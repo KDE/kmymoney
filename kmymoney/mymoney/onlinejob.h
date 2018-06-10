@@ -67,6 +67,7 @@ public:
    * @see isNull()
    */
   onlineJob();
+  explicit onlineJob(const QString &id);
 
   /**
    * @brief Default construtor
@@ -93,6 +94,8 @@ public:
   friend void swap(onlineJob& first, onlineJob& second);
 
   virtual ~onlineJob();
+
+  void setTask(onlineTask *task);
 
   /**
    * @brief Returns task attached to this onlineJob
@@ -285,6 +288,9 @@ public:
    * @return
    */
   virtual QList<onlineJobMessage> jobMessageList() const;
+
+
+  void clearJobMessageList();
 
   /**
    * @brief Thrown if a cast of a task fails

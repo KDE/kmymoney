@@ -45,11 +45,9 @@ MyMoneyCostCenter::MyMoneyCostCenter() :
 {
 }
 
-MyMoneyCostCenter::MyMoneyCostCenter(const QString& name) :
-  MyMoneyObject(*new MyMoneyCostCenterPrivate)
+MyMoneyCostCenter::MyMoneyCostCenter(const QString &id) :
+  MyMoneyObject(*new MyMoneyCostCenterPrivate, id)
 {
-  Q_D(MyMoneyCostCenter);
-  d->m_name = name;
 }
 
 MyMoneyCostCenter::MyMoneyCostCenter(const QDomElement& node) :

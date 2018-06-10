@@ -405,7 +405,7 @@ void KBudgetView::slotSelectAccount(const MyMoneyObject &obj, eView::Intent inte
   d->ui->m_accountTotal->setValue(d->m_budget.account(id).totalBalance());
   MyMoneyBudget::AccountGroup budgetAccount = d->m_budget.account(id);
   if (id != budgetAccount.id()) {
-    budgetAccount.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthly);
+    budgetAccount.setBudgetLevel(eMyMoney::Budget::Level::Monthly);
   }
   d->ui->m_budgetValue->setBudgetValues(d->m_budget, budgetAccount);
 }
@@ -462,10 +462,10 @@ void KBudgetView::cb_includesSubaccounts_clicked()
           d->clearSubBudgets(indexes.front());
         }
 
-        if (auxAccount.budgetLevel() == MyMoneyBudget::AccountGroup::eNone) {
+        if (auxAccount.budgetLevel() == eMyMoney::Budget::Level::None) {
           MyMoneyBudget::PeriodGroup period;
           auxAccount.addPeriod(d->m_budget.budgetStart(), period);
-          auxAccount.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthly);
+          auxAccount.setBudgetLevel(eMyMoney::Budget::Level::Monthly);
         }
       }
     }

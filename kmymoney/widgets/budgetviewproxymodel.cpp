@@ -169,7 +169,7 @@ bool BudgetViewProxyModel::filterAcceptsRow(int source_row, const QModelIndex &s
       if (budgetAccount.id() == account.id()) {
         balance = budgetAccount.balance();
         switch (budgetAccount.budgetLevel()) {
-          case MyMoneyBudget::AccountGroup::eMonthly:
+          case eMyMoney::Budget::Level::Monthly:
             balance *= MyMoneyMoney(12);
             break;
           default:
@@ -197,7 +197,7 @@ MyMoneyMoney BudgetViewProxyModel::accountBalance(const QString &accountId) cons
   if (budgetAccount.id() == accountId) {
     balance = budgetAccount.balance();
     switch (budgetAccount.budgetLevel()) {
-      case MyMoneyBudget::AccountGroup::eMonthly:
+      case eMyMoney::Budget::Level::Monthly:
         balance *= MyMoneyMoney(12);
         break;
       default:

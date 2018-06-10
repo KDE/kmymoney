@@ -136,7 +136,7 @@ void PivotTable::init()
   //
   // Initialize outer groups of the grid
   //
-  if (m_config.rowType() == MyMoneyReport::eAssetLiability) {
+  if (m_config.rowType() == eMyMoney::Report::RowType::AssetLiability) {
     m_grid.insert(MyMoneyAccount::accountTypeToString(eMyMoney::Account::Type::Asset), PivotOuterGroup(m_numColumns));
     m_grid.insert(MyMoneyAccount::accountTypeToString(eMyMoney::Account::Type::Liability), PivotOuterGroup(m_numColumns, PivotOuterGroup::m_kDefaultSortOrder, true /* inverted */));
   } else {
@@ -252,7 +252,7 @@ void PivotTable::init()
 
     // whether asset & liability transactions are actually to be considered
     // transfers
-    bool al_transfers = (m_config.rowType() == MyMoneyReport::eExpenseIncome) && (m_config.isIncludingTransfers());
+    bool al_transfers = (m_config.rowType() == eMyMoney::Report::RowType::ExpenseIncome) && (m_config.isIncludingTransfers());
 
     //this is to store balance for loan accounts when not included in the report
     QMap<QString, MyMoneyMoney> loanBalances;
@@ -909,20 +909,20 @@ void PivotTable::calculateBudgetMapping()
 
         // based on the kind of budget it is, deal accordingly
         switch ((*it_bacc).budgetLevel()) {
-          case MyMoneyBudget::AccountGroup::eYearly:
+          case eMyMoney::Budget::Level::Yearly:
             // divide the single yearly value by 12 and place it in each column
             value /= MyMoneyMoney(12, 1);
             // intentional fall through
 
-          case MyMoneyBudget::AccountGroup::eNone:
-          case MyMoneyBudget::AccountGroup::eMax:
-          case MyMoneyBudget::AccountGroup::eMonthly:
+          case eMyMoney::Budget::Level::None:
+          case eMyMoney::Budget::Level::Max:
+          case eMyMoney::Budget::Level::Monthly:
             // place the single monthly value in each column of the report
             // only add the value if columns are monthly or longer
-            if (m_config.columnType() == MyMoneyReport::eBiMonths
-                || m_config.columnType() == MyMoneyReport::eMonths
-                || m_config.columnType() == MyMoneyReport::eYears
-                || m_config.columnType() == MyMoneyReport::eQuarters) {
+            if (m_config.columnType() == eMyMoney::Report::ColumnType::BiMonths
+                || m_config.columnType() == eMyMoney::Report::ColumnType::Months
+                || m_config.columnType() == eMyMoney::Report::ColumnType::Years
+                || m_config.columnType() == eMyMoney::Report::ColumnType::Quarters) {
               QDate budgetDate = budget.budgetStart();
               while (column < m_numColumns && budget.budgetStart().addYears(1) > budgetDate) {
                 //only show budget values if the budget year and the column date match
@@ -932,7 +932,7 @@ void PivotTable::calculateBudgetMapping()
                 } else {
                   if (budgetDate >= m_beginDate.addDays(-m_beginDate.day() + 1)
                       && budgetDate <= m_endDate.addDays(m_endDate.daysInMonth() - m_endDate.day())
-                      && budgetDate > (columnDate(column).addMonths(-m_config.columnType()))) {
+                      && budgetDate > (columnDate(column).addMonths(-static_cast<int>(m_config.columnType())))) {
                     assignCell(outergroup, splitAccount, column, value, true /*budget*/);
                   }
                   budgetDate = budgetDate.addMonths(1);
@@ -940,7 +940,7 @@ void PivotTable::calculateBudgetMapping()
               }
             }
             break;
-          case MyMoneyBudget::AccountGroup::eMonthByMonth:
+          case eMyMoney::Budget::Level::MonthByMonth:
             // place each value in the appropriate column
             // budget periods are supposed to come in order just like columns
             {
@@ -950,13 +950,13 @@ void PivotTable::calculateBudgetMapping()
                   ++column;
                 } else {
                   switch (m_config.columnType()) {
-                    case MyMoneyReport::eYears:
-                    case MyMoneyReport::eBiMonths:
-                    case MyMoneyReport::eQuarters:
-                    case MyMoneyReport::eMonths: {
+                    case eMyMoney::Report::ColumnType::Years:
+                    case eMyMoney::Report::ColumnType::BiMonths:
+                    case eMyMoney::Report::ColumnType::Quarters:
+                    case eMyMoney::Report::ColumnType::Months: {
                         if ((*it_period).startDate() >= m_beginDate.addDays(-m_beginDate.day() + 1)
                             && (*it_period).startDate() <= m_endDate.addDays(m_endDate.daysInMonth() - m_endDate.day())
-                            && (*it_period).startDate() > (columnDate(column).addMonths(-m_config.columnType()))) {
+                            && (*it_period).startDate() > (columnDate(column).addMonths(-static_cast<int>(m_config.columnType())))) {
                           //no currency conversion is done here because that is done for all columns later
                           value = (*it_period).amount() * reverse;
                           assignCell(outergroup, splitAccount, column, value, true /*budget*/);
@@ -1171,7 +1171,7 @@ void PivotTable::calculateTotals()
     // Outer Row Group Totals
     //
 
-    const bool isIncomeExpense = (m_config.rowType() == MyMoneyReport::eExpenseIncome);
+    const bool isIncomeExpense = (m_config.rowType() == eMyMoney::Report::RowType::ExpenseIncome);
     const bool invert_total = (*it_outergroup).m_inverted;
     auto column = 0;
     while (column < m_numColumns) {
@@ -1481,7 +1481,7 @@ QString PivotTable::renderCSV() const
       bool finishrow = true;
       QString finalRow;
       bool isUsed = false;
-      if (m_config.detailLevel() == MyMoneyReport::eDetailAll && ((*it_innergroup).size() > 1)) {
+      if (m_config.detailLevel() == eMyMoney::Report::DetailLevel::All && ((*it_innergroup).size() > 1)) {
         // Print the individual rows
         result += innergroupdata;
 
@@ -1648,7 +1648,7 @@ QString PivotTable::renderHTML() const
 
 
   // Skip the body of the report if the report only calls for totals to be shown
-  if (m_config.detailLevel() != MyMoneyReport::eDetailTotal) {
+  if (m_config.detailLevel() != eMyMoney::Report::DetailLevel::Total) {
     //
     // Outer groups
     //
@@ -1683,7 +1683,7 @@ QString PivotTable::renderHTML() const
         result += QString("<tr class=\"sectionheader\"><td class=\"left\"%1>%2</td></tr>\n").arg(colspan).arg((*it_outergroup).m_displayName);
 
       // Skip the inner groups if the report only calls for outer group totals to be shown
-      if (m_config.detailLevel() != MyMoneyReport::eDetailGroup) {
+      if (m_config.detailLevel() != eMyMoney::Report::DetailLevel::Group) {
 
         //
         // Inner Groups
@@ -1791,7 +1791,7 @@ QString PivotTable::renderHTML() const
           bool finishrow = true;
           QString finalRow;
           bool isUsed = false;
-          if (m_config.detailLevel() == MyMoneyReport::eDetailAll && ((*it_innergroup).size() > 1)) {
+          if (m_config.detailLevel() == eMyMoney::Report::DetailLevel::All && ((*it_innergroup).size() > 1)) {
             // Print the individual rows
             result += innergroupdata;
 
@@ -1818,7 +1818,7 @@ QString PivotTable::renderHTML() const
             isUsed |= !rowname.isClosed();
             finalRow = QString("<tr class=\"row-%1\"%2><td class=\"left\" style=\"text-indent: %3.0em;\">%5%6</td>")
                        .arg(rownum & 0x01 ? "even" : "odd")
-                       .arg(m_config.detailLevel() == MyMoneyReport::eDetailAll ? "id=\"solo\"" : "")
+                       .arg(m_config.detailLevel() == eMyMoney::Report::DetailLevel::All ? "id=\"solo\"" : "")
                        .arg(rowname.hierarchyDepth() - 1)
                        .arg(rowname.name().replace(QRegExp(" "), "&nbsp;"))
                        .arg((m_config.isConvertCurrency() || !rowname.isForeignCurrency()) ? QString() : QString(" (%1)").arg(rowname.currency().id()));
@@ -2022,7 +2022,7 @@ void PivotTable::calculateForecast()
   }
 
   //run forecast
-  if (m_config.rowType() == MyMoneyReport::eAssetLiability) { //asset and liability
+  if (m_config.rowType() == eMyMoney::Report::RowType::AssetLiability) { //asset and liability
     forecast.doForecast();
   } else { //income and expenses
     MyMoneyBudget budget;
@@ -2141,7 +2141,7 @@ void PivotTable::calculateMovingAverage()
         int column = m_startColumn;
 
         //check whether columns are days or months
-        if (m_config.columnType() == MyMoneyReport::eDays) {
+        if (m_config.columnType() == eMyMoney::Report::ColumnType::Days) {
           while (column < m_numColumns) {
             MyMoneyMoney totalPrice = MyMoneyMoney();
 
@@ -2172,23 +2172,23 @@ void PivotTable::calculateMovingAverage()
 
             //set the right start date depending on the column type
             switch (m_config.columnType()) {
-              case MyMoneyReport::eYears: {
+              case eMyMoney::Report::ColumnType::Years: {
                   averageStart = QDate(columnDate(column).year(), 1, 1);
                   break;
                 }
-              case MyMoneyReport::eBiMonths: {
+              case eMyMoney::Report::ColumnType::BiMonths: {
                   averageStart = QDate(columnDate(column).year(), columnDate(column).month(), 1).addMonths(-1);
                   break;
                 }
-              case MyMoneyReport::eQuarters: {
+              case eMyMoney::Report::ColumnType::Quarters: {
                   averageStart = QDate(columnDate(column).year(), columnDate(column).month(), 1).addMonths(-1);
                   break;
                 }
-              case MyMoneyReport::eMonths: {
+              case eMyMoney::Report::ColumnType::Months: {
                   averageStart = QDate(columnDate(column).year(), columnDate(column).month(), 1);
                   break;
                 }
-              case MyMoneyReport::eWeeks: {
+              case eMyMoney::Report::ColumnType::Weeks: {
                   averageStart = columnDate(column).addDays(-columnDate(column).dayOfWeek() + 1);
                   break;
                 }

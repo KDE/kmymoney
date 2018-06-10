@@ -301,9 +301,9 @@ void KPayeesView::slotSelectPayee()
 
     QStringList keys;
     bool ignorecase = false;
-    MyMoneyPayee::payeeMatchType type = d->m_payee.matchData(ignorecase, keys);
+    auto type = d->m_payee.matchData(ignorecase, keys);
 
-    d->ui->matchTypeCombo->setCurrentIndex(d->ui->matchTypeCombo->findData(type));
+    d->ui->matchTypeCombo->setCurrentIndex(d->ui->matchTypeCombo->findData(static_cast<int>(type)));
     d->ui->matchKeyEditList->clear();
     d->ui->matchKeyEditList->insertStringList(keys);
     d->ui->checkMatchIgnoreCase->setChecked(ignorecase);
@@ -334,7 +334,7 @@ void KPayeesView::slotKeyListChanged()
   QStringList keys;
 
   d->m_payee.matchData(ignorecase, keys);
-  if (d->ui->matchTypeCombo->currentData().toUInt() == MyMoneyPayee::matchKey) {
+  if (static_cast<eMyMoney::Payee::MatchType>(d->ui->matchTypeCombo->currentData().toUInt()) == eMyMoney::Payee::MatchType::Key) {
     rc |= (keys != d->ui->matchKeyEditList->items());
   }
   d->setDirty(rc);
@@ -362,20 +362,20 @@ void KPayeesView::slotPayeeDataChanged()
     bool ignorecase = false;
     QStringList keys;
 
-    MyMoneyPayee::payeeMatchType type = d->m_payee.matchData(ignorecase, keys);
+    auto type = d->m_payee.matchData(ignorecase, keys);
     rc |= (static_cast<unsigned int>(type) != d->ui->matchTypeCombo->currentData().toUInt());
 
     d->ui->checkMatchIgnoreCase->setEnabled(false);
     d->ui->matchKeyEditList->setEnabled(false);
 
-    if (d->ui->matchTypeCombo->currentData().toUInt() != MyMoneyPayee::matchDisabled) {
+    if (static_cast<eMyMoney::Payee::MatchType>(d->ui->matchTypeCombo->currentData().toUInt()) != eMyMoney::Payee::MatchType::Disabled) {
       d->ui->checkMatchIgnoreCase->setEnabled(true);
       // if we turn matching on, we default to 'ignore case'
       // TODO maybe make the default a user option
-      if (type == MyMoneyPayee::matchDisabled && d->ui->matchTypeCombo->currentData().toUInt() != MyMoneyPayee::matchDisabled)
+      if (type == eMyMoney::Payee::MatchType::Disabled && static_cast<eMyMoney::Payee::MatchType>(d->ui->matchTypeCombo->currentData().toUInt()) != eMyMoney::Payee::MatchType::Disabled)
         d->ui->checkMatchIgnoreCase->setChecked(true);
       rc |= (ignorecase != d->ui->checkMatchIgnoreCase->isChecked());
-      if (d->ui->matchTypeCombo->currentData().toUInt() == MyMoneyPayee::matchKey) {
+      if (static_cast<eMyMoney::Payee::MatchType>(d->ui->matchTypeCombo->currentData().toUInt()) == eMyMoney::Payee::MatchType::Key) {
         d->ui->matchKeyEditList->setEnabled(true);
         rc |= (keys != d->ui->matchKeyEditList->items());
       }
@@ -416,7 +416,7 @@ void KPayeesView::slotUpdatePayee()
       d->m_payee.setTelephone(d->ui->telephoneEdit->text());
       d->m_payee.setEmail(d->ui->emailEdit->text());
       d->m_payee.setNotes(d->ui->notesEdit->toPlainText());
-      d->m_payee.setMatchData(static_cast<MyMoneyPayee::payeeMatchType>(d->ui->matchTypeCombo->currentData().toUInt()), d->ui->checkMatchIgnoreCase->isChecked(), d->ui->matchKeyEditList->items());
+      d->m_payee.setMatchData(static_cast<eMyMoney::Payee::MatchType>(d->ui->matchTypeCombo->currentData().toUInt()), d->ui->checkMatchIgnoreCase->isChecked(), d->ui->matchKeyEditList->items());
       d->m_payee.setDefaultAccountId();
       d->m_payee.resetPayeeIdentifiers(d->ui->payeeIdentifiers->identifiers());
 

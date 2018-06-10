@@ -655,11 +655,11 @@ public:
 
   void loadChartView()
   {
-    MyMoneyReport::EDetailLevel detailLevel[4] = { MyMoneyReport::eDetailAll, MyMoneyReport::eDetailTop, MyMoneyReport::eDetailGroup, MyMoneyReport::eDetailTotal };
+    eMyMoney::Report::DetailLevel detailLevel[4] = { eMyMoney::Report::DetailLevel::All, eMyMoney::Report::DetailLevel::Top, eMyMoney::Report::DetailLevel::Group, eMyMoney::Report::DetailLevel::Total };
 
     MyMoneyReport reportCfg = MyMoneyReport(
-                                MyMoneyReport::eAssetLiability,
-                                MyMoneyReport::eMonths,
+                                eMyMoney::Report::RowType::AssetLiability,
+                                static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                 eMyMoney::TransactionFilter::Date::UserDefined, // overridden by the setDateFilter() call below
                                 detailLevel[ui->m_comboDetail->currentIndex()],
                                 i18n("Net Worth Forecast"),
@@ -668,7 +668,7 @@ public:
     reportCfg.setChartByDefault(true);
     reportCfg.setChartCHGridLines(false);
     reportCfg.setChartSVGridLines(false);
-    reportCfg.setChartType(MyMoneyReport::eChartLine);
+    reportCfg.setChartType(eMyMoney::Report::ChartType::Line);
     reportCfg.setIncludingSchedules(false);
     // FIXME: this causes a crash
     //reportCfg.setColumnsAreDays( true );

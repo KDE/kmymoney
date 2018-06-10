@@ -32,6 +32,7 @@
 #include "ui_reporttabperformance.h"
 
 #include "mymoney/mymoneyreport.h"
+#include "mymoneyenums.h"
 
 ReportTabGeneral::ReportTabGeneral(QWidget *parent)
     : QWidget(parent)
@@ -94,11 +95,11 @@ ReportTabChart::ReportTabChart(QWidget *parent)
   ui = new Ui::ReportTabChart;
   ui->setupUi(this);
 
-  ui->m_comboType->addItem(i18nc("type of graphic chart", "Line"), MyMoneyReport::eChartLine);
-  ui->m_comboType->addItem(i18nc("type of graphic chart", "Bar"), MyMoneyReport::eChartBar);
-  ui->m_comboType->addItem(i18nc("type of graphic chart", "Stacked Bar"), MyMoneyReport::eChartStackedBar);
-  ui->m_comboType->addItem(i18nc("type of graphic chart", "Pie"), MyMoneyReport::eChartPie);
-  ui->m_comboType->addItem(i18nc("type of graphic chart", "Ring"), MyMoneyReport::eChartRing);
+  ui->m_comboType->addItem(i18nc("type of graphic chart", "Line"), static_cast<int>(eMyMoney::Report::ChartType::Line));
+  ui->m_comboType->addItem(i18nc("type of graphic chart", "Bar"), static_cast<int>(eMyMoney::Report::ChartType::Bar));
+  ui->m_comboType->addItem(i18nc("type of graphic chart", "Stacked Bar"), static_cast<int>(eMyMoney::Report::ChartType::StackedBar));
+  ui->m_comboType->addItem(i18nc("type of graphic chart", "Pie"), static_cast<int>(eMyMoney::Report::ChartType::Pie));
+  ui->m_comboType->addItem(i18nc("type of graphic chart", "Ring"), static_cast<int>(eMyMoney::Report::ChartType::Ring));
   connect(ui->m_comboType, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &ReportTabChart::slotChartTypeChanged);
   emit ui->m_comboType->currentIndexChanged(ui->m_comboType->currentIndex());
 }
@@ -110,8 +111,8 @@ ReportTabChart::~ReportTabChart()
 
 void ReportTabChart::slotChartTypeChanged(int index)
 {
-  if (index == MyMoneyReport::EChartType::eChartPie ||
-      index == MyMoneyReport::EChartType::eChartRing) {
+  if (index == static_cast<int>(eMyMoney::Report::ChartType::Pie) ||
+      index == static_cast<int>(eMyMoney::Report::ChartType::Ring)) {
     ui->m_checkCHGridLines->setText(i18n("Show circular grid lines"));
     ui->m_checkSVGridLines->setText(i18n("Show sagittal grid lines"));
     ui->m_logYaxis->setChecked(false);
@@ -240,7 +241,7 @@ void ReportTabRange::slotYLabelsPrecisionChanged(const int& value)
 }
 
 void ReportTabRange::slotDataLockChanged(int index) {
-  if (index == MyMoneyReport::dataOptionE::automatic) {
+  if (index == static_cast<int>(eMyMoney::Report::DataLock::Automatic)) {
     ui->m_dataRangeStart->setText(QStringLiteral("0"));
     ui->m_dataRangeEnd->setText(QStringLiteral("0"));
     ui->m_dataMajorTick->setText(QStringLiteral("0"));
@@ -272,7 +273,7 @@ ReportTabCapitalGain::~ReportTabCapitalGain()
 
 void ReportTabCapitalGain::slotInvestmentSumChanged(int index) {
   Q_UNUSED(index);
-  if (ui->m_investmentSum->currentData() == MyMoneyReport::eSumOwned) {
+  if (ui->m_investmentSum->currentData() == static_cast<int>(eMyMoney::Report::InvestmentSum::Owned)) {
     ui->m_settlementPeriod->setValue(0);
     ui->m_settlementPeriod->setEnabled(false);
     ui->m_showSTLTCapitalGains->setChecked(false);

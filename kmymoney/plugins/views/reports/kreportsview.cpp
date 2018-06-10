@@ -684,10 +684,10 @@ void KReportsView::slotReportAccountTransactions()
   // currently selected account.
   if (!d->m_currentAccount.id().isEmpty()) {
     MyMoneyReport report(
-      MyMoneyReport::eAccount,
-      MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory,
+      eMyMoney::Report::RowType::Account,
+      eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category,
       eMyMoney::TransactionFilter::Date::YearToDate,
-      MyMoneyReport::eDetailAll,
+      eMyMoney::Report::DetailLevel::All,
       i18n("%1 YTD Account Transactions", d->m_currentAccount.name()),
       i18n("Generated Report")
     );

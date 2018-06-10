@@ -87,7 +87,6 @@ bool MyMoneyBudget::PeriodGroup::operator == (const PeriodGroup& right) const
   return (d->m_start == d2->m_start && d->m_amount == d2->m_amount);
 }
 
-const QStringList MyMoneyBudget::AccountGroup::kBudgetLevelText = QString("none,monthly,monthbymonth,yearly,invalid").split(',');
 const int BUDGET_VERSION = 2;
 
 class MyMoneyBudget::AccountGroupPrivate {
@@ -95,13 +94,13 @@ class MyMoneyBudget::AccountGroupPrivate {
 public:
 
   AccountGroupPrivate() :
-    m_budgetlevel(AccountGroup::eBudgetLevel::eNone),
+    m_budgetlevel(eMyMoney::Budget::Level::None),
     m_budgetsubaccounts(false)
   {
   }
 
   QString                                   m_id;
-  AccountGroup::eBudgetLevel                m_budgetlevel;
+  eMyMoney::Budget::Level                   m_budgetlevel;
   bool                                      m_budgetsubaccounts;
   QMap<QDate, MyMoneyBudget::PeriodGroup>   m_periods;
 
@@ -126,7 +125,7 @@ MyMoneyBudget::AccountGroup::~AccountGroup()
 bool MyMoneyBudget::AccountGroup::isZero() const
 {
   Q_D(const AccountGroup);
-  return (!d->m_budgetsubaccounts && d->m_budgetlevel == eMonthly && balance().isZero());
+  return (!d->m_budgetsubaccounts && d->m_budgetlevel == eMyMoney::Budget::Level::Monthly && balance().isZero());
 }
 
 void MyMoneyBudget::AccountGroup::convertToMonthly()
@@ -135,8 +134,8 @@ void MyMoneyBudget::AccountGroup::convertToMonthly()
 
   Q_D(AccountGroup);
   switch (d->m_budgetlevel) {
-    case eYearly:
-    case eMonthByMonth:
+    case eMyMoney::Budget::Level::Yearly:
+    case eMyMoney::Budget::Level::MonthByMonth:
       period = d->m_periods.first();         // make him monthly
       period.setAmount(balance() / MyMoneyMoney(12, 1));
       clearPeriods();
@@ -145,7 +144,7 @@ void MyMoneyBudget::AccountGroup::convertToMonthly()
     default:
       break;
   }
-  d->m_budgetlevel = eMonthly;
+  d->m_budgetlevel = eMyMoney::Budget::Level::Monthly;
 }
 
 void MyMoneyBudget::AccountGroup::convertToYearly()
@@ -154,8 +153,8 @@ void MyMoneyBudget::AccountGroup::convertToYearly()
 
   Q_D(AccountGroup);
   switch (d->m_budgetlevel) {
-    case eMonthByMonth:
-    case eMonthly:
+    case eMyMoney::Budget::Level::MonthByMonth:
+    case eMyMoney::Budget::Level::Monthly:
       period = d->m_periods.first();         // make him monthly
       period.setAmount(totalBalance());
       clearPeriods();
@@ -164,7 +163,7 @@ void MyMoneyBudget::AccountGroup::convertToYearly()
     default:
       break;
   }
-  d->m_budgetlevel = eYearly;
+  d->m_budgetlevel = eMyMoney::Budget::Level::Yearly;
 }
 
 void MyMoneyBudget::AccountGroup::convertToMonthByMonth()
@@ -174,8 +173,8 @@ void MyMoneyBudget::AccountGroup::convertToMonthByMonth()
 
   Q_D(AccountGroup);
   switch (d->m_budgetlevel) {
-    case eYearly:
-    case eMonthly:
+    case eMyMoney::Budget::Level::Yearly:
+    case eMyMoney::Budget::Level::Monthly:
       period = d->m_periods.first();
       period.setAmount(totalBalance() / MyMoneyMoney(12, 1));
       clearPeriods();
@@ -189,7 +188,7 @@ void MyMoneyBudget::AccountGroup::convertToMonthByMonth()
     default:
       break;
   }
-  d->m_budgetlevel = eMonthByMonth;
+  d->m_budgetlevel = eMyMoney::Budget::Level::MonthByMonth;
 }
 
 QString MyMoneyBudget::AccountGroup::id() const
@@ -216,13 +215,13 @@ void MyMoneyBudget::AccountGroup::setBudgetSubaccounts(bool budgetsubaccounts)
   d->m_budgetsubaccounts = budgetsubaccounts;
 }
 
-MyMoneyBudget::AccountGroup::eBudgetLevel MyMoneyBudget::AccountGroup::budgetLevel() const
+eMyMoney::Budget::Level MyMoneyBudget::AccountGroup::budgetLevel() const
 {
   Q_D(const AccountGroup);
   return d->m_budgetlevel;
 }
 
-void MyMoneyBudget::AccountGroup::setBudgetLevel(eBudgetLevel level)
+void MyMoneyBudget::AccountGroup::setBudgetLevel(eMyMoney::Budget::Level level)
 {
   Q_D(AccountGroup);
   d->m_budgetlevel = level;
@@ -269,7 +268,7 @@ MyMoneyMoney MyMoneyBudget::AccountGroup::totalBalance() const
   switch (d->m_budgetlevel) {
     default:
       break;
-    case eMonthly:
+    case eMyMoney::Budget::Level::Monthly:
       bal = bal * 12;
       break;
   }
@@ -281,7 +280,7 @@ MyMoneyBudget::AccountGroup MyMoneyBudget::AccountGroup::operator += (const MyMo
   Q_D(AccountGroup);
   auto d2 = static_cast<const AccountGroupPrivate *>(right.d_func());
   // in case the right side is empty, we're done
-  if (d2->m_budgetlevel == eNone)
+  if (d2->m_budgetlevel == eMyMoney::Budget::Level::None)
     return *this;
 
   MyMoneyBudget::AccountGroup r(right);
@@ -289,19 +288,19 @@ MyMoneyBudget::AccountGroup MyMoneyBudget::AccountGroup::operator += (const MyMo
 
   // make both operands based on the same budget level
   if (d->m_budgetlevel != d3->m_budgetlevel) {
-    if (d->m_budgetlevel == eMonthly) {        // my budget is monthly
-      if (d3->m_budgetlevel == eYearly) {     // his is yearly
+    if (d->m_budgetlevel == eMyMoney::Budget::Level::Monthly) {        // my budget is monthly
+      if (d3->m_budgetlevel == eMyMoney::Budget::Level::Yearly) {     // his is yearly
         r.convertToMonthly();
-      } else if (d3->m_budgetlevel == eMonthByMonth) { // his is month by month
+      } else if (d3->m_budgetlevel == eMyMoney::Budget::Level::MonthByMonth) { // his is month by month
         convertToMonthByMonth();
       }
-    } else if (d->m_budgetlevel == eYearly) {  // my budget is yearly
-      if (d3->m_budgetlevel == eMonthly) {    // his is monthly
+    } else if (d->m_budgetlevel == eMyMoney::Budget::Level::Yearly) {  // my budget is yearly
+      if (d3->m_budgetlevel == eMyMoney::Budget::Level::Monthly) {    // his is monthly
         r.convertToYearly();
-      } else if (d3->m_budgetlevel == eMonthByMonth) { // his is month by month
+      } else if (d3->m_budgetlevel == eMyMoney::Budget::Level::MonthByMonth) { // his is month by month
         convertToMonthByMonth();
       }
-    } else if (d->m_budgetlevel == eMonthByMonth) {  // my budget is month by month
+    } else if (d->m_budgetlevel == eMyMoney::Budget::Level::MonthByMonth) {  // my budget is month by month
       r.convertToMonthByMonth();
     }
   }
@@ -311,7 +310,7 @@ MyMoneyBudget::AccountGroup MyMoneyBudget::AccountGroup::operator += (const MyMo
 
   // in case the left side is empty, we add empty periods
   // so that both budgets are identical
-  if (d->m_budgetlevel == eNone) {
+  if (d->m_budgetlevel == eMyMoney::Budget::Level::None) {
     it_pr = rPeriods.constBegin();
     QDate date = (*it_pr).startDate();
     while (it_pr != rPeriods.constEnd()) {
@@ -364,11 +363,11 @@ MyMoneyBudget::MyMoneyBudget() :
   d->m_name = QLatin1Literal("Unconfigured Budget");
 }
 
-MyMoneyBudget::MyMoneyBudget(const QString& name) :
-  MyMoneyObject(*new MyMoneyBudgetPrivate)
+MyMoneyBudget::MyMoneyBudget(const QString &id) :
+  MyMoneyObject(*new MyMoneyBudgetPrivate, id)
 {
   Q_D(MyMoneyBudget);
-  d->m_name = name;
+  d->m_name = QLatin1Literal("Unconfigured Budget");
 }
 
 MyMoneyBudget::MyMoneyBudget(const QDomElement& node) :
@@ -420,7 +419,7 @@ void MyMoneyBudget::write(QDomElement& e, QDomDocument *doc) const
     if (!(*it).balance().isZero() || (*it).budgetSubaccounts()) {
       QDomElement domAccount = doc->createElement(d->getElName(Budget::Element::Account));
       domAccount.setAttribute(d->getAttrName(Budget::Attribute::ID), it.key());
-      domAccount.setAttribute(d->getAttrName(Budget::Attribute::BudgetLevel), AccountGroup::kBudgetLevelText[it.value().budgetLevel()]);
+      domAccount.setAttribute(d->getAttrName(Budget::Attribute::BudgetLevel), d->budgetNames(it.value().budgetLevel()));
       domAccount.setAttribute(d->getAttrName(Budget::Attribute::BudgetSubAccounts), it.value().budgetSubaccounts());
 
       const QMap<QDate, PeriodGroup> periods = it.value().getPeriods();
@@ -466,11 +465,8 @@ bool MyMoneyBudget::read(const QDomElement& e)
         if (c.hasAttribute(d->getAttrName(Budget::Attribute::ID)))
           account.setId(c.attribute(d->getAttrName(Budget::Attribute::ID)));
 
-        if (c.hasAttribute(d->getAttrName(Budget::Attribute::BudgetLevel))) {
-          int i = AccountGroup::kBudgetLevelText.indexOf(c.attribute(d->getAttrName(Budget::Attribute::BudgetLevel)));
-          if (i != -1)
-            account.setBudgetLevel(static_cast<AccountGroup::eBudgetLevel>(i));
-        }
+        if (c.hasAttribute(d->getAttrName(Budget::Attribute::BudgetLevel)))
+          account.setBudgetLevel(d->stringToBudgetLevel(c.attribute(d->getAttrName(Budget::Attribute::BudgetLevel))));
 
         if (c.hasAttribute(d->getAttrName(Budget::Attribute::BudgetSubAccounts)))
           account.setBudgetSubaccounts(c.attribute(d->getAttrName(Budget::Attribute::BudgetSubAccounts)).toUInt());

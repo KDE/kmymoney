@@ -37,6 +37,8 @@
 class QString;
 class QStringList;
 
+namespace eMyMoney { namespace Payee { enum class MatchType; } }
+
 /**
   * This class represents a payee or receiver within the MyMoney engine.
   * Since it is not payee-specific, it is also used as a generic address
@@ -52,14 +54,8 @@ class KMM_MYMONEY_EXPORT MyMoneyPayee : public MyMoneyObject, public MyMoneyPaye
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  typedef enum {
-    matchDisabled = 0,
-    matchName,
-    matchKey,
-    matchNameExact
-  } payeeMatchType;
-
   MyMoneyPayee();
+  explicit MyMoneyPayee(const QString &id);
 
   explicit MyMoneyPayee(const QString& name,
                         const QString& address = QString(),
@@ -123,7 +119,7 @@ public:
    *
    * @return the matching type (see payeeMatchType for details)
    */
-  payeeMatchType matchData(bool& ignorecase, QStringList& keys) const;
+  eMyMoney::Payee::MatchType matchData(bool& ignorecase, QStringList& keys) const;
 
   /**
    * Set all match data in one call
@@ -132,7 +128,7 @@ public:
    * @param ignorecase Whether case should be ignored for the key/name match
    * @param keys A list of keys themselves, if applicable
    */
-  void setMatchData(payeeMatchType type, bool ignorecase, const QStringList& keys);
+  void setMatchData(eMyMoney::Payee::MatchType type, bool ignorecase, const QStringList& keys);
 
   /**
    * Get all match data in one call (overloaded version for database module)
@@ -143,7 +139,7 @@ public:
    *
    * @return the matching type (see payeeMatchType for details)
    */
-  payeeMatchType matchData(bool& ignorecase, QString& keyString) const;
+  eMyMoney::Payee::MatchType matchData(bool& ignorecase, QString& keyString) const;
 
   /**
    * Set all match data in one call (overloaded version for database module)
@@ -152,7 +148,7 @@ public:
    * @param ignorecase Whether case should be ignored for the key/name match
    * @param keys A list of keys in single-string format, if applicable
    */
-  void setMatchData(payeeMatchType type, bool ignorecase, const QString& keys);
+  void setMatchData(eMyMoney::Payee::MatchType type, bool ignorecase, const QString& keys);
 
 
   bool defaultAccountEnabled() const;

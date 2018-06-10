@@ -40,8 +40,6 @@
 #include "mymoneyobject_p.h"
 #include "mymoneyenums.h"
 
-using namespace eMyMoney;
-
 namespace Report
 {
   enum class Element { Payee,
@@ -85,6 +83,55 @@ namespace Report
 class MyMoneyReportPrivate : public MyMoneyObjectPrivate
 {
 public:
+  MyMoneyReportPrivate() :
+    m_name(QStringLiteral("Unconfigured Pivot Table Report")),
+    m_detailLevel(eMyMoney::Report::DetailLevel::None),
+    m_investmentSum(eMyMoney::Report::InvestmentSum::Sold),
+    m_hideTransactions(false),
+    m_convertCurrency(true),
+    m_favorite(false),
+    m_tax(false),
+    m_investments(false),
+    m_loans(false),
+    m_reportType(rowTypeToReportType(eMyMoney::Report::RowType::ExpenseIncome)),
+    m_rowType(eMyMoney::Report::RowType::ExpenseIncome),
+    m_columnType(eMyMoney::Report::ColumnType::Months),
+    m_columnsAreDays(false),
+    m_queryColumns(eMyMoney::Report::QueryColumn::None),
+    m_dateLock(eMyMoney::TransactionFilter::Date::UserDefined),
+    m_accountGroupFilter(false),
+    m_chartType(eMyMoney::Report::ChartType::Line),
+    m_chartDataLabels(true),
+    m_chartCHGridLines(true),
+    m_chartSVGridLines(true),
+    m_chartByDefault(false),
+    m_chartLineWidth(MyMoneyReport::m_lineWidth),
+    m_logYaxis(false),
+    m_dataRangeStart('0'),
+    m_dataRangeEnd('0'),
+    m_dataMajorTick('0'),
+    m_dataMinorTick('0'),
+    m_yLabelsPrecision(2),
+    m_dataLock(eMyMoney::Report::DataLock::Automatic),
+    m_includeSchedules(false),
+    m_includeTransfers(false),
+    m_includeBudgetActuals(false),
+    m_includeUnusedAccounts(false),
+    m_showRowTotals(false),
+    m_showColumnTotals(true),
+    m_includeForecast(false),
+    m_includeMovingAverage(false),
+    m_movingAverageDays(0),
+    m_includePrice(false),
+    m_includeAveragePrice(false),
+    m_mixedTime(false),
+    m_currentDateColumn(0),
+    m_settlementPeriod(3),
+    m_showSTLTCapitalGains(false),
+    m_tseparator(QDate::currentDate().addYears(-1)),
+    m_skipZero(false)
+  {
+  }
 
   static QString getElName(const Report::Element el)
   {
@@ -166,6 +213,327 @@ public:
     return attrNames[attr];
   }
 
+  static QHash<eMyMoney::Report::RowType, QString> rowTypesLUT()
+  {
+    static const QHash<eMyMoney::Report::RowType, QString> lut {
+      {eMyMoney::Report::RowType::NoRows,               QStringLiteral("none")},
+      {eMyMoney::Report::RowType::AssetLiability,       QStringLiteral("assetliability")},
+      {eMyMoney::Report::RowType::ExpenseIncome,        QStringLiteral("expenseincome")},
+      {eMyMoney::Report::RowType::Category,             QStringLiteral("category")},
+      {eMyMoney::Report::RowType::TopCategory,          QStringLiteral("topcategory")},
+      {eMyMoney::Report::RowType::Account,              QStringLiteral("account")},
+      {eMyMoney::Report::RowType::Tag,                  QStringLiteral("tag")},
+      {eMyMoney::Report::RowType::Payee,                QStringLiteral("payee")},
+      {eMyMoney::Report::RowType::Month,                QStringLiteral("month")},
+      {eMyMoney::Report::RowType::Week,                 QStringLiteral("week")},
+      {eMyMoney::Report::RowType::TopAccount,           QStringLiteral("topaccount")},
+      {eMyMoney::Report::RowType::AccountByTopAccount,  QStringLiteral("topaccount-account")},
+      {eMyMoney::Report::RowType::EquityType,           QStringLiteral("equitytype")},
+      {eMyMoney::Report::RowType::AccountType,          QStringLiteral("accounttype")},
+      {eMyMoney::Report::RowType::Institution,          QStringLiteral("institution")},
+      {eMyMoney::Report::RowType::Budget,               QStringLiteral("budget")},
+      {eMyMoney::Report::RowType::BudgetActual,         QStringLiteral("budgetactual")},
+      {eMyMoney::Report::RowType::Schedule,             QStringLiteral("schedule")},
+      {eMyMoney::Report::RowType::AccountInfo,          QStringLiteral("accountinfo")},
+      {eMyMoney::Report::RowType::AccountLoanInfo,      QStringLiteral("accountloaninfo")},
+      {eMyMoney::Report::RowType::AccountReconcile,     QStringLiteral("accountreconcile")},
+      {eMyMoney::Report::RowType::CashFlow,             QStringLiteral("cashflow")},
+    };
+    return lut;
+  }
+
+  static QString reportNames(eMyMoney::Report::RowType textID)
+  {
+    return rowTypesLUT().value(textID);
+  }
+
+  static eMyMoney::Report::RowType stringToRowType(const QString &text)
+  {
+    return rowTypesLUT().key(text, eMyMoney::Report::RowType::Invalid);
+  }
+
+  static QHash<eMyMoney::Report::ColumnType, QString> columTypesLUT()
+  {
+    static const QHash<eMyMoney::Report::ColumnType, QString> lut {
+      {eMyMoney::Report::ColumnType::NoColumns, QStringLiteral("none")},
+      {eMyMoney::Report::ColumnType::Months,    QStringLiteral("months")},
+      {eMyMoney::Report::ColumnType::BiMonths,  QStringLiteral("bimonths")},
+      {eMyMoney::Report::ColumnType::Quarters,  QStringLiteral("quarters")},
+//      {eMyMoney::Report::ColumnType::,        QStringLiteral("4")}
+//      {eMyMoney::Report::ColumnType::,        QStringLiteral("5")}
+//      {eMyMoney::Report::ColumnType::,        QStringLiteral("6")}
+      {eMyMoney::Report::ColumnType::Weeks,     QStringLiteral("weeks")},
+//      {eMyMoney::Report::ColumnType::,        QStringLiteral("8")}
+//      {eMyMoney::Report::ColumnType::,        QStringLiteral("9")}
+//      {eMyMoney::Report::ColumnType::,        QStringLiteral("10")}
+//      {eMyMoney::Report::ColumnType::,        QStringLiteral("11")}
+      {eMyMoney::Report::ColumnType::Years,     QStringLiteral("years")}
+    };
+    return lut;
+  }
+
+  static QString reportNames(eMyMoney::Report::ColumnType textID)
+  {
+    return columTypesLUT().value(textID);
+  }
+
+  static eMyMoney::Report::ColumnType stringToColumnType(const QString &text)
+  {
+    return columTypesLUT().key(text, eMyMoney::Report::ColumnType::Invalid);
+  }
+
+  static QHash<eMyMoney::Report::QueryColumn, QString> queryColumnsLUT()
+  {
+    static const QHash<eMyMoney::Report::QueryColumn, QString> lut {
+      {eMyMoney::Report::QueryColumn::None,        QStringLiteral("none")},
+      {eMyMoney::Report::QueryColumn::Number,      QStringLiteral("number")},
+      {eMyMoney::Report::QueryColumn::Payee,       QStringLiteral("payee")},
+      {eMyMoney::Report::QueryColumn::Category,    QStringLiteral("category")},
+      {eMyMoney::Report::QueryColumn::Tag,         QStringLiteral("tag")},
+      {eMyMoney::Report::QueryColumn::Memo,        QStringLiteral("memo")},
+      {eMyMoney::Report::QueryColumn::Account,     QStringLiteral("account")},
+      {eMyMoney::Report::QueryColumn::Reconciled,  QStringLiteral("reconcileflag")},
+      {eMyMoney::Report::QueryColumn::Action,      QStringLiteral("action")},
+      {eMyMoney::Report::QueryColumn::Shares,      QStringLiteral("shares")},
+      {eMyMoney::Report::QueryColumn::Price,       QStringLiteral("price")},
+      {eMyMoney::Report::QueryColumn::Performance, QStringLiteral("performance")},
+      {eMyMoney::Report::QueryColumn::Loan,        QStringLiteral("loan")},
+      {eMyMoney::Report::QueryColumn::Balance,     QStringLiteral("balance")},
+      {eMyMoney::Report::QueryColumn::CapitalGain, QStringLiteral("capitalgain")}
+    };
+    return lut;
+  }
+
+  static QString reportNamesForQC(eMyMoney::Report::QueryColumn textID)
+  {
+    return queryColumnsLUT().value(textID);
+  }
+
+  static eMyMoney::Report::QueryColumn stringToQueryColumn(const QString &text)
+  {
+    return queryColumnsLUT().key(text, eMyMoney::Report::QueryColumn::End);
+  }
+
+  static QHash<eMyMoney::Report::DetailLevel, QString> detailLevelLUT()
+  {
+    static const QHash<eMyMoney::Report::DetailLevel, QString> lut {
+      {eMyMoney::Report::DetailLevel::None,   QStringLiteral("none")},
+      {eMyMoney::Report::DetailLevel::All,    QStringLiteral("all")},
+      {eMyMoney::Report::DetailLevel::Top,    QStringLiteral("top")},
+      {eMyMoney::Report::DetailLevel::Group,  QStringLiteral("group")},
+      {eMyMoney::Report::DetailLevel::Total,  QStringLiteral("total")},
+      {eMyMoney::Report::DetailLevel::End,    QStringLiteral("invalid")}
+    };
+    return lut;
+  }
+
+  static QString reportNames(eMyMoney::Report::DetailLevel textID)
+  {
+    return detailLevelLUT().value(textID);
+  }
+
+  static eMyMoney::Report::DetailLevel stringToDetailLevel(const QString &text)
+  {
+    return detailLevelLUT().key(text, eMyMoney::Report::DetailLevel::End);
+  }
+
+  static QHash<eMyMoney::Report::ChartType, QString> chartTypeLUT()
+  {
+    static const QHash<eMyMoney::Report::ChartType, QString> lut {
+      {eMyMoney::Report::ChartType::None,       QStringLiteral("none")},
+      {eMyMoney::Report::ChartType::Line,       QStringLiteral("line")},
+      {eMyMoney::Report::ChartType::Bar,        QStringLiteral("bar")},
+      {eMyMoney::Report::ChartType::Pie,        QStringLiteral("pie")},
+      {eMyMoney::Report::ChartType::Ring,       QStringLiteral("ring")},
+      {eMyMoney::Report::ChartType::StackedBar, QStringLiteral("stackedbar")}
+    };
+    return lut;
+  }
+
+  static QString reportNames(eMyMoney::Report::ChartType textID)
+  {
+    return chartTypeLUT().value(textID);
+  }
+
+  static eMyMoney::Report::ChartType stringToChartType(const QString &text)
+  {
+    return chartTypeLUT().key(text, eMyMoney::Report::ChartType::End);
+  }
+
+  static QHash<int, QString> typeAttributeLUT()
+  {
+    static const QHash<int, QString> lut {
+      {0, QStringLiteral("all")},
+      {1, QStringLiteral("payments")},
+      {2, QStringLiteral("deposits")},
+      {3, QStringLiteral("transfers")},
+      {4, QStringLiteral("none")},
+    };
+    return lut;
+  }
+
+  static QString typeAttributeToString(int textID)
+  {
+    return typeAttributeLUT().value(textID);
+  }
+
+  static int stringToTypeAttribute(const QString &text)
+  {
+    return typeAttributeLUT().key(text, 4);
+  }
+
+  static QHash<int, QString> stateAttributeLUT()
+  {
+    static const QHash<int, QString> lut {
+      {0, QStringLiteral("all")},
+      {1, QStringLiteral("notreconciled")},
+      {2, QStringLiteral("cleared")},
+      {3, QStringLiteral("reconciled")},
+      {4, QStringLiteral("frozen")},
+      {5, QStringLiteral("none")}
+    };
+    return lut;
+  }
+
+  static QString stateAttributeToString(int textID)
+  {
+    return stateAttributeLUT().value(textID);
+  }
+
+  static int stringToStateAttribute(const QString &text)
+  {
+    return stateAttributeLUT().key(text, 5);
+  }
+
+  static QHash<int, QString> dateLockLUT()
+  {
+    static const QHash<int, QString> lut {
+      {0, QStringLiteral("alldates")},
+      {1, QStringLiteral("untiltoday")},
+      {2, QStringLiteral("currentmonth")},
+      {3, QStringLiteral("currentyear")},
+      {4, QStringLiteral("monthtodate")},
+      {5, QStringLiteral("yeartodate")},
+      {6, QStringLiteral("yeartomonth")},
+      {7, QStringLiteral("lastmonth")},
+      {8, QStringLiteral("lastyear")},
+      {9, QStringLiteral("last7days")},
+      {10, QStringLiteral("last30days")},
+      {11, QStringLiteral("last3months")},
+      {12, QStringLiteral("last6months")},
+      {13, QStringLiteral("last12months")},
+      {14, QStringLiteral("next7days")},
+      {15, QStringLiteral("next30days")},
+      {16, QStringLiteral("next3months")},
+      {17, QStringLiteral("next6months")},
+      {18, QStringLiteral("next12months")},
+      {19, QStringLiteral("userdefined")},
+      {20, QStringLiteral("last3tonext3months")},
+      {21, QStringLiteral("last11Months")},
+      {22, QStringLiteral("currentQuarter")},
+      {23, QStringLiteral("lastQuarter")},
+      {24, QStringLiteral("nextQuarter")},
+      {25, QStringLiteral("currentFiscalYear")},
+      {26, QStringLiteral("lastFiscalYear")},
+      {27, QStringLiteral("today")},
+      {28, QStringLiteral("next18months")}
+    };
+    return lut;
+  }
+
+  static QString dateLockAttributeToString(int textID)
+  {
+    return dateLockLUT().value(textID);
+  }
+
+  static int stringToDateLockAttribute(const QString &text)
+  {
+    return dateLockLUT().key(text, 0);
+  }
+
+  static QHash<eMyMoney::Report::DataLock, QString> dataLockLUT()
+  {
+    static const QHash<eMyMoney::Report::DataLock, QString> lut {
+      {eMyMoney::Report::DataLock::Automatic,   QStringLiteral("automatic")},
+      {eMyMoney::Report::DataLock::UserDefined, QStringLiteral("userdefined")}
+    };
+    return lut;
+  }
+
+  static QString reportNames(eMyMoney::Report::DataLock textID)
+  {
+    return dataLockLUT().value(textID);
+  }
+
+  static eMyMoney::Report::DataLock stringToDataLockAttribute(const QString &text)
+  {
+    return dataLockLUT().key(text, eMyMoney::Report::DataLock::DataOptionCount);
+  }
+
+  static QHash<int, QString> accountTypeAttributeLUT()
+  {
+    static const QHash<int, QString> lut {
+      {0, QStringLiteral("unknown")},
+      {1, QStringLiteral("checkings")},
+      {2, QStringLiteral("savings")},
+      {3, QStringLiteral("cash")},
+      {4, QStringLiteral("creditcard")},
+      {5, QStringLiteral("loan")},
+      {6, QStringLiteral("certificatedep")},
+      {7, QStringLiteral("investment")},
+      {8, QStringLiteral("moneymarket")},
+      {10, QStringLiteral("asset")},
+      {11, QStringLiteral("liability")},
+      {12, QStringLiteral("currency")},
+      {13, QStringLiteral("income")},
+      {14, QStringLiteral("expense")},
+      {15, QStringLiteral("assetloan")},
+      {16, QStringLiteral("stock")},
+      {17, QStringLiteral("equity")},
+      {18, QStringLiteral("invalid")}
+    };
+    return lut;
+  }
+
+  static QString accountTypeAttributeToString(int textID)
+  {
+    return accountTypeAttributeLUT().value(textID);
+  }
+
+  static int stringToAccountTypeAttribute(const QString &text)
+  {
+    return accountTypeAttributeLUT().key(text, 0);
+  }
+
+  static eMyMoney::Report::ReportType rowTypeToReportType(eMyMoney::Report::RowType rowType)
+  {
+    static const QHash<eMyMoney::Report::RowType, eMyMoney::Report::ReportType> reportTypes {
+      {eMyMoney::Report::RowType::NoRows,               eMyMoney::Report::ReportType::NoReport},
+      {eMyMoney::Report::RowType::AssetLiability,       eMyMoney::Report::ReportType::PivotTable},
+      {eMyMoney::Report::RowType::ExpenseIncome,        eMyMoney::Report::ReportType::PivotTable},
+      {eMyMoney::Report::RowType::Category,             eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::TopCategory,          eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::Account,              eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::Tag,                  eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::Payee,                eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::Month,                eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::Week,                 eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::TopAccount,           eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::AccountByTopAccount,  eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::EquityType,           eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::AccountType,          eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::Institution,          eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::Budget,               eMyMoney::Report::ReportType::PivotTable},
+      {eMyMoney::Report::RowType::BudgetActual,         eMyMoney::Report::ReportType::PivotTable},
+      {eMyMoney::Report::RowType::Schedule,             eMyMoney::Report::ReportType::InfoTable},
+      {eMyMoney::Report::RowType::AccountInfo,          eMyMoney::Report::ReportType::InfoTable},
+      {eMyMoney::Report::RowType::AccountLoanInfo,      eMyMoney::Report::ReportType::InfoTable},
+      {eMyMoney::Report::RowType::AccountReconcile,     eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::CashFlow,             eMyMoney::Report::ReportType::QueryTable},
+    };
+    return reportTypes.value(rowType, eMyMoney::Report::ReportType::Invalid);
+  }
+
   /**
     * The user-assigned name of the report
     */
@@ -183,11 +551,11 @@ public:
   /**
     * How much detail to show in the accounts
     */
-  MyMoneyReport::EDetailLevel m_detailLevel;
+  eMyMoney::Report::DetailLevel m_detailLevel;
   /**
     * Whether to sum: all, sold, bought or owned value
     */
-  MyMoneyReport::EInvestmentSum m_investmentSum;
+  eMyMoney::Report::InvestmentSum m_investmentSum;
   /**
     * Whether to show transactions or just totals.
     */
@@ -219,18 +587,18 @@ public:
   /**
     * What sort of algorithm should be used to run the report
     */
-  MyMoneyReport::EReportType m_reportType;
+  eMyMoney::Report::ReportType m_reportType;
   /**
     * What sort of values should show up on the ROWS of this report
     */
-  MyMoneyReport::ERowType m_rowType;
+  eMyMoney::Report::RowType m_rowType;
   /**
     * What sort of values should show up on the COLUMNS of this report,
     * in the case of a 'PivotTable' report.  Really this is used more as a
     * QUANTITY of months or days.  Whether it's months or days is determined
     * by m_columnsAreDays.
     */
-  MyMoneyReport::EColumnType m_columnType;
+  eMyMoney::Report::ColumnType m_columnType;
   /**
    * Whether the base unit of columns of this report is days.  Only applies to
    * 'PivotTable' reports.  If false, then columns are months or multiples thereof.
@@ -240,7 +608,7 @@ public:
      * What sort of values should show up on the COLUMNS of this report,
      * in the case of a 'QueryTable' report
      */
-  MyMoneyReport::EQueryColumns m_queryColumns;
+  eMyMoney::Report::QueryColumn m_queryColumns;
 
   /**
     * The plain-language description of what the date range should be locked
@@ -257,7 +625,7 @@ public:
     * is applied to the individual splits AFTER a transaction has been
     * matched using the underlying filter.
     */
-  QList<Account::Type> m_accountGroups;
+  QList<eMyMoney::Account::Type> m_accountGroups;
   /**
     * Whether an account group filter has been set (see m_accountGroups)
     */
@@ -265,7 +633,7 @@ public:
   /**
     * What format should be used to draw this report as a chart
     */
-  MyMoneyReport::EChartType m_chartType;
+  eMyMoney::Report::ChartType m_chartType;
   /**
     * Whether the value of individual data points should be drawn on the chart
     */
@@ -310,7 +678,7 @@ public:
   /**
     * Whether data range should be calculated automatically or is user defined
     */
-  MyMoneyReport::dataOptionE m_dataLock;
+  eMyMoney::Report::DataLock m_dataLock;
 
   /**
     * Whether to include scheduled transactions

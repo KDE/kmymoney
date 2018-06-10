@@ -51,6 +51,15 @@ MyMoneyTransaction::MyMoneyTransaction() :
   d->m_postDate = QDate();
 }
 
+MyMoneyTransaction::MyMoneyTransaction(const QString &id) :
+    MyMoneyObject(*new MyMoneyTransactionPrivate, id)
+{
+  Q_D(MyMoneyTransaction);
+  d->m_nextSplitID = 1;
+  d->m_entryDate = QDate();
+  d->m_postDate = QDate();
+}
+
 MyMoneyTransaction::MyMoneyTransaction(const QDomElement& node, const bool forceId) :
     MyMoneyObject(*new MyMoneyTransactionPrivate, node, forceId)
 {

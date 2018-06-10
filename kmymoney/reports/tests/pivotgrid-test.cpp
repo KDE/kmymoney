@@ -46,9 +46,11 @@ void PivotGridTest::init()
   file->addCurrency(MyMoneySecurity("GBP", "British Pound",           "#"));
   file->setBaseCurrency(file->currency("USD"));
 
-  MyMoneyPayee payeeTest("Test Payee");
+  MyMoneyPayee payeeTest;
+  payeeTest.setName("Test Payee");
   file->addPayee(payeeTest);
-  MyMoneyPayee payeeTest2("Thomas Baumgart");
+  MyMoneyPayee payeeTest2;
+  payeeTest2.setName("Thomas Baumgart");
   file->addPayee(payeeTest2);
 
   acAsset = (MyMoneyFile::instance()->asset().id());

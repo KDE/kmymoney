@@ -46,8 +46,7 @@ class KMM_MYMONEY_EXPORT MyMoneyTag : public MyMoneyObject
 
   public:
     MyMoneyTag();
-
-  explicit MyMoneyTag(const QString& name);
+  explicit MyMoneyTag(const QString &id);
 
   explicit MyMoneyTag(const QString& name,
                       const QColor& tagColor

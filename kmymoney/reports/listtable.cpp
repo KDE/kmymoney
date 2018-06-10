@@ -206,7 +206,7 @@ void ListTable::render(QString& result, QString& csv) const
         result.append(QString::fromLatin1("<tr class=\"item%1\">").arg(row_odd ? QLatin1Char('1') : QLatin1Char('0')));
       } else if (rowRank == 4 || rowRank == 5) {
         QList<TableRow>::const_iterator nextRow = std::next(it_row);
-        if ((m_config.rowType() == MyMoneyReport::eTag)) { //If we order by Tags don't show the Grand total as we can have multiple tags per transaction
+        if ((m_config.rowType() == eMyMoney::Report::RowType::Tag)) { //If we order by Tags don't show the Grand total as we can have multiple tags per transaction
           continue;
         } else if (rowRank == 4) {
           if (nextRow != m_rows.end()) {

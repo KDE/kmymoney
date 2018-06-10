@@ -50,6 +50,12 @@ MyMoneyInstitution::MyMoneyInstitution() :
 {
 }
 
+MyMoneyInstitution::MyMoneyInstitution(const QString &id) :
+  MyMoneyObject(*new MyMoneyInstitutionPrivate, id),
+  MyMoneyKeyValueContainer()
+{
+}
+
 MyMoneyInstitution::MyMoneyInstitution(const QString& name,
                                        const QString& town,
                                        const QString& street,

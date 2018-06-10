@@ -981,7 +981,7 @@ public:
     query.bindValue(":defaultAccountId", p.defaultAccountId());
     bool ignoreCase;
     QString matchKeys;
-    MyMoneyPayee::payeeMatchType type = p.matchData(ignoreCase, matchKeys);
+    auto type = p.matchData(ignoreCase, matchKeys);
     query.bindValue(":matchData", static_cast<uint>(type));
 
     if (ignoreCase)

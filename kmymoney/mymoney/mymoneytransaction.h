@@ -63,6 +63,8 @@ class KMM_MYMONEY_EXPORT MyMoneyTransaction : public MyMoneyObject, public MyMon
 public:
 
   MyMoneyTransaction();
+  explicit MyMoneyTransaction(const QString &id);
+
   /**
     * @param node reference to QDomNode
     * @param forceId see MyMoneyObject(const QDomElement&, const bool)

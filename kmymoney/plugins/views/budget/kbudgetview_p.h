@@ -56,6 +56,7 @@
 #include "icons.h"
 #include "modelenums.h"
 #include "menuenums.h"
+#include "mymoneyenums.h"
 
 using namespace Icons;
 
@@ -276,7 +277,7 @@ public:
       auto childIdx = index.child(i, 0);
       auto accountID = childIdx.data((int)eAccountsModel::Role::ID).toString();
       MyMoneyBudget::AccountGroup auxAccount = m_budget.account(accountID);
-      if (auxAccount.budgetLevel() != MyMoneyBudget::AccountGroup::eNone
+      if (auxAccount.budgetLevel() != eMyMoney::Budget::Level::None
           && !auxAccount.isZero()) {
         rc = true;
         // add the subaccount

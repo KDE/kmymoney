@@ -59,6 +59,8 @@ class KMM_MYMONEY_EXPORT MyMoneySecurity : public MyMoneyObject, public MyMoneyK
 
 public:
   MyMoneySecurity();
+  explicit MyMoneySecurity(const QString &id);
+
   explicit MyMoneySecurity(const QString& id,
                            const QString& name,
                            const QString& symbol = QString(),

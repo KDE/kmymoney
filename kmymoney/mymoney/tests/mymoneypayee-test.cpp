@@ -29,6 +29,7 @@
 
 #include "mymoneypayee.h"
 #include "mymoneypayee_p.h"
+#include "mymoneyenums.h"
 
 using namespace std;
 
@@ -92,13 +93,13 @@ void MyMoneyPayeeTest::testEmptyMatchKeyBegin()
   QString keys;
   bool ignoreCase;
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, "\ntest1\ntest2");
-  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  payee.setMatchData(eMyMoney::Payee::MatchType::Key, false, "\ntest1\ntest2");
+  QVERIFY(payee.matchData(ignoreCase, keys) == eMyMoney::Payee::MatchType::Key);
   QVERIFY(ignoreCase == false);
   QVERIFY(keys == QLatin1String("test1\ntest2"));
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, "\n\ntest1\ntest2");
-  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  payee.setMatchData(eMyMoney::Payee::MatchType::Key, false, "\n\ntest1\ntest2");
+  QVERIFY(payee.matchData(ignoreCase, keys) == eMyMoney::Payee::MatchType::Key);
   QVERIFY(ignoreCase == false);
   QVERIFY(keys == QLatin1String("test1\ntest2"));
 }
@@ -109,13 +110,13 @@ void MyMoneyPayeeTest::testEmptyMatchKeyEnd()
   QString keys;
   bool ignoreCase;
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, "test1\ntest2\n");
-  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  payee.setMatchData(eMyMoney::Payee::MatchType::Key, false, "test1\ntest2\n");
+  QVERIFY(payee.matchData(ignoreCase, keys) == eMyMoney::Payee::MatchType::Key);
   QVERIFY(ignoreCase == false);
   QVERIFY(keys == QLatin1String("test1\ntest2"));
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, "test1\ntest2\n\n");
-  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  payee.setMatchData(eMyMoney::Payee::MatchType::Key, false, "test1\ntest2\n\n");
+  QVERIFY(payee.matchData(ignoreCase, keys) == eMyMoney::Payee::MatchType::Key);
   QVERIFY(ignoreCase == false);
   QVERIFY(keys == QLatin1String("test1\ntest2"));
 }
@@ -126,13 +127,13 @@ void MyMoneyPayeeTest::testEmptyMatchKeyMiddle()
   QString keys;
   bool ignoreCase;
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, "test1\n\ntest2");
-  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  payee.setMatchData(eMyMoney::Payee::MatchType::Key, false, "test1\n\ntest2");
+  QVERIFY(payee.matchData(ignoreCase, keys) == eMyMoney::Payee::MatchType::Key);
   QVERIFY(ignoreCase == false);
   QVERIFY(keys == QLatin1String("test1\ntest2"));
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, "test1\n\n\ntest2");
-  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  payee.setMatchData(eMyMoney::Payee::MatchType::Key, false, "test1\n\n\ntest2");
+  QVERIFY(payee.matchData(ignoreCase, keys) == eMyMoney::Payee::MatchType::Key);
   QVERIFY(ignoreCase == false);
   QVERIFY(keys == QLatin1String("test1\ntest2"));
 }
@@ -143,13 +144,13 @@ void MyMoneyPayeeTest::testEmptyMatchKeyMix()
   QString keys;
   bool ignoreCase;
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, "\ntest1\n\ntest2\n");
-  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  payee.setMatchData(eMyMoney::Payee::MatchType::Key, false, "\ntest1\n\ntest2\n");
+  QVERIFY(payee.matchData(ignoreCase, keys) == eMyMoney::Payee::MatchType::Key);
   QVERIFY(ignoreCase == false);
   QVERIFY(keys == QLatin1String("test1\ntest2"));
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, "\n\ntest1\n\n\ntest2\n\n");
-  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  payee.setMatchData(eMyMoney::Payee::MatchType::Key, false, "\n\ntest1\n\n\ntest2\n\n");
+  QVERIFY(payee.matchData(ignoreCase, keys) == eMyMoney::Payee::MatchType::Key);
   QVERIFY(ignoreCase == false);
   QVERIFY(keys == QLatin1String("test1\ntest2"));
 }
@@ -160,8 +161,8 @@ void MyMoneyPayeeTest::testMatchKeyDisallowSingleSpace()
   QString keys;
   bool ignoreCase;
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, " ");
-  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  payee.setMatchData(eMyMoney::Payee::MatchType::Key, false, " ");
+  QVERIFY(payee.matchData(ignoreCase, keys) == eMyMoney::Payee::MatchType::Key);
   QVERIFY(ignoreCase == false);
   QVERIFY(keys == QLatin1String(""));
 }
@@ -172,8 +173,8 @@ void MyMoneyPayeeTest::testMatchKeyDisallowMultipleSpace()
   QString keys;
   bool ignoreCase;
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, "  ");
-  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  payee.setMatchData(eMyMoney::Payee::MatchType::Key, false, "  ");
+  QVERIFY(payee.matchData(ignoreCase, keys) == eMyMoney::Payee::MatchType::Key);
   QVERIFY(ignoreCase == false);
   QVERIFY(keys == QLatin1String(""));
 }
@@ -184,8 +185,8 @@ void MyMoneyPayeeTest::testMatchKeyAllowSpaceAtStart()
   QString keys;
   bool ignoreCase;
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, " payee");
-  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  payee.setMatchData(eMyMoney::Payee::MatchType::Key, false, " payee");
+  QVERIFY(payee.matchData(ignoreCase, keys) == eMyMoney::Payee::MatchType::Key);
   QVERIFY(ignoreCase == false);
   QVERIFY(keys == QLatin1String(" payee"));
 }
@@ -196,8 +197,8 @@ void MyMoneyPayeeTest::testMatchKeyAllowSpaceAtEnd()
   QString keys;
   bool ignoreCase;
 
-  payee.setMatchData(MyMoneyPayee::matchKey, false, "payee ");
-  QVERIFY(payee.matchData(ignoreCase, keys) == MyMoneyPayee::matchKey);
+  payee.setMatchData(eMyMoney::Payee::MatchType::Key, false, "payee ");
+  QVERIFY(payee.matchData(ignoreCase, keys) == eMyMoney::Payee::MatchType::Key);
   QVERIFY(ignoreCase == false);
   QVERIFY(keys == QLatin1String("payee "));
 }
@@ -208,9 +209,9 @@ void MyMoneyPayeeTest::testMatchNameExact()
   QString keys;
   bool ignoreCase;
 
-  payee.setMatchData(MyMoneyPayee::matchNameExact, false, keys);
+  payee.setMatchData(eMyMoney::Payee::MatchType::NameExact, false, keys);
   keys = QLatin1String("payee ");
-  QCOMPARE(payee.matchData(ignoreCase, keys), MyMoneyPayee::matchNameExact);
+  QCOMPARE(payee.matchData(ignoreCase, keys), eMyMoney::Payee::MatchType::NameExact);
   QCOMPARE(ignoreCase, false);
   QVERIFY(keys.isEmpty());
 }

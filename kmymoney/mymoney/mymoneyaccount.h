@@ -94,6 +94,7 @@ public:
     * This is the constructor for a new empty account
     */
   MyMoneyAccount();
+  explicit MyMoneyAccount(const QString &id);
 
   /**
     * This is the constructor for a new account known to the current file

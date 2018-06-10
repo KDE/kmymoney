@@ -46,6 +46,7 @@
 #include "mymoneybudget.h"
 #include "kmymoneyedit.h"
 #include "kmymoneysettings.h"
+#include "mymoneyenums.h"
 
 class KBudgetValuesPrivate
 {
@@ -313,18 +314,18 @@ void KBudgetValues::setBudgetValues(const MyMoneyBudget& budget, const MyMoneyBu
 
   blockSignals(true);
   switch (budgetAccount.budgetLevel()) {
-    case MyMoneyBudget::AccountGroup::eMonthly:
+    case eMyMoney::Budget::Level::Monthly:
     default:
       d->ui->m_monthlyButton->setChecked(true);
       slotChangePeriod(d->ui->m_periodGroup->id(d->ui->m_monthlyButton));
       d->ui->m_amountMonthly->setValue(budgetAccount.period(d->m_budgetDate).amount());
       break;
-    case MyMoneyBudget::AccountGroup::eYearly:
+    case eMyMoney::Budget::Level::Yearly:
       d->ui->m_yearlyButton->setChecked(true);
       slotChangePeriod(d->ui->m_periodGroup->id(d->ui->m_yearlyButton));
       d->ui->m_amountYearly->setValue(budgetAccount.period(d->m_budgetDate).amount());
       break;
-    case MyMoneyBudget::AccountGroup::eMonthByMonth:
+    case eMyMoney::Budget::Level::MonthByMonth:
       d->ui->m_individualButton->setChecked(true);
       slotChangePeriod(d->ui->m_periodGroup->id(d->ui->m_individualButton));
       date.setDate(d->m_budgetDate.year(), d->m_budgetDate.month(), d->m_budgetDate.day());
@@ -349,15 +350,15 @@ void KBudgetValues::budgetValues(const MyMoneyBudget& budget, MyMoneyBudget::Acc
   budgetAccount.clearPeriods();
   int tab = d->ui->m_periodGroup->checkedId();
   if (tab == d->ui->m_periodGroup->id(d->ui->m_monthlyButton)) {
-    budgetAccount.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthly);
+    budgetAccount.setBudgetLevel(eMyMoney::Budget::Level::Monthly);
     period.setAmount(d->ui->m_amountMonthly->value());
     budgetAccount.addPeriod(d->m_budgetDate, period);
   } else if (tab == d->ui->m_periodGroup->id(d->ui->m_yearlyButton)) {
-    budgetAccount.setBudgetLevel(MyMoneyBudget::AccountGroup::eYearly);
+    budgetAccount.setBudgetLevel(eMyMoney::Budget::Level::Yearly);
     period.setAmount(d->ui->m_amountYearly->value());
     budgetAccount.addPeriod(d->m_budgetDate, period);
   } else if (tab == d->ui->m_periodGroup->id(d->ui->m_individualButton)) {
-    budgetAccount.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthByMonth);
+    budgetAccount.setBudgetLevel(eMyMoney::Budget::Level::MonthByMonth);
     date.setDate(d->m_budgetDate.year(), d->m_budgetDate.month(), d->m_budgetDate.day());
     for (auto i = 0; i < 12; ++i) {
       period.setStartDate(date);

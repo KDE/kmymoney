@@ -357,13 +357,13 @@ void KReportTab::updateReport()
   delete m_table;
   m_table = 0;
 
-  if (m_report.reportType() == MyMoneyReport::ePivotTable) {
+  if (m_report.reportType() == eMyMoney::Report::ReportType::PivotTable) {
     m_table = new PivotTable(m_report);
     m_chartEnabled = true;
-  } else if (m_report.reportType() == MyMoneyReport::eQueryTable) {
+  } else if (m_report.reportType() == eMyMoney::Report::ReportType::QueryTable) {
     m_table = new QueryTable(m_report);
     m_chartEnabled = false;
-  } else if (m_report.reportType() == MyMoneyReport::eInfoTable) {
+  } else if (m_report.reportType() == eMyMoney::Report::ReportType::InfoTable) {
     m_table = new ObjectInfoTable(m_report);
     m_chartEnabled = false;
   }
@@ -815,52 +815,52 @@ public:
       ReportGroup list("Income and Expenses", i18n("Income and Expenses"));
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eExpenseIncome,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::ExpenseIncome,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::CurrentMonth,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Income and Expenses This Month"),
                        i18n("Default Report")
                      ));
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eExpenseIncome,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::ExpenseIncome,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Income and Expenses This Year"),
                        i18n("Default Report")
                      ));
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eExpenseIncome,
-                       MyMoneyReport::eYears,
+                       eMyMoney::Report::RowType::ExpenseIncome,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Years),
                        TransactionFilter::Date::All,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Income and Expenses By Year"),
                        i18n("Default Report")
                      ));
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eExpenseIncome,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::ExpenseIncome,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::Last12Months,
-                       MyMoneyReport::eDetailTop,
+                       eMyMoney::Report::DetailLevel::Top,
                        i18n("Income and Expenses Graph"),
                        i18n("Default Report")
                      ));
       list.back().setChartByDefault(true);
-      list.back().setChartType(MyMoneyReport::eChartLine);
+      list.back().setChartType(eMyMoney::Report::ChartType::Line);
       list.back().setChartDataLabels(false);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eExpenseIncome,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::ExpenseIncome,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailGroup,
+                       eMyMoney::Report::DetailLevel::Group,
                        i18n("Income and Expenses Pie Chart"),
                        i18n("Default Report")
                      ));
       list.back().setChartByDefault(true);
-      list.back().setChartType(MyMoneyReport::eChartPie);
+      list.back().setChartType(eMyMoney::Report::ChartType::Pie);
       list.back().setShowingRowTotals(false);
 
       groups.push_back(list);
@@ -869,34 +869,34 @@ public:
       ReportGroup list("Net Worth", i18n("Net Worth"));
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAssetLiability,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::AssetLiability,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailTop,
+                       eMyMoney::Report::DetailLevel::Top,
                        i18n("Net Worth By Month"),
                        i18n("Default Report")
                      ));
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAssetLiability,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::AssetLiability,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::Today,
-                       MyMoneyReport::eDetailTop,
+                       eMyMoney::Report::DetailLevel::Top,
                        i18n("Net Worth Today"),
                        i18n("Default Report")
                      ));
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAssetLiability,
-                       MyMoneyReport::eYears,
+                       eMyMoney::Report::RowType::AssetLiability,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Years),
                        TransactionFilter::Date::All,
-                       MyMoneyReport::eDetailTop,
+                       eMyMoney::Report::DetailLevel::Top,
                        i18n("Net Worth By Year"),
                        i18n("Default Report")
                      ));
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAssetLiability,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::AssetLiability,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::Next7Days,
-                       MyMoneyReport::eDetailTop,
+                       eMyMoney::Report::DetailLevel::Top,
                        i18n("7-day Cash Flow Forecast"),
                        i18n("Default Report")
                      ));
@@ -904,32 +904,32 @@ public:
       list.back().setColumnsAreDays(true);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAssetLiability,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::AssetLiability,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::Last12Months,
-                       MyMoneyReport::eDetailTotal,
+                       eMyMoney::Report::DetailLevel::Total,
                        i18n("Net Worth Graph"),
                        i18n("Default Report")
                      ));
       list.back().setChartByDefault(true);
       list.back().setChartCHGridLines(false);
       list.back().setChartSVGridLines(false);
-      list.back().setChartType(MyMoneyReport::eChartLine);
+      list.back().setChartType(eMyMoney::Report::ChartType::Line);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eInstitution,
-                       MyMoneyReport::eQCnone,
+                       eMyMoney::Report::RowType::Institution,
+                       eMyMoney::Report::QueryColumn::None,
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailTop,
+                       eMyMoney::Report::DetailLevel::Top,
                        i18n("Account Balances by Institution"),
                        i18n("Default Report")
                      ));
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAccountType,
-                       MyMoneyReport::eQCnone,
+                       eMyMoney::Report::RowType::AccountType,
+                       eMyMoney::Report::QueryColumn::None,
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailTop,
+                       eMyMoney::Report::DetailLevel::Top,
                        i18n("Account Balances by Type"),
                        i18n("Default Report")
                      ));
@@ -940,68 +940,68 @@ public:
       ReportGroup list("Transactions", i18n("Transactions"));
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAccount,
-                       MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory | MyMoneyReport::eQCtag | MyMoneyReport::eQCbalance,
+                       eMyMoney::Report::RowType::Account,
+                       eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Tag | eMyMoney::Report::QueryColumn::Balance,
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Transactions by Account"),
                        i18n("Default Report")
                      ));
       //list.back().setConvertCurrency(false);
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eCategory,
-                       MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCaccount | MyMoneyReport::eQCtag,
+                       eMyMoney::Report::RowType::Category,
+                       eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Account | eMyMoney::Report::QueryColumn::Tag,
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Transactions by Category"),
                        i18n("Default Report")
                      ));
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::ePayee,
-                       MyMoneyReport::eQCnumber | MyMoneyReport::eQCcategory | MyMoneyReport::eQCtag,
+                       eMyMoney::Report::RowType::Payee,
+                       eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Tag,
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Transactions by Payee"),
                        i18n("Default Report")
                      ));
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eTag,
-                       MyMoneyReport::eQCnumber | MyMoneyReport::eQCcategory,
+                       eMyMoney::Report::RowType::Tag,
+                       eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Category,
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Transactions by Tag"),
                        i18n("Default Report")
                      ));
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eMonth,
-                       MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory | MyMoneyReport::eQCtag,
+                       eMyMoney::Report::RowType::Month,
+                       eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Tag,
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Transactions by Month"),
                        i18n("Default Report")
                      ));
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eWeek,
-                       MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory | MyMoneyReport::eQCtag,
+                       eMyMoney::Report::RowType::Week,
+                       eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Tag,
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Transactions by Week"),
                        i18n("Default Report")
                      ));
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAccount,
-                       MyMoneyReport::eQCloan,
+                       eMyMoney::Report::RowType::Account,
+                       eMyMoney::Report::QueryColumn::Loan,
                        TransactionFilter::Date::All,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Loan Transactions"),
                        i18n("Default Report")
                      ));
       list.back().setLoansOnly(true);
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAccountReconcile,
-                       MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory | MyMoneyReport::eQCbalance,
+                       eMyMoney::Report::RowType::AccountReconcile,
+                       eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Balance,
                        TransactionFilter::Date::Last3Months,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Transactions by Reconciliation Status"),
                        i18n("Default Report")
                      ));
@@ -1010,10 +1010,10 @@ public:
     {
       ReportGroup list("CashFlow", i18n("Cash Flow"));
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eCashFlow,
-                       MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCaccount,
+                       eMyMoney::Report::RowType::CashFlow,
+                       eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Account,
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Cash Flow Transactions This Month"),
                        i18n("Default Report")
                      ));
@@ -1023,116 +1023,116 @@ public:
       ReportGroup list("Investments", i18n("Investments"));
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eTopAccount,
-                       MyMoneyReport::eQCaction | MyMoneyReport::eQCshares | MyMoneyReport::eQCprice,
+                       eMyMoney::Report::RowType::TopAccount,
+                       eMyMoney::Report::QueryColumn::Action | eMyMoney::Report::QueryColumn::Shares | eMyMoney::Report::QueryColumn::Price,
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Investment Transactions"),
                        i18n("Default Report")
                      ));
       list.back().setInvestmentsOnly(true);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAccountByTopAccount,
-                       MyMoneyReport::eQCshares | MyMoneyReport::eQCprice,
+                       eMyMoney::Report::RowType::AccountByTopAccount,
+                       eMyMoney::Report::QueryColumn::Shares | eMyMoney::Report::QueryColumn::Price,
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Investment Holdings by Account"),
                        i18n("Default Report")
                      ));
       list.back().setInvestmentsOnly(true);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eEquityType,
-                       MyMoneyReport::eQCshares | MyMoneyReport::eQCprice,
+                       eMyMoney::Report::RowType::EquityType,
+                       eMyMoney::Report::QueryColumn::Shares | eMyMoney::Report::QueryColumn::Price,
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Investment Holdings by Type"),
                        i18n("Default Report")
                      ));
       list.back().setInvestmentsOnly(true);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAccountByTopAccount,
-                       MyMoneyReport::eQCperformance,
+                       eMyMoney::Report::RowType::AccountByTopAccount,
+                       eMyMoney::Report::QueryColumn::Performance,
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Investment Performance by Account"),
                        i18n("Default Report")
                      ));
       list.back().setInvestmentsOnly(true);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eEquityType,
-                       MyMoneyReport::eQCperformance,
+                       eMyMoney::Report::RowType::EquityType,
+                       eMyMoney::Report::QueryColumn::Performance,
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Investment Performance by Type"),
                        i18n("Default Report")
                      ));
       list.back().setInvestmentsOnly(true);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAccountByTopAccount,
-                       MyMoneyReport::eQCcapitalgain,
+                       eMyMoney::Report::RowType::AccountByTopAccount,
+                       eMyMoney::Report::QueryColumn::CapitalGain,
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Investment Capital Gains by Account"),
                        i18n("Default Report")
                      ));
       list.back().setInvestmentsOnly(true);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eEquityType,
-                       MyMoneyReport::eQCcapitalgain,
+                       eMyMoney::Report::RowType::EquityType,
+                       eMyMoney::Report::QueryColumn::CapitalGain,
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Investment Capital Gains by Type"),
                        i18n("Default Report")
                      ));
       list.back().setInvestmentsOnly(true);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAssetLiability,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::AssetLiability,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::Today,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Investment Holdings Pie"),
                        i18n("Default Report")
                      ));
       list.back().setChartByDefault(true);
       list.back().setChartCHGridLines(false);
       list.back().setChartSVGridLines(false);
-      list.back().setChartType(MyMoneyReport::eChartPie);
+      list.back().setChartType(eMyMoney::Report::ChartType::Pie);
       list.back().setInvestmentsOnly(true);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAssetLiability,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::AssetLiability,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::Last12Months,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Investment Worth Graph"),
                        i18n("Default Report")
                      ));
       list.back().setChartByDefault(true);
       list.back().setChartCHGridLines(false);
       list.back().setChartSVGridLines(false);
-      list.back().setChartType(MyMoneyReport::eChartLine);
+      list.back().setChartType(eMyMoney::Report::ChartType::Line);
       list.back().setColumnsAreDays(true);
       list.back().setInvestmentsOnly(true);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAssetLiability,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::AssetLiability,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::Last12Months,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Investment Price Graph"),
                        i18n("Default Report")
                      ));
       list.back().setChartByDefault(true);
       list.back().setChartCHGridLines(false);
       list.back().setChartSVGridLines(false);
-      list.back().setChartType(MyMoneyReport::eChartLine);
+      list.back().setChartType(eMyMoney::Report::ChartType::Line);
       list.back().setColumnsAreDays(true);
       list.back().setInvestmentsOnly(true);
       list.back().setIncludingBudgetActuals(false);
@@ -1144,17 +1144,17 @@ public:
       list.back().setShowingRowTotals(false);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAssetLiability,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::AssetLiability,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::Last12Months,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Investment Moving Average Price Graph"),
                        i18n("Default Report")
                      ));
       list.back().setChartByDefault(true);
       list.back().setChartCHGridLines(false);
       list.back().setChartSVGridLines(false);
-      list.back().setChartType(MyMoneyReport::eChartLine);
+      list.back().setChartType(eMyMoney::Report::ChartType::Line);
       list.back().setColumnsAreDays(true);
       list.back().setInvestmentsOnly(true);
       list.back().setIncludingBudgetActuals(false);
@@ -1166,16 +1166,16 @@ public:
       list.back().setShowingRowTotals(false);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAssetLiability,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::AssetLiability,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::Last30Days,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Investment Moving Average"),
                        i18n("Default Report")
                      ));
       list.back().setChartCHGridLines(false);
       list.back().setChartSVGridLines(false);
-      list.back().setChartType(MyMoneyReport::eChartLine);
+      list.back().setChartType(eMyMoney::Report::ChartType::Line);
       list.back().setColumnsAreDays(true);
       list.back().setInvestmentsOnly(true);
       list.back().setIncludingBudgetActuals(false);
@@ -1183,17 +1183,17 @@ public:
       list.back().setMovingAverageDays(10);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAssetLiability,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::AssetLiability,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::Last30Days,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Investment Moving Average vs Actual"),
                        i18n("Default Report")
                      ));
       list.back().setChartByDefault(true);
       list.back().setChartCHGridLines(false);
       list.back().setChartSVGridLines(false);
-      list.back().setChartType(MyMoneyReport::eChartLine);
+      list.back().setChartType(eMyMoney::Report::ChartType::Line);
       list.back().setColumnsAreDays(true);
       list.back().setInvestmentsOnly(true);
       list.back().setIncludingBudgetActuals(true);
@@ -1205,37 +1205,37 @@ public:
       ReportGroup list("Taxes", i18n("Taxes"));
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eCategory,
-                       MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCaccount,
+                       eMyMoney::Report::RowType::Category,
+                       eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Account,
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Tax Transactions by Category"),
                        i18n("Default Report")
                      ));
       list.back().setTax(true);
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::ePayee,
-                       MyMoneyReport::eQCnumber | MyMoneyReport::eQCcategory | MyMoneyReport::eQCaccount,
+                       eMyMoney::Report::RowType::Payee,
+                       eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Account,
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Tax Transactions by Payee"),
                        i18n("Default Report")
                      ));
       list.back().setTax(true);
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eCategory,
-                       MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCaccount,
+                       eMyMoney::Report::RowType::Category,
+                       eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Account,
                        TransactionFilter::Date::LastFiscalYear,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Tax Transactions by Category Last Fiscal Year"),
                        i18n("Default Report")
                      ));
       list.back().setTax(true);
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::ePayee,
-                       MyMoneyReport::eQCnumber | MyMoneyReport::eQCcategory | MyMoneyReport::eQCaccount,
+                       eMyMoney::Report::RowType::Payee,
+                       eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Account,
                        TransactionFilter::Date::LastFiscalYear,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Tax Transactions by Payee Last Fiscal Year"),
                        i18n("Default Report")
                      ));
@@ -1246,10 +1246,10 @@ public:
       ReportGroup list("Budgeting", i18n("Budgeting"));
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eBudgetActual,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::BudgetActual,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::YearToDate,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Budgeted vs. Actual This Year"),
                        i18n("Default Report")
                      ));
@@ -1257,10 +1257,10 @@ public:
       list.back().setBudget("Any", true);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eBudgetActual,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::BudgetActual,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::YearToMonth,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Budgeted vs. Actual This Year (YTM)"),
                        i18n("Default Report")
                      ));
@@ -1272,20 +1272,20 @@ public:
       }
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eBudgetActual,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::BudgetActual,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::CurrentMonth,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Monthly Budgeted vs. Actual"),
                        i18n("Default Report")
                      ));
       list.back().setBudget("Any", true);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eBudgetActual,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::BudgetActual,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::CurrentYear,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Yearly Budgeted vs. Actual"),
                        i18n("Default Report")
                      ));
@@ -1293,30 +1293,30 @@ public:
       list.back().setShowingRowTotals(true);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eBudget,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::Budget,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::CurrentMonth,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Monthly Budget"),
                        i18n("Default Report")
                      ));
       list.back().setBudget("Any", false);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eBudget,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::Budget,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::CurrentYear,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Yearly Budget"),
                        i18n("Default Report")
                      ));
       list.back().setBudget("Any", false);
       list.back().setShowingRowTotals(true);
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eBudgetActual,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::BudgetActual,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::CurrentYear,
-                       MyMoneyReport::eDetailGroup,
+                       eMyMoney::Report::DetailLevel::Group,
                        i18n("Yearly Budgeted vs Actual Graph"),
                        i18n("Default Report")
                      ));
@@ -1324,7 +1324,7 @@ public:
       list.back().setChartCHGridLines(false);
       list.back().setChartSVGridLines(false);
       list.back().setBudget("Any", true);
-      list.back().setChartType(MyMoneyReport::eChartLine);
+      list.back().setChartType(eMyMoney::Report::ChartType::Line);
 
       groups.push_back(list);
     }
@@ -1332,20 +1332,20 @@ public:
       ReportGroup list("Forecast", i18n("Forecast"));
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAssetLiability,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::AssetLiability,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::Next12Months,
-                       MyMoneyReport::eDetailTop,
+                       eMyMoney::Report::DetailLevel::Top,
                        i18n("Forecast By Month"),
                        i18n("Default Report")
                      ));
       list.back().setIncludingForecast(true);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAssetLiability,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::AssetLiability,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::NextQuarter,
-                       MyMoneyReport::eDetailTop,
+                       eMyMoney::Report::DetailLevel::Top,
                        i18n("Forecast Next Quarter"),
                        i18n("Default Report")
                      ));
@@ -1353,20 +1353,20 @@ public:
       list.back().setIncludingForecast(true);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eExpenseIncome,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::ExpenseIncome,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::CurrentYear,
-                       MyMoneyReport::eDetailTop,
+                       eMyMoney::Report::DetailLevel::Top,
                        i18n("Income and Expenses Forecast This Year"),
                        i18n("Default Report")
                      ));
       list.back().setIncludingForecast(true);
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAssetLiability,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::AssetLiability,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::Next3Months,
-                       MyMoneyReport::eDetailTotal,
+                       eMyMoney::Report::DetailLevel::Total,
                        i18n("Net Worth Forecast Graph"),
                        i18n("Default Report")
                      ));
@@ -1375,44 +1375,44 @@ public:
       list.back().setChartByDefault(true);
       list.back().setChartCHGridLines(false);
       list.back().setChartSVGridLines(false);
-      list.back().setChartType(MyMoneyReport::eChartLine);
+      list.back().setChartType(eMyMoney::Report::ChartType::Line);
       groups.push_back(list);
     }
     {
       ReportGroup list("Information", i18n("General Information"));
 
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eSchedule,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::Schedule,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::Next12Months,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Schedule Information"),
                        i18n("Default Report")
                      ));
-      list.back().setDetailLevel(MyMoneyReport::eDetailAll);
+      list.back().setDetailLevel(eMyMoney::Report::DetailLevel::All);
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eSchedule,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::Schedule,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::Next12Months,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Schedule Summary Information"),
                        i18n("Default Report")
                      ));
-      list.back().setDetailLevel(MyMoneyReport::eDetailTop);
+      list.back().setDetailLevel(eMyMoney::Report::DetailLevel::Top);
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAccountInfo,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::AccountInfo,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::Today,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Account Information"),
                        i18n("Default Report")
                      ));
       list.back().setConvertCurrency(false);
       list.push_back(MyMoneyReport(
-                       MyMoneyReport::eAccountLoanInfo,
-                       MyMoneyReport::eMonths,
+                       eMyMoney::Report::RowType::AccountLoanInfo,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                        TransactionFilter::Date::Today,
-                       MyMoneyReport::eDetailAll,
+                       eMyMoney::Report::DetailLevel::All,
                        i18n("Loan Information"),
                        i18n("Default Report")
                      ));

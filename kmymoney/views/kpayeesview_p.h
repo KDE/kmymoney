@@ -162,10 +162,10 @@ public:
     m_filterProxyModel->sort((int)eAccountsModel::Column::Account);
     ui->comboDefaultCategory->setModel(m_filterProxyModel);
 
-    ui->matchTypeCombo->addItem(i18nc("@item No matching", "No matching"), MyMoneyPayee::matchDisabled);
-    ui->matchTypeCombo->addItem(i18nc("@item Match Payees name partially", "Match Payees name (partial)"), MyMoneyPayee::matchName);
-    ui->matchTypeCombo->addItem(i18nc("@item Match Payees name exactly", "Match Payees name (exact)"), MyMoneyPayee::matchNameExact);
-    ui->matchTypeCombo->addItem(i18nc("@item Search match in list", "Match on a name listed below"), MyMoneyPayee::matchKey);
+    ui->matchTypeCombo->addItem(i18nc("@item No matching", "No matching"), static_cast<int>(eMyMoney::Payee::MatchType::Disabled));
+    ui->matchTypeCombo->addItem(i18nc("@item Match Payees name partially", "Match Payees name (partial)"), static_cast<int>(eMyMoney::Payee::MatchType::Name));
+    ui->matchTypeCombo->addItem(i18nc("@item Match Payees name exactly", "Match Payees name (exact)"), static_cast<int>(eMyMoney::Payee::MatchType::NameExact));
+    ui->matchTypeCombo->addItem(i18nc("@item Search match in list", "Match on a name listed below"), static_cast<int>(eMyMoney::Payee::MatchType::Key));
 
     // create the searchline widget
     // and insert it into the existing layout
@@ -616,7 +616,7 @@ public:
 
       bool ignorecase;
       QStringList payeeNames;
-      MyMoneyPayee::payeeMatchType matchType = newPayee.matchData(ignorecase, payeeNames);
+      auto matchType = newPayee.matchData(ignorecase, payeeNames);
       QStringList deletedPayeeNames;
 
       // now loop over all selected payees and remove them
@@ -631,7 +631,7 @@ public:
       }
 
       // if we initially have no matching turned on, we just ignore the case (default)
-      if (matchType == MyMoneyPayee::matchDisabled)
+      if (matchType == eMyMoney::Payee::MatchType::Disabled)
         ignorecase = true;
 
       // update the destination payee if this was requested by the user
@@ -642,7 +642,7 @@ public:
         //       to the user himeself.
         QStringList::const_iterator it_n;
         for (it_n = deletedPayeeNames.constBegin(); it_n != deletedPayeeNames.constEnd(); ++it_n) {
-          if (matchType == MyMoneyPayee::matchKey) {
+          if (matchType == eMyMoney::Payee::MatchType::Key) {
             // make sure we really need it and it is not caught by an existing regexp
             QStringList::const_iterator it_k;
             for (it_k = payeeNames.constBegin(); it_k != payeeNames.constEnd(); ++it_k) {
@@ -658,7 +658,7 @@ public:
 
         // and update the payee in the engine context
         // make sure to turn on matching for this payee in the right mode
-        newPayee.setMatchData(MyMoneyPayee::matchKey, ignorecase, payeeNames);
+        newPayee.setMatchData(eMyMoney::Payee::MatchType::Key, ignorecase, payeeNames);
         file->modifyPayee(newPayee);
       }
       ft.commit();

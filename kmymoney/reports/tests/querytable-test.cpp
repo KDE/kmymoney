@@ -58,9 +58,11 @@ void QueryTableTest::init()
   file->addCurrency(MyMoneySecurity("GBP", "British Pound",           "#"));
   file->setBaseCurrency(file->currency("USD"));
 
-  MyMoneyPayee payeeTest("Test Payee");
+  MyMoneyPayee payeeTest;
+  payeeTest.setName("Test Payee");
   file->addPayee(payeeTest);
-  MyMoneyPayee payeeTest2("Thomas Baumgart");
+  MyMoneyPayee payeeTest2;
+  payeeTest2.setName("Thomas Baumgart");
   file->addPayee(payeeTest2);
 
   acAsset = (MyMoneyFile::instance()->asset().id());
@@ -108,9 +110,9 @@ void QueryTableTest::testQueryBasics()
     unsigned cols;
 
     MyMoneyReport filter;
-    filter.setRowType(MyMoneyReport::eCategory);
-    cols = MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCaccount;
-    filter.setQueryColumns(static_cast<MyMoneyReport::EQueryColumns>(cols));   //
+    filter.setRowType(eMyMoney::Report::RowType::Category);
+    cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Account;
+    filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
     filter.setName("Transactions by Category");
     XMLandback(filter);
     QueryTable qtbl_1(filter);
@@ -133,9 +135,9 @@ void QueryTableTest::testQueryBasics()
     QVERIFY(MyMoneyMoney(rows[17][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3);
     QVERIFY(MyMoneyMoney(rows[18][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
-    filter.setRowType(MyMoneyReport::eTopCategory);
-    cols = MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCaccount;
-    filter.setQueryColumns(static_cast<MyMoneyReport::EQueryColumns>(cols));   //
+    filter.setRowType(eMyMoney::Report::RowType::TopCategory);
+    cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Account;
+    filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
     filter.setName("Transactions by Top Category");
     XMLandback(filter);
     QueryTable qtbl_2(filter);
@@ -160,10 +162,10 @@ void QueryTableTest::testQueryBasics()
     QVERIFY(MyMoneyMoney(rows[14][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3);
     QVERIFY(MyMoneyMoney(rows[15][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
-    filter.setRowType(MyMoneyReport::eAccount);
+    filter.setRowType(eMyMoney::Report::RowType::Account);
     filter.setName("Transactions by Account");
-    cols = MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory;
-    filter.setQueryColumns(static_cast<MyMoneyReport::EQueryColumns>(cols));   //
+    cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category;
+    filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
     XMLandback(filter);
     QueryTable qtbl_3(filter);
 
@@ -193,10 +195,10 @@ void QueryTableTest::testQueryBasics()
     QVERIFY(MyMoneyMoney(rows[17][ListTable::ctValue]) == -(moParent1 + moParent2 + moChild) * 3 + moCreditOpen);
     QVERIFY(MyMoneyMoney(rows[18][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
-    filter.setRowType(MyMoneyReport::ePayee);
+    filter.setRowType(eMyMoney::Report::RowType::Payee);
     filter.setName("Transactions by Payee");
-    cols = MyMoneyReport::eQCnumber | MyMoneyReport::eQCmemo | MyMoneyReport::eQCcategory;
-    filter.setQueryColumns(static_cast<MyMoneyReport::EQueryColumns>(cols));   //
+    cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Memo | eMyMoney::Report::QueryColumn::Category;
+    filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
     XMLandback(filter);
     QueryTable qtbl_4(filter);
 
@@ -218,10 +220,10 @@ void QueryTableTest::testQueryBasics()
     QVERIFY(MyMoneyMoney(rows[12][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3);
     QVERIFY(MyMoneyMoney(rows[13][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
-    filter.setRowType(MyMoneyReport::eMonth);
+    filter.setRowType(eMyMoney::Report::RowType::Month);
     filter.setName("Transactions by Month");
-    cols = MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory;
-    filter.setQueryColumns(static_cast<MyMoneyReport::EQueryColumns>(cols));   //
+    cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category;
+    filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
     XMLandback(filter);
     QueryTable qtbl_5(filter);
 
@@ -245,10 +247,10 @@ void QueryTableTest::testQueryBasics()
     QVERIFY(MyMoneyMoney(rows[9][ListTable::ctValue]) == -moParent1 + moCheckingOpen);
     QVERIFY(MyMoneyMoney(rows[22][ListTable::ctValue]) == -(moParent1 + moParent2 + moSolo + moChild) * 3 + moCheckingOpen + moCreditOpen);
 
-    filter.setRowType(MyMoneyReport::eWeek);
+    filter.setRowType(eMyMoney::Report::RowType::Week);
     filter.setName("Transactions by Week");
-    cols = MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory;
-    filter.setQueryColumns(static_cast<MyMoneyReport::EQueryColumns>(cols));   //
+    cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category;
+    filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
     XMLandback(filter);
     QueryTable qtbl_6(filter);
 
@@ -333,7 +335,7 @@ void QueryTableTest::testAccountQuery()
     //
 
     MyMoneyReport filter;
-    filter.setRowType(MyMoneyReport::eInstitution);
+    filter.setRowType(eMyMoney::Report::RowType::Institution);
     filter.setName("Accounts by Institution (No transactions)");
     XMLandback(filter);
     QueryTable qtbl_1(filter);
@@ -372,7 +374,7 @@ void QueryTableTest::testAccountQuery()
     TransactionHelper t3y2(QDate(2005, 9, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
     TransactionHelper t4y2(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
 
-    filter.setRowType(MyMoneyReport::eInstitution);
+    filter.setRowType(eMyMoney::Report::RowType::Institution);
     filter.setName("Accounts by Institution (With Transactions)");
     XMLandback(filter);
     QueryTable qtbl_2(filter);
@@ -391,7 +393,7 @@ void QueryTableTest::testAccountQuery()
     // Account TYPES
     //
 
-    filter.setRowType(MyMoneyReport::eAccountType);
+    filter.setRowType(eMyMoney::Report::RowType::AccountType);
     filter.setName("Accounts by Type");
     XMLandback(filter);
     QueryTable qtbl_3(filter);
@@ -456,10 +458,10 @@ void QueryTableTest::testInvestment()
     //
 
     MyMoneyReport invtran_r(
-      MyMoneyReport::eTopAccount,
-      MyMoneyReport::eQCaction | MyMoneyReport::eQCshares | MyMoneyReport::eQCprice,
+      eMyMoney::Report::RowType::TopAccount,
+      eMyMoney::Report::QueryColumn::Action | eMyMoney::Report::QueryColumn::Shares | eMyMoney::Report::QueryColumn::Price,
       eMyMoney::TransactionFilter::Date::UserDefined,
-      MyMoneyReport::eDetailAll,
+      eMyMoney::Report::DetailLevel::All,
       i18n("Investment Transactions"),
       i18n("Test Report")
     );
@@ -556,10 +558,10 @@ void QueryTableTest::testInvestment()
     //
 
     MyMoneyReport invhold_r(
-      MyMoneyReport::eAccountByTopAccount,
-      MyMoneyReport::eQCperformance,
+      eMyMoney::Report::RowType::AccountByTopAccount,
+      eMyMoney::Report::QueryColumn::Performance,
       eMyMoney::TransactionFilter::Date::UserDefined,
-      MyMoneyReport::eDetailAll,
+      eMyMoney::Report::DetailLevel::All,
       i18n("Investment Performance by Account"),
       i18n("Test Report")
     );
@@ -639,10 +641,10 @@ void QueryTableTest::testSplitShares()
     //
 
     MyMoneyReport invhold_r(
-      MyMoneyReport::eAccountByTopAccount,
-      MyMoneyReport::eQCperformance,
+      eMyMoney::Report::RowType::AccountByTopAccount,
+      eMyMoney::Report::QueryColumn::Performance,
       eMyMoney::TransactionFilter::Date::UserDefined,
-      MyMoneyReport::eDetailAll,
+      eMyMoney::Report::DetailLevel::All,
       i18n("Investment Performance by Account"),
       i18n("Test Report")
     );
@@ -679,11 +681,11 @@ void QueryTableTest::testConversionRate()
     TransactionHelper t1(QDate(2017, 8, 1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), amountWithdrawn, acCadChecking, acSolo, "CAD");
 
     MyMoneyReport filter;
-    filter.setRowType(MyMoneyReport::eAccount);
+    filter.setRowType(eMyMoney::Report::RowType::Account);
     filter.setDateFilter(QDate(2017, 8, 1), QDate(2017, 8, 2));
     filter.setName("Transactions by Account");
-    auto cols = MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory | MyMoneyReport::eQCbalance;
-    filter.setQueryColumns(static_cast<MyMoneyReport::EQueryColumns>(cols));   //
+    auto cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Balance;
+    filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
     XMLandback(filter);
     QueryTable qtbl(filter);
 
@@ -727,10 +729,10 @@ void QueryTableTest::testBalanceColumn()
 
     MyMoneyReport filter;
 
-    filter.setRowType(MyMoneyReport::eAccount);
+    filter.setRowType(eMyMoney::Report::RowType::Account);
     filter.setName("Transactions by Account");
-    cols = MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory | MyMoneyReport::eQCbalance;
-    filter.setQueryColumns(static_cast<MyMoneyReport::EQueryColumns>(cols));   //
+    cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Balance;
+    filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));   //
     XMLandback(filter);
     QueryTable qtbl_3(filter);
 
@@ -789,10 +791,10 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
 
     MyMoneyReport filter;
 
-    filter.setRowType(MyMoneyReport::eAccount);
+    filter.setRowType(eMyMoney::Report::RowType::Account);
     filter.setName("Transactions by Account");
-    cols = MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCcategory | MyMoneyReport::eQCbalance;
-    filter.setQueryColumns(static_cast<MyMoneyReport::EQueryColumns>(cols));
+    cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Category | eMyMoney::Report::QueryColumn::Balance;
+    filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));
     // don't convert values to the default currency
     filter.setConvertCurrency(false);
     XMLandback(filter);
@@ -883,10 +885,10 @@ void QueryTableTest::testTaxReport()
     unsigned cols;
     MyMoneyReport filter;
 
-    filter.setRowType(MyMoneyReport::eCategory);
+    filter.setRowType(eMyMoney::Report::RowType::Category);
     filter.setName("Tax Transactions");
-    cols = MyMoneyReport::eQCnumber | MyMoneyReport::eQCpayee | MyMoneyReport::eQCaccount;
-    filter.setQueryColumns(static_cast<MyMoneyReport::EQueryColumns>(cols));
+    cols = eMyMoney::Report::QueryColumn::Number | eMyMoney::Report::QueryColumn::Payee | eMyMoney::Report::QueryColumn::Account;
+    filter.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(cols));
     filter.setTax(true);
 
     XMLandback(filter);

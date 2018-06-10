@@ -43,7 +43,7 @@ class KMM_MYMONEY_EXPORT MyMoneyCostCenter : public MyMoneyObject
 
 public:
   MyMoneyCostCenter();
-  explicit MyMoneyCostCenter(const QString& name);
+  explicit MyMoneyCostCenter(const QString &id);
 
   /**
     * This is the constructor for a tag that is described by a

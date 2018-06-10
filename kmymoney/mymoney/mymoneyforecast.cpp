@@ -1394,7 +1394,7 @@ void MyMoneyForecast::createBudget(MyMoneyBudget& budget, QDate historyStart, QD
 
       MyMoneyBudget::AccountGroup budgetAcc;
       budgetAcc.setId(acc.id());
-      budgetAcc.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthByMonth);
+      budgetAcc.setBudgetLevel(eMyMoney::Budget::Level::MonthByMonth);
 
       for (QDate f_date = forecastStartDate(); f_date <= forecastEndDate();) {
         MyMoneyBudget::PeriodGroup period;

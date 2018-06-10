@@ -35,6 +35,7 @@
 
 #include <mymoneyexception.h>
 #include "mymoneystoragenames.h"
+#include "mymoneyenums.h"
 
 using namespace MyMoneyStorageNodes;
 
@@ -42,6 +43,11 @@ MyMoneyPayee MyMoneyPayee::null;
 
 MyMoneyPayee::MyMoneyPayee() :
   MyMoneyObject(*new MyMoneyPayeePrivate)
+{
+}
+
+MyMoneyPayee::MyMoneyPayee(const QString &id):
+  MyMoneyObject(*new MyMoneyPayeePrivate, id)
 {
 }
 
@@ -81,7 +87,7 @@ MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
 
   d->m_matchingEnabled = node.attribute(d->getAttrName(Payee::Attribute::MatchingEnabled), "0").toUInt();
   if (d->m_matchingEnabled) {
-    setMatchData((node.attribute(d->getAttrName(Payee::Attribute::UsingMatchKey), "0").toUInt() != 0) ? matchKey : matchName,
+    setMatchData((node.attribute(d->getAttrName(Payee::Attribute::UsingMatchKey), "0").toUInt() != 0) ? eMyMoney::Payee::MatchType::Key : eMyMoney::Payee::MatchType::Name,
                  node.attribute(d->getAttrName(Payee::Attribute::MatchIgnoreCase), "0").toUInt(),
                  node.attribute(d->getAttrName(Payee::Attribute::MatchKey)));
   }
@@ -312,57 +318,57 @@ void MyMoneyPayee::setReference(const QString& ref)
   d->m_reference = ref;
 }
 
-MyMoneyPayee::payeeMatchType MyMoneyPayee::matchData(bool& ignorecase, QStringList& keys) const
+eMyMoney::Payee::MatchType MyMoneyPayee::matchData(bool& ignorecase, QStringList& keys) const
 {
-  payeeMatchType type = matchDisabled;
+  auto type = eMyMoney::Payee::MatchType::Disabled;
   keys.clear();
 
   Q_D(const MyMoneyPayee);
   ignorecase = d->m_matchKeyIgnoreCase;
 
   if (d->m_matchingEnabled) {
-    type = d->m_usingMatchKey ? matchKey : matchName;
-    if (type == matchKey) {
+    type = d->m_usingMatchKey ? eMyMoney::Payee::MatchType::Key : eMyMoney::Payee::MatchType::Name;
+    if (type == eMyMoney::Payee::MatchType::Key) {
       if (d->m_matchKey.contains(QLatin1Char('\n')))
         keys = d->m_matchKey.split(QLatin1Char('\n'));
       else
         keys = d->m_matchKey.split(QLatin1Char(';'));  // for compatibility with 4.8.0
     } else if (d->m_matchKey.compare(QLatin1String("^$")) == 0) {
-      type = matchNameExact;
+      type = eMyMoney::Payee::MatchType::NameExact;
     }
   }
 
   return type;
 }
 
-MyMoneyPayee::payeeMatchType MyMoneyPayee::matchData(bool& ignorecase, QString& keyString) const
+eMyMoney::Payee::MatchType MyMoneyPayee::matchData(bool& ignorecase, QString& keyString) const
 {
   QStringList keys;
-  payeeMatchType type = matchData(ignorecase, keys);
+  auto type = matchData(ignorecase, keys);
   keyString = keys.join(QLatin1Char('\n'));
   return type;
 }
 
-void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QStringList& keys)
+void MyMoneyPayee::setMatchData(eMyMoney::Payee::MatchType type, bool ignorecase, const QStringList& keys)
 {
   Q_D(MyMoneyPayee);
-  d->m_matchingEnabled = (type != matchDisabled);
+  d->m_matchingEnabled = (type != eMyMoney::Payee::MatchType::Disabled);
   d->m_matchKeyIgnoreCase = ignorecase;
   d->m_matchKey.clear();
 
   if (d->m_matchingEnabled) {
-    d->m_usingMatchKey = (type == matchKey);
+    d->m_usingMatchKey = (type == eMyMoney::Payee::MatchType::Key);
     if (d->m_usingMatchKey) {
       QRegExp validKeyRegExp("[^ ]");
       QStringList filteredKeys = keys.filter(validKeyRegExp);
       d->m_matchKey = filteredKeys.join(QLatin1Char('\n'));
-    } else if(type == matchNameExact) {
+    } else if(type == eMyMoney::Payee::MatchType::NameExact) {
       d->m_matchKey = QLatin1String("^$");
     }
   }
 }
 
-void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QString& keys)
+void MyMoneyPayee::setMatchData(eMyMoney::Payee::MatchType type, bool ignorecase, const QString& keys)
 {
   if (keys.contains(QLatin1Char('\n')))
     setMatchData(type, ignorecase, keys.split(QLatin1Char('\n')));

@@ -1386,7 +1386,7 @@ void MyMoneyStorageMgrTest::testAddPayee()
     QVERIFY(p.postcode() == p1.postcode());
     QVERIFY(p.telephone() == p1.telephone());
     QVERIFY(p.email() == p1.email());
-    MyMoneyPayee::payeeMatchType m1, m2;
+    eMyMoney::Payee::MatchType m1, m2;
     bool ignore, ignore1;
     QStringList keys, keys1;
     m1 = p.matchData(ignore, keys);

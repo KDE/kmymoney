@@ -45,6 +45,11 @@ MyMoneySecurity::MyMoneySecurity() :
 {
 }
 
+MyMoneySecurity::MyMoneySecurity(const QString &id) :
+  MyMoneyObject(*new MyMoneySecurityPrivate, id)
+{
+}
+
 MyMoneySecurity::MyMoneySecurity(const QString& id,
                                  const QString& name,
                                  const QString& symbol,

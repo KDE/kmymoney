@@ -42,6 +42,12 @@ onlineJob::onlineJob() :
   d->m_locked = false;
 }
 
+onlineJob::onlineJob(const QString &id) :
+  MyMoneyObject(*new onlineJobPrivate, id),
+  m_task(nullptr)
+{
+}
+
 onlineJob::onlineJob(onlineTask* onlinetask, const QString &id) :
   MyMoneyObject(*new onlineJobPrivate, id),
   m_task(onlinetask)
@@ -129,6 +135,11 @@ void onlineJob::reset()
 onlineJob::~onlineJob()
 {
   delete m_task;
+}
+
+void onlineJob::setTask(onlineTask *task)
+{
+  m_task = task;
 }
 
 onlineTask* onlineJob::task()
@@ -266,6 +277,12 @@ QList<onlineJobMessage> onlineJob::jobMessageList() const
 {
   Q_D(const onlineJob);
   return d->m_messageList;
+}
+
+void onlineJob::clearJobMessageList()
+{
+  Q_D(onlineJob);
+  d->m_messageList = QList<onlineJobMessage>();
 }
 
 /** @todo give life */

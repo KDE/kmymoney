@@ -277,27 +277,27 @@ void QueryTable::init()
   m_subtotal.clear();
   m_postcolumns.clear();
   switch (m_config.rowType()) {
-    case MyMoneyReport::eAccountByTopAccount:
-    case MyMoneyReport::eEquityType:
-    case MyMoneyReport::eAccountType:
-    case MyMoneyReport::eInstitution:
+    case eMyMoney::Report::RowType::AccountByTopAccount:
+    case eMyMoney::Report::RowType::EquityType:
+    case eMyMoney::Report::RowType::AccountType:
+    case eMyMoney::Report::RowType::Institution:
       constructAccountTable();
       m_columns << ctAccount;
       break;
 
-    case MyMoneyReport::eAccount:
+    case eMyMoney::Report::RowType::Account:
       constructTransactionTable();
       m_columns << ctAccountID << ctPostDate;
       break;
 
-    case MyMoneyReport::ePayee:
-    case MyMoneyReport::eTag:
-    case MyMoneyReport::eMonth:
-    case MyMoneyReport::eWeek:
+    case eMyMoney::Report::RowType::Payee:
+    case eMyMoney::Report::RowType::Tag:
+    case eMyMoney::Report::RowType::Month:
+    case eMyMoney::Report::RowType::Week:
       constructTransactionTable();
       m_columns << ctPostDate << ctAccount;
       break;
-    case MyMoneyReport::eCashFlow:
+    case eMyMoney::Report::RowType::CashFlow:
       constructSplitsTable();
       m_columns << ctPostDate;
       break;
@@ -310,46 +310,46 @@ void QueryTable::init()
   m_subtotal << ctValue;
 
   switch (m_config.rowType()) {
-    case MyMoneyReport::eCashFlow:
+    case eMyMoney::Report::RowType::CashFlow:
       m_group << ctCategoryType << ctTopCategory << ctCategory;
       break;
-    case MyMoneyReport::eCategory:
+    case eMyMoney::Report::RowType::Category:
       m_group << ctCategoryType << ctTopCategory << ctCategory;
       break;
-    case MyMoneyReport::eTopCategory:
+    case eMyMoney::Report::RowType::TopCategory:
       m_group << ctCategoryType << ctTopCategory;
       break;
-    case MyMoneyReport::eTopAccount:
+    case eMyMoney::Report::RowType::TopAccount:
       m_group << ctTopAccount << ctAccount;
       break;
-    case MyMoneyReport::eAccount:
+    case eMyMoney::Report::RowType::Account:
       m_group << ctAccount;
       break;
-    case MyMoneyReport::eAccountReconcile:
+    case eMyMoney::Report::RowType::AccountReconcile:
       m_group << ctAccount << ctReconcileFlag;
       break;
-    case MyMoneyReport::ePayee:
+    case eMyMoney::Report::RowType::Payee:
       m_group << ctPayee;
       break;
-    case MyMoneyReport::eTag:
+    case eMyMoney::Report::RowType::Tag:
       m_group << ctTag;
       break;
-    case MyMoneyReport::eMonth:
+    case eMyMoney::Report::RowType::Month:
       m_group << ctMonth;
       break;
-    case MyMoneyReport::eWeek:
+    case eMyMoney::Report::RowType::Week:
       m_group << ctWeek;
       break;
-    case MyMoneyReport::eAccountByTopAccount:
+    case eMyMoney::Report::RowType::AccountByTopAccount:
       m_group << ctTopAccount;
       break;
-    case MyMoneyReport::eEquityType:
+    case eMyMoney::Report::RowType::EquityType:
       m_group << ctEquityType;
       break;
-    case MyMoneyReport::eAccountType:
+    case eMyMoney::Report::RowType::AccountType:
       m_group << ctType;
       break;
-    case MyMoneyReport::eInstitution:
+    case eMyMoney::Report::RowType::Institution:
       m_group << ctInstitution << ctTopAccount;
       break;
     default:
@@ -360,10 +360,10 @@ void QueryTable::init()
 
   m_columns.clear();
   switch (m_config.rowType()) {
-    case MyMoneyReport::eAccountByTopAccount:
-    case MyMoneyReport::eEquityType:
-    case MyMoneyReport::eAccountType:
-    case MyMoneyReport::eInstitution:
+    case eMyMoney::Report::RowType::AccountByTopAccount:
+    case eMyMoney::Report::RowType::EquityType:
+    case eMyMoney::Report::RowType::AccountType:
+    case eMyMoney::Report::RowType::Institution:
       m_columns << ctAccount;
       break;
 
@@ -373,48 +373,48 @@ void QueryTable::init()
 
   unsigned qc = m_config.queryColumns();
 
-  if (qc & MyMoneyReport::eQCnumber)
+  if (qc & eMyMoney::Report::QueryColumn::Number)
     m_columns << ctNumber;
-  if (qc & MyMoneyReport::eQCpayee)
+  if (qc & eMyMoney::Report::QueryColumn::Payee)
     m_columns << ctPayee;
-  if (qc & MyMoneyReport::eQCtag)
+  if (qc & eMyMoney::Report::QueryColumn::Tag)
     m_columns << ctTag;
-  if (qc & MyMoneyReport::eQCcategory)
+  if (qc & eMyMoney::Report::QueryColumn::Category)
     m_columns << ctCategory;
-  if (qc & MyMoneyReport::eQCaccount)
+  if (qc & eMyMoney::Report::QueryColumn::Account)
     m_columns << ctAccount;
-  if (qc & MyMoneyReport::eQCreconciled)
+  if (qc & eMyMoney::Report::QueryColumn::Reconciled)
     m_columns << ctReconcileFlag;
-  if (qc & MyMoneyReport::eQCmemo)
+  if (qc & eMyMoney::Report::QueryColumn::Memo)
     m_columns << ctMemo;
-  if (qc & MyMoneyReport::eQCaction)
+  if (qc & eMyMoney::Report::QueryColumn::Action)
     m_columns << ctAction;
-  if (qc & MyMoneyReport::eQCshares)
+  if (qc & eMyMoney::Report::QueryColumn::Shares)
     m_columns << ctShares;
-  if (qc & MyMoneyReport::eQCprice)
+  if (qc & eMyMoney::Report::QueryColumn::Price)
     m_columns << ctPrice;
-  if (qc & MyMoneyReport::eQCperformance) {
+  if (qc & eMyMoney::Report::QueryColumn::Performance) {
     m_subtotal.clear();
     switch (m_config.investmentSum()) {
-      case MyMoneyReport::eSumOwnedAndSold:
+      case eMyMoney::Report::InvestmentSum::OwnedAndSold:
         m_columns << ctBuys << ctSells << ctReinvestIncome << ctCashIncome
                   << ctEndingBalance << ctReturn << ctReturnInvestment;
         m_subtotal << ctBuys << ctSells << ctReinvestIncome << ctCashIncome
                    << ctEndingBalance << ctReturn << ctReturnInvestment;
         break;
-      case MyMoneyReport::eSumOwned:
+      case eMyMoney::Report::InvestmentSum::Owned:
         m_columns << ctBuys << ctReinvestIncome << ctMarketValue
                   << ctReturn << ctReturnInvestment;
         m_subtotal << ctBuys << ctReinvestIncome << ctMarketValue
                    << ctReturn << ctReturnInvestment;
         break;
-      case MyMoneyReport::eSumSold:
+      case eMyMoney::Report::InvestmentSum::Sold:
         m_columns << ctBuys << ctSells << ctCashIncome
                   << ctReturn << ctReturnInvestment;
         m_subtotal << ctBuys << ctSells << ctCashIncome
                    << ctReturn << ctReturnInvestment;
         break;
-      case MyMoneyReport::eSumPeriod:
+      case eMyMoney::Report::InvestmentSum::Period:
       default:
         m_columns << ctStartingBalance << ctBuys << ctSells
                   << ctReinvestIncome << ctCashIncome << ctEndingBalance
@@ -425,10 +425,10 @@ void QueryTable::init()
         break;
     }
   }
-  if (qc & MyMoneyReport::eQCcapitalgain) {
+  if (qc & eMyMoney::Report::QueryColumn::CapitalGain) {
     m_subtotal.clear();
     switch (m_config.investmentSum()) {
-      case MyMoneyReport::eSumOwned:
+      case eMyMoney::Report::InvestmentSum::Owned:
         m_columns << ctShares << ctBuyPrice << ctLastPrice
                   << ctBuys << ctMarketValue << ctPercentageGain
                   << ctCapitalGain;
@@ -436,7 +436,7 @@ void QueryTable::init()
                    << ctBuys << ctMarketValue << ctPercentageGain
                    << ctCapitalGain;
         break;
-      case MyMoneyReport::eSumSold:
+      case eMyMoney::Report::InvestmentSum::Sold:
       default:
         m_columns << ctBuys << ctSells << ctCapitalGain;
         m_subtotal << ctBuys << ctSells << ctCapitalGain;
@@ -449,11 +449,11 @@ void QueryTable::init()
         break;
     }
   }
-  if (qc & MyMoneyReport::eQCloan) {
+  if (qc & eMyMoney::Report::QueryColumn::Loan) {
     m_columns << ctPayment << ctInterest << ctFees;
     m_postcolumns << ctBalance;
   }
-  if (qc & MyMoneyReport::eQCbalance)
+  if (qc & eMyMoney::Report::QueryColumn::Balance)
     m_postcolumns << ctBalance;
 
   TableRow::setSortCriteria(sort);
@@ -667,27 +667,27 @@ void QueryTable::constructTransactionTable()
   bool tag_special_case = false;
 
   switch (m_config.rowType()) {
-    case MyMoneyReport::eCategory:
-    case MyMoneyReport::eTopCategory:
+    case eMyMoney::Report::RowType::Category:
+    case eMyMoney::Report::RowType::TopCategory:
       use_summary = false;
       use_transfers = false;
       hide_details = false;
       break;
-    case MyMoneyReport::ePayee:
+    case eMyMoney::Report::RowType::Payee:
       use_summary = false;
       use_transfers = false;
-      hide_details = (m_config.detailLevel() == MyMoneyReport::eDetailNone);
+      hide_details = (m_config.detailLevel() == eMyMoney::Report::DetailLevel::None);
       break;
-    case MyMoneyReport::eTag:
+    case eMyMoney::Report::RowType::Tag:
       use_summary = false;
       use_transfers = false;
-      hide_details = (m_config.detailLevel() == MyMoneyReport::eDetailNone);
+      hide_details = (m_config.detailLevel() == eMyMoney::Report::DetailLevel::None);
       tag_special_case = true;
       break;
     default:
       use_summary = true;
       use_transfers = true;
-      hide_details = (m_config.detailLevel() == MyMoneyReport::eDetailNone);
+      hide_details = (m_config.detailLevel() == eMyMoney::Report::DetailLevel::None);
       break;
   }
 
@@ -770,7 +770,7 @@ void QueryTable::constructTransactionTable()
     // split entries (qS) normally.
 
     bool loan_special_case = false;
-    if (m_config.queryColumns() & MyMoneyReport::eQCloan) {
+    if (m_config.queryColumns() & eMyMoney::Report::QueryColumn::Loan) {
       ReportAccount splitAcc((*it_split).accountId());
       loan_special_case = splitAcc.isLoan();
     }
@@ -1012,8 +1012,8 @@ void QueryTable::constructTransactionTable()
               //this applies when the transaction has only 2 splits, or each split is going to be
               //shown separately, eg. transactions by category
               switch (m_config.rowType()) {
-                case MyMoneyReport::eCategory:
-                case MyMoneyReport::eTopCategory:
+                case eMyMoney::Report::RowType::Category:
+                case eMyMoney::Report::RowType::TopCategory:
                   if (splitAcc.isIncomeExpense())
                     qA[ctValue] = (-(*it_split).shares() * xr).convert(fraction).toString(); // needed for category reports, in case of multicurrency transaction it breaks it
                   break;
@@ -1150,11 +1150,11 @@ void QueryTable::constructTransactionTable()
   // now run through our accts list and add opening and closing balances
 
   switch (m_config.rowType()) {
-    case MyMoneyReport::eAccount:
-    case MyMoneyReport::eTopAccount:
+    case eMyMoney::Report::RowType::Account:
+    case eMyMoney::Report::RowType::TopAccount:
       break;
 
-      // case MyMoneyReport::eCategory:
+      // case eMyMoney::Report::RowType::Category:
       // case MyMoneyReport::eTopCategory:
       // case MyMoneyReport::ePayee:
       // case MyMoneyReport::eMonth:
@@ -1296,7 +1296,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
   newStartingDate = startingDate;
   newEndingDate = endingDate;
 
-  if (report.queryColumns() & MyMoneyReport::eQCcapitalgain) {
+  if (report.queryColumns() & eMyMoney::Report::QueryColumn::CapitalGain) {
     // Saturday and Sunday aren't valid settlement dates
     if (endingDate.dayOfWeek() == Qt::Saturday)
       endingDate = endingDate.addDays(-1);
@@ -1433,9 +1433,9 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
 
   } while (
            (
-             (report.investmentSum() == MyMoneyReport::eSumOwned && !shList[BuysOfOwned].isZero()) ||
-             (report.investmentSum() == MyMoneyReport::eSumSold && !shList.at(Sells).isZero() && shList.at(Sells).abs() > shList.at(BuysOfSells).abs()) ||
-             (report.investmentSum() == MyMoneyReport::eSumOwnedAndSold && (!shList[BuysOfOwned].isZero() || (!shList.at(Sells).isZero() && shList.at(Sells).abs() > shList.at(BuysOfSells).abs())))
+             (report.investmentSum() == eMyMoney::Report::InvestmentSum::Owned && !shList[BuysOfOwned].isZero()) ||
+             (report.investmentSum() == eMyMoney::Report::InvestmentSum::Sold && !shList.at(Sells).isZero() && shList.at(Sells).abs() > shList.at(BuysOfSells).abs()) ||
+             (report.investmentSum() == eMyMoney::Report::InvestmentSum::OwnedAndSold && (!shList[BuysOfOwned].isZero() || (!shList.at(Sells).isZero() && shList.at(Sells).abs() > shList.at(BuysOfSells).abs())))
            ) && account.openingDate() <= newEndingDate
           );
 
@@ -1532,7 +1532,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
   MyMoneyMoney reinvestIncomeTotal;
 
   switch (m_config.investmentSum()) {
-  case MyMoneyReport::eSumOwnedAndSold:
+  case eMyMoney::Report::InvestmentSum::OwnedAndSold:
     buysTotal = cfList.at(BuysOfSells).total() + cfList.at(BuysOfOwned).total();
     sellsTotal = cfList.at(Sells).total();
     cashIncomeTotal = cfList.at(CashIncome).total();
@@ -1552,7 +1552,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
     result[ctReinvestIncome] = reinvestIncomeTotal.toString();
     result[ctEndingBalance] = endingBal.toString();
     break;
-  case MyMoneyReport::eSumOwned:
+  case eMyMoney::Report::InvestmentSum::Owned:
     buysTotal = cfList.at(BuysOfOwned).total();
     startingBal = MyMoneyMoney();
     if (buysTotal.isZero() && endingBal.isZero())
@@ -1563,7 +1563,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
     result[ctReinvestIncome] = reinvestIncomeTotal.toString();
     result[ctMarketValue] = endingBal.toString();
     break;
-  case MyMoneyReport::eSumSold:
+  case eMyMoney::Report::InvestmentSum::Sold:
     buysTotal = cfList.at(BuysOfSells).total();
     sellsTotal = cfList.at(Sells).total();
     cashIncomeTotal = cfList.at(CashIncome).total();
@@ -1578,7 +1578,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
     result[ctSells] = sellsTotal.toString();
     result[ctCashIncome] = cashIncomeTotal.toString();
     break;
-  case MyMoneyReport::eSumPeriod:
+  case eMyMoney::Report::InvestmentSum::Period:
   default:
     buysTotal = cfList.at(Buys).total();
     sellsTotal = cfList.at(Sells).total();
@@ -1625,7 +1625,7 @@ void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow&
   MyMoneyMoney longTermSellsOfBuys = cfList.at(LongTermSellsOfBuys).total();
 
   switch (m_config.investmentSum()) {
-  case MyMoneyReport::eSumOwned:
+  case eMyMoney::Report::InvestmentSum::Owned:
   {
     if (shList.at(BuysOfOwned).isZero())
       return;
@@ -1662,7 +1662,7 @@ void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow&
     result[ctPercentageGain] = ((buysTotal + endingBal)/buysTotal.abs()).toString();
     break;
   }
-  case MyMoneyReport::eSumSold:
+  case eMyMoney::Report::InvestmentSum::Sold:
   default:
     buysTotal = cfList.at(BuysOfSells).total() - cfList.at(ReinvestIncome).total();
     sellsTotal = cfList.at(Sells).total();
@@ -1716,7 +1716,7 @@ void QueryTable::constructAccountTable()
       TableRow qaccountrow;
       CashFlowList accountCashflow; // for total calculation
       switch(m_config.queryColumns()) {
-        case MyMoneyReport::eQCperformance:
+        case eMyMoney::Report::QueryColumn::Performance:
         {
           constructPerformanceRow(account, qaccountrow, accountCashflow);
           if (!qaccountrow.isEmpty()) {
@@ -1736,7 +1736,7 @@ void QueryTable::constructAccountTable()
           }
           break;
         }
-        case MyMoneyReport::eQCcapitalgain:
+        case eMyMoney::Report::QueryColumn::CapitalGain:
           constructCapitalGainRow(account, qaccountrow);
           break;
         default:
@@ -1788,7 +1788,7 @@ void QueryTable::constructAccountTable()
     }
   }
 
-  if (m_config.queryColumns() == MyMoneyReport::eQCperformance && m_config.isShowingColumnTotals()) {
+  if (m_config.queryColumns() == eMyMoney::Report::QueryColumn::Performance && m_config.isShowingColumnTotals()) {
     TableRow qtotalsrow;
     qtotalsrow[ctRank] = QLatin1Char('4'); // add identification of row as total
     QMap<QString, CashFlowList> currencyGrandCashFlow;
@@ -1899,7 +1899,7 @@ void QueryTable::constructSplitsTable()
     // reference (loan) account (qA). however, we process the matching
     // split entries (qS) normally.
     bool loan_special_case = false;
-    if (m_config.queryColumns() & MyMoneyReport::eQCloan) {
+    if (m_config.queryColumns() & eMyMoney::Report::QueryColumn::Loan) {
       ReportAccount splitAcc((*it_split).accountId());
       loan_special_case = splitAcc.isLoan();
     }
@@ -2072,11 +2072,11 @@ void QueryTable::constructSplitsTable()
   // now run through our accts list and add opening and closing balances
 
   switch (m_config.rowType()) {
-    case MyMoneyReport::eAccount:
-    case MyMoneyReport::eTopAccount:
+    case eMyMoney::Report::RowType::Account:
+    case eMyMoney::Report::RowType::TopAccount:
       break;
 
-      // case MyMoneyReport::eCategory:
+      // case eMyMoney::Report::RowType::Category:
       // case MyMoneyReport::eTopCategory:
       // case MyMoneyReport::ePayee:
       // case MyMoneyReport::eMonth:

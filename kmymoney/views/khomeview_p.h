@@ -523,10 +523,10 @@ public:
     m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("Net Worth Forecast"));
 
     MyMoneyReport reportCfg = MyMoneyReport(
-                                MyMoneyReport::eAssetLiability,
-                                MyMoneyReport::eMonths,
+                                eMyMoney::Report::RowType::AssetLiability,
+                                static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                 TransactionFilter::Date::UserDefined, // overridden by the setDateFilter() call below
-                                MyMoneyReport::eDetailTotal,
+                                eMyMoney::Report::DetailLevel::Total,
                                 i18n("Net Worth Forecast"),
                                 i18n("Generated Report"));
 
@@ -534,7 +534,7 @@ public:
     reportCfg.setChartCHGridLines(false);
     reportCfg.setChartSVGridLines(false);
     reportCfg.setChartDataLabels(false);
-    reportCfg.setChartType(MyMoneyReport::eChartLine);
+    reportCfg.setChartType(eMyMoney::Report::ChartType::Line);
     reportCfg.setIncludingSchedules(false);
     reportCfg.addAccountGroup(Account::Type::Asset);
     reportCfg.addAccountGroup(Account::Type::Liability);
@@ -1458,10 +1458,10 @@ public:
 
       //config report just like "Monthly Budgeted vs Actual
       MyMoneyReport reportCfg = MyMoneyReport(
-                                  MyMoneyReport::eBudgetActual,
-                                  MyMoneyReport::eMonths,
+                                  eMyMoney::Report::RowType::BudgetActual,
+                                  static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                                   TransactionFilter::Date::CurrentMonth,
-                                  MyMoneyReport::eDetailAll,
+                                  eMyMoney::Report::DetailLevel::All,
                                   i18n("Monthly Budgeted vs. Actual"),
                                   i18n("Generated Report"));
 

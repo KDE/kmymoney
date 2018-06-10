@@ -54,6 +54,11 @@ MyMoneySchedule::MyMoneySchedule() :
 {
 }
 
+MyMoneySchedule::MyMoneySchedule(const QString &id) :
+    MyMoneyObject(*new MyMoneySchedulePrivate, id)
+{
+}
+
 MyMoneySchedule::MyMoneySchedule(const QString& name,
                                  Schedule::Type type,
                                  Schedule::Occurrence occurrence,

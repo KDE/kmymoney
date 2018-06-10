@@ -85,10 +85,10 @@ KBalanceChartDlg::~KBalanceChartDlg()
 KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
 {
   MyMoneyReport reportCfg = MyMoneyReport(
-                              MyMoneyReport::eAssetLiability,
-                              MyMoneyReport::eMonths,
+                              eMyMoney::Report::RowType::AssetLiability,
+                              static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
                               eMyMoney::TransactionFilter::Date::Last3ToNext3Months,
-                              MyMoneyReport::eDetailTotal,
+                              eMyMoney::Report::DetailLevel::Total,
                               i18n("%1 Balance History", account.name()),
                               i18n("Generated Report")
                             );
@@ -96,7 +96,7 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
   reportCfg.setChartCHGridLines(false);
   reportCfg.setChartSVGridLines(false);
   reportCfg.setChartDataLabels(false);
-  reportCfg.setChartType(MyMoneyReport::eChartLine);
+  reportCfg.setChartType(eMyMoney::Report::ChartType::Line);
   reportCfg.setIncludingForecast(true);
   reportCfg.setIncludingBudgetActuals(true);
   if (account.accountType() == eMyMoney::Account::Type::Investment) {

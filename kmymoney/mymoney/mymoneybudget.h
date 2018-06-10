@@ -41,6 +41,8 @@ class MyMoneyMoney;
 template <typename T> class QList;
 template <class Key, class T> class QMap;
 
+namespace eMyMoney { namespace Budget { enum class Level; } }
+
 /**
   * This class defines a Budget within the MyMoneyEngine.  The Budget class
   * contains all the configuration parameters needed to run a Budget, plus
@@ -61,7 +63,8 @@ class KMM_MYMONEY_EXPORT MyMoneyBudget: public MyMoneyObject
 
 public:
   MyMoneyBudget();
-  explicit MyMoneyBudget(const QString& name);
+  explicit MyMoneyBudget(const QString &id);
+
   /**
     * This constructor creates an object based on the data found in the
     * QDomElement referenced by @p node. If problems arise, the @p id of
@@ -128,17 +131,6 @@ public:
     AccountGroupPrivate* d_ptr;
 
   public:
-    typedef enum {
-      eNone = 0,
-      eMonthly,
-      eMonthByMonth,
-      eYearly,
-      eMax
-    } eBudgetLevel;
-
-    static const QStringList kBudgetLevelText;
-
-  public:
     AccountGroup();
     AccountGroup(const AccountGroup & other);
     AccountGroup(AccountGroup && other);
@@ -153,8 +145,8 @@ public:
     bool budgetSubaccounts() const;
     void setBudgetSubaccounts(bool budgetsubaccounts);
 
-    eBudgetLevel budgetLevel() const;
-    void setBudgetLevel(eBudgetLevel level);
+    eMyMoney::Budget::Level budgetLevel() const;
+    void setBudgetLevel(eMyMoney::Budget::Level level);
 
     PeriodGroup period(const QDate& date) const;
     void addPeriod(const QDate& date, PeriodGroup& period);

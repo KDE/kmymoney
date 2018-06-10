@@ -1292,7 +1292,7 @@ QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees(const QStringList& id
       ignoreCase = (GETSTRING(matchIgnoreCaseCol) == "Y");
       matchKeys = GETSTRING(matchKeysCol);
 
-      payee.setMatchData(static_cast<MyMoneyPayee::payeeMatchType>(type), ignoreCase, matchKeys);
+      payee.setMatchData(static_cast<eMyMoney::Payee::MatchType>(type), ignoreCase, matchKeys);
 
       // Get payeeIdentifier ids
       QStringList identifierIds;

@@ -124,7 +124,7 @@ void MyMoneyStorageANON::writePayee(QDomElement& payee, const MyMoneyPayee& _p)
   p.setNotes(hideString(p.notes()));
   bool ignoreCase;
   QStringList keys;
-  MyMoneyPayee::payeeMatchType matchType = p.matchData(ignoreCase, keys);
+  auto matchType = p.matchData(ignoreCase, keys);
   QRegExp exp("[A-Za-z]");
   p.setMatchData(matchType, ignoreCase, keys.join(";").replace(exp, "x").split(';'));
 

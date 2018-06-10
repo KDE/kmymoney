@@ -57,6 +57,7 @@ public:
     * This is the constructor for a new empty institution description
     */
   MyMoneyInstitution();
+  explicit MyMoneyInstitution(const QString &id);
 
   /**
     * This is the constructor used by an application to fill the

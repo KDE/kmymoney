@@ -117,9 +117,9 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   setAccountSeries(true);
 
   switch (config.chartType()) {
-    case MyMoneyReport::eChartLine:
-    case MyMoneyReport::eChartBar:
-    case MyMoneyReport::eChartStackedBar: {
+    case eMyMoney::Report::ChartType::Line:
+    case eMyMoney::Report::ChartType::Bar:
+    case eMyMoney::Report::ChartType::StackedBar: {
       CartesianCoordinatePlane* cartesianPlane = new CartesianCoordinatePlane(this);
       cartesianPlane->setAutoAdjustVerticalRangeToData(2);
       cartesianPlane->setRubberBandZoomingEnabled(true);
@@ -185,8 +185,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       yAxis->setRulerAttributes(yAxisRulerAttr);
 
       switch (config.chartType()) {
-        case MyMoneyReport::eChartEnd:
-        case MyMoneyReport::eChartLine: {
+        case eMyMoney::Report::ChartType::End:
+        case eMyMoney::Report::ChartType::Line: {
             KChart::LineDiagram* diagram = new KChart::LineDiagram(this, cartesianPlane);
 
             if (config.isSkippingZero()) {
@@ -199,14 +199,14 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
             diagram->addAxis(yAxis);
             break;
           }
-        case MyMoneyReport::eChartBar: {
+        case eMyMoney::Report::ChartType::Bar: {
             KChart::BarDiagram* diagram = new KChart::BarDiagram(this, cartesianPlane);
             cartesianPlane->replaceDiagram(diagram);
             diagram->addAxis(xAxis);
             diagram->addAxis(yAxis);
             break;
           }
-        case MyMoneyReport::eChartStackedBar: {
+        case eMyMoney::Report::ChartType::StackedBar: {
             KChart::BarDiagram* diagram = new KChart::BarDiagram(this, cartesianPlane);
             diagram->setType(BarDiagram::Stacked);
             cartesianPlane->replaceDiagram(diagram);
@@ -219,8 +219,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       }
       break;
     }
-    case MyMoneyReport::eChartPie:
-    case MyMoneyReport::eChartRing:{
+    case eMyMoney::Report::ChartType::Pie:
+    case eMyMoney::Report::ChartType::Ring:{
       PolarCoordinatePlane* polarPlane = new PolarCoordinatePlane(this);
       replaceCoordinatePlane(polarPlane);
 
@@ -236,13 +236,13 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       setAccountSeries(false);
 
       switch (config.chartType()) {
-        case MyMoneyReport::eChartPie: {
+        case eMyMoney::Report::ChartType::Pie: {
             KChart::PieDiagram* diagram = new KChart::PieDiagram(this, polarPlane);
             polarPlane->replaceDiagram(diagram);
             setSeriesTotals(true);
             break;
           }
-        case MyMoneyReport::eChartRing: {
+        case eMyMoney::Report::ChartType::Ring: {
             KChart::RingDiagram* diagram = new KChart::RingDiagram(this, polarPlane);
             polarPlane->replaceDiagram(diagram);
             break;
@@ -288,8 +288,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   QMap<MyMoneyMoney, int> legendTotal;
 
   switch (config.detailLevel()) {
-    case MyMoneyReport::eDetailNone:
-    case MyMoneyReport::eDetailAll: {
+    case eMyMoney::Report::DetailLevel::None:
+    case eMyMoney::Report::DetailLevel::All: {
         // iterate over outer groups
         PivotGrid::const_iterator it_outergroup = grid.begin();
         while (it_outergroup != grid.end()) {
@@ -346,7 +346,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       }
       break;
 
-    case MyMoneyReport::eDetailTop: {
+    case eMyMoney::Report::DetailLevel::Top: {
         // iterate over outer groups
         PivotGrid::const_iterator it_outergroup = grid.begin();
         while (it_outergroup != grid.end()) {
@@ -380,7 +380,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       }
       break;
 
-    case MyMoneyReport::eDetailGroup: {
+    case eMyMoney::Report::DetailLevel::Group: {
         // iterate over outer groups
         PivotGrid::const_iterator it_outergroup = grid.begin();
         while (it_outergroup != grid.end()) {
@@ -431,7 +431,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       }
       break;
 
-    case MyMoneyReport::eDetailTotal: {
+    case eMyMoney::Report::DetailLevel::Total: {
         // iterate row types
         for (int i = 0 ; i < myRowTypeListSize; ++i) {
           QString legendText;
@@ -470,7 +470,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       }
       break;
   default:
-    case MyMoneyReport::eDetailEnd:
+    case eMyMoney::Report::DetailLevel::End:
     return;
   }
 
@@ -504,7 +504,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   m_model.setHorizontalHeaderLabels(legendNames);
 
   // set line width for line chart
-  if (config.chartType() == MyMoneyReport::eChartLine) {
+  if (config.chartType() == eMyMoney::Report::ChartType::Line) {
     AttributesModel* diagramAttributes = planeDiagram->attributesModel();
     int penWidth = config.chartLineWidth();
     for (int i = 0 ; i < rowNum ; ++i) {

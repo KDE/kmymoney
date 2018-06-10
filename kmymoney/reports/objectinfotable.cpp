@@ -82,15 +82,15 @@ void ObjectInfoTable::init()
   m_group.clear();
   m_subtotal.clear();
   switch (m_config.rowType()) {
-    case MyMoneyReport::eSchedule:
+    case eMyMoney::Report::RowType::Schedule:
       constructScheduleTable();
       m_columns << ctNextDueDate << ctName;
       break;
-    case MyMoneyReport::eAccountInfo:
+    case eMyMoney::Report::RowType::AccountInfo:
       constructAccountTable();
       m_columns << ctInstitution << ctType << ctName;
       break;
-    case MyMoneyReport::eAccountLoanInfo:
+    case eMyMoney::Report::RowType::AccountLoanInfo:
       constructAccountLoanTable();
       m_columns << ctInstitution << ctType << ctName;
       break;
@@ -102,12 +102,12 @@ void ObjectInfoTable::init()
   m_subtotal << ctValue;
 
   switch (m_config.rowType()) {
-    case MyMoneyReport::eSchedule:
+    case eMyMoney::Report::RowType::Schedule:
       m_group << ctType;
       m_subtotal << ctValue;
       break;
-    case MyMoneyReport::eAccountInfo:
-    case MyMoneyReport::eAccountLoanInfo:
+    case eMyMoney::Report::RowType::AccountInfo:
+    case eMyMoney::Report::RowType::AccountLoanInfo:
       m_group << ctTopCategory << ctInstitution;
       m_subtotal << ctCurrentBalance;
       break;
@@ -118,8 +118,8 @@ void ObjectInfoTable::init()
   QVector<cellTypeE> sort = QVector<cellTypeE>::fromList(m_group) << QVector<cellTypeE>::fromList(m_columns) << ctID << ctRank;
 
   switch (m_config.rowType()) {
-    case MyMoneyReport::eSchedule:
-      if (m_config.detailLevel() == MyMoneyReport::eDetailAll) {
+    case eMyMoney::Report::RowType::Schedule:
+      if (m_config.detailLevel() == eMyMoney::Report::DetailLevel::All) {
         m_columns << ctName << ctPayee << ctPaymentType << ctOccurrence
                   << ctNextDueDate << ctCategory;
       } else {
@@ -127,13 +127,13 @@ void ObjectInfoTable::init()
                   << ctNextDueDate;
       }
       break;
-    case MyMoneyReport::eAccountInfo:
+    case eMyMoney::Report::RowType::AccountInfo:
       m_columns << ctType << ctName << ctNumber << ctDescription
                 << ctOpeningDate << ctCurrencyName << ctBalanceWarning
                 << ctCreditWarning << ctMaxCreditLimit
                 << ctTax << ctFavorite;
       break;
-    case MyMoneyReport::eAccountLoanInfo:
+    case eMyMoney::Report::RowType::AccountLoanInfo:
       m_columns << ctType << ctName << ctNumber << ctDescription
                 << ctOpeningDate << ctCurrencyName << ctPayee
                 << ctLoanAmount << ctInterestRate << ctNextInterestChange
@@ -201,7 +201,7 @@ void ObjectInfoTable::constructScheduleTable()
       //the text matches the main split
       bool transaction_text = m_config.match(split);
 
-      if (m_config.detailLevel() == MyMoneyReport::eDetailAll) {
+      if (m_config.detailLevel() == eMyMoney::Report::DetailLevel::All) {
         //get the information for all splits
         QList<MyMoneySplit> splits = transaction.splits();
         QList<MyMoneySplit>::const_iterator split_it = splits.constBegin();

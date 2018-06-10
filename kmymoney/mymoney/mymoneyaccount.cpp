@@ -63,6 +63,12 @@ MyMoneyAccount::MyMoneyAccount() :
 {
 }
 
+MyMoneyAccount::MyMoneyAccount(const QString &id):
+  MyMoneyObject(*new MyMoneyAccountPrivate, id),
+  MyMoneyKeyValueContainer()
+{
+}
+
 MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
     MyMoneyObject(*new MyMoneyAccountPrivate, node),
     MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement())

@@ -35,6 +35,7 @@
 
 #include "mymoneyobject_p.h"
 #include "mymoneymoney.h"
+#include "mymoneyenums.h"
 
 namespace Budget
 {
@@ -82,6 +83,28 @@ public:
       {Budget::Attribute::Amount,             QStringLiteral("amount")}
     };
     return attrNames[attr];
+  }
+
+  static QHash<eMyMoney::Budget::Level, QString> budgetLevelLUT()
+  {
+    static const QHash<eMyMoney::Budget::Level, QString> lut {
+      {eMyMoney::Budget::Level::None,         QStringLiteral("none")},
+      {eMyMoney::Budget::Level::Monthly,      QStringLiteral("monthly")},
+      {eMyMoney::Budget::Level::MonthByMonth, QStringLiteral("monthbymonth")},
+      {eMyMoney::Budget::Level::Yearly,       QStringLiteral("yearly")},
+      {eMyMoney::Budget::Level::Max,          QStringLiteral("invalid")},
+    };
+    return lut;
+  }
+
+  static QString budgetNames(eMyMoney::Budget::Level textID)
+  {
+    return budgetLevelLUT().value(textID);
+  }
+
+  static eMyMoney::Budget::Level stringToBudgetLevel(const QString &text)
+  {
+    return budgetLevelLUT().key(text, eMyMoney::Budget::Level::Max);
   }
 
   /**

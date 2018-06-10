@@ -952,21 +952,21 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         bool ignoreCase;
         QStringList keys;
         QStringList::const_iterator it_s;
-        const MyMoneyPayee::payeeMatchType matchType = (*it_p).matchData(ignoreCase, keys);
+        const auto matchType = (*it_p).matchData(ignoreCase, keys);
         switch (matchType) {
-          case MyMoneyPayee::matchDisabled:
+          case eMyMoney::Payee::MatchType::Disabled:
             break;
 
-          case MyMoneyPayee::matchName:
-          case MyMoneyPayee::matchNameExact:
+          case eMyMoney::Payee::MatchType::Name:
+          case eMyMoney::Payee::MatchType::NameExact:
             keys << QString("%1").arg(QRegExp::escape((*it_p).name()));
-            if(matchType == MyMoneyPayee::matchNameExact) {
+            if(matchType == eMyMoney::Payee::MatchType::NameExact) {
               keys.clear();
               keys << QString("^%1$").arg(QRegExp::escape((*it_p).name()));
             }
             // intentional fall through
 
-          case MyMoneyPayee::matchKey:
+          case eMyMoney::Payee::MatchType::Key:
             for (it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
               QRegExp exp(*it_s, ignoreCase ? Qt::CaseInsensitive : Qt::CaseSensitive);
               if (exp.indexIn(payeename) != -1) {
@@ -1033,7 +1033,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         // is called in the context of an automatic procedure it
         // might distract the user.
         payee.setName(payeename);
-        payee.setMatchData(MyMoneyPayee::matchKey, true, QStringList() << QString("^%1$").arg(QRegExp::escape(payeename)));
+        payee.setMatchData(eMyMoney::Payee::MatchType::Key, true, QStringList() << QString("^%1$").arg(QRegExp::escape(payeename)));
         if (m_askPayeeCategory) {
           // We use a QPointer because the dialog may get deleted
           // during exec() if the parent of the dialog gets deleted.

@@ -70,6 +70,7 @@ public:
     * Standard constructor
     */
   MyMoneySchedule();
+  explicit MyMoneySchedule(const QString &id);
 
   /**
     * Constructor for initialising the object.

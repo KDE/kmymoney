@@ -73,9 +73,11 @@ void MyMoneyForecastTest::init()
   file->addCurrency(MyMoneySecurity("GBP", "British Pound",           "#"));
   file->setBaseCurrency(file->currency("USD"));
 
-  MyMoneyPayee payeeTest("Test Payee");
+  MyMoneyPayee payeeTest;
+  payeeTest.setName("Test Payee");
   file->addPayee(payeeTest);
-  MyMoneyPayee payeeTest2("Alvaro Soliverez");
+  MyMoneyPayee payeeTest2;
+  payeeTest2.setName("Alvaro Soliverez");
   file->addPayee(payeeTest2);
 
   acAsset = (MyMoneyFile::instance()->asset().id());
