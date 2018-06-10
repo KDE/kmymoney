@@ -903,7 +903,7 @@ public:
    * @param list of transactions
    * @return false if only schedule is to be selected
    */
-  bool selectTransactions(const KMyMoneyRegister::SelectedTransactions& list)
+  bool selectTransactions(const KMyMoneyRegister::SelectedTransactions list)
   {
     Q_Q(KGlobalLedgerView);
     // list can either contain a list of transactions or a single selected scheduled transaction
