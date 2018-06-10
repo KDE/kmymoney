@@ -71,6 +71,8 @@ KTagContainer::KTagContainer(QWidget* parent) :
 KTagContainer::~KTagContainer()
 {
   Q_D(KTagContainer);
+  // make sure we are not called as part of the destruction
+  disconnect(d->m_tagCombo, &KMyMoneyMVCCombo::lostFocus, this, &KTagContainer::slotAddTagWidget);
   delete d;
 }
 
