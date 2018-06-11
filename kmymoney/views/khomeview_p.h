@@ -45,6 +45,7 @@
 #include <QWebEngineView>
 #else
 #include <KWebView>
+#include <QWebFrame>
 #endif
 
 // ----------------------------------------------------------------------------
@@ -423,6 +424,14 @@ public:
     if (list.isEmpty()) {
       m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
     } else {
+      // keep current location on page
+      int scrollBarPos = 0;
+#ifdef ENABLE_WEBENGINE
+        /// @todo cannot test this
+#else
+      scrollBarPos = m_view->page()->mainFrame()->scrollBarValue(Qt::Vertical);
+#endif
+
       //clear the forecast flag so it will be reloaded
       m_forecast.setForecastDone(false);
 
@@ -497,6 +506,14 @@ public:
       m_html += footer;
 
       m_view->setHtml(m_html, QUrl("file://"));
+
+      if (scrollBarPos) {
+#ifdef ENABLE_WEBENGINE
+        /// @todo cannot test this
+#else
+        m_view->page()->mainFrame()->setScrollBarValue(Qt::Vertical, scrollBarPos);
+#endif
+      }
     }
   }
 
