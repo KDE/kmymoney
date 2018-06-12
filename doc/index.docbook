@@ -111,6 +111,7 @@
   <!ENTITY details-currencies SYSTEM "details-currencies.docbook">
   <!ENTITY details-impexp SYSTEM "details-impexp.docbook">
   <!ENTITY details-impexp-csv SYSTEM "details-impexp-csv.docbook">
+  <!ENTITY details-impexp-csvexp SYSTEM "details-impexp-csvexp.docbook">
   <!ENTITY details-reconciliation SYSTEM "details-reconciliation.docbook">
   <!ENTITY details-search SYSTEM "details-search.docbook">
   <!ENTITY details-reports SYSTEM "details-reports.docbook">

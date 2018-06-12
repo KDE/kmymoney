@@ -1146,6 +1146,7 @@
      workaround, although might be good to keep it in a separate file -->
 <!-- entity defined in index.docbook -->
 &details-impexp-csv;
+&details-impexp-csvexp;
 
 <sect1 id="details.impexp.plugins">
 <title>Writing Importer Plugins</title>
