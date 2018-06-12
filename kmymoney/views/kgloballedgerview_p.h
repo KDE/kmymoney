@@ -1116,8 +1116,8 @@ public:
     if (list.warnLevel() == KMyMoneyRegister::SelectedTransaction::OneAccountClosed) {
       // scan all splits for the first closed account
       QString closedAccount;
-      for(const auto selectedTransaction : list) {
-        for(const auto split : selectedTransaction.transaction().splits()) {
+      foreach(const auto selectedTransaction, list) {
+        foreach(const auto split, selectedTransaction.transaction().splits()) {
           const auto id = split.accountId();
           const auto acc = MyMoneyFile::instance()->account(id);
           if (acc.isClosed()) {
