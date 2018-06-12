@@ -423,6 +423,43 @@
         </widget>
        </item>
        <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="whatsThis">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;In case the server is located in a different timezone than your local time, then the post date of imported transactions is off by a day.&lt;/p&gt;&lt;p&gt;This setting can be used to adjust the timestamps of the transactions during import to reflect your local time. It does not affect previously imported transactions. &lt;/p&gt;&lt;p&gt;If you are located west of your bank's server than enter a negative time, in case you are located east of it enter a positve time.&lt;/p&gt;&lt;p&gt;If you are not sure, leave this setting at 0:00.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,0,0">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Timezone offset</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="KComboBox" name="m_timestampOffsetSign">
+              <item>
+               <property name="text">
+                <string>+</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>-</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTimeEdit" name="m_timestampOffset"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -457,12 +494,6 @@
    <class>KLed</class>
    <extends>QWidget</extends>
    <header>kled.h</header>
-  </customwidget>
-  <customwidget>
-   <class>QTabWidget</class>
-   <extends>QTabWidget</extends>
-   <header>ktabwidget.h</header>
-   <container>1</container>
   </customwidget>
   <customwidget>
    <class>KMyMoneyDateInput</class>
