@@ -167,7 +167,7 @@ MyMoneyMoney::MyMoneyMoney(qint64 Amount, const unsigned int denom)
 MyMoneyMoney::MyMoneyMoney(const int iAmount, const unsigned int denom)
 {
   if (denom == 0)
-    throw MYMONEYEXCEPTION("Denominator 0 not allowed!");
+    throw MYMONEYEXCEPTION_CSTRING("Denominator 0 not allowed!");
   *this = AlkValue(iAmount, denom);
 }
 
