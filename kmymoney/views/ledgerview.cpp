@@ -24,6 +24,7 @@
 #include <QPainter>
 #include <QResizeEvent>
 #include <QDate>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -324,7 +325,7 @@ void LedgerView::mousePressEvent(QMouseEvent* event)
 void LedgerView::mouseMoveEvent(QMouseEvent* event)
 {
   // qDebug() << "mouseMoveEvent";
-  QTableView::mouseMoveEvent(event);
+  // QTableView::mouseMoveEvent(event);
 }
 
 void LedgerView::mouseDoubleClickEvent(QMouseEvent* event)
