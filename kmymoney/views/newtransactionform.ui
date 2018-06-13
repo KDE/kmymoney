@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>642</width>
-    <height>200</height>
+    <height>185</height>
    </rect>
   </property>
   <property name="frameShape">
@@ -31,6 +31,9 @@
    </property>
    <item>
     <layout class="QGridLayout" name="gridLayout" columnstretch="0,4,0,1">
+     <property name="verticalSpacing">
+      <number>3</number>
+     </property>
      <item row="0" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
