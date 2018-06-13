@@ -25,7 +25,15 @@ IF (NOT WIN32 AND NOT APPLE)
    # use pkg-config to get the directories and then use these values
    # in the FIND_PATH() and FIND_LIBRARY() calls
    FIND_PACKAGE(PkgConfig)
-   PKG_CHECK_MODULES(LIBOFX libofx>=${LIBOFX_MIN_VERSION})
+
+   # according to https://svnweb.freebsd.org/ports/head/finance/kmymoney/files/patch-cmake_modules_FindLibOfx.cmake?view=markup
+   # FreeBSD needs a little different variable name here to setup the LibOFX package infrastructure for us.
+   if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+      PKG_CHECK_MODULES(PC_OFX libofx>=${LIBOFX_MIN_VERSION})
+   else (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+      PKG_CHECK_MODULES(LIBOFX libofx>=${LIBOFX_MIN_VERSION})
+   endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+
 
 ELSE (NOT WIN32 AND NOT APPLE)
   FIND_PATH(LIBOFX_INCLUDE_DIR libofx/libofx.h
