@@ -107,7 +107,7 @@ bool WebPriceQuote::launchNative(const QString& _symbol, const QString& _id, con
   // Get sources from the config file
   QString sourcename = _sourcename;
   if (sourcename.isEmpty())
-    sourcename = "Yahoo";
+    sourcename = "KMyMoney Currency";
 
   if (quoteSources().contains(sourcename))
     d->m_source = WebPriceQuoteSource(sourcename);
