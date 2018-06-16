@@ -95,14 +95,12 @@ public:
   QString transactionIdFromTransactionSplitId(const QString& transactionSplitId) const;
 
 public Q_SLOTS:
-
-protected Q_SLOTS:
-  void removeTransaction(eMyMoney::File::Object objType, const QString& id);
   void slotAddTransaction   (eMyMoney::File::Object objType, const QString& id);
-  void modifyTransaction(eMyMoney::File::Object objType, const QString& id);
-  void removeSchedule   (eMyMoney::File::Object objType, const QString& id);
-  void addSchedule      (eMyMoney::File::Object objType, const QString& id);
-  void modifySchedule   (eMyMoney::File::Object objType, const QString& id);
+  void slotModifyTransaction(eMyMoney::File::Object objType, const QString& id);
+  void slotRemoveTransaction(eMyMoney::File::Object objType, const QString& id);
+  void slotAddSchedule      (eMyMoney::File::Object objType, const QString& id);
+  void slotModifySchedule   (eMyMoney::File::Object objType, const QString& id);
+  void slotRemoveSchedule   (eMyMoney::File::Object objType, const QString& id);
 
 private:
   Q_DISABLE_COPY(LedgerModel)

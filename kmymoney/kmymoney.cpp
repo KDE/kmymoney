@@ -122,6 +122,9 @@
 #include "models/accountsmodel.h"
 #include "models/equitiesmodel.h"
 #include "models/securitiesmodel.h"
+#if ENABLE_UNFINISHEDFEATURES
+#include "models/ledgermodel.h"
+#endif
 
 #include "mymoney/mymoneyobject.h"
 #include "mymoney/mymoneyfile.h"
@@ -459,88 +462,57 @@ public:
 
   void connectStorageToModels()
   {
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
-               Models::instance()->accountsModel(), &AccountsModel::slotObjectAdded);
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
-               Models::instance()->accountsModel(), &AccountsModel::slotObjectModified);
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
-               Models::instance()->accountsModel(), &AccountsModel::slotObjectRemoved);
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::balanceChanged,
-               Models::instance()->accountsModel(), &AccountsModel::slotBalanceOrValueChanged);
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::valueChanged,
-               Models::instance()->accountsModel(), &AccountsModel::slotBalanceOrValueChanged);
+    const auto file = MyMoneyFile::instance();
 
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
-               Models::instance()->institutionsModel(), &InstitutionsModel::slotObjectAdded);
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
-               Models::instance()->institutionsModel(), &InstitutionsModel::slotObjectModified);
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
-               Models::instance()->institutionsModel(), &InstitutionsModel::slotObjectRemoved);
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::balanceChanged,
-               Models::instance()->institutionsModel(), &AccountsModel::slotBalanceOrValueChanged);
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::valueChanged,
-               Models::instance()->institutionsModel(), &AccountsModel::slotBalanceOrValueChanged);
+    const auto accountsModel = Models::instance()->accountsModel();
+    q->connect(file, &MyMoneyFile::objectAdded,    accountsModel, &AccountsModel::slotObjectAdded);
+    q->connect(file, &MyMoneyFile::objectModified, accountsModel, &AccountsModel::slotObjectModified);
+    q->connect(file, &MyMoneyFile::objectRemoved,  accountsModel, &AccountsModel::slotObjectRemoved);
+    q->connect(file, &MyMoneyFile::balanceChanged, accountsModel, &AccountsModel::slotBalanceOrValueChanged);
+    q->connect(file, &MyMoneyFile::valueChanged,   accountsModel, &AccountsModel::slotBalanceOrValueChanged);
 
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
-               Models::instance()->equitiesModel(), &EquitiesModel::slotObjectAdded);
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
-               Models::instance()->equitiesModel(), &EquitiesModel::slotObjectModified);
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
-               Models::instance()->equitiesModel(), &EquitiesModel::slotObjectRemoved);
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::balanceChanged,
-               Models::instance()->equitiesModel(), &EquitiesModel::slotBalanceOrValueChanged);
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::valueChanged,
-               Models::instance()->equitiesModel(), &EquitiesModel::slotBalanceOrValueChanged);
+    const auto institutionsModel = Models::instance()->institutionsModel();
+    q->connect(file, &MyMoneyFile::objectAdded,    institutionsModel, &InstitutionsModel::slotObjectAdded);
+    q->connect(file, &MyMoneyFile::objectModified, institutionsModel, &InstitutionsModel::slotObjectModified);
+    q->connect(file, &MyMoneyFile::objectRemoved,  institutionsModel, &InstitutionsModel::slotObjectRemoved);
+    q->connect(file, &MyMoneyFile::balanceChanged, institutionsModel, &AccountsModel::slotBalanceOrValueChanged);
+    q->connect(file, &MyMoneyFile::valueChanged,   institutionsModel, &AccountsModel::slotBalanceOrValueChanged);
 
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
-               Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectAdded);
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
-               Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectModified);
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
-               Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectRemoved);
+    const auto equitiesModel = Models::instance()->equitiesModel();
+    q->connect(file, &MyMoneyFile::objectAdded,    equitiesModel, &EquitiesModel::slotObjectAdded);
+    q->connect(file, &MyMoneyFile::objectModified, equitiesModel, &EquitiesModel::slotObjectModified);
+    q->connect(file, &MyMoneyFile::objectRemoved,  equitiesModel, &EquitiesModel::slotObjectRemoved);
+    q->connect(file, &MyMoneyFile::balanceChanged, equitiesModel, &EquitiesModel::slotBalanceOrValueChanged);
+    q->connect(file, &MyMoneyFile::valueChanged,   equitiesModel, &EquitiesModel::slotBalanceOrValueChanged);
+
+    const auto securitiesModel = Models::instance()->securitiesModel();
+    q->connect(file, &MyMoneyFile::objectAdded,    securitiesModel, &SecuritiesModel::slotObjectAdded);
+    q->connect(file, &MyMoneyFile::objectModified, securitiesModel, &SecuritiesModel::slotObjectModified);
+    q->connect(file, &MyMoneyFile::objectRemoved,  securitiesModel, &SecuritiesModel::slotObjectRemoved);
+
+#if ENABLE_UNFINISHEDFEATURES
+    const auto ledgerModel = Models::instance()->ledgerModel();
+    q->connect(file, &MyMoneyFile::objectAdded,    ledgerModel, &LedgerModel::slotAddTransaction);
+    q->connect(file, &MyMoneyFile::objectModified, ledgerModel, &LedgerModel::slotModifyTransaction);
+    q->connect(file, &MyMoneyFile::objectRemoved,  ledgerModel, &LedgerModel::slotRemoveTransaction);
+
+    q->connect(file, &MyMoneyFile::objectAdded,    ledgerModel, &LedgerModel::slotAddSchedule);
+    q->connect(file, &MyMoneyFile::objectModified, ledgerModel, &LedgerModel::slotModifySchedule);
+    q->connect(file, &MyMoneyFile::objectRemoved,  ledgerModel, &LedgerModel::slotRemoveSchedule);
+#endif
   }
 
   void disconnectStorageFromModels()
   {
-    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
-               Models::instance()->accountsModel(), &AccountsModel::slotObjectAdded);
-    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
-               Models::instance()->accountsModel(), &AccountsModel::slotObjectModified);
-    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
-               Models::instance()->accountsModel(), &AccountsModel::slotObjectRemoved);
-    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::balanceChanged,
-               Models::instance()->accountsModel(), &AccountsModel::slotBalanceOrValueChanged);
-    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::valueChanged,
-               Models::instance()->accountsModel(), &AccountsModel::slotBalanceOrValueChanged);
+    const auto file = MyMoneyFile::instance();
+    q->disconnect(file, nullptr, Models::instance()->accountsModel(), nullptr);
+    q->disconnect(file, nullptr, Models::instance()->institutionsModel(), nullptr);
+    q->disconnect(file, nullptr, Models::instance()->equitiesModel(), nullptr);
+    q->disconnect(file, nullptr, Models::instance()->securitiesModel(), nullptr);
 
-    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
-               Models::instance()->institutionsModel(), &InstitutionsModel::slotObjectAdded);
-    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
-               Models::instance()->institutionsModel(), &InstitutionsModel::slotObjectModified);
-    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
-               Models::instance()->institutionsModel(), &InstitutionsModel::slotObjectRemoved);
-    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::balanceChanged,
-               Models::instance()->institutionsModel(), &AccountsModel::slotBalanceOrValueChanged);
-    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::valueChanged,
-               Models::instance()->institutionsModel(), &AccountsModel::slotBalanceOrValueChanged);
-
-    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
-               Models::instance()->equitiesModel(), &EquitiesModel::slotObjectAdded);
-    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
-               Models::instance()->equitiesModel(), &EquitiesModel::slotObjectModified);
-    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
-               Models::instance()->equitiesModel(), &EquitiesModel::slotObjectRemoved);
-    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::balanceChanged,
-               Models::instance()->equitiesModel(), &EquitiesModel::slotBalanceOrValueChanged);
-    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::valueChanged,
-               Models::instance()->equitiesModel(), &EquitiesModel::slotBalanceOrValueChanged);
-
-    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectAdded,
-               Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectAdded);
-    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectModified,
-               Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectModified);
-    q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::objectRemoved,
-               Models::instance()->securitiesModel(), &SecuritiesModel::slotObjectRemoved);
+#if ENABLE_UNFINISHEDFEATURES
+    q->disconnect(file, nullptr, Models::instance()->ledgerModel(), nullptr);
+#endif
   }
 
   bool askAboutSaving()

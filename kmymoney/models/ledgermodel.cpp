@@ -64,15 +64,6 @@ LedgerModel::LedgerModel(QObject* parent) :
   QAbstractTableModel(parent),
   d_ptr(new LedgerModelPrivate)
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
-
-  connect(file, &MyMoneyFile::objectAdded,    this, &LedgerModel::slotAddTransaction);
-  connect(file, &MyMoneyFile::objectModified, this, &LedgerModel::modifyTransaction);
-  connect(file, &MyMoneyFile::objectRemoved,  this, &LedgerModel::removeTransaction);
-
-  connect(file, &MyMoneyFile::objectAdded,    this, &LedgerModel::addSchedule);
-  connect(file, &MyMoneyFile::objectModified, this, &LedgerModel::modifySchedule);
-  connect(file, &MyMoneyFile::objectRemoved,  this, &LedgerModel::removeSchedule);
 }
 
 LedgerModel::~LedgerModel()
@@ -521,7 +512,7 @@ void LedgerModel::slotAddTransaction(File::Object objType, const QString& id)
   Q_ASSERT(d->m_ledgerItems.count() == rowCount());
 }
 
-void LedgerModel::modifyTransaction(File::Object objType, const QString& id)
+void LedgerModel::slotModifyTransaction(File::Object objType, const QString& id)
 {
   if(objType != File::Object::Transaction) {
     return;
@@ -593,7 +584,7 @@ void LedgerModel::modifyTransaction(File::Object objType, const QString& id)
   Q_ASSERT(d->m_ledgerItems.count() == rowCount());
 }
 
-void LedgerModel::removeTransaction(File::Object objType, const QString& id)
+void LedgerModel::slotRemoveTransaction(File::Object objType, const QString& id)
 {
   if(objType != File::Object::Transaction) {
     return;
@@ -616,7 +607,7 @@ void LedgerModel::removeTransaction(File::Object objType, const QString& id)
   }
 }
 
-void LedgerModel::addSchedule(File::Object objType, const QString& id)
+void LedgerModel::slotAddSchedule(File::Object objType, const QString& id)
 {
   Q_UNUSED(id);
   if(objType != File::Object::Schedule) {
@@ -626,7 +617,7 @@ void LedgerModel::addSchedule(File::Object objType, const QString& id)
   /// @todo implement LedgerModel::addSchedule
 }
 
-void LedgerModel::modifySchedule(File::Object objType, const QString& id)
+void LedgerModel::slotModifySchedule(File::Object objType, const QString& id)
 {
   Q_UNUSED(id);
   if(objType != File::Object::Schedule) {
@@ -636,7 +627,7 @@ void LedgerModel::modifySchedule(File::Object objType, const QString& id)
   /// @todo implement LedgerModel::modifySchedule
 }
 
-void LedgerModel::removeSchedule(File::Object objType, const QString& id)
+void LedgerModel::slotRemoveSchedule(File::Object objType, const QString& id)
 {
   Q_UNUSED(id);
   if(objType != File::Object::Schedule) {
