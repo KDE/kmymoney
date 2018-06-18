@@ -517,7 +517,9 @@ bool KMyMoneyView::canPrint()
 void KMyMoneyView::enableViewsIfFileOpen(bool fileOpen)
 {
   // call set enabled only if the state differs to avoid widgets 'bouncing on the screen' while doing this
-  for (auto i = (int)View::Home; i < (int)View::None; ++i)
+  Q_ASSERT_X(((int)(View::Home)+1) == (int)View::Institutions, "viewenums.h", "View::Home must be first and View::Institutions second entry");
+
+  for (auto i = (int)View::Institutions; i < (int)View::None; ++i)
     if (viewFrames.contains(View(i)))
       if (viewFrames[View(i)]->isEnabled() != fileOpen)
         viewFrames[View(i)]->setEnabled(fileOpen);
