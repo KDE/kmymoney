@@ -63,6 +63,12 @@ static constexpr KCompressionDevice::CompressionType const& COMPRESSION_TYPE = K
 // static constexpr char recoveryKeyId[] = "0xD2B08440";
 static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
 
+// define the default period to warn about an expiring recoverkey to 30 days
+// but allows to override this setting during build time
+#ifndef RECOVER_KEY_EXPIRATION_WARNING
+#define RECOVER_KEY_EXPIRATION_WARNING 30
+#endif
+
 XMLStorage::XMLStorage(QObject *parent, const QVariantList &args) :
   KMyMoneyPlugin::Plugin(parent, "xmlstorage"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
@@ -70,6 +76,7 @@ XMLStorage::XMLStorage(QObject *parent, const QVariantList &args) :
   setComponentName("xmlstorage", i18n("XML storage"));
   // For information, announce that we have been loaded.
   qDebug("Plugins: xmlstorage loaded");
+  checkRecoveryKeyValidity();
 }
 
 XMLStorage::~XMLStorage()
@@ -501,6 +508,39 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
   }
   QFile::setPermissions(localFile, QFileDevice::ReadUser | QFileDevice::WriteUser);
   pWriter->setProgressCallback(0);
+}
+
+void XMLStorage::checkRecoveryKeyValidity()
+{
+// check if the recovery key is still valid or expires soon
+
+if (KMyMoneySettings::writeDataEncrypted() && KMyMoneySettings::encryptRecover()) {
+  if (KGPGFile::GPGAvailable()) {
+    KGPGFile file;
+    QDateTime expirationDate = file.keyExpires(QLatin1String(recoveryKeyId));
+    if (expirationDate.isValid() && QDateTime::currentDateTime().daysTo(expirationDate) <= RECOVER_KEY_EXPIRATION_WARNING) {
+      bool skipMessage = false;
+
+      //get global config object for our app.
+      KSharedConfigPtr kconfig = KSharedConfig::openConfig();
+      KConfigGroup grp;
+      QDate lastWarned;
+      if (kconfig) {
+        grp = kconfig->group("General Options");
+        lastWarned = grp.readEntry("LastRecoverKeyExpirationWarning", QDate());
+        if (QDate::currentDate() == lastWarned) {
+          skipMessage = true;
+        }
+      }
+      if (!skipMessage) {
+        if (kconfig) {
+          grp.writeEntry("LastRecoverKeyExpirationWarning", QDate::currentDate());
+        }
+        KMessageBox::information(nullptr, i18np("You have configured KMyMoney to use GPG to protect your data and to encrypt your data also with the KMyMoney recover key. This key is about to expire in %1 day. Please update the key from a keyserver using your GPG frontend (e.g. KGPG).", "You have configured KMyMoney to use GPG to protect your data and to encrypt your data also with the KMyMoney recover key. This key is about to expire in %1 days. Please update the key from a keyserver using your GPG frontend (e.g. KGPG).", QDateTime::currentDateTime().daysTo(expirationDate)), i18n("Recover key expires soon"));
+      }
+    }
+  }
+}
 }
 
 K_PLUGIN_FACTORY_WITH_JSON(XMLStorageFactory, "xmlstorage.json", registerPlugin<XMLStorage>();)

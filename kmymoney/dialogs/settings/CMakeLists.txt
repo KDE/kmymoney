@@ -4,7 +4,6 @@ set (libsettings_a_SOURCES
   ksettingsfonts.cpp
   ksettingsicons.cpp
   ksettingsgeneral.cpp
-  ksettingsgpg.cpp
   ksettingshome.cpp
   ksettingsonlinequotes.cpp
   ksettingsregister.cpp
@@ -18,7 +17,6 @@ set (libsettings_a_UI
   ksettingsfonts.ui
   ksettingsicons.ui
   ksettingsgeneral.ui
-  ksettingsgpg.ui
   ksettingshome.ui
   ksettingsonlinequotes.ui
   ksettingsregister.ui

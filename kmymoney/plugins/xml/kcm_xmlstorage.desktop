@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=XML storage configuration
+Icon=server-database
+Type=Service
+ServiceTypes=KCModule
+Exec=kcmshell5 xmlstorage
+Categories=Qt;KDE;kmymoney;
+Keywords=xmlstorage;kmymoney;
+Keywords[x-test]=xxxmlstoragexx;xxkmymoneyxx;
+X-KDE-Library=kmymoney/kcm_xmlstorage
+X-KDE-ParentApp=xmlstorage
+X-KDE-ParentComponents=xmlstorage
+Comment=Configuration for XML storage plugin
+Comment[x-test]=xxConfiguration for XML storage pluginxx

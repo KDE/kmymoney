@@ -329,7 +329,6 @@ option(USE_QT_DESIGNER
 add_feature_info("QtDesigner" USE_QT_DESIGNER "Qt-Designer library support (for devs only).")
 
 ######################### The Actual Targets ##########################
-add_subdirectory( libkgpgfile )
 add_subdirectory( tools )
 add_subdirectory( kmymoney )
 if(KF5DocTools_FOUND)

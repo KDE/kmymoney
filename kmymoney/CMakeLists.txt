@@ -34,7 +34,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier/ibanandbic/widgets/ # TODO: this line should be moved to the target it belongs
                     ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier/ibanandbic/
                     ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier/nationalaccount/
-                    ${KMyMoney_SOURCE_DIR}/libkgpgfile/ )
+                    )
 
 add_subdirectory( mymoney )
 add_subdirectory( settings )
@@ -138,7 +138,6 @@ target_link_libraries(kmymoney
   kmm_menus
   kmm_widgets
   kmm_mymoney
-  kgpgfile
   interfaces
   kmm_plugin
   Qt5::Core

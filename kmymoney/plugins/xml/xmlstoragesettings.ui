@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KSettingsGpg</class>
- <widget class="QWidget" name="KSettingsGpg">
+ <class>XMLStorageSettings</class>
+ <widget class="QWidget" name="XMLStorageSettings">
   <property name="geometry">
    <rect>
     <x>0</x>

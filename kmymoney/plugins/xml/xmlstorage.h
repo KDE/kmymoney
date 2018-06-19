@@ -70,6 +70,8 @@ private:
     */
   void saveToLocalFile(const QString& localFile, IMyMoneyOperationsFormat* pWriter, bool plaintext, const QString& keyList);
 
+  void checkRecoveryKeyValidity();
+
   QString m_encryptionKeys;
 };
 

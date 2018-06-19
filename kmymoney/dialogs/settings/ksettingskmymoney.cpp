@@ -24,7 +24,6 @@
 
 #include "ksettingsgeneral.h"
 #include "ksettingsregister.h"
-#include "ksettingsgpg.h"
 #include "ksettingscolors.h"
 #include "ksettingsfonts.h"
 #include "ksettingsicons.h"
@@ -45,7 +44,6 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
   const auto registerPage = new KSettingsRegister();
   const auto homePage = new KSettingsHome();
   const auto schedulesPage = new KSettingsSchedules();
-  const auto encryptionPage = new KSettingsGpg();
   const auto colorsPage = new KSettingsColors();
   const auto fontsPage = new KSettingsFonts();
   const auto iconsPage = new KSettingsIcons();
@@ -57,7 +55,6 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
   addPage(registerPage, i18nc("Ledger view settings", "Ledger"), Icons::get(Icon::ViewFinancialList).name());
   addPage(schedulesPage, QString(i18n("Scheduled\ntransactions")).replace('\n', QString::fromLocal8Bit("\xe2\x80\xa8")), Icons::get(Icon::ViewSchedules).name());
   addPage(onlineQuotesPage, i18n("Online Quotes"), Icons::get(Icon::PreferencesNetwork).name());
-  addPage(encryptionPage, i18n("Encryption"), Icons::get(Icon::Kgpg).name());
   addPage(colorsPage, i18n("Colors"), Icons::get(Icon::PreferencesColor).name());
   addPage(fontsPage, i18n("Fonts"), Icons::get(Icon::PreferencesFont).name());
   addPage(iconsPage, i18n("Icons"), Icons::get(Icon::PreferencesIcon).name());
