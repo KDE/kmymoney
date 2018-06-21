@@ -27,6 +27,7 @@
 #include <QTimer>
 #include <QPushButton>
 #include <QPointer>
+#include <QHeaderView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
