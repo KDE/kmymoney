@@ -26,6 +26,7 @@
 #include <QDebug>
 #include <QGlobalStatic>
 #include <QStandardItemModel>
+#include <QAbstractItemView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
