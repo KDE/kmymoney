@@ -69,11 +69,9 @@
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneyprice.h"
+#include "mymoneyreport.h"
+#include "mymoneymoney.h"
 #include "mymoneyforecast.h"
-#include "kreportchartview.h"
-#include "pivottable.h"
-#include "pivotgrid.h"
-#include "reportaccount.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "icons.h"
@@ -81,8 +79,10 @@
 #include "mymoneyschedule.h"
 #include "mymoneysecurity.h"
 #include "mymoneyexception.h"
+#include "kmymoneyplugin.h"
 #include "mymoneyenums.h"
 #include "menuenums.h"
+#include "plugins/views/reports/reportsviewenums.h"
 
 #define VIEW_LEDGER         "ledger"
 #define VIEW_SCHEDULE       "schedule"
@@ -115,8 +115,6 @@ bool accountNameLess(const MyMoneyAccount &acc1, const MyMoneyAccount &acc2)
 {
   return acc1.name().localeAwareCompare(acc2.name()) < 0;
 }
-
-using namespace reports;
 
 class KHomeViewPrivate : public KMyMoneyViewBasePrivate
 {
@@ -285,8 +283,7 @@ public:
 
   void showAccountEntry(const MyMoneyAccount& acc)
   {
-    MyMoneyFile* file = MyMoneyFile::instance();
-    MyMoneySecurity currency = file->currency(acc.currencyId());
+    const auto file = MyMoneyFile::instance();
     MyMoneyMoney value;
 
     bool showLimit = KMyMoneySettings::showLimitInfo();
@@ -301,9 +298,9 @@ public:
       //get balance for normal accounts
       value = file->balance(acc.id(), QDate::currentDate());
       if (acc.currencyId() != file->baseCurrency().id()) {
-        ReportAccount repAcc = ReportAccount(acc.id());
-        MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(QDate::currentDate());
-        MyMoneyMoney baseValue = value * curPrice;
+        const auto curPrice = file->price(acc.tradingCurrencyId(), file->baseCurrency().id(), QDate::currentDate());
+        const auto curRate = curPrice.rate(file->baseCurrency().id());
+        auto baseValue = value * curRate;
         baseValue = baseValue.convert(file->baseCurrency().smallestAccountFraction());
         m_total += baseValue;
       } else {
@@ -520,54 +517,30 @@ public:
   void showNetWorthGraph()
   {
     Q_Q(KHomeView);
-    m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("Net Worth Forecast"));
-
-    MyMoneyReport reportCfg = MyMoneyReport(
-                                eMyMoney::Report::RowType::AssetLiability,
-                                static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
-                                TransactionFilter::Date::UserDefined, // overridden by the setDateFilter() call below
-                                eMyMoney::Report::DetailLevel::Total,
-                                i18n("Net Worth Forecast"),
-                                i18n("Generated Report"));
-
-    reportCfg.setChartByDefault(true);
-    reportCfg.setChartCHGridLines(false);
-    reportCfg.setChartSVGridLines(false);
-    reportCfg.setChartDataLabels(false);
-    reportCfg.setChartType(eMyMoney::Report::ChartType::Line);
-    reportCfg.setIncludingSchedules(false);
-    reportCfg.addAccountGroup(Account::Type::Asset);
-    reportCfg.addAccountGroup(Account::Type::Liability);
-    reportCfg.setColumnsAreDays(true);
-    reportCfg.setConvertCurrency(true);
-    reportCfg.setIncludingForecast(true);
-    reportCfg.setDateFilter(QDate::currentDate(), QDate::currentDate().addDays(+ 90));
-    reports::PivotTable table(reportCfg);
-
-    reports::KReportChartView* chartWidget = new reports::KReportChartView(0);
-
-    table.drawChart(*chartWidget);
 
     // Adjust the size
     QSize netWorthGraphSize = q->size();
     netWorthGraphSize -= QSize(80, 30);
-    // consider the computed size valid only if it's smaller on both axes that the applications size
-//    if (netWorthGraphSize.width() < kmymoney->width() || netWorthGraphSize.height() < kmymoney->height()) {
-      m_netWorthGraphLastValidSize = netWorthGraphSize;
-//    }
-    chartWidget->resize(m_netWorthGraphLastValidSize);
+    m_netWorthGraphLastValidSize = netWorthGraphSize;
 
-    //save the chart to an image
-    QString chart = QPixmapToDataUri(chartWidget->coordinatePlane()->parent()->grab());
-
+    m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("Net Worth Forecast"));
     m_html += QString("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >");
     m_html += QString("<tr>");
-    m_html += QString("<td><center><img src=\"%1\" ALT=\"Networth\" width=\"100%\" ></center></td>").arg(chart);
+
+    if (const auto reportsPlugin = pPlugins.data.value(QStringLiteral("reportsview"), nullptr)) {
+      const auto variantReport = reportsPlugin->requestData(QString(), eWidgetPlugin::WidgetType::NetWorthForecast);
+      if (!variantReport.isNull()) {
+        auto report = variantReport.value<QWidget *>();
+        report->resize(m_netWorthGraphLastValidSize);
+        m_html += QString("<td><center><img src=\"%1\" ALT=\"Networth\" width=\"100%\" ></center></td>").arg(QPixmapToDataUri(report->grab()));
+        delete report;
+      }
+    } else {
+      m_html += QString("<td><center>%1</center></td>").arg(i18n("Enable reports plugin to see this chart."));
+    }
+
     m_html += QString("</tr>");
     m_html += QString("</table></div></div>");
-
-    //delete the widget since we no longer need it
-    delete chartWidget;
   }
 
   void showPayments()
@@ -1369,9 +1342,9 @@ public:
 
           //calculate balance for foreign currency accounts
           if ((*asset_it).currencyId() != file->baseCurrency().id()) {
-            ReportAccount repAcc = ReportAccount((*asset_it).id());
-            MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(QDate::currentDate());
-            MyMoneyMoney baseValue = value * curPrice;
+            const auto curPrice = file->price((*asset_it).tradingCurrencyId(), file->baseCurrency().id(), QDate::currentDate());
+            const auto curRate = curPrice.rate(file->baseCurrency().id());
+            auto baseValue = value * curRate;
             baseValue = baseValue.convert(10000);
             netAssets += baseValue;
           } else {
@@ -1394,9 +1367,9 @@ public:
           value = MyMoneyFile::instance()->balance((*liabilities_it).id(), QDate::currentDate());
           //calculate balance if foreign currency
           if ((*liabilities_it).currencyId() != file->baseCurrency().id()) {
-            ReportAccount repAcc = ReportAccount((*liabilities_it).id());
-            MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(QDate::currentDate());
-            MyMoneyMoney baseValue = value * curPrice;
+            const auto curPrice = file->price((*liabilities_it).tradingCurrencyId(), file->baseCurrency().id(), QDate::currentDate());
+            const auto curRate = curPrice.rate(file->baseCurrency().id());
+            auto baseValue = value * curRate;
             baseValue = baseValue.convert(10000);
             netLiabilities += baseValue;
           } else {
@@ -1449,143 +1422,20 @@ public:
 
   void showBudget()
   {
-    MyMoneyFile* file = MyMoneyFile::instance();
+    m_html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Budget") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
+    m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
 
-    if (file->countBudgets()) {
-      int prec = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
-      bool isOverrun = false;
-      int i = 0;
-
-      //config report just like "Monthly Budgeted vs Actual
-      MyMoneyReport reportCfg = MyMoneyReport(
-                                  eMyMoney::Report::RowType::BudgetActual,
-                                  static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
-                                  TransactionFilter::Date::CurrentMonth,
-                                  eMyMoney::Report::DetailLevel::All,
-                                  i18n("Monthly Budgeted vs. Actual"),
-                                  i18n("Generated Report"));
-
-      reportCfg.setBudget("Any", true);
-
-      reports::PivotTable table(reportCfg);
-
-      PivotGrid grid = table.grid();
-
-      //div header
-      m_html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Budget") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
-
-      //display budget summary
-      m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-      m_html += "<tr class=\"itemtitle\">";
-      m_html += "<td class=\"left\" colspan=\"3\">";
-      m_html += i18n("Current Month Summary");
-      m_html += "</td></tr>";
-      m_html += "<tr class=\"item\">";
-      m_html += "<td class=\"right\" width=\"50%\">";
-      m_html += i18n("Budgeted");
-      m_html += "</td>";
-      m_html += "<td class=\"right\" width=\"20%\">";
-      m_html += i18n("Actual");
-      m_html += "</td>";
-      m_html += "<td class=\"right\" width=\"20%\">";
-      m_html += i18n("Difference");
-      m_html += "</td></tr>";
-
-      m_html += QString("<tr class=\"row-odd\">");
-
-      MyMoneyMoney totalBudgetValue = grid.m_total[eBudget].m_total;
-      MyMoneyMoney totalActualValue = grid.m_total[eActual].m_total;
-      MyMoneyMoney totalBudgetDiffValue = grid.m_total[eBudgetDiff].m_total;
-
-      QString totalBudgetAmount = totalBudgetValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
-      QString totalActualAmount = totalActualValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
-      QString totalBudgetDiffAmount = totalBudgetDiffValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
-
-      m_html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(totalBudgetAmount, totalBudgetValue.isNegative()));
-      m_html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(totalActualAmount, totalActualValue.isNegative()));
-      m_html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(totalBudgetDiffAmount, totalBudgetDiffValue.isNegative()));
-      m_html += "</tr>";
-      m_html += "</table>";
-
-      //budget overrun
-      m_html += "<div class=\"gap\">&nbsp;</div>\n";
-      m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
-      m_html += "<tr class=\"itemtitle\">";
-      m_html += "<td class=\"left\" colspan=\"4\">";
-      m_html += i18n("Budget Overruns");
-      m_html += "</td></tr>";
-      m_html += "<tr class=\"item\">";
-      m_html += "<td class=\"left\" width=\"30%\">";
-      m_html += i18n("Account");
-      m_html += "</td>";
-      m_html += "<td class=\"right\" width=\"20%\">";
-      m_html += i18n("Budgeted");
-      m_html += "</td>";
-      m_html += "<td class=\"right\" width=\"20%\">";
-      m_html += i18n("Actual");
-      m_html += "</td>";
-      m_html += "<td class=\"right\" width=\"20%\">";
-      m_html += i18n("Difference");
-      m_html += "</td></tr>";
-
-
-      PivotGrid::iterator it_outergroup = grid.begin();
-      while (it_outergroup != grid.end()) {
-        i = 0;
-        PivotOuterGroup::iterator it_innergroup = (*it_outergroup).begin();
-        while (it_innergroup != (*it_outergroup).end()) {
-          PivotInnerGroup::iterator it_row = (*it_innergroup).begin();
-          while (it_row != (*it_innergroup).end()) {
-            //column number is 1 because the report includes only current month
-            if (it_row.value()[eBudgetDiff].value(1).isNegative()) {
-              //get report account to get the name later
-              ReportAccount rowname = it_row.key();
-
-              //write the outergroup if it is the first row of outergroup being shown
-              if (i == 0) {
-                m_html += "<tr style=\"font-weight:bold;\">";
-                m_html += QString("<td class=\"left\" colspan=\"4\">%1</td>").arg(MyMoneyAccount::accountTypeToString(rowname.accountType()));
-                m_html += "</tr>";
-              }
-              m_html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
-
-              //get values from grid
-              MyMoneyMoney actualValue = it_row.value()[eActual][1];
-              MyMoneyMoney budgetValue = it_row.value()[eBudget][1];
-              MyMoneyMoney budgetDiffValue = it_row.value()[eBudgetDiff][1];
-
-              //format amounts
-              QString actualAmount = actualValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
-              QString budgetAmount = budgetValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
-              QString budgetDiffAmount = budgetDiffValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
-
-              //account name
-              m_html += QString("<td>") + link(VIEW_LEDGER, QString("?id=%1").arg(rowname.id())) + rowname.name() + linkend() + "</td>";
-
-              //show amounts
-              m_html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(budgetAmount, budgetValue.isNegative()));
-              m_html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(actualAmount, actualValue.isNegative()));
-              m_html += QString("<td align=\"right\">%1</td>").arg(showColoredAmount(budgetDiffAmount, budgetDiffValue.isNegative()));
-              m_html += "</tr>";
-
-              //set the flag that there are overruns
-              isOverrun = true;
-            }
-            ++it_row;
-          }
-          ++it_innergroup;
-        }
-        ++it_outergroup;
-      }
-
-      //if no negative differences are found, then inform that
-      if (!isOverrun) {
-        m_html += QString::fromLatin1("<tr class=\"row-%1\" style=\"font-weight:bold;\">").arg(((i++ & 1) == 1) ? QLatin1String("even") : QLatin1String("odd"));
-        m_html += QString::fromLatin1("<td class=\"center\" colspan=\"4\">%1</td>").arg(i18n("No Budget Categories have been overrun"));
-        m_html += "</tr>";
-      }
-      m_html += "</table></div></div>";
+    if (const auto reportsPlugin = pPlugins.data.value(QStringLiteral("reportsview"), nullptr)) {
+      const auto variantReport = reportsPlugin->requestData(QString(), eWidgetPlugin::WidgetType::Budget);
+      if (!variantReport.isNull())
+        m_html.append(variantReport.toString());
+    } else {
+      m_html += QString("<tr>");
+      m_html += QString("<td><center>%1</center></td>").arg(i18n("Enable reports plugin to see this chart."));
+      m_html += QString("</tr>");
     }
+
+    m_html += QString("</table></div></div>");
   }
 
   void showCashFlowSummary()
@@ -1615,7 +1465,7 @@ public:
         //get the splits for each transaction
         foreach (const auto split, transaction.splits()) {
           if (!split.shares().isZero()) {
-            ReportAccount repSplitAcc = ReportAccount(split.accountId());
+            auto repSplitAcc = file->account(split.accountId());
 
             //only add if it is an income or expense
             if (repSplitAcc.isIncomeExpense()) {
@@ -1623,8 +1473,9 @@ public:
 
               //convert to base currency if necessary
               if (repSplitAcc.currencyId() != file->baseCurrency().id()) {
-                MyMoneyMoney curPrice = repSplitAcc.baseCurrencyPrice(transaction.postDate());
-                value = (split.shares() * MyMoneyMoney::MINUS_ONE) * curPrice;
+                const auto curPrice = file->price(repSplitAcc.tradingCurrencyId(), file->baseCurrency().id(), QDate::currentDate());
+                const auto curRate = curPrice.rate(file->baseCurrency().id());
+                value = (split.shares() * MyMoneyMoney::MINUS_ONE) * curRate;
                 value = value.convert(10000);
               } else {
                 value = (split.shares() * MyMoneyMoney::MINUS_ONE);
@@ -1719,15 +1570,16 @@ public:
         QList<MyMoneySplit>::const_iterator split_it;
         for (split_it = splits.constBegin(); split_it != splits.constEnd(); ++split_it) {
           if ((*split_it).accountId() != acc.id()) {
-            ReportAccount repSplitAcc = ReportAccount((*split_it).accountId());
+            auto repSplitAcc = file->account((*split_it).accountId());
 
             //get the shares and multiply by the quantity of occurrences in the period
             MyMoneyMoney value = (*split_it).shares() * cnt;
 
             //convert to foreign currency if needed
             if (repSplitAcc.currencyId() != file->baseCurrency().id()) {
-              MyMoneyMoney curPrice = repSplitAcc.baseCurrencyPrice(QDate::currentDate());
-              value = value * curPrice;
+              const auto curPrice = file->price(repSplitAcc.tradingCurrencyId(), file->baseCurrency().id(), QDate::currentDate());
+              const auto curRate = curPrice.rate(file->baseCurrency().id());
+              value = value * curRate;
               value = value.convert(10000);
             }
 
@@ -1781,9 +1633,9 @@ public:
               MyMoneyMoney value = MyMoneyFile::instance()->balance((*account_it).id(), QDate::currentDate());
               //calculate balance for foreign currency accounts
               if ((*account_it).currencyId() != file->baseCurrency().id()) {
-                ReportAccount repAcc = ReportAccount((*account_it).id());
-                MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(QDate::currentDate());
-                MyMoneyMoney baseValue = value * curPrice;
+                const auto curPrice = file->price((*account_it).tradingCurrencyId(), file->baseCurrency().id(), QDate::currentDate());
+                const auto curRate = curPrice.rate(file->baseCurrency().id());
+                auto baseValue = value * curRate;
                 liquidAssets += baseValue;
                 liquidAssets = liquidAssets.convert(10000);
               } else {
@@ -1797,9 +1649,9 @@ public:
               value = MyMoneyFile::instance()->balance((*account_it).id(), QDate::currentDate());
               //calculate balance if foreign currency
               if ((*account_it).currencyId() != file->baseCurrency().id()) {
-                ReportAccount repAcc = ReportAccount((*account_it).id());
-                MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(QDate::currentDate());
-                MyMoneyMoney baseValue = value * curPrice;
+                const auto curPrice = file->price((*account_it).tradingCurrencyId(), file->baseCurrency().id(), QDate::currentDate());
+                const auto curRate = curPrice.rate(file->baseCurrency().id());
+                auto baseValue = value * curRate;
                 liquidLiabilities += baseValue;
                 liquidLiabilities = liquidLiabilities.convert(10000);
               } else {

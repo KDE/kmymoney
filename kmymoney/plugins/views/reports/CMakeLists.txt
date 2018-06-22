@@ -1,3 +1,5 @@
+add_subdirectory(core)
+
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/reportsview.json.in ${CMAKE_CURRENT_BINARY_DIR}/reportsview.json @ONLY)
 
 set(reportsview_SOURCES
@@ -9,6 +11,7 @@ set(reportsview_SOURCES
   kreportconfigurationfilterdlg.cpp
   reporttabimpl.cpp
   reportcontrolimpl.cpp
+  kbalancechartdlg.cpp
   ../../../views/kmymoneywebpage.cpp
   )
 

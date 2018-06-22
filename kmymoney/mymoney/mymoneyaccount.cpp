@@ -368,6 +368,24 @@ QString MyMoneyAccount::currencyId() const
   return d->m_currencyId;
 }
 
+QString MyMoneyAccount::tradingCurrencyId() const
+{
+  const auto file = MyMoneyFile::instance();
+
+  // First, get the trading currency (formerly deep currency)
+  auto deepcurrency = file->security(currencyId());
+  if (!deepcurrency.isCurrency())
+    deepcurrency = file->security(deepcurrency.tradingCurrency());
+
+  // Return the trading currency's ID
+  return deepcurrency.id();
+}
+
+bool MyMoneyAccount::isForeignCurrency() const
+{
+  return (tradingCurrencyId() != MyMoneyFile::instance()->baseCurrency().id());
+}
+
 void MyMoneyAccount::setCurrencyId(const QString& id)
 {
   Q_D(MyMoneyAccount);
@@ -399,6 +417,11 @@ bool MyMoneyAccount::isLiquidAsset() const
   return accountType() == Account::Type::Checkings ||
          accountType() == Account::Type::Savings ||
          accountType() == Account::Type::Cash;
+}
+
+bool MyMoneyAccount::isLiquidLiability() const
+{
+  return accountType() == Account::Type::CreditCard;
 }
 
 bool MyMoneyAccount::isCostCenterRequired() const

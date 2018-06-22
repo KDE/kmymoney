@@ -149,14 +149,6 @@ public:
   MyMoneySecurity currency() const;
 
   /**
-    * Determine if this account's deep currency is different from the file's
-    * base currency
-    *
-    * @return bool True if this account is in a foreign currency
-    */
-  bool isForeignCurrency() const;
-
-  /**
     * The name of only this account.  No matter how deep the hierarchy, this
     * method only returns the last name in the list, which is the engine name]
     * of this account.
@@ -222,12 +214,6 @@ public:
     * @return unsigned Hierarchy depth
     */
   unsigned hierarchyDepth() const;
-
-  /**
-   * Returns whether this account is a liquid liability
-   *
-   */
-  bool isLiquidLiability() const;
 
 protected:
   /**

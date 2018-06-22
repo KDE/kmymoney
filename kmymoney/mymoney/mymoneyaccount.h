@@ -348,6 +348,29 @@ public:
     */
   QString currencyId() const;
 
+  /** There are three different currencies in play with a single Account:
+  *   - The underlying currency: What currency the account itself is denominated in
+  *   - The deep currency: The underlying currency's own underlying currency.  This
+  *      is only a factor if the underlying currency of this account IS NOT a
+  *      currency itself, but is some other kind of security.  In that case, the
+  *      underlying security has its own currency.  The deep currency is the
+  *      currency of the underlying security.  On the other hand, if the account
+  *      has a currency itself, then the deep currency == the underlying currency,
+  *      and this function will return 1.0.
+  *   - The base currency: The base currency of the user's overall file
+  *
+  * @return id of deep currency
+  */
+  QString tradingCurrencyId() const;
+
+  /**
+    * Determine if this account's deep currency is different from the file's
+    * base currency
+    *
+    * @return bool True if this account is in a foreign currency
+    */
+  bool isForeignCurrency() const;
+
   /**
     * This method sets the id of the currency used with this account.
     *
@@ -510,6 +533,12 @@ public:
     * @retval false for all other account types
     */
   bool isLiquidAsset() const;
+
+  /**
+   * Returns whether this account is a liquid liability
+   *
+   */
+  bool isLiquidLiability() const;
 
   /**
    * This method returns true if a costcenter assignment is required for this account

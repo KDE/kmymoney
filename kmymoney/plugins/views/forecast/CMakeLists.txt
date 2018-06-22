@@ -23,8 +23,8 @@ target_link_libraries(forecastview
   PUBLIC
     kmm_plugin
     KF5::TextWidgets
-    reports
     kmm_widgets
+    kmymoney_common
 )
 
 # the KCM module

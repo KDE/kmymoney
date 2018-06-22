@@ -209,17 +209,6 @@ MyMoneySecurity ReportAccount::currency() const
   return deepcurrency;
 }
 
-/**
-  * Determine if this account's deep currency is different from the file's
-  * base currency
-  *
-  * @return bool True if this account is in a foreign currency
-  */
-bool ReportAccount::isForeignCurrency() const
-{
-  return (currency().id() != MyMoneyFile::instance()->baseCurrency().id());
-}
-
 bool ReportAccount::operator<(const ReportAccount& second) const
 {
 //   DEBUG_ENTER(Q_FUNC_INFO);
@@ -322,14 +311,5 @@ QString ReportAccount::topParentName() const
 {
   return m_nameHierarchy.first();
 }
-
-bool ReportAccount::isLiquidLiability() const
-{
-  return accountType() == eMyMoney::Account::Type::CreditCard;
-
-}
-
-
-
 
 }  // end namespace reports

@@ -36,7 +36,6 @@
 
 #include "onlinejobadministration.h"
 #include "knewaccountwizard.h"
-#include "kbalancechartdlg.h"
 #include "kmymoneyutils.h"
 #include "kmymoneysettings.h"
 #include "storageenums.h"
@@ -378,9 +377,7 @@ void KAccountsView::slotChartAccountBalance()
 {
   Q_D(KAccountsView);
   if (!d->m_currentAccount.id().isEmpty()) {
-    QPointer<KBalanceChartDlg> dlg = new KBalanceChartDlg(d->m_currentAccount, this);
-    dlg->exec();
-    delete dlg;
+    emit customActionRequested(View::Accounts, eView::Action::ShowBalanceChart);
   }
 }
 

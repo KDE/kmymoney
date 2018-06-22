@@ -66,7 +66,8 @@ namespace eView {
     EditSchedule,
     CleanupBeforeFileClose,
     InitializeAfterFileOpen,
-    DisableViewDepenedendActions
+    DisableViewDepenedendActions,
+    ShowBalanceChart
   };
 
 }

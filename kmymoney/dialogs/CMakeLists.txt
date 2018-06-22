@@ -8,7 +8,6 @@ set(libdialogs_a_SOURCES
   investtransactioneditor.cpp
   kaccountselectdlg.cpp
   kbackupdlg.cpp
-  kbalancechartdlg.cpp
   kbalancewarning.cpp
   kcategoryreassigndlg.cpp
   kchooseimportexportdlg.cpp

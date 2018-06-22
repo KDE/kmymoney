@@ -104,7 +104,6 @@
 #include "dialogs/kpayeereassigndlg.h"
 #include "dialogs/kcategoryreassigndlg.h"
 #include "wizards/endingbalancedlg/kendingbalancedlg.h"
-#include "dialogs/kbalancechartdlg.h"
 #include "dialogs/kloadtemplatedlg.h"
 #include "dialogs/ktemplateexportdlg.h"
 #include "dialogs/transactionmatcher.h"
@@ -2194,6 +2193,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
     onlineJobAdministration::instance()->setOnlinePlugins(pPlugins.extended);
     d->m_myMoneyView->setOnlinePlugins(pPlugins.online);
     d->updateActions();
+    d->m_myMoneyView->slotRefreshViews();
     return;
   }
   MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());

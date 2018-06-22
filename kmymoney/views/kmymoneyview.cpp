@@ -809,6 +809,10 @@ void KMyMoneyView::slotCustomActionRequested(View view, eView::Action action)
     case eView::Action::SwitchView:
       showPage(view);
       break;
+    case eView::Action::ShowBalanceChart:
+      if (viewBases.contains(View::Reports))
+        viewBases[View::Reports]->executeCustomAction(action);
+      break;
     default:
       break;
   }

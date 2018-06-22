@@ -10,7 +10,6 @@ ecm_add_tests(${tests_sources}
     Qt5::Gui
     kmm_mymoney
     kmm_testutils
-    reports_testcommon
     kmm_utils_platformtools
     onlinetask_interfaces
 )

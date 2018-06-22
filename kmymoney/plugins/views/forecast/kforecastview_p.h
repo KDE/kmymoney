@@ -54,15 +54,13 @@
 #include "mymoneysecurity.h"
 #include "kmymoneysettings.h"
 #include "mymoneybudget.h"
-#include "pivottable.h"
 #include "fixedcolumntreeview.h"
-#include "kreportchartview.h"
-#include "reportaccount.h"
 #include "icons.h"
 #include "mymoneyenums.h"
 #include "kmymoneyutils.h"
+#include "kmymoneyplugin.h"
+#include "plugins/views/reports/reportsviewenums.h"
 
-using namespace reports;
 using namespace Icons;
 
 typedef enum {
@@ -100,7 +98,7 @@ public:
     m_incomeItem(0),
     m_expenseItem(0),
     m_chartLayout(0),
-    m_forecastChart(0)
+    m_forecastChart(nullptr)
   {
   }
 
@@ -114,8 +112,6 @@ public:
     Q_Q(KForecastView);
     m_needLoad = false;
     ui->setupUi(q);
-
-    m_forecastChart = new KReportChartView(ui->m_tabChart);
 
     for (int i = 0; i < MaxViewTabs; ++i)
       m_needReload[i] = false;
@@ -145,10 +141,8 @@ public:
     q->connect(ui->m_budgetList, &QTreeWidget::itemExpanded, q, &KForecastView::itemExpanded);
     q->connect(ui->m_budgetList, &QTreeWidget::itemCollapsed, q, &KForecastView::itemCollapsed);
 
-    m_forecastChart->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_chartLayout = ui->m_tabChart->layout();
     m_chartLayout->setSpacing(6);
-    m_chartLayout->addWidget(m_forecastChart);
 
     loadForecastSettings();
   }
@@ -655,36 +649,23 @@ public:
 
   void loadChartView()
   {
-    eMyMoney::Report::DetailLevel detailLevel[4] = { eMyMoney::Report::DetailLevel::All, eMyMoney::Report::DetailLevel::Top, eMyMoney::Report::DetailLevel::Group, eMyMoney::Report::DetailLevel::Total };
+    if (m_forecastChart)
+      delete m_forecastChart;
 
-    MyMoneyReport reportCfg = MyMoneyReport(
-                                eMyMoney::Report::RowType::AssetLiability,
-                                static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
-                                eMyMoney::TransactionFilter::Date::UserDefined, // overridden by the setDateFilter() call below
-                                detailLevel[ui->m_comboDetail->currentIndex()],
-                                i18n("Net Worth Forecast"),
-                                i18n("Generated Report"));
+    if (const auto reportsPlugin = pPlugins.data.value("reportsview", nullptr)) {
+      const auto args =
+          QString::number(ui->m_comboDetail->currentIndex()) + ';' +
+          QString::number(ui->m_forecastDays->value()) + ';' +
+          QString::number(ui->m_tab->width()) + ';' +
+          QString::number(ui->m_tab->height());
 
-    reportCfg.setChartByDefault(true);
-    reportCfg.setChartCHGridLines(false);
-    reportCfg.setChartSVGridLines(false);
-    reportCfg.setChartType(eMyMoney::Report::ChartType::Line);
-    reportCfg.setIncludingSchedules(false);
-    // FIXME: this causes a crash
-    //reportCfg.setColumnsAreDays( true );
-    reportCfg.setChartDataLabels(false);
-    reportCfg.setConvertCurrency(true);
-    reportCfg.setIncludingForecast(true);
-    reportCfg.setDateFilter(QDate::currentDate(), QDate::currentDate().addDays(ui->m_forecastDays->value()));
-    reports::PivotTable table(reportCfg);
-
-    table.drawChart(*m_forecastChart);
-
-    // Adjust the size
-    m_forecastChart->resize(ui->m_tab->width() - 10, ui->m_tab->height());
-    //m_forecastChart->show();
-    m_forecastChart->update();
-
+      const auto variantReport = reportsPlugin->requestData(args, eWidgetPlugin::WidgetType::NetWorthForecastWithArgs);
+      if (!variantReport.isNull())
+        m_forecastChart = variantReport.value<QWidget *>();
+    } else {
+      m_forecastChart = new QLabel(i18n("Enable reports plugin to see this chart."));
+    }
+    m_chartLayout->addWidget(m_forecastChart);
   }
 
   void loadForecastSettings()
@@ -846,10 +827,11 @@ public:
     MyMoneyAccount account = item->data(0, AccountRole).value<MyMoneyAccount>();
     //calculate the balance in base currency for the total row
     if (account.currencyId() != MyMoneyFile::instance()->baseCurrency().id()) {
-      ReportAccount repAcc = ReportAccount(account.id());
-      MyMoneyMoney curPrice = repAcc.baseCurrencyPrice(forecastDate);
-      MyMoneyMoney baseAmountMM = amount * curPrice;
-      MyMoneyMoney value = baseAmountMM.convert(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction());
+      const auto file = MyMoneyFile::instance();
+      const auto curPrice = file->price(account.tradingCurrencyId(), file->baseCurrency().id(), forecastDate);
+      const auto curRate = curPrice.rate(file->baseCurrency().id());
+      auto baseAmountMM = amount * curRate;
+      auto value = baseAmountMM.convert(file->baseCurrency().smallestAccountFraction());
       item->setData(column, ValueRole, QVariant::fromValue(value));
       adjustParentValue(item->parent(), column, value);
     } else {
@@ -1038,7 +1020,7 @@ public:
   QTreeWidgetItem* m_expenseItem;
 
   QLayout* m_chartLayout;
-  reports::KReportChartView* m_forecastChart;
+  QWidget *m_forecastChart;
   QScopedPointer<FixedColumnTreeView> m_fixedColumnView;
   QMap<QString, QString> m_nameIdx;
 };

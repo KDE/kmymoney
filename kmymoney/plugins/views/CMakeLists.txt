@@ -2,7 +2,7 @@ if(ENABLE_FORECASTVIEW)
   add_subdirectory(forecast)
 endif()
 
-if(ENABLE_REPORTSVIEW)
+if(ENABLE_REPORTSVIEW OR BUILD_TESTING)
   add_subdirectory(reports)
 endif()
 

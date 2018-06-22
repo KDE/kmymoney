@@ -17,7 +17,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}/dialogs/settings/
                     ${CMAKE_CURRENT_BINARY_DIR}/mymoney/storage/
                     ${CMAKE_CURRENT_BINARY_DIR}/mymoney/
-                    ${CMAKE_CURRENT_SOURCE_DIR}/reports/
                     ${CMAKE_CURRENT_SOURCE_DIR}/wizards/endingbalancedlg/
                     ${CMAKE_CURRENT_BINARY_DIR}/wizards/endingbalancedlg/
                     ${CMAKE_CURRENT_SOURCE_DIR}/wizards/newinvestmentwizard/
@@ -40,7 +39,6 @@ add_subdirectory( mymoney )
 add_subdirectory( settings )
 add_subdirectory( models  )
 add_subdirectory( plugins )
-add_subdirectory( reports )
 add_subdirectory( widgets )
 add_subdirectory( dialogs )
 add_subdirectory( views )
@@ -120,7 +118,6 @@ ecm_add_app_icon(kmymoney_SRCS ICONS ${KMYMONEY_APP_ICONS})
 add_executable( kmymoney ${kmymoney_SRCS} )
 target_link_libraries(kmymoney
   views
-  reports
   kmymoney_base
   kmymoney_common
   newuserwizard

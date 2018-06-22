@@ -71,6 +71,7 @@
 #include "objectinfotable.h"
 #include "kreportconfigurationfilterdlg.h"
 #include "icons/icons.h"
+#include "kbalancechartdlg.h"
 #include <kmymoneywebpage.h>
 #include "tocitem.h"
 #include "tocitemgroup.h"
@@ -126,6 +127,15 @@ void KReportsView::executeCustomAction(eView::Action action)
 
     case eView::Action::CleanupBeforeFileClose:
       slotCloseAll();
+      break;
+
+    case eView::Action::ShowBalanceChart:
+      {
+        Q_D(KReportsView);
+        QPointer<KBalanceChartDlg> dlg = new KBalanceChartDlg(d->m_currentAccount, this);
+        dlg->exec();
+        delete dlg;
+      }
       break;
 
     default:
