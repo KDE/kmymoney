@@ -122,7 +122,7 @@
 #include "models/accountsmodel.h"
 #include "models/equitiesmodel.h"
 #include "models/securitiesmodel.h"
-#if ENABLE_UNFINISHEDFEATURES
+#ifdef ENABLE_UNFINISHEDFEATURES
 #include "models/ledgermodel.h"
 #endif
 
@@ -490,7 +490,7 @@ public:
     q->connect(file, &MyMoneyFile::objectModified, securitiesModel, &SecuritiesModel::slotObjectModified);
     q->connect(file, &MyMoneyFile::objectRemoved,  securitiesModel, &SecuritiesModel::slotObjectRemoved);
 
-#if ENABLE_UNFINISHEDFEATURES
+#ifdef ENABLE_UNFINISHEDFEATURES
     const auto ledgerModel = Models::instance()->ledgerModel();
     q->connect(file, &MyMoneyFile::objectAdded,    ledgerModel, &LedgerModel::slotAddTransaction);
     q->connect(file, &MyMoneyFile::objectModified, ledgerModel, &LedgerModel::slotModifyTransaction);
@@ -510,7 +510,7 @@ public:
     q->disconnect(file, nullptr, Models::instance()->equitiesModel(), nullptr);
     q->disconnect(file, nullptr, Models::instance()->securitiesModel(), nullptr);
 
-#if ENABLE_UNFINISHEDFEATURES
+#ifdef ENABLE_UNFINISHEDFEATURES
     q->disconnect(file, nullptr, Models::instance()->ledgerModel(), nullptr);
 #endif
   }
