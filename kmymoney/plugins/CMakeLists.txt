@@ -25,10 +25,9 @@ if (ENABLE_KBANKING)
   add_subdirectory( kbanking )
 endif (ENABLE_KBANKING)
 
-option(ENABLE_SQLCIPHER "Enable SQLCipher plugin" OFF)
 if (ENABLE_SQLCIPHER)
   add_subdirectory(sqlcipher)
-endif(ENABLE_SQLCIPHER)
+endif()
 
 option(ENABLE_ONLINEJOBPLUGINMOCKUP "Enable onlineJob-plugin mockup (only for developers)" OFF)
 if (ENABLE_ONLINEJOBPLUGINMOCKUP)

@@ -26,8 +26,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QInputDialog>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
+
+#include "KMessageBox"
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -93,6 +97,8 @@ int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
     if (QUrlQuery(url).queryItemValue("driver").contains("QMYSQL")) {
       setConnectOptions("MYSQL_OPT_RECONNECT=1");
     }
+
+    QSqlQuery query(*this);
     switch (openMode) {
       case QIODevice::ReadOnly:    // OpenDatabase menu entry (or open last file)
       case QIODevice::ReadWrite:   // Save menu entry with database open
@@ -109,7 +115,33 @@ int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
           d->buildError(QSqlQuery(*this), Q_FUNC_INFO, "opening database");
           rc = 1;
         } else {
-          rc = d->createTables(); // check all tables are present, create if not
+          if (driverName().compare(QLatin1String("QSQLCIPHER")) == 0) {
+            auto passphrase = password();
+            while (true) {
+              if (!passphrase.isEmpty()) {
+                query.exec(QString::fromLatin1("PRAGMA cipher_version"));
+                if(!query.next())
+                  throw MYMONEYEXCEPTION_CSTRING("Based on empty cipher_version, libsqlcipher is not in use.");
+                query.exec(QString::fromLatin1("PRAGMA key = '%1'").arg(passphrase)); // SQLCipher feature to decrypt a database
+              }
+              query.exec(QStringLiteral("SELECT count(*) FROM sqlite_master")); // SQLCipher recommended way to check if password is correct
+              if (query.next()) {
+                rc = d->createTables(); // check all tables are present, create if not
+                break;
+              }
+              auto ok = false;
+              passphrase = QInputDialog::getText(nullptr, i18n("Password"),
+                                                 i18n("You're trying to open an encrypted database.\n"
+                                                      "Please provide a password in order to open it."),
+                                                 QLineEdit::Password, QString(), &ok);
+              if (!ok) {
+                QSqlDatabase::close();
+                throw MYMONEYEXCEPTION_CSTRING("Bad password.");
+              }
+            }
+          } else {
+            rc = d->createTables(); // check all tables are present, create if not
+          }
         }
         break;
       case QIODevice::WriteOnly:   // SaveAs Database - if exists, must be empty, if not will create
@@ -124,10 +156,19 @@ int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
               d->buildError(QSqlQuery(*this), Q_FUNC_INFO, "opening new database");
               rc = 1;
             } else {
+              query.exec(QString::fromLatin1("PRAGMA key = '%1'").arg(password()));
               rc = d->createTables();
             }
           }
         } else {
+          if (driverName().compare(QLatin1String("QSQLCIPHER")) == 0 &&
+              !password().isEmpty()) {
+            KMessageBox::information(nullptr, i18n("Overwriting an existing database with an encrypted database is not yet supported.\n"
+                                                   "Please save your database under a new name."));
+            QSqlDatabase::close();
+            rc = 3;
+            return rc;
+          }
           rc = d->createTables();
           if (rc == 0) {
             if (clear) {
@@ -252,7 +293,9 @@ bool MyMoneyStorageSql::writeFile()
   d->m_onlineJobs = d->m_payeeIdentifier = 0;
   d->m_displayStatus = true;
   try {
-    if (this->driverName().compare(QLatin1String("QSQLITE")) == 0) {
+    const auto driverName = this->driverName();
+    if (driverName.compare(QLatin1String("QSQLITE")) == 0 ||
+        driverName.compare(QLatin1String("QSQLCIPHER")) == 0) {
       QSqlQuery query(*this);
       query.exec("PRAGMA foreign_keys = ON"); // this is needed for "ON UPDATE" and "ON DELETE" to work
     }

@@ -41,6 +41,8 @@ include(CMakeDependentOption)
 include(GenerateExportHeader)
 include(KMyMoneyMacros)
 
+find_package(PkgConfig)
+
 set (OPT_KF5_COMPONENTS DocTools Holidays Contacts Akonadi IdentityManagement Activities)
 find_package(Gpgmepp)
 if (Gpgmepp_FOUND)
@@ -48,6 +50,10 @@ if (Gpgmepp_FOUND)
 else()
   set(GPG_ENCRYPTION OFF)
   list(APPEND OPT_KF5_COMPONENTS Gpgmepp)
+endif()
+
+if (PkgConfig_FOUND)
+  pkg_check_modules(SQLCIPHER sqlcipher)
 endif()
 
 find_package(Qt5 5.6 REQUIRED
@@ -139,7 +145,12 @@ add_feature_info("Online job outbox view" ENABLE_ONLINEJOBOUTBOXVIEW "It adds ou
 cmake_dependent_option(ENABLE_SQLSTORAGE "Enable SQL storage support." ON
                        "Qt5Sql_FOUND" OFF)
 
-add_feature_info("SQL Storage" ENABLE_SQLSTORAGE "It allows storing your financial data in SQL database (note: no encryption yet supported).")
+add_feature_info("SQL Storage" ENABLE_SQLSTORAGE "It allows storing your financial data in SQL database.")
+
+cmake_dependent_option(ENABLE_SQLCIPHER "Enable SQLCipher support." ON
+                       "SQLCIPHER_FOUND" OFF)
+
+add_feature_info("SQLCipher" ENABLE_SQLCIPHER "It allows encrypting your SQLite3 database.")
 
 cmake_dependent_option(ENABLE_IBANBICDATA "Enable IBAN/BIC data support." OFF
                        "Qt5Sql_FOUND" OFF)

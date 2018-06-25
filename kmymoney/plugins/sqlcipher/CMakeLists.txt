@@ -1,69 +1,47 @@
-# Copyright (c) 2014, Christian Dávid, <christian-david@web.de>
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
-# are met:
-#
-# 1. Redistributions of source code must retain the copyright
-#    notice, this list of conditions and the following disclaimer.
-# 2. Redistributions in binary form must reproduce the copyright
-#    notice, this list of conditions and the following disclaimer in the
-#    documentation and/or other materials provided with the distribution.
-# 3. The name of the author may not be used to endorse or promote products
-#    derived from this software without specific prior written permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
-# IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-# OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-# IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
-# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
-# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
-# THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# qsql_sqlite between Qt versions aren't necessarily compatible and can fail to compile
+# qsql_sqlite is copied from https://github.com/sjemens/qsqlcipher-qt5
+if (Qt5Core_VERSION VERSION_GREATER 5.10.99)
+  set (QSQLITE_VERSION 5.11) #untested
 
-project(QSqlcipherDriverPlugin)
+elseif (Qt5Core_VERSION VERSION_GREATER 5.9.99)
+  set (QSQLITE_VERSION 5.10) #tested
 
-add_definitions(${QT_DEFINITIONS})
+elseif (Qt5Core_VERSION VERSION_GREATER 5.7.99)
+  set (QSQLITE_VERSION 5.9) #untested
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
+else()
+  set (QSQLITE_VERSION 5.7) #untested
 
-find_package(SQLCipher REQUIRED)
-find_package(QSQLiteSource REQUIRED)
+endif()
 
-set ( sqlcipherdriver_srcs
-  qsqlcipherdriverplugin.cpp
-  sqlcipherdriver.cpp
-  ${QSQLITESOURCE_SRCS_DIRS}/qsql_sqlite.cpp
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/QSQLite/${QSQLITE_VERSION}/qsql_sqlite_p.h ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/QSQLite/${QSQLITE_VERSION}/qsql_sqlite.cpp ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+
+set ( qsqlcipher_SOURCES
+  smain.cpp
+  qsql_sqlite.cpp
 )
 
-set ( sqlcipherdriver_header
-  qsqlcipherdriverplugin.h
-  sqlcipherdriver.h
-  ${QSQLITESOURCE_SRCS_DIRS}/qsql_sqlite.h
+set ( qsqlcipher_HEADERS
+  qsql_sqlite_p.h
 )
 
-include_directories(${QSQLITESOURCE_INCLUDE_DIRS})
-include_directories(${SQLCIPHER_INCLUDE_DIR})
+kcoreaddons_add_plugin(qsqlcipher
+                       SOURCES ${qsqlcipher_SOURCES}
+                       JSON "${CMAKE_CURRENT_SOURCE_DIR}/sqlcipher.json"
+                       INSTALL_NAMESPACE "sqldrivers")
 
-qt4_automoc(${sqlcipherdriver_srcs})
-qt4_wrap_cpp(sqlcipherdriver_moc ${sqlcipherdriver_header})
-add_library(sqlcipherdriver SHARED ${sqlcipherdriver_header} ${sqlcipherdriver_srcs} ${sqlcipherdriver_moc})
+#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
+set_target_properties(qsqlcipher
+                      PROPERTIES
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
-target_link_libraries(sqlcipherdriver PUBLIC
-  ${QT_LIBRARIES}
-  ${QT_QTCORE_LIBRARIES}
-  Qt5::Sql
-  ${SQLCIPHER_LIBRARIES}
+target_link_libraries(qsqlcipher
+  PRIVATE
+    sqlcipher
+    Qt5::SqlPrivate
 )
 
 if(BUILD_TESTING)
-  add_subdirectory(tests)
+ add_subdirectory(tests)
 endif()
-
-#### Install files ####
-
-install(TARGETS sqlcipherdriver
-        DESTINATION ${KDE_INSTALL_QTPLUGINDIR}/sqldrivers/
-)

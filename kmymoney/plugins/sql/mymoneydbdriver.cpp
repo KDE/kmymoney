@@ -17,6 +17,7 @@
  ***************************************************************************/
 
 #include "mymoneydbdriver.h"
+#include "config-kmymoney.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -150,8 +151,11 @@ const QMap<QString, QString> MyMoneyDbDriver::driverMap()
   map["QODBC"] = QString("Open Database Connectivity");
   map["QPSQL"] = QString("PostgreSQL v7.3 and up");
   map["QTDS"] = QString("Sybase Adaptive Server and Microsoft SQL Server");
-  map["QSQLITE"] = QString("SQLite Version 3");
-  map["SQLCIPHER"] = QString("SQLCipher Version 3 (encrypted SQLite)");
+#ifndef ENABLE_SQLCIPHER
+  map["QSQLITE"] = QString("SQLite Version 3"); // QSQLITE is overridden with QSQLCIPHER and won't work properly, so disable it
+#else
+  map["QSQLCIPHER"] = QString("SQLCipher Version 3 (encrypted SQLite)");
+#endif
   return map;
 }
 
@@ -174,7 +178,7 @@ QExplicitlySharedDataPointer<MyMoneyDbDriver> MyMoneyDbDriver::create(const QStr
     return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneySybaseDriver());
   else if (type == "QSQLITE")
     return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneySqlite3Driver());
-  else if (type == "SQLCIPHER")
+  else if (type == "QSQLCIPHER")
     return QExplicitlySharedDataPointer<MyMoneyDbDriver> (new MyMoneySqlCipher3Driver());
   else throw MYMONEYEXCEPTION_CSTRING("Unknown database driver type.");
 }

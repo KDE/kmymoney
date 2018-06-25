@@ -181,6 +181,10 @@
 
 #include "misc/platformtools.h"
 
+#ifdef ENABLE_SQLCIPHER
+#include "sqlcipher/sqlite3.h"
+#endif
+
 #ifdef KMM_DEBUG
 #include "mymoney/storage/mymoneystoragedump.h"
 #include "mymoneytracer.h"
@@ -1121,6 +1125,26 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   // Register the main engine types used as meta-objects
   qRegisterMetaType<MyMoneyMoney>("MyMoneyMoney");
   qRegisterMetaType<MyMoneySecurity>("MyMoneySecurity");
+
+#ifdef ENABLE_SQLCIPHER
+  /* Issues:
+   * 1) libsqlite3 loads implicitly before libsqlcipher
+   *  thus making the second one loaded but non-functional,
+   * 2) libsqlite3 gets linked into kmymoney target implicitly
+   *  and it's not possible to unload or unlink it explicitly
+   *
+   * Solution:
+   * Use e.g. dummy sqlite3_key call, so that libsqlcipher gets loaded implicitly before libsqlite3
+   * thus making the first one functional.
+   *
+   * Additional info:
+   * 1) loading libsqlcipher explicitly doesn't solve the issue,
+   * 2) using sqlite3_key only in sqlstorage plugin doesn't solve the issue,
+   * 3) in a separate, minimal test case, loading libsqlite3 explicitly
+   *  with QLibrary::ExportExternalSymbolsHint makes libsqlcipher non-functional
+  */
+  sqlite3_key(nullptr, nullptr, 0);
+#endif
 
   // preset the pointer because we need it during the course of this constructor
   kmymoney = this;
@@ -3455,7 +3479,7 @@ bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
         break;
       }
     } catch (const MyMoneyException &e) {
-      KMessageBox::sorry(this, i18n("Cannot open file as requested. Error was: %1", QString::fromLatin1(e.what())));
+      KMessageBox::detailedError(this, i18n("Cannot open file as requested."), QString::fromLatin1(e.what()));
       return false;
     }
   }

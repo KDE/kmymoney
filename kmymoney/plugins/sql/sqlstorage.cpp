@@ -24,7 +24,10 @@
 // QT Includes
 
 #include <QUrlQuery>
+#include <QSqlQuery>
 #include <QTimer>
+#include <QFile>
+#include <QSqlDriver>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -105,6 +108,11 @@ MyMoneyStorageMgr *SQLStorage::open(const QUrl &url)
           query.addQueryItem(optionKey, options);
           dbURL.setQuery(query);
         }
+        break;
+      case 2: // bad password
+      case 3: // unsupported operation
+        delete storage;
+        return nullptr;
     }
   }
   // single user mode; read some of the data into memory
@@ -227,17 +235,26 @@ void SQLStorage::slotOpenDatabase()
     auto url = dialog->selectedURL();
     QUrl newurl = url;
     if ((newurl.scheme() == QLatin1String("sql"))) {
-      const QString key = QLatin1String("driver");
+      const auto key = QLatin1String("driver");
       // take care and convert some old url to their new counterpart
       QUrlQuery query(newurl);
       if (query.queryItemValue(key) == QLatin1String("QMYSQL3")) { // fix any old urls
         query.removeQueryItem(key);
         query.addQueryItem(key, QLatin1String("QMYSQL"));
-      }
-      if (query.queryItemValue(key) == QLatin1String("QSQLITE3")) {
+      } else if (query.queryItemValue(key) == QLatin1String("QSQLITE3")) {
         query.removeQueryItem(key);
         query.addQueryItem(key, QLatin1String("QSQLITE"));
       }
+#ifdef ENABLE_SQLCIPHER
+      // Reading unencrypted database with QSQLITE
+      // while QSQLCIPHER is available causes crash.
+      // QSQLCIPHER can read QSQLITE
+      if (query.queryItemValue(key) == QLatin1String("QSQLITE")) {
+        query.removeQueryItem(key);
+        query.addQueryItem(key, QLatin1String("QSQLCIPHER"));
+      }
+#endif
+
       newurl.setQuery(query);
 
       // check if a password is needed. it may be if the URL came from the last/recent file list
@@ -291,6 +308,10 @@ bool SQLStorage::saveAsDatabase(const QUrl &url)
         return false;
       }
       break;
+    case 2: // bad password
+    case 3: // unsupported operation
+      delete writer;
+      return false;
   }
   if (canWrite) {
     delete writer;

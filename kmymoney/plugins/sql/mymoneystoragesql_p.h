@@ -2013,6 +2013,7 @@ public:
                                   .arg(maindb.databaseName()).arg(Q_FUNC_INFO));
       } else {
         QSqlQuery qm(maindb);
+        qm.exec(QString::fromLatin1("PRAGMA key = '%1'").arg(q->password()));
         QString qs = m_driver->createDbString(dbName) + ';';
         if (!qm.exec(qs)) { // krazy:exclude=crashy
           buildError(qm, Q_FUNC_INFO,

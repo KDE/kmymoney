@@ -116,7 +116,17 @@ file(GLOB_RECURSE KMYMONEY_APP_ICONS "${CMAKE_CURRENT_SOURCE_DIR}/icons/kmymoney
 ecm_add_app_icon(kmymoney_SRCS ICONS ${KMYMONEY_APP_ICONS})
 
 add_executable( kmymoney ${kmymoney_SRCS} )
+
+if (ENABLE_SQLCIPHER)
+  target_link_libraries(kmymoney
+  PRIVATE
+    sqlcipher
+  )
+  add_definitions( -DSQLITE_HAS_CODEC -DSQLITE_TEMP_STORE=2 )
+endif()
+
 target_link_libraries(kmymoney
+  PUBLIC
   views
   kmymoney_base
   kmymoney_common
