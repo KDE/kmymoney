@@ -24,6 +24,7 @@
 #include <QMetaType>
 #include <QString>
 #include <qglobal.h>
+#include "mymoneyexception.h"
 
 /** @todo fix include path after upgrade to cmake 3 */
 #include "payeeidentifier/kmm_payeeidentifier_export.h"
@@ -111,19 +112,19 @@ public:
    *
    * This is inspired by std::bad_cast
    */
-  class badCast final : public std::runtime_error
+  class badCast : public MyMoneyException
   {
   public:
-    explicit badCast(const char *exceptionMessage) : std::runtime_error(exceptionMessage) {}
+    explicit badCast(const char *exceptionMessage) : MyMoneyException(exceptionMessage) {}
   };
 
   /**
    * @brief Thrown if one tried to access the data of a null payeeIdentifier
    */
-  class empty final : public std::runtime_error
+  class empty : public MyMoneyException
   {
   public:
-    explicit empty(const char *exceptionMessage) : std::runtime_error(exceptionMessage) {}
+    explicit empty(const char *exceptionMessage) : MyMoneyException(exceptionMessage) {}
   };
 
 private:

@@ -57,11 +57,10 @@
   * and line parameter to the correct values.
   */
 
-class MyMoneyException final : public std::runtime_error
+class MyMoneyException : public std::runtime_error
 {
 public:
-  explicit MyMoneyException(const char *exceptionMessage) noexcept : std::runtime_error(exceptionMessage) {}
-  MyMoneyException(const MyMoneyException &) noexcept = default;
+  explicit MyMoneyException(const char *exceptionMessage) : std::runtime_error(exceptionMessage) {}
 };
 
 #endif
