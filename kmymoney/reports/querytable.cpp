@@ -419,9 +419,9 @@ void QueryTable::constructTransactionTable()
   report.setReportAllSplits(false);
   report.setConsiderCategory(true);
 
-  bool use_transfers;
-  bool use_summary;
-  bool hide_details;
+  bool use_transfers = false;
+  bool use_summary = false;
+  bool hide_details = false;
   bool tag_special_case = false;
 
   switch (m_config.rowType()) {
