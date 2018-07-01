@@ -46,6 +46,8 @@
 #include "kmymoneyutils.h"
 #include "icons.h"
 
+#include <errno.h>
+
 class KNewBankDlgPrivate
 {
   Q_DISABLE_COPY(KNewBankDlgPrivate)
