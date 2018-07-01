@@ -22,6 +22,10 @@
 #include <QIcon>
 #include <QPixmapCache>
 #include <QPainter>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
+#include <QDir>
+#include <QStandardPaths>
 
 namespace Icons {
   QHash<Icon, QString> sStandardIcons;
@@ -405,5 +409,64 @@ namespace Icons {
       return overlayIcon(sComposedIcons[icon]);
 
     return QIcon::fromTheme(sStandardIcons[icon]);
+  }
+
+  QString iconCacheDir()
+  {
+
+    const QString cachePath = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+    if (QDir::root().mkpath(cachePath)) {
+      return cachePath;
+    }
+    return QString();
+  }
+
+  KMM_ICONS_EXPORT bool storeIconInApplicationCache(const QString& name, const QIcon& icon)
+  {
+    // split the icon name from the type
+    QRegularExpression iconPath(QStringLiteral("^(?<type>[a-zA-Z]+):(?<name>.+)"), QRegularExpression::CaseInsensitiveOption);
+    QRegularExpressionMatch matcher = iconPath.match(name);
+    if (matcher.hasMatch()) {
+      if (matcher.captured(QStringLiteral("type")).compare(QLatin1String("enum")) == 0) {
+        return true;
+      } else {
+        const QString cacheDir = iconCacheDir();
+        if (!cacheDir.isEmpty()) {
+          return icon.pixmap(16).save(QString::fromLatin1("%1/%2-%3").arg(cacheDir, matcher.captured(QStringLiteral("type")), matcher.captured(QStringLiteral("name"))), "PNG");
+        }
+      }
+    }
+    return false;
+  }
+
+  KMM_ICONS_EXPORT QIcon loadIconFromApplicationCache(const QString& name)
+  {
+    const QHash<QString, Icon> sEnumIcons {
+      { QStringLiteral("ViewBank"), Icon::ViewBank },
+    };
+
+    // split the icon name from the type
+    QRegularExpression iconPath(QStringLiteral("^(?<type>[a-zA-Z]+):(?<name>.+)"), QRegularExpression::CaseInsensitiveOption);
+    QRegularExpressionMatch matcher = iconPath.match(name);
+    if (matcher.hasMatch()) {
+      if (matcher.captured(QStringLiteral("type")).compare(QLatin1String("enum")) == 0) {
+        // type is enum, so we use our own set of icons
+        const QString iconName = matcher.captured(QStringLiteral("name"));
+        if (sEnumIcons.contains(iconName)) {
+          return get(sEnumIcons[iconName]);
+        }
+
+      } else {
+        // otherwise, we use the type as part of the filename
+        const QString cacheDir = iconCacheDir();
+        if (!cacheDir.isEmpty()) {
+          const QString filename = QString::fromLatin1("%1/%2-%3").arg(cacheDir, matcher.captured(QStringLiteral("type")), matcher.captured(QStringLiteral("name")));
+          if (QFile::exists(filename)) {
+            return QIcon(filename);
+          }
+        }
+      }
+    }
+    return QIcon();
   }
 }

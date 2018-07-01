@@ -21,6 +21,9 @@
 // QT Includes
 
 #include <QTabBar>
+#include <QToolButton>
+#include <QUrl>
+#include <QDesktopServices>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -38,6 +41,7 @@
 #include "icons/icons.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
+#include "mymoneyinstitution.h"
 #include "mymoneyenums.h"
 #include "modelenums.h"
 
@@ -53,6 +57,7 @@ public:
   , ui(new Ui_SimpleLedgerView)
   , accountsModel(nullptr)
   , newTabWidget(nullptr)
+  , webSiteButton(nullptr)
   , lastIdx(-1)
   , inModelUpdate(false)
   , m_needLoad(true)
@@ -84,10 +89,26 @@ public:
       q->connect(bar, SIGNAL(tabMoved(int,int)), q, SLOT(checkTabOrder(int,int)));
     }
 
+    webSiteButton = new QToolButton;
+    ui->ledgerTab->setCornerWidget(webSiteButton);
+    q->connect(webSiteButton, &QToolButton::pressed, q,
+            [=] {
+              // for some reason, using the website button as cornerWidget
+              // returns the text with an ampersand character maybe inserted
+              // as indication for a hotkey. This needs to be removed for
+              // the construction of the URL
+              const QString website = webSiteButton->text().replace('&', "");
+              QUrl url;
+              url.setUrl(QString::fromLatin1("https://%1/").arg(website));
+              QDesktopServices::openUrl(url);
+            });
+
     q->connect(ui->accountCombo, SIGNAL(accountSelected(QString)), q, SLOT(openNewLedger(QString)));
     q->connect(ui->ledgerTab, &QTabWidget::currentChanged, q, &SimpleLedgerView::tabSelected);
     q->connect(Models::instance(), &Models::modelsLoaded, q, &SimpleLedgerView::updateModels);
     q->connect(ui->ledgerTab, &QTabWidget::tabCloseRequested, q, &SimpleLedgerView::closeLedger);
+    // we reload the icon if the institution data changed
+    q->connect(Models::instance()->institutionsModel(), &InstitutionsModel::dataChanged, q, &SimpleLedgerView::setupCornerWidget);
 
     accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity});
 
@@ -107,6 +128,7 @@ public:
   Ui_SimpleLedgerView*          ui;
   AccountNamesFilterProxyModel* accountsModel;
   QWidget*                      newTabWidget;
+  QToolButton*                  webSiteButton;
   int                           lastIdx;
   bool                          inModelUpdate;
   bool                          m_needLoad;
@@ -167,6 +189,7 @@ void SimpleLedgerView::tabSelected(int idx)
   if(idx != (d->ui->ledgerTab->count()-1)) {
     d->lastIdx = idx;
   }
+  setupCornerWidget();
 }
 
 void SimpleLedgerView::updateModels()
@@ -257,3 +280,38 @@ void SimpleLedgerView::showEvent(QShowEvent* event)
   // don't forget base class implementation
   QWidget::showEvent(event);
 }
+
+void SimpleLedgerView::setupCornerWidget()
+{
+  Q_D(SimpleLedgerView);
+
+  // check if we already have the button, quit if not
+  if (!d->webSiteButton)
+    return;
+
+  d->webSiteButton->hide();
+  auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());
+  if (view) {
+    auto index = Models::instance()->accountsModel()->accountById(view->accountId());
+    if(index.isValid()) {
+      // get icon name and url via account and institution object
+      const auto acc = Models::instance()->accountsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
+      if (!acc.institutionId().isEmpty()) {
+        index = Models::instance()->institutionsModel()->accountById(acc.institutionId());
+        const auto institution = Models::instance()->institutionsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyInstitution>();
+        const auto url = institution.value(QStringLiteral("url"));
+        const auto iconName = institution.value(QStringLiteral("icon"));
+        if (!url.isEmpty() && !iconName.isEmpty()) {
+          const auto favIcon = Icons::loadIconFromApplicationCache(iconName);
+          if (!favIcon.isNull()) {
+            d->webSiteButton->show();
+            d->webSiteButton->setIcon(favIcon);
+            d->webSiteButton->setText(url);
+            d->webSiteButton->setToolTip(i18n("Open website of <b>%1</b> in your browser.").arg(institution.name()));
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -88,6 +88,8 @@ target_link_libraries(dialogs
     onlinetask_interfaces
     kmm_widgets
     kmm_utils_platformtools
+  PRIVATE
+    KF5::KIOGui
 )
 
 target_link_libraries(dialogs LINK_PUBLIC

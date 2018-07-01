@@ -31,6 +31,7 @@
 // Project Includes
 
 class MyMoneyInstitution;
+class KJob;
 
 /// This dialog lets the user create or edit an institution
 class KNewBankDlgPrivate;
@@ -46,9 +47,13 @@ public:
 
   static void newInstitution(MyMoneyInstitution& institution);
 
-protected Q_SLOTS:
+private Q_SLOTS:
   void okClicked();
   void institutionNameChanged(const QString &);
+  void slotUrlChanged(const QString&);
+  void slotLoadIcon();
+  void slotIconLoaded(KJob* job);
+  void killIconLoad();
 
 private:
   KNewBankDlgPrivate * const d_ptr;

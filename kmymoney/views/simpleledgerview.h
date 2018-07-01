@@ -55,12 +55,13 @@ public Q_SLOTS:
 
 protected:
 
-protected Q_SLOTS:
+private Q_SLOTS:
   void tabSelected(int idx);
   void openNewLedger(QString accountId);
   void updateModels();
   void closeLedger(int idx);
   void checkTabOrder(int from, int to);
+  void setupCornerWidget();
 
 Q_SIGNALS:
   void showForms(bool show);
