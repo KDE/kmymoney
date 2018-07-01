@@ -137,7 +137,6 @@ MyMoneyReport::MyMoneyReport(eMyMoney::Report::RowType rt,
 MyMoneyReport::MyMoneyReport(const QDomElement& node) :
     MyMoneyObject(*new MyMoneyReportPrivate, node)
 {
-  Q_D(MyMoneyReport);
   // properly initialize the object before reading it
   *this = MyMoneyReport();
   if (!read(node))
