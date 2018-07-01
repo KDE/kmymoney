@@ -101,13 +101,12 @@ void MyMoneyContact::searchContactResult(KJob *job)
   foreach (const Akonadi::Item &item, items) {
     const KContacts::Addressee &contact = item.payload<KContacts::Addressee>();
     if (contact.emails().contains(contactData.email)) {
-      KContacts::PhoneNumber nullPhone;
-      KContacts::PhoneNumber& phone = nullPhone;
-      const KContacts::PhoneNumber::List phones = contact.phoneNumbers();
+      KContacts::PhoneNumber phone;
+      KContacts::PhoneNumber::List phones = contact.phoneNumbers();
       if (phones.count() == 1)
         phone = phones.first();
       else {
-        const QList<KContacts::PhoneNumber::Type> typesList = {KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Pref,
+        QList<KContacts::PhoneNumber::Type> typesList = {KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Pref,
                                                          KContacts::PhoneNumber::Work,
                                                          KContacts::PhoneNumber::Home | KContacts::PhoneNumber::Pref,
                                                          KContacts::PhoneNumber::Home};
