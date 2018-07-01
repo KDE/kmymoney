@@ -43,14 +43,38 @@
 using namespace reports;
 using namespace test;
 
+#define DEBUG_QUERYTABLETEST
+
 QTEST_KDEMAIN_CORE_WITH_COMPONENTNAME(QueryTableTest, "kmymoney")
+
+void QueryTableTest::writeTabletoHTML(reports::QueryTable &table, const QString &filename)
+{
+  MyMoneyFileTransaction ft;
+  MyMoneyFile::instance()->addReport(table.report());
+  ft.commit();
+  ::writeTabletoHTML(table, filename);
+}
+
+void QueryTableTest::saveKMyMoneyFile(const QString &filename)
+{
+  QFile g(filename);
+  g.open(QIODevice::WriteOnly);
+  MyMoneyStorageXML xml;
+  IMyMoneyStorageFormat& interface = xml;
+  interface.writeFile(&g, dynamic_cast<IMyMoneySerialize*>(MyMoneyFile::instance()->storage()));
+  g.close();
+}
+
 
 void QueryTableTest::init()
 {
   storage = new MyMoneySeqAccessMgr;
+  storage->setFileFixVersion(storage->currentFixVersion());
   file = MyMoneyFile::instance();
   file->attachStorage(storage);
+
   MyMoneyFileTransaction ft;
+  file->setValue("kmm-id", file->storageId());
   file->addCurrency(MyMoneySecurity("CAD", "Canadian Dollar",        "C$"));
   file->addCurrency(MyMoneySecurity("USD", "US Dollar",              "$"));
   file->addCurrency(MyMoneySecurity("JPY", "Japanese Yen",           QChar(0x00A5), 100, 1));
@@ -572,15 +596,8 @@ void QueryTableTest::testInvestment()
     html = invhold.renderBody();
     QVERIFY(searchHTML(html, i18n("Grand Total")) == MyMoneyMoney(170000.00));
 
-#if 0
-    // Dump file & reports
-    QFile g("investmentkmy.xml");
-    g.open(QIODevice::WriteOnly);
-    MyMoneyStorageXML xml;
-    IMyMoneyStorageFormat& interface = xml;
-    interface.writeFile(&g, dynamic_cast<IMyMoneySerialize*>(MyMoneyFile::instance()->storage()));
-    g.close();
-
+#ifdef DEBUG_QUERYTABLETEST
+    saveKMyMoneyFile("investmentkmy.xml");
     invtran.dump("invtran.html", "<html><head></head><body>%1</body></html>");
     invhold.dump("invhold.html", "<html><head></head><body>%1</body></html>");
 #endif

@@ -87,6 +87,8 @@ public:
     return m_rows;
   };
 
+  MyMoneyReport& report() { return m_config; }
+
 protected:
   void render(QString&, QString&) const;
 

@@ -22,12 +22,20 @@
 #include "mymoneyfile.h"
 #include "mymoneyseqaccessmgr.h"
 
+namespace reports {
+class QueryTable;
+}
+
 class QueryTableTest : public QObject
 {
   Q_OBJECT
 private:
   MyMoneySeqAccessMgr* storage;
   MyMoneyFile* file;
+
+private:
+  void writeTabletoHTML(reports::QueryTable &table, const QString &filename);
+  void saveKMyMoneyFile(const QString &filename);
 
 private slots:
   void init();
