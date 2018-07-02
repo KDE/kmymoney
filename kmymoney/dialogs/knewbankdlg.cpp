@@ -25,6 +25,7 @@
 #include <QTemporaryFile>
 #include <QTimer>
 #include <QDesktopServices>
+#include <QRegularExpression>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
