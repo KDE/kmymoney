@@ -656,7 +656,10 @@ int KReportChartView::drawPivotGridRow(int rowNum, const PivotGridRow& gridRow, 
 
   } else {
     QList<QStandardItem*> itemList;
-    for (int i = startColumn; i < columnsToDraw; ++i) {
+    for (int i = 0; i < startColumn-1; ++i) {
+        itemList.append(new QStandardItem);
+    }
+    for (int i = startColumn; i < startColumn + columnsToDraw; ++i) {
       QStandardItem* item = new QStandardItem();
       if (!m_skipZero || !gridRow.at(i).isZero()) {
         double value = gridRow.at(i).toDouble();
