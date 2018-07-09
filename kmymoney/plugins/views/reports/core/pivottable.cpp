@@ -1019,7 +1019,7 @@ void PivotTable::convertToBaseCurrency()
             else
               it_row.value()[rowType][column] = PivotCell(value.convert(fraction));
 
-            DEBUG_OUTPUT_IF(conversionfactor != MyMoneyMoney::ONE , QString("Factor of %1, value was %2, now %3").arg(conversionfactor).arg(DEBUG_SENSITIVE(oldval)).arg(DEBUG_SENSITIVE(it_row.value()[rowType][column].toDouble())));
+            DEBUG_OUTPUT_IF(conversionfactor != MyMoneyMoney::ONE , QString("Factor of %1, value was %2, now %3").arg(conversionfactor.toDouble()).arg(DEBUG_SENSITIVE(oldval.toDouble())).arg(DEBUG_SENSITIVE(it_row.value()[rowType][column].toDouble())));
           }
           ++column;
         }
@@ -1072,7 +1072,7 @@ void PivotTable::convertToDeepCurrency()
             it_row.value()[ePrice][column] = PivotCell(priceValue.convert(10000));
           }
 
-          DEBUG_OUTPUT_IF(conversionfactor != MyMoneyMoney::ONE , QString("Factor of %1, value was %2, now %3").arg(conversionfactor).arg(DEBUG_SENSITIVE(oldval)).arg(DEBUG_SENSITIVE(it_row.value()[eActual][column].toDouble())));
+          DEBUG_OUTPUT_IF(conversionfactor != MyMoneyMoney::ONE , QString("Factor of %1, value was %2, now %3").arg(conversionfactor.toDouble()).arg(DEBUG_SENSITIVE(oldval.toDouble())).arg(DEBUG_SENSITIVE(it_row.value()[eActual][column].toDouble())));
 
           ++column;
         }

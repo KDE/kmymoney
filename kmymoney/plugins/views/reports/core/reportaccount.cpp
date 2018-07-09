@@ -21,6 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDate>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 // This is just needed for i18n().  Once I figure out how to handle i18n
@@ -114,13 +116,13 @@ MyMoneyMoney ReportAccount::deepCurrencyPrice(const QDate& date, bool exactDate)
       DEBUG_OUTPUT(QString("Converting under %1 to deep %2, price on %3 is %4")
                    .arg(undersecurity.name())
                    .arg(file->security(undersecurity.tradingCurrency()).name())
-                   .arg(date.toString())
+                   .arg(date.toString(Qt::ISODate))
                    .arg(result.toDouble()));
     } else {
       DEBUG_OUTPUT(QString("No price to convert under %1 to deep %2 on %3")
                    .arg(undersecurity.name())
                    .arg(file->security(undersecurity.tradingCurrency()).name())
-                   .arg(date.toString()));
+                   .arg(date.toString(Qt::ISODate)));
       result = MyMoneyMoney();
     }
   }
