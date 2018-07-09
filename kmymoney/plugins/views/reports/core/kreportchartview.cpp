@@ -636,14 +636,14 @@ void KReportChartView::slotNeedUpdate()
 int KReportChartView::drawPivotGridRow(int rowNum, const PivotGridRow& gridRow, const QString& legendText, const int startColumn, const int columnsToDraw, const int precision)
 {
   // Columns
-  QString toolTip = QString(QLatin1Literal("<h2>%1</h2><strong>%2</strong><br>")).arg(legendText);
-  bool isToolTip = !legendText.isEmpty();
+  const QString toolTip = QStringLiteral("<h2>%1</h2><strong>%2</strong><br>");
+  const bool isToolTip = !legendText.isEmpty();
   if (seriesTotals()) {
     QStandardItem* item = new QStandardItem();
     double value = gridRow.m_total.toDouble();
     item->setData(QVariant(value), Qt::DisplayRole);
     if (isToolTip)
-      item->setToolTip(toolTip.arg(value, 0, 'f', precision));
+      item->setToolTip(toolTip.arg(legendText).arg(value, 0, 'f', precision));
 
     //set the cell value
     if (accountSeries()) {
@@ -662,7 +662,7 @@ int KReportChartView::drawPivotGridRow(int rowNum, const PivotGridRow& gridRow, 
         double value = gridRow.at(i).toDouble();
         item->setData(QVariant(value), Qt::DisplayRole);
         if (isToolTip)
-          item->setToolTip(toolTip.arg(value, 0, 'f', precision));
+          item->setToolTip(toolTip.arg(legendText).arg(value, 0, 'f', precision));
       }
       itemList.append(item);
     }
