@@ -133,7 +133,7 @@ if("${LibAlkimia_FOUND}" AND NOT "${LIBALKIMIA_LIBRARIES}")
   set(LIBALKIMIA_LIBRARIES Alkimia::alkimia)
 endif()
 # alkimia 4.3
-if(${LIBALKIMIA_FOUND} AND NOT "${LIBALKIMIA_LIBRARIES}")
+if("${LIBALKIMIA_FOUND}" AND NOT "${LIBALKIMIA_LIBRARIES}")
     set(LIBALKIMIA_LIBRARIES alkimia)
 endif()
 # make sure we have the matching version of LibAlkimia (not too new)
