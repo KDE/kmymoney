@@ -45,7 +45,6 @@
 #include <KChartCartesianAxis>
 #include <KChartFrameAttributes>
 #include "kmymoneysettings.h"
-#include <kbalanceaxis.h>
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneyenums.h"
@@ -164,7 +163,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       xAxis->setRulerAttributes(xAxisRulerAttr);
 
       //set-up y axis
-      KBalanceAxis *yAxis = new KBalanceAxis();
+      KChart::CartesianAxis *yAxis = new KChart::CartesianAxis;
       yAxis->setPosition(CartesianAxis::Left);
 
       if (config.isIncludingPrice())

@@ -11,7 +11,6 @@ set (libreports_a_SOURCES
   pivottable.cpp
   querytable.cpp
   reporttable.cpp
-  kbalanceaxis.cpp
 )
 
 add_library(reports STATIC ${libreports_a_SOURCES})
