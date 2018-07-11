@@ -350,9 +350,6 @@ void KGlobalLedgerView::clear()
   // setup header font
   QFont font = KMyMoneyGlobalSettings::listHeaderFont();
   QFontMetrics fm(font);
-  int height = fm.lineSpacing() + 6;
-  m_register->horizontalHeader()->setMinimumHeight(height);
-  m_register->horizontalHeader()->setMaximumHeight(height);
   m_register->horizontalHeader()->setFont(font);
 
   // setup cell font
