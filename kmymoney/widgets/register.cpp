@@ -1235,10 +1235,9 @@ int Register::minimumColumnWidth(int col)
           break;
         }
       }
-      if (w < minWidth) {
-        w = minWidth;
-        break;
-      }
+    }
+    if (minWidth && w < minWidth) {
+      w = minWidth;
     }
   }
 
