@@ -503,7 +503,12 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
     // This simple comparison is possible because the strings are equal if no temporary file was created.
     // If a temporary file was created, it is made in a way that the name is definitely different. So no
     // symlinks etc. have to be evaluated.
-    if (!QFile::remove(localFile) || !QFile::rename(writeFile, localFile))
+
+    // on Windows QTemporaryFile does not release file handle even after close()
+    // so QFile::rename(writeFile, localFile) will fail since Windows does not allow moving files in use
+    // as a workaround QFile::copy is used instead of QFile::rename below
+    // writeFile (i.e. tmpFile) will be deleted by QTemporaryFile dtor when it falls out of scope
+    if (!QFile::remove(localFile) || !QFile::copy(writeFile, localFile))
       throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while writing to '%1'").arg(localFile));
   }
   QFile::setPermissions(localFile, QFileDevice::ReadUser | QFileDevice::WriteUser);
