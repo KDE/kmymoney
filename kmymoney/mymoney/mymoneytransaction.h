@@ -65,12 +65,6 @@ public:
   MyMoneyTransaction();
   explicit MyMoneyTransaction(const QString &id);
 
-  /**
-    * @param node reference to QDomNode
-    * @param forceId see MyMoneyObject(const QDomElement&, const bool)
-    */
-  explicit MyMoneyTransaction(const QDomElement& node, const bool forceId = true);
-
   MyMoneyTransaction(const QString& id,
                      const MyMoneyTransaction& other);
 

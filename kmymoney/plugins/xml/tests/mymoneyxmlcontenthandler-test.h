@@ -37,6 +37,9 @@ private Q_SLOTS:
   void readTransaction();
   void readTransactionEx();
   void writeTransaction();
+  void readSplit();
+  void writeSplit();
+  void testReplaceIDinSplit();
   void readAccount();
   void writeAccount();
   void readWritePayee();

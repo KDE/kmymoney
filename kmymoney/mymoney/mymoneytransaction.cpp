@@ -60,48 +60,6 @@ MyMoneyTransaction::MyMoneyTransaction(const QString &id) :
   d->m_postDate = QDate();
 }
 
-MyMoneyTransaction::MyMoneyTransaction(const QDomElement& node, const bool forceId) :
-    MyMoneyObject(*new MyMoneyTransactionPrivate, node, forceId)
-{
-  Q_D(MyMoneyTransaction);
-  if (nodeNames[nnTransaction] != node.tagName())
-    throw MYMONEYEXCEPTION_CSTRING("Node was not TRANSACTION");
-
-  d->m_nextSplitID = 1;
-
-  d->m_postDate = MyMoneyUtils::stringToDate(node.attribute(d->getAttrName(Transaction::Attribute::PostDate)));
-  d->m_entryDate = MyMoneyUtils::stringToDate(node.attribute(d->getAttrName(Transaction::Attribute::EntryDate)));
-  d->m_bankID = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Transaction::Attribute::BankID)));
-  d->m_memo = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Transaction::Attribute::Memo)));
-  d->m_commodity = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Transaction::Attribute::Commodity)));
-
-  QDomNode child = node.firstChild();
-  while (!child.isNull() && child.isElement()) {
-    QDomElement c = child.toElement();
-    if (c.tagName() == d->getElName(Transaction::Element::Splits)) {
-
-      // Process any split information found inside the transaction entry.
-      QDomNodeList nodeList = c.elementsByTagName(d->getElName(Transaction::Element::Split));
-      for (int i = 0; i < nodeList.count(); ++i) {
-        MyMoneySplit s(nodeList.item(i).toElement());
-        if (!d->m_bankID.isEmpty())
-          s.setBankID(d->m_bankID);
-        if (!s.accountId().isEmpty())
-          addSplit(s);
-        else
-          qDebug("Dropped split because it did not have an account id");
-      }
-
-    } else if (c.tagName() == nodeNames[nnKeyValuePairs]) {
-      MyMoneyKeyValueContainer kvp(c);
-      setPairs(kvp.pairs());
-    }
-
-    child = child.nextSibling();
-  }
-  d->m_bankID.clear();
-}
-
 MyMoneyTransaction::MyMoneyTransaction(const MyMoneyTransaction& other) :
   MyMoneyObject(*new MyMoneyTransactionPrivate(*other.d_func()), other.id()),
   MyMoneyKeyValueContainer(other)

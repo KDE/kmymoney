@@ -29,6 +29,8 @@ private Q_SLOTS:
   void keyValuePairAttributeNames();
   void transactionElementNames();
   void transactionAttributeNames();
+  void splitElementNames();
+  void splitAttributeNames();
   void accountElementNames();
   void accountAttributeNames();
   void payeeElementNames();

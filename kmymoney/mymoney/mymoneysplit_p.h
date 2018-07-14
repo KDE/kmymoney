@@ -37,7 +37,9 @@
 
 #include "mymoneyobject_p.h"
 #include "mymoneymoney.h"
+#include "mymoneytransaction.h"
 #include "mymoneyenums.h"
+
 namespace eMyMoney
 {
   namespace Split
@@ -78,6 +80,11 @@ class MyMoneySplitPrivate : public MyMoneyObjectPrivate
 {
 
 public:
+  MyMoneySplitPrivate() :
+    m_reconcileFlag(eMyMoney::Split::State::NotReconciled),
+    m_isMatched(false)
+  {
+  }
 
   static QString getElName(const Split::Element el)
   {
@@ -196,6 +203,10 @@ public:
     * object to maintain this member variable.
     */
   QString        m_transactionId;
+
+  MyMoneyTransaction m_matchedTransaction;
+  bool m_isMatched;
+
 };
 
 #endif

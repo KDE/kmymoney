@@ -44,12 +44,7 @@ private Q_SLOTS:
   void testSetValue();
   void testSetAction();
   void testIsAutoCalc();
-  void testWriteXML();
-  void testReadXML();
-  void testReplaceId();
   void testUnaryMinus();
-  void testElementNames();
-  void testAttributeNames();
 };
 
 #endif

@@ -110,6 +110,7 @@ namespace test { void writeRCFtoXMLDoc(const MyMoneyReport& filter, QDomDocument
 class MyMoneyXmlContentHandler : public QXmlContentHandler
 {
   friend class MyMoneyXmlContentHandlerTest;
+  friend class MyMoneyStorageXML;
   friend bool test::readRCFfromXMLDoc(QList<MyMoneyReport>& list, QDomDocument* doc);
   friend void test::writeRCFtoXMLDoc(const MyMoneyReport& filter, QDomDocument* doc);
 
@@ -148,8 +149,13 @@ private:
   QDomElement        m_currNode;
   QString            m_errMsg;
 
+  static void writeBaseXML(const QString &id, QDomDocument &document, QDomElement &el);
   static void addToKeyValueContainer(MyMoneyKeyValueContainer &container, const QDomElement &node);
-  static MyMoneyTransaction readTransaction(const QDomElement &node);
+  static void writeKeyValueContainer(const MyMoneyKeyValueContainer &container, QDomDocument &document, QDomElement &parent);
+  static MyMoneyTransaction readTransaction(const QDomElement &node, bool assignEntryDateIfEmpty = true);
+  static void writeTransaction(const MyMoneyTransaction &transaction, QDomDocument &document, QDomElement &parent);
+  static MyMoneySplit readSplit(const QDomElement &node);
+  static void writeSplit(const MyMoneySplit &_split, QDomDocument &document, QDomElement &parent);
   static MyMoneyAccount readAccount(const QDomElement &node);
   static MyMoneyPayee readPayee(const QDomElement &node);
   static MyMoneyTag readTag(const QDomElement &node);
@@ -468,6 +474,13 @@ QString MyMoneyXmlContentHandler::errorString() const
   return m_errMsg;
 }
 
+void MyMoneyXmlContentHandler::writeBaseXML(const QString &id, QDomDocument &document, QDomElement &el)
+{
+  Q_UNUSED(document);
+
+  el.setAttribute(QStringLiteral("id"), id);
+}
+
 void MyMoneyXmlContentHandler::addToKeyValueContainer(MyMoneyKeyValueContainer &container, const QDomElement &node)
 {
   if (!node.isNull()) {
@@ -484,7 +497,24 @@ void MyMoneyXmlContentHandler::addToKeyValueContainer(MyMoneyKeyValueContainer &
   }
 }
 
-MyMoneyTransaction MyMoneyXmlContentHandler::readTransaction(const QDomElement &node)
+void MyMoneyXmlContentHandler::writeKeyValueContainer(const MyMoneyKeyValueContainer &container, QDomDocument &document, QDomElement &parent)
+{
+  const auto pairs = container.pairs();
+  if (!pairs.isEmpty()) {
+    auto el = document.createElement(nodeName(Node::KeyValuePairs));
+
+    for (auto it = pairs.cbegin(); it != pairs.cend(); ++it) {
+      auto pairElement = document.createElement(elementName(Element::KVP::Pair));
+      pairElement.setAttribute(attributeName(Attribute::KVP::Key), it.key());
+      pairElement.setAttribute(attributeName(Attribute::KVP::Value), it.value());
+      el.appendChild(pairElement);
+    }
+
+    parent.appendChild(el);
+  }
+}
+
+MyMoneyTransaction MyMoneyXmlContentHandler::readTransaction(const QDomElement &node, bool assignEntryDateIfEmpty)
 {
   if (nodeName(Node::Transaction) != node.tagName())
     throw MYMONEYEXCEPTION_CSTRING("Node was not TRANSACTION");
@@ -494,30 +524,37 @@ MyMoneyTransaction MyMoneyXmlContentHandler::readTransaction(const QDomElement &
   //  d->m_nextSplitID = 1;
 
   transaction.setPostDate(QDate::fromString(node.attribute(attributeName(Attribute::Transaction::PostDate)), Qt::ISODate));
-  transaction.setEntryDate(QDate::fromString(node.attribute(attributeName(Attribute::Transaction::EntryDate)),Qt::ISODate));
+  auto entryDate = QDate::fromString(node.attribute(attributeName(Attribute::Transaction::EntryDate)),Qt::ISODate);
+  if (!entryDate.isValid() && assignEntryDateIfEmpty)
+    entryDate = QDate::currentDate();
+  transaction.setEntryDate(entryDate);
   transaction.setBankID(node.attribute(attributeName(Attribute::Transaction::BankID)));
   transaction.setMemo(node.attribute(attributeName(Attribute::Transaction::Memo)));
   transaction.setCommodity(node.attribute(attributeName(Attribute::Transaction::Commodity)));
 
   QDomNode child = node.firstChild();
+  auto transactionID = transaction.id();
   while (!child.isNull() && child.isElement()) {
     QDomElement c = child.toElement();
     if (c.tagName() == elementName(Element::Transaction::Splits)) {
 
       // Process any split information found inside the transaction entry.
       QDomNodeList nodeList = c.elementsByTagName(elementName(Element::Transaction::Split));
-      for (int i = 0; i < nodeList.count(); ++i) {
-        MyMoneySplit s(nodeList.item(i).toElement());
+      for (auto i = 0; i < nodeList.count(); ++i) {
+        auto s = readSplit(nodeList.item(i).toElement());
+
         if (!transaction.bankID().isEmpty())
           s.setBankID(transaction.bankID());
         if (!s.accountId().isEmpty())
           transaction.addSplit(s);
         else
           qDebug("Dropped split because it did not have an account id");
+
+        s.setTransactionId(transactionID);
       }
 
     } else if (c.tagName() == nodeName(Node::KeyValuePairs)) {
-      addToKeyValueContainer(transaction, c.toElement());
+      addToKeyValueContainer(transaction, c.toElement());         
     }
 
     child = child.nextSibling();
@@ -525,6 +562,118 @@ MyMoneyTransaction MyMoneyXmlContentHandler::readTransaction(const QDomElement &
   transaction.setBankID(QString());
 
   return transaction;
+}
+
+void MyMoneyXmlContentHandler::writeTransaction(const MyMoneyTransaction &transaction, QDomDocument &document, QDomElement &parent)
+{
+  auto el = document.createElement(nodeName(Node::Transaction));
+
+  writeBaseXML(transaction.id(), document, el);
+  el.setAttribute(attributeName(Attribute::Transaction::PostDate), transaction.postDate().toString(Qt::ISODate));
+  el.setAttribute(attributeName(Attribute::Transaction::Memo), transaction.memo());
+  el.setAttribute(attributeName(Attribute::Transaction::EntryDate), transaction.entryDate().toString(Qt::ISODate));
+  el.setAttribute(attributeName(Attribute::Transaction::Commodity), transaction.commodity());
+
+  auto splitsElement = document.createElement(elementName(Element::Transaction::Splits));
+
+  for (const auto &split : transaction.splits())
+    writeSplit(split, document, splitsElement);
+  el.appendChild(splitsElement);
+
+  writeKeyValueContainer(transaction, document, el);
+
+  parent.appendChild(el);
+}
+
+MyMoneySplit MyMoneyXmlContentHandler::readSplit(const QDomElement &node)
+{
+  if (nodeName(Node::Split) != node.tagName())
+    throw MYMONEYEXCEPTION_CSTRING("Node was not SPLIT");
+
+  MyMoneySplit split/*(node.attribute(attributeName(Attribute::Split::ID)))*/;
+
+  addToKeyValueContainer(split, node.elementsByTagName(nodeName(Node::KeyValuePairs)).item(0).toElement());
+
+  split.setPayeeId(node.attribute(attributeName(Attribute::Split::Payee)));
+
+  QList<QString> tagList;
+  QDomNodeList nodeList = node.elementsByTagName(elementName(Element::Split::Tag));
+  for (auto i = 0; i < nodeList.count(); ++i)
+    tagList << nodeList.item(i).toElement().attribute(attributeName(Attribute::Split::ID));
+  split.setTagIdList(tagList);
+
+  split.setReconcileDate(QDate::fromString(node.attribute(attributeName(Attribute::Split::ReconcileDate)), Qt::ISODate));
+  split.setAction(node.attribute(attributeName(Attribute::Split::Action)));
+  split.setReconcileFlag(static_cast<eMyMoney::Split::State>(node.attribute(attributeName(Attribute::Split::ReconcileFlag)).toInt()));
+  split.setMemo(node.attribute(attributeName(Attribute::Split::Memo)));
+  split.setValue(MyMoneyMoney(node.attribute(attributeName(Attribute::Split::Value))));
+  split.setShares(MyMoneyMoney(node.attribute(attributeName(Attribute::Split::Shares))));
+  split.setPrice(MyMoneyMoney(node.attribute(attributeName(Attribute::Split::Price))));
+  split.setAccountId(node.attribute(attributeName(Attribute::Split::Account)));
+  split.setCostCenterId(node.attribute(attributeName(Attribute::Split::CostCenter)));
+  split.setNumber(node.attribute(attributeName(Attribute::Split::Number)));
+  split.setBankID(node.attribute(attributeName(Attribute::Split::BankID)));
+
+  auto xml = split.value(attributeName(Attribute::Split::KMMatchedTx));
+  if (!xml.isEmpty()) {
+    xml.replace(QLatin1String("&lt;"), QLatin1String("<"));
+    QDomDocument docMatchedTransaction;
+    QDomElement nodeMatchedTransaction;
+    docMatchedTransaction.setContent(xml);
+    nodeMatchedTransaction = docMatchedTransaction.documentElement().firstChild().toElement();
+    auto t = MyMoneyXmlContentHandler::readTransaction(nodeMatchedTransaction);
+    split.addMatch(t);
+  }
+
+  return split;
+}
+
+void MyMoneyXmlContentHandler::writeSplit(const MyMoneySplit &_split, QDomDocument &document, QDomElement &parent)
+{
+  auto el = document.createElement(elementName(Element::Split::Split));
+
+  auto split = _split; // we need to convert matched transaction to kvp pair
+  writeBaseXML(split.id(), document, el);
+
+  el.setAttribute(attributeName(Attribute::Split::Payee), split.payeeId());
+  //el.setAttribute(getAttrName(Split::Attribute::Tag), m_tag);
+  el.setAttribute(attributeName(Attribute::Split::ReconcileDate), split.reconcileDate().toString(Qt::ISODate));
+  el.setAttribute(attributeName(Attribute::Split::Action), split.action());
+  el.setAttribute(attributeName(Attribute::Split::ReconcileFlag), (int)split.reconcileFlag());
+  el.setAttribute(attributeName(Attribute::Split::Value), split.value().toString());
+  el.setAttribute(attributeName(Attribute::Split::Shares), split.shares().toString());
+  if (!split.price().isZero())
+    el.setAttribute(attributeName(Attribute::Split::Price), split.price().toString());
+  el.setAttribute(attributeName(Attribute::Split::Memo), split.memo());
+  // No need to write the split id as it will be re-assigned when the file is read
+  // el.setAttribute(getAttrName(Split::Attribute::ID), split.id());
+  el.setAttribute(attributeName(Attribute::Split::Account), split.accountId());
+  el.setAttribute(attributeName(Attribute::Split::Number), split.number());
+  el.setAttribute(attributeName(Attribute::Split::BankID), split.bankID());
+  if(!split.costCenterId().isEmpty())
+    el.setAttribute(attributeName(Attribute::Split::CostCenter), split.costCenterId());
+  const auto tagIdList = split.tagIdList();
+  for (auto i = 0; i < tagIdList.count(); ++i) {
+    QDomElement sel = document.createElement(elementName(Element::Split::Tag));
+    sel.setAttribute(attributeName(Attribute::Split::ID), tagIdList[i]);
+    el.appendChild(sel);
+  }
+
+  if (split.isMatched()) {
+    QDomDocument docMatchedTransaction(elementName(Element::Split::Match));
+    QDomElement elMatchedTransaction = docMatchedTransaction.createElement(elementName(Element::Split::Container));
+    docMatchedTransaction.appendChild(elMatchedTransaction);
+    writeTransaction(split.matchedTransaction(), docMatchedTransaction, elMatchedTransaction);
+    auto xml = docMatchedTransaction.toString();
+    xml.replace(QLatin1String("<"), QLatin1String("&lt;"));
+    split.setValue(attributeName(Attribute::Split::KMMatchedTx), xml);
+  } else {
+    split.deletePair(attributeName(Attribute::Split::KMMatchedTx));
+  }
+
+  writeKeyValueContainer(split, document, el);
+
+  parent.appendChild(el);
 }
 
 MyMoneyAccount MyMoneyXmlContentHandler::readAccount(const QDomElement &node)
@@ -1045,7 +1194,7 @@ MyMoneySchedule MyMoneyXmlContentHandler::readSchedule(const QDomElement &node)
   if (nodeList.count() == 0)
     throw MYMONEYEXCEPTION_CSTRING("SCHEDULED_TX has no TRANSACTION node");
 
-  auto transaction = readTransaction(nodeList.item(0).toElement());
+  auto transaction = readTransaction(nodeList.item(0).toElement(), false);
 
   // some old versions did not remove the entry date and post date fields
   // in the schedule. So if this is the case, we deal with a very old transaction
@@ -1481,12 +1630,10 @@ void MyMoneyStorageXML::writeTransactions(QDomElement& transactions)
   const auto list = m_storage->transactionList(filter);
   transactions.setAttribute(attributeName(Attribute::General::Count), list.count());
 
-  QList<MyMoneyTransaction>::ConstIterator it;
-
   signalProgress(0, list.count(), i18n("Saving transactions..."));
 
   int i = 0;
-  for (it = list.constBegin(); it != list.constEnd(); ++it) {
+  for (auto it = list.constBegin(); it != list.constEnd(); ++it) {
     writeTransaction(transactions, *it);
     signalProgress(++i, 0);
   }
@@ -1494,7 +1641,7 @@ void MyMoneyStorageXML::writeTransactions(QDomElement& transactions)
 
 void MyMoneyStorageXML::writeTransaction(QDomElement& transaction, const MyMoneyTransaction& tx)
 {
-  tx.writeXML(*m_doc, transaction);
+  MyMoneyXmlContentHandler::writeTransaction(tx, *m_doc, transaction);
 }
 
 void MyMoneyStorageXML::writeSchedules(QDomElement& scheduled)

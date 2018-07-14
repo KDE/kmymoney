@@ -102,6 +102,7 @@ enum class Node {
   Tag,
   Account,
   Transaction,
+  Split,
   ScheduleTX,
   Security,
   Currency,
@@ -127,6 +128,14 @@ namespace Element {
   enum class Transaction {
     Split = 0,
     Splits
+  };
+
+  enum class Split {
+    Split = 0,
+    Tag,
+    Match,
+    Container,
+    KeyValuePairs
   };
 
   enum class Account {
@@ -209,6 +218,26 @@ namespace Attribute {
     EntryDate,
     Commodity,
     BankID,
+    // insert new entries above this line
+    LastAttribute
+  };
+
+  enum class Split {
+    ID = 0,
+    BankID,
+    Account,
+    Payee,
+    Tag,
+    Number,
+    Action,
+    Value,
+    Shares,
+    Price,
+    Memo,
+    CostCenter,
+    ReconcileDate,
+    ReconcileFlag,
+    KMMatchedTx,
     // insert new entries above this line
     LastAttribute
   };
@@ -380,6 +409,9 @@ QString attributeName(Attribute::General attributeID);
 
 QString elementName(Element::Transaction elementID);
 QString attributeName(Attribute::Transaction attributeID);
+
+QString elementName(Element::Split elementID);
+QString attributeName(Attribute::Split attributeID);
 
 QString elementName(Element::Account elementID);
 QString attributeName(Attribute::Account attributeID);

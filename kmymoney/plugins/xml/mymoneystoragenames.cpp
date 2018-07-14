@@ -69,6 +69,7 @@ QString nodeName(Node nodeID)
     {Node::Tag,           QStringLiteral("TAG")},
     {Node::Account,       QStringLiteral("ACCOUNT")},
     {Node::Transaction,   QStringLiteral("TRANSACTION")},
+    {Node::Split,         QStringLiteral("SPLIT")},
     {Node::ScheduleTX,    QStringLiteral("SCHEDULED_TX")},
     {Node::Security,      QStringLiteral("SECURITY")},
     {Node::Currency,      QStringLiteral("CURRENCY")},
@@ -168,6 +169,40 @@ QString attributeName(Attribute::Transaction attributeID)
     {Attribute::Transaction::EntryDate,  QStringLiteral("entrydate")},
     {Attribute::Transaction::Commodity,  QStringLiteral("commodity")},
     {Attribute::Transaction::BankID,     QStringLiteral("bankid")},
+  };
+  return attributeNames.value(attributeID);
+}
+
+QString elementName(Element::Split elementID)
+{
+  static const QMap<Element::Split, QString> elementNames {
+    {Element::Split::Split,          QStringLiteral("SPLIT")},
+    {Element::Split::Tag,            QStringLiteral("TAG")},
+    {Element::Split::Match,          QStringLiteral("MATCH")},
+    {Element::Split::Container,      QStringLiteral("CONTAINER")},
+    {Element::Split::KeyValuePairs,  QStringLiteral("KEYVALUEPAIRS")}
+  };
+  return elementNames.value(elementID);
+}
+
+QString attributeName(Attribute::Split attributeID)
+{
+  static const QMap<Attribute::Split, QString> attributeNames {
+    {Attribute::Split::ID,             QStringLiteral("id")},
+    {Attribute::Split::BankID,         QStringLiteral("bankid")},
+    {Attribute::Split::Account,        QStringLiteral("account")},
+    {Attribute::Split::Payee,          QStringLiteral("payee")},
+    {Attribute::Split::Tag,            QStringLiteral("tag")},
+    {Attribute::Split::Number,         QStringLiteral("number")},
+    {Attribute::Split::Action,         QStringLiteral("action")},
+    {Attribute::Split::Value,          QStringLiteral("value")},
+    {Attribute::Split::Shares,         QStringLiteral("shares")},
+    {Attribute::Split::Price,          QStringLiteral("price")},
+    {Attribute::Split::Memo,           QStringLiteral("memo")},
+    {Attribute::Split::CostCenter,     QStringLiteral("costcenter")},
+    {Attribute::Split::ReconcileDate,  QStringLiteral("reconciledate")},
+    {Attribute::Split::ReconcileFlag,  QStringLiteral("reconcileflag")},
+    {Attribute::Split::KMMatchedTx,    QStringLiteral("kmm-matched-tx")}
   };
   return attributeNames.value(attributeID);
 }

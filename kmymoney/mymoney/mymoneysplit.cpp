@@ -40,6 +40,11 @@
 MyMoneySplit::MyMoneySplit() :
   MyMoneyObject(*new MyMoneySplitPrivate)
 {
+}
+
+MyMoneySplit::MyMoneySplit(const QString &id) :
+    MyMoneyObject(*new MyMoneySplitPrivate, id)
+{
   Q_D(MyMoneySplit);
   d->m_reconcileFlag = eMyMoney::Split::State::NotReconciled;
 }
@@ -422,45 +427,31 @@ bool MyMoneySplit::hasReferenceTo(const QString& id) const
 bool MyMoneySplit::isMatched() const
 {
   Q_D(const MyMoneySplit);
-  return !(value(d->getAttrName(Split::Attribute::KMMatchedTx)).isEmpty());
+  return d->m_isMatched;
 }
 
 void MyMoneySplit::addMatch(const MyMoneyTransaction& _t)
 {
   Q_D(MyMoneySplit);
   //  now we allow matching of two manual transactions
-  if (!isMatched()) {
-    MyMoneyTransaction t(_t);
-    t.clearId();
-    QDomDocument doc(d->getElName(Split::Element::Match));
-    QDomElement el = doc.createElement(d->getElName(Split::Element::Container));
-    doc.appendChild(el);
-    t.writeXML(doc, el);
-    QString xml = doc.toString();
-    xml.replace('<', "&lt;");
-    setValue(d->getAttrName(Split::Attribute::KMMatchedTx), xml);
-  }
+  d->m_matchedTransaction = _t;
+  d->m_matchedTransaction.clearId();
+  d->m_isMatched = true;
 }
 
 void MyMoneySplit::removeMatch()
 {
   Q_D(MyMoneySplit);
-  deletePair(d->getAttrName(Split::Attribute::KMMatchedTx));
+  d->m_matchedTransaction = MyMoneyTransaction();
+  d->m_isMatched = false;
 }
 
 MyMoneyTransaction MyMoneySplit::matchedTransaction() const
 {
   Q_D(const MyMoneySplit);
-  auto xml = value(d->getAttrName(Split::Attribute::KMMatchedTx));
-  if (!xml.isEmpty()) {
-    xml.replace("&lt;", "<");
-    QDomDocument doc;
-    QDomElement node;
-    doc.setContent(xml);
-    node = doc.documentElement().firstChild().toElement();
-    MyMoneyTransaction t(node, false);
-    return t;
-  }
+  if (d->m_isMatched)
+    return d->m_matchedTransaction;
+
   return MyMoneyTransaction();
 }
 

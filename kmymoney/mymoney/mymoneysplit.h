@@ -65,6 +65,8 @@ class KMM_MYMONEY_EXPORT MyMoneySplit : public MyMoneyObject, public MyMoneyKeyV
 public:
 
   MyMoneySplit();
+  explicit MyMoneySplit(const QString &id);
+
   explicit MyMoneySplit(const QDomElement& node);
   MyMoneySplit(const QString& id,
                const MyMoneySplit& other);

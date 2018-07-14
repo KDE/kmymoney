@@ -62,6 +62,26 @@ void MyMoneyStorageNamesTest::transactionAttributeNames()
   }
 }
 
+void MyMoneyStorageNamesTest::splitElementNames()
+{
+  for (auto i = (int)Element::Split::Split; i <= (int)Element::Split::KeyValuePairs; ++i) {
+    auto isEmpty = elementName(static_cast<Element::Split>(i)).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty element's name " << i;
+    QVERIFY(!isEmpty);
+  }
+}
+
+void MyMoneyStorageNamesTest::splitAttributeNames()
+{
+  for (auto i = (int)Attribute::Split::ID; i < (int)Attribute::Split::LastAttribute; ++i) {
+    auto isEmpty = attributeName(static_cast<Attribute::Split>(i)).isEmpty();
+    if (isEmpty)
+      qWarning() << "Empty attribute's name " << i;
+    QVERIFY(!isEmpty);
+  }
+}
+
 void MyMoneyStorageNamesTest::accountElementNames()
 {
   for (auto i = (int)Element::Account::SubAccount; i <= (int)Element::Account::OnlineBanking; ++i) {
