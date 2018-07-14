@@ -21,7 +21,7 @@
 #include <QFile>
 
 // uses helper functions from reports tests
-#include "views/reports/core/tests/reportstestcommon.h"
+#include "tests/testutilities.h"
 using namespace test;
 
 #include "mymoneyinstitution.h"

@@ -23,7 +23,7 @@
 
 #include <KLocalizedString>
 
-#include "reportstestcommon.h"
+#include "tests/testutilities.h"
 #include "querytable.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
@@ -41,6 +41,36 @@ using namespace reports;
 using namespace test;
 
 QTEST_GUILESS_MAIN(QueryTableTest)
+
+void writeTabletoHTML(const QueryTable& table, const QString& _filename = QString())
+{
+  static unsigned filenumber = 1;
+  QString filename = _filename;
+  if (filename.isEmpty()) {
+    filename = QString::fromLatin1("report-%1.html").arg((filenumber, 2, 10,QLatin1Char('0'));
+    ++filenumber;
+  }
+
+  QFile g(filename);
+  g.open(QIODevice::WriteOnly);
+  QTextStream(&g) << table.renderHTML();
+  g.close();
+}
+
+void writeTabletoCSV(const QueryTable& table, const QString& _filename = QString())
+{
+  static unsigned filenumber = 1;
+  QString filename = _filename;
+  if (filename.isEmpty()) {
+    filename = QString::fromLatin1("report-%1.csv").arg((filenumber, 2, 10,QLatin1Char('0'));
+    ++filenumber;
+  }
+
+  QFile g(filename);
+  g.open(QIODevice::WriteOnly);
+  QTextStream(&g) << table.renderCSV();
+  g.close();
+}
 
 void QueryTableTest::setup()
 {

@@ -16,9 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "reportstestcommon.h"
-
-#include "kreportsview-test.h"
+#include "testutilities.h"
 
 #include <QList>
 #include <QFile>
@@ -27,10 +25,7 @@
 #include <QDomElement>
 #include <QDebug>
 
-#include "pivottable.h"
-#include "querytable.h"
-using namespace reports;
-
+#include "mymoneyfile.h"
 #include "mymoneyexception.h"
 #include "mymoneymoney.h"
 #include "mymoneysecurity.h"
@@ -40,6 +35,7 @@ using namespace reports;
 #include "mymoneyreport.h"
 #include "mymoneypayee.h"
 #include "mymoneystatement.h"
+#include "../mymoneystoragexml.cpp"
 
 namespace test
 {
@@ -331,69 +327,6 @@ void writeRCFtoXMLDoc(const MyMoneyReport& filter, QDomDocument* doc)
 
 }
 
-void writeTabletoHTML(const PivotTable& table, const QString& _filename)
-{
-  static unsigned filenumber = 1;
-  QString filename = _filename;
-  if (filename.isEmpty()) {
-    filename = QString("report-%1%2.html").arg((filenumber < 10) ? "0" : "").arg(filenumber);
-    ++filenumber;
-  }
-
-  QFile g(filename);
-  g.open(QIODevice::WriteOnly);
-  QTextStream(&g) << table.renderHTML();
-  g.close();
-
-}
-
-void writeTabletoHTML(const QueryTable& table, const QString& _filename)
-{
-  static unsigned filenumber = 1;
-  QString filename = _filename;
-  if (filename.isEmpty()) {
-    filename = QString("report-%1%2.html").arg((filenumber < 10) ? "0" : "").arg(filenumber);
-    ++filenumber;
-  }
-
-  QFile g(filename);
-  g.open(QIODevice::WriteOnly);
-  QTextStream(&g) << table.renderHTML();
-  g.close();
-}
-
-void writeTabletoCSV(const PivotTable& table, const QString& _filename)
-{
-  static unsigned filenumber = 1;
-  QString filename = _filename;
-  if (filename.isEmpty()) {
-    filename = QString("report-%1%2.csv").arg((filenumber < 10) ? "0" : "").arg(filenumber);
-    ++filenumber;
-  }
-
-  QFile g(filename);
-  g.open(QIODevice::WriteOnly);
-  QTextStream(&g) << table.renderCSV();
-  g.close();
-
-}
-
-void writeTabletoCSV(const QueryTable& table, const QString& _filename)
-{
-  static unsigned filenumber = 1;
-  QString filename = _filename;
-  if (filename.isEmpty()) {
-    filename = QString("qreport-%1%2.csv").arg((filenumber < 10) ? "0" : "").arg(filenumber);
-    ++filenumber;
-  }
-
-  QFile g(filename);
-  g.open(QIODevice::WriteOnly);
-  QTextStream(&g) << table.renderCSV();
-  g.close();
-
-}
-
 void writeRCFtoXML(const MyMoneyReport& filter, const QString& _filename)
 {
   static unsigned filenum = 1;
@@ -432,10 +365,8 @@ bool readRCFfromXMLDoc(QList<MyMoneyReport>& list, QDomDocument* doc)
         result = true;
         QDomNode subchild = child.firstChild();
         while (!subchild.isNull() && subchild.isElement()) {
-          MyMoneyReport filter;
-          if (filter.read(subchild.toElement())) {
-            list += filter;
-          }
+          auto filter = MyMoneyXmlContentHandler::readReport(subchild.toElement());
+          list += filter;
           subchild = subchild.nextSibling();
         }
       }

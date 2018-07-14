@@ -1,14 +1,5 @@
 include(ECMAddTests)
 
-add_library(reports_testcommon STATIC
-  reportstestcommon.cpp
-)
-target_link_libraries(reports_testcommon
-  PUBLIC
-  Qt5::Core
-  reports
-)
-
 set(tests_sources
   chart-test.cpp
   pivotgrid-test.cpp
@@ -22,8 +13,9 @@ ecm_add_tests(${tests_sources}
   LINK_LIBRARIES
     Qt5::Core
     Qt5::Test
+    reports
     kmm_mymoney
-    reports_testcommon
+    kmm_testutilities
 )
 
 add_executable(reports-chart-test chart-test.cpp)

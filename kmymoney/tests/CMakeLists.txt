@@ -9,3 +9,13 @@ ecm_add_tests(${tests_sources}
     Qt5::Test
     kmymoney_common
 )
+
+add_library(kmm_testutilities STATIC
+  testutilities.cpp
+)
+target_link_libraries(kmm_testutilities
+  PUBLIC
+    Qt5::Core
+  PRIVATE
+    mymoneystoragexml
+)

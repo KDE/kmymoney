@@ -20,7 +20,7 @@
 
 #include <QtTest>
 
-#include "reportstestcommon.h"
+#include "tests/testutilities.h"
 
 #include "pivotgrid.h"
 #include "mymoneyinstitution.h"

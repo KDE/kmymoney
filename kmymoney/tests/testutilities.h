@@ -125,10 +125,6 @@ extern void makePrice(const QString& _currencyid, const QDate& _date, const MyMo
 QString makeEquity(const QString& _name, const QString& _symbol);
 extern void makeEquityPrice(const QString& _id, const QDate& _date, const MyMoneyMoney& _price);
 extern void writeRCFtoXMLDoc(const MyMoneyReport& filter, QDomDocument* doc);
-extern void writeTabletoHTML(const reports::PivotTable& table, const QString& _filename = QString());
-extern void writeTabletoHTML(const reports::QueryTable& table, const QString& _filename = QString());
-extern void writeTabletoCSV(const reports::PivotTable& table, const QString& _filename = QString());
-extern void writeTabletoCSV(const reports::QueryTable& table, const QString& _filename = QString());
 extern void writeRCFtoXML(const MyMoneyReport& filter, const QString& _filename = QString());
 extern bool readRCFfromXMLDoc(QList<MyMoneyReport>& list, QDomDocument* doc);
 extern bool readRCFfromXML(QList<MyMoneyReport>& list, const QString& filename);

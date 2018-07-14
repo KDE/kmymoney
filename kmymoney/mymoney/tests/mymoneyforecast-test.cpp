@@ -26,7 +26,7 @@
 #include "mymoneyexception.h"
 
 #include "mymoneystoragedump.h"
-#include "views/reports/core/tests/reportstestcommon.h"
+#include "tests/testutilities.h"
 
 #include "mymoneyinstitution.h"
 #include "mymoneysecurity.h"

@@ -13,7 +13,7 @@ if(ENABLE_SQLSTORAGE)
   add_subdirectory(sql)
 endif()
 
-# if(ENABLE_XMLSTORAGE)
+# if(ENABLE_XMLSTORAGE OR BUILD_TESTING)
   add_subdirectory(xml)
 # endif()
 

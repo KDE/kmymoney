@@ -104,9 +104,14 @@ public:
   }
 };
 
+namespace test { bool readRCFfromXMLDoc(QList<MyMoneyReport>& list, QDomDocument* doc); }
+namespace test { void writeRCFtoXMLDoc(const MyMoneyReport& filter, QDomDocument* doc); }
+
 class MyMoneyXmlContentHandler : public QXmlContentHandler
 {
   friend class MyMoneyXmlContentHandlerTest;
+  friend bool test::readRCFfromXMLDoc(QList<MyMoneyReport>& list, QDomDocument* doc);
+  friend void test::writeRCFtoXMLDoc(const MyMoneyReport& filter, QDomDocument* doc);
 
 public:
   MyMoneyXmlContentHandler(MyMoneyStorageXML* reader);
