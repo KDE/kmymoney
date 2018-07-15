@@ -47,7 +47,7 @@ void writeTabletoHTML(const QueryTable& table, const QString& _filename = QStrin
   static unsigned filenumber = 1;
   QString filename = _filename;
   if (filename.isEmpty()) {
-    filename = QString::fromLatin1("report-%1.html").arg((filenumber, 2, 10,QLatin1Char('0'));
+    filename = QString::fromLatin1("report-%1.html").arg((filenumber, 2, 10,QLatin1Char('0')));
     ++filenumber;
   }
 
@@ -62,7 +62,7 @@ void writeTabletoCSV(const QueryTable& table, const QString& _filename = QString
   static unsigned filenumber = 1;
   QString filename = _filename;
   if (filename.isEmpty()) {
-    filename = QString::fromLatin1("report-%1.csv").arg((filenumber, 2, 10,QLatin1Char('0'));
+    filename = QString::fromLatin1("report-%1.csv").arg((filenumber, 2, 10,QLatin1Char('0')));
     ++filenumber;
   }
 
