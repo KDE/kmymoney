@@ -127,15 +127,14 @@ void KHomeView::slotOpenUrl(const QUrl &url)
   Q_D(KHomeView);
   QString protocol = url.scheme();
   QString view = url.fileName();
-  if (view.isEmpty())
-    return;
+
   QUrlQuery query(url);
   QString id = query.queryItemValue("id");
   QString mode = query.queryItemValue("mode");
 
   const auto file = MyMoneyFile::instance();
 
-  if (protocol == QLatin1String("http")) {
+  if (protocol == QLatin1String("https")) {
     QDesktopServices::openUrl(url);
   } else if (protocol == QLatin1String("mailto")) {
     QDesktopServices::openUrl(url);
