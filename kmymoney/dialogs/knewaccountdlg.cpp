@@ -573,9 +573,9 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   d->m_account = account;
   d->m_categoryEditor = categoryEditor;
   d->m_isEditing = isEditing;
+  d->init();
   if (!title.isEmpty())
     setWindowTitle(title);
-  d->init();
 }
 
 MyMoneyMoney KNewAccountDlg::openingBalance() const
