@@ -36,6 +36,13 @@ set_target_properties(qsqlcipher
                       PROPERTIES
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
+#otherwise "fatal error: 'sqlite3.h' file not found"
+if(CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "Windows")
+  target_include_directories(qsqlcipher
+    PRIVATE
+      ${SQLCIPHER_INCLUDE_DIRS})
+endif()
+
 target_link_libraries(qsqlcipher
   PRIVATE
     sqlcipher

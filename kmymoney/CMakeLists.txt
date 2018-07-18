@@ -123,6 +123,13 @@ if (ENABLE_SQLCIPHER)
     sqlcipher
   )
   add_definitions( -DSQLITE_HAS_CODEC -DSQLITE_TEMP_STORE=2 )
+
+  #otherwise "fatal error: 'sqlite3.h' file not found"
+  if(CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "Windows")
+    target_include_directories(kmymoney
+      PRIVATE
+        ${SQLCIPHER_INCLUDE_DIRS})
+  endif()
 endif()
 
 target_link_libraries(kmymoney
