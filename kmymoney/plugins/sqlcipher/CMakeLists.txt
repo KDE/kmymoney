@@ -45,7 +45,7 @@ endif()
 
 target_link_libraries(qsqlcipher
   PRIVATE
-    sqlcipher
+    ${SQLCIPHER_LIBRARIES}
     Qt5::SqlPrivate
 )
 

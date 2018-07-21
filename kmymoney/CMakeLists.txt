@@ -120,7 +120,7 @@ add_executable( kmymoney ${kmymoney_SRCS} )
 if (ENABLE_SQLCIPHER)
   target_link_libraries(kmymoney
   PRIVATE
-    sqlcipher
+    ${SQLCIPHER_LIBRARIES}
   )
   add_definitions( -DSQLITE_HAS_CODEC -DSQLITE_TEMP_STORE=2 )
 
