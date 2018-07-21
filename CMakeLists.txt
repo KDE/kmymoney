@@ -150,6 +150,10 @@ add_feature_info("SQL Storage" ENABLE_SQLSTORAGE "It allows storing your financi
 cmake_dependent_option(ENABLE_SQLCIPHER "Enable SQLCipher support." ON
                        "SQLCIPHER_FOUND" OFF)
 
+if(SQLCIPHER_FOUND AND (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "Windows"))
+  link_directories(${SQLCIPHER_LIBRARY_DIRS})
+endif(ENABLE_WEBENGINE)
+
 add_feature_info("SQLCipher" ENABLE_SQLCIPHER "It allows encrypting your SQLite3 database.")
 
 cmake_dependent_option(ENABLE_IBANBICDATA "Enable IBAN/BIC data support." OFF
