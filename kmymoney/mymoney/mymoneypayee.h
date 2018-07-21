@@ -102,6 +102,11 @@ public:
   QString reference() const;
   void setReference(const QString& ref);
 
+  bool isMatchingEnabled() const;
+  bool isUsingMatchKey() const;
+  bool isMatchKeyIgnoreCase() const;
+  QString matchKey() const;
+
   /**
    * Get all match data in one call
    *
@@ -154,8 +159,6 @@ public:
   bool operator == (const MyMoneyPayee &) const;
 //  bool operator == (const MyMoneyPayee& lhs, const QString& rhs) const;
   bool operator <(const MyMoneyPayee& right) const;
-
-  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 
   /**
     * This method checks if a reference to the given object exists. It returns,

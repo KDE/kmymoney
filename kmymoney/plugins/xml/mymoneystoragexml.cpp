@@ -32,6 +32,7 @@
 #include <QDomElement>
 #include <QDebug>
 #include <QDate>
+#include <QColor>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -157,16 +158,24 @@ private:
   static MyMoneySplit readSplit(const QDomElement &node);
   static void writeSplit(const MyMoneySplit &_split, QDomDocument &document, QDomElement &parent);
   static MyMoneyAccount readAccount(const QDomElement &node);
+  static void writeAccount(const MyMoneyAccount &account, QDomDocument &document, QDomElement &parent);
   static MyMoneyPayee readPayee(const QDomElement &node);
+  static void writePayee(const MyMoneyPayee &payee, QDomDocument &document, QDomElement &parent);
   static MyMoneyTag readTag(const QDomElement &node);
+  static void writeTag(const MyMoneyTag &tag, QDomDocument &document, QDomElement &parent);
   static MyMoneySecurity readSecurity(const QDomElement &node);
+  static void writeSecurity(const MyMoneySecurity &security, QDomDocument &document, QDomElement &parent);
   static MyMoneyInstitution readInstitution(const QDomElement &node);
+  static void writeInstitution(const MyMoneyInstitution &institution, QDomDocument &document, QDomElement &parent);
   static MyMoneyReport readReport(const QDomElement &node);
   static MyMoneyBudget readBudget(const QDomElement &node);
+  static void writeBudget(const MyMoneyBudget &budget, QDomDocument &document, QDomElement &parent);
   static MyMoneySchedule readSchedule(const QDomElement &node);
   static void writeSchedule(const MyMoneySchedule &schedule, QDomDocument &document, QDomElement &parent);
   static onlineJob readOnlineJob(const QDomElement &node);
+  static void writeOnlineJob(const onlineJob &job, QDomDocument &document, QDomElement &parent);
   static MyMoneyCostCenter readCostCenter(const QDomElement &node);
+  static void writeCostCenter(const MyMoneyCostCenter &costCenter, QDomDocument &document, QDomElement &parent);
 };
 
 MyMoneyXmlContentHandler::MyMoneyXmlContentHandler(MyMoneyStorageXML* reader) :
@@ -555,7 +564,7 @@ MyMoneyTransaction MyMoneyXmlContentHandler::readTransaction(const QDomElement &
       }
 
     } else if (c.tagName() == nodeName(Node::KeyValuePairs)) {
-      addToKeyValueContainer(transaction, c.toElement());         
+      addToKeyValueContainer(transaction, c.toElement());
     }
 
     child = child.nextSibling();
@@ -764,6 +773,61 @@ MyMoneyAccount MyMoneyXmlContentHandler::readAccount(const QDomElement &node)
   return acc;
 }
 
+void MyMoneyXmlContentHandler::writeAccount(const MyMoneyAccount &account, QDomDocument &document, QDomElement &parent)
+{
+  auto el = document.createElement(nodeName(Node::Account));
+
+  writeBaseXML(account.id(), document, el);
+
+  el.setAttribute(attributeName(Attribute::Account::ParentAccount), account.parentAccountId());
+  el.setAttribute(attributeName(Attribute::Account::LastReconciled), MyMoneyUtils::dateToString(account.lastReconciliationDate()));
+  el.setAttribute(attributeName(Attribute::Account::LastModified), MyMoneyUtils::dateToString(account.lastModified()));
+  el.setAttribute(attributeName(Attribute::Account::Institution), account.institutionId());
+  el.setAttribute(attributeName(Attribute::Account::Opened), MyMoneyUtils::dateToString(account.openingDate()));
+  el.setAttribute(attributeName(Attribute::Account::Number), account.number());
+  // el.setAttribute(getAttrName(anOpeningBalance), account.openingBalance().toString());
+  el.setAttribute(attributeName(Attribute::Account::Type), (int)account.accountType());
+  el.setAttribute(attributeName(Attribute::Account::Name), account.name());
+  el.setAttribute(attributeName(Attribute::Account::Description), account.description());
+  if (!account.currencyId().isEmpty())
+    el.setAttribute(attributeName(Attribute::Account::Currency), account.currencyId());
+
+  //Add in subaccount information, if this account has subaccounts.
+  if (account.accountCount()) {
+    QDomElement subAccounts = document.createElement(elementName(Element::Account::SubAccounts));
+    foreach (const auto accountID, account.accountList()) {
+      QDomElement temp = document.createElement(elementName(Element::Account::SubAccount));
+      temp.setAttribute(attributeName(Attribute::Account::ID), accountID);
+      subAccounts.appendChild(temp);
+    }
+
+    el.appendChild(subAccounts);
+  }
+
+  // Write online banking settings
+  auto onlineBankSettingsPairs = account.onlineBankingSettings().pairs();
+  if (onlineBankSettingsPairs.count()) {
+    QDomElement onlinesettings = document.createElement(elementName(Element::Account::OnlineBanking));
+    QMap<QString, QString>::const_iterator it_key = onlineBankSettingsPairs.constBegin();
+    while (it_key != onlineBankSettingsPairs.constEnd()) {
+      onlinesettings.setAttribute(it_key.key(), it_key.value());
+      ++it_key;
+    }
+    el.appendChild(onlinesettings);
+  }
+
+  // FIXME drop the lastStatementDate record from the KVP when it is
+  // not stored there after setLastReconciliationDate() has been changed
+  // See comment there when this will happen
+  // deletePair("lastStatementDate");
+
+
+  //Add in Key-Value Pairs for accounts.
+  writeKeyValueContainer(account, document, el);
+
+  parent.appendChild(el);
+}
+
 MyMoneyPayee MyMoneyXmlContentHandler::readPayee(const QDomElement &node)
 {
   if (nodeName(Node::Payee) != node.tagName())
@@ -806,6 +870,45 @@ MyMoneyPayee MyMoneyXmlContentHandler::readPayee(const QDomElement &node)
   return payee;
 }
 
+void MyMoneyXmlContentHandler::writePayee(const MyMoneyPayee &payee, QDomDocument &document, QDomElement &parent)
+{
+  auto el = document.createElement(nodeName(Node::Payee));
+
+  writeBaseXML(payee.id(), document, el);
+
+  el.setAttribute(attributeName(Attribute::Payee::Name), payee.name());
+  el.setAttribute(attributeName(Attribute::Payee::Reference), payee.reference());
+  el.setAttribute(attributeName(Attribute::Payee::Email), payee.email());
+  if (!payee.notes().isEmpty())
+    el.setAttribute(attributeName(Attribute::Payee::Notes), payee.notes());
+
+  el.setAttribute(attributeName(Attribute::Payee::MatchingEnabled), payee.isMatchingEnabled());
+  if (payee.isMatchingEnabled()) {
+    el.setAttribute(attributeName(Attribute::Payee::UsingMatchKey), payee.isUsingMatchKey());
+    el.setAttribute(attributeName(Attribute::Payee::MatchIgnoreCase), payee.isMatchKeyIgnoreCase());
+    el.setAttribute(attributeName(Attribute::Payee::MatchKey), payee.matchKey());
+  }
+
+  if (!payee.defaultAccountId().isEmpty()) {
+    el.setAttribute(attributeName(Attribute::Payee::DefaultAccountID), payee.defaultAccountId());
+  }
+
+  // Save address
+  QDomElement address = document.createElement(elementName(Element::Payee::Address));
+  address.setAttribute(attributeName(Attribute::Payee::Street), payee.address());
+  address.setAttribute(attributeName(Attribute::Payee::City), payee.city());
+  address.setAttribute(attributeName(Attribute::Payee::PostCode), payee.postcode());
+  address.setAttribute(attributeName(Attribute::Payee::State), payee.state());
+  address.setAttribute(attributeName(Attribute::Payee::Telephone), payee.telephone());
+
+  el.appendChild(address);
+
+  // Save payeeIdentifiers (account numbers)
+  payee.MyMoneyPayeeIdentifierContainer::writeXML(document, el);
+
+  parent.appendChild(el);
+}
+
 MyMoneyTag MyMoneyXmlContentHandler::readTag(const QDomElement &node)
 {
   if (nodeName(Node::Tag) != node.tagName())
@@ -823,6 +926,21 @@ MyMoneyTag MyMoneyXmlContentHandler::readTag(const QDomElement &node)
   tag.setClosed(node.attribute(attributeName(Attribute::Tag::Closed), "0").toUInt());
 
   return tag;
+}
+
+void MyMoneyXmlContentHandler::writeTag(const MyMoneyTag &tag, QDomDocument &document, QDomElement &parent)
+{
+  auto el = document.createElement(nodeName(Node::Tag));
+
+  writeBaseXML(tag.id(), document, el);
+
+  el.setAttribute(attributeName(Attribute::Tag::Name), tag.name());
+  el.setAttribute(attributeName(Attribute::Tag::Closed), tag.isClosed());
+  if (tag.tagColor().isValid())
+    el.setAttribute(attributeName(Attribute::Tag::TagColor), tag.tagColor().name());
+  if (!tag.notes().isEmpty())
+    el.setAttribute(attributeName(Attribute::Tag::Notes), tag.notes());
+  parent.appendChild(el);
 }
 
 MyMoneySecurity MyMoneyXmlContentHandler::readSecurity(const QDomElement &node)
@@ -861,6 +979,35 @@ MyMoneySecurity MyMoneyXmlContentHandler::readSecurity(const QDomElement &node)
   return security;
 }
 
+void MyMoneyXmlContentHandler::writeSecurity(const MyMoneySecurity &security, QDomDocument &document, QDomElement &parent)
+{
+  QDomElement el;
+  if (security.isCurrency())
+    el = document.createElement(nodeName(Node::Currency));
+  else
+    el = document.createElement(nodeName(Node::Security));
+
+  writeBaseXML(security.id(), document, el);
+
+  el.setAttribute(attributeName(Attribute::Security::Name), security.name());
+  el.setAttribute(attributeName(Attribute::Security::Symbol),security.tradingSymbol());
+  el.setAttribute(attributeName(Attribute::Security::Type), static_cast<int>(security.securityType()));
+  el.setAttribute(attributeName(Attribute::Security::RoundingMethod), static_cast<int>(security.roundingMethod()));
+  el.setAttribute(attributeName(Attribute::Security::SAF), security.smallestAccountFraction());
+  el.setAttribute(attributeName(Attribute::Security::PP), security.pricePrecision());
+  if (security.isCurrency())
+    el.setAttribute(attributeName(Attribute::Security::SCF), security.smallestCashFraction());
+  else {
+    el.setAttribute(attributeName(Attribute::Security::TradingCurrency), security.tradingCurrency());
+    el.setAttribute(attributeName(Attribute::Security::TradingMarket), security.tradingMarket());
+  }
+
+  //Add in Key-Value Pairs for securities.
+  writeKeyValueContainer(security, document, el);
+
+  parent.appendChild(el);
+}
+
 MyMoneyInstitution MyMoneyXmlContentHandler::readInstitution(const QDomElement &node)
 {
   if (nodeName(Node::Institution) != node.tagName())
@@ -892,6 +1039,37 @@ MyMoneyInstitution MyMoneyXmlContentHandler::readInstitution(const QDomElement &
   }
 
   return institution;
+}
+
+void MyMoneyXmlContentHandler::writeInstitution(const MyMoneyInstitution &institution, QDomDocument &document, QDomElement &parent)
+{
+  auto el = document.createElement(nodeName(Node::Institution));
+
+  writeBaseXML(institution.id(), document, el);
+
+  el.setAttribute(attributeName(Attribute::Institution::Name), institution.name());
+  el.setAttribute(attributeName(Attribute::Institution::Manager), institution.manager());
+  el.setAttribute(attributeName(Attribute::Institution::SortCode), institution.sortcode());
+
+  auto address = document.createElement(elementName(Element::Institution::Address));
+  address.setAttribute(attributeName(Attribute::Institution::Street), institution.street());
+  address.setAttribute(attributeName(Attribute::Institution::City), institution.town());
+  address.setAttribute(attributeName(Attribute::Institution::Zip), institution.postcode());
+  address.setAttribute(attributeName(Attribute::Institution::Telephone), institution.telephone());
+  el.appendChild(address);
+
+  auto accounts = document.createElement(elementName(Element::Institution::AccountIDS));
+  foreach (const auto accountID, institution.accountList()) {
+    auto temp = document.createElement(elementName(Element::Institution::AccountID));
+    temp.setAttribute(attributeName(Attribute::Institution::ID), accountID);
+    accounts.appendChild(temp);
+  }
+  el.appendChild(accounts);
+
+  //Add in Key-Value Pairs for institutions.
+  writeKeyValueContainer(institution, document, el);
+
+  parent.appendChild(el);
 }
 
 MyMoneyReport MyMoneyXmlContentHandler::readReport(const QDomElement &node)
@@ -1169,6 +1347,48 @@ MyMoneyBudget MyMoneyXmlContentHandler::readBudget(const QDomElement &node)
   return budget;
 }
 
+const int BUDGET_VERSION = 2;
+
+void MyMoneyXmlContentHandler::writeBudget(const MyMoneyBudget &budget, QDomDocument &document, QDomElement &parent)
+{
+  auto el = document.createElement(nodeName(Node::Budget));
+
+  writeBaseXML(budget.id(), document, el);
+
+  el.setAttribute(attributeName(Attribute::Budget::Name),  budget.name());
+  el.setAttribute(attributeName(Attribute::Budget::Start), budget.budgetStart().toString(Qt::ISODate));
+  el.setAttribute(attributeName(Attribute::Budget::Version), BUDGET_VERSION);
+
+  QMap<QString, MyMoneyBudget::AccountGroup>::const_iterator it;
+  auto accounts = budget.accountsMap();
+  for (it = accounts.cbegin(); it != accounts.cend(); ++it) {
+    // only add the account if there is a budget entered
+    // or it covers some sub accounts
+    if (!(*it).balance().isZero() || (*it).budgetSubaccounts()) {
+      QDomElement domAccount = document.createElement(elementName(Element::Budget::Account));
+      domAccount.setAttribute(attributeName(Attribute::Budget::ID), it.key());
+      domAccount.setAttribute(attributeName(Attribute::Budget::BudgetLevel), budgetLevels(it.value().budgetLevel()));
+      domAccount.setAttribute(attributeName(Attribute::Budget::BudgetSubAccounts), it.value().budgetSubaccounts());
+
+      const QMap<QDate, MyMoneyBudget::PeriodGroup> periods = it.value().getPeriods();
+      QMap<QDate, MyMoneyBudget::PeriodGroup>::const_iterator it_per;
+      for (it_per = periods.begin(); it_per != periods.end(); ++it_per) {
+        if (!(*it_per).amount().isZero()) {
+          QDomElement domPeriod = document.createElement(elementName(Element::Budget::Period));
+
+          domPeriod.setAttribute(attributeName(Attribute::Budget::Amount), (*it_per).amount().toString());
+          domPeriod.setAttribute(attributeName(Attribute::Budget::Start), (*it_per).startDate().toString(Qt::ISODate));
+          domAccount.appendChild(domPeriod);
+        }
+      }
+
+      el.appendChild(domAccount);
+    }
+  }
+
+  parent.appendChild(el);
+}
+
 MyMoneySchedule MyMoneyXmlContentHandler::readSchedule(const QDomElement &node)
 {
   if (nodeName(Node::ScheduleTX) != node.tagName())
@@ -1309,6 +1529,37 @@ onlineJob MyMoneyXmlContentHandler::readOnlineJob(const QDomElement &node)
   return oJob;
 }
 
+void MyMoneyXmlContentHandler::writeOnlineJob(const onlineJob &job, QDomDocument &document, QDomElement &parent)
+{
+  auto el = document.createElement(nodeName(Node::OnlineJob));
+
+  writeBaseXML(job.id(), document, el);
+
+  if (!job.sendDate().isNull())
+    el.setAttribute(attributeName(Attribute::OnlineJob::Send), job.sendDate().toString(Qt::ISODate));
+  if (!job.bankAnswerDate().isNull())
+    el.setAttribute(attributeName(Attribute::OnlineJob::BankAnswerDate), job.bankAnswerDate().toString(Qt::ISODate));
+
+  switch (job.bankAnswerState()) {
+    case eMyMoney::OnlineJob::sendingState::abortedByUser: el.setAttribute(attributeName(Attribute::OnlineJob::BankAnswerState), attributeName(Attribute::OnlineJob::AbortedByUser)); break;
+    case eMyMoney::OnlineJob::sendingState::acceptedByBank: el.setAttribute(attributeName(Attribute::OnlineJob::BankAnswerState), attributeName(Attribute::OnlineJob::AcceptedByBank)); break;
+    case eMyMoney::OnlineJob::sendingState::rejectedByBank: el.setAttribute(attributeName(Attribute::OnlineJob::BankAnswerState), attributeName(Attribute::OnlineJob::RejectedByBank)); break;
+    case eMyMoney::OnlineJob::sendingState::sendingError: el.setAttribute(attributeName(Attribute::OnlineJob::BankAnswerState), attributeName(Attribute::OnlineJob::SendingError)); break;
+    case eMyMoney::OnlineJob::sendingState::noBankAnswer:
+    default: void();
+  }
+
+  QDomElement taskEl = document.createElement(elementName(Element::OnlineJob::OnlineTask));
+  taskEl.setAttribute(attributeName(Attribute::OnlineJob::IID), job.taskIid());
+  try {
+    job.task()->writeXML(document, taskEl); // throws execption if there is no task
+    el.appendChild(taskEl); // only append child if there is something to append
+  } catch (const onlineJob::emptyTask &) {
+  }
+
+  parent.appendChild(el);
+}
+
 MyMoneyCostCenter MyMoneyXmlContentHandler::readCostCenter(const QDomElement &node)
 {
   if (nodeName(Node::CostCenter) != node.tagName())
@@ -1317,6 +1568,16 @@ MyMoneyCostCenter MyMoneyXmlContentHandler::readCostCenter(const QDomElement &no
   MyMoneyCostCenter costCenter(node.attribute(attributeName(Attribute::Account::ID)));
   costCenter.setName(node.attribute(attributeName(Attribute::CostCenter::Name)));
   return costCenter;
+}
+
+void MyMoneyXmlContentHandler::writeCostCenter(const MyMoneyCostCenter &costCenter, QDomDocument &document, QDomElement &parent)
+{
+  auto el = document.createElement(nodeName(Node::CostCenter));
+
+  writeBaseXML(costCenter.id(), document, el);
+
+  el.setAttribute(attributeName(Attribute::CostCenter::Name), costCenter.name());
+  parent.appendChild(el);
 }
 
 
@@ -1601,7 +1862,7 @@ void MyMoneyStorageXML::writeInstitutions(QDomElement& institutions)
 
 void MyMoneyStorageXML::writeInstitution(QDomElement& institution, const MyMoneyInstitution& i)
 {
-  i.writeXML(*m_doc, institution);
+  MyMoneyXmlContentHandler::writeInstitution(i, *m_doc, institution);
 }
 
 void MyMoneyStorageXML::writePayees(QDomElement& payees)
@@ -1616,7 +1877,7 @@ void MyMoneyStorageXML::writePayees(QDomElement& payees)
 
 void MyMoneyStorageXML::writePayee(QDomElement& payee, const MyMoneyPayee& p)
 {
-  p.writeXML(*m_doc, payee);
+  MyMoneyXmlContentHandler::writePayee(p, *m_doc, payee);
 }
 
 void MyMoneyStorageXML::writeTags(QDomElement& tags)
@@ -1631,7 +1892,7 @@ void MyMoneyStorageXML::writeTags(QDomElement& tags)
 
 void MyMoneyStorageXML::writeTag(QDomElement& tag, const MyMoneyTag& ta)
 {
-  ta.writeXML(*m_doc, tag);
+  MyMoneyXmlContentHandler::writeTag(ta, *m_doc, tag);
 }
 
 void MyMoneyStorageXML::writeAccounts(QDomElement& accounts)
@@ -1657,7 +1918,7 @@ void MyMoneyStorageXML::writeAccounts(QDomElement& accounts)
 
 void MyMoneyStorageXML::writeAccount(QDomElement& account, const MyMoneyAccount& p)
 {
-  p.writeXML(*m_doc, account);
+  MyMoneyXmlContentHandler::writeAccount(p, *m_doc, account);
 }
 
 void MyMoneyStorageXML::writeTransactions(QDomElement& transactions)
@@ -1711,7 +1972,7 @@ void MyMoneyStorageXML::writeSecurities(QDomElement& equities)
 
 void MyMoneyStorageXML::writeSecurity(QDomElement& securityElement, const MyMoneySecurity& security)
 {
-  security.writeXML(*m_doc, securityElement);
+  MyMoneyXmlContentHandler::writeSecurity(security, *m_doc, securityElement);
 }
 
 void MyMoneyStorageXML::writeCurrencies(QDomElement& currencies)
@@ -1760,7 +2021,7 @@ void MyMoneyStorageXML::writeBudgets(QDomElement& parent)
 
 void MyMoneyStorageXML::writeBudget(QDomElement& budget, const MyMoneyBudget& b)
 {
-  b.writeXML(*m_doc, budget);
+  MyMoneyXmlContentHandler::writeBudget(b, *m_doc, budget);
 }
 
 void MyMoneyStorageXML::writeOnlineJobs(QDomElement& parent)
@@ -1778,7 +2039,7 @@ void MyMoneyStorageXML::writeOnlineJobs(QDomElement& parent)
 
 void MyMoneyStorageXML::writeOnlineJob(QDomElement& onlineJobs, const onlineJob& job)
 {
-  job.writeXML(*m_doc, onlineJobs);
+  MyMoneyXmlContentHandler::writeOnlineJob(job, *m_doc, onlineJobs);
 }
 
 void MyMoneyStorageXML::writeCostCenters(QDomElement& parent)
@@ -1795,7 +2056,7 @@ void MyMoneyStorageXML::writeCostCenters(QDomElement& parent)
 
 void MyMoneyStorageXML::writeCostCenter(QDomElement& costCenters, const MyMoneyCostCenter& costCenter)
 {
-  costCenter.writeXML(*m_doc, costCenters);
+  MyMoneyXmlContentHandler::writeCostCenter(costCenter, *m_doc, costCenters);
 }
 
 QDomElement MyMoneyStorageXML::findChildElement(const QString& name, const QDomElement& root)

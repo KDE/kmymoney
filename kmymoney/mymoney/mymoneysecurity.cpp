@@ -23,8 +23,6 @@
 // QT Includes
 
 #include <QString>
-#include <QDomDocument>
-#include <QDomElement>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -242,36 +240,6 @@ bool MyMoneySecurity::hasReferenceTo(const QString& id) const
 {
   Q_D(const MyMoneySecurity);
   return (id == d->m_tradingCurrency);
-}
-
-void MyMoneySecurity::writeXML(QDomDocument& document, QDomElement& parent) const
-{
-  QDomElement el;
-  if (isCurrency())
-    el = document.createElement(nodeNames[nnCurrency]);
-  else
-    el = document.createElement(nodeNames[nnSecurity]);
-
-  Q_D(const MyMoneySecurity);
-  d->writeBaseXML(document, el);
-
-  el.setAttribute(d->getAttrName(Security::Attribute::Name), d->m_name);
-  el.setAttribute(d->getAttrName(Security::Attribute::Symbol),d->m_tradingSymbol);
-  el.setAttribute(d->getAttrName(Security::Attribute::Type), static_cast<int>(d->m_securityType));
-  el.setAttribute(d->getAttrName(Security::Attribute::RoundingMethod), static_cast<int>(d->m_roundingMethod));
-  el.setAttribute(d->getAttrName(Security::Attribute::SAF), d->m_smallestAccountFraction);
-  el.setAttribute(d->getAttrName(Security::Attribute::PP), d->m_pricePrecision);
-  if (isCurrency())
-    el.setAttribute(d->getAttrName(Security::Attribute::SCF), d->m_smallestCashFraction);
-  else {
-    el.setAttribute(d->getAttrName(Security::Attribute::TradingCurrency), d->m_tradingCurrency);
-    el.setAttribute(d->getAttrName(Security::Attribute::TradingMarket), d->m_tradingMarket);
-  }
-
-  //Add in Key-Value Pairs for securities.
-  MyMoneyKeyValueContainer::writeXML(document, el);
-
-  parent.appendChild(el);
 }
 
 QString MyMoneySecurity::securityTypeToString(const eMyMoney::Security::Type securityType)

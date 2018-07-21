@@ -625,7 +625,7 @@ void MyMoneyXmlContentHandlerTest::writeAccount()
   QDomDocument doc("TEST");
   QDomElement el = doc.createElement("ACCOUNT-CONTAINER");
   doc.appendChild(el);
-  a.writeXML(doc, el);
+  MyMoneyXmlContentHandler::writeAccount(a, doc, el);
 
   QCOMPARE(doc.doctype().name(), QLatin1String("TEST"));
   QDomElement accountContainer = doc.documentElement();
@@ -684,15 +684,15 @@ void MyMoneyXmlContentHandlerTest::readWritePayee()
   QDomElement parent = doc.createElement("Test");
   doc.appendChild(parent);
   MyMoneyPayee payee1("some random id"); //if the ID isn't set, w ethrow an exception
-  payee1.writeXML(doc, parent);
+  MyMoneyXmlContentHandler::writePayee(payee1, doc, parent);
   QString temp1 = "Account1";
   payee1.setDefaultAccountId(temp1);
-  payee1.writeXML(doc, parent);
+  MyMoneyXmlContentHandler::writePayee(payee1, doc, parent);
   QString temp2 = "Account2";
   payee1.setDefaultAccountId(temp2);
-  payee1.writeXML(doc, parent);
+  MyMoneyXmlContentHandler::writePayee(payee1, doc, parent);
   payee1.setDefaultAccountId();
-  payee1.writeXML(doc, parent);
+  MyMoneyXmlContentHandler::writePayee(payee1, doc, parent);
   QDomElement el = parent.firstChild().toElement();
   QVERIFY(!el.isNull());
   auto payee2 = MyMoneyXmlContentHandler::readPayee(el);
@@ -721,7 +721,7 @@ void MyMoneyXmlContentHandlerTest::readWriteTag()
   QDomElement parent = doc.createElement("Test");
   doc.appendChild(parent);
   MyMoneyTag tag1("some random id"); //if the ID isn't set, w ethrow an exception
-  tag1.writeXML(doc, parent);
+  MyMoneyXmlContentHandler::writeTag(tag1, doc, parent);
   QDomElement el = parent.firstChild().toElement();
   QVERIFY(!el.isNull());
   auto tag2 = MyMoneyXmlContentHandler::readTag(el);
@@ -807,8 +807,7 @@ void MyMoneyXmlContentHandlerTest::writeInstitution()
   doc.appendChild(el);
 
   MyMoneyInstitution i("I00001", n);
-
-  i.writeXML(doc, el);
+  MyMoneyXmlContentHandler::writeInstitution(i, doc, el);
 
   QCOMPARE(doc.doctype().name(), QLatin1String("TEST"));
   QDomElement institutionContainer = doc.documentElement();

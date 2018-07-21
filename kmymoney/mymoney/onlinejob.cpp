@@ -18,9 +18,6 @@
 #include "onlinejob.h"
 #include "onlinejob_p.h"
 
-#include <QDomDocument>
-#include <QDomElement>
-
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 
@@ -259,39 +256,6 @@ void onlineJob::clearJobMessageList()
 {
   Q_D(onlineJob);
   d->m_messageList = QList<onlineJobMessage>();
-}
-
-/** @todo give life */
-void onlineJob::writeXML(QDomDocument &document, QDomElement &parent) const
-{
-  auto el = document.createElement(nodeNames[nnOnlineJob]);
-
-  Q_D(const onlineJob);
-  d->writeBaseXML(document, el);
-
-  if (!d->m_jobSend.isNull())
-    el.setAttribute(d->getAttrName(OnlineJob::Attribute::Send), d->m_jobSend.toString(Qt::ISODate));
-  if (!d->m_jobBankAnswerDate.isNull())
-    el.setAttribute(d->getAttrName(OnlineJob::Attribute::BankAnswerDate), d->m_jobBankAnswerDate.toString(Qt::ISODate));
-
-  switch (d->m_jobBankAnswerState) {
-    case eMyMoney::OnlineJob::sendingState::abortedByUser: el.setAttribute(d->getAttrName(OnlineJob::Attribute::BankAnswerState), d->getAttrName(OnlineJob::Attribute::AbortedByUser)); break;
-    case eMyMoney::OnlineJob::sendingState::acceptedByBank: el.setAttribute(d->getAttrName(OnlineJob::Attribute::BankAnswerState), d->getAttrName(OnlineJob::Attribute::AcceptedByBank)); break;
-    case eMyMoney::OnlineJob::sendingState::rejectedByBank: el.setAttribute(d->getAttrName(OnlineJob::Attribute::BankAnswerState), d->getAttrName(OnlineJob::Attribute::RejectedByBank)); break;
-    case eMyMoney::OnlineJob::sendingState::sendingError: el.setAttribute(d->getAttrName(OnlineJob::Attribute::BankAnswerState), d->getAttrName(OnlineJob::Attribute::SendingError)); break;
-    case eMyMoney::OnlineJob::sendingState::noBankAnswer:
-    default: void();
-  }
-
-  QDomElement taskEl = document.createElement(d->getElName(OnlineJob::Element::OnlineTask));
-  taskEl.setAttribute(d->getAttrName(OnlineJob::Attribute::IID), taskIid());
-  try {
-    task()->writeXML(document, taskEl); // throws execption if there is no task
-    el.appendChild(taskEl); // only append child if there is something to append
-  } catch (const emptyTask&) {
-  }
-
-  parent.appendChild(el);
 }
 
 bool onlineJob::isValid() const

@@ -40,6 +40,8 @@ public:
     return QLatin1String("Dummy credit transfer");
   }
 
+  void writeXML(QDomDocument&, QDomElement&) const final override {}
+
 protected:
 
   onlineTaskDummy3* clone() const final override {
@@ -48,7 +50,7 @@ protected:
   bool hasReferenceTo(const QString&) const final override {
     return false;
   }
-  void writeXML(QDomDocument&, QDomElement&) const final override {}
+
   onlineTaskDummy3* createFromXml(const QDomElement &) const final override {
     return (new onlineTaskDummy3);
   }

@@ -38,10 +38,10 @@ public:
   bool isValid() const override;
   QString jobTypeName() const override;
 
+  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 protected:
   QString responsibleAccount() const override;
   unavailableTask* createFromXml(const QDomElement& element) const override;
-  void writeXML(QDomDocument& document, QDomElement& parent) const override;
   bool hasReferenceTo(const QString& id) const override;
   unavailableTask* clone() const override;
 

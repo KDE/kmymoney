@@ -447,6 +447,8 @@ QString stdAccName(StdAccName stdAccID);
 QString tagName(Tag tagID);
 QString nodeName(Node nodeID);
 
+namespace eMyMoney { namespace Budget { enum class Level; } }
+
 namespace eMyMoney { namespace Report { enum class RowType; } }
 namespace eMyMoney { namespace Report { enum class ColumnType; } }
 namespace eMyMoney { namespace Report { enum QueryColumn : int; } }
@@ -454,6 +456,9 @@ namespace eMyMoney { namespace Report { enum class ChartType; } }
 namespace eMyMoney { namespace Report { enum class DataLock; } }
 namespace eMyMoney { namespace Report { enum class ReportType; } }
 namespace eMyMoney { namespace Report { enum class DetailLevel; } }
+
+QHash<eMyMoney::Budget::Level, QString> budgetLevelsLUT();
+QString budgetLevels(eMyMoney::Budget::Level textID);
 
 QHash<eMyMoney::Report::RowType, QString> rowTypesLUT();
 QString reportNames(eMyMoney::Report::RowType textID);

@@ -556,6 +556,12 @@ QList<MyMoneyBudget::AccountGroup> MyMoneyBudget::getaccounts() const
   return d->m_accounts.values();
 }
 
+QMap<QString, MyMoneyBudget::AccountGroup> MyMoneyBudget::accountsMap() const
+{
+  Q_D(const MyMoneyBudget);
+  return d->m_accounts;
+}
+
 QString MyMoneyBudget::name() const
 {
   Q_D(const MyMoneyBudget);

@@ -36,57 +36,12 @@
 
 #include "mymoneyobject_p.h"
 #include "mymoneysplit.h"
-namespace eMyMoney
-{
-  namespace Transaction
-  {
-    enum class Element { Split = 0,
-                         Splits };
-    uint qHash(const Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-
-    enum class Attribute { Name = 0,
-                           Type,
-                           PostDate,
-                           Memo,
-                           EntryDate,
-                           Commodity,
-                           BankID,
-                           // insert new entries above this line
-                           LastAttribute
-                         };
-
-    uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-  }
-}
 
 using namespace eMyMoney;
 
 class MyMoneyTransactionPrivate : public MyMoneyObjectPrivate
 {
 public:
-  static QString getElName(const Transaction::Element el)
-  {
-    static const QHash<Transaction::Element, QString> elNames {
-      {Transaction::Element::Split,  QStringLiteral("SPLIT")},
-      {Transaction::Element::Splits, QStringLiteral("SPLITS")}
-    };
-    return elNames[el];
-  }
-
-  static QString getAttrName(const Transaction::Attribute attr)
-  {
-    static const QHash<Transaction::Attribute, QString> attrNames {
-      {Transaction::Attribute::Name,       QStringLiteral("name")},
-      {Transaction::Attribute::Type,       QStringLiteral("type")},
-      {Transaction::Attribute::PostDate,   QStringLiteral("postdate")},
-      {Transaction::Attribute::Memo,       QStringLiteral("memo")},
-      {Transaction::Attribute::EntryDate,  QStringLiteral("entrydate")},
-      {Transaction::Attribute::Commodity,  QStringLiteral("commodity")},
-      {Transaction::Attribute::BankID,     QStringLiteral("bankid")},
-    };
-    return attrNames[attr];
-  }
-
   /**
     * This method returns the next id to be used for a split
     */

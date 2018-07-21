@@ -123,6 +123,9 @@ public:
    */
   virtual QString jobTypeName() const = 0;
 
+  /** @see MyMoneyObject::writeXML() */
+  virtual void writeXML(QDomDocument &document, QDomElement &parent) const = 0;
+
 protected:
   onlineTask(const onlineTask& other);
 
@@ -136,9 +139,6 @@ protected:
 
   /** @see MyMoneyObject::hasReferenceTo() */
   virtual bool hasReferenceTo(const QString &id) const = 0;
-
-  /** @see MyMoneyObject::writeXML() */
-  virtual void writeXML(QDomDocument &document, QDomElement &parent) const = 0;
 
   /**
    * @brief Create a new instance of this task based on xml data

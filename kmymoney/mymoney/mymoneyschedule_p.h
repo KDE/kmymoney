@@ -38,34 +38,6 @@
 
 using namespace eMyMoney;
 
-namespace eMyMoney
-{
-  namespace Schedule
-  {
-    enum class Element { Payment,
-                         Payments
-                       };
-
-    enum class Attribute { Name = 0,
-                           Type,
-                           Occurrence,
-                           OccurrenceMultiplier,
-                           PaymentType,
-                           Fixed,
-                           AutoEnter,
-                           LastPayment,
-                           WeekendOption,
-                           Date,
-                           StartDate,
-                           EndDate,
-                           LastDayInMonth,
-                           // insert new entries above this line
-                           LastAttribute
-                         };
-    uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-  }
-}
-
 class MyMoneySchedulePrivate : public MyMoneyObjectPrivate
 {
 public:
@@ -79,36 +51,6 @@ public:
   , m_autoEnter(false)
   , m_weekendOption(Schedule::WeekendOption::MoveNothing)
   {}
-
-  static QString getElName(const Schedule::Element el)
-  {
-    static const QMap<Schedule::Element, QString> elNames {
-      {Schedule::Element::Payment,  QStringLiteral("PAYMENT")},
-      {Schedule::Element::Payments, QStringLiteral("PAYMENTS")}
-    };
-    return elNames[el];
-  }
-
-  static QString getAttrName(const Schedule::Attribute attr)
-  {
-    static const QHash<Schedule::Attribute, QString> attrNames {
-      {Schedule::Attribute::Name,                 QStringLiteral("name")},
-      {Schedule::Attribute::Type,                 QStringLiteral("type")},
-      {Schedule::Attribute::Occurrence,           QStringLiteral("occurence")}, // krazy:exclude=spelling
-      {Schedule::Attribute::OccurrenceMultiplier, QStringLiteral("occurenceMultiplier")}, // krazy:exclude=spelling
-      {Schedule::Attribute::PaymentType,          QStringLiteral("paymentType")},
-      {Schedule::Attribute::Fixed,                QStringLiteral("fixed")},
-      {Schedule::Attribute::AutoEnter,            QStringLiteral("autoEnter")},
-      {Schedule::Attribute::LastPayment,          QStringLiteral("lastPayment")},
-      {Schedule::Attribute::WeekendOption,        QStringLiteral("weekendOption")},
-      {Schedule::Attribute::Date,                 QStringLiteral("date")},
-      {Schedule::Attribute::StartDate,            QStringLiteral("startDate")},
-      {Schedule::Attribute::EndDate,              QStringLiteral("endDate")},
-      {Schedule::Attribute::LastDayInMonth,       QStringLiteral("lastDayInMonth")}
-    };
-    return attrNames[attr];
-  }
-
 
   /// Its occurrence
   eMyMoney::Schedule::Occurrence m_occurrence;

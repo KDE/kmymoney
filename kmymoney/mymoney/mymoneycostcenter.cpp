@@ -20,7 +20,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDomElement>
 #include <QCollator>
 
 // ----------------------------------------------------------------------------
@@ -80,17 +79,6 @@ bool MyMoneyCostCenter::operator < (const MyMoneyCostCenter& right) const
   return col.compare(d->m_name, d2->m_name);
 }
 
-void MyMoneyCostCenter::writeXML(QDomDocument& document, QDomElement& parent) const
-{
-  auto el = document.createElement(nodeNames[nnCostCenter]);
-
-  Q_D(const MyMoneyCostCenter);
-  d->writeBaseXML(document, el);
-
-  el.setAttribute(getAttrName(Attribute::Name), d->m_name);
-  parent.appendChild(el);
-}
-
 bool MyMoneyCostCenter::hasReferenceTo(const QString& /*id*/) const
 {
   return false;
@@ -117,12 +105,4 @@ QString MyMoneyCostCenter::shortName() const
     return shortNumberExp.cap(1);
   }
   return d->m_name;
-}
-
-QString MyMoneyCostCenter::getAttrName(const Attribute attr)
-{
-  static const QMap<Attribute, QString> attrNames = {
-    {Attribute::Name, QStringLiteral("name")},
-  };
-  return attrNames[attr];
 }

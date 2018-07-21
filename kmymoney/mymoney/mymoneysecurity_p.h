@@ -36,26 +36,6 @@
 
 using namespace eMyMoney;
 
-namespace eMyMoney
-{
-  namespace Security
-  {
-    enum class Attribute { Name = 0,
-                           Symbol,
-                           Type,
-                           RoundingMethod,
-                           SAF,
-                           PP,
-                           SCF,
-                           TradingCurrency,
-                           TradingMarket,
-                           // insert new entries above this line
-                           LastAttribute
-                         };
-    uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-  }
-}
-
 class MyMoneySecurityPrivate : public MyMoneyObjectPrivate
 {
 public:
@@ -67,22 +47,6 @@ public:
     m_pricePrecision(4),
     m_roundingMethod(AlkValue::RoundRound)
   {
-  }
-
-  static QString getAttrName(const Security::Attribute attr)
-  {
-    static const QHash<Security::Attribute, QString> attrNames {
-      {Security::Attribute::Name,             QStringLiteral("name")},
-      {Security::Attribute::Symbol,           QStringLiteral("symbol")},
-      {Security::Attribute::Type,             QStringLiteral("type")},
-      {Security::Attribute::RoundingMethod,   QStringLiteral("rounding-method")},
-      {Security::Attribute::SAF,              QStringLiteral("saf")},
-      {Security::Attribute::PP,               QStringLiteral("pp")},
-      {Security::Attribute::SCF,              QStringLiteral("scf")},
-      {Security::Attribute::TradingCurrency,  QStringLiteral("trading-currency")},
-      {Security::Attribute::TradingMarket,    QStringLiteral("trading-market")}
-    };
-    return attrNames[attr];
   }
 
   QString                   m_name;

@@ -122,8 +122,6 @@ public:
   int pricePrecision() const;
   void setPricePrecision(const int pp);
 
-  void writeXML(QDomDocument& document, QDomElement& parent) const override;
-
   /**
    * This method checks if a reference to the given object exists. It returns,
    * a @p true if the object is referencing the one requested by the

@@ -22,9 +22,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDomDocument>
-#include <QDomElement>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -138,22 +135,6 @@ bool MyMoneyTag::operator < (const MyMoneyTag& right) const
   Q_D(const MyMoneyTag);
   auto d2 = static_cast<const MyMoneyTagPrivate *>(right.d_func());
   return d->m_name < d2->m_name;
-}
-
-void MyMoneyTag::writeXML(QDomDocument& document, QDomElement& parent) const
-{
-  auto el = document.createElement(nodeNames[nnTag]);
-
-  Q_D(const MyMoneyTag);
-  d->writeBaseXML(document, el);
-
-  el.setAttribute(d->getAttrName(Tag::Attribute::Name), d->m_name);
-  el.setAttribute(d->getAttrName(Tag::Attribute::Closed), d->m_closed);
-  if (d->m_tag_color.isValid())
-    el.setAttribute(d->getAttrName(Tag::Attribute::TagColor), d->m_tag_color.name());
-  if (!d->m_notes.isEmpty())
-    el.setAttribute(d->getAttrName(Tag::Attribute::Notes), d->m_notes);
-  parent.appendChild(el);
 }
 
 bool MyMoneyTag::hasReferenceTo(const QString& /*id*/) const

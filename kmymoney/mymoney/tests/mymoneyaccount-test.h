@@ -40,7 +40,6 @@ private Q_SLOTS:
   void testAssignmentConstructor();
   void testSubAccounts();
   void testEquality();
-  void testWriteXML();
   void testHasReferenceTo();
   void testAdjustBalance();
   void testSetClosed();

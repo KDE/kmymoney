@@ -19,8 +19,6 @@
 #include "mymoneyaccount-test.h"
 
 #include <QtTest>
-#include <QDomDocument>
-#include <QDomElement>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyAccountTest;
 
@@ -287,88 +285,6 @@ void MyMoneyAccountTest::testEquality()
   QVERIFY(!(b == a));
   b = a;
 
-}
-
-void MyMoneyAccountTest::testWriteXML()
-{
-  QString id = "A000001";
-  QString institutionid = "B000001";
-  QString parent = "Parent";
-
-  MyMoneyAccount r;
-  r.setAccountType(eMyMoney::Account::Type::Asset);
-  r.setOpeningDate(QDate::currentDate());
-  r.setLastModified(QDate::currentDate());
-  r.setDescription("Desc");
-  r.setName("AccountName");
-  r.setNumber("465500");
-  r.setParentAccountId(parent);
-  r.setInstitutionId(institutionid);
-  r.setValue(QString("key"), "value");
-  r.addAccountId("A000002");
-  r.addReconciliation(QDate(2011, 1, 1), MyMoneyMoney(123, 100));
-  r.addReconciliation(QDate(2011, 2, 1), MyMoneyMoney(456, 100));
-
-  QCOMPARE(r.pairs().count(), 2);
-  QCOMPARE(r.value("key"), QLatin1String("value"));
-  QCOMPARE(r.value("reconciliationHistory"), QLatin1String("2011-01-01:123/100;2011-02-01:114/25"));
-
-  MyMoneyAccount a(id, r);
-
-  QDomDocument doc("TEST");
-  QDomElement el = doc.createElement("ACCOUNT-CONTAINER");
-  doc.appendChild(el);
-  a.writeXML(doc, el);
-
-  QCOMPARE(doc.doctype().name(), QLatin1String("TEST"));
-  QDomElement accountContainer = doc.documentElement();
-  QVERIFY(accountContainer.isElement());
-  QCOMPARE(accountContainer.tagName(), QLatin1String("ACCOUNT-CONTAINER"));
-  QVERIFY(accountContainer.childNodes().size() == 1);
-  QVERIFY(accountContainer.childNodes().at(0).isElement());
-
-  QDomElement account = accountContainer.childNodes().at(0).toElement();
-  QCOMPARE(account.tagName(), QLatin1String("ACCOUNT"));
-  QCOMPARE(account.attribute("id"), QLatin1String("A000001"));
-  QCOMPARE(account.attribute("lastreconciled"), QString());
-  QCOMPARE(account.attribute("institution"), QLatin1String("B000001"));
-  QCOMPARE(account.attribute("name"), QLatin1String("AccountName"));
-  QCOMPARE(account.attribute("number"), QLatin1String("465500"));
-  QCOMPARE(account.attribute("description"), QLatin1String("Desc"));
-  QCOMPARE(account.attribute("parentaccount"), QLatin1String("Parent"));
-  QCOMPARE(account.attribute("opened"), QDate::currentDate().toString(Qt::ISODate));
-  QCOMPARE(account.attribute("type"), QLatin1String("9"));
-  QCOMPARE(account.attribute("lastmodified"), QDate::currentDate().toString(Qt::ISODate));
-  QCOMPARE(account.attribute("id"), QLatin1String("A000001"));
-  QCOMPARE(account.childNodes().size(), 2);
-
-  QVERIFY(account.childNodes().at(0).isElement());
-  QDomElement subAccounts = account.childNodes().at(0).toElement();
-  QCOMPARE(subAccounts.tagName(), QLatin1String("SUBACCOUNTS"));
-  QCOMPARE(subAccounts.childNodes().size(), 1);
-  QVERIFY(subAccounts.childNodes().at(0).isElement());
-  QDomElement subAccount = subAccounts.childNodes().at(0).toElement();
-  QCOMPARE(subAccount.tagName(), QLatin1String("SUBACCOUNT"));
-  QCOMPARE(subAccount.attribute("id"), QLatin1String("A000002"));
-  QCOMPARE(subAccount.childNodes().size(), 0);
-
-  QDomElement keyValuePairs = account.childNodes().at(1).toElement();
-  QCOMPARE(keyValuePairs.tagName(), QLatin1String("KEYVALUEPAIRS"));
-  QCOMPARE(keyValuePairs.childNodes().size(), 2);
-
-  QVERIFY(keyValuePairs.childNodes().at(0).isElement());
-  QDomElement keyValuePair1 = keyValuePairs.childNodes().at(0).toElement();
-  QCOMPARE(keyValuePair1.tagName(), QLatin1String("PAIR"));
-  QCOMPARE(keyValuePair1.attribute("key"), QLatin1String("key"));
-  QCOMPARE(keyValuePair1.attribute("value"), QLatin1String("value"));
-  QCOMPARE(keyValuePair1.childNodes().size(), 0);
-
-  QVERIFY(keyValuePairs.childNodes().at(1).isElement());
-  QDomElement keyValuePair2 = keyValuePairs.childNodes().at(1).toElement();
-  QCOMPARE(keyValuePair2.tagName(), QLatin1String("PAIR"));
-  QCOMPARE(keyValuePair2.attribute("key"), QLatin1String("reconciliationHistory"));
-  QCOMPARE(keyValuePair2.attribute("value"), QLatin1String("2011-01-01:123/100;2011-02-01:114/25"));
-  QCOMPARE(keyValuePair2.childNodes().size(), 0);
 }
 
 void MyMoneyAccountTest::testHasReferenceTo()

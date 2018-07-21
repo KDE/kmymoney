@@ -30,50 +30,9 @@
 
 namespace eMyMoney { namespace OnlineJob { enum class sendingState; } }
 
-namespace OnlineJob {
-  enum class Element { OnlineTask };
-  uint qHash(const Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-
-  enum class Attribute { Send = 0,
-                         BankAnswerDate,
-                         BankAnswerState,
-                         IID,
-                         AbortedByUser,
-                         AcceptedByBank,
-                         RejectedByBank,
-                         SendingError,
-                         // insert new entries above this line
-                         LastAttribute
-                       };
-  uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-}
-
 class onlineJobPrivate : public MyMoneyObjectPrivate
 {
 public:
-  static QString getElName(const OnlineJob::Element el)
-  {
-    static const QMap<OnlineJob::Element, QString> elNames {
-      {OnlineJob::Element::OnlineTask, QStringLiteral("onlineTask")}
-    };
-    return elNames[el];
-  }
-
-  static QString getAttrName(const OnlineJob::Attribute attr)
-  {
-    static const QHash<OnlineJob::Attribute, QString> attrNames {
-      {OnlineJob::Attribute::Send,             QStringLiteral("send")},
-      {OnlineJob::Attribute::BankAnswerDate,   QStringLiteral("bankAnswerDate")},
-      {OnlineJob::Attribute::BankAnswerState,  QStringLiteral("bankAnswerState")},
-      {OnlineJob::Attribute::IID,              QStringLiteral("iid")},
-      {OnlineJob::Attribute::AbortedByUser,    QStringLiteral("abortedByUser")},
-      {OnlineJob::Attribute::AcceptedByBank,   QStringLiteral("acceptedByBank")},
-      {OnlineJob::Attribute::RejectedByBank,   QStringLiteral("rejectedByBank")},
-      {OnlineJob::Attribute::SendingError,     QStringLiteral("sendingError")},
-    };
-    return attrNames[attr];
-  }
-
   /**
    * @brief Date-time the job was sent to the bank
    *

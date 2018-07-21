@@ -28,8 +28,6 @@
 #include <QPixmap>
 #include <QPixmapCache>
 #include <QIcon>
-#include <QDomDocument>
-#include <QDomElement>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -248,38 +246,6 @@ bool MyMoneyInstitution::operator == (const MyMoneyInstitution& right) const
     return true;
   } else
     return false;
-}
-
-void MyMoneyInstitution::writeXML(QDomDocument& document, QDomElement& parent) const
-{
-  Q_D(const MyMoneyInstitution);
-  auto el = document.createElement(nodeNames[nnInstitution]);
-
-  d->writeBaseXML(document, el);
-
-  el.setAttribute(d->getAttrName(Institution::Attribute::Name), d->m_name);
-  el.setAttribute(d->getAttrName(Institution::Attribute::Manager), d->m_manager);
-  el.setAttribute(d->getAttrName(Institution::Attribute::SortCode), d->m_sortcode);
-
-  auto address = document.createElement(d->getElName(Institution::Element::Address));
-  address.setAttribute(d->getAttrName(Institution::Attribute::Street), d->m_street);
-  address.setAttribute(d->getAttrName(Institution::Attribute::City), d->m_town);
-  address.setAttribute(d->getAttrName(Institution::Attribute::Zip), d->m_postcode);
-  address.setAttribute(d->getAttrName(Institution::Attribute::Telephone), d->m_telephone);
-  el.appendChild(address);
-
-  auto accounts = document.createElement(d->getElName(Institution::Element::AccountIDS));
-  foreach (const auto accountID, accountList()) {
-    auto temp = document.createElement(d->getElName(Institution::Element::AccountID));
-    temp.setAttribute(d->getAttrName(Institution::Attribute::ID), accountID);
-    accounts.appendChild(temp);
-  }
-  el.appendChild(accounts);
-
-  //Add in Key-Value Pairs for institutions.
-  MyMoneyKeyValueContainer::writeXML(document, el);
-
-  parent.appendChild(el);
 }
 
 bool MyMoneyInstitution::hasReferenceTo(const QString& /* id */) const

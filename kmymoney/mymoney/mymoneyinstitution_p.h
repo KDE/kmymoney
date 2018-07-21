@@ -39,55 +39,9 @@
 
 #include "mymoneyobject_p.h"
 
-namespace Institution
-{
-  enum class Element { AccountID,
-                       AccountIDS,
-                       Address };
-  uint qHash(const Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-
-  enum class Attribute { ID = 0,
-                         Name,
-                         Manager,
-                         SortCode,
-                         Street,
-                         City,
-                         Zip,
-                         Telephone,
-                         // insert new entries above this line
-                         LastAttribute
-                       };
-  uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-}
-
 class MyMoneyInstitutionPrivate : public MyMoneyObjectPrivate
 {
 public:
-  static QString getElName(const Institution::Element el)
-  {
-    static const QMap<Institution::Element, QString> elNames {
-      {Institution::Element::AccountID,  QStringLiteral("ACCOUNTID")},
-      {Institution::Element::AccountIDS, QStringLiteral("ACCOUNTIDS")},
-      {Institution::Element::Address,    QStringLiteral("ADDRESS")}
-    };
-    return elNames[el];
-  }
-
-  static QString getAttrName(const Institution::Attribute attr)
-  {
-    static const QHash<Institution::Attribute, QString> attrNames {
-      {Institution::Attribute::ID,         QStringLiteral("id")},
-      {Institution::Attribute::Name,       QStringLiteral("name")},
-      {Institution::Attribute::Manager,    QStringLiteral("manager")},
-      {Institution::Attribute::SortCode,   QStringLiteral("sortcode")},
-      {Institution::Attribute::Street,     QStringLiteral("street")},
-      {Institution::Attribute::City,       QStringLiteral("city")},
-      {Institution::Attribute::Zip,        QStringLiteral("zip")},
-      {Institution::Attribute::Telephone,  QStringLiteral("telephone")}
-    };
-    return attrNames[attr];
-  }
-
   /**
     * This member variable keeps the name of the institution
     */

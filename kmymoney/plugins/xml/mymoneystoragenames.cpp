@@ -503,6 +503,23 @@ QString attributeName(Attribute::CostCenter attributeID)
   return attributeNames.value(attributeID);
 }
 
+QHash<eMyMoney::Budget::Level, QString> budgetLevelsLUT()
+{
+  static const QHash<eMyMoney::Budget::Level, QString> lut {
+    {eMyMoney::Budget::Level::None,         QStringLiteral("none")},
+    {eMyMoney::Budget::Level::Monthly,      QStringLiteral("monthly")},
+    {eMyMoney::Budget::Level::MonthByMonth, QStringLiteral("monthbymonth")},
+    {eMyMoney::Budget::Level::Yearly,       QStringLiteral("yearly")},
+    {eMyMoney::Budget::Level::Max,          QStringLiteral("invalid")},
+  };
+  return lut;
+}
+
+QString budgetLevels(eMyMoney::Budget::Level textID)
+{
+  return budgetLevelsLUT().value(textID);
+}
+
 QHash<eMyMoney::Report::RowType, QString> rowTypesLUT()
 {
   static const QHash<eMyMoney::Report::RowType, QString> lut {

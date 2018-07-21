@@ -140,7 +140,6 @@ public:
 
   /** @todo implement */
   bool hasReferenceTo(const QString &id) const override;
-  void writeXML(QDomDocument &document, QDomElement &parent) const override;
 
   /**
    * @brief Account this job is related to

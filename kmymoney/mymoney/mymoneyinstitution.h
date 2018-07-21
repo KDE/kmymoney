@@ -149,8 +149,6 @@ public:
   bool operator == (const MyMoneyInstitution&) const;
   bool operator < (const MyMoneyInstitution& right) const;
 
-  void writeXML(QDomDocument& document, QDomElement& parent) const override;
-
   /**
     * This method checks if a reference to the given object exists. It returns,
     * a @p true if the object is referencing the one requested by the

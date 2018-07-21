@@ -188,6 +188,8 @@ public:
   bool contains(const QString &id) const;
   QList<AccountGroup> getaccounts() const;
 
+  QMap<QString, MyMoneyBudget::AccountGroup> accountsMap() const;
+
   /**
     * This method writes this Budget to the DOM element @p e,
     * within the DOM document @p doc.

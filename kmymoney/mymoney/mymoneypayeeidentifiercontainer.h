@@ -57,8 +57,9 @@ public:
   void resetPayeeIdentifiers(const QList< ::payeeIdentifier >& list = QList< ::payeeIdentifier >());
 
   void loadXML(QDomElement node);
-protected:
   void writeXML(QDomDocument document, QDomElement parent) const;
+
+protected:
   QList< ::payeeIdentifier > m_payeeIdentifiers;
 };
 

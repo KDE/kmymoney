@@ -97,11 +97,12 @@ public:
 
   QSharedPointer<const sepaOnlineTransfer::settings> getSettings() const final override;
 
+  void writeXML(QDomDocument& document, QDomElement& parent) const final override;
+
 protected:
   sepaOnlineTransfer* clone() const final override;
 
   sepaOnlineTransfer* createFromXml(const QDomElement &element) const final override;
-  void writeXML(QDomDocument& document, QDomElement& parent) const final override;
 
 private:
   mutable QSharedPointer<const settings> _settings;

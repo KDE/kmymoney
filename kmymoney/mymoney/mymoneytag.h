@@ -32,7 +32,6 @@
 
 class QString;
 class QColor;
-class QDomDocument;
 
 /**
   * This class represents a tag within the MyMoney engine.
@@ -78,8 +77,6 @@ class KMM_MYMONEY_EXPORT MyMoneyTag : public MyMoneyObject
   // Equality operator
   bool operator == (const MyMoneyTag &) const;
   bool operator <(const MyMoneyTag& right) const;
-
-  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 
   /**
     * This method checks if a reference to the given object exists. It returns,

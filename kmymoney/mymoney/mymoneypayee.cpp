@@ -27,7 +27,6 @@
 
 #include <QString>
 #include <QStringList>
-#include <QDomElement>
 #include <QMap>
 
 // ----------------------------------------------------------------------------
@@ -120,46 +119,6 @@ bool MyMoneyPayee::operator < (const MyMoneyPayee& right) const
   Q_D(const MyMoneyPayee);
   auto d2 = static_cast<const MyMoneyPayeePrivate *>(right.d_func());
   return d->m_name < d2->m_name;
-}
-
-void MyMoneyPayee::writeXML(QDomDocument& document, QDomElement& parent) const
-{
-  auto el = document.createElement(nodeNames[nnPayee]);
-
-  Q_D(const MyMoneyPayee);
-  d->writeBaseXML(document, el);
-
-  el.setAttribute(d->getAttrName(Payee::Attribute::Name), d->m_name);
-  el.setAttribute(d->getAttrName(Payee::Attribute::Reference), d->m_reference);
-  el.setAttribute(d->getAttrName(Payee::Attribute::Email), d->m_email);
-  if (!d->m_notes.isEmpty())
-    el.setAttribute(d->getAttrName(Payee::Attribute::Notes), d->m_notes);
-
-  el.setAttribute(d->getAttrName(Payee::Attribute::MatchingEnabled), d->m_matchingEnabled);
-  if (d->m_matchingEnabled) {
-    el.setAttribute(d->getAttrName(Payee::Attribute::UsingMatchKey), d->m_usingMatchKey);
-    el.setAttribute(d->getAttrName(Payee::Attribute::MatchIgnoreCase), d->m_matchKeyIgnoreCase);
-    el.setAttribute(d->getAttrName(Payee::Attribute::MatchKey), d->m_matchKey);
-  }
-
-  if (!d->m_defaultAccountId.isEmpty()) {
-    el.setAttribute(d->getAttrName(Payee::Attribute::DefaultAccountID), d->m_defaultAccountId);
-  }
-
-  // Save address
-  QDomElement address = document.createElement(d->getElName(Payee::Element::Address));
-  address.setAttribute(d->getAttrName(Payee::Attribute::Street), d->m_address);
-  address.setAttribute(d->getAttrName(Payee::Attribute::City), d->m_city);
-  address.setAttribute(d->getAttrName(Payee::Attribute::PostCode), d->m_postcode);
-  address.setAttribute(d->getAttrName(Payee::Attribute::State), d->m_state);
-  address.setAttribute(d->getAttrName(Payee::Attribute::Telephone), d->m_telephone);
-
-  el.appendChild(address);
-
-  // Save payeeIdentifiers (account numbers)
-  MyMoneyPayeeIdentifierContainer::writeXML(document, el);
-
-  parent.appendChild(el);
 }
 
 bool MyMoneyPayee::hasReferenceTo(const QString& id) const
@@ -274,6 +233,30 @@ void MyMoneyPayee::setReference(const QString& ref)
 {
   Q_D(MyMoneyPayee);
   d->m_reference = ref;
+}
+
+bool MyMoneyPayee::isMatchingEnabled() const
+{
+  Q_D(const MyMoneyPayee);
+  return d->m_matchingEnabled;
+}
+
+bool MyMoneyPayee::isUsingMatchKey() const
+{
+  Q_D(const MyMoneyPayee);
+  return d->m_usingMatchKey;
+}
+
+bool MyMoneyPayee::isMatchKeyIgnoreCase() const
+{
+  Q_D(const MyMoneyPayee);
+  return d->m_matchKeyIgnoreCase;
+}
+
+QString MyMoneyPayee::matchKey() const
+{
+  Q_D(const MyMoneyPayee);
+  return d->m_matchKey;
 }
 
 eMyMoney::Payee::MatchType MyMoneyPayee::matchData(bool& ignorecase, QStringList& keys) const

@@ -31,20 +31,6 @@
 
 #include "mymoneyobject_p.h"
 
-namespace Tag
-{
-  enum class Attribute {
-    Name = 0 ,
-    Type,
-    TagColor,
-    Closed,
-    Notes,
-    // insert new entries above this line
-    LastAttribute
-  };
-  uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-}
-
 class MyMoneyTagPrivate : public MyMoneyObjectPrivate
 {
 public:
@@ -52,18 +38,6 @@ public:
   MyMoneyTagPrivate() :
     m_closed(false)
   {
-  }
-
-  static QString getAttrName(const Tag::Attribute attr)
-  {
-    static const QHash<Tag::Attribute, QString> attrNames {
-      {Tag::Attribute::Name,     QStringLiteral("name")},
-      {Tag::Attribute::Type,     QStringLiteral("type")},
-      {Tag::Attribute::TagColor, QStringLiteral("tagcolor")},
-      {Tag::Attribute::Closed,   QStringLiteral("closed")},
-      {Tag::Attribute::Notes,    QStringLiteral("notes")},
-    };
-    return attrNames[attr];
   }
 
   // Simple fields

@@ -56,6 +56,8 @@ public:
     return m_testNumber;
   }
 
+  void writeXML(QDomDocument&, QDomElement&) const final override {}
+
 protected:
 
   dummyTask* clone() const final override {
@@ -64,7 +66,7 @@ protected:
   bool hasReferenceTo(const QString &id) const final override {
     Q_UNUSED(id); return false;
   }
-  void writeXML(QDomDocument&, QDomElement&) const final override {}
+
   dummyTask* createFromXml(const QDomElement&) const final override {
     return (new dummyTask);
   }

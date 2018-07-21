@@ -44,37 +44,6 @@
 
 using namespace eMyMoney;
 
-namespace eMyMoney
-{
-  namespace Account
-  {
-    enum class Element { SubAccount,
-                         SubAccounts,
-                         OnlineBanking
-                       };
-    uint qHash(const Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-
-    enum class Attribute { ID = 0 ,
-                           Name,
-                           Type,
-                           ParentAccount,
-                           LastReconciled,
-                           LastModified,
-                           Institution,
-                           Opened,
-                           Number,
-                           Description,
-                           Currency,
-                           OpeningBalance,
-                           IBAN,
-                           BIC,
-                           // insert new entries above this line
-                           LastAttribute
-                         };
-    uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-  }
-}
-
 class MyMoneyAccountPrivate : public MyMoneyObjectPrivate
 {
 public:
@@ -83,38 +52,6 @@ public:
     m_accountType(Account::Type::Unknown),
     m_fraction(-1)
   {
-  }
-
-  static QString getElName(const Account::Element el)
-  {
-    static const QMap<Account::Element, QString> elNames = {
-      {Account::Element::SubAccount,     QStringLiteral("SUBACCOUNT")},
-      {Account::Element::SubAccounts,    QStringLiteral("SUBACCOUNTS")},
-      {Account::Element::OnlineBanking,  QStringLiteral("ONLINEBANKING")}
-    };
-    return elNames[el];
-  }
-
-  static QString getAttrName(const Account::Attribute attr)
-  {
-    static const QHash<Account::Attribute, QString> attrNames = {
-      {Account::Attribute::ID,             QStringLiteral("id")},
-      {Account::Attribute::Name,           QStringLiteral("name")},
-      {Account::Attribute::Type,           QStringLiteral("type")},
-      {Account::Attribute::ParentAccount,  QStringLiteral("parentaccount")},
-      {Account::Attribute::LastReconciled, QStringLiteral("lastreconciled")},
-      {Account::Attribute::LastModified,   QStringLiteral("lastmodified")},
-      {Account::Attribute::Institution,    QStringLiteral("institution")},
-      {Account::Attribute::Opened,         QStringLiteral("opened")},
-      {Account::Attribute::Number,         QStringLiteral("number")},
-      {Account::Attribute::Type,           QStringLiteral("type")},
-      {Account::Attribute::Description,    QStringLiteral("description")},
-      {Account::Attribute::Currency,       QStringLiteral("currency")},
-      {Account::Attribute::OpeningBalance, QStringLiteral("openingbalance")},
-      {Account::Attribute::IBAN,           QStringLiteral("iban")},
-      {Account::Attribute::BIC,            QStringLiteral("bic")},
-    };
-    return attrNames[attr];
   }
 
   /**

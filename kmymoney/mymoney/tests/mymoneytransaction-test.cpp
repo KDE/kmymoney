@@ -19,8 +19,6 @@
 #include "mymoneytransaction-test.h"
 
 #include <QDebug>
-#include <QDomDocument>
-#include <QDomElement>
 
 #include <QtTest>
 

@@ -40,40 +40,6 @@
 #include "mymoneytransaction.h"
 #include "mymoneyenums.h"
 
-namespace eMyMoney
-{
-  namespace Split
-  {
-    enum class Element { Split = 0,
-                         Tag,
-                         Match,
-                         Container,
-                         KeyValuePairs
-                       };
-    uint qHash(const Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-
-    enum class Attribute { ID = 0,
-                           BankID,
-                           Account,
-                           Payee,
-                           Tag,
-                           Number,
-                           Action,
-                           Value,
-                           Shares,
-                           Price,
-                           Memo,
-                           CostCenter,
-                           ReconcileDate,
-                           ReconcileFlag,
-                           KMMatchedTx,
-                           // insert new entries above this line
-                           LastAttribute
-                         };
-    uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-  }
-}
-
 using namespace eMyMoney;
 
 class MyMoneySplitPrivate : public MyMoneyObjectPrivate
@@ -84,40 +50,6 @@ public:
     m_reconcileFlag(eMyMoney::Split::State::NotReconciled),
     m_isMatched(false)
   {
-  }
-
-  static QString getElName(const Split::Element el)
-  {
-    static const QHash<Split::Element, QString> elNames {
-      {Split::Element::Split,          QStringLiteral("SPLIT")},
-      {Split::Element::Tag,            QStringLiteral("TAG")},
-      {Split::Element::Match,          QStringLiteral("MATCH")},
-      {Split::Element::Container,      QStringLiteral("CONTAINER")},
-      {Split::Element::KeyValuePairs,  QStringLiteral("KEYVALUEPAIRS")}
-    };
-    return elNames[el];
-  }
-
-  static QString getAttrName(const Split::Attribute attr)
-  {
-    static const QHash<Split::Attribute, QString> attrNames {
-      {Split::Attribute::ID,             QStringLiteral("id")},
-      {Split::Attribute::BankID,         QStringLiteral("bankid")},
-      {Split::Attribute::Account,        QStringLiteral("account")},
-      {Split::Attribute::Payee,          QStringLiteral("payee")},
-      {Split::Attribute::Tag,            QStringLiteral("tag")},
-      {Split::Attribute::Number,         QStringLiteral("number")},
-      {Split::Attribute::Action,         QStringLiteral("action")},
-      {Split::Attribute::Value,          QStringLiteral("value")},
-      {Split::Attribute::Shares,         QStringLiteral("shares")},
-      {Split::Attribute::Price,          QStringLiteral("price")},
-      {Split::Attribute::Memo,           QStringLiteral("memo")},
-      {Split::Attribute::CostCenter,     QStringLiteral("costcenter")},
-      {Split::Attribute::ReconcileDate,  QStringLiteral("reconciledate")},
-      {Split::Attribute::ReconcileFlag,  QStringLiteral("reconcileflag")},
-      {Split::Attribute::KMMatchedTx,    QStringLiteral("kmm-matched-tx")}
-    };
-    return attrNames[attr];
   }
 
   /**

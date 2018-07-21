@@ -39,7 +39,6 @@
 class QString;
 class QDate;
 class QPixmap;
-class QDomElement;
 class MyMoneySecurity;
 class MyMoneyMoney;
 class MyMoneySplit;
@@ -368,8 +367,6 @@ public:
     * @param id ID of currency to be associated with this account.
     */
   void setCurrencyId(const QString& id);
-
-  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 
   /**
     * This method checks if a reference to the given object exists. It returns,

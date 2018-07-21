@@ -355,61 +355,6 @@ void MyMoneyAccount::setCostCenterRequired(bool required)
   }
 }
 
-void MyMoneyAccount::writeXML(QDomDocument& document, QDomElement& parent) const
-{
-  auto el = document.createElement(nodeNames[nnAccount]);
-
-  Q_D(const MyMoneyAccount);
-  d->writeBaseXML(document, el);
-
-  el.setAttribute(d->getAttrName(Account::Attribute::ParentAccount), parentAccountId());
-  el.setAttribute(d->getAttrName(Account::Attribute::LastReconciled), MyMoneyUtils::dateToString(lastReconciliationDate()));
-  el.setAttribute(d->getAttrName(Account::Attribute::LastModified), MyMoneyUtils::dateToString(lastModified()));
-  el.setAttribute(d->getAttrName(Account::Attribute::Institution), institutionId());
-  el.setAttribute(d->getAttrName(Account::Attribute::Opened), MyMoneyUtils::dateToString(openingDate()));
-  el.setAttribute(d->getAttrName(Account::Attribute::Number), number());
-  // el.setAttribute(getAttrName(anOpeningBalance), openingBalance().toString());
-  el.setAttribute(d->getAttrName(Account::Attribute::Type), (int)accountType());
-  el.setAttribute(d->getAttrName(Account::Attribute::Name), name());
-  el.setAttribute(d->getAttrName(Account::Attribute::Description), description());
-  if (!currencyId().isEmpty())
-    el.setAttribute(d->getAttrName(Account::Attribute::Currency), currencyId());
-
-  //Add in subaccount information, if this account has subaccounts.
-  if (accountCount()) {
-    QDomElement subAccounts = document.createElement(d->getElName(Account::Element::SubAccounts));
-    foreach (const auto accountID, accountList()) {
-      QDomElement temp = document.createElement(d->getElName(Account::Element::SubAccount));
-      temp.setAttribute(d->getAttrName(Account::Attribute::ID), accountID);
-      subAccounts.appendChild(temp);
-    }
-
-    el.appendChild(subAccounts);
-  }
-
-  // Write online banking settings
-  if (d->m_onlineBankingSettings.pairs().count()) {
-    QDomElement onlinesettings = document.createElement(d->getElName(Account::Element::OnlineBanking));
-    QMap<QString, QString>::const_iterator it_key = d->m_onlineBankingSettings.pairs().constBegin();
-    while (it_key != d->m_onlineBankingSettings.pairs().constEnd()) {
-      onlinesettings.setAttribute(it_key.key(), it_key.value());
-      ++it_key;
-    }
-    el.appendChild(onlinesettings);
-  }
-
-  // FIXME drop the lastStatementDate record from the KVP when it is
-  // not stored there after setLastReconciliationDate() has been changed
-  // See comment there when this will happen
-  // deletePair("lastStatementDate");
-
-
-  //Add in Key-Value Pairs for accounts.
-  MyMoneyKeyValueContainer::writeXML(document, el);
-
-  parent.appendChild(el);
-}
-
 bool MyMoneyAccount::hasReferenceTo(const QString& id) const
 {
   Q_D(const MyMoneyAccount);
@@ -646,11 +591,13 @@ QList< payeeIdentifier > MyMoneyAccount::payeeIdentifiers() const
 
   MyMoneyFile* file = MyMoneyFile::instance();
 
+  const auto strIBAN = QStringLiteral("iban");
+  const auto strBIC = QStringLiteral("bic");
   // Iban & Bic
-  if (!value(d->getAttrName(Account::Attribute::IBAN)).isEmpty()) {
+  if (!value(strIBAN).isEmpty()) {
     payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban(new payeeIdentifiers::ibanBic);
-    iban->setIban(value(d->getAttrName(Account::Attribute::IBAN)));
-    iban->setBic(file->institution(institutionId()).value(d->getAttrName(Account::Attribute::BIC)));
+    iban->setIban(value(strIBAN));
+    iban->setBic(file->institution(institutionId()).value(strBIC));
     iban->setOwnerName(file->user().name());
     list.append(iban);
   }

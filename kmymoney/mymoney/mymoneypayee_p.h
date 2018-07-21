@@ -35,32 +35,6 @@
 
 #include "mymoneyobject_p.h"
 
-namespace Payee
-{
-  enum class Element { Address };
-  uint qHash(const Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-
-  enum class Attribute { Name = 0,
-                         Type,
-                         Reference,
-                         Notes,
-                         MatchingEnabled,
-                         UsingMatchKey,
-                         MatchIgnoreCase,
-                         MatchKey,
-                         DefaultAccountID,
-                         Street,
-                         City,
-                         PostCode,
-                         Email,
-                         State,
-                         Telephone,
-                         // insert new entries above this line
-                         LastAttribute
-                       };
-  uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-}
-
 class MyMoneyPayeePrivate : public MyMoneyObjectPrivate
 {
 public:
@@ -70,36 +44,6 @@ public:
     m_usingMatchKey(false),
     m_matchKeyIgnoreCase(true)
   {
-  }
-
-  static QString getElName(const Payee::Element el)
-  {
-    static const QMap<Payee::Element, QString> elNames {
-      {Payee::Element::Address, QStringLiteral("ADDRESS")}
-    };
-    return elNames[el];
-  }
-
-  static QString getAttrName(const Payee::Attribute attr)
-  {
-    static const QHash<Payee::Attribute, QString> attrNames {
-      {Payee::Attribute::Name,             QStringLiteral("name")},
-      {Payee::Attribute::Type,             QStringLiteral("type")},
-      {Payee::Attribute::Reference,        QStringLiteral("reference")},
-      {Payee::Attribute::Notes,            QStringLiteral("notes")},
-      {Payee::Attribute::MatchingEnabled,  QStringLiteral("matchingenabled")},
-      {Payee::Attribute::UsingMatchKey,    QStringLiteral("usingmatchkey")},
-      {Payee::Attribute::MatchIgnoreCase,  QStringLiteral("matchignorecase")},
-      {Payee::Attribute::MatchKey,         QStringLiteral("matchkey")},
-      {Payee::Attribute::DefaultAccountID, QStringLiteral("defaultaccountid")},
-      {Payee::Attribute::Street,           QStringLiteral("street")},
-      {Payee::Attribute::City,             QStringLiteral("city")},
-      {Payee::Attribute::PostCode,         QStringLiteral("postcode")},
-      {Payee::Attribute::Email,            QStringLiteral("email")},
-      {Payee::Attribute::State,            QStringLiteral("state")},
-      {Payee::Attribute::Telephone,        QStringLiteral("telephone")},
-    };
-    return attrNames[attr];
   }
 
   // Simple fields

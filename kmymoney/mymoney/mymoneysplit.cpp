@@ -46,35 +46,6 @@ MyMoneySplit::MyMoneySplit(const QString &id) :
   d->m_reconcileFlag = eMyMoney::Split::State::NotReconciled;
 }
 
-MyMoneySplit::MyMoneySplit(const QDomElement& node) :
-    MyMoneyObject(*new MyMoneySplitPrivate, node, false),
-    MyMoneyKeyValueContainer(node.elementsByTagName(MyMoneySplitPrivate::getElName(Split::Element::KeyValuePairs)).item(0).toElement())
-{
-  Q_D(MyMoneySplit);
-  if (d->getElName(Split::Element::Split) != node.tagName())
-    throw MYMONEYEXCEPTION_CSTRING("Node was not SPLIT");
-
-  clearId();
-
-  d->m_payee = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Payee)));
-
-  QDomNodeList nodeList = node.elementsByTagName(d->getElName(Split::Element::Tag));
-  for (int i = 0; i < nodeList.count(); i++)
-    d->m_tagList << MyMoneyUtils::QStringEmpty(nodeList.item(i).toElement().attribute(d->getAttrName(Split::Attribute::ID)));
-
-  d->m_reconcileDate = MyMoneyUtils::stringToDate(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::ReconcileDate))));
-  d->m_action = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Action)));
-  d->m_reconcileFlag = static_cast<eMyMoney::Split::State>(node.attribute(d->getAttrName(Split::Attribute::ReconcileFlag)).toInt());
-  d->m_memo = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Memo)));
-  d->m_value = MyMoneyMoney(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Value))));
-  d->m_shares = MyMoneyMoney(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Shares))));
-  d->m_price = MyMoneyMoney(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Price))));
-  d->m_account = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Account)));
-  d->m_costCenter = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::CostCenter)));
-  d->m_number = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Number)));
-  d->m_bankID = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::BankID)));
-}
-
 MyMoneySplit::MyMoneySplit(const MyMoneySplit& other) :
   MyMoneyObject(*new MyMoneySplitPrivate(*other.d_func()), other.id()),
   MyMoneyKeyValueContainer(other)

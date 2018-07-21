@@ -69,8 +69,6 @@ public:
   bool operator == (const MyMoneyCostCenter &) const;
   bool operator <(const MyMoneyCostCenter& right) const;
 
-  void writeXML(QDomDocument& document, QDomElement& parent) const override;
-
   /**
     * This method checks if a reference to the given object exists. It returns,
     * a @p true if the object is referencing the one requested by the
@@ -83,16 +81,7 @@ public:
   bool hasReferenceTo(const QString& id) const override;
 
   static MyMoneyCostCenter null;
-
-private:
-  enum class Attribute { Name };
-
-  static QString getAttrName(const Attribute attr);
-
-  friend uint qHash(const Attribute, uint seed);
 };
-
-inline uint qHash(const MyMoneyCostCenter::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
 
 inline void swap(MyMoneyCostCenter& first, MyMoneyCostCenter& second) // krazy:exclude=inline
 {
