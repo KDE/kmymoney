@@ -508,8 +508,6 @@ public:
   void recordPayment(const QDate&);
   QList<QDate> recordedPayments() const;
 
-  void writeXML(QDomDocument& document, QDomElement& parent) const final override;
-
   /**
     * This method checks if a reference to the given object exists. It returns,
     * a @p true if the object is referencing the one requested by the

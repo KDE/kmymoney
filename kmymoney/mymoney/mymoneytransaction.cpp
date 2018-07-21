@@ -27,8 +27,6 @@
 // QT Includes
 
 #include <QStringList>
-#include <QDomDocument>
-#include <QDomElement>
 #include <QMap>
 
 // ----------------------------------------------------------------------------
@@ -398,27 +396,6 @@ void MyMoneyTransaction::setImported(bool state)
     setValue("Imported", "true");
   else
     deletePair("Imported");
-}
-
-void MyMoneyTransaction::writeXML(QDomDocument& document, QDomElement& parent) const
-{
-  Q_D(const MyMoneyTransaction);
-  auto el = document.createElement(nodeNames[nnTransaction]);
-
-  d->writeBaseXML(document, el);
-  el.setAttribute(d->getAttrName(Transaction::Attribute::PostDate), MyMoneyUtils::dateToString(d->m_postDate));
-  el.setAttribute(d->getAttrName(Transaction::Attribute::Memo), d->m_memo);
-  el.setAttribute(d->getAttrName(Transaction::Attribute::EntryDate), MyMoneyUtils::dateToString(d->m_entryDate));
-  el.setAttribute(d->getAttrName(Transaction::Attribute::Commodity), d->m_commodity);
-
-  auto splits = document.createElement(d->getElName(Transaction::Element::Splits));
-  foreach (const auto split, d->m_splits)
-    split.writeXML(document, splits);
-  el.appendChild(splits);
-
-  MyMoneyKeyValueContainer::writeXML(document, el);
-
-  parent.appendChild(el);
 }
 
 bool MyMoneyTransaction::hasReferenceTo(const QString& id) const

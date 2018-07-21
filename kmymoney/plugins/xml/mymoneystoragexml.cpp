@@ -164,6 +164,7 @@ private:
   static MyMoneyReport readReport(const QDomElement &node);
   static MyMoneyBudget readBudget(const QDomElement &node);
   static MyMoneySchedule readSchedule(const QDomElement &node);
+  static void writeSchedule(const MyMoneySchedule &schedule, QDomDocument &document, QDomElement &parent);
   static onlineJob readOnlineJob(const QDomElement &node);
   static MyMoneyCostCenter readCostCenter(const QDomElement &node);
 };
@@ -1246,6 +1247,42 @@ MyMoneySchedule MyMoneyXmlContentHandler::readSchedule(const QDomElement &node)
   return schedule;
 }
 
+void MyMoneyXmlContentHandler::writeSchedule(const MyMoneySchedule &schedule, QDomDocument &document, QDomElement &parent)
+{
+  auto el = document.createElement(nodeName(Node::ScheduleTX));
+
+  writeBaseXML(schedule.id(), document, el);
+
+  el.setAttribute(attributeName(Attribute::Schedule::Name), schedule.name());
+  el.setAttribute(attributeName(Attribute::Schedule::Type), (int)schedule.type());
+  el.setAttribute(attributeName(Attribute::Schedule::Occurrence), (int)schedule.occurrence());
+  el.setAttribute(attributeName(Attribute::Schedule::OccurrenceMultiplier), schedule.occurrenceMultiplier());
+  el.setAttribute(attributeName(Attribute::Schedule::PaymentType), (int)schedule.paymentType());
+  el.setAttribute(attributeName(Attribute::Schedule::StartDate), MyMoneyUtils::dateToString(schedule.startDate()));
+  el.setAttribute(attributeName(Attribute::Schedule::EndDate), MyMoneyUtils::dateToString(schedule.endDate()));
+  el.setAttribute(attributeName(Attribute::Schedule::Fixed), schedule.isFixed());
+  el.setAttribute(attributeName(Attribute::Schedule::LastDayInMonth), schedule.lastDayInMonth());
+  el.setAttribute(attributeName(Attribute::Schedule::AutoEnter), schedule.autoEnter());
+  el.setAttribute(attributeName(Attribute::Schedule::LastPayment), MyMoneyUtils::dateToString(schedule.lastPayment()));
+  el.setAttribute(attributeName(Attribute::Schedule::WeekendOption), (int)schedule.weekendOption());
+
+  //store the payment history for this scheduled task.
+  QList<QDate> payments = schedule.recordedPayments();
+  QList<QDate>::ConstIterator it;
+  QDomElement paymentsElement = document.createElement(elementName(Element::Schedule::Payments));
+  for (it = payments.constBegin(); it != payments.constEnd(); ++it) {
+    QDomElement paymentEntry = document.createElement(elementName(Element::Schedule::Payment));
+    paymentEntry.setAttribute(attributeName(Attribute::Schedule::Date), MyMoneyUtils::dateToString(*it));
+    paymentsElement.appendChild(paymentEntry);
+  }
+  el.appendChild(paymentsElement);
+
+  //store the transaction data for this task.
+  writeTransaction(schedule.transaction(), document, el);
+
+  parent.appendChild(el);
+}
+
 onlineJob MyMoneyXmlContentHandler::readOnlineJob(const QDomElement &node)
 {
   onlineJob oJob(node.attribute(attributeName(Attribute::Account::ID)));
@@ -1658,7 +1695,7 @@ void MyMoneyStorageXML::writeSchedules(QDomElement& scheduled)
 
 void MyMoneyStorageXML::writeSchedule(QDomElement& scheduledTx, const MyMoneySchedule& tx)
 {
-  tx.writeXML(*m_doc, scheduledTx);
+  MyMoneyXmlContentHandler::writeSchedule(tx, *m_doc, scheduledTx);
 }
 
 void MyMoneyStorageXML::writeSecurities(QDomElement& equities)

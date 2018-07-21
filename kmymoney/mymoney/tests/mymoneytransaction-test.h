@@ -51,7 +51,6 @@ private Q_SLOTS:
   void testIsLoanPayment();
   //void testAddDuplicateAccount();
   //void testModifyDuplicateAccount();
-  void testWriteXML();
   void testAutoCalc();
   void testHasReferenceTo();
   void testIsStockSplit();

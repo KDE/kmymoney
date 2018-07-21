@@ -84,7 +84,7 @@ class KMM_MYMONEY_EXPORT MyMoneyObject
     * @param document reference to QDomDocument
     * @param parent reference to QDomElement parent node
     */
-  virtual void writeXML(QDomDocument& document, QDomElement& parent) const = 0;
+  virtual void writeXML(QDomDocument &document, QDomElement &parent) const;
 
   bool operator == (const MyMoneyObject& right) const;
 

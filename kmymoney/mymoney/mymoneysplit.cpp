@@ -24,9 +24,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDomDocument>
-#include <QDomElement>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -373,42 +370,6 @@ MyMoneyMoney MyMoneySplit::price() const
   if (!d->m_value.isZero() && !d->m_shares.isZero())
     return d->m_value / d->m_shares;
   return MyMoneyMoney::ONE;
-}
-
-void MyMoneySplit::writeXML(QDomDocument& document, QDomElement& parent) const
-{
-  Q_D(const MyMoneySplit);
-  auto el = document.createElement(d->getElName(Split::Element::Split));
-
-  d->writeBaseXML(document, el);
-
-  el.setAttribute(d->getAttrName(Split::Attribute::Payee), d->m_payee);
-  //el.setAttribute(getAttrName(Split::Attribute::Tag), m_tag);
-  el.setAttribute(d->getAttrName(Split::Attribute::ReconcileDate), MyMoneyUtils::dateToString(d->m_reconcileDate));
-  el.setAttribute(d->getAttrName(Split::Attribute::Action), d->m_action);
-  el.setAttribute(d->getAttrName(Split::Attribute::ReconcileFlag), (int)d->m_reconcileFlag);
-  el.setAttribute(d->getAttrName(Split::Attribute::Value), d->m_value.toString());
-  el.setAttribute(d->getAttrName(Split::Attribute::Shares), d->m_shares.toString());
-  if (!d->m_price.isZero())
-    el.setAttribute(d->getAttrName(Split::Attribute::Price), d->m_price.toString());
-  el.setAttribute(d->getAttrName(Split::Attribute::Memo), d->m_memo);
-  // No need to write the split id as it will be re-assigned when the file is read
-  // el.setAttribute(getAttrName(Split::Attribute::ID), split.id());
-  el.setAttribute(d->getAttrName(Split::Attribute::Account), d->m_account);
-  el.setAttribute(d->getAttrName(Split::Attribute::Number), d->m_number);
-  el.setAttribute(d->getAttrName(Split::Attribute::BankID), d->m_bankID);
-  if(!d->m_costCenter.isEmpty())
-    el.setAttribute(d->getAttrName(Split::Attribute::CostCenter), d->m_costCenter);
-
-  for (int i = 0; i < d->m_tagList.count(); i++) {
-    QDomElement sel = document.createElement(d->getElName(Split::Element::Tag));
-    sel.setAttribute(d->getAttrName(Split::Attribute::ID), d->m_tagList[i]);
-    el.appendChild(sel);
-  }
-
-  MyMoneyKeyValueContainer::writeXML(document, el);
-
-  parent.appendChild(el);
 }
 
 bool MyMoneySplit::hasReferenceTo(const QString& id) const

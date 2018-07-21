@@ -267,7 +267,7 @@ void MyMoneyXmlContentHandlerTest::writeTransaction()
   QDomDocument doc("TEST");
   QDomElement el = doc.createElement("TRANSACTION-CONTAINER");
   doc.appendChild(el);
-  t.writeXML(doc, el);
+  MyMoneyXmlContentHandler::writeTransaction(t, doc, el);
 
   QCOMPARE(doc.doctype().name(), QLatin1String("TEST"));
   QDomElement transactionContainer = doc.documentElement();
@@ -1045,7 +1045,7 @@ void MyMoneyXmlContentHandlerTest::writeSchedule()
   QDomDocument doc("TEST");
   QDomElement el = doc.createElement("SCHEDULE-CONTAINER");
   doc.appendChild(el);
-  sch.writeXML(doc, el);
+  MyMoneyXmlContentHandler::writeSchedule(sch, doc, el);
 
   QCOMPARE(doc.doctype().name(), QLatin1String("TEST"));
   QDomElement scheduleContainer = doc.documentElement();

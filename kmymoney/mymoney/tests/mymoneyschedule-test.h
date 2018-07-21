@@ -32,7 +32,6 @@ private Q_SLOTS:
   void testCopyConstructor();
   void testAssignmentConstructor();
   void testAddHalfMonths();
-  void testWriteXML();
   void testAdjustedNextDueDate();
   void testModifyNextDueDate();
   void testDaysBetweenEvents();

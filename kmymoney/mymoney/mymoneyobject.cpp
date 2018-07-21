@@ -74,3 +74,8 @@ void MyMoneyObject::clearId()
   Q_D(MyMoneyObject);
   d->m_id.clear();
 }
+
+void MyMoneyObject::writeXML(QDomDocument &, QDomElement &) const
+{
+
+}

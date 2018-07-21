@@ -24,8 +24,6 @@
 // QT Includes
 
 #include <QList>
-#include <QDomDocument>
-#include <QDomElement>
 #include <QMap>
 
 // ----------------------------------------------------------------------------
@@ -867,43 +865,6 @@ void MyMoneySchedule::fixDate(QDate& date) const
       && QDate::isValid(date.year(), date.month(), fixDate.day())) {
     date = QDate(date.year(), date.month(), fixDate.day());
   }
-}
-
-void MyMoneySchedule::writeXML(QDomDocument& document, QDomElement& parent) const
-{
-  auto el = document.createElement(nodeNames[nnScheduleTX]);
-
-  Q_D(const MyMoneySchedule);
-  d->writeBaseXML(document, el);
-
-  el.setAttribute(d->getAttrName(Schedule::Attribute::Name), d->m_name);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::Type), (int)d->m_type);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::Occurrence), (int)d->m_occurrence);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::OccurrenceMultiplier), d->m_occurrenceMultiplier);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::PaymentType), (int)d->m_paymentType);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::StartDate), MyMoneyUtils::dateToString(d->m_startDate));
-  el.setAttribute(d->getAttrName(Schedule::Attribute::EndDate), MyMoneyUtils::dateToString(d->m_endDate));
-  el.setAttribute(d->getAttrName(Schedule::Attribute::Fixed), d->m_fixed);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::LastDayInMonth), d->m_lastDayInMonth);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::AutoEnter), d->m_autoEnter);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::LastPayment), MyMoneyUtils::dateToString(d->m_lastPayment));
-  el.setAttribute(d->getAttrName(Schedule::Attribute::WeekendOption), (int)d->m_weekendOption);
-
-  //store the payment history for this scheduled task.
-  QList<QDate> payments = recordedPayments();
-  QList<QDate>::ConstIterator it;
-  QDomElement paymentsElement = document.createElement(d->getElName(Schedule::Element::Payments));
-  for (it = payments.constBegin(); it != payments.constEnd(); ++it) {
-    QDomElement paymentEntry = document.createElement(d->getElName(Schedule::Element::Payment));
-    paymentEntry.setAttribute(d->getAttrName(Schedule::Attribute::Date), MyMoneyUtils::dateToString(*it));
-    paymentsElement.appendChild(paymentEntry);
-  }
-  el.appendChild(paymentsElement);
-
-  //store the transaction data for this task.
-  d->m_transaction.writeXML(document, el);
-
-  parent.appendChild(el);
 }
 
 bool MyMoneySchedule::hasReferenceTo(const QString& id) const
