@@ -17,6 +17,7 @@ PUBLIC
   kmm_widgets
   kmm_utils_platformtools
   onlinetask_interfaces
+  xmlstoragehelper
 )
 
 file(GLOB tests_sources "*-test.cpp")
@@ -29,4 +30,5 @@ ecm_add_tests(${tests_sources}
     kmm_widgets
     kmm_utils_platformtools
     kmm_mymoney
+    xmlstoragehelper
 )

@@ -61,14 +61,12 @@
 #include "mymoneyexception.h"
 #include "onlinejob.h"
 #include "storageenums.h"
-#include "mymoneystoragenames.h"
 #include "mymoneyenums.h"
 
 // include the following line to get a 'cout' for debug purposes
 // #include <iostream>
 
 using namespace eMyMoney;
-using namespace MyMoneyStandardAccounts;
 
 const QString MyMoneyFile::AccountSeparator = QChar(':');
 
@@ -1447,35 +1445,35 @@ MyMoneyAccount MyMoneyFile::liability() const
 {
   d->checkStorage();
 
-  return account(stdAccNames[stdAccLiability]);
+  return account(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability));
 }
 
 MyMoneyAccount MyMoneyFile::asset() const
 {
   d->checkStorage();
 
-  return account(stdAccNames[stdAccAsset]);
+  return account(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset));
 }
 
 MyMoneyAccount MyMoneyFile::expense() const
 {
   d->checkStorage();
 
-  return account(stdAccNames[stdAccExpense]);
+  return account(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense));
 }
 
 MyMoneyAccount MyMoneyFile::income() const
 {
   d->checkStorage();
 
-  return account(stdAccNames[stdAccIncome]);
+  return account(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income));
 }
 
 MyMoneyAccount MyMoneyFile::equity() const
 {
   d->checkStorage();
 
-  return account(stdAccNames[stdAccEquity]);
+  return account(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Equity));
 }
 
 unsigned int MyMoneyFile::transactionCount(const QString& account) const

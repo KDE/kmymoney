@@ -11,6 +11,8 @@ target_link_libraries(mymoneystoragexml
     Qt5::Xml
     KF5::I18n
     kmm_mymoney
+  PRIVATE
+    xmlstoragehelper
 )
 
 file(GLOB tests_sources "*-test.cpp")

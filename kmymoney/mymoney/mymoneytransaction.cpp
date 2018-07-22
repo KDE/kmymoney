@@ -32,13 +32,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneystoragenames.h"
 #include "mymoneyutils.h"
 #include "mymoneymoney.h"
 #include "mymoneyexception.h"
 #include "mymoneyenums.h"
-
-using namespace MyMoneyStorageNodes;
 
 MyMoneyTransaction::MyMoneyTransaction() :
     MyMoneyObject(*new MyMoneyTransactionPrivate)

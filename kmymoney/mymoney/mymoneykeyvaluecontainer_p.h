@@ -30,44 +30,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace KVC
-{
-  enum class Element { Pair };
-
-  uint qHash(const Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-
-  enum class Attribute { Key,
-                         Value,
-                         // insert new entries above this line
-                         LastAttribute
-                       };
-
-  uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-}
-
-using namespace KVC;
-
 class MyMoneyKeyValueContainerPrivate
 {
 public:
-
-  static QString getElName(const Element el)
-  {
-    static const QMap<Element, QString> elNames {
-      {Element::Pair, QStringLiteral("PAIR")}
-    };
-    return elNames[el];
-  }
-
-  static QString getAttrName(const Attribute attr)
-  {
-    static const QMap<Attribute, QString> attrNames {
-      {Attribute::Key, QStringLiteral("key")},
-      {Attribute::Value, QStringLiteral("value")}
-    };
-    return attrNames[attr];
-  }
-
   /**
     * This member variable represents the container of key/value pairs.
     */

@@ -43,10 +43,8 @@
 #include "onlinetasks/dummy/tasks/dummytask.h"
 
 #include "mymoneyenums.h"
-#include "mymoneystoragenames.h"
 
 using namespace eMyMoney;
-using namespace MyMoneyStandardAccounts;
 
 QTEST_GUILESS_MAIN(MyMoneyStorageMgrTest)
 
@@ -192,10 +190,10 @@ void MyMoneyStorageMgrTest::testSupportFunctions()
 
 void MyMoneyStorageMgrTest::testIsStandardAccount()
 {
-  QCOMPARE(m->isStandardAccount(stdAccNames[stdAccLiability]), true);
-  QCOMPARE(m->isStandardAccount(stdAccNames[stdAccAsset]), true);
-  QCOMPARE(m->isStandardAccount(stdAccNames[stdAccExpense]), true);
-  QCOMPARE(m->isStandardAccount(stdAccNames[stdAccIncome]), true);
+  QCOMPARE(m->isStandardAccount(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability)), true);
+  QCOMPARE(m->isStandardAccount(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset)), true);
+  QCOMPARE(m->isStandardAccount(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense)), true);
+  QCOMPARE(m->isStandardAccount(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income)), true);
   QCOMPARE(m->isStandardAccount("A0002"), false);
 }
 
@@ -276,13 +274,13 @@ void MyMoneyStorageMgrTest::testAddNewAccount()
   // now try to add account 1 as sub-account to account 2
   a = m->account("A000001");
   try {
-    QCOMPARE(m->d_func()->m_accountList[stdAccNames[stdAccAsset]].accountList().count(), 0);
+    QCOMPARE(m->d_func()->m_accountList[MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset)].accountList().count(), 0);
     m->addAccount(b, a);
     m->commitTransaction();
     m->startTransaction();
     QCOMPARE(m->d_func()->m_accountList["A000002"].accountList()[0], QLatin1String("A000001"));
     QCOMPARE(m->d_func()->m_accountList["A000002"].accountList().count(), 1);
-    QCOMPARE(m->d_func()->m_accountList[stdAccNames[stdAccAsset]].accountList().count(), 0);
+    QCOMPARE(m->d_func()->m_accountList[MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset)].accountList().count(), 0);
     QCOMPARE(m->dirty(), true);
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
@@ -503,7 +501,7 @@ void MyMoneyStorageMgrTest::testReparentAccount()
 
     QCOMPARE(m->expense().accountCount(), 3);
     QCOMPARE(m->account(ex1.id()).accountCount(), 1);
-    QCOMPARE(ex3.parentAccountId(), stdAccNames[stdAccExpense]);
+    QCOMPARE(ex3.parentAccountId(), MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense));
 
     m->reparentAccount(ex3, ex1);
     QCOMPARE(m->expense().accountCount(), 2);
@@ -914,22 +912,22 @@ void MyMoneyStorageMgrTest::testAddPayee()
 void MyMoneyStorageMgrTest::testSetAccountName()
 {
   try {
-    m->setAccountName(stdAccNames[stdAccLiability], "Verbindlichkeiten");
+    m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability), "Verbindlichkeiten");
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
   try {
-    m->setAccountName(stdAccNames[stdAccAsset], QString("Vermögen"));
+    m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset), QString("Vermögen"));
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
   try {
-    m->setAccountName(stdAccNames[stdAccExpense], "Ausgaben");
+    m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense), "Ausgaben");
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
   try {
-    m->setAccountName(stdAccNames[stdAccIncome], "Einnahmen");
+    m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income), "Einnahmen");
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }

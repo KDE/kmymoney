@@ -32,7 +32,6 @@ private Q_SLOTS:
   void testCopyConstructor();
   void testAssignmentConstructor();
   void testEquality();
-  void testReadXML();
 };
 
 #endif

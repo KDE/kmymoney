@@ -34,8 +34,6 @@
 
 class QString;
 class QDate;
-class QDomElement;
-class QDomDocument;
 class MyMoneyMoney;
 
 template <typename T> class QList;
@@ -64,13 +62,6 @@ class KMM_MYMONEY_EXPORT MyMoneyBudget: public MyMoneyObject
 public:
   MyMoneyBudget();
   explicit MyMoneyBudget(const QString &id);
-
-  /**
-    * This constructor creates an object based on the data found in the
-    * QDomElement referenced by @p node. If problems arise, the @p id of
-    * the object is cleared (see MyMoneyObject::clearId()).
-    */
-  explicit MyMoneyBudget(const QDomElement& node);
 
   /**
     * This constructor creates an object based on the data found in the
@@ -189,38 +180,6 @@ public:
   QList<AccountGroup> getaccounts() const;
 
   QMap<QString, MyMoneyBudget::AccountGroup> accountsMap() const;
-
-  /**
-    * This method writes this Budget to the DOM element @p e,
-    * within the DOM document @p doc.
-    *
-    * @param e The element which should be populated with info from this Budget
-    * @param doc The document which we can use to create new sub-elements
-    *              if needed
-    */
-  void write(QDomElement& e, QDomDocument *doc) const;
-
-  /**
-    * This method reads a Budget from the DOM element @p e, and
-    * populates this Budget with the results.
-    *
-    * @param e The element from which the Budget should be read
-    *
-    * @return bool True if a Budget was successfully loaded from the
-    *    element @p e.  If false is returned, the contents of this Budget
-    *    object are undefined.
-    */
-  bool read(const QDomElement& e);
-
-  /**
-    * This method creates a QDomElement for the @p document
-    * under the parent node @p parent.  (This version overwrites the
-    * MMObject base class.)
-    *
-    * @param document reference to QDomDocument
-    * @param parent reference to QDomElement parent node
-    */
-  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 
   /**
     * This method checks if a reference to the given object exists. It returns,

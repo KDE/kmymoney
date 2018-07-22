@@ -2531,10 +2531,8 @@ QMap<QString, MyMoneyReport> MyMoneyStorageSql::fetchReports(const QStringList& 
 
     QDomNode child = dom.firstChild();
     child = child.firstChild();
-    MyMoneyReport report;
-
-    if (report.read(child.toElement()))
-      rList[report.id()] = report;
+    auto report = MyMoneyXmlContentHandler2::readReport(child.toElement());
+    rList[report.id()] = report;
 
     d->signalProgress(++progress, 0);
   }
@@ -2573,7 +2571,7 @@ QMap<QString, MyMoneyBudget> MyMoneyStorageSql::fetchBudgets(const QStringList& 
 
     QDomNode child = dom.firstChild();
     child = child.firstChild();
-    MyMoneyBudget budget(child.toElement());
+    auto budget = MyMoneyXmlContentHandler2::readBudget(child.toElement());
     budgets.insert(budget.id(), budget);
     d->signalProgress(++progress, 0);
   }

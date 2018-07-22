@@ -40,9 +40,7 @@
 #include "mymoneyaccount.h"
 #include "mymoneysplit.h"
 #include "imymoneyprocessingcalendar.h"
-#include "mymoneystoragenames.h"
 
-using namespace MyMoneyStorageNodes;
 using namespace eMyMoney;
 
 static IMyMoneyProcessingCalendar* processingCalendarPtr = 0;

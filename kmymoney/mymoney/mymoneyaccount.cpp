@@ -51,10 +51,8 @@
 #include "payeeidentifier/payeeidentifiertyped.h"
 #include "payeeidentifier/ibanbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
-#include "mymoneystoragenames.h"
 #include "icons/icons.h"
 
-using namespace MyMoneyStorageNodes;
 using namespace Icons;
 
 MyMoneyAccount::MyMoneyAccount() :
@@ -619,4 +617,16 @@ bool MyMoneyAccount::hasOnlineMapping() const
 {
   Q_D(const MyMoneyAccount);
   return !d->m_onlineBankingSettings.value(QLatin1String("provider")).isEmpty();
+}
+
+QString MyMoneyAccount::stdAccName(eMyMoney::Account::Standard stdAccID)
+{
+  static const QHash<eMyMoney::Account::Standard, QString> stdAccNames {
+    {eMyMoney::Account::Standard::Liability, QStringLiteral("AStd::Liability")},
+    {eMyMoney::Account::Standard::Asset,     QStringLiteral("AStd::Asset")},
+    {eMyMoney::Account::Standard::Expense,   QStringLiteral("AStd::Expense")},
+    {eMyMoney::Account::Standard::Income,    QStringLiteral("AStd::Income")},
+    {eMyMoney::Account::Standard::Equity,    QStringLiteral("AStd::Equity")},
+  };
+  return stdAccNames.value(stdAccID);
 }

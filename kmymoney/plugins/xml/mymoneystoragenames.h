@@ -26,56 +26,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace MyMoneyStorageTags {
-
-enum tagNameE { tnInstitutions, tnPayees, tnCostCenters,
-                tnTags, tnAccounts, tnTransactions,
-                tnSchedules, tnSecurities, tnCurrencies,
-                tnPrices, tnReports, tnBudgets, tnOnlineJobs,
-                tnKMMFile, tnFileInfo, tnUser
-              };
-
-extern const QHash<tagNameE, QString>    tagNames;
-}
-
-namespace MyMoneyStorageNodes {
-
-enum ndNameE { nnInstitution, nnPayee, nnCostCenter,
-               nnTag, nnAccount, nnTransaction,
-               nnScheduleTX, nnSecurity, nnCurrency,
-               nnPrice, nnPricePair, nnReport, nnBudget, nnOnlineJob,
-               nnKeyValuePairs, nnEquity
-             };
-
-extern const QHash<ndNameE, QString>    nodeNames;
-}
-
-namespace MyMoneyStorageAttributes {
-
-enum attrNameE { anID, anDate, anCount, anFrom, anTo,
-                 anSource, anKey, anValue, anPrice,
-                 anName, anEmail, anCountry, anCity,
-                 anZipCode, anStreet, anTelephone
-               };
-
-extern const QHash<attrNameE, QString>    attrNames;
-}
-
-namespace MyMoneyStandardAccounts {
-
-enum idNameE { stdAccLiability, stdAccAsset, stdAccExpense, stdAccIncome, stdAccEquity };
-
-extern const QHash<idNameE, QString>    stdAccNames;
-}
-
-enum class StdAccName {
-  Liability,
-  Asset,
-  Expense,
-  Income,
-  Equity
-};
-
 enum class Tag {
   Institutions,
   Payees,
@@ -156,26 +106,6 @@ namespace Element {
     AccountID,
     AccountIDS,
     Address
-  };
-
-  enum class Report {
-    Payee,
-    Tag,
-    Account,
-    Text,
-    Type,
-    State,
-    Number,
-    Amount,
-    Dates,
-    Category,
-    AccountGroup
-  };
-
-  enum class Budget {
-    Budget = 0,
-    Account,
-    Period
   };
 
   enum class Schedule {
@@ -328,41 +258,6 @@ namespace Attribute {
     LastAttribute
   };
 
-  enum class Report {
-    ID = 0, Group, Type, Name, Comment, ConvertCurrency, Favorite,
-    SkipZero, DateLock, DataLock, MovingAverageDays,
-    IncludesActuals, IncludesForecast, IncludesPrice,
-    IncludesAveragePrice, IncludesMovingAverage,
-    IncludesSchedules, IncludesTransfers, IncludesUnused,
-    MixedTime, Investments, Budget,
-    ShowRowTotals, ShowColumnTotals, Detail,
-    ColumnsAreDays, ChartType,
-    ChartCHGridLines, ChartSVGridLines,
-    ChartDataLabels, ChartByDefault,
-    LogYAxis, ChartLineWidth, ColumnType, RowType,
-    DataRangeStart, DataRangeEnd,
-    DataMajorTick, DataMinorTick,
-    YLabelsPrecision, QueryColumns,
-    Tax, Loans, HideTransactions, InvestmentSum,
-    SettlementPeriod, ShowSTLTCapitalGains, TermsSeparator,
-    Pattern, CaseSensitive, RegEx, InvertText, State,
-    From, To,
-    // insert new entries above this line
-    LastAttribute
-  };
-
-  enum class Budget {
-    ID = 0,
-    Name,
-    Start,
-    Version,
-    BudgetLevel,
-    BudgetSubAccounts,
-    Amount,
-    // insert new entries above this line
-    LastAttribute
-  };
-
   enum class Schedule {
     ID = 0,
     Name,
@@ -429,12 +324,6 @@ QString attributeName(Attribute::KVP attributeID);
 QString elementName(Element::Institution elementID);
 QString attributeName(Attribute::Institution attributeID);
 
-QString elementName(Element::Report elementID);
-QString attributeName(Attribute::Report attributeID);
-
-QString elementName(Element::Budget elementID);
-QString attributeName(Attribute::Budget attributeID);
-
 QString elementName(Element::Schedule elementID);
 QString attributeName(Attribute::Schedule attributeID);
 
@@ -443,59 +332,7 @@ QString attributeName(Attribute::OnlineJob attributeID);
 
 QString attributeName(Attribute::CostCenter attributeID);
 
-QString stdAccName(StdAccName stdAccID);
 QString tagName(Tag tagID);
 QString nodeName(Node nodeID);
-
-namespace eMyMoney { namespace Budget { enum class Level; } }
-
-namespace eMyMoney { namespace Report { enum class RowType; } }
-namespace eMyMoney { namespace Report { enum class ColumnType; } }
-namespace eMyMoney { namespace Report { enum QueryColumn : int; } }
-namespace eMyMoney { namespace Report { enum class ChartType; } }
-namespace eMyMoney { namespace Report { enum class DataLock; } }
-namespace eMyMoney { namespace Report { enum class ReportType; } }
-namespace eMyMoney { namespace Report { enum class DetailLevel; } }
-
-QHash<eMyMoney::Budget::Level, QString> budgetLevelsLUT();
-QString budgetLevels(eMyMoney::Budget::Level textID);
-
-QHash<eMyMoney::Report::RowType, QString> rowTypesLUT();
-QString reportNames(eMyMoney::Report::RowType textID);
-eMyMoney::Report::RowType stringToRowType(const QString &text);
-QHash<eMyMoney::Report::ColumnType, QString> columTypesLUT();
-QString reportNames(eMyMoney::Report::ColumnType textID);
-eMyMoney::Report::ColumnType stringToColumnType(const QString &text);
-QHash<eMyMoney::Report::QueryColumn, QString> queryColumnsLUT();
-QString reportNamesForQC(eMyMoney::Report::QueryColumn textID);
-eMyMoney::Report::QueryColumn stringToQueryColumn(const QString &text);
-QHash<eMyMoney::Report::DetailLevel, QString> detailLevelLUT();
-QString reportNames(eMyMoney::Report::DetailLevel textID);
-eMyMoney::Report::DetailLevel stringToDetailLevel(const QString &text);
-QHash<eMyMoney::Report::ChartType, QString> chartTypeLUT();
-QString reportNames(eMyMoney::Report::ChartType textID);
-eMyMoney::Report::ChartType stringToChartType(const QString &text);
-QHash<int, QString> typeAttributeLUT();
-QString typeAttributeToString(int textID);
-int stringToTypeAttribute(const QString &text);
-QHash<int, QString> stateAttributeLUT();
-QString stateAttributeToString(int textID);
-int stringToStateAttribute(const QString &text);
-QHash<int, QString> dateLockLUT();
-QString dateLockAttributeToString(int textID);
-int stringToDateLockAttribute(const QString &text);
-QHash<eMyMoney::Report::DataLock, QString> dataLockLUT();
-QString reportNames(eMyMoney::Report::DataLock textID);
-eMyMoney::Report::DataLock stringToDataLockAttribute(const QString &text);
-QHash<int, QString> accountTypeAttributeLUT();
-QString accountTypeAttributeToString(int textID);
-int stringToAccountTypeAttribute(const QString &text);
-eMyMoney::Report::ReportType rowTypeToReportType(eMyMoney::Report::RowType rowType);
-
-namespace eMyMoney { namespace Budget { enum class Level; } }
-
-QHash<eMyMoney::Budget::Level, QString> budgetLevelLUT();
-QString budgetNames(eMyMoney::Budget::Level textID);
-eMyMoney::Budget::Level stringToBudgetLevel(const QString &text);
 
 #endif

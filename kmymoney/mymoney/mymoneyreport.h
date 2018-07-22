@@ -32,8 +32,6 @@
 #include "mymoneyunittestable.h"
 
 class QString;
-class QDomElement;
-class QDomDocument;
 class MyMoneyAccount;
 
 template <typename T> class QList;
@@ -369,40 +367,6 @@ public:
     * @return true if account is in filter set, false otherwise
     */
   bool includes(const MyMoneyAccount& acc) const;
-
-  /**
-    * This method writes this report to the DOM element @p e,
-    * within the DOM document @p doc.
-    *
-    * @param e The element which should be populated with info from this report
-    * @param doc The document which we can use to create new sub-elements
-    *              if needed
-    * @param anonymous Whether the sensitive parts of the report should be
-    *              masked
-    */
-  void write(QDomElement& e, QDomDocument *doc, bool anonymous = false) const;
-
-  /**
-    * This method reads a report from the DOM element @p e, and
-    * populates this report with the results.
-    *
-    * @param e The element from which the report should be read
-    *
-    * @return bool True if a report was successfully loaded from the
-    *    element @p e.  If false is returned, the contents of this report
-    *    object are undefined.
-    */
-  bool read(const QDomElement& e);
-
-  /**
-    * This method creates a QDomElement for the @p document
-    * under the parent node @p parent.  (This version overwrites the
-    * MMObject base class.)
-    *
-    * @param document reference to QDomDocument
-    * @param parent reference to QDomElement parent node
-    */
-  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 
   /**
     * This method checks if a reference to the given object exists. It returns,

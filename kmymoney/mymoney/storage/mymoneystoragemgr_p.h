@@ -58,9 +58,7 @@
 #include "mymoneymap.h"
 #include "onlinejob.h"
 #include "mymoneyenums.h"
-#include "mymoneystoragenames.h"
 
-using namespace MyMoneyStandardAccounts;
 using namespace eStorage;
 
 const int INSTITUTION_ID_SIZE = 6;
@@ -113,34 +111,34 @@ public:
     MyMoneyAccount acc_l;
     acc_l.setAccountType(eMyMoney::Account::Type::Liability);
     acc_l.setName("Liability");
-    MyMoneyAccount liability(stdAccNames[stdAccLiability], acc_l);
+    MyMoneyAccount liability(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability), acc_l);
 
     MyMoneyAccount acc_a;
     acc_a.setAccountType(eMyMoney::Account::Type::Asset);
     acc_a.setName("Asset");
-    MyMoneyAccount asset(stdAccNames[stdAccAsset], acc_a);
+    MyMoneyAccount asset(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset), acc_a);
 
     MyMoneyAccount acc_e;
     acc_e.setAccountType(eMyMoney::Account::Type::Expense);
     acc_e.setName("Expense");
-    MyMoneyAccount expense(stdAccNames[stdAccExpense], acc_e);
+    MyMoneyAccount expense(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense), acc_e);
 
     MyMoneyAccount acc_i;
     acc_i.setAccountType(eMyMoney::Account::Type::Income);
     acc_i.setName("Income");
-    MyMoneyAccount income(stdAccNames[stdAccIncome], acc_i);
+    MyMoneyAccount income(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income), acc_i);
 
     MyMoneyAccount acc_q;
     acc_q.setAccountType(eMyMoney::Account::Type::Equity);
     acc_q.setName("Equity");
-    MyMoneyAccount equity(stdAccNames[stdAccEquity], acc_q);
+    MyMoneyAccount equity(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Equity), acc_q);
 
     QMap<QString, MyMoneyAccount> map;
-    map[stdAccNames[stdAccAsset]] = asset;
-    map[stdAccNames[stdAccLiability]] = liability;
-    map[stdAccNames[stdAccIncome]] = income;
-    map[stdAccNames[stdAccExpense]] = expense;
-    map[stdAccNames[stdAccEquity]] = equity;
+    map[MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset)] = asset;
+    map[MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability)] = liability;
+    map[MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income)] = income;
+    map[MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense)] = expense;
+    map[MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Equity)] = equity;
 
     // load account list with initial accounts
     m_accountList = map;

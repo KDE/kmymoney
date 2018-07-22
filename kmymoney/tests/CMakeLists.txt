@@ -18,4 +18,5 @@ target_link_libraries(kmm_testutilities
     Qt5::Core
   PRIVATE
     mymoneystoragexml
+    xmlstoragehelper
 )

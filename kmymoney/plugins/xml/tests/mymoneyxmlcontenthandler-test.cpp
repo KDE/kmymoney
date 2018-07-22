@@ -26,8 +26,126 @@
 
 #include <QtTest>
 #include "../mymoneystoragexml.cpp"
+#include "mymoneyobject_p.h"
+#include "mymoneyobject.h"
 
 QTEST_GUILESS_MAIN(MyMoneyXmlContentHandlerTest)
+
+class TestMyMoneyObjectPrivate : public MyMoneyObjectPrivate
+{
+public:
+  TestMyMoneyObjectPrivate()
+  {
+  }
+};
+class TestMyMoneyObject : public MyMoneyObject
+{
+  Q_DECLARE_PRIVATE(TestMyMoneyObject)
+public:
+  TestMyMoneyObject() : MyMoneyObject(*new MyMoneyObjectPrivate) {}
+  TestMyMoneyObject(const QString &id) : MyMoneyObject(*new MyMoneyObjectPrivate, id) { }
+  TestMyMoneyObject & operator=(TestMyMoneyObject other);
+  friend void swap(TestMyMoneyObject& first, TestMyMoneyObject& second);
+  ~TestMyMoneyObject(){}
+  bool hasReferenceTo(const QString&) const final override {
+    return false;
+  }
+
+  static TestMyMoneyObject readBaseXML(const QDomElement &node, bool forceId = true)
+  {
+    TestMyMoneyObject obj(node.attribute(QStringLiteral("id")));
+    if (obj.id() == 0 && forceId)
+      throw MYMONEYEXCEPTION_CSTRING("Node has no ID");
+    return obj;
+  }
+};
+
+void swap(TestMyMoneyObject& first, TestMyMoneyObject& second)
+{
+  using std::swap;
+  swap(first.d_ptr, second.d_ptr);
+}
+
+TestMyMoneyObject & TestMyMoneyObject::operator=(TestMyMoneyObject other)
+{
+  swap(*this, other);
+  return *this;
+}
+
+
+void MyMoneyXmlContentHandlerTest::readMyMoneyObject()
+{
+  TestMyMoneyObject t;
+
+  QString ref_ok = QString(
+                     "<!DOCTYPE TEST>\n"
+                     "<TRANSACTION-CONTAINER>\n"
+                     " <MYMONEYOBJECT id=\"T000000000000000001\" >\n"
+                     " </MYMONEYOBJECT>\n"
+                     "</TRANSACTION-CONTAINER>\n"
+                   );
+
+  QString ref_false1 = QString(
+                         "<!DOCTYPE TEST>\n"
+                         "<TRANSACTION-CONTAINER>\n"
+                         " <MYMONEYOBJECT id=\"\" >\n"
+                         " </MYMONEYOBJECT>\n"
+                         "</TRANSACTION-CONTAINER>\n"
+                       );
+
+  QString ref_false2 = QString(
+                         "<!DOCTYPE TEST>\n"
+                         "<TRANSACTION-CONTAINER>\n"
+                         " <MYMONEYOBJECT >\n"
+                         " </MYMONEYOBJECT>\n"
+                         "</TRANSACTION-CONTAINER>\n"
+                       );
+
+  QDomDocument doc;
+  QDomElement node;
+
+  // id="" but required
+  doc.setContent(ref_false1);
+  node = doc.documentElement().firstChild().toElement();
+
+  try {
+    t = TestMyMoneyObject::readBaseXML(node);
+    QFAIL("Missing expected exception");
+  } catch (const MyMoneyException &) {
+  }
+
+  // id attribute missing but required
+  doc.setContent(ref_false2);
+  node = doc.documentElement().firstChild().toElement();
+
+  try {
+    t = TestMyMoneyObject::readBaseXML(node);
+    QFAIL("Missing expected exception");
+  } catch (const MyMoneyException &) {
+  }
+
+  // id present
+  doc.setContent(ref_ok);
+  node = doc.documentElement().firstChild().toElement();
+
+  try {
+    t = TestMyMoneyObject::readBaseXML(node);
+    QVERIFY(t.id() == "T000000000000000001");
+  } catch (const MyMoneyException &) {
+    QFAIL("Unexpected exception");
+  }
+
+  // id="" but not required
+  doc.setContent(ref_false1);
+  node = doc.documentElement().firstChild().toElement();
+
+  try {
+    t = TestMyMoneyObject::readBaseXML(node, false);
+    QVERIFY(t.id().isEmpty());
+  } catch (const MyMoneyException &) {
+    QFAIL("Unexpected exception");
+  }
+}
 
 void MyMoneyXmlContentHandlerTest::readKeyValueContainer()
 {
@@ -97,7 +215,7 @@ void MyMoneyXmlContentHandlerTest::writeKeyValueContainer()
   QDomDocument doc("TEST");
   QDomElement el = doc.createElement("KVP-CONTAINER");
   doc.appendChild(el);
-  kvp.writeXML(doc, el);
+  MyMoneyXmlContentHandler::writeKeyValueContainer(kvp, doc, el);
 
   QCOMPARE(doc.doctype().name(), QLatin1String("TEST"));
   QDomElement kvpContainer = doc.documentElement();

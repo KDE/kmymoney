@@ -1,7 +1,8 @@
 /*
- * Copyright 2006       Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2004-2006  Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2006       Darren Gould <darren_gould@gmx.de>
- * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2007-2010  Alvaro Soliverez <asoliverez@gmail.com>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -17,45 +18,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MYMONEYBUDGET_P_H
-#define MYMONEYBUDGET_P_H
-
-// ----------------------------------------------------------------------------
-// QT Includes
-
-#include <QDate>
-#include <QHash>
-#include <QMap>
+#ifndef XMLSTORAGEHELPER_H
+#define XMLSTORAGEHELPER_H
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
+// QT Includes
+
+// ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyobject_p.h"
-#include "mymoneymoney.h"
-#include "mymoneyenums.h"
+class MyMoneyReport;
+class MyMoneyBudget;
 
-class MyMoneyBudgetPrivate : public MyMoneyObjectPrivate
-{
-public:
-  /**
-    * The user-assigned name of the Budget
-    */
-  QString m_name;
+class QDomDocument;
+class QDomElement;
 
-  /**
-    * The user-assigned year of the Budget
-    */
-  QDate m_start;
+namespace MyMoneyXmlContentHandler2 {
+  MyMoneyReport readReport(const QDomElement &node);
+  void writeReport(const MyMoneyReport &report, QDomDocument &document, QDomElement &parent);
 
-  /**
-    * Map the budgeted accounts
-    *
-    * Each account Id is stored against the AccountGroup information
-    */
-  QMap<QString, MyMoneyBudget::AccountGroup> m_accounts;
-};
+  MyMoneyBudget readBudget(const QDomElement &node);
+  void writeBudget(const MyMoneyBudget &budget, QDomDocument &document, QDomElement &parent);
+}
 
 #endif

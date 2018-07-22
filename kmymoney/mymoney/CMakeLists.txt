@@ -34,7 +34,6 @@ set(kmm_mymoney_LIB_SRCS
   set(storage_a_SOURCES
     ./storage/imymoneystorageformat.cpp
     ./storage/mymoneystoragemgr.cpp
-    ./storage/mymoneystoragenames.cpp
     )
 
   set(onlineTask_a_SOURCES

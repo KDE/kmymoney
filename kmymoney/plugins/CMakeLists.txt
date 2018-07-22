@@ -9,6 +9,10 @@ add_subdirectory( reconciliationreport )
 add_subdirectory( checkprinting )
 add_subdirectory( views )
 
+if(ENABLE_SQLSTORAGE OR ENABLE_XMLSTORAGE)
+  add_subdirectory(xmlhelper)
+endif()
+
 if(ENABLE_SQLSTORAGE)
   add_subdirectory(sql)
 endif()

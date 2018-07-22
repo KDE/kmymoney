@@ -40,10 +40,6 @@ private Q_SLOTS:
   void testLoadList();
   void testArrayRead();
   void testArrayWrite();
-  void testWriteXML();
-  void testReadXML();
-  void testElementNames();
-  void testAttributeNames();
 };
 
 #endif

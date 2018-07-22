@@ -19,6 +19,8 @@
 
 #include <QtTest>
 #include "../mymoneystoragenames.cpp"
+#include "plugins/xmlhelper/xmlstoragehelper.h"
+#include "plugins/xmlhelper/xmlstoragehelper.cpp"
 
 QTEST_GUILESS_MAIN(MyMoneyStorageNamesTest)
 
@@ -166,7 +168,7 @@ void MyMoneyStorageNamesTest::institutionAttributeNames()
 void MyMoneyStorageNamesTest::reportElementNames()
 {
   for (auto i = (int)Element::Report::Payee; i <= (int)Element::Report::AccountGroup; ++i) {
-    auto isEmpty = elementName(static_cast<Element::Report>(i)).isEmpty();
+    auto isEmpty = MyMoneyXmlContentHandler2::elementName(static_cast<Element::Report>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty element's name " << i;
     QVERIFY(!isEmpty);
@@ -176,7 +178,7 @@ void MyMoneyStorageNamesTest::reportElementNames()
 void MyMoneyStorageNamesTest::reportAttributeNames()
 {
   for (auto i = (int)Attribute::Report::ID; i < (int)Attribute::Report::LastAttribute; ++i) {
-    auto isEmpty = attributeName(static_cast<Attribute::Report>(i)).isEmpty();
+    auto isEmpty = MyMoneyXmlContentHandler2::attributeName(static_cast<Attribute::Report>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);
@@ -186,7 +188,7 @@ void MyMoneyStorageNamesTest::reportAttributeNames()
 void MyMoneyStorageNamesTest::budgetElementNames()
 {
   for (auto i = (int)Element::Budget::Budget; i <= (int)Element::Budget::Period; ++i) {
-    auto isEmpty = elementName(static_cast<Element::Budget>(i)).isEmpty();
+    auto isEmpty = MyMoneyXmlContentHandler2::elementName(static_cast<Element::Budget>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty element's name " << i;
     QVERIFY(!isEmpty);
@@ -196,7 +198,7 @@ void MyMoneyStorageNamesTest::budgetElementNames()
 void MyMoneyStorageNamesTest::budgetAttributeNames()
 {
   for (auto i = (int)Attribute::Budget::ID; i < (int)Attribute::Budget::LastAttribute; ++i) {
-    auto isEmpty = attributeName(static_cast<Attribute::Budget>(i)).isEmpty();
+    auto isEmpty = MyMoneyXmlContentHandler2::attributeName(static_cast<Attribute::Budget>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty attribute's name " << i;
     QVERIFY(!isEmpty);

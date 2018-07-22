@@ -33,10 +33,7 @@
 // Project Includes
 
 #include <mymoneyexception.h>
-#include "mymoneystoragenames.h"
 #include "mymoneyenums.h"
-
-using namespace MyMoneyStorageNodes;
 
 MyMoneyPayee MyMoneyPayee::null;
 

@@ -149,11 +149,11 @@ public:
     * @param id QString reference to one of the standard accounts. Possible
     *           values are:
     *
-    *           @li stdAccNames[stdAccLiability]
-    *           @li stdAccNames[stdAccAsset]
-    *           @li stdAccNames[stdAccExpense]
-    *           @li stdAccNames[stdAccIncome]
-    *           @li stdAccNames[stdAccEquity]
+    *           @li MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability)
+    *           @li MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset)
+    *           @li MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense)
+    *           @li MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income)
+    *           @li MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Equity)
     *
     * @param name QString reference to the name to be set
     *

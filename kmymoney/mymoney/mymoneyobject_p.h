@@ -44,16 +44,6 @@ public:
     m_id = id;
   }
 
-  /**
-   * This method writes out the members contained in this object.
-   */
-  void writeBaseXML(QDomDocument& document, QDomElement& el) const
-  {
-    Q_UNUSED(document);
-
-    el.setAttribute(QStringLiteral("id"), m_id);
-  }
-
   QString m_id;
 };
 

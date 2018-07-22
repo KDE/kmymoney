@@ -23,9 +23,6 @@
 
 #include "tasks/onlinetask.h"
 #include "onlinejobadministration.h"
-#include "mymoneystoragenames.h"
-
-using namespace MyMoneyStorageNodes;
 
 onlineJob::onlineJob() :
   MyMoneyObject(*new onlineJobPrivate),

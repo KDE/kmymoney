@@ -84,11 +84,10 @@
 #include "payeeidentifier/ibanbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
 #include "onlinetasks/sepa/sepaonlinetransferimpl.h"
+#include "xmlstoragehelper.h"
 #include "mymoneyenums.h"
-#include "mymoneystoragenames.h"
 
 using namespace eMyMoney;
-using namespace MyMoneyStandardAccounts;
 
 class FilterFail
 {
@@ -438,27 +437,27 @@ public:
       MyMoneyAccount acc_l;
       acc_l.setAccountType(Account::Type::Liability);
       acc_l.setName("Liability");
-      MyMoneyAccount liability(stdAccNames[stdAccLiability], acc_l);
+      MyMoneyAccount liability(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability), acc_l);
 
       MyMoneyAccount acc_a;
       acc_a.setAccountType(Account::Type::Asset);
       acc_a.setName("Asset");
-      MyMoneyAccount asset(stdAccNames[stdAccAsset], acc_a);
+      MyMoneyAccount asset(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset), acc_a);
 
       MyMoneyAccount acc_e;
       acc_e.setAccountType(Account::Type::Expense);
       acc_e.setName("Expense");
-      MyMoneyAccount expense(stdAccNames[stdAccExpense], acc_e);
+      MyMoneyAccount expense(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense), acc_e);
 
       MyMoneyAccount acc_i;
       acc_i.setAccountType(Account::Type::Income);
       acc_i.setName("Income");
-      MyMoneyAccount income(stdAccNames[stdAccIncome], acc_i);
+      MyMoneyAccount income(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income), acc_i);
 
       MyMoneyAccount acc_q;
       acc_q.setAccountType(Account::Type::Equity);
       acc_q.setName("Equity");
-      MyMoneyAccount equity(stdAccNames[stdAccEquity], acc_q);
+      MyMoneyAccount equity(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Equity), acc_q);
 
       QList<MyMoneyAccount> stdList;
       stdList << asset;
@@ -1454,7 +1453,7 @@ public:
     QDomDocument d; // create a dummy XML document
     QDomElement e = d.createElement("REPORTS");
     d.appendChild(e);
-    rep.writeXML(d, e); // write the XML to document
+    MyMoneyXmlContentHandler2::writeReport(rep, d, e); // write the XML to document
     query.bindValue(":id", rep.id());
     query.bindValue(":name", rep.name());
     query.bindValue(":XML", d.toString());
@@ -1466,7 +1465,7 @@ public:
     QDomDocument d; // create a dummy XML document
     QDomElement e = d.createElement("BUDGETS");
     d.appendChild(e);
-    bud.writeXML(d, e); // write the XML to document
+    MyMoneyXmlContentHandler2::writeBudget(bud, d, e); // write the XML to document
     query.bindValue(":id", bud.id());
     query.bindValue(":name", bud.name());
     query.bindValue(":start", bud.budgetStart());

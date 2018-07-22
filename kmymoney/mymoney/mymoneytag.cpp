@@ -26,9 +26,6 @@
 // Project Includes
 
 #include "mymoneyexception.h"
-#include "mymoneystoragenames.h"
-
-using namespace MyMoneyStorageNodes;
 
 MyMoneyTag MyMoneyTag::null;
 

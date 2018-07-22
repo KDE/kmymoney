@@ -49,6 +49,16 @@ namespace eMyMoney {
       MaxAccountTypes       /**< Denotes the number of different account types */
     };
     inline uint qHash(const Type key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+
+    enum class Standard {
+      Liability,
+      Asset,
+      Expense,
+      Income,
+      Equity
+    };
+
+    inline uint qHash(const Standard key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
   }
 
   namespace Payee {

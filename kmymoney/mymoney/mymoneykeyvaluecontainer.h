@@ -36,8 +36,6 @@
 #include "mymoneyunittestable.h"
 
 class QString;
-class QDomDocument;
-class QDomElement;
 
 template <class Key, class Value> class QMap;
 
@@ -63,7 +61,6 @@ protected:
 
 public:
   MyMoneyKeyValueContainer();
-  explicit MyMoneyKeyValueContainer(const QDomElement& node);
 
   MyMoneyKeyValueContainer(const MyMoneyKeyValueContainer & other);
   MyMoneyKeyValueContainer(MyMoneyKeyValueContainer && other);
@@ -133,15 +130,6 @@ public:
   QString operator[](const QString& k) const;
 
   QString& operator[](const QString& k);
-
-  /**
-    * This method creates a QDomElement for the @p document
-    * under the parent node @p parent.
-    *
-    * @param document reference to QDomDocument
-    * @param parent reference to QDomElement parent node
-    */
-  void writeXML(QDomDocument& document, QDomElement& parent) const;
 };
 
 inline void swap(MyMoneyKeyValueContainer& first, MyMoneyKeyValueContainer& second) // krazy:exclude=inline

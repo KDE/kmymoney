@@ -105,11 +105,11 @@ void MyMoneyStorageMgr::setFileFixVersion(uint v)
 
 bool MyMoneyStorageMgr::isStandardAccount(const QString& id) const
 {
-  return id == stdAccNames[stdAccLiability]
-         || id == stdAccNames[stdAccAsset]
-         || id == stdAccNames[stdAccExpense]
-         || id == stdAccNames[stdAccIncome]
-         || id == stdAccNames[stdAccEquity];
+  return id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability)
+         || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset)
+         || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense)
+         || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income)
+         || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Equity);
 }
 
 void MyMoneyStorageMgr::setAccountName(const QString& id, const QString& name)
@@ -970,23 +970,23 @@ MyMoneyMoney MyMoneyStorageMgr::totalBalance(const QString& id, const QDate& dat
 }
 
 MyMoneyAccount MyMoneyStorageMgr::liability() const {
-  return account(stdAccNames[stdAccLiability]);
+  return account(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability));
 }
 
 MyMoneyAccount MyMoneyStorageMgr::asset() const {
-  return account(stdAccNames[stdAccAsset]);
+  return account(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset));
 }
 
 MyMoneyAccount MyMoneyStorageMgr::expense() const {
-  return account(stdAccNames[stdAccExpense]);
+  return account(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense));
 }
 
 MyMoneyAccount MyMoneyStorageMgr::income() const {
-  return account(stdAccNames[stdAccIncome]);
+  return account(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income));
 }
 
 MyMoneyAccount MyMoneyStorageMgr::equity() const {
-  return account(stdAccNames[stdAccEquity]);
+  return account(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Equity));
 }
 
 void MyMoneyStorageMgr::loadAccounts(const QMap<QString, MyMoneyAccount>& map)

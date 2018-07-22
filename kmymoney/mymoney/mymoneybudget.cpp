@@ -24,8 +24,6 @@
 // QT Includes
 
 #include <QMap>
-#include <QDomElement>
-#include <QDomDocument>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -86,8 +84,6 @@ bool MyMoneyBudget::PeriodGroup::operator == (const PeriodGroup& right) const
   auto d2 = static_cast<const PeriodGroupPrivate *>(right.d_func());
   return (d->m_start == d2->m_start && d->m_amount == d2->m_amount);
 }
-
-const int BUDGET_VERSION = 2;
 
 class MyMoneyBudget::AccountGroupPrivate {
 
@@ -370,13 +366,6 @@ MyMoneyBudget::MyMoneyBudget(const QString &id) :
   d->m_name = QLatin1Literal("Unconfigured Budget");
 }
 
-MyMoneyBudget::MyMoneyBudget(const QDomElement& node) :
-    MyMoneyObject(*new MyMoneyBudgetPrivate, node)
-{
-  if (!read(node))
-    clearId();
-}
-
 MyMoneyBudget::MyMoneyBudget(const QString& id, const MyMoneyBudget& other) :
   MyMoneyObject(*new MyMoneyBudgetPrivate(*other.d_func()), id)
 {
@@ -401,106 +390,6 @@ bool MyMoneyBudget::operator == (const MyMoneyBudget& right) const
           (d->m_accounts.values() == d2->m_accounts.values()) &&
           (d->m_name == d2->m_name) &&
           (d->m_start == d2->m_start));
-}
-
-void MyMoneyBudget::write(QDomElement& e, QDomDocument *doc) const
-{
-  Q_D(const MyMoneyBudget);
-  d->writeBaseXML(*doc, e);
-
-  e.setAttribute(d->getAttrName(Budget::Attribute::Name),  d->m_name);
-  e.setAttribute(d->getAttrName(Budget::Attribute::Start), d->m_start.toString(Qt::ISODate));
-  e.setAttribute(d->getAttrName(Budget::Attribute::Version), BUDGET_VERSION);
-
-  QMap<QString, AccountGroup>::const_iterator it;
-  for (it = d->m_accounts.begin(); it != d->m_accounts.end(); ++it) {
-    // only add the account if there is a budget entered
-    // or it covers some sub accounts
-    if (!(*it).balance().isZero() || (*it).budgetSubaccounts()) {
-      QDomElement domAccount = doc->createElement(d->getElName(Budget::Element::Account));
-      domAccount.setAttribute(d->getAttrName(Budget::Attribute::ID), it.key());
-      domAccount.setAttribute(d->getAttrName(Budget::Attribute::BudgetLevel), d->budgetNames(it.value().budgetLevel()));
-      domAccount.setAttribute(d->getAttrName(Budget::Attribute::BudgetSubAccounts), it.value().budgetSubaccounts());
-
-      const QMap<QDate, PeriodGroup> periods = it.value().getPeriods();
-      QMap<QDate, PeriodGroup>::const_iterator it_per;
-      for (it_per = periods.begin(); it_per != periods.end(); ++it_per) {
-        if (!(*it_per).amount().isZero()) {
-          QDomElement domPeriod = doc->createElement(d->getElName(Budget::Element::Period));
-
-          domPeriod.setAttribute(d->getAttrName(Budget::Attribute::Amount), (*it_per).amount().toString());
-          domPeriod.setAttribute(d->getAttrName(Budget::Attribute::Start), (*it_per).startDate().toString(Qt::ISODate));
-          domAccount.appendChild(domPeriod);
-        }
-      }
-
-      e.appendChild(domAccount);
-    }
-  }
-}
-
-bool MyMoneyBudget::read(const QDomElement& e)
-{
-  // The goal of this reading method is 100% backward AND 100% forward
-  // compatibility.  Any Budget ever created with any version of KMyMoney
-  // should be able to be loaded by this method (as long as it's one of the
-  // Budget types supported in this version, of course)
-
-  Q_D(MyMoneyBudget);
-  auto result = false;
-
-  if (d->getElName(Budget::Element::Budget) == e.tagName()) {
-    result = true;
-    d->m_name  = e.attribute(d->getAttrName(Budget::Attribute::Name));
-    d->m_start = QDate::fromString(e.attribute(d->getAttrName(Budget::Attribute::Start)), Qt::ISODate);
-    d->m_id    = e.attribute(d->getAttrName(Budget::Attribute::ID));
-
-    QDomNode child = e.firstChild();
-    while (!child.isNull() && child.isElement()) {
-      QDomElement c = child.toElement();
-
-      AccountGroup account;
-
-      if (d->getElName(Budget::Element::Account) == c.tagName()) {
-        if (c.hasAttribute(d->getAttrName(Budget::Attribute::ID)))
-          account.setId(c.attribute(d->getAttrName(Budget::Attribute::ID)));
-
-        if (c.hasAttribute(d->getAttrName(Budget::Attribute::BudgetLevel)))
-          account.setBudgetLevel(d->stringToBudgetLevel(c.attribute(d->getAttrName(Budget::Attribute::BudgetLevel))));
-
-        if (c.hasAttribute(d->getAttrName(Budget::Attribute::BudgetSubAccounts)))
-          account.setBudgetSubaccounts(c.attribute(d->getAttrName(Budget::Attribute::BudgetSubAccounts)).toUInt());
-      }
-
-      QDomNode period = c.firstChild();
-      while (!period.isNull() && period.isElement()) {
-        QDomElement per = period.toElement();
-        PeriodGroup pGroup;
-
-        if (d->getElName(Budget::Element::Period) == per.tagName() && per.hasAttribute(d->getAttrName(Budget::Attribute::Amount)) && per.hasAttribute(d->getAttrName(Budget::Attribute::Start))) {
-          pGroup.setAmount(MyMoneyMoney(per.attribute(d->getAttrName(Budget::Attribute::Amount))));
-          pGroup.setStartDate(QDate::fromString(per.attribute(d->getAttrName(Budget::Attribute::Start)), Qt::ISODate));
-          account.addPeriod(pGroup.startDate(), pGroup);
-        }
-
-        period = period.nextSibling();
-      }
-
-      d->m_accounts[account.id()] = account;
-
-      child = child.nextSibling();
-    }
-  }
-
-  return result;
-}
-
-void MyMoneyBudget::writeXML(QDomDocument& document, QDomElement& parent) const
-{
-  Q_D(const MyMoneyBudget);
-  QDomElement el = document.createElement(d->getElName(Budget::Element::Budget));
-  write(el, &document);
-  parent.appendChild(el);
 }
 
 bool MyMoneyBudget::hasReferenceTo(const QString& id) const

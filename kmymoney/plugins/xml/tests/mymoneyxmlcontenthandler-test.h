@@ -32,6 +32,7 @@ class MyMoneyXmlContentHandlerTest : public QObject
   Q_OBJECT
 
 private Q_SLOTS:
+  void readMyMoneyObject();
   void readKeyValueContainer();
   void writeKeyValueContainer();
   void readTransaction();

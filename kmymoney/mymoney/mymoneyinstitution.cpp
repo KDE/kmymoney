@@ -37,9 +37,7 @@
 
 #include "icons.h"
 #include <mymoneyexception.h>
-#include "mymoneystoragenames.h"
 
-using namespace MyMoneyStorageNodes;
 using namespace Icons;
 
 MyMoneyInstitution::MyMoneyInstitution() :

@@ -43,9 +43,6 @@
 #include "payeeidentifier/payeeidentifierloader.h"
 #include "payeeidentifiertyped.h"
 
-#include "mymoneystoragenames.h"
-using namespace MyMoneyStandardAccounts;
-
 QTEST_GUILESS_MAIN(MyMoneyFileTest)
 
 MyMoneyFileTest::MyMoneyFileTest() :
@@ -1373,7 +1370,7 @@ void MyMoneyFileTest::testSetAccountName()
   MyMoneyFileTransaction ft;
   clearObjectLists();
   try {
-    m->setAccountName(stdAccNames[stdAccLiability], "Verbindlichkeiten");
+    m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability), "Verbindlichkeiten");
     ft.commit();
     QCOMPARE(m_objectsRemoved.count(), 0);
     QCOMPARE(m_objectsModified.count(), 1);
@@ -1388,7 +1385,7 @@ void MyMoneyFileTest::testSetAccountName()
   ft.restart();
   clearObjectLists();
   try {
-    m->setAccountName(stdAccNames[stdAccAsset], QString::fromUtf8("Vermögen"));
+    m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset), QString::fromUtf8("Vermögen"));
     ft.commit();
     QCOMPARE(m_objectsRemoved.count(), 0);
     QCOMPARE(m_objectsModified.count(), 1);
@@ -1403,7 +1400,7 @@ void MyMoneyFileTest::testSetAccountName()
   ft.restart();
   clearObjectLists();
   try {
-    m->setAccountName(stdAccNames[stdAccExpense], "Ausgaben");
+    m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense), "Ausgaben");
     ft.commit();
     QCOMPARE(m_objectsRemoved.count(), 0);
     QCOMPARE(m_objectsModified.count(), 1);
@@ -1418,7 +1415,7 @@ void MyMoneyFileTest::testSetAccountName()
   ft.restart();
   clearObjectLists();
   try {
-    m->setAccountName(stdAccNames[stdAccIncome], "Einnahmen");
+    m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income), "Einnahmen");
     ft.commit();
     QCOMPARE(m_objectsRemoved.count(), 0);
     QCOMPARE(m_objectsModified.count(), 1);
@@ -1578,7 +1575,7 @@ void MyMoneyFileTest::testAddTransactionStd()
   split1.setAccountId("A000001");
   split1.setShares(MyMoneyMoney(-1000, 100));
   split1.setValue(MyMoneyMoney(-1000, 100));
-  split2.setAccountId(stdAccNames[stdAccExpense]);
+  split2.setAccountId(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense));
   split2.setValue(MyMoneyMoney(1000, 100));
   split2.setShares(MyMoneyMoney(1000, 100));
   try {

@@ -44,6 +44,7 @@ class MyMoneyMoney;
 class MyMoneySplit;
 class payeeIdentifier;
 namespace eMyMoney { namespace Account { enum class Type; } }
+namespace eMyMoney { namespace Account { enum class Standard; } }
 template <class T> class payeeIdentifierTyped;
 
 /**
@@ -585,6 +586,8 @@ public:
     * @return @c true if account has an online mapping, @c false otherwise
     */
   bool hasOnlineMapping() const;
+
+  static QString stdAccName(eMyMoney::Account::Standard stdAccID);
 
   QDataStream &operator<<(const MyMoneyAccount &);
   QDataStream &operator>>(MyMoneyAccount &);

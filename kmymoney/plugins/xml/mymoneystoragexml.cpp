@@ -62,11 +62,9 @@
 #include "mymoneysplit.h"
 #include "onlinejob.h"
 #include "onlinejobadministration.h"
+#include "plugins/xmlhelper/xmlstoragehelper.h"
 #include "mymoneyenums.h"
 
-using namespace MyMoneyStorageTags;
-using namespace MyMoneyStorageNodes;
-using namespace MyMoneyStorageAttributes;
 using namespace eMyMoney;
 
 unsigned int MyMoneyStorageXML::fileVersionRead = 0;
@@ -167,9 +165,6 @@ private:
   static void writeSecurity(const MyMoneySecurity &security, QDomDocument &document, QDomElement &parent);
   static MyMoneyInstitution readInstitution(const QDomElement &node);
   static void writeInstitution(const MyMoneyInstitution &institution, QDomDocument &document, QDomElement &parent);
-  static MyMoneyReport readReport(const QDomElement &node);
-  static MyMoneyBudget readBudget(const QDomElement &node);
-  static void writeBudget(const MyMoneyBudget &budget, QDomDocument &document, QDomElement &parent);
   static MyMoneySchedule readSchedule(const QDomElement &node);
   static void writeSchedule(const MyMoneySchedule &schedule, QDomDocument &document, QDomElement &parent);
   static onlineJob readOnlineJob(const QDomElement &node);
@@ -349,20 +344,17 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
           m_reader->signalProgress(++m_elementCount, 0);
         } else if (s == nodeName(Node::KeyValuePairs)) {
           addToKeyValueContainer(*m_reader->m_storage, m_baseNode);
-          MyMoneyKeyValueContainer kvp(m_baseNode);
-          if (!(kvp.pairs() == m_reader->m_storage->pairs()))
-            qDebug() << "KVP is not equal.";
         } else if (s == nodeName(Node::Institution)) {
           auto i = readInstitution(m_baseNode);
           if (!i.id().isEmpty())
             m_reader->d->iList[i.id()] = i;
         } else if (s == nodeName(Node::Report)) {
-          auto r = readReport(m_baseNode);
+          auto r = MyMoneyXmlContentHandler2::readReport(m_baseNode);
           if (!r.id().isEmpty())
             m_reader->d->rList[r.id()] = r;
           m_reader->signalProgress(++m_elementCount, 0);
         } else if (s == nodeName(Node::Budget)) {
-          auto b = readBudget(m_baseNode);
+          auto b = MyMoneyXmlContentHandler2::readBudget(m_baseNode);
           if (!b.id().isEmpty())
             m_reader->d->bList[b.id()] = b;
         } else if (s == tagName(Tag::FileInfo)) {
@@ -711,7 +703,8 @@ MyMoneyAccount MyMoneyXmlContentHandler::readAccount(const QDomElement &node)
     //
     // Since we want to get rid of the lastStatementDate record anyway, this seems
     // to be ok for now. (ipwizard - 2008-08-14)
-    QString txt = MyMoneyKeyValueContainer(node.elementsByTagName(nodeName(Node::KeyValuePairs)).item(0).toElement()).value("lastStatementDate");
+
+    auto txt = acc.value(QStringLiteral("lastStatementDate"));
     if (!txt.isEmpty()) {
       acc.setLastReconciliationDate(QDate::fromString(txt, Qt::ISODate));
     }
@@ -1068,323 +1061,6 @@ void MyMoneyXmlContentHandler::writeInstitution(const MyMoneyInstitution &instit
 
   //Add in Key-Value Pairs for institutions.
   writeKeyValueContainer(institution, document, el);
-
-  parent.appendChild(el);
-}
-
-MyMoneyReport MyMoneyXmlContentHandler::readReport(const QDomElement &node)
-{
-  if (nodeName(Node::Report) != node.tagName())
-    throw MYMONEYEXCEPTION_CSTRING("Node was not REPORT");
-
-  MyMoneyReport report(node.attribute(attributeName(Attribute::Report::ID)));
-
-    // The goal of this reading method is 100% backward AND 100% forward
-    // compatibility.  Any report ever created with any version of KMyMoney
-    // should be able to be loaded by this method (as long as it's one of the
-    // report types supported in this version, of course)
-
-
-    // read report's internals
-    QString type = node.attribute(attributeName(Attribute::Report::Type));
-    if (type.startsWith(QLatin1String("pivottable")))
-      report.setReportType(eMyMoney::Report::ReportType::PivotTable);
-    else if (type.startsWith(QLatin1String("querytable")))
-      report.setReportType(eMyMoney::Report::ReportType::QueryTable);
-    else if (type.startsWith(QLatin1String("infotable")))
-      report.setReportType(eMyMoney::Report::ReportType::InfoTable);
-    else
-      throw MYMONEYEXCEPTION_CSTRING("Unknown report type");
-
-    report.setGroup(node.attribute(attributeName(Attribute::Report::Group)));
-
-    report.clearTransactionFilter();
-
-    // read date tab
-    QString datelockstr = node.attribute(attributeName(Attribute::Report::DateLock), "userdefined");
-    // Handle the pivot 1.2/query 1.1 case where the values were saved as
-    // numbers
-    bool ok = false;
-    int i = datelockstr.toUInt(&ok);
-    if (!ok) {
-      i = stringToDateLockAttribute(datelockstr);
-      if (i == -1)
-        i = (int)eMyMoney::TransactionFilter::Date::UserDefined;
-    }
-    report.setDateFilter(static_cast<eMyMoney::TransactionFilter::Date>(i));
-
-    // read general tab
-    report.setName(node.attribute(attributeName(Attribute::Report::Name)));
-    report.setComment(node.attribute(attributeName(Attribute::Report::Comment), "Extremely old report"));
-    report.setConvertCurrency(node.attribute(attributeName(Attribute::Report::ConvertCurrency), "1").toUInt());
-    report.setFavorite(node.attribute(attributeName(Attribute::Report::Favorite), "0").toUInt());
-    report.setSkipZero(node.attribute(attributeName(Attribute::Report::SkipZero), "0").toUInt());
-
-    if (report.reportType() == eMyMoney::Report::ReportType::PivotTable) {
-      // read report's internals
-      report.setIncludingBudgetActuals(node.attribute(attributeName(Attribute::Report::IncludesActuals), "0").toUInt());
-      report.setIncludingForecast(node.attribute(attributeName(Attribute::Report::IncludesForecast), "0").toUInt());
-      report.setIncludingPrice(node.attribute(attributeName(Attribute::Report::IncludesPrice), "0").toUInt());
-      report.setIncludingAveragePrice(node.attribute(attributeName(Attribute::Report::IncludesAveragePrice), "0").toUInt());
-      report.setMixedTime(node.attribute(attributeName(Attribute::Report::MixedTime), "0").toUInt());
-      report.setInvestmentsOnly(node.attribute(attributeName(Attribute::Report::Investments), "0").toUInt());
-
-      // read rows/columns tab
-      if (node.hasAttribute(attributeName(Attribute::Report::Budget)))
-        report.setBudget(node.attribute(attributeName(Attribute::Report::Budget)));
-
-      const auto rowTypeFromXML = stringToRowType(node.attribute(attributeName(Attribute::Report::RowType)));
-      if (rowTypeFromXML != eMyMoney::Report::RowType::Invalid)
-        report.setRowType(rowTypeFromXML);
-      else
-        report.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
-
-      if (node.hasAttribute(attributeName(Attribute::Report::ShowRowTotals)))
-        report.setShowingRowTotals(node.attribute(attributeName(Attribute::Report::ShowRowTotals)).toUInt());
-      else if (report.rowType() == eMyMoney::Report::RowType::ExpenseIncome) // for backward compatibility
-        report.setShowingRowTotals(true);
-      report.setShowingColumnTotals(node.attribute(attributeName(Attribute::Report::ShowColumnTotals), "1").toUInt());
-
-      //check for reports with older settings which didn't have the detail attribute
-      const auto detailLevelFromXML = stringToDetailLevel(node.attribute(attributeName(Attribute::Report::Detail)));
-      if (detailLevelFromXML != eMyMoney::Report::DetailLevel::End)
-        report.setDetailLevel(detailLevelFromXML);
-      else
-        report.setDetailLevel(eMyMoney::Report::DetailLevel::All);
-
-      report.setIncludingMovingAverage(node.attribute(attributeName(Attribute::Report::IncludesMovingAverage), "0").toUInt());
-      if (report.isIncludingMovingAverage())
-        report.setMovingAverageDays(node.attribute(attributeName(Attribute::Report::MovingAverageDays), "1").toUInt());
-      report.setIncludingSchedules(node.attribute(attributeName(Attribute::Report::IncludesSchedules), "0").toUInt());
-      report.setIncludingTransfers(node.attribute(attributeName(Attribute::Report::IncludesTransfers), "0").toUInt());
-      report.setIncludingUnusedAccounts(node.attribute(attributeName(Attribute::Report::IncludesUnused), "0").toUInt());
-      report.setColumnsAreDays(node.attribute(attributeName(Attribute::Report::ColumnsAreDays), "0").toUInt());
-
-      // read chart tab
-      const auto chartTypeFromXML = stringToChartType(node.attribute(attributeName(Attribute::Report::ChartType)));
-      if (chartTypeFromXML != eMyMoney::Report::ChartType::End)
-        report.setChartType(chartTypeFromXML);
-      else
-        report.setChartType(eMyMoney::Report::ChartType::None);
-
-      report.setChartCHGridLines(node.attribute(attributeName(Attribute::Report::ChartCHGridLines), "1").toUInt());
-      report.setChartSVGridLines(node.attribute(attributeName(Attribute::Report::ChartSVGridLines), "1").toUInt());
-      report.setChartDataLabels(node.attribute(attributeName(Attribute::Report::ChartDataLabels), "1").toUInt());
-      report.setChartByDefault(node.attribute(attributeName(Attribute::Report::ChartByDefault), "0").toUInt());
-      report.setLogYAxis(node.attribute(attributeName(Attribute::Report::LogYAxis), "0").toUInt());
-      report.setChartLineWidth(node.attribute(attributeName(Attribute::Report::ChartLineWidth), QString(MyMoneyReport::m_lineWidth)).toUInt());
-
-      // read range tab
-      const auto columnTypeFromXML = stringToColumnType(node.attribute(attributeName(Attribute::Report::ColumnType)));
-      if (columnTypeFromXML != eMyMoney::Report::ColumnType::Invalid)
-        report.setColumnType(columnTypeFromXML);
-      else
-        report.setColumnType(eMyMoney::Report::ColumnType::Months);
-
-      const auto dataLockFromXML = stringToDataLockAttribute(node.attribute(attributeName(Attribute::Report::DataLock)));
-      if (dataLockFromXML != eMyMoney::Report::DataLock::DataOptionCount)
-        report.setDataFilter(dataLockFromXML);
-      else
-        report.setDataFilter(eMyMoney::Report::DataLock::Automatic);
-
-      report.setDataRangeStart(node.attribute(attributeName(Attribute::Report::DataRangeStart), "0"));
-      report.setDataRangeEnd(node.attribute(attributeName(Attribute::Report::DataRangeEnd), "0"));
-      report.setDataMajorTick(node.attribute(attributeName(Attribute::Report::DataMajorTick), "0"));
-      report.setDataMinorTick(node.attribute(attributeName(Attribute::Report::DataMinorTick), "0"));
-      report.setYLabelsPrecision(node.attribute(attributeName(Attribute::Report::YLabelsPrecision), "2").toUInt());
-    } else if (report.reportType() == eMyMoney::Report::ReportType::QueryTable) {
-      // read rows/columns tab
-      const auto rowTypeFromXML = stringToRowType(node.attribute(attributeName(Attribute::Report::RowType)));
-      if (rowTypeFromXML != eMyMoney::Report::RowType::Invalid)
-        report.setRowType(rowTypeFromXML);
-      else
-        report.setRowType(eMyMoney::Report::RowType::Account);
-
-      unsigned qc = 0;
-      QStringList columns = node.attribute(attributeName(Attribute::Report::QueryColumns), "none").split(',');
-      foreach (const auto column, columns) {
-        const int queryColumnFromXML = stringToQueryColumn(column);
-        i = stringToQueryColumn(column);
-        if (queryColumnFromXML != eMyMoney::Report::QueryColumn::End)
-          qc |= queryColumnFromXML;
-      }
-      report.setQueryColumns(static_cast<eMyMoney::Report::QueryColumn>(qc));
-
-      report.setTax(node.attribute(attributeName(Attribute::Report::Tax), "0").toUInt());
-      report.setInvestmentsOnly(node.attribute(attributeName(Attribute::Report::Investments), "0").toUInt());
-      report.setLoansOnly(node.attribute(attributeName(Attribute::Report::Loans), "0").toUInt());
-      report.setHideTransactions(node.attribute(attributeName(Attribute::Report::HideTransactions), "0").toUInt());
-      report.setShowingColumnTotals(node.attribute(attributeName(Attribute::Report::ShowColumnTotals), "1").toUInt());
-      const auto detailLevelFromXML = stringToDetailLevel(node.attribute(attributeName(Attribute::Report::Detail), "none"));
-      if (detailLevelFromXML == eMyMoney::Report::DetailLevel::All)
-        report.setDetailLevel(detailLevelFromXML);
-      else
-        report.setDetailLevel(eMyMoney::Report::DetailLevel::None);
-
-      // read performance or capital gains tab
-      if (report.queryColumns() & eMyMoney::Report::QueryColumn::Performance)
-        report.setInvestmentSum(static_cast<eMyMoney::Report::InvestmentSum>(node.attribute(attributeName(Attribute::Report::InvestmentSum), QString::number(static_cast<int>(eMyMoney::Report::InvestmentSum::Period))).toInt()));
-
-      // read capital gains tab
-      if (report.queryColumns() & eMyMoney::Report::QueryColumn::CapitalGain) {
-        report.setInvestmentSum(static_cast<eMyMoney::Report::InvestmentSum>(node.attribute(attributeName(Attribute::Report::InvestmentSum), QString::number(static_cast<int>(eMyMoney::Report::InvestmentSum::Sold))).toInt()));
-        if (report.investmentSum() == eMyMoney::Report::InvestmentSum::Sold) {
-          report.setShowSTLTCapitalGains(node.attribute(attributeName(Attribute::Report::ShowSTLTCapitalGains), "0").toUInt());
-          report.setSettlementPeriod(node.attribute(attributeName(Attribute::Report::SettlementPeriod), "3").toUInt());
-          report.setTermSeparator(QDate::fromString(node.attribute(attributeName(Attribute::Report::TermsSeparator), QDate::currentDate().addYears(-1).toString(Qt::ISODate)),Qt::ISODate));
-        }
-      }
-    } else if (report.reportType() == eMyMoney::Report::ReportType::InfoTable) {
-      if (node.hasAttribute(attributeName(Attribute::Report::ShowRowTotals)))
-        report.setShowingRowTotals(node.attribute(attributeName(Attribute::Report::ShowRowTotals)).toUInt());
-      else
-        report.setShowingRowTotals(true);
-    }
-
-    QDomNode child = node.firstChild();
-    while (!child.isNull() && child.isElement()) {
-      QDomElement c = child.toElement();
-      if (elementName(Element::Report::Text) == c.tagName() && c.hasAttribute(attributeName(Attribute::Report::Pattern))) {
-        report.setTextFilter(QRegExp(c.attribute(attributeName(Attribute::Report::Pattern)),
-                              c.attribute(attributeName(Attribute::Report::CaseSensitive), "1").toUInt()
-                              ? Qt::CaseSensitive : Qt::CaseInsensitive,
-                              c.attribute(attributeName(Attribute::Report::RegEx), "1").toUInt()
-                              ? QRegExp::Wildcard : QRegExp::RegExp),
-                      c.attribute(attributeName(Attribute::Report::InvertText), "0").toUInt());
-      }
-      if (elementName(Element::Report::Type) == c.tagName() && c.hasAttribute(attributeName(Attribute::Report::Type))) {
-        i = stringToTypeAttribute(c.attribute(attributeName(Attribute::Report::Type)));
-        if (i != -1)
-          report.addType(i);
-      }
-      if (elementName(Element::Report::State) == c.tagName() && c.hasAttribute(attributeName(Attribute::Report::State))) {
-        i = stringToStateAttribute(c.attribute(attributeName(Attribute::Report::State)));
-        if (i != -1)
-          report.addState(i);
-      }
-      if (elementName(Element::Report::Number) == c.tagName())
-        report.setNumberFilter(c.attribute(attributeName(Attribute::Report::From)), c.attribute(attributeName(Attribute::Report::To)));
-      if (elementName(Element::Report::Amount) == c.tagName())
-        report.setAmountFilter(MyMoneyMoney(c.attribute(attributeName(Attribute::Report::From), "0/100")), MyMoneyMoney(c.attribute(attributeName(Attribute::Report::To), "0/100")));
-      if (elementName(Element::Report::Dates) == c.tagName()) {
-        QDate from, to;
-        if (c.hasAttribute(attributeName(Attribute::Report::From)))
-          from = QDate::fromString(c.attribute(attributeName(Attribute::Report::From)), Qt::ISODate);
-        if (c.hasAttribute(attributeName(Attribute::Report::To)))
-          to = QDate::fromString(c.attribute(attributeName(Attribute::Report::To)), Qt::ISODate);
-        report.setDateFilter(from, to);
-      }
-      if (elementName(Element::Report::Payee) == c.tagName())
-        report.addPayee(c.attribute(attributeName(Attribute::Report::ID)));
-      if (elementName(Element::Report::Tag) == c.tagName())
-        report.addTag(c.attribute(attributeName(Attribute::Report::ID)));
-      if (elementName(Element::Report::Category) == c.tagName() && c.hasAttribute(attributeName(Attribute::Report::ID)))
-        report.addCategory(c.attribute(attributeName(Attribute::Report::ID)));
-      if (elementName(Element::Report::Account) == c.tagName() && c.hasAttribute(attributeName(Attribute::Report::ID)))
-        report.addAccount(c.attribute(attributeName(Attribute::Report::ID)));
-      if (elementName(Element::Report::AccountGroup) == c.tagName() && c.hasAttribute(attributeName(Attribute::Report::Group))) {
-        i = stringToAccountTypeAttribute(c.attribute(attributeName(Attribute::Report::Group)));
-        if (i != -1)
-          report.addAccountGroup(static_cast<eMyMoney::Account::Type>(i));
-      }
-      child = child.nextSibling();
-    }
-
-
-  return report;
-}
-
-MyMoneyBudget MyMoneyXmlContentHandler::readBudget(const QDomElement &node)
-{
-  if (nodeName(Node::Budget) != node.tagName())
-    throw MYMONEYEXCEPTION_CSTRING("Node was not BUDGET");
-
-  MyMoneyBudget budget(node.attribute(attributeName(Attribute::Account::ID)));
-  // The goal of this reading method is 100% backward AND 100% forward
-  // compatibility.  Any Budget ever created with any version of KMyMoney
-  // should be able to be loaded by this method (as long as it's one of the
-  // Budget types supported in this version, of course)
-
-  budget.setName(node.attribute(attributeName(Attribute::Budget::Name)));
-  budget.setBudgetStart(QDate::fromString(node.attribute(attributeName(Attribute::Budget::Start)), Qt::ISODate));
-
-  QDomNode child = node.firstChild();
-  while (!child.isNull() && child.isElement()) {
-    QDomElement c = child.toElement();
-
-    MyMoneyBudget::AccountGroup account;
-
-    if (elementName(Element::Budget::Account) == c.tagName()) {
-      if (c.hasAttribute(attributeName(Attribute::Budget::ID)))
-        account.setId(c.attribute(attributeName(Attribute::Budget::ID)));
-
-      if (c.hasAttribute(attributeName(Attribute::Budget::BudgetLevel)))
-        account.setBudgetLevel(stringToBudgetLevel(c.attribute(attributeName(Attribute::Budget::BudgetLevel))));
-
-      if (c.hasAttribute(attributeName(Attribute::Budget::BudgetSubAccounts)))
-        account.setBudgetSubaccounts(c.attribute(attributeName(Attribute::Budget::BudgetSubAccounts)).toUInt());
-    }
-
-    QDomNode period = c.firstChild();
-    while (!period.isNull() && period.isElement()) {
-      QDomElement per = period.toElement();
-      MyMoneyBudget::PeriodGroup pGroup;
-
-      if (elementName(Element::Budget::Period) == per.tagName() && per.hasAttribute(attributeName(Attribute::Budget::Amount)) && per.hasAttribute(attributeName(Attribute::Budget::Start))) {
-        pGroup.setAmount(MyMoneyMoney(per.attribute(attributeName(Attribute::Budget::Amount))));
-        pGroup.setStartDate(QDate::fromString(per.attribute(attributeName(Attribute::Budget::Start)), Qt::ISODate));
-        account.addPeriod(pGroup.startDate(), pGroup);
-      }
-
-      period = period.nextSibling();
-    }
-    budget.setAccount(account, account.id());
-
-    child = child.nextSibling();
-  }
-
-
-  return budget;
-}
-
-const int BUDGET_VERSION = 2;
-
-void MyMoneyXmlContentHandler::writeBudget(const MyMoneyBudget &budget, QDomDocument &document, QDomElement &parent)
-{
-  auto el = document.createElement(nodeName(Node::Budget));
-
-  writeBaseXML(budget.id(), document, el);
-
-  el.setAttribute(attributeName(Attribute::Budget::Name),  budget.name());
-  el.setAttribute(attributeName(Attribute::Budget::Start), budget.budgetStart().toString(Qt::ISODate));
-  el.setAttribute(attributeName(Attribute::Budget::Version), BUDGET_VERSION);
-
-  QMap<QString, MyMoneyBudget::AccountGroup>::const_iterator it;
-  auto accounts = budget.accountsMap();
-  for (it = accounts.cbegin(); it != accounts.cend(); ++it) {
-    // only add the account if there is a budget entered
-    // or it covers some sub accounts
-    if (!(*it).balance().isZero() || (*it).budgetSubaccounts()) {
-      QDomElement domAccount = document.createElement(elementName(Element::Budget::Account));
-      domAccount.setAttribute(attributeName(Attribute::Budget::ID), it.key());
-      domAccount.setAttribute(attributeName(Attribute::Budget::BudgetLevel), budgetLevels(it.value().budgetLevel()));
-      domAccount.setAttribute(attributeName(Attribute::Budget::BudgetSubAccounts), it.value().budgetSubaccounts());
-
-      const QMap<QDate, MyMoneyBudget::PeriodGroup> periods = it.value().getPeriods();
-      QMap<QDate, MyMoneyBudget::PeriodGroup>::const_iterator it_per;
-      for (it_per = periods.begin(); it_per != periods.end(); ++it_per) {
-        if (!(*it_per).amount().isZero()) {
-          QDomElement domPeriod = document.createElement(elementName(Element::Budget::Period));
-
-          domPeriod.setAttribute(attributeName(Attribute::Budget::Amount), (*it_per).amount().toString());
-          domPeriod.setAttribute(attributeName(Attribute::Budget::Start), (*it_per).startDate().toString(Qt::ISODate));
-          domAccount.appendChild(domPeriod);
-        }
-      }
-
-      el.appendChild(domAccount);
-    }
-  }
 
   parent.appendChild(el);
 }
@@ -2002,7 +1678,7 @@ void MyMoneyStorageXML::writeReports(QDomElement& parent)
 
 void MyMoneyStorageXML::writeReport(QDomElement& report, const MyMoneyReport& r)
 {
-  r.writeXML(*m_doc, report);
+  MyMoneyXmlContentHandler2::writeReport(r, *m_doc, report);
 }
 
 void MyMoneyStorageXML::writeBudgets(QDomElement& parent)
@@ -2021,7 +1697,7 @@ void MyMoneyStorageXML::writeBudgets(QDomElement& parent)
 
 void MyMoneyStorageXML::writeBudget(QDomElement& budget, const MyMoneyBudget& b)
 {
-  MyMoneyXmlContentHandler::writeBudget(b, *m_doc, budget);
+  MyMoneyXmlContentHandler2::writeBudget(b, *m_doc, budget);
 }
 
 void MyMoneyStorageXML::writeOnlineJobs(QDomElement& parent)

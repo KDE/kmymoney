@@ -27,9 +27,6 @@
 
 #include "mymoneyobject_p.h"
 #include "mymoneyexception.h"
-#include "mymoneystoragenames.h"
-
-using namespace MyMoneyStorageNodes;
 
 MyMoneyCostCenter MyMoneyCostCenter::null;
 

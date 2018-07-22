@@ -32,6 +32,7 @@ target_link_libraries(sqlstorage
   PRIVATE
     Qt5::Sql
     kmm_utils_platformtools
+    xmlstoragehelper
 )
 
 install(FILES sqlstorage.rc

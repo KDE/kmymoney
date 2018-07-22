@@ -33,10 +33,8 @@
 // Project Includes
 
 #include "mymoneyexception.h"
-#include "mymoneystoragenames.h"
 
 using namespace eMyMoney;
-using namespace MyMoneyStorageNodes;
 
 MyMoneySecurity::MyMoneySecurity() :
   MyMoneyObject(*new MyMoneySecurityPrivate)

@@ -36,6 +36,7 @@
 #include "mymoneypayee.h"
 #include "mymoneystatement.h"
 #include "../mymoneystoragexml.cpp"
+#include "plugins/xmlhelper/xmlstoragehelper.h"
 
 namespace test
 {
@@ -321,10 +322,7 @@ void writeRCFtoXMLDoc(const MyMoneyReport& filter, QDomDocument* doc)
   QDomElement reports = doc->createElement("REPORTS");
   root.appendChild(reports);
 
-  QDomElement report = doc->createElement("REPORT");
-  filter.write(report, doc);
-  reports.appendChild(report);
-
+  MyMoneyXmlContentHandler2::writeReport(filter, *doc, reports);
 }
 
 void writeRCFtoXML(const MyMoneyReport& filter, const QString& _filename)
@@ -365,7 +363,7 @@ bool readRCFfromXMLDoc(QList<MyMoneyReport>& list, QDomDocument* doc)
         result = true;
         QDomNode subchild = child.firstChild();
         while (!subchild.isNull() && subchild.isElement()) {
-          auto filter = MyMoneyXmlContentHandler::readReport(subchild.toElement());
+          auto filter = MyMoneyXmlContentHandler2::readReport(subchild.toElement());
           list += filter;
           subchild = subchild.nextSibling();
         }

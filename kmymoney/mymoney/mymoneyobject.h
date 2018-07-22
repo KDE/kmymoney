@@ -31,8 +31,6 @@
 #include "mymoneyunittestable.h"
 
 class QString;
-class QDomDocument;
-class QDomElement;
 
 /**
   * @author Thomas Baumgart
@@ -77,15 +75,6 @@ class KMM_MYMONEY_EXPORT MyMoneyObject
     */
   virtual bool hasReferenceTo(const QString& id) const = 0;
 
-  /**
-    * This method creates a QDomElement for the @p document
-    * under the parent node @p parent.
-    *
-    * @param document reference to QDomDocument
-    * @param parent reference to QDomElement parent node
-    */
-  virtual void writeXML(QDomDocument &document, QDomElement &parent) const;
-
   bool operator == (const MyMoneyObject& right) const;
 
 protected:
@@ -93,16 +82,6 @@ protected:
   MyMoneyObject(MyMoneyObjectPrivate &dd);
   MyMoneyObject(MyMoneyObjectPrivate &dd,
                 const QString& id);
-  MyMoneyObject(MyMoneyObjectPrivate &dd,
-                const QDomElement& node,
-                bool forceId = true);
-
-  /**
-    * This contructor assigns the id to the MyMoneyObject
-    *
-    * @param id ID of object
-    */
-  MyMoneyObject(const QString& id);
 };
 
 #endif

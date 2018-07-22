@@ -316,11 +316,11 @@ void MyMoneyStorageMgrTest::testIsStandardAccount()
   if (!m_canOpen)
     QSKIP("Database test skipped because no database could be opened.", SkipAll);
 
-  QVERIFY(m->isStandardAccount(stdAccNames[stdAccLiability]) == true);
-  QVERIFY(m->isStandardAccount(stdAccNames[stdAccAsset]) == true);
-  QVERIFY(m->isStandardAccount(stdAccNames[stdAccExpense]) == true);
-  QVERIFY(m->isStandardAccount(stdAccNames[stdAccIncome]) == true);
-  QVERIFY(m->isStandardAccount(stdAccNames[stdAccEquity]) == true);
+  QVERIFY(m->isStandardAccount(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability)) == true);
+  QVERIFY(m->isStandardAccount(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset)) == true);
+  QVERIFY(m->isStandardAccount(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense)) == true);
+  QVERIFY(m->isStandardAccount(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income)) == true);
+  QVERIFY(m->isStandardAccount(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Equity)) == true);
   QVERIFY(m->isStandardAccount("A0002") == false);
 }
 
@@ -683,7 +683,7 @@ void MyMoneyStorageMgrTest::testReparentAccount()
     // MyMoneyFile::instance()->preloadCache();
     QVERIFY(m->expense().accountCount() == 3);
     QVERIFY(m->account(ex1.id()).accountCount() == 1);
-    QVERIFY(ex3.parentAccountId() == stdAccNames[stdAccExpense]);
+    QVERIFY(ex3.parentAccountId() == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense));
 
     //for (int i = 0; i < 100; ++i) {
     ft.restart();
@@ -1414,28 +1414,28 @@ void MyMoneyStorageMgrTest::testSetAccountName()
 
   try {
     MyMoneyFileTransaction ft;
-    m->setAccountName(stdAccNames[stdAccLiability], "Verbindlichkeiten");
+    m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability), "Verbindlichkeiten");
     ft.commit();
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
   try {
     MyMoneyFileTransaction ft;
-    m->setAccountName(stdAccNames[stdAccAsset], "Verm�gen");
+    m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset), "Verm�gen");
     ft.commit();
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
   try {
     MyMoneyFileTransaction ft;
-    m->setAccountName(stdAccNames[stdAccExpense], "Ausgaben");
+    m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense), "Ausgaben");
     ft.commit();
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
   }
   try {
     MyMoneyFileTransaction ft;
-    m->setAccountName(stdAccNames[stdAccIncome], "Einnahmen");
+    m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income), "Einnahmen");
     ft.commit();
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
