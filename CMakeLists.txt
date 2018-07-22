@@ -152,7 +152,7 @@ cmake_dependent_option(ENABLE_SQLCIPHER "Enable SQLCipher support." ON
 
 if(SQLCIPHER_FOUND AND (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "Windows"))
   link_directories(${SQLCIPHER_LIBRARY_DIRS})
-endif(ENABLE_WEBENGINE)
+endif()
 
 add_feature_info("SQLCipher" ENABLE_SQLCIPHER "It allows encrypting your SQLite3 database.")
 
