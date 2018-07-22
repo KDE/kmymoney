@@ -47,6 +47,10 @@
 
 #define MYMONEYEXCEPTION_CSTRING(exceptionMessage) MyMoneyException(exceptionMessage " " __FILE__ ":" KMM_TOSTRING(__LINE__))
 
+
+class MyMoneyException : public std::runtime_error
+{
+public:
 /**
   * The constructor to create a new MyMoneyException object.
   *
@@ -56,10 +60,6 @@
   * MYMONEYEXCEPTION(text) instead. It automatically assigns the file
   * and line parameter to the correct values.
   */
-
-class MyMoneyException : public std::runtime_error
-{
-public:
   explicit MyMoneyException(const char *exceptionMessage) : std::runtime_error(exceptionMessage) {}
 };
 
