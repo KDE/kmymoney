@@ -586,7 +586,6 @@ QMap<QDate, MyMoneyMoney> MyMoneyAccount::reconciliationHistory()
  */
 QList< payeeIdentifier > MyMoneyAccount::payeeIdentifiers() const
 {
-  Q_D(const MyMoneyAccount);
   QList< payeeIdentifier > list;
 
   MyMoneyFile* file = MyMoneyFile::instance();
