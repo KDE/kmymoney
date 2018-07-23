@@ -145,40 +145,52 @@ int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
         }
         break;
       case QIODevice::WriteOnly:   // SaveAs Database - if exists, must be empty, if not will create
-        // Try to open the database.
-        // If that fails, try to create the database, then try to open it again.
-        d->m_newDatabase = true;
-        if (!QSqlDatabase::open()) {
-          if (!d->createDatabase(url)) {
-            rc = 1;
-          } else {
-            if (!QSqlDatabase::open()) {
-              d->buildError(QSqlQuery(*this), Q_FUNC_INFO, "opening new database");
+        {
+          // Try to open the database.
+          // If that fails, try to create the database, then try to open it again.
+          d->m_newDatabase = true;
+
+          // QSqlDatabase::open() always returns true on MS Windows
+          // even if SQLite database doesn't exist
+          auto isSQLiteAutocreated = false;
+          if (driverName().compare(QLatin1String("QSQLITE")) == 0 ||
+              driverName().compare(QLatin1String("QSQLCIPHER")) == 0)
+            if (!QFile(url.toLocalFile()).exists())
+              isSQLiteAutocreated = true;
+
+          const auto isSuccessfullyOpened = QSqlDatabase::open();
+          if (!isSuccessfullyOpened || (isSQLiteAutocreated && isSuccessfullyOpened)) {
+            if (!d->createDatabase(url)) {
               rc = 1;
             } else {
-              query.exec(QString::fromLatin1("PRAGMA key = '%1'").arg(password()));
-              rc = d->createTables();
+              if (!QSqlDatabase::open()) {
+                d->buildError(QSqlQuery(*this), Q_FUNC_INFO, "opening new database");
+                rc = 1;
+              } else {
+                query.exec(QString::fromLatin1("PRAGMA key = '%1'").arg(password()));
+                rc = d->createTables();
+              }
+            }
+          } else {
+            if (driverName().compare(QLatin1String("QSQLCIPHER")) == 0 &&
+                !password().isEmpty()) {
+              KMessageBox::information(nullptr, i18n("Overwriting an existing database with an encrypted database is not yet supported.\n"
+                                                     "Please save your database under a new name."));
+              QSqlDatabase::close();
+              rc = 3;
+              return rc;
+            }
+            rc = d->createTables();
+            if (rc == 0) {
+              if (clear) {
+                d->clean();
+              } else {
+                rc = d->isEmpty();
+              }
             }
           }
-        } else {
-          if (driverName().compare(QLatin1String("QSQLCIPHER")) == 0 &&
-              !password().isEmpty()) {
-            KMessageBox::information(nullptr, i18n("Overwriting an existing database with an encrypted database is not yet supported.\n"
-                                                   "Please save your database under a new name."));
-            QSqlDatabase::close();
-            rc = 3;
-            return rc;
-          }
-          rc = d->createTables();
-          if (rc == 0) {
-            if (clear) {
-              d->clean();
-            } else {
-              rc = d->isEmpty();
-            }
-          }
+          break;
         }
-        break;
       default:
         qWarning("%s", qPrintable(QString("%1 - unknown open mode %2").arg(Q_FUNC_INFO).arg(openMode)));
     }
