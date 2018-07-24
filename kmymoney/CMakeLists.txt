@@ -164,7 +164,7 @@ target_link_libraries(kmymoney
   $<$<BOOL:${KF5Holidays_FOUND}>:KF5::Holidays>
   $<$<BOOL:${KF5Activities_FOUND}>:KF5::Activities>
   PRIVATE
-    $<$<BOOL:${ENABLE_SQLCIPHER}>:sqlcipher>
+    $<$<BOOL:${ENABLE_SQLCIPHER}>:${SQLCIPHER_LIBRARIES}>
 )
 
 # own plist magic for mac os
