@@ -18,7 +18,7 @@
 #ifndef MYMONEYTESTUTILS_H
 #define MYMONEYTESTUTILS_H
 
-#include "mymoneyexception.h"
+class MyMoneyException;
 
 #define unexpectedException(e) QFAIL(qPrintable(unexpectedExceptionString(e)));
 

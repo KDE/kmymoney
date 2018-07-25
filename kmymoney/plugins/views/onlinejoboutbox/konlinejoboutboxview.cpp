@@ -48,6 +48,7 @@
 #include "mymoneyfile.h"
 #include "menuenums.h"
 #include "mymoneyenums.h"
+#include "mymoneyexception.h"
 
 #include <QDebug>
 

@@ -141,6 +141,7 @@
 #include "mymoney/mymoneystatement.h"
 #include "mymoney/mymoneyforecast.h"
 #include "mymoney/mymoneytransactionfilter.h"
+#include "mymoneyexception.h"
 
 
 #include "converter/mymoneystatementreader.h"

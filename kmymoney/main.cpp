@@ -44,6 +44,7 @@
 // Project Includes
 
 #include "mymoney/mymoneyfile.h"
+#include "mymoneyexception.h"
 #include "kmymoney.h"
 #include "kstartuplogo.h"
 #include "kcreditswindow.h"

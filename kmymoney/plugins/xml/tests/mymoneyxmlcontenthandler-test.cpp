@@ -28,6 +28,7 @@
 #include "../mymoneystoragexml.cpp"
 #include "mymoneyobject_p.h"
 #include "mymoneyobject.h"
+#include "mymoneyexception.h"
 
 QTEST_GUILESS_MAIN(MyMoneyXmlContentHandlerTest)
 

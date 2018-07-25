@@ -24,6 +24,7 @@
 #include "mymoneyaccount.h"
 #include "mymoney/storage/mymoneystoragemgr.h"
 #include "onlinetasks/dummy/tasks/dummytask.h"
+#include "mymoneyexception.h"
 #include "mymoneyenums.h"
 
 QTEST_GUILESS_MAIN(onlineJobAdministrationTest)

@@ -39,6 +39,7 @@
 #include "onlinejob.h"
 #include "tasks/onlinetask.h"
 #include "accountsmodel.h"
+#include "mymoneyexception.h"
 
 #include "models/models.h"
 #include "icons/icons.h"

@@ -20,8 +20,6 @@
 
 #include <QObject>
 
-#include "mymoneyexception.h"
-
 class MyMoneyExceptionTest : public QObject
 {
   Q_OBJECT

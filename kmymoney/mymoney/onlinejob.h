@@ -26,7 +26,6 @@
 #include <QMetaType>
 #include <QString>
 #include "mymoneyobject.h"
-#include "mymoneyexception.h"
 #include "onlinejobmessage.h"
 
 class onlineTask;

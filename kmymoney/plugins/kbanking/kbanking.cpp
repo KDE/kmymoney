@@ -82,6 +82,7 @@
 #include "kmymoneyview.h"
 #include "kbpickstartdate.h"
 #include "mymoneyinstitution.h"
+#include "mymoneyexception.h"
 
 #include "gwenkdegui.h"
 #include "gwenhywfarqtoperators.h"

@@ -24,6 +24,7 @@
 
 #include "mymoneyfile.h"
 #include "onlinejobadministration.h"
+#include "mymoneyexception.h"
 
 #include "onlinetasks/sepa/sepaonlinetransfer.h"
 #include "sepacredittransfersettingsmockup.h"

@@ -34,6 +34,7 @@
 #include "payeeidentifiertyped.h"
 #include "payeeidentifier/ibanbic/ibanbic.h"
 #include "icons/icons.h"
+#include "mymoneyexception.h"
 #include "mymoneyenums.h"
 
 using namespace Icons;

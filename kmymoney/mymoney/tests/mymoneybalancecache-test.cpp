@@ -22,6 +22,7 @@
 #include <QtTest>
 
 #include "mymoneytestutils.h"
+#include "mymoneyexception.h"
 #include "mymoneybalancecache.h"
 
 QTEST_GUILESS_MAIN(MyMoneyBalanceCacheTest)
