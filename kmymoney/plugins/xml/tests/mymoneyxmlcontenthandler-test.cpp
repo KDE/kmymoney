@@ -54,7 +54,7 @@ public:
   static TestMyMoneyObject readBaseXML(const QDomElement &node, bool forceId = true)
   {
     TestMyMoneyObject obj(node.attribute(QStringLiteral("id")));
-    if (obj.id().length() == 0 && forceId)
+    if (obj.id().isEmpty() && forceId)
       throw MYMONEYEXCEPTION_CSTRING("Node has no ID");
     return obj;
   }
