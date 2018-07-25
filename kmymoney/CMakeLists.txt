@@ -118,10 +118,12 @@ ecm_add_app_icon(kmymoney_SRCS ICONS ${KMYMONEY_APP_ICONS})
 add_executable( kmymoney ${kmymoney_SRCS} )
 
 if (ENABLE_SQLCIPHER)
-  target_compile_definitions(kmymoney
+  message( STATUS "     SQLCIPHER INCLUDE   :  " ${SQLCIPHER_INCLUDE_DIRS}) #just for testing it on MS Windows
+  target_link_libraries(kmymoney
   PRIVATE
-    SQLITE_HAS_CODEC
-    SQLITE_TEMP_STORE=2)
+    ${SQLCIPHER_LIBRARIES}
+  )
+  add_definitions( -DSQLITE_HAS_CODEC -DSQLITE_TEMP_STORE=2 )
 
   #otherwise "fatal error: 'sqlite3.h' file not found"
   if(CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "Windows")
@@ -163,8 +165,6 @@ target_link_libraries(kmymoney
   $<$<BOOL:${USE_MODELTEST}>:Qt5::Test>
   $<$<BOOL:${KF5Holidays_FOUND}>:KF5::Holidays>
   $<$<BOOL:${KF5Activities_FOUND}>:KF5::Activities>
-  PRIVATE
-    $<$<BOOL:${ENABLE_SQLCIPHER}>:${SQLCIPHER_LIBRARIES}>
 )
 
 # own plist magic for mac os

@@ -43,12 +43,6 @@ if(CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "Windows")
       ${SQLCIPHER_INCLUDE_DIRS})
 endif()
 
-target_compile_definitions(qsqlcipher
-  PRIVATE
-  QT_PLUGIN # fails to build on MS Windows without this
-  SQLITE_HAS_CODEC
-  SQLITE_TEMP_STORE=2)
-
 target_link_libraries(qsqlcipher
   PRIVATE
     ${SQLCIPHER_LIBRARIES}
