@@ -695,20 +695,10 @@ MyMoneyAccount MyMoneyXmlContentHandler::readAccount(const QDomElement &node)
   acc.setLastModified(QDate::fromString(node.attribute(attributeName(Attribute::Account::LastModified)), Qt::ISODate));
   acc.setLastReconciliationDate(QDate::fromString(node.attribute(attributeName(Attribute::Account::LastReconciled)), Qt::ISODate));
 
-  if (!acc.lastReconciliationDate().isValid()) {
-    // for some reason, I was unable to access our own kvp at this point through
-    // the value() method. It always returned empty strings. The workaround for
-    // this is to construct a local kvp the same way as we have done before and
-    // extract the value from it.
-    //
-    // Since we want to get rid of the lastStatementDate record anyway, this seems
-    // to be ok for now. (ipwizard - 2008-08-14)
-
-    auto txt = acc.value(QStringLiteral("lastStatementDate"));
-    if (!txt.isEmpty()) {
-      acc.setLastReconciliationDate(QDate::fromString(txt, Qt::ISODate));
-    }
-  }
+  // Very old versions of KMyMoney used to store the reconciliation date in
+  // the KVP as "lastStatementDate". Since we don't use it anymore, we get
+  // rid of it in case we read such an old file.
+  acc.deletePair(QStringLiteral("lastStatementDate"));
 
   acc.setInstitutionId(node.attribute(attributeName(Attribute::Account::Institution)));
   acc.setNumber(node.attribute(attributeName(Attribute::Account::Number)));
@@ -808,12 +798,6 @@ void MyMoneyXmlContentHandler::writeAccount(const MyMoneyAccount &account, QDomD
     }
     el.appendChild(onlinesettings);
   }
-
-  // FIXME drop the lastStatementDate record from the KVP when it is
-  // not stored there after setLastReconciliationDate() has been changed
-  // See comment there when this will happen
-  // deletePair("lastStatementDate");
-
 
   //Add in Key-Value Pairs for accounts.
   writeKeyValueContainer(account, document, el);

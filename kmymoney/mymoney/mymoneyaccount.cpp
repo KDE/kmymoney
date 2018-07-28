@@ -169,11 +169,6 @@ QDate MyMoneyAccount::lastReconciliationDate() const
 void MyMoneyAccount::setLastReconciliationDate(const QDate& date)
 {
   Q_D(MyMoneyAccount);
-  // FIXME: for a limited time (maybe until we delivered 1.0) we
-  // keep the last reconciliation date also in the KVP for backward
-  // compatibility. After that, the setValue() statemetn should be removed
-  // and the XML ctor should remove the value completely from the KVP
-  setValue("lastStatementDate", date.toString(Qt::ISODate));
   d->m_lastReconciliationDate = date;
 }
 

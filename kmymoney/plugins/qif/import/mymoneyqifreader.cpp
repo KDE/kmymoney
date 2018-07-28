@@ -1919,7 +1919,7 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
 
   tmp = extractLine('/');
   if (tmp.length() > 0)
-    account.setValue("lastStatementDate", m_qifProfile.date(tmp).toString("yyyy-MM-dd"));
+    account.setLastReconciliationDate(m_qifProfile.date(tmp));
 
   QifEntryTypeE transactionType = EntryTransaction;
   QString type = extractLine('T').toLower().remove(QRegExp("\\s+"));

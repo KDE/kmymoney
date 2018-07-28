@@ -650,6 +650,7 @@ void MyMoneyXmlContentHandlerTest::readAccount()
                      "   <PAIR key=\"key\" value=\"value\" />\n"
                      "   <PAIR key=\"Key\" value=\"Value\" />\n"
                      "   <PAIR key=\"reconciliationHistory\" value=\"2011-01-01:123/100;2011-02-01:114/25\"/>\n"
+                     "   <PAIR key=\"lastStatementDate\" value=\"2011-01-01\"/>\n"
                      "  </KEYVALUEPAIRS>\n"
                      " </ACCOUNT>\n"
                      "</ACCOUNT-CONTAINER>\n").
@@ -690,26 +691,26 @@ void MyMoneyXmlContentHandlerTest::readAccount()
 
   try {
     a = MyMoneyXmlContentHandler::readAccount(node);
-    QVERIFY(a.id() == "A000001");
-    QVERIFY(a.name() == "AccountName");
-    QVERIFY(a.parentAccountId() == "Parent");
-    QVERIFY(a.lastModified() == QDate::currentDate());
-    QVERIFY(a.lastReconciliationDate() == QDate());
-    QVERIFY(a.institutionId() == "B000001");
-    QVERIFY(a.number() == "465500");
-    QVERIFY(a.openingDate() == QDate::currentDate());
-    QVERIFY(a.accountType() == eMyMoney::Account::Type::Asset);
-    QVERIFY(a.description() == "Desc");
-    QVERIFY(a.accountList().count() == 2);
-    QVERIFY(a.accountList()[0] == "A000002");
-    QVERIFY(a.accountList()[1] == "A000003");
-    QVERIFY(a.pairs().count() == 4);
-    QVERIFY(a.value("key") == "value");
-    QVERIFY(a.value("Key") == "Value");
-    QVERIFY(a.value("lastStatementDate").isEmpty());
-    QVERIFY(a.reconciliationHistory().count() == 2);
-    QVERIFY(a.reconciliationHistory()[QDate(2011, 1, 1)] == MyMoneyMoney(123, 100));
-    QVERIFY(a.reconciliationHistory()[QDate(2011, 2, 1)] == MyMoneyMoney(456, 100));
+    QCOMPARE(a.id(), QStringLiteral("A000001"));
+    QCOMPARE(a.name(), QStringLiteral("AccountName"));
+    QCOMPARE(a.parentAccountId(), QStringLiteral("Parent"));
+    QCOMPARE(a.lastModified(), QDate::currentDate());
+    QCOMPARE(a.lastReconciliationDate(), QDate());
+    QCOMPARE(a.institutionId(), QStringLiteral("B000001"));
+    QCOMPARE(a.number(), QStringLiteral("465500"));
+    QCOMPARE(a.openingDate(), QDate::currentDate());
+    QCOMPARE(a.accountType(), eMyMoney::Account::Type::Asset);
+    QCOMPARE(a.description(), QStringLiteral("Desc"));
+    QCOMPARE(a.accountList().count(), 2);
+    QCOMPARE(a.accountList()[0], QStringLiteral("A000002"));
+    QCOMPARE(a.accountList()[1], QStringLiteral("A000003"));
+    QCOMPARE(a.pairs().count(), 3);
+    QCOMPARE(a.value("key"), QStringLiteral("value"));
+    QCOMPARE(a.value("Key"), QStringLiteral("Value"));
+    QCOMPARE(a.pairs().contains("lastStatementDate"), false);
+    QCOMPARE(a.reconciliationHistory().count(), 2);
+    QCOMPARE(a.reconciliationHistory()[QDate(2011, 1, 1)].toString(), MyMoneyMoney(123, 100).toString());
+    QCOMPARE(a.reconciliationHistory()[QDate(2011, 2, 1)].toString(), MyMoneyMoney(456, 100).toString());
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");
   }
