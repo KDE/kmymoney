@@ -170,7 +170,7 @@ KMyMoneyView::KMyMoneyView()
     The method doesn't break strings that are too long. Following line
     workarounds this by using LINE SEPARATOR character which is accepted by
     QTextLayout::createLine().*/
-    viewFrames[view.id] = m_model->addPage(viewBases[view.id], QString(view.name).replace('\n', QString::fromLocal8Bit("\xe2\x80\xa8")));
+    viewFrames[view.id] = m_model->addPage(viewBases[view.id], QString(view.name).replace(QLatin1Char('\n'), QString::fromUtf8("\xe2\x80\xa8")));
     viewFrames[view.id]->setIcon(Icons::get(view.icon));
     connect(viewBases[view.id], &KMyMoneyViewBase::selectByObject, this, &KMyMoneyView::slotSelectByObject);
     connect(viewBases[view.id], &KMyMoneyViewBase::selectByVariant, this, &KMyMoneyView::slotSelectByVariant);
