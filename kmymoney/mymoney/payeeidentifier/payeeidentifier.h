@@ -113,7 +113,13 @@ public:
    *
    * This is inspired by std::bad_cast
    */
+  #if defined(Q_OS_WIN)
+  class badCast final : public std::runtime_error
+
+  #else
   class KMM_PAYEEIDENTIFIER_EXPORT badCast final : public std::runtime_error
+
+  #endif
   {
   public:
     explicit badCast(const char *exceptionMessage) : std::runtime_error(exceptionMessage) {}
@@ -122,7 +128,13 @@ public:
   /**
    * @brief Thrown if one tried to access the data of a null payeeIdentifier
    */
+  #if defined(Q_OS_WIN)
+  class empty final : public std::runtime_error
+
+  #else
   class KMM_PAYEEIDENTIFIER_EXPORT empty final : public std::runtime_error
+
+  #endif
   {
   public:
     explicit empty(const char *exceptionMessage) : std::runtime_error(exceptionMessage) {}
