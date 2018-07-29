@@ -1,6 +1,7 @@
 /*
  * Copyright 2010-2014  Allan Anderson <agander93@gmail.com>
  * Copyright 2016-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2018       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
