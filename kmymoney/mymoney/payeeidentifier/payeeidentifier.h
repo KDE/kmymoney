@@ -113,7 +113,7 @@ public:
    *
    * This is inspired by std::bad_cast
    */
-  class badCast : public std::runtime_error
+  class KMM_PAYEEIDENTIFIER_EXPORT badCast final : public std::runtime_error
   {
   public:
     explicit badCast(const char *exceptionMessage) : std::runtime_error(exceptionMessage) {}
@@ -122,7 +122,7 @@ public:
   /**
    * @brief Thrown if one tried to access the data of a null payeeIdentifier
    */
-  class empty : public std::runtime_error
+  class KMM_PAYEEIDENTIFIER_EXPORT empty final : public std::runtime_error
   {
   public:
     explicit empty(const char *exceptionMessage) : std::runtime_error(exceptionMessage) {}

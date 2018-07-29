@@ -23,6 +23,7 @@
 #define KMM_TOSTRING(x) KMM_STRINGIFY(x)
 
 #include <stdexcept>
+#include "kmm_mymoney_export.h"
 
 /**
   * @file
@@ -47,8 +48,11 @@
 
 #define MYMONEYEXCEPTION_CSTRING(exceptionMessage) MyMoneyException(exceptionMessage " " __FILE__ ":" KMM_TOSTRING(__LINE__))
 
-
-class MyMoneyException : public std::runtime_error
+// Based on https://gcc.gnu.org/wiki/Visibility
+// custom exception classes should always be exported
+// Otherwise we get an error like that:
+// Expected exception of type MyMoneyException to be thrown but std::exception caught
+class KMM_MYMONEY_EXPORT MyMoneyException final : public std::runtime_error
 {
 public:
 /**
