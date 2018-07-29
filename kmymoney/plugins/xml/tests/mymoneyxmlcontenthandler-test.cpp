@@ -52,7 +52,11 @@ public:
   {
   }
 
-  TestMyMoneyObject(TestMyMoneyObject &&other);
+  TestMyMoneyObject(TestMyMoneyObject &&other) : TestMyMoneyObject()
+  {
+    swap(*this, other);
+  }
+
   TestMyMoneyObject & operator=(TestMyMoneyObject other);
   friend void swap(TestMyMoneyObject& first, TestMyMoneyObject& second);
   ~TestMyMoneyObject() final override
