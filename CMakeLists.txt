@@ -150,7 +150,10 @@ add_feature_info("SQL Storage" ENABLE_SQLSTORAGE "It allows storing your financi
 cmake_dependent_option(ENABLE_SQLCIPHER "Enable SQLCipher support." ON
                        "SQLCIPHER_FOUND" OFF)
 
-if(ENABLE_SQLCIPHER AND (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "Windows"))
+# Otherwise compilers halt on something like that:
+# ld: library not found for -lsqlcipher
+# on MS Windows, FreeBSD, and macOS.
+if(ENABLE_SQLCIPHER AND NOT CMAKE_SYSTEM_NAME MATCHES "Linux")
   link_directories(${SQLCIPHER_LIBRARY_DIRS})
 endif()
 
