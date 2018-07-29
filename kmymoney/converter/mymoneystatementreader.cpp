@@ -385,30 +385,20 @@ QStringList MyMoneyStatementReader::importStatement(const MyMoneyStatement& s, b
     MyMoneyStatement::writeXMLFile(s, logFile);
  }
 
-  // we use an object on the heap here, so that we can check the presence
-  // of it during slotUpdateActions() by looking at the pointer.
   auto reader = new MyMoneyStatementReader;
   reader->setAutoCreatePayee(true);
   if (callback)
     reader->setProgressCallback(callback);
-
-  // disable all standard widgets during the import
-//  setEnabled(false);
 
   QStringList messages;
   result = reader->import(s, messages);
 
   auto transactionAdded = reader->anyTransactionAdded();
 
-  // get rid of the statement reader and tell everyone else
-  // about the destruction by setting the pointer to zero
   delete reader;
 
   if (callback)
     callback(-1, -1, QString());
-
-  // re-enable all standard widgets
-//  setEnabled(true);
 
   if (!silent && transactionAdded) {
     globalResultMessages()->append(messages);
@@ -421,12 +411,6 @@ QStringList MyMoneyStatementReader::importStatement(const MyMoneyStatement& s, b
 
 bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& messages)
 {
-  //
-  // For testing, save the statement to an XML file
-  // (uncomment this line)
-  //
-  //MyMoneyStatement::writeXMLFile(s, "Imported.Xml");
-
   //
   // Select the account
   //
