@@ -34,21 +34,33 @@ QTEST_GUILESS_MAIN(MyMoneyXmlContentHandlerTest)
 
 class TestMyMoneyObjectPrivate : public MyMoneyObjectPrivate
 {
-public:
-  TestMyMoneyObjectPrivate()
-  {
-  }
 };
+
 class TestMyMoneyObject : public MyMoneyObject
 {
   Q_DECLARE_PRIVATE(TestMyMoneyObject)
+
 public:
   TestMyMoneyObject() : MyMoneyObject(*new MyMoneyObjectPrivate) {}
-  TestMyMoneyObject(const QString &id) : MyMoneyObject(*new MyMoneyObjectPrivate, id) { }
+  TestMyMoneyObject(const QString &id) :
+    MyMoneyObject(*new MyMoneyObjectPrivate, id)
+  {
+  }
+
+  TestMyMoneyObject(const TestMyMoneyObject &other) :
+    MyMoneyObject(*new MyMoneyObjectPrivate(*other.d_func()), other.id())
+  {
+  }
+
+  TestMyMoneyObject(TestMyMoneyObject &&other);
   TestMyMoneyObject & operator=(TestMyMoneyObject other);
   friend void swap(TestMyMoneyObject& first, TestMyMoneyObject& second);
-  ~TestMyMoneyObject(){}
-  bool hasReferenceTo(const QString&) const final override {
+  ~TestMyMoneyObject() final override
+  {
+  }
+
+  bool hasReferenceTo(const QString&) const final override
+  {
     return false;
   }
 
