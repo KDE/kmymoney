@@ -97,7 +97,7 @@ public:
               // returns the text with an ampersand character maybe inserted
               // as indication for a hotkey. This needs to be removed for
               // the construction of the URL
-              const QString website = webSiteButton->text().replace('&', "");
+              const QString website = webSiteButton->text().remove(QLatin1Char('&'));
               QUrl url;
               url.setUrl(QString::fromLatin1("https://%1/").arg(website));
               QDesktopServices::openUrl(url);
@@ -307,7 +307,7 @@ void SimpleLedgerView::setupCornerWidget()
             d->webSiteButton->show();
             d->webSiteButton->setIcon(favIcon);
             d->webSiteButton->setText(url);
-            d->webSiteButton->setToolTip(i18n("Open website of <b>%1</b> in your browser.").arg(institution.name()));
+            d->webSiteButton->setToolTip(i18n("Open website of <b>%1</b> in your browser.", institution.name()));
           }
         }
       }

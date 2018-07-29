@@ -52,7 +52,7 @@ public:
   payeeIdentifier(const payeeIdentifier& other);
   ~payeeIdentifier();
   payeeIdentifier& operator=(const payeeIdentifier& other);
-  bool operator==(const payeeIdentifier& other);
+  bool operator==(const payeeIdentifier& other) const;
 
   /** @brief Check if any data is associated */
   bool isNull() const {

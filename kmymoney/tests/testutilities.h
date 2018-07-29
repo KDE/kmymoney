@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef REPORTSTESTCOMMON_H
-#define REPORTSTESTCOMMON_H
+#ifndef TESTUTILITIES_H
+#define TESTUTILITIES_H
 
 #include <QList>
 #include <QDate>
@@ -133,4 +133,4 @@ extern MyMoneyMoney searchHTML(const QString& _html, const QString& _search);
 
 } // end namespace test
 
-#endif // REPORTSTESTCOMMON_H
+#endif // TESTUTILITIES_H

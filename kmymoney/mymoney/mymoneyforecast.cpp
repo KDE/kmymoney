@@ -666,7 +666,7 @@ public:
       switch (q->historyMethod()) {
       //moving average
       case 0: {
-        for (auto t_day = 1; t_day <= q->accountsCycle(); t_day++)
+        for (auto t_day = 1; t_day <= q->accountsCycle(); ++t_day)
           m_accountTrendList[acc.id()][t_day] = accountMovingAverage(acc, t_day, auxForecastTerms); //moving average
         break;
       }
@@ -681,7 +681,7 @@ public:
           for (qint64 w = q->forecastCycles(); i <= auxForecastTerms; ++i, --w)
             totalWeight += w;
         }
-        for (auto t_day = 1; t_day <= q->accountsCycle(); t_day++)
+        for (auto t_day = 1; t_day <= q->accountsCycle(); ++t_day)
           m_accountTrendList[acc.id()][t_day] = accountWeightedMovingAverage(acc, t_day, totalWeight);
         break;
       }
@@ -689,7 +689,7 @@ public:
         //calculate mean term
         MyMoneyMoney meanTerms = MyMoneyMoney((auxForecastTerms * (auxForecastTerms + 1)) / 2, 1) / MyMoneyMoney(auxForecastTerms, 1);
 
-        for (auto t_day = 1; t_day <= q->accountsCycle(); t_day++)
+        for (auto t_day = 1; t_day <= q->accountsCycle(); ++t_day)
           m_accountTrendList[acc.id()][t_day] = accountLinearRegression(acc, t_day, auxForecastTerms, meanTerms);
         break;
       }

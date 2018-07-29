@@ -128,7 +128,7 @@ payeeIdentifier& payeeIdentifier::operator=(const payeeIdentifier & other)
   return *this;
 }
 
-bool payeeIdentifier::operator==(const payeeIdentifier& other)
+bool payeeIdentifier::operator==(const payeeIdentifier& other) const
 {
   if (m_id != other.m_id)
     return false;

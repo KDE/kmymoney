@@ -3520,10 +3520,15 @@ bool KMyMoneyApp::slotFileSaveAs()
       break;
     default:
       {
-        KSaveAsQuestion dlg(availableFileTypes, this);
-        if (dlg.exec() != QDialog::Accepted)
-          return false;
-        chosenFileType = dlg.fileType();
+        QPointer<KSaveAsQuestion> dlg = new KSaveAsQuestion(availableFileTypes, this);
+        auto rc = dlg->exec();
+        if (dlg) {
+          auto fileType = dlg->fileType();
+          delete dlg;
+          if (rc != QDialog::Accepted)
+            return false;
+          chosenFileType = fileType;
+        }
       }
   }
 

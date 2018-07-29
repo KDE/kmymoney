@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SQLCIPHERDRIVERTEST_H
-#define SQLCIPHERDRIVERTEST_H
+#ifndef QSQLCIPHER_TEST_H
+#define QSQLCIPHER_TEST_H
 
 #include <QObject>
 #include <QSqlDatabase>
@@ -48,4 +48,4 @@ private:
   QSqlDatabase m_db;
 };
 
-#endif // SQLCIPHERDRIVERTEST_H
+#endif // QSQLCIPHER_TEST_H
