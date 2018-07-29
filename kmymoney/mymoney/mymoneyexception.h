@@ -48,11 +48,19 @@
 
 #define MYMONEYEXCEPTION_CSTRING(exceptionMessage) MyMoneyException(exceptionMessage " " __FILE__ ":" KMM_TOSTRING(__LINE__))
 
+#if defined(Q_OS_WIN)
+// Otherwise
+// non dll-interface class 'std::runtime_error' used as base for dll-interface class 'MyMoneyException'
+class MyMoneyException final : public std::runtime_error
+
+#else
 // Based on https://gcc.gnu.org/wiki/Visibility
 // custom exception classes should always be exported
 // Otherwise we get an error like that:
 // Expected exception of type MyMoneyException to be thrown but std::exception caught
 class KMM_MYMONEY_EXPORT MyMoneyException final : public std::runtime_error
+
+#endif
 {
 public:
 /**
