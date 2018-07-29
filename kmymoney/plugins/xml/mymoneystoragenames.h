@@ -95,7 +95,8 @@ namespace Element {
   };
 
   enum class Payee {
-    Address
+    Address,
+    Identifier
   };
 
   enum class KVP {
@@ -208,6 +209,13 @@ namespace Attribute {
     Email,
     State,
     Telephone,
+    IBAN,
+    BIC,
+    OwnerVer1,
+    OwnerVer2,
+    BankCode,
+    Country,
+    AccountNumber,
     // insert new entries above this line
     LastAttribute
   };

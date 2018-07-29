@@ -62,6 +62,10 @@
 #include "mymoneysplit.h"
 #include "onlinejob.h"
 #include "onlinejobadministration.h"
+#include "mymoney/payeeidentifier/payeeidentifierdata.h"
+#include "payeeidentifiertyped.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
+#include "payeeidentifier/nationalaccount/nationalaccount.h"
 #include "plugins/xmlhelper/xmlstoragehelper.h"
 #include "mymoneyenums.h"
 
@@ -158,7 +162,13 @@ private:
   static MyMoneyAccount readAccount(const QDomElement &node);
   static void writeAccount(const MyMoneyAccount &account, QDomDocument &document, QDomElement &parent);
   static MyMoneyPayee readPayee(const QDomElement &node);
+  static payeeIdentifierData *readPayeeIdentifier(const QDomElement &node);
+  static payeeIdentifierData *readIBANBIC(const QDomElement &element);
+  static payeeIdentifierData *readNationalAccount(const QDomElement &element);
   static void writePayee(const MyMoneyPayee &payee, QDomDocument &document, QDomElement &parent);
+  static void writePayeeIdentifier(const payeeIdentifier &obj, QDomDocument &document, QDomElement &parent);
+  static void writeIBANBIC(const payeeIdentifier &obj, QDomElement &parent);
+  static void writeNationalAccount(const payeeIdentifier &obj, QDomElement &parent);
   static MyMoneyTag readTag(const QDomElement &node);
   static void writeTag(const MyMoneyTag &tag, QDomDocument &document, QDomElement &parent);
   static MyMoneySecurity readSecurity(const QDomElement &node);
@@ -842,9 +852,55 @@ MyMoneyPayee MyMoneyXmlContentHandler::readPayee(const QDomElement &node)
   payee.setState(addrNode.attribute(attributeName(Attribute::Payee::State)));
   payee.setTelephone(addrNode.attribute(attributeName(Attribute::Payee::Telephone)));
 
-  payee.loadXML(node);
+  // Load identifiers
+  auto identifierNodes = node.elementsByTagName(elementName(Element::Payee::Identifier));
+  const auto identifierNodesLength = identifierNodes.length();
+  for (auto i = 0; i < identifierNodesLength; ++i) {
+    auto identifierData = readPayeeIdentifier(identifierNodes.item(i).toElement());
+    if (identifierData)
+      payee.addPayeeIdentifier(payeeIdentifier((i + 1), identifierData));
+  }
 
   return payee;
+}
+
+payeeIdentifierData *MyMoneyXmlContentHandler::readPayeeIdentifier(const QDomElement &element)
+{
+    const auto identifierType = element.attribute(attributeName(Attribute::Payee::Type));
+    const auto identifierId = element.attribute(attributeName(Attribute::Payee::ID)).toUInt();
+
+    payeeIdentifierData* identData = nullptr;
+
+    if (identifierType == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid())
+      identData = readIBANBIC(element);
+    else if (identifierType == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid())
+      identData = readNationalAccount(element);
+    else
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Unknown payee identifier type %1").arg(identifierType));
+
+    return identData;
+
+}
+
+payeeIdentifierData *MyMoneyXmlContentHandler::readIBANBIC(const QDomElement &element)
+{
+  payeeIdentifiers::ibanBic *const ident = new payeeIdentifiers::ibanBic;
+
+  ident->setBic(element.attribute(attributeName(Attribute::Payee::BIC)));
+  ident->setIban(element.attribute(attributeName(Attribute::Payee::IBAN)));
+  ident->setOwnerName(element.attribute(attributeName(Attribute::Payee::OwnerVer1)));
+  return ident;
+}
+
+payeeIdentifierData *MyMoneyXmlContentHandler::readNationalAccount(const QDomElement &element)
+{
+  payeeIdentifiers::nationalAccount *const ident = new payeeIdentifiers::nationalAccount;
+
+  ident->setBankCode(element.attribute(attributeName(Attribute::Payee::BankCode)));
+  ident->setAccountNumber(element.attribute(attributeName(Attribute::Payee::AccountNumber)));
+  ident->setOwnerName(element.attribute(attributeName(Attribute::Payee::OwnerVer2)));
+  ident->setCountry(element.attribute(attributeName(Attribute::Payee::Country)));
+  return ident;
 }
 
 void MyMoneyXmlContentHandler::writePayee(const MyMoneyPayee &payee, QDomDocument &document, QDomElement &parent)
@@ -881,9 +937,53 @@ void MyMoneyXmlContentHandler::writePayee(const MyMoneyPayee &payee, QDomDocumen
   el.appendChild(address);
 
   // Save payeeIdentifiers (account numbers)
-  payee.MyMoneyPayeeIdentifierContainer::writeXML(document, el);
+  for (const auto &payeeIdentifier : payee.payeeIdentifiers())
+    if (!payeeIdentifier.isNull())
+      writePayeeIdentifier(payeeIdentifier, document, el);
 
   parent.appendChild(el);
+}
+
+void MyMoneyXmlContentHandler::writePayeeIdentifier(const payeeIdentifier &obj, QDomDocument &document, QDomElement &parent)
+{
+  // Important: type must be set before calling m_payeeIdentifier->writeXML()
+  // the plugin for unavailable plugins must be able to set type itself
+  auto elem = document.createElement(elementName(Element::Payee::Identifier));
+  if (obj.id() != 0)
+    elem.setAttribute(attributeName(Attribute::Payee::ID), obj.id());
+
+  if (!obj.isNull()) {
+    elem.setAttribute(attributeName(Attribute::Payee::Type), obj->payeeIdentifierId());
+    if (obj->payeeIdentifierId() == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid())
+      writeIBANBIC(obj, elem);
+    else if (obj->payeeIdentifierId() == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid())
+      writeNationalAccount(obj, elem);
+    obj->writeXML(document, elem);
+  }
+  parent.appendChild(elem);
+}
+
+void MyMoneyXmlContentHandler::writeIBANBIC(const payeeIdentifier &obj, QDomElement &parent)
+{
+  payeeIdentifierTyped<payeeIdentifiers::ibanBic> payeeIdentifier = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(obj);
+
+  parent.setAttribute(attributeName(Attribute::Payee::IBAN), payeeIdentifier->electronicIban());
+
+  if (!payeeIdentifier->fullStoredBic().isEmpty())
+    parent.setAttribute(attributeName(Attribute::Payee::BIC), payeeIdentifier->fullStoredBic());
+  if (!payeeIdentifier->ownerName().isEmpty())
+    parent.setAttribute(attributeName(Attribute::Payee::OwnerVer1), payeeIdentifier->ownerName());
+}
+
+void MyMoneyXmlContentHandler::writeNationalAccount(const payeeIdentifier &obj, QDomElement &parent)
+{
+  payeeIdentifierTyped<payeeIdentifiers::nationalAccount> payeeIdentifier = payeeIdentifierTyped<payeeIdentifiers::nationalAccount>(obj);
+
+  parent.setAttribute(attributeName(Attribute::Payee::AccountNumber), payeeIdentifier->accountNumber());
+  if (!payeeIdentifier->bankCode().isEmpty())
+    parent.setAttribute(attributeName(Attribute::Payee::BankCode), payeeIdentifier->bankCode());
+  parent.setAttribute(attributeName(Attribute::Payee::OwnerVer2), payeeIdentifier->ownerName());
+  parent.setAttribute(attributeName(Attribute::Payee::Country), payeeIdentifier->country());
 }
 
 MyMoneyTag MyMoneyXmlContentHandler::readTag(const QDomElement &node)

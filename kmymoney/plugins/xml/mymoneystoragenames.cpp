@@ -224,7 +224,8 @@ QString attributeName(Attribute::Account attributeID)
 QString elementName(Element::Payee elementID)
 {
   static const QMap<Element::Payee, QString> elementNames {
-    {Element::Payee::Address, QStringLiteral("ADDRESS")}
+    {Element::Payee::Address,         QStringLiteral("ADDRESS")},
+    {Element::Payee::Identifier,      QStringLiteral("payeeIdentifier")}
   };
   return elementNames.value(elementID);
 }
@@ -232,6 +233,7 @@ QString elementName(Element::Payee elementID)
 QString attributeName(Attribute::Payee attributeID)
 {
   static const QMap<Attribute::Payee, QString> attributeNames {
+    {Attribute::Payee::ID,               QStringLiteral("id")},
     {Attribute::Payee::Name,             QStringLiteral("name")},
     {Attribute::Payee::Type,             QStringLiteral("type")},
     {Attribute::Payee::Reference,        QStringLiteral("reference")},
@@ -246,7 +248,14 @@ QString attributeName(Attribute::Payee attributeID)
     {Attribute::Payee::PostCode,         QStringLiteral("postcode")},
     {Attribute::Payee::Email,            QStringLiteral("email")},
     {Attribute::Payee::State,            QStringLiteral("state")},
-    {Attribute::Payee::Telephone,        QStringLiteral("telephone")}
+    {Attribute::Payee::Telephone,        QStringLiteral("telephone")},
+    {Attribute::Payee::IBAN,             QStringLiteral("iban")},
+    {Attribute::Payee::BIC,              QStringLiteral("bic")},
+    {Attribute::Payee::OwnerVer1,        QStringLiteral("ownerName")}, // for IBANBIC number
+    {Attribute::Payee::OwnerVer2,        QStringLiteral("ownername")}, // for NationaAccount number
+    {Attribute::Payee::AccountNumber,    QStringLiteral("accountnumber")},
+    {Attribute::Payee::BankCode,         QStringLiteral("bankcode")},
+    {Attribute::Payee::Country,          QStringLiteral("country")},
   };
   return attributeNames.value(attributeID);
 }

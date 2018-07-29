@@ -116,7 +116,7 @@ void MyMoneyStorageNamesTest::payeeElementNames()
 
 void MyMoneyStorageNamesTest::payeeAttributeNames()
 {
-  for (auto i = (int)Attribute::Payee::Name; i < (int)Attribute::Payee::LastAttribute; ++i) {
+  for (auto i = (int)Attribute::Payee::ID; i < (int)Attribute::Payee::LastAttribute; ++i) {
     auto isEmpty = attributeName(static_cast<Attribute::Payee>(i)).isEmpty();
     if (isEmpty)
       qWarning() << "Empty attribute's name " << i;
