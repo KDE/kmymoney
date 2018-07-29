@@ -72,6 +72,7 @@
 #include "icons.h"
 #include "storageenums.h"
 #include "mymoneyenums.h"
+#include "kmymoneyplugin.h"
 
 using namespace Icons;
 
@@ -807,4 +808,44 @@ MyMoneyForecast KMyMoneyUtils::forecast()
   forecast.setIncludeScheduledTransactions(KMyMoneySettings::includeScheduledTransactions());
 
   return forecast;
+}
+
+bool KMyMoneyUtils::canUpdateAllAccounts()
+{
+  const auto file = MyMoneyFile::instance();
+  auto rc = false;
+  if (!file->storageAttached())
+    return rc;
+
+  QList<MyMoneyAccount> accList;
+  file->accountList(accList);
+  QList<MyMoneyAccount>::const_iterator it_a;
+  auto it_p = pPlugins.online.constEnd();
+  for (it_a = accList.constBegin(); (it_p == pPlugins.online.constEnd()) && (it_a != accList.constEnd()); ++it_a) {
+    if ((*it_a).hasOnlineMapping()) {
+      // check if provider is available
+      it_p = pPlugins.online.constFind((*it_a).onlineBankingSettings().value("provider").toLower());
+      if (it_p != pPlugins.online.constEnd()) {
+        QStringList protocols;
+        (*it_p)->protocols(protocols);
+        if (!protocols.isEmpty()) {
+          rc = true;
+          break;
+        }
+      }
+    }
+  }
+  return rc;
+}
+
+void KMyMoneyUtils::showStatementImportResult(const QStringList& resultMessages, uint statementCount)
+{
+  KMessageBox::informationList(nullptr,
+                                i18np("One statement has been processed with the following results:",
+                                      "%1 statements have been processed with the following results:",
+                                      statementCount),
+                                !resultMessages.isEmpty() ?
+                                    resultMessages :
+                                    QStringList { i18np("No new transaction has been imported.", "No new transactions have been imported.", statementCount) },
+                                i18n("Statement import statistics"));
 }

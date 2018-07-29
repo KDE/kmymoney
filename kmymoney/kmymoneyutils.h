@@ -386,6 +386,10 @@ public:
   static QDebug debug();
 
   static MyMoneyForecast forecast();
+
+  static bool canUpdateAllAccounts();
+
+  static void showStatementImportResult(const QStringList& resultMessages, uint statementCount);
 };
 
 #endif

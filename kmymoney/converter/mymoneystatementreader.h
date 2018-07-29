@@ -93,6 +93,8 @@ public:
     */
   static QStringList importStatement(const QString& url, bool silent = false, void(*callback)(int, int, const QString&) = nullptr);
   static QStringList importStatement(const MyMoneyStatement& s, bool silent = false, void(*callback)(int, int, const QString&) = nullptr);
+  static void clearResultMessages();
+  static QStringList resultMessages();
 
 private:
   /**

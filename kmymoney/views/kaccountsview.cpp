@@ -145,6 +145,7 @@ void KAccountsView::updateActions(const MyMoneyObject& obj)
     pActions[a]->setEnabled(false);
 
   pActions[eMenu::Action::NewAccount]->setEnabled(true);
+  pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(KMyMoneyUtils::canUpdateAllAccounts());
 
   if (acc.id().isEmpty()) {
     d->m_currentAccount = MyMoneyAccount();
@@ -504,34 +505,10 @@ void KAccountsView::slotAccountMapOnline()
 void KAccountsView::slotAccountUpdateOnlineAll()
 {
   Q_D(KAccountsView);
+
   QList<MyMoneyAccount> accList;
   MyMoneyFile::instance()->accountList(accList);
-  QList<MyMoneyAccount>::iterator it_a;
-  QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
-
-  // remove all those from the list, that don't have a 'provider' or the
-  // provider is not currently present
-  for (it_a = accList.begin(); it_a != accList.end();) {
-    if (!(*it_a).hasOnlineMapping()
-        || d->m_onlinePlugins->find((*it_a).onlineBankingSettings().value("provider").toLower()) == d->m_onlinePlugins->end()) {
-      it_a = accList.erase(it_a);
-    } else
-      ++it_a;
-  }
-  const QVector<eMenu::Action> disabledActions {eMenu::Action::UpdateAccount, eMenu::Action::UpdateAllAccounts};
-  for (const auto& a : disabledActions)
-    pActions[a]->setEnabled(false);
-
-  // now work on the remaining list of accounts
-  int cnt = accList.count() - 1;
-  for (it_a = accList.begin(); it_a != accList.end(); ++it_a) {
-    it_p = d->m_onlinePlugins->constFind((*it_a).onlineBankingSettings().value("provider").toLower());
-    (*it_p)->updateAccount(*it_a, cnt != 0);
-    --cnt;
-  }
-
-  // re-enable the disabled actions
-  updateActions(d->m_currentAccount);
+  d->accountsUpdateOnline(accList);
 }
 
 void KAccountsView::slotAccountUpdateOnline()
@@ -545,18 +522,5 @@ void KAccountsView::slotAccountUpdateOnline()
   if (!d->m_currentAccount.hasOnlineMapping())
     return;
 
-  const QVector<eMenu::Action> disabledActions {eMenu::Action::UpdateAccount, eMenu::Action::UpdateAllAccounts};
-  for (const auto& a : disabledActions)
-    pActions[a]->setEnabled(false);
-
-  // find the provider
-  QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
-  it_p = d->m_onlinePlugins->constFind(d->m_currentAccount.onlineBankingSettings().value("provider").toLower());
-  if (it_p != d->m_onlinePlugins->constEnd()) {
-    // plugin found, call it
-    (*it_p)->updateAccount(d->m_currentAccount);
-  }
-
-  // re-enable the disabled actions
-  updateActions(d->m_currentAccount);
+  d->accountsUpdateOnline(QList<MyMoneyAccount> { d->m_currentAccount } );
 }

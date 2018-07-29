@@ -2820,7 +2820,7 @@ void KMyMoneyApp::Private::updateActions()
   auto aC = q->actionCollection();
   aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::SaveAs)))->setEnabled(canFileSaveAs());
   aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Close)))->setEnabled(m_storageInfo.isOpened);
-  pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(canUpdateAllAccounts());
+  pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(KMyMoneyUtils::canUpdateAllAccounts());
 }
 
 bool KMyMoneyApp::Private::canFileSaveAs() const
@@ -2828,34 +2828,6 @@ bool KMyMoneyApp::Private::canFileSaveAs() const
   return (m_storageInfo.isOpened &&
           (!pPlugins.storage.isEmpty() &&
            !(pPlugins.storage.count() == 1 && pPlugins.storage.first()->storageType() == eKMyMoney::StorageType::GNC)));
-}
-
-bool KMyMoneyApp::Private::canUpdateAllAccounts() const
-{
-  const auto file = MyMoneyFile::instance();
-  auto rc = false;
-  if (!file->storageAttached())
-    return rc;
-
-  QList<MyMoneyAccount> accList;
-  file->accountList(accList);
-  QList<MyMoneyAccount>::const_iterator it_a;
-  auto it_p = pPlugins.online.constEnd();
-  for (it_a = accList.constBegin(); (it_p == pPlugins.online.constEnd()) && (it_a != accList.constEnd()); ++it_a) {
-    if ((*it_a).hasOnlineMapping()) {
-      // check if provider is available
-      it_p = pPlugins.online.constFind((*it_a).onlineBankingSettings().value("provider").toLower());
-      if (it_p != pPlugins.online.constEnd()) {
-        QStringList protocols;
-        (*it_p)->protocols(protocols);
-        if (!protocols.isEmpty()) {
-          rc = true;
-          break;
-        }
-      }
-    }
-  }
-  return rc;
 }
 
 void KMyMoneyApp::slotDataChanged()
@@ -3161,7 +3133,10 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
 
   // only start processing if this is the only import so far
   if (d->m_importUrlsQueue.count() == 1) {
+    MyMoneyStatementReader::clearResultMessages();
+    auto statementCount = 0;
     while (!d->m_importUrlsQueue.isEmpty()) {
+      ++statementCount;
       // get the value of the next item from the queue
       // but leave it on the queue for now
       QString url = d->m_importUrlsQueue.head();
@@ -3207,6 +3182,8 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
       // remove the current processed item from the queue
       d->m_importUrlsQueue.dequeue();
     }
+
+    KMyMoneyUtils::showStatementImportResult(MyMoneyStatementReader::resultMessages(), statementCount);
   }
 }
 
@@ -3673,7 +3650,7 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
         m_autoSaveTimer->setSingleShot(true);
         m_autoSaveTimer->start(m_autoSavePeriod * 60 * 1000);  //miliseconds
       }
-      pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(canUpdateAllAccounts());
+      pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(KMyMoneyUtils::canUpdateAllAccounts());
       break;
 
     default:

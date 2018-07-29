@@ -80,6 +80,8 @@ bool matchNotEmpty(const QString &l, const QString &r)
   return !l.isEmpty() && QString::compare(l, r, Qt::CaseInsensitive) == 0;
 }
 
+Q_GLOBAL_STATIC(QStringList, globalResultMessages);
+
 class MyMoneyStatementReader::Private
 {
 public:
@@ -408,9 +410,10 @@ QStringList MyMoneyStatementReader::importStatement(const MyMoneyStatement& s, b
   // re-enable all standard widgets
 //  setEnabled(true);
 
-  if (!silent && transactionAdded)
-    KMessageBox::informationList(nullptr,
-                                 i18n("The statement has been processed with the following results:"), messages, i18n("Statement stats"));
+  if (!silent && transactionAdded) {
+    globalResultMessages()->append(messages);
+  }
+
   if (!result)
     messages.clear();
   return messages;
@@ -1575,4 +1578,14 @@ void MyMoneyStatementReader::slotNewAccount(const MyMoneyAccount& acc)
 {
   auto newAcc = acc;
   NewAccountWizard::Wizard::newAccount(newAcc);
+}
+
+void MyMoneyStatementReader::clearResultMessages()
+{
+  globalResultMessages()->clear();
+}
+
+QStringList MyMoneyStatementReader::resultMessages()
+{
+  return *globalResultMessages();
 }

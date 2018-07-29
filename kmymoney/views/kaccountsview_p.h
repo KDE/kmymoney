@@ -49,6 +49,9 @@
 #include "kmymoneyplugin.h"
 #include "icons.h"
 #include "mymoneyenums.h"
+#include "menuenums.h"
+#include "mymoneystatementreader.h"
+#include "kmymoneyutils.h"
 
 using namespace Icons;
 
@@ -311,6 +314,47 @@ public:
         a->setToolTip(i18n("This account is still included in an active schedule"));
         return;
     }
+  }
+
+  void accountsUpdateOnline(const QList<MyMoneyAccount>& accList)
+  {
+    Q_Q(KAccountsView);
+
+    // block the update account actions for now so that we don't get here twice
+    const QVector<eMenu::Action> disabledActions {eMenu::Action::UpdateAccount, eMenu::Action::UpdateAllAccounts};
+    for (const auto& a : disabledActions)
+      pActions[a]->setEnabled(false);
+
+    // clear global message list
+    MyMoneyStatementReader::clearResultMessages();
+
+    // process all entries that have a mapped account and the 'provider' is available
+    // we need to make sure that only the very last entry that matches sets the
+    // 'moreAccounts' parameter in the call to updateAccount() to false
+    auto processedAccounts = 0;
+    auto nextAccount = accList.cend();
+    auto nextProvider = m_onlinePlugins->cend();
+    for (auto it_a = accList.cbegin(); it_a != accList.cend(); ++it_a) {
+      auto it_p = m_onlinePlugins->constFind((*it_a).onlineBankingSettings().value("provider").toLower());
+      if ((*it_a).hasOnlineMapping() && (it_p != m_onlinePlugins->cend())) {
+        if (nextAccount != accList.cend()) {
+          (*nextProvider)->updateAccount(*nextAccount, true);
+        }
+        nextAccount = it_a;
+        nextProvider = it_p;
+        ++processedAccounts;
+      }
+    }
+
+    // process a possible pending entry
+    if (nextAccount != accList.cend()) {
+      (*nextProvider)->updateAccount(*nextAccount, false);
+    }
+
+    // re-enable the disabled actions
+    q->updateActions(m_currentAccount);
+
+    KMyMoneyUtils::showStatementImportResult(MyMoneyStatementReader::resultMessages(), processedAccounts);
   }
 
   KAccountsView       *q_ptr;
