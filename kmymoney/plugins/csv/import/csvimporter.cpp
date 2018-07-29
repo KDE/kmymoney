@@ -57,27 +57,10 @@ CSVImporter::~CSVImporter()
 void CSVImporter::createActions()
 {
   const auto &kpartgui = QStringLiteral("file_import_csv");
-  m_action = actionCollection()->addAction(kpartgui);
-  m_action->setText(i18n("CSV..."));
-  connect(m_action, &QAction::triggered, this, &CSVImporter::startWizardRun);
+  auto importAction = actionCollection()->addAction(kpartgui);
+  importAction->setText(i18n("CSV..."));
+  connect(importAction, &QAction::triggered, this, &CSVImporter::startWizardRun);
   connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action(qPrintable(kpartgui)), &QAction::setEnabled);
-}
-
-void CSVImporter::startWizardRun()
-{
-  m_action->setEnabled(false);
-  m_importer = new CSVImporterCore;
-  m_wizard = new CSVWizard(this, m_importer);
-  m_silent = false;
-  connect(m_wizard, &CSVWizard::statementReady, this, &CSVImporter::slotGetStatement);
-  m_action->setEnabled(false);//  don't allow further plugins to start while this is open
-}
-
-bool CSVImporter::slotGetStatement(MyMoneyStatement& s)
-{
-  const auto ret = !statementInterface()->import(s, m_silent).isEmpty();
-  delete m_importer;
-  return ret;
 }
 
 QString CSVImporter::formatName() const
@@ -93,26 +76,27 @@ QString CSVImporter::formatFilenameFilter() const
 bool CSVImporter::isMyFormat(const QString& filename) const
 {
   // filename is considered a CSV file if it can be opened
-  // and the filename ends in ".csv".
-  bool result = false;
-
+  // and the filename ends in ".csv" (case does not matter).
   QFile f(filename);
-  if (f.open(QIODevice::ReadOnly | QIODevice::Text)) {
-    result = f.fileName().endsWith(QLatin1String(".csv"));
-    f.close();
-  }
+  return filename.endsWith(QLatin1String(".csv"), Qt::CaseInsensitive)
+          && f.open(QIODevice::ReadOnly | QIODevice::Text);
+}
 
-  return result;
+void CSVImporter::startWizardRun()
+{
+  import(QString());
 }
 
 bool CSVImporter::import(const QString& filename)
 {
-  bool rc = true;
-  m_importer = new CSVImporterCore;
-  m_wizard = new CSVWizard(this, m_importer);
-  m_wizard->presetFilename(filename);
-  m_silent = false;
-  connect(m_wizard, &CSVWizard::statementReady, this, &CSVImporter::slotGetStatement);
+  QPointer<CSVWizard> wizard = new CSVWizard(this);
+  wizard->presetFilename(filename);
+  auto rc = false;
+
+  if ((wizard->exec() == QDialog::Accepted) && wizard) {
+    rc =  !statementInterface()->import(wizard->statement(), false).isEmpty();
+  }
+  wizard->deleteLater();
   return rc;
 }
 

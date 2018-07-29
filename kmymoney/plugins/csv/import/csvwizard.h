@@ -56,12 +56,14 @@ class CSVWizard : public QDialog
   Q_OBJECT
 
 public:
-  explicit CSVWizard(CSVImporter *plugin, CSVImporterCore *importer);
+  explicit CSVWizard(CSVImporter *plugin);
   ~CSVWizard();
 
   enum wizardPageE  { PageIntro, PageSeparator, PageRows,
                       PageBanking, PageInvestment, PagePrices, PageFormats
                     };
+
+  const MyMoneyStatement& statement() const;
 
   Ui::CSVWizard    *ui;
   MyMoneyStatement  m_st;
@@ -108,8 +110,8 @@ private:
   QPointer<PricesPage>         m_pagePrices;
   FormatsPage                 *m_pageFormats;
 
-  CSVImporter*  m_plugin;
-  CSVImporterCore*        m_imp;
+  CSVImporter*        m_plugin;
+  CSVImporterCore*    m_imp;
   QWizard*            m_wiz;
   QString             m_fileName;
 
@@ -117,7 +119,7 @@ private:
   void saveWindowSize(const KSharedConfigPtr& config);
   void showStage();
 
-  void closeEvent(QCloseEvent *event) override;
+  void saveSettings() const;
   bool eventFilter(QObject *object, QEvent *event) override;
 
 private Q_SLOTS:
@@ -129,9 +131,6 @@ private Q_SLOTS:
   void slotIdChanged(int id);
   void fileDialogClicked();
   void saveAsQIFClicked();
-
-Q_SIGNALS:
-  void statementReady(MyMoneyStatement&);
 };
 
 namespace Ui

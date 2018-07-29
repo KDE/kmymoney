@@ -29,10 +29,6 @@
 
 #include "kmymoneyplugin.h"
 
-class CSVImporterCore;
-class CSVWizard;
-class MyMoneyStatement;
-
 class CSVImporter : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::ImporterPlugin
 {
   Q_OBJECT
@@ -42,13 +38,9 @@ public:
   explicit CSVImporter(QObject *parent, const QVariantList &args);
   ~CSVImporter() override;
 
-  QAction*          m_action;
-  CSVWizard*        m_wizard;
-  CSVImporterCore*  m_importer;
-
   /**
     * This method returns the english-language name of the format
-    * this plugin imports, e.g. "OFX"
+    * this plugin imports, e.g. "CSV"
     *
     * @return QString Name of the format
     */
@@ -93,8 +85,6 @@ public:
 
 private:
   bool              m_silent;
-public Q_SLOTS:
-  bool slotGetStatement(MyMoneyStatement& s);
 
 protected Q_SLOTS:
   void startWizardRun();
