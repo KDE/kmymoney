@@ -77,7 +77,6 @@ public:
   KOnlineBankingStatus* m_statusDlg;
   Wallet *m_wallet;
   QDate m_updateStartDate;
-  QStringList m_importSummary;
   int m_timestampOffset;
 };
 
@@ -134,14 +133,7 @@ void OFXImporter::slotImportFile()
 
   if (url.isValid()) {
     if (isMyFormat(url.path())) {
-      d->m_importSummary.clear();
       slotImportFile(url.path());
-
-      if (!d->m_importSummary.isEmpty()) {
-        KMessageBox::informationList(nullptr,
-                                   i18n("The statement has been processed with the following results:"), d->m_importSummary, i18n("Statement stats"));
-        d->m_importSummary.clear();
-      }
 
     } else {
       KMessageBox::error(0, i18n("Unable to import %1 using the OFX importer plugin.  This file is not the correct format.", url.toDisplayString()), i18n("Incorrect format"));
@@ -652,7 +644,7 @@ int OFXImporter::ofxStatusCallback(struct OfxStatusData data, void * pv)
 QStringList OFXImporter::importStatement(const MyMoneyStatement &s)
 {
   qDebug("OfxImporterPlugin::importStatement start");
-  return statementInterface()->import(s, true);
+  return statementInterface()->import(s, false);
 }
 
 MyMoneyAccount OFXImporter::account(const QString& key, const QString& value) const
@@ -757,7 +749,6 @@ bool OFXImporter::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
       // Save the value of preferName to be used by ofxTransactionCallback
       d->m_preferName = static_cast<OFXImporter::Private::NamePreference>(acc.onlineBankingSettings().value(QStringLiteral("kmmofx-preferName")).toInt());
       QPointer<KOfxDirectConnectDlg> dlg = new KOfxDirectConnectDlg(acc);
-      d->m_importSummary.clear();
 
       connect(dlg.data(), &KOfxDirectConnectDlg::statementReady, this, static_cast<void (OFXImporter::*)(const QString &)>(&OFXImporter::slotImportFile));
 
@@ -786,12 +777,6 @@ bool OFXImporter::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
       if (dlg->init())
         dlg->exec();
       delete dlg;
-
-      if (!d->m_importSummary.isEmpty()) {
-        KMessageBox::informationList(nullptr,
-                                   i18n("The statement has been processed with the following results:"), d->m_importSummary, i18n("Statement stats"));
-        d->m_importSummary.clear();
-      }
 
       // reset the earliest-interesting-transaction date to the non-specific account setting
       d->m_updateStartDate = QDate(1900,1,1);
@@ -837,11 +822,8 @@ bool OFXImporter::storeStatements(const QList<MyMoneyStatement> &statements)
   for (const auto& statement : statements) {
     if (abort)
       break;
-    const auto importSummary = importStatement(statement);
-    if (importSummary.isEmpty())
+    if (importStatement(statement).isEmpty())
       ok = false;
-
-    d->m_importSummary.append(importSummary);
   }
 
   if (!ok)
