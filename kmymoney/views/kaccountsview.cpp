@@ -508,7 +508,14 @@ void KAccountsView::slotAccountUpdateOnlineAll()
 
   QList<MyMoneyAccount> accList;
   MyMoneyFile::instance()->accountList(accList);
-  d->accountsUpdateOnline(accList);
+
+  QList<MyMoneyAccount> mappedAccList;
+  Q_FOREACH(auto account, accList) {
+    if (account.hasOnlineMapping())
+      mappedAccList += account;
+  }
+
+  d->accountsUpdateOnline(mappedAccList);
 }
 
 void KAccountsView::slotAccountUpdateOnline()

@@ -332,23 +332,23 @@ public:
     // we need to make sure that only the very last entry that matches sets the
     // 'moreAccounts' parameter in the call to updateAccount() to false
     auto processedAccounts = 0;
-    auto nextAccount = accList.cend();
-    auto nextProvider = m_onlinePlugins->cend();
-    for (auto it_a = accList.cbegin(); it_a != accList.cend(); ++it_a) {
-      auto it_p = m_onlinePlugins->constFind((*it_a).onlineBankingSettings().value("provider").toLower());
-      if ((*it_a).hasOnlineMapping() && (it_p != m_onlinePlugins->cend())) {
-        if (nextAccount != accList.cend()) {
-          (*nextProvider)->updateAccount(*nextAccount, true);
-        }
-        nextAccount = it_a;
-        nextProvider = it_p;
-        ++processedAccounts;
-      }
-    }
 
-    // process a possible pending entry
-    if (nextAccount != accList.cend()) {
-      (*nextProvider)->updateAccount(*nextAccount, false);
+    for (auto it_provider = m_onlinePlugins->constBegin(); it_provider != m_onlinePlugins->constEnd(); ++it_provider) {
+      auto nextAccount = accList.cend();
+      for (auto it_a = accList.cbegin(); it_a != accList.cend(); ++it_a) {
+        if ((*it_a).hasOnlineMapping()
+        && (it_provider == m_onlinePlugins->constFind((*it_a).onlineBankingSettings().value("provider").toLower()))) {
+          if (nextAccount != accList.cend()) {
+            (*it_provider)->updateAccount(*nextAccount, true);
+          }
+          nextAccount = it_a;
+          ++processedAccounts;
+        }
+      }
+      // process a possible pending entry
+      if (nextAccount != accList.cend()) {
+        (*it_provider)->updateAccount(*nextAccount, false);
+      }
     }
 
     // re-enable the disabled actions
