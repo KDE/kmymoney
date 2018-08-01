@@ -56,7 +56,6 @@ public:
   void init()
   {
     Q_Q(KInstitutionsView);
-    ui->setupUi(q);
     m_accountTree = &ui->m_accountTree;
 
     // setup icons for collapse and expand button

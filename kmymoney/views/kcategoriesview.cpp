@@ -56,6 +56,9 @@ using namespace Icons;
 KCategoriesView::KCategoriesView(QWidget *parent) :
     KMyMoneyAccountsViewBase(*new KCategoriesViewPrivate(this), parent)
 {
+  Q_D(KCategoriesView);
+  d->ui->setupUi(this);
+
   connect(pActions[eMenu::Action::NewCategory],    &QAction::triggered, this, &KCategoriesView::slotNewCategory);
   connect(pActions[eMenu::Action::EditCategory],   &QAction::triggered, this, &KCategoriesView::slotEditCategory);
   connect(pActions[eMenu::Action::DeleteCategory], &QAction::triggered, this, &KCategoriesView::slotDeleteCategory);
@@ -199,10 +202,9 @@ void KCategoriesView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent
 
 void KCategoriesView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
 {
-  Q_D(KCategoriesView);
   switch (intent) {
     case eView::Intent::UpdateProfit:
-      if (variant.count() == 1 && d->m_proxyModel)
+      if (variant.count() == 1)
         slotProfitChanged(variant.first().value<MyMoneyMoney>());
       break;
     default:

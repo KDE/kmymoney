@@ -565,7 +565,7 @@ AccountsModel::~AccountsModel()
 void AccountsModel::load()
 {
   Q_D(AccountsModel);
-  this->blockSignals(true);
+  blockSignals(true);
   QStandardItem *rootItem = invisibleRootItem();
 
   QFont font;
@@ -672,9 +672,9 @@ void AccountsModel::load()
     d->setAccountData(rootItem, accountsItem->row(), account, d->m_columns);
   }
 
+  blockSignals(false);
   checkNetWorth();
   checkProfit();
-  this->blockSignals(false);
 }
 
 QModelIndex AccountsModel::accountById(const QString& id) const

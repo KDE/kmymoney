@@ -42,6 +42,9 @@ using namespace Icons;
 KInstitutionsView::KInstitutionsView(QWidget *parent) :
     KMyMoneyAccountsViewBase(*new KInstitutionsViewPrivate(this), parent)
 {
+  Q_D(KInstitutionsView);
+  d->ui->setupUi(this);
+
   connect(pActions[eMenu::Action::NewInstitution],    &QAction::triggered, this, &KInstitutionsView::slotNewInstitution);
   connect(pActions[eMenu::Action::EditInstitution],   &QAction::triggered, this, &KInstitutionsView::slotEditInstitution);
   connect(pActions[eMenu::Action::DeleteInstitution], &QAction::triggered, this, &KInstitutionsView::slotDeleteInstitution);
@@ -204,10 +207,9 @@ void KInstitutionsView::slotSelectByObject(const MyMoneyObject& obj, eView::Inte
 
 void KInstitutionsView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
 {
-  Q_D(KInstitutionsView);
   switch (intent) {
     case eView::Intent::UpdateNetWorth:
-      if (variant.count() == 1 && d->m_proxyModel)
+      if (variant.count() == 1)
         slotNetWorthChanged(variant.first().value<MyMoneyMoney>());
       break;
     default:

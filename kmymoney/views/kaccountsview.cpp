@@ -46,6 +46,9 @@ using namespace Icons;
 KAccountsView::KAccountsView(QWidget *parent) :
     KMyMoneyAccountsViewBase(*new KAccountsViewPrivate(this), parent)
 {
+  Q_D(KAccountsView);
+  d->ui->setupUi(this);
+
   connect(pActions[eMenu::Action::NewAccount],          &QAction::triggered, this, &KAccountsView::slotNewAccount);
   connect(pActions[eMenu::Action::EditAccount],         &QAction::triggered, this, &KAccountsView::slotEditAccount);
   connect(pActions[eMenu::Action::DeleteAccount],       &QAction::triggered, this, &KAccountsView::slotDeleteAccount);
@@ -263,7 +266,7 @@ void KAccountsView::slotSelectByVariant(const QVariantList& variant, eView::Inte
   Q_D(KAccountsView);
   switch (intent) {
     case eView::Intent::UpdateNetWorth:
-      if (variant.count() == 1 && d->m_proxyModel)
+      if (variant.count() == 1)
         slotNetWorthChanged(variant.first().value<MyMoneyMoney>());
       break;
 
