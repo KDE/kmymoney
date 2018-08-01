@@ -58,7 +58,6 @@
 #include "mymoneystoragemgr.h"
 #include "kmymoneystorageplugin.h"
 #include "onlinejobadministration.h"
-#include "payeeidentifier/payeeidentifierloader.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 #include "mymoneycostcenter.h"
 #include "mymoneyexception.h"

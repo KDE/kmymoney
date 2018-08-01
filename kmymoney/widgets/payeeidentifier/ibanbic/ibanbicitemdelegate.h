@@ -1,11 +1,10 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ * Copyright 2014-2016  Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -19,16 +18,16 @@
 #ifndef IBANBICITEMDELEGATE_H
 #define IBANBICITEMDELEGATE_H
 
-#include "payeeidentifier_iban_bic_widgets_export.h"
+#include "kmm_widgets_export.h"
 
 #include <QStyledItemDelegate>
+
 #include "payeeidentifier/payeeidentifiertyped.h"
 #include "payeeidentifier/ibanbic/ibanbic.h"
 
-class PAYEEIDENTIFIER_IBAN_BIC_WIDGETS_EXPORT ibanBicItemDelegate : public QStyledItemDelegate
+class KMM_WIDGETS_EXPORT ibanBicItemDelegate : public QStyledItemDelegate
 {
   Q_OBJECT
-  Q_PLUGIN_METADATA(IID "org.kmymoney.payeeIdentifier.ibanbic.delegate" FILE "kmymoney-ibanbic-delegate.json")
 
 public:
   explicit ibanBicItemDelegate(QObject* parent = nullptr, const QVariantList& args = QVariantList());

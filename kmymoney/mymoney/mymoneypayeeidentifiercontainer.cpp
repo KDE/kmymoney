@@ -19,7 +19,6 @@
 
 #include <QDebug>
 
-#include "payeeidentifier/payeeidentifierloader.h"
 #include "payeeidentifier/ibanbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
 #include "payeeidentifier/unavailableplugin/unavailableplugin.h"

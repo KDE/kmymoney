@@ -1,11 +1,10 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ * Copyright 2014-2015  Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -19,12 +18,14 @@
 #ifndef NATIONALACCOUNTDELEGATE_H
 #define NATIONALACCOUNTDELEGATE_H
 
+#include "kmm_widgets_export.h"
+
 #include <QStyledItemDelegate>
 
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
 #include "payeeidentifier/payeeidentifiertyped.h"
 
-class nationalAccountDelegate : public QStyledItemDelegate
+class KMM_WIDGETS_EXPORT nationalAccountDelegate : public QStyledItemDelegate
 {
   Q_OBJECT
 public:

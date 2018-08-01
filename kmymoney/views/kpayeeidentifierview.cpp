@@ -25,9 +25,10 @@
 #include <QAbstractItemDelegate>
 #include <QStyledItemDelegate>
 
-#include "payeeidentifier/payeeidentifierloader.h"
 #include "payeeidentifiercontainermodel.h"
 #include "payeeidentifierselectiondelegate.h"
+#include "widgets/payeeidentifier/ibanbic/ibanbicitemdelegate.h"
+#include "widgets/payeeidentifier/nationalaccount/nationalaccountdelegate.h"
 
 payeeIdentifierDelegate::payeeIdentifierDelegate(QObject* parent)
     : StyledItemDelegateForwarder(parent)
@@ -45,8 +46,13 @@ QAbstractItemDelegate* payeeIdentifierDelegate::getItemDelegate(const QModelInde
     return delegate;
   }
 
+  QAbstractItemDelegate* delegate = nullptr;
   // Use this->parent() as parent because "this" is const
-  QAbstractItemDelegate* delegate = payeeIdentifierLoader::instance()->createItemDelegate(type, this->parent());
+  if (type == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid()) {
+    delegate = new ibanBicItemDelegate(this->parent());
+  } else if (type == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid()) {
+    delegate = new nationalAccountDelegate(this->parent());
+  }
 
   if (delegate == 0) {
     if (defaultDelegate == 0)

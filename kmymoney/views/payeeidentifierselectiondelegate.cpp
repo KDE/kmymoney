@@ -20,7 +20,6 @@
 
 #include <KLocalizedString>
 
-#include "payeeidentifier/payeeidentifierloader.h"
 #include "models/payeeidentifiercontainermodel.h"
 #include "payeeidentifier/ibanbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
@@ -55,16 +54,14 @@ QWidget* payeeIdentifierSelectionDelegate::createEditor(QWidget* parent, const Q
   connect(comboBox, SIGNAL(commitData(QWidget*)), this, SIGNAL(commitData(QWidget*)));
 
   comboBox->addItem(i18n("Please select the account number type"));
-  payeeIdentifierLoader *const loader = payeeIdentifierLoader::instance();
 
-  for (const auto &pidid : loader->availableDelegates()) {
-    QString delegateName;
-    if (pidid == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid())
-      delegateName = i18n("IBAN and BIC");
-    else if (pidid == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid())
-      delegateName = i18n("National Account Number");
-    comboBox->addItem(delegateName, QVariant(pidid));
-  }
+  const QMap<QString, QString> availableDelegates {
+    {payeeIdentifiers::ibanBic::staticPayeeIdentifierIid(),         i18n("IBAN and BIC")},
+    {payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid(), i18n("National Account Number")}
+  };
+
+  for (auto delegate = availableDelegates.cbegin(); delegate != availableDelegates.cend(); ++delegate )
+    comboBox->addItem(delegate.value(), delegate.key());
 
   return comboBox;
 }

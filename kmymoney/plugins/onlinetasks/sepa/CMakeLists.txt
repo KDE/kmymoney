@@ -42,7 +42,6 @@ target_link_libraries(konlinetasks_sepa
     KF5::Service
     kmm_settings
     kmm_utils_validators
-    payeeidentifier_iban_bic_widgets
     KF5::ItemModels
 )
 

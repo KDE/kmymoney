@@ -40,7 +40,6 @@
 #include "onlinejob.h"
 
 #include "payeeidentifier/ibanbic/ibanbic.h"
-#include "payeeidentifier/payeeidentifierloader.h"
 #include "payeeidentifiertyped.h"
 
 QTEST_GUILESS_MAIN(MyMoneyFileTest)

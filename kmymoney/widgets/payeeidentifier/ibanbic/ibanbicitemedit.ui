@@ -37,12 +37,12 @@
   <customwidget>
    <class>KIbanLineEdit</class>
    <extends>QLineEdit</extends>
-   <header>kibanlineedit.h</header>
+   <header>widgets/payeeidentifier/ibanbic/kibanlineedit.h</header>
   </customwidget>
   <customwidget>
    <class>KBicEdit</class>
    <extends>QLineEdit</extends>
-   <header>kbicedit.h</header>
+   <header>widgets/payeeidentifier/ibanbic/kbicedit.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneyValidationFeedback</class>

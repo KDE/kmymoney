@@ -21,7 +21,6 @@
 
 #include "mymoney/payeeidentifier/payeeidentifier.h"
 #include "mymoney/payeeidentifier/payeeidentifiertyped.h"
-#include "mymoney/payeeidentifier/payeeidentifierloader.h"
 
 #include "payeeidentifier/ibanbic/ibanbic.h"
 

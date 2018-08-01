@@ -61,11 +61,46 @@ set(kmm_widgets_sources
   kmymoneyaccountsviewbase.cpp
   )
 
+set(nationalAccountWidget_SOURCES
+  ./payeeidentifier/nationalaccount/nationalaccountedit.cpp
+  ./payeeidentifier/nationalaccount/nationalaccountdelegate.cpp
+)
+
+set(nationalAccountWidget_HEADERS
+  ./payeeidentifier/nationalaccount/nationalaccountdelegate.h
+  ./payeeidentifier/nationalaccount/nationalaccountedit.h
+)
+
+set(IBANBICWidget_SOURCES
+  ./payeeidentifier/ibanbic/kibanlineedit.cpp
+  ./payeeidentifier/ibanbic/kbicedit.cpp
+  ./payeeidentifier/ibanbic/ibanvalidator.cpp
+  ./payeeidentifier/ibanbic/bicvalidator.cpp
+  ./payeeidentifier/ibanbic/ibanbicitemdelegate.cpp
+  ./payeeidentifier/ibanbic/ibanbicitemedit.cpp
+)
+
+set(IBANBICWidget_HEADERS
+  ./payeeidentifier/ibanbic/kibanlineedit.h
+  ./payeeidentifier/ibanbic/kbicedit.h
+  ./payeeidentifier/ibanbic/ibanvalidator.h
+  ./payeeidentifier/ibanbic/bicvalidator.h
+  ./payeeidentifier/ibanbic/ibanbicitemdelegate.h
+)
+
+list(APPEND kmm_widgets_sources ${nationalAccountWidget_SOURCES})
+list(APPEND kmymoney_STAT_HEADERS ${nationalAccountWidget_HEADERS})
+
+list(APPEND kmm_widgets_sources ${IBANBICWidget_SOURCES})
+list(APPEND kmymoney_STAT_HEADERS ${IBANBICWidget_HEADERS})
+
 ki18n_wrap_ui(kmm_widgets_sources
   kmymoneyvalidationfeedback.ui
   onlinejobmessagesview.ui
   daterangedlg.ui
   ktransactionfilter.ui
+  ./payeeidentifier/nationalaccount/nationalaccountedit.ui
+  ./payeeidentifier/ibanbic/ibanbicitemedit.ui
 )
 
 add_library(kmm_widgets SHARED ${kmm_widgets_sources})
@@ -82,6 +117,7 @@ target_link_libraries(kmm_widgets PUBLIC
   Alkimia::alkimia
   kmm_mymoney
   kmm_models
+  kmm_plugin
 )
 
 set_target_properties(kmm_widgets PROPERTIES

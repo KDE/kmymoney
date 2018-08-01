@@ -16,8 +16,9 @@
  */
 
 #include "payeeidentifiercontainermodel.h"
-#include "payeeidentifier/payeeidentifierloader.h"
 #include "payeeidentifier/payeeidentifier.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
+#include "payeeidentifier/nationalaccount/nationalaccount.h"
 
 #include <KLocalizedString>
 
@@ -68,10 +69,15 @@ bool payeeIdentifierContainerModel::setData(const QModelIndex& index, const QVar
 
 Qt::ItemFlags payeeIdentifierContainerModel::flags(const QModelIndex& index) const
 {
-  Qt::ItemFlags flags = QAbstractItemModel::flags(index) | Qt::ItemIsDragEnabled;
-  const QString type = data(index, payeeIdentifierType).toString();
+  static const QVector<QString> editableDelegates {
+    payeeIdentifiers::ibanBic::staticPayeeIdentifierIid(),
+    payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid()
+  };
+  auto flags = QAbstractItemModel::flags(index) | Qt::ItemIsDragEnabled;
+  const auto type = data(index, payeeIdentifierType).toString();
+
   // type.isEmpty() means the type selection can be shown
-  if (!type.isEmpty() && payeeIdentifierLoader::instance()->hasItemEditDelegate(type))
+  if (!type.isEmpty() && editableDelegates.contains(type))
     flags |= Qt::ItemIsEditable;
   return flags;
 }
