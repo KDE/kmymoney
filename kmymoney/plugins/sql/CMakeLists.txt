@@ -1,6 +1,3 @@
-add_subdirectory(payeeidentifier)
-add_subdirectory(onlinetasks)
-
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/sqlstorage.json.in ${CMAKE_CURRENT_BINARY_DIR}/sqlstorage.json @ONLY)
 
 set(sqlstorage_SOURCES
@@ -10,7 +7,6 @@ set(sqlstorage_SOURCES
   mymoneydbdriver.cpp
   kselectdatabasedlg.cpp
   kgeneratesqldlg.cpp
-  kmymoneystorageplugin.cpp
   )
 
 ki18n_wrap_ui(sqlstorage_SOURCES kselectdatabasedlg.ui kgeneratesqldlg.ui)
@@ -37,10 +33,6 @@ target_link_libraries(sqlstorage
 
 install(FILES sqlstorage.rc
         DESTINATION "${KXMLGUI_INSTALL_DIR}/sqlstorage")
-
-install(FILES kmymoney-sqlstorageplugin.desktop
-  DESTINATION ${SERVICETYPES_INSTALL_DIR}
-)
 
 if(BUILD_TESTING)
   add_subdirectory(tests)

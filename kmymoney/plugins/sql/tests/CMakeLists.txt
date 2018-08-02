@@ -4,7 +4,6 @@ set(sqlstoragestatic_SOURCES
   ../mymoneystoragesql.cpp
   ../mymoneydbdef.cpp
   ../mymoneydbdriver.cpp
-  ../kmymoneystorageplugin.cpp
   )
 
 add_library(sqlstoragestatic STATIC ${sqlstoragestatic_SOURCES} )

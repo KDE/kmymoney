@@ -50,13 +50,11 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <KServiceTypeTrader>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoneystoragemgr.h"
-#include "kmymoneystorageplugin.h"
 #include "onlinejobadministration.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 #include "mymoneycostcenter.h"
@@ -2668,34 +2666,193 @@ public:
       return false;
     QString sqlIID;
 
-    if (iid == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid())
-      sqlIID = QString::fromLatin1("org.kmymoney.payeeIdentifier.ibanbic.sqlStoragePlugin");
-    else if (iid == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid())
-      sqlIID = QLatin1String("org.kmymoney.payeeIdentifier.nationalAccount.sqlStoragePlugin");
-    else if (iid == sepaOnlineTransferImpl::name())
-      sqlIID = QLatin1String("org.kmymoney.creditTransfer.sepa.sqlStoragePlugin");
-    else
-      return false;
-
-    QString errorMsg;
-    KMyMoneyPlugin::storagePlugin* plugin = KServiceTypeTrader::createInstanceFromQuery<KMyMoneyPlugin::storagePlugin>(
-      QLatin1String("KMyMoney/sqlStoragePlugin"),
-      QString("'%1' ~in [X-KMyMoney-PluginIid]").arg(sqlIID.replace(QLatin1Char('\''), QLatin1String("\\'"))),
-      0,
-      QVariantList(),
-      &errorMsg
-    );
-
-    if (plugin == 0)
-      throw MYMONEYEXCEPTION(QString::fromLatin1("Could not load sqlStoragePlugin '%1', (error: %2)").arg(sqlIID, errorMsg));
-
     MyMoneyDbTransaction t(*q, Q_FUNC_INFO);
-    if (plugin->setupDatabase(*q)) {
-      m_loadedStoragePlugins.insert(sqlIID);
-      return true;
+    auto rc = false;
+    if (iid == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid())
+      rc = setupIBANBIC(*q);
+    else if (iid == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid())
+      rc = setupNationalAccount(*q);
+    else if (iid == sepaOnlineTransferImpl::name())
+      rc = setupSepaOnlineTransfer(*q);
+    else
+      rc = false;
+    return rc;
+  }
+
+  bool setupIBANBIC(QSqlDatabase connection)
+  {
+    auto iid = QLatin1String("org.kmymoney.payeeIdentifier.ibanbic.sqlStoragePlugin");
+    // Get current version
+    QSqlQuery query = QSqlQuery(connection);
+    query.prepare("SELECT versionMajor FROM kmmPluginInfo WHERE iid = ?");
+    query.bindValue(0, iid);
+    if (!query.exec()) {
+      qWarning("Could not execute query for ibanBicStoragePlugin: %s", qPrintable(query.lastError().text()));
+      return false;
     }
 
-    throw MYMONEYEXCEPTION(QString::fromLatin1("Could not install sqlStoragePlugin '%1' in database.").arg(sqlIID));
+    int currentVersion = 0;
+    if (query.next())
+      currentVersion = query.value(0).toInt();
+
+    // Create database in it's most recent version if version is 0
+    // (version 0 means the database was not installed)
+    if (currentVersion == 0) {
+      // If the database is recreated the table may be still there. So drop it if needed. No error handling needed
+      // as this step is not necessary - only the creation is important.
+      if (!query.exec("DROP TABLE IF EXISTS kmmIbanBic;"))
+        return false;
+
+      if (!query.exec(
+            "CREATE TABLE kmmIbanBic ("
+            "  id varchar(32) NOT NULL PRIMARY KEY REFERENCES kmmPayeeIdentifier( id ) ON DELETE CASCADE ON UPDATE CASCADE,"
+            "  iban varchar(32),"
+            "  bic char(11) CHECK(length(bic) = 11 OR bic IS NULL),"
+            "  name text"
+            " );"
+          )) {
+        qWarning("Could not create table for ibanBicStoragePlugin: %s", qPrintable(query.lastError().text()));
+        return false;
+      }
+
+      query.prepare("INSERT INTO kmmPluginInfo (iid, versionMajor, versionMinor, uninstallQuery) VALUES(?, ?, ?, ?)");
+      query.bindValue(0, iid);
+      query.bindValue(1, 1);
+      query.bindValue(2, 0);
+      query.bindValue(3, "DROP TABLE kmmIbanBic;");
+      if (query.exec())
+        return true;
+      qWarning("Could not save plugin info for ibanBicStoragePlugin (%s): %s", qPrintable(iid), qPrintable(query.lastError().text()));
+      return false;
+    }
+
+    // Check if version is valid with this plugin
+    switch (currentVersion) {
+      case 1: return true;
+    }
+
+    return false;
+  }
+
+  bool setupNationalAccount(QSqlDatabase connection)
+  {
+    auto iid = QLatin1String("org.kmymoney.payeeIdentifier.nationalAccount.sqlStoragePlugin");
+    // Get current version
+    QSqlQuery query = QSqlQuery(connection);
+    query.prepare("SELECT versionMajor FROM kmmPluginInfo WHERE iid = ?");
+    query.bindValue(0, iid);
+    if (!query.exec()) {
+      qWarning("Could not execute query for nationalAccountStoragePlugin: %s", qPrintable(query.lastError().text()));
+      return false;
+    }
+
+    int currentVersion = 0;
+    if (query.next())
+      currentVersion = query.value(0).toInt();
+
+    // Create database in it's most recent version if version is 0
+    // (version 0 means the database was not installed)
+    if (currentVersion == 0) {
+      // If the database is recreated the table may be still there. So drop it if needed. No error handling needed
+      // as this step is not necessary - only the creation is important.
+      if (!query.exec("DROP TABLE IF EXISTS kmmNationalAccountNumber;"))
+        return false;
+
+      if (!query.exec(
+            "CREATE TABLE kmmNationalAccountNumber ("
+            "  id varchar(32) NOT NULL PRIMARY KEY REFERENCES kmmPayeeIdentifier( id ) ON DELETE CASCADE ON UPDATE CASCADE,"
+            "  countryCode varchar(3),"
+            "  accountNumber TEXT,"
+            "  bankCode TEXT,"
+            "  name TEXT"
+            " );"
+          )) {
+        qWarning("Could not create table for nationalAccountStoragePlugin: %s", qPrintable(query.lastError().text()));
+        return false;
+      }
+
+      query.prepare("INSERT INTO kmmPluginInfo (iid, versionMajor, versionMinor, uninstallQuery) VALUES(?, ?, ?, ?)");
+      query.bindValue(0, iid);
+      query.bindValue(1, 1);
+      query.bindValue(2, 0);
+      query.bindValue(3, "DROP TABLE kmmNationalAccountNumber;");
+      if (query.exec())
+        return true;
+      qWarning("Could not save plugin info for nationalAccountStoragePlugin (%s): %s", qPrintable(iid), qPrintable(query.lastError().text()));
+      return false;
+    }
+
+    // Check if version is valid with this plugin
+    switch (currentVersion) {
+      case 1: return true;
+    }
+
+    return false;
+  }
+
+  bool setupSepaOnlineTransfer(QSqlDatabase connection)
+  {
+    auto iid = QLatin1String("org.kmymoney.creditTransfer.sepa.sqlStoragePlugin");
+    // Get current version
+    QSqlQuery query = QSqlQuery(connection);
+    query.prepare("SELECT versionMajor FROM kmmPluginInfo WHERE iid = ?");
+    query.bindValue(0, iid);
+    if (!query.exec()) {
+      qWarning("Could not execute query for sepaStoragePlugin: %s", qPrintable(query.lastError().text()));
+      return false;
+    }
+
+    int currentVersion = 0;
+    if (query.next())
+      currentVersion = query.value(0).toInt();
+
+    // Create database in it's most recent version if version is 0
+    // (version 0 means the database was not installed)
+    if (currentVersion <= 1) {
+      // If the database is recreated the table may be still there. So drop it if needed. No error handling needed
+      // as this step is not necessary - only the creation is important.
+      if (!query.exec("DROP TABLE IF EXISTS kmmSepaOrders;"))
+        return false;
+
+      if (!query.exec(
+            "CREATE TABLE kmmSepaOrders ("
+            "  id varchar(32) NOT NULL PRIMARY KEY REFERENCES kmmOnlineJobs( id ) ON UPDATE CASCADE ON DELETE CASCADE,"
+            "  originAccount varchar(32) REFERENCES kmmAccounts( id ) ON UPDATE CASCADE ON DELETE SET NULL,"
+            "  value text DEFAULT '0',"
+            "  purpose text,"
+            "  endToEndReference varchar(35),"
+            "  beneficiaryName varchar(27),"
+            "  beneficiaryIban varchar(32),"
+            "  beneficiaryBic char(11),"
+            "  textKey int,"
+            "  subTextKey int"
+            " );"
+          )) {
+        qWarning("Error while creating table kmmSepaOrders: %s", qPrintable(query.lastError().text()));
+        return false;
+      }
+
+      query.prepare("DELETE FROM kmmPluginInfo WHERE iid = ?;");
+      query.bindValue(0, iid);
+      query.exec();
+
+      query.prepare("INSERT INTO kmmPluginInfo (iid, versionMajor, versionMinor, uninstallQuery) VALUES(?, ?, ?, ?)");
+      query.bindValue(0, iid);
+      query.bindValue(1, 2);
+      query.bindValue(2, 0);
+      query.bindValue(3, "DROP TABLE kmmSepaOrders;");
+      if (query.exec())
+        return true;
+      qWarning("Error while inserting kmmPluginInfo for '%s': %s", qPrintable(iid), qPrintable(query.lastError().text()));
+      return false;
+    }
+
+    // Check if version is valid with this plugin
+    switch (currentVersion) {
+      case 2: return true;
+    }
+
+    return false;
   }
 
   bool actOnIBANBICObjectInSQL(SQLAction action, const payeeIdentifier &obj)
