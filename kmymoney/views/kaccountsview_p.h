@@ -247,10 +247,11 @@ public:
   }
 
   enum CanCloseAccountCodeE {
-    AccountCanClose = 0,    // can close the account
-    AccountBalanceNonZero,         // balance is non zero
-    AccountChildrenOpen,          // account has open children account
-    AccountScheduleReference         // account is referenced in a schedule
+    AccountCanClose = 0,        // can close the account
+    AccountBalanceNonZero,      // balance is non zero
+    AccountChildrenOpen,        // account has open children account
+    AccountScheduleReference,   // account is referenced in a schedule
+    AccountHasOnlineMapping,    // account has an online mapping
   };
 
   /**
@@ -260,6 +261,7 @@ public:
     * - the balance is zero and
     * - all children are already closed and
     * - there is no unfinished schedule referencing the account
+    * - and no online mapping is setup
     *
     * @param acc reference to MyMoneyAccount object in question
     * @retval true account can be closed
@@ -270,6 +272,8 @@ public:
     // balance must be zero
     if (!acc.balance().isZero())
       return AccountBalanceNonZero;
+    if (acc.hasOnlineMapping())
+      return AccountHasOnlineMapping;
 
     // all children must be already closed
     foreach (const auto sAccount, acc.accountList()) {
@@ -302,16 +306,19 @@ public:
     switch (canCloseAccount(acc)) {
       case AccountCanClose:
         a->setToolTip(QString());
-        return;
+        break;
       case AccountBalanceNonZero:
         a->setToolTip(i18n("The balance of the account must be zero before the account can be closed"));
-        return;
+        break;
       case AccountChildrenOpen:
         a->setToolTip(i18n("All subaccounts must be closed before the account can be closed"));
-        return;
+        break;
       case AccountScheduleReference:
         a->setToolTip(i18n("This account is still included in an active schedule"));
-        return;
+        break;
+      case AccountHasOnlineMapping:
+        a->setToolTip(i18n("This account is still mapped to an online account"));
+        break;
     }
   }
 

@@ -196,7 +196,7 @@ void KAccountsView::updateActions(const MyMoneyObject& obj)
         }
 
       } else {
-        pActions[eMenu::Action::MapOnlineAccount]->setEnabled(d->m_onlinePlugins && !d->m_onlinePlugins->isEmpty());
+        pActions[eMenu::Action::MapOnlineAccount]->setEnabled(!acc.isClosed() && d->m_onlinePlugins && !d->m_onlinePlugins->isEmpty());
       }
 
       break;
