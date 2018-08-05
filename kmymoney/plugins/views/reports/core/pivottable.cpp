@@ -261,6 +261,10 @@ void PivotTable::init()
     int colofs = columnValue(m_beginDate) - m_startColumn;
     while (it_transaction != transactions.constEnd()) {
       MyMoneyTransaction tx = (*it_transaction);
+      if (m_openingBalanceTransactions.contains(tx.id())) {
+        ++it_transaction;
+        continue;
+      }
       QDate postdate = tx.postDate();
       if (postdate < m_beginDate) {
         qDebug("MyMoneyFile::transactionList returned a transaction that is outside the date filter, skipping it");
@@ -350,6 +354,7 @@ void PivotTable::init()
       ++it_transaction;
     }
   }
+
   //
   // Get forecast data
   //
@@ -685,6 +690,7 @@ void PivotTable::calculateOpeningBalances()
             const auto t = file->transaction(tid);
             const auto s0 = t.splitByAccount(account.id());
             value = s0.shares();
+            m_openingBalanceTransactions << tid;
           } catch (const MyMoneyException &e) {
             qDebug() << "Error retrieving opening balance transaction " << tid << ": " << e.what();
           }

@@ -24,6 +24,7 @@
 // QT Includes
 
 #include <QMap>
+#include <QSet>
 #include <QList>
 #include <QDate>
 
@@ -161,6 +162,8 @@ private:
     *          chosen color.
     */
   QString coloredAmount(const MyMoneyMoney& amount, const QString& currencySymbol, int prec) const;
+
+  QSet<QString> m_openingBalanceTransactions;
 
 protected:
   /**
