@@ -246,7 +246,7 @@ void PivotTableTest::testNetWorthOpening()
   PivotTable nt_opening1(filter);
   writeTabletoCSV(nt_opening1, "networth-opening-1.csv");
 
-  QVERIFY(nt_opening1.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][0] == MyMoneyMoney()); // opening value on 1st Jan 2016 is 12000000, but before that i.e. 31st Dec 2015 opening value is 0
+  QVERIFY(nt_opening1.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][0] == openingBalance); // opening value on 1st Jan 2016 is 12000000, but before that i.e. 31st Dec 2015 opening value is 0
   for (auto i = 1; i <= 6; ++i)
     QVERIFY(nt_opening1.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][i] == openingBalance);
   QVERIFY(nt_opening1.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][7] == openingBalance + MyMoneyMoney(6200000));
