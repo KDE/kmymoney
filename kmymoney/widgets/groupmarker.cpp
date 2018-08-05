@@ -130,7 +130,7 @@ void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItem &opt
   painter->drawLine(cellRect.x(), cellRect.height() - 1, cellRect.width(), cellRect.height() - 1);
 
   // now write the text
-  painter->setPen(option.palette.color(isErroneous() ? QPalette::HighlightedText : QPalette::Text));
+  painter->setPen(option.palette.color(QPalette::HighlightedText));
   QFont font = painter->font();
   font.setBold(true);
   painter->setFont(font);

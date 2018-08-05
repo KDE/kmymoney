@@ -73,12 +73,12 @@ QColor KMyMoneySettings::schemeColor(const SchemeColor color)
       if (useCustomColors())
         return transactionImportedColor();
       else
-        return KColorScheme (QPalette::Active, KColorScheme::Complementary).background(KColorScheme::NeutralBackground).color();
+        return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::LinkBackground).color();
     case SchemeColor::TransactionMatched:
       if (useCustomColors())
         return transactionMatchedColor();
       else
-      return KColorScheme (QPalette::Active, KColorScheme::Complementary).background(KColorScheme::PositiveBackground).color();
+        return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::LinkBackground).color();
     case SchemeColor::TransactionErroneous:
       if (useCustomColors())
         return transactionErroneousColor();

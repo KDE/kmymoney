@@ -24,6 +24,7 @@
 
 #include <QList>
 #include <QPainter>
+#include <QFont>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -69,6 +70,10 @@ bool StdTransactionMatched::paintRegisterCellSetup(QPainter *painter, QStyleOpti
     option.palette.setColor(QPalette::Base, KMyMoneySettings::schemeColor(SchemeColor::TransactionMatched));
     option.palette.setColor(QPalette::AlternateBase, KMyMoneySettings::schemeColor(SchemeColor::TransactionMatched));
   }
+  QFont font = painter->font();
+  font.setBold(true);
+  painter->setFont(font);
+
   //TODO: the first line needs to be painted across all columns
   return rc;
 }
