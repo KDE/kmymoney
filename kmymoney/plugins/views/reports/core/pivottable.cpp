@@ -678,6 +678,19 @@ void PivotTable::calculateOpeningBalances()
       // this is in the underlying currency
       MyMoneyMoney value = file->balance(account.id(), from.addDays(-1));
 
+      if ((columnValue(from) == columnValue(account.openingDate())) && value.isZero()) {
+        auto tid = file->openingBalanceTransaction(account);
+        if (!tid.isEmpty()) {
+          try {
+            const auto t = file->transaction(tid);
+            const auto s0 = t.splitByAccount(account.id());
+            value = s0.shares();
+          } catch (const MyMoneyException &e) {
+            qDebug() << "Error retrieving opening balance transaction " << tid << ": " << e.what();
+          }
+        }
+      }
+
       // place into the 'opening' column...
       assignCell(outergroup, account, 0, value);
     } else {
