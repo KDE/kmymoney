@@ -48,6 +48,8 @@
 
 #define MYMONEYEXCEPTION_CSTRING(exceptionMessage) MyMoneyException(exceptionMessage " " __FILE__ ":" KMM_TOSTRING(__LINE__))
 
+// krazy:exclude=dpointer
+
 #if defined(Q_OS_WIN)
 // Otherwise
 // non dll-interface class 'std::runtime_error' used as base for dll-interface class 'MyMoneyException'
@@ -72,7 +74,7 @@ public:
   * MYMONEYEXCEPTION(text) instead. It automatically assigns the file
   * and line parameter to the correct values.
   */
-  explicit MyMoneyException(const char *exceptionMessage) : std::runtime_error(exceptionMessage) {}
+  explicit MyMoneyException(const char *exceptionMessage) : std::runtime_error(exceptionMessage) {}  // krazy:exclude=inline
 };
 
 #endif

@@ -286,7 +286,7 @@ public:
   class badTaskCast : public std::runtime_error
   {
   public:
-    explicit badTaskCast(const char *msg) : std::runtime_error(msg) {}
+    explicit badTaskCast(const char *msg) : std::runtime_error(msg) {}  // krazy:exclude=inline
   };
 
   /**
@@ -295,7 +295,7 @@ public:
   class emptyTask : public std::runtime_error
   {
   public:
-    explicit emptyTask(const char *msg) : std::runtime_error(msg) {}
+    explicit emptyTask(const char *msg) : std::runtime_error(msg) {}  // krazy:exclude=inline
   };
 
   /** @brief onlineTask attatched to this job */
