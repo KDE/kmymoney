@@ -1346,8 +1346,10 @@ namespace KMyMoneyRegister
   {
   }
 
-  void Register::endEdit(int /*row*/, int /*col*/, bool /*accept*/, bool /*replace*/)
+  void Register::endEdit()
   {
+    Q_D(Register);
+    d->m_ignoreNextButtonRelease = false;
   }
 
   RegisterItem* Register::focusItem() const

@@ -96,7 +96,7 @@ namespace KMyMoneyRegister
     QString text(int row, int col) const;
     QWidget* createEditor(int row, int col, bool initFromCell) const;
     void setCellContentFromEditor(int row, int col);
-    void endEdit(int row, int col, bool accept, bool replace);
+    void endEdit();
 
     RegisterItem* focusItem() const;
     RegisterItem* anchorItem() const;

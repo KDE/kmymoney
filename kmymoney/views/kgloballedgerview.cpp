@@ -953,6 +953,7 @@ void KGlobalLedgerView::slotLeaveEditMode(const KMyMoneyRegister::SelectedTransa
   if (d->m_needsRefresh)
     refresh();
 
+  d->m_register->endEdit();
   d->m_register->setFocus();
 }
 
