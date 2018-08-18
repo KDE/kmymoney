@@ -809,8 +809,10 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
       break;
   }
 
-  if (warnLevel > 1)
+  if (warnLevel > 1) {
+    d->m_register->endEdit();
     return 0;
+  }
 
 
   TransactionEditor* editor = 0;
