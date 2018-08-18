@@ -1274,7 +1274,14 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
       memo.append(QString("DEBT: %1").arg(p));
     }
   }
-  kt.m_strMemo = memo;
+
+  const MyMoneyKeyValueContainer& kvp = acc.onlineBankingSettings();
+  // check if we need the version with or without linebreaks
+  if (kvp.value("kbanking-memo-removelinebreaks").compare(QLatin1String("no"))) {
+    kt.m_strMemo = memo;
+  } else {
+    kt.m_strMemo = s;
+  }
 
   // calculate the hash code and start with the payee info
   // and append the memo field
@@ -1282,7 +1289,6 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
   h = MyMoneyTransaction::hash(s, h);
 
   // see, if we need to extract the payee from the memo field
-  const MyMoneyKeyValueContainer& kvp = acc.onlineBankingSettings();
   QString rePayee = kvp.value("kbanking-payee-regexp");
   if (!rePayee.isEmpty() && kt.m_strPayee.isEmpty()) {
     QString reMemo = kvp.value("kbanking-memo-regexp");
