@@ -198,7 +198,7 @@
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove the line breaks in the memo field that have been inserted between multiple purpose fields of the transaction.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="whatsThis">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Some institutions take multiple purpose fields of a transaction and treat it as a single one. In this case the line break characters inserted after each purpose field are destracting and are removed when this option is enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Some institutions take multiple purpose fields of a transaction and treat it as a single one. In this case the line break characters inserted after each purpose field are distracting and are removed when this option is enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string>Remove line breaks from memo field</string>
