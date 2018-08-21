@@ -606,6 +606,8 @@ void KReportChartView::slotNeedUpdate()
   if (cartesianplane) {
     if (cartesianplane->axesCalcModeY() == KChart::AbstractCoordinatePlane::Logarithmic) {
       qreal labelValue = qFloor(log10(grids.at(1).start)); // first label is 10 to power of labelValue
+      /// @todo this might also need some vertical adjustment in case of a horizontal line
+      ///       see below how this has been solved for linear graphs
       int labelCount = qFloor(log10(grids.at(1).end)) - qFloor(log10(grids.at(1).start)) + 1;
       for (auto i = 0; i < labelCount; ++i) {
         labels.append(loc.toString(qPow(10.0, labelValue), 'f', m_precision).remove(separator).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + decimalPoint + "$")));
@@ -614,6 +616,14 @@ void KReportChartView::slotNeedUpdate()
     } else {
       qreal labelValue = grids.at(1).start; // first label is start value
       qreal step = grids.at(1).stepWidth;
+      // in case we have a horizontal line, we extend the vertical range around it
+      if (cartesianplane->verticalRange().first == cartesianplane->verticalRange().second) {
+        cartesianplane->setVerticalRange(qMakePair(cartesianplane->verticalRange().first - 2,
+                                                   cartesianplane->verticalRange().first + 2));
+        grids[1].start -= 2*step;
+        grids[1].end += 2*step;
+        labelValue -= 2*step;
+      }
       int labelCount = qFloor((grids.at(1).end - grids.at(1).start) / grids.at(1).stepWidth) + 1;
       for (auto i = 0; i < labelCount; ++i) {
         labels.append(loc.toString(labelValue, 'f', m_precision).remove(separator).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + decimalPoint + "$")));
