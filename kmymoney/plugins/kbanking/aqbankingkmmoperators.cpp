@@ -28,6 +28,7 @@
 #include "tasksettings/credittransfersettingsbase.h"
 #include "onlinetasks/sepa/sepaonlinetransfer.h"
 #include "gwenhywfarqtoperators.h"
+#include "mymoneymoney.h"
 
 /**
  * @brief DTAUS Chars

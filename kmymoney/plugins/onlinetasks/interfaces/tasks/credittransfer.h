@@ -20,12 +20,12 @@
 #ifndef CREDITTRANSFER_H
 #define CREDITTRANSFER_H
 
-#include "QtPlugin"
-#include "mymoneymoney.h"
-#include "mymoneysecurity.h"
+#include <QtPlugin>
 #include "payeeidentifier/payeeidentifier.h"
 
 class QValidator;
+class MyMoneyMoney;
+class MyMoneySecurity;
 
 /**
  * @brief Describes an online credit-transfer (or similar)

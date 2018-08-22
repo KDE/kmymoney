@@ -36,6 +36,8 @@
 #include "icons/icons.h"
 #include "mymoneyexception.h"
 #include "mymoneyenums.h"
+#include "mymoneymoney.h"
+#include "mymoneysecurity.h"
 
 using namespace Icons;
 

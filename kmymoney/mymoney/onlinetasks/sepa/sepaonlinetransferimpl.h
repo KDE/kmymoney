@@ -21,6 +21,7 @@
 #include "kmm_mymoney_export.h"
 
 #include "sepaonlinetransfer.h"
+#include "mymoneymoney.h"
 
 /**
  * @brief SEPA Credit Transfer

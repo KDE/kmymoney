@@ -22,6 +22,7 @@
 #include "mymoneyutils.h"
 #include "mymoneyaccount.h"
 #include "mymoneyinstitution.h"
+#include "mymoneysecurity.h"
 #include "mymoney/mymoneyfile.h"
 #include "mymoneypayee.h"
 #include "mymoney/onlinejobadministration.h"

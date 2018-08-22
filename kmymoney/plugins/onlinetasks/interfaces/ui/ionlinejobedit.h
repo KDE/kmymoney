@@ -22,11 +22,8 @@
 #include <QWidget>
 #include <QVariant>
 
-#include "mymoney/onlinejob.h"
-
-#include "mymoneymoney.h"
-
 class MyMoneyMoney;
+class onlineJob;
 
 /**
  * @brief Interface for widgets editing onlineTasks
@@ -82,7 +79,7 @@ Q_SIGNALS:
   /**
    * @brief Emitted if a job which transfers money changed it's value
    */
-  void transferValueChanged(MyMoneyMoney);
+  void transferValueChanged(const MyMoneyMoney &);
 
   /**
    * @brief Emitted if a job got valid or invalid

@@ -21,7 +21,6 @@ add_library(onlinetask_interfaces STATIC ${onlinetask_interfaces_SRCS})
 target_link_libraries( onlinetask_interfaces
   PUBLIC
     kmm_payeeidentifier
-    kmm_mymoney
     Qt5::Widgets
     Alkimia::alkimia
 )
