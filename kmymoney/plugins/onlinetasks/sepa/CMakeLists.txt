@@ -37,7 +37,6 @@ target_link_libraries( konlinetasks_sepa_interface
 target_link_libraries(konlinetasks_sepa
   PUBLIC
     konlinetasks_sepa_interface
-    Alkimia::alkimia
   PRIVATE
     KF5::I18n
     KF5::Service
