@@ -7,7 +7,7 @@ ExternalProject_Add(
   URL_MD5 896608641a08b465098a40ddf51cefba
 
   INSTALL_DIR ${PREFIX_ext_xml}
-  CONFIGURE_COMMAND ./configure LIBS="-liconv" --prefix=${PREFIX_ext_xml} --without-python
+  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_xml} --without-python
   BUILD_COMMAND make
   INSTALL_COMMAND make install
 
