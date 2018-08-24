@@ -467,9 +467,9 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
       || d->m_account.value("lastImportedTransactionDate") != s.m_dateEnd.toString(Qt::ISODate)) {
     if (s.m_closingBalance != MyMoneyMoney::autoCalc) {
       d->m_account.setValue("lastStatementBalance", s.m_closingBalance.toString());
-      if (s.m_dateEnd.isValid()) {
-        d->m_account.setValue("lastImportedTransactionDate", s.m_dateEnd.toString(Qt::ISODate));
-      }
+    }
+    if (s.m_dateEnd.isValid()) {
+      d->m_account.setValue("lastImportedTransactionDate", s.m_dateEnd.toString(Qt::ISODate));
     }
 
     try {
