@@ -35,7 +35,6 @@
 #include "mymoneyreport.h"
 #include "mymoneypayee.h"
 #include "mymoneystatement.h"
-#include "../mymoneystoragexml.cpp"
 #include "plugins/xmlhelper/xmlstoragehelper.h"
 
 namespace test
