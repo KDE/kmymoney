@@ -26,6 +26,7 @@
 // QT Includes
 
 #include <QHash>
+#include <QRegularExpression>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -995,16 +996,16 @@ void MyMoneyStorageMgr::loadAccounts(const QMap<QString, MyMoneyAccount>& map)
   d->m_accountList = map;
 
   // scan the map to identify the last used id
-  QMap<QString, MyMoneyAccount>::const_iterator it_a;
-  QString lastId("");
-  for (it_a = map.begin(); it_a != map.end(); ++it_a) {
-    if (!isStandardAccount((*it_a).id()) && ((*it_a).id() > lastId))
-      lastId = (*it_a).id();
-  }
-
-  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
-  if (pos != -1) {
-    d->m_nextAccountID = lastId.mid(pos).toInt();
+  d->m_nextAccountID = 0;
+  const QRegularExpression idExp("A(\\d+)$");
+  auto end = map.constEnd();
+  for (auto iter = map.constBegin(); iter != end; ++iter) {
+    if (!isStandardAccount((*iter).id())) {
+    const auto id = d->extractId(idExp, (*iter).id());
+      if (id > d->m_nextAccountID) {
+        d->m_nextAccountID = id;
+      }
+    }
   }
 }
 
@@ -1015,22 +1016,19 @@ void MyMoneyStorageMgr::loadTransactions(const QMap<QString, MyMoneyTransaction>
 
   // now fill the key map and
   // identify the last used id
-  QString lastId("");
   QMap<QString, QString> keys;
-  QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
 
-  for (it_t = map.constBegin(); it_t != map.constEnd(); ++it_t) {
-    keys[(*it_t).id()] = it_t.key();
-    if ((*it_t).id() > lastId)
-      lastId = (*it_t).id();
+  d->m_nextTransactionID = 0;
+  const QRegularExpression idExp("T(\\d+)$");
+  auto end = map.constEnd();
+  for (auto iter = map.constBegin(); iter != end; ++iter) {
+    keys[(*iter).id()] = iter.key();
+    const auto id = d->extractId(idExp, (*iter).id());
+    if (id > d->m_nextTransactionID) {
+      d->m_nextTransactionID = id;
+    }
   }
   d->m_transactionKeys = keys;
-
-  // determine highest used ID so far
-  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
-  if (pos != -1) {
-    d->m_nextTransactionID = lastId.mid(pos).toInt();
-  }
 }
 
 void MyMoneyStorageMgr::loadInstitutions(const QMap<QString, MyMoneyInstitution>& map)
@@ -1039,16 +1037,14 @@ void MyMoneyStorageMgr::loadInstitutions(const QMap<QString, MyMoneyInstitution>
   d->m_institutionList = map;
 
   // scan the map to identify the last used id
-  QMap<QString, MyMoneyInstitution>::const_iterator it_i;
-  QString lastId("");
-  for (it_i = map.begin(); it_i != map.end(); ++it_i) {
-    if ((*it_i).id() > lastId)
-      lastId = (*it_i).id();
-  }
-
-  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
-  if (pos != -1) {
-    d->m_nextInstitutionID = lastId.mid(pos).toInt();
+  d->m_nextInstitutionID = 0;
+  const QRegularExpression idExp("I(\\d+)$");
+  auto end = map.constEnd();
+  for (auto iter = map.constBegin(); iter != end; ++iter) {
+    const auto id = d->extractId(idExp, (*iter).id());
+    if (id > d->m_nextInstitutionID) {
+      d->m_nextInstitutionID = id;
+    }
   }
 }
 
@@ -1058,19 +1054,14 @@ void MyMoneyStorageMgr::loadPayees(const QMap<QString, MyMoneyPayee>& map)
   d->m_payeeList = map;
 
   // scan the map to identify the last used id
-  QMap<QString, MyMoneyPayee>::const_iterator it_p;
-  QString lastId("");
-  for (it_p = map.begin(); it_p != map.end(); ++it_p) {
-    if ((*it_p).id().length() <= PAYEE_ID_SIZE + 1) {
-      if ((*it_p).id() > lastId)
-        lastId = (*it_p).id();
-    } else {
+  d->m_nextPayeeID = 0;
+  const QRegularExpression idExp("P(\\d+)$");
+  auto end = map.constEnd();
+  for (auto iter = map.constBegin(); iter != end; ++iter) {
+    const auto id = d->extractId(idExp, (*iter).id());
+    if (id > d->m_nextPayeeID) {
+      d->m_nextPayeeID = id;
     }
-  }
-
-  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
-  if (pos != -1) {
-    d->m_nextPayeeID = lastId.mid(pos).toInt();
   }
 }
 
@@ -1080,19 +1071,14 @@ void MyMoneyStorageMgr::loadTags(const QMap<QString, MyMoneyTag>& map)
   d->m_tagList = map;
 
   // scan the map to identify the last used id
-  QMap<QString, MyMoneyTag>::const_iterator it_ta;
-  QString lastId("");
-  for (it_ta = map.begin(); it_ta != map.end(); ++it_ta) {
-    if ((*it_ta).id().length() <= TAG_ID_SIZE + 1) {
-      if ((*it_ta).id() > lastId)
-        lastId = (*it_ta).id();
-    } else {
+  d->m_nextTagID = 0;
+  const QRegularExpression idExp("G(\\d+)$");
+  auto end = map.constEnd();
+  for (auto iter = map.constBegin(); iter != end; ++iter) {
+    const auto id = d->extractId(idExp, (*iter).id());
+    if (id > d->m_nextTagID) {
+      d->m_nextTagID = id;
     }
-  }
-
-  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
-  if (pos != -1) {
-    d->m_nextTagID = lastId.mid(pos).toUInt();
   }
 }
 
@@ -1102,16 +1088,14 @@ void MyMoneyStorageMgr::loadSecurities(const QMap<QString, MyMoneySecurity>& map
   d->m_securitiesList = map;
 
   // scan the map to identify the last used id
-  QMap<QString, MyMoneySecurity>::const_iterator it_s;
-  QString lastId("");
-  for (it_s = map.begin(); it_s != map.end(); ++it_s) {
-    if ((*it_s).id() > lastId)
-      lastId = (*it_s).id();
-  }
-
-  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
-  if (pos != -1) {
-    d->m_nextSecurityID = lastId.mid(pos).toInt();
+  d->m_nextSecurityID = 0;
+  const QRegularExpression idExp("E(\\d+)$");
+  auto end = map.constEnd();
+  for (auto iter = map.constBegin(); iter != end; ++iter) {
+    const auto id = d->extractId(idExp, (*iter).id());
+    if (id > d->m_nextSecurityID) {
+      d->m_nextSecurityID = id;
+    }
   }
 }
 
@@ -1131,16 +1115,15 @@ void MyMoneyStorageMgr::loadOnlineJobs(const QMap< QString, onlineJob >& onlineJ
 {
   Q_D(MyMoneyStorageMgr);
   d->m_onlineJobList = onlineJobs;
-  QString lastId("");
-  const QMap< QString, onlineJob >::const_iterator end = onlineJobs.constEnd();
-  for (QMap< QString, onlineJob >::const_iterator iter = onlineJobs.constBegin(); iter != end; ++iter) {
-    if ((*iter).id() > lastId)
-      lastId = (*iter).id();
-  }
 
-  const int pos = lastId.indexOf(QRegExp("\\d+"), 0);
-  if (pos != -1) {
-    d->m_nextOnlineJobID = lastId.mid(pos).toInt();
+  d->m_nextOnlineJobID = 0;
+  const QRegularExpression idExp("O(\\d+)$");
+  auto end = onlineJobs.constEnd();
+  for (auto iter = onlineJobs.constBegin(); iter != end; ++iter) {
+    const auto id = d->extractId(idExp, (*iter).id());
+    if (id > d->m_nextOnlineJobID) {
+      d->m_nextOnlineJobID = id;
+    }
   }
 }
 
@@ -1150,16 +1133,14 @@ void MyMoneyStorageMgr::loadCostCenters(const QMap< QString, MyMoneyCostCenter >
   d->m_costCenterList = costCenters;
 
   // scan the map to identify the last used id
-  QMap<QString, MyMoneyCostCenter>::const_iterator it_s;
-  QString lastId;
-  for (it_s = costCenters.constBegin(); it_s != costCenters.constEnd(); ++it_s) {
-    if ((*it_s).id() > lastId)
-      lastId = (*it_s).id();
-  }
-
-  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
-  if (pos != -1) {
-    d->m_nextCostCenterID = lastId.mid(pos).toInt();
+  d->m_nextCostCenterID = 0;
+  const QRegularExpression idExp("C(\\d+)$");
+  auto end = costCenters.constEnd();
+  for (auto iter = costCenters.constBegin(); iter != end; ++iter) {
+    const auto id = d->extractId(idExp, (*iter).id());
+    if (id > d->m_nextCostCenterID) {
+      d->m_nextCostCenterID = id;
+    }
   }
 }
 
@@ -1329,16 +1310,14 @@ void MyMoneyStorageMgr::loadSchedules(const QMap<QString, MyMoneySchedule>& map)
   d->m_scheduleList = map;
 
   // scan the map to identify the last used id
-  QMap<QString, MyMoneySchedule>::const_iterator it_s;
-  QString lastId("");
-  for (it_s = map.begin(); it_s != map.end(); ++it_s) {
-    if ((*it_s).id() > lastId)
-      lastId = (*it_s).id();
-  }
-
-  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
-  if (pos != -1) {
-    d->m_nextScheduleID = lastId.mid(pos).toInt();
+  d->m_nextScheduleID = 0;
+  const QRegularExpression idExp("SCH(\\d+)$");
+  auto end = map.constEnd();
+  for (auto iter = map.constBegin(); iter != end; ++iter) {
+    const auto id = d->extractId(idExp, (*iter).id());
+    if (id > d->m_nextScheduleID) {
+      d->m_nextScheduleID = id;
+    }
   }
 }
 
@@ -1531,16 +1510,14 @@ void MyMoneyStorageMgr::loadReports(const QMap<QString, MyMoneyReport>& map)
   d->m_reportList = map;
 
   // scan the map to identify the last used id
-  QMap<QString, MyMoneyReport>::const_iterator it_r;
-  QString lastId("");
-  for (it_r = map.begin(); it_r != map.end(); ++it_r) {
-    if ((*it_r).id() > lastId)
-      lastId = (*it_r).id();
-  }
-
-  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
-  if (pos != -1) {
-    d->m_nextReportID = lastId.mid(pos).toInt();
+  d->m_nextReportID = 0;
+  const QRegularExpression idExp("R(\\d+)$");
+  auto end = map.constEnd();
+  for (auto iter = map.constBegin(); iter != end; ++iter) {
+    const auto id = d->extractId(idExp, (*iter).id());
+    if (id > d->m_nextReportID) {
+      d->m_nextReportID = id;
+    }
   }
 }
 
@@ -1601,16 +1578,14 @@ void MyMoneyStorageMgr::loadBudgets(const QMap<QString, MyMoneyBudget>& map)
   d->m_budgetList = map;
 
   // scan the map to identify the last used id
-  QMap<QString, MyMoneyBudget>::const_iterator it_b;
-  QString lastId("");
-  for (it_b = map.begin(); it_b != map.end(); ++it_b) {
-    if ((*it_b).id() > lastId)
-      lastId = (*it_b).id();
-  }
-
-  int pos = lastId.indexOf(QRegExp("\\d+"), 0);
-  if (pos != -1) {
-    d->m_nextBudgetID = lastId.mid(pos).toInt();
+  d->m_nextBudgetID = 0;
+  const QRegularExpression idExp("B(\\d+)$");
+  auto end = map.constEnd();
+  for (auto iter = map.constBegin(); iter != end; ++iter) {
+    const auto id = d->extractId(idExp, (*iter).id());
+    if (id > d->m_nextBudgetID) {
+      d->m_nextBudgetID = id;
+    }
   }
 }
 

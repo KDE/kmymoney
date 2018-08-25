@@ -31,6 +31,8 @@
 #include <QList>
 #include <QBitArray>
 #include <QDate>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -416,6 +418,15 @@ public:
     id.setNum(++m_nextCostCenterID);
     id = 'C' + id.rightJustified(COSTCENTER_ID_SIZE, '0');
     return id;
+  }
+
+  ulong extractId(const QRegularExpression& exp, const QString& txtId) const
+  {
+    const auto match = exp.match(txtId, 0, QRegularExpression::NormalMatch, QRegularExpression::AnchoredMatchOption);
+    if (match.hasMatch()) {
+      return match.captured(1).toULong();
+    }
+    return 0;
   }
 
   MyMoneyStorageMgr *q_ptr;
