@@ -172,8 +172,6 @@ double CashFlowList::calculateXIRR() const
 
 double CashFlowList::xirrResult(double& rate) const
 {
-  QDate date;
-
   double r = rate + 1.0;
   double res = 0.00000;//back().value().toDouble();
 
@@ -196,8 +194,6 @@ double CashFlowList::xirrResult(double& rate) const
 
 double CashFlowList::xirrResultDerive(double& rate) const
 {
-  QDate date;
-
   double r = rate + 1.0;
   double res = 0.00000;
 
@@ -1170,8 +1166,7 @@ void QueryTable::constructTransactionTable()
   QString strEndDate = endDate.toString(Qt::ISODate);
   startDate = startDate.addDays(-1);
 
-  QMap<QString, MyMoneyAccount>::const_iterator it_account, accts_end;
-  for (it_account = accts.constBegin(); it_account != accts.constEnd(); ++it_account) {
+  for (auto it_account = accts.constBegin(); it_account != accts.constEnd(); ++it_account) {
     TableRow qA;
 
     ReportAccount account(*it_account);
@@ -2092,8 +2087,7 @@ void QueryTable::constructSplitsTable()
   QString strEndDate = endDate.toString(Qt::ISODate);
   startDate = startDate.addDays(-1);
 
-  QMap<QString, MyMoneyAccount>::const_iterator it_account, accts_end;
-  for (it_account = accts.constBegin(); it_account != accts.constEnd(); ++it_account) {
+  for (auto it_account = accts.constBegin(); it_account != accts.constEnd(); ++it_account) {
     TableRow qA;
 
     ReportAccount account((* it_account));

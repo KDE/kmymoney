@@ -2011,7 +2011,7 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
     MyMoneySchedule sc;
     MyMoneyTransaction tx;
     m_suspectSchedule = false;
-    QDate startDate, nextDate, lastDate, endDate;  // for date calculations
+    QDate nextDate, lastDate, endDate;  // for date calculations
     QDate today = QDate::currentDate();
     int numOccurs, remOccurs;
 

@@ -1949,7 +1949,6 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
   }
   if (!canImplementFilter) {
     QMap<QString, MyMoneyTransaction> transactionList =  fetchTransactions();
-    QMap<QString, MyMoneyTransaction>::ConstIterator it_t;
 
     std::remove_if(transactionList.begin(), transactionList.end(), FilterFail(filter));
     return transactionList;

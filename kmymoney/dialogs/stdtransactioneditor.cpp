@@ -303,7 +303,6 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
   // don't kick off VAT processing from here
   d->m_inUpdateVat = true;
 
-  QMap<QString, QWidget*>::const_iterator it_w;
   QWidget* w;
   AccountSet aSet;
 

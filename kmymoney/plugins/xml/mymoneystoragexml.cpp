@@ -867,7 +867,6 @@ MyMoneyPayee MyMoneyXmlContentHandler::readPayee(const QDomElement &node)
 payeeIdentifierData *MyMoneyXmlContentHandler::readPayeeIdentifier(const QDomElement &element)
 {
     const auto identifierType = element.attribute(attributeName(Attribute::Payee::Type));
-    const auto identifierId = element.attribute(attributeName(Attribute::Payee::ID)).toUInt();
 
     payeeIdentifierData* identData = nullptr;
 

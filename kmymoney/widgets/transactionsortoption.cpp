@@ -130,7 +130,6 @@ void TransactionSortOption::setSettings(const QString& settings)
   }
 
   // fill available list
-  QMap<int, bool>::const_iterator it_m;
   for (int i = static_cast<int>(SortField::PostDate);
        i < static_cast<int>(SortField::MaxFields); ++i) {
     // Never add EntryDateSort

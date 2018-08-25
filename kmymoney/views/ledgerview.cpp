@@ -324,6 +324,7 @@ void LedgerView::mousePressEvent(QMouseEvent* event)
 
 void LedgerView::mouseMoveEvent(QMouseEvent* event)
 {
+  Q_UNUSED(event);
   // qDebug() << "mouseMoveEvent";
   // QTableView::mouseMoveEvent(event);
 }
