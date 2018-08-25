@@ -63,8 +63,7 @@ cmake --build . --config RelWithDebInfo --target ext_gettext
 cmake --build . --config RelWithDebInfo --target ext_zlib
 cmake --build . --config RelWithDebInfo --target ext_boost
 cmake --build . --config RelWithDebInfo --target ext_png
-xmlCommand="cmake --build . --config RelWithDebInfo --target ext_xml"
-cmake -E env LIBS="-liconv" ${xmlCommand}
+cmake --build . --config RelWithDebInfo --target ext_xml
 cmake --build . --config RelWithDebInfo --target ext_xslt
 cmake --build . --config RelWithDebInfo --target ext_lzma
 cmake --build . --config RelWithDebInfo --target ext_fontconfig

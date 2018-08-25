@@ -1,0 +1,13 @@
+diff -ruN libxml2-2.9.7.orig/configure.ac libxml2-2.9.7/configure.ac
+--- libxml2-2.9.7.orig/configure.ac	2017-10-30 08:37:06.000000000 +0100
++++ libxml2-2.9.7/configure.ac	2018-08-24 17:13:34.714491406 +0200
+@@ -1438,7 +1438,8 @@
+ iconv_t cd = iconv_open ("","");
+ iconv (cd, NULL, NULL, NULL, NULL);]])],[
+ 	    AC_MSG_RESULT(yes)
+-	    WITH_ICONV=1],[
++	    WITH_ICONV=1
++	    ICONV_LIBS="${ICONV_LIBS} -liconv"],[
+ 	    AC_MSG_RESULT(no)
+ 	    AC_MSG_CHECKING(for iconv in -liconv)
+ 
