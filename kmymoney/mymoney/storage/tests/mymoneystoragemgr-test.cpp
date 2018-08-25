@@ -1797,7 +1797,7 @@ void MyMoneyStorageMgrTest::testLoaderFunctions()
 
   // security loader
   QMap<QString, MyMoneySecurity> smap;
-  MyMoneySecurity s("S54321", MyMoneySecurity());
+  MyMoneySecurity s("E54321", MyMoneySecurity());
   smap[s.id()] = s;
   m->loadSecurities(smap);
   QCOMPARE(m->d_func()->m_securitiesList.values(), smap.values());
