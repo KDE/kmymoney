@@ -7,8 +7,7 @@ ExternalProject_Add(
   URL_MD5 896608641a08b465098a40ddf51cefba
 
   INSTALL_DIR ${PREFIX_ext_xml}
-  PATCH_COMMAND ${PATCH_COMMAND} -p1 -i ${CMAKE_CURRENT_SOURCE_DIR}/liconv.diff
-  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_xml} --without-python
+  CONFIGURE_COMMAND LIBS="-liconv" && ./configure --prefix=${PREFIX_ext_xml} --without-python
   BUILD_COMMAND make
   INSTALL_COMMAND make install
 

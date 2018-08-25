@@ -63,14 +63,13 @@ cmake --build . --config RelWithDebInfo --target ext_gettext
 cmake --build . --config RelWithDebInfo --target ext_zlib
 cmake --build . --config RelWithDebInfo --target ext_boost
 cmake --build . --config RelWithDebInfo --target ext_png
+cmake --build . --config RelWithDebInfo --target ext_icu
 cmake --build . --config RelWithDebInfo --target ext_xml
 cmake --build . --config RelWithDebInfo --target ext_xslt
 cmake --build . --config RelWithDebInfo --target ext_lzma
-cmake --build . --config RelWithDebInfo --target ext_fontconfig
-cmake --build . --config RelWithDebInfo --target ext_freetype
+# cmake --build . --config RelWithDebInfo --target ext_fontconfig
+# cmake --build . --config RelWithDebInfo --target ext_freetype
 cmake --build . --config RelWithDebInfo --target ext_qt
-cmake --build . --config RelWithDebInfo --target ext_frameworks
 cmake --build . --config RelWithDebInfo --target ext_gmp
 cmake --build . --config RelWithDebInfo --target ext_alkimia
 cmake --build . --config RelWithDebInfo --target ext_kdiagram
-cmake --build . --config RelWithDebInfo --target ext_icu

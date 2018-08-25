@@ -7,7 +7,7 @@ ExternalProject_Add(
   URL_MD5 490ad9d920158e0314e10ba74ae9a150
 
   INSTALL_DIR ${PREFIX_ext_icu}
-  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_icu}  ${GLOBAL_AUTOMAKE_PROFILE}
+  CONFIGURE_COMMAND ./source/configure --prefix=${PREFIX_ext_icu}  ${GLOBAL_AUTOMAKE_PROFILE}
   BUILD_COMMAND make
   INSTALL_COMMAND make install
 
