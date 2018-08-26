@@ -23,6 +23,7 @@
 #include <QSqlError>
 #include <QSqlResult>
 #include <QSqlRecord>
+#include <QCoreApplication>
 
 QTEST_GUILESS_MAIN(qsqlciphertest)
 
@@ -31,6 +32,11 @@ static const auto sqlDriverName(QStringLiteral("QSQLCIPHER"));
 
 void qsqlciphertest::initTestCase()
 {
+  // without qsqlcipher installed system-wide the test couldn't load qsqlcipher plugin
+#ifdef QSQLCIPHERPATH
+  QCoreApplication::addLibraryPath(QLatin1String(QSQLCIPHERPATH));
+#endif
+
   // Called before the first testfunction is executed
   auto drivers = QSqlDatabase::drivers();
   QVERIFY(drivers.contains(sqlDriverName));

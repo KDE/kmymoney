@@ -6,3 +6,7 @@ ecm_add_tests(${tests_sources}
     Qt5::Test
     Qt5::Sql
 )
+
+target_compile_definitions(qsqlcipher-test
+  PRIVATE
+  QSQLCIPHERPATH="${CMAKE_INSTALL_PREFIX}/${PLUGIN_INSTALL_DIR}")
