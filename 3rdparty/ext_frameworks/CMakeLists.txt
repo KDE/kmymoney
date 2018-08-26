@@ -156,7 +156,7 @@ ExternalProject_Add(
                 -DCMAKE_SYSTEM_PREFIX_PATH=${EXTPREFIX}
                 -DBUILD_TESTING=false
     UPDATE_COMMAND ""
-    DEPENDS ext_extra_cmake_modules
+    DEPENDS ext_extra_cmake_modules ext_gettext
 )
 
 ExternalProject_Add(

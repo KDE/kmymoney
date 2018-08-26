@@ -70,6 +70,10 @@ cmake --build . --config RelWithDebInfo --target ext_boost
 # cmake --build . --config RelWithDebInfo --target ext_fontconfig
 # cmake --build . --config RelWithDebInfo --target ext_freetype
 cmake --build . --config RelWithDebInfo --target ext_qt
+cmake --build . --config RelWithDebInfo --target ext_knotifications
+cmake --build . --config RelWithDebInfo --target ext_kio
+cmake --build . --config RelWithDebInfo --target ext_kcmutils
+cmake --build . --config RelWithDebInfo --target ext_kwallet
 # cmake --build . --config RelWithDebInfo --target ext_gmp
 cmake --build . --config RelWithDebInfo --target ext_alkimia
 cmake --build . --config RelWithDebInfo --target ext_kdiagram
