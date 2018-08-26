@@ -396,15 +396,6 @@ namespace Icons {
 
   KMM_ICONS_EXPORT QIcon get(Icon icon)
   {
-#ifdef KMYMONEY_ICON_DIR
-    static bool first_time = true;
-    if (first_time) {
-      first_time = false;
-      QStringList paths = QIcon::themeSearchPaths();
-      paths.append(QStringLiteral(KMYMONEY_ICON_DIR));
-      QIcon::setThemeSearchPaths(paths);
-    }
-#endif
     if (sComposedIcons.contains(icon))
       return overlayIcon(sComposedIcons[icon]);
 

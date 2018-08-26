@@ -1163,6 +1163,23 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   layout->setSpacing(6);
 
   {
+    // find where our custom icons were installed based on an custom icon that we know should exist after installation
+    const auto customIconRelativePath = QString(QStringLiteral("icons/hicolor/16x16/actions/account-add.png"));
+    auto customIconAbsolutePath = QStandardPaths::locate(QStandardPaths::AppDataLocation, customIconRelativePath);
+
+    // add our custom icons path to icons search path
+    if (!customIconAbsolutePath.isEmpty()) {
+      customIconAbsolutePath.chop(customIconRelativePath.length());
+      customIconAbsolutePath.append(QLatin1String("icons"));
+      auto paths = QIcon::themeSearchPaths();
+      paths.append(customIconAbsolutePath);
+      QIcon::setThemeSearchPaths(paths);
+    } else {
+      qWarning("Custom icons were not found in any of the following QStandardPaths::AppDataLocation:");
+      for (const auto &standardPath : QStandardPaths::standardLocations(QStandardPaths::AppDataLocation))
+          qWarning() << standardPath;
+    }
+
     #if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
     QString themeName = QLatin1Literal("system");                       // using QIcon::setThemeName on Craft build system causes icons to disappear
     #else
