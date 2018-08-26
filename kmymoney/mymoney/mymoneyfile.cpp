@@ -3387,6 +3387,43 @@ int MyMoneyFile::countTransactionsWithSpecificReconciliationState(const QString&
   return transactionList(filter).count();
 }
 
+QMap<QString, QVector<int> > MyMoneyFile::countTransactionsWithSpecificReconciliationState() const
+{
+  QMap<QString, QVector<int> > result;
+  MyMoneyTransactionFilter filter;
+  filter.setReportAllSplits(false);
+
+  d->checkStorage();
+
+  QList<MyMoneyAccount> list;
+  accountList(list);
+  for (const auto account : list) {
+    result[account.id()] = QVector<int>((int)eMyMoney::Split::State::MaxReconcileState, 0);
+  }
+
+  const auto transactions = d->m_storage->transactionList(filter);
+  for (const auto& transaction : transactions) {
+    for (const auto& split : transaction.splits()) {
+      if (!result.contains(split.accountId())) {
+        result[split.accountId()] = QVector<int>((int)eMyMoney::Split::State::MaxReconcileState, 0);
+      }
+      const auto flag = split.reconcileFlag();
+      switch(flag) {
+        case eMyMoney::Split::State::NotReconciled:
+        case eMyMoney::Split::State::Cleared:
+        case eMyMoney::Split::State::Reconciled:
+        case eMyMoney::Split::State::Frozen:
+          result[split.accountId()][(int)flag]++;
+          break;
+        default:
+          break;
+      }
+
+    }
+  }
+  return result;
+}
+
   /**
    * Make sure that the splits value has the precision of the corresponding account
    */

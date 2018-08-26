@@ -227,10 +227,10 @@ public:
     QString countStr;
 
     if (KMyMoneySettings::showCountOfUnmarkedTransactions() || KMyMoneySettings::showCountOfNotReconciledTransactions())
-      countNotMarked = file->countTransactionsWithSpecificReconciliationState(acc.id(), TransactionFilter::State::NotReconciled);
+      countNotMarked = m_transactionStats[acc.id()][(int)Split::State::NotReconciled];
 
     if (KMyMoneySettings::showCountOfClearedTransactions() || KMyMoneySettings::showCountOfNotReconciledTransactions())
-      countCleared = file->countTransactionsWithSpecificReconciliationState(acc.id(), TransactionFilter::State::Cleared);
+      countCleared = m_transactionStats[acc.id()][(int)Split::State::Cleared];
 
     if (KMyMoneySettings::showCountOfNotReconciledTransactions())
       countNotReconciled = countNotMarked + countCleared;
@@ -416,11 +416,15 @@ public:
     m_view->setZoomFactor(KMyMoneySettings::zoomFactor());
 
     QList<MyMoneyAccount> list;
-    if (MyMoneyFile::instance()->storage())
+    if (MyMoneyFile::instance()->storage()) {
       MyMoneyFile::instance()->accountList(list);
+    }
     if (list.isEmpty()) {
       m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
     } else {
+      // preload transaction statistics
+      m_transactionStats = MyMoneyFile::instance()->countTransactionsWithSpecificReconciliationState();
+
       // keep current location on page
       int scrollBarPos = 0;
 #ifdef ENABLE_WEBENGINE
@@ -1842,6 +1846,8 @@ public:
     * for the times when the needed size can't be computed.
     */
   QSize           m_netWorthGraphLastValidSize;
+
+  QMap< QString, QVector<int> > m_transactionStats;
 
   /**
     * daily forecast balance of accounts

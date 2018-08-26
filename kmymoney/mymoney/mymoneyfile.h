@@ -1533,6 +1533,7 @@ public:
     * @return number of transactions with state @p state
     */
   int countTransactionsWithSpecificReconciliationState(const QString& accId, eMyMoney::TransactionFilter::State state) const;
+  QMap< QString, QVector<int> > countTransactionsWithSpecificReconciliationState() const;
 
   /**
    * @brief Saves a new onlineJob
