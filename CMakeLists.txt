@@ -30,8 +30,8 @@ endif()
 
 ######################### General Requirements ##########################
 
-if (CMAKE_COMPILER_IS_GNUCXX AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 6.0.0)
-    message(FATAL_ERROR "This version of KMyMoney requires at least gcc 6.0.0 to be built successfully")
+if (CMAKE_COMPILER_IS_GNUCXX AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 5.4.0)
+    message(FATAL_ERROR "This version of KMyMoney requires at least gcc 5.4.0 to be built successfully")
 endif()
 
 find_package(ECM 5.10 REQUIRED NO_MODULE)
