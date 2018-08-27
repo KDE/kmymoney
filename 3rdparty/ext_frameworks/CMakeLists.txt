@@ -323,7 +323,7 @@ ExternalProject_Add(
                 -DCMAKE_SYSTEM_PREFIX_PATH=${EXTPREFIX}
                 -DBUILD_TESTING=false
     UPDATE_COMMAND ""
-    DEPENDS ext_kwindowsystem ext_kconfig ext_kcodecs ext_kcoreaddons
+    DEPENDS ext_kwindowsystem ext_kconfig ext_kcodecs ext_kcoreaddons ext_phonon
 )
 
 ExternalProject_Add(
