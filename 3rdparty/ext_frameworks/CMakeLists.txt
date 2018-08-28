@@ -102,7 +102,6 @@ ExternalProject_Add(
     URL http://download.kde.org/stable/frameworks/5.44/kdbusaddons-5.44.0.zip
     URL_MD5 bee1d8ac4e6e87e3fe17ac7adba40b76
     INSTALL_DIR ${EXTPREFIX_frameworks}
-    PATCH_COMMAND ${PATCH_COMMAND} -p1 -i ${CMAKE_CURRENT_SOURCE_DIR}/desktoptojson.diff
     CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTPREFIX_frameworks}
             -DCMAKE_BUILD_TYPE=${GLOBAL_BUILD_TYPE}
                 ${GLOBAL_PROFILE}
