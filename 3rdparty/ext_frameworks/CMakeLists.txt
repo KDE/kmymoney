@@ -15,6 +15,7 @@ SET(EXTPREFIX_frameworks "${EXTPREFIX}" )
 #   WindowSystem
 #   Solid
 #   Sonnet
+#   SyntaxHighlighting
 # Tier 2
 #   Auth
 #   Completion
@@ -23,6 +24,7 @@ SET(EXTPREFIX_frameworks "${EXTPREFIX}" )
 #   Notifications
 #   Package
 # Tier 3
+#   Emoticons
 #   ConfigWidgets
 #   IconThemes
 #   Service
@@ -251,6 +253,21 @@ ExternalProject_Add(
 )
 
 ExternalProject_Add(
+    ext_syntaxhighlighting
+    DOWNLOAD_DIR ${EXTERNALS_DOWNLOAD_DIR}
+    URL http://download.kde.org/stable/frameworks/5.44/syntax-highlighting-5.44.0.zip
+    URL_MD5 3e2f0c93df9a779981f0379de1ede79e
+    INSTALL_DIR ${EXTPREFIX_frameworks}
+    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTPREFIX_frameworks}
+               -DCMAKE_BUILD_TYPE=${GLOBAL_BUILD_TYPE}
+                ${GLOBAL_PROFILE}
+                -DCMAKE_SYSTEM_PREFIX_PATH=${EXTPREFIX}
+                -DBUILD_TESTING=false
+    UPDATE_COMMAND ""
+    DEPENDS ext_extra_cmake_modules
+)
+
+ExternalProject_Add(
     ext_kauth
     DOWNLOAD_DIR ${EXTERNALS_DOWNLOAD_DIR}
     URL http://download.kde.org/stable/frameworks/5.44/kauth-5.44.0.zip
@@ -383,6 +400,21 @@ ExternalProject_Add(
                 -DBUILD_TESTING=false
     UPDATE_COMMAND ""
     DEPENDS ext_kconfig ext_kcoreaddons ext_kcrash ext_kdbusaddons ext_ki18n
+)
+
+ExternalProject_Add(
+    ext_kemoticons
+    DOWNLOAD_DIR ${EXTERNALS_DOWNLOAD_DIR}
+    URL http://download.kde.org/stable/frameworks/5.44/kemoticons-5.44.0.zip
+    URL_MD5 73dd274ea43acf4abe8bc9e5556180f7
+    INSTALL_DIR ${EXTPREFIX_frameworks}
+    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTPREFIX_frameworks}
+               -DCMAKE_BUILD_TYPE=${GLOBAL_BUILD_TYPE}
+                ${GLOBAL_PROFILE}
+                -DCMAKE_SYSTEM_PREFIX_PATH=${EXTPREFIX}
+                -DBUILD_TESTING=false
+    UPDATE_COMMAND ""
+    DEPENDS ext_karchive ext_kconfig ext_kservice ext_kcoreaddons
 )
 
 ExternalProject_Add(

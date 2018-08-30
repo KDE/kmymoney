@@ -13,4 +13,5 @@ ExternalProject_Add(
 
   UPDATE_COMMAND ""
   BUILD_IN_SOURCE 1
+  DEPENDS ext_xml
 )

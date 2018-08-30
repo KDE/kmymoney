@@ -1,4 +1,5 @@
 SET(PREFIX_ext_gwenhywfar "${EXTPREFIX}" )
+SET(gwenhywfar_guis "qt5 cpp" )
 
 ExternalProject_Add(
   ext_gwenhywfar
@@ -7,7 +8,7 @@ ExternalProject_Add(
   URL_MD5 0744255cae68adca6dff81d3a9f3932d
 
   INSTALL_DIR ${PREFIX_ext_gwenhywfar}
-  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_gwenhywfar} --with-guis=qt5 --disable-static --enable-shared --disable-binreloc
+  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_gwenhywfar} --with-guis=${gwenhywfar_guis} --disable-static --enable-shared --disable-binreloc
   BUILD_COMMAND make
   INSTALL_COMMAND make install
 

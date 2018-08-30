@@ -1,4 +1,5 @@
 SET(PREFIX_ext_aqbanking "${EXTPREFIX}" )
+SET(aqbanking_cppFlags "-L${INSTALL_ROOT}/lib -I${INSTALL_ROOT}/include" )
 
 ExternalProject_Add(
   ext_aqbanking
@@ -7,7 +8,7 @@ ExternalProject_Add(
   URL_MD5 6aceeaad3a1000f22f08986e68946db3
 
   INSTALL_DIR ${PREFIX_ext_aqbanking}
-  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_aqbanking}
+  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_aqbanking} CPPFLAGS=${aqbanking_cppFlags}
   BUILD_COMMAND make
   INSTALL_COMMAND make install
 

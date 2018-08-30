@@ -64,8 +64,8 @@ cmake $KMYMONEY_SOURCES/3rdparty -DCMAKE_INSTALL_PREFIX=$DEPS_INSTALL_PREFIX -DI
 cmake --build . --config RelWithDebInfo --target ext_boost
 # cmake --build . --config RelWithDebInfo --target ext_png
 # cmake --build . --config RelWithDebInfo --target ext_icu
-# cmake --build . --config RelWithDebInfo --target ext_xml
-# cmake --build . --config RelWithDebInfo --target ext_xslt
+cmake --build . --config RelWithDebInfo --target ext_xml
+cmake --build . --config RelWithDebInfo --target ext_xslt # for ext_xmlsec1
 # cmake --build . --config RelWithDebInfo --target ext_lzma
 # cmake --build . --config RelWithDebInfo --target ext_fontconfig
 # cmake --build . --config RelWithDebInfo --target ext_freetype
@@ -75,9 +75,13 @@ cmake --build . --config RelWithDebInfo --target ext_kio
 cmake --build . --config RelWithDebInfo --target ext_kcmutils
 cmake --build . --config RelWithDebInfo --target ext_kwallet
 cmake --build . --config RelWithDebInfo --target ext_kitemmodels
+cmake --build . --config RelWithDebInfo --target ext_kholidays
+cmake --build . --config RelWithDebInfo --target ext_kidentitymanagement
+cmake --build . --config RelWithDebInfo --target ext_kcontacts
 cmake --build . --config RelWithDebInfo --target ext_gmp
 cmake --build . --config RelWithDebInfo --target ext_alkimia
 cmake --build . --config RelWithDebInfo --target ext_kdiagram
-# cmake --build . --config RelWithDebInfo --target ext_aqbanking
+cmake --build . --config RelWithDebInfo --target ext_aqbanking
 cmake --build . --config RelWithDebInfo --target ext_gpgme
+cmake --build . --config RelWithDebInfo --target ext_sqlcipher
 
