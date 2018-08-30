@@ -401,6 +401,21 @@ ExternalProject_Add(
 )
 
 ExternalProject_Add(
+    ext_kglobalaccel
+    DOWNLOAD_DIR ${EXTERNALS_DOWNLOAD_DIR}
+    URL http://download.kde.org/stable/frameworks/5.44/kglobalaccel-5.44.0.zip
+    URL_MD5 dabfff26dbed4494754f7327fadd3cf0
+    INSTALL_DIR ${EXTPREFIX_frameworks}
+    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTPREFIX_frameworks}
+               -DCMAKE_BUILD_TYPE=${GLOBAL_BUILD_TYPE}
+                ${GLOBAL_PROFILE}
+                -DCMAKE_SYSTEM_PREFIX_PATH=${EXTPREFIX}
+                -DBUILD_TESTING=false
+    UPDATE_COMMAND ""
+    DEPENDS ext_kconfig ext_kcoreaddons ext_kcrash ext_kdbusaddons ext_kwindowsystem
+)
+
+ExternalProject_Add(
     ext_kxmlgui
     DOWNLOAD_DIR ${EXTERNALS_DOWNLOAD_DIR}
     URL http://download.kde.org/stable/frameworks/5.44/kxmlgui-5.44.0.zip
@@ -428,21 +443,6 @@ ExternalProject_Add(
                 -DBUILD_TESTING=false
     UPDATE_COMMAND ""
     DEPENDS ext_kconfig ext_kcoreaddons ext_kcodecs ext_kconfigwidgets ext_kiconthemes ext_kwidgetsaddons ext_kxmlgui
-)
-
-ExternalProject_Add(
-    ext_kglobalaccel
-    DOWNLOAD_DIR ${EXTERNALS_DOWNLOAD_DIR}
-    URL http://download.kde.org/stable/frameworks/5.44/kglobalaccel-5.44.0.zip
-    URL_MD5 dabfff26dbed4494754f7327fadd3cf0
-    INSTALL_DIR ${EXTPREFIX_frameworks}
-    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTPREFIX_frameworks}
-               -DCMAKE_BUILD_TYPE=${GLOBAL_BUILD_TYPE}
-                ${GLOBAL_PROFILE}
-                -DCMAKE_SYSTEM_PREFIX_PATH=${EXTPREFIX}
-                -DBUILD_TESTING=false
-    UPDATE_COMMAND ""
-    DEPENDS ext_kconfig ext_kcoreaddons ext_kcrash ext_kdbusaddons ext_kwindowsystem
 )
 
 ExternalProject_Add(
