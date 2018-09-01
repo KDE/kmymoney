@@ -81,7 +81,7 @@ cmake --build . --config RelWithDebInfo --target ext_kcontacts
 cmake --build . --config RelWithDebInfo --target ext_gmp
 cmake --build . --config RelWithDebInfo --target ext_alkimia
 cmake --build . --config RelWithDebInfo --target ext_kdiagram
-cmake --build . --config RelWithDebInfo --target ext_aqbanking
+# cmake --build . --config RelWithDebInfo --target ext_aqbanking
 cmake --build . --config RelWithDebInfo --target ext_gpgme
 cmake --build . --config RelWithDebInfo --target ext_sqlcipher
 
