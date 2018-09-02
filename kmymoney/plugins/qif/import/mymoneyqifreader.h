@@ -131,6 +131,8 @@ public:
     return m_account;
   };
 
+  int statementCount() const;
+
   void setProgressCallback(void(*callback)(qint64, qint64, const QString&));
 
 private:

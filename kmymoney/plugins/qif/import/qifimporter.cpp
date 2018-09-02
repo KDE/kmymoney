@@ -70,13 +70,16 @@ void QIFImporter::slotQifImport()
 
   if (dlg->exec() == QDialog::Accepted && dlg != nullptr) {
     m_qifReader = new MyMoneyQifReader;
+    statementInterface()->resetMessages();
     connect(m_qifReader, &MyMoneyQifReader::statementsReady, this, &QIFImporter::slotGetStatements);
 
     m_qifReader->setURL(dlg->file());
     m_qifReader->setProfile(dlg->profile());
     m_qifReader->setCategoryMapping(dlg->m_typeComboBox->currentIndex() == 0);
+    const auto statementCount = m_qifReader->statementCount();
     if (!m_qifReader->startImport())
       delete m_qifReader;
+    statementInterface()->showMessages(statementCount);
   }
   delete dlg;
   m_action->setEnabled(true);

@@ -1,20 +1,20 @@
-/***************************************************************************
-                          kmmstatementinterface.cpp
-                             -------------------
-    begin                : Wed Jan 5 2005
-    copyright            : (C) 2005 Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2005-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "kmmstatementinterface.h"
 
@@ -25,6 +25,9 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+
+#include <KMessageBox>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -44,6 +47,24 @@ QStringList KMyMoneyPlugin::KMMStatementInterface::import(const MyMoneyStatement
 {
   qDebug("KMyMoneyPlugin::KMMStatementInterface::import start");
   return MyMoneyStatementReader::importStatement(s, silent);
+}
+
+void KMyMoneyPlugin::KMMStatementInterface::resetMessages() const
+{
+  MyMoneyStatementReader::clearResultMessages();
+}
+
+void KMyMoneyPlugin::KMMStatementInterface::showMessages(int statementCount) const
+{
+  const auto resultMessages = MyMoneyStatementReader::resultMessages();
+  KMessageBox::informationList(nullptr,
+                                i18np("One statement has been processed with the following results:",
+                                      "%1 statements have been processed with the following results:",
+                                      statementCount),
+                                !resultMessages.isEmpty() ?
+                                    resultMessages :
+                                    QStringList { i18np("No new transaction has been imported.", "No new transactions have been imported.", statementCount) },
+                                i18n("Statement import statistics"));
 }
 
 MyMoneyAccount KMyMoneyPlugin::KMMStatementInterface::account(const QString& key, const QString& value) const
