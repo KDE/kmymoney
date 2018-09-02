@@ -39,14 +39,14 @@ public:
   gwenKdeGui();
   ~gwenKdeGui();
 
-  virtual int getPassword(uint32_t flags,
+  int getPassword(uint32_t flags,
                           const char *token,
                           const char *title,
                           const char *text,
                           char *buffer,
                           int minLen,
                           int maxLen,
-                          uint32_t guiid);
+                          uint32_t guiid) final override;
 };
 
 /**
@@ -63,7 +63,7 @@ public:
       m_aborted(false)
       {}
 
-  virtual ~gwenKdeGuiTanResult() {}
+  ~gwenKdeGuiTanResult() {}
 
   QString tan() {
     return m_tan;

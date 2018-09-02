@@ -1,20 +1,20 @@
-/***************************************************************************
-                             fancydategroupmarkers.cpp  -  description
-                             -------------------
-    begin                : Fri Mar 10 2006
-    copyright            : (C) 2006 by Thomas Baumgart
-    email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2006-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "fancydategroupmarkers.h"
 #include "fancydategroupmarker_p.h"
@@ -32,7 +32,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "widgetenums.h"
 
 using namespace KMyMoneyRegister;
@@ -120,15 +120,15 @@ void SimpleDateGroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionVie
   cellRect.setHeight(d->m_parent->rowHeight(index.row() + d->m_startRow));
 
   if (d->m_alternate)
-    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListBackground2));
+    option.palette.setColor(QPalette::Base, KMyMoneySettings::schemeColor(SchemeColor::ListBackground2));
   else
-    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListBackground1));
+    option.palette.setColor(QPalette::Base, KMyMoneySettings::schemeColor(SchemeColor::ListBackground1));
 
   QBrush backgroundBrush(option.palette.color(QPalette::Base));
   backgroundBrush.setStyle(Qt::Dense5Pattern);
-  backgroundBrush.setColor(KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListGrid));
+  backgroundBrush.setColor(KMyMoneySettings::schemeColor(SchemeColor::ListGrid));
   painter->eraseRect(cellRect);
   painter->fillRect(cellRect, backgroundBrush);
-  painter->setPen(KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListGrid));
+  painter->setPen(KMyMoneySettings::schemeColor(SchemeColor::ListGrid));
   painter->restore();
 }

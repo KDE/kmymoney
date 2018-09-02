@@ -69,9 +69,9 @@ public:
     */
   ~KScheduledView() override;
 
-  void setDefaultFocus() override;
-  void refresh() override;
-  void updateActions(const MyMoneyObject& obj) override;
+  void executeCustomAction(eView::Action action) override;
+  void refresh();
+  void updateActions(const MyMoneyObject& obj);
 
   // TODO: remove that function
   /**
@@ -84,12 +84,11 @@ public Q_SLOTS:
   void slotShowScheduleMenu(const MyMoneySchedule& sch);
   void slotEditSchedule();
 
-  void slotEnterOverdueSchedules(const MyMoneyAccount& acc, eView::Schedules::Requester req);
+  void slotEnterOverdueSchedules(const MyMoneyAccount& acc);
+
+  void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
 
 Q_SIGNALS:
-  void objectSelected(const MyMoneyObject& obj);
-  void contextMenuRequested(const MyMoneyObject& obj);
-  void openObjectRequested(const MyMoneyObject& obj);
   void enterOverdueSchedulesFinished(eView::Schedules::Requester req);
 
 protected:

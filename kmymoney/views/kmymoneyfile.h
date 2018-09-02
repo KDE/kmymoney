@@ -28,7 +28,7 @@
  */
 #if 0
 #include "mymoneyaccount.h"
-class MyMoneySeqAccessMgr;
+class MyMoneyStorageMgr;
 
 /**
   *@author Michael Edwardes
@@ -39,7 +39,7 @@ class KMyMoneyFile
 private:
   // static KMyMoneyFile *_instance;
   // MyMoneyFile *m_file;
-  MyMoneySeqAccessMgr *m_storage;
+  MyMoneyStorageMgr *m_storage;
   bool m_open;
 
 protected:
@@ -51,7 +51,7 @@ public:
 //  static KMyMoneyFile *instance();
 
   // MyMoneyFile* file();
-  MyMoneySeqAccessMgr* storage();
+  MyMoneyStorageMgr* storage();
   void reset();
   void open();
   void close();

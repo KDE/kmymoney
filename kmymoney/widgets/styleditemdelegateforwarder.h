@@ -1,11 +1,10 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ * Copyright 2014-2016  Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -35,12 +34,12 @@ class KMM_WIDGETS_EXPORT StyledItemDelegateForwarder : public QAbstractItemDeleg
 
 public:
   explicit StyledItemDelegateForwarder(QObject* parent = 0);
-  virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  virtual void setEditorData(QWidget* editor, const QModelIndex& index) const;
-  virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
-  virtual void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+  QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+  QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+  void setEditorData(QWidget* editor, const QModelIndex& index) const override;
+  void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const override;
+  void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
 
   /**
    * @brief Return delegate for a given index

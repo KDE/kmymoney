@@ -1,8 +1,3 @@
-#    Alkimia::alkimia
-#    KF5::KIOWidgets
-#    Qt5::Gui
-#    Qt5::Sql
-
 include(ECMAddTests)
 
 
@@ -15,7 +10,6 @@ ecm_add_tests(${tests_sources}
     Qt5::Gui
     kmm_mymoney
     kmm_testutils
-    reports_testcommon
-    onlinetask_unavailabletask
     kmm_utils_platformtools
+    onlinetask_interfaces
 )

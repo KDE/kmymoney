@@ -1,20 +1,24 @@
-
-/***************************************************************************
-                          mymoneyaccount.h
-                          -------------------
-    copyright            : (C) 2002 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2000-2002  Michael Edwardes <mte@users.sourceforge.net>
+ * Copyright 2001       Felix Rodriguez <frodriguez@users.sourceforge.net>
+ * Copyright 2002-2003  Kevin Tambascio <ktambascio@users.sourceforge.net>
+ * Copyright 2006-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2006       Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MYMONEYACCOUNT_H
 #define MYMONEYACCOUNT_H
@@ -35,13 +39,12 @@
 class QString;
 class QDate;
 class QPixmap;
-class QDomElement;
 class MyMoneySecurity;
 class MyMoneyMoney;
 class MyMoneySplit;
 class payeeIdentifier;
-namespace payeeIdentifiers { class ibanBic; }
 namespace eMyMoney { namespace Account { enum class Type; } }
+namespace eMyMoney { namespace Account { enum class Standard; } }
 template <class T> class payeeIdentifierTyped;
 
 /**
@@ -91,6 +94,7 @@ public:
     * This is the constructor for a new empty account
     */
   MyMoneyAccount();
+  explicit MyMoneyAccount(const QString &id);
 
   /**
     * This is the constructor for a new account known to the current file
@@ -102,15 +106,6 @@ public:
     */
   MyMoneyAccount(const QString& id,
                  const MyMoneyAccount& other);
-
-  /**
-    * This is the constructor for an account that is described by a
-    * QDomElement (e.g. from a file).
-    *
-    * @param el const reference to the QDomElement from which to
-    *           create the object
-    */
-  explicit MyMoneyAccount(const QDomElement& el);
 
   MyMoneyAccount(const MyMoneyAccount & other);
   MyMoneyAccount(MyMoneyAccount && other);
@@ -320,12 +315,6 @@ public:
   QList< payeeIdentifier > payeeIdentifiers() const;
 
   /**
-   * @see MyMoneyPayeeIdentifierContainer::payeeIdentifiersByType()
-   */
-  template< class type >
-  QList< ::payeeIdentifierTyped<type> > payeeIdentifiersByType() const;
-
-  /**
     * This method is used to update m_lastModified to the current date
     */
   void touch();
@@ -350,14 +339,35 @@ public:
     */
   QString currencyId() const;
 
+  /** There are three different currencies in play with a single Account:
+  *   - The underlying currency: What currency the account itself is denominated in
+  *   - The deep currency: The underlying currency's own underlying currency.  This
+  *      is only a factor if the underlying currency of this account IS NOT a
+  *      currency itself, but is some other kind of security.  In that case, the
+  *      underlying security has its own currency.  The deep currency is the
+  *      currency of the underlying security.  On the other hand, if the account
+  *      has a currency itself, then the deep currency == the underlying currency,
+  *      and this function will return 1.0.
+  *   - The base currency: The base currency of the user's overall file
+  *
+  * @return id of deep currency
+  */
+  QString tradingCurrencyId() const;
+
+  /**
+    * Determine if this account's deep currency is different from the file's
+    * base currency
+    *
+    * @return bool True if this account is in a foreign currency
+    */
+  bool isForeignCurrency() const;
+
   /**
     * This method sets the id of the currency used with this account.
     *
     * @param id ID of currency to be associated with this account.
     */
   void setCurrencyId(const QString& id);
-
-  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 
   /**
     * This method checks if a reference to the given object exists. It returns,
@@ -379,7 +389,7 @@ public:
   /**
     * This method adjusts the balance of this account
     * according to the difference contained in the split @p s.
-    * If the s.action() is MyMoneySplit::ActionSplitShares then
+    * If the s.action() is MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares) then
     * the balance will be adjusted accordingly.
     *
     * @param s const reference to MyMoneySplit object containing the
@@ -514,6 +524,12 @@ public:
   bool isLiquidAsset() const;
 
   /**
+   * Returns whether this account is a liquid liability
+   *
+   */
+  bool isLiquidLiability() const;
+
+  /**
    * This method returns true if a costcenter assignment is required for this account
    */
   bool isCostCenterRequired() const;
@@ -571,6 +587,8 @@ public:
     */
   bool hasOnlineMapping() const;
 
+  static QString stdAccName(eMyMoney::Account::Standard stdAccID);
+
   QDataStream &operator<<(const MyMoneyAccount &);
   QDataStream &operator>>(MyMoneyAccount &);
 };
@@ -592,16 +610,6 @@ inline MyMoneyAccount & MyMoneyAccount::operator=(MyMoneyAccount other) // krazy
   swap(*this, other);
   return *this;
 }
-
-template< class type >
-QList< payeeIdentifierTyped<type> > MyMoneyAccount::payeeIdentifiersByType() const
-{
-  QList< payeeIdentifierTyped<type> > typedList;
-  return typedList;
-}
-
-template<>
-QList< payeeIdentifierTyped< ::payeeIdentifiers::ibanBic> > MyMoneyAccount::payeeIdentifiersByType() const;
 
 /**
  * Make it possible to hold @ref MyMoneyAccount objects,

@@ -1,20 +1,23 @@
-/***************************************************************************
-                          mymoneypayee.cpp
-                             -------------------
-    copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
-                           (C) 2008 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2000-2001  Michael Edwardes <mte@users.sourceforge.net>
+ * Copyright 2002-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2003       Kevin Tambascio <ktambascio@users.sourceforge.net>
+ * Copyright 2006       Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "mymoneypayee.h"
 #include "mymoneypayee_p.h"
@@ -24,21 +27,23 @@
 
 #include <QString>
 #include <QStringList>
-#include <QDomElement>
 #include <QMap>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include <mymoneyexception.h>
-#include "mymoneystoragenames.h"
-
-using namespace MyMoneyStorageNodes;
+#include "mymoneyenums.h"
 
 MyMoneyPayee MyMoneyPayee::null;
 
 MyMoneyPayee::MyMoneyPayee() :
   MyMoneyObject(*new MyMoneyPayeePrivate)
+{
+}
+
+MyMoneyPayee::MyMoneyPayee(const QString &id):
+  MyMoneyObject(*new MyMoneyPayeePrivate, id)
 {
 }
 
@@ -62,50 +67,6 @@ MyMoneyPayee::MyMoneyPayee(const QString& name,
   d->m_matchingEnabled = false;
   d->m_usingMatchKey = false;
   d->m_matchKeyIgnoreCase = true;
-}
-
-MyMoneyPayee::MyMoneyPayee(const QDomElement& node) :
-    MyMoneyObject(*new MyMoneyPayeePrivate, node)
-{
-  if (nodeNames[nnPayee] != node.tagName()) {
-    throw MYMONEYEXCEPTION("Node was not PAYEE");
-  }
-
-  Q_D(MyMoneyPayee);
-  d->m_name = node.attribute(d->getAttrName(Payee::Attribute::Name));
-  d->m_reference = node.attribute(d->getAttrName(Payee::Attribute::Reference));
-  d->m_email = node.attribute(d->getAttrName(Payee::Attribute::Email));
-
-  d->m_matchingEnabled = node.attribute(d->getAttrName(Payee::Attribute::MatchingEnabled), "0").toUInt();
-  if (d->m_matchingEnabled) {
-    setMatchData((node.attribute(d->getAttrName(Payee::Attribute::UsingMatchKey), "0").toUInt() != 0) ? matchKey : matchName,
-                 node.attribute(d->getAttrName(Payee::Attribute::MatchIgnoreCase), "0").toUInt(),
-                 node.attribute(d->getAttrName(Payee::Attribute::MatchKey)));
-  }
-
-  if (node.hasAttribute(d->getAttrName(Payee::Attribute::Notes))) {
-    d->m_notes = node.attribute(d->getAttrName(Payee::Attribute::Notes));
-  }
-
-  if (node.hasAttribute(d->getAttrName(Payee::Attribute::DefaultAccountID))) {
-    d->m_defaultAccountId = node.attribute(d->getAttrName(Payee::Attribute::DefaultAccountID));
-  }
-
-  // Load Address
-  QDomNodeList nodeList = node.elementsByTagName(d->getElName(Payee::Element::Address));
-  if (nodeList.count() == 0) {
-    QString msg = QString("No ADDRESS in payee %1").arg(d->m_name);
-    throw MYMONEYEXCEPTION(msg);
-  }
-
-  QDomElement addrNode = nodeList.item(0).toElement();
-  d->m_address = addrNode.attribute(d->getAttrName(Payee::Attribute::Street));
-  d->m_city = addrNode.attribute(d->getAttrName(Payee::Attribute::City));
-  d->m_postcode = addrNode.attribute(d->getAttrName(Payee::Attribute::PostCode));
-  d->m_state = addrNode.attribute(d->getAttrName(Payee::Attribute::State));
-  d->m_telephone = addrNode.attribute(d->getAttrName(Payee::Attribute::Telephone));
-
-  MyMoneyPayeeIdentifierContainer::loadXML(node);
 }
 
 MyMoneyPayee::MyMoneyPayee(const MyMoneyPayee& other) :
@@ -155,46 +116,6 @@ bool MyMoneyPayee::operator < (const MyMoneyPayee& right) const
   Q_D(const MyMoneyPayee);
   auto d2 = static_cast<const MyMoneyPayeePrivate *>(right.d_func());
   return d->m_name < d2->m_name;
-}
-
-void MyMoneyPayee::writeXML(QDomDocument& document, QDomElement& parent) const
-{
-  auto el = document.createElement(nodeNames[nnPayee]);
-
-  Q_D(const MyMoneyPayee);
-  d->writeBaseXML(document, el);
-
-  el.setAttribute(d->getAttrName(Payee::Attribute::Name), d->m_name);
-  el.setAttribute(d->getAttrName(Payee::Attribute::Reference), d->m_reference);
-  el.setAttribute(d->getAttrName(Payee::Attribute::Email), d->m_email);
-  if (!d->m_notes.isEmpty())
-    el.setAttribute(d->getAttrName(Payee::Attribute::Notes), d->m_notes);
-
-  el.setAttribute(d->getAttrName(Payee::Attribute::MatchingEnabled), d->m_matchingEnabled);
-  if (d->m_matchingEnabled) {
-    el.setAttribute(d->getAttrName(Payee::Attribute::UsingMatchKey), d->m_usingMatchKey);
-    el.setAttribute(d->getAttrName(Payee::Attribute::MatchIgnoreCase), d->m_matchKeyIgnoreCase);
-    el.setAttribute(d->getAttrName(Payee::Attribute::MatchKey), d->m_matchKey);
-  }
-
-  if (!d->m_defaultAccountId.isEmpty()) {
-    el.setAttribute(d->getAttrName(Payee::Attribute::DefaultAccountID), d->m_defaultAccountId);
-  }
-
-  // Save address
-  QDomElement address = document.createElement(d->getElName(Payee::Element::Address));
-  address.setAttribute(d->getAttrName(Payee::Attribute::Street), d->m_address);
-  address.setAttribute(d->getAttrName(Payee::Attribute::City), d->m_city);
-  address.setAttribute(d->getAttrName(Payee::Attribute::PostCode), d->m_postcode);
-  address.setAttribute(d->getAttrName(Payee::Attribute::State), d->m_state);
-  address.setAttribute(d->getAttrName(Payee::Attribute::Telephone), d->m_telephone);
-
-  el.appendChild(address);
-
-  // Save payeeIdentifiers (account numbers)
-  MyMoneyPayeeIdentifierContainer::writeXML(document, el);
-
-  parent.appendChild(el);
 }
 
 bool MyMoneyPayee::hasReferenceTo(const QString& id) const
@@ -311,57 +232,81 @@ void MyMoneyPayee::setReference(const QString& ref)
   d->m_reference = ref;
 }
 
-MyMoneyPayee::payeeMatchType MyMoneyPayee::matchData(bool& ignorecase, QStringList& keys) const
+bool MyMoneyPayee::isMatchingEnabled() const
 {
-  payeeMatchType type = matchDisabled;
+  Q_D(const MyMoneyPayee);
+  return d->m_matchingEnabled;
+}
+
+bool MyMoneyPayee::isUsingMatchKey() const
+{
+  Q_D(const MyMoneyPayee);
+  return d->m_usingMatchKey;
+}
+
+bool MyMoneyPayee::isMatchKeyIgnoreCase() const
+{
+  Q_D(const MyMoneyPayee);
+  return d->m_matchKeyIgnoreCase;
+}
+
+QString MyMoneyPayee::matchKey() const
+{
+  Q_D(const MyMoneyPayee);
+  return d->m_matchKey;
+}
+
+eMyMoney::Payee::MatchType MyMoneyPayee::matchData(bool& ignorecase, QStringList& keys) const
+{
+  auto type = eMyMoney::Payee::MatchType::Disabled;
   keys.clear();
 
   Q_D(const MyMoneyPayee);
   ignorecase = d->m_matchKeyIgnoreCase;
 
   if (d->m_matchingEnabled) {
-    type = d->m_usingMatchKey ? matchKey : matchName;
-    if (type == matchKey) {
+    type = d->m_usingMatchKey ? eMyMoney::Payee::MatchType::Key : eMyMoney::Payee::MatchType::Name;
+    if (type == eMyMoney::Payee::MatchType::Key) {
       if (d->m_matchKey.contains(QLatin1Char('\n')))
         keys = d->m_matchKey.split(QLatin1Char('\n'));
       else
         keys = d->m_matchKey.split(QLatin1Char(';'));  // for compatibility with 4.8.0
     } else if (d->m_matchKey.compare(QLatin1String("^$")) == 0) {
-      type = matchNameExact;
+      type = eMyMoney::Payee::MatchType::NameExact;
     }
   }
 
   return type;
 }
 
-MyMoneyPayee::payeeMatchType MyMoneyPayee::matchData(bool& ignorecase, QString& keyString) const
+eMyMoney::Payee::MatchType MyMoneyPayee::matchData(bool& ignorecase, QString& keyString) const
 {
   QStringList keys;
-  payeeMatchType type = matchData(ignorecase, keys);
+  auto type = matchData(ignorecase, keys);
   keyString = keys.join(QLatin1Char('\n'));
   return type;
 }
 
-void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QStringList& keys)
+void MyMoneyPayee::setMatchData(eMyMoney::Payee::MatchType type, bool ignorecase, const QStringList& keys)
 {
   Q_D(MyMoneyPayee);
-  d->m_matchingEnabled = (type != matchDisabled);
+  d->m_matchingEnabled = (type != eMyMoney::Payee::MatchType::Disabled);
   d->m_matchKeyIgnoreCase = ignorecase;
   d->m_matchKey.clear();
 
   if (d->m_matchingEnabled) {
-    d->m_usingMatchKey = (type == matchKey);
+    d->m_usingMatchKey = (type == eMyMoney::Payee::MatchType::Key);
     if (d->m_usingMatchKey) {
       QRegExp validKeyRegExp("[^ ]");
       QStringList filteredKeys = keys.filter(validKeyRegExp);
       d->m_matchKey = filteredKeys.join(QLatin1Char('\n'));
-    } else if(type == matchNameExact) {
+    } else if(type == eMyMoney::Payee::MatchType::NameExact) {
       d->m_matchKey = QLatin1String("^$");
     }
   }
 }
 
-void MyMoneyPayee::setMatchData(payeeMatchType type, bool ignorecase, const QString& keys)
+void MyMoneyPayee::setMatchData(eMyMoney::Payee::MatchType type, bool ignorecase, const QString& keys)
 {
   if (keys.contains(QLatin1Char('\n')))
     setMatchData(type, ignorecase, keys.split(QLatin1Char('\n')));

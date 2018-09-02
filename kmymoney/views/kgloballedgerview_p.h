@@ -48,6 +48,7 @@
 
 #include "kmymoneyviewbase_p.h"
 #include "kendingbalancedlg.h"
+#include "kfindtransactiondlg.h"
 #include "kmymoneyaccountselector.h"
 #include "kmymoneyutils.h"
 #include "mymoneyexception.h"
@@ -61,7 +62,7 @@
 #include "register.h"
 #include "transactioneditor.h"
 #include "selectedtransactions.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "registersearchline.h"
 #include "scheduledtransaction.h"
 #include "accountsmodel.h"
@@ -183,7 +184,7 @@ protected:
     * @param e pointer to QEvent
     * @return always returns @a false
     */
-  bool eventFilter(QObject* o, QEvent* e)
+  bool eventFilter(QObject* o, QEvent* e) final override
   {
     if (m_filterActive) {
       if (e->type() == QEvent::MouseButtonPress && !m_lastMousePressEvent) {
@@ -230,18 +231,32 @@ public:
     q_ptr(qq),
     m_mousePressFilter(0),
     m_registerSearchLine(0),
+    m_precision(2),
     m_recursion(false),
     m_showDetails(false),
+    m_action(eWidgets::eRegister::Action::None),
     m_filterProxyModel(0),
     m_accountComboBox(0),
     m_balanceIsApproximated(false),
+    m_toolbarFrame(nullptr),
+    m_registerFrame(nullptr),
+    m_buttonFrame(nullptr),
+    m_formFrame(nullptr),
+    m_summaryFrame(nullptr),
+    m_register(nullptr),
+    m_buttonbar(nullptr),
+    m_leftSummaryLabel(nullptr),
+    m_centerSummaryLabel(nullptr),
+    m_rightSummaryLabel(nullptr),
+    m_form(nullptr),
     m_needLoad(true),
     m_newAccountLoaded(true),
     m_inEditMode(false),
     m_transactionEditor(nullptr),
     m_balanceWarning(nullptr),
     m_moveToAccountSelector(nullptr),
-    m_endingBalanceDlg(nullptr)
+    m_endingBalanceDlg(nullptr),
+    m_searchDlg(nullptr)
   {
   }
 
@@ -249,6 +264,7 @@ public:
   {
     delete m_moveToAccountSelector;
     delete m_endingBalanceDlg;
+    delete m_searchDlg;
   }
 
   void init()
@@ -359,7 +375,7 @@ public:
 //    q->connect(m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, q, &KGlobalLedgerView::slotAccountSelected);
     q->connect(m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, q, static_cast<void (KGlobalLedgerView::*)(const QString&)>(&KGlobalLedgerView::slotSelectAccount));
     q->connect(m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, q, &KGlobalLedgerView::slotUpdateMoveToAccountMenu);
-    q->connect(m_register, &KMyMoneyRegister::Register::transactionsSelected, q, &KGlobalLedgerView::transactionsSelected);
+    q->connect(m_register, &KMyMoneyRegister::Register::transactionsSelected, q, &KGlobalLedgerView::slotTransactionsSelected);
     q->connect(m_register, &KMyMoneyRegister::Register::transactionsSelected, q, &KGlobalLedgerView::slotUpdateMoveToAccountMenu);
     q->connect(m_register, &KMyMoneyRegister::Register::editTransaction, q, &KGlobalLedgerView::slotEditTransaction);
     q->connect(m_register, &KMyMoneyRegister::Register::emptyItemSelected, q, &KGlobalLedgerView::slotNewTransaction);
@@ -403,8 +419,8 @@ public:
     // TODO: check why the invalidate is needed here
     m_filterProxyModel->invalidate();
     m_filterProxyModel->sort((int)eAccountsModel::Column::Account);
-    m_filterProxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts() && !KMyMoneyGlobalSettings::showAllAccounts());
-    m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
+    m_filterProxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
+    m_filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
     m_accountComboBox->expandAll();
 
     if (m_currentAccount.id().isEmpty()) {
@@ -423,7 +439,7 @@ public:
 
       if (m_currentAccount.id().isEmpty()) {
         // there are no favorite accounts find any account
-        QModelIndexList list = m_filterProxyModel->match(m_filterProxyModel->index(0, 0),
+        list = m_filterProxyModel->match(m_filterProxyModel->index(0, 0),
                                Qt::DisplayRole,
                                QVariant(QString("*")),
                                -1,
@@ -464,7 +480,7 @@ public:
     m_register->clear();
 
     // setup header font
-    QFont font = KMyMoneyGlobalSettings::listHeaderFont();
+    QFont font = KMyMoneySettings::listHeaderFontEx();
     QFontMetrics fm(font);
     int height = fm.lineSpacing() + 6;
     m_register->horizontalHeader()->setMinimumHeight(height);
@@ -472,7 +488,7 @@ public:
     m_register->horizontalHeader()->setFont(font);
 
     // setup cell font
-    font = KMyMoneyGlobalSettings::listCellFont();
+    font = KMyMoneySettings::listCellFontEx();
     m_register->setFont(font);
 
     // clear the form
@@ -494,13 +510,13 @@ public:
     Q_Q(KGlobalLedgerView);
 
     // setup form visibility
-    m_formFrame->setVisible(KMyMoneyGlobalSettings::transactionForm());
+    m_formFrame->setVisible(KMyMoneySettings::transactionForm());
 
     // no account selected
 //    emit q->objectSelected(MyMoneyAccount());
     // no transaction selected
     KMyMoneyRegister::SelectedTransactions list;
-    emit q->transactionsSelected(list);
+    emit q->selectByVariant(QVariantList {QVariant::fromValue(list)}, eView::Intent::SelectRegisterTransactions);
 
     QMap<QString, bool> isSelected;
     QString focusItemId;
@@ -521,7 +537,7 @@ public:
       // and the one that has the selection anchor
       storeId(m_register->anchorItem(), anchorItemId, backUpAnchorItemId);
     } else {
-      m_registerSearchLine->searchLine()->reset();
+      m_registerSearchLine->searchLine()->clear();
     }
 
     // clear the current contents ...
@@ -565,14 +581,14 @@ public:
 
       if (isReconciliationAccount()) {
         key = "kmm-sort-reconcile";
-        sortOrder = KMyMoneyGlobalSettings::sortReconcileView();
+        sortOrder = KMyMoneySettings::sortReconcileView();
         filter.addState((int)eMyMoney::TransactionFilter::State::NotReconciled);
         filter.addState((int)eMyMoney::TransactionFilter::State::Cleared);
       } else {
-        filter.setDateFilter(KMyMoneyGlobalSettings::startDate().date(), QDate());
+        filter.setDateFilter(KMyMoneySettings::startDate().date(), QDate());
         key = "kmm-sort-std";
-        sortOrder = KMyMoneyGlobalSettings::sortNormalView();
-        if (KMyMoneyGlobalSettings::hideReconciledTransactions()
+        sortOrder = KMyMoneySettings::sortNormalView();
+        if (KMyMoneySettings::hideReconciledTransactions()
             && !m_currentAccount.isIncomeExpense()) {
           filter.addState((int)eMyMoney::TransactionFilter::State::NotReconciled);
           filter.addState((int)eMyMoney::TransactionFilter::State::Cleared);
@@ -590,7 +606,7 @@ public:
       // retrieve the list from the engine
       MyMoneyFile::instance()->transactionList(m_transactionList, filter);
 
-      emit q->statusProgress(0, m_transactionList.count());
+      emit q->slotStatusProgress(0, m_transactionList.count());
 
       // create the elements for the register
       QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
@@ -600,7 +616,7 @@ public:
         uniqueMap[(*it).first.id()]++;
         KMyMoneyRegister::Transaction* t = KMyMoneyRegister::Register::transactionFactory(m_register, (*it).first, (*it).second, uniqueMap[(*it).first.id()]);
         actBalance[t->split().accountId()] = MyMoneyMoney();
-        emit q->statusProgress(++i, 0);
+        emit q->slotStatusProgress(++i, 0);
         // if we're in reconciliation and the state is cleared, we
         // force the item to show in dimmed intensity to get a visual focus
         // on those items, that we need to work on
@@ -610,7 +626,7 @@ public:
       }
 
       // create dummy entries for the scheduled transactions if sorted by postdate
-      int period = KMyMoneyGlobalSettings::schedulePreview();
+      int period = KMyMoneySettings::schedulePreview();
       if (m_register->primarySortKey() == eWidgets::SortField::PostDate) {
         // show scheduled transactions which have a scheduled postdate
         // within the next 'period' days. In reconciliation mode, the
@@ -827,7 +843,7 @@ public:
       split.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
       // make sure to use the value specified in the option during reconciliation
       if (isReconciliationAccount())
-        split.setReconcileFlag(static_cast<eMyMoney::Split::State>(KMyMoneyGlobalSettings::defaultReconciliationState()));
+        split.setReconcileFlag(static_cast<eMyMoney::Split::State>(KMyMoneySettings::defaultReconciliationState()));
       KMyMoneyRegister::Register::transactionFactory(m_register, MyMoneyTransaction(), split, 0);
 
       m_register->updateRegister(true);
@@ -849,19 +865,19 @@ public:
       }
 
       updateSummaryLine(actBalance, clearedBalance);
-      emit q->statusProgress(-1, -1);
+      emit q->slotStatusProgress(-1, -1);
 
     } catch (const MyMoneyException &) {
       m_currentAccount = MyMoneyAccount();
       clear();
     }
 
-    m_showDetails = KMyMoneyGlobalSettings::showRegisterDetailed();
+    m_showDetails = KMyMoneySettings::showRegisterDetailed();
 
     // and tell everyone what's selected
-    emit q->objectSelected(m_currentAccount);
+    emit q->selectByObject(m_currentAccount, eView::Intent::None);
     KMyMoneyRegister::SelectedTransactions actualSelection(m_register);
-    emit q->transactionsSelected(actualSelection);
+    emit q->selectByVariant(QVariantList {QVariant::fromValue(actualSelection)}, eView::Intent::SelectRegisterTransactions);
   }
 
   void selectTransaction(const QString& id)
@@ -887,7 +903,7 @@ public:
    * @param list of transactions
    * @return false if only schedule is to be selected
    */
-  bool selectTransactions(const KMyMoneyRegister::SelectedTransactions& list)
+  bool selectTransactions(const KMyMoneyRegister::SelectedTransactions list)
   {
     Q_Q(KGlobalLedgerView);
     // list can either contain a list of transactions or a single selected scheduled transaction
@@ -921,9 +937,9 @@ public:
             try {
               const auto& t = m_selectedTransactions[0].transaction();
               // search the first non-income/non-expense accunt and use it for the 'goto account'
-              const auto& sp = m_selectedTransactions[0].split();
+              const auto& selectedTransactionSplit = m_selectedTransactions[0].split();
               foreach (const auto split, t.splits()) {
-                  if (split.id() != sp.id()) {
+                  if (split.id() != selectedTransactionSplit.id()) {
                       auto acc = MyMoneyFile::instance()->account(split.accountId());
                       if (!acc.isIncomeExpense()) {
                           // for stock accounts we show the portfolio account
@@ -947,7 +963,7 @@ public:
         ret = false;
       }
 
-    emit q->objectSelected(sch);
+    emit q->selectByObject(sch, eView::Intent::None);
 
     // make sure, we show some neutral menu entry if we don't have an object
     if (m_payeeGoto.isEmpty())
@@ -1093,24 +1109,26 @@ public:
 
   bool canProcessTransactions(const KMyMoneyRegister::SelectedTransactions& list, QString& tooltip) const
   {
-    MyMoneyAccount acc;
-    QString closedAccount;
     if (m_register->focusItem() == 0)
       return false;
 
     bool rc = true;
-    if (list.warnLevel() == 3) {  //Closed account somewhere
-      KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
-      for (it_t = list.begin(); rc && it_t != list.end(); ++it_t) {
-        QList<MyMoneySplit> splitList = (*it_t).transaction().splits();
-        QString id = splitList.first().accountId();
-        acc = MyMoneyFile::instance()->account(id);
-        if (!acc.isClosed()) {  //wrong split, try other
-          id = splitList.last().accountId();
-          acc = MyMoneyFile::instance()->account(id);
+    if (list.warnLevel() == KMyMoneyRegister::SelectedTransaction::OneAccountClosed) {
+      // scan all splits for the first closed account
+      QString closedAccount;
+      foreach(const auto selectedTransaction, list) {
+        foreach(const auto split, selectedTransaction.transaction().splits()) {
+          const auto id = split.accountId();
+          const auto acc = MyMoneyFile::instance()->account(id);
+          if (acc.isClosed()) {
+            closedAccount = acc.name();
+            // we're done
+            rc = false;
+            break;
+          }
         }
-        closedAccount = acc.name();
-        break;
+        if(!rc)
+          break;
       }
       tooltip = i18n("Cannot process transactions in account %1, which is closed.", closedAccount);
       showTooltip(tooltip);
@@ -1160,7 +1178,7 @@ public:
     KMyMoneyRegister::SelectedTransactions::iterator it_t;
     int cnt = list.count();
     int i = 0;
-    emit q->statusProgress(0, cnt);
+    emit q->slotStatusProgress(0, cnt);
     MyMoneyFileTransaction ft;
     const auto file = MyMoneyFile::instance();
     try {
@@ -1195,13 +1213,13 @@ public:
         file->modifyAccount(acc);
         list.erase(it_t);
         it_t = list.begin();
-        emit q->statusProgress(i++, 0);
+        emit q->slotStatusProgress(i++, 0);
       }
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(q, i18n("Error"), i18n("Unable to delete transaction(s): %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(q, i18n("Unable to delete transaction(s)"), e.what());
     }
-    emit q->statusProgress(-1, -1);
+    emit q->slotStatusProgress(-1, -1);
   }
 
   void deleteTransactionEditor()
@@ -1278,9 +1296,9 @@ public:
       MyMoneyFileTransaction ft;
       try {
         if (startMatchTransaction.id().isEmpty())
-          throw MYMONEYEXCEPTION(i18n("No manually entered transaction selected for matching"));
+          throw MYMONEYEXCEPTION(QString::fromLatin1("No manually entered transaction selected for matching"));
         if (endMatchTransaction.id().isEmpty())
-          throw MYMONEYEXCEPTION(i18n("No imported transaction selected for matching"));
+          throw MYMONEYEXCEPTION(QString::fromLatin1("No imported transaction selected for matching"));
 
         TransactionMatcher matcher(m_currentAccount);
         matcher.match(startMatchTransaction, startSplit, endMatchTransaction, endSplit, true);
@@ -1308,7 +1326,7 @@ public:
     KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
     auto cnt = list.count();
     auto i = 0;
-    emit q->statusProgress(0, cnt);
+    emit q->slotStatusProgress(0, cnt);
     MyMoneyFileTransaction ft;
     try {
       for (it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
@@ -1356,12 +1374,12 @@ public:
           t.modifySplit(sp);
           MyMoneyFile::instance()->modifyTransaction(t);
         }
-        emit q->statusProgress(i++, 0);
+        emit q->slotStatusProgress(i++, 0);
       }
-      emit q->statusProgress(-1, -1);
+      emit q->slotStatusProgress(-1, -1);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(q, i18n("Error"), i18n("Unable to modify transaction: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(q, i18n("Unable to modify transaction"), e.what());
     }
   }
 
@@ -1447,7 +1465,7 @@ public:
 
 //    KMSTATUS(i18n("Running automatic reconciliation"));
     auto progressBarIndex = 0;
-    q->statusProgress(progressBarIndex, NR_OF_STEPS_LIMIT / PROGRESSBAR_STEPS);
+    q->slotStatusProgress(progressBarIndex, NR_OF_STEPS_LIMIT / PROGRESSBAR_STEPS);
 
     // optimize the most common case - all transactions should be cleared
     QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplitResult(result);
@@ -1460,7 +1478,7 @@ public:
       result = transactions;
       return result;
     }
-    q->statusProgress(progressBarIndex++, 0);
+    q->slotStatusProgress(progressBarIndex++, 0);
     // only one transaction is uncleared
     itTransactionSplitResult.toFront();
     int index = 0;
@@ -1472,7 +1490,7 @@ public:
       }
       index++;
     }
-    q->statusProgress(progressBarIndex++, 0);
+    q->slotStatusProgress(progressBarIndex++, 0);
 
     // more than one transaction is uncleared - apply the algorithm
     result.clear();
@@ -1486,9 +1504,9 @@ public:
     QMap<MyMoneyMoney, QList<QPair<QString, QString> > > sumToComponentsMap;
 
     // compute the possible matches
-    QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplit(transactions);
-    while (itTransactionSplit.hasNext()) {
-      const QPair<MyMoneyTransaction, MyMoneySplit> &transactionSplit = itTransactionSplit.next();
+    QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > it_ts(transactions);
+    while (it_ts.hasNext()) {
+      const QPair<MyMoneyTransaction, MyMoneySplit> &transactionSplit = it_ts.next();
       QListIterator<MyMoneyMoney> itSum(sumList);
       QList<MyMoneyMoney> tempList;
       while (itSum.hasNext()) {
@@ -1505,7 +1523,7 @@ public:
         sumToComponentsMap[transactionSplit.second.shares() + sum] = splitIds;
         int size = sumToComponentsMap.size();
         if (size % PROGRESSBAR_STEPS == 0) {
-          q->statusProgress(progressBarIndex++, 0);
+          q->slotStatusProgress(progressBarIndex++, 0);
         }
         if (size > NR_OF_STEPS_LIMIT) {
           return result; // it's taking too much resources abort the algorithm
@@ -1528,7 +1546,7 @@ public:
       }
     }
 
-    q->statusProgress(NR_OF_STEPS_LIMIT / PROGRESSBAR_STEPS, 0);
+    q->slotStatusProgress(NR_OF_STEPS_LIMIT / PROGRESSBAR_STEPS, 0);
     if (sumToComponentsMap.contains(amount)) {
       QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplit(transactions);
       while (itTransactionSplit.hasNext()) {
@@ -1545,7 +1563,7 @@ public:
            qPrintable(MyMoneyUtils::formatMoney(amount, security)), sumToComponentsMap.size(), transactions.size());
   #endif
 
-    q->statusProgress(-1, -1);
+    q->slotStatusProgress(-1, -1);
     return result;
   }
 
@@ -1627,6 +1645,7 @@ public:
 
   // Reconciliation dialog
   KEndingBalanceDlg*    m_endingBalanceDlg;
+  KFindTransactionDlg*  m_searchDlg;
 };
 
 #endif

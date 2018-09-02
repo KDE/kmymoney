@@ -1,35 +1,28 @@
 /*
-  This file is part of KMyMoney, A Personal Finance Manager by KDE
-  Copyright (C) 2013 Christian Dávid <christian-david@web.de>
-
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ * Copyright 2013-2015  Christian Dávid <christian-david@web.de>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "onlinejob.h"
 #include "onlinejob_p.h"
-
-#include <QDomDocument>
-#include <QDomElement>
 
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 
 #include "tasks/onlinetask.h"
 #include "onlinejobadministration.h"
-#include "mymoneystoragenames.h"
-
-using namespace MyMoneyStorageNodes;
 
 onlineJob::onlineJob() :
   MyMoneyObject(*new onlineJobPrivate),
@@ -38,31 +31,37 @@ onlineJob::onlineJob() :
   Q_D(onlineJob);
   d->m_jobSend = QDateTime();
   d->m_jobBankAnswerDate = QDateTime();
-  d->m_jobBankAnswerState = noBankAnswer;
+  d->m_jobBankAnswerState = eMyMoney::OnlineJob::sendingState::noBankAnswer;
   d->m_messageList = QList<onlineJobMessage>();
   d->m_locked = false;
 }
 
-onlineJob::onlineJob(onlineTask* task, const QString &id) :
+onlineJob::onlineJob(const QString &id) :
   MyMoneyObject(*new onlineJobPrivate, id),
-  m_task(task)
+  m_task(nullptr)
+{
+}
+
+onlineJob::onlineJob(onlineTask* onlinetask, const QString &id) :
+  MyMoneyObject(*new onlineJobPrivate, id),
+  m_task(onlinetask)
 {
   Q_D(onlineJob);
   d->m_jobSend = QDateTime();
   d->m_jobBankAnswerDate = QDateTime();
-  d->m_jobBankAnswerState = noBankAnswer;
+  d->m_jobBankAnswerState = eMyMoney::OnlineJob::sendingState::noBankAnswer;
   d->m_messageList = QList<onlineJobMessage>();
   d->m_locked = false;
 }
 
-onlineJob::onlineJob(onlineTask* task) :
+onlineJob::onlineJob(onlineTask* onlinetask) :
     MyMoneyObject(*new onlineJobPrivate, QString()),
-    m_task(task)
+    m_task(onlinetask)
 {
   Q_D(onlineJob);
   d->m_jobSend = QDateTime();
   d->m_jobBankAnswerDate = QDateTime();
-  d->m_jobBankAnswerState = noBankAnswer;
+  d->m_jobBankAnswerState = eMyMoney::OnlineJob::sendingState::noBankAnswer;
   d->m_messageList = QList<onlineJobMessage>();
   d->m_locked = false;
 }
@@ -81,34 +80,10 @@ onlineJob::onlineJob(const QString &id, const onlineJob& other) :
   Q_D(onlineJob);
   d->m_jobSend = QDateTime();
   d->m_jobBankAnswerDate = QDateTime();
-  d->m_jobBankAnswerState = noBankAnswer;
+  d->m_jobBankAnswerState = eMyMoney::OnlineJob::sendingState::noBankAnswer;
   d->m_messageList = QList<onlineJobMessage>();
   d->m_locked = false;
   copyPointerFromOtherJob(other);
-}
-
-onlineJob::onlineJob(const QDomElement& element) :
-  MyMoneyObject(*new onlineJobPrivate, element, true)
-{
-  Q_D(onlineJob);
-  d->m_messageList = QList<onlineJobMessage>();
-  d->m_locked = false;
-  d->m_jobSend = QDateTime::fromString(element.attribute(d->getAttrName(OnlineJob::Attribute::Send)), Qt::ISODate);
-  d->m_jobBankAnswerDate = QDateTime::fromString(element.attribute(d->getAttrName(OnlineJob::Attribute::BankAnswerDate)), Qt::ISODate);
-  QString state = element.attribute(d->getAttrName(OnlineJob::Attribute::BankAnswerState));
-  if (state == d->getAttrName(OnlineJob::Attribute::AbortedByUser))
-    d->m_jobBankAnswerState = abortedByUser;
-  else if (state == d->getAttrName(OnlineJob::Attribute::AcceptedByBank))
-    d->m_jobBankAnswerState = acceptedByBank;
-  else if (state == d->getAttrName(OnlineJob::Attribute::RejectedByBank))
-    d->m_jobBankAnswerState = rejectedByBank;
-  else if (state == d->getAttrName(OnlineJob::Attribute::SendingError))
-    d->m_jobBankAnswerState = sendingError;
-  else
-    d->m_jobBankAnswerState = noBankAnswer;
-
-  QDomElement taskElem = element.firstChildElement(d->getElName(OnlineJob::Element::OnlineTask));
-  m_task = onlineJobAdministration::instance()->createOnlineTaskByXml(taskElem.attribute(d->getAttrName(OnlineJob::Attribute::IID)), taskElem);
 }
 
 void onlineJob::copyPointerFromOtherJob(const onlineJob &other)
@@ -123,7 +98,7 @@ void onlineJob::reset()
   clearId();
   d->m_jobSend = QDateTime();
   d->m_jobBankAnswerDate = QDateTime();
-  d->m_jobBankAnswerState = noBankAnswer;
+  d->m_jobBankAnswerState = eMyMoney::OnlineJob::sendingState::noBankAnswer;
   d->m_locked = false;
 }
 
@@ -132,17 +107,22 @@ onlineJob::~onlineJob()
   delete m_task;
 }
 
+void onlineJob::setTask(onlineTask *task)
+{
+  m_task = task;
+}
+
 onlineTask* onlineJob::task()
 {
   if (m_task == 0)
-    throw emptyTask(__FILE__, __LINE__);
+    throw EMPTYTASKEXCEPTION;
   return m_task;
 }
 
 const onlineTask* onlineJob::task() const
 {
   if (m_task == 0)
-    throw emptyTask(__FILE__, __LINE__);
+    throw EMPTYTASKEXCEPTION;
   return m_task;
 }
 
@@ -195,7 +175,7 @@ bool onlineJob::isLocked() const
 bool onlineJob::isEditable() const
 {
   Q_D(const onlineJob);
-  return (!isLocked() && sendDate().isNull() && (d->m_jobBankAnswerState == noBankAnswer || d->m_jobBankAnswerState == sendingError));
+  return (!isLocked() && sendDate().isNull() && (d->m_jobBankAnswerState == eMyMoney::OnlineJob::sendingState::noBankAnswer || d->m_jobBankAnswerState == eMyMoney::OnlineJob::sendingState::sendingError));
 }
 
 bool onlineJob::isNull() const
@@ -214,16 +194,16 @@ void onlineJob::setJobSend()
   setJobSend(QDateTime::currentDateTime());
 }
 
-void onlineJob::setBankAnswer(const onlineJob::sendingState sendingState, const QDateTime &dateTime)
+void onlineJob::setBankAnswer(const eMyMoney::OnlineJob::sendingState state, const QDateTime &dateTime)
 {
   Q_D(onlineJob);
-  d->m_jobBankAnswerState = sendingState;
+  d->m_jobBankAnswerState = state;
   d->m_jobBankAnswerDate = dateTime;
 }
 
-void onlineJob::setBankAnswer(const onlineJob::sendingState sendingState)
+void onlineJob::setBankAnswer(const eMyMoney::OnlineJob::sendingState state)
 {
-  setBankAnswer(sendingState, QDateTime::currentDateTime());
+  setBankAnswer(state, QDateTime::currentDateTime());
 }
 
 QDateTime onlineJob::bankAnswerDate() const
@@ -232,7 +212,7 @@ QDateTime onlineJob::bankAnswerDate() const
   return d->m_jobBankAnswerDate;
 }
 
-onlineJob::sendingState onlineJob::bankAnswerState() const
+eMyMoney::OnlineJob::sendingState onlineJob::bankAnswerState() const
 {
   Q_D(const onlineJob);
   return d->m_jobBankAnswerState;
@@ -269,37 +249,10 @@ QList<onlineJobMessage> onlineJob::jobMessageList() const
   return d->m_messageList;
 }
 
-/** @todo give life */
-void onlineJob::writeXML(QDomDocument &document, QDomElement &parent) const
+void onlineJob::clearJobMessageList()
 {
-  auto el = document.createElement(nodeNames[nnOnlineJob]);
-
-  Q_D(const onlineJob);
-  d->writeBaseXML(document, el);
-
-  if (!d->m_jobSend.isNull())
-    el.setAttribute(d->getAttrName(OnlineJob::Attribute::Send), d->m_jobSend.toString(Qt::ISODate));
-  if (!d->m_jobBankAnswerDate.isNull())
-    el.setAttribute(d->getAttrName(OnlineJob::Attribute::BankAnswerDate), d->m_jobBankAnswerDate.toString(Qt::ISODate));
-
-  switch (d->m_jobBankAnswerState) {
-    case abortedByUser: el.setAttribute(d->getAttrName(OnlineJob::Attribute::BankAnswerState), d->getAttrName(OnlineJob::Attribute::AbortedByUser)); break;
-    case acceptedByBank: el.setAttribute(d->getAttrName(OnlineJob::Attribute::BankAnswerState), d->getAttrName(OnlineJob::Attribute::AcceptedByBank)); break;
-    case rejectedByBank: el.setAttribute(d->getAttrName(OnlineJob::Attribute::BankAnswerState), d->getAttrName(OnlineJob::Attribute::RejectedByBank)); break;
-    case sendingError: el.setAttribute(d->getAttrName(OnlineJob::Attribute::BankAnswerState), d->getAttrName(OnlineJob::Attribute::SendingError)); break;
-    case noBankAnswer:
-    default: void();
-  }
-
-  QDomElement taskEl = document.createElement(d->getElName(OnlineJob::Element::OnlineTask));
-  taskEl.setAttribute(d->getAttrName(OnlineJob::Attribute::IID), taskIid());
-  try {
-    task()->writeXML(document, taskEl); // throws execption if there is no task
-    el.appendChild(taskEl); // only append child if there is something to append
-  } catch (const emptyTask&) {
-  }
-
-  parent.appendChild(el);
+  Q_D(onlineJob);
+  d->m_messageList = QList<onlineJobMessage>();
 }
 
 bool onlineJob::isValid() const

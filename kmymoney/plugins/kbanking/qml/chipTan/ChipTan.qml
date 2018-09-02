@@ -28,14 +28,14 @@ Rectangle {
     id: chipTan
 
     color: "#00FFFFFF"
-    
+
     property string transferData: ""
-    
+
     function setFlickerFieldWidth( width )
     {
       chipTanFlickerField.userWidth = width;
     }
-    
+
     function flickerFieldWidth()
     {
       return chipTanFlickerField.width
@@ -45,30 +45,30 @@ Rectangle {
     {
       chipTanFlickerField.userWidth = chipTanFlickerField.width+10
     }
-    
+
     function reduceFlickerField()
     {
       chipTanFlickerField.userWidth = chipTanFlickerField.width-10
     }
-    
+
     function accelerateTransmission()
     {
       chipTanFlickerField.userClockSetting =  chipTanFlickerField.clockSetting - 20
     }
-    
+
     function decelerateTransmission()
     {
       chipTanFlickerField.userClockSetting =  chipTanFlickerField.clockSetting + 20
     }
-    
+
     function setFlickerClockSetting( clockSetting )
     {
       chipTanFlickerField.userClockSetting = clockSetting;
     }
-    
+
     signal flickerFieldWidthChanged( int width );
     signal flickerFieldClockSettingChanged( int clockSetting );
-    
+
     /*
     // Toolbar
     Rectangle {
@@ -138,7 +138,7 @@ Rectangle {
         property int userWidth: parent.width
         width: Math.max( userWidth, minimumWidth )
         onWidthChanged: parent.flickerFieldWidthChanged(width);
-        
+
         property int userClockSetting: 100
         clockSetting: Math.min(Math.max(10, userClockSetting), 2000)
         onClockSettingChanged: parent.flickerFieldClockSettingChanged(clockSetting);
@@ -147,7 +147,7 @@ Rectangle {
             id: resizeMouseArea
             anchors.fill: parent
         }
-        
+
         states:
             State {
                 name: "resizeWidth"

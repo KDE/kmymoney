@@ -24,6 +24,7 @@
 #include <QPainter>
 #include <QResizeEvent>
 #include <QDate>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -279,10 +280,10 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
     // the editor in that single cell
     closeEditor(indexWidget(index), QAbstractItemDelegate::NoHint);
 
-    bool haveEditorInOtherView = false;
+//    bool haveEditorInOtherView = false;
     /// @todo Here we need to make sure that only a single editor can be started at a time
 
-    if(!haveEditorInOtherView) {
+//    if(!haveEditorInOtherView) {
       emit aboutToStartEdit();
       setSpan(index.row(), 0, 1, horizontalHeader()->count());
       QModelIndex editIndex = model()->index(index.row(), 0);
@@ -292,9 +293,9 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
       // and is completely visible
       resizeRowToContents(index.row());
       QMetaObject::invokeMethod(this, "ensureCurrentItemIsVisible", Qt::QueuedConnection);
-    } else {
-      rc = false;
-    }
+//    } else {
+//      rc = false;
+//    }
   }
 
   return rc;
@@ -323,8 +324,9 @@ void LedgerView::mousePressEvent(QMouseEvent* event)
 
 void LedgerView::mouseMoveEvent(QMouseEvent* event)
 {
+  Q_UNUSED(event);
   // qDebug() << "mouseMoveEvent";
-  QTableView::mouseMoveEvent(event);
+  // QTableView::mouseMoveEvent(event);
 }
 
 void LedgerView::mouseDoubleClickEvent(QMouseEvent* event)

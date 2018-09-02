@@ -1,26 +1,21 @@
-/***************************************************************************
-                          kcurrencyeditdlg.cpp  -  description
-                             -------------------
-    begin                : Wed Mar 24 2004
-    copyright            : (C) 2000-2004 by Michael Edwardes
-    email                : mte@users.sourceforge.net
-                           Javier Campos Morales <javi_c@users.sourceforge.net>
-                           Felix Rodriguez <frodriguez@users.sourceforge.net>
-                           John C <thetacoturtle@users.sourceforge.net>
-                           Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           Kevin Tambascio <ktambascio@users.sourceforge.net>
-                           Alvaro Soliverez <asoliverez@gmail.com>
-                           (C) 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2004-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2009-2010  Alvaro Soliverez <asoliverez@gmail.com>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "kcurrencyeditdlg.h"
 
@@ -88,7 +83,7 @@ public:
   explicit KCurrencyEditDelegate(QObject *parent = 0);
 
 protected:
-  QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+  QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const final override;
 };
 
 KCurrencyEditDelegate::KCurrencyEditDelegate(QObject* parent): QStyledItemDelegate(parent)
@@ -108,10 +103,13 @@ class KCurrencyEditDlgPrivate
   Q_DECLARE_PUBLIC(KCurrencyEditDlg)
 
 public:
-  explicit KCurrencyEditDlgPrivate(KCurrencyEditDlg *qq)
-    : q_ptr(qq)
-    , ui(new Ui::KCurrencyEditDlg)
-    , m_inLoading(false)
+  explicit KCurrencyEditDlgPrivate(KCurrencyEditDlg *qq) :
+    q_ptr(qq),
+    ui(new Ui::KCurrencyEditDlg),
+    m_availableCurrencyDlg(nullptr),
+    m_currencyEditorDlg(nullptr),
+    m_searchWidget(nullptr),
+    m_inLoading(false)
   {
   }
 
@@ -161,7 +159,7 @@ public:
           MyMoneyFile::instance()->setBaseCurrency(cur);
           ft.commit();
         } catch (const MyMoneyException &e) {
-          KMessageBox::sorry(q, i18n("Cannot set %1 as base currency: %2", cur.name(), e.what()), i18n("Set base currency"));
+          KMessageBox::sorry(q, i18n("Cannot set %1 as base currency: %2", cur.name(), QString::fromLatin1(e.what())), i18n("Set base currency"));
         }
       }
     }
@@ -182,11 +180,11 @@ public:
           m_currentCurrency = currency;
           ft.commit();
         } catch (const MyMoneyException &e) {
-          KMessageBox::sorry(q, i18n("Cannot update currency. %1", e.what()), i18n("Update currency"));
+          KMessageBox::sorry(q, i18n("Cannot update currency. %1", QString::fromLatin1(e.what())), i18n("Update currency"));
         }
       }
     } catch (const MyMoneyException &e) {
-      KMessageBox::sorry(q, i18n("Cannot update currency. %1", e.what()), i18n("Update currency"));
+      KMessageBox::sorry(q, i18n("Cannot update currency. %1", QString::fromLatin1(e.what())), i18n("Update currency"));
     }
   }
 
@@ -298,7 +296,7 @@ void KCurrencyEditDlg::slotLoadCurrencies()
   try {
     baseCurrency = MyMoneyFile::instance()->baseCurrency().id();
   } catch (const MyMoneyException &e) {
-    qDebug("%s", qPrintable(e.what()));
+    qDebug("%s", e.what());
   }
 
   // construct a transparent 16x16 pixmap
@@ -554,7 +552,7 @@ void KCurrencyEditDlg::slotEditCurrency()
       file->modifyCurrency(currency);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      qDebug("%s", qPrintable(e.what()));
+      qDebug("%s", e.what());
     }
   }
   delete d->m_currencyEditorDlg;
@@ -571,7 +569,7 @@ void KCurrencyEditDlg::slotNewCurrency()
       MyMoneyFile::instance()->addCurrency(currency);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::sorry(this, i18n("Cannot create new currency. %1", e.what()), i18n("New currency"));
+      KMessageBox::sorry(this, i18n("Cannot create new currency. %1", QString::fromLatin1(e.what())), i18n("New currency"));
     }
     slotSelectCurrency(id);
   }
@@ -596,7 +594,7 @@ void KCurrencyEditDlg::slotDeleteCurrency()
       MyMoneyFile::instance()->removeCurrency(d->m_currentCurrency);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::sorry(this, i18n("Cannot delete currency %1. %2", d->m_currentCurrency.name(), e.what()), i18n("Delete currency"));
+      KMessageBox::sorry(this, i18n("Cannot delete currency %1. %2", d->m_currentCurrency.name(), QString::fromLatin1(e.what())), i18n("Delete currency"));
     }
   }
 }
@@ -611,7 +609,7 @@ void KCurrencyEditDlg::slotSetBaseCurrency()
         MyMoneyFile::instance()->setBaseCurrency(d->m_currentCurrency);
         ft.commit();
       } catch (const MyMoneyException &e) {
-        KMessageBox::sorry(this, i18n("Cannot set %1 as base currency: %2", d->m_currentCurrency.name(), e.what()), i18n("Set base currency"));
+        KMessageBox::sorry(this, i18n("Cannot set %1 as base currency: %2", d->m_currentCurrency.name(), QString::fromLatin1(e.what())), i18n("Set base currency"));
       }
     }
   }

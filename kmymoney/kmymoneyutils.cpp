@@ -38,6 +38,7 @@
 #include <QBitArray>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+#include <QTemporaryFile>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -49,6 +50,7 @@
 #include <KMessageBox>
 #include <KStandardGuiItem>
 #include <KIO/StatJob>
+#include <KIO/StoredTransferJob>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -66,10 +68,11 @@
 #include "mymoneyforecast.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "icons.h"
 #include "storageenums.h"
 #include "mymoneyenums.h"
+#include "kmymoneyplugin.h"
 
 using namespace Icons;
 
@@ -176,7 +179,7 @@ bool KMyMoneyUtils::appendCorrectFileExt(QString& str, const QString& strExtToUs
         rc = true;
       }
     } else {
-      str.append(".");
+      str.append(QLatin1Char('.'));
       str.append(strExtToUse);
       rc = true;
     }
@@ -204,9 +207,9 @@ QString KMyMoneyUtils::variableCSS()
   QString css;
   css += "<style type=\"text/css\">\n<!--\n";
   css += QString(".row-even, .item0 { background-color: %1; color: %2 }\n")
-         .arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListBackground1).name()).arg(tcolor.name());
+         .arg(KMyMoneySettings::schemeColor(SchemeColor::ListBackground1).name()).arg(tcolor.name());
   css += QString(".row-odd, .item1  { background-color: %1; color: %2 }\n")
-         .arg(KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListBackground2).name()).arg(tcolor.name());
+         .arg(KMyMoneySettings::schemeColor(SchemeColor::ListBackground2).name()).arg(tcolor.name());
   css += QString("a { color: %1 }\n").arg(link.name());
   css += "-->\n</style>\n";
   return css;
@@ -317,7 +320,7 @@ void KMyMoneyUtils::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoneyTr
   try {
     MyMoneyForecast::calculateAutoLoan(schedule, transaction, balances);
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedError(0, i18n("Unable to load schedule details"), e.what());
+    KMessageBox::detailedError(0, i18n("Unable to load schedule details"), QString::fromLatin1(e.what()));
   }
 }
 
@@ -468,7 +471,7 @@ MyMoneyTransaction KMyMoneyUtils::scheduledTransaction(const MyMoneySchedule& sc
       calculateAutoLoan(schedule, t, QMap<QString, MyMoneyMoney>());
     }
   } catch (const MyMoneyException &e) {
-    qDebug("Unable to load schedule details for '%s' during transaction match: %s", qPrintable(schedule.name()), qPrintable(e.what()));
+    qDebug("Unable to load schedule details for '%s' during transaction match: %s", qPrintable(schedule.name()), e.what());
   }
 
   t.clearId();
@@ -528,19 +531,19 @@ void KMyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, co
   }
 
   // determine transaction type
-  if (split.action() == MyMoneySplit::ActionAddShares) {
+  if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::AddShares)) {
     transactionType = (!split.shares().isNegative()) ? eMyMoney::Split::InvestmentTransactionType::AddShares : eMyMoney::Split::InvestmentTransactionType::RemoveShares;
-  } else if (split.action() == MyMoneySplit::ActionBuyShares) {
+  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) {
     transactionType = (!split.value().isNegative()) ? eMyMoney::Split::InvestmentTransactionType::BuyShares : eMyMoney::Split::InvestmentTransactionType::SellShares;
-  } else if (split.action() == MyMoneySplit::ActionDividend) {
+  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend)) {
     transactionType = eMyMoney::Split::InvestmentTransactionType::Dividend;
-  } else if (split.action() == MyMoneySplit::ActionReinvestDividend) {
+  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend)) {
     transactionType = eMyMoney::Split::InvestmentTransactionType::ReinvestDividend;
-  } else if (split.action() == MyMoneySplit::ActionYield) {
+  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Yield)) {
     transactionType = eMyMoney::Split::InvestmentTransactionType::Yield;
-  } else if (split.action() == MyMoneySplit::ActionSplitShares) {
+  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares)) {
     transactionType = eMyMoney::Split::InvestmentTransactionType::SplitShares;
-  } else if (split.action() == MyMoneySplit::ActionInterestIncome) {
+  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::InterestIncome)) {
     transactionType = eMyMoney::Split::InvestmentTransactionType::InterestIncome;
   } else
     transactionType = eMyMoney::Split::InvestmentTransactionType::BuyShares;
@@ -654,6 +657,28 @@ bool KMyMoneyUtils::fileExists(const QUrl &url)
     return fileExists;
 }
 
+QString KMyMoneyUtils::downloadFile(const QUrl &url)
+{
+  QString filename;
+  KIO::StoredTransferJob *transferjob = KIO::storedGet (url);
+//  KJobWidgets::setWindow(transferjob, this);
+  if (! transferjob->exec()) {
+      KMessageBox::detailedError(nullptr,
+                               i18n("Error while loading file '%1'.", url.url()),
+                               transferjob->errorString(),
+                               i18n("File access error"));
+      return filename;
+  }
+
+  QTemporaryFile file;
+  file.setAutoRemove(false);
+  file.open();
+  file.write(transferjob->data());
+  filename = file.fileName();
+  file.close();
+  return filename;
+}
+
 bool KMyMoneyUtils::newPayee(const QString& newnameBase, QString& id)
 {
   bool doit = true;
@@ -694,8 +719,7 @@ bool KMyMoneyUtils::newPayee(const QString& newnameBase, QString& id)
       id = p.id();
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(nullptr, i18n("Unable to add payee"),
-                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(nullptr, i18n("Unable to add payee"), QString::fromLatin1(e.what()));
       doit = false;
     }
   }
@@ -742,8 +766,7 @@ void KMyMoneyUtils::newTag(const QString& newnameBase, QString& id)
       id = ta.id();
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(nullptr, i18n("Unable to add tag"),
-                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(nullptr, i18n("Unable to add tag"), QString::fromLatin1(e.what()));
     }
   }
 }
@@ -759,11 +782,70 @@ void KMyMoneyUtils::newInstitution(MyMoneyInstitution& institution)
     ft.commit();
 
   } catch (const MyMoneyException &e) {
-    KMessageBox::information(nullptr, i18n("Cannot add institution: %1", e.what()));
+    KMessageBox::information(nullptr, i18n("Cannot add institution: %1", QString::fromLatin1(e.what())));
   }
 }
 
 QDebug KMyMoneyUtils::debug()
 {
   return qDebug() << QDateTime::currentDateTime().toString(QStringLiteral("HH:mm:ss.zzz"));
+}
+
+MyMoneyForecast KMyMoneyUtils::forecast()
+{
+  MyMoneyForecast forecast;
+
+  // override object defaults with those of the application
+  forecast.setForecastCycles(KMyMoneySettings::forecastCycles());
+  forecast.setAccountsCycle(KMyMoneySettings::forecastAccountCycle());
+  forecast.setHistoryStartDate(QDate::currentDate().addDays(-forecast.forecastCycles()*forecast.accountsCycle()));
+  forecast.setHistoryEndDate(QDate::currentDate().addDays(-1));
+  forecast.setForecastDays(KMyMoneySettings::forecastDays());
+  forecast.setBeginForecastDay(KMyMoneySettings::beginForecastDay());
+  forecast.setForecastMethod(KMyMoneySettings::forecastMethod());
+  forecast.setHistoryMethod(KMyMoneySettings::historyMethod());
+  forecast.setIncludeFutureTransactions(KMyMoneySettings::includeFutureTransactions());
+  forecast.setIncludeScheduledTransactions(KMyMoneySettings::includeScheduledTransactions());
+
+  return forecast;
+}
+
+bool KMyMoneyUtils::canUpdateAllAccounts()
+{
+  const auto file = MyMoneyFile::instance();
+  auto rc = false;
+  if (!file->storageAttached())
+    return rc;
+
+  QList<MyMoneyAccount> accList;
+  file->accountList(accList);
+  QList<MyMoneyAccount>::const_iterator it_a;
+  auto it_p = pPlugins.online.constEnd();
+  for (it_a = accList.constBegin(); (it_p == pPlugins.online.constEnd()) && (it_a != accList.constEnd()); ++it_a) {
+    if ((*it_a).hasOnlineMapping()) {
+      // check if provider is available
+      it_p = pPlugins.online.constFind((*it_a).onlineBankingSettings().value("provider").toLower());
+      if (it_p != pPlugins.online.constEnd()) {
+        QStringList protocols;
+        (*it_p)->protocols(protocols);
+        if (!protocols.isEmpty()) {
+          rc = true;
+          break;
+        }
+      }
+    }
+  }
+  return rc;
+}
+
+void KMyMoneyUtils::showStatementImportResult(const QStringList& resultMessages, uint statementCount)
+{
+  KMessageBox::informationList(nullptr,
+                                i18np("One statement has been processed with the following results:",
+                                      "%1 statements have been processed with the following results:",
+                                      statementCount),
+                                !resultMessages.isEmpty() ?
+                                    resultMessages :
+                                    QStringList { i18np("No new transaction has been imported.", "No new transactions have been imported.", statementCount) },
+                                i18n("Statement import statistics"));
 }

@@ -1,20 +1,20 @@
-/***************************************************************************
-                             groupmarkers.cpp  -  description
-                             -------------------
-    begin                : Fri Mar 10 2006
-    copyright            : (C) 2006 by Thomas Baumgart
-    email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2006-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "groupmarkers.h"
 
@@ -179,12 +179,14 @@ namespace KMyMoneyRegister
   {
   public:
     RegisterPrivate() :
-      m_selectAnchor(0),
-      m_focusItem(0),
-      m_firstItem(0),
-      m_lastItem(0),
-      m_firstErroneous(0),
-      m_lastErroneous(0),
+      m_selectAnchor(nullptr),
+      m_focusItem(nullptr),
+      m_ensureVisibleItem(nullptr),
+      m_firstItem(nullptr),
+      m_lastItem(nullptr),
+      m_firstErroneous(nullptr),
+      m_lastErroneous(nullptr),
+      m_markErroneousTransactions(0),
       m_rowHeightHint(0),
       m_ledgerLensForced(false),
       m_selectionMode(QTableWidget::MultiSelection),
@@ -195,6 +197,7 @@ namespace KMyMoneyRegister
       m_usedWithEditor(false),
       m_mouseButton(Qt::MouseButtons(Qt::NoButton)),
       m_modifiers(Qt::KeyboardModifiers(Qt::NoModifier)),
+      m_lastCol(eTransaction::Column::Account),
       m_detailsColumnType(eRegister::DetailColumn::PayeeFirst)
     {
     }

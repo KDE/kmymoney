@@ -115,8 +115,6 @@ public:
   bool mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& settings) override;
   bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts) override;
 
-  void injectExternalSettings(KMyMoneySettings* p) override;
-
 protected Q_SLOTS:
   void slotImportFile();
   void slotImportFile(const QString& url);
@@ -134,8 +132,8 @@ protected:
   const QStringList& warnings() const;
   const QStringList& errors() const;
 
-  bool storeStatements(QList<MyMoneyStatement>& statements);
-  bool importStatement(const MyMoneyStatement& s);
+  bool storeStatements(const QList<MyMoneyStatement> &statements);
+  QStringList importStatement(const MyMoneyStatement &s);
 
 
   static int ofxTransactionCallback(struct OfxTransactionData, void*);

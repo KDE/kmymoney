@@ -131,7 +131,7 @@ public:
     return m_account;
   };
 
-  void setProgressCallback(void(*callback)(int, int, const QString&));
+  void setProgressCallback(void(*callback)(qint64, qint64, const QString&));
 
 private:
   /**
@@ -140,7 +140,7 @@ private:
     *
     * For a parameter description see KMyMoneyView::progressCallback().
     */
-  void signalProgress(int current, int total, const QString& = "");
+  void signalProgress(qint64 current, qint64 total, const QString& = "");
 
   /**
     * This method scans a transaction contained in
@@ -285,7 +285,7 @@ private:
   void createOpeningBalance(eMyMoney::Account::Type accType = eMyMoney::Account::Type::Checkings);
 
 Q_SIGNALS:
-  void statementsReady(QList<MyMoneyStatement> &);
+  void statementsReady(const QList<MyMoneyStatement> &);
 
 private Q_SLOTS:
   void slotSendDataToFilter();
@@ -341,7 +341,7 @@ private:
 
   QList<QByteArray>  m_data;
 
-  void (*m_progressCallback)(int, int, const QString&);
+  void (*m_progressCallback)(qint64, qint64, const QString&);
 
   MyMoneyFileTransaction* m_ft;
 };

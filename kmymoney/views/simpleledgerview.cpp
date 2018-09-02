@@ -21,6 +21,9 @@
 // QT Includes
 
 #include <QTabBar>
+#include <QToolButton>
+#include <QUrl>
+#include <QDesktopServices>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,101 +32,115 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmymoneyviewbase_p.h"
 #include "ledgerviewpage.h"
 #include "models.h"
 #include "accountsmodel.h"
 #include "kmymoneyaccountcombo.h"
 #include "ui_simpleledgerview.h"
 #include "icons/icons.h"
-#include "kmymoneyview.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
+#include "mymoneyinstitution.h"
 #include "mymoneyenums.h"
 #include "modelenums.h"
 
 using namespace Icons;
 
-class SimpleLedgerView::Private
+class SimpleLedgerViewPrivate : public KMyMoneyViewBasePrivate
 {
+  Q_DECLARE_PUBLIC(SimpleLedgerView)
+
 public:
-  Private(SimpleLedgerView* p)
-  : parent(p)
+  explicit SimpleLedgerViewPrivate(SimpleLedgerView* qq)
+  : q_ptr(qq)
   , ui(new Ui_SimpleLedgerView)
-  , accountsModel(new AccountNamesFilterProxyModel(parent))
-  , newTabWidget(0)
+  , accountsModel(nullptr)
+  , newTabWidget(nullptr)
+  , webSiteButton(nullptr)
   , lastIdx(-1)
   , inModelUpdate(false)
   , m_needLoad(true)
   {}
 
-  ~Private() {}
+  ~SimpleLedgerViewPrivate()
+  {
+    delete ui;
+  }
 
-  SimpleLedgerView*             parent;
+  void init()
+  {
+    Q_Q(SimpleLedgerView);
+    m_needLoad = false;
+    ui->setupUi(q);
+    ui->ledgerTab->setTabIcon(0, Icons::get(Icon::ListAdd));
+    ui->ledgerTab->setTabText(0, QString());
+    newTabWidget = ui->ledgerTab->widget(0);
+
+    accountsModel= new AccountNamesFilterProxyModel(q);
+
+    // remove close button from new page
+    QTabBar* bar = ui->ledgerTab->findChild<QTabBar*>();
+    if(bar) {
+      QTabBar::ButtonPosition closeSide = (QTabBar::ButtonPosition)q->style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition, 0, newTabWidget);
+      QWidget *w = bar->tabButton(0, closeSide);
+      bar->setTabButton(0, closeSide, 0);
+      w->deleteLater();
+      q->connect(bar, SIGNAL(tabMoved(int,int)), q, SLOT(checkTabOrder(int,int)));
+    }
+
+    webSiteButton = new QToolButton;
+    ui->ledgerTab->setCornerWidget(webSiteButton);
+    q->connect(webSiteButton, &QToolButton::pressed, q,
+            [=] {
+              QDesktopServices::openUrl(webSiteUrl);
+            });
+
+    q->connect(ui->accountCombo, SIGNAL(accountSelected(QString)), q, SLOT(openNewLedger(QString)));
+    q->connect(ui->ledgerTab, &QTabWidget::currentChanged, q, &SimpleLedgerView::tabSelected);
+    q->connect(Models::instance(), &Models::modelsLoaded, q, &SimpleLedgerView::updateModels);
+    q->connect(ui->ledgerTab, &QTabWidget::tabCloseRequested, q, &SimpleLedgerView::closeLedger);
+    // we reload the icon if the institution data changed
+    q->connect(Models::instance()->institutionsModel(), &InstitutionsModel::dataChanged, q, &SimpleLedgerView::setupCornerWidget);
+
+    accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity});
+
+    accountsModel->setHideEquityAccounts(false);
+    auto const model = Models::instance()->accountsModel();
+    accountsModel->setSourceModel(model);
+    accountsModel->setSourceColumns(model->getColumns());
+    accountsModel->sort((int)eAccountsModel::Column::Account);
+    ui->accountCombo->setModel(accountsModel);
+
+    q->tabSelected(0);
+    q->updateModels();
+    q->openFavoriteLedgers();
+  }
+
+  SimpleLedgerView*             q_ptr;
   Ui_SimpleLedgerView*          ui;
   AccountNamesFilterProxyModel* accountsModel;
   QWidget*                      newTabWidget;
+  QToolButton*                  webSiteButton;
+  QUrl                          webSiteUrl;
   int                           lastIdx;
   bool                          inModelUpdate;
   bool                          m_needLoad;
 };
 
 
-SimpleLedgerView::SimpleLedgerView(KMyMoneyApp *kmymoney, KMyMoneyView *kmymoneyview)
-  : QWidget(nullptr)
-  , d(new Private(this))
-  , m_kmymoney(kmymoney)
-  , m_kmymoneyview(kmymoneyview)
+SimpleLedgerView::SimpleLedgerView(QWidget *parent) :
+    KMyMoneyViewBase(*new SimpleLedgerViewPrivate(this), parent)
 {
 }
 
 SimpleLedgerView::~SimpleLedgerView()
 {
-  if (!d->m_needLoad)
-    delete d->ui;
-  delete d;
-}
-
-void SimpleLedgerView::init()
-{
-  d->m_needLoad = false;
-  d->ui->setupUi(this);
-  d->ui->ledgerTab->setTabIcon(0, Icons::get(Icon::ListAdd));
-  d->ui->ledgerTab->setTabText(0, QString());
-  d->newTabWidget = d->ui->ledgerTab->widget(0);
-
-  // remove close button from new page
-  QTabBar* bar = d->ui->ledgerTab->findChild<QTabBar*>();
-  if(bar) {
-    QTabBar::ButtonPosition closeSide = (QTabBar::ButtonPosition)style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition, 0, d->newTabWidget);
-    QWidget *w = bar->tabButton(0, closeSide);
-    bar->setTabButton(0, closeSide, 0);
-    w->deleteLater();
-    connect(bar, SIGNAL(tabMoved(int,int)), this, SLOT(checkTabOrder(int,int)));
-  }
-
-  connect(d->ui->accountCombo, SIGNAL(accountSelected(QString)), this, SLOT(openNewLedger(QString)));
-  connect(d->ui->ledgerTab, &QTabWidget::currentChanged, this, &SimpleLedgerView::tabSelected);
-  connect(Models::instance(), &Models::modelsLoaded, this, &SimpleLedgerView::updateModels);
-  connect(d->ui->ledgerTab, &QTabWidget::tabCloseRequested, this, &SimpleLedgerView::closeLedger);
-  connect(m_kmymoneyview, &KMyMoneyView::fileClosed, this, &SimpleLedgerView::closeLedgers);
-  connect(m_kmymoneyview, &KMyMoneyView::fileOpened, this, &SimpleLedgerView::openFavoriteLedgers);
-
-  d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity});
-
-  d->accountsModel->setHideEquityAccounts(false);
-  auto const model = Models::instance()->accountsModel();
-  d->accountsModel->setSourceModel(model);
-  d->accountsModel->setSourceColumns(model->getColumns());
-  d->accountsModel->sort((int)eAccountsModel::Column::Account);
-  d->ui->accountCombo->setModel(d->accountsModel);
-
-  tabSelected(0);
-  updateModels();
-  openFavoriteLedgers();
 }
 
 void SimpleLedgerView::openNewLedger(QString accountId)
 {
+  Q_D(SimpleLedgerView);
   if(d->inModelUpdate || accountId.isEmpty())
     return;
 
@@ -161,14 +178,17 @@ void SimpleLedgerView::openNewLedger(QString accountId)
 
 void SimpleLedgerView::tabSelected(int idx)
 {
+  Q_D(SimpleLedgerView);
   // qDebug() << "tabSelected" << idx << (d->ui->ledgerTab->count()-1);
   if(idx != (d->ui->ledgerTab->count()-1)) {
     d->lastIdx = idx;
   }
+  setupCornerWidget();
 }
 
 void SimpleLedgerView::updateModels()
 {
+  Q_D(SimpleLedgerView);
   d->inModelUpdate = true;
   // d->ui->accountCombo->
   d->ui->accountCombo->expandAll();
@@ -178,6 +198,7 @@ void SimpleLedgerView::updateModels()
 
 void SimpleLedgerView::closeLedger(int idx)
 {
+  Q_D(SimpleLedgerView);
   // don't react on the close request for the new ledger function
   if(idx != (d->ui->ledgerTab->count()-1)) {
     d->ui->ledgerTab->removeTab(idx);
@@ -186,6 +207,7 @@ void SimpleLedgerView::closeLedger(int idx)
 
 void SimpleLedgerView::checkTabOrder(int from, int to)
 {
+  Q_D(SimpleLedgerView);
   if(d->inModelUpdate)
     return;
 
@@ -209,7 +231,10 @@ void SimpleLedgerView::showTransactionForm(bool show)
 
 void SimpleLedgerView::closeLedgers()
 {
-  int tabCount = d->ui->ledgerTab->count();
+  Q_D(SimpleLedgerView);
+  if (d->m_needLoad)
+    return;
+  auto tabCount = d->ui->ledgerTab->count();
   // check that we have a least one tab that can be closed
   if(tabCount > 1) {
     // we keep the tab with the selector open at all times
@@ -224,6 +249,10 @@ void SimpleLedgerView::closeLedgers()
 
 void SimpleLedgerView::openFavoriteLedgers()
 {
+  Q_D(SimpleLedgerView);
+  if (d->m_needLoad)
+    return;
+
   AccountsModel* model = Models::instance()->accountsModel();
   QModelIndex start = model->index(0, 0);
   QModelIndexList indexes = model->match(start, (int)eAccountsModel::Role::Favorite, QVariant(true), -1, Qt::MatchRecursive);
@@ -238,9 +267,46 @@ void SimpleLedgerView::openFavoriteLedgers()
 
 void SimpleLedgerView::showEvent(QShowEvent* event)
 {
+  Q_D(SimpleLedgerView);
   if (d->m_needLoad)
-    init();
+    d->init();
 
   // don't forget base class implementation
   QWidget::showEvent(event);
 }
+
+void SimpleLedgerView::setupCornerWidget()
+{
+  Q_D(SimpleLedgerView);
+
+  // check if we already have the button, quit if not
+  if (!d->webSiteButton)
+    return;
+
+  d->webSiteButton->hide();
+  auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());
+  if (view) {
+    auto index = Models::instance()->accountsModel()->accountById(view->accountId());
+    if(index.isValid()) {
+      // get icon name and url via account and institution object
+      const auto acc = Models::instance()->accountsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
+      if (!acc.institutionId().isEmpty()) {
+        index = Models::instance()->institutionsModel()->accountById(acc.institutionId());
+        const auto institution = Models::instance()->institutionsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyInstitution>();
+        const auto url = institution.value(QStringLiteral("url"));
+        const auto iconName = institution.value(QStringLiteral("icon"));
+        if (!url.isEmpty() && !iconName.isEmpty()) {
+          const auto favIcon = Icons::loadIconFromApplicationCache(iconName);
+          if (!favIcon.isNull()) {
+            d->webSiteButton->show();
+            d->webSiteButton->setIcon(favIcon);
+            d->webSiteButton->setText(url);
+            d->webSiteButton->setToolTip(i18n("Open website of <b>%1</b> in your browser.", institution.name()));
+            d->webSiteUrl.setUrl(QString::fromLatin1("https://%1/").arg(url));
+          }
+        }
+      }
+    }
+  }
+}
+

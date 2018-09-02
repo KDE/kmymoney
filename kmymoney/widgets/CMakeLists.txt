@@ -1,7 +1,7 @@
 
 ########### create links ###############
 set(kmymoney_STAT_HEADERS
-  kaccounttemplateselector.h kbudgetvalues.h kguiutils.h
+  kaccounttemplateselector.h kguiutils.h
   kmymoneyaccountcombo.h kmymoneyaccountcompletion.h
   kmymoneyaccountselector.h
   kmymoneycategory.h
@@ -12,7 +12,7 @@ set(kmymoney_STAT_HEADERS
   scheduledtransaction.h selectedtransaction.h selectedtransactions.h stdtransactiondownloaded.h
   stdtransactionmatched.h transactioneditorcontainer.h
   transactionform.h transaction.h investtransaction.h stdtransaction.h
-  transactionsortoption.h reporttabimpl.h reportcontrolimpl.h
+  transactionsortoption.h
   kmymoneyvalidationfeedback.h
   onlinejobmessagesview.h
   kmymoneydateedit.h
@@ -21,7 +21,6 @@ set(kmymoney_STAT_HEADERS
 
 ########### Shared widget library ###########
 set(kmm_widgets_sources
-  widgets_config.cpp
   kmymoneydateinput.cpp
   kmymoneyvalidationfeedback.cpp
   styleditemdelegateforwarder.cpp
@@ -40,6 +39,7 @@ set(kmm_widgets_sources
   kmymoneyperiodcombo.cpp
   kmymoneyreconcilecombo.cpp
   kmymoneytagcombo.cpp
+  kmymoneyaccountselector.cpp
   ktagcontainer.cpp
   ktaglabel.cpp
   kmymoneyselector.cpp
@@ -52,15 +52,60 @@ set(kmm_widgets_sources
   amountedit.cpp
   amountvalidator.cpp
   creditdebithelper.cpp
+  daterangedlg.cpp
+  ktransactionfilter.cpp
+  kmymoneyaccounttreeview.cpp
+  accountsviewproxymodel.cpp
+  budgetviewproxymodel.cpp
+  kmymoneyviewbase.cpp
+  kmymoneyaccountsviewbase.cpp
   )
+
+set(nationalAccountWidget_SOURCES
+  ./payeeidentifier/nationalaccount/nationalaccountedit.cpp
+  ./payeeidentifier/nationalaccount/nationalaccountdelegate.cpp
+)
+
+set(nationalAccountWidget_HEADERS
+  ./payeeidentifier/nationalaccount/nationalaccountdelegate.h
+  ./payeeidentifier/nationalaccount/nationalaccountedit.h
+)
+
+set(IBANBICWidget_SOURCES
+  ./payeeidentifier/ibanbic/kibanlineedit.cpp
+  ./payeeidentifier/ibanbic/kbicedit.cpp
+  ./payeeidentifier/ibanbic/ibanvalidator.cpp
+  ./payeeidentifier/ibanbic/bicvalidator.cpp
+  ./payeeidentifier/ibanbic/ibanbicitemdelegate.cpp
+  ./payeeidentifier/ibanbic/ibanbicitemedit.cpp
+)
+
+set(IBANBICWidget_HEADERS
+  ./payeeidentifier/ibanbic/kibanlineedit.h
+  ./payeeidentifier/ibanbic/kbicedit.h
+  ./payeeidentifier/ibanbic/ibanvalidator.h
+  ./payeeidentifier/ibanbic/bicvalidator.h
+  ./payeeidentifier/ibanbic/ibanbicitemdelegate.h
+)
+
+list(APPEND kmm_widgets_sources ${nationalAccountWidget_SOURCES})
+list(APPEND kmymoney_STAT_HEADERS ${nationalAccountWidget_HEADERS})
+
+list(APPEND kmm_widgets_sources ${IBANBICWidget_SOURCES})
+list(APPEND kmymoney_STAT_HEADERS ${IBANBICWidget_HEADERS})
 
 ki18n_wrap_ui(kmm_widgets_sources
   kmymoneyvalidationfeedback.ui
   onlinejobmessagesview.ui
+  daterangedlg.ui
+  ktransactionfilter.ui
+  ./payeeidentifier/nationalaccount/nationalaccountedit.ui
+  ./payeeidentifier/ibanbic/ibanbicitemedit.ui
 )
 
 add_library(kmm_widgets SHARED ${kmm_widgets_sources})
 target_link_libraries(kmm_widgets PUBLIC
+  kmm_settings
   KF5::TextWidgets
   KF5::KIOWidgets
   KF5::Completion
@@ -68,11 +113,11 @@ target_link_libraries(kmm_widgets PUBLIC
   KF5::ItemViews
   KF5::I18n
   Qt5::Gui
-  Qt5::Sql
   Qt5::Core
   Alkimia::alkimia
-  kmm_config
   kmm_mymoney
+  kmm_models
+  kmm_plugin
 )
 
 set_target_properties(kmm_widgets PROPERTIES
@@ -89,13 +134,7 @@ install(TARGETS kmm_widgets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 # Common sources for libkmymoney.so and libwidgets.a that do not
 # contain the KMM_DESIGNER flag
 set(_uncritial_common_sources
-  fixedcolumntreeview.cpp
-  kbudgetvalues.cpp
   kmymoneyaccountcombo.cpp
-  kmymoneyaccountselector.cpp
-  kmymoneyaccounttreeview.cpp
-  accountsviewproxymodel.cpp
-  budgetviewproxymodel.cpp
   kmymoneycombo.cpp
   kmymoneycompletion.cpp
   kmymoneytitlelabel.cpp
@@ -136,7 +175,7 @@ set (_critial_common_sources
 
 
 set (kmymoney_base_UI
-  kbudgetvalues.ui transactionsortoption.ui kaccounttemplateselector.ui
+  transactionsortoption.ui kaccounttemplateselector.ui
   )
 
 ki18n_wrap_ui(kmymoney_base_ui_srcs ${kmymoney_base_UI})
@@ -152,9 +191,9 @@ add_custom_target(generate_base_ui_srcs DEPENDS
 # We can compile the uncritical sources without KMM_DESIGNER flags
 add_library(kmymoney_base STATIC ${_uncritial_common_sources})
 # TODO: fix dependencies
-target_link_libraries(kmymoney_base KF5::XmlGui KF5::TextWidgets KF5::IconThemes KF5::I18n KF5::ConfigWidgets KF5::ConfigCore KF5::Completion KF5::Service Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::Xml Alkimia::alkimia)
+target_link_libraries(kmymoney_base KF5::XmlGui KF5::TextWidgets KF5::IconThemes KF5::I18n KF5::ConfigWidgets KF5::ConfigCore KF5::Completion KF5::Service Qt5::Gui Qt5::Widgets Qt5::Xml kmm_settings Alkimia::alkimia)
 
-add_dependencies(kmymoney_base kmm_config)
+add_dependencies(kmymoney_base kmm_settings)
 
 ########### QtDesigner Widget Library (kmymoneywidgets) #################
 # we never link against this library,
@@ -181,7 +220,7 @@ if( USE_QT_DESIGNER )
   # dialogs and converter libraries.  If a widget references something
   # from one of these libraries it is most likely due to code that needs
   # to be excluded with a KMM_DESIGNER ifndef.
-  target_link_libraries(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common kmm_config models)
+  target_link_libraries(kmymoneywidgets kmymoney_base kmm_mymoney kmymoney_common kmm_settings models)
 
   install(TARGETS kmymoneywidgets DESTINATION ${QT_PLUGINS_DIR}/designer )
 endif( USE_QT_DESIGNER )
@@ -193,18 +232,10 @@ set(libwidgets_a_SOURCES
   kmymoneybriefschedule.cpp
   registersearchline.cpp
   transactioneditorcontainer.cpp
-  reporttabimpl.cpp
-  reportcontrolimpl.cpp
-  daterangedlg.cpp
   )
 
 set(libwidgets_a_UI
-  kmymoneybriefschedule.ui reportcontrol.ui
-  reporttabgeneral.ui
-  reporttabrowcolquery.ui reporttabrowcolpivot.ui
-  reporttabrange.ui reporttabchart.ui
-  reporttabcapitalgain.ui reporttabperformance.ui
-  daterangedlg.ui
+  kmymoneybriefschedule.ui
   )
 
 # using uic on the above UI files DEPENDS on libkmymoney.so. If uic
@@ -222,7 +253,7 @@ add_library(widgets STATIC
   )
 target_link_libraries(widgets KF5::XmlGui kmymoney_base)
 
-add_dependencies(widgets kmm_config)
+add_dependencies(widgets kmm_settings)
 
 ########### install files ###############
 

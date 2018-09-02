@@ -50,10 +50,9 @@
 #include "register.h"
 #include "transactioneditor.h"
 #include "selectedtransactions.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "registersearchline.h"
 #include "kfindtransactiondlg.h"
-#include "kmymoneysettings.h"
 #include "accountsmodel.h"
 #include "models.h"
 #include "mymoneyschedule.h"
@@ -99,7 +98,8 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent) :
     {Action::StartReconciliation,       &KGlobalLedgerView::slotStartReconciliation},
     {Action::FinishReconciliation,      &KGlobalLedgerView::slotFinishReconciliation},
     {Action::PostponeReconciliation,    &KGlobalLedgerView::slotPostponeReconciliation},
-    {Action::OpenAccount,               &KGlobalLedgerView::slotOpenAccount}
+    {Action::OpenAccount,               &KGlobalLedgerView::slotOpenAccount},
+    {Action::EditFindTransaction,       &KGlobalLedgerView::slotFindTransaction},
   };
 
   for (auto a = actionConnections.cbegin(); a != actionConnections.cend(); ++a)
@@ -113,10 +113,27 @@ KGlobalLedgerView::~KGlobalLedgerView()
 {
 }
 
-void KGlobalLedgerView::setDefaultFocus()
+void KGlobalLedgerView::executeCustomAction(eView::Action action)
 {
-  Q_D(KGlobalLedgerView);
-  QTimer::singleShot(0, d->m_registerSearchLine->searchLine(), SLOT(setFocus()));
+  switch(action) {
+    case eView::Action::Refresh:
+      refresh();
+      break;
+
+    case eView::Action::SetDefaultFocus:
+      {
+        Q_D(KGlobalLedgerView);
+        QTimer::singleShot(0, d->m_registerSearchLine->searchLine(), SLOT(setFocus()));
+      }
+      break;
+
+    case eView::Action::DisableViewDepenedendActions:
+      pActions[Action::SelectAllTransactions]->setEnabled(false);
+      break;
+
+    default:
+      break;
+  }
 }
 
 void KGlobalLedgerView::refresh()
@@ -142,7 +159,7 @@ void KGlobalLedgerView::showEvent(QShowEvent* event)
   if (d->m_needLoad)
     d->init();
 
-  emit aboutToShow(View::Ledgers);
+  emit customActionRequested(View::Ledgers, eView::Action::AboutToShow);
 
   if (d->m_needsRefresh) {
     if (!d->m_inEditMode) {
@@ -165,11 +182,12 @@ void KGlobalLedgerView::showEvent(QShowEvent* event)
       slotSelectAccount(d->m_accountComboBox->getSelected());
     }
 
-//    emit objectSelected(d->m_currentAccount);
     KMyMoneyRegister::SelectedTransactions list(d->m_register);
-    emit transactionsSelected(list);
+    updateLedgerActions(list);
+    emit selectByVariant(QVariantList {QVariant::fromValue(list)}, eView::Intent::SelectRegisterTransactions);
   }
 
+  pActions[Action::SelectAllTransactions]->setEnabled(true);
   // don't forget base class implementation
   QWidget::showEvent(event);
 }
@@ -251,7 +269,7 @@ void KGlobalLedgerView::updateLedgerActionsInternal()
     Action::CancelTransaction, Action::DeleteTransaction, Action::MatchTransaction,
     Action::AcceptTransaction, Action::DuplicateTransaction, Action::ToggleReconciliationFlag, Action::MarkCleared,
     Action::GoToAccount, Action::GoToPayee, Action::AssignTransactionsNumber, Action::NewScheduledTransaction,
-    Action::CombineTransactions, Action::SelectAllTransactions, Action::CopySplits,
+    Action::CombineTransactions, Action::CopySplits,
   };
 
   for (const auto& a : actionsToBeDisabled)
@@ -266,7 +284,6 @@ void KGlobalLedgerView::updateLedgerActionsInternal()
   pMenus[Menu::MarkTransaction]->setEnabled(false);
   pMenus[Menu::MarkTransactionContext]->setEnabled(false);
 
-  pActions[Action::SelectAllTransactions]->setEnabled(true);
   if (!d->m_selectedTransactions.isEmpty() && !d->m_selectedTransactions.first().isScheduled()) {
     // enable 'delete transaction' only if at least one of the
     // selected transactions does not reference a closed account
@@ -420,7 +437,7 @@ void KGlobalLedgerView::slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTr
           showNegative = !showNegative;
         if (showNegative) {
           QPalette palette = d->m_rightSummaryLabel->palette();
-          palette.setColor(d->m_rightSummaryLabel->foregroundRole(), KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative));
+          palette.setColor(d->m_rightSummaryLabel->foregroundRole(), KMyMoneySettings::schemeColor(SchemeColor::Negative));
           d->m_rightSummaryLabel->setPalette(palette);
         }
       } else {
@@ -498,12 +515,8 @@ void KGlobalLedgerView::slotShowTransactionMenu(const MyMoneySplit& sp)
   pMenus[Menu::Transaction]->exec(QCursor::pos());
 }
 
-void KGlobalLedgerView::slotContinueReconciliation(eView::Schedules::Requester req)
+void KGlobalLedgerView::slotContinueReconciliation()
 {
-  // check if request has been made because of reconciliation
-  if (req != eView::Schedules::Requester::Reconciliation)
-    return;
-
   Q_D(KGlobalLedgerView);
   const auto file = MyMoneyFile::instance();
   MyMoneyAccount account;
@@ -516,7 +529,7 @@ void KGlobalLedgerView::slotContinueReconciliation(eView::Schedules::Requester r
     if (account.isAssetLiability()) {
 
       if (d->m_endingBalanceDlg->exec() == QDialog::Accepted) {
-        if (KMyMoneyGlobalSettings::autoReconciliation()) {
+        if (KMyMoneySettings::autoReconciliation()) {
           MyMoneyMoney startBalance = d->m_endingBalanceDlg->previousBalance();
           MyMoneyMoney endBalance = d->m_endingBalanceDlg->endingBalance();
           QDate endDate = d->m_endingBalanceDlg->statementDate();
@@ -556,7 +569,8 @@ void KGlobalLedgerView::slotContinueReconciliation(eView::Schedules::Requester r
 
         if (!file->isStandardAccount(account.id()) &&
             account.isAssetLiability()) {
-          emit switchViewRequested(View::Ledgers);
+          if (!isVisible())
+            emit customActionRequested(View::Ledgers, eView::Action::SwitchView);
           Models::instance()->accountsModel()->slotReconcileAccount(account, d->m_endingBalanceDlg->statementDate(), d->m_endingBalanceDlg->endingBalance());
           slotSetReconcileAccount(account, d->m_endingBalanceDlg->statementDate(), d->m_endingBalanceDlg->endingBalance());
 
@@ -575,7 +589,7 @@ void KGlobalLedgerView::slotContinueReconciliation(eView::Schedules::Requester r
             ft.commit();
 
           } catch (const MyMoneyException &e) {
-            qWarning("interest transaction not stored: '%s'", qPrintable(e.what()));
+            qWarning("interest transaction not stored: '%s'", e.what());
           }
 
           // reload the account object as it might have changed in the meantime
@@ -616,7 +630,7 @@ void KGlobalLedgerView::slotLedgerSelected(const QString& _accId, const QString&
     case Account::Type::Investment:
     case Account::Type::Equity:
       if (!isVisible())
-        emit switchViewRequested(View::Ledgers);
+        emit customActionRequested(View::Ledgers, eView::Action::SwitchView);
       slotSelectAccount(accId, transaction);
       break;
 
@@ -628,6 +642,42 @@ void KGlobalLedgerView::slotLedgerSelected(const QString& _accId, const QString&
 
     default:
       qDebug("Unknown account type %d in KMyMoneyView::slotLedgerSelected", (int)acc.accountType());
+      break;
+  }
+}
+
+void KGlobalLedgerView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
+{
+  switch(intent) {
+    case eView::Intent::UpdateActions:
+      updateActions(obj);
+      break;
+
+    case eView::Intent::FinishEnteringOverdueScheduledTransactions:
+      slotContinueReconciliation();
+      break;
+
+    case eView::Intent::SynchronizeAccountInLedgersView:
+      slotSelectAccount(obj);
+      break;
+
+    default:
+      break;
+  }
+}
+
+void KGlobalLedgerView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
+{
+  switch(intent) {
+    case eView::Intent::ShowTransaction:
+      if (variant.count() == 2)
+        slotLedgerSelected(variant.at(0).toString(), variant.at(1).toString());
+      break;
+    case eView::Intent::SelectRegisterTransactions:
+      if (variant.count() == 1)
+        updateLedgerActions(variant.at(0).value<KMyMoneyRegister::SelectedTransactions>());
+      break;
+    default:
       break;
   }
 }
@@ -670,7 +720,9 @@ bool KGlobalLedgerView::slotSelectAccount(const QString& id, const QString& tran
     } else {
       // we need to refresh m_account.m_accountList, a child could have been deleted
       d->m_currentAccount = MyMoneyFile::instance()->account(id);
-      emit objectSelected(d->m_currentAccount);
+
+      emit selectByObject(d->m_currentAccount, eView::Intent::None);
+      emit selectByObject(d->m_currentAccount, eView::Intent::SynchronizeAccountInInvestmentView);
     }
     d->selectTransaction(transactionId);
   }
@@ -757,8 +809,10 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
       break;
   }
 
-  if (warnLevel > 1)
+  if (warnLevel > 1) {
+    d->m_register->endEdit();
     return 0;
+  }
 
 
   TransactionEditor* editor = 0;
@@ -803,7 +857,7 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
     if (editor) {
       if (parent == d->m_register) {
         // make sure, the height of the table is correct
-        d->m_register->updateRegister(KMyMoneyGlobalSettings::ledgerLens() | !KMyMoneyGlobalSettings::transactionForm());
+        d->m_register->updateRegister(KMyMoneySettings::ledgerLens() | !KMyMoneySettings::transactionForm());
       }
 
       d->m_inEditMode = true;
@@ -856,9 +910,9 @@ void KGlobalLedgerView::slotTransactionsContextMenuRequested()
   updateLedgerActionsInternal();
 //  emit transactionsSelected(d->m_selectedTransactions); // that should select MyMoneySchedule in KScheduledView
   if (!transactions.isEmpty() && transactions.first().isScheduled())
-    emit contextMenuRequested(MyMoneyFile::instance()->schedule(transactions.first().scheduleId()));
+    emit selectByObject(MyMoneyFile::instance()->schedule(transactions.first().scheduleId()), eView::Intent::OpenContextMenu);
   else
-    emit transactionsContextMenuRequested(d->m_selectedTransactions);
+    slotShowTransactionMenu(MyMoneySplit());
 }
 
 void KGlobalLedgerView::slotLeaveEditMode(const KMyMoneyRegister::SelectedTransactions& list)
@@ -901,6 +955,7 @@ void KGlobalLedgerView::slotLeaveEditMode(const KMyMoneyRegister::SelectedTransa
   if (d->m_needsRefresh)
     refresh();
 
+  d->m_register->endEdit();
   d->m_register->setFocus();
 }
 
@@ -976,10 +1031,10 @@ void KGlobalLedgerView::slotSortOptions()
   QString sortOrder, def;
   if (d->isReconciliationAccount()) {
     key = "kmm-sort-reconcile";
-    def = KMyMoneyGlobalSettings::sortReconcileView();
+    def = KMyMoneySettings::sortReconcileView();
   } else {
     key = "kmm-sort-std";
-    def = KMyMoneyGlobalSettings::sortNormalView();
+    def = KMyMoneySettings::sortNormalView();
   }
 
   // check if we have an account override of the sort order
@@ -1004,7 +1059,7 @@ void KGlobalLedgerView::slotSortOptions()
           MyMoneyFile::instance()->modifyAccount(d->m_currentAccount);
           ft.commit();
         } catch (const MyMoneyException &e) {
-          qDebug("Unable to update sort order for account '%s': %s", qPrintable(d->m_currentAccount.name()), qPrintable(e.what()));
+          qDebug("Unable to update sort order for account '%s': %s", qPrintable(d->m_currentAccount.name()), e.what());
         }
       }
     }
@@ -1281,7 +1336,7 @@ void KGlobalLedgerView::slotCancelOrEnterTransactions(bool& okToSelect)
     auto dontShowAgain = "CancelOrEditTransaction";
     // qDebug("KMyMoneyApp::slotCancelOrEndEdit");
     if (d->m_transactionEditor) {
-      if (KMyMoneyGlobalSettings::focusChangeIsEnter() && pActions[Action::EnterTransaction]->isEnabled()) {
+      if (KMyMoneySettings::focusChangeIsEnter() && pActions[Action::EnterTransaction]->isEnabled()) {
         slotEnterTransaction();
         if (d->m_transactionEditor) {
           // if at this stage the editor is still there that means that entering the transaction was cancelled
@@ -1361,8 +1416,8 @@ void KGlobalLedgerView::slotNewTransactionForm(eWidgets::eRegister::Action id)
             payeeEdit->lineEdit()->selectAll();
           }
           if (d->m_transactionEditor) {
-            connect(d->m_transactionEditor.data(), &TransactionEditor::statusProgress, this, &KGlobalLedgerView::statusProgress);
-            connect(d->m_transactionEditor.data(), &TransactionEditor::statusMsg, this, &KGlobalLedgerView::statusMsg);
+            connect(d->m_transactionEditor.data(), &TransactionEditor::statusProgress, this, &KGlobalLedgerView::slotStatusProgress);
+            connect(d->m_transactionEditor.data(), &TransactionEditor::statusMsg, this, &KGlobalLedgerView::slotStatusMsg);
             connect(d->m_transactionEditor.data(), &TransactionEditor::scheduleTransaction, this, &KGlobalLedgerView::slotNewSchedule);
           }
           updateLedgerActionsInternal();
@@ -1432,7 +1487,7 @@ void KGlobalLedgerView::slotDuplicateTransaction()
     int i = 0;
     int cnt = d->m_selectedTransactions.count();
     //    KMSTATUS(i18n("Duplicating transactions"));
-    emit statusProgress(0, cnt);
+    emit selectByVariant(QVariantList {QVariant(0), QVariant(cnt)}, eView::Intent::ReportProgress);
     MyMoneyFileTransaction ft;
     MyMoneyTransaction lt;
     try {
@@ -1452,7 +1507,7 @@ void KGlobalLedgerView::slotDuplicateTransaction()
 
         MyMoneyFile::instance()->addTransaction(t);
         lt = t;
-        emit statusProgress(i++, 0);
+        emit selectByVariant(QVariantList {QVariant(i++), QVariant(0)}, eView::Intent::ReportProgress);
       }
       ft.commit();
 
@@ -1460,10 +1515,10 @@ void KGlobalLedgerView::slotDuplicateTransaction()
       if (!d->m_currentAccount.id().isEmpty())
         slotLedgerSelected(d->m_currentAccount.id(), lt.id());
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Error"), i18n("Unable to duplicate transaction(s): %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(this, i18n("Unable to duplicate transaction(s)"), QString::fromLatin1(e.what()));
     }
     // switch off the progress bar
-    emit statusProgress(-1, -1);
+    emit selectByVariant(QVariantList {QVariant(-1), QVariant(-1)}, eView::Intent::ReportProgress);
   }
 }
 
@@ -1503,7 +1558,7 @@ void KGlobalLedgerView::slotAcceptTransaction()
   KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
   int cnt = list.count();
   int i = 0;
-  emit statusProgress(0, cnt);
+  emit selectByVariant(QVariantList {QVariant(0), QVariant(cnt)}, eView::Intent::ReportProgress);
   MyMoneyFileTransaction ft;
   try {
     for (it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
@@ -1530,12 +1585,12 @@ void KGlobalLedgerView::slotAcceptTransaction()
         TransactionMatcher matcher(d->m_currentAccount);
         matcher.accept(t, s);
       }
-      emit statusProgress(i++, 0);
+      emit selectByVariant(QVariantList {QVariant(i++), QVariant(0)}, eView::Intent::ReportProgress);
     }
-    emit statusProgress(-1, -1);
+    emit selectByVariant(QVariantList {QVariant(-1), QVariant(-1)}, eView::Intent::ReportProgress);
     ft.commit();
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(this, i18n("Error"), i18n("Unable to accept transaction: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+    KMessageBox::detailedSorry(this, i18n("Unable to accept transaction"), QString::fromLatin1(e.what()));
   }
 }
 
@@ -1549,7 +1604,8 @@ void KGlobalLedgerView::slotCancelTransaction()
     pActions[Action::EnterTransaction]->setEnabled(false);
     // qDebug("KMyMoneyApp::slotTransactionsCancel");
     d->deleteTransactionEditor();
-    emit transactionsSelected(d->m_selectedTransactions);
+    updateLedgerActions(d->m_selectedTransactions);
+    emit selectByVariant(QVariantList {QVariant::fromValue(d->m_selectedTransactions)}, eView::Intent::SelectRegisterTransactions);
   }
 }
 
@@ -1562,7 +1618,8 @@ void KGlobalLedgerView::slotEditSplits()
     // as soon as we edit a transaction, we don't remember the last payee entered
     d->m_lastPayeeEnteredId.clear();
     d->m_transactionEditor = d->startEdit(d->m_selectedTransactions);
-    emit transactionsSelected(d->m_selectedTransactions);
+    updateLedgerActions(d->m_selectedTransactions);
+    emit selectByVariant(QVariantList {QVariant::fromValue(d->m_selectedTransactions)}, eView::Intent::SelectRegisterTransactions);
 
     if (d->m_transactionEditor) {
       KMyMoneyMVCCombo::setSubstringSearchForChildren(this/*d->m_myMoneyView*/, !KMyMoneySettings::stringMatchFromStart());
@@ -1574,12 +1631,13 @@ void KGlobalLedgerView::slotEditSplits()
           d->m_transactionEditor->enterTransactions(id);
           ft.commit();
         } catch (const MyMoneyException &e) {
-          KMessageBox::detailedSorry(this, i18n("Error"), i18n("Unable to modify transaction: %1, thrown in %2:%3", e.what(), e.file(), e.line()));
+          KMessageBox::detailedSorry(this, i18n("Unable to modify transaction"), QString::fromLatin1(e.what()));
         }
       }
     }
     d->deleteTransactionEditor();
-    emit transactionsSelected(d->m_selectedTransactions);
+    updateLedgerActions(d->m_selectedTransactions);
+    emit selectByVariant(QVariantList {QVariant::fromValue(d->m_selectedTransactions)}, eView::Intent::SelectRegisterTransactions);
   }
 }
 
@@ -1668,7 +1726,8 @@ void KGlobalLedgerView::slotGoToPayee()
       // d->m_payeeGoto and d->m_currentAccount while calling slotUpdateActions()
       QString payeeId = d->m_payeeGoto;
       QString accountId = d->m_currentAccount.id();
-      emit openPayeeRequested(payeeId, accountId, transactionId);
+      emit selectByVariant(QVariantList {QVariant(payeeId), QVariant(accountId), QVariant(transactionId)}, eView::Intent::ShowPayee);
+//      emit openPayeeRequested(payeeId, accountId, transactionId);
     } catch (const MyMoneyException &) {
     }
   }
@@ -1754,7 +1813,8 @@ void KGlobalLedgerView::slotSelectAllTransactions()
 
   // inform everyone else about the selected items
   KMyMoneyRegister::SelectedTransactions list(d->m_register);
-  emit transactionsSelected(list);
+  updateLedgerActions(list);
+  emit selectByVariant(QVariantList {QVariant::fromValue(list)}, eView::Intent::SelectRegisterTransactions);
 }
 
 void KGlobalLedgerView::slotCreateScheduledTransaction()
@@ -1796,7 +1856,7 @@ void KGlobalLedgerView::slotStartReconciliation()
 
   // we cannot reconcile standard accounts
   if (!MyMoneyFile::instance()->isStandardAccount(d->m_currentAccount.id()))
-    emit enterOverdueSchedulesRequested(d->m_currentAccount, eView::Schedules::Requester::Reconciliation);
+    emit selectByObject(d->m_currentAccount, eView::Intent::StartEnteringOverdueScheduledTransactions);
   // asynchronous call to KScheduledView::slotEnterOverdueSchedules is made here
   // after that all activity should be continued in KGlobalLedgerView::slotContinueReconciliation()
 }
@@ -1822,8 +1882,7 @@ void KGlobalLedgerView::slotFinishReconciliation()
     actBalance = clearedBalance = balance;
 
     // walk the list of transactions to figure out the balance(s)
-    QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
-    for (it = transactionList.constBegin(); it != transactionList.constEnd(); ++it) {
+    for (auto it = transactionList.constBegin(); it != transactionList.constEnd(); ++it) {
       if ((*it).second.reconcileFlag() == eMyMoney::Split::State::NotReconciled) {
         clearedBalance -= (*it).second.shares();
       }
@@ -1879,9 +1938,8 @@ void KGlobalLedgerView::slotFinishReconciliation()
       */
 
       // walk the list of transactions/splits and mark the cleared ones as reconciled
-      QList<QPair<MyMoneyTransaction, MyMoneySplit> >::iterator it;
 
-      for (it = transactionList.begin(); it != transactionList.end(); ++it) {
+      for (auto it = transactionList.begin(); it != transactionList.end(); ++it) {
         MyMoneySplit sp = (*it).second;
         // skip the ones that are not marked cleared
         if (sp.reconcileFlag() != eMyMoney::Split::State::Cleared)
@@ -1904,11 +1962,26 @@ void KGlobalLedgerView::slotFinishReconciliation()
 
       // reload account data from engine as the data might have changed in the meantime
       d->m_reconciliationAccount = file->account(d->m_reconciliationAccount.id());
-      emit accountReconciled(d->m_reconciliationAccount,
-                             d->m_endingBalanceDlg->statementDate(),
-                             d->m_endingBalanceDlg->previousBalance(),
-                             d->m_endingBalanceDlg->endingBalance(),
-                             transactionList);
+
+      /**
+        * This signal is emitted when an account has been successfully reconciled
+        * and all transactions are updated in the engine. It can be used by plugins
+        * to create reconciliation reports.
+        *
+        * @param account the account data
+        * @param date the reconciliation date as provided through the dialog
+        * @param startingBalance the starting balance as provided through the dialog
+        * @param endingBalance the ending balance as provided through the dialog
+        * @param transactionList reference to QList of QPair containing all
+        *        transaction/split pairs processed by the reconciliation.
+        */
+      emit selectByVariant(QVariantList {
+                             QVariant::fromValue(d->m_reconciliationAccount),
+                             QVariant::fromValue(d->m_endingBalanceDlg->statementDate()),
+                             QVariant::fromValue(d->m_endingBalanceDlg->previousBalance()),
+                             QVariant::fromValue(d->m_endingBalanceDlg->endingBalance()),
+                             QVariant::fromValue(transactionList)
+                           }, eView::Intent::AccountReconciled);
 
     } catch (const MyMoneyException &) {
       qDebug("Unexpected exception when setting cleared to reconcile");
@@ -1968,4 +2041,42 @@ void KGlobalLedgerView::slotOpenAccount()
   Q_D(KGlobalLedgerView);
   if (!MyMoneyFile::instance()->isStandardAccount(d->m_currentAccount.id()))
     slotLedgerSelected(d->m_currentAccount.id(), QString());
+}
+
+void KGlobalLedgerView::slotFindTransaction()
+{
+  Q_D(KGlobalLedgerView);
+  if (!d->m_searchDlg) {
+    d->m_searchDlg = new KFindTransactionDlg(this);
+    connect(d->m_searchDlg, &QObject::destroyed, this, &KGlobalLedgerView::slotCloseSearchDialog);
+    connect(d->m_searchDlg, &KFindTransactionDlg::transactionSelected,
+            this, &KGlobalLedgerView::slotLedgerSelected);
+  }
+  d->m_searchDlg->show();
+  d->m_searchDlg->raise();
+  d->m_searchDlg->activateWindow();
+}
+
+void KGlobalLedgerView::slotCloseSearchDialog()
+{
+  Q_D(KGlobalLedgerView);
+  if (d->m_searchDlg)
+    d->m_searchDlg->deleteLater();
+  d->m_searchDlg = nullptr;
+}
+
+void KGlobalLedgerView::slotStatusMsg(const QString& txt)
+{
+  emit selectByVariant(QVariantList {QVariant(txt)}, eView::Intent::ReportProgressMessage);
+}
+
+void KGlobalLedgerView::slotStatusProgress(int cnt, int base)
+{
+  emit selectByVariant(QVariantList {QVariant(cnt), QVariant(base)}, eView::Intent::ReportProgress);
+}
+
+void KGlobalLedgerView::slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& list)
+{
+  updateLedgerActions(list);
+  emit selectByVariant(QVariantList {QVariant::fromValue(list)}, eView::Intent::SelectRegisterTransactions);
 }

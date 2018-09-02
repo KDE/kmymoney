@@ -22,8 +22,7 @@ target_link_libraries( onlinetask_interfaces
   PUBLIC
     kmm_payeeidentifier
     Qt5::Widgets
-    # Copy build dependencies from kmm_mymoney as this has actually a cyclic dependency
-    $<TARGET_PROPERTY:kmm_mymoney,INTERFACE_LINK_LIBRARIES>
+    Alkimia::alkimia
 )
 
 install(FILES ${onlinetask_interfaces_HEADER}

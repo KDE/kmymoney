@@ -39,7 +39,7 @@ public:
   /** Initializes the match finder.
    * @param matchWindow max number of days the transactions may vary and still be considered to be matching
    */
-  explicit TransactionMatchFinder(int matchWindow);
+  explicit TransactionMatchFinder(int m_matchWindow);
   virtual ~TransactionMatchFinder();
 
   /** Searches for a matching transaction. See derived classes to learn where the transaction is looked for.
@@ -74,10 +74,10 @@ public:
   MyMoneySchedule getMatchedSchedule() const;
 
 protected:
-  int                                matchWindow;
+  int                                m_matchWindow;
 
   MyMoneyTransaction                 importedTransaction;    //!< the imported transaction that is being matched
-  MyMoneySplit                       importedSplit;          //!< the imported transaction's split that is being matched
+  MyMoneySplit                       m_importedSplit;          //!< the imported transaction's split that is being matched
 
   MatchResult                        matchResult;            //!< match result
   QScopedPointer<MyMoneyTransaction> matchedTransaction;     //!< the transaction that matches the imported one
@@ -115,7 +115,7 @@ protected:
    * - have empty or matching payees
    * - are not marked as matched already
    */
-  bool splitsMatch(const MyMoneySplit & importedSplit, const MyMoneySplit & existingSplit, int amountVariation = 0) const;
+  bool splitsMatch(const MyMoneySplit & m_importedSplit, const MyMoneySplit & existingSplit, int amountVariation = 0) const;
 
   /** Checks whether splits reference the same account
    * @param split1 the first split
@@ -141,7 +141,7 @@ protected:
    * - they are equal
    * - bankId of existing split is empty
    */
-  bool splitsBankIdsMatch(const MyMoneySplit & importedSplit, const MyMoneySplit & existingSplit) const;
+  bool splitsBankIdsMatch(const MyMoneySplit & m_importedSplit, const MyMoneySplit & existingSplit) const;
 
   /** Checks whether the splits' bankId-s are duplicated
    * @param split1 the first split

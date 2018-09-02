@@ -1,21 +1,26 @@
-/***************************************************************************
-                          mymoneymymoney.cpp  -  description
-                             -------------------
-    begin      : Thu Feb 21 2002
-    copyright  : (C) 2000-2002 by Michael Edwardes <mte@users.sourceforge.net>
-                 (C) 2011 by Carlos Eduardo da Silva <kaduardo@gmail.com>
-                 (C) 2001-2017 by Thomas Baumgart <tbaumgart@kde.org>
-                 (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2000-2004  Michael Edwardes <mte@users.sourceforge.net>
+ * Copyright 2001-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2001-2002  Felix Rodriguez <frodriguez@users.sourceforge.net>
+ * Copyright 2002-2004  Kevin Tambascio <ktambascio@users.sourceforge.net>
+ * Copyright 2005       Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2007-2010  Alvaro Soliverez <asoliverez@gmail.com>
+ * Copyright 2011       Carlos Eduardo da Silva <kaduardo@gmail.com>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 // make sure, that this is defined before we even include any other header file
 #ifndef __STDC_LIMIT_MACROS
@@ -142,10 +147,10 @@ MyMoneyMoney::MyMoneyMoney(const QString& pszAmount)
 //            denom  - denominator of the object
 //
 ////////////////////////////////////////////////////////////////////////////////
-MyMoneyMoney::MyMoneyMoney(signed64 Amount, const signed64 denom)
+MyMoneyMoney::MyMoneyMoney(qint64 Amount, const unsigned int denom)
 {
-  if (!denom)
-    throw MYMONEYEXCEPTION("Denominator 0 not allowed!");
+  if (denom == 0)
+    throw MYMONEYEXCEPTION_CSTRING("Denominator 0 not allowed!");
 
   *this = AlkValue(QString::fromLatin1("%1/%2").arg(Amount).arg(denom), eMyMoney::Money::_decimalSeparator);
 }
@@ -159,10 +164,10 @@ MyMoneyMoney::MyMoneyMoney(signed64 Amount, const signed64 denom)
 //            denom   - denominator of the object
 //
 ////////////////////////////////////////////////////////////////////////////////
-MyMoneyMoney::MyMoneyMoney(const int iAmount, const signed64 denom)
+MyMoneyMoney::MyMoneyMoney(const int iAmount, const unsigned int denom)
 {
-  if (!denom)
-    throw MYMONEYEXCEPTION("Denominator 0 not allowed!");
+  if (denom == 0)
+    throw MYMONEYEXCEPTION_CSTRING("Denominator 0 not allowed!");
   *this = AlkValue(iAmount, denom);
 }
 
@@ -175,10 +180,10 @@ MyMoneyMoney::MyMoneyMoney(const int iAmount, const signed64 denom)
 //            denom   - denominator of the object
 //
 ////////////////////////////////////////////////////////////////////////////////
-MyMoneyMoney::MyMoneyMoney(const long int iAmount, const signed64 denom)
+MyMoneyMoney::MyMoneyMoney(const long int iAmount, const unsigned int denom)
 {
-  if (!denom)
-    throw MYMONEYEXCEPTION("Denominator 0 not allowed!");
+  if (denom == 0)
+    throw MYMONEYEXCEPTION_CSTRING("Denominator 0 not allowed!");
   *this = AlkValue(QString::fromLatin1("%1/%2").arg(iAmount).arg(denom), eMyMoney::Money::_decimalSeparator);
 }
 
@@ -220,13 +225,20 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
   // and limit the precision to 9 digits (the max we can
   // present with 31 bits
 #if 1
-  signed int d;
+  // MPIR and GMP use different types for the return value of mpz_get_si()
+  // which causes warnings on some compilers.
+#ifdef mpir_version     // MPIR is used
+  mpir_si denominator;
+#else                   // GMP is used
+  long int denominator;
+#endif
+
   if (mpz_fits_sint_p(denom.get_mpz_t())) {
-    d = mpz_get_si(denom.get_mpz_t());
+    denominator = mpz_get_si(denom.get_mpz_t());
   } else {
-    d = 1000000000;
+    denominator = 1000000000;
   }
-  value = static_cast<const MyMoneyMoney>(convertDenominator(d)).valueRef().get_num();
+  value = static_cast<const MyMoneyMoney>(convertDenominator(denominator)).valueRef().get_num();
 #else
   value = static_cast<const MyMoneyMoney>(convertDenominator(denom)).valueRef().get_num();
 #endif
@@ -234,7 +246,7 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
   // Once we really support multiple currencies then this method will
   // be much better than using KLocale::global()->formatMoney.
   bool bNegative = false;
-  mpz_class left = value / static_cast<MyMoneyMoney>(convertDenominator(d)).valueRef().get_den();
+  mpz_class left = value / static_cast<MyMoneyMoney>(convertDenominator(denominator)).valueRef().get_den();
   mpz_class right = mpz_class((valueRef() - mpq_class(left)) * denom);
 
   if (right < 0) {

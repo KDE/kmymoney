@@ -1,19 +1,20 @@
-/***************************************************************************
-                          stdtransaction.cpp  -  description
-                             -------------------
-    begin                : Tue Jun 13 2006
-    copyright            : (C) 2000-2006 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2006-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "stdtransaction.h"
 #include "stdtransaction_p.h"
@@ -53,7 +54,7 @@
 #include "stdtransactioneditor.h"
 #endif
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "widgetenums.h"
 #include "mymoneyenums.h"
 
@@ -87,20 +88,20 @@ StdTransaction::StdTransaction(Register *parent, const MyMoneyTransaction& trans
   d->m_rowsForm = 6;
 
   if (KMyMoneyUtils::transactionType(d->m_transaction) == KMyMoneyUtils::InvestmentTransaction) {
-    MyMoneySplit split = KMyMoneyUtils::stockSplit(d->m_transaction);
-    d->m_payee = MyMoneyFile::instance()->account(split.accountId()).name();
+    MyMoneySplit stockSplit = KMyMoneyUtils::stockSplit(d->m_transaction);
+    d->m_payee = MyMoneyFile::instance()->account(stockSplit.accountId()).name();
     QString addon;
-    if (split.action() == MyMoneySplit::ActionBuyShares) {
-      if (split.value().isNegative()) {
+    if (stockSplit.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) {
+      if (stockSplit.value().isNegative()) {
         addon = i18n("Sell");
       } else {
         addon = i18n("Buy");
       }
-    } else if (split.action() == MyMoneySplit::ActionDividend) {
+    } else if (stockSplit.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend)) {
       addon = i18n("Dividend");
-    } else if (split.action() == MyMoneySplit::ActionYield) {
+    } else if (stockSplit.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Yield)) {
       addon = i18n("Yield");
-    } else if (split.action() == MyMoneySplit::ActionInterestIncome) {
+    } else if (stockSplit.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::InterestIncome)) {
       addon = i18n("Interest Income");
     }
     if (!addon.isEmpty()) {
@@ -111,7 +112,7 @@ StdTransaction::StdTransaction(Register *parent, const MyMoneyTransaction& trans
   }
 
   // setup initial size
-  setNumRowsRegister(numRowsRegister(KMyMoneyGlobalSettings::showRegisterDetailed()));
+  setNumRowsRegister(numRowsRegister(KMyMoneySettings::showRegisterDetailed()));
 
   emit parent->itemAdded(this);
 }
@@ -391,7 +392,7 @@ void StdTransaction::registerCellText(QString& txt, Qt::Alignment& align, int ro
               if (txt.isEmpty() && !d->m_split.value().isZero()) {
                 txt = i18n("*** UNASSIGNED ***");
                 if (painter)
-                  painter->setPen(KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionErroneous));
+                  painter->setPen(KMyMoneySettings::schemeColor(SchemeColor::TransactionErroneous));
               }
             }
           }
@@ -456,7 +457,7 @@ void StdTransaction::registerCellText(QString& txt, Qt::Alignment& align, int ro
           if (txt.isEmpty() && !d->m_split.value().isZero()) {
             txt = i18n("*** UNASSIGNED ***");
             if (painter)
-              painter->setPen(KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionErroneous));
+              painter->setPen(KMyMoneySettings::schemeColor(SchemeColor::TransactionErroneous));
           }
           break;
 
@@ -543,17 +544,17 @@ void StdTransaction::arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets)
 
   auto form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(d->m_form);
   auto w = dynamic_cast<KMyMoneyTransactionForm::TabBar*>(editWidgets["tabbar"]);
-  if (w) {
+  if (w && form) {
     // insert the tabbar in the boxlayout so it will take the place of the original tabbar which was hidden
-    QBoxLayout* boxLayout = dynamic_cast<QBoxLayout*>(form->getTabBar()->parentWidget()->layout());
-    boxLayout->insertWidget(0, w);
+    if (auto boxLayout = dynamic_cast<QBoxLayout*>(form->getTabBar()->parentWidget()->layout()))
+      boxLayout->insertWidget(0, w);
   }
 }
 
 void StdTransaction::tabOrderInForm(QWidgetList& tabOrderWidgets) const
 {
   Q_D(const StdTransaction);
-  QStringList taborder = KMyMoneyGlobalSettings::stdTransactionFormTabOrder().split(',', QString::SkipEmptyParts);
+  QStringList taborder = KMyMoneySettings::stdTransactionFormTabOrder().split(',', QString::SkipEmptyParts);
   QStringList::const_iterator it_s = taborder.constBegin();
   QWidget* w;
   while (it_s != taborder.constEnd()) {
@@ -568,7 +569,7 @@ void StdTransaction::tabOrderInForm(QWidgetList& tabOrderWidgets) const
       // ok, we have to have some internal knowledge about the KMyMoneyCategory object, but
       // it's one of our own widgets, so we actually don't care. Just make sure, that we don't
       // go haywire when someone changes the KMyMoneyCategory object ...
-      QWidget* w = d->m_form->cellWidget(2, (int)eTransactionForm::Column::Value1);
+      w = d->m_form->cellWidget(2, (int)eTransactionForm::Column::Value1);
       tabOrderWidgets.append(focusWidget(w));
       w = w->findChild<QPushButton*>("splitButton");
       if (w)
@@ -619,7 +620,7 @@ void StdTransaction::arrangeWidgetsInRegister(QMap<QString, QWidget*>& editWidge
 void StdTransaction::tabOrderInRegister(QWidgetList& tabOrderWidgets) const
 {
   Q_D(const StdTransaction);
-  QStringList taborder = KMyMoneyGlobalSettings::stdTransactionRegisterTabOrder().split(',', QString::SkipEmptyParts);
+  QStringList taborder = KMyMoneySettings::stdTransactionRegisterTabOrder().split(',', QString::SkipEmptyParts);
   QStringList::const_iterator it_s = taborder.constBegin();
   QWidget* w;
   while (it_s != taborder.constEnd()) {

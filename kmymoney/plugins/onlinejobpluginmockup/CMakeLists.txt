@@ -6,15 +6,17 @@ set(onlinejobpluginmockup_PART_SRCS
   onlinejobpluginmockup.cpp
 )
 
-add_library(onlinejobpluginmockup MODULE ${onlinejobpluginmockup_PART_SRCS})
+kcoreaddons_add_plugin(onlinejobpluginmockup
+                       SOURCES ${onlinejobpluginmockup_PART_SRCS}
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/onlinejobpluginmockup.json"
+                       INSTALL_NAMESPACE "kmymoney")
+
+#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
+set_target_properties(onlinejobpluginmockup
+                      PROPERTIES
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(onlinejobpluginmockup
                       kmm_mymoney
                       kmm_plugin
 )
-
-
-########### install files ###############
-
-install(TARGETS onlinejobpluginmockup
-        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")

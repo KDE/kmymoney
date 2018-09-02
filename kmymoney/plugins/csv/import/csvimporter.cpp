@@ -1,21 +1,21 @@
-/***************************************************************************
-                            csvimporter.cpp
-                             -------------------
-    begin                : Sat Jan 01 2010
-    copyright            : (C) 2010 by Allan Anderson
-    email                : agander93@gmail.com
-    copyright            : (C) 2016 by Łukasz Wojniłowicz
-    email                : lukasz.wojnilowicz@gmail.com
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2010-2014  Allan Anderson <agander93@gmail.com>
+ * Copyright 2016-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2018       Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "csvimporter.h"
 
@@ -37,7 +37,7 @@
 #include "core/csvimportercore.h"
 #include "csvwizard.h"
 #include "statementinterface.h"
-#include "kmymoneyglobalsettings.h"
+#include "viewinterface.h"
 
 CSVImporter::CSVImporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, "csvimporter"/*must be the same as X-KDE-PluginInfo-Name*/)
@@ -55,33 +55,13 @@ CSVImporter::~CSVImporter()
   qDebug("Plugins: csvimporter unloaded");
 }
 
-void CSVImporter::injectExternalSettings(KMyMoneySettings* p)
-{
-  KMyMoneyGlobalSettings::injectExternalSettings(p);
-}
-
 void CSVImporter::createActions()
 {
-  m_action = actionCollection()->addAction("file_import_csv");
-  m_action->setText(i18n("CSV..."));
-  connect(m_action, &QAction::triggered, this, &CSVImporter::startWizardRun);
-}
-
-void CSVImporter::startWizardRun()
-{
-  m_action->setEnabled(false);
-  m_importer = new CSVImporterCore;
-  m_wizard = new CSVWizard(this, m_importer);
-  m_silent = false;
-  connect(m_wizard, &CSVWizard::statementReady, this, &CSVImporter::slotGetStatement);
-  m_action->setEnabled(false);//  don't allow further plugins to start while this is open
-}
-
-bool CSVImporter::slotGetStatement(MyMoneyStatement& s)
-{
-  bool ret = statementInterface()->import(s, m_silent);
-  delete m_importer;
-  return ret;
+  const auto &kpartgui = QStringLiteral("file_import_csv");
+  auto importAction = actionCollection()->addAction(kpartgui);
+  importAction->setText(i18n("CSV..."));
+  connect(importAction, &QAction::triggered, this, &CSVImporter::startWizardRun);
+  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action(qPrintable(kpartgui)), &QAction::setEnabled);
 }
 
 QString CSVImporter::formatName() const
@@ -97,26 +77,27 @@ QString CSVImporter::formatFilenameFilter() const
 bool CSVImporter::isMyFormat(const QString& filename) const
 {
   // filename is considered a CSV file if it can be opened
-  // and the filename ends in ".csv".
-  bool result = false;
-
+  // and the filename ends in ".csv" (case does not matter).
   QFile f(filename);
-  if (f.open(QIODevice::ReadOnly | QIODevice::Text)) {
-    result = f.fileName().endsWith(QLatin1String(".csv"));
-    f.close();
-  }
+  return filename.endsWith(QLatin1String(".csv"), Qt::CaseInsensitive)
+          && f.open(QIODevice::ReadOnly | QIODevice::Text);
+}
 
-  return result;
+void CSVImporter::startWizardRun()
+{
+  import(QString());
 }
 
 bool CSVImporter::import(const QString& filename)
 {
-  bool rc = true;
-  m_importer = new CSVImporterCore;
-  m_wizard = new CSVWizard(this, m_importer);
-  m_wizard->presetFilename(filename);
-  m_silent = false;
-  connect(m_wizard, &CSVWizard::statementReady, this, &CSVImporter::slotGetStatement);
+  QPointer<CSVWizard> wizard = new CSVWizard(this);
+  wizard->presetFilename(filename);
+  auto rc = false;
+
+  if ((wizard->exec() == QDialog::Accepted) && wizard) {
+    rc =  !statementInterface()->import(wizard->statement(), false).isEmpty();
+  }
+  wizard->deleteLater();
   return rc;
 }
 

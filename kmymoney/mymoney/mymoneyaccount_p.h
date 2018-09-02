@@ -1,20 +1,24 @@
-/***************************************************************************
-                          mymoneyaccount.cpp
-                          -------------------
-    copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
-                           (C) 2002 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2000-2002  Michael Edwardes <mte@users.sourceforge.net>
+ * Copyright 2001       Felix Rodriguez <frodriguez@users.sourceforge.net>
+ * Copyright 2002-2003  Kevin Tambascio <ktambascio@users.sourceforge.net>
+ * Copyright 2006-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2006       Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MYMONEYACCOUNT_P_H
 #define MYMONEYACCOUNT_P_H
@@ -40,37 +44,6 @@
 
 using namespace eMyMoney;
 
-namespace eMyMoney
-{
-  namespace Account
-  {
-    enum class Element { SubAccount,
-                         SubAccounts,
-                         OnlineBanking
-                       };
-    uint qHash(const Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-
-    enum class Attribute { ID = 0 ,
-                           Name,
-                           Type,
-                           ParentAccount,
-                           LastReconciled,
-                           LastModified,
-                           Institution,
-                           Opened,
-                           Number,
-                           Description,
-                           Currency,
-                           OpeningBalance,
-                           IBAN,
-                           BIC,
-                           // insert new entries above this line
-                           LastAttribute
-                         };
-    uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-  }
-}
-
 class MyMoneyAccountPrivate : public MyMoneyObjectPrivate
 {
 public:
@@ -79,38 +52,6 @@ public:
     m_accountType(Account::Type::Unknown),
     m_fraction(-1)
   {
-  }
-
-  static QString getElName(const Account::Element el)
-  {
-    static const QMap<Account::Element, QString> elNames = {
-      {Account::Element::SubAccount,     QStringLiteral("SUBACCOUNT")},
-      {Account::Element::SubAccounts,    QStringLiteral("SUBACCOUNTS")},
-      {Account::Element::OnlineBanking,  QStringLiteral("ONLINEBANKING")}
-    };
-    return elNames[el];
-  }
-
-  static QString getAttrName(const Account::Attribute attr)
-  {
-    static const QHash<Account::Attribute, QString> attrNames = {
-      {Account::Attribute::ID,             QStringLiteral("id")},
-      {Account::Attribute::Name,           QStringLiteral("name")},
-      {Account::Attribute::Type,           QStringLiteral("type")},
-      {Account::Attribute::ParentAccount,  QStringLiteral("parentaccount")},
-      {Account::Attribute::LastReconciled, QStringLiteral("lastreconciled")},
-      {Account::Attribute::LastModified,   QStringLiteral("lastmodified")},
-      {Account::Attribute::Institution,    QStringLiteral("institution")},
-      {Account::Attribute::Opened,         QStringLiteral("opened")},
-      {Account::Attribute::Number,         QStringLiteral("number")},
-      {Account::Attribute::Type,           QStringLiteral("type")},
-      {Account::Attribute::Description,    QStringLiteral("description")},
-      {Account::Attribute::Currency,       QStringLiteral("currency")},
-      {Account::Attribute::OpeningBalance, QStringLiteral("openingbalance")},
-      {Account::Attribute::IBAN,           QStringLiteral("iban")},
-      {Account::Attribute::BIC,            QStringLiteral("bic")},
-    };
-    return attrNames[attr];
   }
 
   /**

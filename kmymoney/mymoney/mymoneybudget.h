@@ -1,20 +1,21 @@
-/***************************************************************************
-                          mymoneybudget.h
-                             -------------------
-    begin                : Sun Jan 22 2006
-    copyright            : (C) 2006 by Darren Gould
-    email                : darren_gould@gmx.de
-                          (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2006       Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2006       Darren Gould <darren_gould@gmx.de>
+ * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MYMONEYBUDGET_H
 #define MYMONEYBUDGET_H
@@ -33,12 +34,12 @@
 
 class QString;
 class QDate;
-class QDomElement;
-class QDomDocument;
 class MyMoneyMoney;
 
 template <typename T> class QList;
 template <class Key, class T> class QMap;
+
+namespace eMyMoney { namespace Budget { enum class Level; } }
 
 /**
   * This class defines a Budget within the MyMoneyEngine.  The Budget class
@@ -60,13 +61,7 @@ class KMM_MYMONEY_EXPORT MyMoneyBudget: public MyMoneyObject
 
 public:
   MyMoneyBudget();
-  explicit MyMoneyBudget(const QString& name);
-  /**
-    * This constructor creates an object based on the data found in the
-    * QDomElement referenced by @p node. If problems arise, the @p id of
-    * the object is cleared (see MyMoneyObject::clearId()).
-    */
-  explicit MyMoneyBudget(const QDomElement& node);
+  explicit MyMoneyBudget(const QString &id);
 
   /**
     * This constructor creates an object based on the data found in the
@@ -127,17 +122,6 @@ public:
     AccountGroupPrivate* d_ptr;
 
   public:
-    typedef enum {
-      eNone = 0,
-      eMonthly,
-      eMonthByMonth,
-      eYearly,
-      eMax
-    } eBudgetLevel;
-
-    static const QStringList kBudgetLevelText;
-
-  public:
     AccountGroup();
     AccountGroup(const AccountGroup & other);
     AccountGroup(AccountGroup && other);
@@ -152,8 +136,8 @@ public:
     bool budgetSubaccounts() const;
     void setBudgetSubaccounts(bool budgetsubaccounts);
 
-    eBudgetLevel budgetLevel() const;
-    void setBudgetLevel(eBudgetLevel level);
+    eMyMoney::Budget::Level budgetLevel() const;
+    void setBudgetLevel(eMyMoney::Budget::Level level);
 
     PeriodGroup period(const QDate& date) const;
     void addPeriod(const QDate& date, PeriodGroup& period);
@@ -195,37 +179,7 @@ public:
   bool contains(const QString &id) const;
   QList<AccountGroup> getaccounts() const;
 
-  /**
-    * This method writes this Budget to the DOM element @p e,
-    * within the DOM document @p doc.
-    *
-    * @param e The element which should be populated with info from this Budget
-    * @param doc The document which we can use to create new sub-elements
-    *              if needed
-    */
-  void write(QDomElement& e, QDomDocument *doc) const;
-
-  /**
-    * This method reads a Budget from the DOM element @p e, and
-    * populates this Budget with the results.
-    *
-    * @param e The element from which the Budget should be read
-    *
-    * @return bool True if a Budget was successfully loaded from the
-    *    element @p e.  If false is returned, the contents of this Budget
-    *    object are undefined.
-    */
-  bool read(const QDomElement& e);
-
-  /**
-    * This method creates a QDomElement for the @p document
-    * under the parent node @p parent.  (This version overwrites the
-    * MMObject base class.)
-    *
-    * @param document reference to QDomDocument
-    * @param parent reference to QDomElement parent node
-    */
-  void writeXML(QDomDocument& document, QDomElement& parent) const override;
+  QMap<QString, MyMoneyBudget::AccountGroup> accountsMap() const;
 
   /**
     * This method checks if a reference to the given object exists. It returns,

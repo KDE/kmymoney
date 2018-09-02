@@ -1,20 +1,20 @@
-/***************************************************************************
-                          stdtransactiondownloaded.cpp
-                             -------------------
-    begin                : Sun May 11 2008
-    copyright            : (C) 2008 by Thomas Baumgart
-    email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2008-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "stdtransactiondownloaded.h"
 
@@ -29,7 +29,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 
 using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;
@@ -54,8 +54,8 @@ bool StdTransactionDownloaded::paintRegisterCellSetup(QPainter *painter, QStyleO
   auto rc = Transaction::paintRegisterCellSetup(painter, option, index);
   // if not selected paint in selected background color
   if (!isSelected()) {
-    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionImported));
-    option.palette.setColor(QPalette::AlternateBase, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionImported));
+    option.palette.setColor(QPalette::Base, KMyMoneySettings::schemeColor(SchemeColor::TransactionImported));
+    option.palette.setColor(QPalette::AlternateBase, KMyMoneySettings::schemeColor(SchemeColor::TransactionImported));
   }
   return rc;
 }
@@ -79,8 +79,8 @@ bool InvestTransactionDownloaded::paintRegisterCellSetup(QPainter *painter, QSty
   auto rc = Transaction::paintRegisterCellSetup(painter, option, index);
   // if not selected paint in selected background color
   if (!isSelected()) {
-    option.palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionImported));
-    option.palette.setColor(QPalette::AlternateBase, KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionImported));
+    option.palette.setColor(QPalette::Base, KMyMoneySettings::schemeColor(SchemeColor::TransactionImported));
+    option.palette.setColor(QPalette::AlternateBase, KMyMoneySettings::schemeColor(SchemeColor::TransactionImported));
   }
   return rc;
 }

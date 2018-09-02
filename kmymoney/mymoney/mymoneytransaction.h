@@ -1,19 +1,24 @@
-/***************************************************************************
-                          mymoneytransaction.h
-                             -------------------
-    copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
-                           (C) 2002 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2000-2002  Michael Edwardes <mte@users.sourceforge.net>
+ * Copyright 2001-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2001       Felix Rodriguez <frodriguez@users.sourceforge.net>
+ * Copyright 2003       Kevin Tambascio <ktambascio@users.sourceforge.net>
+ * Copyright 2004-2005  Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2006       Darren Gould <darren_gould@gmx.de>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MYMONEYTRANSACTION_H
 #define MYMONEYTRANSACTION_H
@@ -58,11 +63,7 @@ class KMM_MYMONEY_EXPORT MyMoneyTransaction : public MyMoneyObject, public MyMon
 public:
 
   MyMoneyTransaction();
-  /**
-    * @param node reference to QDomNode
-    * @param forceId see MyMoneyObject(const QDomElement&, const bool)
-    */
-  explicit MyMoneyTransaction(const QDomElement& node, const bool forceId = true);
+  explicit MyMoneyTransaction(const QString &id);
 
   MyMoneyTransaction(const QString& id,
                      const MyMoneyTransaction& other);
@@ -88,6 +89,7 @@ public:
 
   QList<MyMoneySplit> splits() const;
   QList<MyMoneySplit>& splits();
+  MyMoneySplit firstSplit() const;
   uint splitCount() const;
 
   QString commodity() const;
@@ -192,7 +194,7 @@ public:
     * contains information of a loan payment or not.
     * Loan payment transactions have at least one
     * split that is identified with a MyMoneySplit::action() of type
-    * MyMoneySplit::ActionAmortization.
+    * MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization).
     *
     * @retval false transaction is no loan payment transaction
     * @retval true  transaction is a loan payment transaction
@@ -238,8 +240,6 @@ public:
     * @return QString with ID of the first split of transactions
     */
   static QString firstSplitID();
-
-  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 
   /**
     * This method checks if a reference to the given object exists. It returns,

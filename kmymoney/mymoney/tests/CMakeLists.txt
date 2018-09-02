@@ -1,6 +1,6 @@
 include(ECMAddTests)
 
-add_library(kmm_testutils STATIC mymoneytestutils.cpp ../onlinejobmessage.cpp)
+add_library(kmm_testutils STATIC mymoneytestutils.cpp)
 target_link_libraries(kmm_testutils
   PUBLIC
     Qt5::Core
@@ -16,6 +16,6 @@ ecm_add_tests(${tests_sources}
     Qt5::Gui
     kmm_mymoney
     kmm_testutils
-    reports_testcommon
-    onlinetask_unavailabletask
+    kmm_testutilities
+    onlinetask_interfaces
 )

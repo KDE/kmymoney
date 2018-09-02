@@ -1,21 +1,20 @@
-/***************************************************************************
-                             csvimportercore.h
-                             -------------------
-    begin                       : Sun May 21 2017
-    copyright                   : (C) 2015 by Allan Anderson
-    email                       : agander93@gmail.com
-    copyright                   : (C) 2017 by Łukasz Wojniłowicz
-    email                       : lukasz.wojnilowicz@gmail.com
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2010  Allan Anderson <agander93@gmail.com>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef CSVIMPORTERCORE_H
 #define CSVIMPORTERCORE_H
@@ -60,16 +59,27 @@ enum miscSettingsE { ConfDirectory, ConfEncoding, ConfDateFormat,
 enum validationResultE { ValidActionType, InvalidActionValues, NoActionType };
 
 
-class KMM_CSVIMPORTERCORE_NO_EXPORT CSVProfile
+class KMM_CSVIMPORTERCORE_EXPORT CSVProfile
 {
 protected:
-  CSVProfile() {}
+  CSVProfile() :
+  m_encodingMIBEnum(0),
+    m_startLine(0),
+    m_endLine(0),
+    m_trailerLines(0),
+    m_dateFormat(DateFormat::DayMonthYear),
+    m_fieldDelimiter(FieldDelimiter::Auto),
+    m_textDelimiter(TextDelimiter::DoubleQuote),
+    m_decimalSymbol(DecimalSymbol::Auto)
+  {
+  }
+
   CSVProfile(const QString &profileName, int encodingMIBEnum,
              int startLine, int trailerLines,
              DateFormat dateFormat, FieldDelimiter fieldDelimiter, TextDelimiter textDelimiter, DecimalSymbol decimalSymbol,
              QMap<Column, int> &colTypeNum) :
     m_profileName(profileName), m_encodingMIBEnum(encodingMIBEnum),
-    m_startLine(startLine), m_trailerLines(trailerLines),
+    m_startLine(startLine), m_endLine(startLine), m_trailerLines(trailerLines),
     m_dateFormat(dateFormat), m_fieldDelimiter(fieldDelimiter),
     m_textDelimiter(textDelimiter), m_decimalSymbol(decimalSymbol),
     m_colTypeNum(colTypeNum)
@@ -110,7 +120,7 @@ public:
 class KMM_CSVIMPORTERCORE_EXPORT BankingProfile : public CSVProfile
 {
 public:
-  explicit BankingProfile() : CSVProfile() {}
+  explicit BankingProfile() : CSVProfile(), m_oppositeSigns(false) {}
   BankingProfile(QString profileName, int encodingMIBEnum,
                  int startLine, int trailerLines,
                  DateFormat dateFormat, FieldDelimiter fieldDelimiter, TextDelimiter textDelimiter, DecimalSymbol decimalSymbol,
@@ -123,9 +133,9 @@ public:
     m_oppositeSigns(oppositeSigns) {}
 
 
-  Profile type() const { return Profile::Banking; }
-  bool readSettings(const KSharedConfigPtr &config);
-  void writeSettings(const KSharedConfigPtr &config);
+  Profile type() const final override { return Profile::Banking; }
+  bool readSettings(const KSharedConfigPtr &config) final override;
+  void writeSettings(const KSharedConfigPtr &config) final override;
 
   QList<int>       m_memoColList;
 
@@ -135,7 +145,14 @@ public:
 class KMM_CSVIMPORTERCORE_EXPORT InvestmentProfile : public CSVProfile
 {
 public:
-  explicit InvestmentProfile() : CSVProfile() {}
+  explicit InvestmentProfile() :
+    CSVProfile(),
+    m_priceFraction(2),
+    m_dontAsk(0),
+    m_feeIsPercentage(false)
+  {
+  }
+
   InvestmentProfile(QString profileName, int encodingMIBEnum,
                     int startLine, int trailerLines,
                     DateFormat dateFormat, FieldDelimiter fieldDelimiter, TextDelimiter textDelimiter, DecimalSymbol decimalSymbol,
@@ -145,11 +162,16 @@ public:
                startLine, trailerLines,
                dateFormat, fieldDelimiter, textDelimiter, decimalSymbol,
                colTypeNum),
-    m_transactionNames(transactionNames), m_priceFraction(priceFraction), m_feeIsPercentage(false) {}
+    m_transactionNames(transactionNames),
+    m_priceFraction(priceFraction),
+    m_dontAsk(0),
+    m_feeIsPercentage(false)
+  {
+  }
 
-  Profile type() const { return Profile::Investment; }
-  bool readSettings(const KSharedConfigPtr &config);
-  void writeSettings(const KSharedConfigPtr &config);
+  Profile type() const final override { return Profile::Investment; }
+  bool readSettings(const KSharedConfigPtr &config) final override;
+  void writeSettings(const KSharedConfigPtr &config) final override;
 
   QMap <eMyMoney::Transaction::Action, QStringList> m_transactionNames;
 
@@ -169,8 +191,22 @@ public:
 class KMM_CSVIMPORTERCORE_EXPORT PricesProfile : public CSVProfile
 {
 public:
-  explicit PricesProfile() : CSVProfile() {}
-  explicit PricesProfile(const Profile profileType) : CSVProfile(), m_profileType(profileType) {}
+  explicit PricesProfile() :
+    CSVProfile(),
+    m_dontAsk(0),
+    m_priceFraction(2),
+    m_profileType(Profile::CurrencyPrices)
+  {
+  }
+
+  explicit PricesProfile(const Profile profileType) :
+    CSVProfile(),
+    m_dontAsk(0),
+    m_priceFraction(2),
+    m_profileType(profileType)
+  {
+  }
+
   PricesProfile(QString profileName, int encodingMIBEnum,
                      int startLine, int trailerLines,
                      DateFormat dateFormat, FieldDelimiter fieldDelimiter, TextDelimiter textDelimiter, DecimalSymbol decimalSymbol,
@@ -180,11 +216,15 @@ public:
                startLine, trailerLines,
                dateFormat, fieldDelimiter, textDelimiter, decimalSymbol,
                colTypeNum),
-    m_priceFraction(priceFraction), m_profileType(profileType) {}
+    m_dontAsk(0),
+    m_priceFraction(priceFraction),
+    m_profileType(profileType)
+  {
+  }
 
-  Profile type() const { return m_profileType; }
-  bool readSettings(const KSharedConfigPtr &config);
-  void writeSettings(const KSharedConfigPtr &config);
+  Profile type() const final override { return m_profileType; }
+  bool readSettings(const KSharedConfigPtr &config) final override;
+  void writeSettings(const KSharedConfigPtr &config) final override;
 
   QString m_securityName;
   QString m_securitySymbol;

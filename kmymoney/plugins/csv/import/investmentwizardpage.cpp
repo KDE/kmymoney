@@ -1,21 +1,20 @@
-/*******************************************************************************
-*                                 investmentwizardpage.cpp
-*                              --------------------
-* begin                       : Thur Jan 01 2015
-* copyright                   : (C) 2015 by Allan Anderson
-* email                       : agander93@gmail.com
-* copyright                   : (C) 2016 by Łukasz Wojniłowicz
-* email                       : lukasz.wojnilowicz@gmail.com
-********************************************************************************/
-
-/*******************************************************************************
-*                                                                              *
-*   This program is free software; you can redistribute it and/or modify       *
-*   it under the terms of the GNU General Public License as published by       *
-*   the Free Software Foundation; either version 2 of the License, or          *
-*   (at your option) any later version.                                        *
-*                                                                              *
-********************************************************************************/
+/*
+ * Copyright 2010-2017  Allan Anderson <agander93@gmail.com>
+ * Copyright 2016-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "investmentwizardpage.h"
 
@@ -424,7 +423,7 @@ bool InvestmentPage::validateActionType()
 
         QStringList colList;
         QStringList colHeaders;
-        for (int col = 0; col < m_imp->m_file->m_columnCount; ++col) {
+        for (col = 0; col < m_imp->m_file->m_columnCount; ++col) {
           colHeaders.append(m_dlg->m_colTypeName.value(m_profile->m_colNumType.value(col, Column::Invalid), QString(i18nc("Unused column", "Unused"))));
           colList.append(m_imp->m_file->m_model->item(row, col)->text());
         }

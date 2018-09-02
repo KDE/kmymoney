@@ -24,13 +24,13 @@
 #include "kmymoneyutils.h"
 
 ScheduledTransactionMatchFinder::ScheduledTransactionMatchFinder(const MyMoneyAccount& account, int matchWindow)
-    : TransactionMatchFinder(matchWindow), account(account)
+    : TransactionMatchFinder(matchWindow), m_account(account)
 {
 }
 
 void ScheduledTransactionMatchFinder::createListOfMatchCandidates()
 {
-  listOfMatchCandidates = MyMoneyFile::instance()->scheduleList(account.id());
+  listOfMatchCandidates = MyMoneyFile::instance()->scheduleList(m_account.id());
   qDebug() << "Considering" << listOfMatchCandidates.size() << "schedule(s) for matching the transaction";
 }
 
@@ -38,8 +38,8 @@ void ScheduledTransactionMatchFinder::findMatchInMatchCandidatesList()
 {
   foreach (const MyMoneySchedule & schedule, listOfMatchCandidates) {
     QDate nextDueDate = schedule.nextDueDate();
-    bool nextDueDateWithinMatchWindowRange = (nextDueDate >= importedTransaction.postDate().addDays(-matchWindow))
-        && (nextDueDate <= importedTransaction.postDate().addDays(matchWindow));
+    bool nextDueDateWithinMatchWindowRange = (nextDueDate >= importedTransaction.postDate().addDays(-m_matchWindow))
+        && (nextDueDate <= importedTransaction.postDate().addDays(m_matchWindow));
     if (schedule.isOverdue() || nextDueDateWithinMatchWindowRange) {
       MyMoneyTransaction scheduledTransaction = KMyMoneyUtils::scheduledTransaction(schedule);
 

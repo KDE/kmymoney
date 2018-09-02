@@ -36,7 +36,7 @@
 #include "mymoneyexception.h"
 #include "mymoneymoney.h"
 #include "mymoneyprice.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "ktagreassigndlg.h"
 #include "kmymoneyutils.h"
 #include "kmymoneymvccombo.h"
@@ -72,15 +72,27 @@ KTagsView::~KTagsView()
 {
 }
 
-void KTagsView::setDefaultFocus()
+void KTagsView::executeCustomAction(eView::Action action)
 {
-  Q_D(KTagsView);
-  QTimer::singleShot(0, d->m_searchWidget, SLOT(setFocus()));
+  switch(action) {
+    case eView::Action::Refresh:
+      refresh();
+      break;
+
+    case eView::Action::SetDefaultFocus:
+      {
+        Q_D(KTagsView);
+        QTimer::singleShot(0, d->m_searchWidget, SLOT(setFocus()));
+      }
+      break;
+
+    default:
+      break;
+  }
 }
 
 void KTagsView::refresh()
 {
-
   Q_D(KTagsView);
   if (isVisible()) {
     if (d->m_inSelection)
@@ -146,8 +158,7 @@ void KTagsView::slotRenameSingleTag(QListWidgetItem* ta)
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to modify tag"),
-                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(this, i18n("Unable to modify tag"), QString::fromLatin1(e.what()));
     }
   } else {
     ta->setText(new_name);
@@ -253,7 +264,7 @@ void KTagsView::slotSelectTag()
     showTransactions();
 
   } catch (const MyMoneyException &e) {
-    qDebug("exception during display of tag: %s at %s:%ld", qPrintable(e.what()), qPrintable(e.file()), e.line());
+    qDebug("exception during display of tag: %s", e.what());
     d->ui->m_register->clear();
     d->m_tag = MyMoneyTag();
   }
@@ -277,7 +288,7 @@ void KTagsView::showTransactions()
   MyMoneySecurity base = file->baseCurrency();
 
   // setup sort order
-  d->ui->m_register->setSortOrder(KMyMoneyGlobalSettings::sortSearchView());
+  d->ui->m_register->setSortOrder(KMyMoneySettings::sortSearchView());
 
   // clear the register
   d->ui->m_register->clear();
@@ -290,7 +301,7 @@ void KTagsView::showTransactions()
   // setup the list and the pointer vector
   MyMoneyTransactionFilter filter;
   filter.addTag(d->m_tag.id());
-  filter.setDateFilter(KMyMoneyGlobalSettings::startDate().date(), QDate());
+  filter.setDateFilter(KMyMoneySettings::startDate().date(), QDate());
 
   // retrieve the list from the engine
   file->transactionList(d->m_transactionList, filter);
@@ -381,8 +392,7 @@ void KTagsView::slotUpdateTag()
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to modify tag"),
-                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(this, i18n("Unable to modify tag"), QString::fromLatin1(e.what()));
     }
   }
 }
@@ -393,7 +403,7 @@ void KTagsView::showEvent(QShowEvent* event)
   if (d->m_needLoad)
     d->init();
 
-  emit aboutToShow(View::Tags);
+  emit customActionRequested(View::Tags, eView::Action::AboutToShow);
 
   if (d->m_needsRefresh)
     refresh();
@@ -484,7 +494,7 @@ void KTagsView::slotSelectTransaction()
   if (!list.isEmpty()) {
     KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(list[0]);
     if (t)
-      emit transactionSelected(t->split().accountId(), t->transaction().id());
+      emit selectByVariant(QVariantList {QVariant(t->split().accountId()), QVariant(t->transaction().id())}, eView::Intent::ShowTransaction);
   }
 }
 
@@ -523,24 +533,24 @@ void KTagsView::slotSelectTagAndTransaction(const QString& tagId, const QString&
         //make sure the tag selection is updated and transactions are updated accordingly
         slotSelectTag();
 
-        KMyMoneyRegister::RegisterItem *item = 0;
-        for (int i = 0; i < d->ui->m_register->rowCount(); ++i) {
-          item = d->ui->m_register->itemAtRow(i);
-          KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(item);
+        KMyMoneyRegister::RegisterItem *registerItem = 0;
+        for (i = 0; i < d->ui->m_register->rowCount(); ++i) {
+          registerItem = d->ui->m_register->itemAtRow(i);
+          KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(registerItem);
           if (t) {
             if (t->transaction().id() == transactionId && t->transaction().accountReferenced(accountId)) {
-              d->ui->m_register->selectItem(item);
-              d->ui->m_register->ensureItemVisible(item);
+              d->ui->m_register->selectItem(registerItem);
+              d->ui->m_register->ensureItemVisible(registerItem);
               break;
             }
           }
         }
-        // quit out of for() loop
+        // quit out of outer for() loop
         break;
       }
     }
   } catch (const MyMoneyException &e) {
-    qWarning("Unexpected exception in KTagsView::slotSelectTagAndTransaction %s", qPrintable(e.what()));
+    qWarning("Unexpected exception in KTagsView::slotSelectTagAndTransaction %s", e.what());
   }
 }
 
@@ -723,8 +733,7 @@ void KTagsView::slotDeleteTag()
         } // for - Schedules
 
       } catch (const MyMoneyException &e) {
-        KMessageBox::detailedSorry(this, i18n("Unable to reassign tag of transaction/split"),
-                                   i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+        KMessageBox::detailedSorry(this, i18n("Unable to reassign tag of transaction/split"), QString::fromLatin1(e.what()));
       }
     } // if !translist.isEmpty()
 
@@ -740,7 +749,6 @@ void KTagsView::slotDeleteTag()
     slotSelectTags(QList<MyMoneyTag>());
 
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(this, i18n("Unable to remove tag(s)"),
-                               i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+    KMessageBox::detailedSorry(this, i18n("Unable to remove tag(s)"), QString::fromLatin1(e.what()));
   }
 }

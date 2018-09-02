@@ -93,10 +93,6 @@
             <property name="enabled">
              <bool>true</bool>
             </property>
-            <!-- TODO: port to kf5 -->
-            <!--property name="title">
-             <string>Exceptions</string>
-            </property-->
             <property name="buttons">
              <set>KEditListWidget::All</set>
             </property>
@@ -191,6 +187,39 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="memoTab">
+      <attribute name="title">
+       <string>Memo</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QCheckBox" name="m_removeLineBreaksFromMemo">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove the line breaks in the memo field that have been inserted between multiple purpose fields of the transaction.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="whatsThis">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Some institutions take multiple purpose fields of a transaction and treat it as a single one. In this case the line break characters inserted after each purpose field are distracting and are removed when this option is enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>Remove line breaks from memo field</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>384</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
    <item>
@@ -216,7 +245,7 @@
   <customwidget>
    <class>KEditListWidget</class>
    <extends>QWidget</extends>
-   <header>KEditListWidget</header>
+   <header>keditlistwidget.h</header>
   </customwidget>
   <customwidget>
    <class>KComboBox</class>
@@ -227,12 +256,6 @@
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>QTabWidget</class>
-   <extends>QTabWidget</extends>
-   <header>ktabwidget.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <tabstops>

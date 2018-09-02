@@ -1,7 +1,5 @@
 include(ECMInstallIcons)
 
-add_definitions(-DKMYMONEY_ICON_DIR="${CMAKE_INSTALL_PREFIX}/${DATA_INSTALL_DIR}/kmymoney/icons")
-
 file(GLOB_RECURSE KMYMONEY_HICOLOR_ICONS "hicolor/*")
 ecm_install_icons(
   ICONS ${KMYMONEY_HICOLOR_ICONS}

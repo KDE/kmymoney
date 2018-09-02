@@ -56,15 +56,14 @@ LoanAttributesWizardPage::LoanAttributesWizardPage(QWidget *parent)
   try {
     MyMoneyFile *file = MyMoneyFile::instance();
 
-    QList<MyMoneyInstitution> list;
-    file->institutionList(list);
+    auto list = file->institutionList();
     qSort(list);
 
     Q_FOREACH(const MyMoneyInstitution &institution, list) {
       ui->m_qcomboboxInstitutions->addItem(institution.name());
     }
   } catch (const MyMoneyException &e) {
-    qDebug("Exception in institution load: %s", qPrintable(e.what()));
+    qDebug("Exception in institution load: %s", e.what());
   }
 }
 

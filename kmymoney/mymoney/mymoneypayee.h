@@ -1,20 +1,23 @@
-/***************************************************************************
-                          mymoneypayee.h
-                             -------------------
-    copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
-                               2005 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2000-2001  Michael Edwardes <mte@users.sourceforge.net>
+ * Copyright 2002-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2003       Kevin Tambascio <ktambascio@users.sourceforge.net>
+ * Copyright 2006       Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MYMONEYPAYEE_H
 #define MYMONEYPAYEE_H
@@ -34,6 +37,8 @@
 class QString;
 class QStringList;
 
+namespace eMyMoney { namespace Payee { enum class MatchType; } }
+
 /**
   * This class represents a payee or receiver within the MyMoney engine.
   * Since it is not payee-specific, it is also used as a generic address
@@ -49,30 +54,16 @@ class KMM_MYMONEY_EXPORT MyMoneyPayee : public MyMoneyObject, public MyMoneyPaye
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  typedef enum {
-    matchDisabled = 0,
-    matchName,
-    matchKey,
-    matchNameExact
-  } payeeMatchType;
-
   MyMoneyPayee();
+  explicit MyMoneyPayee(const QString &id);
 
   explicit MyMoneyPayee(const QString& name,
-                        const QString& address = QString(),
+                        const QString& address,
                         const QString& city = QString(),
                         const QString& state = QString(),
                         const QString& postcode = QString(),
                         const QString& telephone = QString(),
                         const QString& email = QString());
-  /**
-    * This is the constructor for a payee that is described by a
-    * QDomElement (e.g. from a file).
-    *
-    * @param el const reference to the QDomElement from which to
-    *           create the object
-    */
-  explicit MyMoneyPayee(const QDomElement& node);
 
   MyMoneyPayee(const QString& id,
                const MyMoneyPayee& other);
@@ -111,6 +102,11 @@ public:
   QString reference() const;
   void setReference(const QString& ref);
 
+  bool isMatchingEnabled() const;
+  bool isUsingMatchKey() const;
+  bool isMatchKeyIgnoreCase() const;
+  QString matchKey() const;
+
   /**
    * Get all match data in one call
    *
@@ -120,7 +116,7 @@ public:
    *
    * @return the matching type (see payeeMatchType for details)
    */
-  payeeMatchType matchData(bool& ignorecase, QStringList& keys) const;
+  eMyMoney::Payee::MatchType matchData(bool& ignorecase, QStringList& keys) const;
 
   /**
    * Set all match data in one call
@@ -129,7 +125,7 @@ public:
    * @param ignorecase Whether case should be ignored for the key/name match
    * @param keys A list of keys themselves, if applicable
    */
-  void setMatchData(payeeMatchType type, bool ignorecase, const QStringList& keys);
+  void setMatchData(eMyMoney::Payee::MatchType type, bool ignorecase, const QStringList& keys);
 
   /**
    * Get all match data in one call (overloaded version for database module)
@@ -140,7 +136,7 @@ public:
    *
    * @return the matching type (see payeeMatchType for details)
    */
-  payeeMatchType matchData(bool& ignorecase, QString& keyString) const;
+  eMyMoney::Payee::MatchType matchData(bool& ignorecase, QString& keyString) const;
 
   /**
    * Set all match data in one call (overloaded version for database module)
@@ -149,7 +145,7 @@ public:
    * @param ignorecase Whether case should be ignored for the key/name match
    * @param keys A list of keys in single-string format, if applicable
    */
-  void setMatchData(payeeMatchType type, bool ignorecase, const QString& keys);
+  void setMatchData(eMyMoney::Payee::MatchType type, bool ignorecase, const QString& keys);
 
 
   bool defaultAccountEnabled() const;
@@ -163,8 +159,6 @@ public:
   bool operator == (const MyMoneyPayee &) const;
 //  bool operator == (const MyMoneyPayee& lhs, const QString& rhs) const;
   bool operator <(const MyMoneyPayee& right) const;
-
-  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 
   /**
     * This method checks if a reference to the given object exists. It returns,

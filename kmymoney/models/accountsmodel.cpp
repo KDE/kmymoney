@@ -1,23 +1,20 @@
-/***************************************************************************
- *   Copyright 2010  Cristian Onet onet.cristian@gmail.com                 *
- *   Copyright 2017, 2018  Łukasz Wojniłowicz lukasz.wojnilowicz@gmail.com *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or         *
- *   modify it under the terms of the GNU General Public License as        *
- *   published by the Free Software Foundation; either version 2 of        *
- *   the License or (at your option) version 3 or any later version        *
- *   accepted by the membership of KDE e.V. (or its successor approved     *
- *   by the membership of KDE e.V.), which shall act as a proxy            *
- *   defined in Section 14 of version 3 of the license.                    *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
- ***************************************************************************/
+/*
+ * Copyright 2010-2014  Cristian Oneț <onet.cristian@gmail.com>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "accountsmodel.h"
 
@@ -30,7 +27,6 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#include <KColorScheme>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -43,10 +39,11 @@
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "icons.h"
 #include "modelenums.h"
 #include "mymoneyenums.h"
+#include "viewenums.h"
 
 using namespace Icons;
 using namespace eAccountsModel;
@@ -265,13 +262,8 @@ public:
       cell = new QStandardItem;
       node->setChild(row, colTotalValue, cell);
     }
-    QColor color;
-    if (valInstitution.isNegative())
-      color = KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative);
-    else
-      color = KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color();
-
-    cell->setData(QVariant(color),                                                   Qt::ForegroundRole);
+    const auto fontColor = KMyMoneySettings::schemeColor(valInstitution.isNegative() ? SchemeColor::Negative : SchemeColor::Positive);
+    cell->setData(QVariant(fontColor),                                               Qt::ForegroundRole);
     cell->setData(QVariant(itInstitution->data(Qt::FontRole).value<QFont>()),        Qt::FontRole);
     cell->setData(QVariant(Qt::AlignRight | Qt::AlignVCenter),                       Qt::TextAlignmentRole);
     cell->setData(MyMoneyUtils::formatMoney(valInstitution, m_file->baseCurrency()), Qt::DisplayRole);
@@ -335,9 +327,11 @@ public:
       if (colNum != -1) {
         const auto accountValueStr = QVariant::fromValue(MyMoneyUtils::formatMoney(accountValue, m_file->baseCurrency()));
         getCell(colNum);
-        cell->setData(accountValueStr, Qt::DisplayRole);
-        cell->setData(font,       Qt::FontRole);
-        cell->setData(alignment,  Qt::TextAlignmentRole);
+        const auto fontColor = KMyMoneySettings::schemeColor(accountValue.isNegative() ? SchemeColor::Negative : SchemeColor::Positive);
+        cell->setData(QVariant(fontColor),  Qt::ForegroundRole);
+        cell->setData(accountValueStr,      Qt::DisplayRole);
+        cell->setData(font,                 Qt::FontRole);
+        cell->setData(alignment,            Qt::TextAlignmentRole);
       }
     }
 
@@ -347,15 +341,10 @@ public:
       if (colNum != -1) {
         const auto accountTotalValueStr = QVariant::fromValue(MyMoneyUtils::formatMoney(accountTotalValue, m_file->baseCurrency()));
         getCell(colNum);
-        QColor color;
-        if (accountTotalValue.isNegative())
-          color = KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative);
-        else
-          color = KColorScheme(QPalette::Active).foreground(KColorScheme::NormalText).color();
-
+        const auto fontColor = KMyMoneySettings::schemeColor(accountTotalValue.isNegative() ? SchemeColor::Negative : SchemeColor::Positive);
         cell->setData(accountTotalValueStr, Qt::DisplayRole);
         cell->setData(font,                 Qt::FontRole);
-        cell->setData(QVariant(color),      Qt::ForegroundRole);
+        cell->setData(QVariant(fontColor),  Qt::ForegroundRole);
         cell->setData(alignment,            Qt::TextAlignmentRole);
       }
     }
@@ -429,13 +418,13 @@ public:
     MyMoneyMoney value = balance;
     {
       QList<MyMoneyPrice>::const_iterator it_p;
-      QString security = account.currencyId();
+      QString securityID = account.currencyId();
       for (it_p = prices.constBegin(); it_p != prices.constEnd(); ++it_p) {
-        value = (value * (MyMoneyMoney::ONE / (*it_p).rate(security))).convertPrecision(m_file->security(security).pricePrecision());
-        if ((*it_p).from() == security)
-          security = (*it_p).to();
+        value = (value * (MyMoneyMoney::ONE / (*it_p).rate(securityID))).convertPrecision(m_file->security(securityID).pricePrecision());
+        if ((*it_p).from() == securityID)
+          securityID = (*it_p).to();
         else
-          security = (*it_p).from();
+          securityID = (*it_p).from();
       }
       value = value.convert(m_file->baseCurrency().smallestAccountFraction());
     }
@@ -576,7 +565,7 @@ AccountsModel::~AccountsModel()
 void AccountsModel::load()
 {
   Q_D(AccountsModel);
-  this->blockSignals(true);
+  blockSignals(true);
   QStandardItem *rootItem = invisibleRootItem();
 
   QFont font;
@@ -667,7 +656,7 @@ void AccountsModel::load()
       // filter out stocks with zero balance if requested by user
       for (auto subaccStr = subaccountsStr.begin(); subaccStr != subaccountsStr.end();) {
         const auto subacc = d->m_file->account(*subaccStr);
-        if (subacc.isInvest() && KMyMoneyGlobalSettings::hideZeroBalanceEquities() && subacc.balance().isZero())
+        if (subacc.isInvest() && KMyMoneySettings::hideZeroBalanceEquities() && subacc.balance().isZero())
           subaccStr = subaccountsStr.erase(subaccStr);
         else
           ++subaccStr;
@@ -683,9 +672,9 @@ void AccountsModel::load()
     d->setAccountData(rootItem, accountsItem->row(), account, d->m_columns);
   }
 
+  blockSignals(false);
   checkNetWorth();
   checkProfit();
-  this->blockSignals(false);
 }
 
 QModelIndex AccountsModel::accountById(const QString& id) const
@@ -832,7 +821,7 @@ void AccountsModel::checkNetWorth()
   }
   if (d->m_lastNetWorth != netWorth) {
     d->m_lastNetWorth = netWorth;
-    emit netWorthChanged(d->m_lastNetWorth);
+    emit netWorthChanged(QVariantList {QVariant::fromValue(d->m_lastNetWorth)}, eView::Intent::UpdateNetWorth);
   }
 }
 
@@ -865,7 +854,7 @@ void AccountsModel::checkProfit()
   }
   if (d->m_lastProfit != profit) {
     d->m_lastProfit = profit;
-    emit profitChanged(d->m_lastProfit);
+    emit profitChanged(QVariantList {QVariant::fromValue(d->m_lastProfit)}, eView::Intent::UpdateProfit);
   }
 }
 
@@ -903,31 +892,29 @@ void AccountsModel::slotReconcileAccount(const MyMoneyAccount &account, const QD
   * Notify the model that an object has been added. An action is performed only if the object is an account.
   *
   */
-void AccountsModel::slotObjectAdded(File::Object objType, const MyMoneyObject * const obj)
+void AccountsModel::slotObjectAdded(File::Object objType, const QString& id)
 {
   Q_D(AccountsModel);
   if (objType != File::Object::Account)
     return;
 
-  const MyMoneyAccount * const account = dynamic_cast<const MyMoneyAccount * const>(obj);
-  if (!account)
-    return;
+  const auto account = MyMoneyFile::instance()->account(id);
 
   auto favoriteAccountsItem = d->itemFromAccountId(this, favoritesAccountId);
-  auto parentAccountItem = d->itemFromAccountId(this, account->parentAccountId());
-  auto item = d->itemFromAccountId(parentAccountItem, account->id());
+  auto parentAccountItem = d->itemFromAccountId(this, account.parentAccountId());
+  auto item = d->itemFromAccountId(parentAccountItem, account.id());
   if (!item) {
-    item = new QStandardItem(account->name());
+    item = new QStandardItem(account.name());
     parentAccountItem->appendRow(item);
     item->setEditable(false);
   }
   // load the sub-accounts if there are any - there could be sub accounts if this is an add operation
   // that was triggered in slotObjectModified on an already existing account which went trough a hierarchy change
-  d->loadSubaccounts(item, favoriteAccountsItem, account->accountList());
+  d->loadSubaccounts(item, favoriteAccountsItem, account.accountList());
 
   const auto row = item->row();
-  d->setAccountData(parentAccountItem, row, *account, d->m_columns);
-  d->loadPreferredAccount(*account, parentAccountItem, row, favoriteAccountsItem);
+  d->setAccountData(parentAccountItem, row, account, d->m_columns);
+  d->loadPreferredAccount(account, parentAccountItem, row, favoriteAccountsItem);
 
   checkNetWorth();
   checkProfit();
@@ -937,39 +924,38 @@ void AccountsModel::slotObjectAdded(File::Object objType, const MyMoneyObject * 
   * Notify the model that an object has been modified. An action is performed only if the object is an account.
   *
   */
-void AccountsModel::slotObjectModified(File::Object objType, const MyMoneyObject * const obj)
+void AccountsModel::slotObjectModified(File::Object objType, const QString& id)
 {
   Q_D(AccountsModel);
   if (objType != File::Object::Account)
     return;
 
-  const MyMoneyAccount * const account = dynamic_cast<const MyMoneyAccount * const>(obj);
-  if (!account)
-    return;
-  auto accountItem = d->itemFromAccountId(this, account->id());
+  const auto account = MyMoneyFile::instance()->account(id);
+  auto accountItem = d->itemFromAccountId(this, id);
   if (!accountItem) {
     qDebug() << "Unexpected null accountItem in AccountsModel::slotObjectModified";
     return;
   }
+
   const auto oldAccount = accountItem->data((int)Role::Account).value<MyMoneyAccount>();
-  if (oldAccount.parentAccountId() == account->parentAccountId()) {
+  if (oldAccount.parentAccountId() == account.parentAccountId()) {
     // the hierarchy did not change so update the account data
     auto parentAccountItem = accountItem->parent();
     if (!parentAccountItem)
       parentAccountItem = this->invisibleRootItem();
     const auto row = accountItem->row();
-    d->setAccountData(parentAccountItem, row, *account, d->m_columns);
+    d->setAccountData(parentAccountItem, row, account, d->m_columns);
     // and the child of the favorite item if the account is a favorite account or it's favorite status has just changed
     if (auto favoriteAccountsItem = d->itemFromAccountId(this, favoritesAccountId)) {
-      if (account->value("PreferredAccount") == QLatin1String("Yes"))
-        d->loadPreferredAccount(*account, parentAccountItem, row, favoriteAccountsItem);
-      else if (auto favItem = d->itemFromAccountId(favoriteAccountsItem, account->id()))
+      if (account.value("PreferredAccount") == QLatin1String("Yes"))
+        d->loadPreferredAccount(account, parentAccountItem, row, favoriteAccountsItem);
+      else if (auto favItem = d->itemFromAccountId(favoriteAccountsItem, account.id()))
         favoriteAccountsItem->removeRow(favItem->row()); // it's not favorite anymore
     }
   } else {
     // this means that the hierarchy was changed - simulate this with a remove followed by and add operation
     slotObjectRemoved(File::Object::Account, oldAccount.id());
-    slotObjectAdded(File::Object::Account, obj);
+    slotObjectAdded(File::Object::Account, id);
   }
 
   checkNetWorth();
@@ -1135,8 +1121,7 @@ void InstitutionsModel::load()
 {
   Q_D(InstitutionsModel);
   // create items for all the institutions
-  QList<MyMoneyInstitution> institutionList;
-  d->m_file->institutionList(institutionList);
+  auto institutionList = d->m_file->institutionList();
   MyMoneyInstitution none;
   none.setName(i18n("Accounts with no institution assigned"));
   institutionList.append(none);
@@ -1154,7 +1139,7 @@ void InstitutionsModel::load()
   }
 
   for (const auto& stock : stocksList) {
-    if (!(KMyMoneyGlobalSettings::hideZeroBalanceEquities() && stock.balance().isZero()))
+    if (!(KMyMoneySettings::hideZeroBalanceEquities() && stock.balance().isZero()))
       d->loadInstitution(this, stock);
   }
 
@@ -1166,32 +1151,30 @@ void InstitutionsModel::load()
   * Notify the model that an object has been added. An action is performed only if the object is an account or an institution.
   *
   */
-void InstitutionsModel::slotObjectAdded(File::Object objType, const MyMoneyObject * const obj)
+void InstitutionsModel::slotObjectAdded(File::Object objType, const QString& id)
 {
   Q_D(InstitutionsModel);
   if (objType == File::Object::Institution) {
     // if an institution was added then add the item which will represent it
-    const MyMoneyInstitution * const institution = dynamic_cast<const MyMoneyInstitution * const>(obj);
-    if (!institution)
-      return;
-    d->addInstitutionItem(this, *institution);
+    const auto institution = MyMoneyFile::instance()->institution(id);
+    d->addInstitutionItem(this, institution);
   }
 
   if (objType != File::Object::Account)
     return;
 
   // if an account was added then add the item which will represent it only for real accounts
-  const MyMoneyAccount * const account = dynamic_cast<const MyMoneyAccount * const>(obj);
+  const auto account = MyMoneyFile::instance()->account(id);
   // nothing to do for root accounts and categories
-  if (!account || account->parentAccountId().isEmpty() || account->isIncomeExpense())
+  if (account.parentAccountId().isEmpty() || account.isIncomeExpense())
     return;
 
   // load the account into the institution
-  d->loadInstitution(this, *account);
+  d->loadInstitution(this, account);
 
   // load the investment sub-accounts if there are any - there could be sub-accounts if this is an add operation
   // that was triggered in slotObjectModified on an already existing account which went trough a hierarchy change
-  const auto sAccounts = account->accountList();
+  const auto sAccounts = account.accountList();
   if (!sAccounts.isEmpty()) {
     QList<MyMoneyAccount> subAccounts;
     d->m_file->accountList(subAccounts, sAccounts);
@@ -1207,17 +1190,15 @@ void InstitutionsModel::slotObjectAdded(File::Object objType, const MyMoneyObjec
   * Notify the model that an object has been modified. An action is performed only if the object is an account or an institution.
   *
   */
-void InstitutionsModel::slotObjectModified(File::Object objType, const MyMoneyObject * const obj)
+void InstitutionsModel::slotObjectModified(File::Object objType, const QString& id)
 {
   Q_D(InstitutionsModel);
   if (objType == File::Object::Institution) {
     // if an institution was modified then modify the item which represents it
-    const MyMoneyInstitution * const institution = dynamic_cast<const MyMoneyInstitution * const>(obj);
-    if (!institution)
-      return;
-    if (auto institutionItem = d->institutionItemFromId(this, institution->id())) {
-      institutionItem->setData(institution->name(), Qt::DisplayRole);
-      institutionItem->setData(QVariant::fromValue(*institution), (int)Role::Account);
+    const auto institution = MyMoneyFile::instance()->institution(id);
+    if (auto institutionItem = d->institutionItemFromId(this, id)) {
+      institutionItem->setData(institution.name(), Qt::DisplayRole);
+      institutionItem->setData(QVariant::fromValue(institution), (int)Role::Account);
       institutionItem->setIcon(MyMoneyInstitution::pixmap());
     }
   }
@@ -1226,20 +1207,20 @@ void InstitutionsModel::slotObjectModified(File::Object objType, const MyMoneyOb
     return;
 
   // if an account was modified then modify the item which represents it
-  const MyMoneyAccount * const account = dynamic_cast<const MyMoneyAccount * const>(obj);
+  const auto account = MyMoneyFile::instance()->account(id);
   // nothing to do for root accounts, categories and equity accounts since they don't have a representation in this model
-  if (!account || account->parentAccountId().isEmpty() || account->isIncomeExpense() || account->accountType() == Account::Type::Equity)
+  if (account.parentAccountId().isEmpty() || account.isIncomeExpense() || account.accountType() == Account::Type::Equity)
     return;
 
-  auto accountItem = d->itemFromAccountId(this, account->id());
+  auto accountItem = d->itemFromAccountId(this, account.id());
   const auto oldAccount = accountItem->data((int)Role::Account).value<MyMoneyAccount>();
-  if (oldAccount.institutionId() == account->institutionId()) {
+  if (oldAccount.institutionId() == account.institutionId()) {
     // the hierarchy did not change so update the account data
-    d->setAccountData(accountItem->parent(), accountItem->row(), *account, d->m_columns);
+    d->setAccountData(accountItem->parent(), accountItem->row(), account, d->m_columns);
   } else {
     // this means that the hierarchy was changed - simulate this with a remove followed by and add operation
     slotObjectRemoved(File::Object::Account, oldAccount.id());
-    slotObjectAdded(File::Object::Account, obj);
+    slotObjectAdded(File::Object::Account, id);
   }
 }
 

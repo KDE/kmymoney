@@ -38,16 +38,16 @@ public:
   /**
    * @brief Checks if the task is ready for sending
    */
-  virtual bool isValid() const {
+  bool isValid() const final override {
     return true;
-  };
+  }
 
   /**
    * @brief Human readable type-name
    */
-  virtual QString jobTypeName() const {
+  QString jobTypeName() const final override {
     return QLatin1String("Dummy task");
-  };
+  }
 
   void setTestNumber(const int& number) {
     m_testNumber = number;
@@ -55,38 +55,25 @@ public:
   int testNumber() {
     return m_testNumber;
   }
-  virtual QString storagePluginIid() const {
-    return QString();
-  }
 
-  virtual bool sqlSave(QSqlDatabase databaseConnection, const QString& onlineJobId) const {
-    Q_UNUSED(databaseConnection); Q_UNUSED(onlineJobId); return false;
-  }
-  virtual bool sqlModify(QSqlDatabase databaseConnection, const QString& onlineJobId) const {
-    Q_UNUSED(databaseConnection); Q_UNUSED(onlineJobId); return false;
-  }
-  virtual bool sqlRemove(QSqlDatabase databaseConnection, const QString& onlineJobId) const {
-    Q_UNUSED(databaseConnection); Q_UNUSED(onlineJobId); return false;
-  }
+  void writeXML(QDomDocument&, QDomElement&) const final override {}
 
 protected:
 
-  virtual dummyTask* clone() const {
+  dummyTask* clone() const final override {
     return (new dummyTask(*this));
   }
-  virtual bool hasReferenceTo(const QString &id) const {
+  bool hasReferenceTo(const QString &id) const final override {
     Q_UNUSED(id); return false;
   }
-  virtual void writeXML(QDomDocument&, QDomElement&) const {}
-  virtual dummyTask* createFromXml(const QDomElement&) const {
+
+  dummyTask* createFromXml(const QDomElement&) const final override {
     return (new dummyTask);
   }
-  virtual onlineTask* createFromSqlDatabase(QSqlDatabase connection, const QString& onlineJobId) const {
-    Q_UNUSED(connection); Q_UNUSED(onlineJobId);  return (new dummyTask);
-  }
-  virtual QString responsibleAccount() const {
+
+  QString responsibleAccount() const final override {
     return QString();
-  };
+  }
 
   int m_testNumber;
 };

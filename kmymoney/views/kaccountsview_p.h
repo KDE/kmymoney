@@ -49,6 +49,9 @@
 #include "kmymoneyplugin.h"
 #include "icons.h"
 #include "mymoneyenums.h"
+#include "menuenums.h"
+#include "mymoneystatementreader.h"
+#include "kmymoneyutils.h"
 
 using namespace Icons;
 
@@ -73,7 +76,6 @@ public:
   void init()
   {
     Q_Q(KAccountsView);
-    ui->setupUi(q);
     m_accountTree = &ui->m_accountTree;
 
     // setup icons for collapse and expand button
@@ -83,7 +85,8 @@ public:
     m_proxyModel = ui->m_accountTree->init(View::Accounts);
     q->connect(m_proxyModel, &AccountsProxyModel::unusedIncomeExpenseAccountHidden, q, &KAccountsView::slotUnusedIncomeExpenseAccountHidden);
     q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::objectSelected, q, &KAccountsView::objectSelected);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KAccountsView::selectByObject);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KAccountsView::selectByVariant);
 
     q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KAccountsView::refresh);
   }
@@ -104,8 +107,8 @@ public:
     if (wizard->exec() == QDialog::Accepted && wizard != 0) {
       MyMoneySchedule sch;
       try {
-        MyMoneySchedule sch = file->schedule(m_currentAccount.value("schedule").toLatin1());
-      } catch (const MyMoneyException &e) {
+        sch = file->schedule(m_currentAccount.value("schedule").toLatin1());
+      } catch (const MyMoneyException &) {
         qDebug() << "schedule" << m_currentAccount.value("schedule").toLatin1() << "not found";
       }
       if (!(m_currentAccount == wizard->account())
@@ -127,12 +130,12 @@ public:
               }
               ft.commit();
             } catch (const MyMoneyException &e) {
-              qDebug("Cannot add schedule: '%s'", qPrintable(e.what()));
+              qDebug("Cannot add schedule: '%s'", e.what());
             }
           }
         } catch (const MyMoneyException &e) {
           qDebug("Unable to modify account %s: '%s'", qPrintable(m_currentAccount.name()),
-                 qPrintable(e.what()));
+                 e.what());
         }
       }
     }
@@ -244,10 +247,11 @@ public:
   }
 
   enum CanCloseAccountCodeE {
-    AccountCanClose = 0,    // can close the account
-    AccountBalanceNonZero,         // balance is non zero
-    AccountChildrenOpen,          // account has open children account
-    AccountScheduleReference         // account is referenced in a schedule
+    AccountCanClose = 0,        // can close the account
+    AccountBalanceNonZero,      // balance is non zero
+    AccountChildrenOpen,        // account has open children account
+    AccountScheduleReference,   // account is referenced in a schedule
+    AccountHasOnlineMapping,    // account has an online mapping
   };
 
   /**
@@ -257,6 +261,7 @@ public:
     * - the balance is zero and
     * - all children are already closed and
     * - there is no unfinished schedule referencing the account
+    * - and no online mapping is setup
     *
     * @param acc reference to MyMoneyAccount object in question
     * @retval true account can be closed
@@ -267,6 +272,8 @@ public:
     // balance must be zero
     if (!acc.balance().isZero())
       return AccountBalanceNonZero;
+    if (acc.hasOnlineMapping())
+      return AccountHasOnlineMapping;
 
     // all children must be already closed
     foreach (const auto sAccount, acc.accountList()) {
@@ -299,17 +306,61 @@ public:
     switch (canCloseAccount(acc)) {
       case AccountCanClose:
         a->setToolTip(QString());
-        return;
+        break;
       case AccountBalanceNonZero:
         a->setToolTip(i18n("The balance of the account must be zero before the account can be closed"));
-        return;
+        break;
       case AccountChildrenOpen:
         a->setToolTip(i18n("All subaccounts must be closed before the account can be closed"));
-        return;
+        break;
       case AccountScheduleReference:
         a->setToolTip(i18n("This account is still included in an active schedule"));
-        return;
+        break;
+      case AccountHasOnlineMapping:
+        a->setToolTip(i18n("This account is still mapped to an online account"));
+        break;
     }
+  }
+
+  void accountsUpdateOnline(const QList<MyMoneyAccount>& accList)
+  {
+    Q_Q(KAccountsView);
+
+    // block the update account actions for now so that we don't get here twice
+    const QVector<eMenu::Action> disabledActions {eMenu::Action::UpdateAccount, eMenu::Action::UpdateAllAccounts};
+    for (const auto& a : disabledActions)
+      pActions[a]->setEnabled(false);
+
+    // clear global message list
+    MyMoneyStatementReader::clearResultMessages();
+
+    // process all entries that have a mapped account and the 'provider' is available
+    // we need to make sure that only the very last entry that matches sets the
+    // 'moreAccounts' parameter in the call to updateAccount() to false
+    auto processedAccounts = 0;
+
+    for (auto it_provider = m_onlinePlugins->constBegin(); it_provider != m_onlinePlugins->constEnd(); ++it_provider) {
+      auto nextAccount = accList.cend();
+      for (auto it_a = accList.cbegin(); it_a != accList.cend(); ++it_a) {
+        if ((*it_a).hasOnlineMapping()
+        && (it_provider == m_onlinePlugins->constFind((*it_a).onlineBankingSettings().value("provider").toLower()))) {
+          if (nextAccount != accList.cend()) {
+            (*it_provider)->updateAccount(*nextAccount, true);
+          }
+          nextAccount = it_a;
+          ++processedAccounts;
+        }
+      }
+      // process a possible pending entry
+      if (nextAccount != accList.cend()) {
+        (*it_provider)->updateAccount(*nextAccount, false);
+      }
+    }
+
+    // re-enable the disabled actions
+    q->updateActions(m_currentAccount);
+
+    KMyMoneyUtils::showStatementImportResult(MyMoneyStatementReader::resultMessages(), processedAccounts);
   }
 
   KAccountsView       *q_ptr;

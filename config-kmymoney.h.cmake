@@ -17,6 +17,6 @@
 
 #cmakedefine ENABLE_WEBENGINE 1
 
-#cmakedefine IS_GNU 1
-
 #cmakedefine ENABLE_UNFINISHEDFEATURES 1
+
+#cmakedefine ENABLE_SQLCIPHER 1

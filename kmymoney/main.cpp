@@ -39,18 +39,17 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <Kdelibs4ConfigMigrator>
-#include <KConfig>
-#include <KSharedConfig>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoney/mymoneyfile.h"
+#include "mymoneyexception.h"
 #include "kmymoney.h"
 #include "kstartuplogo.h"
 #include "kcreditswindow.h"
 #include "kmymoneyutils.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "misc/webconnect.h"
 #include "platformtools.h"
 
@@ -163,12 +162,13 @@ int main(int argc, char *argv[])
 
   // create the singletons before we start memory checking
   // to avoid false error reports
-  MyMoneyFile::instance();
+  auto file = MyMoneyFile::instance();
+  Q_UNUSED(file)
 
   KMyMoneyUtils::checkConstants();
 
   // show startup logo
-  std::unique_ptr<QSplashScreen> splash(KMyMoneyGlobalSettings::showSplash() ? createStartupLogo() : nullptr);
+  std::unique_ptr<QSplashScreen> splash(KMyMoneySettings::showSplash() ? createStartupLogo() : nullptr);
   app.processEvents();
 
   // setup the MyMoneyMoney locale settings according to the KDE settings
@@ -230,9 +230,8 @@ int main(int argc, char *argv[])
     try {
       rc = runKMyMoney(app, std::move(splash), url, isNoFileOption);
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedError(0, i18n("Uncaught error. Please report the details to the developers"),
-                                 i18n("%1 in file %2 line %3", e.what(), e.file(), e.line()));
-      throw e;
+      KMessageBox::detailedError(0, i18n("Uncaught error. Please report the details to the developers"), QString::fromLatin1(e.what()));
+      throw;
     }
   }
 
@@ -293,10 +292,10 @@ int runKMyMoney(QApplication& a, std::unique_ptr<QSplashScreen> splash, const QU
     KTipDialog::showTip(kmymoney, QString(), false);
     if (url.isValid() && !noFile) {
       kmymoney->slotFileOpenRecent(url);
-    } else if (KMyMoneyGlobalSettings::firstTimeRun()) {
+    } else if (KMyMoneySettings::firstTimeRun()) {
       kmymoney->slotFileNew();
     }
-    KMyMoneyGlobalSettings::setFirstTimeRun(false);
+    KMyMoneySettings::setFirstTimeRun(false);
 
     if (!importfile.isEmpty())
       kmymoney->webConnect(importfile, QByteArray());
@@ -306,12 +305,11 @@ int runKMyMoney(QApplication& a, std::unique_ptr<QSplashScreen> splash, const QU
     kmymoney->slotFileQuit();
   }
 
-  kmymoney->updateCaption();
   kmymoney->centralWidget()->setEnabled(true);
   kmymoney->show();
   splash.reset();
 
-  const int rc = a.exec();
+  const int rc = a.exec();      //krazy:exclude=crashy
   return rc;
 }
 
@@ -362,5 +360,4 @@ static void migrateConfigFiles()
     }
   }
   KConfig::setMainConfigName(sMainConfigSubdirectory + sMainConfigName); // otherwise it would be ~/.config/kmymoneyrc and not ~/.config/kmymoney/kmymoneyrc
-  KMyMoneySettings::instance(KSharedConfig::openConfig().data()->name());  // kcfg settings file should be kmymoneyrc, so define it here in one place instead in kmymoney.kcfg
 }

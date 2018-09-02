@@ -31,7 +31,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymoney.h"
 #include "mymoneytransaction.h"
 #include "mymoneysplit.h"
 
@@ -42,11 +41,13 @@ namespace KMyMoneyRegister
 class SelectedTransactions;
 }
 
+enum class View;
+
 class MyMoneyInstitution;
 class MyMoneyAccount;
 class MyMoneySplit;
 class MyMoneyTransaction;
-class IMyMoneyStorageFormat;
+class KMyMoneyViewBase;
 
 namespace KMyMoneyPlugin
 {
@@ -63,25 +64,6 @@ class KMM_PLUGIN_EXPORT ViewInterface : public QObject
 public:
   explicit ViewInterface(QObject* parent, const char* name = 0);
   virtual ~ViewInterface();
-
-  /**
-    * Calls MyMoneyFile::readAllData which reads a MyMoneyFile into appropriate
-    * data structures in memory.  The return result is examined to make sure no
-    * errors occurred whilst parsing.
-    *
-    * @param url The URL to read from.
-    *            If no protocol is specified, file:// is assumed.
-    *
-    * @return Whether the read was successful.
-    */
-  virtual bool readFile(const QUrl &url, IMyMoneyStorageFormat *pExtReader = nullptr) = 0;
-
-  /**
-    * Makes sure that a MyMoneyFile is open and has been created successfully.
-    *
-    * @return Whether the file is open and initialised
-    */
-  virtual bool fileOpen() = 0;
 
   /**
     * Brings up a dialog to change the list(s) settings and saves them into the
@@ -107,6 +89,9 @@ public:
     * @param w widget to be added to @p page
     */
 //  virtual void addWidget(KMyMoneyViewBase* view, QWidget* w) = 0;
+
+    virtual void addView(KMyMoneyViewBase* view, const QString& name, View idView) = 0;
+    virtual void removeView(View idView) = 0;
 
 Q_SIGNALS:
   /**
@@ -148,7 +133,6 @@ Q_SIGNALS:
   void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
 
   void viewStateChanged(bool);
-  void kmmFilePlugin(unsigned int);
 };
 
 } // namespace

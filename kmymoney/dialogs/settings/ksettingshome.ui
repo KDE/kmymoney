@@ -225,6 +225,13 @@ Use the buttons and checkboxes to customize the layout of the home page.</string
         </property>
        </widget>
       </item>
+      <item row="5" column="0" colspan="3">
+       <widget class="QCheckBox" name="kcfg_ShowDateOfLastReconciliation">
+        <property name="text">
+         <string>Show date of last reconciliation</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>

@@ -1,34 +1,28 @@
-/***************************************************************************
-                          mymoneysplit.cpp  -  description
-                             -------------------
-    begin                : Sun Apr 28 2002
-    copyright            : (C) 2000-2002 by Michael Edwardes
-    email                : mte@users.sourceforge.net
-                           Javier Campos Morales <javi_c@users.sourceforge.net>
-                           Felix Rodriguez <frodriguez@users.sourceforge.net>
-                           John C <thetacoturtle@users.sourceforge.net>
-                           Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           Kevin Tambascio <ktambascio@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2002-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2004       Kevin Tambascio <ktambascio@users.sourceforge.net>
+ * Copyright 2005-2006  Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "mymoneysplit.h"
 #include "mymoneysplit_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
-
-#include <QDomDocument>
-#include <QDomElement>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -40,57 +34,16 @@
 #include "mymoneytransaction.h"
 #include "mymoneyexception.h"
 
-const char MyMoneySplit::ActionCheck[] = "Check";
-const char MyMoneySplit::ActionDeposit[] = "Deposit";
-const char MyMoneySplit::ActionTransfer[] = "Transfer";
-const char MyMoneySplit::ActionWithdrawal[] = "Withdrawal";
-const char MyMoneySplit::ActionATM[] = "ATM";
-
-const char MyMoneySplit::ActionAmortization[] = "Amortization";
-const char MyMoneySplit::ActionInterest[] = "Interest";
-
-const char MyMoneySplit::ActionBuyShares[] = "Buy";
-const char MyMoneySplit::ActionDividend[] = "Dividend";
-const char MyMoneySplit::ActionReinvestDividend[] = "Reinvest";
-const char MyMoneySplit::ActionYield[] = "Yield";
-const char MyMoneySplit::ActionAddShares[] = "Add";
-const char MyMoneySplit::ActionSplitShares[] = "Split";
-const char MyMoneySplit::ActionInterestIncome[] = "IntIncome";
-
 MyMoneySplit::MyMoneySplit() :
   MyMoneyObject(*new MyMoneySplitPrivate)
 {
-  Q_D(MyMoneySplit);
-  d->m_reconcileFlag = eMyMoney::Split::State::NotReconciled;
 }
 
-MyMoneySplit::MyMoneySplit(const QDomElement& node) :
-    MyMoneyObject(*new MyMoneySplitPrivate, node, false),
-    MyMoneyKeyValueContainer(node.elementsByTagName(MyMoneySplitPrivate::getElName(Split::Element::KeyValuePairs)).item(0).toElement())
+MyMoneySplit::MyMoneySplit(const QString &id) :
+    MyMoneyObject(*new MyMoneySplitPrivate, id)
 {
   Q_D(MyMoneySplit);
-  if (d->getElName(Split::Element::Split) != node.tagName())
-    throw MYMONEYEXCEPTION("Node was not SPLIT");
-
-  clearId();
-
-  d->m_payee = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Payee)));
-
-  QDomNodeList nodeList = node.elementsByTagName(d->getElName(Split::Element::Tag));
-  for (int i = 0; i < nodeList.count(); i++)
-    d->m_tagList << MyMoneyUtils::QStringEmpty(nodeList.item(i).toElement().attribute(d->getAttrName(Split::Attribute::ID)));
-
-  d->m_reconcileDate = MyMoneyUtils::stringToDate(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::ReconcileDate))));
-  d->m_action = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Action)));
-  d->m_reconcileFlag = static_cast<eMyMoney::Split::State>(node.attribute(d->getAttrName(Split::Attribute::ReconcileFlag)).toInt());
-  d->m_memo = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Memo)));
-  d->m_value = MyMoneyMoney(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Value))));
-  d->m_shares = MyMoneyMoney(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Shares))));
-  d->m_price = MyMoneyMoney(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Price))));
-  d->m_account = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Account)));
-  d->m_costCenter = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::CostCenter)));
-  d->m_number = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::Number)));
-  d->m_bankID = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Split::Attribute::BankID)));
+  d->m_reconcileFlag = eMyMoney::Split::State::NotReconciled;
 }
 
 MyMoneySplit::MyMoneySplit(const MyMoneySplit& other) :
@@ -263,26 +216,26 @@ void MyMoneySplit::setAction(eMyMoney::Split::InvestmentTransactionType type)
   switch (type) {
     case eMyMoney::Split::InvestmentTransactionType::BuyShares:
     case eMyMoney::Split::InvestmentTransactionType::SellShares:
-      setAction(ActionBuyShares);
+      setAction(actionName(Split::Action::BuyShares));
       break;
     case eMyMoney::Split::InvestmentTransactionType::Dividend:
-      setAction(ActionDividend);
+      setAction(actionName(Split::Action::Dividend));
       break;
     case eMyMoney::Split::InvestmentTransactionType::Yield:
-      setAction(ActionYield);
+      setAction(actionName(Split::Action::Yield));
       break;
     case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
-      setAction(ActionReinvestDividend);
+      setAction(actionName(Split::Action::ReinvestDividend));
       break;
     case eMyMoney::Split::InvestmentTransactionType::AddShares:
     case eMyMoney::Split::InvestmentTransactionType::RemoveShares:
-      setAction(ActionAddShares);
+      setAction(actionName(Split::Action::AddShares));
       break;
     case eMyMoney::Split::InvestmentTransactionType::SplitShares:
-      setAction(ActionSplitShares);
+      setAction(actionName(Split::Action::SplitShares));
       break;
     case eMyMoney::Split::InvestmentTransactionType::InterestIncome:
-      setAction(ActionInterestIncome);
+      setAction(actionName(Split::Action::InterestIncome));
       break;
     case eMyMoney::Split::InvestmentTransactionType::UnknownTransactionType:
       break;
@@ -304,13 +257,13 @@ void MyMoneySplit::setAction(const QString& action)
 bool MyMoneySplit::isAmortizationSplit() const
 {
   Q_D(const MyMoneySplit);
-  return d->m_action == ActionAmortization;
+  return d->m_action == actionName(Split::Action::Amortization);
 }
 
 bool MyMoneySplit::isInterestSplit() const
 {
   Q_D(const MyMoneySplit);
-  return d->m_action == ActionInterest;
+  return d->m_action == actionName(Split::Action::Interest);
 }
 
 QString MyMoneySplit::number() const
@@ -390,42 +343,6 @@ MyMoneyMoney MyMoneySplit::price() const
   return MyMoneyMoney::ONE;
 }
 
-void MyMoneySplit::writeXML(QDomDocument& document, QDomElement& parent) const
-{
-  Q_D(const MyMoneySplit);
-  auto el = document.createElement(d->getElName(Split::Element::Split));
-
-  d->writeBaseXML(document, el);
-
-  el.setAttribute(d->getAttrName(Split::Attribute::Payee), d->m_payee);
-  //el.setAttribute(getAttrName(Split::Attribute::Tag), m_tag);
-  el.setAttribute(d->getAttrName(Split::Attribute::ReconcileDate), MyMoneyUtils::dateToString(d->m_reconcileDate));
-  el.setAttribute(d->getAttrName(Split::Attribute::Action), d->m_action);
-  el.setAttribute(d->getAttrName(Split::Attribute::ReconcileFlag), (int)d->m_reconcileFlag);
-  el.setAttribute(d->getAttrName(Split::Attribute::Value), d->m_value.toString());
-  el.setAttribute(d->getAttrName(Split::Attribute::Shares), d->m_shares.toString());
-  if (!d->m_price.isZero())
-    el.setAttribute(d->getAttrName(Split::Attribute::Price), d->m_price.toString());
-  el.setAttribute(d->getAttrName(Split::Attribute::Memo), d->m_memo);
-  // No need to write the split id as it will be re-assigned when the file is read
-  // el.setAttribute(getAttrName(Split::Attribute::ID), split.id());
-  el.setAttribute(d->getAttrName(Split::Attribute::Account), d->m_account);
-  el.setAttribute(d->getAttrName(Split::Attribute::Number), d->m_number);
-  el.setAttribute(d->getAttrName(Split::Attribute::BankID), d->m_bankID);
-  if(!d->m_costCenter.isEmpty())
-    el.setAttribute(d->getAttrName(Split::Attribute::CostCenter), d->m_costCenter);
-
-  for (int i = 0; i < d->m_tagList.count(); i++) {
-    QDomElement sel = document.createElement(d->getElName(Split::Element::Tag));
-    sel.setAttribute(d->getAttrName(Split::Attribute::ID), d->m_tagList[i]);
-    el.appendChild(sel);
-  }
-
-  MyMoneyKeyValueContainer::writeXML(document, el);
-
-  parent.appendChild(el);
-}
-
 bool MyMoneySplit::hasReferenceTo(const QString& id) const
 {
   Q_D(const MyMoneySplit);
@@ -442,45 +359,31 @@ bool MyMoneySplit::hasReferenceTo(const QString& id) const
 bool MyMoneySplit::isMatched() const
 {
   Q_D(const MyMoneySplit);
-  return !(value(d->getAttrName(Split::Attribute::KMMatchedTx)).isEmpty());
+  return d->m_isMatched;
 }
 
 void MyMoneySplit::addMatch(const MyMoneyTransaction& _t)
 {
   Q_D(MyMoneySplit);
   //  now we allow matching of two manual transactions
-  if (!isMatched()) {
-    MyMoneyTransaction t(_t);
-    t.clearId();
-    QDomDocument doc(d->getElName(Split::Element::Match));
-    QDomElement el = doc.createElement(d->getElName(Split::Element::Container));
-    doc.appendChild(el);
-    t.writeXML(doc, el);
-    QString xml = doc.toString();
-    xml.replace('<', "&lt;");
-    setValue(d->getAttrName(Split::Attribute::KMMatchedTx), xml);
-  }
+  d->m_matchedTransaction = _t;
+  d->m_matchedTransaction.clearId();
+  d->m_isMatched = true;
 }
 
 void MyMoneySplit::removeMatch()
 {
   Q_D(MyMoneySplit);
-  deletePair(d->getAttrName(Split::Attribute::KMMatchedTx));
+  d->m_matchedTransaction = MyMoneyTransaction();
+  d->m_isMatched = false;
 }
 
 MyMoneyTransaction MyMoneySplit::matchedTransaction() const
 {
   Q_D(const MyMoneySplit);
-  auto xml = value(d->getAttrName(Split::Attribute::KMMatchedTx));
-  if (!xml.isEmpty()) {
-    xml.replace("&lt;", "<");
-    QDomDocument doc;
-    QDomElement node;
-    doc.setContent(xml);
-    node = doc.documentElement().firstChild().toElement();
-    MyMoneyTransaction t(node, false);
-    return t;
-  }
+  if (d->m_isMatched)
+    return d->m_matchedTransaction;
+
   return MyMoneyTransaction();
 }
 
@@ -510,4 +413,25 @@ bool MyMoneySplit::replaceId(const QString& newId, const QString& oldId)
   }
 
   return changed;
+}
+
+QString MyMoneySplit::actionName(Split::Action action)
+{
+  static const QHash<Split::Action, QString> actionNames {
+    {Split::Action::Check,            QStringLiteral("Check")},
+    {Split::Action::Deposit,          QStringLiteral("Deposit")},
+    {Split::Action::Transfer,         QStringLiteral("Transfer")},
+    {Split::Action::Withdrawal,       QStringLiteral("Withdrawal")},
+    {Split::Action::ATM,              QStringLiteral("ATM")},
+    {Split::Action::Amortization,     QStringLiteral("Amortization")},
+    {Split::Action::Interest,         QStringLiteral("Interest")},
+    {Split::Action::BuyShares,        QStringLiteral("Buy")},
+    {Split::Action::Dividend,         QStringLiteral("Dividend")},
+    {Split::Action::ReinvestDividend, QStringLiteral("Reinvest")},
+    {Split::Action::Yield,            QStringLiteral("Yield")},
+    {Split::Action::AddShares,        QStringLiteral("Add")},
+    {Split::Action::SplitShares,      QStringLiteral("Split")},
+    {Split::Action::InterestIncome,   QStringLiteral("IntIncome")},
+  };
+  return actionNames[action];
 }

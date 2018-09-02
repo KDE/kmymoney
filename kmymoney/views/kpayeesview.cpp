@@ -56,7 +56,7 @@
 #include "mymoneyaccount.h"
 #include "mymoneymoney.h"
 #include "mymoneytransactionfilter.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "models.h"
 #include "accountsmodel.h"
 #include "mymoneysecurity.h"
@@ -88,12 +88,6 @@ KPayeesView::~KPayeesView()
 {
 }
 
-void KPayeesView::setDefaultFocus()
-{
-  Q_D(KPayeesView);
-  QTimer::singleShot(0, d->m_searchWidget, SLOT(setFocus()));
-}
-
 void KPayeesView::slotChooseDefaultAccount()
 {
   Q_D(KPayeesView);
@@ -104,13 +98,14 @@ void KPayeesView::slotChooseDefaultAccount()
   while (item) {
     //only walk through selectable items. eg. transactions and not group markers
     if (item->isSelectable()) {
-      KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(item);
-
+      auto t = dynamic_cast<KMyMoneyRegister::Transaction*>(item);
+      if (!t)
+        return;
       MyMoneySplit s = t->transaction().splitByPayee(d->m_payee.id());
       const MyMoneyAccount& acc = file->account(s.accountId());
 
       QString txt;
-      if (s.action() != MyMoneySplit::ActionAmortization
+      if (s.action() != MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization)
           && acc.accountType() != eMyMoney::Account::Type::AssetLoan
           && !file->isTransfer(t->transaction())
           && t->transaction().splitCount() == 2) {
@@ -146,6 +141,19 @@ void KPayeesView::slotClosePayeeIdentifierSource()
   if (!d->m_needLoad)
     d->ui->payeeIdentifiers->closeSource();
 }
+
+void KPayeesView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
+{
+  switch (intent) {
+    case eView::Intent::ShowPayee:
+      if (variant.count() == 3)
+        slotSelectPayeeAndTransaction(variant.at(0).toString(), variant.at(1).toString(), variant.at(2).toString());
+      break;
+    default:
+      break;
+  }
+}
+
 
 void KPayeesView::slotStartRename(QListWidgetItem* item)
 {
@@ -200,8 +208,7 @@ void KPayeesView::slotRenameSinglePayee(QListWidgetItem* p)
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to modify payee"),
-                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(this, i18n("Unable to modify payee"), QString::fromLatin1(e.what()));
     }
   } else {
     p->setText(new_name);
@@ -294,9 +301,9 @@ void KPayeesView::slotSelectPayee()
 
     QStringList keys;
     bool ignorecase = false;
-    MyMoneyPayee::payeeMatchType type = d->m_payee.matchData(ignorecase, keys);
+    auto type = d->m_payee.matchData(ignorecase, keys);
 
-    d->ui->matchTypeCombo->setCurrentIndex(d->ui->matchTypeCombo->findData(type));
+    d->ui->matchTypeCombo->setCurrentIndex(d->ui->matchTypeCombo->findData(static_cast<int>(type)));
     d->ui->matchKeyEditList->clear();
     d->ui->matchKeyEditList->insertStringList(keys);
     d->ui->checkMatchIgnoreCase->setChecked(ignorecase);
@@ -311,7 +318,7 @@ void KPayeesView::slotSelectPayee()
     d->showTransactions();
 
   } catch (const MyMoneyException &e) {
-    qDebug("exception during display of payee: %s at %s:%ld", qPrintable(e.what()), qPrintable(e.file()), e.line());
+    qDebug("exception during display of payee: %s", e.what());
     d->ui->m_register->clear();
     d->m_selectedPayeesList.clear();
     d->m_payee = MyMoneyPayee();
@@ -327,7 +334,7 @@ void KPayeesView::slotKeyListChanged()
   QStringList keys;
 
   d->m_payee.matchData(ignorecase, keys);
-  if (d->ui->matchTypeCombo->currentData().toUInt() == MyMoneyPayee::matchKey) {
+  if (static_cast<eMyMoney::Payee::MatchType>(d->ui->matchTypeCombo->currentData().toUInt()) == eMyMoney::Payee::MatchType::Key) {
     rc |= (keys != d->ui->matchKeyEditList->items());
   }
   d->setDirty(rc);
@@ -355,20 +362,20 @@ void KPayeesView::slotPayeeDataChanged()
     bool ignorecase = false;
     QStringList keys;
 
-    MyMoneyPayee::payeeMatchType type = d->m_payee.matchData(ignorecase, keys);
+    auto type = d->m_payee.matchData(ignorecase, keys);
     rc |= (static_cast<unsigned int>(type) != d->ui->matchTypeCombo->currentData().toUInt());
 
     d->ui->checkMatchIgnoreCase->setEnabled(false);
     d->ui->matchKeyEditList->setEnabled(false);
 
-    if (d->ui->matchTypeCombo->currentData().toUInt() != MyMoneyPayee::matchDisabled) {
+    if (static_cast<eMyMoney::Payee::MatchType>(d->ui->matchTypeCombo->currentData().toUInt()) != eMyMoney::Payee::MatchType::Disabled) {
       d->ui->checkMatchIgnoreCase->setEnabled(true);
       // if we turn matching on, we default to 'ignore case'
       // TODO maybe make the default a user option
-      if (type == MyMoneyPayee::matchDisabled && d->ui->matchTypeCombo->currentData().toUInt() != MyMoneyPayee::matchDisabled)
+      if (type == eMyMoney::Payee::MatchType::Disabled && static_cast<eMyMoney::Payee::MatchType>(d->ui->matchTypeCombo->currentData().toUInt()) != eMyMoney::Payee::MatchType::Disabled)
         d->ui->checkMatchIgnoreCase->setChecked(true);
       rc |= (ignorecase != d->ui->checkMatchIgnoreCase->isChecked());
-      if (d->ui->matchTypeCombo->currentData().toUInt() == MyMoneyPayee::matchKey) {
+      if (static_cast<eMyMoney::Payee::MatchType>(d->ui->matchTypeCombo->currentData().toUInt()) == eMyMoney::Payee::MatchType::Key) {
         d->ui->matchKeyEditList->setEnabled(true);
         rc |= (keys != d->ui->matchKeyEditList->items());
       }
@@ -409,7 +416,7 @@ void KPayeesView::slotUpdatePayee()
       d->m_payee.setTelephone(d->ui->telephoneEdit->text());
       d->m_payee.setEmail(d->ui->emailEdit->text());
       d->m_payee.setNotes(d->ui->notesEdit->toPlainText());
-      d->m_payee.setMatchData(static_cast<MyMoneyPayee::payeeMatchType>(d->ui->matchTypeCombo->currentData().toUInt()), d->ui->checkMatchIgnoreCase->isChecked(), d->ui->matchKeyEditList->items());
+      d->m_payee.setMatchData(static_cast<eMyMoney::Payee::MatchType>(d->ui->matchTypeCombo->currentData().toUInt()), d->ui->checkMatchIgnoreCase->isChecked(), d->ui->matchKeyEditList->items());
       d->m_payee.setDefaultAccountId();
       d->m_payee.resetPayeeIdentifiers(d->ui->payeeIdentifiers->identifiers());
 
@@ -425,8 +432,7 @@ void KPayeesView::slotUpdatePayee()
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(0, i18n("Unable to modify payee"),
-                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(this, i18n("Unable to modify payee"), QString::fromLatin1(e.what()));
     }
   }
 }
@@ -443,9 +449,7 @@ void KPayeesView::slotSyncAddressBook()
   }
 
   if (d->m_payeeRows.count() <= d->m_payeeRow) {
-    KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(d->ui->m_payeesList->currentItem());
-
-    if (item) { // update ui if something is selected
+    if (auto item = dynamic_cast<KPayeeListItem*>(d->ui->m_payeesList->currentItem())) { // update ui if something is selected
       d->m_payee = item->payee();
       d->ui->addressEdit->setText(d->m_payee.address());
       d->ui->postcodeEdit->setText(d->m_payee.postcode());
@@ -456,8 +460,7 @@ void KPayeesView::slotSyncAddressBook()
     return;
   }
 
-  KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(d->ui->m_payeesList->item(d->m_payeeRows.at(d->m_payeeRow)));
-  if (item)
+  if (auto item = dynamic_cast<KPayeeListItem*>(d->ui->m_payeesList->item(d->m_payeeRows.at(d->m_payeeRow))))
     d->m_payee = item->payee();
   ++d->m_payeeRow;
 
@@ -495,8 +498,7 @@ void KPayeesView::slotContactFetched(const ContactData &identity)
       MyMoneyFile::instance()->modifyPayee(d->m_payee);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(0, i18n("Unable to modify payee"),
-                                 i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+      KMessageBox::detailedSorry(this, i18n("Unable to modify payee"), QString::fromLatin1(e.what()));
     }
   }
 
@@ -509,6 +511,29 @@ void KPayeesView::slotSendMail()
   QRegularExpression re(".+@.+");
   if (re.match(d->m_payee.email()).hasMatch())
     QDesktopServices::openUrl(QUrl(QStringLiteral("mailto:?to=") + d->m_payee.email(), QUrl::TolerantMode));
+}
+
+void KPayeesView::executeCustomAction(eView::Action action)
+{
+  switch(action) {
+    case eView::Action::Refresh:
+      refresh();
+      break;
+
+    case eView::Action::SetDefaultFocus:
+      {
+        Q_D(KPayeesView);
+        QTimer::singleShot(0, d->m_searchWidget, SLOT(setFocus()));
+      }
+      break;
+
+    case eView::Action::ClosePayeeIdentifierSource:
+      slotClosePayeeIdentifierSource();
+      break;
+
+    default:
+      break;
+  }
 }
 
 void KPayeesView::refresh()
@@ -532,7 +557,7 @@ void KPayeesView::showEvent(QShowEvent* event)
   if (d->m_needLoad)
     d->init();
 
-  emit aboutToShow(View::Payees);
+  emit customActionRequested(View::Payees, eView::Action::AboutToShow);
 
   if (d->m_needsRefresh)
     refresh();
@@ -564,7 +589,7 @@ void KPayeesView::slotSelectTransaction()
   if (!list.isEmpty()) {
     const auto t = dynamic_cast<KMyMoneyRegister::Transaction*>(list[0]);
     if (t)
-      emit transactionSelected(t->split().accountId(), t->transaction().id());
+      emit selectByVariant(QVariantList {QVariant(t->split().accountId()), QVariant(t->transaction().id()) }, eView::Intent::ShowTransaction);
   }
 }
 
@@ -583,8 +608,7 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
     QList<QListWidgetItem *> selectedItems = d->ui->m_payeesList->selectedItems();
     QList<QListWidgetItem *>::const_iterator payeesIt = selectedItems.constBegin();
     while (payeesIt != selectedItems.constEnd()) {
-      KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(*payeesIt);
-      if (item)
+      if (auto item = dynamic_cast<KPayeeListItem*>(*payeesIt))
         item->setSelected(false);
       ++payeesIt;
     }
@@ -593,7 +617,7 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
     QListWidgetItem* it;
     for (int i = 0; i < d->ui->m_payeesList->count(); ++i) {
       it = d->ui->m_payeesList->item(i);
-      KPayeeListItem* item = dynamic_cast<KPayeeListItem *>(it);
+      auto item = dynamic_cast<KPayeeListItem *>(it);
       if (item && item->payee().id() == payeeId) {
         d->ui->m_payeesList->scrollToItem(it, QAbstractItemView::PositionAtCenter);
 
@@ -603,32 +627,30 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
         //make sure the payee selection is updated and transactions are updated accordingly
         slotSelectPayee();
 
-        KMyMoneyRegister::RegisterItem *item = 0;
-        for (int i = 0; i < d->ui->m_register->rowCount(); ++i) {
-          item = d->ui->m_register->itemAtRow(i);
-          KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(item);
-          if (t) {
+        KMyMoneyRegister::RegisterItem *registerItem = 0;
+        for (i = 0; i < d->ui->m_register->rowCount(); ++i) {
+          registerItem = d->ui->m_register->itemAtRow(i);
+          if (auto t = dynamic_cast<KMyMoneyRegister::Transaction*>(registerItem)) {
             if (t->transaction().id() == transactionId && t->transaction().accountReferenced(accountId)) {
-              d->ui->m_register->selectItem(item);
-              d->ui->m_register->ensureItemVisible(item);
+              d->ui->m_register->selectItem(registerItem);
+              d->ui->m_register->ensureItemVisible(registerItem);
               break;
             }
           }
         }
-        // quit out of for() loop
+        // quit out of outer for() loop
         break;
       }
     }
   } catch (const MyMoneyException &e) {
-    qWarning("Unexpected exception in KPayeesView::slotSelectPayeeAndTransaction %s", qPrintable(e.what()));
+    qWarning("Unexpected exception in KPayeesView::slotSelectPayeeAndTransaction %s", e.what());
   }
 }
 
 void KPayeesView::slotShowPayeesMenu(const QPoint& /*p*/)
 {
   Q_D(KPayeesView);
-  auto item = dynamic_cast<KPayeeListItem*>(d->ui->m_payeesList->currentItem());
-  if (item) {
+  if (dynamic_cast<KPayeeListItem*>(d->ui->m_payeesList->currentItem())) {
     slotSelectPayee();
     pMenus[eMenu::Menu::Payee]->exec(QCursor::pos());
   }

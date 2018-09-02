@@ -36,13 +36,13 @@ public:
   explicit SplitDelegate(QObject* parent = 0);
   virtual ~SplitDelegate();
 
-  virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
-  virtual void setEditorData(QWidget* editWidget, const QModelIndex& index) const;
+  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
+  QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
+  QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
+  void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const final override;
+  void setEditorData(QWidget* editWidget, const QModelIndex& index) const final override;
 
-  virtual void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+  void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
 
   /**
    * This method returns the row that currently has an editor
@@ -59,7 +59,7 @@ public:
   static QColor erroneousColor();
 
 protected:
-  bool eventFilter(QObject* o, QEvent* event);
+  bool eventFilter(QObject* o, QEvent* event) final override;
 
 protected Q_SLOTS:
   void endEdit();

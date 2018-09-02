@@ -1,19 +1,19 @@
-/*******************************************************************************
-*                                 priceswizardpage.h
-*                              ------------------
-* begin                       : Sat Jan 21 2017
-* copyright                   : (C) 2016 by Łukasz Wojniłowicz
-* email                       : lukasz.wojnilowicz@gmail.com
-********************************************************************************/
-
-/*******************************************************************************
-*                                                                              *
-*   This program is free software; you can redistribute it and/or modify       *
-*   it under the terms of the GNU General Public License as published by       *
-*   the Free Software Foundation; either version 2 of the License, or          *
-*   (at your option) any later version.                                        *
-*                                                                              *
-********************************************************************************/
+/*
+ * Copyright 2017  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef PRICESWIZARDPAGE_H
 #define PRICESWIZARDPAGE_H
@@ -51,9 +51,9 @@ public:
   ~PricesPage();
 
 private:
-  void                initializePage();
-  bool                isComplete() const;
-  bool                validatePage();
+  void initializePage() final override;
+  bool isComplete() const final override;
+  bool validatePage() final override;
 
   void                resetComboBox(const Column comboBox);
   /**

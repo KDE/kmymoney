@@ -1,19 +1,20 @@
-/***************************************************************************
-                          mymoneytag.h
-                             -------------------
-    copyright            : (C) 2012 by Alessandro Russo <axela74@yahoo.it>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2012       Alessandro Russo <axela74@yahoo.it>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MYMONEYTAG_H
 #define MYMONEYTAG_H
@@ -31,7 +32,6 @@
 
 class QString;
 class QColor;
-class QDomDocument;
 
 /**
   * This class represents a tag within the MyMoney engine.
@@ -45,20 +45,11 @@ class KMM_MYMONEY_EXPORT MyMoneyTag : public MyMoneyObject
 
   public:
     MyMoneyTag();
-
-  explicit MyMoneyTag(const QString& name);
+  explicit MyMoneyTag(const QString &id);
 
   explicit MyMoneyTag(const QString& name,
                       const QColor& tagColor
                       );
-  /**
-    * This is the constructor for a tag that is described by a
-    * QDomElement (e.g. from a file).
-    *
-    * @param el const reference to the QDomElement from which to
-    *           create the object
-    */
-  explicit MyMoneyTag(const QDomElement& node);
 
   MyMoneyTag(const QString& id,
              const MyMoneyTag& tag);
@@ -78,6 +69,7 @@ class KMM_MYMONEY_EXPORT MyMoneyTag : public MyMoneyObject
 
   QColor tagColor() const;
   void setTagColor(const QColor& val);
+  void setNamedTagColor(const QString &val);
 
   QString notes() const;
   void setNotes(const QString& val);
@@ -85,8 +77,6 @@ class KMM_MYMONEY_EXPORT MyMoneyTag : public MyMoneyObject
   // Equality operator
   bool operator == (const MyMoneyTag &) const;
   bool operator <(const MyMoneyTag& right) const;
-
-  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 
   /**
     * This method checks if a reference to the given object exists. It returns,

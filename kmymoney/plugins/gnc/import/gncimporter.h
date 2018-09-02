@@ -29,34 +29,21 @@
 
 class MyMoneyGncReader;
 
-class GNCImporter : public KMyMoneyPlugin::Plugin
+class GNCImporter : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::StoragePlugin
 {
   Q_OBJECT
+  Q_INTERFACES(KMyMoneyPlugin::StoragePlugin)
 
 public:
   explicit GNCImporter(QObject *parent, const QVariantList &args);
   ~GNCImporter() override;
 
-  QAction          *m_action;
+  MyMoneyStorageMgr *open(const QUrl &url) override;
+  bool save(const QUrl &url) override;
+  bool saveAs() override;
 
-  void injectExternalSettings(KMyMoneySettings* p) override;
-
-private:
-  MyMoneyGncReader *m_gncReader;
-
-private Q_SLOTS:
-
-  /**
-    * Called when the user wishes to import tab delimeted transactions
-    * into the current account.  An account must be open for this to
-    * work.  Calls KMyMoneyView::slotAccountImportAscii.
-    *
-    * @see MyMoneyAccount
-    */
-  void slotGNCImport();
-
-protected:
-  void createActions();
+  eKMyMoney::StorageType storageType() const override;
+  QString fileExtension() const override;
 };
 
 #endif

@@ -1,20 +1,20 @@
-/***************************************************************************
-                          ledgermodel.cpp
-                             -------------------
-    begin                : Sat Aug 8 2015
-    copyright            : (C) 2015 by Thomas Baumgart
-    email                : Thomas Baumgart <tbaumgart@kde.org>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2016-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "ledgermodel.h"
 
@@ -42,7 +42,7 @@
 #include "mymoneymoney.h"
 #include "mymoneyexception.h"
 #include "kmymoneyutils.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "mymoneyenums.h"
 #include "modelenums.h"
 
@@ -64,15 +64,6 @@ LedgerModel::LedgerModel(QObject* parent) :
   QAbstractTableModel(parent),
   d_ptr(new LedgerModelPrivate)
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
-
-  connect(file, &MyMoneyFile::objectAdded,    this, static_cast<void (LedgerModel::*)(File::Object, const MyMoneyObject * const)>(&LedgerModel::addTransaction));
-  connect(file, &MyMoneyFile::objectModified, this, &LedgerModel::modifyTransaction);
-  connect(file, &MyMoneyFile::objectRemoved,  this, &LedgerModel::removeTransaction);
-
-  connect(file, &MyMoneyFile::objectAdded,    this, &LedgerModel::addSchedule);
-  connect(file, &MyMoneyFile::objectModified, this, &LedgerModel::modifySchedule);
-  connect(file, &MyMoneyFile::objectRemoved,  this, &LedgerModel::removeSchedule);
 }
 
 LedgerModel::~LedgerModel()
@@ -213,7 +204,7 @@ QVariant LedgerModel::data(const QModelIndex& index, int role) const
 
     case Qt::BackgroundColorRole:
       if(d->m_ledgerItems[index.row()]->isImported()) {
-        return KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionImported);
+        return KMyMoneySettings::schemeColor(SchemeColor::TransactionImported);
       }
       break;
 
@@ -396,7 +387,7 @@ void LedgerModel::addTransaction(const QString& transactionSplitId)
     if(transactionId != d->m_lastTransactionStored.id()) {
       try {
         d->m_lastTransactionStored = MyMoneyFile::instance()->transaction(transactionId);
-      } catch(MyMoneyException& e) {
+      } catch (const MyMoneyException &) {
         d->m_lastTransactionStored = MyMoneyTransaction();
       }
     }
@@ -405,7 +396,7 @@ void LedgerModel::addTransaction(const QString& transactionSplitId)
       beginInsertRows(QModelIndex(), rowCount(), rowCount());
       d->m_ledgerItems.append(new LedgerTransaction(d->m_lastTransactionStored, split));
       endInsertRows();
-    } catch(MyMoneyException& e) {
+    } catch (const MyMoneyException &) {
       d->m_lastTransactionStored = MyMoneyTransaction();
     }
   }
@@ -493,7 +484,7 @@ void LedgerModel::load()
   // load all scheduled transactoins and splits into the model
   const int splitCount = rowCount();
   QList<MyMoneySchedule> sList = MyMoneyFile::instance()->scheduleList();
-  addSchedules(sList, KMyMoneyGlobalSettings::schedulePreview());
+  addSchedules(sList, KMyMoneySettings::schedulePreview());
   qDebug() << "Loaded" << rowCount()-splitCount << "elements";
 
   // create a dummy entry for new transactions
@@ -502,37 +493,37 @@ void LedgerModel::load()
   qDebug() << "Loaded" << rowCount() << "elements";
 }
 
-void LedgerModel::addTransaction(File::Object objType, const MyMoneyObject * const obj)
+void LedgerModel::slotAddTransaction(File::Object objType, const QString& id)
 {
   if(objType != File::Object::Transaction) {
     return;
   }
   Q_D(LedgerModel);
-  qDebug() << "Adding transaction" << obj->id();
+  qDebug() << "Adding transaction" << id;
 
-  const MyMoneyTransaction * const t = static_cast<const MyMoneyTransaction * const>(obj);
+  const auto t = MyMoneyFile::instance()->transaction(id);
 
-  beginInsertRows(QModelIndex(), rowCount(), rowCount() + t->splitCount() - 1);
-  foreach (auto s, t->splits())
-    d->m_ledgerItems.append(new LedgerTransaction(*t, s));
+  beginInsertRows(QModelIndex(), rowCount(), rowCount() + t.splitCount() - 1);
+  foreach (auto s, t.splits())
+    d->m_ledgerItems.append(new LedgerTransaction(t, s));
   endInsertRows();
 
   // just make sure we're in sync
   Q_ASSERT(d->m_ledgerItems.count() == rowCount());
 }
 
-void LedgerModel::modifyTransaction(File::Object objType, const MyMoneyObject* const obj)
+void LedgerModel::slotModifyTransaction(File::Object objType, const QString& id)
 {
   if(objType != File::Object::Transaction) {
     return;
   }
 
   Q_D(LedgerModel);
-  const MyMoneyTransaction * const t = static_cast<const MyMoneyTransaction * const>(obj);
+  const auto t = MyMoneyFile::instance()->transaction(id);
   // get indexes of all existing splits for this transaction
-  QModelIndexList list = match(index(0, 0), (int)Role::TransactionId, obj->id(), -1);
+  auto list = match(index(0, 0), (int)Role::TransactionId, id, -1);
   // get list of splits to be stored
-  QList<MyMoneySplit> splits = t->splits();
+  auto splits = t.splits();
 
   int lastRowUsed = -1;
   int firstRowUsed = 99999999;
@@ -547,9 +538,9 @@ void LedgerModel::modifyTransaction(File::Object objType, const MyMoneyObject* c
     QModelIndex index = list.takeFirst();
     MyMoneySplit split = splits.takeFirst();
     // get rid of the old split and store new split
-    qDebug() << "Modify split in row:" << index.row() << t->id() << split.id();
+    qDebug() << "Modify split in row:" << index.row() << t.id() << split.id();
     delete d->m_ledgerItems[index.row()];
-    d->m_ledgerItems[index.row()] = new LedgerTransaction(*t, split);
+    d->m_ledgerItems[index.row()] = new LedgerTransaction(t, split);
   }
 
   // inform every one else about the changes
@@ -567,7 +558,7 @@ void LedgerModel::modifyTransaction(File::Object objType, const MyMoneyObject* c
     d->m_ledgerItems.insert(lastRowUsed, splits.count(), 0);
     while(!splits.isEmpty()) {
       MyMoneySplit split = splits.takeFirst();
-      d->m_ledgerItems[lastRowUsed] = new LedgerTransaction(*t, split);
+      d->m_ledgerItems[lastRowUsed] = new LedgerTransaction(t, split);
       lastRowUsed++;
     }
     endInsertRows();
@@ -593,7 +584,7 @@ void LedgerModel::modifyTransaction(File::Object objType, const MyMoneyObject* c
   Q_ASSERT(d->m_ledgerItems.count() == rowCount());
 }
 
-void LedgerModel::removeTransaction(File::Object objType, const QString& id)
+void LedgerModel::slotRemoveTransaction(File::Object objType, const QString& id)
 {
   if(objType != File::Object::Transaction) {
     return;
@@ -616,9 +607,9 @@ void LedgerModel::removeTransaction(File::Object objType, const QString& id)
   }
 }
 
-void LedgerModel::addSchedule(File::Object objType, const MyMoneyObject*const obj)
+void LedgerModel::slotAddSchedule(File::Object objType, const QString& id)
 {
-  Q_UNUSED(obj);
+  Q_UNUSED(id);
   if(objType != File::Object::Schedule) {
     return;
   }
@@ -626,9 +617,9 @@ void LedgerModel::addSchedule(File::Object objType, const MyMoneyObject*const ob
   /// @todo implement LedgerModel::addSchedule
 }
 
-void LedgerModel::modifySchedule(File::Object objType, const MyMoneyObject*const obj)
+void LedgerModel::slotModifySchedule(File::Object objType, const QString& id)
 {
-  Q_UNUSED(obj);
+  Q_UNUSED(id);
   if(objType != File::Object::Schedule) {
     return;
   }
@@ -636,7 +627,7 @@ void LedgerModel::modifySchedule(File::Object objType, const MyMoneyObject*const
   /// @todo implement LedgerModel::modifySchedule
 }
 
-void LedgerModel::removeSchedule(File::Object objType, const QString& id)
+void LedgerModel::slotRemoveSchedule(File::Object objType, const QString& id)
 {
   Q_UNUSED(id);
   if(objType != File::Object::Schedule) {

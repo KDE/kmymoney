@@ -28,7 +28,7 @@
 #include "mymoneyexception.h"
 
 TransactionMatchFinder::TransactionMatchFinder(int _matchWindow) :
-    matchWindow(_matchWindow),
+    m_matchWindow(_matchWindow),
     matchResult(MatchNotFound)
 {
 }
@@ -40,16 +40,16 @@ TransactionMatchFinder::~TransactionMatchFinder()
 TransactionMatchFinder::MatchResult TransactionMatchFinder::findMatch(const MyMoneyTransaction& transactionToMatch, const MyMoneySplit& splitToMatch)
 {
   importedTransaction = transactionToMatch;
-  importedSplit = splitToMatch;
+  m_importedSplit = splitToMatch;
   matchResult = MatchNotFound;
   matchedTransaction.reset();
   matchedSplit.reset();
   matchedSchedule.reset();
 
   QString date = importedTransaction.postDate().toString(Qt::ISODate);
-  QString payeeName = MyMoneyFile::instance()->payee(importedSplit.payeeId()).name();
-  QString amount = importedSplit.shares().formatMoney("", 2);
-  QString account = MyMoneyFile::instance()->account(importedSplit.accountId()).name();
+  QString payeeName = MyMoneyFile::instance()->payee(m_importedSplit.payeeId()).name();
+  QString amount = m_importedSplit.shares().formatMoney("", 2);
+  QString account = MyMoneyFile::instance()->account(m_importedSplit.accountId()).name();
   qDebug() << "Looking for a match with transaction: " << date << "," << payeeName << "," << amount
   << "(referenced account: " << account << ")";
 
@@ -61,7 +61,7 @@ TransactionMatchFinder::MatchResult TransactionMatchFinder::findMatch(const MyMo
 MyMoneySplit TransactionMatchFinder::getMatchedSplit() const
 {
   if (matchedSplit.isNull()) {
-    throw MYMONEYEXCEPTION(i18n("Internal error - no matching splits"));
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Internal error - no matching splits"));
   }
 
   return *matchedSplit;
@@ -70,7 +70,7 @@ MyMoneySplit TransactionMatchFinder::getMatchedSplit() const
 MyMoneyTransaction TransactionMatchFinder::getMatchedTransaction() const
 {
   if (matchedTransaction.isNull()) {
-    throw MYMONEYEXCEPTION(i18n("Internal error - no matching transactions"));
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Internal error - no matching transactions"));
   }
 
   return *matchedTransaction;
@@ -79,7 +79,7 @@ MyMoneyTransaction TransactionMatchFinder::getMatchedTransaction() const
 MyMoneySchedule TransactionMatchFinder::getMatchedSchedule() const
 {
   if (matchedSchedule.isNull()) {
-    throw MYMONEYEXCEPTION(i18n("Internal error - no matching schedules"));
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Internal error - no matching schedules"));
   }
 
   return *matchedSchedule;
@@ -136,14 +136,14 @@ bool TransactionMatchFinder::splitsPayeesMatchOrEmpty(const MyMoneySplit& split1
 void TransactionMatchFinder::findMatchingSplit(const MyMoneyTransaction& transaction, int amountVariation)
 {
   foreach (const MyMoneySplit & split, transaction.splits()) {
-    if (splitsAreDuplicates(importedSplit, split, amountVariation)) {
+    if (splitsAreDuplicates(m_importedSplit, split, amountVariation)) {
       matchedTransaction.reset(new MyMoneyTransaction(transaction));
       matchedSplit.reset(new MyMoneySplit(split));
       matchResult = MatchDuplicate;
       break;
     }
 
-    if (splitsMatch(importedSplit, split, amountVariation)) {
+    if (splitsMatch(m_importedSplit, split, amountVariation)) {
       matchedTransaction.reset(new MyMoneyTransaction(transaction));
       matchedSplit.reset(new MyMoneySplit(split));
 

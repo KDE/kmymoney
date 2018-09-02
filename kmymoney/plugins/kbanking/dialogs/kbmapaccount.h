@@ -34,7 +34,7 @@ public:
 
   AB_ACCOUNT *getAccount();
 
-  void accept();
+  void accept() final override;
 
 protected Q_SLOTS:
   void slotSelectionChanged();

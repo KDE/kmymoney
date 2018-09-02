@@ -1,19 +1,24 @@
-/***************************************************************************
-                          mymoneytransaction.cpp
-                             -------------------
-    copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
-                               2002 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2000-2002  Michael Edwardes <mte@users.sourceforge.net>
+ * Copyright 2001-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2001       Felix Rodriguez <frodriguez@users.sourceforge.net>
+ * Copyright 2003       Kevin Tambascio <ktambascio@users.sourceforge.net>
+ * Copyright 2004-2005  Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2006       Darren Gould <darren_gould@gmx.de>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "mymoneytransaction.h"
 #include "mymoneytransaction_p.h"
@@ -22,19 +27,15 @@
 // QT Includes
 
 #include <QStringList>
-#include <QDomDocument>
-#include <QDomElement>
 #include <QMap>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneystoragenames.h"
 #include "mymoneyutils.h"
 #include "mymoneymoney.h"
 #include "mymoneyexception.h"
-
-using namespace MyMoneyStorageNodes;
+#include "mymoneyenums.h"
 
 MyMoneyTransaction::MyMoneyTransaction() :
     MyMoneyObject(*new MyMoneyTransactionPrivate)
@@ -45,46 +46,13 @@ MyMoneyTransaction::MyMoneyTransaction() :
   d->m_postDate = QDate();
 }
 
-MyMoneyTransaction::MyMoneyTransaction(const QDomElement& node, const bool forceId) :
-    MyMoneyObject(*new MyMoneyTransactionPrivate, node, forceId)
+MyMoneyTransaction::MyMoneyTransaction(const QString &id) :
+    MyMoneyObject(*new MyMoneyTransactionPrivate, id)
 {
   Q_D(MyMoneyTransaction);
-  if (nodeNames[nnTransaction] != node.tagName())
-    throw MYMONEYEXCEPTION("Node was not TRANSACTION");
-
   d->m_nextSplitID = 1;
-
-  d->m_postDate = MyMoneyUtils::stringToDate(node.attribute(d->getAttrName(Transaction::Attribute::PostDate)));
-  d->m_entryDate = MyMoneyUtils::stringToDate(node.attribute(d->getAttrName(Transaction::Attribute::EntryDate)));
-  d->m_bankID = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Transaction::Attribute::BankID)));
-  d->m_memo = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Transaction::Attribute::Memo)));
-  d->m_commodity = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Transaction::Attribute::Commodity)));
-
-  QDomNode child = node.firstChild();
-  while (!child.isNull() && child.isElement()) {
-    QDomElement c = child.toElement();
-    if (c.tagName() == d->getElName(Transaction::Element::Splits)) {
-
-      // Process any split information found inside the transaction entry.
-      QDomNodeList nodeList = c.elementsByTagName(d->getElName(Transaction::Element::Split));
-      for (int i = 0; i < nodeList.count(); ++i) {
-        MyMoneySplit s(nodeList.item(i).toElement());
-        if (!d->m_bankID.isEmpty())
-          s.setBankID(d->m_bankID);
-        if (!s.accountId().isEmpty())
-          addSplit(s);
-        else
-          qDebug("Dropped split because it did not have an account id");
-      }
-
-    } else if (c.tagName() == nodeNames[nnKeyValuePairs]) {
-      MyMoneyKeyValueContainer kvp(c);
-      setPairs(kvp.pairs());
-    }
-
-    child = child.nextSibling();
-  }
-  d->m_bankID.clear();
+  d->m_entryDate = QDate();
+  d->m_postDate = QDate();
 }
 
 MyMoneyTransaction::MyMoneyTransaction(const MyMoneyTransaction& other) :
@@ -156,6 +124,13 @@ QList<MyMoneySplit>& MyMoneyTransaction::splits()
   Q_D(MyMoneyTransaction);
   return d->m_splits;
 }
+
+MyMoneySplit MyMoneyTransaction::firstSplit() const
+{
+  Q_D(const MyMoneyTransaction);
+  return d->m_splits.first();
+}
+
 uint MyMoneyTransaction::splitCount() const
 {
   Q_D(const MyMoneyTransaction);
@@ -233,10 +208,10 @@ bool MyMoneyTransaction::accountReferenced(const QString& id) const
 void MyMoneyTransaction::addSplit(MyMoneySplit &split)
 {
   if (!split.id().isEmpty())
-    throw MYMONEYEXCEPTION("Cannot add split with assigned id (" + split.id() + ')');
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot add split with assigned id '%1'").arg(split.id()));
 
   if (split.accountId().isEmpty())
-    throw MYMONEYEXCEPTION("Cannot add split that does not contain an account reference");
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot add split that does not contain an account reference"));
 
   Q_D(MyMoneyTransaction);
   MyMoneySplit newSplit(d->nextSplitID(), split);
@@ -250,7 +225,7 @@ void MyMoneyTransaction::modifySplit(const MyMoneySplit& split)
 // This is the other version which allows having more splits referencing
 // the same account.
   if (split.accountId().isEmpty())
-    throw MYMONEYEXCEPTION("Cannot modify split that does not contain an account reference");
+    throw MYMONEYEXCEPTION_CSTRING("Cannot modify split that does not contain an account reference");
 
   Q_D(MyMoneyTransaction);
   for (auto& it_split : d->m_splits) {
@@ -259,7 +234,7 @@ void MyMoneyTransaction::modifySplit(const MyMoneySplit& split)
       return;
     }
   }
-  throw MYMONEYEXCEPTION(QString("Invalid split id '%1'").arg(split.id()));
+  throw MYMONEYEXCEPTION(QString::fromLatin1("Invalid split id '%1'").arg(split.id()));
 }
 
 void MyMoneyTransaction::removeSplit(const MyMoneySplit& split)
@@ -272,7 +247,7 @@ void MyMoneyTransaction::removeSplit(const MyMoneySplit& split)
     }
   }
 
-  throw MYMONEYEXCEPTION(QString("Invalid split id '%1'").arg(split.id()));
+  throw MYMONEYEXCEPTION(QString::fromLatin1("Invalid split id '%1'").arg(split.id()));
 }
 
 void MyMoneyTransaction::removeSplits()
@@ -289,7 +264,7 @@ MyMoneySplit MyMoneyTransaction::splitByPayee(const QString& payeeId) const
     if (split.payeeId() == payeeId)
       return split;
   }
-  throw MYMONEYEXCEPTION(QString("Split not found for payee '%1'").arg(QString(payeeId)));
+  throw MYMONEYEXCEPTION(QString::fromLatin1("Split not found for payee '%1'").arg(QString(payeeId)));
 }
 
 MyMoneySplit MyMoneyTransaction::splitByAccount(const QString& accountId, const bool match) const
@@ -300,7 +275,7 @@ MyMoneySplit MyMoneyTransaction::splitByAccount(const QString& accountId, const 
         (match == false && split.accountId() != accountId))
       return split;
   }
-  throw MYMONEYEXCEPTION(QString("Split not found for account %1%2").arg(match ? "" : "!").arg(QString(accountId)));
+  throw MYMONEYEXCEPTION(QString::fromLatin1("Split not found for account %1%2").arg(match ? "" : "!").arg(QString(accountId)));
 }
 
 MyMoneySplit MyMoneyTransaction::splitByAccount(const QStringList& accountIds, const bool match) const
@@ -311,7 +286,7 @@ MyMoneySplit MyMoneyTransaction::splitByAccount(const QStringList& accountIds, c
         (match == false && !accountIds.contains(split.accountId())))
       return split;
   }
-  throw MYMONEYEXCEPTION(QString("Split not found for account  %1%1...%2").arg(match ? "" : "!").arg(accountIds.front(), accountIds.back()));
+  throw MYMONEYEXCEPTION(QString::fromLatin1("Split not found for account  %1%1...%2").arg(match ? "" : "!").arg(accountIds.front(), accountIds.back()));
 }
 
 MyMoneySplit MyMoneyTransaction::splitById(const QString& splitId) const
@@ -321,7 +296,7 @@ MyMoneySplit MyMoneyTransaction::splitById(const QString& splitId) const
     if (split.id() == splitId)
       return split;
   }
-  throw MYMONEYEXCEPTION(QString("Split not found for id '%1'").arg(QString(splitId)));
+  throw MYMONEYEXCEPTION(QString::fromLatin1("Split not found for id '%1'").arg(QString(splitId)));
 }
 
 QString MyMoneyTransaction::firstSplitID()
@@ -404,7 +379,7 @@ unsigned long MyMoneyTransaction::hash(const QString& txt, unsigned long h)
 bool MyMoneyTransaction::isStockSplit() const
 {
   Q_D(const MyMoneyTransaction);
-  return (d->m_splits.count() == 1 && d->m_splits[0].action() == MyMoneySplit::ActionSplitShares);
+  return (d->m_splits.count() == 1 && d->m_splits.first().action() == MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares));
 }
 
 bool MyMoneyTransaction::isImported() const
@@ -418,27 +393,6 @@ void MyMoneyTransaction::setImported(bool state)
     setValue("Imported", "true");
   else
     deletePair("Imported");
-}
-
-void MyMoneyTransaction::writeXML(QDomDocument& document, QDomElement& parent) const
-{
-  Q_D(const MyMoneyTransaction);
-  auto el = document.createElement(nodeNames[nnTransaction]);
-
-  d->writeBaseXML(document, el);
-  el.setAttribute(d->getAttrName(Transaction::Attribute::PostDate), MyMoneyUtils::dateToString(d->m_postDate));
-  el.setAttribute(d->getAttrName(Transaction::Attribute::Memo), d->m_memo);
-  el.setAttribute(d->getAttrName(Transaction::Attribute::EntryDate), MyMoneyUtils::dateToString(d->m_entryDate));
-  el.setAttribute(d->getAttrName(Transaction::Attribute::Commodity), d->m_commodity);
-
-  auto splits = document.createElement(d->getElName(Transaction::Element::Splits));
-  foreach (const auto split, d->m_splits)
-    split.writeXML(document, splits);
-  el.appendChild(splits);
-
-  MyMoneyKeyValueContainer::writeXML(document, el);
-
-  parent.appendChild(el);
 }
 
 bool MyMoneyTransaction::hasReferenceTo(const QString& id) const

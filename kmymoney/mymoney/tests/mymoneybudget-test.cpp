@@ -1,18 +1,19 @@
-/***************************************************************************
-                          mymoneybudgettest.cpp
-                          -------------------
-    copyright            : (C) 2010 by Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2010-2011  Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "mymoneybudget-test.h"
 
@@ -37,8 +38,8 @@ void MyMoneyBudgetTest::cleanup()
 void MyMoneyBudgetTest::addMonthlyToMonthly()
 {
   MyMoneyBudget::AccountGroup a0, a1;
-  a0.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthly);
-  a1.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthly);
+  a0.setBudgetLevel(eMyMoney::Budget::Level::Monthly);
+  a1.setBudgetLevel(eMyMoney::Budget::Level::Monthly);
   MyMoneyBudget::PeriodGroup period;
   period.setStartDate(QDate(2010, 1, 1));
   period.setAmount(MyMoneyMoney(100, 1));
@@ -47,8 +48,8 @@ void MyMoneyBudgetTest::addMonthlyToMonthly()
 
   a0 += a1;
 
-  QVERIFY(a0.budgetLevel() == MyMoneyBudget::AccountGroup::eMonthly);
-  QVERIFY(a1.budgetLevel() == MyMoneyBudget::AccountGroup::eMonthly);
+  QVERIFY(a0.budgetLevel() == eMyMoney::Budget::Level::Monthly);
+  QVERIFY(a1.budgetLevel() == eMyMoney::Budget::Level::Monthly);
   QVERIFY(a0.getPeriods().count() == 1);
   QVERIFY(a1.getPeriods().count() == 1);
   QVERIFY(a0.balance() == MyMoneyMoney(200, 1));
@@ -58,8 +59,8 @@ void MyMoneyBudgetTest::addMonthlyToMonthly()
 void MyMoneyBudgetTest::addMonthlyToYearly()
 {
   MyMoneyBudget::AccountGroup a0, a1;
-  a0.setBudgetLevel(MyMoneyBudget::AccountGroup::eYearly);
-  a1.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthly);
+  a0.setBudgetLevel(eMyMoney::Budget::Level::Yearly);
+  a1.setBudgetLevel(eMyMoney::Budget::Level::Monthly);
   MyMoneyBudget::PeriodGroup period;
   period.setStartDate(QDate(2010, 1, 1));
   period.setAmount(MyMoneyMoney(100, 1));
@@ -71,8 +72,8 @@ void MyMoneyBudgetTest::addMonthlyToYearly()
 
   a0 += a1;
 
-  QVERIFY(a0.budgetLevel() == MyMoneyBudget::AccountGroup::eYearly);
-  QVERIFY(a1.budgetLevel() == MyMoneyBudget::AccountGroup::eMonthly);
+  QVERIFY(a0.budgetLevel() == eMyMoney::Budget::Level::Yearly);
+  QVERIFY(a1.budgetLevel() == eMyMoney::Budget::Level::Monthly);
   QVERIFY(a0.getPeriods().count() == 1);
   QVERIFY(a1.getPeriods().count() == 1);
   QVERIFY(a0.totalBalance() == MyMoneyMoney(1300, 1));
@@ -82,8 +83,8 @@ void MyMoneyBudgetTest::addMonthlyToYearly()
 void MyMoneyBudgetTest::addMonthlyToMonthByMonth()
 {
   MyMoneyBudget::AccountGroup a0, a1;
-  a0.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthByMonth);
-  a1.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthly);
+  a0.setBudgetLevel(eMyMoney::Budget::Level::MonthByMonth);
+  a1.setBudgetLevel(eMyMoney::Budget::Level::Monthly);
   MyMoneyBudget::PeriodGroup period;
   period.setStartDate(QDate(2010, 1, 1));
   period.setAmount(MyMoneyMoney(100, 1));
@@ -101,8 +102,8 @@ void MyMoneyBudgetTest::addMonthlyToMonthByMonth()
 
   a0 += a1;
 
-  QVERIFY(a0.budgetLevel() == MyMoneyBudget::AccountGroup::eMonthByMonth);
-  QVERIFY(a1.budgetLevel() == MyMoneyBudget::AccountGroup::eMonthly);
+  QVERIFY(a0.budgetLevel() == eMyMoney::Budget::Level::MonthByMonth);
+  QVERIFY(a1.budgetLevel() == eMyMoney::Budget::Level::Monthly);
   QVERIFY(a0.getPeriods().count() == 12);
   QVERIFY(a1.getPeriods().count() == 1);
   QVERIFY(a0.totalBalance() == MyMoneyMoney(9000, 1));
@@ -112,8 +113,8 @@ void MyMoneyBudgetTest::addMonthlyToMonthByMonth()
 void MyMoneyBudgetTest::addYearlyToMonthly()
 {
   MyMoneyBudget::AccountGroup a0, a1;
-  a0.setBudgetLevel(MyMoneyBudget::AccountGroup::eYearly);
-  a1.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthly);
+  a0.setBudgetLevel(eMyMoney::Budget::Level::Yearly);
+  a1.setBudgetLevel(eMyMoney::Budget::Level::Monthly);
   MyMoneyBudget::PeriodGroup period;
   period.setStartDate(QDate(2010, 1, 1));
   period.setAmount(MyMoneyMoney(100, 1));
@@ -125,8 +126,8 @@ void MyMoneyBudgetTest::addYearlyToMonthly()
 
   a1 += a0;
 
-  QVERIFY(a0.budgetLevel() == MyMoneyBudget::AccountGroup::eYearly);
-  QVERIFY(a1.budgetLevel() == MyMoneyBudget::AccountGroup::eMonthly);
+  QVERIFY(a0.budgetLevel() == eMyMoney::Budget::Level::Yearly);
+  QVERIFY(a1.budgetLevel() == eMyMoney::Budget::Level::Monthly);
   QVERIFY(a0.getPeriods().count() == 1);
   QVERIFY(a1.getPeriods().count() == 1);
   QVERIFY(a0.totalBalance() == MyMoneyMoney(100, 1));
@@ -136,8 +137,8 @@ void MyMoneyBudgetTest::addYearlyToMonthly()
 void MyMoneyBudgetTest::addYearlyToYearly()
 {
   MyMoneyBudget::AccountGroup a0, a1;
-  a0.setBudgetLevel(MyMoneyBudget::AccountGroup::eYearly);
-  a1.setBudgetLevel(MyMoneyBudget::AccountGroup::eYearly);
+  a0.setBudgetLevel(eMyMoney::Budget::Level::Yearly);
+  a1.setBudgetLevel(eMyMoney::Budget::Level::Yearly);
   MyMoneyBudget::PeriodGroup period;
   period.setStartDate(QDate(2010, 1, 1));
   period.setAmount(MyMoneyMoney(100, 1));
@@ -146,8 +147,8 @@ void MyMoneyBudgetTest::addYearlyToYearly()
 
   a0 += a1;
 
-  QVERIFY(a0.budgetLevel() == MyMoneyBudget::AccountGroup::eYearly);
-  QVERIFY(a1.budgetLevel() == MyMoneyBudget::AccountGroup::eYearly);
+  QVERIFY(a0.budgetLevel() == eMyMoney::Budget::Level::Yearly);
+  QVERIFY(a1.budgetLevel() == eMyMoney::Budget::Level::Yearly);
   QVERIFY(a0.getPeriods().count() == 1);
   QVERIFY(a1.getPeriods().count() == 1);
   QVERIFY(a0.balance() == MyMoneyMoney(200, 1));
@@ -157,8 +158,8 @@ void MyMoneyBudgetTest::addYearlyToYearly()
 void MyMoneyBudgetTest::addYearlyToMonthByMonth()
 {
   MyMoneyBudget::AccountGroup a0, a1;
-  a0.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthByMonth);
-  a1.setBudgetLevel(MyMoneyBudget::AccountGroup::eYearly);
+  a0.setBudgetLevel(eMyMoney::Budget::Level::MonthByMonth);
+  a1.setBudgetLevel(eMyMoney::Budget::Level::Yearly);
   MyMoneyBudget::PeriodGroup period;
   period.setStartDate(QDate(2010, 1, 1));
   period.setAmount(MyMoneyMoney(100, 1));
@@ -176,8 +177,8 @@ void MyMoneyBudgetTest::addYearlyToMonthByMonth()
 
   a0 += a1;
 
-  QVERIFY(a0.budgetLevel() == MyMoneyBudget::AccountGroup::eMonthByMonth);
-  QVERIFY(a1.budgetLevel() == MyMoneyBudget::AccountGroup::eYearly);
+  QVERIFY(a0.budgetLevel() == eMyMoney::Budget::Level::MonthByMonth);
+  QVERIFY(a1.budgetLevel() == eMyMoney::Budget::Level::Yearly);
   QVERIFY(a0.getPeriods().count() == 12);
   QVERIFY(a1.getPeriods().count() == 1);
   QVERIFY(a0.totalBalance() == MyMoneyMoney(7900, 1));
@@ -187,8 +188,8 @@ void MyMoneyBudgetTest::addYearlyToMonthByMonth()
 void MyMoneyBudgetTest::addMonthByMonthToMonthly()
 {
   MyMoneyBudget::AccountGroup a0, a1;
-  a0.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthByMonth);
-  a1.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthly);
+  a0.setBudgetLevel(eMyMoney::Budget::Level::MonthByMonth);
+  a1.setBudgetLevel(eMyMoney::Budget::Level::Monthly);
   MyMoneyBudget::PeriodGroup period;
   period.setStartDate(QDate(2010, 1, 1));
   period.setAmount(MyMoneyMoney(100, 1));
@@ -206,8 +207,8 @@ void MyMoneyBudgetTest::addMonthByMonthToMonthly()
 
   a1 += a0;
 
-  QVERIFY(a0.budgetLevel() == MyMoneyBudget::AccountGroup::eMonthByMonth);
-  QVERIFY(a1.budgetLevel() == MyMoneyBudget::AccountGroup::eMonthByMonth);
+  QVERIFY(a0.budgetLevel() == eMyMoney::Budget::Level::MonthByMonth);
+  QVERIFY(a1.budgetLevel() == eMyMoney::Budget::Level::MonthByMonth);
   QVERIFY(a0.getPeriods().count() == 12);
   QVERIFY(a1.getPeriods().count() == 12);
   QVERIFY(a0.totalBalance() == MyMoneyMoney(7800, 1));
@@ -217,8 +218,8 @@ void MyMoneyBudgetTest::addMonthByMonthToMonthly()
 void MyMoneyBudgetTest::addMonthByMonthToYearly()
 {
   MyMoneyBudget::AccountGroup a0, a1;
-  a0.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthByMonth);
-  a1.setBudgetLevel(MyMoneyBudget::AccountGroup::eYearly);
+  a0.setBudgetLevel(eMyMoney::Budget::Level::MonthByMonth);
+  a1.setBudgetLevel(eMyMoney::Budget::Level::Yearly);
   MyMoneyBudget::PeriodGroup period;
   period.setStartDate(QDate(2010, 1, 1));
   period.setAmount(MyMoneyMoney(100, 1));
@@ -236,8 +237,8 @@ void MyMoneyBudgetTest::addMonthByMonthToYearly()
 
   a1 += a0;
 
-  QVERIFY(a0.budgetLevel() == MyMoneyBudget::AccountGroup::eMonthByMonth);
-  QVERIFY(a1.budgetLevel() == MyMoneyBudget::AccountGroup::eMonthByMonth);
+  QVERIFY(a0.budgetLevel() == eMyMoney::Budget::Level::MonthByMonth);
+  QVERIFY(a1.budgetLevel() == eMyMoney::Budget::Level::MonthByMonth);
   QVERIFY(a0.getPeriods().count() == 12);
   QVERIFY(a1.getPeriods().count() == 12);
   QVERIFY(a0.totalBalance() == MyMoneyMoney(7800, 1));
@@ -247,8 +248,8 @@ void MyMoneyBudgetTest::addMonthByMonthToYearly()
 void MyMoneyBudgetTest::addMonthByMonthToMonthByMonth()
 {
   MyMoneyBudget::AccountGroup a0, a1;
-  a0.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthByMonth);
-  a1.setBudgetLevel(MyMoneyBudget::AccountGroup::eMonthByMonth);
+  a0.setBudgetLevel(eMyMoney::Budget::Level::MonthByMonth);
+  a1.setBudgetLevel(eMyMoney::Budget::Level::MonthByMonth);
   MyMoneyBudget::PeriodGroup period;
   QDate date(2010, 1, 1);
   for (int i = 0; i < 12; ++i) {
@@ -266,30 +267,10 @@ void MyMoneyBudgetTest::addMonthByMonthToMonthByMonth()
 
   a0 += a1;
 
-  QVERIFY(a0.budgetLevel() == MyMoneyBudget::AccountGroup::eMonthByMonth);
-  QVERIFY(a1.budgetLevel() == MyMoneyBudget::AccountGroup::eMonthByMonth);
+  QVERIFY(a0.budgetLevel() == eMyMoney::Budget::Level::MonthByMonth);
+  QVERIFY(a1.budgetLevel() == eMyMoney::Budget::Level::MonthByMonth);
   QVERIFY(a0.getPeriods().count() == 12);
   QVERIFY(a1.getPeriods().count() == 12);
   QVERIFY(a0.totalBalance() == MyMoneyMoney(23400, 1));
   QVERIFY(a1.totalBalance() == MyMoneyMoney(15600, 1));
-}
-
-void MyMoneyBudgetTest::testElementNames()
-{
-  for (auto i = (int)Budget::Element::Budget; i <= (int)Budget::Element::Period; ++i) {
-    auto isEmpty = MyMoneyBudgetPrivate::getElName(static_cast<Budget::Element>(i)).isEmpty();
-    if (isEmpty)
-      qWarning() << "Empty element's name " << i;
-    QVERIFY(!isEmpty);
-  }
-}
-
-void MyMoneyBudgetTest::testAttributeNames()
-{
-  for (auto i = (int)Budget::Attribute::ID; i < (int)Budget::Attribute::LastAttribute; ++i) {
-    auto isEmpty = MyMoneyBudgetPrivate::getAttrName(static_cast<Budget::Attribute>(i)).isEmpty();
-    if (isEmpty)
-      qWarning() << "Empty attribute's name " << i;
-    QVERIFY(!isEmpty);
-  }
 }

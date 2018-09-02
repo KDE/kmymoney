@@ -1,19 +1,25 @@
-/***************************************************************************
-                          mymoneyfile.h
-                             -------------------
-    copyright            : (C) 2002, 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2000-2003  Michael Edwardes <mte@users.sourceforge.net>
+ * Copyright 2001-2002  Felix Rodriguez <frodriguez@users.sourceforge.net>
+ * Copyright 2002-2004  Kevin Tambascio <ktambascio@users.sourceforge.net>
+ * Copyright 2004-2005  Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2006-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2006       Darren Gould <darren_gould@gmx.de>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MYMONEYFILE_H
 #define MYMONEYFILE_H
@@ -53,13 +59,13 @@
   * As the MyMoneyFile object represents the business logic, a storage
   * manager must be attached to it. This mechanism allows to use different
   * access methods to store the objects. The interface to access such an
-  * storage manager is defined in the class IMyMoneyStorage. The methods
+  * storage manager is defined in the class MyMoneyStorageMgr. The methods
   * attachStorage() and detachStorage() are used to attach/detach a
   * storage manager object. The following code can be used to create a
   * functional MyMoneyFile instance:
   *
   * @code
-  * IMyMoneyStorage *storage = ....
+  * MyMoneyStorageMgr *storage = ....
   * MyMoneyFile *file = MyMoneyFile::instance();
   * file->attachStorage(storage);
   * @endcode
@@ -121,7 +127,7 @@ template <class Key, class T> class QMap;
 class QString;
 class QStringList;
 class QBitArray;
-class IMyMoneyStorage;
+class MyMoneyStorageMgr;
 class MyMoneyCostCenter;
 class MyMoneyAccount;
 class MyMoneyInstitution;
@@ -173,10 +179,10 @@ public:
     * @deprecated This is a convenience constructor. Do not use it anymore.
     * It will be deprecated in a future version of the engine.
     *
-    * @param storage pointer to object that implements the IMyMoneyStorage
+    * @param storage pointer to object that implements the MyMoneyStorageMgr
     *                interface.
     */
-  explicit MyMoneyFile(IMyMoneyStorage *storage);
+  explicit MyMoneyFile(MyMoneyStorageMgr *storage);
 
   // general get functions
   MyMoneyPayee user() const;
@@ -198,24 +204,24 @@ public:
     * - there is no other @a storage object attached (use detachStorage()
     *   to revert the attachStorage() operation.
     *
-    * @param storage pointer to object that implements the IMyMoneyStorage
+    * @param storage pointer to object that implements the MyMoneyStorageMgr
     *                interface.
     *
     * @sa detachStorage()
     */
-  void attachStorage(IMyMoneyStorage* const storage);
+  void attachStorage(MyMoneyStorageMgr* const storage);
 
   /**
     * This method is used to detach a previously attached storage
     * object from the MyMoneyFile object. If no storage object
     * is attached to the engine, this is a NOP.
     *
-    * @param storage pointer to object that implements the IMyMoneyStorage
+    * @param storage pointer to object that implements the MyMoneyStorageMgr
     *                interface.
     *
     * @sa attachStorage()
     */
-  void detachStorage(IMyMoneyStorage* const storage = 0);
+  void detachStorage(MyMoneyStorageMgr* const storage = 0);
 
   /**
     * This method returns whether a storage is currently attached to
@@ -231,7 +237,7 @@ public:
     * @return const pointer to the current attached storage object.
     *         If no object is attached, returns 0.
     */
-  IMyMoneyStorage* storage() const;
+  MyMoneyStorageMgr* storage() const;
 
   /**
     * This method must be called before any single change or a series of changes
@@ -696,14 +702,6 @@ public:
 
   /**
     * This method returns a list of the institutions
-    * inside a MyMoneyFile object
-    *
-    * @param list reference to the list. It will be cleared by this method first
-    */
-  void institutionList(QList<MyMoneyInstitution>& list) const;
-
-  /**
-    * This method returns a list of the institutions
     * inside a MyMoneyFile object. This is a convenience method
     * to the one above
     *
@@ -737,7 +735,7 @@ public:
    * @return First MyMoneyAccount object found carrying the @p name.
    * An empty MyMoneyAccount object will be returned if the name is not found.
    */
-  MyMoneyAccount subAccountByName(const MyMoneyAccount& acc, const QString& name) const;
+  MyMoneyAccount subAccountByName(const MyMoneyAccount& account, const QString& name) const;
 
   /**
     * This method returns a list of accounts inside a MyMoneyFile object.
@@ -1183,9 +1181,10 @@ public:
   void removeCurrency(const MyMoneySecurity& currency);
 
   /**
-    * This method is used to retrieve a single MyMoneySchedule object.
+    * This method is used to retrieve a single MyMoneySecurity object.
     * The id of the object must be supplied in the parameter @p id.
-    * If @p id is empty, this method returns baseCurrency().
+    * If @p id is empty, this method returns baseCurrency(). In case
+    * no currency is found, @p id is searched in the loaded set of securities.
     *
     * An exception will be thrown upon erroneous situations.
     *
@@ -1516,8 +1515,6 @@ public:
 
   void forceDataChanged();
 
-  void preloadCache();
-
   /**
     * This returns @p true if file and online balance of a specific
     * @p account are matching. Returns false if there is no online balance.
@@ -1536,6 +1533,7 @@ public:
     * @return number of transactions with state @p state
     */
   int countTransactionsWithSpecificReconciliationState(const QString& accId, eMyMoney::TransactionFilter::State state) const;
+  QMap< QString, QVector<int> > countTransactionsWithSpecificReconciliationState() const;
 
   /**
    * @brief Saves a new onlineJob
@@ -1611,7 +1609,7 @@ Q_SIGNALS:
     * had been added. The data for the new object is contained in
     * @a obj.
     */
-  void objectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void objectAdded(eMyMoney::File::Object objType, const QString& id);
 
   /**
     * This signal is emitted by the engine whenever an object
@@ -1629,7 +1627,7 @@ Q_SIGNALS:
     * had been changed. The new state of the object is contained
     * in @a obj.
     */
-  void objectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void objectModified(eMyMoney::File::Object objType, const QString& id);
 
   /**
     * This signal is emitted by the engine whenever the balance

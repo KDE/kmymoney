@@ -42,6 +42,12 @@ public:
   : ui(new Ui_NewTransactionForm)
   {
   }
+
+  ~Private()
+  {
+    delete ui;
+  }
+
   Ui_NewTransactionForm*      ui;
   QString                     transactionSplitId;
 };

@@ -51,8 +51,8 @@ public:
   int flickerFieldWidth();
 
 public Q_SLOTS:
-  void accept();
-  void reject();
+  void accept() final override;
+  void reject() final override;
 
   void setInfoText(const QString&);
   void setHhdCode(const QString&);

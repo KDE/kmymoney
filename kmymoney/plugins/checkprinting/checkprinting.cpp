@@ -56,7 +56,6 @@
 #include "numbertowords.h"
 #include "pluginsettings.h"
 #include "mymoneyenums.h"
-#include "kmymoneyglobalsettings.h"
 
 struct CheckPrinting::Private {
   QAction* m_action;
@@ -66,7 +65,8 @@ struct CheckPrinting::Private {
 };
 
 CheckPrinting::CheckPrinting(QObject *parent, const QVariantList &args) :
-  KMyMoneyPlugin::Plugin(parent, "checkprinting"/*must be the same as X-KDE-PluginInfo-Name*/)
+  KMyMoneyPlugin::Plugin(parent, "checkprinting"/*must be the same as X-KDE-PluginInfo-Name*/),
+  m_currentPrinter(nullptr)
 {
   Q_UNUSED(args);
   // Tell the host application to load my GUI component
@@ -101,11 +101,6 @@ CheckPrinting::CheckPrinting(QObject *parent, const QVariantList &args) :
 CheckPrinting::~CheckPrinting()
 {
   qDebug("Plugins: checkprinting unloaded");
-}
-
-void CheckPrinting::injectExternalSettings(KMyMoneySettings* p)
-{
-  KMyMoneyGlobalSettings::injectExternalSettings(p);
 }
 
 void CheckPrinting::plug()

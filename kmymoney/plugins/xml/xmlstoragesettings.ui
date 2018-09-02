@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>XMLStorageSettings</class>
+ <widget class="QWidget" name="XMLStorageSettings">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>409</width>
+    <height>486</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>GPG encryption settings</string>
+  </property>
+  <property name="whatsThis">
+   <string>This page allows you to set the parameters for encrypted file storage of your &lt;b&gt;KMyMoney&lt;/b&gt; data based on &lt;b&gt;GPG&lt;/b&gt;.&lt;p&gt;
+Access to the settings is disabled if &lt;b&gt;GPG&lt;/b&gt; could not be detected on your system. In this case, please make sure that &lt;b&gt;GPG&lt;/b&gt; is working properly for the current user.&lt;p&gt;
+The &lt;i&gt;additional recovery encryption&lt;/i&gt; is only accessible, if the necessary key for &lt;b&gt;kmymoney-recover@users.sourceforge.net&lt;/b&gt; with id 0x8AFDDC8E is found in your keyring.</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QCheckBox" name="kcfg_WriteDataEncrypted">
+     <property name="text">
+      <string>Use GPG encryption</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="m_idGroup">
+     <property name="title">
+      <string>GPG encryption</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <layout class="QHBoxLayout">
+        <item>
+         <widget class="QLabel" name="textLabel1_2">
+          <property name="text">
+           <string>Your key</string>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="KComboBox" name="m_masterKeyCombo">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>1</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="whatsThis">
+           <string>This combo box lists all the secret keys you have in your keyring. Select the one you want to use for encryption when saving to a file.</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="KLineEdit" name="kcfg_GpgRecipient"/>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>Additional keys</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="KEditListWidget" name="kcfg_GpgRecipientList">
+           <property name="whatsThis">
+            <string>Enter the id of the key you want to use for data encryption. This can either be an e-mail address or the hexadecimal key id. In case of the key id do not forget the leading 0x.</string>
+           </property>
+           <property name="buttons">
+            <set>KEditListWidget::Add|KEditListWidget::Remove</set>
+           </property>
+           <property name="title" stdset="0">
+            <string>Additional keys</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout">
+        <item>
+         <widget class="KLed" name="m_userKeysFound">
+          <property name="whatsThis">
+           <string>This symbol denotes, if the key for the given user id has been found in your keyring. It is green when found, dark otherwise.</string>
+          </property>
+          <property name="shape">
+           <enum>KLed::Circular</enum>
+          </property>
+          <property name="look">
+           <enum>KLed::Sunken</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="textLabel1">
+          <property name="text">
+           <string>Keys for all of the above user ids found</string>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="spacer3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>50</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout">
+        <item>
+         <widget class="KLed" name="m_recoverKeyFound">
+          <property name="whatsThis">
+           <string>This symbol denotes, if the KMyMoney recovery key has been found in your keyring. It is green when found, dark otherwise.</string>
+          </property>
+          <property name="shape">
+           <enum>KLed::Circular</enum>
+          </property>
+          <property name="look">
+           <enum>KLed::Sunken</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="textLabel2">
+          <property name="text">
+           <string>Recover Key available in keyring</string>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="spacer6">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>16</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="kcfg_EncryptRecover">
+        <property name="whatsThis">
+         <string>You can specify to encrypt the data also with the KMyMoney recover key. Only the core KMyMoney developers are in posession of the respective private key required to read back such encrypted data.&lt;p&gt;
+
+This mechanism is provided for the case that you have lost your key and cannot access your data anymore. With this option activated, the KMyMoney developers can decrypt the data and supply you with it in a readable form. Please be prepared, that you have to answer a few detailed questions about the contents of your data before we will send it out.</string>
+        </property>
+        <property name="text">
+         <string>Also encrypt with KMyMoney's recover key</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="spacer5">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Expanding</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>21</width>
+       <height>30</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KEditListWidget</class>
+   <extends>QWidget</extends>
+   <header>keditlistwidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KLed</class>
+   <extends>QWidget</extends>
+   <header>kled.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

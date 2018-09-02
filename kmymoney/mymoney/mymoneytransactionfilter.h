@@ -1,25 +1,22 @@
-/***************************************************************************
-                          mymoneytransactionfilter.h  -  description
-                             -------------------
-    begin                : Fri Aug 22 2003
-    copyright            : (C) 2000-2003 by Michael Edwardes
-    email                : mte@users.sourceforge.net
-                           Javier Campos Morales <javi_c@users.sourceforge.net>
-                           Felix Rodriguez <frodriguez@users.sourceforge.net>
-                           John C <thetacoturtle@users.sourceforge.net>
-                           Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           Kevin Tambascio <ktambascio@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2003-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2004       Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2008-2010  Alvaro Soliverez <asoliverez@gmail.com>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MYMONEYTRANSACTIONFILTER_H
 #define MYMONEYTRANSACTIONFILTER_H
@@ -44,12 +41,14 @@ template <typename T> class QList;
 
 class MyMoneyMoney;
 class MyMoneySplit;
+class MyMoneyAccount;
 
 namespace eMyMoney { namespace TransactionFilter { enum class Date;
                                                    enum class Validity; } }
 
 /**
   * @author Thomas Baumgart
+  * @author Łukasz Wojniłowicz
   */
 
 class MyMoneyTransaction;
@@ -260,7 +259,7 @@ public:
     * @retval false The split does not match at least one of
     *               the filters in the filter set
     */
-  bool matchText(const MyMoneySplit * const sp) const;
+  bool matchText(const MyMoneySplit& s, const MyMoneyAccount &acc) const;
 
   /**
     * This method is used to check a specific split against the
@@ -274,12 +273,12 @@ public:
     * @retval false The split does not match at least one of
     *               the filters in the filter set
     */
-  bool matchAmount(const MyMoneySplit * const sp) const;
+  bool matchAmount(const MyMoneySplit& s) const;
 
   /**
    * Convenience method which actually returns matchText(sp) && matchAmount(sp).
    */
-  bool match(const MyMoneySplit * const sp) const;
+  bool match(const MyMoneySplit& s) const;
 
   /**
     * This method is used to switch the amount of splits reported
@@ -294,6 +293,13 @@ public:
   void setReportAllSplits(const bool report = true);
 
   void setConsiderCategory(const bool check = true);
+
+  /**
+   * This method is to avoid returning matching splits list
+   * if only its count is needed
+   * @return count of matching splits
+   */
+  uint matchingSplitsCount(const MyMoneyTransaction& transaction);
 
   /**
     * This method returns a list of the matching splits for the filter.
@@ -313,7 +319,7 @@ public:
     *       see the documentation of the constructors MyMoneyTransactionFilter()
     *       and MyMoneyTransactionFilter(const QString&) for details.
     */
-  QList<MyMoneySplit> matchingSplits() const;
+  QVector<MyMoneySplit> matchingSplits(const MyMoneyTransaction& transaction);
 
   /**
     * This method returns the from date set in the filter. If
@@ -520,7 +526,7 @@ private:
     *
     * @return converted action of the split passed as parameter
     */
-  int splitType(const MyMoneyTransaction& t, const MyMoneySplit& split) const;
+  int splitType(const MyMoneyTransaction& t, const MyMoneySplit& split, const MyMoneyAccount &acc) const;
 
   /**
     * This method checks if a transaction is valid or not. A transaction

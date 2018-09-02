@@ -1,11 +1,10 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ * Copyright 2014       Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -19,9 +18,10 @@
 #ifndef ONLINEBANKINGACCOUNTSFILTERPROXYMODEL_H
 #define ONLINEBANKINGACCOUNTSFILTERPROXYMODEL_H
 
+#include "kmm_models_export.h"
 #include <QSortFilterProxyModel>
 
-class OnlineBankingAccountsFilterProxyModel : public QSortFilterProxyModel
+class KMM_MODELS_EXPORT OnlineBankingAccountsFilterProxyModel : public QSortFilterProxyModel
 {
   Q_OBJECT
 
@@ -31,10 +31,10 @@ public:
   /**
    * @brief Makes accounts which do not support any onlineJob non-selectable
    */
-  virtual Qt::ItemFlags flags(const QModelIndex& index) const;
+  Qt::ItemFlags flags(const QModelIndex& index) const override;
 
 protected:
-  virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const;
+  bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const final override;
 
 private:
   /**

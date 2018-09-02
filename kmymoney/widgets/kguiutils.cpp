@@ -1,20 +1,20 @@
-/***************************************************************************
-                         kguiutils.cpp  -  description
-                            -------------------
-   begin                : Fri Jan 27 2006
-   copyright            : (C) 2006 Tony Bloomfield
-   email                : Tony Bloomfield <tonybloom@users.sourceforge.net>
-                          (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2006-2010  Tony Bloomfield <tonybloom@users.sourceforge.net>
+ * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "kguiutils.h"
 
@@ -41,7 +41,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "onlinetasks/interfaces/ui/ionlinejobedit.h"
 #include "kmymoneytextedit.h"
 #include "kmymoneypayeecombo.h"
@@ -158,7 +158,7 @@ void KMandatoryFieldGroup::add(QWidget *widget)
     }
 
     QPalette palette = widget->palette();
-    palette.setColor(QPalette::Base, KMyMoneyGlobalSettings::schemeColor(SchemeColor::FieldRequired));
+    palette.setColor(QPalette::Base, KMyMoneySettings::schemeColor(SchemeColor::FieldRequired));
     widget->setPalette(palette);
     d->m_widgets.append(widget);
     changed();

@@ -1,21 +1,21 @@
-/*******************************************************************************
-*                                 csvwizard.h
-*                              ------------------
-* begin                       : Thur Jan 01 2015
-* copyright                   : (C) 2015 by Allan Anderson
-* email                       : agander93@gmail.com
-* copyright                   : (C) 2016 by Łukasz Wojniłowicz
-* email                       : lukasz.wojnilowicz@gmail.com
-********************************************************************************/
-
-/*******************************************************************************
-*                                                                              *
-*   This program is free software; you can redistribute it and/or modify       *
-*   it under the terms of the GNU General Public License as published by       *
-*   the Free Software Foundation; either version 2 of the License, or          *
-*   (at your option) any later version.                                        *
-*                                                                              *
-********************************************************************************/
+/*
+ * Copyright 2015-2016  Allan Anderson <agander93@gmail.com>
+ * Copyright 2016-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2018       Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef CSVWIZARD_H
 #define CSVWIZARD_H
@@ -57,12 +57,14 @@ class CSVWizard : public QDialog
   Q_OBJECT
 
 public:
-  explicit CSVWizard(CSVImporter *plugin, CSVImporterCore *importer);
+  explicit CSVWizard(CSVImporter *plugin);
   ~CSVWizard();
 
   enum wizardPageE  { PageIntro, PageSeparator, PageRows,
                       PageBanking, PageInvestment, PagePrices, PageFormats
                     };
+
+  const MyMoneyStatement& statement() const;
 
   Ui::CSVWizard    *ui;
   MyMoneyStatement  m_st;
@@ -109,8 +111,8 @@ private:
   QPointer<PricesPage>         m_pagePrices;
   FormatsPage                 *m_pageFormats;
 
-  CSVImporter*  m_plugin;
-  CSVImporterCore*        m_imp;
+  CSVImporter*        m_plugin;
+  CSVImporterCore*    m_imp;
   QWizard*            m_wiz;
   QString             m_fileName;
 
@@ -118,7 +120,7 @@ private:
   void saveWindowSize(const KSharedConfigPtr& config);
   void showStage();
 
-  void closeEvent(QCloseEvent *event) override;
+  void saveSettings() const;
   bool eventFilter(QObject *object, QEvent *event) override;
 
 private Q_SLOTS:
@@ -130,9 +132,6 @@ private Q_SLOTS:
   void slotIdChanged(int id);
   void fileDialogClicked();
   void saveAsQIFClicked();
-
-Q_SIGNALS:
-  void statementReady(MyMoneyStatement&);
 };
 
 namespace Ui

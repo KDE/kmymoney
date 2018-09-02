@@ -94,7 +94,7 @@ QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem
        * that this is not possible
        */
       d->m_editor = 0;
-      SplitDelegate* const that = const_cast<SplitDelegate* const>(this);
+      SplitDelegate* that = const_cast<SplitDelegate*>(this);
       emit that->closeEditor(d->m_editor, NoHint);
 
     } else {
@@ -324,11 +324,11 @@ QSize SplitDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
   QStyleOptionViewItem opt = option;
   if(index.isValid()) {
     // check if we are showing the edit widget
-    const QAbstractItemView *view = qobject_cast<const QAbstractItemView *>(opt.widget);
-    if (view) {
-      QModelIndex editIndex = view->model()->index(index.row(), 0);
+    const QAbstractItemView *viewWidget = qobject_cast<const QAbstractItemView *>(opt.widget);
+    if (viewWidget) {
+      QModelIndex editIndex = viewWidget->model()->index(index.row(), 0);
       if(editIndex.isValid()) {
-        QWidget* editor = view->indexWidget(editIndex);
+        QWidget* editor = viewWidget->indexWidget(editIndex);
         if(editor) {
           size = editor->minimumSizeHint();
           return size;

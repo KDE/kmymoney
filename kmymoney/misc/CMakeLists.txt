@@ -10,11 +10,11 @@ set( kmm_utils_webconnect_SRCS
   webconnect.cpp
 )
 
-if( ${HAVE_UNISTD_H} AND ${HAVE_PWD_H} )
+if( "${HAVE_UNISTD_H}" AND "${HAVE_PWD_H}" )
   set( kmm_utils_platformtools_SRCS
     platformtools_gnu.cpp
   )
-elseif( ${HAVE_WINDOWS_H} AND ${HAVE_LMCONS_H} AND ${HAVE_PROCESS_H} )
+elseif( "${HAVE_WINDOWS_H}" AND "${HAVE_LMCONS_H}" AND "${HAVE_PROCESS_H}" )
   set( kmm_utils_platformtools_SRCS
     platformtools_nognu.cpp
   )

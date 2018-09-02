@@ -28,14 +28,14 @@
 #include "kguiutils.h"
 
 #include "mymoney/payeeidentifiermodel.h"
-#include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
-#include "payeeidentifier/ibanandbic/widgets/ibanvalidator.h"
-#include "payeeidentifier/ibanandbic/widgets/bicvalidator.h"
+#include "onlinetasks/sepa/sepaonlinetransfer.h"
+#include "widgets/payeeidentifier/ibanbic/ibanvalidator.h"
+#include "widgets/payeeidentifier/ibanbic/bicvalidator.h"
 #include "payeeidentifier/payeeidentifiertyped.h"
 #include "misc/charvalidator.h"
-#include "payeeidentifier/ibanandbic/ibanbic.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
 #include "styleditemdelegateforwarder.h"
-#include "payeeidentifier/ibanandbic/widgets/ibanbicitemdelegate.h"
+#include "widgets/payeeidentifier/ibanbic/ibanbicitemdelegate.h"
 #include "onlinejobtyped.h"
 #include "mymoneyaccount.h"
 #include "widgetenums.h"
@@ -49,7 +49,7 @@ public:
       : StyledItemDelegateForwarder(parent) {}
 
 protected:
-  virtual QAbstractItemDelegate* getItemDelegate(const QModelIndex &index) const {
+  QAbstractItemDelegate* getItemDelegate(const QModelIndex &index) const final override {
     static QPointer<QAbstractItemDelegate> defaultDelegate;
     static QPointer<QAbstractItemDelegate> ibanBicDelegate;
 
@@ -104,7 +104,7 @@ public:
   ibanBicFilterProxyModel(QObject* parent = 0)
       : QSortFilterProxyModel(parent) {}
 
-  virtual QVariant data(const QModelIndex &index, int role) const {
+  QVariant data(const QModelIndex &index, int role) const final override {
     if (role == payeeIban) {
       if (!index.isValid())
         return QVariant();
@@ -114,7 +114,9 @@ public:
               index.model()->data(index, payeeIdentifierModel::payeeIdentifier).value<payeeIdentifier>()
             );
         return iban->electronicIban();
-      } catch (payeeIdentifier::exception&) {
+      } catch (const payeeIdentifier::empty &) {
+        return QVariant();
+      } catch (const payeeIdentifier::badCast &) {
         return QVariant();
       }
     }
@@ -122,7 +124,7 @@ public:
     return QSortFilterProxyModel::data(index, role);
   }
 
-  virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const {
+  bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const final override {
     if (!source_parent.isValid())
       return true;
 
@@ -172,7 +174,8 @@ void ibanBicCompleter::slotActivated(const QModelIndex &index) const
         );
     emit activatedIban(iban->electronicIban());
     emit activatedBic(iban->storedBic());
-  } catch (payeeIdentifier::exception&) {
+  } catch (const payeeIdentifier::empty &) {
+  } catch (const payeeIdentifier::badCast &) {
   }
 }
 
@@ -188,7 +191,8 @@ void ibanBicCompleter::slotHighlighted(const QModelIndex &index) const
         );
     emit highlightedIban(iban->electronicIban());
     emit highlightedBic(iban->storedBic());
-  } catch (payeeIdentifier::exception&) {
+  } catch (const payeeIdentifier::empty &) {
+  } catch (const payeeIdentifier::badCast &) {
   }
 }
 
@@ -412,7 +416,8 @@ void sepaCreditTransferEdit::beneficiaryIbanChanged(const QString& iban)
   try {
     payeeIdentifier ident = getOnlineJobTyped().task()->originAccountIdentifier();
     payeeIban = ident.data<payeeIdentifiers::ibanBic>()->electronicIban();
-  } catch (payeeIdentifier::exception&) {
+  } catch (const payeeIdentifier::empty &) {
+  } catch (const payeeIdentifier::badCast &) {
   }
 
   if (settings->isBicMandatory(payeeIban, iban)) {
@@ -433,7 +438,7 @@ void sepaCreditTransferEdit::beneficiaryBicChanged(const QString& bic)
     QString iban;
     try {
       iban = payee.data<payeeIdentifiers::ibanBic>()->electronicIban();
-    } catch (payeeIdentifier::badCast&) {
+    } catch (const payeeIdentifier::badCast &) {
     }
 
     if (settings->isBicMandatory(iban , ui->beneficiaryIban->text())) {

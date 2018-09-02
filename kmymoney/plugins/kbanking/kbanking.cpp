@@ -82,6 +82,7 @@
 #include "kmymoneyview.h"
 #include "kbpickstartdate.h"
 #include "mymoneyinstitution.h"
+#include "mymoneyexception.h"
 
 #include "gwenkdegui.h"
 #include "gwenhywfarqtoperators.h"
@@ -89,7 +90,6 @@
 #include "mymoneystatement.h"
 #include "statementinterface.h"
 #include "viewinterface.h"
-#include "kmymoneyglobalsettings.h"
 
 #ifdef KMM_DEBUG
 // Added an option to open the chipTanDialog from the menu for debugging purposes
@@ -122,7 +122,7 @@ public:
           if (exp.exactMatch(proxy)) {
             proxy = exp.cap(2);
             qDebug("Setting GWEN_PROXY to '%s'", qPrintable(proxy));
-            if (setenv("GWEN_PROXY", qPrintable(proxy), 1) == -1) {
+            if (!qputenv("GWEN_PROXY", qPrintable(proxy))) {
               qDebug("Unable to setup GWEN_PROXY");
             }
           }
@@ -172,11 +172,6 @@ KBanking::~KBanking()
 {
   delete d;
   qDebug("Plugins: kbanking unloaded");
-}
-
-void KBanking::injectExternalSettings(KMyMoneySettings* p)
-{
-  KMyMoneyGlobalSettings::injectExternalSettings(p);
 }
 
 void KBanking::plug()
@@ -425,7 +420,7 @@ void KBanking::setupAccountReference(const MyMoneyAccount& acc, AB_ACCOUNT* ab_a
 
     QString val = QString("%1-%2").arg(routingNumber, accountNumber);
     if (val != acc.onlineBankingSettings().value("kbanking-acc-ref")) {
-      MyMoneyKeyValueContainer kvp;
+      kvp.clear();
 
       // make sure to keep our own previous settings
       const QMap<QString, QString>& vals = acc.onlineBankingSettings().pairs();
@@ -670,7 +665,7 @@ QStringList KBanking::availableJobs(QString accountId)
       d->jobList.clear();
       d->fileId = id;
     }
-  } catch (const MyMoneyException&) {
+  } catch (const MyMoneyException &) {
     // Exception usually means account was not found
     return QStringList();
   }
@@ -825,7 +820,7 @@ void KBanking::slotImport()
 
 bool KBanking::importStatement(const MyMoneyStatement& s)
 {
-  return statementInterface()->import(s);
+  return !statementInterface()->import(s).isEmpty();
 }
 
 
@@ -926,9 +921,9 @@ int KBankingExt::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
         job.setJobSend();
 
       if (abStatus == AB_Job_StatusFinished)
-        job.setBankAnswer(onlineJob::acceptedByBank);
+        job.setBankAnswer(eMyMoney::OnlineJob::sendingState::acceptedByBank);
       else if (abStatus == AB_Job_StatusError || abStatus == AB_Job_StatusUnknown)
-        job.setBankAnswer(onlineJob::sendingError);
+        job.setBankAnswer(eMyMoney::OnlineJob::sendingState::sendingError);
 
       job.addJobMessage(onlineJobMessage(eMyMoney::OnlineJob::MessageType::Debug, "KBanking", "Job was processed"));
       m_parent->m_onlineJobQueue.insert(jobIdent, job);
@@ -1279,7 +1274,14 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
       memo.append(QString("DEBT: %1").arg(p));
     }
   }
-  kt.m_strMemo = memo;
+
+  const MyMoneyKeyValueContainer& kvp = acc.onlineBankingSettings();
+  // check if we need the version with or without linebreaks
+  if (kvp.value("kbanking-memo-removelinebreaks").compare(QLatin1String("no"))) {
+    kt.m_strMemo = memo;
+  } else {
+    kt.m_strMemo = s;
+  }
 
   // calculate the hash code and start with the payee info
   // and append the memo field
@@ -1287,7 +1289,6 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
   h = MyMoneyTransaction::hash(s, h);
 
   // see, if we need to extract the payee from the memo field
-  const MyMoneyKeyValueContainer& kvp = acc.onlineBankingSettings();
   QString rePayee = kvp.value("kbanking-payee-regexp");
   if (!rePayee.isEmpty() && kt.m_strPayee.isEmpty()) {
     QString reMemo = kvp.value("kbanking-memo-regexp");
@@ -1324,10 +1325,10 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
 
     if (!startTime)
       startTime = ti;
-    else {
+    /*else { dead code
       if (GWEN_Time_Diff(ti, startTime) < 0)
         startTime = ti;
-    }
+    }*/
 
     if (!GWEN_Time_GetBrokenDownDate(ti, &day, &month, &year)) {
       kt.m_datePosted = QDate(year, month + 1, day);
@@ -1462,8 +1463,6 @@ bool KBankingExt::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai,
       ks.m_eType = eMyMoney::Statement::Type::Investment;
       break;
     case AB_AccountType_Cash:
-      ks.m_eType = eMyMoney::Statement::Type::None;
-      break;
     default:
       ks.m_eType = eMyMoney::Statement::Type::None;
   }

@@ -7,5 +7,5 @@ ecm_add_tests(${tests_sources}
   LINK_LIBRARIES
     Qt5::Test
     kmm_payeeidentifier
-    kmm_payeeidentifier_loader
+    kmm_mymoney
 )

@@ -26,6 +26,7 @@
 #include <QDebug>
 #include <QGlobalStatic>
 #include <QStandardItemModel>
+#include <QAbstractItemView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -70,6 +71,7 @@ public:
   , payeesModel(new QSortFilterProxyModel(parent))
   , accepted(false)
   , costCenterRequired(false)
+  , amountHelper(nullptr)
   {
     accountsModel->setObjectName("NewTransactionEditor::accountsModel");
     costCenterModel->setObjectName("SortedCostCenterModel");
@@ -87,6 +89,11 @@ public:
     createStatusEntry(eMyMoney::Split::State::Cleared);
     createStatusEntry(eMyMoney::Split::State::Reconciled);
     // createStatusEntry(eMyMoney::Split::State::Frozen);
+  }
+
+  ~Private()
+  {
+    delete ui;
   }
 
   void createStatusEntry(eMyMoney::Split::State status);
@@ -110,7 +117,7 @@ public:
   SplitModel                    splitModel;
   QStandardItemModel            statusModel;
   QString                       transactionSplitId;
-  MyMoneyAccount                account;
+  MyMoneyAccount                m_account;
   MyMoneyTransaction            transaction;
   MyMoneySplit                  split;
   CreditDebitHelper*            amountHelper;
@@ -216,7 +223,7 @@ bool NewTransactionEditor::Private::postdateChanged(const QDate& date)
 
   // collect all account ids
   QStringList accountIds;
-  accountIds << account.id();
+  accountIds << m_account.id();
   for(int row = 0; row < splitModel.rowCount(); ++row) {
     QModelIndex index = splitModel.index(row, 0);
     accountIds << splitModel.data(index, (int)eLedgerModel::Role::AccountId).toString();;
@@ -310,7 +317,7 @@ bool NewTransactionEditor::Private::numberChanged(const QString& newNumber)
                                         Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
 
     foreach(QModelIndex index, list) {
-      if(model->data(index, (int)eLedgerModel::Role::AccountId) == account.id()
+      if(model->data(index, (int)eLedgerModel::Role::AccountId) == m_account.id()
         && model->data(index, (int)eLedgerModel::Role::TransactionSplitId) != transactionSplitId) {
         WidgetHintFrame::show(ui->numberEdit, i18n("The check number <b>%1</b> has already been used in this account.", newNumber));
         rc = false;
@@ -356,7 +363,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
   auto const model = Models::instance()->accountsModel();
   // extract account information from model
   const auto index = model->accountById(accountId);
-  d->account = model->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
+  d->m_account = model->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
 
   d->ui->setupUi(this);
 
@@ -572,7 +579,7 @@ void NewTransactionEditor::editSplits()
   // create an empty split at the end
   splitModel.addEmptySplitEntry();
 
-  QPointer<SplitDialog> splitDialog = new SplitDialog(d->account, transactionAmount(), this);
+  QPointer<SplitDialog> splitDialog = new SplitDialog(d->m_account, transactionAmount(), this);
   splitDialog->setModel(&splitModel);
 
   int rc = splitDialog->exec();
@@ -645,7 +652,7 @@ void NewTransactionEditor::saveTransaction()
     sp.setMemo(d->ui->memoEdit->toPlainText());
     sp.setShares(d->amountHelper->value());
     if(t.commodity().isEmpty()) {
-      t.setCommodity(d->account.currencyId());
+      t.setCommodity(d->m_account.currencyId());
       sp.setValue(d->amountHelper->value());
     } else {
       /// @todo check that the transactions commodity is the same

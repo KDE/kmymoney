@@ -1,20 +1,21 @@
-/***************************************************************************
-                          knewaccountdlg.cpp
-                             -------------------
-    copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
-                               2004 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2000-2003  Michael Edwardes <mte@users.sourceforge.net>
+ * Copyright 2005-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "knewaccountdlg.h"
 
@@ -48,7 +49,7 @@
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "kmymoneycurrencyselector.h"
 #include "knewbankdlg.h"
 #include "models.h"
@@ -67,7 +68,10 @@ class KNewAccountDlgPrivate
 public:
   explicit KNewAccountDlgPrivate(KNewAccountDlg *qq) :
     q_ptr(qq),
-    ui(new Ui::KNewAccountDlg)
+    ui(new Ui::KNewAccountDlg),
+    m_filterProxyModel(nullptr),
+    m_categoryEditor(false),
+    m_isEditing(false)
   {
   }
 
@@ -118,7 +122,7 @@ public:
     // the proxy filter model
     m_filterProxyModel = new HierarchyFilterProxyModel(q);
     m_filterProxyModel->setHideClosedAccounts(true);
-    m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
+    m_filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
     m_filterProxyModel->addAccountGroup(filterAccountGroup);
     m_filterProxyModel->setCurrentAccountId(m_account.id());
     auto const model = Models::instance()->accountsModel();
@@ -152,7 +156,7 @@ public:
     bool haveMinBalance = false;
     bool haveMaxCredit = false;
     if (!m_account.openingDate().isValid()) {
-      m_account.setOpeningDate(KMyMoneyGlobalSettings::firstFiscalDate());
+      m_account.setOpeningDate(KMyMoneySettings::firstFiscalDate());
     }
     ui->m_openingDateEdit->setDate(m_account.openingDate());
 
@@ -336,7 +340,7 @@ public:
       else
         institutionName.clear();
     } catch (const MyMoneyException &e) {
-      qDebug("exception in init for account dialog: %s", qPrintable(e.what()));
+      qDebug("exception in init for account dialog: %s", e.what());
     }
 
     if (m_account.isInvest())
@@ -569,9 +573,9 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
   d->m_account = account;
   d->m_categoryEditor = categoryEditor;
   d->m_isEditing = isEditing;
+  d->init();
   if (!title.isEmpty())
     setWindowTitle(title);
-  d->init();
 }
 
 MyMoneyMoney KNewAccountDlg::openingBalance() const
@@ -622,8 +626,6 @@ void KNewAccountDlg::okClicked()
     QString institutionNameText = d->ui->m_qcomboboxInstitutions->currentText();
     if (institutionNameText != i18n("(No Institution)")) {
       try {
-        auto file = MyMoneyFile::instance();
-
         QList<MyMoneyInstitution> list = file->institutionList();
         QList<MyMoneyInstitution>::ConstIterator institutionIterator;
         for (institutionIterator = list.constBegin(); institutionIterator != list.constEnd(); ++institutionIterator) {
@@ -631,7 +633,7 @@ void KNewAccountDlg::okClicked()
             d->m_account.setInstitutionId((*institutionIterator).id());
         }
       } catch (const MyMoneyException &e) {
-        qDebug("Exception in account institution set: %s", qPrintable(e.what()));
+        qDebug("Exception in account institution set: %s", e.what());
       }
     } else {
       d->m_account.setInstitutionId(QString());
@@ -697,7 +699,7 @@ void KNewAccountDlg::okClicked()
       d->m_account.setValue("minimumBalance", d->ui->m_minBalanceAbsoluteEdit->value().toString());
     }
   } else {
-    if (KMyMoneyGlobalSettings::hideUnusedCategory() && !d->m_isEditing) {
+    if (KMyMoneySettings::hideUnusedCategory() && !d->m_isEditing) {
       KMessageBox::information(this, i18n("You have selected to suppress the display of unused categories in the KMyMoney configuration dialog. The category you just created will therefore only be shown if it is used. Otherwise, it will be hidden in the accounts/categories view."), i18n("Hidden categories"), "NewHiddenCategory");
     }
     d->m_account.setCostCenterRequired(d->ui->m_costCenterRequiredCheckBox->isChecked());
@@ -793,7 +795,7 @@ void KNewAccountDlg::slotLoadInstitutions(const QString& name)
 
     d->ui->m_qcomboboxInstitutions->setCurrentItem(name, false);
   } catch (const MyMoneyException &e) {
-    qDebug("Exception in institution load: %s", qPrintable(e.what()));
+    qDebug("Exception in institution load: %s", e.what());
   }
 }
 

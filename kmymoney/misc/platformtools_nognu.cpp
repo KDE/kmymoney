@@ -42,5 +42,6 @@ uint platformTools::processId()
 
 platformTools::currencySymbolPosition_t platformTools::currencySymbolPosition(bool negativeValues)
 {
+  Q_UNUSED(negativeValues)
   return platformTools::AfterQuantityMoneyWithSpace;
 }

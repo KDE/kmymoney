@@ -70,15 +70,15 @@ public:
   explicit LedgerDelegate(LedgerView* parent = 0);
   virtual ~LedgerDelegate();
 
-  virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
-  virtual void setEditorData(QWidget* editWidget, const QModelIndex& index) const;
+  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
+  QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
+  QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
+  void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const final override;
+  void setEditorData(QWidget* editWidget, const QModelIndex& index) const final override;
 
   virtual void setSortRole(eLedgerModel::Role role);
 
-  virtual void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+  void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
 
   /**
    * This method returns the row that currently has an editor
@@ -94,7 +94,7 @@ public:
   static QColor erroneousColor();
 
 protected:
-  bool eventFilter(QObject* o, QEvent* event);
+  bool eventFilter(QObject* o, QEvent* event) final override;
 
 protected Q_SLOTS:
   void endEdit();

@@ -1,21 +1,22 @@
-/***************************************************************************
-                          mymoneyreport.h
-                             -------------------
-    begin                : Sun July 4 2004
-    copyright            : (C) 2004-2005 by Ace Jones
-    email                : acejones@users.sourceforge.net
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2004-2006  Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2006       Darren Gould <darren_gould@gmx.de>
+ * Copyright 2007-2010  Alvaro Soliverez <asoliverez@gmail.com>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MYMONEYREPORT_H
 #define MYMONEYREPORT_H
@@ -31,14 +32,21 @@
 #include "mymoneyunittestable.h"
 
 class QString;
-class QDomElement;
-class QDomDocument;
 class MyMoneyAccount;
 
 template <typename T> class QList;
 
 namespace eMyMoney { namespace Account { enum class Type; }
                      namespace TransactionFilter { enum class Date; } }
+
+namespace eMyMoney { namespace Report { enum class RowType; } }
+namespace eMyMoney { namespace Report { enum class ReportType; } }
+namespace eMyMoney { namespace Report { enum class ColumnType; } }
+namespace eMyMoney { namespace Report { enum QueryColumn : int; } }
+namespace eMyMoney { namespace Report { enum class DetailLevel; } }
+namespace eMyMoney { namespace Report { enum class InvestmentSum; } }
+namespace eMyMoney { namespace Report { enum class ChartType; } }
+namespace eMyMoney { namespace Report { enum class DataLock; } }
 
 /**
   * This class defines a report within the MyMoneyEngine.  The report class
@@ -66,46 +74,16 @@ class KMM_MYMONEY_EXPORT MyMoneyReport: public MyMoneyObject, public MyMoneyTran
 
   KMM_MYMONEY_UNIT_TESTABLE
 
-//protected:
-//    MyMoneyReport(MyMoneyReportPrivate &dd);
-
-public:
-  // When adding a new row type, be sure to add a corresponding entry in kTypeArray
-  enum ERowType { eNoRows = 0, eAssetLiability, eExpenseIncome, eCategory, eTopCategory, eAccount, eTag, ePayee, eMonth, eWeek, eTopAccount, eAccountByTopAccount, eEquityType, eAccountType, eInstitution, eBudget, eBudgetActual, eSchedule, eAccountInfo, eAccountLoanInfo, eAccountReconcile, eCashFlow};
-  enum EReportType { eNoReport = 0, ePivotTable, eQueryTable, eInfoTable };
-  enum EColumnType { eNoColumns = 0, eDays = 1, eMonths = 1, eBiMonths = 2, eQuarters = 3, eWeeks = 7, eYears = 12 };
-
-  // if you add bits to this bitmask, start with the value currently assigned to eQCend and update its value afterwards
-  // also don't forget to add column names to kQueryColumnsText in mymoneyreport.cpp
-  enum EQueryColumns { eQCnone = 0x0, eQCbegin = 0x1, eQCnumber = 0x1, eQCpayee = 0x2, eQCcategory = 0x4, eQCtag = 0x8, eQCmemo = 0x10, eQCaccount = 0x20, eQCreconciled = 0x40, eQCaction = 0x80, eQCshares = 0x100, eQCprice = 0x200, eQCperformance = 0x400, eQCloan = 0x800, eQCbalance = 0x1000, eQCcapitalgain = 0x2000, eQCend = 0x4000 };
-
-  enum EDetailLevel { eDetailNone = 0, eDetailAll, eDetailTop, eDetailGroup, eDetailTotal, eDetailEnd };
-  enum EInvestmentSum { eSumPeriod = 0, eSumOwnedAndSold, eSumOwned, eSumSold, eSumBought};
-  enum EChartType { eChartNone = 0, eChartLine, eChartBar, eChartPie, eChartRing, eChartStackedBar, eChartEnd };
-
-  enum dataOptionE { automatic = 0, userDefined, dataOptionCount };
-
-  static const QStringList kRowTypeText;
-  static const QStringList kColumnTypeText;
-  static const QStringList kQueryColumnsText;
-  static const QStringList kDetailLevelText;
-  static const QStringList kChartTypeText;
-  static const EReportType kTypeArray[];
-
 public:
   MyMoneyReport();
-  explicit MyMoneyReport(ERowType rt,
+  explicit MyMoneyReport(const QString &id);
+
+  explicit MyMoneyReport(eMyMoney::Report::RowType rt,
                          unsigned ct,
                          eMyMoney::TransactionFilter::Date dl,
-                         EDetailLevel ss,
+                         eMyMoney::Report::DetailLevel ss,
                          const QString& name,
                          const QString& comment);
-  /**
-    * This constructor creates an object based on the data found in the
-    * QDomElement referenced by @p node. If problems arise, the @p id of
-    * the object is cleared (see MyMoneyObject::clearId()).
-    */
-  explicit MyMoneyReport(const QDomElement& node);
 
   MyMoneyReport(const QString& id,
                 const MyMoneyReport& other);
@@ -117,7 +95,8 @@ public:
 
   ~MyMoneyReport();
 
-  EReportType reportType() const;
+  eMyMoney::Report::ReportType reportType() const;
+  void setReportType(eMyMoney::Report::ReportType rt);
 
   QString name() const;
   void setName(const QString& s);
@@ -128,12 +107,12 @@ public:
   bool isShowingColumnTotals() const;
   void setShowingColumnTotals(bool f);
 
-  ERowType rowType() const;
-  void setRowType(ERowType rt);
+  eMyMoney::Report::RowType rowType() const;
+  void setRowType(eMyMoney::Report::RowType rt);
   bool isRunningSum() const;
 
-  EColumnType columnType() const;
-  void setColumnType(EColumnType ct);
+  eMyMoney::Report::ColumnType columnType() const;
+  void setColumnType(eMyMoney::Report::ColumnType ct);
 
   bool isConvertCurrency() const;
   void setConvertCurrency(bool f);
@@ -142,8 +121,8 @@ public:
   QString comment() const;
   void setComment(const QString& comment);
 
-  EQueryColumns queryColumns() const;
-  void setQueryColumns(EQueryColumns qc);
+  eMyMoney::Report::QueryColumn queryColumns() const;
+  void setQueryColumns(eMyMoney::Report::QueryColumn qc);
 
   QString group() const;
   void setGroup(const QString& group);
@@ -160,17 +139,17 @@ public:
   bool isLoansOnly() const;
   void setLoansOnly(bool f);
 
-  EDetailLevel detailLevel() const;
-  void setDetailLevel(EDetailLevel detail);
+  eMyMoney::Report::DetailLevel detailLevel() const;
+  void setDetailLevel(eMyMoney::Report::DetailLevel detail);
 
-  EInvestmentSum investmentSum() const;
-  void setInvestmentSum(EInvestmentSum sum);
+  eMyMoney::Report::InvestmentSum investmentSum() const;
+  void setInvestmentSum(eMyMoney::Report::InvestmentSum sum);
 
   bool isHideTransactions() const;
   void setHideTransactions(bool f);
 
-  EChartType chartType() const;
-  void setChartType(EChartType type);
+  eMyMoney::Report::ChartType chartType() const;
+  void setChartType(eMyMoney::Report::ChartType type);
 
   bool isChartDataLabels() const;
   void setChartDataLabels(bool f);
@@ -251,9 +230,9 @@ public:
   bool isIncludingAveragePrice() const;
   void setIncludingAveragePrice(bool f);
 
-  dataOptionE dataFilter() const;
+  eMyMoney::Report::DataLock dataFilter() const;
   bool isDataUserDefined() const;
-  void setDataFilter(dataOptionE u);
+  void setDataFilter(eMyMoney::Report::DataLock u);
 
   eMyMoney::TransactionFilter::Date dateRange() const;
   bool isDateUserDefined() const;
@@ -390,40 +369,6 @@ public:
   bool includes(const MyMoneyAccount& acc) const;
 
   /**
-    * This method writes this report to the DOM element @p e,
-    * within the DOM document @p doc.
-    *
-    * @param e The element which should be populated with info from this report
-    * @param doc The document which we can use to create new sub-elements
-    *              if needed
-    * @param anonymous Whether the sensitive parts of the report should be
-    *              masked
-    */
-  void write(QDomElement& e, QDomDocument *doc, bool anonymous = false) const;
-
-  /**
-    * This method reads a report from the DOM element @p e, and
-    * populates this report with the results.
-    *
-    * @param e The element from which the report should be read
-    *
-    * @return bool True if a report was successfully loaded from the
-    *    element @p e.  If false is returned, the contents of this report
-    *    object are undefined.
-    */
-  bool read(const QDomElement& e);
-
-  /**
-    * This method creates a QDomElement for the @p document
-    * under the parent node @p parent.  (This version overwrites the
-    * MMObject base class.)
-    *
-    * @param document reference to QDomDocument
-    * @param parent reference to QDomElement parent node
-    */
-  void writeXML(QDomDocument& document, QDomElement& parent) const override;
-
-  /**
     * This method checks if a reference to the given object exists. It returns,
     * a @p true if the object is referencing the one requested by the
     * parameter @p id. If it does not, this method returns @p false.
@@ -446,13 +391,16 @@ public:
     */
   static int m_lineWidth;
 
+  static void setExpertMode(bool expertMode);
+  static bool m_expertMode;
+
   /**
    * Return row type as string.
    *
    * @param type type to get string for
    * @return row type converted to string
    */
-  static QString toString(ERowType type);
+  static QString toString(eMyMoney::Report::RowType type);
 
   /**
    * Return report type as string.
@@ -460,7 +408,7 @@ public:
    * @param type report type to get string for
    * @return report type converted to string
    */
-  static QString toString(EReportType type);
+  static QString toString(eMyMoney::Report::ReportType type);
 };
 
 inline void swap(MyMoneyReport& first, MyMoneyReport& second) // krazy:exclude=inline

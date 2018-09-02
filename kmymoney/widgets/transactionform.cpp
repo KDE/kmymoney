@@ -1,20 +1,20 @@
-/***************************************************************************
-                             transactionform.cpp
-                             -------------------
-    begin                : Sun May 14 2006
-    copyright            : (C) 2006 by Thomas Baumgart
-    email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2006-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "transactionform.h"
 
@@ -45,7 +45,7 @@
 #include "kmymoneycategory.h"
 #include "transaction.h"
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 
 #include "widgetenums.h"
 #include "mymoneyenums.h"
@@ -62,7 +62,8 @@ namespace KMyMoneyTransactionForm
   public:
     TransactionFormPrivate() :
       m_transaction(nullptr),
-      m_tabBar(nullptr)
+      m_tabBar(nullptr),
+      m_itemDelegate(nullptr)
     {
     }
 
@@ -328,7 +329,7 @@ void TransactionForm::adjustColumn(eTransactionForm::Column col)
 
   if (d->m_transaction) {
     QString txt;
-    QFontMetrics fontMetrics(KMyMoneyGlobalSettings::listCellFont());
+    QFontMetrics fontMetrics(KMyMoneySettings::listCellFontEx());
 
     // scan through the rows
     for (int i = rowCount() - 1; i >= 0; --i) {

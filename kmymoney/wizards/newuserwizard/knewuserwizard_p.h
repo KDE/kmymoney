@@ -36,7 +36,6 @@ namespace NewUserWizard
   class AccountPage;
   class CategoriesPage;
   class PreferencePage;
-  class FilePage;
 
   class WizardPrivate : public KMyMoneyWizardPrivate
   {
@@ -45,7 +44,12 @@ namespace NewUserWizard
   public:
     explicit WizardPrivate(Wizard *qq):
       KMyMoneyWizardPrivate(qq),
-      m_introPage(nullptr)
+      m_introPage(nullptr),
+      m_generalPage(nullptr),
+      m_currencyPage(nullptr),
+      m_accountPage(nullptr),
+      m_categoriesPage(nullptr),
+      m_preferencePage(nullptr)
     {
     }
 
@@ -60,7 +64,6 @@ namespace NewUserWizard
     AccountPage*      m_accountPage;
     CategoriesPage*   m_categoriesPage;
     PreferencePage*   m_preferencePage;
-    FilePage*         m_filePage;
   };
 
 } // namespace

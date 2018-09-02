@@ -1,21 +1,20 @@
-/***************************************************************************
-                            csvimportercore.cpp
-                             -------------------
-    begin                : Sun May 21 2017
-    copyright            : (C) 2010 by Allan Anderson
-    email                : agander93@gmail.com
-    copyright            : (C) 2016-2017 by Łukasz Wojniłowicz
-    email                : lukasz.wojnilowicz@gmail.com
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2010  Allan Anderson <agander93@gmail.com>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "csvimportercore.h"
 
@@ -107,8 +106,9 @@ const QString CSVImporterCore::m_confProfileNames = QStringLiteral("ProfileNames
 const QString CSVImporterCore::m_confPriorName = QStringLiteral("Prior");
 const QString CSVImporterCore::m_confMiscName = QStringLiteral("Misc");
 
-CSVImporterCore::CSVImporterCore()
-  : m_profile(0)
+CSVImporterCore::CSVImporterCore() :
+  m_profile(0),
+  m_isActionTypeValidated(false)
 {
   m_convertDate = new ConvertDate;
   m_file = new CSVFile;
@@ -520,7 +520,7 @@ validationResultE CSVImporterCore::validateActionType(MyMoneyStatement::Transact
 
 bool CSVImporterCore::calculateFee()
 {
-  InvestmentProfile *profile = dynamic_cast<InvestmentProfile *>(m_profile);
+  auto profile = dynamic_cast<InvestmentProfile *>(m_profile);
   if (!profile)
     return false;
   if ((profile->m_feeRate.isEmpty() ||                  // check whether feeRate...
@@ -717,7 +717,6 @@ QList<MyMoneyAccount> CSVImporterCore::findAccounts(const QList<eMyMoney::Accoun
   file->accountList(accountList);
   QList<MyMoneyAccount> filteredTypes;
   QList<MyMoneyAccount> filteredAccounts;
-  QList<MyMoneyAccount>::iterator account;
   QRegularExpression filterOutChars(QStringLiteral("[-., ]"));
 
   foreach (const auto account, accountList) {
@@ -737,7 +736,7 @@ QList<MyMoneyAccount> CSVImporterCore::findAccounts(const QList<eMyMoney::Accoun
 
   // if filtering returned more results, filter out accounts whose numbers aren't in statements header
   if (filteredAccounts.count() > 1) {
-    for (account = filteredAccounts.begin(); account != filteredAccounts.end();) {
+    for (auto account = filteredAccounts.begin(); account != filteredAccounts.end();) {
       QString txt = (*account).number();
       txt.remove(filterOutChars);
       if (txt.isEmpty() || txt.length() < 3) {
@@ -1362,17 +1361,19 @@ bool CSVImporterCore::createStatement(MyMoneyStatement &st)
       if (m_autodetect.value(AutoAccountInvest))
         detectAccount(st);
 
-      InvestmentProfile *profile = dynamic_cast<InvestmentProfile *>(m_profile);
+      auto profile = dynamic_cast<InvestmentProfile *>(m_profile);
       if ((m_profile->m_colTypeNum.value(Column::Fee, -1) == -1 ||
            m_profile->m_colTypeNum.value(Column::Fee, -1) >= m_file->m_columnCount) &&
-          !profile->m_feeRate.isEmpty()) // fee column has not been calculated so do it now
+          profile && !profile->m_feeRate.isEmpty()) // fee column has not been calculated so do it now
         calculateFee();
 
-      for (int row = m_profile->m_startLine; row <= m_profile->m_endLine; ++row)
-        if (!processInvestRow(st, profile, row)) { // parse fields
-          st = MyMoneyStatement();
-          return false;
-        }
+      if (profile) {
+        for (int row = m_profile->m_startLine; row <= m_profile->m_endLine; ++row)
+          if (!processInvestRow(st, profile, row)) { // parse fields
+            st = MyMoneyStatement();
+            return false;
+          }
+      }
 
       for (QMap<QString, QString>::const_iterator it = m_mapSymbolName.cbegin(); it != m_mapSymbolName.cend(); ++it) {
         MyMoneyStatement::Security security;
@@ -1391,12 +1392,13 @@ bool CSVImporterCore::createStatement(MyMoneyStatement &st)
         return true;
       st.m_eType = eMyMoney::Statement::Type::None;
 
-      PricesProfile *profile = dynamic_cast<PricesProfile *>(m_profile);
-      for (int row = m_profile->m_startLine; row <= m_profile->m_endLine; ++row)
-        if (!processPriceRow(st, profile, row)) { // parse fields
-          st = MyMoneyStatement();
-          return false;
-        }
+      if (auto profile = dynamic_cast<PricesProfile *>(m_profile)) {
+        for (int row = m_profile->m_startLine; row <= m_profile->m_endLine; ++row)
+          if (!processPriceRow(st, profile, row)) { // parse fields
+            st = MyMoneyStatement();
+            return false;
+          }
+      }
 
       for (QMap<QString, QString>::const_iterator it = m_mapSymbolName.cbegin(); it != m_mapSymbolName.cend(); ++it) {
         MyMoneyStatement::Security security;
@@ -1620,7 +1622,9 @@ void PricesProfile::writeSettings(const KSharedConfigPtr &config)
   profilesGroup.config()->sync();
 }
 
-CSVFile::CSVFile()
+CSVFile::CSVFile() :
+  m_columnCount(0),
+  m_rowCount(0)
 {
   m_parse = new Parse;
   m_model = new QStandardItemModel;

@@ -1,20 +1,20 @@
-/***************************************************************************
-                             stdtransactioneditor.cpp
-                             ----------
-    begin                : Wed Jun 07 2006
-    copyright            : (C) 2006 by Thomas Baumgart
-    email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2009-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "stdtransactioneditor.h"
 #include "transactioneditor_p.h"
@@ -58,7 +58,7 @@
 #include "transaction.h"
 #include "transactionform.h"
 #include "mymoneytransactionfilter.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "transactioneditorcontainer.h"
 
 #include "ksplittransactiondlg.h"
@@ -172,7 +172,7 @@ void StdTransactionEditor::createEditWidgets()
     case eMyMoney::Account::Type::Asset:
     case eMyMoney::Account::Type::Liability:
     case eMyMoney::Account::Type::Equity:
-      showNumberField = KMyMoneyGlobalSettings::alwaysShowNrField();
+      showNumberField = KMyMoneySettings::alwaysShowNrField();
       break;
 
     case eMyMoney::Account::Type::Income:
@@ -266,7 +266,7 @@ void StdTransactionEditor::createEditWidgets()
   label->setAlignment(Qt::AlignVCenter);
 
   // create a copy of tabbar above the form (if we are created for a form)
-  KMyMoneyTransactionForm::TransactionForm* form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(d->m_regForm);
+  auto form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(d->m_regForm);
   if (form) {
     auto tabbar = new KMyMoneyTransactionForm::TabBar;
     d->m_editWidgets["tabbar"] = tabbar;
@@ -282,7 +282,8 @@ void StdTransactionEditor::createEditWidgets()
 void StdTransactionEditor::setupCategoryWidget(QString& categoryId)
 {
   Q_D(StdTransactionEditor);
-  TransactionEditor::setupCategoryWidget(dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]), d->m_splits, categoryId, SLOT(slotEditSplits()));
+  if (auto categoryWidget = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]))
+    TransactionEditor::setupCategoryWidget(categoryWidget, d->m_splits, categoryId, SLOT(slotEditSplits()));
 
   if (d->m_splits.count() == 1)
     d->m_shares = d->m_splits[0].shares();
@@ -302,13 +303,11 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
   // don't kick off VAT processing from here
   d->m_inUpdateVat = true;
 
-  QMap<QString, QWidget*>::const_iterator it_w;
   QWidget* w;
   AccountSet aSet;
 
   // load the account widget
-  KMyMoneyCategory* account = dynamic_cast<KMyMoneyCategory*>(haveWidget("account"));
-  if (account) {
+  if (auto account = dynamic_cast<KMyMoneyCategory*>(haveWidget("account"))) {
     aSet.addAccountGroup(eMyMoney::Account::Type::Asset);
     aSet.addAccountGroup(eMyMoney::Account::Type::Liability);
     aSet.removeAccountType(eMyMoney::Account::Type::AssetLoan);
@@ -324,16 +323,20 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
 
   // load the payee widget
   auto payee = dynamic_cast<KMyMoneyPayeeCombo*>(d->m_editWidgets["payee"]);
-  payee->loadPayees(MyMoneyFile::instance()->payeeList());
+  if (payee)
+    payee->loadPayees(MyMoneyFile::instance()->payeeList());
 
   // load the category widget
   auto category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]);
-  disconnect(category, &KMyMoneyCategory::focusIn, this, &StdTransactionEditor::slotEditSplits);
+
+  if (category)
+    disconnect(category, &KMyMoneyCategory::focusIn, this, &StdTransactionEditor::slotEditSplits);
 
   // load the tag widget
   //auto tag = dynamic_cast<KMyMoneyTagCombo*>(m_editWidgets["tag"]);
   auto tag = dynamic_cast<KTagContainer*>(d->m_editWidgets["tag"]);
-  tag->loadTags(MyMoneyFile::instance()->tagList());
+  if (tag)
+    tag->loadTags(MyMoneyFile::instance()->tagList());
 
   // check if the current transaction has a reference to an equity account
   auto haveEquityAccount = false;
@@ -350,14 +353,15 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
   aSet.addAccountGroup(eMyMoney::Account::Type::Liability);
   aSet.addAccountGroup(eMyMoney::Account::Type::Income);
   aSet.addAccountGroup(eMyMoney::Account::Type::Expense);
-  if (KMyMoneyGlobalSettings::expertMode() || haveEquityAccount)
+  if (KMyMoneySettings::expertMode() || haveEquityAccount)
     aSet.addAccountGroup(eMyMoney::Account::Type::Equity);
 
   aSet.removeAccountType(eMyMoney::Account::Type::CertificateDep);
   aSet.removeAccountType(eMyMoney::Account::Type::Investment);
   aSet.removeAccountType(eMyMoney::Account::Type::Stock);
   aSet.removeAccountType(eMyMoney::Account::Type::MoneyMarket);
-  aSet.load(category->selector());
+  if (category)
+    aSet.load(category->selector());
 
   // if an account is specified then remove it from the widget so that the user
   // cannot create a transfer with from and to account being the same account
@@ -365,41 +369,45 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
     category->selector()->removeItem(d->m_account.id());
 
   //  also show memo text if isMultiSelection()
-  dynamic_cast<KTextEdit*>(d->m_editWidgets["memo"])->setText(d->m_split.memo());
+  if (auto memoWidget = dynamic_cast<KTextEdit*>(d->m_editWidgets["memo"]))
+    memoWidget->setText(d->m_split.memo());
   // need to know if it changed
   d->m_memoText = d->m_split.memo();
   d->m_memoChanged = false;
 
   if (!isMultiSelection()) {
-    if (d->m_transaction.postDate().isValid())
-      dynamic_cast<KMyMoneyDateInput*>(d->m_editWidgets["postdate"])->setDate(d->m_transaction.postDate());
-    else if (d->m_lastPostDate.isValid())
-      dynamic_cast<KMyMoneyDateInput*>(d->m_editWidgets["postdate"])->setDate(d->m_lastPostDate);
-    else
-      dynamic_cast<KMyMoneyDateInput*>(d->m_editWidgets["postdate"])->setDate(QDate::currentDate());
+    if (auto dateWidget = dynamic_cast<KMyMoneyDateInput*>(d->m_editWidgets["postdate"])) {
+      if (d->m_transaction.postDate().isValid())
+        dateWidget->setDate(d->m_transaction.postDate());
+      else if (d->m_lastPostDate.isValid())
+        dateWidget->setDate(d->m_lastPostDate);
+      else
+        dateWidget->setDate(QDate::currentDate());
+    }
 
     if ((w = haveWidget("number")) != 0) {
-      dynamic_cast<KMyMoneyLineEdit*>(w)->loadText(d->m_split.number());
+      if (auto lineEdit = dynamic_cast<KMyMoneyLineEdit*>(w))
+        lineEdit->loadText(d->m_split.number());
       if (d->m_transaction.id().isEmpty()                              // new transaction
           && dynamic_cast<KMyMoneyLineEdit*>(w)->text().isEmpty()   // no number filled in
           && d->m_account.accountType() == eMyMoney::Account::Type::Checkings   // checkings account
-          && KMyMoneyGlobalSettings::autoIncCheckNumber()           // and auto inc number turned on?
+          && KMyMoneySettings::autoIncCheckNumber()           // and auto inc number turned on?
           && action != eRegister::Action::Deposit              // only transfers or withdrawals
           && d->m_paymentMethod == eMyMoney::Schedule::PaymentType::WriteChecque) {// only for WriteChecque
         assignNextNumber();
       }
     }
-    dynamic_cast<KMyMoneyReconcileCombo*>(d->m_editWidgets["status"])->setState(d->m_split.reconcileFlag());
+    if (auto statusWidget = dynamic_cast<KMyMoneyReconcileCombo*>(d->m_editWidgets["status"]))
+      statusWidget->setState(d->m_split.reconcileFlag());
 
     QString payeeId = d->m_split.payeeId();
-    if (!payeeId.isEmpty()) {
+    if (payee && !payeeId.isEmpty())
       payee->setSelectedItem(payeeId);
-    }
+
     QList<QString> t = d->m_split.tagIdList();
-    if (!t.isEmpty()) {
+    if (tag && !t.isEmpty())
       for (auto i = 0; i < t.size(); ++i)
         tag->addTagWidget(t[i]);
-    }
 
     d->m_splits.clear();
     if (d->m_transaction.splitCount() < 2) {
@@ -415,33 +423,39 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
     setupCategoryWidget(categoryId);
 
     if ((w = haveWidget("cashflow")) != 0) {
-      KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(w);
-      cashflow->setDirection(!d->m_split.value().isPositive() ? eRegister::CashFlowDirection::Payment : eRegister::CashFlowDirection::Deposit);  //  include isZero case
+      if (auto cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(w))
+        cashflow->setDirection(!d->m_split.value().isPositive() ? eRegister::CashFlowDirection::Payment : eRegister::CashFlowDirection::Deposit);  //  include isZero case
     }
 
     if ((w = haveWidget("category-label")) != 0) {
-      QLabel *categoryLabel = dynamic_cast<QLabel*>(w);
-      if (isTransfer(d->m_split.accountId(), categoryId)) {
-        if (d->m_split.value().isPositive())
-          categoryLabel->setText(i18n("Transfer from"));
-        else
-          categoryLabel->setText(i18n("Transfer to"));
+      if (auto categoryLabel = dynamic_cast<QLabel*>(w)) {
+        if (isTransfer(d->m_split.accountId(), categoryId)) {
+          if (d->m_split.value().isPositive())
+            categoryLabel->setText(i18n("Transfer from"));
+          else
+            categoryLabel->setText(i18n("Transfer to"));
+        }
       }
     }
 
     MyMoneyMoney value = d->m_split.shares();
 
     if (haveWidget("deposit")) {
-      if (d->m_split.shares().isNegative()) {
-        dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["deposit"])->loadText("");
-        dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["payment"])->setValue(value.abs());
-      } else {
-        dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["deposit"])->setValue(value.abs());
-        dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["payment"])->loadText("");
+      auto depositWidget = dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["deposit"]);
+      auto paymentWidget = dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["payment"]);
+      if (depositWidget && paymentWidget) {
+        if (d->m_split.shares().isNegative()) {
+          depositWidget->loadText(QString());
+          paymentWidget->setValue(value.abs());
+        } else {
+          depositWidget->setValue(value.abs());
+          paymentWidget->loadText(QString());
+        }
       }
     }
     if ((w = haveWidget("amount")) != 0) {
-      dynamic_cast<KMyMoneyEdit*>(w)->setValue(value.abs());
+      if (auto amountWidget = dynamic_cast<KMyMoneyEdit*>(w))
+        amountWidget->setValue(value.abs());
     }
 
     slotUpdateCategory(categoryId);
@@ -456,19 +470,21 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
           }
         }
         if (action != eRegister::Action::None) {
-          QLabel *categoryLabel = dynamic_cast<QLabel*>(w);
-          if (action == eRegister::Action::Transfer) {
-            if (d->m_split.value().isPositive())
-              categoryLabel->setText(i18n("Transfer from"));
-            else
-              categoryLabel->setText(i18n("Transfer to"));
+          if (auto categoryLabel = dynamic_cast<QLabel*>(w)) {
+            if (action == eRegister::Action::Transfer) {
+              if (d->m_split.value().isPositive())
+                categoryLabel->setText(i18n("Transfer from"));
+              else
+                categoryLabel->setText(i18n("Transfer to"));
+            }
           }
           if ((w = haveWidget("cashflow")) != 0) {
-            KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(w);
-            if (action == eRegister::Action::Deposit || (action == eRegister::Action::Transfer && d->m_split.value().isPositive()))
-              cashflow->setDirection(eRegister::CashFlowDirection::Deposit);
-            else
-              cashflow->setDirection(eRegister::CashFlowDirection::Payment);
+            if (auto cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(w)) {
+              if (action == eRegister::Action::Deposit || (action == eRegister::Action::Transfer && d->m_split.value().isPositive()))
+                cashflow->setDirection(eRegister::CashFlowDirection::Deposit);
+              else
+                cashflow->setDirection(eRegister::CashFlowDirection::Payment);
+            }
           }
           if (tabbar) {
             tabbar->setCurrentIndex((int)action);
@@ -476,28 +492,34 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
         }
       }
     } else {
-      auto tabbar = dynamic_cast<KMyMoneyTransactionForm::TabBar*>(haveWidget("tabbar"));
-      if (tabbar) {
-        if (!isTransfer(d->m_split.accountId(), categoryId)) {
+      if (auto tabbar = dynamic_cast<KMyMoneyTransactionForm::TabBar*>(haveWidget("tabbar"))) {
+        if (!isTransfer(d->m_split.accountId(), categoryId))
           tabbar->setCurrentIndex(d->m_split.value().isNegative() ? (int)eRegister::Action::Withdrawal : (int)eRegister::Action::Deposit);
-        } else {
+        else
           tabbar->setCurrentIndex((int)eRegister::Action::Transfer);
-        }
       }
     }
 
   } else {  //  isMultiSelection()
-    dynamic_cast<KMyMoneyDateInput*>(d->m_editWidgets["postdate"])->loadDate(QDate());
-    dynamic_cast<KMyMoneyReconcileCombo*>(d->m_editWidgets["status"])->setState(eMyMoney::Split::State::Unknown);
+    if (auto postDateWidget = dynamic_cast<KMyMoneyDateInput*>(d->m_editWidgets["postdate"]))
+      postDateWidget->loadDate(QDate());
+    if (auto statusWidget = dynamic_cast<KMyMoneyReconcileCombo*>(d->m_editWidgets["status"]))
+      statusWidget->setState(eMyMoney::Split::State::Unknown);
     if (haveWidget("deposit")) {
-      dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["deposit"])->loadText("");
-      dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["deposit"])->setAllowEmpty();
-      dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["payment"])->loadText("");
-      dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["payment"])->setAllowEmpty();
+      if (auto depositWidget = dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["deposit"])) {
+        depositWidget->loadText(QString());
+        depositWidget->setAllowEmpty();
+      }
+      if (auto paymentWidget = dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["payment"])) {
+        paymentWidget->loadText(QString());
+        paymentWidget->setAllowEmpty();
+      }
     }
     if ((w = haveWidget("amount")) != 0) {
-      dynamic_cast<KMyMoneyEdit*>(w)->loadText("");
-      dynamic_cast<KMyMoneyEdit*>(w)->setAllowEmpty();
+      if (auto amountWidget = dynamic_cast<KMyMoneyEdit*>(w)) {
+        amountWidget->loadText(QString());
+        amountWidget->setAllowEmpty();
+      }
     }
 
     slotUpdateAction((int)action);
@@ -506,7 +528,8 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
       w->setEnabled(false);
     }
 
-    category->completion()->setSelected(QString());
+    if (category && category->completion())
+      category->completion()->setSelected(QString());
   }
 
   // allow kick off VAT processing again
@@ -521,7 +544,7 @@ void StdTransactionEditor::loadEditWidgets()
 QWidget* StdTransactionEditor::firstWidget() const
 {
   Q_D(const StdTransactionEditor);
-  QWidget* w = 0;
+  QWidget* w = nullptr;
   if (d->m_initialAction != eRegister::Action::None) {
     w = haveWidget("payee");
   }
@@ -532,46 +555,49 @@ void StdTransactionEditor::slotReloadEditWidgets()
 {
   Q_D(StdTransactionEditor);
   // reload category widget
-  KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]);
-  QString categoryId = category->selectedItem();
+  if (auto category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"])) {
+    QString categoryId = category->selectedItem();
 
-  AccountSet aSet;
-  aSet.addAccountGroup(eMyMoney::Account::Type::Asset);
-  aSet.addAccountGroup(eMyMoney::Account::Type::Liability);
-  aSet.addAccountGroup(eMyMoney::Account::Type::Income);
-  aSet.addAccountGroup(eMyMoney::Account::Type::Expense);
-  if (KMyMoneyGlobalSettings::expertMode())
-    aSet.addAccountGroup(eMyMoney::Account::Type::Equity);
-  aSet.load(category->selector());
+    AccountSet aSet;
+    aSet.addAccountGroup(eMyMoney::Account::Type::Asset);
+    aSet.addAccountGroup(eMyMoney::Account::Type::Liability);
+    aSet.addAccountGroup(eMyMoney::Account::Type::Income);
+    aSet.addAccountGroup(eMyMoney::Account::Type::Expense);
+    if (KMyMoneySettings::expertMode())
+      aSet.addAccountGroup(eMyMoney::Account::Type::Equity);
+    aSet.load(category->selector());
 
-  // if an account is specified then remove it from the widget so that the user
-  // cannot create a transfer with from and to account being the same account
-  if (!d->m_account.id().isEmpty())
-    category->selector()->removeItem(d->m_account.id());
+    // if an account is specified then remove it from the widget so that the user
+    // cannot create a transfer with from and to account being the same account
+    if (!d->m_account.id().isEmpty())
+      category->selector()->removeItem(d->m_account.id());
 
-  if (!categoryId.isEmpty())
-    category->setSelectedItem(categoryId);
+    if (!categoryId.isEmpty())
+      category->setSelectedItem(categoryId);
+  }
 
 
   // reload payee widget
-  KMyMoneyPayeeCombo* payee = dynamic_cast<KMyMoneyPayeeCombo*>(d->m_editWidgets["payee"]);
-  QString payeeId = payee->selectedItem();
+  if (auto payee = dynamic_cast<KMyMoneyPayeeCombo*>(d->m_editWidgets["payee"])) {
+    QString payeeId = payee->selectedItem();
 
-  payee->loadPayees(MyMoneyFile::instance()->payeeList());
+    payee->loadPayees(MyMoneyFile::instance()->payeeList());
 
-  if (!payeeId.isEmpty()) {
-    payee->setSelectedItem(payeeId);
+    if (!payeeId.isEmpty()) {
+      payee->setSelectedItem(payeeId);
+    }
   }
 
   // reload tag widget
-  KTagContainer* tag = dynamic_cast<KTagContainer*>(d->m_editWidgets["tag"]);
-  QString tagId = tag->tagCombo()->selectedItem();
+  if (auto tag = dynamic_cast<KTagContainer*>(d->m_editWidgets["tag"])) {
+    QString tagId = tag->tagCombo()->selectedItem();
 
-  tag->loadTags(MyMoneyFile::instance()->tagList());
+    tag->loadTags(MyMoneyFile::instance()->tagList());
 
-  if (!tagId.isEmpty()) {
-    tag->RemoveAllTagWidgets();
-    tag->addTagWidget(tagId);
+    if (!tagId.isEmpty()) {
+      tag->RemoveAllTagWidgets();
+      tag->addTagWidget(tagId);
+    }
   }
 }
 
@@ -584,16 +610,17 @@ void StdTransactionEditor::slotUpdatePayee(const QString& payeeId)
   // in the account.
   if (d->m_transaction.id().isEmpty()
       && d->m_splits.count() == 0
-      && KMyMoneyGlobalSettings::autoFillTransaction() != 0) {
+      && KMyMoneySettings::autoFillTransaction() != 0) {
     // check if category is empty
-    KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]);
-    QStringList list;
-    category->selectedItems(list);
-    if (!list.isEmpty())
-      return;
+    if (auto category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"])) {
+      QStringList list;
+      category->selectedItems(list);
+      if (!list.isEmpty())
+        return;
+    }
 
     // check if memo is empty
-    KTextEdit* memo = dynamic_cast<KTextEdit*>(d->m_editWidgets["memo"]);
+    auto memo = dynamic_cast<KTextEdit*>(d->m_editWidgets["memo"]);
     if (memo && !memo->toPlainText().isEmpty())
       return;
 
@@ -619,8 +646,8 @@ void StdTransactionEditor::slotUpdatePayee(const QString& payeeId)
     // (ipwizard, 2008-04-07)
 
     // check if date has been altered by user
-    KMyMoneyDateInput* postDate = dynamic_cast<KMyMoneyDateInput*>(m_editWidgets["postdate"]);
-    if ((m_lastPostDate.isValid() && (postDate->date() != m_lastPostDate))
+    auto postDate = dynamic_cast<KMyMoneyDateInput*>(m_editWidgets["postdate"]);
+    if (postDate && (m_lastPostDate.isValid() && (postDate->date() != m_lastPostDate))
         || (!m_lastPostDate.isValid() && (postDate->date() != QDate::currentDate())))
       return;
 #endif
@@ -632,8 +659,8 @@ void StdTransactionEditor::slotUpdatePayee(const QString& payeeId)
   // If payee has associated default account (category), set that now.
   const MyMoneyPayee& payeeObj = MyMoneyFile::instance()->payee(payeeId);
   if (payeeObj.defaultAccountEnabled()) {
-    KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]);
-    category->slotItemSelected(payeeObj.defaultAccountId());
+    if (auto category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]))
+      category->slotItemSelected(payeeObj.defaultAccountId());
   }
 }
 
@@ -679,7 +706,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
         if (it_u == uniqList.end()) {
           uniqList[ukey].t = &((*it_t).first);
           uniqList[ukey].cnt = 1;
-        } else if (KMyMoneyGlobalSettings::autoFillTransaction() == 1) {
+        } else if (KMyMoneySettings::autoFillTransaction() == 1) {
           // we already have a transaction with this signature. we must
           // now check, if we should really treat it as a duplicate according
           // to the value comparison delta.
@@ -695,11 +722,11 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
             diff = s1.abs();
           else
             diff = ((s1 - s2) / s2).convert(10000);
-          if (diff.isPositive() && diff <= MyMoneyMoney(KMyMoneyGlobalSettings::autoFillDifference(), 100)) {
+          if (diff.isPositive() && diff <= MyMoneyMoney(KMyMoneySettings::autoFillDifference(), 100)) {
             uniqList[ukey].t = &((*it_t).first);
             break;    // end while loop
           }
-        } else if (KMyMoneyGlobalSettings::autoFillTransaction() == 2) {
+        } else if (KMyMoneySettings::autoFillTransaction() == 2) {
           (*it_u).cnt++;
           break;      // end while loop
         }
@@ -709,7 +736,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
     }
 
     MyMoneyTransaction t;
-    if (KMyMoneyGlobalSettings::autoFillTransaction() != 2) {
+    if (KMyMoneySettings::autoFillTransaction() != 2) {
 #if 0
       // I removed this code to allow cancellation of an autofill if
       // it does not match even if there is only a single matching
@@ -767,8 +794,8 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
         s.setBankID(QString());
         // older versions of KMyMoney used to set the action
         // we don't need this anymore
-        if (s.action() != MyMoneySplit::ActionAmortization
-            && s.action() != MyMoneySplit::ActionInterest)  {
+        if (s.action() != MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization)
+            && s.action() != MyMoneySplit::actionName(eMyMoney::Split::Action::Interest))  {
           s.setAction(QString());
         }
 
@@ -781,7 +808,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
         // to the transaction.
         // </quote>
 
-        KMyMoneyLineEdit* editNr = dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number"));
+        auto editNr = dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number"));
         if (editNr && !editNr->text().isEmpty()) {
           s.setNumber(editNr->text());
         } else if (!s.number().isEmpty()) {
@@ -794,7 +821,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
         // the current account. This allows the user to change
         // the autofilled memo text which will then also be used
         // in this split. See createTransaction() for this logic.
-        if ((s.accountId() != d->m_account.id() && t.splitCount() == 2) || !KMyMoneyGlobalSettings::autoFillUseMemos())
+        if ((s.accountId() != d->m_account.id() && t.splitCount() == 2) || !KMyMoneySettings::autoFillUseMemos())
           s.setMemo(QString());
 
         d->m_transaction.addSplit(s);
@@ -816,9 +843,11 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
       }
 
       // now setup the widgets with the new data but keep the date
-      QDate date = dynamic_cast<KMyMoneyDateInput*>(d->m_editWidgets["postdate"])->date();
-      loadEditWidgets(action);
-      dynamic_cast<KMyMoneyDateInput*>(d->m_editWidgets["postdate"])->setDate(date);
+      if (auto postdateWidget = dynamic_cast<KMyMoneyDateInput*>(d->m_editWidgets["postdate"])) {
+        auto date = postdateWidget->date();
+        loadEditWidgets(action);
+        postdateWidget->setDate(date);
+      }
     }
   }
 
@@ -834,8 +863,10 @@ void StdTransactionEditor::slotUpdateAction(int action)
   Q_D(StdTransactionEditor);
   auto tabbar = dynamic_cast<KMyMoneyTransactionForm::TabBar*>(haveWidget("tabbar"));
   if (tabbar) {
-    QLabel* categoryLabel = dynamic_cast<QLabel*>(haveWidget("category-label"));
-    KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(d->m_editWidgets["cashflow"]);
+    auto categoryLabel = dynamic_cast<QLabel*>(haveWidget("category-label"));
+    auto cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(d->m_editWidgets["cashflow"]);
+    if (!categoryLabel || !cashflow)
+      return;
     switch (action) {
       case (int)eRegister::Action::Deposit:
         categoryLabel->setText(i18n("Category"));
@@ -863,9 +894,9 @@ void StdTransactionEditor::slotUpdateAction(int action)
 
 void StdTransactionEditor::slotUpdateCashFlow(eRegister::CashFlowDirection dir)
 {
-  QLabel* categoryLabel = dynamic_cast<QLabel*>(haveWidget("category-label"));
-  KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(haveWidget("cashflow"));
-  cashflow->setDirection(dir);
+  auto categoryLabel = dynamic_cast<QLabel*>(haveWidget("category-label"));
+  if (auto cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(haveWidget("cashflow")))
+    cashflow->setDirection(dir);
   // qDebug("Update cashflow to %d", dir);
   if (categoryLabel) {
     auto tabbar = dynamic_cast<KMyMoneyTransactionForm::TabBar*>(haveWidget("tabbar"));
@@ -890,13 +921,13 @@ void StdTransactionEditor::slotUpdateCashFlow(eRegister::CashFlowDirection dir)
 void StdTransactionEditor::slotUpdateCategory(const QString& id)
 {
   Q_D(StdTransactionEditor);
-  QLabel *categoryLabel = dynamic_cast<QLabel*>(haveWidget("category-label"));
+  auto categoryLabel = dynamic_cast<QLabel*>(haveWidget("category-label"));
   // qDebug("Update category to %s", qPrintable(id));
 
   if (categoryLabel) {
     auto tabbar = dynamic_cast<KMyMoneyTransactionForm::TabBar*>(haveWidget("tabbar"));
-    KMyMoneyEdit* amount = dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["amount"]);
-    MyMoneyMoney val = amount->value();
+    auto amount = dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["amount"]);
+    auto val = amount ? amount->value() : MyMoneyMoney();
 
     if (categoryLabel->text() == i18n("Transfer from")) {
       val = -val;
@@ -920,7 +951,7 @@ void StdTransactionEditor::slotUpdateCategory(const QString& id)
           tabbar->setTabEnabled((int)eRegister::Action::Deposit, false);
           tabbar->setTabEnabled((int)eRegister::Action::Withdrawal, false);
         }
-        KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(d->m_editWidgets["cashflow"]);
+        auto cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(d->m_editWidgets["cashflow"]);
         if (val.isZero()) {
           if (cashflow && (cashflow->direction() == eRegister::CashFlowDirection::Deposit)) {
             categoryLabel->setText(i18n("Transfer from"));
@@ -929,7 +960,8 @@ void StdTransactionEditor::slotUpdateCategory(const QString& id)
           }
         } else if (val.isNegative()) {
           categoryLabel->setText(i18n("Transfer from"));
-          cashflow->setDirection(eRegister::CashFlowDirection::Deposit);
+          if (cashflow)
+            cashflow->setDirection(eRegister::CashFlowDirection::Deposit);
         } else
           categoryLabel->setText(i18n("Transfer to"));
       } else {
@@ -938,8 +970,8 @@ void StdTransactionEditor::slotUpdateCategory(const QString& id)
       }
       updateAmount(val);
     } else {  //id.isEmpty()
-      KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]);
-      disableTransferTab = !category->currentText().isEmpty();
+      if (auto category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]))
+        disableTransferTab = !category->currentText().isEmpty();
       categoryLabel->setText(i18n("Category"));
     }
     if (tabbar) {
@@ -963,11 +995,16 @@ void StdTransactionEditor::slotUpdatePayment(const QString& txt)
   Q_D(StdTransactionEditor);
   MyMoneyMoney val(txt);
 
+  auto depositWidget = dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["deposit"]);
+  auto paymentWidget = dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["payment"]);
+  if (!depositWidget || !paymentWidget)
+    return;
+
   if (val.isNegative()) {
-    dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["deposit"])->setValue(val.abs());
-    dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["payment"])->clearText();
+    depositWidget->setValue(val.abs());
+    paymentWidget->clearText();
   } else {
-    dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["deposit"])->clearText();
+    depositWidget->clearText();
   }
   updateVAT();
 }
@@ -976,11 +1013,17 @@ void StdTransactionEditor::slotUpdateDeposit(const QString& txt)
 {
   Q_D(StdTransactionEditor);
   MyMoneyMoney val(txt);
+
+  auto depositWidget = dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["deposit"]);
+  auto paymentWidget = dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["payment"]);
+  if (!depositWidget || !paymentWidget)
+    return;
+
   if (val.isNegative()) {
-    dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["payment"])->setValue(val.abs());
-    dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["deposit"])->clearText();
+    paymentWidget->setValue(val.abs());
+    depositWidget->clearText();
   } else {
-    dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["payment"])->clearText();
+    paymentWidget->clearText();
   }
   updateVAT();
 }
@@ -1000,29 +1043,31 @@ void StdTransactionEditor::updateAmount(const MyMoneyMoney& val)
     return;
 
   Q_D(StdTransactionEditor);
-  QLabel *categoryLabel = dynamic_cast<QLabel*>(haveWidget("category-label"));
+  auto categoryLabel = dynamic_cast<QLabel*>(haveWidget("category-label"));
   if (categoryLabel) {
-    KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(d->m_editWidgets["cashflow"]);
-
-    if (!val.isPositive())  {  //   fixes BUG321317
-      if (categoryLabel->text() != i18n("Category")) {
-        if (cashflow->direction() == eRegister::CashFlowDirection::Payment) {
-          categoryLabel->setText(i18n("Transfer to"));
-        }
-      } else {
-        slotUpdateCashFlow(cashflow->direction());
-      }
-      dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["amount"])->setValue(val.abs());
-    } else {
-      if (categoryLabel->text() != i18n("Category")) {
-        if (cashflow->direction() == eRegister::CashFlowDirection::Payment) {
-          categoryLabel->setText(i18n("Transfer to"));
+    if (auto cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(d->m_editWidgets["cashflow"])) {
+      if (!val.isPositive())  {  //   fixes BUG321317
+        if (categoryLabel->text() != i18n("Category")) {
+          if (cashflow->direction() == eRegister::CashFlowDirection::Payment) {
+            categoryLabel->setText(i18n("Transfer to"));
+          }
         } else {
-          categoryLabel->setText(i18n("Transfer from"));
-          cashflow->setDirection(eRegister::CashFlowDirection::Deposit);  //  editing with +ve shows 'from' not 'pay to'
+          slotUpdateCashFlow(cashflow->direction());
         }
+        if (auto amountWidget = dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["amount"]))
+          amountWidget->setValue(val.abs());
+      } else {
+        if (categoryLabel->text() != i18n("Category")) {
+          if (cashflow->direction() == eRegister::CashFlowDirection::Payment) {
+            categoryLabel->setText(i18n("Transfer to"));
+          } else {
+            categoryLabel->setText(i18n("Transfer from"));
+            cashflow->setDirection(eRegister::CashFlowDirection::Deposit);  //  editing with +ve shows 'from' not 'pay to'
+          }
+        }
+        if (auto amountWidget = dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["amount"]))
+          amountWidget->setValue(val.abs());
       }
-      dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["amount"])->setValue(val.abs());
     }
   }
 }
@@ -1060,9 +1105,8 @@ void StdTransactionEditor::updateVAT(bool amountChanged)
     if (d->m_splits.count() == 2) // not removed?
       return;
 
-  } else {
+  } else if (auto category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"])) {
     // otherwise, we need a category
-    KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]);
     if (category->selectedItem().isEmpty())
       return;
 
@@ -1165,7 +1209,7 @@ bool StdTransactionEditor::isComplete(QString& reason) const
   reason.clear();
   QMap<QString, QWidget*>::const_iterator it_w;
 
-  KMyMoneyDateInput* postDate = dynamic_cast<KMyMoneyDateInput*>(d->m_editWidgets["postdate"]);
+  auto postDate = dynamic_cast<KMyMoneyDateInput*>(d->m_editWidgets["postdate"]);
   if (postDate) {
     QDate accountOpeningDate = d->m_account.openingDate();
     for (QList<MyMoneySplit>::const_iterator it_s = d->m_splits.constBegin(); it_s != d->m_splits.constEnd(); ++it_s) {
@@ -1175,7 +1219,7 @@ bool StdTransactionEditor::isComplete(QString& reason) const
         accountOpeningDate = acc.openingDate();
     }
     // check the selected category in case m_splits hasn't been updated yet
-    KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]);
+    auto category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]);
     if (category && !category->selectedItem().isEmpty()) {
       MyMoneyAccount cat = MyMoneyFile::instance()->account(category->selectedItem());
       if (cat.openingDate() > accountOpeningDate)
@@ -1183,7 +1227,7 @@ bool StdTransactionEditor::isComplete(QString& reason) const
     }
 
     if (postDate->date().isValid() && (postDate->date() < accountOpeningDate)) {
-      postDate->markAsBadDate(true, KMyMoneyGlobalSettings::schemeColor(SchemeColor::Negative));
+      postDate->markAsBadDate(true, KMyMoneySettings::schemeColor(SchemeColor::Negative));
       reason = i18n("Cannot enter transaction with postdate prior to account's opening date.");
       postDate->setToolTip(reason);
       return false;
@@ -1193,13 +1237,13 @@ bool StdTransactionEditor::isComplete(QString& reason) const
   }
 
   for (it_w = d->m_editWidgets.begin(); it_w != d->m_editWidgets.end(); ++it_w) {
-    KMyMoneyPayeeCombo* payee = dynamic_cast<KMyMoneyPayeeCombo*>(*it_w);
-    KTagContainer* tagContainer = dynamic_cast<KTagContainer*>(*it_w);
-    KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(*it_w);
-    KMyMoneyEdit* amount = dynamic_cast<KMyMoneyEdit*>(*it_w);
-    KMyMoneyReconcileCombo* reconcile = dynamic_cast<KMyMoneyReconcileCombo*>(*it_w);
-    KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(*it_w);
-    KTextEdit* memo = dynamic_cast<KTextEdit*>(*it_w);
+    auto payee = dynamic_cast<KMyMoneyPayeeCombo*>(*it_w);
+    auto tagContainer = dynamic_cast<KTagContainer*>(*it_w);
+    auto category = dynamic_cast<KMyMoneyCategory*>(*it_w);
+    auto amount = dynamic_cast<KMyMoneyEdit*>(*it_w);
+    auto reconcile = dynamic_cast<KMyMoneyReconcileCombo*>(*it_w);
+    auto cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(*it_w);
+    auto memo = dynamic_cast<KTextEdit*>(*it_w);
 
     if (payee && !(payee->currentText().isEmpty()))
       break;
@@ -1212,17 +1256,16 @@ bool StdTransactionEditor::isComplete(QString& reason) const
 
     // the following widgets are only checked if we are editing multiple transactions
     if (isMultiSelection()) {
-      auto tabbar = dynamic_cast<KMyMoneyTransactionForm::TabBar*>(haveWidget("tabbar"));
-      if (tabbar) {
+      if (auto tabbar = dynamic_cast<KMyMoneyTransactionForm::TabBar*>(haveWidget("tabbar")))
         tabbar->setEnabled(true);
-      }
+
       if (reconcile && reconcile->state() != eMyMoney::Split::State::Unknown)
         break;
 
       if (cashflow && cashflow->direction() != eRegister::CashFlowDirection::Unknown)
         break;
 
-      if (postDate->date().isValid() && (postDate->date() >= d->m_account.openingDate()))
+      if (postDate && postDate->date().isValid() && (postDate->date() >= d->m_account.openingDate()))
         break;
 
       if (memo && d->m_memoChanged)
@@ -1241,7 +1284,7 @@ void StdTransactionEditor::slotCreateCategory(const QString& name, QString& id)
   MyMoneyAccount acc, parent;
   acc.setName(name);
 
-  KMyMoneyCashFlowCombo* cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(haveWidget("cashflow"));
+  auto cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(haveWidget("cashflow"));
   if (cashflow) {
     // form based input
     if (cashflow->direction() == eRegister::CashFlowDirection::Deposit)
@@ -1251,11 +1294,12 @@ void StdTransactionEditor::slotCreateCategory(const QString& name, QString& id)
 
   } else if (haveWidget("deposit")) {
     // register based input
-    KMyMoneyEdit* deposit = dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["deposit"]);
-    if (deposit->value().isPositive())
-      parent = MyMoneyFile::instance()->income();
-    else
-      parent = MyMoneyFile::instance()->expense();
+    if (auto deposit = dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["deposit"])) {
+      if (deposit->value().isPositive())
+        parent = MyMoneyFile::instance()->income();
+      else
+        parent = MyMoneyFile::instance()->expense();
+    }
 
   } else
     parent = MyMoneyFile::instance()->expense();
@@ -1280,21 +1324,21 @@ int StdTransactionEditor::slotEditSplits()
     d->m_openEditSplits = true;
 
     // force focus change to update all data
-    QWidget* w = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"])->splitButton();
+    auto categoryWidget = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]);
+    QWidget* w = categoryWidget ? categoryWidget->splitButton() : nullptr;
     if (w)
       w->setFocus();
 
-    KMyMoneyEdit* amount = dynamic_cast<KMyMoneyEdit*>(haveWidget("amount"));
-    KMyMoneyEdit* deposit = dynamic_cast<KMyMoneyEdit*>(haveWidget("deposit"));
-    KMyMoneyEdit* payment = dynamic_cast<KMyMoneyEdit*>(haveWidget("payment"));
+    auto amount = dynamic_cast<KMyMoneyEdit*>(haveWidget("amount"));
+    auto deposit = dynamic_cast<KMyMoneyEdit*>(haveWidget("deposit"));
+    auto payment = dynamic_cast<KMyMoneyEdit*>(haveWidget("payment"));
     KMyMoneyCashFlowCombo* cashflow = 0;
     eRegister::CashFlowDirection dir = eRegister::CashFlowDirection::Unknown;
     bool isValidAmount = false;
 
     if (amount) {
       isValidAmount = amount->lineedit()->text().length() != 0;
-      cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(haveWidget("cashflow"));
-      if (cashflow)
+      if ((cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(haveWidget("cashflow"))))
         dir = cashflow->direction();
 
     } else {
@@ -1379,27 +1423,30 @@ MyMoneyMoney StdTransactionEditor::amountFromWidget(bool* update) const
   auto cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(haveWidget("cashflow"));
   if (cashflow) {
     // form based input
-    auto amount = dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["amount"]);
-    // if both fields do not contain changes -> no need to update
-    if (cashflow->direction() != eRegister::CashFlowDirection::Unknown
-        && !amount->lineedit()->text().isEmpty())
-      updateValue = true;
-    value = amount->value();
-    if (cashflow->direction() == eRegister::CashFlowDirection::Payment)
-      value = -value;
+    if (auto amount = dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["amount"])) {
+      // if both fields do not contain changes -> no need to update
+      if (cashflow->direction() != eRegister::CashFlowDirection::Unknown
+          && !amount->lineedit()->text().isEmpty())
+        updateValue = true;
+      value = amount->value();
+      if (cashflow->direction() == eRegister::CashFlowDirection::Payment)
+        value = -value;
+    }
 
   } else if (haveWidget("deposit")) {
     // register based input
     auto deposit = dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["deposit"]);
     auto payment = dynamic_cast<KMyMoneyEdit*>(d->m_editWidgets["payment"]);
-    // if both fields do not contain text -> no need to update
-    if (!(deposit->lineedit()->text().isEmpty() && payment->lineedit()->text().isEmpty()))
-      updateValue = true;
+    if (deposit && payment) {
+      // if both fields do not contain text -> no need to update
+      if (!(deposit->lineedit()->text().isEmpty() && payment->lineedit()->text().isEmpty()))
+        updateValue = true;
 
-    if (deposit->value().isPositive())
-      value = deposit->value();
-    else
-      value = -(payment->value());
+      if (deposit->value().isPositive())
+        value = deposit->value();
+      else
+        value = -(payment->value());
+    }
   }
 
   if (update)
@@ -1433,8 +1480,8 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
   t.removeSplits();
   t.setCommodity(d->m_account.currencyId());
 
-  KMyMoneyDateInput* postDate = dynamic_cast<KMyMoneyDateInput*>(d->m_editWidgets["postdate"]);
-  if (postDate->date().isValid()) {
+  auto postDate = dynamic_cast<KMyMoneyDateInput*>(d->m_editWidgets["postdate"]);
+  if (postDate && postDate->date().isValid()) {
     t.setPostDate(postDate->date());
   }
 
@@ -1450,28 +1497,27 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
   // FIXME a better approach would be to have a 'dirty' flag with the widgets
   //       which identifies if the originally loaded value has been modified
   //       by the user
-  KTextEdit* memo = dynamic_cast<KTextEdit*>(d->m_editWidgets["memo"]);
+  auto memo = dynamic_cast<KTextEdit*>(d->m_editWidgets["memo"]);
   if (memo) {
     if (!isMultiSelection() || (isMultiSelection() && d->m_memoChanged))
       s0.setMemo(memo->toPlainText());
   }
 
-  KMyMoneyLineEdit* number = dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number"));
-  if (number) {
+  if (auto number = dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number"))) {
     if (!isMultiSelection() || (isMultiSelection() && !number->text().isEmpty()))
       s0.setNumber(number->text());
   }
 
-  KMyMoneyPayeeCombo* payee = dynamic_cast<KMyMoneyPayeeCombo*>(d->m_editWidgets["payee"]);
+  auto payee = dynamic_cast<KMyMoneyPayeeCombo*>(d->m_editWidgets["payee"]);
   QString payeeId;
-  if (!isMultiSelection() || (isMultiSelection() && !payee->currentText().isEmpty())) {
+  if (payee && (!isMultiSelection() || (isMultiSelection() && !payee->currentText().isEmpty()))) {
     payeeId = payee->selectedItem();
     s0.setPayeeId(payeeId);
   }
 
   //KMyMoneyTagCombo* tag = dynamic_cast<KMyMoneyTagCombo*>(m_editWidgets["tag"]);
-  KTagContainer* tag = dynamic_cast<KTagContainer*>(d->m_editWidgets["tag"]);
-  if (!isMultiSelection() || (isMultiSelection() && !tag->selectedTags().isEmpty())) {
+  auto tag = dynamic_cast<KTagContainer*>(d->m_editWidgets["tag"]);
+  if (tag && (!isMultiSelection() || (isMultiSelection() && !tag->selectedTags().isEmpty()))) {
     s0.setTagIdList(tag->selectedTags());
   }
 
@@ -1487,8 +1533,8 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
   }
 
   // if we mark the split reconciled here, we'll use today's date if no reconciliation date is given
-  KMyMoneyReconcileCombo* status = dynamic_cast<KMyMoneyReconcileCombo*>(d->m_editWidgets["status"]);
-  if (status->state() != eMyMoney::Split::State::Unknown)
+  auto status = dynamic_cast<KMyMoneyReconcileCombo*>(d->m_editWidgets["status"]);
+  if (status && status->state() != eMyMoney::Split::State::Unknown)
     s0.setReconcileFlag(status->state());
 
   if (s0.reconcileFlag() == eMyMoney::Split::State::Reconciled && !s0.reconcileDate().isValid())
@@ -1535,8 +1581,8 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
   }
 
   if (isMultiSelection() || splits.count() == 1) {
-    KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]);
-    if (!isMultiSelection() || (isMultiSelection() && !category->currentText().isEmpty())) {
+    auto category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]);
+    if (category && (!isMultiSelection() || (isMultiSelection() && !category->currentText().isEmpty()))) {
       s1.setAccountId(category->selectedItem());
     }
 
@@ -1611,7 +1657,7 @@ void StdTransactionEditor::slotUpdateAccount(const QString& id)
 {
   Q_D(StdTransactionEditor);
   TransactionEditor::slotUpdateAccount(id);
-  KMyMoneyCategory* category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]);
+  auto category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]);
   if (category && category->splitButton()) {
     category->splitButton()->setDisabled(id.isEmpty());
   }

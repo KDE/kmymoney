@@ -2,7 +2,7 @@
                           kaccountsview.cpp
                              -------------------
     copyright            : (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -34,10 +34,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "onlinejobadministration.h"
 #include "knewaccountwizard.h"
-#include "kbalancechartdlg.h"
 #include "kmymoneyutils.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "storageenums.h"
 #include "menuenums.h"
 
@@ -46,22 +46,42 @@ using namespace Icons;
 KAccountsView::KAccountsView(QWidget *parent) :
     KMyMoneyAccountsViewBase(*new KAccountsViewPrivate(this), parent)
 {
+  Q_D(KAccountsView);
+  d->ui->setupUi(this);
+
   connect(pActions[eMenu::Action::NewAccount],          &QAction::triggered, this, &KAccountsView::slotNewAccount);
   connect(pActions[eMenu::Action::EditAccount],         &QAction::triggered, this, &KAccountsView::slotEditAccount);
   connect(pActions[eMenu::Action::DeleteAccount],       &QAction::triggered, this, &KAccountsView::slotDeleteAccount);
   connect(pActions[eMenu::Action::CloseAccount],        &QAction::triggered, this, &KAccountsView::slotCloseAccount);
   connect(pActions[eMenu::Action::ReopenAccount],       &QAction::triggered, this, &KAccountsView::slotReopenAccount);
   connect(pActions[eMenu::Action::ChartAccountBalance], &QAction::triggered, this, &KAccountsView::slotChartAccountBalance);
+  connect(pActions[eMenu::Action::MapOnlineAccount],    &QAction::triggered, this, &KAccountsView::slotAccountMapOnline);
+  connect(pActions[eMenu::Action::UnmapOnlineAccount],  &QAction::triggered, this, &KAccountsView::slotAccountUnmapOnline);
+  connect(pActions[eMenu::Action::UpdateAccount],       &QAction::triggered, this, &KAccountsView::slotAccountUpdateOnline);
+  connect(pActions[eMenu::Action::UpdateAllAccounts],   &QAction::triggered, this, &KAccountsView::slotAccountUpdateOnlineAll);
 }
 
 KAccountsView::~KAccountsView()
 {
 }
 
-void KAccountsView::setDefaultFocus()
+void KAccountsView::executeCustomAction(eView::Action action)
 {
-  Q_D(KAccountsView);
-  QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
+  switch(action) {
+    case eView::Action::Refresh:
+      refresh();
+      break;
+
+    case eView::Action::SetDefaultFocus:
+      {
+        Q_D(KAccountsView);
+        QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
+      }
+      break;
+
+    default:
+      break;
+  }
 }
 
 void KAccountsView::refresh()
@@ -74,9 +94,9 @@ void KAccountsView::refresh()
   d->m_needsRefresh = false;
   // TODO: check why the invalidate is needed here
   d->m_proxyModel->invalidate();
-  d->m_proxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts());
-  d->m_proxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
-  if (KMyMoneyGlobalSettings::showCategoriesInAccountsView()) {
+  d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
+  d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+  if (KMyMoneySettings::showCategoriesInAccountsView()) {
     d->m_proxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense});
   } else {
     d->m_proxyModel->removeAccountType(eMyMoney::Account::Type::Income);
@@ -86,7 +106,7 @@ void KAccountsView::refresh()
   // reinitialize the default state of the hidden categories label
   d->m_haveUnusedCategories = false;
   d->ui->m_hiddenCategories->hide();  // hides label
-  d->m_proxyModel->setHideUnusedIncomeExpenseAccounts(KMyMoneyGlobalSettings::hideUnusedCategory());
+  d->m_proxyModel->setHideUnusedIncomeExpenseAccounts(KMyMoneySettings::hideUnusedCategory());
 }
 
 void KAccountsView::showEvent(QShowEvent * event)
@@ -95,7 +115,7 @@ void KAccountsView::showEvent(QShowEvent * event)
   if (!d->m_proxyModel)
     d->init();
 
-  emit aboutToShow(View::Accounts);
+  emit customActionRequested(View::Accounts, eView::Action::AboutToShow);
 
   if (d->m_needsRefresh)
     refresh();
@@ -107,6 +127,9 @@ void KAccountsView::showEvent(QShowEvent * event)
 void KAccountsView::updateActions(const MyMoneyObject& obj)
 {
   Q_D(KAccountsView);
+
+  const auto file = MyMoneyFile::instance();
+
   if (typeid(obj) != typeid(MyMoneyAccount) &&
       (obj.id().isEmpty() && d->m_currentAccount.id().isEmpty())) // do not disable actions that were already disabled)
     return;
@@ -117,15 +140,16 @@ void KAccountsView::updateActions(const MyMoneyObject& obj)
         eMenu::Action::NewAccount, eMenu::Action::EditAccount, eMenu::Action::DeleteAccount,
         eMenu::Action::CloseAccount, eMenu::Action::ReopenAccount,
         eMenu::Action::ChartAccountBalance,
-        eMenu::Action::UnmapOnlineAccount, eMenu::Action::MapOnlineAccount, eMenu::Action::UpdateAccount
+        eMenu::Action::UnmapOnlineAccount, eMenu::Action::MapOnlineAccount,
+        eMenu::Action::UpdateAccount
   };
 
   for (const auto& a : actionsToBeDisabled)
     pActions[a]->setEnabled(false);
 
   pActions[eMenu::Action::NewAccount]->setEnabled(true);
+  pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(KMyMoneyUtils::canUpdateAllAccounts());
 
-  const auto file = MyMoneyFile::instance();
   if (acc.id().isEmpty()) {
     d->m_currentAccount = MyMoneyAccount();
     return;
@@ -172,7 +196,7 @@ void KAccountsView::updateActions(const MyMoneyObject& obj)
         }
 
       } else {
-        pActions[eMenu::Action::MapOnlineAccount]->setEnabled(d->m_onlinePlugins && !d->m_onlinePlugins->isEmpty());
+        pActions[eMenu::Action::MapOnlineAccount]->setEnabled(!acc.isClosed() && d->m_onlinePlugins && !d->m_onlinePlugins->isEmpty());
       }
 
       break;
@@ -199,12 +223,6 @@ void KAccountsView::updateActions(const MyMoneyObject& obj)
 
 }
 
-void KAccountsView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins)
-{
-  Q_D(KAccountsView);
-  d->m_onlinePlugins = &plugins;
-}
-
 /**
   * The view is notified that an unused income expense account has been hidden.
   */
@@ -227,10 +245,45 @@ void KAccountsView::slotShowAccountMenu(const MyMoneyAccount& acc)
   pMenus[eMenu::Menu::Account]->exec(QCursor::pos());
 }
 
+void KAccountsView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
+{
+  switch(intent) {
+    case eView::Intent::UpdateActions:
+      updateActions(obj);
+      break;
+
+    case eView::Intent::OpenContextMenu:
+      slotShowAccountMenu(static_cast<const MyMoneyAccount&>(obj));
+      break;
+
+    default:
+      break;
+  }
+}
+
+void KAccountsView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
+{
+  Q_D(KAccountsView);
+  switch (intent) {
+    case eView::Intent::UpdateNetWorth:
+      if (variant.count() == 1)
+        slotNetWorthChanged(variant.first().value<MyMoneyMoney>());
+      break;
+
+    case eView::Intent::SetOnlinePlugins:
+      if (variant.count() == 1)
+        d->m_onlinePlugins = static_cast<QMap<QString, KMyMoneyPlugin::OnlinePlugin*>*>(variant.first().value<void*>());
+      break;
+
+    default:
+      break;
+  }
+}
+
 void KAccountsView::slotNewAccount()
 {
   MyMoneyAccount account;
-  account.setOpeningDate(KMyMoneyGlobalSettings::firstFiscalDate());
+  account.setOpeningDate(KMyMoneySettings::firstFiscalDate());
   NewAccountWizard::Wizard::newAccount(account);
 }
 
@@ -247,7 +300,7 @@ void KAccountsView::slotEditAccount()
       d->editAccount();
       break;
   }
-  emit objectSelected(d->m_currentAccount);
+  emit selectByObject(d->m_currentAccount, eView::Intent::None);
 }
 
 void KAccountsView::slotDeleteAccount()
@@ -284,10 +337,10 @@ void KAccountsView::slotDeleteAccount()
   try {
     file->removeAccount(d->m_currentAccount);
     d->m_currentAccount.clearId();
-    emit objectSelected(MyMoneyAccount());
+    emit selectByObject(MyMoneyAccount(), eView::Intent::None);
     ft.commit();
   } catch (const MyMoneyException &e) {
-    KMessageBox::error(this, i18n("Unable to delete account '%1'. Cause: %2", selectedAccountName, e.what()));
+    KMessageBox::error(this, i18n("Unable to delete account '%1'. Cause: %2", selectedAccountName, QString::fromLatin1(e.what())));
   }
 }
 
@@ -298,9 +351,9 @@ void KAccountsView::slotCloseAccount()
   try {
     d->m_currentAccount.setClosed(true);
     MyMoneyFile::instance()->modifyAccount(d->m_currentAccount);
-    emit objectSelected(d->m_currentAccount);
+    emit selectByObject(d->m_currentAccount, eView::Intent::None);
     ft.commit();
-    if (KMyMoneyGlobalSettings::hideClosedAccounts())
+    if (KMyMoneySettings::hideClosedAccounts())
       KMessageBox::information(this, i18n("<qt>You have closed this account. It remains in the system because you have transactions which still refer to it, but it is not shown in the views. You can make it visible again by going to the View menu and selecting <b>Show all accounts</b> or by deselecting the <b>Do not show closed accounts</b> setting.</qt>"), i18n("Information"), "CloseAccountInfo");
   } catch (const MyMoneyException &) {
   }
@@ -318,7 +371,7 @@ void KAccountsView::slotReopenAccount()
       file->modifyAccount(acc);
       acc = file->account(acc.parentAccountId());
     }
-    emit objectSelected(d->m_currentAccount);
+    emit selectByObject(d->m_currentAccount, eView::Intent::None);
     ft.commit();
   } catch (const MyMoneyException &) {
   }
@@ -328,9 +381,7 @@ void KAccountsView::slotChartAccountBalance()
 {
   Q_D(KAccountsView);
   if (!d->m_currentAccount.id().isEmpty()) {
-    QPointer<KBalanceChartDlg> dlg = new KBalanceChartDlg(d->m_currentAccount, this);
-    dlg->exec();
-    delete dlg;
+    emit customActionRequested(View::Accounts, eView::Action::ShowBalanceChart);
   }
 }
 
@@ -343,4 +394,143 @@ void KAccountsView::slotNewCategory()
 void KAccountsView::slotNewPayee(const QString& nameBase, QString& id)
 {
   KMyMoneyUtils::newPayee(nameBase, id);
+}
+
+void KAccountsView::slotAccountUnmapOnline()
+{
+  Q_D(KAccountsView);
+  // no account selected
+  if (d->m_currentAccount.id().isEmpty())
+    return;
+
+  // not a mapped account
+  if (!d->m_currentAccount.hasOnlineMapping())
+    return;
+
+  if (KMessageBox::warningYesNo(this, QString("<qt>%1</qt>").arg(i18n("Do you really want to remove the mapping of account <b>%1</b> to an online account? Depending on the details of the online banking method used, this action cannot be reverted.", d->m_currentAccount.name())), i18n("Remove mapping to online account")) == KMessageBox::Yes) {
+    MyMoneyFileTransaction ft;
+    try {
+      d->m_currentAccount.setOnlineBankingSettings(MyMoneyKeyValueContainer());
+      // delete the kvp that is used in MyMoneyStatementReader too
+      // we should really get rid of it, but since I don't know what it
+      // is good for, I'll keep it around. (ipwizard)
+      d->m_currentAccount.deletePair("StatementKey");
+      MyMoneyFile::instance()->modifyAccount(d->m_currentAccount);
+      ft.commit();
+      // The mapping could disable the online task system
+      onlineJobAdministration::instance()->updateOnlineTaskProperties();
+    } catch (const MyMoneyException &e) {
+      KMessageBox::error(this, i18n("Unable to unmap account from online account: %1", QString::fromLatin1(e.what())));
+    }
+  }
+  updateActions(d->m_currentAccount);
+}
+
+void KAccountsView::slotAccountMapOnline()
+{
+  Q_D(KAccountsView);
+  // no account selected
+  if (d->m_currentAccount.id().isEmpty())
+    return;
+
+  // already an account mapped
+  if (d->m_currentAccount.hasOnlineMapping())
+    return;
+
+  // check if user tries to map a brokerageAccount
+  if (d->m_currentAccount.name().contains(i18n(" (Brokerage)"))) {
+    if (KMessageBox::warningContinueCancel(this, i18n("You try to map a brokerage account to an online account. This is usually not advisable. In general, the investment account should be mapped to the online account. Please cancel if you intended to map the investment account, continue otherwise"), i18n("Mapping brokerage account")) == KMessageBox::Cancel) {
+      return;
+    }
+  }
+  if (!d->m_onlinePlugins)
+    return;
+
+  // if we have more than one provider let the user select the current provider
+  QString provider;
+  QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
+  switch (d->m_onlinePlugins->count()) {
+    case 0:
+      break;
+    case 1:
+      provider = d->m_onlinePlugins->begin().key();
+      break;
+    default: {
+        QMenu popup(this);
+        popup.setTitle(i18n("Select online banking plugin"));
+
+        // Populate the pick list with all the provider
+        for (it_p = d->m_onlinePlugins->constBegin(); it_p != d->m_onlinePlugins->constEnd(); ++it_p) {
+          popup.addAction(it_p.key())->setData(it_p.key());
+        }
+
+        QAction *item = popup.actions()[0];
+        if (item) {
+          popup.setActiveAction(item);
+        }
+
+        // cancelled
+        if ((item = popup.exec(QCursor::pos(), item)) == 0) {
+          return;
+        }
+
+        provider = item->data().toString();
+      }
+      break;
+  }
+
+  if (provider.isEmpty())
+    return;
+
+  // find the provider
+  it_p = d->m_onlinePlugins->constFind(provider.toLower());
+  if (it_p != d->m_onlinePlugins->constEnd()) {
+    // plugin found, call it
+    MyMoneyKeyValueContainer settings;
+    if ((*it_p)->mapAccount(d->m_currentAccount, settings)) {
+      settings["provider"] = provider.toLower();
+      MyMoneyAccount acc(d->m_currentAccount);
+      acc.setOnlineBankingSettings(settings);
+      MyMoneyFileTransaction ft;
+      try {
+        MyMoneyFile::instance()->modifyAccount(acc);
+        ft.commit();
+        // The mapping could enable the online task system
+        onlineJobAdministration::instance()->updateOnlineTaskProperties();
+      } catch (const MyMoneyException &e) {
+        KMessageBox::error(this, i18n("Unable to map account to online account: %1", QString::fromLatin1(e.what())));
+      }
+    }
+  }
+  updateActions(d->m_currentAccount);
+}
+
+void KAccountsView::slotAccountUpdateOnlineAll()
+{
+  Q_D(KAccountsView);
+
+  QList<MyMoneyAccount> accList;
+  MyMoneyFile::instance()->accountList(accList);
+
+  QList<MyMoneyAccount> mappedAccList;
+  Q_FOREACH(auto account, accList) {
+    if (account.hasOnlineMapping())
+      mappedAccList += account;
+  }
+
+  d->accountsUpdateOnline(mappedAccList);
+}
+
+void KAccountsView::slotAccountUpdateOnline()
+{
+  Q_D(KAccountsView);
+  // no account selected
+  if (d->m_currentAccount.id().isEmpty())
+    return;
+
+  // no online account mapped
+  if (!d->m_currentAccount.hasOnlineMapping())
+    return;
+
+  d->accountsUpdateOnline(QList<MyMoneyAccount> { d->m_currentAccount } );
 }

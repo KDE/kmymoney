@@ -1,26 +1,22 @@
-/***************************************************************************
-                          kequitypriceupdatedlg.cpp  -  description
-                             -------------------
-    begin                : Mon Sep 1 2003
-    copyright            : (C) 2000-2003 by Michael Edwardes
-    email                : mte@users.sourceforge.net
-                           Javier Campos Morales <javi_c@users.sourceforge.net>
-                           Felix Rodriguez <frodriguez@users.sourceforge.net>
-                           John C <thetacoturtle@users.sourceforge.net>
-                           Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           Kevin Tambascio <ktambascio@users.sourceforge.net>
-                           Ace Jones <acejones@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2004-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2004       Kevin Tambascio <ktambascio@users.sourceforge.net>
+ * Copyright 2004-2006  Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "kequitypriceupdatedlg.h"
 
@@ -74,7 +70,9 @@ class KEquityPriceUpdateDlgPrivate
 public:
   explicit KEquityPriceUpdateDlgPrivate(KEquityPriceUpdateDlg *qq) :
     q_ptr(qq),
-    ui(new Ui::KEquityPriceUpdateDlg)
+    ui(new Ui::KEquityPriceUpdateDlg),
+    m_fUpdateAll(false),
+    m_updatingPricePolicy(eDialogs::UpdatePrice::All)
   {
   }
 
@@ -369,19 +367,19 @@ MyMoneyPrice KEquityPriceUpdateDlg::price(const QString& id) const
   if (item) {
     MyMoneyMoney rate(item->text(PRICE_COL));
     if (!rate.isZero()) {
-      QString id = item->text(KMMID_COL).toUtf8();
+      QString kmm_id = item->text(KMMID_COL).toUtf8();
 
       // if the ID has a space, then this is TWO ID's, so it's a currency quote
-      if (id.contains(" ")) {
-        QStringList ids = id.split(' ', QString::SkipEmptyParts);
+      if (kmm_id.contains(" ")) {
+        QStringList ids = kmm_id.split(' ', QString::SkipEmptyParts);
         QString fromid = ids[0].toUtf8();
         QString toid = ids[1].toUtf8();
         price = MyMoneyPrice(fromid, toid, QDate().fromString(item->text(DATE_COL), Qt::ISODate), rate, item->text(SOURCE_COL));
       } else
         // otherwise, it's a security quote
       {
-        MyMoneySecurity security = MyMoneyFile::instance()->security(id);
-        price = MyMoneyPrice(id, security.tradingCurrency(), QDate().fromString(item->text(DATE_COL), Qt::ISODate), rate, item->text(SOURCE_COL));
+        MyMoneySecurity security = MyMoneyFile::instance()->security(kmm_id);
+        price = MyMoneyPrice(kmm_id, security.tradingCurrency(), QDate().fromString(item->text(DATE_COL), Qt::ISODate), rate, item->text(SOURCE_COL));
       }
     }
   }
@@ -502,7 +500,7 @@ void KEquityPriceUpdateDlg::slotDateChanged()
   d->ui->m_toDate->blockSignals(true);
   if (d->ui->m_toDate->date() > QDate::currentDate())
     d->ui->m_toDate->setDate(QDate::currentDate());
-  if (d->ui->m_toDate->date() < d->ui->m_fromDate->date())
+  if (d->ui->m_fromDate->date() > d->ui->m_toDate->date())
     d->ui->m_fromDate->setDate(d->ui->m_toDate->date());
   d->ui->m_fromDate->blockSignals(false);
   d->ui->m_toDate->blockSignals(false);
@@ -520,10 +518,16 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _kmmID, const QString
   // Give the user some options
   int result;
   if (_kmmID.contains(" ")) {
-    result = KMessageBox::warningContinueCancel(this, i18n("Failed to retrieve an exchange rate for %1 from %2. It will be skipped this time.", _webID, item->text(SOURCE_COL)), i18n("Price Update Failed"));
+    if (item)
+      result = KMessageBox::warningContinueCancel(this, i18n("Failed to retrieve an exchange rate for %1 from %2. It will be skipped this time.", _webID, item->text(SOURCE_COL)), i18n("Price Update Failed"));
+    else
+      return;
+  } else if (!item) {
+    return;
   } else {
-    result = KMessageBox::questionYesNoCancel(this, QString("<qt>%1</qt>").arg(i18n("Failed to retrieve a quote for %1 from %2.  Press <b>No</b> to remove the online price source from this security permanently, <b>Yes</b> to continue updating this security during future price updates or <b>Cancel</b> to stop the current update operation.", _webID, item->text(SOURCE_COL))), i18n("Price Update Failed"), KStandardGuiItem::yes(), KStandardGuiItem::no());
+    result = KMessageBox::questionYesNoCancel(this, QString::fromLatin1("<qt>%1</qt>").arg(i18n("Failed to retrieve a quote for %1 from %2.  Press <b>No</b> to remove the online price source from this security permanently, <b>Yes</b> to continue updating this security during future price updates or <b>Cancel</b> to stop the current update operation.", _webID, item->text(SOURCE_COL))), i18n("Price Update Failed"), KStandardGuiItem::yes(), KStandardGuiItem::no());
   }
+
 
   if (result == KMessageBox::No) {
     // Disable price updates for this security
@@ -541,7 +545,7 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _kmmID, const QString
       MyMoneyFile::instance()->modifySecurity(security);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::error(this, QString("<qt>") + i18n("Cannot update security <b>%1</b>: %2", _webID, e.what()) + QString("</qt>"), i18n("Price Update Failed"));
+      KMessageBox::error(this, QString("<qt>") + i18n("Cannot update security <b>%1</b>: %2", _webID, QString::fromLatin1(e.what())) + QString("</qt>"), i18n("Price Update Failed"));
     }
   }
 
@@ -631,7 +635,7 @@ void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _kmmID, const QS
               break;
             case eDialogs::UpdatePrice::Ask:
             {
-              int result = KMessageBox::questionYesNoCancel(this,
+              auto result = KMessageBox::questionYesNoCancel(this,
                                                             i18n("For <b>%1</b> on <b>%2</b> price <b>%3</b> already exists.<br>"
                                                                  "Do you want to replace it with <b>%4</b>?",
                                                                  storedPrice.from(), storedPrice.date().toString(Qt::ISODate),
@@ -639,14 +643,14 @@ void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _kmmID, const QS
                                                                  QString().setNum((*it).m_amount.toDouble(), 'g', 10)),
                                                             i18n("Price Already Exists"));
               switch(result) {
-                case KStandardGuiItem::Yes:
+                case KMessageBox::ButtonCode::Yes:
                   ++it;
                   break;
-                case KStandardGuiItem::No:
+                case KMessageBox::ButtonCode::No:
                   it = st.m_listPrices.erase(it);
                   break;
                 default:
-                case KStandardGuiItem::Cancel:
+                case KMessageBox::ButtonCode::Cancel:
                   finishUpdate();
                   return;
                   break;

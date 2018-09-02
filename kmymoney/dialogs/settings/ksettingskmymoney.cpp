@@ -1,12 +1,11 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2016 Christian Dávid <christian-david@web.de>
- * (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2014-2016  Christian Dávid <christian-david@web.de>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -25,15 +24,12 @@
 
 #include "ksettingsgeneral.h"
 #include "ksettingsregister.h"
-#include "ksettingsgpg.h"
 #include "ksettingscolors.h"
 #include "ksettingsfonts.h"
 #include "ksettingsicons.h"
 #include "ksettingsschedules.h"
 #include "ksettingsonlinequotes.h"
 #include "ksettingshome.h"
-#include "ksettingsforecast.h"
-#include "ksettingsreports.h"
 #include "ksettingsplugins.h"
 
 #include "icons.h"
@@ -48,23 +44,17 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
   const auto registerPage = new KSettingsRegister();
   const auto homePage = new KSettingsHome();
   const auto schedulesPage = new KSettingsSchedules();
-  const auto encryptionPage = new KSettingsGpg();
   const auto colorsPage = new KSettingsColors();
   const auto fontsPage = new KSettingsFonts();
   const auto iconsPage = new KSettingsIcons();
   const auto onlineQuotesPage = new KSettingsOnlineQuotes();
-  const auto forecastPage = new KSettingsForecast();
-  const auto reportsPage = new KSettingsReports();
   const auto pluginsPage = new KSettingsPlugins();
 
   addPage(generalPage, i18nc("General settings", "General"), Icons::get(Icon::SystemRun).name());
   addPage(homePage, i18n("Home"), Icons::get(Icon::ViewHome).name());
   addPage(registerPage, i18nc("Ledger view settings", "Ledger"), Icons::get(Icon::ViewFinancialList).name());
-  addPage(schedulesPage, i18nc("use \u2028 as line break", "Scheduled\u2028transactions"), Icons::get(Icon::ViewSchedules).name());
+  addPage(schedulesPage, QString(i18n("Scheduled\ntransactions")).replace(QLatin1Char('\n'), QString::fromUtf8("\xe2\x80\xa8")), Icons::get(Icon::ViewSchedules).name());
   addPage(onlineQuotesPage, i18n("Online Quotes"), Icons::get(Icon::PreferencesNetwork).name());
-  addPage(reportsPage, i18nc("Report settings", "Reports"), Icons::get(Icon::ViewReports).name());
-  addPage(forecastPage, i18nc("Forecast settings", "Forecast"), Icons::get(Icon::ViewForecast).name());
-  addPage(encryptionPage, i18n("Encryption"), Icons::get(Icon::Kgpg).name());
   addPage(colorsPage, i18n("Colors"), Icons::get(Icon::PreferencesColor).name());
   addPage(fontsPage, i18n("Fonts"), Icons::get(Icon::PreferencesFont).name());
   addPage(iconsPage, i18n("Icons"), Icons::get(Icon::PreferencesIcon).name());

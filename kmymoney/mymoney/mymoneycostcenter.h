@@ -1,18 +1,19 @@
-/***************************************************************************
-                          mymoneycostcenter.h
-                             -------------------
-    copyright            : (C) 2015 by Thomas Baumgart <tbaumgart@kde.org>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2012-2016  Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MYMONEYCOSTCENTER_H
 #define MYMONEYCOSTCENTER_H
@@ -42,16 +43,7 @@ class KMM_MYMONEY_EXPORT MyMoneyCostCenter : public MyMoneyObject
 
 public:
   MyMoneyCostCenter();
-  explicit MyMoneyCostCenter(const QString& name);
-
-  /**
-    * This is the constructor for a tag that is described by a
-    * QDomElement (e.g. from a file).
-    *
-    * @param el const reference to the QDomElement from which to
-    *           create the object
-    */
-  explicit MyMoneyCostCenter(const QDomElement& el);
+  explicit MyMoneyCostCenter(const QString &id);
 
   MyMoneyCostCenter(const QString& id,
                     const MyMoneyCostCenter& other);
@@ -77,8 +69,6 @@ public:
   bool operator == (const MyMoneyCostCenter &) const;
   bool operator <(const MyMoneyCostCenter& right) const;
 
-  void writeXML(QDomDocument& document, QDomElement& parent) const override;
-
   /**
     * This method checks if a reference to the given object exists. It returns,
     * a @p true if the object is referencing the one requested by the
@@ -91,16 +81,7 @@ public:
   bool hasReferenceTo(const QString& id) const override;
 
   static MyMoneyCostCenter null;
-
-private:
-  enum class Attribute { Name };
-
-  static QString getAttrName(const Attribute attr);
-
-  friend uint qHash(const Attribute, uint seed);
 };
-
-inline uint qHash(const MyMoneyCostCenter::Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); } // krazy:exclude=inline
 
 inline void swap(MyMoneyCostCenter& first, MyMoneyCostCenter& second) // krazy:exclude=inline
 {

@@ -19,7 +19,7 @@
 #ifndef SEPACREDITTRANSFERSETTINGSMOCKUP_H
 #define SEPACREDITTRANSFERSETTINGSMOCKUP_H
 
-#include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
+#include "onlinetasks/sepa/sepaonlinetransfer.h"
 
 class sepaCreditTransferSettingsMockup : public sepaOnlineTransfer::settings
 {

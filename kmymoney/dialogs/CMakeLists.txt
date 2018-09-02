@@ -8,7 +8,6 @@ set(libdialogs_a_SOURCES
   investtransactioneditor.cpp
   kaccountselectdlg.cpp
   kbackupdlg.cpp
-  kbalancechartdlg.cpp
   kbalancewarning.cpp
   kcategoryreassigndlg.cpp
   kchooseimportexportdlg.cpp
@@ -22,8 +21,6 @@ set(libdialogs_a_SOURCES
   kequitypriceupdatedlg.cpp
   kequitypriceupdateconfdlg.cpp
   kfindtransactiondlg.cpp
-  kgeneratesqldlg.cpp
-  kgpgkeyselectiondlg.cpp
   kloadtemplatedlg.cpp
   kmergetransactionsdlg.cpp
   kmymoneyfileinfodlg.cpp
@@ -32,13 +29,10 @@ set(libdialogs_a_SOURCES
   knewaccountdlg.cpp
   hierarchyfilterproxymodel.cpp
   knewbankdlg.cpp
-  knewbudgetdlg.cpp
   knewequityentrydlg.cpp
   editpersonaldatadlg.cpp
   kpayeereassigndlg.cpp
   ktagreassigndlg.cpp
-  kreportconfigurationfilterdlg.cpp
-  kselectdatabasedlg.cpp
   kselecttransactionsdlg.cpp
   ksplittransactiondlg.cpp
   ktemplateexportdlg.cpp
@@ -46,7 +40,7 @@ set(libdialogs_a_SOURCES
   transactioneditor.cpp
   stdtransactioneditor.cpp
   transactionmatcher.cpp
-  konlinetransferform.cpp
+  ksaveasquestion.cpp
 )
 
 set(dialogs_HEADERS
@@ -63,18 +57,17 @@ set(dialogs_UI
   keditscheduledlg.ui
   kenterscheduledlg.ui
   kequitypriceupdatedlg.ui kequitypriceupdateconfdlg.ui
-  kfindtransactiondlg.ui kgeneratesqldlg.ui
-  kgpgkeyselectiondlg.ui
+  kfindtransactiondlg.ui
   kloadtemplatedlg.ui
   kmymoneyfileinfodlg.ui kmymoneypricedlg.ui
-  knewaccountdlg.ui knewbankdlg.ui knewbudgetdlg.ui
+  knewaccountdlg.ui knewbankdlg.ui
   knewequityentrydlg.ui editpersonaldatadlg.ui kpayeereassigndlg.ui
   ktagreassigndlg.ui
-  kselectdatabasedlg.ui kselecttransactionsdlg.ui
+  kselecttransactionsdlg.ui
   ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlg.ui
   ktemplateexportdlg.ui
   kupdatestockpricedlg.ui
-  konlinetransferform.ui
+  ksaveasquestion.ui
 )
 
 ki18n_wrap_ui(libdialogs_a_SOURCES ${dialogs_UI} )
@@ -89,12 +82,13 @@ target_link_libraries(dialogs
     KF5::TextWidgets
     KF5::Completion
     Qt5::Widgets
-    Qt5::Sql
     Alkimia::alkimia
     kmm_mymoney
     onlinetask_interfaces
     kmm_widgets
     kmm_utils_platformtools
+  PRIVATE
+    KF5::KIOGui
 )
 
 target_link_libraries(dialogs LINK_PUBLIC

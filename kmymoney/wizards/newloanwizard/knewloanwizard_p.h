@@ -356,7 +356,7 @@ public:
         // calculate the number of payments out of the other information
         val = calc.numPayments();
         if (val == 0)
-          throw MYMONEYEXCEPTION("incorrect fincancial calculation");
+          throw MYMONEYEXCEPTION_CSTRING("incorrect fincancial calculation");
 
         // if the number of payments has a fractional part, then we
         // round it to the smallest integer and calculate the balloon payment
@@ -389,7 +389,7 @@ public:
             || (q->field("lendButton").toBool() && val > 0 && qAbs(val) > qAbs(calc.payment()))) {
           // case a)
           qDebug("Future Value is %f", val);
-          throw MYMONEYEXCEPTION("incorrect fincancial calculation");
+          throw MYMONEYEXCEPTION_CSTRING("incorrect fincancial calculation");
 
         } else if ((q->field("borrowButton").toBool() && val < 0 && qAbs(val) <= qAbs(calc.payment()))
                    || (q->field("lendButton").toBool() && val > 0 && qAbs(val) <= qAbs(calc.payment()))) {
@@ -402,7 +402,7 @@ public:
 
         if (q->field("finalPaymentEditValid").toBool()) {
           if ((q->field("finalPaymentEdit").value<MyMoneyMoney>().abs() - refVal.abs()).abs().toDouble() > 1) {
-            throw MYMONEYEXCEPTION("incorrect fincancial calculation");
+            throw MYMONEYEXCEPTION_CSTRING("incorrect fincancial calculation");
           }
           result = i18n("KMyMoney has successfully verified your loan information.");
         }
@@ -449,7 +449,7 @@ public:
       sInterest.setAccountId(q->field("interestAccountEdit").toStringList().first());
       sInterest.setValue(MyMoneyMoney::autoCalc);
       sInterest.setShares(sInterest.value());
-      sInterest.setAction(MyMoneySplit::ActionInterest);
+      sInterest.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Interest));
     }
 
     // values
@@ -470,8 +470,8 @@ public:
     t.setCommodity(acc.currencyId());
 
     // actions
-    sPayment.setAction(MyMoneySplit::ActionAmortization);
-    sAmortization.setAction(MyMoneySplit::ActionAmortization);
+    sPayment.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization));
+    sAmortization.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization));
 
     // payee
     QString payeeId = q->field("payeeEdit").toString();

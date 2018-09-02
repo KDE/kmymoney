@@ -40,8 +40,6 @@ public:
 
   QAction          *m_action;
 
-  void injectExternalSettings(KMyMoneySettings* p) override;
-
 private:
   MyMoneyQifReader *m_qifReader;
 
@@ -56,7 +54,7 @@ private Q_SLOTS:
     */
   void slotQifImport();
 
-  bool slotGetStatements(QList<MyMoneyStatement> &statements);
+  bool slotGetStatements(const QList<MyMoneyStatement> &statements);
 
 protected:
   void createActions();

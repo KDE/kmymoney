@@ -1,11 +1,10 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ * Copyright 2014       Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -26,8 +25,6 @@
 #include <QHash>
 #include <QMetaType>
 #include <QDomElement>
-
-#include "storage/databasestoreableobject.h"
 
 class payeeIdentifier;
 class payeeIdentifierLoader;
@@ -50,7 +47,7 @@ class payeeIdentifierLoader;
     return _pidid; \
   } \
   /** @brief Returns the payeeIdentifier Id */ \
-  virtual QString payeeIdentifierId() const { \
+  QString payeeIdentifierId() const final override { \
     return className::staticPayeeIdentifierIid(); \
   }
 
@@ -81,7 +78,7 @@ class payeeIdentifierLoader;
  * To identify the type of an payeeIdentifier you must use the macro @ref PAYEEIDENTIFIER_IID()
  * in the public section of your subclass.
  */
-class KMM_PAYEEIDENTIFIER_EXPORT payeeIdentifierData : public databaseStoreableObject
+class KMM_PAYEEIDENTIFIER_EXPORT payeeIdentifierData
 {
 public:
   virtual ~payeeIdentifierData() {}
@@ -114,7 +111,6 @@ public:
    * @param element Note: there could be more data in that elemenet than you created in writeXML()
    */
   virtual payeeIdentifierData* createFromXml(const QDomElement &element) const = 0;
-  virtual payeeIdentifierData* createFromSqlDatabase(QSqlDatabase db, const QString& identId) const = 0;
 
   /**
    * @see MyMoneyObject::writeXML()

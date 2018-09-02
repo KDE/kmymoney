@@ -23,7 +23,6 @@
 // QT Includes
 
 #include <QList>
-#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -59,7 +58,6 @@ namespace NewUserWizard
     friend class AccountPage;
     friend class CategoriesPage;
     friend class PreferencePage;
-    friend class FilePage;
 
     Q_OBJECT
     Q_DISABLE_COPY(Wizard)
@@ -71,11 +69,6 @@ namespace NewUserWizard
     * Returns the personal information of the user (e.g. name, address, etc.)
     */
     MyMoneyPayee user() const;
-
-    /**
-    * Returns the URL that the user has chosen to store the file
-    */
-    QUrl url() const;
 
     /**
     * Returns the information about an institution if entered by

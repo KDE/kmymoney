@@ -1,11 +1,10 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2016 Christian Dávid <christian-david@web.de>
+ * Copyright 2013-2016  Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -22,9 +21,8 @@
 
 #include "mymoney/payeeidentifier/payeeidentifier.h"
 #include "mymoney/payeeidentifier/payeeidentifiertyped.h"
-#include "mymoney/payeeidentifier/payeeidentifierloader.h"
 
-#include "payeeidentifier/ibanandbic/ibanbic.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
 
 QTEST_GUILESS_MAIN(payeeidentifier_test);
 
@@ -56,7 +54,7 @@ void payeeidentifier_test::createAndDeleteEmptyIdent()
 void payeeidentifier_test::copyIdent()
 {
   try {
-    const payeeIdentifier ident = payeeIdentifierLoader::instance()->createPayeeIdentifier(payeeIdentifiers::ibanBic::staticPayeeIdentifierIid());
+    const payeeIdentifier ident = payeeIdentifier(new payeeIdentifiers::ibanBic());
     payeeIdentifier ident2 = ident;
     QVERIFY(!ident2.isNull());
     QCOMPARE(ident2.iid(), payeeIdentifiers::ibanBic::staticPayeeIdentifierIid());
@@ -68,7 +66,7 @@ void payeeidentifier_test::copyIdent()
 void payeeidentifier_test::moveIdent()
 {
   try {
-    payeeIdentifier ident = payeeIdentifierLoader::instance()->createPayeeIdentifier(payeeIdentifiers::ibanBic::staticPayeeIdentifierIid());
+    payeeIdentifier ident = payeeIdentifier(new payeeIdentifiers::ibanBic());
     payeeIdentifier ident2 = ident;
   } catch (...) {
     QFAIL("Unexpected exception");
@@ -78,7 +76,7 @@ void payeeidentifier_test::moveIdent()
 void payeeidentifier_test::createTypedIdent()
 {
   try {
-    payeeIdentifier ident = payeeIdentifierLoader::instance()->createPayeeIdentifier(payeeIdentifiers::ibanBic::staticPayeeIdentifierIid());
+    payeeIdentifier ident = payeeIdentifier(new payeeIdentifiers::ibanBic());
     payeeIdentifierTyped<payeeIdentifiers::ibanBic> typedIdent{ident};
   } catch (...) {
     QFAIL("Unexpected exception");

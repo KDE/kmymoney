@@ -70,7 +70,7 @@ public:
    *
    * @return id of the next page or -1 if there is no next page
    */
-  int nextId() const;
+  int nextId() const final override;
 
 protected:
   bool createTransaction(MyMoneyTransaction& t, const int sign, const MyMoneyMoney& amount, const QString& category, const QDate& date);
@@ -82,7 +82,7 @@ protected Q_SLOTS:
   void help();
   void slotCreateInterestCategory(const QString& txt, QString& id);
   void slotCreateChargesCategory(const QString& txt, QString& id);
-  void accept();
+  void accept() final override;
   void slotUpdateBalances();
 
 Q_SIGNALS:

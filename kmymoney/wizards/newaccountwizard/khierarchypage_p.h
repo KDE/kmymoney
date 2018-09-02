@@ -45,7 +45,8 @@ namespace NewAccountWizard
   public:
     explicit HierarchyPagePrivate(QObject* parent) :
       WizardPagePrivate<Wizard>(parent),
-      ui(new Ui::KHierarchyPage)
+      ui(new Ui::KHierarchyPage),
+      m_filterProxyModel(nullptr)
     {
     }
 

@@ -1,25 +1,20 @@
-/***************************************************************************
-                          mymoneyprice  -  description
-                             -------------------
-    begin                : Sun Nov 21 2004
-    copyright            : (C) 2000-2004 by Michael Edwardes
-    email                : mte@users.sourceforge.net
-                           Javier Campos Morales <javi_c@users.sourceforge.net>
-                           Felix Rodriguez <frodriguez@users.sourceforge.net>
-                           John C <thetacoturtle@users.sourceforge.net>
-                           Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           Kevin Tambascio <ktambascio@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2005-2011  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 /**
   * @author Thomas Baumgart
@@ -65,7 +60,7 @@ MyMoneyPrice::MyMoneyPrice(const QString& from,
   d_ptr(new MyMoneyPricePrivate)
 {
   if ("PRICE" != node.tagName())
-    throw MYMONEYEXCEPTION("Node was not PRICE");
+    throw MYMONEYEXCEPTION_CSTRING("Node was not PRICE");
 
   Q_D(MyMoneyPrice);
   d->m_fromSecurity = from;
@@ -122,8 +117,7 @@ MyMoneyMoney MyMoneyPrice::rate(const QString& id) const
   if (id == d->m_fromSecurity)
     return d->m_invRate;
 
-  QString msg = QString("Unknown security id %1 for price info %2/%3.").arg(id).arg(d->m_fromSecurity).arg(d->m_toSecurity);
-  throw MYMONEYEXCEPTION(msg);
+  throw MYMONEYEXCEPTION(QString::fromLatin1("Unknown security id %1 for price info %2/%3.").arg(id, d->m_fromSecurity, d->m_toSecurity));
 }
 
 QDate MyMoneyPrice::date() const

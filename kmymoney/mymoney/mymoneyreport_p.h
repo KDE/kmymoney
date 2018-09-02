@@ -1,20 +1,22 @@
-/***************************************************************************
-                          mymoneyreport.cpp
-                             -------------------
-    begin                : Sun July 4 2004
-    copyright            : (C) 2004-2005 by Ace Jones
-    email                : acejones@users.sourceforge.net
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2004-2006  Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2006       Darren Gould <darren_gould@gmx.de>
+ * Copyright 2007-2010  Alvaro Soliverez <asoliverez@gmail.com>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MYMONEYREPORT_P_H
 #define MYMONEYREPORT_P_H
@@ -38,130 +40,86 @@
 #include "mymoneyobject_p.h"
 #include "mymoneyenums.h"
 
-using namespace eMyMoney;
-
-namespace Report
-{
-  enum class Element { Payee,
-                       Tag,
-                       Account,
-                       Text,
-                       Type,
-                       State,
-                       Number,
-                       Amount,
-                       Dates,
-                       Category,
-                       AccountGroup
-                     };
-  uint qHash(const Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-
-  enum class Attribute { ID, Group, Type, Name, Comment, ConvertCurrency, Favorite,
-                         SkipZero, DateLock, DataLock, MovingAverageDays,
-                         IncludesActuals, IncludesForecast, IncludesPrice,
-                         IncludesAveragePrice, IncludesMovingAverage,
-                         IncludesSchedules, IncludesTransfers, IncludesUnused,
-                         MixedTime, Investments, Budget,
-                         ShowRowTotals, ShowColumnTotals, Detail,
-                         ColumnsAreDays, ChartType,
-                         ChartCHGridLines, ChartSVGridLines,
-                         ChartDataLabels, ChartByDefault,
-                         LogYAxis, ChartLineWidth, ColumnType, RowType,
-                         DataRangeStart, DataRangeEnd,
-                         DataMajorTick, DataMinorTick,
-                         YLabelsPrecision, QueryColumns,
-                         Tax, Loans, HideTransactions, InvestmentSum,
-                         SettlementPeriod, ShowSTLTCapitalGains, TermsSeparator,
-                         Pattern, CaseSensitive, RegEx, InvertText, State,
-                         From, To,
-                         // insert new entries above this line
-                         LastAttribute
-                       };
-  uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-}
-
 class MyMoneyReportPrivate : public MyMoneyObjectPrivate
 {
 public:
-
-  static QString getElName(const Report::Element el)
+  MyMoneyReportPrivate() :
+    m_name(QStringLiteral("Unconfigured Pivot Table Report")),
+    m_detailLevel(eMyMoney::Report::DetailLevel::None),
+    m_investmentSum(eMyMoney::Report::InvestmentSum::Sold),
+    m_hideTransactions(false),
+    m_convertCurrency(true),
+    m_favorite(false),
+    m_tax(false),
+    m_investments(false),
+    m_loans(false),
+    m_reportType(rowTypeToReportType(eMyMoney::Report::RowType::ExpenseIncome)),
+    m_rowType(eMyMoney::Report::RowType::ExpenseIncome),
+    m_columnType(eMyMoney::Report::ColumnType::Months),
+    m_columnsAreDays(false),
+    m_queryColumns(eMyMoney::Report::QueryColumn::None),
+    m_dateLock(eMyMoney::TransactionFilter::Date::UserDefined),
+    m_accountGroupFilter(false),
+    m_chartType(eMyMoney::Report::ChartType::Line),
+    m_chartDataLabels(true),
+    m_chartCHGridLines(true),
+    m_chartSVGridLines(true),
+    m_chartByDefault(false),
+    m_chartLineWidth(MyMoneyReport::m_lineWidth),
+    m_logYaxis(false),
+    m_dataRangeStart('0'),
+    m_dataRangeEnd('0'),
+    m_dataMajorTick('0'),
+    m_dataMinorTick('0'),
+    m_yLabelsPrecision(2),
+    m_dataLock(eMyMoney::Report::DataLock::Automatic),
+    m_includeSchedules(false),
+    m_includeTransfers(false),
+    m_includeBudgetActuals(false),
+    m_includeUnusedAccounts(false),
+    m_showRowTotals(false),
+    m_showColumnTotals(true),
+    m_includeForecast(false),
+    m_includeMovingAverage(false),
+    m_movingAverageDays(0),
+    m_includePrice(false),
+    m_includeAveragePrice(false),
+    m_mixedTime(false),
+    m_currentDateColumn(0),
+    m_settlementPeriod(3),
+    m_showSTLTCapitalGains(false),
+    m_tseparator(QDate::currentDate().addYears(-1)),
+    m_skipZero(false)
   {
-    static const QHash<Report::Element, QString> elNames {
-      {Report::Element::Payee,        QStringLiteral("PAYEE")},
-      {Report::Element::Tag,          QStringLiteral("TAG")},
-      {Report::Element::Account,      QStringLiteral("ACCOUNT")},
-      {Report::Element::Text,         QStringLiteral("TEXT")},
-      {Report::Element::Type,         QStringLiteral("TYPE")},
-      {Report::Element::State,        QStringLiteral("STATE")},
-      {Report::Element::Number,       QStringLiteral("NUMBER")},
-      {Report::Element::Amount,       QStringLiteral("AMOUNT")},
-      {Report::Element::Dates,        QStringLiteral("DATES")},
-      {Report::Element::Category,     QStringLiteral("CATEGORY")},
-      {Report::Element::AccountGroup, QStringLiteral("ACCOUNTGROUP")}
-    };
-    return elNames[el];
   }
 
-  static QString getAttrName(const Report::Attribute attr)
+  static eMyMoney::Report::ReportType rowTypeToReportType(eMyMoney::Report::RowType rowType)
   {
-    static const QHash<Report::Attribute, QString> attrNames {
-      {Report::Attribute::ID,                     QStringLiteral("id")},
-      {Report::Attribute::Group,                  QStringLiteral("group")},
-      {Report::Attribute::Type,                   QStringLiteral("type")},
-      {Report::Attribute::Name,                   QStringLiteral("name")},
-      {Report::Attribute::Comment,                QStringLiteral("comment")},
-      {Report::Attribute::ConvertCurrency,        QStringLiteral("convertcurrency")},
-      {Report::Attribute::Favorite,               QStringLiteral("favorite")},
-      {Report::Attribute::SkipZero,               QStringLiteral("skipZero")},
-      {Report::Attribute::DateLock,               QStringLiteral("datelock")},
-      {Report::Attribute::DataLock,               QStringLiteral("datalock")},
-      {Report::Attribute::MovingAverageDays,      QStringLiteral("movingaveragedays")},
-      {Report::Attribute::IncludesActuals,        QStringLiteral("includesactuals")},
-      {Report::Attribute::IncludesForecast,       QStringLiteral("includesforecast")},
-      {Report::Attribute::IncludesPrice,          QStringLiteral("includesprice")},
-      {Report::Attribute::IncludesAveragePrice,   QStringLiteral("includesaverageprice")},
-      {Report::Attribute::IncludesMovingAverage,  QStringLiteral("includesmovingaverage")},
-      {Report::Attribute::IncludesSchedules,      QStringLiteral("includeschedules")},
-      {Report::Attribute::IncludesTransfers,      QStringLiteral("includestransfers")},
-      {Report::Attribute::IncludesUnused,         QStringLiteral("includeunused")},
-      {Report::Attribute::MixedTime,              QStringLiteral("mixedtime")},
-      {Report::Attribute::Investments,            QStringLiteral("investments")},
-      {Report::Attribute::Budget,                 QStringLiteral("budget")},
-      {Report::Attribute::ShowRowTotals,          QStringLiteral("showrowtotals")},
-      {Report::Attribute::ShowColumnTotals,       QStringLiteral("showcolumntotals")},
-      {Report::Attribute::Detail,                 QStringLiteral("detail")},
-      {Report::Attribute::ColumnsAreDays,         QStringLiteral("columnsaredays")},
-      {Report::Attribute::ChartType,              QStringLiteral("charttype")},
-      {Report::Attribute::ChartCHGridLines,       QStringLiteral("chartchgridlines")},
-      {Report::Attribute::ChartSVGridLines,       QStringLiteral("chartsvgridlines")},
-      {Report::Attribute::ChartDataLabels,        QStringLiteral("chartdatalabels")},
-      {Report::Attribute::ChartByDefault,         QStringLiteral("chartbydefault")},
-      {Report::Attribute::LogYAxis,               QStringLiteral("logYaxis")},
-      {Report::Attribute::ChartLineWidth,         QStringLiteral("chartlinewidth")},
-      {Report::Attribute::ColumnType,             QStringLiteral("columntype")},
-      {Report::Attribute::RowType,                QStringLiteral("rowtype")},
-      {Report::Attribute::DataRangeStart,         QStringLiteral("dataRangeStart")},
-      {Report::Attribute::DataRangeEnd,           QStringLiteral("dataRangeEnd")},
-      {Report::Attribute::DataMajorTick,          QStringLiteral("dataMajorTick")},
-      {Report::Attribute::DataMinorTick,          QStringLiteral("dataMinorTick")},
-      {Report::Attribute::YLabelsPrecision,       QStringLiteral("yLabelsPrecision")},
-      {Report::Attribute::QueryColumns,           QStringLiteral("querycolumns")},
-      {Report::Attribute::Tax,                    QStringLiteral("tax")},
-      {Report::Attribute::Loans,                  QStringLiteral("loans")},
-      {Report::Attribute::HideTransactions,       QStringLiteral("hidetransactions")},
-      {Report::Attribute::InvestmentSum,          QStringLiteral("investmentsum")},
-      {Report::Attribute::SettlementPeriod,       QStringLiteral("settlementperiod")},
-      {Report::Attribute::ShowSTLTCapitalGains,   QStringLiteral("showSTLTCapitalGains")},
-      {Report::Attribute::TermsSeparator,         QStringLiteral("tseparator")},
-      {Report::Attribute::Pattern,                QStringLiteral("pattern")},
-      {Report::Attribute::CaseSensitive,          QStringLiteral("casesensitive")},
-      {Report::Attribute::RegEx,                  QStringLiteral("regex")},
-      {Report::Attribute::InvertText,             QStringLiteral("inverttext")},
-      {Report::Attribute::State,                  QStringLiteral("state")},
-      {Report::Attribute::From,                   QStringLiteral("from")},
-      {Report::Attribute::To,                     QStringLiteral("to")}
+    static const QHash<eMyMoney::Report::RowType, eMyMoney::Report::ReportType> reportTypes {
+      {eMyMoney::Report::RowType::NoRows,               eMyMoney::Report::ReportType::NoReport},
+      {eMyMoney::Report::RowType::AssetLiability,       eMyMoney::Report::ReportType::PivotTable},
+      {eMyMoney::Report::RowType::ExpenseIncome,        eMyMoney::Report::ReportType::PivotTable},
+      {eMyMoney::Report::RowType::Category,             eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::TopCategory,          eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::Account,              eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::Tag,                  eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::Payee,                eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::Month,                eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::Week,                 eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::TopAccount,           eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::AccountByTopAccount,  eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::EquityType,           eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::AccountType,          eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::Institution,          eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::Budget,               eMyMoney::Report::ReportType::PivotTable},
+      {eMyMoney::Report::RowType::BudgetActual,         eMyMoney::Report::ReportType::PivotTable},
+      {eMyMoney::Report::RowType::Schedule,             eMyMoney::Report::ReportType::InfoTable},
+      {eMyMoney::Report::RowType::AccountInfo,          eMyMoney::Report::ReportType::InfoTable},
+      {eMyMoney::Report::RowType::AccountLoanInfo,      eMyMoney::Report::ReportType::InfoTable},
+      {eMyMoney::Report::RowType::AccountReconcile,     eMyMoney::Report::ReportType::QueryTable},
+      {eMyMoney::Report::RowType::CashFlow,             eMyMoney::Report::ReportType::QueryTable},
     };
-    return attrNames[attr];
+    return reportTypes.value(rowType, eMyMoney::Report::ReportType::Invalid);
   }
 
   /**
@@ -181,11 +139,11 @@ public:
   /**
     * How much detail to show in the accounts
     */
-  MyMoneyReport::EDetailLevel m_detailLevel;
+  eMyMoney::Report::DetailLevel m_detailLevel;
   /**
     * Whether to sum: all, sold, bought or owned value
     */
-  MyMoneyReport::EInvestmentSum m_investmentSum;
+  eMyMoney::Report::InvestmentSum m_investmentSum;
   /**
     * Whether to show transactions or just totals.
     */
@@ -217,18 +175,18 @@ public:
   /**
     * What sort of algorithm should be used to run the report
     */
-  MyMoneyReport::EReportType m_reportType;
+  eMyMoney::Report::ReportType m_reportType;
   /**
     * What sort of values should show up on the ROWS of this report
     */
-  MyMoneyReport::ERowType m_rowType;
+  eMyMoney::Report::RowType m_rowType;
   /**
     * What sort of values should show up on the COLUMNS of this report,
     * in the case of a 'PivotTable' report.  Really this is used more as a
     * QUANTITY of months or days.  Whether it's months or days is determined
     * by m_columnsAreDays.
     */
-  MyMoneyReport::EColumnType m_columnType;
+  eMyMoney::Report::ColumnType m_columnType;
   /**
    * Whether the base unit of columns of this report is days.  Only applies to
    * 'PivotTable' reports.  If false, then columns are months or multiples thereof.
@@ -238,7 +196,7 @@ public:
      * What sort of values should show up on the COLUMNS of this report,
      * in the case of a 'QueryTable' report
      */
-  MyMoneyReport::EQueryColumns m_queryColumns;
+  eMyMoney::Report::QueryColumn m_queryColumns;
 
   /**
     * The plain-language description of what the date range should be locked
@@ -255,7 +213,7 @@ public:
     * is applied to the individual splits AFTER a transaction has been
     * matched using the underlying filter.
     */
-  QList<Account::Type> m_accountGroups;
+  QList<eMyMoney::Account::Type> m_accountGroups;
   /**
     * Whether an account group filter has been set (see m_accountGroups)
     */
@@ -263,7 +221,7 @@ public:
   /**
     * What format should be used to draw this report as a chart
     */
-  MyMoneyReport::EChartType m_chartType;
+  eMyMoney::Report::ChartType m_chartType;
   /**
     * Whether the value of individual data points should be drawn on the chart
     */
@@ -308,7 +266,7 @@ public:
   /**
     * Whether data range should be calculated automatically or is user defined
     */
-  MyMoneyReport::dataOptionE m_dataLock;
+  eMyMoney::Report::DataLock m_dataLock;
 
   /**
     * Whether to include scheduled transactions

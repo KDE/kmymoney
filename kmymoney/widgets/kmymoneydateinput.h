@@ -1,18 +1,21 @@
-/***************************************************************************
-                          kmymoneydateinput.h
-                             -------------------
-    copyright            : (C) 2000 by Michael Edwardes
-    email                : mte@users.sourceforge.net
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2000-2003  Michael Edwardes <mte@users.sourceforge.net>
+ * Copyright 2001       Felix Rodriguez <frodriguez@users.sourceforge.net>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef KMYMONEYDATEINPUT_H
 #define KMYMONEYDATEINPUT_H
@@ -50,16 +53,16 @@ namespace KMyMoney {
     /** if the date was cleared (a state which is not supported by QDateEdit)
       * make sure that a date can be entered again
       */
-    virtual void keyPressEvent(QKeyEvent* k);
+    void keyPressEvent(QKeyEvent* k) final override;
 
     /** reimplemented for internal reasons */
-    virtual bool event(QEvent* e);
+    bool event(QEvent* e) final override;
 
     /** reimplemented for internal reasons */
-    virtual bool focusNextPrevChild(bool next);
+    bool focusNextPrevChild(bool next) final override;
 
     /** reimplemented for internal reasons */
-    virtual void focusInEvent(QFocusEvent *event);
+    void focusInEvent(QFocusEvent *event) final override;
 
   };
 }; // namespace

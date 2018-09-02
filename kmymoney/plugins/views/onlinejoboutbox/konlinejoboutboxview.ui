@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>KOnlineJobOutboxView</class>
+ <widget class="QWidget" name="KOnlineJobOutboxView">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="4" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>208</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="0" rowspan="5">
+    <widget class="QTreeView" name="m_onlineJobView">
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::ExtendedSelection</enum>
+     </property>
+     <property name="rootIsDecorated">
+      <bool>false</bool>
+     </property>
+     <property name="itemsExpandable">
+      <bool>false</bool>
+     </property>
+     <property name="expandsOnDoubleClick">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QPushButton" name="m_buttonSend">
+     <property name="text">
+      <string>Send</string>
+     </property>
+     <property name="icon">
+      <iconset theme="mail-send">
+       <normaloff/>
+      </iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QPushButton" name="m_buttonRemove">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>Remove</string>
+     </property>
+     <property name="icon">
+      <iconset theme="edit-delete-shred">
+       <normaloff/>
+      </iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QPushButton" name="m_buttonEdit">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>Edit</string>
+     </property>
+     <property name="icon">
+      <iconset theme="document-edit">
+       <normaloff/>
+      </iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="m_buttonNewCreditTransfer">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>New credit transfer</string>
+     </property>
+     <property name="icon">
+      <iconset theme="document-new">
+       <normaloff/>
+      </iconset>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+ </customwidgets>
+ <tabstops>
+  <tabstop>m_onlineJobView</tabstop>
+  <tabstop>m_buttonSend</tabstop>
+  <tabstop>m_buttonNewCreditTransfer</tabstop>
+  <tabstop>m_buttonEdit</tabstop>
+  <tabstop>m_buttonRemove</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+ <slots>
+  <signal>sendQueue()</signal>
+ </slots>
+</ui>

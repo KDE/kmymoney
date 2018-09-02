@@ -28,10 +28,10 @@ class payeeIdentifierSelectionDelegate : public QStyledItemDelegate
 
 public:
   explicit payeeIdentifierSelectionDelegate(QObject* parent = 0);
-  virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
-  virtual void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
+  QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
+  void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const final override;
+  void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
+  QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
 };
 
 class payeeIdentifierTypeSelectionWidget : public QComboBox

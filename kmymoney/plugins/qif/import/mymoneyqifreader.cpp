@@ -53,7 +53,7 @@
 #include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneyexception.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 
 #include "mymoneystatement.h"
 
@@ -73,7 +73,10 @@ class MyMoneyQifReader::Private
 public:
   Private() :
       accountType(eMyMoney::Account::Type::Checkings),
-      mapCategories(true) {}
+      firstTransaction(true),
+      mapCategories(true),
+      transactionType(MyMoneyQifReader::QifEntryTypeE::EntryUnknown)
+  {}
 
   const QString accountTypeToQif(eMyMoney::Account::Type type) const;
 
@@ -243,7 +246,13 @@ eMyMoney::Split::State MyMoneyQifReader::Private::reconcileState(const QString& 
 
 
 MyMoneyQifReader::MyMoneyQifReader() :
-    d(new Private)
+    d(new Private),
+    m_file(nullptr),
+    m_extractedLine(0),
+    m_autoCreatePayee(true),
+    m_pos(0),
+    m_linenumber(0),
+    m_ft(nullptr)
 {
   m_skipAccount = false;
   m_transactionsProcessed =
@@ -428,8 +437,7 @@ bool MyMoneyQifReader::startImport()
     qDebug() << "Source:" << m_url.toDisplayString() << "Destination:" << m_filename;
     KIO::FileCopyJob *job = KIO::file_copy(m_url, QUrl::fromUserInput(m_filename), -1, KIO::Overwrite);
 //    KJobWidgets::setWindow(job, kmymoney);
-    job->exec();
-    if (job->error()) {
+    if (job->exec() && job->error()) {
       KMessageBox::detailedError(0, i18n("Error while loading file '%1'.", m_url.toDisplayString()),
                                  job->errorString(),
                                  i18n("File access error"));
@@ -501,22 +509,22 @@ void MyMoneyQifReader::processQifSpecial(const QString& _line)
     line = line.mid(5);
 
     // exportable accounts
-    if (line.toLower() == "ccard" || KMyMoneyGlobalSettings::qifCreditCard().toLower().contains(line.toLower())) {
+    if (line.toLower() == "ccard" || KMyMoneySettings::qifCreditCard().toLower().contains(line.toLower())) {
       d->accountType = eMyMoney::Account::Type::CreditCard;
       d->firstTransaction = true;
       d->transactionType = m_entryType = EntryTransaction;
 
-    } else if (line.toLower() == "bank" || KMyMoneyGlobalSettings::qifBank().toLower().contains(line.toLower())) {
+    } else if (line.toLower() == "bank" || KMyMoneySettings::qifBank().toLower().contains(line.toLower())) {
       d->accountType = eMyMoney::Account::Type::Checkings;
       d->firstTransaction = true;
       d->transactionType = m_entryType = EntryTransaction;
 
-    } else if (line.toLower() == "cash" || KMyMoneyGlobalSettings::qifCash().toLower().contains(line.toLower())) {
+    } else if (line.toLower() == "cash" || KMyMoneySettings::qifCash().toLower().contains(line.toLower())) {
       d->accountType = eMyMoney::Account::Type::Cash;
       d->firstTransaction = true;
       d->transactionType = m_entryType = EntryTransaction;
 
-    } else if (line.toLower() == "oth a" || KMyMoneyGlobalSettings::qifAsset().toLower().contains(line.toLower())) {
+    } else if (line.toLower() == "oth a" || KMyMoneySettings::qifAsset().toLower().contains(line.toLower())) {
       d->accountType = eMyMoney::Account::Type::Asset;
       d->firstTransaction = true;
       d->transactionType = m_entryType = EntryTransaction;
@@ -530,7 +538,7 @@ void MyMoneyQifReader::processQifSpecial(const QString& _line)
       d->accountType = eMyMoney::Account::Type::Investment;
       d->transactionType = m_entryType = EntryInvestmentTransaction;
 
-    } else if (line.toLower() == "invoice" || KMyMoneyGlobalSettings::qifInvoice().toLower().contains(line.toLower())) {
+    } else if (line.toLower() == "invoice" || KMyMoneySettings::qifInvoice().toLower().contains(line.toLower())) {
       m_entryType = EntrySkip;
 
     } else if (line.toLower() == "tax") {
@@ -640,7 +648,7 @@ void MyMoneyQifReader::processQifEntry()
         break;
     }
   } catch (const MyMoneyException &e) {
-    if (e.what() != "USERABORT") {
+    if (QString::fromLatin1(e.what()).contains("USERABORT")) {
       qDebug() << "Line " << m_linenumber << ": Unhandled error: " << e.what();
     } else {
       m_userAbort = true;
@@ -694,7 +702,7 @@ bool MyMoneyQifReader::extractSplits(QList<qSplit>& listqSplits) const
         if (!memoPresent) {  //                     If no memo, clear previous
           q.m_strMemo.clear();
         }
-        qSplit q;  //                               Start new split
+        q = qSplit();  //                               Start new split
         neededCount = 0;
         ret = true;
       }
@@ -903,7 +911,7 @@ MyMoneyAccount MyMoneyQifReader::findAccount(const MyMoneyAccount& acc, const My
       }
     }
   } catch (const MyMoneyException &e) {
-    KMessageBox::error(0, i18n("Unable to find account: %1", e.what()));
+    KMessageBox::error(0, i18n("Unable to find account: %1", QString::fromLatin1(e.what())));
   }
   return nullAccount;
 }
@@ -946,7 +954,8 @@ void MyMoneyQifReader::createOpeningBalance(eMyMoney::Account::Type accType)
     if (name.isEmpty()) {
       name = i18n("QIF imported, no account name supplied");
     }
-    d->isTransfer(name, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1));
+    auto b = d->isTransfer(name, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1));
+    Q_UNUSED(b)
     QStringList entry = m_qifEntry;   // keep a temp copy
     m_qifEntry.clear();               // and construct a temp entry to create/search the account
     m_qifEntry << QString("N%1").arg(name);
@@ -999,9 +1008,9 @@ void MyMoneyQifReader::createOpeningBalance(eMyMoney::Account::Type accType)
     // remember which account we created
     d->st.m_accountId = m_account.id();
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedError(0,
+    KMessageBox::detailedError(nullptr,
                                i18n("Error while creating opening balance transaction"),
-                               QString("%1(%2):%3").arg(e.file()).arg(e.line()).arg(e.what()),
+                               e.what(),
                                i18n("File access error"));
   }
 }
@@ -1046,7 +1055,7 @@ void MyMoneyQifReader::processTransactionEntry()
 
   if (d->firstTransaction) {
     // check if this is an opening balance transaction and process it out of the statement
-    if (!payee.isEmpty() && ((payee.toLower() == "opening balance") || KMyMoneyGlobalSettings::qifOpeningBalance().toLower().contains(payee.toLower()))) {
+    if (!payee.isEmpty() && ((payee.toLower() == "opening balance") || KMyMoneySettings::qifOpeningBalance().toLower().contains(payee.toLower()))) {
       createOpeningBalance(d->accountType);
       d->firstTransaction = false;
       return;
@@ -1092,7 +1101,7 @@ void MyMoneyQifReader::processTransactionEntry()
         break;
 
       case KMessageBox::Cancel:
-        throw MYMONEYEXCEPTION("USERABORT");
+        throw MYMONEYEXCEPTION_CSTRING("USERABORT");
         break;
     }
   }
@@ -1186,7 +1195,7 @@ void MyMoneyQifReader::processTransactionEntry()
 
     if (!accountId.isEmpty()) {
       try {
-        MyMoneyAccount account = file->account(accountId);
+        account = file->account(accountId);
         // FIXME: check that the type matches and ask if not
 
         if (account.accountType() == eMyMoney::Account::Type::Investment) {
@@ -1320,7 +1329,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
         break;
 
       case KMessageBox::Cancel:
-        throw MYMONEYEXCEPTION("USERABORT");
+        throw MYMONEYEXCEPTION_CSTRING("USERABORT");
         break;
     }
   }
@@ -1528,10 +1537,10 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
     }
 
     if (action == "intinc") {
-      MyMoneyMoney price = m_qifProfile.value('I', extractLine('I'));
+      MyMoneyMoney priceValue = m_qifProfile.value('I', extractLine('I'));
       tr.m_amount -= tr.m_fees;
-      if ((!quantity.isZero()) && (!price.isZero()))
-        tr.m_amount = -(quantity * price);
+      if ((!quantity.isZero()) && (!priceValue.isZero()))
+        tr.m_amount = -(quantity * priceValue);
     } else
       // For historic reasons (coming from the OFX importer) the statement
       // reader expects the dividend with a reverse sign. So we just do that.
@@ -1542,14 +1551,14 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
       tr.m_strMemo = (QString("%1 %2").arg(extractLine('Y')).arg(d->typeToAccountName(action))).trimmed();
   } else if (action == "xin" || action == "xout") {
     QString payee = extractLine('P');
-    if (!payee.isEmpty() && ((payee.toLower() == "opening balance") || KMyMoneyGlobalSettings::qifOpeningBalance().toLower().contains(payee.toLower()))) {
+    if (!payee.isEmpty() && ((payee.toLower() == "opening balance") || KMyMoneySettings::qifOpeningBalance().toLower().contains(payee.toLower()))) {
       createOpeningBalance(eMyMoney::Account::Type::Investment);
       return;
     }
 
     tr.m_eAction = (eMyMoney::Transaction::Action::None);
     MyMoneyStatement::Split s2;
-    QString tmp = extractLine('L');
+    tmp = extractLine('L');
     if (d->isTransfer(tmp, m_qifProfile.accountDelimiter().left(1), m_qifProfile.accountDelimiter().mid(1, 1))) {
       s2.m_accountId = transferAccount(tmp);
       s2.m_strCategoryName = tmp;
@@ -1591,7 +1600,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
 
 //    s1.setShares(splitfactor);
 //    s1.setValue(0);
-//   s1.setAction(MyMoneySplit::ActionSplitShares);
+//   s1.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares));
 
 //     return;
   } else {
@@ -1843,14 +1852,14 @@ const QString MyMoneyQifReader::findOrCreateIncomeAccount(const QString& searchn
 
   // If we did not find the account, now we must create one.
   if (result.isEmpty()) {
-    MyMoneyAccount acc;
-    acc.setName(searchname);
-    acc.setAccountType(eMyMoney::Account::Type::Income);
+    MyMoneyAccount newAccount;
+    newAccount.setName(searchname);
+    newAccount.setAccountType(eMyMoney::Account::Type::Income);
     MyMoneyAccount income = file->income();
     MyMoneyFileTransaction ft;
-    file->addAccount(acc, income);
+    file->addAccount(newAccount, income);
     ft.commit();
-    result = acc.id();
+    result = newAccount.id();
   }
 
   return result;
@@ -1879,14 +1888,14 @@ const QString MyMoneyQifReader::findOrCreateExpenseAccount(const QString& search
 
   // If we did not find the account, now we must create one.
   if (result.isEmpty()) {
-    MyMoneyAccount acc;
-    acc.setName(searchname);
-    acc.setAccountType(eMyMoney::Account::Type::Expense);
+    MyMoneyAccount newAccount;
+    newAccount.setName(searchname);
+    newAccount.setAccountType(eMyMoney::Account::Type::Expense);
     MyMoneyFileTransaction ft;
     MyMoneyAccount expense = file->expense();
-    file->addAccount(acc, expense);
+    file->addAccount(newAccount, expense);
     ft.commit();
-    result = acc.id();
+    result = newAccount.id();
   }
 
   return result;
@@ -1910,7 +1919,7 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
 
   tmp = extractLine('/');
   if (tmp.length() > 0)
-    account.setValue("lastStatementDate", m_qifProfile.date(tmp).toString("yyyy-MM-dd"));
+    account.setLastReconciliationDate(m_qifProfile.date(tmp));
 
   QifEntryTypeE transactionType = EntryTransaction;
   QString type = extractLine('T').toLower().remove(QRegExp("\\s+"));
@@ -1998,12 +2007,12 @@ const QString MyMoneyQifReader::processAccountEntry(bool resetAccountId)
   return acc.id();
 }
 
-void MyMoneyQifReader::setProgressCallback(void(*callback)(int, int, const QString&))
+void MyMoneyQifReader::setProgressCallback(void(*callback)(qint64, qint64, const QString&))
 {
   m_progressCallback = callback;
 }
 
-void MyMoneyQifReader::signalProgress(int current, int total, const QString& msg)
+void MyMoneyQifReader::signalProgress(qint64 current, qint64 total, const QString& msg)
 {
   if (m_progressCallback != 0)
     (*m_progressCallback)(current, total, msg);

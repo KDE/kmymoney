@@ -57,7 +57,7 @@
 #include "kconfirmmanualenterdlg.h"
 #include "kmymoneymvccombo.h"
 #include "kmymoneyutils.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "mymoneyexception.h"
 #include "kscheduletreeitem.h"
 #include "ktreewidgetfilterlinewidget.h"
@@ -86,11 +86,13 @@ public:
     KMyMoneyViewBasePrivate(),
     q_ptr(qq),
     ui(new Ui::KScheduledView),
+    m_kaccPopup(nullptr),
     m_openBills(true),
     m_openDeposits(true),
     m_openTransfers(true),
     m_openLoans(true),
     m_needLoad(true),
+    m_searchWidget(nullptr),
     m_balanceWarning(nullptr)
   {
   }
@@ -151,7 +153,7 @@ public:
   void refreshSchedule(bool full, const QString& schedId)
   {
     Q_Q(KScheduledView);
-    ui->m_scheduleTree->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
+    ui->m_scheduleTree->header()->setFont(KMyMoneySettings::listHeaderFontEx());
 
     ui->m_scheduleTree->clear();
 
@@ -269,7 +271,7 @@ public:
 
         }
         if (parent) {
-          if (!KMyMoneyGlobalSettings::hideFinishedSchedules() || !schedData.isFinished()) {
+          if (!KMyMoneySettings::hideFinishedSchedules() || !schedData.isFinished()) {
             item = addScheduleItem(parent, schedData);
             if (schedData.id() == schedId)
               openItem = item;
@@ -325,7 +327,7 @@ public:
     QByteArray columns;
     columns = grp.readEntry("KScheduleView_treeState", columns);
     ui->m_scheduleTree->header()->restoreState(columns);
-    ui->m_scheduleTree->header()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
+    ui->m_scheduleTree->header()->setFont(KMyMoneySettings::listHeaderFontEx());
   }
 
   void writeConfig()
@@ -579,7 +581,7 @@ public:
               q->connect(transactionEditor, SIGNAL(balanceWarning(QWidget*,MyMoneyAccount,QString)), m_balanceWarning.data(), SLOT(slotShowMessage(QWidget*,MyMoneyAccount,QString)));
               if (transactionEditor->enterTransactions(newId, false)) {
                 if (!newId.isEmpty()) {
-                  MyMoneyTransaction t = MyMoneyFile::instance()->transaction(newId);
+                  t = MyMoneyFile::instance()->transaction(newId);
                   schedule.setLastPayment(t.postDate());
                 }
                 // in case the next due date is invalid, the schedule is finished
@@ -622,7 +624,7 @@ public:
       pActions[eMenu::Action::EnterTransaction]->setEnabled(false);
       // qDebug("KMyMoneyApp::slotTransactionsCancel");
       delete editor;
-      emit q->objectSelected(schedule);
+      emit q->selectByObject(schedule, eView::Intent::None);
     }
   }
 
@@ -664,7 +666,6 @@ public:
   bool m_openDeposits;
   bool m_openTransfers;
   bool m_openLoans;
-  bool m_needsRefresh;
 
   /**
     * This member holds the load state of page

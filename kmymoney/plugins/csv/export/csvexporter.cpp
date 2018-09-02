@@ -1,23 +1,22 @@
-/***************************************************************************
-                            csvexporter.cpp
-                             -------------------
-    begin                : Wed Mar 20 2013
-    copyright            : (C) 2013 by Allan Anderson
-    email                : agander93@gmail.com
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2013-2014  Allan Anderson <agander93@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "csvexporter.h"
-#include "csvexportdlg.h"
-#include "csvwriter.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -35,7 +34,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyglobalsettings.h"
+#include "csvexportdlg.h"
+#include "csvwriter.h"
+#include "viewinterface.h"
 
 CSVExporter::CSVExporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, "csvexporter"/*must be the same as X-KDE-PluginInfo-Name*/)
@@ -53,16 +54,13 @@ CSVExporter::~CSVExporter()
   qDebug("Plugins: csvexporter unloaded");
 }
 
-void CSVExporter::injectExternalSettings(KMyMoneySettings* p)
-{
-  KMyMoneyGlobalSettings::injectExternalSettings(p);
-}
-
 void CSVExporter::createActions()
 {
-  m_action = actionCollection()->addAction("file_export_csv");
+  const auto &kpartgui = QStringLiteral("file_export_csv");
+  m_action = actionCollection()->addAction(kpartgui);
   m_action->setText(i18n("&CSV..."));
   connect(m_action, &QAction::triggered, this, &CSVExporter::slotCsvExport);
+  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action(qPrintable(kpartgui)), &QAction::setEnabled);
 }
 
 void CSVExporter::slotCsvExport()

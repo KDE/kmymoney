@@ -1,24 +1,20 @@
-/***************************************************************************
-                          mymoneystoragedump.cpp  -  description
-                             -------------------
-    begin                : Sun May 5 2002
-    copyright            : (C) 2000-2002 by Michael Edwardes
-    email                : mte@users.sourceforge.net
-                           Javier Campos Morales <javi_c@users.sourceforge.net>
-                           Felix Rodriguez <frodriguez@users.sourceforge.net>
-                           John C <thetacoturtle@users.sourceforge.net>
-                           Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           Kevin Tambascio <ktambascio@users.sourceforge.net>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2002-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2004       Ace Jones <acejones@users.sourceforge.net>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "mymoneystoragedump.h"
 
@@ -40,8 +36,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "imymoneyserialize.h"
-#include "imymoneystorage.h"
+#include "mymoneystoragemgr.h"
+#include "mymoneystoragemgr_p.h"
 #include "mymoneyexception.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
@@ -65,15 +61,15 @@ MyMoneyStorageDump::~MyMoneyStorageDump()
 {
 }
 
-void MyMoneyStorageDump::readStream(QDataStream& /* s */, IMyMoneySerialize* /* storage */)
+void MyMoneyStorageDump::readStream(QDataStream& /* s */, MyMoneyStorageMgr* /* storage */)
 {
   qDebug("Reading not supported by MyMoneyStorageDump!!");
 }
 
-void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storage)
+void MyMoneyStorageDump::writeStream(QDataStream& _s, MyMoneyStorageMgr* _storage)
 {
   QTextStream s(_s.device());
-  IMyMoneyStorage* storage = dynamic_cast<IMyMoneyStorage *>(_storage);
+  MyMoneyStorageMgr* storage = _storage;
   MyMoneyPayee user = storage->user();
 
   s << "File-Info\n";
@@ -94,13 +90,13 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
   s << "-------------\n";
   QList<MyMoneyAccount> list_a;
   storage->accountList(list_a);
-  s << "accounts = " << list_a.count() << ", next id = " << _storage->accountId() << "\n";
+  s << "accounts = " << list_a.count() << ", next id = " << _storage->d_func()->m_nextAccountID << "\n";
   MyMoneyTransactionFilter filter;
   filter.setReportAllSplits(false);
   QList<MyMoneyTransaction> list_t;
   storage->transactionList(list_t, filter);
   QList<MyMoneyTransaction>::ConstIterator it_t;
-  s << "transactions = " << list_t.count() << ", next id = " << _storage->transactionId() << "\n";
+  s << "transactions = " << list_t.count() << ", next id = " << _storage->d_func()->m_nextTransactionID << "\n";
   QMap<int, int> xferCount;
   foreach (const auto transaction, list_t) {
     auto accountCount = 0;
@@ -118,11 +114,11 @@ void MyMoneyStorageDump::writeStream(QDataStream& _s, IMyMoneySerialize* _storag
     s << "               " << *it_cnt << " of them references " << it_cnt.key() << " accounts\n";
   }
 
-  s << "payees = " << _storage->payeeList().count() << ", next id = " << _storage->payeeId() << "\n";
-  s << "tags = " << _storage->tagList().count() << ", next id = " << _storage->tagId() << "\n";
-  s << "institutions = " << _storage->institutionList().count() << ", next id = " << _storage->institutionId() << "\n";
+  s << "payees = " << _storage->payeeList().count() << ", next id = " << _storage->d_func()->m_nextPayeeID << "\n";
+  s << "tags = " << _storage->tagList().count() << ", next id = " << _storage->d_func()->m_nextTagID << "\n";
+  s << "institutions = " << _storage->institutionList().count() << ", next id = " << _storage->d_func()->m_nextInstitutionID << "\n";
   s << "schedules = " << _storage->scheduleList(QString(), eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any,
-                                                QDate(), QDate(), false).count() << ", next id = " << _storage->scheduleId() << "\n";
+                                                QDate(), QDate(), false).count() << ", next id = " << _storage->d_func()->m_nextScheduleID << "\n";
   s << "\n";
 
   s << "Institutions\n";
@@ -399,7 +395,7 @@ void MyMoneyStorageDump::dumpKVP(const QString& headline, QTextStream& s, const 
   }
 }
 
-void MyMoneyStorageDump::dumpTransaction(QTextStream& s, IMyMoneyStorage* storage, const MyMoneyTransaction& it_t)
+void MyMoneyStorageDump::dumpTransaction(QTextStream& s, MyMoneyStorageMgr* storage, const MyMoneyTransaction& it_t)
 {
   s << "  ID = " << it_t.id() << "\n";
   s << "  Postdate  = " << it_t.postDate().toString(Qt::ISODate) << "\n";

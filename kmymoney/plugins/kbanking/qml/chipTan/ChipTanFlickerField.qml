@@ -26,7 +26,7 @@ import "chipTan.js" as Logic
 Rectangle {
     id: chipTanFlickerField
 
-    /** You should set the width only, hight is set accordingly */
+    /** You should set the width only, height is set accordingly */
     width: 260
 
     /** @brief Duration of each takt in ms */
@@ -111,7 +111,7 @@ Rectangle {
         onTriggered: Logic.timerTriggered(flickerFields)
         onRunningChanged: Logic.timerStarted(chipTanFlickerField.transferData, flickerFields )
     }
-    
+
     onTransferDataChanged: {
       // Restart timer to load new data to transfer into the script
       if ( timer.running == true )  {
@@ -148,7 +148,7 @@ Rectangle {
                 target: flickerFieldsRepeater.itemAt(4)
                 bitState: stoppedState
             }
-            
+
             PropertyChanges {
                 target: timer
                 running: false

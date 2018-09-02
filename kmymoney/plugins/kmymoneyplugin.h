@@ -38,11 +38,17 @@ class KToggleAction;
 
 #include "mymoneykeyvaluecontainer.h"
 
+class MyMoneyStorageMgr;
 class MyMoneyAccount;
 class KMyMoneySettings;
+class IMyMoneyOperationsFormat;
+
+namespace KMyMoneyPlugin { class AppInterface; }
 namespace KMyMoneyPlugin { class ImportInterface; }
 namespace KMyMoneyPlugin { class StatementInterface; }
 namespace KMyMoneyPlugin { class ViewInterface; }
+
+namespace eKMyMoney { enum class StorageType; }
 
 /**
  * @defgroup KMyMoneyPlugin
@@ -127,8 +133,6 @@ public Q_SLOTS:
    */
   virtual void configurationChanged() ;
 
-  virtual void injectExternalSettings(KMyMoneySettings* p) = 0;
-
 protected:
   /** See KMyMoneyApp::toggleAction() for a description */
   KToggleAction* toggleAction(const QString& name) const;
@@ -139,6 +143,8 @@ protected:
   // named Xxx:
   //
   // XxxInterface* xxxInterface();
+
+  AppInterface* appInterface() const;
   ViewInterface* viewInterface() const;
   StatementInterface* statementInterface() const;
   ImportInterface* importInterface() const;
@@ -273,10 +279,95 @@ public:
 
 };
 
+/**
+  * This class describes the interface between the KMyMoney
+  * application and it's STORAGE plugins. All storage plugins
+  * must provide this interface.
+  *
+  */
+class KMM_PLUGIN_EXPORT StoragePlugin
+{
+public:
+  StoragePlugin() = default;
+  virtual ~StoragePlugin() = default;
+
+  /**
+   * @brief Loads file into storage
+   * @param storage Storage manager for the file
+   * @param url URL of the file
+   * @return true if successfully opened
+   */
+  virtual MyMoneyStorageMgr *open(const QUrl &url) = 0;
+
+  /**
+   * @brief Saves storage into file
+   * @param url URL of the file
+   * @return true if successfully saved
+   */
+  virtual bool save(const QUrl &url) = 0;
+
+  /**
+   * @brief Saves storage into file
+   * @param url URL of the file
+   * @return true if successfully saved
+   */
+  virtual bool saveAs() = 0;
+
+  /**
+   * @brief Storage identifier
+   * @return Storage identifier
+   */
+  virtual eKMyMoney::StorageType storageType() const = 0;
+
+  virtual QString fileExtension() const = 0;
+};
+
+/**
+  * This class describes the interface between the KMyMoney
+  * application and its data plugins. All data plugins
+  * must provide this interface.
+  *
+  */
+class KMM_PLUGIN_EXPORT DataPlugin
+{
+public:
+  DataPlugin() = default;
+  virtual ~DataPlugin() = default;
+
+  /**
+   * @brief Gets data from data service
+   * @param arg Item name to retrieve data for
+   * @param type Data type to retrieve for item
+   * @return a data like int or QString
+   */
+  virtual QVariant requestData(const QString &arg, uint type) = 0;
+};
+
+class OnlinePluginExtended;
+
+/**
+ * @brief The Container struct to hold all plugin interfaces
+ */
+struct Container {
+  QMap<QString, Plugin*>               standard;  // this should contain all loaded plugins because every plugin should inherit Plugin class
+  QMap<QString, OnlinePlugin*>         online;    // casted standard plugin, if such interface is available
+  QMap<QString, OnlinePluginExtended*> extended;  // casted standard plugin, if such interface is available
+  QMap<QString, ImporterPlugin*>       importer;  // casted standard plugin, if such interface is available
+  QMap<QString, StoragePlugin*>        storage;   // casted standard plugin, if such interface is available
+  QMap<QString, DataPlugin*>           data;      // casted standard plugin, if such interface is available
+};
+
 } // end of namespace
+
+/**
+ * @brief Structure of plugins objects by their interfaces
+ */
+KMM_PLUGIN_EXPORT extern KMyMoneyPlugin::Container pPlugins;
 
 Q_DECLARE_INTERFACE(KMyMoneyPlugin::OnlinePlugin, "org.kmymoney.plugin.onlineplugin")
 Q_DECLARE_INTERFACE(KMyMoneyPlugin::ImporterPlugin, "org.kmymoney.plugin.importerplugin")
+Q_DECLARE_INTERFACE(KMyMoneyPlugin::StoragePlugin, "org.kmymoney.plugin.storageplugin")
+Q_DECLARE_INTERFACE(KMyMoneyPlugin::DataPlugin, "org.kmymoney.plugin.dataplugin")
 
 
 /** @} */

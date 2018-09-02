@@ -56,6 +56,27 @@ void KHomeView::wheelEvent(QWheelEvent* event)
   }
 }
 
+void KHomeView::executeCustomAction(eView::Action action)
+{
+  Q_D(KHomeView);
+  switch(action) {
+    case eView::Action::Refresh:
+      refresh();
+      break;
+
+    case eView::Action::Print:
+      slotPrintView();
+      break;
+
+    case eView::Action::CleanupBeforeFileClose:
+      d->m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
+      break;
+
+    default:
+      break;
+  }
+}
+
 void KHomeView::refresh()
 {
   Q_D(KHomeView);
@@ -73,7 +94,7 @@ void KHomeView::showEvent(QShowEvent* event)
   if (d->m_needLoad)
     d->init();
 
-  emit aboutToShow(View::Home);
+  emit customActionRequested(View::Home, eView::Action::AboutToShow);
 
   if (d->m_needsRefresh)
     refresh();
@@ -106,15 +127,14 @@ void KHomeView::slotOpenUrl(const QUrl &url)
   Q_D(KHomeView);
   QString protocol = url.scheme();
   QString view = url.fileName();
-  if (view.isEmpty())
-    return;
+
   QUrlQuery query(url);
   QString id = query.queryItemValue("id");
   QString mode = query.queryItemValue("mode");
 
   const auto file = MyMoneyFile::instance();
 
-  if (protocol == QLatin1String("http")) {
+  if (protocol == QLatin1String("https")) {
     QDesktopServices::openUrl(url);
   } else if (protocol == QLatin1String("mailto")) {
     QDesktopServices::openUrl(url);
@@ -122,17 +142,17 @@ void KHomeView::slotOpenUrl(const QUrl &url)
     KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
     Q_CHECK_PTR(mw);
     if (view == VIEW_LEDGER) {
-      emit ledgerSelected(id, QString());
+      emit selectByVariant(QVariantList {QVariant(id), QVariant(QString())}, eView::Intent::ShowTransaction);
 
     } else if (view == VIEW_SCHEDULE) {
       if (mode == QLatin1String("enter")) {
-        emit objectSelected(file->schedule(id));
+        emit selectByObject(file->schedule(id), eView::Intent::None);
         QTimer::singleShot(0, pActions[eMenu::Action::EnterSchedule], SLOT(trigger()));
       } else if (mode == QLatin1String("edit")) {
-        emit objectSelected(file->schedule(id));
+        emit selectByObject(file->schedule(id), eView::Intent::None);
         QTimer::singleShot(0, pActions[eMenu::Action::EditSchedule], SLOT(trigger()));
       } else if (mode == QLatin1String("skip")) {
-        emit objectSelected(file->schedule(id));
+        emit selectByObject(file->schedule(id), eView::Intent::None);
         QTimer::singleShot(0, pActions[eMenu::Action::SkipSchedule], SLOT(trigger()));
       } else if (mode == QLatin1String("full")) {
         d->m_showAllSchedules = true;
@@ -144,8 +164,8 @@ void KHomeView::slotOpenUrl(const QUrl &url)
       }
 
     } else if (view == VIEW_REPORTS) {
-      emit openObjectRequested(file->report(id));
-//      emit reportSelected(id);
+      emit selectByObject(file->report(id), eView::Intent::OpenObject);
+//      emit openObjectRequested(file->report(id));
 
     } else if (view == VIEW_WELCOME) {
       if (mode == QLatin1String("whatsnew"))

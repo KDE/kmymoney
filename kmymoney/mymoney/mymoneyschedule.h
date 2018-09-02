@@ -1,19 +1,21 @@
-/***************************************************************************
-                          mymoneyschedule.h
-                             -------------------
-    copyright            : (C) 2000-2002 by Michael Edwardes <mte@users.sourceforge.net>
-                           (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2000-2004  Michael Edwardes <mte@users.sourceforge.net>
+ * Copyright 2002-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2005       Ace Jones <acejones@users.sourceforge.net>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MYMONEYSCHEDULE_H
 #define MYMONEYSCHEDULE_H
@@ -68,6 +70,7 @@ public:
     * Standard constructor
     */
   MyMoneySchedule();
+  explicit MyMoneySchedule(const QString &id);
 
   /**
     * Constructor for initialising the object.
@@ -86,8 +89,6 @@ public:
                            const QDate& endDate,
                            bool fixed,
                            bool autoEnter);
-
-  explicit MyMoneySchedule(const QDomElement& node);
 
   MyMoneySchedule(const QString& id,
                   const MyMoneySchedule& other);
@@ -209,6 +210,18 @@ public:
     * @return MyMoneyTransaction The transaction data for the instance.
     */
   MyMoneyTransaction transaction() const;
+
+  /**
+    * Simple method that sets the transaction for the schedule.
+    * The transaction must have a valid postDate set, otherwise
+    * it will not be accepted. This test is bypassed, if @a noDateCheck
+    * is set to true
+    *
+    * @param transaction The new transaction.
+    * @param noDateCheck if @a true, the date check is bypassed
+    * @return none
+    */
+  void setTransaction(const MyMoneyTransaction& transaction, bool noDateCheck);
 
   /**
     * Simple method that returns the schedules last payment. If the
@@ -495,8 +508,6 @@ public:
   void recordPayment(const QDate&);
   QList<QDate> recordedPayments() const;
 
-  void writeXML(QDomDocument& document, QDomElement& parent) const;
-
   /**
     * This method checks if a reference to the given object exists. It returns,
     * a @p true if the object is referencing the one requested by the
@@ -506,7 +517,7 @@ public:
     * @retval true This object references object with id @p id.
     * @retval false This object does not reference the object with id @p id.
     */
-  virtual bool hasReferenceTo(const QString& id) const;
+  virtual bool hasReferenceTo(const QString& id) const final override;
 
   /**
    * This method replaces all occurrences of id @a oldId with
@@ -659,18 +670,6 @@ private:
     * @param date reference to QDate object to be checked and adjusted
     */
   void fixDate(QDate& date) const;
-
-  /**
-    * Simple method that sets the transaction for the schedule.
-    * The transaction must have a valid postDate set, otherwise
-    * it will not be accepted. This test is bypassed, if @a noDateCheck
-    * is set to true
-    *
-    * @param transaction The new transaction.
-    * @param noDateCheck if @a true, the date check is bypassed
-    * @return none
-    */
-  void setTransaction(const MyMoneyTransaction& transaction, bool noDateCheck);
 
   /**
     * This method adds a number of Half Months to the given Date.

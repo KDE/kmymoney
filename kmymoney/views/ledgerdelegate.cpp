@@ -132,9 +132,9 @@ public:
   LedgerSeparatorDate(eLedgerModel::Role role);
   virtual ~LedgerSeparatorDate() {}
 
-  virtual bool rowHasSeparator(const QModelIndex& index) const;
-  virtual QString separatorText(const QModelIndex& index) const;
-  virtual void adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const;
+  virtual bool rowHasSeparator(const QModelIndex& index) const override;
+  virtual QString separatorText(const QModelIndex& index) const override;
+  virtual void adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const override;
 
 protected:
   QString getEntry(const QModelIndex& index, const QModelIndex& nextIndex) const;
@@ -147,9 +147,9 @@ public:
   LedgerSeparatorOnlineBalance(eLedgerModel::Role role);
   virtual ~LedgerSeparatorOnlineBalance() {}
 
-  virtual bool rowHasSeparator(const QModelIndex& index) const;
-  virtual QString separatorText(const QModelIndex& index) const;
-  virtual void adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const;
+  virtual bool rowHasSeparator(const QModelIndex& index) const override;
+  virtual QString separatorText(const QModelIndex& index) const override;
+  virtual void adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const override;
 
   void setSeparatorData(const QDate& date, const MyMoneyMoney& amount, int fraction);
 
@@ -306,13 +306,12 @@ bool LedgerSeparatorOnlineBalance::rowHasSeparator(const QModelIndex& index) con
           // in case it's the same date, we need to check if this is the last real transaction
           // and the next one is a scheduled transaction
           if(!model->data(nextIdx, (int) eLedgerModel::Role::ScheduleId).toString().isEmpty() ) {
-            rc = true;
+            rc = (date <= m_entries.firstKey());
           }
-        }
-        if (rc) {
+        } else {
           // check if this the spot for the online balance data
           rc &= ((date <= m_entries.firstKey())
-            && (model->data(nextIdx, (int)m_role).toDate() >= m_entries.firstKey()));
+            && (model->data(nextIdx, (int)m_role).toDate() > m_entries.firstKey()));
         }
       } else {
         rc = (date <= m_entries.firstKey());
@@ -437,7 +436,7 @@ QWidget* LedgerDelegate::createEditor(QWidget* parent, const QStyleOptionViewIte
        * editor that can handle multiple transactions at once
        */
       d->m_editor = 0;
-      LedgerDelegate* const that = const_cast<LedgerDelegate* const>(this);
+      LedgerDelegate* that = const_cast<LedgerDelegate*>(this);
       emit that->closeEditor(d->m_editor, NoHint);
 
     } else {
@@ -744,7 +743,8 @@ void LedgerDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionVie
   }
 
   QRect r(option.rect);
-  r.setWidth(option.widget->width() - ofs);
+  if (option.widget)
+    r.setWidth(option.widget->width() - ofs);
 
   if(d->displaySeparator(index)) {
     // consider the separator space

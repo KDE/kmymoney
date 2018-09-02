@@ -66,21 +66,21 @@ public Q_SLOTS:
   void edit(const QModelIndex& index) { QTableView::edit(index); }
 
 protected:
-  bool edit(const QModelIndex& index, EditTrigger trigger, QEvent* event);
-  virtual void mousePressEvent(QMouseEvent* event);
-  virtual void mouseMoveEvent(QMouseEvent* event);
-  virtual void mouseDoubleClickEvent(QMouseEvent* event);
-  virtual void wheelEvent(QWheelEvent *event);
-  virtual void moveEvent(QMoveEvent *event);
-  virtual void resizeEvent(QResizeEvent* event);
-  virtual void paintEvent(QPaintEvent* event);
-  virtual int sizeHintForRow(int row) const;
+  bool edit(const QModelIndex& index, EditTrigger trigger, QEvent* event) final override;
+  void mousePressEvent(QMouseEvent* event) final override;
+  void mouseMoveEvent(QMouseEvent* event) final override;
+  void mouseDoubleClickEvent(QMouseEvent* event) final override;
+  void wheelEvent(QWheelEvent *event) final override;
+  void moveEvent(QMoveEvent *event) final override;
+  void resizeEvent(QResizeEvent* event) final override;
+  void paintEvent(QPaintEvent* event) final override;
+  int sizeHintForRow(int row) const final override;
 
 protected Q_SLOTS:
-  virtual void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint);
-  virtual void rowsInserted(const QModelIndex& index, int start, int end);
-  virtual void rowsAboutToBeRemoved(const QModelIndex& index, int start, int end);
-  virtual void currentChanged(const QModelIndex &current, const QModelIndex &previous);
+  void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) final override;
+  void rowsInserted(const QModelIndex& index, int start, int end) final override;
+  void rowsAboutToBeRemoved(const QModelIndex& index, int start, int end) final override;
+  void currentChanged(const QModelIndex &current, const QModelIndex &previous) final override;
 
   virtual void adjustDetailColumn(int newViewportWidth);
   virtual void adjustDetailColumn();
@@ -107,7 +107,7 @@ public:
   virtual ~SplitView();
 
 protected Q_SLOTS:
-  virtual void recalculateBalances() {}
+  void recalculateBalances() final override {}
 };
 #endif // LEDGERVIEW_H
 

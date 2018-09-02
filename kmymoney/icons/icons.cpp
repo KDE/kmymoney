@@ -22,6 +22,10 @@
 #include <QIcon>
 #include <QPixmapCache>
 #include <QPainter>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
+#include <QDir>
+#include <QStandardPaths>
 
 namespace Icons {
   QHash<Icon, QString> sStandardIcons;
@@ -304,11 +308,16 @@ namespace Icons {
   KMM_ICONS_EXPORT void setIconThemeNames(const QString &_themeName)
   {
     sStandardIcons = getCommonNames();
+    auto hasIconsResource = false;
+
+#if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
+    hasIconsResource = true;
+#endif
 
     QStringList kdeThemes {QStringLiteral("oxygen"), QStringLiteral("breeze"), QStringLiteral("breeze-dark")};
     QHash<Icon, QString> iconNames;
 
-    if (kdeThemes.contains(_themeName)) {
+    if (kdeThemes.contains(_themeName) || hasIconsResource) { // on Craft build system there is breeze icon theme, but it's in no way discoverable
       iconNames = getKDENames();
       for (auto it = iconNames.cbegin(); it != iconNames.cend(); ++it)
         sStandardIcons.insert(it.key(), it.value());
@@ -317,7 +326,7 @@ namespace Icons {
     // get icon replacements for specific theme
     if (_themeName == kdeThemes.at(0))
       iconNames = getOxygenNames();
-    else if (_themeName == kdeThemes.at(1) || _themeName == kdeThemes.at(2))
+    else if (_themeName == kdeThemes.at(1) || _themeName == kdeThemes.at(2) || hasIconsResource)
       iconNames = getBreezeNames();
     else if (_themeName == QLatin1String("Tango"))
       iconNames = getTangoNames();
@@ -387,18 +396,68 @@ namespace Icons {
 
   KMM_ICONS_EXPORT QIcon get(Icon icon)
   {
-#ifdef KMYMONEY_ICON_DIR
-    static bool first_time = true;
-    if (first_time) {
-      first_time = false;
-      QStringList paths = QIcon::themeSearchPaths();
-      paths.append(QStringLiteral(KMYMONEY_ICON_DIR));
-      QIcon::setThemeSearchPaths(paths);
-    }
-#endif
     if (sComposedIcons.contains(icon))
       return overlayIcon(sComposedIcons[icon]);
 
     return QIcon::fromTheme(sStandardIcons[icon]);
+  }
+
+  QString iconCacheDir()
+  {
+
+    const QString cachePath = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+    if (QDir::root().mkpath(cachePath)) {
+      return cachePath;
+    }
+    return QString();
+  }
+
+  KMM_ICONS_EXPORT bool storeIconInApplicationCache(const QString& name, const QIcon& icon)
+  {
+    // split the icon name from the type
+    QRegularExpression iconPath(QStringLiteral("^(?<type>[a-zA-Z]+):(?<name>.+)"), QRegularExpression::CaseInsensitiveOption);
+    QRegularExpressionMatch matcher = iconPath.match(name);
+    if (matcher.hasMatch()) {
+      if (matcher.captured(QStringLiteral("type")).compare(QLatin1String("enum")) == 0) {
+        return true;
+      } else {
+        const QString cacheDir = iconCacheDir();
+        if (!cacheDir.isEmpty()) {
+          return icon.pixmap(16).save(QString::fromLatin1("%1/%2-%3").arg(cacheDir, matcher.captured(QStringLiteral("type")), matcher.captured(QStringLiteral("name"))), "PNG");
+        }
+      }
+    }
+    return false;
+  }
+
+  KMM_ICONS_EXPORT QIcon loadIconFromApplicationCache(const QString& name)
+  {
+    const QHash<QString, Icon> sEnumIcons {
+      { QStringLiteral("ViewBank"), Icon::ViewBank },
+    };
+
+    // split the icon name from the type
+    QRegularExpression iconPath(QStringLiteral("^(?<type>[a-zA-Z]+):(?<name>.+)"), QRegularExpression::CaseInsensitiveOption);
+    QRegularExpressionMatch matcher = iconPath.match(name);
+    if (matcher.hasMatch()) {
+      if (matcher.captured(QStringLiteral("type")).compare(QLatin1String("enum")) == 0) {
+        // type is enum, so we use our own set of icons
+        const QString iconName = matcher.captured(QStringLiteral("name"));
+        if (sEnumIcons.contains(iconName)) {
+          return get(sEnumIcons[iconName]);
+        }
+
+      } else {
+        // otherwise, we use the type as part of the filename
+        const QString cacheDir = iconCacheDir();
+        if (!cacheDir.isEmpty()) {
+          const QString filename = QString::fromLatin1("%1/%2-%3").arg(cacheDir, matcher.captured(QStringLiteral("type")), matcher.captured(QStringLiteral("name")));
+          if (QFile::exists(filename)) {
+            return QIcon(filename);
+          }
+        }
+      }
+    }
+    return QIcon();
   }
 }

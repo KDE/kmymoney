@@ -1,11 +1,10 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ * Copyright 2014-2015  Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -37,21 +36,21 @@ payeeIdentifier::payeeIdentifier(const payeeIdentifier& other)
     m_payeeIdentifier = other.m_payeeIdentifier->clone();
 }
 
-payeeIdentifier::payeeIdentifier(payeeIdentifierData*const data)
+payeeIdentifier::payeeIdentifier(payeeIdentifierData*const identifierdata)
     : m_id(0),
-    m_payeeIdentifier(data)
+    m_payeeIdentifier(identifierdata)
 {
 }
 
-payeeIdentifier::payeeIdentifier(const payeeIdentifier::id_t& id, payeeIdentifierData*const data)
+payeeIdentifier::payeeIdentifier(const payeeIdentifier::id_t& id, payeeIdentifierData*const identifierdata)
     : m_id(id),
-    m_payeeIdentifier(data)
+    m_payeeIdentifier(identifierdata)
 {
 }
 
-payeeIdentifier::payeeIdentifier(const QString& id, payeeIdentifierData*const data)
+payeeIdentifier::payeeIdentifier(const QString& id, payeeIdentifierData*const identifierdata)
     : m_id(id.mid(5).toUInt()),
-    m_payeeIdentifier(data)
+    m_payeeIdentifier(identifierdata)
 {
   bool ok = false; // hopefully the compiler optimizes this away if compiled in non-debug mode
   Q_ASSERT(id.mid(5).toUInt(&ok) && ok);
@@ -80,14 +79,14 @@ payeeIdentifier::~payeeIdentifier()
 payeeIdentifierData* payeeIdentifier::operator->()
 {
   if (m_payeeIdentifier == 0)
-    throw empty(__FILE__, __LINE__);
+    throw PAYEEIDENTIFIEREMPTYEXCEPTION;
   return m_payeeIdentifier;
 }
 
 const payeeIdentifierData* payeeIdentifier::operator->() const
 {
   if (m_payeeIdentifier == 0)
-    throw empty(__FILE__, __LINE__);
+    throw PAYEEIDENTIFIEREMPTYEXCEPTION;
   return m_payeeIdentifier;
 }
 
@@ -129,7 +128,7 @@ payeeIdentifier& payeeIdentifier::operator=(const payeeIdentifier & other)
   return *this;
 }
 
-bool payeeIdentifier::operator==(const payeeIdentifier& other)
+bool payeeIdentifier::operator==(const payeeIdentifier& other) const
 {
   if (m_id != other.m_id)
     return false;

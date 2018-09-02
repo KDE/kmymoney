@@ -51,7 +51,8 @@ public:
   explicit KHomeView(QWidget *parent = nullptr);
   ~KHomeView() override;
 
-  void refresh() override;
+  void executeCustomAction(eView::Action action) override;
+  void refresh();
 
 protected:
   void showEvent(QShowEvent* event) override;
@@ -62,11 +63,6 @@ public Q_SLOTS:
     * Print the current view
     */
   void slotPrintView();
-
-Q_SIGNALS:
-  void ledgerSelected(const QString& id, const QString& transaction);
-  void objectSelected(const MyMoneyObject& obj);
-  void openObjectRequested(const MyMoneyObject& obj);
 
 private:
   Q_DECLARE_PRIVATE(KHomeView)

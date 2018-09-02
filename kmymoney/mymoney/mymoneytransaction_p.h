@@ -1,19 +1,24 @@
-/***************************************************************************
-                          mymoneytransaction.cpp
-                             -------------------
-    copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
-                               2002 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2000-2002  Michael Edwardes <mte@users.sourceforge.net>
+ * Copyright 2001-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2001       Felix Rodriguez <frodriguez@users.sourceforge.net>
+ * Copyright 2003       Kevin Tambascio <ktambascio@users.sourceforge.net>
+ * Copyright 2004-2005  Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2006       Darren Gould <darren_gould@gmx.de>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MYMONEYTRANSACTION_P_H
 #define MYMONEYTRANSACTION_P_H
@@ -31,57 +36,12 @@
 
 #include "mymoneyobject_p.h"
 #include "mymoneysplit.h"
-namespace eMyMoney
-{
-  namespace Transaction
-  {
-    enum class Element { Split = 0,
-                         Splits };
-    uint qHash(const Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-
-    enum class Attribute { Name = 0,
-                           Type,
-                           PostDate,
-                           Memo,
-                           EntryDate,
-                           Commodity,
-                           BankID,
-                           // insert new entries above this line
-                           LastAttribute
-                         };
-
-    uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-  }
-}
 
 using namespace eMyMoney;
 
 class MyMoneyTransactionPrivate : public MyMoneyObjectPrivate
 {
 public:
-  static QString getElName(const Transaction::Element el)
-  {
-    static const QHash<Transaction::Element, QString> elNames {
-      {Transaction::Element::Split,  QStringLiteral("SPLIT")},
-      {Transaction::Element::Splits, QStringLiteral("SPLITS")}
-    };
-    return elNames[el];
-  }
-
-  static QString getAttrName(const Transaction::Attribute attr)
-  {
-    static const QHash<Transaction::Attribute, QString> attrNames {
-      {Transaction::Attribute::Name,       QStringLiteral("name")},
-      {Transaction::Attribute::Type,       QStringLiteral("type")},
-      {Transaction::Attribute::PostDate,   QStringLiteral("postdate")},
-      {Transaction::Attribute::Memo,       QStringLiteral("memo")},
-      {Transaction::Attribute::EntryDate,  QStringLiteral("entrydate")},
-      {Transaction::Attribute::Commodity,  QStringLiteral("commodity")},
-      {Transaction::Attribute::BankID,     QStringLiteral("bankid")},
-    };
-    return attrNames[attr];
-  }
-
   /**
     * This method returns the next id to be used for a split
     */

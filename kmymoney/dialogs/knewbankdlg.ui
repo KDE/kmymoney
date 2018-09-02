@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>631</width>
-    <height>344</height>
+    <height>419</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,112 +16,22 @@
   <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
-  <layout class="QVBoxLayout">
-   <property name="spacing">
-    <number>6</number>
-   </property>
-   <property name="leftMargin">
-    <number>11</number>
-   </property>
-   <property name="topMargin">
-    <number>11</number>
-   </property>
-   <property name="rightMargin">
-    <number>11</number>
-   </property>
-   <property name="bottomMargin">
-    <number>11</number>
-   </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QGroupBox" name="GroupBox1">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="title">
       <string>Institution Details</string>
      </property>
-     <layout class="QGridLayout">
-      <property name="leftMargin">
-       <number>11</number>
-      </property>
-      <property name="topMargin">
-       <number>11</number>
-      </property>
-      <property name="rightMargin">
-       <number>11</number>
-      </property>
-      <property name="bottomMargin">
-       <number>11</number>
-      </property>
-      <property name="spacing">
-       <number>6</number>
-      </property>
-      <item row="0" column="0">
-       <widget class="QLabel" name="TextLabel1">
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="7" column="1">
+       <widget class="QLabel" name="label_2">
         <property name="text">
-         <string comment="institution name column">Name:</string>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
+         <string>https://</string>
         </property>
        </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="KLineEdit" name="nameEdit"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="TextLabel2">
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>City:</string>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="KLineEdit" name="cityEdit"/>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="TextLabel3">
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Street:</string>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="KLineEdit" name="streetEdit"/>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="TextLabel4">
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Postal Code:</string>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="KLineEdit" name="postcodeEdit"/>
       </item>
       <item row="4" column="0">
        <widget class="QLabel" name="TextLabel5">
@@ -139,11 +49,8 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
-       <widget class="KLineEdit" name="telephoneEdit"/>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="TextLabel6">
+      <item row="2" column="0">
+       <widget class="QLabel" name="TextLabel3">
         <property name="minimumSize">
          <size>
           <width>100</width>
@@ -151,14 +58,14 @@
          </size>
         </property>
         <property name="text">
-         <string>Routing Number:</string>
+         <string>Street:</string>
         </property>
         <property name="wordWrap">
          <bool>false</bool>
         </property>
        </widget>
       </item>
-      <item row="5" column="1">
+      <item row="5" column="1" colspan="4">
        <widget class="KLineEdit" name="sortCodeEdit"/>
       </item>
       <item row="6" column="0">
@@ -177,8 +84,104 @@
         </property>
        </widget>
       </item>
-      <item row="6" column="1">
+      <item row="0" column="1" colspan="4">
+       <widget class="KLineEdit" name="nameEdit"/>
+      </item>
+      <item row="7" column="2">
+       <widget class="KLineEdit" name="urlEdit"/>
+      </item>
+      <item row="6" column="1" colspan="4">
        <widget class="KLineEdit" name="bicEdit"/>
+      </item>
+      <item row="8" column="0" colspan="5">
+       <widget class="KMessageWidget" name="messageWidget" native="true"/>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="TextLabel4">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Postal Code:</string>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1" colspan="4">
+       <widget class="KLineEdit" name="telephoneEdit"/>
+      </item>
+      <item row="3" column="1" colspan="4">
+       <widget class="KLineEdit" name="postcodeEdit"/>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Website</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" colspan="4">
+       <widget class="KLineEdit" name="streetEdit"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="TextLabel1">
+        <property name="text">
+         <string comment="institution name column">Name:</string>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" colspan="4">
+       <widget class="KLineEdit" name="cityEdit"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="TextLabel2">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>City:</string>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="TextLabel6">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Routing Number:</string>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="3">
+       <widget class="QToolButton" name="iconButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -200,19 +203,6 @@
     </spacer>
    </item>
    <item>
-    <widget class="Line" name="Line1_2">
-     <property name="frameShape">
-      <enum>QFrame::HLine</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <property name="lineWidth">
-      <number>1</number>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
@@ -228,7 +218,25 @@
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
   </customwidget>
+  <customwidget>
+   <class>KMessageWidget</class>
+   <extends>QWidget</extends>
+   <header>kmessagewidget.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>nameEdit</tabstop>
+  <tabstop>cityEdit</tabstop>
+  <tabstop>streetEdit</tabstop>
+  <tabstop>postcodeEdit</tabstop>
+  <tabstop>telephoneEdit</tabstop>
+  <tabstop>sortCodeEdit</tabstop>
+  <tabstop>bicEdit</tabstop>
+  <tabstop>urlEdit</tabstop>
+  <tabstop>iconButton</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

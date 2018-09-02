@@ -46,17 +46,17 @@ public:
   explicit KInstitutionsView(QWidget *parent = nullptr);
   ~KInstitutionsView();
 
-  void setDefaultFocus() override;
-  void refresh() override;
-  void updateActions(const MyMoneyObject &obj) override;
+  void executeCustomAction(eView::Action action) override;
+  void refresh();
+  void updateActions(const MyMoneyObject &obj);
 
 public Q_SLOTS:
   void slotNetWorthChanged(const MyMoneyMoney &);
   void slotShowInstitutionsMenu(const MyMoneyInstitution& inst);
   void slotEditInstitution();
 
-Q_SIGNALS:
-  void objectSelected(const MyMoneyObject& obj);
+  void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
+  void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
 protected:
   void showEvent(QShowEvent * event) override;

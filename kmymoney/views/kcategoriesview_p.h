@@ -63,7 +63,6 @@ public:
   void init()
   {
     Q_Q(KCategoriesView);
-    ui->setupUi(q);
     m_accountTree = &ui->m_accountTree;
 
     // setup icons for collapse and expand button
@@ -74,7 +73,8 @@ public:
 
     q->connect(m_proxyModel, &AccountsProxyModel::unusedIncomeExpenseAccountHidden, q, &KCategoriesView::slotUnusedIncomeExpenseAccountHidden);
     q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::objectSelected, q, &KCategoriesView::objectSelected);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KCategoriesView::selectByObject);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KCategoriesView::selectByVariant);
     q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KCategoriesView::refresh);
   }
 

@@ -37,7 +37,7 @@
 #include "accountsmodel.h"
 #include "hierarchyfilterproxymodel.h"
 #include "kmymoneyaccounttreeview.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "knewaccountwizard.h"
 #include "knewaccountwizard_p.h"
 #include "kaccountsummarypage.h"
@@ -62,7 +62,7 @@ namespace NewAccountWizard
     // the proxy filter model
     d->m_filterProxyModel = new HierarchyFilterProxyModel(this);
     d->m_filterProxyModel->setHideClosedAccounts(true);
-    d->m_filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
+    d->m_filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
     d->m_filterProxyModel->addAccountGroup(QVector<Account::Type> {Account::Type::Asset, Account::Type::Liability});
     auto const model = Models::instance()->accountsModel();
     d->m_filterProxyModel->setSourceModel(model);
@@ -104,9 +104,9 @@ namespace NewAccountWizard
   const MyMoneyAccount& HierarchyPage::parentAccount()
   {
     Q_D(HierarchyPage);
-    QVariant data = d->ui->m_parentAccounts->model()->data(d->ui->m_parentAccounts->currentIndex(), (int)eAccountsModel::Role::Account);
-    if (data.isValid()) {
-        d->m_parentAccount = data.value<MyMoneyAccount>();
+    auto dataVariant = d->ui->m_parentAccounts->model()->data(d->ui->m_parentAccounts->currentIndex(), (int)eAccountsModel::Role::Account);
+    if (dataVariant.isValid()) {
+        d->m_parentAccount = dataVariant.value<MyMoneyAccount>();
       } else {
         d->m_parentAccount = MyMoneyAccount();
       }

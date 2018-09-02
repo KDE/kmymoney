@@ -26,6 +26,12 @@
 
 QTEST_GUILESS_MAIN(MatchFinderTest)
 
+MatchFinderTest::MatchFinderTest() :
+  matchResult(TransactionMatchFinder::MatchResult::MatchNotFound)
+{
+
+}
+
 void MatchFinderTest::init()
 {
   file = MyMoneyFile::instance();
@@ -39,7 +45,7 @@ void MatchFinderTest::init()
   importTransaction = buildDefaultTransaction();
   existingTrFinder.reset(new ExistingTransactionMatchFinder(MATCH_WINDOW));
 
-  schedule = buildNonOverdueSchedule();
+  m_schedule = buildNonOverdueSchedule();
   scheduledTrFinder.reset(new ScheduledTransactionMatchFinder(*account, MATCH_WINDOW));
 }
 
@@ -50,7 +56,7 @@ void MatchFinderTest::cleanup()
 
 void MatchFinderTest::setupStorage()
 {
-  storage.reset(new MyMoneySeqAccessMgr);
+  storage.reset(new MyMoneyStorageMgr);
   file->attachStorage(storage.data());
 }
 
@@ -425,60 +431,60 @@ void MatchFinderTest::testExistingTransactionMatch_multipleAccounts_noBankId()
 
 void MatchFinderTest::testScheduleMatch_allMatch()
 {
-  importTransaction.setPostDate(schedule.adjustedNextDueDate());
-  addSchedule(schedule);
+  importTransaction.setPostDate(m_schedule.adjustedNextDueDate());
+  addSchedule(m_schedule);
 
   expectMatchWithScheduledTransaction(TransactionMatchFinder::MatchPrecise);
-  QCOMPARE(schedule.isOverdue(), false);
+  QCOMPARE(m_schedule.isOverdue(), false);
 }
 
 void MatchFinderTest::testScheduleMatch_dueDateWithinMatchWindow()
 {
-  QDate dateWithinMatchWindow = schedule.adjustedNextDueDate().addDays(MATCH_WINDOW);
+  QDate dateWithinMatchWindow = m_schedule.adjustedNextDueDate().addDays(MATCH_WINDOW);
   importTransaction.setPostDate(dateWithinMatchWindow);
-  addSchedule(schedule);
+  addSchedule(m_schedule);
 
   expectMatchWithScheduledTransaction(TransactionMatchFinder::MatchImprecise);
-  QCOMPARE(schedule.isOverdue(), false);
+  QCOMPARE(m_schedule.isOverdue(), false);
 }
 
 void MatchFinderTest::testScheduleMatch_amountWithinAllowedVariation()
 {
-  double exactAmount = schedule.transaction().splits()[0].shares().toDouble();
-  double amountWithinAllowedVariation = exactAmount * (100 + schedule.variation()) / 100;
+  double exactAmount = m_schedule.transaction().splits()[0].shares().toDouble();
+  double amountWithinAllowedVariation = exactAmount * (100 + m_schedule.variation()) / 100;
   importTransaction.splits()[0].setShares(MyMoneyMoney(amountWithinAllowedVariation));
-  importTransaction.setPostDate(schedule.adjustedNextDueDate());
-  addSchedule(schedule);
+  importTransaction.setPostDate(m_schedule.adjustedNextDueDate());
+  addSchedule(m_schedule);
 
   expectMatchWithScheduledTransaction(TransactionMatchFinder::MatchPrecise);
 }
 
 void MatchFinderTest::testScheduleMatch_overdue()
 {
-  schedule.setNextDueDate(QDate::currentDate().addDays(-MATCH_WINDOW - 1));
+  m_schedule.setNextDueDate(QDate::currentDate().addDays(-MATCH_WINDOW - 1));
   importTransaction.setPostDate(QDate::currentDate());
-  addSchedule(schedule);
+  addSchedule(m_schedule);
 
   expectMatchWithScheduledTransaction(TransactionMatchFinder::MatchImprecise);
-  QCOMPARE(schedule.isOverdue(), true);
+  QCOMPARE(m_schedule.isOverdue(), true);
 }
 
 void MatchFinderTest::testScheduleMismatch_dueDate()
 {
-  importTransaction.setPostDate(schedule.adjustedNextDueDate().addDays(MATCH_WINDOW + 1));
-  addSchedule(schedule);
+  importTransaction.setPostDate(m_schedule.adjustedNextDueDate().addDays(MATCH_WINDOW + 1));
+  addSchedule(m_schedule);
 
   expectMatchWithScheduledTransaction(TransactionMatchFinder::MatchNotFound);
-  QCOMPARE(schedule.isOverdue(), false);
+  QCOMPARE(m_schedule.isOverdue(), false);
 }
 
 void MatchFinderTest::testScheduleMismatch_amount()
 {
-  double exactAmount = schedule.transaction().splits()[0].shares().toDouble();
-  double mismatchedAmount = exactAmount * (110 + schedule.variation()) / 100;
+  double exactAmount = m_schedule.transaction().splits()[0].shares().toDouble();
+  double mismatchedAmount = exactAmount * (110 + m_schedule.variation()) / 100;
   importTransaction.splits()[0].setShares(MyMoneyMoney(mismatchedAmount));
-  importTransaction.setPostDate(schedule.adjustedNextDueDate());
-  addSchedule(schedule);
+  importTransaction.setPostDate(m_schedule.adjustedNextDueDate());
+  addSchedule(m_schedule);
 
   expectMatchWithScheduledTransaction(TransactionMatchFinder::MatchNotFound);
 }

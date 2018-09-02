@@ -1,19 +1,19 @@
-/***************************************************************************
-                        csvwriter.h  -  description
-                            ------------------
-    begin                : Wed Mar 20 2013
-    copyright            : (C) 2013-03-20 by Allan Anderson
-    email                : Allan Anderson agander93@gmail.com
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2013-2014  Allan Anderson <agander93@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef CSVWRITER_H
 #define CSVWRITER_H
@@ -35,6 +35,7 @@ class QTextStream;
 class MyMoneyTransaction;
 class MyMoneySplit;
 class CSVExporter;
+class MyMoneyMoney;
 
 /**
   * @author Thomas Baumgart
@@ -111,7 +112,7 @@ private:
     */
   void writeCategoryEntry(QTextStream &s, const QString &accountId, const QString &leadIn);
   void writeTransactionEntry(const MyMoneyTransaction& t, const QString& accountId, const int count);
-  void writeSplitEntry(QString& str, const MyMoneySplit& split, const int splitCount);
+  void writeSplitEntry(QString& str, const MyMoneySplit& split, const int splitCount, const int lastEntry);
   void extractInvestmentEntries(const QString& accountId, const QDate& startDate, const QDate& endDate);
   void writeInvestmentEntry(const MyMoneyTransaction& t, const int count);
 
@@ -143,6 +144,8 @@ private:
 
   bool m_noError;
 
+  QString format(const QString &s, bool withSeparator = true);
+  QString format(const MyMoneyMoney &value, int prec = 2, bool withSeparator = true);
 };
 
 #endif

@@ -20,6 +20,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QMap>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -29,6 +31,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "interfaceloader.h"
+
+KMyMoneyPlugin::Container pPlugins;
 
 KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const char* name) :
     QObject(),
@@ -75,6 +79,12 @@ KMyMoneyPlugin::OnlinePlugin::OnlinePlugin()
 
 KMyMoneyPlugin::OnlinePlugin::~OnlinePlugin()
 {
+}
+
+KMyMoneyPlugin::AppInterface* KMyMoneyPlugin::Plugin::appInterface() const
+{
+  Q_CHECK_PTR(KMyMoneyPlugin::pluginInterfaces().appInterface);
+  return KMyMoneyPlugin::pluginInterfaces().appInterface;
 }
 
 KMyMoneyPlugin::ViewInterface* KMyMoneyPlugin::Plugin::viewInterface() const

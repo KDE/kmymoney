@@ -1,21 +1,21 @@
-/***************************************************************************
-                             csvimporter.h
-                             -------------------
-    begin                : Sat Jan 01 2010
-    copyright            : (C) 2010 by Allan Anderson
-    email                : agander93@gmail.com
-    copyright            : (C) 2016-2017 by Łukasz Wojniłowicz
-    email                : lukasz.wojnilowicz@gmail.com
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2010-2014  Allan Anderson <agander93@gmail.com>
+ * Copyright 2016-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2018       Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef CSVIMPORTER_H
 #define CSVIMPORTER_H
@@ -30,10 +30,6 @@
 
 #include "kmymoneyplugin.h"
 
-class CSVImporterCore;
-class CSVWizard;
-class MyMoneyStatement;
-
 class CSVImporter : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::ImporterPlugin
 {
   Q_OBJECT
@@ -43,13 +39,9 @@ public:
   explicit CSVImporter(QObject *parent, const QVariantList &args);
   ~CSVImporter() override;
 
-  QAction*          m_action;
-  CSVWizard*        m_wizard;
-  CSVImporterCore*  m_importer;
-
   /**
     * This method returns the english-language name of the format
-    * this plugin imports, e.g. "OFX"
+    * this plugin imports, e.g. "CSV"
     *
     * @return QString Name of the format
     */
@@ -92,12 +84,8 @@ public:
     */
   virtual QString lastError() const override;
 
-  void injectExternalSettings(KMyMoneySettings* p) override;
-
 private:
   bool              m_silent;
-public Q_SLOTS:
-  bool slotGetStatement(MyMoneyStatement& s);
 
 protected Q_SLOTS:
   void startWizardRun();

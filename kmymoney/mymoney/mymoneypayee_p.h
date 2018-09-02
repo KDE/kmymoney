@@ -1,20 +1,23 @@
-/***************************************************************************
-                          mymoneypayee.cpp
-                             -------------------
-    copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
-                           (C) 2008 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2000-2001  Michael Edwardes <mte@users.sourceforge.net>
+ * Copyright 2002-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2003       Kevin Tambascio <ktambascio@users.sourceforge.net>
+ * Copyright 2006       Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MYMONEYPAYEE_P_H
 #define MYMONEYPAYEE_P_H
@@ -32,32 +35,6 @@
 
 #include "mymoneyobject_p.h"
 
-namespace Payee
-{
-  enum class Element { Address };
-  uint qHash(const Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-
-  enum class Attribute { Name = 0,
-                         Type,
-                         Reference,
-                         Notes,
-                         MatchingEnabled,
-                         UsingMatchKey,
-                         MatchIgnoreCase,
-                         MatchKey,
-                         DefaultAccountID,
-                         Street,
-                         City,
-                         PostCode,
-                         Email,
-                         State,
-                         Telephone,
-                         // insert new entries above this line
-                         LastAttribute
-                       };
-  uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-}
-
 class MyMoneyPayeePrivate : public MyMoneyObjectPrivate
 {
 public:
@@ -67,36 +44,6 @@ public:
     m_usingMatchKey(false),
     m_matchKeyIgnoreCase(true)
   {
-  }
-
-  static QString getElName(const Payee::Element el)
-  {
-    static const QMap<Payee::Element, QString> elNames {
-      {Payee::Element::Address, QStringLiteral("ADDRESS")}
-    };
-    return elNames[el];
-  }
-
-  static QString getAttrName(const Payee::Attribute attr)
-  {
-    static const QHash<Payee::Attribute, QString> attrNames {
-      {Payee::Attribute::Name,             QStringLiteral("name")},
-      {Payee::Attribute::Type,             QStringLiteral("type")},
-      {Payee::Attribute::Reference,        QStringLiteral("reference")},
-      {Payee::Attribute::Notes,            QStringLiteral("notes")},
-      {Payee::Attribute::MatchingEnabled,  QStringLiteral("matchingenabled")},
-      {Payee::Attribute::UsingMatchKey,    QStringLiteral("usingmatchkey")},
-      {Payee::Attribute::MatchIgnoreCase,  QStringLiteral("matchignorecase")},
-      {Payee::Attribute::MatchKey,         QStringLiteral("matchkey")},
-      {Payee::Attribute::DefaultAccountID, QStringLiteral("defaultaccountid")},
-      {Payee::Attribute::Street,           QStringLiteral("street")},
-      {Payee::Attribute::City,             QStringLiteral("city")},
-      {Payee::Attribute::PostCode,         QStringLiteral("postcode")},
-      {Payee::Attribute::Email,            QStringLiteral("email")},
-      {Payee::Attribute::State,            QStringLiteral("state")},
-      {Payee::Attribute::Telephone,        QStringLiteral("telephone")},
-    };
-    return attrNames[attr];
   }
 
   // Simple fields

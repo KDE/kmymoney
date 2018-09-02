@@ -1,5 +1,4 @@
 add_subdirectory( onlinetasks )
-add_subdirectory( ibanbicdata )
 add_subdirectory( interfaces )
 add_subdirectory( csv )
 add_subdirectory( qif )
@@ -8,15 +7,31 @@ add_subdirectory( ofx )
 add_subdirectory( icalendar )
 add_subdirectory( reconciliationreport )
 add_subdirectory( checkprinting )
+add_subdirectory( views )
 
-if (KBANKING_FOUND)
+if(ENABLE_SQLSTORAGE OR ENABLE_XMLSTORAGE)
+  add_subdirectory(xmlhelper)
+endif()
+
+if(ENABLE_SQLSTORAGE)
+  add_subdirectory(sql)
+endif()
+
+# if(ENABLE_XMLSTORAGE OR BUILD_TESTING)
+  add_subdirectory(xml)
+# endif()
+
+if(ENABLE_IBANBICDATA)
+  add_subdirectory(ibanbicdata)
+endif()
+
+if (ENABLE_KBANKING)
   add_subdirectory( kbanking )
-endif (KBANKING_FOUND)
+endif (ENABLE_KBANKING)
 
-option(ENABLE_SQLCIPHER "Enable SQLCipher plugin" OFF)
 if (ENABLE_SQLCIPHER)
   add_subdirectory(sqlcipher)
-endif(ENABLE_SQLCIPHER)
+endif()
 
 option(ENABLE_ONLINEJOBPLUGINMOCKUP "Enable onlineJob-plugin mockup (only for developers)" OFF)
 if (ENABLE_ONLINEJOBPLUGINMOCKUP)
@@ -30,6 +45,7 @@ endif ()
 ########### next target ###############
 
 set(kmm_plugin_LIB_SRCS
+  appinterface.cpp
   importinterface.cpp
   kmymoneyplugin.cpp
   statementinterface.cpp
@@ -38,7 +54,8 @@ set(kmm_plugin_LIB_SRCS
   interfaceloader.cpp
 )
 
-set(plugins_HEADERS
+set(plugin_HEADERS
+  appinterface.h
   importinterface.h
   kmymoneyplugin.h
   statementinterface.h
@@ -51,12 +68,15 @@ add_library(kmm_plugin SHARED ${kmm_plugin_LIB_SRCS})
 generate_export_header(kmm_plugin BASE_NAME kmm_plugin)
 target_link_libraries(kmm_plugin
   PUBLIC
-  KF5::XmlGui
-  KF5::KCMUtils
-  KF5::KIOWidgets
-  Qt5::Gui
-  Qt5::Widgets
-  kmm_mymoney
+    Qt5::Core
+    KF5::XmlGui
+  PRIVATE
+    KF5::KCMUtils
+    KF5::KIOWidgets
+    Qt5::Gui
+    Qt5::Widgets
+  INTERFACE
+    kmm_mymoney
 )
 
 set_target_properties(kmm_plugin PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})
@@ -66,7 +86,7 @@ set_target_properties(kmm_plugin PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION
 install(TARGETS kmm_plugin
   ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install(FILES ${plugins_HEADERS}
+install(FILES ${plugin_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney  COMPONENT Devel)
 
 install(FILES

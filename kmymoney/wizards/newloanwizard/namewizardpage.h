@@ -47,12 +47,12 @@ public:
    * Some things on this page depend on previous pages for correct
    * initialization, so overload initializePage()
    */
-  void initializePage();
+  void initializePage() final override;
 
   /**
    * Overload the isComplete function to control the Next button
    */
-  bool isComplete() const;
+  bool isComplete() const final override;
 
   Ui::NameWizardPage *ui;
 };

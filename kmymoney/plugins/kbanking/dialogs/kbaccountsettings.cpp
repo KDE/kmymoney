@@ -61,6 +61,7 @@ void KBAccountSettings::loadUi(const MyMoneyKeyValueContainer& kvp)
     d->ui.m_payeeExceptions->clear();
     d->ui.m_payeeExceptions->insertStringList(kvp.value("kbanking-payee-exceptions").split(';', QString::SkipEmptyParts));
   }
+  d->ui.m_removeLineBreaksFromMemo->setChecked(kvp.value("kbanking-memo-removelinebreaks").compare(QLatin1String("no")));
 }
 
 void KBAccountSettings::loadKvp(MyMoneyKeyValueContainer& kvp)
@@ -69,6 +70,7 @@ void KBAccountSettings::loadKvp(MyMoneyKeyValueContainer& kvp)
   kvp.deletePair("kbanking-memo-regexp");
   kvp.deletePair("kbanking-payee-exceptions");
   kvp.deletePair("kbanking-txn-download");
+  kvp.deletePair("kbanking-memo-remlinebreak");
   // The key "kbanking-jobexec" is not used since version 4.8 anymore
   kvp.deletePair("kbanking-jobexec");
 
@@ -83,5 +85,10 @@ void KBAccountSettings::loadKvp(MyMoneyKeyValueContainer& kvp)
   }
   if (!d->ui.m_transactionDownload->isChecked())
     kvp["kbanking-txn-download"] = "no";
+
+  // remove linebreaks, default is on
+  if (!d->ui.m_removeLineBreaksFromMemo->isChecked())
+    kvp["kbanking-memo-removelinebreaks"] = "no";
+
   kvp["kbanking-statementDate"] = QString("%1").arg(d->ui.m_preferredStatementDate->currentIndex());
 }

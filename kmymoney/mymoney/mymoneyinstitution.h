@@ -1,19 +1,23 @@
-/***************************************************************************
-                          mymoneyinstitution.h
-                          -------------------
-    copyright            : (C) 2002-2005 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2000-2001  Michael Edwardes <mte@users.sourceforge.net>
+ * Copyright 2002-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2003       Kevin Tambascio <ktambascio@users.sourceforge.net>
+ * Copyright 2004-2006  Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MYMONEYINSTITUTION_H
 #define MYMONEYINSTITUTION_H
@@ -53,6 +57,7 @@ public:
     * This is the constructor for a new empty institution description
     */
   MyMoneyInstitution();
+  explicit MyMoneyInstitution(const QString &id);
 
   /**
     * This is the constructor used by an application to fill the
@@ -84,15 +89,6 @@ public:
     * @param right institution definition
     */
   MyMoneyInstitution(const QString& id, const MyMoneyInstitution& other);
-
-  /**
-    * This is the constructor for an institution that is described by a
-    * QDomElement (e.g. from a file).
-    *
-    * @param el const reference to the QDomElement from which to
-    *           create the object
-    */
-  explicit MyMoneyInstitution(const QDomElement& el);
 
   QString manager() const;
   void setManager(const QString& manager);
@@ -152,8 +148,6 @@ public:
 
   bool operator == (const MyMoneyInstitution&) const;
   bool operator < (const MyMoneyInstitution& right) const;
-
-  void writeXML(QDomDocument& document, QDomElement& parent) const override;
 
   /**
     * This method checks if a reference to the given object exists. It returns,

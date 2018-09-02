@@ -1,21 +1,21 @@
-/*******************************************************************************
-*                                 csvwizard.cpp
-*                              --------------------
-* begin                       : Thur Jan 01 2015
-* copyright                   : (C) 2015 by Allan Anderson
-* email                       : agander93@gmail.com
-* copyright                   : (C) 2016 by Łukasz Wojniłowicz
-* email                       : lukasz.wojnilowicz@gmail.com
-********************************************************************************/
-
-/*******************************************************************************
-*                                                                              *
-*   This program is free software; you can redistribute it and/or modify       *
-*   it under the terms of the GNU General Public License as published by       *
-*   the Free Software Foundation; either version 2 of the License, or          *
-*   (at your option) any later version.                                        *
-*                                                                              *
-********************************************************************************/
+/*
+ * Copyright 2015-2016  Allan Anderson <agander93@gmail.com>
+ * Copyright 2016-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2018       Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "csvwizard.h"
 
@@ -24,13 +24,13 @@
 
 #include <QAction>
 #include <QDesktopWidget>
-#include <QCloseEvent>
 #include <QTextCodec>
 #include <QAbstractButton>
 #include <QFileDialog>
 #include <QStandardItemModel>
 #include <QScrollBar>
 #include <QLineEdit>
+#include <QKeyEvent>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -59,10 +59,11 @@
 
 using namespace Icons;
 
-CSVWizard::CSVWizard(CSVImporter *plugin, CSVImporterCore* importer) :
+CSVWizard::CSVWizard(CSVImporter *plugin) :
   ui(new Ui::CSVWizard),
+  m_skipSetup(false),
   m_plugin(plugin),
-  m_imp(importer),
+  m_imp(new CSVImporterCore),
   m_wiz(new QWizard)
 {
   ui->setupUi(this);
@@ -76,10 +77,9 @@ CSVWizard::CSVWizard(CSVImporter *plugin, CSVImporterCore* importer) :
 
   m_wiz->button(QWizard::BackButton)->setIcon(Icons::get(Icon::ArrowLeft));
   m_wiz->button(QWizard::CancelButton)->setIcon(Icons::get(Icon::DialogCancel));
-  m_wiz->button(QWizard::CustomButton2)->setIcon(Icons::get(Icon::KMyMoney));
-  m_wiz->button(QWizard::FinishButton)->setIcon(Icons::get(Icon::DialogOKApply));
+  m_wiz->button(QWizard::FinishButton)->setIcon(Icons::get(Icon::KMyMoney));
   m_wiz->button(QWizard::CustomButton1)->setIcon(Icons::get(Icon::FileArchiver));
-  m_wiz->button(QWizard::CustomButton3)->setIcon(Icons::get(Icon::InvestApplet));
+  m_wiz->button(QWizard::CustomButton2)->setIcon(Icons::get(Icon::InvestApplet));
   m_wiz->button(QWizard::NextButton)->setIcon(Icons::get(Icon::ArrowRight));
 
   m_pageIntro = new IntroPage(this, m_imp);
@@ -100,13 +100,10 @@ CSVWizard::CSVWizard(CSVImporter *plugin, CSVImporterCore* importer) :
   m_stageLabels << ui->label_intro << ui->label_separators << ui->label_rows << ui->label_columns << ui->label_columns << ui->label_columns << ui->label_formats;
   m_pageFormats->setFinalPage(true);
 
-  this->setAttribute(Qt::WA_DeleteOnClose, true);
-
-  connect(m_wiz->button(QWizard::FinishButton), &QAbstractButton::clicked, this, &CSVWizard::slotClose);
-  connect(m_wiz->button(QWizard::CancelButton), &QAbstractButton::clicked, this, &QWidget::close);
+  connect(m_wiz->button(QWizard::FinishButton), &QAbstractButton::clicked, this, &CSVWizard::importClicked);
+  connect(m_wiz->button(QWizard::CancelButton), &QAbstractButton::clicked, this, &CSVWizard::reject);
   connect(m_wiz->button(QWizard::CustomButton1), &QAbstractButton::clicked, this, &CSVWizard::fileDialogClicked);
-  connect(m_wiz->button(QWizard::CustomButton2), &QAbstractButton::clicked, this, &CSVWizard::importClicked);
-  connect(m_wiz->button(QWizard::CustomButton3), &QAbstractButton::clicked, this, &CSVWizard::saveAsQIFClicked);
+  connect(m_wiz->button(QWizard::CustomButton2), &QAbstractButton::clicked, this, &CSVWizard::saveAsQIFClicked);
   connect(m_wiz, SIGNAL(currentIdChanged(int)), this, SLOT(slotIdChanged(int)));
 
   ui->tableView->setWordWrap(false);
@@ -126,6 +123,7 @@ CSVWizard::CSVWizard(CSVImporter *plugin, CSVImporterCore* importer) :
 
 CSVWizard::~CSVWizard()
 {
+  delete m_imp;
   delete ui;
 }
 
@@ -285,12 +283,6 @@ void CSVWizard::updateWindowSize()
   this->setGeometry(wizard);
 }
 
-void CSVWizard::closeEvent(QCloseEvent *event)
-{
-  this->m_plugin->m_action->setEnabled(true); // reenable File->Import->CSV
-  event->accept();
-}
-
 bool CSVWizard::eventFilter(QObject *object, QEvent *event)
 {
   // prevent the QWizard part of CSVWizard window from closing on Escape key press
@@ -306,12 +298,18 @@ bool CSVWizard::eventFilter(QObject *object, QEvent *event)
   return false;
 }
 
-void CSVWizard::slotClose()
+void CSVWizard::saveSettings() const
 {
   m_imp->m_profile->m_lastUsedDirectory = m_imp->m_file->m_inFileName;
   m_imp->m_profile->writeSettings(CSVImporterCore::configFile());
   m_imp->profilesAction(m_imp->m_profile->type(), ProfileAction::UpdateLastUsed, m_imp->m_profile->m_profileName, m_imp->m_profile->m_profileName);
-  close();
+}
+
+void CSVWizard::slotClose()
+{
+  saveSettings();
+  m_st = MyMoneyStatement();        // nothing imported
+  accept();
 }
 
 void CSVWizard::fileDialogClicked()
@@ -358,11 +356,14 @@ void CSVWizard::fileDialogClicked()
       return;
   }
 
-  m_wiz->next();  //go to separator page
+  m_wiz->next();  // go to separator page
 
-  if (m_skipSetup && profileExists)
-    for (int i = 0; i < 4; i++) //programmaticaly go through separator-, rows-, investment-/bank-, formatspage
+  if (m_skipSetup && profileExists) {
+    // programmatically skip to last page
+    while((m_wiz->currentPage() != m_pageFormats) && (m_wiz->nextId() != -1)) {
       m_wiz->next();
+    }
+  }
 }
 
 void CSVWizard::importClicked()
@@ -380,10 +381,18 @@ void CSVWizard::importClicked()
       break;
   }
 
-  if (!m_imp->createStatement(m_st))
+  saveSettings();
+
+  if (!m_imp->createStatement(m_st)) {
+    m_st = MyMoneyStatement();
     return;
-  slotClose();
-  emit statementReady(m_st);
+  }
+  accept();
+}
+
+const MyMoneyStatement& CSVWizard::statement() const
+{
+  return m_st;
 }
 
 void CSVWizard::saveAsQIFClicked()
@@ -446,6 +455,7 @@ void CSVWizard::initializeComboBoxes(const QHash<Column, QComboBox *> &columns)
 //-------------------------------------------------------------------------------------------------------
 IntroPage::IntroPage(CSVWizard *dlg, CSVImporterCore *imp) :
   CSVWizardPage(dlg, imp),
+  m_profileType(Profile::Banking),
   ui(new Ui::IntroPage)
 {
   ui->setupUi(this);
@@ -780,12 +790,6 @@ void SeparatorPage::textDelimiterChanged(const int index)
 
   m_imp->m_profile->m_textDelimiter = static_cast<TextDelimiter>(index);
   m_imp->m_file->setupParser(m_imp->m_profile);
-
-  if (index == -1) {
-    ui->m_textDelimiter->blockSignals(true);
-    ui->m_textDelimiter->setCurrentIndex((int)m_imp->m_profile->m_textDelimiter);
-    ui->m_textDelimiter->blockSignals(false);
-  }
   emit completeChanged();
 }
 
@@ -927,7 +931,9 @@ void RowsPage::endRowChanged(int val)
 
 FormatsPage::FormatsPage(CSVWizard *dlg, CSVImporterCore *imp) :
   CSVWizardPage(dlg, imp),
-    ui(new Ui::FormatsPage)
+    ui(new Ui::FormatsPage),
+    m_isDecimalSymbolOK(false),
+    m_isDateFormatOK(false)
 {
   ui->setupUi(this);
   connect(ui->m_dateFormat, SIGNAL(currentIndexChanged(int)), this, SLOT(dateFormatChanged(int)));
@@ -945,18 +951,15 @@ void FormatsPage::initializePage()
   m_isDateFormatOK = false;
   QList<QWizard::WizardButton> layout;
   layout << QWizard::Stretch
-         << QWizard::CustomButton3
          << QWizard::CustomButton2
          << QWizard::BackButton
          << QWizard::FinishButton
          << QWizard::CancelButton;
+  wizard()->setButtonText(QWizard::FinishButton, i18n("Import CSV"));
   wizard()->setOption(QWizard::HaveCustomButton2, true);
-  wizard()->setButtonText(QWizard::CustomButton2, i18n("Import CSV"));
-  wizard()->setOption(QWizard::HaveCustomButton3, true);
-  wizard()->setButtonText(QWizard::CustomButton3, i18n("Make QIF File"));
+  wizard()->setButtonText(QWizard::CustomButton2, i18n("Make QIF File"));
   wizard()->setButtonLayout(layout);
   wizard()->button(QWizard::CustomButton2)->setEnabled(false);
-  wizard()->button(QWizard::CustomButton3)->setEnabled(false);
   wizard()->button(QWizard::FinishButton)->setEnabled(false);
 
   ui->m_thousandsDelimiter->setEnabled(false);
@@ -973,10 +976,6 @@ void FormatsPage::initializePage()
     ui->m_decimalSymbol->setCurrentIndex((int)m_imp->m_profile->m_decimalSymbol);
   ui->m_decimalSymbol->blockSignals(false);
   emit ui->m_decimalSymbol->currentIndexChanged((int)m_imp->m_profile->m_decimalSymbol); // emit update signal manually regardless of change to combobox
-
-  if (m_dlg->m_skipSetup &&
-      wizard()->button(QWizard::CustomButton2)->isEnabled())
-    m_dlg->importClicked();
 }
 
 void FormatsPage::decimalSymbolChanged(int index)
@@ -1098,10 +1097,9 @@ bool FormatsPage::validateDateFormat(const int col)
 bool FormatsPage::isComplete() const
 {
   const bool enable = m_isDecimalSymbolOK && m_isDateFormatOK;
-  wizard()->button(QWizard::CustomButton2)->setEnabled(enable);
   if (m_imp->m_profile->type() != Profile::StockPrices &&
       m_imp->m_profile->type() != Profile::CurrencyPrices)
-    wizard()->button(QWizard::CustomButton3)->setEnabled(enable);
+    wizard()->button(QWizard::CustomButton2)->setEnabled(enable);
   return enable;
 }
 

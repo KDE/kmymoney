@@ -20,7 +20,7 @@
 #include <QHashFunctions>
 
 enum class View { Home = 0, Institutions, Accounts, Schedules, Categories, Tags,
-                  Payees, Ledgers, Investments, Reports, Budget, Forecast, OnlineJobOutbox, None };
+                  Payees, Ledgers, Investments, Reports, Budget, Forecast, OnlineJobOutbox, NewLedgers, None };
 
 inline uint qHash(const View key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 
@@ -32,11 +32,44 @@ namespace eView {
                    Closed      // closed tags
                  };
 
-  namespace Schedules {
-    enum class Requester {
-      Reconciliation
-    };
-  }
+  enum class Intent {
+    None,
+    UpdateActions,
+    OpenContextMenu,
+    OpenObject,
+    ShowPayee,
+    ShowTransaction,
+    SynchronizeAccountInInvestmentView,
+    SynchronizeAccountInLedgersView,
+    ToggleColumn,
+    UpdateNetWorth,
+    UpdateProfit,
+    StartEnteringOverdueScheduledTransactions,
+    FinishEnteringOverdueScheduledTransactions,
+    EnterSchedule,
+    ReportProgress,
+    ReportProgressMessage,
+    SelectRegisterTransactions,
+    AccountReconciled,
+    SetOnlinePlugins
+  };
+
+  enum class Action {
+    None,
+    Refresh,
+    SetDefaultFocus,
+    AboutToShow,
+    Print,
+    SwitchView,
+    ClosePayeeIdentifierSource,
+    EditInstitution,
+    EditSchedule,
+    CleanupBeforeFileClose,
+    InitializeAfterFileOpen,
+    DisableViewDepenedendActions,
+    ShowBalanceChart
+  };
+
 }
 
 #endif

@@ -1,25 +1,22 @@
-/***************************************************************************
-                          mymoneysplit.cpp  -  description
-                             -------------------
-    begin                : Sun Apr 28 2002
-    copyright            : (C) 2000-2002 by Michael Edwardes
-    email                : mte@users.sourceforge.net
-                           Javier Campos Morales <javi_c@users.sourceforge.net>
-                           Felix Rodriguez <frodriguez@users.sourceforge.net>
-                           John C <thetacoturtle@users.sourceforge.net>
-                           Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           Kevin Tambascio <ktambascio@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2002-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2004       Kevin Tambascio <ktambascio@users.sourceforge.net>
+ * Copyright 2005-2006  Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MYMONEYSPLIT_P_H
 #define MYMONEYSPLIT_P_H
@@ -40,40 +37,8 @@
 
 #include "mymoneyobject_p.h"
 #include "mymoneymoney.h"
+#include "mymoneytransaction.h"
 #include "mymoneyenums.h"
-namespace eMyMoney
-{
-  namespace Split
-  {
-    enum class Element { Split = 0,
-                         Tag,
-                         Match,
-                         Container,
-                         KeyValuePairs
-                       };
-    uint qHash(const Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-
-    enum class Attribute { ID = 0,
-                           BankID,
-                           Account,
-                           Payee,
-                           Tag,
-                           Number,
-                           Action,
-                           Value,
-                           Shares,
-                           Price,
-                           Memo,
-                           CostCenter,
-                           ReconcileDate,
-                           ReconcileFlag,
-                           KMMatchedTx,
-                           // insert new entries above this line
-                           LastAttribute
-                         };
-    uint qHash(const Attribute key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-  }
-}
 
 using namespace eMyMoney;
 
@@ -81,39 +46,10 @@ class MyMoneySplitPrivate : public MyMoneyObjectPrivate
 {
 
 public:
-
-  static QString getElName(const Split::Element el)
+  MyMoneySplitPrivate() :
+    m_reconcileFlag(eMyMoney::Split::State::NotReconciled),
+    m_isMatched(false)
   {
-    static const QHash<Split::Element, QString> elNames {
-      {Split::Element::Split,          QStringLiteral("SPLIT")},
-      {Split::Element::Tag,            QStringLiteral("TAG")},
-      {Split::Element::Match,          QStringLiteral("MATCH")},
-      {Split::Element::Container,      QStringLiteral("CONTAINER")},
-      {Split::Element::KeyValuePairs,  QStringLiteral("KEYVALUEPAIRS")}
-    };
-    return elNames[el];
-  }
-
-  static QString getAttrName(const Split::Attribute attr)
-  {
-    static const QHash<Split::Attribute, QString> attrNames {
-      {Split::Attribute::ID,             QStringLiteral("id")},
-      {Split::Attribute::BankID,         QStringLiteral("bankid")},
-      {Split::Attribute::Account,        QStringLiteral("account")},
-      {Split::Attribute::Payee,          QStringLiteral("payee")},
-      {Split::Attribute::Tag,            QStringLiteral("tag")},
-      {Split::Attribute::Number,         QStringLiteral("number")},
-      {Split::Attribute::Action,         QStringLiteral("action")},
-      {Split::Attribute::Value,          QStringLiteral("value")},
-      {Split::Attribute::Shares,         QStringLiteral("shares")},
-      {Split::Attribute::Price,          QStringLiteral("price")},
-      {Split::Attribute::Memo,           QStringLiteral("memo")},
-      {Split::Attribute::CostCenter,     QStringLiteral("costcenter")},
-      {Split::Attribute::ReconcileDate,  QStringLiteral("reconciledate")},
-      {Split::Attribute::ReconcileFlag,  QStringLiteral("reconcileflag")},
-      {Split::Attribute::KMMatchedTx,    QStringLiteral("kmm-matched-tx")}
-    };
-    return attrNames[attr];
   }
 
   /**
@@ -199,6 +135,10 @@ public:
     * object to maintain this member variable.
     */
   QString        m_transactionId;
+
+  MyMoneyTransaction m_matchedTransaction;
+  bool m_isMatched;
+
 };
 
 #endif

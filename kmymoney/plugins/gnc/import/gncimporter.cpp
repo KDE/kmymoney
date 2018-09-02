@@ -29,26 +29,28 @@
 #include <KLocalizedString>
 #include <KPluginFactory>
 #include <KMessageBox>
+#include <KCompressionDevice>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoneygncreader.h"
 #include "viewinterface.h"
+#include "appinterface.h"
 #include "mymoneyfile.h"
 #include "mymoneyexception.h"
-#include "mymoneyseqaccessmgr.h"
-#include "kmymoneyglobalsettings.h"
+#include "mymoneystoragemgr.h"
+#include "kmymoneyenums.h"
 
 class MyMoneyStatement;
+
+static constexpr KCompressionDevice::CompressionType const& COMPRESSION_TYPE = KCompressionDevice::GZip;
 
 GNCImporter::GNCImporter(QObject *parent, const QVariantList &args) :
   KMyMoneyPlugin::Plugin(parent, "gncimporter"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   Q_UNUSED(args)
   setComponentName("gncimporter", i18n("GnuCash importer"));
-  setXMLFile("gncimporter.rc");
-  createActions();
   // For information, announce that we have been loaded.
   qDebug("Plugins: gncimporter loaded");
 }
@@ -58,36 +60,87 @@ GNCImporter::~GNCImporter()
   qDebug("Plugins: gncimporter unloaded");
 }
 
-void GNCImporter::injectExternalSettings(KMyMoneySettings* p)
-{
-  KMyMoneyGlobalSettings::injectExternalSettings(p);
-}
+MyMoneyStorageMgr *GNCImporter::open(const QUrl &url)
+{ 
+  if (url.scheme() == QLatin1String("sql"))
+    return nullptr;
 
-void GNCImporter::createActions()
-{
-  m_action = actionCollection()->addAction("file_import_gnc");
-  m_action->setText(i18n("GnuCash..."));
-  connect(m_action, &QAction::triggered, this, &GNCImporter::slotGNCImport);
-}
+  if (!url.isLocalFile())
+    return nullptr;
 
-void GNCImporter::slotGNCImport()
-{
-  m_action->setEnabled(false);
+  const auto fileName = url.toLocalFile();
+  const auto sFileToShort = QString::fromLatin1("File %1 is too short.").arg(fileName);
 
-  if (viewInterface()->fileOpen()) {
-    KMessageBox::information(nullptr, i18n("You cannot import GnuCash data into an existing file. Please close it."));
-    m_action->setEnabled(true);
-    return;
+  QFile file(fileName);
+  if (!file.open(QIODevice::ReadOnly))
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot read the file: %1").arg(fileName));
+
+  QByteArray qbaFileHeader(2, '\0');
+  if (file.read(qbaFileHeader.data(), 2) != 2)
+    throw MYMONEYEXCEPTION(sFileToShort);
+
+  file.close();
+
+  QIODevice* qfile = nullptr;
+  QString sFileHeader(qbaFileHeader);
+  if (sFileHeader == QString("\037\213"))        // gzipped?
+    qfile = new KCompressionDevice(fileName, COMPRESSION_TYPE);
+  else
+    return nullptr;
+
+  if (!qfile->open(QIODevice::ReadOnly)) {
+    delete qfile;
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot read the file: %1").arg(fileName));
   }
 
-  auto url = QFileDialog::getOpenFileUrl(nullptr, QString(), QUrl(), i18n("GnuCash files (*.gnucash *.xac *.gnc);;All files (*)"));
-  if (url.isLocalFile()) {
-    auto pReader = new MyMoneyGncReader;
-    if (viewInterface()->readFile(url, pReader))
-      viewInterface()->slotRefreshViews();
+  // Scan the first 70 bytes to see if we find something
+  // we know. For now, we support our own XML format and
+  // GNUCash XML format. If the file is smaller, then it
+  // contains no valid data and we reject it anyway.
+  qbaFileHeader.resize(70);
+  if (qfile->read(qbaFileHeader.data(), 70) != 70)
+    throw MYMONEYEXCEPTION(sFileToShort);
+
+  QString txt(qbaFileHeader);
+
+  QRegExp gncexp("<gnc-v(\\d+)");
+  if (!(gncexp.indexIn(txt) != -1)) {
+    delete qfile;
+    return nullptr;
   }
 
-  m_action->setEnabled(true);
+  MyMoneyGncReader pReader;
+  qfile->seek(0);
+
+  auto storage = new MyMoneyStorageMgr;
+  pReader.setProgressCallback(appInterface()->progressCallback());
+  pReader.readFile(qfile, storage);
+  pReader.setProgressCallback(0);
+
+  qfile->close();
+  delete qfile;
+  return storage;
+}
+
+bool GNCImporter::save(const QUrl &url)
+{
+  Q_UNUSED(url)
+  return false;
+}
+
+bool GNCImporter::saveAs()
+{
+  return false;
+}
+
+eKMyMoney::StorageType GNCImporter::storageType() const
+{
+  return eKMyMoney::StorageType::GNC;
+}
+
+QString GNCImporter::fileExtension() const
+{
+  return i18n("GnuCash files (*.gnucash *.xac *.gnc)");
 }
 
 K_PLUGIN_FACTORY_WITH_JSON(GNCImporterFactory, "gncimporter.json", registerPlugin<GNCImporter>();)

@@ -51,9 +51,10 @@ public:
   explicit KInvestmentView(QWidget *parent = nullptr);
   ~KInvestmentView() override;
 
-  void setDefaultFocus() override;
-  void refresh() override;
-  void updateActions(const MyMoneyObject &obj) override;
+  void executeCustomAction(eView::Action action) override;
+  void setDefaultFocus();
+  void refresh();
+  void updateActions(const MyMoneyObject &obj);
 
 public Q_SLOTS:
   /**
@@ -62,11 +63,7 @@ public Q_SLOTS:
   void slotSelectAccount(const MyMoneyObject &obj);
 
   void slotShowInvestmentMenu(const MyMoneyAccount& acc);
-
-Q_SIGNALS:
-  void accountSelected(const MyMoneyObject&);
-  void objectSelected(const MyMoneyObject&);
-  void contextMenuRequested(const MyMoneyObject& obj);
+  void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
 
 protected:
   void showEvent(QShowEvent* event) override;

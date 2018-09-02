@@ -1,20 +1,24 @@
-/***************************************************************************
-                          securitiesmodel.h
-                             -------------------
-    copyright            : (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef SECURITIESMODEL_H
 #define SECURITIESMODEL_H
+
+#include "kmm_models_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -33,7 +37,7 @@ class MyMoneyObject;
 
 namespace eMyMoney { namespace File { enum class Object; } }
 
-class SecuritiesModel : public QStandardItemModel
+class KMM_MODELS_EXPORT SecuritiesModel : public QStandardItemModel
 {
   Q_OBJECT
 
@@ -46,8 +50,8 @@ public:
   static QString getHeaderName(const Column column);
 
 public Q_SLOTS:
-  void slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
-  void slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void slotObjectAdded(eMyMoney::File::Object objType, const QString &id);
+  void slotObjectModified(eMyMoney::File::Object objType, const QString &id);
   void slotObjectRemoved(eMyMoney::File::Object objType, const QString& id);
 
 private:
@@ -64,7 +68,7 @@ protected:
   Private* const d;
 };
 
-class SecuritiesFilterProxyModel : public KRecursiveFilterProxyModel
+class KMM_MODELS_EXPORT SecuritiesFilterProxyModel : public KRecursiveFilterProxyModel
 {
   Q_OBJECT
 

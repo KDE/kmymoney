@@ -1,5 +1,3 @@
-project(Wizards)
-
 include_directories( ${CMAKE_CURRENT_BINARY_DIR}/wizardpages)
 
 add_subdirectory( wizardpages )

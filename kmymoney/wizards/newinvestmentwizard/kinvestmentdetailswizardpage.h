@@ -50,7 +50,7 @@ public:
   /**
    * Overload isComplete to handle the required fields
    */
-  bool isComplete() const;
+  bool isComplete() const final override;
 
   /**
    * Functions to control or read the m_priceMode widget

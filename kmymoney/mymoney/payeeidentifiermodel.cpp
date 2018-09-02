@@ -1,11 +1,10 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2015, 2016  Christian David <christian-david@web.de>
+ * Copyright 2015-2016  Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -68,7 +67,7 @@ MyMoneyPayee payeeIdentifierModel::payeeByIndex(const QModelIndex& index) const
   if (index.isValid() && index.row() >= 0 && index.row() < m_payeeIdentifierIds.count()) {
     try {
       return MyMoneyFile::instance()->payee(m_payeeIdentifierIds.at(index.row()));
-    } catch (MyMoneyException&) {
+    } catch (const MyMoneyException &) {
     }
   }
 
@@ -80,17 +79,17 @@ QVariant payeeIdentifierModel::data(const QModelIndex& index, int role) const
   if (!index.isValid())
     return QVariant();
 
-  const bool isPayeeIdentifier = index.parent().isValid();
+  const auto isPayeeIdentifierValid = index.parent().isValid();
   if (role == payeeIdentifierModel::isPayeeIdentifier)
-    return isPayeeIdentifier;
+    return isPayeeIdentifierValid;
 
-  const MyMoneyPayee payee = (isPayeeIdentifier) ? payeeByIndex(index.parent()) : payeeByIndex(index);
+  const MyMoneyPayee payee = (isPayeeIdentifierValid) ? payeeByIndex(index.parent()) : payeeByIndex(index);
 
 
-  if (role == payeeName || (!isPayeeIdentifier && role == Qt::DisplayRole)) {
+  if (role == payeeName || (!isPayeeIdentifierValid && role == Qt::DisplayRole)) {
     // Return data for MyMoneyPayee
     return payee.name();
-  } else if (isPayeeIdentifier) {
+  } else if (isPayeeIdentifierValid) {
     // Return data for payeeIdentifier
     if (index.row() >= 0 && static_cast<unsigned int>(index.row()) < payee.payeeIdentifierCount()) {
       ::payeeIdentifier ident = payee.payeeIdentifier(index.row());

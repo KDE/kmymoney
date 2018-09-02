@@ -2,7 +2,7 @@
                              kaccountssview.h
                              -------------------
     copyright            : (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -50,22 +50,16 @@ public:
   explicit KAccountsView(QWidget *parent = nullptr);
   ~KAccountsView();
 
-  void setDefaultFocus() override;
-  void refresh() override;
-  void updateActions(const MyMoneyObject &obj) override;
-
-  /**
-   * Gets access to plugins found in KMyMoneyApp
-   * @param plugins
-   */
-  void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin *>& plugins);
+  void executeCustomAction(eView::Action action) override;
+  void refresh();
+  void updateActions(const MyMoneyObject &obj);
 
 public Q_SLOTS:
   void slotNetWorthChanged(const MyMoneyMoney &);
   void slotShowAccountMenu(const MyMoneyAccount& acc);
 
-Q_SIGNALS:
-  void objectSelected(const MyMoneyObject& obj);
+  void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
+  void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
 protected:
   void showEvent(QShowEvent * event) override;
@@ -83,6 +77,10 @@ private Q_SLOTS:
   void slotChartAccountBalance();
   void slotNewCategory();
   void slotNewPayee(const QString& nameBase, QString& id);
+  void slotAccountMapOnline();
+  void slotAccountUnmapOnline();
+  void slotAccountUpdateOnline();
+  void slotAccountUpdateOnlineAll();
 };
 
 #endif

@@ -24,8 +24,9 @@
 
 #include "mymoneyfile.h"
 #include "onlinejobadministration.h"
+#include "mymoneyexception.h"
 
-#include "plugins/onlinetasks/sepa/tasks/sepaonlinetransfer.h"
+#include "onlinetasks/sepa/sepaonlinetransfer.h"
 #include "sepacredittransfersettingsmockup.h"
 
 onlineJobPluginMockup::onlineJobPluginMockup(QObject *parent, const QVariantList &args) :
@@ -77,7 +78,7 @@ QStringList onlineJobPluginMockup::availableJobs(QString accountId)
   try {
     if (MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider").toLower() == objectName().toLower())
       return onlineJobAdministration::instance()->availableOnlineTasks();
-  } catch (MyMoneyException&) {
+  } catch (const MyMoneyException &) {
   }
 
   return QStringList();
@@ -88,7 +89,7 @@ IonlineTaskSettings::ptr onlineJobPluginMockup::settings(QString accountId, QStr
   try {
     if (taskName == sepaOnlineTransfer::name() && MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider").toLower() == objectName().toLower())
       return IonlineTaskSettings::ptr(new sepaCreditTransferSettingsMockup);
-  } catch (MyMoneyException&) {
+  } catch (const MyMoneyException &) {
   }
   return IonlineTaskSettings::ptr();
 }

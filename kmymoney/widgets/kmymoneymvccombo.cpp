@@ -1,21 +1,22 @@
-/***************************************************************************
-                          kmymoneymvccombo.cpp  -  description
-                             -------------------
-    begin                : Sat Jan 09 2010
-    copyright            : (C) 2010 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           Cristian Onet <cristian.onet@gmail.com>
-                           Alvaro Soliverez <asoliverez@gmail.com>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2010-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2010-2016  Cristian Oneț <onet.cristian@gmail.com>
+ * Copyright 2010       Alvaro Soliverez <asoliverez@gmail.com>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "kmymoneymvccombo.h"
 #include "kmymoneymvccombo_p.h"
@@ -139,9 +140,9 @@ void KMyMoneyMVCCombo::setPlaceholderText(const QString& hint) const
 QString KMyMoneyMVCCombo::selectedItem() const
 {
   Q_D(const KMyMoneyMVCCombo);
-  QVariant data = itemData(currentIndex());
-  if (data.isValid())
-    d->m_id = data.toString();
+  auto dataVariant = itemData(currentIndex());
+  if (dataVariant.isValid())
+    d->m_id = dataVariant.toString();
   else
     d->m_id.clear();
   return d->m_id;
@@ -157,9 +158,9 @@ void KMyMoneyMVCCombo::setSelectedItem(const QString& id)
 void KMyMoneyMVCCombo::activated(int index)
 {
   Q_D(KMyMoneyMVCCombo);
-  QVariant data = itemData(index);
-  if (data.isValid()) {
-    d->m_id = data.toString();
+  auto dataVariant = itemData(index);
+  if (dataVariant.isValid()) {
+    d->m_id = dataVariant.toString();
     emit itemSelected(d->m_id);
   }
 }

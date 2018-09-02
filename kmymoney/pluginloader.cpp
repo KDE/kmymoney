@@ -1,7 +1,7 @@
 /***************************************************************************
                           pluginloader.cpp
                              -------------------
-  (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+  Copyright (C) 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -18,6 +18,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QMap>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -33,7 +35,6 @@
 
 #include "kmymoneyplugin.h"
 #include "onlinepluginextended.h"
-#include "kmymoneyglobalsettings.h"
 
 namespace KMyMoneyPlugin
 {
@@ -91,10 +92,11 @@ namespace KMyMoneyPlugin
           ctnPlugins.online.remove(it.key());
           ctnPlugins.extended.remove(it.key());
           ctnPlugins.importer.remove(it.key());
+          ctnPlugins.storage.remove(it.key());
+          ctnPlugins.data.remove(it.key());
 
           guiFactory->removeClient(it.value());
           it.value()->unplug();
-          it.value()->injectExternalSettings(0);
           delete it.value();
           it = plugins.erase(it);
           continue;
@@ -127,7 +129,6 @@ namespace KMyMoneyPlugin
           }
 
           ctnPlugins.standard.insert((*it).pluginId(), plugin);
-          plugin->injectExternalSettings(KMyMoneyGlobalSettings::self());
           plugin->plug();
           guiFactory->addClient(plugin);
 
@@ -142,6 +143,14 @@ namespace KMyMoneyPlugin
           auto IImporter = qobject_cast<ImporterPlugin *>(plugin);
           if (IImporter)
             ctnPlugins.importer.insert((*it).pluginId(), IImporter);
+
+          auto IStorage = qobject_cast<StoragePlugin *>(plugin);
+          if (IStorage)
+            ctnPlugins.storage.insert((*it).pluginId(), IStorage);
+
+          auto IData = qobject_cast<DataPlugin *>(plugin);
+          if (IData)
+            ctnPlugins.data.insert((*it).pluginId(), IData);
 
         }
       }

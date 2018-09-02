@@ -1,20 +1,20 @@
-/***************************************************************************
-                          registeritem.cpp  -  description
-                             -------------------
-    begin                : Tue Jun 13 2006
-    copyright            : (C) 2000-2006 by Thomas Baumgart
-    email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2006-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "registeritem.h"
 #include "registeritem_p.h"
@@ -29,7 +29,7 @@
 // Project Includes
 
 #include "register.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "mymoneyobject.h"
 #include "mymoneymoney.h"
 #include "mymoneyenums.h"
@@ -89,38 +89,32 @@ void RegisterItem::setFocus(bool /*focus*/, bool updateLens)
 
 QDate RegisterItem::sortPostDate() const
 {
-  Q_D(const RegisterItem);
-  return d->nullDate;
+  return KMyMoneyRegister::RegisterItemPrivate::nullDate;
 }
 
 QDate RegisterItem::sortEntryDate() const
 {
-  Q_D(const RegisterItem);
-  return d->nullDate;
+  return KMyMoneyRegister::RegisterItemPrivate::nullDate;
 }
 
 const QString& RegisterItem::sortPayee() const
 {
-  Q_D(const RegisterItem);
-  return d->nullString;
+  return KMyMoneyRegister::RegisterItemPrivate::nullString;
 }
 
 MyMoneyMoney RegisterItem::sortValue() const
 {
-  Q_D(const RegisterItem);
-  return d->nullValue;
+  return KMyMoneyRegister::RegisterItemPrivate::nullValue;
 }
 
 QString RegisterItem::sortNumber() const
 {
-  Q_D(const RegisterItem);
-  return d->nullString;
+  return KMyMoneyRegister::RegisterItemPrivate::nullString;
 }
 
 const QString& RegisterItem::sortEntryOrder() const
 {
-  Q_D(const RegisterItem);
-  return d->nullString;
+  return KMyMoneyRegister::RegisterItemPrivate::nullString;
 }
 
 eWidgets::eRegister::CashFlowDirection RegisterItem::sortType() const
@@ -130,8 +124,7 @@ eWidgets::eRegister::CashFlowDirection RegisterItem::sortType() const
 
 const QString& RegisterItem::sortCategory() const
 {
-  Q_D(const RegisterItem);
-  return d->nullString;
+  return KMyMoneyRegister::RegisterItemPrivate::nullString;
 }
 
 eMyMoney::Split::State RegisterItem::sortReconcileState() const
@@ -141,8 +134,7 @@ eMyMoney::Split::State RegisterItem::sortReconcileState() const
 
 const QString RegisterItem::sortSecurity() const
 {
-  Q_D(const RegisterItem);
-  return d->nullString;
+  return KMyMoneyRegister::RegisterItemPrivate::nullString;
 }
 
 void RegisterItem::setStartRow(int row)
@@ -295,6 +287,6 @@ int RegisterItem::rowHeightHint() const
     return d->m_parent->rowHeightHint();
   }
 
-  QFontMetrics fm(KMyMoneyGlobalSettings::listCellFont());
+  QFontMetrics fm(KMyMoneySettings::listCellFontEx());
   return fm.lineSpacing() + 6;
 }

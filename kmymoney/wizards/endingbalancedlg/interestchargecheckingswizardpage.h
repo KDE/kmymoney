@@ -43,12 +43,12 @@ class InterestChargeCheckingsWizardPage : public QWizardPage
 
 public:
   explicit InterestChargeCheckingsWizardPage(QWidget *parent = nullptr);
-  ~InterestChargeCheckingsWizardPage();
+  ~InterestChargeCheckingsWizardPage() override;
 
   /**
    * Overload the isComplete function to control the Next button
    */
-  bool isComplete() const;
+  bool isComplete() const final override;
 
   Ui::InterestChargeCheckingsWizardPage *ui;
 };

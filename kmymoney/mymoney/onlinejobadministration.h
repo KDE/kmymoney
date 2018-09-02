@@ -1,11 +1,10 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ * Copyright 2013-2018  Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -38,7 +37,6 @@
 
 class onlineTask;
 class IonlineJobEdit;
-class QSqlDatabase;
 
 namespace KMyMoneyPlugin
 {
@@ -67,8 +65,10 @@ class KMM_MYMONEY_EXPORT onlineJobAdministration : public QObject
   Q_PROPERTY(bool canSendAnyTask READ canSendAnyTask NOTIFY canSendAnyTaskChanged STORED false);
   Q_PROPERTY(bool canSendCreditTransfer READ canSendCreditTransfer NOTIFY canSendCreditTransferChanged STORED false);
 
-public:
+protected:
   explicit onlineJobAdministration(QObject *parent = 0);
+
+public:
   ~onlineJobAdministration();
 
   struct onlineJobEditOffer {
@@ -83,10 +83,7 @@ public:
    */
   QStringList availableOnlineTasks();
 
-  static onlineJobAdministration* instance() {
-    static onlineJobAdministration m_instance;
-    return &m_instance;
-  }
+  static onlineJobAdministration* instance();
 
   /** @brief clear the internal caches for shutdown */
   void clearCaches();
@@ -212,6 +209,12 @@ public:
    */
   void updateActions();
 
+  /**
+   * @brief Creates an onlineTask by its iid and xml data
+   * @return pointer to task, caller gains ownership. Can be 0.
+   */
+  onlineTask* createOnlineTaskByXml(const QString& iid, const QDomElement& element) const;
+
 Q_SIGNALS:
   /**
    * @brief Emitted if canSendAnyTask() changed
@@ -247,6 +250,11 @@ public Q_SLOTS:
 
 private:
   /**
+   * Register all available online tasks
+   */
+  void registerAllOnlineTasks();
+
+  /**
    * @brief Find onlinePlugin which is responsible for accountId
    * @param accountId
    * @return Pointer to onlinePluginExtended, do not delete.
@@ -259,27 +267,12 @@ private:
    */
   onlineTask* createOnlineTask(const QString& iid) const;
 
-  /**
-   * @brief Creates an onlineTask by its iid and xml data
-   * @return pointer to task, caller gains ownership. Can be 0.
-   */
-  onlineTask* createOnlineTaskByXml(const QString& iid, const QDomElement& element) const;
-
-  /**
-   * @brief Creates an onlineTask by its iid and xml data
-   * @return pointer to task, caller gains ownership. Can be 0.
-   */
-  onlineTask* createOnlineTaskFromSqlDatabase(const QString& iid, const QString& onlineJobId, QSqlDatabase connection) const;
-
   // Must be able to call createOnlineTaskByXml
   friend class onlineJob;
 
   // Must be able to call createOnlineTask
   template<class T>
   friend class onlineJobTyped;
-
-  // Must be able to call createOnlineTaskFromSqlDatabase()
-  friend class MyMoneyStorageSql;
 
   /**
    * @brief Get root instance of an onlineTask
@@ -314,6 +307,8 @@ private:
    * Intances of editors
    */
   QList<IonlineJobEdit*> m_onlineTaskEditors;
+
+  bool m_inRegistration;
 };
 
 template<class T>

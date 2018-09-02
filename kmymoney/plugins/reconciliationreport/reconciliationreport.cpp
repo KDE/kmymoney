@@ -42,7 +42,6 @@
 #include "mymoneyutils.h"
 #include "viewinterface.h"
 #include "mymoneyenums.h"
-#include "kmymoneyglobalsettings.h"
 
 #include "kreconciliationreportdlg.h"
 
@@ -56,11 +55,6 @@ ReconciliationReport::ReconciliationReport(QObject *parent, const QVariantList &
 ReconciliationReport::~ReconciliationReport()
 {
   qDebug("Plugins: reconciliation report unloaded");
-}
-
-void ReconciliationReport::injectExternalSettings(KMyMoneySettings* p)
-{
-  KMyMoneyGlobalSettings::injectExternalSettings(p);
 }
 
 void ReconciliationReport::plug()

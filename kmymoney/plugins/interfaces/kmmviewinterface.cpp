@@ -44,12 +44,6 @@ KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoneyView* view, QObject* 
 //  connect(app, &KMyMoneyApp::institutionSelected, this, &ViewInterface::institutionSelected);
 
   connect(m_view, &KMyMoneyView::viewStateChanged, this, &ViewInterface::viewStateChanged);
-  connect(m_view, &KMyMoneyView::kmmFilePlugin, this, &ViewInterface::kmmFilePlugin);
-}
-
-bool KMyMoneyPlugin::KMMViewInterface::readFile(const QUrl &url, IMyMoneyStorageFormat *pExtReader)
-{
-  return m_view->readFile(url, pExtReader);
 }
 
 void KMyMoneyPlugin::KMMViewInterface::slotRefreshViews()
@@ -57,9 +51,14 @@ void KMyMoneyPlugin::KMMViewInterface::slotRefreshViews()
   m_view->slotRefreshViews();
 }
 
-bool KMyMoneyPlugin::KMMViewInterface::fileOpen()
+void KMyMoneyPlugin::KMMViewInterface::addView(KMyMoneyViewBase* view, const QString& name, View idView)
 {
-  return m_view->fileOpen();
+  m_view->addView(view, name, idView);
+}
+
+void KMyMoneyPlugin::KMMViewInterface::removeView(View idView)
+{
+  m_view->removeView(idView);
 }
 
 //KMyMoneyViewBase* KMyMoneyPlugin::KMMViewInterface::addPage(const QString& item, const QString& icon)

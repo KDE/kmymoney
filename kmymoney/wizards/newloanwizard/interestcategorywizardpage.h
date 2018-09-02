@@ -46,7 +46,7 @@ public:
   /**
    * Overload the isComplete function to control the Next button
    */
-  bool isComplete() const;
+  bool isComplete() const final override;
 
   Ui::InterestCategoryWizardPage *ui;
 

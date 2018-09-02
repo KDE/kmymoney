@@ -1,19 +1,21 @@
-/***************************************************************************
-                          mymoneyschedule.cpp
-                             -------------------
-    copyright            : (C) 2000-2002 by Michael Edwardes <mte@users.sourceforge.net>
-                           (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2000-2004  Michael Edwardes <mte@users.sourceforge.net>
+ * Copyright 2002-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2005       Ace Jones <acejones@users.sourceforge.net>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "mymoneyschedule.h"
 #include "mymoneyschedule_p.h"
@@ -22,8 +24,6 @@
 // QT Includes
 
 #include <QList>
-#include <QDomDocument>
-#include <QDomElement>
 #include <QMap>
 
 // ----------------------------------------------------------------------------
@@ -40,15 +40,18 @@
 #include "mymoneyaccount.h"
 #include "mymoneysplit.h"
 #include "imymoneyprocessingcalendar.h"
-#include "mymoneystoragenames.h"
 
-using namespace MyMoneyStorageNodes;
 using namespace eMyMoney;
 
 static IMyMoneyProcessingCalendar* processingCalendarPtr = 0;
 
 MyMoneySchedule::MyMoneySchedule() :
     MyMoneyObject(*new MyMoneySchedulePrivate)
+{
+}
+
+MyMoneySchedule::MyMoneySchedule(const QString &id) :
+    MyMoneyObject(*new MyMoneySchedulePrivate, id)
 {
 }
 
@@ -74,75 +77,6 @@ MyMoneySchedule::MyMoneySchedule(const QString& name,
   d->m_fixed = fixed;
   d->m_autoEnter = autoEnter;
   d->m_endDate = endDate;
-}
-
-MyMoneySchedule::MyMoneySchedule(const QDomElement& node) :
-    MyMoneyObject(*new MyMoneySchedulePrivate, node)
-{
-  if (nodeNames[nnScheduleTX] != node.tagName())
-    throw MYMONEYEXCEPTION("Node was not SCHEDULED_TX");
-
-  Q_D(MyMoneySchedule);
-  d->m_name = node.attribute(d->getAttrName(Schedule::Attribute::Name));
-  d->m_startDate = MyMoneyUtils::stringToDate(node.attribute(d->getAttrName(Schedule::Attribute::StartDate)));
-  d->m_endDate = MyMoneyUtils::stringToDate(node.attribute(d->getAttrName(Schedule::Attribute::EndDate)));
-  d->m_lastPayment = MyMoneyUtils::stringToDate(node.attribute(d->getAttrName(Schedule::Attribute::LastPayment)));
-
-  d->m_type = static_cast<Schedule::Type>(node.attribute(d->getAttrName(Schedule::Attribute::Type)).toInt());
-  d->m_paymentType = static_cast<Schedule::PaymentType>(node.attribute(d->getAttrName(Schedule::Attribute::PaymentType)).toInt());
-  d->m_occurrence = static_cast<Schedule::Occurrence>(node.attribute(d->getAttrName(Schedule::Attribute::Occurrence)).toInt());
-  d->m_occurrenceMultiplier = node.attribute(d->getAttrName(Schedule::Attribute::OccurrenceMultiplier), "1").toInt();
-  // Convert to compound occurrence
-  simpleToCompoundOccurrence(d->m_occurrenceMultiplier, d->m_occurrence);
-  d->m_lastDayInMonth = static_cast<bool>(node.attribute("lastDayInMonth").toInt());
-  d->m_autoEnter = static_cast<bool>(node.attribute(d->getAttrName(Schedule::Attribute::AutoEnter)).toInt());
-  d->m_fixed = static_cast<bool>(node.attribute(d->getAttrName(Schedule::Attribute::Fixed)).toInt());
-  d->m_weekendOption = static_cast<Schedule::WeekendOption>(node.attribute(d->getAttrName(Schedule::Attribute::WeekendOption)).toInt());
-
-  // read in the associated transaction
-  QDomNodeList nodeList = node.elementsByTagName(nodeNames[nnTransaction]);
-  if (nodeList.count() == 0)
-    throw MYMONEYEXCEPTION("SCHEDULED_TX has no TRANSACTION node");
-
-  setTransaction(MyMoneyTransaction(nodeList.item(0).toElement(), false), true);
-
-  // some old versions did not remove the entry date and post date fields
-  // in the schedule. So if this is the case, we deal with a very old transaction
-  // and can't use the post date field as next due date. Hence, we wipe it out here
-  if (d->m_transaction.entryDate().isValid()) {
-    d->m_transaction.setPostDate(QDate());
-    d->m_transaction.setEntryDate(QDate());
-  }
-
-  // readin the recorded payments
-  nodeList = node.elementsByTagName(d->getElName(Schedule::Element::Payments));
-  if (nodeList.count() > 0) {
-    nodeList = nodeList.item(0).toElement().elementsByTagName(d->getElName(Schedule::Element::Payment));
-    for (int i = 0; i < nodeList.count(); ++i) {
-      d->m_recordedPayments << MyMoneyUtils::stringToDate(nodeList.item(i).toElement().attribute(d->getAttrName(Schedule::Attribute::Date)));
-    }
-  }
-
-  // if the next due date is not set (comes from old version)
-  // then set it up the old way
-  if (!nextDueDate().isValid() && !d->m_lastPayment.isValid()) {
-    d->m_transaction.setPostDate(d->m_startDate);
-    // clear it, because the schedule has never been used
-    d->m_startDate = QDate();
-  }
-
-  // There are reports that lastPayment and nextDueDate are identical or
-  // that nextDueDate is older than lastPayment. This could
-  // be caused by older versions of the application. In this case, we just
-  // clear out the nextDueDate and let it calculate from the lastPayment.
-  if (nextDueDate().isValid() && nextDueDate() <= d->m_lastPayment) {
-    d->m_transaction.setPostDate(QDate());
-  }
-
-  if (!nextDueDate().isValid()) {
-    d->m_transaction.setPostDate(d->m_startDate);
-    d->m_transaction.setPostDate(nextPayment(d->m_lastPayment.addDays(1)));
-  }
 }
 
 MyMoneySchedule::MyMoneySchedule(const MyMoneySchedule& other) :
@@ -447,37 +381,37 @@ void MyMoneySchedule::validate(bool id_check) const
    */
   Q_D(const MyMoneySchedule);
   if (id_check && !d->m_id.isEmpty())
-    throw MYMONEYEXCEPTION("ID for schedule not empty when required");
+    throw MYMONEYEXCEPTION_CSTRING("ID for schedule not empty when required");
 
   if (d->m_occurrence == Schedule::Occurrence::Any)
-    throw MYMONEYEXCEPTION("Invalid occurrence type for schedule");
+    throw MYMONEYEXCEPTION_CSTRING("Invalid occurrence type for schedule");
 
   if (d->m_type == Schedule::Type::Any)
-    throw MYMONEYEXCEPTION("Invalid type for schedule");
+    throw MYMONEYEXCEPTION_CSTRING("Invalid type for schedule");
 
   if (!nextDueDate().isValid())
-    throw MYMONEYEXCEPTION("Invalid next due date for schedule");
+    throw MYMONEYEXCEPTION_CSTRING("Invalid next due date for schedule");
 
   if (d->m_paymentType == Schedule::PaymentType::Any)
-    throw MYMONEYEXCEPTION("Invalid payment type for schedule");
+    throw MYMONEYEXCEPTION_CSTRING("Invalid payment type for schedule");
 
   if (d->m_transaction.splitCount() == 0)
-    throw MYMONEYEXCEPTION("Scheduled transaction does not contain splits");
+    throw MYMONEYEXCEPTION_CSTRING("Scheduled transaction does not contain splits");
 
   // Check the payment types
   switch (d->m_type) {
     case Schedule::Type::Bill:
       if (d->m_paymentType == Schedule::PaymentType::DirectDeposit || d->m_paymentType == Schedule::PaymentType::ManualDeposit)
-        throw MYMONEYEXCEPTION("Invalid payment type for bills");
+        throw MYMONEYEXCEPTION_CSTRING("Invalid payment type for bills");
       break;
 
     case Schedule::Type::Deposit:
       if (d->m_paymentType == Schedule::PaymentType::DirectDebit || d->m_paymentType == Schedule::PaymentType::WriteChecque)
-        throw MYMONEYEXCEPTION("Invalid payment type for deposits");
+        throw MYMONEYEXCEPTION_CSTRING("Invalid payment type for deposits");
       break;
 
     case Schedule::Type::Any:
-      throw MYMONEYEXCEPTION("Invalid type ANY");
+      throw MYMONEYEXCEPTION_CSTRING("Invalid type ANY");
       break;
 
     case Schedule::Type::Transfer:
@@ -931,43 +865,6 @@ void MyMoneySchedule::fixDate(QDate& date) const
   }
 }
 
-void MyMoneySchedule::writeXML(QDomDocument& document, QDomElement& parent) const
-{
-  auto el = document.createElement(nodeNames[nnScheduleTX]);
-
-  Q_D(const MyMoneySchedule);
-  d->writeBaseXML(document, el);
-
-  el.setAttribute(d->getAttrName(Schedule::Attribute::Name), d->m_name);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::Type), (int)d->m_type);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::Occurrence), (int)d->m_occurrence);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::OccurrenceMultiplier), d->m_occurrenceMultiplier);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::PaymentType), (int)d->m_paymentType);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::StartDate), MyMoneyUtils::dateToString(d->m_startDate));
-  el.setAttribute(d->getAttrName(Schedule::Attribute::EndDate), MyMoneyUtils::dateToString(d->m_endDate));
-  el.setAttribute(d->getAttrName(Schedule::Attribute::Fixed), d->m_fixed);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::LastDayInMonth), d->m_lastDayInMonth);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::AutoEnter), d->m_autoEnter);
-  el.setAttribute(d->getAttrName(Schedule::Attribute::LastPayment), MyMoneyUtils::dateToString(d->m_lastPayment));
-  el.setAttribute(d->getAttrName(Schedule::Attribute::WeekendOption), (int)d->m_weekendOption);
-
-  //store the payment history for this scheduled task.
-  QList<QDate> payments = recordedPayments();
-  QList<QDate>::ConstIterator it;
-  QDomElement paymentsElement = document.createElement(d->getElName(Schedule::Element::Payments));
-  for (it = payments.constBegin(); it != payments.constEnd(); ++it) {
-    QDomElement paymentEntry = document.createElement(d->getElName(Schedule::Element::Payment));
-    paymentEntry.setAttribute(d->getAttrName(Schedule::Attribute::Date), MyMoneyUtils::dateToString(*it));
-    paymentsElement.appendChild(paymentEntry);
-  }
-  el.appendChild(paymentsElement);
-
-  //store the transaction data for this task.
-  d->m_transaction.writeXML(document, el);
-
-  parent.appendChild(el);
-}
-
 bool MyMoneySchedule::hasReferenceTo(const QString& id) const
 {
   Q_D(const MyMoneySchedule);
@@ -1196,7 +1093,7 @@ QString MyMoneySchedule::weekendOptionToString(Schedule::WeekendOption weekendOp
       text = I18N_NOOP("Change the date to the next processing day");
       break;
     case Schedule::WeekendOption::MoveNothing:
-      text = I18N_NOOP("Do Nothing");
+      text = I18N_NOOP("Do not change the date");
       break;
   }
   return text;

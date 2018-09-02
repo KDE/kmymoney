@@ -1,33 +1,37 @@
 /*
-  This file is part of KMyMoney, A Personal Finance Manager by KDE
-  Copyright (C) 2013 Christian Dávid <christian-david@web.de>
-
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
+ * Copyright 2013-2015  Christian Dávid <christian-david@web.de>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef ONLINEJOB_H
 #define ONLINEJOB_H
 
+#define STRINGIFY(x) #x
+#define TOSTRING(x) STRINGIFY(x)
+#define BADTASKEXCEPTION badTaskCast("Casted onlineTask with wrong type. " __FILE__ ":" TOSTRING(__LINE__))
+#define EMPTYTASKEXCEPTION emptyTask("Requested onlineTask of onlineJob without any task. " __FILE__ ":" TOSTRING(__LINE__))
+
 #include <QMetaType>
 #include <QString>
 #include "mymoneyobject.h"
-#include "mymoneyexception.h"
 #include "onlinejobmessage.h"
 
 class onlineTask;
 class MyMoneyAccount;
+
+namespace eMyMoney { namespace OnlineJob { enum class sendingState; } }
 
 /**
  * @brief Class to share jobs which can be procceded by an online banking plugin
@@ -64,6 +68,7 @@ public:
    * @see isNull()
    */
   onlineJob();
+  explicit onlineJob(const QString &id);
 
   /**
    * @brief Default construtor
@@ -72,9 +77,6 @@ public:
    */
   onlineJob(onlineTask* task, const QString& id); // krazy:exclude=explicit
   onlineJob(onlineTask* task); // krazy:exclude=explicit
-
-  /** @brief Contruct from xml */
-  explicit onlineJob(const QDomElement&);
 
   /**
    * @brief Create new onlineJob as copy of other
@@ -90,6 +92,8 @@ public:
   friend void swap(onlineJob& first, onlineJob& second);
 
   virtual ~onlineJob();
+
+  void setTask(onlineTask *task);
 
   /**
    * @brief Returns task attached to this onlineJob
@@ -135,18 +139,6 @@ public:
 
   /** @todo implement */
   bool hasReferenceTo(const QString &id) const override;
-  void writeXML(QDomDocument &document, QDomElement &parent) const override;
-
-  /**
-   * @brief The state of a job given by the onlinePlugin
-   */
-  enum sendingState {
-    noBankAnswer, /**< Used during or before sending or if sendDate().isValid() the job was successfully sent */
-    acceptedByBank, /**< bank definetly confirmed the job */
-    rejectedByBank, /**< bank definetly rejected this job */
-    abortedByUser, /**< aborted by user during sending */
-    sendingError /**< an error occurred, the job is certainly not executed by the bank */
-  };
 
   /**
    * @brief Account this job is related to
@@ -216,8 +208,8 @@ public:
    *
    * Set dateTime to QDateTime() and bankAnswer to noState to mark unsend. If bankAnswer == noState dateTime.isNull() must be true!
    */
-  void setBankAnswer(const sendingState sendingState, const QDateTime &dateTime);
-  void setBankAnswer(const sendingState sendingState);
+  void setBankAnswer(const eMyMoney::OnlineJob::sendingState state, const QDateTime &dateTime);
+  void setBankAnswer(const eMyMoney::OnlineJob::sendingState state);
 
   /**
    * @brief DateTime of the last status update by the bank
@@ -229,7 +221,7 @@ public:
    * @brief Returns last status sand by bank
    * @return
    */
-  sendingState bankAnswerState() const;
+  eMyMoney::OnlineJob::sendingState bankAnswerState() const;
 
   /**
    * @brief locks the onlineJob for sending it
@@ -283,26 +275,27 @@ public:
    */
   virtual QList<onlineJobMessage> jobMessageList() const;
 
+
+  void clearJobMessageList();
+
   /**
    * @brief Thrown if a cast of a task fails
    *
    * This is inspired by std::bad_cast
    */
-  class badTaskCast : public MyMoneyException
+  class badTaskCast : public std::runtime_error
   {
   public:
-    explicit badTaskCast(const QString& file = QString(), const long unsigned int& line = 0)
-      : MyMoneyException("Casted onlineTask with wrong type", file, line) {}
+    explicit badTaskCast(const char *msg) : std::runtime_error(msg) {}  // krazy:exclude=inline
   };
 
   /**
    * @brief Thrown if a task of an invalid onlineJob is requested
    */
-  class emptyTask : public MyMoneyException
+  class emptyTask : public std::runtime_error
   {
   public:
-    explicit emptyTask(const QString& file = QString(), const long unsigned int& line = 0)
-      : MyMoneyException("Requested onlineTask of onlineJob without any task", file, line) {}
+    explicit emptyTask(const char *msg) : std::runtime_error(msg) {}  // krazy:exclude=inline
   };
 
   /** @brief onlineTask attatched to this job */
@@ -337,7 +330,7 @@ T* onlineJob::task()
 {
   T* ret = dynamic_cast<T*>(m_task);
   if (ret == 0)
-    throw badTaskCast(__FILE__, __LINE__);
+    throw EMPTYTASKEXCEPTION;
   return ret;
 }
 
@@ -346,7 +339,7 @@ const T* onlineJob::task() const
 {
   const T* ret = dynamic_cast<const T*>(m_task);
   if (ret == 0)
-    throw badTaskCast(__FILE__, __LINE__);
+    throw BADTASKEXCEPTION;
   return ret;
 }
 

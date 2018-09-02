@@ -1,23 +1,25 @@
-/***************************************************************************
-                          ledgermodel.cpp
-                             -------------------
-    begin                : Sat Aug 8 2015
-    copyright            : (C) 2015 by Thomas Baumgart
-    email                : Thomas Baumgart <tbaumgart@kde.org>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2016-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef LEDGERMODEL_H
 #define LEDGERMODEL_H
+
+#include "kmm_models_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -39,7 +41,7 @@ class LedgerTransaction;
 namespace eMyMoney { namespace File { enum class Object; } }
 
 class LedgerModelPrivate;
-class LedgerModel : public QAbstractTableModel
+class KMM_MODELS_EXPORT LedgerModel : public QAbstractTableModel
 {
   Q_OBJECT
 
@@ -93,14 +95,12 @@ public:
   QString transactionIdFromTransactionSplitId(const QString& transactionSplitId) const;
 
 public Q_SLOTS:
-
-protected Q_SLOTS:
-  void removeTransaction(eMyMoney::File::Object objType, const QString& id);
-  void addTransaction   (eMyMoney::File::Object objType, const MyMoneyObject * const obj);
-  void modifyTransaction(eMyMoney::File::Object objType, const MyMoneyObject * const obj);
-  void removeSchedule   (eMyMoney::File::Object objType, const QString& id);
-  void addSchedule      (eMyMoney::File::Object objType, const MyMoneyObject * const obj);
-  void modifySchedule   (eMyMoney::File::Object objType, const MyMoneyObject * const obj);
+  void slotAddTransaction   (eMyMoney::File::Object objType, const QString& id);
+  void slotModifyTransaction(eMyMoney::File::Object objType, const QString& id);
+  void slotRemoveTransaction(eMyMoney::File::Object objType, const QString& id);
+  void slotAddSchedule      (eMyMoney::File::Object objType, const QString& id);
+  void slotModifySchedule   (eMyMoney::File::Object objType, const QString& id);
+  void slotRemoveSchedule   (eMyMoney::File::Object objType, const QString& id);
 
 private:
   Q_DISABLE_COPY(LedgerModel)

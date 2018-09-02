@@ -28,6 +28,7 @@
 #include <QQuickView>
 #include <QQuickItem>
 #include <QPushButton>
+#include <QRegExpValidator>
 #include <QStandardPaths>
 
 #include <KLocalizedString>
@@ -47,7 +48,7 @@ chipTanDialog::chipTanDialog(QWidget* parent)
   connect(ui->buttonBox, &QDialogButtonBox::rejected, this, &chipTanDialog::reject);
   connect(ui->tanInput, &QLineEdit::textEdited, this, &chipTanDialog::tanInputChanged);
 
-  ui->declarativeView->setSource(QUrl(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kmm_kbanking/qml/chipTan/ChipTan.qml"))));
+  ui->declarativeView->setSource(QUrl(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kbanking/qml/chipTan/ChipTan.qml"))));
 
   setFlickerFieldWidth(KBankingSettings::width());
   setFlickerFieldClockSetting(KBankingSettings::clocksetting());
@@ -64,6 +65,7 @@ chipTanDialog::chipTanDialog(QWidget* parent)
     done(InternalError);
 
   tanInputChanged(QString());
+  ui->tanInput->setFocus();
 }
 
 chipTanDialog::~chipTanDialog()
@@ -148,6 +150,7 @@ void chipTanDialog::flickerFieldClockSettingChanged(const int& takt)
 
 void chipTanDialog::flickerFieldWidthChanged(const int& width)
 {
+  ui->declarativeView->setFixedWidth(width);
   KBankingSettings::setWidth(width);
   KBankingSettings::self()->save();
 }

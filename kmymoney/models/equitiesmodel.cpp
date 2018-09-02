@@ -1,17 +1,19 @@
-/***************************************************************************
-                          equitiesmodel.cpp
-                             -------------------
-    copyright            : (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "equitiesmodel.h"
 
@@ -223,61 +225,60 @@ void EquitiesModel::load()
 /**
   * Notify the model that an object has been added. An action is performed only if the object is an account.
   */
-void EquitiesModel::slotObjectAdded(eMyMoney::File::Object objType, const MyMoneyObject * const obj)
+void EquitiesModel::slotObjectAdded(eMyMoney::File::Object objType, const QString& id)
 {
   // check whether change is about accounts
   if (objType != eMyMoney::File::Object::Account)
     return;
 
   // check whether change is about either investment or stock account
-  const auto acc = dynamic_cast<const MyMoneyAccount * const>(obj);
-  if (!acc ||
-      (acc->accountType() != eMyMoney::Account::Type::Investment &&
-       acc->accountType() != eMyMoney::Account::Type::Stock))
+  const auto acc = MyMoneyFile::instance()->account(id);
+  if (acc.accountType() != eMyMoney::Account::Type::Investment &&
+      acc.accountType() != eMyMoney::Account::Type::Stock)
     return;
-  auto itAcc = d->itemFromId(this, acc->id(), Role::EquityID);
+  auto itAcc = d->itemFromId(this, id, Role::EquityID);
 
   QStandardItem *itParentAcc;
-  if (acc->accountType() == eMyMoney::Account::Type::Investment) // if it's investment account then its parent is root item
+  if (acc.accountType() == eMyMoney::Account::Type::Investment) // if it's investment account then its parent is root item
     itParentAcc = invisibleRootItem();
   else                                                  // otherwise it's stock account and its parent is investment account
-    itParentAcc = d->itemFromId(this, acc->parentAccountId(), Role::InvestmentID);
+    itParentAcc = d->itemFromId(this, acc.parentAccountId(), Role::InvestmentID);
 
   // if account doesn't exist in model then add it
   if (!itAcc) {
-    itAcc = new QStandardItem(acc->name());
+    itAcc = new QStandardItem(acc.name());
     itParentAcc->appendRow(itAcc);
     itAcc->setEditable(false);
   }
 
-  d->setAccountData(itParentAcc, itAcc->row(), *acc, d->m_columns);
+  d->setAccountData(itParentAcc, itAcc->row(), acc, d->m_columns);
 }
 
 /**
   * Notify the model that an object has been modified. An action is performed only if the object is an account.
   */
-void EquitiesModel::slotObjectModified(eMyMoney::File::Object objType, const MyMoneyObject * const obj)
+void EquitiesModel::slotObjectModified(eMyMoney::File::Object objType, const QString& id)
 {
   MyMoneyAccount acc;
   QStandardItem  *itAcc;
   switch (objType) {
     case eMyMoney::File::Object::Account:
       {
-        auto tmpAcc = dynamic_cast<const MyMoneyAccount * const>(obj);
-        if (!tmpAcc || tmpAcc->accountType() != eMyMoney::Account::Type::Stock)
+        auto tmpAcc = MyMoneyFile::instance()->account(id);
+        if (tmpAcc.accountType() != eMyMoney::Account::Type::Stock)
           return;
-        acc = MyMoneyAccount(*tmpAcc);
+        acc = MyMoneyAccount(tmpAcc);
         itAcc = d->itemFromId(this, acc.id(), Role::EquityID);
         break;
       }
     case eMyMoney::File::Object::Security:
       {
-        auto sec = dynamic_cast<const MyMoneySecurity * const>(obj);
+        auto sec = MyMoneyFile::instance()->security(id);
         // in case we hit a currency, we simply bail out here
         // as there is nothing to do for us
-        if(sec->isCurrency())
+        if(sec.isCurrency())
           return;
-        itAcc = d->itemFromId(this, sec->id(), Role::SecurityID);
+        itAcc = d->itemFromId(this, sec.id(), Role::SecurityID);
         if (!itAcc)
           return;
         const auto idAcc = itAcc->data(Role::EquityID).toString();
@@ -300,7 +301,7 @@ void EquitiesModel::slotObjectModified(eMyMoney::File::Object objType, const MyM
     d->setAccountData(itParentAcc, itAcc->row(), acc, d->m_columns);
   } else {                                                              // and if not then reparent
     slotObjectRemoved(eMyMoney::File::Object::Account, acc.id());
-    slotObjectAdded(eMyMoney::File::Object::Account, obj);
+    slotObjectAdded(eMyMoney::File::Object::Account, id);
   }
 }
 

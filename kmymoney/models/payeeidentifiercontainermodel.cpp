@@ -1,11 +1,10 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ * Copyright 2014-2015  Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -17,8 +16,9 @@
  */
 
 #include "payeeidentifiercontainermodel.h"
-#include "payeeidentifier/payeeidentifierloader.h"
 #include "payeeidentifier/payeeidentifier.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
+#include "payeeidentifier/nationalaccount/nationalaccount.h"
 
 #include <KLocalizedString>
 
@@ -69,10 +69,15 @@ bool payeeIdentifierContainerModel::setData(const QModelIndex& index, const QVar
 
 Qt::ItemFlags payeeIdentifierContainerModel::flags(const QModelIndex& index) const
 {
-  Qt::ItemFlags flags = QAbstractItemModel::flags(index) | Qt::ItemIsDragEnabled;
-  const QString type = data(index, payeeIdentifierType).toString();
+  static const QVector<QString> editableDelegates {
+    payeeIdentifiers::ibanBic::staticPayeeIdentifierIid(),
+    payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid()
+  };
+  auto flags = QAbstractItemModel::flags(index) | Qt::ItemIsDragEnabled;
+  const auto type = data(index, payeeIdentifierType).toString();
+
   // type.isEmpty() means the type selection can be shown
-  if (!type.isEmpty() && payeeIdentifierLoader::instance()->hasItemEditDelegate(type))
+  if (!type.isEmpty() && editableDelegates.contains(type))
     flags |= Qt::ItemIsEditable;
   return flags;
 }

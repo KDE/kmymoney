@@ -1,20 +1,20 @@
-/***************************************************************************
-                          kselecttransactionsdlg.cpp
-                             -------------------
-    begin                : Wed May 16 2007
-    copyright            : (C) 2007 by Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2007-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "kselecttransactionsdlg.h"
 #include "kselecttransactionsdlg_p.h"
@@ -44,7 +44,7 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "transaction.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "widgetenums.h"
 
 KSelectTransactionsDlg::KSelectTransactionsDlg(const MyMoneyAccount& _account, QWidget* parent) :
@@ -65,7 +65,7 @@ KSelectTransactionsDlg::KSelectTransactionsDlg(const MyMoneyAccount& _account, Q
   d->ui->m_register->setSelectionMode(QTableWidget::SingleSelection);
 
   // setup header font
-  auto font = KMyMoneyGlobalSettings::listHeaderFont();
+  auto font = KMyMoneySettings::listHeaderFontEx();
   QFontMetrics fm(font);
   auto height = fm.lineSpacing() + 6;
   d->ui->m_register->horizontalHeader()->setMinimumHeight(height);
@@ -73,7 +73,7 @@ KSelectTransactionsDlg::KSelectTransactionsDlg(const MyMoneyAccount& _account, Q
   d->ui->m_register->horizontalHeader()->setFont(font);
 
   // setup cell font
-  font = KMyMoneyGlobalSettings::listCellFont();
+  font = KMyMoneySettings::listCellFontEx();
   d->ui->m_register->setFont(font);
 
   // ... setup the register columns ...
@@ -159,8 +159,7 @@ MyMoneyTransaction KSelectTransactionsDlg::transaction() const
   QList<KMyMoneyRegister::RegisterItem*> list;
   list = d->ui->m_register->selectedItems();
   if (list.count()) {
-    KMyMoneyRegister::Transaction* _t = dynamic_cast<KMyMoneyRegister::Transaction*>(list[0]);
-    if (_t)
+    if (auto _t = dynamic_cast<KMyMoneyRegister::Transaction*>(list[0]))
       t = _t->transaction();
   }
   return t;
@@ -176,24 +175,24 @@ bool KSelectTransactionsDlg::eventFilter(QObject* o, QEvent* e)
 {
   Q_D(KSelectTransactionsDlg);
   auto rc = false;
-  QKeyEvent* k;
 
   if (o == d->ui->m_register) {
     switch (e->type()) {
       case QEvent::KeyPress:
-        k = dynamic_cast<QKeyEvent*>(e);
-        if ((k->modifiers() & Qt::KeyboardModifierMask) == 0
-            || (k->modifiers() & Qt::KeypadModifier) != 0) {
-          switch (k->key()) {
-            case Qt::Key_Return:
-            case Qt::Key_Enter:
-              if (d->ui->buttonBox->button(QDialogButtonBox::Ok)->isEnabled()) {
-                accept();
-                rc = true;
-              }
-              // tricky fall through here
-            default:
-              break;
+        if (auto k = dynamic_cast<QKeyEvent*>(e)) {
+          if ((k->modifiers() & Qt::KeyboardModifierMask) == 0
+              || (k->modifiers() & Qt::KeypadModifier) != 0) {
+            switch (k->key()) {
+              case Qt::Key_Return:
+              case Qt::Key_Enter:
+                if (d->ui->buttonBox->button(QDialogButtonBox::Ok)->isEnabled()) {
+                  accept();
+                  rc = true;
+                }
+                // tricky fall through here
+              default:
+                break;
+            }
           }
         }
         // tricky fall through here

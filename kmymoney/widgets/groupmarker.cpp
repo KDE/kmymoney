@@ -1,20 +1,20 @@
-/***************************************************************************
-                             groupmarker.cpp  -  description
-                             -------------------
-    begin                : Fri Mar 10 2006
-    copyright            : (C) 2006 by Thomas Baumgart
-    email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2006-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "groupmarker.h"
 #include "groupmarker_p.h"
@@ -122,15 +122,15 @@ void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItem &opt
   cellRect.setWidth(d->m_parent->viewport()->width());
   cellRect.setHeight(d->m_parent->rowHeight(index.row()));
 
-  option.palette.setColor(QPalette::Base, isErroneous() ? KMyMoneyGlobalSettings::schemeColor(SchemeColor::TransactionErroneous) : KMyMoneyGlobalSettings::schemeColor(SchemeColor::GroupMarker));
+  option.palette.setColor(QPalette::Base, isErroneous() ? KMyMoneySettings::schemeColor(SchemeColor::TransactionErroneous) : KMyMoneySettings::schemeColor(SchemeColor::GroupMarker));
 
   QBrush backgroundBrush(option.palette.color(QPalette::Base));
   painter->fillRect(cellRect, backgroundBrush);
-  painter->setPen(KMyMoneyGlobalSettings::schemeColor(SchemeColor::ListGrid));
+  painter->setPen(KMyMoneySettings::schemeColor(SchemeColor::ListGrid));
   painter->drawLine(cellRect.x(), cellRect.height() - 1, cellRect.width(), cellRect.height() - 1);
 
   // now write the text
-  painter->setPen(option.palette.color(isErroneous() ? QPalette::HighlightedText : QPalette::Text));
+  painter->setPen(option.palette.color(QPalette::HighlightedText));
   QFont font = painter->font();
   font.setBold(true);
   painter->setFont(font);
@@ -140,7 +140,7 @@ void GroupMarker::paintRegisterCell(QPainter *painter, QStyleOptionViewItem &opt
   cellRect.setHeight(d->GroupMarkerPrivate::m_bg->height());
 
   // now it's time to draw the background
-  painter->drawPixmap(cellRect, *d->GroupMarkerPrivate::m_bg);
+  painter->drawPixmap(cellRect, *KMyMoneyRegister::GroupMarkerPrivate::m_bg);
 
   // in case we need to show the date, we just paint it in col 1
   if (d->m_showDate) {

@@ -76,7 +76,7 @@ Q_SIGNALS:
 protected Q_SLOTS:
   void slotOfxFinished(KJob*);
   void slotOfxData(KIO::Job*, const QByteArray&);
-  virtual void reject();
+  void reject() final override;
 
 protected:
   void setStatus(const QString& _status);

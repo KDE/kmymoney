@@ -1,11 +1,10 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2013 Christian Dávid <christian-david@web.de>
+ * Copyright 2013-2014  Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -101,8 +100,8 @@ onlineJobTyped<T>::onlineJobTyped(T* task, const QString& id)
     : onlineJob(task, id),
     m_taskTyped(task)
 {
-  if (task == 0)
-    throw emptyTask(__FILE__, __LINE__);
+  if (!task)
+    throw EMPTYTASKEXCEPTION;
 }
 
 template<class T>
@@ -127,8 +126,8 @@ onlineJobTyped<T>::onlineJobTyped(const onlineJob &other)
     : onlineJob(other)
 {
   m_taskTyped = dynamic_cast<T*>(onlineJob::task()); // can throw emptyTask
-  if (m_taskTyped == 0)
-    throw badTaskCast(__FILE__, __LINE__);
+  if (!m_taskTyped)
+    throw BADTASKEXCEPTION;
 }
 
 template<class T>

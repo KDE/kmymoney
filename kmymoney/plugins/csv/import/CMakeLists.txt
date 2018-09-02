@@ -38,8 +38,16 @@ ki18n_wrap_ui(csvimporter_PART_SRCS
   currenciesdlg.ui
 )
 
-# Use static library for tests and prices importer only
-add_library(csvimporter MODULE ${csvimporter_PART_SRCS})
+kcoreaddons_add_plugin(csvimporter
+                       SOURCES ${csvimporter_PART_SRCS}
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/csvimporter.json"
+                       INSTALL_NAMESPACE "kmymoney")
+
+
+#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
+set_target_properties(csvimporter
+                      PROPERTIES
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(csvimporter
   PUBLIC
@@ -52,9 +60,6 @@ target_link_libraries(csvimporter
 install(FILES csvimporter.rc
         DESTINATION "${KXMLGUI_INSTALL_DIR}/csvimporter")
 
-install(TARGETS csvimporter
-        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")
-
 # the KCM module
 set(kcm_csvimporter_PART_SRCS
     kcm_csvimporter.cpp
@@ -64,17 +69,22 @@ kconfig_add_kcfg_files(kcm_csvimporter_PART_SRCS pluginsettings.kcfgc)
 
 ki18n_wrap_ui(kcm_csvimporter_PART_SRCS pluginsettingsdecl.ui)
 
-add_library(kcm_csvimporter MODULE ${kcm_csvimporter_PART_SRCS})
+kcoreaddons_add_plugin(kcm_csvimporter
+                       SOURCES ${kcm_csvimporter_PART_SRCS}
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/kcm_csvimporter.json"
+                       INSTALL_NAMESPACE "kmymoney")
 
 kcoreaddons_desktop_to_json(kcm_csvimporter kcm_csvimporter.desktop)
+
+#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
+set_target_properties(kcm_csvimporter
+                      PROPERTIES
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(kcm_csvimporter
                       KF5::I18n
                       KF5::ConfigWidgets
                       )
-
-install(TARGETS kcm_csvimporter
-        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney")
 
 install(FILES kcm_csvimporter.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})

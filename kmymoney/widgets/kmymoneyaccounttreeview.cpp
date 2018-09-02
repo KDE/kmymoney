@@ -1,23 +1,20 @@
-/***************************************************************************
- *   Copyright 2010  Cristian Onet onet.cristian@gmail.com                 *
- *   Copyright 2017  Łukasz Wojniłowicz lukasz.wojnilowicz@gmail.com       *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or         *
- *   modify it under the terms of the GNU General Public License as        *
- *   published by the Free Software Foundation; either version 2 of        *
- *   the License or (at your option) version 3 or any later version        *
- *   accepted by the membership of KDE e.V. (or its successor approved     *
- *   by the membership of KDE e.V.), which shall act as a proxy            *
- *   defined in Section 14 of version 3 of the license.                    *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
- ***************************************************************************/
+/*
+ * Copyright 2010-2014  Cristian Oneț <onet.cristian@gmail.com>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "kmymoneyaccounttreeview.h"
 
@@ -55,6 +52,7 @@ class KMyMoneyAccountTreeViewPrivate
 public:
   explicit KMyMoneyAccountTreeViewPrivate(KMyMoneyAccountTreeView *qq) :
     q_ptr(qq),
+    m_model(nullptr),
     m_view(View::None)
   {
   }
@@ -96,10 +94,10 @@ public:
       QVariant data = q->model()->data(index, (int)eAccountsModel::Role::Account);
       if (data.isValid()) {
         if (data.canConvert<MyMoneyAccount>()) {
-          emit q->openObjectRequested(data.value<MyMoneyAccount>());
+          emit q->selectByObject(data.value<MyMoneyAccount>(), eView::Intent::OpenObject);
         }
         if (data.canConvert<MyMoneyInstitution>()) {
-          emit q->openObjectRequested(data.value<MyMoneyInstitution>());
+          emit q->selectByObject(data.value<MyMoneyInstitution>(), eView::Intent::OpenObject);
         }
       }
     }
@@ -186,7 +184,7 @@ AccountsViewProxyModel *KMyMoneyAccountTreeView::init(View view)
   setModel(d->m_model);
 
   connect(this->header(), &QWidget::customContextMenuRequested, d->m_model, &AccountsViewProxyModel::slotColumnsMenu);
-  connect(d->m_model, &AccountsViewProxyModel::columnToggled, this, &KMyMoneyAccountTreeView::columnToggled);
+  connect(d->m_model, &AccountsViewProxyModel::columnToggled, this, &KMyMoneyAccountTreeView::slotColumnToggled);
 
   // restore the headers
   const auto grp = KSharedConfig::openConfig()->group(d->getConfGrpName(view));
@@ -218,15 +216,15 @@ void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint)
 {
   const auto index = model()->index(currentIndex().row(), (int)eAccountsModel::Column::Account, currentIndex().parent());
   if (index.isValid() && (model()->flags(index) & Qt::ItemIsSelectable)) {
-    const auto data = model()->data(index, (int)eAccountsModel::Role::Account);
-    if (data.isValid()) {
-      if (data.canConvert<MyMoneyAccount>()) {
-        emit objectSelected(data.value<MyMoneyAccount>());
-        emit contextMenuRequested(data.value<MyMoneyAccount>());
+    const auto dataVariant = model()->data(index, (int)eAccountsModel::Role::Account);
+    if (dataVariant.isValid()) {
+      if (dataVariant.canConvert<MyMoneyAccount>()) {
+        emit selectByObject(dataVariant.value<MyMoneyAccount>(), eView::Intent::None);
+        emit selectByObject(dataVariant.value<MyMoneyAccount>(), eView::Intent::OpenContextMenu);
       }
-      if (data.canConvert<MyMoneyInstitution>()) {
-        emit objectSelected(data.value<MyMoneyInstitution>());
-        emit contextMenuRequested(data.value<MyMoneyInstitution>());
+      if (dataVariant.canConvert<MyMoneyInstitution>()) {
+        emit selectByObject(dataVariant.value<MyMoneyInstitution>(), eView::Intent::None);
+        emit selectByObject(dataVariant.value<MyMoneyInstitution>(), eView::Intent::OpenContextMenu);
       }
     }
   }
@@ -238,20 +236,25 @@ void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, c
   if (!selected.empty()) {
     auto indexes = selected.front().indexes();
     if (!indexes.empty()) {
-      const auto data = model()->data(model()->index(indexes.front().row(), (int)eAccountsModel::Column::Account, indexes.front().parent()), (int)eAccountsModel::Role::Account);
-      if (data.isValid()) {
-        if (data.canConvert<MyMoneyAccount>()) {
-          emit objectSelected(data.value<MyMoneyAccount>());
-        }
-        if (data.canConvert<MyMoneyInstitution>()) {
-          emit objectSelected(data.value<MyMoneyInstitution>());
-        }
+      const auto dataVariant = model()->data(model()->index(indexes.front().row(), (int)eAccountsModel::Column::Account, indexes.front().parent()), (int)eAccountsModel::Role::Account);
+      if (dataVariant.isValid()) {
+        if (dataVariant.canConvert<MyMoneyAccount>())
+          emit selectByObject(dataVariant.value<MyMoneyAccount>(), eView::Intent::None);
+
+        if (dataVariant.canConvert<MyMoneyInstitution>())
+          emit selectByObject(dataVariant.value<MyMoneyInstitution>(), eView::Intent::None);
+
         // an object was successfully selected
         return;
       }
     }
   }
   // since no object was selected reset the object selection
-  emit objectSelected(MyMoneyAccount());
-  emit objectSelected(MyMoneyInstitution());
+  emit selectByObject(MyMoneyAccount(), eView::Intent::None);
+  emit selectByObject(MyMoneyInstitution(), eView::Intent::None);
+}
+
+void KMyMoneyAccountTreeView::slotColumnToggled(const eAccountsModel::Column column, const bool show)
+{
+  emit selectByVariant(QVariantList {QVariant::fromValue(column), QVariant(show)}, eView::Intent::ToggleColumn);
 }

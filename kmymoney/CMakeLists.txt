@@ -2,6 +2,8 @@ include(ECMAddAppIcon)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}
+                    ${CMAKE_CURRENT_SOURCE_DIR}/settings/
+                    ${CMAKE_CURRENT_BINARY_DIR}/settings/
                     ${CMAKE_CURRENT_BINARY_DIR}/dialogs/
                     ${CMAKE_CURRENT_SOURCE_DIR}/widgets/
                     ${CMAKE_CURRENT_BINARY_DIR}/widgets/
@@ -15,7 +17,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}/dialogs/settings/
                     ${CMAKE_CURRENT_BINARY_DIR}/mymoney/storage/
                     ${CMAKE_CURRENT_BINARY_DIR}/mymoney/
-                    ${CMAKE_CURRENT_SOURCE_DIR}/reports/
                     ${CMAKE_CURRENT_SOURCE_DIR}/wizards/endingbalancedlg/
                     ${CMAKE_CURRENT_BINARY_DIR}/wizards/endingbalancedlg/
                     ${CMAKE_CURRENT_SOURCE_DIR}/wizards/newinvestmentwizard/
@@ -27,15 +28,14 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}/models/
                     ${CMAKE_CURRENT_SOURCE_DIR}/icons/
                     ${CMAKE_CURRENT_BINARY_DIR}/icons/
-                    ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier/ibanandbic/widgets/ # TODO: this line should be moved to the target it belongs
-                    ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier/ibanandbic/
-                    ${CMAKE_CURRENT_BINARY_DIR}/payeeidentifier/nationalaccount/
-                    ${KMyMoney_SOURCE_DIR}/libkgpgfile/ )
+                    ${CMAKE_CURRENT_SOURCE_DIR}/menus/
+                    ${CMAKE_CURRENT_BINARY_DIR}/menus/
+                    )
 
 add_subdirectory( mymoney )
+add_subdirectory( settings )
 add_subdirectory( models  )
 add_subdirectory( plugins )
-add_subdirectory( reports )
 add_subdirectory( widgets )
 add_subdirectory( dialogs )
 add_subdirectory( views )
@@ -45,19 +45,13 @@ add_subdirectory( pics )
 add_subdirectory( html )
 add_subdirectory( templates )
 add_subdirectory( misc )
-add_subdirectory( payeeidentifier )
 add_subdirectory( icons )
+add_subdirectory( menus )
 if(BUILD_TESTING)
   add_subdirectory( tests )
 endif()
 
-set( _HEADERS kmymoneyutils.h kmymoneyglobalsettings.h )
-
-########### settings code (kmm_config) STATIC ###############
-set( kmm_config_SRCS kmymoneyglobalsettings.cpp )
-kconfig_add_kcfg_files( kmm_config_SRCS kmymoneysettings.kcfgc )
-add_library(kmm_config STATIC ${kmm_config_SRCS})
-target_link_libraries(kmm_config KF5::WidgetsAddons KF5::ConfigWidgets Qt5::Sql Alkimia::alkimia)
+set( _HEADERS kmymoneyutils.h )
 
 ########### common code (kmymoney_common) STATIC ###############
 # will be linked into kmymoney, kmymoneytest, and libkmymoney.so
@@ -70,22 +64,36 @@ target_link_libraries(kmymoney_common
     Qt5::Core
     KF5::ConfigGui
     KF5::WidgetsAddons
+    KF5::KIOCore
+    KF5::KIOFileWidgets
+    KF5::KIOWidgets
+    KF5::KIONTLM
     Alkimia::alkimia
-    kmm_widgets
     kmm_mymoney
     kmm_utils_webconnect
     kmm_utils_platformtools
+    PRIVATE
+    KF5::I18n
+    kmm_settings
 )
 
 # must build kmymoney/transactionsortoption.h
 # from transactionsortoption.ui first
-add_dependencies(kmymoney_common generate_base_ui_srcs kmm_config)
+add_dependencies(kmymoney_common generate_base_ui_srcs kmm_settings)
 add_dependencies(wizardpages widgets)
 add_dependencies(dialogs widgets)
 
 if(USE_MODELTEST)
   set( kmymoney_common_LIBS ${kmymoney_common_LIBS} ${QT_QTTEST_LIBRARY})
 endif(USE_MODELTEST)
+
+# remove these generated files, they are in the way and leftovers from 5.0
+if(EXISTS ${CMAKE_CURRENT_BINARY_DIR}/kmymoneysettings.h)
+  file(REMOVE ${CMAKE_CURRENT_BINARY_DIR}/kmymoneysettings.h)
+endif()
+if(EXISTS ${CMAKE_CURRENT_BINARY_DIR}/kmymoneysettings.cpp)
+  file(REMOVE ${CMAKE_CURRENT_BINARY_DIR}/kmymoneysettings.cpp)
+endif()
 
 ########### kmymoney executable ###############
 
@@ -104,9 +112,26 @@ file(GLOB_RECURSE KMYMONEY_APP_ICONS "${CMAKE_CURRENT_SOURCE_DIR}/icons/kmymoney
 ecm_add_app_icon(kmymoney_SRCS ICONS ${KMYMONEY_APP_ICONS})
 
 add_executable( kmymoney ${kmymoney_SRCS} )
+
+if (ENABLE_SQLCIPHER)
+  message( STATUS "     SQLCIPHER INCLUDE   :  " ${SQLCIPHER_INCLUDE_DIRS}) #just for testing it on MS Windows
+
+  target_compile_definitions(kmymoney
+    PRIVATE
+      SQLITE_HAS_CODEC
+      SQLITE_TEMP_STORE=2)
+
+  #otherwise "fatal error: 'sqlite3.h' file not found"
+  if(CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "Windows")
+    target_include_directories(kmymoney
+      PRIVATE
+        ${SQLCIPHER_INCLUDE_DIRS})
+  endif()
+endif()
+
 target_link_libraries(kmymoney
+  PUBLIC
   views
-  reports
   kmymoney_base
   kmymoney_common
   newuserwizard
@@ -119,16 +144,14 @@ target_link_libraries(kmymoney
   widgets
   settings
   converter
-  models
-  kmm_config
+  kmm_models
+  kmm_settings
+  kmm_menus
   kmm_widgets
-  kmm_storage
   kmm_mymoney
-  kgpgfile
   interfaces
   kmm_plugin
   Qt5::Core
-  Qt5::Sql
   KF5::Archive
   KF5::ConfigGui
   KF5::WidgetsAddons
@@ -137,6 +160,9 @@ target_link_libraries(kmymoney
   KChart
   $<$<BOOL:${USE_MODELTEST}>:Qt5::Test>
   $<$<BOOL:${KF5Holidays_FOUND}>:KF5::Holidays>
+  $<$<BOOL:${KF5Activities_FOUND}>:KF5::Activities>
+  PRIVATE
+    $<$<BOOL:${ENABLE_SQLCIPHER}>:sqlcipher>
 )
 
 # own plist magic for mac os
@@ -161,12 +187,6 @@ endif()
 
 install(TARGETS kmymoney ${INSTALL_TARGETS_DEFAULT_ARGS})
 
-install(FILES kmymoney.kcfg
-  DESTINATION ${KCFG_INSTALL_DIR}
-  )
-install(FILES kmymoney.upd
-  DESTINATION ${KCONF_UPDATE_INSTALL_DIR}
-  )
 install(FILES ${_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney
   )

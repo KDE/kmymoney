@@ -55,11 +55,10 @@
 #include "mymoneypayee.h"
 #include "mymoneystatement.h"
 #include "mymoneysecurity.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "transactioneditor.h"
 #include "stdtransactioneditor.h"
 #include "kmymoneyedit.h"
-#include "kmymoneysettings.h"
 #include "kaccountselectdlg.h"
 #include "knewaccountwizard.h"
 #include "transactionmatcher.h"
@@ -81,6 +80,8 @@ bool matchNotEmpty(const QString &l, const QString &r)
   return !l.isEmpty() && QString::compare(l, r, Qt::CaseInsensitive) == 0;
 }
 
+Q_GLOBAL_STATIC(QStringList, globalResultMessages);
+
 class MyMoneyStatementReader::Private
 {
 public:
@@ -89,6 +90,8 @@ public:
       transactionsAdded(0),
       transactionsMatched(0),
       transactionsDuplicate(0),
+      m_skipCategoryMatching(true),
+      m_progressCallback(nullptr),
       scannedCategories(false) {}
 
   const QString& feeId(const MyMoneyAccount& invAcc);
@@ -223,7 +226,7 @@ void MyMoneyStatementReader::Private::previouslyUsedCategories(const QString& in
       const MyMoneyTransaction& t = (*it_t).first;
       MyMoneySplit s = (*it_t).second;
 
-      MyMoneyAccount acc = file->account(s.accountId());
+      acc = file->account(s.accountId());
       // stock split shouldn't be fee or interest bacause it won't play nice with dissectTransaction
       // it was caused by processTransactionEntry adding splits in wrong order != with manual transaction entering
       if (acc.accountGroup() == Account::Type::Expense || acc.accountGroup() == Account::Type::Income) {
@@ -336,7 +339,7 @@ MyMoneyStatementReader::MyMoneyStatementReader() :
     m_ft(0),
     m_progressCallback(0)
 {
-  m_askPayeeCategory = KMyMoneyGlobalSettings::askForPayeeCategory();
+  m_askPayeeCategory = KMyMoneySettings::askForPayeeCategory();
 }
 
 MyMoneyStatementReader::~MyMoneyStatementReader()
@@ -382,34 +385,25 @@ QStringList MyMoneyStatementReader::importStatement(const MyMoneyStatement& s, b
     MyMoneyStatement::writeXMLFile(s, logFile);
  }
 
-  // we use an object on the heap here, so that we can check the presence
-  // of it during slotUpdateActions() by looking at the pointer.
   auto reader = new MyMoneyStatementReader;
   reader->setAutoCreatePayee(true);
   if (callback)
     reader->setProgressCallback(callback);
-
-  // disable all standard widgets during the import
-//  setEnabled(false);
 
   QStringList messages;
   result = reader->import(s, messages);
 
   auto transactionAdded = reader->anyTransactionAdded();
 
-  // get rid of the statement reader and tell everyone else
-  // about the destruction by setting the pointer to zero
   delete reader;
 
   if (callback)
     callback(-1, -1, QString());
 
-  // re-enable all standard widgets
-//  setEnabled(true);
+  if (!silent && transactionAdded) {
+    globalResultMessages()->append(messages);
+  }
 
-  if (!silent && transactionAdded)
-    KMessageBox::informationList(nullptr,
-                                 i18n("The statement has been processed with the following results:"), messages, i18n("Statement stats"));
   if (!result)
     messages.clear();
   return messages;
@@ -417,12 +411,6 @@ QStringList MyMoneyStatementReader::importStatement(const MyMoneyStatement& s, b
 
 bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& messages)
 {
-  //
-  // For testing, save the statement to an XML file
-  // (uncomment this line)
-  //
-  //MyMoneyStatement::writeXMLFile(s, "Imported.Xml");
-
   //
   // Select the account
   //
@@ -479,9 +467,9 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
       || d->m_account.value("lastImportedTransactionDate") != s.m_dateEnd.toString(Qt::ISODate)) {
     if (s.m_closingBalance != MyMoneyMoney::autoCalc) {
       d->m_account.setValue("lastStatementBalance", s.m_closingBalance.toString());
-      if (s.m_dateEnd.isValid()) {
-        d->m_account.setValue("lastImportedTransactionDate", s.m_dateEnd.toString(Qt::ISODate));
-      }
+    }
+    if (s.m_dateEnd.isValid()) {
+      d->m_account.setValue("lastImportedTransactionDate", s.m_dateEnd.toString(Qt::ISODate));
     }
 
     try {
@@ -520,7 +508,7 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
     try {
       qDebug("Processing transactions (%s)", qPrintable(d->m_account.name()));
       signalProgress(0, s.m_listTransactions.count(), "Importing Statement ...");
-      int progress = 0;
+      progress = 0;
       QList<MyMoneyStatement::Transaction>::const_iterator it_t = s.m_listTransactions.begin();
       while (it_t != s.m_listTransactions.end() && !m_userAbort) {
         processTransactionEntry(*it_t);
@@ -530,10 +518,10 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
       qDebug("Processing transactions done (%s)", qPrintable(d->m_account.name()));
 
     } catch (const MyMoneyException &e) {
-      if (e.what() == "USERABORT")
+      if (QString::fromLatin1(e.what()).contains("USERABORT"))
         m_userAbort = true;
       else
-        qDebug("Caught exception from processTransactionEntry() not caused by USERABORT: %s", qPrintable(e.what()));
+        qDebug("Caught exception from processTransactionEntry() not caused by USERABORT: %s", e.what());
     }
     signalProgress(-1, -1);
   }
@@ -546,10 +534,10 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
       signalProgress(0, s.m_listPrices.count(), "Importing Statement ...");
       KMyMoneyUtils::processPriceList(s);
     } catch (const MyMoneyException &e) {
-      if (e.what() == "USERABORT")
+      if (QString::fromLatin1(e.what()).contains("USERABORT"))
         m_userAbort = true;
       else
-        qDebug("Caught exception from processPriceEntry() not caused by USERABORT: %s", qPrintable(e.what()));
+        qDebug("Caught exception from processPriceEntry() not caused by USERABORT: %s", e.what());
     }
     signalProgress(-1, -1);
   }
@@ -642,7 +630,7 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
       ft.commit();
       qDebug() << "Created " << security.name() << " with id " << security.id();
     } catch (const MyMoneyException &e) {
-      KMessageBox::error(0, i18n("Error creating security record: %1", e.what()), i18n("Error"));
+      KMessageBox::error(0, i18n("Error creating security record: %1", QString::fromLatin1(e.what())), i18n("Error"));
     }
   } else {
     qDebug() << "Found " << security.name() << " with id " << security.id();
@@ -803,7 +791,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     d->assignUniqueBankID(s1, statementTransactionUnderImport);
 
     if (statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::ReinvestDividend) {
-      s1.setAction(MyMoneySplit::ActionReinvestDividend);
+      s1.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend));
       s1.setShares(statementTransactionUnderImport.m_shares);
 
       if (!statementTransactionUnderImport.m_price.isZero()) {
@@ -843,7 +831,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       // mark this transaction as a cash dividend and note which stock account
       // it belongs to.
       s2.setMemo(statementTransactionUnderImport.m_strMemo);
-      s2.setAction(MyMoneySplit::ActionDividend);
+      s2.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend));
       s2.setAccountId(thisaccount.id());
 
       /*  at this point any fees have been taken into account already
@@ -868,7 +856,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       // mark this transaction as a cash dividend and note which stock account
       // it belongs to.
       s2.setMemo(statementTransactionUnderImport.m_strMemo);
-      s2.setAction(MyMoneySplit::ActionInterestIncome);
+      s2.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::InterestIncome));
       s2.setAccountId(thisaccount.id());
       transfervalue = statementTransactionUnderImport.m_amount;
 
@@ -884,7 +872,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
       } else if ((statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::Buy) ||
                  (statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::Sell)) {
-      s1.setAction(MyMoneySplit::ActionBuyShares);
+      s1.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares));
       if (!statementTransactionUnderImport.m_price.isZero())  {
         s1.setPrice(statementTransactionUnderImport.m_price.abs());
       } else if (!statementTransactionUnderImport.m_shares.isZero()) {
@@ -902,14 +890,14 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                (statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::Shrsout)) {
       s1.setValue(MyMoneyMoney());
       s1.setShares(statementTransactionUnderImport.m_shares);
-      s1.setAction(MyMoneySplit::ActionAddShares);
+      s1.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::AddShares));
     } else if (statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::None) {
       // User is attempting to import a non-investment transaction into this
       // investment account.  This is not supportable the way KMyMoney is
       // written.  However, if a user has an associated brokerage account,
       // we can stuff the transaction there.
 
-      QString brokerageactid = d->m_account.value("kmm-brokerage-account").toUtf8();
+      brokerageactid = d->m_account.value("kmm-brokerage-account").toUtf8();
       if (brokerageactid.isEmpty()) {
         brokerageactid = file->accountByName(d->m_account.brokerageName()).id();
       }
@@ -951,21 +939,21 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         bool ignoreCase;
         QStringList keys;
         QStringList::const_iterator it_s;
-        const MyMoneyPayee::payeeMatchType matchType = (*it_p).matchData(ignoreCase, keys);
+        const auto matchType = (*it_p).matchData(ignoreCase, keys);
         switch (matchType) {
-          case MyMoneyPayee::matchDisabled:
+          case eMyMoney::Payee::MatchType::Disabled:
             break;
 
-          case MyMoneyPayee::matchName:
-          case MyMoneyPayee::matchNameExact:
+          case eMyMoney::Payee::MatchType::Name:
+          case eMyMoney::Payee::MatchType::NameExact:
             keys << QString("%1").arg(QRegExp::escape((*it_p).name()));
-            if(matchType == MyMoneyPayee::matchNameExact) {
+            if(matchType == eMyMoney::Payee::MatchType::NameExact) {
               keys.clear();
               keys << QString("^%1$").arg(QRegExp::escape((*it_p).name()));
             }
             // intentional fall through
 
-          case MyMoneyPayee::matchKey:
+          case eMyMoney::Payee::MatchType::Key:
             for (it_s = keys.constBegin(); it_s != keys.constEnd(); ++it_s) {
               QRegExp exp(*it_s, ignoreCase ? Qt::CaseInsensitive : Qt::CaseSensitive);
               if (exp.indexIn(payeename) != -1) {
@@ -997,7 +985,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
       // if we did not find a matching payee, we throw an exception and try to create it
       if (payeeid.isEmpty())
-        throw MYMONEYEXCEPTION("payee not matched");
+        throw MYMONEYEXCEPTION_CSTRING("payee not matched");
 
       s1.setPayeeId(payeeid);
     } catch (const MyMoneyException &) {
@@ -1032,7 +1020,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         // is called in the context of an automatic procedure it
         // might distract the user.
         payee.setName(payeename);
-        payee.setMatchData(MyMoneyPayee::matchKey, true, QStringList() << QString("^%1$").arg(QRegExp::escape(payeename)));
+        payee.setMatchData(eMyMoney::Payee::MatchType::Key, true, QStringList() << QString("^%1$").arg(QRegExp::escape(payeename)));
         if (m_askPayeeCategory) {
           // We use a QPointer because the dialog may get deleted
           // during exec() if the parent of the dialog gets deleted.
@@ -1049,7 +1037,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           topcontents->addWidget(label1);
 
           auto filterProxyModel = new AccountNamesFilterProxyModel(this);
-          filterProxyModel->setHideEquityAccounts(!KMyMoneyGlobalSettings::expertMode());
+          filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
           filterProxyModel->addAccountGroup(QVector<Account::Type> {Account::Type::Asset, Account::Type::Liability, Account::Type::Equity, Account::Type::Income, Account::Type::Expense});
 
           auto const model = Models::instance()->accountsModel();
@@ -1084,7 +1072,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             payee.setDefaultAccountId(accountId);
           } else if (result != QDialog::Rejected) {
             //add cancel button? and throw exception like below
-            throw MYMONEYEXCEPTION("USERABORT");
+            throw MYMONEYEXCEPTION_CSTRING("USERABORT");
           }
         }
 
@@ -1096,8 +1084,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           s1.setPayeeId(payeeid);
 
         } catch (const MyMoneyException &e) {
-          KMessageBox::detailedSorry(0, i18n("Unable to add payee/receiver"),
-                                     i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
+          KMessageBox::detailedSorry(nullptr, i18n("Unable to add payee/receiver"), QString::fromLatin1(e.what()));
 
         }
 
@@ -1105,7 +1092,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         s1.setPayeeId(QString());
 
       } else {
-        throw MYMONEYEXCEPTION("USERABORT");
+        throw MYMONEYEXCEPTION_CSTRING("USERABORT");
 
       }
     }
@@ -1269,7 +1256,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     TransactionMatcher matcher(thisaccount);
     d->transactionsCount++;
 
-    ExistingTransactionMatchFinder existingTrMatchFinder(KMyMoneyGlobalSettings::matchInterval());
+    ExistingTransactionMatchFinder existingTrMatchFinder(KMyMoneySettings::matchInterval());
     result = existingTrMatchFinder.findMatch(transactionUnderImport, s1);
     if (result != TransactionMatchFinder::MatchNotFound) {
       MyMoneyTransaction matchedTransaction = existingTrMatchFinder.getMatchedTransaction();
@@ -1283,7 +1270,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     }
 
     addTransaction(transactionUnderImport);
-    ScheduledTransactionMatchFinder scheduledTrMatchFinder(thisaccount, KMyMoneyGlobalSettings::matchInterval());
+    ScheduledTransactionMatchFinder scheduledTrMatchFinder(thisaccount, KMyMoneySettings::matchInterval());
     result = scheduledTrMatchFinder.findMatch(transactionUnderImport, s1);
     if (result != TransactionMatchFinder::MatchNotFound) {
       MyMoneySplit matchedSplit = scheduledTrMatchFinder.getMatchedSplit();
@@ -1299,7 +1286,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
     int result = KMessageBox::warningContinueCancel(0, message);
     if (result == KMessageBox::Cancel)
-      throw MYMONEYEXCEPTION("USERABORT");
+      throw MYMONEYEXCEPTION_CSTRING("USERABORT");
   }
 }
 
@@ -1411,7 +1398,7 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
       }
     } else {
       if (accountSelect->aborted())
-        //throw MYMONEYEXCEPTION("USERABORT");
+        //throw MYMONEYEXCEPTION_CSTRING("USERABORT");
         done = true;
       else
         KMessageBox::error(0, QLatin1String("<html>") + i18n("You must select an account, create a new one, or press the <b>Abort</b> button.") + QLatin1String("</html>"));
@@ -1518,11 +1505,11 @@ void MyMoneyStatementReader::handleMatchingOfScheduledTransaction(TransactionMat
         matcher.match(torig, matchedSplit, importedTransaction, importedSplit);
         d->transactionsMatched++;
 
-      } catch (const MyMoneyException &e) {
+      } catch (const MyMoneyException &) {
         // make sure we get rid of the editor before
         // the KEnterScheduleDlg is destroyed
         delete editor;
-        throw e; // rethrow
+        throw; // rethrow
       }
     }
     // delete the editor
@@ -1552,8 +1539,8 @@ bool MyMoneyStatementReader::askUserToEnterScheduleForMatching(const MyMoneySche
                              scheduleName, splitValue, payeeName);
 
   // check that dates are within user's setting
-  const int gap = std::abs(matchedSchedule.transaction().postDate().toJulianDay() - importedTransaction.postDate().toJulianDay());
-  if (gap > KMyMoneyGlobalSettings::matchInterval())
+  const auto gap = static_cast<int>(qAbs(matchedSchedule.transaction().postDate().toJulianDay() - importedTransaction.postDate().toJulianDay()));
+  if (gap > KMyMoneySettings::matchInterval())
     questionMsg = i18np("KMyMoney has found a scheduled transaction which matches an imported transaction.<br/>"
                         "Schedule name: <b>%2</b><br/>"
                         "Transaction: <i>%3 %4</i><br/>"
@@ -1575,4 +1562,14 @@ void MyMoneyStatementReader::slotNewAccount(const MyMoneyAccount& acc)
 {
   auto newAcc = acc;
   NewAccountWizard::Wizard::newAccount(newAcc);
+}
+
+void MyMoneyStatementReader::clearResultMessages()
+{
+  globalResultMessages()->clear();
+}
+
+QStringList MyMoneyStatementReader::resultMessages()
+{
+  return *globalResultMessages();
 }

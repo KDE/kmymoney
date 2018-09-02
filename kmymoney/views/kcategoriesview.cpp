@@ -40,7 +40,7 @@
 // Project Includes
 
 #include "mymoneyexception.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "knewaccountdlg.h"
 #include "kcategoryreassigndlg.h"
 #include "mymoneyschedule.h"
@@ -56,6 +56,9 @@ using namespace Icons;
 KCategoriesView::KCategoriesView(QWidget *parent) :
     KMyMoneyAccountsViewBase(*new KCategoriesViewPrivate(this), parent)
 {
+  Q_D(KCategoriesView);
+  d->ui->setupUi(this);
+
   connect(pActions[eMenu::Action::NewCategory],    &QAction::triggered, this, &KCategoriesView::slotNewCategory);
   connect(pActions[eMenu::Action::EditCategory],   &QAction::triggered, this, &KCategoriesView::slotEditCategory);
   connect(pActions[eMenu::Action::DeleteCategory], &QAction::triggered, this, &KCategoriesView::slotDeleteCategory);
@@ -65,10 +68,23 @@ KCategoriesView::~KCategoriesView()
 {
 }
 
-void KCategoriesView::setDefaultFocus()
+void KCategoriesView::executeCustomAction(eView::Action action)
 {
-  Q_D(KCategoriesView);
-  QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
+  switch(action) {
+    case eView::Action::Refresh:
+      refresh();
+      break;
+
+    case eView::Action::SetDefaultFocus:
+      {
+        Q_D(KCategoriesView);
+        QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
+      }
+      break;
+
+    default:
+      break;
+  }
 }
 
 void KCategoriesView::refresh()
@@ -81,12 +97,12 @@ void KCategoriesView::refresh()
   d->m_needsRefresh = false;
 
   d->m_proxyModel->invalidate();
-  d->m_proxyModel->setHideClosedAccounts(KMyMoneyGlobalSettings::hideClosedAccounts());
+  d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
 
   // reinitialize the default state of the hidden categories label
   d->m_haveUnusedCategories = false;
   d->ui->m_hiddenCategories->hide();
-  d->m_proxyModel->setHideUnusedIncomeExpenseAccounts(KMyMoneyGlobalSettings::hideUnusedCategory());
+  d->m_proxyModel->setHideUnusedIncomeExpenseAccounts(KMyMoneySettings::hideUnusedCategory());
 }
 
 void KCategoriesView::showEvent(QShowEvent * event)
@@ -95,7 +111,7 @@ void KCategoriesView::showEvent(QShowEvent * event)
   if (!d->m_proxyModel)
     d->init();
 
-  emit aboutToShow(View::Categories);
+  emit customActionRequested(View::Categories, eView::Action::AboutToShow);
 
   if (d->m_needsRefresh)
     refresh();
@@ -122,7 +138,6 @@ void KCategoriesView::updateActions(const MyMoneyObject& obj)
     {
       const auto file = MyMoneyFile::instance();
       auto b = file->isStandardAccount(acc.id()) ? false : true;
-      pActions[eMenu::Action::NewCategory]->setEnabled(true);
       pActions[eMenu::Action::EditCategory]->setEnabled(b);
       // enable delete action, if category/account itself is not referenced
       // by any object except accounts, because we want to allow
@@ -140,13 +155,10 @@ void KCategoriesView::updateActions(const MyMoneyObject& obj)
       break;
     }
     default:
-    {
-      pActions[eMenu::Action::NewCategory]->setEnabled(false);
       pActions[eMenu::Action::EditCategory]->setEnabled(false);
       pActions[eMenu::Action::DeleteCategory]->setEnabled(false);
       d->m_currentCategory = MyMoneyAccount();
       break;
-    }
   }
 }
 
@@ -170,6 +182,34 @@ void KCategoriesView::slotShowCategoriesMenu(const MyMoneyAccount& acc)
 {
   Q_UNUSED(acc);
   pMenus[eMenu::Menu::Category]->exec(QCursor::pos());
+}
+
+void KCategoriesView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
+{
+  switch(intent) {
+    case eView::Intent::UpdateActions:
+      updateActions(obj);
+      break;
+
+    case eView::Intent::OpenContextMenu:
+      slotShowCategoriesMenu(static_cast<const MyMoneyAccount&>(obj));
+      break;
+
+    default:
+      break;
+  }
+}
+
+void KCategoriesView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
+{
+  switch (intent) {
+    case eView::Intent::UpdateProfit:
+      if (variant.count() == 1)
+        slotProfitChanged(variant.first().value<MyMoneyMoney>());
+      break;
+    default:
+      break;
+  }
 }
 
 void KCategoriesView::slotNewCategory()
@@ -232,10 +272,10 @@ void KCategoriesView::slotEditCategory()
       ft.commit();
 
       // reload the account object as it might have changed in the meantime
-      emit objectSelected(account);
+      emit selectByObject(account, eView::Intent::None);
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::error(this, i18n("Unable to modify category '%1'. Cause: %2", d->m_currentCategory.name(), e.what()));
+      KMessageBox::error(this, i18n("Unable to modify category '%1'. Cause: %2", d->m_currentCategory.name(), QString::fromLatin1(e.what())));
     }
   }
 
@@ -345,7 +385,7 @@ void KCategoriesView::slotDeleteCategory()
           //        slotStatusProgressBar(blist.count(), 0);
         }
       } catch (MyMoneyException &e) {
-        KMessageBox::error(this, i18n("Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3", d->m_currentCategory.name(), newCategory.name(), e.what()));
+        KMessageBox::error(this, i18n("Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3", d->m_currentCategory.name(), newCategory.name(), QString::fromLatin1(e.what())));
         //    slotStatusProgressBar(-1, -1);
         return;
       }
@@ -370,10 +410,10 @@ void KCategoriesView::slotDeleteCategory()
           try {
             file->removeAccount(d->m_currentCategory);
             d->m_currentCategory.clearId();
-            emit objectSelected(d->m_currentCategory);
+            emit selectByObject(d->m_currentCategory, eView::Intent::None);
             ft.commit();
           } catch (const MyMoneyException &e) {
-            KMessageBox::error(this, i18n("<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>", selectedAccountName, e.what()));
+            KMessageBox::error(this, i18n("<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>", selectedAccountName, QString::fromLatin1(e.what())));
           }
         }
         return;
@@ -437,7 +477,7 @@ void KCategoriesView::slotDeleteCategory()
         // the old account list, which is no longer valid
         d->m_currentCategory = file->account(d->m_currentCategory.id());
       } catch (const MyMoneyException &e) {
-        KMessageBox::error(this, i18n("<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>", selectedAccountName, e.what()));
+        KMessageBox::error(this, i18n("<qt>Unable to delete a sub-category of category <b>%1</b>. Reason: %2</qt>", selectedAccountName, QString::fromLatin1(e.what())));
         return;
       }
     }
@@ -447,10 +487,10 @@ void KCategoriesView::slotDeleteCategory()
     try {
       file->removeAccount(d->m_currentCategory);
       d->m_currentCategory.clearId();
-      emit objectSelected(MyMoneyAccount());
+      emit selectByObject(MyMoneyAccount(), eView::Intent::None);
       ft.commit();
     } catch (const MyMoneyException &e) {
-      KMessageBox::error(this, i18n("Unable to delete category '%1'. Cause: %2", selectedAccountName, e.what()));
+      KMessageBox::error(this, i18n("Unable to delete category '%1'. Cause: %2", selectedAccountName, QString::fromLatin1(e.what())));
     }
 }
 

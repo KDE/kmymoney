@@ -37,8 +37,6 @@
 #include "kaccountpage_p.h"
 #include "kcategoriespage.h"
 #include "kcurrencypage.h"
-#include "kfilepage.h"
-#include "kfilepage_p.h"
 #include "kgeneralpage.h"
 #include "kintropage.h"
 #include "kpreferencepage.h"
@@ -51,7 +49,7 @@
 #include "mymoneyaccount.h"
 #include "kmymoneydateinput.h"
 #include "kmymoneyedit.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "mymoneytemplate.h"
 #include "mymoneyenums.h"
 
@@ -63,7 +61,7 @@ namespace NewUserWizard
     KMyMoneyWizard(*new WizardPrivate(this), parent, modal, flags)
   {
     Q_D(Wizard);
-    bool isFirstTime = KMyMoneyGlobalSettings::firstTimeRun();
+    bool isFirstTime = KMyMoneySettings::firstTimeRun();
 
     stepCount = 1;
 
@@ -73,7 +71,6 @@ namespace NewUserWizard
     addStep(i18n("Personal Data"));
     addStep(i18n("Select Currency"));
     addStep(i18n("Select Accounts"));
-    addStep(i18n("Set preferences"));
     addStep(i18nc("Finish the wizard", "Finish"));
 
     if (isFirstTime)
@@ -83,7 +80,6 @@ namespace NewUserWizard
     d->m_accountPage = new AccountPage(this);
     d->m_categoriesPage = new CategoriesPage(this);
     d->m_preferencePage = new PreferencePage(this);
-    d->m_filePage = new FilePage(this);
 
     d->m_accountPage->d_func()->ui->m_haveCheckingAccountButton->setChecked(true);
     if (isFirstTime)
@@ -102,12 +98,6 @@ namespace NewUserWizard
   {
     Q_D(const Wizard);
     return d->m_generalPage->user();
-  }
-
-  QUrl Wizard::url() const
-  {
-    Q_D(const Wizard);
-    return d->m_filePage->d_func()->ui->m_dataFileEdit->url();
   }
 
   MyMoneyInstitution Wizard::institution() const

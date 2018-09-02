@@ -32,7 +32,6 @@
 
 #include "knewuserwizard.h"
 #include "knewuserwizard_p.h"
-#include "kfilepage.h"
 
 namespace NewUserWizard
 {
@@ -46,12 +45,6 @@ namespace NewUserWizard
 
   PreferencePage::~PreferencePage()
   {
-  }
-
-  KMyMoneyWizardPage* PreferencePage::nextPage() const
-  {
-    Q_D(const PreferencePage);
-    return d->m_wizard->d_func()->m_filePage;
   }
 
 }

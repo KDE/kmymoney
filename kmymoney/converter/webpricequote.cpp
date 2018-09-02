@@ -565,7 +565,7 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
                                           QString(),
                                           "https://fx-rate.net/([^/]+/[^/]+)",
                                           WebPriceQuoteSource::identifyBy::Symbol,
-                                          "1\\s[^=]+\\s=</span><br\\s/>\\s([^\\s]+)",
+                                          "1[ a-zA-Z]+=</span><br\\s*/?>\\s*([,\\d+\\.]+)",
                                           "updated\\s\\d+:\\d+:\\d+\\(\\w+\\)\\s+(\\d{1,2}/\\d{2}/\\d{4})",
                                           "%d/%m/%y",
                                           true // skip HTML stripping
@@ -1051,7 +1051,7 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
   QRegularExpression formatrex("%([mdy]+)(\\W+)%([mdy]+)(\\W+)%([mdy]+)", QRegularExpression::CaseInsensitiveOption);
   QRegularExpressionMatch match;
   if (m_format.indexOf(formatrex, 0, &match) == -1) {
-    throw MYMONEYEXCEPTION("Invalid format string");
+    throw MYMONEYEXCEPTION_CSTRING("Invalid format string");
   }
 
   QStringList formatParts;
@@ -1080,7 +1080,7 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
     inputrex.setPattern("(\\w+)\\W+(\\w+)\\W+(\\w+)");
 
   if (_in.indexOf(inputrex, 0, &match) == -1) {
-    throw MYMONEYEXCEPTION("Invalid input string");
+    throw MYMONEYEXCEPTION_CSTRING("Invalid input string");
   }
 
   QStringList scannedParts;
@@ -1106,7 +1106,7 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
         if ((*it_scanned).indexOf(digitrex, 0, &match) != -1)
           day = match.captured(1).toUInt(&ok);
         if (!ok || day > 31)
-          throw MYMONEYEXCEPTION(QString("Invalid day entry: %1").arg(*it_scanned));
+          throw MYMONEYEXCEPTION(QString::fromLatin1("Invalid day entry: %1").arg(*it_scanned));
         break;
       case 'm':
         month = (*it_scanned).toUInt(&ok);
@@ -1143,18 +1143,18 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
         }
 
         if (month < 1 || month > 12)
-          throw MYMONEYEXCEPTION(QString("Invalid month entry: %1").arg(*it_scanned));
+          throw MYMONEYEXCEPTION(QString::fromLatin1("Invalid month entry: %1").arg(*it_scanned));
 
         break;
       case 'y':
         if (_strict && (*it_scanned).length() != (*it_format).length())
-          throw MYMONEYEXCEPTION(QString("Length of year (%1) does not match expected length (%2).")
+          throw MYMONEYEXCEPTION(QString::fromLatin1("Length of year (%1) does not match expected length (%2).")
                                  .arg(*it_scanned, *it_format));
 
         year = (*it_scanned).toUInt(&ok);
 
         if (!ok)
-          throw MYMONEYEXCEPTION(QString("Invalid year entry: %1").arg(*it_scanned));
+          throw MYMONEYEXCEPTION(QString::fromLatin1("Invalid year entry: %1").arg(*it_scanned));
 
         //
         // 2-digit year case
@@ -1172,11 +1172,11 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
         }
 
         if (year < 1900)
-          throw MYMONEYEXCEPTION(QString("Invalid year (%1)").arg(year));
+          throw MYMONEYEXCEPTION(QString::fromLatin1("Invalid year (%1)").arg(year));
 
         break;
       default:
-        throw MYMONEYEXCEPTION("Invalid format character");
+        throw MYMONEYEXCEPTION_CSTRING("Invalid format character");
     }
 
     ++it_scanned;
@@ -1184,7 +1184,7 @@ const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, u
   }
   QDate result(year, month, day);
   if (! result.isValid())
-    throw MYMONEYEXCEPTION(QString("Invalid date (yr%1 mo%2 dy%3)").arg(year).arg(month).arg(day));
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Invalid date (yr%1 mo%2 dy%3)").arg(year).arg(month).arg(day));
 
   return result;
 }

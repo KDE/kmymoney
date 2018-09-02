@@ -2,7 +2,7 @@
                           kmymoney.h
                              -------------------
     copyright            : (C) 2000-2001 by Michael Edwardes <mte@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ***************************************************************************/
 
@@ -46,6 +46,7 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyenums.h"
+#include "viewenums.h"
 
 class QResizeEvent;
 class MyMoneyObject;
@@ -59,9 +60,12 @@ class MyMoneySplit;
 class MyMoneyTransaction;
 class WebConnect;
 class creditTransfer;
+class IMyMoneyOperationsFormat;
 
 template <class T> class onlineJobTyped;
+typedef  void (*KMyMoneyAppCallback)(int, int, const QString &);
 
+namespace eKMyMoney { enum class FileAction; }
 namespace eDialogs { enum class ScheduleResultCode; }
 namespace eMenu { enum class Action;
                   enum class Menu; }
@@ -94,11 +98,6 @@ class KMyMoneyApp : public KXmlGuiWindow, public IMyMoneyProcessingCalendar
 
 private Q_SLOTS:
   /**
-    * Keep track of objects that are destroyed by external events
-    */
-  void slotObjectDestroyed(QObject* o);
-
-  /**
     * Add a context menu to the list used by KMessageBox::informationList to display the consistency check results.
     */
   void slotInstallConsistencyCheckContextMenu();
@@ -126,11 +125,6 @@ protected Q_SLOTS:
   void slotEnableMessages();
 
   /**
-    * Called when the user asks for file information.
-    */
-  void slotFileFileInfo();
-
-  /**
     * Called to run performance test.
     */
   void slotPerformanceTest();
@@ -141,6 +135,11 @@ protected Q_SLOTS:
   void slotGenerateSql();
 
 #ifdef KMM_DEBUG
+  /**
+    * Called when the user asks for file information.
+    */
+  void slotFileFileInfo();
+
   /**
     * Debugging only: turn on/off traces
     */
@@ -208,16 +207,7 @@ protected Q_SLOTS:
 
   void slotShowNextView();
 
-  /**
-    * Brings up a dialog to let the user search for specific transaction(s).  It then
-    * opens a results window to display those transactions.
-    */
-  void slotFindTransaction();
-
-  /**
-    * Destroys a possibly open the search dialog
-    */
-  void slotCloseSearchDialog();
+  void slotViewSelected(View view);
 
   /**
     * Calls the print logic for the current view
@@ -252,11 +242,6 @@ protected Q_SLOTS:
     * based on transaction @a t and @a occurrence and saves it in the engine.
     */
   void slotScheduleNew(const MyMoneyTransaction& t, eMyMoney::Schedule::Occurrence occurrence = eMyMoney::Schedule::Occurrence::Monthly);
-
-  void slotAccountMapOnline();
-  void slotAccountUnmapOnline();
-  void slotAccountUpdateOnline();
-  void slotAccountUpdateOnlineAll();
 
   void slotStatusProgressDone();
 
@@ -301,16 +286,6 @@ public:
   bool isImportableFile(const QUrl &url);
 
   /**
-    * This method is used to update the caption of the application window.
-    * It sets the caption to "filename [modified] - KMyMoney".
-    *
-    * @param skipActions if true, the actions will not be updated. This
-    *                    is usually onyl required by some early calls when
-    *                    these widgets are not yet created (the default is false).
-    */
-  void updateCaption(bool skipActions = false);
-
-  /**
     * This method returns a list of all 'other' dcop registered kmymoney processes.
     * It's a subset of the return of DCOPclient()->registeredApplications().
     *
@@ -334,6 +309,11 @@ public:
   void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
 
   QString filename() const;
+  QUrl filenameURL() const;
+  void writeFilenameURL(const QUrl &url);
+
+  void addToRecentFiles(const QUrl &url);
+  QTimer* autosaveTimer();
 
   /**
     * Checks if the file with the @a url already exists. If so,
@@ -347,6 +327,28 @@ public:
    * Return pointer to the WebConnect object
    */
   WebConnect* webConnect() const;
+
+  /**
+   * Call this to find out if the currently open file is a sql database
+   *
+   * @retval true file is database
+   * @retval false file is serial
+   */
+  bool isDatabase();
+
+  /**
+    * Call this to find out if the currently open file is native KMM
+    *
+    * @retval true file is native
+    * @retval false file is foreign
+    */
+  bool isNativeFile();
+
+  bool fileOpen() const;
+
+  KMyMoneyAppCallback progressCallback();
+
+  void consistencyCheck(bool alwaysDisplayResult);
 
 protected:
   /** save general Options like all bar positions and status as well as the geometry and the recent file list to the configuration
@@ -392,11 +394,13 @@ protected:
    * @see KMainWindow#queryClose
    * @see QWidget#closeEvent
    */
-  virtual bool queryClose();
+  bool queryClose() final override;
 
   void slotCheckSchedules();
 
-  virtual void resizeEvent(QResizeEvent*);
+#ifdef KMM_DEBUG
+  void resizeEvent(QResizeEvent*) final override;
+#endif
 
   void createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& newAccount);
 
@@ -409,58 +413,7 @@ public Q_SLOTS:
 
   void slotFileInfoDialog();
 
-  /** */
-  void slotFileNew();
-
-  /** open a file and load it into the document*/
-  void slotFileOpen();
-
-  /** opens a file from the recent files menu */
-
-  void slotFileOpenRecent(const QUrl &url);
-
-  /** open a SQL database */
-  void slotOpenDatabase();
-
-  /**
-    * saves the current document. If it has no name yet, the user
-    * will be queried for it.
-    *
-    * @retval false save operation failed
-    * @retval true save operation was successful
-    */
-  bool slotFileSave();
-
-  /**
-    * ask the user for the filename and save the current document
-    *
-    * @retval false save operation failed
-    * @retval true save operation was successful
-    */
-  bool slotFileSaveAs();
-
-  /**
-   * ask the user to select a database and save the current document
-   *
-   * @retval false save operation failed
-   * @retval true save operation was successful
-   */
-  bool saveAsDatabase();
-  void slotSaveAsDatabase();
-
-  /** asks for saving if the file is modified, then closes the actual file and window */
-  void slotFileCloseWindow();
-
-  /** asks for saving if the file is modified, then closes the actual file */
-  void slotFileClose();
-
-  /**
-    * closes all open windows by calling close() on each memberList item
-    * until the list is empty, then quits the application.
-    * If queryClose() returns false because the user canceled the
-    * saveModified() dialog, the closing breaks.
-    */
-  void slotFileQuit();
+  bool isFileOpenedInAnotherInstance(const QUrl &url);
 
   void slotFileConsistencyCheck();
 
@@ -524,8 +477,6 @@ public Q_SLOTS:
     */
   void slotEquityPriceUpdate();
 
-  void slotOnlineAccountRequested(const MyMoneyAccount& acc, eMenu::Action action);
-
   /**
     * This slot reparents account @p src to be a child of account @p dest
     *
@@ -569,19 +520,10 @@ public Q_SLOTS:
     */
   void slotToolsStartKCalc();
 
-  void slotResetSelections();
-
-  void slotSelectAccount(const MyMoneyObject& account);
-
   /**
     * Brings up the new account wizard and saves the information.
     */
   void slotAccountNew(MyMoneyAccount&);
-
-  /**
-    * This method updates all KAction items to the current state.
-    */
-  void slotUpdateActions();
 
   void webConnect(const QString& sourceUrl, const QByteArray &asn_id);
   void webConnect(const QUrl url) { webConnect(url.path(), QByteArray()); }
@@ -610,15 +552,7 @@ private:
   /**
     * Re-implemented from IMyMoneyProcessingCalendar
     */
-  bool isProcessingDate(const QDate& date) const;
-
-  /**
-    * Depending on the setting of AutoSaveOnQuit, this method
-    * asks the user to save the file or not.
-    *
-    * @returns see return values of KMessageBox::warningYesNoCancel()
-    */
-  int askSaveOnClose();
+  bool isProcessingDate(const QDate& date) const final override;
 
 Q_SIGNALS:
   /**
@@ -648,14 +582,6 @@ Q_SIGNALS:
   void selectAllTransactions();
 
   /**
-    * This signal is emitted when a new account has been selected by
-    * the GUI. If no account is selected or the selection is removed,
-    * @a account is identical to MyMoneyAccount(). This signal is used
-    * by plugins to get information about changes.
-    */
-  void accountSelected(const MyMoneyAccount& account);
-
-  /**
     * This signal is emitted when a new institution has been selected by
     * the GUI. If no institution is selected or the selection is removed,
     * @a institution is identical to MyMoneyInstitution(). This signal is used
@@ -674,6 +600,8 @@ Q_SIGNALS:
   void startMatchTransaction(const MyMoneyTransaction& t);
   void cancelMatchTransaction();
 
+  void kmmFilePlugin(unsigned int);
+
 public:
 
   bool isActionToggled(const eMenu::Action _a);
@@ -689,6 +617,21 @@ private:
    */
   /// \internal d-pointer instance.
   Private* d;
+
+public Q_SLOTS:
+  bool slotFileNew();
+  void slotFileOpen();
+  bool slotFileOpenRecent(const QUrl &url);
+  bool slotFileSave();
+  bool slotFileSaveAs();
+  bool slotFileClose();
+  /**
+    * closes all open windows by calling close() on each memberList item
+    * until the list is empty, then quits the application.
+    * If queryClose() returns false because the user canceled the
+    * saveModified() dialog, the closing breaks.
+    */
+  void slotFileQuit();
 };
 
 extern KMyMoneyApp *kmymoney;

@@ -26,8 +26,9 @@
 #include "payeeidentifier/payeeidentifiertyped.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
 #include "tasksettings/credittransfersettingsbase.h"
-#include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
+#include "onlinetasks/sepa/sepaonlinetransfer.h"
 #include "gwenhywfarqtoperators.h"
+#include "mymoneymoney.h"
 
 /**
  * @brief DTAUS Chars

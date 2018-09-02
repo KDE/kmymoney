@@ -465,10 +465,10 @@ bool MyMoneyTemplate::saveTemplate(const QUrl &url)
     if (qfile.open(QIODevice::WriteOnly)) {
       saveToLocalFile(&qfile);
       if (!qfile.commit()) {
-        throw MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
+        throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to write changes to '%1'").arg(filename));
       }
     } else {
-      throw MYMONEYEXCEPTION(i18n("Unable to write changes to '%1'", filename));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to write changes to '%1'").arg(filename));
     }
   } else {
     QTemporaryFile tmpfile;
@@ -477,17 +477,17 @@ bool MyMoneyTemplate::saveTemplate(const QUrl &url)
     if (qfile.open(QIODevice::WriteOnly)) {
       saveToLocalFile(&qfile);
       if (!qfile.commit()) {
-        throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.toDisplayString()));
+        throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to upload to '%1'").arg(url.toDisplayString()));
       }
     } else {
-      throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'", url.toDisplayString()));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to upload to '%1'").arg(url.toDisplayString()));
     }
     int permission = -1;
     QFile file(tmpfile.fileName());
     file.open(QIODevice::ReadOnly);
     KIO::StoredTransferJob *putjob = KIO::storedPut(file.readAll(), url, permission, KIO::JobFlag::Overwrite);
     if (!putjob->exec()) {
-      throw MYMONEYEXCEPTION(i18n("Unable to upload to '%1'.<br />%2", url.toDisplayString(), putjob->errorString()));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to upload to '%1'.<br />%2").arg(url.toDisplayString(), putjob->errorString()));
     }
     file.close();
   }

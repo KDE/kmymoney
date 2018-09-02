@@ -20,7 +20,15 @@ set(ofximporter_PART_UI
 
 ki18n_wrap_ui(ofximporter_PART_SRCS ${ofximporter_PART_UI})
 
-add_library(ofximporter MODULE ${ofximporter_PART_SRCS})
+kcoreaddons_add_plugin(ofximporter
+                       SOURCES ${ofximporter_PART_SRCS}
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/ofximporter.json"
+                       INSTALL_NAMESPACE "kmymoney")
+
+#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
+set_target_properties(ofximporter
+                      PROPERTIES
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(ofximporter
   ofximporter_dialogs
@@ -39,11 +47,8 @@ target_include_directories(ofximporter
   ${CMAKE_CURRENT_BINARY_DIR}/dialogs
   ${LIBOFX_INCLUDE_DIR}
 )
-                      
+
 ########### install files ###############
 
 install(FILES ofximporter.rc
         DESTINATION "${KXMLGUI_INSTALL_DIR}/ofximporter")
-
-install(TARGETS ofximporter
-        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")

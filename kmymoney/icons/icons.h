@@ -104,6 +104,27 @@ enum class Icon { SVNUpdate, Merge, Reconcile, Split, Tip, Fork,
 KMM_ICONS_EXPORT void setIconThemeNames(const QString &_themeName);
 KMM_ICONS_EXPORT QIcon get(Icons::Icon icon);
 
+
+/**
+ * return an icon from the application local cache or an icon provided
+ * by the application. The @a name is formatted as @c type:iconName.
+ * The following types are supported
+ *
+ * - enum
+ * - favicon
+ *
+ * @sa storeIconInApplicationCache(const QString& name, const QIcon& icon)
+ */
+KMM_ICONS_EXPORT QIcon loadIconFromApplicationCache(const QString& name);
+
+/**
+ * store the @a icon in the applications local cache directory under the given @a name.
+ * The @a name is formatted as @c type:iconName.
+ * The icon will be stored in the file "type-iconName".
+ *
+ * @sa loadIconFromApplicationCache(const QString& name)
+ */
+KMM_ICONS_EXPORT bool storeIconInApplicationCache(const QString& name, const QIcon& icon);
 }
 
 #endif

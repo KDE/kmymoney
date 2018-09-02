@@ -1,11 +1,10 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ * Copyright 2013-2016  Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,16 +22,23 @@
 #include "onlinejobadministration.h"
 #include "mymoney/mymoneyfile.h"
 #include "mymoneyaccount.h"
-#include "mymoney/storage/mymoneyseqaccessmgr.h"
+#include "mymoney/storage/mymoneystoragemgr.h"
 #include "onlinetasks/dummy/tasks/dummytask.h"
+#include "mymoneyexception.h"
 #include "mymoneyenums.h"
 
 QTEST_GUILESS_MAIN(onlineJobAdministrationTest)
 
+onlineJobAdministrationTest::onlineJobAdministrationTest()
+  : storage(nullptr)
+  , file(nullptr)
+{
+}
+
 void onlineJobAdministrationTest::initTestCase()
 {
   file = MyMoneyFile::instance();
-  storage = new MyMoneySeqAccessMgr;
+  storage = new MyMoneyStorageMgr;
   file->attachStorage(storage);
 
   try {
@@ -44,8 +50,8 @@ void onlineJobAdministrationTest::initTestCase()
     file->addAccount(account , asset);
     accountId = account.id();
     transaction.commit();
-  } catch (const MyMoneyException& ex) {
-    QFAIL(qPrintable("Unexpected exception " + ex.what()));
+  } catch (const MyMoneyException &ex) {
+    QFAIL(qPrintable(QString::fromLatin1("Unexpected exception %1").arg(ex.what())));
   }
 }
 

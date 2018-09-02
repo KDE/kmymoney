@@ -1,23 +1,26 @@
-/***************************************************************************
-                          budgetviewproxymodel.h
-                             -------------------
-    Copyright (C) 2006 by Darren Gould <darren_gould@gmx.de>
-    Copyright (C) 2006 by Alvaro Soliverez <asoliverez@gmail.com>
-    Copyright (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2006       Darren Gould <darren_gould@gmx.de>
+ * Copyright 2009-2014  Alvaro Soliverez <asoliverez@gmail.com>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef BUDGETVIEWPROXYMODEL_H
 #define BUDGETVIEWPROXYMODEL_H
+
+#include "kmm_widgets_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -30,10 +33,9 @@
 
 #include "accountsviewproxymodel.h"
 
-#include "mymoneymoney.h"
-#include "mymoneybudget.h"
-
 class MyMoneyAccount;
+class MyMoneyBudget;
+class MyMoneyMoney;
 
 /**
   * This proxy model implements all the functionality needed by the budgets
@@ -42,12 +44,15 @@ class MyMoneyAccount;
   *
   * @author Cristin Oneț
   */
-class BudgetViewProxyModel : public AccountsViewProxyModel
+class BudgetViewProxyModelPrivate;
+class KMM_WIDGETS_EXPORT BudgetViewProxyModel : public AccountsViewProxyModel
 {
   Q_OBJECT
+  Q_DISABLE_COPY(BudgetViewProxyModel)
 
 public:
-  explicit BudgetViewProxyModel(QObject *parent = 0);
+  explicit BudgetViewProxyModel(QObject *parent = nullptr);
+  ~BudgetViewProxyModel() override;
 
   virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
   Qt::ItemFlags flags(const QModelIndex &index) const override;
@@ -67,11 +72,9 @@ protected:
   MyMoneyMoney computeTotalValue(const QModelIndex &source_index) const;
 
 private:
-  void checkBalance();
+  Q_DECLARE_PRIVATE(BudgetViewProxyModel)
 
-private:
-  MyMoneyBudget m_budget;
-  MyMoneyMoney m_lastBalance;
+  void checkBalance();
 };
 
 #endif

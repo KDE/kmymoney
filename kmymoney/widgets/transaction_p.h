@@ -1,19 +1,20 @@
-/***************************************************************************
-                          transaction_p.h  -  description
-                             -------------------
-    begin                : Tue Jun 13 2006
-    copyright            : (C) 2000-2006 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2006-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef TRANSACTION_P_H
 #define TRANSACTION_P_H
@@ -48,7 +49,16 @@ namespace KMyMoneyRegister
   class  TransactionPrivate : public RegisterItemPrivate
   {
   public:
-    TransactionPrivate()
+    TransactionPrivate() :
+      m_form(nullptr),
+      m_formRowHeight(-1),
+      m_selected(false),
+      m_focus(false),
+      m_erroneous(false),
+      m_inEdit(false),
+      m_inRegisterEdit(false),
+      m_showBalance(true),
+      m_reducedIntensity(false)
     {
     }
 
@@ -58,15 +68,6 @@ namespace KMyMoneyRegister
 
     void init(int uniqueId)
     {
-      m_formRowHeight = -1;
-      m_selected = false;
-      m_focus = false;
-      m_erroneous = false;
-      m_inEdit = false;
-      m_inRegisterEdit = false;
-      m_showBalance = true;
-      m_reducedIntensity = false;
-
       auto file = MyMoneyFile::instance();
 
       // load the account

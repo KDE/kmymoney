@@ -21,18 +21,26 @@ IF (LIBOFX_INCLUDE_DIR AND LIBOFX_LIBRARIES)
    SET(LIBOFX_FIND_QUIETLY TRUE)
 ENDIF (LIBOFX_INCLUDE_DIR AND LIBOFX_LIBRARIES)
 
-IF (NOT WIN32)
+IF (NOT WIN32 AND NOT APPLE)
    # use pkg-config to get the directories and then use these values
    # in the FIND_PATH() and FIND_LIBRARY() calls
    FIND_PACKAGE(PkgConfig)
-   PKG_CHECK_MODULES(LIBOFX libofx>=${LIBOFX_MIN_VERSION})
-   # I am not sure what the next statement should do, since the
-   # var LIBOFX_DEFINITIONS is not used anywhere. Leave it here
-   # in case I overlooked something, but it could really go
-   # at some point in time (ipwizard, 2011-02-15)
-   # SET(LIBOFX_DEFINITIONS ${LIBOFX_CFLAGS_OTHER})
 
-ELSE (NOT WIN32)
+   # according to https://svnweb.freebsd.org/ports/head/finance/kmymoney/files/patch-cmake_modules_FindLibOfx.cmake?view=markup
+   # FreeBSD needs a little different variable name here to setup the LibOFX package infrastructure for us.
+   if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+      PKG_CHECK_MODULES(PC_OFX libofx>=${LIBOFX_MIN_VERSION})
+   else (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+      PKG_CHECK_MODULES(LIBOFX libofx>=${LIBOFX_MIN_VERSION})
+   endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+
+  FIND_PATH(LIBOFX_INCLUDE_DIR libofx/libofx.h
+      PATHS
+      ${LIBOFX_INCLUDE_DIRS}
+      ${PC_OFX_INCLUDE_DIRS}
+  )
+
+ELSE (NOT WIN32 AND NOT APPLE)
   FIND_PATH(LIBOFX_INCLUDE_DIR libofx/libofx.h
       PATHS
       ${PC_OFX_INCLUDEDIR}
@@ -50,7 +58,7 @@ ELSE (NOT WIN32)
   ELSE (LIBOFX_INCLUDE_DIR AND LIBOFX_LIBRARIES)
     SET(LIBOFX_FOUND FALSE)
   ENDIF (LIBOFX_INCLUDE_DIR AND LIBOFX_LIBRARIES)
-ENDIF (NOT WIN32)
+ENDIF (NOT WIN32 AND NOT APPLE)
 
 IF (LIBOFX_FOUND)
    IF (NOT LIBOFX_FIND_QUIETLY)

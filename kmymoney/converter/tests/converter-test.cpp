@@ -21,7 +21,7 @@
 #include <QFile>
 
 // uses helper functions from reports tests
-#include "reportstestcommon.h"
+#include "tests/testutilities.h"
 using namespace test;
 
 #include "mymoneyinstitution.h"
@@ -31,7 +31,6 @@ using namespace test;
 #include "mymoneypayee.h"
 #include "mymoneystatement.h"
 #include "mymoneyexception.h"
-#include "storage/mymoneystoragexml.h"
 #include "storage/mymoneystoragedump.h"
 #include "webpricequote.h"
 
@@ -41,7 +40,7 @@ using namespace convertertest;
 
 void ConverterTest::init()
 {
-  storage = new MyMoneySeqAccessMgr;
+  storage = new MyMoneyStorageMgr;
   file = MyMoneyFile::instance();
   file->attachStorage(storage);
 
@@ -53,9 +52,11 @@ void ConverterTest::init()
   file->addCurrency(MyMoneySecurity("GBP", "British Pound",           "#"));
   file->setBaseCurrency(file->currency("USD"));
 
-  MyMoneyPayee payeeTest("Test Payee");
+  MyMoneyPayee payeeTest;
+  payeeTest.setName("Test Payee");
   file->addPayee(payeeTest);
-  MyMoneyPayee payeeTest2("Thomas Baumgart");
+  MyMoneyPayee payeeTest2;
+  payeeTest2.setName("Thomas Baumgart");
   file->addPayee(payeeTest2);
 
   acAsset = (MyMoneyFile::instance()->asset().id());
@@ -129,7 +130,7 @@ void ConverterTest::testWebQuotesDefault()
     // Quote value should at least be positive
     QVERIFY(qr.m_price.isPositive());
   } catch (const MyMoneyException &e) {
-    QFAIL(qPrintable(e.what()));
+    QFAIL(e.what());
   }
 #endif
 }
@@ -152,7 +153,7 @@ void ConverterTest::testWebQuotes()
     QVERIFY(qr.m_price.isPositive());
 
   } catch (const MyMoneyException &e) {
-    QFAIL(qPrintable(e.what()));
+    QFAIL(e.what());
   }
 #endif
 }
@@ -196,6 +197,6 @@ void ConverterTest::testDateFormat()
     QVERIFY(format.convertString("1/1/90", false, 2000) == QDate(1990, 1, 1));
     QVERIFY(format.convertString("december 31st, 5", false) == QDate(2005, 12, 31));
   } catch (const MyMoneyException &e) {
-    QFAIL(qPrintable(e.what()));
+    QFAIL(e.what());
   }
 }

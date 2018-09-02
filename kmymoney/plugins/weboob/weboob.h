@@ -58,8 +58,6 @@ public:
 
   bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts = false) override;
 
-  void injectExternalSettings(KMyMoneySettings* p) override;
-  
 private:
   Q_DECLARE_PRIVATE(Weboob)
   WeboobPrivate * const d_ptr;

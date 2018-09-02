@@ -1,5 +1,3 @@
-project(Wizardpages)
-
 ########### next target ###############
 set(libwizardpages_a_SOURCES
   accounts.cpp currency.cpp userinfo.cpp

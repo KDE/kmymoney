@@ -9,6 +9,7 @@
                         John C <thetacoturtle@users.sourceforge.net>
                         Thomas Baumgart <ipwizard@users.sourceforge.net>
                         Kevin Tambascio <ktambascio@users.sourceforge.net>
+                        (C) 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 ***************************************************************************/
 
 /***************************************************************************
@@ -178,8 +179,7 @@ class MyMoneyGncReader;
 class QIODevice;
 class QDate;
 class QTextCodec;
-class IMyMoneySerialize;
-class IMyMoneyStorage;
+class MyMoneyStorageMgr;
 class QXmlAttributes;
 class QXmlInputSource;
 class QXmlSimpleReader;
@@ -206,11 +206,11 @@ protected:
   // process start element for 'this'; normally for attribute checking; other initialization done in constructor
   virtual void initiate(const QString&, const QXmlAttributes&) {
     return ;
-  };
+  }
   // a sub object has completed; process the data it gathered
   virtual void endSubEl(GncObject *) {
     m_dataPtr = 0; return ;
-  };
+  }
   // store data for data element
   void storeData(const QString& pData) { // NB - data MAY come in chunks, and may need to be anonymized
     if (m_dataPtr != 0)
@@ -219,31 +219,31 @@ protected:
   // following is provided only for a future file anonymizer
   QString getData() const {
     return ((m_dataPtr != 0) ? *m_dataPtr : "");
-  };
+  }
   void resetDataPtr() {
     m_dataPtr = 0;
-  };
+  }
   // process end element for 'this'; usually to convert to KMM format
   virtual void terminate() {
     return ;
-  };
+  }
   void setVersion(const QString& v) {
     m_version = v; return;
-  };
+  }
   QString version() const {
     return (m_version);
-  };
+  }
 
   // some gnucash elements have version attribute; check it
   void checkVersion(const QString&, const QXmlAttributes&, const map_elementVersions&);
   // get name of element processed by 'this'
   QString getElName() const {
     return (m_elementName);
-  };
+  }
   // pass 'main' pointer to object
   void setPm(MyMoneyGncReader *pM) {
     pMain = pM;
-  };
+  }
   const QString getKvpValue(const QString& key, const QString& type = QString()) const;
 
   // debug only
@@ -252,18 +252,18 @@ protected:
   // called by isSubElement to create appropriate sub object
   virtual GncObject *startSubEl() {
     return (0);
-  };
+  }
   // called by isDataElement to set variable pointer
   virtual void dataEl(const QXmlAttributes&) {
     m_dataPtr = &(m_v[m_state]); m_anonClass = m_anonClassList[m_state];
-  };
+  }
   // return gnucash data string variable pointer
   virtual QString var(int i) const;
   // anonymize data
   virtual QString hide(QString, unsigned int);
   unsigned int kvpCount() const {
     return (m_kvpList.count());
-  }; //!
+  } //!
 
   MyMoneyGncReader *pMain;    // pointer to 'main' class
   // used at start of each transaction so same money hide factor is applied to all splits
@@ -296,8 +296,8 @@ public:
   ~GncFile();
 private:
   enum iSubEls {BOOK, COUNT, CMDTY, PRICE, ACCT, TX, TEMPLATES, SCHEDULES, END_FILE_SELS };
-  virtual GncObject *startSubEl();
-  virtual void endSubEl(GncObject *);
+  GncObject *startSubEl() final override;
+  void endSubEl(GncObject *) final override;
 
   bool m_processingTemplates; // gnc uses same transaction element for ordinary and template tx's; this will distinguish
   bool m_bookFound;  // to  detect multi-book files
@@ -318,24 +318,24 @@ public:
 
   QString key() const {
     return (var(KEY));
-  };
+  }
   QString value() const {
     return (var(VALUE));
-  };
+  }
   QString type() const {
     return (m_kvpType);
-  };
+  }
   const GncKvp getKvp(unsigned int i) const {
     return (m_kvpList[i]);
-  };
+  }
 private:
   // subsidiary objects/elements
   enum KvpSubEls {KVP, END_Kvp_SELS };
-  virtual GncObject *startSubEl();
-  virtual void endSubEl(GncObject *);
+  GncObject *startSubEl() final override;
+  void endSubEl(GncObject *) final override;
   // data elements
   enum KvpDataEls {KEY, VALUE, END_Kvp_DELS };
-  virtual void dataEl(const QXmlAttributes&);
+  void dataEl(const QXmlAttributes&) final override;
   QString m_kvpType;  // type is an XML attribute
 };
 // ************* GncLot********************************************
@@ -373,7 +373,7 @@ protected:
 private:
   // data elements
   enum CmdtySpecDataEls {CMDTYSPC, CMDTYID, END_CmdtySpec_DELS};
-  virtual QString hide(QString, unsigned int);
+  QString hide(QString, unsigned int) final override;
 };
 // *********************************************************************
 // date; maybe one of two types, ts:date which is date/time, gdate which is date only
@@ -396,10 +396,10 @@ protected:
 private:
   // data elements
   enum DateDataEls {TSDATE, GDATE, END_Date_DELS};
-  virtual void dataEl(const QXmlAttributes&) {
+  void dataEl(const QXmlAttributes&) final override {
     m_dataPtr = &(m_v[TSDATE]); m_anonClass = GncObject::ASIS;
   }
-  ; // treat both date types the same
+   // treat both date types the same
 };
 
 /** Following are the main objects within the gnucash file, which correspond largely one-for-one
@@ -413,8 +413,8 @@ public:
   GncCountData();
   ~GncCountData();
 private:
-  virtual void initiate(const QString&, const QXmlAttributes&);
-  virtual void terminate();
+  void initiate(const QString&, const QXmlAttributes&) final override;
+  void terminate() final override;
   QString m_countType; // type of element being counted
 };
 //********************************************************************
@@ -428,21 +428,21 @@ protected:
   // access data values
   bool isCurrency() const {
     return (var(SPACE) == QString("ISO4217"));
-  };
+  }
   QString space() const {
     return (var(SPACE));
-  };
+  }
   QString id() const {
     return (var(ID));
-  };
+  }
   QString name() const {
     return (var(NAME));
-  };
+  }
   QString fraction() const {
     return (var(FRACTION));
-  };
+  }
 private:
-  virtual void terminate();
+  void terminate() final override;
   // data elements
   enum {SPACE, ID, NAME, FRACTION, END_Commodity_DELS};
 };
@@ -457,22 +457,22 @@ protected:
   // access data values
   const GncCmdtySpec *commodity() const {
     return (m_vpCommodity);
-  };
+  }
   const GncCmdtySpec *currency() const {
     return (m_vpCurrency);
-  };
+  }
   QString value() const {
     return (var(VALUE));
-  };
+  }
   QDate priceDate() const {
     return (m_vpPriceDate->date());
-  };
+  }
 private:
-  virtual void terminate();
+  void terminate() final override;
   // sub object elements
   enum PriceSubEls {CMDTY, CURR, PRICEDATE, END_Price_SELS };
-  virtual GncObject *startSubEl();
-  virtual void endSubEl(GncObject *);
+  GncObject *startSubEl() final override;
+  void endSubEl(GncObject *) final override;
   // data elements
   enum PriceDataEls {VALUE, END_Price_DELS };
   GncCmdtySpec *m_vpCommodity, *m_vpCurrency;
@@ -489,28 +489,28 @@ protected:
   // access data values
   GncCmdtySpec *commodity() const {
     return (m_vpCommodity);
-  };
+  }
   QString id() const {
     return (var(ID));
-  };
+  }
   QString name() const {
     return (var(NAME));
-  };
+  }
   QString desc() const {
     return (var(DESC));
-  };
+  }
   QString type() const {
     return (var(TYPE));
-  };
+  }
   QString parent() const {
     return (var(PARENT));
-  };
+  }
 private:
   // subsidiary objects/elements
   enum AccountSubEls {CMDTY, KVP, LOTS, END_Account_SELS };
-  virtual GncObject *startSubEl();
-  virtual void endSubEl(GncObject *);
-  virtual void terminate();
+  GncObject *startSubEl() final override;
+  void endSubEl(GncObject *) final override;
+  void terminate() final override;
   // data elements
   enum AccountDataEls {ID, NAME, DESC, TYPE, PARENT, END_Account_DELS };
   GncCmdtySpec *m_vpCommodity;
@@ -526,30 +526,30 @@ protected:
   // access data values
   QString id() const {
     return (var(ID));
-  };
+  }
   QString memo() const {
     return (var(MEMO));
-  };
+  }
   QString recon() const {
     return (var(RECON));
-  };
+  }
   QString value() const {
     return (var(VALUE));
-  };
+  }
   QString qty() const {
     return (var(QTY));
-  };
+  }
   QString acct() const {
     return (var(ACCT));
-  };
+  }
   const QDate reconDate() const {
     QDate x = QDate(); return (m_vpDateReconciled == NULL ? x : m_vpDateReconciled->date());
-  };
+  }
 private:
   // subsidiary objects/elements
   enum TransactionSubEls {RECDATE, END_Split_SELS };
-  virtual GncObject *startSubEl();
-  virtual void endSubEl(GncObject *);
+  GncObject *startSubEl() final override;
+  void endSubEl(GncObject *) final override;
   // data elements
   enum SplitDataEls {ID, MEMO, RECON, VALUE, QTY, ACCT, END_Split_DELS };
   GncDate *m_vpDateReconciled;
@@ -565,40 +565,40 @@ protected:
   // access data values
   QString id() const {
     return (var(ID));
-  };
+  }
   QString no() const {
     return (var(NO));
-  };
+  }
   QString desc() const {
     return (var(DESC));
-  };
+  }
   QString currency() const {
     return (m_vpCurrency == NULL ? QString() : m_vpCurrency->id());
-  };
+  }
   QDate dateEntered() const {
     return (m_vpDateEntered->date());
-  };
+  }
   QDate datePosted() const {
     return (m_vpDatePosted->date());
-  };
+  }
   bool isTemplate() const {
     return (m_template);
-  };
+  }
   unsigned int splitCount() const {
     return (m_splitList.count());
-  };
+  }
   const GncObject *getSplit(unsigned int i) const {
     return (m_splitList.at(i));
-  };
+  }
 private:
   // subsidiary objects/elements
   enum TransactionSubEls {CURRCY, POSTED, ENTERED, SPLIT, KVP, END_Transaction_SELS };
-  virtual GncObject *startSubEl();
-  virtual void endSubEl(GncObject *);
-  virtual void terminate();
+  GncObject *startSubEl() final override;
+  void endSubEl(GncObject *) final override;
+  void terminate() final override;
   const GncKvp getKvp(unsigned int i) const {
     return (m_kvpList.at(i));
-  };
+  }
   // data elements
   enum TransactionDataEls {ID, NO, DESC, END_Transaction_DELS };
   GncCmdtySpec *m_vpCurrency;
@@ -618,30 +618,30 @@ protected:
   // access data values
   QString id() const {
     return (var(ID));
-  };
+  }
   QString memo() const {
     return (var(MEMO));
-  };
+  }
   QString recon() const {
     return (var(RECON));
-  };
+  }
   QString value() const {
     return (var(VALUE));
-  };
+  }
   QString qty() const {
     return (var(QTY));
-  };
+  }
   QString acct() const {
     return (var(ACCT));
-  };
+  }
 private:
   const GncKvp getKvp(unsigned int i) const {
     return (m_kvpList[i]);
   };
   // subsidiary objects/elements
   enum TemplateSplitSubEls {KVP, END_TemplateSplit_SELS };
-  virtual GncObject *startSubEl();
-  virtual void endSubEl(GncObject *);
+  GncObject *startSubEl() final override;
+  void endSubEl(GncObject *) final override;
   // data elements
   enum TemplateSplitDataEls {ID, MEMO, RECON, VALUE, QTY, ACCT, END_TemplateSplit_DELS };
 };
@@ -659,58 +659,58 @@ protected:
   // access data values
   QString name() const {
     return (var(NAME));
-  };
+  }
   QString enabled() const {
     return var(ENABLED);
-  };
+  }
   QString autoCreate() const {
     return (var(AUTOC));
-  };
+  }
   QString autoCrNotify() const {
     return (var(AUTOCN));
-  };
+  }
   QString autoCrDays() const {
     return (var(AUTOCD));
-  };
+  }
   QString advCrDays() const {
     return (var(ADVCD));
-  };
+  }
   QString advCrRemindDays() const {
     return (var(ADVRD));
-  };
+  }
   QString instanceCount() const {
     return (var(INSTC));
-  };
+  }
   QString numOccurs() const {
     return (var(NUMOCC));
-  };
+  }
   QString remOccurs() const {
     return (var(REMOCC));
-  };
+  }
   QString templId() const {
     return (var(TEMPLID));
-  };
+  }
   QDate startDate() const {
     QDate x = QDate(); return (m_vpStartDate == NULL ? x : m_vpStartDate->date());
-  };
+  }
   QDate lastDate() const {
     QDate x = QDate(); return (m_vpLastDate == NULL ? x : m_vpLastDate->date());
-  };
+  }
   QDate endDate() const {
     QDate x = QDate(); return (m_vpEndDate == NULL ? x : m_vpEndDate->date());
-  };
+  }
   const GncFreqSpec *getFreqSpec() const {
     return (m_vpFreqSpec);
-  };
+  }
   const GncSchedDef *getSchedDef() const {
     return (m_vpSchedDef);
-  };
+  }
 private:
   // subsidiary objects/elements
   enum ScheduleSubEls {STARTDATE, LASTDATE, ENDDATE, FREQ, RECURRENCE, DEFINST, END_Schedule_SELS };
-  virtual GncObject *startSubEl();
-  virtual void endSubEl(GncObject *);
-  virtual void terminate();
+  GncObject *startSubEl() final override;
+  void endSubEl(GncObject *) final override;
+  void terminate() final override;
   // data elements
   enum ScheduleDataEls {NAME, ENABLED, AUTOC, AUTOCN, AUTOCD, ADVCD, ADVRD, INSTC,
                         NUMOCC, REMOCC, TEMPLID, END_Schedule_DELS
@@ -731,15 +731,15 @@ protected:
   // access data values (only interval type used at present)
   QString intervalType() const {
     return (var(INTVT));
-  };
+  }
 private:
   // subsidiary objects/elements
   enum FreqSpecSubEls {COMPO, END_FreqSpec_SELS };
-  virtual GncObject *startSubEl();
-  virtual void endSubEl(GncObject *);
+  GncObject *startSubEl() final override;
+  void endSubEl(GncObject *) final override;
   // data elements
   enum FreqSpecDataEls {INTVT, MONTHLY, DAILY, WEEKLY, INTVI, INTVO, INTVD, END_FreqSpec_DELS};
-  virtual void terminate();
+  void terminate() final override;
   mutable QList<GncObject*> m_fsList;
 };
 
@@ -755,22 +755,22 @@ protected:
   // access data values
   QDate startDate() const {
     QDate x = QDate(); return (m_vpStartDate == NULL ? x : m_vpStartDate->date());
-  };
+  }
   QString mult() const {
     return (var(MULT));
-  };
+  }
   QString periodType() const {
     return (var(PERIODTYPE));
-  };
+  }
   QString getFrequency() const;
 private:
   // subsidiary objects/elements
   enum RecurrenceSubEls {STARTDATE, END_Recurrence_SELS };
-  virtual GncObject *startSubEl();
-  virtual void endSubEl(GncObject *);
+  GncObject *startSubEl() final override;
+  void endSubEl(GncObject *) final override;
   // data elements
   enum RecurrenceDataEls {MULT, PERIODTYPE, END_Recurrence_DELS};
-  virtual void terminate();
+  void terminate() final override;
   GncDate *m_vpStartDate;
 };
 
@@ -801,11 +801,11 @@ protected:
   XmlReader(MyMoneyGncReader *pM);                 // keep pointer to 'main'
   void processFile(QIODevice*);  // main entry point of reader
   //  define xml content handler functions
-  bool startDocument();
-  bool startElement(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  bool endElement(const QString&, const QString&, const QString&);
-  bool characters(const QString &);
-  bool endDocument();
+  bool startDocument() final override;
+  bool startElement(const QString&, const QString&, const QString&, const QXmlAttributes&) final override;
+  bool endElement(const QString&, const QString&, const QString&) final override;
+  bool characters(const QString &) final override;
+  bool endDocument() final override;
 private:
   QXmlInputSource *m_source;
   QXmlSimpleReader *m_reader;
@@ -825,7 +825,7 @@ private:
   */
 
 #ifndef _GNCFILEANON
-class MyMoneyGncReader : public IMyMoneyStorageFormat
+class MyMoneyGncReader : public IMyMoneyOperationsFormat
 {
 #else
 class MyMoneyGncReader
@@ -833,7 +833,7 @@ class MyMoneyGncReader
 #endif // _GNCFILEANON
 public:
   MyMoneyGncReader();
-  virtual ~MyMoneyGncReader();
+  ~MyMoneyGncReader() override;
   /**
     * Import a GnuCash XML file
     *
@@ -844,10 +844,11 @@ public:
     *
     */
 #ifndef _GNCFILEANON
-  void readFile(QIODevice* pDevice, IMyMoneySerialize* storage);  // main entry point, IODevice is gnucash file
-  void writeFile(QIODevice*, IMyMoneySerialize*) {
+  void readFile(QIODevice* pDevice, MyMoneyStorageMgr *storage) final override;  // main entry point, IODevice is gnucash file
+  void writeFile(QIODevice*, MyMoneyStorageMgr*) final override {
     return ;
-  }; // dummy entry needed by kmymoneywiew. we will not be writing
+  } // dummy entry needed by kmymoneywiew. we will not be writing
+  void setProgressCallback(void(*callback)(int, int, const QString&)) final override;
 #else
   void readFile(QString, QString);
 #endif // _GNCFILEANON
@@ -916,7 +917,6 @@ protected:
   void postMessage(const QString&, const unsigned int, const char *, const char *);
   void postMessage(const QString&, const unsigned int, const char *, const char *, const char *);
   void postMessage(const QString&, const unsigned int, const QStringList&);
-  void setProgressCallback(void(*callback)(int, int, const QString&));
   void signalProgress(int current, int total, const QString& = "");
   /** user options */
   /**
@@ -958,25 +958,25 @@ protected:
   // set gnucash counts (not always accurate!)
   void setGncCommodityCount(int i) {
     m_gncCommodityCount = i;
-  };
+  }
   void setGncAccountCount(int i) {
     m_gncAccountCount = i;
-  };
+  }
   void setGncTransactionCount(int i) {
     m_gncTransactionCount = i;
-  };
+  }
   void setGncScheduleCount(int i) {
     m_gncScheduleCount = i;
-  };
+  }
   void setSmallBusinessFound(bool b) {
     m_smallBusinessFound = b;
-  };
+  }
   void setBudgetsFound(bool b) {
     m_budgetsFound = b;
-  };
+  }
   void setLotsFound(bool b) {
     m_lotsFound = b;
-  };
+  }
   /*          Debug Options
     If you don't know what these are, best leave them alone.
        gncdebug - produce general debug messages
@@ -994,7 +994,7 @@ private:
   // the following handles the gnucash indicator for a bad value (-1/0) which causes us probs
   QString convBadValue(QString gncValue) const {
     return (gncValue == "-1/0" ? "0/1" : gncValue);
-  };
+  }
 #ifndef _GNCFILEANON
   MyMoneyTransaction convertTemplateTransaction(const QString&, const GncTransaction *);
   void convertTemplateSplit(const QString&, const GncTemplateSplit *);
@@ -1005,7 +1005,7 @@ private:
   bool writeReportToFile(const QList<QString>&);
   // main storage
 #ifndef _GNCFILEANON
-  IMyMoneyStorage *m_storage;
+  MyMoneyStorageMgr *m_storage;
 #else
   QTextStream oStream;
 #endif // _GNCFILEANON
@@ -1082,6 +1082,10 @@ private:
   MyMoneyAccount checkConsistency(MyMoneyAccount& parent, MyMoneyAccount& child);  // gnucash is sometimes TOO flexible
   void checkInvestmentOption(QString stockId);  // implement user investment option
   void getPriceSource(MyMoneySecurity stock, QString gncSource);
+  /**
+    * This method loads all known currencies and saves them to the storage
+    */
+  void loadAllCurrencies();
 #endif // _GNCFILEANON
 };
 

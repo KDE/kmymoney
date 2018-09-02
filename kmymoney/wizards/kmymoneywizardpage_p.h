@@ -47,7 +47,10 @@ class KMyMoneyWizardPagePrivate : public QObject
 
 public:
     explicit KMyMoneyWizardPagePrivate(QObject* parent) :
-        QObject(parent)
+        QObject(parent),
+        m_step(0),
+        m_widget(nullptr),
+        m_mandatoryGroup(nullptr)
     {
     }
 

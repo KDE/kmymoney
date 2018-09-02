@@ -188,7 +188,7 @@
   <customwidget>
    <class>KBicEdit</class>
    <extends>QLineEdit</extends>
-   <header>payeeidentifier/ibanandbic/widgets/kbicedit.h</header>
+   <header>widgets/payeeidentifier/ibanbic/kbicedit.h</header>
    <slots>
     <signal>validatorFeedback(KMyMoneyValidationFeedback::MessageType,QString)</signal>
    </slots>
@@ -205,7 +205,7 @@
   <customwidget>
    <class>KIbanLineEdit</class>
    <extends>QLineEdit</extends>
-   <header>payeeidentifier/ibanandbic/widgets/kibanlineedit.h</header>
+   <header>widgets/payeeidentifier/ibanbic/kibanlineedit.h</header>
    <slots>
     <signal>validatorFeedback(KMyMoneyValidationFeedback::MessageType,QString)</signal>
    </slots>

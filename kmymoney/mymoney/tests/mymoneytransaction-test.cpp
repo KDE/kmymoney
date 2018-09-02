@@ -1,24 +1,24 @@
-/***************************************************************************
-                          mymoneytransactiontest.cpp
-                          -------------------
-    copyright            : (C) 2002 by Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2002-2012  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2004-2006  Ace Jones <acejones@users.sourceforge.net>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "mymoneytransaction-test.h"
 
 #include <QDebug>
-#include <QDomDocument>
-#include <QDomElement>
 
 #include <QtTest>
 
@@ -28,6 +28,7 @@
 #include "mymoneysplit_p.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransaction_p.h"
+#include "mymoneyexception.h"
 #include "mymoneyenums.h"
 
 QTEST_GUILESS_MAIN(MyMoneyTransactionTest)
@@ -338,17 +339,17 @@ void MyMoneyTransactionTest::testIsLoanPayment()
   s1 = m->splits()[0];
   s2 = m->splits()[1];
 
-  s1.setAction(MyMoneySplit::ActionAmortization);
+  s1.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization));
   m->modifySplit(s1);
   QVERIFY(m->isLoanPayment() == true);
-  s1.setAction(MyMoneySplit::ActionWithdrawal);
+  s1.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal));
   m->modifySplit(s1);
   QVERIFY(m->isLoanPayment() == false);
 
-  s2.setAction(MyMoneySplit::ActionAmortization);
+  s2.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization));
   m->modifySplit(s2);
   QVERIFY(m->isLoanPayment() == true);
-  s2.setAction(MyMoneySplit::ActionWithdrawal);
+  s2.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal));
   m->modifySplit(s2);
   QVERIFY(m->isLoanPayment() == false);
 }
@@ -409,206 +410,6 @@ void MyMoneyTransactionTest::testModifyDuplicateAccount()
 }
 #endif
 
-void MyMoneyTransactionTest::testWriteXML()
-{
-  MyMoneyTransaction t;
-  t.setPostDate(QDate(2001, 12, 28));
-  t.setEntryDate(QDate(2003, 9, 29));
-  t.d_func()->setId("T000000000000000001");
-  t.setMemo("Wohnung:Miete");
-  t.setCommodity("EUR");
-  t.setValue("key", "value");
-
-  MyMoneySplit s;
-  s.setPayeeId("P000001");
-  QList<QString> tagIdList;
-  tagIdList << "G000001";
-  s.setTagIdList(tagIdList);
-  s.setShares(MyMoneyMoney(96379, 100));
-  s.setValue(MyMoneyMoney(96379, 100));
-  s.setAction(MyMoneySplit::ActionWithdrawal);
-  s.setAccountId("A000076");
-  s.setReconcileFlag(eMyMoney::Split::State::Reconciled);
-  s.setBankID("SPID");
-  t.addSplit(s);
-
-  QDomDocument doc("TEST");
-  QDomElement el = doc.createElement("TRANSACTION-CONTAINER");
-  doc.appendChild(el);
-  t.writeXML(doc, el);
-
-  QCOMPARE(doc.doctype().name(), QLatin1String("TEST"));
-  QDomElement transactionContainer = doc.documentElement();
-  QVERIFY(transactionContainer.isElement());
-  QCOMPARE(transactionContainer.tagName(), QLatin1String("TRANSACTION-CONTAINER"));
-  QVERIFY(transactionContainer.childNodes().size() == 1);
-  QVERIFY(transactionContainer.childNodes().at(0).isElement());
-
-  QDomElement transaction = transactionContainer.childNodes().at(0).toElement();
-  QCOMPARE(transaction.tagName(), QLatin1String("TRANSACTION"));
-  QCOMPARE(transaction.attribute("id"), QLatin1String("T000000000000000001"));
-  QCOMPARE(transaction.attribute("postdate"), QLatin1String("2001-12-28"));
-  QCOMPARE(transaction.attribute("commodity"), QLatin1String("EUR"));
-  QCOMPARE(transaction.attribute("memo"), QLatin1String("Wohnung:Miete"));
-  QCOMPARE(transaction.attribute("entrydate"), QLatin1String("2003-09-29"));
-  QCOMPARE(transaction.childNodes().size(), 2);
-
-  QVERIFY(transaction.childNodes().at(0).isElement());
-  QDomElement splits = transaction.childNodes().at(0).toElement();
-  QCOMPARE(splits.tagName(), QLatin1String("SPLITS"));
-  QCOMPARE(splits.childNodes().size(), 1);
-  QVERIFY(splits.childNodes().at(0).isElement());
-  QDomElement split = splits.childNodes().at(0).toElement();
-  QCOMPARE(split.tagName(), QLatin1String("SPLIT"));
-  QCOMPARE(split.attribute("id"), QLatin1String("S0001"));
-  QCOMPARE(split.attribute("payee"), QLatin1String("P000001"));
-  QCOMPARE(split.attribute("reconcileflag"), QLatin1String("2"));
-  QCOMPARE(split.attribute("shares"), QLatin1String("96379/100"));
-  QCOMPARE(split.attribute("reconciledate"), QString());
-  QCOMPARE(split.attribute("action"), QLatin1String("Withdrawal"));
-  QCOMPARE(split.attribute("bankid"), QLatin1String("SPID"));
-  QCOMPARE(split.attribute("account"), QLatin1String("A000076"));
-  QCOMPARE(split.attribute("number"), QString());
-  QCOMPARE(split.attribute("value"), QLatin1String("96379/100"));
-  QCOMPARE(split.attribute("memo"), QString());
-  QCOMPARE(split.childNodes().size(), 1);
-
-  QVERIFY(split.childNodes().at(0).isElement());
-  QDomElement tag = split.childNodes().at(0).toElement();
-  QCOMPARE(tag.tagName(), QLatin1String("TAG"));
-  QCOMPARE(tag.attribute("id"), QLatin1String("G000001"));
-  QCOMPARE(tag.childNodes().size(), 0);
-
-  QDomElement keyValuePairs = transaction.childNodes().at(1).toElement();
-  QCOMPARE(keyValuePairs.tagName(), QLatin1String("KEYVALUEPAIRS"));
-  QCOMPARE(keyValuePairs.childNodes().size(), 1);
-
-  QVERIFY(keyValuePairs.childNodes().at(0).isElement());
-  QDomElement keyValuePair1 = keyValuePairs.childNodes().at(0).toElement();
-  QCOMPARE(keyValuePair1.tagName(), QLatin1String("PAIR"));
-  QCOMPARE(keyValuePair1.attribute("key"), QLatin1String("key"));
-  QCOMPARE(keyValuePair1.attribute("value"), QLatin1String("value"));
-  QCOMPARE(keyValuePair1.childNodes().size(), 0);
-}
-
-void MyMoneyTransactionTest::testReadXML()
-{
-  MyMoneyTransaction t;
-
-  QString ref_ok = QString(
-                     "<!DOCTYPE TEST>\n"
-                     "<TRANSACTION-CONTAINER>\n"
-                     " <TRANSACTION postdate=\"2001-12-28\" memo=\"Wohnung:Miete\" id=\"T000000000000000001\" commodity=\"EUR\" entrydate=\"2003-09-29\" >\n"
-                     "  <SPLITS>\n"
-                     "   <SPLIT payee=\"P000001\" reconciledate=\"\" shares=\"96379/100\" action=\"Withdrawal\" bankid=\"SPID\" number=\"\" reconcileflag=\"2\" memo=\"\" value=\"96379/100\" account=\"A000076\" />\n"
-                     "   <TAG id=\"G000001\"/>\n"
-                     "  </SPLITS>\n"
-                     "  <KEYVALUEPAIRS>\n"
-                     "   <PAIR key=\"key\" value=\"value\" />\n"
-                     "  </KEYVALUEPAIRS>\n"
-                     " </TRANSACTION>\n"
-                     "</TRANSACTION-CONTAINER>\n"
-                   );
-
-  QString ref_false = QString(
-                        "<!DOCTYPE TEST>\n"
-                        "<TRANSACTION-CONTAINER>\n"
-                        " <TRANS-ACTION postdate=\"2001-12-28\" memo=\"Wohnung:Miete\" id=\"T000000000000000001\" commodity=\"EUR\" entrydate=\"2003-09-29\" >\n"
-                        "  <SPLITS>\n"
-                        "   <SPLIT payee=\"P000001\" reconciledate=\"\" shares=\"96379/100\" action=\"Withdrawal\" bankid=\"SPID\" number=\"\" reconcileflag=\"2\" memo=\"\" value=\"96379/100\" account=\"A000076\" />\n"
-                        "  </SPLITS>\n"
-                        "  <KEYVALUEPAIRS>\n"
-                        "   <PAIR key=\"key\" value=\"value\" />\n"
-                        "  </KEYVALUEPAIRS>\n"
-                        " </TRANS-ACTION>\n"
-                        "</TRANSACTION-CONTAINER>\n"
-                      );
-
-  QDomDocument doc;
-  QDomElement node;
-  doc.setContent(ref_false);
-  node = doc.documentElement().firstChild().toElement();
-
-  try {
-    t = MyMoneyTransaction(node);
-    QFAIL("Missing expected exception");
-  } catch (const MyMoneyException &) {
-  }
-
-  doc.setContent(ref_ok);
-  node = doc.documentElement().firstChild().toElement();
-
-  t.setValue("key", "VALUE");
-  try {
-    t = MyMoneyTransaction(node);
-    QVERIFY(t.postDate() == QDate(2001, 12, 28));
-    QVERIFY(t.entryDate() == QDate(2003, 9, 29));
-    QVERIFY(t.id() == "T000000000000000001");
-    QVERIFY(t.memo() == "Wohnung:Miete");
-    QVERIFY(t.commodity() == "EUR");
-    QVERIFY(t.pairs().count() == 1);
-    QVERIFY(t.value("key") == "value");
-    QVERIFY(t.splits().count() == 1);
-  } catch (const MyMoneyException &) {
-    QFAIL("Unexpected exception");
-  }
-}
-
-void MyMoneyTransactionTest::testReadXMLEx()
-{
-  MyMoneyTransaction t;
-
-  QString ref_ok = QString(
-                     "<!DOCTYPE TEST>\n"
-                     "<TRANSACTION-CONTAINER>\n"
-                     "<TRANSACTION postdate=\"2010-03-05\" memo=\"\" id=\"T000000000000004189\" commodity=\"EUR\" entrydate=\"2010-03-08\" >\n"
-                     " <SPLITS>\n"
-                     "  <SPLIT payee=\"P000010\" reconciledate=\"\" shares=\"-125000/100\" action=\"Transfer\" bankid=\"A000076-2010-03-05-b6850c0-1\" number=\"\" reconcileflag=\"1\" memo=\"UMBUCHUNG\" value=\"-125000/100\" id=\"S0001\" account=\"A000076\" >\n"
-                     "   <KEYVALUEPAIRS>\n"
-                     "    <PAIR key=\"kmm-match-split\" value=\"S0002\" />\n"
-                     "    <PAIR key=\"kmm-matched-tx\" value=\"&amp;lt;!DOCTYPE MATCH>\n"
-                     "    &amp;lt;CONTAINER>\n"
-                     "     &amp;lt;TRANSACTION postdate=&quot;2010-03-05&quot; memo=&quot;UMBUCHUNG&quot; id=&quot;&quot; commodity=&quot;EUR&quot; entrydate=&quot;2010-03-08&quot; >\n"
-                     "      &amp;lt;SPLITS>\n"
-                     "       &amp;lt;SPLIT payee=&quot;P000010&quot; reconciledate=&quot;&quot; shares=&quot;125000/100&quot; action=&quot;Transfer&quot; bankid=&quot;&quot; number=&quot;&quot; reconcileflag=&quot;0&quot; memo=&quot;UMBUCHUNG&quot; value=&quot;125000/100&quot; id=&quot;S0001&quot; account=&quot;A000087&quot; />\n"
-                     "       &amp;lt;SPLIT payee=&quot;P000010&quot; reconciledate=&quot;&quot; shares=&quot;-125000/100&quot; action=&quot;&quot; bankid=&quot;A000076-2010-03-05-b6850c0-1&quot; number=&quot;&quot; reconcileflag=&quot;0&quot; memo=&quot;UMBUCHUNG&quot; value=&quot;-125000/100&quot; id=&quot;S0002&quot; account=&quot;A000076&quot; />\n"
-                     "      &amp;lt;/SPLITS>\n"
-                     "      &amp;lt;KEYVALUEPAIRS>\n"
-                     "       &amp;lt;PAIR key=&quot;Imported&quot; value=&quot;true&quot; />\n"
-                     "      &amp;lt;/KEYVALUEPAIRS>\n"
-                     "     &amp;lt;/TRANSACTION>\n"
-                     "    &amp;lt;/CONTAINER>\n"
-                     "\" />\n"
-                     "    <PAIR key=\"kmm-orig-memo\" value=\"\" />\n"
-                     "   </KEYVALUEPAIRS>\n"
-                     "  </SPLIT>\n"
-                     "  <SPLIT payee=\"P000010\" reconciledate=\"\" shares=\"125000/100\" action=\"Transfer\" bankid=\"\" number=\"\" reconcileflag=\"0\" memo=\"\" value=\"125000/100\" id=\"S0002\" account=\"A000087\" />\n"
-                     " </SPLITS>\n"
-                     "</TRANSACTION>\n"
-                     "</TRANSACTION-CONTAINER>\n"
-                   );
-  QDomDocument doc;
-  QDomElement node;
-  doc.setContent(ref_ok);
-  node = doc.documentElement().firstChild().toElement();
-
-  try {
-    t = MyMoneyTransaction(node);
-    QVERIFY(t.pairs().count() == 0);
-    QVERIFY(t.splits().size() == 2);
-    QVERIFY(t.splits()[0].pairs().count() == 3);
-    QVERIFY(t.splits()[1].pairs().count() == 0);
-    QVERIFY(t.splits()[0].isMatched());
-
-    MyMoneyTransaction ti = t.splits()[0].matchedTransaction();
-    QVERIFY(ti.pairs().count() == 1);
-    QVERIFY(ti.isImported());
-    QVERIFY(ti.splits().count() == 2);
-  } catch (const MyMoneyException &) {
-    QFAIL("Unexpected exception");
-  }
-}
-
 void MyMoneyTransactionTest::testHasReferenceTo()
 {
   MyMoneyTransaction t;
@@ -626,7 +427,7 @@ void MyMoneyTransactionTest::testHasReferenceTo()
   s.setTagIdList(tagIdList);
   s.setShares(MyMoneyMoney(96379, 100));
   s.setValue(MyMoneyMoney(96379, 100));
-  s.setAction(MyMoneySplit::ActionWithdrawal);
+  s.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal));
   s.setAccountId("A000076");
   s.setReconcileFlag(eMyMoney::Split::State::Reconciled);
   t.addSplit(s);
@@ -660,7 +461,7 @@ void MyMoneyTransactionTest::testIsStockSplit()
   m->removeSplits();
   MyMoneySplit s;
   s.setShares(MyMoneyMoney(1, 2));
-  s.setAction(MyMoneySplit::ActionSplitShares);
+  s.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares));
   s.setAccountId("A0001");
   m->addSplit(s);
   QVERIFY(m->isStockSplit() == true);
@@ -714,25 +515,5 @@ void MyMoneyTransactionTest::testReplaceId()
 
   } catch (const MyMoneyException &e) {
     unexpectedException(e);
-  }
-}
-
-void MyMoneyTransactionTest::testElementNames()
-{
-  for (auto i = (int)Transaction::Element::Split; i <= (int)Transaction::Element::Splits; ++i) {
-    auto isEmpty = MyMoneyTransactionPrivate::getElName(static_cast<Transaction::Element>(i)).isEmpty();
-    if (isEmpty)
-      qWarning() << "Empty element's name " << i;
-    QVERIFY(!isEmpty);
-  }
-}
-
-void MyMoneyTransactionTest::testAttributeNames()
-{
-  for (auto i = (int)Transaction::Attribute::Name; i < (int)Transaction::Attribute::LastAttribute; ++i) {
-    auto isEmpty = MyMoneyTransactionPrivate::getAttrName(static_cast<Transaction::Attribute>(i)).isEmpty();
-    if (isEmpty)
-      qWarning() << "Empty attribute's name " << i;
-    QVERIFY(!isEmpty);
   }
 }

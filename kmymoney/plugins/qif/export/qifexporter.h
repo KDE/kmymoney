@@ -41,8 +41,6 @@ public:
 
   MyMoneyQifReader *m_qifReader;
 
-  void injectExternalSettings(KMyMoneySettings* p) override;
-
 public Q_SLOTS:
   /**
     * Called when the user wishes to export some transaction to a

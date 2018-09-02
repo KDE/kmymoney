@@ -20,8 +20,8 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
-#ifndef MYMONEYBANKING_H
-#define MYMONEYBANKING_H
+#ifndef KBANKING_H
+#define KBANKING_H
 
 #ifdef HAVE_CONFIG_H
 #include <config-kmymoney.h>
@@ -51,7 +51,7 @@ class KBAccountSettings;
 #include "mymoneykeyvaluecontainer.h"
 
 #include "mymoney/onlinejobtyped.h"
-#include "onlinetasks/sepa/tasks/sepaonlinetransfer.h"
+#include "onlinetasks/sepa/sepaonlinetransfer.h"
 
 #include "banking.hpp"
 
@@ -87,8 +87,6 @@ public:
 
   void plug() override;
   void unplug() override;
-
-  void injectExternalSettings(KMyMoneySettings* p) override;
 
 private:
   /**
@@ -232,13 +230,13 @@ public:
   virtual bool interactiveImport();
 
 protected:
-  int init();
-  int fini();
+  int init() final override;
+  int fini() final override;
 
   bool askMapAccount(const MyMoneyAccount& acc);
   QString mappingId(const MyMoneyObject& object) const;
 
-  bool importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai, uint32_t flags);
+  bool importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai, uint32_t flags) final override;
   const AB_ACCOUNT_STATUS* _getAccountStatus(AB_IMEXPORTER_ACCOUNTINFO *ai);
   void _xaToStatement(MyMoneyStatement &ks,
                       const MyMoneyAccount&,
@@ -252,4 +250,4 @@ private:
   QSet<QString>   m_sepaKeywords;
 };
 
-#endif
+#endif // KBANKING

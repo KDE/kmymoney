@@ -100,8 +100,8 @@ public:
     typedef QMap<QString,QString> SlotList;
 
     QString id;
-    QString type;
-    QString name;
+    QString m_type;
+    QString m_name;
     QString code;
     QString parent;
     SlotList slotList;
@@ -112,8 +112,8 @@ public:
 
     TemplateAccount(const TemplateAccount &b)
       : id(b.id),
-        type(b.type),
-        name(b.name),
+        m_type(b.m_type),
+        m_name(b.m_name),
         code(b.code),
         parent(b.parent),
         slotList(b.slotList)
@@ -123,8 +123,8 @@ public:
     void clear()
     {
         id = "";
-        type = "";
-        name = "";
+        m_type = "";
+        m_name = "";
         code = "";
         parent = "";
         slotList.clear();
@@ -172,18 +172,18 @@ public:
             xml.readNext();
             QStringRef _name = xml.name();
             if (xml.isEndElement() && _name == "account") {
-                if (prefixNameWithCode && !code.isEmpty() && !name.startsWith(code))
-                    name = code + ' ' + name;
+                if (prefixNameWithCode && !code.isEmpty() && !m_name.startsWith(code))
+                    m_name = code + ' ' + m_name;
                 return true;
             }
             if (xml.isStartElement())
             {
                 if (_name == "name")
-                    name = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
+                    m_name = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
                 else if (_name == "id")
                     id = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
                 else if (_name == "type")
-                    type = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
+                    m_type = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
                 else if (_name == "code")
                     code = xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
                 else if (_name == "parent")
@@ -204,9 +204,9 @@ public:
 QDebug operator <<(QDebug out, const TemplateAccount &a)
 {
     out << "TemplateAccount("
-        << "name:" << a.name
+        << "name:" << a.m_name
         << "id:" << a.id
-        << "type:" << a.type
+        << "type:" << a.m_type
         << "code:" << a.code
         << "parent:" << a.parent
         << "slotList:" << a.slotList
@@ -286,11 +286,11 @@ public:
 
         foreach(TemplateAccount *account, list)
         {
-            if (account->type != "ROOT")
+            if (account->m_type != "ROOT")
             {
                 xml.writeStartElement("","account");
-                xml.writeAttribute("type", QString::number(toKMyMoneyAccountType(account->type)));
-                xml.writeAttribute("name", noLevel1Names && index < 2 ? "" : account->name);
+                xml.writeAttribute("type", QString::number(toKMyMoneyAccountType(account->m_type)));
+                xml.writeAttribute("name", noLevel1Names && index < 2 ? "" : account->m_name);
                 if (withID)
                     xml.writeAttribute("id", account->id);
                 if (withTax) {
@@ -327,7 +327,7 @@ public:
         for(int i=0; i < accounts.size(); i++)
         {
             TemplateAccount &account = accounts[i];
-            if (account.type == type)
+            if (account.m_type == type)
                 list.append(&account);
         }
         return list;
@@ -336,7 +336,7 @@ public:
 
     static bool nameLessThan(TemplateAccount *a1, TemplateAccount *a2)
     {
-        return a1->name < a2->name;
+        return a1->m_name < a2->m_name;
     }
 
     TemplateAccount::PointerList accountsByParentID(const QString &parentID)
@@ -366,7 +366,7 @@ public:
         {
             QString a;
             a.fill(' ', index);
-            qDebug() << a << account->name << toKMyMoneyAccountType(account->type);
+            qDebug() << a << account->m_name << toKMyMoneyAccountType(account->m_type);
             index++;
             dumpTemplates(account->id, index);
             index--;
@@ -450,24 +450,24 @@ protected:
 
     bool read(QIODevice *device)
     {
-        xml.setDevice(device);
-        while(!xml.atEnd())
+        m_xml.setDevice(device);
+        while(!m_xml.atEnd())
         {
-            xml.readNext();
-            if (xml.isStartElement())
+            m_xml.readNext();
+            if (m_xml.isStartElement())
             {
-                if (xml.name() == "gnc-account-example")
+                if (m_xml.name() == "gnc-account-example")
                 {
-                    checkAndUpdateAvailableNamespaces(xml);
-                    _template.read(xml);
+                    checkAndUpdateAvailableNamespaces(m_xml);
+                    _template.read(m_xml);
                 }
                 else
-                    xml.raiseError(QObject::tr("The file is not an gnucash account template file."));
+                    m_xml.raiseError(QObject::tr("The file is not an gnucash account template file."));
             }
         }
-        if (xml.error() != QXmlStreamReader::NoError)
-            qWarning() << xml.errorString();
-        return !xml.error();
+        if (m_xml.error() != QXmlStreamReader::NoError)
+            qWarning() << m_xml.errorString();
+        return !m_xml.error();
     }
 
     bool writeAsXml(QIODevice *device)
@@ -496,7 +496,7 @@ protected:
         return result;
     }
 
-    QXmlStreamReader xml;
+    QXmlStreamReader m_xml;
     TemplateFile _template;
     QString inFileName;
 };
@@ -567,7 +567,7 @@ int convertFileStructure(const QString &indir, const QString &outdir)
         }
         fi.setFile(outFileName);
 
-        QDir d(fi.absolutePath());
+        d = fi.absolutePath();
         if (!d.exists())
         {
             if  (debug)

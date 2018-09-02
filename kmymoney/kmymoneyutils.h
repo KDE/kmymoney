@@ -37,8 +37,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "selectedtransactions.h"
-
 class QIcon;
 
 /**
@@ -62,6 +60,7 @@ class MyMoneySplit;
 class MyMoneyTransaction;
 class MyMoneyStatement;
 class MyMoneyInstitution;
+class MyMoneyForecast;
 
 namespace eMyMoney { namespace Schedule { enum class Occurrence;
                                           enum class PaymentType;
@@ -370,6 +369,8 @@ public:
    */
   static bool fileExists(const QUrl &url);
 
+  static QString downloadFile(const QUrl &url);
+
   static bool newPayee(const QString& newnameBase, QString& id);
 
   static void newTag(const QString& newnameBase, QString& id);
@@ -383,6 +384,12 @@ public:
   static void newInstitution(MyMoneyInstitution& institution);
 
   static QDebug debug();
+
+  static MyMoneyForecast forecast();
+
+  static bool canUpdateAllAccounts();
+
+  static void showStatementImportResult(const QStringList& resultMessages, uint statementCount);
 };
 
 #endif

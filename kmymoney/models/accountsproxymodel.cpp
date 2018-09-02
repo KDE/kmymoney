@@ -1,25 +1,23 @@
-/***************************************************************************
- *   Copyright 2010  Cristian Onet onet.cristian@gmail.com                 *
- *   Copyright 2017  Łukasz Wojniłowicz lukasz.wojnilowicz@gmail.com       *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or         *
- *   modify it under the terms of the GNU General Public License as        *
- *   published by the Free Software Foundation; either version 2 of        *
- *   the License or (at your option) version 3 or any later version        *
- *   accepted by the membership of KDE e.V. (or its successor approved     *
- *   by the membership of KDE e.V.), which shall act as a proxy            *
- *   defined in Section 14 of version 3 of the license.                    *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
- ***************************************************************************/
+/*
+ * Copyright 2010-2014  Cristian Oneț <onet.cristian@gmail.com>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "accountsproxymodel.h"
+#include "accountsproxymodel_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -38,41 +36,22 @@
 
 using namespace eAccountsModel;
 
-/**
-  * The pimpl.
-  */
-class MyMoneyInstitution;
-class AccountsProxyModel::Private
-{
-public:
-  Private() :
-      m_hideClosedAccounts(true),
-      m_hideEquityAccounts(true),
-      m_hideUnusedIncomeExpenseAccounts(false),
-      m_haveHiddenUnusedIncomeExpenseAccounts(false) {
-  }
-
-  ~Private() {
-  }
-
-  QList<eMyMoney::Account::Type> m_typeList;
-  bool m_hideClosedAccounts;
-  bool m_hideEquityAccounts;
-  bool m_hideUnusedIncomeExpenseAccounts;
-  bool m_haveHiddenUnusedIncomeExpenseAccounts;
-};
-
-AccountsProxyModel::AccountsProxyModel(QObject *parent)
-  : KRecursiveFilterProxyModel(parent), d(new Private)
+AccountsProxyModel::AccountsProxyModel(QObject *parent) :
+  KRecursiveFilterProxyModel(parent),
+  d_ptr(new AccountsProxyModelPrivate)
 {
   setDynamicSortFilter(true);
   setSortLocaleAware(true);
   setFilterCaseSensitivity(Qt::CaseInsensitive);
 }
 
+AccountsProxyModel::AccountsProxyModel(AccountsProxyModelPrivate &dd, QObject *parent) :
+  KRecursiveFilterProxyModel(parent), d_ptr(&dd)
+{
+}
+
 AccountsProxyModel::~AccountsProxyModel()
 {
-  delete d;
 }
 
 /**
@@ -80,10 +59,11 @@ AccountsProxyModel::~AccountsProxyModel()
   */
 bool AccountsProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
+  Q_D(const AccountsProxyModel);
   if (!left.isValid() || !right.isValid())
     return false;
   // different sorting based on the column which is being sorted
-  switch (m_mdlColumns->at(left.column())) {
+  switch (d->m_mdlColumns->at(left.column())) {
       // for the accounts column sort based on the DisplayOrderRole
     case Column::Account: {
         const auto leftData = sourceModel()->data(left, (int)Role::DisplayOrder);
@@ -141,6 +121,7 @@ bool AccountsProxyModel::filterAcceptsRowOrChildRows(int source_row, const QMode
   */
 void AccountsProxyModel::addAccountGroup(const QVector<eMyMoney::Account::Type> &groups)
 {
+  Q_D(AccountsProxyModel);
   foreach (const auto group, groups) {
     switch (group) {
       case eMyMoney::Account::Type::Asset:
@@ -184,6 +165,7 @@ void AccountsProxyModel::addAccountGroup(const QVector<eMyMoney::Account::Type> 
   */
 void AccountsProxyModel::addAccountType(eMyMoney::Account::Type type)
 {
+  Q_D(AccountsProxyModel);
   d->m_typeList << type;
   invalidateFilter();
 }
@@ -195,6 +177,7 @@ void AccountsProxyModel::addAccountType(eMyMoney::Account::Type type)
   */
 void AccountsProxyModel::removeAccountType(eMyMoney::Account::Type type)
 {
+  Q_D(AccountsProxyModel);
   if (d->m_typeList.removeAll(type) > 0) {
     invalidateFilter();
   }
@@ -205,6 +188,7 @@ void AccountsProxyModel::removeAccountType(eMyMoney::Account::Type type)
   */
 void AccountsProxyModel::clear()
 {
+  Q_D(AccountsProxyModel);
   d->m_typeList.clear();
   invalidateFilter();
 }
@@ -214,6 +198,7 @@ void AccountsProxyModel::clear()
   */
 bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
 {
+  Q_D(const AccountsProxyModel);
   if (source.isValid()) {
     const auto data = sourceModel()->data(source, (int)Role::Account);
     if (data.isValid()) {
@@ -265,6 +250,7 @@ bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
   */
 void AccountsProxyModel::setHideClosedAccounts(bool hideClosedAccounts)
 {
+  Q_D(AccountsProxyModel);
   if (d->m_hideClosedAccounts != hideClosedAccounts) {
     d->m_hideClosedAccounts = hideClosedAccounts;
     invalidateFilter();
@@ -276,6 +262,7 @@ void AccountsProxyModel::setHideClosedAccounts(bool hideClosedAccounts)
   */
 bool AccountsProxyModel::hideClosedAccounts() const
 {
+  Q_D(const AccountsProxyModel);
   return d->m_hideClosedAccounts;
 }
 
@@ -285,6 +272,7 @@ bool AccountsProxyModel::hideClosedAccounts() const
   */
 void AccountsProxyModel::setHideEquityAccounts(bool hideEquityAccounts)
 {
+  Q_D(AccountsProxyModel);
   if (d->m_hideEquityAccounts != hideEquityAccounts) {
     d->m_hideEquityAccounts = hideEquityAccounts;
     invalidateFilter();
@@ -296,6 +284,7 @@ void AccountsProxyModel::setHideEquityAccounts(bool hideEquityAccounts)
   */
 bool AccountsProxyModel::hideEquityAccounts() const
 {
+  Q_D(const AccountsProxyModel);
   return d->m_hideEquityAccounts;
 }
 
@@ -305,6 +294,7 @@ bool AccountsProxyModel::hideEquityAccounts() const
   */
 void AccountsProxyModel::setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncomeExpenseAccounts)
 {
+  Q_D(AccountsProxyModel);
   if (d->m_hideUnusedIncomeExpenseAccounts != hideUnusedIncomeExpenseAccounts) {
     d->m_hideUnusedIncomeExpenseAccounts = hideUnusedIncomeExpenseAccounts;
     invalidateFilter();
@@ -316,6 +306,7 @@ void AccountsProxyModel::setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncom
   */
 bool AccountsProxyModel::hideUnusedIncomeExpenseAccounts() const
 {
+  Q_D(const AccountsProxyModel);
   return d->m_hideUnusedIncomeExpenseAccounts;
 }
 
@@ -362,5 +353,6 @@ int AccountsProxyModel::visibleItems(const QModelIndex& index) const
 
 void AccountsProxyModel::setSourceColumns(QList<eAccountsModel::Column> *columns)
 {
-  m_mdlColumns = columns;
+  Q_D(AccountsProxyModel);
+  d->m_mdlColumns = columns;
 }

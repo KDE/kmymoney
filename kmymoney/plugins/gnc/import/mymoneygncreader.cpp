@@ -9,6 +9,7 @@ email                : mte@users.sourceforge.net
                        John C <thetacoturtle@users.sourceforge.net>
                        Thomas Baumgart <ipwizard@users.sourceforge.net>
                        Kevin Tambascio <ktambascio@users.sourceforge.net>
+                       (C) 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 ***************************************************************************/
 
 /***************************************************************************
@@ -36,6 +37,9 @@ email                : mte@users.sourceforge.net
 #include <QXmlInputSource>
 #include <QXmlSimpleReader>
 #include <QPointer>
+#if QT_VERSION >= 0x051000
+  #include <QRandomGenerator>
+#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -51,9 +55,8 @@ email                : mte@users.sourceforge.net
 // ------------------------------------------------------------Box21----------------
 // Project Includes
 #include <config-kmymoney.h>
-#include "imymoneyserialize.h"
+#include "mymoneystoragemgr.h"
 #ifndef _GNCFILEANON
-#include "storage/imymoneystorage.h"
 #include "kmymoneyutils.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
@@ -146,11 +149,8 @@ void GncObject::checkVersion(const QString& elName, const QXmlAttributes& elAttr
 {
   TRY {
     if (map.contains(elName)) { // if it's not in the map, there's nothing to check
-      if (!map[elName].contains(elAttrs.value("version"))) {
-        QString em = Q_FUNC_INFO + i18n(": Sorry. This importer cannot handle version %1 of element %2"
-        , elAttrs.value("version"), elName);
-        throw MYMONEYEXCEPTION(em);
-      }
+      if (!map[elName].contains(elAttrs.value("version")))
+        throw MYMONEYEXCEPTION(QString::fromLatin1("%1 : Sorry. This importer cannot handle version %2 of element %3").arg(Q_FUNC_INFO, elAttrs.value("version"), elName));
     }
     return ;
   }
@@ -229,7 +229,11 @@ const QString GncObject::getKvpValue(const QString& key, const QString& type) co
 
 void GncObject::adjustHideFactor()
 {
+#if QT_VERSION >= 0x051000
+  m_moneyHideFactor = pMain->m_fileHideFactor * (1.0 + (int)(200.0 * QRandomGenerator::system()->generate() / (RAND_MAX + 1.0))) / 100.0;
+#else
   m_moneyHideFactor = pMain->m_fileHideFactor * (1.0 + (int)(200.0 * rand() / (RAND_MAX + 1.0))) / 100.0;
+#endif
 }
 
 // data anonymizer
@@ -331,7 +335,7 @@ GncObject *GncFile::startSubEl()
     GncObject *next = 0;
     switch (m_state) {
       case BOOK:
-        if (m_bookFound) throw MYMONEYEXCEPTION(i18n("This version of the importer cannot handle multi-book files."));
+        if (m_bookFound) MYMONEYEXCEPTION(QString::fromLatin1("This version of the importer cannot handle multi-book files."));
         m_bookFound = true;
         break;
       case COUNT:
@@ -358,7 +362,7 @@ GncObject *GncFile::startSubEl()
         next = new GncSchedule;
         break;
       default:
-        throw MYMONEYEXCEPTION("GncFile rcvd invalid state");
+        throw MYMONEYEXCEPTION_CSTRING("GncFile rcvd invalid state");
     }
     return (next);
   }
@@ -450,7 +454,7 @@ GncObject *GncKvp::startSubEl()
         next = new GncKvp;
         break;
       default:
-        throw MYMONEYEXCEPTION("GncKvp rcvd invalid m_state ");
+        throw MYMONEYEXCEPTION_CSTRING("GncKvp rcvd invalid m_state ");
     }
     return (next);
   }
@@ -571,7 +575,7 @@ GncObject *GncPrice::startSubEl()
         next = new GncDate;
         break;
       default:
-        throw MYMONEYEXCEPTION("GncPrice rcvd invalid m_state");
+        throw MYMONEYEXCEPTION_CSTRING("GncPrice rcvd invalid m_state");
     }
     return (next);
   }
@@ -592,7 +596,7 @@ void GncPrice::endSubEl(GncObject *subObj)
         m_vpPriceDate = static_cast<GncDate *>(subObj);
         break;
       default:
-        throw MYMONEYEXCEPTION("GncPrice rcvd invalid m_state");
+        throw MYMONEYEXCEPTION_CSTRING("GncPrice rcvd invalid m_state");
     }
     return;
   }
@@ -646,7 +650,7 @@ GncObject *GncAccount::startSubEl()
         pMain->setLotsFound(true); // we don't handle lots; just set flag to report
         break;
       default:
-        throw MYMONEYEXCEPTION("GncAccount rcvd invalid m_state");
+        throw MYMONEYEXCEPTION_CSTRING("GncAccount rcvd invalid m_state");
     }
     return (next);
   }
@@ -723,7 +727,7 @@ GncObject *GncTransaction::startSubEl()
         next = new GncKvp;
         break;
       default:
-        throw MYMONEYEXCEPTION("GncTransaction rcvd invalid m_state");
+        throw MYMONEYEXCEPTION_CSTRING("GncTransaction rcvd invalid m_state");
     }
     return (next);
   }
@@ -795,7 +799,7 @@ GncObject *GncSplit::startSubEl()
         next = new GncDate;
         break;
       default:
-        throw MYMONEYEXCEPTION("GncTemplateSplit rcvd invalid m_state ");
+        throw MYMONEYEXCEPTION_CSTRING("GncTemplateSplit rcvd invalid m_state ");
     }
     return (next);
   }
@@ -840,7 +844,7 @@ GncObject *GncTemplateSplit::startSubEl()
         next = new GncKvp;
         break;
       default:
-        throw MYMONEYEXCEPTION("GncTemplateSplit rcvd invalid m_state");
+        throw MYMONEYEXCEPTION_CSTRING("GncTemplateSplit rcvd invalid m_state");
     }
     return (next);
   }
@@ -902,7 +906,7 @@ GncObject *GncSchedule::startSubEl()
         next = new GncSchedDef;
         break;
       default:
-        throw MYMONEYEXCEPTION("GncSchedule rcvd invalid m_state");
+        throw MYMONEYEXCEPTION_CSTRING("GncSchedule rcvd invalid m_state");
     }
     return (next);
   }
@@ -972,7 +976,7 @@ GncObject *GncFreqSpec::startSubEl()
         next = new GncFreqSpec;
         break;
       default:
-        throw MYMONEYEXCEPTION("GncFreqSpec rcvd invalid m_state");
+        throw MYMONEYEXCEPTION_CSTRING("GncFreqSpec rcvd invalid m_state");
     }
     return (next);
   }
@@ -1027,7 +1031,7 @@ GncObject *GncRecurrence::startSubEl()
         next = new GncDate;
         break;
       default:
-        throw MYMONEYEXCEPTION("GncRecurrence rcvd invalid m_state");
+        throw MYMONEYEXCEPTION_CSTRING("GncRecurrence rcvd invalid m_state");
     }
     return (next);
   }
@@ -1103,9 +1107,9 @@ void XmlReader::processFile(QIODevice* pDevice)
   m_reader = new QXmlSimpleReader;
   m_reader->setContentHandler(this);
   // go read the file
-  if (!m_reader->parse(m_source)) {
-    throw MYMONEYEXCEPTION(i18n("Input file cannot be parsed; may be corrupt\n%1", errorString()));
-  }
+  if (!m_reader->parse(m_source))
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Input file cannot be parsed; may be corrupt\n%1").arg(errorString()));
+
   delete m_reader;
   delete m_source;
   return ;
@@ -1155,7 +1159,7 @@ bool XmlReader::startElement(const QString&, const QString&, const QString& elNa
     lastType = 0;
 #else
     if ((!m_headerFound) && (elName != "gnc-v2"))
-      throw MYMONEYEXCEPTION(i18n("Invalid header for file. Should be 'gnc-v2'"));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Invalid header for file. Should be 'gnc-v2'"));
     m_headerFound = true;
 #endif // _GNCFILEANON
     m_co->checkVersion(elName, elAttrs, pMain->m_versionList);
@@ -1180,8 +1184,8 @@ bool XmlReader::startElement(const QString&, const QString&, const QString& elNa
   } catch (const MyMoneyException &e) {
 #ifndef _GNCFILEANON
     // we can't pass on exceptions here coz the XML reader won't catch them and we just abort
-    KMessageBox::error(0, i18n("Import failed:\n\n%1", e.what()), PACKAGE);
-    qWarning("%s", qPrintable(e.what()));
+    KMessageBox::error(0, i18n("Import failed:\n\n%1", QString::fromLatin1(e.what())), PACKAGE);
+    qWarning("%s", e.what());
 #else
     qWarning("%s", e->toLatin1());
 #endif // _GNCFILEANON
@@ -1219,8 +1223,8 @@ bool XmlReader::endElement(const QString&, const QString&, const QString&elName)
   } catch (const MyMoneyException &e) {
 #ifndef _GNCFILEANON
     // we can't pass on exceptions here coz the XML reader won't catch them and we just abort
-    KMessageBox::error(0, i18n("Import failed:\n\n%1", e.what()), PACKAGE);
-    qWarning("%s", qPrintable(e.what()));
+    KMessageBox::error(0, i18n("Import failed:\n\n%1", QString::fromLatin1(e.what())), PACKAGE);
+    qWarning("%s", e.what());
 #else
     qWarning("%s", e->toLatin1());
 #endif // _GNCFILEANON
@@ -1306,12 +1310,12 @@ MyMoneyGncReader::~MyMoneyGncReader() {}
 
 //**************************** Main Entry Point ************************************
 #ifndef _GNCFILEANON
-void MyMoneyGncReader::readFile(QIODevice* pDevice, IMyMoneySerialize* storage)
+void MyMoneyGncReader::readFile(QIODevice* pDevice, MyMoneyStorageMgr* storage)
 {
   Q_CHECK_PTR(pDevice);
   Q_CHECK_PTR(storage);
 
-  m_storage = dynamic_cast<IMyMoneyStorage *>(storage);
+  m_storage = storage;
   qDebug("Entering gnucash importer");
   setOptions();
   // get a file anonymization factor from the user
@@ -1319,6 +1323,7 @@ void MyMoneyGncReader::readFile(QIODevice* pDevice, IMyMoneySerialize* storage)
   //m_defaultPayee = createPayee (i18n("Unknown payee"));
 
   MyMoneyFile::instance()->attachStorage(m_storage);
+  loadAllCurrencies();
   MyMoneyFileTransaction ft;
   m_xr = new XmlReader(this);
   bool blocked = MyMoneyFile::instance()->signalsBlocked();
@@ -1328,8 +1333,8 @@ void MyMoneyGncReader::readFile(QIODevice* pDevice, IMyMoneySerialize* storage)
     terminate();  // do all the wind-up things
     ft.commit();
   } catch (const MyMoneyException &e) {
-    KMessageBox::error(0, i18n("Import failed:\n\n%1", e.what()), PACKAGE);
-    qWarning("%s", qPrintable(e.what()));
+    KMessageBox::error(0, i18n("Import failed:\n\n%1", QString::fromLatin1(e.what())), PACKAGE);
+    qWarning("%s", e.what());
   } // end catch
   MyMoneyFile::instance()->blockSignals(blocked);
   MyMoneyFile::instance()->detachStorage(m_storage);
@@ -1387,6 +1392,19 @@ void MyMoneyGncReader::setFileHideFactor()
 {
 #define MINFILEHIDEF 0.01
 #define MAXFILEHIDEF 99.99
+#if QT_VERSION >= 0x051000
+  m_fileHideFactor = 0.0;
+  while (m_fileHideFactor == 0.0) {
+    m_fileHideFactor = QInputDialog::getDouble(0,
+                         i18n("Disguise your wealth"),
+                         i18n("Each monetary value on your file will be multiplied by a random number between 0.01 and 1.99\n"
+                              "with a different value used for each transaction. In addition, to further disguise the true\n"
+                              "values, you may enter a number between %1 and %2 which will be applied to all values.\n"
+                              "These numbers will not be stored in the file.", MINFILEHIDEF, MAXFILEHIDEF),
+                         (1.0 + (int)(1000.0 * QRandomGenerator::system()->generate() / (RAND_MAX + 1.0))) / 100.0,
+                         MINFILEHIDEF, MAXFILEHIDEF, 2);
+  }
+#else
   srand(QTime::currentTime().second());  // seed randomizer for anonymize
   m_fileHideFactor = 0.0;
   while (m_fileHideFactor == 0.0) {
@@ -1399,6 +1417,7 @@ void MyMoneyGncReader::setFileHideFactor()
                          (1.0 + (int)(1000.0 * rand() / (RAND_MAX + 1.0))) / 100.0,
                          MINFILEHIDEF, MAXFILEHIDEF, 2);
   }
+#endif
 }
 #ifndef _GNCFILEANON
 
@@ -1526,9 +1545,7 @@ void MyMoneyGncReader::convertAccount(const GncAccount* gac)
     } else if ("MONEYMRKT" == gac->type()) {
       acc.setAccountType(Account::Type::MoneyMarket);
     } else { // we have here an account type we can't currently handle
-      QString em =
-        i18n("Current importer does not recognize GnuCash account type %1", gac->type());
-      throw MYMONEYEXCEPTION(em);
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Current importer does not recognize GnuCash account type %1").arg(gac->type()));
     }
     // if no parent account is present, assign to one of our standard accounts
     if ((acc.parentAccountId().isEmpty()) || (acc.parentAccountId() == m_rootId)) {
@@ -1639,7 +1656,7 @@ void MyMoneyGncReader::convertTransaction(const GncTransaction *gtx)
   while (!m_splitList.isEmpty()) {
     split = *it;
     // at this point, if m_potentialTransfer is still true, it is actually one!
-    if (m_potentialTransfer) split.setAction(MyMoneySplit::ActionTransfer);
+    if (m_potentialTransfer) split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer));
     if ((m_useTxNotes) // if use txnotes option is set
         && (nonSplitTx) // and it's a (GnuCash) non-split transaction
         && (!tx.memo().isEmpty())) // and tx notes are present
@@ -1721,8 +1738,8 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
     case Account::Type::Asset:
       if (splitAccount.accountType() == Account::Type::Stock) {
         split.value().isZero() ?
-        split.setAction(MyMoneySplit::ActionAddShares) :      // free shares?
-        split.setAction(MyMoneySplit::ActionBuyShares);
+        split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::AddShares)) :      // free shares?
+        split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares));
         m_potentialTransfer = false; // ?
         // add a price history entry
         MyMoneySecurity e = m_storage->security(splitAccount.currencyId());
@@ -1744,7 +1761,7 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
             m_storage->addPrice(dealPrice);
           } CATCH {
             // stock transfer; treat like free shares?
-            split.setAction(MyMoneySplit::ActionAddShares);
+            split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::AddShares));
           }
         }
       } else { // not stock
@@ -1754,20 +1771,20 @@ void MyMoneyGncReader::convertSplit(const GncSplit *gsp)
             split.number().toLong(&isNumeric);    // No QString.isNumeric()??
           }
           if (isNumeric) {
-            split.setAction(MyMoneySplit::ActionCheck);
+            split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Check));
           } else {
-            split.setAction(MyMoneySplit::ActionWithdrawal);
+            split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal));
           }
         } else {
-          split.setAction(MyMoneySplit::ActionDeposit);
+          split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit));
         }
       }
       m_splitList.append(split);
       break;
     case Account::Type::Liability:
       split.value().isNegative() ?
-      split.setAction(MyMoneySplit::ActionWithdrawal) :
-      split.setAction(MyMoneySplit::ActionDeposit);
+      split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal)) :
+      split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit));
       m_liabilitySplitList.append(split);
       break;
     default:
@@ -1825,14 +1842,14 @@ MyMoneyTransaction MyMoneyGncReader::convertTemplateTransaction(const QString& s
   while (!m_splitList.isEmpty()) {
     split = *it;
     if (m_potentialTransfer) {
-      split.setAction(MyMoneySplit::ActionTransfer);
+      split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer));
     } else {
       if (split.value().isNegative()) {
         //split.setAction (negativeActionType);
-        split.setAction(MyMoneySplit::ActionWithdrawal);
+        split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal));
       } else {
         //split.setAction (positiveActionType);
-        split.setAction(MyMoneySplit::ActionDeposit);
+        split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit));
       }
     }
     split.setNumber(gtx->no()); // set cheque no (or equivalent description)
@@ -1994,7 +2011,7 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
     MyMoneySchedule sc;
     MyMoneyTransaction tx;
     m_suspectSchedule = false;
-    QDate startDate, nextDate, lastDate, endDate;  // for date calculations
+    QDate nextDate, lastDate, endDate;  // for date calculations
     QDate today = QDate::currentDate();
     int numOccurs, remOccurs;
 
@@ -2008,7 +2025,7 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
       if (static_cast<const GncTemplateSplit *>((*itt)->getSplit(0))->acct() == gsc->templId()) break;
     }
     if (itt == m_templateList.constEnd()) {
-      throw MYMONEYEXCEPTION(i18n("Cannot find template transaction for schedule %1", sc.name()));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot find template transaction for schedule %1").arg(sc.name()));
     } else {
       tx = convertTemplateTransaction(sc.name(), *itt);
     }
@@ -2140,9 +2157,9 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
     //qDebug(QString("autoEnter set to %1").arg(sc.autoEnter()));
     // type
     QString actionType = tx.splits().first().action();
-    if (actionType == MyMoneySplit::ActionDeposit) {
+    if (actionType == MyMoneySplit::actionName(eMyMoney::Split::Action::Deposit)) {
       sc.setType((Schedule::Type)Schedule::Type::Deposit);
-    } else if (actionType == MyMoneySplit::ActionTransfer) {
+    } else if (actionType == MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer)) {
       sc.setType((Schedule::Type)Schedule::Type::Transfer);
     } else {
       sc.setType((Schedule::Type)Schedule::Type::Bill);
@@ -2235,7 +2252,7 @@ void MyMoneyGncReader::terminate()
           parent = checkConsistency(parent, (*acc));
           m_storage->addAccount(parent, (*acc));
         } else {
-          throw MYMONEYEXCEPTION("terminate() could not find account id");
+          throw MYMONEYEXCEPTION_CSTRING("terminate() could not find account id");
         }
       }
       signalProgress(++i, 0);
@@ -2433,8 +2450,8 @@ QDate MyMoneyGncReader::incrDate(QDate lastDate, unsigned char interval, unsigne
       case 'o': // once-only
         return (lastDate);
     }
-    throw MYMONEYEXCEPTION(i18n("Internal error - invalid interval char in incrDate"));
-    QDate r = QDate(); return (r); // to keep compiler happy
+    throw MYMONEYEXCEPTION_CSTRING("Internal error - invalid interval char in incrDate");
+//    QDate r = QDate(); return (r); // to keep compiler happy
   }
   PASS
 }
@@ -2638,6 +2655,26 @@ void MyMoneyGncReader::getPriceSource(MyMoneySecurity stock, QString gncSource)
   if (dlg->alwaysUse()) m_mapSources[gncSource] = s;
   delete dlg;
   return;
+}
+
+void MyMoneyGncReader::loadAllCurrencies()
+{
+  auto file = MyMoneyFile::instance();
+  MyMoneyFileTransaction ft;
+  if (!file->currencyList().isEmpty())
+    return;
+  auto ancientCurrencies = file->ancientCurrencies();
+  try {
+  foreach (auto currency, file->availableCurrencyList()) {
+    file->addCurrency(currency);
+    MyMoneyPrice price = ancientCurrencies.value(currency, MyMoneyPrice());
+    if (price != MyMoneyPrice())
+      file->addPrice(price);
+  }
+  ft.commit();
+  } catch (const MyMoneyException &e) {
+    qDebug("Error %s loading currency", e.what());
+  }
 }
 
 // functions to control the progress bar

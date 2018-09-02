@@ -33,7 +33,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "mymoneyaccount.h"
 #include "wizards/newaccountwizard/knewaccountwizard.h"
 #include "icons/icons.h"
@@ -97,6 +97,6 @@ bool AssetAccountWizardPage::isComplete() const
 void AssetAccountWizardPage::slotAccountNew()
 {
   MyMoneyAccount account;
-  account.setOpeningDate(KMyMoneyGlobalSettings::firstFiscalDate());
+  account.setOpeningDate(KMyMoneySettings::firstFiscalDate());
   NewAccountWizard::Wizard::newAccount(account);
 }

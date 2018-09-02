@@ -1,25 +1,20 @@
-/***************************************************************************
-                          kmymoneyaccountselector.cpp  -  description
-                             -------------------
-    begin                : Thu Sep 18 2003
-    copyright            : (C) 2003 by Thomas Baumgart
-    email                : mte@users.sourceforge.net
-                           Javier Campos Morales <javi_c@users.sourceforge.net>
-                           Felix Rodriguez <frodriguez@users.sourceforge.net>
-                           John C <thetacoturtle@users.sourceforge.net>
-                           Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           Kevin Tambascio <ktambascio@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2003-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "kmymoneyaccountselector.h"
 #include "kmymoneyselector_p.h"
@@ -43,7 +38,7 @@
 
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "icons/icons.h"
 #include "mymoneyenums.h"
 #include "dialogenums.h"
@@ -312,11 +307,10 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
   QString currentId;
 
   if (selector->selectionMode() == QTreeWidget::SingleSelection) {
-    QStringList list;
-    selector->selectedItems(list);
-    if (!list.isEmpty())
-      currentId = list.first();
-  }
+      selector->selectedItems(list);
+      if (!list.isEmpty())
+        currentId = list.first();
+    }
   if (d->m_typeList.contains(Account::Type::Checkings)
       || d->m_typeList.contains(Account::Type::Savings)
       || d->m_typeList.contains(Account::Type::Cash)
@@ -533,7 +527,7 @@ int AccountSet::loadSubAccounts(KMyMoneyAccountSelector* selector, QTreeWidgetIt
   for (it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
     const MyMoneyAccount& acc = d->m_file->account(*it_l);
     // don't include stock accounts if not in expert mode
-    if (acc.isInvest() && !KMyMoneyGlobalSettings::expertMode())
+    if (acc.isInvest() && !KMyMoneySettings::expertMode())
       continue;
 
     //this will include an account if it matches the account type and

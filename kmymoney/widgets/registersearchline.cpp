@@ -1,20 +1,20 @@
-
-/***************************************************************************
-                          registersearchline.cpp
-                             -------------------
-    copyright            : (C) 2006 by Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2007-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "registersearchline.h"
 
@@ -68,12 +68,8 @@ RegisterSearchLine::RegisterSearchLine(QWidget* parent, Register* reg) :
     KLineEdit(parent),
     d(new RegisterSearchLinePrivate)
 {
-  setClearButtonShown(true); // it allows to emit KLineEdit::clearButtonClicked and is not equal in that sense to setClearButtonEnabled(true)
-  init(reg);
-}
+  setClearButtonEnabled(true);
 
-void RegisterSearchLine::init(Register *reg)
-{
   if (!parentWidget()->layout())
     parentWidget()->setLayout(new QHBoxLayout);
   parentWidget()->layout()->addWidget(this);
@@ -95,8 +91,6 @@ void RegisterSearchLine::init(Register *reg)
   d->combo->insertItem((int)eRegister::ItemState::Cleared, i18nc("Reconciliation state 'Cleared'", "Cleared"));
   d->combo->setCurrentIndex((int)eRegister::ItemState::Any);
   connect(d->combo, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &RegisterSearchLine::slotStatusChanged);
-  connect(this, &KLineEdit::clearButtonClicked, this, &RegisterSearchLine::reset);
-
   label->setBuddy(d->combo);
 
   if (reg) {
@@ -190,11 +184,6 @@ void RegisterSearchLine::updateSearch(const QString& s)
   if (scrollBarVisible != d->reg->verticalScrollBar()->isVisible()) {
     d->reg->resize((int)eTransaction::Column::Detail);
   }
-}
-
-void RegisterSearchLine::reset()
-{
-  clear();
 }
 
 void RegisterSearchLine::itemAdded(RegisterItem* item) const

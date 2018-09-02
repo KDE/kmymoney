@@ -52,9 +52,9 @@ public:
 
 protected:
 #ifdef ENABLE_WEBENGINE
-  bool acceptNavigationRequest(const QUrl &url, NavigationType type, bool);
+  bool acceptNavigationRequest(const QUrl &url, NavigationType type, bool) final override;
 #else
-  bool acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest &request, NavigationType type);
+  bool acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest &request, NavigationType type) final override;
 #endif
 
 };

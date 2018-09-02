@@ -1,18 +1,19 @@
-/***************************************************************************
-                          mymoneyenums.h
-                             -------------------
-    copyright            : (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef MYMONEYENUMS_H
 #define MYMONEYENUMS_H
@@ -48,6 +49,25 @@ namespace eMyMoney {
       MaxAccountTypes       /**< Denotes the number of different account types */
     };
     inline uint qHash(const Type key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+
+    enum class Standard {
+      Liability,
+      Asset,
+      Expense,
+      Income,
+      Equity
+    };
+
+    inline uint qHash(const Standard key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+  }
+
+  namespace Payee {
+    enum class MatchType {
+      Disabled = 0,
+      Name,
+      Key,
+      NameExact
+    };
   }
 
   namespace Security {
@@ -60,6 +80,29 @@ namespace eMyMoney {
     };
 
     inline uint qHash(const Type key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+  }
+
+  namespace Report {
+    enum class RowType { NoRows = 0, AssetLiability, ExpenseIncome, Category, TopCategory, Account, Tag, Payee, Month, Week, TopAccount, AccountByTopAccount, EquityType, AccountType, Institution, Budget, BudgetActual, Schedule, AccountInfo, AccountLoanInfo, AccountReconcile, CashFlow, Invalid };
+    inline uint qHash(const RowType key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+
+    enum class ColumnType { NoColumns = 0, Days = 1, Months = 1, BiMonths = 2, Quarters = 3, Weeks = 7, Years = 12, Invalid };
+    inline uint qHash(const ColumnType key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+
+    enum class ReportType { NoReport = 0, PivotTable, QueryTable, InfoTable, Invalid };
+    // if you add bits to this bitmask, start with the value currently assigned to QCend and update its value afterwards
+    // also don't forget to add column names to kQueryColumnsText in mymoneyreport.cpp
+    enum QueryColumn : int { None = 0x0, Begin = 0x1, Number = 0x1, Payee = 0x2, Category = 0x4, Tag = 0x8, Memo = 0x10, Account = 0x20, Reconciled = 0x40, Action = 0x80, Shares = 0x100, Price = 0x200, Performance = 0x400, Loan = 0x800, Balance = 0x1000, CapitalGain = 0x2000, End = 0x4000 };
+
+    enum class DetailLevel { None = 0, All, Top, Group, Total, End };
+    inline uint qHash(const DetailLevel key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+
+    enum class InvestmentSum { Period = 0, OwnedAndSold, Owned, Sold, Bought};
+    enum class ChartType { None = 0, Line, Bar, Pie, Ring, StackedBar, End };
+    inline uint qHash(const ChartType key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+
+    enum class DataLock { Automatic = 0, UserDefined, DataOptionCount };
+    inline uint qHash(const DataLock key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
   }
 
   namespace Schedule {
@@ -125,6 +168,18 @@ namespace eMyMoney {
       MoveAfter = 1,
       MoveNothing = 2
     };
+  }
+
+  namespace Budget {
+    enum class Level {
+      None = 0,
+      Monthly,
+      MonthByMonth,
+      Yearly,
+      Max
+    };
+
+    inline uint qHash(const Level key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
   }
 
   namespace TransactionFilter {
@@ -238,6 +293,25 @@ namespace eMyMoney {
     };
 
     inline uint qHash(const InvestmentTransactionType key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+
+    enum class Action {
+      Check,
+      Deposit,
+      Transfer,
+      Withdrawal,
+      ATM,
+      Amortization,
+      Interest,
+      BuyShares,
+      Dividend,
+      ReinvestDividend,
+      Yield,
+      AddShares,
+      SplitShares,
+      InterestIncome
+    };
+
+    inline uint qHash(const Action key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
   }
 
   namespace File {
@@ -253,7 +327,8 @@ namespace eMyMoney {
       Tag,
       Schedule,
       Security,
-      OnlineJob
+      OnlineJob,
+      CostCenter
     };
 
     /**
@@ -283,6 +358,17 @@ namespace eMyMoney {
       Warning, /**< A piece of information the user should see but not be enforced to do so (= no modal dialog). E.g. a task is expected to have
         direct effect but insted you have to wait a day (and that is commen behavior). */
       Error /**< Important for the user - he must be warned. E.g. a task could unexpectedly not be executed */
+    };
+
+    /**
+     * @brief The state of a job given by the onlinePlugin
+     */
+    enum class sendingState {
+      noBankAnswer, /**< Used during or before sending or if sendDate().isValid() the job was successfully sent */
+      acceptedByBank, /**< bank definetly confirmed the job */
+      rejectedByBank, /**< bank definetly rejected this job */
+      abortedByUser, /**< aborted by user during sending */
+      sendingError /**< an error occurred, the job is certainly not executed by the bank */
     };
   }
 

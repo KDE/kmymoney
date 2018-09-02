@@ -1,20 +1,20 @@
-/***************************************************************************
-                          kenterscheduledlg.cpp
-                             -------------------
-    begin                : Sat Apr  7 2007
-    copyright            : (C) 2007 by Thomas Baumgart
-    email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2007-2012  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "kenterscheduledlg.h"
 
@@ -74,7 +74,8 @@ public:
   KEnterScheduleDlgPrivate() :
     ui(new Ui::KEnterScheduleDlg),
     m_item(nullptr),
-    m_showWarningOnce(true)
+    m_showWarningOnce(true),
+    m_extendedReturnCode(eDialogs::ScheduleResultCode::Cancel)
   {
   }
 
@@ -82,7 +83,7 @@ public:
   {
     delete ui;
   }
-  
+
   Ui::KEnterScheduleDlg         *ui;
   MyMoneySchedule                m_schedule;
   KMyMoneyRegister::Transaction* m_item;
@@ -185,7 +186,7 @@ MyMoneyTransaction KEnterScheduleDlg::transaction()
       KMyMoneyUtils::calculateAutoLoan(d->m_schedule, t, QMap<QString, MyMoneyMoney>());
     }
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedError(this, i18n("Unable to load schedule details"), e.what());
+    KMessageBox::detailedError(this, i18n("Unable to load schedule details"), QString::fromLatin1(e.what()));
   }
 
   t.clearId();
@@ -231,9 +232,11 @@ TransactionEditor* KEnterScheduleDlg::startEdit()
 {
   Q_D(KEnterScheduleDlg);
   KMyMoneyRegister::SelectedTransactions list(d->ui->m_register);
-  TransactionEditor* editor = d->m_item->createEditor(d->ui->m_form, list, QDate());
-  editor->setScheduleInfo(d->m_schedule.name());
-  editor->setPaymentMethod(d->m_schedule.paymentType());
+  auto editor = d->m_item->createEditor(d->ui->m_form, list, QDate());
+  if (editor) {
+    editor->setScheduleInfo(d->m_schedule.name());
+    editor->setPaymentMethod(d->m_schedule.paymentType());
+  }
 
   // check that we use the same transaction commodity in all selected transactions
   // if not, we need to update this in the editor's list. The user can also bail out
@@ -294,14 +297,15 @@ TransactionEditor* KEnterScheduleDlg::startEdit()
       num = KMyMoneyUtils::nextCheckNumber(d->m_schedule.account());
       KMyMoneyUtils::updateLastNumberUsed(d->m_schedule.account(), num);
       d->m_schedule.account().setValue("lastNumberUsed", num);
-      if (w) {
-        dynamic_cast<KMyMoneyLineEdit*>(w)->loadText(num);
-      }
+      if (w)
+        if (auto numberWidget = dynamic_cast<KMyMoneyLineEdit*>(w))
+          numberWidget->loadText(num);
     } else {
       // if it's not a check, then we need to clear
       // a possibly assigned check number
       if (w)
-        dynamic_cast<KMyMoneyLineEdit*>(w)->loadText(QString());
+        if (auto numberWidget = dynamic_cast<KMyMoneyLineEdit*>(w))
+          numberWidget->loadText(QString());
     }
 
     Q_ASSERT(!d->m_tabOrderWidgets.isEmpty());
@@ -323,7 +327,7 @@ TransactionEditor* KEnterScheduleDlg::startEdit()
     d->m_tabOrderWidgets.append(d->ui->buttonHelp);
 
     for (auto i = 0; i < d->m_tabOrderWidgets.size(); ++i) {
-      QWidget* w = d->m_tabOrderWidgets.at(i);
+      w = d->m_tabOrderWidgets.at(i);
       if (w) {
         w->installEventFilter(this);
         w->installEventFilter(editor);
@@ -337,10 +341,8 @@ TransactionEditor* KEnterScheduleDlg::startEdit()
     focusWidget->setFocus();
 
     // Make sure, we use the adjusted date
-    KMyMoneyDateInput* dateEdit = dynamic_cast<KMyMoneyDateInput*>(editor->haveWidget("postdate"));
-    if (dateEdit) {
+    if (auto dateEdit = dynamic_cast<KMyMoneyDateInput*>(editor->haveWidget("postdate")))
       dateEdit->setDate(d->m_schedule.adjustedNextDueDate());
-    }
   }
 
   return editor;
@@ -350,7 +352,7 @@ bool KEnterScheduleDlg::focusNextPrevChild(bool next)
 {
   Q_D(KEnterScheduleDlg);
   auto rc = false;
-  
+
   auto w = qApp->focusWidget();
   int currentWidgetIndex = d->m_tabOrderWidgets.indexOf(w);
   while (w && currentWidgetIndex == -1) {

@@ -2,15 +2,8 @@
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-sepaorders.json.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepaorders.json @ONLY)
 
 set( sepaOnlineTasks_SRCS
-  tasks/sepaonlinetransferimpl.cpp
-  tasks/sepaonlinetransfer.cpp
   ui/sepacredittransferedit.cpp
-  sepastorageplugin.cpp
   sepaonlinetasksloader.cpp
-)
-
-set( sepaOnlineTasks_HEADER
-  tasks/sepaonlinetransfer.h
 )
 
 ki18n_wrap_ui( sepaOnlineTasks_SRCS
@@ -19,9 +12,15 @@ ki18n_wrap_ui( sepaOnlineTasks_SRCS
 
 add_library(konlinetasks_sepa_interface INTERFACE)
 
-add_library(konlinetasks_sepa MODULE
-  ${sepaOnlineTasks_SRCS}
-)
+kcoreaddons_add_plugin(konlinetasks_sepa
+                       SOURCES ${sepaOnlineTasks_SRCS}
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepaorders.json"
+                       INSTALL_NAMESPACE "kmymoney")
+
+#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
+set_target_properties(konlinetasks_sepa
+                      PROPERTIES
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 # TODO some dependencies can be moved to konlinetasks_sepa
 target_link_libraries( konlinetasks_sepa_interface
@@ -33,7 +32,6 @@ target_link_libraries( konlinetasks_sepa_interface
   Qt5::Xml
   Qt5::Core
   Qt5::Gui
-  Qt5::Sql
 )
 
 target_link_libraries(konlinetasks_sepa
@@ -42,15 +40,8 @@ target_link_libraries(konlinetasks_sepa
   PRIVATE
     KF5::I18n
     KF5::Service
-    kmm_config
+    kmm_settings
     kmm_utils_validators
-    payeeidentifier_iban_bic_widgets
     KF5::ItemModels
 )
 
-install(TARGETS konlinetasks_sepa
-        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")
-
-install(FILES ${sepaOnlineTasks_HEADER}
-        DESTINATION "${INCLUDE_INSTALL_DIR}/kmymoney/onlinetasks/sepa/"
-        COMPONENT Devel)

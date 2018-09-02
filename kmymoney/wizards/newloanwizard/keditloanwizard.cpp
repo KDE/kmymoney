@@ -69,7 +69,9 @@ class KEditLoanWizardPrivate : public KNewLoanWizardPrivate
 
 public:
   KEditLoanWizardPrivate(KEditLoanWizard *qq) :
-    KNewLoanWizardPrivate(qq)
+    KNewLoanWizardPrivate(qq),
+    m_lastSelection(0),
+    m_fullyRepayLoan(false)
   {
   }
 
@@ -207,7 +209,7 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
       d->m_transaction.addSplit(d->m_split);
     }
 
-    if (it_s.action() == MyMoneySplit::ActionInterest) {
+    if (it_s.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest)) {
       interestAccountId = it_s.accountId();
     }
 
@@ -413,7 +415,7 @@ bool KEditLoanWizard::validateCurrentPage()
             split = (*it).splitByAccount(m_account.id());
             balance += split.value();
 
-          } catch(const MyMoneyException &e) {
+          } catch (const MyMoneyException &e) {
             // account is not referenced within this transaction
           }
         }
@@ -465,9 +467,9 @@ void KEditLoanWizard::updateEditSummary()
     foreach (const MyMoneySplit& it_s, it.splits()) {
       // we only count those transactions that have an interest
       // and amortization part
-      if (it_s.action() == MyMoneySplit::ActionInterest)
+      if (it_s.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Interest))
         match |= 0x01;
-      if (it_s.action() == MyMoneySplit::ActionAmortization)
+      if (it_s.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization))
         match |= 0x02;
     }
     if (match == 0x03)
@@ -503,9 +505,8 @@ const MyMoneyAccount KEditLoanWizard::account() const
 
   QString institution = d->ui->m_loanAttributesPage->ui->m_qcomboboxInstitutions->currentText();
   if (institution != i18n("(No Institution)")) {
-    QList<MyMoneyInstitution> list;
-    file->institutionList(list);
-    Q_FOREACH(const MyMoneyInstitution& testInstitution, list) {
+    const auto list = file->institutionList();
+    for (const auto& testInstitution : list) {
       if (testInstitution.name() == institution) {
         acc.setInstitutionId(testInstitution.id());
         break;

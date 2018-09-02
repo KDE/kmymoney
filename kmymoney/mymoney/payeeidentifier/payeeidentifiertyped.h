@@ -1,11 +1,10 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ * Copyright 2014-2016  Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -65,7 +64,7 @@ payeeIdentifierTyped<T>::payeeIdentifierTyped(T* pid)
     m_payeeIdentifierTyped(pid)
 {
   if (m_payeeIdentifierTyped == 0)
-    throw payeeIdentifier::empty(__FILE__, __LINE__);
+    throw PAYEEIDENTIFIEREMPTYEXCEPTION;
 }
 
 template< class T >
@@ -98,8 +97,8 @@ payeeIdentifierTyped<T>::payeeIdentifierTyped(const payeeIdentifier& other)
   m_payeeIdentifierTyped = dynamic_cast<T*>(payeeIdentifier::data());
   if (m_payeeIdentifierTyped == 0) {
     if (payeeIdentifier::data() == 0)
-      throw payeeIdentifier::empty(__FILE__, __LINE__);
-    throw payeeIdentifier::badCast(__FILE__, __LINE__);
+      throw PAYEEIDENTIFIEREMPTYEXCEPTION;
+    throw PAYEEIDENTIFIERBADCASTEXCEPTION;
   }
 }
 

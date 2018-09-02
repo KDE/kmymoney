@@ -56,7 +56,6 @@ public:
   void init()
   {
     Q_Q(KInstitutionsView);
-    ui->setupUi(q);
     m_accountTree = &ui->m_accountTree;
 
     // setup icons for collapse and expand button
@@ -66,7 +65,8 @@ public:
     // the proxy filter model
     m_proxyModel = ui->m_accountTree->init(View::Institutions);
     q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::objectSelected, q, &KInstitutionsView::objectSelected);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KInstitutionsView::selectByObject);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KInstitutionsView::selectByVariant);
     q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KInstitutionsView::refresh);
   }
 

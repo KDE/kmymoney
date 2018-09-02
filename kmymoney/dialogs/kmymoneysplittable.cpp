@@ -1,25 +1,20 @@
-/***************************************************************************
-                          kmymoneysplittable.cpp  -  description
-                             -------------------
-    begin                : Thu Jan 10 2002
-    copyright            : (C) 2000-2002 by Michael Edwardes
-    email                : mte@users.sourceforge.net
-                           Javier Campos Morales <javi_c@users.sourceforge.net>
-                           Felix Rodriguez <frodriguez@users.sourceforge.net>
-                           John C <thetacoturtle@users.sourceforge.net>
-                           Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           Kevin Tambascio <ktambascio@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2008-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "kmymoneysplittable.h"
 
@@ -62,7 +57,7 @@
 #include "kmymoneyaccountselector.h"
 #include "kmymoneylineedit.h"
 #include "mymoneysecurity.h"
-#include "kmymoneyglobalsettings.h"
+#include "kmymoneysettings.h"
 #include "kcurrencycalculator.h"
 #include "mymoneyutils.h"
 #include "mymoneytracer.h"
@@ -81,6 +76,9 @@ public:
     m_currentRow(0),
     m_maxRows(0),
     m_precision(2),
+    m_contextMenu(nullptr),
+    m_contextMenuDelete(nullptr),
+    m_contextMenuDuplicate(nullptr),
     m_editCategory(0),
     m_editMemo(0),
     m_editAmount(0)
@@ -171,13 +169,13 @@ KMyMoneySplitTable::KMyMoneySplitTable(QWidget *parent) :
   getContentsMargins(&left, &top, &right, &bottom);
   setContentsMargins(0, top, right, bottom);
 
-  setFont(KMyMoneyGlobalSettings::listCellFont());
+  setFont(KMyMoneySettings::listCellFontEx());
 
   setAlternatingRowColors(true);
 
   verticalHeader()->hide();
   horizontalHeader()->setSectionsMovable(false);
-  horizontalHeader()->setFont(KMyMoneyGlobalSettings::listHeaderFont());
+  horizontalHeader()->setFont(KMyMoneySettings::listHeaderFontEx());
 
   KConfigGroup grp = KSharedConfig::openConfig()->group("SplitTable");
   QByteArray columns;
@@ -185,7 +183,7 @@ KMyMoneySplitTable::KMyMoneySplitTable(QWidget *parent) :
   horizontalHeader()->restoreState(columns);
   horizontalHeader()->setStretchLastSection(true);
 
-  setShowGrid(KMyMoneyGlobalSettings::showGrid());
+  setShowGrid(KMyMoneySettings::showGrid());
 
   setEditTriggers(QAbstractItemView::NoEditTriggers);
 
@@ -284,7 +282,7 @@ bool KMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
       case Qt::Key_Return:
       case Qt::Key_Enter:
         if (row < d->m_transaction.splits().count() - 1
-            && KMyMoneyGlobalSettings::enterMovesBetweenFields()) {
+            && KMyMoneySettings::enterMovesBetweenFields()) {
           slotStartEdit();
         } else
           emit returnPressed();
@@ -350,17 +348,18 @@ bool KMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
         // a completion list. In this case, we close the completion list and
         // do not end editing of the transaction.
         if (o->inherits("KLineEdit")) {
-          KLineEdit* le = dynamic_cast<KLineEdit*>(o);
-          KCompletionBox* box = le->completionBox(false);
-          if (box && box->isVisible()) {
-            terminate = false;
-            le->completionBox(false)->hide();
+          if (auto le = dynamic_cast<KLineEdit*>(o)) {
+            KCompletionBox* box = le->completionBox(false);
+            if (box && box->isVisible()) {
+              terminate = false;
+              le->completionBox(false)->hide();
+            }
           }
         }
 
         // in case we have the 'enter moves focus between fields', we need to simulate
         // a TAB key when the object 'o' points to the category or memo field.
-        if (KMyMoneyGlobalSettings::enterMovesBetweenFields()) {
+        if (KMyMoneySettings::enterMovesBetweenFields()) {
           if (o == d->m_editCategory->lineEdit() || o == d->m_editMemo) {
             terminate = false;
             QKeyEvent evt(e->type(),
@@ -441,7 +440,7 @@ void KMyMoneySplitTable::slotSetFocus(const QModelIndex& index, int button)
   scrollTo(model()->index(row, 0));
 
   if (isEditMode()) {                   // in edit mode?
-    if (isEditSplitValid() && KMyMoneyGlobalSettings::focusChangeIsEnter())
+    if (isEditSplitValid() && KMyMoneySettings::focusChangeIsEnter())
       endEdit(false/*keyboard driven*/, false/*set focus to next row*/);
     else
       slotCancelEdit();
@@ -537,7 +536,7 @@ void KMyMoneySplitTable::setRowCount(int irows)
 
   // determine row height according to the edit widgets
   // we use the category widget as the base
-  QFontMetrics fm(KMyMoneyGlobalSettings::listCellFont());
+  QFontMetrics fm(KMyMoneySettings::listCellFontEx());
   int height = fm.lineSpacing() + 6;
 #if 0
   // recalculate row height hint
@@ -701,7 +700,7 @@ void KMyMoneySplitTable::slotDuplicateSplit()
       d->m_transaction.addSplit(split);
       emit transactionChanged(d->m_transaction);
     } catch (const MyMoneyException &e) {
-      qDebug("Cannot duplicate split: %s", qPrintable(e.what()));
+      qDebug("Cannot duplicate split: %s", e.what());
     }
   }
 }
@@ -726,7 +725,7 @@ void KMyMoneySplitTable::slotDeleteSplit()
           selectRow(d->m_currentRow);
         emit transactionChanged(d->m_transaction);
       } catch (const MyMoneyException &e) {
-        qDebug("Cannot remove split: %s", qPrintable(e.what()));
+        qDebug("Cannot remove split: %s", e.what());
       }
     }
   }
@@ -844,7 +843,7 @@ void KMyMoneySplitTable::endEdit(bool keyboardDriven, bool setFocusToNextRow)
       }
       emit transactionChanged(d->m_transaction);
     } catch (const MyMoneyException &e) {
-      qDebug("Cannot add/modify split: %s", qPrintable(e.what()));
+      qDebug("Cannot add/modify split: %s", e.what());
     }
   }
   this->setFocus();
@@ -857,7 +856,7 @@ void KMyMoneySplitTable::endEdit(bool keyboardDriven, bool setFocusToNextRow)
   // in case we have selected 'enter moves between fields'
   if (keyboardDriven
       && currentRow() < d->m_transaction.splits().count() - 1
-      && KMyMoneyGlobalSettings::enterMovesBetweenFields()) {
+      && KMyMoneySettings::enterMovesBetweenFields()) {
     slotStartEdit();
   }
 
@@ -865,8 +864,16 @@ void KMyMoneySplitTable::endEdit(bool keyboardDriven, bool setFocusToNextRow)
 
 void KMyMoneySplitTable::slotCancelEdit()
 {
+  Q_D(const KMyMoneySplitTable);
   MYMONEYTRACER(tracer);
   if (isEditMode()) {
+    /*
+     * Prevent asking to add a new category which happens if the user entered any text
+     * caused by emitting signals in KMyMoneyCombo::focusOutEvent() on focus out event.
+     * (see bug 344409)
+     */
+    if (d->m_editCategory)
+      d->m_editCategory->lineEdit()->setText(QString());
     destroyEditWidgets();
     this->setFocus();
   }
@@ -914,7 +921,7 @@ KMyMoneyCategory* KMyMoneySplitTable::createEditWidgets(bool setFocus)
   emit editStarted();
 
   Q_D(KMyMoneySplitTable);
-  auto cellFont = KMyMoneyGlobalSettings::listCellFont();
+  auto cellFont = KMyMoneySettings::listCellFontEx();
   d->m_tabOrderWidgets.clear();
 
   // create the widgets
@@ -1020,7 +1027,7 @@ void KMyMoneySplitTable::slotLoadEditWidgets()
   aSet.addAccountGroup(eMyMoney::Account::Type::Liability);
   aSet.addAccountGroup(eMyMoney::Account::Type::Income);
   aSet.addAccountGroup(eMyMoney::Account::Type::Expense);
-  if (KMyMoneyGlobalSettings::expertMode())
+  if (KMyMoneySettings::expertMode())
     aSet.addAccountGroup(eMyMoney::Account::Type::Equity);
 
   // remove the accounts with invalid types at this point

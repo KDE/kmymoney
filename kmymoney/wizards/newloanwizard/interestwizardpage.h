@@ -41,12 +41,12 @@ class InterestWizardPage : public QWizardPage
   Q_OBJECT
 public:
   explicit InterestWizardPage(QWidget *parent = nullptr);
-  ~InterestWizardPage();
+  ~InterestWizardPage() override;
   /**
    * Overload the initializePage function to set widgets based on
    * the inputs from previous pages.
    */
-  void initializePage();
+  void initializePage() final override;
 
   Ui::InterestWizardPage *ui;
 

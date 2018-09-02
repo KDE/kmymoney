@@ -1,11 +1,10 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2015  Christian David <christian-david@web.de>
+ * Copyright 2015-2016  Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -47,12 +46,12 @@ public:
   };
 
   explicit payeeIdentifierModel(QObject* parent = 0);
-  virtual QVariant data(const QModelIndex& index, int role) const;
-  virtual int columnCount(const QModelIndex& parent) const;
-  virtual int rowCount(const QModelIndex& parent) const;
-  virtual QModelIndex parent(const QModelIndex& child) const;
-  virtual QModelIndex index(int row, int column, const QModelIndex &parent) const;
-  virtual Qt::ItemFlags flags(const QModelIndex &index) const;
+  QVariant data(const QModelIndex& index, int role) const final override;
+  int columnCount(const QModelIndex& parent) const final override;
+  int rowCount(const QModelIndex& parent) const final override;
+  QModelIndex parent(const QModelIndex& child) const final override;
+  QModelIndex index(int row, int column, const QModelIndex &parent) const final override;
+  Qt::ItemFlags flags(const QModelIndex &index) const final override;
 
   /**
    * @brief Set which payeeIdentifier types to show

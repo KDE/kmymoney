@@ -30,10 +30,10 @@ ExistingTransactionMatchFinder::ExistingTransactionMatchFinder(int matchWindow)
 
 void ExistingTransactionMatchFinder::createListOfMatchCandidates()
 {
-  MyMoneyTransactionFilter filter(importedSplit.accountId());
+  MyMoneyTransactionFilter filter(m_importedSplit.accountId());
   filter.setReportAllSplits(false);
-  filter.setDateFilter(importedTransaction.postDate().addDays(-matchWindow), importedTransaction.postDate().addDays(matchWindow));
-  filter.setAmountFilter(importedSplit.shares(), importedSplit.shares());
+  filter.setDateFilter(importedTransaction.postDate().addDays(-m_matchWindow), importedTransaction.postDate().addDays(m_matchWindow));
+  filter.setAmountFilter(m_importedSplit.shares(), m_importedSplit.shares());
 
   MyMoneyFile::instance()->transactionList(listOfMatchCandidates, filter);
   qDebug() << "Considering" << listOfMatchCandidates.size() << "existing transaction(s) for matching";

@@ -1,20 +1,23 @@
-/***************************************************************************
-                          mymoneyinstitution.cpp
-                          -------------------
-    copyright            : (C) 2001 by Michael Edwardes <mte@users.sourceforge.net>
-                               2002-2005 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2000-2001  Michael Edwardes <mte@users.sourceforge.net>
+ * Copyright 2002-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2003       Kevin Tambascio <ktambascio@users.sourceforge.net>
+ * Copyright 2004-2006  Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "mymoneyinstitution.h"
 #include "mymoneyinstitution_p.h"
@@ -25,8 +28,6 @@
 #include <QPixmap>
 #include <QPixmapCache>
 #include <QIcon>
-#include <QDomDocument>
-#include <QDomElement>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,13 +37,17 @@
 
 #include "icons.h"
 #include <mymoneyexception.h>
-#include "mymoneystoragenames.h"
 
-using namespace MyMoneyStorageNodes;
 using namespace Icons;
 
 MyMoneyInstitution::MyMoneyInstitution() :
   MyMoneyObject(*new MyMoneyInstitutionPrivate),
+  MyMoneyKeyValueContainer()
+{
+}
+
+MyMoneyInstitution::MyMoneyInstitution(const QString &id) :
+  MyMoneyObject(*new MyMoneyInstitutionPrivate, id),
   MyMoneyKeyValueContainer()
 {
 }
@@ -66,41 +71,6 @@ MyMoneyInstitution::MyMoneyInstitution(const QString& name,
   d->m_telephone = telephone;
   d->m_manager = manager;
   d->m_sortcode = sortcode;
-}
-
-MyMoneyInstitution::MyMoneyInstitution(const QDomElement& node) :
-  MyMoneyObject(*new MyMoneyInstitutionPrivate, node),
-  MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement())
-{
-  if (nodeNames[nnInstitution] != node.tagName())
-    throw MYMONEYEXCEPTION("Node was not INSTITUTION");
-
-  Q_D(MyMoneyInstitution);
-  d->m_sortcode = node.attribute(d->getAttrName(Institution::Attribute::SortCode));
-  d->m_name = node.attribute(d->getAttrName(Institution::Attribute::Name));
-  d->m_manager = node.attribute(d->getAttrName(Institution::Attribute::Manager));
-
-  QDomNodeList nodeList = node.elementsByTagName(d->getElName(Institution::Element::Address));
-  if (nodeList.count() == 0) {
-    QString msg = QString("No ADDRESS in institution %1").arg(d->m_name);
-    throw MYMONEYEXCEPTION(msg);
-  }
-
-  QDomElement addrNode = nodeList.item(0).toElement();
-  d->m_street = addrNode.attribute(d->getAttrName(Institution::Attribute::Street));
-  d->m_town = addrNode.attribute(d->getAttrName(Institution::Attribute::City));
-  d->m_postcode = addrNode.attribute(d->getAttrName(Institution::Attribute::Zip));
-  d->m_telephone = addrNode.attribute(d->getAttrName(Institution::Attribute::Telephone));
-
-  d->m_accountList.clear();
-
-  nodeList = node.elementsByTagName(d->getElName(Institution::Element::AccountIDS));
-  if (nodeList.count() > 0) {
-    nodeList = nodeList.item(0).toElement().elementsByTagName(d->getElName(Institution::Element::AccountID));
-    for (int i = 0; i < nodeList.count(); ++i) {
-      d->m_accountList << nodeList.item(i).toElement().attribute(d->getAttrName(Institution::Attribute::ID));
-    }
-  }
 }
 
 MyMoneyInstitution::MyMoneyInstitution(const MyMoneyInstitution& other) :
@@ -274,38 +244,6 @@ bool MyMoneyInstitution::operator == (const MyMoneyInstitution& right) const
     return true;
   } else
     return false;
-}
-
-void MyMoneyInstitution::writeXML(QDomDocument& document, QDomElement& parent) const
-{
-  Q_D(const MyMoneyInstitution);
-  auto el = document.createElement(nodeNames[nnInstitution]);
-
-  d->writeBaseXML(document, el);
-
-  el.setAttribute(d->getAttrName(Institution::Attribute::Name), d->m_name);
-  el.setAttribute(d->getAttrName(Institution::Attribute::Manager), d->m_manager);
-  el.setAttribute(d->getAttrName(Institution::Attribute::SortCode), d->m_sortcode);
-
-  auto address = document.createElement(d->getElName(Institution::Element::Address));
-  address.setAttribute(d->getAttrName(Institution::Attribute::Street), d->m_street);
-  address.setAttribute(d->getAttrName(Institution::Attribute::City), d->m_town);
-  address.setAttribute(d->getAttrName(Institution::Attribute::Zip), d->m_postcode);
-  address.setAttribute(d->getAttrName(Institution::Attribute::Telephone), d->m_telephone);
-  el.appendChild(address);
-
-  auto accounts = document.createElement(d->getElName(Institution::Element::AccountIDS));
-  foreach (const auto accountID, accountList()) {
-    auto temp = document.createElement(d->getElName(Institution::Element::AccountID));
-    temp.setAttribute(d->getAttrName(Institution::Attribute::ID), accountID);
-    accounts.appendChild(temp);
-  }
-  el.appendChild(accounts);
-
-  //Add in Key-Value Pairs for institutions.
-  MyMoneyKeyValueContainer::writeXML(document, el);
-
-  parent.appendChild(el);
 }
 
 bool MyMoneyInstitution::hasReferenceTo(const QString& /* id */) const

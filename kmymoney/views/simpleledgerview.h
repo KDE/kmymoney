@@ -21,24 +21,22 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmymoneyviewbase.h"
 
-class KMyMoneyApp;
-class KMyMoneyView;
-
-class SimpleLedgerView : public QWidget
+class SimpleLedgerViewPrivate;
+class SimpleLedgerView : public KMyMoneyViewBase
 {
   Q_OBJECT
+
 public:
-  explicit SimpleLedgerView(KMyMoneyApp *kmymoney, KMyMoneyView *kmymoneyview);
-  virtual ~SimpleLedgerView();
+  explicit SimpleLedgerView(QWidget *parent = nullptr);
+  ~SimpleLedgerView() override;
 
   virtual void showTransactionForm(bool = true);
 
@@ -53,30 +51,23 @@ public Q_SLOTS:
    */
   void openFavoriteLedgers();
 
-  void showEvent(QShowEvent* event);
+  void showEvent(QShowEvent* event) override;
 
 protected:
 
-protected Q_SLOTS:
+private Q_SLOTS:
   void tabSelected(int idx);
   void openNewLedger(QString accountId);
   void updateModels();
   void closeLedger(int idx);
   void checkTabOrder(int from, int to);
+  void setupCornerWidget();
 
 Q_SIGNALS:
   void showForms(bool show);
 
 private:
-  class Private;
-  Private * const d;
-
-  KMyMoneyApp                         *m_kmymoney;
-  KMyMoneyView                        *m_kmymoneyview;
-
-  /** Initializes page and sets its load status to initialized
-   */
-  void init();
+  Q_DECLARE_PRIVATE(SimpleLedgerView)
 };
 
 #endif // SIMPLELEDGERVIEW_H

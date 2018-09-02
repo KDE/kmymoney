@@ -1,20 +1,24 @@
-/***************************************************************************
-                          mymoneyaccount.cpp
-                          -------------------
-    copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
-                           (C) 2002 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2000-2002  Michael Edwardes <mte@users.sourceforge.net>
+ * Copyright 2001       Felix Rodriguez <frodriguez@users.sourceforge.net>
+ * Copyright 2002-2003  Kevin Tambascio <ktambascio@users.sourceforge.net>
+ * Copyright 2006-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2006       Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "mymoneyaccount.h"
 #include "mymoneyaccount_p.h"
@@ -45,12 +49,10 @@
 #include "mymoneyinstitution.h"
 #include "mymoneypayee.h"
 #include "payeeidentifier/payeeidentifiertyped.h"
-#include "payeeidentifier/ibanandbic/ibanbic.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
-#include "mymoneystoragenames.h"
 #include "icons/icons.h"
 
-using namespace MyMoneyStorageNodes;
 using namespace Icons;
 
 MyMoneyAccount::MyMoneyAccount() :
@@ -59,89 +61,10 @@ MyMoneyAccount::MyMoneyAccount() :
 {
 }
 
-MyMoneyAccount::MyMoneyAccount(const QDomElement& node) :
-    MyMoneyObject(*new MyMoneyAccountPrivate, node),
-    MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement())
+MyMoneyAccount::MyMoneyAccount(const QString &id):
+  MyMoneyObject(*new MyMoneyAccountPrivate, id),
+  MyMoneyKeyValueContainer()
 {
-  if (nodeNames[nnAccount] != node.tagName())
-    throw MYMONEYEXCEPTION("Node was not ACCOUNT");
-
-  Q_D(MyMoneyAccount);
-  setName(node.attribute(d->getAttrName(Account::Attribute::Name)));
-
-  // qDebug("Reading information for account %s", acc.name().data());
-
-  setParentAccountId(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::ParentAccount))));
-  setLastModified(MyMoneyUtils::stringToDate(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::LastModified)))));
-  setLastReconciliationDate(MyMoneyUtils::stringToDate(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::LastReconciled)))));
-
-  if (!d->m_lastReconciliationDate.isValid()) {
-    // for some reason, I was unable to access our own kvp at this point through
-    // the value() method. It always returned empty strings. The workaround for
-    // this is to construct a local kvp the same way as we have done before and
-    // extract the value from it.
-    //
-    // Since we want to get rid of the lastStatementDate record anyway, this seems
-    // to be ok for now. (ipwizard - 2008-08-14)
-    QString txt = MyMoneyKeyValueContainer(node.elementsByTagName(nodeNames[nnKeyValuePairs]).item(0).toElement()).value("lastStatementDate");
-    if (!txt.isEmpty()) {
-      setLastReconciliationDate(QDate::fromString(txt, Qt::ISODate));
-    }
-  }
-
-  setInstitutionId(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Institution))));
-  setNumber(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Number))));
-  setOpeningDate(MyMoneyUtils::stringToDate(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Opened)))));
-  setCurrencyId(MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Currency))));
-
-  QString tmp = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::Type)));
-  bool bOK = false;
-  int type = tmp.toInt(&bOK);
-  if (bOK) {
-    setAccountType(static_cast<Account::Type>(type));
-  } else {
-    qWarning("XMLREADER: Account %s had invalid or no account type information.", qPrintable(name()));
-  }
-
-  if (node.hasAttribute(d->getAttrName(Account::Attribute::OpeningBalance))) {
-    if (!MyMoneyMoney(node.attribute(d->getAttrName(Account::Attribute::OpeningBalance))).isZero()) {
-      QString msg = i18n("Account %1 contains an opening balance. Please use KMyMoney version 0.8 or later and earlier than version 0.9 to correct the problem.", d->m_name);
-      throw MYMONEYEXCEPTION(msg);
-    }
-  }
-  setDescription(node.attribute(d->getAttrName(Account::Attribute::Description)));
-
-  d->m_id = MyMoneyUtils::QStringEmpty(node.attribute(d->getAttrName(Account::Attribute::ID)));
-  // qDebug("Account %s has id of %s, type of %d, parent is %s.", acc.name().data(), id.data(), type, acc.parentAccountId().data());
-
-  //  Process any Sub-Account information found inside the account entry.
-  d->m_accountList.clear();
-  QDomNodeList nodeList = node.elementsByTagName(d->getElName(Account::Element::SubAccounts));
-  if (nodeList.count() > 0) {
-    nodeList = nodeList.item(0).toElement().elementsByTagName(d->getElName(Account::Element::SubAccount));
-    for (int i = 0; i < nodeList.count(); ++i) {
-      addAccountId(QString(nodeList.item(i).toElement().attribute(d->getAttrName(Account::Attribute::ID))));
-    }
-  }
-
-  nodeList = node.elementsByTagName(d->getElName(Account::Element::OnlineBanking));
-  if (nodeList.count() > 0) {
-    QDomNamedNodeMap attributes = nodeList.item(0).toElement().attributes();
-    for (int i = 0; i < attributes.count(); ++i) {
-      const QDomAttr& it_attr = attributes.item(i).toAttr();
-      d->m_onlineBankingSettings.setValue(it_attr.name(), it_attr.value());
-    }
-  }
-
-  // Up to and including version 4.6.6 the new account dialog stored the iban in the kvp-key "IBAN".
-  // But the rest of the software uses "iban". So correct this:
-  if (!value("IBAN").isEmpty()) {
-    // If "iban" was not set, set it now. If it is set, the user reseted it already, so remove
-    // the garbage.
-    if (value(d->getAttrName(Account::Attribute::IBAN)).isEmpty())
-      setValue(d->getAttrName(Account::Attribute::IBAN), value("IBAN"));
-    deletePair("IBAN");
-  }
 }
 
 MyMoneyAccount::MyMoneyAccount(const MyMoneyAccount& other) :
@@ -246,11 +169,6 @@ QDate MyMoneyAccount::lastReconciliationDate() const
 void MyMoneyAccount::setLastReconciliationDate(const QDate& date)
 {
   Q_D(MyMoneyAccount);
-  // FIXME: for a limited time (maybe until we delivered 1.0) we
-  // keep the last reconciliation date also in the KVP for backward
-  // compatibility. After that, the setValue() statemetn should be removed
-  // and the XML ctor should remove the value completely from the KVP
-  setValue("lastStatementDate", date.toString(Qt::ISODate));
   d->m_lastReconciliationDate = date;
 }
 
@@ -360,6 +278,24 @@ QString MyMoneyAccount::currencyId() const
   return d->m_currencyId;
 }
 
+QString MyMoneyAccount::tradingCurrencyId() const
+{
+  const auto file = MyMoneyFile::instance();
+
+  // First, get the trading currency (formerly deep currency)
+  auto deepcurrency = file->security(currencyId());
+  if (!deepcurrency.isCurrency())
+    deepcurrency = file->security(deepcurrency.tradingCurrency());
+
+  // Return the trading currency's ID
+  return deepcurrency.id();
+}
+
+bool MyMoneyAccount::isForeignCurrency() const
+{
+  return (tradingCurrencyId() != MyMoneyFile::instance()->baseCurrency().id());
+}
+
 void MyMoneyAccount::setCurrencyId(const QString& id)
 {
   Q_D(MyMoneyAccount);
@@ -393,6 +329,11 @@ bool MyMoneyAccount::isLiquidAsset() const
          accountType() == Account::Type::Cash;
 }
 
+bool MyMoneyAccount::isLiquidLiability() const
+{
+  return accountType() == Account::Type::CreditCard;
+}
+
 bool MyMoneyAccount::isCostCenterRequired() const
 {
   return value("CostCenter").toLower() == QLatin1String("yes");
@@ -405,80 +346,6 @@ void MyMoneyAccount::setCostCenterRequired(bool required)
   } else {
     deletePair("CostCenter");
   }
-}
-
-template<>
-QList< payeeIdentifierTyped< ::payeeIdentifiers::ibanBic> > MyMoneyAccount::payeeIdentifiersByType() const
-{
-  Q_D(const MyMoneyAccount);
-  payeeIdentifierTyped<payeeIdentifiers::ibanBic> ident = payeeIdentifierTyped<payeeIdentifiers::ibanBic>(new payeeIdentifiers::ibanBic);
-  ident->setIban(value(d->getAttrName(Account::Attribute::IBAN)));
-
-  if (!institutionId().isEmpty()) {
-    const MyMoneyInstitution institution = MyMoneyFile::instance()->institution(institutionId());
-    ident->setBic(institution.value(d->getAttrName(Account::Attribute::BIC)));
-  }
-
-  ident->setOwnerName(MyMoneyFile::instance()->user().name());
-
-  QList< payeeIdentifierTyped<payeeIdentifiers::ibanBic> > typedList;
-  typedList << ident;
-  return typedList;
-}
-
-void MyMoneyAccount::writeXML(QDomDocument& document, QDomElement& parent) const
-{
-  auto el = document.createElement(nodeNames[nnAccount]);
-
-  Q_D(const MyMoneyAccount);
-  d->writeBaseXML(document, el);
-
-  el.setAttribute(d->getAttrName(Account::Attribute::ParentAccount), parentAccountId());
-  el.setAttribute(d->getAttrName(Account::Attribute::LastReconciled), MyMoneyUtils::dateToString(lastReconciliationDate()));
-  el.setAttribute(d->getAttrName(Account::Attribute::LastModified), MyMoneyUtils::dateToString(lastModified()));
-  el.setAttribute(d->getAttrName(Account::Attribute::Institution), institutionId());
-  el.setAttribute(d->getAttrName(Account::Attribute::Opened), MyMoneyUtils::dateToString(openingDate()));
-  el.setAttribute(d->getAttrName(Account::Attribute::Number), number());
-  // el.setAttribute(getAttrName(anOpeningBalance), openingBalance().toString());
-  el.setAttribute(d->getAttrName(Account::Attribute::Type), (int)accountType());
-  el.setAttribute(d->getAttrName(Account::Attribute::Name), name());
-  el.setAttribute(d->getAttrName(Account::Attribute::Description), description());
-  if (!currencyId().isEmpty())
-    el.setAttribute(d->getAttrName(Account::Attribute::Currency), currencyId());
-
-  //Add in subaccount information, if this account has subaccounts.
-  if (accountCount()) {
-    QDomElement subAccounts = document.createElement(d->getElName(Account::Element::SubAccounts));
-    foreach (const auto accountID, accountList()) {
-      QDomElement temp = document.createElement(d->getElName(Account::Element::SubAccount));
-      temp.setAttribute(d->getAttrName(Account::Attribute::ID), accountID);
-      subAccounts.appendChild(temp);
-    }
-
-    el.appendChild(subAccounts);
-  }
-
-  // Write online banking settings
-  if (d->m_onlineBankingSettings.pairs().count()) {
-    QDomElement onlinesettings = document.createElement(d->getElName(Account::Element::OnlineBanking));
-    QMap<QString, QString>::const_iterator it_key = d->m_onlineBankingSettings.pairs().constBegin();
-    while (it_key != d->m_onlineBankingSettings.pairs().constEnd()) {
-      onlinesettings.setAttribute(it_key.key(), it_key.value());
-      ++it_key;
-    }
-    el.appendChild(onlinesettings);
-  }
-
-  // FIXME drop the lastStatementDate record from the KVP when it is
-  // not stored there after setLastReconciliationDate() has been changed
-  // See comment there when this will happen
-  // deletePair("lastStatementDate");
-
-
-  //Add in Key-Value Pairs for accounts.
-  MyMoneyKeyValueContainer::writeXML(document, el);
-
-  parent.appendChild(el);
 }
 
 bool MyMoneyAccount::hasReferenceTo(const QString& id) const
@@ -562,7 +429,7 @@ MyMoneyMoney MyMoneyAccount::balance() const
 void MyMoneyAccount::adjustBalance(const MyMoneySplit& s, bool reverse)
 {
   Q_D(MyMoneyAccount);
-  if (s.action() == MyMoneySplit::ActionSplitShares) {
+  if (s.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares)) {
     if (reverse)
       d->m_balance = d->m_balance / s.shares();
     else
@@ -712,16 +579,17 @@ QMap<QDate, MyMoneyMoney> MyMoneyAccount::reconciliationHistory()
  */
 QList< payeeIdentifier > MyMoneyAccount::payeeIdentifiers() const
 {
-  Q_D(const MyMoneyAccount);
   QList< payeeIdentifier > list;
 
   MyMoneyFile* file = MyMoneyFile::instance();
 
+  const auto strIBAN = QStringLiteral("iban");
+  const auto strBIC = QStringLiteral("bic");
   // Iban & Bic
-  if (!value(d->getAttrName(Account::Attribute::IBAN)).isEmpty()) {
+  if (!value(strIBAN).isEmpty()) {
     payeeIdentifierTyped<payeeIdentifiers::ibanBic> iban(new payeeIdentifiers::ibanBic);
-    iban->setIban(value(d->getAttrName(Account::Attribute::IBAN)));
-    iban->setBic(file->institution(institutionId()).value(d->getAttrName(Account::Attribute::BIC)));
+    iban->setIban(value(strIBAN));
+    iban->setBic(file->institution(institutionId()).value(strBIC));
     iban->setOwnerName(file->user().name());
     list.append(iban);
   }
@@ -744,4 +612,16 @@ bool MyMoneyAccount::hasOnlineMapping() const
 {
   Q_D(const MyMoneyAccount);
   return !d->m_onlineBankingSettings.value(QLatin1String("provider")).isEmpty();
+}
+
+QString MyMoneyAccount::stdAccName(eMyMoney::Account::Standard stdAccID)
+{
+  static const QHash<eMyMoney::Account::Standard, QString> stdAccNames {
+    {eMyMoney::Account::Standard::Liability, QStringLiteral("AStd::Liability")},
+    {eMyMoney::Account::Standard::Asset,     QStringLiteral("AStd::Asset")},
+    {eMyMoney::Account::Standard::Expense,   QStringLiteral("AStd::Expense")},
+    {eMyMoney::Account::Standard::Income,    QStringLiteral("AStd::Income")},
+    {eMyMoney::Account::Standard::Equity,    QStringLiteral("AStd::Equity")},
+  };
+  return stdAccNames.value(stdAccID);
 }

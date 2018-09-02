@@ -1,11 +1,10 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ * Copyright 2014-2016  Christian Dávid <christian-david@web.de>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -20,7 +19,10 @@
 
 #include <QDebug>
 
-#include "payeeidentifier/payeeidentifierloader.h"
+#include "payeeidentifier/ibanbic/ibanbic.h"
+#include "payeeidentifier/nationalaccount/nationalaccount.h"
+#include "payeeidentifier/unavailableplugin/unavailableplugin.h"
+#include "payeeidentifier.h"
 
 MyMoneyPayeeIdentifierContainer::MyMoneyPayeeIdentifierContainer()
     : m_payeeIdentifiers(QList< ::payeeIdentifier >())
@@ -92,7 +94,23 @@ void MyMoneyPayeeIdentifierContainer::loadXML(QDomElement node)
   const uint identifierNodesLength = identifierNodes.length();
   for (uint i = 0; i < identifierNodesLength; ++i) {
     const QDomElement element = identifierNodes.item(i).toElement();
-    ::payeeIdentifier ident = payeeIdentifierLoader::instance()->createPayeeIdentifierFromXML(element);
+
+    const auto payeeIdentifierId = element.attribute("type");
+    payeeIdentifierData* identData;
+    if (payeeIdentifierId == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid()) {
+      auto creator = new payeeIdentifiers::ibanBic();
+      identData = creator->createFromXml(element);
+      delete creator;
+    } else if (payeeIdentifierId == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid()) {
+      auto creator = new payeeIdentifiers::nationalAccount();
+      identData = creator->createFromXml(element);
+      delete creator;
+    } else {
+      identData = new payeeIdentifiers::payeeIdentifierUnavailable(element);
+    }
+    ::payeeIdentifier ident(identData);
+    ident.m_id = element.attribute("id", 0).toUInt();
+
     if (ident.isNull()) {
       qWarning() << "Could not load payee identifier" << element.attribute("type", "*no pidid set*");
       continue;

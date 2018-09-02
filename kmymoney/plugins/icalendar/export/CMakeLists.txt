@@ -10,7 +10,16 @@ set(icalendarexporter_PART_SRCS
 )
 
 kconfig_add_kcfg_files(icalendarexporter_PART_SRCS pluginsettings.kcfgc)
-add_library(icalendarexporter MODULE ${icalendarexporter_PART_SRCS})
+
+kcoreaddons_add_plugin(icalendarexporter
+                       SOURCES ${icalendarexporter_PART_SRCS}
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/icalendarexporter.json"
+                       INSTALL_NAMESPACE "kmymoney")
+
+#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
+set_target_properties(icalendarexporter
+                      PROPERTIES
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_include_directories(icalendarexporter PRIVATE ${LIBICAL_INCLUDE_DIRS})
 target_link_libraries(icalendarexporter
@@ -23,9 +32,6 @@ target_link_libraries(icalendarexporter
 install(FILES icalendarexporter.rc
         DESTINATION "${KXMLGUI_INSTALL_DIR}/icalendarexporter")
 
-install(TARGETS icalendarexporter
-        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney/")
-
 # the KCM module
 
 set(kcm_icalendarexporter_PART_SRCS
@@ -35,8 +41,17 @@ set(kcm_icalendarexporter_PART_SRCS
 kconfig_add_kcfg_files(kcm_icalendarexporter_PART_SRCS pluginsettings.kcfgc)
 ki18n_wrap_ui(kcm_icalendarexporter_PART_SRCS pluginsettingsdecl.ui)
 
-add_library(kcm_icalendarexporter MODULE ${kcm_icalendarexporter_PART_SRCS})
+kcoreaddons_add_plugin(kcm_icalendarexporter
+                       SOURCES ${kcm_icalendarexporter_PART_SRCS}
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/kcm_icalendarexporter.json"
+                       INSTALL_NAMESPACE "kmymoney")
+
 kcoreaddons_desktop_to_json(kcm_icalendarexporter kcm_icalendarexporter.desktop)
+
+#kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
+set_target_properties(kcm_icalendarexporter
+                      PROPERTIES
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(kcm_icalendarexporter
   KF5::I18n
@@ -46,9 +61,6 @@ target_link_libraries(kcm_icalendarexporter
   Qt5::Widgets
   Qt5::Gui
 )
-
-install(TARGETS kcm_icalendarexporter
-        DESTINATION "${KDE_INSTALL_PLUGINDIR}/kmymoney")
 
 install(FILES kcm_icalendarexporter.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})

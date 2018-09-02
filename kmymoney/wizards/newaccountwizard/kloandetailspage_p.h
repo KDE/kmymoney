@@ -43,7 +43,8 @@ namespace NewAccountWizard
   public:
     explicit LoanDetailsPagePrivate(QObject* parent) :
       WizardPagePrivate<Wizard>(parent),
-      ui(new Ui::KLoanDetailsPage)
+      ui(new Ui::KLoanDetailsPage),
+      m_needCalculate(false)
     {
     }
 
