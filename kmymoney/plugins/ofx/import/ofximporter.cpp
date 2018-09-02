@@ -1,19 +1,20 @@
-/***************************************************************************
-                          ofximporter.cpp
-                             -------------------
-    begin                : Sat Jan 01 2005
-    copyright            : (C) 2005 by Ace Jones
-    email                : Ace Jones <acejones@users.sourceforge.net>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2005       Ace Jones acejones@users.sourceforge.net
+ * Copyright 2010-2018  Thomas Baumgart tbaumgart@kde.org
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "ofximporter.h"
 
@@ -46,10 +47,12 @@
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
 #include "mymoneystatement.h"
+#include "mymoneystatementreader.h"
 #include "statementinterface.h"
 #include "importinterface.h"
 #include "viewinterface.h"
 #include "ui_importoption.h"
+#include "kmymoneyutils.h"
 
 //#define DEBUG_LIBOFX
 
@@ -133,7 +136,9 @@ void OFXImporter::slotImportFile()
 
   if (url.isValid()) {
     if (isMyFormat(url.path())) {
+      statementInterface()->resetMessages();
       slotImportFile(url.path());
+      statementInterface()->showMessages(d->m_statementlist.count());
 
     } else {
       KMessageBox::error(0, i18n("Unable to import %1 using the OFX importer plugin.  This file is not the correct format.", url.toDisplayString()), i18n("Incorrect format"));

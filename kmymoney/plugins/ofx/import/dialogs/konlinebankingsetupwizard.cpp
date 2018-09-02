@@ -92,6 +92,10 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
   //set password field according to KDE preferences
   m_editPassword->setPasswordMode(true);
 
+  // make sure to not exceed data fields
+  m_editUsername->setMaxLength(OFX_USERID_LENGTH-1);
+  m_editPassword->setMaxLength(OFX_USERPASS_LENGTH-1);
+
   KListWidgetSearchLine* searchLine = new KListWidgetSearchLine(autoTab, m_listFi);
   vboxLayout1->insertWidget(0, searchLine);
   QTimer::singleShot(20, searchLine, SLOT(setFocus()));
@@ -328,9 +332,11 @@ bool KOnlineBankingSetupWizard::finishLoginPage()
   while (m_it_info != m_bankInfo.constEnd()) {
     OfxFiLogin fi;
     memset(&fi, 0, sizeof(OfxFiLogin));
-    strncpy(fi.fid, (*m_it_info).fid, OFX_FID_LENGTH - 1);
-    strncpy(fi.org, (*m_it_info).org, OFX_ORG_LENGTH - 1);
-    strncpy(fi.userid, username.toLatin1(), OFX_USERID_LENGTH - 1);
+    Q_ASSERT(sizeof(fi.fid) == sizeof((*m_it_info).fid));
+    Q_ASSERT(sizeof(fi.org) == sizeof((*m_it_info).org));
+    memcpy(fi.fid, (*m_it_info).fid, OFX_FID_LENGTH - 1);
+    memcpy(fi.org, (*m_it_info).org, OFX_ORG_LENGTH - 1);
+    strncpy(fi.userid, username.toLatin1().left(OFX_USERID_LENGTH - 1), OFX_USERID_LENGTH - 1);
     strncpy(fi.userpass, password.toLatin1(), OFX_USERPASS_LENGTH - 1);
 #ifdef LIBOFX_HAVE_CLIENTUID
     strncpy(fi.clientuid, clientUid.toLatin1(), OFX_CLIENTUID_LENGTH - 1);

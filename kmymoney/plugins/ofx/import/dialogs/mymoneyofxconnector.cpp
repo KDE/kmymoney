@@ -748,7 +748,7 @@ KWallet::Wallet *openSynchronousWallet()
     return Wallet::openWallet(Wallet::NetworkWallet(), 0, Wallet::Synchronous);
   }
 
-  // search for a suitable parent for the wallet than needs to be deactivated while the
+  // search for a suitable parent for the wallet that needs to be deactivated while the
   // wallet access permission dialog is not dismissed with either accept or reject
   KWallet::Wallet *wallet = 0;
   QWidget *parentWidgetForWallet = 0;

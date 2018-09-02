@@ -3303,12 +3303,12 @@ void MyMoneyFile::forceDataChanged()
 
 bool MyMoneyFile::isTransfer(const MyMoneyTransaction& t) const
 {
-  auto rc = false;
+  auto rc = true;
   if (t.splitCount() == 2) {
     foreach (const auto split, t.splits()) {
       auto acc = account(split.accountId());
       if (acc.isIncomeExpense()) {
-        rc = true;
+        rc = false;
         break;
       }
     }

@@ -2081,3 +2081,8 @@ void MyMoneyQifReader::processSecurityEntry()
 
   d->st.m_listSecurities += security;
 }
+
+int MyMoneyQifReader::statementCount() const
+{
+  return d->statements.count();
+}
