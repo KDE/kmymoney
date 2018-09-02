@@ -17,6 +17,7 @@ SET(EXTPREFIX_frameworks "${EXTPREFIX}" )
 #   Sonnet
 #   SyntaxHighlighting
 # Tier 2
+#   Activities
 #   Auth
 #   Completion
 #   Crash
@@ -265,6 +266,21 @@ ExternalProject_Add(
                 -DBUILD_TESTING=false
     UPDATE_COMMAND ""
     DEPENDS ext_extra_cmake_modules
+)
+
+ExternalProject_Add(
+    ext_kactivities
+    DOWNLOAD_DIR ${EXTERNALS_DOWNLOAD_DIR}
+    URL http://download.kde.org/stable/frameworks/5.44/kactivities-5.44.0.zip
+    URL_MD5 3f9ce93d19efc0d9a1a16708b3b8b56a
+    INSTALL_DIR ${EXTPREFIX_frameworks}
+    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTPREFIX_frameworks}
+            -DCMAKE_BUILD_TYPE=${GLOBAL_BUILD_TYPE}
+                ${GLOBAL_PROFILE}
+                -DCMAKE_SYSTEM_PREFIX_PATH=${EXTPREFIX}
+                -DBUILD_TESTING=false
+    UPDATE_COMMAND ""
+    DEPENDS ext_kconfig ext_kcoreaddons ext_kwindowsystem
 )
 
 ExternalProject_Add(

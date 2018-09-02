@@ -14,5 +14,5 @@ ExternalProject_Add(
 
   UPDATE_COMMAND ""
   BUILD_IN_SOURCE 1
-  DEPENDS ext_gwenhywfar ext_ktoblzcheck ext_xmlsec1
+  DEPENDS ext_gwenhywfar ext_ktoblzcheck ext_xmlsec1 ext_gmp
 )
