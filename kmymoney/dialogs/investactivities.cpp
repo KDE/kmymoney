@@ -620,7 +620,7 @@ eMyMoney::Split::InvestmentTransactionType Reinvest::type() const
 void Reinvest::showWidgets() const
 {
   Q_D(const Activity);
-  static const QStringList visibleWidgetIds = QStringList() << "price" << "interest-account";
+  static const QStringList visibleWidgetIds = QStringList() << "price" << "fee-account" << "interest-account";
   setWidgetVisibility(visibleWidgetIds, true);
 
   if (auto shareEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"))) {
@@ -634,6 +634,7 @@ void Reinvest::showWidgets() const
     intAmount->setValue(MyMoneyMoney());
   }
 
+  setLabelText("fee-label", i18n("Fees"));
   setLabelText("interest-label", i18n("Interest"));
   setLabelText("shares-label", i18n("Shares"));
   if (dynamic_cast<QLabel*>(haveWidget("price-label")))
@@ -645,6 +646,7 @@ bool Reinvest::isComplete(QString& reason) const
 {
   auto rc = Activity::isComplete(reason);
   rc &= haveCategoryAndAmount("interest-account", QString(), false);
+  rc &= haveFees(true);
   rc &= haveShares();
   rc &= havePrice();
   return rc;
@@ -656,7 +658,6 @@ bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMone
   Q_UNUSED(assetAccountSplit);
   Q_UNUSED(security);
   Q_UNUSED(currency);
-  Q_UNUSED(m_feeSplits)
 
   QString reason;
   if (!isComplete(reason))
@@ -688,6 +689,13 @@ bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMone
       s0.setValue((shares * price).reduce());
       s0.setPrice(price);
     }
+  }
+
+  auto feeAccountWidget = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
+  auto feeAmountWidget = dynamic_cast<KMyMoneyEdit*>(haveWidget("fee-amount"));
+  if (feeAmountWidget && feeAccountWidget) {
+    if (!createCategorySplits(t, feeAccountWidget, feeAmountWidget, MyMoneyMoney::ONE, feeSplits, m_feeSplits))
+      return false;
   }
 
   auto interestAccountWidget = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
