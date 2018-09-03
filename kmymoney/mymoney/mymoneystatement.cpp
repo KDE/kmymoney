@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2006  Ace Jones <acejones@users.sourceforge.net>
- * Copyright 2005-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2005-2018  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -376,4 +376,18 @@ bool MyMoneyStatement::readXMLFile(MyMoneyStatement& _s, const QString& _filenam
   delete doc;
 
   return result;
+}
+
+QDate MyMoneyStatement::statementEndDate() const
+{
+  if (m_dateEnd.isValid())
+    return m_dateEnd;
+
+  QDate postDate;
+  for(auto t : m_listTransactions) {
+    if (t.m_datePosted > postDate) {
+      postDate = t.m_datePosted;
+    }
+  }
+  return postDate;
 }
