@@ -230,6 +230,7 @@ bool OFXImporter::import(const QString& filename)
   ofx_set_status_cb(ctx, ofxStatusCallback, this);
   qDebug("process data");
   libofx_proc_file(ctx, filename_deep, AUTODETECT);
+  qDebug("process data done");
   libofx_free_context(ctx);
 
   if (d->m_valid) {
