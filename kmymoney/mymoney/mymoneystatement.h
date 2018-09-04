@@ -128,9 +128,9 @@ public:
    */
   QDate statementEndDate() const;
 
-  KMM_MYMONEY_EXPORT static bool isStatementFile(const QString&);
-  KMM_MYMONEY_EXPORT static bool readXMLFile(MyMoneyStatement&, const QString&);
-  KMM_MYMONEY_EXPORT static void writeXMLFile(const MyMoneyStatement&, const QString&);
+  static bool isStatementFile(const QString&);
+  static bool readXMLFile(MyMoneyStatement&, const QString&);
+  static void writeXMLFile(const MyMoneyStatement&, const QString&);
 };
 
 /**
