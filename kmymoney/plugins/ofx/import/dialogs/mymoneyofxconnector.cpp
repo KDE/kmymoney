@@ -245,8 +245,15 @@ QDate MyMoneyOfxConnector::statementStartDate() const
 {
   if ((m_fiSettings.value("kmmofx-todayMinus").toInt() != 0) && !m_fiSettings.value("kmmofx-numRequestDays").isEmpty()) {
     return QDate::currentDate().addDays(-m_fiSettings.value("kmmofx-numRequestDays").toInt());
+
   } else if ((m_fiSettings.value("kmmofx-lastUpdate").toInt() != 0) && !m_account.value("lastImportedTransactionDate").isEmpty()) {
-    return QDate::fromString(m_account.value("lastImportedTransactionDate"), Qt::ISODate);
+    // get last statement request date from application account object
+    // and start from a few days before if the date is valid
+    QDate lastUpdate = QDate::fromString(m_account.value("lastImportedTransactionDate"), Qt::ISODate);
+    if (lastUpdate.isValid()) {
+      return lastUpdate.addDays(-3);
+    }
+
   } else if ((m_fiSettings.value("kmmofx-pickDate").toInt() != 0) && !m_fiSettings.value("kmmofx-specificDate").isEmpty()) {
     return QDate::fromString(m_fiSettings.value("kmmofx-specificDate"));
   }
