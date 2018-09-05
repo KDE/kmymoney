@@ -156,8 +156,8 @@ cmake_dependent_option(ENABLE_SQLCIPHER "Enable SQLCipher support." ON
 
 # Otherwise compilers halt on something like that:
 # ld: library not found for -lsqlcipher
-# on MS Windows, FreeBSD, and macOS.
-if(ENABLE_SQLCIPHER AND NOT CMAKE_SYSTEM_NAME MATCHES "Linux")
+# on MS Windows, FreeBSD, macOS, and Ubuntu 14.04 (Ubuntu has CMake 3.5.1 but I'm not sure if it's the one to blame).
+if(ENABLE_SQLCIPHER AND (NOT CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_VERSION VERSION_LESS 3.5.2))
   link_directories(${SQLCIPHER_LIBRARY_DIRS})
 endif()
 
