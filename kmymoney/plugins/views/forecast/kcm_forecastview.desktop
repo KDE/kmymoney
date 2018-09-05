@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Forecast view configuration
 Name[ca]=Configuració de la vista de pronòstic
+Name[fr]=Configuration de la vue Prévisions
 Name[nl]=Configuratie van begrotingsweergave
 Name[pt]=Configuração da área de previsão
 Name[sv]=Inställning av prognosvy
@@ -12,6 +13,7 @@ Exec=kcmshell5 forecastview
 Categories=Qt;KDE;kmymoney;
 Keywords=forecastview;kmymoney;
 Keywords[ca]=vista de pronòstic;kmymoney;
+Keywords[fr]=forecastview;kmymoney;
 Keywords[nl]=begrotingsweergave;kmymoney;
 Keywords[pt]=área de previsão;kmymoney;
 Keywords[sv]=prognosvy;kmymoney;
@@ -21,6 +23,7 @@ X-KDE-ParentApp=forecastview
 X-KDE-ParentComponents=forecastview
 Comment=Configuration for forecast view plugin
 Comment[ca]=Configuració del connector de vista de pronòstic
+Comment[fr]=Configuration du module externe de la vue Prévisions
 Comment[nl]=Configuratie voor plug-in voor prognose
 Comment[pt]=Configuração do 'plugin' da área de previsão
 Comment[sv]=Anpassa insticksprogram för prognosvy

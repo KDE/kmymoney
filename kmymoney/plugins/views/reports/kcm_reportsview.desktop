@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Reports view configuration
 Name[ca]=Configuració de la vista d'informes
+Name[fr]=Configuration de la vue Rapports
 Name[nl]=Configuratie van rapportenweergave
 Name[pt]=Configuração da área de relatórios
 Name[sv]=Inställning av rapportvy
@@ -12,6 +13,7 @@ Exec=kcmshell5 reportsview
 Categories=Qt;KDE;kmymoney;
 Keywords=reportsview;kmymoney;
 Keywords[ca]=vista d'informes;kmymoney;
+Keywords[fr]=reportsview;kmymoney;
 Keywords[nl]=rapportenweergave;kmymoney;
 Keywords[pt]=área de relatórios;kmymoney;
 Keywords[sv]=rapportvy;kmymoney;
@@ -21,6 +23,7 @@ X-KDE-ParentApp=reportsview
 X-KDE-ParentComponents=reportsview
 Comment=Configuration for reports view plugin
 Comment[ca]=Configuració del connector de la vista d'informes
+Comment[fr]=Configuration du module externe de la vue Rapports
 Comment[nl]=Configuratie voor plug-in voor rapportenweergave
 Comment[pt]=Configuração do 'plugin' da área de relatórios
 Comment[sv]=Anpassa insticksprogram för rapportvy
