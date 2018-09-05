@@ -463,13 +463,14 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   }
 
   // see if we need to update some values stored with the account
+  const auto statementEndDate = s.statementEndDate();
   if (d->m_account.value("lastStatementBalance") != s.m_closingBalance.toString()
-      || d->m_account.value("lastImportedTransactionDate") != s.m_dateEnd.toString(Qt::ISODate)) {
+      || d->m_account.value("lastImportedTransactionDate") != statementEndDate.toString(Qt::ISODate)) {
     if (s.m_closingBalance != MyMoneyMoney::autoCalc) {
       d->m_account.setValue("lastStatementBalance", s.m_closingBalance.toString());
     }
-    if (s.m_dateEnd.isValid()) {
-      d->m_account.setValue("lastImportedTransactionDate", s.m_dateEnd.toString(Qt::ISODate));
+    if (statementEndDate.isValid()) {
+      d->m_account.setValue("lastImportedTransactionDate", statementEndDate.toString(Qt::ISODate));
     }
 
     try {

@@ -218,6 +218,10 @@ bool OFXImporter::import(const QString& filename)
   LibofxContextPtr ctx = libofx_get_new_context();
   Q_CHECK_PTR(ctx);
 
+  // Don't show the position that caused a message to be shown
+  // This has no setter (see libofx.h)
+  ofx_show_position = false;
+
   qDebug("setup callback routines");
   ofx_set_transaction_cb(ctx, ofxTransactionCallback, this);
   ofx_set_statement_cb(ctx, ofxStatementCallback, this);
@@ -226,6 +230,7 @@ bool OFXImporter::import(const QString& filename)
   ofx_set_status_cb(ctx, ofxStatusCallback, this);
   qDebug("process data");
   libofx_proc_file(ctx, filename_deep, AUTODETECT);
+  qDebug("process data done");
   libofx_free_context(ctx);
 
   if (d->m_valid) {

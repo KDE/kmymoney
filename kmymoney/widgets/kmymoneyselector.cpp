@@ -419,9 +419,19 @@ bool KMyMoneySelector::match(const QRegExp& exp, QTreeWidgetItem* item) const
   return exp.indexIn(item->text(0)) != -1;
 }
 
-int KMyMoneySelector::slotMakeCompletion(const QRegExp& exp)
+int KMyMoneySelector::slotMakeCompletion(const QRegExp& _exp)
 {
   Q_D(KMyMoneySelector);
+  auto exp(_exp);
+  QString pattern = exp.pattern();
+  if (exp.patternSyntax() == QRegExp::RegExp) {
+    auto replacement = QStringLiteral(".*:");
+    if (!KMyMoneySettings::stringMatchFromStart() || QLatin1String(this->metaObject()->className()) != QLatin1String("KMyMoneySelector")) {
+      replacement.append(QLatin1String(".*"));
+    }
+    pattern.replace(QLatin1String(":"), replacement);
+    exp.setPattern(pattern);
+  }
   QTreeWidgetItemIterator it(d->m_treeWidget, QTreeWidgetItemIterator::Selectable);
 
   QTreeWidgetItem* it_v;

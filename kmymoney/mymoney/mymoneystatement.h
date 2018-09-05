@@ -1,6 +1,6 @@
 /*
  * Copyright 2004-2006  Ace Jones <acejones@users.sourceforge.net>
- * Copyright 2005-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2005-2018  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -42,7 +42,7 @@ Represents the electronic analog of the paper bank statement just like we used t
 
 @author ace jones
 */
-class MyMoneyStatement
+class KMM_MYMONEY_EXPORT MyMoneyStatement
 {
 public:
   struct Split
@@ -118,9 +118,19 @@ public:
   void write(QDomElement&, QDomDocument*) const;
   bool read(const QDomElement&);
 
-  KMM_MYMONEY_EXPORT static bool isStatementFile(const QString&);
-  KMM_MYMONEY_EXPORT static bool readXMLFile(MyMoneyStatement&, const QString&);
-  KMM_MYMONEY_EXPORT static void writeXMLFile(const MyMoneyStatement&, const QString&);
+  /**
+   * This method returns the date provided as the end date of the statement.
+   * In case this is not provided, we return the date of the youngest transaction
+   * instead. In case there are no transactions found, an invalid date is
+   * returned.
+   *
+   * @sa m_dateEnd
+   */
+  QDate statementEndDate() const;
+
+  static bool isStatementFile(const QString&);
+  static bool readXMLFile(MyMoneyStatement&, const QString&);
+  static void writeXMLFile(const MyMoneyStatement&, const QString&);
 };
 
 /**
