@@ -465,6 +465,8 @@ void KReportConfigurationFilterDlg::slotReset()
     //set moving average days spinbox
     QSpinBox *spinbox = d->m_tabRowColPivot->ui->m_movingAverageDays;
     spinbox->setEnabled(d->m_initialState.isIncludingMovingAverage());
+    d->m_tabRowColPivot->ui->m_movingAverageLabel->setEnabled(d->m_initialState.isIncludingMovingAverage());
+
     if (d->m_initialState.isIncludingMovingAverage()) {
       spinbox->setValue(d->m_initialState.movingAverageDays());
     }

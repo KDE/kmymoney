@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>294</height>
+    <width>599</width>
+    <height>326</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
    <item>
     <layout class="QHBoxLayout">
      <item>
-      <layout class="QGridLayout">
+      <layout class="QGridLayout" name="m_gridLayout">
        <item row="4" column="0">
         <widget class="QLabel" name="textLabel6">
          <property name="text">
@@ -72,7 +72,7 @@
         </widget>
        </item>
        <item row="5" column="0">
-        <widget class="QLabel" name="textLabel10">
+        <widget class="QLabel" name="m_movingAverageLabel">
          <property name="text">
           <string>Average days</string>
          </property>
@@ -130,16 +130,7 @@
           <enum>QFrame::Raised</enum>
          </property>
          <layout class="QHBoxLayout">
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
+          <property name="margin">
            <number>0</number>
           </property>
           <item>
@@ -153,7 +144,7 @@
            </widget>
           </item>
           <item>
-           <widget class="KMyMoneyGeneralCombo" name="m_comboBudget" native="true"/>
+           <widget class="KMyMoneyGeneralCombo" name="m_comboBudget"/>
           </item>
          </layout>
         </widget>
@@ -177,8 +168,8 @@
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>94</width>
-         <height>21</height>
+         <width>0</width>
+         <height>0</height>
         </size>
        </property>
       </spacer>
@@ -233,7 +224,7 @@
   </customwidget>
   <customwidget>
    <class>KMyMoneyGeneralCombo</class>
-   <extends>QWidget</extends>
+   <extends>QComboBox</extends>
    <header>kmymoneygeneralcombo.h</header>
    <container>1</container>
   </customwidget>
