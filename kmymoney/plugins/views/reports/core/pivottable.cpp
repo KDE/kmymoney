@@ -946,7 +946,7 @@ void PivotTable::calculateBudgetMapping()
               while (column < m_numColumns && budget.budgetStart().addYears(1) > budgetDate) {
                 //only show budget values if the budget year and the column date match
                 //no currency conversion is done here because that is done for all columns later
-                if (budgetDate > columnDate(column)) {
+                if (budgetDate >= columnDate(column+1)) {
                   ++column;
                 } else {
                   if (budgetDate >= m_beginDate.addDays(-m_beginDate.day() + 1)
