@@ -3640,6 +3640,9 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
 #ifdef KF5Activities_FOUND
       m_activityResourceInstance->setUri(m_storageInfo.url);
 #endif
+      // start the check for scheduled transactions that need to be
+      // entered as soon as the event loop becomes active.
+      QMetaObject::invokeMethod(q, "slotCheckSchedules",  Qt::QueuedConnection);
       break;
 
     case eKMyMoney::FileAction::Saved:
