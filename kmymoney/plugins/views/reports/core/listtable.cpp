@@ -200,7 +200,9 @@ void ListTable::render(QString& result, QString& csv) const
         // ***DV***
       } else if (rowRank == 1) {
         row_odd = ! row_odd;
-        tlink = QString::fromLatin1("id=%1&tid=%2").arg((*it_row).value(ctAccountID), (*it_row).value(ctID));
+        if (linkEntries()) {
+          tlink = QString::fromLatin1("id=%1&tid=%2").arg((*it_row).value(ctAccountID), (*it_row).value(ctID));
+        }
         result.append(QString::fromLatin1("<tr class=\"row-%1\">").arg(row_odd ? QLatin1String("odd") : QLatin1String("even")));
       } else if (rowRank == 2) {
         result.append(QString::fromLatin1("<tr class=\"item%1\">").arg(row_odd ? QLatin1Char('1') : QLatin1Char('0')));

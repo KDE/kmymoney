@@ -61,6 +61,8 @@ protected:
   void constructAccountTable();
   void constructAccountLoanTable();
 
+  bool linkEntries() const final override { return false; }
+
 private:
   /**
     * @param acc the investment account

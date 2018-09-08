@@ -88,11 +88,11 @@ void ObjectInfoTable::init()
       break;
     case eMyMoney::Report::RowType::AccountInfo:
       constructAccountTable();
-      m_columns << ctInstitution << ctType << ctName;
+      m_columns << ctType << ctName;
       break;
     case eMyMoney::Report::RowType::AccountLoanInfo:
       constructAccountLoanTable();
-      m_columns << ctInstitution << ctType << ctName;
+      m_columns << ctType << ctName;
       break;
     default:
       break;
@@ -120,21 +120,21 @@ void ObjectInfoTable::init()
   switch (m_config.rowType()) {
     case eMyMoney::Report::RowType::Schedule:
       if (m_config.detailLevel() == eMyMoney::Report::DetailLevel::All) {
-        m_columns << ctName << ctPayee << ctPaymentType << ctOccurrence
+        m_columns << ctPayee << ctPaymentType << ctOccurrence
                   << ctNextDueDate << ctCategory;
       } else {
-        m_columns << ctName << ctPayee << ctPaymentType << ctOccurrence
+        m_columns << ctPayee << ctPaymentType << ctOccurrence
                   << ctNextDueDate;
       }
       break;
     case eMyMoney::Report::RowType::AccountInfo:
-      m_columns << ctType << ctName << ctNumber << ctDescription
+      m_columns << ctNumber << ctDescription
                 << ctOpeningDate << ctCurrencyName << ctBalanceWarning
                 << ctCreditWarning << ctMaxCreditLimit
                 << ctTax << ctFavorite;
       break;
     case eMyMoney::Report::RowType::AccountLoanInfo:
-      m_columns << ctType << ctName << ctNumber << ctDescription
+      m_columns << ctNumber << ctDescription
                 << ctOpeningDate << ctCurrencyName << ctPayee
                 << ctLoanAmount << ctInterestRate << ctNextInterestChange
                 << ctPeriodicPayment << ctFinalPayment << ctFavorite;
@@ -178,7 +178,7 @@ void ObjectInfoTable::constructScheduleTable()
       }
 
       // help for sort and render functions
-      scheduleRow[ctRank] = QLatin1Char('0');
+      scheduleRow[ctRank] = QLatin1Char('1');
 
       //schedule data
       scheduleRow[ctID] = schedule.id();
@@ -209,9 +209,10 @@ void ObjectInfoTable::constructScheduleTable()
           TableRow splitRow;
           ReportAccount splitAcc((*split_it).accountId());
 
-          splitRow[ctRank] = QLatin1Char('1');
+          splitRow[ctRank] = QLatin1Char('2');
           splitRow[ctID] = schedule.id();
           splitRow[ctName] = schedule.name();
+          splitRow[ctPayee] = payee.name();
           splitRow[ctType] = KMyMoneyUtils::scheduleTypeToString(schedule.type());
           splitRow[ctNextDueDate] = schedule.nextDueDate().toString(Qt::ISODate);
 
@@ -261,9 +262,13 @@ void ObjectInfoTable::constructAccountTable()
         && account.accountType() != eMyMoney::Account::Type::Stock
         && !account.isClosed()) {
       MyMoneyMoney value;
-      accountRow[ctRank] = QLatin1Char('0');
+      accountRow[ctRank] = QLatin1Char('1');
       accountRow[ctTopCategory] = MyMoneyAccount::accountTypeToString(account.accountGroup());
-      accountRow[ctInstitution] = (file->institution(account.institutionId())).name();
+      if (!account.institutionId().isEmpty()) {
+        accountRow[ctInstitution] = (file->institution(account.institutionId())).name();
+      } else {
+        accountRow[ctInstitution] = QStringLiteral("Accounts with no institution assigned");
+      }
       accountRow[ctType] = MyMoneyAccount::accountTypeToString(account.accountType());
       accountRow[ctName] = account.name();
       accountRow[ctNumber] = account.number();
@@ -318,9 +323,13 @@ void ObjectInfoTable::constructAccountLoanTable()
         xr = account.baseCurrencyPrice(QDate::currentDate()).reduce();
       }
 
-      accountRow[ctRank] = QLatin1Char('0');
+      accountRow[ctRank] = QLatin1Char('1');
       accountRow[ctTopCategory] = MyMoneyAccount::accountTypeToString(account.accountGroup());
-      accountRow[ctInstitution] = (file->institution(account.institutionId())).name();
+      if (!account.institutionId().isEmpty()) {
+        accountRow[ctInstitution] = (file->institution(account.institutionId())).name();
+      } else {
+        accountRow[ctInstitution] = QStringLiteral("Accounts with no institution assigned");
+      }
       accountRow[ctType] = MyMoneyAccount::accountTypeToString(account.accountType());
       accountRow[ctName] = account.name();
       accountRow[ctNumber] = account.number();

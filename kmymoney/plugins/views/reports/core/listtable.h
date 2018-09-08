@@ -144,6 +144,8 @@ protected:
    */
   QList<cellTypeE> m_postcolumns;
 
+  virtual bool linkEntries() const = 0;
+
 private:
   enum cellGroupE { cgMoney, cgShares, cgPercent, cgDate, cgPrice, cgMisc };
   static cellGroupE cellGroup(const cellTypeE cellType);
