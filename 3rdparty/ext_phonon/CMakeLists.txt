@@ -1,4 +1,4 @@
-SET(EXTPREFIX_phonon "${EXTPREFIX}" )
+set(EXTPREFIX_phonon "${EXTPREFIX}")
 
 ExternalProject_Add(
     ext_phonon

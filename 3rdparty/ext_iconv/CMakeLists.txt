@@ -1,4 +1,4 @@
-SET(PREFIX_ext_iconv "${EXTPREFIX}" )
+set(PREFIX_ext_iconv "${EXTPREFIX}")
 
 ExternalProject_Add(
   ext_iconv
@@ -7,7 +7,7 @@ ExternalProject_Add(
   URL_MD5 ace8b5f2db42f7b3b3057585e80d9808
 
   INSTALL_DIR ${PREFIX_ext_iconv}
-  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_iconv} --disable-static --enable-shared
+  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_iconv} ${GLOBAL_AUTOMAKE_PROFILE}
   BUILD_COMMAND make
   INSTALL_COMMAND make install
 

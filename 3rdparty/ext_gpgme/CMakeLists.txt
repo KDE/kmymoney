@@ -1,4 +1,4 @@
-SET(PREFIX_ext_gpgme "${EXTPREFIX}" )
+set(PREFIX_ext_gpgme "${EXTPREFIX}")
 
 ExternalProject_Add(
   ext_gpgme
@@ -7,7 +7,7 @@ ExternalProject_Add(
   URL_MD5 129c46fb85a7ffa41e43345e48aee884
 
   INSTALL_DIR ${PREFIX_ext_gpgme}
-  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_gpgme} --enable-languages=cpp,qt --disable-gpg-test
+  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_gpgme} ${GLOBAL_AUTOMAKE_PROFILE} --enable-languages=cpp,qt --disable-gpg-test
   BUILD_COMMAND make
   INSTALL_COMMAND make install
 

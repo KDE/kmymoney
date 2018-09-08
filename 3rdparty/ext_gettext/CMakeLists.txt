@@ -1,4 +1,4 @@
-SET(PREFIX_ext_gettext "${EXTPREFIX}" )
+set(PREFIX_ext_gettext "${EXTPREFIX}")
 
 ExternalProject_Add(
   ext_gettext
@@ -7,7 +7,7 @@ ExternalProject_Add(
   URL_MD5 97e034cf8ce5ba73a28ff6c3c0638092
 
   INSTALL_DIR ${PREFIX_ext_gettext}
-  CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${PREFIX_ext_gettext} --disable-java --disable-native-java --disable-static --enable-shared --enable-nls --enable-c++
+  CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${PREFIX_ext_gettext} ${GLOBAL_AUTOMAKE_PROFILE} --disable-java --disable-native-java --enable-nls --enable-c++
   BUILD_COMMAND make
   INSTALL_COMMAND make install
 

@@ -1,4 +1,4 @@
-SET(PREFIX_ext_freetype "${EXTPREFIX}" )
+set(PREFIX_ext_freetype "${EXTPREFIX}")
 
 ExternalProject_Add(
   ext_freetype

@@ -1,4 +1,4 @@
-SET(PREFIX_ext_grantlee "${EXTPREFIX}" )
+set(PREFIX_ext_grantlee "${EXTPREFIX}")
 
 ExternalProject_Add(
   ext_grantlee

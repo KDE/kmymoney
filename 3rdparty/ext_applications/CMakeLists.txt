@@ -1,4 +1,4 @@
-SET(EXTPREFIX_applications "${EXTPREFIX}" )
+set(EXTPREFIX_applications "${EXTPREFIX}")
 
 ExternalProject_Add(
     ext_akonadi
@@ -13,21 +13,6 @@ ExternalProject_Add(
                 -DBUILD_TESTING=false
     UPDATE_COMMAND ""
     DEPENDS ext_boost ext_xslt ext_kcompletion ext_kconfig ext_kconfigwidgets ext_kcoreaddons ext_kdbusaddons ext_ki18n ext_kiconthemes ext_kitemmodels ext_kitemviews ext_kio ext_kwidgetsaddons ext_kwindowsystem ext_kxmlgui ext_kcrash
-)
-
-ExternalProject_Add(
-    ext_kholidays
-    DOWNLOAD_DIR ${EXTERNALS_DOWNLOAD_DIR}
-    URL https://download.kde.org/stable/applications/17.12.3/src/kholidays-17.12.3.tar.xz
-    URL_MD5 7c2fecea0e6f5f2b9e1b6453b7c7c064
-    INSTALL_DIR ${EXTPREFIX_applications}
-    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTPREFIX_applications}
-               -DCMAKE_BUILD_TYPE=${GLOBAL_BUILD_TYPE}
-                ${GLOBAL_PROFILE}
-                -DCMAKE_SYSTEM_PREFIX_PATH=${EXTPREFIX}
-                -DBUILD_TESTING=false
-    UPDATE_COMMAND ""
-    DEPENDS ext_extra_cmake_modules
 )
 
 ExternalProject_Add(

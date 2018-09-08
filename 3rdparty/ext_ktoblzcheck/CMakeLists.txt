@@ -1,4 +1,4 @@
-SET(PREFIX_ext_ktoblzcheck "${EXTPREFIX}" )
+set(PREFIX_ext_ktoblzcheck "${EXTPREFIX}")
 
 ExternalProject_Add(
   ext_ktoblzcheck
@@ -7,7 +7,7 @@ ExternalProject_Add(
   URL_MD5 2ea1b01a931eb1e52b0ca0e07cb72435
 
   INSTALL_DIR ${PREFIX_ext_ktoblzcheck}
-  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_ktoblzcheck}
+  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_ktoblzcheck} ${GLOBAL_AUTOMAKE_PROFILE}
   BUILD_COMMAND make
   INSTALL_COMMAND make install
 

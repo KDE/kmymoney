@@ -1,4 +1,4 @@
-SET(PREFIX_ext_gmp "${EXTPREFIX}" )
+set(PREFIX_ext_gmp "${EXTPREFIX}")
 
 ExternalProject_Add(
   ext_gmp
@@ -7,7 +7,7 @@ ExternalProject_Add(
   URL_MD5 8ddbb26dc3bd4e2302984debba1406a5
 
   INSTALL_DIR ${PREFIX_ext_gmp}
-  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_gmp} --enable-cxx
+  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_gmp} ${GLOBAL_AUTOMAKE_PROFILE} --enable-cxx
   BUILD_COMMAND make
   INSTALL_COMMAND make install
 

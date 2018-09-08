@@ -1,4 +1,4 @@
-SET(PREFIX_ext_xslt "${EXTPREFIX}" )
+set(PREFIX_ext_xslt "${EXTPREFIX}")
 
 ExternalProject_Add(
   ext_xslt
@@ -7,7 +7,7 @@ ExternalProject_Add(
   URL_MD5 1fc72f98e98bf4443f1651165f3aa146
 
   INSTALL_DIR ${PREFIX_ext_xslt}
-  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_xslt}  ${GLOBAL_AUTOMAKE_PROFILE}
+  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_xslt} ${GLOBAL_AUTOMAKE_PROFILE}
   BUILD_COMMAND make
   INSTALL_COMMAND make install
 

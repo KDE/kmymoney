@@ -1,4 +1,4 @@
-SET(PREFIX_ext_sqlcipher "${EXTPREFIX}" )
+set(PREFIX_ext_sqlcipher "${EXTPREFIX}")
 
 ExternalProject_Add(
   ext_sqlcipher
@@ -7,7 +7,7 @@ ExternalProject_Add(
   URL_MD5 f12c5975d784856ea89f83cfc9af1a6c
 
   INSTALL_DIR ${PREFIX_ext_sqlcipher}
-  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_sqlcipher} --disable-static --enable-shared --enable-tempstore=yes CFLAGS=-DSQLITE_HAS_CODEC
+  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_sqlcipher} ${GLOBAL_AUTOMAKE_PROFILE} --enable-tempstore=yes CFLAGS=-DSQLITE_HAS_CODEC
   BUILD_COMMAND make
   INSTALL_COMMAND make install
 

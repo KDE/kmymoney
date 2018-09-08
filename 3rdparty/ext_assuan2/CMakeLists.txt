@@ -1,4 +1,4 @@
-SET(PREFIX_ext_assuan2 "${EXTPREFIX}" )
+set(PREFIX_ext_assuan2 "${EXTPREFIX}")
 
 ExternalProject_Add(
   ext_assuan2
@@ -7,7 +7,7 @@ ExternalProject_Add(
   URL_MD5 4354b7ae296894f232ada226a062d7d7
 
   INSTALL_DIR ${PREFIX_ext_assuan2}
-  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_assuan2}
+  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_assuan2} ${GLOBAL_AUTOMAKE_PROFILE}
   BUILD_COMMAND make
   INSTALL_COMMAND make install
 

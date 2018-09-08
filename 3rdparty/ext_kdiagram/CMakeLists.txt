@@ -1,4 +1,4 @@
-SET(PREFIX_ext_kdiagram "${EXTPREFIX}" )
+set(PREFIX_ext_kdiagram "${EXTPREFIX}")
 
 ExternalProject_Add(
   ext_kdiagram

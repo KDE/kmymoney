@@ -19,8 +19,8 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_us.UTF-8
 
 # We want to use $prefix/deps/usr/ for all our dependencies
-export DEPS_INSTALL_PREFIX=$BUILD_PREFIX/deps/usr/
-export DOWNLOADS_DIR=$BUILD_PREFIX/downloads/
+export DEPS_INSTALL_PREFIX=$BUILD_PREFIX/deps/usr
+export DOWNLOADS_DIR=$BUILD_PREFIX/downloads
 
 # Setup variables needed to help everything find what we build
 export LD_LIBRARY_PATH=$DEPS_INSTALL_PREFIX/lib:$LD_LIBRARY_PATH
@@ -59,16 +59,18 @@ cmake $KMYMONEY_SOURCES/3rdparty -DCMAKE_INSTALL_PREFIX=$DEPS_INSTALL_PREFIX -DI
 
 # Now start building everything we need, in the appropriate order
 cmake --build . --config RelWithDebInfo --target ext_iconv
+# cmake --build . --config RelWithDebInfo --target ext_icu
 cmake --build . --config RelWithDebInfo --target ext_xml # must be before gettext
 cmake --build . --config RelWithDebInfo --target ext_gettext
 # cmake --build . --config RelWithDebInfo --target ext_zlib
-cmake --build . --config RelWithDebInfo --target ext_boost
-# cmake --build . --config RelWithDebInfo --target ext_png
-# cmake --build . --config RelWithDebInfo --target ext_icu
-cmake --build . --config RelWithDebInfo --target ext_xslt # for ext_xmlsec1
 # cmake --build . --config RelWithDebInfo --target ext_lzma
+# cmake --build . --config RelWithDebInfo --target ext_png
+cmake --build . --config RelWithDebInfo --target ext_boost
+cmake --build . --config RelWithDebInfo --target ext_xslt # for ext_xmlsec1
 # cmake --build . --config RelWithDebInfo --target ext_fontconfig
 # cmake --build . --config RelWithDebInfo --target ext_freetype
+cmake --build . --config RelWithDebInfo --target ext_sqlite
+# cmake --build . --config RelWithDebInfo --target ext_mysql
 cmake --build . --config RelWithDebInfo --target ext_qt
 cmake --build . --config RelWithDebInfo --target ext_knotifications
 cmake --build . --config RelWithDebInfo --target ext_kio
@@ -86,4 +88,4 @@ cmake --build . --config RelWithDebInfo --target ext_aqbanking
 cmake --build . --config RelWithDebInfo --target ext_gpgme
 cmake --build . --config RelWithDebInfo --target ext_sqlcipher
 cmake --build . --config RelWithDebInfo --target ext_ofx
-
+cmake --build . --config RelWithDebInfo --target ext_ical

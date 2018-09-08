@@ -1,4 +1,4 @@
-SET(PREFIX_ext_opensp "${EXTPREFIX}" )
+set(PREFIX_ext_opensp "${EXTPREFIX}")
 
 ExternalProject_Add(
   ext_opensp
@@ -7,7 +7,7 @@ ExternalProject_Add(
   URL_MD5 670b223c5d12cee40c9137be86b6c39b
 
   INSTALL_DIR ${PREFIX_ext_opensp}
-  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_opensp} --enable-shared --disable-static --disable-doc-build
+  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_opensp} ${GLOBAL_AUTOMAKE_PROFILE} --disable-doc-build
   BUILD_COMMAND make
   INSTALL_COMMAND make install
 

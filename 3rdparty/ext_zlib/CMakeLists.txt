@@ -1,4 +1,4 @@
-SET(PREFIX_ext_zlib "${EXTPREFIX}" )
+set(PREFIX_ext_zlib "${EXTPREFIX}")
 
 ExternalProject_Add(
   ext_zlib

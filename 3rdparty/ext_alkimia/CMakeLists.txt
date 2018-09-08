@@ -1,4 +1,4 @@
-SET(PREFIX_ext_alkimia "${EXTPREFIX}" )
+set(PREFIX_ext_alkimia "${EXTPREFIX}")
 
 ExternalProject_Add(
   ext_alkimia
