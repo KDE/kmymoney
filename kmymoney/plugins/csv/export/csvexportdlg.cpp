@@ -145,12 +145,9 @@ void CsvExportDlg::checkData(const QString& accountName)
   bool  okEnabled = false;
 
   if (!ui->m_qlineeditFile->text().isEmpty()) {
-    QString strFile(ui->m_qlineeditFile->text());
-    int dot = strFile.indexOf('.');
-    if (dot != -1) {
-      strFile.chop(strFile.length() - dot);
-    }
-    strFile += QLatin1String(".csv");
+    auto strFile(ui->m_qlineeditFile->text());
+    if (!strFile.endsWith(QLatin1String(".csv"), Qt::CaseInsensitive))
+      strFile.append(QLatin1String(".csv"));
     ui->m_qlineeditFile->setText(strFile);
   }
   QDate earliestDate(QDate(2500, 01, 01));
