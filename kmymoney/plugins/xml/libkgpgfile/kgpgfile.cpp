@@ -37,7 +37,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#ifdef Gpgmepp_FOUND
+#ifdef ENABLE_GPG
 #include <gpgme++/context.h>
 #include <gpgme++/encryptionresult.h>
 #include <gpgme++/decryptionresult.h>
@@ -378,7 +378,7 @@ void KGPGFile::keyList(QStringList& list, bool secretKeys, const QString& patter
   }
 }
 
-#else // not Gpgmepp_FOUND
+#else // not ENABLE_GPG
 
 // NOOP implementation
 KGPGFile::KGPGFile(const QString& fn, const QString& homedir, const QString& options) : d(0)

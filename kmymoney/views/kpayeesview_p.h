@@ -190,7 +190,7 @@ public:
 
     ui->m_updateButton->setEnabled(false);
     ui->m_syncAddressbook->setEnabled(false);
-    #ifndef KMM_ADDRESSBOOK_FOUND
+    #ifndef ENABLE_ADDRESSBOOK
     ui->m_syncAddressbook->hide();
     #endif
     ui->matchTypeCombo->setCurrentIndex(0);

@@ -42,7 +42,6 @@
 
 #include <KMessageBox>
 #include <KTitleWidget>
-#include <KCompressionDevice>
 #include <KSharedConfig>
 #include <KBackup>
 #include <KActionCollection>

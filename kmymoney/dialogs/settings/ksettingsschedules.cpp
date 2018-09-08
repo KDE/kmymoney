@@ -27,7 +27,7 @@
 // KDE Includes
 
 #include <KLocalizedString>
-#ifdef KF5Holidays_FOUND
+#ifdef ENABLE_HOLIDAYS
 #include <KHolidays/Holiday>
 #include <KHolidays/HolidayRegion>
 using namespace KHolidays;
@@ -86,7 +86,7 @@ void KSettingsSchedules::loadList()
 {
   Q_D(KSettingsSchedules);
   QStringList regions;
-#ifdef KF5Holidays_FOUND
+#ifdef ENABLE_HOLIDAYS
   QStringList regionCodes = HolidayRegion::regionCodes();
 
   foreach (const QString &regionCode, regionCodes) {

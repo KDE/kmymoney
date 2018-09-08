@@ -50,9 +50,9 @@ find_package(PkgConfig)
 set (OPT_KF5_COMPONENTS DocTools Holidays Contacts Akonadi IdentityManagement Activities)
 find_package(Gpgmepp)
 if (Gpgmepp_FOUND)
-  set(GPG_ENCRYPTION ON)
+  set(GPG_FOUND TRUE)
 else()
-  set(GPG_ENCRYPTION OFF)
+  set(GPG_FOUND FALSE)
   list(APPEND OPT_KF5_COMPONENTS Gpgmepp)
 endif()
 
@@ -75,14 +75,16 @@ find_package(LibAlkimia5 7.0.0 REQUIRED)
 #  include_directories(${GMP_INCLUDE_DIR})
 #endif()
 
-find_package(KChart 2.6.0 REQUIRED)
+find_package(KChart 2.6.0)
 
 if(KF5Gpgmepp_FOUND)
-  set(GPG_ENCRYPTION ON)
-  add_definitions(-DGpgmepp_FOUND)
+  set(GPG_FOUND TRUE)
 endif()
 
-add_feature_info("Encryption" GPG_ENCRYPTION "It allows encrypting your financial data.")
+cmake_dependent_option(ENABLE_GPG "Enable GPG support." ON
+                       "GPG_FOUND" OFF)
+
+add_feature_info("Encryption" ENABLE_GPG "Allows to store your financial data using strong GPG encryption.")
 
 add_definitions(-DQT_USE_QSTRINGBUILDER -DQT_NO_CAST_TO_ASCII -DQT_NO_URL_CAST_FROM_STRING)
 set(CMAKE_CXX_STANDARD 14)
@@ -130,26 +132,33 @@ get_filename_component(QT_DIR     ${QT_BIN_DIR}        PATH)
 set(QT_INSTALL_DIR ${QT_DIR} CACHE PATH
   "Qt install prefix defaults to the Qt prefix: ${QT_DIR}")
 
-if(KF5IdentityManagement_FOUND AND KF5Akonadi_FOUND AND KF5Contacts_FOUND)
-  set(KMM_ADDRESSBOOK_FOUND true)
-endif()
+cmake_dependent_option(ENABLE_ADDRESSBOOK "Enable addressbook support." ON
+                       "KF5IdentityManagement_FOUND;KF5Akonadi_FOUND;KF5Contacts_FOUND" OFF)
 
-add_feature_info("Address book" KMM_ADDRESSBOOK_FOUND "It allows fetching payee information from KDE PIM system.")
-add_feature_info("Holidays" KF5Holidays_FOUND "It allows fetching holidays from KDE PIM system.")
+add_feature_info("Address book" ENABLE_ADDRESSBOOK "Allows fetching payee information from KDE PIM system.")
+
+cmake_dependent_option(ENABLE_HOLIDAYS "Enable addressbook support." ON
+                       "KF5Holidays_FOUND" OFF)
+
+add_feature_info("Holidays" ENABLE_HOLIDAYS "Allows fetching holidays from KDE PIM system.")
+
+cmake_dependent_option(ENABLE_ACTIVITIES "Enable activities support." ON
+                       "KF5Activities_FOUND" OFF)
 
 option(ENABLE_FORECASTVIEW "Enable forecast view" ON)
-add_feature_info("Forecast view" ENABLE_FORECASTVIEW "It adds possibility to calculate forecasts.")
-option(ENABLE_REPORTSVIEW "Enable reports view" ON)
-add_feature_info("Reports view" ENABLE_REPORTSVIEW "It adds possibility to display chart and table reports.")
+add_feature_info("Forecast view" ENABLE_FORECASTVIEW "Adds possibility to calculate forecasts.")
+cmake_dependent_option(ENABLE_REPORTSVIEW "Enable reports view." ON
+                       "KChart_FOUND" OFF)
+add_feature_info("Reports view" ENABLE_REPORTSVIEW "Adds possibility to display chart and table reports.")
 option(ENABLE_BUDGETVIEW "Enable budget view" ON)
-add_feature_info("Budget view" ENABLE_BUDGETVIEW "It adds possibility to plan a budget.")
+add_feature_info("Budget view" ENABLE_BUDGETVIEW "Adds possibility to plan a budget.")
 option(ENABLE_ONLINEJOBOUTBOXVIEW "Enable online job outbox view" ON)
-add_feature_info("Online job outbox view" ENABLE_ONLINEJOBOUTBOXVIEW "It adds outbox for sending online jobs.")
+add_feature_info("Online job outbox view" ENABLE_ONLINEJOBOUTBOXVIEW "Adds outbox for sending online jobs.")
 
 cmake_dependent_option(ENABLE_SQLSTORAGE "Enable SQL storage support." ON
                        "Qt5Sql_FOUND" OFF)
 
-add_feature_info("SQL Storage" ENABLE_SQLSTORAGE "It allows storing your financial data in SQL database.")
+add_feature_info("SQL Storage" ENABLE_SQLSTORAGE "Allows storing your financial data in SQL database.")
 
 cmake_dependent_option(ENABLE_SQLCIPHER "Enable SQLCipher support." ON
                        "SQLCIPHER_FOUND" OFF)
@@ -161,7 +170,7 @@ if(ENABLE_SQLCIPHER AND (NOT CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_VERSION 
   link_directories(${SQLCIPHER_LIBRARY_DIRS})
 endif()
 
-add_feature_info("SQLCipher" ENABLE_SQLCIPHER "It allows encrypting your SQLite3 database.")
+add_feature_info("SQLCipher" ENABLE_SQLCIPHER "Allows encrypting your SQLite3 database.")
 
 cmake_dependent_option(ENABLE_IBANBICDATA "Enable IBAN/BIC data support." OFF
                        "Qt5Sql_FOUND" OFF)
@@ -204,7 +213,7 @@ else()
   unset(LIBOFX_HAVE_CLIENTUID CACHE)
 endif(ENABLE_OFXIMPORTER)
 
-add_feature_info("OFX Importer" ENABLE_OFXIMPORTER "It allows importing OFX files (have client uid version: ${nice_LIBOFX_HAVE_CLIENTUID})" )
+add_feature_info("OFX Importer" ENABLE_OFXIMPORTER "Allows importing OFX files (have client uid version: ${nice_LIBOFX_HAVE_CLIENTUID})" )
 
 # check for optional KBanking support
 find_package(AQBANKING 5.6.5)
@@ -247,16 +256,16 @@ add_feature_info(iCalendar ENABLE_LIBICAL "iCalendar integration.")
 
 option(ENABLE_QIFIMPORTER "Enable QIF Importer" ON)
 option(ENABLE_QIFEXPORTER "Enable QIF Exporter" ON)
-add_feature_info("QIF Importer" ENABLE_QIFIMPORTER "It allows importing QIF files.")
-add_feature_info("QIF Exporter" ENABLE_QIFEXPORTER "It allows exporting QIF files.")
+add_feature_info("QIF Importer" ENABLE_QIFIMPORTER "Allows importing QIF files.")
+add_feature_info("QIF Exporter" ENABLE_QIFEXPORTER "Allows exporting QIF files.")
 
 option(ENABLE_GNCIMPORTER "Enable GNC Importer" ON)
-add_feature_info("GNC Importer" ENABLE_GNCIMPORTER "It allows importing GNUCash files.")
+add_feature_info("GNC Importer" ENABLE_GNCIMPORTER "Allows importing GNUCash files.")
 
 option(ENABLE_CSVIMPORTER "Enable CSV Importer" ON)
 option(ENABLE_CSVEXPORTER "Enable CSV Exporter" ON)
-add_feature_info("CSV Importer" ENABLE_CSVIMPORTER "It allows importing CSV files.")
-add_feature_info("CSV Exporter" ENABLE_CSVEXPORTER "It allows exporting CSV files.")
+add_feature_info("CSV Importer" ENABLE_CSVIMPORTER "Allows importing CSV files.")
+add_feature_info("CSV Exporter" ENABLE_CSVEXPORTER "Allows exporting CSV files.")
 
 option(ENABLE_UNFINISHEDFEATURES "For devs only" OFF)
 

@@ -76,7 +76,6 @@ add_library(dialogs STATIC ${libdialogs_a_SOURCES})
 
 target_link_libraries(dialogs
   PUBLIC
-    KChart
     KF5::ItemViews
     KF5::I18n
     KF5::TextWidgets

@@ -40,7 +40,7 @@ target_link_libraries(settings PUBLIC
   Alkimia::alkimia
 )
 
-if (KF5Holidays_FOUND)
+if (ENABLE_HOLIDAYS)
   target_link_libraries(settings PUBLIC KF5::Holidays)
 endif()
 

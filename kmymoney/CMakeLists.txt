@@ -152,15 +152,12 @@ target_link_libraries(kmymoney
   interfaces
   kmm_plugin
   Qt5::Core
-  KF5::Archive
   KF5::ConfigGui
   KF5::WidgetsAddons
-  KF5::KIOCore
   KF5::CoreAddons
-  KChart
   $<$<BOOL:${USE_MODELTEST}>:Qt5::Test>
-  $<$<BOOL:${KF5Holidays_FOUND}>:KF5::Holidays>
-  $<$<BOOL:${KF5Activities_FOUND}>:KF5::Activities>
+  $<$<BOOL:${ENABLE_HOLIDAYS}>:KF5::Holidays>
+  $<$<BOOL:${ENABLE_ACTIVITIES}>:KF5::Activities>
   PRIVATE
     $<$<BOOL:${ENABLE_SQLCIPHER}>:sqlcipher>
 )
