@@ -1,0 +1,11 @@
+diff -ruN akonadi-17.12.3.orig/src/widgets/manageaccountwidget.cpp akonadi-17.12.3/src/widgets/manageaccountwidget.cpp
+--- akonadi-17.12.3.orig/src/widgets/manageaccountwidget.cpp	2018-03-05 11:14:26.000000000 +0100
++++ akonadi-17.12.3/src/widgets/manageaccountwidget.cpp	2018-09-09 08:05:30.093858293 +0200
+@@ -32,6 +32,7 @@
+ #include <KWindowSystem>
+ #include <QKeyEvent>
+ #include <QAbstractItemDelegate>
++#include <QAbstractItemView>
+ 
+ using namespace Akonadi;
+ 

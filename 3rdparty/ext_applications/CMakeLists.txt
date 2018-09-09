@@ -5,6 +5,8 @@ ExternalProject_Add(
     DOWNLOAD_DIR ${EXTERNALS_DOWNLOAD_DIR}
     URL https://download.kde.org/stable/applications/17.12.3/src/akonadi-17.12.3.tar.xz
     URL_MD5 92f1aa77da4e51acab138f686e693b93
+
+    PATCH_COMMAND ${PATCH_COMMAND} -p1 -i ${CMAKE_CURRENT_SOURCE_DIR}/akonadi.diff
     INSTALL_DIR ${EXTPREFIX_applications}
     CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTPREFIX_applications}
                -DCMAKE_BUILD_TYPE=${GLOBAL_BUILD_TYPE}
