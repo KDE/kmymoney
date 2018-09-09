@@ -40,7 +40,7 @@ message( STATUS "CMAKE_GENERATOR: ${CMAKE_GENERATOR}")
 set(GLOBAL_BUILD_TYPE RelWithDebInfo)
 set(GLOBAL_PROFILE ${GLOBAL_PROFILE} -DBUILD_TESTING=false)
 # without --host=x86_64 gmp builds with optimizations for skylake and that prevents running KMyMoney on pre-skylake CPUs
-set(GLOBAL_AUTOMAKE_PROFILE --host=x86_64 --disable-static --enable-shared)
+set(GLOBAL_AUTOMAKE_PROFILE --host=x86_64-linux-gnu --disable-static --enable-shared)
 
 set(SECURITY_EXE_LINKER_FLAGS "")
 set(SECURITY_SHARED_LINKER_FLAGS "")
@@ -58,11 +58,10 @@ endif ()
 
 # this list must be dependency-ordered
 add_subdirectory( ext_iconv )
+add_subdirectory( ext_lzma )
 add_subdirectory( ext_icu )
 add_subdirectory( ext_xml )
 add_subdirectory( ext_gettext )
-add_subdirectory( ext_zlib )
-add_subdirectory( ext_lzma )
 add_subdirectory( ext_png )
 add_subdirectory( ext_boost )
 add_subdirectory( ext_xslt )

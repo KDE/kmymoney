@@ -7,7 +7,7 @@ ExternalProject_Add(
   URL_MD5 b786e353e2aa1b872d70d5d1ca0c740d
 
   INSTALL_DIR ${PREFIX_ext_xml}
-  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_xml} ${GLOBAL_AUTOMAKE_PROFILE} --without-python
+  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_xml} --host=x86_64-linux-gnu --without-python
   BUILD_COMMAND make
   INSTALL_COMMAND make install
 
