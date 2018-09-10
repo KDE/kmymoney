@@ -28,6 +28,7 @@
 #include "kmymoneyplugin.h"
 
 class MyMoneyStorageMgr;
+class QUrlQuery;
 
 class SQLStorage : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::StoragePlugin
 {
@@ -61,6 +62,8 @@ private:
    * @retval true save operation was successful
    */
   bool saveAsDatabase(const QUrl &url);
+
+  QUrlQuery convertOldUrl(const QUrl& url);
 
 private Q_SLOTS:
   void slotOpenDatabase();
