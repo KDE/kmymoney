@@ -8,7 +8,7 @@ ExternalProject_Add(
   URL_MD5 6aceeaad3a1000f22f08986e68946db3
 
   INSTALL_DIR ${PREFIX_ext_aqbanking}
-  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_aqbanking} --disable-static --enable-shared CPPFLAGS=${aqbanking_cppFlags}
+  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_aqbanking} ${GLOBAL_AUTOMAKE_PROFILE} CPPFLAGS=${aqbanking_cppFlags}
   BUILD_COMMAND make
   INSTALL_COMMAND make install
 
