@@ -63,7 +63,8 @@ cmake --build . --config RelWithDebInfo --target ext_iconv
 # cmake --build . --config RelWithDebInfo --target ext_icu
 cmake --build . --config RelWithDebInfo --target ext_xml # must be before gettext
 cmake --build . --config RelWithDebInfo --target ext_gettext
-# cmake --build . --config RelWithDebInfo --target ext_png
+cmake --build . --config RelWithDebInfo --target ext_jpeg
+cmake --build . --config RelWithDebInfo --target ext_png
 cmake --build . --config RelWithDebInfo --target ext_boost
 cmake --build . --config RelWithDebInfo --target ext_xslt # for ext_xmlsec1
 # cmake --build . --config RelWithDebInfo --target ext_fontconfig
