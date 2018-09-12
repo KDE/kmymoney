@@ -5,8 +5,8 @@ set(PREFIX_ext_boost "${EXTPREFIX}")
 ExternalProject_Add(
   ext_boost
   DOWNLOAD_DIR ${EXTERNALS_DOWNLOAD_DIR}
-  URL https://dl.bintray.com/boostorg/release/1.67.0/source/boost_1_67_0.tar.bz2
-  URL_MD5 ced776cb19428ab8488774e1415535ab
+  URL https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.tar.bz2
+  URL_MD5 7fbd1890f571051f2a209681d57d486a
 
   CONFIGURE_COMMAND <SOURCE_DIR>/bootstrap.sh --prefix=${PREFIX_ext_boost} --with-libraries=system
   BUILD_COMMAND <SOURCE_DIR>/b2 -j${SUBMAKE_JOBS} install
