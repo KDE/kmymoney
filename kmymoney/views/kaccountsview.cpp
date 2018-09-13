@@ -411,10 +411,12 @@ void KAccountsView::slotAccountUnmapOnline()
     MyMoneyFileTransaction ft;
     try {
       d->m_currentAccount.setOnlineBankingSettings(MyMoneyKeyValueContainer());
+      // Avoid showing an oline balance
+      d->m_currentAccount.deletePair(QStringLiteral("lastStatementBalance"));
       // delete the kvp that is used in MyMoneyStatementReader too
       // we should really get rid of it, but since I don't know what it
       // is good for, I'll keep it around. (ipwizard)
-      d->m_currentAccount.deletePair("StatementKey");
+      d->m_currentAccount.deletePair(QStringLiteral("StatementKey"));
       MyMoneyFile::instance()->modifyAccount(d->m_currentAccount);
       ft.commit();
       // The mapping could disable the online task system
