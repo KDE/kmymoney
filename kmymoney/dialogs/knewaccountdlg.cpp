@@ -803,6 +803,7 @@ void KNewAccountDlg::slotAccountTypeChanged(const QString& typeStr)
       m_account.setAccountType(type);
       // update the account group displayed in the accounts hierarchy
       m_filterProxyModel->clear();
+      m_filterProxyModel->setSourceModel(Models::instance()->accountsModel());
       m_filterProxyModel->addAccountGroup(m_account.accountGroup());
     }
   } catch (const MyMoneyException &) {
