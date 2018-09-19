@@ -1078,7 +1078,8 @@ void StdTransactionEditor::loadEditWidgets(KMyMoneyRegister::Action action)
           && m_account.accountType() == MyMoneyAccount::Checkings   // checkings account
           && KMyMoneyGlobalSettings::autoIncCheckNumber()           // and auto inc number turned on?
           && action != KMyMoneyRegister::ActionDeposit              // only transfers or withdrawals
-          && m_paymentMethod == MyMoneySchedule::STYPE_WRITECHEQUE) {// only for STYPE_WRITECHEQUE
+          && (m_scheduleInfo.isEmpty()                              // normal transactions
+              || m_paymentMethod == MyMoneySchedule::STYPE_WRITECHEQUE)) {// only for STYPE_WRITECHEQUE schedule transaction
         assignNextNumber();
       }
     }
