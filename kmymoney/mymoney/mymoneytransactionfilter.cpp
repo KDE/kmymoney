@@ -223,7 +223,7 @@ const QList<MyMoneySplit>& MyMoneyTransactionFilter::matchingSplits() const
 bool MyMoneyTransactionFilter::matchText(const MyMoneySplit * const sp) const
 {
   // check if the text is contained in one of the fields
-  // memo, value, number, payee, tag, account, date
+  // memo, value, number, payee, tag, account
   if (m_filterSet.singleFilter.textFilter) {
     MyMoneyFile* file = MyMoneyFile::instance();
     const MyMoneyAccount& acc = file->account(sp->accountId());

@@ -259,5 +259,11 @@ if( KDE4_BUILD_TESTS )
 
   target_link_libraries( onlinejobtypedtest kmm_mymoney onlinetask_interfaces ${target_link_libraries_test})
 
+  # mymoneytransactionfiltertest
+  set( mymoneytransactionfiltertest_SRCS mymoneytransactionfiltertest.cpp )
+  kde4_add_unit_test( mymoneytransactionfiltertest TESTNAME kmymoney-mymoneytransactionfiltertest ${mymoneytransactionfiltertest_SRCS} )
+  add_dependencies( mymoneytransactionfiltertest kmm_mymoney )
+
+  target_link_libraries( mymoneytransactionfiltertest kmm_mymoney ${target_link_libraries_test})
 
 endif( KDE4_BUILD_TESTS )
