@@ -54,6 +54,31 @@
 
 using namespace Icons;
 
+QUrlQuery SQLStorage::convertOldUrl(const QUrl& url)
+{
+  const auto key = QLatin1String("driver");
+  // take care and convert some old url to their new counterpart
+  QUrlQuery query(url);
+  if (query.queryItemValue(key) == QLatin1String("QMYSQL3")) { // fix any old urls
+    query.removeQueryItem(key);
+    query.addQueryItem(key, QLatin1String("QMYSQL"));
+  } else if (query.queryItemValue(key) == QLatin1String("QSQLITE3")) {
+    query.removeQueryItem(key);
+    query.addQueryItem(key, QLatin1String("QSQLITE"));
+  }
+#ifdef ENABLE_SQLCIPHER
+  // Reading unencrypted database with QSQLITE
+  // while QSQLCIPHER is available causes crash.
+  // QSQLCIPHER can read QSQLITE
+  if (query.queryItemValue(key) == QLatin1String("QSQLITE")) {
+    query.removeQueryItem(key);
+    query.addQueryItem(key, QLatin1String("QSQLCIPHER"));
+  }
+#endif
+  return query;
+}
+
+
 SQLStorage::SQLStorage(QObject *parent, const QVariantList &args) :
   KMyMoneyPlugin::Plugin(parent, "sqlstorage"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
@@ -79,6 +104,26 @@ MyMoneyStorageMgr *SQLStorage::open(const QUrl &url)
   auto reader = std::make_unique<MyMoneyStorageSql>(storage, url);
 
   QUrl dbURL(url);
+  if (dbURL.password().isEmpty()) {
+    // check if a password is needed. it may be if the URL came from the last/recent file list
+    QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::ReadWrite, dbURL);
+    if (!dialog->checkDrivers()) {
+      delete dialog;
+      return nullptr;
+    }
+    QUrlQuery query = convertOldUrl(dbURL);
+    // if we need to supply a password, then show the dialog
+    // otherwise it isn't needed
+    if ((query.queryItemValue("secure").toLower() == QLatin1String("yes")) && dbURL.password().isEmpty()) {
+      if (dialog->exec() == QDialog::Accepted && dialog != nullptr) {
+        dbURL = dialog->selectedURL();
+      } else {
+        delete dialog;
+        return nullptr;
+      }
+    }
+    delete dialog;
+  }
   bool retry = true;
   while (retry) {
     switch (reader->open(dbURL, QIODevice::ReadWrite)) {
@@ -235,26 +280,7 @@ void SQLStorage::slotOpenDatabase()
     auto url = dialog->selectedURL();
     QUrl newurl = url;
     if ((newurl.scheme() == QLatin1String("sql"))) {
-      const auto key = QLatin1String("driver");
-      // take care and convert some old url to their new counterpart
-      QUrlQuery query(newurl);
-      if (query.queryItemValue(key) == QLatin1String("QMYSQL3")) { // fix any old urls
-        query.removeQueryItem(key);
-        query.addQueryItem(key, QLatin1String("QMYSQL"));
-      } else if (query.queryItemValue(key) == QLatin1String("QSQLITE3")) {
-        query.removeQueryItem(key);
-        query.addQueryItem(key, QLatin1String("QSQLITE"));
-      }
-#ifdef ENABLE_SQLCIPHER
-      // Reading unencrypted database with QSQLITE
-      // while QSQLCIPHER is available causes crash.
-      // QSQLCIPHER can read QSQLITE
-      if (query.queryItemValue(key) == QLatin1String("QSQLITE")) {
-        query.removeQueryItem(key);
-        query.addQueryItem(key, QLatin1String("QSQLCIPHER"));
-      }
-#endif
-
+      QUrlQuery query = convertOldUrl(newurl);
       newurl.setQuery(query);
 
       // check if a password is needed. it may be if the URL came from the last/recent file list

@@ -245,6 +245,8 @@ protected Q_SLOTS:
 
   void slotStatusProgressDone();
 
+  void slotCheckSchedules();
+
 public:
   /**
     * This method checks if there is at least one asset or liability account
@@ -395,8 +397,6 @@ protected:
    * @see QWidget#closeEvent
    */
   bool queryClose() final override;
-
-  void slotCheckSchedules();
 
 #ifdef KMM_DEBUG
   void resizeEvent(QResizeEvent*) final override;

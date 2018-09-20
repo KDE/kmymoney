@@ -80,6 +80,7 @@ protected:
   MyMoneyMoney helperROI(const MyMoneyMoney& buys, const MyMoneyMoney& sells, const MyMoneyMoney& startingBal, const MyMoneyMoney& endingBal, const MyMoneyMoney& cashIncome) const;
   MyMoneyMoney helperIRR(const CashFlowList& all) const;
   void constructSplitsTable();
+  bool linkEntries() const final override { return true; }
 private:
   enum InvestmentValue {Buys = 0, Sells, BuysOfSells, SellsOfBuys, LongTermBuysOfSells, LongTermSellsOfBuys, BuysOfOwned, ReinvestIncome, CashIncome, End};
 
