@@ -236,8 +236,9 @@ public:
   /**
     * This method is used to check a specific transaction against the filter.
     * The transaction will match the whole filter, if all specified filters
-    * match. If the filter is cleared using the clear() method, any transaciton
-    * matches.
+    * match. If the filter is cleared using the clear() method, any transaction
+    * matches. Matching splits from the transaction are returned by @ref
+    * matchingSplits().
     *
     * @param transaction A transaction
     *
@@ -267,7 +268,7 @@ public:
     * checked filters match. If the filter is cleared using the clear()
     * method, any split matches.
     *
-    * @param sp pointer to the split to be checked
+    * @param sp const reference to the split to be checked
     *
     * @retval true The split matches the filter set
     * @retval false The split does not match at least one of

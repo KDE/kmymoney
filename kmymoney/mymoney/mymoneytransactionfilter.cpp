@@ -520,7 +520,7 @@ bool MyMoneyTransactionFilter::matchText(const MyMoneySplit& s, const MyMoneyAcc
 {
   Q_D(const MyMoneyTransactionFilter);
   // check if the text is contained in one of the fields
-  // memo, value, number, payee, tag, account, date
+  // memo, value, number, payee, tag, account
   if (d->m_filterSet.singleFilter.textFilter) {
     const auto file = MyMoneyFile::instance();
     const auto sec = file->security(acc.currencyId());
