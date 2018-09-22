@@ -120,7 +120,6 @@ public:
     * to an open file.
     */
   void enableViewsIfFileOpen(bool fileOpen);
-  void switchToDefaultView();
   void switchToHomeView();
 
   void addWidget(QWidget* w);
@@ -257,6 +256,7 @@ private Q_SLOTS:
   void slotShowBudgetPage();
   void slotShowForecastPage();
   void slotShowOutboxPage();
+  void switchToDefaultView();
 
   /**
    * Opens object in ledgers or edits in case of institution
