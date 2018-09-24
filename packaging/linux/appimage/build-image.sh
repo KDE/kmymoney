@@ -49,15 +49,12 @@ cp -r $DEPS_INSTALL_PREFIX/translations $APPDIR/usr/
 mv $APPDIR/usr/lib/x86_64-linux-gnu/*  $APPDIR/usr/lib
 rm -rf $APPDIR/usr/lib/x86_64-linux-gnu/
 
-# Step 3: Move plugins to loadable location
-mv $PLUGINS $APPDIR/usr/plugins
-
-# Step 4: Update the rpath in the various plugins we have to make sure they'll be loadable in an Appimage context
-for lib in $APPDIR/usr/plugins/kmymoney/*.so*; do
-  patchelf --set-rpath '$ORIGIN/..' $lib;
+# Step 3: Update the rpath in the various plugins we have to make sure they'll be loadable in an Appimage context
+for lib in $PLUGINS/*.so*; do
+  patchelf --set-rpath '$ORIGIN/../..' $lib;
 done
 
-# Step 5: Build the image!!!
+# Step 4: Build the image!!!
 linuxdeployqt $APPDIR/usr/share/applications/org.kde.kmymoney.desktop \
   -executable=$APPDIR/usr/bin/kmymoney \
   -qmldir=$DEPS_INSTALL_PREFIX/qml \
