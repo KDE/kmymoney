@@ -39,8 +39,8 @@ cmake $KMYMONEY_SOURCES \
     -DCMAKE_INSTALL_PREFIX:PATH=$BUILD_PREFIX/kmymoney.appdir/usr \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -DBUILD_TESTING=FALSE \
-    -DENABLE_WEBENGINE=TRUE \
-    -DIS_APPIMAGE=TRUE
+    -DENABLE_WEBENGINE=TRUE
+#     -DIS_APPIMAGE=TRUE
 
 # Build and Install KMyMoney (ready for the next phase)
 make -j$CPU_COUNT install
