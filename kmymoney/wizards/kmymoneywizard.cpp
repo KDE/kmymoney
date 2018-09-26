@@ -122,7 +122,7 @@ void KMyMoneyWizard::nextButtonClicked()
   Q_D(KMyMoneyWizard);
   // make sure it is really complete. Some widgets only change state during focusOutEvent,
   // so we just create such an animal by changing the focus to the next button and
-  // check again for copmpleness
+  // check again for completeness
   d->m_nextButton->setFocus();
   KMyMoneyWizardPage* oldPage = d->m_history.back();
   if (oldPage->isComplete()) {

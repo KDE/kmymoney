@@ -89,7 +89,7 @@ QString acCash;
 TransactionHelper::TransactionHelper(const QDate& _date, const QString& _action, MyMoneyMoney _value, const QString& _accountid, const QString& _categoryid, const QString& _currencyid, const QString& _payee)
 {
   // _currencyid is the currency of the transaction, and of the _value
-  // both the account and category can have their own currency (athough the category having
+  // both the account and category can have their own currency (although the category having
   // a foreign currency is not yet supported by the program, the reports will still allow it,
   // so it must be tested.)
   MyMoneyFile* file = MyMoneyFile::instance();

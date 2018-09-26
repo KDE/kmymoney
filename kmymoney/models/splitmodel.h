@@ -56,13 +56,13 @@ public:
 
   /**
    * Adds a single dummy split to the model which is used for
-   * createion of new splits.
+   * creation of new splits.
    */
   void addEmptySplitEntry();
 
   /**
    * Remove the single dummy split to the model which is used for
-   * createion of new splits from the model.
+   * creation of new splits from the model.
    */
   void removeEmptySplitEntry();
 

@@ -308,7 +308,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                   const MyMoneyAccount acc = file->account(it_row.key().id());
                   if (acc.isInvest()) {
                     securityPrecision = file->currency(acc.currencyId()).pricePrecision();
-                    // stock account isn't eveluated in currency, so take investment account instead
+                    // stock account isn't evaluated in currency, so take investment account instead
                     currencyPrecision = MyMoneyMoney::denomToPrec(file->account(acc.parentAccountId()).fraction());
                   } else
                     currencyPrecision = MyMoneyMoney::denomToPrec(acc.fraction());

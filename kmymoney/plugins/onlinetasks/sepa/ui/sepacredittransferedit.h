@@ -84,7 +84,7 @@ private Q_SLOTS:
   void updateEveryStatus();
 
   /** @{
-   * These slots are called when the corosponding field is changed
+   * These slots are called when the corresponding field is changed
    * to start the validation.
    */
   void purposeChanged();

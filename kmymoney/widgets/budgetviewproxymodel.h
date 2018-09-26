@@ -42,7 +42,7 @@ class MyMoneyMoney;
   * account tree based on the @ref AccountsModel. One such functionality is
   * obtaining the account balance and value base on the budget.
   *
-  * @author Cristin Oneț
+  * @author Cristian Oneț
   */
 class BudgetViewProxyModelPrivate;
 class KMM_WIDGETS_EXPORT BudgetViewProxyModel : public AccountsViewProxyModel

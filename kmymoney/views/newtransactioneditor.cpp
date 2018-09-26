@@ -349,7 +349,7 @@ bool NewTransactionEditor::Private::valueChanged(CreditDebitHelper* valueHelper)
       rc = true;
 
     } catch (MyMoneyException &e) {
-      qDebug() << "Ooops: somwthing went wrong in" << Q_FUNC_INFO;
+      qDebug() << "Ooops: something went wrong in" << Q_FUNC_INFO;
     }
   }
   return rc;

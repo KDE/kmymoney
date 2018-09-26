@@ -214,10 +214,10 @@ public:
 
   /**
     * This method controls whether the interest is compounded in periods
-    * or continously.
+    * or continuously.
     *
     * @param disc if @p true (default) then the interest is compounded in
-    *             periods, if @p false continously.
+    *             periods, if @p false continuously.
     */
   void setDisc(const bool disc = true);
 

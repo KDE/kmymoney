@@ -279,7 +279,7 @@ void KMyMoneyCombo::focusOutEvent(QFocusEvent* e)
     if (d->m_canCreateObjects) {
       if (!d->m_completion->selector()->contains(currentText())) {
         QString id;
-        // annouce that we go into a possible dialog to create an object
+        // announce that we go into a possible dialog to create an object
         // This can be used by upstream widgets to disable filters etc.
         emit objectCreation(true);
 

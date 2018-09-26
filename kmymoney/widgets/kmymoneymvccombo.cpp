@@ -197,7 +197,7 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
   Q_D(KMyMoneyMVCCombo);
   // when showing m_completion we'll receive a focus out event even if the focus
   // will still remain at this widget since this widget is the completion's focus proxy
-  // so ignore the focus out event caused by showin a widget of type Qt::Popup
+  // so ignore the focus out event caused by showing a widget of type Qt::Popup
   if (e->reason() == Qt::PopupFocusReason)
     return;
 
@@ -227,7 +227,7 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
       // in case we tab out, we make sure that if the current completion
       // contains the current text that we set the current text to
       // the full completion text but only if the completion box is visible.
-      // BUG 254984 is resolved with the visbility check
+      // BUG 254984 is resolved with the visibility check
       if (e->reason() != Qt::MouseFocusReason) {
         if (d->m_completer->popup() && d->m_completer->popup()->isVisible()
             && d->m_completer->currentCompletion().contains(currentText(), Qt::CaseInsensitive)) {
@@ -271,7 +271,7 @@ void KMyMoneyMVCCombo::checkCurrentText()
   Q_D(KMyMoneyMVCCombo);
   if (!contains(currentText())) {
     QString id;
-    // annouce that we go into a possible dialog to create an object
+    // announce that we go into a possible dialog to create an object
     // This can be used by upstream widgets to disable filters etc.
     emit objectCreation(true);
 

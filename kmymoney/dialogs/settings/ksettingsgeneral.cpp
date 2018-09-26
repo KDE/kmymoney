@@ -68,7 +68,7 @@ KSettingsGeneral::KSettingsGeneral(QWidget* parent) :
   // hide the internally used date field
   d->ui->kcfg_StartDate->hide();
 
-  // setup connections, so that the sort optios get loaded once the edit fields are filled
+  // setup connections, so that the sort options get loaded once the edit fields are filled
   connect(d->ui->kcfg_StartDate, &QDateTimeEdit::dateChanged, this, &KSettingsGeneral::slotLoadStartDate);
 
   // setup connections, so that changes by the user are forwarded to the (hidden) edit fields

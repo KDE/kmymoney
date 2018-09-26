@@ -985,7 +985,7 @@ void QueryTable::constructTransactionTable()
               qA[ctFees] = (n0 + value).toString();
             }
             // we don't add qA here for a loan transaction. we'll add one
-            // qA afer all of the split components have been processed.
+            // qA after all of the split components have been processed.
             // (see below)
 
           }

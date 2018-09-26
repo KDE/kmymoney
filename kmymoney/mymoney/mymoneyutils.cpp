@@ -36,7 +36,7 @@ QString MyMoneyUtils::getFileExtension(QString strFileName)
 {
   QString strTemp;
   if (!strFileName.isEmpty()) {
-    //find last . delminator
+    //find last . deliminator
     int nLoc = strFileName.lastIndexOf('.');
     if (nLoc != -1) {
       strTemp = strFileName.right(strFileName.length() - (nLoc + 1));

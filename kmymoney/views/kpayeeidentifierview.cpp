@@ -126,7 +126,7 @@ void KPayeeIdentifierView::removeSelected()
 {
   QModelIndexList selectedRows = ui->view->selectionModel()->selectedRows();
   // To keep the items valid during remove the data must be removed from highest row
-  // to the lowes. Unfortunately QList has no reverse iterator.
+  // to the lowest. Unfortunately QList has no reverse iterator.
   std::sort(selectedRows.begin(), selectedRows.end(), QModelIndexRowComparison);
 
   QAbstractItemModel* model = ui->view->model();

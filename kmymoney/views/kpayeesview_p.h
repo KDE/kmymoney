@@ -563,7 +563,7 @@ public:
           }
         }
 
-        // TODO : check if we have a report that explicitively uses one of our payees
+        // TODO : check if we have a report that explicitly uses one of our payees
         //        and issue an appropriate warning
         try {
           // now loop over all transactions and reassign payee

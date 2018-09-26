@@ -37,7 +37,7 @@ class payeeIdentifierLoader;
  * This also defines the helper ::ptr, ::constPtr and className::ptr cloneSharedPtr()
  *
  * @param PIDID the payeeIdentifier id, e.g. "org.kmymoney.payeeIdentifier.swift". Must be
- * unique among all payeeIdentifiers as it is used internaly to store data, to compare
+ * unique among all payeeIdentifiers as it is used internally to store data, to compare
  * types and for type casting (there must not be more than one class which uses that pidid).
  */
 #define PAYEEIDENTIFIER_IID(className, iid) \
@@ -63,13 +63,13 @@ class payeeIdentifierLoader;
  *
  * Any payee (@ref MyMoneyPayee) can have several payeeIdentifiers.
  *
- * The online banking system uses payeeIdentifiers to dertermine if it is able so create a credit-transfer
+ * The online banking system uses payeeIdentifiers to determine if it is able so create a credit-transfer
  * to a given payee. During import the payeeIdentifiers are used to find a payee.
  *
  * You should use the shared pointer payeeIdentifier::ptr to handle payeeIdentifiers. To copy them used
  * cloneSharedPtr().
  *
- * @intenal First this is more complex than creating a superset of all possible identifiers. But there
+ * @internal First this is more complex than creating a superset of all possible identifiers. But there
  * are many of them. And using this method it is a lot easier to create the comparison operators and
  * things like isValid().
  *

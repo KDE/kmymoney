@@ -18,7 +18,7 @@
 
 #include "mymoneytransactionfilter-test.h"
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 #include "mymoneyenums.h"
 #include "mymoneytransactionfilter.h"

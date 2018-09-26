@@ -25,7 +25,7 @@
 #include "kmm_mymoney_export.h"
 
 /**
-  * POD containig contact data, these fields are retrived based on an email address.
+  * POD containing contact data, these fields are retrieved based on an email address.
   */
 struct ContactData {
   QString email;

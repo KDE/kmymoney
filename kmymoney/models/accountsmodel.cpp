@@ -360,7 +360,7 @@ public:
     MyMoneyMoney balance;
     // a closed account has a zero balance by definition
     if (!account.isClosed()) {
-      // account.balance() is not compatable with stock accounts
+      // account.balance() is not compatible with stock accounts
       if (account.isInvest())
         balance = m_file->balance(account.id());
       else
@@ -798,7 +798,7 @@ QString AccountsModel::getHeaderName(const Column column)
 void AccountsModel::checkNetWorth()
 {
   Q_D(AccountsModel);
-  // compute the net woth
+  // compute the net worth
   QModelIndexList assetList = match(index(0, 0),
                                     (int)Role::ID,
                                     MyMoneyFile::instance()->asset().id(),

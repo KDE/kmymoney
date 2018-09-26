@@ -356,7 +356,7 @@ public:
         // calculate the number of payments out of the other information
         val = calc.numPayments();
         if (val == 0)
-          throw MYMONEYEXCEPTION_CSTRING("incorrect fincancial calculation");
+          throw MYMONEYEXCEPTION_CSTRING("incorrect financial calculation");
 
         // if the number of payments has a fractional part, then we
         // round it to the smallest integer and calculate the balloon payment
@@ -389,7 +389,7 @@ public:
             || (q->field("lendButton").toBool() && val > 0 && qAbs(val) > qAbs(calc.payment()))) {
           // case a)
           qDebug("Future Value is %f", val);
-          throw MYMONEYEXCEPTION_CSTRING("incorrect fincancial calculation");
+          throw MYMONEYEXCEPTION_CSTRING("incorrect financial calculation");
 
         } else if ((q->field("borrowButton").toBool() && val < 0 && qAbs(val) <= qAbs(calc.payment()))
                    || (q->field("lendButton").toBool() && val > 0 && qAbs(val) <= qAbs(calc.payment()))) {
@@ -402,7 +402,7 @@ public:
 
         if (q->field("finalPaymentEditValid").toBool()) {
           if ((q->field("finalPaymentEdit").value<MyMoneyMoney>().abs() - refVal.abs()).abs().toDouble() > 1) {
-            throw MYMONEYEXCEPTION_CSTRING("incorrect fincancial calculation");
+            throw MYMONEYEXCEPTION_CSTRING("incorrect financial calculation");
           }
           result = i18n("KMyMoney has successfully verified your loan information.");
         }

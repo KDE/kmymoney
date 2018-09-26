@@ -124,7 +124,7 @@ Qt::ItemFlags payeeIdentifierModel::flags(const QModelIndex &index) const
 }
 
 /**
- * @intenal The internalId of QModelIndex is set to the row of the parent or invalidParent if there is no
+ * @internal The internalId of QModelIndex is set to the row of the parent or invalidParent if there is no
  * parent.
  *
  * @todo Qt5: the type of the internal id changed!

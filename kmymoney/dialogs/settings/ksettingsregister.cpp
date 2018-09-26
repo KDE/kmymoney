@@ -41,7 +41,7 @@ KSettingsRegister::KSettingsRegister(QWidget* parent) :
   ui->kcfg_sortReconcileView->hide();
   ui->kcfg_sortSearchView->hide();
 
-  // setup connections, so that the sort optios get loaded once the edit fields are filled
+  // setup connections, so that the sort options get loaded once the edit fields are filled
   connect(ui->kcfg_sortNormalView, &QLineEdit::textChanged, this, &KSettingsRegister::slotLoadNormal);
   connect(ui->kcfg_sortReconcileView, &QLineEdit::textChanged, this, &KSettingsRegister::slotLoadReconcile);
   connect(ui->kcfg_sortSearchView, &QLineEdit::textChanged, this, &KSettingsRegister::slotLoadSearch);

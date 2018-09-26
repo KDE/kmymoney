@@ -227,7 +227,7 @@ void MyMoneyStatementReader::Private::previouslyUsedCategories(const QString& in
       MyMoneySplit s = (*it_t).second;
 
       acc = file->account(s.accountId());
-      // stock split shouldn't be fee or interest bacause it won't play nice with dissectTransaction
+      // stock split shouldn't be fee or interest because it won't play nice with dissectTransaction
       // it was caused by processTransactionEntry adding splits in wrong order != with manual transaction entering
       if (acc.accountGroup() == Account::Type::Expense || acc.accountGroup() == Account::Type::Income) {
         foreach (auto sNew , t.splits()) {
@@ -313,7 +313,7 @@ void MyMoneyStatementReader::Private::assignUniqueBankID(MyMoneySplit& s, const 
 void MyMoneyStatementReader::Private::setupPrice(MyMoneySplit &s, const MyMoneyAccount &splitAccount, const MyMoneyAccount &transactionAccount, const QDate &postDate)
 {
   if (transactionAccount.currencyId() != splitAccount.currencyId()) {
-    // a currency converstion is needed assume that split has already a proper value
+    // a currency conversion is needed assume that split has already a proper value
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneySecurity toCurrency = file->security(splitAccount.currencyId());
     MyMoneySecurity fromCurrency = file->security(transactionAccount.currencyId());
@@ -721,7 +721,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         }
       }
 
-      // If there was no stock account under the m_acccount investment account,
+      // If there was no stock account under the m_account investment account,
       // add one using the security.
       if (!found) {
         // The security should always be available, because the statement file

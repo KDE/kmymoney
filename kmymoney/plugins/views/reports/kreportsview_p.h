@@ -138,7 +138,7 @@ public:
   void print();
   void toggleChart();
   /**
-   * Updates information about ploted chart in report's data
+   * Updates information about plotted chart in report's data
    */
   void updateDataRange();
   void copyToClipboard();
@@ -406,7 +406,7 @@ void KReportTab::toggleChart()
 
 void KReportTab::updateDataRange()
 {
-  QList<DataDimension> grids = m_chartView->coordinatePlane()->gridDimensionsList();    // get dimmensions of ploted graph
+  QList<DataDimension> grids = m_chartView->coordinatePlane()->gridDimensionsList();    // get dimensions of plotted graph
   if (grids.isEmpty())
     return;
   QChar separator = locale().groupSeparator();

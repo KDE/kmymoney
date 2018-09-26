@@ -177,7 +177,7 @@ onlineTask* onlineJobAdministration::createOnlineTaskByXml(const QString& iid, c
 }
 
 /**
- * @interanl Using KPluginFactory to create the plugins seemed to be good idea. The drawback is that it does not support to create non QObjects directly.
+ * @internal Using KPluginFactory to create the plugins seemed to be good idea. The drawback is that it does not support to create non QObjects directly.
  * This made this function way longer than needed and adds many checks.
  *
  * @fixme Delete created tasks

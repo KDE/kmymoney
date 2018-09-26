@@ -42,7 +42,7 @@ public:
   virtual QString accountId() const;
 
   /**
-   * This method is used to modify the visibilty of the
+   * This method is used to modify the visibility of the
    * empty entry at the end of the ledger. The default
    * for the parameter @a show is @c true.
    */

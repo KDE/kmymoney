@@ -194,7 +194,7 @@ void KSelectDatabaseDlg::slotDriverSelected(int idx)
   m_requiredFields->removeAll();
 
   if (dbDriver->requiresExternalFile()) {
-    // currently, only sqlite requres an external file
+    // currently, only sqlite requires an external file
     m_sqliteSelected = true;
     if (m_mode == QIODevice::WriteOnly) {
       m_widget->urlSqlite->setMode(KFile::Mode::File);

@@ -297,7 +297,7 @@ public:
   /**
    * This method checks if an account can be closed and enables/disables
    * the close account action
-   * If disabled, it sets a tooltip explaning why it cannot be closed
+   * If disabled, it sets a tooltip explaining why it cannot be closed
    * @brief enableCloseAccountAction
    * @param acc reference to MyMoneyAccount object in question
    */

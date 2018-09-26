@@ -88,7 +88,7 @@ public:
     * This method returns the version of the underlying file. It
     * is used by the MyMoney objects contained in a MyMoneyStorageBin object (e.g.
     * MyMoneyAccount, MyMoneyInstitution, MyMoneyTransaction, etc.) to
-    * determine the layout used when reading/writing a persistant file.
+    * determine the layout used when reading/writing a persistent file.
     * A parameter is used to determine the direction.
     *
     * @param dir information about the direction (reading/writing). The

@@ -98,11 +98,11 @@ public:
   /**
     * This method allows to modify the behavior of the widget
     * such that it accepts an empty value (all blank) or not.
-    * The default is to not accept an emtpy input and to
+    * The default is to not accept an empty input and to
     * convert an empty field into 0.00 upon loss of focus.
     *
     * @param allowed if @a true, empty input is allowed, if @a false
-    *                emtpy input will be converted to 0.00
+    *                empty input will be converted to 0.00
     */
   void setAllowEmpty(bool allowed = true);
 
@@ -134,7 +134,7 @@ public Q_SLOTS:
 Q_SIGNALS:
   /**
     * This signal is sent, when the focus leaves this widget and
-    * the amount has been changed by user during this focus possesion.
+    * the amount has been changed by user during this focus possession.
     */
   void valueChanged(const QString& text);
 

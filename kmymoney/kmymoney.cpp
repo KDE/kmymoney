@@ -2897,7 +2897,7 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
   }
 
   // in case the consistency check was OK, we get a single line as result
-  // in all errneous cases, we get more than one line and force the
+  // in all erroneous cases, we get more than one line and force the
   // display of them.
 
   if (alwaysDisplayResult || m_consistencyCheckResult.size() > 1) {
@@ -3137,7 +3137,7 @@ QList<QString> KMyMoneyApp::instanceList() const
     // build a list of service names of all running kmymoney applications without this one
     for (it = apps.constBegin(); it != apps.constEnd(); ++it) {
       // please change this method of creating a list of 'all the other kmymoney instances that are running on the system'
-      // since assuming that D-Bus creates service names with org.kde.kmymoney-PID is an observation I don't think that it's documented somwhere
+      // since assuming that D-Bus creates service names with org.kde.kmymoney-PID is an observation I don't think that it's documented somewhere
       if ((*it).indexOf("org.kde.kmymoney-") == 0) {
         uint thisProcPid = platformTools::processId();
         if ((*it).indexOf(QString("org.kde.kmymoney-%1").arg(thisProcPid)) != 0)

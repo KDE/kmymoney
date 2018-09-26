@@ -329,7 +329,7 @@ InvestTransactionEditor::InvestTransactionEditor(TransactionEditorContainer* reg
                       lastPostDate)
 {
   Q_D(InvestTransactionEditor);
-  // after the gometries of the container are updated hide the widgets which are not needed by the current activity
+  // after the geometries of the container are updated hide the widgets which are not needed by the current activity
   connect(d->m_regForm, &TransactionEditorContainer::geometriesUpdated, this, &InvestTransactionEditor::slotTransactionContainerGeometriesUpdated);
 
   // dissect the transaction into its type, splits, currency, security etc.

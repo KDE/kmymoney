@@ -244,7 +244,7 @@ bool kOnlineTransferForm::checkEditWidget(IonlineJobEdit* widget)
   return false;
 }
 
-/** @todo auto set another widget if a loseless convert is possible */
+/** @todo auto set another widget if a lossless convert is possible */
 void kOnlineTransferForm::checkNotSupportedWidget()
 {
   if (!checkEditWidget()) {

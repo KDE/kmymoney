@@ -121,7 +121,7 @@ public:
     * Method to prepare the ledger view to create a new transaction.
     * Returns if successful or not.
     *
-    * retval true Emtpy transaction selected.
+    * retval true Empty transaction selected.
     * retval false Not successful (e.g. already editing a transaction)
     */
   bool selectEmptyTransaction();
@@ -154,7 +154,7 @@ public Q_SLOTS:
    *
    * @param account account for which reconciliation mode is activated.
    *                Default  is MyMoneyAccount().
-   * @param reconciliationDate date of statment
+   * @param reconciliationDate date of statement
    * @param endingBalance The calculated ending balance for the statement
    *                Default ist 0.
    */
@@ -165,9 +165,9 @@ public Q_SLOTS:
   void slotShowTransactionMenu(const MyMoneySplit &sp);
 
   /**
-   * Slot that should be entered after entering all due scheduled transasactions
+   * Slot that should be entered after entering all due scheduled transactions
    * @param req is requester that made request to enter scheduled transactions
-   * it's here to avoid reconcilation in case of random entering of scheduled transactions request
+   * it's here to avoid reconciliation in case of random entering of scheduled transactions request
    */
   void slotContinueReconciliation();
 

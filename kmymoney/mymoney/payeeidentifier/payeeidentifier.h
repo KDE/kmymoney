@@ -33,7 +33,7 @@
 #define PAYEEIDENTIFIERBADCASTEXCEPTION payeeIdentifier::badCast("Casted payeeIdentifier with wrong type " __FILE__ ":" KMM_TOSTRING(__LINE__))
 #define PAYEEIDENTIFIEREMPTYEXCEPTION payeeIdentifier::empty("Requested payeeIdentifierData of empty payeeIdentifier " __FILE__ ":" KMM_TOSTRING(__LINE__))
 
-// Q_DECLARE_METATYPE requries this include
+// Q_DECLARE_METATYPE requires this include
 
 class QDomDocument;
 class QDomElement;

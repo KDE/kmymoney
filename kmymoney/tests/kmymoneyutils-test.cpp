@@ -60,7 +60,7 @@ void KMyMoneyUtilsTest::testNextCheckNumber()
   acc.setValue("lastNumberUsed", QLatin1String("No 123 ABC"));
   QVERIFY(KMyMoneyUtils::nextCheckNumber(acc) == QLatin1String("No 124 ABC"));
 
-  // a number containig a dash (e.g. invoice number)
+  // a number containing a dash (e.g. invoice number)
   acc.setValue("lastNumberUsed", QLatin1String("No 123-001 ABC"));
   QVERIFY(KMyMoneyUtils::nextCheckNumber(acc) == QLatin1String("No 123-002 ABC"));
 

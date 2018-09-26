@@ -848,7 +848,7 @@ void MyMoneyScheduleTest::testProcessingDates()
   // make sure fall back works
 
   MyMoneySchedule s;
-  // Check there is no processing caledar defined.
+  // Check there is no processing calendar defined.
   QVERIFY(s.processingCalendar() == nullptr);
   // This should be a processing day.
   QCOMPARE(s.isProcessingDate(QDate(2009, 12, 31)), true);

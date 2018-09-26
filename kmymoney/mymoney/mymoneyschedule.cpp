@@ -67,7 +67,7 @@ MyMoneySchedule::MyMoneySchedule(const QString& name,
     MyMoneyObject(*new MyMoneySchedulePrivate)
 {
   Q_D(MyMoneySchedule);
-  // Set up the values possibly differeing from defaults
+  // Set up the values possibly differing from defaults
   d->m_name = name;
   d->m_occurrence = occurrence;
   d->m_occurrenceMultiplier = occurrenceMultiplier;

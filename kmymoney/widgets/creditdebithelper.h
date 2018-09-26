@@ -48,8 +48,8 @@ public:
   ~CreditDebitHelper();
 
   /**
-   * Retruns the value of the widget that is filled.
-   * A credit is retruned as negative, a debit as positive value.
+   * Returns the value of the widget that is filled.
+   * A credit is returned as negative, a debit as positive value.
    */
   MyMoneyMoney value() const;
 

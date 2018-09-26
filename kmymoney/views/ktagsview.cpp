@@ -684,7 +684,7 @@ void KTagsView::slotDeleteTag()
 
       newTag = file->tag(tag_id);
 
-      // TODO : check if we have a report that explicitively uses one of our tags
+      // TODO : check if we have a report that explicitly uses one of our tags
       //        and issue an appropriate warning
       try {
         // now loop over all transactions and reassign tag

@@ -140,7 +140,7 @@ protected:
     * This method (re-)loads the widgets with the transaction information
     * contained in @a m_transaction and @a m_split.
     *
-    * @param action preset the edit wigdets for @a action if no transaction
+    * @param action preset the edit widgets for @a action if no transaction
     *               is present
     */
   void loadEditWidgets(eWidgets::eRegister::Action action) override;

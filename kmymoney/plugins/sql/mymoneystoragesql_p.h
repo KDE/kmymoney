@@ -916,7 +916,7 @@ public:
    * @name writeMethods
    * @{
    * These methods bind the data fields of MyMoneyObjects to a given query and execute the query.
-   * This is helpfull as the query has usually an update and a insert format.
+   * This is helpful as the query has usually an update and a insert format.
    */
   void writeInstitutionList(const QList<MyMoneyInstitution>& iList, QSqlQuery& query)
   {

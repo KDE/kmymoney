@@ -785,7 +785,7 @@ void MyMoneyQifReader::processMSAccountEntry(const eMyMoney::Account::Type accou
     // Then Quicken issues line 6 but since the account does not carry any
     // transaction does not write an end delimiter. Arrrgh! So we end up with
     // a QIF entry comprising of lines 6-11 and end up in this routine. Actually,
-    // lines 7-11 are the leadin for the next account. So we check here if
+    // lines 7-11 are the leading for the next account. So we check here if
     // the !Type:xxx record also contains an !Account line and process the
     // entry as required.
     //

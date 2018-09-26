@@ -469,7 +469,7 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
 #if 0
   // Even more sadly, this logic is BROKEN.  It consistently results in bogus total
   // values, because of rounding errors in the price.  A more through solution would
-  // be to test if the comission alone is causing a discrepency, and adjust in that case.
+  // be to test if the commission alone is causing a discrepancy, and adjust in that case.
 
   if (data.invtransactiontype_valid && data.unitprice_valid) {
     double proper_total = t.m_dShares * data.unitprice + t.m_moneyFees;

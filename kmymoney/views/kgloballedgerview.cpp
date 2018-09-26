@@ -487,7 +487,7 @@ void KGlobalLedgerView::slotSetReconcileAccount(const MyMoneyAccount& acc, const
       d->m_buttonbar->addAction(pActions[Action::FinishReconciliation]);
       // when we start reconciliation, we need to reload the view
       // because no data has been changed. When postponing or finishing
-      // reconciliation, the data change in the engine takes care of updateing
+      // reconciliation, the data change in the engine takes care of updating
       // the view.
       refresh();
     }

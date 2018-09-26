@@ -40,7 +40,7 @@
 #include "mymoneyenums.h"
 
 /*
- * CENTURY_BREAK is used to identfy the century for a two digit year
+ * CENTURY_BREAK is used to identify the century for a two digit year
  *
  * if yr is < CENTURY_BREAK it is in 2000
  * if yr is >= CENTURY_BREAK it is in 1900
@@ -813,7 +813,7 @@ void MyMoneyQifProfile::autoDetect(const QStringList& lines)
   QStringList::const_iterator it;
   int datesScanned = 0;
   // section: used to switch between different QIF sections,
-  // because the Record identifiers are ambigous between sections
+  // because the Record identifiers are ambiguous between sections
   // eg. in transaction records, T identifies a total amount, in
   // account sections it's the type.
   //

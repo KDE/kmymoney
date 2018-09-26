@@ -45,7 +45,7 @@ class OfxHeaderVersion;
   */
 
 /**
-  * This class implementes a wizard for setting up an existing account
+  * This class implements a wizard for setting up an existing account
   * with online banking.
   *
   * The user is asked to choose his bank from the supported bank, and

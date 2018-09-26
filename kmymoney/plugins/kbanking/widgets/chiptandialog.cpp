@@ -33,7 +33,7 @@
 
 #include <KLocalizedString>
 
-// Prject Includes
+// Project Includes
 #include "kbankingsettings.h"
 
 chipTanDialog::chipTanDialog(QWidget* parent)

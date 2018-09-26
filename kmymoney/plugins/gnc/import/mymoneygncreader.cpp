@@ -2634,7 +2634,7 @@ void MyMoneyGncReader::getPriceSource(MyMoneySecurity stock, QString gncSource)
     return;
   }
   // first check if we have already asked about this source
-  // (mapSources is initialy empty. We may be able to pre-fill it with some equivalent
+  // (mapSources is initially empty. We may be able to pre-fill it with some equivalent
   //  sources, if such things do exist. User feedback may help here.)
   QMap<QString, QString>::const_iterator it;
   for (it = m_mapSources.constBegin(); it != m_mapSources.constEnd(); ++it) {

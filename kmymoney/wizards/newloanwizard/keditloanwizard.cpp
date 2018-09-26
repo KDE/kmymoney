@@ -377,7 +377,7 @@ bool KEditLoanWizard::validateCurrentPage()
 
     // if interest rate and payment amount is given, then force
     // the term to be recalculated. The final payment is adjusted to
-    // 0 if the loan was ment to be fully repayed
+    // 0 if the loan was meant to be fully repayed
     d->ui->m_durationPage->updateTermWidgets(d->m_account.term());
     if (field("interestRateEditValid").toBool()
         && field("paymentEditValid").toBool()) {

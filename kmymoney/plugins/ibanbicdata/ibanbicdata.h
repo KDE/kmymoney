@@ -37,7 +37,7 @@ namespace eIBANBIC {enum bicAllocationStatus : unsigned int;}
  * Kind of a static private class of payeeIdentifier::ibanBic. It loads the iban/bic data and queries the
  * databases.
  *
- * @interal This class is made if a cache will be needed in future.
+ * @internal This class is made if a cache will be needed in future.
  */
 class ibanBicData : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::DataPlugin
 {
@@ -70,7 +70,7 @@ public:
    * @brief Create a BIC from a IBAN and get the institutes name
    *
    * first: bic, always 11 characters long.
-   * second: instution name
+   * second: institution name
    *
    * QString::isNull() == true means an internal error occurred, QString::isEmpty() == true means there is no data
    */

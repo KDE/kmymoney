@@ -839,7 +839,7 @@ bool Transaction::matches(const RegisterFilter& filter) const
       }
     }
     const MyMoneyAccount& acc = file->account(split.accountId());
-    // search for account hierachy
+    // search for account hierarchy
     if (filter.text.contains(MyMoneyFile::AccountSeparator)) {
       QStringList names;
       MyMoneyAccount current = acc;

@@ -1311,7 +1311,7 @@ void MyMoneyXmlContentHandler::writeOnlineJob(const onlineJob &job, QDomDocument
   QDomElement taskEl = document.createElement(elementName(Element::OnlineJob::OnlineTask));
   taskEl.setAttribute(attributeName(Attribute::OnlineJob::IID), job.taskIid());
   try {
-    job.task()->writeXML(document, taskEl); // throws execption if there is no task
+    job.task()->writeXML(document, taskEl); // throws exception if there is no task
     el.appendChild(taskEl); // only append child if there is something to append
   } catch (const onlineJob::emptyTask &) {
   }

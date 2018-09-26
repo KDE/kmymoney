@@ -371,7 +371,7 @@ public:
   void setupFieldDecimalSymbol(int col);
 
   /**
-  * Helper method to get all column numbers that were pointed as nummeric
+  * Helper method to get all column numbers that were pointed as numeric
   */
   QList<int> getNumericalColumns();
 

@@ -46,7 +46,7 @@ class MyMoneyKeyValueContainer;
   * replaced with an arbitrary number which matches the sign of the original.
   *
   * The purpose of this class is to give users a way to send a developer
-  * their file  without comprimising their financial data.  If a user
+  * their file  without compromising their financial data.  If a user
   * encounters an error, they should try saving the anonymous version of the
   * file and see if the error is still there.  If so, they should notify the
   * list of the problem, and then when requested, send the anonymous file

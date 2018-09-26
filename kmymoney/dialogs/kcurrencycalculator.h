@@ -79,7 +79,7 @@ public:
    * a) based on the resulting amount or
    * b) based on direct price entry.
    *
-   * In case a) the price is returned without precision loss as the devision
+   * In case a) the price is returned without precision loss as the division
    * of the amount entered by the user and the @a value passed as argument.
    * In case b) it is returned with the selected global price precision.
    */

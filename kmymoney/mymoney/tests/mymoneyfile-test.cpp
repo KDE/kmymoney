@@ -2561,7 +2561,7 @@ void MyMoneyFileTest::testClearedBalance()
 
 void MyMoneyFileTest::testAdjustedValues()
 {
-  // create a checking account, an expeense, an investment account and a stock
+  // create a checking account, an expense, an investment account and a stock
   AddOneAccount();
 
   MyMoneyAccount exp1;
@@ -2787,7 +2787,7 @@ void MyMoneyFileTest::testEmptyFilter()
 
 void MyMoneyFileTest::testAddSecurity()
 {
-  // create a checking account, an expeense, an investment account and a stock
+  // create a checking account, an expense, an investment account and a stock
   AddOneAccount();
 
   MyMoneyAccount exp1;

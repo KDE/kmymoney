@@ -324,7 +324,7 @@ public:
   bool m_mixedTime;
   /**
    * This stores the column for the current date
-   * This value is calculated dinamically and thus it is not saved in the file
+   * This value is calculated dynamically and thus it is not saved in the file
    */
   int m_currentDateColumn;
   /**

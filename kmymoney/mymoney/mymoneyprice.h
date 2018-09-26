@@ -92,7 +92,7 @@ public:
     * object is invalid (see isValid()) MyMoneyMoney(1,1) is returned.
     *
     * @param id return price to be the factor to be used to convert a value into
-    *           the correcponding value in security @p id.
+    *           the corresponding value in security @p id.
     *
     * @return returns the exchange rate (price) as MyMoneyMoney object.
     *

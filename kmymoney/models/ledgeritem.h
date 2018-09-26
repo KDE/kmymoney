@@ -83,12 +83,12 @@ public:
   virtual QString costCenterId() const = 0;
 
   /**
-   * Returns the full name and hierarchiy of the account.
+   * Returns the full name and hierarchy of the account.
    */
   virtual QString account() const = 0;
 
   /**
-   * Returns the full name and hierarchiy of the counter account. If no counter
+   * Returns the full name and hierarchy of the counter account. If no counter
    * split is present, it returns an empty string, in case more than one counter
    * split is present it returns the fixed string 'Split transaction'.
    */

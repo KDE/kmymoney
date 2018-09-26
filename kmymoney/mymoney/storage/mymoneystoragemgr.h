@@ -83,8 +83,8 @@ namespace eMyMoney { namespace Schedule { enum class PaymentType; } }
   * method and etc. and can then be accessed through the
   * account() method and etc.. All data is loaded into memory, modified
   * and kept there. It is the subject of an outside object to store the
-  * modified data in a persistant storage area using the accountList() method and etc.
-  * As indication, if data has been changed, the retrun value
+  * modified data in a persistent storage area using the accountList() method and etc.
+  * As indication, if data has been changed, the return value
   * of the method dirty() can be used.
   */
 
@@ -423,7 +423,7 @@ public:
   MyMoneyTransaction transaction(const QString& account, const int idx) const;
 
   /**
-    * This method is used to determince, if the account with the
+    * This method is used to determine, if the account with the
     * given ID is referenced by any split in m_transactionList.
     *
     * @param id id of the account to be checked for
@@ -814,7 +814,7 @@ public:
     * according to the filter criteria passed as arguments.
     *
     * @param accountId only search for scheduled transactions that reference
-    *                  accound @p accountId. If accountId is the empty string,
+    *                  account @p accountId. If accountId is the empty string,
     *                  this filter is off. Default is @p QString().
     * @param type      only schedules of type @p type are searched for.
     *                  See eMyMoney::Schedule::Type for details.

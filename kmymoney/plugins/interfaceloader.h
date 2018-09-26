@@ -36,7 +36,7 @@ namespace KMyMoneyPlugin
 /**
  * @internal
  *
- * This class is used as dead drop to comunicate between two compile targets which cannot do
+ * This class is used as dead drop to communicate between two compile targets which cannot do
  * this directly.
  * It is only used by the classes which are named friends. To receive an instance of
  * this class @ref pluginInterfaces() is used.
