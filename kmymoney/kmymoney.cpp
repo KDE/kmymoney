@@ -1173,7 +1173,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
     // according to https://docs.appimage.org/packaging-guide/ingredients.html#open-source-applications
     // QStandardPaths::AppDataLocation is unreliable on AppImages, so apply workaround here in case we fail to find icons
     QString customIconAbsolutePath;
-    const auto appImageAppDataLocation = QCoreApplication::applicationDirPath() + QLatin1String("/../share/kmymoney/") + customIconRelativePath;
+    const auto appImageAppDataLocation = QString("%1%2%3").arg(QCoreApplication::applicationDirPath(), QString("/../share/kmymoney/"), customIconRelativePath);
     if (QFile::exists(appImageAppDataLocation )) {
       customIconAbsolutePath = appImageAppDataLocation ;
     } else {
@@ -2942,7 +2942,8 @@ void KMyMoneyApp::Private::setThemedCSS()
 #else
   // according to https://docs.appimage.org/packaging-guide/ingredients.html#open-source-applications
   // QStandardPaths::AppDataLocation is unreliable on AppImages, so apply workaround here in case we fail to find icons
-  const auto appImageAppDataLocation = QCoreApplication::applicationDirPath() + QLatin1String("/../share/kmymoney") + rcDir;
+  // watch out for QStringBuilder here; for yet unknown reason it causes segmentation fault on startup
+  const auto appImageAppDataLocation = QString("%1%2%3").arg(QCoreApplication::applicationDirPath(), QString("/../share/kmymoney"), rcDir);
   if (QFile::exists(appImageAppDataLocation + CSSnames.first())) {
     defaultCSSDirs.append(appImageAppDataLocation);
   } else {
