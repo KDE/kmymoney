@@ -857,10 +857,17 @@ void MyMoneyXmlContentHandlerTest::readWriteTag()
   QDomElement parent = doc.createElement("Test");
   doc.appendChild(parent);
   MyMoneyTag tag1("some random id"); //if the ID isn't set, w ethrow an exception
+  tag1.setName(QStringLiteral("MyTagName"));
+  tag1.setNamedTagColor(QStringLiteral("red"));
+  tag1.setNotes(QStringLiteral("Notes for a tag"));
+
   MyMoneyXmlContentHandler::writeTag(tag1, doc, parent);
   QDomElement el = parent.firstChild().toElement();
   QVERIFY(!el.isNull());
   auto tag2 = MyMoneyXmlContentHandler::readTag(el);
+  QCOMPARE(tag1.name(), tag2.name());
+  QCOMPARE(tag1.notes(), tag2.notes());
+  QCOMPARE(tag1.tagColor(), tag2.tagColor());
 }
 
 void MyMoneyXmlContentHandlerTest::readInstitution()
