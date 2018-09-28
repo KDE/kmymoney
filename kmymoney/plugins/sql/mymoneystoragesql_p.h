@@ -1772,11 +1772,12 @@ public:
 
   void readPrices()
   {
-  //  try {
-  //    m_storage->addPrice(MyMoneyPrice(from, to,  date, rate, source));
-  //  } catch (const MyMoneyException &) {
-  //    throw;
-  //  }
+    Q_Q(MyMoneyStorageSql);
+    try {
+      m_storage->loadPrices(q->fetchPrices());
+    } catch (const MyMoneyException &) {
+      throw;
+    }
   }
 
   void readCurrencies()
