@@ -280,9 +280,18 @@ void MyMoneyTransactionFilterTest::testMatchTransactionDate()
   QVERIFY(filter.match(transaction));
   QCOMPARE(filter.matchingSplits().size(), 2);
 
+  // check same date
+  filter.setDateFilter(QDate(2014, 1, 2), QDate(2014, 1, 2));
+  QVERIFY(filter.match(transaction));
+  QCOMPARE(filter.matchingSplits().size(), 2);
+
   filter.setReportAllSplits(false);
   QVERIFY(filter.match(transaction));
   QCOMPARE(filter.matchingSplits().size(), 1);
+
+  // check bad date order
+  filter.setDateFilter(QDate(2014, 1, 2), QDate(2014, 1, 1));
+  QVERIFY(!filter.match(transaction));
 
   filter.setDateFilter(QDate(2014, 1, 3), QDate(2014, 1, 5));
   QVERIFY(!filter.match(transaction));
