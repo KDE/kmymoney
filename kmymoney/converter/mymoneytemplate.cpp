@@ -450,7 +450,12 @@ bool MyMoneyTemplate::addAccountStructure(QDomElement& parent, const MyMoneyAcco
     account.setAttribute(QString("name"), acc.name());
   account.setAttribute(QString("type"), acc.accountType());
 
-  // FIXME: add tax flag stuff
+  if (acc.pairs().contains("Tax")) {
+    QDomElement flag = m_doc.createElement("flag");
+    flag.setAttribute(QString("name"), "Tax");
+    flag.setAttribute(QString("value"), acc.value("Tax"));
+    account.appendChild(flag);
+  }
   if (m_vatAccountMap.contains(acc.id()))
     account.setAttribute(QString("id"), m_vatAccountMap[acc.id()]);
 
