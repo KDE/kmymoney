@@ -39,12 +39,12 @@ MyMoneyTag::MyMoneyTag(const QString &id) :
 {
 }
 
-MyMoneyTag::MyMoneyTag(const QString& name, const QColor& tabColor) :
+MyMoneyTag::MyMoneyTag(const QString& name, const QColor& tagColor) :
   MyMoneyObject(*new MyMoneyTagPrivate)
 {
   Q_D(MyMoneyTag);
   d->m_name      = name;
-  d->m_tag_color = tabColor;
+  d->m_tag_color = tagColor;
 }
 
 MyMoneyTag::MyMoneyTag(const MyMoneyTag& other) :
@@ -55,8 +55,6 @@ MyMoneyTag::MyMoneyTag(const MyMoneyTag& other) :
 MyMoneyTag::MyMoneyTag(const QString& id, const MyMoneyTag& other) :
   MyMoneyObject(*new MyMoneyTagPrivate(*other.d_func()), id)
 {
-  Q_D(MyMoneyTag);
-  d->m_tag_color = QColor("black");
 }
 
 MyMoneyTag::~MyMoneyTag()

@@ -36,7 +36,16 @@ class MyMoneyTagPrivate : public MyMoneyObjectPrivate
 public:
 
   MyMoneyTagPrivate() :
-    m_closed(false)
+    m_closed(false),
+    m_tag_color(QColor("black"))
+  {
+  }
+
+  MyMoneyTagPrivate(const MyMoneyTagPrivate& d) :
+    m_name(d.m_name),
+    m_closed(d.m_closed),
+    m_tag_color(d.m_tag_color),
+    m_notes(d.m_notes)
   {
   }
 
