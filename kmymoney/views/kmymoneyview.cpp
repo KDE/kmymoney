@@ -199,6 +199,9 @@ void KMyMoneyView::slotFileOpened()
   if (viewBases.contains(View::OnlineJobOutbox))
     viewBases[View::OnlineJobOutbox]->executeCustomAction(eView::Action::InitializeAfterFileOpen);
 
+  if (viewBases.contains(View::Ledgers))
+    viewBases[View::Ledgers]->executeCustomAction(eView::Action::InitializeAfterFileOpen);
+
   #ifdef ENABLE_UNFINISHEDFEATURES
   static_cast<SimpleLedgerView*>(viewBases[View::NewLedgers])->openFavoriteLedgers();
   #endif

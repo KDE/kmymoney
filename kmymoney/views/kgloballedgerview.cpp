@@ -115,20 +115,27 @@ KGlobalLedgerView::~KGlobalLedgerView()
 
 void KGlobalLedgerView::executeCustomAction(eView::Action action)
 {
+  Q_D(KGlobalLedgerView);
   switch(action) {
     case eView::Action::Refresh:
       refresh();
       break;
 
     case eView::Action::SetDefaultFocus:
-      {
-        Q_D(KGlobalLedgerView);
-        QTimer::singleShot(0, d->m_registerSearchLine->searchLine(), SLOT(setFocus()));
-      }
+      // delay the setFocus call until the event loop is running
+      QMetaObject::invokeMethod(d->m_registerSearchLine->searchLine(), "setFocus", Qt::QueuedConnection);
       break;
 
     case eView::Action::DisableViewDepenedendActions:
       pActions[Action::SelectAllTransactions]->setEnabled(false);
+      break;
+
+    case eView::Action::InitializeAfterFileOpen:
+      d->m_lastSelectedAccountID.clear();
+      d->m_currentAccount = MyMoneyAccount();
+      if (d->m_accountComboBox) {
+        d->m_accountComboBox->setSelected(QString());
+      }
       break;
 
     default:
