@@ -1240,7 +1240,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   connect(d->m_progressTimer, SIGNAL(timeout()), this, SLOT(slotStatusProgressDone()));
 
   // connect the WebConnect server
-  connect(d->m_webConnect, SIGNAL(gotUrl(QUrl)), this, SLOT(webConnect(QUrl)));
+  connect(d->m_webConnect, &WebConnect::gotUrl, this, &KMyMoneyApp::webConnectUrl);
 
   // setup the initial configuration
   slotUpdateConfiguration(QString());
@@ -3130,6 +3130,11 @@ void KMyMoneyApp::slotEquityPriceUpdate()
   if (dlg->exec() == QDialog::Accepted && dlg != 0)
     dlg->storePrices();
   delete dlg;
+}
+
+void KMyMoneyApp::webConnectUrl(const QUrl url)
+{
+  QMetaObject::invokeMethod(this, "webConnect", Qt::QueuedConnection, Q_ARG(QString, url.path()), Q_ARG(QByteArray, QByteArray()));
 }
 
 void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)

@@ -526,7 +526,7 @@ public Q_SLOTS:
   void slotAccountNew(MyMoneyAccount&);
 
   void webConnect(const QString& sourceUrl, const QByteArray &asn_id);
-  void webConnect(const QUrl url) { webConnect(url.path(), QByteArray()); }
+  void webConnectUrl(const QUrl url);
 
 private:
   /**
