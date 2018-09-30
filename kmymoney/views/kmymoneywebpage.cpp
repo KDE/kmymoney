@@ -29,9 +29,11 @@
 #ifdef ENABLE_WEBENGINE
 bool MyQWebEnginePage::acceptNavigationRequest(const QUrl &url, NavigationType type, bool)
 {
-  if (type == NavigationTypeLinkClicked)
+  if (type == NavigationTypeLinkClicked) {
     emit urlChanged(url);
-  return false;
+    return false;
+  }
+  return true;
 }
 #else
 #include <QNetworkRequest>
