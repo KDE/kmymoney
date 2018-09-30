@@ -10,7 +10,8 @@ export KMYMONEY_SOURCES=$2
 
 # Save some frequently referenced locations in variables for ease of use / updating
 export APPDIR=$BUILD_PREFIX/kmymoney.appdir
-export PLUGINS=$APPDIR/usr/lib/plugins/kmymoney/
+export PLUGINS=$APPDIR/usr/lib/plugins/
+export APPIMAGEPLUGINS=$APPDIR/usr/plugins/
 
 # qjsonparser, used to add metadata to the plugins needs to work in a en_US.UTF-8 environment.
 # That's not always the case, so make sure it is
@@ -50,11 +51,20 @@ mv $APPDIR/usr/lib/x86_64-linux-gnu/*  $APPDIR/usr/lib
 rm -rf $APPDIR/usr/lib/x86_64-linux-gnu/
 
 # Step 3: Update the rpath in the various plugins we have to make sure they'll be loadable in an Appimage context
-for lib in $PLUGINS/*.so*; do
-  patchelf --set-rpath '$ORIGIN/../..' $lib;
+for lib in $PLUGINS/kmymoney/*.so*; do
+  patchelf --set-rpath '$ORIGIN/../../lib' $lib;
 done
 
-# Step 4: Build the image!!!
+# Step 4: Move plugins to loadable location in AppImage
+
+# Make sure our plugin directory already exists
+if [ ! -d $APPIMAGEPLUGINS ] ; then
+    mkdir -p $APPIMAGEPLUGINS
+fi
+
+mv $PLUGINS/* $APPIMAGEPLUGINS
+
+# Step 5: Build the image!!!
 linuxdeployqt $APPDIR/usr/share/applications/org.kde.kmymoney.desktop \
   -executable=$APPDIR/usr/bin/kmymoney \
   -qmldir=$DEPS_INSTALL_PREFIX/qml \

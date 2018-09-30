@@ -17,6 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <config-kmymoney.h>
 #include "csvimporter.h"
 
 // ----------------------------------------------------------------------------
@@ -39,12 +40,29 @@
 #include "statementinterface.h"
 #include "viewinterface.h"
 
+#ifdef IS_APPIMAGE
+#include <QCoreApplication>
+#include <QStandardPaths>
+#endif
+
 CSVImporter::CSVImporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, "csvimporter"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   Q_UNUSED(args);
-  setComponentName("csvimporter", i18n("CSV importer"));
-  setXMLFile("csvimporter.rc");
+  const auto componentName = QLatin1String("csvimporter");
+  const auto rcFileName = QLatin1String("csvimporter.rc");
+  setComponentName(componentName, i18n("CSV importer"));
+
+#ifdef IS_APPIMAGE
+  const QString rcFilePath = QCoreApplication::applicationDirPath() + QLatin1String("/../share/kxmlgui5/") + componentName + QLatin1Char('/') + rcFileName;
+  setXMLFile(rcFilePath);
+
+  const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+  setLocalXMLFile(localRcFilePath);
+#else
+  setXMLFile(rcFileName);
+#endif
+
   createActions();
   // For information, announce that we have been loaded.
   qDebug("Plugins: csvimporter loaded");

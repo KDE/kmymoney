@@ -15,6 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <config-kmymoney.h>
 #include "csvexporter.h"
 
 // ----------------------------------------------------------------------------
@@ -38,12 +39,29 @@
 #include "csvwriter.h"
 #include "viewinterface.h"
 
+#ifdef IS_APPIMAGE
+#include <QCoreApplication>
+#include <QStandardPaths>
+#endif
+
 CSVExporter::CSVExporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, "csvexporter"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   Q_UNUSED(args);
-  setComponentName("csvexporter", i18n("CSV exporter"));
-  setXMLFile("csvexporter.rc");
+  const auto componentName = QLatin1String("csvexporter");
+  const auto rcFileName = QLatin1String("csvexporter.rc");
+  setComponentName(componentName, i18n("CSV exporter"));
+
+#ifdef IS_APPIMAGE
+  const QString rcFilePath = QCoreApplication::applicationDirPath() + QLatin1String("/../share/kxmlgui5/") + componentName + QLatin1Char('/') + rcFileName;
+  setXMLFile(rcFilePath);
+
+  const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+  setLocalXMLFile(localRcFilePath);
+#else
+  setXMLFile(rcFileName);
+#endif
+
   createActions();
   // For information, announce that we have been loaded.
   qDebug("Plugins: csvexporter loaded");

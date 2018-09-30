@@ -15,6 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config-kmymoney.h>
 #include "sqlstorage.h"
 
 #include <memory>
@@ -52,6 +53,11 @@
 #include "kmymoneysettings.h"
 #include "kmymoneyenums.h"
 
+#ifdef IS_APPIMAGE
+#include <QCoreApplication>
+#include <QStandardPaths>
+#endif
+
 using namespace Icons;
 
 QUrlQuery SQLStorage::convertOldUrl(const QUrl& url)
@@ -83,8 +89,20 @@ SQLStorage::SQLStorage(QObject *parent, const QVariantList &args) :
   KMyMoneyPlugin::Plugin(parent, "sqlstorage"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   Q_UNUSED(args)
-  setComponentName("sqlstorage", i18n("SQL storage"));
-  setXMLFile("sqlstorage.rc");
+  const auto componentName = QLatin1String("sqlstorage");
+  const auto rcFileName = QLatin1String("sqlstorage.rc");
+  setComponentName(componentName, i18n("SQL storage"));
+
+#ifdef IS_APPIMAGE
+  const QString rcFilePath = QCoreApplication::applicationDirPath() + QLatin1String("/../share/kxmlgui5/") + componentName + QLatin1Char('/') + rcFileName;
+  setXMLFile(rcFilePath);
+
+  const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+  setLocalXMLFile(localRcFilePath);
+#else
+  setXMLFile(rcFileName);
+#endif
+
   createActions();
   // For information, announce that we have been loaded.
   qDebug("Plugins: sqlstorage loaded");

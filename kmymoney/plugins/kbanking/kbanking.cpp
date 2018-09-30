@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config-kmymoney.h>
 
 #include "kbanking.h"
@@ -91,6 +92,11 @@
 #ifdef KMM_DEBUG
 // Added an option to open the chipTanDialog from the menu for debugging purposes
 #include "chiptandialog.h"
+#endif
+
+#ifdef IS_APPIMAGE
+#include <QCoreApplication>
+#include <QStandardPaths>
 #endif
 
 class KBanking::Private
@@ -173,6 +179,8 @@ KBanking::~KBanking()
 
 void KBanking::plug()
 {
+  const auto componentName = QLatin1String("kbanking");
+  const auto rcFileName = QLatin1String("kbanking.rc");
   m_kbanking = new KBankingExt(this, "KMyMoney");
 
   d->passwordCacheTimer = new QTimer(this);
@@ -202,8 +210,18 @@ void KBanking::plug()
 
     if (m_kbanking->init() == 0) {
       // Tell the host application to load my GUI component
-      setComponentName("kbanking", "KBanking");
-      setXMLFile("kbanking.rc");
+      setComponentName(componentName, "KBanking");
+
+#ifdef IS_APPIMAGE
+      const QString rcFilePath = QCoreApplication::applicationDirPath() + QLatin1String("/../share/kxmlgui5/") + componentName + QLatin1Char('/') + rcFileName;
+      setXMLFile(rcFilePath);
+
+      const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+      setLocalXMLFile(localRcFilePath);
+    #else
+      setXMLFile(rcFileName);
+#endif
+
       qDebug("Plugins: kbanking plugged");
 
       // get certificate handling and dialog settings management

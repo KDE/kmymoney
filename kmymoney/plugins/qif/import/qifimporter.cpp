@@ -15,6 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config-kmymoney.h>
 #include "qifimporter.h"
 
 // ----------------------------------------------------------------------------
@@ -36,14 +37,31 @@
 #include "statementinterface.h"
 #include "viewinterface.h"
 
+#ifdef IS_APPIMAGE
+#include <QCoreApplication>
+#include <QStandardPaths>
+#endif
+
 class MyMoneyStatement;
 
 QIFImporter::QIFImporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, "qifimporter"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   Q_UNUSED(args);
-  setComponentName("qifimporter", i18n("QIF importer"));
-  setXMLFile("qifimporter.rc");
+  const auto componentName = QLatin1String("qifimporter");
+  const auto rcFileName = QLatin1String("qifimporter.rc");
+  setComponentName(componentName, i18n("QIF importer"));
+
+#ifdef IS_APPIMAGE
+  const QString rcFilePath = QCoreApplication::applicationDirPath() + QLatin1String("/../share/kxmlgui5/csvexporter/") + rcFileName;
+  setXMLFile(rcFilePath);
+
+  const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + rcFileName;
+  setLocalXMLFile(localRcFilePath);
+#else
+  setXMLFile(rcFileName);
+#endif
+
   createActions();
   // For information, announce that we have been loaded.
   qDebug("Plugins: qifimporter loaded");

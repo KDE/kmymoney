@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <config-kmymoney.h>
 #include "ofximporter.h"
 
 // ----------------------------------------------------------------------------
@@ -55,6 +56,11 @@
 #include "kmymoneyutils.h"
 
 //#define DEBUG_LIBOFX
+
+#ifdef IS_APPIMAGE
+#include <QCoreApplication>
+#include <QStandardPaths>
+#endif
 
 using KWallet::Wallet;
 
@@ -97,8 +103,20 @@ OFXImporter::OFXImporter(QObject *parent, const QVariantList &args) :
     d(new Private)
 {
   Q_UNUSED(args)
-  setComponentName(QStringLiteral("ofximporter"), i18n("OFX Importer"));
-  setXMLFile(QStringLiteral("ofximporter.rc"));
+  const auto componentName = QLatin1String("ofximporter");
+  const auto rcFileName = QLatin1String("ofximporter.rc");
+  setComponentName(componentName, i18n("OFX Importer"));
+
+#ifdef IS_APPIMAGE
+  const QString rcFilePath = QCoreApplication::applicationDirPath() + QLatin1String("/../share/kxmlgui5/") + componentName + QLatin1Char('/') + rcFileName;
+  setXMLFile(rcFilePath);
+
+  const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+  setLocalXMLFile(localRcFilePath);
+#else
+  setXMLFile(rcFileName);
+#endif
+
   createActions();
 
   // For ease announce that we have been loaded.

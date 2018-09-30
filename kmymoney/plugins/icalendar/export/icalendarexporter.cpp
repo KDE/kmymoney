@@ -18,6 +18,7 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
 
+#include <config-kmymoney.h>
 #include "icalendarexporter.h"
 
 #include <QFileDialog>
@@ -39,6 +40,11 @@
 #include "pluginsettings.h"
 #include "viewinterface.h"
 
+#ifdef IS_APPIMAGE
+#include <QCoreApplication>
+#include <QStandardPaths>
+#endif
+
 struct iCalendarExporter::Private {
   QAction* m_action;
   QString  m_profileName;
@@ -54,9 +60,20 @@ iCalendarExporter::iCalendarExporter(QObject *parent, const QVariantList &args) 
   d->m_profileName = "iCalendarPlugin";
   d->m_iCalendarFileEntryName = "iCalendarFile";
 
+  const auto componentName = QLatin1String("icalendarexporter");
+  const auto rcFileName = QLatin1String("icalendarexporter.rc");
   // Tell the host application to load my GUI component
-  setComponentName("icalendarexporter", i18n("iCalendar exporter"));
-  setXMLFile("icalendarexporter.rc");
+  setComponentName(componentName, i18n("iCalendar exporter"));
+
+#ifdef IS_APPIMAGE
+  const QString rcFilePath = QCoreApplication::applicationDirPath() + QLatin1String("/../share/kxmlgui5/") + componentName + QLatin1Char('/') + rcFileName;
+  setXMLFile(rcFilePath);
+
+  const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+  setLocalXMLFile(localRcFilePath);
+#else
+  setXMLFile(rcFileName);
+#endif
 
   // For ease announce that we have been loaded.
   qDebug("Plugins: icalendarexporter loaded");

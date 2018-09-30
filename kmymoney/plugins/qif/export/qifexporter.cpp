@@ -15,6 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config-kmymoney.h>
 #include "qifexporter.h"
 
 // ----------------------------------------------------------------------------
@@ -35,12 +36,29 @@
 #include "mymoneyqifwriter.h"
 #include "viewinterface.h"
 
+#ifdef IS_APPIMAGE
+#include <QCoreApplication>
+#include <QStandardPaths>
+#endif
+
 QIFExporter::QIFExporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, "qifexporter"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   Q_UNUSED(args);
-  setComponentName("qifexporter", i18n("QIF exporter"));
-  setXMLFile("qifexporter.rc");
+  const auto componentName = QLatin1String("qifexporter");
+  const auto rcFileName = QLatin1String("qifexporter.rc");
+  setComponentName(componentName, i18n("QIF exporter"));
+
+#ifdef IS_APPIMAGE
+  const QString rcFilePath = QCoreApplication::applicationDirPath() + QLatin1String("/../share/kxmlgui5/") + componentName + QLatin1Char('/') + rcFileName;
+  setXMLFile(rcFilePath);
+
+  const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+  setLocalXMLFile(localRcFilePath);
+#else
+  setXMLFile(rcFileName);
+#endif
+
   createActions();
   // For information, announce that we have been loaded.
   qDebug("Plugins: qifexporter loaded");
