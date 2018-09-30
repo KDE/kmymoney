@@ -66,9 +66,11 @@ payeeIdentifier::payeeIdentifier(const payeeIdentifier::id_t& id, const payeeIde
 
 QString payeeIdentifier::idString() const
 {
-  if (m_id == 0)
-    return QString();
-  return QLatin1String("IDENT") + QString::number(m_id).rightJustified(6, '0');
+  QString rc;
+  if (m_id != 0) {
+    rc = QString("IDENT%1").arg(m_id, 6, 10, QLatin1Char('0'));
+  }
+  return rc;
 }
 
 payeeIdentifier::~payeeIdentifier()

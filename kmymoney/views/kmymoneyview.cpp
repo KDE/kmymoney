@@ -201,7 +201,8 @@ void KMyMoneyView::slotFileOpened()
   #ifdef ENABLE_UNFINISHEDFEATURES
   static_cast<SimpleLedgerView*>(viewBases[View::NewLedgers])->openFavoriteLedgers();
   #endif
-  switchToDefaultView();
+  // delay the switchToDefaultView call until the event loop is running
+  QMetaObject::invokeMethod(this, "switchToDefaultView", Qt::QueuedConnection);
   slotObjectSelected(MyMoneyAccount()); // in order to enable update all accounts on file reload
 }
 
@@ -503,6 +504,7 @@ void KMyMoneyView::showPage(View idView)
     return;
 
   setCurrentPage(viewFrames[idView]);
+
   resetViewSelection();
 }
 

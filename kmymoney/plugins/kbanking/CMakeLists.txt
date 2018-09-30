@@ -48,9 +48,9 @@ set(KMM_BANKING_DEBUG_OPTIONS)
 # preprocessor definitions in case this is a debug build
 string(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_TOLOWER)
 if("${CMAKE_BUILD_TYPE_TOLOWER}" MATCHES "debug")
-  file(READ kbanking_debug.rc KMM_BANKING_DEBUG_OPTIONS)
+  file(READ kbanking_debug_rc KMM_BANKING_DEBUG_OPTIONS)
 endif()
-configure_file(kbanking.rc "${CMAKE_CURRENT_BINARY_DIR}/kbanking.rc" @ONLY)
+configure_file(kbanking.rc.in "${CMAKE_CURRENT_BINARY_DIR}/kbanking.rc" @ONLY)
 
 ########### install files ###############
 

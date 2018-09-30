@@ -994,7 +994,7 @@ MyMoneyTag MyMoneyXmlContentHandler::readTag(const QDomElement &node)
 
   tag.setName(node.attribute(attributeName(Attribute::Tag::Name)));
   if (node.hasAttribute(attributeName(Attribute::Tag::TagColor))) {
-    tag.setNamedTagColor(attributeName(Attribute::Tag::TagColor));
+    tag.setTagColor(node.attribute(attributeName(Attribute::Tag::TagColor)));
   }
   if (node.hasAttribute(attributeName(Attribute::Tag::Notes))) {
     tag.setNotes(node.attribute(attributeName(Attribute::Tag::Notes)));

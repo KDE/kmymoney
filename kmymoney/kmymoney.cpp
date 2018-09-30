@@ -1207,7 +1207,6 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   d->m_myMoneyView = new KMyMoneyView;
   layout->addWidget(d->m_myMoneyView, 10);
-  connect(d->m_myMoneyView, &KMyMoneyView::viewActivated, this, &KMyMoneyApp::slotViewSelected);
   connect(d->m_myMoneyView, &KMyMoneyView::statusMsg, this, &KMyMoneyApp::slotStatusMsg);
   connect(d->m_myMoneyView, &KMyMoneyView::statusProgress, this, &KMyMoneyApp::slotStatusProgressBar);
 
@@ -1264,9 +1263,6 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
 KMyMoneyApp::~KMyMoneyApp()
 {
-  // don't keep track of selected view anymore as this might change by unloading plugins
-  disconnect(d->m_myMoneyView, &KMyMoneyView::viewActivated, this, &KMyMoneyApp::slotViewSelected);
-
   // delete cached objects since they are in the way
   // when unloading the plugins
   onlineJobAdministration::instance()->clearCaches();
@@ -3667,6 +3663,9 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
       // start the check for scheduled transactions that need to be
       // entered as soon as the event loop becomes active.
       QMetaObject::invokeMethod(q, "slotCheckSchedules",  Qt::QueuedConnection);
+
+      // make sure to catch view activations
+      connect(m_myMoneyView, &KMyMoneyView::viewActivated, q, &KMyMoneyApp::slotViewSelected);
       break;
 
     case eKMyMoney::FileAction::Saved:
@@ -3677,6 +3676,8 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
 
     case eKMyMoney::FileAction::Closing:
       disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
+      // make sure to not catch view activations anymore
+      disconnect(m_myMoneyView, &KMyMoneyView::viewActivated, q, &KMyMoneyApp::slotViewSelected);
       m_myMoneyView->slotFileClosed();
       // notify the models that the file is going to be closed (we should have something like dataChanged that reaches the models first)
       Models::instance()->fileClosed();
