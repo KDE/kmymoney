@@ -2819,7 +2819,7 @@ public:
             "CREATE TABLE kmmSepaOrders ("
             "  id varchar(32) NOT NULL PRIMARY KEY REFERENCES kmmOnlineJobs( id ) ON UPDATE CASCADE ON DELETE CASCADE,"
             "  originAccount varchar(32) REFERENCES kmmAccounts( id ) ON UPDATE CASCADE ON DELETE SET NULL,"
-            "  value text DEFAULT '0',"
+            "  value text,"
             "  purpose text,"
             "  endToEndReference varchar(35),"
             "  beneficiaryName varchar(27),"
@@ -2952,9 +2952,13 @@ public:
     const auto& task = dynamic_cast<const sepaOnlineTransferImpl &>(obj);
 
     auto bindValuesToQuery = [&]() {
+      auto value = task.value().toString();
+      if (value.isEmpty()) {
+        value = QStringLiteral("0");
+      }
       query.bindValue(":id", id);
       query.bindValue(":originAccount", task.responsibleAccount());
-      query.bindValue(":value", task.value().toString());
+      query.bindValue(":value", value);
       query.bindValue(":purpose", task.purpose());
       query.bindValue(":endToEndReference", (task.endToEndReference().isEmpty()) ? QVariant() : QVariant::fromValue(task.endToEndReference()));
       query.bindValue(":beneficiaryName", task.beneficiaryTyped().ownerName());
