@@ -1637,7 +1637,7 @@ public:
     readTransactions(QString(), QString());
   }
 
-  void readSplit(MyMoneySplit& s, const QSqlQuery& query) const
+  MyMoneySplit readSplit(const QSqlQuery& query) const
   {
     Q_Q(const MyMoneyStorageSql);
     // Set these up as statics, since the field numbers should not change
@@ -1659,7 +1659,7 @@ public:
   //  static const int postDateCol = t.fieldNumber("postDate"); // FIXME - when Tom puts date into split object
     static const int bankIdCol = t.fieldNumber("bankId");
 
-    s.clearId();
+    MyMoneySplit s;
 
     QList<QString> tagIdList;
     QSqlQuery query1(*const_cast <MyMoneyStorageSql*>(q));
@@ -1685,7 +1685,7 @@ public:
     //s.setPostDate(GETDATETIME(postDateCol)); // FIXME - when Tom puts date into split object
     s.setBankID(GETSTRING(bankIdCol));
 
-    return;
+    return s;
   }
 
   const MyMoneyKeyValueContainer readKeyValuePairs(const QString& kvpType, const QString& kvpId) const
