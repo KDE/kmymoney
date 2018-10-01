@@ -55,10 +55,32 @@ KSelectDatabaseDlg::KSelectDatabaseDlg(int openMode, QUrl openURL, QWidget *)
   m_requiredFields->setOkButton(m_widget->buttonBox->button(QDialogButtonBox::Ok));
 
   m_widget->checkPreLoad->setEnabled(openMode == QIODevice::ReadWrite);
+
+  m_toggleEchoModeAction = m_widget->textPassword->addAction(QIcon::fromTheme(QStringLiteral("visibility")), QLineEdit::TrailingPosition);
+  m_toggleEchoModeAction->setVisible(false);
+  m_toggleEchoModeAction->setToolTip(i18n("Change the visibility of the password"));
+  connect(m_widget->textPassword, &QLineEdit::textChanged, this, &KSelectDatabaseDlg::showToggleEchoModeAction);
+  connect(m_toggleEchoModeAction, &QAction::triggered, this, &KSelectDatabaseDlg::toggleEchoMode);
 }
 
 KSelectDatabaseDlg::~KSelectDatabaseDlg()
 {
+}
+
+void KSelectDatabaseDlg::showToggleEchoModeAction(const QString& text)
+{
+  m_toggleEchoModeAction->setVisible(!text.isEmpty());
+}
+
+void KSelectDatabaseDlg::toggleEchoMode()
+{
+  if (m_widget->textPassword->echoMode() == QLineEdit::Password) {
+    m_widget->textPassword->setEchoMode(QLineEdit::Normal);
+    m_toggleEchoModeAction->setIcon(QIcon::fromTheme(QStringLiteral("hint")));
+  } else if (m_widget->textPassword->echoMode() == QLineEdit::Normal) {
+    m_widget->textPassword->setEchoMode(QLineEdit::Password);
+    m_toggleEchoModeAction->setIcon(QIcon::fromTheme(QStringLiteral("visibility")));
+  }
 }
 
 bool KSelectDatabaseDlg::checkDrivers()
