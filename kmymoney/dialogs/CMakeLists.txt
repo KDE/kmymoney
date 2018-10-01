@@ -82,6 +82,7 @@ kde4_add_ui_files(libdialogs_a_SOURCES ${dialogs_UI} )
 add_custom_target(generate_dialogs_ui_srcs DEPENDS ${dialogs_ui_srcs})
 
 kde4_add_library(dialogs STATIC ${libdialogs_a_SOURCES} ${dialogs_ui_srcs})
+target_link_libraries(dialogs ${LIBALKIMIA_LIBRARIES})
 
 # we rely on the widgets to be generated
 add_dependencies(dialogs widgets)

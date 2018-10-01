@@ -36,7 +36,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "webpricequote.h"
+#include <alkimia/alkonlinequote.h>
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
 #include "ui_kequitypriceupdatedlgdecl.h"
@@ -78,7 +78,7 @@ protected:
 
 private:
   bool m_fUpdateAll;
-  WebPriceQuote m_webQuote;
+  AlkOnlineQuote m_webQuote;
 };
 
 #endif // KEQUITYPRICEUPDATEDLG_H

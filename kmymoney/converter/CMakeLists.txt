@@ -5,13 +5,13 @@ set (libconverter_a_SOURCES
   mymoneyqifwriter.cpp
   mymoneystatementreader.cpp
   mymoneytemplate.cpp
-  webpricequote.cpp
   transactionmatchfinder.cpp
   existingtransactionmatchfinder.cpp
   scheduledtransactionmatchfinder.cpp
 )
 
 kde4_add_library(converter STATIC ${libconverter_a_SOURCES})
+target_link_libraries(converter ${LIBALKIMIA_LIBRARIES})
 
 # we rely on some dialogs to be generated
 add_dependencies(converter dialogs)
@@ -23,9 +23,6 @@ install(FILES mymoneytemplate.h
 
 ############## tests ####################
 if( KDE4_BUILD_TESTS )
-  set( convertertest_SRCS convertertest.cpp ../reports/reportstestcommon.cpp )
-  kde4_add_unit_test( convertertest TESTNAME kmymoney-convertertest ${convertertest_SRCS} )
-  target_link_libraries( convertertest converter kmymoney_base kmymoney_common kmm_storage ${QT_AND_KDECORE_LIBS} ${KDE4_KIO_LIBS} ${QT_QTTEST_LIBRARY} )
 
   set( matchfindertest_SRCS matchfindertest.cpp )
   kde4_add_unit_test( matchfindertest TESTNAME kmymoney-matchfindertest ${matchfindertest_SRCS} )

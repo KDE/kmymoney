@@ -20,6 +20,7 @@ kde4_add_library(onlinetask_interfaces STATIC ${onlinetask_interfaces_SRCS})
 target_link_libraries( onlinetask_interfaces
   kmm_payeeidentifier
   ${QT_QTCORE_LIBRARIES}
+  ${ALKIMIA_LIBRARIES}
 )
 
 install(FILES ${onlinetask_interfaces_HEADER}

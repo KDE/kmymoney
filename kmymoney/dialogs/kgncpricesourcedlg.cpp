@@ -34,7 +34,7 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "webpricequote.h"
+#include <alkimia/alkonlinequotesprofilemanager.h>
 #include "ui_kgncpricesourcedlgdecl.h"
 
 
@@ -69,7 +69,7 @@ KGncPriceSourceDlg::KGncPriceSourceDlg(const QString &stockName, const QString& 
   d->widget->textStockName->setText(i18n("Investment: %1", stockName));
   d->widget->textGncSource->setText(i18n("Quote source: %1", gncSource));
   d->widget->listKnownSource->clear();
-  d->widget->listKnownSource->insertItems(0, WebPriceQuote::quoteSources());
+  d->widget->listKnownSource->insertItems(0, AlkOnlineQuotesProfileManager::instance().profiles().first()->quoteSources());
   d->widget->lineUserSource->setText(gncSource);
   d->widget->checkAlwaysUse->setChecked(true);
   d->widget->buttonsSource->setId(d->widget->buttonNoSource, 0);

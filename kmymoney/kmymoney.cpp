@@ -93,6 +93,9 @@
 #include <KHolidays/Holidays>
 #endif
 
+#include <alkimia/alkonlinequotesprofilemanager.h>
+#include <alkimia/alkonlinequoteswidget.h>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -105,7 +108,6 @@
 #include "dialogs/settings/ksettingscolors.h"
 #include "dialogs/settings/ksettingsfonts.h"
 #include "dialogs/settings/ksettingsschedules.h"
-#include "dialogs/settings/ksettingsonlinequotes.h"
 #include "dialogs/settings/ksettingshome.h"
 #include "dialogs/settings/ksettingsforecast.h"
 #include "dialogs/settings/ksettingsplugins.h"
@@ -389,6 +391,9 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
     KXmlGuiWindow(parent),
     d(new Private(this))
 {
+  AlkOnlineQuotesProfileManager::instance().addProfile(new AlkOnlineQuotesProfile("kmymoney", AlkOnlineQuotesProfile::Type::KMyMoney4, "kmymoney-quotes.knsrc"));
+  AlkOnlineQuotesProfileManager::instance().setWebPageEnabled(true);
+
   new KmymoneyAdaptor(this);
   QDBusConnection::sessionBus().registerObject("/KMymoney", this);
   QDBusConnection::sessionBus().interface()->registerService(
@@ -2540,7 +2545,7 @@ void KMyMoneyApp::slotSettings()
   KSettingsGpg* encryptionPage = new KSettingsGpg();
   KSettingsColors* colorsPage = new KSettingsColors();
   KSettingsFonts* fontsPage = new KSettingsFonts();
-  KSettingsOnlineQuotes* onlineQuotesPage = new KSettingsOnlineQuotes();
+  AlkOnlineQuotesWidget *onlineQuotesPage = new AlkOnlineQuotesWidget;
   KSettingsForecast* forecastPage = new KSettingsForecast();
   KSettingsPlugins* pluginsPage = new KSettingsPlugins();
   KSettingsReports* reportsPage = new KSettingsReports();

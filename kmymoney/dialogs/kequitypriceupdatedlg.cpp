@@ -49,6 +49,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include <alkimia/alkonlinequotesprofilemanager.h>
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
@@ -63,7 +64,8 @@
 
 KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& securityId) :
     KEquityPriceUpdateDlgDecl(parent),
-    m_fUpdateAll(false)
+    m_fUpdateAll(false),
+    m_webQuote(AlkOnlineQuotesProfileManager::instance().profiles().first())
 {
   QStringList headerList;
   headerList << i18n("Symbol") << i18nc("Equity name", "Name")
@@ -94,7 +96,7 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
   //
 
   // send in securityId == "XXX YYY" to get a single-shot update for XXX to YYY.
-  // for consistency reasons, this accepts the same delimiters as WebPriceQuote::launch()
+  // for consistency reasons, this accepts the same delimiters as AlkOnlineQuote::launch()
   QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", Qt::CaseInsensitive);
   MyMoneySecurityPair currencyIds;
   if (splitrx.indexIn(securityId) != -1) {
