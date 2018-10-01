@@ -33,6 +33,9 @@
 #include <QSaveFile>
 #include <QDateTime>
 #include <QStringList>
+#include <QStandardPaths>
+#include <QFileInfo>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -44,6 +47,7 @@
 #include <gpgme++/keylistresult.h>
 #include <gpgme++/key.h>
 #include <gpgme++/data.h>
+#include <gpgme++/engineinfo.h>
 
 class KGPGFile::Private
 {
@@ -52,9 +56,56 @@ public:
     m_fileRead = 0;
     m_fileWrite = 0;
     GpgME::initializeLibrary();
+
+    // figure out the location of the GPG home directory
+    QStringList baseDirs;
+
+    // we search in the home directory ...
+    baseDirs << QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
+
+    // ... and in the application data dirs.
+    // since we look for gnupg, we need to replace the application name
+    foreach (auto baseDir, QStandardPaths::standardLocations(QStandardPaths::AppDataLocation)) {
+      baseDirs << baseDir.replace(QLatin1String("kmymoney"), QLatin1String("gnupg"), Qt::CaseInsensitive);
+    }
+
+    const QStringList subDirs = {
+      QStringLiteral(".gnupg"),
+      QString(),
+      QStringLiteral("gnupg")
+    };
+
     ctx = GpgME::Context::createForProtocol(GpgME::OpenPGP);
     if (!ctx)
       qDebug("Failed to create the GpgME context for the OpenPGP protocol");
+
+    bool found = false;
+    foreach (const auto baseDir, baseDirs) {
+      foreach (const auto subDir, subDirs) {
+        auto dir = baseDir;
+        if (!subDir.isEmpty()) {
+          dir.append(QString("/%1").arg(subDir));
+        }
+        const auto fileName = QString("%1/%2").arg(dir, "secring.gpg");
+        qDebug() << "GPG search" << fileName;
+        if (QFileInfo::exists(fileName)) {
+          qDebug() << "Found";
+          /// FIXME This might be nasty if the underlying gpgme lib does not work on UTF-8
+          m_lastError = ctx->setEngineHomeDirectory(QDir::toNativeSeparators(dir).toUtf8());
+          if (m_lastError.encodedError()) {
+            qDebug() << "Failure while setting GPG home directory to" << dir << "\n" << QLatin1String(m_lastError.asString());
+          }
+          found = true;
+          break;
+        }
+      }
+      if (found) {
+        break;
+      }
+    }
+
+    qDebug() << "GPG Home directory" << ctx->engineInfo().homeDirectory();
+    qDebug() << "GPG filename" << ctx->engineInfo().fileName();
   }
 
   ~Private() {

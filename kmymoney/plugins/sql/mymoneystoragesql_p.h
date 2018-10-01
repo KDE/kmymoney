@@ -1637,7 +1637,7 @@ public:
     readTransactions(QString(), QString());
   }
 
-  void readSplit(MyMoneySplit& s, const QSqlQuery& query) const
+  MyMoneySplit readSplit(const QSqlQuery& query) const
   {
     Q_Q(const MyMoneyStorageSql);
     // Set these up as statics, since the field numbers should not change
@@ -1659,7 +1659,7 @@ public:
   //  static const int postDateCol = t.fieldNumber("postDate"); // FIXME - when Tom puts date into split object
     static const int bankIdCol = t.fieldNumber("bankId");
 
-    s.clearId();
+    MyMoneySplit s;
 
     QList<QString> tagIdList;
     QSqlQuery query1(*const_cast <MyMoneyStorageSql*>(q));
@@ -1685,7 +1685,7 @@ public:
     //s.setPostDate(GETDATETIME(postDateCol)); // FIXME - when Tom puts date into split object
     s.setBankID(GETSTRING(bankIdCol));
 
-    return;
+    return s;
   }
 
   const MyMoneyKeyValueContainer readKeyValuePairs(const QString& kvpType, const QString& kvpId) const
@@ -2819,7 +2819,7 @@ public:
             "CREATE TABLE kmmSepaOrders ("
             "  id varchar(32) NOT NULL PRIMARY KEY REFERENCES kmmOnlineJobs( id ) ON UPDATE CASCADE ON DELETE CASCADE,"
             "  originAccount varchar(32) REFERENCES kmmAccounts( id ) ON UPDATE CASCADE ON DELETE SET NULL,"
-            "  value text DEFAULT '0',"
+            "  value text,"
             "  purpose text,"
             "  endToEndReference varchar(35),"
             "  beneficiaryName varchar(27),"
@@ -2952,9 +2952,13 @@ public:
     const auto& task = dynamic_cast<const sepaOnlineTransferImpl &>(obj);
 
     auto bindValuesToQuery = [&]() {
+      auto value = task.value().toString();
+      if (value.isEmpty()) {
+        value = QStringLiteral("0");
+      }
       query.bindValue(":id", id);
       query.bindValue(":originAccount", task.responsibleAccount());
-      query.bindValue(":value", task.value().toString());
+      query.bindValue(":value", value);
       query.bindValue(":purpose", task.purpose());
       query.bindValue(":endToEndReference", (task.endToEndReference().isEmpty()) ? QVariant() : QVariant::fromValue(task.endToEndReference()));
       query.bindValue(":beneficiaryName", task.beneficiaryTyped().ownerName());

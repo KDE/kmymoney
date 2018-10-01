@@ -412,7 +412,7 @@ public:
       } catch (const MyMoneyException &) {
         m_lastSelectedAccountID.clear();
         m_currentAccount = MyMoneyAccount();
-        return;
+        m_accountComboBox->setSelected(QString());
       }
     }
 

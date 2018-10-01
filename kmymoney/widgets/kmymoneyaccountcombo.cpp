@@ -200,6 +200,11 @@ bool KMyMoneyAccountCombo::eventFilter(QObject* o, QEvent* e)
 
 void KMyMoneyAccountCombo::setSelected(const QString& id)
 {
+  if (id.isEmpty()) {
+    d->m_lastSelectedAccount.clear();
+    return;
+  }
+
   // make sure, we have all items available for search
   if(isEditable()) {
     lineEdit()->clear();

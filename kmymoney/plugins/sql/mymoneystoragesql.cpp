@@ -1810,7 +1810,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const QSt
   MyMoneySplit s;
   if (qs.next()) {
     splitTxId = qs.value(0).toString();
-    d->readSplit(s, qs);
+    s = d->readSplit(qs);
   } else {
     splitTxId = "ZZZ";
   }
@@ -1838,7 +1838,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const QSt
     while (txId < splitTxId && splitTxId != "ZZZ") {
       if (qs.next()) {
         splitTxId = qs.value(0).toString();
-        d->readSplit(s, qs);
+        s = d->readSplit(qs);
       } else {
         splitTxId = "ZZZ";
       }
@@ -1851,7 +1851,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const QSt
       tx.addSplit(s);
       if (qs.next()) {
         splitTxId = qs.value(0).toString();
-        d->readSplit(s, qs);
+        s = d->readSplit(qs);
       } else {
         splitTxId = "ZZZ";
       }
@@ -2205,17 +2205,17 @@ QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QStringLi
     QSqlRecord rec = q.record();
     if (!q.next()) throw MYMONEYEXCEPTION(d->buildError(q, Q_FUNC_INFO, QString("retrieving scheduled transaction")));
     MyMoneyTransaction tx(s.id(), MyMoneyTransaction());
-    tx.setPostDate(d->GETDATE(transactionTable.fieldNumber("postDate")));
+    // we cannot use the GET.... macros here as they are bound to the query variable
+    tx.setPostDate(d->getDate(q.value(transactionTable.fieldNumber("postDate")).toString()));
     tx.setMemo(q.value(transactionTable.fieldNumber("memo")).toString());
-    tx.setEntryDate(d->GETDATE(transactionTable.fieldNumber("entryDate")));
+    tx.setEntryDate(d->getDate(q.value(transactionTable.fieldNumber("entryDate")).toString()));
     tx.setCommodity(q.value(transactionTable.fieldNumber("currencyId")).toString());
     tx.setBankID(q.value(transactionTable.fieldNumber("bankId")).toString());
 
     qs.bindValue(":id", s.id());
     if (!qs.exec()) throw MYMONEYEXCEPTION(d->buildError(qs, Q_FUNC_INFO, "reading Scheduled Splits")); // krazy:exclude=crashy
     while (qs.next()) {
-      MyMoneySplit sp;
-      d->readSplit(sp, qs);
+      MyMoneySplit sp(d->readSplit(qs));
       tx.addSplit(sp);
     }
 //    if (!m_payeeList.isEmpty())
