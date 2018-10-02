@@ -295,7 +295,7 @@ public:
                     if (account->slotList.contains("tax-related")) {
                         xml.writeStartElement("flag");
                         xml.writeAttribute("name","Tax");
-                        xml.writeAttribute("value",account->slotList["tax-related"]);
+                        xml.writeAttribute("value",account->slotList["tax-related"] == "1" ? "Yes" : "No");
                         xml.writeEndElement();
                     }
                 }
