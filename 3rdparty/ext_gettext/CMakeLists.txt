@@ -12,5 +12,5 @@ ExternalProject_Add(
   INSTALL_COMMAND make install
 
   UPDATE_COMMAND ""
-  DEPENDS ext_iconv ext_xml
+  DEPENDS ext_iconv ext_xml ext_ncurses
 )

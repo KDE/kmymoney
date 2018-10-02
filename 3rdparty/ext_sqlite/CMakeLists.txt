@@ -1,19 +1,18 @@
 set(PREFIX_ext_sqlite "${EXTPREFIX}")
 
+set(sqlite_cFlags "-DSQLITE_ENABLE_COLUMN_METADATA=1 -DSQLITE_DISABLE_DIRSYNC=1 -DSQLITE_SECURE_DELETE=1 -DSQLITE_ENABLE_UNLOCK_NOTIFY=1 -DSQLITE_ENABLE_DBSTAT_VTAB=1 -DSQLITE_ENABLE_FTS3_PARENTHESIS=1")
+
 ExternalProject_Add(
   ext_sqlite
   DOWNLOAD_DIR ${EXTERNALS_DOWNLOAD_DIR}
-  URL https://sqlite.org/2018/sqlite-amalgamation-3240000.zip
-  URL_MD5 4ea1e0c6e7e82cb0490d4753d6878698
+  URL https://www.sqlite.org/2018/sqlite-autoconf-3250200.tar.gz
+  URL_MD5 bfade31d59f58badc51aeaa6ae26a5de
 
-  PATCH_COMMAND ${PATCH_COMMAND} -p1 -i ${CMAKE_CURRENT_SOURCE_DIR}/sqlite.diff
   INSTALL_DIR ${PREFIX_ext_sqlite}
-  CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${PREFIX_ext_sqlite}
-              -DCMAKE_BUILD_TYPE=${GLOBAL_BUILD_TYPE}
-              ${GLOBAL_PROFILE}
-              -DCMAKE_SYSTEM_PREFIX_PATH=${EXTPREFIX}
-              -DBUILD_TESTING=false
-              -DSQLITE_BUILD_STATIC=FALSE
-              -DENABLE_UNLOCK_NOTIFY=TRUE
+  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_sqlite} --disable-static --enable-shared --enable-fts3 --disable-static-shell --enable-session --enable-json1 CFLAGS=${sqlite_cFlags}
+  BUILD_COMMAND make
+  INSTALL_COMMAND make install
+
   UPDATE_COMMAND ""
+  BUILD_IN_SOURCE 1
 )

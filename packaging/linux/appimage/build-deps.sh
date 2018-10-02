@@ -70,7 +70,9 @@ cmake --build . --config RelWithDebInfo --target ext_xslt # for ext_xmlsec1
 # cmake --build . --config RelWithDebInfo --target ext_fontconfig
 # cmake --build . --config RelWithDebInfo --target ext_freetype
 cmake --build . --config RelWithDebInfo --target ext_sqlite
-# cmake --build . --config RelWithDebInfo --target ext_mysql
+cmake --build . --config RelWithDebInfo --target ext_mysql
+# cmake --build . --config RelWithDebInfo --target ext_postgresql
+cmake --build . --config RelWithDebInfo --target ext_sharedmimeinfo
 cmake --build . --config RelWithDebInfo --target ext_qt
 cmake --build . --config RelWithDebInfo --target ext_knotifications
 cmake --build . --config RelWithDebInfo --target ext_kio

@@ -1,7 +1,5 @@
 set(PREFIX_ext_boost "${EXTPREFIX}")
 
-# don't bump boost version without checking it with mysql
-# mysql e.g. needs exactly 1.67 and won't work with 1.68
 ExternalProject_Add(
   ext_boost
   DOWNLOAD_DIR ${EXTERNALS_DOWNLOAD_DIR}
