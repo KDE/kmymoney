@@ -184,6 +184,8 @@ bool OFXImporter::isMyFormat(const QString& filename) const
         lineCount--;
     }
     f.close();
+  } else {
+    qDebug() << "OFXImporter::isMyFormat: unable to open" << filename << "with" << f.errorString();
   }
 
   return result;
