@@ -267,33 +267,33 @@ bool XMLStorage::save(const QUrl &url)
     }
 
     if (url.isLocalFile()) {
-        filename = url.toLocalFile();
-        try {
-          const unsigned int nbak = KMyMoneySettings::autoBackupCopies();
-          if (nbak) {
-              KBackup::numberedBackupFile(filename, QString(), QStringLiteral("~"), nbak);
-            }
-          saveToLocalFile(filename, storageWriter.get(), plaintext, keyList);
-        } catch (const MyMoneyException &e) {
-          qWarning("Unable to write changes to: %s\nReason: %s", qPrintable(filename), e.what());
-          throw;
-        }
-      } else {
-
-        QTemporaryFile tmpfile;
-        tmpfile.open(); // to obtain the name
-        tmpfile.close();
-        saveToLocalFile(tmpfile.fileName(), storageWriter.get(), plaintext, keyList);
-
-        Q_CONSTEXPR int permission = -1;
-        QFile file(tmpfile.fileName());
-        file.open(QIODevice::ReadOnly);
-        KIO::StoredTransferJob *putjob = KIO::storedPut(file.readAll(), url, permission, KIO::JobFlag::Overwrite);
-        if (!putjob->exec()) {
-            throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to upload to '%1'.<br />%2").arg(url.toDisplayString(), putjob->errorString()));
+      filename = url.toLocalFile();
+      try {
+        const unsigned int nbak = KMyMoneySettings::autoBackupCopies();
+        if (nbak) {
+            KBackup::numberedBackupFile(filename, QString(), QStringLiteral("~"), nbak);
           }
-        file.close();
+        saveToLocalFile(filename, storageWriter.get(), plaintext, keyList);
+      } catch (const MyMoneyException &e) {
+        qWarning("Unable to write changes to: %s\nReason: %s", qPrintable(filename), e.what());
+        throw;
       }
+    } else {
+
+      QTemporaryFile tmpfile;
+      tmpfile.open(); // to obtain the name
+      tmpfile.close();
+      saveToLocalFile(tmpfile.fileName(), storageWriter.get(), plaintext, keyList);
+
+      Q_CONSTEXPR int permission = -1;
+      QFile file(tmpfile.fileName());
+      file.open(QIODevice::ReadOnly);
+      KIO::StoredTransferJob *putjob = KIO::storedPut(file.readAll(), url, permission, KIO::JobFlag::Overwrite);
+      if (!putjob->exec()) {
+        throw MYMONEYEXCEPTION(QString::fromLatin1("Unable to upload to '%1'.<br />%2").arg(url.toDisplayString(), putjob->errorString()));
+      }
+      file.close();
+    }
   } catch (const MyMoneyException &e) {
     KMessageBox::error(nullptr, QString::fromLatin1(e.what()));
     MyMoneyFile::instance()->setDirty();
