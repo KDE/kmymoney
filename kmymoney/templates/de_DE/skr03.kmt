@@ -130,6 +130,13 @@
    </account>
   </account>
   <account type="16" name="">
+   <account type="16" name="Saldenvortragskonten">
+    <account type="16" name="9000 Saldenvortrag Sachkonten">
+     <flag currency="EUR" name="OpeningBalanceAccount"/>
+    </account>
+    <account type="16" name="9008 Saldenvorträge Debitoren"/>
+    <account type="16" name="9009 Saldenvorträge Kreditoren"/>
+   </account>
    <account type="16" name="Privatentnahmen/-einlagen">
     <account type="16" name="1800 Privatentnahme allgemein"/>
     <account type="16" name="1810 Privatsteuern"/>
