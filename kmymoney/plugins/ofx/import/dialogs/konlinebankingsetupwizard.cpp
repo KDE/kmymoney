@@ -362,7 +362,7 @@ bool KOnlineBankingSetupWizard::finishLoginPage()
     QString hver = m_headerVersion->headerVersion();
     strncpy(fi.header_version, hver.toLatin1(), OFX_HEADERVERSION_LENGTH - 1);
 
-    QUrl filename(QString("file://%1response.ofx").arg(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + ""));
+    QUrl filename(QString("file://%1response.ofx").arg(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/')));
     QByteArray req(libofx_request_accountinfo(&fi));
     // because the event loop is running while the request is performed disable the back button
     // (this function is not reentrant so the application might crash when back/next are used)
@@ -378,7 +378,7 @@ bool KOnlineBankingSetupWizard::finishLoginPage()
     ofx_set_account_cb(ctx, ofxAccountCallback, this);
     ofx_set_status_cb(ctx, ofxStatusCallback, this);
     // Add resulting accounts to the account list
-    libofx_proc_file(ctx, filename.path().toLatin1(), AUTODETECT);
+    libofx_proc_file(ctx, filename.toLocalFile().toLatin1(), AUTODETECT);
     libofx_free_context(ctx);
 
     ++m_it_info;

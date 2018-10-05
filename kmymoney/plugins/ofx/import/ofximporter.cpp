@@ -135,9 +135,10 @@ void OFXImporter::slotImportFile()
   d->m_preferName = static_cast<OFXImporter::Private::NamePreference>(option->m_preferName->currentIndex());
 
   if (url.isValid()) {
-    if (isMyFormat(url.path())) {
+    const QString filename(url.toLocalFile());
+    if (isMyFormat(filename)) {
       statementInterface()->resetMessages();
-      slotImportFile(url.path());
+      slotImportFile(filename);
       statementInterface()->showMessages(d->m_statementlist.count());
 
     } else {

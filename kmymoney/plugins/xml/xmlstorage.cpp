@@ -235,7 +235,7 @@ MyMoneyStorageMgr *XMLStorage::open(const QUrl &url)
 
 bool XMLStorage::save(const QUrl &url)
 {
-  QString filename = url.path();
+  QString filename = url.toLocalFile();
 
   if (!appInterface()->fileOpen()) {
     KMessageBox::error(nullptr, i18n("Tried to access a file when it has not been opened"));
