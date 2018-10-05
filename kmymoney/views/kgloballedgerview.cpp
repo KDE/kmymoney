@@ -510,7 +510,7 @@ void KGlobalLedgerView::loadView()
           // if the transaction is scheduled and overdue, it can't
           // certainly be posted in the past. So we take today's date
           // as the alternative
-          if (s.isOverdue()) {
+          if (s.isOverdue() && !KMyMoneyGlobalSettings::showPlannedScheduleDates()) {
             t.setPostDate(s.adjustedDate(QDate::currentDate(), s.weekendOption()));
           } else {
             t.setPostDate(s.adjustedNextDueDate());
@@ -523,7 +523,7 @@ void KGlobalLedgerView::loadView()
             }
           }
           // keep track of this payment locally (not in the engine)
-          if (s.isOverdue()) {
+          if (s.isOverdue() && !KMyMoneyGlobalSettings::showPlannedScheduleDates()) {
             s.setLastPayment(QDate::currentDate());
           } else {
             s.setLastPayment(s.nextDueDate());
