@@ -167,6 +167,7 @@ void MyMoneyDbDef::PayeesPayeeIdentifier()
   appendField(MyMoneyDbIntColumn("userOrder", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 10));
   appendField(MyMoneyDbColumn("identifierId", "varchar(32)", false, NOTNULL, 8));
   MyMoneyDbTable t("kmmPayeesPayeeIdentifier", fields);
+  t.addFieldNameChange("\"order\"", "userOrder", 10);
   t.buildSQLStrings();
   m_tables[t.name()] = t;
 }
@@ -227,6 +228,7 @@ void MyMoneyDbDef::AccountsPayeeIdentifier()
   appendField(MyMoneyDbIntColumn("userOrder", MyMoneyDbIntColumn::SMALL, UNSIGNED, PRIMARYKEY, NOTNULL, 10));
   appendField(MyMoneyDbColumn("identifierId", "varchar(32)", false, NOTNULL, 8));
   MyMoneyDbTable t("kmmAccountsPayeeIdentifier", fields);
+  t.addFieldNameChange("\"order\"", "userOrder", 10);
   t.buildSQLStrings();
   m_tables[t.name()] = t;
 }
@@ -339,7 +341,7 @@ void MyMoneyDbDef::Securities()
   appendField(MyMoneyDbIntColumn("type", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL));
   appendField(MyMoneyDbTextColumn("typeString"));
   appendField(MyMoneyDbColumn("smallestAccountFraction", "varchar(24)"));
-  appendField(MyMoneyDbIntColumn("pricePrecision", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL));
+  appendField(MyMoneyDbIntColumn("pricePrecision", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL, 11, std::numeric_limits<int>::max(), QLatin1String("4")));
   appendField(MyMoneyDbTextColumn("tradingMarket"));
   appendField(MyMoneyDbColumn("tradingCurrency", "char(3)"));
   appendField(MyMoneyDbIntColumn("roundingMethod", MyMoneyDbIntColumn::SMALL, UNSIGNED, false, NOTNULL, 11, std::numeric_limits<int>::max(), QString("%1").arg(AlkValue::RoundRound)));
@@ -619,14 +621,20 @@ void MyMoneyDbTable::buildSQLStrings()
   }
 }
 
-const QString MyMoneyDbTable::columnList(const int version) const
+const QString MyMoneyDbTable::columnList(const int version, bool useNewNames) const
 {
   field_iterator ft = m_fields.begin();
   QString qs;
   ft = m_fields.begin();
   while (ft != m_fields.end()) {
     if ((*ft)->initVersion() <= version && (*ft)->lastVersion() >= version) {
-      qs += QString("%1, ").arg((*ft)->name());
+      QString fieldName = (*ft)->name();
+      if (useNewNames && m_newFieldNames.contains(fieldName)) {
+        if (m_newFieldNames[fieldName].first == version+1) {
+          fieldName = m_newFieldNames[fieldName].second;
+        }
+      }
+      qs += QString("%1, ").arg(fieldName);
     }
     ++ft;
   }
@@ -691,6 +699,12 @@ int MyMoneyDbTable::fieldNumber(const QString& name) const
     throw MYMONEYEXCEPTION(QString::fromLatin1("Unknown field %1 in table %2").arg(name).arg(m_name));
   }
   return i.value();
+}
+
+void MyMoneyDbTable::addFieldNameChange(const QString& fromName, const QString& toName, int version)
+{
+  Q_ASSERT(m_newFieldNames.contains(fromName) == false);
+  m_newFieldNames[fromName] = qMakePair(version, toName);
 }
 
 //*****************************************************************************

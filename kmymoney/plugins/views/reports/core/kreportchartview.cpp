@@ -583,11 +583,11 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   planeDiagram->setModel(&m_model);
 
   // connect needLayoutPlanes, so dimension of chart can be known, so custom Y labels can be generated
-  connect(cPlane, SIGNAL(needLayoutPlanes()), this, SLOT(slotNeedUpdate()));
+  connect(cPlane, &KChart::AbstractCoordinatePlane::needLayoutPlanes, this, &KReportChartView::slotNeedUpdate, Qt::QueuedConnection);
 }
 void KReportChartView::slotNeedUpdate()
 {
-  disconnect(coordinatePlane(), SIGNAL(needLayoutPlanes()), this, SLOT(slotNeedUpdate())); // this won't cause hang-up in KReportsView::slotConfigure
+  disconnect(coordinatePlane(), &KChart::AbstractCoordinatePlane::needLayoutPlanes, this, &KReportChartView::slotNeedUpdate); // this won't cause hang-up in KReportsView::slotConfigure
   QList<DataDimension> grids = coordinatePlane()->gridDimensionsList();
   if (grids.isEmpty())  // ring and pie charts have no dimensions
     return;

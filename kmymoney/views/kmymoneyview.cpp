@@ -506,9 +506,8 @@ void KMyMoneyView::showPage(View idView)
       currentPage() == viewFrames[idView])
     return;
 
-  setCurrentPage(viewFrames[idView]);
-
   resetViewSelection();
+  setCurrentPage(viewFrames[idView]);
 }
 
 bool KMyMoneyView::canPrint()

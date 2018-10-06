@@ -153,9 +153,10 @@ void OFXImporter::slotImportFile()
   d->m_preferName = static_cast<OFXImporter::Private::NamePreference>(option->m_preferName->currentIndex());
 
   if (url.isValid()) {
-    if (isMyFormat(url.path())) {
+    const QString filename(url.toLocalFile());
+    if (isMyFormat(filename)) {
       statementInterface()->resetMessages();
-      slotImportFile(url.path());
+      slotImportFile(filename);
       statementInterface()->showMessages(d->m_statementlist.count());
 
     } else {
@@ -186,12 +187,14 @@ bool OFXImporter::isMyFormat(const QString& filename) const
 
   QFile f(filename);
   if (f.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    qDebug() << "OFX: file opened";
     QTextStream ts(&f);
 
     int lineCount = 20;
     while (!ts.atEnd() && !result  && lineCount != 0) {
       // get a line of data and remove all unnecessary whitepace chars
       QString line = ts.readLine().simplified();
+      qDebug() << "OFX:" << line;
       if (line.contains(QStringLiteral("<OFX>"), Qt::CaseInsensitive)
           || line.contains(QStringLiteral("<OFC>"), Qt::CaseInsensitive))
         result = true;
@@ -200,6 +203,8 @@ bool OFXImporter::isMyFormat(const QString& filename) const
         lineCount--;
     }
     f.close();
+  } else {
+    qDebug() << "OFXImporter::isMyFormat: unable to open" << filename << "with" << f.errorString();
   }
 
   return result;

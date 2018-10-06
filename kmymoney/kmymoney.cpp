@@ -1937,7 +1937,7 @@ bool KMyMoneyApp::isImportableFile(const QUrl &url)
   // Iterate through the plugins and see if there's a loaded plugin who can handle it
   QMap<QString, KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = pPlugins.importer.constBegin();
   while (it_plugin != pPlugins.importer.constEnd()) {
-    if ((*it_plugin)->isMyFormat(url.path())) {
+    if ((*it_plugin)->isMyFormat(url.toLocalFile())) {
       result = true;
       break;
     }
@@ -3158,7 +3158,7 @@ void KMyMoneyApp::slotEquityPriceUpdate()
 
 void KMyMoneyApp::webConnectUrl(const QUrl url)
 {
-  QMetaObject::invokeMethod(this, "webConnect", Qt::QueuedConnection, Q_ARG(QString, url.path()), Q_ARG(QByteArray, QByteArray()));
+  QMetaObject::invokeMethod(this, "webConnect", Qt::QueuedConnection, Q_ARG(QString, url.toLocalFile()), Q_ARG(QByteArray, QByteArray()));
 }
 
 void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
@@ -3185,7 +3185,6 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
 
       // Bring this window to the forefront.  This method was suggested by
       // Lubos Lunak <l.lunak@suse.cz> of the KDE core development team.
-      // TODO: port KF5 (WebConnect)
       //KStartupInfo::setNewStartupId(this, asn_id);
 
       // Make sure we have an open file

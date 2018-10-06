@@ -33,6 +33,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDomDocument>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -91,7 +92,7 @@ void ValidateIndexCache()
   QDir dir;
   dir.mkpath(directory);
 
-  QFileInfo i(fname.path());
+  QFileInfo i(fname.toLocalFile());
   if (needReload(i))
     get("", attr, QUrl(QStringLiteral("http://www.ofxhome.com/api.php?all=yes")), fname);
 }
@@ -218,12 +219,12 @@ OfxFiServiceInfo ServiceInfo(const QString& fipid)
 
   QUrl guidFile(QString("file://%1fipid-%2.xml").arg(directory).arg(fipid));
 
-  QFileInfo i(guidFile.path());
+  QFileInfo i(guidFile.toLocalFile());
 
   if (!i.isReadable() || i.lastModified().addDays(7) < QDateTime::currentDateTime())
     get("", attr, QUrl(QString("http://www.ofxhome.com/api.php?lookup=%1").arg(fipid)), guidFile);
 
-  QFile f(guidFile.path());
+  QFile f(guidFile.toLocalFile());
   if (f.open(QIODevice::ReadOnly)) {
     QTextStream stream(&f);
     stream.setCodec("UTF-8");
@@ -243,6 +244,10 @@ OfxFiServiceInfo ServiceInfo(const QString& fipid)
       result.billpay = false;
       result.investments = true;
     }
+  }
+  else
+  {
+    qDebug() << "OFX ServiceInfo:" << f.errorString();
   }
   return result;
 }
@@ -330,7 +335,8 @@ OfxHttpRequest::~OfxHttpRequest()
 
 void OfxHttpRequest::slotOfxConnected(KIO::Job*)
 {
-  m_file.setFileName(m_dst.path());
+  qDebug() << "OfxHttpRequest::slotOfxConnected" << m_dst.toLocalFile();
+  m_file.setFileName(m_dst.toLocalFile());
   m_file.open(QIODevice::WriteOnly);
 }
 
@@ -358,11 +364,11 @@ void OfxHttpRequest::slotOfxFinished(KJob* /* e */)
     m_error = m_postJob->error();
     if (m_error) {
       m_postJob->uiDelegate()->showErrorMessage();
-      QFile::remove(m_dst.path());
+      QFile::remove(m_dst.toLocalFile());
 
     } else if (m_postJob->isErrorPage()) {
       QString details;
-      QFile f(m_dst.path());
+      QFile f(m_dst.toLocalFile());
       if (f.open(QIODevice::ReadOnly)) {
         QTextStream stream(&f);
         QString line;
@@ -372,14 +378,14 @@ void OfxHttpRequest::slotOfxFinished(KJob* /* e */)
         f.close();
       }
       KMessageBox::detailedSorry(0, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed"));
-      QFile::remove(m_dst.path());
+      QFile::remove(m_dst.toLocalFile());
     }
 
   } else if(m_getJob) {
     m_error = m_getJob->error();
     if (m_error) {
       m_getJob->uiDelegate()->showErrorMessage();
-      QFile::remove(m_dst.path());
+      QFile::remove(m_dst.toLocalFile());
     }
   }
 
