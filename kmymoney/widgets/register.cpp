@@ -930,9 +930,8 @@ namespace KMyMoneyRegister
             break;
           }
         }
-        if (w < minWidth) {
+        if (minWidth && (w < minWidth)) {
           w = minWidth;
-          break;
         }
       }
     }
