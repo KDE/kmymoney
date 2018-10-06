@@ -77,7 +77,7 @@ public:
   /**
     * This method generates the DDL (Database Design Language) string for the column.
     *
-    * @param dbType Database driver type
+    * @param driver Database driver type
     *
     * @return QString of the DDL for the column, tailored for what the driver supports.
     */
@@ -279,7 +279,7 @@ public:
     * This method determines the string required to drop the primary key for the table
     * based on the db specific syntax.
     *
-    * @param dbType The driver type of the database.
+    * @param driver The driver type of the database.
     *
     * @return QString for the syntax to drop the primary key.
     */
@@ -289,15 +289,18 @@ public:
     * which were present in a given version
     *
     * @param version version of database definition required
+    * @param useNewNames if true, new column names will be used where applicable
     *
     * @return QString column list
+    *
+    * @sa addFieldNameChange()
     */
-  const QString columnList(const int version = std::numeric_limits<int>::max()) const;
+  const QString columnList(const int version = std::numeric_limits<int>::max(), bool useNewNames = false) const;
   /**
     * This method returns the string for changing a column's definition.  It covers statements
     * like ALTER TABLE..CHANGE COLUMN, MODIFY COLUMN, etc.
     *
-    * @param dbType The driver type of the database.
+    * @param driver The driver type of the database.
     * @param columnName The name of the column to be modified.
     * @param newDef The MyMoneyColumn object of the new column definition.
     *
@@ -313,7 +316,7 @@ public:
   /**
     * This method generates the DDL required to create the table.
     *
-    * @param dbType The driver type of the database.
+    * @param driver The driver type of the database.
     *
     * @return QString of the DDL.
     */
@@ -327,6 +330,17 @@ public:
     * @param unique Whether or not this should be a unique index.
     */
   void addIndex(const QString& name, const QStringList& columns, bool unique = false);
+
+  /**
+   * This method adds a field rename instruction to the table object
+   *
+   * @param fromName The name of the field in prior versions
+   * @param toName The new name of the field
+   * @param version The version at which the named changed
+   *
+   * @sa columnList()
+   */
+  void addFieldNameChange(const QString& fromName, const QString& toName, int version);
 
   typedef QList<QExplicitlySharedDataPointer <MyMoneyDbColumn> >::const_iterator field_iterator;
   inline field_iterator begin() const {
@@ -356,6 +370,7 @@ private:
   QString m_selectAllString; // to select all fields
   QString m_updateString;  // normal string for record update
   QString m_deleteString; // string to delete 1 record
+  QHash< QString, QPair<int, QString>> m_newFieldNames;
 };
 
 /**

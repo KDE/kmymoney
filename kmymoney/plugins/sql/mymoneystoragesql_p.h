@@ -2578,8 +2578,8 @@ public:
     }
     createTable(t, toVersion);
     if (q->getRecCount(tempTableName) > 0) {
-      query.prepare(QString("INSERT INTO " + t.name() + " (" + t.columnList(fromVersion) +
-                          ") SELECT " + t.columnList(fromVersion) + " FROM " + tempTableName + ';'));
+      query.prepare(QString("INSERT INTO " + t.name() + " (" + t.columnList(fromVersion, true) +
+                          ") SELECT " + t.columnList(fromVersion, false) + " FROM " + tempTableName + ';'));
       if (!query.exec()) { // krazy:exclude=crashy
           buildError(query, Q_FUNC_INFO, QString("Error inserting into new table %1").arg(t.name()));
           return false;
