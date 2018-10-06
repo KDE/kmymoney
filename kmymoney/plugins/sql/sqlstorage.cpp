@@ -16,10 +16,8 @@
  ***************************************************************************/
 
 #include <config-kmymoney.h>
-#include "sqlstorage.h"
 
 #include <memory>
-#include <config-kmymoney.h>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -41,6 +39,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "sqlstorage.h"
 #include "appinterface.h"
 #include "viewinterface.h"
 #include "kselectdatabasedlg.h"

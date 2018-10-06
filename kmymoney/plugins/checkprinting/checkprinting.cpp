@@ -32,11 +32,11 @@
 #endif
 #include <QPrintDialog>
 #include <QPrinter>
+#include <QStandardPaths>
 
 // KDE includes
 #include <KPluginFactory>
 #include <KActionCollection>
-#include <QStandardPaths>
 #include <KLocalizedString>
 
 // KMyMoney includes
