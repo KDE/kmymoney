@@ -293,6 +293,9 @@ int runKMyMoney(QApplication& a, std::unique_ptr<QSplashScreen> splash, const QU
     if (url.isValid() && !noFile) {
       kmymoney->slotFileOpenRecent(url);
     } else if (KMyMoneySettings::firstTimeRun()) {
+      // resetting the splash here is needed for windows to have access
+      // to the new file wizard
+      splash.reset();
       kmymoney->slotFileNew();
     }
     KMyMoneySettings::setFirstTimeRun(false);
