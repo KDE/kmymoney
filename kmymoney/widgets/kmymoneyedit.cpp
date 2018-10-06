@@ -106,6 +106,21 @@ public:
   {
   }
 
+  /**
+  * Force geometry update of a hidden widget,
+  * see https://stackoverflow.com/a/3996525 for details
+  *
+  * @parem widget widget to force update
+  */
+  void forceUpdate(QWidget *widget)
+  {
+      widget->setAttribute(Qt::WA_DontShowOnScreen);
+      widget->show();
+      widget->updateGeometry();
+      widget->hide();
+      widget->setAttribute(Qt::WA_DontShowOnScreen, false);
+  }
+
   void init()
   {
     Q_Q(KMyMoneyEdit);
@@ -131,7 +146,7 @@ public:
 
     m_calculator = new KMyMoneyCalculator(m_calculatorFrame);
     calculatorFrameVBoxLayout->addWidget(m_calculator);
-    m_calculatorFrame->hide();
+    forceUpdate(m_calculatorFrame);
 
     m_calcButton = new QPushButton(Icons::get(Icon::AccessoriesCalculator), QString(), q);
     m_calcButton->setFocusProxy(m_edit);
