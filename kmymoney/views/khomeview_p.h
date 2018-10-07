@@ -166,7 +166,6 @@ public:
 
     vbox->addWidget(m_view);
 
-    m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
   #ifdef ENABLE_WEBENGINE
     q->connect(m_view->page(), &QWebEnginePage::urlChanged,
             q, &KHomeView::slotOpenUrl);
