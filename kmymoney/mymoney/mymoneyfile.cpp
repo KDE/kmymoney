@@ -1353,6 +1353,8 @@ void MyMoneyFile::removeTag(const MyMoneyTag& tag)
 
 void MyMoneyFile::accountList(QList<MyMoneyAccount>& list, const QStringList& idlist, const bool recursive) const
 {
+  d->checkStorage();
+
   if (idlist.isEmpty()) {
     d->m_storage->accountList(list);
 

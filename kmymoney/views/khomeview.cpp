@@ -177,7 +177,13 @@ void KHomeView::slotOpenUrl(const QUrl &url)
       QTimer::singleShot(0, mw->actionCollection()->action(id), SLOT(trigger()));
     } else if (view == VIEW_HOME) {
       QList<MyMoneyAccount> list;
-      MyMoneyFile::instance()->accountList(list);
+      // it could be, that we don't even have a storage object attached.
+      // in this case the call to accountList() will throw an MyMoneyException
+      // which we catch here and treat it as 'no accounts found'.
+      try {
+        MyMoneyFile::instance()->accountList(list);
+      } catch(const MyMoneyException& e) {
+      }
       if (list.count() == 0) {
         KMessageBox::information(this, i18n("Before KMyMoney can give you detailed information about your financial status, you need to create at least one account. Until then, KMyMoney shows the welcome page instead."));
       }
