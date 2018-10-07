@@ -161,14 +161,14 @@ void WebConnect::dataAvailable()
     }
     QUrl url;
     in >> url;
-    qCInfo(WebConnectLog) << "Processing" << url;
+    qCDebug(WebConnectLog) << "Processing" << url;
     emit gotUrl(url);
 }
 
 void WebConnect::loadFile(const QUrl& url)
 {
     if (d->connectToServer()) {
-        qCInfo(WebConnectLog) << "Pass to server" << url;
+        qCDebug(WebConnectLog) << "Pass to server" << url;
         // transfer filename
         QByteArray block;
         QDataStream stream(&block, QIODevice::WriteOnly);
