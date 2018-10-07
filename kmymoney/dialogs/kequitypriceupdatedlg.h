@@ -51,8 +51,7 @@ class KEquityPriceUpdateDlg : public QDialog
   Q_DISABLE_COPY(KEquityPriceUpdateDlg)
 
 public:
-  explicit KEquityPriceUpdateDlg(QWidget *parent, const QString& securityId);
-  explicit KEquityPriceUpdateDlg(QWidget *parent);
+  explicit KEquityPriceUpdateDlg(QWidget *parent, const QString& securityId = QString());
   ~KEquityPriceUpdateDlg();
   void storePrices();
   MyMoneyPrice price(const QString& id) const;
