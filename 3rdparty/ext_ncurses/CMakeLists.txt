@@ -7,9 +7,9 @@ ExternalProject_Add(
   URL_MD5 98c889aaf8d23910d2b92d65be2e737a
 
   INSTALL_DIR ${PREFIX_ext_ncurses}
-  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_ncurses} ${GLOBAL_AUTOMAKE_PROFILE}
-  BUILD_COMMAND make
-  INSTALL_COMMAND make install
+  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_ncurses} --enable-overwrite --enable-pc-files --without-tests --with-shared --with-cxx-shared --without-ada
+  BUILD_COMMAND ${MAKE_EXE}
+  INSTALL_COMMAND ${MAKE_EXE} install
 
   UPDATE_COMMAND ""
   BUILD_IN_SOURCE 1
