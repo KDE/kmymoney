@@ -154,10 +154,10 @@ int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
           // even if SQLite database doesn't exist
           auto isSQLiteAutocreated = false;
           if (driverName().compare(QLatin1String("QSQLITE")) == 0 ||
-              driverName().compare(QLatin1String("QSQLCIPHER")) == 0)
-            if (!QFile(url.toLocalFile()).exists())
+              driverName().compare(QLatin1String("QSQLCIPHER")) == 0) {
+            if (!QFile::exists(dbName))
               isSQLiteAutocreated = true;
-
+          }
           const auto isSuccessfullyOpened = QSqlDatabase::open();
           if (!isSuccessfullyOpened || (isSQLiteAutocreated && isSuccessfullyOpened)) {
             if (!d->createDatabase(url)) {

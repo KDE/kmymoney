@@ -2526,11 +2526,18 @@ public:
     // an old behaviour is used: call upgradeDb().
     m_dbVersion = m_db.currentVersion();
     if (m_dbVersion >= 6) {
-      query.prepare(QLatin1String("INSERT INTO kmmFileInfo (version, fixLevel) VALUES(?,?);"));
-      query.bindValue(0, m_dbVersion);
-      query.bindValue(1, m_storage->fileFixVersion());
-      if (!query.exec())
-        throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("Saving database version"));
+      // create the fileinfo stuff if it does not exist
+      query.prepare("SELECT count(*) FROM kmmFileInfo;");
+      if (!query.exec() || !query.next())
+        throw MYMONEYEXCEPTIONSQL("checking fileinfo"); // krazy:exclude=crashy
+
+      if (query.value(0).toInt() == 0) {
+        query.prepare(QLatin1String("INSERT INTO kmmFileInfo (version, fixLevel) VALUES(?,?);"));
+        query.bindValue(0, m_dbVersion);
+        query.bindValue(1, m_storage->fileFixVersion());
+        if (!query.exec())
+          throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("Saving database version"));
+      }
     }
 
     return upgradeDb();
