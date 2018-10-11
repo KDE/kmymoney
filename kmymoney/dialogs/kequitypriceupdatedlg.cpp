@@ -146,8 +146,8 @@ public:
       }
     }
 
-    // if list is empty, add the request price pair
-    if (ui->lvEquityList->invisibleRootItem()->childCount() == 0) {
+    // if list is empty and a price pair has been requested, add it
+    if (ui->lvEquityList->invisibleRootItem()->childCount() == 0 && !securityId.isEmpty()) {
       addPricePair(currencyIds, true);
     }
 
@@ -182,7 +182,9 @@ public:
 
     // Hide OK button until we have received the first update
     ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
-
+    if (ui->lvEquityList->invisibleRootItem()->childCount() == 0) {
+      ui->btnUpdateAll->setEnabled(false);
+    }
     q->slotUpdateSelection();
 
     // previous versions of this dialog allowed to store a "Don't ask again" switch.
@@ -326,11 +328,6 @@ KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& sec
 {
   Q_D(KEquityPriceUpdateDlg);
   d->init(securityId);
-}
-
-KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent) :
-  KEquityPriceUpdateDlg(parent, QString())
-{
 }
 
 KEquityPriceUpdateDlg::~KEquityPriceUpdateDlg()

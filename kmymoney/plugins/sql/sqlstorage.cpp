@@ -202,7 +202,7 @@ bool SQLStorage::save(const QUrl &url)
     return (rc);
   }
   auto writer = new MyMoneyStorageSql(MyMoneyFile::instance()->storage(), url);
-  writer->open(url, QIODevice::WriteOnly);
+  writer->open(url, QIODevice::ReadWrite);
 //  writer->setProgressCallback(&KMyMoneyView::progressCallback);
   if (!writer->writeFile()) {
     KMessageBox::detailedError(nullptr,
