@@ -1,19 +1,15 @@
-set(PREFIX_ext_ofx "${EXTPREFIX}")
-set(ofx_openSPIncludeDir "${INSTALL_ROOT}/include/OpenSP")
-set(ofx_openSPLibDir "${INSTALL_ROOT}/lib")
+set(ofx_openSPIncludeDir "${EXT_INSTALL_DIR}/include/OpenSP")
+set(ofx_openSPLibDir "${EXT_INSTALL_DIR}/lib")
 
 ExternalProject_Add(
   ext_ofx
-  DOWNLOAD_DIR ${EXTERNALS_DOWNLOAD_DIR}
+  DOWNLOAD_DIR ${EXT_DOWNLOAD_DIR}
   URL http://downloads.sourceforge.net/project/libofx/libofx/libofx-0.9.13.tar.gz
   URL_MD5 dde6276ffe2999f86bed5bf2cc80f7b2
 
-  INSTALL_DIR ${PREFIX_ext_ofx}
-  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_ofx} ${GLOBAL_AUTOMAKE_PROFILE} --with-opensp-includes=${ofx_openSPIncludeDir} --with-opensp-libs=${ofx_openSPLibDir}
-  BUILD_COMMAND make
-  INSTALL_COMMAND make install
+  CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${EXT_INSTALL_DIR} ${AT_HOST} ${AT_SHARED_ONLY} --with-opensp-includes=${ofx_openSPIncludeDir} --with-opensp-libs=${ofx_openSPLibDir}
+  BUILD_COMMAND $(MAKE)
+  INSTALL_COMMAND $(MAKE) install
 
-  UPDATE_COMMAND ""
-  BUILD_IN_SOURCE 1
   DEPENDS ext_opensp
 )

@@ -1,8 +1,8 @@
 ExternalProject_Add(
-  ext_intltool
+  ext_unistring
   DOWNLOAD_DIR ${EXT_DOWNLOAD_DIR}
-  URL https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz
-  URL_MD5 12e517cac2b57a0121cda351570f1e63
+  URL http://ftp.gnu.org/gnu/libunistring/libunistring-0.9.10.tar.xz
+  URL_MD5 db08bb384e81968957f997ec9808926e
 
   CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${EXT_INSTALL_DIR} ${AT_HOST} ${AT_SHARED_ONLY}
   BUILD_COMMAND $(MAKE)

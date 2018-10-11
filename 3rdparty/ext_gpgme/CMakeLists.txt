@@ -1,17 +1,12 @@
-set(PREFIX_ext_gpgme "${EXTPREFIX}")
-
 ExternalProject_Add(
   ext_gpgme
-  DOWNLOAD_DIR ${EXTERNALS_DOWNLOAD_DIR}
-  URL https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-1.11.1.tar.bz2
-  URL_MD5 129c46fb85a7ffa41e43345e48aee884
+  DOWNLOAD_DIR ${EXT_DOWNLOAD_DIR}
+  URL https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-1.12.0.tar.bz2
+  URL_MD5 902fca3a94907efe4e929b2ade545a7c
 
-  INSTALL_DIR ${PREFIX_ext_gpgme}
-  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_gpgme} ${GLOBAL_AUTOMAKE_PROFILE} --enable-languages=cpp,qt --disable-gpg-test
-  BUILD_COMMAND make
-  INSTALL_COMMAND make install
+  CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${EXT_INSTALL_DIR} ${AT_HOST} ${AT_SHARED_ONLY} --enable-languages=cpp,qt --disable-gpg-test
+  BUILD_COMMAND $(MAKE)
+  INSTALL_COMMAND $(MAKE) install
 
-  UPDATE_COMMAND ""
-  BUILD_IN_SOURCE 1
   DEPENDS ext_assuan2
 )

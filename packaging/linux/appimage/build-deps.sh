@@ -55,39 +55,33 @@ fi
 cd $BUILD_PREFIX/deps-build/
 
 # Configure the dependencies for building
-cmake $KMYMONEY_SOURCES/3rdparty -DCMAKE_INSTALL_PREFIX=$DEPS_INSTALL_PREFIX -DINSTALL_ROOT=$DEPS_INSTALL_PREFIX -DEXTERNALS_DOWNLOAD_DIR=$DOWNLOADS_DIR
+cmake $KMYMONEY_SOURCES/3rdparty -DCMAKE_INSTALL_PREFIX=$DEPS_INSTALL_PREFIX -DEXT_INSTALL_DIR=$DEPS_INSTALL_PREFIX -DEXT_DOWNLOAD_DIR=$DOWNLOADS_DIR
 
 # Now start building everything we need, in the appropriate order
-cmake --build . --config RelWithDebInfo --target ext_iconv
-# cmake --build . --config RelWithDebInfo --target ext_lzma
-# cmake --build . --config RelWithDebInfo --target ext_icu
-cmake --build . --config RelWithDebInfo --target ext_xml # must be before gettext
-cmake --build . --config RelWithDebInfo --target ext_gettext
-# cmake --build . --config RelWithDebInfo --target ext_jpeg
-# cmake --build . --config RelWithDebInfo --target ext_png
-cmake --build . --config RelWithDebInfo --target ext_boost
-cmake --build . --config RelWithDebInfo --target ext_xslt # for ext_xmlsec1
-# cmake --build . --config RelWithDebInfo --target ext_fontconfig
-# cmake --build . --config RelWithDebInfo --target ext_freetype
-cmake --build . --config RelWithDebInfo --target ext_sqlite
-cmake --build . --config RelWithDebInfo --target ext_mysql
-# cmake --build . --config RelWithDebInfo --target ext_postgresql
-cmake --build . --config RelWithDebInfo --target ext_sharedmimeinfo
-cmake --build . --config RelWithDebInfo --target ext_qt
-cmake --build . --config RelWithDebInfo --target ext_knotifications
-cmake --build . --config RelWithDebInfo --target ext_kio
-cmake --build . --config RelWithDebInfo --target ext_kcmutils
-cmake --build . --config RelWithDebInfo --target ext_kwallet
-cmake --build . --config RelWithDebInfo --target ext_kactivities
-cmake --build . --config RelWithDebInfo --target ext_kitemmodels
-cmake --build . --config RelWithDebInfo --target ext_kholidays
-cmake --build . --config RelWithDebInfo --target ext_kidentitymanagement
-cmake --build . --config RelWithDebInfo --target ext_kcontacts
-cmake --build . --config RelWithDebInfo --target ext_akonadi
-cmake --build . --config RelWithDebInfo --target ext_alkimia
-cmake --build . --config RelWithDebInfo --target ext_kdiagram
-cmake --build . --config RelWithDebInfo --target ext_aqbanking
-cmake --build . --config RelWithDebInfo --target ext_gpgme
-cmake --build . --config RelWithDebInfo --target ext_sqlcipher
-cmake --build . --config RelWithDebInfo --target ext_ofx
-cmake --build . --config RelWithDebInfo --target ext_ical
+cmake --build . --target ext_gettext
+# cmake --build . --target ext_jpeg
+cmake --build . --target ext_png
+cmake --build . --target ext_boost
+cmake --build . --target ext_xslt # for ext_xmlsec1
+cmake --build . --target ext_sqlite
+cmake --build . --target ext_mysql
+cmake --build . --target ext_postgresql
+cmake --build . --target ext_sharedmimeinfo
+cmake --build . --target ext_gnutls
+cmake --build . --target ext_qt
+cmake --build . --target ext_knotifications
+cmake --build . --target ext_kio
+cmake --build . --target ext_kcmutils
+cmake --build . --target ext_kactivities
+cmake --build . --target ext_kitemmodels
+cmake --build . --target ext_kholidays
+cmake --build . --target ext_kidentitymanagement
+cmake --build . --target ext_kcontacts
+cmake --build . --target ext_akonadi
+cmake --build . --target ext_alkimia
+cmake --build . --target ext_kdiagram
+cmake --build . --target ext_aqbanking
+cmake --build . --target ext_gpgme
+cmake --build . --target ext_sqlcipher
+cmake --build . --target ext_ofx
+cmake --build . --target ext_ical

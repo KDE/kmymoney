@@ -1,25 +1,22 @@
-set(PREFIX_ext_mysql "${EXTPREFIX}")
-
 ExternalProject_Add(
   ext_mysql
-  DOWNLOAD_DIR ${EXTERNALS_DOWNLOAD_DIR}
+  DOWNLOAD_DIR ${EXT_DOWNLOAD_DIR}
   URL https://cdn.mysql.com//Downloads/MySQL-8.0/mysql-boost-8.0.12.tar.gz
   URL_MD5 82ba7cc22755f77635768c6e6d184161
 
-  INSTALL_DIR ${PREFIX_ext_mysql}
-  CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${PREFIX_ext_mysql}
-              -DCMAKE_BUILD_TYPE=${GLOBAL_BUILD_TYPE}
-              ${GLOBAL_PROFILE}
-              -DCMAKE_SYSTEM_PREFIX_PATH=${EXTPREFIX}
+  CMAKE_ARGS ${CMAKE_GLOBAL_PROFILE}
               -DWITH_BOOST=<SOURCE_DIR>/boost
               -DBUILD_CONFIG=mysql_release
+              -DWITH_LZMA=system
+              -DWITH_ICU=system
+              -DWITH_ZLIB=system
 #               -DCPACK_MONOLITHIC_INSTALL=1
 #               -DIGNORE_AIO_CHECK=1
 #               -DINSTALL_STATIC_LIBRARIES=OFF
 
   BUILD_COMMAND "" # on default whole server would be built
   INSTALL_COMMAND ""
-  DEPENDS ext_ncurses
+  DEPENDS ext_ncurses ext_openssl
 )
 
 # build and install client only

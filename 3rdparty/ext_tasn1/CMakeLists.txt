@@ -1,8 +1,8 @@
 ExternalProject_Add(
-  ext_intltool
+  ext_tasn1
   DOWNLOAD_DIR ${EXT_DOWNLOAD_DIR}
-  URL https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz
-  URL_MD5 12e517cac2b57a0121cda351570f1e63
+  URL http://ftp.gnu.org/gnu/libtasn1/libtasn1-4.13.tar.gz
+  URL_MD5 ce2ba4d3088119b48e7531a703669c52
 
   CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${EXT_INSTALL_DIR} ${AT_HOST} ${AT_SHARED_ONLY}
   BUILD_COMMAND $(MAKE)
