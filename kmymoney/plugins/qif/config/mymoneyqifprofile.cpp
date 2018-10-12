@@ -160,7 +160,7 @@ void MyMoneyQifProfile::clear()
   m_valueMode = "";
   m_filterScriptImport = "";
   m_filterScriptExport = "";
-  m_filterFileType = "*.qif";
+  m_filterFileType = "*.qif *.QIF";
 
   m_decimal.clear();
   m_decimal['$'] =

@@ -80,13 +80,12 @@ KImportDlg::KImportDlg(QWidget *parent)
                          i18n("Use this to open the profile editor"));
 
   // connect the buttons to their functionality
-  connect(m_qbuttonBrowse, SIGNAL(clicked()), this, SLOT(slotBrowse()));
-  connect(m_buttonBox, SIGNAL(accepted()), this, SLOT(slotOkClicked()));
-  connect(m_buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  connect(m_qbuttonBrowse, &QPushButton::clicked, this, &KImportDlg::slotBrowse);
+  connect(m_buttonBox, &QDialogButtonBox::accepted, this, &KImportDlg::slotOkClicked);
+  connect(m_buttonBox, &QDialogButtonBox::rejected, this, &KImportDlg::reject);
 
   // connect the change signals to the check slot and perform initial check
-  connect(m_qlineeditFile, SIGNAL(textChanged(QString)), this,
-          SLOT(slotFileTextChanged(QString)));
+  connect(m_qlineeditFile, &KLineEdit::textChanged, this, &KImportDlg::slotFileTextChanged);
 
   // setup button enable status
   slotFileTextChanged(m_qlineeditFile->text());
@@ -102,10 +101,10 @@ void KImportDlg::slotBrowse()
 
   MyMoneyQifProfile tmpprofile;
   tmpprofile.loadProfile("Profile-" + profile());
-
-  QUrl file = QFileDialog::getOpenFileUrl(this, i18n("Import File..."), QUrl("kfiledialog:///kmymoney-import"),
-      i18n("Import files (%1);;All files (%2)", tmpprofile.filterFileType(), "*")
-  );
+  QUrl file = QFileDialog::getOpenFileUrl(this,
+                                          i18n("Import File..."),
+                                          QUrl::fromLocalFile(m_qlineeditFile->text()),
+                                          i18n("Import files (%1);;All files (%2)", tmpprofile.filterFileType(), "*"));
 
   if (!file.isEmpty()) {
     m_qlineeditFile->setText(file.toDisplayString(QUrl::PreferLocalFile));
@@ -125,7 +124,6 @@ void KImportDlg::readConfig()
   KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   KConfigGroup kgrp = kconfig->group("Last Use Settings");
   m_qlineeditFile->setText(kgrp.readEntry("KImportDlg_LastFile"));
-
 }
 
 void KImportDlg::writeConfig()
