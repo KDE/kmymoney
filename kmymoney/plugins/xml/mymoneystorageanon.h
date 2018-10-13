@@ -90,6 +90,7 @@ protected:
 
   QDomElement findChildElement(const QString& name, const QDomElement& root);
 
+  void writeAccounts(QDomElement& accounts) final override;
 
 private:
   /**
@@ -108,7 +109,8 @@ private:
   void fakeBudget(MyMoneyBudget& bn);
   void fakeKeyValuePair(MyMoneyKeyValueContainer& _kvp);
 
-  MyMoneyMoney m_factor;
+  MyMoneyMoney          m_factor;
+  QList<MyMoneyAccount> m_accountList;
 };
 
 #endif

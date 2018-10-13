@@ -31,6 +31,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KLocalizedString>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -47,6 +49,7 @@
 #include "mymoneytag.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneyexception.h"
+#include "mymoneyenums.h"
 
 QStringList MyMoneyStorageANON::zKvpNoModify = QString("kmm-baseCurrency,OpeningBalanceAccount,PreferredAccount,Tax,fixed-interest,interest-calculation,payee,schedule,term,kmm-online-source,kmm-brokerage-account,kmm-sort-reconcile,kmm-sort-std,kmm-iconpos,mm-closed,payee,schedule,term,lastImportedTransactionDate,VatAccount,VatRate,kmm-matched-tx,Imported,priceMode").split(',');
 QStringList MyMoneyStorageANON::zKvpXNumber = QString("final-payment,loan-amount,periodic-payment,lastStatementBalance").split(',');
@@ -143,12 +146,31 @@ void MyMoneyStorageANON::writeTag(QDomElement& tag, const MyMoneyTag& _ta)
   MyMoneyStorageXML::writeTag(tag, ta);
 }
 
+void MyMoneyStorageANON::writeAccounts(QDomElement& accounts)
+{
+  // keep an account list to allow changing brokerage accounts accordingly
+  m_storage->accountList(m_accountList);
+  MyMoneyStorageXML::writeAccounts(accounts);
+}
+
 void MyMoneyStorageANON::writeAccount(QDomElement& account, const MyMoneyAccount& _p)
 {
   MyMoneyAccount p(_p);
 
+  const auto isBrokerageAccount = p.name().contains(i18n(" (Brokerage)"));
   p.setNumber(hideString(p.number()));
   p.setName(p.id());
+  if (isBrokerageAccount) {
+    // search the name of the corresponding investment account
+    // and setup the name according to the rule of brokerage accounts
+    foreach(const auto acc, m_accountList) {
+      if (acc.accountType() == eMyMoney::Account::Type::Investment
+      && _p.name() == i18n("%1 (Brokerage)", acc.name()) ) {
+        p.setName(i18n("%1 (Brokerage)", acc.id()));
+        break;
+      }
+    }
+  }
   p.setDescription(hideString(p.description()));
   fakeKeyValuePair(p);
 
