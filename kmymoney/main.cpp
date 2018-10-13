@@ -27,6 +27,8 @@
 #include <QCommandLineParser>
 #include <QSplashScreen>
 #include <QStandardPaths>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 #ifdef KMM_DBUS
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
@@ -209,14 +211,24 @@ int main(int argc, char *argv[])
   // file. In case the name does not start with "file://" or "./" or "/"
   // we need to prepend "./" to fake a relative filename. Otherwiese, QUrl prepends
   // "http://" and uses the full path which will not work.
+  // On MS-Windows we also need to check if the filename starts with a
+  // drive letter or the backslash variants.
   //
   // The handling might be different on other OSes
   if (!fileUrls.isEmpty()) {
     fname = fileUrls.front();
     QFileInfo fi(fname);
-    if (fi.isFile() && !fname.startsWith(QLatin1String("file://"))
-    && !fname.startsWith(QLatin1String("./"))
-    && !fname.startsWith(QLatin1String("/"))) {
+    auto needLeadIn = fi.isFile();
+#ifdef Q_OS_WIN
+    QRegularExpression exp("^[a-z]:", QRegularExpression::CaseInsensitiveOption);
+    needLeadIn &= !exp.match(fname).hasMatch()
+                  && !fname.startsWith(QLatin1String(".\\"))
+                  && !fname.startsWith(QLatin1String("\\"));
+#endif
+    needLeadIn &= !fname.startsWith(QLatin1String("file://"))
+                  && !fname.startsWith(QLatin1String("./"))
+                  && !fname.startsWith(QLatin1String("/"));
+    if (needLeadIn) {
         fname.prepend(QLatin1String("./"));
     }
   }
