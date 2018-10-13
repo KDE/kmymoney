@@ -436,7 +436,7 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
 
   // Create a temporary file if needed
   QString writeFile = localFile;
-  QTemporaryFile tmpFile;
+  QTemporaryFile tmpFile(writeFile);
   if (QFile::exists(localFile)) {
     tmpFile.open();
     writeFile = tmpFile.fileName();
