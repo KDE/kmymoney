@@ -65,10 +65,10 @@ void QIFImporter::createActions()
 
 void QIFImporter::slotQifImport()
 {
-  m_action->setEnabled(false);
   QPointer<KImportDlg> dlg = new KImportDlg(nullptr);
 
   if (dlg->exec() == QDialog::Accepted && dlg != nullptr) {
+    m_action->setEnabled(false);
     m_qifReader = new MyMoneyQifReader;
     statementInterface()->resetMessages();
     connect(m_qifReader, &MyMoneyQifReader::statementsReady, this, &QIFImporter::slotGetStatements);
@@ -76,33 +76,31 @@ void QIFImporter::slotQifImport()
     m_qifReader->setURL(dlg->file());
     m_qifReader->setProfile(dlg->profile());
     m_qifReader->setCategoryMapping(dlg->m_typeComboBox->currentIndex() == 0);
-    const auto statementCount = m_qifReader->statementCount();
-    if (!m_qifReader->startImport())
+    if (!m_qifReader->startImport()) {
       delete m_qifReader;
-    statementInterface()->showMessages(statementCount);
+      statementInterface()->showMessages(0);
+      m_action->setEnabled(true);
+    }
   }
   delete dlg;
-  m_action->setEnabled(true);
 }
 
 bool QIFImporter::slotGetStatements(const QList<MyMoneyStatement> &statements)
 {
   auto ret = true;
-  QStringList importSummary;
   for (const auto& statement : statements) {
     const auto singleImportSummary = statementInterface()->import(statement);
     if (singleImportSummary.isEmpty())
       ret = false;
-
-    importSummary.append(singleImportSummary);
   }
 
   delete m_qifReader;
 
-  if (!importSummary.isEmpty())
-    KMessageBox::informationList(nullptr,
-                               i18n("The statement has been processed with the following results:"), importSummary, i18n("Statement stats"));
+  // inform the user about the result of the operation
+  statementInterface()->showMessages(statements.count());
 
+  // allow further QIF imports
+  m_action->setEnabled(true);
   return ret;
 }
 
