@@ -335,15 +335,14 @@ bool XMLStorage::saveAs()
   QPointer<QFileDialog> dlg =
     new QFileDialog(nullptr, i18n("Save As"), prevDir,
                     QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.kmy")).arg(i18nc("KMyMoney (Filefilter)", "KMyMoney files")) +
-                    QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.xml")).arg(i18nc("XML (Filefilter)", "XML files")) +
                     QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.anon.xml")).arg(i18nc("Anonymous (Filefilter)", "Anonymous files")) +
+                    QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.xml")).arg(i18nc("XML (Filefilter)", "XML files")) +
                     QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*")).arg(i18nc("All files (Filefilter)", "All files")));
   dlg->setAcceptMode(QFileDialog::AcceptSave);
 
   if (dlg->exec() == QDialog::Accepted && dlg != 0) {
     QUrl newURL = dlg->selectedUrls().first();
     if (!newURL.fileName().isEmpty()) {
-      appInterface()->consistencyCheck(false);
       QString newName = newURL.toDisplayString(QUrl::PreferLocalFile);
 
       // append extension if not present
