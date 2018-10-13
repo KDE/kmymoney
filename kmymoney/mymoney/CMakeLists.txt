@@ -67,6 +67,7 @@ set(mymoney_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/kmm_mymoney_export.h
   mymoneyutils.h mymoneybudget.h mymoneyforecast.h
   imymoneyprocessingcalendar.h
   mymoneycostcenter.h
+  mymoneyenums.h
   mymoneyunittestable.h
   mymoneypayeeidentifiercontainer.h
   onlinejob.h
