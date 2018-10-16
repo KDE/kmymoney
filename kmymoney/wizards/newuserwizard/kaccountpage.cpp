@@ -53,12 +53,17 @@ namespace NewUserWizard
     d->m_mandatoryGroup->add(d->ui->m_accountNameEdit);
     connect(d->m_mandatoryGroup, static_cast<void (KMandatoryFieldGroup::*)()>(&KMandatoryFieldGroup::stateChanged), object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
     connect(d->ui->m_haveCheckingAccountButton, &QAbstractButton::toggled, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
-    d->ui->m_accountNameEdit->setFocus();
     d->ui->m_openingDateEdit->setDate(QDate(QDate::currentDate().year(), 1, 1));
   }
 
   AccountPage::~AccountPage()
   {
+  }
+
+  void AccountPage::enterPage()
+  {
+    Q_D(AccountPage);
+    d->ui->m_accountNameEdit->setFocus();
   }
 
   KMyMoneyWizardPage* AccountPage::nextPage() const
