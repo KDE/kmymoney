@@ -301,19 +301,27 @@ int runKMyMoney(QApplication& a, std::unique_ptr<QSplashScreen> splash, const QU
       url = QUrl::fromUserInput(kmymoney->readLastUsedFile());
     }
 
-    KTipDialog::showTip(kmymoney, QString(), false);
     if (url.isValid() && !noFile) {
+      if (importfile.isEmpty()) {
+        KTipDialog::showTip(kmymoney, QString(), false);
+      }
       kmymoney->slotFileOpenRecent(url);
+
     } else if (KMyMoneySettings::firstTimeRun()) {
-      // resetting the splash here is needed for windows to have access
+      // resetting the splash here is needed for ms-windows to have access
       // to the new file wizard
       splash.reset();
       kmymoney->slotFileNew();
     }
+
     KMyMoneySettings::setFirstTimeRun(false);
 
-    if (!importfile.isEmpty())
+    if (!importfile.isEmpty()) {
+      // resetting the splash here is needed for ms-windows to have access
+      // to the web connect widgets
+      splash.reset();
       kmymoney->webConnect(importfile, QByteArray());
+    }
 
   } else {
     // the instantQuit flag is set, so we force the app to quit right away

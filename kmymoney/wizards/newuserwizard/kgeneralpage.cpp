@@ -66,7 +66,6 @@ namespace NewUserWizard
   {
     Q_D(GeneralPage);
     d->m_contact = new MyMoneyContact(this);
-    ui->m_userNameEdit->setFocus();
 
     ui->m_loadAddressButton->setEnabled(d->m_contact->ownerExists());
     connect(ui->m_loadAddressButton, &QAbstractButton::clicked, this, &GeneralPage::slotLoadFromAddressBook);
@@ -75,6 +74,13 @@ namespace NewUserWizard
   GeneralPage::~GeneralPage()
   {
   }
+
+  void GeneralPage::enterPage()
+  {
+    Q_D(GeneralPage);
+    ui->m_userNameEdit->setFocus();
+  }
+
 
   void GeneralPage::slotLoadFromAddressBook()
   {

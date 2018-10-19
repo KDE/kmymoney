@@ -51,6 +51,8 @@ namespace NewUserWizard
 
     bool isComplete() const override;
 
+    void enterPage() override;
+
   private:
     Q_DECLARE_PRIVATE_D(WizardPage<Wizard>::d_ptr, AccountPage)
     friend class Wizard;
