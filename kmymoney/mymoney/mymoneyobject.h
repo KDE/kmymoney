@@ -79,7 +79,7 @@ class KMM_MYMONEY_EXPORT MyMoneyObject
 
 protected:
   MyMoneyObjectPrivate * d_ptr;
-  MyMoneyObject(MyMoneyObjectPrivate &dd);
+  explicit MyMoneyObject(MyMoneyObjectPrivate &dd);
   MyMoneyObject(MyMoneyObjectPrivate &dd,
                 const QString& id);
 };

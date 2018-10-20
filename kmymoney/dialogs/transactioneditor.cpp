@@ -813,7 +813,6 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
       }
     } catch (const MyMoneyException &e) {
       qDebug("Unable to store transaction within engine: %s", e.what());
-      newTransactionCreated = false;
     }
 
     emit statusProgress(-1, -1);

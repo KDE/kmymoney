@@ -47,7 +47,7 @@ class KSettingsPluginsPrivate
   Q_DISABLE_COPY(KSettingsPluginsPrivate)
 
 public:
-  KSettingsPluginsPrivate(KSettingsPlugins* qq) :
+  explicit KSettingsPluginsPrivate(KSettingsPlugins* qq) :
     m_pluginSelector(new KPluginSelector(qq))
   {
   }

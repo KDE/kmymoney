@@ -27,6 +27,7 @@
 QTEST_GUILESS_MAIN(MatchFinderTest)
 
 MatchFinderTest::MatchFinderTest() :
+  file(nullptr),
   matchResult(TransactionMatchFinder::MatchResult::MatchNotFound)
 {
 

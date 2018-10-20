@@ -72,12 +72,12 @@ class InvestTransactionEditorPrivate : public TransactionEditorPrivate
   friend class Invest::Activity;
 
 public:
-  InvestTransactionEditorPrivate(InvestTransactionEditor* qq) :
+  explicit  InvestTransactionEditorPrivate(InvestTransactionEditor* qq) :
       TransactionEditorPrivate(qq),
       m_activity(0),
+      m_phonyAccount(MyMoneyAccount("Phony-ID", MyMoneyAccount())),
       m_transactionType(eMyMoney::Split::InvestmentTransactionType::BuyShares)
   {
-    m_phonyAccount = MyMoneyAccount("Phony-ID", MyMoneyAccount());
   }
 
   ~InvestTransactionEditorPrivate()
@@ -1097,7 +1097,7 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
   s0.clearId();
 
   auto sec = dynamic_cast<KMyMoneySecurity*>(d->m_editWidgets["security"]);
-  if (sec && (!isMultiSelection() || (isMultiSelection() && !sec->currentText().isEmpty()))) {
+  if (sec && (!isMultiSelection() || !sec->currentText().isEmpty())) {
     QString securityId = sec->selectedItem();
     if (!securityId.isEmpty()) {
       s0.setAccountId(securityId);
@@ -1143,7 +1143,7 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
   //       by the user
   auto memo = dynamic_cast<KTextEdit*>(d->m_editWidgets["memo"]);
   if (memo) {
-    if (!isMultiSelection() || (isMultiSelection() && d->m_activity->memoChanged()))
+    if (!isMultiSelection() || d->m_activity->memoChanged())
       s0.setMemo(memo->toPlainText());
   }
 

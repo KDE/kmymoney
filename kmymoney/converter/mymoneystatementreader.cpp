@@ -234,8 +234,8 @@ void MyMoneyStatementReader::Private::previouslyUsedCategories(const QString& in
           acc = file->account(sNew.accountId());
           if (acc.accountGroup() != Account::Type::Expense && // shouldn't be fee
               acc.accountGroup() != Account::Type::Income &&  // shouldn't be interest
-              (sNew.value() != sNew.shares() ||                 // shouldn't be checking account...
-              (sNew.value() == sNew.shares() && sNew.price() != MyMoneyMoney::ONE))) { // ...but sometimes it may look like checking account
+              ((sNew.value() != sNew.shares()) ||                 // shouldn't be checking account...
+               (sNew.price() != MyMoneyMoney::ONE))) {            // ...but sometimes it may look like checking account
             s = sNew;
             break;
           }
