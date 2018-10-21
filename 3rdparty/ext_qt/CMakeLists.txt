@@ -1,5 +1,5 @@
 # qtquickcontrols and qtwebchannel are required by qtwebengine
-# "Pepper Plugins" are required by "Printing and PDF"
+# "WebRTC" is required by "Pepper Plugins" is required by "Printing and PDF"
 # don't use -I and -L switches as they will cause explicit link to
 # OpenSSL instead of BoringSSL in QWebEngine
 ExternalProject_Add(

@@ -10,9 +10,7 @@ ExternalProject_Add(
               -DWITH_LZMA=system
               -DWITH_ICU=system
               -DWITH_ZLIB=system
-#               -DINSTALL_STATIC_LIBRARIES=OFF
-#               -DWITH_SSL=${EXT_INSTALL_DIR}/openssl
-#               -DOPENSSL_EXECUTABLE=${EXT_INSTALL_DIR}/openssl/bin/openssl
+              -DINSTALL_STATIC_LIBRARIES=OFF
 #               -DCPACK_MONOLITHIC_INSTALL=1
 #               -DIGNORE_AIO_CHECK=1
 

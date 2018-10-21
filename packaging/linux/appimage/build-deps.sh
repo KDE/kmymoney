@@ -26,7 +26,6 @@ export DOWNLOADS_DIR=$BUILD_PREFIX/downloads
 export LD_LIBRARY_PATH=$DEPS_INSTALL_PREFIX/lib:$LD_LIBRARY_PATH
 export PATH=$DEPS_INSTALL_PREFIX/bin:$PATH
 export PKG_CONFIG_PATH=$DEPS_INSTALL_PREFIX/share/pkgconfig:$DEPS_INSTALL_PREFIX/lib/pkgconfig:/usr/lib/pkgconfig:$PKG_CONFIG_PATH
-export CMAKE_PREFIX_PATH=$DEPS_INSTALL_PREFIX:$CMAKE_PREFIX_PATH
 
 # A kmymoney build layout looks like this:
 # kmymoney/ -- the source directory
@@ -70,11 +69,7 @@ cmake --build . --target ext_freetype
 cmake --build . --target ext_harfbuzz
 cmake --build . --target ext_freetype # that's not a mistake that it's here a second time, harfbuzz nad freetype are interdependent
 cmake --build . --target ext_qt
-cmake --build . --target ext_sharedmimeinfo
-cmake --build . --target ext_gnutls
 cmake --build . --target ext_boost
-cmake --build . --target ext_knotifications
-cmake --build . --target ext_kio
 cmake --build . --target ext_kcmutils
 cmake --build . --target ext_kactivities
 cmake --build . --target ext_kitemmodels

@@ -34,15 +34,16 @@ set(CMAKE_BUILD_TYPE RelWithDebInfo)
 
 set(CMAKE_GLOBAL_PROFILE
   -DCMAKE_BUILD_TYPE=RelWithDebInfo
-  -DCMAKE_INSTALL_PREFIX=${EXT_INSTALL_DIR}
-  -DCMAKE_PREFIX_PATH=${EXT_INSTALL_DIR}
+  -DCMAKE_INSTALL_PREFIX=${CMAKE_PREFIX_PATH}
+  -DCMAKE_PREFIX_PATH=${CMAKE_INSTALL_PREFIX}
   -DBUILD_TESTING=FALSE
 )
 
 # without --host=x86_64 gmp builds with optimizations for skylake and that prevents running KMyMoney on pre-skylake CPUs
 set(AT_HOST --host=x86_64-linux-gnu)
 set(AT_SHARED_ONLY --disable-static --enable-shared)
-set(AT_CPP_FLAGS "-L${EXT_INSTALL_DIR}/lib -I${EXT_INSTALL_DIR}/include")
+set(AT_CPP_FLAGS "-I${EXT_INSTALL_DIR}/include")
+set(AT_LD_FLAGS "-L${EXT_INSTALL_DIR}/lib")
 
 set(PATCH_COMMAND patch)
 

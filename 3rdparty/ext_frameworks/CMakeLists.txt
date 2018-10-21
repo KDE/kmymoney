@@ -185,7 +185,7 @@ ExternalProject_Add(
   URL http://download.kde.org/stable/frameworks/5.51/kactivities-5.51.0.zip
   URL_MD5 397fe66ad6b2bd4151de87b5bea27550
   CMAKE_ARGS ${CMAKE_GLOBAL_PROFILE}
-  DEPENDS ext_kconfig ext_kcoreaddons ext_kwindowsystem
+  DEPENDS ext_boost ext_kconfig ext_kcoreaddons ext_kwindowsystem
 )
 
 ExternalProject_Add(
@@ -320,7 +320,7 @@ ExternalProject_Add(
   URL http://download.kde.org/stable/frameworks/5.51/kwallet-5.51.0.zip
   URL_MD5 da6f7e2282f6316b612cb0acaa7a140a
   CMAKE_ARGS ${CMAKE_GLOBAL_PROFILE}
-  DEPENDS ext_kcoreaddons ext_kconfig ext_kwindowsystem ext_ki18n
+  DEPENDS ext_kcoreaddons ext_kconfig ext_kwindowsystem ext_ki18n ext_kconfigwidgets ext_knotifications ext_kservice ext_kwidgetsaddons ext_kiconthemes ext_kdbusaddons
 )
 
 ExternalProject_Add(

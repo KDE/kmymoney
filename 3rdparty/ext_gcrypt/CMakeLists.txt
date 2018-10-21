@@ -7,4 +7,5 @@ ExternalProject_Add(
   CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${EXT_INSTALL_DIR} ${AT_HOST} ${AT_SHARED_ONLY} --disable-doc
   BUILD_COMMAND $(MAKE)
   INSTALL_COMMAND $(MAKE) install
+  DEPENDS ext_gpgerror
 )
