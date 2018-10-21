@@ -86,7 +86,7 @@ ExternalProject_Add(
   URL http://download.kde.org/stable/frameworks/5.51/kcoreaddons-5.51.0.zip
   URL_MD5 bd29fb792d368dcc031277182e20dd57
   CMAKE_ARGS ${CMAKE_GLOBAL_PROFILE}
-  DEPENDS ext_extra_cmake_modules
+  DEPENDS ext_sharedmimeinfo ext_extra_cmake_modules
 )
 
 ExternalProject_Add(

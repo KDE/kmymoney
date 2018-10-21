@@ -1,25 +1,18 @@
+set(openSSLLDFlags "-L${EXT_INSTALL_DIR}/openssl/lib")
 ExternalProject_Add(
   ext_postgresql
   DOWNLOAD_DIR ${EXT_DOWNLOAD_DIR}
-  URL https://ftp.postgresql.org/pub/source/v10.5/postgresql-10.5.tar.bz2
-  URL_MD5 a5fe5fdff2d6c28f65601398be0950df
+  URL https://ftp.postgresql.org/pub/source/v11.0/postgresql-11.0.tar.bz2
+  URL_MD5 338ede84c0443db02ff6e8c4c8cbc5e9
 
-  CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${EXT_INSTALL_DIR} ${AT_HOST} ${AT_SHARED_ONLY} --with-libxml --with-libxslt --with-openssl --with-icu CPPFLAGS=${AT_CPP_FLAGS}
-  BUILD_COMMAND ""
+  CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${EXT_INSTALL_DIR} --with-libxml --with-libxslt --with-icu --with-tcl --enable-thread-safety --without-readline --with-libraries=${EXT_INSTALL_DIR}/lib --with-includes=${EXT_INSTALL_DIR}/include
+  BUILD_COMMAND rsync -a --ignore-existing src/backend/utils/ src/include/utils/
+  COMMAND       rsync -a --ignore-existing src/backend/catalog/ src/include/catalog/
+  COMMAND $(MAKE) -C src/bin install
+  COMMAND $(MAKE) -C src/include install
+  COMMAND $(MAKE) -C src/interfaces install
   INSTALL_COMMAND ""
   UPDATE_COMMAND ""
   BUILD_IN_SOURCE 1
-  DEPENDS ext_readline
-)
-
-# build and install client only
-ExternalProject_Add_Step(
-ext_postgresql client
-COMMAND $(MAKE) -C src/bin install
-COMMAND rsync -a --ignore-existing src/backend/utils/ src/include/utils/
-COMMAND $(MAKE) -C src/include install
-COMMAND $(MAKE) -C src/interfaces install
-COMMAND $(MAKE) -C doc install
-DEPENDEES install
-WORKING_DIRECTORY <SOURCE_DIR>
+  DEPENDS ext_readline ext_tcl ext_xslt
 )

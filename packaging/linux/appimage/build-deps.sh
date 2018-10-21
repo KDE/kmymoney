@@ -58,22 +58,27 @@ cd $BUILD_PREFIX/deps-build/
 cmake $KMYMONEY_SOURCES/3rdparty -DCMAKE_INSTALL_PREFIX=$DEPS_INSTALL_PREFIX -DEXT_INSTALL_DIR=$DEPS_INSTALL_PREFIX -DEXT_DOWNLOAD_DIR=$DOWNLOADS_DIR
 
 # Now start building everything we need, in the appropriate order
+cmake --build . --target ext_iconv
+cmake --build . --target ext_zlib
+cmake --build . --target ext_lzma
+cmake --build . --target ext_xml
 cmake --build . --target ext_gettext
-# cmake --build . --target ext_jpeg
+cmake --build . --target ext_xslt
 cmake --build . --target ext_png
-cmake --build . --target ext_boost
-cmake --build . --target ext_xslt # for ext_xmlsec1
-cmake --build . --target ext_sqlite
-cmake --build . --target ext_mysql
-cmake --build . --target ext_postgresql
+# cmake --build . --target ext_jpeg
+cmake --build . --target ext_freetype
+cmake --build . --target ext_harfbuzz
+cmake --build . --target ext_freetype # that's not a mistake that it's here a second time, harfbuzz nad freetype are interdependent
+cmake --build . --target ext_qt
 cmake --build . --target ext_sharedmimeinfo
 cmake --build . --target ext_gnutls
-cmake --build . --target ext_qt
+cmake --build . --target ext_boost
 cmake --build . --target ext_knotifications
 cmake --build . --target ext_kio
 cmake --build . --target ext_kcmutils
 cmake --build . --target ext_kactivities
 cmake --build . --target ext_kitemmodels
+cmake --build . --target ext_kitemviews
 cmake --build . --target ext_kholidays
 cmake --build . --target ext_kidentitymanagement
 cmake --build . --target ext_kcontacts
