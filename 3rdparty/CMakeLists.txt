@@ -28,7 +28,7 @@ if(NOT IS_DIRECTORY ${EXT_INSTALL_DIR})
 endif()
 
 message( STATUS "CMAKE_GENERATOR: ${CMAKE_GENERATOR}")
-set(CMAKE_PREFIX_PATH "${EXT_INSTALL_DIR}")
+set(CMAKE_PREFIX_PATH "${EXT_INSTALL_DIR};${EXT_INSTALL_DIR}/openssl")
 set(CMAKE_INSTALL_PREFIX "${EXT_INSTALL_DIR}")
 set(CMAKE_BUILD_TYPE RelWithDebInfo)
 
@@ -42,8 +42,8 @@ set(CMAKE_GLOBAL_PROFILE
 # without --host=x86_64 gmp builds with optimizations for skylake and that prevents running KMyMoney on pre-skylake CPUs
 set(AT_HOST --host=x86_64-linux-gnu)
 set(AT_SHARED_ONLY --disable-static --enable-shared)
-set(AT_CPP_FLAGS "-I${EXT_INSTALL_DIR}/include")
-set(AT_LD_FLAGS "-L${EXT_INSTALL_DIR}/lib")
+set(AT_CPP_FLAGS "-I${EXT_INSTALL_DIR}/include -I${EXT_INSTALL_DIR}/openssl/include")
+set(AT_LD_FLAGS "-L${EXT_INSTALL_DIR}/lib -L${EXT_INSTALL_DIR}/openssl/lib")
 
 set(PATCH_COMMAND patch)
 

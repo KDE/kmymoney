@@ -17,7 +17,7 @@ ExternalProject_Add(
 
   BUILD_COMMAND "" # on default whole server would be built
   INSTALL_COMMAND ""
-  DEPENDS ext_ncurses #ext_openssl
+  DEPENDS ext_ncurses ext_openssl
 )
 
 # build and install client only

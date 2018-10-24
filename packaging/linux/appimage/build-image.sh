@@ -50,6 +50,9 @@ cp -r $DEPS_INSTALL_PREFIX/translations $APPDIR/usr/
 mv $APPDIR/usr/lib/x86_64-linux-gnu/*  $APPDIR/usr/lib
 rm -rf $APPDIR/usr/lib/x86_64-linux-gnu/
 
+mv $APPDIR/usr/openssl/lib/*  $APPDIR/usr/lib
+rm -rf $APPDIR/usr/openssl/lib/
+
 # Step 3: Update the rpath in the various plugins we have to make sure they'll be loadable in an Appimage context
 for lib in $PLUGINS/kmymoney/*.so*; do
   patchelf --set-rpath '$ORIGIN/../../lib' $lib;
