@@ -1,0 +1,16 @@
+diff -Npru kservice-5.51.0.orig/src/sycoca/ksycoca.cpp kservice-5.51.0/src/sycoca/ksycoca.cpp
+--- kservice-5.51.0.orig/src/sycoca/ksycoca.cpp	2018-10-08 10:21:25.000000000 +0200
++++ kservice-5.51.0/src/sycoca/ksycoca.cpp	2018-10-23 18:48:47.403851239 +0200
+@@ -602,6 +602,12 @@ KSycocaHeader KSycocaPrivate::readSycoca
+     language = header.language;
+     updateSig = header.updateSignature;
+ 
++    const QString appImageShare = QCoreApplication::applicationDirPath() + QLatin1String("/../share");
++    addLocalResourceDir(appImageShare + QLatin1String("/kservices5"));
++    addLocalResourceDir(appImageShare + QLatin1String("/kservicetypes5"));
++    addLocalResourceDir(appImageShare + QLatin1String("/mime"));
++    addLocalResourceDir(appImageShare + QLatin1String("/applications"));
++
+     if (m_globalDatabase) {
+         // The global database doesn't point to the user's local dirs, but we need to check them too
+         // to react on something being created there
