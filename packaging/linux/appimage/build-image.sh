@@ -45,13 +45,11 @@ cp -r $DEPS_INSTALL_PREFIX/share/locale $APPDIR/usr/share/kmymoney
 cp -r $DEPS_INSTALL_PREFIX/share/kf5 $APPDIR/usr/share
 cp -r $DEPS_INSTALL_PREFIX/share/mime $APPDIR/usr/share
 cp -r $DEPS_INSTALL_PREFIX/translations $APPDIR/usr/
+cp -r $DEPS_INSTALL_PREFIX/openssl/lib/*  $APPDIR/usr/lib
 
 # Step 2: Relocate x64 binaries from the architecture specific directory as required for Appimages
 mv $APPDIR/usr/lib/x86_64-linux-gnu/*  $APPDIR/usr/lib
 rm -rf $APPDIR/usr/lib/x86_64-linux-gnu/
-
-mv $APPDIR/usr/openssl/lib/*  $APPDIR/usr/lib
-rm -rf $APPDIR/usr/openssl/lib/
 
 # Step 3: Update the rpath in the various plugins we have to make sure they'll be loadable in an Appimage context
 for lib in $PLUGINS/kmymoney/*.so*; do
