@@ -42,6 +42,7 @@ X-KDE-ParentComponents=reportsview
 Comment=Configuration for reports view plugin
 Comment[ca]=Configuració del connector de la vista d'informes
 Comment[ca@valencia]=Configuració del connector de la vista d'informes
+Comment[de]=Einrichtung für das Modul Berichtansicht
 Comment[en_GB]=Configuration for reports view plugin
 Comment[es]=Configuración para el complemento del visor de informes
 Comment[fi]=Raporttinäkymäliitännäisen asetukset
