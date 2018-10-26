@@ -76,12 +76,10 @@ bool MyMoneyTemplate::loadTemplate(const QUrl &url)
     filename = url.toLocalFile();
 
   } else {
-    bool rc = false;
     downloadedFile = true;
     KIO::StoredTransferJob *transferjob = KIO::storedGet (url);
     KJobWidgets::setWindow(transferjob, KMyMoneyUtils::mainWindow());
-    rc = transferjob->exec();
-    if (! rc) {
+    if (! transferjob->exec()) {
         KMessageBox::detailedError(KMyMoneyUtils::mainWindow(),
                                  i18n("Error while loading file '%1'.", url.url()),
                                  transferjob->errorString(),

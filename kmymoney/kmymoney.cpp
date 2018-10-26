@@ -201,7 +201,7 @@ enum backupStateE {
 class KMyMoneyApp::Private
 {
 public:
-  Private(KMyMoneyApp *app) :
+  explicit Private(KMyMoneyApp *app) :
       q(app),
       m_backupState(backupStateE::BACKUP_IDLE),
       m_backupResult(0),
@@ -403,7 +403,6 @@ public:
 
     // For debugging purposes, we can turn off the automatic fix manually
     // by setting the entry in kmymoneyrc to true
-    grp = config->group("General Options");
     if (grp.readEntry("SkipFix", false) != true) {
       MyMoneyFileTransaction ft;
       try {
@@ -817,9 +816,9 @@ public:
     MyMoneyTransaction t = sched.transaction();
     QList<MyMoneySplit> splitList = t.splits();
     QList<MyMoneySplit>::ConstIterator it_s;
-    bool updated = false;
 
     try {
+      bool updated = false;
       // Check if the splits contain valid data and set it to
       // be valid.
       for (it_s = splitList.constBegin(); it_s != splitList.constEnd(); ++it_s) {
@@ -2135,9 +2134,8 @@ void KMyMoneyApp::slotLoadAccountTemplates()
 {
   KMSTATUS(i18n("Importing account templates."));
 
-  int rc;
   QPointer<KLoadTemplateDlg> dlg = new KLoadTemplateDlg();
-  if ((rc = dlg->exec()) == QDialog::Accepted && dlg != 0) {
+  if (dlg->exec() == QDialog::Accepted && dlg != 0) {
     MyMoneyFileTransaction ft;
     try {
       // import the account templates
@@ -3715,8 +3713,8 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
 }
 
 KMStatus::KMStatus(const QString &text)
+  : m_prevText(kmymoney->slotStatusMsg(text))
 {
-  m_prevText = kmymoney->slotStatusMsg(text);
 }
 
 KMStatus::~KMStatus()

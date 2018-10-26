@@ -29,7 +29,7 @@ Q_LOGGING_CATEGORY(WebConnectLog, "WebConnect")
 class WebConnect::Private
 {
 public:
-    Private(WebConnect* parent)
+    explicit Private(WebConnect* parent)
     : q(parent)
     , clientSocket(new QLocalSocket(parent))
     , serverSocket(0)

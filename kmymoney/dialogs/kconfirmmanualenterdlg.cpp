@@ -74,9 +74,10 @@ void KConfirmManualEnterDlg::loadTransactions(const MyMoneyTransaction& to, cons
 {
   QString messageDetail("<qt>");
   auto file = MyMoneyFile::instance();
-  int noItemsChanged = 0;
 
   try {
+    int noItemsChanged = 0;
+
     if (to.splits().isEmpty())
       throw MYMONEYEXCEPTION(i18n("Transaction %1 has no splits", to.id()));
     if (tn.splits().isEmpty())

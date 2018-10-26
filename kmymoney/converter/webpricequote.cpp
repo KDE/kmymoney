@@ -430,8 +430,6 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
 {
   QString quotedata = _quotedata;
   d->m_quoteData = quotedata;
-  bool gotprice = false;
-  bool gotdate = false;
 
   qCDebug(WEBPRICEQUOTE) << "quotedata" << _quotedata;
 
@@ -459,6 +457,9 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
       qCDebug(WEBPRICEQUOTE) << "Identifier" << match.captured(1);
       emit status(i18n("Identifier found: '%1'", match.captured(1)));
     }
+
+    bool gotprice = false;
+    bool gotdate = false;
 
     if (quotedata.indexOf(priceRegExp, 0, &match) > -1) {
       gotprice = true;

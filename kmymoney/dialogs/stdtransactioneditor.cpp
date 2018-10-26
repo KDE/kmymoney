@@ -75,7 +75,7 @@ class StdTransactionEditorPrivate : public TransactionEditorPrivate
   Q_DISABLE_COPY(StdTransactionEditorPrivate)
 
 public:
-  StdTransactionEditorPrivate(StdTransactionEditor *qq) :
+  explicit StdTransactionEditorPrivate(StdTransactionEditor *qq) :
     TransactionEditorPrivate(qq),
     m_inUpdateVat(false)
   {
@@ -625,12 +625,11 @@ void StdTransactionEditor::slotUpdatePayee(const QString& payeeId)
       return;
 
     // check if all value fields are empty
-    KMyMoneyEdit* amount;
     QStringList fields;
     fields << "amount" << "payment" << "deposit";
     QStringList::const_iterator it_f;
     for (it_f = fields.constBegin(); it_f != fields.constEnd(); ++it_f) {
-      amount = dynamic_cast<KMyMoneyEdit*>(haveWidget(*it_f));
+      const auto amount = dynamic_cast<KMyMoneyEdit*>(haveWidget(*it_f));
       if (amount && !amount->value().isZero())
         return;
     }
@@ -1499,25 +1498,25 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
   //       by the user
   auto memo = dynamic_cast<KTextEdit*>(d->m_editWidgets["memo"]);
   if (memo) {
-    if (!isMultiSelection() || (isMultiSelection() && d->m_memoChanged))
+    if (!isMultiSelection() || d->m_memoChanged)
       s0.setMemo(memo->toPlainText());
   }
 
   if (auto number = dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number"))) {
-    if (!isMultiSelection() || (isMultiSelection() && !number->text().isEmpty()))
+    if (!isMultiSelection() || !number->text().isEmpty())
       s0.setNumber(number->text());
   }
 
   auto payee = dynamic_cast<KMyMoneyPayeeCombo*>(d->m_editWidgets["payee"]);
   QString payeeId;
-  if (payee && (!isMultiSelection() || (isMultiSelection() && !payee->currentText().isEmpty()))) {
+  if (payee && (!isMultiSelection() || !payee->currentText().isEmpty())) {
     payeeId = payee->selectedItem();
     s0.setPayeeId(payeeId);
   }
 
   //KMyMoneyTagCombo* tag = dynamic_cast<KMyMoneyTagCombo*>(m_editWidgets["tag"]);
   auto tag = dynamic_cast<KTagContainer*>(d->m_editWidgets["tag"]);
-  if (tag && (!isMultiSelection() || (isMultiSelection() && !tag->selectedTags().isEmpty()))) {
+  if (tag && (!isMultiSelection() || !tag->selectedTags().isEmpty())) {
     s0.setTagIdList(tag->selectedTags());
   }
 
@@ -1582,14 +1581,14 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
 
   if (isMultiSelection() || splits.count() == 1) {
     auto category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]);
-    if (category && (!isMultiSelection() || (isMultiSelection() && !category->currentText().isEmpty()))) {
+    if (category && (!isMultiSelection() || !category->currentText().isEmpty())) {
       s1.setAccountId(category->selectedItem());
     }
 
     // if the first split has a memo but the second split is empty,
     // we just copy the memo text over
     if (memo) {
-      if (!isMultiSelection() || (isMultiSelection() && !memo->toPlainText().isEmpty())) {
+      if (!isMultiSelection() || !memo->toPlainText().isEmpty()) {
         // if the memo is filled, we check if the
         // account referenced by s1 is a regular account or a category.
         // in case of a regular account, we just leave the memo as is

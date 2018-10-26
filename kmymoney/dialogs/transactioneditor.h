@@ -283,7 +283,7 @@ Q_SIGNALS:
 
 protected:
   QScopedPointer<TransactionEditorPrivate> d_ptr;
-  TransactionEditor(TransactionEditorPrivate &dd);
+  explicit TransactionEditor(TransactionEditorPrivate &dd);
 
 protected Q_SLOTS:
   void slotNewPayee(const QString& newnameBase, QString& id);
