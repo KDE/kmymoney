@@ -765,7 +765,7 @@ const QString MyMoneyDbColumn::generateDDL(const QExplicitlySharedDataPointer<My
   QString qs = name() + ' ' + type();
   if (isNotNull()) qs += " NOT NULL";
   if (!defaultValue().isEmpty())
-      qs += QString(" DEFAULT \"%1\"").arg(defaultValue());
+      qs += QString(" DEFAULT '%1'").arg(defaultValue());
   return qs;
 }
 
