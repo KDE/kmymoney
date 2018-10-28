@@ -953,6 +953,7 @@ public:
 
     if (!query.execBatch())
       throw MYMONEYEXCEPTIONSQL("writing Institution");
+    deleteKeyValuePairs("OFXSETTINGS", idList);
     writeKeyValuePairs("OFXSETTINGS", idList, kvpPairsList);
     // Set m_hiIdInstitutions to 0 to force recalculation the next time it is requested
     m_hiIdInstitutions = 0;
@@ -1095,6 +1096,8 @@ public:
       throw MYMONEYEXCEPTIONSQL("writing Account");
 
     //Add in Key-Value Pairs for accounts.
+    deleteKeyValuePairs("ACCOUNT", idList);
+    deleteKeyValuePairs("ONLINEBANKING", idList);
     writeKeyValuePairs("ACCOUNT", idList, pairs);
     writeKeyValuePairs("ONLINEBANKING", idList, onlineBankingPairs);
     m_hiIdAccounts = 0;
@@ -1393,6 +1396,7 @@ public:
     idList << security.id();
     QList<QMap<QString, QString> > pairs;
     pairs << security.pairs();
+    deleteKeyValuePairs("SECURITY", idList);
     writeKeyValuePairs("SECURITY", idList, pairs);
     m_hiIdSecurities = 0;
   }
