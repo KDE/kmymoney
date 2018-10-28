@@ -953,6 +953,7 @@ public:
 
     if (!query.execBatch())
       throw MYMONEYEXCEPTIONSQL("writing Institution");
+    deleteKeyValuePairs("OFXSETTINGS", idList);
     writeKeyValuePairs("OFXSETTINGS", idList, kvpPairsList);
     // Set m_hiIdInstitutions to 0 to force recalculation the next time it is requested
     m_hiIdInstitutions = 0;
@@ -1095,6 +1096,8 @@ public:
       throw MYMONEYEXCEPTIONSQL("writing Account");
 
     //Add in Key-Value Pairs for accounts.
+    deleteKeyValuePairs("ACCOUNT", idList);
+    deleteKeyValuePairs("ONLINEBANKING", idList);
     writeKeyValuePairs("ACCOUNT", idList, pairs);
     writeKeyValuePairs("ONLINEBANKING", idList, onlineBankingPairs);
     m_hiIdAccounts = 0;
@@ -1393,6 +1396,7 @@ public:
     idList << security.id();
     QList<QMap<QString, QString> > pairs;
     pairs << security.pairs();
+    deleteKeyValuePairs("SECURITY", idList);
     writeKeyValuePairs("SECURITY", idList, pairs);
     m_hiIdSecurities = 0;
   }
@@ -1742,8 +1746,18 @@ public:
         }
       }
     */
+    const bool isOnlineBanking = kvpType.toLower().compare(QLatin1String("onlinebanking")) == 0;
     while (query.next()) {
-      retval[query.value(0).toString()].setValue(query.value(1).toString(), query.value(2).toString());
+      QString kvpId = query.value(0).toString();
+      QString kvpKey = query.value(1).toString();
+      QString kvpData = query.value(2).toString();
+      if (isOnlineBanking) {
+        if ((kvpKey.toLower().compare(QLatin1String("provider")) == 0)
+        && (kvpData.toLower().compare(QLatin1String("kmymoney ofx")) == 0)) {
+          kvpData = QStringLiteral("ofximporter");
+        }
+      }
+      retval[kvpId].setValue(kvpKey, kvpData);
     }
     return (retval);
   }

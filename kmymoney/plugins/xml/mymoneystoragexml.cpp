@@ -751,6 +751,12 @@ MyMoneyAccount MyMoneyXmlContentHandler::readAccount(const QDomElement &node)
       const auto it_attr = attributes.item(i).toAttr();
       kvp.setValue(it_attr.name(), it_attr.value());
     }
+    // Up to and including 4.8 the OFX importer plugin was called "KMyMoney OFX"
+    // From version 5 on it is called "ofximporter". So we update it here in
+    // case we find the 'old' name
+    if (kvp.value(QStringLiteral("provider")).toLower().compare(QLatin1String("kmymoney ofx")) == 0) {
+      kvp.setValue(QStringLiteral("provider"), QStringLiteral("ofximporter"));
+    }
     acc.setOnlineBankingSettings(kvp);
   }
 
