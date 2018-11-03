@@ -9,7 +9,6 @@ ExternalProject_Add(
               -DBUILD_CONFIG=mysql_release
               -DWITH_LZMA=system
               -DWITH_ICU=system
-              -DWITH_ZLIB=system
               -DINSTALL_STATIC_LIBRARIES=OFF
 #               -DCPACK_MONOLITHIC_INSTALL=1
 #               -DIGNORE_AIO_CHECK=1

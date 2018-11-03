@@ -1,3 +1,6 @@
+# this library isn't shipped with AppImage as per
+# https://github.com/AppImage/AppImages/blob/master/excludelist#L126
+
 ExternalProject_Add(
   ext_harfbuzz
   DOWNLOAD_DIR ${EXT_DOWNLOAD_DIR}
