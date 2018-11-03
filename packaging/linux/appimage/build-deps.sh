@@ -19,14 +19,13 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_us.UTF-8
 
 # We want to use $prefix/deps/usr/ for all our dependencies
-export DEPS_INSTALL_PREFIX=$BUILD_PREFIX/deps/usr/
-export DOWNLOADS_DIR=$BUILD_PREFIX/downloads/
+export DEPS_INSTALL_PREFIX=$BUILD_PREFIX/deps/usr
+export DOWNLOADS_DIR=$BUILD_PREFIX/downloads
 
 # Setup variables needed to help everything find what we build
-export LD_LIBRARY_PATH=$DEPS_INSTALL_PREFIX/lib:$LD_LIBRARY_PATH
-export PATH=$DEPS_INSTALL_PREFIX/bin:$PATH
-export PKG_CONFIG_PATH=$DEPS_INSTALL_PREFIX/share/pkgconfig:$DEPS_INSTALL_PREFIX/lib/pkgconfig:/usr/lib/pkgconfig:$PKG_CONFIG_PATH
-export CMAKE_PREFIX_PATH=$DEPS_INSTALL_PREFIX:$CMAKE_PREFIX_PATH
+export LD_LIBRARY_PATH=$DEPS_INSTALL_PREFIX/lib:$DEPS_INSTALL_PREFIX/openssl/lib:$LD_LIBRARY_PATH
+export PATH=$DEPS_INSTALL_PREFIX/bin:$DEPS_INSTALL_PREFIX/openssl/bin:$PATH
+export PKG_CONFIG_PATH=$DEPS_INSTALL_PREFIX/share/pkgconfig:$DEPS_INSTALL_PREFIX/lib/pkgconfig:$DEPS_INSTALL_PREFIX/openssl/lib/pkgconfig:/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 
 # A kmymoney build layout looks like this:
 # kmymoney/ -- the source directory
@@ -55,33 +54,30 @@ fi
 cd $BUILD_PREFIX/deps-build/
 
 # Configure the dependencies for building
-cmake $KMYMONEY_SOURCES/3rdparty -DCMAKE_INSTALL_PREFIX=$DEPS_INSTALL_PREFIX -DINSTALL_ROOT=$DEPS_INSTALL_PREFIX -DEXTERNALS_DOWNLOAD_DIR=$DOWNLOADS_DIR
+cmake $KMYMONEY_SOURCES/3rdparty -DCMAKE_INSTALL_PREFIX=$DEPS_INSTALL_PREFIX -DEXT_INSTALL_DIR=$DEPS_INSTALL_PREFIX -DEXT_DOWNLOAD_DIR=$DOWNLOADS_DIR
 
 # Now start building everything we need, in the appropriate order
-# cmake --build . --config RelWithDebInfo --target ext_iconv
-# cmake --build . --config RelWithDebInfo --target ext_gettext
-# cmake --build . --config RelWithDebInfo --target ext_zlib
-cmake --build . --config RelWithDebInfo --target ext_boost
-# cmake --build . --config RelWithDebInfo --target ext_png
-# cmake --build . --config RelWithDebInfo --target ext_icu
-cmake --build . --config RelWithDebInfo --target ext_xml
-cmake --build . --config RelWithDebInfo --target ext_xslt # for ext_xmlsec1
-# cmake --build . --config RelWithDebInfo --target ext_lzma
-# cmake --build . --config RelWithDebInfo --target ext_fontconfig
-# cmake --build . --config RelWithDebInfo --target ext_freetype
-cmake --build . --config RelWithDebInfo --target ext_qt
-cmake --build . --config RelWithDebInfo --target ext_knotifications
-cmake --build . --config RelWithDebInfo --target ext_kio
-cmake --build . --config RelWithDebInfo --target ext_kcmutils
-cmake --build . --config RelWithDebInfo --target ext_kwallet
-cmake --build . --config RelWithDebInfo --target ext_kitemmodels
-cmake --build . --config RelWithDebInfo --target ext_kholidays
-cmake --build . --config RelWithDebInfo --target ext_kidentitymanagement
-cmake --build . --config RelWithDebInfo --target ext_kcontacts
-cmake --build . --config RelWithDebInfo --target ext_gmp
-cmake --build . --config RelWithDebInfo --target ext_alkimia
-cmake --build . --config RelWithDebInfo --target ext_kdiagram
-# cmake --build . --config RelWithDebInfo --target ext_aqbanking
-cmake --build . --config RelWithDebInfo --target ext_gpgme
-cmake --build . --config RelWithDebInfo --target ext_sqlcipher
-
+cmake --build . --target ext_iconv
+cmake --build . --target ext_lzma
+cmake --build . --target ext_xml
+cmake --build . --target ext_gettext
+cmake --build . --target ext_xslt
+cmake --build . --target ext_png
+# cmake --build . --target ext_jpeg #this causes build failures in Qt 5.10
+cmake --build . --target ext_qt
+cmake --build . --target ext_boost
+cmake --build . --target ext_kcmutils
+cmake --build . --target ext_kactivities
+cmake --build . --target ext_kitemmodels
+cmake --build . --target ext_kitemviews
+cmake --build . --target ext_kholidays
+cmake --build . --target ext_kidentitymanagement
+cmake --build . --target ext_kcontacts
+cmake --build . --target ext_akonadi
+cmake --build . --target ext_alkimia
+cmake --build . --target ext_kdiagram
+cmake --build . --target ext_aqbanking
+cmake --build . --target ext_gpgme
+cmake --build . --target ext_sqlcipher
+cmake --build . --target ext_ofx
+cmake --build . --target ext_ical

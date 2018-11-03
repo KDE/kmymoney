@@ -1,12 +1,13 @@
-SET(PREFIX_ext_zlib "${EXTPREFIX}" )
+# this library isn't shipped with AppImage as per
+# https://github.com/AppImage/AppImages/blob/master/excludelist#L126
 
 ExternalProject_Add(
   ext_zlib
-  DOWNLOAD_DIR ${EXTERNALS_DOWNLOAD_DIR}
-  URL http://files.kde.org/krita/build/dependencies/zlib-1.2.11.tar.gz
+  DOWNLOAD_DIR ${EXT_DOWNLOAD_DIR}
+  URL https://zlib.net/zlib-1.2.11.tar.gz
   URL_MD5 1c9f62f0778697a09d36121ead88e08e
 
-  CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${PREFIX_ext_zlib} -DCMAKE_BUILD_TYPE=${GLOBAL_BUILD_TYPE} ${GLOBAL_PROFILE}
-
-  UPDATE_COMMAND ""
+  CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${EXT_INSTALL_DIR}
+  BUILD_COMMAND $(MAKE)
+  INSTALL_COMMAND $(MAKE) install
 )

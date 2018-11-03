@@ -1,18 +1,12 @@
-SET(PREFIX_ext_aqbanking "${EXTPREFIX}" )
-SET(aqbanking_cppFlags "-L${INSTALL_ROOT}/lib -I${INSTALL_ROOT}/include" )
-
 ExternalProject_Add(
   ext_aqbanking
-  DOWNLOAD_DIR ${EXTERNALS_DOWNLOAD_DIR}
+  DOWNLOAD_DIR ${EXT_DOWNLOAD_DIR}
   URL https://www.aquamaniac.de/sites/download/download.php?package=03&release=217&file=02&dummy=aqbanking-5.7.8.tar.gz
   URL_MD5 6aceeaad3a1000f22f08986e68946db3
 
-  INSTALL_DIR ${PREFIX_ext_aqbanking}
-  CONFIGURE_COMMAND ./configure --prefix=${PREFIX_ext_aqbanking} CPPFLAGS=${aqbanking_cppFlags}
-  BUILD_COMMAND make
-  INSTALL_COMMAND make install
+  CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${EXT_INSTALL_DIR} ${AT_HOST} ${AT_SHARED_ONLY} CPPFLAGS=${AT_CPP_FLAGS} LDFLAGS=${AT_LD_FLAGS}
+  BUILD_COMMAND $(MAKE)
+  INSTALL_COMMAND $(MAKE) install
 
-  UPDATE_COMMAND ""
-  BUILD_IN_SOURCE 1
-  DEPENDS ext_gwenhywfar ext_ktoblzcheck ext_xmlsec1
+  DEPENDS ext_gwenhywfar ext_ktoblzcheck ext_xmlsec1 ext_gmp
 )

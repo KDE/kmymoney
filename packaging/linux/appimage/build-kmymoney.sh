@@ -18,10 +18,10 @@ export DEPS_INSTALL_PREFIX=$BUILD_PREFIX/deps/usr/
 export DOWNLOADS_DIR=$BUILD_PREFIX/downloads/
 
 # Setup variables needed to help everything find what we build
-export LD_LIBRARY_PATH=$DEPS_INSTALL_PREFIX/lib:$LD_LIBRARY_PATH
-export PATH=$DEPS_INSTALL_PREFIX/bin:$PATH
-export PKG_CONFIG_PATH=$DEPS_INSTALL_PREFIX/share/pkgconfig:$DEPS_INSTALL_PREFIX/lib/pkgconfig:/usr/lib/pkgconfig:$PKG_CONFIG_PATH
-export CMAKE_PREFIX_PATH=$DEPS_INSTALL_PREFIX:$CMAKE_PREFIX_PATH
+export LD_LIBRARY_PATH=$DEPS_INSTALL_PREFIX/lib:$DEPS_INSTALL_PREFIX/openssl/lib:$LD_LIBRARY_PATH
+export PATH=$DEPS_INSTALL_PREFIX/bin:$DEPS_INSTALL_PREFIX/openssl/bin:$PATH
+export PKG_CONFIG_PATH=$DEPS_INSTALL_PREFIX/share/pkgconfig:$DEPS_INSTALL_PREFIX/lib/pkgconfig:$DEPS_INSTALL_PREFIX/openssl/lib/pkgconfig:/usr/lib/pkgconfig:$PKG_CONFIG_PATH
+export CMAKE_PREFIX_PATH=$DEPS_INSTALL_PREFIX:${DEPS_INSTALL_PREFIX}/openssl:$CMAKE_PREFIX_PATH
 
 # Make sure our build directory exists
 if [ ! -d $BUILD_PREFIX/kmymoney-build/ ] ; then
@@ -37,9 +37,10 @@ CPU_COUNT=`grep processor /proc/cpuinfo | wc -l`
 # Configure KMyMoney
 cmake $KMYMONEY_SOURCES \
     -DCMAKE_INSTALL_PREFIX:PATH=$BUILD_PREFIX/kmymoney.appdir/usr \
-    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -DBUILD_TESTING=FALSE \
-    -DENABLE_WEBENGINE=TRUE
+    -DENABLE_WEBENGINE=TRUE \
+    -DIS_APPIMAGE=TRUE
 
 # Build and Install KMyMoney (ready for the next phase)
 make -j$CPU_COUNT install
