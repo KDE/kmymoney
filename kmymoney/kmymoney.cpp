@@ -2360,6 +2360,7 @@ bool KMyMoneyApp::slotBackupWriteFile()
   d->m_proc << d->m_storageInfo.url.toLocalFile() << backupfile;
 #endif
   d->m_backupState = BACKUP_COPYING;
+  qDebug() << "Backup cmd:" << d->m_proc.program();
   d->m_proc.start();
   return true;
 }
