@@ -1,14 +1,13 @@
 diff -Npru kservice-5.51.0.orig/src/sycoca/kbuildservicefactory.cpp kservice-5.51.0/src/sycoca/kbuildservicefactory.cpp
 --- kservice-5.51.0.orig/src/sycoca/kbuildservicefactory.cpp	2018-10-08 10:21:25.000000000 +0200
-+++ kservice-5.51.0/src/sycoca/kbuildservicefactory.cpp	2018-11-03 09:57:18.192402267 +0100
-@@ -93,11 +93,18 @@ KSycocaEntry *KBuildServiceFactory::crea
++++ kservice-5.51.0/src/sycoca/kbuildservicefactory.cpp	2018-11-04 08:51:59.529451519 +0100
+@@ -93,11 +93,17 @@ KSycocaEntry *KBuildServiceFactory::crea
          if (QDir::isAbsolutePath(file)) { // vfolder sends us full paths for applications
              serv = new KService(file);
          } else { // we get relative paths for services
 +          const QString appImageDesktopFile = QCoreApplication::applicationDirPath() + QLatin1String("/../share/") + QStringLiteral("kservices5/") + file;
-+          if (qAppName() == QLatin1String("AppRun") && QFile::exists(appImageDesktopFile)) {
++          if (QFile::exists(appImageDesktopFile)) {
 +            KDesktopFile desktopFile(appImageDesktopFile);
-+            qDebug() << "filename w KBuildServiceFactory::createEntry" << desktopFile.fileName();
 +            serv = new KService(&desktopFile, appImageDesktopFile);
 +          } else {
              KDesktopFile desktopFile(QStandardPaths::GenericDataLocation, QStringLiteral("kservices5/") + file);
@@ -22,50 +21,47 @@ diff -Npru kservice-5.51.0.orig/src/sycoca/kbuildservicefactory.cpp kservice-5.5
          //qCDebug(SYCOCA) << "Creating KService from" << file << "entryPath=" << serv->entryPath();
 diff -Npru kservice-5.51.0.orig/src/sycoca/kbuildsycoca.cpp kservice-5.51.0/src/sycoca/kbuildsycoca.cpp
 --- kservice-5.51.0.orig/src/sycoca/kbuildsycoca.cpp	2018-10-08 10:21:25.000000000 +0200
-+++ kservice-5.51.0/src/sycoca/kbuildsycoca.cpp	2018-11-03 09:58:38.961596599 +0100
-@@ -201,7 +201,12 @@ bool KBuildSycoca::build()
++++ kservice-5.51.0/src/sycoca/kbuildsycoca.cpp	2018-11-04 08:53:04.976953937 +0100
+@@ -201,7 +201,11 @@ bool KBuildSycoca::build()
          m_resource = it1.value();
  
          QSet<QString> relFiles;
 -        const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, m_resourceSubdir, QStandardPaths::LocateDirectory);
 +        QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, m_resourceSubdir, QStandardPaths::LocateDirectory);
 +        const QString appImageDir = QCoreApplication::applicationDirPath() + QLatin1String("/../share/") + m_resourceSubdir;
-+        if (qAppName() == QLatin1String("AppRun")) {
-+          if (QFile::exists(appImageDir))
-+            dirs.append(appImageDir);
-+        }
++        if (QFile::exists(appImageDir))
++          dirs.append(appImageDir);
++
          qCDebug(SYCOCA) << "Looking for subdir" << m_resourceSubdir << "=>" << dirs;
          Q_FOREACH (const QString &dir, dirs) {
              QDirIterator it(dir, QDirIterator::Subdirectories);
-@@ -626,7 +631,12 @@ quint32 KBuildSycoca::calcResourceHash(c
+@@ -626,7 +630,11 @@ quint32 KBuildSycoca::calcResourceHash(c
      if (!QDir::isRelativePath(filename)) {
          return updateHash(filename, hash);
      }
 -    const QStringList files = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, resourceSubDir + QLatin1Char('/') + filename);
 +    QStringList files = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, resourceSubDir + QLatin1Char('/') + filename);
-+    if (qAppName() == QLatin1String("AppRun")) {
-+      const QString appImageFile = QCoreApplication::applicationDirPath() + QLatin1String("/../share/") + resourceSubDir + QLatin1Char('/') + filename;
-+      if (QFile::exists(appImageFile))
-+        files.append(appImageFile);
-+    }
++    const QString appImageFile = QCoreApplication::applicationDirPath() + QLatin1String("/../share/") + resourceSubDir + QLatin1Char('/') + filename;
++    if (QFile::exists(appImageFile))
++      files.append(appImageFile);
++
      Q_FOREACH (const QString &file, files) {
          hash = updateHash(file, hash);
      }
 diff -Npru kservice-5.51.0.orig/src/sycoca/ksycoca.cpp kservice-5.51.0/src/sycoca/ksycoca.cpp
 --- kservice-5.51.0.orig/src/sycoca/ksycoca.cpp	2018-10-08 10:21:25.000000000 +0200
-+++ kservice-5.51.0/src/sycoca/ksycoca.cpp	2018-11-03 09:56:30.893459677 +0100
-@@ -596,6 +596,15 @@ KSycocaHeader KSycocaPrivate::readSycoca
++++ kservice-5.51.0/src/sycoca/ksycoca.cpp	2018-11-04 08:56:33.977171556 +0100
+@@ -596,6 +596,14 @@ KSycocaHeader KSycocaPrivate::readSycoca
  
      str->device()->seek(oldPos);
  
 +    // this clause must be before timeStamp = header.timeStamp
-+    if (qAppName() == QLatin1String("AppRun")) {
-+      const QString appImageShare = QCoreApplication::applicationDirPath() + QLatin1String("/../share");
-+      addLocalResourceDir(appImageShare + QLatin1String("/kservices5"));
-+      addLocalResourceDir(appImageShare + QLatin1String("/kservicetypes5"));
-+      addLocalResourceDir(appImageShare + QLatin1String("/mime"));
-+      addLocalResourceDir(appImageShare + QLatin1String("/applications"));
-+    }
++    qDebug() << "applications name: " << qAppName();
++    const QString appImageShare = QCoreApplication::applicationDirPath() + QLatin1String("/../share");
++    addLocalResourceDir(appImageShare + QLatin1String("/kservices5"));
++    addLocalResourceDir(appImageShare + QLatin1String("/kservicetypes5"));
++    addLocalResourceDir(appImageShare + QLatin1String("/mime"));
++    addLocalResourceDir(appImageShare + QLatin1String("/applications"));
 +
      timeStamp = header.timeStamp;
  
