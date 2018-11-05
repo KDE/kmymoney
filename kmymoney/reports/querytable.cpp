@@ -931,14 +931,14 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
   if (!returnInvestment.isZero() && !endingBal.isZero()) {
     returnInvestment = ((endingBal + paidDividend) - returnInvestment) / returnInvestment;
     returnInvestment = returnInvestment.convert(10000);
+    result["returninvestment"] = returnInvestment.toString();
   } else {
-    returnInvestment = MyMoneyMoney();
+    result["returninvestment"] = "";
   }
 
   try {
     MyMoneyMoney annualReturn(all.XIRR(), 10000);
     result["return"] = annualReturn.toString();
-    result["returninvestment"] = returnInvestment.toString();
   } catch (MyMoneyException &e) {
     result["return"] = "";
     kDebug(2) << e.what();
