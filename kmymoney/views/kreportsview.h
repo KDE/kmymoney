@@ -163,7 +163,6 @@ private:
 
   bool m_needReload;
 
-  KListWidget* m_reportListView;
   KTabWidget* m_reportTabWidget;
   QWidget* m_listTab;
   QVBoxLayout* m_listTabLayout;

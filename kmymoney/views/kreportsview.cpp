@@ -286,8 +286,7 @@ public:
 KReportsView::KReportsView(QWidget *parent, const char *name) :
     KMyMoneyViewBase(parent, name, i18n("Reports")),
     d(new Private),
-    m_needReload(false),
-    m_reportListView(0)
+    m_needReload(false)
 {
   // build reports toc
 
@@ -410,9 +409,6 @@ void KReportsView::loadView()
     // no matter, whether the item is a report- or a group-item
     visibleTopItemText = visibleTopItem->text(0);
   }
-
-  // turn off updates to avoid flickering during reload
-  //m_reportListView->setUpdatesEnabled(false);
 
   //
   // Rebuild the list page
