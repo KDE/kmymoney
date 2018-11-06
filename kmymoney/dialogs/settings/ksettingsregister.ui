@@ -95,6 +95,16 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="kcfg_ShowPlannedScheduleDates">
+         <property name="whatsThis">
+          <string>If a planned transaction is overdue, today's date is used by default as the posting date. With this option, the originally planned date is used instead.</string>
+         </property>
+         <property name="text">
+          <string>Display overdue schedules with planned date</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="spacer6">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
