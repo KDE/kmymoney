@@ -524,9 +524,14 @@ void ListTable::render(QString& result, QString& csv) const
           csv += "\"" + (*it_row)["currency"] + " " + MyMoneyMoney(data).formatMoney(fraction, false) + "\",";
         }
       } else if (percentColumns.contains(*it_column)) {
-        data = (MyMoneyMoney(data) * MyMoneyMoney(100, 1)).formatMoney(fraction);
-        result += QString("<td>%2%1%%3</td>").arg(data, tlinkBegin, tlinkEnd);
-        csv += data + "%,";
+        if (data.isEmpty()) {
+          result += QString("<td></td>");
+          csv += "\"\",";
+        } else {
+          data = (MyMoneyMoney(data) * MyMoneyMoney(100, 1)).formatMoney(fraction);
+          result += QString("<td>%2%1%%3</td>").arg(data, tlinkBegin, tlinkEnd);
+          csv += data + "%,";
+        }
       } else if (dateColumns.contains(*it_column)) {
         // do this before we possibly change data
         csv += "\"" + data + "\",";
