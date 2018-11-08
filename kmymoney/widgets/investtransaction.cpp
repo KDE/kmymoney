@@ -141,16 +141,16 @@ void InvestTransaction::activity(QString& txt, eMyMoney::Split::InvestmentTransa
 {
   switch (type) {
     case eMyMoney::Split::InvestmentTransactionType::AddShares:
-      txt = i18n("Add shares");
+      txt = i18nc("Add securities/shares/bonds", "Add shares");
       break;
     case eMyMoney::Split::InvestmentTransactionType::RemoveShares:
-      txt = i18n("Remove shares");
+      txt = i18nc("Remove securities/shares/bonds", "Remove shares");
       break;
     case eMyMoney::Split::InvestmentTransactionType::BuyShares:
-      txt = i18n("Buy shares");
+      txt = i18nc("Buy securities/shares/bonds", "Buy shares");
       break;
     case eMyMoney::Split::InvestmentTransactionType::SellShares:
-      txt = i18n("Sell shares");
+      txt = i18nc("Sell securities/shares/bonds", "Sell shares");
       break;
     case eMyMoney::Split::InvestmentTransactionType::Dividend:
       txt = i18n("Dividend");
@@ -162,7 +162,7 @@ void InvestTransaction::activity(QString& txt, eMyMoney::Split::InvestmentTransa
       txt = i18n("Yield");
       break;
     case eMyMoney::Split::InvestmentTransactionType::SplitShares:
-      txt = i18n("Split shares");
+      txt = i18nc("Split securities/shares/bonds", "Split shares");
       break;
     case eMyMoney::Split::InvestmentTransactionType::InterestIncome:
       txt = i18n("Interest Income");
