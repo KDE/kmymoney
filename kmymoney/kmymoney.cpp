@@ -6747,7 +6747,23 @@ void KMyMoneyApp::slotUpdateActions()
     else enableCloseAccountAction(d->m_selectedInvestment);
   }
 
-  if (!d->m_selectedSchedule.id().isEmpty()) {
+  bool isSchedule = !d->m_selectedSchedule.id().isEmpty();
+  action("transaction_edit")->setVisible(!isSchedule);
+  action("transaction_editsplits")->setVisible(!isSchedule);
+  action("transaction_enter")->setVisible(!isSchedule);
+  action("transaction_cancel")->setVisible(!isSchedule);
+  action("transaction_delete")->setVisible(!isSchedule);
+  action("transaction_match")->setVisible(!isSchedule);
+  action("transaction_accept")->setVisible(!isSchedule);
+
+  action("schedule_new")->setVisible(isSchedule);
+  action("schedule_edit")->setVisible(isSchedule);
+  action("schedule_delete")->setVisible(isSchedule);
+  action("schedule_duplicate")->setVisible(isSchedule);
+  action("schedule_enter")->setVisible(isSchedule);
+  action("schedule_skip")->setVisible(isSchedule);
+
+  if (isSchedule) {
     action("schedule_edit")->setEnabled(true);
     action("schedule_duplicate")->setEnabled(true);
     action("schedule_delete")->setEnabled(!file->isReferenced(d->m_selectedSchedule));
