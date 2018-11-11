@@ -30,6 +30,7 @@
 #include <kstandarddirs.h>
 #include <qtest_kde.h>
 
+#include "cashflowlist.h"
 #include "reportstestcommon.h"
 #include "querytable.h"
 #include "mymoneyaccount.h"
@@ -323,7 +324,7 @@ void QueryTableTest::testQueryBasics()
 void QueryTableTest::testCashFlowAnalysis()
 {
   //
-  // Test IRR calculations
+  // Test XIRR calculations
   //
 
   CashFlowList list;
@@ -339,16 +340,56 @@ void QueryTableTest::testCashFlowAnalysis()
   list += CashFlowListItem(QDate(2004, 9, 21), MyMoneyMoney(5.0));
   list += CashFlowListItem(QDate(2004, 10, 16), MyMoneyMoney(-2037.0));
 
-  MyMoneyMoney IRR(list.IRR(), 1000);
-
-  QVERIFY(IRR == MyMoneyMoney(1676, 1000));
+  MyMoneyMoney XIRR(list.XIRR(), 1000);
+  QVERIFY(XIRR == MyMoneyMoney(1676, 1000));
 
   list.pop_back();
   list += CashFlowListItem(QDate(2004, 10, 16), MyMoneyMoney(-1358.0));
 
-  IRR = MyMoneyMoney(list.IRR(), 1000);
+  XIRR = MyMoneyMoney(list.XIRR(), 1000);
+  QVERIFY(XIRR.isZero());
 
-  QVERIFY(IRR.isZero());
+  // two entries
+  list.clear();
+  list += CashFlowListItem(QDate(2005, 9, 22), MyMoneyMoney(-3472.57));
+  list += CashFlowListItem(QDate(2009, 3, 18), MyMoneyMoney(6051.36));
+
+  XIRR = MyMoneyMoney(list.XIRR(), 1000);
+  QCOMPARE(XIRR.toDouble(), MyMoneyMoney(173, 1000).toDouble());
+
+  // check ignoring zero values
+  list += CashFlowListItem(QDate(1998, 11, 1), MyMoneyMoney(0.0));
+  list += CashFlowListItem(QDate(2017, 8, 11), MyMoneyMoney(0.0));
+
+  XIRR = MyMoneyMoney(list.XIRR(), 1000);
+  QCOMPARE(XIRR.toDouble(), MyMoneyMoney(173, 1000).toDouble());
+
+  list.pop_back();
+  // former implementation crashed
+  list += CashFlowListItem(QDate(2014, 8, 11), MyMoneyMoney(0.0));
+
+  XIRR = MyMoneyMoney(list.XIRR(), 1000);
+  QCOMPARE(XIRR.toDouble(), MyMoneyMoney(173, 1000).toDouble());
+
+  // different ordering
+  list.clear();
+  list += CashFlowListItem(QDate(2004, 3, 18), MyMoneyMoney(6051.36));
+  list += CashFlowListItem(QDate(2005, 9, 22), MyMoneyMoney(-3472.57));
+
+  XIRR = MyMoneyMoney(list.XIRR(), 1000);
+  QCOMPARE(XIRR.toDouble(), MyMoneyMoney(-307, 1000).toDouble());
+
+
+  // not enough entries
+  list.pop_back();
+
+  bool result = false;
+  try {
+    XIRR = MyMoneyMoney(list.XIRR(), 1000);
+  } catch (MyMoneyException &e) {
+    result  = true;
+  }
+  QVERIFY(result);
 }
 
 void QueryTableTest::testAccountQuery()

@@ -3,15 +3,8 @@
                          -------------------
     begin                : Fri Jul 23 2004
     copyright            : (C) 2004-2005 by Ace Jones <acejones@users.sourceforge.net>
-                           (C) 2007 Sascha Pfau <MrPeacock@gmail.com>
 
 ***************************************************************************/
-
-/****************************************************************************
-  Contains code from the func_xirr and related methods of financial.cpp
-  - KOffice 1.6 by Sascha Pfau.  Sascha agreed to relicense those methods under
-  GPLv2 or later.
-*****************************************************************************/
 
 /***************************************************************************
  *                                                                         *
@@ -41,6 +34,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "cashflowlist.h"
 #include "mymoneyfile.h"
 #include "mymoneytransaction.h"
 #include "mymoneyreport.h"
@@ -52,185 +46,6 @@
 
 namespace reports
 {
-
-// ****************************************************************************
-//
-// CashFlowListItem implementation
-//
-//   Cash flow analysis tools for investment reports
-//
-// ****************************************************************************
-
-QDate CashFlowListItem::m_sToday = QDate::currentDate();
-
-MyMoneyMoney CashFlowListItem::NPV(double _rate) const
-{
-  double T = static_cast<double>(m_sToday.daysTo(m_date)) / 365.0;
-  MyMoneyMoney result(m_value.toDouble() / pow(1 + _rate, T), 100);
-
-  //kDebug(2) << "CashFlowListItem::NPV( " << _rate << " ) == " << result;
-
-  return result;
-}
-
-// ****************************************************************************
-//
-// CashFlowList implementation
-//
-//   Cash flow analysis tools for investment reports
-//
-// ****************************************************************************
-
-CashFlowListItem CashFlowList::mostRecent() const
-{
-  CashFlowList dupe(*this);
-
-  qSort(dupe);
-
-  //kDebug(2) << " CashFlowList::mostRecent() == " << dupe.back().date().toString(Qt::ISODate);
-
-  return dupe.back();
-}
-
-MyMoneyMoney CashFlowList::NPV(double _rate) const
-{
-  MyMoneyMoney result;
-
-  const_iterator it_cash = begin();
-  while (it_cash != end()) {
-    result += (*it_cash).NPV(_rate);
-    ++it_cash;
-  }
-
-  //kDebug(2) << "CashFlowList::NPV( " << _rate << " ) == " << result << "------------------------" << endl;
-
-  return result;
-}
-
-double CashFlowList::calculateXIRR() const
-{
-  double resultRate = 0.00001;
-
-  double resultZero = 0.00000;
-  //if ( args.count() > 2 )
-  //  resultRate = calc->conv()->asFloat ( args[2] ).asFloat();
-
-// check pairs and count >= 2 and guess > -1.0
-  //if ( args[0].count() != args[1].count() || args[1].count() < 2 || resultRate <= -1.0 )
-  //  return Value::errorVALUE();
-
-// define max epsilon
-  static const double maxEpsilon = 1e-5;
-
-// max number of iterations
-  static const int maxIter = 50;
-
-// Newton's method - try to find a res, with a accuracy of maxEpsilon
-  double rateEpsilon, newRate, resultValue;
-  int i = 0;
-  bool contLoop;
-
-  do {
-    resultValue = xirrResult(resultRate);
-
-    double resultDerive = xirrResultDerive(resultRate);
-
-    //check what happens if xirrResultDerive is zero
-    //Don't know if it is correct to dismiss the result
-    if (resultDerive != 0) {
-      newRate =  resultRate - resultValue / resultDerive;
-    } else {
-
-      newRate =  resultRate - resultValue;
-    }
-
-    rateEpsilon = fabs(newRate - resultRate);
-
-    resultRate = newRate;
-    contLoop = (rateEpsilon > maxEpsilon) && (fabs(resultValue) > maxEpsilon);
-  } while (contLoop && (++i < maxIter));
-
-  if (contLoop)
-    return resultZero;
-
-  return resultRate;
-}
-
-double CashFlowList::xirrResult(double& rate) const
-{
-  QDate date;
-
-  double r = rate + 1.0;
-  double res = 0.00000;//back().value().toDouble();
-
-  QList<CashFlowListItem>::const_iterator list_it = begin();
-  while (list_it != end()) {
-    double e_i = ((* list_it).today().daysTo((* list_it).date())) / 365.0;
-    MyMoneyMoney val = (* list_it).value();
-
-    if (e_i < 0) {
-      res += val.toDouble() * pow(r, -e_i);
-    } else {
-      res += val.toDouble() / pow(r, e_i);
-    }
-    ++list_it;
-  }
-
-  return res;
-}
-
-
-double CashFlowList::xirrResultDerive(double& rate) const
-{
-  QDate date;
-
-  double r = rate + 1.0;
-  double res = 0.00000;
-
-  QList<CashFlowListItem>::const_iterator list_it = begin();
-  while (list_it != end()) {
-    double e_i = ((* list_it).today().daysTo((* list_it).date())) / 365.0;
-    MyMoneyMoney val = (* list_it).value();
-
-    res -= e_i * val.toDouble() / pow(r, e_i + 1.0);
-    ++list_it;
-  }
-
-  return res;
-}
-
-double CashFlowList::IRR() const
-{
-  double result = 0.0;
-
-  // set 'today', which is the most recent of all dates in the list
-  CashFlowListItem::setToday(mostRecent().date());
-
-  result = calculateXIRR();
-  return result;
-}
-
-MyMoneyMoney CashFlowList::total() const
-{
-  MyMoneyMoney result;
-
-  const_iterator it_cash = begin();
-  while (it_cash != end()) {
-    result += (*it_cash).value();
-    ++it_cash;
-  }
-
-  return result;
-}
-
-void CashFlowList::dumpDebug() const
-{
-  const_iterator it_item = begin();
-  while (it_item != end()) {
-    kDebug(2) << (*it_item).date().toString(Qt::ISODate) << " " << (*it_item).value().toString();
-    ++it_item;
-  }
-}
 
 // ****************************************************************************
 //
@@ -1121,16 +936,12 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
   }
 
   try {
-    double irr = all.IRR();
-#ifdef Q_CC_MSVC
-    MyMoneyMoney annualReturn = MyMoneyMoney(_isnan(irr) ? 0 : irr, 10000);
-#else
-    MyMoneyMoney annualReturn = MyMoneyMoney(std::isnan(irr) ? 0 : irr, 10000);
-#endif
+    MyMoneyMoney annualReturn(all.XIRR(), 10000);
     result["return"] = annualReturn.toString();
     result["returninvestment"] = returnInvestment.toString();
-  } catch (QString e) {
-    kDebug(2) << e;
+  } catch (MyMoneyException &e) {
+    result["return"] = "";
+    kDebug(2) << e.what();
   }
 
   result["buys"] = (-(buys.total())).toString();

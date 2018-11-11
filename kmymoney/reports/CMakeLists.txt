@@ -1,4 +1,5 @@
 set (libreports_a_SOURCES
+  cashflowlist.cpp
   kreportchartview.cpp
   reportaccount.cpp
   listtable.cpp
