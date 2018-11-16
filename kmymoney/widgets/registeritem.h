@@ -71,7 +71,8 @@ struct RegisterFilter {
     Erroneous,
     NotMarked,
     NotReconciled,
-    Cleared
+    Cleared,
+    Scheduled,
   };
   RegisterFilter(const QString &t, ItemState s) : state(s), text(t) {
   }
