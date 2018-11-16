@@ -77,10 +77,10 @@ void RegisterSearchLine::init(Register *reg)
   d->combo->insertItem(RegisterFilter::Imported, SmallIcon("document-import"), i18n("Imported"));
   d->combo->insertItem(RegisterFilter::Matched, KMyMoneyUtils::overlayIcon("view-financial-transfer", "document-import"), i18n("Matched"));
   d->combo->insertItem(RegisterFilter::Erroneous, SmallIcon("task-attention"), i18n("Erroneous"));
+  d->combo->insertItem(RegisterFilter::Scheduled, SmallIcon("view-pim-calendar"), i18n("Scheduled"));
   d->combo->insertItem(RegisterFilter::NotMarked, i18n("Not marked"));
   d->combo->insertItem(RegisterFilter::NotReconciled, i18n("Not reconciled"));
   d->combo->insertItem(RegisterFilter::Cleared, i18nc("Reconciliation state 'Cleared'", "Cleared"));
-  d->combo->insertItem(RegisterFilter::Scheduled, SmallIcon("view-pim-calendar"), i18n("Scheduled"));
   d->combo->setCurrentIndex(RegisterFilter::Any);
   connect(d->combo, SIGNAL(activated(int)), this, SLOT(slotStatusChanged(int)));
   connect(this, SIGNAL(clearButtonClicked()), this, SLOT(reset()));
