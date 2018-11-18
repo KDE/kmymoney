@@ -107,9 +107,9 @@ onlineJob::~onlineJob()
   delete m_task;
 }
 
-void onlineJob::setTask(onlineTask *task)
+void onlineJob::setTask(onlineTask *_task)
 {
-  m_task = task;
+  m_task = _task;
 }
 
 onlineTask* onlineJob::task()

@@ -643,10 +643,10 @@ public:
             }
 
             MyMoneyTransaction t(s.id(), KMyMoneyUtils::scheduledTransaction(s));
-            // if the transaction is scheduled and overdue, it can't
-            // certainly be posted in the past. So we take today's date
-            // as the alternative
-            if (s.isOverdue()) {
+            if (s.isOverdue() && !KMyMoneySettings::showPlannedScheduleDates()) {
+              // if the transaction is scheduled and overdue, it can't
+              // certainly be posted in the past. So we take today's date
+              // as the alternative
               t.setPostDate(s.adjustedDate(QDate::currentDate(), s.weekendOption()));
             } else {
               t.setPostDate(s.adjustedNextDueDate());
@@ -657,7 +657,7 @@ public:
               }
             }
             // keep track of this payment locally (not in the engine)
-            if (s.isOverdue()) {
+            if (s.isOverdue() && !KMyMoneySettings::showPlannedScheduleDates()) {
               s.setLastPayment(QDate::currentDate());
             } else {
               s.setLastPayment(s.nextDueDate());

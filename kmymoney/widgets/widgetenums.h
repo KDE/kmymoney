@@ -84,7 +84,8 @@ namespace eWidgets {
       Erroneous,
       NotMarked,
       NotReconciled,
-      Cleared
+      Cleared,
+      Scheduled
     };
 
     enum class Action {

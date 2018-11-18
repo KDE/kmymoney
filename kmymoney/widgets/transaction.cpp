@@ -810,6 +810,10 @@ bool Transaction::matches(const RegisterFilter& filter) const
         if (split().reconcileFlag() != eMyMoney::Split::State::Cleared)
           return false;
         break;
+      case eRegister::ItemState::Scheduled:
+        if (!isScheduled())
+          return false;
+        break;
     }
   }
 

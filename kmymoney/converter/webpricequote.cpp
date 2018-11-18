@@ -463,6 +463,17 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
 
     if (quotedata.indexOf(priceRegExp, 0, &match) > -1) {
       gotprice = true;
+      QString pricestr = match.captured(1);
+
+      // Deal with exponential prices
+      // we extract the exponent and add it again before we convert to a double
+      QRegularExpression expRegExp("[eE][+-]?\\D+");
+      int pos;
+      QString exponent;
+      if ((pos = pricestr.indexOf(expRegExp, 0, &match)) > -1) {
+        exponent = pricestr.mid(pos);
+        pricestr = pricestr.left(pos);
+      }
 
       // Deal with european quotes that come back as X.XXX,XX or XX,XXX
       //
@@ -471,9 +482,8 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
       //
       // Remove all non-digits from the price string except the last one, and
       // set the last one to a period.
-      QString pricestr = match.captured(1);
 
-      int pos = pricestr.lastIndexOf(QRegularExpression("\\D"));
+      pos = pricestr.lastIndexOf(QRegularExpression("\\D"));
       if (pos > 0) {
         pricestr[pos] = QLatin1Char('.');
         pos = pricestr.lastIndexOf(QRegularExpression("\\D"), pos - 1);
@@ -482,6 +492,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
         pricestr.remove(pos, 1);
         pos = pricestr.lastIndexOf(QRegularExpression("\\D"), pos);
       }
+      pricestr.append(exponent);
 
       d->m_price = pricestr.toDouble();
       qCDebug(WEBPRICEQUOTE) << "Price" << pricestr;
