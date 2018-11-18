@@ -34,7 +34,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "webpricequote.h"
+#include <alkimia/alkonlinequote.h>
 #include "ui_kgncpricesourcedlg.h"
 
 class KGncPriceSourceDlgPrivate

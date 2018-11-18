@@ -22,13 +22,14 @@
 
 #include <KLocalizedString>
 
+#include <alkimia/alkonlinequoteswidget.h>
+
 #include "ksettingsgeneral.h"
 #include "ksettingsregister.h"
 #include "ksettingscolors.h"
 #include "ksettingsfonts.h"
 #include "ksettingsicons.h"
 #include "ksettingsschedules.h"
-#include "ksettingsonlinequotes.h"
 #include "ksettingshome.h"
 #include "ksettingsplugins.h"
 
@@ -47,7 +48,7 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
   const auto colorsPage = new KSettingsColors();
   const auto fontsPage = new KSettingsFonts();
   const auto iconsPage = new KSettingsIcons();
-  const auto onlineQuotesPage = new KSettingsOnlineQuotes();
+  const auto onlineQuotesPage = new AlkOnlineQuotesWidget;
   const auto pluginsPage = new KSettingsPlugins();
 
   addPage(generalPage, i18nc("General settings", "General"), Icons::get(Icon::SystemRun).name());

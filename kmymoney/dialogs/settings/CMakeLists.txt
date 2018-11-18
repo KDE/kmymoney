@@ -5,7 +5,6 @@ set (libsettings_a_SOURCES
   ksettingsicons.cpp
   ksettingsgeneral.cpp
   ksettingshome.cpp
-  ksettingsonlinequotes.cpp
   ksettingsregister.cpp
   ksettingsschedules.cpp
   ksettingskmymoney.cpp
@@ -18,7 +17,6 @@ set (libsettings_a_UI
   ksettingsicons.ui
   ksettingsgeneral.ui
   ksettingshome.ui
-  ksettingsonlinequotes.ui
   ksettingsregister.ui
   ksettingsschedules.ui
   )

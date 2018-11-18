@@ -40,6 +40,10 @@
 #include <KLocalizedString>
 #include <KColorScheme>
 
+#include <alkimia/alkonlinequote.h>
+#include <alkimia/alkonlinequotesource.h>
+#include <alkimia/alkonlinequotesprofilemanager.h>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -47,9 +51,10 @@
 
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
+#include "mymoneymoney.h"
 #include "mymoneysecurity.h"
 #include "mymoneyprice.h"
-#include "webpricequote.h"
+#include "mymoneystatement.h"
 #include "kequitypriceupdateconfdlg.h"
 #include "kmymoneyutils.h"
 #include "mymoneyexception.h"
@@ -112,7 +117,7 @@ public:
     //
 
     // send in securityId == "XXX YYY" to get a single-shot update for XXX to YYY.
-    // for consistency reasons, this accepts the same delimiters as WebPriceQuote::launch()
+    // for consistency reasons, this accepts the same delimiters as AlkOnlineQuote::launch()
     QRegExp splitrx("([0-9a-z\\.]+)[^a-z0-9]+([0-9a-z\\.]+)", Qt::CaseInsensitive);
     MyMoneySecurityPair currencyIds;
     if (splitrx.indexIn(securityId) != -1) {
@@ -157,15 +162,15 @@ public:
     q->connect(ui->m_fromDate, &KMyMoneyDateInput::dateChanged, q, &KEquityPriceUpdateDlg::slotDateChanged);
     q->connect(ui->m_toDate, &KMyMoneyDateInput::dateChanged, q, &KEquityPriceUpdateDlg::slotDateChanged);
 
-    q->connect(&m_webQuote, &WebPriceQuote::csvquote,
-            q, &KEquityPriceUpdateDlg::slotReceivedCSVQuote);
-    q->connect(&m_webQuote, &WebPriceQuote::quote,
+//    q->connect(&m_webQuote, &AlkOnlineQuote::csvquote,
+//            q, &KEquityPriceUpdateDlg::slotReceivedCSVQuote);
+    q->connect(&m_webQuote, &AlkOnlineQuote::quote,
             q, &KEquityPriceUpdateDlg::slotReceivedQuote);
-    q->connect(&m_webQuote, &WebPriceQuote::failed,
+    q->connect(&m_webQuote, &AlkOnlineQuote::failed,
             q, &KEquityPriceUpdateDlg::slotQuoteFailed);
-    q->connect(&m_webQuote, &WebPriceQuote::status,
+    q->connect(&m_webQuote, &AlkOnlineQuote::status,
             q, &KEquityPriceUpdateDlg::logStatusMessage);
-    q->connect(&m_webQuote, &WebPriceQuote::error,
+    q->connect(&m_webQuote, &AlkOnlineQuote::error,
             q, &KEquityPriceUpdateDlg::logErrorMessage);
 
     q->connect(ui->lvEquityList, &QTreeWidget::itemSelectionChanged, q, &KEquityPriceUpdateDlg::slotUpdateSelection);
@@ -275,12 +280,12 @@ public:
       // if it is in use, it_a is not equal to list.end()
       if (it_a != list.constEnd()) {
         QString webID;
-        WebPriceQuoteSource onlineSource(inv.value("kmm-online-source"));
-        if (onlineSource.m_webIDBy == WebPriceQuoteSource::identifyBy::IdentificationNumber)
-          webID = inv.value("kmm-security-id");   // insert ISIN number...
-        else if (onlineSource.m_webIDBy == WebPriceQuoteSource::identifyBy::Name)
-          webID = inv.name();                     // ...or name...
-        else
+        AlkOnlineQuoteSource onlineSource(inv.value("kmm-online-source"), AlkOnlineQuotesProfileManager::instance().profiles().first());
+//        if (onlineSource.m_webIDBy == AlkOnlineQuoteSource::identifyBy::IdentificationNumber)
+//          webID = inv.value("kmm-security-id");   // insert ISIN number...
+//        else if (onlineSource.m_webIDBy == AlkOnlineQuoteSource::identifyBy::Name)
+//          webID = inv.name();                     // ...or name...
+//        else
           webID = inv.tradingSymbol();            // ...or symbol
 
         QTreeWidgetItem* item = new QTreeWidgetItem();
@@ -319,7 +324,7 @@ public:
   Ui::KEquityPriceUpdateDlg  *ui;
   bool                        m_fUpdateAll;
   eDialogs::UpdatePrice        m_updatingPricePolicy;
-  WebPriceQuote               m_webQuote;
+  AlkOnlineQuote               m_webQuote;
 };
 
 KEquityPriceUpdateDlg::KEquityPriceUpdateDlg(QWidget *parent, const QString& securityId) :
@@ -460,7 +465,8 @@ void KEquityPriceUpdateDlg::slotUpdateSelectedClicked()
     item = d->ui->lvEquityList->invisibleRootItem()->child(skipCnt);
     ++skipCnt;
   }
-  d->m_webQuote.setDate(d->ui->m_fromDate->date(), d->ui->m_toDate->date());
+  // FIXME : Why do we need to set the date before, when launch determines the date
+  //d->m_webQuote.setDate(d->ui->m_fromDate->date(), d->ui->m_toDate->date());
   if (item) {
     d->ui->prgOnlineProgress->setMaximum(1 + d->ui->lvEquityList->invisibleRootItem()->childCount());
     d->ui->prgOnlineProgress->setValue(skipCnt);
@@ -607,7 +613,7 @@ void KEquityPriceUpdateDlg::slotReceivedCSVQuote(const QString& _kmmID, const QS
     }
 
     if (d->m_updatingPricePolicy != eDialogs::UpdatePrice::All) {
-      QStringList qSources = WebPriceQuote::quoteSources();
+      QStringList qSources = AlkOnlineQuotesProfileManager::instance().profiles().first()->quoteSources();
       for (auto it = st.m_listPrices.begin(); it != st.m_listPrices.end();) {
         MyMoneyPrice storedPrice = file->price(toCurrency.id(), fromCurrency.id(), (*it).m_date, true);
         bool priceValid = storedPrice.isValid();

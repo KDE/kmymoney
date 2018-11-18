@@ -5,7 +5,6 @@ endif()
 set (libconverter_a_SOURCES
   mymoneystatementreader.cpp
   mymoneytemplate.cpp
-  webpricequote.cpp
   transactionmatchfinder.cpp
   existingtransactionmatchfinder.cpp
   scheduledtransactionmatchfinder.cpp

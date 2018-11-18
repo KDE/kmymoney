@@ -25,6 +25,10 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <alkimia/alkonlinequotesprofilemanager.h>.h>
+#include <alkimia/alkfinancequoteprocess.h>
+#include <alkimia/alkonlinequote.h>
+#include <alkimia/alkonlinequotesource.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -33,7 +37,6 @@
 
 #include "mymoneymoney.h"
 #include "mymoneysecurity.h"
-#include "webpricequote.h"
 
 KOnlineUpdateWizardPage::KOnlineUpdateWizardPage(QWidget *parent) :
   QWizardPage(parent),
@@ -81,7 +84,7 @@ void KOnlineUpdateWizardPage::init2(const MyMoneySecurity& security)
 {
   int idx;
   if (security.value("kmm-online-quote-system") == "Finance::Quote") {
-    FinanceQuoteProcess p;
+    AlkFinanceQuoteProcess p;
     ui->m_useFinanceQuote->setChecked(true);
     idx = ui->m_onlineSourceCombo->findText(p.niceName(security.value("kmm-online-source")));
   } else {
@@ -120,10 +123,10 @@ void KOnlineUpdateWizardPage::slotSourceChanged(bool useFQ)
 {
   ui->m_onlineSourceCombo->clear();
   ui->m_onlineSourceCombo->insertItem(0, QString());
-  if (useFQ) {
-    ui->m_onlineSourceCombo->addItems(WebPriceQuote::quoteSources(WebPriceQuote::FinanceQuote));
-  } else {
-    ui->m_onlineSourceCombo->addItems(WebPriceQuote::quoteSources());
-  }
+//  if (useFQ) {
+//    ui->m_onlineSourceCombo->addItems(AlkOnlineQuoteSource::quoteSources(AlkOnlineQuoteSource::FinanceQuote));
+//  } else {
+    ui->m_onlineSourceCombo->addItems(AlkOnlineQuotesProfileManager::instance().profiles().first()->quoteSources());
+//  }
   ui->m_onlineSourceCombo->model()->sort(0);
 }
