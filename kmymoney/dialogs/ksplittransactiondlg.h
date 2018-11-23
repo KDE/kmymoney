@@ -43,7 +43,7 @@
 #include "ui_ksplittransactiondlgdecl.h"
 #include "ui_ksplitcorrectiondlg.h"
 
-
+class MyMoneyTag;
 
 class KSplitCorrectionDlgDecl : public KDialog, public Ui::KSplitCorrectionDlgDecl
 {
@@ -142,6 +142,13 @@ signals:
     * @param parent reference to parent account
     */
   void createCategory(MyMoneyAccount& account, const MyMoneyAccount& parent);
+
+  /**
+    * This signal is sent out, when a new tag needs to be created
+    * @param txt The name of the tag to be created
+    * @param id A connected slot should store the id of the created object in this variable
+    */
+  void createTag(const QString& txt, QString& id);
 
   /**
     * Signal is emitted, if any of the widgets enters (@a state equals @a true)

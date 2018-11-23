@@ -102,6 +102,7 @@ KSplitTransactionDlg::KSplitTransactionDlg(const MyMoneyTransaction& t,
   connect(transactionsTable, SIGNAL(transactionChanged(MyMoneyTransaction)),
           this, SLOT(slotSetTransaction(MyMoneyTransaction)));
   connect(transactionsTable, SIGNAL(createCategory(QString,QString&)), this, SLOT(slotCreateCategory(QString,QString&)));
+  connect(transactionsTable, SIGNAL(createTag(QString,QString&)), this, SIGNAL(createTag(QString,QString&)));
   connect(transactionsTable, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
   connect(transactionsTable, SIGNAL(returnPressed()), this, SLOT(accept()));

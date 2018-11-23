@@ -520,6 +520,12 @@ void QueryTable::constructTransactionTable()
               //convert to lowest fraction
               qA["split"] = ((-(*it_split).shares()) * xr).convert(fraction).toString();
               qA["rank"] = '1';
+              qA["tag"] = "";
+              QString delimiter = "";
+              for (int i = 0; i < tagIdList.size(); i++) {
+                qA["tag"] += delimiter + file->tag(tagIdList[i]).name().simplified();
+                delimiter = ", ";
+              }
             } else {
               //this applies when the transaction has only 2 splits, or each split is going to be
               //shown separately, eg. transactions by category

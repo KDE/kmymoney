@@ -2010,6 +2010,7 @@ int StdTransactionEditor::slotEditSplits()
                                  m_regForm);
       connect(dlg, SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
       connect(dlg, SIGNAL(createCategory(MyMoneyAccount&,MyMoneyAccount)), this, SIGNAL(createCategory(MyMoneyAccount&,MyMoneyAccount)));
+      connect(dlg, SIGNAL(createTag(QString, QString&)), this, SIGNAL(createTag(QString, QString&)));
 
       if ((rc = dlg->exec()) == KDialog::Accepted) {
         m_transaction = dlg->transaction();

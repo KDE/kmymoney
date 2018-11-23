@@ -49,6 +49,7 @@ class QFrame;
 class KMyMoneyCategory;
 class kMyMoneyLineEdit;
 class kMyMoneyEdit;
+class KTagContainer;
 
 /**
   * @author Thomas Baumgart
@@ -159,6 +160,8 @@ protected slots:
   void slotUpdateData(const MyMoneyTransaction& t);
 
   void slotLoadEditWidgets();
+  void slotCreateTag(const QString &txt, QString &id);
+  void slotUpdateTag(QString &id);
 
 signals:
   /**
@@ -198,6 +201,15 @@ signals:
     * @param id A connected slot should store the id of the created object in this variable
     */
   void createCategory(const QString& txt, QString& id);
+
+  /**
+    * This signal is sent out, when a new tag needs to be created
+    * @sa KMyMoneyCombo::createItem()
+    *
+    * @param txt The name of the tag to be created
+    * @param id A connected slot should store the id of the created object in this variable
+    */
+  void createTag(const QString& txt, QString& id);
 
   /**
     * Signal is emitted, if any of the widgets enters (@a state equals @a true)
@@ -248,6 +260,13 @@ private:
     * and destroyInputWidgets().
     */
   QPointer<kMyMoneyLineEdit> m_editMemo;
+
+  /**
+    * This member contains a pointer to the input widget for the memo.
+    * The widget will be created and destroyed dynamically in createInputWidgets()
+    * and destroyInputWidgets().
+    */
+  QPointer<KTagContainer> m_editTag;
 
   /**
     * This member contains a pointer to the input widget for the amount.

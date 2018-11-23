@@ -437,7 +437,6 @@ void ListTable::render(QString& result, QString& csv) const
         else if (*it_column == "postdate"
                  || *it_column == "number"
                  || *it_column == "payee"
-                 || *it_column == "tag"
                  || *it_column == "action"
                  || *it_column == "shares"
                  || *it_column == "price"
