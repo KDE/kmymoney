@@ -267,9 +267,11 @@ void SimpleLedgerView::openFavoriteLedgers()
 
 void SimpleLedgerView::showEvent(QShowEvent* event)
 {
-  Q_D(SimpleLedgerView);
-  if (d->m_needLoad)
-    d->init();
+  if (MyMoneyFile::instance()->storageAttached()) {
+    Q_D(SimpleLedgerView);
+    if (d->m_needLoad)
+      d->init();
+  }
 
   // don't forget base class implementation
   QWidget::showEvent(event);
