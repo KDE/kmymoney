@@ -80,13 +80,8 @@ double CashFlowList::XIRR(double rate) const
       contLoop = (rateEpsilon > maxEpsilon) && (fabs(resultValue) > maxEpsilon);
     } while (contLoop && (++iter < maxIter));
     iter = 0;
-#ifdef Q_CC_MSVC
-    if (_isinf(resultRate) || _isnan(resultRate) ||
-      _isinf(resultValue) || _isnan(resultValue))
-#else
     if (std::isinf(resultRate) || std::isnan(resultRate) ||
         std::isinf(resultValue) || std::isnan(resultValue))
-#endif
       contLoop = true;
     iterScan++;
     resultRateScanEnd = (iterScan >= 200);
