@@ -316,7 +316,9 @@ bool MyMoneyTemplate::setFlags(MyMoneyAccount& acc, QDomNode flags)
         // make sure, we only store flags we know!
         QString value = flagElement.attribute("name");
         if (value == "Tax") {
-          acc.setValue(value.toLatin1(), "Yes");
+          acc.setValue(value, "Yes");
+        } else if (value == "VatRate") {
+          acc.setValue(value, flagElement.attribute("value"));
         } else if (value == "OpeningBalanceAccount") {
           acc.setValue("OpeningBalanceAccount", "Yes");
         } else {
@@ -425,6 +427,12 @@ bool MyMoneyTemplate::addAccountStructure(QDomElement& parent, const MyMoneyAcco
   account.setAttribute(QString("type"), (int)acc.accountType());
 
   // FIXME: add tax flag stuff
+  if (acc.pairs().contains("VatRate")) {
+    QDomElement flag = m_doc.createElement("flag");
+    flag.setAttribute(QString("name"), "VatRate");
+    flag.setAttribute(QString("value"), acc.value("VatRate"));
+    account.appendChild(flag);
+  }
   if (acc.pairs().contains("OpeningBalanceAccount")) {
     QString openingBalanceAccount = acc.value("OpeningBalanceAccount");
     if (openingBalanceAccount == "Yes") {
