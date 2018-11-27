@@ -357,7 +357,7 @@ void QueryTable::constructTotalRows()
               if (subtotal == ctReturnInvestment)
                 totalsRow[subtotal] = helperROI((*currencyGrp).at(i + 1).value(ctBuys) - (*currencyGrp).at(i + 1).value(ctReinvestIncome), (*currencyGrp).at(i + 1).value(ctSells),
                                                 (*currencyGrp).at(i + 1).value(ctStartingBalance), (*currencyGrp).at(i + 1).value(ctEndingBalance) + (*currencyGrp).at(i + 1).value(ctMarketValue),
-                                                (*currencyGrp).at(i + 1).value(ctCashIncome)).toString();
+                                                (*currencyGrp).at(i + 1).value(ctCashIncome));
               else if (subtotal == ctPercentageGain)
                 totalsRow[subtotal] = (((*currencyGrp).at(i + 1).value(ctBuys) + (*currencyGrp).at(i + 1).value(ctMarketValue)) / (*currencyGrp).at(i + 1).value(ctBuys).abs()).toString();
               else if (subtotal == ctPrice)
@@ -417,7 +417,7 @@ void QueryTable::constructTotalRows()
           if (subtotal == ctReturnInvestment)
             totalsRow[subtotal] = helperROI((*currencyGrp).at(0).value(ctBuys) - (*currencyGrp).at(0).value(ctReinvestIncome), (*currencyGrp).at(0).value(ctSells),
                                             (*currencyGrp).at(0).value(ctStartingBalance), (*currencyGrp).at(0).value(ctEndingBalance) + (*currencyGrp).at(0).value(ctMarketValue),
-                                            (*currencyGrp).at(0).value(ctCashIncome)).toString();
+                                            (*currencyGrp).at(0).value(ctCashIncome));
           else if (subtotal == ctPercentageGain)
             totalsRow[subtotal] = (((*currencyGrp).at(0).value(ctBuys) + (*currencyGrp).at(0).value(ctMarketValue)) / (*currencyGrp).at(0).value(ctBuys).abs()).toString();
           else if (subtotal == ctPrice)
@@ -1054,15 +1054,14 @@ void QueryTable::constructTransactionTable()
   }
 }
 
-MyMoneyMoney QueryTable::helperROI(const MyMoneyMoney &buys, const MyMoneyMoney &sells, const MyMoneyMoney &startingBal, const MyMoneyMoney &endingBal, const MyMoneyMoney &cashIncome) const
+QString QueryTable::helperROI(const MyMoneyMoney &buys, const MyMoneyMoney &sells, const MyMoneyMoney &startingBal, const MyMoneyMoney &endingBal, const MyMoneyMoney &cashIncome) const
 {
   MyMoneyMoney returnInvestment;
   if (!buys.isZero() || !startingBal.isZero()) {
     returnInvestment = (sells + buys + cashIncome + endingBal - startingBal) / (startingBal - buys);
-    returnInvestment = returnInvestment.convert(10000);
+    return returnInvestment.convert(10000).toString();
   } else
-    returnInvestment = MyMoneyMoney(); // if no investment then no return on investment
-  return returnInvestment;
+    return QString();
 }
 
 QString QueryTable::helperIRR(const CashFlowList &all) const
@@ -1404,11 +1403,9 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
     break;
   }
 
-  MyMoneyMoney returnInvestment = helperROI(buysTotal - reinvestIncomeTotal, sellsTotal, startingBal, endingBal, cashIncomeTotal);
-
   result[ctBuys] = buysTotal.toString();
   result[ctReturn] = helperIRR(all);
-  result[ctReturnInvestment] = returnInvestment.toString();
+  result[ctReturnInvestment] = helperROI(buysTotal - reinvestIncomeTotal, sellsTotal, startingBal, endingBal, cashIncomeTotal);
   result[ctEquityType] = MyMoneySecurity::securityTypeToString(file->security(account.currencyId()).securityType());
 }
 

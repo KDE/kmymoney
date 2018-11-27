@@ -68,7 +68,7 @@ protected:
   void sumInvestmentValues(const ReportAccount &account, QList<CashFlowList> &cfList, QList<MyMoneyMoney> &shList) const;
   void constructPerformanceRow(const ReportAccount& account, TableRow& result, CashFlowList &all) const;
   void constructCapitalGainRow(const ReportAccount& account, TableRow& result) const;
-  MyMoneyMoney helperROI(const MyMoneyMoney& buys, const MyMoneyMoney& sells, const MyMoneyMoney& startingBal, const MyMoneyMoney& endingBal, const MyMoneyMoney& cashIncome) const;
+  QString helperROI(const MyMoneyMoney& buys, const MyMoneyMoney& sells, const MyMoneyMoney& startingBal, const MyMoneyMoney& endingBal, const MyMoneyMoney& cashIncome) const;
   QString helperIRR(const CashFlowList& all) const;
   void constructSplitsTable();
   bool linkEntries() const final override { return true; }
