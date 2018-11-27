@@ -933,14 +933,14 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
     returnInvestment = returnInvestment.convert(10000);
     result["returninvestment"] = returnInvestment.toString();
   } else {
-    result["returninvestment"] = "";
+    result["returninvestment"] = QString();
   }
 
   try {
     MyMoneyMoney annualReturn(all.XIRR(), 10000);
     result["return"] = annualReturn.toString();
   } catch (MyMoneyException &e) {
-    result["return"] = "";
+    result["return"] = QString();
     kDebug(2) << e.what();
   }
 
