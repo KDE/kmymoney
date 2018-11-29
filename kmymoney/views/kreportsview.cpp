@@ -323,7 +323,7 @@ KReportsView::KReportsView(QWidget *parent, const char *name) :
 
   m_tocTreeWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 
-  m_tocTreeWidget->setSelectionMode(QAbstractItemView::SingleSelection);
+  m_tocTreeWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
   m_listTabLayout->addWidget(m_tocTreeWidget);
   m_reportTabWidget->addTab(m_listTab, i18n("Reports"));
@@ -1073,36 +1073,46 @@ void KReportsView::addReportTab(const MyMoneyReport& report)
 
 void KReportsView::slotListContextMenu(const QPoint & p)
 {
-  QTreeWidgetItem *item = m_tocTreeWidget->itemAt(p);
+  QList<QTreeWidgetItem*> items = m_tocTreeWidget->selectedItems();
 
-  if (!item) {
+  if (items.isEmpty())
     return;
+
+  QList<TocItem*> tocItems;
+  foreach(QTreeWidgetItem *item, items) {
+    TocItem* tocItem = dynamic_cast<TocItem*>(item);
+    if (!tocItem || !tocItem->isReport())
+        continue;
+    tocItems.append(tocItem);
   }
 
-  TocItem* tocItem = dynamic_cast<TocItem*>(item);
-
-  if (!tocItem->isReport()) {
-    // currently there is no context menu for reportgroup items
+  if (tocItems.isEmpty())
     return;
-  }
 
   KMenu* contextmenu = new KMenu(this);
 
-  contextmenu->addAction(i18nc("To open a new report", "&Open"),
+  contextmenu->addAction(i18nc("To open a report", "&Open"),
                          this, SLOT(slotOpenFromList()));
 
-  contextmenu->addAction(i18nc("Configure a report", "&Configure"),
-                         this, SLOT(slotConfigureFromList()));
+  contextmenu->addAction(i18nc("To print a report", "&Print"),
+                         this, SLOT(slotPrintFromList()));
 
-  contextmenu->addAction(i18n("&New report"),
-                         this, SLOT(slotNewFromList()));
+  if (tocItems.size() == 1) {
+    TocItem* tocItem = dynamic_cast<TocItem*>(tocItems.at(0));
 
-  // Only add this option if it's a custom report. Default reports cannot be deleted
-  TocItemReport* reportTocItem = dynamic_cast<TocItemReport*>(tocItem);
-  MyMoneyReport& report = reportTocItem->getReport();
-  if (! report.id().isEmpty()) {
-    contextmenu->addAction(i18n("&Delete"),
-                           this, SLOT(slotDeleteFromList()));
+    contextmenu->addAction(i18nc("Configure a report", "&Configure"),
+                           this, SLOT(slotConfigureFromList()));
+
+    contextmenu->addAction(i18n("&New report"),
+                           this, SLOT(slotNewFromList()));
+
+    // Only add this option if it's a custom report. Default reports cannot be deleted
+    TocItemReport* reportTocItem = dynamic_cast<TocItemReport*>(tocItem);
+    MyMoneyReport& report = reportTocItem->getReport();
+    if (! report.id().isEmpty()) {
+      contextmenu->addAction(i18n("&Delete"),
+                             this, SLOT(slotDeleteFromList()));
+    }
   }
 
   contextmenu->popup(m_tocTreeWidget->mapToGlobal(p));
@@ -1110,10 +1120,32 @@ void KReportsView::slotListContextMenu(const QPoint & p)
 
 void KReportsView::slotOpenFromList()
 {
-  TocItem* tocItem = dynamic_cast<TocItem*>(m_tocTreeWidget->currentItem());
+  QList<QTreeWidgetItem*> items = m_tocTreeWidget->selectedItems();
 
-  if (tocItem)
-    slotItemDoubleClicked(tocItem, 0);
+  if (items.isEmpty())
+    return;
+
+  foreach(QTreeWidgetItem *item, items) {
+    TocItem* tocItem = dynamic_cast<TocItem*>(item);
+    if (tocItem && tocItem->isReport())
+      slotItemDoubleClicked(tocItem, 0);
+  }
+}
+
+void KReportsView::slotPrintFromList()
+{
+  QList<QTreeWidgetItem*> items = m_tocTreeWidget->selectedItems();
+
+  if (items.isEmpty())
+    return;
+
+  foreach(QTreeWidgetItem *item, items) {
+    TocItem* tocItem = dynamic_cast<TocItem*>(item);
+    if (tocItem && tocItem->isReport()) {
+      slotItemDoubleClicked(tocItem, 0);
+      slotPrintView();
+    }
+  }
 }
 
 void KReportsView::slotConfigureFromList()

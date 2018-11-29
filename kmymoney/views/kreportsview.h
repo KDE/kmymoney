@@ -228,6 +228,7 @@ public slots:
   void slotDelete();
   void slotListContextMenu(const QPoint &);
   void slotOpenFromList();
+  void slotPrintFromList();
   void slotConfigureFromList();
   void slotNewFromList();
   void slotDeleteFromList();
