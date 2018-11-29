@@ -497,13 +497,11 @@ public:
 
     // for report group items:
     // doubleclick toggles the expand-state,
-    // so avoid any further action in case of doubleclick
-    // (see slotItemDoubleClicked)
     m_tocTreeWidget->setExpandsOnDoubleClick(false);
 
     m_tocTreeWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 
-    m_tocTreeWidget->setSelectionMode(QAbstractItemView::SingleSelection);
+    m_tocTreeWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
     m_listTabLayout->addWidget(m_tocTreeWidget);
     m_reportTabWidget->addTab(m_listTab, i18n("Reports"));
@@ -511,7 +509,7 @@ public:
     q->connect(m_reportTabWidget, &QTabWidget::tabCloseRequested,
             q, &KReportsView::slotClose);
 
-    q->connect(m_tocTreeWidget, &QTreeWidget::itemActivated,
+    q->connect(m_tocTreeWidget, &QTreeWidget::itemDoubleClicked,
             q, &KReportsView::slotItemDoubleClicked);
 
     q->connect(m_tocTreeWidget, &QWidget::customContextMenuRequested,
