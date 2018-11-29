@@ -611,8 +611,7 @@ void KReportsView::slotListContextMenu(const QPoint & p)
   contextmenu->addAction(i18nc("To print a report", "&Print"),
                          this, SLOT(slotPrintFromList()));
 
-  if (tocItems.count() == 1)
-  {
+  if (tocItems.count() == 1) {
     contextmenu->addAction(i18nc("Configure a report", "&Configure"),
                           this, SLOT(slotConfigureFromList()));
 
