@@ -553,21 +553,23 @@ void KPayeesView::refresh()
 
 void KPayeesView::showEvent(QShowEvent* event)
 {
-  Q_D(KPayeesView);
-  if (d->m_needLoad)
-    d->init();
+  if (MyMoneyFile::instance()->storageAttached()) {
+    Q_D(KPayeesView);
+    if (d->m_needLoad)
+      d->init();
 
-  emit customActionRequested(View::Payees, eView::Action::AboutToShow);
+    emit customActionRequested(View::Payees, eView::Action::AboutToShow);
 
-  if (d->m_needsRefresh)
-    refresh();
+    if (d->m_needsRefresh)
+      refresh();
+
+    QList<MyMoneyPayee> list;
+    d->selectedPayees(list);
+    emit selectObjects(list);
+  }
 
   // don't forget base class implementation
   QWidget::showEvent(event);
-
-  QList<MyMoneyPayee> list;
-  d->selectedPayees(list);
-  emit selectObjects(list);
 }
 
 void KPayeesView::updatePayeeActions(const QList<MyMoneyPayee> &payees)

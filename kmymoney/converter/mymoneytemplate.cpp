@@ -263,6 +263,25 @@ bool MyMoneyTemplate::importTemplate(void(*callback)(int, int, const QString&))
     }
     m_accounts = m_accounts.nextSibling();
   }
+
+  /*
+   * Resolve imported vat account assignments
+   *
+   * The template account id of the assigned vat account
+   * is stored temporarly in the account key/value pair
+   * 'UnresolvedVatAccount' and resolved below.
+   */
+  QList<MyMoneyAccount> accounts;
+  file->accountList(accounts);
+  foreach (MyMoneyAccount acc, accounts) {
+    if (!acc.pairs().contains("UnresolvedVatAccount"))
+      continue;
+    QString id = acc.value("UnresolvedVatAccount");
+    acc.setValue("VatAccount", m_vatAccountMap[id]);
+    acc.deletePair("UnresolvedVatAccount");
+    MyMoneyFile::instance()->modifyAccount(acc);
+  }
+
   signalProgress(-1, -1);
   return rc;
 }
@@ -284,6 +303,9 @@ bool MyMoneyTemplate::createAccounts(MyMoneyAccount& parent, QDomNode account)
           for (it = subAccountList.constBegin(); it != subAccountList.constEnd(); ++it) {
             if ((*it).name() == accountElement.attribute("name")) {
               acc = *it;
+              QString id = accountElement.attribute("id");
+              if (!id.isEmpty())
+                m_vatAccountMap[id] = acc.id();
               break;
             }
           }
@@ -297,6 +319,9 @@ bool MyMoneyTemplate::createAccounts(MyMoneyAccount& parent, QDomNode account)
             MyMoneyFile::instance()->addAccount(acc, parent);
           } catch (const MyMoneyException &) {
           }
+          QString id = accountElement.attribute("id");
+          if (!id.isEmpty())
+            m_vatAccountMap[id] = acc.id();
         }
         createAccounts(acc, account.firstChild());
       }
@@ -316,7 +341,12 @@ bool MyMoneyTemplate::setFlags(MyMoneyAccount& acc, QDomNode flags)
         // make sure, we only store flags we know!
         QString value = flagElement.attribute("name");
         if (value == "Tax") {
-          acc.setValue(value.toLatin1(), "Yes");
+          acc.setValue(value, "Yes");
+       } else if (value == "VatRate") {
+          acc.setValue(value, flagElement.attribute("value"));
+        } else if (value == "VatAccount") {
+          // will be resolved later in importTemplate()
+          acc.setValue("UnresolvedVatAccount", flagElement.attribute("value"));
         } else if (value == "OpeningBalanceAccount") {
           acc.setValue("OpeningBalanceAccount", "Yes");
         } else {
@@ -342,6 +372,17 @@ void MyMoneyTemplate::signalProgress(int current, int total, const QString& msg)
 bool MyMoneyTemplate::exportTemplate(void(*callback)(int, int, const QString&))
 {
   m_progressCallback = callback;
+
+  // prepare vat account map
+  QList<MyMoneyAccount> accountList;
+  MyMoneyFile::instance()->accountList(accountList);
+  int i = 0;
+  QList<MyMoneyAccount>::Iterator it;
+  for (it = accountList.begin(); it != accountList.end(); ++it) {
+    if (!(*it).pairs().contains("VatAccount"))
+      continue;
+    m_vatAccountMap[(*it).value("VatAccount")] = QString::fromLatin1("%1").arg(i++, 3, 10, QLatin1Char('0'));
+  }
 
   m_doc = QDomDocument("KMYMONEY-TEMPLATE");
 
@@ -424,7 +465,27 @@ bool MyMoneyTemplate::addAccountStructure(QDomElement& parent, const MyMoneyAcco
     account.setAttribute(QString("name"), acc.name());
   account.setAttribute(QString("type"), (int)acc.accountType());
 
-  // FIXME: add tax flag stuff
+  if (acc.pairs().contains("Tax")) {
+    QDomElement flag = m_doc.createElement("flag");
+    flag.setAttribute(QString("name"), "Tax");
+    flag.setAttribute(QString("value"), acc.value("Tax"));
+    account.appendChild(flag);
+  }
+  if (m_vatAccountMap.contains(acc.id()))
+    account.setAttribute(QString("id"), m_vatAccountMap[acc.id()]);
+
+  if (acc.pairs().contains("VatRate")) {
+    QDomElement flag = m_doc.createElement("flag");
+    flag.setAttribute(QString("name"), "VatRate");
+    flag.setAttribute(QString("value"), acc.value("VatRate"));
+    account.appendChild(flag);
+  }
+  if (acc.pairs().contains("VatAccount")) {
+    QDomElement flag = m_doc.createElement("flag");
+    flag.setAttribute(QString("name"), "VatAccount");
+    flag.setAttribute(QString("value"), m_vatAccountMap[acc.value("VatAccount")]);
+    account.appendChild(flag);
+  }
   if (acc.pairs().contains("OpeningBalanceAccount")) {
     QString openingBalanceAccount = acc.value("OpeningBalanceAccount");
     if (openingBalanceAccount == "Yes") {

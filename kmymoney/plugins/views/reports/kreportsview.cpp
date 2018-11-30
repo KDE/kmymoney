@@ -156,20 +156,21 @@ void KReportsView::refresh()
 
 void KReportsView::showEvent(QShowEvent * event)
 {
-  Q_D(KReportsView);
-  if (d->m_needLoad)
-    d->init();
+  if (MyMoneyFile::instance()->storageAttached()) {
+    Q_D(KReportsView);
+    if (d->m_needLoad)
+      d->init();
 
-  emit customActionRequested(View::Reports, eView::Action::AboutToShow);
+    emit customActionRequested(View::Reports, eView::Action::AboutToShow);
 
-  if (d->m_needsRefresh)
-    refresh();
+    if (d->m_needsRefresh)
+      refresh();
 
-  if (auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->currentWidget()))
-    emit reportSelected(tab->report());
-  else
-    emit reportSelected(MyMoneyReport());
-
+    if (auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->currentWidget()))
+      emit reportSelected(tab->report());
+    else
+      emit reportSelected(MyMoneyReport());
+  }
   // don't forget base class implementation
   QWidget::showEvent(event);
 }
@@ -584,38 +585,49 @@ void KReportsView::slotCloseAll()
 void KReportsView::slotListContextMenu(const QPoint & p)
 {
   Q_D(KReportsView);
-  QTreeWidgetItem *item = d->m_tocTreeWidget->itemAt(p);
+  auto items = d->m_tocTreeWidget->selectedItems();
 
-  if (!item) {
+  if (items.isEmpty()) {
     return;
   }
 
-  auto tocItem = dynamic_cast<TocItem*>(item);
+  QList<TocItem*> tocItems;
+  foreach(auto item, items) {
+    auto tocItem = dynamic_cast<TocItem*>(item);
+    if (tocItem && tocItem->isReport()) {
+      tocItems.append(tocItem);
+    }
+  }
 
-  if (tocItem && !tocItem->isReport()) {
-    // currently there is no context menu for reportgroup items
+  if (tocItems.isEmpty()) {
     return;
   }
 
-  QMenu* contextmenu = new QMenu(this);
+  auto contextmenu = new QMenu(this);
 
   contextmenu->addAction(i18nc("To open a new report", "&Open"),
                          this, SLOT(slotOpenFromList()));
 
-  contextmenu->addAction(i18nc("Configure a report", "&Configure"),
-                         this, SLOT(slotConfigureFromList()));
+  contextmenu->addAction(i18nc("To print a report", "&Print"),
+                         this, SLOT(slotPrintFromList()));
 
-  contextmenu->addAction(i18n("&New report"),
-                         this, SLOT(slotNewFromList()));
+  if (tocItems.count() == 1) {
+    contextmenu->addAction(i18nc("Configure a report", "&Configure"),
+                          this, SLOT(slotConfigureFromList()));
 
-  // Only add this option if it's a custom report. Default reports cannot be deleted
-  auto reportTocItem = dynamic_cast<TocItemReport*>(tocItem);
+    contextmenu->addAction(i18n("&New report"),
+                          this, SLOT(slotNewFromList()));
 
-  if (reportTocItem) {
-    MyMoneyReport& report = reportTocItem->getReport();
-    if (! report.id().isEmpty()) {
-      contextmenu->addAction(i18n("&Delete"),
-                             this, SLOT(slotDeleteFromList()));
+    // Only add this option if it's a custom report. Default reports cannot be deleted
+
+    auto reportTocItem = dynamic_cast<TocItemReport*>(tocItems.at(0));
+
+    if (reportTocItem) {
+      MyMoneyReport& report = reportTocItem->getReport();
+      if (! report.id().isEmpty()) {
+        contextmenu->addAction(i18n("&Delete"),
+                              this, SLOT(slotDeleteFromList()));
+      }
     }
   }
 
@@ -625,8 +637,38 @@ void KReportsView::slotListContextMenu(const QPoint & p)
 void KReportsView::slotOpenFromList()
 {
   Q_D(KReportsView);
-  if (auto tocItem = dynamic_cast<TocItem*>(d->m_tocTreeWidget->currentItem()))
-    slotItemDoubleClicked(tocItem, 0);
+
+  auto items = d->m_tocTreeWidget->selectedItems();
+
+  if (items.isEmpty()) {
+    return;
+  }
+
+  foreach(auto item, items) {
+    auto tocItem = dynamic_cast<TocItem*>(item);
+    if (tocItem && tocItem->isReport()) {
+      slotItemDoubleClicked(tocItem, 0);
+    }
+  }
+}
+
+void KReportsView::slotPrintFromList()
+{
+  Q_D(KReportsView);
+
+  auto items = d->m_tocTreeWidget->selectedItems();
+
+  if (items.isEmpty()) {
+    return;
+  }
+
+  foreach(auto item, items) {
+    auto tocItem = dynamic_cast<TocItem*>(item);
+    if (tocItem && tocItem->isReport()) {
+      slotItemDoubleClicked(tocItem, 0);
+      slotPrintView();
+    }
+  }
 }
 
 void KReportsView::slotConfigureFromList()
