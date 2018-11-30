@@ -1,6 +1,7 @@
 /*  This file is part of the KDE project
     Copyright (C) 2009 Laurent Montel <montel@kde.org>
     (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    Copyright 2018 Michael Kiefer <Michael-Kiefer@web.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -117,9 +118,23 @@ void ReportTabChart::slotChartTypeChanged(int index)
     ui->m_checkSVGridLines->setText(i18n("Show sagittal grid lines"));
     ui->m_logYaxis->setChecked(false);
     ui->m_logYaxis->setEnabled(false);
+    ui->m_negExpenses->setChecked(false);
+    ui->m_negExpenses->setEnabled(false);
   } else {
     ui->m_checkCHGridLines->setText(i18n("Show horizontal grid lines"));
     ui->m_checkSVGridLines->setText(i18n("Show vertical grid lines"));
+    ui->m_logYaxis->setEnabled(true);
+    ui->m_negExpenses->setEnabled(true);
+  }
+}
+
+void ReportTabChart::setNegExpenses(bool set)
+{
+  // logarithm on negative numbers does not make sense, so disable it
+  if (set) {
+    ui->m_logYaxis->setChecked(false);
+    ui->m_logYaxis->setEnabled(false);
+  } else {
     ui->m_logYaxis->setEnabled(true);
   }
 }

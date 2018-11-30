@@ -2,6 +2,7 @@
  * Copyright 2005       Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2005-2018  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2018       Michael Kiefer <mlkiefer@users.noreply.github.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -292,6 +293,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
         // iterate over outer groups
         PivotGrid::const_iterator it_outergroup = grid.begin();
         while (it_outergroup != grid.end()) {
+          //determine whether expenses should be displayed as negative
+          const bool invertValue = (config.isNegExpenses() && (*it_outergroup).m_inverted);
           // iterate over inner groups
           PivotOuterGroup::const_iterator it_innergroup = (*it_outergroup).begin();
           while (it_innergroup != (*it_outergroup).end()) {
@@ -333,7 +336,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
                   //set the cell value and tooltip
                   rowNum = drawPivotGridRow(rowNum, it_row.value().value(myRowTypeList.at(i)),
                                             config.isChartDataLabels() ? legendText : QString(),
-                                            0, numberColumns, precision);
+                                            0, numberColumns, precision, invertValue);
                 }
               }
               ++it_row;
@@ -349,7 +352,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
         // iterate over outer groups
         PivotGrid::const_iterator it_outergroup = grid.begin();
         while (it_outergroup != grid.end()) {
-
+          //determine whether expenses should be displayed as negative
+          const bool invertValue = (config.isNegExpenses() && (*it_outergroup).m_inverted);
           // iterate over inner groups
           PivotOuterGroup::const_iterator it_innergroup = (*it_outergroup).begin();
           while (it_innergroup != (*it_outergroup).end()) {
@@ -370,7 +374,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
               //set the cell value and tooltip
               rowNum = drawPivotGridRow(rowNum, (*it_innergroup).m_total.value(myRowTypeList.at(i)),
                                         config.isChartDataLabels() ? legendText : QString(),
-                                        0, numberColumns, precision);
+                                        0, numberColumns, precision, invertValue);
             }
             ++it_innergroup;
           }
@@ -383,6 +387,8 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
         // iterate over outer groups
         PivotGrid::const_iterator it_outergroup = grid.begin();
         while (it_outergroup != grid.end()) {
+          //determine whether expenses should be displayed as negative
+          const bool invertValue = (config.isNegExpenses() && (*it_outergroup).m_inverted);
           // iterate row types
           for (int i = 0 ; i < myRowTypeListSize; ++i) {
             QString legendText;
@@ -400,7 +406,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
             //set the cell value and tooltip
             rowNum = drawPivotGridRow(rowNum, (*it_outergroup).m_total.value(myRowTypeList.at(i)),
                                       config.isChartDataLabels() ? legendText : QString(),
-                                      0, numberColumns, precision);
+                                      0, numberColumns, precision, invertValue);
           }
           ++it_outergroup;
         }
@@ -424,7 +430,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
             //set the cell value and tooltip
             rowNum = drawPivotGridRow(rowNum, grid.m_total.value(myRowTypeList.at(i)),
                                       config.isChartDataLabels() ? legendText : QString(),
-                                      0, numberColumns, precision);
+                                      0, numberColumns, precision, false);
           }
         }
       }
@@ -450,20 +456,20 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
             if (myRowTypeList.at(i) == eActual)
               rowNum = drawPivotGridRow(rowNum, grid.m_total.value(myRowTypeList.at(i)),
                                         config.isChartDataLabels() ? legendText : QString(),
-                                        0, config.currentDateColumn(), precision);
+                                        0, config.currentDateColumn(), precision, false);
             else if (myRowTypeList.at(i)== eForecast) {
               rowNum = drawPivotGridRow(rowNum, grid.m_total.value(myRowTypeList.at(i)),
                                         config.isChartDataLabels() ? legendText : QString(),
-                                        config.currentDateColumn(), numberColumns - config.currentDateColumn(), precision);
+                                        config.currentDateColumn(), numberColumns - config.currentDateColumn(), precision, false);
 
             } else
               rowNum = drawPivotGridRow(rowNum, grid.m_total.value(myRowTypeList.at(i)),
                                         config.isChartDataLabels() ? legendText : QString(),
-                                        0, numberColumns, precision);
+                                        0, numberColumns, precision, false);
           } else
             rowNum = drawPivotGridRow(rowNum, grid.m_total.value(myRowTypeList.at(i)),
                                       config.isChartDataLabels() ? legendText : QString(),
-                                      0, numberColumns, precision);
+                                      0, numberColumns, precision, false);
         }
 
       }
@@ -642,7 +648,7 @@ void KReportChartView::slotNeedUpdate()
     barDiagram->axes().at(1)->setLabels(labels);
 }
 
-int KReportChartView::drawPivotGridRow(int rowNum, const PivotGridRow& gridRow, const QString& legendText, const int startColumn, const int columnsToDraw, const int precision)
+int reports::KReportChartView::drawPivotGridRow ( int rowNum, const reports::PivotGridRow& gridRow, const QString& legendText, const int startColumn, const int columnsToDraw, const int precision, const bool invertValue )
 {
   // Columns
   const QString toolTip = QStringLiteral("<h2>%1</h2><strong>%2</strong><br>");
@@ -672,6 +678,8 @@ int KReportChartView::drawPivotGridRow(int rowNum, const PivotGridRow& gridRow, 
       QStandardItem* item = new QStandardItem();
       if (!m_skipZero || !gridRow.at(i).isZero()) {
         double value = gridRow.at(i).toDouble();
+        if (invertValue)
+          value = -value;
         item->setData(QVariant(value), Qt::DisplayRole);
         if (isToolTip)
           item->setToolTip(toolTip.arg(legendText).arg(value, 0, 'f', precision));

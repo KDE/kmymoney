@@ -11,6 +11,7 @@
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
                            Ace Jones <ace.j@hotpop.com>
                            (C) 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           2018 Michael Kiefer <Michael-Kiefer@web.de>
  ***************************************************************************/
 
 /***************************************************************************
@@ -848,6 +849,19 @@ public:
       list.back().setChartByDefault(true);
       list.back().setChartType(eMyMoney::Report::ChartType::Line);
       list.back().setChartDataLabels(false);
+
+      list.push_back(MyMoneyReport(
+                       eMyMoney::Report::RowType::ExpenseIncome,
+                       static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
+                       TransactionFilter::Date::Last12Months,
+                       eMyMoney::Report::DetailLevel::Top,
+                       i18n("Income and Expenses Bar Graph"),
+                       i18n("Default Report")
+                     ));
+      list.back().setChartByDefault(true);
+      list.back().setChartType(eMyMoney::Report::ChartType::StackedBar);
+      list.back().setChartDataLabels(false);
+      list.back().setNegExpenses(true);
 
       list.push_back(MyMoneyReport(
                        eMyMoney::Report::RowType::ExpenseIncome,

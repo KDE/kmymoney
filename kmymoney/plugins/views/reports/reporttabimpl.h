@@ -1,6 +1,7 @@
 /*  This file is part of the KDE project
     Copyright (C) 2009 Laurent Montel <montel@kde.org>
     (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+        2018 by Michael Kiefer <Michael-Kiefer@web.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -83,6 +84,7 @@ public:
   ~ReportTabChart();
 
   Ui::ReportTabChart* ui;
+  void setNegExpenses(bool set);
 
 private Q_SLOTS:
   void slotChartTypeChanged(int index);

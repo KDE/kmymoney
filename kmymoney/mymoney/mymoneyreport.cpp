@@ -3,6 +3,7 @@
  * Copyright 2006       Darren Gould <darren_gould@gmx.de>
  * Copyright 2007-2010  Alvaro Soliverez <asoliverez@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2018       Michael Kiefer <Michael-Kiefer@web.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -458,6 +459,18 @@ void MyMoneyReport::setLogYAxis(bool f)
 {
   Q_D(MyMoneyReport);
   d->m_logYaxis = f;
+}
+
+bool MyMoneyReport::isNegExpenses() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_negExpenses;
+}
+
+void MyMoneyReport::setNegExpenses(bool f)
+{
+  Q_D(MyMoneyReport);
+  d->m_negExpenses = f;
 }
 
 QString MyMoneyReport::dataRangeStart() const

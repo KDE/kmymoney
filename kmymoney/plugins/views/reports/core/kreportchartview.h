@@ -2,6 +2,7 @@
  * Copyright 2005       Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2005-2018  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2018       Michael Kiefer <Michael-Kiefer@web.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -79,7 +80,7 @@ private:
   /**
     * Draw a PivotGridRow in a chart
     */
-  int drawPivotGridRow(int rowNum, const PivotGridRow& gridRow, const QString& legendText, const int startColumn = 0, const int columnsToDraw = 0, const int precision = 2);
+  int drawPivotGridRow(int rowNum, const PivotGridRow& gridRow, const QString& legendText, const int startColumn = 0, const int columnsToDraw = 0, const int precision = 2, const bool invertValue = false);
 
   /**
     * Set cell data

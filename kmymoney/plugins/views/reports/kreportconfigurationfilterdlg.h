@@ -11,6 +11,7 @@
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
                            Ace Jones <ace.j@hotpop.com>
                            (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           2018 by Michael Kiefer <Michael-Kiefer@web.de>
  ***************************************************************************/
 
 /***************************************************************************
@@ -66,6 +67,7 @@ protected Q_SLOTS:
   void slotUpdateColumnsCombo();
   void slotUpdateColumnsCombo(int idx);
   void slotLogAxisChanged(int state);
+  void slotNegExpensesChanged(int state);
 
 private:
   Q_DECLARE_PRIVATE(KReportConfigurationFilterDlg)
