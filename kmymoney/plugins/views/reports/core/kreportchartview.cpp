@@ -98,7 +98,9 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
   //set the new header
   HeaderFooter* header = new HeaderFooter;
-  header->setText(config.name());
+  // adding some extra spaces at the end here avoids truncation
+  // of the label on the diagram and solves bug #399260
+  header->setText(config.name().append(QLatin1String("     ")));
   header->setType(HeaderFooter::Header);
   header->setPosition(Position::North);
   TextAttributes headerTextAttr(header->textAttributes());
