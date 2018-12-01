@@ -217,15 +217,17 @@ public:
           file->removeTransaction(t);
 
         } else if (!tid.isEmpty() && !dlg->openingBalance().isZero()) {
-          s0.setShares(bal);
-          s0.setValue(bal);
-          t.modifySplit(s0);
-          s1.setShares(-bal);
-          s1.setValue(-bal);
-          t.modifySplit(s1);
-          t.setPostDate(account.openingDate());
-          file->modifyTransaction(t);
-
+          // update transaction only if changed
+          if ((s0.shares() != bal) || (t.postDate() != account.openingDate())) {
+            s0.setShares(bal);
+            s0.setValue(bal);
+            t.modifySplit(s0);
+            s1.setShares(-bal);
+            s1.setValue(-bal);
+            t.modifySplit(s1);
+            t.setPostDate(account.openingDate());
+            file->modifyTransaction(t);
+          }
         } else if (tid.isEmpty() && !dlg->openingBalance().isZero()) {
           file->createOpeningBalanceTransaction(m_currentAccount, bal);
         }
