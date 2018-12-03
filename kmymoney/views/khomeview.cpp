@@ -125,8 +125,13 @@ void KHomeView::slotPrintView()
 void KHomeView::slotOpenUrl(const QUrl &url)
 {
   Q_D(KHomeView);
+
   QString protocol = url.scheme();
   QString view = url.fileName();
+
+  // empty view -> bail out
+  if (view.isEmpty())
+    return;
 
   QUrlQuery query(url);
   QString id = query.queryItemValue("id");
