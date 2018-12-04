@@ -26,9 +26,11 @@
 #ifdef HAVE_KDEPIMLIBS
 #include <KPIMIdentities/IdentityManager>
 #include <KPIMIdentities/Identity>
+#ifdef HAVE_AKONADI
 #include <akonadi/recursiveitemfetchjob.h>
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/Collection>
+#endif
 #include <KABC/Addressee>
 #endif
 
@@ -71,7 +73,7 @@ QString MyMoneyContact::ownerFullName() const
 
 void MyMoneyContact::fetchContact(const QString &email)
 {
-#ifdef HAVE_KDEPIMLIBS
+#if defined(HAVE_KDEPIMLIBS) && defined(HAVE_AKONADI)
   // fetch the contact data
   Akonadi::RecursiveItemFetchJob *job = new Akonadi::RecursiveItemFetchJob(Akonadi::Collection::root(), QStringList() << KABC::Addressee::mimeType());
   job->fetchScope().fetchFullPayload();
@@ -88,7 +90,7 @@ void MyMoneyContact::fetchContact(const QString &email)
 
 void MyMoneyContact::searchContactResult(KJob *job)
 {
-#ifdef HAVE_KDEPIMLIBS
+#if defined(HAVE_KDEPIMLIBS) && defined(HAVE_AKONADI)
   const Akonadi::RecursiveItemFetchJob *contactJob = qobject_cast<Akonadi::RecursiveItemFetchJob*>(job);
   Akonadi::Item::List items;
   if (contactJob)

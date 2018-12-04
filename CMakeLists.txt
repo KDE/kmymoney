@@ -90,6 +90,9 @@ find_package(SharedMimeInfo REQUIRED)
 # set the configuration switch signaling that KDE PIM libraries were found
 if (KdepimLibs_FOUND)
   set(HAVE_KDEPIMLIBS 1)
+  if(WIN32)
+    set(KDEPIMLIBS_AKONADI_CONTACT_LIBS)
+  endif()
 endif (KdepimLibs_FOUND)
 
 add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS} ${KDEPIM_DEFINITIONS})
