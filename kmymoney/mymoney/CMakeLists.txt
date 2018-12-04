@@ -61,13 +61,14 @@ target_link_libraries(kmm_mymoney LINK_PUBLIC
                       ${KDEPIMLIBS_AKONADI_CONTACT_LIBS}
                       ${LIBALKIMIA_LIBRARIES}
                       kmm_storage
+                      payeeidentifier_iban_bic
 #                     onlinetask_interfaces
+                      LINK_PRIVATE
                       kmm_payeeidentifier_loader
                       kmm_payeeidentifier
                       payeeidentifier_iban_bic
                       payeeidentifier_nationalAccount
                       kmm_settings
-                      LINK_PRIVATE
                       onlinetask_unavailabletask
 )
 

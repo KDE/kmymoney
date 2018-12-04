@@ -18,7 +18,9 @@ set(storage_a_SOURCES
 # This library is actually not needed. It is built just for
 # convenience, and then linked into kmm_mymoney.
 kde4_add_library( kmm_storage STATIC ${storage_a_SOURCES} )
-
+if( WIN32 )
+  target_compile_definitions(kmm_storage PUBLIC KMM_MYMONEY_EXPORT=)
+endif()
 ########### install files ###############
 
 install(FILES ${storage_HEADERS}
