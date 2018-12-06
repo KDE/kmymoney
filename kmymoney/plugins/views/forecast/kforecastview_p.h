@@ -653,17 +653,16 @@ public:
       delete m_forecastChart;
 
     if (const auto reportsPlugin = pPlugins.data.value("reportsview", nullptr)) {
-      const auto args =
+      const QString args =
           QString::number(ui->m_comboDetail->currentIndex()) + ';' +
           QString::number(ui->m_forecastDays->value()) + ';' +
           QString::number(ui->m_tab->width()) + ';' +
           QString::number(ui->m_tab->height());
-
-      const auto variantReport = reportsPlugin->requestData(args, eWidgetPlugin::WidgetType::NetWorthForecastWithArgs);
+       const auto variantReport = reportsPlugin->requestData(args, eWidgetPlugin::WidgetType::NetWorthForecastWithArgs);
       if (!variantReport.isNull())
         m_forecastChart = variantReport.value<QWidget *>();
     } else {
-      m_forecastChart = new QLabel(i18n("Enable reports plugin to see this chart."));
+        m_forecastChart = new QLabel(i18n("Enable reports plugin to see this chart."));
     }
     m_chartLayout->addWidget(m_forecastChart);
   }

@@ -134,8 +134,7 @@ QWidget *ReportsView::netWorthForecast(const QString &arg) const
   reportCfg.setChartSVGridLines(false);
   reportCfg.setChartType(eMyMoney::Report::ChartType::Line);
   reportCfg.setIncludingSchedules(false);
-  // FIXME: this causes a crash
-  //reportCfg.setColumnsAreDays( true );
+  reportCfg.setColumnsAreDays( true );
   reportCfg.setChartDataLabels(false);
   reportCfg.setConvertCurrency(true);
   reportCfg.setIncludingForecast(true);
@@ -148,7 +147,7 @@ QWidget *ReportsView::netWorthForecast(const QString &arg) const
 
   // Adjust the size
   forecastChart->resize(liArgs.at(2).toInt() - 10, liArgs.at(3).toInt());
-  //forecastChart->show();
+  forecastChart->show();
   forecastChart->update();
   return forecastChart;
 }
