@@ -94,6 +94,11 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, KLineEdit* versionEdit, const QSt
   // following two added as found in previous URL on 2017-10-01
   m_appMap[i18n("Quicken Windows 2015")] = "QWIN:2400";
   m_appMap[i18n("Quicken Windows 2016")] = "QWIN:2500";
+  // following three added as logical consequence on 2018-12-12
+  m_appMap[i18n("Quicken Windows 2017")] = "QWIN:2600";
+  m_appMap[i18n("Quicken Windows 2018")] = "QWIN:2700";
+  m_appMap[i18n("Quicken Windows 2019")] = "QWIN:2800";
+  // the swiss army knife entry :)
   m_appMap[i18n("Quicken Windows (Expert)")] = "QWIN:";
 
   // MS-Money
