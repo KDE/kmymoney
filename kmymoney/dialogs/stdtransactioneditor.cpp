@@ -603,6 +603,10 @@ void StdTransactionEditor::slotReloadEditWidgets()
 
 void StdTransactionEditor::slotUpdatePayee(const QString& payeeId)
 {
+  // in case of an empty payee, there is nothing to do
+  if (payeeId.isEmpty())
+    return;
+
   Q_D(StdTransactionEditor);
   // we have a new payee assigned to this transaction.
   // in case there is no category assigned, no value entered and no

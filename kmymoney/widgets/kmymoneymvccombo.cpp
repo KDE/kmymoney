@@ -256,6 +256,7 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
   if (isEditable() && currentText().isEmpty()) {
     QString id = d->m_id;
     d->m_id.clear();
+    setCurrentIndex(-1);
     if (!id.isEmpty())
       emit itemSelected(d->m_id);
     update();
