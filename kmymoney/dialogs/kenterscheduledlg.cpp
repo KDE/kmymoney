@@ -26,6 +26,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QIcon>
+#include <QWindow>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -35,6 +36,9 @@
 #include <KLocalizedString>
 #include <KGuiItem>
 #include <KStandardGuiItem>
+#include <KSharedConfig>
+#include <KWindowConfig>
+#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -97,6 +101,16 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& sch
   d_ptr(new KEnterScheduleDlgPrivate)
 {
   Q_D(KEnterScheduleDlg);
+
+  // restore the last used dialog size
+  winId(); // needs to be called to create the QWindow
+  KConfigGroup grp = KSharedConfig::openConfig()->group("KEnterScheduleDlg");
+  if (grp.isValid()) {
+    KWindowConfig::restoreWindowSize(windowHandle(), grp);
+  }
+  // let the minimum size be 780x410
+  resize(QSize(780, 410).expandedTo(windowHandle() ? windowHandle()->size() : QSize()));
+
   d->ui->setupUi(this);
   d->m_schedule = schedule;
   d->m_extendedReturnCode = eDialogs::ScheduleResultCode::Enter;
@@ -144,6 +158,13 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& sch
 KEnterScheduleDlg::~KEnterScheduleDlg()
 {
   Q_D(KEnterScheduleDlg);
+
+  // store the last used dialog size
+  KConfigGroup grp = KSharedConfig::openConfig()->group("KEnterScheduleDlg");
+  if (grp.isValid()) {
+    KWindowConfig::saveWindowSize(windowHandle(), grp);
+  }
+
   delete d;
 }
 
@@ -220,7 +241,7 @@ int KEnterScheduleDlg::exec()
   Q_D(KEnterScheduleDlg);
   if (d->m_showWarningOnce) {
     d->m_showWarningOnce = false;
-    KMessageBox::information(this, QString("<qt>") + i18n("<p>Please check that all the details in the following dialog are correct and press OK.</p><p>Editable data can be changed and can either be applied to just this occurrence or for all subsequent occurrences for this schedule.  (You will be asked what you intend after pressing OK in the following dialog)</p>") + QString("</qt>"), i18n("Enter scheduled transaction"), "EnterScheduleDlgInfo");
+    KMessageBox::information(parentWidget(), QString("<qt>") + i18n("<p>Please check that all the details in the following dialog are correct and press OK.</p><p>Editable data can be changed and can either be applied to just this occurrence or for all subsequent occurrences for this schedule.  (You will be asked what you intend after pressing OK in the following dialog)</p>") + QString("</qt>"), i18n("Enter scheduled transaction"), "EnterScheduleDlgInfo");
   }
 
   // force the initial height to be as small as possible
