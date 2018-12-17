@@ -87,7 +87,6 @@
 
 #include "dialogs/settings/ksettingskmymoney.h"
 #include "dialogs/kbackupdlg.h"
-#include "dialogs/kenterscheduledlg.h"
 #include "dialogs/kconfirmmanualenterdlg.h"
 #include "dialogs/kmymoneypricedlg.h"
 #include "dialogs/kcurrencyeditdlg.h"
