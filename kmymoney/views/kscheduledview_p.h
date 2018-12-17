@@ -489,7 +489,14 @@ public:
         return rc;
       }
 
-      QPointer<KEnterScheduleDlg> dlg = new KEnterScheduleDlg(q, schedule);
+      // make sure that the parent widget is currently visible to avoid
+      // positioning of the dialog in the upper left corner of the screen
+      QWidget* parent = q;
+      while (parent && !parent->isVisible()) {
+        parent = parent->parentWidget();
+      }
+
+      QPointer<KEnterScheduleDlg> dlg = new KEnterScheduleDlg(parent, schedule);
 
       try {
         QDate origDueDate = schedule.nextDueDate();
