@@ -1366,11 +1366,16 @@ void KGlobalLedgerView::slotCancelOrEnterTransactions(bool& okToSelect)
           noGuiItem.setEnabled(false);
           noGuiItem.setToolTip(pActions[Action::EnterTransaction]->toolTip());
         }
-        if (okToSelect == true) {
+
+        // in case we have a new transaction and cannot save it we simply cancel
+        if (!pActions[Action::EnterTransaction]->isEnabled() && d->m_transactionEditor && d->m_transactionEditor->createNewTransaction()) {
+          rc = KMessageBox::Yes;
+
+        } else if (okToSelect == true) {
           rc = KMessageBox::warningYesNoCancel(this, i18n("<p>Please select what you want to do: discard the changes, save the changes or continue to edit the transaction.</p><p>You can also set an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("End transaction edit"), yesGuiItem, noGuiItem, cancelGuiItem, dontShowAgain);
 
         } else {
-          rc = KMessageBox::warningYesNo(this, i18n("<p>Please select what you want to do: discard the changes, save the changes or continue to edit the transaction.</p><p>You can also set an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("End transaction edit"), yesGuiItem, noGuiItem, dontShowAgain);
+          rc = KMessageBox::warningYesNo(this, i18n("<p>Please select what you want to do: discard or save the changes.</p><p>You can also set an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("End transaction edit"), yesGuiItem, noGuiItem, dontShowAgain);
         }
 
         switch (rc) {

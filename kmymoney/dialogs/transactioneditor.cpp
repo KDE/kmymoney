@@ -606,6 +606,17 @@ void TransactionEditor::setupCategoryWidget(KMyMoneyCategory* category, const QL
   }
 }
 
+bool TransactionEditor::createNewTransaction() const
+{
+  Q_D(const TransactionEditor);
+
+  bool rc = true;
+  if (!d->m_transactions.isEmpty()) {
+    rc = d->m_transactions.at(0).transaction().id().isEmpty();
+  }
+  return rc;
+}
+
 bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, bool suppressBalanceWarnings)
 {
   Q_D(TransactionEditor);

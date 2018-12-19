@@ -175,6 +175,14 @@ public:
   void setScheduleInfo(const QString& si);
   void setPaymentMethod(eMyMoney::Schedule::PaymentType pm);
 
+  /**
+   * This method returns if the editor is currently used to create a new transaction
+   * or editing existing transaction(s).
+   *
+   * @returns @c true in case it creates a new transaction, @c false otherwise
+   */
+  bool createNewTransaction() const;
+
 public Q_SLOTS:
   void slotReloadEditWidgets();
 
