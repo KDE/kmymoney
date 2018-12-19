@@ -225,7 +225,7 @@ void KGlobalLedgerView::updateActions(const MyMoneyObject& obj)
   pMenus[Menu::MoveTransaction]->setEnabled(b);
 
   QString tooltip;
-  pActions[Action::NewTransaction]->setEnabled(canCreateTransactions(tooltip));
+  pActions[Action::NewTransaction]->setEnabled(canCreateTransactions(tooltip) || !isVisible());
   pActions[Action::NewTransaction]->setToolTip(tooltip);
 
   const auto file = MyMoneyFile::instance();
@@ -1101,12 +1101,7 @@ bool KGlobalLedgerView::canCreateTransactions(QString& tooltip) const
 {
   Q_D(const KGlobalLedgerView);
   bool rc = true;
-  // we can only create transactions in the ledger view so
-  // we check that this is the active page
-  if(!isVisible()) {
-    tooltip = i18n("Creating transactions can only be performed in the ledger view");
-    rc = false;
-  }
+
   if (d->m_currentAccount.id().isEmpty()) {
     tooltip = i18n("Cannot create transactions when no account is selected.");
     rc = false;
@@ -1446,6 +1441,18 @@ void KGlobalLedgerView::slotNewTransactionForm(eWidgets::eRegister::Action id)
 
 void KGlobalLedgerView::slotNewTransaction()
 {
+  // in case the view is not visible ...
+  if (!isVisible()) {
+    // we switch to it
+    pActions[Action::ShowLedgersView]->activate(QAction::ActionEvent::Trigger);
+    QString tooltip;
+    if (!canCreateTransactions(tooltip)) {
+      // and inform the user via a dialog about the reason
+      // why a transaction cannot be created
+      KMessageBox::sorry(this, tooltip);
+      return;
+    }
+  }
   slotNewTransactionForm(eWidgets::eRegister::Action::None);
 }
 
