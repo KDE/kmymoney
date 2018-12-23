@@ -861,15 +861,16 @@ bool CSVImporterCore::processBankRow(MyMoneyStatement &st, const BankingProfile 
   QString memo;
   QString txt;
 
-  // process number field
-  if (profile->m_colTypeNum.value(Column::Number, -1) != -1)
-    tr.m_strNumber = txt;
-
   // process date field
   int col = profile->m_colTypeNum.value(Column::Date, -1);
   tr.m_datePosted = processDateField(row, col);
   if (tr.m_datePosted == QDate())
     return false;
+
+  // process number field
+  col = profile->m_colTypeNum.value(Column::Number, -1);
+  if (col != -1)
+    tr.m_strNumber = m_file->m_model->item(row, col)->text();
 
   // process payee field
   col = profile->m_colTypeNum.value(Column::Payee, -1);
