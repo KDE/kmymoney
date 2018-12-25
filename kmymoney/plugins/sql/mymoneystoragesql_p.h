@@ -919,7 +919,7 @@ public:
       } catch (const MyMoneyException &e) {
         // Do not save e as this may point to an inherited class
         failedJobs.append(QPair<onlineJob, QString>(job, e.what()));
-        qDebug() << "Failed to save onlineJob" << job.id() << "Reson:" << e.what();
+        qDebug() << "Failed to save onlineJob" << job.id() << "Reason:" << e.what();
       }
 
       signalProgress(++jobCount, 0);
