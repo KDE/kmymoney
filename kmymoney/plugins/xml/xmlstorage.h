@@ -24,6 +24,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QUrl>
+
 // Project Includes
 
 #include "kmymoneyplugin.h"
@@ -48,6 +50,7 @@ public:
   bool saveAs() override;
   eKMyMoney::StorageType storageType() const override;
   QString fileExtension() const override;
+  QUrl openUrl() const override;
 
 private:
   void createActions();
@@ -73,6 +76,8 @@ private:
   void checkRecoveryKeyValidity();
 
   QString m_encryptionKeys;
+
+  QUrl fileUrl;
 };
 
 #endif

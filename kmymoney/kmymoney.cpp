@@ -3460,7 +3460,7 @@ bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
         MyMoneyFile::instance()->attachStorage(pStorage);
         d->m_storageInfo.type = plugin->storageType();
         if (plugin->storageType() != eKMyMoney::StorageType::GNC) {
-          d->m_storageInfo.url = url;
+          d->m_storageInfo.url = plugin->openUrl();
           writeLastUsedFile(url.toDisplayString(QUrl::PreferLocalFile));
           /* Don't use url variable after KRecentFilesAction::addUrl
          * as it might delete it.
@@ -3636,7 +3636,12 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
       q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
 
 #ifdef KF5Activities_FOUND
-      m_activityResourceInstance->setUri(m_storageInfo.url);
+      {
+        // make sure that we don't store the DB password in activity
+        QUrl url(m_storageInfo.url);
+        url.setPassword(QString());
+        m_activityResourceInstance->setUri(url);
+      }
 #endif
       // start the check for scheduled transactions that need to be
       // entered as soon as the event loop becomes active.

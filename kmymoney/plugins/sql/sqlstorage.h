@@ -48,6 +48,7 @@ public:
   bool saveAs() override;
   eKMyMoney::StorageType storageType() const override;
   QString fileExtension() const override;
+  QUrl openUrl() const override;
 
 protected:
   void createActions();
@@ -64,6 +65,11 @@ private:
   bool saveAsDatabase(const QUrl &url);
 
   QUrlQuery convertOldUrl(const QUrl& url);
+
+  /**
+   * The full url (incl. password) used to open a database
+   */
+  QUrl dbUrl;
 
 private Q_SLOTS:
   void slotOpenDatabase();

@@ -86,6 +86,8 @@ XMLStorage::~XMLStorage()
 
 MyMoneyStorageMgr *XMLStorage::open(const QUrl &url)
 {
+  fileUrl.clear();
+
   if (url.scheme() == QLatin1String("sql"))
     return nullptr;
 
@@ -230,7 +232,13 @@ MyMoneyStorageMgr *XMLStorage::open(const QUrl &url)
     MyMoneyFile::instance()->detachStorage();
   }
 
+  fileUrl = url;
   return storage;
+}
+
+QUrl XMLStorage::openUrl() const
+{
+  return fileUrl;
 }
 
 bool XMLStorage::save(const QUrl &url)
