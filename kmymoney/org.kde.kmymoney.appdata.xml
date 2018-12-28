@@ -19,6 +19,7 @@
   <name xml:lang="fr">KMyMoney</name>
   <name xml:lang="gl">KMyMoney</name>
   <name xml:lang="hu">KMyMoney</name>
+  <name xml:lang="id">KMyMoney</name>
   <name xml:lang="it">KMyMoney</name>
   <name xml:lang="lt">KMyMoney</name>
   <name xml:lang="nl">KMyMoney</name>
@@ -49,6 +50,7 @@
   <summary xml:lang="fr">Gestionnaire de finances personnelles</summary>
   <summary xml:lang="gl">Xestor das finanzas persoais</summary>
   <summary xml:lang="hu">Személyes pénzügyi kezelő</summary>
+  <summary xml:lang="id">Pengelola Keuangan Personal</summary>
   <summary xml:lang="it">Gestore delle finanze personali</summary>
   <summary xml:lang="lt">Asmeninių finansų tvarkytuvė</summary>
   <summary xml:lang="nl">Persoonlijk financieel beheer</summary>
@@ -75,6 +77,7 @@
     <p xml:lang="fi">KMyMoney on KDE:n henkilökohtainen taloudenhallintaohjelma. Siinä on monia ominaisuuksia, mutta se on silti helppo myös ei-tekniselle käyttäjälle.</p>
     <p xml:lang="fr">KMyMoney est un gestionnaire de finances personnelles par KDE. Il dispose d'un ensemble de fonctionnalités complètes tout en restant simple d'utilisation pour les utilisateurs peu techniques.</p>
     <p xml:lang="gl">KMyMoney é un xestor de finanzas persoais de KDE. Inclúe un gran número de funcionalidades sen renunciar a ser fácil de usar para personas non técnicas.</p>
+    <p xml:lang="id">KMyMoney adalah pengelola keuangan personal oleh KDE. Ia menghadirkan sebuah set yang besar dari fitur yang mudah saat digunakan oleh pengguna nonteknis.</p>
     <p xml:lang="it">KMyMoney è un gestore delle finanza personali di KDE. È dotato di un ampio insieme funzionalità pur essendo facile da usare per l'utente non tecnico.</p>
     <p xml:lang="nl">KMyMoney is een persoonlijke financieelbeheerder door KDE. Het komt met een grote set aan functies terwijl het gemakkelijk is te gebruiken voor de niet-technische gebruiker.</p>
     <p xml:lang="pl">KMyMoney jest programem do zarządzania osobistymi finansami stworzony w ramach KDE. Posada wiele funkcji, będąc przy tym łatwym w użyciu przez nietechicznych użytkowników.</p>
@@ -103,6 +106,7 @@
     <p xml:lang="fi">Se tukee erilaisia tilityyppejä, tulojen ja menojen kategorisointia, tiliotteiden yhteensovittamista kirjanpidon kanssa ja tuontia ja vientiä QIF-tiedostomuodossa. Suoralataus OFX ja HBCI-muodoissa on myös mahdollista liitännäisten avulla. OFX- ja HBCI-protokollille on tarjolla myös online-pankkituki (tiliotteiden lataaminen).</p>
     <p xml:lang="fr">Il prend en charge différents types de comptes, une catégorisation des dépenses et des revenus, une réconciliation des comptes en banque et l'importation/exportation du format de fichier « QIF ». Le téléchargement direct des formats « OFX » et « HBCI » est également possible à l'aide de modules d'extension. La prise en charge des relevés de compte en ligne est également fournie pour les protocoles OFX et HBCI.</p>
     <p xml:lang="gl">Permite definir distintos tipos de contas, organizar por categorías os gastos e ingresos, conciliar contas do banco e importar e exportar datos no formato de ficheiro QIF. Existen ademais complementos que permiten descargar datos directamente en formato OFX ou HBCI. Para os protocolos OFX e HBCI tamén se permite usar a banca por internet (descargar o extracto).</p>
+    <p xml:lang="id">Ini mendukung berbagai jenis akun, kategorisasi pengeluaran dan pendapatan, rekonsiliasi rekening bank dan impor/ekspor ke format file “QIF”. Pengunduhan langsung menggunakan format OFX dan HBCI juga dimungkinkan melalui plugin. Dukungan perbankan online (download pernyataan) juga disediakan untuk protokol OFX dan HBCI.</p>
     <p xml:lang="it">Supporta diversi tipi di conti, categorie di spese ed entrate, riconciliazione dei conti correnti e importazione/esportazione del formato di file "QIF". Lo scaricamento diretto utilizzando i formati OFX e HBCI è inoltre possibile tramite estensioni. Il supporto ai servizi bancari in linea (scaricamento dell'estratto conto) è fornito per i protocolli OFX e HBCI.</p>
     <p xml:lang="nl">Het ondersteunt verschillende typen rekeningen, in categorieën indelen van uitgaven en inkomsten, controle op bankrekeningen en importeren/exporteren naar het “QIF” bestandsformaat. Direct downloaden met de OFX en HBCI formaten is ook mogelijk via plug-ins. Onderstuening voor online bankieren (downloaden van afschriften) wordt ook geleverd voor de OFX en HBCI protocollen.</p>
     <p xml:lang="pl">Obsługuje różne rodzaj kont, kategoryzacje rozchodów i przychodów, uzgadnianie kont bankowych oraz importowanie/eksportowanie do formatu plików “QIF”. Bezpośrednie pobieranie przy użyciu formatów OFX oraz HBCI również jest możliwe poprzez wtyczki. Obsługa bankowości w sieci (pobieranie wyciągów) jest również zapewniona przez protokoły OFX oraz HBCI.</p>
@@ -130,6 +134,7 @@
       <caption xml:lang="fi">KMyMoneyssa on tervetulosivu auttamaan uusia käyttäjiä</caption>
       <caption xml:lang="fr">KMyMoney a une page d'accueil pour aider les nouveaux utilisateurs à démarrer facilement</caption>
       <caption xml:lang="gl">KMyMoney dispón dunha páxina de benvida para axudar aos novos usuarios a empezar a usalo correctamente.</caption>
+      <caption xml:lang="id">KMyMoney memiliki sebuah halaman sambutan untuk bantuan para pengguna baru supaya memulai dengan baik</caption>
       <caption xml:lang="it">KMyMoney ha una pagina di benvenuto per aiutare i nuovi utenti a iniziare a utilizzarlo nel modo giusto</caption>
       <caption xml:lang="nl">KMyMoney heeft een welkomstpagina om nieuwe gebruikers bij een goede start te helpen</caption>
       <caption xml:lang="pl">KMyMoney zawiera stronę powitalną, aby pomoc nowym użytkownikom w szybkim rozpoczęciu pracy</caption>
@@ -158,6 +163,7 @@
       <caption xml:lang="fi">Taloustietojen yhteenveto antaa yleiskuvan taloustilanteestasi</caption>
       <caption xml:lang="fr">Le résumé financier vous offre une vue d'ensemble de vos finances</caption>
       <caption xml:lang="gl">O resumo financeiro ofrece unha vista xeral das fianzas persoais.</caption>
+      <caption xml:lang="id">Ringkasan keuangan memberi Anda ikhtisar umum tentang keuangan Anda</caption>
       <caption xml:lang="it">Il riepilogo finanziario ti offre una panoramica delle tue finanze</caption>
       <caption xml:lang="nl">De financiële samenvatting geeft u een overzicht van uw financiën</caption>
       <caption xml:lang="pl">Podsumowanie finansowe daje pogląd na twoje finanse</caption>
@@ -181,6 +187,7 @@
       <caption xml:lang="fi">Hallitse tilejäsi esim. rahalaitoksittain</caption>
       <caption xml:lang="fr">Gestion des comptes, par exemple en fonction des établissements dans lesquels ils sont détenus</caption>
       <caption xml:lang="gl">Xestionar contas, por exemplo polas institucións onde están abertas.</caption>
+      <caption xml:lang="id">Kelola akun mis. oleh institusi tempat mereka ditahan</caption>
       <caption xml:lang="it">Gestisci gli account, ad esempio, per gli istituti presso cui sono tenuti</caption>
       <caption xml:lang="nl">Rekeningen beheren bijv. door instituten waarbij ze behoren</caption>
       <caption xml:lang="pl">Zarządzanie kontami np. przez instytucje, w których zostały założone</caption>
