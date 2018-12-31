@@ -148,7 +148,7 @@ protected:
 private:
   File::Object   m_objType;
   File::Mode     m_notificationMode;
-  QString                            m_id;
+  QString        m_id;
 };
 
 
@@ -392,6 +392,19 @@ void MyMoneyFile::commitTransaction()
   const auto changed = d->m_storage->commitTransaction();
   d->m_inTransaction = false;
 
+  // collect notifications about removed objects
+  QStringList removedObjects;
+  const auto& set = d->m_changeSet;
+  for (const auto& change : set) {
+    switch (change.notificationMode()) {
+      case File::Mode::Remove:
+        removedObjects += change.id();
+        break;
+      default:
+        break;
+    }
+  }
+
   // inform the outside world about the beginning of notifications
   emit beginChangeNotification();
 
@@ -408,10 +421,14 @@ void MyMoneyFile::commitTransaction()
         d->m_balanceChangedSet.remove(change.id());
         break;
       case File::Mode::Add:
-        emit objectAdded(change.objectType(), change.id());
+        if (!removedObjects.contains(change.id())) {
+          emit objectAdded(change.objectType(), change.id());
+        }
         break;
       case File::Mode::Modify:
-        emit objectModified(change.objectType(), change.id());
+        if (!removedObjects.contains(change.id())) {
+          emit objectModified(change.objectType(), change.id());
+        }
         break;
     }
   }
@@ -424,17 +441,22 @@ void MyMoneyFile::commitTransaction()
   // change.
   const auto& balanceChanges = d->m_balanceChangedSet;
   for (const auto& id : balanceChanges) {
-    // if we notify about balance change we don't need to notify about value change
-    // for the same account since a balance change implies a value change
-    d->m_valueChangedSet.remove(id);
-    emit balanceChanged(account(id));
+    if (!removedObjects.contains(id)) {
+      // if we notify about balance change we don't need to notify about value change
+      // for the same account since a balance change implies a value change
+      d->m_valueChangedSet.remove(id);
+      emit balanceChanged(account(id));
+    }
   }
   d->m_balanceChangedSet.clear();
 
   // now notify about the remaining value changes
   const auto& m_valueChanges = d->m_valueChangedSet;
-  for (const auto& id : m_valueChanges)
-    emit valueChanged(account(id));
+  for (const auto& id : m_valueChanges) {
+    if (!removedObjects.contains(id)) {
+      emit valueChanged(account(id));
+    }
+  }
 
   d->m_valueChangedSet.clear();
 
