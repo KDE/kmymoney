@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2007-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -1229,8 +1229,11 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
       t.addSplit(split);
     }
 
-    s0.setShares(MyMoneyMoney(s0.shares().convertDenominator(securityFraction, roundingMethod))); // only shares variable from stock split isn't evaluated in currency
-    s0.setValue(MyMoneyMoney(s0.value().convertDenominator(currencyFraction, roundingMethod)));
+    // Don't do any rounding on a split factor
+    if (d->m_activity->type() != eMyMoney::Split::InvestmentTransactionType::SplitShares) {
+      s0.setShares(MyMoneyMoney(s0.shares().convertDenominator(securityFraction, roundingMethod))); // only shares variable from stock split isn't evaluated in currency
+      s0.setValue(MyMoneyMoney(s0.value().convertDenominator(currencyFraction, roundingMethod)));
+    }
     t.addSplit(s0);
   }
 
