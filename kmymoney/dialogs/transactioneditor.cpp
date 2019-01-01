@@ -215,11 +215,6 @@ void TransactionEditor::setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount
   setup(tabOrderWidgets, account, eWidgets::eRegister::Action::None);
 }
 
-void TransactionEditor::setup(QWidgetList& tabOrderWidgets)
-{
-  setup(tabOrderWidgets, MyMoneyAccount(), eWidgets::eRegister::Action::None);
-}
-
 MyMoneyAccount TransactionEditor::account() const
 {
   Q_D(const TransactionEditor);

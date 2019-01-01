@@ -87,7 +87,6 @@ public:
     */
   void setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount& account, eWidgets::eRegister::Action action);
   void setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount& account);
-  void setup(QWidgetList& tabOrderWidgets);
 
   /**
     * Enter the transactions into the ledger. In case of a newly created
