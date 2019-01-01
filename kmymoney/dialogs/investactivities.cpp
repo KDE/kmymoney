@@ -287,10 +287,13 @@ void Activity::setWidgetVisibility(const QStringList& widgetIds, bool visible) c
   for (QStringList::const_iterator it_w = widgetIds.constBegin(); it_w != widgetIds.constEnd(); ++it_w) {
     auto w = haveWidget(*it_w);
     if (w) {
-      if (visible) {
-        w->show();
+      // in case we hit a category with a split button,
+      // we need to manipulate the enclosing QFrame
+      auto cat = dynamic_cast<KMyMoneyCategory*>(w);
+      if (cat && cat->splitButton()) {
+        cat->parentWidget()->setVisible(visible);
       } else {
-        w->hide();
+        w->setVisible(visible);
       }
     }
   }

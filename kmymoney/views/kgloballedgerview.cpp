@@ -974,36 +974,44 @@ bool KGlobalLedgerView::focusNextPrevChild(bool next)
 {
   Q_D(KGlobalLedgerView);
   bool  rc = false;
-  // qDebug("KGlobalLedgerView::focusNextPrevChild(editmode=%s)", m_inEditMode ? "true" : "false");
+  // qDebug() << "----------------------------------------------------------";
+  // qDebug() << "KGlobalLedgerView::focusNextPrevChild, editmode=" << d->m_inEditMode;
   if (d->m_inEditMode) {
     QWidget *w = 0;
 
     w = qApp->focusWidget();
-    // qDebug("w = %p", w);
     int currentWidgetIndex = d->m_tabOrderWidgets.indexOf(w);
-    while (w && currentWidgetIndex == -1) {
-      // qDebug("'%s' not in list, use parent", qPrintable(w->objectName()));
-      w = w->parentWidget();
-      currentWidgetIndex = d->m_tabOrderWidgets.indexOf(w);
-    }
-
-    if (currentWidgetIndex != -1) {
-      // if(w) qDebug("tab order is at '%s'", qPrintable(w->objectName()));
-      currentWidgetIndex += next ? 1 : -1;
-      if (currentWidgetIndex < 0)
-        currentWidgetIndex = d->m_tabOrderWidgets.size() - 1;
-      else if (currentWidgetIndex >= d->m_tabOrderWidgets.size())
-        currentWidgetIndex = 0;
-
-      w = d->m_tabOrderWidgets[currentWidgetIndex];
-      // qDebug("currentWidgetIndex = %d, w = %p", currentWidgetIndex, w);
-
-      if (((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
-        // qDebug("Selecting '%s' (%p) as focus", qPrintable(w->objectName()), w);
-        w->setFocus();
-        rc = true;
+    const auto startIndex = currentWidgetIndex;
+    // qDebug() << "Focus is at currentWidgetIndex" <<  currentWidgetIndex << w->objectName();
+    do {
+      while (w && currentWidgetIndex == -1) {
+        // qDebug() << w->objectName() << "not in list, use parent";
+        w = w->parentWidget();
+        currentWidgetIndex = d->m_tabOrderWidgets.indexOf(w);
       }
-    }
+      // qDebug() << "Focus is at currentWidgetIndex" <<  currentWidgetIndex << w->objectName();
+
+      if (currentWidgetIndex != -1) {
+        // if(w) qDebug() << "tab order is at" << w->objectName();
+        currentWidgetIndex += next ? 1 : -1;
+        if (currentWidgetIndex < 0)
+          currentWidgetIndex = d->m_tabOrderWidgets.size() - 1;
+        else if (currentWidgetIndex >= d->m_tabOrderWidgets.size())
+          currentWidgetIndex = 0;
+
+        w = d->m_tabOrderWidgets[currentWidgetIndex];
+        // qDebug() << "currentWidgetIndex" <<  currentWidgetIndex << w->objectName() << w->isVisible();
+
+        if (((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
+          // qDebug() << "Set focus to" << w->objectName();
+          w->setFocus();
+          rc = true;
+          break;
+        }
+      } else {
+        break;
+      }
+    } while(currentWidgetIndex != startIndex);
   } else
     rc = KMyMoneyViewBase::focusNextPrevChild(next);
   return rc;
