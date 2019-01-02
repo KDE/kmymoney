@@ -1739,6 +1739,10 @@ void KGlobalLedgerView::slotCopySplits()
               }
               t.addSplit(sp);
             }
+            // check if we need to add/update a VAT assignment
+            file->updateVAT(t);
+
+            // and store the modified transaction
             file->modifyTransaction(t);
           }
         }

@@ -1127,7 +1127,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         s.setPayeeId(payeeid);
         d->setupPrice(s, splitAccount, d->m_account, statementTransactionUnderImport.m_datePosted);
         transactionUnderImport.addSplit(s);
-        file->addVATSplit(transactionUnderImport, d->m_account, splitAccount, statementTransactionUnderImport.m_amount);
+
       } else if (statementTransactionUnderImport.m_listSplits.isEmpty() && !d->m_skipCategoryMatching) {
         MyMoneyTransactionFilter filter(thisaccount.id());
         filter.addPayee(payeeid);
@@ -1175,6 +1175,12 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
                 s.setBankID(QString());
                 s.removeMatch();
 
+                // in case the old transaction has two splits
+                // we simply inverse the amount of the current
+                // transaction found in s1. In other cases (more
+                // than two splits we copy all splits and don't
+                // modify the splits. This may lead to unbalanced
+                // transactions which the user has to fix manually
                 if (t_old.splits().count() == 2) {
                   s.setShares(-s1.shares());
                   s.setValue(-s1.value());
@@ -1228,6 +1234,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     transactionUnderImport.addSplit(s2);
 
   transactionUnderImport.addSplit(s1);
+
+  // check if we need to add/update a VAT assignment
+  file->updateVAT(transactionUnderImport);
 
   if ((statementTransactionUnderImport.m_eAction != eMyMoney::Transaction::Action::ReinvestDividend) && (statementTransactionUnderImport.m_eAction != eMyMoney::Transaction::Action::CashDividend) && (statementTransactionUnderImport.m_eAction != eMyMoney::Transaction::Action::Interest)
      ) {

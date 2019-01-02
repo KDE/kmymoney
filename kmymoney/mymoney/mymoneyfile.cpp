@@ -895,7 +895,7 @@ void MyMoneyFile::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
       MyMoneyTransaction t;
       MyMoneySplit a, b;
       a.setAccountId(acc.id());
-      b.setAccountId(acc.value("kmm-loan-payment-acc").toLatin1());
+      b.setAccountId(acc.value("kmm-loan-payment-acc"));
       a.setValue(acc.loanAmount());
       if (acc.accountType() == Account::Type::Loan)
         a.setValue(-a.value());
@@ -3183,7 +3183,53 @@ void MyMoneyFile::costCenterList(QList< MyMoneyCostCenter >& list) const
   list = d->m_storage->costCenterList();
 }
 
-bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAccount& account, const MyMoneyAccount& category, const MyMoneyMoney& amount)
+void MyMoneyFile::updateVAT(MyMoneyTransaction& transaction) const
+{
+  // check if transaction qualifies
+  const auto splitCount = transaction.splits().count();
+  if (splitCount > 1 && splitCount <= 3) {
+    MyMoneyMoney amount;
+    MyMoneyAccount assetLiability;
+    MyMoneyAccount category;
+    MyMoneySplit taxSplit;
+    const QString currencyId = transaction.commodity();
+    foreach (const auto& split, transaction.splits()) {
+      const auto acc = account(split.accountId());
+      // all splits must reference accounts denoted in the same currency
+      if (acc.currencyId() != currencyId) {
+        return;
+      }
+      if (acc.isAssetLiability() && assetLiability.id().isEmpty()) {
+        amount = split.shares();
+        assetLiability = acc;
+        continue;
+      }
+      if (acc.isAssetLiability()) {
+        return;
+      }
+      if (category.id().isEmpty() && !acc.value("VatAccount").isEmpty()) {
+        category = acc;
+        continue;
+      } else if(taxSplit.id().isEmpty() && !acc.value("Tax").toLower().compare(QLatin1String("yes"))) {
+        taxSplit = split;
+        continue;
+      }
+      return;
+    }
+    if (!category.id().isEmpty()) {
+      // remove a possibly found tax split - we create a new one
+      // but only if it is the same tax category
+      if (!taxSplit.id().isEmpty()) {
+        if (category.value("VatAccount").compare(taxSplit.accountId()))
+          return;
+        transaction.removeSplit(taxSplit);
+      }
+      addVATSplit(transaction, assetLiability, category, amount);
+    }
+  }
+}
+
+bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAccount& acc, const MyMoneyAccount& category, const MyMoneyMoney& amount) const
 {
   bool rc = false;
 
@@ -3193,8 +3239,8 @@ bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAcco
 
     if (category.value("VatAccount").isEmpty())
       return false;
-    MyMoneyAccount vatAcc = this->account(category.value("VatAccount").toLatin1());
-    const MyMoneySecurity& asec = security(account.currencyId());
+    MyMoneyAccount vatAcc = account(category.value("VatAccount"));
+    const MyMoneySecurity& asec = security(acc.currencyId());
     const MyMoneySecurity& csec = security(category.currencyId());
     const MyMoneySecurity& vsec = security(vatAcc.currencyId());
     if (asec.id() != csec.id() || asec.id() != vsec.id()) {
@@ -3204,7 +3250,7 @@ bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAcco
 
     MyMoneyMoney vatRate(vatAcc.value("VatRate"));
     MyMoneyMoney gv, nv;    // gross value, net value
-    int fract = account.fraction();
+    int fract = acc.fraction();
 
     if (!vatRate.isZero()) {
 
@@ -3215,7 +3261,7 @@ bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAcco
         // split value is the gross value
         gv = amount;
         nv = (gv / (MyMoneyMoney::ONE + vatRate)).convert(fract);
-        MyMoneySplit catSplit = transaction.splitByAccount(account.id(), false);
+        MyMoneySplit catSplit = transaction.splitByAccount(acc.id(), false);
         catSplit.setShares(-nv);
         catSplit.setValue(catSplit.shares());
         transaction.modifySplit(catSplit);
@@ -3224,7 +3270,7 @@ bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAcco
         // split value is the net value
         nv = amount;
         gv = (nv * (MyMoneyMoney::ONE + vatRate)).convert(fract);
-        MyMoneySplit accSplit = transaction.splitByAccount(account.id());
+        MyMoneySplit accSplit = transaction.splitByAccount(acc.id());
         accSplit.setValue(gv.convert(fract));
         accSplit.setShares(accSplit.value());
         transaction.modifySplit(accSplit);

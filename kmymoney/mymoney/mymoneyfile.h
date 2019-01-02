@@ -1447,7 +1447,21 @@ public:
     *
     * @return true if a VAT split has been added
     */
-  bool addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAccount& account, const MyMoneyAccount& category, const MyMoneyMoney& amount);
+  bool addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAccount& account, const MyMoneyAccount& category, const MyMoneyMoney& amount) const;
+
+  /**
+    * This method checks if the @a transaction has two or three splits and
+    * one references an asset or liability, one references an income or expense and one
+    * references a tax account. All three accounts must be denominated in the same
+    * transaction.commodity(). Also, if there is a tax split it must reference the
+    * same account as the one that is assigned to the income/expense category.
+    *
+    * If that all matches, the @a transaction is updated such that the amount
+    * of the asset/liability is split according to the tax settings.
+    *
+    * @param transaction reference to the transaction
+    */
+  void updateVAT(MyMoneyTransaction& transaction) const;
 
   /**
     * This method checks, if the given @p object is referenced
