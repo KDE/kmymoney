@@ -138,6 +138,12 @@ void KGlobalLedgerView::executeCustomAction(eView::Action action)
       }
       break;
 
+    case eView::Action::CleanupBeforeFileClose:
+      if (d->m_inEditMode) {
+        d->deleteTransactionEditor();
+      }
+      break;
+
     default:
       break;
   }
