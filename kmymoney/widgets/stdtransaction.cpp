@@ -441,6 +441,11 @@ void StdTransaction::registerCellText(QString& txt, Qt::Alignment& align, int ro
           switch (d->m_parent->getDetailsColumnType()) {
             case eRegister::DetailColumn::PayeeFirst:
               txt = d->m_category;
+              if (txt.isEmpty() && !d->m_split.value().isZero()) {
+                txt = i18n("*** UNASSIGNED ***");
+                if (painter)
+                  painter->setPen(KMyMoneySettings::schemeColor(SchemeColor::TransactionErroneous));
+              }
               if (!d->m_tagList.isEmpty()) {
                 txt += " ( ";
                 for (auto i = 0; i < d->m_tagList.size() - 1; ++i) {
@@ -451,14 +456,12 @@ void StdTransaction::registerCellText(QString& txt, Qt::Alignment& align, int ro
               break;
             case eRegister::DetailColumn::AccountFirst:
               txt = d->m_payee;
+              if (txt.isEmpty()) {
+                singleLineMemo(txt, d->m_split);
+              }
               break;
           }
           align |= Qt::AlignLeft;
-          if (txt.isEmpty() && !d->m_split.value().isZero()) {
-            txt = i18n("*** UNASSIGNED ***");
-            if (painter)
-              painter->setPen(KMyMoneySettings::schemeColor(SchemeColor::TransactionErroneous));
-          }
           break;
 
         default:
