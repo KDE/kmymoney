@@ -60,6 +60,9 @@ public:
     addTagToFilter
   };
 
+  // the set of accounts to choose from
+  AccountSet accountSet;
+
   explicit KTransactionFilterPrivate(KTransactionFilter *qq) :
     q_ptr(qq),
     ui(new Ui::KTransactionFilter),
@@ -381,15 +384,14 @@ public:
   {
     Q_Q(KTransactionFilter);
     ui->m_accountsView->setSelectionMode(QTreeWidget::MultiSelection);
-    AccountSet accountSet;
     accountSet.addAccountGroup(eMyMoney::Account::Type::Asset);
     accountSet.addAccountGroup(eMyMoney::Account::Type::Liability);
 
     if (withEquityAccounts)
       accountSet.addAccountGroup(eMyMoney::Account::Type::Equity);
 
-    //set the accountset to show closed account if the settings say so
-    accountSet.setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
+    // set the accountset to show closed account if the settings say so
+    accountSet.setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
     accountSet.load(ui->m_accountsView);
     q->connect(ui->m_accountsView, &KMyMoneyAccountSelector::stateChanged, q, &KTransactionFilter::slotUpdateSelections);
   }

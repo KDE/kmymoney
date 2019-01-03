@@ -34,6 +34,8 @@
 #include "ui_ktransactionfilter.h"
 #include "mymoneyreport.h"
 #include "mymoneysplit.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 #include "kmymoneyedit.h"
@@ -499,6 +501,22 @@ void KTransactionFilter::resetFilter(MyMoneyReport& rep)
 
   QStringList accounts;
   if (rep.accounts(accounts)) {
+    // in case the presentation of closed accounts is turned off ...
+    if (d->accountSet.isHidingClosedAccounts()) {
+      // ... we need to turn them on again in case our own
+      // configuration references a closed account
+      const MyMoneyFile* file = MyMoneyFile::instance();
+      foreach(const auto accId, accounts) {
+        try {
+          if (file->account(accId).isClosed()) {
+            d->accountSet.setHideClosedAccounts(false);
+            d->accountSet.load(d->ui->m_accountsView);
+            break;
+          }
+        } catch (const MyMoneyException&) {
+        }
+      }
+    }
     d->ui->m_accountsView->selectAllItems(false);
     d->ui->m_accountsView->selectItems(accounts, true);
   } else
