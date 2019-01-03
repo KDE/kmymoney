@@ -1637,6 +1637,9 @@ bool StdTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyMone
     if (!s1.accountId().isEmpty())
       t.addSplit(s1);
 
+    // check if we need to add/update a VAT assignment
+    MyMoneyFile::instance()->updateVAT(t);
+
   } else {
     foreach (const auto split, splits) {
       s1 = split;
