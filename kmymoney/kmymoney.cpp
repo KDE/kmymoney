@@ -1648,7 +1648,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
   lutActions[Action::ViewTransactionDetail]->setChecked(KMyMoneySettings::showRegisterDetailed());
   lutActions[Action::ViewHideReconciled]->setChecked(KMyMoneySettings::hideReconciledTransactions());
   lutActions[Action::ViewHideCategories]->setChecked(KMyMoneySettings::hideUnusedCategory());
-  lutActions[Action::ViewShowAll]->setChecked(false);
+  lutActions[Action::ViewShowAll]->setChecked(KMyMoneySettings::showAllAccounts());
 
   // *************
   // Adding actions to ActionCollection
