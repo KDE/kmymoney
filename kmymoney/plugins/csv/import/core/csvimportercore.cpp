@@ -861,15 +861,16 @@ bool CSVImporterCore::processBankRow(MyMoneyStatement &st, const BankingProfile 
   QString memo;
   QString txt;
 
-  // process number field
-  if (profile->m_colTypeNum.value(Column::Number, -1) != -1)
-    tr.m_strNumber = txt;
-
   // process date field
   int col = profile->m_colTypeNum.value(Column::Date, -1);
   tr.m_datePosted = processDateField(row, col);
   if (tr.m_datePosted == QDate())
     return false;
+
+  // process number field
+  col = profile->m_colTypeNum.value(Column::Number, -1);
+  if (col != -1)
+    tr.m_strNumber = m_file->m_model->item(row, col)->text();
 
   // process payee field
   col = profile->m_colTypeNum.value(Column::Payee, -1);
@@ -1460,7 +1461,7 @@ bool BankingProfile::readSettings(const KSharedConfigPtr &config)
   m_colTypeNum[Column::Date] = profilesGroup.readEntry(CSVImporterCore::m_colTypeConfName.value(Column::Date), -1);
   m_colTypeNum[Column::Category] = profilesGroup.readEntry(CSVImporterCore::m_colTypeConfName.value(Column::Category), -1);
   m_colTypeNum[Column::Memo] = -1; // initialize, otherwise random data may go here
-  m_oppositeSigns = profilesGroup.readEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfOppositeSigns), 0);
+  m_oppositeSigns = profilesGroup.readEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfOppositeSigns), false);
   m_memoColList = profilesGroup.readEntry(CSVImporterCore::m_colTypeConfName.value(Column::Memo), QList<int>());
 
   CSVProfile::readSettings(profilesGroup);

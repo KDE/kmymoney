@@ -138,6 +138,12 @@ void KGlobalLedgerView::executeCustomAction(eView::Action action)
       }
       break;
 
+    case eView::Action::CleanupBeforeFileClose:
+      if (d->m_inEditMode) {
+        d->deleteTransactionEditor();
+      }
+      break;
+
     default:
       break;
   }
@@ -225,7 +231,7 @@ void KGlobalLedgerView::updateActions(const MyMoneyObject& obj)
   pMenus[Menu::MoveTransaction]->setEnabled(b);
 
   QString tooltip;
-  pActions[Action::NewTransaction]->setEnabled(canCreateTransactions(tooltip));
+  pActions[Action::NewTransaction]->setEnabled(canCreateTransactions(tooltip) || !isVisible());
   pActions[Action::NewTransaction]->setToolTip(tooltip);
 
   const auto file = MyMoneyFile::instance();
@@ -974,36 +980,44 @@ bool KGlobalLedgerView::focusNextPrevChild(bool next)
 {
   Q_D(KGlobalLedgerView);
   bool  rc = false;
-  // qDebug("KGlobalLedgerView::focusNextPrevChild(editmode=%s)", m_inEditMode ? "true" : "false");
+  // qDebug() << "----------------------------------------------------------";
+  // qDebug() << "KGlobalLedgerView::focusNextPrevChild, editmode=" << d->m_inEditMode;
   if (d->m_inEditMode) {
     QWidget *w = 0;
 
     w = qApp->focusWidget();
-    // qDebug("w = %p", w);
     int currentWidgetIndex = d->m_tabOrderWidgets.indexOf(w);
-    while (w && currentWidgetIndex == -1) {
-      // qDebug("'%s' not in list, use parent", qPrintable(w->objectName()));
-      w = w->parentWidget();
-      currentWidgetIndex = d->m_tabOrderWidgets.indexOf(w);
-    }
-
-    if (currentWidgetIndex != -1) {
-      // if(w) qDebug("tab order is at '%s'", qPrintable(w->objectName()));
-      currentWidgetIndex += next ? 1 : -1;
-      if (currentWidgetIndex < 0)
-        currentWidgetIndex = d->m_tabOrderWidgets.size() - 1;
-      else if (currentWidgetIndex >= d->m_tabOrderWidgets.size())
-        currentWidgetIndex = 0;
-
-      w = d->m_tabOrderWidgets[currentWidgetIndex];
-      // qDebug("currentWidgetIndex = %d, w = %p", currentWidgetIndex, w);
-
-      if (((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
-        // qDebug("Selecting '%s' (%p) as focus", qPrintable(w->objectName()), w);
-        w->setFocus();
-        rc = true;
+    const auto startIndex = currentWidgetIndex;
+    // qDebug() << "Focus is at currentWidgetIndex" <<  currentWidgetIndex << w->objectName();
+    do {
+      while (w && currentWidgetIndex == -1) {
+        // qDebug() << w->objectName() << "not in list, use parent";
+        w = w->parentWidget();
+        currentWidgetIndex = d->m_tabOrderWidgets.indexOf(w);
       }
-    }
+      // qDebug() << "Focus is at currentWidgetIndex" <<  currentWidgetIndex << w->objectName();
+
+      if (currentWidgetIndex != -1) {
+        // if(w) qDebug() << "tab order is at" << w->objectName();
+        currentWidgetIndex += next ? 1 : -1;
+        if (currentWidgetIndex < 0)
+          currentWidgetIndex = d->m_tabOrderWidgets.size() - 1;
+        else if (currentWidgetIndex >= d->m_tabOrderWidgets.size())
+          currentWidgetIndex = 0;
+
+        w = d->m_tabOrderWidgets[currentWidgetIndex];
+        // qDebug() << "currentWidgetIndex" <<  currentWidgetIndex << w->objectName() << w->isVisible();
+
+        if (((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
+          // qDebug() << "Set focus to" << w->objectName();
+          w->setFocus();
+          rc = true;
+          break;
+        }
+      } else {
+        break;
+      }
+    } while(currentWidgetIndex != startIndex);
   } else
     rc = KMyMoneyViewBase::focusNextPrevChild(next);
   return rc;
@@ -1101,12 +1115,7 @@ bool KGlobalLedgerView::canCreateTransactions(QString& tooltip) const
 {
   Q_D(const KGlobalLedgerView);
   bool rc = true;
-  // we can only create transactions in the ledger view so
-  // we check that this is the active page
-  if(!isVisible()) {
-    tooltip = i18n("Creating transactions can only be performed in the ledger view");
-    rc = false;
-  }
+
   if (d->m_currentAccount.id().isEmpty()) {
     tooltip = i18n("Cannot create transactions when no account is selected.");
     rc = false;
@@ -1366,11 +1375,16 @@ void KGlobalLedgerView::slotCancelOrEnterTransactions(bool& okToSelect)
           noGuiItem.setEnabled(false);
           noGuiItem.setToolTip(pActions[Action::EnterTransaction]->toolTip());
         }
-        if (okToSelect == true) {
+
+        // in case we have a new transaction and cannot save it we simply cancel
+        if (!pActions[Action::EnterTransaction]->isEnabled() && d->m_transactionEditor && d->m_transactionEditor->createNewTransaction()) {
+          rc = KMessageBox::Yes;
+
+        } else if (okToSelect == true) {
           rc = KMessageBox::warningYesNoCancel(this, i18n("<p>Please select what you want to do: discard the changes, save the changes or continue to edit the transaction.</p><p>You can also set an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("End transaction edit"), yesGuiItem, noGuiItem, cancelGuiItem, dontShowAgain);
 
         } else {
-          rc = KMessageBox::warningYesNo(this, i18n("<p>Please select what you want to do: discard the changes, save the changes or continue to edit the transaction.</p><p>You can also set an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("End transaction edit"), yesGuiItem, noGuiItem, dontShowAgain);
+          rc = KMessageBox::warningYesNo(this, i18n("<p>Please select what you want to do: discard or save the changes.</p><p>You can also set an option to save the transaction automatically when e.g. selecting another transaction.</p>"), i18n("End transaction edit"), yesGuiItem, noGuiItem, dontShowAgain);
         }
 
         switch (rc) {
@@ -1441,6 +1455,18 @@ void KGlobalLedgerView::slotNewTransactionForm(eWidgets::eRegister::Action id)
 
 void KGlobalLedgerView::slotNewTransaction()
 {
+  // in case the view is not visible ...
+  if (!isVisible()) {
+    // we switch to it
+    pActions[Action::ShowLedgersView]->activate(QAction::ActionEvent::Trigger);
+    QString tooltip;
+    if (!canCreateTransactions(tooltip)) {
+      // and inform the user via a dialog about the reason
+      // why a transaction cannot be created
+      KMessageBox::sorry(this, tooltip);
+      return;
+    }
+  }
   slotNewTransactionForm(eWidgets::eRegister::Action::None);
 }
 
@@ -1713,6 +1739,10 @@ void KGlobalLedgerView::slotCopySplits()
               }
               t.addSplit(sp);
             }
+            // check if we need to add/update a VAT assignment
+            file->updateVAT(t);
+
+            // and store the modified transaction
             file->modifyTransaction(t);
           }
         }

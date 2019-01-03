@@ -215,11 +215,6 @@ void TransactionEditor::setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount
   setup(tabOrderWidgets, account, eWidgets::eRegister::Action::None);
 }
 
-void TransactionEditor::setup(QWidgetList& tabOrderWidgets)
-{
-  setup(tabOrderWidgets, MyMoneyAccount(), eWidgets::eRegister::Action::None);
-}
-
 MyMoneyAccount TransactionEditor::account() const
 {
   Q_D(const TransactionEditor);
@@ -604,6 +599,17 @@ void TransactionEditor::setupCategoryWidget(KMyMoneyCategory* category, const QL
 #endif
       break;
   }
+}
+
+bool TransactionEditor::createNewTransaction() const
+{
+  Q_D(const TransactionEditor);
+
+  bool rc = true;
+  if (!d->m_transactions.isEmpty()) {
+    rc = d->m_transactions.at(0).transaction().id().isEmpty();
+  }
+  return rc;
 }
 
 bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, bool suppressBalanceWarnings)

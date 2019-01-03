@@ -44,6 +44,7 @@ public:
 
   eKMyMoney::StorageType storageType() const override;
   QString fileExtension() const override;
+  QUrl openUrl() const override;
 };
 
 #endif

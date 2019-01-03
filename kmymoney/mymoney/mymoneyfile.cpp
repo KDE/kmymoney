@@ -3,7 +3,7 @@
  * Copyright 2001-2002  Felix Rodriguez <frodriguez@users.sourceforge.net>
  * Copyright 2002-2004  Kevin Tambascio <ktambascio@users.sourceforge.net>
  * Copyright 2004-2005  Ace Jones <acejones@users.sourceforge.net>
- * Copyright 2006-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2006-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2006       Darren Gould <darren_gould@gmx.de>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
@@ -148,7 +148,7 @@ protected:
 private:
   File::Object   m_objType;
   File::Mode     m_notificationMode;
-  QString                            m_id;
+  QString        m_id;
 };
 
 
@@ -392,6 +392,19 @@ void MyMoneyFile::commitTransaction()
   const auto changed = d->m_storage->commitTransaction();
   d->m_inTransaction = false;
 
+  // collect notifications about removed objects
+  QStringList removedObjects;
+  const auto& set = d->m_changeSet;
+  for (const auto& change : set) {
+    switch (change.notificationMode()) {
+      case File::Mode::Remove:
+        removedObjects += change.id();
+        break;
+      default:
+        break;
+    }
+  }
+
   // inform the outside world about the beginning of notifications
   emit beginChangeNotification();
 
@@ -408,10 +421,14 @@ void MyMoneyFile::commitTransaction()
         d->m_balanceChangedSet.remove(change.id());
         break;
       case File::Mode::Add:
-        emit objectAdded(change.objectType(), change.id());
+        if (!removedObjects.contains(change.id())) {
+          emit objectAdded(change.objectType(), change.id());
+        }
         break;
       case File::Mode::Modify:
-        emit objectModified(change.objectType(), change.id());
+        if (!removedObjects.contains(change.id())) {
+          emit objectModified(change.objectType(), change.id());
+        }
         break;
     }
   }
@@ -424,17 +441,22 @@ void MyMoneyFile::commitTransaction()
   // change.
   const auto& balanceChanges = d->m_balanceChangedSet;
   for (const auto& id : balanceChanges) {
-    // if we notify about balance change we don't need to notify about value change
-    // for the same account since a balance change implies a value change
-    d->m_valueChangedSet.remove(id);
-    emit balanceChanged(account(id));
+    if (!removedObjects.contains(id)) {
+      // if we notify about balance change we don't need to notify about value change
+      // for the same account since a balance change implies a value change
+      d->m_valueChangedSet.remove(id);
+      emit balanceChanged(account(id));
+    }
   }
   d->m_balanceChangedSet.clear();
 
   // now notify about the remaining value changes
   const auto& m_valueChanges = d->m_valueChangedSet;
-  for (const auto& id : m_valueChanges)
-    emit valueChanged(account(id));
+  for (const auto& id : m_valueChanges) {
+    if (!removedObjects.contains(id)) {
+      emit valueChanged(account(id));
+    }
+  }
 
   d->m_valueChangedSet.clear();
 
@@ -873,7 +895,7 @@ void MyMoneyFile::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
       MyMoneyTransaction t;
       MyMoneySplit a, b;
       a.setAccountId(acc.id());
-      b.setAccountId(acc.value("kmm-loan-payment-acc").toLatin1());
+      b.setAccountId(acc.value("kmm-loan-payment-acc"));
       a.setValue(acc.loanAmount());
       if (acc.accountType() == Account::Type::Loan)
         a.setValue(-a.value());
@@ -3161,7 +3183,53 @@ void MyMoneyFile::costCenterList(QList< MyMoneyCostCenter >& list) const
   list = d->m_storage->costCenterList();
 }
 
-bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAccount& account, const MyMoneyAccount& category, const MyMoneyMoney& amount)
+void MyMoneyFile::updateVAT(MyMoneyTransaction& transaction) const
+{
+  // check if transaction qualifies
+  const auto splitCount = transaction.splits().count();
+  if (splitCount > 1 && splitCount <= 3) {
+    MyMoneyMoney amount;
+    MyMoneyAccount assetLiability;
+    MyMoneyAccount category;
+    MyMoneySplit taxSplit;
+    const QString currencyId = transaction.commodity();
+    foreach (const auto& split, transaction.splits()) {
+      const auto acc = account(split.accountId());
+      // all splits must reference accounts denoted in the same currency
+      if (acc.currencyId() != currencyId) {
+        return;
+      }
+      if (acc.isAssetLiability() && assetLiability.id().isEmpty()) {
+        amount = split.shares();
+        assetLiability = acc;
+        continue;
+      }
+      if (acc.isAssetLiability()) {
+        return;
+      }
+      if (category.id().isEmpty() && !acc.value("VatAccount").isEmpty()) {
+        category = acc;
+        continue;
+      } else if(taxSplit.id().isEmpty() && !acc.value("Tax").toLower().compare(QLatin1String("yes"))) {
+        taxSplit = split;
+        continue;
+      }
+      return;
+    }
+    if (!category.id().isEmpty()) {
+      // remove a possibly found tax split - we create a new one
+      // but only if it is the same tax category
+      if (!taxSplit.id().isEmpty()) {
+        if (category.value("VatAccount").compare(taxSplit.accountId()))
+          return;
+        transaction.removeSplit(taxSplit);
+      }
+      addVATSplit(transaction, assetLiability, category, amount);
+    }
+  }
+}
+
+bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAccount& acc, const MyMoneyAccount& category, const MyMoneyMoney& amount) const
 {
   bool rc = false;
 
@@ -3171,8 +3239,8 @@ bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAcco
 
     if (category.value("VatAccount").isEmpty())
       return false;
-    MyMoneyAccount vatAcc = this->account(category.value("VatAccount").toLatin1());
-    const MyMoneySecurity& asec = security(account.currencyId());
+    MyMoneyAccount vatAcc = account(category.value("VatAccount"));
+    const MyMoneySecurity& asec = security(acc.currencyId());
     const MyMoneySecurity& csec = security(category.currencyId());
     const MyMoneySecurity& vsec = security(vatAcc.currencyId());
     if (asec.id() != csec.id() || asec.id() != vsec.id()) {
@@ -3182,7 +3250,7 @@ bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAcco
 
     MyMoneyMoney vatRate(vatAcc.value("VatRate"));
     MyMoneyMoney gv, nv;    // gross value, net value
-    int fract = account.fraction();
+    int fract = acc.fraction();
 
     if (!vatRate.isZero()) {
 
@@ -3193,7 +3261,7 @@ bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAcco
         // split value is the gross value
         gv = amount;
         nv = (gv / (MyMoneyMoney::ONE + vatRate)).convert(fract);
-        MyMoneySplit catSplit = transaction.splitByAccount(account.id(), false);
+        MyMoneySplit catSplit = transaction.splitByAccount(acc.id(), false);
         catSplit.setShares(-nv);
         catSplit.setValue(catSplit.shares());
         transaction.modifySplit(catSplit);
@@ -3202,7 +3270,7 @@ bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAcco
         // split value is the net value
         nv = amount;
         gv = (nv * (MyMoneyMoney::ONE + vatRate)).convert(fract);
-        MyMoneySplit accSplit = transaction.splitByAccount(account.id());
+        MyMoneySplit accSplit = transaction.splitByAccount(acc.id());
         accSplit.setValue(gv.convert(fract));
         accSplit.setShares(accSplit.value());
         transaction.modifySplit(accSplit);
@@ -3441,8 +3509,11 @@ void MyMoneyFile::fixSplitPrecision(MyMoneyTransaction& t) const
       auto sec = security(acc.currencyId());
       fraction = acc.fraction(sec);
     }
-    split.setShares(static_cast<const MyMoneyMoney>(split.shares().convertDenominator(fraction).canonicalize()));
-    split.setValue(static_cast<const MyMoneyMoney>(split.value().convertDenominator(transactionFraction).canonicalize()));
+    // Don't do any rounding on a split factor
+    if (split.action() != MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares)) {
+      split.setShares(static_cast<const MyMoneyMoney>(split.shares().convertDenominator(fraction).canonicalize()));
+      split.setValue(static_cast<const MyMoneyMoney>(split.value().convertDenominator(transactionFraction).canonicalize()));
+    }
   }
 }
 

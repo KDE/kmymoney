@@ -55,7 +55,7 @@ PayeesModel::~PayeesModel()
 
 int PayeesModel::rowCount(const QModelIndex& parent) const
 {
-  // since the ledger model is a simple table model, we only
+  // since the payees model is a simple table model, we only
   // return the rowCount for the hiddenRootItem. and zero otherwise
   if(parent.isValid()) {
     return 0;
@@ -155,7 +155,7 @@ void PayeesModel::load()
 
   if(list.count() > 0) {
     beginInsertRows(QModelIndex(), rowCount(), rowCount() + list.count());
-    // create an empty entry for those items that do not reference a cost center
+    // create an empty entry for those items that do not reference a payee
     d->m_payeeItems.append(new MyMoneyPayee());
     foreach (const auto it, list)
       d->m_payeeItems.append(new MyMoneyPayee(it));

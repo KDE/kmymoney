@@ -881,12 +881,32 @@ public:
     }
   }
 
+  bool clearTable(const QString& tableName, QSqlQuery& query)
+  {
+    Q_Q(MyMoneyStorageSql);
+    if (query.exec(QString("SELECT count(*) FROM %1").arg(tableName))) {
+      if (query.next()) {
+        if (query.value(0).toUInt() > 0) {
+          if (!query.exec(QString("DELETE FROM %1").arg(tableName)))
+            return false;
+        }
+      }
+    }
+    return true;
+  }
+
   void writeOnlineJobs()
   {
     Q_Q(MyMoneyStorageSql);
     QSqlQuery query(*q);
-    if (!query.exec("DELETE FROM kmmOnlineJobs;"))
+    if (!clearTable(QStringLiteral("kmmOnlineJobs"), query))
       throw MYMONEYEXCEPTIONSQL("Clean kmmOnlineJobs table");
+
+    if (!clearTable(QStringLiteral("kmmSepaOrders"), query))
+      throw MYMONEYEXCEPTIONSQL("Clean kmmSepaOrders table");
+
+    if (!clearTable(QStringLiteral("kmmNationalAccountNumber"), query))
+      throw MYMONEYEXCEPTIONSQL("Clean kmmNationalAccountNumber table");
 
     const QList<onlineJob> jobs(m_storage->onlineJobList());
     signalProgress(0, jobs.count(), i18n("Inserting online jobs."));
@@ -899,7 +919,7 @@ public:
       } catch (const MyMoneyException &e) {
         // Do not save e as this may point to an inherited class
         failedJobs.append(QPair<onlineJob, QString>(job, e.what()));
-        qDebug() << "Failed to save onlineJob" << job.id() << "Reson:" << e.what();
+        qDebug() << "Failed to save onlineJob" << job.id() << "Reason:" << e.what();
       }
 
       signalProgress(++jobCount, 0);

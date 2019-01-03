@@ -221,6 +221,9 @@ void KMyMoneyView::slotFileClosed()
   if (viewBases.contains(View::OnlineJobOutbox))
     viewBases[View::OnlineJobOutbox]->executeCustomAction(eView::Action::CleanupBeforeFileClose);
 
+  if (viewBases.contains(View::Ledgers))
+    viewBases[View::Ledgers]->executeCustomAction(eView::Action::CleanupBeforeFileClose);
+
   #ifdef ENABLE_UNFINISHEDFEATURES
   static_cast<SimpleLedgerView*>(viewBases[View::NewLedgers])->closeLedgers();
   #endif

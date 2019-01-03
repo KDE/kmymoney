@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2007-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -85,12 +85,15 @@ public:
     delete m_activity;
   }
 
-  void hideCategory(const QString& name)
+  void showCategory(const QString& name, bool visible = true)
   {
     Q_Q(InvestTransactionEditor);
     if (auto cat = dynamic_cast<KMyMoneyCategory*>(q->haveWidget(name))) {
-      cat->hide();
-      cat->splitButton()->hide();
+      if (Q_LIKELY(cat->splitButton())) {
+        cat->parentWidget()->setVisible(visible);  // show or hide the enclosing QFrame;
+      } else {
+        cat->setVisible(visible);  // show or hide the enclosing QFrame;
+      }
     }
   }
 
@@ -349,6 +352,7 @@ void InvestTransactionEditor::createEditWidgets()
 {
   Q_D(InvestTransactionEditor);
   auto activity = new KMyMoneyActivityCombo();
+  activity->setObjectName("activity");
   d->m_editWidgets["activity"] = activity;
   connect(activity, &KMyMoneyActivityCombo::activitySelected, this, &InvestTransactionEditor::slotUpdateActivity);
   connect(activity, &KMyMoneyActivityCombo::activitySelected, this, &InvestTransactionEditor::slotUpdateButtonState);
@@ -356,6 +360,7 @@ void InvestTransactionEditor::createEditWidgets()
   d->m_editWidgets["postdate"] = new KMyMoneyDateInput;
 
   auto security = new KMyMoneySecurity;
+  security->setObjectName("security");
   security->setPlaceholderText(i18n("Security"));
   d->m_editWidgets["security"] = security;
   connect(security, &KMyMoneyCombo::itemSelected, this, &InvestTransactionEditor::slotUpdateSecurity);
@@ -364,12 +369,14 @@ void InvestTransactionEditor::createEditWidgets()
   connect(security, &KMyMoneyCombo::objectCreation, this, &InvestTransactionEditor::objectCreation);
 
   auto asset = new KMyMoneyCategory(false, nullptr);
+  asset->setObjectName("asset-account");
   asset->setPlaceholderText(i18n("Asset account"));
   d->m_editWidgets["asset-account"] = asset;
   connect(asset, &QComboBox::editTextChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
   connect(asset, &KMyMoneyCombo::objectCreation, this, &InvestTransactionEditor::objectCreation);
 
   auto fees = new KMyMoneyCategory(true, nullptr);
+  fees->setObjectName("fee-account");
   fees->setPlaceholderText(i18n("Fees"));
   d->m_editWidgets["fee-account"] = fees;
   connect(fees, &KMyMoneyCombo::itemSelected, this, &InvestTransactionEditor::slotUpdateFeeCategory);
@@ -381,6 +388,7 @@ void InvestTransactionEditor::createEditWidgets()
 
   auto interest = new KMyMoneyCategory(true, nullptr);
   interest->setPlaceholderText(i18n("Interest"));
+  interest->setObjectName("interest-account");
   d->m_editWidgets["interest-account"] = interest;
   connect(interest, &KMyMoneyCombo::itemSelected, this, &InvestTransactionEditor::slotUpdateInterestCategory);
   connect(interest, &QComboBox::editTextChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
@@ -391,13 +399,14 @@ void InvestTransactionEditor::createEditWidgets()
 
   auto tag = new KTagContainer;
   tag->tagCombo()->setPlaceholderText(i18n("Tag"));
-  tag->tagCombo()->setObjectName(QLatin1String("Tag"));
+  tag->tagCombo()->setObjectName(QLatin1String("tag"));
   d->m_editWidgets["tag"] = tag;
   connect(tag->tagCombo(), &QComboBox::editTextChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
   connect(tag->tagCombo(), &KMyMoneyMVCCombo::createItem, this, &InvestTransactionEditor::slotNewTag);
   connect(tag->tagCombo(), &KMyMoneyMVCCombo::objectCreation, this, &InvestTransactionEditor::objectCreation);
 
   auto memo = new KTextEdit;
+  memo->setObjectName("memo");
   memo->setTabChangesFocus(true);
   d->m_editWidgets["memo"] = memo;
   connect(memo, &QTextEdit::textChanged, this, &InvestTransactionEditor::slotUpdateInvestMemoState);
@@ -407,6 +416,7 @@ void InvestTransactionEditor::createEditWidgets()
   d->m_activity->memoChanged() = false;
 
   KMyMoneyEdit* value = new KMyMoneyEdit;
+  value->setObjectName("shares");
   value->setPlaceholderText(i18n("Shares"));
   value->setResetButtonVisible(false);
   d->m_editWidgets["shares"] = value;
@@ -414,6 +424,7 @@ void InvestTransactionEditor::createEditWidgets()
   connect(value, &KMyMoneyEdit::valueChanged, this, &InvestTransactionEditor::slotUpdateTotalAmount);
 
   value = new KMyMoneyEdit;
+  value->setObjectName("price");
   value->setPlaceholderText(i18n("Price"));
   value->setResetButtonVisible(false);
   d->m_editWidgets["price"] = value;
@@ -421,6 +432,7 @@ void InvestTransactionEditor::createEditWidgets()
   connect(value, &KMyMoneyEdit::valueChanged, this, &InvestTransactionEditor::slotUpdateTotalAmount);
 
   value = new KMyMoneyEdit;
+  value->setObjectName("fee-amount");
   // TODO once we have the selected transactions as array of Transaction
   // we can allow multiple splits for fee and interest
   value->setResetButtonVisible(false);
@@ -429,6 +441,7 @@ void InvestTransactionEditor::createEditWidgets()
   connect(value, &KMyMoneyEdit::valueChanged, this, &InvestTransactionEditor::slotUpdateTotalAmount);
 
   value = new KMyMoneyEdit;
+  value->setObjectName("interest-amount");
   // TODO once we have the selected transactions as array of Transaction
   // we can allow multiple splits for fee and interest
   value->setResetButtonVisible(false);
@@ -437,6 +450,7 @@ void InvestTransactionEditor::createEditWidgets()
   connect(value, &KMyMoneyEdit::valueChanged, this, &InvestTransactionEditor::slotUpdateTotalAmount);
 
   auto reconcile = new KMyMoneyReconcileCombo;
+  reconcile->setObjectName("reconcile");
   d->m_editWidgets["status"] = reconcile;
   connect(reconcile, &KMyMoneyMVCCombo::itemSelected, this, &InvestTransactionEditor::slotUpdateButtonState);
 
@@ -554,25 +568,19 @@ void InvestTransactionEditor::slotUpdateFeeVisibility(const QString& txt)
   if (!feeAmount)
     return;
   feeAmount->setHidden(txt.isEmpty());
-  auto l = dynamic_cast<QLabel*>(haveWidget("fee-amount-label"));
 
   auto fee = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
   if (!fee)
     return;
-  const auto hideFee = txt.isEmpty() || transactionTypesWithoutFee.contains(d->m_activity->type());
+
+  const auto hideFee = transactionTypesWithoutFee.contains(d->m_activity->type());
   //  no fee expected so hide
-  if (hideFee) {
-    if (l) {
-      l->setText("");
-    }
-    feeAmount->hide();
-    fee->splitButton()->hide();
-  } else {
-    if (l) {
-      l->setText(i18n("Fee Amount"));
-    }
-    feeAmount->show();
-    fee->splitButton()->show();
+  feeAmount->setHidden(hideFee);
+  d->showCategory("fee-account", !hideFee);
+
+  auto l = dynamic_cast<QLabel*>(haveWidget("fee-amount-label"));
+  if (l) {
+    l->setText(hideFee ? QString() : i18n("Fee Amount"));
   }
 }
 
@@ -585,26 +593,24 @@ void InvestTransactionEditor::slotUpdateInterestVisibility(const QString& txt)
 {
   Q_D(InvestTransactionEditor);
   static const QSet<eMyMoney::Split::InvestmentTransactionType> transactionTypesWithInterest = QSet<eMyMoney::Split::InvestmentTransactionType>()
-      << eMyMoney::Split::InvestmentTransactionType::BuyShares << eMyMoney::Split::InvestmentTransactionType::SellShares << eMyMoney::Split::InvestmentTransactionType::Dividend << eMyMoney::Split::InvestmentTransactionType::InterestIncome << eMyMoney::Split::InvestmentTransactionType::Yield;
+      << eMyMoney::Split::InvestmentTransactionType::SellShares << eMyMoney::Split::InvestmentTransactionType::Dividend << eMyMoney::Split::InvestmentTransactionType::InterestIncome << eMyMoney::Split::InvestmentTransactionType::Yield;
 
-  QWidget* w = haveWidget("interest-amount");
-  w->setHidden(txt.isEmpty());
-  auto l = dynamic_cast<QLabel*>(haveWidget("interest-amount-label"));
+  auto interestAmount = dynamic_cast<KMyMoneyEdit*>(haveWidget("interest-amount"));
+  if (!interestAmount)
+    return;
+  interestAmount->setHidden(txt.isEmpty());
 
   auto interest = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
-  const auto showInterest = !txt.isEmpty() && transactionTypesWithInterest.contains(d->m_activity->type());
-  if (interest && showInterest) {
-    interest->splitButton()->show();
-    w->show();
-    if (l)
-      l->setText(i18n("Interest"));
-  } else {
-    if (interest) {
-      interest->splitButton()->hide();
-      w->hide();
-      if (l)
-        l->setText(QString());
-    }
+  if (!interest)
+    return;
+
+  const auto showInterest = transactionTypesWithInterest.contains(d->m_activity->type());
+  d->showCategory("interest-account", showInterest);
+  interestAmount->setVisible(showInterest);
+
+  auto l = dynamic_cast<QLabel*>(haveWidget("interest-amount-label"));
+  if (l) {
+    l->setText(showInterest ? i18n("Interest") : QString());
   }
 }
 
@@ -945,8 +951,8 @@ void InvestTransactionEditor::slotUpdateActivity(eMyMoney::Split::InvestmentTran
   d->activityFactory(activity);
 
   // hide all dynamic widgets
-  d->hideCategory("interest-account");
-  d->hideCategory("fee-account");
+  d->showCategory("interest-account", false);
+  d->showCategory("fee-account", false);
 
   QStringList dynwidgets;
   dynwidgets << "total-label" << "asset-label" << "fee-label" << "fee-amount-label" << "interest-label" << "interest-amount-label" << "price-label" << "shares-label";
@@ -957,7 +963,7 @@ void InvestTransactionEditor::slotUpdateActivity(eMyMoney::Split::InvestmentTran
   for (it_s = dynwidgets.constBegin(); it_s != dynwidgets.constEnd(); ++it_s) {
     QLabel* w = dynamic_cast<QLabel*>(haveWidget(*it_s));
     if (w)
-      w->setText(" ");
+      w->setText(QStringLiteral(" "));
   }
 
   // real widgets can be hidden
@@ -973,17 +979,11 @@ void InvestTransactionEditor::slotUpdateActivity(eMyMoney::Split::InvestmentTran
   d->m_activity->preloadAssetAccount();
 
   if (auto cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"))) {
-  if (cat->parentWidget()->isVisible())
     slotUpdateInterestVisibility(cat->currentText());
-  else
-    cat->splitButton()->hide();
   }
 
   if (auto cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"))) {
-  if (cat->parentWidget()->isVisible())
     slotUpdateFeeVisibility(cat->currentText());
-  else
-    cat->splitButton()->hide();
   }
 }
 
@@ -1229,8 +1229,11 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
       t.addSplit(split);
     }
 
-    s0.setShares(MyMoneyMoney(s0.shares().convertDenominator(securityFraction, roundingMethod))); // only shares variable from stock split isn't evaluated in currency
-    s0.setValue(MyMoneyMoney(s0.value().convertDenominator(currencyFraction, roundingMethod)));
+    // Don't do any rounding on a split factor
+    if (d->m_activity->type() != eMyMoney::Split::InvestmentTransactionType::SplitShares) {
+      s0.setShares(MyMoneyMoney(s0.shares().convertDenominator(securityFraction, roundingMethod))); // only shares variable from stock split isn't evaluated in currency
+      s0.setValue(MyMoneyMoney(s0.value().convertDenominator(currencyFraction, roundingMethod)));
+    }
     t.addSplit(s0);
   }
 

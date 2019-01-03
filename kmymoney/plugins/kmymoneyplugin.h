@@ -320,6 +320,12 @@ public:
   virtual eKMyMoney::StorageType storageType() const = 0;
 
   virtual QString fileExtension() const = 0;
+
+  /**
+   * @brief returns the full URL used to open the database (incl. password)
+   * @return QUrl to re-open the database
+   */
+  virtual QUrl openUrl() const = 0;
 };
 
 /**

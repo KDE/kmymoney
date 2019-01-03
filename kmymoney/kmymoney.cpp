@@ -1659,7 +1659,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
   lutActions[Action::ViewTransactionDetail]->setChecked(KMyMoneySettings::showRegisterDetailed());
   lutActions[Action::ViewHideReconciled]->setChecked(KMyMoneySettings::hideReconciledTransactions());
   lutActions[Action::ViewHideCategories]->setChecked(KMyMoneySettings::hideUnusedCategory());
-  lutActions[Action::ViewShowAll]->setChecked(false);
+  lutActions[Action::ViewShowAll]->setChecked(KMyMoneySettings::showAllAccounts());
 
   // *************
   // Adding actions to ActionCollection
@@ -3484,7 +3484,7 @@ bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
         MyMoneyFile::instance()->attachStorage(pStorage);
         d->m_storageInfo.type = plugin->storageType();
         if (plugin->storageType() != eKMyMoney::StorageType::GNC) {
-          d->m_storageInfo.url = url;
+          d->m_storageInfo.url = plugin->openUrl();
           writeLastUsedFile(url.toDisplayString(QUrl::PreferLocalFile));
           /* Don't use url variable after KRecentFilesAction::addUrl
          * as it might delete it.
@@ -3660,7 +3660,12 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
       q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
 
 #ifdef ENABLE_ACTIVITIES
-      m_activityResourceInstance->setUri(m_storageInfo.url);
+      {
+        // make sure that we don't store the DB password in activity
+        QUrl url(m_storageInfo.url);
+        url.setPassword(QString());
+        m_activityResourceInstance->setUri(url);
+      }
 #endif
       // start the check for scheduled transactions that need to be
       // entered as soon as the event loop becomes active.

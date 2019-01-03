@@ -120,20 +120,20 @@ MyMoneyStorageMgr *SQLStorage::open(const QUrl &url)
   auto storage = new MyMoneyStorageMgr;
   auto reader = std::make_unique<MyMoneyStorageSql>(storage, url);
 
-  QUrl dbURL(url);
-  if (dbURL.password().isEmpty()) {
+  dbUrl = url;
+  if (dbUrl.password().isEmpty()) {
     // check if a password is needed. it may be if the URL came from the last/recent file list
-    QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::ReadWrite, dbURL);
+    QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::ReadWrite, dbUrl);
     if (!dialog->checkDrivers()) {
       delete dialog;
       return nullptr;
     }
-    QUrlQuery query = convertOldUrl(dbURL);
+    QUrlQuery query = convertOldUrl(dbUrl);
     // if we need to supply a password, then show the dialog
     // otherwise it isn't needed
-    if ((query.queryItemValue("secure").toLower() == QLatin1String("yes")) && dbURL.password().isEmpty()) {
+    if ((query.queryItemValue("secure").toLower() == QLatin1String("yes")) && dbUrl.password().isEmpty()) {
       if (dialog->exec() == QDialog::Accepted && dialog != nullptr) {
-        dbURL = dialog->selectedURL();
+        dbUrl = dialog->selectedURL();
       } else {
         delete dialog;
         return nullptr;
@@ -141,6 +141,11 @@ MyMoneyStorageMgr *SQLStorage::open(const QUrl &url)
     }
     delete dialog;
   }
+
+  // create a copy that we can override temporarily
+  // and use it from now on
+  QUrl dbURL(dbUrl);
+
   bool retry = true;
   while (retry) {
     switch (reader->open(dbURL, QIODevice::ReadWrite)) {
@@ -192,6 +197,11 @@ MyMoneyStorageMgr *SQLStorage::open(const QUrl &url)
   }
 //  reader->setProgressCallback(0);
   return storage;
+}
+
+QUrl SQLStorage::openUrl() const
+{
+  return dbUrl;
 }
 
 bool SQLStorage::save(const QUrl &url)

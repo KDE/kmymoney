@@ -87,7 +87,6 @@ public:
     */
   void setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount& account, eWidgets::eRegister::Action action);
   void setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount& account);
-  void setup(QWidgetList& tabOrderWidgets);
 
   /**
     * Enter the transactions into the ledger. In case of a newly created
@@ -174,6 +173,14 @@ public:
 
   void setScheduleInfo(const QString& si);
   void setPaymentMethod(eMyMoney::Schedule::PaymentType pm);
+
+  /**
+   * This method returns if the editor is currently used to create a new transaction
+   * or editing existing transaction(s).
+   *
+   * @returns @c true in case it creates a new transaction, @c false otherwise
+   */
+  bool createNewTransaction() const;
 
 public Q_SLOTS:
   void slotReloadEditWidgets();

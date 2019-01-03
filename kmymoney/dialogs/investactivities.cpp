@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2007-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -287,10 +287,13 @@ void Activity::setWidgetVisibility(const QStringList& widgetIds, bool visible) c
   for (QStringList::const_iterator it_w = widgetIds.constBegin(); it_w != widgetIds.constEnd(); ++it_w) {
     auto w = haveWidget(*it_w);
     if (w) {
-      if (visible) {
-        w->show();
+      // in case we hit a category with a split button,
+      // we need to manipulate the enclosing QFrame
+      auto cat = dynamic_cast<KMyMoneyCategory*>(w);
+      if (cat && cat->splitButton()) {
+        cat->parentWidget()->setVisible(visible);
       } else {
-        w->hide();
+        w->setVisible(visible);
       }
     }
   }
@@ -883,14 +886,6 @@ bool Invest::Split::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, M
   Q_UNUSED(currency);
 
   auto sharesEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
-
-  KMyMoneyCategory* cat;
-  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
-  if (cat)
-    cat->parentWidget()->hide();
-  cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
-  if (cat)
-    cat->parentWidget()->hide();
 
   s0.setAction(eMyMoney::Split::InvestmentTransactionType::SplitShares);
   if (sharesEdit)

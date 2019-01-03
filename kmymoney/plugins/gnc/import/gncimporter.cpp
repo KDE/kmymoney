@@ -61,7 +61,7 @@ GNCImporter::~GNCImporter()
 }
 
 MyMoneyStorageMgr *GNCImporter::open(const QUrl &url)
-{ 
+{
   if (url.scheme() == QLatin1String("sql"))
     return nullptr;
 
@@ -120,6 +120,11 @@ MyMoneyStorageMgr *GNCImporter::open(const QUrl &url)
   qfile->close();
   delete qfile;
   return storage;
+}
+
+QUrl GNCImporter::openUrl() const
+{
+  return QUrl();
 }
 
 bool GNCImporter::save(const QUrl &url)
