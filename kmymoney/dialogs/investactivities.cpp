@@ -334,11 +334,12 @@ eMyMoney::Split::InvestmentTransactionType Buy::type() const
 
 void Buy::showWidgets() const
 {
-  static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "shares" << "price" << "total" << "interest-account" << "fee-account";
+  static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "shares" << "price" << "total" << "fee-account" << "fee-amount" << "interest-account" << "interest-amount";
   setWidgetVisibility(visibleWidgetIds, true);
 
   setLabelText("interest-amount-label", i18n("Interest"));
   setLabelText("interest-label", i18n("Interest"));
+  setLabelText("fee-amount-label", i18n("Fees"));
   setLabelText("fee-label", i18n("Fees"));
   setLabelText("asset-label", i18n("Account"));
   setLabelText("shares-label", i18n("Shares"));
@@ -435,7 +436,7 @@ eMyMoney::Split::InvestmentTransactionType Sell::type() const
 void Sell::showWidgets() const
 {
   Q_D(const Activity);
-  static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "shares" << "price" << "total" << "interest-account" << "fee-account";
+  static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "fee-amount" << "shares" << "price" << "total" << "interest-account" << "fee-account";
   setWidgetVisibility(visibleWidgetIds, true);
 
   if (auto shareEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares")))
@@ -443,6 +444,7 @@ void Sell::showWidgets() const
 
   setLabelText("interest-amount-label", i18n("Interest"));
   setLabelText("interest-label", i18n("Interest"));
+  setLabelText("fee-amount-label", i18n("Fees"));
   setLabelText("fee-label", i18n("Fees"));
   setLabelText("asset-label", i18n("Account"));
   setLabelText("shares-label", i18n("Shares"));
@@ -541,13 +543,14 @@ eMyMoney::Split::InvestmentTransactionType Div::type() const
 
 void Div::showWidgets() const
 {
-  static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "total" << "interest-account" << "fee-account";
+  static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "fee-amount" << "total" << "interest-account" << "fee-account";
   setWidgetVisibility(visibleWidgetIds, true);
   static const QStringList hiddenWidgetIds = QStringList() << "shares" << "price";
   setWidgetVisibility(hiddenWidgetIds, false);
 
   setLabelText("interest-amount-label", i18n("Interest"));
   setLabelText("interest-label", i18n("Interest"));
+  setLabelText("fee-amount-label", i18n("Fees"));
   setLabelText("fee-label", i18n("Fees"));
   setLabelText("asset-label", i18n("Account"));
   setLabelText("total-label", i18nc("Total value", "Total"));
@@ -631,12 +634,9 @@ void Reinvest::showWidgets() const
     shareEdit->setPrecision(MyMoneyMoney::denomToPrec(d->m_parent->security().smallestAccountFraction()));
   }
 
-  if (auto intAmount = dynamic_cast<KMyMoneyEdit*>(haveWidget("interest-amount"))) {
-    intAmount->hide();
-    setLabelText("interest-amount-label", QString());
-    intAmount->setValue(MyMoneyMoney());
-  }
-
+  setLabelText("interest-amount-label", i18n("Interest"));
+  setLabelText("interest-label", i18n("Interest"));
+  setLabelText("fee-amount-label", i18n("Fees"));
   setLabelText("fee-label", i18n("Fees"));
   setLabelText("interest-label", i18n("Interest"));
   setLabelText("shares-label", i18n("Shares"));

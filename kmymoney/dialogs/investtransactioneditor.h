@@ -122,9 +122,7 @@ protected Q_SLOTS:
   void slotUpdateActivity(eMyMoney::Split::InvestmentTransactionType);
   void slotUpdateSecurity(const QString& stockId);
   void slotUpdateInterestCategory(const QString& id);
-  void slotUpdateInterestVisibility(const QString&);
   void slotUpdateFeeCategory(const QString& id);
-  void slotUpdateFeeVisibility(const QString&);
   void slotUpdateTotalAmount();
   void slotTransactionContainerGeometriesUpdated();
   void slotUpdateInvestMemoState();
