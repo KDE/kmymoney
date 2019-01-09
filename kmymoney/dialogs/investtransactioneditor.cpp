@@ -381,7 +381,6 @@ void InvestTransactionEditor::createEditWidgets()
   d->m_editWidgets["fee-account"] = fees;
   connect(fees, &KMyMoneyCombo::itemSelected, this, &InvestTransactionEditor::slotUpdateFeeCategory);
   connect(fees, &QComboBox::editTextChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
-  connect(fees, &QComboBox::editTextChanged, this, &InvestTransactionEditor::slotUpdateFeeVisibility);
   connect(fees, &KMyMoneyCombo::createItem, this, &InvestTransactionEditor::slotCreateFeeCategory);
   connect(fees, &KMyMoneyCombo::objectCreation, this, &InvestTransactionEditor::objectCreation);
   connect(fees->splitButton(), &QAbstractButton::clicked, this, &InvestTransactionEditor::slotEditFeeSplits);
@@ -392,7 +391,6 @@ void InvestTransactionEditor::createEditWidgets()
   d->m_editWidgets["interest-account"] = interest;
   connect(interest, &KMyMoneyCombo::itemSelected, this, &InvestTransactionEditor::slotUpdateInterestCategory);
   connect(interest, &QComboBox::editTextChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
-  connect(interest, &QComboBox::editTextChanged, this, &InvestTransactionEditor::slotUpdateInterestVisibility);
   connect(interest, &KMyMoneyCombo::createItem, this, &InvestTransactionEditor::slotCreateInterestCategory);
   connect(interest, &KMyMoneyCombo::objectCreation, this, &InvestTransactionEditor::objectCreation);
   connect(interest->splitButton(), &QAbstractButton::clicked, this, &InvestTransactionEditor::slotEditInterestSplits);
@@ -558,60 +556,9 @@ void InvestTransactionEditor::slotUpdateFeeCategory(const QString& id)
   haveWidget("fee-amount")->setDisabled(id.isEmpty());
 }
 
-void InvestTransactionEditor::slotUpdateFeeVisibility(const QString& txt)
-{
-  Q_D(InvestTransactionEditor);
-  static const QSet<eMyMoney::Split::InvestmentTransactionType> transactionTypesWithoutFee = QSet<eMyMoney::Split::InvestmentTransactionType>()
-      << eMyMoney::Split::InvestmentTransactionType::AddShares << eMyMoney::Split::InvestmentTransactionType::RemoveShares << eMyMoney::Split::InvestmentTransactionType::SplitShares;
-
-  auto feeAmount = dynamic_cast<KMyMoneyEdit*>(haveWidget("fee-amount"));
-  if (!feeAmount)
-    return;
-  feeAmount->setHidden(txt.isEmpty());
-
-  auto fee = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
-  if (!fee)
-    return;
-
-  const auto hideFee = transactionTypesWithoutFee.contains(d->m_activity->type());
-  //  no fee expected so hide
-  feeAmount->setHidden(hideFee);
-  d->showCategory("fee-account", !hideFee);
-
-  auto l = dynamic_cast<QLabel*>(haveWidget("fee-amount-label"));
-  if (l) {
-    l->setText(hideFee ? QString() : i18n("Fee Amount"));
-  }
-}
-
 void InvestTransactionEditor::slotUpdateInterestCategory(const QString& id)
 {
   haveWidget("interest-amount")->setDisabled(id.isEmpty());
-}
-
-void InvestTransactionEditor::slotUpdateInterestVisibility(const QString& txt)
-{
-  Q_D(InvestTransactionEditor);
-  static const QSet<eMyMoney::Split::InvestmentTransactionType> transactionTypesWithInterest = QSet<eMyMoney::Split::InvestmentTransactionType>()
-      << eMyMoney::Split::InvestmentTransactionType::SellShares << eMyMoney::Split::InvestmentTransactionType::Dividend << eMyMoney::Split::InvestmentTransactionType::InterestIncome << eMyMoney::Split::InvestmentTransactionType::Yield;
-
-  auto interestAmount = dynamic_cast<KMyMoneyEdit*>(haveWidget("interest-amount"));
-  if (!interestAmount)
-    return;
-  interestAmount->setHidden(txt.isEmpty());
-
-  auto interest = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
-  if (!interest)
-    return;
-
-  const auto showInterest = transactionTypesWithInterest.contains(d->m_activity->type());
-  d->showCategory("interest-account", showInterest);
-  interestAmount->setVisible(showInterest);
-
-  auto l = dynamic_cast<QLabel*>(haveWidget("interest-amount-label"));
-  if (l) {
-    l->setText(showInterest ? i18n("Interest") : QString());
-  }
 }
 
 void InvestTransactionEditor::slotCreateInterestCategory(const QString& name, QString& id)
@@ -738,14 +685,12 @@ void InvestTransactionEditor::loadEditWidgets()
     aSet.addAccountGroup(Account::Type::Income);
     aSet.load(interest->selector());
     setupCategoryWidget(interest, d->m_interestSplits, id, SLOT(slotEditInterestSplits()));
-    slotUpdateInterestVisibility(interest->currentText());
 
     // fee-account
     aSet.clear();
     aSet.addAccountGroup(Account::Type::Expense);
     aSet.load(fees->selector());
     setupCategoryWidget(fees, d->m_feeSplits, id, SLOT(slotEditFeeSplits()));
-    slotUpdateFeeVisibility(fees->currentText());
 
     // shares
     // don't set the value if the number of shares is zero so that
@@ -977,14 +922,6 @@ void InvestTransactionEditor::slotUpdateActivity(eMyMoney::Split::InvestmentTran
   }
   d->m_activity->showWidgets();
   d->m_activity->preloadAssetAccount();
-
-  if (auto cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"))) {
-    slotUpdateInterestVisibility(cat->currentText());
-  }
-
-  if (auto cat = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"))) {
-    slotUpdateFeeVisibility(cat->currentText());
-  }
 }
 
 eDialogs::PriceMode InvestTransactionEditor::priceMode() const
