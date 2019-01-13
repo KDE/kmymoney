@@ -23,6 +23,7 @@
 
 #include <QList>
 #include <QDate>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -86,15 +87,20 @@ void ObjectInfoTable::init()
       constructScheduleTable();
       m_columns << ctNextDueDate << ctName;
       break;
+
+    default:
+      qDebug() << "ObjectInfoTable::ObjectInfoTable(): unhandled row type" << static_cast<uint>(m_config.rowType());
+      qDebug() << "turned into eMyMoney::Report::RowType::AccountInfo";
+      m_config.setRowType(eMyMoney::Report::RowType::AccountInfo);
+      // intentional fall through
     case eMyMoney::Report::RowType::AccountInfo:
       constructAccountTable();
       m_columns << ctType << ctName;
       break;
+
     case eMyMoney::Report::RowType::AccountLoanInfo:
       constructAccountLoanTable();
       m_columns << ctType << ctName;
-      break;
-    default:
       break;
   }
 

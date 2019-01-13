@@ -76,48 +76,17 @@ MyMoneyReport::MyMoneyReport(eMyMoney::Report::RowType rt,
     throw MYMONEYEXCEPTION_CSTRING("Invalid report type");
 
   //add the corresponding account groups
-  if (rt == eMyMoney::Report::RowType::AssetLiability) {
-    addAccountGroup(eMyMoney::Account::Type::Asset);
-    addAccountGroup(eMyMoney::Account::Type::Liability);
-    d->m_showRowTotals = true;
+  addAccountGroupsByRowType(rt);
+  switch(rt) {
+    case eMyMoney::Report::RowType::AssetLiability:
+    case eMyMoney::Report::RowType::Account:
+    case eMyMoney::Report::RowType::ExpenseIncome:
+      d->m_showRowTotals = true;
+      break;
+    default:
+      break;
   }
-  if (rt == eMyMoney::Report::RowType::Account) {
-    addAccountGroup(eMyMoney::Account::Type::Asset);
-    addAccountGroup(eMyMoney::Account::Type::AssetLoan);
-    addAccountGroup(eMyMoney::Account::Type::Cash);
-    addAccountGroup(eMyMoney::Account::Type::Checkings);
-    addAccountGroup(eMyMoney::Account::Type::CreditCard);
-    if (m_expertMode)
-      addAccountGroup(eMyMoney::Account::Type::Equity);
-    addAccountGroup(eMyMoney::Account::Type::Expense);
-    addAccountGroup(eMyMoney::Account::Type::Income);
-    addAccountGroup(eMyMoney::Account::Type::Liability);
-    addAccountGroup(eMyMoney::Account::Type::Loan);
-    addAccountGroup(eMyMoney::Account::Type::Savings);
-    addAccountGroup(eMyMoney::Account::Type::Stock);
-    d->m_showRowTotals = true;
-  }
-  if (rt == eMyMoney::Report::RowType::ExpenseIncome) {
-    addAccountGroup(eMyMoney::Account::Type::Expense);
-    addAccountGroup(eMyMoney::Account::Type::Income);
-    d->m_showRowTotals = true;
-  }
-  //FIXME take this out once we have sorted out all issues regarding budget of assets and liabilities -- asoliverez@gmail.com
-  if (rt == eMyMoney::Report::RowType::Budget || rt == eMyMoney::Report::RowType::BudgetActual) {
-    addAccountGroup(eMyMoney::Account::Type::Expense);
-    addAccountGroup(eMyMoney::Account::Type::Income);
-  }
-  if (rt == eMyMoney::Report::RowType::AccountInfo) {
-    addAccountGroup(eMyMoney::Account::Type::Asset);
-    addAccountGroup(eMyMoney::Account::Type::Liability);
-  }
-  //cash flow reports show splits for all account groups
-  if (rt == eMyMoney::Report::RowType::CashFlow) {
-    addAccountGroup(eMyMoney::Account::Type::Expense);
-    addAccountGroup(eMyMoney::Account::Type::Income);
-    addAccountGroup(eMyMoney::Account::Type::Asset);
-    addAccountGroup(eMyMoney::Account::Type::Liability);
-  }
+
 #ifdef DEBUG_REPORTS
   QDebug out = qDebug();
   out << _name << toString(_rt) << toString(m_reportType);
@@ -145,6 +114,56 @@ MyMoneyReport::MyMoneyReport(const QString& id, const MyMoneyReport& other) :
 
 MyMoneyReport::~MyMoneyReport()
 {
+}
+
+void MyMoneyReport::addAccountGroupsByRowType(eMyMoney::Report::RowType rt)
+{
+  //add the corresponding account groups
+  switch(rt) {
+    case eMyMoney::Report::RowType::AccountInfo:
+    case eMyMoney::Report::RowType::AssetLiability:
+      addAccountGroup(eMyMoney::Account::Type::Asset);
+      addAccountGroup(eMyMoney::Account::Type::Liability);
+      break;
+
+    case eMyMoney::Report::RowType::Account:
+      addAccountGroup(eMyMoney::Account::Type::Asset);
+      addAccountGroup(eMyMoney::Account::Type::AssetLoan);
+      addAccountGroup(eMyMoney::Account::Type::Cash);
+      addAccountGroup(eMyMoney::Account::Type::Checkings);
+      addAccountGroup(eMyMoney::Account::Type::CreditCard);
+      if (m_expertMode)
+        addAccountGroup(eMyMoney::Account::Type::Equity);
+      addAccountGroup(eMyMoney::Account::Type::Expense);
+      addAccountGroup(eMyMoney::Account::Type::Income);
+      addAccountGroup(eMyMoney::Account::Type::Liability);
+      addAccountGroup(eMyMoney::Account::Type::Loan);
+      addAccountGroup(eMyMoney::Account::Type::Savings);
+      addAccountGroup(eMyMoney::Account::Type::Stock);
+      break;
+
+    case eMyMoney::Report::RowType::ExpenseIncome:
+      addAccountGroup(eMyMoney::Account::Type::Expense);
+      addAccountGroup(eMyMoney::Account::Type::Income);
+      break;
+
+    //FIXME take this out once we have sorted out all issues regarding budget of assets and liabilities -- asoliverez@gmail.com
+    case eMyMoney::Report::RowType::Budget:
+    case eMyMoney::Report::RowType::BudgetActual:
+      addAccountGroup(eMyMoney::Account::Type::Expense);
+      addAccountGroup(eMyMoney::Account::Type::Income);
+      break;
+
+    //cash flow reports show splits for all account groups
+    case eMyMoney::Report::RowType::CashFlow:
+      addAccountGroup(eMyMoney::Account::Type::Expense);
+      addAccountGroup(eMyMoney::Account::Type::Income);
+      addAccountGroup(eMyMoney::Account::Type::Asset);
+      addAccountGroup(eMyMoney::Account::Type::Liability);
+      break;
+    default:
+      break;
+  }
 }
 
 eMyMoney::Report::ReportType MyMoneyReport::reportType() const
@@ -210,14 +229,7 @@ void MyMoneyReport::setRowType(eMyMoney::Report::RowType rt)
   d->m_accountGroupFilter = false;
   d->m_accountGroups.clear();
 
-  if (rt == eMyMoney::Report::RowType::AssetLiability) {
-    addAccountGroup(eMyMoney::Account::Type::Asset);
-    addAccountGroup(eMyMoney::Account::Type::Liability);
-  }
-  if (rt == eMyMoney::Report::RowType::ExpenseIncome) {
-    addAccountGroup(eMyMoney::Account::Type::Expense);
-    addAccountGroup(eMyMoney::Account::Type::Income);
-  }
+  addAccountGroupsByRowType(rt);
 }
 
 bool MyMoneyReport::isRunningSum() const
@@ -955,6 +967,11 @@ bool MyMoneyReport::m_expertMode = false;
 void MyMoneyReport::setLineWidth(int width)
 {
   m_lineWidth = width;
+}
+
+int MyMoneyReport::lineWidth()
+{
+  return m_lineWidth;
 }
 
 void MyMoneyReport::setExpertMode(bool expertMode)

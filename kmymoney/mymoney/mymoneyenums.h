@@ -251,6 +251,7 @@ namespace eMyMoney {
       // insert new constants above of this line
       LastDateItem
     };
+    inline uint qHash(const Date key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
   }
 
   namespace Split {

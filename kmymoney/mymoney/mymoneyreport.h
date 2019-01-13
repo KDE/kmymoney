@@ -380,21 +380,6 @@ public:
   bool hasReferenceTo(const QString& id) const override;
 
   /**
-    * This method allows to modify the default lineWidth for graphs.
-    * The default is 2.
-    */
-  static void setLineWidth(int width);
-
-  /**
-    * This member keeps the current setting for line graphs lineWidth.
-    * @sa setLineWidth()
-    */
-  static int m_lineWidth;
-
-  static void setExpertMode(bool expertMode);
-  static bool m_expertMode;
-
-  /**
    * Return row type as string.
    *
    * @param type type to get string for
@@ -409,6 +394,28 @@ public:
    * @return report type converted to string
    */
   static QString toString(eMyMoney::Report::ReportType type);
+
+  /**
+    * This method allows to modify and retrieve the default lineWidth for graphs.
+    * The default is 2.
+    */
+  static void setLineWidth(int width);
+  static int lineWidth();
+
+  // set the expert mode which shows equity accounts for some reports
+  static void setExpertMode(bool expertMode);
+
+private:
+  void addAccountGroupsByRowType(eMyMoney::Report::RowType rt);
+
+private:
+  /**
+    * This member keeps the current setting for line graphs lineWidth.
+    * @sa setLineWidth()
+    */
+  static int m_lineWidth;
+
+  static bool m_expertMode;
 };
 
 inline void swap(MyMoneyReport& first, MyMoneyReport& second) // krazy:exclude=inline
