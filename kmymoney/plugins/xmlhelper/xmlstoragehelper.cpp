@@ -420,50 +420,50 @@ namespace MyMoneyXmlContentHandler2 {
     return stateAttributeLUT().key(text, 5);
   }
 
-  QHash<int, QString> dateLockLUT()
+  QHash<eMyMoney::TransactionFilter::Date, QString> dateLockLUT()
   {
-    static const QHash<int, QString> lut {
-      {0, QStringLiteral("alldates")},
-      {1, QStringLiteral("untiltoday")},
-      {2, QStringLiteral("currentmonth")},
-      {3, QStringLiteral("currentyear")},
-      {4, QStringLiteral("monthtodate")},
-      {5, QStringLiteral("yeartodate")},
-      {6, QStringLiteral("yeartomonth")},
-      {7, QStringLiteral("lastmonth")},
-      {8, QStringLiteral("lastyear")},
-      {9, QStringLiteral("last7days")},
-      {10, QStringLiteral("last30days")},
-      {11, QStringLiteral("last3months")},
-      {12, QStringLiteral("last6months")},
-      {13, QStringLiteral("last12months")},
-      {14, QStringLiteral("next7days")},
-      {15, QStringLiteral("next30days")},
-      {16, QStringLiteral("next3months")},
-      {17, QStringLiteral("next6months")},
-      {18, QStringLiteral("next12months")},
-      {19, QStringLiteral("userdefined")},
-      {20, QStringLiteral("last3tonext3months")},
-      {21, QStringLiteral("last11Months")},
-      {22, QStringLiteral("currentQuarter")},
-      {23, QStringLiteral("lastQuarter")},
-      {24, QStringLiteral("nextQuarter")},
-      {25, QStringLiteral("currentFiscalYear")},
-      {26, QStringLiteral("lastFiscalYear")},
-      {27, QStringLiteral("today")},
-      {28, QStringLiteral("next18months")}
+    static const QHash<eMyMoney::TransactionFilter::Date, QString> lut {
+      {eMyMoney::TransactionFilter::Date::All,                QStringLiteral("alldates")},
+      {eMyMoney::TransactionFilter::Date::AsOfToday,          QStringLiteral("untiltoday")},
+      {eMyMoney::TransactionFilter::Date::CurrentMonth,       QStringLiteral("currentmonth")},
+      {eMyMoney::TransactionFilter::Date::CurrentYear,        QStringLiteral("currentyear")},
+      {eMyMoney::TransactionFilter::Date::MonthToDate,        QStringLiteral("monthtodate")},
+      {eMyMoney::TransactionFilter::Date::YearToDate,         QStringLiteral("yeartodate")},
+      {eMyMoney::TransactionFilter::Date::YearToMonth,        QStringLiteral("yeartomonth")},
+      {eMyMoney::TransactionFilter::Date::LastMonth,          QStringLiteral("lastmonth")},
+      {eMyMoney::TransactionFilter::Date::LastYear,           QStringLiteral("lastyear")},
+      {eMyMoney::TransactionFilter::Date::Last7Days,          QStringLiteral("last7days")},
+      {eMyMoney::TransactionFilter::Date::Last30Days,         QStringLiteral("last30days")},
+      {eMyMoney::TransactionFilter::Date::Last3Months,        QStringLiteral("last3months")},
+      {eMyMoney::TransactionFilter::Date::Last6Months,        QStringLiteral("last6months")},
+      {eMyMoney::TransactionFilter::Date::Last12Months,       QStringLiteral("last12months")},
+      {eMyMoney::TransactionFilter::Date::Next7Days,          QStringLiteral("next7days")},
+      {eMyMoney::TransactionFilter::Date::Next30Days,         QStringLiteral("next30days")},
+      {eMyMoney::TransactionFilter::Date::Next3Months,        QStringLiteral("next3months")},
+      {eMyMoney::TransactionFilter::Date::Next6Months,        QStringLiteral("next6months")},
+      {eMyMoney::TransactionFilter::Date::Next12Months,       QStringLiteral("next12months")},
+      {eMyMoney::TransactionFilter::Date::UserDefined,        QStringLiteral("userdefined")},
+      {eMyMoney::TransactionFilter::Date::Last3ToNext3Months, QStringLiteral("last3tonext3months")},
+      {eMyMoney::TransactionFilter::Date::Last11Months,       QStringLiteral("last11Months")},
+      {eMyMoney::TransactionFilter::Date::CurrentQuarter,     QStringLiteral("currentQuarter")},
+      {eMyMoney::TransactionFilter::Date::LastQuarter,        QStringLiteral("lastQuarter")},
+      {eMyMoney::TransactionFilter::Date::NextQuarter,        QStringLiteral("nextQuarter")},
+      {eMyMoney::TransactionFilter::Date::CurrentFiscalYear,  QStringLiteral("currentFiscalYear")},
+      {eMyMoney::TransactionFilter::Date::LastFiscalYear,     QStringLiteral("lastFiscalYear")},
+      {eMyMoney::TransactionFilter::Date::Today,              QStringLiteral("today")},
+      {eMyMoney::TransactionFilter::Date::Next18Months,       QStringLiteral("next18months")}
     };
     return lut;
   }
 
-  QString dateLockAttributeToString(int textID)
+  QString dateLockAttributeToString(eMyMoney::TransactionFilter::Date textID)
   {
     return dateLockLUT().value(textID);
   }
 
-  int stringToDateLockAttribute(const QString &text)
+  eMyMoney::TransactionFilter::Date stringToDateLockAttribute(const QString &text)
   {
-    return dateLockLUT().key(text, 0);
+    return dateLockLUT().key(text, eMyMoney::TransactionFilter::Date::UserDefined);
   }
 
   QHash<eMyMoney::Report::DataLock, QString> dataLockLUT()
@@ -485,39 +485,38 @@ namespace MyMoneyXmlContentHandler2 {
     return dataLockLUT().key(text, eMyMoney::Report::DataLock::DataOptionCount);
   }
 
-  QHash<int, QString> accountTypeAttributeLUT()
+  QHash<eMyMoney::Account::Type, QString> accountTypeAttributeLUT()
   {
-    static const QHash<int, QString> lut {
-      {0, QStringLiteral("unknown")},
-      {1, QStringLiteral("checkings")},
-      {2, QStringLiteral("savings")},
-      {3, QStringLiteral("cash")},
-      {4, QStringLiteral("creditcard")},
-      {5, QStringLiteral("loan")},
-      {6, QStringLiteral("certificatedep")},
-      {7, QStringLiteral("investment")},
-      {8, QStringLiteral("moneymarket")},
-      {10, QStringLiteral("asset")},
-      {11, QStringLiteral("liability")},
-      {12, QStringLiteral("currency")},
-      {13, QStringLiteral("income")},
-      {14, QStringLiteral("expense")},
-      {15, QStringLiteral("assetloan")},
-      {16, QStringLiteral("stock")},
-      {17, QStringLiteral("equity")},
-      {18, QStringLiteral("invalid")}
+    static const QHash<eMyMoney::Account::Type, QString> lut {
+      {eMyMoney::Account::Type::Unknown,        QStringLiteral("unknown")},
+      {eMyMoney::Account::Type::Checkings,      QStringLiteral("checkings")},
+      {eMyMoney::Account::Type::Savings,        QStringLiteral("savings")},
+      {eMyMoney::Account::Type::Cash,           QStringLiteral("cash")},
+      {eMyMoney::Account::Type::CreditCard,     QStringLiteral("creditcard")},
+      {eMyMoney::Account::Type::Loan,           QStringLiteral("loan")},
+      {eMyMoney::Account::Type::CertificateDep, QStringLiteral("certificatedep")},
+      {eMyMoney::Account::Type::Investment,     QStringLiteral("investment")},
+      {eMyMoney::Account::Type::MoneyMarket,    QStringLiteral("moneymarket")},
+      {eMyMoney::Account::Type::Asset,          QStringLiteral("asset")},
+      {eMyMoney::Account::Type::Liability,      QStringLiteral("liability")},
+      {eMyMoney::Account::Type::Currency,       QStringLiteral("currency")},
+      {eMyMoney::Account::Type::Income,         QStringLiteral("income")},
+      {eMyMoney::Account::Type::Expense,        QStringLiteral("expense")},
+      {eMyMoney::Account::Type::AssetLoan,      QStringLiteral("assetloan")},
+      {eMyMoney::Account::Type::Stock,          QStringLiteral("stock")},
+      {eMyMoney::Account::Type::Equity,         QStringLiteral("equity")},
     };
     return lut;
   }
 
-  QString accountTypeAttributeToString(int textID)
+  QString accountTypeAttributeToString(eMyMoney::Account::Type type)
   {
-    return accountTypeAttributeLUT().value(textID);
+    return accountTypeAttributeLUT().value(type);
   }
 
-  int stringToAccountTypeAttribute(const QString &text)
+  eMyMoney::Account::Type stringToAccountTypeAttribute(const QString &text)
   {
-    return accountTypeAttributeLUT().key(text, 0);
+    return accountTypeAttributeLUT().key(text, eMyMoney::Account::Type::Unknown);
   }
 
   eMyMoney::Report::ReportType rowTypeToReportType(eMyMoney::Report::RowType rowType)
@@ -628,13 +627,11 @@ namespace MyMoneyXmlContentHandler2 {
       // Handle the pivot 1.2/query 1.1 case where the values were saved as
       // numbers
       bool ok = false;
-      int i = datelockstr.toUInt(&ok);
+      eMyMoney::TransactionFilter::Date dateLock = static_cast<eMyMoney::TransactionFilter::Date>(datelockstr.toUInt(&ok));
       if (!ok) {
-        i = stringToDateLockAttribute(datelockstr);
-        if (i == -1)
-          i = (int)eMyMoney::TransactionFilter::Date::UserDefined;
+        dateLock = stringToDateLockAttribute(datelockstr);
       }
-      report.setDateFilter(static_cast<eMyMoney::TransactionFilter::Date>(i));
+      report.setDateFilter(dateLock);
 
       // read general tab
       report.setName(node.attribute(attributeName(Attribute::Report::Name)));
@@ -642,6 +639,7 @@ namespace MyMoneyXmlContentHandler2 {
       report.setConvertCurrency(node.attribute(attributeName(Attribute::Report::ConvertCurrency), "1").toUInt());
       report.setFavorite(node.attribute(attributeName(Attribute::Report::Favorite), "0").toUInt());
       report.setSkipZero(node.attribute(attributeName(Attribute::Report::SkipZero), "0").toUInt());
+      const auto rowTypeFromXML = stringToRowType(node.attribute(attributeName(Attribute::Report::RowType)));
 
       if (report.reportType() == eMyMoney::Report::ReportType::PivotTable) {
         // read report's internals
@@ -656,7 +654,6 @@ namespace MyMoneyXmlContentHandler2 {
         if (node.hasAttribute(attributeName(Attribute::Report::Budget)))
           report.setBudget(node.attribute(attributeName(Attribute::Report::Budget)));
 
-        const auto rowTypeFromXML = stringToRowType(node.attribute(attributeName(Attribute::Report::RowType)));
         if (rowTypeFromXML != eMyMoney::Report::RowType::Invalid)
           report.setRowType(rowTypeFromXML);
         else
@@ -696,7 +693,7 @@ namespace MyMoneyXmlContentHandler2 {
         report.setChartByDefault(node.attribute(attributeName(Attribute::Report::ChartByDefault), "0").toUInt());
         report.setLogYAxis(node.attribute(attributeName(Attribute::Report::LogYAxis), "0").toUInt());
         report.setNegExpenses(node.attribute(attributeName(Attribute::Report::NegExpenses), "0").toUInt());
-        report.setChartLineWidth(node.attribute(attributeName(Attribute::Report::ChartLineWidth), QString(MyMoneyReport::m_lineWidth)).toUInt());
+        report.setChartLineWidth(node.attribute(attributeName(Attribute::Report::ChartLineWidth), QString(MyMoneyReport::lineWidth())).toUInt());
 
         // read range tab
         const auto columnTypeFromXML = stringToColumnType(node.attribute(attributeName(Attribute::Report::ColumnType)));
@@ -718,7 +715,6 @@ namespace MyMoneyXmlContentHandler2 {
         report.setYLabelsPrecision(node.attribute(attributeName(Attribute::Report::YLabelsPrecision), "2").toUInt());
       } else if (report.reportType() == eMyMoney::Report::ReportType::QueryTable) {
         // read rows/columns tab
-        const auto rowTypeFromXML = stringToRowType(node.attribute(attributeName(Attribute::Report::RowType)));
         if (rowTypeFromXML != eMyMoney::Report::RowType::Invalid)
           report.setRowType(rowTypeFromXML);
         else
@@ -728,7 +724,6 @@ namespace MyMoneyXmlContentHandler2 {
         QStringList columns = node.attribute(attributeName(Attribute::Report::QueryColumns), "none").split(',');
         foreach (const auto column, columns) {
           const int queryColumnFromXML = stringToQueryColumn(column);
-          i = stringToQueryColumn(column);
           if (queryColumnFromXML != eMyMoney::Report::QueryColumn::End)
             qc |= queryColumnFromXML;
         }
@@ -759,6 +754,11 @@ namespace MyMoneyXmlContentHandler2 {
           }
         }
       } else if (report.reportType() == eMyMoney::Report::ReportType::InfoTable) {
+        if (rowTypeFromXML != eMyMoney::Report::RowType::Invalid)
+          report.setRowType(rowTypeFromXML);
+        else
+          report.setRowType(eMyMoney::Report::RowType::AccountInfo);
+
         if (node.hasAttribute(attributeName(Attribute::Report::ShowRowTotals)))
           report.setShowingRowTotals(node.attribute(attributeName(Attribute::Report::ShowRowTotals)).toUInt());
         else
@@ -777,14 +777,14 @@ namespace MyMoneyXmlContentHandler2 {
                         c.attribute(attributeName(Attribute::Report::InvertText), "0").toUInt());
         }
         if (elementName(Element::Report::Type) == c.tagName() && c.hasAttribute(attributeName(Attribute::Report::Type))) {
-          i = stringToTypeAttribute(c.attribute(attributeName(Attribute::Report::Type)));
-          if (i != -1)
-            report.addType(i);
+          const auto reportType = stringToTypeAttribute(c.attribute(attributeName(Attribute::Report::Type)));
+          if (reportType != -1)
+            report.addType(reportType);
         }
         if (elementName(Element::Report::State) == c.tagName() && c.hasAttribute(attributeName(Attribute::Report::State))) {
-          i = stringToStateAttribute(c.attribute(attributeName(Attribute::Report::State)));
-          if (i != -1)
-            report.addState(i);
+          const auto state = stringToStateAttribute(c.attribute(attributeName(Attribute::Report::State)));
+          if (state != -1)
+            report.addState(state);
         }
         if (elementName(Element::Report::Number) == c.tagName())
           report.setNumberFilter(c.attribute(attributeName(Attribute::Report::From)), c.attribute(attributeName(Attribute::Report::To)));
@@ -806,11 +806,17 @@ namespace MyMoneyXmlContentHandler2 {
           report.addCategory(c.attribute(attributeName(Attribute::Report::ID)));
         if (elementName(Element::Report::Account) == c.tagName() && c.hasAttribute(attributeName(Attribute::Report::ID)))
           report.addAccount(c.attribute(attributeName(Attribute::Report::ID)));
+#if 0
+        // account groups had a severe problem in versions 5.0.0 to 5.0.2.  Therefor, we don't read them
+        // in anymore and rebuild them internally. They are written to the file nevertheless to maintain
+        // compatibility to older versions which rely on them. I left the old code for reference here
+        // ipwizard - 2019-01-13
         if (elementName(Element::Report::AccountGroup) == c.tagName() && c.hasAttribute(attributeName(Attribute::Report::Group))) {
-          i = stringToAccountTypeAttribute(c.attribute(attributeName(Attribute::Report::Group)));
-          if (i != -1)
-            report.addAccountGroup(static_cast<eMyMoney::Account::Type>(i));
+          const auto groupType = stringToAccountTypeAttribute(c.attribute(attributeName(Attribute::Report::Group)));
+          if (groupType != eMyMoney::Account::Type::Unknown)
+            report.addAccountGroup(groupType);
         }
+#endif
         child = child.nextSibling();
       }
 
@@ -850,7 +856,8 @@ namespace MyMoneyXmlContentHandler2 {
       el.setAttribute(attributeName(Attribute::Report::Favorite), report.isFavorite());
       el.setAttribute(attributeName(Attribute::Report::SkipZero), report.isSkippingZero());
 
-      el.setAttribute(attributeName(Attribute::Report::DateLock), dateLockAttributeToString(static_cast<int>(report.dateRange())));
+      el.setAttribute(attributeName(Attribute::Report::DateLock), dateLockAttributeToString(report.dateRange()));
+      el.setAttribute(attributeName(Attribute::Report::RowType), reportNames(report.rowType()));
 
       if (report.reportType() == eMyMoney::Report::ReportType::PivotTable) {
         // write report's internals
@@ -865,7 +872,6 @@ namespace MyMoneyXmlContentHandler2 {
         if (!report.budget().isEmpty())
           el.setAttribute(attributeName(Attribute::Report::Budget), report.budget());
 
-        el.setAttribute(attributeName(Attribute::Report::RowType), reportNames(report.rowType()));
         el.setAttribute(attributeName(Attribute::Report::ShowRowTotals), report.isShowingRowTotals());
         el.setAttribute(attributeName(Attribute::Report::ShowColumnTotals), report.isShowingColumnTotals());
         el.setAttribute(attributeName(Attribute::Report::Detail), reportNames(report.detailLevel()));
@@ -893,9 +899,9 @@ namespace MyMoneyXmlContentHandler2 {
         el.setAttribute(attributeName(Attribute::Report::DataMajorTick), report.dataMajorTick());
         el.setAttribute(attributeName(Attribute::Report::DataMinorTick), report.dataMinorTick());
         el.setAttribute(attributeName(Attribute::Report::YLabelsPrecision), report.yLabelsPrecision());
+
       } else if (report.reportType() == eMyMoney::Report::ReportType::QueryTable) {
         // write rows/columns tab
-        el.setAttribute(attributeName(Attribute::Report::RowType), reportNames(report.rowType()));
         QStringList columns;
         unsigned qc = report.queryColumns();
         unsigned it_qc = eMyMoney::Report::QueryColumn::Begin;
@@ -1050,7 +1056,7 @@ namespace MyMoneyXmlContentHandler2 {
         QList<eMyMoney::Account::Type>::const_iterator it_group = accountgrouplist.constBegin();
         while (it_group != accountgrouplist.constEnd()) {
           QDomElement p = document.createElement(elementName(Element::Report::AccountGroup));
-          p.setAttribute(attributeName(Attribute::Report::Group), accountTypeAttributeToString(static_cast<int>(*it_group)));
+          p.setAttribute(attributeName(Attribute::Report::Group), accountTypeAttributeToString(*it_group));
           el.appendChild(p);
 
           ++it_group;
