@@ -68,9 +68,9 @@ find_package(KF5 5.2 REQUIRED
   COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet IconThemes XmlGui TextWidgets Notifications KIO
   OPTIONAL_COMPONENTS ${OPT_KF5_COMPONENTS}
 )
-find_package(LibAlkimia5 8.0.0)
+find_package(LibAlkimia5 8.0)
 if (NOT LibAlkimia5_FOUND)
-  find_package(LibAlkimia5 7.0.0 REQUIRED)
+  find_package(LibAlkimia5 7.0 REQUIRED)
 endif()
 # Recent changes to LibAlkimia should allow us to remove this construct
 #if(CMAKE_SYSTEM_NAME MATCHES "Windows")
