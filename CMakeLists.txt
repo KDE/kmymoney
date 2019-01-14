@@ -68,8 +68,16 @@ find_package(KF5 5.2 REQUIRED
   COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet IconThemes XmlGui TextWidgets Notifications KIO
   OPTIONAL_COMPONENTS ${OPT_KF5_COMPONENTS}
 )
+
+if(LibAlkimia5_DIR)
+  set(_LibAlkimia5_DIR ${LibAlkimia5_DIR})
+endif()
 find_package(LibAlkimia5 8.0)
 if (NOT LibAlkimia5_FOUND)
+  # restore LibAlkimia5_DIR set to NOTFOUND by first find_package call
+  if(_LibAlkimia5_DIR)
+    set(LibAlkimia5_DIR ${_LibAlkimia5_DIR})
+  endif()
   find_package(LibAlkimia5 7.0 REQUIRED)
 endif()
 # Recent changes to LibAlkimia should allow us to remove this construct
