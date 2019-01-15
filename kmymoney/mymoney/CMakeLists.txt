@@ -66,7 +66,6 @@ target_link_libraries(kmm_mymoney LINK_PUBLIC
                       LINK_PRIVATE
                       kmm_payeeidentifier_loader
                       kmm_payeeidentifier
-                      payeeidentifier_iban_bic
                       payeeidentifier_nationalAccount
                       kmm_settings
                       onlinetask_unavailabletask
