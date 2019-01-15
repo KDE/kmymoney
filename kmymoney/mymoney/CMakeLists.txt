@@ -70,6 +70,9 @@ target_link_libraries(kmm_mymoney LINK_PUBLIC
                       kmm_settings
                       onlinetask_unavailabletask
 )
+if(NOT WIN32)
+  target_link_libraries(kmm_mymoney LINK_PUBLIC kmm_payeeidentifier_loader)
+endif()
 
 set_target_properties(kmm_mymoney PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 
