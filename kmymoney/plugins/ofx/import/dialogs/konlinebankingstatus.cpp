@@ -104,6 +104,12 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
   m_specificDate->setMaximumDate(QDate::currentDate());
   m_preferredPayee->setCurrentIndex(settings.value("kmmofx-preferName").toInt());
 
+  const int offset = settings.value("kmmofx-timestampOffset").toInt();
+  m_timestampOffsetSign->setCurrentIndex(offset < 0 ? 1 : 0);
+  QTime time;
+  time.setHMS(qAbs(offset) / 60, qAbs(offset) % 60,0);
+  m_timestampOffset->setTime(time);
+
   QString key = OFX_PASSWORD_KEY(settings.value("url"), settings.value("uniqueId"));
   QString pwd;
 

@@ -23,3 +23,6 @@
 #cmakedefine KMM_DESIGNER 1
 
 #cmakedefine HAVE_KDEPIMLIBS 1
+
+/* for KF5 compatibility */
+#define QStringLiteral QLatin1String

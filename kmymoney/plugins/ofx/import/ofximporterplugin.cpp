@@ -57,7 +57,7 @@ class OfxImporterPlugin::Private
 {
 public:
   Private() : m_valid(false), m_preferName(PreferId), m_walletIsOpen(false), m_statusDlg(0), m_wallet(0),
-              m_updateStartDate(QDate(1900,1,1)) {}
+              m_updateStartDate(QDate(1900,1,1)), m_timestampOffset(0) {}
 
   bool m_valid;
   enum NamePreference {
@@ -75,6 +75,7 @@ public:
   KOnlineBankingStatus* m_statusDlg;
   Wallet *m_wallet;
   QDate m_updateStartDate;
+  int m_timestampOffset;
 };
 
 
@@ -248,11 +249,11 @@ int OfxImporterPlugin::ofxTransactionCallback(struct OfxTransactionData data, vo
 
   if (data.date_posted_valid) {
     QDateTime dt;
-    dt.setTime_t(data.date_posted);
+    dt.setTime_t(data.date_posted - pofx->d->m_timestampOffset * 60);
     t.m_datePosted = dt.date();
   } else if (data.date_initiated_valid) {
     QDateTime dt;
-    dt.setTime_t(data.date_initiated);
+    dt.setTime_t(data.date_initiated - pofx->d->m_timestampOffset * 60);
     t.m_datePosted = dt.date();
   }
   if (t.m_datePosted.isValid()) {
@@ -480,13 +481,13 @@ int OfxImporterPlugin::ofxStatementCallback(struct OfxStatementData data, void* 
 
   if (data.date_start_valid) {
     QDateTime dt;
-    dt.setTime_t(data.date_start);
+    dt.setTime_t(data.date_start - pofx->d->m_timestampOffset * 60);
     s.m_dateBegin = dt.date();
   }
 
   if (data.date_end_valid) {
     QDateTime dt;
-    dt.setTime_t(data.date_end);
+    dt.setTime_t(data.date_end - pofx->d->m_timestampOffset * 60);
     s.m_dateEnd = dt.date();
   }
 
@@ -688,6 +689,16 @@ MyMoneyKeyValueContainer OfxImporterPlugin::onlineBankingSettings(const MyMoneyK
       kvp.setValue("clientUid", d->m_statusDlg->m_clientUidEdit->text());
     else
       kvp.deletePair("clientUid");
+    if (d->m_statusDlg->m_timestampOffset->time().msecsTo(QTime()) == 0) {
+      kvp.deletePair(QStringLiteral("kmmofx-timestampOffset"));
+    } else {
+      // get offset in minutes
+      int offset = d->m_statusDlg->m_timestampOffset->time().msecsTo(QTime()) / 1000 / 60;
+      if (d->m_statusDlg->m_timestampOffsetSign->currentText() == QStringLiteral("-")) {
+        offset = -offset;
+      }
+      kvp.setValue(QStringLiteral("kmmofx-timestampOffset"), QString::number(offset));
+    }
     // TODO get rid of pre 4.6 values
     // kvp.deletePair("kmmofx-preferPayeeid");
   }
@@ -744,6 +755,7 @@ bool OfxImporterPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccoun
           d->m_updateStartDate = QDate::currentDate().addMonths(-2);
         }
       }
+      d->m_timestampOffset = settings.value("kmmofx-timestampOffset").toInt();
       //kDebug(0) << "ofx plugin: account" << acc.name() << "earliest transaction date to process =" << qPrintable(d->m_updateStartDate.toString(Qt::ISODate));
 
       if (dlg->init())
@@ -752,7 +764,7 @@ bool OfxImporterPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccoun
 
       // reset the earliest-interesting-transaction date to the non-specific account setting
       d->m_updateStartDate = QDate(1900,1,1);
-
+      d->m_timestampOffset = 0;
     }
   } catch (const MyMoneyException &e) {
     KMessageBox::information(0 , i18n("Error connecting to bank: %1", e.what()));
