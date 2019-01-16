@@ -9,7 +9,7 @@ add_subdirectory( csvimport )
 add_subdirectory( csvexport )
 
 if(LIBOFX_FOUND)
-  add_subdirectory( ofximport )
+  add_subdirectory( ofx/import )
 endif(LIBOFX_FOUND)
 
 if (LIBICAL_FOUND)
