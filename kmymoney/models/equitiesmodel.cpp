@@ -96,6 +96,13 @@ public:
     if (account.accountType() == eMyMoney::Account::Type::Investment)  // investments accounts are not meant to be displayed, so stop here
       return;
 
+    // Display the name of the equity with strikeout font in case it is closed
+    auto font = cell->data(Qt::FontRole).value<QFont>();
+    if (account.isClosed() != font.strikeOut()) {
+      font.setStrikeOut(account.isClosed());
+      cell->setData(font, Qt::FontRole);
+    }
+
     // Symbol
     if (columns.contains(Column::Symbol)) {
       colNum = m_columns.indexOf(Column::Symbol);
