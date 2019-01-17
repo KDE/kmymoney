@@ -358,9 +358,11 @@ void QueryTable::constructTotalRows()
                 totalsRow[subtotal] = helperROI((*currencyGrp).at(i + 1).value(ctBuys) - (*currencyGrp).at(i + 1).value(ctReinvestIncome), (*currencyGrp).at(i + 1).value(ctSells),
                                                 (*currencyGrp).at(i + 1).value(ctStartingBalance), (*currencyGrp).at(i + 1).value(ctEndingBalance) + (*currencyGrp).at(i + 1).value(ctMarketValue),
                                                 (*currencyGrp).at(i + 1).value(ctCashIncome));
-              else if (subtotal == ctPercentageGain)
-                totalsRow[subtotal] = (((*currencyGrp).at(i + 1).value(ctBuys) + (*currencyGrp).at(i + 1).value(ctMarketValue)) / (*currencyGrp).at(i + 1).value(ctBuys).abs()).toString();
-              else if (subtotal == ctPrice)
+              else if (subtotal == ctPercentageGain) {
+                const MyMoneyMoney denominator = (*currencyGrp).at(i + 1).value(ctBuys).abs();
+                totalsRow[subtotal] = denominator.isZero() ? QString():
+                    (((*currencyGrp).at(i + 1).value(ctBuys) + (*currencyGrp).at(i + 1).value(ctMarketValue)) / denominator).toString();
+              } else if (subtotal == ctPrice)
                 totalsRow[subtotal] = MyMoneyMoney((*currencyGrp).at(i + 1).value(ctPrice) / (*currencyGrp).at(i + 1).value(ctRowsCount)).toString();
             }
 
@@ -1057,7 +1059,7 @@ void QueryTable::constructTransactionTable()
 QString QueryTable::helperROI(const MyMoneyMoney &buys, const MyMoneyMoney &sells, const MyMoneyMoney &startingBal, const MyMoneyMoney &endingBal, const MyMoneyMoney &cashIncome) const
 {
   MyMoneyMoney returnInvestment;
-  if (!buys.isZero() || !startingBal.isZero()) {
+  if (!(startingBal - buys).isZero()) {
     returnInvestment = (sells + buys + cashIncome + endingBal - startingBal) / (startingBal - buys);
     return returnInvestment.convert(10000).toString();
   } else
@@ -1456,7 +1458,8 @@ void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow&
     result[ctLastPrice] = price.toString();
     result[ctMarketValue] = endingBal.toString();
     result[ctCapitalGain] = (buysTotal + endingBal).toString();
-    result[ctPercentageGain] = ((buysTotal + endingBal)/buysTotal.abs()).toString();
+    result[ctPercentageGain] = buysTotal.isZero() ? QString() :
+        ((buysTotal + endingBal)/buysTotal.abs()).toString();
     break;
   }
   case eMyMoney::Report::InvestmentSum::Sold:

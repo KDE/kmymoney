@@ -975,3 +975,31 @@ void QueryTableTest::testTaxReport()
     QFAIL(e.what());
   }
 }
+
+class QueryTableProtectedTester : QueryTable {
+public:
+  QueryTableProtectedTester(): QueryTable(MyMoneyReport(eMyMoney::Report::RowType::Account,
+      static_cast<unsigned>(eMyMoney::Report::ColumnType::Months),
+      eMyMoney::TransactionFilter::Date::YearToDate,
+      eMyMoney::Report::DetailLevel::Top,
+      "Yearly Budgeted vs. Actual", "Default Report")) {}
+
+  void testHelperROI() {
+    // (10 + 50 - 110 + 60 + 70) / (110 - 10)
+    QString result1 = helperROI(MyMoneyMoney(10), MyMoneyMoney(50), MyMoneyMoney(110), MyMoneyMoney(60), MyMoneyMoney(70));
+    QVERIFY(MyMoneyMoney(result1) == MyMoneyMoney(80, 100));
+
+    // (110 + 50 - 110 + 60 + 70) / (110 - 110)
+    QString result2 = helperROI(MyMoneyMoney(110), MyMoneyMoney(50), MyMoneyMoney(110), MyMoneyMoney(60), MyMoneyMoney(70));
+    QVERIFY(result2 == "");
+  }
+};
+
+void QueryTableTest::testProtectedMethods()
+{
+  try {
+    QueryTableProtectedTester().testHelperROI();
+  } catch (const MyMoneyException &e) {
+    QFAIL(e.what());
+  }
+}
