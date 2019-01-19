@@ -65,7 +65,7 @@ public:
                            const QString& name,
                            const QString& symbol = QString(),
                            const int smallestCashFraction = 100,
-                           const int smallestAccountFraction = 100,
+                           const int smallestAccountFraction = 0,
                            const int pricePrecision = 4);
 
   MyMoneySecurity(const QString& id,
