@@ -1087,18 +1087,21 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
   MyMoneySplit assetAccountSplit;
   QList<MyMoneySplit> feeSplits;
   QList<MyMoneySplit> interestSplits;
-  MyMoneySecurity security, currency;
+  MyMoneySecurity security;
+  MyMoneySecurity currency = file->security(t.commodity());
   eMyMoney::Split::InvestmentTransactionType transactionType;
 
-  // extract the splits from the original transaction
-  KMyMoneyUtils::dissectTransaction(torig, sorig,
+  // extract the splits from the original transaction, but only
+  // if there is one because otherwise the currency is overridden
+  if (t.commodity().isEmpty()) {
+    KMyMoneyUtils::dissectTransaction(torig, sorig,
                      assetAccountSplit,
                      feeSplits,
                      interestSplits,
                      security,
                      currency,
                      transactionType);
-
+  }
   // check if the trading currency is the same if the security has changed
   // in case it differs, check that we have a price (request from user)
   // and convert all splits
