@@ -883,7 +883,6 @@ public:
 
   bool clearTable(const QString& tableName, QSqlQuery& query)
   {
-    Q_Q(MyMoneyStorageSql);
     if (query.exec(QString("SELECT count(*) FROM %1").arg(tableName))) {
       if (query.next()) {
         if (query.value(0).toUInt() > 0) {

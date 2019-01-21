@@ -77,7 +77,6 @@ namespace NewUserWizard
 
   void GeneralPage::enterPage()
   {
-    Q_D(GeneralPage);
     ui->m_userNameEdit->setFocus();
   }
 
