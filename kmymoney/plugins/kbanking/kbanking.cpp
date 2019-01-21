@@ -222,8 +222,6 @@ void KBanking::plug()
       setXMLFile(rcFileName);
 #endif
 
-      qDebug("Plugins: kbanking plugged");
-
       // get certificate handling and dialog settings management
       AB_Gui_Extend(gui->getCInterface(), m_kbanking->getCInterface());
 

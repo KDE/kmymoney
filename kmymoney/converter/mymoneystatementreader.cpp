@@ -1137,30 +1137,34 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           MyMoneyTransaction t_old = list.last();
 
           // if there is more than one matching transaction, try to be a little
-          // smart about which one we take.  for now, we'll see if there's one
-          // with the same VALUE as our imported transaction, and if so take that one.
+          // smart about which one we use.  we scan them all and check if
+          // we find an exact match or use the one with the closest value
+
           if (list.count() > 1) {
             QList<MyMoneyTransaction>::ConstIterator it_trans = list.constEnd();
-            if (it_trans != list.constBegin())
+            MyMoneyMoney minDiff;
+            do {
               --it_trans;
-            while (it_trans != list.constBegin()) {
               MyMoneySplit s = (*it_trans).splitByAccount(thisaccount.id());
               if (s.value() == s1.value()) {
+                // in case of an exact match, we won't get better and we can stop.
                 // keep searching if this transaction references a closed account
                 if (!MyMoneyFile::instance()->referencesClosedAccount(*it_trans)) {
                   t_old = *it_trans;
                   break;
                 }
+              } else {
+                MyMoneyMoney newDiff = (s.value() - s1.value()).abs();
+                if (newDiff < minDiff || minDiff.isZero()) {
+                  // keep it if it matches better than the current match
+                  // but only if it does not reference a closed account
+                  if (!MyMoneyFile::instance()->referencesClosedAccount(*it_trans)) {
+                    minDiff = newDiff;
+                    t_old = *it_trans;
+                  }
+                }
               }
-              --it_trans;
-            }
-            // check constBegin, just in case
-            if (it_trans == list.constBegin()) {
-              MyMoneySplit s = (*it_trans).splitByAccount(thisaccount.id());
-              if (s.value() == s1.value()) {
-                t_old = *it_trans;
-              }
-            }
+            } while (it_trans != list.constBegin());
           }
 
           // Only copy the splits if the transaction found does not reference a closed account

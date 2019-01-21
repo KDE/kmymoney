@@ -19,6 +19,7 @@
 // QT Includes
 
 #include <QMap>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -65,9 +66,12 @@ namespace KMyMoneyPlugin
 
     for (const KPluginMetaData& pluginData : pluginDatas) {
       if (pluginData.serviceTypes().contains(QStringLiteral("KMyMoney/Plugin"))) {
-        if (!onlyEnabled ||
-            (onlyEnabled && isPluginEnabled(pluginData, pluginSection))) {
-          plugins.insert(pluginData.pluginId(), pluginData);
+        if (!onlyEnabled || isPluginEnabled(pluginData, pluginSection)) {
+          // only use the first one found. Otherwise, always the last one
+          // wins (usually the installed system version) and the QT_PLUGIN_PATH
+          // env variable nor the current directory have an effect for KMyMoney
+          if (!plugins.contains(pluginData.pluginId()))
+            plugins.insert(pluginData.pluginId(), pluginData);
         }
       }
     }
@@ -76,6 +80,14 @@ namespace KMyMoneyPlugin
 
   void pluginHandling(Action action, Container& ctnPlugins, QObject* parent, KXMLGUIFactory* guiFactory)
   {
+
+    if (action == Action::Load ||
+        action == Action::Reorganize) {
+      KPluginLoader::forEachPlugin(QStringLiteral("kmymoney"), [&](const QString &pluginPath) {
+          KPluginMetaData metadata(pluginPath);
+          qDebug() << "Located plugin" << pluginPath << "Validity" << metadata.isValid();
+      });
+    }
 
     QMap<QString, KPluginMetaData> referencePluginDatas;
     if (action == Action::Load ||
@@ -112,7 +124,7 @@ namespace KMyMoneyPlugin
       auto& refPlugins = referencePluginDatas;
       for (auto it = refPlugins.cbegin(); it != refPlugins.cend(); ++it) {
         if (!ctnPlugins.standard.contains(it.key())) {
-
+          qDebug() << "Loading" << (*it).fileName();
           KPluginLoader loader((*it).fileName());
           auto factory = loader.factory();
           if (!factory) {
