@@ -197,20 +197,24 @@ QString extractNodeText(QDomDocument& doc, const QString& name)
   return res;
 }
 
-OfxFiServiceInfo ServiceInfo(const QString& fipid)
+OfxHomeServiceInfo ServiceInfo(const QString& fipid)
 {
-  OfxFiServiceInfo result;
-  memset(&result, 0, sizeof(OfxFiServiceInfo));
+  OfxHomeServiceInfo result;
+  memset(&result.ofxInfo, 0, sizeof(result.ofxInfo));
+  result.ofxValidated = true;
+  result.sslValidated = true;
+  result.lastOfxValidated = QDate::currentDate().toString();
+  result.lastSslValidated = result.lastOfxValidated;
 
   // Hard-coded values for Innovision test server
   if (fipid == "1") {
-    strncpy(result.fid, "00000", OFX_FID_LENGTH - 1);
-    strncpy(result.org, "ReferenceFI", OFX_ORG_LENGTH - 1);
-    strncpy(result.url, "http://ofx.innovision.com", OFX_URL_LENGTH - 1);
-    result.accountlist = 1;
-    result.statements = 1;
-    result.billpay = 1;
-    result.investments = 1;
+    strncpy(result.ofxInfo.fid, "00000", OFX_FID_LENGTH - 1);
+    strncpy(result.ofxInfo.org, "ReferenceFI", OFX_ORG_LENGTH - 1);
+    strncpy(result.ofxInfo.url, "http://ofx.innovision.com", OFX_URL_LENGTH - 1);
+    result.ofxInfo.accountlist = 1;
+    result.ofxInfo.statements = 1;
+    result.ofxInfo.billpay = 1;
+    result.ofxInfo.investments = 1;
 
     return result;
   }
@@ -232,21 +236,31 @@ OfxFiServiceInfo ServiceInfo(const QString& fipid)
     int errl, errc;
     QDomDocument doc;
     if (doc.setContent(stream.readAll(), &msg, &errl, &errc)) {
-      QString fid = extractNodeText(doc, "institution/fid");
-      QString org = extractNodeText(doc, "institution/org");
-      QString url = extractNodeText(doc, "institution/url");
-      strncpy(result.fid, fid.toLatin1(), OFX_FID_LENGTH - 1);
-      strncpy(result.org, org.toLatin1(), OFX_ORG_LENGTH - 1);
-      strncpy(result.url, url.toLatin1(), OFX_URL_LENGTH - 1);
+      const auto fid = extractNodeText(doc, "institution/fid");
+      const auto org = extractNodeText(doc, "institution/org");
+      const auto url = extractNodeText(doc, "institution/url");
+      result.ofxValidated = (extractNodeText(doc, "institution/ofxfail").toUInt() == 0);
+      result.sslValidated = (extractNodeText(doc, "institution/sslfail").toUInt() == 0);
+      result.lastOfxValidated = extractNodeText(doc, "institution/lastofxvalidation");
+      result.lastSslValidated = extractNodeText(doc, "institution/lastsslvalidation");
 
-      result.accountlist = true;
-      result.statements = true;
-      result.billpay = false;
-      result.investments = true;
+      strncpy(result.ofxInfo.fid, fid.toLatin1(), OFX_FID_LENGTH - 1);
+      strncpy(result.ofxInfo.org, org.toLatin1(), OFX_ORG_LENGTH - 1);
+      strncpy(result.ofxInfo.url, url.toLatin1(), OFX_URL_LENGTH - 1);
+
+      result.ofxInfo.accountlist = true;
+      result.ofxInfo.statements = true;
+      result.ofxInfo.billpay = false;
+      result.ofxInfo.investments = true;
     }
   }
   else
   {
+    memset(&result.ofxInfo, 0, sizeof(result.ofxInfo));
+    result.ofxValidated = false;
+    result.sslValidated = false;
+    result.lastOfxValidated.clear();
+    result.lastSslValidated.clear();
     qDebug() << "OFX ServiceInfo:" << f.errorString();
   }
   return result;
