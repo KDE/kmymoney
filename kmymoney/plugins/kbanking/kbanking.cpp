@@ -204,7 +204,6 @@ void KBanking::plug()
       // Tell the host application to load my GUI component
       setComponentName("kbanking", "KBanking");
       setXMLFile("kbanking.rc");
-      qDebug("Plugins: kbanking pluged");
 
       // get certificate handling and dialog settings management
       AB_Gui_Extend(gui->getCInterface(), m_kbanking->getCInterface());
