@@ -884,10 +884,11 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
     QString intermediateDateString = QLocale().toString(intermediateDate, QLocale::ShortFormat);
     QString closingDateString = QLocale().toString(closingDate, QLocale::ShortFormat);
     // check the opening and closing balances
+
     QVERIFY(html.indexOf(openingDateString + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Opening Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>USD&nbsp;0.00</td></tr>") > 0);
     QVERIFY(html.indexOf(closingDateString + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Closing Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>USD&nbsp;304.00</td></tr>") > 0);
     QVERIFY(html.indexOf(closingDateString + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Closing Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>USD&nbsp;-300.00</td></tr>") > 0);
-    QVERIFY(html.indexOf(closingDateString + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Closing Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>JPY&nbsp;-400.00</td></tr>") > 0);
+    QVERIFY(html.indexOf(closingDateString + "</td><td class=\"left0\"></td><td class=\"left0\">" + i18n("Closing Balance") + "</td><td class=\"left0\"></td><td class=\"value\"></td><td>JPY&nbsp;-400</td></tr>") > 0);
 
     // after a transfer of 100 JPY the balance should be 1.00 - price is 0.010 (precision of 2)
     QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000001>" + openingDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Transfer from Japanese Checking</td><td class=\"value\">USD&nbsp;1.00</td><td>USD&nbsp;1.00</td></tr>") > 0);
@@ -908,7 +909,7 @@ void QueryTableTest::testBalanceColumnWithMultipleCurrencies()
     QVERIFY(html.indexOf("<a href=ledger?id=A000001&tid=T000000000000000006>" + closingDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Transfer from Credit Card</td><td class=\"value\">USD&nbsp;100.00</td><td>USD&nbsp;304.00</td></tr>") > 0);
 
     // a 100.00 JPY withdrawal should be displayed as such even if the expense account uses another currency
-    QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000007>" + intermediateDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Solo</td><td class=\"value\">JPY&nbsp;-100.00</td><td>JPY&nbsp;-300.00</td></tr>") > 0);
+    QVERIFY(html.indexOf("<a href=ledger?id=A000008&tid=T000000000000000007>" + intermediateDateString + "</a></td><td class=\"left0\"></td><td class=\"left0\">Test Payee</td><td class=\"left0\">Solo</td><td class=\"value\">JPY&nbsp;-100</td><td>JPY&nbsp;-300</td></tr>") > 0);
 
     // now run the same report again but this time convert all values to the base currency and make sure the values are correct
     filter.setConvertCurrency(true);
