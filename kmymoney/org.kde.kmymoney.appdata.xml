@@ -34,6 +34,7 @@
   <name xml:lang="uk">KMyMoney</name>
   <name xml:lang="x-test">xxKMyMoneyxx</name>
   <name xml:lang="zh-CN">KMyMoney</name>
+  <name xml:lang="zh-TW">KMyMoney</name>
   <summary>Personal Finance Manager</summary>
   <summary xml:lang="ar">مدير ماليّة شخصيّ</summary>
   <summary xml:lang="bs">Lični upravnik finansijama</summary>
@@ -65,6 +66,7 @@
   <summary xml:lang="uk">Програма для керування особистими фінансами</summary>
   <summary xml:lang="x-test">xxPersonal Finance Managerxx</summary>
   <summary xml:lang="zh-CN">个人金融管理器</summary>
+  <summary xml:lang="zh-TW">個人財務管理程式</summary>
   <description>
     <p>KMyMoney is a personal finance manager by KDE. It comes with a large set of features while being easy to use for the non-technical user.</p>
     <p xml:lang="ar">«أموالك» هو مدير ماليّة شخصي من «كدي». يأتي التّطبيق بمجموعة كبيرة من المزايا لكن بأخذ النّظر لتبسيط استخدامه للمستخدمين غير التّقنيّين.</p>
@@ -187,7 +189,7 @@
       <caption xml:lang="fi">Hallitse tilejäsi esim. rahalaitoksittain</caption>
       <caption xml:lang="fr">Gestion des comptes, par exemple en fonction des établissements dans lesquels ils sont détenus</caption>
       <caption xml:lang="gl">Xestionar contas, por exemplo polas institucións onde están abertas.</caption>
-      <caption xml:lang="id">Kelola akun mis. oleh institusi tempat mereka ditahan</caption>
+      <caption xml:lang="id">Kelola akun misal oleh institusi tempat mereka ditahan</caption>
       <caption xml:lang="it">Gestisci gli account, ad esempio, per gli istituti presso cui sono tenuti</caption>
       <caption xml:lang="nl">Rekeningen beheren bijv. door instituten waarbij ze behoren</caption>
       <caption xml:lang="pl">Zarządzanie kontami np. przez instytucje, w których zostały założone</caption>
