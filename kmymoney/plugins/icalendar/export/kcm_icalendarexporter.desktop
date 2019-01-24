@@ -56,6 +56,7 @@ Keywords[sv]=icalendarexporter;kmymoney;
 Keywords[uk]=icalendarexporter;kmymoney;кмаймані;календар;експорт;
 Keywords[x-test]=xxicalendarexporterxx;xxkmymoneyxx;
 Keywords[zh_CN]=icalendarexporter;kmymoney;
+Keywords[zh_TW]=icalendarexporter;kmymoney;
 X-KDE-Library=kmymoney/kcm_icalendarexporter
 X-KDE-ParentApp=icalendarexporter
 X-KDE-ParentComponents=icalendarexporter

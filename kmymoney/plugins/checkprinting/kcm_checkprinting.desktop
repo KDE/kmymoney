@@ -40,6 +40,7 @@ Keywords[pt_BR]=impressão;cheque;cheques;kmymoney;
 Keywords[sv]=checkutskrift;kmymoney;
 Keywords[uk]=printcheck;kmymoney;надрукувати;чек;кмаймані;друк;
 Keywords[x-test]=xxcheckprintingxx;xxkmymoneyxx;
+Keywords[zh_TW]=checkprinting;kmymoney;
 X-KDE-Library=kmymoney/kcm_checkprinting
 X-KDE-ParentApp=checkprinting
 X-KDE-ParentComponents=checkprinting
