@@ -35,6 +35,7 @@
   <name xml:lang="uk">KMyMoney</name>
   <name xml:lang="x-test">xxKMyMoneyxx</name>
   <name xml:lang="zh-CN">KMyMoney</name>
+  <name xml:lang="zh-TW">KMyMoney</name>
   <summary>Personal Finance Manager</summary>
   <summary xml:lang="ar">مدير ماليّة شخصيّ</summary>
   <summary xml:lang="bs">Lični upravnik finansijama</summary>
@@ -66,6 +67,7 @@
   <summary xml:lang="uk">Програма для керування особистими фінансами</summary>
   <summary xml:lang="x-test">xxPersonal Finance Managerxx</summary>
   <summary xml:lang="zh-CN">个人金融管理器</summary>
+  <summary xml:lang="zh-TW">個人財務管理程式</summary>
   <description>
     <p>KMyMoney is a personal finance manager by KDE. It comes with a large set of features while being easy to use for the non-technical user.</p>
     <p xml:lang="ca">El KMyMoney és un gestor de les finances personals desenvolupat pel KDE. Té un gran conjunt de funcionalitats encara que és fàcil d'utilitzar pels usuaris no tècnics.</p>
