@@ -310,13 +310,7 @@ TransactionEditor* KEnterScheduleDlg::startEdit()
     QString num = t.splits().first().number();
     QWidget* w = editor->haveWidget("number");
     if (d->m_schedule.paymentType() == eMyMoney::Schedule::PaymentType::WriteChecque) {
-      auto file = MyMoneyFile::instance();
-      if (file->checkNoUsed(d->m_schedule.account().id(), num)) {
-        //  increment and try again
-        num = KMyMoneyUtils::getAdjacentNumber(num);
-      }
-      num = KMyMoneyUtils::nextCheckNumber(d->m_schedule.account());
-      KMyMoneyUtils::updateLastNumberUsed(d->m_schedule.account(), num);
+      num = KMyMoneyUtils::nextFreeCheckNumber(d->m_schedule.account());
       d->m_schedule.account().setValue("lastNumberUsed", num);
       if (w)
         if (auto numberWidget = dynamic_cast<KMyMoneyLineEdit*>(w))

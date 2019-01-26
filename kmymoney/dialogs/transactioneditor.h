@@ -213,6 +213,12 @@ protected:
    */
   void setupPrecision();
 
+  /**
+   * Check for a duplicate check number and ask the user what to do about it
+   * Returns the number to be used.
+   */
+  QString validateCheckNumber(const QString& num) const;
+
 protected Q_SLOTS:
   void slotUpdateButtonState();
   void slotUpdateMemoState();
@@ -262,11 +268,6 @@ Q_SIGNALS:
     * rather then adding it to the ledger right away.
     */
   void scheduleTransaction(const MyMoneyTransaction& t, eMyMoney::Schedule::Occurrence occurrence);
-
-  /**
-   * This signal is sent out, if the user double clicks the number field
-   */
-  void assignNumber();
 
   /**
    * This signal is sent out, if the user has pressed the ESC key.

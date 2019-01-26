@@ -885,7 +885,6 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
       connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, editor, &TransactionEditor::slotReloadEditWidgets);
       connect(editor, &TransactionEditor::finishEdit, this, &KGlobalLedgerView::slotLeaveEditMode);
       connect(editor, &TransactionEditor::objectCreation, d->m_mousePressFilter, &MousePressFilter::setFilterDeactive);
-      connect(editor, &TransactionEditor::assignNumber, this, &KGlobalLedgerView::slotAssignNumber);
       connect(editor, &TransactionEditor::lastPostDateUsed, this, &KGlobalLedgerView::slotKeepPostDate);
 
       // create the widgets, place them in the parent and load them with data

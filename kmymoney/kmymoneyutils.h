@@ -301,15 +301,20 @@ public:
   static void calculateAutoLoan(const MyMoneySchedule& schedule, MyMoneyTransaction& transaction, const QMap<QString, MyMoneyMoney>& balances);
 
   /**
-    * Return next check number for account @a acc.
+    * Returns the next check number for account @a acc. No check is performed, if the
+    * number is already in use.
     */
   static QString nextCheckNumber(const MyMoneyAccount& acc);
 
-  static void updateLastNumberUsed(const MyMoneyAccount& acc, const QString& number);
+  /**
+    * Returns the next check free number for account @a acc.
+    */
+  static QString nextFreeCheckNumber(const MyMoneyAccount& acc);
 
-  static void setLastNumberUsed(const QString& num);
 
-  static QString lastNumberUsed();
+  // static void setLastNumberUsed(const QString& num);
+
+  // static QString lastNumberUsed();
 
   /**
     * Returns previous number if offset is -1 or
