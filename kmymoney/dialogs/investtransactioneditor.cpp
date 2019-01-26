@@ -819,8 +819,10 @@ bool InvestTransactionEditor::fixTransactionCommodity(const MyMoneyAccount& /* a
 }
 
 
-void InvestTransactionEditor::totalAmount(MyMoneyMoney& amount) const
+MyMoneyMoney InvestTransactionEditor::totalAmount() const
 {
+  MyMoneyMoney amount;
+
   auto activityCombo = dynamic_cast<KMyMoneyActivityCombo*>(haveWidget("activity"));
   auto sharesEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
   auto priceEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("price"));
@@ -829,7 +831,7 @@ void InvestTransactionEditor::totalAmount(MyMoneyMoney& amount) const
 
   if (!activityCombo || !sharesEdit || !priceEdit ||
       !feesEdit || !interestEdit)
-    return;
+    return amount;
 
   if (priceMode() == eDialogs::PriceMode::PricePerTransaction)
     amount = priceEdit->value().abs();
@@ -862,6 +864,7 @@ void InvestTransactionEditor::totalAmount(MyMoneyMoney& amount) const
     }
     amount += (interest * factor);
   }
+  return amount;
 }
 
 void InvestTransactionEditor::slotUpdateTotalAmount()
@@ -870,9 +873,7 @@ void InvestTransactionEditor::slotUpdateTotalAmount()
   auto total = dynamic_cast<QLabel*>(haveWidget("total"));
 
   if (total && total->isVisible()) {
-    MyMoneyMoney amount;
-    totalAmount(amount);
-    total->setText(amount.convert(d->m_currency.smallestAccountFraction(), d->m_security.roundingMethod())
+    total->setText(totalAmount().convert(d->m_currency.smallestAccountFraction(), d->m_security.roundingMethod())
                    .formatMoney(d->m_currency.tradingSymbol(), MyMoneyMoney::denomToPrec(d->m_currency.smallestAccountFraction())));
   }
 }

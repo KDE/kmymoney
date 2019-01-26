@@ -815,7 +815,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
         if (editNr && !editNr->text().isEmpty()) {
           s.setNumber(editNr->text());
         } else if (!s.number().isEmpty()) {
-          s.setNumber(KMyMoneyUtils::nextCheckNumber(d->m_account));
+          s.setNumber(KMyMoneyUtils::nextFreeCheckNumber(d->m_account));
         }
 
         // if the memos should not be used with autofill or

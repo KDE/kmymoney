@@ -455,12 +455,23 @@ void Sell::showWidgets() const
 
 bool Sell::isComplete(QString& reason) const
 {
+  Q_D(const Activity);
+
   auto rc = Activity::isComplete(reason);
-  rc &= haveAssetAccount();
   rc &= haveFees(true);
   rc &= haveInterest(true);
   rc &= haveShares();
   rc &= havePrice();
+
+  // Allow a sell operation to be saved without specifying a brokerage
+  // account, when the proceeds equal the fees. This will handle sales
+  // made solely to cover annual account fees, where there is no money
+  // transferred.
+  if (rc) {
+    if (!d->m_parent->totalAmount().isZero()) {
+      rc &= haveAssetAccount();
+    }
+  }
   return rc;
 }
 
@@ -516,13 +527,14 @@ bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpl
       !createCategorySplits(t, interestAccountWidget, interestAmountWidget, MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
     return false;
 
-  createAssetAccountSplit(assetAccountSplit, s0);
+  const auto total = sumSplits(s0, feeSplits, interestSplits);
+  if (!total.isZero()) {
+    createAssetAccountSplit(assetAccountSplit, s0);
+    assetAccountSplit.setValue(-total);
 
-  MyMoneyMoney total = sumSplits(s0, feeSplits, interestSplits);
-  assetAccountSplit.setValue(-total);
-
-  if (!d->m_parent->setupPrice(t, assetAccountSplit))
-    return false;
+    if (!d->m_parent->setupPrice(t, assetAccountSplit))
+      return false;
+  }
 
   return true;
 }

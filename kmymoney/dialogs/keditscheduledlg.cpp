@@ -319,8 +319,9 @@ TransactionEditor* KEditScheduleDlg::startEdit()
     if (d->m_schedule.paymentType() != Schedule::PaymentType::WriteChecque) {
       QWidget* w = editor->haveWidget("number");
       if (w) {
-        if (auto numberWidget = dynamic_cast<KMyMoneyLineEdit*>(w))
+        if (auto numberWidget = dynamic_cast<KMyMoneyLineEdit*>(w)) {
           numberWidget->loadText(QString());
+        }
       }
     }
 
@@ -670,13 +671,14 @@ void KEditScheduleDlg::slotPostDateChanged(const QDate& date)
 void KEditScheduleDlg::slotSetPaymentMethod(int item)
 {
   Q_D(KEditScheduleDlg);
-  if (auto dateEdit = dynamic_cast<KMyMoneyLineEdit*>(d->m_editor->haveWidget("number"))) {
-    dateEdit->setVisible(item == (int)Schedule::PaymentType::WriteChecque);
+  const bool isWriteCheck = item == (int)Schedule::PaymentType::WriteChecque;
+  if (auto numberEdit = dynamic_cast<KMyMoneyLineEdit*>(d->m_editor->haveWidget("number"))) {
+    numberEdit->setVisible(isWriteCheck);
 
     // hiding the label does not work, because the label underneath will shine
     // through. So we either write the label or a blank
     if (auto label = dynamic_cast<QLabel *>(d->m_editor->haveWidget("number-label")))
-      label->setText((item == (int)Schedule::PaymentType::WriteChecque) ? i18n("Number") : " ");
+      label->setText(isWriteCheck ? i18n("Number") : QStringLiteral(" "));
   }
 }
 

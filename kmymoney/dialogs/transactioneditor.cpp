@@ -257,7 +257,7 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
   bool rc = false;
   if (o == haveWidget("number")) {
     if (e->type() == QEvent::MouseButtonDblClick) {
-      emit assignNumber();
+      assignNextNumber();
       rc = true;
     }
   }
@@ -321,27 +321,6 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
     }
   }
   return rc;
-}
-
-void TransactionEditor::slotNumberChanged(const QString& txt)
-{
-  Q_D(TransactionEditor);
-  auto next = txt;
-  QString schedInfo;
-  if (!d->m_scheduleInfo.isEmpty()) {
-    schedInfo = i18n("<center>Processing schedule for %1.</center>", d->m_scheduleInfo);
-  }
-
-  while (MyMoneyFile::instance()->checkNoUsed(d->m_account.id(), next)) {
-    if (KMessageBox::questionYesNo(d->m_regForm, QString("<qt>") + schedInfo + i18n("<center>Check number <b>%1</b> has already been used in account <b>%2</b>.</center>"
-                                   "<center>Do you want to replace it with the next available number?</center>", next, d->m_account.name()) + QString("</qt>"), i18n("Duplicate number")) == KMessageBox::Yes) {
-      assignNextNumber();
-      next = KMyMoneyUtils::nextCheckNumber(d->m_account);
-    } else if (auto number = dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number"))) {
-      number->setText(QString());
-      break;
-    }
-  }
 }
 
 void TransactionEditor::slotUpdateMemoState()
@@ -519,39 +498,48 @@ bool TransactionEditor::fixTransactionCommodity(const MyMoneyAccount& account)
   return rc;
 }
 
+QString TransactionEditor::validateCheckNumber(const QString& num) const
+{
+  Q_D(const TransactionEditor);
+
+  int rc = KMessageBox::No;
+  QString schedInfo;
+  if (!d->m_scheduleInfo.isEmpty()) {
+    schedInfo = i18n("<center>Processing schedule for %1.</center>", d->m_scheduleInfo);
+  }
+  if (MyMoneyFile::instance()->checkNoUsed(d->m_account.id(), num)) {
+    rc = KMessageBox::questionYesNo(d->m_regForm, QString("<qt>") + schedInfo + i18n("Check number <b>%1</b> has already been used in account <b>%2</b>."
+                                    "<center>Do you want to replace it with the next available number?</center>", num, d->m_account.name()) + QString("</qt>"), i18n("Duplicate number"));
+    if (rc == KMessageBox::Yes) {
+      return KMyMoneyUtils::nextFreeCheckNumber(d->m_account);
+    }
+  }
+  return num;
+}
+
 void TransactionEditor::assignNextNumber()
 {
   Q_D(TransactionEditor);
-  if (canAssignNumber()) {
-    auto number = dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number"));
-    QString num = KMyMoneyUtils::nextCheckNumber(d->m_account);
-    bool showMessage = true;
-    int rc = KMessageBox::No;
-    QString schedInfo;
-    if (!d->m_scheduleInfo.isEmpty()) {
-      schedInfo = i18n("<center>Processing schedule for %1.</center>", d->m_scheduleInfo);
-    }
-    while (MyMoneyFile::instance()->checkNoUsed(d->m_account.id(), num)) {
-      if (showMessage) {
-        rc = KMessageBox::questionYesNo(d->m_regForm, QString("<qt>") + schedInfo + i18n("Check number <b>%1</b> has already been used in account <b>%2</b>."
-                                        "<center>Do you want to replace it with the next available number?</center>", num, d->m_account.name()) + QString("</qt>"), i18n("Duplicate number"));
-        showMessage = false;
-      }
-      if (rc == KMessageBox::Yes) {
-        num = KMyMoneyUtils::nextCheckNumber(d->m_account);
-        KMyMoneyUtils::updateLastNumberUsed(d->m_account, num);
-        d->m_account.setValue("lastNumberUsed", num);
-        if (number)
-          number->loadText(num);
-      } else {
-        num = QString();
-        break;
-      }
-    }
-    if (number)
-      number->setText(num);
+  auto number = dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number"));
+  if (number) {
+    const auto num = validateCheckNumber(KMyMoneyUtils::nextCheckNumber(d->m_account));
+    d->m_account.setValue("lastNumberUsed", num);
+    number->setText(num);
   }
 }
+
+void TransactionEditor::slotNumberChanged(const QString& txt)
+{
+  Q_D(TransactionEditor);
+  auto number = dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number"));
+  if (number) {
+    const auto next = validateCheckNumber(txt);
+    if (next != txt) {
+      number->setText(next);
+    }
+  }
+}
+
 
 bool TransactionEditor::canAssignNumber() const
 {

@@ -93,6 +93,8 @@ KMyMoneyTagCombo* KTagContainer::tagCombo()
 const QList<QString> KTagContainer::selectedTags()
 {
   Q_D(KTagContainer);
+  // Adding possible selected tag which is not yet in the list
+  slotAddTagWidget();
   return d->m_tagIdList;
 }
 
