@@ -28,7 +28,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/mod
 # The current version of KMyMoney (used for packages and config.h)
 set(VERSION_MAJOR "4")
 set(VERSION_MINOR "8")
-set(VERSION_PATCH "2")
+set(VERSION_PATCH "3")
 
 # Determine the GIT reference (if we're based on GIT)
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.git AND CMAKE_SYSTEM_NAME MATCHES Linux)
