@@ -39,7 +39,8 @@
 class MyMoneyStatement;
 
 QIFImporter::QIFImporter(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, "qifimporter"/*must be the same as X-KDE-PluginInfo-Name*/)
+    KMyMoneyPlugin::Plugin(parent, "qifimporter"/*must be the same as X-KDE-PluginInfo-Name*/),
+    m_qifReader(nullptr)
 {
   Q_UNUSED(args);
   setComponentName("qifimporter", i18n("QIF importer"));
@@ -51,6 +52,7 @@ QIFImporter::QIFImporter(QObject *parent, const QVariantList &args) :
 
 QIFImporter::~QIFImporter()
 {
+  delete m_qifReader;
   qDebug("Plugins: qifimporter unloaded");
 }
 
@@ -69,6 +71,7 @@ void QIFImporter::slotQifImport()
 
   if (dlg->exec() == QDialog::Accepted && dlg != nullptr) {
     m_action->setEnabled(false);
+    delete m_qifReader;
     m_qifReader = new MyMoneyQifReader;
     statementInterface()->resetMessages();
     connect(m_qifReader, &MyMoneyQifReader::statementsReady, this, &QIFImporter::slotGetStatements);
@@ -93,8 +96,6 @@ bool QIFImporter::slotGetStatements(const QList<MyMoneyStatement> &statements)
     if (singleImportSummary.isEmpty())
       ret = false;
   }
-
-  delete m_qifReader;
 
   // inform the user about the result of the operation
   statementInterface()->showMessages(statements.count());
