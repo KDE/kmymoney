@@ -75,7 +75,7 @@ public:
 
   bool fixTransactionCommodity(const MyMoneyAccount& /* account */) override;
 
-  void totalAmount(MyMoneyMoney& amount) const;
+  MyMoneyMoney totalAmount() const;
 
   bool setupPrice(const MyMoneyTransaction& t, MyMoneySplit& split);
 
