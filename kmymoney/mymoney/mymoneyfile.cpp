@@ -2722,7 +2722,7 @@ QList<MyMoneySecurity> MyMoneyFile::availableCurrencyList() const
   currencyList.append(MyMoneySecurity("DZD", i18n("Algerian Dinar")));
   currencyList.append(MyMoneySecurity("ADF", i18n("Andorran Franc")));
   currencyList.append(MyMoneySecurity("ADP", i18n("Andorran Peseta")));
-  currencyList.append(MyMoneySecurity("AON", i18n("Angolan New Kwanza")));
+  currencyList.append(MyMoneySecurity("AOA", i18n("Angolan Kwanza"),         "Kz"));
   currencyList.append(MyMoneySecurity("ARS", i18n("Argentine Peso"),         "$"));
   currencyList.append(MyMoneySecurity("AWG", i18n("Aruban Florin")));
   currencyList.append(MyMoneySecurity("AUD", i18n("Australian Dollar"),      "$"));
