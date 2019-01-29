@@ -128,6 +128,9 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
   button(QWizard::CancelButton)->setIcon(KStandardGuiItem::cancel().icon());
   button(QWizard::NextButton)->setIcon(KStandardGuiItem::forward(KStandardGuiItem::UseRTL).icon());
   button(QWizard::BackButton)->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
+
+  m_problemMessages->setHidden(true);
+  m_problemMessages->setWordWrap(true);
 }
 
 KOnlineBankingSetupWizard::~KOnlineBankingSetupWizard()
@@ -186,6 +189,7 @@ void KOnlineBankingSetupWizard::newPage(int id)
 {
   QWidget* focus = 0;
 
+  m_problemMessages->setHidden(true);
   bool ok = true;
   if ((id - d->m_prevPage) == 1) { // one page forward?
     switch (d->m_prevPage) {
@@ -235,7 +239,7 @@ bool KOnlineBankingSetupWizard::finishFiPage()
   bool result = false;
 
   m_bankInfo.clear();
-  OfxFiServiceInfo info;
+  OfxHomeServiceInfo info;
 
   if (m_selectionTab->currentIndex() == 0) {
 
@@ -255,16 +259,29 @@ bool KOnlineBankingSetupWizard::finishFiPage()
         QString message = QString("<p>Fipid: %1<br/>").arg(*it_fipid);
 
         // If the bank supports retrieving statements
-        if (info.accountlist) {
-          m_bankInfo.push_back(info);
+        if (info.ofxInfo.accountlist) {
+          m_bankInfo.push_back(info.ofxInfo);
 
-          message += QString("URL: %1<br/>Org: %2<br/>Fid: %3<br/>").arg(info.url, info.org, info.fid);
-          if (info.statements)
+          message += QString("URL: %1<br/>Org: %2<br/>Fid: %3<br/>").arg(info.ofxInfo.url, info.ofxInfo.org, info.ofxInfo.fid);
+
+          if (info.ofxInfo.statements)
             message += i18n("Supports online statements<br/>");
-          if (info.investments)
+          if (info.ofxInfo.investments)
             message += i18n("Supports investments<br/>");
-          if (info.billpay)
+          if (info.ofxInfo.billpay)
             message += i18n("Supports bill payment (but not supported by KMyMoney yet)<br/>");
+
+          QString problemMessage;
+          if (!info.ofxValidated)
+            problemMessage += i18n("OFX host failed. Last successful access was on '%1'. ").arg(info.lastOfxValidated);
+          if (!info.sslValidated)
+            problemMessage += i18n("Certificate verification of OFX host failed. Last successful verification was on '%1'.").arg(info.lastSslValidated);
+
+          if (!problemMessage.isEmpty()) {
+            m_problemMessages->setText(problemMessage);
+            m_problemMessages->animatedShow();
+          }
+
         } else {
           message += i18n("Does not support online banking");
         }
@@ -288,24 +305,24 @@ bool KOnlineBankingSetupWizard::finishFiPage()
     m_textDetails->clear();
     m_textDetails->append(i18n("<p>Details for %1:</p>", m_bankName->text()));
 
-    memset(&info, 0, sizeof(OfxFiServiceInfo));
-    strncpy(info.fid, m_fid->text().toLatin1(), OFX_FID_LENGTH - 1);
-    strncpy(info.org, m_bankName->text().toLatin1(), OFX_ORG_LENGTH - 1);
-    strncpy(info.url, m_url->url().url().toLatin1(), OFX_URL_LENGTH - 1);
-    info.accountlist = 1;
-    info.statements = 1;
-    info.billpay = 1;
-    info.investments = 1;
+    memset(&info.ofxInfo, 0, sizeof(OfxFiServiceInfo));
+    strncpy(info.ofxInfo.fid, m_fid->text().toLatin1(), OFX_FID_LENGTH - 1);
+    strncpy(info.ofxInfo.org, m_bankName->text().toLatin1(), OFX_ORG_LENGTH - 1);
+    strncpy(info.ofxInfo.url, m_url->url().url().toLatin1(), OFX_URL_LENGTH - 1);
+    info.ofxInfo.accountlist = 1;
+    info.ofxInfo.statements = 1;
+    info.ofxInfo.billpay = 1;
+    info.ofxInfo.investments = 1;
 
-    m_bankInfo.push_back(info);
+    m_bankInfo.push_back(info.ofxInfo);
 
     QString message;
-    message += QString("<p>URL: %1<br/>Org: %2<br/>Fid: %3<br/>").arg(info.url, info.org, info.fid);
-    if (info.statements)
+    message += QString("<p>URL: %1<br/>Org: %2<br/>Fid: %3<br/>").arg(info.ofxInfo.url, info.ofxInfo.org, info.ofxInfo.fid);
+    if (info.ofxInfo.statements)
       message += i18n("Supports online statements<br/>");
-    if (info.investments)
+    if (info.ofxInfo.investments)
       message += i18n("Supports investments<br/>");
-    if (info.billpay)
+    if (info.ofxInfo.billpay)
       message += i18n("Supports bill payment (but not supported by KMyMoney yet)<br/>");
     message += "</p>";
     m_textDetails->append(message);

@@ -42,6 +42,14 @@ class TransferJob;
 
 #include <libofx/libofx.h>
 
+struct OfxHomeServiceInfo {
+  OfxFiServiceInfo  ofxInfo;
+  bool ofxValidated;
+  bool sslValidated;
+  QString lastOfxValidated;
+  QString lastSslValidated;
+};
+
 namespace OfxPartner
 {
 /**
@@ -54,7 +62,7 @@ namespace OfxPartner
 void setDirectory(const QString& dir);
 
 void ValidateIndexCache();
-OfxFiServiceInfo ServiceInfo(const QString& fipid);
+OfxHomeServiceInfo ServiceInfo(const QString& fipid);
 QStringList BankNames();
 QStringList FipidForBank(const QString& bank);
 
