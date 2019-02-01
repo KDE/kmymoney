@@ -1,4 +1,4 @@
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/onlinejoboutboxview.json.in ${CMAKE_CURRENT_BINARY_DIR}/onlinejoboutboxview.json @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/onlinejoboutboxview.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/onlinejoboutboxview.json @ONLY)
 
 set(onlinejoboutboxview_SOURCES
   onlinejoboutboxview.cpp

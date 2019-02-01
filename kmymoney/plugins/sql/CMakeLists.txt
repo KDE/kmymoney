@@ -1,4 +1,4 @@
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/sqlstorage.json.in ${CMAKE_CURRENT_BINARY_DIR}/sqlstorage.json @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/sqlstorage.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/sqlstorage.json @ONLY)
 
 set(sqlstorage_SOURCES
   sqlstorage.cpp

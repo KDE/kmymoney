@@ -1,5 +1,5 @@
 # patch the version with the version defined in the build system
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/ofximporter.json.in ${CMAKE_CURRENT_BINARY_DIR}/ofximporter.json @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/ofximporter.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/ofximporter.json @ONLY)
 
 if(${LIBOFX_HAVE_CLIENTUID})
   add_definitions(-DLIBOFX_HAVE_CLIENTUID)

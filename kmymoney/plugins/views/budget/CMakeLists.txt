@@ -1,4 +1,4 @@
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/budgetview.json.in ${CMAKE_CURRENT_BINARY_DIR}/budgetview.json @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/budgetview.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/budgetview.json @ONLY)
 
 set(budgetview_SOURCES
   budgetview.cpp
