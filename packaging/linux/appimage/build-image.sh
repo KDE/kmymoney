@@ -65,7 +65,24 @@ fi
 
 mv $PLUGINS/* $APPIMAGEPLUGINS
 
-# Step 5: Build the image!!!
+# Step 5: Determine the version of KMyMoney we have just built
+# This is needed for linuxdeployqt/appimagetool to do the right thing
+cd $KMYMONEY_SOURCES
+KMYMONEY_VERSION=$(grep "KMyMoney VERSION" CMakeLists.txt | cut -d '"' -f 2)
+
+# Also find out the revision of Git we built
+# Then use that to generate a combined name we'll distribute
+if [[ -d .git ]]; then
+        GIT_REVISION=$(git rev-parse --short HEAD)
+        export VERSION=$KMYMONEY_VERSION-$GIT_REVISION
+else
+        export VERSION=$KMYMONEY_VERSION
+fi
+
+# Finally transition back to the build directory so we can build the appimage
+cd $BUILD_PREFIX
+
+# Step 6: Build the image!!!
 linuxdeployqt $APPDIR/usr/share/applications/org.kde.kmymoney.desktop \
   -executable=$APPDIR/usr/bin/kmymoney \
   -qmldir=$DEPS_INSTALL_PREFIX/qml \
@@ -73,24 +90,3 @@ linuxdeployqt $APPDIR/usr/share/applications/org.kde.kmymoney.desktop \
   -bundle-non-qt-libs \
   -appimage \
   -exclude-libs=libnss3.so,libnssutil3.so
-
-# Step 5: Find out what version of KMyMoney we built and give the Appimage a proper name
-cd $BUILD_PREFIX/kmymoney-build
-KMYMONEY_VERSION=$(grep "KMyMoney VERSION" CMakeLists.txt | cut -d '"' -f 2)
-
-# Also find out the revision of Git we built
-# Then use that to generate a combined name we'll distribute
-cd $KMYMONEY_SOURCES
-if [[ -d .git ]]; then
-	GIT_REVISION=$(git rev-parse --short HEAD)
-	VERSION=$KMYMONEY_VERSION-$GIT_REVISION
-else
-	VERSION=$KMYMONEY_VERSION
-fi
-
-# Return to our build root
-cd $BUILD_PREFIX
-
-# Generate a new name for the Appimage file and rename it accordingly
-APPIMAGE=kmymoney-"$VERSION"-x86_64.appimage
-mv KMyMoney-x86_64.AppImage $APPIMAGE
