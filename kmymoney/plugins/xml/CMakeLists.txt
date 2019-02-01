@@ -1,6 +1,6 @@
 add_subdirectory( libkgpgfile )
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/xmlstorage.json.in ${CMAKE_CURRENT_BINARY_DIR}/xmlstorage.json @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/xmlstorage.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/xmlstorage.json @ONLY)
 
 set(xmlstorage_SOURCES
   xmlstorage.cpp

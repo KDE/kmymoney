@@ -1,5 +1,5 @@
 # patch the version with the version defined in the build system
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/icalendarexporter.json.in
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/icalendarexporter.json.cmake
   ${CMAKE_CURRENT_BINARY_DIR}/icalendarexporter.json
   @ONLY
 )

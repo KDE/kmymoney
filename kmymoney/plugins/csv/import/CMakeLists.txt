@@ -5,7 +5,7 @@ if(NOT ENABLE_CSVIMPORTER)
 endif()
 
 # patch the version with the version defined in the build system
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/csvimporter.json.in ${CMAKE_CURRENT_BINARY_DIR}/csvimporter.json @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/csvimporter.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/csvimporter.json @ONLY)
 
 ########### next target ###############
 

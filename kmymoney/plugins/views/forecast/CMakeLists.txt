@@ -1,4 +1,4 @@
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/forecastview.json.in ${CMAKE_CURRENT_BINARY_DIR}/forecastview.json @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/forecastview.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/forecastview.json @ONLY)
 
 set(forecastview_SOURCES
   forecastview.cpp

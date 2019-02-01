@@ -1,5 +1,5 @@
 # patch the version with the version defined in the build system
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/gncimporter.json.in ${CMAKE_CURRENT_BINARY_DIR}/gncimporter.json @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/gncimporter.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/gncimporter.json @ONLY)
 
 ########### next target ###############
 

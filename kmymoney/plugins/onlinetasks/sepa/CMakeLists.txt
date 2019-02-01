@@ -1,5 +1,5 @@
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-sepaorders.json.in ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepaorders.json @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kmymoney-sepaorders.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/kmymoney-sepaorders.json @ONLY)
 
 set( sepaOnlineTasks_SRCS
   ui/sepacredittransferedit.cpp

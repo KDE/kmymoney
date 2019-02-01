@@ -2,7 +2,7 @@
 # include(KDECompilerSettings NO_POLICY_SCOPE)
 
 # patch the version with the version defined in the build system
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/weboob.json.in ${CMAKE_CURRENT_BINARY_DIR}/weboob.json @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/weboob.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/weboob.json @ONLY)
 
 add_subdirectory( dialogs )
 add_subdirectory( interface )
