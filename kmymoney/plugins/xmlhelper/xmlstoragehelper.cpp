@@ -4,6 +4,7 @@
  * Copyright 2007-2010  Alvaro Soliverez <asoliverez@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  * Copyright 2018       Michael Kiefer <Michael-Kiefer@web.de>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -55,7 +56,8 @@ namespace Element {
     Amount,
     Dates,
     Category,
-    AccountGroup
+    AccountGroup,
+    Validity
   };
 
   enum class Budget {
@@ -86,6 +88,7 @@ namespace Attribute {
     SettlementPeriod, ShowSTLTCapitalGains, TermsSeparator,
     Pattern, CaseSensitive, RegEx, InvertText, State,
     From, To,
+    Validity,
     NegExpenses,
     // insert new entries above this line
     LastAttribute
@@ -136,7 +139,8 @@ namespace MyMoneyXmlContentHandler2 {
       {Element::Report::Amount,       QStringLiteral("AMOUNT")},
       {Element::Report::Dates,        QStringLiteral("DATES")},
       {Element::Report::Category,     QStringLiteral("CATEGORY")},
-      {Element::Report::AccountGroup, QStringLiteral("ACCOUNTGROUP")}
+      {Element::Report::AccountGroup, QStringLiteral("ACCOUNTGROUP")},
+      {Element::Report::Validity,     QStringLiteral("VALIDITY")}
     };
     return elementNames.value(elementID);
   }
@@ -199,6 +203,7 @@ namespace MyMoneyXmlContentHandler2 {
       {Attribute::Report::State,                  QStringLiteral("state")},
       {Attribute::Report::From,                   QStringLiteral("from")},
       {Attribute::Report::To,                     QStringLiteral("to")},
+      {Attribute::Report::Validity,               QStringLiteral("validity")},
       {Attribute::Report::NegExpenses,            QStringLiteral("negexpenses")}
     };
     return attributeNames.value(attributeID);
@@ -418,6 +423,26 @@ namespace MyMoneyXmlContentHandler2 {
   int stringToStateAttribute(const QString &text)
   {
     return stateAttributeLUT().key(text, 5);
+  }
+
+  QHash<int, QString> validityAttributeLUT()
+  {
+    static const QHash<int, QString> lut {
+      {0, QStringLiteral("any")},
+      {1, QStringLiteral("valid")},
+      {2, QStringLiteral("invalid")},
+    };
+    return lut;
+  }
+
+  QString validityAttributeToString(int textID)
+  {
+    return validityAttributeLUT().value(textID);
+  }
+
+  int stringToValidityAttribute(const QString &text)
+  {
+    return validityAttributeLUT().key(text, 0);
   }
 
   QHash<eMyMoney::TransactionFilter::Date, QString> dateLockLUT()
@@ -786,6 +811,11 @@ namespace MyMoneyXmlContentHandler2 {
           if (state != -1)
             report.addState(state);
         }
+        if (elementName(Element::Report::Validity) == c.tagName() && c.hasAttribute(attributeName(Attribute::Report::Validity))) {
+          const auto validity = stringToValidityAttribute(c.attribute(attributeName(Attribute::Report::Validity)));
+          if (validity != -1)
+            report.addValidity(validity);
+        }
         if (elementName(Element::Report::Number) == c.tagName())
           report.setNumberFilter(c.attribute(attributeName(Attribute::Report::From)), c.attribute(attributeName(Attribute::Report::To)));
         if (elementName(Element::Report::Amount) == c.tagName())
@@ -978,6 +1008,20 @@ namespace MyMoneyXmlContentHandler2 {
           ++it_state;
         }
       }
+
+      QList<int> validitylist;
+      if (report.validities(validitylist) && ! validitylist.empty()) {
+        // iterate over payees, and add each one
+        QList<int>::const_iterator it_validity = validitylist.constBegin();
+        while (it_validity != validitylist.constEnd()) {
+          QDomElement p = document.createElement(elementName(Element::Report::Validity));
+          p.setAttribute(attributeName(Attribute::Report::Validity), validityAttributeToString(*it_validity));
+          el.appendChild(p);
+
+          ++it_validity;
+        }
+      }
+
       //
       // Number Filter
       //

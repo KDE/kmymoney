@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2003-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2004       Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2008-2010  Alvaro Soliverez <asoliverez@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
@@ -329,9 +329,9 @@ QVector<MyMoneySplit> MyMoneyTransactionFilter::matchingSplits(const MyMoneyTran
   auto isMatchingSplitsEmpty = true;
 
   auto extendedFilter = d->m_filterSet;
-  extendedFilter.singleFilter.dateFilter =
-  extendedFilter.singleFilter.accountFilter =
-      extendedFilter.singleFilter.categoryFilter = 0;
+  extendedFilter.singleFilter.dateFilter = 0;
+  extendedFilter.singleFilter.accountFilter = 0;
+  extendedFilter.singleFilter.categoryFilter = 0;
 
   if (filter.accountFilter ||
       filter.categoryFilter ||
@@ -762,6 +762,21 @@ bool MyMoneyTransactionFilter::states(QList<int>& list) const
   return result;
 }
 
+bool MyMoneyTransactionFilter::validities(QList<int>& list) const
+{
+  Q_D(const MyMoneyTransactionFilter);
+  auto result = d->m_filterSet.singleFilter.validityFilter;
+
+  if (result) {
+    QHashIterator<int, QString> it_validity(d->m_validity);
+    while (it_validity.hasNext()) {
+      it_validity.next();
+      list += it_validity.key();
+    }
+  }
+  return result;
+}
+
 bool MyMoneyTransactionFilter::firstType(int&i) const
 {
   Q_D(const MyMoneyTransactionFilter);
@@ -787,6 +802,21 @@ bool MyMoneyTransactionFilter::firstState(int&i) const
     if (it_state.hasNext()) {
       it_state.next();
       i = it_state.key();
+    }
+  }
+  return result;
+}
+
+bool MyMoneyTransactionFilter::firstValidity(int&i) const
+{
+  Q_D(const MyMoneyTransactionFilter);
+  auto result = d->m_filterSet.singleFilter.validityFilter;
+
+  if (result) {
+    QHashIterator<int, QString> it_validity(d->m_validity);
+    if (it_validity.hasNext()) {
+      it_validity.next();
+      i = it_validity.key();
     }
   }
   return result;

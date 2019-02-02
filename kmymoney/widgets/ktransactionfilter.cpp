@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2002-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -390,6 +390,10 @@ void KTransactionFilter::resetFilter(MyMoneyReport& rep)
   int state;
   if (rep.firstState(state))
     d->ui->m_stateBox->setCurrentIndex(state);
+
+  int validity;
+  if (rep.firstValidity(validity))
+    d->ui->m_validityBox->setCurrentIndex(validity);
 
   //
   // Number Filter

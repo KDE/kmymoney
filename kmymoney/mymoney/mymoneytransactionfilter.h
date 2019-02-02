@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2003-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2004       Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2008-2010  Alvaro Soliverez <asoliverez@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
@@ -471,6 +471,18 @@ public:
   bool firstState(int& i) const;
 
   bool states(QList<int>& list) const;
+
+  /**
+    * This method returns whether a validity filter has been set,
+    * and if so, it returns the first validity in the filter.
+    *
+    * @param i reference to int to replace with first validity filter, untouched otherwise
+    * @return return true if a validity filter has been set
+    */
+  bool firstValidity(int& i) const;
+
+  bool validities(QList<int>& list) const;
+
   /**
     * This method returns whether a text filter has been set,
     * and if so, it returns the text filter.
