@@ -641,7 +641,9 @@ void QueryTable::constructTransactionTable()
       else
         xr = MyMoneyMoney::ONE;
 
-      if (it_split == myBegin) {
+      qA[ctTag].clear();
+
+      if (it_split == myBegin && splits.count() > 1) {
         include_me = m_config.includes(splitAcc);
         if (include_me)
           // track accts that will need opening and closing balances
@@ -766,7 +768,6 @@ void QueryTable::constructTransactionTable()
               qA[ctCategory] = i18n("[Split Transaction]");
               qA[ctTopCategory] = i18nc("Split transaction", "Split");
               qA[ctCategoryType] = i18nc("Split transaction", "Split");
-
               m_rows += qA;
             }
           }
@@ -823,6 +824,8 @@ void QueryTable::constructTransactionTable()
               switch (m_config.rowType()) {
                 case eMyMoney::Report::RowType::Category:
                 case eMyMoney::Report::RowType::TopCategory:
+                case eMyMoney::Report::RowType::Tag:
+                case eMyMoney::Report::RowType::Payee:
                   if (splitAcc.isIncomeExpense())
                     qA[ctValue] = (-(*it_split).shares() * xr).convert(fraction).toString(); // needed for category reports, in case of multicurrency transaction it breaks it
                   break;
@@ -854,26 +857,29 @@ void QueryTable::constructTransactionTable()
               qA [ctCategoryType] = MyMoneyAccount::accountTypeToString(splitAcc.accountGroup());
             }
 
-            if (use_transfers || (splitAcc.isIncomeExpense() && m_config.includes(splitAcc))) {
-              //if it matches the text of the main split of the transaction or
-              //it matches this particular split, include it
-              //otherwise, skip it
-              //if the filter is "does not contain" exclude the split if it does not match
-              //even it matches the whole split
-              if ((m_config.isInvertingText() &&
-                   m_config.match((*it_split)))
-                  || (!m_config.isInvertingText()
-                      && (transaction_text
-                          || m_config.match((*it_split))))) {
-                if (tag_special_case) {
-                  if (!tagIdListCache.size())
-                    qA[ctTag] = i18n("[No Tag]");
-                  else
-                    for (int i = 0; i < tagIdListCache.size(); i++) {
-                      qA[ctTag] = file->tag(tagIdListCache[i]).name().simplified();
-                      m_rows += qA;
+            if (splits.count() > 1) {
+              if (use_transfers || (splitAcc.isIncomeExpense() && m_config.includes(splitAcc))) {
+                //if it matches the text of the main split of the transaction or
+                //it matches this particular split, include it
+                //otherwise, skip it
+                //if the filter is "does not contain" exclude the split if it does not match
+                //even it matches the whole split
+                if ((m_config.isInvertingText() &&
+                    m_config.match((*it_split)))
+                    || (!m_config.isInvertingText()
+                        && (transaction_text
+                            || m_config.match((*it_split))))) {
+                  if (tag_special_case) {
+                    if (tagIdListCache.isEmpty()) {
+                      qA[ctTag] = i18n("[No Tag]");
+                    } else {
+                      QString delimiter;
+                      foreach(const auto tagId, tagIdListCache) {
+                        qA[ctTag] += delimiter + file->tag(tagId).name().simplified();
+                        delimiter = QLatin1Char(',');
+                      }
                     }
-                } else {
+                  }
                   m_rows += qA;
                 }
               }
@@ -881,8 +887,8 @@ void QueryTable::constructTransactionTable()
           }
         }
 
-        if (m_config.includes(splitAcc) && use_transfers &&
-            !(splitAcc.isInvest() && include_me)) { // otherwise stock split is displayed twice in report
+        if ((m_config.includes(splitAcc) && use_transfers &&
+            !(splitAcc.isInvest() && include_me)) || splits.count() == 1) { // otherwise stock split is displayed twice in report
           if (! splitAcc.isIncomeExpense()) {
             //multiply by currency and convert to lowest fraction
             qS[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString();
@@ -893,10 +899,13 @@ void QueryTable::constructTransactionTable()
             qS[ctAccountID] = splitAcc.id();
             qS[ctTopAccount] = splitAcc.topParentName();
 
-            qS[ctCategory] = ((*it_split).shares().isNegative())
-                             ? i18n("Transfer to %1", a_fullname)
-                             : i18n("Transfer from %1", a_fullname);
-
+            if (splits.count() > 1) {
+              qS[ctCategory] = ((*it_split).shares().isNegative())
+                              ? i18n("Transfer to %1", a_fullname)
+                              : i18n("Transfer from %1", a_fullname);
+            } else {
+              qS[ctCategory] = i18n("*** UNASSIGNED ***");
+            }
             qS[ctInstitution] = institution.isEmpty()
                                 ? i18n("No Institution")
                                 : file->institution(institution).name();
@@ -906,10 +915,14 @@ void QueryTable::constructTransactionTable()
                          : (*it_split).memo();
 
             //FIXME-ALEX When is used this? I can't find in which condition we arrive here... maybe this code is useless?
-            QString delimiter;
-            for (int i = 0; i < tagIdList.size(); i++) {
-              qA[ctTag] += delimiter + file->tag(tagIdList[i]).name().simplified();
-              delimiter = '+';
+            if (tagIdList.isEmpty()) {
+              qS[ctTag] = i18n("[No Tag]");
+            } else {
+              QString delimiter;
+              foreach(const auto tagId, tagIdList) {
+                qS[ctTag] += delimiter + file->tag(tagId).name().simplified();
+                delimiter = QLatin1Char(',');
+              }
             }
 
             qS[ctPayee] = payee.isEmpty()
