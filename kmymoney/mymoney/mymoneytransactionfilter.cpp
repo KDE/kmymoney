@@ -329,9 +329,9 @@ QVector<MyMoneySplit> MyMoneyTransactionFilter::matchingSplits(const MyMoneyTran
   auto isMatchingSplitsEmpty = true;
 
   auto extendedFilter = d->m_filterSet;
-  extendedFilter.singleFilter.dateFilter =
-  extendedFilter.singleFilter.accountFilter =
-      extendedFilter.singleFilter.categoryFilter = 0;
+  extendedFilter.singleFilter.dateFilter = 0;
+  extendedFilter.singleFilter.accountFilter = 0;
+  extendedFilter.singleFilter.categoryFilter = 0;
 
   if (filter.accountFilter ||
       filter.categoryFilter ||
