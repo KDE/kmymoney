@@ -1,4 +1,26 @@
 {
+    "KMyMoney": {
+        "OnlineTask": {
+            "Editors": [
+                {
+                    "Name": "SEPA Order",
+                    "Name[de]": "Sepa Überweisung",
+                    "OnlineTaskIds": [
+                        "org.kmymoney.creditTransfer.sepa"
+                    ],
+                    "PluginKeyword": "sepaCreditTransferUi"
+                }
+            ],
+            "Iids": [
+                "org.kmymoney.creditTransfer.sepa"
+            ],
+            "PluginKeyword": "sepaOnlineTasks"
+        },
+        "StoragePlugin": {
+            "Iid": "org.kmymoney.creditTransfer.sepa.sqlStoragePlugin",
+            "PluginKeyword": "sepaSqlStoragePlugin"
+        }
+    },
     "KPlugin": {
         "Authors": [
             {
@@ -19,23 +41,5 @@
         ],
         "Version": "@PROJECT_VERSION@@PROJECT_VERSION_SUFFIX@",
         "Website": "https://kmymoney.org/plugins.html"
-    },
-    "KMyMoney": {
-      "OnlineTask": {
-          "Iids": ["org.kmymoney.creditTransfer.sepa"],
-          "PluginKeyword": "sepaOnlineTasks",
-          "Editors": [
-            {
-            "PluginKeyword": "sepaCreditTransferUi",
-            "OnlineTaskIds": ["org.kmymoney.creditTransfer.sepa"],
-            "Name": "SEPA Order",
-            "Name[de]": "Sepa Überweisung"
-            }
-          ]
-      },
-      "StoragePlugin": {
-          "Iid": "org.kmymoney.creditTransfer.sepa.sqlStoragePlugin",
-          "PluginKeyword": "sepaSqlStoragePlugin"
-      }
     }
 }
