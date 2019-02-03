@@ -480,7 +480,7 @@ void InvestTransactionEditor::createEditWidgets()
   d->m_editWidgets["fee-label"] = label = new QLabel(i18n("Fees"));
   label->setAlignment(Qt::AlignVCenter);
 
-  d->m_editWidgets["fee-amount-label"] = label = new QLabel("");
+  d->m_editWidgets["fee-amount-label"] = label = new QLabel(QString());
   label->setAlignment(Qt::AlignVCenter);
 
   d->m_editWidgets["interest-label"] = label = new QLabel(i18n("Interest"));
@@ -492,7 +492,7 @@ void InvestTransactionEditor::createEditWidgets()
   d->m_editWidgets["memo-label"] = label = new QLabel(i18n("Memo"));
   label->setAlignment(Qt::AlignVCenter);
 
-  d->m_editWidgets["total"] = label = new QLabel("");
+  d->m_editWidgets["total"] = label = new QLabel(QString());
   label->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
 
   d->m_editWidgets["total-label"] = label = new QLabel(i18nc("Total value", "Total"));

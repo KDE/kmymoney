@@ -164,7 +164,7 @@ void chipTanDialog::tanInputChanged(const QString& input)
     button->setToolTip(i18n("A valid tan is required to proceed."));
   } else {
     button->setEnabled(true);
-    button->setToolTip("");
+    button->setToolTip(QString());
   }
 }
 
