@@ -3,15 +3,36 @@
         "Authors": [
             {
                 "Email": "asoliverez@gmail.com,lukasz.wojnilowicz@gmail.com",
-                "Name": "Alvaro Soliverez,Łukasz Wojniłowicz"
+                "Name": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[ca]": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[gl]": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[nl]": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[pt]": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[sv]": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[uk]": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[x-test]": "xxAlvaro Soliverez,Łukasz Wojniłowiczxx"
             }
         ],
         "Description": "Adds forecast view to KMyMoney",
+        "Description[ca]": "Afegeix la vista de pronòstics al KMyMoney",
+        "Description[gl]": "Engade unha vista de prognóstico a KMyMoney",
+        "Description[nl]": "Voegt weergave van prognoses toe aan KMyMoney",
+        "Description[pt]": "Adiciona a área de antevisão ao KMyMoney",
+        "Description[sv]": "Lägger till prognosvy i KMyMoney",
+        "Description[uk]": "Панель прогнозів у KMyMoney",
+        "Description[x-test]": "xxAdds forecast view to KMyMoneyxx",
         "EnabledByDefault": true,
         "Icon": "forecast",
         "Id": "forecastview",
         "License": "GPL",
         "Name": "Forecast view",
+        "Name[ca]": "Vista de pronòstic",
+        "Name[gl]": "Vista de prognóstico",
+        "Name[nl]": "Prognoseweergave",
+        "Name[pt]": "Área de Previsão",
+        "Name[sv]": "Prognosvy",
+        "Name[uk]": "Перегляд прогнозів",
+        "Name[x-test]": "xxForecast viewxx",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],
