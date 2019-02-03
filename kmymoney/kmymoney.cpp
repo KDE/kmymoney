@@ -433,6 +433,11 @@ public:
               s->setFileFixVersion(4);
               break;
 
+            case 4:
+              fixFile_4();
+              s->setFileFixVersion(5);
+              break;
+
               // add new levels above. Don't forget to increase currentFixVersion() for all
               // the storage backends this fix applies to
             default:
@@ -646,6 +651,26 @@ public:
   /* DO NOT ADD code to this function or any of it's called ones.
      Instead, create a new function, fixFile_n, and modify the initializeStorage()
      logic above to call it */
+
+  void fixFile_4()
+  {
+    auto file = MyMoneyFile::instance();
+    QList<MyMoneySecurity> currencies = file->currencyList();
+    static const QStringList symbols = {  QStringLiteral("XAU"),
+                                          QStringLiteral("XPD"),
+                                          QStringLiteral("XPT"),
+                                          QStringLiteral("XAG") };
+
+
+    foreach(auto currency, currencies) {
+      if (symbols.contains(currency.id())) {
+        if (currency.smallestAccountFraction() != currency.smallestCashFraction()) {
+          currency.setSmallestAccountFraction(currency.smallestCashFraction());
+          file->modifyCurrency(currency);
+        }
+      }
+    }
+  }
 
   void fixFile_3()
   {
@@ -3627,6 +3652,8 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
       connectStorageToModels();
       // inform everyone about new data
       MyMoneyFile::instance()->forceDataChanged();
+      // Enable save in case the fix changed the contents
+      q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(dirty());
       updateActions();
       m_myMoneyView->slotFileOpened();
       onlineJobAdministration::instance()->updateActions();
