@@ -490,6 +490,13 @@ void KReportConfigurationFilterDlg::slotReset()
     m_ui->m_stateBox->setCurrentIndex(state);
 
   //
+  // Validity Filters
+  //
+  int validity;
+  if (m_initialState.firstValidity(validity))
+    m_ui->m_validityBox->setCurrentIndex(validity);
+
+  //
   // Number Filter
   //
 

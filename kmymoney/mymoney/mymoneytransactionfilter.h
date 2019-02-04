@@ -519,6 +519,18 @@ public:
   bool firstState(int& i) const;
 
   bool states(QList<int>& list) const;
+
+  /**
+    * This method returns whether a validity filter has been set,
+    * and if so, it returns the first validity in the filter.
+    *
+    * @param i reference to int to replace with first validity filter, untouched otherwise
+    * @return return true if a validity filter has been set
+    */
+  bool firstValidity(int& i) const;
+
+  bool validities(QList<int>& list) const;
+
   /**
     * This method returns whether a text filter has been set,
     * and if so, it returns the text filter.

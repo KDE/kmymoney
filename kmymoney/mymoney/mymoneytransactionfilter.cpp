@@ -730,6 +730,34 @@ bool MyMoneyTransactionFilter::firstState(int&i) const
   return result;
 }
 
+bool MyMoneyTransactionFilter::firstValidity(int&i) const
+{
+  bool result = m_filterSet.singleFilter.validityFilter;
+
+  if (result) {
+    QHashIterator<int, QString> it_validity(m_validity);
+    if (it_validity.hasNext()) {
+      it_validity.next();
+      i = it_validity.key();
+    }
+  }
+  return result;
+}
+
+bool MyMoneyTransactionFilter::validities(QList<int>& list) const
+{
+  bool result = m_filterSet.singleFilter.validityFilter;
+
+  if (result) {
+    QHashIterator<int, QString> it_validity(m_validity);
+    while (it_validity.hasNext()) {
+      it_validity.next();
+      list += it_validity.key();
+    }
+  }
+  return result;
+}
+
 bool MyMoneyTransactionFilter::textFilter(QRegExp& exp) const
 {
   exp = m_text;
