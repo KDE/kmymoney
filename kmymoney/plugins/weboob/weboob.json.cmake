@@ -4,6 +4,7 @@
             {
                 "Email": "romain@weboob.org",
                 "Name": "Romain Bignon",
+                "Name[ca@valencia]": "Romain Bignon",
                 "Name[ca]": "Romain Bignon",
                 "Name[gl]": "Romain Bignon",
                 "Name[nl]": "Romain Bignon",
@@ -14,6 +15,7 @@
             }
         ],
         "Description": "Plugin for weboob",
+        "Description[ca@valencia]": "Connector pel Weboob",
         "Description[ca]": "Connector pel Weboob",
         "Description[gl]": "Complemento para weboob",
         "Description[nl]": "Plug-in voor weboob",
@@ -26,7 +28,9 @@
         "Id": "weboob",
         "License": "GPL",
         "Name": "Weboob",
+        "Name[ca@valencia]": "Weboob",
         "Name[ca]": "Weboob",
+        "Name[fr]": "Weboob",
         "Name[gl]": "Weboob",
         "Name[nl]": "Weboob",
         "Name[pt]": "Weboob",

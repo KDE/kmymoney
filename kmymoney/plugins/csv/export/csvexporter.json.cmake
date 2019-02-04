@@ -4,6 +4,7 @@
             {
                 "Email": "aganders93@gmail.com",
                 "Name": "Allan Anderson",
+                "Name[ca@valencia]": "Allan Anderson",
                 "Name[ca]": "Allan Anderson",
                 "Name[gl]": "Allan Anderson",
                 "Name[nl]": "Allan Anderson",
@@ -14,6 +15,7 @@
             }
         ],
         "Description": "Add CSV exporting to KMyMoney",
+        "Description[ca@valencia]": "Afig l'exportació a CSV al KMyMoney",
         "Description[ca]": "Afegeix l'exportació a CSV al KMyMoney",
         "Description[gl]": "Permite exportar CSV desde KMyMoney",
         "Description[nl]": "Voeg CSV exporteren toe aan KMyMoney",
@@ -26,6 +28,7 @@
         "Id": "csvexporter",
         "License": "GPL",
         "Name": "CSV Exporter",
+        "Name[ca@valencia]": "Exportador a CSV",
         "Name[ca]": "Exportador a CSV",
         "Name[gl]": "Exportador a CSV",
         "Name[nl]": "CSV-exportprogramma",

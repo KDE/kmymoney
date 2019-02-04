@@ -4,6 +4,7 @@
             {
                 "Email": "ktambascio@users.sourceforge.net,tbaumgart@kde.org,acejones@users.sourceforge.net,lukasz.wojnilowicz@gmail.com",
                 "Name": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
+                "Name[ca@valencia]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
                 "Name[ca]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
                 "Name[gl]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
                 "Name[nl]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
@@ -14,6 +15,7 @@
             }
         ],
         "Description": "Adds XML storage support to KMyMoney",
+        "Description[ca@valencia]": "Afig la implementació de l'emmagatzematge en XML al KMyMoney",
         "Description[ca]": "Afegeix la implementació de l'emmagatzematge en XML al KMyMoney",
         "Description[gl]": "Permite almacenamento de XML en KMyMoney",
         "Description[nl]": "Voegt ondersteuning toe voor XML-opslag aan KMyMoney",
@@ -26,6 +28,7 @@
         "Id": "xmlstorage",
         "License": "GPL",
         "Name": "XML Storage",
+        "Name[ca@valencia]": "Emmagatzematge XML",
         "Name[ca]": "Emmagatzematge XML",
         "Name[gl]": "Almacenamento de XML",
         "Name[nl]": "XML-opslag",

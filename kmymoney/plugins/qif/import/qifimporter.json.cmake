@@ -4,6 +4,7 @@
             {
                 "Email": "mte@users.sourceforge.net",
                 "Name": "Michael Edwardes",
+                "Name[ca@valencia]": "Michael Edwardes",
                 "Name[ca]": "Michael Edwardes",
                 "Name[gl]": "Michael Edwardes",
                 "Name[nl]": "Michael Edwardes",
@@ -14,6 +15,7 @@
             }
         ],
         "Description": "Add QIF importing to KMyMoney",
+        "Description[ca@valencia]": "Afig la importació des de QIF al KMyMoney",
         "Description[ca]": "Afegeix la importació des de QIF al KMyMoney",
         "Description[gl]": "Permite importar QIF en KMyMoney",
         "Description[nl]": "Voeg QIF importeren toe aan KMyMoney",
@@ -26,6 +28,7 @@
         "Id": "qifimporter",
         "License": "GPL",
         "Name": "QIF Importer",
+        "Name[ca@valencia]": "importador de QIF",
         "Name[ca]": "importador de QIF",
         "Name[gl]": "Importador de QIF",
         "Name[nl]": "QIF importeren",

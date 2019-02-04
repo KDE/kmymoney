@@ -4,6 +4,7 @@
             {
                 "Email": "tonybloom@users.sourceforge.net,lukasz.wojnilowicz@gmail.com",
                 "Name": "Tony Bloomfield,Łukasz Wojniłowicz",
+                "Name[ca@valencia]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[ca]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[gl]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[nl]": "Tony Bloomfield,Łukasz Wojniłowicz",
@@ -14,6 +15,7 @@
             }
         ],
         "Description": "Adds SQL storage support to KMyMoney",
+        "Description[ca@valencia]": "Afig la implementació de l'emmagatzematge en SQL al KMyMoney",
         "Description[ca]": "Afegeix la implementació de l'emmagatzematge en SQL al KMyMoney",
         "Description[gl]": "Permite almacenamento de SQL en KMyMoney",
         "Description[nl]": "Voegt ondersteuning toe voor SQL-opslag aan KMyMoney",
@@ -26,6 +28,7 @@
         "Id": "sqlstorage",
         "License": "GPL",
         "Name": "SQL Storage",
+        "Name[ca@valencia]": "Emmagatzematge SQL",
         "Name[ca]": "Emmagatzematge SQL",
         "Name[gl]": "Almacenamento de SQL",
         "Name[nl]": "SQL-opslag",

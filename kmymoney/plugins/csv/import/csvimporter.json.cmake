@@ -4,6 +4,7 @@
             {
                 "Email": "aganders93@gmail.com,lukasz.wojnilowicz@gmail.com",
                 "Name": "Allan Anderson,Łukasz Wojniłowicz",
+                "Name[ca@valencia]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[ca]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[gl]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[nl]": "Allan Anderson,Łukasz Wojniłowicz",
@@ -14,6 +15,7 @@
             }
         ],
         "Description": "Add CSV importing to KMyMoney",
+        "Description[ca@valencia]": "Afig la importació des de CSV al KMyMoney",
         "Description[ca]": "Afegeix la importació des de CSV al KMyMoney",
         "Description[gl]": "Permite importar CSV en KMyMoney",
         "Description[nl]": "Voeg CSV importeren toe aan KMyMoney",
@@ -26,6 +28,7 @@
         "Id": "csvimporter",
         "License": "GPL",
         "Name": "CSV Importer",
+        "Name[ca@valencia]": "Importador de CSV",
         "Name[ca]": "Importador de CSV",
         "Name[gl]": "Importador de CSV",
         "Name[nl]": "CSV-importeerprogramma",

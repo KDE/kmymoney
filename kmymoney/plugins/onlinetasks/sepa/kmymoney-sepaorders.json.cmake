@@ -26,6 +26,7 @@
             {
                 "Email": "christian-david@web.de",
                 "Name": "Christian David",
+                "Name[ca@valencia]": "Christian David",
                 "Name[ca]": "Christian David",
                 "Name[gl]": "Christian David",
                 "Name[nl]": "Christian David",
@@ -36,6 +37,7 @@
             }
         ],
         "Description": "Order types for single european payment area (SEPA) orders",
+        "Description[ca@valencia]": "Tipus d'ordres per a les ordres de l'àrea única europea de pagaments «SEPA» (Single European Payment Area)",
         "Description[ca]": "Tipus d'ordres per a les ordres de l'àrea única europea de pagaments «SEPA» (Single European Payment Area)",
         "Description[gl]": "Tipos das ordes da área europea única de pagos (SEPA)",
         "Description[nl]": "Opdrachttypen voor enkelvoudige betalingsopdrachten in Europees gebied (SEPA)",
@@ -48,6 +50,7 @@
         "Id": "SEPA orders for online banking",
         "License": "GPLv2+",
         "Name": "SEPA orders",
+        "Name[ca@valencia]": "Ordres SEPA",
         "Name[ca]": "Ordres SEPA",
         "Name[gl]": "Ordes SEPA",
         "Name[nl]": "SEPA-opdrachten",

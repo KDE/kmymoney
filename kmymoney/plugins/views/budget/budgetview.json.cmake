@@ -4,6 +4,7 @@
             {
                 "Email": "darren_gould@gmx.de",
                 "Name": "Darren Gould",
+                "Name[ca@valencia]": "Darren Gould",
                 "Name[ca]": "Darren Gould",
                 "Name[gl]": "Darren Gould",
                 "Name[nl]": "Darren Gould",
@@ -14,6 +15,7 @@
             }
         ],
         "Description": "Adds budget view to KMyMoney",
+        "Description[ca@valencia]": "Afig la vista de pressupostos al KMyMoney",
         "Description[ca]": "Afegeix la vista de pressupostos al KMyMoney",
         "Description[gl]": "Engade unha vista de presuposto a KMyMoney",
         "Description[nl]": "Voegt weergave van budgetten toe aan KMyMoney",
@@ -26,6 +28,7 @@
         "Id": "budgetview",
         "License": "GPL",
         "Name": "Budget view",
+        "Name[ca@valencia]": "Vista de pressupost",
         "Name[ca]": "Vista de pressupost",
         "Name[gl]": "Vista de presuposto",
         "Name[nl]": "Budgetweergave",
