@@ -116,12 +116,12 @@ Please select an appropriate entry.</string>
        </property>
        <item>
         <property name="text">
-         <string comment="description of investment activity" extracomment="don't translate part after '-'">Buy Shares</string>
+         <string comment="description of investment activity" extracomment="Finance, don't translate part after '-'">Buy Shares</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string comment="description of investment activity" extracomment="don't translate part after '-'">Sell Shares</string>
+         <string comment="description of investment activity" extracomment="Finance, don't translate part after '-'">Sell Shares</string>
         </property>
        </item>
        <item>
@@ -136,12 +136,12 @@ Please select an appropriate entry.</string>
        </item>
        <item>
         <property name="text">
-         <string comment="description of investment activity" extracomment="don't translate part after '-'">Add Shares</string>
+         <string comment="description of investment activity" extracomment="Finance, don't translate part after '-'">Add Shares</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string comment="description of investment activity" extracomment="don't translate part after '-'">Remove Shares</string>
+         <string comment="description of investment activity" extracomment="Finance, don't translate part after '-'">Remove Shares</string>
         </property>
        </item>
        <item>

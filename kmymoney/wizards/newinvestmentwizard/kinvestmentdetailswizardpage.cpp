@@ -40,8 +40,8 @@ KInvestmentDetailsWizardPage::KInvestmentDetailsWizardPage(QWidget *parent)
 
   // load the price mode combo
   m_priceMode->insertItem(i18nc("default price mode", "(default)"), 0);
-  m_priceMode->insertItem(i18n("Price per share"), 1);
-  m_priceMode->insertItem(i18n("Total for all shares"), 2);
+  m_priceMode->insertItem(i18n("Finance", "Price per share"), 1);
+  m_priceMode->insertItem(i18n("Finance", "Total for all shares"), 2);
 
   // load the widget with the available currencies
   m_tradingCurrencyEdit->update(QString());

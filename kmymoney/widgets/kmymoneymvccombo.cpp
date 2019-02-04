@@ -640,14 +640,14 @@ KMyMoneyActivityCombo::KMyMoneyActivityCombo(QWidget* w) :
     KMyMoneyMVCCombo(false, w),
     m_activity(MyMoneySplit::UnknownTransactionType)
 {
-  addItem(i18n("Buy shares"), QVariant(MyMoneySplit::BuyShares));
-  addItem(i18n("Sell shares"), QVariant(MyMoneySplit::SellShares));
+  addItem(i18n("Finance", "Buy shares"), QVariant(MyMoneySplit::BuyShares));
+  addItem(i18n("Finance", "Sell shares"), QVariant(MyMoneySplit::SellShares));
   addItem(i18n("Dividend"), QVariant(MyMoneySplit::Dividend));
   addItem(i18n("Reinvest dividend"), QVariant(MyMoneySplit::ReinvestDividend));
   addItem(i18n("Yield"), QVariant(MyMoneySplit::Yield));
-  addItem(i18n("Add shares"), QVariant(MyMoneySplit::AddShares));
-  addItem(i18n("Remove shares"), QVariant(MyMoneySplit::RemoveShares));
-  addItem(i18n("Split shares"), QVariant(MyMoneySplit::SplitShares));
+  addItem(i18n("Finance", "Add shares"), QVariant(MyMoneySplit::AddShares));
+  addItem(i18n("Finance", "Remove shares"), QVariant(MyMoneySplit::RemoveShares));
+  addItem(i18n("Finance", "Split shares"), QVariant(MyMoneySplit::SplitShares));
   addItem(i18n("Interest Income"), QVariant(MyMoneySplit::InterestIncome));
 
   connect(this, SIGNAL(itemSelected(QString)), this, SLOT(slotSetActivity(QString)));

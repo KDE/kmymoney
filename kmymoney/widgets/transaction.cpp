@@ -1459,16 +1459,16 @@ void InvestTransaction::activity(QString& txt, MyMoneySplit::investTransactionTy
 {
   switch (type) {
     case MyMoneySplit::AddShares:
-      txt = i18n("Add shares");
+      txt = i18n("Finance", "Add shares");
       break;
     case MyMoneySplit::RemoveShares:
-      txt = i18n("Remove shares");
+      txt = i18n("Finance", "Remove shares");
       break;
     case MyMoneySplit::BuyShares:
-      txt = i18n("Buy shares");
+      txt = i18n("Finance", "Buy shares");
       break;
     case MyMoneySplit::SellShares:
-      txt = i18n("Sell shares");
+      txt = i18n("Finance", "Sell shares");
       break;
     case MyMoneySplit::Dividend:
       txt = i18n("Dividend");
@@ -1480,7 +1480,7 @@ void InvestTransaction::activity(QString& txt, MyMoneySplit::investTransactionTy
       txt = i18n("Yield");
       break;
     case MyMoneySplit::SplitShares:
-      txt = i18n("Split shares");
+      txt = i18n("Finance", "Split shares");
       break;
     case MyMoneySplit::InterestIncome:
       txt = i18n("Interest Income");
@@ -1540,7 +1540,7 @@ bool InvestTransaction::formCellText(QString& txt, Qt::Alignment& align, int row
         case LabelColumn2:
           align |= Qt::AlignLeft;
           if (haveShares()) {
-            txt = i18n("Shares");
+            txt = i18n("Finance", "Shares");
           } else if (haveSplitRatio()) {
             txt = i18n("Ratio");
           }
@@ -1575,7 +1575,7 @@ bool InvestTransaction::formCellText(QString& txt, Qt::Alignment& align, int row
         case LabelColumn2:
           align |= Qt::AlignLeft;
           if (havePrice())
-            txt = i18n("Price/share");
+            txt = i18n("Finance", "Price/share");
           break;
 
         case ValueColumn2:

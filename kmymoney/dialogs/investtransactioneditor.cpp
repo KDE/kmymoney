@@ -322,7 +322,7 @@ void InvestTransactionEditor::createEditWidgets()
   m_editWidgets["asset-label"] = label = new QLabel(i18n("Account"));
   label->setAlignment(Qt::AlignVCenter);
 
-  m_editWidgets["price-label"] = label = new QLabel(i18n("Price/share"));
+  m_editWidgets["price-label"] = label = new QLabel(i18n("Finance", "Price/share"));
   label->setAlignment(Qt::AlignVCenter);
 
   m_editWidgets["fee-label"] = label = new QLabel(i18n("Fees"));
@@ -1141,7 +1141,7 @@ void InvestTransactionEditor::updatePriceMode(const MyMoneySplit& split)
         priceEdit->setValue(sharesEdit->value().abs() * price);
 
     } else if (priceMode() == PricePerShare) {
-      label->setText(i18n("Price/Share"));
+      label->setText(i18n("Finance", "Price/Share"));
       priceEdit->setValue(price);
 
     } else

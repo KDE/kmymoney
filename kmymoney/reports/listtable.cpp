@@ -225,7 +225,7 @@ void ListTable::render(QString& result, QString& csv) const
   i18nHeaders["week"] = i18n("Week");
   i18nHeaders["reconcileflag"] = i18n("Reconciled");
   i18nHeaders["action"] = i18n("Action");
-  i18nHeaders["shares"] = i18n("Shares");
+  i18nHeaders["shares"] = i18n("Finance", "Shares");
   i18nHeaders["price"] = i18n("Price");
   i18nHeaders["latestprice"] = i18n("Price");
   i18nHeaders["netinvvalue"] = i18n("Net Value");

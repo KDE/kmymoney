@@ -2174,10 +2174,10 @@ const QStringList MyMoneyFile::consistencyCheck()
           // use the value as master if the transaction is balanced
           if (t.splitSum().isZero()) {
             s.setShares(s.value());
-            rc << i18n("  * shares set to value in split of transaction '%1'.", t.id());
+            rc << i18n("Finance", "  * shares set to value in split of transaction '%1'.", t.id());
           } else {
             s.setValue(s.shares());
-            rc << i18n("  * value set to shares in split of transaction '%1'.", t.id());
+            rc << i18n("Finance", "  * value set to shares in split of transaction '%1'.", t.id());
           }
           sChanged = true;
           ++problemCount;
@@ -2272,8 +2272,8 @@ const QStringList MyMoneyFile::consistencyCheck()
       if (!(*it_s).value().isZero() && (*it_s).shares().isZero()) {
         s.setShares(s.value());
         sChanged = true;
-        rc << i18n("  * Split in scheduled transaction '%1' contained value != 0 and shares == 0.", (*it_sch).name());
-        rc << i18n("    Shares set to value.");
+        rc << i18n("Finance", "  * Split in scheduled transaction '%1' contained value != 0 and shares == 0.", (*it_sch).name());
+        rc << i18n("Finance", "    Shares set to value.");
         ++problemCount;
       }
 
@@ -2294,10 +2294,10 @@ const QStringList MyMoneyFile::consistencyCheck()
           // use the value as master if the transaction is balanced
           if (t.splitSum().isZero()) {
             s.setShares(s.value());
-            rc << i18n("  * shares set to value in split in schedule '%1'.", (*it_sch).name());
+            rc << i18n("Finance", "  * shares set to value in split in schedule '%1'.", (*it_sch).name());
           } else {
             s.setValue(s.shares());
-            rc << i18n("  * value set to shares in split in schedule '%1'.", (*it_sch).name());
+            rc << i18n("Finance", "  * value set to shares in split in schedule '%1'.", (*it_sch).name());
           }
           sChanged = true;
           ++problemCount;
