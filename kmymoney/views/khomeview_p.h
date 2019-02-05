@@ -412,6 +412,7 @@ public:
 
   void loadView()
   {
+    Q_Q(KHomeView);
     m_view->setZoomFactor(KMyMoneySettings::zoomFactor());
 
     QList<MyMoneyAccount> list;
@@ -425,11 +426,9 @@ public:
       m_transactionStats = MyMoneyFile::instance()->countTransactionsWithSpecificReconciliationState();
 
       // keep current location on page
-      int scrollBarPos = 0;
-#ifdef ENABLE_WEBENGINE
-        /// @todo cannot test this
-#else
-      scrollBarPos = m_view->page()->mainFrame()->scrollBarValue(Qt::Vertical);
+      m_scrollBarPos = 0;
+#ifndef ENABLE_WEBENGINE
+      m_scrollBarPos = m_view->page()->mainFrame()->scrollBarValue(Qt::Vertical);
 #endif
 
       //clear the forecast flag so it will be reloaded
@@ -507,13 +506,11 @@ public:
 
       m_view->setHtml(m_html, QUrl("file://"));
 
-      if (scrollBarPos) {
-#ifdef ENABLE_WEBENGINE
-        /// @todo cannot test this
-#else
-        m_view->page()->mainFrame()->setScrollBarValue(Qt::Vertical, scrollBarPos);
-#endif
+#ifndef ENABLE_WEBENGINE
+      if (m_scrollBarPos) {
+        QMetaObject::invokeMethod(q, "slotAdjustScrollPos", Qt::QueuedConnection);
       }
+#endif
     }
   }
 
@@ -1853,6 +1850,7 @@ public:
     */
   QMap<QString, dailyBalances> m_accountList;
   QPrinter *m_currentPrinter;
+  int       m_scrollBarPos;
 };
 
 #endif
