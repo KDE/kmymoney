@@ -4,6 +4,7 @@
             {
                 "Email": "aquamaniac@users.sourceforge.net,ipwizard@users.sourceforge.net,christian-david@web.de",
                 "Name": "Martin Preuss,Thomas Baumgart,Christian Dávid",
+                "Name[ca@valencia]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
                 "Name[ca]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
                 "Name[gl]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
                 "Name[nl]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
@@ -15,6 +16,7 @@
             }
         ],
         "Description": "Add HBCI/FinTs online banking to KMyMoney",
+        "Description[ca@valencia]": "Afig la banca en línia HBCI/FinTs al KMyMoney",
         "Description[ca]": "Afegeix la banca en línia HBCI/FinTs al KMyMoney",
         "Description[gl]": "Engade banca por internet HBCI e FinTs a KMyMoney",
         "Description[nl]": "Voegt HBCI/FinTs online bankieren toe aan KMyMoney",
@@ -28,6 +30,7 @@
         "Id": "kbanking",
         "License": "GPL",
         "Name": "KBanking",
+        "Name[ca@valencia]": "KBanking",
         "Name[ca]": "KBanking",
         "Name[fr]": "KBanking",
         "Name[gl]": "KBanking",

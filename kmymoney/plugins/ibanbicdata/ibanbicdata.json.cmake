@@ -4,6 +4,7 @@
             {
                 "Email": "christian-david@web.de",
                 "Name": "Christian Dávid",
+                "Name[ca@valencia]": "Christian Dávid",
                 "Name[ca]": "Christian Dávid",
                 "Name[gl]": "Christian Dávid",
                 "Name[nl]": "Christian Dávid",
@@ -15,6 +16,7 @@
             }
         ],
         "Description": "Adds predefined IBAN/BIC numbers to KMyMoney",
+        "Description[ca@valencia]": "Afig números IBAN/BIC predefinits al KMyMoney",
         "Description[ca]": "Afegeix números IBAN/BIC predefinits al KMyMoney",
         "Description[gl]": "Engade números predefinidos de IBAN e BIC a KMyMoney",
         "Description[nl]": "Voegt voorgedefinieerde IBAN/BIC-nummers toe aan KMyMoney",
@@ -28,6 +30,7 @@
         "Id": "ibanbicdata",
         "License": "GPL",
         "Name": "IBAN/BIC Data",
+        "Name[ca@valencia]": "Dades IBAN i BIC",
         "Name[ca]": "Dades IBAN i BIC",
         "Name[gl]": "Datos de IBAN e BIC",
         "Name[nl]": "IBAN/BIC gegevens",

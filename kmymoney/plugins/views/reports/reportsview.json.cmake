@@ -4,6 +4,7 @@
             {
                 "Email": "asoliverez@gmail.com,lukasz.wojnilowicz@gmail.com",
                 "Name": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[ca@valencia]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[ca]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[gl]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[nl]": "Alvaro Soliverez,Łukasz Wojniłowicz",
@@ -15,6 +16,7 @@
             }
         ],
         "Description": "Adds reports view to KMyMoney",
+        "Description[ca@valencia]": "Afig la vista d'informes al KMyMoney",
         "Description[ca]": "Afegeix la vista d'informes al KMyMoney",
         "Description[gl]": "Engade unha vista de informes a KMyMoney",
         "Description[nl]": "Voegt weergave van rapporten toe aan KMyMoney",
@@ -28,6 +30,7 @@
         "Id": "reportsview",
         "License": "GPL",
         "Name": "Reports view",
+        "Name[ca@valencia]": "Vista d'informes",
         "Name[ca]": "Vista d'informes",
         "Name[gl]": "Vista de informes",
         "Name[nl]": "Rapportenweergave",

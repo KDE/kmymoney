@@ -4,6 +4,7 @@
             {
                 "Email": "christian-david@web.de",
                 "Name": "Christian David",
+                "Name[ca@valencia]": "Christian David",
                 "Name[ca]": "Christian David",
                 "Name[gl]": "Christian David",
                 "Name[nl]": "Christian David",
@@ -15,6 +16,7 @@
             }
         ],
         "Description": "If mapped to an account, it pretends it could handle all onlineTasks (for developers only).",
+        "Description[ca@valencia]": "Si està mapat a un compte, intenta que puga gestionar totes les tasques en línia (només per als desenvolupadors).",
         "Description[ca]": "Si està mapat a un compte, intenta que pugui gestionar totes les tasques en línia (només per als desenvolupadors).",
         "Description[gl]": "Se está asociado cunha conta pretende que pode xestionar todas as onlineTasks (só para desenvolvedores).",
         "Description[nl]": "Indien gekoppeld aan een account, pretendeert het dat het alle online taken kan afhandelen (alleen voor ontwikkelaars)",
@@ -27,6 +29,7 @@
         "Id": "onlinejobpluginmockup",
         "License": "GPL",
         "Name": "onlinejobpluginmockup",
+        "Name[ca@valencia]": "onlinejobpluginmockup",
         "Name[ca]": "onlinejobpluginmockup",
         "Name[fr]": "onlinejobpluginmockup",
         "Name[gl]": "onlinejobpluginmockup",
