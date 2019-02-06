@@ -9,6 +9,7 @@
                 "Name[gl]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[nl]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[pt]": "Allan Anderson,Łukasz Wojniłowicz",
+                "Name[pt_BR]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[sv]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[uk]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[x-test]": "xxAllan Anderson,Łukasz Wojniłowiczxx"
@@ -20,6 +21,7 @@
         "Description[gl]": "Permite importar CSV en KMyMoney",
         "Description[nl]": "Voeg CSV importeren toe aan KMyMoney",
         "Description[pt]": "Adição da importação de CSV para o KMyMoney",
+        "Description[pt_BR]": "Adiciona importação CSV no KMyMoney",
         "Description[sv]": "Lägg till CSV-import till KMyMoney",
         "Description[uk]": "Імпортування даних CSV у KMyMoney",
         "Description[x-test]": "xxAdd CSV importing to KMyMoneyxx",
@@ -33,6 +35,7 @@
         "Name[gl]": "Importador de CSV",
         "Name[nl]": "CSV-importeerprogramma",
         "Name[pt]": "Importação de CSV",
+        "Name[pt_BR]": "Importador CSV",
         "Name[sv]": "CSV-import",
         "Name[uk]": "Імпортування CSV",
         "Name[x-test]": "xxCSV Importerxx",

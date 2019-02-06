@@ -9,6 +9,7 @@
                 "Name[gl]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[nl]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[pt]": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[pt_BR]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[sv]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[uk]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[x-test]": "xxAlvaro Soliverez,Łukasz Wojniłowiczxx"
@@ -33,6 +34,7 @@
         "Name[gl]": "Vista de prognóstico",
         "Name[nl]": "Prognoseweergave",
         "Name[pt]": "Área de Previsão",
+        "Name[pt_BR]": "Área de previsão",
         "Name[sv]": "Prognosvy",
         "Name[uk]": "Перегляд прогнозів",
         "Name[x-test]": "xxForecast viewxx",

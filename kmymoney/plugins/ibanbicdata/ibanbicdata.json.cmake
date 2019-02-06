@@ -9,6 +9,7 @@
                 "Name[gl]": "Christian Dávid",
                 "Name[nl]": "Christian Dávid",
                 "Name[pt]": "Christian Dávid",
+                "Name[pt_BR]": "Christian Dávid",
                 "Name[sv]": "Christian Dávid",
                 "Name[uk]": "Christian Dávid",
                 "Name[x-test]": "xxChristian Dávidxx"
@@ -20,6 +21,7 @@
         "Description[gl]": "Engade números predefinidos de IBAN e BIC a KMyMoney",
         "Description[nl]": "Voegt voorgedefinieerde IBAN/BIC-nummers toe aan KMyMoney",
         "Description[pt]": "Adiciona os números IBAN/BIC predefinidos ao KMyMoney",
+        "Description[pt_BR]": "Adiciona números IBAN/BIC pré-definidos no KMyMoney",
         "Description[sv]": "Lägger till fördefinierade IBAN/BIC-nummer i KMyMoney",
         "Description[uk]": "Попередньо визначені номери IBAN/BIC у KMyMoney",
         "Description[x-test]": "xxAdds predefined IBAN/BIC numbers to KMyMoneyxx",
@@ -33,6 +35,7 @@
         "Name[gl]": "Datos de IBAN e BIC",
         "Name[nl]": "IBAN/BIC gegevens",
         "Name[pt]": "Dados do IBAN/BIC",
+        "Name[pt_BR]": "Dados IBAN/BIC",
         "Name[sv]": "IBAN- och BIC-data",
         "Name[uk]": "Дані IBAN та BIC",
         "Name[x-test]": "xxIBAN/BIC Dataxx",

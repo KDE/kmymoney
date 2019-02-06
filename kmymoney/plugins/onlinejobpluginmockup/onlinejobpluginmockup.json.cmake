@@ -9,6 +9,7 @@
                 "Name[gl]": "Christian David",
                 "Name[nl]": "Christian David",
                 "Name[pt]": "Christian David",
+                "Name[pt_BR]": "Christian David",
                 "Name[sv]": "Christian David",
                 "Name[uk]": "Christian David",
                 "Name[x-test]": "xxChristian Davidxx"
@@ -33,6 +34,7 @@
         "Name[gl]": "onlinejobpluginmockup",
         "Name[nl]": "onlinejobpluginmockup",
         "Name[pt]": "onlinejobpluginmockup",
+        "Name[pt_BR]": "onlinejobpluginmockup",
         "Name[sv]": "Insticksprogram med nätjobbsattrapp",
         "Name[uk]": "onlinejobpluginmockup",
         "Name[x-test]": "xxonlinejobpluginmockupxx",

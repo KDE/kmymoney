@@ -9,6 +9,7 @@
                 "Name[gl]": "Ace Jones,Thomas Baumgart",
                 "Name[nl]": "Ace Jones,Thomas Baumgart",
                 "Name[pt]": "Ace Jones,Thomas Baumgart",
+                "Name[pt_BR]": "Ace Jones,Thomas Baumgart",
                 "Name[sv]": "Ace Jones,Thomas Baumgart",
                 "Name[uk]": "Ace Jones,Thomas Baumgart",
                 "Name[x-test]": "xxAce Jones,Thomas Baumgartxx"
@@ -20,6 +21,7 @@
         "Description[gl]": "Permite importar OFX en KMyMoney",
         "Description[nl]": "Voeg OFX importeren toe aan KMyMoney",
         "Description[pt]": "Adição da importação de OFX para o KMyMoney",
+        "Description[pt_BR]": "Adiciona importação OFX no KMyMoney",
         "Description[sv]": "Lägg till OFX-import till KMyMoney",
         "Description[uk]": "Імпортування даних OFX у KMyMoney",
         "Description[x-test]": "xxAdd OFX importing to KMyMoneyxx",
@@ -33,6 +35,7 @@
         "Name[gl]": "Importador de OFX",
         "Name[nl]": "QFX-importeren",
         "Name[pt]": "Importação de OFX",
+        "Name[pt_BR]": "Importador OFX",
         "Name[sv]": "QFX-import",
         "Name[uk]": "Інструмент імпортування OFX",
         "Name[x-test]": "xxOFX Importerxx",

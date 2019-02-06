@@ -9,6 +9,7 @@
                 "Name[gl]": "Darren Gould",
                 "Name[nl]": "Darren Gould",
                 "Name[pt]": "Darren Gould",
+                "Name[pt_BR]": "Darren Gould",
                 "Name[sv]": "Darren Gould",
                 "Name[uk]": "Darren Gould",
                 "Name[x-test]": "xxDarren Gouldxx"
@@ -33,6 +34,7 @@
         "Name[gl]": "Vista de presuposto",
         "Name[nl]": "Budgetweergave",
         "Name[pt]": "Área do Orçamento",
+        "Name[pt_BR]": "Área de orçamento",
         "Name[sv]": "Budgetvy",
         "Name[uk]": "Панель бюджету",
         "Name[x-test]": "xxBudget viewxx",
