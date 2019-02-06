@@ -468,7 +468,7 @@ void OfxHttpsRequest::slotOfxFinished(KJob* /* e */)
       }
       f.close();
     }
-    KMessageBox::detailedSorry(0, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed"));
+    KMessageBox::detailedSorry(nullptr, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed"));
 //FIXME: FIX on windows
     unlink(m_dst.path().toUtf8().data());
   }
@@ -518,7 +518,7 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const KUrl &url, const QByte
   }
 
   if (m_error != QHttp::NoError) {
-    KMessageBox::error(0, errorMsg, i18n("OFX setup error"));
+    KMessageBox::error(nullptr, errorMsg, i18n("OFX setup error"));
 //FIXME: FIX on windows
     unlink(dst.path().toUtf8().data());
   }

@@ -416,7 +416,7 @@ bool MyMoneyQifReader::startImport()
   m_data.clear();
 
   if (!KIO::NetAccess::download(m_url, m_filename, 0)) {
-    KMessageBox::detailedError(0,
+    KMessageBox::detailedError(nullptr,
                                i18n("Error while loading file '%1'.", m_url.prettyUrl()),
                                KIO::NetAccess::lastErrorString(),
                                i18n("File access error"));
@@ -466,7 +466,7 @@ bool MyMoneyQifReader::startImport()
       slotSendDataToFilter();
       rc = true;
     } else {
-      KMessageBox::detailedError(0, i18n("Error while running the filter '%1'.", m_filter.program().join(QLatin1String(" "))),
+      KMessageBox::detailedError(nullptr, i18n("Error while running the filter '%1'.", m_filter.program().join(QLatin1String(" "))),
                                  m_filter.errorString(),
                                  i18n("Filter error"));
     }
@@ -552,7 +552,7 @@ bool MyMoneyQifReader::finishImport()
     if (rc)
       ft.commit();
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(0, i18n("Unable to add transactions"),
+    KMessageBox::detailedSorry(nullptr, i18n("Unable to add transactions"),
                                i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
     rc = false;
   }
@@ -990,7 +990,7 @@ void MyMoneyQifReader::createOpeningBalance(MyMoneyAccount::_accountTypeE accTyp
       }
       if (needCreate) {
         // in case we create it anyway, we issue a warning to the user to check it manually
-        KMessageBox::sorry(0, QString("<qt>%1</qt>").arg(i18n("KMyMoney has imported a second opening balance transaction into account <b>%1</b> which differs from the one found already on file. Please correct this manually once the import is done.", acc.name())), i18n("Opening balance problem"));
+        KMessageBox::sorry(nullptr, QString("<qt>%1</qt>").arg(i18n("KMyMoney has imported a second opening balance transaction into account <b>%1</b> which differs from the one found already on file. Please correct this manually once the import is done.", acc.name())), i18n("Opening balance problem"));
       }
     }
 
@@ -1012,7 +1012,7 @@ void MyMoneyQifReader::createOpeningBalance(MyMoneyAccount::_accountTypeE accTyp
     // remember which account we created
     d->st.m_accountId = m_account.id();
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedError(0,
+    KMessageBox::detailedError(nullptr,
                                i18n("Error while creating opening balance transaction"),
                                QString("%1(%2):%3").arg(e.file()).arg(e.line()).arg(e.what()),
                                i18n("File access error"));
@@ -1092,7 +1092,7 @@ void MyMoneyQifReader::processTransactionEntry()
 
   tr.m_datePosted = (m_qifProfile.date(extractLine('D')));
   if (!tr.m_datePosted.isValid()) {
-    int rc = KMessageBox::warningContinueCancel(0,
+    int rc = KMessageBox::warningContinueCancel(nullptr,
              i18n("The date entry \"%1\" read from the file cannot be interpreted through the current "
                   "date profile setting of \"%2\".\n\nPressing \"Continue\" will "
                   "assign todays date to the transaction. Pressing \"Cancel\" will abort "
@@ -1320,7 +1320,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
   if (date.isValid())
     tr.m_datePosted = date;
   else {
-    int rc = KMessageBox::warningContinueCancel(0,
+    int rc = KMessageBox::warningContinueCancel(nullptr,
              i18n("The date entry \"%1\" read from the file cannot be interpreted through the current "
                   "date profile setting of \"%2\".\n\nPressing \"Continue\" will "
                   "assign todays date to the transaction. Pressing \"Cancel\" will abort "
@@ -1452,7 +1452,7 @@ void MyMoneyQifReader::processInvestmentTransactionEntry()
 
     // If the security is not known, notify the user
     // TODO (Ace) A "SelectOrCreateAccount" interface for investments
-    KMessageBox::information(0, i18n("This investment account does not contain the \"%1\" security.  "
+    KMessageBox::information(nullptr, i18n("This investment account does not contain the \"%1\" security.  "
                                      "Transactions involving this security will be ignored.", securityname),
                              i18n("Security not found"),
                              QString("MissingSecurity%1").arg(securityname.trimmed()));
@@ -2117,7 +2117,7 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
 
     } catch (const MyMoneyException &e) {
       const QString message(i18n("Account \"%1\" disappeared: %2", account.name(), e.what()));
-      KMessageBox::error(0, message);
+      KMessageBox::error(nullptr, message);
     }
   }
 
@@ -2137,7 +2137,7 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
           return;
 
         } else {
-          switch (KMessageBox::questionYesNo(0,
+          switch (KMessageBox::questionYesNo(nullptr,
                                              i18nc("The 'type of object' 'x' does not exist", "The %1 '%2' does not exist. Do you "
                                                    "want to create it?", typeStr, account.name()))) {
             case KMessageBox::Yes:
@@ -2222,9 +2222,9 @@ void MyMoneyQifReader::selectOrCreateAccount(const SelectCreateMode mode, MyMone
           throw MYMONEYEXCEPTION("USERABORT");
 
         if (typeStr == i18n("account")) {
-          KMessageBox::error(0, i18n("You must select or create an account."));
+          KMessageBox::error(nullptr, i18n("You must select or create an account."));
         } else {
-          KMessageBox::error(0, i18n("You must select or create a category."));
+          KMessageBox::error(nullptr, i18n("You must select or create a category."));
         }
       }
     }

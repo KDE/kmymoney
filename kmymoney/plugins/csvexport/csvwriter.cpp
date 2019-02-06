@@ -79,14 +79,14 @@ void CsvWriter::write(const QString& filename,
       QString errMsg = i18n("Unexpected exception '%1' thrown in %2, line %3 "
                             "caught in MyMoneyCsvWriter::write()", e.what(), e.file(), e.line());
 
-      KMessageBox::error(0, errMsg);
+      KMessageBox::error(nullptr, errMsg);
     }
 
     csvFile.close();
     qDebug() << i18n("Export completed.\n");
     delete m_plugin->exporterDialog();  //  Can now delete as export finished
   } else {
-    KMessageBox::error(0, i18n("Unable to open file '%1' for writing", filename));
+    KMessageBox::error(nullptr, i18n("Unable to open file '%1' for writing", filename));
   }
 }
 
@@ -180,7 +180,7 @@ void CsvWriter::writeTransactionEntry(const MyMoneyTransaction& t, const QString
   MyMoneySplit split = t.splitByAccount(accountId);
   QList<MyMoneySplit> splits = t.splits();
   if (splits.count() < 2) {
-    KMessageBox::sorry(0, i18n("Transaction number '%1' is missing an account assignment.\n"
+    KMessageBox::sorry(nullptr, i18n("Transaction number '%1' is missing an account assignment.\n"
                                "Date '%2', Payee '%3'.\nTransaction dropped.\n", count, t.postDate().toString(Qt::ISODate), file->payee(split.payeeId()).name()),
                        i18n("Invalid transaction"));
     m_noError = false;
@@ -358,7 +358,7 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
       }
       if ((strAction == QLatin1String("DivX")) || (strAction == QLatin1String("IntIncX"))) {
         if ((map.value(MyMoneyAccount::Checkings).isEmpty()) && (map.value(MyMoneyAccount::Cash).isEmpty())) {
-          KMessageBox::sorry(0, i18n("Transaction number '%1' is missing an account assignment.\n"
+          KMessageBox::sorry(nullptr, i18n("Transaction number '%1' is missing an account assignment.\n"
                                      "Date '%2', Amount '%3'.\nTransaction dropped.\n", count, t.postDate().toString(Qt::ISODate), strAmount),
                              i18n("Invalid transaction"));
           return;

@@ -94,7 +94,7 @@ bool CsvExporterPlugin::okToWriteFile(const KUrl& url)
   bool reallySaveFile = true;
 
   if (KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, 0)) {
-    if (KMessageBox::warningYesNo(0, QString("<qt>") + i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?", url.pathOrUrl()) + QString("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
+    if (KMessageBox::warningYesNo(nullptr, QString("<qt>") + i18n("The file <b>%1</b> already exists. Do you really want to overwrite it?", url.pathOrUrl()) + QString("</qt>"), i18n("File already exists")) != KMessageBox::Yes)
       reallySaveFile = false;
   }
   return reallySaveFile;

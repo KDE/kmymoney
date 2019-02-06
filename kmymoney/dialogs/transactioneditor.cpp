@@ -419,7 +419,7 @@ bool TransactionEditor::fixTransactionCommodity(const MyMoneyAccount& account)
                 msg = i18n("At least one of the selected transactions has more than two splits and is originally based on a different currency (%1). Using this account to modify the transactions may result in rounding errors. Do you want to continue?", osec.name());
               }
 
-              if (KMessageBox::warningContinueCancel(0, QString("<qt>%1</qt>").arg(msg)) == KMessageBox::Cancel) {
+              if (KMessageBox::warningContinueCancel(nullptr, QString("<qt>%1</qt>").arg(msg)) == KMessageBox::Cancel) {
                 rc = false;
               }
             }

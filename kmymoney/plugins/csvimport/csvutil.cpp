@@ -608,7 +608,7 @@ void CsvUtil::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAc
                              , MyMoneyUtils::formatMoney(-openingBal, newAccount, sec)
                              , MyMoneyUtils::formatMoney(openingBal, newAccount, sec));
 
-      int ans = KMessageBox::questionYesNoCancel(0, message);
+      int ans = KMessageBox::questionYesNoCancel(nullptr, message);
       if (ans == KMessageBox::Yes) {
         openingBal = -openingBal;
 
@@ -631,7 +631,7 @@ void CsvUtil::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAc
 
     ft.commit();
   } catch (const MyMoneyException &e) {
-    KMessageBox::information(0, i18n("Unable to add account: %1", e.what()));
+    KMessageBox::information(nullptr, i18n("Unable to add account: %1", e.what()));
   }
 }
 

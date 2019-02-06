@@ -282,7 +282,7 @@ bool KNewLoanWizard::validateCurrentPage()
     if (field("thisYearPaymentButton").toBool()
         && !field("loanAmountEditValid").toBool()) {
       dontLeavePage = true;
-      KMessageBox::error(0, i18n("You selected, that payments have already been made towards this loan. "
+      KMessageBox::error(nullptr, i18n("You selected, that payments have already been made towards this loan. "
                                  "This requires you to enter the loan amount exactly as found on your "
                                  "last statement."), i18n("Calculation error"));
     } else
@@ -293,7 +293,7 @@ bool KNewLoanWizard::validateCurrentPage()
     if (!field("loanAmountEditValid").toBool()
         && !field("interestRateEditValid").toBool()) {
       dontLeavePage = true;
-      KMessageBox::error(0, ks.subs(i18n("interest rate")).toString(), i18n("Calculation error"));
+      KMessageBox::error(nullptr, ks.subs(i18n("interest rate")).toString(), i18n("Calculation error"));
     } else
       updateInterestRate();
 
@@ -302,7 +302,7 @@ bool KNewLoanWizard::validateCurrentPage()
          || !field("interestRateEditValid").toBool())
         && field("durationValueEdit").toInt() == 0) {
       dontLeavePage = true;
-      KMessageBox::error(0, ks.subs(i18n("term")).toString(), i18n("Calculation error"));
+      KMessageBox::error(nullptr, ks.subs(i18n("term")).toString(), i18n("Calculation error"));
     } else
       updateDuration();
 
@@ -312,7 +312,7 @@ bool KNewLoanWizard::validateCurrentPage()
          || field("durationValueEdit").toInt() == 0)
         && !field("paymentEditValid").toBool()) {
       dontLeavePage = true;
-      KMessageBox::error(0, ks.subs(i18n("principal and interest")).toString(), i18n("Calculation error"));
+      KMessageBox::error(nullptr, ks.subs(i18n("principal and interest")).toString(), i18n("Calculation error"));
     } else
       updatePayment();
 
@@ -505,7 +505,7 @@ int KNewLoanWizard::calculateLoan()
     }
 
   } catch (const MyMoneyException &) {
-    KMessageBox::error(0,
+    KMessageBox::error(nullptr,
                        i18n("You have entered mis-matching information. Please backup to the "
                             "appropriate page and update your figures or leave one value empty "
                             "to let KMyMoney calculate it for you"),
@@ -515,7 +515,7 @@ int KNewLoanWizard::calculateLoan()
 
   result += i18n("\n\nAccept this or modify the loan information and recalculate.");
 
-  KMessageBox::information(0, result, i18n("Calculation successful"));
+  KMessageBox::information(nullptr, result, i18n("Calculation successful"));
   return 1;
 }
 

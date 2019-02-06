@@ -238,6 +238,6 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
     }
     ft.commit();
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(0, i18n("Unable to create all objects for the investment"), QString("%1 caugt in %2:%3").arg(e.what()).arg(e.file()).arg(e.line()));
+    KMessageBox::detailedSorry(nullptr, i18n("Unable to create all objects for the investment"), QString("%1 caugt in %2:%3").arg(e.what()).arg(e.file()).arg(e.line()));
   }
 }

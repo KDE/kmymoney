@@ -693,7 +693,7 @@ void KBudgetView::slotItemChanged(QTreeWidgetItem* p, int col)
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(0, i18n("Unable to modify budget"),
+      KMessageBox::detailedSorry(nullptr, i18n("Unable to modify budget"),
                                  i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   } else {
@@ -857,7 +857,7 @@ void KBudgetView::slotResetBudget()
     }
 
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(0, i18n("Unable to reset budget"),
+    KMessageBox::detailedSorry(nullptr, i18n("Unable to reset budget"),
                                i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
   }
 }
@@ -870,7 +870,7 @@ void KBudgetView::slotUpdateBudget()
     ft.commit();
     slotRefreshHideUnusedButton();
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(0, i18n("Unable to modify budget"),
+    KMessageBox::detailedSorry(nullptr, i18n("Unable to modify budget"),
                                i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
   }
 }

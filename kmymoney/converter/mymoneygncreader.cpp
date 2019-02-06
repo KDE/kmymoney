@@ -1160,7 +1160,7 @@ bool XmlReader::startElement(const QString&, const QString&, const QString& elNa
   } catch (const MyMoneyException &e) {
 #ifndef _GNCFILEANON
     // we can't pass on exceptions here coz the XML reader won't catch them and we just abort
-    KMessageBox::error(0, i18n("Import failed:\n\n%1", e.what()), PACKAGE);
+    KMessageBox::error(nullptr, i18n("Import failed:\n\n%1", e.what()), PACKAGE);
     qWarning("%s", qPrintable(e.what()));
 #else
     qWarning("%s", e->toLatin1());
@@ -1199,7 +1199,7 @@ bool XmlReader::endElement(const QString&, const QString&, const QString&elName)
   } catch (const MyMoneyException &e) {
 #ifndef _GNCFILEANON
     // we can't pass on exceptions here coz the XML reader won't catch them and we just abort
-    KMessageBox::error(0, i18n("Import failed:\n\n%1", e.what()), PACKAGE);
+    KMessageBox::error(nullptr, i18n("Import failed:\n\n%1", e.what()), PACKAGE);
     qWarning("%s", qPrintable(e.what()));
 #else
     qWarning("%s", e->toLatin1());
@@ -1308,7 +1308,7 @@ void MyMoneyGncReader::readFile(QIODevice* pDevice, IMyMoneySerialize* storage)
     terminate();  // do all the wind-up things
     ft.commit();
   } catch (const MyMoneyException &e) {
-    KMessageBox::error(0, i18n("Import failed:\n\n%1", e.what()), PACKAGE);
+    KMessageBox::error(nullptr, i18n("Import failed:\n\n%1", e.what()), PACKAGE);
     qWarning("%s", qPrintable(e.what()));
   } // end catch
   MyMoneyFile::instance()->blockSignals(blocked);
@@ -2233,7 +2233,7 @@ void MyMoneyGncReader::terminate()
 
     if (mainCurrency != "") {
       QString question = i18n("Your main currency seems to be %1 (%2); do you want to set this as your base currency?", mainCurrency, m_storage->currency(mainCurrency.toUtf8()).name());
-      if (KMessageBox::questionYesNo(0, question, PACKAGE) == KMessageBox::Yes) {
+      if (KMessageBox::questionYesNo(nullptr, question, PACKAGE) == KMessageBox::Yes) {
         m_storage->setValue("kmm-baseCurrency", mainCurrency);
       }
     }
@@ -2253,7 +2253,7 @@ void MyMoneyGncReader::terminate()
       KGuiItem yesItem(button0Text, KIcon(), "", "");
       KGuiItem noItem(i18n("Save Report"), KIcon(), "", "");
 
-      switch (KMessageBox::questionYesNoCancel(0,
+      switch (KMessageBox::questionYesNoCancel(nullptr,
               buildReportSection(sectionsToReport[si]),
               PACKAGE,
               yesItem, noItem)) {
@@ -2271,7 +2271,7 @@ void MyMoneyGncReader::terminate()
     for (si = 0; si < m_suspectList.count(); ++si) {
       MyMoneySchedule sc = m_storage->schedule(m_suspectList[si]);
       KEditScheduleDlg *s;
-      switch (KMessageBox::warningYesNo(0, i18n("Problems were encountered in converting schedule '%1'.\nDo you want to review or edit it now?", sc.name()), PACKAGE)) {
+      switch (KMessageBox::warningYesNo(nullptr, i18n("Problems were encountered in converting schedule '%1'.\nDo you want to review or edit it now?", sc.name()), PACKAGE)) {
         case KMessageBox::Yes:
           s = new KEditScheduleDlg(sc);
           if (s->exec())
@@ -2564,7 +2564,7 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
               break;
           }
 #endif
-          switch (KMessageBox::questionYesNo(0, i18n("%1 is not an Investment Account. Do you wish to make it one?", invAcc.name()), PACKAGE)) {
+          switch (KMessageBox::questionYesNo(nullptr, i18n("%1 is not an Investment Account. Do you wish to make it one?", invAcc.name()), PACKAGE)) {
             case KMessageBox::Yes:
               // convert it - but what if it has splits???
               qWarning("Not yet implemented");

@@ -505,7 +505,7 @@ void CSVDialog::slotFileDialogClicked()
 {
   if ((m_fileType != "Banking") || (m_profileName.isEmpty())) {
     if (m_fileType == "Banking") {
-      KMessageBox::information(0, i18n("Please select a profile type and enter a profile name."));
+      KMessageBox::information(nullptr, i18n("Please select a profile type and enter a profile name."));
     }
     return;
   }
@@ -621,7 +621,7 @@ void CSVDialog::slotFileDialogClicked()
   m_inFileName.clear();
 
   if (!KIO::NetAccess::download(m_url, m_inFileName, 0)) {
-    KMessageBox::detailedError(0, i18n("Error while loading file '%1'.", m_url.prettyUrl()),
+    KMessageBox::detailedError(nullptr, i18n("Error while loading file '%1'.", m_url.prettyUrl()),
                                KIO::NetAccess::lastErrorString(),
                                i18n("File access error"));
     return;
@@ -1204,7 +1204,7 @@ int CSVDialog::processQifLine(QString& iBuff)
         }
       }
       if ((m_flagCol < 0) || (m_flagCol > m_endColumn)) {      // shouldn't get here
-        KMessageBox::sorry(0, i18n("An invalid column was entered.\n"
+        KMessageBox::sorry(nullptr, i18n("An invalid column was entered.\n"
                                    "Must be between 1 and %1.", m_endColumn), i18n("CSV import"));
         return KMessageBox::Cancel;
       }
@@ -1287,7 +1287,7 @@ int CSVDialog::processQifLine(QString& iBuff)
     if (m_wiz->m_pageIntro->ui->checkBoxSkipSetup->isEnabled()) {
       errMsg += i18n("<center>You possibly need to check the start and end line settings, or reset 'Skip setup'.</center>");
     }
-    KMessageBox::information(0, errMsg);
+    KMessageBox::information(nullptr, errMsg);
     m_importError = true;
     return KMessageBox::Cancel;
   }
@@ -1424,7 +1424,7 @@ void CSVDialog::csvImportTransaction(MyMoneyStatement& st)
   tr.m_strBankID = m_trData.id;
   tr.m_datePosted = m_trData.date;
   if (!tr.m_datePosted.isValid()) {
-    int rc = KMessageBox::warningContinueCancel(0, i18n("The date entry \"%1\" read from the file cannot be interpreted through the current "
+    int rc = KMessageBox::warningContinueCancel(nullptr, i18n("The date entry \"%1\" read from the file cannot be interpreted through the current "
              "date format setting of \"%2.\"" "\n\nPressing \'Continue\' will "
              "assign today's date to the transaction. Pressing \'Cancel\'' will abort "
              "the import operation. You can then restart the import and select a different "
@@ -1498,7 +1498,7 @@ void CSVDialog::slotImportClicked()
 
     int skp = m_wiz->m_pageLinesDate->ui->spinBox_skip->value() - 1;
     if (skp > m_endLine) {
-      KMessageBox::sorry(0, i18n("<center>The start line is greater than the end line.\n</center>"
+      KMessageBox::sorry(nullptr, i18n("<center>The start line is greater than the end line.\n</center>"
                                  "<center>Please correct your settings.</center>"), i18n("CSV import"));
       m_importError = true;
       return;
@@ -1515,7 +1515,7 @@ void CSVDialog::slotImportClicked()
     if (m_wiz->m_pageIntro->ui->checkBoxSkipSetup->isChecked()) {
       errMsg += i18n("<center>As you had skipped Setup, the wizard will now return you to the setups.</center>");
     }
-    KMessageBox::information(0, errMsg);
+    KMessageBox::information(nullptr, errMsg);
     m_importError = true;
   }
 }
@@ -1759,7 +1759,7 @@ int CSVDialog::validateColumn(const int& col, QString& type)
     return KMessageBox::Ok; //                 accept new type
   }
   if ((m_columnTypeList[col] == "memo")  && (type == "payee") && (m_wiz->m_pageBanking->isVisible())) {
-    int rc = KMessageBox::questionYesNo(0, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
+    int rc = KMessageBox::questionYesNo(nullptr, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
                                         "<center>If you wish to copy the Memo data to the Payee field, click 'Yes'.</center>",
                                         m_columnTypeList[col]));
     if (rc == KMessageBox::Yes) {
@@ -1783,7 +1783,7 @@ int CSVDialog::validateColumn(const int& col, QString& type)
   }
   //  BUT column is already in use
   if (m_wiz->m_pageBanking->isVisible()) {
-    KMessageBox::information(0, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
+    KMessageBox::information(nullptr, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
                                      "<center>Please reselect both entries as necessary.</center>", m_columnTypeList[col]));
     if (m_columnTypeList[col] == "memo") {  //  If memo col has now been cleared, remove it from m_columnTypeList too
       m_memoColList.removeOne(col);
@@ -2012,7 +2012,7 @@ void CSVDialog::decimalSymbolSelected(int index)
     endLine = m_investProcessing->m_endLine;
   }
   if (startLine > endLine) {
-    KMessageBox::sorry(0, i18n("<center>The start line is greater than the end line.\n</center>"
+    KMessageBox::sorry(nullptr, i18n("<center>The start line is greater than the end line.\n</center>"
                                "<center>Please correct your settings.</center>"), i18n("CSV import"));
     m_importError = true;
     m_wiz->m_pageIntro->ui->checkBoxSkipSetup->setChecked(false);

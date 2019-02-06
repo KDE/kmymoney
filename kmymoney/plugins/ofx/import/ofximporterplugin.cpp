@@ -129,7 +129,7 @@ void OfxImporterPlugin::slotImportFile()
     if (isMyFormat(url.path())) {
       slotImportFile(url.path());
     } else {
-      KMessageBox::error(0, i18n("Unable to import %1 using the OFX importer plugin.  This file is not the correct format.", url.prettyUrl()), i18n("Incorrect format"));
+      KMessageBox::error(nullptr, i18n("Unable to import %1 using the OFX importer plugin.  This file is not the correct format.", url.prettyUrl()), i18n("Incorrect format"));
     }
 
   }
@@ -767,7 +767,7 @@ bool OfxImporterPlugin::updateAccount(const MyMoneyAccount& acc, bool moreAccoun
       d->m_timestampOffset = 0;
     }
   } catch (const MyMoneyException &e) {
-    KMessageBox::information(0 , i18n("Error connecting to bank: %1", e.what()));
+    KMessageBox::information(nullptr , i18n("Error connecting to bank: %1", e.what()));
   }
 
   return false;
@@ -777,7 +777,7 @@ void OfxImporterPlugin::slotImportFile(const QString& url)
 {
   qDebug("OfxImporterPlugin::slotImportFile");
   if (!import(url)) {
-    KMessageBox::error(0, QString("<qt>%1</qt>").arg(i18n("<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin returned the following error:</p><p>%2</p>", url, lastError())), i18n("Importing error"));
+    KMessageBox::error(nullptr, QString("<qt>%1</qt>").arg(i18n("<p>Unable to import <b>'%1'</b> using the OFX importer plugin.  The plugin returned the following error:</p><p>%2</p>", url, lastError())), i18n("Importing error"));
   }
 }
 
@@ -808,7 +808,7 @@ bool OfxImporterPlugin::storeStatements(QList<MyMoneyStatement>& statements)
   }
 
   if (hasstatements && !ok) {
-    KMessageBox::error(0, i18n("Importing process terminated unexpectedly."), i18n("Failed to import all statements."));
+    KMessageBox::error(nullptr, i18n("Importing process terminated unexpectedly."), i18n("Failed to import all statements."));
   }
 
   return (!hasstatements || ok);

@@ -339,7 +339,7 @@ void KPayeesView::slotRenamePayee(QListWidgetItem* p)
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(0, i18n("Unable to modify payee"),
+      KMessageBox::detailedSorry(nullptr, i18n("Unable to modify payee"),
                                  i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   } else {
@@ -675,7 +675,7 @@ void KPayeesView::slotUpdatePayee()
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(0, i18n("Unable to modify payee"),
+      KMessageBox::detailedSorry(nullptr, i18n("Unable to modify payee"),
                                  i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   }

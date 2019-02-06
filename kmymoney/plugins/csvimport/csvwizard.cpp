@@ -370,7 +370,7 @@ void CSVWizard::memoColumnSelected(int col)
     }
     int rc = KMessageBox::Yes;
     if (m_pageBanking->isVisible()) {  //  Don't show msg. if we got here from resource file load
-      rc = KMessageBox::questionYesNo(0, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
+      rc = KMessageBox::questionYesNo(nullptr, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
                                               "<center>If you wish to copy the Payee data to the memo field, click 'Yes'.</center>",
                                               m_csvDialog->m_columnTypeList[col]));
     }
@@ -398,7 +398,7 @@ void CSVWizard::memoColumnSelected(int col)
     m_csvDialog->m_memoSelected = false;  //  clear incorrect selection
     m_csvDialog->m_payeeColCopied = false;
     if (m_pageBanking->isVisible()) {
-      KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>"
+      KMessageBox::information(nullptr, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>"
                                        , m_csvDialog->m_columnTypeList[col]));
       m_pageBanking->ui->comboBoxBnk_memoCol->setCurrentIndex(-1);
       m_csvDialog->setPreviousColumn(-1);
@@ -661,7 +661,7 @@ void IntroPage::slotComboEditTextChanged(QString txt)
     disconnect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
     m_messageBoxJustCancelled = false;
 
-    int rc = KMessageBox::warningYesNo(0, i18n("<center>You have cleared the profile name '%1'.</center>\n"
+    int rc = KMessageBox::warningYesNo(nullptr, i18n("<center>You have cleared the profile name '%1'.</center>\n"
                                        "<center>If you wish to delete the entry, click 'Delete'.</center>\n"
                                        "<center>Otherwise, click 'Keep'.</center>", m_wizDlg->m_csvDialog->m_profileName),
                                        i18n("Delete or Edit Profile Name"),
@@ -757,7 +757,7 @@ void IntroPage::slotComboSourceClicked(int index)
                                     "<center>but you have not elected to add a new profile</center>"
                                     "<center>If you wish to add '%1' as a new profile,</center>"
                                     "<center> click 'Yes'.  Otherwise, click 'No'</center>", txt);
-            if (KMessageBox::questionYesNo(0, question, i18n("Adding profile name.")) == KMessageBox::Yes) {
+            if (KMessageBox::questionYesNo(nullptr, question, i18n("Adding profile name.")) == KMessageBox::Yes) {
               addProfileName();
               m_index = indx;
               m_priorIndex = indx;
@@ -836,7 +836,7 @@ int  IntroPage::editProfileName(QString& fromName, QString& toName)
                             "<center>from '%1' to '%2'.</center>"
                             "<center>If you wish to accept the new name, click 'Yes'.</center>"
                             "<center>Otherwise, click 'No'</center>", from, toName);
-    if (KMessageBox::questionYesNo(0, question, i18n("Edit a profile name or create new one.")) == KMessageBox::Yes) {
+    if (KMessageBox::questionYesNo(nullptr, question, i18n("Edit a profile name or create new one.")) == KMessageBox::Yes) {
       disconnect(ui->combobox_source, SIGNAL(editTextChanged(QString)), this, SLOT(slotComboEditTextChanged(QString)));
       //  Accept new name.
       m_map.take(from);
@@ -964,7 +964,7 @@ int IntroPage::addItem(QString txt)
 
     if (!m_addRequested) {
       question2 = question1 + question2;
-      if (KMessageBox::questionYesNo(0, question2, i18n("Adding profile name.")) == KMessageBox::No) {
+      if (KMessageBox::questionYesNo(nullptr, question2, i18n("Adding profile name.")) == KMessageBox::No) {
         ui->combobox_source->lineEdit()->clear();
         connect(ui->combobox_source->lineEdit(), SIGNAL(editingFinished()), this, SLOT(slotLineEditingFinished()));
         return ret;
@@ -978,7 +978,7 @@ int IntroPage::addItem(QString txt)
   }  else {  //  Already exists.
 
     if ((!m_addRequested) && (!m_editAccepted)) {
-      if (KMessageBox::questionYesNo(0, question2, i18n("Adding profile name.")) == KMessageBox::No) {
+      if (KMessageBox::questionYesNo(nullptr, question2, i18n("Adding profile name.")) == KMessageBox::No) {
         int indx = ui->combobox_source->findText(txt);
         ui->combobox_source->removeItem(indx);
         return ret;

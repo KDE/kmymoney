@@ -181,7 +181,7 @@ void CsvExportDlg::checkData(const QString& accountName)
       MyMoneyTransactionFilter filter(account.id());
       listTrans = file->transactionList(filter);
       if (listTrans.isEmpty()) {
-        KMessageBox::sorry(0, i18n("There are no entries in this account.\n"),
+        KMessageBox::sorry(nullptr, i18n("There are no entries in this account.\n"),
                            i18n("Invalid account"));
         return;
       }

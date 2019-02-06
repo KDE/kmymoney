@@ -85,7 +85,7 @@ bool KSelectDatabaseDlg::checkDrivers()
     //qDebug() << driverName;
     //qDebug() << m_supportedDrivers;
     if (!m_supportedDrivers.join(",").contains(driverName)) {
-      KMessageBox::error(0, i18n("Qt SQL driver %1 is no longer installed on your system", driverName),
+      KMessageBox::error(nullptr, i18n("Qt SQL driver %1 is no longer installed on your system", driverName),
                          "");
       return (false);
     }
@@ -180,7 +180,7 @@ void KSelectDatabaseDlg::slotDriverSelected(QListWidgetItem *driver)
 {
   KSharedPtr<MyMoneyDbDriver> dbDriver = MyMoneyDbDriver::create(driver->text().section(' ', 0, 0));
   if (!dbDriver->isTested()) {
-    int rc = KMessageBox::warningContinueCancel(0,
+    int rc = KMessageBox::warningContinueCancel(nullptr,
              i18n("Database type %1 has not been fully tested in a KMyMoney environment.\n"
                   "Please make sure you have adequate backups of your data.\n"
                   "Please report any problems to the developer mailing list at "

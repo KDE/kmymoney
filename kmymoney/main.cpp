@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
   KApplication* a = new KApplication();
 
   if (KGlobal::locale()->monetaryDecimalSymbol().isEmpty()) {
-    KMessageBox::error(0, i18n("The monetary decimal symbol is not correctly set in the KDE System Settings module Country/Region & Language. Please set it to a reasonable value and start KMyMoney again."), i18n("Invalid settings"));
+    KMessageBox::error(nullptr, i18n("The monetary decimal symbol is not correctly set in the KDE System Settings module Country/Region & Language. Please set it to a reasonable value and start KMyMoney again."), i18n("Invalid settings"));
     delete a;
     exit(1);
   }
@@ -184,7 +184,7 @@ int main(int argc, char *argv[])
     try {
       rc = runKMyMoney(a, splash);
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedError(0, i18n("Uncaught error. Please report the details to the developers"),
+      KMessageBox::detailedError(nullptr, i18n("Uncaught error. Please report the details to the developers"),
                                  i18n("%1 in file %2 line %3", e.what(), e.file(), e.line()));
       throw e;
     }
@@ -228,7 +228,7 @@ int runKMyMoney(KApplication *a, KStartupLogo *splash)
           }
         }
 
-        if (KMessageBox::questionYesNo(0, i18n("Another instance of KMyMoney is already running. Do you want to quit?")) == KMessageBox::Yes) {
+        if (KMessageBox::questionYesNo(nullptr, i18n("Another instance of KMyMoney is already running. Do you want to quit?")) == KMessageBox::Yes) {
           rc = 1;
           delete kmymoney;
           delete splash;

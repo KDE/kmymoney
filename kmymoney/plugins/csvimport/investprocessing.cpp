@@ -280,7 +280,7 @@ void InvestProcessing::slotFileDialogClicked()
   m_csvDialog->m_inFileName.clear();
 
   if (!KIO::NetAccess::download(m_url,  m_csvDialog->m_inFileName, 0)) {
-    KMessageBox::detailedError(0, i18n("Error while loading file '%1'.", m_url.prettyUrl()),
+    KMessageBox::detailedError(nullptr, i18n("Error while loading file '%1'.", m_url.prettyUrl()),
                                KIO::NetAccess::lastErrorString(),
                                i18n("File access error"));
     return;
@@ -478,7 +478,7 @@ int InvestProcessing::validateNewColumn(const int& col, const QString& type)
   //  selection was in range
   //  ...but does it clash?
   if ((!m_columnTypeList[col].isEmpty())  && (m_columnTypeList[col] != type) && (m_csvDialog->m_wiz->m_pageInvestment->m_investPageInitialized)) {  // column is already in use
-    KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>", m_columnTypeList[col]));
+    KMessageBox::information(nullptr, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>", m_columnTypeList[col]));
     m_previousColumn = -1;
     resetComboBox(m_columnTypeList[col], col);  //      clash,  so reset ..
     resetComboBox(type, col);  //                   ... both comboboxes
@@ -593,7 +593,7 @@ void InvestProcessing::memoColumnSelected(int col)
     }
     int rc = KMessageBox::Yes;
     if (m_csvDialog->m_wiz->m_pageInvestment->isVisible()) {
-      rc = KMessageBox::questionYesNo(0, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
+      rc = KMessageBox::questionYesNo(nullptr, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
                                               "<center>If you wish to copy that data to the memo field, click 'Yes'.</center>",
                                               m_columnTypeList[col]));
     }
@@ -616,7 +616,7 @@ void InvestProcessing::memoColumnSelected(int col)
     m_memoSelected = false;//                    clear incorrect selection
     m_typeColCopied = false;
     m_detailColCopied = false;
-    KMessageBox::information(0, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>", m_columnTypeList[col]));
+    KMessageBox::information(nullptr, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>", m_columnTypeList[col]));
     m_csvDialog->m_wiz->m_pageInvestment->ui->comboBoxInv_memoCol->setCurrentIndex(-1);
     m_previousColumn = -1;
     resetComboBox(m_columnTypeList[col], col);  //      clash,  so reset ..
@@ -1026,7 +1026,7 @@ void InvestProcessing::readFile(const QString& fname)
       m_csvDialog->updateDecimalSymbol("price", m_priceColumn);
       m_csvDialog->updateDecimalSymbol("quantity", m_quantityColumn);
     } else {
-      KMessageBox::sorry(0, i18n("<center>An amount, price, and/or quantity column is missing.</center>Please check your selections."), i18n("CSV import"));
+      KMessageBox::sorry(nullptr, i18n("<center>An amount, price, and/or quantity column is missing.</center>Please check your selections."), i18n("CSV import"));
     }
 
     emit statementReady(st);  //              investment statement ready
@@ -1205,7 +1205,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
   if (m_columnList.count() < m_endColumn) {
     if (!m_csvDialog->m_accept) {
       QString row = QString::number(m_row);
-      int ret = KMessageBox::questionYesNoCancel(0, i18n("<center>Row number %1 does not have the expected number of columns.</center>"
+      int ret = KMessageBox::questionYesNoCancel(nullptr, i18n("<center>Row number %1 does not have the expected number of columns.</center>"
                 "<center>This might not be a problem, but it may be a header line.</center>"
                 "<center>You may accept all similar items, or just this one, or cancel.</center>",
                 row), i18n("CSV import"),
@@ -1229,7 +1229,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
       txt = txt.remove('"');
       QDate dat = m_convertDat->convertDate(txt);
       if (dat == QDate()) {
-        KMessageBox::sorry(0, i18n("<center>An invalid date has been detected during import.</center>"
+        KMessageBox::sorry(nullptr, i18n("<center>An invalid date has been detected during import.</center>"
                                    "<center><b>'%1'</b></center>"
                                    "Please check that you have set the correct date format,\n"
                                    "<center>and start and end lines.</center>"
@@ -1511,7 +1511,7 @@ int InvestProcessing::processInvestLine(const QString& inBuffer)
   if (neededFieldsCount > 3) {
     return KMessageBox::Ok;
   } else {
-    KMessageBox::sorry(0, i18n("<center>The columns selected are invalid.\n</center>"
+    KMessageBox::sorry(nullptr, i18n("<center>The columns selected are invalid.\n</center>"
                                "There must an amount or quantity fields, symbol or security name, plus date and type field."
                                "<center>You possibly need to check the start and end line settings, or reset 'Skip setup'.</center>"),
                        i18n("CSV import"));
@@ -1529,7 +1529,7 @@ int InvestProcessing::processActionType(QString& type)
   typesList << "buy" << "sell" << "div" << "reinv" << "shrsin" << "shrsout" << "intinc";
 
   if (m_buyList.isEmpty()) {
-    KMessageBox::information(0, i18n("<center>buyList of transaction types was not found.</center>"
+    KMessageBox::information(nullptr, i18n("<center>buyList of transaction types was not found.</center>"
                                      "<center>Check existence of correct resource file - 'csvimporterrc'.</center>"));
     return KMessageBox::Cancel;
   }
@@ -1559,7 +1559,7 @@ int InvestProcessing::processActionType(QString& type)
                                         "<center>containing the Payee or Detail:</center>")) - 1;//payee column
     }
     if (m_payeeColumn == 0) {
-      KMessageBox::sorry(0, i18n("An invalid column was entered.\n"
+      KMessageBox::sorry(nullptr, i18n("An invalid column was entered.\n"
                                  "Must be between 1 and %1.", m_endColumn), i18n("CSV import"));
       return KMessageBox::Cancel;
     } else if (m_payeeColumn == -1) {
@@ -1571,7 +1571,7 @@ int InvestProcessing::processActionType(QString& type)
       m_csvSplit.m_strCategoryName = m_columnList[m_payeeColumn];
       return KMessageBox::Ok;
     } else if (m_securityName.isEmpty()) {
-      KMessageBox::information(0, i18n("<center>No Detail field specified</center>"
+      KMessageBox::information(nullptr, i18n("<center>No Detail field specified</center>"
                                        "<center>and no security name supplied.</center>"
                                        "<center>(Please check the parameters given)</center>"));
       return KMessageBox::Cancel;
@@ -1696,7 +1696,7 @@ void InvestProcessing::investCsvImport(MyMoneyStatement& st)
     st.m_eType = MyMoneyStatement::etInvestment;
   tr.m_datePosted = m_trInvestData.date;
   if (!m_trInvestData.date.isValid()) {
-    int rc = KMessageBox::warningContinueCancel(0, i18n("The date entry \"%1\" read from the file cannot be interpreted through the current date format setting of \"%2.\"\n\n"
+    int rc = KMessageBox::warningContinueCancel(nullptr, i18n("The date entry \"%1\" read from the file cannot be interpreted through the current date format setting of \"%2.\"\n\n"
              "Pressing \'Continue\' will assign today's date to the transaction. Pressing \'Cancel\'' will abort the import operation. You can then restart the import and select a different date format.",
              m_trInvestData.date.toString(m_dateFormats[m_dateFormatIndex]),
              m_dateFormats[m_dateFormatIndex]), i18n("Invalid date format"));
@@ -1791,7 +1791,7 @@ void InvestProcessing::slotImportClicked()
   }
 
   if (m_csvDialog->decimalSymbol().isEmpty()) {
-    KMessageBox::sorry(0, i18n("<center>Please select the decimal symbol used in your file.\n</center>"), i18n("Investment import"));
+    KMessageBox::sorry(nullptr, i18n("<center>Please select the decimal symbol used in your file.\n</center>"), i18n("Investment import"));
     m_csvDialog->m_importError = true;
     return;
   }
@@ -1806,7 +1806,7 @@ void InvestProcessing::slotImportClicked()
   }
 
   if ((m_securityName.isEmpty()) && (m_symbolColumn < 1)) {
-    KMessageBox::sorry(0, i18n("<center>Please enter a name or symbol for the security.\n</center>"), i18n("CSV import"));
+    KMessageBox::sorry(nullptr, i18n("<center>Please enter a name or symbol for the security.\n</center>"), i18n("CSV import"));
     m_csvDialog->m_importError = true;
     return;
   }
@@ -1830,7 +1830,7 @@ void InvestProcessing::slotImportClicked()
     m_endLine = m_csvDialog->m_wiz->m_pageLinesDate->ui->spinBox_skipToLast->value();
     int skp = m_csvDialog->m_wiz->m_pageLinesDate->ui->spinBox_skip->value(); //         skip all headers
     if (skp > m_endLine) {
-      KMessageBox::sorry(0, i18n("<center>The start line is greater than the end line.\n</center>"
+      KMessageBox::sorry(nullptr, i18n("<center>The start line is greater than the end line.\n</center>"
                                  "<center>Please correct your settings.</center>"), i18n("CSV import"));
       m_csvDialog->m_importError = true;
       return;
@@ -1840,7 +1840,7 @@ void InvestProcessing::slotImportClicked()
     m_csvDialog->markUnwantedRows();
     m_screenUpdated = true;
   } else {
-    KMessageBox::information(0, i18n("The Security Name, and Date and Type columns are needed.<center>Also, the Price, Quantity and Amount columns.</center><center>Please try again.</center>"));
+    KMessageBox::information(nullptr, i18n("The Security Name, and Date and Type columns are needed.<center>Also, the Price, Quantity and Amount columns.</center><center>Please try again.</center>"));
     m_csvDialog->m_importError = true;
     return;
   }
@@ -2258,7 +2258,7 @@ void InvestProcessing::resetComboBox(const QString& comboBox, const int& col)
       m_detailSelected = false;
       break;
     default:
-      KMessageBox::sorry(0, i18n("<center>Field name not recognised.</center><center>'<b>%1</b>'</center>Please re-enter your column selections.", comboBox), i18n("CSV import"));
+      KMessageBox::sorry(nullptr, i18n("<center>Field name not recognised.</center><center>'<b>%1</b>'</center>Please re-enter your column selections.", comboBox), i18n("CSV import"));
   }
   m_columnTypeList[col].clear();
 }
@@ -2344,7 +2344,7 @@ void InvestProcessing::securityNameEdited()
   if ((index >= 0) || (name.isEmpty())) {
     return;
   }
-  int rc = KMessageBox::warningContinueCancel(0, i18n("<center>Do you want to add a new security</center>\n"
+  int rc = KMessageBox::warningContinueCancel(nullptr, i18n("<center>Do you want to add a new security</center>\n"
            "<center>%1 </center>\n"
            "<center>to the selection list?</center>\n"
            "<center>Click \'Continue\' to add the name.</center>\n"
@@ -2373,7 +2373,7 @@ void InvestProcessing::hideSecurity()
   if (name.isEmpty()) {
     return;
   }
-  int rc = KMessageBox::warningContinueCancel(0, i18n("<center>You have selected to remove from the selection list</center>\n"
+  int rc = KMessageBox::warningContinueCancel(nullptr, i18n("<center>You have selected to remove from the selection list</center>\n"
            "<center>%1. </center>\n"
            "<center>Click \'Continue\' to remove the name, or</center>\n"
            "<center>Click \'Cancel\'' to leave 'as is'.</center>",

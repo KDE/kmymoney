@@ -255,7 +255,7 @@ void KTagsView::slotRenameTag(QListWidgetItem* ta)
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(0, i18n("Unable to modify tag"),
+      KMessageBox::detailedSorry(nullptr, i18n("Unable to modify tag"),
                                  i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   } else {
@@ -483,7 +483,7 @@ void KTagsView::slotUpdateTag()
       ft.commit();
 
     } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(0, i18n("Unable to modify tag"),
+      KMessageBox::detailedSorry(nullptr, i18n("Unable to modify tag"),
                                  i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
     }
   }

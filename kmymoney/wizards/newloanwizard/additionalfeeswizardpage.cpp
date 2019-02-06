@@ -52,7 +52,7 @@ AdditionalFeesWizardPage::AdditionalFeesWizardPage(QWidget *parent)
 
 void AdditionalFeesWizardPage::slotAdditionalFees()
 {
-  // KMessageBox::information(0, QString("Not yet implemented ... if you want to help, contact kmymoney-devel@kde.org"), QString("Development notice"));
+  // KMessageBox::information(nullptr, QString("Not yet implemented ... if you want to help, contact kmymoney-devel@kde.org"), QString("Development notice"));
   MyMoneyAccount account("Phony-ID", MyMoneyAccount());
 
   QMap<QString, MyMoneyMoney> priceInfo;

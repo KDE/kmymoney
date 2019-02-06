@@ -75,13 +75,13 @@ void MyMoneyQifWriter::write(const QString& filename, const QString& profile,
       QString errMsg = i18n("Unexpected exception '%1' thrown in %2, line %3 "
                             "caught in MyMoneyQifWriter::write()", e.what(), e.file(), e.line());
 
-      KMessageBox::error(0, errMsg);
+      KMessageBox::error(nullptr, errMsg);
     }
 
     qifFile.close();
     qDebug() << "Export completed.\n";
   } else {
-    KMessageBox::error(0, i18n("Unable to open file '%1' for writing", filename));
+    KMessageBox::error(nullptr, i18n("Unable to open file '%1' for writing", filename));
   }
 }
 
@@ -353,7 +353,7 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
       }
       if ((action == "DivX") || (action == "IntIncX")) {
         if (map.value(MyMoneyAccount::Checkings).isEmpty()) {
-          KMessageBox::sorry(0,
+          KMessageBox::sorry(nullptr,
                              QString("<qt>%1</qt>").arg(i18n("Transaction number <b>%1</b> is missing an account assignment.\nTransaction dropped.", count)),
                              i18n("Invalid transaction"));
           noError = false;

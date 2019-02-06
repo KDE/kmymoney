@@ -346,7 +346,7 @@ void KMyMoneyUtils::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoneyTr
   try {
     MyMoneyForecast::calculateAutoLoan(schedule, transaction, balances);
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedError(0, i18n("Unable to load schedule details"), e.what());
+    KMessageBox::detailedError(nullptr, i18n("Unable to load schedule details"), e.what());
   }
 }
 

@@ -581,7 +581,7 @@ void MyMoneyStatementReader::processSecurityEntry(const MyMoneyStatement::Securi
       ft.commit();
       kDebug(0) << "Created " << security.name() << " with id " << security.id();
     } catch (const MyMoneyException &e) {
-      KMessageBox::error(0, i18n("Error creating security record: %1", e.what()), i18n("Error"));
+      KMessageBox::error(nullptr, i18n("Error creating security record: %1", e.what()), i18n("Error"));
     }
   } else {
     kDebug(0) << "Found " << security.name() << " with id " << security.id();
@@ -676,7 +676,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         // and when we found a security, we added it to the file.
 
         if (statementTransactionUnderImport.m_strSecurity.isEmpty()) {
-          KMessageBox::information(0, i18n("This imported statement contains investment transactions with no security.  These transactions will be ignored."), i18n("Security not found"), QString("BlankSecurity"));
+          KMessageBox::information(nullptr, i18n("This imported statement contains investment transactions with no security.  These transactions will be ignored."), i18n("Security not found"), QString("BlankSecurity"));
           return;
         } else {
           MyMoneySecurity security;
@@ -704,7 +704,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             // This should be rare.  A statement should have a security entry for any
             // of the securities referred to in the transactions.  The only way to get
             // here is if that's NOT the case.
-            int ret = KMessageBox::warningContinueCancel(0, i18n("<center>This investment account does not contain the \"%1\" security.</center>"
+            int ret = KMessageBox::warningContinueCancel(nullptr, i18n("<center>This investment account does not contain the \"%1\" security.</center>"
                       "<center>Transactions involving this security will be ignored.</center>", statementTransactionUnderImport.m_strSecurity),
                       i18n("Security not found"), KStandardGuiItem::cont(), KStandardGuiItem::cancel());
             if (ret == KMessageBox::Cancel) {
@@ -746,7 +746,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         s1.setPrice(statementTransactionUnderImport.m_price);
       } else {
         if (statementTransactionUnderImport.m_shares.isZero()) {
-          KMessageBox::information(0, i18nc("Finance", "This imported statement contains investment transactions with no share amount.  These transactions will be ignored."), i18nc("Finance", "No share amount provided"), QString("BlankAmount"));
+          KMessageBox::information(nullptr, i18nc("Finance", "This imported statement contains investment transactions with no share amount.  These transactions will be ignored."), i18nc("Finance", "No share amount provided"), QString("BlankAmount"));
           return;
         }
         MyMoneyMoney total = -statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees;
@@ -959,7 +959,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         if (!m_dontAskAgain.contains(askKey)) {
           m_dontAskAgain += askKey;
         }
-        rc = KMessageBox::questionYesNoCancel(0, msg, i18n("New payee/receiver"),
+        rc = KMessageBox::questionYesNoCancel(nullptr, msg, i18n("New payee/receiver"),
                                               KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(), askKey);
       }
 
@@ -1032,7 +1032,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           s1.setPayeeId(payeeid);
 
         } catch (const MyMoneyException &e) {
-          KMessageBox::detailedSorry(0, i18n("Unable to add payee/receiver"),
+          KMessageBox::detailedSorry(nullptr, i18n("Unable to add payee/receiver"),
                                      i18n("%1 thrown in %2:%3", e.what(), e.file(), e.line()));
 
         }
@@ -1223,7 +1223,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     QString message(i18n("Problem adding or matching imported transaction with id '%1': %2", statementTransactionUnderImport.m_strBankID, e.what()));
     qDebug("%s", qPrintable(message));
 
-    int result = KMessageBox::warningContinueCancel(0, message);
+    int result = KMessageBox::warningContinueCancel(nullptr, message);
     if (result == KMessageBox::Cancel)
       throw MYMONEYEXCEPTION("USERABORT");
   }
@@ -1330,7 +1330,7 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
         //throw MYMONEYEXCEPTION("USERABORT");
         done = true;
       else
-        KMessageBox::error(0, QString("<qt>%1</qt>").arg(i18n("You must select an account, create a new one, or press the <b>Abort</b> button.")));
+        KMessageBox::error(nullptr, QString("<qt>%1</qt>").arg(i18n("You must select an account, create a new one, or press the <b>Abort</b> button.")));
     }
   }
   delete accountSelect;
@@ -1462,7 +1462,7 @@ bool MyMoneyStatementReader::askUserToEnterScheduleForMatching(const MyMoneySche
                              "Transaction: <i>%2 %3</i><br/>"
                              "Do you want KMyMoney to enter this schedule now so that the transaction can be matched? ",
                              scheduleName, splitValue, payeeName);
-  int userAnswer = KMessageBox::questionYesNo(0, QString("<qt>%1</qt>").arg(questionMsg), i18n("Schedule found"));
+  int userAnswer = KMessageBox::questionYesNo(nullptr, QString("<qt>%1</qt>").arg(questionMsg), i18n("Schedule found"));
 
   return (userAnswer == KMessageBox::Yes);
 }

@@ -1127,7 +1127,7 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
       break;
 
     case 1:
-      if (KMessageBox::warningContinueCancel(0,
+      if (KMessageBox::warningContinueCancel(nullptr,
                                              i18n(
                                                "At least one split of the selected transactions has been reconciled. "
                                                "Do you wish to continue to edit the transactions anyway?"
@@ -1139,14 +1139,14 @@ TransactionEditor* KGlobalLedgerView::startEdit(const KMyMoneyRegister::Selected
       break;
 
     case 2:
-      KMessageBox::sorry(0,
+      KMessageBox::sorry(nullptr,
                          i18n("At least one split of the selected transactions has been frozen. "
                               "Editing the transactions is therefore prohibited."),
                          i18n("Transaction already frozen"));
       break;
 
     case 3:
-      KMessageBox::sorry(0,
+      KMessageBox::sorry(nullptr,
                          i18n("At least one split of the selected transaction references an account that has been closed. "
                               "Editing the transactions is therefore prohibited."),
                          i18n("Account closed"));

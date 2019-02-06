@@ -948,7 +948,7 @@ bool KMyMoneyView::openDatabase(const KUrl& url)
   // also, didn't show home page
   reader->setProgressCallback(&KMyMoneyView::progressCallback);
   if (!reader->readFile()) {
-    KMessageBox::detailedError(0,
+    KMessageBox::detailedError(nullptr,
                                i18n("An unrecoverable error occurred while reading the database"),
                                reader->lastError().toLatin1(),
                                i18n("Database malfunction"));
@@ -1304,7 +1304,7 @@ bool KMyMoneyView::saveAsDatabase(const KUrl& url)
       canWrite = true;
       break;
     case -1: // dbase already has data, see if he wants to clear it out
-      if (KMessageBox::warningContinueCancel(0,
+      if (KMessageBox::warningContinueCancel(nullptr,
                                              i18n("Database contains data which must be removed before using Save As.\n"
                                                   "Do you wish to continue?"), "Database not empty") == KMessageBox::Continue) {
         if (writer->open(url, QIODevice::WriteOnly, true) == 0)
@@ -1318,7 +1318,7 @@ bool KMyMoneyView::saveAsDatabase(const KUrl& url)
   if (canWrite) {
     writer->setProgressCallback(&KMyMoneyView::progressCallback);
     if (!writer->writeFile()) {
-      KMessageBox::detailedError(0,
+      KMessageBox::detailedError(nullptr,
                                  i18n("An unrecoverable error occurred while writing to the database.\n"
                                       "It may well be corrupt."),
                                  writer->lastError().toLatin1(),
