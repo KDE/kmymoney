@@ -10,6 +10,7 @@
                 "Name[nl]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
                 "Name[pl]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
                 "Name[pt]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
+                "Name[pt_BR]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
                 "Name[sv]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
                 "Name[uk]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
                 "Name[x-test]": "xxMartin Preuss,Thomas Baumgart,Christian Dávidxx"
@@ -37,6 +38,7 @@
         "Name[nl]": "KBanking",
         "Name[pl]": "KBanking",
         "Name[pt]": "KBanking",
+        "Name[pt_BR]": "KBanking",
         "Name[sv]": "Kbank",
         "Name[uk]": "KBanking",
         "Name[x-test]": "xxKBankingxx",

@@ -10,6 +10,7 @@
                 "Name[nl]": "Michael Edwardes",
                 "Name[pl]": "Michael Edwardes",
                 "Name[pt]": "Michael Edwardes",
+                "Name[pt_BR]": "Michael Edwardes",
                 "Name[sv]": "Michael Edwardes",
                 "Name[uk]": "Michael Edwardes",
                 "Name[x-test]": "xxMichael Edwardesxx"
@@ -22,6 +23,7 @@
         "Description[nl]": "Voeg GnuCash importeren toe aan KMyMoney",
         "Description[pl]": "Dodaje importowanie GnuCash do KMyMoney",
         "Description[pt]": "Adição da importação do GnuCash para o KMyMoney",
+        "Description[pt_BR]": "Adiciona importação GnuCash no KMyMoney",
         "Description[sv]": "Lägg till GnuCash-import till KMyMoney",
         "Description[uk]": "Імпортування даних GnuCash у KMyMoney",
         "Description[x-test]": "xxAdd GnuCash importing to KMyMoneyxx",
@@ -36,6 +38,7 @@
         "Name[nl]": "GNC-importprogramma",
         "Name[pl]": "Importer GNC",
         "Name[pt]": "Importação de GNC",
+        "Name[pt_BR]": "Importador GNC",
         "Name[sv]": "GNC-import",
         "Name[uk]": "Імпортування GNC",
         "Name[x-test]": "xxGNC Importerxx",

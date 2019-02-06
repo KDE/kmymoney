@@ -10,6 +10,7 @@
                 "Name[nl]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[pl]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[pt]": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[pt_BR]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[sv]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[uk]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[x-test]": "xxAlvaro Soliverez,Łukasz Wojniłowiczxx"
@@ -36,6 +37,7 @@
         "Name[nl]": "Rapportenweergave",
         "Name[pl]": "Widok sprawozdań",
         "Name[pt]": "Área de relatórios",
+        "Name[pt_BR]": "Área de relatórios",
         "Name[sv]": "Rapportvy",
         "Name[uk]": "Перегляд звітів",
         "Name[x-test]": "xxReports viewxx",

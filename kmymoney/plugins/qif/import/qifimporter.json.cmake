@@ -10,6 +10,7 @@
                 "Name[nl]": "Michael Edwardes",
                 "Name[pl]": "Michael Edwardes",
                 "Name[pt]": "Michael Edwardes",
+                "Name[pt_BR]": "Michael Edwardes",
                 "Name[sv]": "Michael Edwardes",
                 "Name[uk]": "Michael Edwardes",
                 "Name[x-test]": "xxMichael Edwardesxx"
@@ -22,6 +23,7 @@
         "Description[nl]": "Voeg QIF importeren toe aan KMyMoney",
         "Description[pl]": "Dodaje importowanie QIF do KMyMoney",
         "Description[pt]": "Adição da importação de QIF para o KMyMoney",
+        "Description[pt_BR]": "Adiciona importação QIF no KMyMoney",
         "Description[sv]": "Lägg till QIF-import till KMyMoney",
         "Description[uk]": "Імпортування даних QIF у KMyMoney",
         "Description[x-test]": "xxAdd QIF importing to KMyMoneyxx",
@@ -36,6 +38,7 @@
         "Name[nl]": "QIF importeren",
         "Name[pl]": "Importer QIF",
         "Name[pt]": "Importação de QIF",
+        "Name[pt_BR]": "Importador QIF",
         "Name[sv]": "QIF-import",
         "Name[uk]": "Інструмент імпортування QIF",
         "Name[x-test]": "xxQIF Importerxx",

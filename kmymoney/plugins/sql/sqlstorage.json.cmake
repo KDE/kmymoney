@@ -10,6 +10,7 @@
                 "Name[nl]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[pl]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[pt]": "Tony Bloomfield,Łukasz Wojniłowicz",
+                "Name[pt_BR]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[sv]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[uk]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[x-test]": "xxTony Bloomfield,Łukasz Wojniłowiczxx"
@@ -22,6 +23,7 @@
         "Description[nl]": "Voegt ondersteuning toe voor SQL-opslag aan KMyMoney",
         "Description[pl]": "Dodaje obsługę pamięci SQL do KMyMoney",
         "Description[pt]": "Adiciona o suporte do armazenamento em SQL ao KMyMoney",
+        "Description[pt_BR]": "Adiciona suporte ao armazenamento SQL no KMyMoney",
         "Description[sv]": "Lägger till stöd för SQL-lagring i KMyMoney",
         "Description[uk]": "Підтримка сховища даних SQL у KMyMoney",
         "Description[x-test]": "xxAdds SQL storage support to KMyMoneyxx",
@@ -36,6 +38,7 @@
         "Name[nl]": "SQL-opslag",
         "Name[pl]": "Pamięć SQL",
         "Name[pt]": "Armazenamento em SQL",
+        "Name[pt_BR]": "Armazenamento SQL",
         "Name[sv]": "SQL-lagring",
         "Name[uk]": "Сховище SQL",
         "Name[x-test]": "xxSQL Storagexx",

@@ -10,6 +10,7 @@
                 "Name[nl]": "Cristian Oneț",
                 "Name[pl]": "Cristian Oneț",
                 "Name[pt]": "Cristian Oneț",
+                "Name[pt_BR]": "Cristian Oneț",
                 "Name[sv]": "Cristian Oneț",
                 "Name[uk]": "Cristian Oneț",
                 "Name[x-test]": "xxCristian Onețxx"
@@ -22,6 +23,7 @@
         "Description[nl]": "Maakt een rapport aan na elke transactiecontrole met gegevens over het controleproces",
         "Description[pl]": "Tworzy sprawozdanie, po każdym uzgodnieniu, zawierające dane o procesie uzgadniania",
         "Description[pt]": "Cria um relatório após cada reconciliação de contas, contendo os dados sobre o processo de reconciliação",
+        "Description[pt_BR]": "Cria um relatório após cada reconciliação contendo dados sobre o processo de reconciliação",
         "Description[sv]": "Skapar en rapport efter varje avstämning som innehåller information om avstämningsprocessen",
         "Description[uk]": "Створення звітів після кожного узгодження із даними щодо процедури узгодження",
         "Description[x-test]": "xxCreates a report after each reconciliation containing data about the reconciliation processxx",
@@ -37,6 +39,7 @@
         "Name[nl]": "Rapport over transactiecontrole",
         "Name[pl]": "Sprawozdanie uzgadniania",
         "Name[pt]": "Relatório de reconciliação",
+        "Name[pt_BR]": "Relatório de reconciliação",
         "Name[sv]": "Avstämningsrapport",
         "Name[uk]": "Звіт щодо звірки",
         "Name[x-test]": "xxReconciliation reportxx",

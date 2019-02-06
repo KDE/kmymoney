@@ -10,6 +10,7 @@
                 "Name[nl]": "Christian Dávid",
                 "Name[pl]": "Christian Dávid",
                 "Name[pt]": "Christian Dávid",
+                "Name[pt_BR]": "Christian Dávid",
                 "Name[sv]": "Christian Dávid",
                 "Name[uk]": "Christian Dávid",
                 "Name[x-test]": "xxChristian Dávidxx"

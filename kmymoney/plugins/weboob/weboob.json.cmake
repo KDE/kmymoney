@@ -10,6 +10,7 @@
                 "Name[nl]": "Romain Bignon",
                 "Name[pl]": "Romain Bignon",
                 "Name[pt]": "Romain Bignon",
+                "Name[pt_BR]": "Romain Bignon",
                 "Name[sv]": "Romain Bignon",
                 "Name[uk]": "Romain Bignon",
                 "Name[x-test]": "xxRomain Bignonxx"
@@ -22,6 +23,7 @@
         "Description[nl]": "Plug-in voor weboob",
         "Description[pl]": "Wtyczka dla weboob",
         "Description[pt]": "'Plugin' do Weboob",
+        "Description[pt_BR]": "Plugin para weboob",
         "Description[sv]": "Insticksprogram för weboob",
         "Description[uk]": "Додаток weboob",
         "Description[x-test]": "xxPlugin for weboobxx",
@@ -37,6 +39,7 @@
         "Name[nl]": "Weboob",
         "Name[pl]": "Weboob",
         "Name[pt]": "Weboob",
+        "Name[pt_BR]": "Weboob",
         "Name[sv]": "Weboob",
         "Name[uk]": "Weboob",
         "Name[x-test]": "xxWeboobxx",
