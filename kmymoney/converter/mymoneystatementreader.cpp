@@ -746,7 +746,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         s1.setPrice(statementTransactionUnderImport.m_price);
       } else {
         if (statementTransactionUnderImport.m_shares.isZero()) {
-          KMessageBox::information(0, i18n("Finance", "This imported statement contains investment transactions with no share amount.  These transactions will be ignored."), i18n("Finance", "No share amount provided"), QString("BlankAmount"));
+          KMessageBox::information(0, i18nc("Finance", "This imported statement contains investment transactions with no share amount.  These transactions will be ignored."), i18nc("Finance", "No share amount provided"), QString("BlankAmount"));
           return;
         }
         MyMoneyMoney total = -statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees;

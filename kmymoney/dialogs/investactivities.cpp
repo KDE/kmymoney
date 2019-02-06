@@ -206,7 +206,7 @@ QString Activity::priceLabel() const
   if (priceMode() == InvestTransactionEditor::Price) {
     label = i18n("Price");
   } else if (priceMode() == InvestTransactionEditor::PricePerShare) {
-    label = i18n("Finance", "Price/share");
+    label = i18nc("Finance", "Price/share");
   } else if (priceMode() == InvestTransactionEditor::PricePerTransaction) {
     label = i18n("Transaction amount");
   }
@@ -222,7 +222,7 @@ void Buy::showWidgets() const
   setLabelText("interest-label", i18n("Interest"));
   setLabelText("fee-label", i18n("Fees"));
   setLabelText("asset-label", i18n("Account"));
-  setLabelText("shares-label", i18n("Shares"));
+  setLabelText("shares-label", i18nc("Finance", "Shares"));
   setLabelText("price-label", priceLabel());
   setLabelText("total-label", i18nc("Total value", "Total"));
 }
@@ -306,7 +306,7 @@ void Sell::showWidgets() const
   setLabelText("interest-label", i18n("Interest"));
   setLabelText("fee-label", i18n("Fees"));
   setLabelText("asset-label", i18n("Account"));
-  setLabelText("shares-label", i18n("Finance", "Shares"));
+  setLabelText("shares-label", i18nc("Finance", "Shares"));
   setLabelText("price-label", priceLabel());
   setLabelText("total-label", i18nc("Total value", "Total"));
 }
