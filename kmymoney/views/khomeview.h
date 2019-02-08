@@ -69,6 +69,7 @@ private:
 
 private Q_SLOTS:
   void slotOpenUrl(const QUrl &url);
+  void slotAdjustScrollPos();
 };
 
 #endif

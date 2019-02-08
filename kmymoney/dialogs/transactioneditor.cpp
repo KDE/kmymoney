@@ -680,6 +680,18 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
             maxCreditAbsolute[acc.id()] = balance < MyMoneyMoney(acc.value("maxCreditAbsolute"));
             maxCreditEarly[acc.id()] = false;
           }
+
+        // and adjust opening date of invest accounts
+          if (acc.isInvest()) {
+            if (acc.openingDate() > t.postDate()) {
+              try {
+                acc.setOpeningDate(t.postDate());
+                file->modifyAccount(acc);
+              } catch(MyMoneyException& ) {
+                qDebug() << "Unable to modify opening date for invest account" << acc.name() << acc.id();
+              }
+            }
+          }
         }
 
         if (transaction.id().isEmpty()) {

@@ -357,7 +357,8 @@ void InvestTransactionEditor::createEditWidgets()
   connect(activity, &KMyMoneyActivityCombo::activitySelected, this, &InvestTransactionEditor::slotUpdateActivity);
   connect(activity, &KMyMoneyActivityCombo::activitySelected, this, &InvestTransactionEditor::slotUpdateButtonState);
 
-  d->m_editWidgets["postdate"] = new KMyMoneyDateInput;
+  auto postDate = d->m_editWidgets["postdate"] = new KMyMoneyDateInput;
+  connect(postDate, SIGNAL(dateChanged(QDate)), this, SLOT(slotUpdateButtonState()));
 
   auto security = new KMyMoneySecurity;
   security->setObjectName("security");
@@ -480,7 +481,7 @@ void InvestTransactionEditor::createEditWidgets()
   d->m_editWidgets["fee-label"] = label = new QLabel(i18n("Fees"));
   label->setAlignment(Qt::AlignVCenter);
 
-  d->m_editWidgets["fee-amount-label"] = label = new QLabel("");
+  d->m_editWidgets["fee-amount-label"] = label = new QLabel(QString());
   label->setAlignment(Qt::AlignVCenter);
 
   d->m_editWidgets["interest-label"] = label = new QLabel(i18n("Interest"));
@@ -492,7 +493,7 @@ void InvestTransactionEditor::createEditWidgets()
   d->m_editWidgets["memo-label"] = label = new QLabel(i18n("Memo"));
   label->setAlignment(Qt::AlignVCenter);
 
-  d->m_editWidgets["total"] = label = new QLabel("");
+  d->m_editWidgets["total"] = label = new QLabel(QString());
   label->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
 
   d->m_editWidgets["total-label"] = label = new QLabel(i18nc("Total value", "Total"));
@@ -776,6 +777,36 @@ bool InvestTransactionEditor::isComplete(QString& reason) const
 {
   Q_D(const InvestTransactionEditor);
   reason.clear();
+
+  auto postDate = dynamic_cast<KMyMoneyDateInput*>(d->m_editWidgets["postdate"]);
+  if (postDate) {
+    QDate accountOpeningDate = d->m_account.openingDate();
+    auto asset = dynamic_cast<KMyMoneyCategory*>(haveWidget("asset-account"));
+    if (asset && asset->isVisible()) {
+      if (!isMultiSelection() || !asset->currentText().isEmpty()) {
+        const auto assetId = asset->selectedItem();
+        if (!assetId.isEmpty()) {
+          try {
+            const auto acc = MyMoneyFile::instance()->account(assetId);
+            if (acc.openingDate() > accountOpeningDate)
+              accountOpeningDate = acc.openingDate();
+          } catch(MyMoneyException& e) {
+            qDebug() << "opening date check failed on account" << assetId << e.what();
+          }
+        }
+      }
+    }
+
+    if (postDate->date().isValid() && (postDate->date() < accountOpeningDate)) {
+      postDate->markAsBadDate(true, KMyMoneySettings::schemeColor(SchemeColor::Negative));
+      reason = i18n("Cannot enter transaction with postdate prior to account's opening date.");
+      postDate->setToolTip(reason);
+      return false;
+    }
+    postDate->markAsBadDate();
+    postDate->setToolTip(QString());
+  }
+
   return d->m_activity->isComplete(reason);
 }
 

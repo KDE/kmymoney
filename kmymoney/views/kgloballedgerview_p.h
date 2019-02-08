@@ -844,7 +844,9 @@ public:
       // make sure to use the value specified in the option during reconciliation
       if (isReconciliationAccount())
         split.setReconcileFlag(static_cast<eMyMoney::Split::State>(KMyMoneySettings::defaultReconciliationState()));
-      KMyMoneyRegister::Register::transactionFactory(m_register, MyMoneyTransaction(), split, 0);
+      MyMoneyTransaction emptyTransaction;
+      emptyTransaction.setCommodity(m_currentAccount.currencyId());
+      KMyMoneyRegister::Register::transactionFactory(m_register, emptyTransaction, split, 0);
 
       m_register->updateRegister(true);
 

@@ -280,6 +280,7 @@ private Q_SLOTS:
   void slotSelectAllTransactions();
   void slotCreateScheduledTransaction();
   void slotAssignNumber();
+  void slotCopyTransactionToClipboard();
 
   /**
     * Used to start reconciliation of account @a account. It switches the

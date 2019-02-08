@@ -40,6 +40,16 @@ KHomeView::~KHomeView()
 {
 }
 
+void KHomeView::slotAdjustScrollPos()
+{
+#ifndef ENABLE_WEBENGINE
+  Q_D(KHomeView);
+  if (d && d->m_view && d->m_view->page() && d->m_view->page()->mainFrame()) {
+    d->m_view->page()->mainFrame()->setScrollBarValue(Qt::Vertical, d->m_scrollBarPos);
+  }
+#endif
+}
+
 void KHomeView::wheelEvent(QWheelEvent* event)
 {
   Q_D(KHomeView);
@@ -114,11 +124,11 @@ void KHomeView::slotPrintView()
       d->m_currentPrinter = nullptr;
       return;
     }
-    #ifdef ENABLE_WEBENGINE
+  #ifdef ENABLE_WEBENGINE
     d->m_view->page()->print(d->m_currentPrinter, [=] (bool) {delete d->m_currentPrinter; d->m_currentPrinter = nullptr;});
-    #else
-      d->m_view->print(d->m_currentPrinter);
-    #endif
+  #else
+    d->m_view->print(d->m_currentPrinter);
+  #endif
   }
 }
 

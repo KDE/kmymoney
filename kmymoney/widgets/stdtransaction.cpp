@@ -259,7 +259,7 @@ bool StdTransaction::formCellText(QString& txt, Qt::Alignment& align, int row, i
         case (int)eTransactionForm::Column::Value1:
           align |= Qt::AlignLeft;
           txt = d->m_category;
-          if (d->m_transaction != MyMoneyTransaction()) {
+          if (!d->m_transaction.id().isEmpty()) {
             if (txt.isEmpty() && !d->m_split.value().isZero())
               txt = i18n("*** UNASSIGNED ***");
           }
@@ -272,7 +272,7 @@ bool StdTransaction::formCellText(QString& txt, Qt::Alignment& align, int row, i
 
         case (int)eTransactionForm::Column::Value2:
           align |= Qt::AlignRight;
-          if (d->m_transaction != MyMoneyTransaction())
+          if (!d->m_transaction.id().isEmpty())
             txt = QLocale().toString(d->m_transaction.postDate(), QLocale::ShortFormat);
           break;
       }
@@ -303,7 +303,7 @@ bool StdTransaction::formCellText(QString& txt, Qt::Alignment& align, int row, i
 
         case (int)eTransactionForm::Column::Value2:
           align |= Qt::AlignRight;
-          if (d->m_transaction != MyMoneyTransaction()) {
+          if (!d->m_transaction.id().isEmpty()) {
             txt = (d->m_split.value(d->m_transaction.commodity(), d->m_splitCurrencyId).abs()).formatMoney(d->m_account.fraction());
           }
           break;
@@ -321,7 +321,7 @@ bool StdTransaction::formCellText(QString& txt, Qt::Alignment& align, int row, i
           align &= ~Qt::AlignVCenter;
           align |= Qt::AlignTop;
           align |= Qt::AlignLeft;
-          if (d->m_transaction != MyMoneyTransaction())
+          if (!d->m_transaction.id().isEmpty())
             txt = d->m_split.memo().section('\n', 0, 2);
           break;
       }

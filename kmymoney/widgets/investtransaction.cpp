@@ -200,7 +200,7 @@ bool InvestTransaction::formCellText(QString& txt, Qt::Alignment& align, int row
         case (int)eTransactionForm::Column::Value2:
           align |= Qt::AlignRight;
           fieldEditable = true;
-          if (d->m_transaction != MyMoneyTransaction())
+          if (!d->m_transaction.id().isEmpty())
             txt = QLocale().toString(d->m_transaction.postDate(), QLocale::ShortFormat);
           break;
       }
@@ -346,7 +346,7 @@ bool InvestTransaction::formCellText(QString& txt, Qt::Alignment& align, int row
           align |= Qt::AlignTop;
           align |= Qt::AlignLeft;
           fieldEditable = true;
-          if (d->m_transaction != MyMoneyTransaction())
+          if (!d->m_transaction.id().isEmpty())
             txt = d->m_split.memo().section('\n', 0, 2);
           break;
 

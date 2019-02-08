@@ -1236,7 +1236,7 @@ bool StdTransactionEditor::isComplete(QString& reason) const
       return false;
     }
     postDate->markAsBadDate();
-    postDate->setToolTip("");
+    postDate->setToolTip(QString());
   }
 
   for (it_w = d->m_editWidgets.begin(); it_w != d->m_editWidgets.end(); ++it_w) {

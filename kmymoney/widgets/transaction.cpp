@@ -450,7 +450,7 @@ void Transaction::paintRegisterCell(QPainter *painter, QStyleOptionViewItem &opt
     // construct the text for the cell
     QString txt;
     option.displayAlignment = Qt::AlignVCenter;
-    if (d->m_transaction != MyMoneyTransaction() && !d->m_inRegisterEdit) {
+    if (!d->m_transaction.id().isEmpty() && !d->m_inRegisterEdit) {
       registerCellText(txt, option.displayAlignment, index.row() - startRow(), index.column(), painter);
     }
 
@@ -720,7 +720,7 @@ QString Transaction::reconcileState(bool text) const
 
   if ((text == true)
       && (txt == i18nc("Unknown reconciliation state", "Unknown"))
-      && (d->m_transaction == MyMoneyTransaction()))
+      && (d->m_transaction.id().isEmpty()))
     txt.clear();
   return txt;
 }

@@ -97,7 +97,7 @@ public:
     m_dirty(false),
     m_creationDate(QDate::currentDate()),
     // initialize for file fixes (see kmymoneyview.cpp)
-    m_currentFixVersion(4),
+    m_currentFixVersion(5),
     m_fileFixVersion(0), // default value if no fix-version in file
     m_transactionListFull(false)
   {
