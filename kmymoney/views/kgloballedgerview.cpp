@@ -30,6 +30,7 @@
 #include <QApplication>
 #include <QTimer>
 #include <QMenu>
+#include <QClipboard>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -37,6 +38,8 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KToolBar>
+#include <KActionCollection>
+#include <KXmlGuiWindow>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -104,6 +107,9 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent) :
 
   for (auto a = actionConnections.cbegin(); a != actionConnections.cend(); ++a)
     connect(pActions[a.key()], &QAction::triggered, this, a.value());
+
+  KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
+  KStandardAction::copy(this, &KGlobalLedgerView::slotCopyTransactionToClipboard,  mw->actionCollection());
 
   Q_D(KGlobalLedgerView);
   d->m_balanceWarning.reset(new KBalanceWarning(this));
@@ -1674,6 +1680,58 @@ void KGlobalLedgerView::slotEditSplits()
     d->deleteTransactionEditor();
     updateLedgerActions(d->m_selectedTransactions);
     emit selectByVariant(QVariantList {QVariant::fromValue(d->m_selectedTransactions)}, eView::Intent::SelectRegisterTransactions);
+  }
+}
+
+void KGlobalLedgerView::slotCopyTransactionToClipboard()
+{
+  Q_D(KGlobalLedgerView);
+
+  // suppress copy transactions if view not visible
+  // or in edit mode
+  if (!isVisible() || d->m_inEditMode)
+    return;
+
+  // format transactions into text
+  QString txt;
+  const auto file = MyMoneyFile::instance();
+  const auto acc = file->account(d->m_lastSelectedAccountID);
+  const auto currency = file->currency(acc.currencyId());
+
+  foreach (const auto& st, d->m_selectedTransactions) {
+    if (!txt.isEmpty() || (d->m_selectedTransactions.count() > 1)) {
+      txt += QStringLiteral("----------------------------\n");
+    }
+    try {
+      const auto& s = st.split();
+      // Date
+      txt += i18n("Date: %1").arg(st.transaction().postDate().toString(Qt::DefaultLocaleShortDate));
+      txt += QStringLiteral("\n");
+      // Payee
+      QString payee = i18nc("Name for unknown payee", "Unknown");
+      if (!s.payeeId().isEmpty()) {
+        payee = file->payee(s.payeeId()).name();
+      }
+      txt += i18n("Payee: %1").arg(payee);
+      txt += QStringLiteral("\n");
+      // Amount
+      txt += i18n("Amount: %1").arg(s.value().formatMoney(currency.tradingSymbol(),  MyMoneyMoney::denomToPrec(acc.fraction(currency))));
+      txt += QStringLiteral("\n");
+      // Memo
+      txt += i18n("Memo: %1").arg(s.memo());
+      txt += QStringLiteral("\n");
+
+    } catch (MyMoneyException &) {
+      qDebug() << "Cannot copy transaction" << st.transaction().id() << "to clipboard";
+    }
+  }
+  if (d->m_selectedTransactions.count() > 1) {
+    txt += QStringLiteral("----------------------------\n");
+  }
+
+  if (!txt.isEmpty()) {
+    QClipboard *clipboard = QGuiApplication::clipboard();
+    clipboard->setText(txt);
   }
 }
 
