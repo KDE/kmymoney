@@ -219,7 +219,7 @@ bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
         if ((account.accountType() == eMyMoney::Account::Type::Income || account.accountType() == eMyMoney::Account::Type::Expense) && hideUnusedIncomeExpenseAccounts()) {
           const auto totalValue = sourceModel()->data(source, (int)Role::TotalValue);
           if (totalValue.isValid() && totalValue.value<MyMoneyMoney>().isZero()) {
-            emit unusedIncomeExpenseAccountHidden();
+            emit const_cast<AccountsProxyModel*>(this)->unusedIncomeExpenseAccountHidden();
             return false;
           }
         }

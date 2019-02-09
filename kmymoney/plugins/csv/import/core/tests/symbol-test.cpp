@@ -76,8 +76,8 @@ void SymbolTest::testDecimalSymbolInvalid()
   m_testDecimal = m_parse->decimalSymbol(DecimalSymbol::Comma);
 
   QFETCH(QString, input);
-  QFETCH(QString, result);
-  QString res = m_parse->possiblyReplaceSymbol(input);
+  // QFETCH(QString, result);
+  m_parse->possiblyReplaceSymbol(input);
 
   QVERIFY(m_parse->invalidConversion() == true);
 }

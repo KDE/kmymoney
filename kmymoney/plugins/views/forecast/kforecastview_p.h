@@ -898,8 +898,6 @@ public:
 
   void updateDetailed(QTreeWidgetItem *item)
   {
-    QString amount;
-    QString vAmount;
     MyMoneyMoney vAmountMM;
     const auto file = MyMoneyFile::instance();
 

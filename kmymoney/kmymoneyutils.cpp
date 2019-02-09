@@ -239,7 +239,7 @@ QString KMyMoneyUtils::findResource(QStandardPaths::StandardLocation type, const
     ///    mappings to the filename are not correct. This certainly must
     ///    be overhauled at some point in time (ipwizard, 2017-10-22)
     QString mask = filename.arg("_%1.%2");
-    rc = QStandardPaths::locate(type, mask.arg(country).arg(language));
+    rc = QStandardPaths::locate(type, mask.arg(country, language));
 
     // search the given resource
     if (rc.isEmpty()) {
@@ -298,10 +298,11 @@ KMyMoneyUtils::transactionTypeE KMyMoneyUtils::transactionType(const MyMoneyTran
     return SplitTransaction;
   }
   QString ida, idb;
-  if (t.splits().size() > 0)
-    ida = t.splits()[0].accountId();
-  if (t.splits().size() > 1)
-    idb = t.splits()[1].accountId();
+  const auto & splits = t.splits();
+  if (splits.size() > 0)
+    ida = splits[0].accountId();
+  if (splits.size() > 1)
+    idb = splits[1].accountId();
   if (ida.isEmpty() || idb.isEmpty())
     return Unknown;
 
@@ -375,7 +376,7 @@ QString KMyMoneyUtils::getAdjacentNumber(const QString& number, int offset)
     QString arg2 = exp.cap(2);
     QString arg3 = QString::number(exp.cap(3).toULong() + offset);
     QString arg4 = exp.cap(4);
-    num = QString("%1%2%3%4").arg(arg1).arg(arg2).arg(arg3).arg(arg4);
+    num = QString("%1%2%3%4").arg(arg1, arg2, arg3, arg4);
   } else {
     num = QStringLiteral("1");
   }
@@ -387,11 +388,11 @@ quint64 KMyMoneyUtils::numericPart(const QString & num)
   quint64 num64 = 0;
   QRegExp exp(QString("(.*\\D)?(0*)(\\d+)(\\D.*)?"));
   if (exp.indexIn(num) != -1) {
-    QString arg1 = exp.cap(1);
+    // QString arg1 = exp.cap(1);
     QString arg2 = exp.cap(2);
     QString arg3 = QString::number(exp.cap(3).toULongLong());
-    QString arg4 = exp.cap(4);
-    num64 = QString("%2%3").arg(arg2).arg(arg3).toULongLong();
+    // QString arg4 = exp.cap(4);
+    num64 = QString("%2%3").arg(arg2, arg3).toULongLong();
   }
   return num64;
 }
@@ -537,7 +538,8 @@ void KMyMoneyUtils::processPriceList(const MyMoneyStatement &st)
   QHash<QString, MyMoneySecurity> secBySymbol;
   QHash<QString, MyMoneySecurity> secByName;
 
-  for (const auto& sec : file->securityList()) {
+  const auto securityList = file->securityList();
+  for (const auto& sec : securityList) {
     secBySymbol[sec.tradingSymbol()] = sec;
     secByName[sec.name()] = sec;
   }

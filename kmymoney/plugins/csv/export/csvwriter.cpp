@@ -292,7 +292,6 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
 
   for (int i = 0; i < lst.count(); i++) {
     MyMoneyAccount acc = file->account(lst[i].accountId());
-    QString accName = acc.name();
     typ = acc.accountType();
     map.insert(typ, lst[i].accountId());
 

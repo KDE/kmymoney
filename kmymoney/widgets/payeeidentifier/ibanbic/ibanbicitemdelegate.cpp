@@ -79,7 +79,6 @@ void ibanBicItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
   normal.setBold(true);
   painter->setFont(normal);
   const QRect ibanRect = style->alignedRect(opt.direction, Qt::AlignTop, QSize(textArea.width(), metrics.lineSpacing()), textArea);
-  const QString bic = index.model()->data(index, Qt::DisplayRole).toString();
   style->drawItemText(painter, ibanRect, Qt::AlignTop, QApplication::palette(), true, ibanBic->paperformatIban(), opt.state & QStyle::State_Selected ? QPalette::HighlightedText : QPalette::Text);
   painter->restore();
 

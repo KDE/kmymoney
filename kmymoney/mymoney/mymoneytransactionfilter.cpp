@@ -537,7 +537,8 @@ bool MyMoneyTransactionFilter::matchText(const MyMoneySplit& s, const MyMoneyAcc
     if (!s.payeeId().isEmpty() && file->payee(s.payeeId()).name().contains(d->m_text))
       return !d->m_invertText;
 
-    for (const auto& tag : s.tagIdList())
+    const auto& tagIdList = s.tagIdList();
+    for (const auto& tag : tagIdList)
       if (file->tag(tag).name().contains(d->m_text))
         return !d->m_invertText;
 
@@ -616,8 +617,8 @@ int MyMoneyTransactionFilter::splitType(const MyMoneyTransaction& t, const MyMon
 eMyMoney::TransactionFilter::Validity MyMoneyTransactionFilter::validTransaction(const MyMoneyTransaction& t) const
 {
   MyMoneyMoney val;
-
-  for (const auto& split : t.splits())
+  const auto& splits = t.splits();
+  for (const auto& split : splits)
     val += split.value();
 
   return (val == MyMoneyMoney()) ? eMyMoney::TransactionFilter::Validity::Valid : eMyMoney::TransactionFilter::Validity::Invalid;

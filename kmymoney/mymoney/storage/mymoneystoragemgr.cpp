@@ -855,9 +855,11 @@ void MyMoneyStorageMgr::transactionList(QList< QPair<MyMoneyTransaction, MyMoney
   Q_D(const MyMoneyStorageMgr);
   list.clear();
 
-  for (const auto& transaction : d->m_transactionList)
-    for (const auto& split : filter.matchingSplits(transaction))
+  for (const auto& transaction : d->m_transactionList) {
+    const auto& splits = filter.matchingSplits(transaction);
+    for (const auto& split : splits)
       list.append(qMakePair(transaction, split));
+  }
 }
 
 QList<MyMoneyTransaction> MyMoneyStorageMgr::transactionList(MyMoneyTransactionFilter& filter) const

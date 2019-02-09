@@ -773,7 +773,6 @@ void KNewAccountDlg::slotLoadInstitutions(const QString& name)
 {
   Q_D(KNewAccountDlg);
   d->ui->m_qcomboboxInstitutions->clear();
-  QString bic;
   // Are we forcing the user to use institutions?
   d->ui->m_qcomboboxInstitutions->addItem(i18n("(No Institution)"));
   d->ui->m_bicValue->setText(" ");

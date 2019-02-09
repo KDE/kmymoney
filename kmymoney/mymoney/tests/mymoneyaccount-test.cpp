@@ -56,7 +56,6 @@ void MyMoneyAccountTest::testEmptyConstructor()
 void MyMoneyAccountTest::testConstructor()
 {
   QString id = "A000001";
-  QString institutionid = "B000001";
   QString parent = "Parent";
   MyMoneyAccount r;
   MyMoneySplit s;

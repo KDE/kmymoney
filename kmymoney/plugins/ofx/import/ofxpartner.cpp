@@ -385,7 +385,6 @@ void OfxHttpRequest::slotOfxFinished(KJob* /* e */)
       QFile f(m_dst.toLocalFile());
       if (f.open(QIODevice::ReadOnly)) {
         QTextStream stream(&f);
-        QString line;
         while (!stream.atEnd()) {
           details += stream.readLine(); // line of text excluding '\n'
         }

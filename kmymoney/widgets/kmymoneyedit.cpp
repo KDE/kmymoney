@@ -515,7 +515,6 @@ void KMyMoneyEdit::slotCalculatorOpen()
 void KMyMoneyEdit::slotCalculatorResult()
 {
   Q_D(KMyMoneyEdit);
-  QString result;
   if (d->m_calculator != 0) {
     d->m_calculatorFrame->hide();
     d->m_edit->setText(d->m_calculator->result());

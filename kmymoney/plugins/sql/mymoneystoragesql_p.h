@@ -1216,7 +1216,6 @@ public:
     QVariantList tagIdList;
     QVariantList txIdList;
     QVariantList splitIdList_TagSplits;
-    QVariantList tagSplitsIdList;
 
     int i = 0, l = 0;
     foreach (const MyMoneySplit& s, splitList) {
@@ -2316,7 +2315,6 @@ public:
   {
     Q_Q(MyMoneyStorageSql);
     MyMoneyDbTransaction t(*q, Q_FUNC_INFO);
-    QSqlQuery query(*q);
     // change kmmSplits add price, priceFormatted fields
     if (!alterTable(m_db.m_tables["kmmSplits"], m_dbVersion))
       return (1);
@@ -2361,7 +2359,6 @@ public:
   {
     Q_Q(MyMoneyStorageSql);
     MyMoneyDbTransaction dbtrans(*q, Q_FUNC_INFO);
-    QSqlQuery query(*q);
     // kmmSplits - add bankId
     if (!alterTable(m_db.m_tables["kmmSplits"], m_dbVersion))
       return (1);
@@ -2430,7 +2427,6 @@ public:
   {
     Q_Q(MyMoneyStorageSql);
     MyMoneyDbTransaction dbtrans(*q, Q_FUNC_INFO);
-    QSqlQuery query(*q);
 
     // add tags support
     // kmmFileInfo - add tags and hiTagId
@@ -2458,7 +2454,6 @@ public:
     Q_Q(MyMoneyStorageSql);
     MyMoneyDbTransaction dbtrans(*q, Q_FUNC_INFO);
 
-    QSqlQuery query(*q);
     // kmmSplits - add bankId
     if (!alterTable(m_db.m_tables["kmmSplits"], m_dbVersion))
       return (1);
@@ -2471,7 +2466,6 @@ public:
     Q_Q(MyMoneyStorageSql);
     MyMoneyDbTransaction dbtrans(*q, Q_FUNC_INFO);
 
-    QSqlQuery query(*q);
     if (!alterTable(m_db.m_tables["kmmPayeesPayeeIdentifier"], m_dbVersion))
       return (1);
     if (!alterTable(m_db.m_tables["kmmAccountsPayeeIdentifier"], m_dbVersion))
@@ -2484,8 +2478,6 @@ public:
   {
     Q_Q(MyMoneyStorageSql);
     MyMoneyDbTransaction dbtrans(*q, Q_FUNC_INFO);
-
-    QSqlQuery query(*q);
 
     // add column roundingMethodCol to kmmSecurities
     if (!alterTable(m_db.m_tables["kmmSecurities"], m_dbVersion))
@@ -2705,7 +2697,6 @@ public:
     // also the setup is removed if the current database transaction is rolled back
     if (iid.isEmpty() /*|| m_loadedStoragePlugins.contains(iid)*/)
       return false;
-    QString sqlIID;
 
     MyMoneyDbTransaction t(*q, Q_FUNC_INFO);
     auto rc = false;

@@ -1327,7 +1327,6 @@ QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees(const QStringList& id
   if (query.next()) {
     while (query.isValid()) {
       QString pid;
-      QString boolChar;
       MyMoneyPayee payee;
       uint type;
       bool ignoreCase;
@@ -1541,7 +1540,6 @@ QMap<QString, MyMoneyTag> MyMoneyStorageSql::fetchTags(const QStringList& idList
 
   while (query.next()) {
     QString pid;
-    QString boolChar;
     MyMoneyTag tag;
     pid = GETSTRING(idCol);
     tag.setName(GETSTRING(nameCol));
@@ -1636,7 +1634,6 @@ QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts(const QStringList
 
   while (query.next()) {
     QString aid;
-    QString balance;
     MyMoneyAccount acc;
 
     aid = GETSTRING(idCol);
