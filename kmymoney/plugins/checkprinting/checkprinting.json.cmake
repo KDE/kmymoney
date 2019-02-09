@@ -6,6 +6,7 @@
                 "Name": "Cristian Oneț",
                 "Name[ca@valencia]": "Cristian Oneț",
                 "Name[ca]": "Cristian Oneț",
+                "Name[es]": "Cristian Oneț",
                 "Name[gl]": "Cristian Oneț",
                 "Name[it]": "Cristian Oneț",
                 "Name[nl]": "Cristian Oneț",
