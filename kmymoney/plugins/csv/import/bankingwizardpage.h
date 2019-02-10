@@ -66,7 +66,6 @@ private:
   BankingProfile       *m_profile;
   Ui::BankingPage      *ui;
 
-private Q_SLOTS:
   void                memoColSelected(int col);
   void                categoryColSelected(int col);
   void                numberColSelected(int col);
@@ -79,6 +78,9 @@ private Q_SLOTS:
   void                debitCreditToggled(bool checked);
   void                oppositeSignsClicked(bool checked);
   void                clearColumns();
+  void                updateCurrentMemoSelection();
+  void                clearMemoColumns();
+
 };
 
 #endif // BANKINGWIZARDPAGE_H
