@@ -72,7 +72,7 @@ def processFile(fileName):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Creates a SQLite database for KMyMoney with information about IBAN and BICs based on a fixed-column text file from the german central bank."
-                                     " You can download the source file at http://www.bundesbank.de/Redaktion/DE/Standardartikel/Aufgaben/Unbarer_Zahlungsverkehr/bankleitzahlen_download.html"
+                                     " You can download the source file at https://www.bundesbank.de/de/aufgaben/unbarer-zahlungsverkehr/serviceangebot/bankleitzahlen/download---bankleitzahlen-602592"
                                      )
     parser.add_argument(dest='file', help='File to load')
     parser.add_argument('-o', '--output', default="bankdata.de.db", help='SQLite database to open/generate')

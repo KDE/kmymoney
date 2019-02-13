@@ -19,6 +19,8 @@
 #ifndef IBANBICDATA_H
 #define IBANBICDATA_H
 
+#include "iban_bic_identifier_export.h"
+
 #ifndef KMM_MYMONEY_UNIT_TESTABLE
 #  define KMM_MYMONEY_UNIT_TESTABLE
 #endif
@@ -35,7 +37,7 @@
  *
  * @interal This class is made if a cache will be needed in future.
  */
-class ibanBicData : public QObject
+class IBAN_BIC_IDENTIFIER_EXPORT ibanBicData : public QObject
 {
   Q_OBJECT
   KMM_MYMONEY_UNIT_TESTABLE

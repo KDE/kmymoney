@@ -28,9 +28,8 @@ QTEST_MAIN(internationalAccountIdentifierTest);
 
 bool internationalAccountIdentifierTest::dataInstalled(const QString& countryCode)
 {
-  // Not really implemented yet
-  Q_UNUSED(countryCode);
-  return false;
+    ibanBicData data;
+    return data.bankIdentifierLength(countryCode) != 0;
 }
 
 void internationalAccountIdentifierTest::initTestCase()
@@ -307,19 +306,17 @@ void internationalAccountIdentifierTest::bicAndNameByIban_data()
 {
   QTest::addColumn<QString>("iban");
   QTest::addColumn<QString>("bic");
-  QTest::addColumn<QString>("name");
 
-  QTest::newRow("Germany (Unicef Germany)")   << "DE57370205000000300000" << "BFSWDE33XXX" << "";
+  QTest::newRow("Germany (Unicef Germany)")   << "DE57370205000000300000" << "BFSWDE33XXX";
+  QTest::newRow("Switzerland (Unicef Swiss)") << "CH8809000000800072119"  << "POFICHBEXXX";
 }
 
 void internationalAccountIdentifierTest::bicAndNameByIban()
 {
-  QTest::addColumn<QString>("iban");
-  QTest::addColumn<QString>("bic");
-  QTest::addColumn<QString>("name");
+  QFETCH(QString, iban);
+  QFETCH(QString, bic);
 
-  QSKIP("Test not implemented", SkipAll);
-  //QPair<QString, QString> pair = internationalAccountIdentifier::;
+  QCOMPARE(payeeIdentifiers::ibanBic::bicByIban(iban), bic);
 }
 
 void internationalAccountIdentifierTest::qStringNullAndEmpty()
@@ -354,8 +351,9 @@ void internationalAccountIdentifierTest::bicAllocated()
   QFETCH(QString, bic);
   QFETCH(payeeIdentifiers::ibanBic::bicAllocationStatus, allocated);
 
-  if (!dataInstalled(bic.mid(4, 2)))
-    QSKIP(qPrintable(QString("Could not find ibanBicData service for this country (was looking for \"%1\"). Did you install the services?").arg(bic)), SkipSingle);
+  const QString countryCode = bic.mid(4, 2);
+  if (!dataInstalled(countryCode))
+    QSKIP(qPrintable(QString("Could not find ibanBicData service for this country (was looking for \"%1\"). Did you install the services?").arg(countryCode)), SkipSingle);
 
   QCOMPARE(payeeIdentifiers::ibanBic::isBicAllocated(bic), allocated);
 }

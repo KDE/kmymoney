@@ -20,6 +20,8 @@ target_link_libraries( payeeidentifier_iban_bic PUBLIC
   ${GMP_LIBRARIES}
 )
 
+add_dependencies(payeeidentifier_iban_bic ibanbicdata_de ibanbicdata_ch)
+
 set_target_properties(payeeidentifier_iban_bic PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 
 install(TARGETS payeeidentifier_iban_bic
