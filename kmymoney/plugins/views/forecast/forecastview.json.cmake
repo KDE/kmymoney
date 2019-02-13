@@ -6,6 +6,7 @@
                 "Name": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[ca@valencia]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[ca]": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[cs]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[es]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[gl]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[it]": "Alvaro Soliverez,Łukasz Wojniłowicz",

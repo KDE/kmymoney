@@ -6,6 +6,7 @@
                 "Name": "Romain Bignon",
                 "Name[ca@valencia]": "Romain Bignon",
                 "Name[ca]": "Romain Bignon",
+                "Name[cs]": "Romain Bignon",
                 "Name[es]": "Romain Bignon",
                 "Name[gl]": "Romain Bignon",
                 "Name[it]": "Romain Bignon",
