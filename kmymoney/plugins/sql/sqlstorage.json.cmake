@@ -37,6 +37,7 @@
         "Name": "SQL Storage",
         "Name[ca@valencia]": "Emmagatzematge SQL",
         "Name[ca]": "Emmagatzematge SQL",
+        "Name[cs]": "Úložiště SQL",
         "Name[es]": "Almacenamiento SQL",
         "Name[gl]": "Almacenamento de SQL",
         "Name[it]": "Archiviazione SQL",

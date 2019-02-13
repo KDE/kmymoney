@@ -37,6 +37,7 @@
         "Name": "OFX Importer",
         "Name[ca@valencia]": "Importador d'OFX",
         "Name[ca]": "Importador d'OFX",
+        "Name[cs]": "Importér OXF",
         "Name[es]": "Importador OFX",
         "Name[gl]": "Importador de OFX",
         "Name[it]": "Strumento di importazione OFX",

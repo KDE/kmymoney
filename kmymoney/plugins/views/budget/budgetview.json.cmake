@@ -6,6 +6,7 @@
                 "Name": "Darren Gould",
                 "Name[ca@valencia]": "Darren Gould",
                 "Name[ca]": "Darren Gould",
+                "Name[cs]": "Darren Gould",
                 "Name[es]": "Darren Gould",
                 "Name[gl]": "Darren Gould",
                 "Name[it]": "Darren Gould",

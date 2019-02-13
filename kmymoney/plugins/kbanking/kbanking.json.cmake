@@ -36,6 +36,7 @@
         "Name": "KBanking",
         "Name[ca@valencia]": "KBanking",
         "Name[ca]": "KBanking",
+        "Name[cs]": "KBanking",
         "Name[es]": "KBanking",
         "Name[fr]": "KBanking",
         "Name[gl]": "KBanking",

@@ -6,6 +6,7 @@
                 "Name": "Michael Edwardes",
                 "Name[ca@valencia]": "Michael Edwardes",
                 "Name[ca]": "Michael Edwardes",
+                "Name[cs]": "Michael Edwardes",
                 "Name[es]": "Michael Edwardes",
                 "Name[gl]": "Michael Edwardes",
                 "Name[it]": "Michael Edwardes",
