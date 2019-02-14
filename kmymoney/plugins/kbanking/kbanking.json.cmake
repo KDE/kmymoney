@@ -20,6 +20,7 @@
         "Description": "Add HBCI/FinTs online banking to KMyMoney",
         "Description[ca@valencia]": "Afig la banca en línia HBCI/FinTs al KMyMoney",
         "Description[ca]": "Afegeix la banca en línia HBCI/FinTs al KMyMoney",
+        "Description[es]": "Añade banca en línea HBCI/FinTs a KMyMoney",
         "Description[gl]": "Engade banca por internet HBCI e FinTs a KMyMoney",
         "Description[it]": "Aggiungi servizi bancari HBCI/FinTs in linea a KMyMoney",
         "Description[nl]": "Voegt HBCI/FinTs online bankieren toe aan KMyMoney",

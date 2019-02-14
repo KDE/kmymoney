@@ -21,6 +21,7 @@
         "Description": "Adds budget view to KMyMoney",
         "Description[ca@valencia]": "Afig la vista de pressupostos al KMyMoney",
         "Description[ca]": "Afegeix la vista de pressupostos al KMyMoney",
+        "Description[es]": "Añade la vista de presupuestos a KMyMoney",
         "Description[gl]": "Engade unha vista de presuposto a KMyMoney",
         "Description[it]": "Aggiunge la vista dei budget a KMyMoney",
         "Description[nl]": "Voegt weergave van budgetten toe aan KMyMoney",

@@ -21,6 +21,7 @@
         "Description": "Adds reports view to KMyMoney",
         "Description[ca@valencia]": "Afig la vista d'informes al KMyMoney",
         "Description[ca]": "Afegeix la vista d'informes al KMyMoney",
+        "Description[es]": "Añade una vista de informes a KMyMoney",
         "Description[gl]": "Engade unha vista de informes a KMyMoney",
         "Description[it]": "Aggiunge la vista dei report a KMyMoney",
         "Description[nl]": "Voegt weergave van rapporten toe aan KMyMoney",

@@ -21,6 +21,7 @@
         "Description": "Add GnuCash importing to KMyMoney",
         "Description[ca@valencia]": "Afig la importació des de GnuCash al KMyMoney",
         "Description[ca]": "Afegeix la importació des de GnuCash al KMyMoney",
+        "Description[es]": "Añade importación GnuCash a KMyMoney",
         "Description[gl]": "Permite importar GnuCash en KMyMoney",
         "Description[it]": "Aggiunge l'importazione GnuCash a KMymoney",
         "Description[nl]": "Voeg GnuCash importeren toe aan KMyMoney",
