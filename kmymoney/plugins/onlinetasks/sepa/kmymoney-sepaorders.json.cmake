@@ -44,6 +44,7 @@
         "Description": "Order types for single european payment area (SEPA) orders",
         "Description[ca@valencia]": "Tipus d'ordres per a les ordres de l'àrea única europea de pagaments «SEPA» (Single European Payment Area)",
         "Description[ca]": "Tipus d'ordres per a les ordres de l'àrea única europea de pagaments «SEPA» (Single European Payment Area)",
+        "Description[es]": "Tipos de órdenes para la zona única de pagos en euros (SEPA)",
         "Description[gl]": "Tipos das ordes da área europea única de pagos (SEPA)",
         "Description[it]": "Tipi per gli ordini dell'area unica dei pagamenti in euro (SEPA)",
         "Description[nl]": "Opdrachttypen voor enkelvoudige betalingsopdrachten in Europees gebied (SEPA)",

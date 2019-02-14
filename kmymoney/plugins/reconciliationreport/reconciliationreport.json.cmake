@@ -22,6 +22,7 @@
         "Description": "Creates a report after each reconciliation containing data about the reconciliation process",
         "Description[ca@valencia]": "Crea un informe després de cada conciliació que conté dades del procés de conciliació",
         "Description[ca]": "Crea un informe després de cada conciliació que conté dades del procés de conciliació",
+        "Description[es]": "Crea un informe tras cada reconciliación que contenga datos sobre el proceso de reconciliación",
         "Description[gl]": "Crea un informe tras cada reconciliación que conteña datos sobre o proceso de reconciliación",
         "Description[it]": "Crea un report dopo ogni riconciliazione che contiene dati sul processo di riconciliazione",
         "Description[nl]": "Maakt een rapport aan na elke transactiecontrole met gegevens over het controleproces",

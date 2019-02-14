@@ -22,6 +22,7 @@
         "Description": "Exports schedules to iCalendar files",
         "Description[ca@valencia]": "Exporta les planificacions a fitxers iCalendar",
         "Description[ca]": "Exporta les planificacions a fitxers iCalendar",
+        "Description[es]": "Exporta planificaciones a archivos iCalendar",
         "Description[gl]": "Exporta planificacións a ficheiros iCalendar",
         "Description[it]": "Esporta le pianificazioni a file iCalendar",
         "Description[nl]": "Exporteert planningen naar iCalender bestanden",

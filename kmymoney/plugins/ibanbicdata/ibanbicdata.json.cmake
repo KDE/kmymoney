@@ -22,6 +22,7 @@
         "Description": "Adds predefined IBAN/BIC numbers to KMyMoney",
         "Description[ca@valencia]": "Afig números IBAN/BIC predefinits al KMyMoney",
         "Description[ca]": "Afegeix números IBAN/BIC predefinits al KMyMoney",
+        "Description[es]": "Añade números IBAN/BIC predefinidos a KMyMoney",
         "Description[gl]": "Engade números predefinidos de IBAN e BIC a KMyMoney",
         "Description[it]": "Aggiunge i numeri IBAN/BIC predefiniti a KMyMoney",
         "Description[nl]": "Voegt voorgedefinieerde IBAN/BIC-nummers toe aan KMyMoney",
