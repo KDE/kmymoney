@@ -22,7 +22,7 @@
         "Description[ca@valencia]": "Afig la importació des de QIF al KMyMoney",
         "Description[ca]": "Afegeix la importació des de QIF al KMyMoney",
         "Description[es]": "Añade importación QIF a KMyMoney",
-        "Description[gl]": "Permite importar QIF en KMyMoney",
+        "Description[gl]": "Engadir a posibilidade de importar QIF en KMyMoney",
         "Description[it]": "Aggiunge l'importazione QIF a KMymoney",
         "Description[nl]": "Voeg QIF importeren toe aan KMyMoney",
         "Description[pt]": "Adição da importação de QIF para o KMyMoney",

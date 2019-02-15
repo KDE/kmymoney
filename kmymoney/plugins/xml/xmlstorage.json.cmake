@@ -21,7 +21,7 @@
         "Description[ca@valencia]": "Afig la implementació de l'emmagatzematge en XML al KMyMoney",
         "Description[ca]": "Afegeix la implementació de l'emmagatzematge en XML al KMyMoney",
         "Description[es]": "Añade almacenamiento XML a KMyMoney",
-        "Description[gl]": "Permite almacenamento de XML en KMyMoney",
+        "Description[gl]": "Engade a posibilidade de almacenamento de XML en KMyMoney",
         "Description[it]": "Aggiunge il supporto per l'archiviazione XML a KMyMoney",
         "Description[nl]": "Voegt ondersteuning toe voor XML-opslag aan KMyMoney",
         "Description[pt]": "Adiciona o suporte do armazenamento em XML ao KMyMoney",

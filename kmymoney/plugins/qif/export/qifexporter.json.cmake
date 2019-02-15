@@ -22,7 +22,7 @@
         "Description[ca@valencia]": "Afig l'exportació a QIF al KMyMoney",
         "Description[ca]": "Afegeix l'exportació a QIF al KMyMoney",
         "Description[es]": "Añade exportación QIF a KMyMoney",
-        "Description[gl]": "Permite exportar QIF desde KMyMoney",
+        "Description[gl]": "Engadir a posibilidade de exportar QIF desde KMyMoney",
         "Description[it]": "Aggiunge l'esportazione QIF a KMymoney",
         "Description[nl]": "Voeg QIF exporteren toe aan KMyMoney",
         "Description[pt]": "Adição da exportação para QIF para o KMyMoney",
