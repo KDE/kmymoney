@@ -152,7 +152,7 @@ QString LedgerTransaction::transactionSplitId() const
   Q_D(const LedgerTransaction);
   QString rc;
   if(!d->m_transaction.id().isEmpty()) {
-    rc = QString("%1-%2").arg(d->m_transaction.id()).arg(d->m_split.id());
+    rc = QString("%1-%2").arg(d->m_transaction.id(), d->m_split.id());
   }
   return rc;
 }
