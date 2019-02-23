@@ -251,15 +251,31 @@ void KMyMoneyDateInput::keyPressEvent(QKeyEvent * k)
 {
   QKeySequence today(i18nc("Enter todays date into date input widget", "T"));
 
+  auto adjustDateSection = [&](int offset) {
+    switch(d->m_dateEdit->currentSection()) {
+      case QDateTimeEdit::DaySection:
+        slotDateChosen(d->m_date.addDays(offset));
+        break;
+      case QDateTimeEdit::MonthSection:
+        slotDateChosen(d->m_date.addMonths(offset));
+        break;
+      case QDateTimeEdit::YearSection:
+        slotDateChosen(d->m_date.addYears(offset));
+        break;
+      default:
+        break;
+    }
+  };
+
   switch (k->key()) {
     case Qt::Key_Equal:
     case Qt::Key_Plus:
-      slotDateChosen(d->m_date.addDays(1));
+      adjustDateSection(1);
       k->accept();
       break;
 
     case Qt::Key_Minus:
-      slotDateChosen(d->m_date.addDays(-1));
+      adjustDateSection(-1);
       k->accept();
       break;
 
