@@ -453,7 +453,7 @@ QString CsvWriter::format(const QString &s, bool withSeparator)
     return withSeparator ? m_separator : QString();
   QString m = s;
   m.remove('\'');
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
   m.replace(QLatin1Char('"'), QStringLiteral("\"\""));
 #else
   m.replace(QLatin1Char('"'), QLatin1String("\"\""));

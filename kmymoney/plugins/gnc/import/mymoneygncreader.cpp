@@ -37,7 +37,7 @@ email                : mte@users.sourceforge.net
 #include <QXmlInputSource>
 #include <QXmlSimpleReader>
 #include <QPointer>
-#if QT_VERSION >= 0x051000
+#if QT_VERSION >= QT_VERSION_CHECK(5,10,0)
   #include <QRandomGenerator>
 #endif
 
@@ -229,7 +229,7 @@ const QString GncObject::getKvpValue(const QString& key, const QString& type) co
 
 void GncObject::adjustHideFactor()
 {
-#if QT_VERSION >= 0x051000
+#if QT_VERSION >= QT_VERSION_CHECK(5,10,0)
   m_moneyHideFactor = pMain->m_fileHideFactor * (1.0 + (int)(200.0 * QRandomGenerator::system()->generate() / (RAND_MAX + 1.0))) / 100.0;
 #else
   m_moneyHideFactor = pMain->m_fileHideFactor * (1.0 + (int)(200.0 * rand() / (RAND_MAX + 1.0))) / 100.0;
@@ -1392,7 +1392,7 @@ void MyMoneyGncReader::setFileHideFactor()
 {
 #define MINFILEHIDEF 0.01
 #define MAXFILEHIDEF 99.99
-#if QT_VERSION >= 0x051000
+#if QT_VERSION >= QT_VERSION_CHECK(5,10,0)
   m_fileHideFactor = 0.0;
   while (m_fileHideFactor == 0.0) {
     m_fileHideFactor = QInputDialog::getDouble(0,
