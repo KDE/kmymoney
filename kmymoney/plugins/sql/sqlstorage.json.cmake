@@ -12,6 +12,7 @@
                 "Name[nl]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[pt]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[pt_BR]": "Tony Bloomfield,Łukasz Wojniłowicz",
+                "Name[ru]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[sv]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[uk]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[x-test]": "xxTony Bloomfield,Łukasz Wojniłowiczxx"
