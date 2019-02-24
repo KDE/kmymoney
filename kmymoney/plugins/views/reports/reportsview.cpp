@@ -165,7 +165,7 @@ QString ReportsView::budget() const
   }
 
   auto prec = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
-  auto isOverrun = false;
+  bool isOverrun = false;
   int i = 0;
 
   //config report just like "Monthly Budgeted vs Actual

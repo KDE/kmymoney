@@ -113,7 +113,6 @@ public:
   QSortFilterProxyModel*        payeesModel;
   bool                          accepted;
   bool                          costCenterRequired;
-  bool                          costCenterOk;
   SplitModel                    splitModel;
   QStandardItemModel            statusModel;
   QString                       transactionSplitId;

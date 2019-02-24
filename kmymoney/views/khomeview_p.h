@@ -128,7 +128,8 @@ public:
     m_showAllSchedules(false),
     m_needLoad(true),
     m_netWorthGraphLastValidSize(400, 300),
-    m_currentPrinter(nullptr)
+    m_currentPrinter(nullptr),
+    m_scrollBarPos(0)
   {
   }
 

@@ -84,6 +84,7 @@ class WidgetHintFrameCollection : public QObject
   Q_OBJECT
 public:
   explicit WidgetHintFrameCollection(QObject* parent = 0);
+  ~WidgetHintFrameCollection();
 
   void addFrame(WidgetHintFrame* frame);
   void addWidget(QWidget* w);

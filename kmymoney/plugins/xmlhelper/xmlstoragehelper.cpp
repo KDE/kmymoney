@@ -870,14 +870,9 @@ namespace MyMoneyXmlContentHandler2 {
       el.setAttribute(attributeName(Attribute::Report::ID), report.id());
 
       // write general tab
-      auto anonymous = false;
-      if (anonymous) {
-        el.setAttribute(attributeName(Attribute::Report::Name), report.id());
-        el.setAttribute(attributeName(Attribute::Report::Comment), QString(report.comment()).fill('x'));
-      } else {
-        el.setAttribute(attributeName(Attribute::Report::Name), report.name());
-        el.setAttribute(attributeName(Attribute::Report::Comment), report.comment());
-      }
+      el.setAttribute(attributeName(Attribute::Report::Name), report.name());
+      el.setAttribute(attributeName(Attribute::Report::Comment), report.comment());
+
       el.setAttribute(attributeName(Attribute::Report::ConvertCurrency), report.isConvertCurrency());
       el.setAttribute(attributeName(Attribute::Report::Favorite), report.isFavorite());
       el.setAttribute(attributeName(Attribute::Report::SkipZero), report.isSkippingZero());

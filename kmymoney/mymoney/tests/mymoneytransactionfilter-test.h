@@ -25,7 +25,10 @@ class MyMoneyFile;
 
 class MyMoneyTransactionFilterTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
+public:
+    MyMoneyTransactionFilterTest();
+
 private slots:
     void init();
     void cleanup();

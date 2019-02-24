@@ -40,7 +40,11 @@ using namespace test;
 QTEST_GUILESS_MAIN(MyMoneyTransactionFilterTest)
 
 
-// using namespace std;
+MyMoneyTransactionFilterTest::MyMoneyTransactionFilterTest::MyMoneyTransactionFilterTest()
+  : storage(nullptr)
+  , file(nullptr)
+{
+}
 
 void MyMoneyTransactionFilterTest::init()
 {

@@ -658,9 +658,11 @@ public:
           QString::number(ui->m_forecastDays->value()) + ';' +
           QString::number(ui->m_tab->width()) + ';' +
           QString::number(ui->m_tab->height());
-       const auto variantReport = reportsPlugin->requestData(args, eWidgetPlugin::WidgetType::NetWorthForecastWithArgs);
+      const auto variantReport = reportsPlugin->requestData(args, eWidgetPlugin::WidgetType::NetWorthForecastWithArgs);
       if (!variantReport.isNull())
         m_forecastChart = variantReport.value<QWidget *>();
+      else
+        m_forecastChart = new QLabel(i18n("No data provided by reports plugin for this chart."));
     } else {
         m_forecastChart = new QLabel(i18n("Enable reports plugin to see this chart."));
     }

@@ -250,6 +250,8 @@ void KNewBankDlg::slotIconLoaded(KJob* job)
     default:
       // There is problem with the URL from
       qDebug() << "KIO::FavIconRequestJob error" << job->error();
+      // intentional fall through
+
     case EALREADY:    // invalid URL, no server response
       d->ui->iconButton->setEnabled(false);
       d->m_favIcon = QIcon();

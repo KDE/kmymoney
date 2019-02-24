@@ -116,8 +116,7 @@ QStringList KMyMoneySettings::listOfItems()
   QRegExp exp("-?(\\d+)");
   QStringList::iterator it_s;
   for (it_s = all.begin(); it_s != all.end(); ++it_s) {
-    exp.indexIn(*it_s);
-    if (!list.contains(exp.cap(1)) && !list.contains(QString("-%1").arg(exp.cap(1)))) {
+    if ((exp.indexIn(*it_s) != -1) && !list.contains(exp.cap(1)) && !list.contains(QString("-%1").arg(exp.cap(1)))) {
       list << *it_s;
     }
   }
