@@ -8,9 +8,9 @@
 #
 #  osc	- opensuse build service command line client
 #
-# syntax: release-windows-packages <mode>
+# syntax: release-windows-packages [<options>] <mode>
 #
-# run ./release-windows-packages to see all modes
+# run ./release-windows-packages to see all modes and options
 #
 NAME=kmymoney
 
@@ -18,15 +18,17 @@ PACKAGENAME32=mingw32-$NAME
 ROOT32=windows\:mingw\:win32
 SRCROOT32=${ROOT32}
 ARCHOUT32=i686-w64-mingw32
+use32=1
 
 PACKAGENAME64=mingw64-$NAME
 ROOT64=windows\:mingw\:win64
 SRCROOT64=${ROOT64}
 ARCHOUT64=x86_64-w64-mingw32
+use64=1
 
 REPO=openSUSE_Leap_42.2
 SRCREPO=$REPO
-VERSION=4.8.1.1
+usesrc=1
 
 PHABURL=https://phabricator.kde.org
 oscoptions="-A https://api.opensuse.org"
@@ -39,24 +41,69 @@ if ! test -d "work"; then
     mkdir work
 fi
 
-case $1 in
-clean) ## clean working area
-	rm -rf work/*
+dryrun=0
+update=0
+curl=curl
+
+# check options
+for var in "$@"; do
+case $var in
+--update-32) ## update x86_64 variant
+	use64=0
+	usesrc=0
+	update=1
+	shift
 	;;
 
-download) ## download rpm packages
+--update-64) ## update i686 variant
+	use32=0
+	usesrc=0
+	update=1
+	shift
+	;;
+
+--dryrun) ## simulate upload only
+	dryrun=1
+	curl="echo curl"
+	shift
+	;;
+esac
+done
+
+function clean() {
+	rm -rf work/*
+}
+
+
+function download() {
 	cd work
 	rm -rf binaries
-	osc $oscoptions getbinaries --multibuild-package=$PACKAGENAME32-installer $ROOT32 $PACKAGENAME32 $REPO x86_64
-	if test -n "$ROOT64"; then
-	    osc $oscoptions getbinaries --multibuild-package=$PACKAGENAME64-installer $ROOT64 $PACKAGENAME64 $REPO x86_64
+	if test $use32 -eq 1; then
+		osc $oscoptions getbinaries --multibuild-package=$PACKAGENAME32-installer $ROOT32 $PACKAGENAME32 $REPO x86_64
+		VERSION=$(find binaries/ -name "*$PACKAGENAME32-installer*" | sed "s,^.*$PACKAGENAME32-installer-,,g;s,-.*$,,g")
+		echo $VERSION > VERSION
+	fi
+	if test $use64 -eq 1; then
+		osc $oscoptions getbinaries --multibuild-package=$PACKAGENAME64-installer $ROOT64 $PACKAGENAME64 $REPO x86_64
+		VERSION=$(find binaries/ -name "*$PACKAGENAME64-installer*" | sed "s,^.*$PACKAGENAME64-installer-,,g;s,-.*$,,g")
+		echo $VERSION > VERSION
 	fi
 	cd ..
-	$self downloadsrc
+	if test $usesrc -eq 1; then
+		downloadsrc
+	fi
 	touch work/$1.finished
-	;;
+}
 
-downloadsrc) ## download source
+function getversion() {
+	if ! test -f work/VERSION; then
+		echo "no version found"
+		exit 1;
+	fi
+	VERSION=$(cat work/VERSION)
+}
+
+function downloadsrc() {
 	cd work
 	# fetch source package
 	src32pkg=$(osc $oscoptions ls -b -r $SRCREPO -a x86_64 $SRCROOT32 $PACKAGENAME32 | grep src)
@@ -71,10 +118,12 @@ downloadsrc) ## download source
 	    debug64pkg=$(osc $oscoptions ls -b -r $SRCREPO -a x86_64 $SRCROOT64 $PACKAGENAME64 | grep debug)
 	    osc $oscoptions getbinaries $SRCROOT64 $PACKAGENAME64 $SRCREPO x86_64 $debug64pkg
 	fi
+	cd ..
 	touch $1.finished
-	;;
+}
 
-unpack) ## unpack rpm files
+function unpack()  {
+	getversion
 	cd work
 	files=$(cd binaries; find -name '*installer*' -o -name '*portable*' -o -name '*src*' -o -name '*debugpackage*' | grep "$VERSION" | sed 's,^.,binaries,g')
 	if test -d tmp; then
@@ -84,89 +133,155 @@ unpack) ## unpack rpm files
 	for i in $(echo $files); do
 		(cd tmp; rpm2cpio ../$i | cpio -idmv)
 	done
+	cd ..
 	touch $1.finished
-	;;
+}
 
-movepackage) ## move windows binary packages into upload folder
+function movepackage() {
 	cd work
 	rm -rf out
 	mkdir -p out
 	find tmp/ -type f -name '*.exe' -exec cp {} out \;
 	find tmp/ -type f -name '*.7z' -exec cp {} out \;
 	find tmp/ -type f -name '*.xz' -exec cp {} out \;
+	cd ..
 	touch $1.finished
-	;;
+}
 
-repacksource) ## repackage source tar ball to 7z
+function repacksource() {
 	# repackage source package
 	srcfile=$(find work/tmp -name "$NAME*.xz")
 	outfile=$(basename $srcfile | sed 's,\.tar\.xz,\.7z,g')
 	(mkdir -p work/srctmp; cd work/srctmp; tar -xJf ../../$srcfile; 7za a ../out/$outfile *; cd ..; rm -rf srctmp)
 	touch work/$1.finished
-	;;
+}
 
-createsha) ## create sha256sums
+function createsha() {
 	(cd work/out; find -type f -name '*.7z' -o -name '*.exe' -o -name '*.xz' | sed 's,\./,,g' | sort | xargs sha256sum > $NAME.sha256sum)
 	touch work/$1.finished
-	;;
+}
 
-upload) ## upload files to staging area
+function upload() {
 	for i in $(find work/out -name '*.7z' -o -name '*.exe' -o -name '*.xz'); do
-	    curl -T $i	ftp://upload.kde.org/incoming/
+	    $curl -T $i	ftp://upload.kde.org/incoming/
 	done
 	touch work/$1.finished
-	;;
+}
 
-createdescription) ## create ticket description
-	description="Please move the $NAME related files which has been uploaded to upload.kde.org/incoming to download mirror 'stable/$NAME/$VERSION' location and please update the symbolic link 'stable/$NAME/latest' to 'stable/$NAME/$VERSION'"
+function createdescription() {
+	getversion
+	if test $update -eq 1; then
+		description="Please move the $NAME related files which has been uploaded to upload.kde.org/incoming to download mirror 'stable/$NAME/$VERSION' location and remove the old files from this directory."
+	else
+		description="Please move the $NAME related files which has been uploaded to upload.kde.org/incoming to download mirror 'stable/$NAME/$VERSION' location and please update the symbolic link 'stable/$NAME/latest' to 'stable/$NAME/$VERSION'"
+	fi
 	sums=$(cat work/out/$NAME.sha256sum | gawk 'BEGIN { print "dir	 shasum								   file"}  $2 ~ /i686/ { print "win32 " $0 } $2 ~ /x86_64/ { print "win64 " $0 } $2 ~ /[a-z]+-[0-9]/ { print "src   " $0 }')
-	echo -e "$description\n\n$sums"
+	echo -e "$description\n\n$sums" > work/description
 	touch work/$1.finished
-	;;
+}
 
-ticket) ## submit phabricator ticket
-	description=$($0 createdescription)
-	curl $PHABURL/api/maniphest.createtask \
+function ticket() {
+	getversion
+	description=$(cat work/description)
+	$curl $PHABURL/api/maniphest.createtask \
 	-d api.token=$apitoken \
 	-d "title=tarball move request for stable/$NAME/$VERSION" \
 	-d "description=$description" \
 	-d "$options"
 	touch work/$1.finished
-	;;
+}
 
-sf) ## run all required targets for releasing on sourceforge
-	$self clean
-	$self download
-	$self unpack
-	$self movepackage
-	$self repacksource
-	$self createsha
+function sf() {
+	clean
+	download
+	unpack
+	movepackage
+	if test $usesrc -eq 1; then
+		repacksource
+	fi
+	createsha
 	echo "All release related files are located in work/out"
 	ls work/out
 	touch work/$1.finished
+}
+
+function kde() {
+	clean
+	download
+	unpack
+	movepackage
+	if test $usesrc -eq 1; then
+		repacksource
+	fi
+	createsha
+	upload
+	echo "Content for ticket creating:"
+	createdescription
+	echo run "$0 ticket" to submit ticket
+	touch work/$1.finished
+}
+
+function help() {
+	echo "syntax: release-windows-packages [<options>] <mode>"
+	echo
+	echo "options:"
+	gawk '$0 ~ /^--[a-z].*) ##/ { sub(/) ##/,"",$0); a = $1; $1 = ""; printf("    %-20s  - %s\n",a, $0); }' $0
+	echo
+	echo "modes:"
+	gawk '$0 ~ /^[a-z].*) ##/ { sub(/) ##/,"",$0); a = $1; $1 = ""; printf("    %-20s  - %s\n",a, $0); }' $0
+
+}
+
+case $1 in
+clean) ## clean working area
+	clean;
+	;;
+
+download) ## download rpm packages
+	download
+	;;
+
+downloadsrc) ## download source
+	downloadsrc
+	;;
+
+unpack) ## unpack rpm files
+	unpack
+	;;
+
+movepackage) ## move windows binary packages into upload folder
+	movepackage
+	;;
+
+repacksource) ## repackage source tar ball to 7z
+	repacksource
+	;;
+
+createsha) ## create sha256sums
+	createsha
+	;;
+
+upload) ## upload files to staging area
+	upload
+	;;
+
+createdescription) ## create ticket description
+	createdescription
+	;;
+
+ticket) ## submit phabricator ticket
+	ticket
+	;;
+
+sf) ## run all required targets for releasing on sourceforge
+	sf
 	;;
 
 kde) ## run all required targets for releasing on download.kde.org
-	$self clean
-	$self download
-	$self unpack
-	$self movepackage
-	$self repacksource
-	$self createsha
-	$self upload
-	echo "Content for ticket creating:"
-	$self createdescription
-	echo run "$0 ticket" to submit ticket
-	touch work/$1.finished
+	kde
 	;;
-
 *)
-	echo "Make sure to setup VERSION inside $0 and run"
-	echo "$0 all"
-	echo
-	echo "or run single targets"
-	echo
-	gawk '$0 ~ /^[a-z].*) ##/ { sub(/) ##/,"",$0); a = $1; $1 = ""; printf("    %-20s  - %s\n",a, $0); }' $0
+	help
 	;;
 esac
 
