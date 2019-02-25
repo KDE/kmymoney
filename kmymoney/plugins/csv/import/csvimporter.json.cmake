@@ -14,6 +14,7 @@
                 "Name[pl]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[pt]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[pt_BR]": "Allan Anderson,Łukasz Wojniłowicz",
+                "Name[ru]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[sv]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[uk]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[x-test]": "xxAllan Anderson,Łukasz Wojniłowiczxx"

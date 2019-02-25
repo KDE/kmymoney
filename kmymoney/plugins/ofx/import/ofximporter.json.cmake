@@ -13,6 +13,7 @@
                 "Name[pl]": "Ace Jones,Thomas Baumgart",
                 "Name[pt]": "Ace Jones,Thomas Baumgart",
                 "Name[pt_BR]": "Ace Jones,Thomas Baumgart",
+                "Name[ru]": "Ace Jones,Thomas Baumgart",
                 "Name[sv]": "Ace Jones,Thomas Baumgart",
                 "Name[uk]": "Ace Jones,Thomas Baumgart",
                 "Name[x-test]": "xxAce Jones,Thomas Baumgartxx"

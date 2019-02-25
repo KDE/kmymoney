@@ -13,6 +13,7 @@
                 "Name[pl]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
                 "Name[pt]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
                 "Name[pt_BR]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
+                "Name[ru]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
                 "Name[sv]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
                 "Name[uk]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
                 "Name[x-test]": "xxKevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowiczxx"

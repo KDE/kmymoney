@@ -14,6 +14,7 @@
                 "Name[pl]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[pt]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[pt_BR]": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[ru]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[sv]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[uk]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[x-test]": "xxAlvaro Soliverez,Łukasz Wojniłowiczxx"

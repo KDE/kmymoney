@@ -14,6 +14,7 @@
                 "Name[pl]": "Allan Anderson",
                 "Name[pt]": "Allan Anderson",
                 "Name[pt_BR]": "Allan Anderson",
+                "Name[ru]": "Allan Anderson",
                 "Name[sv]": "Allan Anderson",
                 "Name[uk]": "Allan Anderson",
                 "Name[x-test]": "xxAllan Andersonxx"
