@@ -88,6 +88,7 @@ public:
     m_calculatorButton->setCursor(Qt::ArrowCursor);
     m_calculatorButton->setStyleSheet("QToolButton { border: none; padding: 2px}");
     m_calculatorButton->setFixedSize(btnSize, btnSize);
+    m_calculatorButton->setFocusPolicy(Qt::ClickFocus);
     m_calculatorButton->show();
 
     int frameWidth = q->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
@@ -143,10 +144,11 @@ public:
     if (p.x() + w > QApplication::desktop()->width())
       p.setX(p.x() + q->width() - w);
 
+    m_calculatorFrame->show();
+
     QRect r = m_calculator->geometry();
     r.moveTopLeft(p);
     m_calculatorFrame->setGeometry(r);
-    m_calculatorFrame->show();
     m_calculator->setFocus();
   }
 

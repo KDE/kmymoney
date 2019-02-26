@@ -42,8 +42,6 @@
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
-#include "kmymoneyedit.h"
-#include "kmymoneydateinput.h"
 #include "mymoneyprice.h"
 #include "mymoneymoney.h"
 #include "mymoneyexception.h"
@@ -122,16 +120,16 @@ public:
     }
 
     // fill in initial values
-    ui->m_toAmount->loadText(m_result.formatMoney(QString(), MyMoneyMoney::denomToPrec(m_resultFraction)));
     ui->m_toAmount->setPrecision(MyMoneyMoney::denomToPrec(m_resultFraction));
+    ui->m_toAmount->setValue(m_result);
 
     ui->m_conversionRate->setPrecision(m_fromCurrency.pricePrecision());
 
     q->connect(ui->m_amountButton, &QAbstractButton::clicked, q, &KCurrencyCalculator::slotSetToAmount);
     q->connect(ui->m_rateButton, &QAbstractButton::clicked, q, &KCurrencyCalculator::slotSetExchangeRate);
 
-    q->connect(ui->m_toAmount, &KMyMoneyEdit::valueChanged, q, &KCurrencyCalculator::slotUpdateResult);
-    q->connect(ui->m_conversionRate, &KMyMoneyEdit::valueChanged, q, &KCurrencyCalculator::slotUpdateRate);
+    q->connect(ui->m_toAmount, &AmountEdit::valueChanged, q, &KCurrencyCalculator::slotUpdateResult);
+    q->connect(ui->m_conversionRate, &AmountEdit::valueChanged, q, &KCurrencyCalculator::slotUpdateRate);
 
     // use this as the default
     ui->m_amountButton->animateClick();
@@ -313,9 +311,9 @@ void KCurrencyCalculator::slotUpdateResult(const QString& /*txt*/)
   if (!result.isZero()) {
     price = result / d->m_value;
 
-    d->ui->m_conversionRate->loadText(price.formatMoney(QString(), d->m_fromCurrency.pricePrecision()));
+    d->ui->m_conversionRate->setValue(price);
     d->m_result = (d->m_value * price).convert(d->m_resultFraction);
-    d->ui->m_toAmount->loadText(d->m_result.formatMoney(d->m_resultFraction));
+    d->ui->m_toAmount->setValue(d->m_result);
   }
   d->updateExample(price);
 }
@@ -332,9 +330,9 @@ void KCurrencyCalculator::slotUpdateRate(const QString& /*txt*/)
   }
 
   if (!price.isZero()) {
-    d->ui->m_conversionRate->loadText(price.formatMoney(QString(), d->m_fromCurrency.pricePrecision()));
+    d->ui->m_conversionRate->setValue(price);
     d->m_result = (d->m_value * price).convert(d->m_resultFraction);
-    d->ui->m_toAmount->loadText(d->m_result.formatMoney(QString(), MyMoneyMoney::denomToPrec(d->m_resultFraction)));
+    d->ui->m_toAmount->setValue(d->m_result);
   }
   d->updateExample(price);
 }

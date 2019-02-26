@@ -131,6 +131,7 @@ public:
     allowEmpty = false;
     m_edit = new KMyMoneyLineEdit(q, true);
     m_edit->installEventFilter(q);
+    q->setFocusPolicy(m_edit->focusPolicy());
     q->setFocusProxy(m_edit);
     editLayout->addWidget(m_edit);
 
