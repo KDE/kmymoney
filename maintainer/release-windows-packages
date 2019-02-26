@@ -163,7 +163,11 @@ function createsha() {
 
 function upload() {
 	for i in $(find work/out -name '*.7z' -o -name '*.exe' -o -name '*.xz'); do
-	    $curl -T $i	ftp://upload.kde.org/incoming/
+		$curl -T $i ftp://upload.kde.org/incoming/
+		if test $? -ne 0; then
+			echo "upload failed"
+			exit 1
+		fi
 	done
 	touch work/$1.finished
 }
