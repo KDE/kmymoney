@@ -189,7 +189,6 @@ void KImportDlg::loadProfiles(const bool selectLast)
 void KImportDlg::addCategories(QStringList& strList, const QString& id, const QString& leadIn) const
 {
   MyMoneyFile *file = MyMoneyFile::instance();
-  QString name;
 
   MyMoneyAccount account = file->account(id);
 

@@ -302,9 +302,7 @@ void MyMoneyQifWriter::writeInvestmentEntry(QTextStream& stream, const MyMoneyTr
   QMap<eMyMoney::Account::Type, QString> map;
 
   for (int i = 0; i < lst.count(); i++) {
-    QString actionType = lst[i].action();
     MyMoneyAccount acc = file->account(lst[i].accountId());
-    QString accName = acc.name();
     typ = acc.accountType();
     map.insert(typ, lst[i].accountId());
     if (typ == eMyMoney::Account::Type::Stock) {

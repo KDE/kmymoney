@@ -104,7 +104,6 @@ void KPayeesView::slotChooseDefaultAccount()
       MyMoneySplit s = t->transaction().splitByPayee(d->m_payee.id());
       const MyMoneyAccount& acc = file->account(s.accountId());
 
-      QString txt;
       if (s.action() != MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization)
           && acc.accountType() != eMyMoney::Account::Type::AssetLoan
           && !file->isTransfer(t->transaction())

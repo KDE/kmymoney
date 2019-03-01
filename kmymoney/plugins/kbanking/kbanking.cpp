@@ -166,6 +166,7 @@ KBanking::KBanking(QObject *parent, const QVariantList &args) :
   , m_importAction(nullptr)
   , m_kbanking(nullptr)
   , m_accountSettings(nullptr)
+  , m_statementCount(0)
 {
   Q_UNUSED(args)
   qDebug("Plugins: kbanking loaded");

@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>387</width>
-    <height>268</height>
+    <height>336</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -179,9 +179,6 @@
      </item>
      <item>
       <layout class="QGridLayout">
-       <item row="1" column="1">
-        <widget class="KMyMoneyEdit" name="m_conversionRate" native="true"/>
-       </item>
        <item row="0" column="0" rowspan="3">
         <widget class="QGroupBox" name="buttonGroupBox1">
          <property name="title">
@@ -250,6 +247,23 @@
          </layout>
         </widget>
        </item>
+       <item row="0" column="1">
+        <widget class="AmountEdit" name="m_toAmount"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="AmountEdit" name="m_conversionRate"/>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLabel" name="m_conversionExample">
+         <property name="text">
+          <string>xx
+xx</string>
+         </property>
+         <property name="wordWrap">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
        <item row="3" column="0" colspan="2">
         <widget class="QFrame" name="m_dateFrame">
          <property name="frameShape">
@@ -282,24 +296,14 @@
            </widget>
           </item>
           <item>
-           <widget class="KMyMoneyDateInput" name="m_dateEdit" native="true"/>
+           <widget class="KMyMoneyDateEdit" name="m_dateEdit">
+            <property name="calendarPopup">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLabel" name="m_conversionExample">
-         <property name="text">
-          <string>xx
-xx</string>
-         </property>
-         <property name="wordWrap">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="KMyMoneyEdit" name="m_toAmount" native="true"/>
        </item>
       </layout>
      </item>
@@ -343,20 +347,22 @@ xx</string>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KMyMoneyDateInput</class>
-   <extends>QWidget</extends>
-   <header>kmymoneydateinput.h</header>
-   <container>1</container>
+   <class>AmountEdit</class>
+   <extends>QLineEdit</extends>
+   <header>amountedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KMyMoneyEdit</class>
-   <extends>QWidget</extends>
-   <header>kmymoneyedit.h</header>
+   <class>KMyMoneyDateEdit</class>
+   <extends>QDateEdit</extends>
+   <header>kmymoneydateedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>m_amountButton</tabstop>
   <tabstop>m_rateButton</tabstop>
+  <tabstop>m_toAmount</tabstop>
+  <tabstop>m_conversionRate</tabstop>
+  <tabstop>m_dateEdit</tabstop>
   <tabstop>m_updateButton</tabstop>
  </tabstops>
  <resources/>

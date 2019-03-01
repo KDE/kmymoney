@@ -384,7 +384,7 @@ QDate MyMoneyStatement::statementEndDate() const
     return m_dateEnd;
 
   QDate postDate;
-  for(auto t : m_listTransactions) {
+  for(auto& t : m_listTransactions) {
     if (t.m_datePosted > postDate) {
       postDate = t.m_datePosted;
     }

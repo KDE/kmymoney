@@ -205,6 +205,9 @@ void KAccountsView::updateActions(const MyMoneyObject& obj)
       break;
   }
 
+#if 0
+  // It is unclear to me, what the following code should do
+  // as it just does nothing
   QBitArray skip((int)eStorage::Reference::Count);
   if (!d->m_currentAccount.id().isEmpty()) {
     if (!file->isStandardAccount(d->m_currentAccount.id())) {
@@ -220,6 +223,7 @@ void KAccountsView::updateActions(const MyMoneyObject& obj)
       }
     }
   }
+#endif
 
 }
 

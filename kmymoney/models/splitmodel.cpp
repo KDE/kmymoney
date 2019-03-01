@@ -231,7 +231,7 @@ QVariant SplitModel::data(const QModelIndex& index, int role) const
       break;
 
     case (int)Role::TransactionSplitId:
-      rc = QString("%1-%2").arg(d->m_transaction.id()).arg(split.id());
+      rc = QString("%1-%2").arg(d->m_transaction.id(), split.id());
       break;
 
     case (int)Role::SplitId:

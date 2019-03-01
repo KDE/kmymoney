@@ -3467,13 +3467,14 @@ QMap<QString, QVector<int> > MyMoneyFile::countTransactionsWithSpecificReconcili
 
   QList<MyMoneyAccount> list;
   accountList(list);
-  for (const auto account : list) {
+  for (const auto& account : list) {
     result[account.id()] = QVector<int>((int)eMyMoney::Split::State::MaxReconcileState, 0);
   }
 
   const auto transactions = d->m_storage->transactionList(filter);
   for (const auto& transaction : transactions) {
-    for (const auto& split : transaction.splits()) {
+    const auto& splits = transaction.splits();
+    for (const auto& split : splits) {
       if (!result.contains(split.accountId())) {
         result[split.accountId()] = QVector<int>((int)eMyMoney::Split::State::MaxReconcileState, 0);
       }

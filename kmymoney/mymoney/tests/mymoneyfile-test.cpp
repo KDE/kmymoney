@@ -148,8 +148,6 @@ void MyMoneyFileTest::testAddOneInstitution()
   MyMoneyInstitution institution_noname(institution);
   institution_noname.setName(QString());
 
-  QString id;
-
   QCOMPARE(m->institutionCount(), static_cast<unsigned>(0));
   storage->d_func()->m_dirty = false;
 
@@ -208,8 +206,6 @@ void MyMoneyFileTest::testAddTwoInstitutions()
   institution.setTelephone("telephone");
   institution.setManager("manager");
   institution.setSortcode("sortcode");
-
-  QString id;
 
   storage->d_func()->m_dirty = false;
   MyMoneyFileTransaction ft;
@@ -841,7 +837,6 @@ void MyMoneyFileTest::testRemoveAccount()
   QCOMPARE(m->accountCount(), static_cast<unsigned>(7));
   storage->d_func()->m_dirty = false;
 
-  QString id;
   MyMoneyAccount p = m->account("A000001");
 
   clearObjectLists();

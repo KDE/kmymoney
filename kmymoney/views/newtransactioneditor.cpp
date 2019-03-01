@@ -113,7 +113,6 @@ public:
   QSortFilterProxyModel*        payeesModel;
   bool                          accepted;
   bool                          costCenterRequired;
-  bool                          costCenterOk;
   SplitModel                    splitModel;
   QStandardItemModel            statusModel;
   QString                       transactionSplitId;
@@ -624,7 +623,6 @@ void NewTransactionEditor::saveTransaction()
     *lastUsedPostDate() = d->ui->dateEdit->date();
   }
 
-  QList<MyMoneySplit> splits = t.splits();
   // first remove the splits that are gone
   foreach (const auto split, t.splits()) {
     if(split.id() == d->split.id()) {

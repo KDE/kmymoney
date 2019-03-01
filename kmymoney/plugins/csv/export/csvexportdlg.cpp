@@ -213,7 +213,6 @@ QStringList CsvExportDlg::getAccounts()
 {
   QStringList list;
   MyMoneyFile* file = MyMoneyFile::instance();
-  QString accountId;
   // Get a list of all accounts
   QList<MyMoneyAccount> accounts;
   file->accountList(accounts);

@@ -127,7 +127,8 @@ public:
     m_showAllSchedules(false),
     m_needLoad(true),
     m_netWorthGraphLastValidSize(400, 300),
-    m_currentPrinter(nullptr)
+    m_currentPrinter(nullptr),
+    m_scrollBarPos(0)
   {
   }
 
@@ -197,7 +198,7 @@ public:
       amountToMinBal.replace(QChar(' '), "&nbsp;");
     }
 
-    QString cellStatus, cellCounts, pathOK, pathTODO, pathNotOK;
+    QString cellStatus, pathOK, pathTODO, pathNotOK;
 
     if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
       //show account's online-status
@@ -1197,7 +1198,6 @@ public:
     QList<MyMoneyAccount> liabilities;
     MyMoneyMoney netAssets;
     MyMoneyMoney netLiabilities;
-    QString fontStart, fontEnd;
 
     MyMoneyFile* file = MyMoneyFile::instance();
     int prec = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());

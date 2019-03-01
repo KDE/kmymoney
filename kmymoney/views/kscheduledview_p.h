@@ -35,6 +35,7 @@
 #include <QMenu>
 #include <QIcon>
 #include <QScopedPointer>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -489,14 +490,9 @@ public:
         return rc;
       }
 
-      // make sure that the parent widget is currently visible to avoid
-      // positioning of the dialog in the upper left corner of the screen
-      QWidget* parent = q;
-      while (parent && !parent->isVisible()) {
-        parent = parent->parentWidget();
-      }
-
+      QWidget* parent = QApplication::activeWindow();
       QPointer<KEnterScheduleDlg> dlg = new KEnterScheduleDlg(parent, schedule);
+      qDebug() << "parent widget" << (void*) parent;
 
       try {
         QDate origDueDate = schedule.nextDueDate();

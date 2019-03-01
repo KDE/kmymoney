@@ -131,6 +131,7 @@ public:
     allowEmpty = false;
     m_edit = new KMyMoneyLineEdit(q, true);
     m_edit->installEventFilter(q);
+    q->setFocusPolicy(m_edit->focusPolicy());
     q->setFocusProxy(m_edit);
     editLayout->addWidget(m_edit);
 
@@ -515,7 +516,6 @@ void KMyMoneyEdit::slotCalculatorOpen()
 void KMyMoneyEdit::slotCalculatorResult()
 {
   Q_D(KMyMoneyEdit);
-  QString result;
   if (d->m_calculator != 0) {
     d->m_calculatorFrame->hide();
     d->m_edit->setText(d->m_calculator->result());

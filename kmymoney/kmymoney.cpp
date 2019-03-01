@@ -3225,7 +3225,6 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
         QMap<QString, KMyMoneyPlugin::ImporterPlugin*>::const_iterator it_plugin = pPlugins.importer.constBegin();
         while (it_plugin != pPlugins.importer.constEnd()) {
           if ((*it_plugin)->isMyFormat(url)) {
-            QList<MyMoneyStatement> statements;
             if (!(*it_plugin)->import(url) && !(*it_plugin)->lastError().isEmpty()) {
               KMessageBox::error(this, i18n("Unable to import %1 using %2 plugin.  The plugin returned the following error: %3", url, (*it_plugin)->formatName(), (*it_plugin)->lastError()), i18n("Importing error"));
             }

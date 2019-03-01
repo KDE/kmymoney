@@ -292,7 +292,6 @@ void CsvWriter::writeInvestmentEntry(const MyMoneyTransaction& t, const int coun
 
   for (int i = 0; i < lst.count(); i++) {
     MyMoneyAccount acc = file->account(lst[i].accountId());
-    QString accName = acc.name();
     typ = acc.accountType();
     map.insert(typ, lst[i].accountId());
 
@@ -454,7 +453,7 @@ QString CsvWriter::format(const QString &s, bool withSeparator)
     return withSeparator ? m_separator : QString();
   QString m = s;
   m.remove('\'');
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
   m.replace(QLatin1Char('"'), QStringLiteral("\"\""));
 #else
   m.replace(QLatin1Char('"'), QLatin1String("\"\""));

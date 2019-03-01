@@ -72,7 +72,7 @@ public:
   {
     Q_Q(AccountsModel);
     QStringList headerLabels;
-    for (const auto& column : m_columns)
+    for (const auto& column : qAsConst(m_columns))
       headerLabels.append(q->getHeaderName(column));
     q->setHorizontalHeaderLabels(headerLabels);
   }
@@ -646,7 +646,8 @@ void AccountsModel::load()
     }
 
     // adding accounts (specific bank/investment accounts) belonging to given accounts category
-    for (const auto& accStr : account.accountList()) {
+    const auto&  accountList = account.accountList();
+    for (const auto& accStr : accountList) {
       const auto acc = d->m_file->account(accStr);
 
       auto item = new QStandardItem(acc.name());
@@ -1174,7 +1175,7 @@ void InstitutionsModel::slotObjectAdded(File::Object objType, const QString& id)
 
   // load the investment sub-accounts if there are any - there could be sub-accounts if this is an add operation
   // that was triggered in slotObjectModified on an already existing account which went trough a hierarchy change
-  const auto sAccounts = account.accountList();
+  const auto& sAccounts = account.accountList();
   if (!sAccounts.isEmpty()) {
     QList<MyMoneyAccount> subAccounts;
     d->m_file->accountList(subAccounts, sAccounts);

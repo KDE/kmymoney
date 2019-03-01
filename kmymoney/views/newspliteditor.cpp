@@ -62,7 +62,6 @@ struct NewSplitEditor::Private
   , splitModel(0)
   , accepted(false)
   , costCenterRequired(false)
-  , costCenterOk(false)
   , showValuesInverted(false)
   , amountHelper(nullptr)
   {
@@ -98,7 +97,6 @@ struct NewSplitEditor::Private
   SplitModel*                   splitModel;
   bool                          accepted;
   bool                          costCenterRequired;
-  bool                          costCenterOk;
   bool                          showValuesInverted;
   QStandardItemModel            statusModel;
   QString                       transactionSplitId;

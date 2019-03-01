@@ -42,6 +42,11 @@ WidgetHintFrameCollection::WidgetHintFrameCollection(QObject* parent)
 {
 }
 
+WidgetHintFrameCollection::~WidgetHintFrameCollection()
+{
+  delete d;
+}
+
 void WidgetHintFrameCollection::addFrame(WidgetHintFrame* frame)
 {
   if(!d->frameList.contains(frame)) {

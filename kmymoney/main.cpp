@@ -373,7 +373,7 @@ static void migrateConfigFiles()
       {QStringLiteral("icalendarexportpluginrc"), QStringLiteral("icalendarexporterrc")}
     };
 
-    for (const auto& sConfigName : sConfigNames) {
+    for (const auto& sConfigName : qAsConst(sConfigNames)) {
       const auto sOldConfigFilename = sOldMainConfigPath + sConfigName;
       const auto sNewConfigFilename = sMainConfigPath + configNamesChange.value(sConfigName, sConfigName);
       if (QFile::exists(sOldConfigFilename)) {
