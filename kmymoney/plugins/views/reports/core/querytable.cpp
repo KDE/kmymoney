@@ -487,17 +487,20 @@ void QueryTable::constructTransactionTable()
     case eMyMoney::Report::RowType::Category:
     case eMyMoney::Report::RowType::TopCategory:
       use_summary = false;
-      use_transfers = false;
+      use_transfers = report.isIncludingTransfers();
+      report.setTreatTransfersAsIncomeExpense(use_transfers);
       hide_details = false;
       break;
     case eMyMoney::Report::RowType::Payee:
       use_summary = false;
-      use_transfers = false;
+      use_transfers = report.isIncludingTransfers();
+      report.setTreatTransfersAsIncomeExpense(use_transfers);
       hide_details = (m_config.detailLevel() == eMyMoney::Report::DetailLevel::None);
       break;
     case eMyMoney::Report::RowType::Tag:
       use_summary = false;
-      use_transfers = false;
+      use_transfers = report.isIncludingTransfers();
+      report.setTreatTransfersAsIncomeExpense(use_transfers);
       hide_details = (m_config.detailLevel() == eMyMoney::Report::DetailLevel::None);
       tag_special_case = true;
       break;
@@ -556,7 +559,10 @@ void QueryTable::constructTransactionTable()
         myBegin = it_split;
 
       if ((myBegin == splits.end()) && ! splitAcc.isIncomeExpense()) {
-        myBegin = it_split;
+        // continue if split references an unselected account
+        if (report.includesAccount(splitAcc.id())) {
+          myBegin = it_split;
+        }
       }
     }
 

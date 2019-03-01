@@ -759,6 +759,7 @@ namespace MyMoneyXmlContentHandler2 {
         report.setLoansOnly(node.attribute(attributeName(Attribute::Report::Loans), "0").toUInt());
         report.setHideTransactions(node.attribute(attributeName(Attribute::Report::HideTransactions), "0").toUInt());
         report.setShowingColumnTotals(node.attribute(attributeName(Attribute::Report::ShowColumnTotals), "1").toUInt());
+        report.setIncludingTransfers(node.attribute(attributeName(Attribute::Report::IncludesTransfers), "0").toUInt());
         const auto detailLevelFromXML = stringToDetailLevel(node.attribute(attributeName(Attribute::Report::Detail), "none"));
         if (detailLevelFromXML == eMyMoney::Report::DetailLevel::All)
           report.setDetailLevel(detailLevelFromXML);
@@ -866,7 +867,7 @@ namespace MyMoneyXmlContentHandler2 {
       if (report.reportType() == eMyMoney::Report::ReportType::PivotTable)
         el.setAttribute(attributeName(Attribute::Report::Type), "pivottable 1.15");
       else if (report.reportType() == eMyMoney::Report::ReportType::QueryTable)
-        el.setAttribute(attributeName(Attribute::Report::Type), "querytable 1.14");
+        el.setAttribute(attributeName(Attribute::Report::Type), "querytable 1.15");
       else if (report.reportType() == eMyMoney::Report::ReportType::InfoTable)
         el.setAttribute(attributeName(Attribute::Report::Type), "infotable 1.0");
 
@@ -944,6 +945,7 @@ namespace MyMoneyXmlContentHandler2 {
         el.setAttribute(attributeName(Attribute::Report::HideTransactions), report.isHideTransactions());
         el.setAttribute(attributeName(Attribute::Report::ShowColumnTotals), report.isShowingColumnTotals());
         el.setAttribute(attributeName(Attribute::Report::Detail), reportNames(report.detailLevel()));
+        el.setAttribute(attributeName(Attribute::Report::IncludesTransfers), report.isIncludingTransfers());
 
         // write performance tab
         if (report.queryColumns() & eMyMoney::Report::QueryColumn::Performance || report.queryColumns() & eMyMoney::Report::QueryColumn::CapitalGain)

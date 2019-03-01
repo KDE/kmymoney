@@ -298,6 +298,8 @@ void KReportConfigurationFilterDlg::slotSearch()
                                   eMyMoney::Report::DetailLevel::None : eMyMoney::Report::DetailLevel::All);
     d->m_currentState.setHideTransactions(d->m_tabRowColQuery->ui->m_checkHideTransactions->isChecked());
     d->m_currentState.setShowingColumnTotals(!d->m_tabRowColQuery->ui->m_checkHideTotals->isChecked());
+
+    d->m_currentState.setIncludingTransfers(d->m_tabRowColQuery->ui->m_checkTransfers->isChecked());
   }
 
   if (d->m_tabChart) {
@@ -530,6 +532,7 @@ void KReportConfigurationFilterDlg::slotReset()
 
     d->m_tabRowColQuery->ui->m_checkHideSplitDetails->setChecked
     (d->m_initialState.detailLevel() == eMyMoney::Report::DetailLevel::None || d->m_initialState.isHideTransactions());
+    d->m_tabRowColQuery->ui->m_checkTransfers->setChecked(d->m_initialState.isIncludingTransfers());
   }
 
   if (d->m_tabChart) {
