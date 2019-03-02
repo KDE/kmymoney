@@ -15,6 +15,7 @@
                 "Name[pt]": "Michael Edwardes",
                 "Name[pt_BR]": "Michael Edwardes",
                 "Name[ru]": "Michael Edwardes",
+                "Name[sk]": "Michael Edwardes",
                 "Name[sv]": "Michael Edwardes",
                 "Name[uk]": "Michael Edwardes",
                 "Name[x-test]": "xxMichael Edwardesxx"

@@ -15,6 +15,7 @@
                 "Name[pt]": "Allan Anderson",
                 "Name[pt_BR]": "Allan Anderson",
                 "Name[ru]": "Allan Anderson",
+                "Name[sk]": "Allan Anderson",
                 "Name[sv]": "Allan Anderson",
                 "Name[uk]": "Allan Anderson",
                 "Name[x-test]": "xxAllan Andersonxx"
@@ -30,6 +31,7 @@
         "Description[pl]": "Dodaje eksportowanie CSV do KMyMoney",
         "Description[pt]": "Adição da exportação para CSV para o KMyMoney",
         "Description[pt_BR]": "Adiciona exportação CSV no KMyMoney",
+        "Description[sk]": "Pridať CSV exportovanie do KMyMoney",
         "Description[sv]": "Lägg till CSV-export till KMyMoney",
         "Description[uk]": "Експортування даних CSV у KMyMoney",
         "Description[x-test]": "xxAdd CSV exporting to KMyMoneyxx",
@@ -48,6 +50,7 @@
         "Name[pl]": "Eksporter CSV",
         "Name[pt]": "Exportação para CSV",
         "Name[pt_BR]": "Exportador CSV",
+        "Name[sk]": "CSV exportér",
         "Name[sv]": "CSV-export",
         "Name[uk]": "Експортування CSV",
         "Name[x-test]": "xxCSV Exporterxx",

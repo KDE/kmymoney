@@ -15,6 +15,7 @@
                 "Name[pt]": "Cristian Oneț",
                 "Name[pt_BR]": "Cristian Oneț",
                 "Name[ru]": "Cristian Oneț",
+                "Name[sk]": "Cristian Oneț",
                 "Name[sv]": "Cristian Oneț",
                 "Name[uk]": "Cristian Oneț",
                 "Name[x-test]": "xxCristian Onețxx"
@@ -30,6 +31,7 @@
         "Description[pl]": "Eksportuje harmonogramy do plików iCalendar",
         "Description[pt]": "Exporta os agendamentos para ficheiros do iCalendar",
         "Description[pt_BR]": "Exporta agendamentos para arquivos iCalendar",
+        "Description[sk]": "Exportovať rozvrhy do súborov iCalendar",
         "Description[sv]": "Exporterar scheman till iCalendar-filer",
         "Description[uk]": "Експортування розкладів до файлів iCalendar",
         "Description[x-test]": "xxExports schedules to iCalendar filesxx",
@@ -49,6 +51,7 @@
         "Name[pl]": "iCalendar",
         "Name[pt]": "iCalendar",
         "Name[pt_BR]": "iCalendar",
+        "Name[sk]": "iCalendar",
         "Name[sv]": "iCalendar",
         "Name[uk]": "iCalendar",
         "Name[x-test]": "xxiCalendarxx",
