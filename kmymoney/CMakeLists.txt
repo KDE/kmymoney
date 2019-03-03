@@ -33,6 +33,8 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${KMyMoney_SOURCE_DIR}/libkgpgfile/
                     ${KMyMoney_SOURCE_DIR}/libkdchart/include/KDChart )
 
+add_definitions(-Dnullptr=0)
+
 add_subdirectory( settings )
 add_subdirectory( mymoney )
 add_subdirectory( models  )
