@@ -113,7 +113,8 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& sch
   // position the dialog centered on the application (for some reason without
   // a call to winId() the dialog is positioned in the upper left corner of
   // the screen, but winId() crashes on MS-Windows ...
-  move(parent->pos() + QPoint(parent->width()/2, parent->height()/2) - QPoint(width()/2, height()/2));
+  if (parent)
+    move(parent->pos() + QPoint(parent->width()/2, parent->height()/2) - QPoint(width()/2, height()/2));
 
   d->ui->setupUi(this);
   d->m_schedule = schedule;
