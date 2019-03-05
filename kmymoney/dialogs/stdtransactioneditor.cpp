@@ -365,7 +365,7 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
 
   // if an account is specified then remove it from the widget so that the user
   // cannot create a transfer with from and to account being the same account
-  if (!d->m_account.id().isEmpty())
+  if (category && !d->m_account.id().isEmpty())
     category->selector()->removeItem(d->m_account.id());
 
   //  also show memo text if isMultiSelection()
@@ -411,7 +411,9 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
 
     d->m_splits.clear();
     if (d->m_transaction.splitCount() < 2) {
-      category->completion()->setSelected(QString());
+      if (category && category->completion()) {
+        category->completion()->setSelected(QString());
+      }
     } else {
       foreach (const auto split, d->m_transaction.splits()) {
         if (split == d->m_split)

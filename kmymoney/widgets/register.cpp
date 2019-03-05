@@ -107,7 +107,6 @@ namespace KMyMoneyRegister
     RegisterItem*                m_firstErroneous;
     RegisterItem*                m_lastErroneous;
 
-    int                          m_markErroneousTransactions;
     int                          m_rowHeightHint;
 
     MyMoneyAccount               m_account;
