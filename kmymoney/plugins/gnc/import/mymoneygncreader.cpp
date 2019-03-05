@@ -232,7 +232,7 @@ void GncObject::adjustHideFactor()
 #if QT_VERSION >= QT_VERSION_CHECK(5,10,0)
   m_moneyHideFactor = pMain->m_fileHideFactor * (1.0 + (int)(200.0 * QRandomGenerator::system()->generate() / (RAND_MAX + 1.0))) / 100.0;
 #else
-  m_moneyHideFactor = pMain->m_fileHideFactor * (1.0 + (int)(200.0 * rand() / (RAND_MAX + 1.0))) / 100.0;
+  m_moneyHideFactor = pMain->m_fileHideFactor * (1.0 + (int)(200.0 * qrand() / (RAND_MAX + 1.0))) / 100.0;
 #endif
 }
 
