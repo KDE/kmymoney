@@ -43,8 +43,6 @@ public:
   explicit XMLStorage(QObject *parent, const QVariantList &args);
   ~XMLStorage() override;
 
-  QAction *m_saveAsXMLaction;
-
   MyMoneyStorageMgr *open(const QUrl &url) override;
   bool save(const QUrl &url) override;
   bool saveAs() override;

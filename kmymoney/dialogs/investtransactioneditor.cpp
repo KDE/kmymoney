@@ -714,15 +714,15 @@ void InvestTransactionEditor::loadEditWidgets()
     value = dynamic_cast<KMyMoneyEdit*>(haveWidget("fee-amount"));
     if (!value)
       return;
-    value->setValue(d->subtotal(d->m_feeSplits));
     value->setPrecision(MyMoneyMoney::denomToPrec(d->m_currency.smallestAccountFraction()));
+    value->setValue(d->subtotal(d->m_feeSplits));
 
     // interest amount
     value = dynamic_cast<KMyMoneyEdit*>(haveWidget("interest-amount"));
     if (!value)
       return;
-    value->setValue(-d->subtotal(d->m_interestSplits));
     value->setPrecision(MyMoneyMoney::denomToPrec(d->m_currency.smallestAccountFraction()));
+    value->setValue(-d->subtotal(d->m_interestSplits));
 
     // total
     slotUpdateTotalAmount();

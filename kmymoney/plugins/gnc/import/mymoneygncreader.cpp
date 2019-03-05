@@ -232,7 +232,7 @@ void GncObject::adjustHideFactor()
 #if QT_VERSION >= QT_VERSION_CHECK(5,10,0)
   m_moneyHideFactor = pMain->m_fileHideFactor * (1.0 + (int)(200.0 * QRandomGenerator::system()->generate() / (RAND_MAX + 1.0))) / 100.0;
 #else
-  m_moneyHideFactor = pMain->m_fileHideFactor * (1.0 + (int)(200.0 * rand() / (RAND_MAX + 1.0))) / 100.0;
+  m_moneyHideFactor = pMain->m_fileHideFactor * (1.0 + (int)(200.0 * qrand() / (RAND_MAX + 1.0))) / 100.0;
 #endif
 }
 
@@ -1414,7 +1414,7 @@ void MyMoneyGncReader::setFileHideFactor()
                               "with a different value used for each transaction. In addition, to further disguise the true\n"
                               "values, you may enter a number between %1 and %2 which will be applied to all values.\n"
                               "These numbers will not be stored in the file.", MINFILEHIDEF, MAXFILEHIDEF),
-                         (1.0 + (int)(1000.0 * rand() / (RAND_MAX + 1.0))) / 100.0,
+                         (1.0 + (int)(1000.0 * qrand() / (RAND_MAX + 1.0))) / 100.0,
                          MINFILEHIDEF, MAXFILEHIDEF, 2);
   }
 #endif

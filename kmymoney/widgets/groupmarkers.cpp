@@ -186,7 +186,6 @@ namespace KMyMoneyRegister
       m_lastItem(nullptr),
       m_firstErroneous(nullptr),
       m_lastErroneous(nullptr),
-      m_markErroneousTransactions(0),
       m_rowHeightHint(0),
       m_ledgerLensForced(false),
       m_selectionMode(QTableWidget::MultiSelection),
@@ -216,7 +215,6 @@ namespace KMyMoneyRegister
     RegisterItem*                m_firstErroneous;
     RegisterItem*                m_lastErroneous;
 
-    int                          m_markErroneousTransactions;
     int                          m_rowHeightHint;
 
     MyMoneyAccount               m_account;

@@ -861,6 +861,9 @@ bool CSVImporterCore::processBankRow(MyMoneyStatement &st, const BankingProfile 
   QString memo;
   QString txt;
 
+  if (!profile)
+    return false;
+
   // process date field
   int col = profile->m_colTypeNum.value(Column::Date, -1);
   tr.m_datePosted = processDateField(row, col);
@@ -952,6 +955,9 @@ bool CSVImporterCore::processBankRow(MyMoneyStatement &st, const BankingProfile 
 bool CSVImporterCore::processInvestRow(MyMoneyStatement &st, const InvestmentProfile *profile, const int row)
 {
   MyMoneyStatement::Transaction tr;
+
+  if (!profile)
+    return false;
 
   QString memo;
   QString txt;
@@ -1063,6 +1069,9 @@ bool CSVImporterCore::processInvestRow(MyMoneyStatement &st, const InvestmentPro
 bool CSVImporterCore::processPriceRow(MyMoneyStatement &st, const PricesProfile *profile, const int row)
 {
   MyMoneyStatement::Price pr;
+
+  if (!profile)
+    return false;
 
   // process date field
   int col = profile->m_colTypeNum.value(Column::Date, -1);

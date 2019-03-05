@@ -103,13 +103,17 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& sch
   Q_D(KEnterScheduleDlg);
 
   // restore the last used dialog size
-  winId(); // needs to be called to create the QWindow
   KConfigGroup grp = KSharedConfig::openConfig()->group("KEnterScheduleDlg");
   if (grp.isValid()) {
     KWindowConfig::restoreWindowSize(windowHandle(), grp);
   }
   // let the minimum size be 780x410
   resize(QSize(780, 410).expandedTo(windowHandle() ? windowHandle()->size() : QSize()));
+
+  // position the dialog centered on the application (for some reason without
+  // a call to winId() the dialog is positioned in the upper left corner of
+  // the screen, but winId() crashes on MS-Windows ...
+  move(parent->pos() + QPoint(parent->width()/2, parent->height()/2) - QPoint(width()/2, height()/2));
 
   d->ui->setupUi(this);
   d->m_schedule = schedule;
