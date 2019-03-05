@@ -11,7 +11,16 @@
    </rect>
   </property>
   <layout class="QGridLayout">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item row="0" column="0" rowspan="6">
@@ -26,7 +35,7 @@
          <string comment="@action timeframe of the budget">Monthly</string>
         </property>
         <attribute name="buttonGroup">
-         <string>m_periodGroup</string>
+         <string notr="true">m_periodGroup</string>
         </attribute>
        </widget>
       </item>
@@ -36,7 +45,7 @@
          <string comment="@action timeframe of the budget">Yearly</string>
         </property>
         <attribute name="buttonGroup">
-         <string>m_periodGroup</string>
+         <string notr="true">m_periodGroup</string>
         </attribute>
        </widget>
       </item>
@@ -46,7 +55,7 @@
          <string comment="@action timeframe of the budget. month-by-month budget">Individual</string>
         </property>
         <attribute name="buttonGroup">
-         <string>m_periodGroup</string>
+         <string notr="true">m_periodGroup</string>
         </attribute>
        </widget>
       </item>
@@ -116,43 +125,58 @@
      </property>
      <widget class="QWidget" name="m_monthlyPage">
       <layout class="QHBoxLayout">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
         <number>0</number>
        </property>
        <item>
-        <widget class="KMyMoneyEdit" name="m_amountMonthly" native="true">
-         <property name="resetButtonVisibility" stdset="0">
-          <bool>false</bool>
-         </property>
-        </widget>
+        <widget class="AmountEdit" name="m_amountMonthly"/>
        </item>
       </layout>
      </widget>
      <widget class="QWidget" name="m_yearlyPage">
       <layout class="QHBoxLayout">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
         <number>0</number>
        </property>
        <item>
-        <widget class="KMyMoneyEdit" name="m_amountYearly" native="true">
-         <property name="resetButtonVisibility" stdset="0">
-          <bool>false</bool>
-         </property>
-        </widget>
+        <widget class="AmountEdit" name="m_amountYearly"/>
        </item>
       </layout>
      </widget>
      <widget class="QWidget" name="m_individualPage">
       <layout class="QHBoxLayout">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
         <number>0</number>
        </property>
        <item>
-        <widget class="KMyMoneyEdit" name="m_amount1" native="true">
-         <property name="resetButtonVisibility" stdset="0">
-          <bool>false</bool>
-         </property>
-        </widget>
+        <widget class="AmountEdit" name="m_amount1"/>
        </item>
       </layout>
      </widget>
@@ -169,11 +193,7 @@
     </widget>
    </item>
    <item row="1" column="3">
-    <widget class="KMyMoneyEdit" name="m_amount2" native="true">
-     <property name="resetButtonVisibility" stdset="0">
-      <bool>false</bool>
-     </property>
-    </widget>
+    <widget class="AmountEdit" name="m_amount2"/>
    </item>
    <item row="2" column="2">
     <widget class="QLabel" name="m_label3">
@@ -186,11 +206,7 @@
     </widget>
    </item>
    <item row="2" column="3">
-    <widget class="KMyMoneyEdit" name="m_amount3" native="true">
-     <property name="resetButtonVisibility" stdset="0">
-      <bool>false</bool>
-     </property>
-    </widget>
+    <widget class="AmountEdit" name="m_amount3"/>
    </item>
    <item row="3" column="2">
     <widget class="QLabel" name="m_label4">
@@ -203,11 +219,7 @@
     </widget>
    </item>
    <item row="3" column="3">
-    <widget class="KMyMoneyEdit" name="m_amount4" native="true">
-     <property name="resetButtonVisibility" stdset="0">
-      <bool>false</bool>
-     </property>
-    </widget>
+    <widget class="AmountEdit" name="m_amount4"/>
    </item>
    <item row="4" column="2">
     <widget class="QLabel" name="m_label5">
@@ -220,11 +232,7 @@
     </widget>
    </item>
    <item row="4" column="3">
-    <widget class="KMyMoneyEdit" name="m_amount5" native="true">
-     <property name="resetButtonVisibility" stdset="0">
-      <bool>false</bool>
-     </property>
-    </widget>
+    <widget class="AmountEdit" name="m_amount5"/>
    </item>
    <item row="5" column="2">
     <widget class="QLabel" name="m_label6">
@@ -237,11 +245,7 @@
     </widget>
    </item>
    <item row="5" column="3">
-    <widget class="KMyMoneyEdit" name="m_amount6" native="true">
-     <property name="resetButtonVisibility" stdset="0">
-      <bool>false</bool>
-     </property>
-    </widget>
+    <widget class="AmountEdit" name="m_amount6"/>
    </item>
    <item row="0" column="4">
     <widget class="QLabel" name="m_label7">
@@ -254,11 +258,7 @@
     </widget>
    </item>
    <item row="0" column="5">
-    <widget class="KMyMoneyEdit" name="m_amount7" native="true">
-     <property name="resetButtonVisibility" stdset="0">
-      <bool>false</bool>
-     </property>
-    </widget>
+    <widget class="AmountEdit" name="m_amount7"/>
    </item>
    <item row="1" column="4">
     <widget class="QLabel" name="m_label8">
@@ -271,11 +271,7 @@
     </widget>
    </item>
    <item row="1" column="5">
-    <widget class="KMyMoneyEdit" name="m_amount8" native="true">
-     <property name="resetButtonVisibility" stdset="0">
-      <bool>false</bool>
-     </property>
-    </widget>
+    <widget class="AmountEdit" name="m_amount8"/>
    </item>
    <item row="2" column="4">
     <widget class="QLabel" name="m_label9">
@@ -288,11 +284,7 @@
     </widget>
    </item>
    <item row="2" column="5">
-    <widget class="KMyMoneyEdit" name="m_amount9" native="true">
-     <property name="resetButtonVisibility" stdset="0">
-      <bool>false</bool>
-     </property>
-    </widget>
+    <widget class="AmountEdit" name="m_amount9"/>
    </item>
    <item row="3" column="4">
     <widget class="QLabel" name="m_label10">
@@ -305,11 +297,7 @@
     </widget>
    </item>
    <item row="3" column="5">
-    <widget class="KMyMoneyEdit" name="m_amount10" native="true">
-     <property name="resetButtonVisibility" stdset="0">
-      <bool>false</bool>
-     </property>
-    </widget>
+    <widget class="AmountEdit" name="m_amount10"/>
    </item>
    <item row="4" column="4">
     <widget class="QLabel" name="m_label11">
@@ -322,11 +310,7 @@
     </widget>
    </item>
    <item row="4" column="5">
-    <widget class="KMyMoneyEdit" name="m_amount11" native="true">
-     <property name="resetButtonVisibility" stdset="0">
-      <bool>false</bool>
-     </property>
-    </widget>
+    <widget class="AmountEdit" name="m_amount11"/>
    </item>
    <item row="5" column="4">
     <widget class="QLabel" name="m_label12">
@@ -339,20 +323,16 @@
     </widget>
    </item>
    <item row="5" column="5">
-    <widget class="KMyMoneyEdit" name="m_amount12" native="true">
-     <property name="resetButtonVisibility" stdset="0">
-      <bool>false</bool>
-     </property>
-    </widget>
+    <widget class="AmountEdit" name="m_amount12"/>
    </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KMyMoneyEdit</class>
-   <extends>QWidget</extends>
-   <header>kmymoneyedit.h</header>
+   <class>AmountEdit</class>
+   <extends>QLineEdit</extends>
+   <header>amountedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
