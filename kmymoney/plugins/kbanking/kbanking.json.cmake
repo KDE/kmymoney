@@ -28,6 +28,7 @@
         "Description[nl]": "Voegt HBCI/FinTs online bankieren toe aan KMyMoney",
         "Description[pl]": "Dodaje obsługę bankowości HBCI/FinTs w sieci do KMyMoney",
         "Description[pt]": "Adição da banca 'online' do HBCI/FinTs ao KMyMoney",
+        "Description[pt_BR]": "Adiciona correspondente bancário do tipo HBCI/FinTs no KMyMoney",
         "Description[sv]": "Lägg till HBCI/FinTs Internetbank till KMyMoney",
         "Description[uk]": "Онлайн-банкінг HBCI/FinTs у KMyMoney",
         "Description[x-test]": "xxAdd HBCI/FinTs online banking to KMyMoneyxx",
