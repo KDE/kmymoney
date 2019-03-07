@@ -29,6 +29,7 @@
         "Description[nl]": "Indien gekoppeld aan een account, pretendeert het dat het alle online taken kan afhandelen (alleen voor ontwikkelaars)",
         "Description[pl]": "Jeśli zmapowana do konta, to twierdzi, że może obsłużyć wszystkie onlineTasks (tylko dla programistów).",
         "Description[pt]": "Se estiver associado a uma conta, finge que consegue tratar de todas as tarefas 'online' (apenas para programadores).",
+        "Description[pt_BR]": "Se mapeado para uma conta, espera-se que possa lidar com todas as tarefas online (apenas para desenvolvedores)",
         "Description[sk]": "Ak je namapované na účet, zabraňuje spracovaniu všetkých online úloh (len pre vývojárov)",
         "Description[sv]": "Om tilldelad till ett konto, låtsas det att det kan hantera alla nätuppgifter (bara för utvecklare).",
         "Description[uk]": "Якщо пов'язано із рахунком, імітує можливість обробки усіх інтернет-завдань (лише для розробників).",
