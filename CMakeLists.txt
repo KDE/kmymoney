@@ -361,6 +361,10 @@ option(USE_QT_DESIGNER
 add_feature_info("QtDesigner" USE_QT_DESIGNER "Qt-Designer library support (for devs only).")
 
 ######################### The Actual Targets ##########################
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 add_subdirectory( tools )
 add_subdirectory( kmymoney )
 if(KF5DocTools_FOUND)
