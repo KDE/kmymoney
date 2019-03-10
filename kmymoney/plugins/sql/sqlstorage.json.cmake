@@ -25,6 +25,7 @@
         "Description[es]": "Añade almacenamiento SQL a KMyMoney",
         "Description[gl]": "Engade a posibilidade de almacenamento de SQL en KMyMoney",
         "Description[it]": "Aggiunge il supporto di archiviazione a KMyMoney",
+        "Description[ko]": "KMyMoney에 SQL 스토리지 지원 추가",
         "Description[nl]": "Voegt ondersteuning toe voor SQL-opslag aan KMyMoney",
         "Description[pl]": "Dodaje obsługę pamięci SQL do KMyMoney",
         "Description[pt]": "Adiciona o suporte do armazenamento em SQL ao KMyMoney",

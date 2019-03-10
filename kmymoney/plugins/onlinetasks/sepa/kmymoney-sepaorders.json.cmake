@@ -48,6 +48,7 @@
         "Description[es]": "Tipos de órdenes para la zona única de pagos en euros (SEPA)",
         "Description[gl]": "Tipos das ordes da área europea única de pagos (SEPA)",
         "Description[it]": "Tipi per gli ordini dell'area unica dei pagamenti in euro (SEPA)",
+        "Description[ko]": "단일 유럽 지불 지역(SEPA) 주문에 대한 주문 유형",
         "Description[nl]": "Opdrachttypen voor enkelvoudige betalingsopdrachten in Europees gebied (SEPA)",
         "Description[pl]": "Rodzaje przelewów dla SEPA",
         "Description[pt]": "Tipos de transferências SEPA (Single European Payment Area)",

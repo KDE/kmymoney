@@ -27,6 +27,7 @@
         "Description[es]": "Añade la vista de la bandeja de salida de trabajos en línea a KMyMoney",
         "Description[gl]": "Engade unha vista fóra da caixa de traballo por internet a KMyMoney",
         "Description[it]": "Aggiunge la vista delle operazioni in linea in uscita a KMyMoney",
+        "Description[ko]": "KMyMoney에 온라인 작업 발신 함보기 추가",
         "Description[nl]": "Voegt online weergave van postvak uit toe aan KMyMoney",
         "Description[pl]": "Dodaje widok skrzynki wyjściowej zadań w sieci do KMyMoney",
         "Description[pt]": "Adiciona a área da caixa de saída das tarefas 'online' ao KMyMoney",

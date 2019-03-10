@@ -27,6 +27,7 @@
         "Description[es]": "Exporta planificaciones a archivos iCalendar",
         "Description[gl]": "Exporta planificacións a ficheiros iCalendar",
         "Description[it]": "Esporta le pianificazioni a file iCalendar",
+        "Description[ko]": "iCalendar 파일로 예약 내보내기",
         "Description[nl]": "Exporteert planningen naar iCalender bestanden",
         "Description[pl]": "Eksportuje harmonogramy do plików iCalendar",
         "Description[pt]": "Exporta os agendamentos para ficheiros do iCalendar",

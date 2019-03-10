@@ -27,6 +27,7 @@
         "Description[es]": "Crea un informe tras cada reconciliación que contenga datos sobre el proceso de reconciliación",
         "Description[gl]": "Crea un informe tras cada reconciliación que conteña datos sobre o proceso de reconciliación",
         "Description[it]": "Crea un report dopo ogni riconciliazione che contiene dati sul processo di riconciliazione",
+        "Description[ko]": "조정 프로세스에 대한 데이터를 포함하는 각 조정 후 리포트를 생성합니다.",
         "Description[nl]": "Maakt een rapport aan na elke transactiecontrole met gegevens over het controleproces",
         "Description[pl]": "Tworzy sprawozdanie, po każdym uzgodnieniu, zawierające dane o procesie uzgadniania",
         "Description[pt]": "Cria um relatório após cada reconciliação de contas, contendo os dados sobre o processo de reconciliação",

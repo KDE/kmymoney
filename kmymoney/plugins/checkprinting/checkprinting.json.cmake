@@ -27,6 +27,7 @@
         "Description[es]": "Proporciona la capacidad de imprimir cheques",
         "Description[gl]": "Permite imprimir cheques",
         "Description[it]": "Fornisce la funzionalità di stampa degli assegni",
+        "Description[ko]": "수표 인쇄 기능 제공",
         "Description[nl]": "Levert de mogelijkheid checks af te drukken",
         "Description[pl]": "Dostarcza możliwość drukowania czeków",
         "Description[pt]": "Oferece a possibilidade de imprimir cheques",
