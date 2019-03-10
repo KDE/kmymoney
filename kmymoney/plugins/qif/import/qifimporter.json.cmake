@@ -27,6 +27,7 @@
         "Description[es]": "Añade importación QIF a KMyMoney",
         "Description[gl]": "Engadir a posibilidade de importar QIF en KMyMoney",
         "Description[it]": "Aggiunge l'importazione QIF a KMymoney",
+        "Description[ko]": "KMyMoney에 QIF 가져오기 추가",
         "Description[nl]": "Voeg QIF importeren toe aan KMyMoney",
         "Description[pl]": "Dodaje importowanie QIF do KMyMoney",
         "Description[pt]": "Adição da importação de QIF para o KMyMoney",

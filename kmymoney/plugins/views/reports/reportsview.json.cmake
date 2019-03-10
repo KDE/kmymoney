@@ -26,6 +26,7 @@
         "Description[es]": "Añade una vista de informes a KMyMoney",
         "Description[gl]": "Engade unha vista de informes a KMyMoney",
         "Description[it]": "Aggiunge la vista dei report a KMyMoney",
+        "Description[ko]": "KMyMoney에 리포트 보기 추가",
         "Description[nl]": "Voegt weergave van rapporten toe aan KMyMoney",
         "Description[pl]": "Dodaje widok sprawozdań do KMyMoney",
         "Description[pt]": "Adiciona a área de relatórios ao KMyMoney",

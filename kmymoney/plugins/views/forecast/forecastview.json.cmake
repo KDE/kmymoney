@@ -26,6 +26,7 @@
         "Description[es]": "Añade la vista de pronósticos a KMyMoney",
         "Description[gl]": "Engade unha vista de prognóstico a KMyMoney",
         "Description[it]": "Aggiunge la vista delle previsioni a KMyMoney",
+        "Description[ko]": "KMyMoney에 예측보기 추가",
         "Description[nl]": "Voegt weergave van prognoses toe aan KMyMoney",
         "Description[pl]": "Dodaje widok prognoz do KMyMoney",
         "Description[pt]": "Adiciona a área de antevisão ao KMyMoney",

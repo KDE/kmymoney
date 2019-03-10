@@ -25,6 +25,7 @@
         "Description[es]": "Añade importación OFX a KMyMoney",
         "Description[gl]": "Engadir a posibilidade de importar OFX en KMyMoney",
         "Description[it]": "Aggiunge l'importazione OFX a KMymoney",
+        "Description[ko]": "KMyMoney에 OFX 가져오기 추가",
         "Description[nl]": "Voeg OFX importeren toe aan KMyMoney",
         "Description[pl]": "Dodaje importowanie OFX do KMyMoney",
         "Description[pt]": "Adição da importação de OFX para o KMyMoney",

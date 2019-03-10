@@ -27,6 +27,7 @@
         "Description[es]": "Añade exportación QIF a KMyMoney",
         "Description[gl]": "Engadir a posibilidade de exportar QIF desde KMyMoney",
         "Description[it]": "Aggiunge l'esportazione QIF a KMymoney",
+        "Description[ko]": "KMyMoney에 QIF 내보내기 추가",
         "Description[nl]": "Voeg QIF exporteren toe aan KMyMoney",
         "Description[pl]": "Dodaje eksportowanie QIF do KMyMoney",
         "Description[pt]": "Adição da exportação para QIF para o KMyMoney",

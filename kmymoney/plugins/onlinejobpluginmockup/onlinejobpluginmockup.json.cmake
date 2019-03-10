@@ -26,6 +26,7 @@
         "Description[es]": "Si está asignado a una cuenta, simula que puede manejar todas las tareas en línea (solo para desarrolladores).",
         "Description[gl]": "Se está asociado cunha conta pretende que pode xestionar todas as onlineTasks (só para desenvolvedores).",
         "Description[it]": "Se associato a un conto, simula di poter gestire tutte le attività in linea (solo per sviluppatori).",
+        "Description[ko]": "계정에 매핑된 경우, 모든 온라인 작업을 처리할 수 있는 것처럼 보이죠 . (개발자 전용).",
         "Description[nl]": "Indien gekoppeld aan een account, pretendeert het dat het alle online taken kan afhandelen (alleen voor ontwikkelaars)",
         "Description[pl]": "Jeśli zmapowana do konta, to twierdzi, że może obsłużyć wszystkie onlineTasks (tylko dla programistów).",
         "Description[pt]": "Se estiver associado a uma conta, finge que consegue tratar de todas as tarefas 'online' (apenas para programadores).",

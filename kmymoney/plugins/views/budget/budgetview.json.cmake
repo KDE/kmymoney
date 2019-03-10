@@ -26,6 +26,7 @@
         "Description[es]": "Añade la vista de presupuestos a KMyMoney",
         "Description[gl]": "Engade unha vista de presuposto a KMyMoney",
         "Description[it]": "Aggiunge la vista dei budget a KMyMoney",
+        "Description[ko]": "KMyMoney에 예산보기 추가",
         "Description[nl]": "Voegt weergave van budgetten toe aan KMyMoney",
         "Description[pl]": "Dodaje widok budżetów do KMyMoney",
         "Description[pt]": "Adiciona a área do orçamento ao KMyMoney",

@@ -26,6 +26,7 @@
         "Description[es]": "Añade importación CSV a KMyMoney",
         "Description[gl]": "Engadir a posibilidade de importar CSV en KMyMoney",
         "Description[it]": "Aggiunge l'importazione CSV a KMymoney",
+        "Description[ko]": "KMyMoney에 CSV 가져오기를 추가",
         "Description[nl]": "Voeg CSV importeren toe aan KMyMoney",
         "Description[pl]": "Dodaje importowanie CSV do KMyMoney",
         "Description[pt]": "Adição da importação de CSV para o KMyMoney",
