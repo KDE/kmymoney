@@ -2078,11 +2078,12 @@ void KMyMoneyApp::slotStatusProgressBar(int current, int total)
     d->m_progressBar->setMaximum(total);
     d->m_progressBar->setValue(0);
     d->m_progressBar->show();
+    d->m_lastUpdate = QTime::currentTime();
 
   } else {                                // update
-    QTime currentTime = QTime::currentTime();
-    // only process painting if last update is at least 250 ms ago
-    if (abs(d->m_lastUpdate.msecsTo(currentTime)) > 250) {
+    const auto currentTime = QTime::currentTime();
+    // only process painting if last update is at least 200 ms ago
+    if (abs(d->m_lastUpdate.msecsTo(currentTime)) > 200) {
       d->m_progressBar->setValue(current);
       d->m_lastUpdate = currentTime;
     }
