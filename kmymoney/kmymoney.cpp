@@ -235,9 +235,6 @@ public:
   void moveInvestmentTransaction(const QString& fromId,
                                  const QString& toId,
                                  const MyMoneyTransaction& t);
-  QList<QPair<MyMoneyTransaction, MyMoneySplit> > automaticReconciliation(const MyMoneyAccount &account,
-      const QList<QPair<MyMoneyTransaction, MyMoneySplit> > &transactions,
-      const MyMoneyMoney &amount);
 
   struct storageInfo {
     eKMyMoney::StorageType type {eKMyMoney::StorageType::None};
@@ -2092,11 +2089,12 @@ void KMyMoneyApp::slotStatusProgressBar(int current, int total)
     d->m_progressBar->setMaximum(total);
     d->m_progressBar->setValue(0);
     d->m_progressBar->show();
+    d->m_lastUpdate = QTime::currentTime();
 
   } else {                                // update
-    QTime currentTime = QTime::currentTime();
-    // only process painting if last update is at least 250 ms ago
-    if (abs(d->m_lastUpdate.msecsTo(currentTime)) > 250) {
+    const auto currentTime = QTime::currentTime();
+    // only process painting if last update is at least 200 ms ago
+    if (abs(d->m_lastUpdate.msecsTo(currentTime)) > 200) {
       d->m_progressBar->setValue(current);
       d->m_lastUpdate = currentTime;
     }
@@ -2613,118 +2611,6 @@ void KMyMoneyApp::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& ne
       KMessageBox::information(this, i18n("Unable to add scheduled transaction: %1", QString::fromLatin1(e.what())));
     }
   }
-}
-
-QList<QPair<MyMoneyTransaction, MyMoneySplit> > KMyMoneyApp::Private::automaticReconciliation(const MyMoneyAccount &account,
-    const QList<QPair<MyMoneyTransaction, MyMoneySplit> > &transactions,
-    const MyMoneyMoney &amount)
-{
-  static const int NR_OF_STEPS_LIMIT = 300000;
-  static const int PROGRESSBAR_STEPS = 1000;
-  QList<QPair<MyMoneyTransaction, MyMoneySplit> > result = transactions;
-
-  KMSTATUS(i18n("Running automatic reconciliation"));
-  int progressBarIndex = 0;
-  q->slotStatusProgressBar(progressBarIndex, NR_OF_STEPS_LIMIT / PROGRESSBAR_STEPS);
-
-  // optimize the most common case - all transactions should be cleared
-  QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplitResult(result);
-  MyMoneyMoney transactionsBalance;
-  while (itTransactionSplitResult.hasNext()) {
-    const QPair<MyMoneyTransaction, MyMoneySplit> &transactionSplit = itTransactionSplitResult.next();
-    transactionsBalance += transactionSplit.second.shares();
-  }
-  if (amount == transactionsBalance) {
-    result = transactions;
-    return result;
-  }
-  q->slotStatusProgressBar(progressBarIndex++, 0);
-  // only one transaction is uncleared
-  itTransactionSplitResult.toFront();
-  int index = 0;
-  while (itTransactionSplitResult.hasNext()) {
-    const QPair<MyMoneyTransaction, MyMoneySplit> &transactionSplit = itTransactionSplitResult.next();
-    if (transactionsBalance - transactionSplit.second.shares() == amount) {
-      result.removeAt(index);
-      return result;
-    }
-    index++;
-  }
-  q->slotStatusProgressBar(progressBarIndex++, 0);
-
-  // more than one transaction is uncleared - apply the algorithm
-  result.clear();
-
-  const MyMoneySecurity &security = MyMoneyFile::instance()->security(account.currencyId());
-  double precision = 0.1 / account.fraction(security);
-
-  QList<MyMoneyMoney> sumList;
-  sumList << MyMoneyMoney();
-
-  QMap<MyMoneyMoney, QList<QPair<QString, QString> > > sumToComponentsMap;
-
-  // compute the possible matches
-  QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplit(transactions);
-  while (itTransactionSplit.hasNext()) {
-    const QPair<MyMoneyTransaction, MyMoneySplit> &transactionSplit = itTransactionSplit.next();
-    QListIterator<MyMoneyMoney> itSum(sumList);
-    QList<MyMoneyMoney> tempList;
-    while (itSum.hasNext()) {
-      const MyMoneyMoney &sum = itSum.next();
-      QList<QPair<QString, QString> > splitIds;
-      splitIds << qMakePair<QString, QString>(transactionSplit.first.id(), transactionSplit.second.id());
-      if (sumToComponentsMap.contains(sum)) {
-        if (sumToComponentsMap.value(sum).contains(qMakePair<QString, QString>(transactionSplit.first.id(), transactionSplit.second.id()))) {
-          continue;
-        }
-        splitIds.append(sumToComponentsMap.value(sum));
-      }
-      tempList << transactionSplit.second.shares() + sum;
-      sumToComponentsMap[transactionSplit.second.shares() + sum] = splitIds;
-      int size = sumToComponentsMap.size();
-      if (size % PROGRESSBAR_STEPS == 0) {
-        q->slotStatusProgressBar(progressBarIndex++, 0);
-      }
-      if (size > NR_OF_STEPS_LIMIT) {
-        return result; // it's taking too much resources abort the algorithm
-      }
-    }
-    QList<MyMoneyMoney> unionList;
-    unionList.append(tempList);
-    unionList.append(sumList);
-    qSort(unionList);
-    sumList.clear();
-    MyMoneyMoney smallestSumFromUnion = unionList.first();
-    sumList.append(smallestSumFromUnion);
-    QListIterator<MyMoneyMoney> itUnion(unionList);
-    while (itUnion.hasNext()) {
-      MyMoneyMoney sumFromUnion = itUnion.next();
-      if (smallestSumFromUnion < MyMoneyMoney(1 - precision / transactions.size())*sumFromUnion) {
-        smallestSumFromUnion = sumFromUnion;
-        sumList.append(sumFromUnion);
-      }
-    }
-  }
-
-  q->slotStatusProgressBar(NR_OF_STEPS_LIMIT / PROGRESSBAR_STEPS, 0);
-  if (sumToComponentsMap.contains(amount)) {
-    QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplit2(transactions);
-    while (itTransactionSplit2.hasNext()) {
-      const QPair<MyMoneyTransaction, MyMoneySplit> &transactionSplit = itTransactionSplit2.next();
-      const QList<QPair<QString, QString> > &splitIds = sumToComponentsMap.value(amount);
-      if (splitIds.contains(qMakePair<QString, QString>(transactionSplit.first.id(), transactionSplit.second.id()))) {
-        result.append(transactionSplit);
-      }
-    }
-  }
-
-#ifdef KMM_DEBUG
-  qDebug("For the amount %s a number of %d possible sums where computed from the set of %d transactions: ",
-         qPrintable(MyMoneyUtils::formatMoney(amount, security)), sumToComponentsMap.size(), transactions.size());
-#endif
-
-  q->slotStatusProgressBar(-1, -1);
-  return result;
 }
 
 void KMyMoneyApp::slotReparentAccount(const MyMoneyAccount& _src, const MyMoneyInstitution& _dst)
