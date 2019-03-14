@@ -1464,13 +1464,9 @@ public:
       const MyMoneyMoney &amount)
   {
     Q_Q(KGlobalLedgerView);
-    static const int NR_OF_STEPS_LIMIT = 300000;
+    static const int NR_OF_STEPS_LIMIT = 60000;
     static const int PROGRESSBAR_STEPS = 1000;
     QList<QPair<MyMoneyTransaction, MyMoneySplit> > result = transactions;
-
-//    KMSTATUS(i18n("Running automatic reconciliation"));
-    auto progressBarIndex = 0;
-    q->slotStatusProgress(progressBarIndex, NR_OF_STEPS_LIMIT / PROGRESSBAR_STEPS);
 
     // optimize the most common case - all transactions should be cleared
     QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > itTransactionSplitResult(result);
@@ -1483,7 +1479,7 @@ public:
       result = transactions;
       return result;
     }
-    q->slotStatusProgress(progressBarIndex++, 0);
+
     // only one transaction is uncleared
     itTransactionSplitResult.toFront();
     int index = 0;
@@ -1495,7 +1491,6 @@ public:
       }
       index++;
     }
-    q->slotStatusProgress(progressBarIndex++, 0);
 
     // more than one transaction is uncleared - apply the algorithm
     result.clear();
@@ -1507,6 +1502,21 @@ public:
     sumList << MyMoneyMoney();
 
     QMap<MyMoneyMoney, QList<QPair<QString, QString> > > sumToComponentsMap;
+
+    struct restoreStatusMsgHelper {
+      restoreStatusMsgHelper(KGlobalLedgerView* qq)
+      : q(qq) {}
+
+      ~restoreStatusMsgHelper()
+      {
+        q->slotStatusMsg(QString());
+        q->slotStatusProgress(-1, -1);
+      }
+      KGlobalLedgerView* q;
+    } restoreHelper(q);
+
+    q->slotStatusMsg(i18n("Running automatic reconciliation"));
+    q->slotStatusProgress(0, NR_OF_STEPS_LIMIT);
 
     // compute the possible matches
     QListIterator<QPair<MyMoneyTransaction, MyMoneySplit> > it_ts(transactions);
@@ -1528,7 +1538,7 @@ public:
         sumToComponentsMap[transactionSplit.second.shares() + sum] = splitIds;
         int size = sumToComponentsMap.size();
         if (size % PROGRESSBAR_STEPS == 0) {
-          q->slotStatusProgress(progressBarIndex++, 0);
+          q->slotStatusProgress(size, 0);
         }
         if (size > NR_OF_STEPS_LIMIT) {
           return result; // it's taking too much resources abort the algorithm
@@ -1568,7 +1578,6 @@ public:
            qPrintable(MyMoneyUtils::formatMoney(amount, security)), sumToComponentsMap.size(), transactions.size());
   #endif
 
-    q->slotStatusProgress(-1, -1);
     return result;
   }
 
