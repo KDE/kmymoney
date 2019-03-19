@@ -39,6 +39,7 @@
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include <QTemporaryFile>
+#include <QFileInfo>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -623,14 +624,20 @@ bool KMyMoneyUtils::fileExists(const QUrl &url)
 {
     bool fileExists = false;
     if (url.isValid()) {
-        short int detailLevel = 0; // Lowest level: file/dir/symlink/none
-        KIO::StatJob* statjob = KIO::stat(url, KIO::StatJob::SourceSide, detailLevel);
-        bool noerror = statjob->exec();
-        if (noerror) {
-            // We want a file
-            fileExists = !statjob->statResult().isDir();
+        if (url.isLocalFile() || url.scheme().isEmpty()) {
+          QFileInfo check_file(url.toLocalFile());
+          fileExists = check_file.exists() && check_file.isFile();
+
+        } else {
+            short int detailLevel = 0; // Lowest level: file/dir/symlink/none
+            KIO::StatJob* statjob = KIO::stat(url, KIO::StatJob::SourceSide, detailLevel);
+            bool noerror = statjob->exec();
+            if (noerror) {
+                // We want a file
+                fileExists = !statjob->statResult().isDir();
+            }
+            statjob->kill();
         }
-        statjob->kill();
     }
     return fileExists;
 }
