@@ -35,6 +35,7 @@ class MyMoneyMoney;
 class MyMoneySplit;
 class MyMoneyTransaction;
 class MyMoneyAccount;
+class MyMoneyTag;
 
 namespace Ui { class KSplitCorrectionDlg; }
 
@@ -109,6 +110,7 @@ protected Q_SLOTS:
   void slotClearUnusedSplits();
   void slotSetTransaction(const MyMoneyTransaction& t);
   void slotCreateCategory(const QString& txt, QString& id);
+  void slotCreateTag(const QString &txt, QString &id);
   void slotUpdateButtons();
   void slotMergeSplits();
   void slotEditStarted();
@@ -126,6 +128,13 @@ Q_SIGNALS:
     * @param parent reference to parent account
     */
   void createCategory(MyMoneyAccount& account, const MyMoneyAccount& parent);
+
+  /**
+    * This signal is sent out, when a new tag needs to be created
+    * @param txt The name of the tag to be created
+    * @param id A connected slot should store the id of the created object in this variable
+    */
+  void createTag(const QString& txt, QString& id);
 
   /**
     * Signal is emitted, if any of the widgets enters (@a state equals @a true)

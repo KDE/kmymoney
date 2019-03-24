@@ -35,6 +35,7 @@ class MyMoneyMoney;
 class MyMoneySplit;
 class MyMoneyTransaction;
 class MyMoneyAccount;
+class KTagContainer;
 
 template <class Key, class Value> class QMap;
 
@@ -187,6 +188,15 @@ Q_SIGNALS:
     * @param id A connected slot should store the id of the created object in this variable
     */
   void createCategory(const QString& txt, QString& id);
+
+  /**
+    * This signal is sent out, when a new tag needs to be created
+    * @sa KMyMoneyCombo::createItem()
+    *
+    * @param txt The name of the tag to be created
+    * @param id A connected slot should store the id of the created object in this variable
+    */
+  void createTag(const QString& txt, QString& id);
 
   /**
     * Signal is emitted, if any of the widgets enters (@a state equals @a true)
