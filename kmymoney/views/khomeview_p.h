@@ -39,7 +39,6 @@
 #include <QUrlQuery>
 #include <QWheelEvent>
 #include <QPrintDialog>
-#include <QPrinter>
 #include <QPointer>
 #ifdef ENABLE_WEBENGINE
 #include <QWebEngineView>
@@ -128,7 +127,6 @@ public:
     m_showAllSchedules(false),
     m_needLoad(true),
     m_netWorthGraphLastValidSize(400, 300),
-    m_currentPrinter(nullptr),
     m_scrollBarPos(0)
   {
   }
@@ -1849,7 +1847,6 @@ public:
     * daily forecast balance of accounts
     */
   QMap<QString, dailyBalances> m_accountList;
-  QPrinter *m_currentPrinter;
   int       m_scrollBarPos;
 };
 

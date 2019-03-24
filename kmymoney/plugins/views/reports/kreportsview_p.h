@@ -47,7 +47,6 @@
 #include <QPrintDialog>
 #include <QMenu>
 #include <QPointer>
-#include <QPrinter>
 #ifdef ENABLE_WEBENGINE
 #include <QWebEngineView>
 #else
@@ -84,6 +83,7 @@
 #include "reporttable.h"
 #include "reportcontrolimpl.h"
 #include "mymoneyenums.h"
+#include "kmm_printer.h"
 
 using namespace reports;
 using namespace eMyMoney;
@@ -114,7 +114,6 @@ private:
   reports::KReportChartView *m_chartView;
   ReportControl             *m_control;
   QVBoxLayout               *m_layout;
-  QPrinter                  *m_currentPrinter;
   MyMoneyReport m_report;
   bool m_deleteMe;
   bool m_chartEnabled;
@@ -198,7 +197,6 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     m_chartView(new KReportChartView(this)),
     m_control(new ReportControl(this)),
     m_layout(new QVBoxLayout(this)),
-    m_currentPrinter(nullptr),
     m_report(report),
     m_deleteMe(false),
     m_chartEnabled(false),
@@ -282,19 +280,14 @@ KReportTab::~KReportTab()
 void KReportTab::print()
 {
   if (m_tableView) {
-    m_currentPrinter = new QPrinter();
-    QPointer<QPrintDialog> dialog = new QPrintDialog(m_currentPrinter, this);
-    dialog->setWindowTitle(QString());
-    if (dialog->exec() != QDialog::Accepted) {
-      delete m_currentPrinter;
-      m_currentPrinter = nullptr;
-      return;
-    }
+    auto printer = KMyMoneyPrinter::startPrint();
+    if (printer != nullptr) {
     #ifdef ENABLE_WEBENGINE
-      m_tableView->page()->print(m_currentPrinter, [=] (bool) {delete m_currentPrinter; m_currentPrinter = nullptr;});
+      m_tableView->page()->print(printer, [=] (bool) {});
     #else
-      m_tableView->print(m_currentPrinter);
+      m_tableView->print(printer);
     #endif
+    }
   }
 }
 

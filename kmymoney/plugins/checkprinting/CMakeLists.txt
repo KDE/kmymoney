@@ -24,6 +24,7 @@ target_link_libraries(checkprinting
   KF5::I18n
   kmm_mymoney
   kmm_plugin
+  kmm_printer
 )
 
 if(ENABLE_WEBENGINE)

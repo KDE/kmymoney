@@ -23,7 +23,6 @@
 // Qt includes
 #include <QPushButton>
 #include <QTabWidget>
-#include <QPrinter>
 #include <QPrintDialog>
 #include <QPointer>
 
@@ -35,9 +34,10 @@
 #include <KWebView>
 #endif
 
+#include "kmm_printer.h"
+
 KReportDlg::KReportDlg(QWidget* parent, const QString& summaryReportHTML, const QString& detailsReportHTML) :
-  QDialog(parent),
-  m_currentPrinter(nullptr)
+  QDialog(parent)
 {
   setupUi(this);
   #ifdef ENABLE_WEBENGINE
@@ -67,34 +67,27 @@ KReportDlg::~KReportDlg()
 
 void KReportDlg::print()
 {
-  m_currentPrinter = new QPrinter();
-  QPointer<QPrintDialog> dialog = new QPrintDialog(m_currentPrinter, this);
-  dialog->setWindowTitle(QString());
-  if (dialog->exec() != QDialog::Accepted) {
-    delete m_currentPrinter;
-    m_currentPrinter = nullptr;
-    return;
-  }
-
-  // do the actual painting job
-  switch (m_tabWidget->currentIndex()) {
-    case 0:
-      #ifdef ENABLE_WEBENGINE
-      m_summaryHTMLPart->page()->print(m_currentPrinter, [=] (bool) {delete m_currentPrinter; m_currentPrinter = nullptr;});
-      #else
-      m_summaryHTMLPart->print(m_currentPrinter);
-      #endif
-      break;
-    case 1:
-      #ifdef ENABLE_WEBENGINE
-      m_detailsHTMLPart->page()->print(m_currentPrinter, [=] (bool) {delete m_currentPrinter; m_currentPrinter = nullptr;});
-      #else
-      m_detailsHTMLPart->print(m_currentPrinter);
-      #endif
-      break;
-    default:
-      delete m_currentPrinter;
-      m_currentPrinter = nullptr;
-      qDebug("KReportDlg::print() current page index not handled correctly");
+  auto printer = KMyMoneyPrinter::startPrint();
+  if (printer != nullptr) {
+    // do the actual painting job
+    switch (m_tabWidget->currentIndex()) {
+      case 0:
+        #ifdef ENABLE_WEBENGINE
+        m_summaryHTMLPart->page()->print(printer, [=] (bool) {});
+        #else
+        m_summaryHTMLPart->print(printer);
+        #endif
+        break;
+      case 1:
+        #ifdef ENABLE_WEBENGINE
+        m_detailsHTMLPart->page()->print(printer, [=] (bool) {});
+        #else
+        m_detailsHTMLPart->print(printer);
+        #endif
+        break;
+      default:
+        qDebug("KReportDlg::print() current page index not handled correctly");
+        break;
+    }
   }
 }

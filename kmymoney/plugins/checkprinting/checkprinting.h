@@ -26,7 +26,6 @@
 #include "selectedtransactions.h"
 
 class KPluginInfo;
-class QPrinter;
 class QObject;
 class CheckPrinting : public KMyMoneyPlugin::Plugin
 {
@@ -54,7 +53,6 @@ protected Q_SLOTS:
 private:
   struct Private;
   std::unique_ptr<Private> d;
-  QPrinter                *m_currentPrinter;
 };
 
 #endif

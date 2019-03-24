@@ -30,6 +30,8 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}/icons/
                     ${CMAKE_CURRENT_SOURCE_DIR}/menus/
                     ${CMAKE_CURRENT_BINARY_DIR}/menus/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/misc/
+                    ${CMAKE_CURRENT_BINARY_DIR}/misc/
                     )
 
 add_subdirectory( mymoney )

@@ -49,6 +49,7 @@ target_link_libraries(reportsview
     reports
     kmm_widgets
     kmm_menus
+    kmm_printer
 )
 
 if(ENABLE_WEBENGINE)

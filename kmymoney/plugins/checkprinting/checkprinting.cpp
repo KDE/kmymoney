@@ -1,5 +1,8 @@
 /***************************************************************************
- *   Copyright 2009  Cristian Onet onet.cristian@gmail.com                 *
+ *   This file is part of KMyMoney, A Personal Finance Manager by KDE      *
+ *                                                                         *
+ *   Copyright (C) 2009      Cristian Onet <onet.cristian@gmail.com>       *
+ *   Copyright (C) 2019      Thomas Baumgart <tbaumgart@kde.org>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -32,7 +35,6 @@
 #include <KWebView>
 #endif
 #include <QPrintDialog>
-#include <QPrinter>
 #include <QStandardPaths>
 
 // KDE includes
@@ -57,6 +59,8 @@
 #include "pluginsettings.h"
 #include "mymoneyenums.h"
 
+#include "kmm_printer.h"
+
 struct CheckPrinting::Private {
   QAction* m_action;
   QString  m_checkTemplateHTML;
@@ -65,8 +69,7 @@ struct CheckPrinting::Private {
 };
 
 CheckPrinting::CheckPrinting(QObject *parent, const QVariantList &args) :
-  KMyMoneyPlugin::Plugin(parent, "checkprinting"/*must be the same as X-KDE-PluginInfo-Name*/),
-  m_currentPrinter(nullptr)
+  KMyMoneyPlugin::Plugin(parent, "checkprinting"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   Q_UNUSED(args);
   // Tell the host application to load my GUI component
@@ -193,21 +196,14 @@ void CheckPrinting::slotPrintCheck()
 
     // print the check
     htmlPart->setHtml(checkHTML, QUrl("file://"));
-    m_currentPrinter = new QPrinter();
-    QPointer<QPrintDialog> dialog = new QPrintDialog(m_currentPrinter);
-    dialog->setWindowTitle(QString());
-    if (dialog->exec() != QDialog::Accepted) {
-      delete m_currentPrinter;
-      m_currentPrinter = nullptr;
-      continue;
-    } else {
+    auto printer = KMyMoneyPrinter::startPrint();
+    if (printer != nullptr) {
       #ifdef ENABLE_WEBENGINE
-        htmlPart->page()->print(m_currentPrinter, [=] (bool) {delete m_currentPrinter; m_currentPrinter = nullptr;});
+        htmlPart->page()->print(printer, [=] (bool) {});
       #else
-        htmlPart->print(m_currentPrinter);
+        htmlPart->print(printer);
       #endif
     }
-    delete dialog;
 
     // mark the transaction as printed
     markAsPrinted(*it);

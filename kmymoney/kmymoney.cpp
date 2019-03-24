@@ -2,8 +2,8 @@
                           kmymoney.cpp
                              -------------------
     copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
-                           (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2002-2019 by Thomas Baumgart <tbaumgart@kde.org>
+                           (C) 2017-2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ****************************************************************************/
 
@@ -179,7 +179,8 @@
 #include "menuenums.h"
 #include "kmymoneyenums.h"
 
-#include "misc/platformtools.h"
+#include "platformtools.h"
+#include "kmm_printer.h"
 
 #ifdef ENABLE_SQLCIPHER
 #include "sqlcipher/sqlite3.h"
@@ -1287,6 +1288,9 @@ KMyMoneyApp::~KMyMoneyApp()
 #ifdef KF5Activities_FOUND
   delete d->m_activityResourceInstance;
 #endif
+
+  // destroy printer object
+  KMyMoneyPrinter::cleanup();
 
   // make sure all settings are written to disk
   KMyMoneySettings::self()->save();

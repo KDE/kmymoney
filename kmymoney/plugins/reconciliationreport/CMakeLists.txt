@@ -25,6 +25,7 @@ target_link_libraries(reconciliationreport
   Qt5::PrintSupport
   kmm_mymoney
   kmm_plugin
+  kmm_printer
 )
 
 if(ENABLE_WEBENGINE)
