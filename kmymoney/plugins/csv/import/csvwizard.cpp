@@ -923,7 +923,7 @@ void RowsPage::endRowChanged(int val)
       ui->m_endLine->setValue(m_imp->m_profile->m_startLine + 1);
     return;
   }
-  m_imp->m_profile->m_trailerLines = m_imp->m_file->m_rowCount - val;
+  m_imp->m_profile->m_trailerLines = m_imp->m_file->m_rowCount - (val + 1);
   m_imp->m_profile->m_endLine = val;
   m_dlg->markUnwantedRows();
 }

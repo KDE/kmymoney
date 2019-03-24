@@ -1649,7 +1649,9 @@ CSVFile::~CSVFile()
 void CSVFile::getStartEndRow(CSVProfile *profile)
 {
   profile->m_endLine = m_rowCount - 1;
-  if (profile->m_endLine > profile->m_trailerLines)
+
+  // if trailer lines are specified then remove them here
+  if (profile->m_trailerLines)
     profile->m_endLine -= profile->m_trailerLines;
 
   if (profile->m_startLine > profile->m_endLine)   // Don't allow m_startLine > m_endLine
