@@ -34,7 +34,6 @@
 #else
 #include <KWebView>
 #endif
-#include <QPrintDialog>
 #include <QStandardPaths>
 
 // KDE includes

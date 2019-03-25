@@ -23,7 +23,6 @@
 // Qt includes
 #include <QPushButton>
 #include <QTabWidget>
-#include <QPrintDialog>
 #include <QPointer>
 
 // KDE includes
