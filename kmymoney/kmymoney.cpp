@@ -230,12 +230,18 @@ public:
 #ifdef HAVE_KDEPIMLIBS
       m_holidayRegion(0),
 #endif
-      m_applicationIsReady(true) {
+      m_applicationIsReady(true),
+      m_printer(0) {
     // since the days of the week are from 1 to 7,
     // and a day of the week is used to index this bit array,
     // resize the array to 8 elements (element 0 is left unused)
     m_processingDays.resize(8);
 
+  }
+
+  ~Private()
+  {
+    delete m_printer;
   }
 
   void closeFile();
@@ -369,12 +375,14 @@ public:
   QMap<QDate, bool>     m_holidayMap;
   QStringList           m_consistencyCheckResult;
   bool                  m_applicationIsReady;
+  QPrinter*             m_printer;
 
   // methods
   void consistencyCheck(bool alwaysDisplayResults);
   void setCustomColors();
   void copyConsistencyCheckResults();
   void saveConsistencyCheckResults();
+  QPrinter* printer();
 };
 
 KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
@@ -1209,6 +1217,15 @@ KToggleAction* KMyMoneyApp::toggleAction(const QString& actionName) const
     p = &dummyAction;
   }
   return p;
+}
+
+/**
+ * return printer instance
+ * @return printer instance
+ */
+QPrinter *KMyMoneyApp::printer()
+{
+  return d->printer();
 }
 
 
@@ -7097,6 +7114,13 @@ void KMyMoneyApp::Private::setCustomColors()
                         "alternate-background-color: " + KMyMoneyGlobalSettings::listColor().name() + ';' +
                         "background-clip: content;}");
   }
+}
+
+QPrinter *KMyMoneyApp::Private::printer()
+{
+  if (!m_printer)
+    m_printer = new QPrinter;
+  return m_printer;
 }
 
 void KMyMoneyApp::slotCheckSchedules()

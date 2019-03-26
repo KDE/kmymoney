@@ -50,6 +50,7 @@
 #include <mymoneyfile.h>
 #include <mymoneyreport.h>
 #include <kmymoneyglobalsettings.h>
+#include "kmymoney.h"
 #include "querytable.h"
 #include "objectinfotable.h"
 #include "kreportconfigurationfilterdlg.h"
@@ -114,7 +115,11 @@ KReportsView::KReportTab::~KReportTab()
 void KReportsView::KReportTab::print()
 {
   if (m_part && m_part->view())
+#ifdef Q_OS_WIN
+    m_part->view()->print(kmymoney->printer());
+#else
     m_part->view()->print();
+#endif
 }
 
 void KReportsView::KReportTab::copyToClipboard()

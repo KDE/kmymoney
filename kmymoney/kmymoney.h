@@ -49,6 +49,7 @@
 #include "onlinetasks/interfaces/tasks/credittransfer.h"
 
 class QResizeEvent;
+class QPrinter;
 class QTreeWidgetItem;
 class KPluginInfo;
 
@@ -1359,6 +1360,7 @@ public:
     */
   KToggleAction* toggleAction(const QString& actionName) const;
 
+  QPrinter *printer();
 
 private:
   /// \internal d-pointer class.
