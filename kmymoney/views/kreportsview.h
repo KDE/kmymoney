@@ -94,6 +94,8 @@ public:
     bool m_showingChart;
     bool m_needReload;
     reports::ReportTable* m_table;
+    class Private;
+    Private* const d;
 
     /**
      * Users character set encoding.
