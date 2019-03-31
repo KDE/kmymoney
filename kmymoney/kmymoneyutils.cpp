@@ -133,7 +133,7 @@ const char* homePageItems[] = {
   I18N_NOOP("Favorite reports"),
   I18N_NOOP("Forecast (schedule)"),
   I18N_NOOP("Net worth forecast"),
-  I18N_NOOP("Forecast (history)"),
+  I18N_NOOP("Forecast (history)"),        // unused, s.a. KSettingsHome::slotLoadItems()
   I18N_NOOP("Assets and Liabilities"),
   I18N_NOOP("Budget"),
   I18N_NOOP("CashFlow"),

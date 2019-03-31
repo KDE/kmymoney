@@ -481,6 +481,8 @@ public:
             case 6:         // net worth graph over all accounts
               showNetWorthGraph();
               break;
+            case 7:         // forecast (history) - currently unused
+              break;
             case 8:         // assets and liabilities
               showAssetsLiabilities();
               break;
@@ -490,8 +492,6 @@ public:
             case 10:         // cash flow summary
               showCashFlowSummary();
               break;
-
-
           }
           m_html += "<div class=\"gap\">&nbsp;</div>\n";
         }

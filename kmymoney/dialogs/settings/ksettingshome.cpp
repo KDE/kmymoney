@@ -111,18 +111,20 @@ void KSettingsHome::slotLoadItems()
     // skip over unknown item entries
     if (idx == 0)
       continue;
+
+    // "Forecast (history)" is currently unused (s.a. KHomeViewPrivate::loadView()
+    // and KMyMoneyUtils::homePageItems so we don't present it to the user.
+    // We cannot remove it since the settings value is the index into the list.
+    if (idx == 7)
+      continue;
+
     bool enabled = idx > 0;
     if (!enabled) idx = -idx;
     QListWidgetItem* item = new QListWidgetItem(d->ui->m_homePageList);
     item->setText(KMyMoneyUtils::homePageItemToString(idx));
     item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
 
-    // qDebug("Adding %s", item->text(0).toLatin1());
-    if (enabled) {
-      item->setCheckState(Qt::Checked);
-    } else {
-      item->setCheckState(Qt::Unchecked);
-    }
+    item->setCheckState(enabled ? Qt::Checked : Qt::Unchecked);
 
     if (sel == 0)
       sel = item;
