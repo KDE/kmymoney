@@ -16,9 +16,9 @@
 <title>&kmymoney; Settings</title>
 
 <para>
-   The settings described below modify the behavior of &kmymoney;, allwing you
+   The settings described below modify the behavior of &kmymoney;, allowing you
    to customize it to meet the needs of your unique financial affairs, and to
-   modify it's look and feel to match your personality.  These settings can be
+   modify its look and feel to match your personality.  These settings can be
    changed through <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
    &kmymoney;...</guimenuitem></menuchoice> or by using the keyboard shortcut
    <keycombo action="simul"><keycap>Ctl</keycap><keycap>Shift</keycap>
@@ -32,7 +32,7 @@
     those icons, the right part of the dialog will display controls for
     configuring that area of the program, often divided into several tabs.
 </para>
-  
+
 <sect1 id="details.settings.general">
 <title>General</title>
 
@@ -62,9 +62,9 @@
       entering a transaction) up to 60 minutes.</para>
 
       <para>Checking the <guilabel>Autosave when file is modified upon close</guilabel> box
-      instructs &kmymoney; to autosave your file when the program is closed. You also have the 
+      instructs &kmymoney; to autosave your file when the program is closed. You also have the
       option upon closing the program to backup your &kmymoney; file.  The Number of backup to
-      keep can be set at 0 (Off) upto to 20 backups.  Any backup files will be stored in the same 
+      keep can be set at 0 (Off) upto to 20 backups.  Any backup files will be stored in the same
       folder as the main file.  The will be labeled sequentially with 1 being the most current.</para>
     </listitem>
   </varlistentry>
@@ -123,18 +123,18 @@
       closed.</para>
     </listitem>
   </varlistentry>
-  
+
   <varlistentry>
   <term><guilabel>Type of the KMyMoney View</guilabel></term>
     <listitem>
       <para> You can select one of three general layouts for &kmymoney; to use.  If
       you select the List or Tree view, the icons and their labels will be located at
-      left side of the window.  The List view displays larger icons while the Tree
+      the left side of the window.  The List view displays larger icons while the Tree
       view has smaller icons.  The Tabbed view locates the icons and labels across
       the top of the window.</para>
     </listitem>
   </varlistentry>
-  
+
   <varlistentry>
     <term><guilabel>Show title bar on each page</guilabel></term>
     <listitem>
@@ -196,7 +196,7 @@
       which contain the opening balances for other accounts.</para>
     </listitem>
   </varlistentry>
-  
+
   <varlistentry>
   <term><guilabel>Show categories in the accounts list view</guilabel></term>
     <listitem>
@@ -204,7 +204,7 @@
       option will display the Categories in the Accounts View.</para>
     </listitem>
   </varlistentry>
-  
+
   <varlistentry>
   <term><guilabel>Do not show zero balance equities</guilabel></term>
     <listitem>
@@ -301,7 +301,7 @@
       within the <menuchoice><guimenu>Account</guimenu><guimenuitem>Edit account...
       </guimenuitem></menuchoice>Configuration dialog.</para>
       <para>For this and all other account list sections addressed by this set of
-      options, the display will includ the account name and current balance, and
+      options, the display will include the account name and current balance, and
       other columns specific to that type of report, and in some cases, as configured
       elsewhere.</para>
       <!-- FIXME - the menu item (or maybe link to actual doc page) should point
@@ -409,6 +409,8 @@ of accounts.</para>
       that the local file has transactions newer than the most recent online update.
       This alerts the user to start an online-update.  A red warning sign indicates a
       mismatch between the local file and online-balance.</para>
+      <!-- Note: the colors might be different depending on the selected theme
+           -->
     </listitem>
   </varlistentry>
 
@@ -470,7 +472,7 @@ of accounts.</para>
       parts.</para>
     </listitem>
   </varlistentry>
-  
+
   <varlistentry>
     <term><guilabel>Show all register entries in full detail</guilabel></term>
     <listitem>
@@ -483,7 +485,7 @@ of accounts.</para>
       Detail</link> menu option.</para>
     </listitem>
   </varlistentry>
-  
+
   <varlistentry id="details.settings.register.lens">
     <term><guilabel>Use the ledger lens</guilabel></term>
     <listitem>
@@ -665,7 +667,7 @@ of accounts.</para>
   <varlistentry>
     <term><guilabel>Autofill</guilabel></term>
     <listitem>
-      <para>This option allows you to select the deired behavior for autofill.
+      <para>This option allows you to select the desired behavior for autofill.
       This controls which, if any, previous transactions for the same payee are
       displayed, and which, if any, of those transactions are used to auto-fill
       details of the new transaction.</para>
@@ -749,7 +751,7 @@ of accounts.</para>
   <varlistentry>
     <term><guilabel>Check schedules upon startup</guilabel></term>
     <listitem>
-      <para>Enables checking the schedule upon startup of &kmymoney;.  If 
+      <para>Enables checking the schedule upon startup of &kmymoney;.  If
       a scheduled transaction matches the schedule criteria set then &kmymoney;
       will produce a notification requiring handling of the transaction. </para>
     </listitem>
@@ -764,7 +766,7 @@ of accounts.</para>
   </varlistentry>
 </variablelist>
 </sect2>
-  
+
 <sect2>
 <title>Processing Days</title>
 <variablelist>
@@ -833,7 +835,7 @@ of accounts.</para>
   You can select a defined basic color, pick a color by clicking anywhere on the
   screen, input an HTML defined color, specify values for Hue, Saturation,
   Value, Red, Green, and Blue.
-  
+
 </para>
 </sect1>
 
@@ -881,7 +883,7 @@ of accounts.</para>
     <term><guilabel>Individual icon settings</guilabel></term>
     <listitem>
       <para>Using the pull-down menu there is a selection of available icons available for use.
-      Additional icons may be available for downloading and use depending on the operating 
+      Additional icons may be available for downloading and use depending on the operating
       system installed.</para>
     </listitem>
   </varlistentry>
@@ -924,7 +926,7 @@ of accounts.</para>
 <para>
   This plugin is included with the source of &kmymoney;, and should always be
   enabled.  It allows printing of a check based on the data from a selected
-  transaction, with the layout controlled by an html template. You need to use a 
+  transaction, with the layout controlled by an html template. You need to use a
   template which is matched to your pre-printed checks.  When you click on the
   <guibutton>configure</guibutton> (&configicon;) button , the <guilabel>Check
   printing</guilabel> configuration dialog is displayed.  At the top is a text box
@@ -941,7 +943,7 @@ of accounts.</para>
   selected, the configuration dialog will show you the directory which contains
   the sample files.
 </para>
- 
+
 <!-- info from source code on substitution variables
     // data about the user
     checkHTML.replace("$OWNER_NAME", file->user().name());
