@@ -358,7 +358,7 @@ Selecting 0% will list all transactions.</string>
           <item>
            <widget class="QLabel" name="label">
             <property name="text">
-             <string>Same transaction if amount differes less than </string>
+             <string>Same transaction if amount differs less than </string>
             </property>
            </widget>
           </item>
