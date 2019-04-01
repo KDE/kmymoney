@@ -924,7 +924,8 @@ of accounts.</para>
 <title>Check printing plugin</title>
 
 <para>
-  This plugin is included with the source of &kmymoney;, and should always be
+  As one example, there is a plugin for printing checks, which
+  is included with the source of &kmymoney;, and should always be
   enabled.  It allows printing of a check based on the data from a selected
   transaction, with the layout controlled by an &HTML; template. You need to use a
   template which is matched to your pre-printed checks.  When you click on the
