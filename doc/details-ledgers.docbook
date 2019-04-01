@@ -417,7 +417,7 @@
 </sect1>
 
 <sect1 id="details.ledgers.split">
-<title id="details.ledgers.split.title">Split Transactions</title>
+<title>Split Transactions</title>
 
 <para>
   The Split transaction feature allows you to divide up a transaction into
@@ -494,7 +494,7 @@
 </sect1>
 
 <sect1 id="details.ledgers.match">
-<title id="details.ledgers.match.title">Matching Transactions</title>
+<title>Matching Transactions</title>
 
 <para>
   Generally, when importing transactions, either via QIF, OFX, or HBCI, &kmymoney;
@@ -595,7 +595,8 @@
 
 </sect1>
 
-<sect1 id="details.ledgers.settings"><title id="details.ledgers.settings.title">Changing Transaction Settings</title>
+<sect1 id="details.ledgers.settings">
+<title>Changing Transaction Settings</title>
 
 <para>
   There are several settings options that change the appearance and behavior of
@@ -674,7 +675,7 @@
 </sect1>
 
 <sect1 id="details.ledgers.other">
-<title id="details.ledgers.other.title">Other Functionality</title>
+<title>Other Functionality</title>
 
 <para>
   Additional options are available from the <guimenu>Transaction

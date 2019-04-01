@@ -9,7 +9,7 @@
   <releaseinfo>4.5</releaseinfo>
 </chapterinfo>
 
-<title id="details.payees.title">Payees</title>
+<title>Payees</title>
 
 <para>
   The Payees screen provides detailed information about all the payees and
@@ -75,7 +75,6 @@
   the new payee's matching list.
 </para>
 </sect2>
-
 </sect1>
 
 <sect1 id="details.payees.personalinformation">
@@ -106,7 +105,7 @@
 </para>
 </sect2>
 
-<sect2>
+<sect2 id="details.payees.personalinformation.matching">
 <title>Transaction Matching Settings</title>
 
 <sect3>
