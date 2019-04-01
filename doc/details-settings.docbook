@@ -626,10 +626,10 @@ of accounts.</para>
   <varlistentry>
     <term><guilabel>Use Enter to move between fields</guilabel></term>
     <listitem>
-      <para>When enabled, pressing Enter will change the focus to the next field
+      <para>When enabled, pressing &Enter; will change the focus to the next field
       of the transaction.  When in the last field, the transaction will be
       saved.  When disabled, navigation between fields would occur by using the
-      Tab key or the Mouse.  Pressing the Enter key would save the transaction,
+      &Tab; key or the mouse.  Pressing the &Enter; key would save the transaction,
       no matter which field is currently in focus.
       </para>
     </listitem>
@@ -833,7 +833,7 @@ of accounts.</para>
   Modify any of the colors by clicking on the color button, which will open
   color select palette.  This will provide unlimited options in color selection.
   You can select a defined basic color, pick a color by clicking anywhere on the
-  screen, input an HTML defined color, specify values for Hue, Saturation,
+  screen, input an &HTML; defined color, specify values for Hue, Saturation,
   Value, Red, Green, and Blue.
 
 </para>
@@ -926,16 +926,16 @@ of accounts.</para>
 <para>
   This plugin is included with the source of &kmymoney;, and should always be
   enabled.  It allows printing of a check based on the data from a selected
-  transaction, with the layout controlled by an html template. You need to use a
+  transaction, with the layout controlled by an &HTML; template. You need to use a
   template which is matched to your pre-printed checks.  When you click on the
-  <guibutton>configure</guibutton> (&configicon;) button , the <guilabel>Check
+  <guibutton>configure</guibutton> (&configicon;) button, the <guilabel>Check
   printing</guilabel> configuration dialog is displayed.  At the top is a text box
   for the path to the selected template.  To the right of that is a button which
   brings up a file chooser, to select an alternate template file.
 </para>
 
 <para>
-  A template file is an html file, in which specific strings are used to
+  A template file is an &HTML; file, in which specific strings are used to
   reference the fields from the transaction and from the current account and
   institution to show where they will be printed on the check.  &kmymoney; is
   shipped with some sample template files.  You should either be able to use one
