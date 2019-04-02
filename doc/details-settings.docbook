@@ -65,7 +65,7 @@
       instructs &kmymoney; to autosave your file when the program is closed. You also have the
       option upon closing the program to backup your &kmymoney; file.  The Number of backup to
       keep can be set at 0 (Off) upto to 20 backups.  Any backup files will be stored in the same
-      folder as the main file.  The will be labeled sequentially with 1 being the most current.</para>
+      folder as the main file.  They will be labeled sequentially with 1 being the most current.</para>
     </listitem>
   </varlistentry>
 
@@ -502,7 +502,7 @@ of accounts.</para>
       linkend="details.ledger.transactionform">transaction form</link> at the
       bottom of the register, and that is where you edit a transaction.  If the
       transaction form is not displayed, you edit a transaction within the
-      ledger itself.  With this option enabled fewer transaction are visible in
+      ledger itself.  With this option enabled fewer transactions are visible in
       the ledger, compared to when it is disabled.</para>
     </listitem>
   </varlistentry>
@@ -560,7 +560,7 @@ of accounts.</para>
   by double clicking on it.
 </para>
 <para>
-  The fields available for sorting are the same for all three secions: Amount,
+  The fields available for sorting are the same for all three sections: Amount,
   Category, Entry Order (date the transaction was created,) Number, Payee, Post
   date, Reconcile state, Security, and Type.
 </para>
