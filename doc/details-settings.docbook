@@ -21,9 +21,9 @@
    modify its look and feel to match your personality.  These settings can be
    changed through <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
    &kmymoney;...</guimenuitem></menuchoice> or by using the keyboard shortcut
-   <keycombo action="simul"><keycap>Ctl</keycap><keycap>Shift</keycap>
+   <keycombo action="simul">&Ctrl; &Shift;
    <keycap>,</keycap></keycombo>. In order for any changes to take effect the
-   apply tab must be entered.
+   <guibutton>Apply</guibutton> button must be clicked.
 </para>
 
 <para>
@@ -125,7 +125,7 @@
   </varlistentry>
 
   <varlistentry>
-  <term><guilabel>Type of the KMyMoney View</guilabel></term>
+  <term><guilabel>Type of the KMyMoney view</guilabel></term>
     <listitem>
       <para> You can select one of three general layouts for &kmymoney; to use.  If
       you select the List or Tree view, the icons and their labels will be located at
@@ -192,7 +192,7 @@
       this option will display the equity accounts in the Accounts View.  Equity
       accounts are used to track individual equities or investments held in an
       Investment Account.  This should not be confused with the top level
-      <emphasis>Equity</emphasis> group of acccounts, which includes the account(s)
+      <emphasis>Equity</emphasis> group of accounts, which includes the account(s)
       which contain the opening balances for other accounts.</para>
     </listitem>
   </varlistentry>
@@ -435,7 +435,7 @@ of accounts.</para>
     per account [!R]</guilabel></term>
     <listitem>
       <para>Inserts an additional column showing the number of not reconciled
-      transactions for the account, i.e., the sum of all not marked and cleared
+      transactions for the account, &ie;, the sum of all not marked and cleared
       transactions.</para>
     </listitem>
   </varlistentry>
@@ -500,7 +500,7 @@ of accounts.</para>
     <listitem>
       <para>Selecting this option displays the <link
       linkend="details.ledger.transactionform">transaction form</link> at the
-      bottom of the register, and that is where you edit a transation.  If the
+      bottom of the register, and that is where you edit a transaction.  If the
       transaction form is not displayed, you edit a transaction within the
       ledger itself.  With this option enabled fewer transaction are visible in
       the ledger, compared to when it is disabled.</para>
@@ -529,13 +529,13 @@ of accounts.</para>
     <term><guilabel>Show header for the previous and current fiscal year
     </guilabel></term>
     <listitem>
-      <para>Selectling this option will display group headers in the register for
+      <para>Selecting this option will display group headers in the register for
       the current and the previous fiscal year.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
-    <term><guilabel>Display overdue shcedules with planned date</guilabel></term>
+    <term><guilabel>Display overdue schedules with planned date</guilabel></term>
     <listitem>
       <para>Scheduled transactions with future dates are shown in the Ledger
       View for the relevant account.  When the date passes, and a scheduled
