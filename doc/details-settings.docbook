@@ -767,7 +767,7 @@ of accounts.</para>
 </variablelist>
 </sect2>
 
-<sect2>
+<sect2 id="details.settings.schedules.calendar">
 <title>Processing Days</title>
 <variablelist>
   <varlistentry>

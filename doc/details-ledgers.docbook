@@ -15,17 +15,18 @@
 <title>The Ledger View</title>
 
 <para>
-  The Ledger view is where most of the functionality of &kmymoney; lies.  This
-  view is for examining and entering transaction data in the various
+  The Ledger view is functionaly the data intergration center of &kmymoney;.  This
+  view is for entering, examining, deleting and editing transactions in your defined
   accounts. The view is split into three main areas: the filter area, the
   transaction list, and the input area.
 </para>
 
 <para>
   This view allows for several key actions: searching and viewing transactions,
-  entering new transactions, and editing or deleting existing
-  transactions. Other functionality includes modifying account details and
-  reconciling the account.
+  entering new and editing, duplicating, deleting and scheduling existing transactions. 
+  Along with this it also provides the ability to move, mark and go to additional account 
+  transaction details.  Other functionality within the ledger view includes modifying
+  and reconciling the account.
 </para>
   
 <para>
@@ -51,7 +52,7 @@
   <listitem>
     <para>
       The transaction input form, which may or may not appear, depending upon
-      your configuration.
+      your configuration as selected in the Configure &kmymoney; Ledger section.
     </para>
   </listitem>
 </itemizedlist>
@@ -73,19 +74,20 @@
 </para>
 	
 <para>
-  You can select an account via the account dropdown list at the top of the view
+  You can easily select any account via the account dropdown list at the top of the view
   area.  Note that depending upon the type of the account the <link
   linkend="details.ledger.transactionform">transaction input form</link> at the
-  bottom of the view changes.
+  bottom of the view may change.
 </para>
 
 <para>
   To the right of the account dropdown list, are two additional fields. The
-  search box acts as a filter on the transactions that are shown in the list
-  view. Only transactions that include the text typed in the search box are
-  displayed. The text specified can be in any of the fields of the transaction.
-  The status field is a dropdown list. Only transactions of the type selected in
-  that dropdown are displayed.
+  filter box acts provides the ability to search for matching transactions
+  that will be displayed in the list view. The text specified can be in any
+  of the fields of the transaction for the specific account. The status field
+  is a dropdown list. The status field list allows for the selection of:
+  Any status, Imported, Matched, Erroneous, Not marked, Not reconciled, 
+  Cleared and scheduled transactions.
 </para>
 
 </sect2>
@@ -107,21 +109,21 @@
 </para>
 	
 <para>
-  After you have entered a transaction, it is displayed in the transaction list.
+  After a transaction has been entered, it is displayed in the transaction list.
   You can also change transaction properties or even create new transactions
   directly in the list.  In the transactions list, the default arrangement of
   transactions is sorted by date with the most recent transaction on the bottom.
   Clicking the Right Mouse Button on the header of the transaction list brings
-  up a dialog that allows you to change the sort order of the transactions. For
-  instructions on how to change the default sort order, see the <link
+  up a dialog box that will allow  the ability to change the sort order of the
+  transactions. For instructions on how to change the default sort order, see the <link
   linkend="details.settings.register.sorting">Sorting tab</link> section of the
   <link linkend="details.settings">&kmymoney; Settings</link> Chapter.
 </para>
 
 <para>
    Note that the balance column is based on the currently displayed sort order,
-   and will not be calculated if the display is filtered by the search box or
-   transaction type dropdown, as described above.
+   and will not be calculated if the display is filtered by the searching within
+   the filter box or transaction type dropdown, as described above.
 </para>
 
 <para>
@@ -130,7 +132,7 @@
 
 <formalpara><title>Last reconciled</title>
   <para>
-    This is the most recent date on which you reconciled this account.
+    This is the most recent date when you reconciled this account.
     Reconciliation is an important process for many accounts, and is described
     <link linkend="details.reconcile">here</link>.
   </para>
@@ -174,9 +176,11 @@
 
 <para>
   There are two methods of entering transactions into the ledger: using the
-  transaction input form and entering the data directly into the transaction
+  transaction input form or entering the data directly into the transaction
   list.  The transaction input form is displayed by default and this is the
-  method we will discuss first.
+  method we will discuss first. Turning off the transaction form can be 
+  accoumplished by going to the Ledger section in the Configure &kmymoney; that's
+  within the Settings.
 </para>
 
 <para>
@@ -205,14 +209,14 @@
 	
 <para>
   The transaction input form at the bottom of the ledger view is the interface
-  for creating transactions.
+  for manually creating transactions.
 </para>
 
 <para>
   Depending upon the type or method of transaction you wish to enter there are
   several tabs available on the transaction form.  Click on the tab that best
-  describes your transaction (deposit, transfer, or withdrawal) and the form
-  will load several fields ready for your input.
+  defines your transaction (deposit, transfer, or withdrawal) and the form
+  will load several fields available for your input.
 </para>
 
 <para>
@@ -222,14 +226,14 @@
 
 <para>
   If you are unsure which method to choose simply use Deposit for any money
-  going into the account, Withdrawal for money coming out of the account, and
+  coming into the account, Withdrawal for money going out of the account, and
   Transfer for money moving from one account to another.  The transaction
   methods and the differences between them are discussed in more detail
   elsewhere.
 </para>
 
 <para>
-  Select the transaction method by clicking on one of the tabs.
+  Select the transaction method by clicking on the appropriate tab.
 </para>
 
 <sect2>
@@ -238,11 +242,12 @@
 <para>
   Enter the information using the following notes on the available fields.  Note
   that many fields have 'Auto Completion' turned on.  That is, if you start
-  typing, &kmymoney; will offer alternatives matching the characters you have
-  entered so far.  To select an entry click on it using the mouse or keyboard,
-  or if your entry is not listed keep typing to add the new value.  The next
-  time you type the value in, &kmymoney; will find it for you after the first
-  few characters have been input.
+  typing, &kmymoney; will offer alternatives matching the characters you begin
+  to enter.  To select the matching content simply click on the entry by using
+  your mouse or selecting the appropriate keyboard keys.  If the entry is not
+  listed finish typing the content to add the new value.  The next time you type
+  the content, &kmymoney; will find it for you as you begin to enter the intial
+  characters.
 </para>
 
 <sect3>
@@ -251,8 +256,8 @@
 <para>
   The Payee is who the money came from/to.  If the payee is a new entry
   &kmymoney; will ask if you wish to add this to the list of Payees.  Any other
-  information related to a payee or payer, such as address details can be
-  updated in the Payees view later.
+  information related to a payee or payer, such as address, phone number and account
+  number as well as notes can be updated in the Payees view.
 </para>
 </sect3>
 
@@ -262,16 +267,18 @@
 <para>
   The Category associates a transaction with an income or expense category for
   accounting and reporting purposes, and enables you to group certain
-  transactions. Type the name of the category into the required field.  If you
+  transactions. Type the name of the category into the defined field.  If you
   have entered the category and it does not exist then &kmymoney; will ask if
-  you want to create a new one.
+  you want to create a new one.  If the selection is Yes &kmymoney; will then
+  open a dialog box that allows for the further definiton of the category based 
+  on General, Heirarchy and Tax characteristics. 
 </para>
 
 <para>
   If you wish to associate parts of the transaction with different categories,
-  &kmymoney; can let you do that.  An example transaction might be a cash
-  machine withdrawal of 50 of which you use 10 on food, 20 on beer and 20 as
-  spare cash.  The transaction will therefore be assigned three categories:
+  &kmymoney; can handle this need.  An example transaction might be a cash
+  withdrawal of 50 of which you use 10 on food, 20 on beer and 20 as
+  cash.  The transaction will therefore be assigned three categories:
   Food, Beer, and Cash.  To do this, you need to use <link
   linkend="details.ledgers.split">Split Transactions</link>, which is described
   in more detail below.
@@ -287,12 +294,14 @@
 <title>The Tag</title>
 
 <para>
-  Tags were introduced to &kmymoney; in version 4.7, and they are not yet fully
-  documented in this handbook.  Tags are similar to Categories, and can be used
-  to maintain an orthogonal view to Categories.  For example, you might have
-  a Category for each different type of automotice expenses, and then have a Tag
-  for each vehicle.  As with Categories, you can select from the dropdown list, or type
-  a new Tag name, and be prompted if you want to create a new Tag with that name.
+  Tags are similar to Categories, and can be used to maintain an orthogonal view
+  to Categories.  They provide the ability to group transactions within a Category based
+  on your defined needs.  This need could be defined by a specifics to Person, Place or
+  Thing. For example, you might have a Category for each different type of automotive
+  expenses, and then have a Tag for each vehicle.  As with Categories, you can select
+  from the dropdown list, or type a new Tag name, and be prompted if you want to create
+  a new Tag with that name.  Within the Tag field &kmymoney; will allow for multiple tags
+  entered within a single transaction. 
 </para>
 </sect3>
 
@@ -300,8 +309,8 @@
 <title>The Memo</title>
 
 <para>
-  A multi-line memo can be entered if you wish to help you remember what the
-  transaction was for.
+  A multi-line memo can be entered if you wish to help you remember further
+  details of a specific transaction.
 </para>
 </sect3>
 
@@ -309,8 +318,9 @@
 <title>The Check Number</title>
 
 <para>
-  The check number can be entered if needed.  Note that the check number can
-  always be visible if desired.  This is configured in the Settings dialog.
+  The check number can be entered if needed.  Note that the check number field can
+  be made visible or invisible in the ledger if desired.  This is configured in 
+  the Ledger Settings dialog.
 </para>
 </sect3>
 
@@ -332,12 +342,13 @@
   Finally, enter the transaction amount into the required field. Note that a
   simple calculator can be displayed, either by clicking the icon to the right
   of the amount field, or by entering the % character into the field, or by
-  entering a formula, as in <emphasis>12 + 3</emphasis>. When entering the plus
+  entering any of these mathmatical symbols: + - * / in a formula,
+  as in <emphasis>12 + 3</emphasis>. When entering the plus
   sign, the calculator will be opened.
 </para>
 
 <para>
-  When you are satisfied that all the fields have been filled in correctly,
+  When you are satisfied that all the fields have been adequately filled in,
   click on <guibutton>Enter</guibutton>. If you accidentally press or click on
   <guibutton>Enter</guibutton> before you have finished entering all the data,
   click on <guibutton>Edit</guibutton> to resume entering the data.
@@ -364,7 +375,7 @@
 
 <para>
   The second method of entering transactions into the ledger involves editing
-  the transaction list itself directly.
+  the transaction list directly.
 </para>
 
 <para>
@@ -417,7 +428,7 @@
 </sect1>
 
 <sect1 id="details.ledgers.split">
-<title>Split Transactions</title>
+<title id="details.ledgers.split.title">Split Transactions</title>
 
 <para>
   The Split transaction feature allows you to divide up a transaction into
@@ -427,7 +438,7 @@
 
 <para>
   To enter a split transaction, using either the transaction input form or the
-  transaction list, start a new transaction as normal, including entering the
+  transaction list, start a new transaction, including entering the
   total amount. Then, instead of selecting a category, click the
   <guibutton>Split</guibutton> button. If you have already selected a category,
   that becomes the first entry in the split editor screen.
@@ -494,7 +505,7 @@
 </sect1>
 
 <sect1 id="details.ledgers.match">
-<title>Matching Transactions</title>
+<title id="details.ledgers.match.title">Matching Transactions</title>
 
 <para>
   Generally, when importing transactions, either via QIF, OFX, or HBCI, &kmymoney;
@@ -508,7 +519,7 @@
 <para>
   If you should find that an imported transaction was not automatically matched
   with an existing transaction when it should have matched, then it is possible
-  to match them manually. Note that there is a difference between manually
+  to match them manually. Note there is a difference between manually
   matching two transactions and simply deleting one of them, even though they
   may appear to have the same effect.  Specifically with OFX or HBCI, it is
   important not to delete the imported transaction, because you will find that
@@ -525,12 +536,11 @@
   transaction with a hand-entered (non-imported) transaction. To do so, select
   one of the transactions to be matched by clicking on it, then select the other
   by left clicking on it while pressing the &Ctrl; key, and then select
-  <guimenuitem>Match</guimenuitem> from the context menu. This changes the
-  background color to a pale green. This will match and combine the two
-  transactions together. The values of both transactions must be the same for
-  the match to work, except that the dates may differ by the window specified in
-  the settings, as described above. If you are happy with the result, right
-  click the matched transaction, then select <guibutton>Accept</guibutton>.
+  <guimenuitem>Match</guimenuitem> from the context menu. This will match and 
+  combine the two transactions together. The values of both transactions must
+  be the same for the match to work, except that the dates may differ by the
+  window specified in the settings, as described above. If you are happy with
+  the result, right click the matched transaction, then select <guibutton>Accept</guibutton>.
 </para>
 
 <para>
@@ -553,8 +563,8 @@
 <title>Understanding the Cleared State</title>
 
 <para>
-  A transaction can have one of three states: non-reconciled, cleared (C), and
-  reconciled (R). When you enter a transaction, it has state
+  A transaction can have one of three states: non-reconciled(blank), cleared (C)
+  , and reconciled (R). When a transaction is entered, it has state of
   non-reconciled. Once the bank posts the transaction, the user can clear it
   and thus transform it to state (C). When you receive a statement from the
   bank, all cleared transactions should be on the statement.
@@ -587,16 +597,10 @@
   (R), you will be warned.
 </para>
 
-<para>
-  A fourth state is defined (frozen (F)) but there's currently no way to set
-  it. It is reserved for future use. Nevertheless, if a transaction has at least
-  one split in state frozen it cannot be edited anymore.
-</para>
 
 </sect1>
 
-<sect1 id="details.ledgers.settings">
-<title>Changing Transaction Settings</title>
+<sect1 id="details.ledgers.settings"><title id="details.ledgers.settings.title">Changing Transaction Settings</title>
 
 <para>
   There are several settings options that change the appearance and behavior of
@@ -675,7 +679,7 @@
 </sect1>
 
 <sect1 id="details.ledgers.other">
-<title>Other Functionality</title>
+<title id="details.ledgers.other.title">Other Functionality</title>
 
 <para>
   Additional options are available from the <guimenu>Transaction
@@ -710,3 +714,4 @@
 </para>
 </sect1>
 </chapter>
+

@@ -4,23 +4,33 @@
   <authorgroup>
     <author> &Roger.Lum; &Roger.Lum.mail; </author>
     <author> &Ace.Jones; &Ace.Jones.mail; </author>
+    <author>
+      <personname><firstname>Michael</firstname><surname>Carpino</surname></personname>
+      <email>mfcarpino@gmail.com</email>
+    </author>
   </authorgroup>
-  <date>2010-07-25</date>
-  <releaseinfo>4.5</releaseinfo>
+  <date>2019-04-01</date>
+  <releaseinfo>5.0.3</releaseinfo>
 </chapterinfo>
 
 <title>Payees</title>
 
 <para>
-  The Payees screen provides detailed information about all the payees and
-  payers involved in transactions. The Payees screen is split into two main
-  areas: a payees and payers list and a detail area.
+  The Payees View provides detailed information about all the payees and payers
+  involved in transactions.  These are the entities to and from which you
+  transfer money.  &kmymoney; stores information about all the payees and payers
+  from all existing transactions.  This makes it possible to pick a payee from a
+  list instead of having to type the full name, which also decreases the chance
+  of misspelling or typing the wrong name.
 </para>
 
 <para>
-  The Payees screen allows for viewing the transactions for the selected payee,
-  updating personal information associated with a particular payee or payer, and
-  specifying transaction matching criteria.
+  The Payees View is split into two main areas: a payees and payers list on the
+  left, and a detail area on the right.  The <guilabel>Your payees</guilabel>
+  section allows for adding, deleting, renaming, and merging payees.  The detail
+  area has several tabls, showing the transactions, address, matching
+  information, default account, and account numbers for the payee selected in
+  the list.
 </para>
 
 <para>
@@ -37,19 +47,17 @@
 <title>Payees List</title>
 
 <para>
-  A list of payees and payers is on the left side of this screen. The payee list
-  is sorted alphabetically.
+  The list of all payees and payers in your data is shown on the left side of
+  this view. The payee list is sorted alphabetically.
 </para>
 
 <sect2>
 <title>Adding a Payee or Payer</title>
 
 <para>
-  To add a payee or payer, right-click on any payee name and choose
-  <guimenuitem>New payee</guimenuitem>. This creates a new payee called
-  <quote>New Payee</quote>. Right-click on this payee and select
-  <guimenuitem>Rename payee</guimenuitem> to enter the name of the new payee or
-  payer.
+  To add a payee or payer, choose <guibutton>+New</guibutton>.  This creates a
+  new payee called <quote>New Payee</quote>.  You can also right-click on any
+  existing payee and select <guimenuitem>Add payee</guimenuitem>.
 </para>
 </sect2>
 
@@ -57,10 +65,10 @@
 <title>Renaming a Payee or Payer</title>
 
 <para>
-  To rename a payee or payer, simply right-click on the name, select
-  <guimenuitem>Rename payee</guimenuitem> and the name becomes
-  editable. Changing the name will affect the name in all the transactions in
-  which it appears.
+  To rename a payee or payer, either double-click on the name or right-click on
+  the name and select <guimenuitem>Rename payee</guimenuitem>.  The name then
+  becomes editable.  Changing the name will affect the name in all the
+  transactions in which it appears.
 </para>
 </sect2>
 
@@ -69,10 +77,12 @@
 
 <para>
   To remove a payee or payer, right-click the name and select
-  <guimenuitem>Delete payee</guimenuitem>. If the payee has any transactions,
+  <guimenuitem>Delete payee</guimenuitem>.  If the payee has any transactions,
   you will be presented with a dialog that allows you to reassign them to a
-  different payee, and also a check box to enable a deleted name to be added to
-  the new payee's matching list.
+  different payee, and also a check box to enable the deleted name to be added
+  to the new payee's matching list.  Another option for renaming an existing
+  payee is to select the payee or payer by left clicking it and then left
+  clicking <guibutton>-Del</guibutton>.
 </para>
 </sect2>
 </sect1>
@@ -85,9 +95,10 @@
 
 <para>
   To view and edit the personal information associated with a particular payee,
-  select the payee from the list and select the Address tab. To modify this
-  information, edit the detail area directly and press the Update button when
-  finished.
+  select the payee from the list and select the Address tab. Along with address
+  information you can also store a telephone number, email address, and notes
+  pertaining to the selected payee.  To modify this information, edit the detail
+  area directly and press the Update button when finished.
 </para>
 
 <para>
@@ -115,15 +126,16 @@
  &kmymoney; has the ability to automatically assign the proper payee to imported
  transactions.  This can be handy when importing transactions from your bank,
  when the payee name has extra unnecessary characters, or worse, if the payee
- names change.
+ names change. The ability to match transactions to a particualar payee assists
+ in providing a consist naming of payees within the ledger and reports.
 </para>
 
 <para>
   For example, let's say your monthly mortgage payment comes in from your bank
   like this <quote>SUNTRUST BANK MAPLE VALLEY, GA 111506</quote> one month and
   then <quote>SUNTRUST BANK MAPLE VALLEY, GA 121606</quote> the next month.  You
-  would really like both of those transactions to be assigned simply to your
-  payee <quote>SunTrust</quote>.  The transaction matching feature is for you!
+  would really like both of those transactions to be assigned to your payee
+  <quote>SunTrust</quote>.  The transaction matching feature is for you!
 </para>
 
 <para>
@@ -145,39 +157,51 @@
 <title>Setting up</title>
 
 <para>
-  From the Matching tab, you can set the Transaction Matching Settings. You have
-  3 major options:
+  From the Matching tab, you can set the transaction matching settings.  You can
+  select one of four options with the <guilabel>Match method</guilabel>
+  dropdown.
 </para>
 
 <itemizedlist>
   <listitem>
     <para>
-      No Matching.  Disables the feature for this payee.  This is the default
-      setting for all payees.
+      No Matching.  This disables the feature for this payee.  This is the
+      default setting for all payees.
     </para>
   </listitem>
 
   <listitem>
     <para>
-      Match on Payee Name.  Enables the feature, and uses the payee name itself
-      as the Match Key
+      Match Payees name (partial).  This enables the feature based on a partial
+      name matching of the Payee and and uses the payee name itself as the Match
+      Key.
     </para>
   </listitem>
 
   <listitem>
     <para>
-      Match on Key.  Enables the feature, and allows you to enter one or more
-      Match Keys of your choosing.  In general, entering a plain string will
-      work perfectly.  However, the match keys are actually regular expressions,
-      so it is possible to match on more complicated patterns.
+      Match Payees name (exact).  This enables the feature based on an exact
+      match of the Payee.  You would use this matching ability when you want to
+      keep track of different Payees that have the same business name but have
+      different locations.
+    </para>
+  </listitem>
+
+  <listitem>
+    <para>
+      Match on a name listed below.  This enables matching based on multiple
+      different or optional names for a Payee.  You would use this matching
+      ability when you have a particaular Payee that has different business
+      names but you want all imported transactions identified by any of those
+      names to be associated with a single Payee in &kmymoney;.
     </para>
   </listitem>
 </itemizedlist>
 
 <para>
-  You can also choose whether you want to ignore the case of the Match Key.  If
-  you choose this option, the Match Key <quote>SunTrust</quote> would match
-  <quote>SUNTRUST BANK</quote> or <quote>SunTrust Bank</quote>.
+  With any of these options you can choose whether or not to ingnore the case
+  sensitivity of the spelling of the payee based on whether you check
+  <guilabel>Ignore Case</guilabel>.
 </para>
 </sect3>
 
@@ -185,16 +209,18 @@
 <title>Importing Transactions</title>
 
 <para>
-  When you import transactions using the QIF import, or using a plugin such as
-  OFX or AqBanking, the Match Keys you have set will be considered.  If the
-  Match Key for one of your payees is found anywhere in the payee of the
+  The Match Keys you have set will be considered whenever you import
+  transactions using the QIF import, or using a plugin such as OFX or AqBanking,
+  If the Match Key for one of your payees is found anywhere in the payee of the
   imported transaction, the corresponding payee from your list will be assigned
   to that transaction.  Thus, a Match Key of <quote>SunTrust</quote> will match
   <quote>SUNTRUST BANK MAPLE VALLEY,GA</quote> or even
   <quote>MORGENSUNTRUST&amp;LOAN</quote>.  So choose your Match Keys carefully.
-  <note><para> If a transaction payee matches more than one Match Key, the
-  behavior is undefined.  &kmymoney; will arbitrarily pick one of the matching
-  payees.  </para></note>
+  <note>
+    <para> If a transaction payee matches more than one Match Key, the behavior
+    is undefined.  &kmymoney; will arbitrarily pick one of the matching
+    payees.</para>
+  </note>
 </para>
 </sect3>
 </sect2>
@@ -205,9 +231,9 @@
 
 <para>
   To view all transactions associated with a particular payee, select the payee
-  from the list and the Transaction tab in the detail area. Double-clicking a
-  particular transaction will bring you directly to that transaction in the
-  Ledgers screen.
+  from the list and select the Transaction tab in the detail area.
+  Double-clicking a particular transaction will bring you directly to that
+  transaction in the Ledgers View for the appropriate account.
 </para>
 
 <para>
@@ -225,3 +251,4 @@
 </para>
 </sect1>
 </chapter>
+
