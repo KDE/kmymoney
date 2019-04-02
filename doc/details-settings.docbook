@@ -350,7 +350,7 @@
     <term><guilabel>Budget</guilabel></term>
     <listitem>
       <para>This will display a current month summary and overruns for any defined
-      budget(s), If no budget is defined, it will display no budget or overruns, with
+      budget(s). If no budget is defined, it will display no budget or overruns, with
       the actual current month spending.</para>
     </listitem>
   </varlistentry>
