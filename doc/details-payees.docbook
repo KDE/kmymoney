@@ -28,7 +28,7 @@
   The Payees View is split into two main areas: a payees and payers list on the
   left, and a detail area on the right.  The <guilabel>Your payees</guilabel>
   section allows for adding, deleting, renaming, and merging payees.  The detail
-  area has several tabls, showing the transactions, address, matching
+  area has several tabs, showing the transactions, address, matching
   information, default account, and account numbers for the payee selected in
   the list.
 </para>
@@ -191,7 +191,7 @@
     <para>
       Match on a name listed below.  This enables matching based on multiple
       different or optional names for a Payee.  You would use this matching
-      ability when you have a particaular Payee that has different business
+      ability when you have a particular Payee that has different business
       names but you want all imported transactions identified by any of those
       names to be associated with a single Payee in &kmymoney;.
     </para>
@@ -199,7 +199,7 @@
 </itemizedlist>
 
 <para>
-  With any of these options you can choose whether or not to ingnore the case
+  With any of these options you can choose whether or not to ignore the case
   sensitivity of the spelling of the payee based on whether you check
   <guilabel>Ignore Case</guilabel>.
 </para>

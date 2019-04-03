@@ -28,7 +28,7 @@
 <para>
   Sometimes called a recurring transaction, a schedule provides a means to
   record information about a transaction that happen on a regular basis.  You 
-  can schedule deposit, transfer, withdrawl, and loan transactions.  There is
+  can schedule deposit, transfer, withdrawal, and loan transactions.  There is
   a lot of flexibility built in with scheduling transactions that include doing
   it Once, or on a basis of number of Day(s), Week(s), Half-month(s), Month(s), 
   or Year(s).
@@ -50,7 +50,7 @@
 </para>
 
 <para>
-  A schedule consists of two main parts: the transactiondata and the scheduling
+  A schedule consists of two main parts: the transaction data and the scheduling
   data.  The scheduling data records the occurrence of the schedule, &ie;, when
   the transaction is to be entered into the ledger and how.  The transaction
   data records the normal details about the transaction.  These include options
