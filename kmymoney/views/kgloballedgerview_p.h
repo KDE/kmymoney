@@ -1186,29 +1186,34 @@ public:
     try {
       it_t = list.begin();
       while (it_t != list.end()) {
+        const auto accountId = (*it_t).split().accountId();
+        const auto deletedNum = (*it_t).split().number();
+        const auto transactionId = (*it_t).transaction().id();
         // only remove those transactions that do not reference a closed account
         if (!file->referencesClosedAccount((*it_t).transaction())) {
           file->removeTransaction((*it_t).transaction());
           // remove all those references in the list of selected transactions
           // that refer to the same transaction we just removed so that we
           // will not be caught by an exception later on (see bko #285310)
-          KMyMoneyRegister::SelectedTransactions::iterator it_td = it_t;
-          ++it_td;
-          while (it_td != list.end()) {
-            if ((*it_t).transaction().id() == (*it_td).transaction().id()) {
-              it_td = list.erase(it_td);
+          while (it_t != list.end()) {
+            if (transactionId == (*it_t).transaction().id()) {
+              it_t = list.erase(it_t);
               i++; // bump count of deleted transactions
             } else {
-              ++it_td;
+              ++it_t;
             }
           }
+
+        } else {
+          list.erase(it_t);
         }
+        it_t = list.begin();
+
         // need to ensure "nextCheckNumber" is still correct
-        auto acc = file->account((*it_t).split().accountId());
+        auto acc = file->account(accountId);
 
         // the "lastNumberUsed" might have been the txn number deleted
         // so adjust it
-        QString deletedNum = (*it_t).split().number();
         if (deletedNum == acc.value("lastNumberUsed")) {
           // decrement deletedNum and set new "lastNumberUsed"
           QString num = KMyMoneyUtils::getAdjacentNumber(deletedNum, -1);
@@ -1216,11 +1221,10 @@ public:
           file->modifyAccount(acc);
         }
 
-        list.erase(it_t);
-        it_t = list.begin();
         emit q->slotStatusProgress(i++, 0);
       }
       ft.commit();
+
     } catch (const MyMoneyException &e) {
       KMessageBox::detailedSorry(q, i18n("Unable to delete transaction(s)"), e.what());
     }
