@@ -39,6 +39,7 @@
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include <QTemporaryFile>
+#include <QFileInfo>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -132,7 +133,7 @@ const char* homePageItems[] = {
   I18N_NOOP("Favorite reports"),
   I18N_NOOP("Forecast (schedule)"),
   I18N_NOOP("Net worth forecast"),
-  I18N_NOOP("Forecast (history)"),
+  I18N_NOOP("Forecast (history)"),        // unused, s.a. KSettingsHome::slotLoadItems()
   I18N_NOOP("Assets and Liabilities"),
   I18N_NOOP("Budget"),
   I18N_NOOP("CashFlow"),
@@ -623,14 +624,20 @@ bool KMyMoneyUtils::fileExists(const QUrl &url)
 {
     bool fileExists = false;
     if (url.isValid()) {
-        short int detailLevel = 0; // Lowest level: file/dir/symlink/none
-        KIO::StatJob* statjob = KIO::stat(url, KIO::StatJob::SourceSide, detailLevel);
-        bool noerror = statjob->exec();
-        if (noerror) {
-            // We want a file
-            fileExists = !statjob->statResult().isDir();
+        if (url.isLocalFile() || url.scheme().isEmpty()) {
+          QFileInfo check_file(url.toLocalFile());
+          fileExists = check_file.exists() && check_file.isFile();
+
+        } else {
+            short int detailLevel = 0; // Lowest level: file/dir/symlink/none
+            KIO::StatJob* statjob = KIO::stat(url, KIO::StatJob::SourceSide, detailLevel);
+            bool noerror = statjob->exec();
+            if (noerror) {
+                // We want a file
+                fileExists = !statjob->statResult().isDir();
+            }
+            statjob->kill();
         }
-        statjob->kill();
     }
     return fileExists;
 }

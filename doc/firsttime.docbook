@@ -110,12 +110,12 @@
 </para>
 
 <para>
-  The view selector consists of at least eleven icons in the left side of the
-  main window, depending upon the software provided by your system.  More icons
-  could be added by various plugins.  By clicking on an icon, the view window on
-  the right hand side is loaded with the appropriate view of your financial
-  data.  Each view provides a unique representation of your financial situation
-  and allows you to view or edit the information shown.
+  On the left side of the main window, the view selector consists of at least
+  eleven icons with optional labels, depending upon the software provided by
+  your system.  More icons could be added by various plugins.  By clicking on an
+  icon, the view window on the right hand side is loaded with the appropriate
+  view of your financial data.  Each view provides a unique representation of
+  your financial situation and allows you to view or edit the information shown.
 </para>
 
 <para>

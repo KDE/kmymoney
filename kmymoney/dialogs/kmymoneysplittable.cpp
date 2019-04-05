@@ -58,6 +58,10 @@
 #include "kmymoneylineedit.h"
 #include "mymoneysecurity.h"
 #include "kmymoneysettings.h"
+#include "kmymoneymvccombo.h"
+#include "mymoneytag.h"
+#include "kmymoneytagcombo.h"
+#include "ktagcontainer.h"
 #include "kcurrencycalculator.h"
 #include "mymoneyutils.h"
 #include "mymoneytracer.h"
@@ -80,6 +84,7 @@ public:
     m_contextMenuDelete(nullptr),
     m_contextMenuDuplicate(nullptr),
     m_editCategory(0),
+    m_editTag(0),
     m_editMemo(0),
     m_editAmount(0)
   {
@@ -124,6 +129,11 @@ public:
   QPointer<KMyMoneyCategory> m_editCategory;
 
   /**
+    * This member contains a pointer to the tag widget for the memo.
+    */
+  QPointer<KTagContainer> m_editTag;
+
+  /**
     * This member contains a pointer to the input widget for the memo.
     * The widget will be created and destroyed dynamically in createInputWidgets()
     * and destroyInputWidgets().
@@ -159,9 +169,9 @@ KMyMoneySplitTable::KMyMoneySplitTable(QWidget *parent) :
 
   // setup the transactions table
   setRowCount(1);
-  setColumnCount(3);
+  setColumnCount(4);
   QStringList labels;
-  labels << i18n("Category") << i18n("Memo") << i18n("Amount");
+  labels << i18n("Category") << i18n("Memo") << i18n("Tag") << i18n("Amount");
   setHorizontalHeaderLabels(labels);
   setSelectionMode(QAbstractItemView::SingleSelection);
   setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -360,7 +370,7 @@ bool KMyMoneySplitTable::eventFilter(QObject *o, QEvent *e)
         // in case we have the 'enter moves focus between fields', we need to simulate
         // a TAB key when the object 'o' points to the category or memo field.
         if (KMyMoneySettings::enterMovesBetweenFields()) {
-          if (o == d->m_editCategory->lineEdit() || o == d->m_editMemo) {
+          if (o == d->m_editCategory->lineEdit() || o == d->m_editMemo || o == d->m_editTag) {
             terminate = false;
             QKeyEvent evt(e->type(),
                           Qt::Key_Tab, k->modifiers(), QString(),
@@ -502,6 +512,10 @@ void KMyMoneySplitTable::mouseDoubleClickEvent(QMouseEvent *e)
       break;
 
     case 2:
+     d->m_editTag->tagCombo()->setFocus();
+      break;
+
+    case 3:
       editWidget = d->m_editAmount->lineedit();
       break;
 
@@ -634,27 +648,35 @@ void KMyMoneySplitTable::slotUpdateData(const MyMoneyTransaction& t)
     else
       setItem(numRows, 1, new QTableWidgetItem((*it).memo()));
 
-    textItem = item(numRows, 2);
+    QList<QString> tl = (*it).tagIdList();
+    QStringList tagNames;
+    if (!tl.isEmpty()) {
+      for (int i = 0; i < tl.size(); i++)
+        tagNames.append(MyMoneyFile::instance()->tag(tl[i]).name());
+    }
+    setItem(numRows, 2, new QTableWidgetItem(tagNames.join(", ")));
+
+    textItem = item(numRows, 3);
     if (textItem)
       textItem->setText(amountTxt);
     else
-      setItem(numRows, 2, new QTableWidgetItem(amountTxt));
+      setItem(numRows, 3, new QTableWidgetItem(amountTxt));
 
-    item(numRows, 2)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    item(numRows, 3)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
     ++numRows;
   }
 
   // now clean out the remainder of the table
   while (numRows < static_cast<unsigned long>(rowCount())) {
-    for (auto i = 0 ; i < 3; ++i) {
+    for (auto i = 0 ; i < 4; ++i) {
       textItem = item(numRows, i);
       if (textItem)
         textItem->setText("");
       else
         setItem(numRows, i, new QTableWidgetItem(""));
     }
-    item(numRows, 2)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    item(numRows, 3)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
     ++numRows;
   }
 }
@@ -770,6 +792,10 @@ void KMyMoneySplitTable::endEdit(bool keyboardDriven, bool setFocusToNextRow)
     s1.setMemo(d->m_editMemo->text());
     needUpdate = true;
   }
+  if (d->m_editTag->selectedTags() != d->m_split.tagIdList()) {
+    s1.setTagIdList(d->m_editTag->selectedTags());
+    needUpdate = true;
+  }
   if (d->m_editAmount->value() != d->m_split.value()) {
     s1.setValue(d->m_editAmount->value());
     needUpdate = true;
@@ -883,13 +909,13 @@ bool KMyMoneySplitTable::isEditMode() const
 {
   Q_D(const KMyMoneySplitTable);
   // while the edit widgets exist we're in edit mode
-  return d->m_editAmount || d->m_editMemo || d->m_editCategory;
+  return d->m_editAmount || d->m_editMemo || d->m_editCategory || d->m_editTag;
 }
 
 bool KMyMoneySplitTable::isEditSplitValid() const
 {
   Q_D(const KMyMoneySplitTable);
-  return isEditMode() && !d->m_editCategory->selectedItem().isEmpty();
+  return isEditMode() && !(d->m_editCategory && d->m_editCategory->selectedItem().isEmpty());
 }
 
 void KMyMoneySplitTable::destroyEditWidgets()
@@ -904,6 +930,7 @@ void KMyMoneySplitTable::destroyEditWidgets()
   destroyEditWidget(d->m_currentRow, 0);
   destroyEditWidget(d->m_currentRow, 1);
   destroyEditWidget(d->m_currentRow, 2);
+  destroyEditWidget(d->m_currentRow, 3);
   destroyEditWidget(d->m_currentRow + 1, 0);
 }
 
@@ -940,6 +967,13 @@ KMyMoneyCategory* KMyMoneySplitTable::createEditWidgets(bool setFocus)
   d->m_editMemo->setPlaceholderText(i18n("Memo"));
   d->m_editMemo->setFont(cellFont);
 
+  d->m_editTag = new KTagContainer;
+  d->m_editTag->tagCombo()->setPlaceholderText(i18n("Tag"));
+  d->m_editTag->tagCombo()->setFont(cellFont);
+  d->m_editTag->loadTags(MyMoneyFile::instance()->tagList());
+  connect(d->m_editTag->tagCombo(), SIGNAL(createItem(QString,QString&)), this, SIGNAL(createTag(QString,QString&)));
+  connect(d->m_editTag->tagCombo(), SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
+
   // create buttons for the mouse users
   d->m_registerButtonFrame = new QFrame(this);
   d->m_registerButtonFrame->setContentsMargins(0, 0, 0, 0);
@@ -963,6 +997,7 @@ KMyMoneyCategory* KMyMoneySplitTable::createEditWidgets(bool setFocus)
   // setup tab order
   addToTabOrder(d->m_editCategory);
   addToTabOrder(d->m_editMemo);
+  addToTabOrder(d->m_editTag);
   addToTabOrder(d->m_editAmount);
   addToTabOrder(d->m_registerEnterButton);
   addToTabOrder(d->m_registerCancelButton);
@@ -982,6 +1017,12 @@ KMyMoneyCategory* KMyMoneySplitTable::createEditWidgets(bool setFocus)
     d->m_split.setValue(-diff);
   }
 
+  QList<QString> t = d->m_split.tagIdList();
+  if (!t.isEmpty()) {
+    for (int i = 0; i < t.size(); i++)
+      d->m_editTag->addTagWidget(t[i]);
+  }
+
   d->m_editMemo->loadText(d->m_split.memo());
   // don't allow automatically calculated values to be modified
   if (d->m_split.value() == MyMoneyMoney::autoCalc) {
@@ -992,7 +1033,8 @@ KMyMoneyCategory* KMyMoneySplitTable::createEditWidgets(bool setFocus)
 
   setCellWidget(d->m_currentRow, 0, d->m_editCategory);
   setCellWidget(d->m_currentRow, 1, d->m_editMemo);
-  setCellWidget(d->m_currentRow, 2, d->m_editAmount);
+  setCellWidget(d->m_currentRow, 2, d->m_editTag);
+  setCellWidget(d->m_currentRow, 3, d->m_editAmount);
   setCellWidget(d->m_currentRow + 1, 0, d->m_registerButtonFrame);
 
   // load e.g. the category widget with the account list

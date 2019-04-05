@@ -25,7 +25,6 @@
 
 #include "ui_kreconciliationreportdlgdecl.h"
 
-class QPrinter;
 #ifdef ENABLE_WEBENGINE
 class QWebEngineView;
 #else
@@ -51,7 +50,6 @@ private:
   KWebView       *m_summaryHTMLPart;
   KWebView       *m_detailsHTMLPart;
   #endif
-  QPrinter       *m_currentPrinter;
 };
 
 #endif

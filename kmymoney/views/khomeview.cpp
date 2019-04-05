@@ -6,9 +6,9 @@
                            Javier Campos Morales <javi_c@users.sourceforge.net>
                            Felix Rodriguez <frodriguez@users.sourceforge.net>
                            John C <thetacoturtle@users.sourceforge.net>
-                           Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
                            (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2002-2019 by Thomas Baumgart <tbaumgart@kde.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -30,6 +30,8 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "kmm_printer.h"
 
 KHomeView::KHomeView(QWidget *parent) :
   KMyMoneyViewBase(*new KHomeViewPrivate(this), parent)
@@ -116,19 +118,14 @@ void KHomeView::slotPrintView()
 {
   Q_D(KHomeView);
   if (d->m_view) {
-    d->m_currentPrinter = new QPrinter();
-    QPointer<QPrintDialog> dialog = new QPrintDialog(d->m_currentPrinter, this);
-    dialog->setWindowTitle(QString());
-    if (dialog->exec() != QDialog::Accepted) {
-      delete d->m_currentPrinter;
-      d->m_currentPrinter = nullptr;
-      return;
+    auto printer = KMyMoneyPrinter::startPrint();
+    if (printer != nullptr) {
+    #ifdef ENABLE_WEBENGINE
+      d->m_view->page()->print(printer, [=] (bool) {});
+    #else
+      d->m_view->print(printer);
+    #endif
     }
-  #ifdef ENABLE_WEBENGINE
-    d->m_view->page()->print(d->m_currentPrinter, [=] (bool) {delete d->m_currentPrinter; d->m_currentPrinter = nullptr;});
-  #else
-    d->m_view->print(d->m_currentPrinter);
-  #endif
   }
 }
 

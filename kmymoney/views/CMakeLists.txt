@@ -75,6 +75,7 @@ endif(ENABLE_WEBENGINE)
 target_link_libraries( views PUBLIC
   kmm_mymoney # needed to load payeeIdentifier
   kmm_widgets
+  kmm_printer
 )
 
 # we rely on some of the dialogs to be generated

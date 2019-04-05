@@ -35,9 +35,15 @@ set( kmm_utils_platformtools_HEADER
   platformtools.h
 )
 
+set( kmm_printer_SRCS
+  kmm_printer.cpp
+)
+
+
 add_library(kmm_utils_validators STATIC ${kmm_utils_validators_SRCS})
 add_library(kmm_utils_webconnect STATIC ${kmm_utils_webconnect_SRCS})
 add_library(kmm_utils_platformtools STATIC ${kmm_utils_platformtools_SRCS})
+add_library(kmm_printer SHARED ${kmm_printer_SRCS})
 
 target_link_libraries( kmm_utils_validators
   PUBLIC
@@ -55,3 +61,20 @@ target_link_libraries( kmm_utils_platformtools
   PUBLIC
   Qt5::Core
 )
+
+target_link_libraries(kmm_printer
+  PUBLIC
+  Qt5::Core
+  Qt5::PrintSupport
+)
+
+set_target_properties(kmm_printer PROPERTIES
+  VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
+)
+
+generate_export_header(kmm_printer)
+
+install(TARGETS kmm_printer ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_printer_export.h
+  DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
+

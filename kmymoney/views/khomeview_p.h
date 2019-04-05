@@ -41,7 +41,6 @@
 #include <QPrintDialog>
 #include <QVBoxLayout>
 #include <QPrinter>
-#include <QPointer>
 #ifdef ENABLE_WEBENGINE
 #include <QWebEngineView>
 #else
@@ -127,7 +126,6 @@ public:
     m_showAllSchedules(false),
     m_needLoad(true),
     m_netWorthGraphLastValidSize(400, 300),
-    m_currentPrinter(nullptr),
     m_scrollBarPos(0)
   {
   }
@@ -482,6 +480,8 @@ public:
             case 6:         // net worth graph over all accounts
               showNetWorthGraph();
               break;
+            case 7:         // forecast (history) - currently unused
+              break;
             case 8:         // assets and liabilities
               showAssetsLiabilities();
               break;
@@ -491,8 +491,6 @@ public:
             case 10:         // cash flow summary
               showCashFlowSummary();
               break;
-
-
           }
           m_html += "<div class=\"gap\">&nbsp;</div>\n";
         }
@@ -1848,7 +1846,6 @@ public:
     * daily forecast balance of accounts
     */
   QMap<QString, dailyBalances> m_accountList;
-  QPrinter *m_currentPrinter;
   int       m_scrollBarPos;
 };
 

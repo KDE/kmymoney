@@ -48,6 +48,7 @@ void KForecastView::slotTabChanged(int index)
   KConfigGroup grp = config->group("Last Use Settings");
   grp.writeEntry("KForecastView_LastType", QVariant(tab).toString());
 
+  d->loadForecastSettings();
   d->loadForecast(tab);
 }
 

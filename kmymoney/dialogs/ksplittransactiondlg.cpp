@@ -46,6 +46,7 @@
 #include "ui_ksplittransactiondlg.h"
 #include "ui_ksplitcorrectiondlg.h"
 
+#include "kmymoneyutils.h"
 #include "mymoneyfile.h"
 #include "kmymoneysplittable.h"
 #include "mymoneymoney.h"
@@ -136,6 +137,7 @@ public:
     q->connect(ui->transactionsTable, &KMyMoneySplitTable::transactionChanged,
             q, &KSplitTransactionDlg::slotSetTransaction);
     q->connect(ui->transactionsTable, &KMyMoneySplitTable::createCategory, q, &KSplitTransactionDlg::slotCreateCategory);
+    q->connect(ui->transactionsTable, &KMyMoneySplitTable::createTag, q, &KSplitTransactionDlg::slotCreateTag);
     q->connect(ui->transactionsTable, &KMyMoneySplitTable::objectCreation, q, &KSplitTransactionDlg::objectCreation);
 
     q->connect(ui->transactionsTable, &KMyMoneySplitTable::returnPressed, q, &KSplitTransactionDlg::accept);
@@ -565,3 +567,8 @@ void KSplitTransactionDlg::slotCreateCategory(const QString& name, QString& id)
   id = acc.id();
 }
 
+void KSplitTransactionDlg::slotCreateTag(const QString& txt, QString& id)
+{
+  KMyMoneyUtils::newTag(txt, id);
+  emit createTag(txt, id);
+}
