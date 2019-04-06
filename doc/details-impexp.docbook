@@ -31,7 +31,7 @@
   <listitem><para>import of 'multi-book' files</para></listitem>
   <listitem><para>import into an existing &kmymoney; file</para></listitem>
   <listitem><para>import of small-business specific features (Employees,
-    Invoices, etc.)</para></listitem>
+    Invoices, &etc;)</para></listitem>
   <listitem><para>export to GnuCash files.</para></listitem>
 </itemizedlist>
 
@@ -196,7 +196,7 @@
   As with GnuCash, data is entered in the form of transactions, each generally
   consisting of 2 or more split entries. In fact, valid GnuCash transactions
   will always contain at least 2 splits, and to conform to GnuCash's
-  double-entry bookkeeping standard, these must be in monetary balance (i.e.,
+  double-entry bookkeeping standard, these must be in monetary balance (&ie;,
   they must balance out to zero). &kmymoney; encourages, but does not enforce,
   this standard, but any imported transaction which is not balanced will be
   marked in the ledger view as having a problem.
@@ -461,13 +461,13 @@
 
 <para>
   If your native language is written in letters or symbols which are different
-  from those used in the 'Latin' languages (i.e., generally Western European),
+  from those used in the 'Latin' languages (&ie;, generally Western European),
   these are represented in a special fashion ('encoded') in your GnuCash file.
   If these letters are not displayed correctly on your screen, then they must be
   decoded.  Currently, it is often not possible to detect accurately which form
   of decoding must be used, so you may need to set this option and select an
   entry from the list.  In general, the first item in the list will be that
-  which is considered appropriate for your locale (i.e., the country and
+  which is considered appropriate for your locale (&ie;, the country and
   language which was selected as native when your operating system was
   installed), so this should be tried first.  Since the import process does not
   overwrite your GnuCash file, you are free to experiment with any of these
@@ -968,7 +968,7 @@
   still variations, depending on the specific implementation used by any
   institution.  OFX files may have an extension of <quote>OFX</quote> or
   <quote>QFX</quote> (upper or lower case); this does not imply any particular
-  difference in the content.  The specification is based on XML, so the files
+  difference in the content.  The specification is based on &XML;, so the files
   can be read in any text editor, but as whitespace is not relevant to the
   content itself, some implementations do not use any, making it very hard for a
   human to read.

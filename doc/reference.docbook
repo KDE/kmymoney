@@ -576,7 +576,7 @@
     <term><menuchoice>
       <shortcut>
         <keycombo>
-          &Ctrl;&Alt;<keycap>Space</keycap>
+          &Ctrl;&Alt;&Space;
         </keycombo>
       </shortcut>
       <guimenu>Transaction</guimenu>
@@ -592,7 +592,7 @@
     <term><menuchoice>
       <shortcut>
         <keycombo>
-          &Ctrl;&Shift;<keycap>Space</keycap>
+          &Ctrl;&Shift;&Space;
         </keycombo>
       </shortcut>
       <guimenu>Transaction</guimenu>

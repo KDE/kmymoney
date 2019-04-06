@@ -117,7 +117,7 @@
   You can also change transaction properties or even create new transactions
   directly in the list.  In the transactions list, the default order of
   transactions is sorted by date with the most recent transaction on the bottom.
-  Clicking the Right Mouse Button on the header of the transaction list brings
+  Clicking the &RMB; on the header of the transaction list brings
   up a dialog box that will allow  the ability to change the sort order of the
   transactions. For instructions on how to change the default sort order, see the <link
   linkend="details.settings.register.sorting">Sorting tab</link> section of the
@@ -410,9 +410,9 @@
 <para>	
   To enter a new transaction into the register you can now either click on an
   empty entry, press <keycombo
-  action="simul">&Ctrl;<keycap>Ins</keycap></keycombo>, or click
-  <guibutton>New</guibutton> at the foot of the window. The <keycap>Up</keycap>
-  and <keycap>Down</keycap> arrow keys let you navigate through the list.  After
+  action="simul">&Ctrl;&Ins;</keycombo>, or click
+  <guibutton>New</guibutton> at the foot of the window. The &Up;
+  and &Down; arrow keys let you navigate through the list.  After
   pressing &Enter; or double clicking on an entry, the transaction list displays
   the fields required to enter the transaction and waits for input.
 </para>
@@ -426,7 +426,7 @@
 <para>
   In case the option <guilabel>Use Enter to move between fields</guilabel> is
   selected, the &Enter; key moves to the next field just as the
-  <keycap>TAB</keycap> key except for the last entry field where it saves the
+  &Tab; key except for the last entry field where it saves the
   data.
 </para>
 
@@ -458,7 +458,7 @@
 <para>
   In the split editor screen, double-click an empty line to enter a new
   sub-transaction or press <keycombo
-  action="simul">&Ctrl;<keycap>Ins</keycap></keycombo>. Specify the category,
+  action="simul">&Ctrl;&Ins;</keycombo>. Specify the category,
   add an (optional) memo, and enter the amount. To save this part of the split,
   press the green check mark under the category. To cancel, press the red cross.
 </para> 

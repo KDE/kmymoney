@@ -30,7 +30,7 @@
 </para>
 
 <para>
-  Although work has begun porting &kmymoney; to the new KDE Frameworks 5, this is
+  Although work has begun porting &kmymoney; to the new &kf5-full;, this is
   still very early, and not yet usable.  Hopefully it will be available in the
   5.0 version, which we expect to release in early 2015.  Until then, if you are
   specifically interested in following this work, you should subscribe to the
@@ -73,7 +73,7 @@
   installation issues will be available on the <ulink
   url="http://www.kmymoney.org">&kmymoney; home page</ulink>.  That page will
   also have links to tarballs of recent versions as well as instructions for
-  obtaining the source from &kde; Git, in case you want to compile the latest,
+  obtaining the source from &kde; &git;, in case you want to compile the latest,
   development version.
 </para>
 
@@ -89,7 +89,7 @@
   On the other hand, if you want to see the current state of development, to
   check out a recent bug fix or new feature, you can download a tarball which is
   a snapshot of the development repository.  You can also check the source
-  directly out of the repository.  The version 4.x source is in &kde; Git.  (The
+  directly out of the repository.  The version 4.x source is in &kde; &git;.  (The
   version 1.0.x source was in SourceForge cvs, but it is no longer being
   developed or supported at all.)  Instructions for access are on the project
   home page.
@@ -97,7 +97,7 @@
 
 <warning>
  <para>
-   The code in the Git repository and in development snapshots is under active
+   The code in the &git; repository and in development snapshots is under active
    development: it may have bugs, it may crash, and it may mess up or lose data.
    If you use it, be absolutely sure to make adequate backups.  Unless you have
    a good reason to use this, stick to a stable released version.
@@ -157,7 +157,7 @@
 </para></important>
 
 <para>
-  If you have compiled the source from git, and want to update to the latest
+  If you have compiled the source from &git;, and want to update to the latest
   revision, most of the time you can do the following:
 </para>
 

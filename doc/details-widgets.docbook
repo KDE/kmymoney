@@ -80,7 +80,7 @@
   At the bottom of the datepicker widget, there are a button, a text edit field,
   and a combo box. Pressing the button selects today's date in the
   datepicker. The text field can be used to enter a specific date. Pressing the
-  <keycap>RETURN</keycap> key shows that date in the datepicker widget.  The
+  &Enter; key shows that date in the datepicker widget.  The
   combo box allows the user to select a specific week, and continue to pick a
   date from there.
 </para>
