@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>634</width>
-    <height>338</height>
+    <width>638</width>
+    <height>368</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -381,27 +381,11 @@
        <item>
         <widget class="QGroupBox" name="buttonGroupBox1">
          <property name="title">
-          <string/>
+          <string>Import options</string>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <widget class="QLabel" name="textLabel3_2">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>1</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Payee's name is based on contents of the OFX tag</string>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="KComboBox" name="m_preferredPayee">
+         <layout class="QGridLayout" name="gridLayout_3" rowstretch="2,0,0">
+          <item row="0" column="1">
+           <widget class="QComboBox" name="m_preferredPayee">
             <item>
              <property name="text">
               <string notr="true">PAYEEID</string>
@@ -419,24 +403,52 @@
             </item>
            </widget>
           </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="groupBox">
-         <property name="whatsThis">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;In case the server is located in a different timezone than your local time, then the post date of imported transactions is off by a day.&lt;/p&gt;&lt;p&gt;This setting can be used to adjust the timestamps of the transactions during import to reflect your local time. It does not affect previously imported transactions. &lt;/p&gt;&lt;p&gt;If you are located west of your bank's server than enter a negative time, in case you are located east of it enter a positive time.&lt;/p&gt;&lt;p&gt;If you are not sure, leave this setting at 0:00.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_6">
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,0,0">
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Method to detect duplicate transactions during import</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="m_uniqueTransactionId">
             <item>
-             <widget class="QLabel" name="label">
-              <property name="text">
-               <string>Timezone offset</string>
-              </property>
-             </widget>
+             <property name="text">
+              <string>OFX FITID</string>
+             </property>
             </item>
+            <item>
+             <property name="text">
+              <string>KMyMoney Hash</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="textLabel3_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>1</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Payee's name is based on contents of the OFX tag</string>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Timezone offset</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <layout class="QHBoxLayout" name="hl2" stretch="0,1">
             <item>
              <widget class="KComboBox" name="m_timestampOffsetSign">
               <item>
@@ -481,9 +493,9 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
+   <class>KLed</class>
+   <extends>QWidget</extends>
+   <header>kled.h</header>
   </customwidget>
   <customwidget>
    <class>KLineEdit</class>
@@ -491,9 +503,9 @@
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KLed</class>
-   <extends>QWidget</extends>
-   <header>kled.h</header>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneyDateInput</class>
