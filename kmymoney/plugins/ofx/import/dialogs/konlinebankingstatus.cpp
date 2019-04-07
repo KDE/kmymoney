@@ -51,6 +51,7 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
   m_ledOnlineStatus->off();
 
   m_preferredPayee->setCurrentIndex(0);
+  m_uniqueTransactionId->setCurrentIndex(0);
 
   buttonGroupBox2->setContentsMargins(0, 0, 0, 0);
 
@@ -100,6 +101,7 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
     m_specificDate->setDate(QDate::currentDate());
   m_specificDate->setMaximumDate(QDate::currentDate());
   m_preferredPayee->setCurrentIndex(settings.value("kmmofx-preferName").toInt());
+  m_uniqueTransactionId->setCurrentIndex(settings.value("kmmofx-uniqueIdSource").toInt());
 
   const int offset = settings.value("kmmofx-timestampOffset").toInt();
   m_timestampOffsetSign->setCurrentIndex(offset < 0 ? 1 : 0);

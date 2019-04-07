@@ -23,6 +23,7 @@
 
 #include <QFileDialog>
 #include <QPointer>
+#include <QGridLayout>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -47,6 +48,13 @@ QUrl KMyMoneyPlugin::KMMImportInterface::selectFile(const QString& title, const 
 
   QPointer<QFileDialog> dialog = new QFileDialog(nullptr, title, path, mask);
   dialog->setFileMode(mode);
+  dialog->setOption(QFileDialog::DontUseNativeDialog);
+
+  // insert additional widgets into the file open dialog
+  QGridLayout* layout = qobject_cast<QGridLayout*>(dialog->layout());
+  if (layout) {
+    layout->addWidget(widget, layout->rowCount(), 0, 1, layout->columnCount());
+  }
 
   QUrl url;
   if (dialog->exec() == QDialog::Accepted && dialog != 0) {
