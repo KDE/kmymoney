@@ -91,7 +91,7 @@
   <listitem><para>Investment Holdings by Account:  Shows the current shares,
     price, and value for each account.</para></listitem>
   <listitem><para>Investment Holdings by Type:  Same as the previous report, but
-    organizes the accounts by type (Stock, Mutual Fund, etc)</para></listitem>
+    organizes the accounts by type (Stock, Mutual Fund, &etc;)</para></listitem>
   <listitem><para>Investment Performance by Account: Shows the annualized
     performance over any period of time.  This performs a cash flow analysis of
     all money coming into and going out of the account.  As a result, this is a
@@ -99,7 +99,7 @@
     doing.</para></listitem>
   <listitem><para>Investment Performance by Type:  Same as the previous report,
     but organizes the accounts by type (Stock, Mutual Fund,
-    etc)</para></listitem>
+    &etc;)</para></listitem>
 </itemizedlist>
 
 <para>

@@ -67,7 +67,7 @@ using KWallet::Wallet;
 class OFXImporter::Private
 {
 public:
-  Private() : m_valid(false), m_preferName(PreferId), m_walletIsOpen(false), m_statusDlg(0), m_wallet(0),
+  Private() : m_valid(false), m_preferName(PreferId), m_uniqueIdSource(OFX), m_walletIsOpen(false), m_statusDlg(0), m_wallet(0),
               m_updateStartDate(QDate(1900,1,1)), m_timestampOffset(0) {}
 
   bool m_valid;
@@ -76,6 +76,10 @@ public:
     PreferName,
     PreferMemo
   } m_preferName;
+  enum UniqueTransactionIdSource {
+    OFX,
+    KMyMoney
+  } m_uniqueIdSource;
   bool m_walletIsOpen;
   QList<MyMoneyStatement> m_statementlist;
   QList<MyMoneyStatement::Security> m_securitylist;
@@ -87,6 +91,18 @@ public:
   Wallet *m_wallet;
   QDate m_updateStartDate;
   int m_timestampOffset;
+  QSet<QString> m_hashes;
+
+  int constructTimeOffset(const QTimeEdit* timestampOffset, const KComboBox* timestampOffsetSign) const
+  {
+    // get offset in minutes
+    int offset = timestampOffset->time().msecsSinceStartOfDay() / 1000 / 60;
+    if (timestampOffsetSign->currentText() == QStringLiteral("-")) {
+      offset = -offset;
+    }
+    return offset;
+  }
+
 };
 
 
@@ -151,6 +167,8 @@ void OFXImporter::slotImportFile()
              widget);
 
   d->m_preferName = static_cast<OFXImporter::Private::NamePreference>(option->m_preferName->currentIndex());
+  d->m_uniqueIdSource = static_cast<OFXImporter::Private::UniqueTransactionIdSource>(option->m_uniqueIdSource->currentIndex());
+  d->m_timestampOffset = d->constructTimeOffset(option->m_timestampOffset, option->m_timestampOffsetSign);
 
   if (url.isValid()) {
     const QString filename(url.toLocalFile());
@@ -243,6 +261,8 @@ bool OFXImporter::import(const QString& filename)
   // This has no setter (see libofx.h)
   ofx_show_position = false;
 
+  d->m_hashes.clear();
+
   qDebug("setup callback routines");
   ofx_set_transaction_cb(ctx, ofxTransactionCallback, this);
   ofx_set_statement_cb(ctx, ofxStatementCallback, this);
@@ -310,10 +330,47 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
     t.m_strNumber = QString::fromUtf8(data.check_number);
   }
 
-  if (data.fi_id_valid) {
-    t.m_strBankID = QStringLiteral("ID ") + QString::fromUtf8(data.fi_id);
-  } else if (data.reference_number_valid) {
-    t.m_strBankID = QStringLiteral("REF ") + QString::fromUtf8(data.reference_number);
+  unsigned long h;
+  QString tmpString;
+  switch (pofx->d->m_uniqueIdSource) {
+    default:
+    case OFXImporter::Private::OFX:
+      if (data.fi_id_valid) {
+        t.m_strBankID = QStringLiteral("ID ") + QString::fromUtf8(data.fi_id);
+      } else if (data.reference_number_valid) {
+        t.m_strBankID = QStringLiteral("REF ") + QString::fromUtf8(data.reference_number);
+      }
+      break;
+
+    case OFXImporter::Private::KMyMoney:
+      if (data.payee_id_valid) {
+        tmpString = QString::fromUtf8(data.payee_id);
+      } else if (data.name_valid) {
+        tmpString = QString::fromUtf8(data.name);
+      } else if (data.memo_valid) {
+        tmpString = QString::fromUtf8(data.memo);
+      }
+      h = MyMoneyTransaction::hash(tmpString.trimmed());
+      if (data.memo_valid)
+        h = MyMoneyTransaction::hash(QString::fromUtf8(data.memo), h);
+
+      h = MyMoneyTransaction::hash(t.m_amount.toString(), h);
+      // make hash value unique in case we don't have one already
+
+      QString hashBase;
+      hashBase.sprintf("%s-%07lx", qPrintable(t.m_datePosted.toString(Qt::ISODate)), h);
+      int idx = 1;
+      QString hash;
+      for (;;) {
+        hash = QString("%1-%2").arg(hashBase).arg(idx);
+        if (!pofx->d->m_hashes.contains(hash)) {
+          pofx->d->m_hashes += hash;
+          break;
+        }
+        ++idx;
+      }
+      t.m_strBankID = QString("KMM %1").arg(hash);
+      break;
   }
 
   // Decide whether to use NAME, PAYEEID or MEMO to construct the payee
@@ -561,6 +618,8 @@ int OFXImporter::ofxAccountCallback(struct OfxAccountData data, void * pv)
 
   // Having any account at all makes an ofx statement valid
   pofx->d->m_valid = true;
+  // new account means new hashes
+  pofx->d->m_hashes.clear();
 
   if (data.account_id_valid) {
     s.m_strAccountName = QString::fromUtf8(data.account_name);
@@ -733,18 +792,15 @@ MyMoneyKeyValueContainer OFXImporter::onlineBankingSettings(const MyMoneyKeyValu
     kvp.setValue(QStringLiteral("kmmofx-pickDate"), QString::number(d->m_statusDlg->m_pickDateRB->isChecked()));
     kvp.setValue(QStringLiteral("kmmofx-specificDate"), d->m_statusDlg->m_specificDate->date().toString());
     kvp.setValue(QStringLiteral("kmmofx-preferName"), QString::number(d->m_statusDlg->m_preferredPayee->currentIndex()));
+    kvp.setValue(QStringLiteral("kmmofx-uniqueIdSource"), QString::number(d->m_statusDlg->m_uniqueTransactionId->currentIndex()));
     if (!d->m_statusDlg->m_clientUidEdit->text().isEmpty())
       kvp.setValue(QStringLiteral("clientUid"), d->m_statusDlg->m_clientUidEdit->text());
     else
       kvp.deletePair(QStringLiteral("clientUid"));
-    if (d->m_statusDlg->m_timestampOffset->time().msecsSinceStartOfDay() == 0) {
+    int offset = d->constructTimeOffset(d->m_statusDlg->m_timestampOffset, d->m_statusDlg->m_timestampOffsetSign);
+    if (offset == 0) {
       kvp.deletePair(QStringLiteral("kmmofx-timestampOffset"));
     } else {
-      // get offset in minutes
-      int offset = d->m_statusDlg->m_timestampOffset->time().msecsSinceStartOfDay() / 1000 / 60;
-      if (d->m_statusDlg->m_timestampOffsetSign->currentText() == QStringLiteral("-")) {
-        offset = -offset;
-      }
       kvp.setValue(QStringLiteral("kmmofx-timestampOffset"), QString::number(offset));
     }
     // get rid of pre 4.6 values
@@ -779,6 +835,7 @@ bool OFXImporter::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
     if (!acc.id().isEmpty()) {
       // Save the value of preferName to be used by ofxTransactionCallback
       d->m_preferName = static_cast<OFXImporter::Private::NamePreference>(acc.onlineBankingSettings().value(QStringLiteral("kmmofx-preferName")).toInt());
+      d->m_uniqueIdSource = static_cast<OFXImporter::Private::UniqueTransactionIdSource>(acc.onlineBankingSettings().value(QStringLiteral("kmmofx-uniqueIdSource")).toInt());
       QPointer<KOfxDirectConnectDlg> dlg = new KOfxDirectConnectDlg(acc);
 
       connect(dlg.data(), &KOfxDirectConnectDlg::statementReady, this, static_cast<void (OFXImporter::*)(const QString &)>(&OFXImporter::slotImportFile));

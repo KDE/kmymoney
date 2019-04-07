@@ -119,7 +119,7 @@
 
 <para>
   The first thing you'll be asked to enter is the type of investment, whether
-  it's a stock, bond, etc.
+  it's a stock, bond, &etc;
 </para>
 
 <para>
@@ -640,7 +640,7 @@
 <para>
   Certain common features that are normally found with investments are not yet
   implemented in &kmymoney;.  These include: Derivatives (options, futures,
-  etc), capital gains, and tax reporting for investments.
+  &etc;), capital gains, and tax reporting for investments.
 </para>
 </sect1>
 </chapter>

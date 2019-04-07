@@ -271,7 +271,7 @@
 <listitem>
 <para>
   The <guilabel>Type/Action</guilabel> selector is to identify the column which
-  contains the action type, such as Buy, Sell, Dividend, etc.
+  contains the action type, such as Buy, Sell, Dividend, &etc;
 </para>
 </listitem>
 
@@ -475,14 +475,14 @@
 <para>
   If you have more that one transaction referring to the same security, you can
   edit all of them at once, using multi-select.  For instance, to add a symbol for
-  several lines, press and hold the <keysym>CTL</keysym> key, and in the symbol column,
-  select each transaction.  While still holding the <keysym>CTL</keysym> key,
+  several lines, press and hold the &Ctrl; key, and in the symbol column,
+  select each transaction.  While still holding the &Ctrl; key,
   all those symbol cells should still be selected, so click on one and enter the
   symbol.  Click inside the window but outside that column, or hit
-  <keysym>Enter</keysym> (not <guilabel>OK</guilabel>).  Now that those
+  &Enter; (not <guilabel>OK</guilabel>).  Now that those
   transactions all have the same symbol, double click one detail entry and edit
   the security name as you wish.  Click elsewhere on the window (or
-  <keysym>Enter</keysym>) to accept the edit, which will then change all
+  &Enter;) to accept the edit, which will then change all
   those entries.  The remaining entries will show the symbols picked up from the
   transactions in the import file.
 </para>
@@ -589,7 +589,7 @@
   the plugin will validate the column contents to ensure they match the action
   type.  For instance, if a quantity appears but no price or amount, it is
   assumed that the transaction can be only an Add or Remove Shares.  Or, if
-  there is an amount but no quantity or price, then a Dividend is assumed, etc..
+  there is an amount but no quantity or price, then a Dividend is assumed, &etc;.
 </para>
 
 <para>

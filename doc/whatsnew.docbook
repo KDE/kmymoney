@@ -15,8 +15,8 @@
 
 <para>
 
-  The largest amount of work has gone towards basing this version on KDE
-  Frameworks.  Many of the underlying libraries used by the application have
+  The largest amount of work has gone towards basing this version on
+  &kde-frameworks;.  Many of the underlying libraries used by the application have
   been reorganized and improved, but most of that is behind the scenes, and not
   directly visible to the end user.  Some of the general look and feel may have
   changed, but the basic functionality of the program remains the same, aside

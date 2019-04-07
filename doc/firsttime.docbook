@@ -51,7 +51,7 @@
 </note>
 
 <para>
-  All tips have been extracted from the Frequently Asked Questions list (FAQ)
+  All tips have been extracted from the Frequently Asked Questions list (&FAQ;)
   that provides more detailed help and can be found on the project <ulink
   url="http://www.kmymoney.org/faq.php">website</ulink> and in <link
   linkend="faq">this manual</link>.
@@ -68,7 +68,7 @@
     this manual.  Many details, such as fonts, colors, and icons, can be
     customized, either using the
     <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-    &kmymoney;...</guimenuitem></menuchoice> dialog or the KDE System Settings
+    &kmymoney;...</guimenuitem></menuchoice> dialog or the &kde; &systemsettings;
     application, depending on your operating system.
   </para>
 </note>
@@ -484,7 +484,7 @@
   Choose the appropriate country and account template(s). Each template provides
   a different set of categories for organizing your finances. Multiple
   templates, even from different countries, can be selected using a combination
-  of &Ctrl; and &Shift; together with the left mouse button.  The account
+  of &Ctrl; and &Shift; together with the &LMB;.  The account
   hierarchy to be setup will be shown in a preview part of the wizard. In case
   you cannot find a template that suits your needs, don't select a template at
   this time, and you can manually set up categories later.
