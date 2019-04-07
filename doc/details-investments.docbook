@@ -185,7 +185,7 @@
 
   <listitem><para>Trading currency. The market exchange currency in which this
       investment trades.  This is typically the country that the security trades
-      within.  It is usually, but not necessariy, the same as the default currency
+      within.  It is usually, but not necessarily, the same as the default currency
       for the Investment account holding that security.
   </para></listitem>
 
@@ -334,7 +334,7 @@
     <para>
       A simple increase or decrease in the number of shares you own.  This should be
       used very rarely, because it's uncommon for shares to just show up in your
-      account (or disappear) unless it's a purchase or a sale.  One use of thes
+      account (or disappear) unless it's a purchase or a sale.  One use of these
       activities is for some situations &kmymoney; does not natively handle, such as
       the exchange of some number of shares of a security for a different number of
       shares of a different class of the same security.
