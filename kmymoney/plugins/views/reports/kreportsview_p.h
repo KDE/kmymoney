@@ -281,11 +281,27 @@ void KReportTab::print()
   if (m_tableView) {
     auto printer = KMyMoneyPrinter::startPrint();
     if (printer != nullptr) {
+      if (m_showingChart) {
+        QPainter painter(printer);
+        m_chartView->paint(&painter, painter.window());
+        QFont font = painter.font();
+        font.setPointSizeF(font.pointSizeF() * 0.8);
+        painter.setFont(font);
+        QLocale locale;
+        painter.drawText(0, 0, QDate::currentDate().toString(locale.dateFormat(QLocale::ShortFormat)));
+
+        /// @todo extract url from KMyMoneyApp
+        QUrl file;
+        if (file.isValid()) {
+          painter.drawText(0, painter.window().height(), file.toLocalFile());
+        }
+      } else {
     #ifdef ENABLE_WEBENGINE
-      m_tableView->page()->print(printer, [=] (bool) {});
+        m_tableView->page()->print(printer, [=] (bool) {});
     #else
-      m_tableView->print(printer);
+        m_tableView->print(printer);
     #endif
+      }
     }
   }
 }
