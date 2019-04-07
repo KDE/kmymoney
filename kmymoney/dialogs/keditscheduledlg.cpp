@@ -484,9 +484,11 @@ void KEditScheduleDlg::newSchedule(const MyMoneyTransaction& _t, eMyMoney::Sched
       schedule.setNextDueDate(schedule.nextPayment(t.postDate()));
   }
 
-  QPointer<KEditScheduleDlg> dlg = new KEditScheduleDlg(schedule, nullptr);
-  QPointer<TransactionEditor> transactionEditor = dlg->startEdit();
-  if (transactionEditor) {
+  bool committed;
+  do {
+    committed = true;
+    QPointer<KEditScheduleDlg> dlg = new KEditScheduleDlg(schedule, nullptr);
+    QPointer<TransactionEditor> transactionEditor = dlg->startEdit();
     KMyMoneyMVCCombo::setSubstringSearchForChildren(dlg, !KMyMoneySettings::stringMatchFromStart());
     if (dlg->exec() == QDialog::Accepted && dlg != 0) {
       MyMoneyFileTransaction ft;
@@ -497,11 +499,12 @@ void KEditScheduleDlg::newSchedule(const MyMoneyTransaction& _t, eMyMoney::Sched
 
       } catch (const MyMoneyException &e) {
         KMessageBox::error(nullptr, i18n("Unable to add scheduled transaction: %1", QString::fromLatin1(e.what())), i18n("Add scheduled transaction"));
+        committed = false;
       }
     }
-  }
-  delete transactionEditor;
-  delete dlg;
+    delete transactionEditor;
+    delete dlg;
+  } while(!committed);
 }
 
 void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule)
