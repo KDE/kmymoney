@@ -384,7 +384,7 @@
   any two of these, and &kmymoney; will calculate the third.  It's usually best to
   enter just the total amount and the number of shares, because these are the known
   facts of the transaction.  &kmymoney; will automatically calculate the price per
-  share.  Note that there is is only one entry field for the price, and it will be
+  share.  Note that there is only one entry field for the price, and it will be
   labeled
   <quote>Transaction amount</quote> or <quote>Price/share</quote> depending on the
   setting of the <guilabel>Price entry</guilabel> option when the account
@@ -625,7 +625,7 @@
   technical user.  You should feel comfortable reading HTML and writing complex
   regular expressions.  If this doesn't sound like you, we recommend writing to the
   developer's list if none of the quote sources work for you.  Ideally, please point
-  us to a web page where these quotes can be obtained.  Additionaly you can consult
+  us to a web page where these quotes can be obtained.  Additionally you can consult
   with members of the KDE Community Forum for &kmymoney; as they may already have a
   solution available for your needs.
 </para>
