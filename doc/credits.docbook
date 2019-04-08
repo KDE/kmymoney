@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="credits">
 <chapterinfo>
-  <date>2014-08-30</date>
-  <releaseinfo>4.7.01</releaseinfo>
+  <date>2019-04-05</date>
+  <releaseinfo>5.0.4</releaseinfo>
 </chapterinfo>
 
 <title>Credits</title>
 
 <para>
-  Program Copyright &copy; 2000-2018 The KMyMoney Development Team
+  Program Copyright &copy; 2000-2019 The KMyMoney Development Team
 </para>
 
 <para>
@@ -16,7 +16,7 @@
 </para>
 
 <para>
-  Documentation Copyright &copy; 2000-2018 The KMyMoney Development Team
+  Documentation Copyright &copy; 2000-2019 The KMyMoney Development Team
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
@@ -39,34 +39,11 @@
 
   <listitem>
     <formalpara>
-      <title>Łukasz Wojniłowicz &Lukasz.Wojnilowicz.mail;</title>
-      <para>Developer.</para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
       <title>Ralf Habacker &Ralf.Habacker.mail;</title>
       <para>Developer.</para>
     </formalpara>
   </listitem>
-
-  <listitem>
-    <formalpara>
-      <title>Cristian Oneţ &Cristian.Onet.mail;</title>
-      <para>Patches and Plugins.</para>
-    </formalpara>
-  </listitem>
-
-  <listitem>
-    <formalpara>
-      <title>Cristian Dávid &Christian.David.mail;</title>
-      <para>Developer.</para>
-    </formalpara>
-  </listitem>
-
 </itemizedlist>
-
 </sect1>
 
 <sect1 id="credits.special">
@@ -136,6 +113,27 @@
 <title>Inactive Developers and Contributors to Previous Versions</title>
 
 <itemizedlist>
+  <listitem>
+    <formalpara>
+      <title>Cristian Oneţ &Cristian.Onet.mail;</title>
+      <para>Patches and Plugins.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title>Cristian Dávid &Christian.David.mail;</title>
+      <para>Developer.</para>
+    </formalpara>
+  </listitem>
+
+  <listitem>
+    <formalpara>
+      <title>Łukasz Wojniłowicz &Lukasz.Wojnilowicz.mail;</title>
+      <para>Developer.</para>
+    </formalpara>
+  </listitem>
+
   <listitem>
     <formalpara>
       <title>Michael Edwardes &Michael.T.Edwardes.mail;</title>

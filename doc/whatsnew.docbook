@@ -1,117 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="whatsnew">
 <chapterinfo>
-  <date>2018-02-01</date>
-  <releaseinfo>5.0.0</releaseinfo>
+  <date>2019-04-04</date>
+  <releaseinfo>5.0.4</releaseinfo>
 </chapterinfo>
-
 <title>What's new in this release</title>
 
+<sect1>
+<title>Bug fixes and enhancements to functionality</title>
+
 <para>
-  As with every release, the &kmymoney; development team has been working hard
-  to make this release better and easier to use in every way. We have also made
-  quite a few improvements. We are confident you will like what you see.
+  As with every release, the &kmymoney; development team has been working hard to
+  make this release better and easier to use in every way.  This is the fourth
+  release in the 5.0 series, and most of the activity has been directed to fixing
+  bugs.
 </para>
 
 <para>
-
-  The largest amount of work has gone towards basing this version on
-  &kde-frameworks;.  Many of the underlying libraries used by the application have
-  been reorganized and improved, but most of that is behind the scenes, and not
-  directly visible to the end user.  Some of the general look and feel may have
-  changed, but the basic functionality of the program remains the same, aside
-  from intentional improvements and additions.
+  At this point, the conversion to using &kde-frameworks; is essentially complete,
+  although that and the work to update many of the underlying libraries used by the
+  application are behind the scenes and not directly visible to the end user.  The
+  general look and feel should be stable, although some minor changes may still
+  occur.  The basic functionality of the program also remains the same, aside from
+  intentional improvements and additions.
 </para>
 
 <para>
-  In addition to adapting to new and updated libraries, there have also been
-  numerous bug fixes, as well as several new features and improved
-  functionality.  Although this means there have been some major changes to the
-  underlying code, this version has actually been used in production by many of
-  the developers, so it has actually had a significant amount of testing.
+  In past releases, this page of the manual has included a list of many of the
+  specific bug fixes and functional enhancements.
+  However, rather than duplicating that information, you can find it directly in the
+  <ulink url="https://kmymoney.org/release-notes.php">Release Notes</ulink>.
 </para>
 
 <para>
-  Here are some of the new features found in this release:
-</para>
-
-<itemizedlist>
-  <listitem>
-    <para>
-      Multiple improvements to reports, including better performance.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      Allow logarithmic axes in report graphs.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      When deleting a security, automatically delete its prices.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      Allow separate beginning balance accounts for different currencies.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      Added support for several new currencies
-    </para>
-  </listitem>
-</itemizedlist>
-
-<para>
-  Here are some of the major bugs which have been fixed:
+  Since the release of 5.0, there have been some changes which will need adjustments
+  on the user's side if you are upgrading from 4.8.x or an older version.
 </para>
 
 <itemizedlist>
-  <listitem>
-    <para>
-      Elimination of several crashes.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      Fix problems with report graphs using older data.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      Fix rounding errors in some investment transactions.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
-      Removed Yahoo from stock and currency price sources, as they no longer
-      provide this service
-    </para>
-  </listitem>
+  <listitem><para>
+    The program searches for the templates for the printcheck plugin
+    in different locations.  The user needs to account for this in the plugins
+    setting dialog, <link linkend="details.settings.plugins">see this section for
+    more details.</link>
+  </para></listitem>
 </itemizedlist>
+</sect1>
+
+<sect1>
+<title>Updates to this Handbook</title>
 
 <para>
-  There are a some changes which will need some adjustments on the user's side
-  if you are upgrading from 4.8.x or an older version
+  While we continue to make progress, there are still chapters of this handbook which
+  have not been updated to reflect all changes in the program which are visible to
+  the user as of 5.0.  Each chapter does identify the release of &kmymoney; for which
+  it was last updated, but we present the complete list here, as a quick reference.
 </para>
 
-<itemizedlist>
-  <listitem>
-    <para>
-      The program searches for the templates for the printcheck plugin in
-      different locations.  The user needs to account for this in the plugins
-      setting dialog, <link linkend="details.settings.plugins">see this section
-      for more details.</link>
-    </para>
-  </listitem>
-</itemizedlist>
+<para>
+  However, please note that extent to which the chapters which have not been
+  explicitly updated do or do not reflect the current operation of the program
+  depends on how much that area of the program has changed between the 4.8 and the
+  5.0 releases.  
+</para>
+  
+<informaltable frame="none">
+  <tgroup cols="2">
+    <thead>
+      <row>
+	<entry><para>Chapters updated for 5.x</para></entry>
+	<entry><para>Chapters not yet updated for 5.x</para></entry>
+      </row>
+    </thead>
+    <tbody>
+      <row>
+	<entry valign="top">
+	  <simplelist>
+	    <member><link linkend="introduction">Introduction</link></member>
+	    <member><link linkend="whatsnew">What's new in this release</link></member>
+	    <member><link linkend="makingmostof">Making the most of &kmymoney;</link></member>
+	    <member><link linkend="firsttime">Using &kmymoney; for the first time</link></member>
+	    <member><link linkend="details.institutions">Institutions</link></member>
+	    <member><link linkend="details.accounts">Accounts</link></member>
+	    <member><link linkend="details.payees">Payees</link></member>
+	    <member><link linkend="details.reconcile">Schedules</link></member>
+	    <member><link linkend="details.ledgers">Ledgers</link></member>
+	    <member><link linkend="details.investments">Investments</link></member>
+	    <member><link linkend="details.settings">Settings</link></member>
+	    <member><link linkend="reference.menus">Reference: Menus</link></member>
+	    <member><link linkend="credits">Credits</link></member>
+	  </simplelist>
+	</entry>
+	<entry valign="top">
+	  <simplelist>
+	    <member><link linkend="details.categories">Categories</link></member>
+	    <member><link linkend="details.tags">Tags</link></member>
+	    <member><link linkend="details.currencies">Currencies</link></member>
+	    <member><link linkend="details.reconcile">Reconciliation</link></member>
+	    <member><link linkend="details.reports">Reports</link></member>
+	    <member><link linkend="details.impexp">Importing and Exporting</link></member>
+	    <member><link linkend="details.loans">Loans</link></member>
+	    <member><link linkend="details.budgets">Budgets</link></member>
+	    <member><link linkend="details.forecast">Forecast</link></member>
+	    <member><link linkend="details.search">Search Transactions</link></member>
+	    <member><link linkend="details.formats">File Formats</link></member>
+	    <member><link linkend="details.database">Database</link></member>
+	    <member><link linkend="faq">Questions and Answers</link></member>
+	    <member><link linkend="reference.widgets">Reference: Widgets</link></member>
+	    <member><link linkend="installation">Installation</link></member>
+	  </simplelist>
+	</entry>
+      </row>
+    </tbody>
+  </tgroup>
+</informaltable>
+<para>
 
+</para>
+</sect1>
+
+  
 </chapter>
