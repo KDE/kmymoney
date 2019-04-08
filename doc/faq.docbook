@@ -37,84 +37,7 @@
    didn't you?)</para>
    <para>If &kmymoney; crashes on startup without trying to load a data file,
    there may be a problem with your installation.  See the section on <link
-   linkend="installation">installing &kmymoney;</link> or the section on <link
    linkend="firsttime.contact">getting help</link>.</para>
- </answer>
-</qandaentry>
-
-<qandaentry>
- <question>
-   <para>When I start KMyMoney I get a "Malformed URL" error. What's
-   wrong?</para>
- </question>
- <answer>
-   <para>Usually the reason for this is that you didn't run 'make install' as
-   root. This step actually copies all of the icons, and other files needed by
-   KMyMoney to run properly. If you did run this, make sure you passed the
-   correct prefix to cmake at the beginning of your compile.  See the section on
-   <link linkend="installation.fromsource">compiling from source</link> for more
-   information.</para>
- </answer>
-</qandaentry>
-
-<qandaentry>
- <question>
-   <para>When I compile from source, all the icons show up as missing.  What
-   did I do wrong?</para>
- </question>
- <answer>
-   <para>Usually the reason for this is that you didn't run 'make install' as
-   root. See the previous question/answer for more information.</para>
- </answer>
-</qandaentry>
-
-<qandaentry>
- <question>
-   <para>What options are useful to pass to cmake?</para>
- </question>
- <answer>
-   <para>The most important option is -DCMAKE_INSTALL_PREFIX.  This specifies
-   where you want to install KMyMoney; it should be the same location where
-   &kde; is installed. In many distributions, cmake will find this location on
-   its own, but if it can't, you can use the command line tool
-   <command>kde4-config --prefix</command> to read out what the prefix should
-   be. For &RedHat;-based distributions, including Mandriva and Fedora, &kde; is
-   installed in <filename role="directory">/usr</filename>.</para>
-   <para>Another useful option is -DCMAKE_BUILD_TYPE.  Normally this is not set,
-   but if it is set to Debug, it will allow you to build KMyMoney with debug
-   symbols, which help in trying to figure out crashes. This option is essential
-   if you are a developer and want to contribute.</para>
- </answer>
-</qandaentry>
-
-<qandaentry>
- <question>
-   <para>The Git version is broken! What do I do now?</para>
- </question>
- <answer>
-   <para>Usually the reason for this is that one of the developers made a change
-   to the code that requires a clean reconfigure.  See the end of the section on
-   <link linkend="installation.fromsource">compiling from source</link> for
-   instructions.  If you follow these steps carefully, and still have a problem
-   compiling, please post a message to the &kmymoney; Developers List at
-   &devlist;, and include the failed output of either the cmake or
-   make command.
-</para>
- </answer>
-</qandaentry>
-
-<qandaentry>
- <question>
-   <para>I compiled from source, but the version number in the Help->About
-   dialog no longer gets changed to show the latest git commit, like it used
-   to?</para>
- </question>
- <answer>
-   <para>You probably ran <command>$ make</command> without running <command>$
-   cmake</command> or <command>$ ccmake</command> first.  If you update the
-   code, using <command>$ git pull</command>, one of those two commands is
-   necessary to put the updated version number/git commit in the right place.
-</para>
  </answer>
 </qandaentry>
 
@@ -126,15 +49,9 @@
  <answer>
    <para>Yes, &kmymoney; will work without a full &kde; desktop, but you will
    have to install the basic &kde; libraries first.  The easiest way to do this
-   is to use <link linkend="installation.distribution">your distribution's
-   package management system</link>, which will handle these requirements
-   automatically.  If you are going to install from source, you will probably
-   need development versions of those libraries; refer to these <link
-   linkend="installation.fromsource">instructions</link> for details.</para>
-   <para>There has been at least one report of an error message about a
-   &kmymoney; process which did not come from any &kmymoney; or &kde;
-   source.  This is not necessarily bad, but it can be very difficult to
-   determine the actual cause.</para>
+   is to use your distribution's package management system, which will handle
+   these requirements automatically.  If you are going to install from source,
+   you will probably need development versions of those libraries.</para>
  </answer>
 </qandaentry>
 
