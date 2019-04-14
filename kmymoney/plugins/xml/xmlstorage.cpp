@@ -377,7 +377,16 @@ bool XMLStorage::saveAs()
             m_encryptionKeys.append(m_additionalGpgKeys.join(QLatin1Char(',')));
           }
         }
+        // clear out any existing keys so that the new ones will be used
+        MyMoneyFileTransaction ft;
+        try {
+          MyMoneyFile::instance()->deletePair("kmm-encryption-key");
+          ft.commit();
+        } catch(MyMoneyException& e) {
+          ; // do nothing
+        }
         rc = save(newURL);
+
         appInterface()->addToRecentFiles(newURL);
         //write the directory used for this file as the default one for next time.
         appInterface()->writeLastUsedDir(newURL.toDisplayString(QUrl::RemoveFilename | QUrl::PreferLocalFile | QUrl::StripTrailingSlash));
