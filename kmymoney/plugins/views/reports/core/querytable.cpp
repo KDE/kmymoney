@@ -331,75 +331,83 @@ void QueryTable::constructTotalRows()
       totalCurrency[currencyID].last()[ctRowsCount] += MyMoneyMoney::ONE;
     }
 
-    // iterate over groups from the lowest to the highest to find group change
-    for (int i = groups.count() - 1; i >= 0 ; --i) {
-      // if any of groups from next row changes (or next row is the last row), then it's time to put totals row
-      if (lastRow || m_rows.at(iCurrentRow)[groups.at(i)] != m_rows.at(iNextRow)[groups.at(i)]) {
-        bool isMainCurrencyTotal = true;
-        QMap<QString, QList<QMap<cellTypeE, MyMoneyMoney>>>::iterator currencyGrp = totalCurrency.begin();
-        while (currencyGrp != totalCurrency.end()) {
-          if (!MyMoneyMoney((*currencyGrp).at(i + 1).value(ctRowsCount)).isZero()) {    // if no rows summed up, then no totals row
-            TableRow totalsRow;
-            // sum all subtotal values for higher groups (excluding grand total) and reset lowest group values
-            QMap<cellTypeE, MyMoneyMoney>::iterator upperGrp = (*currencyGrp)[i].begin();
-            QMap<cellTypeE, MyMoneyMoney>::iterator lowerGrp = (*currencyGrp)[i + 1].begin();
-
-            while(upperGrp != (*currencyGrp)[i].end()) {
-              totalsRow[lowerGrp.key()] = lowerGrp.value().toString();  // fill totals row with subtotal values...
-              (*upperGrp) += (*lowerGrp);
-              //          (*lowerGrp) = MyMoneyMoney();
-              ++upperGrp;
-              ++lowerGrp;
-            }
-
-            // custom total values calculations
-            foreach (auto subtotal, subtotals) {
-              if (subtotal == ctReturnInvestment)
-                totalsRow[subtotal] = helperROI((*currencyGrp).at(i + 1).value(ctBuys) - (*currencyGrp).at(i + 1).value(ctReinvestIncome), (*currencyGrp).at(i + 1).value(ctSells),
-                                                (*currencyGrp).at(i + 1).value(ctStartingBalance), (*currencyGrp).at(i + 1).value(ctEndingBalance) + (*currencyGrp).at(i + 1).value(ctMarketValue),
-                                                (*currencyGrp).at(i + 1).value(ctCashIncome));
-              else if (subtotal == ctPercentageGain) {
-                const MyMoneyMoney denominator = (*currencyGrp).at(i + 1).value(ctBuys).abs();
-                totalsRow[subtotal] = denominator.isZero() ? QString():
-                    (((*currencyGrp).at(i + 1).value(ctBuys) + (*currencyGrp).at(i + 1).value(ctMarketValue)) / denominator).toString();
-              } else if (subtotal == ctPrice)
-                totalsRow[subtotal] = MyMoneyMoney((*currencyGrp).at(i + 1).value(ctPrice) / (*currencyGrp).at(i + 1).value(ctRowsCount)).toString();
-            }
-
-            // total values that aren't calculated here, but are taken untouched from external source, e.g. constructPerformanceRow
-            if (!stashedTotalRows.isEmpty()) {
-              for (int j = 0; j < stashedTotalRows.count(); ++j) {
-                if (stashedTotalRows.at(j).value(ctCurrency) != currencyID)
-                  continue;
-                foreach (auto subtotal, subtotals) {
-                  if (subtotal == ctReturn)
-                    totalsRow[ctReturn] = stashedTotalRows.takeAt(j)[ctReturn];
-                }
-                break;
-              }
-            }
-
-            (*currencyGrp).replace(i + 1, totalsValues);
-            for (int j = 0; j < groups.count(); ++j) {
-              totalsRow[groups.at(j)] = m_rows.at(iCurrentRow)[groups.at(j)];   // ...and identification
-            }
-
-            currencyID = currencyGrp.key();
-            if (currencyID.isEmpty() && totalCurrency.count() > 1)
-              currencyID = file->baseCurrency().id();
-            totalsRow[ctCurrency] = currencyID;
-            if (isMainCurrencyTotal) {
-              totalsRow[ctRank] = QLatin1Char('4');
-              isMainCurrencyTotal = false;
-            } else
-              totalsRow[ctRank] = QLatin1Char('5');
-            totalsRow[ctDepth] = QString::number(i);
-            totalsRow.remove(ctRowsCount);
-
-            m_rows.insert(iNextRow++, totalsRow);  // iCurrentRow and iNextRow can diverge here by more than one
-          }
-          ++currencyGrp;
+    auto levelToClose = groups.count();
+    if (!lastRow) {
+      for (int i = 0; i < groups.count(); ++i) {
+        if (m_rows.at(iCurrentRow)[groups.at(i)] != m_rows.at(iNextRow)[groups.at(i)]) {
+          levelToClose = i;
+          break;
         }
+      }
+    } else {
+      levelToClose = 0;   // all, we're done
+    }
+    // iterate over groups from the lowest to the highest to close groups
+    for (int i = groups.count() - 1; i >= levelToClose ; --i) {
+      bool isMainCurrencyTotal = true;
+      QMap<QString, QList<QMap<cellTypeE, MyMoneyMoney>>>::iterator currencyGrp = totalCurrency.begin();
+      while (currencyGrp != totalCurrency.end()) {
+        if (!MyMoneyMoney((*currencyGrp).at(i + 1).value(ctRowsCount)).isZero()) {    // if no rows summed up, then no totals row
+          TableRow totalsRow;
+          // sum all subtotal values for higher groups (excluding grand total) and reset lowest group values
+          QMap<cellTypeE, MyMoneyMoney>::iterator upperGrp = (*currencyGrp)[i].begin();
+          QMap<cellTypeE, MyMoneyMoney>::iterator lowerGrp = (*currencyGrp)[i + 1].begin();
+
+          while(upperGrp != (*currencyGrp)[i].end()) {
+            totalsRow[lowerGrp.key()] = lowerGrp.value().toString();  // fill totals row with subtotal values...
+            (*upperGrp) += (*lowerGrp);
+            //          (*lowerGrp) = MyMoneyMoney();
+            ++upperGrp;
+            ++lowerGrp;
+          }
+
+          // custom total values calculations
+          foreach (auto subtotal, subtotals) {
+            if (subtotal == ctReturnInvestment)
+              totalsRow[subtotal] = helperROI((*currencyGrp).at(i + 1).value(ctBuys) - (*currencyGrp).at(i + 1).value(ctReinvestIncome), (*currencyGrp).at(i + 1).value(ctSells),
+                                              (*currencyGrp).at(i + 1).value(ctStartingBalance), (*currencyGrp).at(i + 1).value(ctEndingBalance) + (*currencyGrp).at(i + 1).value(ctMarketValue),
+                                              (*currencyGrp).at(i + 1).value(ctCashIncome));
+            else if (subtotal == ctPercentageGain) {
+              const MyMoneyMoney denominator = (*currencyGrp).at(i + 1).value(ctBuys).abs();
+              totalsRow[subtotal] = denominator.isZero() ? QString():
+                  (((*currencyGrp).at(i + 1).value(ctBuys) + (*currencyGrp).at(i + 1).value(ctMarketValue)) / denominator).toString();
+            } else if (subtotal == ctPrice)
+              totalsRow[subtotal] = MyMoneyMoney((*currencyGrp).at(i + 1).value(ctPrice) / (*currencyGrp).at(i + 1).value(ctRowsCount)).toString();
+          }
+
+          // total values that aren't calculated here, but are taken untouched from external source, e.g. constructPerformanceRow
+          if (!stashedTotalRows.isEmpty()) {
+            for (int j = 0; j < stashedTotalRows.count(); ++j) {
+              if (stashedTotalRows.at(j).value(ctCurrency) != currencyID)
+                continue;
+              foreach (auto subtotal, subtotals) {
+                if (subtotal == ctReturn)
+                  totalsRow[ctReturn] = stashedTotalRows.takeAt(j)[ctReturn];
+              }
+              break;
+            }
+          }
+
+          (*currencyGrp).replace(i + 1, totalsValues);
+          for (int j = 0; j < groups.count(); ++j) {
+            totalsRow[groups.at(j)] = m_rows.at(iCurrentRow)[groups.at(j)];   // ...and identification
+          }
+
+          currencyID = currencyGrp.key();
+          if (currencyID.isEmpty() && totalCurrency.count() > 1)
+            currencyID = file->baseCurrency().id();
+          totalsRow[ctCurrency] = currencyID;
+          if (isMainCurrencyTotal) {
+            totalsRow[ctRank] = QLatin1Char('4');
+            isMainCurrencyTotal = false;
+          } else
+            totalsRow[ctRank] = QLatin1Char('5');
+          totalsRow[ctDepth] = QString::number(i);
+          totalsRow.remove(ctRowsCount);
+
+          m_rows.insert(iNextRow++, totalsRow);  // iCurrentRow and iNextRow can diverge here by more than one
+        }
+        ++currencyGrp;
       }
     }
 
@@ -455,7 +463,7 @@ void QueryTable::constructTotalRows()
       }
       break;                                      // no use to loop further
     }
-    iCurrentRow = iNextRow;                             // iCurrent makes here a leap forward by at least one
+    iCurrentRow = iNextRow;                       // iCurrent makes here a leap forward by at least one
   }
 }
 
