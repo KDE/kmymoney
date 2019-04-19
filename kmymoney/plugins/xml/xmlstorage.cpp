@@ -377,7 +377,16 @@ bool XMLStorage::saveAs()
             m_encryptionKeys.append(m_additionalGpgKeys.join(QLatin1Char(',')));
           }
         }
+        // clear out any existing keys so that the new ones will be used
+        MyMoneyFileTransaction ft;
+        try {
+          MyMoneyFile::instance()->deletePair("kmm-encryption-key");
+          ft.commit();
+        } catch(MyMoneyException& e) {
+          ; // do nothing
+        }
         rc = save(newURL);
+
         appInterface()->addToRecentFiles(newURL);
         //write the directory used for this file as the default one for next time.
         appInterface()->writeLastUsedDir(newURL.toDisplayString(QUrl::RemoveFilename | QUrl::PreferLocalFile | QUrl::StripTrailingSlash));
@@ -443,6 +452,8 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
     }
   }
 
+  // Permissions to apply to new file
+  QFileDevice::Permissions fmode = QFileDevice::ReadUser | QFileDevice::WriteUser;
 
   // Create a temporary file if needed
   QString writeFile = localFile;
@@ -451,6 +462,8 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
     tmpFile.open();
     writeFile = tmpFile.fileName();
     tmpFile.close();
+    // Since file is going to be replaced, stash the original permissions so they can be restored
+    fmode = QFile::permissions(localFile);
   }
 
   /**
@@ -521,7 +534,7 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
     if (!QFile::remove(localFile) || !QFile::copy(writeFile, localFile))
       throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while writing to '%1'").arg(localFile));
   }
-  QFile::setPermissions(localFile, QFileDevice::ReadUser | QFileDevice::WriteUser);
+  QFile::setPermissions(localFile, fmode);
   pWriter->setProgressCallback(0);
 }
 

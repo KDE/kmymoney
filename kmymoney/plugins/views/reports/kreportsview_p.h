@@ -47,6 +47,7 @@
 #include <QTextCodec>
 #include <QMenu>
 #include <QPointer>
+#include <QWheelEvent>
 #ifdef ENABLE_WEBENGINE
 #include <QWebEngineView>
 #else
@@ -158,6 +159,10 @@ public:
   }
   void showEvent(QShowEvent * event) final override;
   void loadTab();
+
+protected:
+  void wheelEvent(QWheelEvent *event) override;
+
 };
 
 /**
@@ -276,6 +281,25 @@ KReportTab::~KReportTab()
 {
   delete m_table;
 }
+
+
+void KReportTab::wheelEvent(QWheelEvent* event)
+{
+  // Zoom text on Ctrl + Scroll
+  if (event->modifiers() & Qt::CTRL) {
+    if (!m_showingChart) {
+      qreal factor = m_tableView->zoomFactor();
+      if (event->delta() > 0)
+        factor += 0.1;
+      else if (event->delta() < 0)
+        factor -= 0.1;
+      m_tableView->setZoomFactor(factor);
+      event->accept();
+      return;
+    }
+  }
+}
+
 
 void KReportTab::print()
 {

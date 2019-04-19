@@ -35,6 +35,7 @@
 #include <KGuiItem>
 #include <KStandardGuiItem>
 #include <KLocalizedString>
+#include <KLineEdit>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -116,12 +117,20 @@ public:
 
     // only allow searches when a selection has been made
     ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
+    ui->buttonBox->button(QDialogButtonBox::Apply)->setDefault(true);
+    ui->buttonBox->button(QDialogButtonBox::Apply)->setAutoDefault(true);
     KGuiItem::assign(ui->buttonBox->button(QDialogButtonBox::Apply), KStandardGuiItem::find());
     ui->buttonBox->button(QDialogButtonBox::Apply)->setToolTip(i18nc("@info:tooltip for find transaction apply button", "Search transactions"));
     q->connect(m_tabFilters, &KTransactionFilter::selectionNotEmpty, ui->buttonBox->button(QDialogButtonBox::Apply), &QWidget::setEnabled);
 
+
     // get signal about engine changes
     q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KFindTransactionDlg::slotRefreshView);
+
+    // set initial focus to text entry field
+    KLineEdit* textEdit = m_tabFilters->findChild<KLineEdit*>(QLatin1String("m_textEdit"));
+    if (textEdit)
+      textEdit->setFocus();
   }
 
   /**
