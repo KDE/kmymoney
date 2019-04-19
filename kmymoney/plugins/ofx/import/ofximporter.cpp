@@ -1,6 +1,6 @@
 /*
  * Copyright 2005       Ace Jones acejones@users.sourceforge.net
- * Copyright 2010-2018  Thomas Baumgart tbaumgart@kde.org
+ * Copyright 2010-2019  Thomas Baumgart tbaumgart@kde.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -36,6 +36,8 @@
 #include <KActionCollection>
 #include <KLocalizedString>
 #include <KWallet>
+#include <KSharedConfig>
+#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -58,10 +60,16 @@
 
 using KWallet::Wallet;
 
+typedef enum  {
+  UniqueIdUnknown = -1,
+  UniqueIdOfx = 0,
+  UniqueIdKMyMoney
+} UniqueTransactionIdSource;
+
 class OFXImporter::Private
 {
 public:
-  Private() : m_valid(false), m_preferName(PreferId), m_uniqueIdSource(OFX), m_walletIsOpen(false), m_statusDlg(0), m_wallet(0),
+  Private() : m_valid(false), m_preferName(PreferId), m_uniqueIdSource(UniqueIdUnknown), m_walletIsOpen(false), m_statusDlg(0), m_wallet(0),
               m_updateStartDate(QDate(1900,1,1)), m_timestampOffset(0) {}
 
   bool m_valid;
@@ -70,10 +78,7 @@ public:
     PreferName,
     PreferMemo
   } m_preferName;
-  enum UniqueTransactionIdSource {
-    OFX,
-    KMyMoney
-  } m_uniqueIdSource;
+  UniqueTransactionIdSource  m_uniqueIdSource;
   bool m_walletIsOpen;
   QList<MyMoneyStatement> m_statementlist;
   QList<MyMoneyStatement::Security> m_securitylist;
@@ -100,6 +105,13 @@ public:
 };
 
 
+static UniqueTransactionIdSource defaultIdSource()
+{
+  KSharedConfigPtr config = KSharedConfig::openConfig(QStringLiteral("kmymoney/ofximporterrc"));
+  KConfigGroup grp = config->group("General");
+
+  return (grp.readEntry<bool>("useOwnFITID", false) == true) ? UniqueIdKMyMoney : UniqueIdOfx;
+}
 
 
 OFXImporter::OFXImporter(QObject *parent, const QVariantList &args) :
@@ -142,6 +154,9 @@ void OFXImporter::slotImportFile()
   Ui_ImportOption* option = new Ui_ImportOption;
   option->setupUi(widget);
 
+  // initially set to global default option
+  option->m_uniqueIdSource->setCurrentIndex(defaultIdSource());
+
   QUrl url = importInterface()->selectFile(i18n("OFX import file selection"),
              QString(),
              QStringLiteral("*.ofx *.qfx *.ofc|OFX files (*.ofx *.qfx *.ofc);;*|All files (*)"),
@@ -149,7 +164,7 @@ void OFXImporter::slotImportFile()
              widget);
 
   d->m_preferName = static_cast<OFXImporter::Private::NamePreference>(option->m_preferName->currentIndex());
-  d->m_uniqueIdSource = static_cast<OFXImporter::Private::UniqueTransactionIdSource>(option->m_uniqueIdSource->currentIndex());
+  d->m_uniqueIdSource = static_cast<UniqueTransactionIdSource>(option->m_uniqueIdSource->currentIndex());
   d->m_timestampOffset = d->constructTimeOffset(option->m_timestampOffset, option->m_timestampOffsetSign);
 
   if (url.isValid()) {
@@ -314,9 +329,15 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
 
   unsigned long h;
   QString tmpString;
-  switch (pofx->d->m_uniqueIdSource) {
+  // in case the unique transaction id source is yet unknown we
+  // use the global preset
+  UniqueTransactionIdSource idSource = pofx->d->m_uniqueIdSource;
+  if (idSource == UniqueIdUnknown) {
+    idSource = defaultIdSource();
+  }
+  switch (idSource) {
     default:
-    case OFXImporter::Private::OFX:
+    case UniqueIdOfx:
       if (data.fi_id_valid) {
         t.m_strBankID = QStringLiteral("ID ") + QString::fromUtf8(data.fi_id);
       } else if (data.reference_number_valid) {
@@ -324,7 +345,7 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
       }
       break;
 
-    case OFXImporter::Private::KMyMoney:
+    case UniqueIdKMyMoney:
       if (data.payee_id_valid) {
         tmpString = QString::fromUtf8(data.payee_id);
       } else if (data.name_valid) {
@@ -814,10 +835,14 @@ bool OFXImporter::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
 
   qDebug("OfxImporterPlugin::updateAccount");
   try {
+    d->m_uniqueIdSource = UniqueIdUnknown;
     if (!acc.id().isEmpty()) {
       // Save the value of preferName to be used by ofxTransactionCallback
       d->m_preferName = static_cast<OFXImporter::Private::NamePreference>(acc.onlineBankingSettings().value(QStringLiteral("kmmofx-preferName")).toInt());
-      d->m_uniqueIdSource = static_cast<OFXImporter::Private::UniqueTransactionIdSource>(acc.onlineBankingSettings().value(QStringLiteral("kmmofx-uniqueIdSource")).toInt());
+      if (acc.onlineBankingSettings().value(QStringLiteral("kmmofx-uniqueIdSource")).isEmpty())
+        d->m_uniqueIdSource = defaultIdSource();
+      else
+        d->m_uniqueIdSource = static_cast<UniqueTransactionIdSource>(acc.onlineBankingSettings().value(QStringLiteral("kmmofx-uniqueIdSource")).toInt());
       QPointer<KOfxDirectConnectDlg> dlg = new KOfxDirectConnectDlg(acc);
 
       connect(dlg.data(), &KOfxDirectConnectDlg::statementReady, this, static_cast<void (OFXImporter::*)(const QString &)>(&OFXImporter::slotImportFile));
