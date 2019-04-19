@@ -1381,6 +1381,12 @@ bool MyMoneyStatementReader::selectOrCreateAccount(const SelectCreateMode /*mode
   } else {
     type = static_cast<eDialogs::Category>(eDialogs::Category::asset | eDialogs::Category::liability);
   }
+  // FIXME: This is a quick fix to show all accounts in the account selection combo box
+  // of the KAccountSelectDlg. This allows to select any asset or liability account during
+  // statement import.
+  // The real fix would be to detect the account type here
+  // and add an option to show all accounts in the dialog.
+  type = static_cast<eDialogs::Category>(eDialogs::Category::asset | eDialogs::Category::liability);
 
   QPointer<KAccountSelectDlg> accountSelect = new KAccountSelectDlg(type, "StatementImport", 0);
   connect(accountSelect, &KAccountSelectDlg::createAccount, this, &MyMoneyStatementReader::slotNewAccount);
