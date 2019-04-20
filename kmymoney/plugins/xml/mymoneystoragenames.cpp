@@ -1,5 +1,6 @@
 /*
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -84,16 +85,16 @@ namespace Element {
 }
 
 namespace Attribute {
-  uint qHash(const General key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-  uint qHash(const Transaction key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-  uint qHash(const Account key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-  uint qHash(const Payee key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-  uint qHash(const Tag key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-  uint qHash(const Security key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-  uint qHash(const KVP key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-  uint qHash(const Institution key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-  uint qHash(const Schedule key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-  uint qHash(const OnlineJob key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+  uint qHash(const General key, uint seed) { Q_UNUSED(seed); return ::qHash(static_cast<uint>(key), 0); }
+  uint qHash(const Transaction key, uint seed) { Q_UNUSED(seed); return ::qHash(static_cast<uint>(key), 0); }
+  uint qHash(const Account key, uint seed) { Q_UNUSED(seed); return ::qHash(static_cast<uint>(key), 0); }
+  uint qHash(const Payee key, uint seed) { Q_UNUSED(seed); return ::qHash(static_cast<uint>(key), 0); }
+  uint qHash(const Tag key, uint seed) { Q_UNUSED(seed); return ::qHash(static_cast<uint>(key), 0); }
+  uint qHash(const Security key, uint seed) { Q_UNUSED(seed); return ::qHash(static_cast<uint>(key), 0); }
+  uint qHash(const KVP key, uint seed) { Q_UNUSED(seed); return ::qHash(static_cast<uint>(key), 0); }
+  uint qHash(const Institution key, uint seed) { Q_UNUSED(seed); return ::qHash(static_cast<uint>(key), 0); }
+  uint qHash(const Schedule key, uint seed) { Q_UNUSED(seed); return ::qHash(static_cast<uint>(key), 0); }
+  uint qHash(const OnlineJob key, uint seed) { Q_UNUSED(seed); return ::qHash(static_cast<uint>(key), 0); }
 }
 
 QString elementName(Element::General elementID)
