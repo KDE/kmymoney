@@ -206,6 +206,8 @@ namespace MyMoneyXmlContentHandler2 {
     return attributeNames.value(attributeID);
   }
 
+  uint qHash(const Attribute::Report key, uint seed) { Q_UNUSED(seed); return ::qHash(static_cast<uint>(key), 0); }
+
   QString elementName(Element::Budget elementID)
   {
     static const QMap<Element::Budget, QString> elementNames {
@@ -229,6 +231,8 @@ namespace MyMoneyXmlContentHandler2 {
     };
     return attributeNames.value(attributeID);
   }
+
+  uint qHash(const Attribute::Budget key, uint seed) { Q_UNUSED(seed); return ::qHash(static_cast<uint>(key), 0); }
 
   QHash<eMyMoney::Report::RowType, QString> rowTypesLUT()
   {
@@ -674,7 +678,7 @@ namespace MyMoneyXmlContentHandler2 {
 
         // read rows/columns tab
         if (node.hasAttribute(attributeName(Attribute::Report::Budget)))
-          report.setBudget(node.attribute(attributeName(Attribute::Report::Budget)));
+          report.setBudget(node.attribute(attributeName(Attribute::Report::Budget)), report.isIncludingBudgetActuals());
 
         if (rowTypeFromXML != eMyMoney::Report::RowType::Invalid)
           report.setRowType(rowTypeFromXML);
