@@ -241,6 +241,7 @@ QString ReportsView::budget() const
   html += "</td></tr>";
 
   reports::PivotGrid::iterator it_outergroup = grid.begin();
+  const int column = 0;
   while (it_outergroup != grid.end()) {
     i = 0;
     reports::PivotOuterGroup::iterator it_innergroup = (*it_outergroup).begin();
@@ -248,7 +249,7 @@ QString ReportsView::budget() const
       reports::PivotInnerGroup::iterator it_row = (*it_innergroup).begin();
       while (it_row != (*it_innergroup).end()) {
         //column number is 1 because the report includes only current month
-        if (it_row.value()[reports::eBudgetDiff].value(1).isNegative()) {
+        if (it_row.value()[reports::eBudgetDiff].value(column).isNegative()) {
           //get report account to get the name later
           reports::ReportAccount rowname = it_row.key();
 
@@ -261,9 +262,9 @@ QString ReportsView::budget() const
           html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
 
           //get values from grid
-          MyMoneyMoney actualValue = it_row.value()[reports::eActual][1];
-          MyMoneyMoney budgetValue = it_row.value()[reports::eBudget][1];
-          MyMoneyMoney budgetDiffValue = it_row.value()[reports::eBudgetDiff][1];
+          MyMoneyMoney actualValue = it_row.value()[reports::eActual][column];
+          MyMoneyMoney budgetValue = it_row.value()[reports::eBudget][column];
+          MyMoneyMoney budgetDiffValue = it_row.value()[reports::eBudgetDiff][column];
 
           //format amounts
           QString actualAmount = actualValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);
