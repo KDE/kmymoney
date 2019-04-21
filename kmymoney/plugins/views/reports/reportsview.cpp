@@ -157,10 +157,15 @@ QString ReportsView::budget() const
   const auto file = MyMoneyFile::instance();
 
   QString html;
+  //div header
+  html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Budget") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
+
   if (file->countBudgets() == 0) {
+    html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
     html += QString("<tr>");
     html += QString("<td><center>%1</center></td>").arg(i18n("You have no budgets to display."));
     html += QString("</tr>");
+    html += "</table></div></div>";
     return html;
   }
 
@@ -182,9 +187,6 @@ QString ReportsView::budget() const
   reports::PivotTable table(reportCfg);
 
   reports::PivotGrid grid = table.grid();
-
-  //div header
-  html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Budget") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
 
   //display budget summary
   html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
