@@ -157,10 +157,15 @@ QString ReportsView::budget() const
   const auto file = MyMoneyFile::instance();
 
   QString html;
+  //div header
+  html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Budget") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
+
   if (file->countBudgets() == 0) {
+    html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
     html += QString("<tr>");
     html += QString("<td><center>%1</center></td>").arg(i18n("You have no budgets to display."));
     html += QString("</tr>");
+    html += "</table></div></div>";
     return html;
   }
 
@@ -182,9 +187,6 @@ QString ReportsView::budget() const
   reports::PivotTable table(reportCfg);
 
   reports::PivotGrid grid = table.grid();
-
-  //div header
-  html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Budget") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
 
   //display budget summary
   html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
@@ -241,6 +243,7 @@ QString ReportsView::budget() const
   html += "</td></tr>";
 
   reports::PivotGrid::iterator it_outergroup = grid.begin();
+  const int column = 0;
   while (it_outergroup != grid.end()) {
     i = 0;
     reports::PivotOuterGroup::iterator it_innergroup = (*it_outergroup).begin();
@@ -248,7 +251,7 @@ QString ReportsView::budget() const
       reports::PivotInnerGroup::iterator it_row = (*it_innergroup).begin();
       while (it_row != (*it_innergroup).end()) {
         //column number is 1 because the report includes only current month
-        if (it_row.value()[reports::eBudgetDiff].value(1).isNegative()) {
+        if (it_row.value()[reports::eBudgetDiff].value(column).isNegative()) {
           //get report account to get the name later
           reports::ReportAccount rowname = it_row.key();
 
@@ -261,9 +264,9 @@ QString ReportsView::budget() const
           html += QString("<tr class=\"row-%1\">").arg(i++ & 0x01 ? "even" : "odd");
 
           //get values from grid
-          MyMoneyMoney actualValue = it_row.value()[reports::eActual][1];
-          MyMoneyMoney budgetValue = it_row.value()[reports::eBudget][1];
-          MyMoneyMoney budgetDiffValue = it_row.value()[reports::eBudgetDiff][1];
+          MyMoneyMoney actualValue = it_row.value()[reports::eActual][column];
+          MyMoneyMoney budgetValue = it_row.value()[reports::eBudget][column];
+          MyMoneyMoney budgetDiffValue = it_row.value()[reports::eBudgetDiff][column];
 
           //format amounts
           QString actualAmount = actualValue.formatMoney(file->baseCurrency().tradingSymbol(), prec);

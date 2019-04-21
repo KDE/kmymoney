@@ -1419,20 +1419,22 @@ public:
 
   void showBudget()
   {
-    m_html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Budget") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
-    m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
+    QVariant variantReport;
 
     if (const auto reportsPlugin = pPlugins.data.value(QStringLiteral("reportsview"), nullptr)) {
-      const auto variantReport = reportsPlugin->requestData(QString(), eWidgetPlugin::WidgetType::Budget);
-      if (!variantReport.isNull())
-        m_html.append(variantReport.toString());
+      variantReport = reportsPlugin->requestData(QString(), eWidgetPlugin::WidgetType::Budget);
+    }
+
+    if (!variantReport.isNull()) {
+      m_html.append(variantReport.toString());
     } else {
+      m_html += "<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">" + i18n("Budget") + "</div>\n<div class=\"gap\">&nbsp;</div>\n";
+      m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
       m_html += QString("<tr>");
       m_html += QString("<td><center>%1</center></td>").arg(i18n("Enable reports plugin to see this chart."));
       m_html += QString("</tr>");
+      m_html += QString("</table></div></div>");
     }
-
-    m_html += QString("</table></div></div>");
   }
 
   void showCashFlowSummary()

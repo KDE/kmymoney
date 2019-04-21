@@ -418,7 +418,6 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
   d->m_account = MyMoneyAccount();
   d->m_brokerageAccount = MyMoneyAccount();
 
-  m_ft = new MyMoneyFileTransaction();
   d->m_skipCategoryMatching = s.m_skipCategoryMatching;
 
   // if the statement source left some information about
@@ -461,6 +460,9 @@ bool MyMoneyStatementReader::import(const MyMoneyStatement& s, QStringList& mess
     if (!m_userAbort && s.m_listTransactions.count() > 0)
       m_userAbort = ! selectOrCreateAccount(Select, d->m_account);
   }
+
+  // open an engine transaction
+  m_ft = new MyMoneyFileTransaction();
 
   // see if we need to update some values stored with the account
   const auto statementEndDate = s.statementEndDate();
