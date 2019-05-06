@@ -88,7 +88,7 @@ void KInstitutionsView::refresh()
 
   d->m_proxyModel->invalidate();
   d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
-  d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
+  d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
 }
 
 void KInstitutionsView::showEvent(QShowEvent * event)

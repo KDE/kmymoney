@@ -97,7 +97,7 @@ void KCategoriesView::refresh()
   d->m_needsRefresh = false;
 
   d->m_proxyModel->invalidate();
-  d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
+  d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
 
   // reinitialize the default state of the hidden categories label
   d->m_haveUnusedCategories = false;
