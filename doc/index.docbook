@@ -99,7 +99,6 @@
   <!ENTITY faq SYSTEM "faq.docbook">
   <!ENTITY reference SYSTEM "reference.docbook">
   <!ENTITY credits SYSTEM "credits.docbook">
-  <!ENTITY installation SYSTEM "installation.docbook">
 ]>
 
 <book id="kmymoney" lang="&language;">
@@ -214,7 +213,6 @@ consistent documentation style across all KDE apps. -->
 &faq;
 &reference;
 &credits;
-&installation;
 &documentation.index;
 </book>
 <!--

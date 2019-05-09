@@ -94,7 +94,7 @@ void KAccountsView::refresh()
   d->m_needsRefresh = false;
   // TODO: check why the invalidate is needed here
   d->m_proxyModel->invalidate();
-  d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
+  d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
   d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
   if (KMyMoneySettings::showCategoriesInAccountsView()) {
     d->m_proxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense});
