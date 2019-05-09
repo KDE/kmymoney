@@ -120,7 +120,7 @@ public:
 
         ui->m_prevButton->setEnabled(true);
         ui->m_nextButton->setEnabled(true);
-        ui->m_skipButton->setEnabled(sched.occurrencePeriod() != eMyMoney::Schedule::Occurrence::Once);
+        ui->m_skipButton->setEnabled(sched.occurrence() != eMyMoney::Schedule::Occurrence::Once);
 
         if (m_index == 0)
           ui->m_prevButton->setEnabled(false);

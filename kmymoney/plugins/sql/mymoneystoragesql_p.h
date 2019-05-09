@@ -1339,7 +1339,7 @@ public:
     query.bindValue(":name", sch.name());
     query.bindValue(":type", (int)sch.type());
     query.bindValue(":typeString", MyMoneySchedule::scheduleTypeToString(sch.type()));
-    query.bindValue(":occurence", (int)sch.occurrencePeriod()); // krazy:exclude=spelling
+    query.bindValue(":occurence", (int)sch.occurrence()); // krazy:exclude=spelling
     query.bindValue(":occurenceMultiplier", sch.occurrenceMultiplier()); // krazy:exclude=spelling
     query.bindValue(":occurenceString", sch.occurrenceToString()); // krazy:exclude=spelling
     query.bindValue(":paymentType", (int)sch.paymentType());
