@@ -2184,7 +2184,7 @@ QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QStringLi
 
     // convert simple occurrence to compound occurrence
     int mult = s.occurrenceMultiplier();
-    Schedule::Occurrence occ = s.occurrencePeriod();
+    Schedule::Occurrence occ = s.occurrence();
     MyMoneySchedule::simpleToCompoundOccurrence(mult, occ);
     s.setOccurrencePeriod(occ);
     s.setOccurrenceMultiplier(mult);

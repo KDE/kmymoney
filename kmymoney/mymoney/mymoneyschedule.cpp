@@ -93,7 +93,7 @@ MyMoneySchedule::~MyMoneySchedule()
 {
 }
 
-Schedule::Occurrence MyMoneySchedule::occurrence() const
+Schedule::Occurrence MyMoneySchedule::baseOccurrence() const
 {
   Q_D(const MyMoneySchedule);
   Schedule::Occurrence occ = d->m_occurrence;
@@ -114,7 +114,7 @@ eMyMoney::Schedule::Type MyMoneySchedule::type() const
   return d->m_type;
 }
 
-eMyMoney::Schedule::Occurrence MyMoneySchedule::occurrencePeriod() const
+eMyMoney::Schedule::Occurrence MyMoneySchedule::occurrence() const
 {
   Q_D(const MyMoneySchedule);
   return d->m_occurrence;
@@ -873,7 +873,7 @@ bool MyMoneySchedule::hasReferenceTo(const QString& id) const
 
 QString MyMoneySchedule::occurrenceToString() const
 {
-  return occurrenceToString(occurrenceMultiplier(), occurrencePeriod());
+  return occurrenceToString(occurrenceMultiplier(), occurrence());
 }
 
 QString MyMoneySchedule::occurrenceToString(Schedule::Occurrence occurrence)

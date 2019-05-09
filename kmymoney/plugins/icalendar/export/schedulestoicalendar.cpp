@@ -113,7 +113,7 @@ struct icalrecurrencetype scheduleToRecurenceRule(const MyMoneySchedule& schedul
   recurrence.week_start = icalrecurrencetype_day_day_of_week(QLocale().firstDayOfWeek());
   int frequencyFactor = 1; // used to translate kmymoney frequency to icalendar frequency
 
-  switch (schedule.occurrence()) {
+  switch (schedule.baseOccurrence()) {
     case Schedule::Occurrence::Daily:
       recurrence.freq = ICAL_DAILY_RECURRENCE;
       break;
@@ -342,7 +342,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
     if (pRRule != 0) {
       icalcomponent_remove_property(schedule, pRRule);
     }
-    if (myMoneySchedule.occurrence() != Schedule::Occurrence::Once && myMoneySchedule.occurrence() != Schedule::Occurrence::Any)
+    if (myMoneySchedule.occurrence() != Schedule::Occurrence::Once && myMoneySchedule.baseOccurrence() != Schedule::Occurrence::Any)
       icalcomponent_add_property(schedule, icalproperty_new_rrule(scheduleToRecurenceRule(myMoneySchedule)));
 
     icalcomponent* oldAlarm = icalcomponent_get_first_component(schedule, ICAL_VALARM_COMPONENT);

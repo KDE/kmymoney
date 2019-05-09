@@ -1106,7 +1106,7 @@ void MyMoneyXmlContentHandlerTest::readSchedule()
     QCOMPARE(sch.paymentType(), Schedule::PaymentType::DirectDebit);
     QCOMPARE(sch.type(), Schedule::Type::Bill);
     QCOMPARE(sch.name(), QLatin1String("A Name"));
-    QCOMPARE(sch.occurrence(), Schedule::Occurrence::Weekly);
+    QCOMPARE(sch.baseOccurrence(), Schedule::Occurrence::Weekly);
     QCOMPARE(sch.occurrenceMultiplier(), 1);
     QCOMPARE(sch.nextDueDate(), sch.lastPayment().addDays(7));
     QCOMPARE(sch.recordedPayments().count(), 1);
@@ -1132,7 +1132,7 @@ void MyMoneyXmlContentHandlerTest::readSchedule()
     QCOMPARE(sch.paymentType(), Schedule::PaymentType::DirectDebit);
     QCOMPARE(sch.type(), Schedule::Type::Bill);
     QCOMPARE(sch.name(), QLatin1String("A Name"));
-    QCOMPARE(sch.occurrence(), Schedule::Occurrence::Weekly);
+    QCOMPARE(sch.baseOccurrence(), Schedule::Occurrence::Weekly);
     QCOMPARE(sch.occurrenceMultiplier(), 1);
     QCOMPARE(sch.nextDueDate(), sch.lastPayment().addDays(7));
     QCOMPARE(sch.recordedPayments().count(), 1);
@@ -1785,7 +1785,7 @@ void MyMoneyXmlContentHandlerTest::testPaidEarlyOneTime()
   try {
     sch = MyMoneyXmlContentHandler::readSchedule(node);
     QCOMPARE(sch.isFinished(), true);
-    QCOMPARE(sch.occurrencePeriod(), Schedule::Occurrence::Monthly);
+    QCOMPARE(sch.occurrence(), Schedule::Occurrence::Monthly);
     QCOMPARE(sch.paymentDates(QDate::currentDate(), QDate::currentDate().addDays(21)).count(), 0);
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception");

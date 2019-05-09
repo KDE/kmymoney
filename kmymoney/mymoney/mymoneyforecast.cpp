@@ -1651,10 +1651,10 @@ void MyMoneyForecast::calculateAutoLoan(const MyMoneySchedule& schedule, MyMoney
       // FIXME: for now, we only support periodic compounding
       calc.setDisc();
 
-      calc.setPF(MyMoneySchedule::eventsPerYear(schedule.occurrence()));
+      calc.setPF(MyMoneySchedule::eventsPerYear(schedule.baseOccurrence()));
       eMyMoney::Schedule::Occurrence compoundingOccurrence = static_cast<eMyMoney::Schedule::Occurrence>(acc.interestCompounding());
       if (compoundingOccurrence == eMyMoney::Schedule::Occurrence::Any)
-        compoundingOccurrence = schedule.occurrence();
+        compoundingOccurrence = schedule.baseOccurrence();
 
       calc.setCF(MyMoneySchedule::eventsPerYear(compoundingOccurrence));
 

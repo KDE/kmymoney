@@ -125,7 +125,7 @@ public:
     // setup widget contents
     ui->m_nameEdit->setText(m_schedule.name());
 
-    ui->m_frequencyEdit->setCurrentItem((int)m_schedule.occurrencePeriod());
+    ui->m_frequencyEdit->setCurrentItem((int)m_schedule.occurrence());
     if (ui->m_frequencyEdit->currentItem() == Schedule::Occurrence::Any)
       ui->m_frequencyEdit->setCurrentItem((int)Schedule::Occurrence::Monthly);
     q->slotFrequencyChanged((int)ui->m_frequencyEdit->currentItem());

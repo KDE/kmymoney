@@ -1252,7 +1252,7 @@ QList<MyMoneySchedule> MyMoneyStorageMgr::scheduleList(const QString& accountId,
     }
 
     if (occurrence != eMyMoney::Schedule::Occurrence::Any) {
-      if (occurrence != (*pos).occurrence()) {
+      if (occurrence != (*pos).baseOccurrence()) {
         continue;
       }
     }
@@ -1342,7 +1342,7 @@ QList<MyMoneySchedule> MyMoneyStorageMgr::scheduleListEx(int scheduleTypes,
     if (scheduleTypes && !(scheduleTypes & (int)(*pos).type()))
       continue;
 
-    if (scheduleOcurrences && !(scheduleOcurrences & (int)(*pos).occurrence()))
+    if (scheduleOcurrences && !(scheduleOcurrences & (int)(*pos).baseOccurrence()))
       continue;
 
     if (schedulePaymentTypes && !(schedulePaymentTypes & (int)(*pos).paymentType()))

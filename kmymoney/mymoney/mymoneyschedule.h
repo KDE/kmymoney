@@ -104,11 +104,12 @@ public:
   ~MyMoneySchedule();
 
   /**
-    * Simple get method that returns the occurrence frequency.
+    * Simple get method that returns the base occurrence frequency.
     *
-    * @return eMyMoney::Schedule::Occurrence The instance frequency.
+    * @return eMyMoney::Schedule::Occurrence The instance frequency
+    *         reduced to the simple units.
     */
-  eMyMoney::Schedule::Occurrence occurrence() const;
+  eMyMoney::Schedule::Occurrence baseOccurrence() const;
 
   /**
     * Simple get method that returns the occurrence period
@@ -117,7 +118,7 @@ public:
     * @return eMyMoney::Schedule::Occurrence The instance period
     *
     */
-  eMyMoney::Schedule::Occurrence occurrencePeriod() const;
+  eMyMoney::Schedule::Occurrence occurrence() const;
 
   /**
     * Simple get method that returns the occurrence period multiplier.
