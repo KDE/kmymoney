@@ -147,7 +147,11 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
     d->ui->m_interestTypePage->ui->m_variableInterestButton->click();
   }
 
-  QString institutionName = file->institution(d->m_account.institutionId()).name();
+  QString institutionName;
+  try {
+    institutionName = file->institution(d->m_account.institutionId()).name();
+  } catch (const MyMoneyException &) {
+  }
   d->ui->m_loanAttributesPage->setInstitution(institutionName);
 
   MyMoneyMoney ir;
