@@ -893,6 +893,10 @@ bool CSVImporterCore::processBankRow(MyMoneyStatement &st, const BankingProfile 
         memo.append(m_file->m_model->item(row, profile->m_memoColList.at(i))->text());
     }
   }
+  // remove unnecessary line endings
+  while (memo.endsWith(QLatin1Char('\n'))) {
+    memo.resize(memo.length()-1);
+  }
   tr.m_strMemo = memo;
 
   // process amount field
@@ -1036,6 +1040,10 @@ bool CSVImporterCore::processInvestRow(MyMoneyStatement &st, const InvestmentPro
       if (profile->m_memoColList.at(i) < m_file->m_columnCount)
         memo.append(m_file->m_model->item(row, profile->m_memoColList.at(i))->text());
     }
+  }
+  // remove unnecessary line endings
+  while (memo.endsWith(QLatin1Char('\n'))) {
+    memo.resize(memo.length()-1);
   }
   tr.m_strMemo = memo;
 
