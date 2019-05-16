@@ -143,8 +143,10 @@ void PayeesModel::unload()
     beginRemoveRows(QModelIndex(), 0, rowCount() - 1);
     qDeleteAll(d->m_payeeItems);
     d->m_payeeItems.clear();
-    QVector<MyMoneyPayee*> swp;
-    d->m_payeeItems.swap(swp); // changed behaviour from Qt 5.7 http://doc.qt.io/qt-5/qvector.html#clear
+    // From Qt 5.7, the capacity is preserved. To shed all capacity,
+    // swap with a default-constructed vector.
+    // see http://doc.qt.io/qt-5/qvector.html#clear
+    QVector<MyMoneyPayee*>().swap(d->m_payeeItems);
     endRemoveRows();
   }
 }
@@ -153,8 +155,14 @@ void PayeesModel::load()
 {
   const QList<MyMoneyPayee> list = MyMoneyFile::instance()->payeeList();
 
-  if(list.count() > 0) {
-    beginInsertRows(QModelIndex(), rowCount(), rowCount() + list.count());
+  // first get rid of existing entries
+  unload();
+
+  const auto payeeCount = list.count();
+  if(payeeCount > 0) {
+    // reserve some more slots than needed
+    d->m_payeeItems.reserve(payeeCount + 13);
+    beginInsertRows(QModelIndex(), rowCount(), rowCount() + payeeCount);
     // create an empty entry for those items that do not reference a payee
     d->m_payeeItems.append(new MyMoneyPayee());
     foreach (const auto it, list)
