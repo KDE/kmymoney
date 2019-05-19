@@ -2406,7 +2406,7 @@ QStringList MyMoneyFile::consistencyCheck()
         && (!securityPriceDate.contains(reversePricePair) || securityPriceDate.value(reversePricePair) > (*accForeignList_it).openingDate())) {
       if (firstInvProblem) {
         firstInvProblem = false;
-        rc << i18n("* Potential problem with investments/currencies");
+        rc << i18n("* Potential problem with securities/currencies");
       }
       QDate openingDate = (*accForeignList_it).openingDate();
       MyMoneySecurity secError = security((*accForeignList_it).currencyId());
@@ -2414,8 +2414,8 @@ QStringList MyMoneyFile::consistencyCheck()
         rc << i18n("  * The account '%1' in currency '%2' has no price set for the opening date '%3'.", (*accForeignList_it).name(), secError.name(), openingDate.toString(Qt::ISODate));
         rc << i18n("    Please enter a price for the currency on or before the opening date.");
       } else {
-        rc << i18n("  * The investment '%1' has no price set for the opening date '%2'.", (*accForeignList_it).name(), openingDate.toString(Qt::ISODate));
-        rc << i18n("    Please enter a price for the investment on or before the opening date.");
+        rc << i18n("  * The security '%1' has no price set for the opening date '%2'.", (*accForeignList_it).name(), openingDate.toString(Qt::ISODate));
+        rc << i18n("    Please enter a price for the security on or before the opening date.");
       }
       ++unfixedCount;
     }
