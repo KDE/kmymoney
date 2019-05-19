@@ -29,10 +29,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmm_mymoney_export.h"
 
 /**
   */
-class PayeesModel : public QAbstractListModel
+class KMM_MYMONEY_EXPORT PayeesModel : public QAbstractListModel
 {
   Q_OBJECT
 

@@ -1,6 +1,5 @@
 set(libmodels_a_SOURCES
     costcentermodel.cpp
-    payeesmodel.cpp
     accountsmodel.cpp
     accountsproxymodel.cpp
     onlinebankingaccountsfilterproxymodel.cpp
