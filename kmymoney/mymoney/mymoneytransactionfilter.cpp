@@ -49,6 +49,7 @@ public:
     : m_reportAllSplits(false)
     , m_considerCategory(false)
     , m_matchOnly(false)
+    , m_treatTransfersAsIncomeExpense(false)
     , m_matchingSplitsCount(0)
     , m_invertText(false)
   {
@@ -59,6 +60,7 @@ public:
   bool                m_reportAllSplits;
   bool                m_considerCategory;
   bool                m_matchOnly;
+  bool                m_treatTransfersAsIncomeExpense;
 
   uint                m_matchingSplitsCount;
 
@@ -269,6 +271,18 @@ void MyMoneyTransactionFilter::setConsiderCategory(const bool check)
 {
   Q_D(MyMoneyTransactionFilter);
   d->m_considerCategory = check;
+}
+
+void MyMoneyTransactionFilter::setTreatTransfersAsIncomeExpense(const bool check)
+{
+  Q_D(MyMoneyTransactionFilter);
+  d->m_treatTransfersAsIncomeExpense = check;
+}
+
+bool MyMoneyTransactionFilter::treatTransfersAsIncomeExpense() const
+{
+  Q_D(const MyMoneyTransactionFilter);
+  return d->m_treatTransfersAsIncomeExpense;
 }
 
 uint MyMoneyTransactionFilter::matchingSplitsCount(const MyMoneyTransaction& transaction)
@@ -593,16 +607,15 @@ int MyMoneyTransactionFilter::splitState(const MyMoneySplit& split) const
 
 int MyMoneyTransactionFilter::splitType(const MyMoneyTransaction& t, const MyMoneySplit& split, const MyMoneyAccount& acc) const
 {
-  qDebug() << "SplitType";
+  Q_D(const MyMoneyTransactionFilter);
   if (acc.isIncomeExpense())
     return (int)eMyMoney::TransactionFilter::Type::All;
 
-  if (t.splitCount() == 2) {
+  if (t.splitCount() == 2 && !d->m_treatTransfersAsIncomeExpense) {
     const auto& splits = t.splits();
     const auto file = MyMoneyFile::instance();
     const auto& a = splits.at(0).id().compare(split.id()) == 0 ? acc : file->account(splits.at(0).accountId());
     const auto& b = splits.at(1).id().compare(split.id()) == 0 ? acc : file->account(splits.at(1).accountId());
-    qDebug() << "first split: " << splits.at(0).accountId() << "second split: " << splits.at(1).accountId();
 
     if (!a.isIncomeExpense() && !b.isIncomeExpense())
       return (int)eMyMoney::TransactionFilter::Type::Transfers;

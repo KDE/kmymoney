@@ -295,6 +295,8 @@ public:
 
   void setConsiderCategory(const bool check = true);
 
+  void setTreatTransfersAsIncomeExpense(const bool check = true);
+
   /**
    * This method is to avoid returning matching splits list
    * if only its count is needed
@@ -497,6 +499,12 @@ public:
    * that DO NOT contain the text
    */
   bool isInvertingText() const;
+
+  /**
+   * This method returns whether transfers should be treated as
+   * income/expense transactions or not
+   */
+  bool treatTransfersAsIncomeExpense() const;
 
   /**
     * This method translates a plain-language date range into QDate
