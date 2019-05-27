@@ -161,10 +161,10 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
     ir = d->m_account.interestRate(QDate::currentDate());
   }
   //FIXME: port
-  d->ui->m_interestPage->ui->m_interestRateEdit->loadText(ir.formatMoney(QString(), 3));
   d->ui->m_interestPage->ui->m_interestRateEdit->setPrecision(3);
-  d->ui->m_interestEditPage->ui->m_newInterestRateEdit->loadText(ir.formatMoney(QString(), 3));
+  d->ui->m_interestPage->ui->m_interestRateEdit->loadText(ir.formatMoney(QString(), 3));
   d->ui->m_interestEditPage->ui->m_newInterestRateEdit->setPrecision(3);
+  d->ui->m_interestEditPage->ui->m_newInterestRateEdit->loadText(ir.formatMoney(QString(), 3));
   d->ui->m_interestEditPage->ui->m_interestRateLabel->setText(QString(" ") + ir.formatMoney(QString(), 3) + QString("%"));
 
   d->ui->m_paymentFrequencyPage->ui->m_paymentFrequencyUnitEdit->setCurrentIndex(d->ui->m_paymentFrequencyPage->ui->m_paymentFrequencyUnitEdit->findData(QVariant((int)d->m_schedule.occurrence()), Qt::UserRole, Qt::MatchExactly));
