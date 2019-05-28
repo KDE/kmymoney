@@ -95,6 +95,11 @@ void BankingPage::initializePage()
 
   columns.remove(Column::Memo);
   for (auto it = columns.cbegin(); it != columns.cend(); ++it) {
+    auto index = m_profile->m_colTypeNum.value(it.key());
+    // reset values to undefined in case out of range
+    if (index >= it.value()->count()) {
+      m_profile->m_colTypeNum[it.key()] = -1;;
+    }
     it.value()->setCurrentIndex(m_profile->m_colTypeNum.value(it.key()));
   }
 
