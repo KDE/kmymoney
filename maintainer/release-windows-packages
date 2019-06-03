@@ -184,7 +184,7 @@ function createdescription() {
 	else
 		description="$description."
 	fi
-	sums=$(cat work/out/$NAME.sha256sum | gawk 'BEGIN { print "dir	 shasum								   file"}  $2 ~ /mingw32/ { print "win32 " $0 } $2 ~ /mingw64/ { print "win64 " $0 } $2 ~ /[a-z]+-[0-9]/ { print "src   " $0 }')
+	sums=$(cat work/out/$NAME.sha256sum | gawk 'BEGIN { print "dir	 shasum								   file"}  $2 ~ /mingw32/ { print "win32 " $0 } $2 ~ /mingw64/ { print "win64 " $0 } $2 ~ /\-src/ { print "src   " $0 }')
 	echo -e "$description\n\n$sums" > work/description
 	touch work/$1.finished
 }
