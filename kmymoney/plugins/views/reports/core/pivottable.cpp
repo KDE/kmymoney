@@ -965,7 +965,7 @@ void PivotTable::calculateBudgetMapping()
             {
               QMap<QDate, MyMoneyBudget::PeriodGroup>::const_iterator it_period = periods.begin();
               while (it_period != periods.end() && column < m_numColumns) {
-                if ((*it_period).startDate() > columnDate(column)) {
+                if ((*it_period).startDate() >= columnDate(column + 1 - m_startColumn)) {
                   ++column;
                 } else {
                   switch (m_config.columnType()) {
