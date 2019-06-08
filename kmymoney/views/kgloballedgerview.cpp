@@ -1015,7 +1015,7 @@ bool KGlobalLedgerView::focusNextPrevChild(bool next)
 
         if (((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
           // qDebug() << "Set focus to" << w->objectName();
-          w->setFocus();
+          w->setFocus(next ? Qt::TabFocusReason: Qt::BacktabFocusReason);
           rc = true;
           break;
         }
