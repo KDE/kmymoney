@@ -40,7 +40,6 @@
 #include "kmymoneyaccountselector.h"
 #include "kmymoneycategory.h"
 #include "kmymoneydateinput.h"
-#include "kmymoneyedit.h"
 #include "kmymoneygeneralcombo.h"
 #include "kmymoneypayeecombo.h"
 #include "knewaccountwizard.h"
@@ -66,7 +65,7 @@ namespace NewAccountWizard
     d->ui->setupUi(this);
     d->m_mandatoryGroup->add(d->ui->m_name);
     d->m_mandatoryGroup->add(d->ui->m_payee);
-    d->m_mandatoryGroup->add(d->ui->m_amount->lineedit());
+    d->m_mandatoryGroup->add(d->ui->m_amount);
     d->m_mandatoryGroup->add(d->ui->m_paymentAccount);
     connect(d->ui->m_paymentAccount, &KMyMoneyCombo::itemSelected, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
     connect(d->ui->m_payee, &KMyMoneyMVCCombo::itemSelected, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
@@ -125,7 +124,7 @@ namespace NewAccountWizard
             rc = false;
             msg = i18n("No account selected");
           }
-        if (d->ui->m_amount->lineedit()->text().isEmpty()) {
+        if (d->ui->m_amount->text().isEmpty()) {
             rc = false;
             msg = i18n("No amount for payment selected");
           }

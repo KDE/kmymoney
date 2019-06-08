@@ -224,7 +224,7 @@
          <item>
           <layout class="QGridLayout" name="_6">
            <item row="2" column="1">
-            <widget class="KMyMoneyEdit" name="m_amountToEdit" native="true">
+            <widget class="AmountEdit" name="m_amountToEdit" native="true">
              <property name="minimumSize">
               <size>
                <width>100</width>
@@ -254,7 +254,7 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="KMyMoneyEdit" name="m_amountEdit" native="true">
+            <widget class="AmountEdit" name="m_amountEdit" native="true">
              <property name="minimumSize">
               <size>
                <width>100</width>
@@ -274,7 +274,7 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="KMyMoneyEdit" name="m_amountFromEdit" native="true">
+            <widget class="AmountEdit" name="m_amountFromEdit" native="true">
              <property name="minimumSize">
               <size>
                <width>100</width>
@@ -856,11 +856,10 @@
    <extends>QWidget</extends>
    <header location="global">../widgets/kmymoneyaccountselector.h</header>
   </customwidget>
-  <customwidget>
-   <class>KMyMoneyEdit</class>
-   <extends>QWidget</extends>
-   <header>kmymoneyedit.h</header>
-   <container>1</container>
+  <customwidget>                                   
+   <class>AmountEdit</class>
+   <extends>QLineEdit</extends>                   
+   <header location="global">amountedit.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

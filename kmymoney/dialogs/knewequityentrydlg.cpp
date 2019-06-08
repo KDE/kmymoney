@@ -33,7 +33,6 @@
 
 #include "ui_knewequityentrydlg.h"
 
-#include "kmymoneyedit.h"
 #include "mymoneymoney.h"
 
 class KNewEquityEntryDlgPrivate
@@ -66,13 +65,13 @@ KNewEquityEntryDlg::KNewEquityEntryDlg(QWidget *parent) :
   d->m_fraction = 0;
   d->ui->setupUi(this);
   setModal(true);
-  d->ui->edtFraction->setCalculatorButtonVisible(false);
+  d->ui->edtFraction->setCalculatorButtonVisible(true);
   d->ui->edtFraction->setPrecision(0);
-  d->ui->edtFraction->loadText("100");
+  d->ui->edtFraction->setText(QLatin1String("100"));
 
   connect(d->ui->buttonBox->button(QDialogButtonBox::Ok), &QAbstractButton::clicked, this, &KNewEquityEntryDlg::onOKClicked);
 
-  connect(d->ui->edtFraction, &KMyMoneyEdit::textChanged, this, &KNewEquityEntryDlg::slotDataChanged);
+  connect(d->ui->edtFraction, &AmountEdit::textChanged, this, &KNewEquityEntryDlg::slotDataChanged);
   connect(d->ui->edtMarketSymbol, &QLineEdit::textChanged, this, &KNewEquityEntryDlg::slotDataChanged);
   connect(d->ui->edtEquityName, &QLineEdit::textChanged, this, &KNewEquityEntryDlg::slotDataChanged);
 

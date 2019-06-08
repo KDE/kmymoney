@@ -70,7 +70,7 @@ email                : mte@users.sourceforge.net
 #include "kgncimportoptionsdlg.h"
 #include "kgncpricesourcedlg.h"
 #include "keditscheduledlg.h"
-#include "kmymoneyedit.h"
+#include "mymoneymoney.h"
 #include "kmymoneymoneyvalidator.h"
 #define TRY try
 #define CATCH catch (const MyMoneyException &)

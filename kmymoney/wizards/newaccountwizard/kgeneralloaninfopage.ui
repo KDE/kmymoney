@@ -149,7 +149,7 @@ The option to &lt;b&gt;start from the beginning of the current year&lt;/b&gt; is
                 </widget>
               </item>
               <item row="4" column="1">
-                <widget class="KMyMoneyEdit" name="m_openingBalance">
+                <widget class="AmountEdit" name="m_openingBalance">
                   <property name="whatsThis" stdset="0">
                     <string>You have selected to record only payments from the beginning of this year. Since prior transactions will not be recorded, you need to supply the balance of the loan on January 1st of this year.</string>
                   </property>
@@ -370,6 +370,10 @@ Enter the due date of the first payment in the current year</string>
    <container>1</container>
   </customwidget>
 
-
+    <customwidget>
+      <class>AmountEdit</class>
+      <extends>QLineEdit</extends>
+      <header location="global">amountedit.h</header>
+    </customwidget>
   </customwidgets>
 </ui>

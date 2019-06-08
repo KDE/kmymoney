@@ -40,9 +40,9 @@
    <header>kmymoneycategory.h</header>
   </customwidget>
   <customwidget>
-   <class>KMyMoneyEdit</class>
-   <extends>QFrame</extends>
-   <header>kmymoneyedit.h</header>
+   <class>AmountEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">amountedit.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneyPayeeCombo</class>

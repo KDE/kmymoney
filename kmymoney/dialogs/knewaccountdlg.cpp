@@ -43,7 +43,6 @@
 
 #include "ui_knewaccountdlg.h"
 
-#include "kmymoneyedit.h"
 #include "kmymoneydateinput.h"
 #include <mymoneyexception.h>
 #include "mymoneyfile.h"
@@ -307,9 +306,9 @@ public:
       loadKVP("maxCreditAbsolute", ui->m_maxCreditAbsoluteEdit);
       loadKVP("maxCreditEarly", ui->m_maxCreditEarlyEdit);
       // reverse the sign for display purposes
-      if (!ui->m_maxCreditAbsoluteEdit->lineedit()->text().isEmpty())
+      if (!ui->m_maxCreditAbsoluteEdit->text().isEmpty())
         ui->m_maxCreditAbsoluteEdit->setValue(ui->m_maxCreditAbsoluteEdit->value()*MyMoneyMoney::MINUS_ONE);
-      if (!ui->m_maxCreditEarlyEdit->lineedit()->text().isEmpty())
+      if (!ui->m_maxCreditEarlyEdit->text().isEmpty())
         ui->m_maxCreditEarlyEdit->setValue(ui->m_maxCreditEarlyEdit->value()*MyMoneyMoney::MINUS_ONE);
       loadKVP("lastNumberUsed", ui->m_lastCheckNumberUsed);
 
@@ -364,14 +363,14 @@ public:
     q->connect(ui->m_vatAssignment, &QAbstractButton::toggled,       q, &KNewAccountDlg::slotVatAssignmentChanged);
     q->connect(ui->m_vatCategory,   &QAbstractButton::toggled,       q, &KNewAccountDlg::slotCheckFinished);
     q->connect(ui->m_vatAssignment, &QAbstractButton::toggled,       q, &KNewAccountDlg::slotCheckFinished);
-    q->connect(ui->m_vatRate,       &KMyMoneyEdit::textChanged,      q, &KNewAccountDlg::slotCheckFinished);
+    q->connect(ui->m_vatRate,       &AmountEdit::textChanged,      q, &KNewAccountDlg::slotCheckFinished);
     q->connect(ui->m_vatAccount,    &KMyMoneySelector::stateChanged, q, &KNewAccountDlg::slotCheckFinished);
     q->connect(ui->m_currency, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), q, &KNewAccountDlg::slotCheckCurrency);
 
-    q->connect(ui->m_minBalanceEarlyEdit,     &KMyMoneyEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMinBalanceAbsoluteEdit);
-    q->connect(ui->m_minBalanceAbsoluteEdit,  &KMyMoneyEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMinBalanceEarlyEdit);
-    q->connect(ui->m_maxCreditEarlyEdit,      &KMyMoneyEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMaxCreditAbsoluteEdit);
-    q->connect(ui->m_maxCreditAbsoluteEdit,   &KMyMoneyEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMaxCreditEarlyEdit);
+    q->connect(ui->m_minBalanceEarlyEdit,     &AmountEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMinBalanceAbsoluteEdit);
+    q->connect(ui->m_minBalanceAbsoluteEdit,  &AmountEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMinBalanceEarlyEdit);
+    q->connect(ui->m_maxCreditEarlyEdit,      &AmountEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMaxCreditAbsoluteEdit);
+    q->connect(ui->m_maxCreditAbsoluteEdit,   &AmountEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMaxCreditEarlyEdit);
 
     q->connect(ui->m_qcomboboxInstitutions, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::activated), q, &KNewAccountDlg::slotLoadInstitutions);
 
@@ -418,13 +417,13 @@ public:
     requiredFields->add(ui->accountNameEdit);
   }
 
-  void loadKVP(const QString& key, KMyMoneyEdit* widget)
+  void loadKVP(const QString& key, AmountEdit* widget)
   {
     if (!widget)
       return;
 
     if (m_account.value(key).isEmpty()) {
-      widget->clearText();
+      widget->setText(QString());
     } else {
       widget->setValue(MyMoneyMoney(m_account.value(key)));
     }
@@ -457,9 +456,9 @@ public:
     }
   }
 
-  void storeKVP(const QString& key, KMyMoneyEdit* widget)
+  void storeKVP(const QString& key, AmountEdit* widget)
   {
-    storeKVP(key, widget->lineedit()->text(), widget->text());
+    storeKVP(key, widget->text(), widget->text());
   }
 
   void storeKVP(const QString& key, KLineEdit* widget)
@@ -499,7 +498,7 @@ public:
       vatSet.load(ui->m_vatAccount, i18n("Expense"), loadListExpense, false);
   }
 
-  void adjustEditWidgets(KMyMoneyEdit* dst, KMyMoneyEdit* src, char mode, int corr)
+  void adjustEditWidgets(AmountEdit* dst, AmountEdit* src, char mode, int corr)
   {
     MyMoneyMoney factor(corr, 1);
     if (m_account.accountGroup() == Account::Type::Asset)
@@ -647,15 +646,15 @@ void KNewAccountDlg::okClicked()
   d->storeKVP("minBalanceEarly", d->ui->m_minBalanceEarlyEdit);
 
   // the figures for credit line with reversed sign
-  if (!d->ui->m_maxCreditAbsoluteEdit->lineedit()->text().isEmpty())
+  if (!d->ui->m_maxCreditAbsoluteEdit->text().isEmpty())
     d->ui->m_maxCreditAbsoluteEdit->setValue(d->ui->m_maxCreditAbsoluteEdit->value()*MyMoneyMoney::MINUS_ONE);
-  if (!d->ui->m_maxCreditEarlyEdit->lineedit()->text().isEmpty())
+  if (!d->ui->m_maxCreditEarlyEdit->text().isEmpty())
     d->ui->m_maxCreditEarlyEdit->setValue(d->ui->m_maxCreditEarlyEdit->value()*MyMoneyMoney::MINUS_ONE);
   d->storeKVP("maxCreditAbsolute", d->ui->m_maxCreditAbsoluteEdit);
   d->storeKVP("maxCreditEarly", d->ui->m_maxCreditEarlyEdit);
-  if (!d->ui->m_maxCreditAbsoluteEdit->lineedit()->text().isEmpty())
+  if (!d->ui->m_maxCreditAbsoluteEdit->text().isEmpty())
     d->ui->m_maxCreditAbsoluteEdit->setValue(d->ui->m_maxCreditAbsoluteEdit->value()*MyMoneyMoney::MINUS_ONE);
-  if (!d->ui->m_maxCreditEarlyEdit->lineedit()->text().isEmpty())
+  if (!d->ui->m_maxCreditEarlyEdit->text().isEmpty())
     d->ui->m_maxCreditEarlyEdit->setValue(d->ui->m_maxCreditEarlyEdit->value()*MyMoneyMoney::MINUS_ONE);
 
   d->storeKVP("lastNumberUsed", d->ui->m_lastCheckNumberUsed);

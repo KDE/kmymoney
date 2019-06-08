@@ -311,15 +311,15 @@ public:
       if (!q->field("loanAmountEditValid").toBool()) {
         // calculate the amount of the loan out of the other information
         val = calc.presentValue();
-        ui->m_loanAmountPage->ui->m_loanAmountEdit->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney(fraction));
-        result = i18n("KMyMoney has calculated the amount of the loan as %1.", ui->m_loanAmountPage->ui->m_loanAmountEdit->lineedit()->text());
+        ui->m_loanAmountPage->ui->m_loanAmountEdit->setText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney(fraction));
+        result = i18n("KMyMoney has calculated the amount of the loan as %1.", ui->m_loanAmountPage->ui->m_loanAmountEdit->text());
 
       } else if (!q->field("interestRateEditValid").toBool()) {
         // calculate the interest rate out of the other information
         val = calc.interestRate();
 
-        ui->m_interestPage->ui->m_interestRateEdit->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney("", 3));
-        result = i18n("KMyMoney has calculated the interest rate to %1%.", ui->m_interestPage->ui->m_interestRateEdit->lineedit()->text());
+        ui->m_interestPage->ui->m_interestRateEdit->setText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney("", 3));
+        result = i18n("KMyMoney has calculated the interest rate to %1%.", ui->m_interestPage->ui->m_interestRateEdit->text());
 
       } else if (!q->field("paymentEditValid").toBool()) {
         // calculate the periodical amount of the payment out of the other information
@@ -331,7 +331,7 @@ public:
           val = -val;
         calc.setPmt(val);
 
-        result = i18n("KMyMoney has calculated a periodic payment of %1 to cover principal and interest.", ui->m_paymentPage->ui->m_paymentEdit->lineedit()->text());
+        result = i18n("KMyMoney has calculated a periodic payment of %1 to cover principal and interest.", ui->m_paymentPage->ui->m_paymentEdit->text());
 
         val = calc.futureValue();
         if ((q->field("borrowButton").toBool() && val < 0 && qAbs(val) >= qAbs(calc.payment()))
@@ -340,16 +340,16 @@ public:
           ui->m_durationPage->updateTermWidgets(calc.npp());
           val = calc.futureValue();
           MyMoneyMoney refVal(static_cast<double>(val));
-          ui->m_finalPaymentPage->ui->m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));
+          ui->m_finalPaymentPage->ui->m_finalPaymentEdit->setText(refVal.abs().formatMoney(fraction));
           result += QString(" ");
-          result += i18n("The number of payments has been decremented and the final payment has been modified to %1.", ui->m_finalPaymentPage->ui->m_finalPaymentEdit->lineedit()->text());
+          result += i18n("The number of payments has been decremented and the final payment has been modified to %1.", ui->m_finalPaymentPage->ui->m_finalPaymentEdit->text());
         } else if ((q->field("borrowButton").toBool() && val < 0 && qAbs(val) < qAbs(calc.payment()))
                    || (q->field("lendButton").toBool() && val > 0 && qAbs(val) < qAbs(calc.payment()))) {
-          ui->m_finalPaymentPage->ui->m_finalPaymentEdit->loadText(MyMoneyMoney().formatMoney(fraction));
+          ui->m_finalPaymentPage->ui->m_finalPaymentEdit->setText(MyMoneyMoney().formatMoney(fraction));
         } else {
           MyMoneyMoney refVal(static_cast<double>(val));
-          ui->m_finalPaymentPage->ui->m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));
-          result += i18n("The final payment has been modified to %1.", ui->m_finalPaymentPage->ui->m_finalPaymentEdit->lineedit()->text());
+          ui->m_finalPaymentPage->ui->m_finalPaymentEdit->setText(refVal.abs().formatMoney(fraction));
+          result += i18n("The final payment has been modified to %1.", ui->m_finalPaymentPage->ui->m_finalPaymentEdit->text());
         }
 
       } else if (q->field("durationValueEdit").toInt() == 0) {
@@ -366,8 +366,8 @@ public:
           calc.setNpp(qFloor(val));
           val = calc.futureValue();
           MyMoneyMoney refVal(static_cast<double>(val));
-          ui->m_finalPaymentPage->ui->m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));
-          result += i18n("The final payment has been modified to %1.", ui->m_finalPaymentPage->ui->m_finalPaymentEdit->lineedit()->text());
+          ui->m_finalPaymentPage->ui->m_finalPaymentEdit->setText(refVal.abs().formatMoney(fraction));
+          result += i18n("The final payment has been modified to %1.", ui->m_finalPaymentPage->ui->m_finalPaymentEdit->text());
         }
 
       } else {
@@ -407,7 +407,7 @@ public:
           result = i18n("KMyMoney has successfully verified your loan information.");
         }
         //FIXME: port
-        ui->m_finalPaymentPage->ui->m_finalPaymentEdit->loadText(refVal.abs().formatMoney(fraction));
+        ui->m_finalPaymentPage->ui->m_finalPaymentEdit->setText(refVal.abs().formatMoney(fraction));
       }
 
     } catch (const MyMoneyException &) {

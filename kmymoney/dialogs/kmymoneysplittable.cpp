@@ -52,7 +52,7 @@
 #include "mymoneyaccount.h"
 #include "mymoneyfile.h"
 #include "mymoneyprice.h"
-#include "kmymoneyedit.h"
+#include "amountedit.h"
 #include "kmymoneycategory.h"
 #include "kmymoneyaccountselector.h"
 #include "kmymoneylineedit.h"
@@ -145,7 +145,7 @@ public:
     * The widget will be created and destroyed dynamically in createInputWidgets()
     * and destroyInputWidgets().
     */
-  QPointer<KMyMoneyEdit>     m_editAmount;
+  QPointer<AmountEdit>     m_editAmount;
 
   /**
     * This member keeps the tab order for the above widgets
@@ -516,7 +516,7 @@ void KMyMoneySplitTable::mouseDoubleClickEvent(QMouseEvent *e)
       break;
 
     case 3:
-      editWidget = d->m_editAmount->lineedit();
+      editWidget = d->m_editAmount;
       break;
 
     default:
@@ -631,7 +631,7 @@ void KMyMoneySplitTable::slotUpdateData(const MyMoneyTransaction& t)
       amountTxt.clear();
 
     unsigned width = fontMetrics().width(amountTxt);
-    KMyMoneyEdit* valfield = new KMyMoneyEdit();
+    AmountEdit* valfield = new AmountEdit();
     valfield->setMinimumWidth(width);
     width = valfield->minimumSizeHint().width();
     delete valfield;
@@ -952,9 +952,9 @@ KMyMoneyCategory* KMyMoneySplitTable::createEditWidgets(bool setFocus)
   d->m_tabOrderWidgets.clear();
 
   // create the widgets
-  d->m_editAmount = new KMyMoneyEdit(0);
+  d->m_editAmount = new AmountEdit;
   d->m_editAmount->setFont(cellFont);
-  d->m_editAmount->setResetButtonVisible(false);
+  d->m_editAmount->setCalculatorButtonVisible(true);
   d->m_editAmount->setPrecision(d->m_precision);
 
   d->m_editCategory = new KMyMoneyCategory();
@@ -1027,7 +1027,7 @@ KMyMoneyCategory* KMyMoneySplitTable::createEditWidgets(bool setFocus)
   // don't allow automatically calculated values to be modified
   if (d->m_split.value() == MyMoneyMoney::autoCalc) {
     d->m_editAmount->setEnabled(false);
-    d->m_editAmount->loadText("will be calculated");
+    d->m_editAmount->setText("will be calculated");
   } else
     d->m_editAmount->setValue(d->m_split.value());
 

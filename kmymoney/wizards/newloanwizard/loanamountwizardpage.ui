@@ -60,7 +60,7 @@
           </widget>
         </item>
         <item>
-          <widget class="KMyMoneyEdit" name="m_loanAmountEdit"/>
+          <widget class="AmountEdit" name="m_loanAmountEdit"/>
         </item>
       </layout>
     </item>
@@ -242,6 +242,11 @@
  <resources/>
  <connections/>
  <customwidgets>
+   <customwidget>
+     <class>AmountEdit</class>
+     <extends>QLineEdit</extends>
+     <header location="global">amountedit.h</header>
+   </customwidget>
  </customwidgets>
  <tabstops>
  </tabstops>

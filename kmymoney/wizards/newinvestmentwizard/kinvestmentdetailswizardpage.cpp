@@ -80,7 +80,7 @@ KInvestmentDetailsWizardPage::KInvestmentDetailsWizardPage(QWidget *parent) :
   registerField("roundingMethod", ui->m_roundingMethod, "currentData", SIGNAL(currentIndexChanged(int)));
 
   registerField("fraction", ui->m_fraction, "value", SIGNAL(textChanged()));
-  connect(ui->m_fraction, &KMyMoneyEdit::textChanged,
+  connect(ui->m_fraction, &AmountEdit::textChanged,
           this, &QWizardPage::completeChanged);
 
   registerField("pricePrecision", ui->m_pricePrecision, "value", SIGNAL(valueChanged()));

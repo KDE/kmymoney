@@ -61,7 +61,7 @@ Please enter the interest rate or leave the field empty to calculate it.</string
           </widget>
         </item>
         <item>
-          <widget class="KMyMoneyEdit" name="m_interestRateEdit"/>
+          <widget class="AmountEdit" name="m_interestRateEdit"/>
         </item>
       </layout>
     </item>
@@ -243,6 +243,11 @@ Please enter the interest rate or leave the field empty to calculate it.</string
  <resources/>
  <connections/>
  <customwidgets>
+   <customwidget>
+     <class>AmountEdit</class>
+     <extends>QLineEdit</extends>
+     <header location="global">amountedit.h</header>
+   </customwidget>		 
  </customwidgets>
  <tabstops>
  </tabstops>

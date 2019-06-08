@@ -42,7 +42,6 @@
 #include "mymoneyexception.h"
 #include "mymoneyutils.h"
 #include "mymoneytracer.h"
-#include "kmymoneyedit.h"
 #include "mymoneysplit.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"

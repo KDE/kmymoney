@@ -61,7 +61,7 @@ Please enter the amount of a final amortization payment or leave the field empty
           </widget>
         </item>
         <item>
-          <widget class="KMyMoneyEdit" name="m_finalPaymentEdit"/>
+          <widget class="AmountEdit" name="m_finalPaymentEdit"/>
         </item>
       </layout>
     </item>
@@ -243,6 +243,11 @@ Please enter the amount of a final amortization payment or leave the field empty
  <resources/>
  <connections/>
  <customwidgets>
+   <customwidget>
+     <class>AmountEdit</class>
+     <extends>QLineEdit</extends>
+     <header location="global">amountedit.h</header>
+   </customwidget>		 
  </customwidgets>
  <tabstops>
  </tabstops>

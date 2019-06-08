@@ -6,7 +6,7 @@ set(kmymoney_STAT_HEADERS
   kmymoneyaccountselector.h
   kmymoneycategory.h
   kmymoneycombo.h kmymoneymvccombo.h kmymoneycompletion.h
-  kmymoneycurrencyselector.h  kmymoneydateinput.h kmymoneyedit.h
+  kmymoneycurrencyselector.h  kmymoneydateinput.h
   kmymoneylineedit.h kmymoneyselector.h
   kmymoneytitlelabel.h register.h registeritem.h groupmarker.h fancydategroupmarker.h
   scheduledtransaction.h selectedtransaction.h selectedtransactions.h stdtransactiondownloaded.h
@@ -24,7 +24,6 @@ set(kmm_widgets_sources
   kmymoneydateinput.cpp
   kmymoneyvalidationfeedback.cpp
   styleditemdelegateforwarder.cpp
-  kmymoneyedit.cpp
   kmymoneylineedit.cpp
   kmymoneytextedit.cpp
   kmymoneytextedithighlighter.cpp

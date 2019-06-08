@@ -41,9 +41,9 @@
 // Project Includes
 
 #include "ktransactionfilter.h"
-#include "kmymoneyedit.h"
 #include "mymoneyaccount.h"
 #include "mymoneyfile.h"
+#include "mymoneymoney.h"
 #include "mymoneypayee.h"
 #include "mymoneytag.h"
 #include "kmymoneysettings.h"

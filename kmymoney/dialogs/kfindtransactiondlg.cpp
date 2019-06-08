@@ -46,7 +46,6 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
-#include "kmymoneyedit.h"
 #include "kmymoneysettings.h"
 #include "register.h"
 #include "transaction.h"

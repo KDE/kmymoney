@@ -48,7 +48,6 @@
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
 #include "kmymoneydateinput.h"
-#include "kmymoneyedit.h"
 #include "kmymoneysettings.h"
 #include "mymoneytemplate.h"
 #include "mymoneyenums.h"

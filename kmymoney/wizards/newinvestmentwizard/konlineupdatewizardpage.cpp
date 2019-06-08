@@ -59,7 +59,7 @@ KOnlineUpdateWizardPage::KOnlineUpdateWizardPage(QWidget *parent) :
   registerField("onlineSourceCombo", ui->m_onlineSourceCombo, "currentText", SIGNAL(currentIndexChanged(QString)));
   registerField("useFinanceQuote", ui->m_useFinanceQuote);
   connect(ui->m_onlineSourceCombo, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged), this, &KOnlineUpdateWizardPage::slotCheckPage);
-  connect(ui->m_onlineFactor, &KMyMoneyEdit::textChanged,
+  connect(ui->m_onlineFactor, &AmountEdit::textChanged,
           this, &QWizardPage::completeChanged);
 
   connect(ui->m_onlineSourceCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),

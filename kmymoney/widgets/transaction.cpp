@@ -51,7 +51,6 @@
 #include "kmymoneycategory.h"
 #include "kmymoneydateinput.h"
 #include "transactionform.h"
-#include "kmymoneyedit.h"
 #include "kmymoneyutils.h"
 #include "registerfilter.h"
 #include "tabbar.h"

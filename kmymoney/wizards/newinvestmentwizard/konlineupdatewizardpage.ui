@@ -92,7 +92,7 @@
                   </widget>
                 </item>
                 <item>
-                  <widget class="KMyMoneyEdit" name="m_onlineFactor"/>
+                  <widget class="AmountEdit" name="m_onlineFactor"/>
                 </item>
               </layout>
             </item>
@@ -142,6 +142,11 @@
       <extends>QComboBox</extends>
       <header location="global">kcombobox.h</header>
    </customwidget>
+   <customwidget>
+      <class>AmountEdit</class>
+      <extends>QLineEdit</extends>
+      <header location="global">amountedit.h</header>
+   </customwidget>	   
  </customwidgets>
  <tabstops>
    <tabstop>m_useFinanceQuote</tabstop>

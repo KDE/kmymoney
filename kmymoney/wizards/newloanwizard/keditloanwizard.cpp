@@ -53,7 +53,6 @@
 #include "knewloanwizard.h"
 #include "knewloanwizard_p.h"
 #include "kmymoneylineedit.h"
-#include "kmymoneyedit.h"
 #include "kmymoneyaccountselector.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
@@ -136,8 +135,8 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
 
   //FIXME: port
   d->ui->m_namePage->ui->m_nameEdit->loadText(d->m_account.name());
-  d->ui->m_loanAmountPage->ui->m_loanAmountEdit->loadText(d->m_account.loanAmount().formatMoney(d->m_account.fraction(MyMoneyFile::instance()->security(d->m_account.currencyId()))));
-  d->ui->m_finalPaymentPage->ui->m_finalPaymentEdit->loadText(d->m_account.finalPayment().formatMoney(d->m_account.fraction(MyMoneyFile::instance()->security(d->m_account.currencyId()))));
+  d->ui->m_loanAmountPage->ui->m_loanAmountEdit->setText(d->m_account.loanAmount().formatMoney(d->m_account.fraction(MyMoneyFile::instance()->security(d->m_account.currencyId()))));
+  d->ui->m_finalPaymentPage->ui->m_finalPaymentEdit->setText(d->m_account.finalPayment().formatMoney(d->m_account.fraction(MyMoneyFile::instance()->security(d->m_account.currencyId()))));
   setField("firstDueDateEdit", d->m_account.openingDate());
 
   //FIXME: port
@@ -161,9 +160,9 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
     ir = d->m_account.interestRate(QDate::currentDate());
   }
   //FIXME: port
-  d->ui->m_interestPage->ui->m_interestRateEdit->loadText(ir.formatMoney(QString(), 3));
+  d->ui->m_interestPage->ui->m_interestRateEdit->setText(ir.formatMoney(QString(), 3));
   d->ui->m_interestPage->ui->m_interestRateEdit->setPrecision(3);
-  d->ui->m_interestEditPage->ui->m_newInterestRateEdit->loadText(ir.formatMoney(QString(), 3));
+  d->ui->m_interestEditPage->ui->m_newInterestRateEdit->setText(ir.formatMoney(QString(), 3));
   d->ui->m_interestEditPage->ui->m_newInterestRateEdit->setPrecision(3);
   d->ui->m_interestEditPage->ui->m_interestRateLabel->setText(QString(" ") + ir.formatMoney(QString(), 3) + QString("%"));
 
@@ -239,8 +238,8 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
 
   int fraction = d->m_account.fraction(MyMoneyFile::instance()->security(d->m_account.currencyId()));
   //FIXME: port
-  d->ui->m_paymentPage->ui->m_paymentEdit->loadText(basePayment.formatMoney(fraction));
-  d->ui->m_paymentEditPage->ui->m_newPaymentEdit->loadText(basePayment.formatMoney(fraction));
+  d->ui->m_paymentPage->ui->m_paymentEdit->setText(basePayment.formatMoney(fraction));
+  d->ui->m_paymentEditPage->ui->m_newPaymentEdit->setText(basePayment.formatMoney(fraction));
   d->ui->m_paymentEditPage->ui->m_paymentLabel->setText(QString(" ") + basePayment.formatMoney(fraction));
 
   setField("additionalCost", addPayment.formatMoney(fraction));
@@ -392,7 +391,7 @@ bool KEditLoanWizard::validateCurrentPage()
         setField("durationValueEdit", 0);
       }
       if (d->m_fullyRepayLoan)
-        d->ui->m_finalPaymentPage->ui->m_finalPaymentEdit->loadText(MyMoneyMoney().formatMoney(d->m_account.fraction(MyMoneyFile::instance()->security(d->m_account.currencyId()))));
+        d->ui->m_finalPaymentPage->ui->m_finalPaymentEdit->setText(MyMoneyMoney().formatMoney(d->m_account.fraction(MyMoneyFile::instance()->security(d->m_account.currencyId()))));
     }
 
     /*

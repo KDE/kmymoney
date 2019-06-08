@@ -42,7 +42,7 @@ LoanAmountWizardPage::LoanAmountWizardPage(QWidget *parent)
   registerField("loanAmountEdit", ui->m_loanAmountEdit, "value", SIGNAL(textChanged()));
   registerField("loanAmountEditValid", ui->m_loanAmountEdit, "valid", SIGNAL(textChanged()));
 
-  connect(ui->m_loanAmountEdit, &KMyMoneyEdit::textChanged, this, &QWizardPage::completeChanged);
+  connect(ui->m_loanAmountEdit, &AmountEdit::textChanged, this, &QWizardPage::completeChanged);
 
   registerField("loanAmount1", ui->m_loanAmount1, "text");
   registerField("interestRate1", ui->m_interestRate1, "text");

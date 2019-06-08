@@ -109,7 +109,6 @@
 #include "widgets/kmymoneyaccountselector.h"
 #include "widgets/kmymoneypayeecombo.h"
 #include "widgets/amountedit.h"
-#include "widgets/kmymoneyedit.h"
 #include "widgets/kmymoneymvccombo.h"
 
 #include "views/kmymoneyview.h"
@@ -3558,7 +3557,6 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
 
       // setup the standard precision
       AmountEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
-      KMyMoneyEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
 
       applyFileFixes();
       Models::instance()->fileOpened();

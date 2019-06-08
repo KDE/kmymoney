@@ -79,7 +79,7 @@ public:
   /**
     * This method is used to preset the first operand and start
     * execution of an operation. This method is currently used
-    * by KMyMoneyEdit. If @p ev is 0, then no operation will be
+    * by AmountEdit. If @p ev is 0, then no operation will be
     * started.
     *
     * @param value reference to QString representing the operands value

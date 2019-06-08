@@ -60,7 +60,6 @@
 #include "kmymoneycategory.h"
 #include "kmymoneycurrencyselector.h"
 #include "kmymoneydateinput.h"
-#include "kmymoneyedit.h"
 #include "kmymoneyfrequencycombo.h"
 #include "kmymoneygeneralcombo.h"
 #include "kmymoneypayeecombo.h"

@@ -47,7 +47,6 @@
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneyforecast.h"
-#include "kmymoneyedit.h"
 #include "kbudgetvalues.h"
 #include "kmymoneyutils.h"
 

@@ -58,7 +58,7 @@
 #include "kmymoneysettings.h"
 #include "transactioneditor.h"
 #include "stdtransactioneditor.h"
-#include "kmymoneyedit.h"
+#include "amountedit.h"
 #include "kaccountselectdlg.h"
 #include "knewaccountwizard.h"
 #include "transactionmatcher.h"
@@ -1501,7 +1501,7 @@ void MyMoneyStatementReader::handleMatchingOfScheduledTransaction(TransactionMat
             // sure to use only the absolute value of the amount, because
             // the editor keeps the sign in a different position (deposit,
             // withdrawal tab)
-            KMyMoneyEdit* amount = dynamic_cast<KMyMoneyEdit*>(se->haveWidget("amount"));
+            AmountEdit* amount = dynamic_cast<AmountEdit*>(se->haveWidget("amount"));
             if (amount) {
               amount->setValue(importedSplit.shares().abs());
               se->slotUpdateAmount(importedSplit.shares().abs().toString());

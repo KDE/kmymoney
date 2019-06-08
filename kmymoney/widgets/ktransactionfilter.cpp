@@ -38,7 +38,6 @@
 #include "mymoneyfile.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
-#include "kmymoneyedit.h"
 #include "kmymoneysettings.h"
 #include "daterangedlg.h"
 
@@ -67,9 +66,9 @@ void KTransactionFilter::slotReset()
   d->ui->m_amountEdit->setEnabled(true);
   d->ui->m_amountFromEdit->setEnabled(false);
   d->ui->m_amountToEdit->setEnabled(false);
-  d->ui->m_amountEdit->loadText(QString());
-  d->ui->m_amountFromEdit->loadText(QString());
-  d->ui->m_amountToEdit->loadText(QString());
+  d->ui->m_amountEdit->setText(QString());
+  d->ui->m_amountFromEdit->setText(QString());
+  d->ui->m_amountToEdit->setText(QString());
   d->ui->m_amountButton->setChecked(true);
   d->ui->m_amountRangeButton->setChecked(false);
 
@@ -441,18 +440,18 @@ void KTransactionFilter::resetFilter(MyMoneyReport& rep)
       d->ui->m_amountEdit->setEnabled(true);
       d->ui->m_amountFromEdit->setEnabled(false);
       d->ui->m_amountToEdit->setEnabled(false);
-      d->ui->m_amountEdit->loadText(QString::number(from.toDouble()));
-      d->ui->m_amountFromEdit->loadText(QString());
-      d->ui->m_amountToEdit->loadText(QString());
+      d->ui->m_amountEdit->setText(QString::number(from.toDouble()));
+      d->ui->m_amountFromEdit->setText(QString());
+      d->ui->m_amountToEdit->setText(QString());
       d->ui->m_amountButton->setChecked(true);
       d->ui->m_amountRangeButton->setChecked(false);
     } else {
       d->ui->m_amountEdit->setEnabled(false);
       d->ui->m_amountFromEdit->setEnabled(true);
       d->ui->m_amountToEdit->setEnabled(true);
-      d->ui->m_amountEdit->loadText(QString());
-      d->ui->m_amountFromEdit->loadText(QString::number(from.toDouble()));
-      d->ui->m_amountToEdit->loadText(QString::number(to.toDouble()));
+      d->ui->m_amountEdit->setText(QString());
+      d->ui->m_amountFromEdit->setText(QString::number(from.toDouble()));
+      d->ui->m_amountToEdit->setText(QString::number(to.toDouble()));
       d->ui->m_amountButton->setChecked(false);
       d->ui->m_amountRangeButton->setChecked(true);
     }
@@ -460,9 +459,9 @@ void KTransactionFilter::resetFilter(MyMoneyReport& rep)
     d->ui->m_amountEdit->setEnabled(true);
     d->ui->m_amountFromEdit->setEnabled(false);
     d->ui->m_amountToEdit->setEnabled(false);
-    d->ui->m_amountEdit->loadText(QString());
-    d->ui->m_amountFromEdit->loadText(QString());
-    d->ui->m_amountToEdit->loadText(QString());
+    d->ui->m_amountEdit->setText(QString());
+    d->ui->m_amountFromEdit->setText(QString());
+    d->ui->m_amountToEdit->setText(QString());
     d->ui->m_amountButton->setChecked(true);
     d->ui->m_amountRangeButton->setChecked(false);
   }

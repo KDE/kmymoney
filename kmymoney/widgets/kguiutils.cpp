@@ -36,11 +36,11 @@
 #include <KComboBox>
 #include <KLineEdit>
 #include <KUrlRequester>
-#include "kmymoneyedit.h"
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "amountedit.h"
 #include "kmymoneysettings.h"
 #include "onlinetasks/interfaces/ui/ionlinejobedit.h"
 #include "kmymoneytextedit.h"
@@ -102,16 +102,6 @@ void KMandatoryFieldGroup::add(QWidget *widget)
         connect(lineedit, &QLineEdit::textChanged, this, &KMandatoryFieldGroup::changed);
       } else {
         connect(combo, static_cast<void (QComboBox::*)(int)>(&QComboBox::highlighted), this, &KMandatoryFieldGroup::changed);
-      }
-    }
-
-    else if (qobject_cast<KMyMoneyEdit*>(widget)) {
-      KMyMoneyEdit* amount = qobject_cast<KMyMoneyEdit*>(widget);
-      KLineEdit* lineedit = qobject_cast<KLineEdit*>(amount->lineedit());
-      if (lineedit) {
-        connect(lineedit, &QLineEdit::textChanged, this, &KMandatoryFieldGroup::changed);
-      } else {
-        connect(amount, SIGNAL(highlighted(int)), this, SLOT(changed()));
       }
     }
 
@@ -243,8 +233,8 @@ void KMandatoryFieldGroup::changed()
       } else
         continue;
     }
-    if ((qobject_cast<KMyMoneyEdit*>(widget))) {
-      if ((qobject_cast<KMyMoneyEdit*>(widget))->text() == "0/1") {
+    if ((qobject_cast<AmountEdit*>(widget))) {
+      if (!(qobject_cast<AmountEdit*>(widget))->value().isZero()) {
         enable = false;
         break;
       } else
