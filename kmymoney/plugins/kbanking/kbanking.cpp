@@ -1440,8 +1440,11 @@ bool KBankingExt::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai,
     ks.m_strRoutingNumber = m_parent->stripLeadingZeroes(p);
   }
 
-  MyMoneyAccount kacc = m_parent->account("kbanking-acc-ref", QString("%1-%2").arg(ks.m_strRoutingNumber, ks.m_strAccountNumber));
-  ks.m_accountId = kacc.id();
+  MyMoneyAccount kacc;
+  if (!ks.m_strAccountNumber.isEmpty() || !ks.m_strRoutingNumber.isEmpty()) {
+    kacc = m_parent->account("kbanking-acc-ref", QString("%1-%2").arg(ks.m_strRoutingNumber, ks.m_strAccountNumber));
+    ks.m_accountId = kacc.id();
+  }
 
   // account name
   p = AB_ImExporterAccountInfo_GetAccountName(ai);
