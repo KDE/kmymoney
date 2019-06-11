@@ -45,6 +45,7 @@
         "Name": "Weboob",
         "Name[ca@valencia]": "Weboob",
         "Name[ca]": "Weboob",
+        "Name[cs]": "Weboob",
         "Name[en_GB]": "Weboob",
         "Name[es]": "Weboob",
         "Name[fr]": "Weboob",
