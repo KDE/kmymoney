@@ -32,8 +32,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymoney.h"
-
 /**
   * This class is derived from KDoubleValidator and uses
   * the monetary symbols instead of the numeric symbols.
