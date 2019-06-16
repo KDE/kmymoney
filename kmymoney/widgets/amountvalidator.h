@@ -1,6 +1,5 @@
 /*
- * Copyright 2016       Thomas Baumgart <tbaumgart@kde.org>
- * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2016-2019  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -33,9 +32,9 @@
 // Project Includes
 
 /**
-  * This class is derived from KDoubleValidator and uses
-  * the monetary symbols instead of the numeric symbols.
-  * Also, it always accepts localized input.
+  * This class is a specialization of the QDoubleValidator
+  * which uses the StandardNotation instead of the
+  * ScientificNotation as the default
   *
   * @author Thomas Baumgart
   */
@@ -44,26 +43,9 @@ class AmountValidator : public QDoubleValidator
   Q_OBJECT
 
 public:
-  /**
-    * Constuct a locale-aware KDoubleValidator with default range
-    * (whatever QDoubleValidator uses for that) and parent @p
-    * parent
-    */
   explicit AmountValidator(QObject * parent);
-  /**
-    * Constuct a locale-aware KDoubleValidator for range [@p bottom,@p
-    * top] and a precision of @p digits after the decimal
-    * point.
-    */
   explicit AmountValidator(double bottom, double top, int decimals,
                          QObject * parent);
-  /**
-    * Destructs the validator.
-    */
-  ~AmountValidator();
-
-  /** Overloaded for internal reasons. The API is not affected. */
-  QValidator::State validate(QString & input, int & pos) const override;
 };
 
 #endif
