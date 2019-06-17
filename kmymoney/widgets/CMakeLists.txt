@@ -259,3 +259,9 @@ add_dependencies(widgets kmm_settings)
 
 install(FILES ${kmymoney_STAT_HEADERS} ${CMAKE_CURRENT_BINARY_DIR}/kmm_widgets_export.h
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
+
+############## tests ####################
+
+if(BUILD_TESTING)
+  add_subdirectory(tests)
+endif()
