@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2010-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -67,6 +67,8 @@ public:
   explicit AmountEdit(const MyMoneySecurity& eq, QWidget* parent = nullptr);
   virtual ~AmountEdit();
 
+  static AmountEdit* global();
+
   MyMoneyMoney value() const;
 
   void setValue(const MyMoneyMoney& value);
@@ -114,8 +116,17 @@ public:
    * This allows to setup the standard precision (number of decimal places)
    * to be used when no other information is available. @a prec must be in
    * the range of 0..19. If never set, the default precision is 2.
+   *
+   * @sa standardPrecision
    */
   static void setStandardPrecision(int prec);
+
+  /**
+   * This returns the global selected standard precision
+   *
+   * @sa setStandardPrecision
+   */
+  static int standardPrecision();
 
 public Q_SLOTS:
   void resetText();

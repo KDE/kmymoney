@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2010-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -28,7 +28,6 @@
 #include <QToolButton>
 #include <QFrame>
 #include <QLocale>
-#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -41,11 +40,29 @@
 
 #include "amountvalidator.h"
 #include "kmymoneycalculator.h"
-#include "mymoneymoney.h"
 #include "mymoneysecurity.h"
 #include "icons/icons.h"
 
 using namespace Icons;
+
+class AmountEditHelper
+{
+public:
+  AmountEditHelper() : q(nullptr) {}
+  ~AmountEditHelper() { delete q; }
+  AmountEdit *q;
+};
+
+Q_GLOBAL_STATIC(AmountEditHelper, s_globalAmountEdit)
+
+AmountEdit* AmountEdit::global()
+{
+  if (!s_globalAmountEdit()->q) {
+    s_globalAmountEdit()->q = new AmountEdit(0, 2);
+  }
+
+  return s_globalAmountEdit()->q;
+}
 
 class AmountEditPrivate
 {
@@ -167,10 +184,7 @@ public:
    *
    * @sa setStandardPrecision()
    */
-  static int standardPrecision;
 };
-
-int AmountEditPrivate::standardPrecision = 2;
 
 AmountEdit::AmountEdit(QWidget *parent, const int prec) :
   QLineEdit(parent),
@@ -179,7 +193,7 @@ AmountEdit::AmountEdit(QWidget *parent, const int prec) :
   Q_D(AmountEdit);
   d->m_prec = prec;
   if (prec < -1 || prec > 20) {
-    d->m_prec = AmountEditPrivate::standardPrecision;
+    d->m_prec = AmountEdit::global()->standardPrecision();
   }
   d->init();
 }
@@ -202,8 +216,13 @@ AmountEdit::~AmountEdit()
 void AmountEdit::setStandardPrecision(int prec)
 {
   if (prec >= 0 && prec < 20) {
-    AmountEditPrivate::standardPrecision = prec;
+    global()->d_ptr->m_prec = prec;
   }
+}
+
+int AmountEdit::standardPrecision()
+{
+  return global()->d_ptr->m_prec;
 }
 
 
