@@ -1229,7 +1229,12 @@ public:
           case Account::Type::Loan:
             // list account if it's the last in the hierarchy or has transactions in it
             if ((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
-              liabilities << *it;
+	      // Add it if we are not hiding zero balance liabilities, or the balance is not zero
+              const auto value = 
+		      MyMoneyFile::instance()->balance((*it).id(), QDate::currentDate());
+	      if (!(KMyMoneySettings::hideZeroBalanceLiabilities() && value.isZero())) {
+                liabilities << *it;
+              }
             }
             break;
 

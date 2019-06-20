@@ -40,8 +40,8 @@ KOnlineUpdateWizardPage::KOnlineUpdateWizardPage(QWidget *parent) :
   ui(new Ui::KOnlineUpdateWizardPage)
 {
   ui->setupUi(this);
-  ui->m_onlineFactor->setValue(MyMoneyMoney::ONE);
   ui->m_onlineFactor->setPrecision(4);
+  ui->m_onlineFactor->setValue(MyMoneyMoney::ONE);
 
   // make ui->m_onlineSourceCombo sortable
   QSortFilterProxyModel* proxy = new QSortFilterProxyModel(ui->m_onlineSourceCombo);

@@ -572,6 +572,18 @@ public:
             // loop over all splits
             for (auto& split : transaction.splits()) {
               // if the split is assigned to one of the selected payees, we need to modify it
+              if (split.isMatched()) {
+                auto tm = split.matchedTransaction();
+                for (auto& sm : tm.splits()) {
+                  if (payeeInList(m_selectedPayeesList, sm.payeeId())) {
+                    sm.setPayeeId(payee_id); // first modify payee in current split
+                    // then modify the split in our local copy of the transaction list
+                    tm.modifySplit(sm); // this does not modify the list object 'splits'!
+                  }
+                }
+                split.addMatch(tm);
+                transaction.modifySplit(split); // this does not modify the list object 'splits'!
+              }
               if (payeeInList(m_selectedPayeesList, split.payeeId())) {
                 split.setPayeeId(payee_id); // first modify payee in current split
                 // then modify the split in our local copy of the transaction list

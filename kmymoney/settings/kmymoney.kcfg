@@ -192,6 +192,10 @@
    <label>Show date of last reconciliation on the Homepage</label>
    <default>false</default>
   </entry>
+  <entry name="HideZeroBalanceLiabilities" type="Bool">
+    <label>Hide zero balance liabilities on the Homepage</label>
+    <default>false</default>
+  </entry>
  </group>
  <group name="Color Options">
   <entry name="useCustomColors" type="Bool">

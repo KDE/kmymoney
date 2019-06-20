@@ -232,6 +232,13 @@ Use the buttons and checkboxes to customize the layout of the home page.</string
         </property>
        </widget>
       </item>
+      <item row="6" column="0" colspan="3">
+       <widget class="QCheckBox" name="kcfg_HideZeroBalanceLiabilities">
+	<property name="text">
+         <string>Hide liability accounts with zero balance</string>
+	</property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
