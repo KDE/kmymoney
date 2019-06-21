@@ -23,7 +23,6 @@
 // QT Includes
 
 #include <QString>
-#include <QDomElement>
 
 // ----------------------------------------------------------------------------
 // Project Includes
