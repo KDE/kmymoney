@@ -7,7 +7,6 @@
                 "Name[ca@valencia]": "Christian David",
                 "Name[ca]": "Christian David",
                 "Name[cs]": "Christian David",
-                "Name[de]": "Christian David",
                 "Name[en_GB]": "Christian David",
                 "Name[es]": "Christian David",
                 "Name[fr]": "Christian David",
