@@ -1,6 +1,6 @@
 /*
  * Copyright 2009-2014  Cristian Oneț <onet.cristian@gmail.com>
- * Copyright 2009-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2009-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2016       Christian Dávid <christian-david@web.de>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
@@ -35,15 +35,13 @@ QTEST_GUILESS_MAIN(MyMoneyPayeeTest)
 void MyMoneyPayeeTest::testDefaultAccount()
 {
   MyMoneyPayee payee;
-  QVERIFY(!payee.defaultAccountEnabled());
-  QVERIFY(payee.defaultAccountId().isEmpty());
+  QCOMPARE(payee.defaultAccountId().isEmpty(), true);
   QString temp = "Account1";
   payee.setDefaultAccountId(temp);
-  QVERIFY(payee.defaultAccountEnabled());
-  QVERIFY(payee.defaultAccountId() == temp);
+  QCOMPARE(payee.defaultAccountId().isEmpty(), false);
+  QCOMPARE(payee.defaultAccountId(), temp);
   payee.setDefaultAccountId();
-  QVERIFY(!payee.defaultAccountEnabled());
-  QVERIFY(payee.defaultAccountId().isEmpty());
+  QCOMPARE(payee.defaultAccountId().isEmpty(), true);
 }
 
 void MyMoneyPayeeTest::testEmptyMatchKeyBegin()

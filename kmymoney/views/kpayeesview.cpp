@@ -307,7 +307,7 @@ void KPayeesView::slotSelectPayee()
     d->ui->matchKeyEditList->insertStringList(keys);
     d->ui->checkMatchIgnoreCase->setChecked(ignorecase);
 
-    d->ui->checkEnableDefaultCategory->setChecked(d->m_payee.defaultAccountEnabled());
+    d->ui->checkEnableDefaultCategory->setChecked(!d->m_payee.defaultAccountId().isEmpty());
     d->ui->comboDefaultCategory->setSelected(d->m_payee.defaultAccountId());
 
     d->ui->payeeIdentifiers->setSource(d->m_payee);
@@ -380,7 +380,7 @@ void KPayeesView::slotPayeeDataChanged()
       }
     }
 
-    rc |= (d->ui->checkEnableDefaultCategory->isChecked() != d->m_payee.defaultAccountEnabled());
+    rc |= (d->ui->checkEnableDefaultCategory->isChecked() != !d->m_payee.defaultAccountId().isEmpty());
     if (d->ui->checkEnableDefaultCategory->isChecked()) {
       d->ui->comboDefaultCategory->setEnabled(true);
       d->ui->labelDefaultCategory->setEnabled(true);

@@ -1118,7 +1118,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       // handle it.
       //
       const MyMoneyPayee& payeeObj = MyMoneyFile::instance()->payee(payeeid);
-      if (statementTransactionUnderImport.m_listSplits.isEmpty() && payeeObj.defaultAccountEnabled()) {
+      if (statementTransactionUnderImport.m_listSplits.isEmpty() && !payeeObj.defaultAccountId().isEmpty()) {
         MyMoneyAccount splitAccount = file->account(payeeObj.defaultAccountId());
         MyMoneySplit s;
         s.setReconcileFlag(eMyMoney::Split::State::Cleared);

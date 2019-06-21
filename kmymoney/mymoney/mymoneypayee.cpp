@@ -1,6 +1,6 @@
 /*
  * Copyright 2000-2001  Michael Edwardes <mte@users.sourceforge.net>
- * Copyright 2002-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2002-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2003       Kevin Tambascio <ktambascio@users.sourceforge.net>
  * Copyright 2006       Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
@@ -27,14 +27,14 @@
 
 #include <QString>
 #include <QStringList>
-#include <QMap>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneyexception.h>
+#include "mymoneyexception.h"
 #include "mymoneyenums.h"
 
+/// @todo remove and replace that one occurrence with MyMoneyPayee()
 MyMoneyPayee MyMoneyPayee::null;
 
 MyMoneyPayee::MyMoneyPayee() :
@@ -45,28 +45,6 @@ MyMoneyPayee::MyMoneyPayee() :
 MyMoneyPayee::MyMoneyPayee(const QString &id):
   MyMoneyObject(*new MyMoneyPayeePrivate, id)
 {
-}
-
-MyMoneyPayee::MyMoneyPayee(const QString& name,
-                           const QString& address,
-                           const QString& city,
-                           const QString& state,
-                           const QString& postcode,
-                           const QString& telephone,
-                           const QString& email) :
-  MyMoneyObject(*new MyMoneyPayeePrivate)
-{
-  Q_D(MyMoneyPayee);
-  d->m_name      = name;
-  d->m_address   = address;
-  d->m_city      = city;
-  d->m_state     = state;
-  d->m_postcode  = postcode;
-  d->m_telephone = telephone;
-  d->m_email     = email;
-  d->m_matchingEnabled = false;
-  d->m_usingMatchKey = false;
-  d->m_matchKeyIgnoreCase = true;
 }
 
 MyMoneyPayee::MyMoneyPayee(const MyMoneyPayee& other) :
@@ -104,12 +82,6 @@ bool MyMoneyPayee::operator == (const MyMoneyPayee& right) const
           ((d->m_reference.length() == 0 && d2->m_reference.length() == 0) || (d->m_reference == d2->m_reference)) &&
           ((d->m_defaultAccountId.length() == 0 && d2->m_defaultAccountId.length() == 0) || d->m_defaultAccountId == d2->m_defaultAccountId));
 }
-
-//bool MyMoneyPayee::operator == (const MyMoneyPayee& lhs, const QString& rhs) const
-//{
-//  Q_D(const MyMoneyPayee);
-//  return lhs.id() == rhs;
-//}
 
 bool MyMoneyPayee::operator < (const MyMoneyPayee& right) const
 {
@@ -314,12 +286,6 @@ void MyMoneyPayee::setMatchData(eMyMoney::Payee::MatchType type, bool ignorecase
     setMatchData(type, ignorecase, keys.split(QLatin1Char(';'))); // for compatibility with 4.8.0
 }
 
-bool MyMoneyPayee::defaultAccountEnabled() const
-{
-  Q_D(const MyMoneyPayee);
-  return !d->m_defaultAccountId.isEmpty();
-}
-
 QString MyMoneyPayee::defaultAccountId() const
 {
   Q_D(const MyMoneyPayee);
@@ -330,11 +296,6 @@ void MyMoneyPayee::setDefaultAccountId(const QString& id)
 {
   Q_D(MyMoneyPayee);
   d->m_defaultAccountId = id;
-}
-
-void MyMoneyPayee::setDefaultAccountId()
-{
-  setDefaultAccountId(QString());
 }
 
 // vim:cin:si:ai:et:ts=2:sw=2:

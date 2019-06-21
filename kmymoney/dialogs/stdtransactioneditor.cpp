@@ -663,7 +663,7 @@ void StdTransactionEditor::slotUpdatePayee(const QString& payeeId)
 
   // If payee has associated default account (category), set that now.
   const MyMoneyPayee& payeeObj = MyMoneyFile::instance()->payee(payeeId);
-  if (payeeObj.defaultAccountEnabled()) {
+  if (!payeeObj.defaultAccountId().isEmpty()) {
     if (auto category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"]))
       category->slotItemSelected(payeeObj.defaultAccountId());
   }

@@ -1395,7 +1395,6 @@ void MyMoneyStorageMgrTest::testAddPayee()
     QVERIFY(ignore == ignore1);
     QVERIFY(keys == keys1);
     QVERIFY(p.reference() == p1.reference());
-    QVERIFY(p.defaultAccountEnabled() == p1.defaultAccountEnabled());
     QVERIFY(p.defaultAccountId() == p1.defaultAccountId());
 
     QVERIFY(p == p1);
