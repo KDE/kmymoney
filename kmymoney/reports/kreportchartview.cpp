@@ -175,16 +175,30 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   gridAttr.setGridVisible(config.isChartGridLines());
   coordinatePlane()->setGlobalGridAttributes(gridAttr);
 
-  //the palette - we set it here because it is a property of the diagram
-  switch (KMyMoneySettings::chartsPalette()) {
-    case 0:
+  // setup chart color palette
+  switch (config.chartPalette()) {
+    case MyMoneyReport::ChartPalette::Application:
+      switch (KMyMoneySettings::chartsPalette()) {
+        case 0:
+          planeDiagram->useDefaultColors();
+          break;
+        case 1:
+          planeDiagram->useRainbowColors();
+          break;
+        case 2:
+        default:
+          planeDiagram->useSubduedColors();
+          break;
+      }
+      break;
+    case MyMoneyReport::ChartPalette::Default:
       planeDiagram->useDefaultColors();
       break;
-    case 1:
+    case MyMoneyReport::ChartPalette::Rainbow:
       planeDiagram->useRainbowColors();
       break;
-    case 2:
     default:
+    case MyMoneyReport::ChartPalette::Subdued:
       planeDiagram->useSubduedColors();
       break;
   }

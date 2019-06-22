@@ -108,6 +108,12 @@ public:
     static const QStringList kText;
   };
 
+  class ChartPalette {
+  public:
+    enum Type { Application = 0, Default, Rainbow, Subdued };
+    static const QStringList kText;
+  };
+
 public:
   MyMoneyReport();
   MyMoneyReport(Row::Type _rt, unsigned _ct, dateOptionE _dl, DetailLevel::Type _ss, const QString& _name, const QString& _comment);
@@ -186,6 +192,9 @@ public:
   }
   uint chartLineWidth() const {
     return m_chartLineWidth;
+  }
+  ChartPalette::Type chartPalette() const {
+    return m_chartPalette;
   }
   bool isIncludingSchedules() const {
     return m_includeSchedules;
@@ -288,6 +297,9 @@ public:
   }
   void setChartLineWidth(uint _f) {
     m_chartLineWidth = _f;
+  }
+  void setChartPalette(ChartPalette::Type _f) {
+    m_chartPalette = _f;
   }
   void setIncludingSchedules(bool _f) {
     m_includeSchedules = _f;
@@ -634,6 +646,10 @@ private:
    * Width of the chart lines
    */
   uint m_chartLineWidth;
+  /**
+   * Color palette used for the chart of this report
+   */
+  ChartPalette::Type m_chartPalette;
   /**
     * Whether to include scheduled transactions
     */

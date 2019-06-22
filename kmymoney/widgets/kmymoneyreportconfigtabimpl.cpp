@@ -84,6 +84,11 @@ kMyMoneyReportConfigTabChartDecl::kMyMoneyReportConfigTabChartDecl(QWidget *pare
   ui->m_comboType->addItem(i18nc("type of graphic chart", "Stacked Bar"), MyMoneyReport::Chart::StackedBar);
   ui->m_comboType->addItem(i18nc("type of graphic chart", "Pie"), MyMoneyReport::Chart::Pie);
   ui->m_comboType->addItem(i18nc("type of graphic chart", "Ring"), MyMoneyReport::Chart::Ring);
+
+  ui->m_chartPalette->addItem(i18nc("chart palette", "Use application setting"), MyMoneyReport::ChartPalette::Application);
+  ui->m_chartPalette->addItem(i18nc("chart palette", "Default"), MyMoneyReport::ChartPalette::Default);
+  ui->m_chartPalette->addItem(i18nc("chart palette", "Rainbowed"), MyMoneyReport::ChartPalette::Rainbow);
+  ui->m_chartPalette->addItem(i18nc("chart palette", "Subdued"), MyMoneyReport::ChartPalette::Subdued);
 }
 
 kMyMoneyReportConfigTabChartDecl::~kMyMoneyReportConfigTabChartDecl()

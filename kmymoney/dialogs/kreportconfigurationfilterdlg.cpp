@@ -58,6 +58,7 @@
 #include <kmymoneyedit.h>
 #include <kmymoneylineedit.h>
 #include <kmymoneyaccountselector.h>
+#include <kmymoneymvccombo.h>
 #include <mymoneyfile.h>
 #include <mymoneyreport.h>
 #include <ktoolinvocation.h>
@@ -239,6 +240,8 @@ void KReportConfigurationFilterDlg::slotSearch()
   if (m_tabChart) {
     MyMoneyReport::Chart::Type ct[5] = { MyMoneyReport::Chart::Line, MyMoneyReport::Chart::Bar, MyMoneyReport::Chart::StackedBar, MyMoneyReport::Chart::Pie, MyMoneyReport::Chart::Ring };
     m_currentState.setChartType(ct[m_tabChart->findChild<KMyMoneyGeneralCombo*>("m_comboType")->currentIndex()]);
+    MyMoneyReport::ChartPalette::Type cp[4] = { MyMoneyReport::ChartPalette::Application, MyMoneyReport::ChartPalette::Default, MyMoneyReport::ChartPalette::Rainbow, MyMoneyReport::ChartPalette::Subdued };
+    m_currentState.setChartPalette(cp[m_tabChart->findChild<KMyMoneyGeneralCombo*>("m_chartPalette")->currentIndex()]);
 
     m_currentState.setChartGridLines(m_tabChart->findChild<QCheckBox*>("m_checkGridLines")->isChecked());
     m_currentState.setChartDataLabels(m_tabChart->findChild<QCheckBox*>("m_checkValues")->isChecked());
@@ -459,6 +462,9 @@ void KReportConfigurationFilterDlg::slotReset()
       case MyMoneyReport::Chart::End:
         throw MYMONEYEXCEPTION("KReportConfigurationFilterDlg::slotReset(): Report has invalid charttype");
     }
+    // keep in sync with kMyMoneyReportConfigTabChartDecl::kMyMoneyReportConfigTabChartDecl
+    KMyMoneyGeneralCombo* palette = m_tabChart->findChild<KMyMoneyGeneralCombo*>("m_chartPalette");
+    palette->setCurrentIndex(m_initialState.chartPalette());
     m_tabChart->findChild<QCheckBox*>("m_checkGridLines")->setChecked(m_initialState.isChartGridLines());
     m_tabChart->findChild<QCheckBox*>("m_checkValues")->setChecked(m_initialState.isChartDataLabels());
     m_tabChart->findChild<QCheckBox*>("m_checkShowChart")->setChecked(m_initialState.isChartByDefault());

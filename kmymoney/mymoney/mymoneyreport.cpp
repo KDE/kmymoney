@@ -42,6 +42,7 @@ const QStringList MyMoneyReport::Column::kTypeText = QString("none,months,bimont
 const QStringList MyMoneyReport::QueryColumns::kText = QString("none,number,payee,category,tag,memo,account,reconcileflag,action,shares,price,performance,loan,balance").split(',');
 const QStringList MyMoneyReport::DetailLevel::kText = QString("none,all,top,group,total,invalid").split(',');
 const QStringList MyMoneyReport::Chart::kText = QString("none,line,bar,pie,ring,stackedbar,invalid").split(',');
+const QStringList MyMoneyReport::ChartPalette::kText = QString("application,default,rainbow,subdued").split(',');
 
 // This should live in mymoney/mymoneytransactionfilter.h
 const QStringList kTypeText = QString("all,payments,deposits,transfers,none").split(',');
@@ -109,6 +110,7 @@ MyMoneyReport::MyMoneyReport() :
     m_chartDataLabels(true),
     m_chartGridLines(true),
     m_chartByDefault(false),
+    m_chartPalette(ChartPalette::Application),
     m_includeSchedules(false),
     m_includeTransfers(false),
     m_includeBudgetActuals(false),
@@ -128,6 +130,7 @@ MyMoneyReport::MyMoneyReport() :
 
 MyMoneyReport::MyMoneyReport(const QString& id, const MyMoneyReport& right) :
     MyMoneyObject(id),
+    m_chartPalette(ChartPalette::Application),
     m_movingAverageDays(0),
     m_currentDateColumn(0)
 {
@@ -155,6 +158,7 @@ MyMoneyReport::MyMoneyReport(Row::Type _rt, unsigned _ct, dateOptionE _dl, Detai
     m_chartDataLabels(true),
     m_chartGridLines(true),
     m_chartByDefault(false),
+    m_chartPalette(ChartPalette::Application),
     m_includeSchedules(false),
     m_includeTransfers(false),
     m_includeBudgetActuals(false),
@@ -239,6 +243,7 @@ MyMoneyReport::MyMoneyReport(Row::Type _rt, unsigned _ct, dateOptionE _dl, Detai
 
 MyMoneyReport::MyMoneyReport(const QDomElement& node) :
     MyMoneyObject(node),
+    m_chartPalette(ChartPalette::Application),
     m_currentDateColumn(0)
 {
   // properly initialize the object before reading it
@@ -434,6 +439,7 @@ void MyMoneyReport::write(QDomElement& e, QDomDocument *doc, bool anonymous) con
   e.setAttribute("chartgridlines", m_chartGridLines);
   e.setAttribute("chartbydefault", m_chartByDefault);
   e.setAttribute("chartlinewidth", m_chartLineWidth);
+  e.setAttribute("chartpalette", ChartPalette::kText[m_chartPalette]);
   e.setAttribute("skipZero", m_skipZero);
 
   if (m_reportType == Report::PivotTable) {
@@ -756,6 +762,10 @@ bool MyMoneyReport::read(const QDomElement& e)
       m_chartByDefault = false;
       m_chartLineWidth = 1;
     }
+
+    i = ChartPalette::kText.indexOf(e.attribute("chartpalette", "application"));
+    if (i >= 0)
+      m_chartPalette = static_cast<ChartPalette::Type>(i);
 
     QString datelockstr = e.attribute("datelock", "userdefined");
     // Handle the pivot 1.2/query 1.1 case where the values were saved as
