@@ -362,7 +362,7 @@ protected:
   friend class MyMoneyGncReader;
   friend class GncTransaction;
   bool isCurrency() const {
-    return (m_v[CMDTYSPC] == QString("ISO4217"));
+    return (m_v[CMDTYSPC] == QStringLiteral("ISO4217") || m_v[CMDTYSPC] == QStringLiteral("CURRENCY"));
   };
   QString id() const {
     return (m_v[CMDTYID]);
@@ -427,7 +427,7 @@ protected:
   friend class MyMoneyGncReader;
   // access data values
   bool isCurrency() const {
-    return (var(SPACE) == QString("ISO4217"));
+    return (var(SPACE) == QStringLiteral("ISO4217") || var(SPACE) == QStringLiteral("CURRENCY"));
   }
   QString space() const {
     return (var(SPACE));
@@ -1082,10 +1082,6 @@ private:
   MyMoneyAccount checkConsistency(MyMoneyAccount& parent, MyMoneyAccount& child);  // gnucash is sometimes TOO flexible
   void checkInvestmentOption(QString stockId);  // implement user investment option
   void getPriceSource(MyMoneySecurity stock, QString gncSource);
-  /**
-    * This method loads all known currencies and saves them to the storage
-    */
-  void loadAllCurrencies();
 #endif // _GNCFILEANON
 };
 
