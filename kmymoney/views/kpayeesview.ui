@@ -395,14 +395,13 @@
       </widget>
       <widget class="QWidget" name="defaultAccountTab">
        <attribute name="title">
-        <string>Default Account</string>
+        <string>Default Category</string>
        </attribute>
        <layout class="QVBoxLayout">
         <item>
          <widget class="QCheckBox" name="checkEnableDefaultCategory">
           <property name="text">
-           <string>Use the default category for
-new transactions with this payee</string>
+           <string>Use the default category for new transactions with this payee</string>
           </property>
          </widget>
         </item>
