@@ -9,8 +9,8 @@
       <email>mfcarpino@gmail.com</email>
     </author>
   </authorgroup>
-  <date>2019-04-01</date>
-  <releaseinfo>5.0.3</releaseinfo>
+  <date>2019-06-24</date>
+  <releaseinfo>5.0.5</releaseinfo>
 </chapterinfo>
 
 <title>Payees</title>
@@ -29,7 +29,7 @@
   left, and a detail area on the right.  The <guilabel>Your payees</guilabel>
   section allows for adding, deleting, renaming, and merging payees.  The detail
   area has several tabs, showing the transactions, address, matching
-  information, default account, and account numbers for the payee selected in
+  information, default category, and account numbers for the payee selected in
   the list.
 </para>
 
@@ -80,9 +80,9 @@
   <guimenuitem>Delete payee</guimenuitem>.  If the payee has any transactions,
   you will be presented with a dialog that allows you to reassign them to a
   different payee, and also a check box to enable the deleted name to be added
-  to the new payee's matching list.  Another option for renaming an existing
+  to the new payee's matching list.  Another option for deleting an existing
   payee is to select the payee or payer by left clicking it and then left
-  clicking <guibutton>-Del</guibutton>.
+  clicking <guibutton>Del</guibutton>.
 </para>
 </sect2>
 </sect1>
