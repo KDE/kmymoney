@@ -31,6 +31,8 @@ class AmountValidatorTest : public QObject
 protected:
     QLocale         defaultLocale;
     QString         currentLocale;
+    QChar           currentDecimalPoint;
+    QChar           currentGroupSeparator;
 
 private Q_SLOTS:
     void init();
@@ -39,7 +41,7 @@ private Q_SLOTS:
     void testValidator();
 
 private:
-    void setLocale(const QString& name);
+    void setLocale(const QString& name, const QChar& decimal , const QChar& group);
     void addAcceptableNumber(const QString& testCaseName, const QString& number);
     void addInvalidNumber(const QString& testCaseName, const QString& number);
 };

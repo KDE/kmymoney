@@ -36,9 +36,11 @@ void AmountValidatorTest::cleanup()
 }
 
 
-void AmountValidatorTest::setLocale(const QString& name)
+void AmountValidatorTest::setLocale(const QString& name, const QChar& decimal , const QChar& group)
 {
     currentLocale = name;
+    currentDecimalPoint = decimal;
+    currentGroupSeparator = group;
 }
 
 void AmountValidatorTest::addAcceptableNumber(const QString& testCaseName, const QString& number)
@@ -47,7 +49,7 @@ void AmountValidatorTest::addAcceptableNumber(const QString& testCaseName, const
     QString fixedNumber(number);
     // replace a blank in the test string with a non-breakable-space
     fixedNumber.replace(" ", "\u00A0");
-    QTest::newRow((QString("%1:%2").arg(currentLocale, testCaseName)).toUtf8()) << currentLocale << fixedNumber << result;
+    QTest::newRow((QString("%1:%2").arg(currentLocale, testCaseName)).toUtf8()) << currentLocale << fixedNumber << currentDecimalPoint << currentGroupSeparator << result;
 }
 
 void AmountValidatorTest::addInvalidNumber(const QString& testCaseName, const QString& number)
@@ -56,16 +58,18 @@ void AmountValidatorTest::addInvalidNumber(const QString& testCaseName, const QS
     QString fixedNumber(number);
     // replace a blank in the test string with a non-breakable-space
     fixedNumber.replace(" ", "\u00A0");
-    QTest::newRow((QString("%1:%2").arg(currentLocale, testCaseName)).toUtf8()) << currentLocale << fixedNumber << result;
+    QTest::newRow((QString("%1:%2").arg(currentLocale, testCaseName)).toUtf8()) << currentLocale << fixedNumber << currentDecimalPoint << currentGroupSeparator << result;
 }
 
 void AmountValidatorTest::testValidator_data()
 {
     QTest::addColumn<QString>("locale");
     QTest::addColumn<QString>("inputValue");
+    QTest::addColumn<QChar>("decimalPoint");
+    QTest::addColumn<QChar>("groupSeparator");
     QTest::addColumn<int>("result");
 
-    setLocale("en_US");
+    setLocale("en_US", QLatin1Char('.'), QLatin1Char(','));
     addAcceptableNumber("amount w/ thousand and decimal", "1,123.00");
     addAcceptableNumber("amount no thousand but decimal", "1123.00");
     addAcceptableNumber("neg. amount no thousand but decimal", "-1123.00");
@@ -76,14 +80,14 @@ void AmountValidatorTest::testValidator_data()
     addInvalidNumber("neg. amount w/ thousand and decimal reversed", "1.123,00-");
     addInvalidNumber("amount only fraction reversed", ",00");
 
-    setLocale("sv_FI");
+    setLocale("sv_FI", QLatin1Char(','), QChar('\xA0'));
     addAcceptableNumber("amount w/ thousand and decimal", "1 123,00");
     addAcceptableNumber("neg. amount w/ thousand and decimal", "-1 123,00");
     addAcceptableNumber("amount no thousand but decimal", "1123,00");
     addAcceptableNumber("amount no thousand no decimal", "1123");
     addAcceptableNumber("amount only fraction", ",00");
 
-    setLocale("de_DE");
+    setLocale("de_DE", QLatin1Char(','), QLatin1Char('.'));
     addAcceptableNumber("amount w/ thousand and decimal", "1.123,00");
     addAcceptableNumber("amount no thousand but decimal", "1123,00");
     addAcceptableNumber("amount no thousand no decimal", "1123");
@@ -92,7 +96,7 @@ void AmountValidatorTest::testValidator_data()
     addInvalidNumber("amount w/ thousand and decimal reversed", "1,123.00");
     addInvalidNumber("amount only fraction reversed", ".00");
 
-    setLocale("es_PE");
+    setLocale("es_PE", QLatin1Char('.'), QLatin1Char(','));
     addAcceptableNumber("amount w/ thousand and decimal", "1,123.00");
     addAcceptableNumber("amount no thousand but decimal", "1123.00");
     addAcceptableNumber("amount no thousand no decimal", "1123");
@@ -106,9 +110,20 @@ void AmountValidatorTest::testValidator()
 {
     QFETCH(QString, locale);
     QFETCH(QString, inputValue);
+    QFETCH(QChar, decimalPoint);
+    QFETCH(QChar, groupSeparator);
     QFETCH(int, result);
 
     QLocale::setDefault(locale);
+    if (QLocale().decimalPoint() != decimalPoint) {
+        const QString msg = QStringLiteral("Locale %1 does not seem to be loaded correctly: decimal point is %2 and should be  %3").arg(locale, QLocale().decimalPoint(), decimalPoint);
+
+        QSKIP(msg.toLatin1());
+    }
+    if (QLocale().groupSeparator() != groupSeparator) {
+        QString msg = QStringLiteral("Locale %1 does not seem to be loaded correctly: group separator is %2 and should be  %3").arg(locale, QLocale().groupSeparator(), groupSeparator);
+        QSKIP(msg.toLatin1());
+    }
     AmountValidator m(nullptr);
     int pos = inputValue.length();
     // QCOMPARE(m->validate(inputValue, pos), static_cast<QValidator::State>(result));
