@@ -46,23 +46,13 @@ void AmountValidatorTest::setLocale(const QString& name, const QChar& decimal , 
 void AmountValidatorTest::addAcceptableNumber(const QString& testCaseName, const QString& number)
 {
     const int result = static_cast<int>(QValidator::Acceptable);
-    QString fixedNumber(number);
-#ifndef Q_OS_WIN
-    // replace a blank in the test string with a non-breakable-space
-    fixedNumber.replace(" ", "\u00A0");
-#endif
-    QTest::newRow((QString("%1:%2").arg(currentLocale, testCaseName)).toUtf8()) << currentLocale << fixedNumber << currentDecimalPoint << currentGroupSeparator << result;
+    QTest::newRow((QString("%1:%2").arg(currentLocale, testCaseName)).toUtf8()) << currentLocale << number << currentDecimalPoint << currentGroupSeparator << result;
 }
 
 void AmountValidatorTest::addInvalidNumber(const QString& testCaseName, const QString& number)
 {
     const int result = static_cast<int>(QValidator::Invalid);
-    QString fixedNumber(number);
-#ifndef Q_OS_WIN
-    // replace a blank in the test string with a non-breakable-space
-    fixedNumber.replace(" ", "\u00A0");
-#endif
-    QTest::newRow((QString("%1:%2").arg(currentLocale, testCaseName)).toUtf8()) << currentLocale << fixedNumber << currentDecimalPoint << currentGroupSeparator << result;
+    QTest::newRow((QString("%1:%2").arg(currentLocale, testCaseName)).toUtf8()) << currentLocale << number << currentDecimalPoint << currentGroupSeparator << result;
 }
 
 void AmountValidatorTest::testValidator_data()
