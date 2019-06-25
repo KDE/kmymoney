@@ -3199,7 +3199,7 @@ bool KMyMoneyApp::isProcessingDate(const QDate& date) const
 
   //check first whether it's already in cache
   if (d->m_holidayMap.contains(date)) {
-    return d->m_holidayMap.value(date, true);
+    return d->m_holidayMap.value(date);
   } else {
     bool processingDay = !d->m_holidayRegion->isHoliday(date);
     d->m_holidayMap.insert(date, processingDay);
@@ -3213,15 +3213,15 @@ bool KMyMoneyApp::isProcessingDate(const QDate& date) const
 void KMyMoneyApp::preloadHolidays()
 {
 #ifdef KF5Holidays_FOUND
-  //clear the cache before loading
+  // clear the cache before loading
   d->m_holidayMap.clear();
-  //only do this if it is a valid region
+  // only do this if it is a valid region
   if (d->m_holidayRegion && d->m_holidayRegion->isValid()) {
-    //load holidays for the forecast days plus 1 cycle, to be on the safe side
+    // load holidays for the forecast days plus 1 cycle, to be on the safe side
     auto forecastDays = KMyMoneySettings::forecastDays() + KMyMoneySettings::forecastAccountCycle();
     QDate endDate = QDate::currentDate().addDays(forecastDays);
 
-    //look for holidays for the next 2 years as a minimum. That should give a good margin for the cache
+    // look for holidays for the next 2 years as a minimum. That should give a good margin for the cache
     if (endDate < QDate::currentDate().addYears(2))
       endDate = QDate::currentDate().addYears(2);
 
@@ -3229,15 +3229,16 @@ void KMyMoneyApp::preloadHolidays()
     KHolidays::Holiday::List::const_iterator holiday_it;
     for (holiday_it = holidayList.constBegin(); holiday_it != holidayList.constEnd(); ++holiday_it) {
       for (QDate holidayDate = (*holiday_it).observedStartDate(); holidayDate <= (*holiday_it).observedEndDate(); holidayDate = holidayDate.addDays(1))
-        d->m_holidayMap.insert(holidayDate, false);
+        d->m_holidayMap.insert(holidayDate, (*holiday_it).dayType() == KHolidays::Holiday::Workday);
     }
 
+    // prefill cache with all values of the forecast period
     for (QDate date = QDate::currentDate(); date <= endDate; date = date.addDays(1)) {
-      //if it is not a processing day, set it to false
+      // if it is not a processing day, set it to false
       if (!d->m_processingDays.testBit(date.dayOfWeek())) {
         d->m_holidayMap.insert(date, false);
       } else if (!d->m_holidayMap.contains(date)) {
-        //if it is not a holiday nor a weekend, it is a processing day
+        // if it is not a holiday nor a weekend, it is a processing day
         d->m_holidayMap.insert(date, true);
       }
     }
