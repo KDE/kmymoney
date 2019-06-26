@@ -69,6 +69,15 @@ static void migrateConfigFiles();
 
 int main(int argc, char *argv[])
 {
+#ifdef KMM_DEBUG
+  // make sure the DOM attributes are stored in the same order
+  // each time a file is saved. Don't use QHash for security
+  // relevant things from here on. See
+  // http://qt-project.org/doc/qt-5.0/qtcore/qhash.html#algorithmic-complexity-attacks
+  // for details.
+  qSetGlobalQHashSeed(0);
+#endif
+
   /**
    * Create application first
    */

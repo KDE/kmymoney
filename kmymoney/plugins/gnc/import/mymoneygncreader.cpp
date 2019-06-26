@@ -1323,7 +1323,6 @@ void MyMoneyGncReader::readFile(QIODevice* pDevice, MyMoneyStorageMgr* storage)
   //m_defaultPayee = createPayee (i18n("Unknown payee"));
 
   MyMoneyFile::instance()->attachStorage(m_storage);
-  loadAllCurrencies();
   MyMoneyFileTransaction ft;
   m_xr = new XmlReader(this);
   bool blocked = MyMoneyFile::instance()->signalsBlocked();
@@ -1442,6 +1441,33 @@ void MyMoneyGncReader::convertCommodity(const GncCommodity *gcm)
     //assign the gnucash id as the key into the map to find our id
     if (gncdebug) qDebug() << "mapping, key =" << gcm->id() << "id =" << equ.id();
     m_mapEquities[gcm->id().toUtf8()] = equ.id();
+  } else {
+    try {
+      const QString id = gcm->id();
+      const auto file = MyMoneyFile::instance();
+      const auto currencyList = file->availableCurrencyList();
+      bool currencyFound = false;
+      MyMoneySecurity currency;
+      foreach (currency, currencyList) {
+        if (currency.id() == id) {
+          m_storage->addCurrency(currency);
+          currencyFound = true;
+          break;
+        }
+      }
+      if (!currencyFound) {
+        MyMoneySecurity newCurrency(id, id);
+        m_storage->addCurrency(newCurrency);
+      }
+      currency = file->security(id);
+
+      MyMoneyPrice price = file->ancientCurrencies().value(currency, MyMoneyPrice());
+      if (price != MyMoneyPrice()) {
+        m_storage->addPrice(price);
+      }
+    } catch (const MyMoneyException &e) {
+      qDebug("Error %s creating currency", e.what());
+    }
   }
   signalProgress(++m_commodityCount, 0);
   return ;
@@ -2655,26 +2681,6 @@ void MyMoneyGncReader::getPriceSource(MyMoneySecurity stock, QString gncSource)
   if (dlg->alwaysUse()) m_mapSources[gncSource] = s;
   delete dlg;
   return;
-}
-
-void MyMoneyGncReader::loadAllCurrencies()
-{
-  auto file = MyMoneyFile::instance();
-  MyMoneyFileTransaction ft;
-  if (!file->currencyList().isEmpty())
-    return;
-  auto ancientCurrencies = file->ancientCurrencies();
-  try {
-  foreach (auto currency, file->availableCurrencyList()) {
-    file->addCurrency(currency);
-    MyMoneyPrice price = ancientCurrencies.value(currency, MyMoneyPrice());
-    if (price != MyMoneyPrice())
-      file->addPrice(price);
-  }
-  ft.commit();
-  } catch (const MyMoneyException &e) {
-    qDebug("Error %s loading currency", e.what());
-  }
 }
 
 // functions to control the progress bar

@@ -173,7 +173,7 @@
    <default>true</default>
   </entry>
   <entry name="ShowBalanceStatusOfOnlineAccounts" type="Bool">
-   <label>Show balance-status of mapped online accounts on the Homepage</label>
+   <label>Show balance status on the Homepage for accounts where data imports include balance information.</label>
    <default>false</default>
   </entry>
   <entry name="ShowCountOfUnmarkedTransactions" type="Bool">

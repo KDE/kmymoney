@@ -90,10 +90,11 @@ void KSettingsSchedules::loadList()
   QStringList regionCodes = HolidayRegion::regionCodes();
 
   foreach (const QString &regionCode, regionCodes) {
-    QString regionName = HolidayRegion::name(regionCode);
-    QLocale langLocale(HolidayRegion::languageCode(regionCode));
-    QString languageName = QLocale().languageToString(langLocale.language());
-    QString region = languageName.isEmpty() ? regionName : i18nc("Holiday region (region language)", "%1 (%2)", regionName, languageName);
+    const auto regionName( HolidayRegion::name(regionCode));
+    const QLocale langLocale(HolidayRegion::languageCode(regionCode));
+    const auto languageName = QLocale().languageToString(langLocale.language());
+    const auto description = HolidayRegion::description(regionCode);
+    const QString region = !description.isEmpty() ? description : i18nc("Holiday region (region language)", "Holidays for %1 (%2)", regionName, languageName);
     d->m_regionMap[region] = regionCode;
     regions << region;
   }
