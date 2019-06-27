@@ -11,6 +11,10 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
   # Add variables which are similar to the build in names of cmake
   set(PROJECT_VERSION_SUFFIX "${VERSION_SUFFIX}")
   set(${PROJECT_NAME}_VERSION_SUFFIX "${VERSION_SUFFIX}")
+elseif(DEFINED VERSION_SUFFIX)
+  string(REGEX REPLACE "-*(.+)" "\\1" DASHFREE_SUFFIX "${VERSION_SUFFIX}")
+  set(PROJECT_VERSION_SUFFIX "-${DASHFREE_SUFFIX}")
+  set(${PROJECT_NAME}_VERSION_SUFFIX "-${DASHFREE_SUFFIX}")
 endif()
 
 # Automoc all sources
