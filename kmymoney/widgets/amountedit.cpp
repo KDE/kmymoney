@@ -291,6 +291,12 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
         break;
 
     default:
+      // in case all text is selected and the user presses the decimal point
+      // we fill the widget with the leading "0". The outcome of this will be
+      // that the widget then contains "0.".
+      if ((event->key() == QLocale().decimalPoint()) && (selectedText() == text())) {
+        QLineEdit::setText(QLatin1String("0"));
+      }
       QLineEdit::keyPressEvent(event);
       break;
   }
