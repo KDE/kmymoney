@@ -1127,7 +1127,7 @@ bool KMyMoneySplitTable::focusNextPrevChild(bool next)
 
       if (((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
         // qDebug("Selecting '%s' as focus", w->className());
-        w->setFocus();
+        w->setFocus(next ? Qt::TabFocusReason: Qt::BacktabFocusReason);
         rc = true;
       }
     }
