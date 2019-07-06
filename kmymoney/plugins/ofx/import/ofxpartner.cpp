@@ -94,7 +94,7 @@ void ValidateIndexCache()
 
   QFileInfo i(fname.toLocalFile());
   if (needReload(i))
-    get("", attr, QUrl(QStringLiteral("http://www.ofxhome.com/api.php?all=yes")), fname);
+    get("", attr, QUrl(QStringLiteral("https://www.ofxhome.com/api.php?all=yes")), fname);
 }
 
 static void ParseFile(QMap<QString, QString>& result, const QString& fileName, const QString& bankName)
@@ -226,7 +226,7 @@ OfxHomeServiceInfo ServiceInfo(const QString& fipid)
   QFileInfo i(guidFile.toLocalFile());
 
   if (!i.isReadable() || i.lastModified().addDays(7) < QDateTime::currentDateTime())
-    get("", attr, QUrl(QString("http://www.ofxhome.com/api.php?lookup=%1").arg(fipid)), guidFile);
+    get("", attr, QUrl(QString("https://www.ofxhome.com/api.php?lookup=%1").arg(fipid)), guidFile);
 
   QFile f(guidFile.toLocalFile());
   if (f.open(QIODevice::ReadOnly)) {
