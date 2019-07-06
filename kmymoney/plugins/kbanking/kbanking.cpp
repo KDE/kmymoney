@@ -231,7 +231,7 @@ void KBanking::unplug()
   if (m_kbanking) {
     m_kbanking->fini();
     delete m_kbanking;
-    qDebug("Plugins: kbanking unpluged");
+    qDebug("Plugins: kbanking unplugged");
   }
 }
 
@@ -907,7 +907,7 @@ int KBankingExt::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
 
       onlineJob job = m_parent->m_onlineJobQueue.value(jobIdent);
       if (job.isNull()) {
-        // It should not be possiblie that this will happen (only if AqBanking fails heavily).
+        // It should not be possible that this will happen (only if AqBanking fails heavily).
         //! @todo correct exception text
         qWarning("Executed a job which was not in queue. Please inform the KMyMoney developers.");
         abJob = AB_Job_List2Iterator_Next(jobIter);
@@ -1017,7 +1017,7 @@ bool KBankingExt::askMapAccount(const MyMoneyAccount& acc)
     if (!bank.sortcode().isEmpty())
       bankId = bank.sortcode();
   } catch (const MyMoneyException &e) {
-    // no bank assigned, we just leave the field emtpy
+    // no bank assigned, we just leave the field empty
   }
 
   // extract account information. if we have an account number
