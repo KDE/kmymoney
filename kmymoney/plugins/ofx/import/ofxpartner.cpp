@@ -210,7 +210,7 @@ OfxHomeServiceInfo ServiceInfo(const QString& fipid)
   if (fipid == "1") {
     strncpy(result.ofxInfo.fid, "00000", OFX_FID_LENGTH - 1);
     strncpy(result.ofxInfo.org, "ReferenceFI", OFX_ORG_LENGTH - 1);
-    strncpy(result.ofxInfo.url, "http://ofx.innovision.com", OFX_URL_LENGTH - 1);
+    strncpy(result.ofxInfo.url, "https://ofx.innovision.com", OFX_URL_LENGTH - 1);
     result.ofxInfo.accountlist = 1;
     result.ofxInfo.statements = 1;
     result.ofxInfo.billpay = 1;
