@@ -103,8 +103,8 @@ int main(int argc, char *argv[])
 
   if (argc != 0) {
     /**
-   * Create command line parser and feed it with known options
-   */
+     * Create command line parser and feed it with known options
+     */
     QCommandLineParser parser;
     aboutData.setupCommandLine(&parser);
 
@@ -140,8 +140,8 @@ int main(int argc, char *argv[])
     parser.addPositionalArgument(QStringLiteral("url"), i18n("file to open"));
 
     /**
-   * do the command line parsing
-   */
+     * do the command line parsing
+     */
     parser.parse(QApplication::arguments());
 
     bool ishelpSet = parser.isSet(QStringLiteral("help"));
@@ -155,8 +155,8 @@ int main(int argc, char *argv[])
       parser.showVersion();
 
     /**
-   * handle standard options
-   */
+     * handle standard options
+     */
     aboutData.processCommandLine(&parser);
 
 #ifdef KMM_DEBUG
@@ -338,7 +338,12 @@ int runKMyMoney(QApplication& a, std::unique_ptr<QSplashScreen> splash, const QU
   }
 
   kmymoney->centralWidget()->setEnabled(true);
-  kmymoney->show();
+
+  // we cannot call kmymoney->show() directly as this causes a crash
+  // when running on some non KDE desktops (e.g. XFCE) with QWebEngine
+  // enabled. Postponing the call until we are inside the event loop
+  // solved the problem.
+  QMetaObject::invokeMethod(kmymoney, "show", Qt::QueuedConnection);
   splash.reset();
 
   const int rc = a.exec();      //krazy:exclude=crashy

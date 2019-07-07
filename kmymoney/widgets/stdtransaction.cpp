@@ -394,6 +394,14 @@ void StdTransaction::registerCellText(QString& txt, Qt::Alignment& align, int ro
                 if (painter)
                   painter->setPen(KMyMoneySettings::schemeColor(SchemeColor::TransactionErroneous));
               }
+
+              if (!d->m_tagList.isEmpty()) {
+                txt += " ( ";
+                for (auto i = 0; i < d->m_tagList.size() - 1; ++i) {
+                  txt += "<span style='color: " + d->m_tagColorList[i].name() + "'>&#x25CF;</span> " + d->m_tagList[i] + ", ";
+                }
+                txt += "<span style='color: " + d->m_tagColorList.last().name() + "'>&#x25CF;</span> " + d->m_tagList.last() + " )";
+              }
             }
           }
           break;

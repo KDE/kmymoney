@@ -81,7 +81,7 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
   // fill the list view with banks
   QProgressDialog* dlg = new QProgressDialog(this);
   dlg->setWindowTitle(i18n("Loading banklist"));
-  dlg->setLabelText(i18n("Getting list of banks from http://www.ofxhome.com/\nThis may take some time depending on the available bandwidth."));
+  dlg->setLabelText(i18n("Getting list of banks from https://www.ofxhome.com/\nThis may take some time depending on the available bandwidth."));
   dlg->setModal(true);
   dlg->setCancelButton(0);
   // force to show immediately as the call to OfxPartner::BankNames()

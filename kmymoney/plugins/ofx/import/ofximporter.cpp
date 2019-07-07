@@ -676,7 +676,10 @@ int OFXImporter::ofxAccountCallback(struct OfxAccountData data, void * pv)
   }
 
   // ask KMyMoney for an account id
-  s.m_accountId = pofx->account(QStringLiteral("kmmofx-acc-ref"), QString("%1-%2").arg(s.m_strRoutingNumber, s.m_strAccountNumber)).id();
+  // but only if we have any information to ask for
+  if (!s.m_strAccountNumber.isEmpty() || !s.m_strRoutingNumber.isEmpty()) {
+    s.m_accountId = pofx->account(QStringLiteral("kmmofx-acc-ref"), QString("%1-%2").arg(s.m_strRoutingNumber, s.m_strAccountNumber)).id();
+  }
 
   // copy over the securities
   s.m_listSecurities = pofx->d->m_securitylist;
