@@ -28,7 +28,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <ktoolbar.h>
 #include <kcombobox.h>
 #include <kiconloader.h>
 #include <klocale.h>
