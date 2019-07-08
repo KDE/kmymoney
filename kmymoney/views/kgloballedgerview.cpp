@@ -283,12 +283,12 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   m_buttonbar->addAction(kmymoney->action("transaction_accept"));
   m_buttonbar->addAction(kmymoney->action("transaction_match"));
 
-  m_buttonbar->addAction(kmymoney->action("schedule_new"));
-  m_buttonbar->addAction(kmymoney->action("schedule_edit"));
-  m_buttonbar->addAction(kmymoney->action("schedule_delete"));
-  m_buttonbar->addAction(kmymoney->action("schedule_duplicate"));
   m_buttonbar->addAction(kmymoney->action("schedule_enter"));
   m_buttonbar->addAction(kmymoney->action("schedule_skip"));
+  m_buttonbar->addAction(kmymoney->action("schedule_edit"));
+  m_buttonbar->addAction(kmymoney->action("schedule_new"));
+  m_buttonbar->addAction(kmymoney->action("schedule_delete"));
+  m_buttonbar->addAction(kmymoney->action("schedule_duplicate"));
 
   // create the transaction form frame
   m_formFrame = new QFrame(this);
