@@ -68,7 +68,7 @@ KOnlineUpdateWizardPage::KOnlineUpdateWizardPage(QWidget *parent)
  */
 void KOnlineUpdateWizardPage::init2(const MyMoneySecurity& security)
 {
-  int idx;
+  int idx = -1;
   if (security.value("kmm-online-quote-system") == "Finance::Quote") {
     FinanceQuoteProcess p;
     m_useFinanceQuote->setChecked(true);
