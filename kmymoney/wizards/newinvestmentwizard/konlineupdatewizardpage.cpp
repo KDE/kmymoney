@@ -107,6 +107,7 @@ void KOnlineUpdateWizardPage::slotCheckPage(const QString& txt)
 
 void KOnlineUpdateWizardPage::slotSourceChanged(bool useFQ)
 {
+  Q_UNUSED(useFQ);
   m_onlineSourceCombo->clear();
   m_onlineSourceCombo->insertItem(0, QString());
   if (useFQ) {
