@@ -72,7 +72,7 @@ MyMoneyStorageANON::~MyMoneyStorageANON()
 {
 }
 
-void MyMoneyStorageANON::readFile(QIODevice* , MyMoneyStorageMgr*)
+void MyMoneyStorageANON::readFile(QIODevice* , MyMoneyStorageMgr*, Models*)
 {
   throw MYMONEYEXCEPTION_CSTRING("Cannot read a file through MyMoneyStorageANON!!");
 }

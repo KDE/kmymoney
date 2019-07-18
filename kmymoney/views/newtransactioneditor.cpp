@@ -56,6 +56,7 @@
 #include "icons/icons.h"
 #include "modelenums.h"
 #include "mymoneyenums.h"
+#include "mymoneypayee.h"
 
 using namespace Icons;
 
@@ -165,14 +166,9 @@ void NewTransactionEditor::Private::updateWidgetState()
   if(ui->costCenterCombo->isEnabled()) {
     // extract the cost center
     index = splitModel.index(0, 0);
-    QModelIndexList ccList = costCenterModel->match(costCenterModel->index(0, 0), CostCenterModel::CostCenterIdRole,
-                                                    splitModel.data(index, (int)eLedgerModel::Role::CostCenterId),
-                                      1,
-                                      Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
-    if (ccList.count() > 0) {
-      index = ccList.front();
-      ui->costCenterCombo->setCurrentIndex(index.row());
-    }
+    index = MyMoneyFile::instance()->costCenterModel()->indexById(splitModel.data(index, (int)eLedgerModel::Role::CostCenterId).toString());
+    if (index.isValid())
+      ui->costCenterCombo->setCurrentIndex(costCenterModel->mapFromSource(index).row());
   }
 }
 
@@ -251,7 +247,7 @@ bool NewTransactionEditor::Private::costCenterChanged(int costCenterIndex)
     }
     if(rc == true && splitModel.rowCount() == 1) {
       QModelIndex index = costCenterModel->index(costCenterIndex, 0);
-      QString costCenterId = costCenterModel->data(index, CostCenterModel::CostCenterIdRole).toString();
+      const auto costCenterId = costCenterModel->data(index, eMyMoney::Model::Roles::IdRole).toString();
       index = splitModel.index(0, 0);
       splitModel.setData(index, costCenterId, (int)eLedgerModel::Role::CostCenterId);
     }
@@ -361,15 +357,14 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 {
   auto const model = Models::instance()->accountsModel();
   // extract account information from model
-  const auto index = model->accountById(accountId);
-  d->m_account = model->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
+  const auto index = model->indexById(accountId);
+  d->m_account = model->itemByIndex(index);
 
   d->ui->setupUi(this);
 
   d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity});
   d->accountsModel->setHideEquityAccounts(false);
   d->accountsModel->setSourceModel(model);
-  d->accountsModel->setSourceColumns(model->getColumns());
   d->accountsModel->sort((int)eAccountsModel::Column::Account);
   d->ui->accountCombo->setModel(d->accountsModel);
 
@@ -514,7 +509,10 @@ void NewTransactionEditor::loadTransaction(const QString& id)
         d->transaction = model->data(index, (int)eLedgerModel::Role::Transaction).value<MyMoneyTransaction>();
         d->split = model->data(index, (int)eLedgerModel::Role::Split).value<MyMoneySplit>();
         d->ui->dateEdit->setDate(model->data(index, (int)eLedgerModel::Role::PostDate).toDate());
-        d->ui->payeeEdit->lineEdit()->setText(model->data(index, (int)eLedgerModel::Role::PayeeName).toString());
+
+        const QModelIndex payeeIdx = Models::instance()->payeesModel()->indexById(d->split.payeeId());
+        d->ui->payeeEdit->setCurrentIndex(d->payeesModel->mapFromSource(payeeIdx).row());
+
         d->ui->memoEdit->clear();
         d->ui->memoEdit->insertPlainText(model->data(index, (int)eLedgerModel::Role::Memo).toString());
         d->ui->memoEdit->moveCursor(QTextCursor::Start);
@@ -530,8 +528,7 @@ void NewTransactionEditor::loadTransaction(const QString& id)
 
         QModelIndexList stList = d->statusModel.match(d->statusModel.index(0, 0), Qt::UserRole+1, model->data(index, (int)eLedgerModel::Role::Reconciliation).toInt());
         if(stList.count()) {
-          QModelIndex stIndex = stList.front();
-          d->ui->statusCombo->setCurrentIndex(stIndex.row());
+          d->ui->statusCombo->setCurrentIndex(stList.front().row());
         }
       } else {
         d->splitModel.addSplit(transactionSplitId);

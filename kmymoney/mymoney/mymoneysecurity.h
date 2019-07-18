@@ -135,7 +135,7 @@ public:
 
   /**
    * This method is used to convert the internal representation of
-   * an security type into a human readable format
+   * a security type into a human readable format
    *
    * @param securityType enumerated representation of the security type.
    *                     For possible values, see MyMoneySecurity::eSECURITYTYPE

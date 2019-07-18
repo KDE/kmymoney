@@ -145,7 +145,7 @@ bool NewSplitEditor::Private::categoryChanged(const QString& accountId)
   bool rc = true;
   if(!accountId.isEmpty()) {
     try {
-      QModelIndex index = Models::instance()->accountsModel()->accountById(accountId);
+      QModelIndex index = Models::instance()->accountsModel()->indexById(accountId);
       category = Models::instance()->accountsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
       const bool isIncomeExpense = category.isIncomeExpense();
       ui->costCenterCombo->setEnabled(isIncomeExpense);
@@ -202,7 +202,7 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
   Q_ASSERT(view != 0);
   d->splitModel = qobject_cast<SplitModel*>(view->model());
 
-  QModelIndex index = Models::instance()->accountsModel()->accountById(counterAccountId);
+  QModelIndex index = Models::instance()->accountsModel()->indexById(counterAccountId);
   d->counterAccount = Models::instance()->accountsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
 
   d->ui->setupUi(this);
@@ -213,7 +213,6 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
   d->accountsModel->setHideEquityAccounts(false);
   auto const model = Models::instance()->accountsModel();
   d->accountsModel->setSourceModel(model);
-  d->accountsModel->setSourceColumns(model->getColumns());
   d->accountsModel->sort((int)eAccountsModel::Column::Account);
   d->ui->accountCombo->setModel(d->accountsModel);
 
@@ -341,12 +340,12 @@ QString NewSplitEditor::costCenterId() const
 {
   const int row = d->ui->costCenterCombo->currentIndex();
   QModelIndex index = d->ui->costCenterCombo->model()->index(row, 0);
-  return d->ui->costCenterCombo->model()->data(index, CostCenterModel::CostCenterIdRole).toString();
+  return d->ui->costCenterCombo->model()->data(index, eMyMoney::Model::Roles::IdRole).toString();
 }
 
 void NewSplitEditor::setCostCenterId(const QString& id)
 {
-  QModelIndex index = Models::indexById(d->costCenterModel, CostCenterModel::CostCenterIdRole, id);
+  QModelIndex index = Models::indexById(d->costCenterModel, eMyMoney::Model::Roles::IdRole, id);
   if(index.isValid()) {
     d->ui->costCenterCombo->setCurrentIndex(index.row());
   }

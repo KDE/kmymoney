@@ -21,6 +21,7 @@ set(kmymoney_STAT_HEADERS
 
 ########### Shared widget library ###########
 set(kmm_widgets_sources
+  columnselector.cpp
   kmymoneydateinput.cpp
   kmymoneyvalidationfeedback.cpp
   styleditemdelegateforwarder.cpp

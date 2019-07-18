@@ -36,13 +36,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+/// @todo port to new model code
+
 //************************ Constructor/Destructor *****************************
-MyMoneyStorageSql::MyMoneyStorageSql(MyMoneyStorageMgr *storage, const QUrl &url) :
+MyMoneyStorageSql::MyMoneyStorageSql(MyMoneyStorageMgr *storage, Models* models, const QUrl &url) :
   QSqlDatabase(QUrlQuery(url).queryItemValue("driver")),
   d_ptr(new MyMoneyStorageSqlPrivate(this))
 {
   Q_D(MyMoneyStorageSql);
   d->m_storage = storage;
+  d->m_models = models;
 }
 
 MyMoneyStorageSql::~MyMoneyStorageSql()
@@ -2855,14 +2858,14 @@ void MyMoneyStorageSql::setProgressCallback(void(*callback)(int, int, const QStr
   d->m_progressCallback = callback;
 }
 
-void MyMoneyStorageSql::readFile(QIODevice* s, MyMoneyStorageMgr* storage)
+void MyMoneyStorageSql::readFile(QIODevice* s, MyMoneyStorageMgr* storage, Models* models)
 {
-  Q_UNUSED(s); Q_UNUSED(storage)
+  Q_UNUSED(s); Q_UNUSED(storage); Q_UNUSED(models);
 }
 
-void MyMoneyStorageSql::writeFile(QIODevice* s, MyMoneyStorageMgr* storage)
+void MyMoneyStorageSql::writeFile(QIODevice* s, MyMoneyStorageMgr* storage, Models* models)
 {
-  Q_UNUSED(s); Q_UNUSED(storage)
+  Q_UNUSED(s); Q_UNUSED(storage); Q_UNUSED(models);
 }
 
 // **************************** Error display routine *******************************

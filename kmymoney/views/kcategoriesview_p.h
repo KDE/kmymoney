@@ -37,7 +37,7 @@
 #include "ui_kcategoriesview.h"
 #include "kmymoneyaccountsviewbase_p.h"
 
-#include "accountsviewproxymodel.h"
+#include "accountsproxymodel.h"
 #include "mymoneyaccount.h"
 #include "icons.h"
 
@@ -62,6 +62,8 @@ public:
 
   void init()
   {
+/// @todo port to new model code
+#if 0
     Q_Q(KCategoriesView);
     m_accountTree = &ui->m_accountTree;
 
@@ -76,6 +78,7 @@ public:
     q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KCategoriesView::selectByObject);
     q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KCategoriesView::selectByVariant);
     q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KCategoriesView::refresh);
+#endif
   }
 
   KCategoriesView       *q_ptr;

@@ -34,6 +34,7 @@
 
 #include "modelenums.h"
 
+#if 0
 class AccountsViewProxyModelPrivate : public AccountsProxyModelPrivate
 {
   Q_DISABLE_COPY(AccountsViewProxyModelPrivate)
@@ -50,5 +51,6 @@ public:
 
   QSet<eAccountsModel::Column> m_visColumns;
 };
+#endif
 
 #endif

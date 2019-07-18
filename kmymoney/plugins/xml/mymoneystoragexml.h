@@ -59,6 +59,7 @@ class MyMoneyPrice;
 class MyMoneyTransaction;
 class MyMoneyCostCenter;
 class onlineJob;
+class Models;
 
 template <typename T> class QList;
 typedef QPair<QString, QString> MyMoneySecurityPair;
@@ -77,8 +78,8 @@ public:
     Writing = 1           /**< version to be used when writing a file */
   };
 
-  void readFile(QIODevice* s, MyMoneyStorageMgr* storage) override;
-  void writeFile(QIODevice* s, MyMoneyStorageMgr* storage) override;
+  void readFile(QIODevice* s, MyMoneyStorageMgr* storage, Models* models) override;
+  void writeFile(QIODevice* s, MyMoneyStorageMgr* storage, Models* models) override;
   void setProgressCallback(void(*callback)(int, int, const QString&)) override;
 
   protected:
@@ -159,7 +160,8 @@ private:
 
 protected:
   MyMoneyStorageMgr *m_storage;
-  QDomDocument *m_doc;
+  Models            *m_models;
+  QDomDocument      *m_doc;
 
 private:
   /// \internal d-pointer class.

@@ -25,7 +25,7 @@
 namespace eAccountsModel {
     enum class Column {
         FirstColumnMarker = 0,
-        Account = 0,  // CAUTION! Assumption is being made that Account column number is always 0 and you shouldn't change this
+        Account = 0,  // CAUTION! Assumption is being made that Account column number is always 0 and you must not change this
         Type,
         Tax,
         VAT,

@@ -36,6 +36,7 @@
 #include "ledgerviewpage.h"
 #include "models.h"
 #include "accountsmodel.h"
+#include "institutionsmodel.h"
 #include "kmymoneyaccountcombo.h"
 #include "ui_simpleledgerview.h"
 #include "icons/icons.h"
@@ -108,7 +109,8 @@ public:
     accountsModel->setHideEquityAccounts(false);
     auto const model = Models::instance()->accountsModel();
     accountsModel->setSourceModel(model);
-    accountsModel->setSourceColumns(model->getColumns());
+    /// @todo port to new model code
+    // accountsModel->setSourceColumns(model->getColumns());
     accountsModel->sort((int)eAccountsModel::Column::Account);
     ui->accountCombo->setModel(accountsModel);
 
@@ -157,7 +159,7 @@ void SimpleLedgerView::openNewLedger(QString accountId)
   }
 
   // need a new tab, we insert it before the rightmost one
-  QModelIndex index = Models::instance()->accountsModel()->accountById(accountId);
+  QModelIndex index = Models::instance()->accountsModel()->indexById(accountId);
   if(index.isValid()) {
 
     // create new ledger view page
@@ -288,13 +290,13 @@ void SimpleLedgerView::setupCornerWidget()
   d->webSiteButton->hide();
   auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());
   if (view) {
-    auto index = Models::instance()->accountsModel()->accountById(view->accountId());
+    auto index = Models::instance()->accountsModel()->indexById(view->accountId());
     if(index.isValid()) {
       // get icon name and url via account and institution object
-      const auto acc = Models::instance()->accountsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
+      const auto acc = Models::instance()->accountsModel()->itemByIndex(index);
       if (!acc.institutionId().isEmpty()) {
-        index = Models::instance()->institutionsModel()->accountById(acc.institutionId());
-        const auto institution = Models::instance()->institutionsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyInstitution>();
+        index = Models::instance()->institutionsModel()->indexById(acc.institutionId());
+        const auto institution = Models::instance()->institutionsModel()->itemByIndex(index);
         const auto url = institution.value(QStringLiteral("url"));
         const auto iconName = institution.value(QStringLiteral("icon"));
         if (!url.isEmpty() && !iconName.isEmpty()) {

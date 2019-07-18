@@ -128,20 +128,16 @@ void KTagsView::slotRenameSingleTag(QListWidgetItem* ta)
     MyMoneyFileTransaction ft;
     try {
       // check if we already have a tag with the new name
-      try {
-        // this function call will throw an exception, if the tag
-        // hasn't been found.
-        MyMoneyFile::instance()->tagByName(new_name);
-        // the name already exists, ask the user whether he's sure to keep the name
+      const auto tag = MyMoneyFile::instance()->tagByName(new_name);
+      // if the name already exists, ask the user whether he's sure to keep the name
+      if (!tag.id().isEmpty()) {
         if (KMessageBox::questionYesNo(this,
-                                       i18n("A tag with the name '%1' already exists. It is not advisable to have "
+                                        i18n("A tag with the name '%1' already exists. It is not advisable to have "
                                             "multiple tags with the same identification name. Are you sure you would like "
                                             "to rename the tag?", new_name)) != KMessageBox::Yes) {
           ta->setText(d->m_tag.name());
           return;
         }
-      } catch (const MyMoneyException &) {
-        // all ok, the name is unique
       }
 
       d->m_tag.setName(new_name);

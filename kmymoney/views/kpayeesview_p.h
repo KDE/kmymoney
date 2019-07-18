@@ -74,6 +74,7 @@
 #include "widgetenums.h"
 #include "mymoneyenums.h"
 #include "modelenums.h"
+#include "payeesmodel.h"
 #include "menuenums.h"
 
 using namespace Icons;
@@ -93,7 +94,7 @@ public:
     */
   explicit KPayeeListItem(QListWidget *parent, const MyMoneyPayee& payee) :
     QListWidgetItem(parent, QListWidgetItem::UserType),
-    m_payee(payee)
+    m_id(payee.id())
   {
     setText(payee.name());
     // allow in column rename
@@ -104,12 +105,13 @@ public:
   {
   }
 
-  const MyMoneyPayee& payee() const {
-    return m_payee;
+  MyMoneyPayee payee() const
+  {
+    return Models::instance()->payeesModel()->itemById(m_id);
   }
 
 private:
-  MyMoneyPayee  m_payee;
+  QString       m_id;
 };
 
 enum filterTypeE { eAllPayees = 0, eReferencedPayees = 1, eUnusedPayees = 2 };
@@ -158,7 +160,6 @@ public:
 
     auto const model = Models::instance()->accountsModel();
     m_filterProxyModel->setSourceModel(model);
-    m_filterProxyModel->setSourceColumns(model->getColumns());
     m_filterProxyModel->sort((int)eAccountsModel::Column::Account);
     ui->comboDefaultCategory->setModel(m_filterProxyModel);
 

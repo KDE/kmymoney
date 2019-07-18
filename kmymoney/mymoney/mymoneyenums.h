@@ -1,5 +1,6 @@
 /*
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -18,6 +19,7 @@
 #ifndef MYMONEYENUMS_H
 #define MYMONEYENUMS_H
 
+#include <QtCore/qnamespace.h>
 #include <QHashFunctions>
 
 namespace eMyMoney {
@@ -419,5 +421,41 @@ namespace eMyMoney {
     };
   }
 
+  /// @todo port to new model code
+  // think about moving this to modelenums.h
+  namespace Model {
+    enum Roles {
+      IdRole  = Qt::UserRole,      // must remain Qt::UserRole due to KMyMoneyMVCCombo::selectedItem,,
+      // MyMoneyPayee
+      PayeeNameRole,
+      PayeeAddressRole,
+      PayeeCityRole,
+      PayeeStateRole,
+      PayeePostCodeRole,
+      PayeeTelephoneRole,
+      PayeeEmailRole,
+      PayeeNotesRole,
+      PayeeReferenceRole,
+      PayeeMatchTypeRole,
+      PayeeMatchKeyRole,
+      PayeeMatchCaseRole,
+      PayeeDefaultAccountRole,
+
+      // MyMoneyAccount
+
+      // MyMoneyCostCenter
+      CostCenterShortNameRole,
+
+      // MyMoneySchedule
+      ScheduleNameRole,
+      ScheduleTypeRole,
+
+      // MyMoneySecurity
+      SecuritySymbolRole,
+
+      // MyMoneyBudget
+      BudgetNameRole,
+    };
+  }
 }
 #endif

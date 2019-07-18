@@ -70,13 +70,13 @@
 #include "kgloballedgerview.h"
 #include "kinvestmentview.h"
 #include "models.h"
+#include "modelenums.h"
 #include "accountsmodel.h"
 #include "equitiesmodel.h"
 #include "securitiesmodel.h"
 #include "icons.h"
 #include "onlinejobadministration.h"
 #include "kmymoneyaccounttreeview.h"
-#include "accountsviewproxymodel.h"
 #include "mymoneymoney.h"
 #include "mymoneyprice.h"
 #include "mymoneyschedule.h"
@@ -175,10 +175,13 @@ KMyMoneyView::KMyMoneyView()
     connect(viewBases[view.id], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
   }
 
+/// @todo port to new model code
+#if 0
   connect(Models::instance()->accountsModel(), &AccountsModel::netWorthChanged, this, &KMyMoneyView::slotSelectByVariant);
   connect(Models::instance()->accountsModel(), &AccountsModel::profitChanged, this, &KMyMoneyView::slotSelectByVariant);
   connect(Models::instance()->institutionsModel(), &AccountsModel::netWorthChanged, this, &KMyMoneyView::slotSelectByVariant);
   connect(Models::instance()->institutionsModel(), &AccountsModel::profitChanged, this, &KMyMoneyView::slotSelectByVariant);
+#endif
 
   //set the model
   setModel(m_model);
@@ -334,6 +337,8 @@ void KMyMoneyView::updateViewType()
 
 void KMyMoneyView::slotAccountTreeViewChanged(const eAccountsModel::Column column, const bool show)
 {
+#warning "Reimplement global acccount column visibility"
+#if 0
   QVector<AccountsViewProxyModel *> proxyModels
   {
     static_cast<KMyMoneyAccountsViewBase*>(viewBases[View::Institutions])->getProxyModel(),
@@ -377,6 +382,7 @@ void KMyMoneyView::slotAccountTreeViewChanged(const eAccountsModel::Column colum
     Models::instance()->accountsModel()->setColumnVisibility(column, show);
     Models::instance()->institutionsModel()->setColumnVisibility(column, show);
   }
+#endif
 }
 
 void KMyMoneyView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins)
@@ -557,7 +563,10 @@ void KMyMoneyView::slotTagSelected(const QString& tag, const QString& account, c
 
 void KMyMoneyView::finishReconciliation(const MyMoneyAccount& /* account */)
 {
+/// @todo port to new model code
+#if 0
   Models::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+#endif
   static_cast<KGlobalLedgerView*>(viewBases[View::Ledgers])->slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 }
 

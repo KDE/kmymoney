@@ -3,7 +3,7 @@
  * Copyright 2001-2002  Felix Rodriguez <frodriguez@users.sourceforge.net>
  * Copyright 2002-2004  Kevin Tambascio <ktambascio@users.sourceforge.net>
  * Copyright 2004-2005  Ace Jones <acejones@users.sourceforge.net>
- * Copyright 2006-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2006-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2006       Darren Gould <darren_gould@gmx.de>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
@@ -148,6 +148,16 @@ class MyMoneyTransaction;
 class MyMoneyTransactionFilter;
 class onlineJob;
 
+/// @todo add new models here
+class PayeesModel;
+class CostCenterModel;
+class SchedulesModel;
+class TagsModel;
+class SecuritiesModel;
+class BudgetsModel;
+class AccountsModel;
+class InstitutionsModel;
+
 namespace eMyMoney { namespace Account { enum class Type; }
                      namespace File { enum class Object; }
                      namespace Schedule { enum class Type;
@@ -238,6 +248,11 @@ public:
     *         If no object is attached, returns 0.
     */
   MyMoneyStorageMgr* storage() const;
+
+  /**
+   * This method clears all data in all storage models
+   */
+  void unload();
 
   /**
     * This method must be called before any single change or a series of changes
@@ -861,6 +876,53 @@ public:
     */
   QList<MyMoneyPayee> payeeList() const;
 
+  /**
+   * The payees model instance
+   */
+  PayeesModel* payeesModel() const;
+
+  /**
+   * The costcenter model instance
+   */
+  CostCenterModel* costCenterModel() const;
+
+  /**
+   * The schedules model instance
+   */
+  SchedulesModel* schedulesModel() const;
+
+  /**
+   * The tags model instance
+   */
+  TagsModel* tagsModel() const;
+
+  /**
+   * The securities model instance
+   */
+  SecuritiesModel* securitiesModel() const;
+
+  /**
+   * The currencies model instance
+   */
+  SecuritiesModel* currenciesModel() const;
+
+  /**
+   * The budgets model instance
+   */
+  BudgetsModel* budgetsModel() const;
+
+  /**
+   * The accounts model instance
+   */
+  AccountsModel* accountsModel() const;
+
+  /**
+   * The institutions model instance
+   */
+  InstitutionsModel* institutionsModel() const;
+
+
+  /// @todo add new models here
   /**
     * This method is used to create a new tag
     *

@@ -1,13 +1,11 @@
 set(libmodels_a_SOURCES
-    costcentermodel.cpp
-    accountsmodel.cpp
     accountsproxymodel.cpp
     onlinebankingaccountsfilterproxymodel.cpp
     ../plugins/onlinetasks/interfaces/tasks/credittransfer.cpp
     models.cpp
     payeeidentifiercontainermodel.cpp
     equitiesmodel.cpp
-    securitiesmodel.cpp
+    securitiesfilterproxymodel.cpp
 )
 
 if(ENABLE_UNFINISHEDFEATURES)

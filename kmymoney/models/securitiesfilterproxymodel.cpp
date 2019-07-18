@@ -1,5 +1,6 @@
 /*
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -15,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "securitiesmodel.h"
+#include "securitiesfilterproxymodel.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -34,6 +35,8 @@
 #include "mymoneysecurity.h"
 #include "mymoneyenums.h"
 
+/// @todo cleanup
+#if 0
 class SecuritiesModel::Private
 {
 public:
@@ -285,18 +288,27 @@ QString SecuritiesModel::getHeaderName(const Column column)
       return QString();
   }
 }
+#endif
 
 class SecuritiesFilterProxyModel::Private
 {
 public:
-  Private() :
-    m_mdlColumns(nullptr),
-    m_file(MyMoneyFile::instance())
-     {}
+  Private()
+  : m_mdlColumns({
+      SecuritiesModel::Security,
+      SecuritiesModel::Symbol,
+      SecuritiesModel::Type,
+      SecuritiesModel::Market,
+      SecuritiesModel::Currency,
+      SecuritiesModel::Fraction
+      })
+    , m_file(MyMoneyFile::instance())
+  {
+  }
 
   ~Private() {}
 
-  QList<SecuritiesModel::Column> *m_mdlColumns;
+  QList<SecuritiesModel::Column> m_mdlColumns;
   QList<SecuritiesModel::Column> m_visColumns;
 
   MyMoneyFile *m_file;
@@ -314,7 +326,6 @@ SecuritiesFilterProxyModel::SecuritiesFilterProxyModel(QObject *parent, Securiti
   setSortLocaleAware(true);
   setFilterCaseSensitivity(Qt::CaseInsensitive);
   setSourceModel(model);
-  d->m_mdlColumns = model->getColumns();
   d->m_visColumns.append(columns);
 }
 #undef QSortFilterProxyModel
@@ -327,9 +338,15 @@ SecuritiesFilterProxyModel::~SecuritiesFilterProxyModel()
 bool SecuritiesFilterProxyModel::filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const
 {
   Q_UNUSED(source_parent)
-  if (d->m_visColumns.isEmpty() || d->m_visColumns.contains(d->m_mdlColumns->at(source_column)))
+  if (d->m_visColumns.isEmpty() || d->m_visColumns.contains(d->m_mdlColumns.at(source_column)))
       return true;
   return false;
+}
+
+bool SecuritiesFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
+{
+  const QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
+  return !sourceModel()->data(idx, eMyMoney::Model::Roles::IdRole).toString().isEmpty();
 }
 
 QList<SecuritiesModel::Column> &SecuritiesFilterProxyModel::getVisibleColumns()
@@ -352,7 +369,7 @@ void SecuritiesFilterProxyModel::slotColumnsMenu(const QPoint)
   foreach (const auto idColumn, idColumns) {
     auto a = new QAction(nullptr);
     a->setObjectName(QString::number(idColumn));
-    a->setText(SecuritiesModel::getHeaderName(idColumn));
+    a->setText(sourceModel()->headerData(idColumn, Qt::Horizontal).toString());
     a->setCheckable(true);
     a->setChecked(d->m_visColumns.contains(idColumn));
     actions.append(a);

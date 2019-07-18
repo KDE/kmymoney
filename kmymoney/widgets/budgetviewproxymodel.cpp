@@ -42,6 +42,7 @@
 
 using namespace eAccountsModel;
 
+#if 0
 class BudgetViewProxyModelPrivate : public AccountsViewProxyModelPrivate
 {
   Q_DISABLE_COPY(BudgetViewProxyModelPrivate)
@@ -262,3 +263,4 @@ void BudgetViewProxyModel::checkBalance()
     emit balanceChanged(d->m_lastBalance);
   }
 }
+#endif

@@ -173,7 +173,7 @@ QVariant SplitModel::data(const QModelIndex& index, int role) const
             rc = MyMoneyFile::instance()->accountToCategory(split.accountId());
             break;
           case (int)Column::CostCenter:
-            subIndex = Models::indexById(ccModel, CostCenterModel::CostCenterIdRole, split.costCenterId());
+            subIndex = Models::indexById(ccModel, eMyMoney::Model::Roles::CostCenterShortNameRole, split.costCenterId());
             rc = ccModel->data(subIndex);
             break;
           case (int)Column::Number:
@@ -207,13 +207,13 @@ QVariant SplitModel::data(const QModelIndex& index, int role) const
         case (int)Column::Amount:
         case (int)Column::Balance:
         case (int)Column::Value:
-          rc = QVariant(Qt::AlignRight| Qt::AlignTop);
+          rc = QVariant(Qt::AlignRight| Qt::AlignVCenter);
           break;
         case (int)Column::Reconciliation:
-          rc = QVariant(Qt::AlignHCenter | Qt::AlignTop);
+          rc = QVariant(Qt::AlignHCenter | Qt::AlignVCenter);
           break;
         default:
-          rc = QVariant(Qt::AlignLeft | Qt::AlignTop);
+          rc = QVariant(Qt::AlignLeft | Qt::AlignVCenter);
           break;
       }
       break;

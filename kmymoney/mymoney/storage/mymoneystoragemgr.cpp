@@ -497,27 +497,6 @@ uint MyMoneyStorageMgr::accountCount() const
 void MyMoneyStorageMgr::addTransaction(MyMoneyTransaction& transaction, bool skipAccountUpdate)
 {
   Q_D(MyMoneyStorageMgr);
-  // perform some checks to see that the transaction stuff is OK. For
-  // now we assume that
-  // * no ids are assigned
-  // * the date valid (must not be empty)
-  // * the referenced accounts in the splits exist
-
-  // first perform all the checks
-  if (!transaction.id().isEmpty())
-    throw MYMONEYEXCEPTION_CSTRING("transaction already contains an id");
-  if (!transaction.postDate().isValid())
-    throw MYMONEYEXCEPTION_CSTRING("invalid post date");
-
-  // now check the splits
-  foreach (const auto split, transaction.splits()) {
-    // the following lines will throw an exception if the
-    // account or payee do not exist
-    account(split.accountId());
-    if (!split.payeeId().isEmpty())
-      payee(split.payeeId());
-  }
-
   MyMoneyTransaction newTransaction(d->nextTransactionID(), transaction);
   QString key = newTransaction.uniqueSortKey();
 
@@ -628,34 +607,9 @@ void MyMoneyStorageMgr::modifyInstitution(const MyMoneyInstitution& institution)
 void MyMoneyStorageMgr::modifyTransaction(const MyMoneyTransaction& transaction)
 {
   Q_D(MyMoneyStorageMgr);
-  // perform some checks to see that the transaction stuff is OK. For
-  // now we assume that
-  // * ids are assigned
-  // * the pointer to the MyMoneyFile object is not 0
-  // * the date valid (must not be empty)
-  // * the splits must have valid account ids
 
-  // first perform all the checks
-  if (transaction.id().isEmpty()
-//  || transaction.file() != this
-      || !transaction.postDate().isValid())
-    throw MYMONEYEXCEPTION_CSTRING("invalid transaction to be modified");
-
-  // now check the splits
-  foreach (const auto split, transaction.splits()) {
-    // the following lines will throw an exception if the
-    // account or payee do not exist
-    account(split.accountId());
-    if (!split.payeeId().isEmpty())
-      payee(split.payeeId());
-    foreach (const auto tagId, split.tagIdList()) {
-      if (!tagId.isEmpty())
-        tag(tagId);
-    }
-  }
-
-  // new data seems to be ok. find old version of transaction
-  // in our pool. Throw exception if unknown.
+  // Find old version of transaction in our pool.
+  // Throw exception if unknown.
   if (!d->m_transactionKeys.contains(transaction.id()))
     throw MYMONEYEXCEPTION_CSTRING("invalid transaction id");
 

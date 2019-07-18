@@ -191,13 +191,13 @@ QVariant LedgerModel::data(const QModelIndex& index, int role) const
         case (int)Column::Amount:
         case (int)Column::Balance:
         case (int)Column::Value:
-          rc = QVariant(Qt::AlignRight| Qt::AlignTop);
+          rc = QVariant(Qt::AlignRight| Qt::AlignVCenter);
           break;
         case (int)Column::Reconciliation:
-          rc = QVariant(Qt::AlignHCenter | Qt::AlignTop);
+          rc = QVariant(Qt::AlignHCenter | Qt::AlignVCenter);
           break;
         default:
-          rc = QVariant(Qt::AlignLeft | Qt::AlignTop);
+          rc = QVariant(Qt::AlignLeft | Qt::AlignVCenter);
           break;
       }
       break;

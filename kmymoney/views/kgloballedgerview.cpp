@@ -598,7 +598,10 @@ void KGlobalLedgerView::slotContinueReconciliation()
             account.isAssetLiability()) {
           if (!isVisible())
             emit customActionRequested(View::Ledgers, eView::Action::SwitchView);
+/// @todo port to new model code
+#if 0
           Models::instance()->accountsModel()->slotReconcileAccount(account, d->m_endingBalanceDlg->statementDate(), d->m_endingBalanceDlg->endingBalance());
+#endif
           slotSetReconcileAccount(account, d->m_endingBalanceDlg->statementDate(), d->m_endingBalanceDlg->endingBalance());
 
           // check if the user requests us to create interest
@@ -2093,7 +2096,10 @@ void KGlobalLedgerView::slotFinishReconciliation()
       qDebug("Unexpected exception when setting cleared to reconcile");
     }
     // Turn off reconciliation mode
+/// @todo port to new model code
+#if 0
     Models::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+#endif
     slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
   }
   // Turn off reconciliation mode
@@ -2136,7 +2142,10 @@ void KGlobalLedgerView::slotPostponeReconciliation()
       d->m_reconciliationAccount = file->account(d->m_reconciliationAccount.id());
     }
     // Turn off reconciliation mode
+/// @todo port to new model code
+#if 0
     Models::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+#endif
     slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
     d->loadView();
   }

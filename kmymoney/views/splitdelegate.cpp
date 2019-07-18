@@ -412,7 +412,7 @@ void SplitDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, con
     model->setData(index, QVariant::fromValue<MyMoneyMoney>(splitEditor->amount()), (int)Role::SplitValue);
 
     const QString transactionCommodity = model->data(index, (int)Role::TransactionCommodity).toString();
-    QModelIndex accIndex = Models::instance()->accountsModel()->accountById(splitEditor->accountId());
+    QModelIndex accIndex = Models::instance()->accountsModel()->indexById(splitEditor->accountId());
     if(accIndex.isValid()) {
       MyMoneyAccount acc = Models::instance()->accountsModel()->data(accIndex, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
       if(transactionCommodity != acc.currencyId()) {

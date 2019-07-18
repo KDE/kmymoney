@@ -54,6 +54,7 @@ class payeeIdentifier;
 class onlineJob;
 class MyMoneyStorageSql;
 class MyMoneyStorageMgr;
+class Models;
 
 template <class T1, class T2> struct QPair;
 template <class Key, class Value> class QMap;
@@ -79,7 +80,7 @@ class MyMoneyStorageSql : public IMyMoneyOperationsFormat, public QSqlDatabase, 
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  explicit MyMoneyStorageSql(MyMoneyStorageMgr *storage, const QUrl&);
+  explicit MyMoneyStorageSql(MyMoneyStorageMgr *storage, Models* models, const QUrl&);
   ~MyMoneyStorageSql() override;
 
   uint currentVersion() const;
@@ -255,8 +256,8 @@ public:
   void readTransactions(const MyMoneyTransactionFilter& filter);
   void setProgressCallback(void(*callback)(int, int, const QString&)) override;
 
-  void readFile(QIODevice* s, MyMoneyStorageMgr* storage) override;
-  void writeFile(QIODevice* s, MyMoneyStorageMgr* storage) override;
+  void readFile(QIODevice* s, MyMoneyStorageMgr* storage, Models* models) override;
+  void writeFile(QIODevice* s, MyMoneyStorageMgr* storage, Models* models) override;
 
   void startCommitUnit(const QString& callingFunction);
   bool endCommitUnit(const QString& callingFunction);

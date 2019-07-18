@@ -38,6 +38,7 @@
 #include "mymoneypayee.h"
 #include "mymoneyenums.h"
 #include "onlinejob.h"
+#include "payeesmodel.h"
 
 #include "payeeidentifier/ibanbic/ibanbic.h"
 #include "payeeidentifiertyped.h"
@@ -112,6 +113,7 @@ void MyMoneyFileTest::cleanup()
 {
   m->detachStorage(storage);
   delete storage;
+  m->unload();
 }
 
 void MyMoneyFileTest::testEmptyConstructor()
@@ -1870,6 +1872,8 @@ void MyMoneyFileTest::testBaseCurrency()
     unexpectedException(e);
   }
 
+#warning "Cleanup dead code"
+#if 0 // invalid test with new model based backend
   // check if it gets reset when attaching a new storage
   m->detachStorage(storage);
 
@@ -1887,6 +1891,7 @@ void MyMoneyFileTest::testBaseCurrency()
   QCOMPARE(ref.id(), QLatin1String("EUR"));
   QCOMPARE(ref.name(), QLatin1String("Euro"));
   QVERIFY(ref.tradingSymbol() == QChar(0x20ac));
+#endif
 }
 
 void MyMoneyFileTest::testOpeningBalanceNoBase()

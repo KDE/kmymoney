@@ -20,6 +20,11 @@ PUBLIC
 )
 
 file(GLOB tests_sources "*-test.cpp")
+
+# for now don't build database test as it will be replaced
+message("mymoneydatabasemgr-test.cpp disabled in ${CMAKE_CURRENT_SOURCE_DIR}")
+list(REMOVE_ITEM tests_sources ${CMAKE_CURRENT_SOURCE_DIR}/mymoneydatabasemgr-test.cpp)
+
 ecm_add_tests(${tests_sources}
   LINK_LIBRARIES
     sqlstoragestatic

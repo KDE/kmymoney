@@ -18,6 +18,10 @@
 #ifndef MODELS_H
 #define MODELS_H
 
+/// @todo port to new model code
+// this file should not be needed anymore, mark all members as
+// deprecated and port callers to use MyMoneyFile::instance()->model
+// instead.
 #include <config-kmymoney.h>
 #include "kmm_models_export.h"
 
@@ -36,15 +40,19 @@
 /**
   * Forward declarations for the returned models.
   */
-class AccountsModel;
-class InstitutionsModel;
 #ifdef ENABLE_UNFINISHEDFEATURES
 class LedgerModel;
 #endif
-class CostCenterModel;
+/// @todo add new models here
 class PayeesModel;
-class EquitiesModel;
+class CostCenterModel;
+class SchedulesModel;
+class TagsModel;
 class SecuritiesModel;
+class EquitiesModel;
+class BudgetsModel;
+class AccountsModel;
+class InstitutionsModel;
 
 /**
   * This object is the owner and maintainer of all the core models of KMyMoney.
@@ -81,10 +89,18 @@ public:
 #ifdef ENABLE_UNFINISHEDFEATURES
   LedgerModel* ledgerModel();
 #endif
-  CostCenterModel* costCenterModel();
-  PayeesModel* payeesModel();
+  /// @todo add new models here
+  CostCenterModel* costCenterModel() const;
+  PayeesModel* payeesModel() const;
+  SchedulesModel* schedulesModel() const;
+  TagsModel* tagsModel() const;
+  SecuritiesModel* securitiesModel() const;
+  SecuritiesModel* currenciesModel() const;
+  BudgetsModel* budgetsModel() const;
+  AccountsModel* accountsModel() const;
+  InstitutionsModel* institutionsModel() const;
+
   EquitiesModel* equitiesModel();
-  SecuritiesModel* securitiesModel();
 
   /**
    * returns the index of an item the @a model based on the @a id of role @a role.
@@ -99,10 +115,16 @@ public Q_SLOTS:
   void fileOpened();
 
   /**
+   * This slot is used to notify the models that the data has been saved so that they
+   * can reset their dirty flag.
+   */
+  void fileSaved();
+
+  /**
     * This slot is used to notify the models that the data has been unloaded.
     * @ref MyMoneyFile.
     */
-  void fileClosed();
+  void unload();
 
 Q_SIGNALS:
   void modelsLoaded();

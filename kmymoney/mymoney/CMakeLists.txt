@@ -35,6 +35,13 @@ set(kmm_mymoney_LIB_SRCS
     ./storage/imymoneystorageformat.cpp
     ./storage/mymoneystoragemgr.cpp
     ./storage/payeesmodel.cpp
+    ./storage/costcentermodel.cpp
+    ./storage/schedulesmodel.cpp
+    ./storage/tagsmodel.cpp
+    ./storage/securitiesmodel.cpp
+    ./storage/budgetsmodel.cpp
+    ./storage/accountsmodel.cpp
+    ./storage/institutionsmodel.cpp
     )
 
   set(onlineTask_a_SOURCES
@@ -53,7 +60,7 @@ set(kmm_mymoney_LIB_SRCS
   )
 
 list(APPEND storage_a_SOURCES $<$<OR:$<CONFIG:Debug>,$<CONFIG:DebugFull>,$<CONFIG:DebugKMM>>: ./storage/mymoneystoragedump.cpp>)
-
+list(APPEND storage_a_SOURCES $<$<BOOL:${USE_MODELTEST}>:modeltest.cpp>)
 list(APPEND kmm_mymoney_LIB_SRCS ${storage_a_SOURCES})
 list(APPEND kmm_mymoney_LIB_SRCS ${onlineTask_a_SOURCES})
 list(APPEND kmm_mymoney_LIB_SRCS ${payeeidentifier_a_SOURCES})
@@ -79,6 +86,10 @@ set(mymoney_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/kmm_mymoney_export.h
 
 add_library(kmm_mymoney SHARED ${kmm_mymoney_LIB_SRCS})
 
+if (USE_MODELTEST)
+  target_compile_definitions(kmm_mymoney PRIVATE -DKMM_MODELTEST)
+endif()
+
 generate_export_header(kmm_mymoney BASE_NAME kmm_mymoney)
 
 target_link_libraries(kmm_mymoney
@@ -96,6 +107,7 @@ target_link_libraries(kmm_mymoney
                       KF5::XmlGui
                       PRIVATE
                       onlinetask_interfaces
+                      $<$<BOOL:${USE_MODELTEST}>:Qt5::Test>
 )
 
 if(ENABLE_ADDRESSBOOK)

@@ -30,6 +30,7 @@
 #include "mymoneymoney.h"
 
 class MyMoneyKeyValueContainer;
+class Models;
 
 /**
   * @author Kevin Tambascio (ktambascio@users.sourceforge.net)
@@ -81,7 +82,7 @@ protected:
 
   void writeReport(QDomElement& reports, const MyMoneyReport& r) final override;
 
-  void readFile(QIODevice* s, MyMoneyStorageMgr* storage) final override;
+  void readFile(QIODevice* s, MyMoneyStorageMgr* storage, Models* models) final override;
 
   void writeSecurity(QDomElement& securityElement, const MyMoneySecurity& security) final override;
 

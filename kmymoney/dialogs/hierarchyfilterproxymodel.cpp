@@ -78,6 +78,10 @@ QModelIndex HierarchyFilterProxyModel::getSelectedParentAccountIndex() const
   return QModelIndex();
 }
 
+/// @todo port to new model code
+// this one should actually be handled inside the base class using a flag
+#if 0
+
 /**
   * Filter the favorites accounts group.
   */
@@ -90,6 +94,7 @@ bool HierarchyFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
     return false;
   return AccountsProxyModel::filterAcceptsRow(source_row, source_parent);
 }
+#endif
 
 /**
   * Filter all but the first column.

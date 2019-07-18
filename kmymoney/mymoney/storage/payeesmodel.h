@@ -21,47 +21,41 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QAbstractListModel>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneymodel.h"
+#include "mymoneyenums.h"
 #include "kmm_mymoney_export.h"
+
+#include "mymoneypayee.h"
 
 /**
   */
-class KMM_MYMONEY_EXPORT PayeesModel : public QAbstractListModel
+class KMM_MYMONEY_EXPORT PayeesModel : public MyMoneyModel<MyMoneyPayee>
 {
   Q_OBJECT
 
 public:
+  class Column {
+    enum {
+      Name
+    } Columns;
+  };
+
   explicit PayeesModel(QObject* parent = 0);
   ~PayeesModel();
 
-  enum Roles {
-    PayeeIdRole = Qt::UserRole,      // must remain Qt::UserRole due to KMyMoneyMVCCombo::selectedItem,
-  };
+  static const int ID_SIZE = 6;
 
-  int rowCount(const QModelIndex& parent = QModelIndex()) const final override;
   int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
   QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
   QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;
 
-  Qt::ItemFlags flags(const QModelIndex& index) const final override;
   bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
-
-  /**
-   * clears all objects currently in the model
-   */
-  void unload();
-
-  /**
-   * Loads the model with data from the engine
-   */
-  void load();
 
 public Q_SLOTS:
 

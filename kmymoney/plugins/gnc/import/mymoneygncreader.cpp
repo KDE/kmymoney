@@ -1310,10 +1310,11 @@ MyMoneyGncReader::~MyMoneyGncReader() {}
 
 //**************************** Main Entry Point ************************************
 #ifndef _GNCFILEANON
-void MyMoneyGncReader::readFile(QIODevice* pDevice, MyMoneyStorageMgr* storage)
+void MyMoneyGncReader::readFile(QIODevice* pDevice, MyMoneyStorageMgr* storage, Models* models)
 {
   Q_CHECK_PTR(pDevice);
   Q_CHECK_PTR(storage);
+  Q_CHECK_PTR(models);
 
   m_storage = storage;
   qDebug("Entering gnucash importer");

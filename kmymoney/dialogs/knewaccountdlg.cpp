@@ -126,7 +126,8 @@ public:
     m_filterProxyModel->setCurrentAccountId(m_account.id());
     auto const model = Models::instance()->accountsModel();
     m_filterProxyModel->setSourceModel(model);
-    m_filterProxyModel->setSourceColumns(model->getColumns());
+    /// @todo port to new model code
+    // filterProxyModel->setSourceColumns(model->getColumns());
     m_filterProxyModel->setDynamicSortFilter(true);
 
     ui->m_parentAccounts->setModel(m_filterProxyModel);

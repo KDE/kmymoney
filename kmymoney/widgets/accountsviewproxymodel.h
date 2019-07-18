@@ -42,32 +42,32 @@ class QPoint;
   * This model is specialized to organize the data for the accounts tree view
   * based on the data of the @ref AccountsModel.
   */
-class AccountsViewProxyModelPrivate;
-class KMM_WIDGETS_EXPORT AccountsViewProxyModel : public AccountsProxyModel
-{
-  Q_OBJECT
-  Q_DISABLE_COPY(AccountsViewProxyModel)
-
-public:
-  explicit AccountsViewProxyModel(QObject *parent = nullptr);
-  ~AccountsViewProxyModel() override;
-
-  void setColumnVisibility(eAccountsModel::Column column, bool visible);
-  QSet<eAccountsModel::Column> getVisibleColumns();
-
-public Q_SLOTS:
-  void slotColumnsMenu(const QPoint);
-
-Q_SIGNALS:
-  void columnToggled(const eAccountsModel::Column column, const bool show);
-
-protected:
-  AccountsViewProxyModel(AccountsViewProxyModelPrivate &dd, QObject *parent);
-  bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
-  bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override;
-
-private:
-  Q_DECLARE_PRIVATE(AccountsViewProxyModel)
-};
+// class AccountsViewProxyModelPrivate;
+// class KMM_WIDGETS_EXPORT AccountsViewProxyModel : public AccountsProxyModel
+// {
+//   Q_OBJECT
+//   Q_DISABLE_COPY(AccountsViewProxyModel)
+//
+// public:
+//   explicit AccountsViewProxyModel(QObject *parent = nullptr);
+//   ~AccountsViewProxyModel() override;
+//
+//   void setColumnVisibility(eAccountsModel::Column column, bool visible);
+//   QSet<eAccountsModel::Column> getVisibleColumns();
+//
+// public Q_SLOTS:
+//   void slotColumnsMenu(const QPoint);
+//
+// Q_SIGNALS:
+//   void columnToggled(const eAccountsModel::Column column, const bool show);
+//
+// protected:
+//   AccountsViewProxyModel(AccountsViewProxyModelPrivate &dd, QObject *parent);
+//   bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
+//   bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override;
+//
+// private:
+//   Q_DECLARE_PRIVATE(AccountsViewProxyModel)
+// };
 
 #endif

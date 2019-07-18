@@ -6,6 +6,13 @@ set(storage_HEADERS
   imymoneystorageformat.h
   mymoneystoragemgr.h
   payeesmodel.h
+  costcentermodel.h
+  schedulesmodel.h
+  tagsmodel.h
+  securitiesmodel.h
+  budgetsmodel.h
+  accountsmodel.h
+  institutionsmodel.h
   )
 
 ########### install files ###############

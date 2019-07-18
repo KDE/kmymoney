@@ -83,6 +83,7 @@
 #include "onlinetasks/sepa/sepaonlinetransferimpl.h"
 #include "xmlstoragehelper.h"
 #include "mymoneyenums.h"
+#include "models.h"
 
 using namespace eMyMoney;
 
@@ -3229,6 +3230,7 @@ public:
   MyMoneyDbDef m_db;
   uint m_dbVersion;
   MyMoneyStorageMgr *m_storage;
+  Models            *m_models;
   // input options
   bool m_loadAll; // preload all data
   bool m_override; // override open if already in use

@@ -426,7 +426,10 @@ void KBudgetView::slotBudgetedAmountChanged()
   d->ui->m_budgetValue->budgetValues(d->m_budget, accountGroup);
   d->m_budget.setAccount(accountGroup, accountID);
 
+/// @todo port to new model code
+#if 0
   d->m_budgetProxyModel->setBudget(d->m_budget);
+#endif
   d->ui->m_accountTotal->setValue(accountGroup.totalBalance());
 
   d->ui->m_updateButton->setEnabled(!(d->selectedBudget() == d->m_budget));
@@ -471,7 +474,10 @@ void KBudgetView::cb_includesSubaccounts_clicked()
     }
 
     d->m_budget.setAccount(auxAccount, accountID);
+/// @todo port to new model code
+#if 0
     d->m_budgetProxyModel->setBudget(d->m_budget);
+#endif
     d->ui->m_budgetValue->setBudgetValues(d->m_budget, auxAccount);
 
     d->loadAccounts();
@@ -534,6 +540,9 @@ void KBudgetView::slotHideUnused(bool toggled)
   // make sure we show all items for an empty budget
   const auto prevState = !toggled;
   d->refreshHideUnusedButton();
+/// @todo port to new model code
+#if 0
   if (prevState != d->ui->m_hideUnusedButton->isChecked())
     d->m_budgetProxyModel->setHideUnusedIncomeExpenseAccounts(d->ui->m_hideUnusedButton->isChecked());
+#endif
 }

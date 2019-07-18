@@ -106,7 +106,6 @@ public:
     KMyMoneyAccountsViewBasePrivate(),
     q_ptr(qq),
     ui(new Ui::KBudgetView),
-    m_budgetProxyModel(nullptr),
     m_inSelection(false),
     m_budgetInEditing(false)
   {
@@ -138,6 +137,8 @@ public:
     ui->m_collapseButton->setIcon(Icons::get(Icon::ListCollapse));
     ui->m_expandButton->setIcon(Icons::get(Icon::ListExpand));
 
+/// @todo port to new model code
+#if 0
     m_budgetProxyModel = qobject_cast<BudgetViewProxyModel *>(ui->m_accountTree->init(View::Budget));
     m_proxyModel = m_budgetProxyModel;
 
@@ -169,6 +170,7 @@ public:
     q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KBudgetView::selectByVariant);
 
     q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KBudgetView::refresh);
+    #endif
 
     // setup initial state
     updateButtonStates();
@@ -223,6 +225,8 @@ public:
 
   void loadAccounts()
   {
+  /// @todo port to new model code
+  #if 0
     // if no budgets are selected, don't load the accounts
     // and clear out the previously shown list
     if (m_budget.id().isEmpty()) {
@@ -235,6 +239,7 @@ public:
     ui->m_resetButton->setEnabled(!(selectedBudget() == m_budget));
 
     m_budgetProxyModel->setBudget(m_budget);
+  #endif
   }
 
   const MyMoneyBudget& selectedBudget() const
@@ -295,6 +300,8 @@ public:
    */
   void loadBudgets()
   {
+  /// @todo port to new model code
+  #if 0
     Q_Q(KBudgetView);
     m_budgetProxyModel->invalidate();
 
@@ -344,6 +351,7 @@ public:
 
     // make sure the world around us knows what we have selected
     q->slotSelectBudget();
+#endif
   }
 
   void ensureBudgetVisible(const QString& id)
@@ -360,7 +368,6 @@ public:
 
   KBudgetView          *q_ptr;
   Ui::KBudgetView      *ui;
-  BudgetViewProxyModel *m_budgetProxyModel;
 
   MyMoneyBudget        m_budget;
   QMap<QString, ulong> m_transactionCountMap;

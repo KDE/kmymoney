@@ -66,7 +66,8 @@ namespace NewAccountWizard
     d->m_filterProxyModel->addAccountGroup(QVector<Account::Type> {Account::Type::Asset, Account::Type::Liability});
     auto const model = Models::instance()->accountsModel();
     d->m_filterProxyModel->setSourceModel(model);
-    d->m_filterProxyModel->setSourceColumns(model->getColumns());
+    /// @todo port to new model code
+    // d->m_filterProxyModel->setSourceColumns(model->getColumns());
     d->m_filterProxyModel->setDynamicSortFilter(true);
 
     d->ui->m_parentAccounts->setModel(d->m_filterProxyModel);

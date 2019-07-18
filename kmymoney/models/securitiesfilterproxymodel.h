@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SECURITIESMODEL_H
-#define SECURITIESMODEL_H
+#ifndef SECURITIESFILTERPROXYMODEL_H
+#define SECURITIESFILTERPROXYMODEL_H
 
 #include "kmm_models_export.h"
 
@@ -72,6 +72,56 @@ protected:
 };
 
 class KMM_MODELS_EXPORT SecuritiesFilterProxyModel : public QSortFilterProxyModel
+=======
+/// @todo cleanup
+/// @todo port to new model code
+
+// #include <KItemModels/KRecursiveFilterProxyModel>
+
+// ----------------------------------------------------------------------------
+// Project Includes
+
+#include "securitiesmodel.h"
+
+/// @todo cleanup
+// class MyMoneyObject;
+
+// namespace eMyMoney { namespace File { enum class Object; } }
+//
+// class KMM_MODELS_EXPORT SecuritiesModel : public QStandardItemModel
+// {
+//   Q_OBJECT
+//
+// public:
+//   enum Column { Security = 0, Symbol, Type, Market, Currency, Fraction };
+//
+//   ~SecuritiesModel();
+//
+//   auto getColumns();
+//   static QString getHeaderName(const Column column);
+//
+// public Q_SLOTS:
+//   void slotObjectAdded(eMyMoney::File::Object objType, const QString &id);
+//   void slotObjectModified(eMyMoney::File::Object objType, const QString &id);
+//   void slotObjectRemoved(eMyMoney::File::Object objType, const QString& id);
+//
+// private:
+//   SecuritiesModel(QObject *parent = nullptr);
+//   SecuritiesModel(const SecuritiesModel&);
+//   SecuritiesModel& operator=(SecuritiesModel&);
+//   friend class Models;  // only this class can create SecuritiesModel
+//
+//   void init();
+//   void load();
+//
+// protected:
+//   class Private;
+//   Private* const d;
+// };
+
+/// @todo cleanup
+class KMM_MODELS_EXPORT SecuritiesFilterProxyModel : public QSortFilterProxyModel //KRecursiveFilterProxyModel
+>>>>>>> Started implementation of new model code:kmymoney/models/securitiesfilterproxymodel.h
 {
   Q_OBJECT
 
@@ -89,6 +139,7 @@ public Q_SLOTS:
 
 protected:
   bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override;
+  bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
 
 private:
   class Private;
@@ -102,4 +153,4 @@ private:
 };
 
 #undef QSortFilterProxyModel
-#endif // SECURITIESMODEL_H
+#endif // SECURITIESFILTERPROXYMODEL_H

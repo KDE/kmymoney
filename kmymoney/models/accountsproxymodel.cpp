@@ -1,6 +1,7 @@
 /*
  * Copyright 2010-2014  Cristian Oneț <onet.cristian@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -17,7 +18,6 @@
  */
 
 #include "accountsproxymodel.h"
-#include "accountsproxymodel_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -39,6 +39,38 @@ using namespace eAccountsModel;
 #if QT_VERSION < QT_VERSION_CHECK(5,10,0)
 #define QSortFilterProxyModel KRecursiveFilterProxyModel
 #endif
+
+class AccountsProxyModelPrivate
+{
+  Q_DISABLE_COPY(AccountsProxyModelPrivate)
+
+public:
+  AccountsProxyModelPrivate() :
+  m_hideClosedAccounts(true),
+  m_hideEquityAccounts(true),
+  m_hideUnusedIncomeExpenseAccounts(false),
+  m_haveHiddenUnusedIncomeExpenseAccounts(false),
+  m_hideFavoriteAccounts(true)
+  {
+  }
+
+  virtual ~AccountsProxyModelPrivate()
+  {
+  }
+
+  QList<eMyMoney::Account::Type> m_typeList;
+  bool m_hideClosedAccounts;
+  bool m_hideEquityAccounts;
+  bool m_hideUnusedIncomeExpenseAccounts;
+  bool m_haveHiddenUnusedIncomeExpenseAccounts;
+  bool m_hideFavoriteAccounts;
+};
+
+
+
+
+
+>>>>>>> Started implementation of new model code
 AccountsProxyModel::AccountsProxyModel(QObject *parent) :
   QSortFilterProxyModel(parent),
   d_ptr(new AccountsProxyModelPrivate)
@@ -69,7 +101,7 @@ bool AccountsProxyModel::lessThan(const QModelIndex &left, const QModelIndex &ri
   if (!left.isValid() || !right.isValid())
     return false;
   // different sorting based on the column which is being sorted
-  switch (d->m_mdlColumns->at(left.column())) {
+  switch (static_cast<eAccountsModel::Column>(left.column())) {
       // for the accounts column sort based on the DisplayOrderRole
     case Column::Account: {
         const auto leftData = sourceModel()->data(left, (int)Role::DisplayOrder);
@@ -99,6 +131,8 @@ bool AccountsProxyModel::lessThan(const QModelIndex &left, const QModelIndex &ri
   */
 bool AccountsProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
+/// @todo port to new model code
+// add filter for favorite
   const auto index = sourceModel()->index(source_row, (int)Column::Account, source_parent);
   return acceptSourceItem(index) && filterAcceptsRowOrChildRows(source_row, source_parent);
 }
@@ -204,6 +238,7 @@ void AccountsProxyModel::clear()
   */
 bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
 {
+/// @todo port to new model code
   Q_D(const AccountsProxyModel);
   if (source.isValid()) {
     const auto data = sourceModel()->data(source, (int)Role::Account);
@@ -317,6 +352,28 @@ bool AccountsProxyModel::hideUnusedIncomeExpenseAccounts() const
 }
 
 /**
+ * Set if favorite accounts should be hidden or not.
+ * @param hideFavoriteAccounts
+ */
+void AccountsProxyModel::setHideFavoriteAccounts(bool hideFavoriteAccounts)
+{
+  Q_D(AccountsProxyModel);
+  if (d->m_hideFavoriteAccounts != hideFavoriteAccounts) {
+    d->m_hideFavoriteAccounts = hideFavoriteAccounts;
+    invalidateFilter();
+  }
+}
+
+/**
+ * Check if empty categories are hidden or not.
+ */
+bool AccountsProxyModel::hideFavoriteAccounts() const
+{
+  Q_D(const AccountsProxyModel);
+  return d->m_hideFavoriteAccounts;
+}
+
+/**
   * Returns the number of visible items after filtering. In case @a includeBaseAccounts
   * is set to @c true, the 5 base accounts (asset, liability, income, expense and equity)
   * will also be counted. The default is @c false.
@@ -357,8 +414,11 @@ int AccountsProxyModel::visibleItems(const QModelIndex& index) const
   return rows;
 }
 
+#if 0
+/// @todo port to new model code
 void AccountsProxyModel::setSourceColumns(QList<eAccountsModel::Column> *columns)
 {
   Q_D(AccountsProxyModel);
   d->m_mdlColumns = columns;
 }
+#endif

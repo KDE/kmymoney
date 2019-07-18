@@ -429,6 +429,8 @@ MyMoneyMoney MyMoneyAccount::balance() const
 void MyMoneyAccount::adjustBalance(const MyMoneySplit& s, bool reverse)
 {
   Q_D(MyMoneyAccount);
+  const MyMoneyMoney oldBalance = d->m_balance;
+
   if (s.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares)) {
     if (reverse)
       d->m_balance = d->m_balance / s.shares();
@@ -440,13 +442,20 @@ void MyMoneyAccount::adjustBalance(const MyMoneySplit& s, bool reverse)
     else
       d->m_balance += s.shares();
   }
-
+  // adjust total balance by the difference between the current and previous balance
+  d->m_totalBalance += (d->m_balance - oldBalance);
 }
 
 void MyMoneyAccount::setBalance(const MyMoneyMoney& val)
 {
   Q_D(MyMoneyAccount);
   d->m_balance = val;
+}
+
+void MyMoneyAccount::setTotalBalance(const MyMoneyMoney& val)
+{
+  Q_D(MyMoneyAccount);
+  d->m_totalBalance = val;
 }
 
 QPixmap MyMoneyAccount::accountPixmap(const bool reconcileFlag, const int size) const

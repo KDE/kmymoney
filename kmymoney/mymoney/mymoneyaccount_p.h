@@ -126,6 +126,11 @@ public:
   MyMoneyMoney    m_balance;
 
   /**
+   * This member keeps the balance of the account and all subaccounts
+   */
+  MyMoneyMoney    m_totalBalance;
+
+  /**
     * This member variable keeps the set of kvp's needed to establish
     * online banking sessions to this account.
     */

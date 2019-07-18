@@ -34,6 +34,8 @@
 
 namespace NewAccountWizard
 {
+/// @todo port to new model code
+#if 0
   class HierarchyFilterProxyModelPrivate : public AccountsProxyModelPrivate
   {
     Q_DISABLE_COPY(HierarchyFilterProxyModelPrivate)
@@ -48,9 +50,10 @@ namespace NewAccountWizard
     {
     }
   };
+#endif
 
-  HierarchyFilterProxyModel::HierarchyFilterProxyModel(QObject *parent) :
-    AccountsProxyModel(*new HierarchyFilterProxyModelPrivate, parent)
+  HierarchyFilterProxyModel::HierarchyFilterProxyModel(QObject *parent)
+  //   : AccountsProxyModel(*new HierarchyFilterProxyModelPrivate, parent)
   {
   }
 
@@ -58,6 +61,9 @@ namespace NewAccountWizard
   {
   }
 
+/// @todo port to new model code
+// This should be handled by a flag in the base class
+#if 0
   /**
   * Filter the favorites accounts group.
   */
@@ -72,8 +78,13 @@ namespace NewAccountWizard
       }
     return AccountsProxyModel::filterAcceptsRow(source_row, source_parent);
   }
+#endif
 
-  /**
+/// @todo port to new model code
+/// check if we can't do this via a views setColumnHidden() method which would completely eliminate this class
+#if 0
+#endif
+/**
   * Filter all but the first column.
   */
   bool HierarchyFilterProxyModel::filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const

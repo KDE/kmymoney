@@ -409,6 +409,15 @@ public:
   void setBalance(const MyMoneyMoney& val);
 
   /**
+   * This method sets the total balance of this account
+   * according to the value provided by @p val.
+   *
+   * @param val const reference to MyMoneyMoney object containing the
+   *             value to be assigned to the total balance
+   */
+  void setTotalBalance(const MyMoneyMoney& val);
+
+  /**
     * This method sets the kvp's for online banking with this account
     *
     * @param values The container of kvp's needed when connecting to this account

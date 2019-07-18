@@ -92,6 +92,8 @@ void KAccountsView::refresh()
     return;
   }
   d->m_needsRefresh = false;
+/// @todo port to new model code
+#if 0
   // TODO: check why the invalidate is needed here
   d->m_proxyModel->invalidate();
   d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
@@ -107,6 +109,7 @@ void KAccountsView::refresh()
   d->m_haveUnusedCategories = false;
   d->ui->m_hiddenCategories->hide();  // hides label
   d->m_proxyModel->setHideUnusedIncomeExpenseAccounts(KMyMoneySettings::hideUnusedCategory());
+#endif
 }
 
 void KAccountsView::showEvent(QShowEvent * event)

@@ -1,6 +1,7 @@
 /*
  * Copyright 2010-2014  Cristian Oneț <onet.cristian@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -45,10 +46,10 @@
   * (in the example @a widget is a pointer to a model/view widget):
   *
   * @code
-  *   AccountsFilterProxyModel *filterModel = new AccountsFilterProxyModel(widget);
+  *   AccountsProxyModel *filterModel = new AccountsProxyModel(widget);
   *   filterModel->addAccountGroup(eMyMoney::Account::Type::Asset);
   *   filterModel->addAccountGroup(eMyMoney::Account::Type::Liability);
-  *   filterModel->setSourceModel(Models::instance()->accountsModel());
+  *   filterModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
   *   filterModel->sort(0);
   *
   *   widget->setModel(filterModel);
@@ -57,6 +58,7 @@
   * @see AccountsModel
   *
   * @author Cristian Onet 2010
+  * @author Thomas Baumgart 2019
   *
   */
 
@@ -87,6 +89,9 @@ public:
 
   void setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncomeExpenseAccounts);
   bool hideUnusedIncomeExpenseAccounts() const;
+
+  void setHideFavoriteAccounts(bool hideFavoriteAccounts);
+  bool hideFavoriteAccounts() const;
 
   int visibleItems(bool includeBaseAccounts = false) const;
 

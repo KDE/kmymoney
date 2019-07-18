@@ -135,7 +135,7 @@ public:
 
     auto balance = m_file->balance(account.id());
     auto security = m_file->security(account.currencyId());
-    auto tradingCurrency = m_file->security(security.tradingCurrency());
+    auto tradingCurrency = m_file->currency(security.tradingCurrency());
     auto price = m_file->price(account.currencyId(), tradingCurrency.id());
 
     // Value

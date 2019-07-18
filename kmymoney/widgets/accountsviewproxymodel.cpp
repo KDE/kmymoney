@@ -35,6 +35,7 @@
 
 #include "accountsmodel.h"
 #include "modelenums.h"
+#if 0
 
 using namespace eAccountsModel;
 
@@ -124,3 +125,4 @@ void AccountsViewProxyModel::slotColumnsMenu(const QPoint)
     invalidateFilter();                       // refresh filter to reflect recent changes
   }
 }
+#endif

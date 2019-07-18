@@ -284,7 +284,8 @@ public:
     m_filterProxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity});
     auto const model = Models::instance()->accountsModel();
     m_filterProxyModel->setSourceModel(model);
-    m_filterProxyModel->setSourceColumns(model->getColumns());
+    /// @todo port to new model code
+    // m_filterProxyModel->setSourceColumns(model->getColumns());
     m_filterProxyModel->sort((int)eAccountsModel::Column::Account);
 
     // create the toolbar frame at the top of the view

@@ -96,6 +96,8 @@ void KCategoriesView::refresh()
   }
   d->m_needsRefresh = false;
 
+/// @todo port to new model code
+#if 0
   d->m_proxyModel->invalidate();
   d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
 
@@ -103,6 +105,7 @@ void KCategoriesView::refresh()
   d->m_haveUnusedCategories = false;
   d->ui->m_hiddenCategories->hide();
   d->m_proxyModel->setHideUnusedIncomeExpenseAccounts(KMyMoneySettings::hideUnusedCategory());
+#endif
 }
 
 void KCategoriesView::showEvent(QShowEvent * event)

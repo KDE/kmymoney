@@ -11,6 +11,7 @@ target_link_libraries(mymoneystoragexml
     Qt5::Xml
     KF5::I18n
     kmm_mymoney
+    kmm_models
   PRIVATE
     xmlstoragehelper
 )

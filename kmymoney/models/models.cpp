@@ -17,6 +17,8 @@
 
 #include "models.h"
 
+/// @todo port to new model code
+// this file should not be needed anymore
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -26,14 +28,22 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "accountsmodel.h"
 #ifdef ENABLE_UNFINISHEDFEATURES
 #include "ledgermodel.h"
 #endif
+/// @todo add new models here
 #include "costcentermodel.h"
 #include "payeesmodel.h"
-#include "equitiesmodel.h"
+#include "schedulesmodel.h"
+#include "tagsmodel.h"
 #include "securitiesmodel.h"
+#include "budgetsmodel.h"
+#include "accountsmodel.h"
+#include "institutionsmodel.h"
+
+#include "equitiesmodel.h"
+
+#include "mymoneyfile.h"
 
 #ifdef KMM_MODELTEST
   #include "modeltest.h"
@@ -48,10 +58,8 @@ struct Models::Private {
 #ifdef ENABLE_UNFINISHEDFEATURES
   , m_ledgerModel(0)
 #endif
-  , m_costCenterModel(0)
-  , m_payeesModel(0)
   , m_equitiesModel(0)
-  , m_securitiesModel(0)
+  // , m_securitiesModel(0)
   {}
 
   AccountsModel *m_accountsModel;
@@ -59,10 +67,8 @@ struct Models::Private {
 #ifdef ENABLE_UNFINISHEDFEATURES
   LedgerModel *m_ledgerModel;
 #endif
-  CostCenterModel *m_costCenterModel;
-  PayeesModel *m_payeesModel;
   EquitiesModel *m_equitiesModel;
-  SecuritiesModel *m_securitiesModel;
+  // SecuritiesModel *m_securitiesModel;
 };
 
 
@@ -91,13 +97,7 @@ Models* Models::instance()
   */
 AccountsModel* Models::accountsModel()
 {
-  if (!d->m_accountsModel) {
-    d->m_accountsModel = new AccountsModel(this);
-#ifdef KMM_MODELTEST
-    new ModelTest(d->m_accountsModel, Models::instance());
-#endif
-  }
-  return d->m_accountsModel;
+  return MyMoneyFile::instance()->accountsModel();
 }
 
 /**
@@ -107,13 +107,7 @@ AccountsModel* Models::accountsModel()
  */
 InstitutionsModel* Models::institutionsModel()
 {
-  if (!d->m_institutionsModel) {
-    d->m_institutionsModel = new InstitutionsModel(this);
-#ifdef KMM_MODELTEST
-    new ModelTest(d->m_institutionsModel, Models::instance());
-#endif
-  }
-  return d->m_institutionsModel;
+  return MyMoneyFile::instance()->institutionsModel();
 }
 
 #ifdef ENABLE_UNFINISHEDFEATURES
@@ -134,20 +128,15 @@ LedgerModel* Models::ledgerModel()
 }
 #endif
 
+/// @todo add new models here
 /**
  * This is the function to get a reference to the core @ref CostCenterModel.
  * The returned object is owned by this object so don't delete it. It creates the
  * model on the first access to it.
  */
-CostCenterModel* Models::costCenterModel()
+CostCenterModel* Models::costCenterModel() const
 {
-  if (!d->m_costCenterModel) {
-    d->m_costCenterModel = new CostCenterModel(this);
-#ifdef KMM_MODELTEST
-    new ModelTest(d->m_costCenterModel, Models::instance());
-#endif
-  }
-  return d->m_costCenterModel;
+  return MyMoneyFile::instance()->costCenterModel();
 }
 
 /**
@@ -155,15 +144,59 @@ CostCenterModel* Models::costCenterModel()
  * The returned object is owned by this object so don't delete it. It creates the
  * model on the first access to it.
  */
-PayeesModel* Models::payeesModel()
+PayeesModel* Models::payeesModel() const
 {
-  if (!d->m_payeesModel) {
-    d->m_payeesModel = new PayeesModel(this);
-    #ifdef KMM_MODELTEST
-    new ModelTest(d->m_payeesModel, Models::instance());
-    #endif
-  }
-  return d->m_payeesModel;
+  return MyMoneyFile::instance()->payeesModel();
+}
+
+/**
+ * This is the function to get a reference to the core @ref SchedulesModel.
+ * The returned object is owned by this object so don't delete it. It creates the
+ * model on the first access to it.
+ */
+SchedulesModel* Models::schedulesModel() const
+{
+  return MyMoneyFile::instance()->schedulesModel();
+}
+
+/**
+ * This is the function to get a reference to the core @ref TagsModel.
+ * The returned object is owned by this object so don't delete it. It creates the
+ * model on the first access to it.
+ */
+TagsModel* Models::tagsModel() const
+{
+  return MyMoneyFile::instance()->tagsModel();
+}
+
+/**
+ * This is the function to get a reference to the core @ref SecuritiesModel.
+ * The returned object is owned by this object so don't delete it. It creates the
+ * model on the first access to it.
+ */
+SecuritiesModel* Models::securitiesModel() const
+{
+  return MyMoneyFile::instance()->securitiesModel();
+}
+
+/**
+ * This is the function to get a reference to the core @ref CurrenciesModel.
+ * The returned object is owned by this object so don't delete it. It creates the
+ * model on the first access to it.
+ */
+SecuritiesModel* Models::currenciesModel() const
+{
+  return MyMoneyFile::instance()->currenciesModel();
+}
+
+/**
+ * This is the function to get a reference to the core @ref BudgetsModel.
+ * The returned object is owned by this object so don't delete it. It creates the
+ * model on the first access to it.
+ */
+BudgetsModel* Models::budgetsModel() const
+{
+  return MyMoneyFile::instance()->budgetsModel();
 }
 
 /**
@@ -182,6 +215,7 @@ EquitiesModel* Models::equitiesModel()
   return d->m_equitiesModel;
 }
 
+#if 0
 /**
  * This is the function to get a reference to the core @ref SecuritiesModel.
  * The returned object is owned by this object so don't delete it. It creates the
@@ -197,6 +231,7 @@ SecuritiesModel* Models::securitiesModel()
   }
   return d->m_securitiesModel;
 }
+#endif
 
 QModelIndex Models::indexById(QAbstractItemModel* model, int role, const QString& id)
 {
@@ -213,22 +248,34 @@ QModelIndex Models::indexById(QAbstractItemModel* model, int role, const QString
 
 }
 
+void Models::fileSaved()
+{
+  /// @todo add new models here
+  schedulesModel()->setDirty(false);
+  costCenterModel()->setDirty(false);
+  payeesModel()->setDirty(false);
+  tagsModel()->setDirty(false);
+  securitiesModel()->setDirty(false);
+  currenciesModel()->setDirty(false);
+  budgetsModel()->setDirty(false);
+  accountsModel()->setDirty(false);
+  institutionsModel()->setDirty(false);
+}
+
 void Models::fileOpened()
 {
-  accountsModel()->AccountsModel::load();
-  institutionsModel()->InstitutionsModel::load();
-  costCenterModel()->load();
+  // accountsModel()->AccountsModel::load();
+  // institutionsModel()->InstitutionsModel::load();
+  // securitiesModel()->load();
   #ifdef ENABLE_UNFINISHEDFEATURES
   ledgerModel()->load();
   #endif
-  payeesModel()->load();
   equitiesModel()->load();
-  securitiesModel()->load();
 
   emit modelsLoaded();
 }
 
-void Models::fileClosed()
+void Models::unload()
 {
   // TODO: make this cleaner in the future, for now just clear the accounts model before the file is closed
   // to avoid any uncaught KMyMoneyExceptions while using the account objects from this model after the file has been closed
@@ -237,8 +284,8 @@ void Models::fileClosed()
   #ifdef ENABLE_UNFINISHEDFEATURES
   ledgerModel()->unload();
   #endif
-  costCenterModel()->unload();
-  payeesModel()->unload();
   equitiesModel()->removeRows(0, equitiesModel()->rowCount());
-  securitiesModel()->removeRows(0, securitiesModel()->rowCount());
+  // securitiesModel()->removeRows(0, securitiesModel()->rowCount());
+
+  MyMoneyFile::instance()->unload();
 }

@@ -44,17 +44,13 @@ QTEST_GUILESS_MAIN(MyMoneyForecastTest)
 MyMoneyForecastTest::MyMoneyForecastTest() :
   m(nullptr),
   storage(nullptr),
-  file(nullptr)
+  file(nullptr),
+  moT1(57, 1),
+  moT2(63, 1),
+  moT3(84, 1),
+  moT4(62, 1),
+  moT5(104, 1)
 {
-  try {
-    this->moT1 = MyMoneyMoney(57, 1);
-    this->moT2 = MyMoneyMoney(63, 1);
-    this->moT3 = MyMoneyMoney(84, 1);
-    this->moT4 = MyMoneyMoney(62, 1);
-    this->moT5 = MyMoneyMoney(104, 1);
-  } catch (const MyMoneyException &e) {
-    qDebug() << e.what();
-  }
 }
 
 void MyMoneyForecastTest::init()
@@ -64,6 +60,7 @@ void MyMoneyForecastTest::init()
 
   storage = new MyMoneyStorageMgr;
   file = MyMoneyFile::instance();
+  file->unload();
   file->attachStorage(storage);
 
   MyMoneyFileTransaction ft;
@@ -970,7 +967,7 @@ void MyMoneyForecastTest::testCreateBudget()
   MyMoneyMoney c_parent = c.forecastBalance(a_parent, QDate(QDate::currentDate().addMonths(1).year(), QDate::currentDate().addMonths(1).month(), 1));
 
   //test valid results
-  QVERIFY(c.forecastBalance(a_parent, QDate(QDate::currentDate().addMonths(1).year(), QDate::currentDate().addMonths(1).month(), 1)) == (moT2));
+  QCOMPARE(c.forecastBalance(a_parent, QDate(QDate::currentDate().addMonths(1).year(), QDate::currentDate().addMonths(1).month(), 1)).formatMoney(4), moT2.formatMoney(4));
 }
 
 void MyMoneyForecastTest::testLinearRegression()

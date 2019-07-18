@@ -46,7 +46,7 @@
 #include "accountsmodel.h"
 #include "models.h"
 #include "equitiesmodel.h"
-#include "securitiesmodel.h"
+#include "securitiesfilterproxymodel.h"
 #include "icons.h"
 #include "modelenums.h"
 #include "mymoneyenums.h"
@@ -117,7 +117,8 @@ public:
     m_accountsProxyModel->setHideEquityAccounts(false);
     auto const model = Models::instance()->accountsModel();
     m_accountsProxyModel->setSourceModel(model);
-    m_accountsProxyModel->setSourceColumns(model->getColumns());
+    /// @todo port to new model code
+    // m_accountsProxyModel->setSourceColumns(model->getColumns());
     m_accountsProxyModel->sort((int)eAccountsModel::Column::Account);
     ui->m_accountComboBox->setModel(m_accountsProxyModel);
     ui->m_accountComboBox->expandAll();

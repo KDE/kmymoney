@@ -36,6 +36,7 @@ class QIODevice;
 // Project Includes
 
 class MyMoneyStorageMgr;
+class Models;
 
 class KMM_MYMONEY_EXPORT IMyMoneyOperationsFormat
 {
@@ -48,10 +49,11 @@ public:
     Writing = 1           /**< version to be used when writing a file */
   };
 
-  virtual void readFile(QIODevice* qf, MyMoneyStorageMgr* storage) = 0;
+/// @todo port to new model code
+  virtual void readFile(QIODevice* qf, MyMoneyStorageMgr* storage, Models* models) = 0;
   // virtual void readStream(QDataStream& s, IMyMoneySerialization* storage) = 0;
 
-  virtual void writeFile(QIODevice* qf, MyMoneyStorageMgr* storage) = 0;
+  virtual void writeFile(QIODevice* qf, MyMoneyStorageMgr* storage, Models* models) = 0;
   //virtual void writeStream(QDataStream& s, IMyMoneySerialization* storage) = 0;
 
   virtual void setProgressCallback(void(*callback)(int, int, const QString&)) = 0;

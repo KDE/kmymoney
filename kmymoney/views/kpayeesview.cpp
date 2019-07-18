@@ -176,20 +176,15 @@ void KPayeesView::slotRenameSinglePayee(QListWidgetItem* p)
     MyMoneyFileTransaction ft;
     try {
       // check if we already have a payee with the new name
-      try {
-        // this function call will throw an exception, if the payee
-        // hasn't been found.
-        MyMoneyFile::instance()->payeeByName(new_name);
+      if (!MyMoneyFile::instance()->payeeByName(new_name).id().isEmpty()) {
         // the name already exists, ask the user whether he's sure to keep the name
         if (KMessageBox::questionYesNo(this,
-                                       i18n("A payee with the name '%1' already exists. It is not advisable to have "
+                                      i18n("A payee with the name '%1' already exists. It is not advisable to have "
                                             "multiple payees with the same identification name. Are you sure you would like "
                                             "to rename the payee?", new_name)) != KMessageBox::Yes) {
           p->setText(d->m_payee.name());
           return;
         }
-      } catch (const MyMoneyException &) {
-        // all ok, the name is unique
       }
 
       d->m_payee.setName(new_name);

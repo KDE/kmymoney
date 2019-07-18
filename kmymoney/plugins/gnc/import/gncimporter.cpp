@@ -41,6 +41,7 @@
 #include "mymoneyexception.h"
 #include "mymoneystoragemgr.h"
 #include "kmymoneyenums.h"
+#include "models.h"
 
 class MyMoneyStatement;
 
@@ -112,9 +113,10 @@ MyMoneyStorageMgr *GNCImporter::open(const QUrl &url)
   MyMoneyGncReader pReader;
   qfile->seek(0);
 
+  /// @todo port to new model code
   auto storage = new MyMoneyStorageMgr;
   pReader.setProgressCallback(appInterface()->progressCallback());
-  pReader.readFile(qfile, storage);
+  pReader.readFile(qfile, storage, Models::instance());
   pReader.setProgressCallback(0);
 
   qfile->close();

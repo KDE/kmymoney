@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -15,13 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef COSTCENTERMODEL_H
-#define COSTCENTERMODEL_H
+#ifndef SECURITIESMODEL_H
+#define SECURITIESMODEL_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
-
-#include <QAbstractListModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,39 +27,44 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneymodel.h"
+#include "mymoneyenums.h"
+#include "kmm_mymoney_export.h"
+
+#include "mymoneysecurity.h"
 
 /**
   */
-class CostCenterModel : public QAbstractListModel
+class KMM_MYMONEY_EXPORT SecuritiesModel : public MyMoneyModel<MyMoneySecurity>
 {
   Q_OBJECT
 
 public:
-  explicit CostCenterModel(QObject* parent = 0);
-  virtual ~CostCenterModel();
-
-  enum Roles {
-    CostCenterIdRole = Qt::UserRole,      // must remain Qt::UserRole due to KMyMoneyMVCCombo::selectedItem
-    ShortNameRole,
+  enum Column {
+    Security = 0,
+    Symbol,
+    Type,
+    Market,
+    Currency,
+    Fraction,
+    // insert new columns above this line
+    MaxColumns
   };
 
-  int rowCount(const QModelIndex& parent = QModelIndex()) const final override;
+
+  explicit SecuritiesModel(QObject* parent = 0);
+  virtual ~SecuritiesModel();
+
+  static const int ID_SIZE = 6;
+
   int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
   QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
   QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;
 
-  Qt::ItemFlags flags(const QModelIndex& index) const final override;
   bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
 
-  /**
-   * clears all objects currently in the model
-   */
-  void unload();
-
-  /**
-   * Loads the model with data from the engine
-   */
-  void load();
+  void addCurrency(const MyMoneySecurity& currency);
+  void loadCurrencies(const QMap<QString, MyMoneySecurity>& list);
 
 public Q_SLOTS:
 
@@ -70,5 +73,5 @@ private:
   QScopedPointer<Private> d;
 };
 
-#endif // COSTCENTERMODEL_H
+#endif // SECURITIESMODEL_H
 

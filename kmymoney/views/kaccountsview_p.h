@@ -45,7 +45,7 @@
 #include "mymoneyaccount.h"
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
-#include "accountsviewproxymodel.h"
+#include "accountsproxymodel.h"
 #include "kmymoneyplugin.h"
 #include "icons.h"
 #include "mymoneyenums.h"
@@ -75,6 +75,8 @@ public:
 
   void init()
   {
+/// @todo port to new model code
+#if 0
     Q_Q(KAccountsView);
     m_accountTree = &ui->m_accountTree;
 
@@ -89,6 +91,7 @@ public:
     q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KAccountsView::selectByVariant);
 
     q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KAccountsView::refresh);
+#endif
   }
 
   void editLoan()

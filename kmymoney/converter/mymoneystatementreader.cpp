@@ -1056,7 +1056,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
 
           auto const model = Models::instance()->accountsModel();
           filterProxyModel->setSourceModel(model);
-          filterProxyModel->setSourceColumns(model->getColumns());
+          /// @todo port to new model code
+          // filterProxyModel->setSourceColumns(model->getColumns());
           filterProxyModel->sort((int)eAccountsModel::Column::Account);
 
           QPointer<KMyMoneyAccountCombo> accountCombo = new KMyMoneyAccountCombo(filterProxyModel);

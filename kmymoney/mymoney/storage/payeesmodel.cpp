@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2016-2019  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -22,6 +22,8 @@
 
 #include <QDebug>
 #include <QString>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -31,37 +33,22 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyfile.h"
-#include "mymoneypayee.h"
-
 struct PayeesModel::Private
 {
-  Private() {}
+  Private()
+  {}
 
-  QVector<MyMoneyPayee*>  m_payeeItems;
 };
 
 PayeesModel::PayeesModel(QObject* parent)
-  : QAbstractListModel(parent)
+  : MyMoneyModel<MyMoneyPayee>(parent, QStringLiteral("P"), PayeesModel::ID_SIZE)
   , d(new Private)
 {
-  qDebug() << "Payees model created with items" << d->m_payeeItems.count();
-  d->m_payeeItems.clear();
+  setObjectName(QLatin1String("PayeesModel"));
 }
 
 PayeesModel::~PayeesModel()
 {
-}
-
-int PayeesModel::rowCount(const QModelIndex& parent) const
-{
-  // since the payees model is a simple table model, we only
-  // return the rowCount for the hiddenRootItem. and zero otherwise
-  if(parent.isValid()) {
-    return 0;
-  }
-
-  return d->m_payeeItems.count();
 }
 
 int PayeesModel::columnCount(const QModelIndex& parent) const
@@ -70,22 +57,9 @@ int PayeesModel::columnCount(const QModelIndex& parent) const
   return 1;
 }
 
-Qt::ItemFlags PayeesModel::flags(const QModelIndex& index) const
-{
-  Qt::ItemFlags flags;
-
-  if(!index.isValid())
-    return flags;
-  if(index.row() < 0 || index.row() >= d->m_payeeItems.count())
-    return flags;
-
-  return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
-}
-
-
 QVariant PayeesModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-  if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
+  if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
     switch(section) {
       case 0:
         return i18n("Payee");
@@ -97,29 +71,64 @@ QVariant PayeesModel::headerData(int section, Qt::Orientation orientation, int r
 
 QVariant PayeesModel::data(const QModelIndex& index, int role) const
 {
-  if(!index.isValid())
+  if (!index.isValid())
     return QVariant();
-  if(index.row() < 0 || index.row() >= d->m_payeeItems.count())
+  if (index.row() < 0 || index.row() >= rowCount(index.parent()))
     return QVariant();
 
   QVariant rc;
-  switch(role) {
+  const MyMoneyPayee& payee = static_cast<TreeItem<MyMoneyPayee>*>(index.internalPointer())->constDataRef();
+  switch (role) {
+    case eMyMoney::Model::Roles::PayeeNameRole:
     case Qt::DisplayRole:
     case Qt::EditRole:
       // make sure to never return any displayable text for the dummy entry
-      if(!d->m_payeeItems[index.row()]->id().isEmpty()) {
-        rc = d->m_payeeItems[index.row()]->name();
+      if (!payee.id().isEmpty()) {
+        rc = payee.name();
       } else {
         rc = QString();
       }
       break;
 
     case Qt::TextAlignmentRole:
-      rc = QVariant(Qt::AlignLeft | Qt::AlignTop);
+      rc = QVariant(Qt::AlignLeft | Qt::AlignVCenter);
       break;
 
-    case PayeeIdRole:
-      rc = d->m_payeeItems[index.row()]->id();
+    case eMyMoney::Model::Roles::IdRole:
+      rc = payee.id();
+      break;
+    case eMyMoney::Model::Roles::PayeeAddressRole:
+      rc = payee.address();
+      break;
+    case eMyMoney::Model::Roles::PayeeCityRole:
+      rc = payee.city();
+      break;
+    case eMyMoney::Model::Roles::PayeeStateRole:
+      rc = payee.state();
+      break;
+    case eMyMoney::Model::Roles::PayeePostCodeRole:
+      rc = payee.postcode();
+      break;
+    case eMyMoney::Model::Roles::PayeeTelephoneRole:
+      rc = payee.telephone();
+      break;
+    case eMyMoney::Model::Roles::PayeeEmailRole:
+      rc = payee.email();
+      break;
+    case eMyMoney::Model::Roles::PayeeNotesRole:
+      rc = payee.notes();
+      break;
+    case eMyMoney::Model::Roles::PayeeReferenceRole:
+      rc = payee.reference();
+      break;
+    case eMyMoney::Model::Roles::PayeeMatchTypeRole:
+      break;
+    case eMyMoney::Model::Roles::PayeeMatchKeyRole:
+      break;
+    case eMyMoney::Model::Roles::PayeeMatchCaseRole:
+      break;
+    case eMyMoney::Model::Roles::PayeeDefaultAccountRole:
+      rc = payee.defaultAccountId();
       break;
   }
   return rc;
@@ -127,46 +136,79 @@ QVariant PayeesModel::data(const QModelIndex& index, int role) const
 
 bool PayeesModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-  if(!index.isValid()) {
+  if (!index.isValid()) {
     return false;
   }
 
-  qDebug() << "setData(" << index.row() << index.column() << ")" << value << role;
-  return QAbstractItemModel::setData(index, value, role);
-}
+  if (!index.isValid())
+    return false;
+  if (index.row() < 0 || index.row() >= rowCount(index.parent()))
+    return false;
 
+  MyMoneyPayee& payee = static_cast<TreeItem<MyMoneyPayee>*>(index.internalPointer())->dataRef();
 
+  bool rc = true;
+  switch(role) {
+    case eMyMoney::Model::Roles::PayeeNameRole:
+    case Qt::DisplayRole:
+    case Qt::EditRole:
+      // make sure to never return any displayable text for the dummy entry
+      if (!payee.id().isEmpty()) {
+        payee.setName(value.toString());
+      } else {
+        rc = false;
+      }
+      break;
 
-void PayeesModel::unload()
-{
-  if(rowCount() > 0) {
-    beginRemoveRows(QModelIndex(), 0, rowCount() - 1);
-    qDeleteAll(d->m_payeeItems);
-    d->m_payeeItems.clear();
-    // From Qt 5.7, the capacity is preserved. To shed all capacity,
-    // swap with a default-constructed vector.
-    // see https://doc.qt.io/qt-5/qvector.html#clear
-    QVector<MyMoneyPayee*>().swap(d->m_payeeItems);
-    endRemoveRows();
+    case Qt::TextAlignmentRole:
+      break;
+
+    case eMyMoney::Model::Roles::IdRole:
+      rc = false;
+      break;
+    case eMyMoney::Model::Roles::PayeeAddressRole:
+      payee.setAddress(value.toString());
+      break;
+    case eMyMoney::Model::Roles::PayeeCityRole:
+      payee.setCity(value.toString());
+      break;
+    case eMyMoney::Model::Roles::PayeeStateRole:
+      payee.setState(value.toString());
+      break;
+    case eMyMoney::Model::Roles::PayeePostCodeRole:
+      payee.setPostcode(value.toString());
+      break;
+    case eMyMoney::Model::Roles::PayeeTelephoneRole:
+      payee.setTelephone(value.toString());
+      break;
+    case eMyMoney::Model::Roles::PayeeEmailRole:
+      payee.setEmail(value.toString());
+      break;
+    case eMyMoney::Model::Roles::PayeeNotesRole:
+      payee.setNotes(value.toString());
+      break;
+    case eMyMoney::Model::Roles::PayeeReferenceRole:
+      payee.setReference(value.toString());
+      break;
+    case eMyMoney::Model::Roles::PayeeMatchTypeRole:
+      break;
+    case eMyMoney::Model::Roles::PayeeMatchKeyRole:
+      break;
+    case eMyMoney::Model::Roles::PayeeMatchCaseRole:
+      break;
+    case eMyMoney::Model::Roles::PayeeDefaultAccountRole:
+      payee.setDefaultAccountId(value.toString());
+      break;
+    default:
+      rc = false;
+      break;
   }
-}
 
-void PayeesModel::load()
-{
-  const QList<MyMoneyPayee> list = MyMoneyFile::instance()->payeeList();
-
-  // first get rid of existing entries
-  unload();
-
-  const auto payeeCount = list.count();
-  if(payeeCount > 0) {
-    // reserve some more slots than needed
-    d->m_payeeItems.reserve(payeeCount + 13);
-    beginInsertRows(QModelIndex(), rowCount(), rowCount() + payeeCount);
-    // create an empty entry for those items that do not reference a payee
-    d->m_payeeItems.append(new MyMoneyPayee());
-    foreach (const auto it, list)
-      d->m_payeeItems.append(new MyMoneyPayee(it));
-    endInsertRows();
+  if (rc) {
+    setDirty();
+    const auto topLeft = PayeesModel::index(index.row(), 0);
+    const auto bottomRight = PayeesModel::index(index.row(), columnCount()-1);
+    emit dataChanged(topLeft, bottomRight);
   }
+  return rc;
 }

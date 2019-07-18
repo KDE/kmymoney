@@ -42,7 +42,6 @@ enum class View;
 /**
   * This view was created to handle the actions that could be performed with the accounts.
   */
-class KMyMoneyAccountTreeViewPrivate;
 class KMM_WIDGETS_EXPORT KMyMoneyAccountTreeView : public QTreeView
 {
   Q_OBJECT
@@ -51,8 +50,6 @@ class KMM_WIDGETS_EXPORT KMyMoneyAccountTreeView : public QTreeView
 public:
   explicit KMyMoneyAccountTreeView(QWidget* parent = nullptr);
   ~KMyMoneyAccountTreeView();
-
-  AccountsViewProxyModel *init(View view);
 
 protected:
   void mouseDoubleClickEvent(QMouseEvent *event) override;
@@ -66,12 +63,6 @@ Q_SIGNALS:
   void selectByObject(const MyMoneyObject&, eView::Intent);
   void selectByVariant(const QVariantList&, eView::Intent);
 
-private:
-  KMyMoneyAccountTreeViewPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KMyMoneyAccountTreeView)
-
-private Q_SLOTS:
-  void slotColumnToggled(const eAccountsModel::Column column, const bool show);
 };
 
 #endif // KMYMONEYACCOUNTTREEVIEW_H
