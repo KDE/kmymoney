@@ -5,6 +5,8 @@ endif()
 set(storage_HEADERS
   imymoneystorageformat.h
   mymoneystoragemgr.h
+  mymoneymodelbase.h
+  mymoneymodel.h
   payeesmodel.h
   costcentermodel.h
   schedulesmodel.h

@@ -34,6 +34,7 @@ set(kmm_mymoney_LIB_SRCS
   set(storage_a_SOURCES
     ./storage/imymoneystorageformat.cpp
     ./storage/mymoneystoragemgr.cpp
+    ./storage/mymoneymodelbase.cpp
     ./storage/payeesmodel.cpp
     ./storage/costcentermodel.cpp
     ./storage/schedulesmodel.cpp
