@@ -185,7 +185,7 @@ public:
     , currenciesModel(qq)
     , budgetsModel(qq)
     , accountsModel(qq)
-    , institutionsModel(qq)
+    , institutionsModel(&accountsModel, qq)
   {
 #ifdef KMM_MODELTEST
     /// @todo add new models here
@@ -763,7 +763,10 @@ void MyMoneyFile::reparentAccount(MyMoneyAccount &acc, MyMoneyAccount& parent)
 
 MyMoneyInstitution MyMoneyFile::institution(const QString& id) const
 {
-  return d->m_storage->institution(id);
+  if (Q_UNLIKELY(id.isEmpty())) // FIXME: Stop requesting accounts with empty id
+    return MyMoneyInstitution();
+
+  return d->institutionsModel.itemById(id);
 }
 
 MyMoneyAccount MyMoneyFile::account(const QString& id) const
@@ -771,7 +774,7 @@ MyMoneyAccount MyMoneyFile::account(const QString& id) const
   if (Q_UNLIKELY(id.isEmpty())) // FIXME: Stop requesting accounts with empty id
     return MyMoneyAccount();
 
-  return d->m_storage->account(id);
+  return d->accountsModel.itemById(id);
 }
 
 MyMoneyAccount MyMoneyFile::subAccountByName(const MyMoneyAccount& account, const QString& name) const
@@ -790,7 +793,7 @@ MyMoneyAccount MyMoneyFile::subAccountByName(const MyMoneyAccount& account, cons
 MyMoneyAccount MyMoneyFile::accountByName(const QString& name) const
 {
   try {
-    return d->m_storage->accountByName(name);
+    return d->accountsModel.itemByName(name);
   } catch (const MyMoneyException &) {
   }
   return MyMoneyAccount();
