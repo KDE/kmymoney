@@ -631,6 +631,7 @@ QString MyMoneyAccount::stdAccName(eMyMoney::Account::Standard stdAccID)
     {eMyMoney::Account::Standard::Expense,   QStringLiteral("AStd::Expense")},
     {eMyMoney::Account::Standard::Income,    QStringLiteral("AStd::Income")},
     {eMyMoney::Account::Standard::Equity,    QStringLiteral("AStd::Equity")},
+    {eMyMoney::Account::Standard::Favorite,  QStringLiteral("AStd::Favorite")},
   };
   return stdAccNames.value(stdAccID);
 }

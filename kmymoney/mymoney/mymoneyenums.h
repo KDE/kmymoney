@@ -57,7 +57,10 @@ namespace eMyMoney {
       Asset,
       Expense,
       Income,
-      Equity
+      Equity,
+      Favorite,             /**< Used internally as parent for all favorite accounts */
+      // insert new groups above this line
+      MaxGroups
     };
 
     inline uint qHash(const Standard key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }

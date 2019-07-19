@@ -38,6 +38,7 @@
 class KMM_MYMONEY_EXPORT AccountsModel : public MyMoneyModel<MyMoneyAccount>
 {
   Q_OBJECT
+  Q_DISABLE_COPY(AccountsModel)
 
 public:
   enum Column {
@@ -68,10 +69,21 @@ public:
   bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
 
   void load(const QMap<QString, MyMoneyAccount>& list);
+
   QList<MyMoneyAccount> itemList() const;
+  bool insertRows(int startRow, int rows, const QModelIndex &parent = QModelIndex()) override;
+  bool removeRows(int startRow, int rows, const QModelIndex &parent = QModelIndex()) override;
+  QModelIndex indexById(const QString& id) const;
+  QModelIndexList indexListByName(const QString& name) const;
+
+protected:
+  void clearModelItems() override;
+  void addFavorite(const QString& id);
+  void removeFavorite(const QString& id);
 
   // reparent()
 public Q_SLOTS:
+
 
 private:
   struct Private;

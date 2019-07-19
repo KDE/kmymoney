@@ -32,18 +32,73 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneyenums.h"
 
 struct AccountsModel::Private
 {
+  Q_DECLARE_PUBLIC(AccountsModel)
+
   Private(AccountsModel* qq, QObject* parent)
     : q_ptr(qq)
     , parentObject(parent)
   {
   }
 
+  int loadSubAccounts(const QModelIndex parent, const QMap<QString, MyMoneyAccount>& list)
+  {
+    Q_Q(AccountsModel);
+    const auto parentAccount = static_cast<TreeItem<MyMoneyAccount>*>(parent.internalPointer())->constDataRef();
+
+    // create entries for the sub accounts
+    const int subAccounts = parentAccount.accountCount();
+    int itemCount = subAccounts;
+    if (subAccounts > 0) {
+      q->insertRows(0, subAccounts, parent);
+      for (int row = 0; row < subAccounts; ++row) {
+        const auto subAccountId = parentAccount.accountList().at(row);
+        const auto subAccount = list.value(subAccountId);
+        if (subAccount.id() == subAccountId) {
+          q->updateNextObjectId(subAccount.id());
+          const auto idx = q->index(row, 0, parent);
+          static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->dataRef() = subAccount;
+          if (subAccount.value("PreferredAccount") == QLatin1String("Yes")) {
+            q->addFavorite(subAccountId);
+            ++itemCount;
+          }
+          itemCount += loadSubAccounts(idx, list);
+
+        } else {
+          qDebug() << "Account" << parentAccount.id() << ": subaccount with ID" << subAccountId << "not found in list";
+        }
+      }
+    }
+    return itemCount;
+  }
+
+  bool isParentFavorite(const QModelIndex& parent) const
+  {
+    if (parent.isValid()) {
+      TreeItem<MyMoneyAccount> *parentItem;
+      parentItem = static_cast<TreeItem<MyMoneyAccount>*>(parent.internalPointer());
+      if (parentItem->constDataRef().id() == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Favorite)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  const QVector<QPair<eMyMoney::Account::Standard, const char*> > types = {
+    { eMyMoney::Account::Standard::Favorite, I18N_NOOP("Favorite")},
+    { eMyMoney::Account::Standard::Asset, I18N_NOOP("Asset accounts") },
+    { eMyMoney::Account::Standard::Liability, I18N_NOOP("Liability accounts") },
+    { eMyMoney::Account::Standard::Income, I18N_NOOP("Income categories") },
+    { eMyMoney::Account::Standard::Expense, I18N_NOOP("Expense categories") },
+    { eMyMoney::Account::Standard::Equity, I18N_NOOP("Equity accounts") },
+  };
 
   AccountsModel*    q_ptr;
-  QObject*            parentObject;
+  QObject*          parentObject;
+  QList<QString>    favorites;
 };
 
 AccountsModel::AccountsModel(QObject* parent)
@@ -51,6 +106,9 @@ AccountsModel::AccountsModel(QObject* parent)
   , d(new Private(this, parent))
 {
   setObjectName(QLatin1String("AccountsModel"));
+
+  // force creation of empty account structure
+  unload();
 }
 
 AccountsModel::~AccountsModel()
@@ -157,8 +215,49 @@ bool AccountsModel::setData(const QModelIndex& index, const QVariant& value, int
     return false;
   }
 
+  bool rc = false;
+
+  // check if something is performed on a favorite entry
+  // and skip right away
+  if (d->isParentFavorite(index.parent())) {
+    return true;
+  }
+
+  MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(index.internalPointer())->dataRef();
+  switch(role) {
+    case Qt::DisplayRole:
+    case Qt::EditRole:
+#if 0
+      switch(index.column()) {
+        case Column::Name:
+          account.setName(value.toString());
+          rc = true;
+          break;
+        default:
+          break;
+      }
+#endif
+      break;
+  }
   qDebug() << "setData(" << index.row() << index.column() << ")" << value << role;
   return QAbstractItemModel::setData(index, value, role);
+}
+
+void AccountsModel::clearModelItems()
+{
+  MyMoneyModel<MyMoneyAccount>::clearModelItems();
+  d->favorites.clear();
+
+  // create the account groups with favorite entry as the first thing
+  int row = 0;
+  insertRows(0, static_cast<int>(eMyMoney::Account::Standard::MaxGroups));
+  foreach(auto type, d->types) {
+    MyMoneyAccount baseAccount;
+    baseAccount.setName(i18n(type.second));
+    auto account = MyMoneyAccount(MyMoneyAccount::stdAccName(type.first), baseAccount);
+    static_cast<TreeItem<MyMoneyAccount>*>(index(row, 0).internalPointer())->dataRef() = account;
+    ++row;
+  }
 }
 
 void AccountsModel::load(const QMap<QString, MyMoneyAccount>& list)
@@ -167,25 +266,34 @@ void AccountsModel::load(const QMap<QString, MyMoneyAccount>& list)
   // first get rid of any existing entries
   clearModelItems();
 
-
   // and don't count loading as a modification
   setDirty(false);
 
-  /// @todo here implement hierarchical loading
-  int row = 0;
-  foreach (const auto item, list) {
-    static_cast<TreeItem<MyMoneyAccount>*>(index(row, 0).internalPointer())->dataRef() = item;
-    ++row;
+  int itemCount = 0;
+  foreach(auto type, d->types) {
+    ++itemCount;
+    // we have nothing to do for favorites
+    if (type.first == eMyMoney::Account::Standard::Favorite)
+      continue;
+    const auto baseAccount = list.value(MyMoneyAccount::stdAccName(type.first));
+    if (baseAccount.id() == MyMoneyAccount::stdAccName(type.first)) {
+      const auto idx = indexById(baseAccount.id());
+      static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->dataRef() = baseAccount;
+      itemCount += d->loadSubAccounts(idx, list);
+    } else {
+      qDebug() << "Baseaccount for" << MyMoneyAccount::stdAccName(type.first) << "not found in list";
+    }
   }
   endResetModel();
 
-  qDebug() << "Model for 'A' loaded with" << rowCount() << "items";
+  qDebug() << "Model for \"A\" loaded with" << itemCount << "items";
 }
 
 QList<MyMoneyAccount> AccountsModel::itemList() const
 {
   QList<MyMoneyAccount> list;
-  QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive);
+  // never search in the first row which is favorites
+  QModelIndexList indexes = match(index(1, 0), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive);
   for (int row = 0; row < indexes.count(); ++row) {
     const MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(indexes.value(row).internalPointer())->constDataRef();
     if (!account.id().startsWith("AStd"))
@@ -194,3 +302,80 @@ QList<MyMoneyAccount> AccountsModel::itemList() const
   return list;
 }
 
+bool AccountsModel::insertRows(int startRow, int rows, const QModelIndex &parent)
+{
+  // special handling for favorites
+  if (d->isParentFavorite(parent)) {
+    beginInsertRows(parent, startRow, startRow + rows - 1);
+    do {
+      d->favorites.insert(startRow, QString());
+      --rows;
+    } while(rows > 0);
+    endInsertRows();
+    setDirty();
+    return true;
+  }
+  return MyMoneyModel<MyMoneyAccount>::insertRows(startRow, rows, parent);
+}
+
+bool AccountsModel::removeRows(int startRow, int rows, const QModelIndex &parent)
+{
+  if (rows == 0)
+    return true;
+
+  if (d->isParentFavorite(parent)) {
+    beginRemoveRows(parent, startRow, startRow + rows - 1);
+    do {
+      d->favorites.removeAt(startRow);
+      --rows;
+    } while(rows > 0);
+    endRemoveRows();
+    setDirty();
+    return true;
+  }
+  return MyMoneyModel<MyMoneyAccount>::removeRows(startRow, rows, parent);
+}
+
+QModelIndex AccountsModel::indexById(const QString& id) const
+{
+  // never search in the first row which is favorites
+  const QModelIndexList indexes = match(index(1, 0), eMyMoney::Model::Roles::IdRole, id, 1, Qt::MatchFixedString | Qt::MatchRecursive);
+  if (indexes.isEmpty())
+    return QModelIndex();
+  return indexes.first();
+}
+
+QModelIndexList AccountsModel::indexListByName(const QString& name) const
+{
+  // never search in the first row which is favorites
+  return match(index(1, 0), Qt::DisplayRole, name, 1, Qt::MatchFixedString | Qt::MatchCaseSensitive);
+}
+
+void AccountsModel::addFavorite(const QString& id)
+{
+  // no need to do anything if it is already listed
+  if (!d->favorites.contains(id)) {
+    // bypass our own indexById as it does not return favorites
+    const auto favoriteIdx = MyMoneyModel<MyMoneyAccount>::indexById(MyMoneyAccount::stdAccName(d->types[0].first));
+    // we append a single row at the end
+    beginInsertRows(favoriteIdx, d->favorites.count(), d->favorites.count());
+    d->favorites.append(id);
+    endInsertRows();
+    // don't modify the dirty flag here. This is done elsewhere.
+  }
+}
+
+void AccountsModel::removeFavorite(const QString& id)
+{
+  // no need to do anything if it is not listed
+  if (d->favorites.contains(id)) {
+    // bypass our own indexById as it does not return favorites
+    const auto favoriteIdx = MyMoneyModel<MyMoneyAccount>::indexById(MyMoneyAccount::stdAccName(d->types[0].first));
+    const int row = d->favorites.indexOf(id);
+    // we remove a single row
+    beginRemoveRows(favoriteIdx, row, row);
+    d->favorites.removeAt(row);
+    endRemoveRows();
+    // don't modify the dirty flag here. This is done elsewhere.
+  }
+}
