@@ -23,7 +23,6 @@
 #include <QSharedData>
 #include <QSharedDataPointer>
 #include <QVariant>
-#include <QAbstractItemModel>
 #include <QModelIndex>
 #include <QRegularExpression>
 #include <QDomDocument>
@@ -32,6 +31,7 @@
 #include <QDebug>
 
 #include "mymoneyenums.h"
+#include "mymoneymodelbase.h"
 
 #include "kmm_models_export.h"
 
@@ -146,14 +146,12 @@ private:
     TreeItem<T> *                           parentItem;
 };
 
-
-
 template <typename T>
-class MyMoneyModel : public QAbstractItemModel
+class MyMoneyModel : public MyMoneyModelBase
 {
 public:
   explicit MyMoneyModel(QObject* parent, const QString& idLeadin, quint8 idSize)
-      : QAbstractItemModel(parent)
+      : MyMoneyModelBase(parent)
       , m_nextId(0)
       , m_idLeadin(idLeadin)
       , m_idSize(idSize)
@@ -350,6 +348,7 @@ public:
       ++row;
     }
     endResetModel();
+    emit modelLoaded();
 
     qDebug() << "Model for" << m_idLeadin << "loaded with" << rowCount() << "items";
   }
