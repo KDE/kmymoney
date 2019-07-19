@@ -379,3 +379,10 @@ void AccountsModel::removeFavorite(const QString& id)
     // don't modify the dirty flag here. This is done elsewhere.
   }
 }
+
+int AccountsModel::processItems(Worker *worker)
+{
+  // make sure to work only on real entries and not on favorites
+  return MyMoneyModel<MyMoneyAccount>::processItems(worker, match(index(1, 0), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive));
+}
+

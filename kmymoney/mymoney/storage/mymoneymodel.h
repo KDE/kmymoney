@@ -377,9 +377,13 @@ public:
   };
 
 
-  int processItems(Worker *worker)
+  virtual int processItems(Worker *worker)
   {
-    const auto indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive);
+    return processItems(worker, match(index(0, 0), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive));
+  }
+
+  int processItems(Worker *worker, const QModelIndexList& indexes)
+  {
     for (int row = 0; row < indexes.count(); ++row) {
       worker->operator()(static_cast<TreeItem<T>*>(indexes.value(row).internalPointer())->constDataRef());
     }

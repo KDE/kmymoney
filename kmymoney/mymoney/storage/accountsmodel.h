@@ -76,10 +76,12 @@ public:
   QModelIndex indexById(const QString& id) const;
   QModelIndexList indexListByName(const QString& name) const;
 
+
 protected:
   void clearModelItems() override;
   void addFavorite(const QString& id);
   void removeFavorite(const QString& id);
+  int processItems(Worker *worker) override;
 
   // reparent()
 public Q_SLOTS:
