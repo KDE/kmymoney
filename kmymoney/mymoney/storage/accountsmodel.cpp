@@ -152,20 +152,26 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
   return QAbstractItemModel::headerData(section, orientation, role);
 }
 
-QVariant AccountsModel::data(const QModelIndex& index, int role) const
+QVariant AccountsModel::data(const QModelIndex& idx, int role) const
 {
-  if (!index.isValid())
+  if (!idx.isValid())
     return QVariant();
-  if (index.row() < 0 || index.row() >= rowCount(index.parent()))
+  if (idx.row() < 0 || idx.row() >= rowCount(idx.parent()))
     return QVariant();
 
   QVariant rc;
-  const MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(index.internalPointer())->constDataRef();
+  if (d->isParentFavorite(idx.parent())) {
+    const auto accountIdx = indexById(d->favorites.at(idx.row()));
+    const auto subIdx = index(accountIdx.row(), idx.column(), accountIdx.parent());
+    return data(subIdx, role);
+  }
+
+  const MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->constDataRef();
   MyMoneyAccount tradingCurrency;
   switch(role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-      switch(index.column()) {
+      switch(idx.column()) {
         case Column::AccountName:
           // make sure to never return any displayable text for the dummy entry
           if (!account.id().isEmpty()) {
@@ -266,9 +272,6 @@ void AccountsModel::load(const QMap<QString, MyMoneyAccount>& list)
   // first get rid of any existing entries
   clearModelItems();
 
-  // and don't count loading as a modification
-  setDirty(false);
-
   int itemCount = 0;
   foreach(auto type, d->types) {
     ++itemCount;
@@ -284,7 +287,13 @@ void AccountsModel::load(const QMap<QString, MyMoneyAccount>& list)
       qDebug() << "Baseaccount for" << MyMoneyAccount::stdAccName(type.first) << "not found in list";
     }
   }
+
+  // and don't count loading as a modification
+  setDirty(false);
+
   endResetModel();
+
+  emit modelLoaded();
 
   qDebug() << "Model for \"A\" loaded with" << itemCount << "items";
 }
