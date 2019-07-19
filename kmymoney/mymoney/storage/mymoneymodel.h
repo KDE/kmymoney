@@ -158,6 +158,7 @@ public:
       , m_idLeadin(idLeadin)
       , m_idSize(idSize)
       , m_dirty(false)
+      , m_idMatchExp(QStringLiteral("^%1(\\d+)$").arg(m_idLeadin))
   {
     m_rootItem = new TreeItem<T>(T());
 #if 0
@@ -336,22 +337,15 @@ public:
 
     const auto itemCount = list.count();
     // reserve an extra slot for the null item
-    insertRows(0, itemCount+1);
+    insertRows(0, itemCount);
 
     // and don't count loading as a modification
     setDirty(false);
     m_nextId = 0;
 
-    QRegularExpression exp(QStringLiteral("^%1(\\d+)$").arg(m_idLeadin));
-    int row = 1;
+    int row = 0;
     foreach (const auto item, list) {
-      QRegularExpressionMatch m = exp.match(item.id());
-      if (m.hasMatch()) {
-        const quint64 id = m.captured(1).toUInt();
-        if (id > m_nextId) {
-          m_nextId = id;
-        }
-      }
+      updateNextObjectId(item.id());
       static_cast<TreeItem<T>*>(index(row, 0).internalPointer())->dataRef() = item;
       ++row;
     }
@@ -450,12 +444,23 @@ public:
   }
 
 protected:
-  void clearModelItems()
+  virtual void clearModelItems()
   {
     // get rid of any existing entries should they exist
     if (m_rootItem->childCount()) {
       delete m_rootItem;
       m_rootItem = new TreeItem<T>(T());
+    }
+  }
+
+  virtual void updateNextObjectId(const QString& id)
+  {
+    QRegularExpressionMatch m = m_idMatchExp.match(id);
+    if (m.hasMatch()) {
+      const quint64 itemId = m.captured(1).toUInt();
+      if (itemId > m_nextId) {
+        m_nextId = itemId;
+      }
     }
   }
 
@@ -466,6 +471,7 @@ protected:
   QString                 m_idLeadin;
   quint8                  m_idSize;
   bool                    m_dirty;
+  QRegularExpression      m_idMatchExp;
 };
 
 #endif // MYMONEYMODEL_H

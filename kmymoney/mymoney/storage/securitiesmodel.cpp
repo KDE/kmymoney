@@ -189,6 +189,7 @@ void SecuritiesModel::loadCurrencies(const QMap<QString, MyMoneySecurity>& list)
 {
   // make sure this is a currency model
   m_idLeadin.clear();
+  m_idMatchExp.setPattern(QStringLiteral("^(\\d+)$"));
   setObjectName(QLatin1String("CurrenciesModel"));
 
   beginResetModel();
@@ -218,6 +219,7 @@ void SecuritiesModel::addCurrency(const MyMoneySecurity& currency)
 {
   // make sure this is a currency model
   m_idLeadin.clear();
+  m_idMatchExp.setPattern(QStringLiteral("^(\\d+)$"));
 
   if (!currency.id().isEmpty()) {
     const auto idx = indexById(currency.id());
