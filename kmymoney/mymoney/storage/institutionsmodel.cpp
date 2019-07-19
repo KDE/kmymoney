@@ -16,6 +16,7 @@
  */
 
 #include "institutionsmodel.h"
+#include "accountsmodel.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -35,21 +36,40 @@
 
 struct InstitutionsModel::Private
 {
+  Q_DECLARE_PUBLIC(InstitutionsModel);
+
   Private(InstitutionsModel* qq, QObject* parent)
     : q_ptr(qq)
     , parentObject(parent)
   {
   }
 
+  void loadAccounts(const QModelIndex& idx, const QList<QString>& idList)
+  {
+    Q_Q(InstitutionsModel);
+    const int accounts = idList.count();
+    q->insertRows(0, accounts, idx);
+    // we create institution subentries here with the id of the account. These will never
+    // be used as institutions and also not found by indexById for a different m_leadIn
+    // The are only used in data() to proxy data from the accountsModel.
+    for (int row = 0; row < accounts; ++row) {
+      const auto subIdx = q->index(row, 0, idx);
+      MyMoneyInstitution account(idList.at(row), MyMoneyInstitution());
+      static_cast<TreeItem<MyMoneyInstitution>*>(subIdx.internalPointer())->dataRef() = account;
+    }
+  }
 
-  InstitutionsModel*    q_ptr;
+
+  InstitutionsModel*  q_ptr;
   QObject*            parentObject;
+  AccountsModel*      accountsModel;
 };
 
-InstitutionsModel::InstitutionsModel(QObject* parent)
+InstitutionsModel::InstitutionsModel(AccountsModel* accountsModel, QObject* parent)
   : MyMoneyModel<MyMoneyInstitution>(parent, QStringLiteral("I"), InstitutionsModel::ID_SIZE)
   , d(new Private(this, parent))
 {
+  d->accountsModel = accountsModel;
   setObjectName(QLatin1String("InstitutionsModel"));
 }
 
@@ -65,48 +85,32 @@ int InstitutionsModel::columnCount(const QModelIndex& parent) const
 
 QVariant InstitutionsModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-  if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
-    switch(section) {
-      case Column::AccountName:
-        return i18n("Name");
-      case Column::Type:
-        return i18n("Type");
-      case Column::Tax:
-        return i18n("Tax");
-      case Column::Vat:
-        return i18n("VAT");
-      case Column::CostCenter:
-        return i18nc("CostCenter", "CC");
-      case Column::TotalBalance:
-        return i18n("Total Balance");
-      case Column::PostedValue:
-        return i18n("Posted Value");
-      case Column::TotalValue:
-        return i18n("Total Value");
-      case Column::Number:
-        return i18n("Number");
-      case Column::SortCode:
-        return i18n("SortCode");
-      default:
-        return QVariant();
-    }
-  }
-  return QAbstractItemModel::headerData(section, orientation, role);
+  if (Q_UNLIKELY(!d->accountsModel))
+    return QVariant();
+  return d->accountsModel->headerData(section, orientation, role);
 }
 
-QVariant InstitutionsModel::data(const QModelIndex& index, int role) const
+QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
 {
-  if (!index.isValid())
+  if (!idx.isValid())
     return QVariant();
-  if (index.row() < 0 || index.row() >= rowCount(index.parent()))
+  if (idx.row() < 0 || idx.row() >= rowCount(idx.parent()))
     return QVariant();
 
   QVariant rc;
-  const MyMoneyInstitution& institution = static_cast<TreeItem<MyMoneyInstitution>*>(index.internalPointer())->constDataRef();
+  const MyMoneyInstitution& institution = static_cast<TreeItem<MyMoneyInstitution>*>(idx.internalPointer())->constDataRef();
+
+  // check for a sub-entry which is actually a proxy to the corresponding account
+  if (idx.isValid()) {
+    const auto accountIdx = d->accountsModel->indexById(institution.id());
+    const auto subIdx = d->accountsModel->index(accountIdx.row(), idx.column(), accountIdx.parent());
+    return d->accountsModel->data(subIdx, role);
+  }
+
   switch(role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-      switch(index.column()) {
+      switch(idx.column()) {
         case Column::AccountName:
           // make sure to never return any displayable text for the dummy entry
           if (!institution.id().isEmpty()) {
@@ -115,24 +119,6 @@ QVariant InstitutionsModel::data(const QModelIndex& index, int role) const
             rc = QString();
           }
           break;
-      case Column::Type:
-        return i18n("Type");
-      case Column::Tax:
-        return i18n("Tax");
-      case Column::Vat:
-        return i18n("VAT");
-      case Column::CostCenter:
-        return i18nc("CostCenter", "CC");
-      case Column::TotalBalance:
-        return i18n("Total Balance");
-      case Column::PostedValue:
-        return i18n("Posted Value");
-      case Column::TotalValue:
-        return i18n("Total Value");
-      case Column::Number:
-        return i18n("Number");
-      case Column::SortCode:
-        return i18n("SortCode");
         default:
           break;
       }
@@ -170,13 +156,23 @@ void InstitutionsModel::load(const QMap<QString, MyMoneyInstitution>& list)
   // and don't count loading as a modification
   setDirty(false);
 
-  /// @todo here implement institution loading
   int row = 0;
-  foreach (const auto item, list) {
-    static_cast<TreeItem<MyMoneyInstitution>*>(index(row, 0).internalPointer())->dataRef() = item;
+  // insert one more used for the no institution item
+  insertRows(0, list.count()+1);
+  MyMoneyInstitution noBank((QString()), MyMoneyInstitution());
+  noBank.setName(i18n("Accounts with no institution assigned"));
+  static_cast<TreeItem<MyMoneyInstitution>*>(index(0, 0).internalPointer())->dataRef() = noBank;
+  ++row;
+  foreach(const auto institution, list) {
+    const auto idx = index(row, 0);
+    static_cast<TreeItem<MyMoneyInstitution>*>(idx.internalPointer())->dataRef() = institution;
+    d->loadAccounts(idx, institution.accountList());
     ++row;
   }
+
   endResetModel();
 
-  qDebug() << "Model for 'I' loaded with" << rowCount() << "items";
+  emit modelLoaded();
+
+  qDebug() << "Model for \"I\" loaded with" << rowCount() << "items";
 }

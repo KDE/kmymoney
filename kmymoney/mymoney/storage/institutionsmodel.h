@@ -33,6 +33,7 @@
 
 #include "mymoneyinstitution.h"
 
+class AccountsModel;
 /**
   */
 class KMM_MYMONEY_EXPORT InstitutionsModel : public MyMoneyModel<MyMoneyInstitution>
@@ -56,16 +57,16 @@ public:
   };
 
 
-  explicit InstitutionsModel(QObject* parent = 0);
+  explicit InstitutionsModel(AccountsModel* accountsModel, QObject* parent = 0);
   virtual ~InstitutionsModel();
 
   static const int ID_SIZE = 6;
 
   int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
-  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
+  QVariant data(const QModelIndex& idx, int role = Qt::DisplayRole) const final override;
   QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;
 
-  bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
+  bool setData(const QModelIndex& idx, const QVariant& value, int role = Qt::EditRole) final override;
 
   void load(const QMap<QString, MyMoneyInstitution>& list);
   // reparent()
