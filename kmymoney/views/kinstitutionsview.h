@@ -26,7 +26,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyaccountsviewbase.h"
+#include "kmymoneyviewbase.h"
 
 class MyMoneyInstitution;
 class MyMoneyMoney;
@@ -38,7 +38,7 @@ class MyMoneyMoney;
   * This class implements the institutions hierarchical 'view'.
   */
 class KInstitutionsViewPrivate;
-class KInstitutionsView : public KMyMoneyAccountsViewBase
+class KInstitutionsView : public KMyMoneyViewBase
 {
   Q_OBJECT
 

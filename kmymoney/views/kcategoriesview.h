@@ -32,7 +32,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyaccountsviewbase.h"
+#include "kmymoneyviewbase.h"
 
 class MyMoneyMoney;
 class MyMoneyAccount;
@@ -58,7 +58,7 @@ class MyMoneyAccount;
   * accessible from either the main menu or the context menu.
   */
 class KCategoriesViewPrivate;
-class KCategoriesView : public KMyMoneyAccountsViewBase
+class KCategoriesView : public KMyMoneyViewBase
 {
   Q_OBJECT
 

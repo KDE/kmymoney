@@ -34,7 +34,7 @@
 // Project Includes
 
 #include "ui_kaccountsview.h"
-#include "kmymoneyaccountsviewbase_p.h"
+#include "kmymoneyviewbase_p.h"
 
 #include "mymoneyexception.h"
 #include "mymoneysplit.h"
@@ -55,7 +55,7 @@
 
 using namespace Icons;
 
-class KAccountsViewPrivate : public KMyMoneyAccountsViewBasePrivate
+class KAccountsViewPrivate : public KMyMoneyViewBasePrivate
 {
   Q_DECLARE_PUBLIC(KAccountsView)
 
@@ -75,15 +75,15 @@ public:
 
   void init()
   {
-/// @todo port to new model code
-#if 0
     Q_Q(KAccountsView);
-    m_accountTree = &ui->m_accountTree;
 
     // setup icons for collapse and expand button
     ui->m_collapseButton->setIcon(Icons::get(Icon::ListCollapse));
     ui->m_expandButton->setIcon(Icons::get(Icon::ListExpand));
 
+    /// @todo port to new model code
+#if 0
+    m_accountTree = &ui->m_accountTree;
     m_proxyModel = ui->m_accountTree->init(View::Accounts);
     q->connect(m_proxyModel, &AccountsProxyModel::unusedIncomeExpenseAccountHidden, q, &KAccountsView::slotUnusedIncomeExpenseAccountHidden);
     q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);

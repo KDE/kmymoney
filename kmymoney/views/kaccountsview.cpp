@@ -44,7 +44,7 @@
 using namespace Icons;
 
 KAccountsView::KAccountsView(QWidget *parent) :
-    KMyMoneyAccountsViewBase(*new KAccountsViewPrivate(this), parent)
+    KMyMoneyViewBase(*new KAccountsViewPrivate(this), parent)
 {
   Q_D(KAccountsView);
   d->ui->setupUi(this);
@@ -115,8 +115,11 @@ void KAccountsView::refresh()
 void KAccountsView::showEvent(QShowEvent * event)
 {
   Q_D(KAccountsView);
+  /// @todo port to new model code
+#if 0
   if (!d->m_proxyModel)
     d->init();
+#endif
 
   emit customActionRequested(View::Accounts, eView::Action::AboutToShow);
 
@@ -243,7 +246,8 @@ void KAccountsView::slotUnusedIncomeExpenseAccountHidden()
 void KAccountsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)
 {
   Q_D(KAccountsView);
-  d->netBalProChanged(netWorth, d->ui->m_totalProfitsLabel, View::Accounts);
+  /// @todo port to new model code
+  // d->netBalProChanged(netWorth, d->ui->m_totalProfitsLabel, View::Accounts);
 }
 
 void KAccountsView::slotShowAccountMenu(const MyMoneyAccount& acc)

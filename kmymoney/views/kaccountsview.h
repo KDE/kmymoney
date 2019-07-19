@@ -26,7 +26,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyaccountsviewbase.h"
+#include "kmymoneyviewbase.h"
 
 class MyMoneyMoney;
 class MyMoneyAccount;
@@ -42,7 +42,7 @@ template <class Key, class Value> class QMap;
   */
 
 class KAccountsViewPrivate;
-class KAccountsView : public KMyMoneyAccountsViewBase
+class KAccountsView : public KMyMoneyViewBase
 {
   Q_OBJECT
 

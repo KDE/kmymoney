@@ -32,6 +32,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
 #include "kmymoneysettings.h"
 #include "mymoneyexception.h"
 #include "knewbankdlg.h"
@@ -40,7 +42,7 @@
 using namespace Icons;
 
 KInstitutionsView::KInstitutionsView(QWidget *parent) :
-    KMyMoneyAccountsViewBase(*new KInstitutionsViewPrivate(this), parent)
+    KMyMoneyViewBase(*new KInstitutionsViewPrivate(this), parent)
 {
   Q_D(KInstitutionsView);
   d->ui->setupUi(this);
@@ -97,8 +99,11 @@ void KInstitutionsView::refresh()
 void KInstitutionsView::showEvent(QShowEvent * event)
 {
   Q_D(KInstitutionsView);
+  /// @todo port to new model code
+#if 0
   if (!d->m_proxyModel)
     d->init();
+#endif
 
   emit customActionRequested(View::Institutions, eView::Action::AboutToShow);
 
@@ -128,7 +133,8 @@ void KInstitutionsView::updateActions(const MyMoneyObject& obj)
 void KInstitutionsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)
 {
   Q_D(KInstitutionsView);
-  d->netBalProChanged(netWorth, d->ui->m_totalProfitsLabel, View::Institutions);
+  /// @todo port to new model code
+  // d->netBalProChanged(netWorth, d->ui->m_totalProfitsLabel, View::Institutions);
 }
 
 void KInstitutionsView::slotNewInstitution()

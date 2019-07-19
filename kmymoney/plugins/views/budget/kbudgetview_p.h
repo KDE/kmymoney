@@ -42,7 +42,7 @@
 // Project Includes
 
 #include "ui_kbudgetview.h"
-#include "kmymoneyaccountsviewbase_p.h"
+#include "kmymoneyviewbase_p.h"
 
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
@@ -97,13 +97,13 @@ private:
   MyMoneyBudget  m_budget;
 };
 
-class KBudgetViewPrivate : public KMyMoneyAccountsViewBasePrivate
+class KBudgetViewPrivate : public KMyMoneyViewBasePrivate
 {
   Q_DECLARE_PUBLIC(KBudgetView)
 
 public:
   explicit KBudgetViewPrivate(KBudgetView *qq) :
-    KMyMoneyAccountsViewBasePrivate(),
+    KMyMoneyViewBasePrivate(),
     q_ptr(qq),
     ui(new Ui::KBudgetView),
     m_inSelection(false),
@@ -113,12 +113,10 @@ public:
 
   ~KBudgetViewPrivate()
   {
-    if(m_proxyModel) {
-      // remember the splitter settings for startup
-      KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
-      grp.writeEntry("KBudgetViewSplitterSize", ui->m_splitter->saveState());
-      grp.sync();
-    }
+    // remember the splitter settings for startup
+    KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
+    grp.writeEntry("KBudgetViewSplitterSize", ui->m_splitter->saveState());
+    grp.sync();
     delete ui;
   }
 
@@ -126,7 +124,6 @@ public:
   {
     Q_Q(KBudgetView);
     ui->setupUi(q);
-    m_accountTree = &ui->m_accountTree;
 
     ui->m_budgetList->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->m_newButton->setIcon(Icons::get(Icon::BudgetNew));
@@ -139,6 +136,7 @@ public:
 
 /// @todo port to new model code
 #if 0
+    m_accountTree = &ui->m_accountTree;
     m_budgetProxyModel = qobject_cast<BudgetViewProxyModel *>(ui->m_accountTree->init(View::Budget));
     m_proxyModel = m_budgetProxyModel;
 

@@ -29,7 +29,7 @@
 // Project Includes
 
 #include "ui_kinstitutionsview.h"
-#include "kmymoneyaccountsviewbase_p.h"
+#include "kmymoneyviewbase_p.h"
 
 #include "accountsproxymodel.h"
 #include "mymoneyinstitution.h"
@@ -37,7 +37,7 @@
 
 using namespace Icons;
 
-class KInstitutionsViewPrivate : public KMyMoneyAccountsViewBasePrivate
+class KInstitutionsViewPrivate : public KMyMoneyViewBasePrivate
 {
   Q_DECLARE_PUBLIC(KInstitutionsView)
 

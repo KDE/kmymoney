@@ -37,14 +37,14 @@
 using namespace Icons;
 
 KBudgetView::KBudgetView(QWidget *parent) :
-    KMyMoneyAccountsViewBase(*new KBudgetViewPrivate(this), parent)
+    KMyMoneyViewBase(*new KBudgetViewPrivate(this), parent)
 {
   Q_D(KBudgetView);
   d->m_inSelection = false;
 }
 
 KBudgetView::KBudgetView(KBudgetViewPrivate &dd, QWidget *parent)
-    : KMyMoneyAccountsViewBase(dd, parent)
+    : KMyMoneyViewBase(dd, parent)
 {
 }
 
@@ -55,9 +55,11 @@ KBudgetView::~KBudgetView()
 void KBudgetView::showEvent(QShowEvent * event)
 {
   Q_D(KBudgetView);
+  /// @todo port to new model code
+#if 0
   if (!d->m_proxyModel)
     d->init();
-
+#endif
   emit customActionRequested(View::Budget, eView::Action::AboutToShow);
 
   if (d->m_needsRefresh)
@@ -487,7 +489,8 @@ void KBudgetView::cb_includesSubaccounts_clicked()
 void KBudgetView::slotBudgetBalanceChanged(const MyMoneyMoney &balance)
 {
   Q_D(KBudgetView);
-  d->netBalProChanged(balance, d->ui->m_balanceLabel, View::Budget);
+  /// @todo port to new model code
+  // d->netBalProChanged(balance, d->ui->m_balanceLabel, View::Budget);
 }
 
 void KBudgetView::slotSelectBudget()

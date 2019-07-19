@@ -58,7 +58,6 @@ set(kmm_widgets_sources
   accountsviewproxymodel.cpp
   budgetviewproxymodel.cpp
   kmymoneyviewbase.cpp
-  kmymoneyaccountsviewbase.cpp
   passwordtoggle.cpp
   )
 

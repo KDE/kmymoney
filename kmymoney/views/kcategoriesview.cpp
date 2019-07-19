@@ -39,6 +39,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyfile.h"
 #include "mymoneyexception.h"
 #include "kmymoneysettings.h"
 #include "knewaccountdlg.h"
@@ -50,11 +51,12 @@
 #include "mymoneyenums.h"
 #include "storageenums.h"
 #include "menuenums.h"
+#include "mymoneymoney.h"
 
 using namespace Icons;
 
 KCategoriesView::KCategoriesView(QWidget *parent) :
-    KMyMoneyAccountsViewBase(*new KCategoriesViewPrivate(this), parent)
+    KMyMoneyViewBase(*new KCategoriesViewPrivate(this), parent)
 {
   Q_D(KCategoriesView);
   d->ui->setupUi(this);
@@ -111,8 +113,11 @@ void KCategoriesView::refresh()
 void KCategoriesView::showEvent(QShowEvent * event)
 {
   Q_D(KCategoriesView);
+  /// @todo port to new model code
+#if 0
   if (!d->m_proxyModel)
     d->init();
+#endif
 
   emit customActionRequested(View::Categories, eView::Action::AboutToShow);
 
@@ -178,7 +183,8 @@ void KCategoriesView::slotUnusedIncomeExpenseAccountHidden()
 void KCategoriesView::slotProfitChanged(const MyMoneyMoney &profit)
 {
   Q_D(KCategoriesView);
-  d->netBalProChanged(profit, d->ui->m_totalProfitsLabel, View::Categories);
+  /// @todo port to new model code
+  // d->netBalProChanged(profit, d->ui->m_totalProfitsLabel, View::Categories);
 }
 
 void KCategoriesView::slotShowCategoriesMenu(const MyMoneyAccount& acc)

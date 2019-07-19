@@ -29,7 +29,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyaccountsviewbase.h"
+#include "kmymoneyviewbase.h"
 
 class QTreeWidgetItem;
 
@@ -42,7 +42,7 @@ class MyMoneyMoney;
   * @author Thomas Baumgart
   */
 class KBudgetViewPrivate;
-class KBudgetView : public KMyMoneyAccountsViewBase
+class KBudgetView : public KMyMoneyViewBase
 {
   Q_OBJECT
 
