@@ -333,8 +333,8 @@ public:
     // first get rid of any existing entries
     clearModelItems();
 
+    // create the number of required items
     const auto itemCount = list.count();
-    // reserve an extra slot for the null item
     insertRows(0, itemCount);
 
     // and don't count loading as a modification
