@@ -157,6 +157,7 @@ class SecuritiesModel;
 class BudgetsModel;
 class AccountsModel;
 class InstitutionsModel;
+class JournalModel;
 
 namespace eMyMoney { namespace Account { enum class Type; }
                      namespace File { enum class Object; }
@@ -920,6 +921,11 @@ public:
    * The institutions model instance
    */
   InstitutionsModel* institutionsModel() const;
+
+  /**
+   * The journal model instance
+   */
+  JournalModel* journalModel() const;
 
 
   /// @todo add new models here

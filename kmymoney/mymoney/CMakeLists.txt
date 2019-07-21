@@ -43,6 +43,7 @@ set(kmm_mymoney_LIB_SRCS
     ./storage/budgetsmodel.cpp
     ./storage/accountsmodel.cpp
     ./storage/institutionsmodel.cpp
+    ./storage/journalmodel.cpp
     )
 
   set(onlineTask_a_SOURCES

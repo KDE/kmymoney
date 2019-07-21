@@ -79,6 +79,7 @@
 #include "budgetsmodel.h"
 #include "accountsmodel.h"
 #include "institutionsmodel.h"
+#include "journalmodel.h"
 
 using namespace eMyMoney;
 
@@ -456,14 +457,16 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
       // last institution read, now dump them into the engine
       m_reader->m_models->institutionsModel()->load(m_reader->d->iList);
       m_reader->d->iList.clear();
-
-/* above this line we keep the new model logic to keep track of what needs to be done */
-
     } else if (s == tagName(Tag::Transactions)) {
       // last transaction read, now dump them into the engine
+      m_reader->m_models->journalModel()->load(m_reader->d->tList);
+      /// @todo cleanup
       m_reader->m_storage->loadTransactions(m_reader->d->tList);
       m_reader->d->tList.clear();
       m_reader->signalProgress(-1, -1);
+
+/* above this line we keep the new model logic to keep track of what needs to be done */
+
     } else if (s == tagName(Tag::Reports)) {
       // last report read, now dump them into the engine
       m_reader->m_storage->loadReports(m_reader->d->rList);

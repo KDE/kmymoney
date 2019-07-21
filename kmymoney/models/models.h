@@ -53,6 +53,7 @@ class EquitiesModel;
 class BudgetsModel;
 class AccountsModel;
 class InstitutionsModel;
+class JournalModel;
 
 /**
   * This object is the owner and maintainer of all the core models of KMyMoney.
@@ -99,6 +100,7 @@ public:
   BudgetsModel* budgetsModel() const;
   AccountsModel* accountsModel() const;
   InstitutionsModel* institutionsModel() const;
+  JournalModel* journalModel() const;
 
   EquitiesModel* equitiesModel();
 
