@@ -62,13 +62,14 @@ ColumnSelector::ColumnSelector(QTreeView *view, const QString& configGroupName)
     if (!visibleColumns.isEmpty()) {
       const auto maxColumn = view->model()->columnCount();
       for (int col = 1; col < maxColumn; ++col) {
-        view->setColumnHidden(col, visibleColumns.contains(col));
+        view->setColumnHidden(col, !visibleColumns.contains(col));
       }
     }
     // allow context menu to be opened on tree header for columns selection
     view->header()->setContextMenuPolicy(Qt::CustomContextMenu);
 
     connect(view->header(), &QWidget::customContextMenuRequested, this, &ColumnSelector::slotColumnsMenu);
+    connect(view->header(), &QHeaderView::sectionResized, this, &ColumnSelector::slotUpdateHeaderState);
   } else {
     qDebug() << "WARNING: You must not create a ColumnSelector without a view or view without model";
   }
@@ -79,6 +80,14 @@ ColumnSelector::~ColumnSelector()
 {
   Q_D(ColumnSelector);
   delete d;
+}
+
+void ColumnSelector::slotUpdateHeaderState()
+{
+  Q_D(ColumnSelector);
+  auto grp = KSharedConfig::openConfig()->group(d->configGroupName);
+  grp.writeEntry("HeaderState", d->view->header()->saveState());
+  grp.sync();
 }
 
 void ColumnSelector::slotColumnsMenu(const QPoint)
@@ -106,8 +115,8 @@ void ColumnSelector::slotColumnsMenu(const QPoint)
     d->view->setColumnHidden(retAction->objectName().toInt(), !retAction->isChecked());
 
     auto grp = KSharedConfig::openConfig()->group(d->configGroupName);
-    grp.writeEntry("HeaderState", d->view->header()->saveState());
-    QList<int> visibleColumns;
+    // column zero is always visible
+    QList<int> visibleColumns { 0 };
 
     for (int col = 1; col < maxColumn; ++col) {
       if (!d->view->isColumnHidden(col)) {
@@ -115,6 +124,8 @@ void ColumnSelector::slotColumnsMenu(const QPoint)
       }
     }
     grp.writeEntry("ColumnsSelection", visibleColumns);
-    grp.sync();
+
+    // do this as last statement as it contains the sync of the grp
+    slotUpdateHeaderState();
   }
 }

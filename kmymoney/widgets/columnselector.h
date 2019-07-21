@@ -18,6 +18,8 @@
 #ifndef COLUMNSELECTOR_H
 #define COLUMNSELECTOR_H
 
+#include "kmm_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -35,8 +37,8 @@ class ColumnSelectorPrivate;
 // Project Includes
 
 /**
- * This class takes care of selecting the columns of a tree view and
- * store the selection in the global application configuration.
+ * This class takes care of the selection of visible columns of a tree view and
+ * their sizes and stores the selection in the global application configuration.
  *
  * The @a parent tree view must have a model attached that allows to
  * extract the maximum number of columns. The header names found in
@@ -45,7 +47,7 @@ class ColumnSelectorPrivate;
  *
  * @author Thomas Baumgart
  */
-class ColumnSelector : public QObject
+class KMM_WIDGETS_EXPORT ColumnSelector : public QObject
 {
   Q_OBJECT
   Q_DISABLE_COPY(ColumnSelector)
@@ -56,6 +58,7 @@ public:
 
 protected Q_SLOT:
   void slotColumnsMenu(const QPoint);
+  void slotUpdateHeaderState();
 
 private:
   ColumnSelectorPrivate * const d_ptr;
