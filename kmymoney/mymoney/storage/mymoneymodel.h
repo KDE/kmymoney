@@ -432,14 +432,14 @@ public:
     }
   }
 
-  QModelIndexList indexListByName(const QString& name) const
+  QModelIndexList indexListByName(const QString& name, const QModelIndex parent = QModelIndex()) const
   {
-    return match(index(0, 0), Qt::DisplayRole, name, 1, Qt::MatchFixedString | Qt::MatchCaseSensitive);
+    return match(index(0, 0, parent), Qt::DisplayRole, name, 1, Qt::MatchFixedString | Qt::MatchCaseSensitive);
   }
 
-  T itemByName(const QString& name) const
+  T itemByName(const QString& name, const QModelIndex parent = QModelIndex()) const
   {
-    QModelIndexList indexes = indexListByName(name);
+    QModelIndexList indexes = indexListByName(name, parent);
     if (!indexes.isEmpty()) {
       return static_cast<TreeItem<T>*>(indexes.first().internalPointer())->data();
     }
