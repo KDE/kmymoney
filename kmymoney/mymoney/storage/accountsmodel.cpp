@@ -45,6 +45,7 @@ struct AccountsModel::Private
   Private(AccountsModel* qq, QObject* parent)
     : q_ptr(qq)
     , parentObject(parent)
+    , updateOnBalanceChange(true)
   {
   }
 
@@ -105,8 +106,12 @@ struct AccountsModel::Private
     { eMyMoney::Account::Standard::Equity,    eMyMoney::Account::Type::Equity,    I18N_NOOP("Equity accounts") },
   };
 
-  AccountsModel*    q_ptr;
-  QObject*          parentObject;
+  AccountsModel*                q_ptr;
+  QObject*                      parentObject;
+  QHash<QString, MyMoneyMoney>  balance;
+  QHash<QString, MyMoneyMoney>  value;
+  QHash<QString, MyMoneyMoney>  totalValue;
+  bool                          updateOnBalanceChange;
 };
 
 AccountsModel::AccountsModel(QObject* parent)
@@ -144,7 +149,7 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
       case Column::CostCenter:
         return i18nc("CostCenter", "CC");
       case Column::TotalBalance:
-        return i18n("Total Balance");
+        return i18n("Balance");
       case Column::PostedValue:
         return i18n("Posted Value");
       case Column::TotalValue:
@@ -212,7 +217,7 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
           break;
 
         case Column::TotalBalance:
-          return i18n("Total Balance");
+          return i18n("Balance");
 
         case Column::PostedValue:
           return i18n("Posted Value");
