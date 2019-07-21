@@ -160,7 +160,7 @@ public:
 
     auto const model = Models::instance()->accountsModel();
     m_filterProxyModel->setSourceModel(model);
-    m_filterProxyModel->sort((int)eAccountsModel::Column::Account);
+    m_filterProxyModel->sort(AccountsModel::Column::AccountName);
     ui->comboDefaultCategory->setModel(m_filterProxyModel);
 
     ui->matchTypeCombo->addItem(i18nc("@item No matching", "No matching"), static_cast<int>(eMyMoney::Payee::MatchType::Disabled));

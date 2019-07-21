@@ -146,7 +146,7 @@ bool NewSplitEditor::Private::categoryChanged(const QString& accountId)
   if(!accountId.isEmpty()) {
     try {
       QModelIndex index = Models::instance()->accountsModel()->indexById(accountId);
-      category = Models::instance()->accountsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
+      category = Models::instance()->accountsModel()->itemByIndex(index);
       const bool isIncomeExpense = category.isIncomeExpense();
       ui->costCenterCombo->setEnabled(isIncomeExpense);
       ui->costCenterLabel->setEnabled(isIncomeExpense);
@@ -202,8 +202,7 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
   Q_ASSERT(view != 0);
   d->splitModel = qobject_cast<SplitModel*>(view->model());
 
-  QModelIndex index = Models::instance()->accountsModel()->indexById(counterAccountId);
-  d->counterAccount = Models::instance()->accountsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
+  d->counterAccount = Models::instance()->accountsModel()->itemById(counterAccountId);
 
   d->ui->setupUi(this);
   d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
@@ -213,12 +212,12 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
   d->accountsModel->setHideEquityAccounts(false);
   auto const model = Models::instance()->accountsModel();
   d->accountsModel->setSourceModel(model);
-  d->accountsModel->sort((int)eAccountsModel::Column::Account);
+  d->accountsModel->sort(AccountsModel::Column::AccountName);
   d->ui->accountCombo->setModel(d->accountsModel);
 
   d->costCenterModel->setSortRole(Qt::DisplayRole);
   d->costCenterModel->setSourceModel(Models::instance()->costCenterModel());
-  d->costCenterModel->sort((int)eAccountsModel::Column::Account);
+  d->costCenterModel->sort(AccountsModel::Column::AccountName);
 
   d->ui->costCenterCombo->setEditable(true);
   d->ui->costCenterCombo->setModel(d->costCenterModel);

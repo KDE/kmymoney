@@ -33,7 +33,9 @@
 // Project Includes
 
 #include "mymoneyfile.h"
-#include "modelenums.h"
+#include "mymoneyenums.h"
+#include "accountsmodel.h"
+// #include "modelenums.h"
 
 class KMyMoneyAccountCombo::Private
 {
@@ -153,7 +155,7 @@ void KMyMoneyAccountCombo::collapseAll()
 
 void KMyMoneyAccountCombo::activated()
 {
-  auto variant = view()->currentIndex().data((int)eAccountsModel::Role::ID);
+  auto variant = view()->currentIndex().data(eMyMoney::Model::Roles::IdRole);
   if (variant.isValid()) {
     setSelected(variant.toString());
   }
@@ -210,7 +212,7 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
     lineEdit()->clear();
   }
   // find which item has this id and set it as the current item
-  QModelIndexList list = model()->match(model()->index(0, 0), (int)eAccountsModel::Role::ID,
+  QModelIndexList list = model()->match(model()->index(0, 0), eMyMoney::Model::Roles::IdRole,
                                         QVariant(id),
                                         1,
                                         Qt::MatchFlags(Qt::MatchExactly | Qt::MatchWrap | Qt::MatchRecursive)); // CAUTION: Without Qt::MatchWrap no results for credit card, so nothing happens in ledger view
@@ -219,15 +221,15 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
     // make sure the popup is closed from here on
     hidePopup();
     d->m_lastSelectedAccount = id;
-    QModelIndex index = list.front();
+    const auto idx = list.front();
 
     if(isEditable()) {
-      lineEdit()->setText(d->fullAccountName(model(), index));
+      lineEdit()->setText(d->fullAccountName(model(), idx));
     } else {
       // ensure that combobox is properly set when KMyMoneyAccountCombo::setSelected is called programmatically
       blockSignals(true);
-      setRootModelIndex(index.parent());
-      setCurrentIndex(index.row());
+      setRootModelIndex(idx.parent());
+      setCurrentIndex(idx.row());
       setRootModelIndex(QModelIndex());
       blockSignals(false);
     }
@@ -243,8 +245,8 @@ const QString& KMyMoneyAccountCombo::getSelected() const
 void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
 {
   // CAUTION! Assumption is being made that Account column number is always 0
-  if ((int)eAccountsModel::Column::Account != 0) {
-    qFatal("eAccountsModel::Column::Account must be 0 in modelenums.h");
+  if (AccountsModel::Column::AccountName != 0) {
+    qFatal("AccountsModel::Column::AccountName must be 0 in modelenums.h");
   }
 
   // since we create a new popup view, we get rid of an existing one
@@ -254,8 +256,8 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
   KComboBox::setModel(model);
 
   // setup filtering criteria
-  model->setFilterKeyColumn((int)eAccountsModel::Column::Account);
-  model->setFilterRole((int)eAccountsModel::Role::FullName);
+  model->setFilterKeyColumn(AccountsModel::Column::AccountName);
+  model->setFilterRole(eMyMoney::Model::Roles::AccountFullNameRole);
 
   // create popup view, attach model and allow to select a single item
   d->m_popupView = new QTreeView(this);
@@ -284,7 +286,7 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
 void KMyMoneyAccountCombo::selectItem(const QModelIndex& index)
 {
   if(index.isValid() && (model()->flags(index) & Qt::ItemIsSelectable)) {
-    setSelected(model()->data(index, (int)eAccountsModel::Role::ID).toString());
+    setSelected(model()->data(index, eMyMoney::Model::Roles::IdRole).toString());
   }
 }
 

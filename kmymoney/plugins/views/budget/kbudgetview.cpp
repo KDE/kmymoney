@@ -267,8 +267,11 @@ void KBudgetView::slotResetBudget()
     d->loadAccounts();
     const auto index = d->ui->m_accountTree->currentIndex();
     if (index.isValid()) {
+      /// @todo port to new model code
+#if 0
       const auto acc = d->ui->m_accountTree->model()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
       slotSelectAccount(acc, eView::Intent::None);
+#endif
     } else {
       d->ui->m_budgetValue->clear();
     }
@@ -421,7 +424,7 @@ void KBudgetView::slotBudgetedAmountChanged()
   const auto indexes = d->ui->m_accountTree->selectionModel()->selectedIndexes();
   if (indexes.empty())
     return;
-  QString accountID = indexes.front().data((int)eAccountsModel::Role::ID).toString();
+  QString accountID = indexes.front().data(eMyMoney::Model::Roles::IdRole).toString();
 
   MyMoneyBudget::AccountGroup accountGroup = d->m_budget.account(accountID);
   accountGroup.setId(accountID);
@@ -446,7 +449,7 @@ void KBudgetView::cb_includesSubaccounts_clicked()
 
   QModelIndexList indexes = d->ui->m_accountTree->selectionModel()->selectedIndexes();
   if (!indexes.empty()) {
-    QString accountID = indexes.front().data((int)eAccountsModel::Role::ID).toString();
+    QString accountID = indexes.front().data(eMyMoney::Model::Roles::IdRole).toString();
     // now, we get a reference to the accountgroup, to modify its attribute,
     // and then put the resulting account group instead of the original
     MyMoneyBudget::AccountGroup auxAccount = d->m_budget.account(accountID);
@@ -524,8 +527,11 @@ void KBudgetView::slotSelectBudget()
   d->loadAccounts();
   const auto index = d->ui->m_accountTree->currentIndex();
   if (index.isValid()) {
+    /// @todo port to new model code
+#if 0
     const auto acc = d->ui->m_accountTree->model()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
     slotSelectAccount(acc, eView::Intent::None);
+#endif
   } else {
     d->ui->m_budgetValue->clear();
   }

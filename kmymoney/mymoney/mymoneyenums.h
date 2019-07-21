@@ -445,6 +445,18 @@ namespace eMyMoney {
       PayeeDefaultAccountRole,
 
       // MyMoneyAccount
+      AccountTypeRole,
+      AccountIsClosedRole,
+      AccountIsInvestRole,
+      AccountBalanceRole,
+      AccountTotalBalanceRole,
+      AccountValueRole,
+      AccountTotalValueRole,
+      AccountFullNameRole,
+      AccountDisplayOrderRole,
+
+      // MyMoneyInstitution
+      InstitutionSortCodeRole,
 
       // MyMoneyCostCenter
       CostCenterShortNameRole,

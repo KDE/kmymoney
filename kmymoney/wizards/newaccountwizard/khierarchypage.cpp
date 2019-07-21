@@ -71,7 +71,7 @@ namespace NewAccountWizard
     d->m_filterProxyModel->setDynamicSortFilter(true);
 
     d->ui->m_parentAccounts->setModel(d->m_filterProxyModel);
-    d->ui->m_parentAccounts->sortByColumn((int)eAccountsModel::Column::Account, Qt::AscendingOrder);
+    d->ui->m_parentAccounts->sortByColumn(AccountsModel::Column::AccountName, Qt::AscendingOrder);
 
     connect(d->ui->m_parentAccounts->selectionModel(), &QItemSelectionModel::currentChanged, this, &HierarchyPage::parentAccountChanged);
   }
@@ -105,12 +105,15 @@ namespace NewAccountWizard
   const MyMoneyAccount& HierarchyPage::parentAccount()
   {
     Q_D(HierarchyPage);
+    /// @todo port to new model code
+#if 0
     auto dataVariant = d->ui->m_parentAccounts->model()->data(d->ui->m_parentAccounts->currentIndex(), (int)eAccountsModel::Role::Account);
     if (dataVariant.isValid()) {
-        d->m_parentAccount = dataVariant.value<MyMoneyAccount>();
-      } else {
-        d->m_parentAccount = MyMoneyAccount();
-      }
+      d->m_parentAccount = dataVariant.value<MyMoneyAccount>();
+    } else {
+      d->m_parentAccount = MyMoneyAccount();
+    }
+#endif
     return d->m_parentAccount;
   }
 

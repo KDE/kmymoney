@@ -53,7 +53,6 @@
 #include "budgetviewproxymodel.h"
 #include "kmymoneysettings.h"
 #include "icons.h"
-#include "modelenums.h"
 #include "menuenums.h"
 #include "mymoneyenums.h"
 
@@ -264,7 +263,7 @@ public:
 
     for (auto i = 0; i < children; ++i) {
       const auto childIdx = index.child(i, 0);
-      const auto accountID = childIdx.data((int)eAccountsModel::Role::ID).toString();
+      const auto accountID = childIdx.data(eMyMoney::Model::Roles::IdRole).toString();
       m_budget.removeReference(accountID);
       clearSubBudgets(childIdx);
     }
@@ -277,7 +276,7 @@ public:
 
     for (auto i = 0; i < children; ++i) {
       auto childIdx = index.child(i, 0);
-      auto accountID = childIdx.data((int)eAccountsModel::Role::ID).toString();
+      auto accountID = childIdx.data(eMyMoney::Model::Roles::IdRole).toString();
       MyMoneyBudget::AccountGroup auxAccount = m_budget.account(accountID);
       if (auxAccount.budgetLevel() != eMyMoney::Budget::Level::None
           && !auxAccount.isZero()) {

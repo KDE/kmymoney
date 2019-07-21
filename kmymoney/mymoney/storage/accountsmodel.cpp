@@ -22,6 +22,8 @@
 
 #include <QDebug>
 #include <QString>
+#include <QFont>
+#include <QIcon>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,6 +35,8 @@
 
 #include "mymoneyfile.h"
 #include "mymoneyenums.h"
+#include "mymoneymoney.h"
+#include "icons.h"
 
 struct AccountsModel::Private
 {
@@ -75,30 +79,34 @@ struct AccountsModel::Private
     return itemCount;
   }
 
-  bool isParentFavorite(const QModelIndex& parent) const
+  bool isFavoriteIndex(const QModelIndex& idx) const
   {
-    if (parent.isValid()) {
-      TreeItem<MyMoneyAccount> *parentItem;
-      parentItem = static_cast<TreeItem<MyMoneyAccount>*>(parent.internalPointer());
-      if (parentItem->constDataRef().id() == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Favorite)) {
+    if (idx.isValid()) {
+      TreeItem<MyMoneyAccount> *item;
+      item = static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer());
+      if (item->constDataRef().id() == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Favorite)) {
         return true;
       }
     }
     return false;
   }
 
-  const QVector<QPair<eMyMoney::Account::Standard, const char*> > types = {
-    { eMyMoney::Account::Standard::Favorite, I18N_NOOP("Favorite")},
-    { eMyMoney::Account::Standard::Asset, I18N_NOOP("Asset accounts") },
-    { eMyMoney::Account::Standard::Liability, I18N_NOOP("Liability accounts") },
-    { eMyMoney::Account::Standard::Income, I18N_NOOP("Income categories") },
-    { eMyMoney::Account::Standard::Expense, I18N_NOOP("Expense categories") },
-    { eMyMoney::Account::Standard::Equity, I18N_NOOP("Equity accounts") },
+  struct DefaultAccounts {
+    eMyMoney::Account::Standard groupType;
+    eMyMoney::Account::Type     accountType;
+    const char*                 description;
+  };
+  const QVector<DefaultAccounts> defaults = {
+    { eMyMoney::Account::Standard::Favorite,  eMyMoney::Account::Type::Asset,     I18N_NOOP("Favorite")},
+    { eMyMoney::Account::Standard::Asset,     eMyMoney::Account::Type::Asset,     I18N_NOOP("Asset accounts") },
+    { eMyMoney::Account::Standard::Liability, eMyMoney::Account::Type::Liability, I18N_NOOP("Liability accounts") },
+    { eMyMoney::Account::Standard::Income,    eMyMoney::Account::Type::Income,    I18N_NOOP("Income categories") },
+    { eMyMoney::Account::Standard::Expense,   eMyMoney::Account::Type::Expense,   I18N_NOOP("Expense categories") },
+    { eMyMoney::Account::Standard::Equity,    eMyMoney::Account::Type::Equity,    I18N_NOOP("Equity accounts") },
   };
 
   AccountsModel*    q_ptr;
   QObject*          parentObject;
-  QList<QString>    favorites;
 };
 
 AccountsModel::AccountsModel(QObject* parent)
@@ -160,13 +168,14 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
     return QVariant();
 
   QVariant rc;
-  if (d->isParentFavorite(idx.parent())) {
-    const auto accountIdx = indexById(d->favorites.at(idx.row()));
+  const MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->constDataRef();
+
+  if (d->isFavoriteIndex(idx.parent())) {
+    const auto accountIdx = indexById(account.id());
     const auto subIdx = index(accountIdx.row(), idx.column(), accountIdx.parent());
     return data(subIdx, role);
   }
 
-  const MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->constDataRef();
   MyMoneyAccount tradingCurrency;
   switch(role) {
     case Qt::DisplayRole:
@@ -180,37 +189,139 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
             rc = QString();
           }
           break;
-      case Column::Type:
-        return i18n("Type");
-      case Column::Tax:
-        return i18n("Tax");
-      case Column::Vat:
-        return i18n("VAT");
-      case Column::CostCenter:
-        return i18nc("CostCenter", "CC");
-      case Column::TotalBalance:
-        return i18n("Total Balance");
-      case Column::PostedValue:
-        return i18n("Posted Value");
-      case Column::TotalValue:
-        return i18n("Total Value");
-      case Column::Number:
-        return i18n("Number");
-      case Column::SortCode:
-        return i18n("SortCode");
+
+        case Column::Type:
+          return account.accountTypeToString(account.accountType());
+
+        case Column::Tax:
+          break;
+
+        case Column::Vat:
+          if (!account.value("VatAccount").isEmpty()) {
+            const auto vatAccount = itemById(account.value("VatAccount"));
+            rc = vatAccount.name();
+
+            // VAT Rate
+          } else if (!account.value("VatRate").isEmpty()) {
+            const auto vatRate = MyMoneyMoney(account.value("VatRate")) * MyMoneyMoney(100, 1);
+            rc = QString::fromLatin1("%1 %").arg(vatRate.formatMoney(QString(), 1));
+          }
+          break;
+
+        case Column::CostCenter:
+          break;
+
+        case Column::TotalBalance:
+          return i18n("Total Balance");
+
+        case Column::PostedValue:
+          return i18n("Posted Value");
+
+        case Column::TotalValue:
+          return i18n("Total Value");
+
+        case Column::Number:
+          return account.number();
+
+        case Column::SortCode:
+          return account.value("iban");
+
         default:
           break;
       }
       break;
 
     case Qt::TextAlignmentRole:
-      rc = QVariant(Qt::AlignLeft | Qt::AlignVCenter);
+      switch (idx.column()) {
+        case AccountsModel::Column::Vat:
+          rc = QVariant(Qt::AlignRight | Qt::AlignVCenter);
+          break;
+        default:
+          rc = QVariant(Qt::AlignLeft | Qt::AlignVCenter);
+          break;
+      }
+      break;
+
+    case Qt::FontRole:
+      {
+        QFont font;
+        // display top level account groups in bold
+        if (!idx.parent().isValid()) {
+          font.setBold(true);
+        }
+        // display the names of closed accounts with strikeout font
+        // all others without
+        if (account.isClosed() != font.strikeOut()) {
+          font.setStrikeOut(account.isClosed());
+        }
+        rc = font;
+      }
+      break;
+
+    case Qt::DecorationRole:
+      switch (idx.column()) {
+        case AccountsModel::Column::AccountName:
+          if (d->isFavoriteIndex(idx)) {
+            rc = Icons::get(Icons::Icon::ViewBankAccount);
+          } else {
+            const bool isReconciledAccount = false;
+            rc = QIcon(account.accountPixmap(isReconciledAccount));
+          }
+          break;
+
+        case AccountsModel::Column::Tax:
+          if (account.value("Tax").toLower() == "yes") {
+            rc = Icons::get(Icons::Icon::DialogOK);
+          }
+          break;
+
+        case AccountsModel::Column::CostCenter:
+          if (account.isCostCenterRequired()) {
+            rc = Icons::get(Icons::Icon::DialogOK);
+          }
+          break;
+
+        default:
+          break;
+      }
       break;
 
     case eMyMoney::Model::Roles::IdRole:
       rc = account.id();
       break;
 
+    case eMyMoney::Model::Roles::AccountTypeRole:
+      rc = static_cast<int>(account.accountType());
+      break;
+
+    case eMyMoney::Model::Roles::AccountIsClosedRole:
+      rc = account.isClosed();
+      break;
+
+    case eMyMoney::Model::Roles::AccountFullNameRole:
+      rc = indexToHierarchicalName(idx, true);
+      break;
+
+
+    case eMyMoney::Model::Roles::AccountDisplayOrderRole:
+      if (idx.parent().isValid())
+        rc = 99;
+      else
+        rc = idx.row();
+      break;
+
+    case eMyMoney::Model::Roles::AccountTotalValueRole:
+      qDebug() << "implement AccountTotalValueRole";
+      break;
+    case eMyMoney::Model::Roles::AccountTotalBalanceRole:
+      qDebug() << "implement AccountTotalBalanceRole";
+      break;
+    case eMyMoney::Model::Roles::AccountValueRole:
+      qDebug() << "implement AccountValueRole";
+      break;
+    case eMyMoney::Model::Roles::AccountBalanceRole:
+      qDebug() << "implement AccountBalanceRole";
+      break;
   }
   return rc;
 }
@@ -225,7 +336,7 @@ bool AccountsModel::setData(const QModelIndex& index, const QVariant& value, int
 
   // check if something is performed on a favorite entry
   // and skip right away
-  if (d->isParentFavorite(index.parent())) {
+  if (d->isFavoriteIndex(index.parent())) {
     return true;
   }
 
@@ -252,16 +363,16 @@ bool AccountsModel::setData(const QModelIndex& index, const QVariant& value, int
 void AccountsModel::clearModelItems()
 {
   MyMoneyModel<MyMoneyAccount>::clearModelItems();
-  d->favorites.clear();
 
   // create the account groups with favorite entry as the first thing
   int row = 0;
   insertRows(0, static_cast<int>(eMyMoney::Account::Standard::MaxGroups));
-  foreach(auto type, d->types) {
-    MyMoneyAccount baseAccount;
-    baseAccount.setName(i18n(type.second));
-    auto account = MyMoneyAccount(MyMoneyAccount::stdAccName(type.first), baseAccount);
-    static_cast<TreeItem<MyMoneyAccount>*>(index(row, 0).internalPointer())->dataRef() = account;
+  foreach(auto baseAccount, d->defaults) {
+    MyMoneyAccount account;
+    account.setName(i18n(baseAccount.description));
+    account.setAccountType(baseAccount.accountType);
+    auto newAccount = MyMoneyAccount(MyMoneyAccount::stdAccName(baseAccount.groupType), account);
+    static_cast<TreeItem<MyMoneyAccount>*>(index(row, 0).internalPointer())->dataRef() = newAccount;
     ++row;
   }
 }
@@ -273,18 +384,18 @@ void AccountsModel::load(const QMap<QString, MyMoneyAccount>& list)
   clearModelItems();
 
   int itemCount = 0;
-  foreach(auto type, d->types) {
+  foreach(auto baseAccount, d->defaults) {
     ++itemCount;
     // we have nothing to do for favorites
-    if (type.first == eMyMoney::Account::Standard::Favorite)
+    if (baseAccount.groupType == eMyMoney::Account::Standard::Favorite)
       continue;
-    const auto baseAccount = list.value(MyMoneyAccount::stdAccName(type.first));
-    if (baseAccount.id() == MyMoneyAccount::stdAccName(type.first)) {
-      const auto idx = indexById(baseAccount.id());
-      static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->dataRef() = baseAccount;
+    const auto account = list.value(MyMoneyAccount::stdAccName(baseAccount.groupType));
+    if (account.id() == MyMoneyAccount::stdAccName(baseAccount.groupType)) {
+      const auto idx = indexById(account.id());
+      static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->dataRef() = account;
       itemCount += d->loadSubAccounts(idx, list);
     } else {
-      qDebug() << "Baseaccount for" << MyMoneyAccount::stdAccName(type.first) << "not found in list";
+      qDebug() << "Baseaccount for" << MyMoneyAccount::stdAccName(baseAccount.groupType) << "not found in list";
     }
   }
 
@@ -311,40 +422,6 @@ QList<MyMoneyAccount> AccountsModel::itemList() const
   return list;
 }
 
-bool AccountsModel::insertRows(int startRow, int rows, const QModelIndex &parent)
-{
-  // special handling for favorites
-  if (d->isParentFavorite(parent)) {
-    beginInsertRows(parent, startRow, startRow + rows - 1);
-    do {
-      d->favorites.insert(startRow, QString());
-      --rows;
-    } while(rows > 0);
-    endInsertRows();
-    setDirty();
-    return true;
-  }
-  return MyMoneyModel<MyMoneyAccount>::insertRows(startRow, rows, parent);
-}
-
-bool AccountsModel::removeRows(int startRow, int rows, const QModelIndex &parent)
-{
-  if (rows == 0)
-    return true;
-
-  if (d->isParentFavorite(parent)) {
-    beginRemoveRows(parent, startRow, startRow + rows - 1);
-    do {
-      d->favorites.removeAt(startRow);
-      --rows;
-    } while(rows > 0);
-    endRemoveRows();
-    setDirty();
-    return true;
-  }
-  return MyMoneyModel<MyMoneyAccount>::removeRows(startRow, rows, parent);
-}
-
 QModelIndex AccountsModel::indexById(const QString& id) const
 {
   // never search in the first row which is favorites
@@ -363,29 +440,40 @@ QModelIndexList AccountsModel::indexListByName(const QString& name) const
 void AccountsModel::addFavorite(const QString& id)
 {
   // no need to do anything if it is already listed
-  if (!d->favorites.contains(id)) {
-    // bypass our own indexById as it does not return favorites
-    const auto favoriteIdx = MyMoneyModel<MyMoneyAccount>::indexById(MyMoneyAccount::stdAccName(d->types[0].first));
+  // bypass our own indexById as it does not return favorites
+  const auto favoriteIdx = MyMoneyModel<MyMoneyAccount>::indexById(MyMoneyAccount::stdAccName(d->defaults[0].groupType));
+
+  // check if the favorite is already present, if not add it
+  const QModelIndexList indexes = match(index(0, 0, favoriteIdx), eMyMoney::Model::Roles::IdRole, id, 1, Qt::MatchFixedString | Qt::MatchRecursive);
+  if (indexes.isEmpty()) {
+    const auto count = rowCount(favoriteIdx);
     // we append a single row at the end
-    beginInsertRows(favoriteIdx, d->favorites.count(), d->favorites.count());
-    d->favorites.append(id);
-    endInsertRows();
+    const bool dirty = isDirty();
+    insertRows(count, 1, favoriteIdx);
+    const auto idx = index(count, 0, favoriteIdx);
+    MyMoneyAccount subAccount(id, MyMoneyAccount());
+    static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->dataRef() = subAccount;
     // don't modify the dirty flag here. This is done elsewhere.
+    setDirty(dirty);
   }
 }
 
 void AccountsModel::removeFavorite(const QString& id)
 {
   // no need to do anything if it is not listed
-  if (d->favorites.contains(id)) {
-    // bypass our own indexById as it does not return favorites
-    const auto favoriteIdx = MyMoneyModel<MyMoneyAccount>::indexById(MyMoneyAccount::stdAccName(d->types[0].first));
-    const int row = d->favorites.indexOf(id);
+  // bypass our own indexById as it does not return favorites
+  const auto favoriteIdx = MyMoneyModel<MyMoneyAccount>::indexById(MyMoneyAccount::stdAccName(d->defaults[0].groupType));
+
+  // check if the favorite is already present, if not add it
+  const QModelIndexList indexes = match(index(0, 0, favoriteIdx), eMyMoney::Model::Roles::IdRole, id, 1, Qt::MatchFixedString | Qt::MatchRecursive);
+  if (!indexes.isEmpty()) {
+    const QModelIndex& idx = indexes.first();
     // we remove a single row
-    beginRemoveRows(favoriteIdx, row, row);
-    d->favorites.removeAt(row);
+    const bool dirty = isDirty();
+    removeRows(idx.row(), 1, favoriteIdx);
     endRemoveRows();
     // don't modify the dirty flag here. This is done elsewhere.
+    setDirty(dirty);
   }
 }
 
@@ -395,3 +483,43 @@ int AccountsModel::processItems(Worker *worker)
   return MyMoneyModel<MyMoneyAccount>::processItems(worker, match(index(1, 0), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive));
 }
 
+QString AccountsModel::indexToHierarchicalName(const QModelIndex& _idx, bool includeStandardAccounts) const
+{
+  QString rc;
+  auto idx(_idx);
+
+  if (idx.isValid()) {
+    do {
+      const MyMoneyAccount& acc = static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->constDataRef();
+      if (!rc.isEmpty())
+        rc = MyMoneyAccount::accountSeparator() + rc;
+      rc = acc.name() + rc;
+      idx = idx.parent();
+    } while (idx.isValid() && (includeStandardAccounts || idx.parent().isValid()));
+  }
+  return rc;
+}
+
+QString AccountsModel::accountIdToHierarchicalName(const QString& accountId, bool includeStandardAccounts) const
+{
+  return indexToHierarchicalName(indexById(accountId), includeStandardAccounts);
+}
+
+QString AccountsModel::accountNameToId(const QString& category, eMyMoney::Account::Type type) const
+{
+  QString id;
+
+  // search the category in the expense accounts and if it is not found, try
+  // to locate it in the income accounts in case the type is not provided
+  if (type == eMyMoney::Account::Type::Unknown
+   || type == eMyMoney::Account::Type::Expense) {
+    id = itemByName(category, indexById(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense))).name();
+  }
+
+  if ((id.isEmpty() && type == eMyMoney::Account::Type::Unknown)
+   || type == eMyMoney::Account::Type::Income) {
+    id = itemByName(category, indexById(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income))).name();
+  }
+
+  return id;
+}

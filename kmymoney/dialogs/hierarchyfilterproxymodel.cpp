@@ -45,7 +45,7 @@ Qt::ItemFlags HierarchyFilterProxyModel::flags(const QModelIndex &index) const
   Qt::ItemFlags flags = AccountsProxyModel::flags(index);
   QModelIndex currentIndex = index;
   while (currentIndex.isValid()) {
-    QVariant accountId = data(currentIndex, (int)eAccountsModel::Role::ID);
+    QVariant accountId = data(currentIndex, eMyMoney::Model::Roles::IdRole);
     if (accountId.isValid() && accountId.toString() == m_currentAccountId) {
       flags = flags & ~Qt::ItemIsSelectable & ~Qt::ItemIsEnabled;
     }
@@ -71,7 +71,7 @@ void HierarchyFilterProxyModel::setCurrentAccountId(const QString &currentAccoun
   */
 QModelIndex HierarchyFilterProxyModel::getSelectedParentAccountIndex() const
 {
-  QModelIndexList list = match(index(0, 0), (int)eAccountsModel::Role::ID, m_currentAccountId, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+  QModelIndexList list = match(index(0, 0), eMyMoney::Model::Roles::IdRole, m_currentAccountId, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
   if (!list.empty()) {
     return list.front().parent();
   }

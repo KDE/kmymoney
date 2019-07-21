@@ -22,6 +22,8 @@
 #include <qnamespace.h>
 #include <QMetaType>
 
+/// @todo cleanup
+#if 0
 namespace eAccountsModel {
     enum class Column {
         FirstColumnMarker = 0,
@@ -53,6 +55,7 @@ namespace eAccountsModel {
 
     inline uint qHash(const Role key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 }
+#endif
 
 namespace eLedgerModel {
   enum class Column {
@@ -114,9 +117,10 @@ namespace eLedgerModel {
   };
 }
 
+/// @todo cleanup
 /**
   * Make it possible to hold eAccountsModel::Column objects inside @ref QVariant objects.
   */
-Q_DECLARE_METATYPE(eAccountsModel::Column)
+// Q_DECLARE_METATYPE(eAccountsModel::Column)
 
 #endif

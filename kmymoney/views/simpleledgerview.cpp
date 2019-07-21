@@ -111,7 +111,7 @@ public:
     accountsModel->setSourceModel(model);
     /// @todo port to new model code
     // accountsModel->setSourceColumns(model->getColumns());
-    accountsModel->sort((int)eAccountsModel::Column::Account);
+    accountsModel->sort(AccountsModel::Column::AccountName);
     ui->accountCombo->setModel(accountsModel);
 
     q->tabSelected(0);
@@ -163,7 +163,7 @@ void SimpleLedgerView::openNewLedger(QString accountId)
   if(index.isValid()) {
 
     // create new ledger view page
-    MyMoneyAccount acc = Models::instance()->accountsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
+    const MyMoneyAccount acc = Models::instance()->accountsModel()->itemByIndex(index);
     view = new LedgerViewPage(this);
     view->setShowEntryForNewTransaction();
     view->setAccount(acc);
@@ -255,6 +255,8 @@ void SimpleLedgerView::openFavoriteLedgers()
   if (d->m_needLoad)
     return;
 
+  /// @todo port to new model code
+#if 0
   AccountsModel* model = Models::instance()->accountsModel();
   QModelIndex start = model->index(0, 0);
   QModelIndexList indexes = model->match(start, (int)eAccountsModel::Role::Favorite, QVariant(true), -1, Qt::MatchRecursive);
@@ -264,6 +266,7 @@ void SimpleLedgerView::openFavoriteLedgers()
   Q_FOREACH(QModelIndex index, indexes) {
     openNewLedger(model->data(index, (int)eAccountsModel::Role::ID).toString());
   }
+#endif
   d->ui->ledgerTab->setCurrentIndex(0);
 }
 

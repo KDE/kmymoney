@@ -286,7 +286,7 @@ public:
     m_filterProxyModel->setSourceModel(model);
     /// @todo port to new model code
     // m_filterProxyModel->setSourceColumns(model->getColumns());
-    m_filterProxyModel->sort((int)eAccountsModel::Column::Account);
+    m_filterProxyModel->sort(AccountsModel::Column::AccountName);
 
     // create the toolbar frame at the top of the view
     m_toolbarFrame = new QFrame();
@@ -419,11 +419,13 @@ public:
 
     // TODO: check why the invalidate is needed here
     m_filterProxyModel->invalidate();
-    m_filterProxyModel->sort((int)eAccountsModel::Column::Account);
+    m_filterProxyModel->sort(AccountsModel::Column::AccountName);
     m_filterProxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
     m_filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
     m_accountComboBox->expandAll();
 
+    /// @todo port to new model code
+#if 0
     if (m_currentAccount.id().isEmpty()) {
       // find the first favorite account
       QModelIndexList list = m_filterProxyModel->match(m_filterProxyModel->index(0, 0),
@@ -459,7 +461,7 @@ public:
         }
       }
     }
-
+#endif
     if (!m_currentAccount.id().isEmpty()) {
       m_accountComboBox->setSelected(m_currentAccount.id());
       try {

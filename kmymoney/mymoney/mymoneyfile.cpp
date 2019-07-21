@@ -1801,6 +1801,10 @@ QList<MyMoneyTag> MyMoneyFile::tagList() const
 
 QString MyMoneyFile::accountToCategory(const QString& accountId, bool includeStandardAccounts) const
 {
+  return d->accountsModel.accountIdToHierarchicalName(accountId, includeStandardAccounts);
+
+/// @todo cleanup
+#if 0
   MyMoneyAccount acc;
   QString rc;
 
@@ -1814,10 +1818,15 @@ QString MyMoneyFile::accountToCategory(const QString& accountId, bool includeSta
     } while (!acc.id().isEmpty() && (includeStandardAccounts || !isStandardAccount(acc.id())));
   }
   return rc;
+#endif
 }
 
 QString MyMoneyFile::categoryToAccount(const QString& category, Account::Type type) const
 {
+  return d->accountsModel.accountNameToId(category, type);
+
+/// @todo cleanup
+#if 0
   QString id;
 
   // search the category in the expense accounts and if it is not found, try
@@ -1833,6 +1842,7 @@ QString MyMoneyFile::categoryToAccount(const QString& category, Account::Type ty
   }
 
   return id;
+#endif
 }
 
 QString MyMoneyFile::categoryToAccount(const QString& category) const

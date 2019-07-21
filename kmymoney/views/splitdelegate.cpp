@@ -414,7 +414,8 @@ void SplitDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, con
     const QString transactionCommodity = model->data(index, (int)Role::TransactionCommodity).toString();
     QModelIndex accIndex = Models::instance()->accountsModel()->indexById(splitEditor->accountId());
     if(accIndex.isValid()) {
-      MyMoneyAccount acc = Models::instance()->accountsModel()->data(accIndex, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
+      /// @todo port to new model code (use idByIndex())
+      const MyMoneyAccount acc = Models::instance()->accountsModel()->itemByIndex(accIndex);
       if(transactionCommodity != acc.currencyId()) {
 #if 0
         ///  @todo call KCurrencyConversionDialog and update the model data

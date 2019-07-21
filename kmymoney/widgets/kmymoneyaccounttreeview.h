@@ -25,6 +25,7 @@
 // QT Includes
 
 #include <QTreeView>
+#include <QScopedPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,7 +34,8 @@
 // Project Includes
 
 class MyMoneyObject;
-class AccountsViewProxyModel;
+class AccountsProxyModel;
+class KMyMoneyAccountTreeViewPrivate;
 
 namespace eAccountsModel { enum class Column; }
 namespace eView { enum class Intent; }
@@ -51,6 +53,14 @@ public:
   explicit KMyMoneyAccountTreeView(QWidget* parent = nullptr);
   ~KMyMoneyAccountTreeView();
 
+  AccountsProxyModel* proxyModel() const;
+
+  /**
+   * This method attaches the @a model to the view while
+   * inserting the @sa proxyModel() in between them.
+   */
+  void setModel(QAbstractItemModel* model) override;
+
 protected:
   void mouseDoubleClickEvent(QMouseEvent *event) override;
   void keyPressEvent(QKeyEvent *event) override;
@@ -63,6 +73,9 @@ Q_SIGNALS:
   void selectByObject(const MyMoneyObject&, eView::Intent);
   void selectByVariant(const QVariantList&, eView::Intent);
 
+private:
+  const QScopedPointer<KMyMoneyAccountTreeViewPrivate> d_ptr;
+  Q_DECLARE_PRIVATE(KMyMoneyAccountTreeView)
 };
 
 #endif // KMYMONEYACCOUNTTREEVIEW_H

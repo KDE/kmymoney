@@ -119,7 +119,7 @@ public:
     m_accountsProxyModel->setSourceModel(model);
     /// @todo port to new model code
     // m_accountsProxyModel->setSourceColumns(model->getColumns());
-    m_accountsProxyModel->sort((int)eAccountsModel::Column::Account);
+    m_accountsProxyModel->sort(AccountsModel::Column::AccountName);
     ui->m_accountComboBox->setModel(m_accountsProxyModel);
     ui->m_accountComboBox->expandAll();
 

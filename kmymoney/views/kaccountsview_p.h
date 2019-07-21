@@ -35,6 +35,8 @@
 
 #include "ui_kaccountsview.h"
 #include "kmymoneyviewbase_p.h"
+#include "mymoneyfile.h"
+#include "accountsmodel.h"
 
 #include "mymoneyexception.h"
 #include "mymoneysplit.h"
@@ -44,7 +46,6 @@
 #include "keditloanwizard.h"
 #include "mymoneyaccount.h"
 #include "mymoneymoney.h"
-#include "mymoneyfile.h"
 #include "accountsproxymodel.h"
 #include "kmymoneyplugin.h"
 #include "icons.h"
@@ -52,6 +53,7 @@
 #include "menuenums.h"
 #include "mymoneystatementreader.h"
 #include "kmymoneyutils.h"
+#include "columnselector.h"
 
 using namespace Icons;
 
@@ -60,11 +62,12 @@ class KAccountsViewPrivate : public KMyMoneyViewBasePrivate
   Q_DECLARE_PUBLIC(KAccountsView)
 
 public:
-  explicit KAccountsViewPrivate(KAccountsView *qq) :
-    q_ptr(qq),
-    ui(new Ui::KAccountsView),
-    m_haveUnusedCategories(false),
-    m_onlinePlugins(nullptr)
+  explicit KAccountsViewPrivate(KAccountsView *qq)
+    : q_ptr(qq)
+    , ui(new Ui::KAccountsView)
+    , m_haveUnusedCategories(false)
+    , m_onlinePlugins(nullptr)
+    , m_proxyModel(nullptr)
   {
   }
 
@@ -77,12 +80,29 @@ public:
   {
     Q_Q(KAccountsView);
 
+    ui->setupUi(q);
+
     // setup icons for collapse and expand button
     ui->m_collapseButton->setIcon(Icons::get(Icon::ListCollapse));
     ui->m_expandButton->setIcon(Icons::get(Icon::ListExpand));
 
+    // setup filter
+    m_proxyModel = ui->m_accountTree->proxyModel();
+    q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
+
+    ui->m_accountTree->setModel(MyMoneyFile::instance()->accountsModel());
+    m_proxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {
+        eMyMoney::Account::Type::Asset,
+        eMyMoney::Account::Type::Liability,
+        eMyMoney::Account::Type::Equity
+      });
+
+    q->slotSettingsChanged();
+
+    new ColumnSelector(ui->m_accountTree, q->metaObject()->className());
+
     /// @todo port to new model code
-#if 0
+    #if 0
     m_accountTree = &ui->m_accountTree;
     m_proxyModel = ui->m_accountTree->init(View::Accounts);
     q->connect(m_proxyModel, &AccountsProxyModel::unusedIncomeExpenseAccountHidden, q, &KAccountsView::slotUnusedIncomeExpenseAccountHidden);
@@ -373,6 +393,7 @@ public:
   bool                m_haveUnusedCategories;
   MyMoneyAccount      m_currentAccount;
   QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* m_onlinePlugins;
+  AccountsProxyModel* m_proxyModel;
 };
 
 #endif

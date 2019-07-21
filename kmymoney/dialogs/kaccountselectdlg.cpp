@@ -138,7 +138,7 @@ KAccountSelectDlg::KAccountSelectDlg(const eDialogs::Category accountType, const
   filterProxyModel->setSourceModel(model);
   /// @todo port to new model code
   // filterProxyModel->setSourceColumns(model->getColumns());
-  filterProxyModel->sort((int)eAccountsModel::Column::Account);
+  filterProxyModel->sort(AccountsModel::Column::AccountName);
 
   d->ui->m_accountSelector->setModel(filterProxyModel);
 

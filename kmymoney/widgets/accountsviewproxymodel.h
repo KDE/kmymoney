@@ -19,29 +19,30 @@
 #ifndef ACCOUNTSVIEWPROXYMODEL_H
 #define ACCOUNTSVIEWPROXYMODEL_H
 
-#include "kmm_widgets_export.h"
-
-// ----------------------------------------------------------------------------
-// QT Includes
-
-#include <QSet>
-#include <QPoint>
-
-// ----------------------------------------------------------------------------
-// KDE Includes
-
-// ----------------------------------------------------------------------------
-// Project Includes
-
-#include "accountsproxymodel.h"
-#include "modelenums.h"
-
-class QPoint;
-
-/**
-  * This model is specialized to organize the data for the accounts tree view
-  * based on the data of the @ref AccountsModel.
-  */
+/// @todo port to new model code (remove this class completely)
+// #include "kmm_widgets_export.h"
+//
+// // ----------------------------------------------------------------------------
+// // QT Includes
+//
+// #include <QSet>
+// #include <QPoint>
+//
+// // ----------------------------------------------------------------------------
+// // KDE Includes
+//
+// // ----------------------------------------------------------------------------
+// // Project Includes
+//
+// #include "accountsproxymodel.h"
+// #include "modelenums.h"
+//
+// class QPoint;
+//
+// /**
+//   * This model is specialized to organize the data for the accounts tree view
+//   * based on the data of the @ref AccountsModel.
+//   */
 // class AccountsViewProxyModelPrivate;
 // class KMM_WIDGETS_EXPORT AccountsViewProxyModel : public AccountsProxyModel
 // {

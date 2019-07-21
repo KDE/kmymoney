@@ -220,7 +220,7 @@ void KExportDlg::loadAccounts()
   // model->load();
   // filterProxyModel->setSourceColumns(model->getColumns());
   filterProxyModel->setSourceModel(model);
-  filterProxyModel->sort((int)eAccountsModel::Column::Account);
+  filterProxyModel->sort(AccountsModel::Column::AccountName);
   m_accountComboBox->setModel(filterProxyModel);
 }
 

@@ -38,9 +38,8 @@
 #include "mymoneybudget.h"
 #include "models.h"
 #include "accountsmodel.h"
-#include "modelenums.h"
+#include "mymoneyenums.h"
 
-using namespace eAccountsModel;
 
 #if 0
 class BudgetViewProxyModelPrivate : public AccountsViewProxyModelPrivate

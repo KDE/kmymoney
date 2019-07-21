@@ -597,6 +597,7 @@ public:
   bool hasOnlineMapping() const;
 
   static QString stdAccName(eMyMoney::Account::Standard stdAccID);
+  static QString accountSeparator();
 
   QDataStream &operator<<(const MyMoneyAccount &);
   QDataStream &operator>>(MyMoneyAccount &);

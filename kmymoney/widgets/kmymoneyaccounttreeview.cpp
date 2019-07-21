@@ -38,16 +38,29 @@
 #include "mymoneyaccount.h"
 #include "models.h"
 #include "accountsmodel.h"
-#include "accountsviewproxymodel.h"
-#include "budgetviewproxymodel.h"
+#include "accountsproxymodel.h"
+// #include "budgetviewproxymodel.h"
 #include "modelenums.h"
 #include "mymoneyenums.h"
-#include "viewenums.h"
+// #include "viewenums.h"
 
+class KMyMoneyAccountTreeViewPrivate
+{
+public:
+  KMyMoneyAccountTreeViewPrivate(KMyMoneyAccountTreeView *qq)
+    : q_ptr(qq),
+    proxyModel(new AccountsProxyModel(qq))
+    {}
+
+  KMyMoneyAccountTreeView*  q_ptr;
+  AccountsProxyModel*       proxyModel;
+};
 
 KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent)
   : QTreeView(parent)
+  , d_ptr(new KMyMoneyAccountTreeViewPrivate(this))
 {
+  Q_D(KMyMoneyAccountTreeView);
   setContextMenuPolicy(Qt::CustomContextMenu);            // allow context menu to be opened on tree items
   connect(this, &QWidget::customContextMenuRequested, this, &KMyMoneyAccountTreeView::customContextMenuRequested);
   setAllColumnsShowFocus(true);
@@ -59,6 +72,21 @@ KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent)
 KMyMoneyAccountTreeView::~KMyMoneyAccountTreeView()
 {
 }
+
+void KMyMoneyAccountTreeView::setModel(QAbstractItemModel* model)
+{
+  Q_D(KMyMoneyAccountTreeView);
+  d->proxyModel->setSourceModel(model);
+  QTreeView::setModel(d->proxyModel);
+}
+
+
+AccountsProxyModel* KMyMoneyAccountTreeView::proxyModel() const
+{
+  Q_D(const KMyMoneyAccountTreeView);
+  return d->proxyModel;
+}
+
 
 #if 0
 AccountsViewProxyModel *KMyMoneyAccountTreeView::init(View view)

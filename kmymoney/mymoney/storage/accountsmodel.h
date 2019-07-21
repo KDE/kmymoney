@@ -71,11 +71,32 @@ public:
   void load(const QMap<QString, MyMoneyAccount>& list);
 
   QList<MyMoneyAccount> itemList() const;
-  bool insertRows(int startRow, int rows, const QModelIndex &parent = QModelIndex()) override;
-  bool removeRows(int startRow, int rows, const QModelIndex &parent = QModelIndex()) override;
   QModelIndex indexById(const QString& id) const;
   QModelIndexList indexListByName(const QString& name) const;
 
+
+  /**
+   * Returns the full account path for the given index @a idx.
+   */
+  QString indexToHierarchicalName(const QModelIndex& idx, bool includeStandardAccounts) const;
+
+  /**
+   * Convert the given @a accountId into the full hierarchical name
+   * Include the standard base account if @a includeStandardAccounts is @c true
+   *
+   * Returns the full account path or empty if @a accountId is not known
+   *
+   * @sa indexToHierarchicalName()
+   */
+  QString accountIdToHierarchicalName(const QString& accountId, bool includeStandardAccounts) const;
+
+  /**
+   * Convert a given account @a name and @a type into the corresponding id. Valid types are
+   * eMyMoney::Account::Type::(Income|Expense|Unknown). In case of Unknown, both Income and
+   * Expense subtrees will be searched. The first matching entry will be used. If no account
+   * is found, an empty string will be returned.
+   */
+  QString accountNameToId(const QString& name, eMyMoney::Account::Type type) const;
 
 protected:
   void clearModelItems() override;

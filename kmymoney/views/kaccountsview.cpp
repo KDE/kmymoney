@@ -1,18 +1,20 @@
-/***************************************************************************
-                          kaccountsview.cpp
-                             -------------------
-    copyright            : (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2007-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "kaccountsview_p.h"
 
@@ -47,8 +49,7 @@ KAccountsView::KAccountsView(QWidget *parent) :
     KMyMoneyViewBase(*new KAccountsViewPrivate(this), parent)
 {
   Q_D(KAccountsView);
-  d->ui->setupUi(this);
-
+  d->init();
   connect(pActions[eMenu::Action::NewAccount],          &QAction::triggered, this, &KAccountsView::slotNewAccount);
   connect(pActions[eMenu::Action::EditAccount],         &QAction::triggered, this, &KAccountsView::slotEditAccount);
   connect(pActions[eMenu::Action::DeleteAccount],       &QAction::triggered, this, &KAccountsView::slotDeleteAccount);
@@ -63,6 +64,14 @@ KAccountsView::KAccountsView(QWidget *parent) :
 
 KAccountsView::~KAccountsView()
 {
+}
+
+void KAccountsView::slotSettingsChanged()
+{
+  Q_D(KAccountsView);
+  d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
+  d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+  d->m_proxyModel->setHideFavoriteAccounts(true);
 }
 
 void KAccountsView::executeCustomAction(eView::Action action)
@@ -93,6 +102,7 @@ void KAccountsView::refresh()
   }
   d->m_needsRefresh = false;
 /// @todo port to new model code
+
 #if 0
   // TODO: check why the invalidate is needed here
   d->m_proxyModel->invalidate();

@@ -782,8 +782,12 @@ void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Inten
       break;
 
     case eView::Intent::ToggleColumn:
-      if (variant.count() == 2)
+      if (variant.count() == 2) {
+        /// @todo port to new model code
+#if 0
         slotAccountTreeViewChanged(variant.at(0).value<eAccountsModel::Column>(), variant.at(1).value<bool>());
+#endif
+      }
       break;
 
     case eView::Intent::ShowPayee:

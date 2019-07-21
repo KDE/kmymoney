@@ -131,7 +131,7 @@ public:
     m_filterProxyModel->setDynamicSortFilter(true);
 
     ui->m_parentAccounts->setModel(m_filterProxyModel);
-    ui->m_parentAccounts->sortByColumn((int)eAccountsModel::Column::Account, Qt::AscendingOrder);
+    ui->m_parentAccounts->sortByColumn(AccountsModel::Column::AccountName, Qt::AscendingOrder);
 
     ui->m_subAccountLabel->setText(i18n("Is a sub account"));
 
@@ -761,11 +761,14 @@ void KNewAccountDlg::slotSelectionChanged(const QItemSelection &current, const Q
   Q_UNUSED(previous)
   Q_D(KNewAccountDlg);
   if (!current.indexes().empty()) {
+    /// @todo port to new model code
+#if 0
     QVariant account = d->ui->m_parentAccounts->model()->data(current.indexes().front(), (int)eAccountsModel::Role::Account);
     if (account.isValid()) {
       d->m_parentAccount = account.value<MyMoneyAccount>();
       d->ui->m_subAccountLabel->setText(i18n("Is a sub account of %1", d->m_parentAccount.name()));
     }
+#endif
   }
 }
 

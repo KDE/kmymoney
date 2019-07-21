@@ -152,10 +152,6 @@ void InstitutionsModel::load(const QMap<QString, MyMoneyInstitution>& list)
   // first get rid of any existing entries
   clearModelItems();
 
-
-  // and don't count loading as a modification
-  setDirty(false);
-
   int row = 0;
   // insert one more used for the no institution item
   insertRows(0, list.count()+1);
@@ -169,6 +165,9 @@ void InstitutionsModel::load(const QMap<QString, MyMoneyInstitution>& list)
     d->loadAccounts(idx, institution.accountList());
     ++row;
   }
+
+  // and don't count loading as a modification
+  setDirty(false);
 
   endResetModel();
 
