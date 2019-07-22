@@ -87,6 +87,23 @@ public:
       childItems.append(item);
     }
 
+    bool insertChildren(int row, QVector<TreeItem<T>*> items)
+    {
+      if (row < 0 || row > childItems.count())
+        return false;
+
+      // insert empty pointers in one go
+      childItems.insert(row, items.count(), nullptr);
+
+      // and move the ones found in items to it
+      const auto count = items.count();
+      for (int i = 0; i < count; ++i) {
+        childItems[row + i] = items[i];
+        items[i] = nullptr;
+      }
+      return true;
+    }
+
     bool insertChild(int row, TreeItem<T>* item)
     {
       if (row < 0 || row > childItems.count())
@@ -234,15 +251,27 @@ public:
     else
       parentItem = static_cast<TreeItem<T>*>(parent.internalPointer());
 
-    if (startRow < 0 || startRow > parentItem->childCount())
+    const int childCount = parentItem->childCount();
+    if (startRow < 0 || startRow > childCount)
       return false;
 
     beginInsertRows(parent, startRow, startRow + rows - 1);
 
-    for (int row = 0; row < rows; ++row) {
-      TreeItem<T> *newItem = new TreeItem<T>(T(), parentItem);
-      if (!parentItem->insertChild(startRow, newItem))
-        break;
+    // appending can be done one by one
+    if (startRow < childCount) {
+      QVector<TreeItem<T>*> items;
+      for (int row = 0; row < rows; ++row) {
+        items << new TreeItem<T>(T(), parentItem);
+      }
+      if (!parentItem->insertChildren(startRow, items)) {
+        qDeleteAll(items);
+      }
+    } else {
+      for (int row = 0; row < rows; ++row) {
+        TreeItem<T> *newItem = new TreeItem<T>(T(), parentItem);
+        if (!parentItem->insertChild(startRow, newItem))
+          break;
+      }
     }
 
     endInsertRows();
