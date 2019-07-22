@@ -71,7 +71,7 @@ public:
   void load(const QMap<QString, MyMoneyAccount>& list);
 
   QList<MyMoneyAccount> itemList() const;
-  QModelIndex indexById(const QString& id) const;
+  QModelIndex indexById(const QString& id) const override;
   QModelIndexList indexListByName(const QString& name) const;
 
 

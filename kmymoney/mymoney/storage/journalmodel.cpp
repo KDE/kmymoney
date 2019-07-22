@@ -57,7 +57,7 @@ struct JournalModel::Private
 };
 
 JournalModel::JournalModel(QObject* parent)
-  : MyMoneyModel<JournalEntry>(parent, QStringLiteral("T"), JournalModel::ID_SIZE)
+  : MyMoneyModel<JournalEntry>(parent, QStringLiteral("J"), JournalModel::ID_SIZE)
   , d(new Private)
 {
   setObjectName(QLatin1String("JournalModel"));
@@ -161,4 +161,48 @@ void JournalModel::load(const QMap<QString, MyMoneyTransaction>& list)
   qDebug() << "Model for" << m_idLeadin << "loaded with" << rowCount() << "items";
 }
 
-void
+MyMoneyTransaction JournalModel::transactionById(const QString& id) const
+{
+  const QModelIndex idx = firstIndexById(id);
+  if (idx.isValid()) {
+    return static_cast<TreeItem<JournalEntry>*>(idx.internalPointer())->constDataRef().transaction();
+  }
+  return MyMoneyTransaction();
+}
+
+QModelIndex JournalModel::firstIndexById(const QString& id) const
+{
+  const QString key = d->mapIdToKey(id);
+  // in case we do not have a key, the transactionId does not exist
+  // so no need to search for it
+  if (key.isEmpty()) {
+    return QModelIndex();
+  }
+
+  return firstIndexByKey(key);
+}
+
+QModelIndex JournalModel::firstIndexByKey(const QString& key) const
+{
+  // the following two could be turned into additional parameters
+  // to this function to search only in sections of the journal
+  int first = 0;
+  const int last = rowCount();
+
+  int count = last - first;
+  int row = -1;
+  int step;
+  while (count > 0) {
+    row = first;
+    step = count / 2;
+    row = first + step;
+    const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
+    if (journalEntry.id() < key) {
+      first = ++row;
+      count -= step + 1;
+    } else {
+      count = step;
+    }
+  }
+  return index(row, 0);
+}

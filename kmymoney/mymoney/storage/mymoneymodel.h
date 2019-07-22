@@ -274,21 +274,12 @@ public:
     return true;
   }
 
-  QModelIndex indexById(const QString& id) const
+  virtual QModelIndex indexById(const QString& id) const
   {
     const QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, id, 1, Qt::MatchFixedString | Qt::MatchRecursive);
     if (indexes.isEmpty())
       return QModelIndex();
     return indexes.first();
-  }
-
-  T itemById(const QString& id) const
-  {
-    const QModelIndex idx = indexById(id);
-    if (idx.isValid()) {
-      return static_cast<TreeItem<T>*>(idx.internalPointer())->data();
-    }
-    return T();
   }
 
   T itemByIndex(const QModelIndex& idx) const
@@ -297,6 +288,11 @@ public:
       return static_cast<TreeItem<T>*>(idx.internalPointer())->data();
     }
     return T();
+  }
+
+  T itemById(const QString& id) const
+  {
+    return itemByIndex(indexById(id));
   }
 
   QString nextId()

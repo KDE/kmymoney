@@ -79,15 +79,26 @@ public:
   explicit JournalModel(QObject* parent = 0);
   virtual ~JournalModel();
 
-  static const int ID_SIZE = 6;
+  static const int ID_SIZE = 32;
 
   int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
   QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
   QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;
 
+  /**
+   * Special implementation using a binary search algorithm instead
+   * of the linear one provided by the template function
+   */
+  MyMoneyTransaction transactionById(const QString& id) const;
+
   bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
 
   void load(const QMap<QString, MyMoneyTransaction>& list);
+
+protected:
+  QModelIndex firstIndexById(const QString& id) const;
+  QModelIndex firstIndexByKey(const QString& key) const;
+
 
 public Q_SLOTS:
 
