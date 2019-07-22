@@ -678,8 +678,10 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
   // make sure the value is rounded to the accounts precision
   fixSplitPrecision(tCopy);
 
+  d->journalModel.modifyTransaction(tCopy);
+  /// @todo cleanup
   // perform modification
-  d->m_storage->modifyTransaction(tCopy);
+  // d->m_storage->modifyTransaction(tCopy);
 
   // and mark all accounts that are referenced
   const auto splits3 = tCopy.splits();
@@ -826,7 +828,9 @@ void MyMoneyFile::removeTransaction(const MyMoneyTransaction& transaction)
     //FIXME-ALEX Do I need to add d->addCacheNotification(split.tagList()); ??
   }
 
-  d->m_storage->removeTransaction(transaction);
+  d->journalModel.removeTransaction(transaction);
+  /// @todo cleanup
+  // d->m_storage->removeTransaction(transaction);
 
   // remove a possible notification of that same object from the changeSet
   QList<MyMoneyNotification>::iterator it;
@@ -851,13 +855,16 @@ bool MyMoneyFile::hasActiveSplits(const QString& id) const
 
 bool MyMoneyFile::isStandardAccount(const QString& id) const
 {
-  d->checkStorage();
-
-  return d->m_storage->isStandardAccount(id);
+  return id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability)
+  || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset)
+  || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense)
+  || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income)
+  || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Equity);
 }
 
 void MyMoneyFile::setAccountName(const QString& id, const QString& name) const
 {
+  /// @todo port to new model code
   d->checkTransaction(Q_FUNC_INFO);
 
   auto acc = account(id);
@@ -867,6 +874,8 @@ void MyMoneyFile::setAccountName(const QString& id, const QString& name) const
 
 void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 {
+  /// @todo port to new model code
+#if 0
   d->checkTransaction(Q_FUNC_INFO);
 
   MyMoneyAccount parent;
@@ -908,10 +917,13 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, parent);
   d->m_changeSet += MyMoneyNotification(File::Mode::Remove, acc);
+#endif
 }
 
 void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned int level)
 {
+  /// @todo port to new model code
+#if 0
   if (level > 100)
     throw MYMONEYEXCEPTION_CSTRING("Too deep recursion in [MyMoneyFile::removeAccountList]!");
 
@@ -942,6 +954,7 @@ void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned in
     // make sure to remove the item from the cache
     removeAccount(a);
   }
+#endif
 }
 
 bool MyMoneyFile::hasOnlyUnusedAccounts(const QStringList& account_list, unsigned int level)
@@ -961,6 +974,8 @@ bool MyMoneyFile::hasOnlyUnusedAccounts(const QStringList& account_list, unsigne
 
 void MyMoneyFile::removeInstitution(const MyMoneyInstitution& institution)
 {
+  /// @todo port to new model code
+#if 0
   d->checkTransaction(Q_FUNC_INFO);
 
   MyMoneyInstitution inst = MyMoneyFile::institution(institution.id());
@@ -979,6 +994,7 @@ void MyMoneyFile::removeInstitution(const MyMoneyInstitution& institution)
   d->m_storage->removeInstitution(institution);
 
   d->m_changeSet += MyMoneyNotification(File::Mode::Remove, institution);
+#endif
 }
 
 void MyMoneyFile::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
@@ -1062,6 +1078,8 @@ void MyMoneyFile::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
 
 void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
 {
+  /// @todo port to new model code
+#if 0
   d->checkTransaction(Q_FUNC_INFO);
 
   MyMoneyInstitution institution;
@@ -1162,6 +1180,7 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
     d->m_storage->modifyInstitution(institution);
     d->m_changeSet += MyMoneyNotification(File::Mode::Modify, institution);
   }
+#endif
 }
 
 MyMoneyTransaction MyMoneyFile::createOpeningBalanceTransaction(const MyMoneyAccount& acc, const MyMoneyMoney& balance)
@@ -1406,7 +1425,9 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
   fixSplitPrecision(transaction);
 
   // then add the transaction to the file global pool
-  d->m_storage->addTransaction(transaction);
+  d->journalModel.addTransaction(transaction);
+  /// @todo cleanup
+  // d->m_storage->addTransaction(transaction);
 
   // scan the splits again to update notification list
   const auto splits2 = transaction.splits();
@@ -1418,13 +1439,17 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
 
 MyMoneyTransaction MyMoneyFile::transaction(const QString& id) const
 {
-  d->checkStorage();
+  return d->journalModel.transactionById(id);
 
-  return d->m_storage->transaction(id);
+  /// @todo cleanup
+//   d->checkStorage();
+//
+//   return d->m_storage->transaction(id);
 }
 
 MyMoneyTransaction MyMoneyFile::transaction(const QString& account, const int idx) const
 {
+  qDebug() << "Who calls this?";
   d->checkStorage();
 
   return d->m_storage->transaction(account, idx);
@@ -1785,20 +1810,29 @@ void MyMoneyFile::warningMissingRate(const QString& fromId, const QString& toId)
 
 void MyMoneyFile::transactionList(QList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const
 {
+  d->journalModel.transactionList(list, filter);
+/// @todo cleanup
+#if 0
   d->checkStorage();
   d->m_storage->transactionList(list, filter);
+#endif
 }
 
 void MyMoneyFile::transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const
 {
+  d->journalModel.transactionList(list, filter);
+/// @todo cleanup
+#if 0
   d->checkStorage();
   d->m_storage->transactionList(list, filter);
+#endif
 }
 
 QList<MyMoneyTransaction> MyMoneyFile::transactionList(MyMoneyTransactionFilter& filter) const
 {
-  d->checkStorage();
-  return d->m_storage->transactionList(filter);
+  QList<MyMoneyTransaction> list;
+  transactionList(list, filter);
+  return list;
 }
 
 QList<MyMoneyPayee> MyMoneyFile::payeeList() const
@@ -1864,20 +1898,24 @@ QString MyMoneyFile::categoryToAccount(const QString& category) const
 
 QString MyMoneyFile::nameToAccount(const QString& name) const
 {
+  /// @todo port to new model code
+
   QString id;
 
+#if 0
   // search the category in the asset accounts and if it is not found, try
   // to locate it in the liability accounts
   id = locateSubAccount(MyMoneyFile::instance()->asset(), name);
   if (id.isEmpty())
     id = locateSubAccount(MyMoneyFile::instance()->liability(), name);
+#endif
 
   return id;
 }
 
 QString MyMoneyFile::parentName(const QString& name) const
 {
-  return name.section(AccountSeparator, 0, -2);
+  return name.section(MyMoneyAccount::accountSeparator(), 0, -2);
 }
 
 QString MyMoneyFile::locateSubAccount(const MyMoneyAccount& base, const QString& category) const
@@ -1901,6 +1939,7 @@ QString MyMoneyFile::locateSubAccount(const MyMoneyAccount& base, const QString&
 
 QString MyMoneyFile::value(const QString& key) const
 {
+  /// @todo port to new model code
   d->checkStorage();
 
   return d->m_storage->value(key);
@@ -1908,16 +1947,22 @@ QString MyMoneyFile::value(const QString& key) const
 
 void MyMoneyFile::setValue(const QString& key, const QString& val)
 {
+  /// @todo port to new model code
+#if 0
   d->checkTransaction(Q_FUNC_INFO);
 
   d->m_storage->setValue(key, val);
+#endif
 }
 
 void MyMoneyFile::deletePair(const QString& key)
 {
+  /// @todo port to new model code
+#if 0
   d->checkTransaction(Q_FUNC_INFO);
 
   d->m_storage->deletePair(key);
+#endif
 }
 
 void MyMoneyFile::addSchedule(MyMoneySchedule& sched)
@@ -2003,7 +2048,10 @@ QList<MyMoneySchedule> MyMoneyFile::scheduleList() const
 
 QStringList MyMoneyFile::consistencyCheck()
 {
-  /// @todo fix consistencyCheck to support new model based storage
+  QStringList rc;
+
+  /// @todo port to new model code
+#if 0
   QList<MyMoneyAccount> list;
   QList<MyMoneyAccount>::Iterator it_a;
   QList<MyMoneySchedule>::Iterator it_sch;
@@ -2019,7 +2067,6 @@ QStringList MyMoneyFile::consistencyCheck()
   MyMoneyAccount toplevel;
 
   QString parentId;
-  QStringList rc;
 
   int problemCount = 0;
   int unfixedCount = 0;
@@ -2652,6 +2699,7 @@ QStringList MyMoneyFile::consistencyCheck()
     rc << QString();
     rc << i18nc("%1 is a string, e.g. 7 problems corrected; %2 is a string, e.g. 3 problems still present", "Finished: %1 %2", problemsCorrected, problemsRemaining);
   }
+#endif
   return rc;
 }
 
@@ -2898,6 +2946,7 @@ QMap<MyMoneySecurity, MyMoneyPrice> MyMoneyFile::ancientCurrencies() const
   return ancientCurrencies;
 }
 
+/// @todo move to static function in MyMoneySecurity
 QList<MyMoneySecurity> MyMoneyFile::availableCurrencyList() const
 {
   QList<MyMoneySecurity> currencyList;
@@ -3117,6 +3166,8 @@ void MyMoneyFile::setBaseCurrency(const MyMoneySecurity& curr)
 
 void MyMoneyFile::addPrice(const MyMoneyPrice& price)
 {
+  /// @todo port to new model code
+#if 0
   if (price.rate(QString()).isZero())
     return;
 
@@ -3125,19 +3176,26 @@ void MyMoneyFile::addPrice(const MyMoneyPrice& price)
   // store the account's which are affected by this price regarding their value
   d->priceChanged(*this, price);
   d->m_storage->addPrice(price);
+#endif
 }
 
 void MyMoneyFile::removePrice(const MyMoneyPrice& price)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
+  /// @todo port to new model code
+#if 0
   // store the account's which are affected by this price regarding their value
   d->priceChanged(*this, price);
   d->m_storage->removePrice(price);
+#endif
 }
 
 MyMoneyPrice MyMoneyFile::price(const QString& fromId, const QString& toId, const QDate& date, const bool exactDate) const
 {
+  MyMoneyPrice rc;
+  /// @todo port to new model code
+#if 0
   d->checkStorage();
 
   QString to(toId);
@@ -3182,6 +3240,7 @@ MyMoneyPrice MyMoneyFile::price(const QString& fromId, const QString& toId, cons
       }
     }
   }
+#endif
   return rc;
 }
 
@@ -3197,6 +3256,7 @@ MyMoneyPrice MyMoneyFile::price(const QString& fromId) const
 
 MyMoneyPriceList MyMoneyFile::priceList() const
 {
+  /// @todo port to new model code
   d->checkStorage();
 
   return d->m_storage->priceList();
@@ -3214,6 +3274,7 @@ bool MyMoneyFile::hasAccount(const QString& id, const QString& name) const
 
 QList<MyMoneyReport> MyMoneyFile::reportList() const
 {
+  /// @todo port to new model code
   d->checkStorage();
 
   return d->m_storage->reportList();
@@ -3223,6 +3284,7 @@ void MyMoneyFile::addReport(MyMoneyReport& report)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
+  /// @todo port to new model code
   d->m_storage->addReport(report);
 }
 
@@ -3230,6 +3292,7 @@ void MyMoneyFile::modifyReport(const MyMoneyReport& report)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
+  /// @todo port to new model code
   d->m_storage->modifyReport(report);
 }
 
@@ -3237,6 +3300,7 @@ unsigned MyMoneyFile::countReports() const
 {
   d->checkStorage();
 
+  /// @todo port to new model code
   return d->m_storage->countReports();
 }
 
@@ -3244,6 +3308,7 @@ MyMoneyReport MyMoneyFile::report(const QString& id) const
 {
   d->checkStorage();
 
+  /// @todo port to new model code
   return d->m_storage->report(id);
 }
 
@@ -3251,6 +3316,7 @@ void MyMoneyFile::removeReport(const MyMoneyReport& report)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
+  /// @todo port to new model code
   d->m_storage->removeReport(report);
 }
 
@@ -3300,6 +3366,7 @@ void MyMoneyFile::addOnlineJob(onlineJob& job)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
+  /// @todo port to new model code
   d->m_storage->addOnlineJob(job);
   d->m_changeSet += MyMoneyNotification(File::Mode::Add, job);
 }
@@ -3307,18 +3374,21 @@ void MyMoneyFile::addOnlineJob(onlineJob& job)
 void MyMoneyFile::modifyOnlineJob(const onlineJob job)
 {
   d->checkTransaction(Q_FUNC_INFO);
+  /// @todo port to new model code
   d->m_storage->modifyOnlineJob(job);
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, job);
 }
 
 onlineJob MyMoneyFile::getOnlineJob(const QString &jobId) const
 {
+  /// @todo port to new model code
   d->checkStorage();
   return d->m_storage->getOnlineJob(jobId);
 }
 
 QList<onlineJob> MyMoneyFile::onlineJobList() const
 {
+  /// @todo port to new model code
   d->checkStorage();
   return d->m_storage->onlineJobList();
 }
@@ -3326,6 +3396,7 @@ QList<onlineJob> MyMoneyFile::onlineJobList() const
 /** @todo improve speed by passing count job to m_storage */
 int MyMoneyFile::countOnlineJobs() const
 {
+  /// @todo port to new model code
   return onlineJobList().count();
 }
 
@@ -3337,16 +3408,20 @@ void MyMoneyFile::removeOnlineJob(const onlineJob& job)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
+  /// @todo port to new model code
+#if 0
   // clear all changed objects from cache
   if (job.isLocked()) {
     return;
   }
   d->m_changeSet += MyMoneyNotification(File::Mode::Remove, job);
   d->m_storage->removeOnlineJob(job);
+#endif
 }
 
 void MyMoneyFile::removeOnlineJob(const QStringList onlineJobIds)
 {
+  /// @todo port to new model code
   foreach (QString jobId, onlineJobIds) {
     removeOnlineJob(getOnlineJob(jobId));
   }
@@ -3462,6 +3537,7 @@ bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAcco
 
 bool MyMoneyFile::isReferenced(const MyMoneyObject& obj, const QBitArray& skipChecks) const
 {
+  /// @todo port to new model code
   d->checkStorage();
   return d->m_storage->isReferenced(obj, skipChecks);
 }
@@ -3473,6 +3549,7 @@ bool MyMoneyFile::isReferenced(const MyMoneyObject& obj) const
 
 bool MyMoneyFile::checkNoUsed(const QString& accId, const QString& no) const
 {
+  /// @todo port to new model code
   // by definition, an empty string or a non-numeric string is not used
   QRegExp exp(QString("(.*\\D)?(\\d+)(\\D.*)?"));
   if (no.isEmpty() || exp.indexIn(no) == -1)
@@ -3499,6 +3576,7 @@ bool MyMoneyFile::checkNoUsed(const QString& accId, const QString& no) const
 
 QString MyMoneyFile::highestCheckNo(const QString& accId) const
 {
+  /// @todo port to new model code
   unsigned64 lno = 0;
   unsigned64 cno;
   QString no;
@@ -3528,6 +3606,7 @@ QString MyMoneyFile::highestCheckNo(const QString& accId) const
 
 bool MyMoneyFile::hasNewerTransaction(const QString& accId, const QDate& date) const
 {
+  /// @todo port to new model code
   MyMoneyTransactionFilter filter;
   filter.addAccount(accId);
   filter.setDateFilter(date.addDays(+1), QDate());
@@ -3625,6 +3704,7 @@ bool MyMoneyFile::hasMatchingOnlineBalance(const MyMoneyAccount& _acc) const
 
 int MyMoneyFile::countTransactionsWithSpecificReconciliationState(const QString& accId, TransactionFilter::State state) const
 {
+  /// @todo port to new model code
   MyMoneyTransactionFilter filter;
   filter.addAccount(accId);
   filter.addState((int)state);
@@ -3633,6 +3713,7 @@ int MyMoneyFile::countTransactionsWithSpecificReconciliationState(const QString&
 
 QMap<QString, QVector<int> > MyMoneyFile::countTransactionsWithSpecificReconciliationState() const
 {
+  /// @todo port to new model code
   QMap<QString, QVector<int> > result;
   MyMoneyTransactionFilter filter;
   filter.setReportAllSplits(false);

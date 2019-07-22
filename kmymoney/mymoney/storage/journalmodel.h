@@ -37,6 +37,8 @@
 #include "mymoneytransaction.h"
 #include "mymoneysplit.h"
 
+class MyMoneyTransactionFilter;
+
 /**
  * The class representing a single journal entry (one split of a transaction)
  */
@@ -79,7 +81,7 @@ public:
   explicit JournalModel(QObject* parent = 0);
   virtual ~JournalModel();
 
-  static const int ID_SIZE = 32;
+  static const int ID_SIZE = 18;
 
   int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
   QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
@@ -91,14 +93,23 @@ public:
    */
   MyMoneyTransaction transactionById(const QString& id) const;
 
+  void addTransaction(MyMoneyTransaction& t);
+  void removeTransaction(const MyMoneyTransaction& t);
+  void modifyTransaction(const MyMoneyTransaction& newTransaction);
+
+  void transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const;
+  void transactionList(QList< QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const;
+
   bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
 
   void load(const QMap<QString, MyMoneyTransaction>& list);
 
 protected:
+  void addTransaction(const QString& id, MyMoneyTransaction& t);
+  void removeTransaction(const QModelIndex& idx);
+
   QModelIndex firstIndexById(const QString& id) const;
   QModelIndex firstIndexByKey(const QString& key) const;
-
 
 public Q_SLOTS:
 
