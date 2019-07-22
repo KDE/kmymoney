@@ -2115,6 +2115,7 @@ public:
           throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("dropping view %1").arg(tt.key()));
       }
     }
+    query.finish();
 
     while ((m_dbVersion < m_db.currentVersion()) && (rc == 0)) {
       switch (m_dbVersion) {
@@ -2564,6 +2565,7 @@ public:
           throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("Saving database version"));
       }
     }
+    query.finish();
 
     return upgradeDb();
   }
