@@ -3588,9 +3588,12 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
       AmountEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
 
       applyFileFixes();
+      emit MyMoneyFile::instance()->modelsLoaded();
+      /// @todo remove old models container
       Models::instance()->fileOpened();
       connectStorageToModels();
       // inform everyone about new data
+      MyMoneyFile::instance()->modelsReadyToUse();
       MyMoneyFile::instance()->forceDataChanged();
       // Enable save in case the fix changed the contents
       q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(dirty());

@@ -186,15 +186,6 @@ public:
     */
   ~MyMoneyFile();
 
-  /**
-    * @deprecated This is a convenience constructor. Do not use it anymore.
-    * It will be deprecated in a future version of the engine.
-    *
-    * @param storage pointer to object that implements the MyMoneyStorageMgr
-    *                interface.
-    */
-  explicit MyMoneyFile(MyMoneyStorageMgr *storage);
-
   // general get functions
   MyMoneyPayee user() const;
 
@@ -1724,6 +1715,19 @@ Q_SIGNALS:
     * prices from the MyMoneyFile object.
     */
   void valueChanged(const MyMoneyAccount& acc);
+
+  /**
+   * This signal is emitted once all data of a new backend is loaded.
+   */
+  void modelsLoaded();
+
+  /**
+   * This signal is emitted once all data of a new backend is ready to be used.
+   * The difference to modelsLoaded() is that some internal fixes can be applied
+   * in the meantime. Right before this signal is sent out, the dirty flag of all
+   * models will be reset.
+   */
+  void modelsReadyToUse();
 
 private:
   static MyMoneyFile file;

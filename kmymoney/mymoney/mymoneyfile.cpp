@@ -63,6 +63,9 @@
 #include "storageenums.h"
 #include "mymoneyenums.h"
 
+/// @todo cleanup
+#include "models.h"
+
 /// @todo add new models here
 #include "payeesmodel.h"
 #include "costcentermodel.h"
@@ -383,17 +386,12 @@ private:
 MyMoneyFile::MyMoneyFile() :
     d(new Private(this))
 {
+  connect(this, &MyMoneyFile::modelsLoaded, &d->accountsModel, &AccountsModel::setupAccountFractions);
 }
 
 MyMoneyFile::~MyMoneyFile()
 {
   delete d;
-}
-
-MyMoneyFile::MyMoneyFile(MyMoneyStorageMgr *storage) :
-    d(new Private(this))
-{
-  attachStorage(storage);
 }
 
 MyMoneyFile* MyMoneyFile::instance()
