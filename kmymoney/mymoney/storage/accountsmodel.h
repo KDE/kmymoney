@@ -113,7 +113,7 @@ protected:
 
   // reparent()
 public Q_SLOTS:
-
+  void setupAccountFractions();
 
 private:
   struct Private;

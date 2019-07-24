@@ -568,13 +568,25 @@ QString AccountsModel::accountNameToId(const QString& category, eMyMoney::Accoun
   // to locate it in the income accounts in case the type is not provided
   if (type == eMyMoney::Account::Type::Unknown
    || type == eMyMoney::Account::Type::Expense) {
-    id = itemByName(category, indexById(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense))).name();
+    id = itemByName(category, expenseIndex()).name();
   }
 
   if ((id.isEmpty() && type == eMyMoney::Account::Type::Unknown)
    || type == eMyMoney::Account::Type::Income) {
-    id = itemByName(category, indexById(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income))).name();
-  }
+    id = itemByName(category, incomeIndex()).name();
+   }
 
   return id;
+}
+
+void AccountsModel::setupAccountFractions()
+{
+  QModelIndexList indexes = match(assetIndex(), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive);
+  MyMoneySecurity currency;
+  for (int row = 0; row < indexes.count(); ++row) {
+    MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(indexes.value(row).internalPointer())->dataRef();
+    if (account.currencyId() != currency.id())
+      currency = MyMoneyFile::instance()->currency(account.currencyId());
+    account.fraction(currency);
+  }
 }
