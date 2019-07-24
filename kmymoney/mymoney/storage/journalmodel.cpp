@@ -347,16 +347,16 @@ void JournalModel::transactionList(QList< QPair<MyMoneyTransaction, MyMoneySplit
 {
   list.clear();
 
-  QString lastKey;
   const int rows = rowCount();
-  for (int row = 0; row < rows; ++row) {
-    const QModelIndex idx = index(row, 0);
-    const auto journalEntry = static_cast<TreeItem<JournalEntry>*>(idx.internalPointer())->constDataRef();
-    if (journalEntry.id() != lastKey) {
-      const auto& splits = filter.matchingSplits(journalEntry.transaction());
+  QVector<MyMoneySplit> splits;
+  for (int row = 0; row < rows; ) {
+    const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
+    splits = filter.matchingSplits(journalEntry.transaction());
+    if (!splits.isEmpty()) {
       for (const auto& split : splits) {
         list.append(qMakePair(journalEntry.transaction(), split));
       }
     }
+    row += journalEntry.transaction().splitCount();
   }
 }
