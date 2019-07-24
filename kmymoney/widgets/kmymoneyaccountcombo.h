@@ -34,51 +34,6 @@
 #include "onlinebankingaccountsfilterproxymodel.h"
 
 /**
-  * A proxy model used to filter all the data from the core accounts model leaving
-  * only the name of the accounts so this model can be used in the account
-  * completion combo.
-  *
-  * It shows only the first column (account name) and makes top level items non-selectable.
-  *
-  * @see AccountsModel
-  * @see AccountsFilterProxyModel
-  *
-  * @author Cristian Onet 2010
-  * @author Christian David
-  */
-
-template <class baseProxyModel>
-class AccountNamesFilterProxyModelTpl : public baseProxyModel
-{
-public:
-  explicit AccountNamesFilterProxyModelTpl(QObject *parent = 0);
-
-  virtual Qt::ItemFlags flags(const QModelIndex &index) const override;
-
-protected:
-  bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override;
-};
-
-/**
- * @brief "typedef" for AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel>
- *
- * To create valid Qt moc data this class inherits the template and uses Q_OBJECT.
- *
- * @code
- * typedef AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel> AccountNamesFilterProxyModel;
- * @endcode
- *
- * should work as well.
- */
-class AccountNamesFilterProxyModel : public AccountNamesFilterProxyModelTpl<AccountsProxyModel>
-{
-  Q_OBJECT
-public:
-  explicit AccountNamesFilterProxyModel(QObject* parent = 0)
-      : AccountNamesFilterProxyModelTpl< AccountsProxyModel >(parent) {}
-};
-
-/**
  * @brief OnlineBankingAccountFilterProxyModel showing only the name column
  *
  * Is equivalent to AccountNamesFilterProxyModel using OnlineBankingAccountFilterProxyModel as base.
@@ -143,33 +98,5 @@ private:
   QScopedPointer<Private> const d;
 };
 
-template <class baseProxyModel>
-AccountNamesFilterProxyModelTpl<baseProxyModel>::AccountNamesFilterProxyModelTpl(QObject *parent)
-    : baseProxyModel(parent)
-{
-}
-
-/**
- * Top items are not selectable because they are not real accounts but are only used for grouping.
- */
-template <class baseProxyModel>
-Qt::ItemFlags AccountNamesFilterProxyModelTpl<baseProxyModel>::flags(const QModelIndex &index) const
-{
-  if (!index.parent().isValid())
-    return baseProxyModel::flags(index) & ~Qt::ItemIsSelectable;
-  return baseProxyModel::flags(index);
-}
-
-/**
- * Filter all but the first column.
- */
-template <class baseProxyModel>
-bool AccountNamesFilterProxyModelTpl<baseProxyModel>::filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const
-{
-  Q_UNUSED(source_parent)
-  if (source_column == 0)
-    return true;
-  return false;
-}
 #endif
 // kate: space-indent on; indent-width 2; remove-trailing-space on; remove-trailing-space-save on;

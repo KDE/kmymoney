@@ -39,12 +39,13 @@
 #include "institutionsmodel.h"
 #include "kmymoneyaccountcombo.h"
 #include "ui_simpleledgerview.h"
-#include "icons/icons.h"
+#include "icons.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyenums.h"
 #include "modelenums.h"
+#include "kmymoneysettings.h"
 
 using namespace Icons;
 
@@ -78,7 +79,8 @@ public:
     ui->ledgerTab->setTabText(0, QString());
     newTabWidget = ui->ledgerTab->widget(0);
 
-    accountsModel= new AccountNamesFilterProxyModel(q);
+    accountsModel = new AccountNamesFilterProxyModel(q);
+    q->slotSettingsChanged();
 
     // remove close button from new page
     QTabBar* bar = ui->ledgerTab->findChild<QTabBar*>();
@@ -110,7 +112,6 @@ public:
     auto const model = Models::instance()->accountsModel();
     accountsModel->setSourceModel(model);
     /// @todo port to new model code
-    // accountsModel->setSourceColumns(model->getColumns());
     accountsModel->sort(AccountsModel::Column::AccountName);
     ui->accountCombo->setModel(accountsModel);
 
@@ -148,7 +149,7 @@ void SimpleLedgerView::openNewLedger(QString accountId)
 
   LedgerViewPage* view = 0;
   // check if ledger is already opened
-  for(int idx=0; idx < d->ui->ledgerTab->count()-1; ++idx) {
+  for(int idx = 0; idx < d->ui->ledgerTab->count()-1; ++idx) {
     view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->widget(idx));
     if(view) {
       if(accountId == view->accountId()) {
@@ -159,11 +160,10 @@ void SimpleLedgerView::openNewLedger(QString accountId)
   }
 
   // need a new tab, we insert it before the rightmost one
-  QModelIndex index = Models::instance()->accountsModel()->indexById(accountId);
-  if(index.isValid()) {
+  const MyMoneyAccount acc = Models::instance()->accountsModel()->itemById(accountId);
+  if(!acc.id().isEmpty()) {
 
     // create new ledger view page
-    const MyMoneyAccount acc = Models::instance()->accountsModel()->itemByIndex(index);
     view = new LedgerViewPage(this);
     view->setShowEntryForNewTransaction();
     view->setAccount(acc);
@@ -255,18 +255,14 @@ void SimpleLedgerView::openFavoriteLedgers()
   if (d->m_needLoad)
     return;
 
-  /// @todo port to new model code
-#if 0
-  AccountsModel* model = Models::instance()->accountsModel();
-  QModelIndex start = model->index(0, 0);
-  QModelIndexList indexes = model->match(start, (int)eAccountsModel::Role::Favorite, QVariant(true), -1, Qt::MatchRecursive);
+  AccountsModel* model = MyMoneyFile::instance()->accountsModel();
+  // retrieve all items in the favorite subtree
+  QModelIndexList indexes = model->match(model->index(0, 0, model->favoriteIndex()), Qt::DisplayRole, QString("*"), -1, Qt::MatchWildcard);
 
-  // indexes now has a list of favorite accounts but two entries for each.
-  // that doesn't matter here, since openNewLedger() can handle duplicates
-  Q_FOREACH(QModelIndex index, indexes) {
-    openNewLedger(model->data(index, (int)eAccountsModel::Role::ID).toString());
+  // indexes now has a list of favorite accounts
+  foreach (const auto idx, indexes) {
+    openNewLedger(idx.data(eMyMoney::Model::Roles::IdRole).toString());
   }
-#endif
   d->ui->ledgerTab->setCurrentIndex(0);
 }
 
@@ -317,3 +313,10 @@ void SimpleLedgerView::setupCornerWidget()
   }
 }
 
+void SimpleLedgerView::slotSettingsChanged()
+{
+  Q_D(SimpleLedgerView);
+  d->accountsModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
+  d->accountsModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+  d->accountsModel->setHideFavoriteAccounts(false);
+}

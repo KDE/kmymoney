@@ -338,6 +338,7 @@ void KMyMoneyView::updateViewType()
 void KMyMoneyView::slotAccountTreeViewChanged(const eAccountsModel::Column column, const bool show)
 {
 #warning "Reimplement global acccount column visibility"
+  /// @todo port to new model code
 #if 0
   QVector<AccountsViewProxyModel *> proxyModels
   {

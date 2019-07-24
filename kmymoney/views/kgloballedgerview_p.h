@@ -281,11 +281,8 @@ public:
 
     // the proxy filter model
     m_filterProxyModel = new AccountNamesFilterProxyModel(q);
-    m_filterProxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity});
-    auto const model = Models::instance()->accountsModel();
-    m_filterProxyModel->setSourceModel(model);
-    /// @todo port to new model code
-    // m_filterProxyModel->setSourceColumns(model->getColumns());
+    m_filterProxyModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquity());
+    m_filterProxyModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
     m_filterProxyModel->sort(AccountsModel::Column::AccountName);
 
     // create the toolbar frame at the top of the view
@@ -419,24 +416,25 @@ public:
 
     // TODO: check why the invalidate is needed here
     m_filterProxyModel->invalidate();
-    m_filterProxyModel->sort(AccountsModel::Column::AccountName);
+    m_filterProxyModel->setHideFavoriteAccounts(false);
     m_filterProxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
     m_filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+    m_filterProxyModel->sort(AccountsModel::Column::AccountName);
     m_accountComboBox->expandAll();
 
     /// @todo port to new model code
-#if 0
+// #if 0
     if (m_currentAccount.id().isEmpty()) {
       // find the first favorite account
-      QModelIndexList list = m_filterProxyModel->match(m_filterProxyModel->index(0, 0),
-                             (int)eAccountsModel::Role::Favorite,
-                             QVariant(true),
+      QModelIndexList list = m_filterProxyModel->match(m_filterProxyModel->index(0, 0, m_filterProxyModel->index(0, 0)),
+                             eMyMoney::Model::Roles::IdRole,
+                             QVariant(QString("*")),
                              1,
-                             Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+                             Qt::MatchFlags(Qt::MatchWildcard));
       if (list.count() > 0) {
-        QVariant accountId = list.front().data((int)eAccountsModel::Role::ID);
-        if (accountId.isValid()) {
-          m_currentAccount = file->account(accountId.toString());
+        auto accountId = list.front().data(eMyMoney::Model::Roles::IdRole).toString();
+        if (!accountId.isEmpty()) {
+          m_currentAccount = file->accountsModel()->itemById(accountId);
         }
       }
 
@@ -450,18 +448,19 @@ public:
         for (QModelIndexList::ConstIterator it = list.constBegin(); it != list.constEnd(); ++it) {
           if (!it->parent().isValid())
             continue; // skip the top level accounts
-          QVariant accountId = (*it).data((int)eAccountsModel::Role::ID);
-          if (accountId.isValid()) {
-            MyMoneyAccount a = file->account(accountId.toString());
-            if (!a.isInvest() && !a.isClosed()) {
-              m_currentAccount = a;
+
+          auto acc = file->accountsModel()->itemByIndex(m_filterProxyModel->mapToSource(*it));
+          qDebug() << Q_FUNC_INFO << acc.name();
+          if (!acc.id().isEmpty()) {
+            if (!acc.isInvest() && !acc.isClosed()) {
+              m_currentAccount = acc;
               break;
             }
           }
         }
       }
     }
-#endif
+// #endif
     if (!m_currentAccount.id().isEmpty()) {
       m_accountComboBox->setSelected(m_currentAccount.id());
       try {

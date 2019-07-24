@@ -212,7 +212,9 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
     lineEdit()->clear();
   }
   // find which item has this id and set it as the current item
-  QModelIndexList list = model()->match(model()->index(0, 0), eMyMoney::Model::Roles::IdRole,
+  // and we always skip over the favorite section
+  int startRow = model()->index(0, 0).data(eMyMoney::Model::Roles::IdRole).toString() == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Favorite) ? 1 : 0;
+  QModelIndexList list = model()->match(model()->index(startRow, 0), eMyMoney::Model::Roles::IdRole,
                                         QVariant(id),
                                         1,
                                         Qt::MatchFlags(Qt::MatchExactly | Qt::MatchWrap | Qt::MatchRecursive)); // CAUTION: Without Qt::MatchWrap no results for credit card, so nothing happens in ledger view

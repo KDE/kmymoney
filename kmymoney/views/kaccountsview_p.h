@@ -91,11 +91,7 @@ public:
     q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
 
     ui->m_accountTree->setModel(MyMoneyFile::instance()->accountsModel());
-    m_proxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {
-        eMyMoney::Account::Type::Asset,
-        eMyMoney::Account::Type::Liability,
-        eMyMoney::Account::Type::Equity
-      });
+    m_proxyModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquity());
 
     q->slotSettingsChanged();
 
