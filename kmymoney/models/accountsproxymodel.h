@@ -47,8 +47,7 @@
   *
   * @code
   *   AccountsProxyModel *filterModel = new AccountsProxyModel(widget);
-  *   filterModel->addAccountGroup(eMyMoney::Account::Type::Asset);
-  *   filterModel->addAccountGroup(eMyMoney::Account::Type::Liability);
+  *   filterModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquity());
   *   filterModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
   *   filterModel->sort(0);
   *
@@ -97,6 +96,20 @@ public:
 
   void setSourceColumns(QList<eAccountsModel::Column> *columns);
 
+  /**
+   * This is a convenience method which returns a prefilled vector
+   * to be used with accAccountGroup() for asset, liability and equity
+   * accounts.
+   */
+  static QVector<eMyMoney::Account::Type> assetLiabilityEquity();
+
+  /**
+   * This is a convenience method which returns a prefilled vector
+   * to be used with accAccountGroup() for income and expense
+   * accounts.
+   */
+  static QVector<eMyMoney::Account::Type> incomeExpense();
+
 protected:
   const QScopedPointer<AccountsProxyModelPrivate> d_ptr;
   AccountsProxyModel(AccountsProxyModelPrivate &dd, QObject *parent);
@@ -123,4 +136,73 @@ private:
 };
 
 #undef QSortFilterProxyModel
+
+/**
+ * A proxy model used to filter all the data from the core accounts model leaving
+ * only the name of the accounts so this model can be used in the account
+ * completion combo.
+ *
+ * It shows only the first column (account name) and makes top level items non-selectable.
+ *
+ * @see AccountsModel
+ * @see AccountsFilterProxyModel
+ *
+ * @author Cristian Onet 2010
+ * @author Christian David
+ */
+
+template <class baseProxyModel>
+class AccountNamesFilterProxyModelTpl : public baseProxyModel
+{
+public:
+  explicit AccountNamesFilterProxyModelTpl(QObject *parent = 0)
+    : baseProxyModel(parent)
+  {}
+
+  /**
+   * Top items are not selectable because they are not real accounts but are only used for grouping.
+   */
+  virtual Qt::ItemFlags flags(const QModelIndex &idx) const override
+  {
+    if (!idx.parent().isValid())
+      return baseProxyModel::flags(idx) & ~Qt::ItemIsSelectable;
+    return baseProxyModel::flags(idx);
+  }
+
+protected:
+  /**
+   * Filter all but the first column.
+   */
+  bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override
+  {
+    Q_UNUSED(source_parent)
+    if (source_column == 0)
+      return true;
+    return false;
+  }
+};
+
+/**
+ * @brief "typedef" for AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel>
+ *
+ * To create valid Qt moc data this class inherits the template and uses Q_OBJECT.
+ * Simply using a typedef like
+ *
+ * @code
+ * typedef AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel> AccountNamesFilterProxyModel;
+ * @endcode
+ *
+ * does not work, because at some point the code needs to use qobject_cast<> to promote a
+ * returned QSortFilterProxyModel pointer to an AccountNamesFilterProxyModel which is
+ * only possible with Q_OBJECT being in place.
+ */
+class KMM_MODELS_EXPORT AccountNamesFilterProxyModel : public AccountNamesFilterProxyModelTpl<AccountsProxyModel>
+{
+  Q_OBJECT
+public:
+  explicit AccountNamesFilterProxyModel(QObject* parent = 0)
+  : AccountNamesFilterProxyModelTpl< AccountsProxyModel >(parent) {}
+};
+
+
 #endif
