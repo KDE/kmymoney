@@ -66,7 +66,8 @@ struct AccountsModel::Private
           q->updateNextObjectId(subAccount.id());
           const auto idx = q->index(row, 0, parent);
           static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->dataRef() = subAccount;
-          if (subAccount.value("PreferredAccount") == QLatin1String("Yes")) {
+          if (subAccount.value("PreferredAccount") == QLatin1String("Yes")
+            && !subAccount.isClosed() ) {
             q->addFavorite(subAccountId);
             ++itemCount;
           }
