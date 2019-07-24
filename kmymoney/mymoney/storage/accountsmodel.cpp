@@ -15,6 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// just make sure that the assertions always work in this model
+#ifndef QT_FORCE_ASSERTS
+#define QT_FORCE_ASSERTS
+#endif
+
 #include "accountsmodel.h"
 
 // ----------------------------------------------------------------------------
@@ -36,6 +41,7 @@
 #include "mymoneyfile.h"
 #include "mymoneyenums.h"
 #include "mymoneymoney.h"
+#include "mymoneysecurity.h"
 #include "icons.h"
 
 struct AccountsModel::Private
@@ -119,6 +125,15 @@ AccountsModel::AccountsModel(QObject* parent)
   : MyMoneyModel<MyMoneyAccount>(parent, QStringLiteral("A"), AccountsModel::ID_SIZE)
   , d(new Private(this, parent))
 {
+  // validate that our assumptions about the order of the
+  // groups in the model are still correct
+  Q_ASSERT(d->defaults[0].groupType == eMyMoney::Account::Standard::Favorite);
+  Q_ASSERT(d->defaults[1].groupType == eMyMoney::Account::Standard::Asset);
+  Q_ASSERT(d->defaults[2].groupType == eMyMoney::Account::Standard::Liability);
+  Q_ASSERT(d->defaults[3].groupType == eMyMoney::Account::Standard::Income);
+  Q_ASSERT(d->defaults[4].groupType == eMyMoney::Account::Standard::Expense);
+  Q_ASSERT(d->defaults[5].groupType == eMyMoney::Account::Standard::Equity);
+
   setObjectName(QLatin1String("AccountsModel"));
 
   // force creation of empty account structure
@@ -316,6 +331,10 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
         rc = idx.row();
       break;
 
+    case eMyMoney::Model::Roles::AccountFractionRole:
+      rc = account.fraction();
+      break;
+
     case eMyMoney::Model::Roles::AccountTotalValueRole:
       qDebug() << "implement AccountTotalValueRole";
       break;
@@ -383,6 +402,36 @@ void AccountsModel::clearModelItems()
   }
 }
 
+QModelIndex AccountsModel::favoriteIndex() const
+{
+  return index(0, 0);
+}
+
+QModelIndex AccountsModel::assetIndex() const
+{
+  return index(1, 0);
+}
+
+QModelIndex AccountsModel::liabilityIndex() const
+{
+  return index(2, 0);
+}
+
+QModelIndex AccountsModel::incomeIndex() const
+{
+  return index(3, 0);
+}
+
+QModelIndex AccountsModel::expenseIndex() const
+{
+  return index(4, 0);
+}
+
+QModelIndex AccountsModel::equityIndex() const
+{
+  return index(5, 0);
+}
+
 void AccountsModel::load(const QMap<QString, MyMoneyAccount>& list)
 {
   beginResetModel();
@@ -419,7 +468,7 @@ QList<MyMoneyAccount> AccountsModel::itemList() const
 {
   QList<MyMoneyAccount> list;
   // never search in the first row which is favorites
-  QModelIndexList indexes = match(index(1, 0), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive);
+  QModelIndexList indexes = match(assetIndex(), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive);
   for (int row = 0; row < indexes.count(); ++row) {
     const MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(indexes.value(row).internalPointer())->constDataRef();
     if (!account.id().startsWith("AStd"))
@@ -431,7 +480,7 @@ QList<MyMoneyAccount> AccountsModel::itemList() const
 QModelIndex AccountsModel::indexById(const QString& id) const
 {
   // never search in the first row which is favorites
-  const QModelIndexList indexes = match(index(1, 0), eMyMoney::Model::Roles::IdRole, id, 1, Qt::MatchFixedString | Qt::MatchRecursive);
+  const QModelIndexList indexes = match(assetIndex(), eMyMoney::Model::Roles::IdRole, id, 1, Qt::MatchFixedString | Qt::MatchRecursive);
   if (indexes.isEmpty())
     return QModelIndex();
   return indexes.first();
@@ -486,7 +535,7 @@ void AccountsModel::removeFavorite(const QString& id)
 int AccountsModel::processItems(Worker *worker)
 {
   // make sure to work only on real entries and not on favorites
-  return MyMoneyModel<MyMoneyAccount>::processItems(worker, match(index(1, 0), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive));
+  return MyMoneyModel<MyMoneyAccount>::processItems(worker, match(assetIndex(), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive));
 }
 
 QString AccountsModel::indexToHierarchicalName(const QModelIndex& _idx, bool includeStandardAccounts) const

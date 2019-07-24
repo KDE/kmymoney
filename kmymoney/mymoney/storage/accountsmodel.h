@@ -98,6 +98,13 @@ public:
    */
   QString accountNameToId(const QString& name, eMyMoney::Account::Type type) const;
 
+  QModelIndex favoriteIndex() const;
+  QModelIndex assetIndex() const;
+  QModelIndex liabilityIndex() const;
+  QModelIndex incomeIndex() const;
+  QModelIndex expenseIndex() const;
+  QModelIndex equityIndex() const;
+
 protected:
   void clearModelItems() override;
   void addFavorite(const QString& id);
