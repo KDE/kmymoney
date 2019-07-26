@@ -41,14 +41,6 @@ public:
   explicit LedgerProxyModel(QObject* parent = nullptr);
   virtual ~LedgerProxyModel();
 
-  /**
-   * Set if the attached views shall show an empty transaction at
-   * the end of the ledger which clicked starts editing a new transaction.
-   *
-   * @note This must be called before setAccount().
-   */
-  void setShowNewTransaction(bool show);
-
   void setAccountType(eMyMoney::Account::Type type);
 
   void setFilterFixedString(const QString& filter);

@@ -25,8 +25,10 @@
 
 #include <QObject>
 #include <QTreeView>
+#include <QTableView>
 #include <QString>
 #include <QPoint>
+#include <QVector>
 
 class ColumnSelectorPrivate;
 
@@ -53,8 +55,15 @@ class KMM_WIDGETS_EXPORT ColumnSelector : public QObject
   Q_DISABLE_COPY(ColumnSelector)
 
 public:
-  explicit ColumnSelector(QTreeView* parent, const QString& configGroupName);
+  explicit ColumnSelector(QTreeView* view, const QString& configGroupName = QString());
+  explicit ColumnSelector(QTableView* view, const QString& configGroupName = QString());
+
   ~ColumnSelector();
+
+  void setAlwaysHidden(QVector<int> columns);
+  void setAlwaysVisible(QVector<int> columns);
+  void setSelectable(QVector<int> columns);
+  void setModel(QAbstractItemModel* model);
 
 protected Q_SLOT:
   void slotColumnsMenu(const QPoint);

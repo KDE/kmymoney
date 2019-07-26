@@ -17,6 +17,7 @@
  */
 
 #include "ledgerproxymodel.h"
+#include "journalmodel.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -30,9 +31,9 @@
 // Project Includes
 
 #include "mymoneyenums.h"
-#include "modelenums.h"
+// #include "modelenums.h"
 
-using namespace eLedgerModel;
+// using namespace eLedgerModel;
 using namespace eMyMoney;
 
 LedgerProxyModel::LedgerProxyModel(QObject* parent)
@@ -41,9 +42,9 @@ LedgerProxyModel::LedgerProxyModel(QObject* parent)
   , m_accountType(Account::Type::Asset)
   , m_filterRole(Qt::DisplayRole)
 {
-  setFilterRole((int)Role::AccountId);
+  setFilterRole(eMyMoney::Model::Roles::SplitAccountIdRole);
   setFilterKeyColumn(0);
-  setSortRole((int)Role::PostDate);
+  setSortRole(eMyMoney::Model::Roles::TransactionPostDateRole);
 }
 
 LedgerProxyModel::~LedgerProxyModel()
@@ -59,7 +60,7 @@ QVariant LedgerProxyModel::headerData(int section, Qt::Orientation orientation, 
 {
   if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
     switch(section) {
-      case (int)Column::Payment:
+      case JournalModel::Column::Payment:
         switch(m_accountType) {
           case Account::Type::CreditCard:
             return i18nc("Payment made with credit card", "Charge");
@@ -81,7 +82,7 @@ QVariant LedgerProxyModel::headerData(int section, Qt::Orientation orientation, 
         }
         break;
 
-      case (int)Column::Deposit:
+      case JournalModel::Column::Deposit:
         switch(m_accountType) {
           case Account::Type::CreditCard:
             return i18nc("Payment towards credit card", "Payment");
@@ -110,13 +111,16 @@ QVariant LedgerProxyModel::headerData(int section, Qt::Orientation orientation, 
 bool LedgerProxyModel::lessThan(const QModelIndex& left, const QModelIndex& right) const
 {
   // make sure that the dummy transaction is shown last in any case
-  if(left.data((int)Role::TransactionSplitId).toString().isEmpty()) {
+  if(left.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
     return false;
 
-  } else if(right.data((int)Role::TransactionSplitId).toString().isEmpty()) {
+  } else if(right.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
     return true;
   }
 
+  // sort the schedules always after the real transactions
+  /// @todo port to new model code, make sure to support display within correct date
+#if 0
   const QString leftString(left.data((int)Role::ScheduleId).toString());
   const QString rightString(right.data((int)Role::ScheduleId).toString());
 
@@ -129,6 +133,7 @@ bool LedgerProxyModel::lessThan(const QModelIndex& left, const QModelIndex& righ
     // right is schedule, left is not
     return true;
   }
+#endif
 
   // otherwise use normal sorting
   return QSortFilterProxyModel::lessThan(left, right);
@@ -138,8 +143,9 @@ bool LedgerProxyModel::filterAcceptsRow(int source_row, const QModelIndex& sourc
 {
   QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
   bool rc = idx.data(m_filterRole).toString().compare(m_filterId) == 0;
-  if(!rc && m_showNewTransaction) {
-    rc = idx.data((int)Role::TransactionSplitId).toString().isEmpty();
+  // in case a journal entry has no id, it is the new transaction placeholder
+  if(!rc) {
+    rc = idx.data(eMyMoney::Model::IdRole).toString().isEmpty();
   }
   return rc;
 }
@@ -163,9 +169,4 @@ bool LedgerProxyModel::setData(const QModelIndex& index, const QVariant& value, 
 {
   QModelIndex sourceIndex = mapToSource(index);
   return sourceModel()->setData(sourceIndex, value, role);
-}
-
-void LedgerProxyModel::setShowNewTransaction(bool show)
-{
-  m_showNewTransaction = show;
 }

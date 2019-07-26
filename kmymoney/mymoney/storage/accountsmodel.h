@@ -78,7 +78,7 @@ public:
   /**
    * Returns the full account path for the given index @a idx.
    */
-  QString indexToHierarchicalName(const QModelIndex& idx, bool includeStandardAccounts) const;
+  QString indexToHierarchicalName(const QModelIndex& idx, bool includeStandardAccounts = false) const;
 
   /**
    * Convert the given @a accountId into the full hierarchical name
@@ -87,8 +87,10 @@ public:
    * Returns the full account path or empty if @a accountId is not known
    *
    * @sa indexToHierarchicalName()
+   *
+   * @note Previous name: accountToCategory()
    */
-  QString accountIdToHierarchicalName(const QString& accountId, bool includeStandardAccounts) const;
+  QString accountIdToHierarchicalName(const QString& accountId, bool includeStandardAccounts = false) const;
 
   /**
    * Convert a given account @a name and @a type into the corresponding id. Valid types are

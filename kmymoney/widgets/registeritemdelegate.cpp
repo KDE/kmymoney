@@ -30,6 +30,7 @@
 #include "register.h"
 #include "registeritem.h"
 
+/// @todo remove this class with old register code
 using namespace KMyMoneyRegister;
 
 RegisterItemDelegate::RegisterItemDelegate(Register *parent) :

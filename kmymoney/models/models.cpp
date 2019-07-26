@@ -276,11 +276,12 @@ void Models::fileSaved()
 
 void Models::fileOpened()
 {
+  /// @todo cleanup
   // accountsModel()->AccountsModel::load();
   // institutionsModel()->InstitutionsModel::load();
   // securitiesModel()->load();
   #ifdef ENABLE_UNFINISHEDFEATURES
-  ledgerModel()->load();
+  // ledgerModel()->load();
   #endif
   equitiesModel()->load();
 

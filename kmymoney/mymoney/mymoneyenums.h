@@ -471,6 +471,21 @@ namespace eMyMoney {
 
       // MyMoneyBudget
       BudgetNameRole,
+
+      // MyMoneyTransaction
+      TransactionErroneousRole,
+      TransactionPostDateRole,
+      TransactionCounterAccountRole,
+
+      // MyMoneySplit
+      SplitSharesSuffixRole,
+      SplitAccountIdRole,
+      SplitPayeeIdRole,
+      SplitMemoRole,
+      SplitSingleLineMemoRole,
+      SplitSharesRole,
+      SplitValueRole,
+      SplitPriceRole,
     };
   }
 }

@@ -25,6 +25,7 @@
 #include <QPainter>
 #include <QDebug>
 #include <QDate>
+#include <QSortFilterProxyModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -35,8 +36,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyfile.h"
 #include "ledgerview.h"
-#include "ledgermodel.h"
+#include "journalmodel.h"
+#include "payeesmodel.h"
 #include "newtransactioneditor.h"
 
 static unsigned char attentionSign[] = {
@@ -129,7 +132,7 @@ QColor LedgerDelegate::m_separatorColor = QColor(0xff, 0xf2, 0x9b);
 class LedgerSeparatorDate : public LedgerSeparator
 {
 public:
-  LedgerSeparatorDate(eLedgerModel::Role role);
+  LedgerSeparatorDate(eMyMoney::Model::Roles role);
   virtual ~LedgerSeparatorDate() {}
 
   virtual bool rowHasSeparator(const QModelIndex& index) const override;
@@ -144,7 +147,7 @@ protected:
 class LedgerSeparatorOnlineBalance : public LedgerSeparatorDate
 {
 public:
-  LedgerSeparatorOnlineBalance(eLedgerModel::Role role);
+  LedgerSeparatorOnlineBalance(eMyMoney::Model::Roles role);
   virtual ~LedgerSeparatorOnlineBalance() {}
 
   virtual bool rowHasSeparator(const QModelIndex& index) const override;
@@ -181,7 +184,7 @@ QModelIndex LedgerSeparator::nextIndex(const QModelIndex& index) const
   return QModelIndex();
 }
 
-LedgerSeparatorDate::LedgerSeparatorDate(eLedgerModel::Role role)
+LedgerSeparatorDate::LedgerSeparatorDate(eMyMoney::Model::Roles role)
   : LedgerSeparator(role)
 {
   const QDate today = QDate::currentDate();
@@ -244,6 +247,8 @@ bool LedgerSeparatorDate::rowHasSeparator(const QModelIndex& index) const
   if(!m_entries.isEmpty()) {
     QModelIndex nextIdx = nextIndex(index);
     if(nextIdx.isValid() ) {
+      /// @todo port to new model code
+#if 0
       const QString id = nextIdx.model()->data(nextIdx, (int)eLedgerModel::Role::TransactionSplitId).toString();
       // For a new transaction the id is completely empty, for a split view the transaction
       // part is filled but the split id is empty and the string ends with a dash
@@ -251,6 +256,7 @@ bool LedgerSeparatorDate::rowHasSeparator(const QModelIndex& index) const
       if(!id.isEmpty() && !id.endsWith('-')) {
         rc = !getEntry(index, nextIdx).isEmpty();
       }
+#endif
     }
   }
   return rc;
@@ -273,7 +279,7 @@ void LedgerSeparatorDate::adjustBackgroundScheme(QPalette& palette, const QModel
 
 
 
-LedgerSeparatorOnlineBalance::LedgerSeparatorOnlineBalance(eLedgerModel::Role role)
+LedgerSeparatorOnlineBalance::LedgerSeparatorOnlineBalance(eMyMoney::Model::Roles role)
   : LedgerSeparatorDate(role)
 {
   // we don't need the standard values
@@ -292,6 +298,8 @@ void LedgerSeparatorOnlineBalance::setSeparatorData(const QDate& date, const MyM
 bool LedgerSeparatorOnlineBalance::rowHasSeparator(const QModelIndex& index) const
 {
   bool rc = false;
+  /// @todo port to new model code
+#if 0
   if(!m_entries.isEmpty()) {
     QModelIndex nextIdx = nextIndex(index);
     const QAbstractItemModel* model = index.model();
@@ -318,6 +326,7 @@ bool LedgerSeparatorOnlineBalance::rowHasSeparator(const QModelIndex& index) con
       }
     }
   }
+#endif
   return rc;
 }
 
@@ -331,16 +340,19 @@ QString LedgerSeparatorOnlineBalance::separatorText(const QModelIndex& index) co
 
 void LedgerSeparatorOnlineBalance::adjustBackgroundScheme(QPalette& palette, const QModelIndex& index) const
 {
+  /// @todo port to new model code
+  KColorScheme::BackgroundRole role = KColorScheme::PositiveBackground;
+  #if 0
   const QAbstractItemModel* model = index.model();
   QModelIndex amountIndex = model->index(index.row(), (int)eLedgerModel::Column::Balance);
   QString amount = model->data(amountIndex).toString();
-  KColorScheme::BackgroundRole role = KColorScheme::PositiveBackground;
 
   if (!m_entries.isEmpty()) {
     if(amount != m_balanceAmount) {
       role = KColorScheme::NegativeBackground;
     }
   }
+#endif
   KColorScheme::adjustBackground(palette, role, QPalette::Base, KColorScheme::Button, KSharedConfigPtr());
 }
 
@@ -393,7 +405,7 @@ LedgerDelegate::~LedgerDelegate()
   delete d;
 }
 
-void LedgerDelegate::setSortRole(eLedgerModel::Role role)
+void LedgerDelegate::setSortRole(eMyMoney::Model::Roles role)
 {
   delete d->m_separator;
   delete d->m_onlineBalanceSeparator;
@@ -401,7 +413,7 @@ void LedgerDelegate::setSortRole(eLedgerModel::Role role)
   d->m_onlineBalanceSeparator = 0;
 
   switch(role) {
-    case eLedgerModel::Role::PostDate:
+    case eMyMoney::Model::Roles::TransactionPostDateRole:
       d->m_separator = new LedgerSeparatorDate(role);
       d->m_onlineBalanceSeparator = new LedgerSeparatorOnlineBalance(role);
       break;
@@ -504,7 +516,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
 
   // Do not paint text if the edit widget is shown
   if (!editWidgetIsVisible) {
-    if(view && (index.column() == (int)eLedgerModel::Column::Detail)) {
+    if(view && (index.column() == JournalModel::Column::Detail)) {
       if(view->currentIndex().row() == index.row()) {
         opt.state |= QStyle::State_HasFocus;
       }
@@ -513,34 +525,37 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     const bool selected = opt.state & QStyle::State_Selected;
 
     QStringList lines;
-    if(index.column() == (int)eLedgerModel::Column::Detail) {
-      lines << index.model()->data(index, (int)eLedgerModel::Role::PayeeName).toString();
+    if(index.column() == JournalModel::Column::Detail) {
+      const QString payeeId = index.data(eMyMoney::Model::Roles::SplitPayeeIdRole).toString();
+      lines << MyMoneyFile::instance()->payeesModel()->itemById(payeeId).name();
       if(selected) {
-        lines << index.model()->data(index, (int)eLedgerModel::Role::CounterAccount).toString();
-        lines << index.model()->data(index, (int)eLedgerModel::Role::SingleLineMemo).toString();
+        lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
+        lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
 
       } else {
         if(lines.at(0).isEmpty()) {
           lines.clear();
-          lines << index.model()->data(index, (int)eLedgerModel::Role::SingleLineMemo).toString();
+          lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
         }
         if(lines.at(0).isEmpty()) {
-          lines << index.model()->data(index, (int)eLedgerModel::Role::CounterAccount).toString();
+          lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
         }
       }
       lines.removeAll(QString());
     }
 
-    const bool erroneous = index.model()->data(index, (int)eLedgerModel::Role::Erroneous).toBool();
+    const bool erroneous = index.data(eMyMoney::Model::Roles::TransactionErroneousRole).toBool();
 
     // draw the text items
     if(!opt.text.isEmpty() || !lines.isEmpty()) {
 
+      /// @todo port to new model code
+#if 0
       // check if it is a scheduled transaction and display it as inactive
       if(!index.model()->data(index, (int)eLedgerModel::Role::ScheduleId).toString().isEmpty()) {
         opt.state &= ~QStyle::State_Enabled;
       }
-
+#endif
       cg = (opt.state & QStyle::State_Enabled) ? QPalette::Normal : QPalette::Disabled;
 
       if (cg == QPalette::Normal && !(opt.state & QStyle::State_Active)) {
@@ -563,7 +578,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
       }
 
       // collect data for the various columns
-      if(index.column() == (int)eLedgerModel::Column::Detail) {
+      if(index.column() == JournalModel::Column::Detail) {
         for(int i = 0; i < lines.count(); ++i) {
           painter->drawText(textArea.adjusted(0, lineHeight * i, 0, 0), opt.displayAlignment, lines[i]);
         }
@@ -588,7 +603,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     }
 
     // draw the attention mark
-    if((index.column() == (int)eLedgerModel::Column::Detail)
+    if((index.column() == JournalModel::Column::Detail)
     && erroneous) {
       QPixmap attention;
       attention.loadFromData(attentionSign, sizeof(attentionSign), 0, 0);
@@ -611,7 +626,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     // so we need to paint the separator if we get here in this casee
     bool needPaint = editWidgetIsVisible;
 
-    if(!needPaint && (index.column() == (int)eLedgerModel::Column::Detail)) {
+    if(!needPaint && (index.column() == JournalModel::Column::Detail)) {
       needPaint = true;
       // adjust the rect to cover all columns
       if(view && view->viewport()) {
@@ -640,7 +655,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     // so we need to paint the separator if we get here in this casee
     bool needPaint = editWidgetIsVisible;
 
-    if(!needPaint && (index.column() == (int)eLedgerModel::Column::Detail)) {
+    if(!needPaint && (index.column() == JournalModel::Column::Detail)) {
       needPaint = true;
       // adjust the rect to cover all columns
       if(view && view->viewport()) {
@@ -663,9 +678,12 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
   if(d->m_view) {
     QModelIndex currentIndex = d->m_view->currentIndex();
     if(currentIndex.isValid()) {
-      QString currentId = currentIndex.model()->data(currentIndex, (int)eLedgerModel::Role::TransactionSplitId).toString();
-      QString myId = index.model()->data(index, (int)eLedgerModel::Role::TransactionSplitId).toString();
+#if 0
+      QString currentId = currentIndex.data(eMyMoney::Model::Roles::IdRole).toString();
+      QString myId = index.data(eMyMoney::Model::Roles::IdRole).toString();
       fullDisplay = (currentId == myId);
+      #endif
+      fullDisplay = (currentIndex.row() == index.row());
     }
   }
 
@@ -704,11 +722,11 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
   size = QSize(100, lineHeight + 2*margin);
 
   if(fullDisplay) {
-    auto payee = index.data((int)eLedgerModel::Role::PayeeName).toString();
-    auto counterAccount = index.data((int)eLedgerModel::Role::CounterAccount).toString();
-    auto memo = index.data((int)eLedgerModel::Role::SingleLineMemo).toString();
+    auto payeeId = index.data(eMyMoney::Model::Roles::SplitPayeeIdRole).toString();
+    auto counterAccount = index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
+    auto memo = index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
 
-    rows = (payee.length() > 0 ? 1 : 0) + (counterAccount.length() > 0 ? 1 : 0) + (memo.length() > 0 ? 1 : 0);
+    rows = (payeeId.isEmpty() ? 0 : 1) + (counterAccount.isEmpty() ? 0 : 1) + (memo.isEmpty() ? 0 : 1);
     // make sure we show at least one row
     if(!rows) {
       rows = 1;
@@ -782,7 +800,9 @@ void LedgerDelegate::setEditorData(QWidget* editWidget, const QModelIndex& index
 {
   NewTransactionEditor* editor = qobject_cast<NewTransactionEditor*>(editWidget);
   if(editor) {
-    editor->loadTransaction(index.model()->data(index, (int)eLedgerModel::Role::TransactionSplitId).toString());
+    /// @todo port to new model code
+    // The role is certainly not correct, maybe we can use the row here
+    // editor->loadTransaction(index.data(eMyMoney::Model::Roles::IdRole).toString());
   }
 }
 
@@ -793,6 +813,7 @@ void LedgerDelegate::setModelData(QWidget* editWidget, QAbstractItemModel* model
 
   NewTransactionEditor* editor = qobject_cast<NewTransactionEditor*>(editWidget);
   if(editor) {
-    editor->saveTransaction();
+    /// @todo port to new model code
+    // editor->saveTransaction();
   }
 }

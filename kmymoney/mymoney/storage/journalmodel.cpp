@@ -33,11 +33,89 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "accountsmodel.h"
+#include "costcentermodel.h"
+#include "mymoneytransaction.h"
+#include "mymoneysplit.h"
+#include "mymoneymoney.h"
 #include "mymoneytransactionfilter.h"
 
 struct JournalModel::Private
 {
-  Private() {}
+  Private()
+    : newTransactionModel(nullptr)
+    , m_headerData(QHash<Column, QString> ({
+      { Number, i18nc("Cheque Number", "No.") },
+      { Date, i18n("Date") },
+      { Security, i18n("Security") },
+      { CostCenter, i18n("CC") },
+      { Detail, i18n("Detail") },
+      { Reconciliation, i18n("C") },
+      { Payment, i18nc("Payment made from account", "Payment") },
+      { Deposit, i18nc("Deposit into account", "Deposit") },
+      { Quantity, i18n("Quantity") },
+      { Price, i18n("Price") },
+      { Amount, i18n("Amount") },
+      { Value, i18n("Value") },
+      { Balance, i18n("Balance") },
+    }))
+  {
+  }
+
+  QString reconciliationStateShort(eMyMoney::Split::State reconcileState) const
+  {
+    switch(reconcileState) {
+      case eMyMoney::Split::State::NotReconciled:
+      default:
+        break;
+      case eMyMoney::Split::State::Cleared:
+        return i18nc("Reconciliation flag C", "C");
+      case eMyMoney::Split::State::Reconciled:
+        return i18nc("Reconciliation flag R", "R");
+      case eMyMoney::Split::State::Frozen:
+        return i18nc("Reconciliation flag F", "F");
+    }
+    return QString();
+  }
+
+  QString reconciliationStateLong(eMyMoney::Split::State reconcileState) const
+  {
+    switch(reconcileState) {
+      case eMyMoney::Split::State::NotReconciled:
+      default:
+        return i18nc("Reconciliation flag empty", "Not reconciled");
+      case eMyMoney::Split::State::Cleared:
+        return i18nc("Reconciliation flag C", "Cleared");
+      case eMyMoney::Split::State::Reconciled:
+        return i18nc("Reconciliation flag R", "Reconciled");
+      case eMyMoney::Split::State::Frozen:
+        return i18nc("Reconciliation flag F", "Frozen");
+    }
+    return QString();
+  }
+
+  QString counterAccount(const JournalEntry& journalEntry, const MyMoneyTransaction& transaction)
+  {
+    // A transaction can have more than 2 splits ...
+    if(transaction.splitCount() > 2) {
+      return i18n("Split transaction");
+
+      // ... exactly two splits ...
+    } else if(transaction.splitCount() == 2) {
+      const MyMoneySplit split = journalEntry.split();
+      foreach (const auto sp, transaction.splits()) {
+        if(split.id() != sp.id()) {
+          return MyMoneyFile::instance()->accountsModel()->accountIdToHierarchicalName(sp.accountId());
+          break;
+        }
+      }
+
+      // ... or a single split
+    } else if(!journalEntry.split().shares().isZero()) {
+      return i18n("*** UNASSIGNED ***");
+    }
+    return QString();
+  }
 
   void removeIdKeyMapping(const QString& id)
   {
@@ -54,8 +132,45 @@ struct JournalModel::Private
     return m_transactionIdKeyMap.value(id);
   }
 
-  QMap<QString, QString>    m_transactionIdKeyMap;
+  JournalModelNewTransaction* newTransactionModel;
+  QMap<QString, QString>      m_transactionIdKeyMap;
+  QHash<Column, QString>      m_headerData;
 };
+
+JournalModelNewTransaction::JournalModelNewTransaction(QObject* parent)
+  : JournalModel(parent)
+{
+  setObjectName(QLatin1String("JournalModelNewTransaction"));
+  QMap<QString, MyMoneyTransaction> list;
+  MyMoneyTransaction t;
+  MyMoneySplit sp;
+  sp.setAccountId(QStringLiteral("FakeID"));
+  t.addSplit(sp);
+  list[QString()] = t;
+  JournalModel::load(list);
+}
+
+JournalModelNewTransaction::~JournalModelNewTransaction()
+{
+}
+
+QVariant JournalModelNewTransaction::data(const QModelIndex& idx, int role) const
+{
+  if (!idx.isValid())
+    return QVariant();
+  if (idx.row() < 0 || idx.row() >= rowCount(idx.parent()))
+    return QVariant();
+
+  // never show any data for the empty transaction
+  if ((role == Qt::DisplayRole) || (role == Qt::EditRole))
+    return QVariant();
+
+  return JournalModel::data(idx, role);
+}
+
+
+
+
 
 JournalModel::JournalModel(QObject* parent)
   : MyMoneyModel<JournalEntry>(parent, QStringLiteral("T"), JournalModel::ID_SIZE)
@@ -68,20 +183,24 @@ JournalModel::~JournalModel()
 {
 }
 
+JournalModelNewTransaction * JournalModel::newTransaction()
+{
+  if (d->newTransactionModel == nullptr) {
+    d->newTransactionModel = new JournalModelNewTransaction(this);
+  }
+  return d->newTransactionModel;
+}
+
 int JournalModel::columnCount(const QModelIndex& parent) const
 {
   Q_UNUSED(parent);
-  return 1;
+  return d->m_headerData.count();
 }
 
 QVariant JournalModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
   if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
-    switch(section) {
-      case 0:
-        return i18nc("Postdate", "Date");
-        break;
-    }
+    return d->m_headerData.value(static_cast<Column>(section));
   }
   return QAbstractItemModel::headerData(section, orientation, role);
 }
@@ -93,26 +212,160 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
   if (idx.row() < 0 || idx.row() >= rowCount(idx.parent()))
     return QVariant();
 
-  QVariant rc;
   const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(idx.internalPointer())->constDataRef();
+  const MyMoneyTransaction transaction = journalEntry.transaction();
+
   switch(role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
       switch(idx.column()) {
-        case 0:
+        case Number:
+          return journalEntry.split().number();
+
+        case Date:
+          return QLocale().toString(transaction.postDate(), QLocale::ShortFormat);
+
+        case Security:
+          break;
+
+        case CostCenter:
+#if 0
+          // in case the own split does not have a costcenter, but the counter split does
+          // we use it nevertheless
+          if(m_costCenterId.isEmpty())
+            m_costCenterId = split.costCenterId();
+#endif
+          break;
+
+        case Detail:
+          return d->counterAccount(journalEntry, transaction);
+
+        case Reconciliation:
+          return d->reconciliationStateShort(journalEntry.split().reconcileFlag());
+          break;
+
+        case Payment:
+          if (journalEntry.split().value().isNegative()) {
+            const auto split = journalEntry.split();
+            auto acc = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
+            auto value = split.value(transaction.commodity(), acc.currencyId());
+            return (-value).formatMoney(acc.fraction());
+          }
+          break;
+
+        case Deposit:
+          if (!journalEntry.split().value().isNegative()) {
+            const auto split = journalEntry.split();
+            auto acc = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
+            auto value = split.value(transaction.commodity(), acc.currencyId());
+            return value.formatMoney(acc.fraction());
+          }
+        case Quantity:
+        case Price:
+        case Amount:
+        case Value:
+        case Balance:
           break;
       }
       break;
 
     case Qt::TextAlignmentRole:
-      rc = QVariant(Qt::AlignLeft | Qt::AlignVCenter);
-      break;
+      switch( idx.column()) {
+        case Quantity:
+        case Price:
+        case Amount:
+        case Payment:
+        case Deposit:
+        case Balance:
+          return QVariant(Qt::AlignRight | Qt::AlignTop);
+
+        case Reconciliation:
+          return QVariant(Qt::AlignHCenter | Qt::AlignTop);
+
+        default:
+          break;
+      }
+      return QVariant(Qt::AlignLeft | Qt::AlignTop);
 
     case eMyMoney::Model::Roles::IdRole:
-      rc = journalEntry.id();
+      return journalEntry.id();
+
+    case eMyMoney::Model::Roles::SplitAccountIdRole:
+      return journalEntry.split().accountId();
+
+    case eMyMoney::Model::Roles::TransactionPostDateRole:
+      return transaction.postDate();
+
+    case eMyMoney::Model::Roles::TransactionErroneousRole:
+      return !transaction.splitSum().isZero();
+
+    case eMyMoney::Model::Roles::SplitSharesSuffixRole:
+      // figure out if it is a debit or credit split. s.a. https://en.wikipedia.org/wiki/Debits_and_credits#Aspects_of_transactions
+      if(journalEntry.split().shares().isNegative()) {
+        return i18nc("Credit suffix", "Cr.");
+      }
+      return i18nc("Debit suffix", "Dr.");
+
+    case eMyMoney::Model::Roles::SplitSharesRole:
+      {
+        QVariant rc;
+        rc.setValue(journalEntry.split().shares());
+        return rc;
+      }
+
+    case eMyMoney::Model::Roles::SplitValueRole:
+    {
+      QVariant rc;
+      rc.setValue(journalEntry.split().value());
+      return rc;
+    }
+
+    case eMyMoney::Model::SplitPriceRole:
+    {
+      QVariant rc;
+      rc.setValue(journalEntry.split().price());
+      return rc;
+    }
+
+    case eMyMoney::Model::SplitPayeeIdRole:
+      if (journalEntry.split().payeeId().isEmpty()) {
+        // not sure if we want to replace it with the payeeId
+        // of another split. Anyway, here would be the spot to do it
+#if 0
+        const MyMoneySplit split = journalEntry.split();
+        foreach (const auto sp, transaction.splits()) {
+          if(split.id() != sp.id()) {
+            if (!split.payeeId().isEmpty())
+
+          }
+        }
+#endif
+        return QVariant();
+      }
+      return journalEntry.split().payeeId();
+
+    case eMyMoney::Model::SplitSingleLineMemoRole:
+    case eMyMoney::Model::SplitMemoRole:
+      {
+        QString rc(journalEntry.split().memo());
+        if(role == eMyMoney::Model::SplitSingleLineMemoRole) {
+          // remove empty lines
+          rc.replace("\n\n", "\n");
+          // replace '\n' with ", "
+          rc.replace('\n', ", ");
+        }
+        return rc;
+      }
+
+    case eMyMoney::Model::TransactionCounterAccountRole:
+      return d->counterAccount(journalEntry, transaction);
+
+    default:
+      if (role >= Qt::UserRole)
+        qDebug() << "JournalModel::data(), role" << role << "offset" << role-Qt::UserRole << "not implemented";
       break;
   }
-  return rc;
+  return QVariant();
 }
 
 bool JournalModel::setData(const QModelIndex& idx, const QVariant& value, int role)

@@ -31,7 +31,7 @@ class QColor;
 // Project Includes
 
 #include "ledgermodel.h"
-#include "modelenums.h"
+#include "mymoneyenums.h"
 
 class LedgerView;
 class MyMoneyMoney;
@@ -39,7 +39,7 @@ class MyMoneyMoney;
 class LedgerSeparator
 {
 public:
-  explicit LedgerSeparator(eLedgerModel::Role role) : m_role(role) {}
+  explicit LedgerSeparator(eMyMoney::Model::Roles role) : m_role(role) {}
   virtual ~LedgerSeparator() {}
 
   virtual bool rowHasSeparator(const QModelIndex& index) const = 0;
@@ -54,7 +54,7 @@ public:
 protected:
   inline QModelIndex nextIndex(const QModelIndex& index) const;
 
-  eLedgerModel::Role         m_role;
+  eMyMoney::Model::Roles        m_role;
 
   static QDate firstFiscalDate;
   static bool  showFiscalDate;
@@ -76,7 +76,7 @@ public:
   void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const final override;
   void setEditorData(QWidget* editWidget, const QModelIndex& index) const final override;
 
-  virtual void setSortRole(eLedgerModel::Role role);
+  virtual void setSortRole(eMyMoney::Model::Roles role);
 
   void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
 

@@ -63,7 +63,7 @@ private:
 
 };
 
-
+class JournalModelNewTransaction;
 
 /**
   */
@@ -72,19 +72,31 @@ class KMM_MYMONEY_EXPORT JournalModel : public MyMoneyModel<JournalEntry>
   Q_OBJECT
 
 public:
-  class Column {
-    enum {
-      Name
-    } Columns;
+  enum Column {
+    Number = 0,
+    Date,
+    Security,
+    CostCenter,
+    Detail,
+    Reconciliation,
+    Payment,
+    Deposit,
+    Quantity,
+    Price,
+    Amount,
+    Value,
+    Balance,
+    // insert new columns above this line
+    MaxColumns
   };
 
-  explicit JournalModel(QObject* parent = 0);
+  explicit JournalModel(QObject* parent = nullptr);
   virtual ~JournalModel();
 
   static const int ID_SIZE = 18;
 
   int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
-  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
+  QVariant data(const QModelIndex& idx, int role = Qt::DisplayRole) const override;
   QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;
 
   /**
@@ -100,9 +112,11 @@ public:
   void transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const;
   void transactionList(QList< QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const;
 
-  bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
+  bool setData(const QModelIndex& idx, const QVariant& value, int role = Qt::EditRole) override;
 
   void load(const QMap<QString, MyMoneyTransaction>& list);
+
+  JournalModelNewTransaction* newTransaction();
 
 protected:
   void addTransaction(const QString& id, MyMoneyTransaction& t);
@@ -118,5 +132,30 @@ private:
   QScopedPointer<Private> d;
 };
 
+class KMM_MYMONEY_EXPORT JournalModelNewTransaction : public JournalModel
+{
+  Q_OBJECT
+
+public:
+  explicit JournalModelNewTransaction(QObject* parent = nullptr);
+  virtual ~JournalModelNewTransaction();
+
+  QVariant data(const QModelIndex& idx, int role = Qt::DisplayRole) const final override;
+
+protected:
+  void addTransaction(MyMoneyTransaction& t) { Q_UNUSED(t); }
+  void removeTransaction(const MyMoneyTransaction& t) { Q_UNUSED(t); }
+  void modifyTransaction(const MyMoneyTransaction& newTransaction) { Q_UNUSED(newTransaction); }
+
+  bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override
+  {
+    Q_UNUSED(index);
+    Q_UNUSED(value);
+    Q_UNUSED(role);
+    return false;
+  }
+
+  void load(const QMap<QString, MyMoneyTransaction>& list);
+};
 #endif // JOURNALMODEL_H
 
