@@ -509,6 +509,20 @@ void LedgerView::setShowEntryForNewTransaction(bool show)
   }
 }
 
+void LedgerView::slotSettingsChanged()
+{
+#if 0
+  // KMyMoneySettings::showGrid()
+  // KMyMoneySettings::sortNormalView()
+  // KMyMoneySettings::ledgerLens()
+  // KMyMoneySettings::showRegisterDetailed()
+  d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
+  d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+  d->m_proxyModel->setHideFavoriteAccounts(true);
+#endif
+}
+
+
 SplitView::SplitView(QWidget* parent)
   : LedgerView(parent)
 {

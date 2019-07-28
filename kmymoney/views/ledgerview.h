@@ -65,6 +65,8 @@ public Q_SLOTS:
    */
   void edit(const QModelIndex& index) { QTableView::edit(index); }
 
+  void slotSettingsChanged();
+
 protected:
   bool edit(const QModelIndex& index, EditTrigger trigger, QEvent* event) final override;
   void mousePressEvent(QMouseEvent* event) final override;

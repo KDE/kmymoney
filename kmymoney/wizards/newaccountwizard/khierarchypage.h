@@ -51,7 +51,7 @@ namespace NewAccountWizard
     void enterPage() override;
     KMyMoneyWizardPage* nextPage() const override;
     QWidget* initialFocusWidget() const override;
-    const MyMoneyAccount& parentAccount();
+    MyMoneyAccount parentAccount() const;
 
     bool isComplete() const override;
 
