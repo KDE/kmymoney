@@ -71,6 +71,7 @@ AccountsProxyModel::AccountsProxyModel(QObject *parent) :
   QSortFilterProxyModel(parent),
   d_ptr(new AccountsProxyModelPrivate)
 {
+  setObjectName("AccountsProxyModel");
   setRecursiveFilteringEnabled(true);
   setDynamicSortFilter(true);
   setSortLocaleAware(true);

@@ -202,6 +202,7 @@ void LedgerView::setAccount(const MyMoneyAccount& acc)
     d->showValuesInverted = true;
   }
 
+  d->filterModel->setObjectName("LedgerView filterModel");
   d->filterModel->setFilterRole(eMyMoney::Model::Roles::SplitAccountIdRole);
   d->filterModel->setFilterKeyColumn(0);
   d->filterModel->setFilterFixedString(acc.id());
@@ -216,6 +217,7 @@ void LedgerView::setAccount(const MyMoneyAccount& acc)
     d->delegate->setOnlineBalance(QDate(), MyMoneyMoney());
   }
   setModel(d->filterModel);
+  d->concatModel->setObjectName("LedgerView concatModel");
   d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel());
   d->filterModel->setSourceModel(d->concatModel);
   d->columnSelector->setModel(MyMoneyFile::instance()->journalModel());
