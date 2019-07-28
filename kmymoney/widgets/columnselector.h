@@ -64,6 +64,7 @@ public:
   void setAlwaysVisible(QVector<int> columns);
   void setSelectable(QVector<int> columns);
   void setModel(QAbstractItemModel* model);
+  QVector<int> columns() const;
 
 protected Q_SLOT:
   void slotColumnsMenu(const QPoint);

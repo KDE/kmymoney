@@ -272,3 +272,17 @@ void ColumnSelector::setModel(QAbstractItemModel* model)
   d->model = model;
   d->init(d->configGroupName);
 }
+
+QVector<int> ColumnSelector::columns() const
+{
+  Q_D(const ColumnSelector);
+
+  QVector<int>    columns;
+  const auto maxColumn = d->headerView->count();
+
+  for (int col = 0; col < maxColumn; ++col) {
+    columns.append(col);
+  }
+  return columns;
+}
+
