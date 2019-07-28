@@ -19,7 +19,16 @@
 #ifndef MYMONEYMODELBASE_H
 #define MYMONEYMODELBASE_H
 
+// ----------------------------------------------------------------------------
+// Qt Includes
+
 #include <QAbstractItemModel>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
+// ----------------------------------------------------------------------------
+// Project Includes
 
 #include "kmm_models_export.h"
 
@@ -30,6 +39,34 @@ class KMM_MODELS_EXPORT MyMoneyModelBase : public QAbstractItemModel
 public:
   explicit MyMoneyModelBase(QObject* parent);
   virtual ~MyMoneyModelBase();
+
+  /**
+   * This method returns a list with the first QModelIndex that mathches the @a name
+   * in the Qt::DisplayRole role in the model.
+   *
+   * @sa
+   */
+  QModelIndexList indexListByName(const QString& name, const QModelIndex parent = QModelIndex()) const;
+
+  /**
+   * This is convenience method returning the value of
+   * mapToBaseSource(idx).model()
+   *
+   * @sa mapToBaseSource
+   */
+  static const QAbstractItemModel* baseModel(const QModelIndex& idx);
+
+  /**
+   * This static method returns the model index in the base model of a
+   * QModelIndex @a idx. The method traverses any possible filter
+   * model until it finds the base model. In case the index already
+   * points to the base model or points to an unknown filter model type
+   * it is returned unaltered.
+   *
+   * @note The following filter models (and any derivatives are supported:
+   * QSortFilterProxyModel, KConcatenateRowsProxyModel
+   */
+  static QModelIndex mapToBaseSource(const QModelIndex& idx);
 
 Q_SIGNALS:
   void modelLoaded() const;

@@ -15,8 +15,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include "mymoneymodelbase.h"
+
+// ----------------------------------------------------------------------------
+// Qt Includes
+
+#include <QSortFilterProxyModel>
+
+// ----------------------------------------------------------------------------
+// KDE Includes
+
+#include <KConcatenateRowsProxyModel>
+
+// ----------------------------------------------------------------------------
+// Project Includes
+
 
 MyMoneyModelBase::MyMoneyModelBase(QObject* parent)
   : QAbstractItemModel(parent)
@@ -27,3 +40,27 @@ MyMoneyModelBase::~MyMoneyModelBase()
 {
 }
 
+QModelIndexList MyMoneyModelBase::indexListByName(const QString& name, const QModelIndex parent) const
+{
+  return match(index(0, 0, parent), Qt::DisplayRole, name, 1, Qt::MatchFixedString | Qt::MatchCaseSensitive);
+}
+
+const QAbstractItemModel* MyMoneyModelBase::baseModel(const QModelIndex& idx)
+{
+  return mapToBaseSource(idx).model();
+}
+
+QModelIndex MyMoneyModelBase::mapToBaseSource(const QModelIndex& _idx)
+{
+  QModelIndex                       idx(_idx);
+  const QSortFilterProxyModel*      proxyModel;
+  const KConcatenateRowsProxyModel* concatModel;
+  do {
+    if (( proxyModel = qobject_cast<const QSortFilterProxyModel *>(idx.model())) != nullptr) {
+      idx = proxyModel->mapToSource(idx);
+    } else if((concatModel = qobject_cast<const KConcatenateRowsProxyModel *>(idx.model())) != nullptr) {
+      idx = concatModel->mapToSource(idx);
+    }
+  } while (proxyModel || concatModel);
+  return idx;
+}

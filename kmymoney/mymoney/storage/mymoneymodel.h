@@ -19,6 +19,9 @@
 #ifndef MYMONEYMODEL_H
 #define MYMONEYMODEL_H
 
+// ----------------------------------------------------------------------------
+// QT Includes
+
 #include <QObject>
 #include <QSharedData>
 #include <QSharedDataPointer>
@@ -30,32 +33,18 @@
 
 #include <QDebug>
 
+// ----------------------------------------------------------------------------
+// KDE Includes
+
+// ----------------------------------------------------------------------------
+// Project Includes
+
 #include "mymoneyenums.h"
 #include "mymoneymodelbase.h"
 
 #include "kmm_models_export.h"
 
 class MyMoneyFile;
-
-#if 0
-template <typename T>
-class TreeItemObject : public QSharedData
-{
-public:
-    TreeItemObject(T data)
-        : QSharedData()
-        , objectData(data)
-    {}
-
-    TreeItemObject(const TreeItemObject& other)
-        : QSharedData(other)
-        , objectData(other.objectData)
-    {
-    }
-
-    T   objectData;
-};
-#endif
 
 template <typename T>
 class TreeItem
@@ -176,13 +165,6 @@ public:
       , m_idMatchExp(QStringLiteral("^%1(\\d+)$").arg(m_idLeadin))
   {
     m_rootItem = new TreeItem<T>(T());
-#if 0
-    if ((parent == nullptr) || !parent->inherits("MyMoneyFile")) {
-      qDebug() << "Warning: parent of any MyMoneyModel derivative must be the MyMoneyFile object";
-    } else {
-      m_file = dynamic_cast<MyMoneyFile*>(parent);
-    }
-#endif
   }
 
   virtual ~MyMoneyModel()
@@ -457,11 +439,6 @@ public:
     }
   }
 
-  QModelIndexList indexListByName(const QString& name, const QModelIndex parent = QModelIndex()) const
-  {
-    return match(index(0, 0, parent), Qt::DisplayRole, name, 1, Qt::MatchFixedString | Qt::MatchCaseSensitive);
-  }
-
   T itemByName(const QString& name, const QModelIndex parent = QModelIndex()) const
   {
     QModelIndexList indexes = indexListByName(name, parent);
@@ -470,6 +447,7 @@ public:
     }
     return T();
   }
+
 
 protected:
   virtual void clearModelItems()
