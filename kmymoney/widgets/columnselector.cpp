@@ -244,8 +244,8 @@ void ColumnSelector::setAlwaysHidden(QVector<int> columns)
   Q_D(ColumnSelector);
 
   d->alwaysHiddenColumns = columns;
-  for (int col = 0; col < columns.count(); ++col) {
-    d->setColumnHidden(col, true);
+  for (int i = 0; i < columns.count(); ++i) {
+    d->setColumnHidden(columns.at(i), true);
   }
 }
 
@@ -254,8 +254,8 @@ void ColumnSelector::setAlwaysVisible(QVector<int> columns)
   Q_D(ColumnSelector);
 
   d->alwaysVisibleColumns = columns;
-  for (int col = 0; col < columns.count(); ++col) {
-    d->setColumnHidden(col, false);
+  for (int i = 0; i < columns.count(); ++i) {
+    d->setColumnHidden(columns.at(i), false);
   }
 }
 
