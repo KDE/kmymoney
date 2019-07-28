@@ -31,7 +31,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "accountsviewproxymodel.h"
+// #include "accountsviewproxymodel.h"
 
 class MyMoneyAccount;
 class MyMoneyBudget;

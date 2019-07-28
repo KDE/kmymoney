@@ -19,7 +19,6 @@
  */
 
 #include "budgetviewproxymodel.h"
-#include "accountsviewproxymodel_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes

@@ -55,7 +55,6 @@ set(kmm_widgets_sources
   daterangedlg.cpp
   ktransactionfilter.cpp
   kmymoneyaccounttreeview.cpp
-  accountsviewproxymodel.cpp
   budgetviewproxymodel.cpp
   kmymoneyviewbase.cpp
   passwordtoggle.cpp
