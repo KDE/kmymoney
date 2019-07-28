@@ -13,7 +13,6 @@ set (libnewaccountwizard_a_SOURCES
   kloanpaymentpage.cpp
   kloanpayoutpage.cpp
   kloanschedulepage.cpp
-  hierarchyfilterproxymodel.cpp
   )
 
 set (libnewaccountwizard_a_UI
