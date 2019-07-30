@@ -142,7 +142,7 @@ bool ItemPtrVector::item_cmp(RegisterItem* i1, RegisterItem* i2)
   qulonglong n1, n2;
 
   for (it = sortOrder.begin(); it != sortOrder.end(); ++it) {
-    TransactionSortField sortField = static_cast<TransactionSortField>(abs(*it));
+    TransactionSortField sortField = static_cast<TransactionSortField>(*it);
     switch (sortField) {
       case PostDateSort:
         rc = i2->sortPostDate().daysTo(i1->sortPostDate());
