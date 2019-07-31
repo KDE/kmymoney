@@ -21,6 +21,8 @@
 // Qt Includes
 
 #include <QSortFilterProxyModel>
+#include <QIdentityProxyModel>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -53,14 +55,45 @@ const QAbstractItemModel* MyMoneyModelBase::baseModel(const QModelIndex& idx)
 QModelIndex MyMoneyModelBase::mapToBaseSource(const QModelIndex& _idx)
 {
   QModelIndex                       idx(_idx);
-  const QSortFilterProxyModel*      proxyModel;
+  const QSortFilterProxyModel*      sortFilterModel;
+  const QIdentityProxyModel*        identityModel;
   const KConcatenateRowsProxyModel* concatModel;
   do {
-    if (( proxyModel = qobject_cast<const QSortFilterProxyModel *>(idx.model())) != nullptr) {
-      idx = proxyModel->mapToSource(idx);
-    } else if((concatModel = qobject_cast<const KConcatenateRowsProxyModel *>(idx.model())) != nullptr) {
+    if (( sortFilterModel = qobject_cast<const QSortFilterProxyModel*>(idx.model())) != nullptr) {
+      idx = sortFilterModel->mapToSource(idx);
+    } else if((concatModel = qobject_cast<const KConcatenateRowsProxyModel*>(idx.model())) != nullptr) {
       idx = concatModel->mapToSource(idx);
+    } else if((identityModel = qobject_cast<const QIdentityProxyModel*>(idx.model())) != nullptr) {
+      idx = identityModel->mapToSource(idx);
     }
-  } while (proxyModel || concatModel);
+  } while (sortFilterModel || concatModel || identityModel);
+  return idx;
+}
+
+QModelIndex MyMoneyModelBase::mapFromBaseSource(QAbstractItemModel* proxyModel, const QModelIndex& _idx)
+{
+  QModelIndex                       idx(_idx);
+  const QSortFilterProxyModel*      sortFilterModel;
+  const QIdentityProxyModel*        identityModel;
+  const KConcatenateRowsProxyModel* concatModel;
+
+  if (( sortFilterModel = qobject_cast<const QSortFilterProxyModel*>(proxyModel)) != nullptr) {
+    if (sortFilterModel->sourceModel() != idx.model()) {
+      idx = mapFromBaseSource(sortFilterModel->sourceModel(), idx);
+    }
+    idx = sortFilterModel->mapFromSource(idx);
+
+  } else if((concatModel = qobject_cast<const KConcatenateRowsProxyModel*>(proxyModel)) != nullptr) {
+    idx = concatModel->mapFromSource(idx);
+
+  } else if((identityModel = qobject_cast<const QIdentityProxyModel*>(proxyModel)) != nullptr) {
+    if (identityModel->sourceModel() != idx.model()) {
+      idx = mapFromBaseSource(identityModel->sourceModel(), idx);
+    }
+    idx = identityModel->mapFromSource(idx);
+  } else {
+    qDebug() << proxyModel->metaObject()->className() << "not supported in" << Q_FUNC_INFO;
+    idx = QModelIndex();
+  }
   return idx;
 }

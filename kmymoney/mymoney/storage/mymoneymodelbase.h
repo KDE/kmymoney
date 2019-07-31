@@ -68,6 +68,12 @@ public:
    */
   static QModelIndex mapToBaseSource(const QModelIndex& idx);
 
+  /**
+   * This method returns a QModelIndex for a stacked @a proxyModel based
+   * on the model index @a idx pointing to the base model.
+   */
+  static QModelIndex mapFromBaseSource(QAbstractItemModel* proxyModel, const QModelIndex& idx);
+
 Q_SIGNALS:
   void modelLoaded() const;
 
