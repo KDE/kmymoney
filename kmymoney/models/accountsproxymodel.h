@@ -92,6 +92,9 @@ public:
   void setHideFavoriteAccounts(bool hideFavoriteAccounts);
   bool hideFavoriteAccounts() const;
 
+  void setHideAllEntries(bool hideAllEntries);
+  bool hideAllEntries() const;
+
   int visibleItems(bool includeBaseAccounts = false) const;
 
   void setSourceColumns(QList<eAccountsModel::Column> *columns);
@@ -145,7 +148,7 @@ private:
  * It shows only the first column (account name) and makes top level items non-selectable.
  *
  * @see AccountsModel
- * @see AccountsFilterProxyModel
+ * @see AccountsProxyModel
  *
  * @author Cristian Onet 2010
  * @author Christian David

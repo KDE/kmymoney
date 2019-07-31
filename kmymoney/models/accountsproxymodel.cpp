@@ -41,12 +41,13 @@ class AccountsProxyModelPrivate
   Q_DISABLE_COPY(AccountsProxyModelPrivate)
 
 public:
-  AccountsProxyModelPrivate() :
-  m_hideClosedAccounts(true),
-  m_hideEquityAccounts(true),
-  m_hideUnusedIncomeExpenseAccounts(false),
-  m_haveHiddenUnusedIncomeExpenseAccounts(false),
-  m_hideFavoriteAccounts(true)
+  AccountsProxyModelPrivate()
+    : m_hideClosedAccounts(true)
+    , m_hideEquityAccounts(true)
+    , m_hideUnusedIncomeExpenseAccounts(false)
+    , m_haveHiddenUnusedIncomeExpenseAccounts(false)
+    , m_hideFavoriteAccounts(true)
+    , m_hideAllEntries(false)
   {
   }
 
@@ -60,6 +61,7 @@ public:
   bool m_hideUnusedIncomeExpenseAccounts;
   bool m_haveHiddenUnusedIncomeExpenseAccounts;
   bool m_hideFavoriteAccounts;
+  bool m_hideAllEntries;
 };
 
 
@@ -128,7 +130,11 @@ bool AccountsProxyModel::lessThan(const QModelIndex &left, const QModelIndex &ri
   */
 bool AccountsProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
-  if (!source_parent.isValid() && source_row == 0 && hideFavoriteAccounts())
+  Q_D(const AccountsProxyModel);
+  if (d->m_hideAllEntries)
+    return false;
+
+  if (!source_parent.isValid() && (source_row == 0) && hideFavoriteAccounts())
     return false;
 
   const auto index = sourceModel()->index(source_row, AccountsModel::Column::AccountName, source_parent);
@@ -137,7 +143,7 @@ bool AccountsProxyModel::filterAcceptsRow(int source_row, const QModelIndex &sou
 
 /**
   * This function implements a recursive matching. It is used to match a row even if it's values
-  * don't match the current filtering criteria but it has at least one child row that does match.
+  * doesn't match the current filtering criteria but it has at least one child row that does match.
   */
 bool AccountsProxyModel::filterAcceptsRowOrChildRows(int source_row, const QModelIndex &source_parent) const
 {
@@ -412,6 +418,21 @@ bool AccountsProxyModel::hideFavoriteAccounts() const
 {
   Q_D(const AccountsProxyModel);
   return d->m_hideFavoriteAccounts;
+}
+
+void AccountsProxyModel::setHideAllEntries(bool hideAllEntries)
+{
+  Q_D(AccountsProxyModel);
+  if (d->m_hideAllEntries ^ hideAllEntries) {
+    d->m_hideAllEntries = hideAllEntries;
+    invalidateFilter();
+  }
+}
+
+bool AccountsProxyModel::hideAllEntries() const
+{
+  Q_D(const AccountsProxyModel);
+  return d->m_hideAllEntries;
 }
 
 /**
