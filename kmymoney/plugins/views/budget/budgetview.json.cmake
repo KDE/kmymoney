@@ -46,6 +46,7 @@
         "Name": "Budget view",
         "Name[ca@valencia]": "Vista de pressupost",
         "Name[ca]": "Vista de pressupost",
+        "Name[de]": "Budgetansicht",
         "Name[en_GB]": "Budget view",
         "Name[es]": "Vista de presupuestos",
         "Name[fr]": "Vue Budget",

@@ -26,6 +26,7 @@
         "Description": "Add CSV importing to KMyMoney",
         "Description[ca@valencia]": "Afig la importació des de CSV al KMyMoney",
         "Description[ca]": "Afegeix la importació des de CSV al KMyMoney",
+        "Description[de]": "Fügt CSV-Import zu KMyMoney hinzu",
         "Description[en_GB]": "Add CSV importing to KMyMoney",
         "Description[es]": "Añade importación CSV a KMyMoney",
         "Description[fr]": "Ajoute l'importation « CSV » à KMyMoney",

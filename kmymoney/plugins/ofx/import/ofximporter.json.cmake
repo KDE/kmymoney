@@ -25,6 +25,7 @@
         "Description": "Add OFX importing to KMyMoney",
         "Description[ca@valencia]": "Afig la importació des d'OFX al KMyMoney",
         "Description[ca]": "Afegeix la importació des d'OFX al KMyMoney",
+        "Description[de]": "Fügt OFX-Import zu KMyMoney hinzu",
         "Description[en_GB]": "Add OFX importing to KMyMoney",
         "Description[es]": "Añade importación OFX a KMyMoney",
         "Description[fr]": "Ajoute l'importation « OFX » à KMyMoney",
