@@ -455,6 +455,7 @@ namespace eMyMoney {
       AccountFullNameRole,
       AccountDisplayOrderRole,
       AccountFractionRole,
+      AccountParentIdRole,
 
       // MyMoneyInstitution
       InstitutionSortCodeRole,
@@ -468,6 +469,9 @@ namespace eMyMoney {
 
       // MyMoneySecurity
       SecuritySymbolRole,
+      SecurityTradingCurrencyIdRole,
+      SecurityTradingCurrencyIndexRole,
+      SecurityPricePrecisionRole,
 
       // MyMoneyBudget
       BudgetNameRole,
@@ -486,6 +490,9 @@ namespace eMyMoney {
       SplitSharesRole,
       SplitValueRole,
       SplitPriceRole,
+
+      // Ledger
+      LedgerDisplayOrderRole,
     };
   }
 }

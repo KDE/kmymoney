@@ -472,13 +472,13 @@ public:
     q->connect(file, &MyMoneyFile::valueChanged,   institutionsModel, &AccountsModel::slotBalanceOrValueChanged);
 #endif
 
+#if 0
     const auto equitiesModel = Models::instance()->equitiesModel();
     q->connect(file, &MyMoneyFile::objectAdded,    equitiesModel, &EquitiesModel::slotObjectAdded);
     q->connect(file, &MyMoneyFile::objectModified, equitiesModel, &EquitiesModel::slotObjectModified);
     q->connect(file, &MyMoneyFile::objectRemoved,  equitiesModel, &EquitiesModel::slotObjectRemoved);
     q->connect(file, &MyMoneyFile::balanceChanged, equitiesModel, &EquitiesModel::slotBalanceOrValueChanged);
     q->connect(file, &MyMoneyFile::valueChanged,   equitiesModel, &EquitiesModel::slotBalanceOrValueChanged);
-#if 0
     const auto securitiesModel = Models::instance()->securitiesModel();
     q->connect(file, &MyMoneyFile::objectAdded,    securitiesModel, &SecuritiesModel::slotObjectAdded);
     q->connect(file, &MyMoneyFile::objectModified, securitiesModel, &SecuritiesModel::slotObjectModified);
@@ -3588,9 +3588,10 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
       AmountEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
 
       applyFileFixes();
-      emit MyMoneyFile::instance()->modelsLoaded();
+      // setup internal data for which we need all models loaded
+      MyMoneyFile::instance()->accountsModel()->setupAccountFractions();
+
       /// @todo remove old models container
-      Models::instance()->fileOpened();
       connectStorageToModels();
       // inform everyone about new data
       MyMoneyFile::instance()->modelsReadyToUse();

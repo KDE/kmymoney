@@ -118,12 +118,14 @@ public:
 
   JournalModelNewTransaction* newTransaction();
 
-protected:
+private:
   void addTransaction(const QString& id, MyMoneyTransaction& t);
   void removeTransaction(const QModelIndex& idx);
 
   QModelIndex firstIndexById(const QString& id) const;
   QModelIndex firstIndexByKey(const QString& key) const;
+
+  void updateBalances();
 
 public Q_SLOTS:
 

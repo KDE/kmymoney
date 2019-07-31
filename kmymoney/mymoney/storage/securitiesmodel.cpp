@@ -41,32 +41,25 @@ struct SecuritiesModel::Private
   {
   }
 
-  QString tradingCurrency(const MyMoneySecurity& security)
+  QModelIndex tradingCurrencyIndex(const MyMoneySecurity& security)
   {
-    QString result;
+    QModelIndex idx;
     if (!security.isCurrency()) {
-      auto file = qobject_cast<MyMoneyFile*>(parentObject);
-      if (file) {
-
-        auto
-        idx = file->currenciesModel()->indexById(security.tradingCurrency());
-        result = file->currenciesModel()->data(idx, eMyMoney::Model::Roles::SecuritySymbolRole).toString();
-        if (!idx.isValid()) {
-          idx = q_ptr->indexById(security.tradingCurrency());
-          result = q_ptr->data(idx, eMyMoney::Model::Roles::SecuritySymbolRole).toString();
-          if (!idx.isValid()) {
-            qDebug() << "Trading currency" << security.tradingCurrency() << "not found";
-          }
-        }
+      idx = MyMoneyFile::instance()->currenciesModel()->indexById(security.tradingCurrency());
+      if (!idx.isValid()) {
+        idx = q_ptr->indexById(security.tradingCurrency());
       }
     }
-    #if 0
-    MyMoneySecurity tradingCurrency;
-    if (!security.isCurrency())
-      tradingCurrency = m_file->security(security.tradingCurrency());
-    cell->setData(tradingCurrency.tradingSymbol(), Qt::DisplayRole);
-    #endif
-    return result;
+    if (!idx.isValid()) {
+      qDebug() << "Trading currency" << security.tradingCurrency() << "not found";
+    }
+    return idx;
+  }
+
+  QString tradingCurrency(const MyMoneySecurity& security)
+  {
+    const auto idx = tradingCurrencyIndex(security);
+    return idx.data(eMyMoney::Model::Roles::SecuritySymbolRole).toString();
   }
 
   SecuritiesModel*    q_ptr;
@@ -130,49 +123,54 @@ QVariant SecuritiesModel::data(const QModelIndex& index, int role) const
         case Column::Security:
           // make sure to never return any displayable text for the dummy entry
           if (!security.id().isEmpty()) {
-            rc = security.name();
-          } else {
-            rc = QString();
+            return security.name();
           }
           break;
+
         case Column::Symbol:
-          rc = security.tradingSymbol();
-          break;
+          return security.tradingSymbol();
+
         case Column::Type:
-          rc = security.securityTypeToString(security.securityType());
-          break;
+          return security.securityTypeToString(security.securityType());
+
         case Column::Market:
           if (security.isCurrency())
-            rc = QStringLiteral("ISO 4217");
-          else
-            rc = security.tradingMarket();
-          break;
+            return QStringLiteral("ISO 4217");
+          return security.tradingMarket();
+
         case Column::Currency:
           if (!security.isCurrency()) {
-            rc = d->tradingCurrency(security);
+            return d->tradingCurrency(security);
           }
           break;
+
         case Column::Fraction:
-          rc = QStringLiteral("%1").arg(security.smallestAccountFraction());
-          break;
+          return QStringLiteral("%1").arg(security.smallestAccountFraction());
+
         default:
           break;
       }
       break;
 
     case Qt::TextAlignmentRole:
-      rc = QVariant(Qt::AlignLeft | Qt::AlignVCenter);
-      break;
+      return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
 
     case eMyMoney::Model::Roles::IdRole:
-      rc = security.id();
-      break;
+      return security.id();
 
     case eMyMoney::Model::Roles::SecuritySymbolRole:
-      rc = security.tradingSymbol();
-      break;
+      return security.tradingSymbol();
+
+    case eMyMoney::Model::SecurityTradingCurrencyIdRole:
+      return security.tradingCurrency();
+
+    case eMyMoney::Model::SecurityTradingCurrencyIndexRole:
+      return d->tradingCurrencyIndex(security);
+
+    case eMyMoney::Model::SecurityPricePrecisionRole:
+      return security.pricePrecision();
   }
-  return rc;
+  return QVariant();
 }
 
 bool SecuritiesModel::setData(const QModelIndex& index, const QVariant& value, int role)

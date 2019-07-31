@@ -44,7 +44,7 @@ struct JournalModel::Private
 {
   Private()
     : newTransactionModel(nullptr)
-    , m_headerData(QHash<Column, QString> ({
+    , headerData(QHash<Column, QString> ({
       { Number, i18nc("Cheque Number", "No.") },
       { Date, i18n("Date") },
       { Security, i18n("Security") },
@@ -119,22 +119,33 @@ struct JournalModel::Private
 
   void removeIdKeyMapping(const QString& id)
   {
-    m_transactionIdKeyMap.remove(id);
+    transactionIdKeyMap.remove(id);
   }
 
   void addIdKeyMapping(const QString& id, const QString& key)
   {
-    m_transactionIdKeyMap[id] = key;
+    transactionIdKeyMap[id] = key;
   }
 
   QString mapIdToKey(const QString& id) const
   {
-    return m_transactionIdKeyMap.value(id);
+    return transactionIdKeyMap.value(id);
   }
 
-  JournalModelNewTransaction* newTransactionModel;
-  QMap<QString, QString>      m_transactionIdKeyMap;
-  QHash<Column, QString>      m_headerData;
+  void loadAccountCache()
+  {
+    accountCache.clear();
+    const auto accountList = MyMoneyFile::instance()->accountsModel()->itemList();
+    foreach(const auto& acc, accountList) {
+      accountCache[acc.id()] = acc;
+    }
+  }
+
+  JournalModelNewTransaction*     newTransactionModel;
+  QMap<QString, QString>          transactionIdKeyMap;
+  QHash<Column, QString>          headerData;
+  QHash<QString, MyMoneyMoney>    balanceCache;
+  QHash<QString, MyMoneyAccount>  accountCache;
 };
 
 JournalModelNewTransaction::JournalModelNewTransaction(QObject* parent)
@@ -194,13 +205,13 @@ JournalModelNewTransaction * JournalModel::newTransaction()
 int JournalModel::columnCount(const QModelIndex& parent) const
 {
   Q_UNUSED(parent);
-  return d->m_headerData.count();
+  return d->headerData.count();
 }
 
 QVariant JournalModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
   if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
-    return d->m_headerData.value(static_cast<Column>(section));
+    return d->headerData.value(static_cast<Column>(section));
   }
   return QAbstractItemModel::headerData(section, orientation, role);
 }
@@ -611,5 +622,16 @@ void JournalModel::transactionList(QList< QPair<MyMoneyTransaction, MyMoneySplit
       }
     }
     row += journalEntry.transaction().splitCount();
+  }
+}
+
+void JournalModel::updateBalances()
+{
+  d->loadAccountCache();
+
+  const int rows = rowCount();
+  for (int row = 0; row < rows; ++row) {
+    JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->dataRef();
+    d->balanceCache[journalEntry.split().accountId()] += journalEntry.split().shares();
   }
 }

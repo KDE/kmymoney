@@ -38,6 +38,13 @@ class KMM_MODELS_EXPORT LedgerProxyModel : public QSortFilterProxyModel
 {
   Q_OBJECT
 public:
+  enum GroupSortOrder {
+    DateGrouping = 0,
+    PayeeGrouping,
+    JournalEntry,
+    OnlineBalance,
+  };
+
   explicit LedgerProxyModel(QObject* parent = nullptr);
   virtual ~LedgerProxyModel();
 

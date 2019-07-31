@@ -217,6 +217,8 @@ JournalModel* Models::journalModel() const
  */
 EquitiesModel* Models::equitiesModel()
 {
+  return nullptr;
+#if 0
   if (!d->m_equitiesModel) {
     d->m_equitiesModel = new EquitiesModel(this);
     #ifdef KMM_MODELTEST
@@ -224,6 +226,7 @@ EquitiesModel* Models::equitiesModel()
     #endif
   }
   return d->m_equitiesModel;
+#endif
 }
 
 #if 0
@@ -283,7 +286,7 @@ void Models::fileOpened()
   #ifdef ENABLE_UNFINISHEDFEATURES
   // ledgerModel()->load();
   #endif
-  equitiesModel()->load();
+  // equitiesModel()->load();
 
   emit modelsLoaded();
 }
@@ -297,7 +300,7 @@ void Models::unload()
   #ifdef ENABLE_UNFINISHEDFEATURES
   ledgerModel()->unload();
   #endif
-  equitiesModel()->removeRows(0, equitiesModel()->rowCount());
+  // equitiesModel()->removeRows(0, equitiesModel()->rowCount());
   // securitiesModel()->removeRows(0, securitiesModel()->rowCount());
 
   MyMoneyFile::instance()->unload();

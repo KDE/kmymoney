@@ -386,7 +386,6 @@ private:
 MyMoneyFile::MyMoneyFile() :
     d(new Private(this))
 {
-  connect(this, &MyMoneyFile::modelsLoaded, &d->accountsModel, &AccountsModel::setupAccountFractions);
 }
 
 MyMoneyFile::~MyMoneyFile()
