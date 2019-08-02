@@ -48,6 +48,14 @@ public:
    */
   QModelIndexList indexListByName(const QString& name, const QModelIndex parent = QModelIndex()) const;
 
+  QModelIndex lowerBound(const QString& id) const;
+
+  virtual QModelIndex lowerBound(const QString& id, int first, int last) const = 0;
+
+  QModelIndex upperBound(const QString& id) const;
+
+  virtual QModelIndex upperBound(const QString& id, int first, int last) const = 0;
+
   /**
    * This is convenience method returning the value of
    * mapToBaseSource(idx).model()

@@ -447,32 +447,7 @@ QModelIndex JournalModel::firstIndexById(const QString& id) const
     return QModelIndex();
   }
 
-  return firstIndexByKey(key);
-}
-
-QModelIndex JournalModel::firstIndexByKey(const QString& key) const
-{
-  // the following two could be turned into additional parameters
-  // to this function to search only in sections of the journal
-  int first = 0;
-  const int last = rowCount();
-
-  int count = last - first;
-  int row = -1;
-  int step;
-  while (count > 0) {
-    row = first;
-    step = count / 2;
-    row = first + step;
-    const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
-    if (journalEntry.id() < key) {
-      first = ++row;
-      count -= step + 1;
-    } else {
-      count = step;
-    }
-  }
-  return index(row, 0);
+  return MyMoneyModelBase::lowerBound(key);
 }
 
 void JournalModel::addTransaction(MyMoneyTransaction& t)
@@ -488,7 +463,7 @@ void JournalModel::addTransaction(const QString& id, MyMoneyTransaction& t)
   // add mapping
   d->addIdKeyMapping((*transaction).id(), key);
 
-  const auto idx = firstIndexByKey(key);
+  const auto idx = MyMoneyModelBase::lowerBound(key);
   auto startRow = idx.row();
   if (!idx.isValid()) {
     startRow = rowCount();

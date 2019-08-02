@@ -285,6 +285,50 @@ public:
     return true;
   }
 
+
+  QModelIndex lowerBound(const QString& id, int first, int last) const override
+  {
+    int count = last - first;
+    int row = -1;
+    int step;
+    while (count > 0) {
+      step = count / 2;
+      row = first + step;
+      const T& item = static_cast<TreeItem<T>*>(index(row, 0).internalPointer())->constDataRef();
+      if (item.id() < id) {
+        first = ++row;
+        count -= step + 1;
+      } else {
+        count = step;
+      }
+    }
+    return index(row, 0);
+  }
+
+  QModelIndex upperBound(const QString& id, int first, int last) const override
+  {
+    int count = last - first;
+    int row = -1;
+    int step;
+    while (count > 0) {
+      step = count / 2;
+      row = last - step;
+      const T& item = static_cast<TreeItem<T>*>(index(row, 0).internalPointer())->constDataRef();
+      if (item.id() > id) {
+        last = --row;
+        count -= step + 1;
+      } else {
+        count = step;
+      }
+    }
+    return index(row, 0);
+  }
+
+
+
+
+
+
   virtual QModelIndex indexById(const QString& id) const
   {
     const QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, id, 1, Qt::MatchFixedString | Qt::MatchRecursive);
