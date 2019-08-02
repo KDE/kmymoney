@@ -16,6 +16,7 @@ set(storage_HEADERS
   accountsmodel.h
   institutionsmodel.h
   journalmodel.h
+  pricemodel.h
   )
 
 ########### install files ###############

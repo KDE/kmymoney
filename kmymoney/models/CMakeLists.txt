@@ -6,6 +6,7 @@ set(libmodels_a_SOURCES
     payeeidentifiercontainermodel.cpp
     equitiesmodel.cpp
     securitiesfilterproxymodel.cpp
+    delegateproxy.cpp
 )
 
 if(ENABLE_UNFINISHEDFEATURES)

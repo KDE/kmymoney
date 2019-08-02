@@ -76,6 +76,7 @@
 #include "accountsmodel.h"
 #include "institutionsmodel.h"
 #include "journalmodel.h"
+#include "pricemodel.h"
 
 #ifdef KMM_MODELTEST
   #include "modeltest.h"
@@ -191,6 +192,7 @@ public:
     , accountsModel(qq)
     , institutionsModel(&accountsModel, qq)
     , journalModel(qq)
+    , priceModel(qq)
   {
 #ifdef KMM_MODELTEST
     /// @todo add new models here
@@ -205,6 +207,7 @@ public:
     new ModelTest(&accountsModel, file);
     new ModelTest(&institutionsModel, file);
     new ModelTest(&journalModel, file);
+    new ModelTest(&priceModel, file);
 #endif
   }
 
@@ -224,7 +227,8 @@ public:
         || budgetsModel.isDirty()
         || accountsModel.isDirty()
         || institutionsModel.isDirty()
-        || journalModel.isDirty();
+        || journalModel.isDirty()
+        || priceModel.isDirty();
   }
 
   /**
@@ -365,6 +369,7 @@ public:
   AccountsModel       accountsModel;
   InstitutionsModel   institutionsModel;
   JournalModel        journalModel;
+  PriceModel          priceModel;
 };
 
 
@@ -411,6 +416,7 @@ void MyMoneyFile::unload()
   d->accountsModel.unload();
   d->institutionsModel.unload();
   d->journalModel.unload();
+  d->priceModel.unload();
 }
 
 void MyMoneyFile::attachStorage(MyMoneyStorageMgr* const storage)
@@ -512,6 +518,7 @@ void MyMoneyFile::commitTransaction()
       case eMyMoney::File::Object::Account:
       case eMyMoney::File::Object::Institution:
       case eMyMoney::File::Object::Transaction:
+      // case eMyMoney::File::Object::Price:
         changed = true;
         break;
       default:
@@ -1501,6 +1508,11 @@ InstitutionsModel* MyMoneyFile::institutionsModel() const
 JournalModel* MyMoneyFile::journalModel() const
 {
   return &d->journalModel;
+}
+
+PriceModel* MyMoneyFile::priceModel() const
+{
+  return &d->priceModel;
 }
 
 void MyMoneyFile::addPayee(MyMoneyPayee& payee)

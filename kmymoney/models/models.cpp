@@ -41,7 +41,7 @@
 #include "accountsmodel.h"
 #include "institutionsmodel.h"
 #include "journalmodel.h"
-
+#include "pricemodel.h"
 #include "equitiesmodel.h"
 
 #include "mymoneyfile.h"
@@ -211,6 +211,19 @@ JournalModel* Models::journalModel() const
 }
 
 /**
+ * This is the function to get a reference to the core @ref PriceModel.
+ * The returned object is owned by this object so don't delete it. It creates the
+ * model on the first access to it.
+ */
+PriceModel* Models::priceModel() const
+{
+  return MyMoneyFile::instance()->priceModel();
+}
+
+
+
+
+/**
  * This is the function to get a reference to the core @ref EquitiesModel.
  * The returned object is owned by this object so don't delete it. It creates the
  * model on the first access to it.
@@ -275,6 +288,7 @@ void Models::fileSaved()
   accountsModel()->setDirty(false);
   institutionsModel()->setDirty(false);
   journalModel()->setDirty(false);
+  priceModel()->setDirty(false);
 }
 
 void Models::fileOpened()

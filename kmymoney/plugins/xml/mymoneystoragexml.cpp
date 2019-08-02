@@ -80,12 +80,12 @@
 #include "accountsmodel.h"
 #include "institutionsmodel.h"
 #include "journalmodel.h"
+#include "pricemodel.h"
 
 using namespace eMyMoney;
 
 unsigned int MyMoneyStorageXML::fileVersionRead = 0;
 unsigned int MyMoneyStorageXML::fileVersionWrite = 0;
-
 
 class MyMoneyStorageXML::Private
 {
@@ -193,6 +193,7 @@ private:
   static void writeOnlineJob(const onlineJob &job, QDomDocument &document, QDomElement &parent);
   static MyMoneyCostCenter readCostCenter(const QDomElement &node);
   static void writeCostCenter(const MyMoneyCostCenter &costCenter, QDomDocument &document, QDomElement &parent);
+  static void writePrice(const PriceEntry& price, QDomDocument &document, QDomElement &parent);
 };
 
 MyMoneyXmlContentHandler::MyMoneyXmlContentHandler(MyMoneyStorageXML* reader) :
@@ -463,7 +464,12 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
       /// @todo cleanup
       m_reader->m_storage->loadTransactions(m_reader->d->tList);
       m_reader->d->tList.clear();
-      m_reader->signalProgress(-1, -1);
+    } else if (s == tagName(Tag::Prices)) {
+      // last price read, now dump them into the engine
+      m_reader->m_models->priceModel()->load(m_reader->d->prList);
+      /// @todo cleanup
+      m_reader->m_storage->loadPrices(m_reader->d->prList);
+      m_reader->d->prList.clear();
 
 /* above this line we keep the new model logic to keep track of what needs to be done */
 
@@ -471,11 +477,6 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
       // last report read, now dump them into the engine
       m_reader->m_storage->loadReports(m_reader->d->rList);
       m_reader->d->rList.clear();
-      m_reader->signalProgress(-1, -1);
-    } else if (s == tagName(Tag::Prices)) {
-      // last price read, now dump them into the engine
-      m_reader->m_storage->loadPrices(m_reader->d->prList);
-      m_reader->d->bList.clear();
       m_reader->signalProgress(-1, -1);
     } else if (s == tagName(Tag::OnlineJobs)) {
       m_reader->m_storage->loadOnlineJobs(m_reader->d->onlineJobList);
@@ -1372,8 +1373,6 @@ void MyMoneyXmlContentHandler::writeCostCenter(const MyMoneyCostCenter &costCent
 
 
 
-
-
 MyMoneyStorageXML::MyMoneyStorageXML() :
     m_progressCallback(0),
     m_storage(0),
@@ -1678,14 +1677,6 @@ void MyMoneyStorageXML::writeTags(QDomElement& parent)
   TagsModel::xmlWriter writer(&MyMoneyXmlContentHandler::writeTag, *m_doc, parent);
   const auto count = m_models->tagsModel()->processItems(&writer);
   parent.setAttribute(attributeName(Attribute::General::Count), count);
-  #if 0
-  const auto list = m_storage->tagList();
-  parent.setAttribute(attributeName(Attribute::General::Count), list.count());
-
-  Q_FOREACH(const auto& item, list) {
-    writeTag(parent, item);
-  }
-#endif
 }
 
 void MyMoneyStorageXML::writeTag(QDomElement& tag, const MyMoneyTag& ta)
@@ -1860,19 +1851,45 @@ QDomElement MyMoneyStorageXML::writeKeyValuePairs(const QMap<QString, QString> p
 
 void MyMoneyStorageXML::writePrices(QDomElement& prices)
 {
-  const MyMoneyPriceList list = m_storage->priceList();
-  MyMoneyPriceList::ConstIterator it;
-  prices.setAttribute(attributeName(Attribute::General::Count), list.count());
+  QString from;
+  QString to;
+  QDomElement pricePair;
+  int pricePairCount = 0;
 
-  for (it = list.constBegin(); it != list.constEnd(); ++it) {
-    QDomElement price = m_doc->createElement(nodeName(Node::PricePair));
-    price.setAttribute(attributeName(Attribute::General::From), it.key().first);
-    price.setAttribute(attributeName(Attribute::General::To), it.key().second);
-    writePricePair(price, *it);
-    prices.appendChild(price);
+  PriceModel* model = m_models->priceModel();
+
+  pricePair.clear();
+
+  auto const rows = model->rowCount();
+  QModelIndex idx;
+
+  for (auto row = 0; row < rows; ++row) {
+    idx = model->index(row, 0);
+    PriceEntry entry = model->itemByIndex(idx);
+
+    if ((entry.from() != from) || (entry.to() != to)) {
+      ++pricePairCount;
+      if (!pricePair.isNull()) {
+        prices.appendChild(pricePair);
+      }
+      pricePair = m_doc->createElement(nodeName(Node::PricePair));
+      pricePair.setAttribute(attributeName(Attribute::General::From), entry.from());
+      pricePair.setAttribute(attributeName(Attribute::General::To), entry.to());
+    }
+    QDomElement price = m_doc->createElement(nodeName(Node::Price));
+    price.setAttribute(attributeName(Attribute::General::Date), entry.date().toString(Qt::ISODate));
+    price.setAttribute(attributeName(Attribute::General::Price), entry.rate(QString()).toString());
+    price.setAttribute(attributeName(Attribute::General::Source), entry.source());
+    pricePair.appendChild(price);
   }
+
+  if (!pricePair.isNull()) {
+    prices.appendChild(pricePair);
+  }
+  prices.setAttribute(attributeName(Attribute::General::Count), pricePairCount);
 }
 
+#if 0
 void MyMoneyStorageXML::writePricePair(QDomElement& price, const MyMoneyPriceEntries& p)
 {
   MyMoneyPriceEntries::ConstIterator it;
@@ -1889,6 +1906,7 @@ void MyMoneyStorageXML::writePrice(QDomElement& price, const MyMoneyPrice& p)
   price.setAttribute(attributeName(Attribute::General::Price), p.rate(QString()).toString());
   price.setAttribute(attributeName(Attribute::General::Source), p.source());
 }
+#endif
 
 void MyMoneyStorageXML::setProgressCallback(void(*callback)(int, int, const QString&))
 {

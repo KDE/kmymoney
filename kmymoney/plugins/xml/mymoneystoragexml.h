@@ -60,6 +60,7 @@ class MyMoneyTransaction;
 class MyMoneyCostCenter;
 class onlineJob;
 class Models;
+class PriceEntry;
 
 template <typename T> class QList;
 typedef QPair<QString, QString> MyMoneySecurityPair;
@@ -112,8 +113,9 @@ public:
   virtual void writeInstitutions(QDomElement& institutions);
 
   virtual void writePrices(QDomElement& prices);
-  virtual void writePricePair(QDomElement& price, const MyMoneyPriceEntries& p);
-  virtual void writePrice(QDomElement& prices, const MyMoneyPrice& p);
+  /// @todo cleanup
+  // virtual void writePricePair(QDomElement& price, const MyMoneyPriceEntries& p);
+  // virtual void writePrice(QDomElement& prices, const MyMoneyPrice& p);
 
   virtual void writePayees(QDomElement& payees);
   virtual void writePayee(QDomElement& payees, const MyMoneyPayee& p);

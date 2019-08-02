@@ -43,6 +43,7 @@
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
 #include "mymoneyenums.h"
+#include "pricemodel.h"
 
 KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent) :
     QDialog(parent),
@@ -89,12 +90,7 @@ KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent) :
   ui->m_splitCount->setText(QString::fromLatin1("%1").arg(storage->transactionList(filter).count()));
   ui->m_scheduleCount->setText(QString::fromLatin1("%1").arg(storage->scheduleList(QString(), eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any,
                                                                                    QDate(), QDate(), false).count()));
-  MyMoneyPriceList list = storage->priceList();
-  MyMoneyPriceList::const_iterator it_p;
-  int pCount = 0;
-  for (it_p = list.constBegin(); it_p != list.constEnd(); ++it_p)
-    pCount += (*it_p).count();
-  ui->m_priceCount->setText(QString::fromLatin1("%1").arg(pCount));
+  ui->m_priceCount->setText(QString::fromLatin1("%1").arg(MyMoneyFile::instance()->priceModel()->rowCount()));
 }
 
 KMyMoneyFileInfoDlg::~KMyMoneyFileInfoDlg()
