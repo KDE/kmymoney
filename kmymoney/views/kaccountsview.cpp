@@ -42,6 +42,7 @@
 #include "kmymoneysettings.h"
 #include "storageenums.h"
 #include "menuenums.h"
+#include "accountdelegate.h"
 
 using namespace Icons;
 
@@ -60,6 +61,8 @@ KAccountsView::KAccountsView(QWidget *parent) :
   connect(pActions[eMenu::Action::UnmapOnlineAccount],  &QAction::triggered, this, &KAccountsView::slotAccountUnmapOnline);
   connect(pActions[eMenu::Action::UpdateAccount],       &QAction::triggered, this, &KAccountsView::slotAccountUpdateOnline);
   connect(pActions[eMenu::Action::UpdateAllAccounts],   &QAction::triggered, this, &KAccountsView::slotAccountUpdateOnlineAll);
+
+  d->ui->m_accountTree->setItemDelegate(new AccountDelegate(d->ui->m_accountTree));
 }
 
 KAccountsView::~KAccountsView()

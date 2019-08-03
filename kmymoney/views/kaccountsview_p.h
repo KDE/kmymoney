@@ -90,12 +90,15 @@ public:
     m_proxyModel = ui->m_accountTree->proxyModel();
     q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
 
+    auto columnSelector = new ColumnSelector(ui->m_accountTree, q->metaObject()->className());
+    columnSelector->setAlwaysVisible(QVector<int>({ AccountsModel::Column::AccountName }));
+    columnSelector->setAlwaysHidden(QVector<int>({ AccountsModel::Column::Balance, AccountsModel::Column::PostedValue }));
+
     ui->m_accountTree->setModel(MyMoneyFile::instance()->accountsModel());
     m_proxyModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquity());
 
+    columnSelector->setModel(m_proxyModel);
     q->slotSettingsChanged();
-
-    new ColumnSelector(ui->m_accountTree, q->metaObject()->className());
 
     /// @todo port to new model code
     #if 0

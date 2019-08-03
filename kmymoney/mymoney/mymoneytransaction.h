@@ -283,6 +283,7 @@ public:
   QString accountSignature(bool includeSplitCount = false) const;
 
   QString uniqueSortKey() const;
+  static QString uniqueSortKey(const QDate& date, const QString& id);
 
   /**
    * This module implements an algorithm used by P.J. Weinberger

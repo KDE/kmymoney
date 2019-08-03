@@ -453,7 +453,7 @@ public:
   void connectStorageToModels()
   {
     const auto file = MyMoneyFile::instance();
-/// @todo port to new model code
+    /// @todo port to new model code
 #if 0
 
     const auto accountsModel = Models::instance()->accountsModel();
@@ -499,10 +499,11 @@ public:
 
   void disconnectStorageFromModels()
   {
+    /// @todo port to new model code
     const auto file = MyMoneyFile::instance();
     // q->disconnect(file, nullptr, Models::instance()->accountsModel(), nullptr);
     // q->disconnect(file, nullptr, Models::instance()->institutionsModel(), nullptr);
-    q->disconnect(file, nullptr, Models::instance()->equitiesModel(), nullptr);
+    // q->disconnect(file, nullptr, Models::instance()->equitiesModel(), nullptr);
     // q->disconnect(file, nullptr, Models::instance()->securitiesModel(), nullptr);
 
 #ifdef ENABLE_UNFINISHEDFEATURES

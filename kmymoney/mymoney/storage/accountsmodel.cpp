@@ -29,6 +29,7 @@
 #include <QString>
 #include <QFont>
 #include <QIcon>
+#include <QDate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -42,6 +43,9 @@
 #include "mymoneyenums.h"
 #include "mymoneymoney.h"
 #include "mymoneysecurity.h"
+#include "securitiesmodel.h"
+#include "mymoneyprice.h"
+
 #include "icons.h"
 
 struct AccountsModel::Private
@@ -53,6 +57,8 @@ struct AccountsModel::Private
     , parentObject(parent)
     , updateOnBalanceChange(true)
   {
+    Q_Q(AccountsModel);
+    q->m_file = qobject_cast<MyMoneyFile*>(parent);
   }
 
   int loadSubAccounts(const QModelIndex parent, const QMap<QString, MyMoneyAccount>& list)
@@ -99,16 +105,16 @@ struct AccountsModel::Private
     return false;
   }
 
-  MyMoneyMoney calculateTotalBalance(QModelIndex idx)
+  MyMoneyMoney calculateTotalValue(QModelIndex idx)
   {
     Q_Q(AccountsModel);
-    MyMoneyMoney result = idx.data(eMyMoney::Model::AccountBalanceRole).value<MyMoneyMoney>();
+    MyMoneyMoney result = idx.data(eMyMoney::Model::AccountValueRole).value<MyMoneyMoney>();
     const auto rows = q->rowCount(idx);
     for (int row = 0; row < rows; ++row) {
       QModelIndex subIdx = q->index(row, 0, idx);
-      result += calculateTotalBalance(subIdx);
+      result += calculateTotalValue(subIdx);
     }
-    q->setData(idx, QVariant::fromValue(result), eMyMoney::Model::AccountTotalBalanceRole);
+    q->setData(idx, QVariant::fromValue(result), eMyMoney::Model::AccountTotalValueRole);
     return result;
   }
 
@@ -181,7 +187,7 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
         return i18n("Balance");
       case Column::PostedValue:
         return i18n("Posted Value");
-      case Column::TotalValue:
+      case Column::TotalPostedValue:
         return i18n("Total Value");
       case Column::Number:
         return i18n("Number");
@@ -243,17 +249,26 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
           break;
 
         case Column::TotalBalance:
-          return QStringLiteral("Balance");
-          /// @todo the delegate should show this using the AccountBalanceRole or AccountTotalBalanceRole
-          /// depending on the expansion of the account entry
-          // QModelIndex securityIdx = MyMoneyFile::instance()->currenciesModel()->indexById(account.currencyId());
-          // return account.balance().formatMoney(securityIdx.data(eMyMoney::Model::SecuritySymbolRole).toString(), MyMoneyMoney::denomToPrec(account.fraction()));
+          return QVariant();
+
+        case Column::Balance:
+          {
+            auto security = MyMoneyFile::instance()->currency(account.currencyId());
+            const auto prec = MyMoneyMoney::denomToPrec(account.fraction());
+            return account.balance().formatMoney(security.tradingSymbol(), prec);
+          }
 
         case Column::PostedValue:
-          return i18n("Posted Value");
+          {
+            const auto baseCurrency = MyMoneyFile::instance()->baseCurrency();
+            return account.postedValue().formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
+          }
 
-        case Column::TotalValue:
-          return i18n("Total Value");
+        case Column::TotalPostedValue:
+        {
+          const auto baseCurrency = MyMoneyFile::instance()->baseCurrency();
+          return account.totalPostedValue().formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
+        }
 
         case Column::Number:
           return account.number();
@@ -269,6 +284,10 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
     case Qt::TextAlignmentRole:
       switch (idx.column()) {
         case AccountsModel::Column::Vat:
+        case AccountsModel::Column::Balance:
+        case AccountsModel::Column::PostedValue:
+        case AccountsModel::Column::TotalBalance:
+        case AccountsModel::Column::TotalPostedValue:
           return QVariant(Qt::AlignRight | Qt::AlignVCenter);
         default:
           break;
@@ -345,17 +364,16 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
       return account.parentAccountId();
 
     case eMyMoney::Model::AccountTotalValueRole:
-      qDebug() << "implement AccountTotalValueRole";
-      break;
-    case eMyMoney::Model::AccountTotalBalanceRole:
-      qDebug() << "implement AccountTotalBalanceRole";
-      break;
+      return QVariant::fromValue(account.totalPostedValue());
+
     case eMyMoney::Model::AccountValueRole:
-      qDebug() << "implement AccountValueRole";
-      break;
+      return QVariant::fromValue(account.postedValue());
 
     case eMyMoney::Model::AccountBalanceRole:
       return QVariant::fromValue(account.balance());
+
+    case eMyMoney::Model::AccountCurrencyIdRole:
+      return account.currencyId();
   }
   return QVariant();
 }
@@ -391,6 +409,14 @@ bool AccountsModel::setData(const QModelIndex& index, const QVariant& value, int
       break;
     case eMyMoney::Model::AccountBalanceRole:
       account.setBalance(value.value<MyMoneyMoney>());
+      return true;
+
+    case eMyMoney::Model::AccountValueRole:
+      account.setPostedValue(value.value<MyMoneyMoney>());
+      return true;
+
+    case eMyMoney::Model::AccountTotalValueRole:
+      account.setTotalPostedValue(value.value<MyMoneyMoney>());
       return true;
 
     default:
@@ -611,6 +637,9 @@ void AccountsModel::setupAccountFractions()
 
 void AccountsModel::updateAccountBalances(const QHash<QString, MyMoneyMoney>& balances)
 {
+  const MyMoneyFile* file = MyMoneyFile::instance();
+  const MyMoneySecurity baseCurrency = file->baseCurrency();
+
   beginResetModel();
 
   // suppress single updates while processing whole batch
@@ -618,12 +647,54 @@ void AccountsModel::updateAccountBalances(const QHash<QString, MyMoneyMoney>& ba
 
   for(auto it = balances.constBegin(); it != balances.constEnd(); ++it) {
     auto accountIdx = indexById(it.key());
-    setData(accountIdx, QVariant::fromValue(it.value()), eMyMoney::Model::AccountBalanceRole);
+    MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(accountIdx.internalPointer())->dataRef();
+    account.setBalance(it.value());
+
+    // now calculate the value, but only for balances differing from null
+    bool needConvert = false;
+    MyMoneyMoney accountValue(it.value());
+    QList<MyMoneyPrice> prices;
+    if (!it.value().isZero()) {
+      MyMoneySecurity security(baseCurrency);
+      if (account.isInvest()) {
+        security = file->security(account.currencyId());
+        if (!security.id().isEmpty()) {
+          prices += file->price(account.currencyId(), security.tradingCurrency());
+          if (security.tradingCurrency() != baseCurrency.id()) {
+            MyMoneySecurity sec = file->security(security.tradingCurrency());
+            if (!sec.id().isEmpty()) {
+              prices += file->price(sec.id(), baseCurrency.id());
+            }
+          }
+        }
+        needConvert = true;
+      } else if (account.currencyId() != baseCurrency.id()) {
+        security = file->security(account.currencyId());
+        if (!security.id().isEmpty()) {
+          prices += file->price(account.currencyId(), baseCurrency.id());
+        }
+        needConvert = true;
+      }
+    }
+
+    if (needConvert) {
+      QList<MyMoneyPrice>::const_iterator it_p;
+      QString securityID = account.currencyId();
+      for (it_p = prices.constBegin(); it_p != prices.constEnd(); ++it_p) {
+        accountValue = (accountValue * (MyMoneyMoney::ONE / (*it_p).rate(securityID))).convertPrecision(m_file->security(securityID).pricePrecision());
+        if ((*it_p).from() == securityID)
+          securityID = (*it_p).to();
+        else
+          securityID = (*it_p).from();
+      }
+      accountValue = accountValue.convert(m_file->baseCurrency().smallestAccountFraction());
+    }
+    account.setPostedValue(accountValue);
   }
 
-  // now that we have all balance, we can calculate the balances in the parent accounts
+  // now that we have all values, we can calculate the total values in the parent accounts
   for (int row = assetIndex().row(); row < rowCount(); ++row) {
-    d->calculateTotalBalance(index(row, 0));
+    d->calculateTotalValue(index(row, 0));
   }
   // turn on update on balance change
   d->updateOnBalanceChange = true;

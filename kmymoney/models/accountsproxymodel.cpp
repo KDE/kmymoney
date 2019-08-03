@@ -115,7 +115,7 @@ bool AccountsProxyModel::lessThan(const QModelIndex &left, const QModelIndex &ri
       }
       // the total balance and value columns are sorted based on the value of the account
     case AccountsModel::Column::TotalBalance:
-    case AccountsModel::Column::TotalValue: {
+    case AccountsModel::Column::TotalPostedValue: {
       const auto leftData = sourceModel()->data(sourceModel()->index(left.row(), AccountsModel::Column::AccountName, left.parent()), eMyMoney::Model::Roles::AccountTotalValueRole);
       const auto rightData = sourceModel()->data(sourceModel()->index(right.row(), AccountsModel::Column::AccountName, right.parent()), eMyMoney::Model::Roles::AccountTotalValueRole);
         return leftData.value<MyMoneyMoney>() < rightData.value<MyMoneyMoney>();

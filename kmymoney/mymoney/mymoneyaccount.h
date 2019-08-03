@@ -387,6 +387,20 @@ public:
   MyMoneyMoney balance() const;
 
   /**
+   * This member returns the value of this account based on
+   * all transactions stored in the journal and currently available
+   * price information.
+   */
+  MyMoneyMoney postedValue() const;
+
+  /**
+   * This member returns the value of this account and all its
+   * subaccounts based on all transactions stored in the journal
+   * and currently available price information.
+   */
+  MyMoneyMoney totalPostedValue() const;
+
+  /**
     * This method adjusts the balance of this account
     * according to the difference contained in the split @p s.
     * If the s.action() is MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares) then
@@ -409,13 +423,22 @@ public:
   void setBalance(const MyMoneyMoney& val);
 
   /**
-   * This method sets the total balance of this account
-   * according to the value provided by @p val.
+   * This method sets the total value of this account to @p val. This
+   * does not include the subaccounts
    *
    * @param val const reference to MyMoneyMoney object containing the
-   *             value to be assigned to the total balance
+   *             value to be assigned to the total posted value
    */
-  void setTotalBalance(const MyMoneyMoney& val);
+  void setPostedValue(const MyMoneyMoney& val);
+
+  /**
+   * This method sets the total value of this account and all its
+   * subaccounts to @p val.
+   *
+   * @param val const reference to MyMoneyMoney object containing the
+   *             value to be assigned to the total posted value
+   */
+  void setTotalPostedValue(const MyMoneyMoney& val);
 
   /**
     * This method sets the kvp's for online banking with this account

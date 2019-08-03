@@ -158,6 +158,7 @@ class MyMoneyModel : public MyMoneyModelBase
 public:
   explicit MyMoneyModel(QObject* parent, const QString& idLeadin, quint8 idSize)
       : MyMoneyModelBase(parent)
+      , m_file(nullptr)
       , m_nextId(0)
       , m_idLeadin(idLeadin)
       , m_idSize(idSize)
@@ -285,7 +286,6 @@ public:
     return true;
   }
 
-
   QModelIndex lowerBound(const QString& id, int first, int last) const override
   {
     int count = last - first;
@@ -323,11 +323,6 @@ public:
     }
     return index(row, 0);
   }
-
-
-
-
-
 
   virtual QModelIndex indexById(const QString& id) const
   {
@@ -438,6 +433,17 @@ public:
       worker->operator()(static_cast<TreeItem<T>*>(indexes.value(row).internalPointer())->constDataRef());
     }
     return indexes.count();
+  }
+
+  bool hasReferenceTo(const QString& id) const
+  {
+    bool rc = false;
+    QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, "*", -1, Qt::MatchWildcard | Qt::MatchRecursive);
+    for (int row = 0; row < indexes.count(); ++row) {
+      const T& item = static_cast<TreeItem<T>*>(index(row, 0).internalPointer())->constDataRef();
+      rc |= item.hasReferenceTo(id);
+    }
+    return rc;
   }
 
   QList<T> itemList() const

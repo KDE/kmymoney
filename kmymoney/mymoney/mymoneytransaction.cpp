@@ -449,12 +449,16 @@ QString MyMoneyTransaction::accountSignature(bool includeSplitCount) const
 QString MyMoneyTransaction::uniqueSortKey() const
 {
   Q_D(const MyMoneyTransaction);
-  QString year, month, day, key;
-  const auto postdate = postDate();
-  year = year.setNum(postdate.year()).rightJustified(MyMoneyTransactionPrivate::YEAR_SIZE, '0');
-  month = month.setNum(postdate.month()).rightJustified(MyMoneyTransactionPrivate::MONTH_SIZE, '0');
-  day = day.setNum(postdate.day()).rightJustified(MyMoneyTransactionPrivate::DAY_SIZE, '0');
-  key = QString::fromLatin1("%1-%2-%3-%4").arg(year, month, day, d->m_id);
+  return uniqueSortKey(postDate(), d->m_id);
+}
+
+QString MyMoneyTransaction::uniqueSortKey(const QDate& date, const QString& id)
+{
+  QString year, month, day;
+  year = year.setNum(date.year()).rightJustified(MyMoneyTransactionPrivate::YEAR_SIZE, '0');
+  month = month.setNum(date.month()).rightJustified(MyMoneyTransactionPrivate::MONTH_SIZE, '0');
+  day = day.setNum(date.day()).rightJustified(MyMoneyTransactionPrivate::DAY_SIZE, '0');
+  const auto key = QString::fromLatin1("%1-%2-%3-%4").arg(year, month, day, id);
   return key;
 }
 

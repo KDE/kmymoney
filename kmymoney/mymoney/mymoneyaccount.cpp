@@ -426,6 +426,18 @@ MyMoneyMoney MyMoneyAccount::balance() const
   return d->m_balance;
 }
 
+MyMoneyMoney MyMoneyAccount::postedValue() const
+{
+  Q_D(const MyMoneyAccount);
+  return d->m_postedValue;
+}
+
+MyMoneyMoney MyMoneyAccount::totalPostedValue() const
+{
+  Q_D(const MyMoneyAccount);
+  return d->m_totalPostedValue;
+}
+
 void MyMoneyAccount::adjustBalance(const MyMoneySplit& s, bool reverse)
 {
   Q_D(MyMoneyAccount);
@@ -442,8 +454,6 @@ void MyMoneyAccount::adjustBalance(const MyMoneySplit& s, bool reverse)
     else
       d->m_balance += s.shares();
   }
-  // adjust total balance by the difference between the current and previous balance
-  d->m_totalBalance += (d->m_balance - oldBalance);
 }
 
 void MyMoneyAccount::setBalance(const MyMoneyMoney& val)
@@ -452,10 +462,16 @@ void MyMoneyAccount::setBalance(const MyMoneyMoney& val)
   d->m_balance = val;
 }
 
-void MyMoneyAccount::setTotalBalance(const MyMoneyMoney& val)
+void MyMoneyAccount::setPostedValue(const MyMoneyMoney& val)
 {
   Q_D(MyMoneyAccount);
-  d->m_totalBalance = val;
+  d->m_postedValue = val;
+}
+
+void MyMoneyAccount::setTotalPostedValue(const MyMoneyMoney& val)
+{
+  Q_D(MyMoneyAccount);
+  d->m_totalPostedValue = val;
 }
 
 QPixmap MyMoneyAccount::accountPixmap(const bool reconcileFlag, const int size) const

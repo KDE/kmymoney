@@ -48,10 +48,11 @@ public:
     Vat,
     CostCenter,
     TotalBalance,
-    PostedValue,
-    TotalValue,
+    TotalPostedValue,
     Number,
     SortCode,
+    PostedValue,
+    Balance,
     // insert new columns above this line
     MaxColumns
   };

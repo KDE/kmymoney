@@ -419,8 +419,6 @@ void JournalModel::load(const QMap<QString, MyMoneyTransaction>& list)
   }
   endResetModel();
 
-  updateBalances();
-
   emit modelLoaded();
 
   // and don't count loading as a modification
@@ -617,4 +615,25 @@ void JournalModel::updateBalances()
 
   // and store the results in the accountsModel
   emit balancesChanged(d->balanceCache);
+}
+
+MyMoneyMoney JournalModel::balance(const QString& accountId, const QDate& date) const
+{
+  if (date.isValid()) {
+    MyMoneyMoney balance;
+    QModelIndex lastIdx = upperBound(MyMoneyTransaction::uniqueSortKey(date, QString()), 0, rowCount());
+    for (int row = 0; row < lastIdx.row(); ++row) {
+      const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
+      if (journalEntry.split().accountId() == accountId) {
+
+        if (journalEntry.transaction().isStockSplit()) {
+          balance *= journalEntry.split().shares();
+        } else {
+          balance += journalEntry.split().shares();
+        }
+      }
+    }
+    return balance;
+  }
+  return d->balanceCache.value(accountId);
 }

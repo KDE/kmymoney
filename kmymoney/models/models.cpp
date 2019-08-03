@@ -42,7 +42,8 @@
 #include "institutionsmodel.h"
 #include "journalmodel.h"
 #include "pricemodel.h"
-#include "equitiesmodel.h"
+// #include "equitiesmodel.h"
+#include "parametersmodel.h"
 
 #include "mymoneyfile.h"
 
@@ -59,7 +60,7 @@ struct Models::Private {
 #ifdef ENABLE_UNFINISHEDFEATURES
   , m_ledgerModel(0)
 #endif
-  , m_equitiesModel(0)
+  // , m_equitiesModel(0)
   // , m_securitiesModel(0)
   {}
 
@@ -68,7 +69,7 @@ struct Models::Private {
 #ifdef ENABLE_UNFINISHEDFEATURES
   LedgerModel *m_ledgerModel;
 #endif
-  EquitiesModel *m_equitiesModel;
+  // EquitiesModel *m_equitiesModel;
   // SecuritiesModel *m_securitiesModel;
 };
 
@@ -129,7 +130,6 @@ LedgerModel* Models::ledgerModel()
 }
 #endif
 
-/// @todo add new models here
 /**
  * This is the function to get a reference to the core @ref CostCenterModel.
  * The returned object is owned by this object so don't delete it. It creates the
@@ -220,9 +220,22 @@ PriceModel* Models::priceModel() const
   return MyMoneyFile::instance()->priceModel();
 }
 
+/**
+ * This is the function to get a reference to the core @ref ParametersModel.
+ * The returned object is owned by this object so don't delete it. It creates the
+ * model on the first access to it.
+ */
+ParametersModel* Models::parametersModel() const
+{
+  return MyMoneyFile::instance()->parametersModel();
+}
 
 
 
+
+/// @todo add new models here
+
+#if 0
 /**
  * This is the function to get a reference to the core @ref EquitiesModel.
  * The returned object is owned by this object so don't delete it. It creates the
@@ -242,7 +255,6 @@ EquitiesModel* Models::equitiesModel()
 #endif
 }
 
-#if 0
 /**
  * This is the function to get a reference to the core @ref SecuritiesModel.
  * The returned object is owned by this object so don't delete it. It creates the
@@ -289,6 +301,7 @@ void Models::fileSaved()
   institutionsModel()->setDirty(false);
   journalModel()->setDirty(false);
   priceModel()->setDirty(false);
+  parametersModel()->setDirty(false);
 }
 
 void Models::fileOpened()

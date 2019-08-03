@@ -55,6 +55,7 @@ public:
   inline const MyMoneyTransaction& transaction() const { return *m_transaction; }
   inline const MyMoneySplit& split() const { return m_split; }
   inline const QString& id() const { return m_id; }
+  inline bool hasReferenceTo(const QString& id) const { return m_transaction->hasReferenceTo(id); }
 
 private:
   QString                             m_id;
@@ -118,6 +119,12 @@ public:
 
   JournalModelNewTransaction* newTransaction();
 
+  MyMoneyMoney balance(const QString& accountId, const QDate& date) const;
+
+
+public Q_SLOTS:
+  void updateBalances();
+
 private:
   void addTransaction(const QString& id, MyMoneyTransaction& t);
   void removeTransaction(const QModelIndex& idx);
@@ -125,7 +132,6 @@ private:
   QModelIndex firstIndexById(const QString& id) const;
   QModelIndex firstIndexByKey(const QString& key) const;
 
-  void updateBalances();
 
 Q_SIGNALS:
   void balancesChanged(const QHash<QString, MyMoneyMoney>& balances) const;

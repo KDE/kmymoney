@@ -159,6 +159,7 @@ class AccountsModel;
 class InstitutionsModel;
 class JournalModel;
 class PriceModel;
+class ParametersModel;
 
 namespace eMyMoney { namespace Account { enum class Type; }
                      namespace File { enum class Object; }
@@ -923,6 +924,11 @@ public:
    * The price model instance
    */
   PriceModel* priceModel() const;
+
+  /**
+   * The parameters model instance
+   */
+  ParametersModel* parametersModel() const;
 
 
   /// @todo add new models here

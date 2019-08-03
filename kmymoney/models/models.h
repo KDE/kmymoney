@@ -55,6 +55,7 @@ class AccountsModel;
 class InstitutionsModel;
 class JournalModel;
 class PriceModel;
+class ParametersModel;
 
 /**
   * This object is the owner and maintainer of all the core models of KMyMoney.
@@ -103,8 +104,8 @@ public:
   InstitutionsModel* institutionsModel() const;
   JournalModel* journalModel() const;
   PriceModel* priceModel() const;
-
-  EquitiesModel* equitiesModel();
+  ParametersModel* parametersModel() const;
+  // EquitiesModel* equitiesModel();
 
   /**
    * returns the index of an item the @a model based on the @a id of role @a role.

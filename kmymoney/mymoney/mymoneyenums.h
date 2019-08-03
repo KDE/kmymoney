@@ -452,13 +452,13 @@ namespace eMyMoney {
       AccountIsClosedRole,
       AccountIsInvestRole,
       AccountBalanceRole,
-      AccountTotalBalanceRole,
       AccountValueRole,
       AccountTotalValueRole,
       AccountFullNameRole,
       AccountDisplayOrderRole,
       AccountFractionRole,
       AccountParentIdRole,
+      AccountCurrencyIdRole,
 
       // MyMoneyInstitution
       InstitutionSortCodeRole,
@@ -498,6 +498,9 @@ namespace eMyMoney {
 
       // Ledger
       LedgerDisplayOrderRole,
+
+      // Parameter
+      ParameterValueRole,
     };
   }
 }

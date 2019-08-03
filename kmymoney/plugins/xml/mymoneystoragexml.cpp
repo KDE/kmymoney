@@ -81,6 +81,7 @@
 #include "institutionsmodel.h"
 #include "journalmodel.h"
 #include "pricemodel.h"
+#include "parametersmodel.h"
 
 using namespace eMyMoney;
 
@@ -366,7 +367,10 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
             m_reader->d->secList[sec.id()] = sec;
           m_reader->signalProgress(++m_elementCount, 0);
         } else if (s == nodeName(Node::KeyValuePairs)) {
-          addToKeyValueContainer(*m_reader->m_storage, m_baseNode);
+          MyMoneyKeyValueContainer container;
+          addToKeyValueContainer(container, m_baseNode);
+          m_reader->m_models->parametersModel()->load(container.pairs());
+
         } else if (s == nodeName(Node::Institution)) {
           auto i = readInstitution(m_baseNode);
           if (!i.id().isEmpty())
@@ -1491,7 +1495,7 @@ void MyMoneyStorageXML::writeFile(QIODevice* qf, MyMoneyStorageMgr* storage, Mod
   writeTransactions(transactions);
   mainElement.appendChild(transactions);
 
-  QDomElement keyvalpairs = writeKeyValuePairs(m_storage->pairs());
+  QDomElement keyvalpairs = writeKeyValuePairs(m_models->parametersModel()->pairs());
   mainElement.appendChild(keyvalpairs);
 
   QDomElement schedules = m_doc->createElement(tagName(Tag::Schedules));

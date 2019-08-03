@@ -2,6 +2,7 @@
 set(libviews_a_SOURCES
   kaccountsview.cpp
   kcategoriesview.cpp
+  accountdelegate.cpp
   kgloballedgerview.cpp
   kwelcomepage.cpp
   khomeview.cpp

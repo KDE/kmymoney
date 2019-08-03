@@ -222,7 +222,7 @@ void ColumnSelector::slotColumnsMenu(const QPoint)
           continue;
         if (d->alwaysVisibleColumns.contains(col))
           continue;
-        if (!d->selectableColumns.contains(col))
+        if (!d->selectableColumns.isEmpty() && !d->selectableColumns.contains(col))
           continue;
         if (!d->isColumnHidden(col)) {
           visibleColumns.append(col);
