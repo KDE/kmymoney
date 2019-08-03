@@ -240,8 +240,13 @@ QVariant EquitiesModel::extraColumnData(const QModelIndex& parent, int row, int 
 
       case Value:
         break;
+
       case Quantity:
-        return tradingCurrencyIdx.data(eMyMoney::Model::SecuritySymbolRole).toString();
+        {
+          auto balance = baseIdx.data(eMyMoney::Model::AccountBalanceRole).value<MyMoneyMoney>();
+          auto prec = MyMoneyMoney::denomToPrec(securityIdx.data(eMyMoney::Model::SecuritySmallestAccountFractionRole).toInt());
+          return balance.formatMoney(QString(), prec);
+        }
 
       case Price:
         {
@@ -250,6 +255,7 @@ QVariant EquitiesModel::extraColumnData(const QModelIndex& parent, int row, int 
           const auto tradingCurrencySymbol = tradingCurrencyIdx.data(eMyMoney::Model::SecuritySymbolRole).toString();
           return file->price(acc.currencyId(), tradingCurrencyId).rate(tradingCurrencyId).formatMoney(tradingCurrencySymbol, prec);
         }
+
       default:
         break;
     }
@@ -257,6 +263,15 @@ QVariant EquitiesModel::extraColumnData(const QModelIndex& parent, int row, int 
     switch(role) {
       case Qt::DecorationRole:
         return QVariant();
+
+      case Qt::TextAlignmentRole:
+        switch(extraColumn) {
+          case Symbol:
+            return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
+          default:
+            return QVariant(Qt::AlignRight | Qt::AlignVCenter);
+        }
+        break;
 
       default:
         return idx.data(role);

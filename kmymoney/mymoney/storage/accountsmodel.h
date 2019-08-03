@@ -116,6 +116,7 @@ protected:
   // reparent()
 public Q_SLOTS:
   void setupAccountFractions();
+  void updateAccountBalances(const QHash<QString, MyMoneyMoney>& balances);
 
 private:
   struct Private;

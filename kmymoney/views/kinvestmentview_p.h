@@ -304,7 +304,7 @@ public:
     auto treeItem = ui->m_securitiesTree->currentIndex();
     if (treeItem.isValid()) {
       auto mdlItem = m_securitiesProxyModel->index(treeItem.row(), SecuritiesModel::Security, treeItem.parent());
-      sec = MyMoneyFile::instance()->security(mdlItem.data(Qt::UserRole).toString());
+      sec = MyMoneyFile::instance()->security(mdlItem.data(eMyMoney::Model::IdRole).toString());
     }
     return sec;
   }

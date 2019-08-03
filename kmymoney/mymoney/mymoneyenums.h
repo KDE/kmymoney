@@ -297,7 +297,7 @@ namespace eMyMoney {
       AddShares,
       RemoveShares,
       SplitShares,
-      InterestIncome///
+      InterestIncome
     };
 
     inline uint qHash(const InvestmentTransactionType key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
@@ -428,7 +428,10 @@ namespace eMyMoney {
   // think about moving this to modelenums.h
   namespace Model {
     enum Roles {
-      IdRole  = Qt::UserRole,      // must remain Qt::UserRole due to KMyMoneyMVCCombo::selectedItem,,
+      // The IdRole is used by all model items whereas the id of all other roles id unique
+      // for each model. This way, we can identify if an id is used on the wrong model.
+      IdRole  = Qt::UserRole,      // must remain Qt::UserRole due to KMyMoneyMVCCombo::selectedItem
+
       // MyMoneyPayee
       PayeeNameRole,
       PayeeAddressRole,
@@ -472,6 +475,8 @@ namespace eMyMoney {
       SecurityTradingCurrencyIdRole,
       SecurityTradingCurrencyIndexRole,
       SecurityPricePrecisionRole,
+      SecuritySmallestAccountFractionRole,
+      SecuritySmallestCashFractionRole,
 
       // MyMoneyBudget
       BudgetNameRole,

@@ -99,6 +99,19 @@ struct AccountsModel::Private
     return false;
   }
 
+  MyMoneyMoney calculateTotalBalance(QModelIndex idx)
+  {
+    Q_Q(AccountsModel);
+    MyMoneyMoney result = idx.data(eMyMoney::Model::AccountBalanceRole).value<MyMoneyMoney>();
+    const auto rows = q->rowCount(idx);
+    for (int row = 0; row < rows; ++row) {
+      QModelIndex subIdx = q->index(row, 0, idx);
+      result += calculateTotalBalance(subIdx);
+    }
+    q->setData(idx, QVariant::fromValue(result), eMyMoney::Model::AccountTotalBalanceRole);
+    return result;
+  }
+
   struct DefaultAccounts {
     eMyMoney::Account::Standard groupType;
     eMyMoney::Account::Type     accountType;
@@ -230,7 +243,11 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
           break;
 
         case Column::TotalBalance:
-          return i18n("Balance");
+          return QStringLiteral("Balance");
+          /// @todo the delegate should show this using the AccountBalanceRole or AccountTotalBalanceRole
+          /// depending on the expansion of the account entry
+          // QModelIndex securityIdx = MyMoneyFile::instance()->currenciesModel()->indexById(account.currencyId());
+          // return account.balance().formatMoney(securityIdx.data(eMyMoney::Model::SecuritySymbolRole).toString(), MyMoneyMoney::denomToPrec(account.fraction()));
 
         case Column::PostedValue:
           return i18n("Posted Value");
@@ -336,9 +353,9 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::AccountValueRole:
       qDebug() << "implement AccountValueRole";
       break;
+
     case eMyMoney::Model::AccountBalanceRole:
-      qDebug() << "implement AccountBalanceRole";
-      break;
+      return QVariant::fromValue(account.balance());
   }
   return QVariant();
 }
@@ -372,8 +389,16 @@ bool AccountsModel::setData(const QModelIndex& index, const QVariant& value, int
       }
 #endif
       break;
+    case eMyMoney::Model::AccountBalanceRole:
+      account.setBalance(value.value<MyMoneyMoney>());
+      return true;
+
+    default:
+      if (role >= Qt::UserRole) {
+        qDebug() << "setData(" << index.row() << index.column() << ")" << value << role;
+      }
+      break;
   }
-  qDebug() << "setData(" << index.row() << index.column() << ")" << value << role;
   return QAbstractItemModel::setData(index, value, role);
 }
 
@@ -581,4 +606,27 @@ void AccountsModel::setupAccountFractions()
       currency = MyMoneyFile::instance()->currency(account.currencyId());
     account.fraction(currency);
   }
+}
+
+
+void AccountsModel::updateAccountBalances(const QHash<QString, MyMoneyMoney>& balances)
+{
+  beginResetModel();
+
+  // suppress single updates while processing whole batch
+  d->updateOnBalanceChange = false;
+
+  for(auto it = balances.constBegin(); it != balances.constEnd(); ++it) {
+    auto accountIdx = indexById(it.key());
+    setData(accountIdx, QVariant::fromValue(it.value()), eMyMoney::Model::AccountBalanceRole);
+  }
+
+  // now that we have all balance, we can calculate the balances in the parent accounts
+  for (int row = assetIndex().row(); row < rowCount(); ++row) {
+    d->calculateTotalBalance(index(row, 0));
+  }
+  // turn on update on balance change
+  d->updateOnBalanceChange = true;
+
+  endResetModel();
 }

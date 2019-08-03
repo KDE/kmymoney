@@ -209,6 +209,7 @@ public:
     new ModelTest(&journalModel, file);
     new ModelTest(&priceModel, file);
 #endif
+    qq->connect(&journalModel, &JournalModel::balancesChanged, &accountsModel, &AccountsModel::updateAccountBalances);
   }
 
   ~Private() {
@@ -3202,19 +3203,16 @@ void MyMoneyFile::removePrice(const MyMoneyPrice& price)
 
 MyMoneyPrice MyMoneyFile::price(const QString& fromId, const QString& toId, const QDate& date, const bool exactDate) const
 {
-  MyMoneyPrice rc;
-  /// @todo port to new model code
-#if 0
-  d->checkStorage();
-
   QString to(toId);
-  if (to.isEmpty())
+  if (to.isEmpty()) {
     to = value("kmm-baseCurrency");
-  // if some id is missing, we can return an empty price object
+  }
+  // if any id is missing at that point,
+  // we can safely return an empty price object
   if (fromId.isEmpty() || to.isEmpty())
     return MyMoneyPrice();
 
-  // we don't search our tables if someone asks stupid stuff
+  // we don't interrogate our tables if someone asks stupid stuff
   if (fromId == toId) {
     return MyMoneyPrice(fromId, toId, date, MyMoneyMoney::ONE, "KMyMoney");
   }
@@ -3222,16 +3220,16 @@ MyMoneyPrice MyMoneyFile::price(const QString& fromId, const QString& toId, cons
   // if not asking for exact date, try to find the exact date match first,
   // either the requested price or its reciprocal value. If unsuccessful, it will move
   // on and look for prices of previous dates
-  MyMoneyPrice rc = d->m_storage->price(fromId, to, date, true);
+  MyMoneyPrice rc = d->priceModel.price(fromId, to, date, true);
   if (!rc.isValid()) {
     // not found, search 'to-from' rate and use reciprocal value
-    rc = d->m_storage->price(to, fromId, date, true);
+    rc = d->priceModel.price(to, fromId, date, true);
 
     // not found, search previous dates, if exact date is not needed
     if (!exactDate && !rc.isValid()) {
       // search 'from-to' and 'to-from', select the most recent one
-      MyMoneyPrice fromPrice = d->m_storage->price(fromId, to, date, exactDate);
-      MyMoneyPrice toPrice = d->m_storage->price(to, fromId, date, exactDate);
+      MyMoneyPrice fromPrice = d->priceModel.price(fromId, to, date, exactDate);
+      MyMoneyPrice toPrice = d->priceModel.price(to, fromId, date, exactDate);
 
       // check first whether both prices are valid
       if (fromPrice.isValid() && toPrice.isValid()) {
@@ -3249,7 +3247,6 @@ MyMoneyPrice MyMoneyFile::price(const QString& fromId, const QString& toId, cons
       }
     }
   }
-#endif
   return rc;
 }
 

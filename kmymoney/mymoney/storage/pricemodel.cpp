@@ -74,7 +74,7 @@ PriceModel::~PriceModel()
 
 QString PriceModel::createId(const QString& from, const QString& to, const QDate& date)
 {
-  return QString("%1-%2-%3").arg(date.toString(Qt::ISODate), from, to);
+  return QString("%1-%2-%3").arg(from, to, date.toString(Qt::ISODate));
 }
 
 QPair<QString,QString> PriceEntry::pricePair() const
@@ -112,12 +112,21 @@ QVariant PriceModel::data(const QModelIndex& idx, int role) const
         case Commodity:
           return QString("From");
 
+        case StockName:
+          return QString("Stockname");
+
         case Currency:
           return QString("To");
 
         case Date:
           return QLocale().toString(priceEntry.date(), QLocale::ShortFormat);
 
+        case Price:
+          /// @todo fix precision handling
+          return priceEntry.rate(priceEntry.to()).formatMoney("", 2);
+
+        case Source:
+          return priceEntry.source();
       }
       break;
 

@@ -127,6 +127,9 @@ private:
 
   void updateBalances();
 
+Q_SIGNALS:
+  void balancesChanged(const QHash<QString, MyMoneyMoney>& balances) const;
+
 public Q_SLOTS:
 
 private:

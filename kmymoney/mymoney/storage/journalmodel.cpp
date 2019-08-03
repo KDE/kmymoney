@@ -419,7 +419,7 @@ void JournalModel::load(const QMap<QString, MyMoneyTransaction>& list)
   }
   endResetModel();
 
-  /// @todo add/update balance cache
+  updateBalances();
 
   emit modelLoaded();
 
@@ -604,9 +604,17 @@ void JournalModel::updateBalances()
 {
   d->loadAccountCache();
 
+  // calculate the balances
   const int rows = rowCount();
   for (int row = 0; row < rows; ++row) {
-    JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->dataRef();
-    d->balanceCache[journalEntry.split().accountId()] += journalEntry.split().shares();
+    const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
+    if (journalEntry.transaction().isStockSplit()) {
+      d->balanceCache[journalEntry.split().accountId()] *= journalEntry.split().shares();
+    } else {
+      d->balanceCache[journalEntry.split().accountId()] += journalEntry.split().shares();
+    }
   }
+
+  // and store the results in the accountsModel
+  emit balancesChanged(d->balanceCache);
 }

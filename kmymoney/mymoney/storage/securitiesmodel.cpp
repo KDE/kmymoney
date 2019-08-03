@@ -169,6 +169,12 @@ QVariant SecuritiesModel::data(const QModelIndex& index, int role) const
 
     case eMyMoney::Model::SecurityPricePrecisionRole:
       return security.pricePrecision();
+
+    case eMyMoney::Model::SecuritySmallestAccountFractionRole:
+      return security.smallestAccountFraction();
+
+    case eMyMoney::Model::SecuritySmallestCashFractionRole:
+      return security.smallestCashFraction();
   }
   return QVariant();
 }
