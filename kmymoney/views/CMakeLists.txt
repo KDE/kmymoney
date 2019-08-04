@@ -36,6 +36,7 @@ set(libviews_a_UI
   kinstitutionsviewdecl.ui
   kinvestmentviewdecl.ui
   kpayeesviewdecl.ui
+  kreportsviewdecl.ui
   kscheduledviewdecl.ui
   ktagsviewdecl.ui
   konlinejoboutbox.ui

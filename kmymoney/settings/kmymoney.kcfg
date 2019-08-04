@@ -453,6 +453,12 @@
    <default></default>
   </entry>
  </group>
+ <group name="Report View Settings">
+  <entry name="showReportsExpanded" type="Bool">
+   <label>Show reports view expanded when loaded</label>
+   <default>false</default>
+  </entry>
+ </group>
 </kcfg>
 <!--
   <entry name="" type="">

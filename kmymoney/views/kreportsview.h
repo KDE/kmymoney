@@ -59,6 +59,8 @@
 #include "tocitemgroup.h"
 #include "tocitemreport.h"
 
+#include "ui_kreportsviewdecl.h"
+
 class MyMoneyReport;
 
 /**
@@ -68,7 +70,7 @@ class MyMoneyReport;
   *
   * @short A view for reports.
 **/
-class KReportsView : public KMyMoneyViewBase
+class KReportsView : public QWidget, Ui::KReportsViewDecl
 {
   Q_OBJECT
 public:
@@ -166,7 +168,6 @@ private:
 
   bool m_needReload;
 
-  KTabWidget* m_reportTabWidget;
   QWidget* m_listTab;
   QVBoxLayout* m_listTabLayout;
   QTreeWidget* m_tocTreeWidget;
@@ -239,6 +240,7 @@ public slots:
 
 protected slots:
   void slotSaveFilterChanged(const QString&);
+  void slotExpandCollapse();
 
 signals:
   /**
@@ -250,6 +252,11 @@ signals:
     * This signal is emitted whenever a transaction is selected
     */
   void ledgerSelected(const QString&, const QString&);
+
+  /**
+    * This signal is emitted whenever the view is about to be shown.
+    */
+  void aboutToShow();
 
 private:
   /**

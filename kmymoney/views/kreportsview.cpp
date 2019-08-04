@@ -336,17 +336,30 @@ public:
 };
 
 KReportsView::KReportsView(QWidget *parent, const char *name) :
-    KMyMoneyViewBase(parent, name, i18n("Reports")),
+    QWidget(parent),
     d(new Private),
     m_needReload(false)
 {
+  setupUi(this);
   // build reports toc
 
   setColumnsAlreadyAdjusted(false);
 
-  m_reportTabWidget = new KTabWidget(this);
-  addWidget(m_reportTabWidget);
   m_reportTabWidget->setTabsClosable(true);
+
+  // setup icons for collapse and expand button
+  KGuiItem collapseGuiItem("",
+                           KIcon("zoom-out"),
+                           QString(),
+                           QString());
+  KGuiItem expandGuiItem("",
+                         KIcon("zoom-in"),
+                         QString(),
+                         QString());
+  m_collapseButton->setGuiItem(collapseGuiItem);
+  m_expandButton->setGuiItem(expandGuiItem);
+  connect(m_collapseButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
+  connect(m_expandButton, SIGNAL(clicked()), this, SLOT(slotExpandCollapse()));
 
   m_listTab = new QWidget(m_reportTabWidget);
   m_listTabLayout = new QVBoxLayout(m_listTab);
@@ -403,6 +416,9 @@ void KReportsView::showEvent(QShowEvent * event)
 
   if (m_needReload) {
     loadView();
+    if (KMyMoneyGlobalSettings::showReportsExpanded()) {
+      m_tocTreeWidget->expandAll();
+    }
     m_needReload = false;
   }
 
@@ -412,8 +428,7 @@ void KReportsView::showEvent(QShowEvent * event)
   else
     emit reportSelected(MyMoneyReport());
 
-  // don't forget base class implementation
-  KMyMoneyViewBase::showEvent(event);
+  QWidget::showEvent(event);
 }
 
 void KReportsView::slotLoadView()
@@ -1856,6 +1871,17 @@ void KReportsView::restoreTocExpandState(QMap<QString, bool>& expandStates)
         item->setExpanded(false);
       }
     }
+  }
+}
+
+void KReportsView::slotExpandCollapse()
+{
+  if (sender() == m_expandButton) {
+    KMyMoneyGlobalSettings::setShowReportsExpanded(true);
+    m_tocTreeWidget->expandAll();
+  } else {
+      KMyMoneyGlobalSettings::setShowReportsExpanded(false);
+      m_tocTreeWidget->collapseAll();
   }
 }
 
