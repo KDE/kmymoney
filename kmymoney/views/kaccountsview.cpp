@@ -43,6 +43,7 @@
 #include "storageenums.h"
 #include "menuenums.h"
 #include "accountdelegate.h"
+#include "accountsmodel.h"
 
 using namespace Icons;
 
@@ -63,6 +64,7 @@ KAccountsView::KAccountsView(QWidget *parent) :
   connect(pActions[eMenu::Action::UpdateAllAccounts],   &QAction::triggered, this, &KAccountsView::slotAccountUpdateOnlineAll);
 
   d->ui->m_accountTree->setItemDelegate(new AccountDelegate(d->ui->m_accountTree));
+  connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::netWorthChanged, this, &KAccountsView::slotNetWorthChanged);
 }
 
 KAccountsView::~KAccountsView()
@@ -75,6 +77,9 @@ void KAccountsView::slotSettingsChanged()
   d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
   d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
   d->m_proxyModel->setHideFavoriteAccounts(true);
+
+  MyMoneyFile::instance()->accountsModel()->setColorScheme(AccountsModel::Positive, KMyMoneySettings::schemeColor(SchemeColor::Positive));
+  MyMoneyFile::instance()->accountsModel()->setColorScheme(AccountsModel::Negative, KMyMoneySettings::schemeColor(SchemeColor::Negative));
 }
 
 void KAccountsView::executeCustomAction(eView::Action action)
@@ -256,11 +261,10 @@ void KAccountsView::slotUnusedIncomeExpenseAccountHidden()
   d->ui->m_hiddenCategories->setVisible(d->m_haveUnusedCategories);
 }
 
-void KAccountsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)
+void KAccountsView::slotNetWorthChanged(const MyMoneyMoney &netWorth, bool isApproximate)
 {
   Q_D(KAccountsView);
-  /// @todo port to new model code
-  // d->netBalProChanged(netWorth, d->ui->m_totalProfitsLabel, View::Accounts);
+  d->updateNetWorthLabel(netWorth, isApproximate, d->ui->m_totalProfitsLabel, i18n("Net Worth: %1"));
 }
 
 void KAccountsView::slotShowAccountMenu(const MyMoneyAccount& acc)
@@ -289,11 +293,13 @@ void KAccountsView::slotSelectByVariant(const QVariantList& variant, eView::Inte
 {
   Q_D(KAccountsView);
   switch (intent) {
+    /// @todo cleanup
+#if 0
     case eView::Intent::UpdateNetWorth:
       if (variant.count() == 1)
         slotNetWorthChanged(variant.first().value<MyMoneyMoney>());
       break;
-
+#endif
     case eView::Intent::SetOnlinePlugins:
       if (variant.count() == 1)
         d->m_onlinePlugins = static_cast<QMap<QString, KMyMoneyPlugin::OnlinePlugin*>*>(variant.first().value<void*>());

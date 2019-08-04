@@ -57,6 +57,10 @@ public:
     MaxColumns
   };
 
+  enum ColorScheme {
+    Positive,
+    Negative
+  };
 
   explicit AccountsModel(QObject* parent = 0);
   virtual ~AccountsModel();
@@ -108,6 +112,8 @@ public:
   QModelIndex expenseIndex() const;
   QModelIndex equityIndex() const;
 
+  void setColorScheme(ColorScheme scheme, const QColor& color);
+
 protected:
   void clearModelItems() override;
   void addFavorite(const QString& id);
@@ -118,6 +124,10 @@ protected:
 public Q_SLOTS:
   void setupAccountFractions();
   void updateAccountBalances(const QHash<QString, MyMoneyMoney>& balances);
+
+Q_SIGNALS:
+  void netWorthChanged(const MyMoneyMoney& amount, bool approximate) const;
+  void profitLossChanged(const MyMoneyMoney& amount, bool approximate) const;
 
 private:
   struct Private;

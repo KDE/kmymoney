@@ -45,6 +45,7 @@
 #include "mymoneysecurity.h"
 #include "securitiesmodel.h"
 #include "mymoneyprice.h"
+#include "kmymoneysettings.h"
 
 #include "icons.h"
 
@@ -105,6 +106,19 @@ struct AccountsModel::Private
     return false;
   }
 
+  MyMoneyMoney adjustedBalance(const MyMoneyMoney& amount, const MyMoneyAccount& account)
+  {
+    switch(account.accountGroup()) {
+      case eMyMoney::Account::Type::Liability:
+      case eMyMoney::Account::Type::Expense:
+      case eMyMoney::Account::Type::Equity:
+        return -amount;
+      default:
+        break;
+    }
+    return amount;
+  }
+
   MyMoneyMoney calculateTotalValue(QModelIndex idx)
   {
     Q_Q(AccountsModel);
@@ -116,6 +130,20 @@ struct AccountsModel::Private
     }
     q->setData(idx, QVariant::fromValue(result), eMyMoney::Model::AccountTotalValueRole);
     return result;
+  }
+
+  MyMoneyMoney netWorth() const
+  {
+    Q_Q(const AccountsModel);
+    return q->assetIndex().data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>()
+         + q->liabilityIndex().data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>();
+  }
+
+  MyMoneyMoney profitLoss() const
+  {
+    Q_Q(const AccountsModel);
+    return q->incomeIndex().data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>()
+         + q->expenseIndex().data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>();
   }
 
   struct DefaultAccounts {
@@ -138,6 +166,8 @@ struct AccountsModel::Private
   QHash<QString, MyMoneyMoney>  value;
   QHash<QString, MyMoneyMoney>  totalValue;
   bool                          updateOnBalanceChange;
+  QColor                        positiveScheme;
+  QColor                        negativeScheme;
 };
 
 AccountsModel::AccountsModel(QObject* parent)
@@ -178,11 +208,11 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
       case Column::Type:
         return i18n("Type");
       case Column::Tax:
-        return i18n("Tax");
+        return i18nc("Column heading for category in tax report", "Tax");
       case Column::Vat:
-        return i18n("VAT");
+        return i18nc("Column heading for VAT category", "VAT");
       case Column::CostCenter:
-        return i18nc("CostCenter", "CC");
+        return i18nc("Column heading for Cost Center", "CC");
       case Column::TotalBalance:
         return i18n("Balance");
       case Column::PostedValue:
@@ -255,19 +285,19 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
           {
             auto security = MyMoneyFile::instance()->currency(account.currencyId());
             const auto prec = MyMoneyMoney::denomToPrec(account.fraction());
-            return account.balance().formatMoney(security.tradingSymbol(), prec);
+            return d->adjustedBalance(account.balance(), account).formatMoney(security.tradingSymbol(), prec);
           }
 
         case Column::PostedValue:
           {
             const auto baseCurrency = MyMoneyFile::instance()->baseCurrency();
-            return account.postedValue().formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
+            return d->adjustedBalance(account.postedValue(), account).formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
           }
 
         case Column::TotalPostedValue:
         {
           const auto baseCurrency = MyMoneyFile::instance()->baseCurrency();
-          return account.totalPostedValue().formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
+          return d->adjustedBalance(account.totalPostedValue(), account).formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
         }
 
         case Column::Number:
@@ -293,6 +323,19 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
           break;
       }
       return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
+
+    case Qt::ForegroundRole:
+      switch(idx.column()) {
+        case Column::Balance:
+          return d->adjustedBalance(account.balance(), account).isNegative() ? d->negativeScheme : d->positiveScheme;
+
+        case Column::PostedValue:
+          return d->adjustedBalance(account.postedValue(), account).isNegative() ? d->negativeScheme : d->positiveScheme;
+
+        case Column::TotalPostedValue:
+          return d->adjustedBalance(account.totalPostedValue(), account).isNegative() ? d->negativeScheme : d->positiveScheme;
+      }
+      break;
 
     case Qt::FontRole:
       {
@@ -384,8 +427,6 @@ bool AccountsModel::setData(const QModelIndex& index, const QVariant& value, int
     return false;
   }
 
-  bool rc = false;
-
   // check if something is performed on a favorite entry
   // and skip right away
   if (d->isFavoriteIndex(index.parent())) {
@@ -426,6 +467,18 @@ bool AccountsModel::setData(const QModelIndex& index, const QVariant& value, int
       break;
   }
   return QAbstractItemModel::setData(index, value, role);
+}
+
+void AccountsModel::setColorScheme(AccountsModel::ColorScheme scheme, const QColor& color)
+{
+  switch(scheme) {
+    case Positive:
+      d->positiveScheme = color;
+      break;
+    case Negative:
+      d->negativeScheme = color;
+      break;
+  }
 }
 
 void AccountsModel::clearModelItems()
@@ -645,6 +698,7 @@ void AccountsModel::updateAccountBalances(const QHash<QString, MyMoneyMoney>& ba
   // suppress single updates while processing whole batch
   d->updateOnBalanceChange = false;
 
+  bool approximate = false;
   for(auto it = balances.constBegin(); it != balances.constEnd(); ++it) {
     auto accountIdx = indexById(it.key());
     MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(accountIdx.internalPointer())->dataRef();
@@ -657,21 +711,27 @@ void AccountsModel::updateAccountBalances(const QHash<QString, MyMoneyMoney>& ba
     if (!it.value().isZero()) {
       MyMoneySecurity security(baseCurrency);
       if (account.isInvest()) {
-        security = file->security(account.currencyId());
+        security = file->currency(account.currencyId());
         if (!security.id().isEmpty()) {
           prices += file->price(account.currencyId(), security.tradingCurrency());
           if (security.tradingCurrency() != baseCurrency.id()) {
-            MyMoneySecurity sec = file->security(security.tradingCurrency());
+            MyMoneySecurity sec = file->currency(security.tradingCurrency());
             if (!sec.id().isEmpty()) {
               prices += file->price(sec.id(), baseCurrency.id());
+            } else {
+              qDebug() << security.tradingCurrency() << "not found";
+              approximate = true;
             }
           }
         }
         needConvert = true;
       } else if (account.currencyId() != baseCurrency.id()) {
-        security = file->security(account.currencyId());
+        security = file->currency(account.currencyId());
         if (!security.id().isEmpty()) {
           prices += file->price(account.currencyId(), baseCurrency.id());
+        } else {
+          qDebug() << security.id() << "not found";
+          approximate = true;
         }
         needConvert = true;
       }
@@ -693,11 +753,22 @@ void AccountsModel::updateAccountBalances(const QHash<QString, MyMoneyMoney>& ba
   }
 
   // now that we have all values, we can calculate the total values in the parent accounts
+  MyMoneyMoney netWorth = d->netWorth();
+  MyMoneyMoney profit = d->profitLoss();
+
   for (int row = assetIndex().row(); row < rowCount(); ++row) {
     d->calculateTotalValue(index(row, 0));
   }
   // turn on update on balance change
   d->updateOnBalanceChange = true;
+
+  MyMoneyMoney newNetWorth = d->netWorth();
+  if (netWorth != newNetWorth)
+    emit netWorthChanged(newNetWorth, approximate);
+
+  MyMoneyMoney newProfit = d->profitLoss();
+  if (profit != newProfit)
+    emit profitLossChanged(newProfit, approximate);
 
   endResetModel();
 }

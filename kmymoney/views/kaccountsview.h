@@ -55,7 +55,7 @@ public:
   void updateActions(const MyMoneyObject &obj);
 
 public Q_SLOTS:
-  void slotNetWorthChanged(const MyMoneyMoney &);
+  void slotNetWorthChanged(const MyMoneyMoney &netWorth, bool isApproximate);
   void slotShowAccountMenu(const MyMoneyAccount& acc);
 
   void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;

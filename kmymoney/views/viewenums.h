@@ -42,8 +42,8 @@ namespace eView {
     SynchronizeAccountInInvestmentView,
     SynchronizeAccountInLedgersView,
     ToggleColumn,
-    UpdateNetWorth,
-    UpdateProfit,
+    UpdateNetWorth,                             // deprecated
+    UpdateProfit,                               // deprecated
     StartEnteringOverdueScheduledTransactions,
     FinishEnteringOverdueScheduledTransactions,
     EnterSchedule,
