@@ -429,8 +429,8 @@ public:
 
   int processItems(Worker *worker, const QModelIndexList& indexes)
   {
-    for (int row = 0; row < indexes.count(); ++row) {
-      worker->operator()(static_cast<TreeItem<T>*>(indexes.value(row).internalPointer())->constDataRef());
+    foreach (const auto idx, indexes) {
+      worker->operator()(static_cast<TreeItem<T>*>(idx.internalPointer())->constDataRef());
     }
     return indexes.count();
   }
@@ -439,9 +439,10 @@ public:
   {
     bool rc = false;
     QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, "*", -1, Qt::MatchWildcard | Qt::MatchRecursive);
-    for (int row = 0; row < indexes.count(); ++row) {
-      const T& item = static_cast<TreeItem<T>*>(index(row, 0).internalPointer())->constDataRef();
-      rc |= item.hasReferenceTo(id);
+    foreach (const auto idx, indexes) {
+      const T& item = static_cast<TreeItem<T>*>(idx.internalPointer())->constDataRef();
+      if ((rc |= item.hasReferenceTo(id)) == true)
+        break;
     }
     return rc;
   }
@@ -450,8 +451,8 @@ public:
   {
     QList<T> list;
     QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive);
-    for (int row = 0; row < indexes.count(); ++row) {
-      list.append(static_cast<TreeItem<T>*>(indexes.value(row).internalPointer())->constDataRef());
+    foreach (const auto idx, indexes) {
+      list.append(static_cast<TreeItem<T>*>(idx.internalPointer())->constDataRef());
     }
     return list;
   }
