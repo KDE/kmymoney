@@ -1,6 +1,7 @@
 /*
  * Copyright 2010-2014  Cristian Oneț <onet.cristian@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -60,6 +61,15 @@ public:
    * inserting the @sa proxyModel() in between them.
    */
   void setModel(QAbstractItemModel* model) override;
+
+  /**
+   * This method replaces the existing proxy model with @a model.
+   * @a model will be reparented to the this object.
+   *
+   * @note It is advisable to replace this soon after construction
+   * and not during operation.
+   */
+  void setProxyModel(AccountsProxyModel* model);
 
 protected:
   void mouseDoubleClickEvent(QMouseEvent *event) override;

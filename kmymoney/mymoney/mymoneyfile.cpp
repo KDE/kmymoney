@@ -605,13 +605,14 @@ void MyMoneyFile::addInstitution(MyMoneyInstitution& institution)
   // now we assume that the institution must have a name, the ID is not set
   // and it does not have a parent (MyMoneyFile).
 
-  if (institution.name().length() == 0
-      || institution.id().length() != 0)
+  if (institution.name().isEmpty()
+      || !institution.id().isEmpty())
     throw MYMONEYEXCEPTION_CSTRING("Not a new institution");
 
   d->checkTransaction(Q_FUNC_INFO);
+  d->institutionsModel.addItem(institution);
 
-  d->m_storage->addInstitution(institution);
+  // d->m_storage->addInstitution(institution);
   d->m_changeSet += MyMoneyNotification(File::Mode::Add, institution);
 }
 
@@ -860,9 +861,7 @@ void MyMoneyFile::removeTransaction(const MyMoneyTransaction& transaction)
 
 bool MyMoneyFile::hasActiveSplits(const QString& id) const
 {
-  d->checkStorage();
-
-  return d->m_storage->hasActiveSplits(id);
+  return d->journalModel.hasReferenceTo(id);
 }
 
 bool MyMoneyFile::isStandardAccount(const QString& id) const
@@ -874,20 +873,8 @@ bool MyMoneyFile::isStandardAccount(const QString& id) const
   || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Equity);
 }
 
-void MyMoneyFile::setAccountName(const QString& id, const QString& name) const
-{
-  /// @todo port to new model code
-  d->checkTransaction(Q_FUNC_INFO);
-
-  auto acc = account(id);
-  d->m_storage->setAccountName(id, name);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, acc);
-}
-
 void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 {
-  /// @todo port to new model code
-#if 0
   d->checkTransaction(Q_FUNC_INFO);
 
   MyMoneyAccount parent;
@@ -896,10 +883,10 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 
   // check that the account and its parent exist
   // this will throw an exception if the id is unknown
-  acc = MyMoneyFile::account(account.id());
-  parent = MyMoneyFile::account(account.parentAccountId());
+  acc = d->accountsModel.itemById(account.id());
+  parent = d->accountsModel.itemById(account.parentAccountId());
   if (!acc.institutionId().isEmpty())
-    institution = MyMoneyFile::institution(acc.institutionId());
+    institution = d->institutionsModel.itemById(acc.institutionId());
 
   // check that it's not one of the standard account groups
   if (isStandardAccount(account.id()))
@@ -918,18 +905,19 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 
   if (!institution.id().isEmpty()) {
     institution.removeAccountId(account.id());
-    d->m_storage->modifyInstitution(institution);
+    d->institutionsModel.modifyItem(institution);
+    // d->m_storage->modifyInstitution(institution);
     d->m_changeSet += MyMoneyNotification(File::Mode::Modify, institution);
   }
   acc.setInstitutionId(QString());
 
-  d->m_storage->removeAccount(acc);
+  d->accountsModel.removeItem(acc);
+  // d->m_storage->removeAccount(acc);
 
   d->m_balanceCache.clear(acc.id());
 
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, parent);
   d->m_changeSet += MyMoneyNotification(File::Mode::Remove, acc);
-#endif
 }
 
 void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned int level)
@@ -987,26 +975,25 @@ bool MyMoneyFile::hasOnlyUnusedAccounts(const QStringList& account_list, unsigne
 void MyMoneyFile::removeInstitution(const MyMoneyInstitution& institution)
 {
   /// @todo port to new model code
-#if 0
   d->checkTransaction(Q_FUNC_INFO);
 
-  MyMoneyInstitution inst = MyMoneyFile::institution(institution.id());
+  MyMoneyInstitution inst = d->institutionsModel.itemById(institution.id());
 
   bool blocked = signalsBlocked();
   blockSignals(true);
   const auto accounts = inst.accountList();
-  for (const auto& acc : accounts) {
-    auto a = account(acc);
+  for (const auto& accountId : accounts) {
+    auto a = account(accountId);
     a.setInstitutionId(QString());
     modifyAccount(a);
     d->m_changeSet += MyMoneyNotification(File::Mode::Modify, a);
   }
   blockSignals(blocked);
 
-  d->m_storage->removeInstitution(institution);
+  d->institutionsModel.removeItem(institution);
+  // d->m_storage->removeInstitution(institution);
 
   d->m_changeSet += MyMoneyNotification(File::Mode::Remove, institution);
-#endif
 }
 
 void MyMoneyFile::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
@@ -1091,20 +1078,17 @@ void MyMoneyFile::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
 void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
 {
   /// @todo port to new model code
-#if 0
   d->checkTransaction(Q_FUNC_INFO);
-
-  MyMoneyInstitution institution;
 
   // perform some checks to see that the account stuff is OK. For
   // now we assume that the account must have a name, has no
   // transaction and sub-accounts and parent account
   // it's own ID is not set and it does not have a pointer to (MyMoneyFile)
 
-  if (account.name().length() == 0)
+  if (account.name().isEmpty())
     throw MYMONEYEXCEPTION_CSTRING("Account has no name");
 
-  if (account.id().length() != 0)
+  if (!account.id().isEmpty())
     throw MYMONEYEXCEPTION_CSTRING("New account must have no id");
 
   if (account.accountList().count() != 0)
@@ -1119,9 +1103,12 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
   // make sure, that the parent account exists
   // if not, an exception is thrown. If it exists,
   // get a copy of the current data
-  auto acc = MyMoneyFile::account(parent.id());
+  auto acc = d->accountsModel.itemById(parent.id());
 
-#if 0
+  if (acc.id().isEmpty())
+    throw MYMONEYEXCEPTION_CSTRING("Parent account does not exist");
+
+  #if 0
   // TODO: remove the following code as we now can have multiple accounts
   // with the same name even in the same hierarchy position of the account tree
   //
@@ -1156,10 +1143,13 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
     throw MYMONEYEXCEPTION_CSTRING("Investment account can only have stock accounts as children");
 
   // if an institution is set, verify that it exists
-  if (account.institutionId().length() != 0) {
+  MyMoneyInstitution institution;
+  if (!account.institutionId().isEmpty()) {
     // check the presence of the institution. if it
     // does not exist, an exception is thrown
     institution = MyMoneyFile::institution(account.institutionId());
+    if (institution.id().isEmpty())
+      throw MYMONEYEXCEPTION_CSTRING("Institution not found");
   }
 
   // if we don't have a valid opening date use today
@@ -1181,18 +1171,23 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
   // make sure the parent id is setup
   account.setParentAccountId(parent.id());
 
-  d->m_storage->addAccount(account);
+  d->accountsModel.addAccount(account);
+
+  // d->m_storage->addAccount(account);
   d->m_changeSet += MyMoneyNotification(File::Mode::Add, account);
 
-  d->m_storage->addAccount(parent, account);
+  parent.addAccountId(account.id());
+  d->accountsModel.modifyItem(parent);
+
+  // d->m_storage->addAccount(parent, account);
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, parent);
 
   if (account.institutionId().length() != 0) {
     institution.addAccountId(account.id());
-    d->m_storage->modifyInstitution(institution);
+    d->institutionsModel.modifyItem(institution);
+    // d->m_storage->modifyInstitution(institution);
     d->m_changeSet += MyMoneyNotification(File::Mode::Modify, institution);
   }
-#endif
 }
 
 MyMoneyTransaction MyMoneyFile::createOpeningBalanceTransaction(const MyMoneyAccount& acc, const MyMoneyMoney& balance)
@@ -1438,8 +1433,6 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
 
   // then add the transaction to the file global pool
   d->journalModel.addTransaction(transaction);
-  /// @todo cleanup
-  // d->m_storage->addTransaction(transaction);
 
   // scan the splits again to update notification list
   const auto splits2 = transaction.splits();
@@ -1451,12 +1444,11 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
 
 MyMoneyTransaction MyMoneyFile::transaction(const QString& id) const
 {
-  return d->journalModel.transactionById(id);
-
-  /// @todo cleanup
-//   d->checkStorage();
-//
-//   return d->m_storage->transaction(id);
+  MyMoneyTransaction t(d->journalModel.transactionById(id));
+  if (t.id().isEmpty()) {
+    throw MYMONEYEXCEPTION_CSTRING("Selected transaction not found");
+  }
+  return t;
 }
 
 MyMoneyTransaction MyMoneyFile::transaction(const QString& account, const int idx) const

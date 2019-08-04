@@ -1,18 +1,20 @@
-/***************************************************************************
-                          kinstitutionsview.cpp
-                             -------------------
-    copyright            : (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2007-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "kinstitutionsview_p.h"
 
@@ -21,7 +23,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QTimer>
 #include <QMenu>
 
 // ----------------------------------------------------------------------------
@@ -38,6 +39,7 @@
 #include "mymoneyexception.h"
 #include "knewbankdlg.h"
 #include "menuenums.h"
+#include "accountdelegate.h"
 
 using namespace Icons;
 
@@ -45,16 +47,31 @@ KInstitutionsView::KInstitutionsView(QWidget *parent) :
     KMyMoneyViewBase(*new KInstitutionsViewPrivate(this), parent)
 {
   Q_D(KInstitutionsView);
-  d->ui->setupUi(this);
+  d->init();
 
   connect(pActions[eMenu::Action::NewInstitution],    &QAction::triggered, this, &KInstitutionsView::slotNewInstitution);
   connect(pActions[eMenu::Action::EditInstitution],   &QAction::triggered, this, &KInstitutionsView::slotEditInstitution);
   connect(pActions[eMenu::Action::DeleteInstitution], &QAction::triggered, this, &KInstitutionsView::slotDeleteInstitution);
+
+  d->ui->m_accountTree->setItemDelegate(new AccountDelegate(d->ui->m_accountTree));
+  connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::netWorthChanged, this, &KInstitutionsView::slotNetWorthChanged);
 }
 
 KInstitutionsView::~KInstitutionsView()
 {
 }
+
+void KInstitutionsView::slotSettingsChanged()
+{
+  Q_D(KInstitutionsView);
+  d->m_proxyModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
+  d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+  d->m_proxyModel->setHideFavoriteAccounts(true);
+
+  MyMoneyFile::instance()->accountsModel()->setColorScheme(AccountsModel::Positive, KMyMoneySettings::schemeColor(SchemeColor::Positive));
+  MyMoneyFile::instance()->accountsModel()->setColorScheme(AccountsModel::Negative, KMyMoneySettings::schemeColor(SchemeColor::Negative));
+}
+
 
 void KInstitutionsView::executeCustomAction(eView::Action action)
 {
@@ -66,7 +83,7 @@ void KInstitutionsView::executeCustomAction(eView::Action action)
     case eView::Action::SetDefaultFocus:
       {
         Q_D(KInstitutionsView);
-        QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
+        QMetaObject::invokeMethod(d->ui->m_accountTree, "setFocus");
       }
       break;
 
@@ -87,10 +104,10 @@ void KInstitutionsView::refresh()
     return;
   }
   d->m_needsRefresh = false;
-
-/// @todo port to new model code
-#if 0
   d->m_proxyModel->invalidate();
+
+/// @todo port to new model code or cleanup
+#if 0
   d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
   d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
 #endif
@@ -98,17 +115,17 @@ void KInstitutionsView::refresh()
 
 void KInstitutionsView::showEvent(QShowEvent * event)
 {
-  Q_D(KInstitutionsView);
-  /// @todo port to new model code
+  /// @todo port to new model code or cleanup
 #if 0
+  Q_D(KInstitutionsView);
   if (!d->m_proxyModel)
     d->init();
-#endif
 
   emit customActionRequested(View::Institutions, eView::Action::AboutToShow);
 
   if (d->m_needsRefresh)
     refresh();
+#endif
 
   // don't forget base class implementation
   QWidget::showEvent(event);
@@ -130,11 +147,10 @@ void KInstitutionsView::updateActions(const MyMoneyObject& obj)
   d->m_currentInstitution = inst;
 }
 
-void KInstitutionsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)
+void KInstitutionsView::slotNetWorthChanged(const MyMoneyMoney &netWorth, bool isApproximate)
 {
   Q_D(KInstitutionsView);
-  /// @todo port to new model code
-  // d->netBalProChanged(netWorth, d->ui->m_totalProfitsLabel, View::Institutions);
+  d->updateNetWorthLabel(netWorth, isApproximate, d->ui->m_totalProfitsLabel, i18n("Net Worth: %1"));
 }
 
 void KInstitutionsView::slotNewInstitution()
@@ -157,12 +173,6 @@ void KInstitutionsView::slotNewInstitution()
     }
   }
   delete dlg;
-}
-
-void KInstitutionsView::slotShowInstitutionsMenu(const MyMoneyInstitution& inst)
-{
-  Q_UNUSED(inst);
-  pMenus[eMenu::Menu::Institution]->exec(QCursor::pos());
 }
 
 void KInstitutionsView::slotEditInstitution()
@@ -206,7 +216,12 @@ void KInstitutionsView::slotSelectByObject(const MyMoneyObject& obj, eView::Inte
       break;
 
     case eView::Intent::OpenContextMenu:
-      slotShowInstitutionsMenu(static_cast<const MyMoneyInstitution&>(obj));
+      if (MyMoneyFile::instance()->accountsModel()->indexById(obj.id()).isValid()) {
+        pMenus[eMenu::Menu::Account]->exec(QCursor::pos());
+
+      } else if (MyMoneyFile::instance()->institutionsModel()->indexById(obj.id()).isValid()) {
+        pMenus[eMenu::Menu::Institution]->exec(QCursor::pos());
+      }
       break;
 
     default:
@@ -216,6 +231,8 @@ void KInstitutionsView::slotSelectByObject(const MyMoneyObject& obj, eView::Inte
 
 void KInstitutionsView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
 {
+  /// @todo cleanup
+#if 0
   switch (intent) {
     case eView::Intent::UpdateNetWorth:
       if (variant.count() == 1)
@@ -224,6 +241,7 @@ void KInstitutionsView::slotSelectByVariant(const QVariantList& variant, eView::
     default:
       break;
   }
+#endif
 }
 
 void KInstitutionsView::slotDeleteInstitution()

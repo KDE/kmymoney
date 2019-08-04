@@ -1,6 +1,7 @@
 /*
  * Copyright 2010-2014  Cristian Oneț <onet.cristian@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -61,9 +62,7 @@ public:
   {
     Q_Q(KMyMoneyAccountTreeView);
     if (index.isValid()) {
-      qDebug() << "index" << index;
       QModelIndex baseIdx = AccountsModel::mapToBaseSource(index);
-      qDebug() << "baseIdx" << baseIdx;
       const auto account = MyMoneyFile::instance()->accountsModel()->itemByIndex(baseIdx);
       if (account.id().isEmpty()) {
         const auto institution = MyMoneyFile::instance()->institutionsModel()->itemByIndex(baseIdx);
@@ -97,6 +96,7 @@ KMyMoneyAccountTreeView::~KMyMoneyAccountTreeView()
 {
 }
 
+
 void KMyMoneyAccountTreeView::setModel(QAbstractItemModel* model)
 {
   Q_D(KMyMoneyAccountTreeView);
@@ -104,6 +104,27 @@ void KMyMoneyAccountTreeView::setModel(QAbstractItemModel* model)
   QTreeView::setModel(d->proxyModel);
 }
 
+void KMyMoneyAccountTreeView::setProxyModel(AccountsProxyModel* model)
+{
+  Q_D(KMyMoneyAccountTreeView);
+  // unlink a possible sourceModel
+  QAbstractItemModel* sourceModel = d->proxyModel->sourceModel();
+  if (sourceModel) {
+    d->proxyModel->setSourceModel(nullptr);
+  }
+
+  // delete the old proxy
+  d->proxyModel->deleteLater();
+
+  // reparent the new proxy
+  model->setParent(this);
+
+  // and insert it into the chain
+  d->proxyModel = model;
+  d->proxyModel->setSourceModel(sourceModel);
+  QTreeView::setModel(d->proxyModel);
+
+}
 
 AccountsProxyModel* KMyMoneyAccountTreeView::proxyModel() const
 {
@@ -175,19 +196,17 @@ void KMyMoneyAccountTreeView::keyPressEvent(QKeyEvent *event)
 
 void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint)
 {
-  const auto idx = AccountsModel::mapToBaseSource(currentIndex());
-  if (idx.isValid() && (model()->flags(currentIndex()) & Qt::ItemIsSelectable)) {
-    const auto account = MyMoneyFile::instance()->accountsModel()->itemByIndex(idx);
+  if (currentIndex().isValid() && (model()->flags(currentIndex()) & Qt::ItemIsSelectable)) {
+    auto objId = currentIndex().data(eMyMoney::Model::IdRole).toString();
+    const auto account = MyMoneyFile::instance()->accountsModel()->itemById(objId);
     if (!account.id().isEmpty()) {
       emit selectByObject(account, eView::Intent::None);
       emit selectByObject(account, eView::Intent::OpenContextMenu);
-
-    } else {
-      const auto institution = MyMoneyFile::instance()->institutionsModel()->itemByIndex(idx);
-      if (!institution.id().isEmpty()) {
-        emit selectByObject(institution, eView::Intent::None);
-        emit selectByObject(institution, eView::Intent::OpenContextMenu);
-      }
+    }
+    const auto institution = MyMoneyFile::instance()->institutionsModel()->itemById(objId);
+    if (!institution.id().isEmpty()) {
+      emit selectByObject(institution, eView::Intent::None);
+      emit selectByObject(institution, eView::Intent::OpenContextMenu);
     }
   }
 }
@@ -198,18 +217,17 @@ void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, c
   if (!selected.isEmpty()) {
     QModelIndexList idxList = selected.indexes();
     if (!idxList.isEmpty()) {
-      const auto idx = AccountsModel::mapToBaseSource(selected.indexes().front());
-      const auto account = MyMoneyFile::instance()->accountsModel()->itemByIndex(idx);
+      auto objId = selected.indexes().front().data(eMyMoney::Model::IdRole).toString();
+      const auto account = MyMoneyFile::instance()->accountsModel()->itemById(objId);
       if (!account.id().isEmpty()) {
         emit selectByObject(account, eView::Intent::None);
         return;
+      }
 
-      } else {
-        const auto institution = MyMoneyFile::instance()->institutionsModel()->itemByIndex(idx);
-        if (!institution.id().isEmpty()) {
-          emit selectByObject(institution, eView::Intent::None);
-          return;
-        }
+      const auto institution = MyMoneyFile::instance()->institutionsModel()->itemById(objId);
+      if (!institution.id().isEmpty()) {
+        emit selectByObject(institution, eView::Intent::None);
+        return;
       }
     }
   }

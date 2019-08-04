@@ -492,17 +492,6 @@ public:
   bool isTransfer(const MyMoneyTransaction& t) const;
 
   /**
-    * This method is used to set the name for the specified standard account
-    * within the storage area. An exception will be thrown, if an error
-    * occurs
-    *
-    * @param id QString reference to one of the standard accounts.
-    * @param name QString reference to the name to be set
-    *
-    */
-  void setAccountName(const QString& id, const QString& name) const;
-
-  /**
     * Deletes an existing account from the file global account pool
     * This method only allows to remove accounts that are not
     * referenced by any split. Use moveSplits() to move splits

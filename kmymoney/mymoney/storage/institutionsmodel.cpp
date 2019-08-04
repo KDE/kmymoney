@@ -23,6 +23,7 @@
 
 #include <QDebug>
 #include <QString>
+#include <QFont>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -101,7 +102,7 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
   const MyMoneyInstitution& institution = static_cast<TreeItem<MyMoneyInstitution>*>(idx.internalPointer())->constDataRef();
 
   // check for a sub-entry which is actually a proxy to the corresponding account
-  if (idx.isValid()) {
+  if (idx.parent().isValid()) {
     const auto accountIdx = d->accountsModel->indexById(institution.id());
     const auto subIdx = d->accountsModel->index(accountIdx.row(), idx.column(), accountIdx.parent());
     return d->accountsModel->data(subIdx, role);
@@ -113,27 +114,37 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
       switch(idx.column()) {
         case Column::AccountName:
           // make sure to never return any displayable text for the dummy entry
-          if (!institution.id().isEmpty()) {
-            rc = institution.name();
-          } else {
-            rc = QString();
-          }
-          break;
+          return institution.name();
+
         default:
-          break;
+          return QString();
       }
       break;
 
+    case Qt::FontRole:
+    {
+      QFont font;
+      // display top level account groups in bold
+      if (!idx.parent().isValid()) {
+        font.setBold(true);
+      }
+      return font;
+    }
+
     case Qt::TextAlignmentRole:
-      rc = QVariant(Qt::AlignLeft | Qt::AlignVCenter);
-      break;
+      return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
 
     case eMyMoney::Model::Roles::IdRole:
-      rc = institution.id();
-      break;
+      return institution.id();
 
+    case eMyMoney::Model::InstitutionSortCodeRole:
+      return institution.sortcode();
+
+    case eMyMoney::Model::AccountDisplayOrderRole:
+      // make sure the no bank assigned accounts show up at the top
+      return (institution.id().isEmpty()) ? 0 : 1;
   }
-  return rc;
+  return QVariant();
 }
 
 bool InstitutionsModel::setData(const QModelIndex& index, const QVariant& value, int role)

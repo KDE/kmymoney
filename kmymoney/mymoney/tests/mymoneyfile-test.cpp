@@ -1361,6 +1361,8 @@ void MyMoneyFileTest::testBalanceTotal()
 
 }
 
+/// @todo cleanup
+#if 0
 void MyMoneyFileTest::testSetAccountName()
 {
   MyMoneyFileTransaction ft;
@@ -1437,6 +1439,7 @@ void MyMoneyFileTest::testSetAccountName()
   } catch (const MyMoneyException &) {
   }
 }
+#endif
 
 void MyMoneyFileTest::testAddPayee()
 {

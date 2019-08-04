@@ -23,7 +23,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QTimer>
 #include <QMenu>
 #include <QAction>
 #include <QBitArray>
@@ -92,7 +91,7 @@ void KAccountsView::executeCustomAction(eView::Action action)
     case eView::Action::SetDefaultFocus:
       {
         Q_D(KAccountsView);
-        QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
+        QMetaObject::invokeMethod(d->ui->m_accountTree, "setFocus");
       }
       break;
 
@@ -132,18 +131,18 @@ void KAccountsView::refresh()
 
 void KAccountsView::showEvent(QShowEvent * event)
 {
-  Q_D(KAccountsView);
   /// @todo port to new model code
 #if 0
+  Q_D(KAccountsView);
   if (!d->m_proxyModel)
     d->init();
-#endif
 
   emit customActionRequested(View::Accounts, eView::Action::AboutToShow);
 
   if (d->m_needsRefresh)
     refresh();
 
+#endif
   // don't forget base class implementation
   QWidget::showEvent(event);
 }

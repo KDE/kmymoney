@@ -279,10 +279,13 @@ bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
         return true;
       }
 
-    } else if (isValidInstititonEntry && (sourceModel()->rowCount(source) == 0)) {
-      // if this is an institution that has no children show it only if hide unused institutions
-      // (hide closed accounts for now) is not checked
-      return !hideClosedAccounts();
+    } else if (isValidInstititonEntry) {
+      if (sourceModel()->rowCount(source) == 0) {
+        // if this is an institution that has no children show it only if hide unused institutions
+        // (hide closed accounts for now) is not checked
+        return !hideClosedAccounts();
+      }
+      return true;
     }
 
     // all parents that have at least one visible child must be visible

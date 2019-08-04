@@ -1,5 +1,6 @@
 set(libmodels_a_SOURCES
     accountsproxymodel.cpp
+    institutionsproxymodel.cpp
     onlinebankingaccountsfilterproxymodel.cpp
     ../plugins/onlinetasks/interfaces/tasks/credittransfer.cpp
     models.cpp

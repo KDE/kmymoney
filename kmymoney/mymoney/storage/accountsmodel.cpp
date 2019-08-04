@@ -772,3 +772,18 @@ void AccountsModel::updateAccountBalances(const QHash<QString, MyMoneyMoney>& ba
 
   endResetModel();
 }
+
+void AccountsModel::addAccount(MyMoneyAccount& account)
+{
+  auto parentIdx = indexById(account.parentAccountId());
+  if (parentIdx.isValid()) {
+    auto rows = rowCount(parentIdx);
+    insertRow(rows, parentIdx);
+    auto idx = index(rows, 0, parentIdx);
+    MyMoneyAccount item(nextId(), account);
+    static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->dataRef() = item;
+    account = item;
+    emit dataChanged(idx, idx);
+    setDirty();
+  }
+}
