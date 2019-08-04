@@ -21,6 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QObject>
 #include <QHeaderView>
 #include <QMouseEvent>
 #include <QPoint>
@@ -34,23 +35,46 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
 #include "models.h"
 #include "accountsmodel.h"
+#include "institutionsmodel.h"
 #include "accountsproxymodel.h"
 // #include "budgetviewproxymodel.h"
 #include "modelenums.h"
 #include "mymoneyenums.h"
-// #include "viewenums.h"
+#include "viewenums.h"
 
 class KMyMoneyAccountTreeViewPrivate
 {
+  Q_DECLARE_PUBLIC(KMyMoneyAccountTreeView)
+
 public:
   KMyMoneyAccountTreeViewPrivate(KMyMoneyAccountTreeView *qq)
     : q_ptr(qq),
     proxyModel(new AccountsProxyModel(qq))
     {}
+
+  void openIndex(const QModelIndex &index)
+  {
+    Q_Q(KMyMoneyAccountTreeView);
+    if (index.isValid()) {
+      qDebug() << "index" << index;
+      QModelIndex baseIdx = AccountsModel::mapToBaseSource(index);
+      qDebug() << "baseIdx" << baseIdx;
+      const auto account = MyMoneyFile::instance()->accountsModel()->itemByIndex(baseIdx);
+      if (account.id().isEmpty()) {
+        const auto institution = MyMoneyFile::instance()->institutionsModel()->itemByIndex(baseIdx);
+        if (!institution.id().isEmpty()) {
+          emit q->selectByObject(institution, eView::Intent::OpenObject);
+        }
+      } else {
+        emit q->selectByObject(account, eView::Intent::OpenObject);
+      }
+    }
+  }
 
   KMyMoneyAccountTreeView*  q_ptr;
   AccountsProxyModel*       proxyModel;
@@ -87,7 +111,7 @@ AccountsProxyModel* KMyMoneyAccountTreeView::proxyModel() const
   return d->proxyModel;
 }
 
-
+/// @todo cleanup
 #if 0
 AccountsViewProxyModel *KMyMoneyAccountTreeView::init(View view)
 {
@@ -133,49 +157,67 @@ AccountsViewProxyModel *KMyMoneyAccountTreeView::init(View view)
 
 void KMyMoneyAccountTreeView::mouseDoubleClickEvent(QMouseEvent *event)
 {
-#if 0
   Q_D(KMyMoneyAccountTreeView);
   d->openIndex(currentIndex());
-#endif
   event->accept();
 }
 
 void KMyMoneyAccountTreeView::keyPressEvent(QKeyEvent *event)
 {
-  // Q_D(KMyMoneyAccountTreeView);
   if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
-#if 0
+    Q_D(KMyMoneyAccountTreeView);
     d->openIndex(currentIndex());
-#endif
     event->accept();
-} else {
+  } else {
     QTreeView::keyPressEvent(event);
   }
 }
 
 void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint)
 {
-#if 0
-  const auto index = model()->index(currentIndex().row(), (int)eAccountsModel::Column::Account, currentIndex().parent());
-  if (index.isValid() && (model()->flags(index) & Qt::ItemIsSelectable)) {
-    const auto dataVariant = model()->data(index, (int)eAccountsModel::Role::Account);
-    if (dataVariant.isValid()) {
-      if (dataVariant.canConvert<MyMoneyAccount>()) {
-        emit selectByObject(dataVariant.value<MyMoneyAccount>(), eView::Intent::None);
-        emit selectByObject(dataVariant.value<MyMoneyAccount>(), eView::Intent::OpenContextMenu);
-      }
-      if (dataVariant.canConvert<MyMoneyInstitution>()) {
-        emit selectByObject(dataVariant.value<MyMoneyInstitution>(), eView::Intent::None);
-        emit selectByObject(dataVariant.value<MyMoneyInstitution>(), eView::Intent::OpenContextMenu);
+  const auto idx = AccountsModel::mapToBaseSource(currentIndex());
+  if (idx.isValid() && (model()->flags(currentIndex()) & Qt::ItemIsSelectable)) {
+    const auto account = MyMoneyFile::instance()->accountsModel()->itemByIndex(idx);
+    if (!account.id().isEmpty()) {
+      emit selectByObject(account, eView::Intent::None);
+      emit selectByObject(account, eView::Intent::OpenContextMenu);
+
+    } else {
+      const auto institution = MyMoneyFile::instance()->institutionsModel()->itemByIndex(idx);
+      if (!institution.id().isEmpty()) {
+        emit selectByObject(institution, eView::Intent::None);
+        emit selectByObject(institution, eView::Intent::OpenContextMenu);
       }
     }
   }
-#endif
 }
 
 void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
 {
   QTreeView::selectionChanged(selected, deselected);
+  if (!selected.isEmpty()) {
+    QModelIndexList idxList = selected.indexes();
+    if (!idxList.isEmpty()) {
+      const auto idx = AccountsModel::mapToBaseSource(selected.indexes().front());
+      const auto account = MyMoneyFile::instance()->accountsModel()->itemByIndex(idx);
+      if (!account.id().isEmpty()) {
+        emit selectByObject(account, eView::Intent::None);
+        return;
+
+      } else {
+        const auto institution = MyMoneyFile::instance()->institutionsModel()->itemByIndex(idx);
+        if (!institution.id().isEmpty()) {
+          emit selectByObject(institution, eView::Intent::None);
+          return;
+        }
+      }
+    }
+  }
+  // since no object was selected reset the object selection
+  emit selectByObject(MyMoneyAccount(), eView::Intent::None);
+  emit selectByObject(MyMoneyInstitution(), eView::Intent::None);
+
+/// @todo cleanup
 #if 0
   if (!selected.empty()) {
     auto indexes = selected.front().indexes();
@@ -193,12 +235,10 @@ void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, c
       }
     }
   }
-  // since no object was selected reset the object selection
-  emit selectByObject(MyMoneyAccount(), eView::Intent::None);
-  emit selectByObject(MyMoneyInstitution(), eView::Intent::None);
 #endif
 }
 
+/// @todo cleanup
 #if 0
 void KMyMoneyAccountTreeView::slotColumnToggled(const eAccountsModel::Column column, const bool show)
 {
