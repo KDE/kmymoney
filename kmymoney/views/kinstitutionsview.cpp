@@ -68,8 +68,8 @@ void KInstitutionsView::slotSettingsChanged()
   d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
   d->m_proxyModel->setHideFavoriteAccounts(true);
 
-  MyMoneyFile::instance()->accountsModel()->setColorScheme(AccountsModel::Positive, KMyMoneySettings::schemeColor(SchemeColor::Positive));
-  MyMoneyFile::instance()->accountsModel()->setColorScheme(AccountsModel::Negative, KMyMoneySettings::schemeColor(SchemeColor::Negative));
+  MyMoneyFile::instance()->institutionsModel()->setColorScheme(AccountsModel::Positive, KMyMoneySettings::schemeColor(SchemeColor::Positive));
+  MyMoneyFile::instance()->institutionsModel()->setColorScheme(AccountsModel::Negative, KMyMoneySettings::schemeColor(SchemeColor::Negative));
 }
 
 

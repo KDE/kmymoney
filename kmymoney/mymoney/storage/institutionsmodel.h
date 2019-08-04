@@ -28,12 +28,14 @@
 // Project Includes
 
 #include "mymoneymodel.h"
+#include "accountsmodel.h"
 #include "mymoneyenums.h"
 #include "kmm_mymoney_export.h"
 
 #include "mymoneyinstitution.h"
 
 class AccountsModel;
+class QColor;
 /**
   */
 class KMM_MYMONEY_EXPORT InstitutionsModel : public MyMoneyModel<MyMoneyInstitution>
@@ -69,8 +71,12 @@ public:
   bool setData(const QModelIndex& idx, const QVariant& value, int role = Qt::EditRole) final override;
 
   void load(const QMap<QString, MyMoneyInstitution>& list);
-  // reparent()
+  void addAccount(const QString& institutionId, const QString& accountId);
+
+  void setColorScheme(AccountsModel::ColorScheme scheme, const QColor& color);
+
 public Q_SLOTS:
+  void slotLoadAccountsWithoutInstitutions(const QModelIndexList& indexes);
 
 private:
   struct Private;

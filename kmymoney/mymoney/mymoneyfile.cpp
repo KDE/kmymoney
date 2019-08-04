@@ -213,7 +213,9 @@ public:
     new ModelTest(&parametersModel, file);
 #endif
     qq->connect(qq, &MyMoneyFile::modelsReadyToUse, &journalModel, &JournalModel::updateBalances);
+    qq->connect(qq, &MyMoneyFile::modelsReadyToUse, qq, &MyMoneyFile::finalizeFileOpen);
     qq->connect(&journalModel, &JournalModel::balancesChanged, &accountsModel, &AccountsModel::updateAccountBalances);
+
   }
 
   ~Private() {
@@ -407,6 +409,11 @@ MyMoneyFile::~MyMoneyFile()
 MyMoneyFile* MyMoneyFile::instance()
 {
   return &file;
+}
+
+void MyMoneyFile::finalizeFileOpen()
+{
+  d->institutionsModel.slotLoadAccountsWithoutInstitutions(d->accountsModel.accountsWithoutInstitutions());
 }
 
 void MyMoneyFile::unload()

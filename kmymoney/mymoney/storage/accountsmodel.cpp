@@ -417,6 +417,9 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::AccountCurrencyIdRole:
       return account.currencyId();
+
+    case eMyMoney::Model::AccountInstitutionIdRole:
+      return account.institutionId();
   }
   return QVariant();
 }
@@ -786,4 +789,10 @@ void AccountsModel::addAccount(MyMoneyAccount& account)
     emit dataChanged(idx, idx);
     setDirty();
   }
+}
+
+QModelIndexList AccountsModel::accountsWithoutInstitutions() const
+{
+  return match(index(0, 0, assetIndex()), eMyMoney::Model::AccountInstitutionIdRole, QString(), -1, Qt::MatchExactly | Qt::MatchRecursive)
+  + match(index(0, 0, liabilityIndex()), eMyMoney::Model::AccountInstitutionIdRole, QString(), -1, Qt::MatchExactly| Qt::MatchRecursive);
 }

@@ -116,6 +116,8 @@ public:
 
   void setColorScheme(ColorScheme scheme, const QColor& color);
 
+  QModelIndexList accountsWithoutInstitutions() const;
+
 protected:
   void clearModelItems() override;
   void addFavorite(const QString& id);

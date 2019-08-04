@@ -1659,6 +1659,9 @@ protected:
     */
   MyMoneyFile();
 
+protected Q_SLOTS:
+  void finalizeFileOpen();
+
 Q_SIGNALS:
   /**
    * This signal is emitted when a transaction has been committed and

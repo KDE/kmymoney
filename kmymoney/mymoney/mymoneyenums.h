@@ -459,6 +459,7 @@ namespace eMyMoney {
       AccountFractionRole,
       AccountParentIdRole,
       AccountCurrencyIdRole,
+      AccountInstitutionIdRole,
 
       // MyMoneyInstitution
       InstitutionSortCodeRole,

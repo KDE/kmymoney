@@ -24,6 +24,7 @@
 #include <QDebug>
 #include <QString>
 #include <QFont>
+#include <QColor>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,6 +35,8 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "mymoneysecurity.h"
 
 struct InstitutionsModel::Private
 {
@@ -60,10 +63,24 @@ struct InstitutionsModel::Private
     }
   }
 
+  MyMoneyMoney bankVolume(const QModelIndex& idx)
+  {
+    Q_Q(InstitutionsModel);
+    const auto rows = q->rowCount(idx);
+    MyMoneyMoney value;
+    for (int row = 0; row < rows; ++row) {
+      const auto subIdx(q->index(row, 0, idx));
+      value += subIdx.data(eMyMoney::Model::AccountValueRole).value<MyMoneyMoney>();
+    }
+    return value;
+  }
 
   InstitutionsModel*  q_ptr;
   QObject*            parentObject;
   AccountsModel*      accountsModel;
+  QColor              positiveScheme;
+  QColor              negativeScheme;
+
 };
 
 InstitutionsModel::InstitutionsModel(AccountsModel* accountsModel, QObject* parent)
@@ -116,6 +133,12 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
           // make sure to never return any displayable text for the dummy entry
           return institution.name();
 
+        case AccountsModel::Column::TotalPostedValue:
+          {
+            const auto baseCurrency = MyMoneyFile::instance()->baseCurrency();
+            return d->bankVolume(idx).formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
+          }
+
         default:
           return QString();
       }
@@ -132,7 +155,24 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
     }
 
     case Qt::TextAlignmentRole:
+      switch (idx.column()) {
+        case AccountsModel::Column::Vat:
+        case AccountsModel::Column::Balance:
+        case AccountsModel::Column::PostedValue:
+        case AccountsModel::Column::TotalBalance:
+        case AccountsModel::Column::TotalPostedValue:
+          return QVariant(Qt::AlignRight | Qt::AlignVCenter);
+        default:
+          break;
+      }
       return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
+
+    case Qt::ForegroundRole:
+      switch(idx.column()) {
+        case AccountsModel::Column::TotalPostedValue:
+          return d->bankVolume(idx).isNegative() ? d->negativeScheme : d->positiveScheme;
+      }
+      break;
 
     case eMyMoney::Model::Roles::IdRole:
       return institution.id();
@@ -156,6 +196,19 @@ bool InstitutionsModel::setData(const QModelIndex& index, const QVariant& value,
   qDebug() << "setData(" << index.row() << index.column() << ")" << value << role;
   return QAbstractItemModel::setData(index, value, role);
 }
+
+void InstitutionsModel::setColorScheme(AccountsModel::ColorScheme scheme, const QColor& color)
+{
+  switch(scheme) {
+    case AccountsModel::Positive:
+      d->positiveScheme = color;
+      break;
+    case AccountsModel::Negative:
+      d->negativeScheme = color;
+      break;
+  }
+}
+
 
 void InstitutionsModel::load(const QMap<QString, MyMoneyInstitution>& list)
 {
@@ -185,4 +238,24 @@ void InstitutionsModel::load(const QMap<QString, MyMoneyInstitution>& list)
   emit modelLoaded();
 
   qDebug() << "Model for \"I\" loaded with" << rowCount() << "items";
+}
+
+void InstitutionsModel::slotLoadAccountsWithoutInstitutions(const QModelIndexList& indexes)
+{
+  foreach (auto idx, indexes) {
+    addAccount(QString(), idx.data(eMyMoney::Model::IdRole).toString());
+  }
+}
+
+void InstitutionsModel::addAccount(const QString& institutionId, const QString& accountId)
+{
+  auto idx = indexById(institutionId);
+  if (idx.isValid()) {
+    const auto rows = rowCount(idx);
+    insertRow(rows, idx);
+    const auto subIdx = index(rows, 0, idx);
+    MyMoneyInstitution account(accountId, MyMoneyInstitution());
+    static_cast<TreeItem<MyMoneyInstitution>*>(subIdx.internalPointer())->dataRef() = account;
+    emit dataChanged(subIdx, subIdx);
+  }
 }
