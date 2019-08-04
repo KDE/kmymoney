@@ -123,8 +123,8 @@ public:
   bool operator == (const MyMoneyAccount &) const;
 
   /**
-    * This converts the account type into one of the four
-    * major account types liability, asset, expense or income.
+    * This converts the account type into one of the five
+    * major account types liability, asset, expense, income or equity.
     *
     * The current assignment is as follows:
     *
@@ -150,6 +150,9 @@ public:
     *
     * - Expense
     *   - Expense
+    *
+    * - Equity
+    *   - Equity
     *
     * @return accountTypeE of major account type
     */
