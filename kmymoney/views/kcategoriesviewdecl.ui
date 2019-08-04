@@ -15,9 +15,6 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="KMyMoneyAccountTreeView" name="m_accountTree"/>
-   </item>
-   <item>
     <layout class="QHBoxLayout">
      <item>
       <widget class="KLineEdit" name="m_searchWidget">
@@ -47,6 +44,9 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="KMyMoneyAccountTreeView" name="m_accountTree"/>
    </item>
    <item>
     <widget class="QLabel" name="m_hiddenCategories">
