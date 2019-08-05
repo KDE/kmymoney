@@ -124,7 +124,6 @@ public:
     } else if (!(treeView || tableView)) {
       qDebug() << "WARNING: You must not create a ColumnSelector without a view";
     }
-
   }
 
   ColumnSelector*       q_ptr;
@@ -245,7 +244,9 @@ void ColumnSelector::setAlwaysHidden(QVector<int> columns)
 
   d->alwaysHiddenColumns = columns;
   for (int i = 0; i < columns.count(); ++i) {
-    d->setColumnHidden(columns.at(i), true);
+    auto col = columns.at(i);
+    d->setColumnHidden(col, true);
+    d->alwaysVisibleColumns.removeAll(col);
   }
 }
 
@@ -255,7 +256,9 @@ void ColumnSelector::setAlwaysVisible(QVector<int> columns)
 
   d->alwaysVisibleColumns = columns;
   for (int i = 0; i < columns.count(); ++i) {
-    d->setColumnHidden(columns.at(i), false);
+    auto col = columns.at(i);
+    d->setColumnHidden(col, false);
+    d->alwaysHiddenColumns.removeAll(col);
   }
 }
 
