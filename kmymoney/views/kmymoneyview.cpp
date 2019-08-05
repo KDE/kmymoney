@@ -175,7 +175,7 @@ KMyMoneyView::KMyMoneyView()
     connect(viewBases[view.id], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
   }
 
-/// @todo port to new model code
+/// @todo cleanup
 #if 0
   connect(Models::instance()->accountsModel(), &AccountsModel::netWorthChanged, this, &KMyMoneyView::slotSelectByVariant);
   connect(Models::instance()->accountsModel(), &AccountsModel::profitChanged, this, &KMyMoneyView::slotSelectByVariant);
@@ -762,6 +762,8 @@ void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Inten
         emit statusMsg(variant.first().toString());
       break;
 
+    /// @todo cleanup
+#if 0
     case eView::Intent::UpdateNetWorth:
       if (viewBases.contains(View::Accounts))
         viewBases[View::Accounts]->slotSelectByVariant(variant, intent);
@@ -769,6 +771,7 @@ void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Inten
       if (viewBases.contains(View::Institutions))
         viewBases[View::Institutions]->slotSelectByVariant(variant, intent);
       break;
+#endif
 
     case eView::Intent::UpdateProfit:
       if (viewBases.contains(View::Categories))

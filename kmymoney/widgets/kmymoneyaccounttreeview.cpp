@@ -205,8 +205,14 @@ void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint)
     }
     const auto institution = MyMoneyFile::instance()->institutionsModel()->itemById(objId);
     if (!institution.id().isEmpty()) {
-      emit selectByObject(institution, eView::Intent::None);
-      emit selectByObject(institution, eView::Intent::OpenContextMenu);
+      // the institutions model also reports accounts as institutions at this point.
+      // We can differentiate between the two objects by looking at the parent of
+      // the index. If it is valid, we have been called via an account,
+      // if it is invalid the source is an institution.
+      if (!currentIndex().parent().isValid()) {
+        emit selectByObject(institution, eView::Intent::None);
+        emit selectByObject(institution, eView::Intent::OpenContextMenu);
+      }
     }
   }
 }

@@ -63,7 +63,7 @@ struct InstitutionsModel::Private
     }
   }
 
-  MyMoneyMoney bankVolume(const QModelIndex& idx)
+  MyMoneyMoney institutionValue(const QModelIndex& idx)
   {
     Q_Q(InstitutionsModel);
     const auto rows = q->rowCount(idx);
@@ -71,6 +71,8 @@ struct InstitutionsModel::Private
     for (int row = 0; row < rows; ++row) {
       const auto subIdx(q->index(row, 0, idx));
       value += subIdx.data(eMyMoney::Model::AccountValueRole).value<MyMoneyMoney>();
+
+
     }
     return value;
   }
@@ -136,7 +138,7 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
         case AccountsModel::Column::TotalPostedValue:
           {
             const auto baseCurrency = MyMoneyFile::instance()->baseCurrency();
-            return d->bankVolume(idx).formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
+            return d->institutionValue(idx).formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
           }
 
         default:
@@ -170,7 +172,7 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
     case Qt::ForegroundRole:
       switch(idx.column()) {
         case AccountsModel::Column::TotalPostedValue:
-          return d->bankVolume(idx).isNegative() ? d->negativeScheme : d->positiveScheme;
+          return d->institutionValue(idx).isNegative() ? d->negativeScheme : d->positiveScheme;
       }
       break;
 
@@ -223,7 +225,7 @@ void InstitutionsModel::load(const QMap<QString, MyMoneyInstitution>& list)
   noBank.setName(i18n("Accounts with no institution assigned"));
   static_cast<TreeItem<MyMoneyInstitution>*>(index(0, 0).internalPointer())->dataRef() = noBank;
   ++row;
-  foreach(const auto institution, list) {
+  for(const auto institution : list) {
     const auto idx = index(row, 0);
     static_cast<TreeItem<MyMoneyInstitution>*>(idx.internalPointer())->dataRef() = institution;
     d->loadAccounts(idx, institution.accountList());
@@ -242,7 +244,7 @@ void InstitutionsModel::load(const QMap<QString, MyMoneyInstitution>& list)
 
 void InstitutionsModel::slotLoadAccountsWithoutInstitutions(const QModelIndexList& indexes)
 {
-  foreach (auto idx, indexes) {
+  for (const auto idx : indexes) {
     addAccount(QString(), idx.data(eMyMoney::Model::IdRole).toString());
   }
 }

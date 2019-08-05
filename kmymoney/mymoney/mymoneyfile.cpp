@@ -619,7 +619,6 @@ void MyMoneyFile::addInstitution(MyMoneyInstitution& institution)
   d->checkTransaction(Q_FUNC_INFO);
   d->institutionsModel.addItem(institution);
 
-  // d->m_storage->addInstitution(institution);
   d->m_changeSet += MyMoneyNotification(File::Mode::Add, institution);
 }
 
@@ -627,9 +626,39 @@ void MyMoneyFile::modifyInstitution(const MyMoneyInstitution& institution)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  d->m_storage->modifyInstitution(institution);
+  d->institutionsModel.modifyItem(institution);
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, institution);
 }
+
+void MyMoneyFile::removeInstitution(const MyMoneyInstitution& institution)
+{
+  d->checkTransaction(Q_FUNC_INFO);
+
+  MyMoneyInstitution inst = d->institutionsModel.itemById(institution.id());
+
+  bool blocked = signalsBlocked();
+  blockSignals(true);
+  const auto accounts = inst.accountList();
+  for (const auto& accountId : accounts) {
+    auto a = account(accountId);
+    a.setInstitutionId(QString());
+    modifyAccount(a);
+    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, a);
+  }
+  blockSignals(blocked);
+
+  d->institutionsModel.removeItem(institution);
+
+  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, institution);
+}
+
+QList<MyMoneyInstitution> MyMoneyFile::institutionList() const
+{
+  return d->institutionsModel.itemList();
+}
+
+
+
 
 void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
 {
@@ -978,30 +1007,6 @@ bool MyMoneyFile::hasOnlyUnusedAccounts(const QStringList& account_list, unsigne
   return true; // all subaccounts unused
 }
 
-
-void MyMoneyFile::removeInstitution(const MyMoneyInstitution& institution)
-{
-  /// @todo port to new model code
-  d->checkTransaction(Q_FUNC_INFO);
-
-  MyMoneyInstitution inst = d->institutionsModel.itemById(institution.id());
-
-  bool blocked = signalsBlocked();
-  blockSignals(true);
-  const auto accounts = inst.accountList();
-  for (const auto& accountId : accounts) {
-    auto a = account(accountId);
-    a.setInstitutionId(QString());
-    modifyAccount(a);
-    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, a);
-  }
-  blockSignals(blocked);
-
-  d->institutionsModel.removeItem(institution);
-  // d->m_storage->removeInstitution(institution);
-
-  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, institution);
-}
 
 void MyMoneyFile::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
 {
@@ -1633,11 +1638,6 @@ void MyMoneyFile::accountList(QList<MyMoneyAccount>& list, const QStringList& id
       }
     }
   }
-}
-
-QList<MyMoneyInstitution> MyMoneyFile::institutionList() const
-{
-  return d->m_storage->institutionList();
 }
 
 // general get functions
