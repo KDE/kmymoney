@@ -55,13 +55,14 @@ public:
   {
   }
 
-  QList<eMyMoney::Account::Type> m_typeList;
-  bool m_hideClosedAccounts;
-  bool m_hideEquityAccounts;
-  bool m_hideUnusedIncomeExpenseAccounts;
-  bool m_haveHiddenUnusedIncomeExpenseAccounts;
-  bool m_hideFavoriteAccounts;
-  bool m_hideAllEntries;
+  QList<eMyMoney::Account::Type>  m_typeList;
+  QString                         m_notSelectableId;
+  bool                            m_hideClosedAccounts;
+  bool                            m_hideEquityAccounts;
+  bool                            m_hideUnusedIncomeExpenseAccounts;
+  bool                            m_haveHiddenUnusedIncomeExpenseAccounts;
+  bool                            m_hideFavoriteAccounts;
+  bool                            m_hideAllEntries;
 };
 
 
@@ -234,7 +235,25 @@ void AccountsProxyModel::clear()
 {
   Q_D(AccountsProxyModel);
   d->m_typeList.clear();
+  d->m_notSelectableId.clear();
   invalidateFilter();
+}
+
+void AccountsProxyModel::setNotSelectable(const QString& accountId)
+{
+  Q_D(AccountsProxyModel);
+  d->m_notSelectableId = accountId;
+}
+
+Qt::ItemFlags AccountsProxyModel::flags(const QModelIndex& index) const
+{
+  Q_D(const AccountsProxyModel);
+  auto flags = QSortFilterProxyModel::flags(index);
+  if (d->m_notSelectableId == index.data(eMyMoney::Model::IdRole).toString()) {
+    flags.setFlag(Qt::ItemIsSelectable, false);
+    flags.setFlag(Qt::ItemIsEnabled, false);
+  }
+  return flags;
 }
 
 /**

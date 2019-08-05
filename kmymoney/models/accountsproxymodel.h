@@ -97,7 +97,9 @@ public:
 
   int visibleItems(bool includeBaseAccounts = false) const;
 
-  void setSourceColumns(QList<eAccountsModel::Column> *columns);
+  void setNotSelectable(const QString& accountId);
+
+  Qt::ItemFlags flags(const QModelIndex &index) const override;
 
   /**
    * This is a convenience method which returns a prefilled vector
