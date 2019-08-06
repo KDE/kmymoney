@@ -700,7 +700,7 @@ void AccountsModel::updateAccountBalances(const QHash<QString, MyMoneyMoney>& ba
 
   // suppress single updates while processing whole batch
   d->updateOnBalanceChange = false;
-
+  qDebug() << "Start updating balances in accounts";
   bool approximate = false;
   for(auto it = balances.constBegin(); it != balances.constEnd(); ++it) {
     auto accountIdx = indexById(it.key());
@@ -773,6 +773,7 @@ void AccountsModel::updateAccountBalances(const QHash<QString, MyMoneyMoney>& ba
   if (profit != newProfit)
     emit profitLossChanged(newProfit, approximate);
 
+  qDebug() << "End updating balances in accounts";
   endResetModel();
 }
 

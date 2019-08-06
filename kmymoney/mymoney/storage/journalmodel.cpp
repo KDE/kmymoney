@@ -604,6 +604,7 @@ void JournalModel::updateBalances()
 
   // calculate the balances
   const int rows = rowCount();
+  qDebug() << "Start calculating balances:" << rows << "splits";
   for (int row = 0; row < rows; ++row) {
     const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
     if (journalEntry.transaction().isStockSplit()) {
@@ -612,6 +613,7 @@ void JournalModel::updateBalances()
       d->balanceCache[journalEntry.split().accountId()] += journalEntry.split().shares();
     }
   }
+  qDebug() << "End calculating balances";
 
   // and store the results in the accountsModel
   emit balancesChanged(d->balanceCache);
