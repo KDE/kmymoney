@@ -62,15 +62,22 @@ public:
   {
     Q_Q(KMyMoneyAccountTreeView);
     if (index.isValid()) {
-      QModelIndex baseIdx = AccountsModel::mapToBaseSource(index);
-      const auto account = MyMoneyFile::instance()->accountsModel()->itemByIndex(baseIdx);
-      if (account.id().isEmpty()) {
-        const auto institution = MyMoneyFile::instance()->institutionsModel()->itemByIndex(baseIdx);
-        if (!institution.id().isEmpty()) {
+      QModelIndex baseIdx = MyMoneyModelBase::mapToBaseSource(index);
+      // baseIdx could point into the accountsModel or the institutionsModel.
+      // in case of the institutionsModel it is unclear if it is an account or
+      // an institution. So we simply extract the id and check where we find
+      // the object.
+      const auto objId = baseIdx.data(eMyMoney::Model::IdRole).toString();
+      auto idx = MyMoneyFile::instance()->accountsModel()->indexById(objId);
+      if (idx.isValid()) {
+        const auto account = MyMoneyFile::instance()->accountsModel()->itemByIndex(idx);
+        emit q->selectByObject(account, eView::Intent::OpenObject);
+      } else {
+        idx = MyMoneyFile::instance()->institutionsModel()->indexById(objId);
+        if (idx.isValid()) {
+          const auto institution = MyMoneyFile::instance()->institutionsModel()->itemByIndex(idx);
           emit q->selectByObject(institution, eView::Intent::OpenObject);
         }
-      } else {
-        emit q->selectByObject(account, eView::Intent::OpenObject);
       }
     }
   }
