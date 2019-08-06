@@ -97,6 +97,7 @@ KReportChartView* KBalanceChartDlg::drawChart(const MyMoneyAccount& account)
   reportCfg.setChartSVGridLines(false);
   reportCfg.setChartDataLabels(false);
   reportCfg.setChartType(eMyMoney::Report::ChartType::Line);
+  reportCfg.setChartPalette(eMyMoney::Report::ChartPalette::Application);
   reportCfg.setIncludingForecast(true);
   reportCfg.setIncludingBudgetActuals(true);
   if (account.accountType() == eMyMoney::Account::Type::Investment) {

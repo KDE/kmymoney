@@ -61,6 +61,7 @@ public:
     m_dateLock(eMyMoney::TransactionFilter::Date::UserDefined),
     m_accountGroupFilter(false),
     m_chartType(eMyMoney::Report::ChartType::Line),
+    m_chartPalette(eMyMoney::Report::ChartPalette::Application),
     m_chartDataLabels(true),
     m_chartCHGridLines(true),
     m_chartSVGridLines(true),
@@ -222,6 +223,10 @@ public:
     * What format should be used to draw this report as a chart
     */
   eMyMoney::Report::ChartType m_chartType;
+  /**
+    * What color palette should be used to draw this report as a chart
+    */
+  eMyMoney::Report::ChartPalette m_chartPalette;
   /**
     * Whether the value of individual data points should be drawn on the chart
     */

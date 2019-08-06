@@ -262,16 +262,30 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   AbstractDiagram* planeDiagram = cPlane->diagram();
   planeDiagram->setAntiAliasing(true);
 
-  //the palette - we set it here because it is a property of the diagram
-  switch (KMyMoneySettings::chartsPalette()) {
-    case 0:
+  // setup chart color palette
+  switch (config.chartPalette()) {
+    case eMyMoney::Report::ChartPalette::Application:
+      switch (KMyMoneySettings::chartsPalette()) {
+        case 0:
+          planeDiagram->useDefaultColors();
+          break;
+        case 1:
+          planeDiagram->useRainbowColors();
+          break;
+        case 2:
+        default:
+          planeDiagram->useSubduedColors();
+          break;
+      }
+      break;
+    case eMyMoney::Report::ChartPalette::Default:
       planeDiagram->useDefaultColors();
       break;
-    case 1:
+    case eMyMoney::Report::ChartPalette::Rainbow:
       planeDiagram->useRainbowColors();
       break;
-    case 2:
     default:
+    case eMyMoney::Report::ChartPalette::Subdued:
       planeDiagram->useSubduedColors();
       break;
   }

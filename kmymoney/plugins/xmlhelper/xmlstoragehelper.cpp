@@ -87,7 +87,7 @@ namespace Attribute {
     SettlementPeriod, ShowSTLTCapitalGains, TermsSeparator,
     Pattern, CaseSensitive, RegEx, InvertText, State,
     From, To,
-    Validity,
+    Validity, ChartPalette,
     // insert new entries above this line
     LastAttribute
   };
@@ -173,6 +173,7 @@ namespace MyMoneyXmlContentHandler2 {
       {Attribute::Report::Detail,                 QStringLiteral("detail")},
       {Attribute::Report::ColumnsAreDays,         QStringLiteral("columnsaredays")},
       {Attribute::Report::ChartType,              QStringLiteral("charttype")},
+      {Attribute::Report::ChartPalette,           QStringLiteral("chartpalette")},
       {Attribute::Report::ChartCHGridLines,       QStringLiteral("chartchgridlines")},
       {Attribute::Report::ChartSVGridLines,       QStringLiteral("chartsvgridlines")},
       {Attribute::Report::ChartDataLabels,        QStringLiteral("chartdatalabels")},
@@ -401,6 +402,48 @@ namespace MyMoneyXmlContentHandler2 {
   int stringToTypeAttribute(const QString &text)
   {
     return typeAttributeLUT().key(text, 4);
+  }
+
+  QHash<eMyMoney::Report::ChartPalette, QString> chartPaletteLUT()
+  {
+    static const QHash<eMyMoney::Report::ChartPalette, QString> lut {
+      {eMyMoney::Report::ChartPalette::Application, QStringLiteral("appplication")},
+      {eMyMoney::Report::ChartPalette::Default,     QStringLiteral("default")},
+      {eMyMoney::Report::ChartPalette::Rainbow,     QStringLiteral("rainbow")},
+      {eMyMoney::Report::ChartPalette::Subdued,     QStringLiteral("subdued")},
+    };
+    return lut;
+  }
+
+  QString reportNames(eMyMoney::Report::ChartPalette textID)
+  {
+    return chartPaletteLUT().value(textID);
+  }
+
+  eMyMoney::Report::ChartPalette stringToChartPalette(const QString &text)
+  {
+    return chartPaletteLUT().key(text, eMyMoney::Report::ChartPalette::End);
+  }
+
+  QHash<int, QString> paletteAttributeLUT()
+  {
+    static const QHash<int, QString> lut {
+      {0, QStringLiteral("application")},
+      {1, QStringLiteral("default")},
+      {2, QStringLiteral("rainbow")},
+      {3, QStringLiteral("subdued")},
+    };
+    return lut;
+  }
+
+  QString paletteAttributeToString(int textID)
+  {
+    return paletteAttributeLUT().value(textID);
+  }
+
+  int stringToPaletteAttribute(const QString &text)
+  {
+    return paletteAttributeLUT().key(text, 4);
   }
 
   QHash<int, QString> stateAttributeLUT()
@@ -713,6 +756,12 @@ namespace MyMoneyXmlContentHandler2 {
         else
           report.setChartType(eMyMoney::Report::ChartType::None);
 
+        const auto chartPaletteFromXML = stringToChartPalette(node.attribute(attributeName(Attribute::Report::ChartPalette)));
+        if (chartPaletteFromXML != eMyMoney::Report::ChartPalette::End)
+          report.setChartPalette(chartPaletteFromXML);
+        else
+          report.setChartPalette(eMyMoney::Report::ChartPalette::Application);
+
         report.setChartCHGridLines(node.attribute(attributeName(Attribute::Report::ChartCHGridLines), "1").toUInt());
         report.setChartSVGridLines(node.attribute(attributeName(Attribute::Report::ChartSVGridLines), "1").toUInt());
         report.setChartDataLabels(node.attribute(attributeName(Attribute::Report::ChartDataLabels), "1").toUInt());
@@ -911,6 +960,7 @@ namespace MyMoneyXmlContentHandler2 {
         el.setAttribute(attributeName(Attribute::Report::IncludesUnused), report.isIncludingUnusedAccounts());
         el.setAttribute(attributeName(Attribute::Report::ColumnsAreDays), report.isColumnsAreDays());
         el.setAttribute(attributeName(Attribute::Report::ChartType), reportNames(report.chartType()));
+        el.setAttribute(attributeName(Attribute::Report::ChartPalette), reportNames(report.chartPalette()));
         el.setAttribute(attributeName(Attribute::Report::ChartCHGridLines), report.isChartCHGridLines());
         el.setAttribute(attributeName(Attribute::Report::ChartSVGridLines), report.isChartSVGridLines());
         el.setAttribute(attributeName(Attribute::Report::ChartDataLabels), report.isChartDataLabels());
