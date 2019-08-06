@@ -401,6 +401,18 @@ void MyMoneyReport::setChartType(eMyMoney::Report::ChartType type)
   d->m_chartType = type;
 }
 
+eMyMoney::Report::ChartPalette MyMoneyReport::chartPalette() const
+{
+  Q_D(const MyMoneyReport);
+  return d->m_chartPalette;
+}
+
+void MyMoneyReport::setChartPalette(eMyMoney::Report::ChartPalette type)
+{
+  Q_D(MyMoneyReport);
+  d->m_chartPalette = type;
+}
+
 bool MyMoneyReport::isChartDataLabels() const
 {
   Q_D(const MyMoneyReport);

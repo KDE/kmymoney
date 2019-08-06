@@ -103,6 +103,11 @@ ReportTabChart::ReportTabChart(QWidget *parent)
   ui->m_comboType->addItem(i18nc("type of graphic chart", "Ring"), static_cast<int>(eMyMoney::Report::ChartType::Ring));
   connect(ui->m_comboType, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &ReportTabChart::slotChartTypeChanged);
   emit ui->m_comboType->currentIndexChanged(ui->m_comboType->currentIndex());
+
+  ui->m_comboPalette->addItem(i18nc("type of graphic palette", "Use application setting"), static_cast<int>(eMyMoney::Report::ChartPalette::Application));
+  ui->m_comboPalette->addItem(i18nc("type of graphic palette", "Default"), static_cast<int>(eMyMoney::Report::ChartPalette::Default));
+  ui->m_comboPalette->addItem(i18nc("type of graphic palette", "Rainbow"), static_cast<int>(eMyMoney::Report::ChartPalette::Rainbow));
+  ui->m_comboPalette->addItem(i18nc("type of graphic palette", "Subdued"), static_cast<int>(eMyMoney::Report::ChartPalette::Subdued));
 }
 
 ReportTabChart::~ReportTabChart()

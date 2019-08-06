@@ -48,6 +48,7 @@ namespace eMyMoney { namespace Report { enum class DetailLevel; } }
 namespace eMyMoney { namespace Report { enum class InvestmentSum; } }
 namespace eMyMoney { namespace Report { enum class ChartType; } }
 namespace eMyMoney { namespace Report { enum class DataLock; } }
+namespace eMyMoney { namespace Report { enum class ChartPalette; } }
 
 /**
   * This class defines a report within the MyMoneyEngine.  The report class
@@ -151,6 +152,9 @@ public:
 
   eMyMoney::Report::ChartType chartType() const;
   void setChartType(eMyMoney::Report::ChartType type);
+
+  eMyMoney::Report::ChartPalette chartPalette() const;
+  void setChartPalette(eMyMoney::Report::ChartPalette type);
 
   bool isChartDataLabels() const;
   void setChartDataLabels(bool f);

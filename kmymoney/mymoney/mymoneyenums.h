@@ -103,6 +103,8 @@ namespace eMyMoney {
 
     enum class DataLock { Automatic = 0, UserDefined, DataOptionCount };
     inline uint qHash(const DataLock key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+    enum class ChartPalette { Application = 0, Default, Rainbow, Subdued, End};
+    inline uint qHash(const ChartPalette key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
   }
 
   namespace Schedule {
