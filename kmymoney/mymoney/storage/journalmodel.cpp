@@ -304,6 +304,12 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::Roles::SplitAccountIdRole:
       return journalEntry.split().accountId();
 
+    case eMyMoney::Model::SplitReconcileFlagRole:
+      return QVariant::fromValue<eMyMoney::Split::State>(journalEntry.split().reconcileFlag());
+
+    case eMyMoney::Model::SplitReconcileDateRole:
+      return journalEntry.split().reconcileDate();
+
     case eMyMoney::Model::Roles::TransactionPostDateRole:
       return transaction.postDate();
 

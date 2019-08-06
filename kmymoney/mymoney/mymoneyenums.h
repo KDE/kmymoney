@@ -20,6 +20,7 @@
 #define MYMONEYENUMS_H
 
 #include <QtCore/qnamespace.h>
+#include <QMetaType>
 #include <QHashFunctions>
 
 namespace eMyMoney {
@@ -496,6 +497,8 @@ namespace eMyMoney {
       SplitSharesRole,
       SplitValueRole,
       SplitPriceRole,
+      SplitReconcileFlagRole,
+      SplitReconcileDateRole,
 
       // Ledger
       LedgerDisplayOrderRole,
@@ -505,4 +508,7 @@ namespace eMyMoney {
     };
   }
 }
+
+Q_DECLARE_METATYPE(eMyMoney::Split::State)
+
 #endif

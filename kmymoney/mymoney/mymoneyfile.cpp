@@ -3767,38 +3767,26 @@ int MyMoneyFile::countTransactionsWithSpecificReconciliationState(const QString&
 
 QMap<QString, QVector<int> > MyMoneyFile::countTransactionsWithSpecificReconciliationState() const
 {
-  /// @todo port to new model code
   QMap<QString, QVector<int> > result;
-  MyMoneyTransactionFilter filter;
-  filter.setReportAllSplits(false);
 
-  d->checkStorage();
-
-  QList<MyMoneyAccount> list;
-  accountList(list);
-  for (const auto& account : list) {
-    result[account.id()] = QVector<int>((int)eMyMoney::Split::State::MaxReconcileState, 0);
-  }
-
-  const auto transactions = d->m_storage->transactionList(filter);
-  for (const auto& transaction : transactions) {
-    const auto& splits = transaction.splits();
-    for (const auto& split : splits) {
-      if (!result.contains(split.accountId())) {
-        result[split.accountId()] = QVector<int>((int)eMyMoney::Split::State::MaxReconcileState, 0);
-      }
-      const auto flag = split.reconcileFlag();
-      switch(flag) {
-        case eMyMoney::Split::State::NotReconciled:
-        case eMyMoney::Split::State::Cleared:
-        case eMyMoney::Split::State::Reconciled:
-        case eMyMoney::Split::State::Frozen:
-          result[split.accountId()][(int)flag]++;
-          break;
-        default:
-          break;
-      }
-
+  const auto rows = d->journalModel.rowCount();
+  QModelIndex idx;
+  for (int row = 0; row < rows; ++row) {
+    idx = d->journalModel.index(row, 0);
+    const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
+    if (!result.contains(accountId)) {
+      result[accountId] = QVector<int>((int)eMyMoney::Split::State::MaxReconcileState, 0);
+    }
+    const auto flag = idx.data(eMyMoney::Model::SplitReconcileFlagRole).value<eMyMoney::Split::State>();
+    switch (flag) {
+      case eMyMoney::Split::State::NotReconciled:
+      case eMyMoney::Split::State::Cleared:
+      case eMyMoney::Split::State::Reconciled:
+      case eMyMoney::Split::State::Frozen:
+        result[accountId][(int)flag]++;
+        break;
+      default:
+        break;
     }
   }
   return result;
