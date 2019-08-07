@@ -46,7 +46,7 @@
         "Name": "Reports view",
         "Name[ca@valencia]": "Vista d'informes",
         "Name[ca]": "Vista d'informes",
-        "Name[de]": "Berichts-Ansicht",
+        "Name[de]": "Berichtsansicht",
         "Name[en_GB]": "Reports view",
         "Name[es]": "Vista de informes",
         "Name[fr]": "Vue Rapports",
