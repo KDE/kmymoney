@@ -1,7 +1,7 @@
 /*
  * Copyright 2004       Martin Preuss aquamaniac@users.sourceforge.net
  * Copyright 2009       Cristian Onet onet.cristian@gmail.com
- * Copyright 2010-2018  Thomas Baumgart tbaumgart@kde.org
+ * Copyright 2010-2019  Thomas Baumgart tbaumgart@kde.org
  * Copyright 2015       Christian David christian-david@web.de
  *
  * This program is free software; you can redistribute it and/or
@@ -33,8 +33,10 @@
 #include <QCheckBox>
 #include <QLabel>
 #include <QTimer>
+#include <QRegularExpression>
 
 #include <QDebug> //! @todo remove @c #include <QDebug>
+
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -50,6 +52,7 @@
 #include <KComboBox>
 #include <KConfig>
 #include <KConfigGroup>
+#include <KAboutData>
 
 // ----------------------------------------------------------------------------
 // Library Includes
@@ -845,6 +848,18 @@ KBankingExt::KBankingExt(KBanking* parent, const char* appname, const char* fnam
     , _jobQueue(0)
 {
   m_sepaKeywords = {QString::fromUtf8("SEPA-BASISLASTSCHRIFT"), QString::fromUtf8("SEPA-ÜBERWEISUNG")};
+  QRegularExpression exp("(\\d+\\.\\d+\\.\\d+).*");
+  QRegularExpressionMatch match = exp.match(KAboutData::applicationData().version());
+
+  QByteArray regkey;
+  const char *p = "\x08\x0f\x41\x0f\x58\x5b\x56\x4a\x09\x7b\x40\x0e\x5f\x2a\x56\x3f\x0e\x7f\x3f\x7d\x5b\x56\x56\x4b\x0a\x4d";
+  const char* q = appname;
+  while (*p) {
+    regkey += (*q++ ^ *p++) & 0xff;
+    if (!*q)
+      q = appname;
+  }
+  registerFinTs(regkey.data(), match.captured(1).toLatin1());
 }
 
 

@@ -1,17 +1,20 @@
-/***************************************************************************
-    begin       : Mon Mar 01 2004
-    copyright   : (C) 2004 by Martin Preuss
-    email       : martin@libchipcard.de
-
- ***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-
+/*
+ * Copyright 2004       Martin Preuss <martin@libchipcard.de>
+ * Copyright 2004-2019  Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifdef HAVE_CONFIG_H
 # include <config-kmymoney.h>
@@ -34,6 +37,13 @@ AB_Banking::AB_Banking(const char *appname, const char *fname)
   _banking = AB_Banking_new(appname, fname, 0);
 }
 
+void AB_Banking::registerFinTs(const char* regKey, const char* version) const
+{
+#ifdef ENABLE_FINTS_REGISTRATION
+  AB_Banking_RuntimeConfig_SetCharValue(_banking, "fintsRegistrationKey", regKey);
+  AB_Banking_RuntimeConfig_SetCharValue(_banking, "fintsApplicationVersionString", version);
+#endif
+}
 
 
 AB_Banking::~AB_Banking()
