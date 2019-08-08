@@ -12,6 +12,11 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${gwengui-qt4_INCLUDE_DIRS}
 )
 
+file(STRINGS "${AQBANKING_INCLUDE_DIRS}/aqbanking/banking.h" HAVE_REGISTRATION_FEATURE REGEX "AB_Banking_RuntimeConfig_SetCharValue")
+if (NOT ${HAVE_REGISTRATION_FEATURE} STREQUAL "")
+  add_definitions(-DENABLE_FINTS_REGISTRATION)
+endif()
+
 add_subdirectory( dialogs )
 add_subdirectory( widgets )
 add_subdirectory( qml )

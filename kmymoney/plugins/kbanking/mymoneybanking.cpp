@@ -77,6 +77,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "config-kmymoney-version.h"
 #include "mymoney/onlinejob.h"
 
 #include "kbaccountsettings.h"
@@ -794,6 +795,18 @@ KMyMoneyBanking::KMyMoneyBanking(KBankingPlugin* parent, const char* appname, co
 {
   m_sepaKeywords  << QString("SEPA-BASISLASTSCHRIFT")
   << QString::fromUtf8("SEPA-ÜBERWEISUNG");
+
+  QStringList versions = QString(VERSION).split(".");
+
+  QByteArray regkey;
+  const char *p = "\x08\x0f\x41\x0f\x58\x5b\x56\x4a\x09\x7b\x40\x0e\x5f\x2a\x56\x3f\x0e\x7f\x3f\x7d\x5b\x56\x56\x4b\x0a\x4d";
+  const char* q = appname;
+  while (*p) {
+    regkey += (*q++ ^ *p++) & 0xff;
+    if (!*q)
+      q = appname;
+  }
+  registerFinTs(regkey.data(), versions[0].toLatin1());
 }
 
 int KMyMoneyBanking::init()
