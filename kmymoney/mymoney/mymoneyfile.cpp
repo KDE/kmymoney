@@ -78,6 +78,7 @@
 #include "journalmodel.h"
 #include "pricemodel.h"
 #include "parametersmodel.h"
+#include "onlinejobsmodel.h"
 
 #ifdef KMM_MODELTEST
   #include "modeltest.h"
@@ -195,6 +196,7 @@ public:
     , journalModel(qq)
     , priceModel(qq)
     , parametersModel(qq)
+    , onlineJobsModel(qq)
   {
 #ifdef KMM_MODELTEST
     /// @todo add new models here
@@ -211,6 +213,7 @@ public:
     new ModelTest(&journalModel, file);
     new ModelTest(&priceModel, file);
     new ModelTest(&parametersModel, file);
+    new ModelTest(&onlineJobsModel, file);
 #endif
     qq->connect(qq, &MyMoneyFile::modelsReadyToUse, &journalModel, &JournalModel::updateBalances);
     qq->connect(qq, &MyMoneyFile::modelsReadyToUse, qq, &MyMoneyFile::finalizeFileOpen);
@@ -236,7 +239,8 @@ public:
         || institutionsModel.isDirty()
         || journalModel.isDirty()
         || priceModel.isDirty()
-        || parametersModel.isDirty();
+        || parametersModel.isDirty()
+        || onlineJobsModel.isDirty();
   }
 
   /**
@@ -378,6 +382,7 @@ public:
   JournalModel        journalModel;
   PriceModel          priceModel;
   ParametersModel     parametersModel;
+  OnlineJobsModel     onlineJobsModel;
 };
 
 
@@ -431,6 +436,7 @@ void MyMoneyFile::unload()
   d->journalModel.unload();
   d->priceModel.unload();
   d->parametersModel.unload();
+  d->onlineJobsModel.unload();
 }
 
 void MyMoneyFile::attachStorage(MyMoneyStorageMgr* const storage)
@@ -534,6 +540,7 @@ void MyMoneyFile::commitTransaction()
       case eMyMoney::File::Object::Transaction:
       // case eMyMoney::File::Object::Price:
       // case eMyMoney::File::Object::Parameter:
+      case eMyMoney::File::Object::OnlineJob:
         changed = true;
         break;
       default:
@@ -599,6 +606,7 @@ void MyMoneyFile::rollbackTransaction()
 {
   d->checkTransaction(Q_FUNC_INFO);
 
+  /// @todo port to new model code
   d->m_storage->rollbackTransaction();
   d->m_inTransaction = false;
   d->m_balanceChangedSet.clear();
@@ -744,9 +752,11 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
+  /// @todo port to new model code
   MyMoneyAccount account(_account);
 
-  auto acc = MyMoneyFile::account(account.id());
+  QModelIndex idx = d->accountsModel.indexById(account.id());
+  auto acc = d->accountsModel.itemByIndex(idx);
 
   // check that for standard accounts only specific parameters are changed
   if (isStandardAccount(account.id())) {
@@ -784,7 +794,7 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
     }
   }
 
-  d->m_storage->modifyAccount(account);
+  d->accountsModel.modifyItem(idx, account);
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, account);
 }
 
@@ -792,6 +802,7 @@ void MyMoneyFile::reparentAccount(MyMoneyAccount &acc, MyMoneyAccount& parent)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
+  /// @todo port to new model code
   // check that it's not one of the standard account groups
   if (isStandardAccount(acc.id()))
     throw MYMONEYEXCEPTION_CSTRING("Unable to reparent the standard account groups");
@@ -919,7 +930,9 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 
   // check that the account and its parent exist
   // this will throw an exception if the id is unknown
-  acc = d->accountsModel.itemById(account.id());
+  const auto idx = d->accountsModel.indexById(account.id());
+  acc = d->accountsModel.itemByIndex(idx);
+
   parent = d->accountsModel.itemById(account.parentAccountId());
   if (!acc.institutionId().isEmpty())
     institution = d->institutionsModel.itemById(acc.institutionId());
@@ -941,13 +954,13 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 
   if (!institution.id().isEmpty()) {
     institution.removeAccountId(account.id());
-    d->institutionsModel.modifyItem(institution);
+    modifyInstitution(institution);
     // d->m_storage->modifyInstitution(institution);
     d->m_changeSet += MyMoneyNotification(File::Mode::Modify, institution);
   }
   acc.setInstitutionId(QString());
 
-  d->accountsModel.removeItem(acc);
+  d->accountsModel.removeItem(idx);
   // d->m_storage->removeAccount(acc);
 
   d->m_balanceCache.clear(acc.id());
@@ -959,6 +972,7 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned int level)
 {
   /// @todo port to new model code
+  qDebug() << "removeAccountList needs to be ported to new model code";
 #if 0
   if (level > 100)
     throw MYMONEYEXCEPTION_CSTRING("Too deep recursion in [MyMoneyFile::removeAccountList]!");
@@ -1531,6 +1545,11 @@ ParametersModel* MyMoneyFile::parametersModel() const
   return &d->parametersModel;
 }
 
+OnlineJobsModel* MyMoneyFile::onlineJobsModel() const
+{
+  return &d->onlineJobsModel;
+}
+
 /// @todo add new models here
 
 void MyMoneyFile::addPayee(MyMoneyPayee& payee)
@@ -1643,6 +1662,7 @@ void MyMoneyFile::accountList(QList<MyMoneyAccount>& list, const QStringList& id
 // general get functions
 MyMoneyPayee MyMoneyFile::user() const
 {
+  /// @todo port to new model code
   d->checkStorage();
   return d->m_storage->user();
 }
@@ -1652,11 +1672,13 @@ void MyMoneyFile::setUser(const MyMoneyPayee& user)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
+  /// @todo port to new model code
   d->m_storage->setUser(user);
 }
 
 bool MyMoneyFile::dirty() const
 {
+  /// @todo port to new model code
   if (!d->m_storage)
     return false;
 
@@ -1666,6 +1688,7 @@ bool MyMoneyFile::dirty() const
 
 void MyMoneyFile::setDirty() const
 {
+  /// @todo port to new model code
   d->checkStorage();
 
   d->m_storage->setDirty();
@@ -1673,6 +1696,7 @@ void MyMoneyFile::setDirty() const
 
 unsigned int MyMoneyFile::accountCount() const
 {
+  /// @todo port to new model code
   d->checkStorage();
 
   return d->m_storage->accountCount();
@@ -1711,20 +1735,14 @@ MyMoneyAccount MyMoneyFile::equity() const
   return account(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Equity));
 }
 
-unsigned int MyMoneyFile::transactionCount(const QString& account) const
+unsigned int MyMoneyFile::transactionCount(const QString& accountId) const
 {
-  d->checkStorage();
-
-  return d->m_storage->transactionCount(account);
-}
-
-unsigned int MyMoneyFile::transactionCount() const
-{
-  return transactionCount(QString());
+  return d->journalModel.transactionCount(accountId);
 }
 
 QMap<QString, unsigned long> MyMoneyFile::transactionCountMap() const
 {
+  /// @todo port to new model code
   d->checkStorage();
 
   return d->m_storage->transactionCountMap();
@@ -1732,6 +1750,7 @@ QMap<QString, unsigned long> MyMoneyFile::transactionCountMap() const
 
 unsigned int MyMoneyFile::institutionCount() const
 {
+  /// @todo port to new model code
   d->checkStorage();
 
   return d->m_storage->institutionCount();
@@ -1745,7 +1764,7 @@ MyMoneyMoney MyMoneyFile::balance(const QString& id, const QDate& date) const
       return bal.balance();
   }
 
-  MyMoneyMoney returnValue = d->m_storage->balance(id, date);
+  const auto returnValue = d->journalModel.balance(id, date);
 
   if (date.isValid()) {
     d->m_balanceCache.insert(id, date, returnValue);
@@ -1792,6 +1811,7 @@ MyMoneyMoney MyMoneyFile::clearedBalance(const QString &id, const QDate& date) c
 
 MyMoneyMoney MyMoneyFile::totalBalance(const QString& id, const QDate& date) const
 {
+  /// @todo port to new model code
   d->checkStorage();
 
   return d->m_storage->totalBalance(id, date);
@@ -3360,41 +3380,32 @@ void MyMoneyFile::addOnlineJob(onlineJob& job)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  /// @todo port to new model code
-  d->m_storage->addOnlineJob(job);
+  d->onlineJobsModel.addItem(job);
   d->m_changeSet += MyMoneyNotification(File::Mode::Add, job);
 }
 
 void MyMoneyFile::modifyOnlineJob(const onlineJob job)
 {
   d->checkTransaction(Q_FUNC_INFO);
-  /// @todo port to new model code
-  d->m_storage->modifyOnlineJob(job);
+
+  d->onlineJobsModel.modifyItem(job);
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, job);
 }
 
 onlineJob MyMoneyFile::getOnlineJob(const QString &jobId) const
 {
-  /// @todo port to new model code
-  d->checkStorage();
-  return d->m_storage->getOnlineJob(jobId);
+  return d->onlineJobsModel.itemById(jobId);
 }
 
 QList<onlineJob> MyMoneyFile::onlineJobList() const
 {
-  /// @todo port to new model code
-#if 0
-  d->checkStorage();
-  return d->m_storage->onlineJobList();
-#endif
-  return QList<onlineJob>();
+  return d->onlineJobsModel.itemList();
 }
 
 /** @todo improve speed by passing count job to m_storage */
 int MyMoneyFile::countOnlineJobs() const
 {
-  /// @todo port to new model code
-  return onlineJobList().count();
+  return d->onlineJobsModel.rowCount();
 }
 
 /**
@@ -3405,20 +3416,16 @@ void MyMoneyFile::removeOnlineJob(const onlineJob& job)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  /// @todo port to new model code
-#if 0
   // clear all changed objects from cache
   if (job.isLocked()) {
     return;
   }
   d->m_changeSet += MyMoneyNotification(File::Mode::Remove, job);
-  d->m_storage->removeOnlineJob(job);
-#endif
+  d->onlineJobsModel.removeItem(job);
 }
 
 void MyMoneyFile::removeOnlineJob(const QStringList onlineJobIds)
 {
-  /// @todo port to new model code
   foreach (QString jobId, onlineJobIds) {
     removeOnlineJob(getOnlineJob(jobId));
   }
@@ -3769,14 +3776,18 @@ QMap<QString, QVector<int> > MyMoneyFile::countTransactionsWithSpecificReconcili
 {
   QMap<QString, QVector<int> > result;
 
+  // fill with empty result for all existing accounts
+  QList<MyMoneyAccount> list;
+  accountList(list);
+  for (const auto& acc : qAsConst(list)) {
+    result[acc.id()] = QVector<int>((int)eMyMoney::Split::State::MaxReconcileState, 0);
+  }
+
   const auto rows = d->journalModel.rowCount();
   QModelIndex idx;
   for (int row = 0; row < rows; ++row) {
     idx = d->journalModel.index(row, 0);
     const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
-    if (!result.contains(accountId)) {
-      result[accountId] = QVector<int>((int)eMyMoney::Split::State::MaxReconcileState, 0);
-    }
     const auto flag = idx.data(eMyMoney::Model::SplitReconcileFlagRole).value<eMyMoney::Split::State>();
     switch (flag) {
       case eMyMoney::Split::State::NotReconciled:

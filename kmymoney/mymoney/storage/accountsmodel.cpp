@@ -94,6 +94,51 @@ struct AccountsModel::Private
     return itemCount;
   }
 
+  QMap<QString, MyMoneyAccount> checkHierarchy(const QMap<QString, MyMoneyAccount>& _list)
+  {
+    auto list(_list);
+
+    qDebug() << "Start verifying account hierarchy";
+    // check forwards: entries in the accountList member of an
+    // account must have the current account as parent. If not
+    // or the accountId does not exist at all, the  accountId
+    // will be removed from the accountList member.
+    for (auto ita = list.begin(); ita != list.end(); ++ita) {
+      const QStringList accountIds = (*ita).accountList();
+      for (const auto& subAccount : accountIds) {
+        if (!_list.contains(subAccount) || _list.value(subAccount).parentAccountId() != (*ita).id()) {
+          (*ita).removeAccountId(subAccount);
+          qDebug() << "check account hierarchy:" << "removed" << subAccount << "from" << (*ita).id();
+        }
+      }
+    }
+
+    // check backwards: make sure, the parentId points to an
+    // existing account. If not, attach it to the top account.
+    // Make sure, the parentId is listed in the parent account's
+    // sub-account accountList member. If not, add it to the parent.
+    // Don't check the parent of the top level accounts.
+    for (auto ita = list.begin(); ita != list.end(); ++ita) {
+      // standard account?
+      if ((*ita).id().startsWith("AStd"))
+        continue;
+      // parent does not exist?
+      if (!_list.contains((*ita).parentAccountId())) {
+        const auto newParentid = MyMoneyAccount::stdAccName(static_cast<eMyMoney::Account::Standard>((*ita).accountGroup()));
+        (*ita).setParentAccountId(newParentid);
+        qDebug() << "check account hierarchy:" << "reparented" << (*ita).id() << "to" << newParentid;
+      }
+      // if parent does not know about us?
+      auto itb = list.find((*ita).parentAccountId());
+      if (!(*itb).accountList().contains((*ita).id())) {
+        (*itb).addAccountId((*ita).id());
+        qDebug() << "check account hierarchy:" << "added" << (*ita).id() << "to" << (*itb).id();
+      }
+    }
+    qDebug() << "End verifying account hierarchy";
+    return list;
+  }
+
   bool isFavoriteIndex(const QModelIndex& idx) const
   {
     if (idx.isValid()) {
@@ -531,12 +576,13 @@ QModelIndex AccountsModel::equityIndex() const
   return index(5, 0);
 }
 
-void AccountsModel::load(const QMap<QString, MyMoneyAccount>& list)
+void AccountsModel::load(const QMap<QString, MyMoneyAccount>& _list)
 {
   beginResetModel();
   // first get rid of any existing entries
   clearModelItems();
 
+  auto list = d->checkHierarchy(_list);
   int itemCount = 0;
   foreach(auto baseAccount, d->defaults) {
     ++itemCount;
@@ -560,7 +606,7 @@ void AccountsModel::load(const QMap<QString, MyMoneyAccount>& list)
 
   emit modelLoaded();
 
-  qDebug() << "Model for \"A\" loaded with" << itemCount << "items";
+  qDebug() << "Model for accounts loaded with" << itemCount << "items";
 }
 
 QList<MyMoneyAccount> AccountsModel::itemList() const
@@ -568,6 +614,7 @@ QList<MyMoneyAccount> AccountsModel::itemList() const
   QList<MyMoneyAccount> list;
   // never search in the first row which is favorites
   QModelIndexList indexes = match(assetIndex(), eMyMoney::Model::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive);
+
   for (int row = 0; row < indexes.count(); ++row) {
     const MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(indexes.value(row).internalPointer())->constDataRef();
     if (!account.id().startsWith("AStd"))

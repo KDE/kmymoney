@@ -160,6 +160,7 @@ class InstitutionsModel;
 class JournalModel;
 class PriceModel;
 class ParametersModel;
+class OnlineJobsModel;
 
 namespace eMyMoney { namespace Account { enum class Type; }
                      namespace File { enum class Object; }
@@ -652,15 +653,14 @@ public:
     * This method returns the number of transactions currently known to file
     * in the range 0..MAXUINT
     *
-    * @param account QString reference to account id. If account is empty
-    +                all transactions (the journal) will be counted. If account
-    *                is not empty it returns the number of transactions
-    *                that have splits in this account.
+    * @param accountId QString reference to account id. If account is empty
+    +                  all transactions (the journal) will be counted. If account
+    *                  is not empty it returns the number of transactions
+    *                  that have splits in this account.
     *
     * @return number of transactions in journal/account
     */
-  unsigned int transactionCount(const QString& account) const;
-  unsigned int transactionCount() const;
+  unsigned int transactionCount(const QString& accountId = QString()) const;
 
   /**
     * This method returns a QMap filled with the number of transactions
@@ -918,6 +918,11 @@ public:
    * The parameters model instance
    */
   ParametersModel* parametersModel() const;
+
+  /**
+   * The online jobs model instance
+   */
+  OnlineJobsModel* onlineJobsModel() const;
 
 
   /// @todo add new models here

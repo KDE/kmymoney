@@ -82,6 +82,7 @@
 #include "journalmodel.h"
 #include "pricemodel.h"
 #include "parametersmodel.h"
+#include "onlinejobsmodel.h"
 
 using namespace eMyMoney;
 
@@ -474,6 +475,9 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
       /// @todo cleanup
       m_reader->m_storage->loadPrices(m_reader->d->prList);
       m_reader->d->prList.clear();
+    } else if (s == tagName(Tag::OnlineJobs)) {
+      m_reader->m_models->onlineJobsModel()->load(m_reader->d->onlineJobList);
+      m_reader->d->onlineJobList.clear();
 
 /* above this line we keep the new model logic to keep track of what needs to be done */
 
@@ -481,10 +485,6 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
       // last report read, now dump them into the engine
       m_reader->m_storage->loadReports(m_reader->d->rList);
       m_reader->d->rList.clear();
-      m_reader->signalProgress(-1, -1);
-    } else if (s == tagName(Tag::OnlineJobs)) {
-      m_reader->m_storage->loadOnlineJobs(m_reader->d->onlineJobList);
-      m_reader->d->onlineJobList.clear();
     }
   }
   return rc;
@@ -759,8 +759,6 @@ MyMoneyAccount MyMoneyXmlContentHandler::readAccount(const QDomElement &node)
       throw MYMONEYEXCEPTION(QString::fromLatin1("Account %1 contains an opening balance. Please use KMyMoney version 0.8 or later and earlier than version 0.9 to correct the problem.").arg(acc.name()));
 
   acc.setDescription(node.attribute(attributeName(Attribute::Account::Description)));
-
-  // qDebug("Account %s has id of %s, type of %d, parent is %s.", acc.name().data(), id.data(), type, acc.parentAccountId().data());
 
   //  Process any Sub-Account information found inside the account entry.
   acc.removeAccountIds();
@@ -1795,12 +1793,9 @@ void MyMoneyStorageXML::writeBudget(QDomElement& budget, const MyMoneyBudget& b)
 
 void MyMoneyStorageXML::writeOnlineJobs(QDomElement& parent)
 {
-  const auto list = m_storage->onlineJobList();
-  parent.setAttribute(attributeName(Attribute::General::Count), list.count());
-
-  Q_FOREACH(const auto& item, list) {
-    writeOnlineJob(parent, item);
-  }
+  OnlineJobsModel::xmlWriter writer(&MyMoneyXmlContentHandler::writeOnlineJob, *m_doc, parent);
+  const auto count = m_models->onlineJobsModel()->processItems(&writer);
+  parent.setAttribute(attributeName(Attribute::General::Count), count);
 }
 
 void MyMoneyStorageXML::writeOnlineJob(QDomElement& onlineJobs, const onlineJob& job)

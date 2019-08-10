@@ -63,7 +63,10 @@ public:
 
     TreeItem<T> *child(int row)
     {
-      return childItems.value(row);
+      if (row < childItems.count()) {
+        return childItems.value(row);
+      }
+      return nullptr;
     }
 
     int childCount() const
@@ -286,11 +289,23 @@ public:
     return true;
   }
 
+  /**
+   * lowerBound returns a QModelIndex with a row pointing to the item
+   * with the equal or next higher item.id(). If id is higher than any
+   * id found in the model, then the returned QModelIndex has a row
+   * equal to rowCount() which cannot be used. It is the caller's
+   * responsibility to check for this condition. In case the distance
+   * between first and last is less than or equal to zero, an invalid
+   * QModelIndex is returned.
+   */
   QModelIndex lowerBound(const QString& id, int first, int last) const override
   {
-    int count = last - first;
+    int count = last - first + 1;
     int row = -1;
     int step;
+    if (count <= 0) {
+      return QModelIndex();
+    }
     while (count > 0) {
       step = count / 2;
       row = first + step;
@@ -305,17 +320,28 @@ public:
     return index(row, 0);
   }
 
+  /**
+   * upperBound returns a QModelIndex with a row pointing to the item
+   * with the next higher item.id(). If id is higher than any
+   * id found in the model, then the returned QModelIndex is invalid.
+   * It is the caller's responsibility to check for this condition.
+   * In case the distance between first and last is less than or equal
+   * to zero, an invalid QModelIndex is returned.
+   */
   QModelIndex upperBound(const QString& id, int first, int last) const override
   {
-    int count = last - first;
+    int count = last - first + 1;
     int row = -1;
     int step;
+    if (count <= 0) {
+      return QModelIndex();
+    }
     while (count > 0) {
       step = count / 2;
-      row = last - step;
+      row = first + step;
       const T& item = static_cast<TreeItem<T>*>(index(row, 0).internalPointer())->constDataRef();
-      if (item.id() > id) {
-        last = --row;
+      if (!(id < item.id())) {
+        first = ++row;
         count -= step + 1;
       } else {
         count = step;
@@ -471,9 +497,8 @@ public:
     emit dataChanged(idx, index(row, columnCount()-1));
   }
 
-  void modifyItem(const T& item)
+  void modifyItem(const QModelIndex& idx, const T& item)
   {
-    const QModelIndex idx = indexById(item.id());
     if (idx.isValid()) {
       static_cast<TreeItem<T>*>(idx.internalPointer())->dataRef() = item;
       setDirty();
@@ -481,13 +506,22 @@ public:
     }
   }
 
-  void removeItem(const T& item)
+  void modifyItem(const T& item)
   {
-    const QModelIndex idx = indexById(item.id());
+    modifyItem(indexById(item.id()), item);
+  }
+
+  void removeItem(const QModelIndex& idx)
+  {
     if (idx.isValid()) {
       removeRow(idx.row(), idx.parent());
       setDirty();
     }
+  }
+
+  void removeItem(const T& item)
+  {
+    removeItem(indexById(item.id()));
   }
 
   T itemByName(const QString& name, const QModelIndex parent = QModelIndex()) const

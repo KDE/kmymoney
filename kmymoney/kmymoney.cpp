@@ -3410,6 +3410,8 @@ bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
     return false;
   }
 
+  qDebug() << "Open file" << url;
+
   if (url.scheme() != QLatin1String("sql") && !KMyMoneyUtils::fileExists(url)) {
     KMessageBox::sorry(this, i18n("<p><b>%1</b> is either an invalid filename or the file does not exist. You can open another file or create a new one.</p>", url.toDisplayString(QUrl::PreferLocalFile)), i18n("File not found"));
     return false;

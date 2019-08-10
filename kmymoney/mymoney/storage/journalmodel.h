@@ -112,6 +112,7 @@ public:
 
   void transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const;
   void transactionList(QList< QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const;
+  unsigned int transactionCount(const QString& accountid) const;
 
   bool setData(const QModelIndex& idx, const QVariant& value, int role = Qt::EditRole) override;
 

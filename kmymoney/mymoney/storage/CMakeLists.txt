@@ -18,6 +18,7 @@ set(storage_HEADERS
   journalmodel.h
   pricemodel.h
   parametersmodel.h
+  onlinejobsmodel.h
   )
 
 ########### install files ###############

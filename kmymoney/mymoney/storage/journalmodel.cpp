@@ -604,11 +604,32 @@ void JournalModel::transactionList(QList< QPair<MyMoneyTransaction, MyMoneySplit
   }
 }
 
+unsigned int JournalModel::transactionCount(const QString& accountid) const
+{
+  unsigned int result = 0;
+
+  if (accountid.isEmpty()) {
+    result = d->transactionIdKeyMap.count();
+
+  } else {
+    const int rows = rowCount();
+    QVector<MyMoneySplit> splits;
+    for (int row = 0; row < rows; ++row) {
+      const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
+      if (journalEntry.split().accountId() == accountid) {
+        ++result;
+      }
+    }
+  }
+  return result;
+}
+
 void JournalModel::updateBalances()
 {
   d->loadAccountCache();
 
   // calculate the balances
+  d->balanceCache.clear();
   const int rows = rowCount();
   qDebug() << "Start calculating balances:" << rows << "splits";
   for (int row = 0; row < rows; ++row) {
@@ -629,19 +650,43 @@ MyMoneyMoney JournalModel::balance(const QString& accountId, const QDate& date) 
 {
   if (date.isValid()) {
     MyMoneyMoney balance;
-    QModelIndex lastIdx = upperBound(MyMoneyTransaction::uniqueSortKey(date, QString()), 0, rowCount());
-    for (int row = 0; row < lastIdx.row(); ++row) {
-      const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
-      if (journalEntry.split().accountId() == accountId) {
-
-        if (journalEntry.transaction().isStockSplit()) {
-          balance *= journalEntry.split().shares();
-        } else {
-          balance += journalEntry.split().shares();
+    QModelIndex lastIdx = upperBound(MyMoneyTransaction::uniqueSortKey(date, QStringLiteral("x")), 0, rowCount()-1);
+    // in case the index is invalid, we search for a data past
+    // the end of the journal, so we can simply use the cached
+    // balance.
+    if (lastIdx.isValid()) {
+      // in case the entry is in the first half,
+      // we start from the beginning and go forward
+      if (lastIdx.row() < rowCount()/2) {
+        for (int row = 0; row < lastIdx.row(); ++row) {
+          const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
+          if (journalEntry.split().accountId() == accountId) {
+            if (journalEntry.transaction().isStockSplit()) {
+              balance *= journalEntry.split().shares();
+            } else {
+              balance += journalEntry.split().shares();
+            }
+          }
+        }
+      } else {
+        // in case the entry is in the second half,
+        // we start at the end and go backwards
+        // This requires the balance cache to always
+        // be up-to-date
+        balance = d->balanceCache.value(accountId);
+        for (int row = rowCount()-1; row >= lastIdx.row(); --row) {
+          const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
+          if (journalEntry.split().accountId() == accountId) {
+            if (journalEntry.transaction().isStockSplit()) {
+              balance /= journalEntry.split().shares();
+            } else {
+              balance -= journalEntry.split().shares();
+            }
+          }
         }
       }
+      return balance;
     }
-    return balance;
   }
   return d->balanceCache.value(accountId);
 }

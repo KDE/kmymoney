@@ -100,10 +100,10 @@ QModelIndex MyMoneyModelBase::mapFromBaseSource(QAbstractItemModel* proxyModel, 
 
 QModelIndex MyMoneyModelBase::lowerBound(const QString& id) const
 {
-  return lowerBound(id, 0, rowCount());
+  return lowerBound(id, 0, rowCount()-1);
 }
 
 QModelIndex MyMoneyModelBase::upperBound(const QString& id) const
 {
-  return upperBound(id, 0, rowCount());
+  return upperBound(id, 0, rowCount()-1);
 }

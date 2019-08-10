@@ -56,6 +56,7 @@ class InstitutionsModel;
 class JournalModel;
 class PriceModel;
 class ParametersModel;
+class OnlineJobsModel;
 
 /**
   * This object is the owner and maintainer of all the core models of KMyMoney.
@@ -105,6 +106,7 @@ public:
   JournalModel* journalModel() const;
   PriceModel* priceModel() const;
   ParametersModel* parametersModel() const;
+  OnlineJobsModel* onlineJobsModel() const;
   // EquitiesModel* equitiesModel();
 
   /**
