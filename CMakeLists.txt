@@ -231,8 +231,8 @@ endif(ENABLE_OFXIMPORTER)
 add_feature_info("OFX Importer" ENABLE_OFXIMPORTER "Allows importing OFX files (have client uid version: ${nice_LIBOFX_HAVE_CLIENTUID})" )
 
 # check for optional KBanking support
-find_package(AQBANKING 5.6.5)
-find_package(gwenhywfar 4.15.3)
+find_package(AQBANKING 5.8.0)
+find_package(gwenhywfar 4.20.0)
 find_package(gwengui-cpp)
 find_package(gwengui-qt5)
 

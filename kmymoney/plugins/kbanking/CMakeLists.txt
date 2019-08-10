@@ -1,6 +1,12 @@
 # patch the version with the version defined in the build system
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kbanking.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/kbanking.json @ONLY)
 
+file(STRINGS "${AQBANKING_INCLUDE_DIRS}/aqbanking/banking.h" HAVE_REGISTRATION_FEATURE REGEX "AB_Banking_RuntimeConfig_SetCharValue")
+if (NOT ${HAVE_REGISTRATION_FEATURE} STREQUAL "")
+  add_definitions(-DENABLE_FINTS_REGISTRATION)
+endif()
+
+
 add_subdirectory( dialogs )
 add_subdirectory( widgets )
 add_subdirectory( qml )

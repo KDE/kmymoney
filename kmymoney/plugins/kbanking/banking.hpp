@@ -1,12 +1,20 @@
-/***************************************************************************
-    begin       : Mon Mar 01 2004
-    copyright   : (C) 2004 by Martin Preuss
-    email       : martin@libchipcard.de
-
- ***************************************************************************
- * This file is part of the project "AqBanking".                           *
- * Please see toplevel file COPYING of that project for license details.   *
- ***************************************************************************/
+/*
+ * Copyright 2004       Martin Preuss <martin@libchipcard.de>
+ * Copyright 2004-2019  Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 /** @file
  * @short A C++ wrapper of the main aqbanking interface
@@ -119,10 +127,10 @@ public:
   int unlockAppConfig();
 
   int loadAppSubConfig(const char *subGroup,
-		       GWEN_DB_NODE **pDb);
+                      GWEN_DB_NODE **pDb);
 
   int saveAppSubConfig(const char *subGroup,
-		       GWEN_DB_NODE *dbSrc);
+                      GWEN_DB_NODE *dbSrc);
 
 
   int loadSharedConfig(const char *name, GWEN_DB_NODE **pDb);
@@ -131,12 +139,12 @@ public:
   int unlockSharedConfig(const char *name);
 
   int loadSharedSubConfig(const char *name,
-			  const char *subGroup,
-			  GWEN_DB_NODE **pDb);
+                         const char *subGroup,
+                         GWEN_DB_NODE **pDb);
 
   int saveSharedSubConfig(const char *name,
-			  const char *subGroup,
-			  GWEN_DB_NODE *dbSrc);
+                         const char *subGroup,
+                         GWEN_DB_NODE *dbSrc);
 
   int beginExclUseAccount(AB_ACCOUNT *a);
   int endExclUseAccount(AB_ACCOUNT *a, int abandon);
@@ -148,6 +156,10 @@ public:
 
   void setAccountAlias(AB_ACCOUNT *a, const char *alias);
 
+  /**
+   * Provide interface to setup ZKA FinTS registration
+   */
+  void registerFinTs(const char* regKey, const char* version) const;
 
   /** @name Enqueueing, Dequeueing and Executing Jobs
    *
@@ -165,7 +177,7 @@ public:
    * and allows that backend to process it.
    */
   virtual int executeJobs(AB_JOB_LIST2 *jl,
-			  AB_IMEXPORTER_CONTEXT *ctx);
+                         AB_IMEXPORTER_CONTEXT *ctx);
 
   /*@}*/
 
