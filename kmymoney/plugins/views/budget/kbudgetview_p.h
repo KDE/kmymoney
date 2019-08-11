@@ -78,9 +78,12 @@ public:
   ~KBudgetViewPrivate()
   {
     // remember the splitter settings for startup
-    KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
-    grp.writeEntry("KBudgetViewSplitterSize", ui->m_splitter->saveState());
-    grp.sync();
+    // but only if we ever have been initialized
+    if (m_budgetProxyModel) {
+      KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
+      grp.writeEntry("KBudgetViewSplitterSize", ui->m_splitter->saveState());
+      grp.sync();
+    }
     delete ui;
   }
 
