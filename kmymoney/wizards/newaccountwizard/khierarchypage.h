@@ -36,9 +36,8 @@ class MyMoneyAccount;
 namespace NewAccountWizard
 {
   class Wizard;
-  class HierarchyFilterProxyModel;
-
   class HierarchyPagePrivate;
+
   class HierarchyPage : public QWidget, public WizardPage<Wizard>
   {
     Q_OBJECT
