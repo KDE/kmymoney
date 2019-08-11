@@ -224,6 +224,10 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     return QVariant();
 
   const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(idx.internalPointer())->constDataRef();
+  if (journalEntry.transactionPtr() == nullptr) {
+    return QVariant();
+  }
+
   const MyMoneyTransaction transaction = journalEntry.transaction();
 
   switch(role) {

@@ -52,6 +52,7 @@ public:
   , m_split(sp)
   {}
 
+  inline const MyMoneyTransaction* transactionPtr() const { return m_transaction.data(); }
   inline const MyMoneyTransaction& transaction() const { return *m_transaction; }
   inline const MyMoneySplit& split() const { return m_split; }
   inline const QString& id() const { return m_id; }
