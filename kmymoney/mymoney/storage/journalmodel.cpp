@@ -241,6 +241,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
         case CostCenter:
 #if 0
+          /// @todo finish implementation
           // in case the own split does not have a costcenter, but the counter split does
           // we use it nevertheless
           if(m_costCenterId.isEmpty())
