@@ -143,6 +143,11 @@ SimpleLedgerView::~SimpleLedgerView()
 
 void SimpleLedgerView::openNewLedger(QString accountId)
 {
+  openNewLedger(accountId, true);
+}
+
+void SimpleLedgerView::openNewLedger(QString accountId, bool makeCurrentLedger)
+{
   Q_D(SimpleLedgerView);
   if(d->inModelUpdate || accountId.isEmpty())
     return;
@@ -173,8 +178,10 @@ void SimpleLedgerView::openNewLedger(QString accountId)
 
     // insert new ledger view page in tab view
     int newIdx = d->ui->ledgerTab->insertTab(d->ui->ledgerTab->count()-1, view, acc.name());
-    d->ui->ledgerTab->setCurrentIndex(d->ui->ledgerTab->count()-1);
-    d->ui->ledgerTab->setCurrentIndex(newIdx);
+    if (makeCurrentLedger) {
+      d->ui->ledgerTab->setCurrentIndex(d->ui->ledgerTab->count()-1);
+      d->ui->ledgerTab->setCurrentIndex(newIdx);
+    }
   }
 }
 
@@ -261,7 +268,7 @@ void SimpleLedgerView::openFavoriteLedgers()
 
   // indexes now has a list of favorite accounts
   foreach (const auto idx, indexes) {
-    openNewLedger(idx.data(eMyMoney::Model::Roles::IdRole).toString());
+    openNewLedger(idx.data(eMyMoney::Model::Roles::IdRole).toString(), false);
   }
   d->ui->ledgerTab->setCurrentIndex(0);
 }

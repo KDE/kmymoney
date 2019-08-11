@@ -60,6 +60,10 @@ protected:
 
 private Q_SLOTS:
   void tabSelected(int idx);
+  void openNewLedger(QString accountId, bool makeCurrentLedger);
+  /**
+   * A convenience method that sets @a makeCurrentLedger to @c true.
+   */
   void openNewLedger(QString accountId);
   void updateModels();
   void closeLedger(int idx);
