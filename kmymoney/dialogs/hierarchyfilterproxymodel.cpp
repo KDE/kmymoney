@@ -18,6 +18,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/// @todo cleanup - remove file
+#if 0
 #include "hierarchyfilterproxymodel.h"
 
 // ----------------------------------------------------------------------------
@@ -106,3 +108,4 @@ bool HierarchyFilterProxyModel::filterAcceptsColumn(int source_column, const QMo
     return true;
   return false;
 }
+#endif
