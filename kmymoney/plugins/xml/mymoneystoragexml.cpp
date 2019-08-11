@@ -83,6 +83,7 @@
 #include "pricemodel.h"
 #include "parametersmodel.h"
 #include "onlinejobsmodel.h"
+#include "reportsmodel.h"
 
 using namespace eMyMoney;
 
@@ -434,7 +435,6 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
     } else if (s == tagName(Tag::CostCenters)) {
       m_reader->m_models->costCenterModel()->load(m_reader->d->ccList);
       m_reader->d->ccList.clear();
-      m_reader->signalProgress(-1, -1);
     } else if (s == tagName(Tag::Tags)) {
       // last tag read, now dump them into the engine
       m_reader->m_models->tagsModel()->load(m_reader->d->taList);
@@ -442,23 +442,25 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
     } else if (s == tagName(Tag::Securities)) {
       // last security read, now dump them into the engine
       m_reader->m_models->securitiesModel()->load(m_reader->d->secList);
-      m_reader->m_storage->loadSecurities(m_reader->d->secList);
+      /// @todo cleanup
+      // m_reader->m_storage->loadSecurities(m_reader->d->secList);
       m_reader->d->secList.clear();
     } else if (s == tagName(Tag::Currencies)) {
       // last currency read, now dump them into the engine
       m_reader->m_models->currenciesModel()->loadCurrencies(m_reader->d->secList);
-      m_reader->m_storage->loadCurrencies(m_reader->d->secList);
+      /// @todo cleanup
+      // m_reader->m_storage->loadCurrencies(m_reader->d->secList);
       m_reader->d->secList.clear();
     } else if (s == tagName(Tag::Budgets)) {
       // last budget read, now dump them into the engine
       m_reader->m_models->budgetsModel()->load(m_reader->d->bList);
-      m_reader->m_storage->loadBudgets(m_reader->d->bList);
+      /// @todo cleanup
+      // m_reader->m_storage->loadBudgets(m_reader->d->bList);
       m_reader->d->bList.clear();
     } else if (s == tagName(Tag::Accounts)) {
       // last account read, now dump them into the engine
       m_reader->m_models->accountsModel()->load(m_reader->d->aList);
       m_reader->d->aList.clear();
-      m_reader->signalProgress(-1, -1);
     } else if (s == tagName(Tag::Institutions)) {
       // last institution read, now dump them into the engine
       m_reader->m_models->institutionsModel()->load(m_reader->d->iList);
@@ -467,23 +469,22 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
       // last transaction read, now dump them into the engine
       m_reader->m_models->journalModel()->load(m_reader->d->tList);
       /// @todo cleanup
-      m_reader->m_storage->loadTransactions(m_reader->d->tList);
+      // m_reader->m_storage->loadTransactions(m_reader->d->tList);
       m_reader->d->tList.clear();
     } else if (s == tagName(Tag::Prices)) {
       // last price read, now dump them into the engine
       m_reader->m_models->priceModel()->load(m_reader->d->prList);
       /// @todo cleanup
-      m_reader->m_storage->loadPrices(m_reader->d->prList);
+      // m_reader->m_storage->loadPrices(m_reader->d->prList);
       m_reader->d->prList.clear();
     } else if (s == tagName(Tag::OnlineJobs)) {
       m_reader->m_models->onlineJobsModel()->load(m_reader->d->onlineJobList);
       m_reader->d->onlineJobList.clear();
-
-/* above this line we keep the new model logic to keep track of what needs to be done */
-
     } else if (s == tagName(Tag::Reports)) {
       // last report read, now dump them into the engine
-      m_reader->m_storage->loadReports(m_reader->d->rList);
+      m_reader->m_models->reportsModel()->load(m_reader->d->rList);
+      /// @todo cleanup
+      // m_reader->m_storage->loadReports(m_reader->d->rList);
       m_reader->d->rList.clear();
     }
   }
@@ -1766,12 +1767,9 @@ void MyMoneyStorageXML::writeCurrencies(QDomElement& parent)
 
 void MyMoneyStorageXML::writeReports(QDomElement& parent)
 {
-  const auto list = m_storage->reportList();
-  parent.setAttribute(attributeName(Attribute::General::Count), list.count());
-
-  Q_FOREACH(const auto& item, list) {
-    writeReport(parent, item);
-  }
+  ReportsModel::xmlWriter writer(&MyMoneyXmlContentHandler2::writeReport, *m_doc, parent);
+  const auto count = m_models->reportsModel()->processItems(&writer);
+  parent.setAttribute(attributeName(Attribute::General::Count), count);
 }
 
 void MyMoneyStorageXML::writeReport(QDomElement& report, const MyMoneyReport& r)

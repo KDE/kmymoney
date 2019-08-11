@@ -161,6 +161,7 @@ class JournalModel;
 class PriceModel;
 class ParametersModel;
 class OnlineJobsModel;
+class ReportsModel;
 
 namespace eMyMoney { namespace Account { enum class Type; }
                      namespace File { enum class Object; }
@@ -923,6 +924,11 @@ public:
    * The online jobs model instance
    */
   OnlineJobsModel* onlineJobsModel() const;
+
+  /**
+   * The reports model instance
+   */
+  ReportsModel* reportsModel() const;
 
 
   /// @todo add new models here

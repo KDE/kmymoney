@@ -79,6 +79,7 @@
 #include "pricemodel.h"
 #include "parametersmodel.h"
 #include "onlinejobsmodel.h"
+#include "reportsmodel.h"
 
 #ifdef KMM_MODELTEST
   #include "modeltest.h"
@@ -197,6 +198,7 @@ public:
     , priceModel(qq)
     , parametersModel(qq)
     , onlineJobsModel(qq)
+    , reportsModel(qq)
   {
 #ifdef KMM_MODELTEST
     /// @todo add new models here
@@ -214,6 +216,7 @@ public:
     new ModelTest(&priceModel, file);
     new ModelTest(&parametersModel, file);
     new ModelTest(&onlineJobsModel, file);
+    new ModelTest(&reportsModel, file);
 #endif
     qq->connect(qq, &MyMoneyFile::modelsReadyToUse, &journalModel, &JournalModel::updateBalances);
     qq->connect(qq, &MyMoneyFile::modelsReadyToUse, qq, &MyMoneyFile::finalizeFileOpen);
@@ -240,7 +243,8 @@ public:
         || journalModel.isDirty()
         || priceModel.isDirty()
         || parametersModel.isDirty()
-        || onlineJobsModel.isDirty();
+        || onlineJobsModel.isDirty()
+        || reportsModel.isDirty();
   }
 
   /**
@@ -383,6 +387,7 @@ public:
   PriceModel          priceModel;
   ParametersModel     parametersModel;
   OnlineJobsModel     onlineJobsModel;
+  ReportsModel        reportsModel;
 };
 
 
@@ -437,6 +442,7 @@ void MyMoneyFile::unload()
   d->priceModel.unload();
   d->parametersModel.unload();
   d->onlineJobsModel.unload();
+  d->reportsModel.unload();
 }
 
 void MyMoneyFile::attachStorage(MyMoneyStorageMgr* const storage)
@@ -541,6 +547,7 @@ void MyMoneyFile::commitTransaction()
       // case eMyMoney::File::Object::Price:
       // case eMyMoney::File::Object::Parameter:
       case eMyMoney::File::Object::OnlineJob:
+      // case eMyMoney::File::Object::Report:
         changed = true;
         break;
       default:
@@ -1548,6 +1555,11 @@ ParametersModel* MyMoneyFile::parametersModel() const
 OnlineJobsModel* MyMoneyFile::onlineJobsModel() const
 {
   return &d->onlineJobsModel;
+}
+
+ReportsModel* MyMoneyFile::reportsModel() const
+{
+  return &d->reportsModel;
 }
 
 /// @todo add new models here
@@ -3268,6 +3280,7 @@ MyMoneyPrice MyMoneyFile::price(const QString& fromId) const
   return price(fromId, QString(), QDate::currentDate(), false);
 }
 
+
 MyMoneyPriceList MyMoneyFile::priceList() const
 {
   /// @todo port to new model code
@@ -3286,54 +3299,42 @@ bool MyMoneyFile::hasAccount(const QString& id, const QString& name) const
   return false;
 }
 
-QList<MyMoneyReport> MyMoneyFile::reportList() const
-{
-  /// @todo port to new model code
-  d->checkStorage();
-
-  return d->m_storage->reportList();
-}
-
 void MyMoneyFile::addReport(MyMoneyReport& report)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  /// @todo port to new model code
-  d->m_storage->addReport(report);
+  d->reportsModel.addItem(report);
 }
 
 void MyMoneyFile::modifyReport(const MyMoneyReport& report)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  /// @todo port to new model code
-  d->m_storage->modifyReport(report);
-}
-
-unsigned MyMoneyFile::countReports() const
-{
-  d->checkStorage();
-
-  /// @todo port to new model code
-  return d->m_storage->countReports();
-}
-
-MyMoneyReport MyMoneyFile::report(const QString& id) const
-{
-  d->checkStorage();
-
-  /// @todo port to new model code
-  return d->m_storage->report(id);
+  d->reportsModel.modifyItem(report);
 }
 
 void MyMoneyFile::removeReport(const MyMoneyReport& report)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  /// @todo port to new model code
-  d->m_storage->removeReport(report);
+  d->reportsModel.removeItem(report);
 }
 
+MyMoneyReport MyMoneyFile::report(const QString& id) const
+{
+  return d->reportsModel.itemById(id);
+}
+
+QList<MyMoneyReport> MyMoneyFile::reportList() const
+{
+  return d->reportsModel.itemList();
+}
+
+
+unsigned MyMoneyFile::countReports() const
+{
+  return d->reportsModel.rowCount();
+}
 
 QList<MyMoneyBudget> MyMoneyFile::budgetList() const
 {
@@ -3349,7 +3350,11 @@ void MyMoneyFile::addBudget(MyMoneyBudget &budget)
 
 MyMoneyBudget MyMoneyFile::budgetByName(const QString& name) const
 {
-  return d->budgetsModel.itemByName(name);
+  MyMoneyBudget budget = d->budgetsModel.itemByName(name);
+  if (budget.id().isEmpty()) {
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Unknown budget '%1'").arg(name));
+  }
+  return budget;
 }
 
 void MyMoneyFile::modifyBudget(const MyMoneyBudget& budget)

@@ -44,6 +44,7 @@
 #include "pricemodel.h"
 #include "parametersmodel.h"
 #include "onlinejobsmodel.h"
+#include "reportsmodel.h"
 
 #include "mymoneyfile.h"
 
@@ -240,6 +241,16 @@ OnlineJobsModel* Models::onlineJobsModel() const
   return MyMoneyFile::instance()->onlineJobsModel();
 }
 
+/**
+ * This is the function to get a reference to the core @ref ReportsModel.
+ * The returned object is owned by this object so don't delete it. It creates the
+ * model on the first access to it.
+ */
+ReportsModel* Models::reportsModel() const
+{
+  return MyMoneyFile::instance()->reportsModel();
+}
+
 
 
 
@@ -313,6 +324,7 @@ void Models::fileSaved()
   priceModel()->setDirty(false);
   parametersModel()->setDirty(false);
   onlineJobsModel()->setDirty(false);
+  reportsModel()->setDirty(false);
 }
 
 void Models::fileOpened()
