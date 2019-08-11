@@ -219,10 +219,12 @@ void ColumnSelector::slotColumnsMenu(const QPoint)
       for (int col = 0; col < maxColumn; ++col) {
         if (d->alwaysHiddenColumns.contains(col))
           continue;
-        if (d->alwaysVisibleColumns.contains(col))
-          continue;
-        if (!d->selectableColumns.isEmpty() && !d->selectableColumns.contains(col))
-          continue;
+        // in case a column is always visible, we
+        // add it to the list for backward compatibility
+        if (!d->alwaysVisibleColumns.contains(col)) {
+          if (!d->selectableColumns.isEmpty() && !d->selectableColumns.contains(col))
+            continue;
+        }
         if (!d->isColumnHidden(col)) {
           visibleColumns.append(col);
         }
