@@ -18,6 +18,7 @@
  */
 
 #include "accountsproxymodel.h"
+#include "accountsproxymodel_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -69,7 +70,6 @@ public:
 
 
 
->>>>>>> Started implementation of new model code
 AccountsProxyModel::AccountsProxyModel(QObject *parent) :
   QSortFilterProxyModel(parent),
   d_ptr(new AccountsProxyModelPrivate)

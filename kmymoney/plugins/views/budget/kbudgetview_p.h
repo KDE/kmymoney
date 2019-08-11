@@ -6,6 +6,7 @@
     email                : darren_gould@gmx.de
                            Alvaro Soliverez <asoliverez@gmail.com>
                            (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2019 Thomas Baumgart <tbaumgart@kde.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -50,14 +51,17 @@
 #include "kbudgetvalues.h"
 #include "kmymoneyutils.h"
 
+#include "budgetsmodel.h"
 #include "budgetviewproxymodel.h"
 #include "kmymoneysettings.h"
 #include "icons.h"
 #include "menuenums.h"
 #include "mymoneyenums.h"
+#include "columnselector.h"
 
 using namespace Icons;
 
+#if 0
 /**
   * @author Darren Gould
   * @author Thomas Baumgart
@@ -95,18 +99,20 @@ public:
 private:
   MyMoneyBudget  m_budget;
 };
+#endif
 
 class KBudgetViewPrivate : public KMyMoneyViewBasePrivate
 {
   Q_DECLARE_PUBLIC(KBudgetView)
 
 public:
-  explicit KBudgetViewPrivate(KBudgetView *qq) :
-    KMyMoneyViewBasePrivate(),
-    q_ptr(qq),
-    ui(new Ui::KBudgetView),
-    m_inSelection(false),
-    m_budgetInEditing(false)
+  explicit KBudgetViewPrivate(KBudgetView *qq)
+    : KMyMoneyViewBasePrivate()
+    , q_ptr(qq)
+    , ui(new Ui::KBudgetView)
+    , m_budgetProxyModel(nullptr)
+    , m_inSelection(false)
+    , m_budgetInEditing(false)
   {
   }
 
@@ -133,19 +139,31 @@ public:
     ui->m_collapseButton->setIcon(Icons::get(Icon::ListCollapse));
     ui->m_expandButton->setIcon(Icons::get(Icon::ListExpand));
 
+    ui->m_budgetList->setModel(MyMoneyFile::instance()->budgetsModel());
+
 /// @todo port to new model code
-#if 0
-    m_accountTree = &ui->m_accountTree;
-    m_budgetProxyModel = qobject_cast<BudgetViewProxyModel *>(ui->m_accountTree->init(View::Budget));
-    m_proxyModel = m_budgetProxyModel;
+    // replace the standard proxy model
+    m_budgetProxyModel = new BudgetViewProxyModel(q);
+    ui->m_accountTree->setProxyModel(m_budgetProxyModel);
+
+    auto columnSelector = new ColumnSelector(ui->m_accountTree, q->metaObject()->className());
+    columnSelector->setAlwaysVisible(QVector<int>({ AccountsModel::Column::AccountName }));
+    columnSelector->setAlwaysHidden(QVector<int>({ AccountsModel::Column::Balance, AccountsModel::Column::PostedValue }));
+
+    ui->m_accountTree->setModel(MyMoneyFile::instance()->accountsModel());
+    // m_proxyModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquity());
+
+    columnSelector->setModel(m_budgetProxyModel);
 
     q->connect(m_budgetProxyModel, &BudgetViewProxyModel::balanceChanged, q, &KBudgetView::slotBudgetBalanceChanged);
 
     q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KBudgetView::slotSelectAccount);
 
-    q->connect(ui->m_budgetList, &QTreeWidget::customContextMenuRequested, q, &KBudgetView::slotOpenContextMenu);
+    q->connect(ui->m_budgetList, &QTableView::customContextMenuRequested, q, &KBudgetView::slotOpenContextMenu);
     q->connect(ui->m_budgetList->selectionModel(), &QItemSelectionModel::selectionChanged, q, &KBudgetView::slotSelectBudget);
-    q->connect(ui->m_budgetList, &QTreeWidget::itemChanged, q, &KBudgetView::slotItemChanged);
+
+    /// @todo port to new model code
+    // q->connect(ui->m_budgetList, &QTreeWidget::itemChanged, q, &KBudgetView::slotItemChanged);
 
     q->connect(ui->m_cbBudgetSubaccounts, &QAbstractButton::clicked, q, &KBudgetView::cb_includesSubaccounts_clicked);
 
@@ -167,6 +185,12 @@ public:
     q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KBudgetView::selectByVariant);
 
     q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KBudgetView::refresh);
+
+    /// @todo cleanup
+    #if 0
+    m_budgetProxyModel = qobject_cast<BudgetViewProxyModel *>(ui->m_accountTree->init(View::Budget));
+    m_proxyModel = m_budgetProxyModel;
+
     #endif
 
     // setup initial state
@@ -222,8 +246,6 @@ public:
 
   void loadAccounts()
   {
-  /// @todo port to new model code
-  #if 0
     // if no budgets are selected, don't load the accounts
     // and clear out the previously shown list
     if (m_budget.id().isEmpty()) {
@@ -236,18 +258,19 @@ public:
     ui->m_resetButton->setEnabled(!(selectedBudget() == m_budget));
 
     m_budgetProxyModel->setBudget(m_budget);
-  #endif
   }
 
   const MyMoneyBudget& selectedBudget() const
   {
     static MyMoneyBudget nullBudget;
-
+    /// @todo port to new model code
+#if 0
     QTreeWidgetItemIterator it_l(ui->m_budgetList, QTreeWidgetItemIterator::Selected);
     KBudgetListItem* item = dynamic_cast<KBudgetListItem*>(*it_l);
     if (item) {
       return item->budget();
     }
+#endif
     return nullBudget;
   }
 
@@ -353,6 +376,8 @@ public:
 
   void ensureBudgetVisible(const QString& id)
   {
+    /// @todo port to new model code
+#if 0
     const auto widgetIt = QTreeWidgetItemIterator(ui->m_budgetList);
     while (*widgetIt) {
       const auto p = dynamic_cast<KBudgetListItem*>(*widgetIt);
@@ -361,30 +386,32 @@ public:
         ui->m_budgetList->setCurrentItem(p, 0, QItemSelectionModel::ClearAndSelect);      // active item and deselect all others
       }
     }
+#endif
   }
 
-  KBudgetView          *q_ptr;
-  Ui::KBudgetView      *ui;
+  KBudgetView*          q_ptr;
+  Ui::KBudgetView*      ui;
+  BudgetViewProxyModel* m_budgetProxyModel;
 
-  MyMoneyBudget        m_budget;
-  QMap<QString, ulong> m_transactionCountMap;
-  QStringList          m_yearList;
-  QList<MyMoneyBudget> m_budgetList;
+  MyMoneyBudget         m_budget;
+  QMap<QString, ulong>  m_transactionCountMap;
+  QStringList           m_yearList;
+  QList<MyMoneyBudget>  m_budgetList;
 
   /**
     * Set if we are in the selection of a different budget
     **/
-  bool                 m_inSelection;
+  bool                  m_inSelection;
 
   void adaptHideUnusedButton();
 
-  static const int m_iBudgetYearsAhead = 5;
-  static const int m_iBudgetYearsBack = 3;
+  static const int      m_iBudgetYearsAhead = 5;
+  static const int      m_iBudgetYearsBack = 3;
 
   /**
     * This signals whether a budget is being edited
     **/
-  bool m_budgetInEditing;
+  bool                  m_budgetInEditing;
 };
 
 #endif

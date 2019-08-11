@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>840</width>
+    <width>862</width>
     <height>302</height>
    </rect>
   </property>
@@ -86,26 +86,22 @@
         </layout>
        </item>
        <item>
-        <widget class="QTreeWidget" name="m_budgetList">
+        <widget class="QTableView" name="m_budgetList">
          <property name="alternatingRowColors">
           <bool>true</bool>
          </property>
-         <property name="rootIsDecorated">
-          <bool>false</bool>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::SingleSelection</enum>
          </property>
-         <property name="allColumnsShowFocus">
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <property name="sortingEnabled">
           <bool>true</bool>
          </property>
-         <column>
-          <property name="text">
-           <string comment="@title header of the budget name column">Name</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Year</string>
-          </property>
-         </column>
+         <attribute name="verticalHeaderVisible">
+          <bool>false</bool>
+         </attribute>
         </widget>
        </item>
       </layout>
@@ -242,14 +238,14 @@
               <property name="focusPolicy">
                <enum>Qt::NoFocus</enum>
               </property>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
               <property name="calculatorButtonVisibility" stdset="0">
                <bool>false</bool>
               </property>
               <property name="resetButtonVisibility" stdset="0">
                <bool>false</bool>
-              </property>
-              <property name="readOnly" stdset="0">
-               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -306,9 +302,9 @@
    <extends>QTreeView</extends>
    <header>kmymoneyaccounttreeview.h</header>
   </customwidget>
-  <customwidget>                                   
+  <customwidget>
    <class>AmountEdit</class>
-   <extends>QLineEdit</extends>                   
+   <extends>QLineEdit</extends>
    <header location="global">amountedit.h</header>
   </customwidget>
   <customwidget>

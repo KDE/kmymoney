@@ -191,6 +191,59 @@ struct AccountsModel::Private
          + q->expenseIndex().data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>();
   }
 
+  QPair<MyMoneyMoney, bool> balanceToValue(const MyMoneyAccount& account, const MyMoneyMoney bal)
+  {
+    // now calculate the value, but only for balances differing from null
+    const auto file = MyMoneyFile::instance();
+    bool needConvert = false;
+    MyMoneyMoney accountValue(bal);
+    QList<MyMoneyPrice> prices;
+    bool approximate = false;
+    if (!bal.isZero()) {
+      const auto baseCurrency = file->baseCurrency();
+      MyMoneySecurity security(baseCurrency);
+      if (account.isInvest()) {
+        security = file->currency(account.currencyId());
+        if (!security.id().isEmpty()) {
+          prices += file->price(account.currencyId(), security.tradingCurrency());
+          if (security.tradingCurrency() != baseCurrency.id()) {
+            MyMoneySecurity sec = file->currency(security.tradingCurrency());
+            if (!sec.id().isEmpty()) {
+              prices += file->price(sec.id(), baseCurrency.id());
+            } else {
+              qDebug() << security.tradingCurrency() << "not found";
+              approximate = true;
+            }
+          }
+        }
+        needConvert = true;
+      } else if (account.currencyId() != baseCurrency.id()) {
+        security = file->currency(account.currencyId());
+        if (!security.id().isEmpty()) {
+          prices += file->price(account.currencyId(), baseCurrency.id());
+        } else {
+          qDebug() << security.id() << "not found";
+          approximate = true;
+        }
+        needConvert = true;
+      }
+    }
+
+    if (needConvert) {
+      QList<MyMoneyPrice>::const_iterator it_p;
+      QString securityID = account.currencyId();
+      for (it_p = prices.constBegin(); it_p != prices.constEnd(); ++it_p) {
+        accountValue = (accountValue * (MyMoneyMoney::ONE / (*it_p).rate(securityID))).convertPrecision(file->security(securityID).pricePrecision());
+        if ((*it_p).from() == securityID)
+          securityID = (*it_p).to();
+        else
+          securityID = (*it_p).from();
+      }
+      accountValue = accountValue.convert(file->baseCurrency().smallestAccountFraction());
+    }
+    return qMakePair(accountValue, approximate);
+  }
+
   struct DefaultAccounts {
     eMyMoney::Account::Standard groupType;
     eMyMoney::Account::Type     accountType;
@@ -737,6 +790,17 @@ void AccountsModel::setupAccountFractions()
   }
 }
 
+QPair<MyMoneyMoney, bool> AccountsModel::balanceToValue(const QString& accountId, MyMoneyMoney balance) const
+{
+  const auto accountIdx = indexById(accountId);
+  auto result = qMakePair(MyMoneyMoney(), true);
+
+  if (accountIdx.isValid()) {
+    MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(accountIdx.internalPointer())->dataRef();
+    result = d->balanceToValue(account, balance);
+  }
+  return result;
+}
 
 void AccountsModel::updateAccountBalances(const QHash<QString, MyMoneyMoney>& balances)
 {
@@ -750,56 +814,13 @@ void AccountsModel::updateAccountBalances(const QHash<QString, MyMoneyMoney>& ba
   qDebug() << "Start updating balances in accounts";
   bool approximate = false;
   for(auto it = balances.constBegin(); it != balances.constEnd(); ++it) {
-    auto accountIdx = indexById(it.key());
-    MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(accountIdx.internalPointer())->dataRef();
+    MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(indexById(it.key()).internalPointer())->dataRef();
     account.setBalance(it.value());
 
-    // now calculate the value, but only for balances differing from null
-    bool needConvert = false;
-    MyMoneyMoney accountValue(it.value());
-    QList<MyMoneyPrice> prices;
-    if (!it.value().isZero()) {
-      MyMoneySecurity security(baseCurrency);
-      if (account.isInvest()) {
-        security = file->currency(account.currencyId());
-        if (!security.id().isEmpty()) {
-          prices += file->price(account.currencyId(), security.tradingCurrency());
-          if (security.tradingCurrency() != baseCurrency.id()) {
-            MyMoneySecurity sec = file->currency(security.tradingCurrency());
-            if (!sec.id().isEmpty()) {
-              prices += file->price(sec.id(), baseCurrency.id());
-            } else {
-              qDebug() << security.tradingCurrency() << "not found";
-              approximate = true;
-            }
-          }
-        }
-        needConvert = true;
-      } else if (account.currencyId() != baseCurrency.id()) {
-        security = file->currency(account.currencyId());
-        if (!security.id().isEmpty()) {
-          prices += file->price(account.currencyId(), baseCurrency.id());
-        } else {
-          qDebug() << security.id() << "not found";
-          approximate = true;
-        }
-        needConvert = true;
-      }
-    }
+    const auto result = d->balanceToValue(account, it.value());
 
-    if (needConvert) {
-      QList<MyMoneyPrice>::const_iterator it_p;
-      QString securityID = account.currencyId();
-      for (it_p = prices.constBegin(); it_p != prices.constEnd(); ++it_p) {
-        accountValue = (accountValue * (MyMoneyMoney::ONE / (*it_p).rate(securityID))).convertPrecision(m_file->security(securityID).pricePrecision());
-        if ((*it_p).from() == securityID)
-          securityID = (*it_p).to();
-        else
-          securityID = (*it_p).from();
-      }
-      accountValue = accountValue.convert(m_file->baseCurrency().smallestAccountFraction());
-    }
-    account.setPostedValue(accountValue);
+    account.setPostedValue(result.first);
+    approximate |= result.second;
   }
 
   // now that we have all values, we can calculate the total values in the parent accounts

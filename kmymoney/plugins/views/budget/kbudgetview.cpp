@@ -6,6 +6,7 @@
     email                : darren_gould@gmx.de
                            Alvaro Soliverez <asoliverez@gmail.com>
                            (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2019 Thomas Baumgart <tbaumgart@kde.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -19,12 +20,8 @@
 
 #include "kbudgetview_p.h"
 
-#include <typeinfo>
-
 // ----------------------------------------------------------------------------
 // QT Includes
-
-#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -55,11 +52,8 @@ KBudgetView::~KBudgetView()
 void KBudgetView::showEvent(QShowEvent * event)
 {
   Q_D(KBudgetView);
-  /// @todo port to new model code
-#if 0
-  if (!d->m_proxyModel)
+  if (!d->m_budgetProxyModel)
     d->init();
-#endif
   emit customActionRequested(View::Budget, eView::Action::AboutToShow);
 
   if (d->m_needsRefresh)
@@ -79,7 +73,7 @@ void KBudgetView::executeCustomAction(eView::Action action)
     case eView::Action::SetDefaultFocus:
       {
         Q_D(KBudgetView);
-        QTimer::singleShot(0, d->ui->m_budgetList, SLOT(setFocus()));
+        QMetaObject::invokeMethod(d->ui->m_budgetList, "setFocus");
       }
       break;
 
@@ -93,7 +87,7 @@ void KBudgetView::refresh()
   Q_D(KBudgetView);
   if (isVisible()) {
     if (d->m_inSelection)
-      QTimer::singleShot(0, this, SLOT(refresh()));
+      QMetaObject::invokeMethod(this, "refresh");
     else {
       d->loadBudgets();
       d->m_needsRefresh = false;
@@ -118,8 +112,9 @@ void KBudgetView::slotNewBudget()
     int i = 1;
     // Exception thrown when the name is not found
     while (1) {
-      MyMoneyFile::instance()->budgetByName(newname);
-      newname = i18n("Budget %1 %2", date.year(), i++);
+      if (!MyMoneyFile::instance()->budgetByName(newname).id().isEmpty())
+        newname = i18n("Budget %1 %2", date.year(), i++);
+      break;
     }
   } catch (const MyMoneyException &) {
     // all ok, the name is unique
@@ -297,11 +292,14 @@ void KBudgetView::slotUpdateBudget()
 void KBudgetView::slotStartRename()
 {
   Q_D(KBudgetView);
+  /// @todo port to new model code
+#if 0
   QTreeWidgetItemIterator it_l(d->ui->m_budgetList, QTreeWidgetItemIterator::Selected);
   QTreeWidgetItem* it_v;
   if ((it_v = *it_l) != 0) {
     d->ui->m_budgetList->editItem(it_v, 0);
   }
+#endif
 }
 
 void KBudgetView::slotOpenContextMenu(const QPoint&)
@@ -335,6 +333,8 @@ void KBudgetView::slotOpenContextMenu(const QPoint&)
 
 void KBudgetView::slotItemChanged(QTreeWidgetItem* p, int col)
 {
+  /// @todo port to new model code
+#if 0
   // if we don't have an item we actually don't care about it
   if (!p)
     return;
@@ -388,6 +388,7 @@ void KBudgetView::slotItemChanged(QTreeWidgetItem* p, int col)
   } else {
     pBudget->setText(0, new_name);
   }
+#endif
 }
 
 void KBudgetView::slotSelectAccount(const MyMoneyObject &obj, eView::Intent intent)
@@ -499,6 +500,8 @@ void KBudgetView::slotBudgetBalanceChanged(const MyMoneyMoney &balance)
 void KBudgetView::slotSelectBudget()
 {
   Q_D(KBudgetView);
+  /// @todo port to new model code
+#if 0
   d->askSave();
   KBudgetListItem* item;
 
@@ -539,6 +542,7 @@ void KBudgetView::slotSelectBudget()
   d->m_budgetList.clear();
   if (!d->m_budget.id().isEmpty())
     d->m_budgetList << d->m_budget;
+#endif
   d->actionStates();
   d->updateButtonStates();
 }

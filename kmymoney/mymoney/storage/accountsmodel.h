@@ -118,6 +118,16 @@ public:
 
   QModelIndexList accountsWithoutInstitutions() const;
 
+  /**
+   * Calculate the value in base currency for a given @a balance in
+   * the currency of the account defined by @a accountId. The return
+   * value returns a QPair where the first item is the value and
+   * the second an indication if the value is exact (@c false) or
+   * an approximation (@c true) in case not all price information
+   * is available.
+   */
+  QPair<MyMoneyMoney, bool>  balanceToValue(const QString& accountId, MyMoneyMoney balance) const;
+
 protected:
   void clearModelItems() override;
   void addFavorite(const QString& id);

@@ -22,6 +22,7 @@
 
 #include <QDebug>
 #include <QString>
+#include <QDate>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 
@@ -54,7 +55,7 @@ BudgetsModel::~BudgetsModel()
 int BudgetsModel::columnCount(const QModelIndex& parent) const
 {
   Q_UNUSED(parent);
-  return 1;
+  return 2;
 }
 
 QVariant BudgetsModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -84,26 +85,26 @@ QVariant BudgetsModel::data(const QModelIndex& index, int role) const
     case eMyMoney::Model::Roles::BudgetNameRole:
     case Qt::DisplayRole:
     case Qt::EditRole:
-      // make sure to never return any displayable text for the dummy entry
-      if (!budget.id().isEmpty()) {
-        rc = budget.name();
-      } else {
-        rc = QString();
+      switch(index.column()) {
+        case Columns::Name:
+          return budget.name();
+
+        case Columns::Year:
+          return budget.budgetStart().year();
+
       }
-      break;
+      return QVariant();
 
     case Qt::TextAlignmentRole:
-      rc = QVariant(Qt::AlignLeft | Qt::AlignVCenter);
-      break;
+      return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
 
     case eMyMoney::Model::Roles::IdRole:
-      rc = budget.id();
-      break;
+      return budget.id();
 
     default:
       break;
   }
-  return rc;
+  return QVariant();
 }
 
 bool BudgetsModel::setData(const QModelIndex& index, const QVariant& value, int role)

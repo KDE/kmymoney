@@ -6,6 +6,7 @@
     email                : darren_gould@gmx.de
                            Alvaro Soliverez <asoliverez@gmail.com>
                            (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2019 Thomas Baumgart <tbaumgart@kde.org>
 ***************************************************************************/
 
 /***************************************************************************

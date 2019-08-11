@@ -40,10 +40,9 @@ class KMM_MYMONEY_EXPORT BudgetsModel : public MyMoneyModel<MyMoneyBudget>
   Q_OBJECT
 
 public:
-  class Column {
-    enum {
-      Name
-    } Columns;
+  enum Columns {
+      Name,
+      Year
   };
 
   explicit BudgetsModel(QObject* parent = 0);
