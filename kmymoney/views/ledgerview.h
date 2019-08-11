@@ -77,6 +77,8 @@ protected:
   void resizeEvent(QResizeEvent* event) final override;
   void paintEvent(QPaintEvent* event) final override;
   int sizeHintForRow(int row) const final override;
+  void showEvent(QShowEvent* event) override;
+  void setAccount_bh(const MyMoneyAccount& acc);
 
 protected Q_SLOTS:
   void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) final override;

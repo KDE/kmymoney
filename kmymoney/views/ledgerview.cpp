@@ -159,6 +159,14 @@ LedgerView::~LedgerView()
   delete d;
 }
 
+void LedgerView::showEvent(QShowEvent* event)
+{
+  if (model() == nullptr) {
+    setAccount_bh(d->account);
+  }
+  QTableView::showEvent(event);
+}
+
 bool LedgerView::showValuesInverted() const
 {
   return d->showValuesInverted;
@@ -167,6 +175,10 @@ bool LedgerView::showValuesInverted() const
 void LedgerView::setAccount(const MyMoneyAccount& acc)
 {
   d->account = acc;
+}
+
+void LedgerView::setAccount_bh(const MyMoneyAccount& acc)
+{
   QVector<int> columns;
   switch(acc.accountType()) {
     case eMyMoney::Account::Type::Investment:
