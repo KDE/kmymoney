@@ -16,6 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef KMYMONEYVIEWBASEPRIVATE_H
+#define KMYMONEYVIEWBASEPRIVATE_H
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -34,9 +37,6 @@
 #include <kmymoneysettings.h>
 #include <mymoneysecurity.h>
 #include <mymoneyutils.h>
-
-#ifndef KMYMONEYVIEWBASEPRIVATE_H
-#define KMYMONEYVIEWBASEPRIVATE_H
 
 class KMyMoneyViewBasePrivate
 {

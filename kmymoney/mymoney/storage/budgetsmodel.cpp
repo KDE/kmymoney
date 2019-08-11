@@ -58,6 +58,16 @@ int BudgetsModel::columnCount(const QModelIndex& parent) const
   return 2;
 }
 
+Qt::ItemFlags BudgetsModel::flags(const QModelIndex &index) const
+{
+  if (!index.isValid())
+    return Qt::ItemFlags();
+  if (index.row() < 0 || index.row() >= rowCount(index.parent()))
+    return Qt::ItemFlags();
+
+  return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
+}
+
 QVariant BudgetsModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
   if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
@@ -82,7 +92,6 @@ QVariant BudgetsModel::data(const QModelIndex& index, int role) const
   QVariant rc;
   const MyMoneyBudget& budget = static_cast<TreeItem<MyMoneyBudget>*>(index.internalPointer())->constDataRef();
   switch (role) {
-    case eMyMoney::Model::Roles::BudgetNameRole:
     case Qt::DisplayRole:
     case Qt::EditRole:
       switch(index.column()) {
@@ -100,6 +109,9 @@ QVariant BudgetsModel::data(const QModelIndex& index, int role) const
 
     case eMyMoney::Model::Roles::IdRole:
       return budget.id();
+
+    case eMyMoney::Model::Roles::BudgetNameRole:
+      return budget.name();
 
     default:
       break;
@@ -120,36 +132,44 @@ bool BudgetsModel::setData(const QModelIndex& index, const QVariant& value, int 
 
   MyMoneyBudget& budget = static_cast<TreeItem<MyMoneyBudget>*>(index.internalPointer())->dataRef();
 
-  bool rc = true;
   switch(role) {
-    case eMyMoney::Model::Roles::BudgetNameRole:
     case Qt::DisplayRole:
     case Qt::EditRole:
-      // make sure to never return any displayable text for the dummy entry
-      if (!budget.id().isEmpty()) {
-        budget.setName(value.toString());
-      } else {
-        rc = false;
+      switch(index.column()) {
+        case Columns::Name:
+          budget.setName(value.toString());
+          break;;
+
+        case Columns::Year:
+          {
+            /// @todo fix when supporting budget for any fiscal year boundary
+            QDate date(value.toInt(), 1, 1);
+            if (date.isValid()) {
+              budget.setBudgetStart(QDate(value.toInt(), 1, 1));
+            } else {
+              return false;
+            }
+          }
+          break;
+
+        default:
+          return false;
       }
       break;
 
-    case Qt::TextAlignmentRole:
+    case eMyMoney::Model::Roles::BudgetNameRole:
+      budget.setName(value.toString());
       break;
 
-    case eMyMoney::Model::Roles::IdRole:
-      rc = false;
-      break;
     default:
-      rc = false;
-      break;
+      return false;
   }
 
-  if (rc) {
-    setDirty();
-    const auto topLeft = BudgetsModel::index(index.row(), 0);
-    const auto bottomRight = BudgetsModel::index(index.row(), columnCount()-1);
-    emit dataChanged(topLeft, bottomRight);
-  }
-  return rc;
+  setDirty();
+  const auto topLeft = BudgetsModel::index(index.row(), 0);
+  const auto bottomRight = BudgetsModel::index(index.row(), columnCount()-1);
+  emit dataChanged(topLeft, bottomRight);
+
+  return true;
 }
 

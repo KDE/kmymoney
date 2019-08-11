@@ -33,6 +33,7 @@
 // Project Includes
 
 #include "accountsproxymodel.h"
+#include "accountsmodel.h"
 
 class MyMoneyAccount;
 class MyMoneyBudget;
@@ -55,10 +56,11 @@ public:
   explicit BudgetViewProxyModel(QObject *parent = nullptr);
   ~BudgetViewProxyModel() override;
 
-  virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
-  Qt::ItemFlags flags(const QModelIndex &index) const override;
+  virtual QVariant data(const QModelIndex &idx, int role = Qt::DisplayRole) const override;
+  Qt::ItemFlags flags(const QModelIndex &idx) const override;
 
   void setBudget(const MyMoneyBudget& budget);
+  void setColorScheme(AccountsModel::ColorScheme scheme, const QColor& color);
 
 Q_SIGNALS:
   /**

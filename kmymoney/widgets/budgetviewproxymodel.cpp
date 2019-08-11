@@ -24,6 +24,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QColor>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -37,7 +39,6 @@
 #include "mymoneymoney.h"
 #include "mymoneybudget.h"
 #include "models.h"
-#include "accountsmodel.h"
 #include "accountsproxymodel.h"
 #include "accountsproxymodel_p.h"
 #include "budgetviewproxymodel.h"
@@ -59,8 +60,10 @@ public:
   {
   }
 
-  MyMoneyBudget m_budget;
-  MyMoneyMoney m_lastBalance;
+  MyMoneyBudget   m_budget;
+  MyMoneyMoney    m_lastBalance;
+  QColor          positiveScheme;
+  QColor          negativeScheme;
 };
 
 BudgetViewProxyModel::BudgetViewProxyModel(QObject *parent) :
@@ -73,11 +76,25 @@ BudgetViewProxyModel::~BudgetViewProxyModel()
 {
 }
 
+void BudgetViewProxyModel::setColorScheme(AccountsModel::ColorScheme scheme, const QColor& color)
+{
+  Q_D(BudgetViewProxyModel);
+  switch(scheme) {
+    case AccountsModel::Positive:
+      d->positiveScheme = color;
+      break;
+    case AccountsModel::Negative:
+      d->negativeScheme = color;
+      break;
+  }
+}
+
+
 /**
   * This function was reimplemented to add the data needed by the other columns that this model
   * is adding besides the columns of the @ref AccountsModel.
   */
-QVariant BudgetViewProxyModel::data(const QModelIndex &index, int role) const
+QVariant BudgetViewProxyModel::data(const QModelIndex & idx, int role) const
 {
   Q_D(const BudgetViewProxyModel);
 
@@ -87,7 +104,7 @@ QVariant BudgetViewProxyModel::data(const QModelIndex &index, int role) const
 #endif
 
   // get index in base model
-  const auto accountIdx = AccountsModel::mapToBaseSource(index);
+  const auto accountIdx = AccountsModel::mapToBaseSource(idx);
 
   switch (role) {
     case Qt::DisplayRole:
@@ -97,7 +114,7 @@ QVariant BudgetViewProxyModel::data(const QModelIndex &index, int role) const
         const auto currencyId = accountIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString();
         const auto baseCurrency = file->baseCurrency();
 
-        switch (index.column()) {
+        switch (idx.column()) {
           case AccountsModel::Column::TotalBalance:
             if (currencyId != baseCurrency.id())
               return MyMoneyUtils::formatMoney(accountBalance(accountId), file->security(currencyId));
@@ -117,6 +134,19 @@ QVariant BudgetViewProxyModel::data(const QModelIndex &index, int role) const
     case eMyMoney::Model::AccountTotalValueRole:
       return QVariant::fromValue(computeTotalValue(accountIdx));
 
+    case Qt::ForegroundRole:
+      // show all numbers in positive scheme
+      switch(idx.column()) {
+        case AccountsModel::Column::Balance:
+        case AccountsModel::Column::PostedValue:
+        case AccountsModel::Column::TotalPostedValue:
+          return d->positiveScheme;
+
+        default:
+          break;
+      }
+      break;
+
 #if 0
     case (int)Role::Balance:
       if (account.currencyId() != file->baseCurrency().id())
@@ -129,7 +159,7 @@ QVariant BudgetViewProxyModel::data(const QModelIndex &index, int role) const
     default:
       break;
   }
-  return AccountsProxyModel::data(index, role);
+  return AccountsProxyModel::data(idx, role);
 }
 
 Qt::ItemFlags BudgetViewProxyModel::flags(const QModelIndex &index) const
@@ -244,7 +274,7 @@ void BudgetViewProxyModel::checkBalance()
   const auto expenseIdx = AccountsModel::mapFromBaseSource(this, file->accountsModel()->expenseIndex());
 
   balance = incomeIdx.data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>()
-  + expenseIdx.data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>();
+  - expenseIdx.data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>();
 
   if (d->m_lastBalance != balance) {
     d->m_lastBalance = balance;

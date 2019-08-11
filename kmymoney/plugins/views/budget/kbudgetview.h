@@ -52,7 +52,9 @@ public:
   ~KBudgetView() override;
 
   void executeCustomAction(eView::Action action) override;
-  void refresh();
+
+public Q_SLOTS:
+  void slotSettingsChanged();
 
 protected:
   KBudgetView(KBudgetViewPrivate &dd, QWidget *parent);
@@ -65,11 +67,10 @@ private Q_SLOTS:
   void slotNewBudget();
   void slotDeleteBudget();
   void slotCopyBudget();
-  void slotChangeBudgetYear();
+  void slotStartRename();
   void slotBudgetForecast();
   void slotResetBudget();
   void slotUpdateBudget();
-  void slotStartRename();
 
   /**
     * This slot receives the signal from the listview control that an
@@ -79,7 +80,6 @@ private Q_SLOTS:
     * @param p position of the pointing device
     */
   void slotOpenContextMenu(const QPoint&);
-  void slotItemChanged(QTreeWidgetItem* p, int col);
   void slotSelectAccount(const MyMoneyObject &obj, eView::Intent intent);
   void slotBudgetedAmountChanged();
   /**

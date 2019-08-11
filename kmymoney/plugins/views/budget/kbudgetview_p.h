@@ -61,45 +61,6 @@
 
 using namespace Icons;
 
-#if 0
-/**
-  * @author Darren Gould
-  * @author Thomas Baumgart
-  *
-  * This class represents an item in the budgets list view.
-  */
-class KBudgetListItem : public QTreeWidgetItem
-{
-public:
-  /**
-    * Constructor to be used to construct a budget entry object.
-    *
-    * @param parent pointer to the QTreeWidget object this entry should be
-    *               added to.
-    * @param budget const reference to MyMoneyBudget for which
-    *               the QTreeWidget entry is constructed
-    */
-  explicit KBudgetListItem(QTreeWidget *parent, const MyMoneyBudget& budget):
-    QTreeWidgetItem(parent),
-    m_budget(budget)
-  {
-    setText(0, budget.name());
-    setText(1, QString::fromLatin1("%1").arg(budget.budgetStart().year()));
-    setFlags(flags() | Qt::ItemIsEditable);
-  }
-  ~KBudgetListItem() {}
-
-  const MyMoneyBudget& budget() {
-    return m_budget;
-  }
-  void setBudget(const MyMoneyBudget& budget) {
-    m_budget = budget;
-  }
-
-private:
-  MyMoneyBudget  m_budget;
-};
-#endif
 
 class KBudgetViewPrivate : public KMyMoneyViewBasePrivate
 {
@@ -111,8 +72,6 @@ public:
     , q_ptr(qq)
     , ui(new Ui::KBudgetView)
     , m_budgetProxyModel(nullptr)
-    , m_inSelection(false)
-    , m_budgetInEditing(false)
   {
   }
 
@@ -141,9 +100,9 @@ public:
 
     ui->m_budgetList->setModel(MyMoneyFile::instance()->budgetsModel());
 
-/// @todo port to new model code
     // replace the standard proxy model
     m_budgetProxyModel = new BudgetViewProxyModel(q);
+    m_budgetProxyModel->addAccountGroup(AccountsProxyModel::incomeExpense());
     ui->m_accountTree->setProxyModel(m_budgetProxyModel);
 
     auto columnSelector = new ColumnSelector(ui->m_accountTree, q->metaObject()->className());
@@ -151,7 +110,6 @@ public:
     columnSelector->setAlwaysHidden(QVector<int>({ AccountsModel::Column::Balance, AccountsModel::Column::PostedValue }));
 
     ui->m_accountTree->setModel(MyMoneyFile::instance()->accountsModel());
-    // m_proxyModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquity());
 
     columnSelector->setModel(m_budgetProxyModel);
 
@@ -161,9 +119,6 @@ public:
 
     q->connect(ui->m_budgetList, &QTableView::customContextMenuRequested, q, &KBudgetView::slotOpenContextMenu);
     q->connect(ui->m_budgetList->selectionModel(), &QItemSelectionModel::selectionChanged, q, &KBudgetView::slotSelectBudget);
-
-    /// @todo port to new model code
-    // q->connect(ui->m_budgetList, &QTreeWidget::itemChanged, q, &KBudgetView::slotItemChanged);
 
     q->connect(ui->m_cbBudgetSubaccounts, &QAbstractButton::clicked, q, &KBudgetView::cb_includesSubaccounts_clicked);
 
@@ -184,14 +139,7 @@ public:
     q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KBudgetView::selectByObject);
     q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KBudgetView::selectByVariant);
 
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KBudgetView::refresh);
-
-    /// @todo cleanup
-    #if 0
-    m_budgetProxyModel = qobject_cast<BudgetViewProxyModel *>(ui->m_accountTree->init(View::Budget));
-    m_proxyModel = m_budgetProxyModel;
-
-    #endif
+    q->slotSettingsChanged();
 
     // setup initial state
     updateButtonStates();
@@ -205,10 +153,10 @@ public:
   {
     QHash<eMenu::Action, bool> actionStates;
     actionStates[eMenu::Action::NewBudget] = true;
-    auto b = m_budgetList.size() >= 1 ? true : false;
+    auto b = !ui->m_budgetList->selectionModel()->selectedIndexes().isEmpty();
     actionStates[eMenu::Action::DeleteBudget] = b;
 
-    b = m_budgetList.size() == 1 ? true : false;
+    b = (ui->m_budgetList->selectionModel()->selectedIndexes().count() == 2);
     actionStates[eMenu::Action::ChangeBudgetYear] = b;
     actionStates[eMenu::Action::CopyBudget] = b;
     actionStates[eMenu::Action::RenameBudget] = b;
@@ -232,19 +180,14 @@ public:
     if (ui->m_updateButton->isEnabled()) {
       if (KMessageBox::questionYesNo(q, i18n("<qt>Do you want to save the changes for <b>%1</b>?</qt>", m_budget.name()),
                                      i18n("Save changes")) == KMessageBox::Yes) {
-        m_inSelection = true;
+        // m_inSelection = true;
         q->slotUpdateBudget();
-        m_inSelection = false;
+        // m_inSelection = false;
       }
     }
   }
 
-  void refreshHideUnusedButton()
-  {
-    ui->m_hideUnusedButton->setDisabled(m_budget.getaccounts().isEmpty());
-  }
-
-  void loadAccounts()
+  void loadBudgetAccountsView()
   {
     // if no budgets are selected, don't load the accounts
     // and clear out the previously shown list
@@ -252,32 +195,23 @@ public:
       ui->m_budgetValue->clear();
       ui->m_updateButton->setEnabled(false);
       ui->m_resetButton->setEnabled(false);
+      m_budgetProxyModel->setBudget(MyMoneyBudget());
       return;
     }
     ui->m_updateButton->setEnabled(!(selectedBudget() == m_budget));
     ui->m_resetButton->setEnabled(!(selectedBudget() == m_budget));
-
     m_budgetProxyModel->setBudget(m_budget);
   }
 
-  const MyMoneyBudget& selectedBudget() const
+  MyMoneyBudget selectedBudget() const
   {
-    static MyMoneyBudget nullBudget;
-    /// @todo port to new model code
-#if 0
-    QTreeWidgetItemIterator it_l(ui->m_budgetList, QTreeWidgetItemIterator::Selected);
-    KBudgetListItem* item = dynamic_cast<KBudgetListItem*>(*it_l);
-    if (item) {
-      return item->budget();
+    MyMoneyBudget budget;
+    auto currentIdx = ui->m_budgetList->selectionModel()->currentIndex();
+    if (currentIdx.isValid() && !ui->m_budgetList->selectionModel()->selectedIndexes().isEmpty()) {
+      const auto baseIdx = BudgetsModel::mapToBaseSource( currentIdx );
+      budget = MyMoneyFile::instance()->budgetsModel()->itemByIndex(baseIdx);
     }
-#endif
-    return nullBudget;
-  }
-
-  void AccountEnter()
-  {
-    if (m_budget.id().isEmpty())
-      return;
+    return budget;
   }
 
   void clearSubBudgets(const QModelIndex &index)
@@ -314,104 +248,11 @@ public:
     return rc;
   }
 
-  /**
-   * This method loads all available budgets into the budget list widget. If a budget is
-   * currently selected it remains selected if it is still present.
-   */
-  void loadBudgets()
-  {
-  /// @todo port to new model code
-  #if 0
-    Q_Q(KBudgetView);
-    m_budgetProxyModel->invalidate();
-
-    // remember which item is currently selected
-    QString id = m_budget.id();
-
-    // clear the budget list
-    ui->m_budgetList->clear();
-
-    // add the correct years to the drop down list
-    QDate date = QDate::currentDate();
-    int iStartYear = date.year() - m_iBudgetYearsBack;
-
-    m_yearList.clear();
-    for (int i = 0; i < m_iBudgetYearsAhead + m_iBudgetYearsBack; i++)
-      m_yearList += QString::number(iStartYear + i);
-
-    KBudgetListItem* currentItem = 0;
-
-    QList<MyMoneyBudget> list = MyMoneyFile::instance()->budgetList();
-    QList<MyMoneyBudget>::ConstIterator it;
-    for (it = list.constBegin(); it != list.constEnd(); ++it) {
-      KBudgetListItem* item = new KBudgetListItem(ui->m_budgetList, *it);
-
-      // create a list of unique years
-      if (m_yearList.indexOf(QString::number((*it).budgetStart().year())) == -1)
-        m_yearList += QString::number((*it).budgetStart().year());
-
-      //sort the list by name
-      ui->m_budgetList->sortItems((int)eAccountsModel::Column::Account, Qt::AscendingOrder);
-
-      if (item->budget().id() == id) {
-        m_budget = (*it);
-        currentItem = item;
-        item->setSelected(true);
-      }
-    }
-    m_yearList.sort();
-
-    if (currentItem) {
-      ui->m_budgetList->setCurrentItem(currentItem);
-    }
-
-    // reset the status of the buttons
-    ui->m_updateButton->setEnabled(false);
-    ui->m_resetButton->setEnabled(false);
-
-    // make sure the world around us knows what we have selected
-    q->slotSelectBudget();
-#endif
-  }
-
-  void ensureBudgetVisible(const QString& id)
-  {
-    /// @todo port to new model code
-#if 0
-    const auto widgetIt = QTreeWidgetItemIterator(ui->m_budgetList);
-    while (*widgetIt) {
-      const auto p = dynamic_cast<KBudgetListItem*>(*widgetIt);
-      if ((p)->budget().id() == id) {
-        ui->m_budgetList->scrollToItem((p), QAbstractItemView::PositionAtCenter);
-        ui->m_budgetList->setCurrentItem(p, 0, QItemSelectionModel::ClearAndSelect);      // active item and deselect all others
-      }
-    }
-#endif
-  }
-
   KBudgetView*          q_ptr;
   Ui::KBudgetView*      ui;
   BudgetViewProxyModel* m_budgetProxyModel;
 
   MyMoneyBudget         m_budget;
-  QMap<QString, ulong>  m_transactionCountMap;
-  QStringList           m_yearList;
-  QList<MyMoneyBudget>  m_budgetList;
-
-  /**
-    * Set if we are in the selection of a different budget
-    **/
-  bool                  m_inSelection;
-
-  void adaptHideUnusedButton();
-
-  static const int      m_iBudgetYearsAhead = 5;
-  static const int      m_iBudgetYearsBack = 3;
-
-  /**
-    * This signals whether a budget is being edited
-    **/
-  bool                  m_budgetInEditing;
 };
 
 #endif
