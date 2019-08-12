@@ -122,7 +122,7 @@ bool ParametersModel::setData(const QModelIndex& index, const QVariant& value, i
 
 void ParametersModel::addItem(const QString& key, const QString& val)
 {
-  QModelIndex idx = indexById(key);
+  const auto idx = indexById(key);
   int row;
   if (!idx.isValid()) {
     row = idx.row();
@@ -137,8 +137,7 @@ void ParametersModel::addItem(const QString& key, const QString& val)
 
 void ParametersModel::deleteItem(const QString& key)
 {
-  QModelIndex idx = indexById(key);
-  int row;
+  const auto idx = indexById(key);
   if (!idx.isValid()) {
     removeRow(idx.row());
   }
@@ -153,9 +152,6 @@ void ParametersModel::load(const QMap<QString, QString>& pairs)
   // create the number of required items
   const auto itemCount = pairs.count();
   insertRows(0, itemCount);
-
-  // and don't count loading as a modification
-  setDirty(false);
 
   int row = 0;
   for (auto it = pairs.constBegin(); it != pairs.constEnd(); ++it) {
