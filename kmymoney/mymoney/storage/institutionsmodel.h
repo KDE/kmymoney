@@ -76,6 +76,13 @@ public:
   void setColorScheme(AccountsModel::ColorScheme scheme, const QColor& color);
 
 public Q_SLOTS:
+  /**
+   * Add the accounts pointed to by @a indexes to the group of
+   * accounts not assigned to any institution. The indexes should
+   * point into the AccountsModel. The addition is performed on
+   * the id returned by the @c IdRole role. The dirty flag
+   * is not modified.
+   */
   void slotLoadAccountsWithoutInstitutions(const QModelIndexList& indexes);
 
 private:

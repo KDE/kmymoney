@@ -244,9 +244,11 @@ void InstitutionsModel::load(const QMap<QString, MyMoneyInstitution>& list)
 
 void InstitutionsModel::slotLoadAccountsWithoutInstitutions(const QModelIndexList& indexes)
 {
+  bool dirty = m_dirty;
   for (const auto idx : indexes) {
     addAccount(QString(), idx.data(eMyMoney::Model::IdRole).toString());
   }
+  m_dirty = dirty;
 }
 
 void InstitutionsModel::addAccount(const QString& institutionId, const QString& accountId)
