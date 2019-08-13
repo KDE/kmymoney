@@ -1664,6 +1664,11 @@ public:
    */
   void removeOnlineJob(const QStringList onlineJobIds);
 
+  /**
+   * mark all models as clean
+   */
+  void fileSaved();
+
 protected:
   /**
     * This is the constructor for a new empty file description

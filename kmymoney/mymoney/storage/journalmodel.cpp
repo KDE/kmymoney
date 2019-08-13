@@ -396,7 +396,7 @@ bool JournalModel::setData(const QModelIndex& idx, const QVariant& value, int ro
     return false;
   }
 
-  qDebug() << "setData(" << idx.row() << idx.column() << ")" << value << role;
+  // qDebug() << "setData(" << idx.row() << idx.column() << ")" << value << role;
   return QAbstractItemModel::setData(idx, value, role);
 }
 

@@ -28,8 +28,8 @@
 // Project Includes
 
 #include "newtransactionform.h"
-#include "models.h"
 #include "ledgermodel.h"
+#include "journalmodel.h"
 #include "ui_ledgerviewpage.h"
 #include "mymoneyenums.h"
 
@@ -109,8 +109,12 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
     d->ui->formWidget->layout()->addWidget(d->form);
     connect(d->ui->ledgerView, &LedgerView::transactionSelected,
             d->form, &NewTransactionForm::showTransaction);
-    connect(Models::instance()->ledgerModel(), &LedgerModel::dataChanged,
+
+    /// @todo port to new model code
+#if 0
+    connect(MyMoneyFile::instance()->ledgerModel(), &LedgerModel::dataChanged,
             d->form, &NewTransactionForm::modelDataChanged);
+#endif
   }
   d->ui->formWidget->setVisible(d->hideFormReasons.isEmpty());
   d->ui->ledgerView->setAccount(acc);

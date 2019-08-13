@@ -1,6 +1,6 @@
 /*
  * Copyright 2002-2004  Kevin Tambascio <ktambascio@users.sourceforge.net>
- * Copyright 2002-2016  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2002-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2004-2005  Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2006       Darren Gould <darren_gould@gmx.de>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
@@ -42,6 +42,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyfile.h"
 #include "mymoneystoragemgr.h"
 #include "mymoneyexception.h"
 #include "mymoneykeyvaluecontainer.h"
@@ -68,7 +69,6 @@
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
 #include "plugins/xmlhelper/xmlstoragehelper.h"
 #include "mymoneyenums.h"
-#include "models.h"
 
 /// @todo add new models here
 #include "payeesmodel.h"
@@ -371,7 +371,7 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
         } else if (s == nodeName(Node::KeyValuePairs)) {
           MyMoneyKeyValueContainer container;
           addToKeyValueContainer(container, m_baseNode);
-          m_reader->m_models->parametersModel()->load(container.pairs());
+          m_reader->m_file->parametersModel()->load(container.pairs());
 
         } else if (s == nodeName(Node::Institution)) {
           auto i = readInstitution(m_baseNode);
@@ -426,63 +426,63 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
     /// @todo add new models here
     if (s == tagName(Tag::Payees)) {
       // last payee read, now dump them into the engine
-      m_reader->m_models->payeesModel()->load(m_reader->d->pList);
+      m_reader->m_file->payeesModel()->load(m_reader->d->pList);
       m_reader->d->pList.clear();
     } else if (s == tagName(Tag::Schedules)) {
       // last schedule read, now dump them into the engine
-      m_reader->m_models->schedulesModel()->load(m_reader->d->sList);
+      m_reader->m_file->schedulesModel()->load(m_reader->d->sList);
       m_reader->d->sList.clear();
     } else if (s == tagName(Tag::CostCenters)) {
-      m_reader->m_models->costCenterModel()->load(m_reader->d->ccList);
+      m_reader->m_file->costCenterModel()->load(m_reader->d->ccList);
       m_reader->d->ccList.clear();
     } else if (s == tagName(Tag::Tags)) {
       // last tag read, now dump them into the engine
-      m_reader->m_models->tagsModel()->load(m_reader->d->taList);
+      m_reader->m_file->tagsModel()->load(m_reader->d->taList);
       m_reader->d->taList.clear();
     } else if (s == tagName(Tag::Securities)) {
       // last security read, now dump them into the engine
-      m_reader->m_models->securitiesModel()->load(m_reader->d->secList);
+      m_reader->m_file->securitiesModel()->load(m_reader->d->secList);
       /// @todo cleanup
       // m_reader->m_storage->loadSecurities(m_reader->d->secList);
       m_reader->d->secList.clear();
     } else if (s == tagName(Tag::Currencies)) {
       // last currency read, now dump them into the engine
-      m_reader->m_models->currenciesModel()->loadCurrencies(m_reader->d->secList);
+      m_reader->m_file->currenciesModel()->loadCurrencies(m_reader->d->secList);
       /// @todo cleanup
       // m_reader->m_storage->loadCurrencies(m_reader->d->secList);
       m_reader->d->secList.clear();
     } else if (s == tagName(Tag::Budgets)) {
       // last budget read, now dump them into the engine
-      m_reader->m_models->budgetsModel()->load(m_reader->d->bList);
+      m_reader->m_file->budgetsModel()->load(m_reader->d->bList);
       /// @todo cleanup
       // m_reader->m_storage->loadBudgets(m_reader->d->bList);
       m_reader->d->bList.clear();
     } else if (s == tagName(Tag::Accounts)) {
       // last account read, now dump them into the engine
-      m_reader->m_models->accountsModel()->load(m_reader->d->aList);
+      m_reader->m_file->accountsModel()->load(m_reader->d->aList);
       m_reader->d->aList.clear();
     } else if (s == tagName(Tag::Institutions)) {
       // last institution read, now dump them into the engine
-      m_reader->m_models->institutionsModel()->load(m_reader->d->iList);
+      m_reader->m_file->institutionsModel()->load(m_reader->d->iList);
       m_reader->d->iList.clear();
     } else if (s == tagName(Tag::Transactions)) {
       // last transaction read, now dump them into the engine
-      m_reader->m_models->journalModel()->load(m_reader->d->tList);
+      m_reader->m_file->journalModel()->load(m_reader->d->tList);
       /// @todo cleanup
       // m_reader->m_storage->loadTransactions(m_reader->d->tList);
       m_reader->d->tList.clear();
     } else if (s == tagName(Tag::Prices)) {
       // last price read, now dump them into the engine
-      m_reader->m_models->priceModel()->load(m_reader->d->prList);
+      m_reader->m_file->priceModel()->load(m_reader->d->prList);
       /// @todo cleanup
       // m_reader->m_storage->loadPrices(m_reader->d->prList);
       m_reader->d->prList.clear();
     } else if (s == tagName(Tag::OnlineJobs)) {
-      m_reader->m_models->onlineJobsModel()->load(m_reader->d->onlineJobList);
+      m_reader->m_file->onlineJobsModel()->load(m_reader->d->onlineJobList);
       m_reader->d->onlineJobList.clear();
     } else if (s == tagName(Tag::Reports)) {
       // last report read, now dump them into the engine
-      m_reader->m_models->reportsModel()->load(m_reader->d->rList);
+      m_reader->m_file->reportsModel()->load(m_reader->d->rList);
       /// @todo cleanup
       // m_reader->m_storage->loadReports(m_reader->d->rList);
       m_reader->d->rList.clear();
@@ -1390,7 +1390,7 @@ MyMoneyStorageXML::~MyMoneyStorageXML()
 }
 
 // Function to read in the file, send to XML parser.
-void MyMoneyStorageXML::readFile(QIODevice* pDevice, MyMoneyStorageMgr* storage, Models* models)
+void MyMoneyStorageXML::readFile(QIODevice* pDevice, MyMoneyStorageMgr* storage, MyMoneyFile* file)
 {
   Q_CHECK_PTR(storage);
   Q_CHECK_PTR(pDevice);
@@ -1398,7 +1398,7 @@ void MyMoneyStorageXML::readFile(QIODevice* pDevice, MyMoneyStorageMgr* storage,
     return;
 
   m_storage = storage;
-  m_models = models;
+  m_file = file;
 
   m_doc = new QDomDocument;
   Q_CHECK_PTR(m_doc);
@@ -1441,7 +1441,7 @@ void MyMoneyStorageXML::readFile(QIODevice* pDevice, MyMoneyStorageMgr* storage,
 }
 
 
-void MyMoneyStorageXML::writeFile(QIODevice* qf, MyMoneyStorageMgr* storage, Models* models)
+void MyMoneyStorageXML::writeFile(QIODevice* qf, MyMoneyStorageMgr* storage, MyMoneyFile* file)
 {
   Q_CHECK_PTR(qf);
   Q_CHECK_PTR(storage);
@@ -1449,7 +1449,7 @@ void MyMoneyStorageXML::writeFile(QIODevice* qf, MyMoneyStorageMgr* storage, Mod
     return;
   }
   m_storage = storage;
-  m_models = models;
+  m_file = file;
 
   /// @todo add new models here
 
@@ -1494,7 +1494,7 @@ void MyMoneyStorageXML::writeFile(QIODevice* qf, MyMoneyStorageMgr* storage, Mod
   writeTransactions(transactions);
   mainElement.appendChild(transactions);
 
-  QDomElement keyvalpairs = writeKeyValuePairs(m_models->parametersModel()->pairs());
+  QDomElement keyvalpairs = writeKeyValuePairs(m_file->parametersModel()->pairs());
   mainElement.appendChild(keyvalpairs);
 
   QDomElement schedules = m_doc->createElement(tagName(Tag::Schedules));
@@ -1538,7 +1538,7 @@ void MyMoneyStorageXML::writeFile(QIODevice* qf, MyMoneyStorageMgr* storage, Mod
   // this seems to be nonsense, but it clears the dirty flag
   // as a side-effect.
   m_storage->setLastModificationDate(m_storage->lastModificationDate());
-  m_models->fileSaved();
+  m_file->fileSaved();
 
   m_storage = 0;
 }
@@ -1666,7 +1666,7 @@ void MyMoneyStorageXML::writeInstitution(QDomElement& institution, const MyMoney
 void MyMoneyStorageXML::writePayees(QDomElement& parent)
 {
   PayeesModel::xmlWriter writer(&MyMoneyXmlContentHandler::writePayee, *m_doc, parent);
-  const auto count = m_models->payeesModel()->processItems(&writer);
+  const auto count = m_file->payeesModel()->processItems(&writer);
   parent.setAttribute(attributeName(Attribute::General::Count), count);
 }
 
@@ -1678,7 +1678,7 @@ void MyMoneyStorageXML::writePayee(QDomElement& payee, const MyMoneyPayee& p)
 void MyMoneyStorageXML::writeTags(QDomElement& parent)
 {
   TagsModel::xmlWriter writer(&MyMoneyXmlContentHandler::writeTag, *m_doc, parent);
-  const auto count = m_models->tagsModel()->processItems(&writer);
+  const auto count = m_file->tagsModel()->processItems(&writer);
   parent.setAttribute(attributeName(Attribute::General::Count), count);
 }
 
@@ -1689,7 +1689,7 @@ void MyMoneyStorageXML::writeTag(QDomElement& tag, const MyMoneyTag& ta)
 
 void MyMoneyStorageXML::writeAccounts(QDomElement& accounts)
 {
-  QList<MyMoneyAccount> list = m_models->accountsModel()->itemList();
+  QList<MyMoneyAccount> list = m_file->accountsModel()->itemList();
   m_storage->accountList(list);
   QList<MyMoneyAccount>::ConstIterator it;
   accounts.setAttribute(attributeName(Attribute::General::Count), list.count() + 5);
@@ -1737,7 +1737,7 @@ void MyMoneyStorageXML::writeTransaction(QDomElement& transaction, const MyMoney
 void MyMoneyStorageXML::writeSchedules(QDomElement& parent)
 {
   SchedulesModel::xmlWriter writer(&MyMoneyXmlContentHandler::writeSchedule, *m_doc, parent);
-  const auto count = m_models->schedulesModel()->processItems(&writer);
+  const auto count = m_file->schedulesModel()->processItems(&writer);
   parent.setAttribute(attributeName(Attribute::General::Count), count);
 }
 
@@ -1749,7 +1749,7 @@ void MyMoneyStorageXML::writeSchedule(QDomElement& scheduledTx, const MyMoneySch
 void MyMoneyStorageXML::writeSecurities(QDomElement& parent)
 {
   SecuritiesModel::xmlWriter writer(&MyMoneyXmlContentHandler::writeSecurity, *m_doc, parent);
-  const auto count = m_models->securitiesModel()->processItems(&writer);
+  const auto count = m_file->securitiesModel()->processItems(&writer);
   parent.setAttribute(attributeName(Attribute::General::Count), count);
 }
 
@@ -1761,14 +1761,14 @@ void MyMoneyStorageXML::writeSecurity(QDomElement& securityElement, const MyMone
 void MyMoneyStorageXML::writeCurrencies(QDomElement& parent)
 {
   SecuritiesModel::xmlWriter writer(&MyMoneyXmlContentHandler::writeSecurity, *m_doc, parent);
-  const auto count = m_models->currenciesModel()->processItems(&writer);
+  const auto count = m_file->currenciesModel()->processItems(&writer);
   parent.setAttribute(attributeName(Attribute::General::Count), count);
 }
 
 void MyMoneyStorageXML::writeReports(QDomElement& parent)
 {
   ReportsModel::xmlWriter writer(&MyMoneyXmlContentHandler2::writeReport, *m_doc, parent);
-  const auto count = m_models->reportsModel()->processItems(&writer);
+  const auto count = m_file->reportsModel()->processItems(&writer);
   parent.setAttribute(attributeName(Attribute::General::Count), count);
 }
 
@@ -1780,7 +1780,7 @@ void MyMoneyStorageXML::writeReport(QDomElement& report, const MyMoneyReport& r)
 void MyMoneyStorageXML::writeBudgets(QDomElement& parent)
 {
   BudgetsModel::xmlWriter writer(&MyMoneyXmlContentHandler2::writeBudget, *m_doc, parent);
-  const auto count = m_models->budgetsModel()->processItems(&writer);
+  const auto count = m_file->budgetsModel()->processItems(&writer);
   parent.setAttribute(attributeName(Attribute::General::Count), count);
 }
 
@@ -1792,7 +1792,7 @@ void MyMoneyStorageXML::writeBudget(QDomElement& budget, const MyMoneyBudget& b)
 void MyMoneyStorageXML::writeOnlineJobs(QDomElement& parent)
 {
   OnlineJobsModel::xmlWriter writer(&MyMoneyXmlContentHandler::writeOnlineJob, *m_doc, parent);
-  const auto count = m_models->onlineJobsModel()->processItems(&writer);
+  const auto count = m_file->onlineJobsModel()->processItems(&writer);
   parent.setAttribute(attributeName(Attribute::General::Count), count);
 }
 
@@ -1804,7 +1804,7 @@ void MyMoneyStorageXML::writeOnlineJob(QDomElement& onlineJobs, const onlineJob&
 void MyMoneyStorageXML::writeCostCenters(QDomElement& parent)
 {
   CostCenterModel::xmlWriter writer(&MyMoneyXmlContentHandler::writeCostCenter, *m_doc, parent);
-  const auto count = m_models->costCenterModel()->processItems(&writer);
+  const auto count = m_file->costCenterModel()->processItems(&writer);
   parent.setAttribute(attributeName(Attribute::General::Count), count);
 }
 
@@ -1853,7 +1853,7 @@ void MyMoneyStorageXML::writePrices(QDomElement& prices)
   QDomElement pricePair;
   int pricePairCount = 0;
 
-  PriceModel* model = m_models->priceModel();
+  PriceModel* model = m_file->priceModel();
 
   pricePair.clear();
 

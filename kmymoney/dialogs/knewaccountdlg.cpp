@@ -52,7 +52,6 @@
 #include "kmymoneysettings.h"
 #include "kmymoneycurrencyselector.h"
 #include "knewbankdlg.h"
-#include "models.h"
 #include "accountsmodel.h"
 #include "accountsproxymodel.h"
 #include "mymoneyenums.h"
@@ -127,7 +126,7 @@ public:
     m_filterProxyModel->addAccountGroup(filterAccountGroup);
     // don't allow to select ourself as parent
     m_filterProxyModel->setNotSelectable(m_account.id());
-    auto const model = Models::instance()->accountsModel();
+    auto const model = MyMoneyFile::instance()->accountsModel();
     m_filterProxyModel->setDynamicSortFilter(true);
 
     ui->m_parentAccounts->setModel(model);

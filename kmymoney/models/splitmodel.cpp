@@ -32,7 +32,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "models.h"
 #include "costcentermodel.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
@@ -162,7 +161,7 @@ QVariant SplitModel::data(const QModelIndex& index, int role) const
   MyMoneyMoney value;
   const MyMoneySplit& split = d->m_splits[index.row()];
   QModelIndex subIndex;
-  CostCenterModel* ccModel = Models::instance()->costCenterModel();
+  CostCenterModel* ccModel = MyMoneyFile::instance()->costCenterModel();
 
   switch(role) {
     case Qt::DisplayRole:
@@ -173,7 +172,7 @@ QVariant SplitModel::data(const QModelIndex& index, int role) const
             rc = MyMoneyFile::instance()->accountToCategory(split.accountId());
             break;
           case (int)Column::CostCenter:
-            subIndex = Models::indexById(ccModel, eMyMoney::Model::Roles::CostCenterShortNameRole, split.costCenterId());
+            subIndex = ccModel->indexById(split.costCenterId());
             rc = ccModel->data(subIndex);
             break;
           case (int)Column::Number:

@@ -39,7 +39,6 @@
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
-#include "models.h"
 #include "accountsmodel.h"
 #include "institutionsmodel.h"
 #include "accountsproxymodel.h"
@@ -152,8 +151,8 @@ AccountsViewProxyModel *KMyMoneyAccountTreeView::init(View view)
 
   d->m_model->addAccountGroup(d->getVisibleGroups(view));
 
-  const auto accountsModel = Models::instance()->accountsModel();
-  const auto institutionsModel = Models::instance()->institutionsModel();
+  const auto accountsModel = MyMoneyFile::instance()->accountsModel();
+  const auto institutionsModel = MyMoneyFile::instance()->institutionsModel();
 
   AccountsModel *sourceModel;
   if (view != View::Institutions)

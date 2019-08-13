@@ -36,7 +36,6 @@
 #include <KMessageBox>
 #include <KActionCollection>
 
-#include "models.h"
 #include "onlinejobmodel.h"
 #include "onlinejobadministration.h"
 #include "onlinejobtyped.h"
@@ -108,7 +107,7 @@ public:
       m_onlineJobModel = new onlineJobModel(q);
   #ifdef KMM_MODELTEST
       /// @todo using the ModelTest feature on the onlineJobModel crashes. Need to fix.
-      // new ModelTest(m_onlineJobModel, Models::instance());
+      // new ModelTest(m_onlineJobModel, MyMoneyFile::instance());
   #endif
     }
     return m_onlineJobModel;

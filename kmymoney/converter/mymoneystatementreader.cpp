@@ -66,7 +66,6 @@
 #include "kenterscheduledlg.h"
 #include "kmymoneyaccountcombo.h"
 #include "accountsmodel.h"
-#include "models.h"
 #include "existingtransactionmatchfinder.h"
 #include "scheduledtransactionmatchfinder.h"
 #include "dialogenums.h"
@@ -1054,10 +1053,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
           filterProxyModel->addAccountGroup(QVector<Account::Type> {Account::Type::Asset, Account::Type::Liability, Account::Type::Equity, Account::Type::Income, Account::Type::Expense});
 
-          auto const model = Models::instance()->accountsModel();
-          filterProxyModel->setSourceModel(model);
-          /// @todo port to new model code
-          // filterProxyModel->setSourceColumns(model->getColumns());
+          filterProxyModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
           filterProxyModel->sort(AccountsModel::Column::AccountName);
 
           QPointer<KMyMoneyAccountCombo> accountCombo = new KMyMoneyAccountCombo(filterProxyModel);

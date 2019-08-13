@@ -3,7 +3,6 @@ set(libmodels_a_SOURCES
     institutionsproxymodel.cpp
     onlinebankingaccountsfilterproxymodel.cpp
     ../plugins/onlinetasks/interfaces/tasks/credittransfer.cpp
-    models.cpp
     payeeidentifiercontainermodel.cpp
     equitiesmodel.cpp
     securitiesfilterproxymodel.cpp

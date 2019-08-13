@@ -69,7 +69,6 @@
 #include "kscheduledview.h"
 #include "kgloballedgerview.h"
 #include "kinvestmentview.h"
-#include "models.h"
 #include "modelenums.h"
 #include "accountsmodel.h"
 #include "equitiesmodel.h"
@@ -177,10 +176,10 @@ KMyMoneyView::KMyMoneyView()
 
 /// @todo cleanup
 #if 0
-  connect(Models::instance()->accountsModel(), &AccountsModel::netWorthChanged, this, &KMyMoneyView::slotSelectByVariant);
-  connect(Models::instance()->accountsModel(), &AccountsModel::profitChanged, this, &KMyMoneyView::slotSelectByVariant);
-  connect(Models::instance()->institutionsModel(), &AccountsModel::netWorthChanged, this, &KMyMoneyView::slotSelectByVariant);
-  connect(Models::instance()->institutionsModel(), &AccountsModel::profitChanged, this, &KMyMoneyView::slotSelectByVariant);
+  connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::netWorthChanged, this, &KMyMoneyView::slotSelectByVariant);
+  connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::profitChanged, this, &KMyMoneyView::slotSelectByVariant);
+  connect(MyMoneyFile::instance()->institutionsModel(), &AccountsModel::netWorthChanged, this, &KMyMoneyView::slotSelectByVariant);
+  connect(MyMoneyFile::instance()->institutionsModel(), &AccountsModel::profitChanged, this, &KMyMoneyView::slotSelectByVariant);
 #endif
 
   //set the model
@@ -369,8 +368,8 @@ void KMyMoneyView::slotAccountTreeViewChanged(const eAccountsModel::Column colum
                                  QString(),
                                  KStandardGuiItem::yes(), KStandardGuiItem::no(),
                                  QStringLiteral("ShowColumnOnEveryView")) == KMessageBox::Yes) {
-    Models::instance()->accountsModel()->setColumnVisibility(column, show);
-    Models::instance()->institutionsModel()->setColumnVisibility(column, show);
+    MyMoneyFile::instance()->accountsModel()->setColumnVisibility(column, show);
+    MyMoneyFile::instance()->institutionsModel()->setColumnVisibility(column, show);
     foreach(AccountsViewProxyModel *proxyModel, proxyModels) {
       if (!proxyModel)
         continue;
@@ -380,8 +379,8 @@ void KMyMoneyView::slotAccountTreeViewChanged(const eAccountsModel::Column colum
   } else if(show) {
     // in case we need to show it, we have to make sure to set the visibility
     // in the base model as well. Otherwise, we don't see the column through the proxy model
-    Models::instance()->accountsModel()->setColumnVisibility(column, show);
-    Models::instance()->institutionsModel()->setColumnVisibility(column, show);
+    MyMoneyFile::instance()->accountsModel()->setColumnVisibility(column, show);
+    MyMoneyFile::instance()->institutionsModel()->setColumnVisibility(column, show);
   }
 #endif
 }
@@ -566,7 +565,7 @@ void KMyMoneyView::finishReconciliation(const MyMoneyAccount& /* account */)
 {
 /// @todo port to new model code
 #if 0
-  Models::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+  MyMoneyFile::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 #endif
   static_cast<KGlobalLedgerView*>(viewBases[View::Ledgers])->slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 }

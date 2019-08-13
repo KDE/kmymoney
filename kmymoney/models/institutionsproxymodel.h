@@ -39,7 +39,7 @@
   *
   * @code
   *   InstitutionsFilterProxyModel *filterModel = new InstitutionsFilterProxyModel(widget);
-  *   filterModel->setSourceModel(Models::instance()->institutionsModel());
+  *   filterModel->setSourceModel(MyMoneyFile::instance()->institutionsModel());
   *   filterModel->sort(0);
   *
   *   widget->setModel(filterModel);

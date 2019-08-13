@@ -66,7 +66,6 @@
 #include "registersearchline.h"
 #include "scheduledtransaction.h"
 #include "accountsmodel.h"
-#include "models.h"
 #include "mymoneyprice.h"
 #include "mymoneyschedule.h"
 #include "mymoneysecurity.h"

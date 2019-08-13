@@ -60,7 +60,6 @@
 #include "mymoneytransactionfilter.h"
 #include "kmymoneysettings.h"
 #include "kpayeereassigndlg.h"
-#include "models.h"
 #include "accountsmodel.h"
 #include "mymoneysecurity.h"
 #include "mymoneyschedule.h"
@@ -107,7 +106,7 @@ public:
 
   MyMoneyPayee payee() const
   {
-    return Models::instance()->payeesModel()->itemById(m_id);
+    return MyMoneyFile::instance()->payeesModel()->itemById(m_id);
   }
 
 private:
@@ -158,8 +157,7 @@ public:
     m_filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
     m_filterProxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity});
 
-    auto const model = Models::instance()->accountsModel();
-    m_filterProxyModel->setSourceModel(model);
+    m_filterProxyModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
     m_filterProxyModel->sort(AccountsModel::Column::AccountName);
     ui->comboDefaultCategory->setModel(m_filterProxyModel);
 

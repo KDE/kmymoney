@@ -63,9 +63,6 @@
 #include "storageenums.h"
 #include "mymoneyenums.h"
 
-/// @todo cleanup
-#include "models.h"
-
 /// @todo add new models here
 #include "payeesmodel.h"
 #include "costcentermodel.h"
@@ -184,7 +181,6 @@ public:
   Private(MyMoneyFile* qq)
     : m_storage(0)
     , m_inTransaction(false)
-    /// @todo add new models here
     , payeesModel(qq)
     , costCenterModel(qq)
     , schedulesModel(qq)
@@ -199,9 +195,9 @@ public:
     , parametersModel(qq)
     , onlineJobsModel(qq)
     , reportsModel(qq)
-  {
-#ifdef KMM_MODELTEST
     /// @todo add new models here
+    {
+#ifdef KMM_MODELTEST
     MyMoneyFile* file = MyMoneyFile::instance();
     new ModelTest(&payeesModel, file);
     new ModelTest(&costCenterModel, file);
@@ -217,6 +213,7 @@ public:
     new ModelTest(&parametersModel, file);
     new ModelTest(&onlineJobsModel, file);
     new ModelTest(&reportsModel, file);
+    /// @todo add new models here
 #endif
     qq->connect(qq, &MyMoneyFile::modelsReadyToUse, &journalModel, &JournalModel::updateBalances);
     qq->connect(qq, &MyMoneyFile::modelsReadyToUse, qq, &MyMoneyFile::finalizeFileOpen);
@@ -230,7 +227,6 @@ public:
 
   bool anyModelDirty() const
   {
-    /// @todo add new models here
     return payeesModel.isDirty()
         || costCenterModel.isDirty()
         || schedulesModel.isDirty()
@@ -245,6 +241,26 @@ public:
         || parametersModel.isDirty()
         || onlineJobsModel.isDirty()
         || reportsModel.isDirty();
+        /// @todo add new models here
+  }
+
+  void markModelsAsClean()
+  {
+    schedulesModel.setDirty(false);
+    costCenterModel.setDirty(false);
+    payeesModel.setDirty(false);
+    tagsModel.setDirty(false);
+    securitiesModel.setDirty(false);
+    currenciesModel.setDirty(false);
+    budgetsModel.setDirty(false);
+    accountsModel.setDirty(false);
+    institutionsModel.setDirty(false);
+    journalModel.setDirty(false);
+    priceModel.setDirty(false);
+    parametersModel.setDirty(false);
+    onlineJobsModel.setDirty(false);
+    reportsModel.setDirty(false);
+    /// @todo add new models here
   }
 
   /**
@@ -3830,6 +3846,15 @@ void MyMoneyFile::fixSplitPrecision(MyMoneyTransaction& t) const
     }
   }
 }
+
+
+void MyMoneyFile::fileSaved()
+{
+  d->markModelsAsClean();
+}
+
+
+
 
 class MyMoneyFileTransactionPrivate
 {

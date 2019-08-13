@@ -112,7 +112,6 @@
 #include "widgets/kmymoneymvccombo.h"
 
 #include "views/kmymoneyview.h"
-#include "models.h"
 #include "accountsmodel.h"
 #include "equitiesmodel.h"
 // #include "models/securitiesmodel.h"
@@ -452,11 +451,11 @@ public:
 
   void connectStorageToModels()
   {
-    const auto file = MyMoneyFile::instance();
     /// @todo port to new model code
 #if 0
+    const auto file = MyMoneyFile::instance();
 
-    const auto accountsModel = Models::instance()->accountsModel();
+    const auto accountsModel = MyMoneyFile::instance()->accountsModel();
 
     q->connect(file, &MyMoneyFile::objectAdded,    accountsModel, &AccountsModel::slotObjectAdded);
     q->connect(file, &MyMoneyFile::objectModified, accountsModel, &AccountsModel::slotObjectModified);
@@ -464,7 +463,7 @@ public:
     q->connect(file, &MyMoneyFile::balanceChanged, accountsModel, &AccountsModel::slotBalanceOrValueChanged);
     q->connect(file, &MyMoneyFile::valueChanged,   accountsModel, &AccountsModel::slotBalanceOrValueChanged);
 
-    const auto institutionsModel = Models::instance()->institutionsModel();
+    const auto institutionsModel = MyMoneyFile::instance()->institutionsModel();
     q->connect(file, &MyMoneyFile::objectAdded,    institutionsModel, &InstitutionsModel::slotObjectAdded);
     q->connect(file, &MyMoneyFile::objectModified, institutionsModel, &InstitutionsModel::slotObjectModified);
     q->connect(file, &MyMoneyFile::objectRemoved,  institutionsModel, &InstitutionsModel::slotObjectRemoved);
@@ -473,20 +472,22 @@ public:
 #endif
 
 #if 0
-    const auto equitiesModel = Models::instance()->equitiesModel();
+    const auto equitiesModel = MyMoneyFile::instance()->equitiesModel();
     q->connect(file, &MyMoneyFile::objectAdded,    equitiesModel, &EquitiesModel::slotObjectAdded);
     q->connect(file, &MyMoneyFile::objectModified, equitiesModel, &EquitiesModel::slotObjectModified);
     q->connect(file, &MyMoneyFile::objectRemoved,  equitiesModel, &EquitiesModel::slotObjectRemoved);
     q->connect(file, &MyMoneyFile::balanceChanged, equitiesModel, &EquitiesModel::slotBalanceOrValueChanged);
     q->connect(file, &MyMoneyFile::valueChanged,   equitiesModel, &EquitiesModel::slotBalanceOrValueChanged);
-    const auto securitiesModel = Models::instance()->securitiesModel();
+    const auto securitiesModel = MyMoneyFile::instance()->securitiesModel();
     q->connect(file, &MyMoneyFile::objectAdded,    securitiesModel, &SecuritiesModel::slotObjectAdded);
     q->connect(file, &MyMoneyFile::objectModified, securitiesModel, &SecuritiesModel::slotObjectModified);
     q->connect(file, &MyMoneyFile::objectRemoved,  securitiesModel, &SecuritiesModel::slotObjectRemoved);
 #endif
 
 #ifdef ENABLE_UNFINISHEDFEATURES
-    const auto ledgerModel = Models::instance()->ledgerModel();
+#if 0
+    /// @todo port to new model code
+    const auto ledgerModel = MyMoneyFile::instance()->journalModel();
     q->connect(file, &MyMoneyFile::objectAdded,    ledgerModel, &LedgerModel::slotAddTransaction);
     q->connect(file, &MyMoneyFile::objectModified, ledgerModel, &LedgerModel::slotModifyTransaction);
     q->connect(file, &MyMoneyFile::objectRemoved,  ledgerModel, &LedgerModel::slotRemoveTransaction);
@@ -495,11 +496,13 @@ public:
     q->connect(file, &MyMoneyFile::objectModified, ledgerModel, &LedgerModel::slotModifySchedule);
     q->connect(file, &MyMoneyFile::objectRemoved,  ledgerModel, &LedgerModel::slotRemoveSchedule);
 #endif
+#endif
   }
 
   void disconnectStorageFromModels()
   {
     /// @todo port to new model code
+#if 0
     const auto file = MyMoneyFile::instance();
     // q->disconnect(file, nullptr, Models::instance()->accountsModel(), nullptr);
     // q->disconnect(file, nullptr, Models::instance()->institutionsModel(), nullptr);
@@ -508,6 +511,7 @@ public:
 
 #ifdef ENABLE_UNFINISHEDFEATURES
     q->disconnect(file, nullptr, Models::instance()->ledgerModel(), nullptr);
+#endif
 #endif
   }
 
@@ -565,7 +569,7 @@ public:
     if (p) {
       file->detachStorage(p);
       delete p;
-      Models::instance()->unload();
+      MyMoneyFile::instance()->unload();
     }
   }
 
@@ -3637,7 +3641,7 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
       disconnect(m_myMoneyView, &KMyMoneyView::viewActivated, q, &KMyMoneyApp::slotViewSelected);
       m_myMoneyView->slotFileClosed();
       // notify the models that the file is going to be closed (we should have something like dataChanged that reaches the models first)
-      Models::instance()->unload();
+      MyMoneyFile::instance()->unload();
       break;
 
     case eKMyMoney::FileAction::Closed:

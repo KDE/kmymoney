@@ -38,7 +38,6 @@
 #include "mymoneysecurity.h"
 #include "mymoneymoney.h"
 #include "mymoneybudget.h"
-#include "models.h"
 #include "accountsproxymodel.h"
 #include "accountsproxymodel_p.h"
 #include "budgetviewproxymodel.h"

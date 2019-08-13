@@ -57,7 +57,6 @@
 #include "mymoneymoney.h"
 #include "mymoneytransactionfilter.h"
 #include "kmymoneysettings.h"
-#include "models.h"
 #include "accountsmodel.h"
 #include "mymoneysecurity.h"
 #include "mymoneycontact.h"

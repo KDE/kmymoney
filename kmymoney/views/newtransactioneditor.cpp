@@ -1,19 +1,20 @@
-/***************************************************************************
-                          newtransactioneditor.cpp
-                             -------------------
-    begin                : Sat Aug 8 2015
-    copyright            : (C) 2015 by Thomas Baumgart
-    email                : Thomas Baumgart <tbaumgart@kde.org>
- ***************************************************************************/
+/*
+ * Copyright 2015-2019  Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
 
 #include "newtransactioneditor.h"
 
@@ -36,13 +37,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_newtransactioneditor.h"
 #include "creditdebithelper.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyaccountcombo.h"
-#include "models.h"
 #include "accountsmodel.h"
 #include "costcentermodel.h"
 #include "ledgermodel.h"
@@ -50,7 +51,6 @@
 #include "payeesmodel.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
-#include "ui_newtransactioneditor.h"
 #include "splitdialog.h"
 #include "widgethintframe.h"
 #include "icons/icons.h"
@@ -305,6 +305,8 @@ bool NewTransactionEditor::Private::numberChanged(const QString& newNumber)
   bool rc = true;
   WidgetHintFrame::hide(ui->numberEdit, i18n("The check number used for this transaction."));
   if(!newNumber.isEmpty()) {
+    /// @todo port to new model code
+#if 0
     const LedgerModel* model = Models::instance()->ledgerModel();
     QModelIndexList list = model->match(model->index(0, 0), (int)eLedgerModel::Role::Number,
                                         QVariant(newNumber),
@@ -319,6 +321,7 @@ bool NewTransactionEditor::Private::numberChanged(const QString& newNumber)
         break;
       }
     }
+#endif
   }
   return rc;
 }
@@ -355,7 +358,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
   : QFrame(parent, Qt::FramelessWindowHint /* | Qt::X11BypassWindowManagerHint */)
   , d(new Private(this))
 {
-  auto const model = Models::instance()->accountsModel();
+  auto const model = MyMoneyFile::instance()->accountsModel();
   // extract account information from model
   const auto index = model->indexById(accountId);
   d->m_account = model->itemByIndex(index);
@@ -369,7 +372,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
   d->ui->accountCombo->setModel(d->accountsModel);
 
   d->costCenterModel->setSortRole(Qt::DisplayRole);
-  d->costCenterModel->setSourceModel(Models::instance()->costCenterModel());
+  d->costCenterModel->setSourceModel(MyMoneyFile::instance()->costCenterModel());
   d->costCenterModel->sort(0);
 
   d->ui->costCenterCombo->setEditable(true);
@@ -378,7 +381,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
   d->ui->costCenterCombo->completer()->setFilterMode(Qt::MatchContains);
 
   d->payeesModel->setSortRole(Qt::DisplayRole);
-  d->payeesModel->setSourceModel(Models::instance()->payeesModel());
+  d->payeesModel->setSourceModel(MyMoneyFile::instance()->payeesModel());
   d->payeesModel->sort(0);
 
   d->ui->payeeEdit->setEditable(true);
@@ -479,6 +482,8 @@ void NewTransactionEditor::keyPressEvent(QKeyEvent* e)
 
 void NewTransactionEditor::loadTransaction(const QString& id)
 {
+  /// @todo port to new model code
+#if 0
   const LedgerModel* model = Models::instance()->ledgerModel();
   const QString transactionId = model->transactionIdFromTransactionSplitId(id);
 
@@ -539,6 +544,7 @@ void NewTransactionEditor::loadTransaction(const QString& id)
 
   // set focus to date edit once we return to event loop
   QMetaObject::invokeMethod(d->ui->dateEdit, "setFocus", Qt::QueuedConnection);
+#endif
 }
 
 void NewTransactionEditor::numberChanged(const QString& newNumber)

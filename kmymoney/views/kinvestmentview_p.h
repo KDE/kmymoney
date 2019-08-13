@@ -49,7 +49,6 @@
 #include "kmymoneysettings.h"
 #include "kmymoneyaccountcombo.h"
 #include "accountsmodel.h"
-#include "models.h"
 #include "equitiesmodel.h"
 #include "securitiesfilterproxymodel.h"
 #include "icons.h"
@@ -191,7 +190,7 @@ public:
           visEColumns.append(visColumn);
     }
 
-    m_equitiesProxyModel = new EquitiesFilterProxyModel(q, Models::instance()->equitiesModel(), visEColumns);
+    m_equitiesProxyModel = new EquitiesFilterProxyModel(q, MyMoneyFile::instance()->equitiesModel(), visEColumns);
     ui->m_equitiesTree->setModel(m_equitiesProxyModel);
     ui->m_equitiesTree->header()->restoreState(cfgHeader);
     ui->m_equitiesTree->header()->setContextMenuPolicy(Qt::CustomContextMenu);

@@ -168,7 +168,6 @@ class MyMoneyAccount;
 class MyMoneySecurity;
 class MyMoneyTransaction;
 class MyMoneySplit;
-class Models;
 
 typedef QMap<QString, QString> map_accountIds;
 typedef map_accountIds::iterator map_accountIds_iter;
@@ -846,9 +845,9 @@ public:
     */
 #ifndef _GNCFILEANON
   /// @todo port to new model code
-  void readFile(QIODevice* pDevice, MyMoneyStorageMgr *storage, Models* models) final override;  // main entry point, IODevice is gnucash file
+  void readFile(QIODevice* pDevice, MyMoneyStorageMgr *storage, MyMoneyFile* file) final override;  // main entry point, IODevice is gnucash file
   // dummy entry needed by kmymoneywiew. we will not be writing
-  void writeFile(QIODevice*, MyMoneyStorageMgr*, Models*) final override {}
+  void writeFile(QIODevice*, MyMoneyStorageMgr*, MyMoneyFile*) final override {}
 
   void setProgressCallback(void(*callback)(int, int, const QString&)) final override;
 #else

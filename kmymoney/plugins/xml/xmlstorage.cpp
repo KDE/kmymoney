@@ -58,7 +58,6 @@
 #include "kgpgfile.h"
 #include "kgpgkeyselectiondlg.h"
 #include "kmymoneyenums.h"
-#include "models.h"
 
 using namespace Icons;
 
@@ -211,7 +210,7 @@ MyMoneyStorageMgr *XMLStorage::open(const QUrl &url)
   auto storage = new MyMoneyStorageMgr;
   MyMoneyStorageXML pReader;
   pReader.setProgressCallback(appInterface()->progressCallback());
-  pReader.readFile(qfile, storage, Models::instance());
+  pReader.readFile(qfile, storage, MyMoneyFile::instance());
   pReader.setProgressCallback(0);
 
   qfile->close();
@@ -531,7 +530,7 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
   }
 
   pWriter->setProgressCallback(appInterface()->progressCallback());
-  pWriter->writeFile(device.get(), MyMoneyFile::instance()->storage(), Models::instance());
+  pWriter->writeFile(device.get(), MyMoneyFile::instance()->storage(), MyMoneyFile::instance());
   device->close();
 
   // Check for errors if possible, only possible for KGPGFile

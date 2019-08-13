@@ -50,7 +50,6 @@
 #include "mymoneytransactionfilter.h"
 #include "kmymoneyaccountcombo.h"
 #include "kmymoneyutils.h"
-#include "models.h"
 #include "accountsmodel.h"
 #include <icons/icons.h>
 #include "mymoneyenums.h"
@@ -215,11 +214,7 @@ void KExportDlg::loadAccounts()
 {
   auto filterProxyModel = new AccountNamesFilterProxyModel(this);
   filterProxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability});
-  auto const model = Models::instance()->accountsModel();
-  /// @todo port to new model code
-  // model->load();
-  // filterProxyModel->setSourceColumns(model->getColumns());
-  filterProxyModel->setSourceModel(model);
+  filterProxyModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
   filterProxyModel->sort(AccountsModel::Column::AccountName);
   m_accountComboBox->setModel(filterProxyModel);
 }

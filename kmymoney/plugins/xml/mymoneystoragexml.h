@@ -1,6 +1,6 @@
 /*
  * Copyright 2002-2004  Kevin Tambascio <ktambascio@users.sourceforge.net>
- * Copyright 2002-2016  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2002-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2004-2005  Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2006       Darren Gould <darren_gould@gmx.de>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
@@ -59,7 +59,7 @@ class MyMoneyPrice;
 class MyMoneyTransaction;
 class MyMoneyCostCenter;
 class onlineJob;
-class Models;
+class MyMoneyFile;
 class PriceEntry;
 
 template <typename T> class QList;
@@ -79,8 +79,8 @@ public:
     Writing = 1           /**< version to be used when writing a file */
   };
 
-  void readFile(QIODevice* s, MyMoneyStorageMgr* storage, Models* models) override;
-  void writeFile(QIODevice* s, MyMoneyStorageMgr* storage, Models* models) override;
+  void readFile(QIODevice* s, MyMoneyStorageMgr* storage, MyMoneyFile* file) override;
+  void writeFile(QIODevice* s, MyMoneyStorageMgr* storage, MyMoneyFile* file) override;
   void setProgressCallback(void(*callback)(int, int, const QString&)) override;
 
   protected:
@@ -162,7 +162,7 @@ private:
 
 protected:
   MyMoneyStorageMgr *m_storage;
-  Models            *m_models;
+  MyMoneyFile       *m_file;
   QDomDocument      *m_doc;
 
 private:

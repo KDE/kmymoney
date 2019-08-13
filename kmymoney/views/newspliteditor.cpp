@@ -1,19 +1,20 @@
-/***************************************************************************
-                          newspliteditor.cpp
-                             -------------------
-    begin                : Sat Apr 9 2016
-    copyright            : (C) 2016 by Thomas Baumgart
-    email                : Thomas Baumgart <tbaumgart@kde.org>
- ***************************************************************************/
+/*
+ * Copyright 2016-2019  Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
 
 #include "newspliteditor.h"
 
@@ -37,7 +38,7 @@
 #include "creditdebithelper.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyaccountcombo.h"
-#include "models.h"
+#include "mymoneyfile.h"
 #include "accountsmodel.h"
 #include "costcentermodel.h"
 #include "ledgermodel.h"
@@ -145,8 +146,9 @@ bool NewSplitEditor::Private::categoryChanged(const QString& accountId)
   bool rc = true;
   if(!accountId.isEmpty()) {
     try {
-      QModelIndex index = Models::instance()->accountsModel()->indexById(accountId);
-      category = Models::instance()->accountsModel()->itemByIndex(index);
+      const auto model = MyMoneyFile::instance()->accountsModel();
+      QModelIndex index = model->indexById(accountId);
+      category = model->itemByIndex(index);
       const bool isIncomeExpense = category.isIncomeExpense();
       ui->costCenterCombo->setEnabled(isIncomeExpense);
       ui->costCenterLabel->setEnabled(isIncomeExpense);
@@ -167,6 +169,8 @@ bool NewSplitEditor::Private::numberChanged(const QString& newNumber)
   bool rc = true;
   WidgetHintFrame::hide(ui->numberEdit, i18n("The check number used for this transaction."));
   if(!newNumber.isEmpty()) {
+    /// @todo port to new model code
+#if 0
     const LedgerModel* model = Models::instance()->ledgerModel();
     QModelIndexList list = model->match(model->index(0, 0), (int)eLedgerModel::Role::Number,
                                         QVariant(newNumber),
@@ -181,6 +185,7 @@ bool NewSplitEditor::Private::numberChanged(const QString& newNumber)
         break;
       }
     }
+#endif
   }
   return rc;
 }
@@ -202,7 +207,8 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
   Q_ASSERT(view != 0);
   d->splitModel = qobject_cast<SplitModel*>(view->model());
 
-  d->counterAccount = Models::instance()->accountsModel()->itemById(counterAccountId);
+  auto const model = MyMoneyFile::instance()->accountsModel();
+  d->counterAccount = model->itemById(counterAccountId);
 
   d->ui->setupUi(this);
   d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
@@ -210,13 +216,12 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
 
   d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity});
   d->accountsModel->setHideEquityAccounts(false);
-  auto const model = Models::instance()->accountsModel();
   d->accountsModel->setSourceModel(model);
   d->accountsModel->sort(AccountsModel::Column::AccountName);
   d->ui->accountCombo->setModel(d->accountsModel);
 
   d->costCenterModel->setSortRole(Qt::DisplayRole);
-  d->costCenterModel->setSourceModel(Models::instance()->costCenterModel());
+  d->costCenterModel->setSourceModel(MyMoneyFile::instance()->costCenterModel());
   d->costCenterModel->sort(AccountsModel::Column::AccountName);
 
   d->ui->costCenterCombo->setEditable(true);
@@ -344,7 +349,8 @@ QString NewSplitEditor::costCenterId() const
 
 void NewSplitEditor::setCostCenterId(const QString& id)
 {
-  QModelIndex index = Models::indexById(d->costCenterModel, eMyMoney::Model::Roles::IdRole, id);
+  const auto baseIdx = MyMoneyFile::instance()->costCenterModel()->indexById(id);
+  const auto index = CostCenterModel::mapFromBaseSource(d->costCenterModel, baseIdx);
   if(index.isValid()) {
     d->ui->costCenterCombo->setCurrentIndex(index.row());
   }

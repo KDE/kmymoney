@@ -56,7 +56,6 @@
 #include "icons.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyenums.h"
-#include "models.h"
 
 using namespace Icons;
 
@@ -119,7 +118,7 @@ MyMoneyStorageMgr *SQLStorage::open(const QUrl &url)
     return nullptr;
 
   auto storage = new MyMoneyStorageMgr;
-  auto reader = std::make_unique<MyMoneyStorageSql>(storage, Models::instance(), url);
+  auto reader = std::make_unique<MyMoneyStorageSql>(storage, MyMoneyFile::instance(), url);
 
   dbUrl = url;
   if (dbUrl.password().isEmpty()) {
@@ -212,7 +211,7 @@ bool SQLStorage::save(const QUrl &url)
     KMessageBox::error(nullptr, i18n("Tried to access a file when it has not been opened"));
     return (rc);
   }
-  auto writer = new MyMoneyStorageSql(MyMoneyFile::instance()->storage(), Models::instance(), url);
+  auto writer = new MyMoneyStorageSql(MyMoneyFile::instance()->storage(), MyMoneyFile::instance(), url);
   writer->open(url, QIODevice::ReadWrite);
 //  writer->setProgressCallback(&KMyMoneyView::progressCallback);
   if (!writer->writeFile()) {
@@ -345,7 +344,7 @@ void SQLStorage::slotGenerateSql()
 
 bool SQLStorage::saveAsDatabase(const QUrl &url)
 {
-  auto writer = new MyMoneyStorageSql(MyMoneyFile::instance()->storage(), Models::instance(), url);
+  auto writer = new MyMoneyStorageSql(MyMoneyFile::instance()->storage(), MyMoneyFile::instance(), url);
   auto canWrite = false;
   switch (writer->open(url, QIODevice::WriteOnly)) {
     case 0:

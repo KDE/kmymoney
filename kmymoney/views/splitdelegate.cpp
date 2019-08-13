@@ -1,19 +1,19 @@
-/***************************************************************************
-                          splitdelegate.cpp
-                             -------------------
-    begin                : Wed Apr 6 2016
-    copyright            : (C) 2016 by Thomas Baumgart
-    email                : Thomas Baumgart <tbaumgart@kde.org>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2016-2019  Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "splitdelegate.h"
 
@@ -32,13 +32,13 @@
 // Project Includes
 
 #include "ledgerview.h"
-#include "models.h"
 #include "accountsmodel.h"
 #include "ledgermodel.h"
 #include "splitmodel.h"
 #include "newspliteditor.h"
 #include "mymoneyaccount.h"
 #include "modelenums.h"
+#include "mymoneyfile.h"
 
 using namespace eLedgerModel;
 
@@ -412,10 +412,11 @@ void SplitDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, con
     model->setData(index, QVariant::fromValue<MyMoneyMoney>(splitEditor->amount()), (int)Role::SplitValue);
 
     const QString transactionCommodity = model->data(index, (int)Role::TransactionCommodity).toString();
-    QModelIndex accIndex = Models::instance()->accountsModel()->indexById(splitEditor->accountId());
+    const auto accountsModel = MyMoneyFile::instance()->accountsModel();
+    QModelIndex accIndex = accountsModel->indexById(splitEditor->accountId());
     if(accIndex.isValid()) {
       /// @todo port to new model code (use idByIndex())
-      const MyMoneyAccount acc = Models::instance()->accountsModel()->itemByIndex(accIndex);
+      const MyMoneyAccount acc = accountsModel->itemByIndex(accIndex);
       if(transactionCommodity != acc.currencyId()) {
 #if 0
         ///  @todo call KCurrencyConversionDialog and update the model data

@@ -33,13 +33,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_simpleledgerview.h"
 #include "kmymoneyviewbase_p.h"
 #include "ledgerviewpage.h"
-#include "models.h"
 #include "accountsmodel.h"
 #include "institutionsmodel.h"
 #include "kmymoneyaccountcombo.h"
-#include "ui_simpleledgerview.h"
 #include "icons.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
@@ -102,15 +101,15 @@ public:
 
     q->connect(ui->accountCombo, SIGNAL(accountSelected(QString)), q, SLOT(openNewLedger(QString)));
     q->connect(ui->ledgerTab, &QTabWidget::currentChanged, q, &SimpleLedgerView::tabSelected);
-    q->connect(Models::instance(), &Models::modelsLoaded, q, &SimpleLedgerView::updateModels);
+    q->connect(MyMoneyFile::instance(), &MyMoneyFile::modelsLoaded, q, &SimpleLedgerView::updateModels);
     q->connect(ui->ledgerTab, &QTabWidget::tabCloseRequested, q, &SimpleLedgerView::closeLedger);
     // we reload the icon if the institution data changed
-    q->connect(Models::instance()->institutionsModel(), &InstitutionsModel::dataChanged, q, &SimpleLedgerView::setupCornerWidget);
+    q->connect(MyMoneyFile::instance()->institutionsModel(), &InstitutionsModel::dataChanged, q, &SimpleLedgerView::setupCornerWidget);
 
     accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity});
 
     accountsModel->setHideEquityAccounts(false);
-    auto const model = Models::instance()->accountsModel();
+    auto const model = MyMoneyFile::instance()->accountsModel();
     accountsModel->setSourceModel(model);
     accountsModel->sort(AccountsModel::Column::AccountName);
     ui->accountCombo->setModel(accountsModel);
@@ -165,7 +164,7 @@ void SimpleLedgerView::openNewLedger(QString accountId, bool makeCurrentLedger)
   }
 
   // need a new tab, we insert it before the rightmost one
-  const MyMoneyAccount acc = Models::instance()->accountsModel()->itemById(accountId);
+  const MyMoneyAccount acc = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
   if(!acc.id().isEmpty()) {
 
     // create new ledger view page
@@ -296,13 +295,15 @@ void SimpleLedgerView::setupCornerWidget()
   d->webSiteButton->hide();
   auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());
   if (view) {
-    auto index = Models::instance()->accountsModel()->indexById(view->accountId());
+    const auto accountsModel = MyMoneyFile::instance()->accountsModel();
+    auto index = accountsModel->indexById(view->accountId());
     if(index.isValid()) {
       // get icon name and url via account and institution object
-      const auto acc = Models::instance()->accountsModel()->itemByIndex(index);
+      const auto acc = accountsModel->itemByIndex(index);
       if (!acc.institutionId().isEmpty()) {
-        index = Models::instance()->institutionsModel()->indexById(acc.institutionId());
-        const auto institution = Models::instance()->institutionsModel()->itemByIndex(index);
+        const auto institutionsModel = MyMoneyFile::instance()->institutionsModel();
+        index = institutionsModel->indexById(acc.institutionId());
+        const auto institution = institutionsModel->itemByIndex(index);
         const auto url = institution.value(QStringLiteral("url"));
         const auto iconName = institution.value(QStringLiteral("icon"));
         if (!url.isEmpty() && !iconName.isEmpty()) {

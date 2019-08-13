@@ -43,7 +43,6 @@
 #include "kmymoneycategory.h"
 #include "kmymoneyaccountselector.h"
 #include "knewaccountdlg.h"
-#include "models.h"
 #include "accountsmodel.h"
 
 #include "dialogenums.h"
@@ -134,10 +133,7 @@ KAccountSelectDlg::KAccountSelectDlg(const eDialogs::Category accountType, const
   filterProxyModel->setHideEquityAccounts(true);
   filterProxyModel->addAccountGroup(accountTypes);
 
-  auto model = Models::instance()->accountsModel();
-  filterProxyModel->setSourceModel(model);
-  /// @todo port to new model code
-  // filterProxyModel->setSourceColumns(model->getColumns());
+  filterProxyModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
   filterProxyModel->sort(AccountsModel::Column::AccountName);
 
   d->ui->m_accountSelector->setModel(filterProxyModel);

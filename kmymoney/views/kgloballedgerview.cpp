@@ -57,7 +57,6 @@
 #include "registersearchline.h"
 #include "kfindtransactiondlg.h"
 #include "accountsmodel.h"
-#include "models.h"
 #include "mymoneyschedule.h"
 #include "mymoneysecurity.h"
 #include "mymoneytransaction.h"
@@ -600,7 +599,7 @@ void KGlobalLedgerView::slotContinueReconciliation()
             emit customActionRequested(View::Ledgers, eView::Action::SwitchView);
 /// @todo port to new model code
 #if 0
-          Models::instance()->accountsModel()->slotReconcileAccount(account, d->m_endingBalanceDlg->statementDate(), d->m_endingBalanceDlg->endingBalance());
+          MyMoneyFile::instance()->accountsModel()->slotReconcileAccount(account, d->m_endingBalanceDlg->statementDate(), d->m_endingBalanceDlg->endingBalance());
 #endif
           slotSetReconcileAccount(account, d->m_endingBalanceDlg->statementDate(), d->m_endingBalanceDlg->endingBalance());
 
@@ -2010,7 +2009,7 @@ void KGlobalLedgerView::slotFinishReconciliation()
     d->m_reconciliationAccount = file->account(d->m_reconciliationAccount.id());
 
     // Turn off reconciliation mode
-//    Models::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+//    MyMoneyFile::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 //    slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 //    d->m_myMoneyView->finishReconciliation(d->m_reconciliationAccount);
 
@@ -2098,7 +2097,7 @@ void KGlobalLedgerView::slotFinishReconciliation()
     // Turn off reconciliation mode
 /// @todo port to new model code
 #if 0
-    Models::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+    MyMoneyFile::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 #endif
     slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
   }
@@ -2121,7 +2120,7 @@ void KGlobalLedgerView::slotPostponeReconciliation()
     d->m_reconciliationAccount = file->account(d->m_reconciliationAccount.id());
 
     // Turn off reconciliation mode
-//    Models::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+//    MyMoneyFile::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 //    slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 //    d->m_myMoneyView->finishReconciliation(d->m_reconciliationAccount);
 
@@ -2144,7 +2143,7 @@ void KGlobalLedgerView::slotPostponeReconciliation()
     // Turn off reconciliation mode
 /// @todo port to new model code
 #if 0
-    Models::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+    MyMoneyFile::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 #endif
     slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
     d->loadView();
