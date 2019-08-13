@@ -162,7 +162,9 @@ LedgerView::~LedgerView()
 void LedgerView::showEvent(QShowEvent* event)
 {
   if (model() == nullptr) {
-    setAccount_bh(d->account);
+    if (!d->account.id().isEmpty()) {
+      setAccount_bh(d->account);
+    }
   }
   QTableView::showEvent(event);
 }
@@ -177,31 +179,24 @@ void LedgerView::setAccount(const MyMoneyAccount& acc)
   d->account = acc;
 }
 
+void LedgerView::setColumnsHidden(QVector<int> columns)
+{
+  d->columnSelector->setAlwaysHidden(columns);
+}
+
+void LedgerView::setColumnsShown(QVector<int> columns)
+{
+  d->columnSelector->setAlwaysVisible(columns);
+}
+
 void LedgerView::setAccount_bh(const MyMoneyAccount& acc)
 {
-  QVector<int> columns;
   switch(acc.accountType()) {
     case eMyMoney::Account::Type::Investment:
       break;
 
     default:
-      columns = { JournalModel::Column::Security,
-                  JournalModel::Column::CostCenter,
-                  JournalModel::Column::Quantity,
-                  JournalModel::Column::Price,
-                  JournalModel::Column::Amount,
-                  JournalModel::Column::Value, };
-      d->columnSelector->setAlwaysHidden(columns);
-      columns = { JournalModel::Column::Number,
-                  JournalModel::Column::Date,
-                  JournalModel::Column::Detail,
-                  JournalModel::Column::Reconciliation,
-                  JournalModel::Column::Payment,
-                  JournalModel::Column::Deposit,
-                  JournalModel::Column::Balance, };
-      d->columnSelector->setAlwaysVisible(columns);
-
-      horizontalHeader()->resizeSection(JournalModel::Column::Reconciliation, 20);
+      horizontalHeader()->resizeSection(JournalModel::Column::Reconciliation, 15);
 
       d->setDelegate(new LedgerDelegate(this));
       setItemDelegate(d->delegate);
@@ -222,12 +217,6 @@ void LedgerView::setAccount_bh(const MyMoneyAccount& acc)
 
   d->setSortRole(eMyMoney::Model::Roles::TransactionPostDateRole, JournalModel::Column::Date);
 
-  if (acc.hasOnlineMapping()) {
-    connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::dataChanged, this, &LedgerView::accountChanged);
-  } else {
-    disconnect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::dataChanged, this, &LedgerView::accountChanged);
-    d->delegate->setOnlineBalance(QDate(), MyMoneyMoney());
-  }
   setModel(d->filterModel);
   d->concatModel->setObjectName("LedgerView concatModel");
   d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel());

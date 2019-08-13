@@ -1,19 +1,20 @@
-/***************************************************************************
-                          ledgerviewpage.cpp
-                             -------------------
-    begin                : Sat Aug 8 2015
-    copyright            : (C) 2015 by Thomas Baumgart
-    email                : Thomas Baumgart <tbaumgart@kde.org>
- ***************************************************************************/
+/*
+ * Copyright 2015-2019  Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
 
 #include "ledgerviewpage.h"
 #include "mymoneyaccount.h"
@@ -86,6 +87,7 @@ QString LedgerViewPage::accountId() const
 
 void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
 {
+  QVector<int> columns;
   // get rid of current form
   delete d->form;
   d->form = 0;
@@ -96,6 +98,22 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
       break;
 
     default:
+      columns = { JournalModel::Column::Security,
+        JournalModel::Column::CostCenter,
+        JournalModel::Column::Quantity,
+        JournalModel::Column::Price,
+        JournalModel::Column::Amount,
+        JournalModel::Column::Value, };
+      d->ui->ledgerView->setColumnsHidden(columns);
+      columns = { JournalModel::Column::Number,
+        JournalModel::Column::Date,
+        JournalModel::Column::Detail,
+        JournalModel::Column::Reconciliation,
+        JournalModel::Column::Payment,
+        JournalModel::Column::Deposit,
+        JournalModel::Column::Balance, };
+      d->ui->ledgerView->setColumnsShown(columns);
+
       d->form = new NewTransactionForm(d->ui->formWidget);
       break;
   }

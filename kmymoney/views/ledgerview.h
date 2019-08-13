@@ -22,6 +22,7 @@
 // QT Includes
 
 #include <QTableView>
+#include <QVector>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -53,6 +54,9 @@ public:
    * been inverted depending on the account type.
    */
   bool showValuesInverted() const;
+
+  void setColumnsHidden(QVector<int> columns);
+  void setColumnsShown(QVector<int> columns);
 
 public Q_SLOTS:
   /**
