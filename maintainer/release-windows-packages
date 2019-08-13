@@ -6,13 +6,15 @@
 #
 # requirements:
 #
-#  osc	- opensuse build service command line client
+#  osc - opensuse build service command line client
 #
 # syntax: release-windows-packages [<options>] <mode>
 #
 # run ./release-windows-packages to see all modes and options
 #
 NAME=kmymoney
+# package name on download.kde.org
+RELEASE_NAME=$NAME
 
 PACKAGENAME32=mingw32-$NAME
 ROOT32=windows\:mingw\:win32
@@ -26,14 +28,25 @@ SRCROOT64=${ROOT64}
 ARCHOUT64=x86_64-w64-mingw32
 use64=1
 
-REPO=openSUSE_Leap_42.2
+REPO=openSUSE_Leap_42.3
 SRCREPO=$REPO
-usesrc=1
+usesrc=0
 
 PHABURL=https://phabricator.kde.org
 oscoptions="-A https://api.opensuse.org"
 apitoken=cli-uxo23l4q5qrzoyscbz5kp4zcngqp
 options='projectPHIDs[]=PHID-PROJ-3qa4tomwgrmcmp4ym2ow'
+
+# abort on errors
+set -e
+
+echo2() { printf "%s\n" "$*" >&2; }
+
+which 7z >/dev/null 2>&1
+if test $? -ne 0; then
+    echo "7z not found, run 'zypper install p7zip'"
+    exit 1
+fi
 
 self=$(realpath $0)
 
@@ -41,24 +54,31 @@ if ! test -d "work"; then
     mkdir work
 fi
 
+echo2 "running mode $1"
 dryrun=0
 update=0
+update_symlink=1
 curl=curl
 
 # check options
 for var in "$@"; do
 case $var in
---update-32) ## update x86_64 variant
+--update-32) ## update i686 variant
 	use64=0
 	usesrc=0
 	update=1
 	shift
 	;;
 
---update-64) ## update i686 variant
+--update-64) ## update x86_64 variant
 	use32=0
 	usesrc=0
 	update=1
+	shift
+	;;
+
+--symlink) ## update 'latest' symbolic link
+	update_symlink=1
 	shift
 	;;
 
@@ -73,7 +93,6 @@ done
 function clean() {
 	rm -rf work/*
 }
-
 
 function download() {
 	cd work
@@ -174,13 +193,17 @@ function upload() {
 
 function createdescription() {
 	getversion
+	description="Please move the $RELEASE_NAME related files which has been uploaded to upload.kde.org/incoming to download mirror 'stable/$RELEASE_NAME/$VERSION' location"
 	if test $update -eq 1; then
-		description="Please move the $NAME related files which has been uploaded to upload.kde.org/incoming to download mirror 'stable/$NAME/$VERSION' location and remove the old files from this directory."
+		description="$description and remove the old files from this directory."
+	elif test $update_symlink -eq 1; then
+		description="$description and update the symbolic link 'stable/$RELEASE_NAME/latest' to 'stable/$RELEASE_NAME/$VERSION'"
 	else
-		description="Please move the $NAME related files which has been uploaded to upload.kde.org/incoming to download mirror 'stable/$NAME/$VERSION' location and please update the symbolic link 'stable/$NAME/latest' to 'stable/$NAME/$VERSION'"
+		description="$description."
 	fi
-	sums=$(cat work/out/$NAME.sha256sum | gawk 'BEGIN { print "dir	 shasum								   file"}  $2 ~ /i686/ { print "win32 " $0 } $2 ~ /x86_64/ { print "win64 " $0 } $2 ~ /[a-z]+-[0-9]/ { print "src   " $0 }')
+	sums=$(cat work/out/$NAME.sha256sum | gawk 'BEGIN { print "dir	 shasum								   file"}  $2 ~ /mingw32/ { print "win32 " $0 } $2 ~ /mingw64/ { print "win64 " $0 } $2 ~ /\-src/ { print "src   " $0 }')
 	echo -e "$description\n\n$sums" > work/description
+	cat work/description
 	touch work/$1.finished
 }
 
@@ -189,7 +212,7 @@ function ticket() {
 	description=$(cat work/description)
 	$curl $PHABURL/api/maniphest.createtask \
 	-d api.token=$apitoken \
-	-d "title=tarball move request for stable/$NAME/$VERSION" \
+	-d "title=tarball move request for stable/$RELEASE_NAME/$VERSION" \
 	-d "description=$description" \
 	-d "$options"
 	touch work/$1.finished
