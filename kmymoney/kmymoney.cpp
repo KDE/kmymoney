@@ -3683,9 +3683,9 @@ KMStatus::~KMStatus()
 
 void KMyMoneyApp::Private::unlinkStatementXML()
 {
-  QDir d(KMyMoneySettings::logPath(), "kmm-statement*");
-  for (uint i = 0; i < d.count(); ++i) {
-    qDebug("Remove %s", qPrintable(d[i]));
-    d.remove(KMyMoneySettings::logPath() + QString("/%1").arg(d[i]));
+  QDir dir(KMyMoneySettings::logPath(), "kmm-statement*");
+  for (uint i = 0; i < dir.count(); ++i) {
+    qDebug("Remove %s", qPrintable(dir[i]));
+        dir.remove(KMyMoneySettings::logPath() + QString("/%1").arg(dir[i]));
   }
 }
