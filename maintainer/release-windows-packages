@@ -193,11 +193,11 @@ function upload() {
 
 function createdescription() {
 	getversion
-	description="Please move the $RELEASE_NAME related files which has been uploaded to upload.kde.org/incoming to download mirror 'stable/$RELEASE_NAME/$VERSION' location"
+	description="Please move the $RELEASE_NAME related files which have been uploaded to upload.kde.org/incoming to download mirror 'stable/$RELEASE_NAME/$VERSION' location"
 	if test $update -eq 1; then
 		description="$description and remove the old files from this directory."
 	elif test $update_symlink -eq 1; then
-		description="$description and update the symbolic link 'stable/$RELEASE_NAME/latest' to 'stable/$RELEASE_NAME/$VERSION'"
+		description="$description and update the symbolic link 'stable/$RELEASE_NAME/latest' to 'stable/$RELEASE_NAME/$VERSION'."
 	else
 		description="$description."
 	fi
