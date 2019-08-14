@@ -2115,9 +2115,10 @@ public:
           throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("dropping view %1").arg(tt.key()));
       }
     }
-    query.finish();
 
     while ((m_dbVersion < m_db.currentVersion()) && (rc == 0)) {
+      qDebug() << "Perform upgrade to db layout version" << m_dbVersion+1;
+      query.finish();
       switch (m_dbVersion) {
         case 0:
           if ((rc = upgradeToV1()) != 0) return (1);
@@ -2171,6 +2172,7 @@ public:
           qWarning("Unknown version number in database - %d", m_dbVersion);
       }
     }
+    query.finish();
 
     // restore VIEWs
     lowerTables = tables(QSql::AllTables);
@@ -2599,30 +2601,36 @@ public:
         }
       }
     }
+    query.finish();
     for (MyMoneyDbTable::index_iterator i = t.indexBegin(); i != t.indexEnd(); ++i) {
       QString indexName = t.name() + '_' + i->name() + "_idx";
       if (!query.exec(m_driver->dropIndexString(t.name(), indexName))) {
         buildError(query, Q_FUNC_INFO, QString("Error dropping index from %1").arg(t.name()));
         return false;
       }
+      query.finish();
     }
     if (!query.exec(QString("ALTER TABLE " + t.name() + " RENAME TO " + tempTableName + ';'))) {
       buildError(query, Q_FUNC_INFO, QString("Error renaming table %1").arg(t.name()));
       return false;
     }
+    query.finish();
     createTable(t, toVersion);
     if (q->getRecCount(tempTableName) > 0) {
+      query.finish();
       query.prepare(QString("INSERT INTO " + t.name() + " (" + t.columnList(fromVersion, true) +
                           ") SELECT " + t.columnList(fromVersion, false) + " FROM " + tempTableName + ';'));
       if (!query.exec()) { // krazy:exclude=crashy
           buildError(query, Q_FUNC_INFO, QString("Error inserting into new table %1").arg(t.name()));
           return false;
       }
+      query.finish();
     }
     if (!query.exec(QString("DROP TABLE " + tempTableName + ';'))) {
       buildError(query, Q_FUNC_INFO, QString("Error dropping old table %1").arg(t.name()));
       return false;
     }
+    query.finish();
     return true;
   }
 
