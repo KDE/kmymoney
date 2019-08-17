@@ -192,6 +192,9 @@ add_feature_info("SQL Storage" ENABLE_SQLSTORAGE "Allows storing your financial 
 cmake_dependent_option(ENABLE_SQLCIPHER "Enable SQLCipher support." ON
                        "SQLCIPHER_FOUND" OFF)
 
+cmake_dependent_option(ENABLE_SQLTRACER "Dump SQL requests to console" OFF
+                       "ENABLE_SQLSTORAGE" OFF)
+
 # Otherwise compilers halt on something like that:
 # ld: library not found for -lsqlcipher
 # on MS Windows, FreeBSD, macOS, and Ubuntu 14.04 (Ubuntu has CMake 3.5.1 but I'm not sure if it's the one to blame).
@@ -200,6 +203,8 @@ if(ENABLE_SQLCIPHER AND (NOT CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_VERSION 
 endif()
 
 add_feature_info("SQLCipher" ENABLE_SQLCIPHER "Allows encrypting your SQLite3 database.")
+
+add_feature_info("SQL Tracer" ENABLE_SQLTRACER "It traces the SQL queries to the console.")
 
 cmake_dependent_option(ENABLE_IBANBICDATA "Enable IBAN/BIC data support." OFF
                        "Qt5Sql_FOUND" OFF)
