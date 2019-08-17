@@ -126,6 +126,7 @@ int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
               }
               query.exec(QStringLiteral("SELECT count(*) FROM sqlite_master")); // SQLCipher recommended way to check if password is correct
               if (query.next()) {
+                query.finish();
                 rc = d->createTables(); // check all tables are present, create if not
                 break;
               }
