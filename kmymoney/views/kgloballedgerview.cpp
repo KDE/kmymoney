@@ -1264,26 +1264,24 @@ void KGlobalLedgerView::slotMoveToAccount(const QString& id)
     pMenus[Menu::Transaction]->close();
 
   if (!d->m_selectedTransactions.isEmpty()) {
+    const auto file = MyMoneyFile::instance();
     MyMoneyFileTransaction ft;
     try {
       foreach (const auto selection, d->m_selectedTransactions) {
         if (d->m_currentAccount.accountType() == eMyMoney::Account::Type::Investment) {
           d->moveInvestmentTransaction(d->m_currentAccount.id(), id, selection.transaction());
         } else {
-          auto changed = false;
-          auto t = selection.transaction();
-
-          foreach (const auto split, selection.transaction().splits()) {
-            if (split.accountId() == d->m_currentAccount.id()) {
-              MyMoneySplit s = split;
-              s.setAccountId(id);
-              t.modifySplit(s);
-              changed = true;
-            }
-          }
-          if (changed) {
-            MyMoneyFile::instance()->modifyTransaction(t);
-          }
+          // we get the data afresh from the engine as
+          // it might have changed by a previous iteration
+          // in this loop. Use case: two splits point to
+          // the same account and both are selected.
+          auto tid = selection.transaction().id();
+          auto sid = selection.split().id();
+          auto t = file->transaction(tid);
+          auto s = t.splitById(sid);
+          s.setAccountId(id);
+          t.modifySplit(s);
+          file->modifyTransaction(t);
         }
       }
       ft.commit();
@@ -1327,10 +1325,9 @@ void KGlobalLedgerView::slotUpdateMoveToAccountMenu()
 
     accountSet.load(d->m_moveToAccountSelector);
     // remove those accounts that we currently reference
+    // with the selected items
     foreach (const auto selection, d->m_selectedTransactions) {
-      foreach (const auto split, selection.transaction().splits()) {
-        d->m_moveToAccountSelector->removeItem(split.accountId());
-      }
+      d->m_moveToAccountSelector->removeItem(selection.split().accountId());
     }
     // remove those accounts from the list that are denominated
     // in a different currency
