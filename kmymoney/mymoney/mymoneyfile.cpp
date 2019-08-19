@@ -90,8 +90,6 @@ using namespace eMyMoney;
 
 const QString MyMoneyFile::AccountSeparator = QChar(':');
 
-MyMoneyFile MyMoneyFile::file;
-
 typedef QList<std::pair<QString, QDate> > BalanceNotifyList;
 typedef QMap<QString, bool> CacheNotifyList;
 
@@ -179,7 +177,8 @@ class MyMoneyFile::Private
 {
 public:
   Private(MyMoneyFile* qq)
-    : m_storage(0)
+    : m_file(qq)
+    , m_dirty(false)
     , m_inTransaction(false)
     , payeesModel(qq)
     , costCenterModel(qq)
@@ -198,21 +197,21 @@ public:
     /// @todo add new models here
     {
 #ifdef KMM_MODELTEST
-    MyMoneyFile* file = MyMoneyFile::instance();
-    new ModelTest(&payeesModel, file);
-    new ModelTest(&costCenterModel, file);
-    new ModelTest(&schedulesModel, file);
-    new ModelTest(&tagsModel, file);
-    new ModelTest(&securitiesmodel, file);
-    new ModelTest(&currenciesModel, file);
-    new ModelTest(&budgetsModel, file);
-    new ModelTest(&accountsModel, file);
-    new ModelTest(&institutionsModel, file);
-    new ModelTest(&journalModel, file);
-    new ModelTest(&priceModel, file);
-    new ModelTest(&parametersModel, file);
-    new ModelTest(&onlineJobsModel, file);
-    new ModelTest(&reportsModel, file);
+    new ModelTest(&payeesModel, m_file);
+    new ModelTest(&userModel, m_file);
+    new ModelTest(&costCenterModel, m_file);
+    new ModelTest(&schedulesModel, m_file);
+    new ModelTest(&tagsModel, m_file);
+    new ModelTest(&securitiesmodel, m_file);
+    new ModelTest(&currenciesModel, m_file);
+    new ModelTest(&budgetsModel, m_file);
+    new ModelTest(&accountsModel, m_file);
+    new ModelTest(&institutionsModel, m_file);
+    new ModelTest(&journalModel, m_file);
+    new ModelTest(&priceModel, m_file);
+    new ModelTest(&parametersModel, m_file);
+    new ModelTest(&onlineJobsModel, m_file);
+    new ModelTest(&reportsModel, m_file);
     /// @todo add new models here
 #endif
     qq->connect(qq, &MyMoneyFile::modelsReadyToUse, &journalModel, &JournalModel::updateBalances);
@@ -320,26 +319,22 @@ public:
       throw MYMONEYEXCEPTION(QString::fromLatin1("No transaction started for %1").arg(QString::fromLatin1(txt)));
   }
 
-  void priceChanged(const MyMoneyFile& file, const MyMoneyPrice price) {
+  void priceChanged(const MyMoneyPrice price) {
     // get all affected accounts and add them to the m_valueChangedSet
     QList<MyMoneyAccount> accList;
-    file.accountList(accList);
+    m_file->accountList(accList);
     QList<MyMoneyAccount>::const_iterator account_it;
     for (account_it = accList.constBegin(); account_it != accList.constEnd(); ++account_it) {
       QString currencyId = account_it->currencyId();
-      if (currencyId != file.baseCurrency().id() && (currencyId == price.from() || currencyId == price.to())) {
+      if (currencyId != m_file->baseCurrency().id() && (currencyId == price.from() || currencyId == price.to())) {
         // this account is not in the base currency and the price affects it's value
         m_valueChangedSet.insert(account_it->id());
       }
     }
   }
 
-  /**
-    * This member points to the storage strategy
-    */
-  MyMoneyStorageMgr *m_storage;
-
-
+  MyMoneyFile*           m_file;
+  bool                   m_dirty;
   bool                   m_inTransaction;
   MyMoneySecurity        m_baseCurrency;
 
@@ -434,6 +429,7 @@ MyMoneyFile::~MyMoneyFile()
 
 MyMoneyFile* MyMoneyFile::instance()
 {
+  static MyMoneyFile file;
   return &file;
 }
 

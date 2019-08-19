@@ -1750,8 +1750,6 @@ Q_SIGNALS:
   void modelsReadyToUse();
 
 private:
-  static MyMoneyFile file;
-
   MyMoneyFile& operator=(MyMoneyFile&); // not allowed for singleton
   MyMoneyFile(const MyMoneyFile&);      // not allowed for singleton
 
