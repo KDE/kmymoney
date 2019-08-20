@@ -68,6 +68,7 @@
         "Name": "SEPA orders",
         "Name[ca@valencia]": "Ordres SEPA",
         "Name[ca]": "Ordres SEPA",
+        "Name[de]": "SEPA-Aufträge",
         "Name[en_GB]": "SEPA orders",
         "Name[es]": "Pagos SEPA",
         "Name[fr]": "Virements SEPA",
