@@ -2104,6 +2104,10 @@ const QStringList MyMoneyFile::consistencyCheck()
       if ((*it_s).action() == MyMoneySplit::ActionInterest)
         interestAccounts[(*it_s).accountId()] = true;
     }
+    if (t.splits().count() < 2) {
+      rc << i18n("  * transaction '%1' has only %2 of 2 expected splits.", t.id(), t.splits().count());
+      ++unfixedCount;
+    }
   }
   QSet<MyMoneyAccount::accountTypeE> supportedAccountTypes;
   supportedAccountTypes << MyMoneyAccount::Checkings
