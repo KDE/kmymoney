@@ -1696,7 +1696,7 @@ QString PivotTable::renderHTML() const
 
       ++it_outergroup_map;
     }
-    qSort(outergroups.begin(), outergroups.end());
+    std::sort(outergroups.begin(), outergroups.end());
 
     QList<PivotOuterGroup>::const_iterator it_outergroup = outergroups.constBegin();
     while (it_outergroup != outergroups.constEnd()) {

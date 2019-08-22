@@ -181,7 +181,7 @@ void BankingPage::memoColSelected(int col)
     if(validateSelectedColumn(col, Column::Memo)) {
       if (col != - 1 && !m_profile->m_memoColList.contains(col)) {
         m_profile->m_memoColList.append(col);
-        qSort(m_profile->m_memoColList);
+        std::sort(m_profile->m_memoColList.begin(), m_profile->m_memoColList.end());
       }
     }
   }

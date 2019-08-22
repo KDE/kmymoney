@@ -593,7 +593,7 @@ public:
     if (!overdues.isEmpty()) {
       m_html += "<div class=\"gap\">&nbsp;</div>\n";
 
-      qSort(overdues);
+      std::sort(overdues.begin(), overdues.end());
       QList<MyMoneySchedule>::Iterator it;
       QList<MyMoneySchedule>::Iterator it_f;
 
@@ -630,7 +630,7 @@ public:
     }
 
     if (!schedule.isEmpty()) {
-      qSort(schedule);
+      std::sort(schedule.begin(), schedule.end());
 
       // Extract todays payments if any
       QList<MyMoneySchedule> todays;
@@ -711,7 +711,7 @@ public:
         bool needMoreLess = m_showAllSchedules;
 
         QDate lastDate = QDate::currentDate().addMonths(1);
-        qSort(schedule);
+        std::sort(schedule.begin(), schedule.end());
         do {
           it = schedule.begin();
           if (it == schedule.end())
@@ -761,7 +761,7 @@ public:
           }
 
           (*it).setNextDueDate((*it).nextPayment((*it).nextDueDate()));
-          qSort(schedule);
+          std::sort(schedule.begin(), schedule.end());
         } while (1);
 
         if (needMoreLess) {

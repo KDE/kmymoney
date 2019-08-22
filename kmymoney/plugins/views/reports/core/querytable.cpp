@@ -264,7 +264,7 @@ void QueryTable::init()
     m_postcolumns << ctBalance;
 
   TableRow::setSortCriteria(sort);
-  qSort(m_rows);
+  std::sort(m_rows.begin(), m_rows.end());
   if (m_config.isShowingColumnTotals())
     constructTotalRows(); // adds total rows to m_rows
 }

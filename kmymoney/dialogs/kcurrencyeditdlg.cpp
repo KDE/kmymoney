@@ -278,7 +278,7 @@ void KCurrencyEditDlg::slotLoadCurrencies()
 
   // sort the currencies ...
   // ... and make sure a few precious metals are at the ned
-  qSort(list.begin(), list.end(),
+  std::sort(list.begin(), list.end(),
         [=] (const MyMoneySecurity& c1, const MyMoneySecurity& c2)
         {
           const bool c1Metal = c1.tradingSymbol().startsWith(QLatin1Char('X')) && metalSymbols.contains(c1.tradingSymbol());

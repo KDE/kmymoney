@@ -502,7 +502,7 @@ bool MyMoneyTemplate::addAccountStructure(QDomElement& parent, const MyMoneyAcco
   if (acc.accountList().count() > 0) {
     QList<MyMoneyAccount> list;
     MyMoneyFile::instance()->accountList(list, acc.accountList(), false);
-    qSort(list.begin(), list.end(), nameLessThan);
+    std::sort(list.begin(), list.end(), nameLessThan);
     QList<MyMoneyAccount>::Iterator it;
     for (it = list.begin(); it != list.end(); ++it) {
       addAccountStructure(account, *it);

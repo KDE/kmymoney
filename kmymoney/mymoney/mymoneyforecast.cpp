@@ -335,7 +335,7 @@ public:
     if (schedule.count() > 0) {
       QList<MyMoneySchedule>::Iterator it;
       do {
-        qSort(schedule);
+        std::sort(schedule.begin(), schedule.end());
         it = schedule.begin();
         if (it == schedule.end())
           break;

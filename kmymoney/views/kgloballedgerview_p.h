@@ -1556,7 +1556,7 @@ public:
       QList<MyMoneyMoney> unionList;
       unionList.append(tempList);
       unionList.append(sumList);
-      qSort(unionList);
+      std::sort(unionList.begin(), unionList.end());
       sumList.clear();
       MyMoneyMoney smallestSumFromUnion = unionList.first();
       sumList.append(smallestSumFromUnion);

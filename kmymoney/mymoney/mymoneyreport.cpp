@@ -874,7 +874,7 @@ void MyMoneyReport::validDateRange(QDate& db, QDate& de)
     QDate tmpBegin, tmpEnd;
 
     if (!list.isEmpty()) {
-      qSort(list);
+      std::sort(list.begin(), list.end());
       // try to use the post dates
       tmpBegin = list.front().postDate();
       tmpEnd = list.back().postDate();

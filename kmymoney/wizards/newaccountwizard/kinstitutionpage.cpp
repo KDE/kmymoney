@@ -72,7 +72,7 @@ namespace NewAccountWizard
 
     d->m_list.clear();
     d->m_list = MyMoneyFile::instance()->institutionList();
-    qSort(d->m_list);
+    std::sort(d->m_list.begin(), d->m_list.end());
 
     QList<MyMoneyInstitution>::const_iterator it_l;
     d->ui->m_institutionComboBox->addItem(QString());

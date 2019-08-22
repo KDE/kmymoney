@@ -3156,7 +3156,7 @@ QList<MyMoneySecurity> MyMoneyFile::availableCurrencyList() const
   currencyList.append(ancientCurrencies().keys());
 
   // sort the currencies ...
-  qSort(currencyList.begin(), currencyList.end(),
+  std::sort(currencyList.begin(), currencyList.end(),
         [] (const MyMoneySecurity& c1, const MyMoneySecurity& c2)
         {
           return c1.name().compare(c2.name()) < 0;

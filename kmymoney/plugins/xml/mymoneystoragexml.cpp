@@ -1694,11 +1694,17 @@ void MyMoneyStorageXML::writeAccounts(QDomElement& accounts)
   QList<MyMoneyAccount>::ConstIterator it;
   accounts.setAttribute(attributeName(Attribute::General::Count), list.count() + 5);
 
-  writeAccount(accounts, m_storage->asset());
-  writeAccount(accounts, m_storage->liability());
-  writeAccount(accounts, m_storage->expense());
-  writeAccount(accounts, m_storage->income());
-  writeAccount(accounts, m_storage->equity());
+  writeAccount(accounts, m_file->accountsModel()->itemByIndex(m_file->accountsModel()->assetIndex()));
+  writeAccount(accounts, m_file->accountsModel()->itemByIndex(m_file->accountsModel()->liabilityIndex()));
+  writeAccount(accounts, m_file->accountsModel()->itemByIndex(m_file->accountsModel()->expenseIndex()));
+  writeAccount(accounts, m_file->accountsModel()->itemByIndex(m_file->accountsModel()->incomeIndex()));
+  writeAccount(accounts, m_file->accountsModel()->itemByIndex(m_file->accountsModel()->equityIndex()));
+
+#ifdef KMM_DEBUG
+  // in case of debug compilation, we save the accounts ordered by id
+  // allowing to compare the file contents before and after write
+  std::sort(list.begin(), list.end(), [] (const MyMoneyAccount& a1, const MyMoneyAccount& a2) { return a1.id() < a2.id(); } );
+#endif
 
   signalProgress(0, list.count(), i18n("Saving accounts..."));
   int i = 0;
@@ -1717,7 +1723,16 @@ void MyMoneyStorageXML::writeTransactions(QDomElement& transactions)
 {
   MyMoneyTransactionFilter filter;
   filter.setReportAllSplits(false);
-  const auto list = m_storage->transactionList(filter);
+  QList<MyMoneyTransaction> list;
+
+  m_file->transactionList(list, filter);
+
+#ifdef KMM_DEBUG
+  // in case of debug compilation, we save the transactions ordered by id
+  // allowing to compare the file contents before and after write
+  std::sort(list.begin(), list.end(), [] (const MyMoneyTransaction& t1, const MyMoneyTransaction& t2) { return t1.id() < t2.id(); } );
+#endif
+
   transactions.setAttribute(attributeName(Attribute::General::Count), list.count());
 
   signalProgress(0, list.count(), i18n("Saving transactions..."));
@@ -1736,9 +1751,18 @@ void MyMoneyStorageXML::writeTransaction(QDomElement& transaction, const MyMoney
 
 void MyMoneyStorageXML::writeSchedules(QDomElement& parent)
 {
-  SchedulesModel::xmlWriter writer(&MyMoneyXmlContentHandler::writeSchedule, *m_doc, parent);
-  const auto count = m_file->schedulesModel()->processItems(&writer);
-  parent.setAttribute(attributeName(Attribute::General::Count), count);
+  auto list = m_file->scheduleList();
+
+#ifdef KMM_DEBUG
+  // in case of debug compilation, we save the schedules ordered by id
+  // allowing to compare the file contents before and after write
+  std::sort(list.begin(), list.end(), [] (const MyMoneySchedule& t1, const MyMoneySchedule& t2) { return t1.id() < t2.id(); } );
+#endif
+
+  for (auto it = list.constBegin(); it != list.constEnd(); ++it) {
+    writeSchedule(parent, *it);
+  }
+  parent.setAttribute(attributeName(Attribute::General::Count), list.count());
 }
 
 void MyMoneyStorageXML::writeSchedule(QDomElement& scheduledTx, const MyMoneySchedule& tx)
