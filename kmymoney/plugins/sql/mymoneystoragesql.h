@@ -133,7 +133,7 @@ public:
    * be saved in a different file or format. It will ensure that all data
    * from the database is available in memory to enable it to be written.
    */
-  virtual void fillStorage();
+  // virtual void fillStorage();
 
   /**
     * The following functions correspond to the identically named (usually) functions

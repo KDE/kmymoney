@@ -621,7 +621,7 @@ void MyMoneyDbTable::buildSQLStrings()
   }
 }
 
-const QString MyMoneyDbTable::columnList(const int version, bool useNewNames) const
+QString MyMoneyDbTable::columnList(const int version, bool useNewNames) const
 {
   field_iterator ft = m_fields.begin();
   QString qs;

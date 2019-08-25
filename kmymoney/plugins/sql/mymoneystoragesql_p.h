@@ -1648,6 +1648,7 @@ public:
     m_storage->loadAccounts(q->fetchAccounts());
   }
 
+#if 0
   void readTransactions(const QString& tidList, const QString& dateClause)
   {
     Q_Q(MyMoneyStorageSql);
@@ -1662,6 +1663,7 @@ public:
   {
     readTransactions(QString(), QString());
   }
+#endif
 
   MyMoneySplit readSplit(const QSqlQuery& query) const
   {
