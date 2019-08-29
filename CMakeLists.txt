@@ -43,6 +43,19 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_D
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
+# reimplementation because kmymoney app image is bound to ECM 5.36
+if("${ECM_GLOBAL_FIND_VERSION}" VERSION_LESS "5.38.0")
+  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+  if(WIN32)
+     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+  else()
+     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+  endif()
+elseif(NOT WIN32)
+   set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+endif()
+
 include(FeatureSummary)
 include(CMakeDependentOption)
 
