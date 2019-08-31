@@ -158,41 +158,6 @@ private:
 
 
 template <typename T>
-class MyMoneyModelIdToItemMapper
-{
-public:
-  MyMoneyModelIdToItemMapper() {}
-
-  void updateItem(const QString& id, TreeItem<T>* item)
-  {
-    idToItemMap.insert(id, item);
-  }
-
-  void removeItem(const QString& id)
-  {
-    idToItemMap.remove(id);
-  }
-
-  TreeItem<T>* itemById(const QString& id) const
-  {
-    return idToItemMap.value(id, nullptr);
-  }
-
-  void clear()
-  {
-    idToItemMap.clear();
-  }
-
-private:
-  QHash<QString, TreeItem<T>*>    idToItemMap;
-};
-
-
-
-
-
-
-template <typename T>
 class MyMoneyModel : public MyMoneyModelBase
 {
 public:
@@ -217,7 +182,7 @@ public:
   void useIdToItemMapper(bool use)
   {
     if (use && (m_idToItemMapper == nullptr)) {
-      m_idToItemMapper = new MyMoneyModelIdToItemMapper<T>();
+      m_idToItemMapper = new QHash<QString, TreeItem<T>*>();
 
     } else if(!use && (m_idToItemMapper != nullptr)) {
       delete m_idToItemMapper;
@@ -331,7 +296,7 @@ public:
     for (int row = 0; row < rows; ++row) {
       if (m_idToItemMapper) {
         const auto idx = index(startRow, 0, parent);
-        m_idToItemMapper->removeItem(idx.data(eMyMoney::Model::IdRole).toString());
+        m_idToItemMapper->remove(idx.data(eMyMoney::Model::IdRole).toString());
       }
       if (!parentItem->removeChild(startRow))
         break;
@@ -406,7 +371,7 @@ public:
   virtual QModelIndex indexById(const QString& id) const
   {
     if (m_idToItemMapper) {
-      const auto item = m_idToItemMapper->itemById(id);
+      const auto item = m_idToItemMapper->value(id, nullptr);
       if (item) {
         return createIndex(item->row(), 0, item);
       }
@@ -552,7 +517,7 @@ public:
     item = T(nextId(), item);
     static_cast<TreeItem<T>*>(idx.internalPointer())->dataRef() = item;
     if (m_idToItemMapper) {
-      m_idToItemMapper->updateItem(item.id(), static_cast<TreeItem<T>*>(idx.internalPointer()));
+      m_idToItemMapper->insert(item.id(), static_cast<TreeItem<T>*>(idx.internalPointer()));
     }
     setDirty();
     emit dataChanged(idx, index(row, columnCount()-1));
@@ -562,8 +527,8 @@ public:
   {
     if (idx.isValid()) {
       if (m_idToItemMapper) {
-        m_idToItemMapper->removeItem(static_cast<const TreeItem<T>*>(idx.internalPointer())->constDataRef().id());
-        m_idToItemMapper->updateItem(item.id(), static_cast<TreeItem<T>*>(idx.internalPointer()));
+        m_idToItemMapper->remove(static_cast<const TreeItem<T>*>(idx.internalPointer())->constDataRef().id());
+        m_idToItemMapper->insert(item.id(), static_cast<TreeItem<T>*>(idx.internalPointer()));
       }
       static_cast<TreeItem<T>*>(idx.internalPointer())->dataRef() = item;
       setDirty();
@@ -625,14 +590,14 @@ protected:
   }
 
 protected:
-  TreeItem<T> *                   m_rootItem;
-  MyMoneyFile*                    m_file;
-  MyMoneyModelIdToItemMapper<T>*  m_idToItemMapper;
-  quint64                         m_nextId;
-  QString                         m_idLeadin;
-  quint8                          m_idSize;
-  bool                            m_dirty;
-  QRegularExpression              m_idMatchExp;
+  TreeItem<T> *                 m_rootItem;
+  MyMoneyFile*                  m_file;
+  QHash<QString, TreeItem<T>*>* m_idToItemMapper;
+  quint64                       m_nextId;
+  QString                       m_idLeadin;
+  quint8                        m_idSize;
+  bool                          m_dirty;
+  QRegularExpression            m_idMatchExp;
 };
 
 #endif // MYMONEYMODEL_H

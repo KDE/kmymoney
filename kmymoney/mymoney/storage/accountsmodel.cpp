@@ -80,7 +80,7 @@ struct AccountsModel::Private
           const auto idx = q->index(row, 0, parent);
           static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->dataRef() = subAccount;
           if (q->m_idToItemMapper) {
-            q->m_idToItemMapper->updateItem(subAccountId, static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer()));
+            q->m_idToItemMapper->insert(subAccountId, static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer()));
           }
           if (subAccount.value("PreferredAccount") == QLatin1String("Yes")
             && !subAccount.isClosed() ) {
@@ -386,7 +386,7 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
 
         case Column::Balance:
           {
-            auto security = MyMoneyFile::instance()->currency(account.currencyId());
+            auto security = MyMoneyFile::instance()->security(account.currencyId());
             const auto prec = MyMoneyMoney::denomToPrec(account.fraction());
             return d->adjustedBalance(account.balance(), account).formatMoney(security.tradingSymbol(), prec);
           }
@@ -687,7 +687,7 @@ QList<MyMoneyAccount> AccountsModel::itemList() const
 QModelIndex AccountsModel::indexById(const QString& id) const
 {
   if (m_idToItemMapper) {
-    const auto item = m_idToItemMapper->itemById(id);
+    const auto item = m_idToItemMapper->value(id, nullptr);
     if (item) {
       return createIndex(item->row(), 0, item);
     }
