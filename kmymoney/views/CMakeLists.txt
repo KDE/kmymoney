@@ -24,6 +24,8 @@ if(ENABLE_UNFINISHEDFEATURES)
     simpleledgerview.cpp
     ledgerviewpage.cpp
     ledgerview.cpp
+    ledgeraccountfilter.cpp
+    ledgerpayeefilter.cpp
     ledgerdelegate.cpp
     newspliteditor.cpp
     newtransactioneditor.cpp

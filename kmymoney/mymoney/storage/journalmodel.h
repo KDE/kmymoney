@@ -36,6 +36,7 @@
 #include "mymoneyobject.h"
 #include "mymoneytransaction.h"
 #include "mymoneysplit.h"
+#include "mymoneymoney.h"
 
 class MyMoneyTransactionFilter;
 
@@ -55,14 +56,16 @@ public:
   inline const MyMoneyTransaction* transactionPtr() const { return m_transaction.data(); }
   inline const MyMoneyTransaction& transaction() const { return *m_transaction; }
   inline const MyMoneySplit& split() const { return m_split; }
+  inline const MyMoneyMoney& balance() const { return m_balance; }
   inline const QString& id() const { return m_id; }
   inline bool hasReferenceTo(const QString& id) const { return m_transaction->hasReferenceTo(id); }
 
+  inline void setBalance(const MyMoneyMoney& balance) { m_balance = balance; }
 private:
   QString                             m_id;
   QSharedPointer<MyMoneyTransaction>  m_transaction;
   MyMoneySplit                        m_split;
-
+  MyMoneyMoney                        m_balance;
 };
 
 class JournalModelNewTransaction;
@@ -77,6 +80,7 @@ public:
   enum Column {
     Number = 0,
     Date,
+    Account,
     Security,
     CostCenter,
     Detail,
@@ -123,6 +127,12 @@ public:
 
   MyMoneyMoney balance(const QString& accountId, const QDate& date) const;
 
+  /**
+   * This method returns a key for a specific date that can
+   * be used in connection with lowerBound() and upperBound()
+   * to get indexes into the journal based on the date.
+   */
+  QString keyForDate(const QDate& date) const;
 
 public Q_SLOTS:
   void updateBalances();

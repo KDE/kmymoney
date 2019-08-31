@@ -1274,38 +1274,45 @@ MyMoneyTransaction MyMoneyFile::createOpeningBalanceTransaction(const MyMoneyAcc
 
 QString MyMoneyFile::openingBalanceTransaction(const MyMoneyAccount& acc) const
 {
-  QString result;
-
-  MyMoneySecurity currency = security(acc.currencyId());
   MyMoneyAccount openAcc;
 
   try {
-    openAcc = openingBalanceAccount(currency);
+    openAcc = openingBalanceAccount(security(acc.currencyId()));
   } catch (const MyMoneyException &) {
-    return result;
+    return QString();
   }
 
-  // Iterate over all the opening balance transactions for this currency
-  MyMoneyTransactionFilter filter;
-  filter.addAccount(openAcc.id());
-  QList<MyMoneyTransaction> transactions = transactionList(filter);
-  QList<MyMoneyTransaction>::const_iterator it_t = transactions.constBegin();
-  while (it_t != transactions.constEnd()) {
-    try {
-      // Test whether the transaction also includes a split into
-      // this account
-      (*it_t).splitByAccount(acc.id(), true /*match*/);
+  // Iterate over all transactions starting at the opening date
+  const auto start = d->journalModel.MyMoneyModelBase::lowerBound(d->journalModel.keyForDate(acc.openingDate())).row();
+  const auto end = d->journalModel.rowCount();
 
-      // If so, we have a winner!
-      result = (*it_t).id();
-      break;
-    } catch (const MyMoneyException &) {
-      // If not, keep searching
-      ++it_t;
+  // look for a transaction with two splits, one referencing
+  // acc.id(), the other openAcc.id()
+  int matchCount = 0;
+  QString lastTxId;
+  QString txId;
+  QString splitAccoountId;
+  QModelIndex idx;
+  for (int row = start; row < end; ++row) {
+    idx = d->journalModel.index(row, 0);
+    txId = idx.data(eMyMoney::Model::JournalTransactionIdRole).toString();
+    if (lastTxId != txId) {
+      matchCount = 0;
+      lastTxId = txId;
+    }
+    splitAccoountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
+    if (splitAccoountId == acc.id())
+      ++matchCount;
+    else if(splitAccoountId == openAcc.id())
+      ++matchCount;
+
+    // if we found both accounts in a transaction we have a match
+    if (matchCount == 2) {
+      return txId;
     }
   }
-
-  return result;
+  // no opening balance transaction found
+  return QString();
 }
 
 MyMoneyAccount MyMoneyFile::openingBalanceAccount(const MyMoneySecurity& security)
@@ -2881,7 +2888,16 @@ MyMoneySecurity MyMoneyFile::security(const QString& id) const
   if (Q_UNLIKELY(id.isEmpty()))
     return baseCurrency();
 
-  return d->securitiesModel.itemById(id);
+  // in case we don't find the id in the securities,
+  // we search in the currencies
+  MyMoneySecurity security = d->securitiesModel.itemById(id);
+  if (security.id().isEmpty()) {
+    security = d->currenciesModel.itemById(id);
+    if (security.id().isEmpty()) {
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Security '%1' not found.").arg(id));
+    }
+  }
+  return security;
 }
 
 QList<MyMoneySecurity> MyMoneyFile::securityList() const
@@ -2930,10 +2946,7 @@ MyMoneySecurity MyMoneyFile::currency(const QString& id) const
   auto currency = d->currenciesModel.itemById(id);
   // in case we don't find a currency with this id, we try a security
   if (currency.id().isEmpty()) {
-    currency = d->securitiesModel.itemById(id);
-    if (currency.id().isEmpty()) {
-      throw MYMONEYEXCEPTION(QString::fromLatin1("Security '%1' not found.").arg(id));
-    }
+    throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot retrieve currency with unknown id '%1'").arg(id));
   }
   return currency;
 }

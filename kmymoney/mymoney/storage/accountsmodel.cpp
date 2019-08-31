@@ -79,6 +79,9 @@ struct AccountsModel::Private
           q->updateNextObjectId(subAccount.id());
           const auto idx = q->index(row, 0, parent);
           static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->dataRef() = subAccount;
+          if (q->m_idToItemMapper) {
+            q->m_idToItemMapper->updateItem(subAccountId, static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer()));
+          }
           if (subAccount.value("PreferredAccount") == QLatin1String("Yes")
             && !subAccount.isClosed() ) {
             q->addFavorite(subAccountId);
@@ -203,7 +206,7 @@ struct AccountsModel::Private
       const auto baseCurrency = file->baseCurrency();
       MyMoneySecurity security(baseCurrency);
       if (account.isInvest()) {
-        security = file->currency(account.currencyId());
+        security = file->security(account.currencyId());
         if (!security.id().isEmpty()) {
           prices += file->price(account.currencyId(), security.tradingCurrency());
           if (security.tradingCurrency() != baseCurrency.id()) {
@@ -258,14 +261,14 @@ struct AccountsModel::Private
     { eMyMoney::Account::Standard::Equity,    eMyMoney::Account::Type::Equity,    I18N_NOOP("Equity accounts") },
   };
 
-  AccountsModel*                q_ptr;
-  QObject*                      parentObject;
-  QHash<QString, MyMoneyMoney>  balance;
-  QHash<QString, MyMoneyMoney>  value;
-  QHash<QString, MyMoneyMoney>  totalValue;
-  bool                          updateOnBalanceChange;
-  QColor                        positiveScheme;
-  QColor                        negativeScheme;
+  AccountsModel*                  q_ptr;
+  QObject*                        parentObject;
+  QHash<QString, MyMoneyMoney>    balance;
+  QHash<QString, MyMoneyMoney>    value;
+  QHash<QString, MyMoneyMoney>    totalValue;
+  bool                            updateOnBalanceChange;
+  QColor                          positiveScheme;
+  QColor                          negativeScheme;
 };
 
 AccountsModel::AccountsModel(QObject* parent)
@@ -282,6 +285,8 @@ AccountsModel::AccountsModel(QObject* parent)
   Q_ASSERT(d->defaults[5].groupType == eMyMoney::Account::Standard::Equity);
 
   setObjectName(QLatin1String("AccountsModel"));
+
+  useIdToItemMapper(true);
 
   // force creation of empty account structure
   unload();
@@ -518,6 +523,9 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::AccountInstitutionIdRole:
       return account.institutionId();
+
+    case eMyMoney::Model::AccountGroupRole:
+      return static_cast<int>(account.accountGroup());
   }
   return QVariant();
 }
@@ -678,6 +686,12 @@ QList<MyMoneyAccount> AccountsModel::itemList() const
 
 QModelIndex AccountsModel::indexById(const QString& id) const
 {
+  if (m_idToItemMapper) {
+    const auto item = m_idToItemMapper->itemById(id);
+    if (item) {
+      return createIndex(item->row(), 0, item);
+    }
+  }
   // never search in the first row which is favorites
   const QModelIndexList indexes = match(assetIndex(), eMyMoney::Model::IdRole, id, 1, Qt::MatchFixedString | Qt::MatchRecursive);
   if (indexes.isEmpty())
@@ -784,8 +798,9 @@ void AccountsModel::setupAccountFractions()
   MyMoneySecurity currency;
   for (int row = 0; row < indexes.count(); ++row) {
     MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(indexes.value(row).internalPointer())->dataRef();
-    if (account.currencyId() != currency.id())
-      currency = MyMoneyFile::instance()->currency(account.currencyId());
+    if (account.currencyId() != currency.id()) {
+      currency = MyMoneyFile::instance()->security(account.currencyId());
+    }
     account.fraction(currency);
   }
 }

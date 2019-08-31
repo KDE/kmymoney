@@ -98,7 +98,8 @@ QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem
       emit that->closeEditor(d->m_editor, NoHint);
 
     } else {
-      d->m_editor = new NewSplitEditor(parent, view->accountId());
+      QString accountId = index.data(eMyMoney::Model::SplitAccountIdRole).toString();
+      d->m_editor = new NewSplitEditor(parent, accountId);
     }
 
     if(d->m_editor) {

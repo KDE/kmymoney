@@ -30,6 +30,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyenums.h"
+
 class MyMoneyAccount;
 
 class LedgerView : public QTableView
@@ -39,8 +41,8 @@ public:
   explicit LedgerView(QWidget* parent = 0);
   virtual ~LedgerView();
 
-  virtual void setAccount(const MyMoneyAccount& acc);
-  virtual QString accountId() const;
+  // virtual void setAccount(const MyMoneyAccount& acc);
+  // virtual QString accountId() const;
 
   /**
    * This method is used to modify the visibility of the
@@ -48,6 +50,8 @@ public:
    * for the parameter @a show is @c true.
    */
   void setShowEntryForNewTransaction(bool show = true);
+
+  void setSingleLineDetailRole(eMyMoney::Model::Roles role);
 
   /**
    * Returns true if the sign of the values displayed has
@@ -82,7 +86,7 @@ protected:
   void paintEvent(QPaintEvent* event) final override;
   int sizeHintForRow(int row) const final override;
   void showEvent(QShowEvent* event) override;
-  void setAccount_bh(const MyMoneyAccount& acc);
+  // void setAccount_bh(const MyMoneyAccount& acc);
 
 protected Q_SLOTS:
   void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) final override;
@@ -93,14 +97,16 @@ protected Q_SLOTS:
   virtual void adjustDetailColumn(int newViewportWidth);
   virtual void adjustDetailColumn();
 
-  virtual void recalculateBalances();
+  // virtual void recalculateBalances();
 
-  virtual void accountChanged();
+  // virtual void accountChanged();
 
 Q_SIGNALS:
   void transactionSelected(const QString& transactionSplitId);
   void aboutToStartEdit();
   void aboutToFinishEdit();
+  void requestBalanceRecalculation();
+  void requestBottomHalfSetup();
 
 protected:
   class Private;
@@ -116,7 +122,7 @@ public:
   virtual ~SplitView();
 
 protected Q_SLOTS:
-  void recalculateBalances() final override {}
+  // void recalculateBalances() final override {}
 };
 #endif // LEDGERVIEW_H
 

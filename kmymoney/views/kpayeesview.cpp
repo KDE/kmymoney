@@ -28,7 +28,6 @@
 
 #include <QMap>
 #include <QList>
-#include <QTimer>
 #include <QMenu>
 #include <QDesktopServices>
 #include <QIcon>
@@ -93,6 +92,8 @@ void KPayeesView::slotChooseDefaultAccount()
   MyMoneyFile* file = MyMoneyFile::instance();
   QMap<QString, int> account_count;
 
+  /// @todo port to new model code
+#if 0
   KMyMoneyRegister::RegisterItem* item = d->ui->m_register->firstItem();
   while (item) {
     //only walk through selectable items. eg. transactions and not group markers
@@ -117,6 +118,7 @@ void KPayeesView::slotChooseDefaultAccount()
     }
     item = item->nextItem();
   }
+#endif
 
   QMap<QString, int>::Iterator most_frequent, iter;
   most_frequent = account_count.begin();
@@ -222,6 +224,7 @@ void KPayeesView::slotSelectPayee()
   Q_D(KPayeesView);
   // check if the content of a currently selected payee was modified
   // and ask to store the data
+  qDebug() << "slotSelectPayee start " << d->ui->m_register->isColumnHidden(JournalModel::Column::CostCenter);
   if (d->isDirty()) {
     if (KMessageBox::questionYesNo(this,
                                    i18n("<qt>Do you want to save the changes for <b>%1</b>?</qt>", d->m_newName),
@@ -240,6 +243,7 @@ void KPayeesView::slotSelectPayee()
   d->selectedPayees(d->m_selectedPayeesList);
   updatePayeeActions(d->m_selectedPayeesList);
 
+  qDebug() << "slotSelectPayee 1" << d->ui->m_register->isColumnHidden(JournalModel::Column::CostCenter);
   emit selectObjects(d->m_selectedPayeesList);
 
   if (d->m_selectedPayeesList.isEmpty()) {
@@ -310,17 +314,22 @@ void KPayeesView::slotSelectPayee()
 
     d->ui->payeeIdentifiers->setSource(d->m_payee);
 
+    qDebug() << "slotSelectPayee 2" << d->ui->m_register->isColumnHidden(JournalModel::Column::CostCenter);
     slotPayeeDataChanged();
+    qDebug() << "slotSelectPayee 3" << d->ui->m_register->isColumnHidden(JournalModel::Column::CostCenter);
 
     d->showTransactions();
+    qDebug() << "slotSelectPayee 4" << d->ui->m_register->isColumnHidden(JournalModel::Column::CostCenter);
 
   } catch (const MyMoneyException &e) {
     qDebug("exception during display of payee: %s", e.what());
-    d->ui->m_register->clear();
+    /// @todo port to new model code
+    // d->ui->m_register->clear();
     d->m_selectedPayeesList.clear();
     d->m_payee = MyMoneyPayee();
   }
   d->m_allowEditing = true;
+  qDebug() << "slotSelectPayee end " << d->ui->m_register->isColumnHidden(JournalModel::Column::CostCenter);
 }
 
 void KPayeesView::slotKeyListChanged()
@@ -534,7 +543,7 @@ void KPayeesView::executeCustomAction(eView::Action action)
     case eView::Action::SetDefaultFocus:
       {
         Q_D(KPayeesView);
-        QTimer::singleShot(0, d->m_searchWidget, SLOT(setFocus()));
+        QMetaObject::invokeMethod(d->m_searchWidget, "setFocus");
       }
       break;
 
@@ -552,7 +561,7 @@ void KPayeesView::refresh()
   Q_D(KPayeesView);
   if (isVisible()) {
     if (d->m_inSelection) {
-      QTimer::singleShot(0, this, SLOT(refresh()));
+      QMetaObject::invokeMethod(this, "refresh");
     } else {
       d->loadPayees();
       d->m_needsRefresh = false;
@@ -598,12 +607,15 @@ void KPayeesView::updatePayeeActions(const QList<MyMoneyPayee> &payees)
 void KPayeesView::slotSelectTransaction()
 {
   Q_D(KPayeesView);
+  /// @todo port to new model code
+#if 0
   auto list = d->ui->m_register->selectedItems();
   if (!list.isEmpty()) {
     const auto t = dynamic_cast<KMyMoneyRegister::Transaction*>(list[0]);
     if (t)
       emit selectByVariant(QVariantList {QVariant(t->split().accountId()), QVariant(t->transaction().id()) }, eView::Intent::ShowTransaction);
   }
+#endif
 }
 
 void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QString& accountId, const QString& transactionId)
@@ -612,6 +624,8 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
   if (!isVisible())
     return;
 
+  /// @todo port to new model code
+#if 0
   try {
     // clear filter
     d->m_searchWidget->clear();
@@ -658,6 +672,7 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
   } catch (const MyMoneyException &e) {
     qWarning("Unexpected exception in KPayeesView::slotSelectPayeeAndTransaction %s", e.what());
   }
+#endif
 }
 
 void KPayeesView::slotShowPayeesMenu(const QPoint& /*p*/)

@@ -1950,10 +1950,10 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions() const
   MyMoneyTransaction tx;
 
   QSqlQuery tagQuery(*const_cast <MyMoneyStorageSql*>(this));
-  tagQuery.prepare("SELECT tagId from kmmTagSplits where splitId = :id and transactionId = :transactionId");
+  tagQuery.prepare("SELECT tagId FROM kmmTagSplits WHERE splitId = :id AND transactionId = :transactionId");
 
   QSqlQuery kvpQuery(*const_cast <MyMoneyStorageSql*>(this));
-  kvpQuery.prepare("SELECT kvpKey, kvpData from kmmKeyValuePairs where kvpType = :type and kvpId = :id;");
+  kvpQuery.prepare("SELECT kvpKey, kvpData FROM kmmKeyValuePairs WHERE kvpType = :type AND kvpId = :id;");
   kvpQuery.bindValue(":type", QStringLiteral("TRANSACTION"));
 
   while (query.next()) {

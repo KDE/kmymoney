@@ -1,19 +1,19 @@
-/***************************************************************************
-                          ledgerdelegate.cpp
-                             -------------------
-    begin                : Sat Aug 8 2015
-    copyright            : (C) 2015 by Thomas Baumgart
-    email                : Thomas Baumgart <tbaumgart@kde.org>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2015-2019  Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "ledgerdelegate.h"
 
@@ -368,6 +368,8 @@ public:
   , m_editorRow(-1)
   , m_separator(0)
   , m_onlineBalanceSeparator(0)
+  , m_singleLineRole(eMyMoney::Model::SplitPayeeRole)
+
   {}
 
   ~Private()
@@ -390,6 +392,7 @@ inline bool displaySeparator(const QModelIndex& index) const
   int                           m_editorRow;
   LedgerSeparator*              m_separator;
   LedgerSeparatorOnlineBalance* m_onlineBalanceSeparator;
+  eMyMoney::Model::Roles        m_singleLineRole;
 };
 
 
@@ -428,6 +431,11 @@ void LedgerDelegate::setErroneousColor(const QColor& color)
   m_erroneousColor = color;
 }
 
+void LedgerDelegate::setSingleLineRole(eMyMoney::Model::Roles role)
+{
+  d->m_singleLineRole = role;
+}
+
 void LedgerDelegate::setOnlineBalance(const QDate& date, const MyMoneyMoney& amount, int fraction)
 {
   if(d->m_onlineBalanceSeparator) {
@@ -452,7 +460,8 @@ QWidget* LedgerDelegate::createEditor(QWidget* parent, const QStyleOptionViewIte
       emit that->closeEditor(d->m_editor, NoHint);
 
     } else {
-      d->m_editor = new NewTransactionEditor(parent, d->m_view->accountId());
+      QString accountId = index.data(eMyMoney::Model::SplitAccountIdRole).toString();
+      d->m_editor = new NewTransactionEditor(parent, accountId);
     }
 
     if(d->m_editor) {
@@ -526,9 +535,10 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
 
     QStringList lines;
     if(index.column() == JournalModel::Column::Detail) {
-      const QString payeeId = index.data(eMyMoney::Model::Roles::SplitPayeeIdRole).toString();
-      lines << MyMoneyFile::instance()->payeesModel()->itemById(payeeId).name();
+      lines << index.data(d->m_singleLineRole).toString();
       if(selected) {
+        lines.clear();
+        lines << index.data(eMyMoney::Model::Roles::SplitPayeeRole).toString();
         lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
         lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
 

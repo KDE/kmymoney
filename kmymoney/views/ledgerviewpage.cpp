@@ -29,7 +29,7 @@
 // Project Includes
 
 #include "newtransactionform.h"
-#include "ledgermodel.h"
+#include "ledgeraccountfilter.h"
 #include "journalmodel.h"
 #include "ui_ledgerviewpage.h"
 #include "mymoneyenums.h"
@@ -39,7 +39,8 @@ class LedgerViewPage::Private
 public:
   Private(QWidget* parent)
   : ui(new Ui_LedgerViewPage)
-  , form(0)
+  , filter(nullptr)
+  , form(nullptr)
   {
     ui->setupUi(parent);
 
@@ -58,9 +59,11 @@ public:
     delete ui;
   }
 
-  Ui_LedgerViewPage*  ui;
-  NewTransactionForm* form;
-  QSet<QString>       hideFormReasons;
+  Ui_LedgerViewPage*    ui;
+  LedgerAccountFilter*  filter;
+  NewTransactionForm*   form;
+  QSet<QString>         hideFormReasons;
+  QString               accountId;
 };
 
 LedgerViewPage::LedgerViewPage(QWidget* parent)
@@ -73,6 +76,8 @@ LedgerViewPage::LedgerViewPage(QWidget* parent)
   connect(d->ui->ledgerView, &LedgerView::aboutToStartEdit, this, &LedgerViewPage::startEdit);
   connect(d->ui->ledgerView, &LedgerView::aboutToFinishEdit, this, &LedgerViewPage::finishEdit);
   connect(d->ui->splitter, &QSplitter::splitterMoved, this, &LedgerViewPage::splitterChanged);
+
+  d->filter = new LedgerAccountFilter(d->ui->ledgerView);
 }
 
 LedgerViewPage::~LedgerViewPage()
@@ -82,7 +87,7 @@ LedgerViewPage::~LedgerViewPage()
 
 QString LedgerViewPage::accountId() const
 {
-  return d->ui->ledgerView->accountId();
+  return d->accountId;
 }
 
 void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
@@ -98,7 +103,8 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
       break;
 
     default:
-      columns = { JournalModel::Column::Security,
+      columns = { JournalModel::Column::Account,
+        JournalModel::Column::Security,
         JournalModel::Column::CostCenter,
         JournalModel::Column::Quantity,
         JournalModel::Column::Price,
@@ -135,7 +141,8 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
 #endif
   }
   d->ui->formWidget->setVisible(d->hideFormReasons.isEmpty());
-  d->ui->ledgerView->setAccount(acc);
+  d->filter->setAccount(acc);
+  d->accountId = acc.id();
 }
 
 void LedgerViewPage::showTransactionForm(bool show)
@@ -172,5 +179,5 @@ void LedgerViewPage::splitterChanged(int pos, int index)
 
 void LedgerViewPage::setShowEntryForNewTransaction(bool show)
 {
-  d->ui->ledgerView->setShowEntryForNewTransaction(show);
+  d->filter->setShowEntryForNewTransaction(show);
 }

@@ -870,6 +870,9 @@ void MyMoneyReport::validDateRange(QDate& db, QDate& de)
   // year as the filter criteria.
 
   if (!db.isValid() || !de.isValid()) {
+    /// @todo port to new model code
+    /// use first and last index into journal model instead
+    /// of retrieving the whole list of transactions.
     QList<MyMoneyTransaction> list = MyMoneyFile::instance()->transactionList(*this);
     QDate tmpBegin, tmpEnd;
 

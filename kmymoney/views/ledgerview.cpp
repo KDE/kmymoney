@@ -29,13 +29,11 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KConcatenateRowsProxyModel>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "mymoneyfile.h"
-#include "ledgerproxymodel.h"
 #include "ledgerdelegate.h"
 #include "ledgermodel.h"
 #include "mymoneymoney.h"
@@ -51,9 +49,6 @@ class LedgerView::Private
 public:
   Private(LedgerView* p)
   : q(p)
-  , delegate(0)
-  , filterModel(new LedgerProxyModel(p))
-  , concatModel(new KConcatenateRowsProxyModel(p))
   , adjustableColumn(JournalModel::Column::Detail)
   , adjustingColumn(false)
   , showValuesInverted(false)
@@ -61,55 +56,17 @@ public:
   , newTransactionPresent(false)
   , columnSelector(nullptr)
   {
-    filterModel->setFilterRole(eMyMoney::Model::Roles::SplitAccountIdRole);
+    delegates.insert(0, new LedgerDelegate(q));
+    q->setItemDelegate(delegates[0]);
   }
 
-  void setDelegate(LedgerDelegate* _delegate)
+  LedgerDelegate* delegateForRow(const QModelIndex& idx)
   {
-    delete delegate;
-    delegate = _delegate;
-  }
-
-  void setSortRole(eMyMoney::Model::Roles role, int column)
-  {
-    Q_ASSERT(delegate);
-    Q_ASSERT(filterModel);
-
-    delegate->setSortRole(role);
-    filterModel->setSortRole(role);
-    filterModel->sort(column);
-  }
-
-  void recalculateBalances()
-  {
-    const auto start = filterModel->index(0, 0);
-    /// @note No idea if additional filtering is necessary, as we filter on an account anyway
-    /// upon no account filter active, we should not show a balance anyway
-    const auto indexes = filterModel->match(start, eMyMoney::Model::Roles::SplitAccountIdRole, account.id(), -1);
-    MyMoneyMoney balance;
-    for(const auto &index : indexes) {
-      if(showValuesInverted) {
-        balance -= filterModel->data(index, eMyMoney::Model::Roles::SplitSharesRole).value<MyMoneyMoney>();
-      } else {
-        balance += filterModel->data(index, eMyMoney::Model::Roles::SplitSharesRole).value<MyMoneyMoney>();
-      }
-      const auto txt = balance.formatMoney(account.fraction());
-      const auto dispIndex = filterModel->index(index.row(), JournalModel::Column::Balance);
-      filterModel->setData(dispIndex, txt, Qt::DisplayRole);
-    }
-
-    // filterModel->invalidate();
-    const QModelIndex top = filterModel->index(0, JournalModel::Column::Balance);
-    const QModelIndex bottom = filterModel->index(filterModel->rowCount()-1, JournalModel::Column::Balance);
-
-    q->dataChanged(top, bottom);
-    balanceCalculationPending = false;
+    return delegates[0];
   }
 
   LedgerView*                 q;
-  LedgerDelegate*             delegate;
-  LedgerProxyModel*           filterModel;
-  KConcatenateRowsProxyModel* concatModel;
+  QVector<LedgerDelegate*>    delegates;
   MyMoneyAccount              account;
   int                         adjustableColumn;
   bool                        adjustingColumn;
@@ -162,8 +119,9 @@ LedgerView::~LedgerView()
 void LedgerView::showEvent(QShowEvent* event)
 {
   if (model() == nullptr) {
-    if (!d->account.id().isEmpty()) {
-      setAccount_bh(d->account);
+    emit requestBottomHalfSetup();
+    if (model() != nullptr) {
+      d->columnSelector->setModel(MyMoneyFile::instance()->journalModel());
     }
   }
   QTableView::showEvent(event);
@@ -172,11 +130,6 @@ void LedgerView::showEvent(QShowEvent* event)
 bool LedgerView::showValuesInverted() const
 {
   return d->showValuesInverted;
-}
-
-void LedgerView::setAccount(const MyMoneyAccount& acc)
-{
-  d->account = acc;
 }
 
 void LedgerView::setColumnsHidden(QVector<int> columns)
@@ -189,68 +142,7 @@ void LedgerView::setColumnsShown(QVector<int> columns)
   d->columnSelector->setAlwaysVisible(columns);
 }
 
-void LedgerView::setAccount_bh(const MyMoneyAccount& acc)
-{
-  switch(acc.accountType()) {
-    case eMyMoney::Account::Type::Investment:
-      break;
-
-    default:
-      horizontalHeader()->resizeSection(JournalModel::Column::Reconciliation, 15);
-
-      d->setDelegate(new LedgerDelegate(this));
-      setItemDelegate(d->delegate);
-      break;
-  }
-
-  d->showValuesInverted = false;
-  if(acc.accountGroup() == eMyMoney::Account::Type::Liability
-  || acc.accountGroup() == eMyMoney::Account::Type::Income) {
-    d->showValuesInverted = true;
-  }
-
-  d->filterModel->setObjectName("LedgerView filterModel");
-  d->filterModel->setFilterRole(eMyMoney::Model::Roles::SplitAccountIdRole);
-  d->filterModel->setFilterKeyColumn(0);
-  d->filterModel->setFilterFixedString(acc.id());
-  d->filterModel->setAccountType(acc.accountType());
-
-  d->setSortRole(eMyMoney::Model::Roles::TransactionPostDateRole, JournalModel::Column::Date);
-
-  setModel(d->filterModel);
-  d->concatModel->setObjectName("LedgerView concatModel");
-  d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel());
-  d->filterModel->setSourceModel(d->concatModel);
-  d->columnSelector->setModel(MyMoneyFile::instance()->journalModel());
-
-  accountChanged();
-
-  // if balance calculation has not been triggered, then run it immediately
-  if(!d->balanceCalculationPending) {
-    recalculateBalances();
-  }
-
-  /// @todo port to new model code
-  if(d->filterModel->rowCount() > 0) {
-    // we need to check that the last row may contain a scheduled transaction or
-    // the row that is shown for new transacations.
-    // in that case, we need to go back to find the actual last transaction
-    int row = d->filterModel->rowCount()-1;
-    while(row >= 0) {
-      const QModelIndex index = d->filterModel->index(row, 0);
-      if(!d->filterModel->data(index, eMyMoney::Model::IdRole).toString().isEmpty()
-      // && !d->filterModel->data(index, (int)eLedgerModel::Role::TransactionSplitId).toString().isEmpty()
-      ) {
-        setCurrentIndex(index);
-        selectRow(index.row());
-        scrollTo(index, PositionAtBottom);
-        break;
-      }
-      row--;
-    }
-  }
-}
-
+#if 0
 QString LedgerView::accountId() const
 {
   QString id;
@@ -258,48 +150,20 @@ QString LedgerView::accountId() const
     id = d->account.id();
   return id;
 }
-
-void LedgerView::accountChanged()
-{
-  QString id = accountId();
-  if(!id.isEmpty()) {
-    d->account = MyMoneyFile::instance()->account(id);
-    QDate onlineBalanceDate = QDate::fromString(d->account.value(QLatin1String("lastImportedTransactionDate")), Qt::ISODate);
-    MyMoneyMoney amount(d->account.value(QLatin1String("lastStatementBalance")));
-    if (d->showValuesInverted) {
-      amount = -amount;
-    }
-    d->delegate->setOnlineBalance(onlineBalanceDate, amount, d->account.fraction());
-  } else {
-    d->delegate->setOnlineBalance(QDate(), MyMoneyMoney());
-  }
-  // force redraw
-  d->filterModel->invalidate();
-}
-
-void LedgerView::recalculateBalances()
-{
-  d->recalculateBalances();
-}
+#endif
 
 void LedgerView::rowsAboutToBeRemoved(const QModelIndex& index, int start, int end)
 {
   QAbstractItemView::rowsAboutToBeRemoved(index, start, end);
-  // make sure the balances are recalculated but trigger only once
-  if(!d->balanceCalculationPending) {
-    d->balanceCalculationPending = true;
-    QMetaObject::invokeMethod(this, "recalculateBalances", Qt::QueuedConnection);
-  }
+  // tell the filter model to recalculate if needed
+  emit requestBalanceRecalculation();
 }
 
 void LedgerView::rowsInserted(const QModelIndex& index, int start, int end)
 {
   QTableView::rowsInserted(index, start, end);
-  // make sure the balances are recalculated but trigger only once
-  if(!d->balanceCalculationPending) {
-    d->balanceCalculationPending = true;
-    QMetaObject::invokeMethod(this, "recalculateBalances", Qt::QueuedConnection);
-  }
+  // tell the filter model to recalculate if needed
+  emit requestBalanceRecalculation();
 }
 
 bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger trigger, QEvent* event)
@@ -434,6 +298,11 @@ void LedgerView::paintEvent(QPaintEvent* event)
   }
 }
 
+void LedgerView::setSingleLineDetailRole(eMyMoney::Model::Roles role)
+{
+  d->delegates[0]->setSingleLineRole(role);
+}
+
 int LedgerView::sizeHintForRow(int row) const
 {
   // we can optimize the sizeHintForRow() operation by asking the
@@ -441,10 +310,11 @@ int LedgerView::sizeHintForRow(int row) const
   // method which scans over all items in a column and takes a long
   // time in large ledgers. In case the editor is open in the row, we
   // use the regular method.
-  QModelIndex index = d->filterModel->index(row, 0);
-  if(d->delegate && (d->delegate->editorRow() != row)) {
+  QModelIndex index = model()->index(row, 0);
+  LedgerDelegate* delegate = d->delegateForRow(index);
+  if(delegate && (delegate->editorRow() != row)) {
     QStyleOptionViewItem opt;
-    int hint = d->delegate->sizeHint(opt, index).height();
+    int hint = delegate->sizeHint(opt, index).height();
     if(showGrid())
       hint += 1;
     return hint;
@@ -495,21 +365,6 @@ void LedgerView::adjustDetailColumn(int newViewportWidth)
 void LedgerView::ensureCurrentItemIsVisible()
 {
   scrollTo(currentIndex(), EnsureVisible);
-}
-
-void LedgerView::setShowEntryForNewTransaction(bool show)
-{
-  if (!d->concatModel) {
-    qDebug() << Q_FUNC_INFO << "called without a concatenation model present";
-    return;
-  }
-  if (show && !d->newTransactionPresent) {
-    d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
-    d->newTransactionPresent = true;
-  } else if (!show && d->newTransactionPresent) {
-    d->concatModel->removeSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
-    d->newTransactionPresent = false;
-  }
 }
 
 void LedgerView::slotSettingsChanged()

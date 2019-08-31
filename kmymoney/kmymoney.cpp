@@ -619,7 +619,7 @@ public:
         QString cid;
         try {
           if (!(*it).currencyId().isEmpty() || (*it).currencyId().length() != 0)
-            cid = MyMoneyFile::instance()->currency((*it).currencyId()).id();
+            cid = MyMoneyFile::instance()->security((*it).currencyId()).id();
         } catch (const MyMoneyException &e) {
           qDebug() << QLatin1String("Account") << (*it).id() << (*it).name() << e.what();
         }

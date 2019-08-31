@@ -141,6 +141,9 @@ bool LedgerProxyModel::lessThan(const QModelIndex& left, const QModelIndex& righ
 
 bool LedgerProxyModel::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
 {
+  if (m_filterId.isEmpty())
+    return false;
+
   QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
   bool rc = idx.data(m_filterRole).toString().compare(m_filterId) == 0;
   // in case a journal entry has no id, it is the new transaction placeholder

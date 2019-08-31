@@ -155,6 +155,43 @@ private:
     TreeItem<T> *                           parentItem;
 };
 
+
+
+template <typename T>
+class MyMoneyModelIdToItemMapper
+{
+public:
+  MyMoneyModelIdToItemMapper() {}
+
+  void updateItem(const QString& id, TreeItem<T>* item)
+  {
+    idToItemMap.insert(id, item);
+  }
+
+  void removeItem(const QString& id)
+  {
+    idToItemMap.remove(id);
+  }
+
+  TreeItem<T>* itemById(const QString& id) const
+  {
+    return idToItemMap.value(id, nullptr);
+  }
+
+  void clear()
+  {
+    idToItemMap.clear();
+  }
+
+private:
+  QHash<QString, TreeItem<T>*>    idToItemMap;
+};
+
+
+
+
+
+
 template <typename T>
 class MyMoneyModel : public MyMoneyModelBase
 {
@@ -162,6 +199,7 @@ public:
   explicit MyMoneyModel(QObject* parent, const QString& idLeadin, quint8 idSize)
       : MyMoneyModelBase(parent)
       , m_file(nullptr)
+      , m_idToItemMapper(nullptr)
       , m_nextId(0)
       , m_idLeadin(idLeadin)
       , m_idSize(idSize)
@@ -174,6 +212,17 @@ public:
   virtual ~MyMoneyModel()
   {
     delete m_rootItem;
+  }
+
+  void useIdToItemMapper(bool use)
+  {
+    if (use && (m_idToItemMapper == nullptr)) {
+      m_idToItemMapper = new MyMoneyModelIdToItemMapper<T>();
+
+    } else if(!use && (m_idToItemMapper != nullptr)) {
+      delete m_idToItemMapper;
+      m_idToItemMapper = nullptr;
+    }
   }
 
   Qt::ItemFlags flags(const QModelIndex &index) const override
@@ -280,6 +329,10 @@ public:
     beginRemoveRows(parent, startRow, startRow + rows - 1);
 
     for (int row = 0; row < rows; ++row) {
+      if (m_idToItemMapper) {
+        const auto idx = index(startRow, 0, parent);
+        m_idToItemMapper->removeItem(idx.data(eMyMoney::Model::IdRole).toString());
+      }
       if (!parentItem->removeChild(startRow))
         break;
     }
@@ -352,6 +405,12 @@ public:
 
   virtual QModelIndex indexById(const QString& id) const
   {
+    if (m_idToItemMapper) {
+      const auto item = m_idToItemMapper->itemById(id);
+      if (item) {
+        return createIndex(item->row(), 0, item);
+      }
+    }
     const QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, id, 1, Qt::MatchFixedString | Qt::MatchRecursive);
     if (indexes.isEmpty())
       return QModelIndex();
@@ -492,7 +551,9 @@ public:
     // make sure the caller receives the assigned ID
     item = T(nextId(), item);
     static_cast<TreeItem<T>*>(idx.internalPointer())->dataRef() = item;
-
+    if (m_idToItemMapper) {
+      m_idToItemMapper->updateItem(item.id(), static_cast<TreeItem<T>*>(idx.internalPointer()));
+    }
     setDirty();
     emit dataChanged(idx, index(row, columnCount()-1));
   }
@@ -500,6 +561,10 @@ public:
   void modifyItem(const QModelIndex& idx, const T& item)
   {
     if (idx.isValid()) {
+      if (m_idToItemMapper) {
+        m_idToItemMapper->removeItem(static_cast<const TreeItem<T>*>(idx.internalPointer())->constDataRef().id());
+        m_idToItemMapper->updateItem(item.id(), static_cast<TreeItem<T>*>(idx.internalPointer()));
+      }
       static_cast<TreeItem<T>*>(idx.internalPointer())->dataRef() = item;
       setDirty();
       emit dataChanged(idx, index(idx.row(), columnCount(idx.parent())-1));
@@ -538,6 +603,10 @@ protected:
   virtual void clearModelItems()
   {
     // get rid of any existing entries should they exist
+    if (m_idToItemMapper) {
+      m_idToItemMapper->clear();
+    }
+
     if (m_rootItem->childCount()) {
       delete m_rootItem;
       m_rootItem = new TreeItem<T>(T());
@@ -556,13 +625,14 @@ protected:
   }
 
 protected:
-  TreeItem<T> *           m_rootItem;
-  MyMoneyFile*            m_file;
-  quint64                 m_nextId;
-  QString                 m_idLeadin;
-  quint8                  m_idSize;
-  bool                    m_dirty;
-  QRegularExpression      m_idMatchExp;
+  TreeItem<T> *                   m_rootItem;
+  MyMoneyFile*                    m_file;
+  MyMoneyModelIdToItemMapper<T>*  m_idToItemMapper;
+  quint64                         m_nextId;
+  QString                         m_idLeadin;
+  quint8                          m_idSize;
+  bool                            m_dirty;
+  QRegularExpression              m_idMatchExp;
 };
 
 #endif // MYMONEYMODEL_H

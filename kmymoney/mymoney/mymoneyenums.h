@@ -450,6 +450,7 @@ namespace eMyMoney {
 
       // MyMoneyAccount
       AccountTypeRole,
+      AccountGroupRole,
       AccountIsClosedRole,
       AccountIsInvestRole,
       AccountBalanceRole,
@@ -492,6 +493,7 @@ namespace eMyMoney {
       SplitSharesSuffixRole,
       SplitAccountIdRole,
       SplitPayeeIdRole,
+      SplitPayeeRole,
       SplitMemoRole,
       SplitSingleLineMemoRole,
       SplitSharesRole,
@@ -499,6 +501,10 @@ namespace eMyMoney {
       SplitPriceRole,
       SplitReconcileFlagRole,
       SplitReconcileDateRole,
+
+      // Journal
+      JournalSplitIdRole,
+      JournalTransactionIdRole,
 
       // Ledger
       LedgerDisplayOrderRole,

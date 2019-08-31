@@ -35,6 +35,7 @@
 #include "mymoneyfile.h"
 #include "accountsmodel.h"
 #include "costcentermodel.h"
+#include "payeesmodel.h"
 #include "mymoneytransaction.h"
 #include "mymoneysplit.h"
 #include "mymoneymoney.h"
@@ -47,6 +48,7 @@ struct JournalModel::Private
     , headerData(QHash<Column, QString> ({
       { Number, i18nc("Cheque Number", "No.") },
       { Date, i18n("Date") },
+      { Account, i18n("Account") },
       { Security, i18n("Security") },
       { CostCenter, i18n("CC") },
       { Detail, i18n("Detail") },
@@ -205,6 +207,8 @@ JournalModelNewTransaction * JournalModel::newTransaction()
 int JournalModel::columnCount(const QModelIndex& parent) const
 {
   Q_UNUSED(parent);
+  Q_ASSERT(d->headerData.count() == MaxColumns);
+
   return d->headerData.count();
 }
 
@@ -239,6 +243,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
         case Date:
           return QLocale().toString(transaction.postDate(), QLocale::ShortFormat);
+
+        case Account:
+          return MyMoneyFile::instance()->accountsModel()->itemById(journalEntry.split().accountId()).name();
 
         case Security:
           break;
@@ -280,7 +287,14 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         case Price:
         case Amount:
         case Value:
+          break;
+
         case Balance:
+          {
+            const auto split = journalEntry.split();
+            auto acc = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
+            return journalEntry.balance().formatMoney(acc.fraction());
+          }
           break;
       }
       break;
@@ -303,7 +317,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
       }
       return QVariant(Qt::AlignLeft | Qt::AlignTop);
 
-    case eMyMoney::Model::Roles::IdRole:
+    case eMyMoney::Model::IdRole:
       return journalEntry.id();
 
     case eMyMoney::Model::Roles::SplitAccountIdRole:
@@ -314,6 +328,12 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::SplitReconcileDateRole:
       return journalEntry.split().reconcileDate();
+
+    case eMyMoney::Model::JournalSplitIdRole:
+      return journalEntry.split().id();
+
+    case eMyMoney::Model::JournalTransactionIdRole:
+      return journalEntry.transaction().id();
 
     case eMyMoney::Model::Roles::TransactionPostDateRole:
       return transaction.postDate();
@@ -379,6 +399,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         return rc;
       }
 
+    case eMyMoney::Model::SplitPayeeRole:
+      return MyMoneyFile::instance()->payeesModel()->itemById(journalEntry.split().payeeId()).name();
+
     case eMyMoney::Model::TransactionCounterAccountRole:
       return d->counterAccount(journalEntry, transaction);
 
@@ -395,7 +418,32 @@ bool JournalModel::setData(const QModelIndex& idx, const QVariant& value, int ro
   if(!idx.isValid()) {
     return false;
   }
+  if (idx.row() < 0 || idx.row() >= rowCount(idx.parent())) {
+    return false;
+  }
 
+  JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(idx.internalPointer())->dataRef();
+  if (journalEntry.transactionPtr() == nullptr) {
+    return false;
+  }
+
+  switch(role) {
+    case Qt::DisplayRole:
+    case Qt::EditRole:
+      switch(idx.column()) {
+        case Balance:
+          journalEntry.setBalance(value.value<MyMoneyMoney>());
+          return true;
+
+        default:
+          return false;
+      }
+      break;
+
+    default:
+      return false;
+
+  }
   // qDebug() << "setData(" << idx.row() << idx.column() << ")" << value << role;
   return QAbstractItemModel::setData(idx, value, role);
 }
@@ -457,6 +505,11 @@ QModelIndex JournalModel::firstIndexById(const QString& id) const
   }
 
   return MyMoneyModelBase::lowerBound(key);
+}
+
+QString JournalModel::keyForDate(const QDate& date) const
+{
+  return MyMoneyTransaction::uniqueSortKey(date, QString());
 }
 
 void JournalModel::addTransaction(MyMoneyTransaction& t)
@@ -576,18 +629,14 @@ void JournalModel::transactionList(QList<MyMoneyTransaction>& list, MyMoneyTrans
 {
   list.clear();
 
-  QString lastKey;
   const int rows = rowCount();
-  for (int row = 0; row < rows; ++row) {
-    const QModelIndex idx = index(row, 0);
-    const auto journalEntry = static_cast<TreeItem<JournalEntry>*>(idx.internalPointer())->constDataRef();
-    if (journalEntry.id() != lastKey) {
-      const auto cnt = filter.matchingSplitsCount(journalEntry.transaction());
-      for (uint i = 0; i < cnt; ++i) {
-        list.append(journalEntry.transaction());
-      }
-      lastKey = journalEntry.id();
+  for (int row = 0; row < rows;) {
+    const auto journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
+    const auto cnt = filter.matchingSplitsCount(journalEntry.transaction());
+    for (uint i = 0; i < cnt; ++i) {
+      list.append(journalEntry.transaction());
     }
+    row += journalEntry.transaction().splitCount();
   }
 }
 

@@ -75,6 +75,8 @@
 #include "modelenums.h"
 #include "payeesmodel.h"
 #include "menuenums.h"
+#include "ledgerpayeefilter.h"
+#include "journalmodel.h"
 
 using namespace Icons;
 
@@ -124,6 +126,7 @@ public:
     KMyMoneyViewBasePrivate(),
     q_ptr(qq),
     ui(new Ui::KPayeesView),
+    m_transactionFilter (nullptr),
     m_contact(nullptr),
     m_payeeRow(0),
     m_needLoad(true),
@@ -151,6 +154,10 @@ public:
     Q_Q(KPayeesView);
     m_needLoad = false;
     ui->setupUi(q);
+
+    ui->m_register->setSingleLineDetailRole(eMyMoney::Model::TransactionCounterAccountRole);
+
+    m_transactionFilter = new LedgerPayeeFilter(ui->m_register);
 
     m_contact = new MyMoneyContact(q);
     m_filterProxyModel = new AccountNamesFilterProxyModel(q);
@@ -200,6 +207,8 @@ public:
     ui->labelDefaultCategory->setEnabled(false);
     ui->comboDefaultCategory->setEnabled(false);
 
+    /// @todo port to new model code
+#if 0
     QList<eWidgets::eTransaction::Column> cols {
     eWidgets::eTransaction::Column::Date,
     eWidgets::eTransaction::Column::Account,
@@ -207,9 +216,11 @@ public:
     eWidgets::eTransaction::Column::ReconcileFlag,
     eWidgets::eTransaction::Column::Payment,
     eWidgets::eTransaction::Column::Deposit};
+
     ui->m_register->setupRegister(MyMoneyAccount(), cols);
     ui->m_register->setSelectionMode(QTableWidget::SingleSelection);
     ui->m_register->setDetailsColumnType(eWidgets::eRegister::DetailColumn::AccountFirst);
+#endif
     ui->m_balanceLabel->hide();
 
     q->connect(m_contact, &MyMoneyContact::contactFetched, q, &KPayeesView::slotContactFetched);
@@ -246,7 +257,10 @@ public:
     q->connect(ui->m_helpButton,      &QAbstractButton::clicked, q, &KPayeesView::slotHelp);
     q->connect(ui->m_sendMail,        &QAbstractButton::clicked, q, &KPayeesView::slotSendMail);
 
+    /// @todo port to new model code
+#if 0
     q->connect(ui->m_register, &KMyMoneyRegister::Register::editTransaction, q, &KPayeesView::slotSelectTransaction);
+#endif
 
     q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KPayeesView::refresh);
 
@@ -258,6 +272,28 @@ public:
     KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");
     ui->m_splitter->restoreState(grp.readEntry("KPayeesViewSplitterSize", QByteArray()));
     ui->m_splitter->setChildrenCollapsible(false);
+
+    QVector<int> columns;
+    columns = {
+      JournalModel::Column::Number,
+      JournalModel::Column::Security,
+      JournalModel::Column::CostCenter,
+      JournalModel::Column::Quantity,
+      JournalModel::Column::Price,
+      JournalModel::Column::Amount,
+      JournalModel::Column::Value,
+      JournalModel::Column::Balance,
+    };
+    ui->m_register->setColumnsHidden(columns);
+    columns = {
+      JournalModel::Column::Date,
+      JournalModel::Column::Account,
+      JournalModel::Column::Detail,
+      JournalModel::Column::Reconciliation,
+      JournalModel::Column::Payment,
+      JournalModel::Column::Deposit,
+    };
+    ui->m_register->setColumnsShown(columns);
 
     //At start we haven't any payee selected
     ui->m_tabWidget->setEnabled(false); // disable tab widget
@@ -299,7 +335,9 @@ public:
     m_searchWidget->clear();
     m_searchWidget->updateSearch();
     ui->m_payeesList->clear();
-    ui->m_register->clear();
+
+    /// @todo port to new model code
+    // ui->m_register->clear();
     currentItem = 0;
 
     QList<MyMoneyPayee>list = file->payeeList();
@@ -380,17 +418,21 @@ public:
     const auto file = MyMoneyFile::instance();
     MyMoneySecurity base = file->baseCurrency();
 
-    // setup sort order
-    ui->m_register->setSortOrder(KMyMoneySettings::sortSearchView());
-
-    // clear the register
-    ui->m_register->clear();
-
     if (m_selectedPayeesList.isEmpty() || !ui->m_tabWidget->isEnabled()) {
       ui->m_balanceLabel->setText(i18n("Balance: %1", balance.formatMoney(file->baseCurrency().smallestAccountFraction())));
       return;
     }
 
+    QStringList payeeIds;
+    for (const auto payee : qAsConst(m_selectedPayeesList)) {
+      payeeIds.append(payee.id());
+    }
+
+    qDebug() << "slotSelectPayee 3a" << ui->m_register->isColumnHidden(JournalModel::Column::CostCenter);
+    m_transactionFilter->setPayeeIdList(payeeIds);
+    qDebug() << "slotSelectPayee 3b" << ui->m_register->isColumnHidden(JournalModel::Column::CostCenter);
+    /// @todo port to new model code
+#if 0
     // setup the list and the pointer vector
     MyMoneyTransactionFilter filter;
 
@@ -457,6 +499,7 @@ public:
     ui->m_balanceLabel->setText(i18n("Balance: %1%2",
                                  balanceAccurate ? "" : "~",
                                  balance.formatMoney(file->baseCurrency().smallestAccountFraction())));
+#endif
   }
 
   /**
@@ -727,13 +770,15 @@ public:
     ui->m_updateButton->setEnabled(dirty);
   }
 
-  KPayeesView      *q_ptr;
-  Ui::KPayeesView  *ui;
-  MyMoneyPayee      m_payee;
-  QString           m_newName;
-  MyMoneyContact   *m_contact;
-  int               m_payeeRow;
-  QList<int>        m_payeeRows;
+  KPayeesView*        q_ptr;
+  Ui::KPayeesView*    ui;
+  LedgerPayeeFilter*  m_transactionFilter;
+
+  MyMoneyPayee        m_payee;
+  QString             m_newName;
+  MyMoneyContact*     m_contact;
+  int                 m_payeeRow;
+  QList<int>          m_payeeRows;
 
   /**
     * List of selected payees
