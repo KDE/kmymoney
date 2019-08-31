@@ -7,3 +7,4 @@ IncludeFiles=\"kmm_settings_export.h\",\"kmymoneysettings_addon.h\"
 SourceIncludeFiles=\"kmymoneysettings_addons.cpp\"
 Visibility=KMM_SETTINGS_EXPORT
 CustomAdditions=true
+UseEnumTypes=true

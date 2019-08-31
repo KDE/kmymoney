@@ -48,6 +48,7 @@ namespace KMyMoney {
     Q_OBJECT
   public:
     explicit OldDateEdit(const QDate& date, QWidget* parent = nullptr);
+    void setInitialSection(Section section) { m_initialSection = section; }
 
   protected:
     /** if the date was cleared (a state which is not supported by QDateEdit)
@@ -64,6 +65,8 @@ namespace KMyMoney {
     /** reimplemented for internal reasons */
     void focusInEvent(QFocusEvent *event) final override;
 
+  private:
+    QDateEdit::Section  m_initialSection;
   };
 }; // namespace
 

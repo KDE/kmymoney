@@ -327,6 +327,15 @@
    <label>Sort order of register in search dialog</label>
    <default>1,-9,-4</default>
   </entry>
+  <entry name="initialDateFieldCursorPosition" type="Enum">
+   <label>Initial cursor position within the date field</label>
+   <default>Day</default>
+   <choices name="PositionType">
+     <choice name="Day"/>
+     <choice name="Month"/>
+     <choice name="Year"/>
+   </choices>
+  </entry>
   <entry name="defaultReconciliationState" type="Int">
    <label>Default reconciliation state for transactions entered during reconciliation</label>
    <default>0</default>

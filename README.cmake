@@ -145,3 +145,24 @@ $ make developer-doc
 
 $ make test
     to process all unit tests.
+
+-----------------------------------------------------
+Quick-start 5: Run kmymoney from build dir
+-----------------------------------------------------
+
+Instead of installing kmymoney in a system location to be able to
+run it with any newly compiled plugins, you can use the following
+recipe to run kmymoney from a build directory.
+
+After compiling kmymoney (see Quickstart 1:), the following commands
+must be executed once to see icons in the application
+
+$ cd build
+$ make install DESTDIR=$PWD/tmp
+
+After each build you can start kmymoney with
+
+$ cd build
+$ XDG_DATA_DIRS=$PWD/tmp/usr/local/share:$XDG_DATA_DIRS \
+  QT_PLUGIN_PATH=$PWD/lib:$QT_PLUGIN_PATH \
+  LD_LIBRARY_PATH=$PWD/lib bin/kmymoney

@@ -18,6 +18,7 @@
  */
 
 #include "kmymoneydateinput.h"
+#include "kmymoneysettings.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -55,8 +56,9 @@ const int DATE_POPUP_TIMEOUT = 1500;
 const QDate INVALID_DATE = QDate(1800, 1, 1);
 }
 
-KMyMoney::OldDateEdit::OldDateEdit(const QDate& date, QWidget* parent) :
-  QDateEdit(date, parent)
+KMyMoney::OldDateEdit::OldDateEdit(const QDate& date, QWidget* parent)
+  : QDateEdit(date, parent)
+  , m_initialSection(QDateTimeEdit::DaySection)
 {
 }
 
@@ -68,7 +70,7 @@ void KMyMoney::OldDateEdit::keyPressEvent(QKeyEvent* k)
     // (the same meaning as clearing the date) - in this case set the date
     // to the current date and let the editor do the actual work
     setDate(QDate::currentDate());
-    setSelectedSection(QDateTimeEdit::DaySection); // start as when focused in if the date was cleared
+    setSelectedSection(m_initialSection); // start as when focused in if the date was cleared
   }
   QDateEdit::keyPressEvent(k);
 }
@@ -76,7 +78,7 @@ void KMyMoney::OldDateEdit::keyPressEvent(QKeyEvent* k)
 void KMyMoney::OldDateEdit::focusInEvent(QFocusEvent * event)
 {
   QDateEdit::focusInEvent(event);
-  setSelectedSection(QDateTimeEdit::DaySection);
+  setSelectedSection(m_initialSection);
 }
 
 bool KMyMoney::OldDateEdit::event(QEvent* e)
@@ -105,7 +107,7 @@ bool KMyMoney::OldDateEdit::focusNextPrevChild(bool next)
 }
 
 struct KMyMoneyDateInput::Private {
-  QDateEdit *m_dateEdit;
+  KMyMoney::OldDateEdit *m_dateEdit;
   KDatePicker *m_datePicker;
   QDate m_date;
   QDate m_prevDate;
@@ -147,6 +149,17 @@ KMyMoneyDateInput::KMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   d->m_dateFrame->hide();
 
   d->m_dateEdit->setDisplayFormat(QLocale().dateFormat(QLocale::ShortFormat));
+  switch(KMyMoneySettings::initialDateFieldCursorPosition()) {
+    case KMyMoneySettings::Day:
+      d->m_dateEdit->setInitialSection(QDateTimeEdit::DaySection);
+      break;
+    case KMyMoneySettings::Month:
+      d->m_dateEdit->setInitialSection(QDateTimeEdit::MonthSection);
+      break;
+    case KMyMoneySettings::Year:
+      d->m_dateEdit->setInitialSection(QDateTimeEdit::YearSection);
+      break;
+  }
 
   d->m_datePicker = new KDatePicker(d->m_date, d->m_dateFrame);
   dateFrameVBoxLayout->addWidget(d->m_datePicker);

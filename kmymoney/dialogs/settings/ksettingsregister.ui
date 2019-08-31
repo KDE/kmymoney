@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>632</width>
-    <height>500</height>
+    <height>512</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tab">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab1">
       <attribute name="title">
@@ -245,8 +245,50 @@
         </widget>
        </item>
        <item>
-        <layout class="QHBoxLayout">
-         <item>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="textLabel2_1">
+           <property name="text">
+            <string>Initial cursor position within the date field</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QComboBox" name="kcfg_initialDateFieldCursorPosition">
+           <item>
+            <property name="text">
+             <string>Day</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Month</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Year</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <spacer name="spacer16">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Expanding</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>31</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="0">
           <widget class="QLabel" name="textLabel2_2">
            <property name="text">
             <string>Default reconciliation state</string>
@@ -256,7 +298,7 @@
            </property>
           </widget>
          </item>
-         <item>
+         <item row="1" column="1">
           <widget class="KComboBox" name="kcfg_defaultReconciliationState">
            <property name="toolTip">
             <string>Default reconciliation state for transactions entered during reconciliation of an account</string>
@@ -278,7 +320,7 @@
            </item>
           </widget>
          </item>
-         <item>
+         <item row="1" column="2">
           <spacer name="spacer15">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
