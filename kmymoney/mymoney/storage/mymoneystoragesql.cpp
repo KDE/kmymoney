@@ -3838,99 +3838,121 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(con
     signalProgress(0, transactionsNb, QObject::tr("Loading transactions..."));
   }
   int progress = 0;
-//  m_payeeList.clear();
-  QString whereClause = " WHERE txType = 'N' ";
+  const MyMoneyDbTable& t = m_db.m_tables["kmmTransactions"];
+  const MyMoneyDbTable& ts = m_db.m_tables["kmmSplits"];
+  QSqlQuery q(*const_cast <MyMoneyStorageSql*>(this));
+
+  QString whereClause;
   if (! tidList.isEmpty()) {
     whereClause += " AND id IN " + tidList;
   }
-  if (!dateClause.isEmpty()) whereClause += " and " + dateClause;
-  const MyMoneyDbTable& t = m_db.m_tables["kmmTransactions"];
-  QSqlQuery q(*const_cast <MyMoneyStorageSql*>(this));
-  q.prepare(t.selectAllString(false) + whereClause + " ORDER BY id;");
-  if (!q.exec()) throw MYMONEYEXCEPTION(buildError(q, Q_FUNC_INFO, QString("reading Transaction"))); // krazy:exclude=crashy
-  const MyMoneyDbTable& ts = m_db.m_tables["kmmSplits"];
-  whereClause = " WHERE txType = 'N' ";
-  if (! tidList.isEmpty()) {
-    whereClause += " AND transactionId IN " + tidList;
+  if (!dateClause.isEmpty())
+    whereClause += " AND " + dateClause;
+
+  const QString queryString = QString("SELECT %1, %2 FROM %3 LEFT JOIN %4 ON %4.id = %3.transactionId WHERE %3.txType = 'N' %5 ORDER BY transactionId,splitId;")
+          .arg(ts.fullColumnString(), t.fullColumnString(), ts.name(), t.name(), whereClause);
+  if (!q.exec(queryString)) {   // krazy:exclude=crashy
+    throw MYMONEYEXCEPTION("reading Splits");
   }
-  if (!dateClause.isEmpty()) whereClause += " and " + dateClause;
-  QSqlQuery qs(*const_cast <MyMoneyStorageSql*>(this));
-  QString splitQuery = ts.selectAllString(false) + whereClause
-                       + " ORDER BY transactionId, splitId;";
-  qs.prepare(splitQuery);
-  if (!qs.exec()) throw MYMONEYEXCEPTION(buildError(qs, Q_FUNC_INFO, "reading Splits")); // krazy:exclude=crashy
-  QString splitTxId = "ZZZ";
-  MyMoneySplit s;
-  if (qs.next()) {
-    splitTxId = qs.value(0).toString();
-    readSplit(s, qs);
-  } else {
-    splitTxId = "ZZZ";
-  }
+
+  static const int splitIdCol = ts.fieldNumber("splitId");
+  static const int transactionIdCol = ts.fieldNumber("transactionId");
+  static const int payeeIdCol = ts.fieldNumber("payeeId");
+  static const int reconcileDateCol = ts.fieldNumber("reconcileDate");
+  static const int actionCol = ts.fieldNumber("action");
+  static const int reconcileFlagCol = ts.fieldNumber("reconcileFlag");
+  static const int valueCol = ts.fieldNumber("value");
+  static const int sharesCol = ts.fieldNumber("shares");
+  static const int priceCol = ts.fieldNumber("price");
+  static const int memoCol = ts.fieldNumber("memo");
+  static const int accountIdCol = ts.fieldNumber("accountId");
+  //static const int costCenterIdCol = ts.fieldNumber("costCenterId");
+  static const int checkNumberCol = ts.fieldNumber("checkNumber");
+  static const int bankIdCol = ts.fieldNumber("bankId");
+
+  static int base = bankIdCol + 1;
+  static const int txIdCol = base + t.fieldNumber("id");
+  static const int txPostDateCol = base + t.fieldNumber("postDate");
+  static const int txMemoCol = base + t.fieldNumber("memo");
+  static const int txEntryDateCol = base + t.fieldNumber("entryDate");
+  static const int txCurrencyIdCol = base + t.fieldNumber("currencyId");
+  static const int txBankIdCol = base + t.fieldNumber("bankId");
+
   QMap <QString, MyMoneyTransaction> txMap;
-  QStringList txList;
-  int idCol = t.fieldNumber("id");
-  int postDateCol = t.fieldNumber("postDate");
-  int memoCol = t.fieldNumber("memo");
-  int entryDateCol = t.fieldNumber("entryDate");
-  int currencyIdCol = t.fieldNumber("currencyId");
-  int bankIdCol = t.fieldNumber("bankId");
+  MyMoneyTransaction tx;
+
+  QSqlQuery tagQuery(*const_cast <MyMoneyStorageSql*>(this));
+  tagQuery.prepare("SELECT tagId FROM kmmTagSplits WHERE splitId = :id AND transactionId = :transactionId");
+
+  QSqlQuery kvpQuery(*const_cast <MyMoneyStorageSql*>(this));
+  kvpQuery.prepare("SELECT * FROM kmmKeyValuePairs WHERE kvpType = :type AND kvpId = :id;");
+  kvpQuery.bindValue(":type", QStringLiteral("TRANSACTION"));
 
   while (q.next()) {
-    MyMoneyTransaction tx;
-    QString txId = GETSTRING(idCol);
-    tx.setPostDate(GETDATE(postDateCol));
-    tx.setMemo(GETSTRING(memoCol));
-    tx.setEntryDate(GETDATE(entryDateCol));
-    tx.setCommodity(GETSTRING(currencyIdCol));
-    tx.setBankID(GETSTRING(bankIdCol));
-
-    // skip all splits while the transaction id of the split is less than
-    // the transaction id of the current transaction. Don't forget to check
-    // for the ZZZ flag for the end of the list.
-    while (txId < splitTxId && splitTxId != "ZZZ") {
-      if (qs.next()) {
-        splitTxId = qs.value(0).toString();
-        readSplit(s, qs);
-      } else {
-        splitTxId = "ZZZ";
+    QString txId = GETSTRING(txIdCol);
+    // check if the transaction has been collected completely
+    // and store it in the map
+    if (txId != tx.id()) {
+      if (!tx.id().isEmpty()) {
+        txMap.insert(tx.uniqueSortKey(), tx);
       }
-    }
+      // start a new transaction
+      tx = MyMoneyTransaction(txId, MyMoneyTransaction());
+      tx.setPostDate(GETDATE(txPostDateCol));
+      tx.setMemo(GETSTRING(txMemoCol));
+      tx.setEntryDate(GETDATE(txEntryDateCol));
+      tx.setCommodity(GETSTRING(txCurrencyIdCol));
+      tx.setBankID(GETSTRING(txBankIdCol));
 
-    // while the split transaction id matches the current transaction id,
-    // add the split to the current transaction. Set the ZZZ flag if
-    // all splits for this transaction have been read.
-    while (txId == splitTxId) {
-      tx.addSplit(s);
-      if (qs.next()) {
-        splitTxId = qs.value(0).toString();
-        readSplit(s, qs);
-      } else {
-        splitTxId = "ZZZ";
+      // get the KVPs
+      kvpQuery.bindValue(":id", txId);
+      if (!kvpQuery.exec()) {   // krazy:exclude=crashy
+        throw MYMONEYEXCEPTION(QString::fromLatin1("reading Kvp for %1 %2").arg(kvpQuery.boundValue(":type").toString(), txId));
       }
+
+      QMap<QString, QString> pairs;
+      while (kvpQuery.next()) {
+        pairs.insert(kvpQuery.value(0).toString(), kvpQuery.value(1).toString());
+      }
+      tx.setPairs(pairs);
     }
 
-    // Process any key value pair
-    if (! txId.isEmpty()) {
-      txList.append(txId);
-      tx = MyMoneyTransaction(txId, tx);
-      txMap.insert(tx.uniqueSortKey(), tx);
-    }
-  }
+    // prepare split
+    MyMoneySplit s;
+    s.setPayeeId(GETSTRING(payeeIdCol));
+    s.setReconcileDate(GETDATE(reconcileDateCol));
+    s.setAction(GETSTRING(actionCol));
+    s.setReconcileFlag(static_cast<MyMoneySplit::reconcileFlagE>(GETINT(reconcileFlagCol)));
+    s.setValue(MyMoneyMoney(QStringEmpty(GETSTRING(valueCol))));
+    s.setShares(MyMoneyMoney(QStringEmpty(GETSTRING(sharesCol))));
+    s.setPrice(MyMoneyMoney(QStringEmpty(GETSTRING(priceCol))));
+    s.setMemo(GETSTRING(memoCol));
+    s.setAccountId(GETSTRING(accountIdCol));
+    s.setNumber(GETSTRING(checkNumberCol));
+    //s.setPostDate(GETDATETIME(postDateCol)); // FIXME - when Tom puts date into split object
+    //s.setCostCenterId(GETSTRING(costCenterIdCol));
+    s.setBankID(GETSTRING(bankIdCol));
 
-  // get the kvps
-  QHash <QString, MyMoneyKeyValueContainer> kvpMap = readKeyValuePairs("TRANSACTION", txList);
-  QMap<QString, MyMoneyTransaction>::Iterator txMapEnd = txMap.end();
-  for (QMap<QString, MyMoneyTransaction>::Iterator i = txMap.begin();
-       i != txMapEnd; ++i) {
-    i.value().setPairs(kvpMap[i.value().id()].pairs());
+    // add tag list
+    QList<QString> tagIdList;
+    tagQuery.bindValue(":id", GETSTRING(splitIdCol));
+    tagQuery.bindValue(":transactionId", GETSTRING(transactionIdCol));
+    if (!tagQuery.exec()) {    // krazy:exclude=crashy
+      throw MYMONEYEXCEPTION("reading tagId in Split");
+    }
+    while (tagQuery.next())
+      tagIdList << tagQuery.value(0).toString();
+
+    s.setTagIdList(tagIdList);
+    tx.addSplit(s);
 
     if (m_displayStatus) signalProgress(++progress, 0);
   }
-
-  if ((tidList.isEmpty()) && (dateClause.isEmpty())) {
-    //qDebug("setting full list read");
+  // make sure to not forget the last transaction
+  if (!tx.id().isEmpty()) {
+    txMap.insert(tx.uniqueSortKey(), tx);
   }
+
   return txMap;
 }
 
@@ -4126,11 +4148,11 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(con
   QString dateClause;
   QString connector = "";
   if (end != QDate()) {
-    dateClause = QString("(postDate < '%1')").arg(end.addDays(1).toString(Qt::ISODate));
+    dateClause = QString("(kmmTransactions.postDate < '%1')").arg(end.addDays(1).toString(Qt::ISODate));
     connector = " AND ";
   }
   if (start != QDate()) {
-    dateClause += QString("%1 (postDate >= '%2')").arg(connector).arg(start.toString(Qt::ISODate));
+    dateClause += QString("%1 (kmmTransactions.postDate >= '%2')").arg(connector).arg(start.toString(Qt::ISODate));
   }
   // now get a list of transaction ids
   // if we have only a date filter, we need to build the list from the tx table
@@ -4139,6 +4161,7 @@ const QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(con
     inQuery = QString("(SELECT DISTINCT transactionId FROM kmmSplits %1)").arg(whereClause);
   } else {
     inQuery = QString("(SELECT DISTINCT id FROM kmmTransactions WHERE %1)").arg(dateClause);
+    dateClause = "";
     txFilterActive = false; // kill off the date filter now
   }
 
@@ -4200,6 +4223,7 @@ void MyMoneyStorageSql::readSplit(MyMoneySplit& s, const QSqlQuery& q) const
   s.setAccountId(GETSTRING(accountIdCol));
   s.setNumber(GETSTRING(checkNumberCol));
   //s.setPostDate(GETDATETIME(postDateCol)); // FIXME - when Tom puts date into split object
+  //s.setCostCenterId(GETSTRING(costCenterIdCol));
   s.setBankID(GETSTRING(bankIdCol));
 
   return;
