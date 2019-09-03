@@ -104,6 +104,21 @@ public:
   QString defaultValue() const {
     return m_defaultValue;
   }
+
+  inline QString fullColumnString() const
+  {
+    QString colList = columnList();
+    const QStringList columns = colList.remove(QChar(' ')).split(',');
+    const int maxColumn = columns.count();
+    QString qs;
+    for (int i = 0; i < maxColumn; ++i) {
+      qs += QString("%1.%2, ").arg(m_name, columns.at(i));
+    }
+    if (!qs.isEmpty())
+      qs = qs.left(qs.length() - 2);
+    return qs;
+  }
+
 private:
   QString m_name;
   QString m_type;
