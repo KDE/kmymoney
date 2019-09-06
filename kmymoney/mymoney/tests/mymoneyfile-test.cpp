@@ -1948,7 +1948,7 @@ void MyMoneyFileTest::testOpeningBalance()
 void MyMoneyFileTest::testModifyStdAccount()
 {
   QVERIFY(m->asset().currencyId().isEmpty());
-  QCOMPARE(m->asset().name(), QLatin1String("Asset"));
+  QCOMPARE(m->asset().name(), QLatin1String("Asset accounts"));
   testBaseCurrency();
   QVERIFY(m->asset().currencyId().isEmpty());
   QVERIFY(!m->baseCurrency().id().isEmpty());

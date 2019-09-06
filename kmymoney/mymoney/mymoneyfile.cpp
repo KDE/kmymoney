@@ -653,7 +653,12 @@ void MyMoneyFile::modifyInstitution(const MyMoneyInstitution& institution)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  d->institutionsModel.modifyItem(institution);
+  const auto idx = d->institutionsModel.indexById(institution.id());
+  if (!idx.isValid()) {
+    throw MYMONEYEXCEPTION_CSTRING("Unknown institution");
+  }
+
+  d->institutionsModel.modifyItem(idx, institution);
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, institution);
 }
 
@@ -662,6 +667,9 @@ void MyMoneyFile::removeInstitution(const MyMoneyInstitution& institution)
   d->checkTransaction(Q_FUNC_INFO);
 
   MyMoneyInstitution inst = d->institutionsModel.itemById(institution.id());
+
+  if (inst.id().isEmpty())
+    throw MYMONEYEXCEPTION_CSTRING("Unknown institution");
 
   bool blocked = signalsBlocked();
   blockSignals(true);
@@ -771,10 +779,12 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  /// @todo port to new model code
   MyMoneyAccount account(_account);
 
   QModelIndex idx = d->accountsModel.indexById(account.id());
+  if (!idx.isValid())
+    throw MYMONEYEXCEPTION_CSTRING("Unknown account");
+
   auto acc = d->accountsModel.itemByIndex(idx);
 
   // check that for standard accounts only specific parameters are changed
@@ -792,8 +802,15 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
   }
 
   if (account.accountType() != acc.accountType() &&
-      !account.isLiquidAsset() && !acc.isLiquidAsset())
+      (!account.isLiquidAsset() || !acc.isLiquidAsset()))
     throw MYMONEYEXCEPTION_CSTRING("Unable to change account type");
+
+  // make sure that all the referenced objects exist
+  if (!account.institutionId().isEmpty())
+    institution(account.institutionId());
+
+  for (const auto sAccount : account.accountList())
+    this->account(sAccount);
 
   // if the account was moved to another institution, we notify
   // the old one as well as the new one and the structure change
@@ -854,7 +871,11 @@ MyMoneyInstitution MyMoneyFile::institution(const QString& id) const
   if (Q_UNLIKELY(id.isEmpty())) // FIXME: Stop requesting accounts with empty id
     return MyMoneyInstitution();
 
-  return d->institutionsModel.itemById(id);
+  const auto idx = d->institutionsModel.indexById(id);
+  if (idx.isValid())
+    return d->institutionsModel.itemByIndex(idx);
+
+  throw MYMONEYEXCEPTION_CSTRING("Unknown institution");
 }
 
 MyMoneyAccount MyMoneyFile::account(const QString& id) const
@@ -862,7 +883,11 @@ MyMoneyAccount MyMoneyFile::account(const QString& id) const
   if (Q_UNLIKELY(id.isEmpty())) // FIXME: Stop requesting accounts with empty id
     return MyMoneyAccount();
 
-  return d->accountsModel.itemById(id);
+  const auto idx = d->accountsModel.indexById(id);
+  if (idx.isValid())
+    return d->accountsModel.itemByIndex(idx);
+
+  throw MYMONEYEXCEPTION_CSTRING("Unknown account");
 }
 
 MyMoneyAccount MyMoneyFile::subAccountByName(const MyMoneyAccount& account, const QString& name) const
@@ -1703,8 +1728,12 @@ void MyMoneyFile::setUser(const MyMoneyPayee& user)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  /// @todo port to new model code
-  d->m_storage->setUser(user);
+  auto payee = MyMoneyPayee(fixedKey(MyMoneyFile::UserID), user);
+  if (d->userModel.rowCount() == 0) {
+    d->userModel.addItem(payee);
+  } else {
+    d->userModel.modifyItem(payee);
+  }
 }
 
 bool MyMoneyFile::dirty() const
