@@ -189,9 +189,25 @@ void CheckPrinting::slotPrintCheck()
     checkHTML.replace("$PAYEE_CITY", file->payee((*it).split().payeeId()).city());
     checkHTML.replace("$PAYEE_POSTCODE", file->payee((*it).split().payeeId()).postcode());
     checkHTML.replace("$PAYEE_STATE", file->payee((*it).split().payeeId()).state());
-    checkHTML.replace("$AMOUNT_STRING", converter.convert((*it).split().shares().abs(), currency.smallestAccountFraction()));
-    checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().shares().abs(), currency));
+    checkHTML.replace("$AMOUNT_STRING", converter.convert((*it).split().value().abs(), currency.smallestAccountFraction()));
+    checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().value().abs(), currency));
     checkHTML.replace("$MEMO", (*it).split().memo());
+    const auto currencyId = (*it).transaction().commodity();
+    const auto accountcurrency = MyMoneyFile::instance()->currency(currencyId);
+    checkHTML.replace("$TRANSACTIONCURRENCY", accountcurrency.tradingSymbol());
+    int numSplits = (*it).transaction().splitCount();
+    const int maxSplits = 11;
+    for (int i = 0; i < maxSplits; ++i) {
+        const QString valueVariable = QString("$SPLITVALUE%1").arg(i);
+        const QString accountVariable = QString("$SPLITACCOUNTNAME%1").arg(i);
+        if (i < numSplits) {
+            checkHTML.replace( valueVariable, MyMoneyUtils::formatMoney((*it).transaction().splits()[i].value().abs(), currency));
+            checkHTML.replace( accountVariable, (file->account((*it).transaction().splits()[i].accountId())).name());
+        } else {
+            checkHTML.replace( valueVariable, " ");
+            checkHTML.replace( accountVariable, " ");
+        }
+    }
 
     // print the check
     htmlPart->setHtml(checkHTML, QUrl("file://"));
