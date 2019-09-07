@@ -158,7 +158,7 @@ struct AccountsModel::Private
   {
     switch(account.accountGroup()) {
       case eMyMoney::Account::Type::Liability:
-      case eMyMoney::Account::Type::Expense:
+      case eMyMoney::Account::Type::Income:
       case eMyMoney::Account::Type::Equity:
         return -amount;
       default:

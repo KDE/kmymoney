@@ -2289,6 +2289,11 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
     d->m_myMoneyView->slotRefreshViews();
     return;
   }
+
+  d->m_myMoneyView->slotSettingsChanged();
+
+  /// @todo port to new model code
+  // this should all be handled by calling the KMyMoneyView::slotSettingsChanged() slot
   MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
 
 #ifdef ENABLE_UNFINISHEDFEATURES
@@ -2302,6 +2307,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
 
   // update the report module settings
   MyMoneyReport::setLineWidth(KMyMoneySettings::lineWidth());
+  /// @todo port to new model code --end
 
   // update the holiday region configuration
   setHolidayRegion(KMyMoneySettings::holidayRegion());

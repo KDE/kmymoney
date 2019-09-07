@@ -172,6 +172,7 @@ KMyMoneyView::KMyMoneyView()
     connect(viewBases[view.id], &KMyMoneyViewBase::selectByObject, this, &KMyMoneyView::slotSelectByObject);
     connect(viewBases[view.id], &KMyMoneyViewBase::selectByVariant, this, &KMyMoneyView::slotSelectByVariant);
     connect(viewBases[view.id], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
+    connect(this, &KMyMoneyView::settingsChanged, viewBases[view.id], &KMyMoneyViewBase::slotSettingsChanged);
   }
 
 /// @todo cleanup
@@ -417,6 +418,7 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
   connect(viewBases[idView], &KMyMoneyViewBase::selectByObject, this, &KMyMoneyView::slotSelectByObject);
   connect(viewBases[idView], &KMyMoneyViewBase::selectByVariant, this, &KMyMoneyView::slotSelectByVariant);
   connect(viewBases[idView], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
+  connect(this, &KMyMoneyView::settingsChanged, viewBases[idView], &KMyMoneyViewBase::slotSettingsChanged);
 
   auto icon = Icon::Forecast;
   switch (idView) {
@@ -446,10 +448,16 @@ void KMyMoneyView::removeView(View idView)
   disconnect(viewBases[idView], &KMyMoneyViewBase::selectByObject, this, &KMyMoneyView::slotSelectByObject);
   disconnect(viewBases[idView], &KMyMoneyViewBase::selectByVariant, this, &KMyMoneyView::slotSelectByVariant);
   disconnect(viewBases[idView], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
+  disconnect(this, &KMyMoneyView::settingsChanged, viewBases[idView], &KMyMoneyViewBase::slotSettingsChanged);
 
   m_model->removePage(viewFrames[idView]);
   viewFrames.remove(idView);
   viewBases.remove(idView);
+}
+
+void KMyMoneyView::slotSettingsChanged()
+{
+  emit settingsChanged();
 }
 
 QHash<eMenu::Action, QAction *> KMyMoneyView::actionsToBeConnected()

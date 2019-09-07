@@ -211,8 +211,10 @@ void AccountsProxyModel::addAccountGroup(const QVector<eMyMoney::Account::Type> 
 void AccountsProxyModel::addAccountType(eMyMoney::Account::Type type)
 {
   Q_D(AccountsProxyModel);
-  d->m_typeList << type;
-  invalidateFilter();
+  if (!d->m_typeList.contains(type)) {
+    d->m_typeList << type;
+    invalidateFilter();
+  }
 }
 
 /**

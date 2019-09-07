@@ -77,6 +77,13 @@ void KAccountsView::slotSettingsChanged()
   d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
   d->m_proxyModel->setHideFavoriteAccounts(true);
 
+  if (KMyMoneySettings::showCategoriesInAccountsView()) {
+    d->m_proxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense});
+  } else {
+    d->m_proxyModel->removeAccountType(eMyMoney::Account::Type::Income);
+    d->m_proxyModel->removeAccountType(eMyMoney::Account::Type::Expense);
+  }
+
   MyMoneyFile::instance()->accountsModel()->setColorScheme(AccountsModel::Positive, KMyMoneySettings::schemeColor(SchemeColor::Positive));
   MyMoneyFile::instance()->accountsModel()->setColorScheme(AccountsModel::Negative, KMyMoneySettings::schemeColor(SchemeColor::Negative));
 }

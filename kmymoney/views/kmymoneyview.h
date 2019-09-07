@@ -235,6 +235,7 @@ public Q_SLOTS:
   void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent);
   void slotSelectByVariant(const QVariantList& variant, eView::Intent intent);
   void slotCustomActionRequested(View view, eView::Action action);
+  void slotSettingsChanged();
 
   void slotFileOpened();
   void slotFileClosed();
@@ -322,6 +323,8 @@ Q_SIGNALS:
     * by plugins to get information about changes.
     */
   void accountSelected(const MyMoneyAccount& account);
+
+  void settingsChanged();
 };
 
 #endif

@@ -324,7 +324,9 @@ void SimpleLedgerView::setupCornerWidget()
 void SimpleLedgerView::slotSettingsChanged()
 {
   Q_D(SimpleLedgerView);
-  d->accountsModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
-  d->accountsModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
-  d->accountsModel->setHideFavoriteAccounts(false);
+  if (d->accountsModel) {
+    d->accountsModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
+    d->accountsModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+    d->accountsModel->setHideFavoriteAccounts(false);
+  }
 }
