@@ -190,8 +190,8 @@ struct AccountsModel::Private
   MyMoneyMoney profitLoss() const
   {
     Q_Q(const AccountsModel);
-    return q->incomeIndex().data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>()
-         + q->expenseIndex().data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>();
+    return -q->incomeIndex().data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>()
+         - q->expenseIndex().data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>();
   }
 
   QPair<MyMoneyMoney, bool> balanceToValue(const MyMoneyAccount& account, const MyMoneyMoney bal)

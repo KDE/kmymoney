@@ -27,7 +27,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QTimer>
 #include <QBitArray>
 #include <QMenu>
 
@@ -52,6 +51,7 @@
 #include "storageenums.h"
 #include "menuenums.h"
 #include "mymoneymoney.h"
+#include "accountdelegate.h"
 
 using namespace Icons;
 
@@ -59,29 +59,43 @@ KCategoriesView::KCategoriesView(QWidget *parent) :
     KMyMoneyViewBase(*new KCategoriesViewPrivate(this), parent)
 {
   Q_D(KCategoriesView);
-  d->ui->setupUi(this);
+  d->init();
 
   connect(pActions[eMenu::Action::NewCategory],    &QAction::triggered, this, &KCategoriesView::slotNewCategory);
   connect(pActions[eMenu::Action::EditCategory],   &QAction::triggered, this, &KCategoriesView::slotEditCategory);
   connect(pActions[eMenu::Action::DeleteCategory], &QAction::triggered, this, &KCategoriesView::slotDeleteCategory);
+
+  d->ui->m_accountTree->setItemDelegate(new AccountDelegate(d->ui->m_accountTree));
+  connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::profitLossChanged, this, &KCategoriesView::slotProfitLossChanged);
 }
 
 KCategoriesView::~KCategoriesView()
 {
 }
 
+void KCategoriesView::slotSettingsChanged()
+{
+  Q_D(KCategoriesView);
+  d->m_proxyModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
+  d->m_proxyModel->setHideEquityAccounts(true);
+  d->m_proxyModel->setHideFavoriteAccounts(true);
+
+  MyMoneyFile::instance()->accountsModel()->setColorScheme(AccountsModel::Positive, KMyMoneySettings::schemeColor(SchemeColor::Positive));
+  MyMoneyFile::instance()->accountsModel()->setColorScheme(AccountsModel::Negative, KMyMoneySettings::schemeColor(SchemeColor::Negative));
+}
+
+
 void KCategoriesView::executeCustomAction(eView::Action action)
 {
+  Q_D(KCategoriesView);
+
   switch(action) {
     case eView::Action::Refresh:
       refresh();
       break;
 
     case eView::Action::SetDefaultFocus:
-      {
-        Q_D(KCategoriesView);
-        QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
-      }
+      QMetaObject::invokeMethod(d->ui->m_accountTree, "setFocus");
       break;
 
     default:
@@ -117,13 +131,13 @@ void KCategoriesView::showEvent(QShowEvent * event)
 #if 0
   if (!d->m_proxyModel)
     d->init();
-#endif
 
   emit customActionRequested(View::Categories, eView::Action::AboutToShow);
 
   if (d->m_needsRefresh)
     refresh();
 
+  #endif
   // don't forget base class implementation
   QWidget::showEvent(event);
 }
@@ -180,11 +194,14 @@ void KCategoriesView::slotUnusedIncomeExpenseAccountHidden()
   d->ui->m_hiddenCategories->setVisible(d->m_haveUnusedCategories);
 }
 
-void KCategoriesView::slotProfitChanged(const MyMoneyMoney &profit)
+void KCategoriesView::slotProfitLossChanged(const MyMoneyMoney &profit, bool isApproximate)
 {
   Q_D(KCategoriesView);
-  /// @todo port to new model code
-  // d->netBalProChanged(profit, d->ui->m_totalProfitsLabel, View::Categories);
+  if (profit.isNegative()) {
+    d->updateNetWorthLabel(-profit, isApproximate, d->ui->m_totalProfitsLabel, i18n("Loss: %1"), KMyMoneySettings::schemeColor(SchemeColor::Negative));
+  } else {
+    d->updateNetWorthLabel(profit, isApproximate, d->ui->m_totalProfitsLabel, i18n("Profit: %1"), KMyMoneySettings::schemeColor(SchemeColor::Positive));
+  }
 }
 
 void KCategoriesView::slotShowCategoriesMenu(const MyMoneyAccount& acc)
@@ -211,14 +228,17 @@ void KCategoriesView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent
 
 void KCategoriesView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
 {
+  /// @todo cleanup
+#if 0
   switch (intent) {
     case eView::Intent::UpdateProfit:
       if (variant.count() == 1)
-        slotProfitChanged(variant.first().value<MyMoneyMoney>());
+        slotProfitLossChanged(variant.first().value<MyMoneyMoney>());
       break;
     default:
       break;
   }
+#endif
 }
 
 void KCategoriesView::slotNewCategory()

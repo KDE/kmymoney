@@ -64,7 +64,6 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
 
   connect(this, &KConfigDialog::rejected, schedulesPage, &KSettingsSchedules::slotResetRegion);
   connect(this, &KConfigDialog::rejected, iconsPage, &KSettingsIcons::slotResetTheme);
-  connect(this, &KConfigDialog::settingsChanged, generalPage, &KSettingsGeneral::slotUpdateEquitiesVisibility);
 
   auto defaultButton = button(QDialogButtonBox::RestoreDefaults);
   auto applyButton = button(QDialogButtonBox::Apply);

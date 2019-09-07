@@ -43,9 +43,8 @@ class KMyMoneyViewBasePrivate
 public:
   virtual ~KMyMoneyViewBasePrivate(){}
 
-  void updateNetWorthLabel(const MyMoneyMoney& value, bool isApproximate, QLabel* label, const QString& labelText)
+  void updateNetWorthLabel(const MyMoneyMoney& value, bool isApproximate, QLabel* label, const QString& labelText, const QColor& scheme)
   {
-    const QColor scheme = KMyMoneySettings::schemeColor(value.isNegative() ? SchemeColor::Negative : SchemeColor::Positive).convertTo(QColor::Rgb);
     const QString colorDef = QStringLiteral("#%1%2%3").arg(scheme.red(), 2, 16, QLatin1Char('0')).arg(scheme.green(), 2, 16, QLatin1Char('0')).arg(scheme.blue(), 2, 16, QLatin1Char('0'));
 
     QString s(MyMoneyUtils::formatMoney(value, MyMoneyFile::instance()->baseCurrency()));
@@ -60,6 +59,12 @@ public:
 
     label->setFont(KMyMoneySettings::listCellFontEx());
     label->setText(txt.arg(s));
+  }
+
+  void updateNetWorthLabel(const MyMoneyMoney& value, bool isApproximate, QLabel* label, const QString& labelText)
+  {
+    const QColor scheme = KMyMoneySettings::schemeColor(value.isNegative() ? SchemeColor::Negative : SchemeColor::Positive).convertTo(QColor::Rgb);
+    updateNetWorthLabel(value, isApproximate, label, labelText, scheme);
   }
 
   bool m_needsRefresh;
