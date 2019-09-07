@@ -455,6 +455,24 @@ void MyMoneyFile::unload()
   d->parametersModel.unload();
   d->onlineJobsModel.unload();
   d->reportsModel.unload();
+  d->m_baseCurrency = MyMoneySecurity();
+  d->m_dirty = false;
+}
+
+int MyMoneyFile::fileFixVersion() const
+{
+  QString version = d->parametersModel.itemById(fixedKey(FileFixVersion)).value();
+  if (version.isEmpty()) {
+    return availableFixVersion();
+  }
+  return version.toInt();
+}
+
+void MyMoneyFile::setFileFixVersion(int version)
+{
+  if (version > availableFixVersion())
+    version = availableFixVersion();
+  d->parametersModel.addItem(fixedKey(FileFixVersion), QString("%1").arg(version));
 }
 
 void MyMoneyFile::attachStorage(MyMoneyStorageMgr* const storage)
@@ -856,7 +874,18 @@ void MyMoneyFile::reparentAccount(MyMoneyAccount &acc, MyMoneyAccount& parent)
     // keep a notification of the current parent
     MyMoneyAccount curParent = account(acc.parentAccountId());
 
-    d->m_storage->reparentAccount(acc, parent);
+    if (!d->accountsModel.indexById(acc.id()).isValid())
+      throw MYMONEYEXCEPTION_CSTRING("Unable to reparent non existant account");
+
+    if (!d->accountsModel.indexById(acc.id()).isValid())
+      throw MYMONEYEXCEPTION_CSTRING("Unable to reparent to existant account");
+
+    // reparent in model
+    d->accountsModel.reparentAccount(acc.id(), parent.id());
+
+    // update data in references
+    acc = d->accountsModel.itemById(acc.id());
+    parent = d->accountsModel.itemById(parent.id());
 
     d->m_changeSet += MyMoneyNotification(File::Mode::Modify, curParent);
     d->m_changeSet += MyMoneyNotification(File::Mode::Modify, parent);
@@ -892,24 +921,26 @@ MyMoneyAccount MyMoneyFile::account(const QString& id) const
 
 MyMoneyAccount MyMoneyFile::subAccountByName(const MyMoneyAccount& account, const QString& name) const
 {
-  static MyMoneyAccount nullAccount;
-
   const auto accounts = account.accountList();
   for (const auto& acc : accounts) {
     const auto sacc = MyMoneyFile::account(acc);
     if (sacc.name().compare(name) == 0)
       return sacc;
   }
-  return nullAccount;
+  return {};
 }
 
 MyMoneyAccount MyMoneyFile::accountByName(const QString& name) const
 {
   try {
-    return d->accountsModel.itemByName(name);
+    auto indexList = d->accountsModel.indexListByName(name);
+    if (indexList.isEmpty()) {
+      return {};
+    }
+    return d->accountsModel.itemByIndex(indexList.first());
   } catch (const MyMoneyException &) {
   }
-  return MyMoneyAccount();
+  return {};
 }
 
 void MyMoneyFile::removeTransaction(const MyMoneyTransaction& transaction)
@@ -970,16 +1001,16 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 
   MyMoneyAccount parent;
   MyMoneyAccount acc;
-  MyMoneyInstitution institution;
 
   // check that the account and its parent exist
   // this will throw an exception if the id is unknown
   const auto idx = d->accountsModel.indexById(account.id());
+  if (!idx.isValid())
+    throw MYMONEYEXCEPTION_CSTRING("Unable to remove not existing account");
+
   acc = d->accountsModel.itemByIndex(idx);
 
   parent = d->accountsModel.itemById(account.parentAccountId());
-  if (!acc.institutionId().isEmpty())
-    institution = d->institutionsModel.itemById(acc.institutionId());
 
   // check that it's not one of the standard account groups
   if (isStandardAccount(account.id()))
@@ -989,23 +1020,31 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
     throw MYMONEYEXCEPTION_CSTRING("Unable to remove account with active splits");
   }
 
-  // collect all sub-ordinate accounts for notification
-  const auto accounts = acc.accountList();
-  for (const auto& id : accounts)
-    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, MyMoneyFile::account(id));
+  // re-parent all sub-ordinate accounts to the parent of the account
+  // to be deleted. First round check that all accounts exist, second
+  // round do the re-parenting.
+  for (const auto accountId : account.accountList()) {
+    this->account(accountId);
+  }
 
-  // don't forget the parent and a possible institution
+  // if one of the accounts did not exist, an exception had been
+  // thrown and we would not make it until here.
+  auto newParent = d->accountsModel.itemById(acc.parentAccountId());
+  for (const auto accountId : acc.accountList()) {
+    auto accountToMove = d->accountsModel.itemById(accountId);
+    reparentAccount(accountToMove, newParent);
+    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, MyMoneyFile::account(accountToMove.id()));
+  }
 
-  if (!institution.id().isEmpty()) {
+  // don't forget the a possible institution
+  if (!acc.institutionId().isEmpty()) {
+    MyMoneyInstitution institution = d->institutionsModel.itemById(acc.institutionId());
     institution.removeAccountId(account.id());
     modifyInstitution(institution);
-    // d->m_storage->modifyInstitution(institution);
-    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, institution);
   }
   acc.setInstitutionId(QString());
 
   d->accountsModel.removeItem(idx);
-  // d->m_storage->removeAccount(acc);
 
   d->m_balanceCache.clear(acc.id());
 
@@ -1237,6 +1276,14 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
   if (account.currencyId().isEmpty()) {
     account.setCurrencyId(baseCurrency().id());
   }
+
+  // make sure the currency exists
+  auto currency = security(account.currencyId());
+  if (currency.id().isEmpty())
+    throw MYMONEYEXCEPTION_CSTRING("Currency not found");
+
+  // setup fraction
+  account.fraction(currency);
 
   // make sure the parent id is setup
   account.setParentAccountId(parent.id());
@@ -1511,10 +1558,12 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
   // then add the transaction to the file global pool
   d->journalModel.addTransaction(transaction);
 
-  // scan the splits again to update notification list
+  // scan the splits again to update last account access and notification list
   const auto splits2 = transaction.splits();
-  for (const auto& split : splits2)
+  for (const auto& split : splits2) {
+    d->accountsModel.touchAccountById(split.accountId());;
     d->addCacheNotification(split.accountId(), transaction.postDate());
+  }
 
   d->m_changeSet += MyMoneyNotification(File::Mode::Add, transaction);
 }
@@ -1822,6 +1871,10 @@ MyMoneyMoney MyMoneyFile::balance(const QString& id, const QDate& date) const
     MyMoneyBalanceCacheItem bal = d->m_balanceCache.balance(id, date);
     if (bal.isValid())
       return bal.balance();
+  }
+
+  if (!d->accountsModel.indexById(id).isValid()) {
+    throw MYMONEYEXCEPTION_CSTRING("Cannot retrieve balance for unknown account");
   }
 
   const auto returnValue = d->journalModel.balance(id, date);
@@ -2975,7 +3028,10 @@ MyMoneySecurity MyMoneyFile::currency(const QString& id) const
   auto currency = d->currenciesModel.itemById(id);
   // in case we don't find a currency with this id, we try a security
   if (currency.id().isEmpty()) {
-    throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot retrieve currency with unknown id '%1'").arg(id));
+    currency = d->securitiesModel.itemById(id);
+    if (currency.id().isEmpty()) {
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot retrieve currency with unknown id '%1'").arg(id));
+    }
   }
   return currency;
 }
@@ -3250,29 +3306,25 @@ void MyMoneyFile::setBaseCurrency(const MyMoneySecurity& curr)
 
 void MyMoneyFile::addPrice(const MyMoneyPrice& price)
 {
-  /// @todo port to new model code
-#if 0
   if (price.rate(QString()).isZero())
     return;
 
   d->checkTransaction(Q_FUNC_INFO);
 
   // store the account's which are affected by this price regarding their value
-  d->priceChanged(*this, price);
-  d->m_storage->addPrice(price);
-#endif
+  d->priceChanged(price);
+
+  d->priceModel.addPrice(price);
 }
 
 void MyMoneyFile::removePrice(const MyMoneyPrice& price)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  /// @todo port to new model code
-#if 0
   // store the account's which are affected by this price regarding their value
-  d->priceChanged(*this, price);
-  d->m_storage->removePrice(price);
-#endif
+  d->priceChanged(price);
+
+  d->priceModel.removePrice(price);
 }
 
 MyMoneyPrice MyMoneyFile::price(const QString& fromId, const QString& toId, const QDate& date, const bool exactDate) const

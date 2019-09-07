@@ -103,7 +103,7 @@ QVariant PriceModel::data(const QModelIndex& idx, int role) const
   if (idx.row() < 0 || idx.row() >= rowCount(idx.parent()))
     return QVariant();
 
-  const MyMoneyPrice& priceEntry = static_cast<TreeItem<MyMoneyPrice>*>(idx.internalPointer())->constDataRef();
+  const PriceEntry& priceEntry = static_cast<TreeItem<PriceEntry>*>(idx.internalPointer())->constDataRef();
 
   switch(role) {
     case Qt::DisplayRole:
@@ -141,8 +141,7 @@ QVariant PriceModel::data(const QModelIndex& idx, int role) const
       return QVariant(Qt::AlignLeft | Qt::AlignTop);
 
     case eMyMoney::Model::Roles::IdRole:
-      /// @todo return an id
-      return QString();
+      return priceEntry.id();
 
 
     default:
@@ -200,19 +199,24 @@ void PriceModel::load(const QMap<MyMoneySecurityPair, MyMoneyPriceEntries>& list
   qDebug() << "Model for prices loaded with" << rowCount() << "items";
 }
 
-void PriceModel::addPrice(MyMoneyPrice& price)
+void PriceModel::addPrice(const MyMoneyPrice& price)
 {
   PriceEntry newEntry(price);
 
   // find the entry or the position where to insert a new one
   QModelIndex idx = MyMoneyModelBase::lowerBound(newEntry.id());
+  int row = idx.row();
+  if (!idx.isValid()) {
+    row = rowCount();
+  }
   if (idx.data(eMyMoney::Model::IdRole).toString() != newEntry.id()) {
-    insertRow(idx.row());
+    insertRow(row);
   }
 
-  if (static_cast<TreeItem<PriceEntry>*>(index(idx.row(), 0).internalPointer())->dataRef() != newEntry) {
-    static_cast<TreeItem<PriceEntry>*>(index(idx.row(), 0).internalPointer())->dataRef() = newEntry;
-    emit dataChanged(idx, index(idx.row(), columnCount()));
+  if (static_cast<TreeItem<PriceEntry>*>(index(row, 0).internalPointer())->dataRef() != newEntry) {
+    static_cast<TreeItem<PriceEntry>*>(index(row, 0).internalPointer())->dataRef() = newEntry;
+    emit dataChanged(idx, index(row, columnCount()));
+    setDirty();
   }
 }
 
@@ -220,10 +224,11 @@ void PriceModel::removePrice(const MyMoneyPrice& price)
 {
   PriceEntry newEntry(price);
 
-  // find the entry or the position where to insert a new one
+  // find the entry or the position where to remove the entry
   QModelIndex idx = MyMoneyModelBase::lowerBound(newEntry.id());
-  if (idx.data(eMyMoney::Model::IdRole).toString() != newEntry.id()) {
+  if (idx.data(eMyMoney::Model::IdRole).toString() == newEntry.id()) {
     removeRow(idx.row());
+    setDirty();
   }
 }
 
@@ -236,7 +241,7 @@ MyMoneyPrice PriceModel::price(const QString& from, const QString& to, const QDa
   // find the last matching price
   QModelIndex idx = MyMoneyModelBase::lowerBound(id);
   if (!idx.isValid()) {
-    return MyMoneyPrice();
+    return {};
   }
   auto priceEntry = static_cast<TreeItem<PriceEntry>*>(index(idx.row(), 0).internalPointer())->data();
 
@@ -247,7 +252,7 @@ MyMoneyPrice PriceModel::price(const QString& from, const QString& to, const QDa
 
   // in case the caller wanted the exact date we are done
   if (exactDate) {
-    return MyMoneyPrice();
+    return {};
   }
 
   // since lower bound returns the first item with a larger key (we already know that key is not present)
@@ -259,7 +264,7 @@ MyMoneyPrice PriceModel::price(const QString& from, const QString& to, const QDa
       return std::move(priceEntry);
     }
   }
-  return MyMoneyPrice();
+  return {};
 }
 
 MyMoneyPriceList PriceModel::priceList() const

@@ -96,7 +96,7 @@ public:
    */
   MyMoneyPrice price(const QString& from, const QString& to, const QDate& date, bool exactDate) const;
 
-  void addPrice(MyMoneyPrice& price);
+  void addPrice(const MyMoneyPrice& price);
   void removePrice(const MyMoneyPrice& price);
   MyMoneyPriceList priceList() const;
 

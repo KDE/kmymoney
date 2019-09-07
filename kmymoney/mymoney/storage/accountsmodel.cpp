@@ -201,6 +201,7 @@ struct AccountsModel::Private
     bool needConvert = false;
     MyMoneyMoney accountValue(bal);
     QList<MyMoneyPrice> prices;
+    MyMoneyPrice price;
     bool approximate = false;
     if (!bal.isZero()) {
       const auto baseCurrency = file->baseCurrency();
@@ -208,11 +209,17 @@ struct AccountsModel::Private
       if (account.isInvest()) {
         security = file->security(account.currencyId());
         if (!security.id().isEmpty()) {
-          prices += file->price(account.currencyId(), security.tradingCurrency());
+          price = file->price(account.currencyId(), security.tradingCurrency());
+          if (price.isValid()) {
+            prices += price;
+          }
           if (security.tradingCurrency() != baseCurrency.id()) {
             MyMoneySecurity sec = file->currency(security.tradingCurrency());
             if (!sec.id().isEmpty()) {
-              prices += file->price(sec.id(), baseCurrency.id());
+              price = file->price(sec.id(), baseCurrency.id());
+              if (price.isValid()) {
+                prices += price;
+              }
             } else {
               qDebug() << security.tradingCurrency() << "not found";
               approximate = true;
@@ -223,7 +230,10 @@ struct AccountsModel::Private
       } else if (account.currencyId() != baseCurrency.id()) {
         security = file->currency(account.currencyId());
         if (!security.id().isEmpty()) {
-          prices += file->price(account.currencyId(), baseCurrency.id());
+          price = file->price(account.currencyId(), baseCurrency.id());
+          if (price.isValid()) {
+            prices += price;
+          }
         } else {
           qDebug() << security.id() << "not found";
           approximate = true;
@@ -245,6 +255,26 @@ struct AccountsModel::Private
       accountValue = accountValue.convert(file->baseCurrency().smallestAccountFraction());
     }
     return qMakePair(accountValue, approximate);
+  }
+
+  MyMoneyAccount itemByName(const QString& name, const QModelIndex& start) const
+  {
+    Q_Q(const AccountsModel);
+    QStringList parts = name.split(MyMoneyAccount::accountSeparator());
+    if (parts.isEmpty())
+      return {};
+
+    QModelIndex parent = start;
+    QModelIndexList indexes;
+    do {
+      indexes = q->MyMoneyModelBase::indexListByName(parts.at(0), parent);
+      if (indexes.isEmpty()) {
+        return {};
+      }
+      parent = indexes.first();
+      parts.takeFirst();
+    } while(!parts.isEmpty());
+    return q->MyMoneyModel::itemByIndex(parent);
   }
 
   struct DefaultAccounts {
@@ -702,7 +732,7 @@ QModelIndex AccountsModel::indexById(const QString& id) const
 QModelIndexList AccountsModel::indexListByName(const QString& name) const
 {
   // never search in the first row which is favorites
-  return match(index(1, 0), Qt::DisplayRole, name, 1, Qt::MatchFixedString | Qt::MatchCaseSensitive);
+  return match(assetIndex(), Qt::DisplayRole, name, 1, Qt::MatchFixedString | Qt::MatchCaseSensitive | Qt::MatchRecursive);
 }
 
 void AccountsModel::addFavorite(const QString& id)
@@ -723,6 +753,34 @@ void AccountsModel::addFavorite(const QString& id)
     static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->dataRef() = subAccount;
     // don't modify the dirty flag here. This is done elsewhere.
     setDirty(dirty);
+  }
+}
+
+void AccountsModel::removeItem(const QModelIndex& idx)
+{
+  if (idx.isValid()) {
+    // update the parent internal structure
+    const auto parentIdx = idx.parent();
+    const auto accountId = static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->constDataRef().id();
+    static_cast<TreeItem<MyMoneyAccount>*>(parentIdx.internalPointer())->dataRef().removeAccountId(accountId);
+
+    // then remove the entry from the model
+    removeRow(idx.row(), idx.parent());
+
+    // and also from the favorites
+    removeFavorite(accountId);
+
+    setDirty();
+  }
+}
+
+void AccountsModel::touchAccountById(const QString& id)
+{
+  const auto idx = indexById(id);
+  if (idx.isValid()) {
+    static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->dataRef().touch();
+    setDirty();
+    emit dataChanged(idx, idx);
   }
 }
 
@@ -773,6 +831,7 @@ QString AccountsModel::accountIdToHierarchicalName(const QString& accountId, boo
   return indexToHierarchicalName(indexById(accountId), includeStandardAccounts);
 }
 
+
 QString AccountsModel::accountNameToId(const QString& category, eMyMoney::Account::Type type) const
 {
   QString id;
@@ -781,12 +840,12 @@ QString AccountsModel::accountNameToId(const QString& category, eMyMoney::Accoun
   // to locate it in the income accounts in case the type is not provided
   if (type == eMyMoney::Account::Type::Unknown
    || type == eMyMoney::Account::Type::Expense) {
-    id = itemByName(category, expenseIndex()).name();
+    id = d->itemByName(category, expenseIndex()).id();
   }
 
   if ((id.isEmpty() && type == eMyMoney::Account::Type::Unknown)
    || type == eMyMoney::Account::Type::Income) {
-    id = itemByName(category, incomeIndex()).name();
+    id = d->itemByName(category, incomeIndex()).id();
    }
 
   return id;
@@ -826,7 +885,6 @@ void AccountsModel::updateAccountBalances(const QHash<QString, MyMoneyMoney>& ba
 
   // suppress single updates while processing whole batch
   d->updateOnBalanceChange = false;
-  qDebug() << "Start updating balances in accounts";
   bool approximate = false;
   for(auto it = balances.constBegin(); it != balances.constEnd(); ++it) {
     MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(indexById(it.key()).internalPointer())->dataRef();
@@ -856,7 +914,6 @@ void AccountsModel::updateAccountBalances(const QHash<QString, MyMoneyMoney>& ba
   if (profit != newProfit)
     emit profitLossChanged(newProfit, approximate);
 
-  qDebug() << "End updating balances in accounts";
   endResetModel();
 }
 
@@ -880,3 +937,32 @@ QModelIndexList AccountsModel::accountsWithoutInstitutions() const
   return match(index(0, 0, assetIndex()), eMyMoney::Model::AccountInstitutionIdRole, QString(), -1, Qt::MatchExactly | Qt::MatchRecursive)
   + match(index(0, 0, liabilityIndex()), eMyMoney::Model::AccountInstitutionIdRole, QString(), -1, Qt::MatchExactly| Qt::MatchRecursive);
 }
+
+void AccountsModel::reparentAccount(const QString& accountId, const QString& newParentId)
+{
+  QModelIndex accountIdx = indexById(accountId);
+  QModelIndex parentIdx = accountIdx.parent();
+
+  // keep the account data
+  MyMoneyAccount account = static_cast<TreeItem<MyMoneyAccount>*>(accountIdx.internalPointer())->dataRef();
+
+  // remove from old parent (in object and model)
+  static_cast<TreeItem<MyMoneyAccount>*>(parentIdx.internalPointer())->dataRef().removeAccountId(accountId);
+  removeRow(accountIdx.row(), parentIdx);
+
+  // add to new parent
+  account.setParentAccountId(newParentId);
+  parentIdx = indexById(newParentId);
+  static_cast<TreeItem<MyMoneyAccount>*>(parentIdx.internalPointer())->dataRef().addAccountId(accountId);
+  auto rows = rowCount(parentIdx);
+  insertRow(rows, parentIdx);
+  accountIdx = index(rows, 0, parentIdx);
+  static_cast<TreeItem<MyMoneyAccount>*>(accountIdx.internalPointer())->dataRef() = account;
+
+  // and update new location in idToItemMapper
+  if (m_idToItemMapper) {
+    m_idToItemMapper->insert(accountId, static_cast<TreeItem<MyMoneyAccount>*>(accountIdx.internalPointer()));
+  }
+  emit dataChanged(accountIdx, accountIdx);
+}
+

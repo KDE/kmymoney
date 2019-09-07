@@ -88,6 +88,19 @@ void MyMoneyFileTest::valueChanged(const MyMoneyAccount& account)
   m_valueChanged += account.id();
 }
 
+void MyMoneyFileTest::setupBaseCurrency()
+{
+  MyMoneySecurity base("EUR", "Euro", QChar(0x20ac));
+  MyMoneyFileTransaction ft;
+  try {
+    m->currency(base.id());
+  } catch (const MyMoneyException &e) {
+    m->addCurrency(base);
+  }
+  m->setBaseCurrency(base);
+  ft.commit();
+}
+
 // this method will be called once at the beginning of the test
 void MyMoneyFileTest::initTestCase()
 {
@@ -468,6 +481,7 @@ void MyMoneyFileTest::testSetFunctions()
 void MyMoneyFileTest::testAddAccounts()
 {
   testAddTwoInstitutions();
+  setupBaseCurrency();
   MyMoneyAccount  a, b, c;
   a.setAccountType(eMyMoney::Account::Type::Checkings);
   b.setAccountType(eMyMoney::Account::Type::Checkings);
@@ -598,6 +612,8 @@ void MyMoneyFileTest::testAddAccounts()
 
 void MyMoneyFileTest::testAddCategories()
 {
+  setupBaseCurrency();
+
   MyMoneyAccount  a, b, c;
   a.setAccountType(eMyMoney::Account::Type::Income);
   a.setOpeningDate(QDate::currentDate());
@@ -903,7 +919,7 @@ void MyMoneyFileTest::testRemoveAccountTree()
     ft.commit();
 
     QCOMPARE(m_objectsRemoved.count(), 1);
-    QCOMPARE(m_objectsModified.count(), 3);
+    QCOMPARE(m_objectsModified.count(), 5);
     QCOMPARE(m_objectsAdded.count(), 0);
     QCOMPARE(m_balanceChanged.count(), 0);
     QCOMPARE(m_valueChanged.count(), 0);
@@ -958,6 +974,8 @@ void MyMoneyFileTest::testAccountListRetrieval()
 void MyMoneyFileTest::testAddTransaction()
 {
   testAddAccounts();
+  setupBaseCurrency();
+
   MyMoneyTransaction t, p;
 
   MyMoneyAccount exp1;
@@ -1051,7 +1069,7 @@ void MyMoneyFileTest::testAddTransaction()
   // check the balance of the accounts
   a = m->account("A000001");
   QCOMPARE(a.lastModified(), QDate::currentDate());
-  QCOMPARE(a.balance(), MyMoneyMoney(-1000, 100));
+  QCOMPARE(a.balance().toDouble(), MyMoneyMoney(-1000, 100).toDouble());
 
   MyMoneyAccount b = m->account("A000003");
   QCOMPARE(b.lastModified(), QDate::currentDate());
@@ -1709,6 +1727,8 @@ void MyMoneyFileTest::testAddEquityAccount()
   i.setName("Investment");
   i.setAccountType(eMyMoney::Account::Type::Investment);
 
+  setupBaseCurrency();
+
   MyMoneyFileTransaction ft;
   try {
     MyMoneyAccount parent = m->asset();
@@ -1914,7 +1934,7 @@ void MyMoneyFileTest::testOpeningBalance()
 {
   MyMoneyAccount openingAcc;
   MyMoneySecurity second("USD", "US Dollar", "$");
-  testBaseCurrency();
+  setupBaseCurrency();
 
   try {
     openingAcc = m->openingBalanceAccount(m->baseCurrency());
@@ -1949,7 +1969,8 @@ void MyMoneyFileTest::testModifyStdAccount()
 {
   QVERIFY(m->asset().currencyId().isEmpty());
   QCOMPARE(m->asset().name(), QLatin1String("Asset accounts"));
-  testBaseCurrency();
+  setupBaseCurrency();
+  // testBaseCurrency();
   QVERIFY(m->asset().currencyId().isEmpty());
   QVERIFY(!m->baseCurrency().id().isEmpty());
 
@@ -1982,7 +2003,7 @@ void MyMoneyFileTest::testModifyStdAccount()
 void MyMoneyFileTest::testAddPrice()
 {
   testAddAccounts();
-  testBaseCurrency();
+  setupBaseCurrency();
   MyMoneyAccount p;
 
   MyMoneyFileTransaction ft;
@@ -2150,7 +2171,7 @@ void MyMoneyFileTest::testStorageId()
 
 void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithoutImportedBalance()
 {
-  AddOneAccount();
+  addOneAccount();
 
   MyMoneyAccount a = m->account("A000001");
 
@@ -2159,7 +2180,7 @@ void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithoutImportedBa
 
 void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithEqualImportedBalance()
 {
-  AddOneAccount();
+  addOneAccount();
 
   MyMoneyAccount a = m->account("A000001");
 
@@ -2175,7 +2196,7 @@ void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithEqualImported
 
 void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithUnequalImportedBalance()
 {
-  AddOneAccount();
+  addOneAccount();
 
   MyMoneyAccount a = m->account("A000001");
 
@@ -2191,7 +2212,7 @@ void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithUnequalImport
 
 void MyMoneyFileTest::testHasNewerTransaction_withoutAnyTransaction_afterLastImportedTransaction()
 {
-  AddOneAccount();
+  addOneAccount();
 
   MyMoneyAccount a = m->account("A000001");
 
@@ -2204,7 +2225,8 @@ void MyMoneyFileTest::testHasNewerTransaction_withoutAnyTransaction_afterLastImp
 void MyMoneyFileTest::testHasNewerTransaction_withoutNewerTransaction_afterLastImportedTransaction()
 {
 
-  AddOneAccount();
+  addOneAccount();
+  setupBaseCurrency();
 
   QString accId("A000001");
   QDate dateOfLastTransactionImport(2011, 12, 1);
@@ -2232,7 +2254,8 @@ void MyMoneyFileTest::testHasNewerTransaction_withoutNewerTransaction_afterLastI
 void MyMoneyFileTest::testHasNewerTransaction_withNewerTransaction_afterLastImportedTransaction()
 {
 
-  AddOneAccount();
+  addOneAccount();
+  setupBaseCurrency();
 
   QString accId("A000001");
   QDate dateOfLastTransactionImport(2011, 12, 1);
@@ -2258,8 +2281,9 @@ void MyMoneyFileTest::testHasNewerTransaction_withNewerTransaction_afterLastImpo
   QCOMPARE(m->hasNewerTransaction(accId, dateOfLastTransactionImport), true);
 }
 
-void MyMoneyFileTest::AddOneAccount()
+void MyMoneyFileTest::addOneAccount()
 {
+  setupBaseCurrency();
   QString accountId = "A000001";
   MyMoneyAccount  a;
   a.setAccountType(eMyMoney::Account::Type::Checkings);
@@ -2300,7 +2324,7 @@ void MyMoneyFileTest::AddOneAccount()
 
 void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState_noTransactions()
 {
-  AddOneAccount();
+  addOneAccount();
   QString accountId = "A000001";
 
   QCOMPARE(m->countTransactionsWithSpecificReconciliationState(accountId, eMyMoney::TransactionFilter::State::NotReconciled), 0);
@@ -2308,7 +2332,9 @@ void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState_noTra
 
 void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState_transactionWithWantedReconcileState()
 {
-  AddOneAccount();
+  addOneAccount();
+  setupBaseCurrency();
+
   QString accountId = "A000001";
 
   // construct split & transaction
@@ -2331,7 +2357,9 @@ void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState_trans
 
 void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState_transactionWithUnwantedReconcileState()
 {
-  AddOneAccount();
+  addOneAccount();
+  setupBaseCurrency();
+
   QString accountId = "A000001";
 
   // construct split & transaction
@@ -2565,7 +2593,7 @@ void MyMoneyFileTest::testClearedBalance()
 void MyMoneyFileTest::testAdjustedValues()
 {
   // create a checking account, an expense, an investment account and a stock
-  AddOneAccount();
+  addOneAccount();
 
   MyMoneyAccount exp1;
   exp1.setAccountType(eMyMoney::Account::Type::Expense);
@@ -2583,12 +2611,14 @@ void MyMoneyFileTest::testAdjustedValues()
 
   testAddEquityAccount();
 
-  testBaseCurrency();
-  MyMoneySecurity stockSecurity(QLatin1String("Blubber"), QLatin1String("TestsockSecurity"), QLatin1String("BLUB"), 1000, 1000, 1000);
+  MyMoneySecurity stockSecurity(QLatin1String("Blubber"), QLatin1String("TestStockSecurity"), QLatin1String("BLUB"), 1000, 1000, 1000);
   stockSecurity.setTradingCurrency(QLatin1String("BLUB"));
+  MyMoneySecurity tradingCurrency("BLUB", "BlubCurrency");
+
   // add the security
   ft.restart();
   try {
+    m->addCurrency(tradingCurrency);
     m->addSecurity(stockSecurity);
     ft.commit();
   } catch (const MyMoneyException &e) {
@@ -2791,7 +2821,7 @@ void MyMoneyFileTest::testEmptyFilter()
 void MyMoneyFileTest::testAddSecurity()
 {
   // create a checking account, an expense, an investment account and a stock
-  AddOneAccount();
+  addOneAccount();
 
   MyMoneyAccount exp1;
   exp1.setAccountType(eMyMoney::Account::Type::Expense);
@@ -2809,7 +2839,6 @@ void MyMoneyFileTest::testAddSecurity()
 
   testAddEquityAccount();
 
-  testBaseCurrency();
   MyMoneySecurity stockSecurity(QLatin1String("Blubber"), QLatin1String("TestsockSecurity"), QLatin1String("BLUB"), 1000, 1000, 1000);
   stockSecurity.setTradingCurrency(QLatin1String("BLUB"));
   // add the security

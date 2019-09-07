@@ -43,8 +43,9 @@
 
 struct JournalModel::Private
 {
-  Private()
-    : newTransactionModel(nullptr)
+  Private(JournalModel* qq)
+    : q(qq)
+    , newTransactionModel(nullptr)
     , headerData(QHash<Column, QString> ({
       { Number, i18nc("Cheque Number", "No.") },
       { Date, i18n("Date") },
@@ -143,11 +144,76 @@ struct JournalModel::Private
     }
   }
 
+  void startBalanceCacheOperation()
+  {
+    balanceChangedSet.clear();
+    fullBalanceRecalc.clear();
+  }
+
+  void removeTransactionFromBalance(int startRow, int rows)
+  {
+    for (int row = 0; row < rows; ++row)  {
+      const auto journalEntry = static_cast<TreeItem<JournalEntry>*>(q->index(startRow, 0).internalPointer())->constDataRef();
+      balanceChangedSet.insert(journalEntry.split().accountId());
+      if (Q_UNLIKELY(journalEntry.transaction().isStockSplit())) {
+        fullBalanceRecalc.insert(journalEntry.split().accountId());
+      } else {
+        balanceCache[journalEntry.split().accountId()] -= journalEntry.split().shares();
+      }
+      ++startRow;
+    }
+  }
+
+  void addTransactionToBalance(int startRow, int rows)
+  {
+    for (int row = 0; row < rows; ++row)  {
+      const auto journalEntry = static_cast<TreeItem<JournalEntry>*>(q->index(startRow, 0).internalPointer())->constDataRef();
+      balanceChangedSet.insert(journalEntry.split().accountId());
+      if (Q_UNLIKELY(journalEntry.transaction().isStockSplit())) {
+        fullBalanceRecalc.insert(journalEntry.split().accountId());
+      } else {
+        balanceCache[journalEntry.split().accountId()] += journalEntry.split().shares();
+      }
+      ++startRow;
+    }
+  }
+
+  void finishBalanceCacheOperation()
+  {
+    if (!fullBalanceRecalc.isEmpty()) {
+      const auto journalRows = q->rowCount();
+      for (const auto accountId : qAsConst(fullBalanceRecalc)) {
+        balanceCache[accountId] = MyMoneyMoney();
+      }
+
+      for (int row = 0; row < journalRows; ++row) {
+        const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(q->index(row, 0).internalPointer())->constDataRef();
+        if (fullBalanceRecalc.contains(journalEntry.split().accountId())) {
+          if (journalEntry.transaction().isStockSplit()) {
+            balanceCache[journalEntry.split().accountId()] *= journalEntry.split().shares();
+          } else {
+            balanceCache[journalEntry.split().accountId()] += journalEntry.split().shares();
+          }
+        }
+      }
+    }
+
+    // inform others about the changes
+    QHash<QString, MyMoneyMoney> balances;
+    for (const auto accountId : qAsConst(balanceChangedSet)) {
+      balances.insert(accountId, balanceCache.value(accountId));
+    }
+    emit q->balancesChanged(balances);
+  }
+
+  JournalModel*                   q;
   JournalModelNewTransaction*     newTransactionModel;
   QMap<QString, QString>          transactionIdKeyMap;
   QHash<Column, QString>          headerData;
   QHash<QString, MyMoneyMoney>    balanceCache;
   QHash<QString, MyMoneyAccount>  accountCache;
+  QSet<QString>                   fullBalanceRecalc;
+  QSet<QString>                   balanceChangedSet;
 };
 
 JournalModelNewTransaction::JournalModelNewTransaction(QObject* parent)
@@ -187,7 +253,7 @@ QVariant JournalModelNewTransaction::data(const QModelIndex& idx, int role) cons
 
 JournalModel::JournalModel(QObject* parent)
   : MyMoneyModel<JournalEntry>(parent, QStringLiteral("T"), JournalModel::ID_SIZE)
-  , d(new Private)
+  , d(new Private(this))
 {
   setObjectName(QLatin1String("JournalModel"));
 }
@@ -486,6 +552,13 @@ void JournalModel::load(const QMap<QString, MyMoneyTransaction>& list)
   qDebug() << "Model for" << m_idLeadin << "loaded with" << rowCount() << "items";
 }
 
+void JournalModel::unload()
+{
+  d->balanceCache.clear();
+  d->accountCache.clear();
+  MyMoneyModel::unload();
+}
+
 MyMoneyTransaction JournalModel::transactionById(const QString& id) const
 {
   const QModelIndex idx = firstIndexById(id);
@@ -538,18 +611,25 @@ void JournalModel::addTransaction(const QString& id, MyMoneyTransaction& t)
   const QModelIndex startIdx = index(startRow, 0);
   const QModelIndex endIdx = index(startRow+rows, columnCount());
 
+  d->startBalanceCacheOperation();
+
+  const auto originalStartRow = startRow;
   foreach (const auto split, (*transaction).splits()) {
     JournalEntry journalEntry(key, transaction, split);
     static_cast<TreeItem<JournalEntry>*>(index(startRow, 0).internalPointer())->dataRef() = journalEntry;
     ++startRow;
   }
 
+  // add the splits to the balance cache
+  d->addTransactionToBalance(originalStartRow, rows);
+
   // tell the caller what we have done to his transaction
   t = (*transaction);
 
-  /// @todo add/update balance cache
-
   emit dataChanged(startIdx, endIdx);
+
+  d->finishBalanceCacheOperation();
+  setDirty();
 }
 
 void JournalModel::removeTransaction(const MyMoneyTransaction& t)
@@ -568,11 +648,15 @@ void JournalModel::removeTransaction(const QModelIndex& idx)
   // (we don't believe the caller except for the id)
   const auto transaction = static_cast<TreeItem<JournalEntry>*>(idx.internalPointer())->constDataRef().transaction();
 
-  removeRows(idx.row(), transaction.splitCount());
+  const auto rows = transaction.splitCount();
+  d->startBalanceCacheOperation();
+  d->removeTransactionFromBalance(idx.row(), rows);
+
+  removeRows(idx.row(), rows);
   d->removeIdKeyMapping(transaction.id());
 
-  /// @todo add/update balance cache
-
+  d->finishBalanceCacheOperation();
+  setDirty();
 }
 
 
@@ -588,6 +672,8 @@ void JournalModel::modifyTransaction(const MyMoneyTransaction& newTransaction)
   const auto oldTransaction = static_cast<TreeItem<JournalEntry>*>(startIdx.internalPointer())->constDataRef().transaction();
   const auto oldKey = oldTransaction.uniqueSortKey();
 
+  d->startBalanceCacheOperation();
+  d->removeTransactionFromBalance(startIdx.row(), oldTransaction.splitCount());
   // we have to deal with several cases here. The first differentiation
   // is the unique key. It remains the same as long as the postDate()
   // of the two transactions is identical. In case the postDate changed, we
@@ -611,7 +697,7 @@ void JournalModel::modifyTransaction(const MyMoneyTransaction& newTransaction)
     const QModelIndex endIdx = index(row-1, columnCount());
     emit dataChanged(startIdx, endIdx);
 
-    /// @todo add/update balance cache
+    d->addTransactionToBalance(startIdx.row(), newTransaction.splitCount());
 
   } else {
 
@@ -623,6 +709,9 @@ void JournalModel::modifyTransaction(const MyMoneyTransaction& newTransaction)
     MyMoneyTransaction t(newTransaction);
     addTransaction(newTransaction.id(), t);
   }
+
+  d->finishBalanceCacheOperation();
+  setDirty();
 }
 
 void JournalModel::transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const

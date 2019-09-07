@@ -124,7 +124,8 @@ private:
   void testRemoveStdAccount(const MyMoneyAccount& acc);
   void testReparentEquity(QList<eMyMoney::Account::Type>& list, MyMoneyAccount& parent);
   void clearObjectLists();
-  void AddOneAccount();
+  void addOneAccount();
+  void setupBaseCurrency();
 
 private:
   QStringList m_objectsAdded;

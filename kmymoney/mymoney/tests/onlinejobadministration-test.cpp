@@ -26,6 +26,7 @@
 #include "onlinetasks/dummy/tasks/dummytask.h"
 #include "mymoneyexception.h"
 #include "mymoneyenums.h"
+#include "mymoneysecurity.h"
 
 QTEST_GUILESS_MAIN(onlineJobAdministrationTest)
 
@@ -35,8 +36,25 @@ onlineJobAdministrationTest::onlineJobAdministrationTest()
 {
 }
 
+void onlineJobAdministrationTest::setupBaseCurrency()
+{
+  file = MyMoneyFile::instance();
+
+  MyMoneySecurity base("EUR", "Euro", QChar(0x20ac));
+  MyMoneyFileTransaction ft;
+  try {
+    file->currency(base.id());
+  } catch (const MyMoneyException &e) {
+    file->addCurrency(base);
+  }
+  file->setBaseCurrency(base);
+  ft.commit();
+}
+
+
 void onlineJobAdministrationTest::initTestCase()
 {
+  setupBaseCurrency();
   file = MyMoneyFile::instance();
   storage = new MyMoneyStorageMgr;
   file->attachStorage(storage);

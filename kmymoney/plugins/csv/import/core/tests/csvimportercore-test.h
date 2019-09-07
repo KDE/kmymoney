@@ -53,5 +53,8 @@ private Q_SLOTS:
   void testAutoDecimalSymbol();
   void testInvAccountAutodetection();
   void testCalculatedFeeColumn();
+
+private:
+  void setupBaseCurrency();
 };
 #endif

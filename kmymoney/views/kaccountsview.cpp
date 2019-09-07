@@ -109,15 +109,15 @@ void KAccountsView::executeCustomAction(eView::Action action)
 
 void KAccountsView::refresh()
 {
+  /// @todo port to new model code or cleanup
+#if 0
   Q_D(KAccountsView);
   if (!isVisible()) {
     d->m_needsRefresh = true;
     return;
   }
   d->m_needsRefresh = false;
-/// @todo port to new model code
 
-#if 0
   // TODO: check why the invalidate is needed here
   d->m_proxyModel->invalidate();
   d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
@@ -138,7 +138,7 @@ void KAccountsView::refresh()
 
 void KAccountsView::showEvent(QShowEvent * event)
 {
-  /// @todo port to new model code
+  /// @todo port to new model code or cleanup
 #if 0
   Q_D(KAccountsView);
   if (!d->m_proxyModel)

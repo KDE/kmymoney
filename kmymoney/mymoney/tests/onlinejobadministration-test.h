@@ -43,6 +43,9 @@ private Q_SLOTS:
   void init();
   void getSettings();
   void registerOnlineTask();
+
+private:
+  void setupBaseCurrency();
 };
 
 #endif // ONLINEJOBADMINISTRATIONTEST_H

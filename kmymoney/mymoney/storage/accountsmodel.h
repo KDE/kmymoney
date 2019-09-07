@@ -128,13 +128,19 @@ public:
    */
   QPair<MyMoneyMoney, bool>  balanceToValue(const QString& accountId, MyMoneyMoney balance) const;
 
+  void reparentAccount(const QString& accountId, const QString& newParentId);
+
+  void removeItem(const QModelIndex& idx);
+
+  void touchAccountById(const QString& id);
+
 protected:
   void clearModelItems() override;
   void addFavorite(const QString& id);
   void removeFavorite(const QString& id);
+
   int processItems(Worker *worker) override;
 
-  // reparent()
 public Q_SLOTS:
   void setupAccountFractions();
   void updateAccountBalances(const QHash<QString, MyMoneyMoney>& balances);
