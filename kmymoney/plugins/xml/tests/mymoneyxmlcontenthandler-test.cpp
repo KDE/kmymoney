@@ -29,6 +29,8 @@
 #include "mymoneyobject_p.h"
 #include "mymoneyobject.h"
 #include "mymoneyexception.h"
+#include "tests/testutilities.h"
+using namespace test;
 
 QTEST_GUILESS_MAIN(MyMoneyXmlContentHandlerTest)
 
@@ -87,6 +89,26 @@ TestMyMoneyObject & TestMyMoneyObject::operator=(TestMyMoneyObject other)
 {
   swap(*this, other);
   return *this;
+}
+
+void MyMoneyXmlContentHandlerTest::init()
+{
+}
+
+void MyMoneyXmlContentHandlerTest::cleanup()
+{
+  MyMoneyFile::instance()->unload();
+}
+
+void MyMoneyXmlContentHandlerTest::setupAccounts()
+{
+  acAsset = (MyMoneyFile::instance()->asset().id());
+  acLiability = (MyMoneyFile::instance()->liability().id());
+  acExpense = (MyMoneyFile::instance()->expense().id());
+  acIncome = (MyMoneyFile::instance()->income().id());
+  curBase = makeBaseCurrency();
+  acChecking = makeAccount("A000076","Checking Account 1", eMyMoney::Account::Type::Checkings, moZero, QDate(2014, 5, 15), acAsset);
+  acTransfer = makeAccount("A000276","Checking Account 2", eMyMoney::Account::Type::Checkings, moZero, QDate(2014, 5, 15), acAsset);
 }
 
 
@@ -1111,7 +1133,7 @@ void MyMoneyXmlContentHandlerTest::readSchedule()
   doc.setContent(ref_ok1);
   node = doc.documentElement().firstChild().toElement();
 
-
+  setupAccounts();
   try {
     sch = MyMoneyXmlContentHandler::readSchedule(node);
     QCOMPARE(sch.id(), QLatin1String("SCH0002"));
@@ -1163,6 +1185,7 @@ void MyMoneyXmlContentHandlerTest::readSchedule()
 
 void MyMoneyXmlContentHandlerTest::writeSchedule()
 {
+  setupAccounts();
   MyMoneySchedule tempSch("A Name",
                       Schedule::Type::Bill,
                       Schedule::Occurrence::Weekly, 123,
@@ -1337,6 +1360,7 @@ void MyMoneyXmlContentHandlerTest::testOverdue()
   QDomDocument doc;
   QDomElement node;
 
+  setupAccounts();
   // std::cout << ref_intime << std::endl;
   try {
     doc.setContent(ref_overdue);
@@ -1758,6 +1782,7 @@ void MyMoneyXmlContentHandlerTest::testHasReferenceTo()
   doc.setContent(ref_ok);
   node = doc.documentElement().firstChild().toElement();
 
+  setupAccounts();
   try {
     sch = MyMoneyXmlContentHandler::readSchedule(node);
 
@@ -1801,6 +1826,7 @@ void MyMoneyXmlContentHandlerTest::testPaidEarlyOneTime()
   doc.setContent(ref_ok);
   node = doc.documentElement().firstChild().toElement();
 
+  setupAccounts();
   try {
     sch = MyMoneyXmlContentHandler::readSchedule(node);
     QCOMPARE(sch.isFinished(), true);
@@ -1837,6 +1863,7 @@ void MyMoneyXmlContentHandlerTest::testReplaceId()
   QDomElement node;
   doc.setContent(ref_ok);
   node = doc.documentElement().firstChild().toElement();
+  setupAccounts();
 
   try {
     sch = MyMoneyXmlContentHandler::readSchedule(node);
