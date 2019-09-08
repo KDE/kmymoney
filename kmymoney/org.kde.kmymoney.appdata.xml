@@ -91,6 +91,7 @@
     <p xml:lang="pl">KMyMoney jest programem do zarządzania osobistymi finansami stworzony w ramach KDE. Posada wiele funkcji, będąc przy tym łatwym w użyciu przez nietechicznych użytkowników.</p>
     <p xml:lang="pt">O KMyMoney é um gestor de finanças pessoais do KDE. Vem com um grande conjunto de funcionalidades, embora seja simples de usar com um utilizador não técnico.</p>
     <p xml:lang="pt-BR">O KMyMoney é um gerenciador de finanças pessoal do KDE. Ele vem com um grande conjunto de recursos sendo fácil de usar para o usuário não técnico.</p>
+    <p xml:lang="sk">KMyMomney je osobný správca financií od KDE. Prichádza s veľkou sadou funkcií, pričom je jednoduchý na používanie pre netechnického používateľa.</p>
     <p xml:lang="sv">KMyMoney är en hemekonomihanterare av KDE. Den levereras med ett stort antal funktioner, medan den är lätt att använda för den icke-tekniska användaren.</p>
     <p xml:lang="tr">KMyMoney, KDE tarafından bir kişisel bir finans yöneticisidir. Teknik olmayan kullanıcılar için kullanımı kolayken, geniş bir özellik seti ile birlikte gelir.</p>
     <p xml:lang="uk">KMyMoney — програма для керування особистими фінансами від KDE. У програмі передбачено багато можливостей, якими просто користуватися навіть технічно не обізнаним користувачам.</p>
@@ -203,6 +204,7 @@
       <caption xml:lang="pl">Zarządzanie kontami np. przez instytucje, w których zostały założone</caption>
       <caption xml:lang="pt">Faz a gestão das contas p.ex. das instituições onde estão guardadas</caption>
       <caption xml:lang="pt-BR">Gerencie contas por ex. pelas instituições em que estão guardadas</caption>
+      <caption xml:lang="sk">Spravovať účtu napríklad podľa inštitúcií, ktoré ich držia</caption>
       <caption xml:lang="sv">Hantera konton, t.ex. enligt institution som de hör till</caption>
       <caption xml:lang="tr">Hesapları yönetin ör. tutuldukları kurumlar tarafından </caption>
       <caption xml:lang="uk">Керування рахунками, наприклад, за установами, де їх відкрито.</caption>
