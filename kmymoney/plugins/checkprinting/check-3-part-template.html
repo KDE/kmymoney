@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+#date1 {
+  position: absolute;
+  top: 85px;
+  left: 800px;
+}
+
+#payee1 {
+  position: absolute;
+  top: 140px;
+  left: 130px;
+}
+
+#amountnum1 {
+  position: absolute;
+  height: 14px;
+  top: 140px;
+  left: 800px;
+}
+
+#amountword1 {
+  position: absolute;
+  top: 175px;
+  left: 50px;
+}
+
+#payee1a {
+  position: absolute;
+  top: 220px;
+  left: 125px;
+}
+
+#address1 {
+  position: absolute;
+  top: 235px;
+  left: 125px;
+}
+
+#memo1 {
+  position: absolute;
+  top: 320px;
+  left: 100px;
+}
+
+#date2 {
+  position: absolute;
+  top: 430px;
+  left: 100px;
+}
+
+#payee2 {
+  position: absolute;
+  top: 460px;
+  left: 100px;
+}
+#address2 {
+  position: absolute;
+  top: 480px;
+  left: 100px;
+}
+
+#splitaccount2 {
+  position: absolute;
+  top: 530px;
+  left: 100px;
+}
+
+#splitvalue2 {
+  position: absolute;
+  top: 530px;
+  left: 600px;
+}
+#splitaccount3 {
+  position: absolute;
+  top: 550px;
+  left: 100px;
+}
+#splitvalue3 {
+  position: absolute;
+  top: 550px;
+  left: 600px;
+}
+#splitaccount4 {
+  position: absolute;
+  top: 570px;
+  left: 100px;
+}
+#splitvalue4 {
+  position: absolute;
+  top: 570px;
+  left: 600px;
+}
+#splitaccount5 {
+  position: absolute;
+  top: 590px;
+  left: 100px;
+}
+#splitvalue5{
+  position: absolute;
+  top: 590px;
+  left: 600px;
+}
+#splitaccount6 {
+  position: absolute;
+  top: 610px;
+  left: 100px;
+}
+#splitvalue6 {
+  position: absolute;
+  top: 610px;
+  left: 600px;
+}
+#memo2 {
+  position: absolute;
+  top: 680px;
+  left: 100px;
+}
+#splitaccount1 {
+  position: absolute;
+  top: 760px;
+  left: 100px;
+}
+#splitvalue1 {
+  position: absolute;
+  top: 760px;
+  left: 600px;
+}
+#date12 {
+  position: absolute;
+  top:840px;
+  left: 100px;
+}
+
+#payee12 {
+  position: absolute;
+  top: 860px;
+  left: 100px;
+}
+#address12 {
+  position: absolute;
+  top: 880px;
+  left: 100px;
+}
+
+#splitaccount12 {
+  position: absolute;
+  top: 920px;
+  left: 100px;
+}
+
+#splitvalue12 {
+  position: absolute;
+  top: 920px;
+  left: 600px;
+}
+#splitaccount13 {
+  position: absolute;
+  top: 940px;
+  left: 100px;
+}
+#splitvalue13 {
+  position: absolute;
+  top: 940px;
+  left: 600px;
+}
+#splitaccount14 {
+  position: absolute;
+  top: 960px;
+  left: 100px;
+}
+#splitvalue14 {
+  position: absolute;
+  top: 960px;
+  left: 600px;
+}
+#splitaccount15 {
+  position: absolute;
+  top: 980px;
+  left: 100px;
+}
+#splitvalue15{
+  position: absolute;
+  top: 980px;
+  left: 600px;
+}
+#splitaccount16 {
+  position: absolute;
+  top: 1000px;
+  left: 100px;
+}
+#splitvalue16 {
+  position: absolute;
+  top: 1000px;
+  left: 600px;
+}
+#memo12 {
+  position: absolute;
+  top: 1080px;
+  left: 100px;
+}
+#splitaccount11 {
+  position: absolute;
+  top: 1180px;
+  left: 100px;
+}
+#splitvalue11 {
+  position: absolute;
+  top: 1180px;
+  left: 600px;
+}
+</style>
+</head>
+<body>
+
+<div id="date1">$DATE</div>
+<div id="payee1">$PAYEE_NAME</div>
+<div id="amountnum1">$AMOUNT_DECIMAL</div>
+<div id="amountword1">$AMOUNT_STRING</div>
+<div id="payee1a">$PAYEE_NAME</div>
+<div id="address1">$PAYEE_ADDRESS</div>
+<div id="memo1">$MEMO</div>
+<div id="date2">$DATE</div>
+<div id="payee2">$PAYEE_NAME</div>
+<div id="address2">$PAYEE_ADDRESS</div>
+<div id="splitaccount2">$SPLITACCOUNTNAME1</div>
+<div id="splitvalue2">$SPLITVALUE1</div>
+<div id="splitaccount3">$SPLITACCOUNTNAME2</div>
+<div id="splitvalue3">$SPLITVALUE2</div>
+<div id="splitaccount4">$SPLITACCOUNTNAME3</div>
+<div id="splitvalue4">$SPLITVALUE3</div>
+<div id="splitaccount5">$SPLITACCOUNTNAME4</div>
+<div id="splitvalue5">$SPLITVALUE4</div>
+<div id="splitaccount6">$SPLITACCOUNTNAME5</div>
+<div id="splitvalue6">$SPLITVALUE5</div>
+<div id="memo2">$MEMO</div>
+<div id="splitaccount1">$SPLITACCOUNTNAME0</div>
+<div id="splitvalue1">$SPLITVALUE0</div>
+<div id="date12">$DATE</div>
+<div id="payee12">$PAYEE_NAME</div>
+<div id="address12">$PAYEE_ADDRESS</div>
+<div id="splitaccount12">$SPLITACCOUNTNAME1</div>
+<div id="splitvalue12">$SPLITVALUE1</div>
+<div id="splitaccount13">$SPLITACCOUNTNAME2</div>
+<div id="splitvalue13">$SPLITVALUE2</div>
+<div id="splitaccount14">$SPLITACCOUNTNAME3</div>
+<div id="splitvalue14">$SPLITVALUE3</div>
+<div id="splitaccount15">$SPLITACCOUNTNAME4</div>
+<div id="splitvalue15">$SPLITVALUE4</div>
+<div id="splitaccount16">$SPLITACCOUNTNAME5</div>
+<div id="splitvalue16">$SPLITVALUE5</div>
+<div id="memo12">$MEMO</div>
+<div id="splitaccount11">$SPLITACCOUNTNAME0</div>
+<div id="splitvalue11">$SPLITVALUE0</div>
+</body>
+</html>
