@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright 2009  Cristian Onet onet.cristian@gmail.com                 *
- *   Copyright 2004  Martin Preuss aquamaniac@users.sourceforge.net        *
+ *   Copyright 2018  Martin Preuss aquamaniac@users.sourceforge.net        *
  *   Copyright 2010  Thomas Baumgart ipwizard@users.sourceforge.net        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
@@ -24,7 +24,7 @@
 
 
 #include <QTreeWidget>
-#include <aqbanking/job.h>
+#include <aqbanking/types/transaction.h>
 
 #include <list>
 
@@ -36,17 +36,17 @@ class KBJobListViewItem;
 class KBJobListViewItem: public QTreeWidgetItem
 {
 private:
-  AB_JOB *_job;
+  AB_TRANSACTION *_job;
 
   void _populate();
 
 public:
-  KBJobListViewItem(KBJobListView *parent, AB_JOB *j);
+  KBJobListViewItem(KBJobListView *parent, AB_TRANSACTION *j);
   KBJobListViewItem(const KBJobListViewItem &item);
 
   virtual ~KBJobListViewItem();
 
-  AB_JOB *getJob();
+  AB_TRANSACTION *getJob();
 };
 
 
@@ -58,11 +58,11 @@ public:
   explicit KBJobListView(QWidget *parent = 0);
   virtual ~KBJobListView();
 
-  void addJob(AB_JOB *j);
-  void addJobs(const std::list<AB_JOB*> &js);
+  void addJob(AB_TRANSACTION *j);
+  void addJobs(const std::list<AB_TRANSACTION*> &js);
 
-  AB_JOB *getCurrentJob();
-  std::list<AB_JOB*> getSelectedJobs();
+  AB_TRANSACTION *getCurrentJob();
+  std::list<AB_TRANSACTION*> getSelectedJobs();
 };
 
 

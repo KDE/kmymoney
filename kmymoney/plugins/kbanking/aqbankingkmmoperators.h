@@ -30,7 +30,7 @@
 #include "onlinetasks/interfaces/tasks/ionlinetasksettings.h"
 #include "onlinetasks/sepa/sepaonlinetransfer.h"
 
-struct AB_ACCOUNT;
+struct AB_ACCOUNT_SPEC;
 struct AB_TRANSACTION_LIMITS;
 struct AB_TRANSACTION;
 struct AB_VALUE;
@@ -59,7 +59,7 @@ void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const payeeIde
 /**
  * @brief Set local account of transaction by aqBanking account ptr
  */
-void AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const AB_ACCOUNT* account);
+void AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const AB_ACCOUNT_SPEC* account);
 
 /**
  * @brief AB_Transaction_SetLocalAccount

@@ -1,5 +1,5 @@
 /*
- * Copyright 2004       Martin Preuss <martin@libchipcard.de>
+ * Copyright 2018       Martin Preuss <martin@libchipcard.de>
  * Copyright 2004-2019  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
@@ -51,7 +51,7 @@ private:
 
 public:
   AB_Banking(const char *appname,
-          const char *fname);
+             const char *fname);
   virtual ~AB_Banking();
 
 
@@ -68,25 +68,6 @@ public:
    */
   virtual int fini();
 
-
-  /**
-   * See @ref AB_Banking_OnlineInit
-   */
-  int onlineInit();
-
-  /**
-   * See @ref AB_Banking_OnlineFini
-   */
-  int onlineFini();
-
-  /**
-   * Loads a backend with the given name. You can use
-   * @ref AB_Banking_GetProviderDescrs to retrieve a list of available
-   * backends. Such a backend can then be asked to return an account list.
-   */
-  AB_PROVIDER *getProvider(const char *name);
-
-
   /**
    * Returns the application name as given to @ref AB_Banking_new.
    */
@@ -99,7 +80,7 @@ public:
    * However, destroying the list will not free the accounts, so it is
    * safe to do that.
    */
-  std::list<AB_ACCOUNT*> getAccounts();
+  std::list<AB_ACCOUNT_SPEC*> getAccounts();
 
   /**
    * This function does an account lookup based on the given unique id.
@@ -107,31 +88,11 @@ public:
    * The pointer returned is still owned by AqBanking, so you MUST NOT free
    * it.
    */
-  AB_ACCOUNT *getAccount(uint32_t uniqueId);
+  AB_ACCOUNT_SPEC *getAccount(uint32_t uniqueId);
 
-  /**
-   * Returns a list of pointers to currently known users.
-   * Please note that the pointers in this list are still owned by
-   * AqBanking, so you MUST NOT free them.
-   * However, destroying the list will not free the users, so it is
-   * safe to do that.
-   */
-  std::list<AB_USER*> getUsers();
+  std::list<std::string> getActiveProviders();
 
   int getUserDataDir(GWEN_BUFFER *buf) const ;
-  int getAppUserDataDir(GWEN_BUFFER *buf) const ;
-
-  int loadAppConfig(GWEN_DB_NODE **pDb);
-  int saveAppConfig(GWEN_DB_NODE *db);
-  int lockAppConfig();
-  int unlockAppConfig();
-
-  int loadAppSubConfig(const char *subGroup,
-                      GWEN_DB_NODE **pDb);
-
-  int saveAppSubConfig(const char *subGroup,
-                      GWEN_DB_NODE *dbSrc);
-
 
   int loadSharedConfig(const char *name, GWEN_DB_NODE **pDb);
   int saveSharedConfig(const char *name, GWEN_DB_NODE *db);
@@ -146,15 +107,7 @@ public:
                          const char *subGroup,
                          GWEN_DB_NODE *dbSrc);
 
-  int beginExclUseAccount(AB_ACCOUNT *a);
-  int endExclUseAccount(AB_ACCOUNT *a, int abandon);
-
-  int beginExclUseUser(AB_USER *u);
-  int endExclUseUser(AB_USER *u, int abandon);
-
-  std::list<std::string> getActiveProviders();
-
-  void setAccountAlias(AB_ACCOUNT *a, const char *alias);
+  void setAccountAlias(AB_ACCOUNT_SPEC *a, const char *alias);
 
   /**
    * Provide interface to setup ZKA FinTS registration
@@ -176,8 +129,8 @@ public:
    * This function sends all jobs in the list to their corresponding backends
    * and allows that backend to process it.
    */
-  virtual int executeJobs(AB_JOB_LIST2 *jl,
-                         AB_IMEXPORTER_CONTEXT *ctx);
+  virtual int executeJobs(AB_TRANSACTION_LIST2 *jl,
+                          AB_IMEXPORTER_CONTEXT *ctx);
 
   /*@}*/
 

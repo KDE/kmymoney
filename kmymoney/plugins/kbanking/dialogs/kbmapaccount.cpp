@@ -36,7 +36,7 @@
 struct KBMapAccount::Private {
   Ui::KBMapAccount ui;
   KBankingExt *banking;
-  AB_ACCOUNT *account;
+  AB_ACCOUNT_SPEC *account;
 };
 
 KBMapAccount::KBMapAccount(KBankingExt *kb,
@@ -75,7 +75,7 @@ KBMapAccount::~KBMapAccount()
   delete d;
 }
 
-AB_ACCOUNT *KBMapAccount::getAccount()
+AB_ACCOUNT_SPEC *KBMapAccount::getAccount()
 {
   return d->account;
 }
@@ -88,8 +88,8 @@ void KBMapAccount::accept()
 
 void KBMapAccount::slotSelectionChanged()
 {
-  std::list<AB_ACCOUNT*> al;
-  AB_ACCOUNT *a;
+  std::list<AB_ACCOUNT_SPEC*> al;
+  AB_ACCOUNT_SPEC *a;
 
   al = d->ui.accountList->getSelectedAccounts();
   if (al.empty()) {
@@ -98,7 +98,7 @@ void KBMapAccount::slotSelectionChanged()
     return;
   }
   a = al.front();
-  if (AB_Account_GetUniqueId(a) != 0) {
+  if (AB_AccountSpec_GetUniqueId(a) != 0) {
     d->account = a;
     d->ui.assignButton->setEnabled(true);
   } else
