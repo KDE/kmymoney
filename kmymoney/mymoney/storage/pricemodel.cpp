@@ -236,17 +236,35 @@ MyMoneyPrice PriceModel::price(const QString& from, const QString& to, const QDa
 {
   // if no valid date is passed, we use today's date.
   const QDate &date = _date.isValid() ? _date : QDate::currentDate();
-  QString id(createId(from, to, date));
+  QString fullId(createId(from, to, date));
+  QString pricePair(createId(from, to, QDate()));
 
-  // find the last matching price
-  QModelIndex idx = MyMoneyModelBase::lowerBound(id);
+  // check if we have a price for this price pair at all
+  QModelIndex idx = MyMoneyModelBase::lowerBound(pricePair);
   if (!idx.isValid()) {
     return {};
   }
-  auto priceEntry = static_cast<TreeItem<PriceEntry>*>(index(idx.row(), 0).internalPointer())->data();
+
+  // find the last matching price
+  idx = lowerBound(fullId, idx.row(), rowCount()-1);
+  int row = idx.row();
+  if (!idx.isValid()) {
+    // if we found a price pair but get an invalid index here
+    // we don't have an exact match. In case we look for the
+    // exact match, we can return right away.
+    if (exactDate) {
+      return {};
+    }
+    // the last row is the one we look for. We
+    row = rowCount()-1;
+    auto priceEntry = static_cast<TreeItem<PriceEntry>*>(index(row, 0).internalPointer())->data();
+    return std::move(priceEntry);
+  }
+
+  auto priceEntry = static_cast<TreeItem<PriceEntry>*>(index(row, 0).internalPointer())->data();
 
   // in case we have an exact match, we report it
-  if (priceEntry.id() == id) {
+  if (priceEntry.id() == fullId) {
     return std::move(priceEntry);
   }
 
@@ -255,11 +273,11 @@ MyMoneyPrice PriceModel::price(const QString& from, const QString& to, const QDa
     return {};
   }
 
-  // since lower bound returns the first item with a larger key (we already know that key is not present)
-  // we need to return the previous item (the model is not empty so there is one)
-  idx = index(idx.row()-1, 0);
-  if (idx.isValid()) {
-    priceEntry = static_cast<TreeItem<PriceEntry>*>(index(idx.row(), 0).internalPointer())->data();
+  // since lower bound returns the first item with a larger key (we already know that
+  // the exact key is not present) we need to return the previous item (the model
+  // is not empty so there is one)
+  if (row > 0) {
+    priceEntry = static_cast<TreeItem<PriceEntry>*>(index(row-1, 0).internalPointer())->data();
     if ((priceEntry.from() == from) && (priceEntry.to() == to)) {
       return std::move(priceEntry);
     }
