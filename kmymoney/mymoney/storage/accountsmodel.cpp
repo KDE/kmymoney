@@ -210,16 +210,20 @@ struct AccountsModel::Private
         security = file->security(account.currencyId());
         if (!security.id().isEmpty()) {
           price = file->price(account.currencyId(), security.tradingCurrency());
-          if (price.isValid()) {
-            prices += price;
+          if (!price.isValid()) {
+            price = MyMoneyPrice(security.tradingCurrency(), account.currencyId(), QDate::currentDate(), MyMoneyMoney::ONE, "internal");
+            approximate = true;
           }
+          prices += price;
           if (security.tradingCurrency() != baseCurrency.id()) {
             MyMoneySecurity sec = file->currency(security.tradingCurrency());
             if (!sec.id().isEmpty()) {
               price = file->price(sec.id(), baseCurrency.id());
-              if (price.isValid()) {
-                prices += price;
+              if (!price.isValid()) {
+                price = MyMoneyPrice(sec.id(), baseCurrency.id(), QDate::currentDate(), MyMoneyMoney::ONE, "internal");
+                approximate = true;
               }
+              prices += price;
             } else {
               qDebug() << security.tradingCurrency() << "not found";
               approximate = true;
@@ -232,8 +236,10 @@ struct AccountsModel::Private
         if (!security.id().isEmpty()) {
           price = file->price(account.currencyId(), baseCurrency.id());
           if (price.isValid()) {
-            prices += price;
+            price = MyMoneyPrice(account.currencyId(), baseCurrency.id(), QDate::currentDate(), MyMoneyMoney::ONE, "internal");
+            approximate = true;
           }
+          prices += price;
         } else {
           qDebug() << security.id() << "not found";
           approximate = true;
@@ -246,7 +252,8 @@ struct AccountsModel::Private
       QList<MyMoneyPrice>::const_iterator it_p;
       QString securityID = account.currencyId();
       for (it_p = prices.constBegin(); it_p != prices.constEnd(); ++it_p) {
-        accountValue = (accountValue * (MyMoneyMoney::ONE / (*it_p).rate(securityID))).convertPrecision(file->security(securityID).pricePrecision());
+        const auto prec = MyMoneyMoney::denomToPrec(file->security(securityID).pricePrecision());
+        accountValue = (accountValue * (MyMoneyMoney::ONE / (*it_p).rate(securityID))).convertPrecision(prec);
         if ((*it_p).from() == securityID)
           securityID = (*it_p).to();
         else
