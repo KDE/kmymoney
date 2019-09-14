@@ -22,6 +22,9 @@
 
 #include "gwenkdegui.h"
 
+#include <gwenhywfar/debug.h>
+
+
 #include <QString>
 #include <QStringList>
 #include <QRegularExpression>
@@ -42,47 +45,112 @@ gwenKdeGui::~gwenKdeGui()
 
 }
 
-int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title, const char* text, char* buffer, int minLen, int maxLen, uint32_t guiid)
-{
-  if ((flags & GWEN_GUI_INPUT_FLAGS_OPTICAL) && text && *text) {
-    // Optical Tan (chipTan)
 
-    // Extract text to display and hhd code
-    QString infoText = QString::fromUtf8(text);
 
-    // replace Newline with Blank to catch all text
-    infoText.replace(QLatin1Char('\n'), QStringLiteral(" "));
+int gwenKdeGui::getPasswordText(uint32_t flags,
+                                const char *token,
+                                const char *title,
+                                const char *text,
+                                char *buffer,
+                                int minLen,
+                                int maxLen,
+                                GWEN_GUI_PASSWORD_METHOD methodId,
+                                GWEN_DB_NODE *methodParams,
+                                uint32_t guiid) {
+  return QT5_Gui::getPassword(flags, token, title, text, buffer, minLen, maxLen, methodId, methodParams, guiid);
+}
 
-    QRegularExpression hhdRegExp(QLatin1String("^(.*)\\$OBEGIN\\$(.*?)\\$OEND\\$(.*)"), QRegularExpression::CaseInsensitiveOption);
-    QRegularExpressionMatch match = hhdRegExp.match(infoText);
-    QString hhdCode;
-    if(match.hasMatch()) {
-      hhdCode = match.captured(2);
-      infoText = match.captured(1) + match.captured(3);
-    }
 
-    //! @todo: Memory leak?
-    QPointer<chipTanDialog> dialog = new chipTanDialog(getParentWidget());
-    dialog->setInfoText(infoText);
-    dialog->setHhdCode(hhdCode);
-    dialog->setTanLimits(minLen, maxLen);
 
-    const int rv = dialog->exec();
+int gwenKdeGui::getPasswordHhd(uint32_t /*flags*/,
+                               const char * /*token*/,
+                               const char * /*title*/,
+                               const char *text,
+                               char *buffer,
+                               int minLen,
+                               int maxLen,
+                               GWEN_GUI_PASSWORD_METHOD /*methodId*/,
+                               GWEN_DB_NODE *methodParams,
+                               uint32_t /*guiid*/) {
+  QString hhdCode;
+  QString infoText;
+  const char *sChallenge;
 
-    if (rv == chipTanDialog::Rejected)
-      return GWEN_ERROR_USER_ABORTED;
-    else if (rv == chipTanDialog::InternalError || dialog.isNull())
-      return GWEN_ERROR_INTERNAL;
-
-    QString tan = dialog->tan();
-    if (tan.length() >= minLen && tan.length() <= maxLen) {
-      strncpy(buffer, tan.toUtf8().constData() , tan.length());
-      buffer[tan.length()] = 0;
-      return 0;
-    }
-    qDebug("Received Tan with incorrect length by ui.");
-    return GWEN_ERROR_INTERNAL;
+  sChallenge=GWEN_DB_GetCharValue(methodParams, "challenge", 0, NULL);
+  if (! (sChallenge && *sChallenge)) {
+    DBG_ERROR(0, "Empty optical data");
+    return GWEN_ERROR_NO_DATA;
   }
 
-  return QT5_Gui::getPassword(flags, token, title, text, buffer, minLen, maxLen, guiid);
+  hhdCode = QString::fromUtf8(sChallenge);
+  infoText = QString::fromUtf8(text);
+
+  //! @todo: Memory leak?
+  QPointer<chipTanDialog> dialog = new chipTanDialog(getParentWidget());
+  dialog->setInfoText(infoText);
+  dialog->setHhdCode(hhdCode);
+  dialog->setTanLimits(minLen, maxLen);
+
+  const int rv = dialog->exec();
+
+  if (rv == chipTanDialog::Rejected)
+    return GWEN_ERROR_USER_ABORTED;
+  else if (rv == chipTanDialog::InternalError || dialog.isNull())
+    return GWEN_ERROR_INTERNAL;
+
+  QString tan = dialog->tan();
+  if (tan.length() >= minLen && tan.length() <= maxLen) {
+    strncpy(buffer, tan.toUtf8().constData() , tan.length());
+    buffer[tan.length()] = 0;
+    return 0;
+  }
+  qDebug("Received Tan with incorrect length by ui.");
+  return GWEN_ERROR_INTERNAL;
+}
+
+
+
+
+int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title, const char* text, char* buffer,
+                            int minLen, int maxLen,
+                            GWEN_GUI_PASSWORD_METHOD methodId,
+                            GWEN_DB_NODE *methodParams,
+                            uint32_t guiid)
+{
+
+
+  switch( (methodId & GWEN_Gui_PasswordMethod_Mask)) {
+  case GWEN_Gui_PasswordMethod_Unknown:
+  case GWEN_Gui_PasswordMethod_Mask:
+    DBG_ERROR(0, "Invalid password method id %08x", methodId);
+    return GWEN_ERROR_INVALID;
+
+  case GWEN_Gui_PasswordMethod_Text:
+    return getPasswordText(flags,
+                           token,
+                           title,
+                           text,
+                           buffer,
+                           minLen,
+                           maxLen,
+                           methodId, methodParams,
+                           guiid);
+
+  case GWEN_Gui_PasswordMethod_OpticalHHD:
+    return getPasswordHhd(flags,
+			  token,
+			  title,
+			  text,
+			  buffer,
+			  minLen,
+			  maxLen,
+			  methodId, methodParams,
+			  guiid);
+
+    /* intentionally omit "default:" here to be informed when new password methods are added to
+     * gwen which have not been implemented. */
+  }
+
+  DBG_ERROR(0, "Unhandled password method id %08x", methodId);
+  return GWEN_ERROR_INVALID;
 }

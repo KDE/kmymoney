@@ -17,7 +17,7 @@
 
 #include <QDialog>
 
-#include <aqbanking/account.h>
+#include <aqbanking/types/account_spec.h>
 
 class KBankingExt;
 
@@ -32,7 +32,7 @@ public:
                Qt::WindowFlags fl = 0);
   ~KBMapAccount();
 
-  AB_ACCOUNT *getAccount();
+  AB_ACCOUNT_SPEC *getAccount();
 
   void accept() final override;
 

@@ -46,7 +46,33 @@ public:
                           char *buffer,
                           int minLen,
                           int maxLen,
+                          GWEN_GUI_PASSWORD_METHOD methodId,
+                          GWEN_DB_NODE *methodParams,
                           uint32_t guiid) final override;
+
+private:
+  int getPasswordText(uint32_t flags,
+                      const char *token,
+                      const char *title,
+                      const char *text,
+                      char *buffer,
+                      int minLen,
+                      int maxLen,
+                      GWEN_GUI_PASSWORD_METHOD methodId,
+                      GWEN_DB_NODE *methodParams,
+                      uint32_t guiid);
+  int getPasswordHhd(uint32_t flags,
+                     const char *token,
+                     const char *title,
+                     const char *text,
+                     char *buffer,
+                     int minLen,
+                     int maxLen,
+                     GWEN_GUI_PASSWORD_METHOD methodId,
+                     GWEN_DB_NODE *methodParams,
+                     uint32_t guiid);
+
+
 };
 
 /**
