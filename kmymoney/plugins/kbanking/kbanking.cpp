@@ -841,7 +841,7 @@ KBankingExt::KBankingExt(KBanking* parent, const char* appname, const char* fnam
     if (!*q)
       q = appname;
   }
-  registerFinTs(regkey.data(), match.captured(1).toLatin1());
+  registerFinTs(regkey.data(), match.captured(1).remove(QLatin1Char('.')).left(5).toLatin1());
 }
 
 
