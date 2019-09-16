@@ -1217,22 +1217,6 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
   if (acc.id().isEmpty())
     throw MYMONEYEXCEPTION_CSTRING("Parent account does not exist");
 
-  #if 0
-  // TODO: remove the following code as we now can have multiple accounts
-  // with the same name even in the same hierarchy position of the account tree
-  //
-  // check if the selected name is currently not among the child accounts
-  // if we find one, then return it as the new account
-  QStringList::const_iterator it_a;
-  foreach (const auto accountID, acc.accountList()) {
-    MyMoneyAccount a = MyMoneyFile::account(accountID);
-    if (account.name() == a.name()) {
-      account = a;
-      return;
-    }
-  }
-#endif
-
   // FIXME: make sure, that the parent has the same type
   // I left it out here because I don't know, if there is
   // a tight coupling between e.g. checking accounts and the
