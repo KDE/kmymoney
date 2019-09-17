@@ -420,6 +420,7 @@ public:
     } else {
       query.prepare(m_db.m_tables["kmmAccounts"].updateString());
     }
+    /// @todo port to new model code - it does not fail anymore
     // Attempt to write the standard accounts. For an empty db, this will fail.
     try {
       QList<MyMoneyAccount> stdList;
@@ -767,6 +768,7 @@ public:
 
     //! @todo The following bindings are for backwards compatibility only
     //! remove backwards compatibility in a later version
+    //! @todo port to new model code - use the model's nextId value directly or remove stuff
     query.bindValue(":hiInstitutionId", QVariant::fromValue(q->getNextInstitutionId()));
     query.bindValue(":hiPayeeId", QVariant::fromValue(q->getNextPayeeId()));
     query.bindValue(":hiTagId", QVariant::fromValue(q->getNextTagId()));
@@ -3237,6 +3239,8 @@ public:
   bool m_override; // override open if already in use
   // error message
   QString m_error;
+
+  /// @todo get rid of counts and id maintenance. This is now handled by the models
   // record counts
   ulong m_institutions;
   ulong m_accounts;

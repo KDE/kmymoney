@@ -70,7 +70,6 @@
 #include "plugins/xmlhelper/xmlstoragehelper.h"
 #include "mymoneyenums.h"
 
-/// @todo add new models here
 #include "payeesmodel.h"
 #include "costcentermodel.h"
 #include "schedulesmodel.h"
@@ -84,6 +83,7 @@
 #include "parametersmodel.h"
 #include "onlinejobsmodel.h"
 #include "reportsmodel.h"
+/// @note add new models here
 
 using namespace eMyMoney;
 
@@ -423,7 +423,6 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
       m_doc = QDomDocument();
     }
   } else {
-    /// @todo add new models here
     if (s == tagName(Tag::Payees)) {
       // last payee read, now dump them into the engine
       m_reader->m_file->payeesModel()->load(m_reader->d->pList);
@@ -487,6 +486,7 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
       // m_reader->m_storage->loadReports(m_reader->d->rList);
       m_reader->d->rList.clear();
     }
+    /// @note add new models here
   }
   return rc;
 }
@@ -1456,6 +1456,10 @@ void MyMoneyStorageXML::writeFile(QIODevice* qf, MyMoneyStorageMgr* storage, MyM
   // qDebug("XMLWRITER: Starting file write");
   m_doc = new QDomDocument(tagName(Tag::KMMFile));
   Q_CHECK_PTR(m_doc);
+  ScopeHelper<QDomDocument> helper(&m_doc);
+
+  /// @note add new models here
+
   QDomProcessingInstruction instruct = m_doc->createProcessingInstruction("xml", "version=\"1.0\" encoding=\"utf-8\"");
   m_doc->appendChild(instruct);
 

@@ -63,7 +63,7 @@
 #include "storageenums.h"
 #include "mymoneyenums.h"
 
-/// @todo add new models here
+// the models
 #include "payeesmodel.h"
 #include "costcentermodel.h"
 #include "schedulesmodel.h"
@@ -77,6 +77,7 @@
 #include "parametersmodel.h"
 #include "onlinejobsmodel.h"
 #include "reportsmodel.h"
+/// @note add new models here
 
 #ifdef KMM_MODELTEST
   #include "modeltest.h"
@@ -194,7 +195,7 @@ public:
     , parametersModel(qq)
     , onlineJobsModel(qq)
     , reportsModel(qq)
-    /// @todo add new models here
+    /// @note add new models here
     {
 #ifdef KMM_MODELTEST
     new ModelTest(&payeesModel, m_file);
@@ -212,7 +213,7 @@ public:
     new ModelTest(&parametersModel, m_file);
     new ModelTest(&onlineJobsModel, m_file);
     new ModelTest(&reportsModel, m_file);
-    /// @todo add new models here
+    /// @note add new models here
 #endif
     qq->connect(qq, &MyMoneyFile::modelsReadyToUse, &journalModel, &JournalModel::updateBalances);
     qq->connect(qq, &MyMoneyFile::modelsReadyToUse, qq, &MyMoneyFile::finalizeFileOpen);
@@ -240,7 +241,7 @@ public:
         || parametersModel.isDirty()
         || onlineJobsModel.isDirty()
         || reportsModel.isDirty();
-        /// @todo add new models here
+        /// @note add new models here
   }
 
   void markModelsAsClean()
@@ -259,7 +260,7 @@ public:
     parametersModel.setDirty(false);
     onlineJobsModel.setDirty(false);
     reportsModel.setDirty(false);
-    /// @todo add new models here
+    /// @note add new models here
   }
 
   /**
@@ -384,7 +385,6 @@ public:
   /**
    * The various models
    */
-  /// @todo add new models here
   PayeesModel         payeesModel;
   CostCenterModel     costCenterModel;
   SchedulesModel      schedulesModel;
@@ -399,6 +399,7 @@ public:
   ParametersModel     parametersModel;
   OnlineJobsModel     onlineJobsModel;
   ReportsModel        reportsModel;
+  /// @note add new models here
 };
 
 
@@ -440,7 +441,6 @@ void MyMoneyFile::finalizeFileOpen()
 
 void MyMoneyFile::unload()
 {
-  /// @todo add new models here
   d->schedulesModel.unload();
   d->payeesModel.unload();
   d->costCenterModel.unload();
@@ -455,6 +455,7 @@ void MyMoneyFile::unload()
   d->parametersModel.unload();
   d->onlineJobsModel.unload();
   d->reportsModel.unload();
+  /// @note add new models here
   d->m_baseCurrency = MyMoneySecurity();
   d->m_dirty = false;
 }
@@ -563,7 +564,7 @@ void MyMoneyFile::commitTransaction()
   for (const auto& change : changes) {
     // turn on the global changed flag for model based objects
     switch(change.objectType()) {
-      /// @todo add new models here
+      /// @note add new models here
       case eMyMoney::File::Object::Payee:
       case eMyMoney::File::Object::CostCenter:
       case eMyMoney::File::Object::Schedule:
@@ -1639,7 +1640,12 @@ ReportsModel* MyMoneyFile::reportsModel() const
   return &d->reportsModel;
 }
 
-/// @todo add new models here
+PayeesModel* MyMoneyFile::userModel() const
+{
+  return &d->userModel;
+}
+
+/// @note add new models here
 
 void MyMoneyFile::addPayee(MyMoneyPayee& payee)
 {

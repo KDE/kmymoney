@@ -148,7 +148,7 @@ class MyMoneyTransaction;
 class MyMoneyTransactionFilter;
 class onlineJob;
 
-/// @todo add new models here
+// the models
 class PayeesModel;
 class CostCenterModel;
 class SchedulesModel;
@@ -162,6 +162,7 @@ class PriceModel;
 class ParametersModel;
 class OnlineJobsModel;
 class ReportsModel;
+/// @note add new models here
 
 namespace eMyMoney { namespace Account { enum class Type; }
                      namespace File { enum class Object; }
@@ -931,7 +932,9 @@ public:
   ReportsModel* reportsModel() const;
 
 
-  /// @todo add new models here
+/// @note add new models here
+
+
   /**
     * This method is used to create a new tag
     *
