@@ -86,6 +86,7 @@
 
 using namespace eMyMoney;
 
+#if 0
 class FilterFail
 {
 public:
@@ -102,6 +103,7 @@ public:
 private:
   MyMoneyTransactionFilter m_filter;
 };
+#endif
 
 //*****************************************************************************
 // Create a class to handle db transactions using scope
