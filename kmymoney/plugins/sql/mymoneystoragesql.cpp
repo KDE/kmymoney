@@ -263,7 +263,6 @@ bool MyMoneyStorageSql::readFile()
     d->readFileInfo();
     file->institutionsModel()->load(fetchInstitutions());
     file->payeesModel()->load(fetchPayees());
-    file->userModel()->setDirty(false);
     file->tagsModel()->load(fetchTags());
     file->currenciesModel()->load(fetchCurrencies());
     file->securitiesModel()->load(fetchSecurities());
@@ -1381,9 +1380,14 @@ QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees(const QStringList& id
         payee.resetPayeeIdentifiers(identifier);
       }
 
-      if (pid == "USER")
-        d->m_storage->setUser(payee);
-      else
+      if (pid == "USER") {
+        // make sure it is the sole item in the model
+        d->m_file->userModel()->unload();
+        MyMoneyPayee user = MyMoneyPayee(d->m_file->fixedKey(MyMoneyFile::UserID), payee);
+        d->m_file->userModel()->addItem(user);
+        // loading does not count as making dirty
+        d->m_file->userModel()->setDirty(false);
+      } else
         pList[pid] = MyMoneyPayee(pid, payee);
 
       if (d->m_displayStatus)
