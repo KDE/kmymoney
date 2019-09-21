@@ -1,5 +1,6 @@
 /*
  * Copyright 2013-2018  Christian Dávid <christian-david@web.de>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -434,10 +435,10 @@ bool onlineJobAdministration::canSendCreditTransfer()
   return false;
 }
 
-//! @fixme plugin query
 bool onlineJobAdministration::canEditOnlineJob(const onlineJob& job)
 {
-  return (!job.taskIid().isEmpty() && !KServiceTypeTrader::self()->query(QLatin1String("KMyMoney/OnlineTaskUi"), QString("'%1' ~in [X-KMyMoney-onlineTaskIds]").arg(job.taskIid())).isEmpty());
+  const auto taskIid = job.taskIid();
+  return (!taskIid.isEmpty() && m_onlineTasks.contains(taskIid));
 }
 
 void onlineJobAdministration::updateOnlineTaskProperties()
