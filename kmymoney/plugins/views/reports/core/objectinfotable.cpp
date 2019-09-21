@@ -127,10 +127,10 @@ void ObjectInfoTable::init()
     case eMyMoney::Report::RowType::Schedule:
       if (m_config.detailLevel() == eMyMoney::Report::DetailLevel::All) {
         m_columns << ctPayee << ctPaymentType << ctOccurrence
-                  << ctNextDueDate << ctCategory;
+                  << ctNextDueDate << ctCategory << ctValue;
       } else {
         m_columns << ctPayee << ctPaymentType << ctOccurrence
-                  << ctNextDueDate;
+                  << ctNextDueDate << ctValue;
       }
       break;
     case eMyMoney::Report::RowType::AccountInfo:
