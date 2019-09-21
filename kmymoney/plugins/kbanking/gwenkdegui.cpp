@@ -138,14 +138,14 @@ int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title
 
   case GWEN_Gui_PasswordMethod_OpticalHHD:
     return getPasswordHhd(flags,
-			  token,
-			  title,
-			  text,
-			  buffer,
-			  minLen,
-			  maxLen,
-			  methodId, methodParams,
-			  guiid);
+                          token,
+                          title,
+                          text,
+                          buffer,
+                          minLen,
+                          maxLen,
+                          methodId, methodParams,
+                          guiid);
 
     /* intentionally omit "default:" here to be informed when new password methods are added to
      * gwen which have not been implemented. */
