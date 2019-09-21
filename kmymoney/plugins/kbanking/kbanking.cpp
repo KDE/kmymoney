@@ -62,8 +62,11 @@
 #include <aqbanking/types/transaction.h>
 #include <aqbanking/types/transactionlimits.h>
 #include <aqbanking/gui/abgui.h>
+#include <aqbanking/version.h>
 #include <gwenhywfar/logger.h>
 #include <gwenhywfar/debug.h>
+#include <gwenhywfar/version.h>
+#include <gwenhywfar/gwenhywfar.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -130,6 +133,12 @@ public:
     }
   }
 
+  QString libVersion(void (*version)(int*, int*, int*, int*))
+  {
+    int major, minor, patch, build;
+    version(&major, &minor, &patch, &build);
+    return QString("%1.%2.%3.%4").arg(major).arg(minor).arg(patch).arg(build);
+  }
   /**
    * KMyMoney asks for accounts over and over again which causes a lot of "Job not supported with this account" error messages.
    * This function filters messages with that string.
@@ -161,7 +170,9 @@ KBanking::KBanking(QObject *parent, const QVariantList &args) :
   , m_statementCount(0)
 {
   Q_UNUSED(args)
-  qDebug("Plugins: kbanking loaded");
+  QString compileVersionSet = QLatin1String(GWENHYWFAR_VERSION_FULL_STRING "/" AQBANKING_VERSION_FULL_STRING);
+  QString runtimeVersionSet = QString("%1/%2").arg(d->libVersion(&GWEN_Version), d->libVersion(&AB_Banking_GetVersion));
+  qDebug() << QString("Plugins: kbanking loaded, build with (%1), run with (%2)").arg(compileVersionSet, runtimeVersionSet);
 }
 
 KBanking::~KBanking()
