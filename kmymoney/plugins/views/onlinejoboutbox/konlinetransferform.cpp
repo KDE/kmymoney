@@ -1,12 +1,12 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
- * (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2014       Christian Dávid <christian-david@web.de>
+ * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -58,8 +58,7 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   delete ui->creditTransferEdit->takeWidget();
 
   OnlineBankingAccountNamesFilterProxyModel* accountsModel = new OnlineBankingAccountNamesFilterProxyModel(this);
-  auto const model = Models::instance()->accountsModel();
-  accountsModel->setSourceModel(model);
+  accountsModel->setSourceModel(Models::instance()->accountsModel());
   ui->originAccount->setModel(accountsModel);
 
   ui->convertMessage->hide();
@@ -82,14 +81,15 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   connect(ui->buttonAbort, &QAbstractButton::clicked, this, &kOnlineTransferForm::reject);
   connect(ui->buttonSend, &QAbstractButton::clicked, this, &kOnlineTransferForm::sendJob);
   connect(ui->buttonEnque, &QAbstractButton::clicked, this, &kOnlineTransferForm::accept);
-  connect(m_requiredFields, static_cast<void (KMandatoryFieldGroup::*)(bool)>(&KMandatoryFieldGroup::stateChanged), ui->buttonEnque, &QPushButton::setEnabled);
+  connect(m_requiredFields, static_cast<void (KMandatoryFieldGroup::*)(bool)>(&KMandatoryFieldGroup::stateChanged), this, &kOnlineTransferForm::enableSendAndEnqueue);
 
   connect(ui->originAccount, &KMyMoneyAccountCombo::accountSelected, this, &kOnlineTransferForm::accountChanged);
 
   accountChanged();
   setJobReadOnly(false);
   m_requiredFields->add(ui->originAccount);
-  m_requiredFields->setOkButton(ui->buttonSend);
+  // no need to call setOkButton() here as this is controlled
+  // via kOnlineTransferForm::enableSendAndEnqueue()
 }
 
 void kOnlineTransferForm::loadOnlineJobEditPlugin(const onlineJobAdministration::onlineJobEditOffer& pluginDesc)
@@ -175,6 +175,7 @@ void kOnlineTransferForm::duplicateCurrentJob()
 
   onlineJob duplicate(QString(), activeOnlineJob());
   widget->setOnlineJob(duplicate);
+  setJobReadOnly(false);
 }
 
 void kOnlineTransferForm::accept()
@@ -186,7 +187,7 @@ void kOnlineTransferForm::accept()
 void kOnlineTransferForm::sendJob()
 {
   emit acceptedForSend(activeOnlineJob());
-    QDialog::accept();
+  QDialog::accept();
 }
 
 void kOnlineTransferForm::reject()
@@ -268,10 +269,22 @@ onlineJob kOnlineTransferForm::activeOnlineJob() const
   return widget->getOnlineJob();
 }
 
+void kOnlineTransferForm::enableSendAndEnqueue(bool enable)
+{
+  // force buttons to be disabled in case of read-only job
+  if (!ui->originAccount->isEnabled()) {
+    enable = false;
+  }
+  ui->buttonSend->setEnabled(enable);
+  ui->buttonEnque->setEnabled(enable);
+}
+
 void kOnlineTransferForm::setJobReadOnly(const bool& readOnly)
 {
   ui->originAccount->setDisabled(readOnly);
   ui->transferTypeSelection->setDisabled(readOnly);
+  ui->buttonSend->setDisabled(readOnly);
+  ui->buttonEnque->setDisabled(readOnly);
 
   if (readOnly) {
     ui->headMessage->setMessageType(KMessageWidget::Information);

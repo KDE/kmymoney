@@ -127,10 +127,10 @@ void ObjectInfoTable::init()
     case eMyMoney::Report::RowType::Schedule:
       if (m_config.detailLevel() == eMyMoney::Report::DetailLevel::All) {
         m_columns << ctPayee << ctPaymentType << ctOccurrence
-                  << ctNextDueDate << ctCategory;
+                  << ctNextDueDate << ctCategory << ctValue;
       } else {
         m_columns << ctPayee << ctPaymentType << ctOccurrence
-                  << ctNextDueDate;
+                  << ctNextDueDate << ctValue;
       }
       break;
     case eMyMoney::Report::RowType::AccountInfo:
@@ -212,6 +212,9 @@ void ObjectInfoTable::constructScheduleTable()
         QList<MyMoneySplit> splits = transaction.splits();
         QList<MyMoneySplit>::const_iterator split_it = splits.constBegin();
         for (; split_it != splits.constEnd(); ++split_it) {
+          if ((*split_it).id() == split.id()) {
+            continue;
+          }
           TableRow splitRow;
           ReportAccount splitAcc((*split_it).accountId());
 
@@ -240,9 +243,16 @@ void ObjectInfoTable::constructScheduleTable()
           }
 
           //add the split only if it matches the text or it matches the main split
-          if (m_config.match((*split_it))
-              || transaction_text)
-            m_rows += splitRow;
+          if (m_config.match((*split_it)) || transaction_text) {
+            // only add separate rows when we have a split transaction
+            // otherwise, we simply copy the category to the
+            // already added row and go on
+            if (splits.count() > 2) {
+              m_rows += splitRow;
+            } else {
+              m_rows.last()[ctCategory] = splitRow [ctCategory];
+            }
+          }
         }
       }
     }

@@ -1,11 +1,11 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2013-2014 Christian Dávid <christian-david@web.de>
+ * Copyright 2013-2014  Christian Dávid <christian-david@web.de>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -187,9 +187,12 @@ void KOnlineJobOutboxView::updateButtonState() const
 
     if (!job.isEditable()) {
       editable = false;
-      if (job.sendDate().isValid())
+      if (job.sendDate().isValid()) {
+        /// @todo maybe add a word about unable to edit but able to copy here
+        // I don't do it right away since we are in string freeze for 5.0.7
         tooltip = i18n("This job cannot be edited anymore because it was sent already.");
-      else if (job.isLocked())
+        editable = true;
+      } else if (job.isLocked())
         tooltip = i18n("Job is being processed at the moment.");
       else
         Q_ASSERT(false);
