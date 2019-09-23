@@ -60,6 +60,11 @@ public:
     q->setItemDelegate(delegates[0]);
   }
 
+  LedgerDelegate* delegateForColumn(const QModelIndex& idx)
+  {
+    return delegates[0];
+  }
+
   LedgerDelegate* delegateForRow(const QModelIndex& idx)
   {
     return delegates[0];
@@ -82,10 +87,12 @@ LedgerView::LedgerView(QWidget* parent)
   : QTableView(parent)
   , d(new Private(this))
 {
-  verticalHeader()->setDefaultSectionSize(15);
-  verticalHeader()->setMinimumSectionSize(15);
+  // keep rows as small as possible
+  verticalHeader()->setMinimumSectionSize(1);
   verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
   verticalHeader()->hide();
+
+  horizontalHeader()->setMinimumSectionSize(20);
 
   // since we don't have a vertical header, it does not make sense
   // to use the first column to select all items in the view
@@ -123,6 +130,7 @@ void LedgerView::showEvent(QShowEvent* event)
     if (model() != nullptr) {
       d->columnSelector->setModel(MyMoneyFile::instance()->journalModel());
     }
+    horizontalHeader()->setSectionResizeMode(JournalModel::Column::Reconciliation, QHeaderView::ResizeToContents);
   }
   QTableView::showEvent(event);
 }
@@ -303,6 +311,20 @@ void LedgerView::setSingleLineDetailRole(eMyMoney::Model::Roles role)
   d->delegates[0]->setSingleLineRole(role);
 }
 
+int LedgerView::sizeHintForColumn(int col) const
+{
+  if (col == JournalModel::Column::Reconciliation) {
+    QStyleOptionViewItem opt;
+    QModelIndex index = model()->index(0, col);
+    LedgerDelegate* delegate = d->delegateForColumn(index);
+    int hint = delegate->sizeHint(opt, index).width();
+    if(showGrid())
+      hint += 1;
+    return hint;
+  }
+  return QTableView::sizeHintForColumn(col);
+}
+
 int LedgerView::sizeHintForRow(int row) const
 {
   // we can optimize the sizeHintForRow() operation by asking the
@@ -310,10 +332,14 @@ int LedgerView::sizeHintForRow(int row) const
   // method which scans over all items in a column and takes a long
   // time in large ledgers. In case the editor is open in the row, we
   // use the regular method.
-  QModelIndex index = model()->index(row, 0);
+  // We always ask for the detail column as this varies in height
+  ensurePolished();
+
+  QModelIndex index = model()->index(row, JournalModel::Column::Detail);
   LedgerDelegate* delegate = d->delegateForRow(index);
   if(delegate && (delegate->editorRow() != row)) {
     QStyleOptionViewItem opt;
+    opt.state |= (row == currentIndex().row()) ? QStyle::State_Selected : QStyle::State_None;
     int hint = delegate->sizeHint(opt, index).height();
     if(showGrid())
       hint += 1;

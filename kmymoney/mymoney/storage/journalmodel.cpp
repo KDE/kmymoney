@@ -23,6 +23,7 @@
 #include <QDebug>
 #include <QString>
 #include <QDate>
+#include <QSize>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -280,8 +281,18 @@ int JournalModel::columnCount(const QModelIndex& parent) const
 
 QVariant JournalModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-  if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
-    return d->headerData.value(static_cast<Column>(section));
+  if (orientation == Qt::Horizontal) {
+    switch (role) {
+      case Qt::DisplayRole:
+        return d->headerData.value(static_cast<Column>(section));
+
+      case Qt::SizeHintRole:
+        return QSize(20, 20);;
+    }
+    return {};
+  }
+  if (orientation == Qt::Vertical && role == Qt::SizeHintRole) {
+    return QSize(10, 10);
   }
   return QAbstractItemModel::headerData(section, orientation, role);
 }

@@ -369,6 +369,8 @@ public:
   , m_separator(0)
   , m_onlineBalanceSeparator(0)
   , m_singleLineRole(eMyMoney::Model::SplitPayeeRole)
+  , m_lineHeight(12)
+  , m_margin(2)
 
   {}
 
@@ -377,7 +379,7 @@ public:
     delete m_separator;
   }
 
-inline bool displaySeparator(const QModelIndex& index) const
+  inline bool displaySeparator(const QModelIndex& index) const
   {
     return m_separator && m_separator->rowHasSeparator(index);
   }
@@ -387,12 +389,42 @@ inline bool displaySeparator(const QModelIndex& index) const
     return m_onlineBalanceSeparator && m_onlineBalanceSeparator->rowHasSeparator(index);
   }
 
+  QStringList displayString(const QModelIndex& index, const QStyleOptionViewItem& opt)
+  {
+    QStringList lines;
+    if(index.column() == JournalModel::Column::Detail) {
+      lines << index.data(m_singleLineRole).toString();
+      if(opt.state & QStyle::State_Selected) {
+        lines.clear();
+        lines << index.data(eMyMoney::Model::Roles::SplitPayeeRole).toString();
+        lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
+        lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
+
+      } else {
+        if(lines.at(0).isEmpty()) {
+          lines.clear();
+          lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
+        }
+        if(lines.at(0).isEmpty()) {
+          lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
+        }
+      }
+      lines.removeAll(QString());
+
+    } else {
+      lines << opt.text;
+    }
+    return lines;
+  }
+
   NewTransactionEditor*         m_editor;
   LedgerView*                   m_view;
   int                           m_editorRow;
   LedgerSeparator*              m_separator;
   LedgerSeparatorOnlineBalance* m_onlineBalanceSeparator;
   eMyMoney::Model::Roles        m_singleLineRole;
+  int                           m_lineHeight;
+  int                           m_margin;
 };
 
 
@@ -533,26 +565,7 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
     const QRect textArea = QRect(opt.rect.x() + margin, opt.rect.y() + margin, opt.rect.width() - 2 * margin, opt.rect.height() - 2 * margin);
     const bool selected = opt.state & QStyle::State_Selected;
 
-    QStringList lines;
-    if(index.column() == JournalModel::Column::Detail) {
-      lines << index.data(d->m_singleLineRole).toString();
-      if(selected) {
-        lines.clear();
-        lines << index.data(eMyMoney::Model::Roles::SplitPayeeRole).toString();
-        lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
-        lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
-
-      } else {
-        if(lines.at(0).isEmpty()) {
-          lines.clear();
-          lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
-        }
-        if(lines.at(0).isEmpty()) {
-          lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
-        }
-      }
-      lines.removeAll(QString());
-    }
+    QStringList lines = d->displayString(index, opt);
 
     const bool erroneous = index.data(eMyMoney::Model::Roles::TransactionErroneousRole).toBool();
 
@@ -684,27 +697,16 @@ void LedgerDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option
 
 QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-  bool fullDisplay = false;
-  if(d->m_view) {
-    QModelIndex currentIndex = d->m_view->currentIndex();
-    if(currentIndex.isValid()) {
-#if 0
-      QString currentId = currentIndex.data(eMyMoney::Model::Roles::IdRole).toString();
-      QString myId = index.data(eMyMoney::Model::Roles::IdRole).toString();
-      fullDisplay = (currentId == myId);
-      #endif
-      fullDisplay = (currentIndex.row() == index.row());
-    }
-  }
-
   QSize size;
-  QStyleOptionViewItem opt = option;
+  // get parameters only once per update to speed things up
+  if (index.row() == 0) {
+    QStyleOptionViewItem opt = option;
+    initStyleOption(&opt, index);
+    QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
+    d->m_margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
+    d->m_lineHeight = opt.fontMetrics.lineSpacing();
+  }
   int rows = 1;
-  initStyleOption(&opt, index);
-
-  QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
-  const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
-  const int lineHeight = opt.fontMetrics.lineSpacing();
 
   if(index.isValid()) {
     // check if we are showing the edit widget
@@ -715,13 +717,14 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
         QWidget* editor = d->m_view->indexWidget(editIndex);
         if(editor) {
           size = editor->minimumSizeHint();
+          /// @todo port to new model code (remove the following lines)
           if(d->displaySeparator(index)) {
             // don't draw over the separator space
-            size += QSize(0, lineHeight + margin);
+            size += QSize(0, d->m_lineHeight + d->m_margin);
           }
           if(d->displayOnlineBalanceSeparator(index)) {
             // don't draw over the separator space
-            size += QSize(0, lineHeight + margin);
+            size += QSize(0, d->m_lineHeight + d->m_margin);
           }
           return size;
         }
@@ -729,9 +732,9 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
     }
   }
 
-  size = QSize(100, lineHeight + 2*margin);
+  size = QSize(10, d->m_lineHeight + 2 * d->m_margin);
 
-  if(fullDisplay) {
+  if(option.state & QStyle::State_Selected) {
     auto payeeId = index.data(eMyMoney::Model::Roles::SplitPayeeIdRole).toString();
     auto counterAccount = index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
     auto memo = index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
@@ -742,15 +745,7 @@ QSize LedgerDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelI
       rows = 1;
     }
     // leave a few pixels as margin for each space between rows
-    size.setHeight((size.height() * rows) - (margin * (rows - 1)));
-
-  }
-
-  if (d->m_separator && d->m_separator->rowHasSeparator(index)) {
-    size.setHeight(size.height() + lineHeight + margin);
-  }
-  if (d->m_onlineBalanceSeparator && d->m_onlineBalanceSeparator->rowHasSeparator(index)) {
-    size.setHeight(size.height() + lineHeight + margin);
+    size.setHeight((size.height() * rows) - (d->m_margin * (rows - 1)));
   }
   return size;
 }
