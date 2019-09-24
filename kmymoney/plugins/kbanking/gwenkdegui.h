@@ -71,7 +71,16 @@ private:
                      GWEN_GUI_PASSWORD_METHOD methodId,
                      GWEN_DB_NODE *methodParams,
                      uint32_t guiid);
-
+   int getPasswordPhoto(uint32_t flags,
+                      const char *token,
+                      const char *title,
+                      const char *text,
+                      char *buffer,
+                      int minLen,
+                      int maxLen,
+                      GWEN_GUI_PASSWORD_METHOD methodId,
+                      GWEN_DB_NODE *methodParams,
+                      uint32_t guiid);
 
 };
 

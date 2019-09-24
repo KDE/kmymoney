@@ -3,12 +3,14 @@
 
 set(kbanking_widgets_la_SOURCES
   chiptandialog.cpp
+  phototandialog.cpp
   kbaccountlist.cpp
   kbjoblist.cpp
 )
 
 set(kbanking_widgets_UI
   chiptandialog.ui
+  phototandialog.ui
 )
 
 kconfig_add_kcfg_files(kbanking_widgets_la_SOURCES ../kbankingsettings.kcfgc)
