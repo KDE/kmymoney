@@ -1,4 +1,5 @@
     <!-- only for debug purposes -->
     <Menu name="kmmtools">
-      <Action name="open_chiptan_dialog" append="configure_merge"/>
+      <Action name="open_chiptan_dialog" group="tools_group"/>
+      <Action name="open_phototan_dialog" group="tools_group"/>
     </Menu>
