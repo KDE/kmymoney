@@ -3,8 +3,8 @@ set(gwenhywfar_guis "qt5 cpp")
 ExternalProject_Add(
   ext_gwenhywfar
   DOWNLOAD_DIR ${EXT_DOWNLOAD_DIR}
-  URL https://www.aquamaniac.de/sites/download/download.php?package=01&release=208&file=02&dummy=gwenhywfar-4.20.0.tar.gz
-  URL_MD5 0744255cae68adca6dff81d3a9f3932d
+  URL https://www.aquamaniac.de/rdm/attachments/download/140/gwenhywfar-4.99.16beta.tar.gz
+  URL_MD5 be67ed26f2e83cb44e4d4abb7bec467b
 
   CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${EXT_INSTALL_DIR} ${AT_SHARED_ONLY} --with-guis=${gwenhywfar_guis} CPPFLAGS=${AT_CPP_FLAGS} LDFLAGS=${AT_LD_FLAGS}
   BUILD_COMMAND $(MAKE)
