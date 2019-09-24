@@ -33,9 +33,8 @@
 #include "kbankingsettings.h"
 
 photoTanDialog::photoTanDialog(QWidget* parent)
-  : QDialog(parent),
-    m_tan(""),
-    m_accepted(true)
+  : QDialog(parent)
+  , m_accepted(true)
 {
   ui.reset(new Ui::photoTanDialog);
   ui->setupUi(this);
