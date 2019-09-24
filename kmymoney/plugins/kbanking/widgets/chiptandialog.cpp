@@ -37,9 +37,8 @@
 #include "kbankingsettings.h"
 
 chipTanDialog::chipTanDialog(QWidget* parent)
-  : QDialog(parent),
-    m_tan(""),
-    m_accepted(true)
+  : QDialog(parent)
+  , m_accepted(true)
 {
   ui.reset(new Ui::chipTanDialog);
   ui->setupUi(this);

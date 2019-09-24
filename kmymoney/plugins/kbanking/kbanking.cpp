@@ -91,8 +91,10 @@
 #include "viewinterface.h"
 
 #ifdef KMM_DEBUG
-// Added an option to open the chipTanDialog from the menu for debugging purposes
 #include "chiptandialog.h"
+#include "phototandialog.h"
+
+#include "phototan-demo.cpp"
 #endif
 
 #ifdef IS_APPIMAGE
@@ -328,6 +330,20 @@ void KBanking::createActions()
     auto dlg = new chipTanDialog();
     dlg->setHhdCode("0F04871100030333555414312C32331D");
     dlg->setInfoText("<html><h1>Test Graphic for debugging</h1><p>The encoded data is</p><p>Account Number: <b>335554</b><br/>Amount: <b>1,23</b></p></html>");
+    connect(dlg, &QDialog::accepted, dlg, &chipTanDialog::deleteLater);
+    connect(dlg, &QDialog::rejected, dlg, &chipTanDialog::deleteLater);
+    dlg->show();
+  });
+
+  QAction *openPhotoTanDialog = actionCollection()->addAction("open_phototan_dialog");
+  openPhotoTanDialog->setText("Open PhotoTan Dialog");
+  connect(openPhotoTanDialog, &QAction::triggered, [&](){
+    auto dlg = new photoTanDialog();
+    QImage img;
+    img.loadFromData(photoTan, sizeof(photoTan), "PNG");
+    img = img.scaled(300, 300, Qt::KeepAspectRatio);
+    dlg->setPicture(QPixmap::fromImage(img));
+    dlg->setInfoText("<html><h1>Test Graphic for debugging</h1><p>The encoded data is</p><p>unknown</p></html>");
     connect(dlg, &QDialog::accepted, dlg, &chipTanDialog::deleteLater);
     connect(dlg, &QDialog::rejected, dlg, &chipTanDialog::deleteLater);
     dlg->show();
