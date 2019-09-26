@@ -99,7 +99,7 @@ void KReportsView::KReportTab::Private::slotPaintRequested(QPrinter *printer)
 #if KDE_IS_VERSION(4, 14, 65)
     q->m_part->view()->print(kmymoney->printer(), true);
 #else
-    q->m_part->view()->print(true);
+    q->m_part->view()->print();
 #endif
 }
 
