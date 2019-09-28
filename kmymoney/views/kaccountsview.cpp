@@ -183,10 +183,17 @@ void KAccountsView::slotTabCurrentChanged(int index)
     case ListView:
       // update the hint if categories are hidden
       m_hiddenCategories->setVisible(m_haveUnusedCategories);
+      m_searchWidget->setEnabled(true);
+      m_collapseButton->setEnabled(true);
+      m_expandButton->setEnabled(true);
       break;
 
     case IconView:
       m_hiddenCategories->hide();
+      m_searchWidget->setEnabled(false);
+      m_searchWidget->setText(QString());
+      m_collapseButton->setEnabled(false);
+      m_expandButton->setEnabled(false);
       break;
 
     default:
