@@ -99,12 +99,12 @@ function download() {
 	rm -rf binaries
 	if test $use32 -eq 1; then
 		osc $oscoptions getbinaries --multibuild-package=$PACKAGENAME32-installer $ROOT32 $PACKAGENAME32 $REPO x86_64
-		VERSION=$(find binaries/ -name "*$PACKAGENAME32-installer*" | sed "s,^.*$PACKAGENAME32-installer-,,g;s,-.*$,,g")
+		VERSION=$(find binaries/ -name "*$PACKAGENAME32-setup*" | sed "s,^.*$PACKAGENAME32-setup-,,g;s,-.*$,,g")
 		echo $VERSION > VERSION
 	fi
 	if test $use64 -eq 1; then
 		osc $oscoptions getbinaries --multibuild-package=$PACKAGENAME64-installer $ROOT64 $PACKAGENAME64 $REPO x86_64
-		VERSION=$(find binaries/ -name "*$PACKAGENAME64-installer*" | sed "s,^.*$PACKAGENAME64-installer-,,g;s,-.*$,,g")
+		VERSION=$(find binaries/ -name "*$PACKAGENAME64-setup*" | sed "s,^.*$PACKAGENAME64-setup-,,g;s,-.*$,,g")
 		echo $VERSION > VERSION
 	fi
 	cd ..
@@ -144,7 +144,7 @@ function downloadsrc() {
 function unpack()  {
 	getversion
 	cd work
-	files=$(cd binaries; find -name '*installer*' -o -name '*portable*' -o -name '*src*' -o -name '*debugpackage*' | grep "$VERSION" | sed 's,^.,binaries,g')
+	files=$(cd binaries; find -name '*setup*' -o -name '*portable*' -o -name '*src*' -o -name '*debugpackage*' | grep "$VERSION" | sed 's,^.,binaries,g')
 	if test -d tmp; then
 		rm -rf tmp
 	fi
