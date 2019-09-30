@@ -264,7 +264,7 @@ bool MyMoneyStorageSql::readFile()
     file->institutionsModel()->load(fetchInstitutions());
     file->payeesModel()->load(fetchPayees());
     file->tagsModel()->load(fetchTags());
-    file->currenciesModel()->load(fetchCurrencies());
+    file->currenciesModel()->loadCurrencies(fetchCurrencies());
     file->securitiesModel()->load(fetchSecurities());
     file->accountsModel()->load(fetchAccounts());
     file->journalModel()->load(fetchTransactions());
