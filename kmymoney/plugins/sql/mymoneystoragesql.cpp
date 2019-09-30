@@ -1170,7 +1170,7 @@ QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions(const QSt
   ulong lastId = 0;
   const MyMoneyDbTable& t = d->m_db.m_tables["kmmInstitutions"];
   QSqlQuery sq(*const_cast <MyMoneyStorageSql*>(this));
-  sq.prepare("SELECT id from kmmAccounts where institutionId = :id");
+  sq.prepare("SELECT id FROM kmmAccounts WHERE institutionId = :id");
   QSqlQuery query(*const_cast <MyMoneyStorageSql*>(this));
   QString queryString(t.selectAllString(false));
 
@@ -1446,7 +1446,7 @@ QMap<QString, onlineJob> MyMoneyStorageSql::fetchOnlineJobs(const QStringList& i
     else // includes: stateString == "noBankAnswer"
       state = eMyMoney::OnlineJob::sendingState::noBankAnswer;
 
-    job.setBankAnswer(state, query.value(4).toDateTime());
+    job.setBankAnswer(state, query.value(3).toDateTime());
     job.setLock(query.value(5).toString() == QLatin1String("Y") ? true : false);
     jobList.insert(job.id(), job);
     if (d->m_displayStatus)
@@ -1788,7 +1788,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const QSt
   if (! tidList.isEmpty()) {
     whereClause += " AND id IN " + tidList;
   }
-  if (!dateClause.isEmpty()) whereClause += " and " + dateClause;
+  if (!dateClause.isEmpty()) whereClause += " AND " + dateClause;
   const MyMoneyDbTable& t = d->m_db.m_tables["kmmTransactions"];
   QSqlQuery query(*const_cast <MyMoneyStorageSql*>(this));
   query.prepare(t.selectAllString(false) + whereClause + " ORDER BY id;");
@@ -1798,7 +1798,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const QSt
   if (! tidList.isEmpty()) {
     whereClause += " AND transactionId IN " + tidList;
   }
-  if (!dateClause.isEmpty()) whereClause += " and " + dateClause;
+  if (!dateClause.isEmpty()) whereClause += " AND " + dateClause;
   QSqlQuery qs(*const_cast <MyMoneyStorageSql*>(this));
   QString splitQuery = ts.selectAllString(false) + whereClause
                        + " ORDER BY transactionId, splitId;";
@@ -1960,11 +1960,11 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
   bool txFilterActive = ((start != QDate()) || (end != QDate())); // and this for fields in the transaction table
 
   QString whereClause = "";
-  QString subClauseconnector = " where txType = 'N' and ";
+  QString subClauseconnector = " WHERE txType = 'N' AND ";
   // payees
   QStringList payees;
   if (filter.payees(payees)) {
-    QString itemConnector = "payeeId in (";
+    QString itemConnector = "payeeId IN (";
     QString payeesClause = "";
     foreach (const QString& it, payees) {
       payeesClause.append(QString("%1'%2'")
@@ -1973,7 +1973,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
     }
     if (!payeesClause.isEmpty()) {
       whereClause += subClauseconnector + payeesClause + ')';
-      subClauseconnector = " and ";
+      subClauseconnector = " AND ";
     }
     splitFilterActive = true;
   }
@@ -1981,7 +1981,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
   //tags
   QStringList tags;
   if (filter.tags(tags)) {
-    QString itemConnector = "splitId in ( SELECT splitId from kmmTagSplits where kmmTagSplits.transactionId = kmmSplits.transactionId and tagId in (";
+    QString itemConnector = "splitId IN ( SELECT splitId FROM kmmTagSplits WHERE kmmTagSplits.transactionId = kmmSplits.transactionId AND tagId IN (";
     QString tagsClause = "";
     foreach (const QString& it, tags) {
       tagsClause.append(QString("%1'%2'")
@@ -1990,7 +1990,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
     }
     if (!tagsClause.isEmpty()) {
       whereClause += subClauseconnector + tagsClause + ')';
-      subClauseconnector = " and ";
+      subClauseconnector = " AND ";
     }
     splitFilterActive = true;
   }
@@ -1998,7 +1998,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
   // accounts and categories
   if (!accounts.isEmpty()) {
     splitFilterActive = true;
-    QString itemConnector = "accountId in (";
+    QString itemConnector = "accountId IN (";
     QString accountsClause = "";
     foreach (const QString& it, accounts) {
       accountsClause.append(QString("%1 '%2'")
@@ -2007,7 +2007,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
     }
     if (!accountsClause.isEmpty()) {
       whereClause += subClauseconnector + accountsClause + ')';
-      subClauseconnector = " and (";
+      subClauseconnector = " AND (";
     }
   }
 
@@ -2024,7 +2024,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
     }
     if (!statesClause.isEmpty()) {
       whereClause += subClauseconnector + statesClause + ')';
-      subClauseconnector = " and (";
+      subClauseconnector = " AND (";
     }
   }
   // I've given up trying to work out the logic. we keep getting the wrong number of close brackets
@@ -2057,7 +2057,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
   QString connector = "";
   if (end != QDate()) {
     dateClause = QString("(postDate < '%1')").arg(end.addDays(1).toString(Qt::ISODate));
-    connector = " and ";
+    connector = " AND ";
   }
   if (start != QDate()) {
     dateClause += QString("%1 (postDate >= '%2')").arg(connector).arg(start.toString(Qt::ISODate));
@@ -2066,9 +2066,9 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
   // if we have only a date filter, we need to build the list from the tx table
   // otherwise we need to build from the split table
   if (splitFilterActive) {
-    inQuery = QString("(select distinct transactionId from kmmSplits %1)").arg(whereClause);
+    inQuery = QString("(SELECT DISTINCT transactionId FROM kmmSplits %1)").arg(whereClause);
   } else {
-    inQuery = QString("(select distinct id from kmmTransactions where %1)").arg(dateClause);
+    inQuery = QString("(SELECT DISTINCT id FROM kmmTransactions WHERE %1)").arg(dateClause);
     txFilterActive = false; // kill off the date filter now
   }
 
@@ -2122,7 +2122,7 @@ QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QStringLi
   QSqlQuery qs(*const_cast <MyMoneyStorageSql*>(this));
   qs.prepare(ts.selectAllString(false) + " WHERE transactionId = :id ORDER BY splitId;");
   QSqlQuery sq(*const_cast <MyMoneyStorageSql*>(this));
-  sq.prepare("SELECT payDate from kmmSchedulePaymentHistory where schedId = :id");
+  sq.prepare("SELECT payDate FROM kmmSchedulePaymentHistory WHERE schedId = :id");
 
   QString queryString(t.selectAllString(false));
 
