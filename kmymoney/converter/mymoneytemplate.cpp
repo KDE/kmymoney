@@ -25,6 +25,7 @@
 #include <QTextStream>
 #include <QList>
 #include <QSaveFile>
+#include <QtDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -302,6 +303,7 @@ bool MyMoneyTemplate::createAccounts(MyMoneyAccount& parent, QDomNode account)
           MyMoneyFile::instance()->accountList(subAccountList, parent.accountList());
           for (it = subAccountList.constBegin(); it != subAccountList.constEnd(); ++it) {
             if ((*it).name() == accountElement.attribute("name")) {
+              qWarning() << "account" << (*it).name() << "already present";
               acc = *it;
               QString id = accountElement.attribute("id");
               if (!id.isEmpty())
