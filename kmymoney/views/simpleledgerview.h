@@ -54,7 +54,7 @@ public Q_SLOTS:
 
   void showEvent(QShowEvent* event) override;
 
-  void slotSettingsChanged();
+  void slotSettingsChanged() override;
 
 protected:
 

@@ -272,7 +272,7 @@ public:
   }
 
   inline const QString selectAllString(bool terminate = true) const {
-    return (terminate ? QString(m_selectAllString + ";") : m_selectAllString);
+    return terminate ? QString(m_selectAllString + ";") : m_selectAllString;
   }
   inline const QString& updateString() const {
     return (m_updateString);

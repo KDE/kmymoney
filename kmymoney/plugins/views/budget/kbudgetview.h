@@ -54,7 +54,7 @@ public:
   void executeCustomAction(eView::Action action) override;
 
 public Q_SLOTS:
-  void slotSettingsChanged();
+  void slotSettingsChanged() override;
 
 protected:
   KBudgetView(KBudgetViewPrivate &dd, QWidget *parent);

@@ -63,7 +63,7 @@ public Q_SLOTS:
   void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
   void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
-  void slotSettingsChanged();
+  void slotSettingsChanged() override;
 
 protected:
   void showEvent(QShowEvent * event) override;

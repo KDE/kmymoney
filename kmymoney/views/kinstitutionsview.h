@@ -1,4 +1,4 @@
-/*
+ /*
  * Copyright 2007-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
@@ -59,7 +59,7 @@ public Q_SLOTS:
   void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
   void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
-  void slotSettingsChanged();
+  void slotSettingsChanged() override;
 
 protected:
   void showEvent(QShowEvent * event) override;
