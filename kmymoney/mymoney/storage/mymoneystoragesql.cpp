@@ -3505,7 +3505,7 @@ const QMap<QString, onlineJob> MyMoneyStorageSql::fetchOnlineJobs(const QStringL
     else // includes: stateString == "noBankAnswer"
       state = onlineJob::noBankAnswer;
 
-    job.setBankAnswer(state, query.value(4).toDateTime());
+    job.setBankAnswer(state, query.value(3).toDateTime());
     job.setLock(query.value(5).toString() == QLatin1String("Y") ? true : false);
     jobList.insert(job.id(), job);
     if (m_displayStatus)
