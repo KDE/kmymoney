@@ -68,7 +68,7 @@ KScheduledView::KScheduledView(QWidget *parent) :
   // create the searchline widget
   // and insert it into the existing layout
   m_searchWidget = new KTreeWidgetFilterLineWidget(m_listTab, m_scheduleTree);
-  m_listTabLayout->insertWidget(0, m_searchWidget);
+  m_filterBox->insertWidget(1, m_searchWidget);
 
   //enable custom context menu
   m_scheduleTree->setContextMenuPolicy(Qt::CustomContextMenu);

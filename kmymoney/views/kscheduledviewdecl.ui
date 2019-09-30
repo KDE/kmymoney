@@ -15,11 +15,11 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QHBoxLayout">
+    <layout class="QHBoxLayout" name="m_filterBox">
      <item>
-      <widget class="KPushButton" name="m_qbuttonNew">
+      <widget class="KPushButton" name="m_accountsCombo">
        <property name="text">
-        <string>New Scheduled transaction...</string>
+        <string>Filter Accounts</string>
        </property>
       </widget>
      </item>
@@ -40,9 +40,9 @@
       </spacer>
      </item>
      <item>
-      <widget class="KPushButton" name="m_accountsCombo">
+      <widget class="KPushButton" name="m_qbuttonNew">
        <property name="text">
-        <string>Filter Accounts</string>
+        <string>New Scheduled transaction...</string>
        </property>
       </widget>
      </item>
