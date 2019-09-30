@@ -67,7 +67,7 @@ private:
   Q_DECLARE_PRIVATE(KCurrencyEditDlg)
 
 private Q_SLOTS:
-  void timerDone();
+  void finishCtor();
   void slotSelectBaseCurrency();
   void slotAddCurrency();
   void slotRemoveCurrency();

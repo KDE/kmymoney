@@ -24,7 +24,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QTimer>
 #include <QPixmap>
 #include <QBitmap>
 #include <QList>
@@ -227,10 +226,10 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
   connect(d->ui->m_editCurrencyButton, &QAbstractButton::clicked, this, &KCurrencyEditDlg::slotEditCurrency);
   connect(d->ui->m_removeUnusedCurrencyButton, &QAbstractButton::clicked, this, &KCurrencyEditDlg::slotRemoveUnusedCurrency);
 
-  QTimer::singleShot(10, this, SLOT(timerDone()));
+  QMetaObject::invokeMethod(this, "finishCtor");
 }
 
-void KCurrencyEditDlg::timerDone()
+void KCurrencyEditDlg::finishCtor()
 {
   Q_D(KCurrencyEditDlg);
   slotLoadCurrencies();
