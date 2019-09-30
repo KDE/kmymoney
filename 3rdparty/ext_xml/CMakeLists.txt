@@ -2,7 +2,7 @@
 ExternalProject_Add(
   ext_xml
   DOWNLOAD_DIR ${EXT_DOWNLOAD_DIR}
-  URL ftp://xmlsoft.org/libxslt/libxml2-2.9.8.tar.gz
+  URL http://xmlsoft.org/sources/libxml2-2.9.8.tar.gz
   URL_MD5 b786e353e2aa1b872d70d5d1ca0c740d
 
   PATCH_COMMAND ${PATCH_COMMAND} -p1 -i ${CMAKE_CURRENT_SOURCE_DIR}/xml.diff
