@@ -22,6 +22,8 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+#include <KGlobal>
+#include <KLocale>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -29,6 +31,11 @@
 TocItemReport::TocItemReport(QTreeWidgetItem* parent, MyMoneyReport& report):
     TocItem(parent, QStringList() << report.name() << report.comment())
 {
+  QDate startDate,endDate;
+  if (report.dateFilter(startDate, endDate)) {
+    setText(2, KGlobal::locale()->formatDate(startDate, KLocale::ShortDate));
+    setText(3, KGlobal::locale()->formatDate(endDate, KLocale::ShortDate));
+  }
   m_report = report;
 
   type = TocItem::REPORT;

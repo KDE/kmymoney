@@ -346,11 +346,11 @@ KReportsView::KReportsView(QWidget *parent, const char *name) :
 
   // report-group items have only 1 column (name of group),
   // report items have 2 columns (report name and comment)
-  m_tocTreeWidget->setColumnCount(2);
+  m_tocTreeWidget->setColumnCount(4);
 
   // headers
   QStringList headers;
-  headers << i18n("Reports") << i18n("Comment");
+  headers << i18n("Reports") << i18n("Comment") << i18n("Start date") << i18n("End date");
   m_tocTreeWidget->setHeaderLabels(headers);
 
   m_tocTreeWidget->setAlternatingRowColors(true);
