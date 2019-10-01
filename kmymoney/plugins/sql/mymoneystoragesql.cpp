@@ -2368,7 +2368,8 @@ QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QStringLi
       tx.setPostDate(nextPaymentDue);
     }
 
-    s.setTransaction(tx);
+    // make sure to skip the date check for transactions
+    s.setTransaction(tx, true);
 
     // read in the recorded payments
     sq.bindValue(":id", s.id());
