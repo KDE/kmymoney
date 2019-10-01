@@ -25,7 +25,7 @@
 #include <QTextStream>
 #include <QList>
 #include <QSaveFile>
-#include <QtDebug>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
