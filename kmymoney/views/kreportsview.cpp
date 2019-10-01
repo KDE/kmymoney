@@ -152,9 +152,11 @@ KReportsView::KReportTab::~KReportTab()
 
 void KReportsView::KReportTab::print()
 {
+#if KDE_IS_VERSION(4, 14, 65)
   QPrintDialog dlg(kmymoney->printer(), this);
   if (!dlg.exec())
     return;
+#endif
 
   d->slotPaintRequested(kmymoney->printer());
 }
