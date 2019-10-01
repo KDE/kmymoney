@@ -470,7 +470,7 @@ public:
 
   void storeKVP(const QString& key, AmountEdit* widget)
   {
-    storeKVP(key, widget->text(), widget->text());
+    storeKVP(key, widget->text(), widget->value().toString());
   }
 
   void storeKVP(const QString& key, KLineEdit* widget)
