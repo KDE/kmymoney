@@ -1258,6 +1258,8 @@ QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions() const
   return fetchInstitutions(QStringList(), false);
 }
 
+#if 0
+/// @todo cleanup, the following can go
 void MyMoneyStorageSql::readPayees(const QString& id)
 {
   QList<QString> list;
@@ -1279,6 +1281,7 @@ void MyMoneyStorageSql::readPayees()
 {
   readPayees(QList<QString>());
 }
+#endif
 
 QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees(const QStringList& idList, bool /*forUpdate*/) const
 {
