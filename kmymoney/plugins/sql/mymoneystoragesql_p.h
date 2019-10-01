@@ -564,13 +564,11 @@ public:
     foreach (const MyMoneySchedule& it, list) {
       query.prepare(m_db.m_tables["kmmSchedules"].updateString());
       query2.prepare(m_db.m_tables["kmmSchedules"].insertString());
-      bool insert = true;
       if (dbList.contains(it.id())) {
         dbList.removeAll(it.id());
-        insert = false;
-        writeSchedule(it, query, insert);
+        writeSchedule(it, query, false);
       } else {
-        writeSchedule(it, query2, insert);
+        writeSchedule(it, query2, true);
       }
       signalProgress(++m_schedules, 0);
     }
