@@ -108,6 +108,7 @@ public:
   QMap<QString, onlineJob> onlineJobList;
   QMap<MyMoneySecurityPair, MyMoneyPriceEntries> prList;
   QMap<QString, MyMoneyCostCenter> ccList;
+  QMap<QString, QString> fileInfoKvp;
 
   QString           m_fromSecurity;
   QString           m_toSecurity;
@@ -372,6 +373,13 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
           MyMoneyKeyValueContainer container;
           addToKeyValueContainer(container, m_baseNode);
           m_reader->m_file->parametersModel()->load(container.pairs());
+          const auto end = m_reader->d->fileInfoKvp.constEnd();
+          for (auto it = m_reader->d->fileInfoKvp.constBegin(); it != end; ++it) {
+            m_reader->m_file->parametersModel()->addItem(it.key(), it.value());
+          }
+          // loading does not count as making dirty
+          m_reader->m_file->parametersModel()->setDirty(false);
+          m_reader->d->fileInfoKvp.clear();
 
         } else if (s == nodeName(Node::Institution)) {
           auto i = readInstitution(m_baseNode);
@@ -1550,13 +1558,16 @@ void MyMoneyStorageXML::writeFile(QIODevice* qf, MyMoneyStorageMgr* storage, MyM
 bool MyMoneyStorageXML::readFileInformation(const QDomElement& fileInfo)
 {
   signalProgress(0, 3, i18n("Loading file information..."));
+  d->fileInfoKvp.clear();
   bool rc = true;
   QDomElement temp = findChildElement(elementName(Element::General::CreationDate), fileInfo);
   if (temp == QDomElement()) {
     rc = false;
   }
   QString strDate = MyMoneyUtils::QStringEmpty(temp.attribute(attributeName(Attribute::General::Date)));
-  m_storage->setCreationDate(MyMoneyUtils::stringToDate(strDate));
+  if (MyMoneyUtils::stringToDate(strDate).isValid()) {
+    d->fileInfoKvp.insert(m_file->fixedKey(MyMoneyFile::CreationDate), strDate);
+  }
   signalProgress(1, 0);
 
   temp = findChildElement(elementName(Element::General::LastModifiedDate), fileInfo);
@@ -1564,7 +1575,9 @@ bool MyMoneyStorageXML::readFileInformation(const QDomElement& fileInfo)
     rc = false;
   }
   strDate = MyMoneyUtils::QStringEmpty(temp.attribute(attributeName(Attribute::General::Date)));
-  m_storage->setLastModificationDate(MyMoneyUtils::stringToDate(strDate));
+  if (MyMoneyUtils::stringToDate(strDate).isValid()) {
+    d->fileInfoKvp.insert(m_file->fixedKey(MyMoneyFile::LastModificationDate), strDate);
+  }
   signalProgress(2, 0);
 
   temp = findChildElement(elementName(Element::General::Version), fileInfo);
@@ -1579,9 +1592,9 @@ bool MyMoneyStorageXML::readFileInformation(const QDomElement& fileInfo)
     QString strFixVersion = MyMoneyUtils::QStringEmpty(temp.attribute(attributeName(Attribute::General::ID)));
     m_storage->setFileFixVersion(strFixVersion.toUInt());
     // skip KMyMoneyView::fixFile_2()
-    if (m_storage->fileFixVersion() == 2) {
-      m_storage->setFileFixVersion(3);
-    }
+    if (strFixVersion == 2)
+      strFixVersion = 3;
+    d->fileInfoKvp.insert(m_file->fixedKey(MyMoneyFile::FileFixVersion), QString("%1").arg(strFixVersion));
   }
   // FIXME The old version stuff used this rather odd number
   //       We now use increments
