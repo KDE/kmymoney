@@ -220,7 +220,6 @@ bool SQLStorage::save(const QUrl &url)
                                     "It may well be corrupt."),
                                writer->lastError().toLatin1(),
                                i18n("Database malfunction"));
-    rc =  false;
   } else {
     rc = true;
   }
