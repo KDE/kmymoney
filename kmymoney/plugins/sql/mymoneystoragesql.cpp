@@ -200,7 +200,12 @@ int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
     }
     if (rc != 0) return (rc);
     // bypass logon check if we are creating a database
-    if (d->m_newDatabase) return(0);
+    if (d->m_newDatabase) {
+      d->m_logonUser = url.userName() + '@' + url.host();
+      d->m_logonAt = QDateTime::currentDateTime();
+      d->writeFileInfo();
+      return(0);
+    }
     // check if the database is locked, if not lock it
     d->readFileInfo();
     if (!d->m_logonUser.isEmpty() && (!d->m_override)) {
@@ -214,8 +219,6 @@ int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
     } else {
       d->m_logonUser = url.userName() + '@' + url.host();
       d->m_logonAt = QDateTime::currentDateTime();
-      /// @todo port to new model code
-      // d->writeFileInfo();
     }
     return(rc);
   } catch (const QString& s) {
@@ -2650,6 +2653,7 @@ QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchCurrencies(const QStringL
     c.setSmallestAccountFraction(GETINT(smallestAccountFractionCol));
     c.setPricePrecision(GETINT(pricePrecisionCol));
     c.setTradingSymbol(QString(symbol, 3).trimmed());
+    c.setRoundingMethod(AlkValue::RoundNever);
 
     cList[id] = MyMoneySecurity(id, c);
 
