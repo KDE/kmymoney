@@ -47,6 +47,15 @@ cp -r $DEPS_INSTALL_PREFIX/share/mime $APPDIR/usr/share
 cp -r $DEPS_INSTALL_PREFIX/translations $APPDIR/usr/
 cp -r $DEPS_INSTALL_PREFIX/openssl/lib/*  $APPDIR/usr/lib
 
+# Step 1a: copy Gwenhywfar and AqBanking if they exist
+for d in gwenhywfar aqbanking; do
+    echo "Try to locate $DEPS_INSTALL_PREFIX/lib/$d"
+    if [ -d $DEPS_INSTALL_PREFIX/lib/$d ]; then
+        echo "Copy $DEPS_INSTALL_PREFIX/lib/$d to $APPDIR/usr/lib"
+        cp -r $DEPS_INSTALL_PREFIX/lib/$d $APPDIR/usr/lib
+    fi
+done
+
 # Step 2: Relocate x64 binaries from the architecture specific directory as required for Appimages
 mv $APPDIR/usr/lib/x86_64-linux-gnu/*  $APPDIR/usr/lib
 rm -rf $APPDIR/usr/lib/x86_64-linux-gnu/
