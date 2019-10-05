@@ -38,6 +38,7 @@ MyMoneyTransactionFilter::MyMoneyTransactionFilter()
   m_filterSet.allFilter = 0;
   m_reportAllSplits = true;
   m_considerCategory = true;
+  m_considerCategorySplits = false;
   m_invertText = false;
 }
 
@@ -46,6 +47,7 @@ MyMoneyTransactionFilter::MyMoneyTransactionFilter(const QString& id)
   m_filterSet.allFilter = 0;
   m_reportAllSplits = false;
   m_considerCategory = false;
+  m_considerCategorySplits = false;
   m_invertText = false;
 
   addAccount(id);
@@ -208,6 +210,11 @@ void MyMoneyTransactionFilter::setNumberFilter(const QString& from, const QStrin
 void MyMoneyTransactionFilter::setReportAllSplits(const bool report)
 {
   m_reportAllSplits = report;
+}
+
+void MyMoneyTransactionFilter::setConsiderCategorySplits(const bool check)
+{
+  m_considerCategorySplits = check;
 }
 
 void MyMoneyTransactionFilter::setConsiderCategory(const bool check)
@@ -427,7 +434,8 @@ bool MyMoneyTransactionFilter::match(const MyMoneyTransaction& transaction)
           break;
       }
 
-      if (!isCategory && !removeSplit) {
+      bool includeSplit = m_considerCategorySplits || (!m_considerCategorySplits && !isCategory);
+      if (includeSplit && !removeSplit) {
         // check the payee list
         if (!removeSplit && m_filterSet.singleFilter.payeeFilter) {
           if (m_payees.count() > 0) {

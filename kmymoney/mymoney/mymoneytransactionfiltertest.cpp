@@ -542,7 +542,7 @@ void MyMoneyTransactionFilterTest::testMatchTransactionTag()
   QVERIFY(filter.match(transaction));
   QCOMPARE(filter.matchingSplits().size(), 1);
 
-  // check no category support
+  // check disabled category splits support
   MyMoneySplit split4;
   split4.setAccountId(acExpenseId);
   split4.setShares(MyMoneyMoney(123.00));
@@ -556,7 +556,10 @@ void MyMoneyTransactionFilterTest::testMatchTransactionTag()
   QVERIFY(!filter.match(transaction2));
   QCOMPARE(filter.matchingSplits().size(), 0);
 
-  qDebug() << "tags on categories could not be tested";
+  // check enabled category splits support
+  filter.setConsiderCategorySplits(true);
+  QVERIFY(filter.match(transaction2));
+  QCOMPARE(filter.matchingSplits().size(), 1);
 }
 
 void MyMoneyTransactionFilterTest::testMatchTransactionTypeAllTypes()

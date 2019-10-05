@@ -344,6 +344,15 @@ public:
     */
   void setReportAllSplits(const bool report = true);
 
+  /** Consider splits in categories
+    *
+    * With this setting, splits in categories that are not considered
+    * by default are taken into account.
+    *
+    * @param check check state
+    */
+  void setConsiderCategorySplits(const bool check = true);
+
   /**
    * Consider income and expense categories
    *
@@ -616,6 +625,7 @@ protected:
   FilterSet           m_filterSet;
   bool                m_reportAllSplits;
   bool                m_considerCategory;
+  bool                m_considerCategorySplits;
 
   QRegExp             m_text;
   bool                m_invertText;
