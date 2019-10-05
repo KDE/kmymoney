@@ -344,6 +344,15 @@ public:
     */
   void setReportAllSplits(const bool report = true);
 
+  /**
+   * Consider income and expense categories
+   *
+   * If the account or category filter is enabled, categories of
+   * income and expense type are included if enabled with this
+   * method.
+   *
+   * @param check check state
+   */
   void setConsiderCategory(const bool check = true);
 
   /**
