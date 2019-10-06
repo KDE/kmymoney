@@ -539,6 +539,11 @@ public slots:
   void slotPrintView();
 
   /**
+    * This slot opens the print preview for the current view.
+    */
+  void slotPrintPreviewView();
+
+  /**
     * This slot switches the view to present the home page
     */
   void slotShowHomePage() {

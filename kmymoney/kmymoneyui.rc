@@ -269,6 +269,7 @@
   <Action name="file_open" />
   <Action name="file_save" />
   <Action name="file_print" />
+  <Action name="file_print_preview" />
   <Separator lineSeparator="true"/>
   <Action name="institution_new" />
   <Action name="account_new" />

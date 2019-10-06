@@ -97,6 +97,16 @@ public slots:
     */
   void slotPrintView();
 
+  /**
+    * Opens the print preview for the current view
+    */
+  void slotPrintPreviewView();
+
+  /**
+    * Generates a print for a given printer
+    */
+  void slotPaintRequested(QPrinter *printer);
+
   void slotZoomView(int);
 
 signals:

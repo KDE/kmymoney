@@ -34,6 +34,7 @@
 #include <QVariant>
 #include <QCheckBox>
 #include <QPainter>
+#include <QPrintPreviewDialog>
 #include <QPrintDialog>
 #include <QPrinter>
 
@@ -159,6 +160,13 @@ void KReportsView::KReportTab::print()
 #endif
 
   d->slotPaintRequested(kmymoney->printer());
+}
+
+void KReportsView::KReportTab::printPreview()
+{
+  QPrintPreviewDialog dlg(kmymoney->printer(), this);
+  connect(&dlg, SIGNAL(paintRequested(QPrinter*)), d, SLOT(slotPaintRequested(QPrinter*)));
+  dlg.exec();
 }
 
 void KReportsView::KReportTab::copyToClipboard()
@@ -708,6 +716,13 @@ void KReportsView::slotPrintView()
   KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
   if (tab)
     tab->print();
+}
+
+void KReportsView::slotPrintPreviewView()
+{
+  KReportTab* tab = dynamic_cast<KReportTab*>(m_reportTabWidget->currentWidget());
+  if (tab)
+    tab->printPreview();
 }
 
 void KReportsView::slotCopyView()

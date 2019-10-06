@@ -277,6 +277,11 @@ protected slots:
   void slotPrintView();
 
   /**
+    * Calls the print preview logic for the current view
+    */
+  void slotPrintPreviewView();
+
+  /**
     * Create a new investment
     */
   void slotInvestmentNew();

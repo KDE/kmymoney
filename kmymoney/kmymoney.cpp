@@ -581,6 +581,7 @@ void KMyMoneyApp::initActions()
   actionCollection()->addAction(KStandardAction::Close, this, SLOT(slotFileClose()));
   actionCollection()->addAction(KStandardAction::Quit, this, SLOT(slotFileQuit()));
   actionCollection()->addAction(KStandardAction::Print, this, SLOT(slotPrintView()));
+  actionCollection()->addAction(KStandardAction::PrintPreview, this, SLOT(slotPrintPreviewView()));
 
   KAction *open_database = actionCollection()->addAction("open_database");
   open_database->setText(i18n("Open database..."));
@@ -6364,6 +6365,11 @@ void KMyMoneyApp::slotPrintView()
   d->m_myMoneyView->slotPrintView();
 }
 
+void KMyMoneyApp::slotPrintPreviewView()
+{
+  d->m_myMoneyView->slotPrintPreviewView();
+}
+
 void KMyMoneyApp::updateCaption(bool skipActions)
 {
   QString caption;
@@ -6412,6 +6418,7 @@ void KMyMoneyApp::slotUpdateActions()
   action("view_personal_data")->setEnabled(fileOpen);
   action("file_backup")->setEnabled(fileOpen && !d->m_myMoneyView->isDatabase());
   action("file_print")->setEnabled(fileOpen && d->m_myMoneyView->canPrint());
+  action("file_print_preview")->setEnabled(fileOpen && d->m_myMoneyView->canPrint());
 #ifdef KMM_DEBUG
   action("view_file_info")->setEnabled(fileOpen);
   action("file_dump")->setEnabled(fileOpen);

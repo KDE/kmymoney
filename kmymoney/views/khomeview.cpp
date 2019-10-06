@@ -35,6 +35,9 @@
 #include <QFile>
 #include <QTimer>
 #include <QBuffer>
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QPrintPreviewDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -188,8 +191,30 @@ void KHomeView::showEvent(QShowEvent* event)
 
 void KHomeView::slotPrintView()
 {
-  if (d->m_part && d->m_part->view())
-    d->m_part->view()->print();
+  QPrintDialog dlg(kmymoney->printer(), this);
+  if (!dlg.exec())
+    return;
+  slotPaintRequested(kmymoney->printer());
+}
+
+void KHomeView::slotPaintRequested(QPrinter *printer)
+{
+  if (!d->m_part || !d->m_part->view())
+    return;
+#if KDE_IS_VERSION(4, 14, 65)
+  d->m_part->view()->print(printer, true);
+#else
+  d->m_part->view()->print();
+#endif
+}
+
+void KHomeView::slotPrintPreviewView()
+{
+  if (!d->m_part && !d->m_part->view())
+    return;
+  QPrintPreviewDialog dlg(kmymoney->printer(), this);
+  connect(&dlg, SIGNAL(paintRequested(QPrinter*)), this, SLOT(slotPaintRequested(QPrinter*)));
+  dlg.exec();
 }
 
 void KHomeView::slotZoomView(int delta)

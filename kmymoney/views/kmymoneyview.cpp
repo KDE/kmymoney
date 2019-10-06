@@ -2295,6 +2295,14 @@ void KMyMoneyView::slotPrintView()
     m_homeView->slotPrintView();
 }
 
+void KMyMoneyView::slotPrintPreviewView()
+{
+  if (m_reportsViewFrame == currentPage())
+    m_reportsView->slotPrintPreviewView();
+  else if (m_homeViewFrame == currentPage())
+    m_homeView->slotPrintPreviewView();
+}
+
 KMyMoneyViewBase* KMyMoneyView::addBasePage(const QString& title, const QString& icon)
 {
   KMyMoneyViewBase* viewBase = new KMyMoneyViewBase(this, title, title);
