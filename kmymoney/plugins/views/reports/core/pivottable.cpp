@@ -697,6 +697,11 @@ void PivotTable::calculateOpeningBalances()
         }
       }
 
+      if (account.isInvest()) {
+        // calculate value of shares
+        value *= account.deepCurrencyPrice(from.addDays(-1));
+      }
+
       // place into the 'opening' column...
       assignCell(outergroup, account, 0, value);
     } else {
