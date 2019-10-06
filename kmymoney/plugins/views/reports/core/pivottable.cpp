@@ -2072,7 +2072,11 @@ void PivotTable::calculateForecast()
         QDate forecastDate = m_beginDate;
         // check whether the opening balance needs to be setup
         if (copyOpeningBalances) {
-          it_row.value()[eForecast][0] += it_row.value()[eActual][0];
+          if (it_row.key().accountGroup() == eMyMoney::Account::Type::Liability) {
+            it_row.value()[eForecast][0] -= it_row.value()[eActual][0];
+          } else {
+            it_row.value()[eForecast][0] += it_row.value()[eActual][0];
+          }
         }
         //check whether columns are days or months
         if (m_config.isColumnsAreDays()) {
