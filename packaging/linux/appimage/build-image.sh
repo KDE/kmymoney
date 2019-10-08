@@ -53,6 +53,7 @@ for d in gwenhywfar aqbanking; do
     if [ -d $DEPS_INSTALL_PREFIX/lib/$d ]; then
         echo "Copy $DEPS_INSTALL_PREFIX/lib/$d to $APPDIR/usr/lib"
         cp -r $DEPS_INSTALL_PREFIX/lib/$d $APPDIR/usr/lib
+        cp -r $DEPS_INSTALL_PREFIX/share/$d $APPDIR/usr/share
     fi
 done
 
