@@ -1,9 +1,8 @@
 <!DOCTYPE kpartgui>
-<kpartgui name="kmymoneyplugin-kbanking" version="4">
+<kpartgui name="kmymoneyplugin-kbanking" version="5">
   <MenuBar>
     <Menu name="file">
       <Menu name="import" append="merge_import">
-        <Separator/>
         <Action name="file_import_aqbanking"/>
       </Menu>
     </Menu>

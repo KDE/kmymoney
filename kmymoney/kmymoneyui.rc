@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui version="44" name="kmymoney" >
+<kpartgui version="45" name="kmymoney" >
  <MenuBar>
   <Menu name="file" >
    <DefineGroup name="open_db_group" append="open_merge"/>
@@ -14,6 +14,7 @@
    <Menu append="save_merge" name="export" >
     <text>&amp;Export</text>
     <Merge/>
+    <MergeLocal name="export_merge"/>
     <Separator/>
     <Action name="file_export_template" />
    </Menu>
