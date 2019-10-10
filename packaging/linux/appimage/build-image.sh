@@ -52,8 +52,10 @@ for d in gwenhywfar aqbanking; do
     echo "Try to locate $DEPS_INSTALL_PREFIX/lib/$d"
     if [ -d $DEPS_INSTALL_PREFIX/lib/$d ]; then
         echo "Copy $DEPS_INSTALL_PREFIX/lib/$d to $APPDIR/usr/bin/[lib,share]"
-        cp -r -v $DEPS_INSTALL_PREFIX/lib/$d $APPDIR/usr/bin/lib
-        cp -r -v $DEPS_INSTALL_PREFIX/share/$d $APPDIR/usr/bin/share
+        for sd in lib share; do
+            echo tar -C $DEPS_INSTALL_PREFIX/$sd -cf - $d | tar -C $APPDIR/usr/bin/$sd -xf -
+            tar -C $DEPS_INSTALL_PREFIX/$sd -cf - $d | tar -C $APPDIR/usr/bin/$sd -xf -
+        done
     fi
 done
 
