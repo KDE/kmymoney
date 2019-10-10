@@ -56,6 +56,8 @@ for d in gwenhywfar aqbanking; do
         cp -r -v $DEPS_INSTALL_PREFIX/share/$d $APPDIR/usr/bin/share
     fi
 done
+
+mkdir -p $APPDIR/usr/bin/share/locale
 cp -r -v $DEPS_INSTALL_PREFIX/share/locale/* $APPDIR/usr/bin/share/locale
 
 # Step 2: Relocate x64 binaries from the architecture specific directory as required for Appimages
