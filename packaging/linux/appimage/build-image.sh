@@ -53,7 +53,7 @@ for d in gwenhywfar aqbanking; do
     if [ -d $DEPS_INSTALL_PREFIX/lib/$d ]; then
         echo "Copy $DEPS_INSTALL_PREFIX/lib/$d to $APPDIR/usr/bin/[lib,share]"
         for sd in lib share; do
-            echo tar -C $DEPS_INSTALL_PREFIX/$sd -cf - $d | tar -C $APPDIR/usr/bin/$sd -xf -
+            echo "tar -C $DEPS_INSTALL_PREFIX/$sd -cf - $d | tar -C $APPDIR/usr/bin/$sd -xf -"
             tar -C $DEPS_INSTALL_PREFIX/$sd -cf - $d | tar -C $APPDIR/usr/bin/$sd -xf -
         done
     fi
