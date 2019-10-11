@@ -177,11 +177,12 @@ Transaction::Transaction(Register *parent, const MyMoneyTransaction& transaction
   }
 
   // load the tag
-  if (!m_split.tagIdList().isEmpty()) {
-    const QList<QString> t = m_split.tagIdList();
-    for (int i = 0; i < t.count(); i++) {
-      m_tagList << file->tag(t[i]).name();
-      m_tagColorList << file->tag(t[i]).tagColor();
+  foreach (const MyMoneySplit &s, transaction.splits()) {
+    if (!s.tagIdList().isEmpty()) {
+      foreach (const QString &id, s.tagIdList()) {
+        if (!m_tagIdList.contains(id))
+          m_tagIdList << id;
+      }
     }
   }
 
@@ -988,10 +989,8 @@ bool StdTransaction::formCellText(QString& txt, Qt::Alignment& align, int row, i
 
         case ValueColumn1:
           align |= Qt::AlignLeft;
-          if (!m_tagList.isEmpty()) {
-            for (int i = 0; i < m_tagList.size() - 1; i++)
-              txt += m_tagList[i] + ", ";
-            txt += m_tagList.last();
+          if (!m_tagIdList.isEmpty()) {
+            txt += formatTagList();
           }
           //if (m_transaction != MyMoneyTransaction())
           //  txt = m_split.tagId();
@@ -1049,6 +1048,51 @@ bool StdTransaction::formCellText(QString& txt, Qt::Alignment& align, int row, i
   return (col == ValueColumn1 && row < 5) || (col == ValueColumn2 && row > 0 && row != 4);
 }
 
+/**
+ * format the internal list of tags
+ * @return ordered and comma separated string with tags
+ */
+QString StdTransaction::formatTagList() const
+{
+  MyMoneyFile *file = MyMoneyFile::instance();
+
+  // sort tags
+  QMap<QString,QString> tags;
+  foreach (const QString &id, m_tagIdList) {
+    tags[file->tag(id).name()] = id;
+  }
+
+  QStringList names(tags.keys());
+  return names.join(", ");
+}
+
+/**
+ * format the internal list of tags
+ * @return formatted html fragment with tags
+ */
+QString StdTransaction::formatTagListAsHtml() const
+{
+  MyMoneyFile *file = MyMoneyFile::instance();
+
+  // sort tags
+  QMap<QString,QString> tags;
+  foreach (const QString &id, m_tagIdList) {
+    tags[file->tag(id).name()] = id;
+  }
+
+  QString s;
+  s += " ( ";
+  QString delimiter;
+
+  foreach (const QString &name, tags.keys()) {
+    s += delimiter + "<span style='color: " + file->tag(tags[name]).tagColor().name() + "'>&#x25CF;</span> " + name;
+    if (delimiter.isEmpty())
+      delimiter =", ";
+  }
+  s += " )";
+  return s;
+}
+
 void StdTransaction::registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter)
 {
   switch (row) {
@@ -1072,12 +1116,8 @@ void StdTransaction::registerCellText(QString& txt, Qt::Alignment& align, int ro
               break;
             case AccountFirst:
               txt = m_category;
-              if (!m_tagList.isEmpty()) {
-                txt += " ( ";
-                for (int i = 0; i < m_tagList.size() - 1; i++) {
-                  txt += "<span style='color: " + m_tagColorList[i].name() + "'>&#x25CF;</span> " + m_tagList[i] + ", ";
-                }
-                txt += "<span style='color: " + m_tagColorList.last().name() + "'>&#x25CF;</span> " + m_tagList.last() + " )";
+              if (!m_tagIdList.isEmpty()) {
+                txt += formatTagListAsHtml();
               }
               break;
           }
@@ -1141,12 +1181,8 @@ void StdTransaction::registerCellText(QString& txt, Qt::Alignment& align, int ro
           switch (m_parent->getDetailsColumnType()) {
             case PayeeFirst:
               txt = m_category;
-              if (!m_tagList.isEmpty()) {
-                txt += " ( ";
-                for (int i = 0; i < m_tagList.size() - 1; i++) {
-                  txt += "<span style='color: " + m_tagColorList[i].name() + "'>&#x25CF;</span> " + m_tagList[i] + ", ";
-                }
-                txt += "<span style='color: " + m_tagColorList.last().name() + "'>&#x25CF;</span> " + m_tagList.last() + " )";
+              if (!m_tagIdList.isEmpty()) {
+                txt += formatTagListAsHtml();
               }
               break;
             case AccountFirst:

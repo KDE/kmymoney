@@ -41,6 +41,7 @@
 class QTableWidget;
 class TransactionEditor;
 class TransactionEditorContainer;
+class MyMoneyTag;
 
 namespace KMyMoneyTransactionForm
 {
@@ -119,8 +120,8 @@ public:
   virtual const QString& sortPayee() const {
     return m_payee;
   }
-  virtual const QList<QString>& sortTagList() const {
-    return m_tagList;
+  virtual const QStringList& sortTagIdList() const {
+    return m_tagIdList;
   }
   virtual const MyMoneyMoney& sortValue() const {
     return m_split.shares();
@@ -288,8 +289,7 @@ protected:
   QString                 m_category;
   QString                 m_payee;
   QString                 m_payeeHeader;
-  QList<QString>          m_tagList;
-  QList<QColor>           m_tagColorList;
+  QStringList             m_tagIdList;
   QString                 m_categoryHeader;
   QString                 m_splitCurrencyId;
   QString                 m_uniqueId;
@@ -355,6 +355,8 @@ public:
 
 protected:
   void setupFormHeader(const QString& id);
+  QString formatTagList() const;
+  QString formatTagListAsHtml() const;
 
 private:
   bool m_showAccountRow;
