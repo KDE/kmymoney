@@ -53,15 +53,15 @@ for d in gwenhywfar aqbanking; do
     if [ -d $DEPS_INSTALL_PREFIX/lib/$d ]; then
         echo "Copy $DEPS_INSTALL_PREFIX/lib/$d to $APPDIR/usr/bin/[lib,share]"
         for sd in lib share; do
-            mkdir -p $APPDIR/usr/bin/$sd
-            echo "tar -C $DEPS_INSTALL_PREFIX/$sd -cf - $d | tar -C $APPDIR/usr/bin/$sd -xf -"
-            tar -C $DEPS_INSTALL_PREFIX/$sd -cf - $d | tar -C $APPDIR/usr/bin/$sd -xf -
+            mkdir -p $APPDIR/usr/$sd
+            echo "tar -C $DEPS_INSTALL_PREFIX/$sd -cf - $d | tar -C $APPDIR/usr/$sd -xf -"
+            tar -C $DEPS_INSTALL_PREFIX/$sd -cf - $d | tar -C $APPDIR/usr/$sd -xf -
         done
     fi
 done
 
 mkdir -p $APPDIR/usr/bin/share/locale
-cp -r -v $DEPS_INSTALL_PREFIX/share/locale/* $APPDIR/usr/bin/share/locale
+cp -r -v $DEPS_INSTALL_PREFIX/share/locale/* $APPDIR/usr/share/locale
 
 # Step 2: Relocate x64 binaries from the architecture specific directory as required for Appimages
 mv -v $APPDIR/usr/lib/x86_64-linux-gnu/*  $APPDIR/usr/lib
