@@ -256,6 +256,7 @@ void QueryTable::constructTransactionTable()
       use_transfers = false;
       hide_details = (m_config.detailLevel() == MyMoneyReport::DetailLevel::None);
       tag_special_case = true;
+      report.setConsiderCategorySplits(true);
       break;
     default:
       use_summary = true;
@@ -357,10 +358,29 @@ void QueryTable::constructTransactionTable()
     QString a_memo = "";
     int pass = 1;
     QString myBeginCurrency = (file->account((*myBegin).accountId())).currencyId(); //currency of the main split
+    qA["tag"] = tag_special_case ? i18n("[No Tag]") : QLatin1String("");
 
     do {
       MyMoneyMoney xr;
       ReportAccount splitAcc = (* it_split).accountId();
+
+      if (include_me) {
+        // handle tags
+        const QStringList tagIdList = (*it_split).tagIdList();
+        foreach (const QString &tagId, tagIdList) {
+          if (!tagIdListCache.contains(tagId))
+            tagIdListCache << tagId;
+        }
+        if (tagIdListCache.size() > 0) {
+          qSort(tagIdListCache);
+          qA["tag"] = "";
+          QString delimiter = "";
+          foreach (const QString &tagId, tagIdListCache) {
+            qA["tag"] += delimiter + file->tag(tagId).name().simplified();
+            delimiter = ", ";
+          }
+        }
+      }
 
       //get fraction for account
       int fraction = splitAcc.currency().smallestAccountFraction();
@@ -371,8 +391,6 @@ void QueryTable::constructTransactionTable()
 
       QString institution = splitAcc.institutionId();
       QString payee = (*it_split).payeeId();
-
-      const QList<QString> tagIdList = (*it_split).tagIdList();
 
       //convert to base currency
       if (m_config.isConvertCurrency()) {
@@ -418,15 +436,6 @@ void QueryTable::constructTransactionTable()
                       ? i18n("[Empty Payee]")
                       : file->payee(payee).name().simplified();
 
-        if (tag_special_case) {
-          tagIdListCache = tagIdList;
-        } else {
-          QString delimiter = "";
-          for (int i = 0; i < tagIdList.size(); i++) {
-            qA["tag"] += delimiter + file->tag(tagIdList[i]).name().simplified();
-            delimiter = ", ";
-          }
-        }
         qA["reconciledate"] = (*it_split).reconcileDate().toString(Qt::ISODate);
         qA["reconcileflag"] = KMyMoneyUtils::reconcileStateToString((*it_split).reconcileFlag(), true);
         qA["number"] = (*it_split).number();
@@ -520,12 +529,6 @@ void QueryTable::constructTransactionTable()
               //convert to lowest fraction
               qA["split"] = ((-(*it_split).shares()) * xr).convert(fraction).toString();
               qA["rank"] = '1';
-              qA["tag"] = "";
-              QString delimiter = "";
-              for (int i = 0; i < tagIdList.size(); i++) {
-                qA["tag"] += delimiter + file->tag(tagIdList[i]).name().simplified();
-                delimiter = ", ";
-              }
             } else {
               //this applies when the transaction has only 2 splits, or each split is going to be
               //shown separately, eg. transactions by category
@@ -581,17 +584,7 @@ void QueryTable::constructTransactionTable()
                   || (!m_config.isInvertingText()
                       && (transaction_text
                           || m_config.match(&(*it_split))))) {
-                if (tag_special_case) {
-                  if (!tagIdListCache.size())
-                    qA["tag"] = i18n("[No Tag]");
-                  else
-                    for (int i = 0; i < tagIdListCache.size(); i++) {
-                      qA["tag"] = file->tag(tagIdListCache[i]).name().simplified();
-                      m_rows += qA;
-                    }
-                } else {
-                  m_rows += qA;
-                }
+                m_rows += qA;
               }
             }
           }
@@ -619,13 +612,6 @@ void QueryTable::constructTransactionTable()
             qS["memo"] = (*it_split).memo().isEmpty()
                          ? a_memo
                          : (*it_split).memo();
-
-            //FIXME-ALEX When is used this? I can't find in which condition we arrive here... maybe this code is useless?
-            QString delimiter = "";
-            for (int i = 0; i < tagIdList.size(); i++) {
-              qA["tag"] += delimiter + file->tag(tagIdList[i]).name().simplified();
-              delimiter = '+';
-            }
 
             qS["payee"] = payee.isEmpty()
                           ? qA["payee"]
