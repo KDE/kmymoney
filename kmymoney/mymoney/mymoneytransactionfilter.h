@@ -294,6 +294,16 @@ public:
   void setReportAllSplits(const bool report = true);
 
   /**
+   * Consider splits in categories
+   *
+   * With this setting, splits in categories that are not considered
+   * by default are taken into account.
+   *
+   * @param check check state
+   */
+  void setConsiderCategorySplits(const bool check = true);
+
+  /**
    * Consider income and expense categories
    *
    * If the account or category filter is enabled, categories of

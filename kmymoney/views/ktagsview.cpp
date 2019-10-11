@@ -301,6 +301,7 @@ void KTagsView::showTransactions()
 
   // setup the list and the pointer vector
   MyMoneyTransactionFilter filter;
+  filter.setConsiderCategorySplits();
   filter.addTag(d->m_tag.id());
   filter.setDateFilter(KMyMoneySettings::startDate().date(), QDate());
 
