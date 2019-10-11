@@ -6418,7 +6418,11 @@ void KMyMoneyApp::slotUpdateActions()
   action("view_personal_data")->setEnabled(fileOpen);
   action("file_backup")->setEnabled(fileOpen && !d->m_myMoneyView->isDatabase());
   action("file_print")->setEnabled(fileOpen && d->m_myMoneyView->canPrint());
+#if KDE_IS_VERSION(4, 14, 65)
   action("file_print_preview")->setEnabled(fileOpen && d->m_myMoneyView->canPrint());
+#else
+  action("file_print_preview")->setEnabled(false);
+#endif
 #ifdef KMM_DEBUG
   action("view_file_info")->setEnabled(fileOpen);
   action("file_dump")->setEnabled(fileOpen);
