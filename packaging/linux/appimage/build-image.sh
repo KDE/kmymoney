@@ -36,8 +36,12 @@ cd $BUILD_PREFIX
 #
 
 # Step 0: place the translations where ki18n and Qt look for them
+#         but leave a link so that AqBanking can find them as well
 if [ -d $APPDIR/usr/share/locale ] ; then
     mv -v $APPDIR/usr/share/locale $APPDIR/usr/share/kmymoney
+    pushd $APPDIR/usr/share
+    ln -s kmymoney/locale locale
+    popd
 fi
 
 # Step 1: Copy over all the resources provided by dependencies that we need
@@ -59,9 +63,6 @@ for d in gwenhywfar aqbanking; do
         done
     fi
 done
-
-mkdir -p $APPDIR/usr/bin/share/locale
-cp -r -v $DEPS_INSTALL_PREFIX/share/locale/* $APPDIR/usr/share/locale
 
 # Step 2: Relocate x64 binaries from the architecture specific directory as required for Appimages
 mv -v $APPDIR/usr/lib/x86_64-linux-gnu/*  $APPDIR/usr/lib
