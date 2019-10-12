@@ -85,8 +85,8 @@ for lib in $PLUGINS/kmymoney/*.so*; do
   patchelf --set-rpath '$ORIGIN/../../lib' $lib;
 done
 
-# Step 4: Move plugins to loadable location in AppImage
-mv -v $PLUGINS/* $APPIMAGEPLUGINS
+# Step 4: Copy plugins to loadable location in AppImage
+cp -r -v $PLUGINS/* $APPIMAGEPLUGINS
 
 # Step 5: Determine the version of KMyMoney we have just built
 # This is needed for linuxdeployqt/appimagetool to do the right thing
