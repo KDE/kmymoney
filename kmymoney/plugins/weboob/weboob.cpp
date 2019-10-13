@@ -1,14 +1,14 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2014-2015 Romain Bignon <romain@symlink.me>
- * Copyright (C) 2014-2015 Florent Fourcot <weboob@flo.fourcot.fr>
- * Copyright (C) 2016 Christian David <christian-david@web.de>
- * (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2014-2015  Romain Bignon <romain@symlink.me>
+ * Copyright 2014-2015  Florent Fourcot <weboob@flo.fourcot.fr>
+ * Copyright 2016       Christian David <christian-david@web.de>
+ * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -29,6 +29,10 @@
 #include <QtConcurrentRun>
 #include <QFutureWatcher>
 #include <QProgressDialog>
+#ifdef IS_APPIMAGE
+  #include <QCoreApplication>
+  #include <QStandardPaths>
+#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -70,8 +74,19 @@ Weboob::Weboob(QObject *parent, const QVariantList &args) :
   d_ptr(new WeboobPrivate)
 {
   Q_UNUSED(args)
-  setComponentName("weboob", i18n("Weboob"));
-  setXMLFile("weboob.rc");
+  const auto componentName = QLatin1String("weboob");
+  const auto rcFileName = QLatin1String("weboob.rc");
+  setComponentName(componentName, i18n("Weboob"));
+
+#ifdef IS_APPIMAGE
+  const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
+  setXMLFile(rcFilePath);
+
+  const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+  setLocalXMLFile(localRcFilePath);
+#else
+  setXMLFile(rcFileName);
+#endif
 
   qDebug("Plugins: weboob loaded");
 }

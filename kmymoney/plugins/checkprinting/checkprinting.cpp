@@ -30,9 +30,12 @@
 #include <QFile>
 #include <QDialog>
 #ifdef ENABLE_WEBENGINE
-#include <QWebEngineView>
+  #include <QWebEngineView>
 #else
-#include <KWebView>
+  #include <KWebView>
+#endif
+#ifdef IS_APPIMAGE
+  #include <QCoreApplication>
 #endif
 #include <QStandardPaths>
 
@@ -72,8 +75,19 @@ CheckPrinting::CheckPrinting(QObject *parent, const QVariantList &args) :
 {
   Q_UNUSED(args);
   // Tell the host application to load my GUI component
-  setComponentName("checkprinting", i18nc("It's about printing bank checks", "Check printing"));
-  setXMLFile("checkprinting.rc");
+  const auto componentName = QLatin1String("checkprinting");
+  const auto rcFileName = QLatin1String("checkprinting.rc");
+  setComponentName(componentName, i18nc("It's about printing bank checks", "Check printing"));
+
+#ifdef IS_APPIMAGE
+  const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
+  setXMLFile(rcFilePath);
+
+  const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+  setLocalXMLFile(localRcFilePath);
+#else
+  setXMLFile(rcFileName);
+#endif
 
   // For ease announce that we have been loaded.
   qDebug("Plugins: checkprinting loaded");

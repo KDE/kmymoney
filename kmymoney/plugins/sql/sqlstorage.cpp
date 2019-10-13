@@ -1,19 +1,20 @@
-/***************************************************************************
-                            sqlstorage.cpp
-                             -------------------
-
-    copyright            : (C) 2018 by Łukasz Wojniłowicz
-    email                : lukasz.wojnilowicz@gmail.com
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2018       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include <config-kmymoney.h>
 
@@ -27,6 +28,10 @@
 #include <QTimer>
 #include <QFile>
 #include <QSqlDriver>
+#ifdef IS_APPIMAGE
+  #include <QCoreApplication>
+  #include <QStandardPaths>
+#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -83,8 +88,20 @@ SQLStorage::SQLStorage(QObject *parent, const QVariantList &args) :
   KMyMoneyPlugin::Plugin(parent, "sqlstorage"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   Q_UNUSED(args)
-  setComponentName("sqlstorage", i18n("SQL storage"));
-  setXMLFile("sqlstorage.rc");
+  const auto componentName = QLatin1String("sqlstorage");
+  const auto rcFileName = QLatin1String("sqlstorage.rc");
+  setComponentName(componentName, i18n("SQL storage"));
+
+#ifdef IS_APPIMAGE
+  const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
+  setXMLFile(rcFilePath);
+
+  const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+  setLocalXMLFile(localRcFilePath);
+#else
+  setXMLFile(rcFileName);
+#endif
+
   createActions();
   // For information, announce that we have been loaded.
   qDebug("Plugins: sqlstorage loaded");

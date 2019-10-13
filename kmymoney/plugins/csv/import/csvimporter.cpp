@@ -1,7 +1,7 @@
 /*
  * Copyright 2010-2014  Allan Anderson <agander93@gmail.com>
  * Copyright 2016-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- * Copyright 2018       Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2018-2019  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -23,6 +23,10 @@
 // QT Includes
 
 #include <QFile>
+#ifdef IS_APPIMAGE
+  #include <QCoreApplication>
+  #include <QStandardPaths>
+#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -43,8 +47,21 @@ CSVImporter::CSVImporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, "csvimporter"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   Q_UNUSED(args);
-  setComponentName("csvimporter", i18n("CSV importer"));
-  setXMLFile("csvimporter.rc");
+  const auto componentName = QLatin1String("csvimporter");
+  const auto rcFileName = QLatin1String("csvimporter.rc");
+  setComponentName(componentName, i18n("CSV importer"));
+
+#ifdef IS_APPIMAGE
+  const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
+  setXMLFile(rcFilePath);
+
+  const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+  setLocalXMLFile(localRcFilePath);
+#else
+  setXMLFile(rcFileName);
+#endif
+
+
   createActions();
   // For information, announce that we have been loaded.
   qDebug("Plugins: csvimporter loaded");

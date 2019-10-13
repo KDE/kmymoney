@@ -37,6 +37,10 @@
 
 #include <QDebug> //! @todo remove @c #include <QDebug>
 
+#ifdef IS_APPIMAGE
+  #include <QCoreApplication>
+  #include <QStandardPaths>
+#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -200,8 +204,19 @@ void KBanking::plug()
 
     if (m_kbanking->init() == 0) {
       // Tell the host application to load my GUI component
-      setComponentName("kbanking", "KBanking");
-      setXMLFile("kbanking.rc");
+      const auto componentName = QLatin1String("kbanking");
+      const auto rcFileName = QLatin1String("kbanking.rc");
+      setComponentName(componentName, "KBanking");
+
+#ifdef IS_APPIMAGE
+      const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
+      setXMLFile(rcFilePath);
+
+      const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+      setLocalXMLFile(localRcFilePath);
+#else
+      setXMLFile(rcFileName);
+#endif
 
       // get certificate handling and dialog settings management
       AB_Gui_Extend(gui->getCInterface(), m_kbanking->getCInterface());
