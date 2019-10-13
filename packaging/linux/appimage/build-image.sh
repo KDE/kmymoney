@@ -40,12 +40,23 @@ if [ -d $APPDIR/usr/share/locale ] ; then
     mv -v $APPDIR/usr/share/locale $APPDIR/usr/share/kmymoney
 fi
 
+# Step 0a: Make sure our plugin directory already exists
+if [ ! -d $APPIMAGEPLUGINS ] ; then
+    mkdir -p $APPIMAGEPLUGINS
+fi
+
 # Step 1: Copy over all the resources provided by dependencies that we need
 cp -r -v $DEPS_INSTALL_PREFIX/share/locale $APPDIR/usr/share/kmymoney
 cp -r -v $DEPS_INSTALL_PREFIX/share/kf5 $APPDIR/usr/share
+cp -r -v $DEPS_INSTALL_PREFIX/share/kservices5 $APPDIR/usr/share
 cp -r -v $DEPS_INSTALL_PREFIX/share/mime $APPDIR/usr/share
-cp -r -v $DEPS_INSTALL_PREFIX/translations $APPDIR/usr/
+# cp -r -v $DEPS_INSTALL_PREFIX/translations $APPDIR/usr/
 cp -r -v $DEPS_INSTALL_PREFIX/openssl/lib/*  $APPDIR/usr/lib
+cp -r -v $DEPS_INSTALL_PREFIX/plugins/* $APPDIR/usr/plugins
+
+# @todo we still need the following program from /bin or /usr/bin:
+#  true, mount, umount (backup)
+#  cat (qif filter)
 
 # Step 1a: copy Gwenhywfar and AqBanking if they exist
 #          and make sure they find their translations
@@ -74,14 +85,8 @@ for lib in $PLUGINS/kmymoney/*.so*; do
   patchelf --set-rpath '$ORIGIN/../../lib' $lib;
 done
 
-# Step 4: Move plugins to loadable location in AppImage
-
-# Make sure our plugin directory already exists
-if [ ! -d $APPIMAGEPLUGINS ] ; then
-    mkdir -p $APPIMAGEPLUGINS
-fi
-
-mv -v $PLUGINS/* $APPIMAGEPLUGINS
+# Step 4: Copy plugins to loadable location in AppImage
+cp -r -v $PLUGINS/* $APPIMAGEPLUGINS
 
 # Step 5: Determine the version of KMyMoney we have just built
 # This is needed for linuxdeployqt/appimagetool to do the right thing
@@ -99,6 +104,9 @@ fi
 
 # Finally transition back to the build directory so we can build the appimage
 cd $BUILD_PREFIX
+
+# Remove everything that we do not need
+rm -rf $APPDIR/usr/include
 
 # Step 6: Build the image!!!
 linuxdeployqt $APPDIR/usr/share/applications/org.kde.kmymoney.desktop \
