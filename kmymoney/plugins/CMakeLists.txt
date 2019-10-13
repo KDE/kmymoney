@@ -8,18 +8,12 @@ add_subdirectory( icalendar )
 add_subdirectory( reconciliationreport )
 add_subdirectory( checkprinting )
 add_subdirectory( views )
-
-if(ENABLE_SQLSTORAGE OR ENABLE_XMLSTORAGE)
-  add_subdirectory(xmlhelper)
-endif()
+add_subdirectory( xml )
+add_subdirectory( xmlhelper )
 
 if(ENABLE_SQLSTORAGE)
   add_subdirectory(sql)
 endif()
-
-# if(ENABLE_XMLSTORAGE OR BUILD_TESTING)
-  add_subdirectory(xml)
-# endif()
 
 if(ENABLE_IBANBICDATA)
   add_subdirectory(ibanbicdata)
