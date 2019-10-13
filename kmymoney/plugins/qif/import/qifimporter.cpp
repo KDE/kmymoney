@@ -17,11 +17,14 @@
  */
 
 #include <config-kmymoney.h>
-
 #include "qifimporter.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
+#ifdef IS_APPIMAGE
+  #include <QCoreApplication>
+  #include <QStandardPaths>
+#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes

@@ -669,20 +669,16 @@ void MyMoneyStorageMgr::modifyTransaction(const MyMoneyTransaction& transaction)
   if (it_t == d->m_transactionList.end())
     throw MYMONEYEXCEPTION_CSTRING("invalid transaction key");
 
-  foreach (const auto split, (*it_t).splits()) {
-    auto acc = d->m_accountList[split.accountId()];
-    // we only need to adjust non-investment accounts here
-    // as for investment accounts the balance will be recalculated
-    // after the transaction has been added.
-    if (!acc.isInvest()) {
-      d->adjustBalance(acc, split, true);
-      acc.touch();
-      d->m_accountList.modify(acc.id(), acc);
-    }
-  }
-
   // remove old transaction from lists
   d->m_transactionList.remove(oldKey);
+
+  // and adjust the balances of the accounts
+  foreach (const auto split, (*it_t).splits()) {
+    auto acc = d->m_accountList[split.accountId()];
+    d->adjustBalance(acc, split, true);
+    acc.touch();
+    d->m_accountList.modify(acc.id(), acc);
+  }
 
   // add new transaction to lists
   QString newKey = transaction.uniqueSortKey();
