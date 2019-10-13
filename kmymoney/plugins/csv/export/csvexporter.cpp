@@ -1,5 +1,6 @@
 /*
  * Copyright 2013-2014  Allan Anderson <agander93@gmail.com>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -15,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <config-kmymoney.h>
 #include "csvexporter.h"
 
 // ----------------------------------------------------------------------------
