@@ -407,7 +407,7 @@ namespace MyMoneyXmlContentHandler2 {
   QHash<eMyMoney::Report::ChartPalette, QString> chartPaletteLUT()
   {
     static const QHash<eMyMoney::Report::ChartPalette, QString> lut {
-      {eMyMoney::Report::ChartPalette::Application, QStringLiteral("appplication")},
+      {eMyMoney::Report::ChartPalette::Application, QStringLiteral("application")},
       {eMyMoney::Report::ChartPalette::Default,     QStringLiteral("default")},
       {eMyMoney::Report::ChartPalette::Rainbow,     QStringLiteral("rainbow")},
       {eMyMoney::Report::ChartPalette::Subdued,     QStringLiteral("subdued")},
