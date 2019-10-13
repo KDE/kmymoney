@@ -1186,7 +1186,26 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   {
     // find where our custom icons were installed based on an custom icon that we know should exist after installation
     const auto customIconRelativePath = QString(QStringLiteral("icons/hicolor/16x16/actions/account-add.png"));
+#ifndef IS_APPIMAGE
+    // find where our custom icons were installed based on an custom icon that we know should exist after installation
     auto customIconAbsolutePath = QStandardPaths::locate(QStandardPaths::AppDataLocation, customIconRelativePath);
+    if (customIconAbsolutePath.isEmpty()) {
+      qWarning("Custom icons were not found in any of the following QStandardPaths::AppDataLocation:");
+      for (const auto &standardPath : QStandardPaths::standardLocations(QStandardPaths::AppDataLocation))
+        qWarning() << standardPath;
+    }
+#else
+    // according to https://docs.appimage.org/packaging-guide/ingredients.html#open-source-applications
+    // QStandardPaths::AppDataLocation is unreliable on AppImages, so apply workaround here in case we fail to find icons
+    QString customIconAbsolutePath;
+    const auto appImageAppDataLocation = QString("%1%2%3").arg(QCoreApplication::applicationDirPath(), QString("/../share/kmymoney/"), customIconRelativePath);
+    if (QFile::exists(appImageAppDataLocation )) {
+      customIconAbsolutePath = appImageAppDataLocation ;
+    } else {
+      qWarning("Custom icons were not found in the following location:");
+      qWarning() << appImageAppDataLocation ;
+    }
+#endif
 
     // add our custom icons path to icons search path
     if (!customIconAbsolutePath.isEmpty()) {
@@ -1195,10 +1214,6 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
       auto paths = QIcon::themeSearchPaths();
       paths.append(customIconAbsolutePath);
       QIcon::setThemeSearchPaths(paths);
-    } else {
-      qWarning("Custom icons were not found in any of the following QStandardPaths::AppDataLocation:");
-      for (const auto &standardPath : QStandardPaths::standardLocations(QStandardPaths::AppDataLocation))
-          qWarning() << standardPath;
     }
 
     #if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
@@ -2833,9 +2848,22 @@ void KMyMoneyApp::Private::saveConsistencyCheckResults()
 void KMyMoneyApp::Private::setThemedCSS()
 {
   const QStringList CSSnames {QStringLiteral("kmymoney.css"), QStringLiteral("welcome.css")};
-
   const QString rcDir("/html/");
-  const QStringList defaultCSSDirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, rcDir, QStandardPaths::LocateDirectory);
+  QStringList defaultCSSDirs;
+#ifndef IS_APPIMAGE
+  defaultCSSDirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, rcDir, QStandardPaths::LocateDirectory);
+#else
+  // according to https://docs.appimage.org/packaging-guide/ingredients.html#open-source-applications
+  // QStandardPaths::AppDataLocation is unreliable on AppImages, so apply workaround here in case we fail to find icons
+  // watch out for QStringBuilder here; for yet unknown reason it causes segmentation fault on startup
+  const auto appImageAppDataLocation = QString("%1%2%3").arg(QCoreApplication::applicationDirPath(), QString("/../share/kmymoney"), rcDir);
+  if (QFile::exists(appImageAppDataLocation + CSSnames.first())) {
+    defaultCSSDirs.append(appImageAppDataLocation);
+  } else {
+    qWarning("CSS file was not found in the following location:");
+    qWarning() << appImageAppDataLocation;
+  }
+#endif
 
   // scan the list of directories to find the ones that really
   // contains all files we look for
