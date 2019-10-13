@@ -29,9 +29,12 @@
 #include <QFile>
 #include <QDialog>
 #ifdef ENABLE_WEBENGINE
-#include <QWebEngineView>
+  #include <QWebEngineView>
 #else
-#include <KWebView>
+  #include <KWebView>
+#endif
+#ifdef IS_APPIMAGE
+  #include <QCoreApplication>
 #endif
 #include <QStandardPaths>
 
@@ -57,10 +60,6 @@
 #include "pluginsettings.h"
 #include "mymoneyenums.h"
 
-#ifdef IS_APPIMAGE
-#include <QCoreApplication>
-#include <QStandardPaths>
-#endif
 #include "kmm_printer.h"
 
 struct CheckPrinting::Private {
@@ -74,13 +73,13 @@ CheckPrinting::CheckPrinting(QObject *parent, const QVariantList &args) :
   KMyMoneyPlugin::Plugin(parent, "checkprinting"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   Q_UNUSED(args);
+  // Tell the host application to load my GUI component
   const auto componentName = QLatin1String("checkprinting");
   const auto rcFileName = QLatin1String("checkprinting.rc");
-  // Tell the host application to load my GUI component
   setComponentName(componentName, i18nc("It's about printing bank checks", "Check printing"));
 
 #ifdef IS_APPIMAGE
-  const QString rcFilePath = QCoreApplication::applicationDirPath() + QLatin1String("/../share/kxmlgui5/") + componentName + QLatin1Char('/') + rcFileName;
+  const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
   setXMLFile(rcFilePath);
 
   const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;

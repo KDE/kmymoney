@@ -48,6 +48,7 @@ public:
   MyMoneyTransactionFilterPrivate()
     : m_reportAllSplits(false)
     , m_considerCategory(false)
+    , m_considerCategorySplits(false)
     , m_matchOnly(false)
     , m_treatTransfersAsIncomeExpense(false)
     , m_matchingSplitsCount(0)
@@ -59,6 +60,7 @@ public:
   MyMoneyTransactionFilter::FilterSet m_filterSet;
   bool                m_reportAllSplits;
   bool                m_considerCategory;
+  bool                m_considerCategorySplits;
   bool                m_matchOnly;
   bool                m_treatTransfersAsIncomeExpense;
 
@@ -267,6 +269,12 @@ void MyMoneyTransactionFilter::setReportAllSplits(const bool report)
   d->m_reportAllSplits = report;
 }
 
+void MyMoneyTransactionFilter::setConsiderCategorySplits(const bool check)
+{
+  Q_D(MyMoneyTransactionFilter);
+  d->m_considerCategorySplits = check;
+}
+
 void MyMoneyTransactionFilter::setConsiderCategory(const bool check)
 {
   Q_D(MyMoneyTransactionFilter);
@@ -418,7 +426,8 @@ QVector<MyMoneySplit> MyMoneyTransactionFilter::matchingSplits(const MyMoneyTran
             break;
         }
 
-        if (!isCategory) {
+        bool includeSplit = d->m_considerCategorySplits || (!d->m_considerCategorySplits && !isCategory);
+        if (includeSplit) {
           // check the payee list
           if (filter.payeeFilter) {
             if (!d->m_payees.isEmpty()) {

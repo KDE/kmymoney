@@ -27,6 +27,10 @@
 #include <QRadioButton>
 #include <QSpinBox>
 #include <QByteArray>
+#ifdef IS_APPIMAGE
+  #include <QCoreApplication>
+  #include <QStandardPaths>
+#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -58,11 +62,6 @@
 #include "kmymoneyutils.h"
 
 //#define DEBUG_LIBOFX
-
-#ifdef IS_APPIMAGE
-#include <QCoreApplication>
-#include <QStandardPaths>
-#endif
 
 using KWallet::Wallet;
 
@@ -136,7 +135,7 @@ OFXImporter::OFXImporter(QObject *parent, const QVariantList &args) :
   setComponentName(componentName, i18n("OFX Importer"));
 
 #ifdef IS_APPIMAGE
-  const QString rcFilePath = QCoreApplication::applicationDirPath() + QLatin1String("/../share/kxmlgui5/") + componentName + QLatin1Char('/') + rcFileName;
+  const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
   setXMLFile(rcFilePath);
 
   const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
