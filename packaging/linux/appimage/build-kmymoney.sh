@@ -32,7 +32,7 @@ fi
 cd $BUILD_PREFIX/kmymoney-build/
 
 # Determine how many CPUs we have
-CPU_COUNT=`grep processor /proc/cpuinfo | wc -l`
+CPU_COUNT=`nproc`
 
 # Configure KMyMoney
 cmake $KMYMONEY_SOURCES \
