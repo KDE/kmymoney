@@ -80,7 +80,7 @@ class MyMoneyStorageSql : public IMyMoneyOperationsFormat, public QSqlDatabase, 
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  explicit MyMoneyStorageSql(MyMoneyStorageMgr *storage, MyMoneyFile* file, const QUrl&);
+  explicit MyMoneyStorageSql(MyMoneyFile* file, const QUrl&);
   ~MyMoneyStorageSql() override;
 
   uint currentVersion() const;
@@ -256,8 +256,8 @@ public:
   void readTransactions(const MyMoneyTransactionFilter& filter);
   void setProgressCallback(void(*callback)(int, int, const QString&)) override;
 
-  void readFile(QIODevice* s, MyMoneyStorageMgr* storage, MyMoneyFile* file) override;
-  void writeFile(QIODevice* s, MyMoneyStorageMgr* storage, MyMoneyFile* file) override;
+  void readFile(QIODevice* s, MyMoneyFile* file) override;
+  void writeFile(QIODevice* s, MyMoneyFile* file) override;
 
   void startCommitUnit(const QString& callingFunction);
   bool endCommitUnit(const QString& callingFunction);

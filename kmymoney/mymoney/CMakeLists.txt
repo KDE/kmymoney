@@ -33,7 +33,6 @@ set(kmm_mymoney_LIB_SRCS
   # which are in fact available in kmm_mymoney
   set(storage_a_SOURCES
     ./storage/imymoneystorageformat.cpp
-    ./storage/mymoneystoragemgr.cpp
     ./storage/mymoneymodelbase.cpp
     ./storage/payeesmodel.cpp
     ./storage/costcentermodel.cpp

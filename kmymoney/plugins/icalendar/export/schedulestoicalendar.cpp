@@ -244,9 +244,6 @@ KMMSchedulesToiCalendar::~KMMSchedulesToiCalendar()
 
 void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool settingsChaged)
 {
-  if (!MyMoneyFile::instance()->storageAttached())
-    return;
-
   QFile icsFile(filePath);
 
   icsFile.open(QIODevice::ReadOnly);

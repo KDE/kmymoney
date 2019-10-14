@@ -56,7 +56,7 @@ public:
 
   bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts = false) override;
 
-  QStringList availableJobs(QString accountId) override;
+  QStringList availableJobs(QString accountId) const override;
   IonlineTaskSettings::ptr settings(QString accountId, QString taskName) override;
   void sendOnlineJob(QList< onlineJob >& jobs) override;
   void plug() override {}

@@ -22,7 +22,6 @@
 #include "onlinejobadministration.h"
 #include "mymoney/mymoneyfile.h"
 #include "mymoneyaccount.h"
-#include "mymoney/storage/mymoneystoragemgr.h"
 #include "onlinetasks/dummy/tasks/dummytask.h"
 #include "mymoneyexception.h"
 #include "mymoneyenums.h"
@@ -31,8 +30,7 @@
 QTEST_GUILESS_MAIN(onlineJobAdministrationTest)
 
 onlineJobAdministrationTest::onlineJobAdministrationTest()
-  : storage(nullptr)
-  , file(nullptr)
+  : file(nullptr)
 {
 }
 
@@ -56,8 +54,6 @@ void onlineJobAdministrationTest::initTestCase()
 {
   setupBaseCurrency();
   file = MyMoneyFile::instance();
-  storage = new MyMoneyStorageMgr;
-  file->attachStorage(storage);
 
   try {
     MyMoneyAccount account = MyMoneyAccount();
@@ -75,8 +71,6 @@ void onlineJobAdministrationTest::initTestCase()
 
 void onlineJobAdministrationTest::cleanupTestCase()
 {
-  file->detachStorage(storage);
-  delete storage;
 }
 
 void onlineJobAdministrationTest::init()

@@ -32,7 +32,7 @@
 #include "kmm_mymoney_export.h"
 
 class ParametersModel;
-class /* no export here on purpose */ ParameterItem
+class KMM_MYMONEY_EXPORT  ParameterItem
 {
   friend ParametersModel;
 public:

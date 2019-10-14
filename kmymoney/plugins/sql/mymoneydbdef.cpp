@@ -31,7 +31,7 @@
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
-#include "mymoneystoragemgr.h"
+#include "parametersmodel.h"
 
 #include <alkimia/alkvalue.h>
 
@@ -504,9 +504,10 @@ const QString MyMoneyDbDef::generateSQL(const QExplicitlySharedDataPointer<MyMon
     QString replace = "NULL";
     if ((*fit)->name() == "version")
       replace = QString::number(m_currentVersion);
-    if ((*fit)->name() == "fixLevel")
-      replace =  QString::number
-                 (MyMoneyFile::instance()->storage()->currentFixVersion());
+    if ((*fit)->name() == "fixLevel") {
+      const auto file = MyMoneyFile::instance();
+      replace = file->parametersModel()->itemById(file->fixedKey(MyMoneyFile::FileFixVersion)).value();
+    }
     if ((*fit)->name() == "created")
       replace = QLatin1Char('\'')
                 + QDate::currentDate().toString(Qt::ISODate)

@@ -79,7 +79,6 @@ void QueryTableTest::setup()
 
 void QueryTableTest::init()
 {
-  storage = new MyMoneyStorageMgr;
   file = MyMoneyFile::instance();
   file->unload();
   MyMoneyFileTransaction ft;
@@ -116,8 +115,6 @@ void QueryTableTest::init()
 
 void QueryTableTest::cleanup()
 {
-  file->detachStorage(storage);
-  delete storage;
 }
 
 void QueryTableTest::testQueryBasics()

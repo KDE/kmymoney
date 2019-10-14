@@ -82,7 +82,6 @@ void PivotTableTest::setup()
 
 void PivotTableTest::init()
 {
-  storage = new MyMoneyStorageMgr;
   file = MyMoneyFile::instance();
   file->unload();
 
@@ -123,8 +122,6 @@ void PivotTableTest::init()
 
 void PivotTableTest::cleanup()
 {
-  file->detachStorage(storage);
-  delete storage;
 }
 
 void PivotTableTest::testNetWorthSingle()

@@ -33,6 +33,7 @@
 #include <QDebug>
 #include <QDate>
 #include <QColor>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -43,7 +44,6 @@
 // Project Includes
 
 #include "mymoneyfile.h"
-#include "mymoneystoragemgr.h"
 #include "mymoneyexception.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneyaccount.h"
@@ -449,20 +449,14 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
     } else if (s == tagName(Tag::Securities)) {
       // last security read, now dump them into the engine
       m_reader->m_file->securitiesModel()->load(m_reader->d->secList);
-      /// @todo cleanup
-      // m_reader->m_storage->loadSecurities(m_reader->d->secList);
       m_reader->d->secList.clear();
     } else if (s == tagName(Tag::Currencies)) {
       // last currency read, now dump them into the engine
       m_reader->m_file->currenciesModel()->loadCurrencies(m_reader->d->secList);
-      /// @todo cleanup
-      // m_reader->m_storage->loadCurrencies(m_reader->d->secList);
       m_reader->d->secList.clear();
     } else if (s == tagName(Tag::Budgets)) {
       // last budget read, now dump them into the engine
       m_reader->m_file->budgetsModel()->load(m_reader->d->bList);
-      /// @todo cleanup
-      // m_reader->m_storage->loadBudgets(m_reader->d->bList);
       m_reader->d->bList.clear();
     } else if (s == tagName(Tag::Accounts)) {
       // last account read, now dump them into the engine
@@ -475,14 +469,10 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
     } else if (s == tagName(Tag::Transactions)) {
       // last transaction read, now dump them into the engine
       m_reader->m_file->journalModel()->load(m_reader->d->tList);
-      /// @todo cleanup
-      // m_reader->m_storage->loadTransactions(m_reader->d->tList);
       m_reader->d->tList.clear();
     } else if (s == tagName(Tag::Prices)) {
       // last price read, now dump them into the engine
       m_reader->m_file->priceModel()->load(m_reader->d->prList);
-      /// @todo cleanup
-      // m_reader->m_storage->loadPrices(m_reader->d->prList);
       m_reader->d->prList.clear();
     } else if (s == tagName(Tag::OnlineJobs)) {
       m_reader->m_file->onlineJobsModel()->load(m_reader->d->onlineJobList);
@@ -490,8 +480,6 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
     } else if (s == tagName(Tag::Reports)) {
       // last report read, now dump them into the engine
       m_reader->m_file->reportsModel()->load(m_reader->d->rList);
-      /// @todo cleanup
-      // m_reader->m_storage->loadReports(m_reader->d->rList);
       m_reader->d->rList.clear();
     }
     /// @note add new models here
@@ -1385,9 +1373,8 @@ void MyMoneyXmlContentHandler::writeCostCenter(const MyMoneyCostCenter &costCent
 
 
 MyMoneyStorageXML::MyMoneyStorageXML() :
-    m_progressCallback(0),
-    m_storage(0),
-    m_doc(0),
+    m_progressCallback(nullptr),
+    m_doc(nullptr),
     d(new Private())
 {
 }
@@ -1397,19 +1384,27 @@ MyMoneyStorageXML::~MyMoneyStorageXML()
   delete d;
 }
 
+template <class T>
+struct ScopeHelper {
+  ScopeHelper(T **pointer) : m_pointer(pointer) {}
+  ~ScopeHelper() { delete *m_pointer; *m_pointer = nullptr; }
+private:
+  T **m_pointer;
+};
+
+
 // Function to read in the file, send to XML parser.
-void MyMoneyStorageXML::readFile(QIODevice* pDevice, MyMoneyStorageMgr* storage, MyMoneyFile* file)
+void MyMoneyStorageXML::readFile(QIODevice* pDevice, MyMoneyFile* file)
 {
-  Q_CHECK_PTR(storage);
   Q_CHECK_PTR(pDevice);
-  if (!storage)
-    return;
+  Q_CHECK_PTR(file);
 
-  m_storage = storage;
-  m_file = file;
-
+  // the following enforces, that the QDomDocument is deleted
+  // upon return and that m_doc will be set to nullptr.
   m_doc = new QDomDocument;
-  Q_CHECK_PTR(m_doc);
+  ScopeHelper<QDomDocument> helper(&m_doc);
+
+  m_file = file;
 
   qDebug("reading file");
   // creating the QXmlInputSource object based on a QIODevice object
@@ -1425,41 +1420,27 @@ void MyMoneyStorageXML::readFile(QIODevice* pDevice, MyMoneyStorageMgr* storage,
   reader.setContentHandler(&mmxml);
 
   if (!reader.parse(&xml, false)) {
-    delete m_doc;
-    m_doc = 0;
-    signalProgress(-1, -1);
     throw MYMONEYEXCEPTION_CSTRING("File was not parsable!");
   }
   qDebug("done parsing file");
 
-  // check if we need to build up the account balances
-  if (fileVersionRead < 2)
-    m_storage->rebuildAccountBalances();
-
-  delete m_doc;
-  m_doc = 0;
-
+  /// @todo port to new model code
+#if 0
   // this seems to be nonsense, but it clears the dirty flag
   // as a side-effect.
   m_storage->setLastModificationDate(m_storage->lastModificationDate());
-  m_storage = 0;
+#endif
 
   //hides the progress bar.
   signalProgress(-1, -1);
 }
 
 
-void MyMoneyStorageXML::writeFile(QIODevice* qf, MyMoneyStorageMgr* storage, MyMoneyFile* file)
+void MyMoneyStorageXML::writeFile(QIODevice* qf, MyMoneyFile* file)
 {
   Q_CHECK_PTR(qf);
-  Q_CHECK_PTR(storage);
-  if (!storage) {
-    return;
-  }
-  m_storage = storage;
-  m_file = file;
 
-  /// @todo add new models here
+  m_file = file;
 
   // qDebug("XMLWRITER: Starting file write");
   m_doc = new QDomDocument(tagName(Tag::KMMFile));
@@ -1541,18 +1522,17 @@ void MyMoneyStorageXML::writeFile(QIODevice* qf, MyMoneyStorageMgr* storage, MyM
   stream.setCodec("UTF-8");
   stream << m_doc->toString();
 
-  delete m_doc;
-  m_doc = 0;
-
   //hides the progress bar.
   signalProgress(-1, -1);
 
+  /// @todo port to new model code
+#if 0
   // this seems to be nonsense, but it clears the dirty flag
   // as a side-effect.
   m_storage->setLastModificationDate(m_storage->lastModificationDate());
-  m_file->fileSaved();
+#endif
 
-  m_storage = 0;
+  m_file->fileSaved();
 }
 
 bool MyMoneyStorageXML::readFileInformation(const QDomElement& fileInfo)
@@ -1589,8 +1569,7 @@ bool MyMoneyStorageXML::readFileInformation(const QDomElement& fileInfo)
 
   temp = findChildElement(elementName(Element::General::FixVersion), fileInfo);
   if (temp != QDomElement()) {
-    QString strFixVersion = MyMoneyUtils::QStringEmpty(temp.attribute(attributeName(Attribute::General::ID)));
-    m_storage->setFileFixVersion(strFixVersion.toUInt());
+    auto strFixVersion = MyMoneyUtils::QStringEmpty(temp.attribute(attributeName(Attribute::General::ID))).toUInt();
     // skip KMyMoneyView::fixFile_2()
     if (strFixVersion == 2)
       strFixVersion = 3;
@@ -1608,26 +1587,25 @@ bool MyMoneyStorageXML::readFileInformation(const QDomElement& fileInfo)
 void MyMoneyStorageXML::writeFileInformation(QDomElement& fileInfo)
 {
   QDomElement creationDate = m_doc->createElement(elementName(Element::General::CreationDate));
-  creationDate.setAttribute(attributeName(Attribute::General::Date), MyMoneyUtils::dateToString(m_storage->creationDate()));
+  creationDate.setAttribute(attributeName(Attribute::General::Date), m_file->parametersModel()->itemById(m_file->fixedKey(MyMoneyFile::CreationDate)).value());
   fileInfo.appendChild(creationDate);
 
   QDomElement lastModifiedDate = m_doc->createElement(elementName(Element::General::LastModifiedDate));
-  lastModifiedDate.setAttribute(attributeName(Attribute::General::Date), MyMoneyUtils::dateToString(m_storage->lastModificationDate()));
+  lastModifiedDate.setAttribute(attributeName(Attribute::General::Date), m_file->parametersModel()->itemById(m_file->fixedKey(MyMoneyFile::LastModificationDate)).value());
   fileInfo.appendChild(lastModifiedDate);
 
   QDomElement version = m_doc->createElement(elementName(Element::General::Version));
-
-  version.setAttribute(attributeName(Attribute::General::ID), "1");
+  version.setAttribute(attributeName(Attribute::General::ID), QLatin1String("1"));
   fileInfo.appendChild(version);
 
   QDomElement fixVersion = m_doc->createElement(elementName(Element::General::FixVersion));
-  fixVersion.setAttribute(attributeName(Attribute::General::ID), m_storage->fileFixVersion());
+  fixVersion.setAttribute(attributeName(Attribute::General::ID), m_file->parametersModel()->itemById(m_file->fixedKey(MyMoneyFile::FileFixVersion)).value());
   fileInfo.appendChild(fixVersion);
 }
 
 void MyMoneyStorageXML::writeUserInformation(QDomElement& userInfo)
 {
-  MyMoneyPayee user = m_storage->user();
+  const auto user = m_file->userModel()->itemById(m_file->fixedKey(MyMoneyFile::UserID));
   userInfo.setAttribute(attributeName(Attribute::General::Name), user.name());
   userInfo.setAttribute(attributeName(Attribute::General::Email), user.email());
 
@@ -1646,7 +1624,7 @@ bool MyMoneyStorageXML::readUserInformation(const QDomElement& userElement)
   bool rc = true;
   signalProgress(0, 1, i18n("Loading user information..."));
 
-  MyMoneyPayee user;
+  MyMoneyPayee user = MyMoneyPayee(m_file->fixedKey(MyMoneyFile::UserID), MyMoneyPayee());
   user.setName(MyMoneyUtils::QStringEmpty(userElement.attribute(attributeName(Attribute::General::Name))));
   user.setEmail(MyMoneyUtils::QStringEmpty(userElement.attribute(attributeName(Attribute::General::Email))));
 
@@ -1659,7 +1637,12 @@ bool MyMoneyStorageXML::readUserInformation(const QDomElement& userElement)
     user.setTelephone(MyMoneyUtils::QStringEmpty(addressNode.attribute(attributeName(Attribute::General::Telephone))));
   }
 
-  m_storage->setUser(user);
+  // make sure it is the sole item in the model
+  m_file->userModel()->unload();
+  m_file->userModel()->addItem(user);
+  // loading does not count as making dirty
+  m_file->userModel()->setDirty(false);
+
   signalProgress(1, 0);
 
   return rc;
@@ -1667,12 +1650,9 @@ bool MyMoneyStorageXML::readUserInformation(const QDomElement& userElement)
 
 void MyMoneyStorageXML::writeInstitutions(QDomElement& parent)
 {
-  const auto list = m_storage->institutionList();
-  parent.setAttribute(attributeName(Attribute::General::Count), list.count());
-
-  Q_FOREACH(const auto& item, list) {
-    writeInstitution(parent, item);
-  }
+  InstitutionsModel::xmlWriter writer(&MyMoneyXmlContentHandler::writeInstitution, *m_doc, parent);
+  const auto count = m_file->institutionsModel()->processItems(&writer);
+  parent.setAttribute(attributeName(Attribute::General::Count), count);
 }
 
 void MyMoneyStorageXML::writeInstitution(QDomElement& institution, const MyMoneyInstitution& i)
@@ -1707,7 +1687,6 @@ void MyMoneyStorageXML::writeTag(QDomElement& tag, const MyMoneyTag& ta)
 void MyMoneyStorageXML::writeAccounts(QDomElement& accounts)
 {
   QList<MyMoneyAccount> list = m_file->accountsModel()->itemList();
-  m_storage->accountList(list);
   QList<MyMoneyAccount>::ConstIterator it;
   accounts.setAttribute(attributeName(Attribute::General::Count), list.count() + 5);
 
@@ -1723,11 +1702,8 @@ void MyMoneyStorageXML::writeAccounts(QDomElement& accounts)
   std::sort(list.begin(), list.end(), [] (const MyMoneyAccount& a1, const MyMoneyAccount& a2) { return a1.id() < a2.id(); } );
 #endif
 
-  signalProgress(0, list.count(), i18n("Saving accounts..."));
-  int i = 0;
   for (it = list.constBegin(); it != list.constEnd(); ++it) {
     writeAccount(accounts, *it);
-    signalProgress(++i, 0);
   }
 }
 
@@ -1738,6 +1714,7 @@ void MyMoneyStorageXML::writeAccount(QDomElement& account, const MyMoneyAccount&
 
 void MyMoneyStorageXML::writeTransactions(QDomElement& transactions)
 {
+
   MyMoneyTransactionFilter filter;
   filter.setReportAllSplits(false);
   QList<MyMoneyTransaction> list;
@@ -1752,12 +1729,8 @@ void MyMoneyStorageXML::writeTransactions(QDomElement& transactions)
 
   transactions.setAttribute(attributeName(Attribute::General::Count), list.count());
 
-  signalProgress(0, list.count(), i18n("Saving transactions..."));
-
-  int i = 0;
   for (auto it = list.constBegin(); it != list.constEnd(); ++it) {
     writeTransaction(transactions, *it);
-    signalProgress(++i, 0);
   }
 }
 
@@ -1913,6 +1886,8 @@ void MyMoneyStorageXML::writePrices(QDomElement& prices)
       pricePair = m_doc->createElement(nodeName(Node::PricePair));
       pricePair.setAttribute(attributeName(Attribute::General::From), entry.from());
       pricePair.setAttribute(attributeName(Attribute::General::To), entry.to());
+      from = entry.from();
+      to = entry.to();
     }
     QDomElement price = m_doc->createElement(nodeName(Node::Price));
     price.setAttribute(attributeName(Attribute::General::Date), entry.date().toString(Qt::ISODate));
@@ -1926,25 +1901,6 @@ void MyMoneyStorageXML::writePrices(QDomElement& prices)
   }
   prices.setAttribute(attributeName(Attribute::General::Count), pricePairCount);
 }
-
-#if 0
-void MyMoneyStorageXML::writePricePair(QDomElement& price, const MyMoneyPriceEntries& p)
-{
-  MyMoneyPriceEntries::ConstIterator it;
-  for (it = p.constBegin(); it != p.constEnd(); ++it) {
-    QDomElement entry = m_doc->createElement(nodeName(Node::Price));
-    writePrice(entry, *it);
-    price.appendChild(entry);
-  }
-}
-
-void MyMoneyStorageXML::writePrice(QDomElement& price, const MyMoneyPrice& p)
-{
-  price.setAttribute(attributeName(Attribute::General::Date), p.date().toString(Qt::ISODate));
-  price.setAttribute(attributeName(Attribute::General::Price), p.rate(QString()).toString());
-  price.setAttribute(attributeName(Attribute::General::Source), p.source());
-}
-#endif
 
 void MyMoneyStorageXML::setProgressCallback(void(*callback)(int, int, const QString&))
 {

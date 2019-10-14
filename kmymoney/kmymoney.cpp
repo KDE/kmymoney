@@ -156,7 +156,6 @@
 
 #include "misc/webconnect.h"
 
-#include "storage/mymoneystoragemgr.h"
 #include "imymoneystorageformat.h"
 
 #include "transactioneditor.h"
@@ -391,9 +390,9 @@ public:
 
   bool applyFileFixes()
   {
-    const auto blocked = MyMoneyFile::instance()->blockSignals(true);
+    const auto file = MyMoneyFile::instance();
+    const auto blocked = file->blockSignals(true);
     KSharedConfigPtr config = KSharedConfig::openConfig();
-
     KConfigGroup grp = config->group("General Options");
 
     // For debugging purposes, we can turn off the automatic fix manually
@@ -402,33 +401,32 @@ public:
       MyMoneyFileTransaction ft;
       try {
         // Check if we have to modify the file before we allow to work with it
-        auto s = MyMoneyFile::instance()->storage();
-        while (s->fileFixVersion() < s->currentFixVersion()) {
-          qDebug("%s", qPrintable((QString("testing fileFixVersion %1 < %2").arg(s->fileFixVersion()).arg(s->currentFixVersion()))));
-          switch (s->fileFixVersion()) {
+        while (file->fileFixVersion() < file->availableFixVersion()) {
+          qDebug() << "testing fileFixVersion" << file->fileFixVersion() << "<" << file->availableFixVersion();
+          switch (file->fileFixVersion()) {
             case 0:
               fixFile_0();
-              s->setFileFixVersion(1);
+              file->setFileFixVersion(1);
               break;
 
             case 1:
               fixFile_1();
-              s->setFileFixVersion(2);
+              file->setFileFixVersion(2);
               break;
 
             case 2:
               fixFile_2();
-              s->setFileFixVersion(3);
+              file->setFileFixVersion(3);
               break;
 
             case 3:
               fixFile_3();
-              s->setFileFixVersion(4);
+              file->setFileFixVersion(4);
               break;
 
             case 4:
               fixFile_4();
-              s->setFileFixVersion(5);
+              file->setFileFixVersion(5);
               break;
 
               // add new levels above. Don't forget to increase currentFixVersion() for all
@@ -439,13 +437,13 @@ public:
         }
         ft.commit();
       } catch (const MyMoneyException &) {
-        MyMoneyFile::instance()->blockSignals(blocked);
+        file->blockSignals(blocked);
         return false;
       }
     } else {
-      qDebug("Skipping automatic transaction fix!");
+      qDebug() << "Skipping automatic transaction fix!";
     }
-    MyMoneyFile::instance()->blockSignals(blocked);
+    file->blockSignals(blocked);
     return true;
   }
 
@@ -547,30 +545,12 @@ public:
   }
 
   /**
-    * This method attaches an empty storage object to the MyMoneyFile
-    * object. It calls removeStorage() to remove a possibly attached
-    * storage object.
-    */
-  void newStorage()
-  {
-    removeStorage();
-    auto file = MyMoneyFile::instance();
-    file->attachStorage(new MyMoneyStorageMgr);
-  }
-
-  /**
-    * This method removes an attached storage from the MyMoneyFile
-    * object.
+    * This method removes all data from the MyMoneyFile object
+    * and resets the dirty flag(s).
     */
   void removeStorage()
   {
-    auto file = MyMoneyFile::instance();
-    auto p = file->storage();
-    if (p) {
-      file->detachStorage(p);
-      delete p;
-      MyMoneyFile::instance()->unload();
-    }
+    MyMoneyFile::instance()->unload();
   }
 
   /**
@@ -2056,7 +2036,7 @@ void KMyMoneyApp::slotFileFileInfo()
   g.open(QIODevice::WriteOnly);
   QDataStream st(&g);
   MyMoneyStorageDump dumper;
-  dumper.writeStream(st, MyMoneyFile::instance()->storage());
+  dumper.writeStream(st, MyMoneyFile::instance());
   g.close();
 }
 
@@ -3324,11 +3304,10 @@ bool KMyMoneyApp::slotFileNew()
   d->m_storageInfo.url = QUrl();
 
   try {
-    auto storage = new MyMoneyStorageMgr;
-    MyMoneyFile::instance()->attachStorage(storage);
-
     MyMoneyFileTransaction ft;
     auto file = MyMoneyFile::instance();
+    file->unload();
+
     // store the user info
     file->setUser(wizard.user());
 
@@ -3435,8 +3414,7 @@ bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
   d->m_storageInfo.type = eKMyMoney::StorageType::None;
   for (auto &plugin : pPlugins.storage) {
     try {
-      if (auto pStorage = plugin->open(url)) {
-        MyMoneyFile::instance()->attachStorage(pStorage);
+      if (plugin->open(url)) {
         d->m_storageInfo.type = plugin->storageType();
         if (plugin->storageType() != eKMyMoney::StorageType::GNC) {
           d->m_storageInfo.url = plugin->openUrl();

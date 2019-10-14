@@ -397,20 +397,18 @@ void KTagsView::slotUpdateTag()
 
 void KTagsView::showEvent(QShowEvent* event)
 {
-  if (MyMoneyFile::instance()->storageAttached()) {
-    Q_D(KTagsView);
-    if (d->m_needLoad)
-      d->init();
+  Q_D(KTagsView);
+  if (d->m_needLoad)
+    d->init();
 
-    emit customActionRequested(View::Tags, eView::Action::AboutToShow);
+  emit customActionRequested(View::Tags, eView::Action::AboutToShow);
 
-    if (d->m_needsRefresh)
-      refresh();
+  if (d->m_needsRefresh)
+    refresh();
 
-    QList<MyMoneyTag> list;
-    selectedTags(list);
-    slotSelectTags(list);
-  }
+  QList<MyMoneyTag> list;
+  selectedTags(list);
+  slotSelectTags(list);
 
   // don't forget base class implementation
   QWidget::showEvent(event);

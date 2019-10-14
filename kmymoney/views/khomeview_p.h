@@ -414,9 +414,7 @@ public:
     m_view->setZoomFactor(KMyMoneySettings::zoomFactor());
 
     QList<MyMoneyAccount> list;
-    if (MyMoneyFile::instance()->storage()) {
-      MyMoneyFile::instance()->accountList(list);
-    }
+    MyMoneyFile::instance()->accountList(list);
     if (list.isEmpty()) {
       m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
     } else {

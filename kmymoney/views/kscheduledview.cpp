@@ -157,7 +157,7 @@ void KScheduledView::showEvent(QShowEvent* event)
 
   emit customActionRequested(View::Schedules, eView::Action::AboutToShow);
 
-  if (d->m_needsRefresh && MyMoneyFile::instance()->storageAttached())
+  if (d->m_needsRefresh)
     refresh();
 
   QWidget::showEvent(event);

@@ -121,7 +121,6 @@ KMyMoneyView::KMyMoneyView()
     }
   }
 
-//  newStorage();
   m_model = new KPageWidgetModel(this); // cannot be parentless, otherwise segfaults at exit
 
   viewBases[View::Home] = new KHomeView;
@@ -528,10 +527,8 @@ void KMyMoneyView::showPage(View idView)
 
 bool KMyMoneyView::canPrint()
 {
-  return (MyMoneyFile::instance()->storageAttached() &&
-          ((viewFrames.contains(View::Reports) && viewFrames[View::Reports] == currentPage()) ||
-          (viewFrames.contains(View::Home) && viewFrames[View::Home] == currentPage()))
-         );
+  return ((viewFrames.contains(View::Reports) && viewFrames[View::Reports] == currentPage()) ||
+          (viewFrames.contains(View::Home) && viewFrames[View::Home] == currentPage()));
 }
 
 void KMyMoneyView::enableViewsIfFileOpen(bool fileOpen)
@@ -680,8 +677,6 @@ void KMyMoneyView::slotPrintView()
 
 void KMyMoneyView::resetViewSelection()
 {
-  if (!MyMoneyFile::instance()->storageAttached())
-    return;
   slotObjectSelected(MyMoneyAccount());
   slotObjectSelected(MyMoneyInstitution());
   slotObjectSelected(MyMoneySchedule());

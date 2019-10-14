@@ -55,7 +55,6 @@ void CSVImporterCoreTest::init()
 {
   setupBaseCurrency();
   file = MyMoneyFile::instance();
-  file->attachStorage(storage);
 
   csvImporter = new CSVImporterCore;
 
@@ -100,8 +99,6 @@ void CSVImporterCoreTest::cleanup()
   delete pricesProfile;
   delete amountProfile;
   delete csvImporter;
-  file->detachStorage(storage);
-  delete storage;
 }
 
 void CSVImporterCoreTest::testBasicPriceTable()
@@ -285,7 +282,7 @@ void CSVImporterCoreTest::testAutoDecimalSymbol()
 }
 
 void CSVImporterCoreTest::testInvAccountAutodetection()
-{  
+{
   MyMoneyFileTransaction ft;
   makeAccount("Eas", "123", eMyMoney::Account::Type::Investment, QDate(2017, 8, 1), file->asset().id());
   makeAccount("BigInvestments", "", eMyMoney::Account::Type::Investment, QDate(2017, 8, 1), file->asset().id());

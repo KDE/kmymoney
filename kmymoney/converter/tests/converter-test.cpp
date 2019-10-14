@@ -40,9 +40,7 @@ using namespace convertertest;
 
 void ConverterTest::init()
 {
-  storage = new MyMoneyStorageMgr;
   file = MyMoneyFile::instance();
-  file->attachStorage(storage);
 
   MyMoneyFileTransaction ft;
 
@@ -78,8 +76,6 @@ void ConverterTest::init()
 
 void ConverterTest::cleanup()
 {
-  file->detachStorage(storage);
-  delete storage;
 }
 
 void ConverterTest::testWebQuotes_data()

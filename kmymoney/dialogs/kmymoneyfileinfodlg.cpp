@@ -33,17 +33,17 @@
 
 #include "ui_kmymoneyfileinfodlg.h"
 
-#include "mymoneystoragemgr.h"
 #include "mymoneyfile.h"
-#include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
-#include "mymoneypayee.h"
 #include "mymoneyprice.h"
-#include "mymoneyschedule.h"
-#include "mymoneytransaction.h"
-#include "mymoneytransactionfilter.h"
+#include "mymoneysecurity.h"
 #include "mymoneyenums.h"
 #include "pricemodel.h"
+#include "parametersmodel.h"
+#include "payeesmodel.h"
+#include "institutionsmodel.h"
+#include "journalmodel.h"
+#include "schedulesmodel.h"
 
 KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent) :
     QDialog(parent),
@@ -51,17 +51,16 @@ KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent) :
 {
   ui->setupUi(this);
   // Now fill the fields with data
-  auto storage = MyMoneyFile::instance()->storage();
 
-  ui->m_creationDate->setText(storage->creationDate().toString(Qt::ISODate));
-  ui->m_lastModificationDate->setText(storage->lastModificationDate().toString(Qt::ISODate));
-  ui->m_baseCurrency->setText(storage->value("kmm-baseCurrency"));
+  const auto file = MyMoneyFile::instance();
+  ui->m_creationDate->setText(file->parametersModel()->itemById(file->fixedKey(MyMoneyFile::CreationDate)).value());
+  ui->m_lastModificationDate->setText(file->parametersModel()->itemById(file->fixedKey(MyMoneyFile::LastModificationDate)).value());
+  ui->m_baseCurrency->setText(file->baseCurrency().name());
 
-  ui->m_payeeCount->setText(QString::fromLatin1("%1").arg(storage->payeeList().count()));
-  ui->m_institutionCount->setText(QString::fromLatin1("%1").arg(storage->institutionList().count()));
+  ui->m_payeeCount->setText(QString::fromLatin1("%1").arg(file->payeesModel()->rowCount()));
+  ui->m_institutionCount->setText(QString::fromLatin1("%1").arg(file->institutionsModel()->rowCount()));
 
-  QList<MyMoneyAccount> a_list;
-  storage->accountList(a_list);
+  QList<MyMoneyAccount> a_list = file->accountsModel()->itemList();
   ui->m_accountCount->setText(QString::fromLatin1("%1").arg(a_list.count()));
 
   QMap<eMyMoney::Account::Type, int> accountMap;
@@ -83,14 +82,10 @@ KMyMoneyFileInfoDlg::KMyMoneyFileInfoDlg(QWidget *parent) :
     ui->m_accountView->invisibleRootItem()->addChild(item);
   }
 
-  MyMoneyTransactionFilter filter;
-  filter.setReportAllSplits(false);
-  ui->m_transactionCount->setText(QString::fromLatin1("%1").arg(storage->transactionList(filter).count()));
-  filter.setReportAllSplits(true);
-  ui->m_splitCount->setText(QString::fromLatin1("%1").arg(storage->transactionList(filter).count()));
-  ui->m_scheduleCount->setText(QString::fromLatin1("%1").arg(storage->scheduleList(QString(), eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any,
-                                                                                   QDate(), QDate(), false).count()));
-  ui->m_priceCount->setText(QString::fromLatin1("%1").arg(MyMoneyFile::instance()->priceModel()->rowCount()));
+  ui->m_transactionCount->setText(QString::fromLatin1("%1").arg(file->journalModel()->transactionCount(QString())));
+  ui->m_splitCount->setText(QString::fromLatin1("%1").arg(file->journalModel()->rowCount()));
+  ui->m_scheduleCount->setText(QString::fromLatin1("%1").arg(file->scheduleList().count()));
+  ui->m_priceCount->setText(QString::fromLatin1("%1").arg(file->priceModel()->rowCount()));
 }
 
 KMyMoneyFileInfoDlg::~KMyMoneyFileInfoDlg()

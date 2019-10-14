@@ -38,7 +38,7 @@ public:
   explicit GNCImporter(QObject *parent, const QVariantList &args);
   ~GNCImporter() override;
 
-  MyMoneyStorageMgr *open(const QUrl &url) override;
+  bool open(const QUrl &url) override;
   bool save(const QUrl &url) override;
   bool saveAs() override;
 

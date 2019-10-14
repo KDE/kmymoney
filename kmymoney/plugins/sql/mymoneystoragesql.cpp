@@ -36,15 +36,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "tagsmodel.h"
+
 /// @todo port to new model code
 
 //************************ Constructor/Destructor *****************************
-MyMoneyStorageSql::MyMoneyStorageSql(MyMoneyStorageMgr *storage, MyMoneyFile* file, const QUrl &url) :
+MyMoneyStorageSql::MyMoneyStorageSql(MyMoneyFile* file, const QUrl &url) :
   QSqlDatabase(QUrlQuery(url).queryItemValue("driver")),
   d_ptr(new MyMoneyStorageSqlPrivate(this))
 {
   Q_D(MyMoneyStorageSql);
-  d->m_storage = storage;
   d->m_file = file;
 }
 
@@ -280,9 +281,6 @@ bool MyMoneyStorageSql::readFile()
 
     //FIXME - ?? if (m_mode == 0)
     //m_storage->rebuildAccountBalances();
-    // this seems to be nonsense, but it clears the dirty flag
-    // as a side-effect.
-    d->m_storage->setLastModificationDate(d->m_storage->lastModificationDate());
     // FIXME?? if (m_mode == 0) m_storage = NULL;
     // make sure the progress bar is not shown any longer
     d->signalProgress(-1, -1);
@@ -336,10 +334,11 @@ bool MyMoneyStorageSql::writeFile()
     // make sure the progress bar is not shown any longer
     d->signalProgress(-1, -1);
     d->m_displayStatus = false;
-    // this seems to be nonsense, but it clears the dirty flag
-    // as a side-effect.
-    d->m_storage->setLastModificationDate(d->m_storage->lastModificationDate());
+
+    /// @todo the engine needs to reset the dirty flags in all models
+    /// signal fileSaved?
     return true;
+
   } catch (const QString &) {
     return false;
   }
@@ -721,7 +720,7 @@ void MyMoneyStorageSql::addTransaction(const MyMoneyTransaction& tx)
   QList<MyMoneyAccount> aList;
   // for each split account, update lastMod date, balance, txCount
   foreach (const MyMoneySplit& it_s, tx.splits()) {
-    MyMoneyAccount acc = d->m_storage->account(it_s.accountId());
+    MyMoneyAccount acc = d->m_file->account(it_s.accountId());
     ++d->m_transactionCountMap[acc.id()];
     aList << acc;
   }
@@ -749,7 +748,7 @@ void MyMoneyStorageSql::modifyTransaction(const MyMoneyTransaction& tx)
   QList<MyMoneyAccount> aList;
   // for each split account, update lastMod date, balance, txCount
   foreach (const MyMoneySplit& it_s, tx.splits()) {
-    MyMoneyAccount acc = d->m_storage->account(it_s.accountId());
+    MyMoneyAccount acc = d->m_file->account(it_s.accountId());
     ++d->m_transactionCountMap[acc.id()];
     aList << acc;
   }
@@ -769,7 +768,7 @@ void MyMoneyStorageSql::removeTransaction(const MyMoneyTransaction& tx)
   QList<MyMoneyAccount> aList;
   // for each split account, update lastMod date, balance, txCount
   foreach (const MyMoneySplit& it_s, tx.splits()) {
-    MyMoneyAccount acc = d->m_storage->account(it_s.accountId());
+    MyMoneyAccount acc = d->m_file->account(it_s.accountId());
     --d->m_transactionCountMap[acc.id()];
     aList << acc;
   }
@@ -877,7 +876,7 @@ void MyMoneyStorageSql::addPrice(const MyMoneyPrice& p)
   query.bindValue(":toId", p.to());
   query.bindValue(":priceDate", p.date().toString(Qt::ISODate));
   query.bindValue(":price", p.rate(QString()).toString());
-  const MyMoneySecurity sec = d->m_storage->security(p.to());
+  const MyMoneySecurity sec = d->m_file->security(p.to());
   query.bindValue(":priceFormatted",
               p.rate(QString()).formatMoney("", sec.pricePrecision()));
   query.bindValue(":priceSource", p.source());
@@ -1274,7 +1273,8 @@ void MyMoneyStorageSql::readPayees(const QList<QString>& pid)
 {
   Q_D(MyMoneyStorageSql);
   try {
-    d->m_storage->loadPayees(fetchPayees(pid));
+    d->m_file->payeesModel()->load(fetchPayees(pid));
+    d->m_file->userModel()->setDirty(false);
   } catch (const MyMoneyException &) {
   }
 //  if (pid.isEmpty()) m_payeeListRead = true;
@@ -1419,7 +1419,7 @@ void MyMoneyStorageSql::readTags(const QList<QString>& pid)
 {
   Q_D(MyMoneyStorageSql);
   try {
-    d->m_storage->loadTags(fetchTags(pid));
+    d->m_file->tagsModel()->load(fetchTags(pid));
   } catch (const MyMoneyException &) {
   }
 }
@@ -1799,7 +1799,7 @@ void MyMoneyStorageSql::readTransactions(const MyMoneyTransactionFilter& filter)
 {
   Q_D(MyMoneyStorageSql);
   try {
-    d->m_storage->loadTransactions(fetchTransactions(filter));
+    d->m_file->journalModel()->load(fetchTransactions(filter));
   } catch (const MyMoneyException &) {
     throw;
   }
@@ -2436,7 +2436,7 @@ QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchSecurities(const QStringL
     e.setTradingMarket(GETSTRING(tradingMarketCol));
 
     if (e.tradingCurrency().isEmpty())
-      e.setTradingCurrency(d->m_storage->pairs()["kmm-baseCurrency"]);
+      e.setTradingCurrency(d->m_file->baseCurrency().id());
     if (saf == 0)
       saf = 100;
     if (pp == 0 || pp > 10)
@@ -2983,14 +2983,14 @@ void MyMoneyStorageSql::setProgressCallback(void(*callback)(int, int, const QStr
   d->m_progressCallback = callback;
 }
 
-void MyMoneyStorageSql::readFile(QIODevice* s, MyMoneyStorageMgr* storage, MyMoneyFile* file)
+void MyMoneyStorageSql::readFile(QIODevice* s, MyMoneyFile* file)
 {
-  Q_UNUSED(s); Q_UNUSED(storage); Q_UNUSED(file);
+  Q_UNUSED(s); Q_UNUSED(file);
 }
 
-void MyMoneyStorageSql::writeFile(QIODevice* s, MyMoneyStorageMgr* storage, MyMoneyFile* file)
+void MyMoneyStorageSql::writeFile(QIODevice* s, MyMoneyFile* file)
 {
-  Q_UNUSED(s); Q_UNUSED(storage); Q_UNUSED(file);
+  Q_UNUSED(s); Q_UNUSED(file);
 }
 
 // **************************** Error display routine *******************************

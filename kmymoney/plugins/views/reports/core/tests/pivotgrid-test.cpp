@@ -35,9 +35,7 @@ QTEST_GUILESS_MAIN(PivotGridTest)
 
 void PivotGridTest::init()
 {
-  storage = new MyMoneyStorageMgr;
   file = MyMoneyFile::instance();
-  file->attachStorage(storage);
 
   MyMoneyFileTransaction ft;
   file->addCurrency(MyMoneySecurity("CAD", "Canadian Dollar",        "C$"));
@@ -76,8 +74,6 @@ void PivotGridTest::init()
 
 void PivotGridTest::cleanup()
 {
-  file->detachStorage(storage);
-  delete storage;
 }
 
 void PivotGridTest::testCellAddValue()

@@ -82,7 +82,7 @@ protected:
 
   void writeReport(QDomElement& reports, const MyMoneyReport& r) final override;
 
-  void readFile(QIODevice* s, MyMoneyStorageMgr* storage, MyMoneyFile* file) final override;
+  void readFile(QIODevice* s, MyMoneyFile* file) final override;
 
   void writeSecurity(QDomElement& securityElement, const MyMoneySecurity& security) final override;
 

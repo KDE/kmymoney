@@ -185,7 +185,7 @@ void MyMoneySchedule::setTransaction(const MyMoneyTransaction& transaction, bool
       // simply skip the test
       // Don't check for accounts with an id of 'Phony-ID' which is used
       // internally for non-existing accounts (during creation of accounts)
-      if (file->storageAttached() && s.accountId() != QString("Phony-ID")) {
+      if (s.accountId() != QString("Phony-ID")) {
         auto acc = file->account(s.accountId());
         if (acc.isIncomeExpense()) {
           s.setPayeeId(QString());

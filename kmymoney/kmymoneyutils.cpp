@@ -799,8 +799,6 @@ bool KMyMoneyUtils::canUpdateAllAccounts()
 {
   const auto file = MyMoneyFile::instance();
   auto rc = false;
-  if (!file->storageAttached())
-    return rc;
 
   QList<MyMoneyAccount> accList;
   file->accountList(accList);

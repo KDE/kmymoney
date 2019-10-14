@@ -58,10 +58,8 @@ void MyMoneyForecastTest::init()
 
   //all this has been taken from pivottabletest.cpp, by Thomas Baumgart and Ace Jones
 
-  storage = new MyMoneyStorageMgr;
   file = MyMoneyFile::instance();
   file->unload();
-  file->attachStorage(storage);
 
   MyMoneyFileTransaction ft;
   file->addCurrency(MyMoneySecurity("CAD", "Canadian Dollar",        "C$"));
@@ -106,8 +104,6 @@ void MyMoneyForecastTest::init()
 
 void MyMoneyForecastTest::cleanup()
 {
-  file->detachStorage(storage);
-  delete storage;
 }
 
 void MyMoneyForecastTest::testEmptyConstructor()

@@ -172,6 +172,7 @@ namespace eMyMoney { namespace Account { enum class Type; }
                      namespace TransactionFilter { enum class State; }
                    }
 
+
 class KMM_MYMONEY_EXPORT MyMoneyFile : public QObject
 {
   Q_OBJECT
@@ -179,6 +180,13 @@ class KMM_MYMONEY_EXPORT MyMoneyFile : public QObject
 
 public:
   friend class MyMoneyNotifier;
+
+  typedef enum {
+    CreationDate,
+    LastModificationDate,
+    FileFixVersion,
+    UserID,
+  } FixedKey;
 
   /**
     * This is the function to access the MyMoneyFile object.
@@ -190,6 +198,25 @@ public:
     * This is the destructor for any MyMoneyFile object
     */
   ~MyMoneyFile();
+
+  /**
+   * This returns the currently implemented highest fix version
+   */
+  constexpr int availableFixVersion() const { return 5; }
+
+  /**
+   * returns the current file fix version of the loaded data
+   *
+   * @sa setFileFixVersion(), availableFixVersion()
+   */
+  int fileFixVersion() const;
+
+  /**
+   * Sets the file fix level to @a version
+   *
+   * @sa fileFixVersion(), availableFixVersion()
+   */
+  void setFileFixVersion(int version);
 
   // general get functions
   MyMoneyPayee user() const;
@@ -244,7 +271,7 @@ public:
     * @return const pointer to the current attached storage object.
     *         If no object is attached, returns 0.
     */
-  MyMoneyStorageMgr* storage() const;
+  // MyMoneyStorageMgr* storage() const;
 
   /**
    * This method clears all data in all storage models
@@ -377,7 +404,7 @@ public:
     * flag after a failed upload to a server when the save operation
     * to a local temp file was OK.
     */
-  void setDirty() const;
+  void setDirty(bool dirty = true) const;
 
   /**
     * Adds an institution to the file-global institution pool. A
@@ -930,6 +957,11 @@ public:
    * The reports model instance
    */
   ReportsModel* reportsModel() const;
+
+  /**
+   * The user model instance
+   */
+  PayeesModel* userModel() const;
 
 
 /// @note add new models here
@@ -1671,6 +1703,11 @@ public:
    * mark all models as clean
    */
   void fileSaved();
+
+  /**
+   * This returns the string for specific parameters
+   */
+  const QString& fixedKey(FixedKey key) const;
 
 protected:
   /**

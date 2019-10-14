@@ -52,7 +52,6 @@
 #include "mymoneyfile.h"
 #include "mymoneystoragesql.h"
 #include "mymoneyexception.h"
-#include "mymoneystoragemgr.h"
 #include "icons.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyenums.h"
@@ -112,13 +111,12 @@ SQLStorage::~SQLStorage()
   qDebug("Plugins: sqlstorage unloaded");
 }
 
-MyMoneyStorageMgr *SQLStorage::open(const QUrl &url)
+bool SQLStorage::open(const QUrl &url)
 {
   if (url.scheme() != QLatin1String("sql"))
-    return nullptr;
+    return false;
 
-  auto storage = new MyMoneyStorageMgr;
-  auto reader = std::make_unique<MyMoneyStorageSql>(storage, MyMoneyFile::instance(), url);
+  auto reader = std::make_unique<MyMoneyStorageSql>(MyMoneyFile::instance(), url);
 
   dbUrl = url;
   if (dbUrl.password().isEmpty()) {
@@ -126,7 +124,7 @@ MyMoneyStorageMgr *SQLStorage::open(const QUrl &url)
     QPointer<KSelectDatabaseDlg> dialog = new KSelectDatabaseDlg(QIODevice::ReadWrite, dbUrl);
     if (!dialog->checkDrivers()) {
       delete dialog;
-      return nullptr;
+      return false;
     }
     QUrlQuery query = convertOldUrl(dbUrl);
     // if we need to supply a password, then show the dialog
@@ -136,7 +134,7 @@ MyMoneyStorageMgr *SQLStorage::open(const QUrl &url)
         dbUrl = dialog->selectedURL();
       } else {
         delete dialog;
-        return nullptr;
+        return false;
       }
     }
     delete dialog;
@@ -156,12 +154,11 @@ MyMoneyStorageMgr *SQLStorage::open(const QUrl &url)
         KMessageBox::detailedError(nullptr,
                                    i18n("Cannot open database %1\n", dbURL.toDisplayString()),
                                    reader->lastError());
-        delete storage;
-        return nullptr;
+        return false;
       case -1: // retryable error
         if (KMessageBox::warningYesNo(nullptr, reader->lastError(), PACKAGE) == KMessageBox::No) {
-          delete storage;
-          return nullptr;
+          return false;
+
         } else {
           QUrlQuery query(dbURL);
           const QString optionKey = QLatin1String("options");
@@ -178,8 +175,7 @@ MyMoneyStorageMgr *SQLStorage::open(const QUrl &url)
         break;
       case 2: // bad password
       case 3: // unsupported operation
-        delete storage;
-        return nullptr;
+        return false;
     }
   }
   // single user mode; read some of the data into memory
@@ -192,11 +188,11 @@ MyMoneyStorageMgr *SQLStorage::open(const QUrl &url)
                                i18n("An unrecoverable error occurred while reading the database"),
                                reader->lastError().toLatin1(),
                                i18n("Database malfunction"));
-    delete storage;
-    return nullptr;
+    return false;
   }
 //  reader->setProgressCallback(0);
-  return storage;
+  /// @todo port to new model code
+  return true;
 }
 
 QUrl SQLStorage::openUrl() const
@@ -211,7 +207,7 @@ bool SQLStorage::save(const QUrl &url)
     KMessageBox::error(nullptr, i18n("Tried to access a file when it has not been opened"));
     return (rc);
   }
-  auto writer = new MyMoneyStorageSql(MyMoneyFile::instance()->storage(), MyMoneyFile::instance(), url);
+  auto writer = new MyMoneyStorageSql(MyMoneyFile::instance(), url);
   writer->open(url, QIODevice::ReadWrite);
 //  writer->setProgressCallback(&KMyMoneyView::progressCallback);
   if (!writer->writeFile()) {
@@ -343,7 +339,7 @@ void SQLStorage::slotGenerateSql()
 
 bool SQLStorage::saveAsDatabase(const QUrl &url)
 {
-  auto writer = new MyMoneyStorageSql(MyMoneyFile::instance()->storage(), MyMoneyFile::instance(), url);
+  auto writer = new MyMoneyStorageSql(MyMoneyFile::instance(), url);
   auto canWrite = false;
   switch (writer->open(url, QIODevice::WriteOnly)) {
     case 0:

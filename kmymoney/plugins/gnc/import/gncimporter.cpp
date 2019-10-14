@@ -39,7 +39,6 @@
 #include "appinterface.h"
 #include "mymoneyfile.h"
 #include "mymoneyexception.h"
-#include "mymoneystoragemgr.h"
 #include "kmymoneyenums.h"
 
 class MyMoneyStatement;
@@ -60,13 +59,13 @@ GNCImporter::~GNCImporter()
   qDebug("Plugins: gncimporter unloaded");
 }
 
-MyMoneyStorageMgr *GNCImporter::open(const QUrl &url)
+bool GNCImporter::open(const QUrl &url)
 {
   if (url.scheme() == QLatin1String("sql"))
-    return nullptr;
+    return false;
 
   if (!url.isLocalFile())
-    return nullptr;
+    return false;
 
   const auto fileName = url.toLocalFile();
   const auto sFileToShort = QString::fromLatin1("File %1 is too short.").arg(fileName);
@@ -81,15 +80,14 @@ MyMoneyStorageMgr *GNCImporter::open(const QUrl &url)
 
   file.close();
 
-  QIODevice* qfile = nullptr;
+  QScopedPointer<QIODevice> qfile;
   QString sFileHeader(qbaFileHeader);
   if (sFileHeader == QString("\037\213"))        // gzipped?
-    qfile = new KCompressionDevice(fileName, COMPRESSION_TYPE);
+    qfile.reset(new KCompressionDevice(fileName, COMPRESSION_TYPE));
   else
-    return nullptr;
+    return false;
 
   if (!qfile->open(QIODevice::ReadOnly)) {
-    delete qfile;
     throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot read the file: %1").arg(fileName));
   }
 
@@ -105,22 +103,18 @@ MyMoneyStorageMgr *GNCImporter::open(const QUrl &url)
 
   QRegExp gncexp("<gnc-v(\\d+)");
   if (!(gncexp.indexIn(txt) != -1)) {
-    delete qfile;
-    return nullptr;
+    return false;
   }
 
   MyMoneyGncReader pReader;
   qfile->seek(0);
 
-  /// @todo port to new model code
-  auto storage = new MyMoneyStorageMgr;
   pReader.setProgressCallback(appInterface()->progressCallback());
-  pReader.readFile(qfile, storage, MyMoneyFile::instance());
+  pReader.readFile(qfile.data(), MyMoneyFile::instance());
   pReader.setProgressCallback(0);
 
   qfile->close();
-  delete qfile;
-  return storage;
+  return true;
 }
 
 QUrl GNCImporter::openUrl() const

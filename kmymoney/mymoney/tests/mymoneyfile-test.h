@@ -26,7 +26,6 @@
 
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
-#include "storage/mymoneystoragemgr.h"
 
 class MyMoneyFileTest : public QObject
 {
@@ -36,7 +35,6 @@ public:
 
 protected:
   MyMoneyFile *m;
-  MyMoneyStorageMgr* storage;
   MyMoneyAccount  m_inv;
 
 private Q_SLOTS:
@@ -74,10 +72,8 @@ private Q_SLOTS:
   void testRemovePayee();
   void testPayeeWithIdentifier();
   void testAddTransactionStd();
-  void testAttachStorage();
   void testAccount2Category();
   void testCategory2Account();
-  void testAttachedStorage();
   void testHasAccount();
   void testAddEquityAccount();
   void testReparentEquity();

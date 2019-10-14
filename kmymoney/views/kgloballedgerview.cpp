@@ -173,38 +173,36 @@ void KGlobalLedgerView::refresh()
 
 void KGlobalLedgerView::showEvent(QShowEvent* event)
 {
-  if (MyMoneyFile::instance()->storageAttached()) {
-    Q_D(KGlobalLedgerView);
-    if (d->m_needLoad)
-      d->init();
+  Q_D(KGlobalLedgerView);
+  if (d->m_needLoad)
+    d->init();
 
-    emit customActionRequested(View::Ledgers, eView::Action::AboutToShow);
+  emit customActionRequested(View::Ledgers, eView::Action::AboutToShow);
 
-    if (d->m_needsRefresh) {
-      if (!d->m_inEditMode) {
-        setUpdatesEnabled(false);
-        d->loadView();
-        setUpdatesEnabled(true);
-        d->m_needsRefresh = false;
-        d->m_newAccountLoaded = false;
-      }
-
-    } else {
-      if (!d->m_lastSelectedAccountID.isEmpty()) {
-        try {
-          const auto acc = MyMoneyFile::instance()->account(d->m_lastSelectedAccountID);
-          slotSelectAccount(acc.id());
-        } catch (const MyMoneyException &) {
-          d->m_lastSelectedAccountID.clear();                                               // account is invalid
-        }
-      } else {
-        slotSelectAccount(d->m_accountComboBox->getSelected());
-      }
-
-      KMyMoneyRegister::SelectedTransactions list(d->m_register);
-      updateLedgerActions(list);
-      emit selectByVariant(QVariantList {QVariant::fromValue(list)}, eView::Intent::SelectRegisterTransactions);
+  if (d->m_needsRefresh) {
+    if (!d->m_inEditMode) {
+      setUpdatesEnabled(false);
+      d->loadView();
+      setUpdatesEnabled(true);
+      d->m_needsRefresh = false;
+      d->m_newAccountLoaded = false;
     }
+
+  } else {
+    if (!d->m_lastSelectedAccountID.isEmpty()) {
+      try {
+        const auto acc = MyMoneyFile::instance()->account(d->m_lastSelectedAccountID);
+        slotSelectAccount(acc.id());
+      } catch (const MyMoneyException &) {
+        d->m_lastSelectedAccountID.clear();                                               // account is invalid
+      }
+    } else {
+      slotSelectAccount(d->m_accountComboBox->getSelected());
+    }
+
+    KMyMoneyRegister::SelectedTransactions list(d->m_register);
+    updateLedgerActions(list);
+    emit selectByVariant(QVariantList {QVariant::fromValue(list)}, eView::Intent::SelectRegisterTransactions);
   }
 
   pActions[Action::SelectAllTransactions]->setEnabled(true);
@@ -475,14 +473,13 @@ void KGlobalLedgerView::slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTr
 
 void KGlobalLedgerView::resizeEvent(QResizeEvent* ev)
 {
-  if (MyMoneyFile::instance()->storageAttached()) {
-    Q_D(KGlobalLedgerView);
-    if (d->m_needLoad)
-      d->init();
+  Q_D(KGlobalLedgerView);
+  if (d->m_needLoad)
+    d->init();
 
-    d->m_register->resize((int)eWidgets::eTransaction::Column::Detail);
-    d->m_form->resize((int)eWidgets::eTransactionForm::Column::Value1);
-  }
+  d->m_register->resize((int)eWidgets::eTransaction::Column::Detail);
+  d->m_form->resize((int)eWidgets::eTransactionForm::Column::Value1);
+
   KMyMoneyViewBase::resizeEvent(ev);
 }
 

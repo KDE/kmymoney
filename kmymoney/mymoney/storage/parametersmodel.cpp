@@ -124,7 +124,7 @@ void ParametersModel::addItem(const QString& key, const QString& val)
 {
   const auto idx = indexById(key);
   int row;
-  if (!idx.isValid()) {
+  if (idx.isValid()) {
     row = idx.row();
 
   } else {

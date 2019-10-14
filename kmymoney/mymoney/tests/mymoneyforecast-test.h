@@ -24,7 +24,6 @@
 
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
-#include "mymoneystoragemgr.h"
 
 #include "mymoneyforecast.h"
 

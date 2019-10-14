@@ -55,7 +55,6 @@ email                : mte@users.sourceforge.net
 // ------------------------------------------------------------Box21----------------
 // Project Includes
 #include <config-kmymoney.h>
-#include "mymoneystoragemgr.h"
 #ifndef _GNCFILEANON
 #include "kmymoneyutils.h"
 #include "mymoneyfile.h"
@@ -127,7 +126,7 @@ void MyMoneyGncReader::setOptions()
   developerDebug = false;
   // set your fave currency here to save getting that enormous dialog each time you run a test
   // especially if you have to scroll down to USD...
-  if (developerDebug) m_storage->setValue("kmm-baseCurrency", "GBP");
+  if (developerDebug) MyMoneyFile::instance()->setValue("kmm-baseCurrency", "GBP");
 #endif // _GNCFILEANON
 }
 
@@ -1286,10 +1285,8 @@ MyMoneyGncReader::MyMoneyGncReader() :
     m_potentialTransfer(0),
     m_suspectSchedule(false)
 {
-#ifndef _GNCFILEANON
-  m_storage = 0;
-#endif // _GNCFILEANON
 // to hold gnucash count data (only used for progress bar)
+  m_storage = MyMoneyFile::instance();
   m_gncCommodityCount = m_gncAccountCount = m_gncTransactionCount = m_gncScheduleCount = 0;
   m_smallBusinessFound = m_budgetsFound = m_lotsFound = false;
   m_commodityCount = m_priceCount = m_accountCount = m_transactionCount = m_templateCount = m_scheduleCount = 0;
@@ -1310,20 +1307,17 @@ MyMoneyGncReader::~MyMoneyGncReader() {}
 
 //**************************** Main Entry Point ************************************
 #ifndef _GNCFILEANON
-void MyMoneyGncReader::readFile(QIODevice* pDevice, MyMoneyStorageMgr* storage, MyMoneyFile* file)
+void MyMoneyGncReader::readFile(QIODevice* pDevice, MyMoneyFile* file)
 {
   Q_CHECK_PTR(pDevice);
-  Q_CHECK_PTR(storage);
   Q_CHECK_PTR(file);
 
-  m_storage = storage;
   qDebug("Entering gnucash importer");
   setOptions();
   // get a file anonymization factor from the user
   if (bAnonymize) setFileHideFactor();
   //m_defaultPayee = createPayee (i18n("Unknown payee"));
 
-  MyMoneyFile::instance()->attachStorage(m_storage);
   MyMoneyFileTransaction ft;
   m_xr = new XmlReader(this);
   bool blocked = MyMoneyFile::instance()->signalsBlocked();
@@ -1337,7 +1331,6 @@ void MyMoneyGncReader::readFile(QIODevice* pDevice, MyMoneyStorageMgr* storage, 
     qWarning("%s", e.what());
   } // end catch
   MyMoneyFile::instance()->blockSignals(blocked);
-  MyMoneyFile::instance()->detachStorage(m_storage);
   signalProgress(0, 1, i18n("Import complete"));  // switch off progress bar
   delete m_xr;
   signalProgress(0, 1, i18nc("Application is ready to use", "Ready.")); // application is ready for input
@@ -1619,7 +1612,23 @@ void MyMoneyGncReader::convertAccount(const GncAccount* gac)
     if (gac->getKvpValue("tax-related", "integer") == QChar('1')) acc.setValue("Tax", "Yes");
     // all the details from the file about the account should be known by now.
     // calling addAccount will automatically fill in the account ID.
-    m_storage->addAccount(acc);
+    MyMoneyAccount parent;
+    switch(acc.accountGroup()) {
+      default:
+      case eMyMoney::Account::Type::Asset:
+        parent = m_storage->asset();
+        break;
+      case eMyMoney::Account::Type::Liability:
+        parent = m_storage->liability();
+        break;
+      case eMyMoney::Account::Type::Income:
+        parent = m_storage->income();
+        break;
+      case eMyMoney::Account::Type::Expense:
+        parent = m_storage->expense();
+        break;
+    }
+    m_storage->addAccount(acc, parent);
     m_mapIds[gac->id().toUtf8()] = acc.id(); // to link gnucash id to ours for tx posting
 
     if (gncdebug)
@@ -1633,7 +1642,7 @@ void MyMoneyGncReader::convertAccount(const GncAccount* gac)
   PASS
 }
 
-//********************************************** convertTransaction *****************************
+//***************************** convertTransaction *****************************
 void MyMoneyGncReader::convertTransaction(const GncTransaction *gtx)
 {
   Q_CHECK_PTR(gtx);
@@ -1691,7 +1700,7 @@ void MyMoneyGncReader::convertTransaction(const GncTransaction *gtx)
     tx.addSplit(split);
     it = m_splitList.erase(it);
   }
-  m_storage->addTransaction(tx, true); // all done, add the transaction to storage
+  m_storage->addTransaction(tx); // all done, add the transaction to storage
   signalProgress(++m_transactionCount, 0);
   return ;
 }
@@ -2452,8 +2461,9 @@ QString MyMoneyGncReader::createOrphanAccount(const QString& gncName)
   acc.setLastReconciliationDate(today);
   acc.setCurrencyId(m_txCommodity);
   acc.setAccountType(Account::Type::Asset);
-  acc.setParentAccountId(m_storage->asset().id());
-  m_storage->addAccount(acc);
+  auto parent = m_storage->asset();
+  acc.setParentAccountId(parent.id());
+  m_storage->addAccount(acc, parent);
   // assign the gnucash id as the key into the map to find our id
   m_mapIds[gncName.toUtf8()] = acc.id();
   m_messageList["OR"].append(
@@ -2534,7 +2544,8 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
     invAcc.setAccountType(Account::Type::Investment);
     invAcc.setCurrencyId(QString(""));  // we don't know what currency it is!!
     invAcc.setParentAccountId(parentKey);  // intersperse it between old parent and child stock acct
-    m_storage->addAccount(invAcc);
+    parent = m_storage->account(parentKey);
+    m_storage->addAccount(invAcc, parent);
     m_mapIds [invAcc.id()] = invAcc.id(); // so stock account gets parented (again) to investment account later
     if (gncdebug) qDebug()
       << "Created investment account" << invAcc.name() << "as id" << invAcc.id()
@@ -2558,8 +2569,9 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
       singleInvAcc.setName(invAccName);
       singleInvAcc.setAccountType(Account::Type::Investment);
       singleInvAcc.setCurrencyId(QString(""));
-      singleInvAcc.setParentAccountId(m_storage->asset().id());
-      m_storage->addAccount(singleInvAcc);
+      parent = m_storage->asset();
+      singleInvAcc.setParentAccountId(parent.id());
+      m_storage->addAccount(singleInvAcc, parent);
       m_mapIds [singleInvAcc.id()] = singleInvAcc.id(); // so stock account gets parented (again) to investment account later
       if (gncdebug) qDebug() << "Created investment account" << singleInvAcc.name()
         << "as id" << singleInvAcc.id() << "parent" << singleInvAcc.parentAccountId()
@@ -2604,8 +2616,9 @@ void MyMoneyGncReader::checkInvestmentOption(QString stockId)
           invAcc.setAccountType(Account::Type::Investment);
           invAcc.setName(invAccName);
           invAcc.setCurrencyId(QString(""));
-          invAcc.setParentAccountId(m_storage->asset().id());
-          m_storage->addAccount(invAcc);
+          parent = m_storage->asset();
+          invAcc.setParentAccountId(parent.id());
+          m_storage->addAccount(invAcc, parent);
           ok = true;
         }
         if (invAcc.accountType() == Account::Type::Investment) {

@@ -50,10 +50,10 @@ public:
   };
 
 /// @todo port to new model code
-  virtual void readFile(QIODevice* qf, MyMoneyStorageMgr* storage, MyMoneyFile* file) = 0;
+  virtual void readFile(QIODevice* qf, MyMoneyFile* file) = 0;
   // virtual void readStream(QDataStream& s, IMyMoneySerialization* storage) = 0;
 
-  virtual void writeFile(QIODevice* qf, MyMoneyStorageMgr* storage, MyMoneyFile* file) = 0;
+  virtual void writeFile(QIODevice* qf, MyMoneyFile* file) = 0;
   //virtual void writeStream(QDataStream& s, IMyMoneySerialization* storage) = 0;
 
   virtual void setProgressCallback(void(*callback)(int, int, const QString&)) = 0;

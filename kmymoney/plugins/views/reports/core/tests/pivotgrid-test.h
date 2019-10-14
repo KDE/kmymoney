@@ -29,7 +29,6 @@ class PivotGridTest;
 #define KMM_MYMONEY_UNIT_TESTABLE friend class reports::PivotGridTest;
 
 #include "mymoneyfile.h"
-#include "mymoneystoragemgr.h"
 
 namespace reports
 {
@@ -38,7 +37,6 @@ class PivotGridTest : public QObject
 {
   Q_OBJECT
 private:
-  MyMoneyStorageMgr* storage;
   MyMoneyFile* file;
 
 private Q_SLOTS:

@@ -43,7 +43,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneystoragemgr.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
 #include "mymoneyaccountloan.h"
@@ -182,6 +181,7 @@ public:
     , m_dirty(false)
     , m_inTransaction(false)
     , payeesModel(qq)
+    , userModel(qq)
     , costCenterModel(qq)
     , schedulesModel(qq)
     , tagsModel(qq)
@@ -221,13 +221,14 @@ public:
 
   }
 
-  ~Private() {
-    delete m_storage;
+  ~Private()
+  {
   }
 
   bool anyModelDirty() const
   {
     return payeesModel.isDirty()
+        || userModel.isDirty()
         || costCenterModel.isDirty()
         || schedulesModel.isDirty()
         || tagsModel.isDirty()
@@ -249,6 +250,7 @@ public:
     schedulesModel.setDirty(false);
     costCenterModel.setDirty(false);
     payeesModel.setDirty(false);
+    userModel.setDirty(false);
     tagsModel.setDirty(false);
     securitiesModel.setDirty(false);
     currenciesModel.setDirty(false);
@@ -302,18 +304,8 @@ public:
   }
 
   /**
-    * This method checks if a storage object is attached and
-    * throws and exception if not.
-    */
-  inline void checkStorage() const {
-    if (m_storage == 0)
-      throw MYMONEYEXCEPTION_CSTRING("No storage object attached to MyMoneyFile");
-  }
-
-  /**
     * This method checks that a transaction has been started with
-    * startTransaction() and throws an exception otherwise. Calls
-    * checkStorage() to make sure a storage object is present and attached.
+    * startTransaction() and throws an exception otherwise.
     */
   void checkTransaction(const char* txt) const {
     if (!m_inTransaction)
@@ -386,6 +378,7 @@ public:
    * The various models
    */
   PayeesModel         payeesModel;
+  PayeesModel         userModel;
   CostCenterModel     costCenterModel;
   SchedulesModel      schedulesModel;
   TagsModel           tagsModel;
@@ -428,6 +421,23 @@ MyMoneyFile::~MyMoneyFile()
   delete d;
 }
 
+const QString& MyMoneyFile::fixedKey(FixedKey key) const
+{
+  static QVector<QString> fixedKeys = {
+    QStringLiteral("CreationDate"),
+    QStringLiteral("LastModificationDate"),
+    QStringLiteral("FixVersion"),
+    QStringLiteral("P000001"),
+  };
+  static QString null;
+
+  if ((key < 0) || (key >= fixedKeys.count())) {
+    qDebug() << "Invalid key" << key << "for MyMoneyFile::fixedKey";
+    return null;
+  }
+  return fixedKeys[key];
+}
+
 MyMoneyFile* MyMoneyFile::instance()
 {
   static MyMoneyFile file;
@@ -443,6 +453,7 @@ void MyMoneyFile::unload()
 {
   d->schedulesModel.unload();
   d->payeesModel.unload();
+  d->userModel.unload();
   d->costCenterModel.unload();
   d->tagsModel.unload();
   d->securitiesModel.unload();
@@ -476,6 +487,7 @@ void MyMoneyFile::setFileFixVersion(int version)
   d->parametersModel.addItem(fixedKey(FileFixVersion), QString("%1").arg(version));
 }
 
+#if 0
 void MyMoneyFile::attachStorage(MyMoneyStorageMgr* const storage)
 {
   if (d->m_storage != 0)
@@ -515,6 +527,7 @@ bool MyMoneyFile::storageAttached() const
 {
   return d->m_storage != 0;
 }
+#endif
 
 void MyMoneyFile::startTransaction()
 {
@@ -645,7 +658,7 @@ void MyMoneyFile::rollbackTransaction()
   d->checkTransaction(Q_FUNC_INFO);
 
   /// @todo port to new model code
-  d->m_storage->rollbackTransaction();
+  // d->m_storage->rollbackTransaction();
   d->m_inTransaction = false;
   d->m_balanceChangedSet.clear();
   d->m_valueChangedSet.clear();
@@ -1552,7 +1565,6 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
 
   d->m_changeSet += MyMoneyNotification(File::Mode::Add, transaction);
 }
-
 MyMoneyTransaction MyMoneyFile::transaction(const QString& id) const
 {
   MyMoneyTransaction t(d->journalModel.transactionById(id));
@@ -1562,12 +1574,23 @@ MyMoneyTransaction MyMoneyFile::transaction(const QString& id) const
   return t;
 }
 
-MyMoneyTransaction MyMoneyFile::transaction(const QString& account, const int idx) const
-{
-  qDebug() << "Who calls this?";
-  d->checkStorage();
 
-  return d->m_storage->transaction(account, idx);
+MyMoneyTransaction MyMoneyFile::transaction(const QString& accountId, const int idx) const
+{
+  auto acc = account(accountId);
+  MyMoneyTransactionFilter filter;
+
+  if (acc.accountGroup() == eMyMoney::Account::Type::Income
+    || acc.accountGroup() == eMyMoney::Account::Type::Expense)
+    filter.addCategory(accountId);
+  else
+    filter.addAccount(accountId);
+
+  const auto list = transactionList(filter);
+  if (idx < 0 || idx >= static_cast<int>(list.count()))
+    throw MYMONEYEXCEPTION_CSTRING("Unknown idx for transaction");
+
+  return transaction(list[idx].id());
 }
 
 PayeesModel * MyMoneyFile::payeesModel() const
@@ -1665,8 +1688,6 @@ MyMoneyPayee MyMoneyFile::payee(const QString& id) const
 
 MyMoneyPayee MyMoneyFile::payeeByName(const QString& name) const
 {
-  d->checkStorage();
-
   return d->payeesModel.itemByName(name);
 }
 
@@ -1702,8 +1723,6 @@ MyMoneyTag MyMoneyFile::tag(const QString& id) const
 
 MyMoneyTag MyMoneyFile::tagByName(const QString& name) const
 {
-  d->checkStorage();
-
   return d->tagsModel.itemByName(name);
 }
 
@@ -1757,9 +1776,7 @@ void MyMoneyFile::accountList(QList<MyMoneyAccount>& list, const QStringList& id
 // general get functions
 MyMoneyPayee MyMoneyFile::user() const
 {
-  /// @todo port to new model code
-  d->checkStorage();
-  return d->m_storage->user();
+  return d->userModel.itemById(fixedKey(MyMoneyFile::UserID));
 }
 
 // general set functions
@@ -1777,29 +1794,24 @@ void MyMoneyFile::setUser(const MyMoneyPayee& user)
 
 bool MyMoneyFile::dirty() const
 {
-  /// @todo port to new model code
-  if (!d->m_storage)
-    return false;
-
-  return d->m_storage->dirty()
-    || d->anyModelDirty();
+  return d->m_dirty || d->anyModelDirty();
 }
 
-void MyMoneyFile::setDirty() const
+void MyMoneyFile::setDirty(bool dirty) const
 {
-  /// @todo port to new model code
-  d->checkStorage();
-
-  d->m_storage->setDirty();
+  if (!dirty) {
+    d->markModelsAsClean();
+  }
+  d->m_dirty = dirty;
 }
 
+#if 0
 unsigned int MyMoneyFile::accountCount() const
 {
-  /// @todo port to new model code
-  d->checkStorage();
-
-  return d->m_storage->accountCount();
+  // Don't forget the
+  return d->accountsModel.itemList().count() + 5;
 }
+#endif
 
 void MyMoneyFile::ensureDefaultCurrency(MyMoneyAccount& acc) const
 {
@@ -1839,6 +1851,7 @@ unsigned int MyMoneyFile::transactionCount(const QString& accountId) const
   return d->journalModel.transactionCount(accountId);
 }
 
+#if 0
 QMap<QString, unsigned long> MyMoneyFile::transactionCountMap() const
 {
   /// @todo port to new model code
@@ -1846,13 +1859,11 @@ QMap<QString, unsigned long> MyMoneyFile::transactionCountMap() const
 
   return d->m_storage->transactionCountMap();
 }
+#endif
 
 unsigned int MyMoneyFile::institutionCount() const
 {
-  /// @todo port to new model code
-  d->checkStorage();
-
-  return d->m_storage->institutionCount();
+  return d->institutionsModel.itemList().count();
 }
 
 MyMoneyMoney MyMoneyFile::balance(const QString& id, const QDate& date) const
@@ -1914,10 +1925,13 @@ MyMoneyMoney MyMoneyFile::clearedBalance(const QString &id, const QDate& date) c
 
 MyMoneyMoney MyMoneyFile::totalBalance(const QString& id, const QDate& date) const
 {
-  /// @todo port to new model code
-  d->checkStorage();
 
-  return d->m_storage->totalBalance(id, date);
+  MyMoneyMoney result(balance(id, date));
+
+  for (const auto sAccount : account(id).accountList())
+    result += totalBalance(sAccount, date);
+
+  return result;
 }
 
 MyMoneyMoney MyMoneyFile::totalBalance(const QString& id) const
@@ -3379,10 +3393,7 @@ MyMoneyPrice MyMoneyFile::price(const QString& fromId) const
 
 MyMoneyPriceList MyMoneyFile::priceList() const
 {
-  /// @todo port to new model code
-  d->checkStorage();
-
-  return d->m_storage->priceList();
+  return d->priceModel.priceList();
 }
 
 bool MyMoneyFile::hasAccount(const QString& id, const QString& name) const
@@ -3777,7 +3788,6 @@ bool MyMoneyFile::hasNewerTransaction(const QString& accId, const QDate& date) c
 
 void MyMoneyFile::clearCache()
 {
-  d->checkStorage();
   d->m_balanceCache.clear();
 }
 

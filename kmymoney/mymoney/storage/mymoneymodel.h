@@ -395,6 +395,11 @@ public:
     return itemByIndex(indexById(id));
   }
 
+  QString peekNextId()
+  {
+    return QString("%1%2").arg(m_idLeadin).arg(m_nextId+1, m_idSize, 10, QLatin1Char('0'));
+  }
+
   QString nextId()
   {
     return QString("%1%2").arg(m_idLeadin).arg(++m_nextId, m_idSize, 10, QLatin1Char('0'));

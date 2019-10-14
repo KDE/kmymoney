@@ -36,7 +36,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneystoragemgr.h"
 #include "mymoneyreport.h"
 #include "mymoneyschedule.h"
 #include "mymoneysplit.h"
@@ -50,6 +49,9 @@
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneyexception.h"
 #include "mymoneyenums.h"
+#include "mymoneyfile.h"
+#include "payeesmodel.h"
+#include "accountsmodel.h"
 
 QStringList MyMoneyStorageANON::zKvpNoModify = QString("kmm-baseCurrency,OpeningBalanceAccount,PreferredAccount,Tax,fixed-interest,interest-calculation,payee,schedule,term,kmm-online-source,kmm-brokerage-account,kmm-sort-reconcile,kmm-sort-std,kmm-iconpos,mm-closed,payee,schedule,term,lastImportedTransactionDate,VatAccount,VatRate,kmm-matched-tx,Imported,priceMode").split(',');
 QStringList MyMoneyStorageANON::zKvpXNumber = QString("final-payment,loan-amount,periodic-payment,lastStatementBalance").split(',');
@@ -72,14 +74,14 @@ MyMoneyStorageANON::~MyMoneyStorageANON()
 {
 }
 
-void MyMoneyStorageANON::readFile(QIODevice* , MyMoneyStorageMgr*, MyMoneyFile*)
+void MyMoneyStorageANON::readFile(QIODevice*, MyMoneyFile*)
 {
   throw MYMONEYEXCEPTION_CSTRING("Cannot read a file through MyMoneyStorageANON!!");
 }
 
 void MyMoneyStorageANON::writeUserInformation(QDomElement& userInfo)
 {
-  MyMoneyPayee user = m_storage->user();
+  auto user = m_file->userModel()->itemById(m_file->fixedKey(MyMoneyFile::UserID));
 
   userInfo.setAttribute(QString("name"), hideString(user.name()));
   userInfo.setAttribute(QString("email"), hideString(user.email()));
@@ -149,7 +151,7 @@ void MyMoneyStorageANON::writeTag(QDomElement& tag, const MyMoneyTag& _ta)
 void MyMoneyStorageANON::writeAccounts(QDomElement& accounts)
 {
   // keep an account list to allow changing brokerage accounts accordingly
-  m_storage->accountList(m_accountList);
+  m_accountList = m_file->accountsModel()->itemList();
   MyMoneyStorageXML::writeAccounts(accounts);
 }
 

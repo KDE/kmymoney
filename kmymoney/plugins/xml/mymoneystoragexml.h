@@ -27,6 +27,7 @@
 
 #include <QMap>
 #include <QString>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -46,7 +47,6 @@ class QDomElement;
 class QDomDocument;
 class QDate;
 
-class MyMoneyStorageMgr;
 class MyMoneyInstitution;
 class MyMoneyAccount;
 class MyMoneySecurity;
@@ -79,8 +79,8 @@ public:
     Writing = 1           /**< version to be used when writing a file */
   };
 
-  void readFile(QIODevice* s, MyMoneyStorageMgr* storage, MyMoneyFile* file) override;
-  void writeFile(QIODevice* s, MyMoneyStorageMgr* storage, MyMoneyFile* file) override;
+  void readFile(QIODevice* s, MyMoneyFile* file) override;
+  void writeFile(QIODevice* s, MyMoneyFile* file) override;
   void setProgressCallback(void(*callback)(int, int, const QString&)) override;
 
   protected:
@@ -161,9 +161,8 @@ private:
   void (*m_progressCallback)(int, int, const QString&);
 
 protected:
-  MyMoneyStorageMgr *m_storage;
-  MyMoneyFile       *m_file;
-  QDomDocument      *m_doc;
+  MyMoneyFile*        m_file;
+  QDomDocument*       m_doc;
 
 private:
   /// \internal d-pointer class.

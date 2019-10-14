@@ -27,7 +27,6 @@
 
 #include "kmymoneyplugin.h"
 
-class MyMoneyStorageMgr;
 class QUrlQuery;
 
 class SQLStorage : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::StoragePlugin
@@ -43,7 +42,7 @@ public:
   QAction *m_saveAsDBaction;
   QAction *m_generateDB;
 
-  MyMoneyStorageMgr *open(const QUrl &url) override;
+  bool open(const QUrl &url) override;
   bool save(const QUrl &url) override;
   bool saveAs() override;
   eKMyMoney::StorageType storageType() const override;
