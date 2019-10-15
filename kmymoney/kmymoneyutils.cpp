@@ -689,9 +689,12 @@ bool KMyMoneyUtils::newPayee(const QString& newnameBase, QString& id)
       QString newname(newnameBase);
       // adjust name until a unique name has been created
       int count = 0;
+
       for (;;) {
         try {
-          MyMoneyFile::instance()->payeeByName(newname);
+          const auto payee = MyMoneyFile::instance()->payeeByName(newname);
+          if (payee.id().isEmpty())
+            break;
           newname = QString::fromLatin1("%1 [%2]").arg(newnameBase).arg(++count);
         } catch (const MyMoneyException &) {
           break;
