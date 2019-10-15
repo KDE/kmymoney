@@ -1686,7 +1686,11 @@ MyMoneyPayee MyMoneyFile::payee(const QString& id) const
   if (Q_UNLIKELY(id.isEmpty()))
     return MyMoneyPayee();
 
-  return d->payeesModel.itemById(id);
+  const auto idx = d->payeesModel.indexById(id);
+  if (idx.isValid())
+    return d->payeesModel.itemByIndex(idx);
+
+  throw MYMONEYEXCEPTION_CSTRING("Unknown payee");
 }
 
 MyMoneyPayee MyMoneyFile::payeeByName(const QString& name) const
