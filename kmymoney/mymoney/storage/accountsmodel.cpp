@@ -923,7 +923,7 @@ void AccountsModel::updateAccountBalances(const QHash<QString, MyMoneyMoney>& ba
   endResetModel();
 }
 
-void AccountsModel::addAccount(MyMoneyAccount& account)
+void AccountsModel::addItem(MyMoneyAccount& account)
 {
   auto parentIdx = indexById(account.parentAccountId());
   if (parentIdx.isValid()) {

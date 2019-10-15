@@ -1289,7 +1289,7 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
   // make sure the parent id is setup
   account.setParentAccountId(parent.id());
 
-  d->accountsModel.addAccount(account);
+  d->accountsModel.addItem(account);
 
   // d->m_storage->addAccount(account);
   d->m_changeSet += MyMoneyNotification(File::Mode::Add, account);
