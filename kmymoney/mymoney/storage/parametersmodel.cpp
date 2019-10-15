@@ -49,8 +49,8 @@ struct ParametersModel::Private
   Private() {}
 };
 
-ParametersModel::ParametersModel(QObject* parent)
-  : MyMoneyModel<ParameterItem>(parent, QStringLiteral("p"), ParametersModel::ID_SIZE)
+ParametersModel::ParametersModel(QObject* parent, QUndoStack* undoStack)
+  : MyMoneyModel<ParameterItem>(parent, QStringLiteral("p"), ParametersModel::ID_SIZE, undoStack)
   , d(new Private)
 {
   setObjectName(QLatin1String("ParametersModel"));

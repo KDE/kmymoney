@@ -55,8 +55,8 @@ struct SchedulesModel::Private
   SchedulesModel* q;
 };
 
-SchedulesModel::SchedulesModel(QObject* parent)
-  : MyMoneyModel<MyMoneySchedule>(parent, QStringLiteral("SCH"), SchedulesModel::ID_SIZE)
+SchedulesModel::SchedulesModel(QObject* parent, QUndoStack* undoStack)
+  : MyMoneyModel<MyMoneySchedule>(parent, QStringLiteral("SCH"), SchedulesModel::ID_SIZE, undoStack)
   , d(new Private(this))
 {
   setObjectName(QLatin1String("SchedulesModel"));

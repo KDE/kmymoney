@@ -38,8 +38,8 @@ struct CostCenterModel::Private
   Private() {}
 };
 
-CostCenterModel::CostCenterModel(QObject* parent)
-  : MyMoneyModel<MyMoneyCostCenter>(parent, QStringLiteral("C"), CostCenterModel::ID_SIZE)
+CostCenterModel::CostCenterModel(QObject* parent, QUndoStack* undoStack)
+  : MyMoneyModel<MyMoneyCostCenter>(parent, QStringLiteral("C"), CostCenterModel::ID_SIZE, undoStack)
   , d(new Private)
 {
   setObjectName(QLatin1String("CostCenterModel"));

@@ -38,8 +38,8 @@ struct TagsModel::Private
   Private() {}
 };
 
-TagsModel::TagsModel(QObject* parent)
-  : MyMoneyModel<MyMoneyTag>(parent, QStringLiteral("G"), TagsModel::ID_SIZE)
+TagsModel::TagsModel(QObject* parent, QUndoStack* undoStack)
+  : MyMoneyModel<MyMoneyTag>(parent, QStringLiteral("G"), TagsModel::ID_SIZE, undoStack)
   , d(new Private)
 {
   setObjectName(QLatin1String("TagsModel"));

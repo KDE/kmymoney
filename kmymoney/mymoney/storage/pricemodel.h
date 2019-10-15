@@ -38,6 +38,8 @@
 #include "mymoneymoney.h"
 #include "mymoneyprice.h"
 
+class QUndoStack;
+
 class PriceEntry : public MyMoneyPrice
 {
 public:
@@ -80,7 +82,7 @@ public:
     MaxColumns
   };
 
-  explicit PriceModel(QObject* parent = nullptr);
+  explicit PriceModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
   virtual ~PriceModel();
 
   static const int ID_SIZE = 18;

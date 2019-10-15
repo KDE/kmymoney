@@ -33,6 +33,7 @@
 
 #include "mymoneyaccount.h"
 
+class QUndoStack;
 /**
   */
 class KMM_MYMONEY_EXPORT AccountsModel : public MyMoneyModel<MyMoneyAccount>
@@ -62,7 +63,7 @@ public:
     Negative
   };
 
-  explicit AccountsModel(QObject* parent = 0);
+  explicit AccountsModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
   virtual ~AccountsModel();
 
   static const int ID_SIZE = 6;

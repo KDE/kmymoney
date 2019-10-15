@@ -85,8 +85,8 @@ struct InstitutionsModel::Private
 
 };
 
-InstitutionsModel::InstitutionsModel(AccountsModel* accountsModel, QObject* parent)
-  : MyMoneyModel<MyMoneyInstitution>(parent, QStringLiteral("I"), InstitutionsModel::ID_SIZE)
+InstitutionsModel::InstitutionsModel(AccountsModel* accountsModel, QObject* parent, QUndoStack* undoStack)
+  : MyMoneyModel<MyMoneyInstitution>(parent, QStringLiteral("I"), InstitutionsModel::ID_SIZE, undoStack)
   , d(new Private(this, parent))
 {
   d->accountsModel = accountsModel;

@@ -66,8 +66,8 @@ struct SecuritiesModel::Private
   QObject*            parentObject;
 };
 
-SecuritiesModel::SecuritiesModel(QObject* parent)
-  : MyMoneyModel<MyMoneySecurity>(parent, QStringLiteral("E"), SecuritiesModel::ID_SIZE)
+SecuritiesModel::SecuritiesModel(QObject* parent, QUndoStack* undoStack)
+  : MyMoneyModel<MyMoneySecurity>(parent, QStringLiteral("E"), SecuritiesModel::ID_SIZE, undoStack)
   , d(new Private(this, parent))
 {
   setObjectName(QLatin1String("SecuritiesModel"));

@@ -33,6 +33,7 @@
 
 #include "mymoneybudget.h"
 
+class QUndoStack;
 /**
   */
 class KMM_MYMONEY_EXPORT BudgetsModel : public MyMoneyModel<MyMoneyBudget>
@@ -45,7 +46,7 @@ public:
       Year
   };
 
-  explicit BudgetsModel(QObject* parent = 0);
+  explicit BudgetsModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
   ~BudgetsModel();
 
   static const int ID_SIZE = 6;

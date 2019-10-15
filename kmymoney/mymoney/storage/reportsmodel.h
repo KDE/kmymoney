@@ -33,6 +33,7 @@
 
 #include "mymoneyreport.h"
 
+class QUndoStack;
 /**
   */
 class KMM_MYMONEY_EXPORT ReportsModel : public MyMoneyModel<MyMoneyReport>
@@ -46,7 +47,7 @@ public:
     MaxColumns
   };
 
-  explicit ReportsModel(QObject* parent = 0);
+  explicit ReportsModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
   virtual ~ReportsModel();
 
   static const int ID_SIZE = 6;

@@ -252,8 +252,8 @@ QVariant JournalModelNewTransaction::data(const QModelIndex& idx, int role) cons
 
 
 
-JournalModel::JournalModel(QObject* parent)
-  : MyMoneyModel<JournalEntry>(parent, QStringLiteral("T"), JournalModel::ID_SIZE)
+JournalModel::JournalModel(QObject* parent, QUndoStack* undoStack)
+  : MyMoneyModel<JournalEntry>(parent, QStringLiteral("T"), JournalModel::ID_SIZE, undoStack)
   , d(new Private(this))
 {
   setObjectName(QLatin1String("JournalModel"));

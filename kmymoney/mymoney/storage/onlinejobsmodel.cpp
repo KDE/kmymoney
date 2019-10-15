@@ -40,8 +40,8 @@ struct OnlineJobsModel::Private
   Private() {}
 };
 
-OnlineJobsModel::OnlineJobsModel(QObject* parent)
-  : MyMoneyModel<onlineJob>(parent, QStringLiteral("O"), OnlineJobsModel::ID_SIZE)
+OnlineJobsModel::OnlineJobsModel(QObject* parent, QUndoStack* undoStack)
+  : MyMoneyModel<onlineJob>(parent, QStringLiteral("O"), OnlineJobsModel::ID_SIZE, undoStack)
   , d(new Private)
 {
   setObjectName(QLatin1String("OnlineJobsModel"));

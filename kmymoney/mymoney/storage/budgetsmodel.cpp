@@ -41,8 +41,8 @@ struct BudgetsModel::Private
 
 };
 
-BudgetsModel::BudgetsModel(QObject* parent)
-  : MyMoneyModel<MyMoneyBudget>(parent, QStringLiteral("B"), BudgetsModel::ID_SIZE)
+BudgetsModel::BudgetsModel(QObject* parent, QUndoStack* undoStack)
+  : MyMoneyModel<MyMoneyBudget>(parent, QStringLiteral("B"), BudgetsModel::ID_SIZE, undoStack)
   , d(new Private)
 {
   setObjectName(QLatin1String("BudgetsModel"));

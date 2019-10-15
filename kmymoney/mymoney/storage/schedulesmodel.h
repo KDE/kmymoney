@@ -33,6 +33,7 @@
 
 #include "mymoneyschedule.h"
 
+class QUndoStack;
 /**
   */
 class KMM_MYMONEY_EXPORT SchedulesModel : public MyMoneyModel<MyMoneySchedule>
@@ -54,7 +55,7 @@ public:
     } Columns;
   };
 
-  explicit SchedulesModel(QObject* parent = 0);
+  explicit SchedulesModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
   virtual ~SchedulesModel();
 
   static const int ID_SIZE = 6;

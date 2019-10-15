@@ -33,6 +33,7 @@
 
 #include "mymoneypayee.h"
 
+class QUndoStack;
 /**
   */
 class KMM_MYMONEY_EXPORT PayeesModel : public MyMoneyModel<MyMoneyPayee>
@@ -46,7 +47,7 @@ public:
     } Columns;
   };
 
-  explicit PayeesModel(QObject* parent = 0);
+  explicit PayeesModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
   ~PayeesModel();
 
   static const int ID_SIZE = 6;

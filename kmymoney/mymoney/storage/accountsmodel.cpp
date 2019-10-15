@@ -59,7 +59,6 @@ struct AccountsModel::Private
     , updateOnBalanceChange(true)
   {
     Q_Q(AccountsModel);
-    q->m_file = qobject_cast<MyMoneyFile*>(parent);
   }
 
   int loadSubAccounts(const QModelIndex parent, const QMap<QString, MyMoneyAccount>& list)
@@ -308,8 +307,8 @@ struct AccountsModel::Private
   QColor                          negativeScheme;
 };
 
-AccountsModel::AccountsModel(QObject* parent)
-  : MyMoneyModel<MyMoneyAccount>(parent, QStringLiteral("A"), AccountsModel::ID_SIZE)
+AccountsModel::AccountsModel(QObject* parent, QUndoStack* undoStack)
+  : MyMoneyModel<MyMoneyAccount>(parent, QStringLiteral("A"), AccountsModel::ID_SIZE, undoStack)
   , d(new Private(this, parent))
 {
   // validate that our assumptions about the order of the

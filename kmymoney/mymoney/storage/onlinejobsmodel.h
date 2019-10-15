@@ -33,6 +33,7 @@
 
 #include "onlinejob.h"
 
+class QUndoStack;
 /**
   */
 class KMM_MYMONEY_EXPORT OnlineJobsModel : public MyMoneyModel<onlineJob>
@@ -49,7 +50,7 @@ public:
     MaxColumns
   };
 
-  explicit OnlineJobsModel(QObject* parent = 0);
+  explicit OnlineJobsModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
   virtual ~OnlineJobsModel();
 
   static const int ID_SIZE = 6;

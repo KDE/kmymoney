@@ -30,6 +30,7 @@
 #include <QRegularExpression>
 #include <QDomDocument>
 #include <QDomElement>
+#include <QUndoStack>
 
 #include <QDebug>
 
@@ -161,9 +162,9 @@ template <typename T>
 class MyMoneyModel : public MyMoneyModelBase
 {
 public:
-  explicit MyMoneyModel(QObject* parent, const QString& idLeadin, quint8 idSize)
+  explicit MyMoneyModel(QObject* parent, const QString& idLeadin, quint8 idSize, QUndoStack* undoStack)
       : MyMoneyModelBase(parent)
-      , m_file(nullptr)
+      , m_undoStack(undoStack)
       , m_idToItemMapper(nullptr)
       , m_nextId(0)
       , m_idLeadin(idLeadin)
@@ -596,7 +597,7 @@ protected:
 
 protected:
   TreeItem<T> *                 m_rootItem;
-  MyMoneyFile*                  m_file;
+  QUndoStack*                   m_undoStack;
   QHash<QString, TreeItem<T>*>* m_idToItemMapper;
   quint64                       m_nextId;
   QString                       m_idLeadin;

@@ -33,6 +33,7 @@
 
 #include "mymoneycostcenter.h"
 
+class QUndoStack;
 /**
   */
 class KMM_MYMONEY_EXPORT CostCenterModel : public MyMoneyModel<MyMoneyCostCenter>
@@ -46,7 +47,7 @@ public:
     } Columns;
   };
 
-  explicit CostCenterModel(QObject* parent = 0);
+  explicit CostCenterModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
   virtual ~CostCenterModel();
 
   static const int ID_SIZE = 6;

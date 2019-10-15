@@ -39,6 +39,7 @@
 #include "mymoneymoney.h"
 
 class MyMoneyTransactionFilter;
+class QUndoStack;
 
 /**
  * The class representing a single journal entry (one split of a transaction)
@@ -96,7 +97,7 @@ public:
     MaxColumns
   };
 
-  explicit JournalModel(QObject* parent = nullptr);
+  explicit JournalModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
   virtual ~JournalModel();
 
   static const int ID_SIZE = 18;

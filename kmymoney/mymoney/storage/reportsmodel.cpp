@@ -37,8 +37,8 @@ struct ReportsModel::Private
   Private() {}
 };
 
-ReportsModel::ReportsModel(QObject* parent)
-  : MyMoneyModel<MyMoneyReport>(parent, QStringLiteral("R"), ReportsModel::ID_SIZE)
+ReportsModel::ReportsModel(QObject* parent, QUndoStack* undoStack)
+  : MyMoneyModel<MyMoneyReport>(parent, QStringLiteral("R"), ReportsModel::ID_SIZE, undoStack)
   , d(new Private)
 {
   setObjectName(QLatin1String("ReportsModel"));

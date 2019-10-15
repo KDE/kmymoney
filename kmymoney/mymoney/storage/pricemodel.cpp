@@ -61,8 +61,8 @@ struct PriceModel::Private
 
 
 
-PriceModel::PriceModel(QObject* parent)
-  : MyMoneyModel<PriceEntry>(parent, QStringLiteral("p"), PriceModel::ID_SIZE)
+PriceModel::PriceModel(QObject* parent, QUndoStack* undoStack)
+  : MyMoneyModel<PriceEntry>(parent, QStringLiteral("p"), PriceModel::ID_SIZE, undoStack)
   , d(new Private)
 {
   setObjectName(QLatin1String("PriceModel"));

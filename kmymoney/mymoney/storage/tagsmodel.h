@@ -33,6 +33,7 @@
 
 #include "mymoneytag.h"
 
+class QUndoStack;
 /**
   */
 class KMM_MYMONEY_EXPORT TagsModel : public MyMoneyModel<MyMoneyTag>
@@ -46,7 +47,7 @@ public:
     } Columns;
   };
 
-  explicit TagsModel(QObject* parent = 0);
+  explicit TagsModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
   virtual ~TagsModel();
 
   static const int ID_SIZE = 6;

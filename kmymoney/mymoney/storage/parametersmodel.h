@@ -32,6 +32,8 @@
 #include "kmm_mymoney_export.h"
 
 class ParametersModel;
+class QUndoStack;
+
 class KMM_MYMONEY_EXPORT  ParameterItem
 {
   friend ParametersModel;
@@ -60,7 +62,7 @@ public:
     } Columns;
   };
 
-  explicit ParametersModel(QObject* parent = 0);
+  explicit ParametersModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
   virtual ~ParametersModel();
 
   static const int ID_SIZE = 6;

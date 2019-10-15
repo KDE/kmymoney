@@ -33,6 +33,7 @@
 
 #include "mymoneysecurity.h"
 
+class QUndoStack;
 /**
   */
 class KMM_MYMONEY_EXPORT SecuritiesModel : public MyMoneyModel<MyMoneySecurity>
@@ -52,7 +53,7 @@ public:
   };
 
 
-  explicit SecuritiesModel(QObject* parent = 0);
+  explicit SecuritiesModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
   virtual ~SecuritiesModel();
 
   static const int ID_SIZE = 6;

@@ -40,8 +40,8 @@ struct PayeesModel::Private
 
 };
 
-PayeesModel::PayeesModel(QObject* parent)
-  : MyMoneyModel<MyMoneyPayee>(parent, QStringLiteral("P"), PayeesModel::ID_SIZE)
+PayeesModel::PayeesModel(QObject* parent, QUndoStack* undoStack)
+  : MyMoneyModel<MyMoneyPayee>(parent, QStringLiteral("P"), PayeesModel::ID_SIZE, undoStack)
   , d(new Private)
 {
   setObjectName(QLatin1String("PayeesModel"));

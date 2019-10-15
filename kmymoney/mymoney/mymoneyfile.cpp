@@ -180,21 +180,21 @@ public:
     : m_file(qq)
     , m_dirty(false)
     , m_inTransaction(false)
-    , payeesModel(qq)
-    , userModel(qq)
-    , costCenterModel(qq)
-    , schedulesModel(qq)
-    , tagsModel(qq)
-    , securitiesModel(qq)
-    , currenciesModel(qq)
-    , budgetsModel(qq)
-    , accountsModel(qq)
-    , institutionsModel(&accountsModel, qq)
-    , journalModel(qq)
-    , priceModel(qq)
-    , parametersModel(qq)
-    , onlineJobsModel(qq)
-    , reportsModel(qq)
+    , payeesModel(qq, &undoStack)
+    , userModel(qq, &undoStack)
+    , costCenterModel(qq, &undoStack)
+    , schedulesModel(qq, &undoStack)
+    , tagsModel(qq, &undoStack)
+    , securitiesModel(qq, &undoStack)
+    , currenciesModel(qq, &undoStack)
+    , budgetsModel(qq, &undoStack)
+    , accountsModel(qq, &undoStack)
+    , institutionsModel(&accountsModel, qq, &undoStack)
+    , journalModel(qq, &undoStack)
+    , priceModel(qq, &undoStack)
+    , parametersModel(qq, &undoStack)
+    , onlineJobsModel(qq, &undoStack)
+    , reportsModel(qq, &undoStack)
     /// @note add new models here
     {
 #ifdef KMM_MODELTEST
@@ -373,6 +373,9 @@ public:
     * or removed.
     */
   QList<MyMoneyNotification> m_changeSet;
+
+  // the engine's undo stack
+  QUndoStack          undoStack;
 
   /**
    * The various models

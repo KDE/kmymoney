@@ -36,6 +36,7 @@
 
 class AccountsModel;
 class QColor;
+class QUndoStack;
 /**
   */
 class KMM_MYMONEY_EXPORT InstitutionsModel : public MyMoneyModel<MyMoneyInstitution>
@@ -59,7 +60,7 @@ public:
   };
 
 
-  explicit InstitutionsModel(AccountsModel* accountsModel, QObject* parent = 0);
+  explicit InstitutionsModel(AccountsModel* accountsModel, QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
   virtual ~InstitutionsModel();
 
   static const int ID_SIZE = 6;
