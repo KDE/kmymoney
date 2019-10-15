@@ -45,6 +45,8 @@
 
 #include "kmm_models_export.h"
 
+#include "undocommand.h"
+
 class MyMoneyFile;
 
 template <typename T>
@@ -161,6 +163,8 @@ private:
 template <typename T>
 class MyMoneyModel : public MyMoneyModelBase
 {
+  friend class UndoCommand<T>;
+
 public:
   explicit MyMoneyModel(QObject* parent, const QString& idLeadin, quint8 idSize, QUndoStack* undoStack)
       : MyMoneyModelBase(parent)
