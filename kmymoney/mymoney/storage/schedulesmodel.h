@@ -66,9 +66,6 @@ public:
 
   bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
 
-  // the old interface which may be deprecated at some point in time
-  void addItem(MyMoneySchedule& schedule);
-
   /// @todo simplify this to a QList<MyMoneySchedule> scheduleList() which returns
   /// all schedules and move the filtering into a specific QSortFilterProxyModel.
   /// For now, we keep this as it is and leave it for another day
@@ -92,6 +89,8 @@ public:
 
   void load(const QMap<QString, MyMoneySchedule>& list);
 
+protected:
+  void doAddItem(MyMoneySchedule& schedule) override;
 
 public Q_SLOTS:
 

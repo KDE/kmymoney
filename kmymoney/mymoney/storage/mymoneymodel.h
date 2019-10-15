@@ -515,31 +515,20 @@ public:
 
   void addItem(T& item)
   {
-    const int row = rowCount();
-    insertRows(row, 1);
-    const QModelIndex idx = index(row, 0);
     // assign an ID and store the object and
     // make sure the caller receives the assigned ID
     item = T(nextId(), item);
-    static_cast<TreeItem<T>*>(idx.internalPointer())->dataRef() = item;
-    if (m_idToItemMapper) {
-      m_idToItemMapper->insert(item.id(), static_cast<TreeItem<T>*>(idx.internalPointer()));
-    }
-    setDirty();
-    emit dataChanged(idx, index(row, columnCount()-1));
+
+    /// @todo create undoStack item here and remove call to doAddItem
+    ///       which would then be performed by m_undoStack->push()
+    doAddItem(item);
   }
 
   void modifyItem(const QModelIndex& idx, const T& item)
   {
-    if (idx.isValid()) {
-      if (m_idToItemMapper) {
-        m_idToItemMapper->remove(static_cast<const TreeItem<T>*>(idx.internalPointer())->constDataRef().id());
-        m_idToItemMapper->insert(item.id(), static_cast<TreeItem<T>*>(idx.internalPointer()));
-      }
-      static_cast<TreeItem<T>*>(idx.internalPointer())->dataRef() = item;
-      setDirty();
-      emit dataChanged(idx, index(idx.row(), columnCount(idx.parent())-1));
-    }
+    /// @todo create undoStack item here and remove call to doModifyItem
+    ///       which would then be performed by m_undoStack->push()
+    doModifyItem(idx, item);
   }
 
   void modifyItem(const T& item)
@@ -549,10 +538,9 @@ public:
 
   void removeItem(const QModelIndex& idx)
   {
-    if (idx.isValid()) {
-      removeRow(idx.row(), idx.parent());
-      setDirty();
-    }
+    /// @todo create undoStack item here and remove call to doRemoveItem
+    ///       which would then be performed by m_undoStack->push()
+    doRemoveItem(idx);
   }
 
   void removeItem(const T& item)
@@ -571,6 +559,40 @@ public:
 
 
 protected:
+  virtual void doAddItem(T& item)
+  {
+    const int row = rowCount();
+    insertRows(row, 1);
+    const QModelIndex idx = index(row, 0);
+    static_cast<TreeItem<T>*>(idx.internalPointer())->dataRef() = item;
+    if (m_idToItemMapper) {
+      m_idToItemMapper->insert(item.id(), static_cast<TreeItem<T>*>(idx.internalPointer()));
+    }
+    setDirty();
+    emit dataChanged(idx, index(row, columnCount()-1));
+  }
+
+  virtual void doModifyItem(const QModelIndex& idx, const T& item)
+  {
+    if (idx.isValid()) {
+      if (m_idToItemMapper) {
+        m_idToItemMapper->remove(static_cast<const TreeItem<T>*>(idx.internalPointer())->constDataRef().id());
+        m_idToItemMapper->insert(item.id(), static_cast<TreeItem<T>*>(idx.internalPointer()));
+      }
+      static_cast<TreeItem<T>*>(idx.internalPointer())->dataRef() = item;
+      setDirty();
+      emit dataChanged(idx, index(idx.row(), columnCount(idx.parent())-1));
+    }
+  }
+
+  virtual void doRemoveItem(const QModelIndex& idx)
+  {
+    if (idx.isValid()) {
+      removeRow(idx.row(), idx.parent());
+      setDirty();
+    }
+  }
+
   virtual void clearModelItems()
   {
     // get rid of any existing entries should they exist

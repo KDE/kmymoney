@@ -218,7 +218,7 @@ void SchedulesModel::load(const QMap<QString, MyMoneySchedule>& list)
   endResetModel();
 }
 
-void SchedulesModel::addItem(MyMoneySchedule& schedule)
+void SchedulesModel::doAddItem(MyMoneySchedule& schedule)
 {
   if (schedule.type() == eMyMoney::Schedule::Type::Any) {
     qDebug() << "Schedule to be added has no type. Rejected.";
@@ -230,9 +230,6 @@ void SchedulesModel::addItem(MyMoneySchedule& schedule)
   const int row = rowCount(group);
   insertRows(row, 1, group);
   const QModelIndex idx = index(row, 0, group);
-  // assign an ID and store the object and
-  // make sure the caller receives the assigned ID
-  schedule = MyMoneySchedule(nextId(), schedule);
   static_cast<TreeItem<MyMoneySchedule>*>(idx.internalPointer())->dataRef() = schedule;
 
   setDirty();
