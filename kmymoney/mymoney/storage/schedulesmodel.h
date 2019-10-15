@@ -90,7 +90,8 @@ public:
   void load(const QMap<QString, MyMoneySchedule>& list);
 
 protected:
-  void doAddItem(MyMoneySchedule& schedule) override;
+  void clearModelItems() override;
+  void doAddItem(MyMoneySchedule& schedule, const QModelIndex& parentIdx = QModelIndex()) override;
 
 public Q_SLOTS:
 

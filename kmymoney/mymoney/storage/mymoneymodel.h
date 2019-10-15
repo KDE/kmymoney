@@ -559,17 +559,17 @@ public:
 
 
 protected:
-  virtual void doAddItem(T& item)
+  virtual void doAddItem(T& item, const QModelIndex& parentIdx = QModelIndex())
   {
-    const int row = rowCount();
-    insertRows(row, 1);
-    const QModelIndex idx = index(row, 0);
+    const int row = rowCount(parentIdx);
+    insertRows(row, 1, parentIdx);
+    const QModelIndex idx = index(row, 0, parentIdx);
     static_cast<TreeItem<T>*>(idx.internalPointer())->dataRef() = item;
     if (m_idToItemMapper) {
       m_idToItemMapper->insert(item.id(), static_cast<TreeItem<T>*>(idx.internalPointer()));
     }
     setDirty();
-    emit dataChanged(idx, index(row, columnCount()-1));
+    emit dataChanged(idx, index(row, columnCount()-1, parentIdx));
   }
 
   virtual void doModifyItem(const QModelIndex& idx, const T& item)

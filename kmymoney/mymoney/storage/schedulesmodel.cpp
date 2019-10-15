@@ -60,10 +60,33 @@ SchedulesModel::SchedulesModel(QObject* parent, QUndoStack* undoStack)
   , d(new Private(this))
 {
   setObjectName(QLatin1String("SchedulesModel"));
+  // force creation of group entries
+  unload();
 }
 
 SchedulesModel::~SchedulesModel()
 {
+}
+
+void SchedulesModel::clearModelItems()
+{
+  const QVector<QPair<eMyMoney::Schedule::Type, QString>> types = {
+    { eMyMoney::Schedule::Type::Bill, i18n("Bills") },
+    { eMyMoney::Schedule::Type::Deposit, i18n("Deposits") },
+    { eMyMoney::Schedule::Type::Transfer, i18n("Transfers") },
+    { eMyMoney::Schedule::Type::LoanPayment, i18n("Loans") }
+  };
+  MyMoneyModel<MyMoneySchedule>::clearModelItems();
+
+  // create the type entries
+  insertRows(0, types.count());
+  int row = 0;
+  foreach(auto type, types) {
+    auto idx = index(row, 0);
+    setData(idx, static_cast<int>(type.first), eMyMoney::Model::Roles::ScheduleTypeRole);
+    setData(idx, type.second);
+    ++row;
+  }
 }
 
 int SchedulesModel::columnCount(const QModelIndex& parent) const
@@ -172,25 +195,9 @@ bool SchedulesModel::setData(const QModelIndex& index, const QVariant& value, in
 
 void SchedulesModel::load(const QMap<QString, MyMoneySchedule>& list)
 {
-  const QVector<QPair<eMyMoney::Schedule::Type, QString>> types = {
-    { eMyMoney::Schedule::Type::Bill, i18n("Bills") },
-    { eMyMoney::Schedule::Type::Deposit, i18n("Deposits") },
-    { eMyMoney::Schedule::Type::Transfer, i18n("Transfers") },
-    { eMyMoney::Schedule::Type::LoanPayment, i18n("Loans") }
-  };
-
   beginResetModel();
   clearModelItems();
 
-  // create the type entries
-  insertRows(0, types.count());
-  int row = 0;
-  foreach(auto type, types) {
-    auto idx = index(row, 0);
-    setData(idx, static_cast<int>(type.first), eMyMoney::Model::Roles::ScheduleTypeRole);
-    setData(idx, type.second);
-    ++row;
-  }
   m_nextId = 0;
 
   QRegularExpression exp(QStringLiteral("^%1(\\d+)$").arg(m_idLeadin));
@@ -218,7 +225,7 @@ void SchedulesModel::load(const QMap<QString, MyMoneySchedule>& list)
   endResetModel();
 }
 
-void SchedulesModel::doAddItem(MyMoneySchedule& schedule)
+void SchedulesModel::doAddItem(MyMoneySchedule& schedule, const QModelIndex& parentIdx)
 {
   if (schedule.type() == eMyMoney::Schedule::Type::Any) {
     qDebug() << "Schedule to be added has no type. Rejected.";
@@ -227,13 +234,17 @@ void SchedulesModel::doAddItem(MyMoneySchedule& schedule)
 
   QModelIndex group = d->indexByType(schedule.type());
 
+  if (group.isValid()) {
+    MyMoneyModel::doAddItem(schedule, group);
+  }
+#if 0
   const int row = rowCount(group);
   insertRows(row, 1, group);
   const QModelIndex idx = index(row, 0, group);
-  static_cast<TreeItem<MyMoneySchedule>*>(idx.internalPointer())->dataRef() = schedule;
-
+  static_cast<TreeItem<MyMoneySchedule>*>(idx.internalPointer())->dataRef() = sch
   setDirty();
   emit dataChanged(idx, index(row, columnCount(group)-1, group));
+#endif
 }
 
 QList<MyMoneySchedule> SchedulesModel::scheduleList(const QString& accountId,
