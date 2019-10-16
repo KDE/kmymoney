@@ -167,13 +167,9 @@ class MyMoneyModel : public MyMoneyModelBase
 
 public:
   explicit MyMoneyModel(QObject* parent, const QString& idLeadin, quint8 idSize, QUndoStack* undoStack)
-      : MyMoneyModelBase(parent)
+      : MyMoneyModelBase(parent, idLeadin, idSize)
       , m_undoStack(undoStack)
       , m_idToItemMapper(nullptr)
-      , m_nextId(0)
-      , m_idLeadin(idLeadin)
-      , m_idSize(idSize)
-      , m_dirty(false)
       , m_idMatchExp(QStringLiteral("^%1(\\d+)$").arg(m_idLeadin))
   {
     m_rootItem = new TreeItem<T>(T());
@@ -373,6 +369,7 @@ public:
     return index(row, 0);
   }
 
+  /// @todo possibly move to base class
   virtual QModelIndex indexById(const QString& id) const
   {
     if (m_idToItemMapper) {
@@ -400,29 +397,10 @@ public:
     return itemByIndex(indexById(id));
   }
 
-  QString peekNextId()
-  {
-    return QString("%1%2").arg(m_idLeadin).arg(m_nextId+1, m_idSize, 10, QLatin1Char('0'));
-  }
-
-  QString nextId()
-  {
-    return QString("%1%2").arg(m_idLeadin).arg(++m_nextId, m_idSize, 10, QLatin1Char('0'));
-  }
-
-  void setDirty(bool dirty = true)
-  {
-    m_dirty = dirty;
-  }
-
-  bool isDirty() const
-  {
-    return m_dirty;
-  }
-
   /**
     * clears all objects currently in the model
     */
+  /// @todo possibly move to base class
   void unload()
   {
     beginResetModel();
@@ -482,6 +460,7 @@ public:
   };
 
 
+  /// @todo possibly move to base class
   virtual int processItems(Worker *worker)
   {
     return processItems(worker, match(index(0, 0), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive));
@@ -589,6 +568,7 @@ protected:
     }
   }
 
+  /// @todo possibly move to base class
   virtual void doRemoveItem(const QModelIndex& idx)
   {
     if (idx.isValid()) {
@@ -610,6 +590,7 @@ protected:
     }
   }
 
+  /// @todo possibly move to base class
   virtual void updateNextObjectId(const QString& id)
   {
     QRegularExpressionMatch m = m_idMatchExp.match(id);
@@ -625,10 +606,6 @@ protected:
   TreeItem<T> *                 m_rootItem;
   QUndoStack*                   m_undoStack;
   QHash<QString, TreeItem<T>*>* m_idToItemMapper;
-  quint64                       m_nextId;
-  QString                       m_idLeadin;
-  quint8                        m_idSize;
-  bool                          m_dirty;
   QRegularExpression            m_idMatchExp;
 };
 

@@ -37,7 +37,7 @@ class KMM_MODELS_EXPORT MyMoneyModelBase : public QAbstractItemModel
 {
   Q_OBJECT
 public:
-  explicit MyMoneyModelBase(QObject* parent);
+  explicit MyMoneyModelBase(QObject* parent, const QString& idLeadin, quint8 idSize);
   virtual ~MyMoneyModelBase();
 
   /**
@@ -82,8 +82,21 @@ public:
    */
   static QModelIndex mapFromBaseSource(QAbstractItemModel* proxyModel, const QModelIndex& idx);
 
+  void setDirty(bool dirty = true);
+  bool isDirty() const;
+  QString peekNextId() const;
+
+protected:
+  QString nextId();
+
 Q_SIGNALS:
   void modelLoaded() const;
+
+protected:
+  quint64                       m_nextId;
+  QString                       m_idLeadin;
+  quint8                        m_idSize;
+  bool                          m_dirty;
 
 };
 

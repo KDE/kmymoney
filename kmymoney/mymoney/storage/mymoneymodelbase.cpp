@@ -33,9 +33,13 @@
 // Project Includes
 
 
-MyMoneyModelBase::MyMoneyModelBase(QObject* parent)
+MyMoneyModelBase::MyMoneyModelBase(QObject* parent, const QString& idLeadin, quint8 idSize)
   : QAbstractItemModel(parent)
-{
+  , m_nextId(0)
+  , m_idLeadin(idLeadin)
+  , m_idSize(idSize)
+  , m_dirty(false)
+  {
 }
 
 MyMoneyModelBase::~MyMoneyModelBase()
@@ -107,3 +111,24 @@ QModelIndex MyMoneyModelBase::upperBound(const QString& id) const
 {
   return upperBound(id, 0, rowCount()-1);
 }
+
+QString MyMoneyModelBase::peekNextId() const
+{
+  return QString("%1%2").arg(m_idLeadin).arg(m_nextId+1, m_idSize, 10, QLatin1Char('0'));
+}
+
+QString MyMoneyModelBase::nextId()
+{
+  return QString("%1%2").arg(m_idLeadin).arg(++m_nextId, m_idSize, 10, QLatin1Char('0'));
+}
+
+void MyMoneyModelBase::setDirty(bool dirty)
+{
+  m_dirty = dirty;
+}
+
+bool MyMoneyModelBase::isDirty() const
+{
+  return m_dirty;
+}
+
