@@ -142,6 +142,8 @@ protected:
 
   int processItems(Worker *worker) override;
 
+  MyMoneyModel<MyMoneyAccount>::Operation undoOperation(const MyMoneyAccount& before, const MyMoneyAccount& after) const override;
+
 public Q_SLOTS:
   void setupAccountFractions();
   void updateAccountBalances(const QHash<QString, MyMoneyMoney>& balances);

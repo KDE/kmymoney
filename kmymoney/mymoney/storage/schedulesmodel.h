@@ -91,7 +91,7 @@ public:
 
 protected:
   void clearModelItems() override;
-  void doAddItem(MyMoneySchedule& schedule, const QModelIndex& parentIdx = QModelIndex()) override;
+  void doAddItem(const MyMoneySchedule& schedule, const QModelIndex& parentIdx = QModelIndex()) override;
 
 public Q_SLOTS:
 

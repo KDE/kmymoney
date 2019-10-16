@@ -225,7 +225,7 @@ void SchedulesModel::load(const QMap<QString, MyMoneySchedule>& list)
   endResetModel();
 }
 
-void SchedulesModel::doAddItem(MyMoneySchedule& schedule, const QModelIndex& parentIdx)
+void SchedulesModel::doAddItem(const MyMoneySchedule& schedule, const QModelIndex& parentIdx)
 {
   if (schedule.type() == eMyMoney::Schedule::Type::Any) {
     qDebug() << "Schedule to be added has no type. Rejected.";

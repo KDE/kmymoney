@@ -693,7 +693,7 @@ void MyMoneyFile::modifyInstitution(const MyMoneyInstitution& institution)
     throw MYMONEYEXCEPTION_CSTRING("Unknown institution");
   }
 
-  d->institutionsModel.modifyItem(idx, institution);
+  d->institutionsModel.modifyItem(institution);
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, institution);
 }
 
@@ -865,7 +865,7 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
     }
   }
 
-  d->accountsModel.modifyItem(idx, account);
+  d->accountsModel.modifyItem(account);
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, account);
 }
 

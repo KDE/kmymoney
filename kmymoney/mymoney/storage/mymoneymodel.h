@@ -45,8 +45,6 @@
 
 #include "kmm_models_export.h"
 
-#include "undocommand.h"
-
 class MyMoneyFile;
 
 template <typename T>
@@ -159,13 +157,55 @@ private:
 };
 
 
-
 template <typename T>
 class MyMoneyModel : public MyMoneyModelBase
 {
-  friend class UndoCommand<T>;
-
 public:
+  enum Operation {
+    Invalid,
+    Add,
+    Modify,
+    Remove,
+    Reparent
+  };
+
+  /**
+   * This class represents an undo command within the MyMoney Engine
+   *
+   * @author Thomas Baumgart
+   */
+  class UndoCommand : public QUndoCommand
+  {
+  public:
+    // construction/destruction
+
+    explicit UndoCommand(MyMoneyModel<T>* model, const T& before, const T& after, QUndoCommand* parent = nullptr)
+    : QUndoCommand(parent)
+    , m_model(model)
+    , m_before(before)
+    , m_after(after)
+    {
+    }
+
+    void redo() override
+    {
+      m_model->redo(m_before, m_after);
+    }
+
+    void undo() override
+    {
+      m_model->undo(m_before, m_after);
+    }
+
+
+  protected:
+    MyMoneyModel<T>*    m_model;
+    T                   m_before;
+    T                   m_after;
+  };
+
+
+
   explicit MyMoneyModel(QObject* parent, const QString& idLeadin, quint8 idSize, QUndoStack* undoStack)
       : MyMoneyModelBase(parent, idLeadin, idSize)
       , m_undoStack(undoStack)
@@ -502,33 +542,25 @@ public:
     // make sure the caller receives the assigned ID
     item = T(nextId(), item);
 
-    /// @todo create undoStack item here and remove call to doAddItem
-    ///       which would then be performed by m_undoStack->push()
-    doAddItem(item);
-  }
-
-  void modifyItem(const QModelIndex& idx, const T& item)
-  {
-    /// @todo create undoStack item here and remove call to doModifyItem
-    ///       which would then be performed by m_undoStack->push()
-    doModifyItem(idx, item);
+    m_undoStack->push(new UndoCommand(this, T(), item));
   }
 
   void modifyItem(const T& item)
   {
-    modifyItem(indexById(item.id()), item);
-  }
-
-  void removeItem(const QModelIndex& idx)
-  {
-    /// @todo create undoStack item here and remove call to doRemoveItem
-    ///       which would then be performed by m_undoStack->push()
-    doRemoveItem(idx);
+    const auto idx = indexById(item.id());
+    if (idx.isValid()) {
+      const auto currentItem = itemByIndex(idx);
+      m_undoStack->push(new UndoCommand(this, currentItem, item));
+    }
   }
 
   void removeItem(const T& item)
   {
-    removeItem(indexById(item.id()));
+    const auto idx = indexById(item.id());
+    if (idx.isValid()) {
+      const auto currentItem = itemByIndex(idx);
+      m_undoStack->push(new UndoCommand(this, currentItem, T()));
+    }
   }
 
   T itemByName(const QString& name, const QModelIndex parent = QModelIndex()) const
@@ -542,7 +574,81 @@ public:
 
 
 protected:
-  virtual void doAddItem(T& item, const QModelIndex& parentIdx = QModelIndex())
+  // determine for which type we were created:
+  //
+  // a) add item: m_after.id() is filled, m_before.id() is empty
+  // b) modify item: m_after.id() is filled, m_before.id() is filled
+  // c) add item: m_after.id() is empty, m_before.id() is filled
+  virtual Operation undoOperation(const T& before, const T& after) const
+  {
+    const auto afterIdEmpty = after.id().isEmpty();
+    const auto beforeIdEmpty = before.id().isEmpty();
+    if (!afterIdEmpty && beforeIdEmpty)
+      return Add;
+    if (!afterIdEmpty && !beforeIdEmpty)
+      return Modify;
+    if (afterIdEmpty && !beforeIdEmpty)
+      return Remove;
+    return Invalid;
+  }
+
+  virtual void redo(const T& before, const T& after)
+  {
+    QModelIndex idx;
+    switch(undoOperation(before, after)) {
+      case Add:
+        doAddItem(after);
+        break;
+      case Modify:
+        idx = indexById(after.id());
+        if (idx.isValid()) {
+          doModifyItem(idx, after);
+        }
+        break;
+      case Remove:
+        idx = indexById(before.id());
+        if (idx.isValid()) {
+          doRemoveItem(idx);
+        }
+        break;
+      case Reparent:
+        break;
+      case Invalid:
+        qDebug() << "Invalid operation in redo";
+        break;
+    }
+  }
+
+  virtual void undo(const T& before, const T& after)
+  {
+    QModelIndex idx;
+    switch(undoOperation(before, after)) {
+      case Add:
+        idx = indexById(after.id());
+        if (idx.isValid()) {
+          doRemoveItem(idx);
+        }
+        break;
+      case Modify:
+        idx = indexById(before.id());
+        if (idx.isValid()) {
+          doModifyItem(idx, before);
+        }
+        break;
+      case Remove:
+        doAddItem(before);
+        break;
+      case Reparent:
+        break;
+      case Invalid:
+        qDebug() << "Invalid operation in undo";
+        break;
+    }
+  }
+
+
+
+  virtual void doAddItem(const T& item, const QModelIndex& parentIdx = QModelIndex())
   {
     const int row = rowCount(parentIdx);
     insertRows(row, 1, parentIdx);
@@ -568,10 +674,12 @@ protected:
     }
   }
 
-  /// @todo possibly move to base class
   virtual void doRemoveItem(const QModelIndex& idx)
   {
     if (idx.isValid()) {
+      if (m_idToItemMapper) {
+        m_idToItemMapper->remove(static_cast<const TreeItem<T>*>(idx.internalPointer())->constDataRef().id());
+      }
       removeRow(idx.row(), idx.parent());
       setDirty();
     }

@@ -969,3 +969,12 @@ void AccountsModel::reparentAccount(const QString& accountId, const QString& new
   emit dataChanged(accountIdx, accountIdx);
 }
 
+MyMoneyModel<MyMoneyAccount>::Operation AccountsModel::undoOperation(const MyMoneyAccount& before, const MyMoneyAccount& after) const
+{
+  Operation op = MyMoneyModel::undoOperation(before, after);
+  if (op == Modify) {
+    if (before.parentAccountId() != after.parentAccountId())
+      op = Reparent;
+  }
+  return op;
+}
