@@ -142,7 +142,9 @@ protected:
 
   int processItems(Worker *worker) override;
 
+  virtual void doAddItem(const MyMoneyAccount& item, const QModelIndex& parentIdx = QModelIndex()) override;
   MyMoneyModel<MyMoneyAccount>::Operation undoOperation(const MyMoneyAccount& before, const MyMoneyAccount& after) const override;
+  void doReparentItem(const MyMoneyAccount& before, const MyMoneyAccount& after) override;
 
 public Q_SLOTS:
   void setupAccountFractions();

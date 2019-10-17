@@ -608,6 +608,7 @@ protected:
         }
         break;
       case Reparent:
+        doReparentItem(before, after);
         break;
       case Invalid:
         qDebug() << "Invalid operation in redo";
@@ -635,14 +636,13 @@ protected:
         doAddItem(before);
         break;
       case Reparent:
+        doReparentItem(after, before);
         break;
       case Invalid:
         qDebug() << "Invalid operation in undo";
         break;
     }
   }
-
-
 
   virtual void doAddItem(const T& item, const QModelIndex& parentIdx = QModelIndex())
   {
@@ -679,6 +679,12 @@ protected:
       removeRow(idx.row(), idx.parent());
       setDirty();
     }
+  }
+
+  virtual void doReparentItem(const T& before, const T& after)
+  {
+    Q_UNUSED(before);
+    Q_UNUSED(after);
   }
 
   virtual void clearModelItems()

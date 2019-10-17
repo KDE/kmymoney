@@ -928,11 +928,14 @@ void AccountsModel::addItem(MyMoneyAccount& account)
   auto parentIdx = indexById(account.parentAccountId());
   if (parentIdx.isValid()) {
     account = MyMoneyAccount(nextId(), account);
-
-    /// @todo create undoStack item here and remove call to doAddItem
-    ///       which would then be performed by m_undoStack->push()
-    doAddItem(account, parentIdx);
+    m_undoStack->push(new UndoCommand(this, MyMoneyAccount(), account));
   }
+}
+
+void AccountsModel::doAddItem(const MyMoneyAccount& item, const QModelIndex& parentIdx)
+{
+  Q_UNUSED(parentIdx);
+  MyMoneyModel::doAddItem(item, indexById(item.parentAccountId()));
 }
 
 QModelIndexList AccountsModel::accountsWithoutInstitutions() const
@@ -944,30 +947,39 @@ QModelIndexList AccountsModel::accountsWithoutInstitutions() const
 void AccountsModel::reparentAccount(const QString& accountId, const QString& newParentId)
 {
   QModelIndex accountIdx = indexById(accountId);
-  QModelIndex parentIdx = accountIdx.parent();
 
   // keep the account data
   MyMoneyAccount account = static_cast<TreeItem<MyMoneyAccount>*>(accountIdx.internalPointer())->dataRef();
+  // setup new parent
+  MyMoneyAccount newAccount(account);
+  newAccount.setParentAccountId(newParentId);
+
+  m_undoStack->push(new UndoCommand(this, account, newAccount));
+}
+
+void AccountsModel::doReparentItem(const MyMoneyAccount& before, const MyMoneyAccount& after)
+{
+  QModelIndex accountIdx = indexById(before.id());
+  QModelIndex parentIdx = accountIdx.parent();
 
   // remove from old parent (in object and model)
-  static_cast<TreeItem<MyMoneyAccount>*>(parentIdx.internalPointer())->dataRef().removeAccountId(accountId);
+  static_cast<TreeItem<MyMoneyAccount>*>(parentIdx.internalPointer())->dataRef().removeAccountId(before.id());
   removeRow(accountIdx.row(), parentIdx);
 
-  // add to new parent
-  account.setParentAccountId(newParentId);
-  parentIdx = indexById(newParentId);
-  static_cast<TreeItem<MyMoneyAccount>*>(parentIdx.internalPointer())->dataRef().addAccountId(accountId);
+  parentIdx = indexById(after.parentAccountId());
+  static_cast<TreeItem<MyMoneyAccount>*>(parentIdx.internalPointer())->dataRef().addAccountId(before.id());
   auto rows = rowCount(parentIdx);
   insertRow(rows, parentIdx);
   accountIdx = index(rows, 0, parentIdx);
-  static_cast<TreeItem<MyMoneyAccount>*>(accountIdx.internalPointer())->dataRef() = account;
+  static_cast<TreeItem<MyMoneyAccount>*>(accountIdx.internalPointer())->dataRef() = after;
 
   // and update new location in idToItemMapper
   if (m_idToItemMapper) {
-    m_idToItemMapper->insert(accountId, static_cast<TreeItem<MyMoneyAccount>*>(accountIdx.internalPointer()));
+    m_idToItemMapper->insert(before.id(), static_cast<TreeItem<MyMoneyAccount>*>(accountIdx.internalPointer()));
   }
   emit dataChanged(accountIdx, accountIdx);
 }
+
 
 MyMoneyModel<MyMoneyAccount>::Operation AccountsModel::undoOperation(const MyMoneyAccount& before, const MyMoneyAccount& after) const
 {
