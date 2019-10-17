@@ -23,6 +23,7 @@
 // Qt Includes
 
 #include <QAbstractItemModel>
+#include <QRegularExpression>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -89,6 +90,8 @@ public:
 protected:
   QString nextId();
 
+  virtual void updateNextObjectId(const QString& id);
+
 Q_SIGNALS:
   void modelLoaded() const;
 
@@ -97,7 +100,7 @@ protected:
   QString                       m_idLeadin;
   quint8                        m_idSize;
   bool                          m_dirty;
-
+  QRegularExpression            m_idMatchExp;
 };
 
 #endif // MYMONEYMODELBASE_H

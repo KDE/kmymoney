@@ -39,7 +39,8 @@ MyMoneyModelBase::MyMoneyModelBase(QObject* parent, const QString& idLeadin, qui
   , m_idLeadin(idLeadin)
   , m_idSize(idSize)
   , m_dirty(false)
-  {
+  , m_idMatchExp(QStringLiteral("^%1(\\d+)$").arg(m_idLeadin))
+{
 }
 
 MyMoneyModelBase::~MyMoneyModelBase()
@@ -121,6 +122,18 @@ QString MyMoneyModelBase::nextId()
 {
   return QString("%1%2").arg(m_idLeadin).arg(++m_nextId, m_idSize, 10, QLatin1Char('0'));
 }
+
+void MyMoneyModelBase::updateNextObjectId(const QString& id)
+{
+  QRegularExpressionMatch m = m_idMatchExp.match(id);
+  if (m.hasMatch()) {
+    const quint64 itemId = m.captured(1).toUInt();
+    if (itemId > m_nextId) {
+      m_nextId = itemId;
+    }
+  }
+}
+
 
 void MyMoneyModelBase::setDirty(bool dirty)
 {

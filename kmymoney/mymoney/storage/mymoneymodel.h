@@ -27,7 +27,6 @@
 #include <QSharedDataPointer>
 #include <QVariant>
 #include <QModelIndex>
-#include <QRegularExpression>
 #include <QDomDocument>
 #include <QDomElement>
 #include <QUndoStack>
@@ -210,7 +209,6 @@ public:
       : MyMoneyModelBase(parent, idLeadin, idSize)
       , m_undoStack(undoStack)
       , m_idToItemMapper(nullptr)
-      , m_idMatchExp(QStringLiteral("^%1(\\d+)$").arg(m_idLeadin))
   {
     m_rootItem = new TreeItem<T>(T());
   }
@@ -409,7 +407,6 @@ public:
     return index(row, 0);
   }
 
-  /// @todo possibly move to base class
   virtual QModelIndex indexById(const QString& id) const
   {
     if (m_idToItemMapper) {
@@ -438,9 +435,8 @@ public:
   }
 
   /**
-    * clears all objects currently in the model
-    */
-  /// @todo possibly move to base class
+   * clears all objects currently in the model
+   */
   void unload()
   {
     beginResetModel();
@@ -698,23 +694,10 @@ protected:
     }
   }
 
-  /// @todo possibly move to base class
-  virtual void updateNextObjectId(const QString& id)
-  {
-    QRegularExpressionMatch m = m_idMatchExp.match(id);
-    if (m.hasMatch()) {
-      const quint64 itemId = m.captured(1).toUInt();
-      if (itemId > m_nextId) {
-        m_nextId = itemId;
-      }
-    }
-  }
-
 protected:
   TreeItem<T> *                 m_rootItem;
   QUndoStack*                   m_undoStack;
   QHash<QString, TreeItem<T>*>* m_idToItemMapper;
-  QRegularExpression            m_idMatchExp;
 };
 
 #endif // MYMONEYMODEL_H
