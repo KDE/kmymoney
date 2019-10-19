@@ -18,6 +18,7 @@
                 "Name[pt]": "Romain Bignon",
                 "Name[pt_BR]": "Romain Bignon",
                 "Name[ru]": "Romain Bignon",
+                "Name[sk]": "Romain Bignon",
                 "Name[sv]": "Romain Bignon",
                 "Name[uk]": "Romain Bignon",
                 "Name[x-test]": "xxRomain Bignonxx"

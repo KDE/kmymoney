@@ -18,6 +18,7 @@
                 "Name[pt]": "Darren Gould",
                 "Name[pt_BR]": "Darren Gould",
                 "Name[ru]": "Darren Gould",
+                "Name[sk]": "Darren Gould",
                 "Name[sv]": "Darren Gould",
                 "Name[uk]": "Darren Gould",
                 "Name[x-test]": "xxDarren Gouldxx"
