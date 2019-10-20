@@ -140,7 +140,7 @@ public:
   virtual bool importContext(AB_IMEXPORTER_CONTEXT *ctx,
                              uint32_t flags);
 
-  virtual bool importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai, uint32_t flags);
+  virtual bool importAccountInfo(AB_IMEXPORTER_CONTEXT *ctx, AB_IMEXPORTER_ACCOUNTINFO *ai, uint32_t flags);
 
 };
 

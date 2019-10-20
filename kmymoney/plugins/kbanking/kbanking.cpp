@@ -85,7 +85,9 @@
 #include "kmymoneyview.h"
 #include "kbpickstartdate.h"
 #include "mymoneyinstitution.h"
+#include "mymoneytransactionfilter.h"
 #include "mymoneyexception.h"
+#include "mymoneysecurity.h"
 
 #include "gwenkdegui.h"
 #include "gwenhywfarqtoperators.h"
@@ -444,7 +446,8 @@ void KBanking::setupAccountReference(const MyMoneyAccount& acc, AB_ACCOUNT_SPEC*
     QString accountNumber = stripLeadingZeroes(AB_AccountSpec_GetAccountNumber(ab_acc));
     QString routingNumber = stripLeadingZeroes(AB_AccountSpec_GetBankCode(ab_acc));
 
-    QString val = QString("%1-%2").arg(routingNumber, accountNumber);
+    QString val = QString("%1-%2-%3").arg(routingNumber, accountNumber).arg(AB_AccountSpec_GetType(ab_acc));
+
     if (val != acc.onlineBankingSettings().value("kbanking-acc-ref")) {
       kvp.clear();
 
@@ -1128,8 +1131,8 @@ bool KBankingExt::interactiveImport()
 
 
 void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
-                                     const MyMoneyAccount& acc,
-                                     const AB_TRANSACTION *t)
+                                 const MyMoneyAccount& acc,
+                                 const AB_TRANSACTION *t)
 {
   QString s;
   QString memo;
@@ -1153,7 +1156,7 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
     kt.m_strPayee = QString::fromUtf8(p);
 
   // memo
-#if 1
+
   p = AB_Transaction_GetPurpose(t);
   if (p && *p) {
     QString tmpMemo;
@@ -1203,102 +1206,6 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
     memo.append(QString("DEBT: %1").arg(p));
   }
 
-#else
-  // The variable 's' contains the old method of extracting
-  // the memo which added a linefeed after each part received
-  // from AqBanking. The new variable 'memo' does not have
-  // this inserted linefeed. We keep the variable 's' to
-  // construct the hash-value to retrieve the reference
-  s.truncate(0);
-  sl = AB_Transaction_GetPurpose(t);
-  if (sl) {
-    GWEN_STRINGLISTENTRY *se;
-    bool insertLineSep = false;
-
-    se = GWEN_StringList_FirstEntry(sl);
-    while (se) {
-      p = GWEN_StringListEntry_Data(se);
-      assert(p);
-      if (insertLineSep)
-        s += '\n';
-      insertLineSep = true;
-      s += QString::fromUtf8(p).trimmed();
-      memo += QString::fromUtf8(p).trimmed();
-      se = GWEN_StringListEntry_Next(se);
-    } // while
-
-    // Sparda / Netbank hack: the software these banks use stores
-    // parts of the payee name in the beginning of the purpose field
-    // in case the payee name exceeds the 27 character limit. This is
-    // the case, when one of the strings listed in m_sepaKeywords is part
-    // of the purpose fields but does not start at the beginning. In this
-    // case, the part leading up to the keyword is to be treated as the
-    // tail of the payee. Also, a blank is inserted after the keyword.
-    QSet<QString>::const_iterator itk;
-    for (itk = m_sepaKeywords.constBegin(); itk != m_sepaKeywords.constEnd(); ++itk) {
-      int idx = s.indexOf(*itk);
-      if (idx >= 0) {
-        if (idx > 0) {
-          // re-add a possibly removed blank to name
-          if (kt.m_strPayee.length() < 27)
-            kt.m_strPayee += ' ';
-          kt.m_strPayee += s.left(idx);
-          s = s.mid(idx);
-        }
-        s = QString("%1 %2").arg(*itk).arg(s.mid((*itk).length()));
-
-        // now do the same for 'memo' except for updating the payee
-        idx = memo.indexOf(*itk);
-        if (idx >= 0) {
-          if (idx > 0) {
-            memo = memo.mid(idx);
-          }
-        }
-        memo = QString("%1 %2").arg(*itk).arg(memo.mid((*itk).length()));
-        break;
-      }
-    }
-
-    // in case we have some SEPA fields filled with information
-    // we add them to the memo field
-    p = AB_Transaction_GetEndToEndReference(t);
-    if (p) {
-      s += QString(", EREF: %1").arg(p);
-      if(memo.length())
-        memo.append('\n');
-      memo.append(QString("EREF: %1").arg(p));
-    }
-    p = AB_Transaction_GetCustomerReference(t);
-    if (p) {
-      s += QString(", CREF: %1").arg(p);
-      if(memo.length())
-        memo.append('\n');
-      memo.append(QString("CREF: %1").arg(p));
-    }
-    p = AB_Transaction_GetMandateId(t);
-    if (p) {
-      s += QString(", MREF: %1").arg(p);
-      if(memo.length())
-        memo.append('\n');
-      memo.append(QString("MREF: %1").arg(p));
-    }
-    p = AB_Transaction_GetCreditorSchemeId(t);
-    if (p) {
-      s += QString(", CRED: %1").arg(p);
-      if(memo.length())
-        memo.append('\n');
-      memo.append(QString("CRED: %1").arg(p));
-    }
-    p = AB_Transaction_GetOriginatorId(t);
-    if (p) {
-      s += QString(", DEBT: %1").arg(p);
-      if(memo.length())
-        memo.append('\n');
-      memo.append(QString("DEBT: %1").arg(p));
-    }
-  }
-#endif
-
   const MyMoneyKeyValueContainer& kvp = acc.onlineBankingSettings();
   // check if we need the version with or without linebreaks
   if (kvp.value("kbanking-memo-removelinebreaks").compare(QLatin1String("no"))) {
@@ -1347,10 +1254,6 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
   if (dt) {
     if (!startDate)
       startDate = dt;
-    /*else { dead code
-      if (GWEN_Time_Diff(ti, startTime) < 0)
-        startTime = ti;
-    }*/
     kt.m_datePosted = QDate(GWEN_Date_GetYear(dt), GWEN_Date_GetMonth(dt), GWEN_Date_GetDay(dt));
   } else {
     DBG_WARN(0, "No date for transaction");
@@ -1433,8 +1336,91 @@ void KBankingExt::_xaToStatement(MyMoneyStatement &ks,
 }
 
 
-bool KBankingExt::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai,
-                                        uint32_t /*flags*/)
+void KBankingExt::_slToStatement(MyMoneyStatement &ks,
+                                 const MyMoneyAccount& acc,
+                                 const AB_SECURITY *sy)
+{
+  MyMoneyFile* file = MyMoneyFile::instance();
+  QString s;
+  QString memo;
+  const char *p;
+  const AB_VALUE *val;
+  const GWEN_TIME *ti;
+  MyMoneyStatement::Security ksy;
+  MyMoneyStatement::Price kpr;
+  MyMoneyStatement::Transaction kt;
+
+  // security name
+  p = AB_Security_GetName(sy);
+  if (p)
+    ksy.m_strName = QString::fromUtf8(p);
+
+  // security id
+  p = AB_Security_GetUniqueId(sy);
+  if (p) {
+    ksy.m_strId = QString::fromUtf8(p);
+    ksy.m_strSymbol = QString::fromUtf8(p);
+    kpr.m_strSecurity = QString::fromUtf8(p);
+  }
+
+  // date
+  ti = AB_Security_GetUnitPriceDate(sy);
+  if (ti) {
+    int year, month, day;
+
+    if (!GWEN_Time_GetBrokenDownDate(ti, &day, &month, &year)) {
+      kpr.m_date = QDate(year, month + 1, day);
+    }
+  }
+
+  // value
+  val = AB_Security_GetUnitPriceValue(sy);
+  if (val)
+    kpr.m_amount = MyMoneyMoney(AB_Value_GetValueAsDouble(val));
+
+  // generate dummy booking in case online balance does not match
+  MyMoneySecurity security;
+  MyMoneyAccount sacc;
+  foreach (const auto sAccount, file->account(acc.id()).accountList()) {
+    sacc=file->account(sAccount);
+    security=file->security(sacc.currencyId());
+    if ((!ksy.m_strSymbol.isEmpty() && QString::compare(ksy.m_strSymbol, security.tradingSymbol(), Qt::CaseInsensitive) == 0) ||
+	(!ksy.m_strName.isEmpty() && QString::compare(ksy.m_strName, security.name(), Qt::CaseInsensitive) == 0)) {
+      if (sacc.balance().toDouble() != AB_Value_GetValueAsDouble(AB_Security_GetUnits(sy))) {
+	qDebug("Creating dummy correction booking for '%s' with %f shares", qPrintable(security.tradingSymbol()),
+	       AB_Value_GetValueAsDouble(AB_Security_GetUnits(sy))-sacc.balance().toDouble());
+	kt.m_fees = MyMoneyMoney();
+	kt.m_strMemo = "Dummy booking added by KMyMoney to reflect online balance - please adjust";
+	kt.m_datePosted = QDate::currentDate();
+	kt.m_strSymbol=security.tradingSymbol();
+	kt.m_strSecurity=security.name();
+	kt.m_strBrokerageAccount=acc.name();
+
+	kt.m_shares=MyMoneyMoney(AB_Value_GetValueAsDouble(AB_Security_GetUnits(sy))-sacc.balance().toDouble());
+	if (AB_Value_GetValueAsDouble(AB_Security_GetUnits(sy)) > sacc.balance().toDouble())
+	  kt.m_eAction = eMyMoney::Transaction::Action::Shrsin;
+	else
+	  kt.m_eAction = eMyMoney::Transaction::Action::Shrsout;
+
+	// store transaction
+	ks.m_listTransactions += kt;
+      }
+      else
+	qDebug("Online balance matches balance in KMyMoney account!");
+    }
+  }
+
+  // store security
+  ks.m_listSecurities += ksy;
+
+  // store prices
+  ks.m_listPrices += kpr;
+}
+
+
+bool KBankingExt::importAccountInfo(AB_IMEXPORTER_CONTEXT *ctx,
+                                    AB_IMEXPORTER_ACCOUNTINFO *ai,
+                                    uint32_t /*flags*/)
 {
   const char *p;
 
@@ -1454,7 +1440,7 @@ bool KBankingExt::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai,
 
   MyMoneyAccount kacc;
   if (!ks.m_strAccountNumber.isEmpty() || !ks.m_strRoutingNumber.isEmpty()) {
-    kacc = m_parent->account("kbanking-acc-ref", QString("%1-%2").arg(ks.m_strRoutingNumber, ks.m_strAccountNumber));
+    kacc = m_parent->account("kbanking-acc-ref", QString("%1-%2-%3").arg(ks.m_strRoutingNumber, ks.m_strAccountNumber).arg(AB_ImExporterAccountInfo_GetAccountType(ai)));
     ks.m_accountId = kacc.id();
   }
 
@@ -1510,6 +1496,14 @@ bool KBankingExt::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai,
 
   // clear hash map
   m_hashMap.clear();
+
+  // get all securities
+  const AB_SECURITY* s = AB_ImExporterContext_GetFirstSecurity(ctx);
+  while (s) {
+    qDebug("Found security '%s'", AB_Security_GetName(s));
+    _slToStatement(ks, kacc, s);
+    s = AB_Security_List_Next(s);
+  }
 
   // get all transactions
   const AB_TRANSACTION* t = AB_ImExporterAccountInfo_GetFirstTransaction(ai, AB_Transaction_TypeStatement, 0);

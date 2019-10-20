@@ -132,7 +132,7 @@ bool AB_Banking::importContext(AB_IMEXPORTER_CONTEXT *ctx, uint32_t flags)
 
   ai = AB_ImExporterContext_GetFirstAccountInfo(ctx);
   while (ai) {
-    if (!importAccountInfo(ai, flags))
+    if (!importAccountInfo(ctx, ai, flags))
       return false;
     ai = AB_ImExporterAccountInfo_List_Next(ai);
   }
@@ -142,7 +142,9 @@ bool AB_Banking::importContext(AB_IMEXPORTER_CONTEXT *ctx, uint32_t flags)
 
 
 
-bool AB_Banking::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO*, uint32_t)
+bool AB_Banking::importAccountInfo(AB_IMEXPORTER_CONTEXT*,
+                                   AB_IMEXPORTER_ACCOUNTINFO*,
+                                   uint32_t)
 {
   return false;
 }
@@ -297,8 +299,3 @@ void AB_Banking::setAccountAlias(AB_ACCOUNT_SPEC *a, const char *alias)
 {
   AB_Banking_SetAccountSpecAlias(_banking, a, alias);
 }
-
-
-
-
-
