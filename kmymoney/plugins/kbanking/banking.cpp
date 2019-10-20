@@ -142,7 +142,7 @@ bool AB_Banking::importContext(AB_IMEXPORTER_CONTEXT *ctx, uint32_t flags)
 
 
 
-bool AB_Banking::importAccountInfo(AB_IMEXPORTER_CONTEXT* ctx,
+bool AB_Banking::importAccountInfo(AB_IMEXPORTER_CONTEXT*,
                                    AB_IMEXPORTER_ACCOUNTINFO*,
                                    uint32_t)
 {
