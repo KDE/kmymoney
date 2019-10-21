@@ -33,6 +33,7 @@
 #include <QUuid>
 #include <QLocale>
 #include <QBitArray>
+#include <QAction>
 #include <QDebug>
 
 // ----------------------------------------------------------------------------
@@ -450,6 +451,9 @@ MyMoneyFile* MyMoneyFile::instance()
 void MyMoneyFile::finalizeFileOpen()
 {
   d->institutionsModel.slotLoadAccountsWithoutInstitutions(d->accountsModel.accountsWithoutInstitutions());
+
+  // remove any undo activities generated during loading
+  d->undoStack.clear();
 }
 
 void MyMoneyFile::unload()
@@ -471,6 +475,7 @@ void MyMoneyFile::unload()
   d->reportsModel.unload();
   /// @note add new models here
   d->m_baseCurrency = MyMoneySecurity();
+  d->undoStack.clear();
   d->m_dirty = false;
 }
 
@@ -532,13 +537,13 @@ bool MyMoneyFile::storageAttached() const
 }
 #endif
 
-void MyMoneyFile::startTransaction()
+void MyMoneyFile::startTransaction(const QString& undoActionText)
 {
   if (d->m_inTransaction) {
     throw MYMONEYEXCEPTION_CSTRING("Already started a transaction!");
   }
 
-  // d->m_storage->startTransaction();
+  d->undoStack.beginMacro(undoActionText);
   d->m_inTransaction = true;
   d->m_changeSet.clear();
 }
@@ -552,9 +557,9 @@ void MyMoneyFile::commitTransaction()
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  /// @todo port to new model code
   // commit the transaction in the storage
-  auto changed = false; // d->m_storage->commitTransaction();
+  d->undoStack.endMacro();
+  auto changed = false;
   d->m_inTransaction = false;
 
   // collect notifications about removed objects
@@ -659,6 +664,14 @@ void MyMoneyFile::commitTransaction()
 void MyMoneyFile::rollbackTransaction()
 {
   d->checkTransaction(Q_FUNC_INFO);
+
+  /// @todo add rollback of undo stack here
+  // finish the sequence
+  d->undoStack.endMacro();
+  qDebug() << "Rollback transaction with now" << d->undoStack.count() << "commands on stack at index" << d->undoStack.index();
+  // and undo it immediately
+  d->undoStack.undo();
+  qDebug() << "Rolled back transaction with now" << d->undoStack.count() << "commands on stack at index" << d->undoStack.index();
 
   /// @todo port to new model code
   // d->m_storage->rollbackTransaction();
@@ -3950,7 +3963,10 @@ void MyMoneyFile::fileSaved()
   d->markModelsAsClean();
 }
 
-
+QUndoStack* MyMoneyFile::undoStack() const
+{
+  return &d->undoStack;
+}
 
 
 class MyMoneyFileTransactionPrivate

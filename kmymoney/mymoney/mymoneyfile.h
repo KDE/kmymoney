@@ -127,6 +127,7 @@ template <class Key, class T> class QMap;
 class QString;
 class QStringList;
 class QBitArray;
+class QUndoStack;
 class MyMoneyStorageMgr;
 class MyMoneyCostCenter;
 class MyMoneyAccount;
@@ -285,8 +286,10 @@ public:
     * commitTransaction() must be called to finalize all changes. If an error occurs
     * during the processing of the changes call rollbackTransaction() to undo the
     * changes done so far.
+    *
+    * The @a undoActionText will be attached to the transaction
     */
-  void startTransaction();
+  void startTransaction(const QString& undoActionText = QString());
 
   /**
     * This method returns whether a transaction has been started (@a true)
@@ -1708,6 +1711,8 @@ public:
    * This returns the string for specific parameters
    */
   const QString& fixedKey(FixedKey key) const;
+
+  QUndoStack* undoStack() const;
 
 protected:
   /**

@@ -41,6 +41,8 @@ namespace eMenu {
     // The edit menu
     // *************
     EditFindTransaction,
+    EditUndo,
+    EditRedo,
     // *************
     // The view menu
     // *************

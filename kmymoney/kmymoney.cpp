@@ -68,6 +68,7 @@
 #include <KProcess>
 #include <KAboutApplicationDialog>
 #include <KBackup>
+#include <KUndoActions>
 #ifdef ENABLE_HOLIDAYS
 #include <KHolidays/Holiday>
 #include <KHolidays/HolidayRegion>
@@ -1505,7 +1506,11 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       a->setEnabled(false);
       lutActions.insert(info.action, a);  // store QAction's pointer for later processing
     }
+
   }
+
+  lutActions.insert(Action::EditUndo, KUndoActions::createUndoAction(MyMoneyFile::instance()->undoStack(), aC));
+  lutActions.insert(Action::EditRedo, KUndoActions::createRedoAction(MyMoneyFile::instance()->undoStack(), aC));
 
   {
     // List with slots that get connected here. Other slots get connected in e.g. appropriate views
@@ -3584,6 +3589,10 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
 
       /// @todo remove old models container
       connectStorageToModels();
+
+      // clean undostack
+      MyMoneyFile::instance()->undoStack()->clear();
+
       // inform everyone about new data
       MyMoneyFile::instance()->modelsReadyToUse();
       MyMoneyFile::instance()->forceDataChanged();
