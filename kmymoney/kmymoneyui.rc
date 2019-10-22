@@ -25,9 +25,10 @@
    <Action name="file_dump" />
   </Menu>
   <Menu name="edit" >
-   <Action name="edit_find_transaction" />
    <Action name="edit_undo" />
    <Action name="edit_redo" />
+   <Separator/>
+   <Action name="edit_find_transaction" />
   </Menu>
   <Menu name="view" >
    <Action name="view_show_transaction_detail" />
