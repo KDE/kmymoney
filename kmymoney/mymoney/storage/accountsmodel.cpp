@@ -762,24 +762,6 @@ void AccountsModel::addFavorite(const QString& id)
   }
 }
 
-void AccountsModel::removeItem(const QModelIndex& idx)
-{
-  if (idx.isValid()) {
-    // update the parent internal structure
-    const auto parentIdx = idx.parent();
-    const auto accountId = static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->constDataRef().id();
-    static_cast<TreeItem<MyMoneyAccount>*>(parentIdx.internalPointer())->dataRef().removeAccountId(accountId);
-
-    // then remove the entry from the model
-    removeRow(idx.row(), idx.parent());
-
-    // and also from the favorites
-    removeFavorite(accountId);
-
-    setDirty();
-  }
-}
-
 void AccountsModel::touchAccountById(const QString& id)
 {
   const auto idx = indexById(id);
@@ -932,17 +914,24 @@ void AccountsModel::addItem(MyMoneyAccount& account)
   }
 }
 
-void AccountsModel::doAddItem(const MyMoneyAccount& item, const QModelIndex& parentIdx)
-{
-  Q_UNUSED(parentIdx);
-  MyMoneyModel::doAddItem(item, indexById(item.parentAccountId()));
-}
-
 QModelIndexList AccountsModel::accountsWithoutInstitutions() const
 {
   return match(index(0, 0, assetIndex()), eMyMoney::Model::AccountInstitutionIdRole, QString(), -1, Qt::MatchExactly | Qt::MatchRecursive)
   + match(index(0, 0, liabilityIndex()), eMyMoney::Model::AccountInstitutionIdRole, QString(), -1, Qt::MatchExactly| Qt::MatchRecursive);
 }
+
+void AccountsModel::removeItem(const QModelIndex& idx)
+{
+  if (idx.isValid()) {
+    // update the parent internal structure
+    const auto parentIdx = idx.parent();
+    if (parentIdx.isValid()) {
+      auto account = itemByIndex(idx);
+      m_undoStack->push(new UndoCommand(this, account, MyMoneyAccount()));
+    }
+  }
+}
+
 
 void AccountsModel::reparentAccount(const QString& accountId, const QString& newParentId)
 {
@@ -957,27 +946,56 @@ void AccountsModel::reparentAccount(const QString& accountId, const QString& new
   m_undoStack->push(new UndoCommand(this, account, newAccount));
 }
 
+void AccountsModel::doAddItem(const MyMoneyAccount& item, const QModelIndex& parentIdx)
+{
+  Q_UNUSED(parentIdx);
+  const auto realParentIdx = indexById(item.parentAccountId());
+  static_cast<TreeItem<MyMoneyAccount>*>(realParentIdx.internalPointer())->dataRef().addAccountId(item.id());
+  MyMoneyModel::doAddItem(item, realParentIdx);
+  if (item.value("PreferredAccount") == QLatin1String("Yes")) {
+    addFavorite(item.id());
+  }
+}
+
+void AccountsModel::doModifyItem(const QModelIndex& idx, const MyMoneyAccount& item)
+{
+  if (idx.isValid()) {
+    MyMoneyModel::doModifyItem(idx, item);
+    if (item.value("PreferredAccount") == QLatin1String("Yes")) {
+      addFavorite(item.id());
+    } else {
+      removeFavorite(item.id());
+    }
+    // MyMoneyModel::doModifyItem already sents this out, so maybe we can skip it here
+    // emit dataChanged(idx, index(idx.row(), columnCount(idx.parent())-1));
+  }
+}
+
+void AccountsModel::doRemoveItem(const QModelIndex& idx)
+{
+  if (idx.isValid()) {
+    const auto itemId = idx.data(eMyMoney::Model::IdRole).toString();
+    MyMoneyModel::doRemoveItem(idx);
+    static_cast<TreeItem<MyMoneyAccount>*>(idx.parent().internalPointer())->dataRef().removeAccountId(itemId);
+    removeFavorite(itemId);
+  }
+}
+
+
 void AccountsModel::doReparentItem(const MyMoneyAccount& before, const MyMoneyAccount& after)
 {
-  QModelIndex accountIdx = indexById(before.id());
-  QModelIndex parentIdx = accountIdx.parent();
+  QModelIndex itemIdx = indexById(before.id());
+  QModelIndex oldParentIdx = itemIdx.parent();
+  QModelIndex newParentIdx = indexById(after.parentAccountId());
 
-  // remove from old parent (in object and model)
-  static_cast<TreeItem<MyMoneyAccount>*>(parentIdx.internalPointer())->dataRef().removeAccountId(before.id());
-  removeRow(accountIdx.row(), parentIdx);
+  static_cast<TreeItem<MyMoneyAccount>*>(oldParentIdx.internalPointer())->dataRef().removeAccountId(before.id());
+  static_cast<TreeItem<MyMoneyAccount>*>(itemIdx.internalPointer())->dataRef().setParentAccountId(after.parentAccountId());
 
-  parentIdx = indexById(after.parentAccountId());
-  static_cast<TreeItem<MyMoneyAccount>*>(parentIdx.internalPointer())->dataRef().addAccountId(before.id());
-  auto rows = rowCount(parentIdx);
-  insertRow(rows, parentIdx);
-  accountIdx = index(rows, 0, parentIdx);
-  static_cast<TreeItem<MyMoneyAccount>*>(accountIdx.internalPointer())->dataRef() = after;
+  reparentRow(oldParentIdx, itemIdx.row(), newParentIdx);
 
-  // and update new location in idToItemMapper
-  if (m_idToItemMapper) {
-    m_idToItemMapper->insert(before.id(), static_cast<TreeItem<MyMoneyAccount>*>(accountIdx.internalPointer()));
-  }
-  emit dataChanged(accountIdx, accountIdx);
+  static_cast<TreeItem<MyMoneyAccount>*>(newParentIdx.internalPointer())->dataRef().addAccountId(after.id());
+
+  setDirty(true);
 }
 
 

@@ -107,13 +107,23 @@ public:
 
     bool removeChild(int row)
     {
-      if (row < 0 || row >= childItems.count())
-        return false;
-
-      delete childItems.takeAt(row);
-      return true;
+      TreeItem<T>* child = takeChild(row);
+      delete child;
+      return child != nullptr;
     }
 
+    TreeItem<T>* takeChild(int row)
+    {
+      if (row < 0 || row >= childItems.count())
+        return nullptr;
+
+      return childItems.takeAt(row);
+    }
+
+    void reparent(TreeItem<T>* newParent)
+    {
+      parentItem = newParent;
+    }
 
     TreeItem<T> *parent()
     {
@@ -343,6 +353,46 @@ public:
 
     endRemoveRows();
     setDirty();
+    return true;
+  }
+
+  bool reparentRow(const QModelIndex &oldParent, int oldRow, const QModelIndex& newParent, int newRow = -1)
+  {
+    if (oldParent == newParent) {
+      return true;
+    }
+
+    TreeItem<T> *oldParentItem;
+    if (!oldParent.isValid())
+      oldParentItem = m_rootItem;
+    else
+      oldParentItem = static_cast<TreeItem<T>*>(oldParent.internalPointer());
+
+    if ( oldRow < 0 || oldRow > oldParentItem->childCount())
+      return false;
+
+    TreeItem<T> *newParentItem;
+    if (!newParent.isValid())
+      newParentItem = m_rootItem;
+    else
+      newParentItem = static_cast<TreeItem<T>*>(newParent.internalPointer());
+
+    if (newRow == -1) {
+      newRow = newParentItem->childCount();
+    }
+    if (newRow < 0 || newRow > newParentItem->childCount())
+      return false;
+
+    // remove from the old parent
+    beginMoveRows(oldParent, oldRow, oldRow, newParent, newRow);
+    // take out the original item
+    TreeItem<T>* item = oldParentItem->takeChild(oldRow);
+    // and add it to the new parent
+    newParentItem->insertChild(newRow, item);
+    // and adjust the pointer to the new parent
+    item->reparent(newParentItem);
+    endMoveRows();
+
     return true;
   }
 
