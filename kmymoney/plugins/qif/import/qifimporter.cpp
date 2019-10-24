@@ -22,8 +22,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 #ifdef IS_APPIMAGE
-  #include <QCoreApplication>
-  #include <QStandardPaths>
+#include <QCoreApplication>
+#include <QStandardPaths>
 #endif
 
 // ----------------------------------------------------------------------------
@@ -41,11 +41,6 @@
 #include "mymoneyqifreader.h"
 #include "statementinterface.h"
 #include "viewinterface.h"
-
-#ifdef IS_APPIMAGE
-#include <QCoreApplication>
-#include <QStandardPaths>
-#endif
 
 class MyMoneyStatement;
 

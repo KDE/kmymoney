@@ -1702,20 +1702,20 @@ void KGlobalLedgerView::slotCopyTransactionToClipboard()
     try {
       const auto& s = st.split();
       // Date
-      txt += i18n("Date: %1").arg(st.transaction().postDate().toString(Qt::DefaultLocaleShortDate));
+      txt += i18n("Date: %1", st.transaction().postDate().toString(Qt::DefaultLocaleShortDate));
       txt += QStringLiteral("\n");
       // Payee
       QString payee = i18nc("Name for unknown payee", "Unknown");
       if (!s.payeeId().isEmpty()) {
         payee = file->payee(s.payeeId()).name();
       }
-      txt += i18n("Payee: %1").arg(payee);
+      txt += i18n("Payee: %1", payee);
       txt += QStringLiteral("\n");
       // Amount
-      txt += i18n("Amount: %1").arg(s.value().formatMoney(currency.tradingSymbol(),  MyMoneyMoney::denomToPrec(acc.fraction(currency))));
+      txt += i18n("Amount: %1", s.value().formatMoney(currency.tradingSymbol(),  MyMoneyMoney::denomToPrec(acc.fraction(currency))));
       txt += QStringLiteral("\n");
       // Memo
-      txt += i18n("Memo: %1").arg(s.memo());
+      txt += i18n("Memo: %1", s.memo());
       txt += QStringLiteral("\n");
 
     } catch (MyMoneyException &) {

@@ -273,9 +273,9 @@ bool KOnlineBankingSetupWizard::finishFiPage()
 
           QString problemMessage;
           if (!info.ofxValidated)
-            problemMessage += i18n("OFX host failed. Last successful access was on '%1'. ").arg(info.lastOfxValidated);
+            problemMessage += i18n("OFX host failed. Last successful access was on '%1'. ", info.lastOfxValidated);
           if (!info.sslValidated)
-            problemMessage += i18n("Certificate verification of OFX host failed. Last successful verification was on '%1'.").arg(info.lastSslValidated);
+            problemMessage += i18n("Certificate verification of OFX host failed. Last successful verification was on '%1'.", info.lastSslValidated);
 
           if (!problemMessage.isEmpty()) {
             m_problemMessages->setText(problemMessage);

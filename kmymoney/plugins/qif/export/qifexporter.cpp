@@ -22,8 +22,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 #ifdef IS_APPIMAGE
-  #include <QCoreApplication>
-  #include <QStandardPaths>
+#include <QCoreApplication>
+#include <QStandardPaths>
 #endif
 
 // ----------------------------------------------------------------------------
@@ -40,11 +40,6 @@
 
 #include "mymoneyqifwriter.h"
 #include "viewinterface.h"
-
-#ifdef IS_APPIMAGE
-#include <QCoreApplication>
-#include <QStandardPaths>
-#endif
 
 QIFExporter::QIFExporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, "qifexporter"/*must be the same as X-KDE-PluginInfo-Name*/)

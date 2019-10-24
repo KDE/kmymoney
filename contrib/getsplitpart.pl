@@ -24,7 +24,7 @@
 #
 # transactionId;splitId;<selected-field>[;numeric amount]
 #
-# in case the selected field is either 'shares' or 'value' the colum 'amount'
+# in case the selected field is either 'shares' or 'value' the column 'amount'
 # will be added to the output which contains the value in a form that can be
 # processed by spreadsheet programs
 #
@@ -47,7 +47,7 @@ while ($#args >= 0) {
 
 die ("Field '$field' not supported.") if ($fields !~ /\;$field\;/);
 die ("Missing account id. Use --acc= to specify.") if ($accountid eq "");
-die ("Missing field name. Use --field= to specifiy.") if ($field eq "");
+die ("Missing field name. Use --field= to specify.") if ($field eq "");
 
 my $transactionid;
 my $splitid;
