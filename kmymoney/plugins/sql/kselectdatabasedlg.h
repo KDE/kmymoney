@@ -27,6 +27,7 @@
 // KDE Includes
 
 #include <QDialog>
+#include <QLineEdit>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -64,17 +65,12 @@ public Q_SLOTS:
   void slotDriverSelected(int idx);
   void slotHelp();
 
-private Q_SLOTS:
-  void showToggleEchoModeAction(const QString &text);
-  void toggleEchoMode();
-
 private:
   Ui::KSelectDatabaseDlg* m_widget;
   int m_mode;
   QUrl m_url;
   KMandatoryFieldGroup* m_requiredFields;
   bool m_sqliteSelected;
-  QAction *m_toggleEchoModeAction;
 };
 
 #endif
