@@ -45,6 +45,7 @@
 
 #include "../ofxpartner.h"
 #include "mymoneyofxconnector.h"
+#include "passwordtoggle.h"
 
 using KWallet::Wallet;
 
@@ -91,6 +92,7 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
 
   //set password field according to KDE preferences
   m_editPassword->setPasswordMode(true);
+  new PasswordToggle(m_editPassword);
 
   // make sure to not exceed data fields
   m_editUsername->setMaxLength(OFX_USERID_LENGTH-1);

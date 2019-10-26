@@ -59,6 +59,7 @@ set(kmm_widgets_sources
   budgetviewproxymodel.cpp
   kmymoneyviewbase.cpp
   kmymoneyaccountsviewbase.cpp
+  passwordtoggle.cpp
   )
 
 set(nationalAccountWidget_SOURCES
