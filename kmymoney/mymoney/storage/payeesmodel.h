@@ -42,6 +42,7 @@ class KMM_MYMONEY_EXPORT PayeesModel : public MyMoneyModel<MyMoneyPayee>
 
 public:
   class Column {
+  public:
     enum {
       Name
     } Columns;

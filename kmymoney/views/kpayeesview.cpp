@@ -76,10 +76,14 @@ using namespace Icons;
 KPayeesView::KPayeesView(QWidget *parent) :
     KMyMoneyViewBase(*new KPayeesViewPrivate(this), parent)
 {
+  Q_D(KPayeesView);
+  d->init();
+
   connect(pActions[eMenu::Action::NewPayee],    &QAction::triggered, this, &KPayeesView::slotNewPayee);
   connect(pActions[eMenu::Action::RenamePayee], &QAction::triggered, this, &KPayeesView::slotRenamePayee);
   connect(pActions[eMenu::Action::DeletePayee], &QAction::triggered, this, &KPayeesView::slotDeletePayee);
   connect(pActions[eMenu::Action::MergePayee],  &QAction::triggered, this, &KPayeesView::slotMergePayee);
+
 }
 
 KPayeesView::~KPayeesView()
@@ -154,6 +158,7 @@ void KPayeesView::slotSelectByVariant(const QVariantList& variant, eView::Intent
   }
 }
 
+#if 0
 
 void KPayeesView::slotStartRename(QListWidgetItem* item)
 {
@@ -165,14 +170,19 @@ void KPayeesView::slotStartRename(QListWidgetItem* item)
 // This variant is only called when a single payee is selected and renamed.
 void KPayeesView::slotRenameSinglePayee(QListWidgetItem* p)
 {
+}
+#endif
+
+void KPayeesView::slotRenameSinglePayee(const QModelIndex& idx, const QVariant& value)
+{
   Q_D(KPayeesView);
   //if there is no current item selected, exit
-  if (d->m_allowEditing == false || !d->ui->m_payeesList->currentItem() || p != d->ui->m_payeesList->currentItem())
+  if (d->m_allowEditing == false || !idx.isValid())
     return;
 
   //qDebug() << "[KPayeesView::slotRenamePayee]";
   // create a copy of the new name without appended whitespaces
-  QString new_name = p->text();
+  QString new_name = value.toString();
   if (d->m_payee.name() != new_name) {
     MyMoneyFileTransaction ft;
     try {
@@ -183,7 +193,7 @@ void KPayeesView::slotRenameSinglePayee(QListWidgetItem* p)
                                       i18n("A payee with the name '%1' already exists. It is not advisable to have "
                                             "multiple payees with the same identification name. Are you sure you would like "
                                             "to rename the payee?", new_name)) != KMessageBox::Yes) {
-          p->setText(d->m_payee.name());
+          // p->setText(d->m_payee.name());
           return;
         }
       }
@@ -196,19 +206,18 @@ void KPayeesView::slotRenameSinglePayee(QListWidgetItem* p)
       // all references and pointers to the view have to be
       // re-established.
 
+      ft.commit();
+
       // make sure, that the record is visible even if it moved
       // out of sight due to the rename operation
       d->ensurePayeeVisible(d->m_payee.id());
 
-      ft.commit();
-
     } catch (const MyMoneyException &e) {
       KMessageBox::detailedSorry(this, i18n("Unable to modify payee"), QString::fromLatin1(e.what()));
     }
-  } else {
-    p->setText(new_name);
   }
 }
+
 
 void KPayeesView::slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev)
 {
@@ -219,12 +228,106 @@ void KPayeesView::slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev)
   d->m_allowEditing = false;
 }
 
+void KPayeesView::slotPayeeSelectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
+{
+  Q_D(KPayeesView);
+
+  if (d->isDirty()) {
+    if (KMessageBox::questionYesNo(this,
+      i18n("<qt>Do you want to save the changes for <b>%1</b>?</qt>", d->m_newName),
+                                   i18n("Save changes")) == KMessageBox::Yes) {
+      d->m_inSelection = true;
+      slotUpdatePayee();
+      d->m_inSelection = false;
+    }
+  }
+
+  const auto selectedItemCount = d->ui->m_payees->selectionModel()->selectedIndexes().count();
+  updatePayeeActions(selectedItemCount);
+
+  d->ui->m_deleteButton->setEnabled(true); //re-enable delete button
+  d->ui->m_syncAddressbook->setEnabled(true);
+
+  switch (selectedItemCount) {
+    case 0: // no selection
+      d->ui->m_tabWidget->setEnabled(false); // disable tab widget
+      d->ui->m_balanceLabel->hide();
+      d->ui->m_deleteButton->setEnabled(false); //disable delete, rename and merge buttons
+      d->ui->m_renameButton->setEnabled(false);
+      d->ui->m_mergeButton->setEnabled(false);
+      d->clearItemData();
+      d->m_payee = MyMoneyPayee();
+      d->ui->m_syncAddressbook->setEnabled(false);
+      return; // make sure we don't access an undefined payee
+
+    case 1: // single selection
+      d->ui->m_mergeButton->setEnabled(false);
+      d->ui->m_renameButton->setEnabled(true);
+      break;
+
+    default:  // if we have multiple payees selected, clear and disable the payee information
+      d->ui->m_tabWidget->setEnabled(false); // disable tab widget
+      d->ui->m_renameButton->setEnabled(false); // disable also the rename button
+      d->ui->m_mergeButton->setEnabled(true);
+      d->ui->m_balanceLabel->hide();
+      d->clearItemData();
+      break;
+  }
+  d->ui->m_tabWidget->setEnabled(true); // enable tab widget
+
+  const auto selectedPayees = d->selectedPayees();
+  d->m_payee = MyMoneyPayee();
+  if (!selectedPayees.isEmpty()) {
+    d->m_payee = selectedPayees.at(0);
+  }
+  emit selectObjects(selectedPayees);
+
+  // as of now we are updating only the last selected payee, and until
+  // selection mode of the QListView has been changed to Extended, this
+  // will also be the only selection and behave exactly as before - Andreas
+  try {
+    d->m_newName = d->m_payee.name();
+
+    d->ui->addressEdit->setEnabled(true);
+    d->ui->addressEdit->setText(d->m_payee.address());
+    d->ui->postcodeEdit->setEnabled(true);
+    d->ui->postcodeEdit->setText(d->m_payee.postcode());
+    d->ui->telephoneEdit->setEnabled(true);
+    d->ui->telephoneEdit->setText(d->m_payee.telephone());
+    d->ui->emailEdit->setEnabled(true);
+    d->ui->emailEdit->setText(d->m_payee.email());
+    d->ui->notesEdit->setText(d->m_payee.notes());
+
+    QStringList keys;
+    bool ignorecase = false;
+    auto type = d->m_payee.matchData(ignorecase, keys);
+
+    d->ui->matchTypeCombo->setCurrentIndex(d->ui->matchTypeCombo->findData(static_cast<int>(type)));
+    d->ui->matchKeyEditList->clear();
+    d->ui->matchKeyEditList->insertStringList(keys);
+    d->ui->checkMatchIgnoreCase->setChecked(ignorecase);
+
+    d->ui->checkEnableDefaultCategory->setChecked(!d->m_payee.defaultAccountId().isEmpty());
+    d->ui->comboDefaultCategory->setSelected(d->m_payee.defaultAccountId());
+
+    d->ui->payeeIdentifiers->setSource(d->m_payee);
+
+    slotPayeeDataChanged();
+    d->showTransactions();
+
+  } catch (const MyMoneyException &e) {
+    qDebug("exception during display of payee: %s", e.what());
+    /// @todo port to new model code
+    // d->ui->m_register->clear();
+    d->m_payee = MyMoneyPayee();
+  }
+}
+
+
 void KPayeesView::slotSelectPayee()
 {
   Q_D(KPayeesView);
-  // check if the content of a currently selected payee was modified
-  // and ask to store the data
-  qDebug() << "slotSelectPayee start " << d->ui->m_register->isColumnHidden(JournalModel::Column::CostCenter);
+
   if (d->isDirty()) {
     if (KMessageBox::questionYesNo(this,
                                    i18n("<qt>Do you want to save the changes for <b>%1</b>?</qt>", d->m_newName),
@@ -574,8 +677,6 @@ void KPayeesView::refresh()
 void KPayeesView::showEvent(QShowEvent* event)
 {
   Q_D(KPayeesView);
-  if (d->m_needLoad)
-    d->init();
 
   emit customActionRequested(View::Payees, eView::Action::AboutToShow);
 
@@ -590,10 +691,22 @@ void KPayeesView::showEvent(QShowEvent* event)
   QWidget::showEvent(event);
 }
 
+/// @todo cleanup
 void KPayeesView::updatePayeeActions(const QList<MyMoneyPayee> &payees)
 {
   pActions[eMenu::Action::NewPayee]->setEnabled(true);
   const auto payeesCount = payees.count();
+  auto b = payeesCount == 1 ? true : false;
+  pActions[eMenu::Action::RenamePayee]->setEnabled(b);
+  b = payeesCount > 1 ? true : false;
+  pActions[eMenu::Action::MergePayee]->setEnabled(b);
+  b = payeesCount == 0 ? false : true;
+  pActions[eMenu::Action::DeletePayee]->setEnabled(b);
+}
+
+void KPayeesView::updatePayeeActions(int payeesCount)
+{
+  pActions[eMenu::Action::NewPayee]->setEnabled(true);
   auto b = payeesCount == 1 ? true : false;
   pActions[eMenu::Action::RenamePayee]->setEnabled(b);
   b = payeesCount > 1 ? true : false;
@@ -705,21 +818,24 @@ void KPayeesView::slotNewPayee()
 void KPayeesView::slotRenamePayee()
 {
   Q_D(KPayeesView);
-  if (d->ui->m_payeesList->currentItem() && d->ui->m_payeesList->selectedItems().count() == 1) {
-    slotStartRename(d->ui->m_payeesList->currentItem());
+  if (d->ui->m_payees->currentIndex().isValid() && d->ui->m_payees->selectionModel()->selectedIndexes().count() == 1) {
+    /// @todo port to new model code
+    // slotStartRename(d->ui->m_payeesList->currentItem());
   }
 }
 
 void KPayeesView::slotDeletePayee()
 {
   Q_D(KPayeesView);
-  if (d->m_selectedPayeesList.isEmpty())
+  const auto payeesList = d->selectedPayees();
+
+  if (payeesList.isEmpty())
     return; // shouldn't happen
 
   // get confirmation from user
   QString prompt;
-  if (d->m_selectedPayeesList.size() == 1)
-    prompt = i18n("<p>Do you really want to remove the payee <b>%1</b>?</p>", d->m_selectedPayeesList.front().name());
+  if (payeesList.count() == 1)
+    prompt = i18n("<p>Do you really want to remove the payee <b>%1</b>?</p>", payeesList.front().name());
   else
     prompt = i18n("Do you really want to remove all selected payees?");
 
@@ -732,7 +848,8 @@ void KPayeesView::slotDeletePayee()
 void KPayeesView::slotMergePayee()
 {
   Q_D(KPayeesView);
-  if (d->m_selectedPayeesList.size() < 1)
+  const auto payeesList = d->selectedPayees();
+  if (payeesList.count() < 1)
     return; // shouldn't happen
 
   if (KMessageBox::questionYesNo(this, i18n("<p>Do you really want to merge the selected payees?"),
@@ -740,6 +857,8 @@ void KPayeesView::slotMergePayee()
     return;
 
   if (d->payeeReassign(KPayeeReassignDlg::TypeMerge))
+    /// @todo maybe select the one that is remaining and call
+    ///       d->ensurePayeeVisible
     // clean selection since we just deleted the selected payees
-    d->m_selectedPayeesList.clear();
+    d->ui->m_payees->selectionModel()->clear();
 }

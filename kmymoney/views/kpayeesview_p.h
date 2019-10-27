@@ -34,6 +34,7 @@
 #include <QTimer>
 #include <QDesktopServices>
 #include <QIcon>
+#include <QSortFilterProxyModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -77,6 +78,7 @@
 #include "menuenums.h"
 #include "ledgerpayeefilter.h"
 #include "journalmodel.h"
+#include "itemrenameproxymodel.h"
 
 using namespace Icons;
 
@@ -166,6 +168,8 @@ public:
 
     m_filterProxyModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
     m_filterProxyModel->sort(AccountsModel::Column::AccountName);
+
+
     ui->comboDefaultCategory->setModel(m_filterProxyModel);
 
     ui->matchTypeCombo->addItem(i18nc("@item No matching", "No matching"), static_cast<int>(eMyMoney::Payee::MatchType::Disabled));
@@ -221,14 +225,32 @@ public:
     ui->m_register->setSelectionMode(QTableWidget::SingleSelection);
     ui->m_register->setDetailsColumnType(eWidgets::eRegister::DetailColumn::AccountFirst);
 #endif
+    m_renameProxyModel = new ItemRenameProxyModel(q);
+    ui->m_payees->setModel( m_renameProxyModel );
+
+    m_renameProxyModel->setFilterKeyColumn(PayeesModel::Column::Name);
+    m_renameProxyModel->setRenameColumn(PayeesModel::Column::Name);
+    m_renameProxyModel->setSortRole(eMyMoney::Model::PayeeNameRole);
+    m_renameProxyModel->setSortLocaleAware(true);
+    m_renameProxyModel->sort(0);
+    m_renameProxyModel->setDynamicSortFilter(true);
+    m_renameProxyModel->setSourceModel(MyMoneyFile::instance()->payeesModel());
+
     ui->m_balanceLabel->hide();
 
     q->connect(m_contact, &MyMoneyContact::contactFetched, q, &KPayeesView::slotContactFetched);
 
+    q->connect(ui->m_payees->selectionModel(), &QItemSelectionModel::selectionChanged, q, &KPayeesView::slotPayeeSelectionChanged);
+    q->connect(ui->m_payees, &QWidget::customContextMenuRequested, q, &KPayeesView::slotShowPayeesMenu);
+    ui->m_payees->setSelectionMode(QListView::ExtendedSelection);
+    q->connect( m_renameProxyModel, &ItemRenameProxyModel::renameItem,     q, &KPayeesView::slotRenameSinglePayee);
+
+
+
     q->connect(ui->m_payeesList, static_cast<void (QListWidget::*)(QListWidgetItem*, QListWidgetItem*)>(&QListWidget::currentItemChanged), q, static_cast<void (KPayeesView::*)(QListWidgetItem*, QListWidgetItem*)>(&KPayeesView::slotSelectPayee));
     q->connect(ui->m_payeesList, &QListWidget::itemSelectionChanged, q,   static_cast<void (KPayeesView::*)()>(&KPayeesView::slotSelectPayee));
-    q->connect(ui->m_payeesList, &QListWidget::itemDoubleClicked, q,      &KPayeesView::slotStartRename);
-    q->connect(ui->m_payeesList, &QListWidget::itemChanged, q,            &KPayeesView::slotRenameSinglePayee);
+    // q->connect(ui->m_payeesList, &QListWidget::itemDoubleClicked, q,      &KPayeesView::slotStartRename);
+    // q->connect(ui->m_payeesList, &QListWidget::itemChanged, q,            &KPayeesView::slotRenameSinglePayee);
     q->connect(ui->m_payeesList, &QWidget::customContextMenuRequested, q, &KPayeesView::slotShowPayeesMenu);
 
     q->connect(ui->m_newButton,     &QAbstractButton::clicked, q, &KPayeesView::slotNewPayee);
@@ -295,11 +317,12 @@ public:
     };
     ui->m_register->setColumnsShown(columns);
 
-    //At start we haven't any payee selected
+    // At start we haven't any payee selected
     ui->m_tabWidget->setEnabled(false); // disable tab widget
     ui->m_deleteButton->setEnabled(false); //disable delete, rename and merge buttons
     ui->m_renameButton->setEnabled(false);
     ui->m_mergeButton->setEnabled(false);
+
     m_payee = MyMoneyPayee(); // make sure we don't access an undefined payee
     clearItemData();
   }
@@ -382,15 +405,12 @@ public:
 
   void ensurePayeeVisible(const QString& id)
   {
-    for (int i = 0; i < ui->m_payeesList->count(); ++i) {
-      KPayeeListItem* p = dynamic_cast<KPayeeListItem*>(ui->m_payeesList->item(0));
-      if (p && p->payee().id() == id) {
-        ui->m_payeesList->scrollToItem(p, QAbstractItemView::PositionAtCenter);
-
-        ui->m_payeesList->setCurrentItem(p);      // active item and deselect all others
-        ui->m_payeesList->setCurrentRow(i, QItemSelectionModel::ClearAndSelect);   // and select it
-        break;
-      }
+    Q_Q(KPayeesView);
+    const auto baseIdx = MyMoneyFile::instance()->payeesModel()->indexById(id);
+    if (baseIdx.isValid()) {
+      const auto idx = MyMoneyModelBase::mapFromBaseSource(m_renameProxyModel, baseIdx);
+      ui->m_payees->setCurrentIndex(idx);
+      ui->m_payees->scrollTo(idx);
     }
   }
 
@@ -406,6 +426,21 @@ public:
     showTransactions();
   }
 
+  QList<MyMoneyPayee> selectedPayees() const
+  {
+    QList<MyMoneyPayee> payees;
+    auto baseModel = MyMoneyFile::instance()->payeesModel();
+    const QModelIndexList selection = ui->m_payees->selectionModel()->selectedIndexes();
+    for (const auto idx : selection) {
+      auto baseIdx = baseModel->mapToBaseSource(idx);
+      auto payee = baseModel->itemByIndex(baseIdx);
+      if (!payee.id().isEmpty()) {
+        payees.append(payee);
+      }
+    }
+    return payees;
+  }
+
   /**
     * This method loads the m_transactionList, clears
     * the m_TransactionPtrVector and rebuilds and sorts
@@ -418,19 +453,18 @@ public:
     const auto file = MyMoneyFile::instance();
     MyMoneySecurity base = file->baseCurrency();
 
-    if (m_selectedPayeesList.isEmpty() || !ui->m_tabWidget->isEnabled()) {
+    const auto selection = selectedPayees();
+
+    if (selection.isEmpty() || !ui->m_tabWidget->isEnabled()) {
       ui->m_balanceLabel->setText(i18n("Balance: %1", balance.formatMoney(file->baseCurrency().smallestAccountFraction())));
       return;
     }
 
     QStringList payeeIds;
-    for (const auto payee : qAsConst(m_selectedPayeesList)) {
+    for (const auto payee : selection) {
       payeeIds.append(payee.id());
     }
-
-    qDebug() << "slotSelectPayee 3a" << ui->m_register->isColumnHidden(JournalModel::Column::CostCenter);
     m_transactionFilter->setPayeeIdList(payeeIds);
-    qDebug() << "slotSelectPayee 3b" << ui->m_register->isColumnHidden(JournalModel::Column::CostCenter);
     /// @todo port to new model code
 #if 0
     // setup the list and the pointer vector
@@ -816,6 +850,7 @@ public:
   int m_payeeFilterType;
 
   AccountNamesFilterProxyModel *m_filterProxyModel;
+  ItemRenameProxyModel*         m_renameProxyModel;
 };
 
 #endif
