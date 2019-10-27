@@ -665,11 +665,12 @@ void PivotTable::calculateOpeningBalances()
       if (account.isClosed()) {
         // check if the account has transactions for the report timeframe
         if ((start == -1) || (end == -1)) {
+          ++it_account;
           continue;
         }
         QModelIndex idx;
         bool canSkip = true;
-        for (int row = start; row < end; ++row) {
+        for (int row = start; canSkip && (row < end); ++row) {
           idx = journalModel->index(row, 0);
           if (idx.data(eMyMoney::Model::SplitAccountIdRole).toString() == account.id()) {
             if (!idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>().isZero()) {
