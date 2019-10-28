@@ -699,10 +699,14 @@ void KGlobalLedgerView::loadView()
     if (statement) {
       const QString aboutDeposits = i18np("%1 deposit (%2)", "%1 deposits (%2)",
                                           deposits[m_account.id()], depositAmount[m_account.id()].abs().formatMoney(m_account.fraction()));
+      const QString aboutCharges = i18np("%1 charge (%2)", "%1 charges (%2)",
+                                         deposits[m_account.id()], depositAmount[m_account.id()].abs().formatMoney(m_account.fraction()));
       const QString aboutPayments = i18np("%1 payment (%2)", "%1 payments (%2)",
                                           payments[m_account.id()], paymentAmount[m_account.id()].abs().formatMoney(m_account.fraction()));
 
-      statement->setText(i18nc("%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments", "%1, %2", aboutDeposits, aboutPayments));
+      statement->setText(i18nc("%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments", "%1, %2",
+                               m_account.accountType() == MyMoneyAccount::CreditCard ? aboutCharges : aboutDeposits,
+                               aboutPayments));
     }
     if (pStatement) {
       pStatement->setText(i18np("%1 payment (%2)", "%1 payments (%2)", payments[m_account.id()]
