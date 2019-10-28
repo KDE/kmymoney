@@ -1,6 +1,7 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2014 Christian Dávid <christian-david@web.de>
+ * Copyright 2014       Christian Dávid <christian-david@web.de>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +18,8 @@
  */
 
 #include "unavailabletask.h"
+
+#include <QSet>
 
 #include <KLocalizedString>
 
@@ -50,6 +53,11 @@ bool unavailableTask::hasReferenceTo(const QString& id) const
 {
   Q_UNUSED(id);
   return false;
+}
+
+QSet<QString> unavailableTask::referencedObjects() const
+{
+  return {};
 }
 
 unavailableTask* unavailableTask::clone() const

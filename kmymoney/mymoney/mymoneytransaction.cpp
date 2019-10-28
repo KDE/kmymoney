@@ -1,6 +1,6 @@
 /*
  * Copyright 2000-2002  Michael Edwardes <mte@users.sourceforge.net>
- * Copyright 2001-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2001-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2001       Felix Rodriguez <frodriguez@users.sourceforge.net>
  * Copyright 2003       Kevin Tambascio <ktambascio@users.sourceforge.net>
  * Copyright 2004-2005  Ace Jones <acejones@users.sourceforge.net>
@@ -28,6 +28,7 @@
 
 #include <QStringList>
 #include <QMap>
+#include <QSet>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -415,6 +416,17 @@ bool MyMoneyTransaction::hasReferenceTo(const QString& id) const
       return true;
   }
   return false;
+}
+
+QSet<QString> MyMoneyTransaction::referencedObjects() const
+{
+  Q_D(const MyMoneyTransaction);
+  QSet<QString> ids;
+  ids.insert(d->m_commodity);
+  for (const auto split : d->m_splits) {
+    ids.unite(split.referencedObjects());
+  }
+  return ids;
 }
 
 bool MyMoneyTransaction::hasAutoCalcSplit() const

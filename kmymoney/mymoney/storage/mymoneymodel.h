@@ -44,8 +44,6 @@
 
 #include "kmm_models_export.h"
 
-class MyMoneyFile;
-
 template <typename T>
 class TreeItem
 {
@@ -546,7 +544,6 @@ public:
   };
 
 
-  /// @todo possibly move to base class
   virtual int processItems(Worker *worker)
   {
     return processItems(worker, match(index(0, 0), eMyMoney::Model::Roles::IdRole, m_idLeadin, -1, Qt::MatchStartsWith | Qt::MatchRecursive));
@@ -564,12 +561,16 @@ public:
   {
     bool rc = false;
     QModelIndexList indexes = match(index(0, 0), eMyMoney::Model::Roles::IdRole, "*", -1, Qt::MatchWildcard | Qt::MatchRecursive);
-    foreach (const auto idx, indexes) {
-      const T& item = static_cast<TreeItem<T>*>(idx.internalPointer())->constDataRef();
-      if ((rc |= item.hasReferenceTo(id)) == true)
+    for (const auto idx : indexes) {
+      if ((rc |= static_cast<TreeItem<T>*>(idx.internalPointer())->constDataRef().hasReferenceTo(id)) == true)
         break;
     }
     return rc;
+  }
+
+  QSet<QString> referencedObjects() const
+  {
+    return m_referencedObjects;
   }
 
   QList<T> itemList() const
@@ -704,6 +705,7 @@ protected:
       m_idToItemMapper->insert(item.id(), static_cast<TreeItem<T>*>(idx.internalPointer()));
     }
     setDirty();
+    doUpdateReferencedObjects();
     emit dataChanged(idx, index(row, columnCount()-1, parentIdx));
   }
 
@@ -716,6 +718,7 @@ protected:
       }
       static_cast<TreeItem<T>*>(idx.internalPointer())->dataRef() = item;
       setDirty();
+      doUpdateReferencedObjects();
       emit dataChanged(idx, index(idx.row(), columnCount(idx.parent())-1));
     }
   }
@@ -727,6 +730,7 @@ protected:
         m_idToItemMapper->remove(static_cast<const TreeItem<T>*>(idx.internalPointer())->constDataRef().id());
       }
       removeRow(idx.row(), idx.parent());
+      doUpdateReferencedObjects();
       setDirty();
     }
   }
@@ -750,10 +754,28 @@ protected:
     }
   }
 
+  virtual void doUpdateReferencedObjects() override
+  {
+    const int rows = rowCount();
+    m_referencedObjects.clear();
+    if (m_idToItemMapper) {
+      for(const auto item : qAsConst(*m_idToItemMapper)) {
+        m_referencedObjects.unite(item->constDataRef().referencedObjects());
+      }
+    } else {
+      QModelIndex idx;
+      for (int row = 0; row < rows; ++row) {
+        idx = index(row, 0);
+        m_referencedObjects.unite(static_cast<TreeItem<T>*>(idx.internalPointer())->constDataRef().referencedObjects());
+      }
+    }
+  }
+
 protected:
   TreeItem<T> *                 m_rootItem;
   QUndoStack*                   m_undoStack;
   QHash<QString, TreeItem<T>*>* m_idToItemMapper;
+  QSet<QString>                 m_referencedObjects;
 };
 
 #endif // MYMONEYMODEL_H

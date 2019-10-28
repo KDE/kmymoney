@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2016  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2016-2019  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -79,6 +79,11 @@ public:
     * @retval false This object does not reference the object with id @p id.
     */
   bool hasReferenceTo(const QString& id) const override;
+
+  /**
+   * @copydoc MyMoneyObject::referencedObjects
+   */
+  QSet<QString> referencedObjects() const override;
 
   static MyMoneyCostCenter null;
 };

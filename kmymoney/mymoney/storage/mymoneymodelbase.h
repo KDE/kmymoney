@@ -92,6 +92,11 @@ protected:
 
   virtual void updateNextObjectId(const QString& id);
 
+  virtual void doUpdateReferencedObjects() = 0;
+
+protected Q_SLOTS:
+  void updateReferencedObjects();
+
 Q_SIGNALS:
   void modelLoaded() const;
 

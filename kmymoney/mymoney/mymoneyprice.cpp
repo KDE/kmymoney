@@ -1,5 +1,5 @@
 /*
- * Copyright 2005-2011  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2005-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -28,6 +28,7 @@
 #include <QDate>
 #include <QString>
 #include <QDomElement>
+#include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -171,4 +172,10 @@ bool MyMoneyPrice::hasReferenceTo(const QString& id) const
 {
   Q_D(const MyMoneyPrice);
   return (id == d->m_fromSecurity) || (id == d->m_toSecurity);
+}
+
+QSet<QString> MyMoneyPrice::referencedObjects() const
+{
+  Q_D(const MyMoneyPrice);
+  return { d->m_fromSecurity, d->m_toSecurity };
 }

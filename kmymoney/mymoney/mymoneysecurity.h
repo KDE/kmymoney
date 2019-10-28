@@ -1,5 +1,5 @@
 /*
- * Copyright 2005-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2005-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -132,6 +132,11 @@ public:
    * @retval false This object does not reference the object with id @p id.
    */
   bool hasReferenceTo(const QString& id) const override;
+
+  /**
+   * @copydoc MyMoneyObject::referencedObjects
+   */
+  QSet<QString> referencedObjects() const override;
 
   /**
    * This method is used to convert the internal representation of

@@ -1,6 +1,7 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2013 Christian Dávid <christian-david@web.de>
+ * Copyright 2013       Christian Dávid <christian-david@web.de>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,7 +67,9 @@ protected:
   bool hasReferenceTo(const QString &id) const final override {
     Q_UNUSED(id); return false;
   }
-
+  QSet<QString> referencedObjects() const final override {
+    return {};
+  }
   dummyTask* createFromXml(const QDomElement&) const final override {
     return (new dummyTask);
   }

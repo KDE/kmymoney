@@ -432,6 +432,7 @@ namespace eMyMoney {
       // The IdRole is used by all model items whereas the id of all other roles id unique
       // for each model. This way, we can identify if an id is used on the wrong model.
       IdRole  = Qt::UserRole,      // must remain Qt::UserRole due to KMyMoneyMVCCombo::selectedItem
+      ItemReferenceRole,
 
       // MyMoneyPayee
       PayeeNameRole,

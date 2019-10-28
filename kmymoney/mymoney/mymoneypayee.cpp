@@ -27,6 +27,7 @@
 
 #include <QString>
 #include <QStringList>
+#include <QSet>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -94,6 +95,12 @@ bool MyMoneyPayee::hasReferenceTo(const QString& id) const
 {
   Q_D(const MyMoneyPayee);
   return id == d->m_defaultAccountId;
+}
+
+QSet<QString> MyMoneyPayee::referencedObjects() const
+{
+  Q_D(const MyMoneyPayee);
+  return { d->m_defaultAccountId };
 }
 
 QString MyMoneyPayee::name() const

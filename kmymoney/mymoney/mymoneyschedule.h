@@ -1,6 +1,6 @@
 /*
  * Copyright 2000-2004  Michael Edwardes <mte@users.sourceforge.net>
- * Copyright 2002-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2002-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2005       Ace Jones <acejones@users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or
@@ -519,6 +519,11 @@ public:
     * @retval false This object does not reference the object with id @p id.
     */
   virtual bool hasReferenceTo(const QString& id) const final override;
+
+  /**
+   * @copydoc MyMoneyObject::referencedObjects
+   */
+  QSet<QString> referencedObjects() const override;
 
   /**
    * This method replaces all occurrences of id @a oldId with

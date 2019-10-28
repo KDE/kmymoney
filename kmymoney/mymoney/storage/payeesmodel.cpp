@@ -33,6 +33,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyfile.h"
+
 struct PayeesModel::Private
 {
   Private()
@@ -94,41 +96,44 @@ QVariant PayeesModel::data(const QModelIndex& index, int role) const
       rc = QVariant(Qt::AlignLeft | Qt::AlignVCenter);
       break;
 
-    case eMyMoney::Model::Roles::IdRole:
+    case eMyMoney::Model::IdRole:
       rc = payee.id();
       break;
-    case eMyMoney::Model::Roles::PayeeAddressRole:
+    case eMyMoney::Model::PayeeAddressRole:
       rc = payee.address();
       break;
-    case eMyMoney::Model::Roles::PayeeCityRole:
+    case eMyMoney::Model::PayeeCityRole:
       rc = payee.city();
       break;
-    case eMyMoney::Model::Roles::PayeeStateRole:
+    case eMyMoney::Model::PayeeStateRole:
       rc = payee.state();
       break;
-    case eMyMoney::Model::Roles::PayeePostCodeRole:
+    case eMyMoney::Model::PayeePostCodeRole:
       rc = payee.postcode();
       break;
-    case eMyMoney::Model::Roles::PayeeTelephoneRole:
+    case eMyMoney::Model::PayeeTelephoneRole:
       rc = payee.telephone();
       break;
-    case eMyMoney::Model::Roles::PayeeEmailRole:
+    case eMyMoney::Model::PayeeEmailRole:
       rc = payee.email();
       break;
-    case eMyMoney::Model::Roles::PayeeNotesRole:
+    case eMyMoney::Model::PayeeNotesRole:
       rc = payee.notes();
       break;
-    case eMyMoney::Model::Roles::PayeeReferenceRole:
+    case eMyMoney::Model::PayeeReferenceRole:
       rc = payee.reference();
       break;
-    case eMyMoney::Model::Roles::PayeeMatchTypeRole:
+    case eMyMoney::Model::PayeeMatchTypeRole:
       break;
-    case eMyMoney::Model::Roles::PayeeMatchKeyRole:
+    case eMyMoney::Model::PayeeMatchKeyRole:
       break;
-    case eMyMoney::Model::Roles::PayeeMatchCaseRole:
+    case eMyMoney::Model::PayeeMatchCaseRole:
       break;
-    case eMyMoney::Model::Roles::PayeeDefaultAccountRole:
+    case eMyMoney::Model::PayeeDefaultAccountRole:
       rc = payee.defaultAccountId();
+      break;
+    case eMyMoney::Model::ItemReferenceRole:
+      rc = MyMoneyFile::instance()->isReferenced(payee);
       break;
   }
   return rc;
@@ -149,7 +154,7 @@ bool PayeesModel::setData(const QModelIndex& index, const QVariant& value, int r
 
   bool rc = true;
   switch(role) {
-    case eMyMoney::Model::Roles::PayeeNameRole:
+    case eMyMoney::Model::PayeeNameRole:
     case Qt::DisplayRole:
     case Qt::EditRole:
       // make sure to never return any displayable text for the dummy entry
@@ -163,40 +168,40 @@ bool PayeesModel::setData(const QModelIndex& index, const QVariant& value, int r
     case Qt::TextAlignmentRole:
       break;
 
-    case eMyMoney::Model::Roles::IdRole:
+    case eMyMoney::Model::IdRole:
       rc = false;
       break;
-    case eMyMoney::Model::Roles::PayeeAddressRole:
+    case eMyMoney::Model::PayeeAddressRole:
       payee.setAddress(value.toString());
       break;
-    case eMyMoney::Model::Roles::PayeeCityRole:
+    case eMyMoney::Model::PayeeCityRole:
       payee.setCity(value.toString());
       break;
-    case eMyMoney::Model::Roles::PayeeStateRole:
+    case eMyMoney::Model::PayeeStateRole:
       payee.setState(value.toString());
       break;
-    case eMyMoney::Model::Roles::PayeePostCodeRole:
+    case eMyMoney::Model::PayeePostCodeRole:
       payee.setPostcode(value.toString());
       break;
-    case eMyMoney::Model::Roles::PayeeTelephoneRole:
+    case eMyMoney::Model::PayeeTelephoneRole:
       payee.setTelephone(value.toString());
       break;
-    case eMyMoney::Model::Roles::PayeeEmailRole:
+    case eMyMoney::Model::PayeeEmailRole:
       payee.setEmail(value.toString());
       break;
-    case eMyMoney::Model::Roles::PayeeNotesRole:
+    case eMyMoney::Model::PayeeNotesRole:
       payee.setNotes(value.toString());
       break;
-    case eMyMoney::Model::Roles::PayeeReferenceRole:
+    case eMyMoney::Model::PayeeReferenceRole:
       payee.setReference(value.toString());
       break;
-    case eMyMoney::Model::Roles::PayeeMatchTypeRole:
+    case eMyMoney::Model::PayeeMatchTypeRole:
       break;
-    case eMyMoney::Model::Roles::PayeeMatchKeyRole:
+    case eMyMoney::Model::PayeeMatchKeyRole:
       break;
-    case eMyMoney::Model::Roles::PayeeMatchCaseRole:
+    case eMyMoney::Model::PayeeMatchCaseRole:
       break;
-    case eMyMoney::Model::Roles::PayeeDefaultAccountRole:
+    case eMyMoney::Model::PayeeDefaultAccountRole:
       payee.setDefaultAccountId(value.toString());
       break;
     default:

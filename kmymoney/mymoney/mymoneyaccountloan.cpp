@@ -2,7 +2,7 @@
  * Copyright 2001-2002  Michael Edwardes <mte@users.sourceforge.net>
  * Copyright 2001       Felix Rodriguez <frodriguez@users.sourceforge.net>
  * Copyright 2002-2003  Kevin Tambascio <ktambascio@users.sourceforge.net>
- * Copyright 2006-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2006-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2006       Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
@@ -28,6 +28,7 @@
 #include <QRegExp>
 #include <QDate>
 #include <QMap>
+#include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -229,6 +230,14 @@ bool MyMoneyAccountLoan::hasReferenceTo(const QString& id) const
   return MyMoneyAccount::hasReferenceTo(id)
          || (id == payee())
          || (id == schedule());
+}
+
+QSet<QString> MyMoneyAccountLoan::referencedObjects() const
+{
+  QSet<QString> ids(MyMoneyAccount::referencedObjects());
+  ids.insert(payee());
+  ids.insert(schedule());
+  return ids;
 }
 
 void MyMoneyAccountLoan::setInterestCompounding(int frequency)

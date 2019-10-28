@@ -3740,6 +3740,24 @@ bool MyMoneyFile::isReferenced(const MyMoneyObject& obj) const
   return isReferenced(obj, QBitArray((int)eStorage::Reference::Count));
 }
 
+QSet<QString> MyMoneyFile::referencedObjects() const
+{
+  QSet<QString> ids(d->journalModel.referencedObjects());
+  ids.unite(d->accountsModel.referencedObjects());
+  ids.unite(d->institutionsModel.referencedObjects());
+  ids.unite(d->payeesModel.referencedObjects());
+  ids.unite(d->tagsModel.referencedObjects());
+  ids.unite(d->budgetsModel.referencedObjects());
+  ids.unite(d->schedulesModel.referencedObjects());
+  ids.unite(d->securitiesModel.referencedObjects());
+  ids.unite(d->currenciesModel.referencedObjects());
+  ids.unite(d->costCenterModel.referencedObjects());
+  ids.unite(d->priceModel.referencedObjects());
+  // we never report the empty id
+  ids.remove(QString());
+  return ids;
+}
+
 bool MyMoneyFile::checkNoUsed(const QString& accId, const QString& no) const
 {
   /// @todo port to new model code

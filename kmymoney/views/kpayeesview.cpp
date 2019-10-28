@@ -218,7 +218,7 @@ void KPayeesView::slotRenameSinglePayee(const QModelIndex& idx, const QVariant& 
   }
 }
 
-
+#if 0
 void KPayeesView::slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev)
 {
   Q_D(KPayeesView);
@@ -227,6 +227,7 @@ void KPayeesView::slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev)
 
   d->m_allowEditing = false;
 }
+#endif
 
 void KPayeesView::slotPayeeSelectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
 {
@@ -323,7 +324,7 @@ void KPayeesView::slotPayeeSelectionChanged(const QItemSelection& selected, cons
   }
 }
 
-
+#if 0
 void KPayeesView::slotSelectPayee()
 {
   Q_D(KPayeesView);
@@ -338,18 +339,15 @@ void KPayeesView::slotSelectPayee()
     }
   }
 
-  // make sure we always clear the selected list when listing again
-  d->m_selectedPayeesList.clear();
-
   // loop over all payees and count the number of payees, also
   // obtain last selected payee
-  d->selectedPayees(d->m_selectedPayeesList);
-  updatePayeeActions(d->m_selectedPayeesList);
+  const int selectedPayeesCount = d->ui->m_payees->selectionModel()->selectedIndexes().count();
+  updatePayeeActions(selectedPayeesCount);
 
   qDebug() << "slotSelectPayee 1" << d->ui->m_register->isColumnHidden(JournalModel::Column::CostCenter);
-  emit selectObjects(d->m_selectedPayeesList);
+  emit selectObjects(d->selectedPayees());
 
-  if (d->m_selectedPayeesList.isEmpty()) {
+  if (selectedPayeesCount == 0) {
     d->ui->m_tabWidget->setEnabled(false); // disable tab widget
     d->ui->m_balanceLabel->hide();
     d->ui->m_deleteButton->setEnabled(false); //disable delete, rename and merge buttons
@@ -366,7 +364,7 @@ void KPayeesView::slotSelectPayee()
   d->ui->m_syncAddressbook->setEnabled(true);
 
   // if we have multiple payees selected, clear and disable the payee information
-  if (d->m_selectedPayeesList.count() > 1) {
+  if (selectedPayeesCount > 1) {
     d->ui->m_tabWidget->setEnabled(false); // disable tab widget
     d->ui->m_renameButton->setEnabled(false); // disable also the rename button
     d->ui->m_mergeButton->setEnabled(true);
@@ -385,7 +383,7 @@ void KPayeesView::slotSelectPayee()
   // selection mode of the QListView has been changed to Extended, this
   // will also be the only selection and behave exactly as before - Andreas
   try {
-    d->m_payee = d->m_selectedPayeesList[0];
+    d->m_payee = d->selectedPayees().first();
 
     d->m_newName = d->m_payee.name();
 
@@ -428,12 +426,12 @@ void KPayeesView::slotSelectPayee()
     qDebug("exception during display of payee: %s", e.what());
     /// @todo port to new model code
     // d->ui->m_register->clear();
-    d->m_selectedPayeesList.clear();
     d->m_payee = MyMoneyPayee();
   }
   d->m_allowEditing = true;
   qDebug() << "slotSelectPayee end " << d->ui->m_register->isColumnHidden(JournalModel::Column::CostCenter);
 }
+#endif
 
 void KPayeesView::slotKeyListChanged()
 {
@@ -555,15 +553,14 @@ void KPayeesView::slotUpdatePayee()
 void KPayeesView::slotSyncAddressBook()
 {
   Q_D(KPayeesView);
-  if (d->m_payeeRows.isEmpty()) {                            // empty list means no syncing is pending...
-    foreach (auto item, d->ui->m_payeesList->selectedItems()) {
-      d->m_payeeRows.append(d->ui->m_payeesList->row(item));        // ...so initialize one
-    }
-    d->ui->m_payeesList->clearSelection();                       // otherwise slotSelectPayee will be run after every payee update
-//    d->ui->m_syncAddressbook->setEnabled(false);                 // disallow concurrent syncs
+  if (d->m_payeesToSync.isEmpty()) {                            // empty list means no syncing is pending...
+    d->m_payeesToSync = d->selectedPayees();                    // ...so initialize one
+    d->m_syncedPayees = 0;
+    d->ui->m_syncAddressbook->setEnabled(false);                // disallow concurrent syncs
   }
 
-  if (d->m_payeeRows.count() <= d->m_payeeRow) {
+  if (d->m_payeesToSync.count() <= d->m_syncedPayees) {
+#if 0
     if (auto item = dynamic_cast<KPayeeListItem*>(d->ui->m_payeesList->currentItem())) { // update ui if something is selected
       d->m_payee = item->payee();
       d->ui->addressEdit->setText(d->m_payee.address());
@@ -572,21 +569,35 @@ void KPayeesView::slotSyncAddressBook()
       d->ui->postcodeEdit->setText(d->m_payee.postcode());
       d->ui->telephoneEdit->setText(d->m_payee.telephone());
     }
-    d->m_payeeRows.clear();  // that means end of sync
-    d->m_payeeRow = 0;
+    // update synced data in engine
+#endif
+
+    if (!d->m_payeesToSync.isEmpty()) {
+      MyMoneyFileTransaction ft;
+      try {
+        for (const auto& payee : d->m_payeesToSync) {
+          MyMoneyFile::instance()->modifyPayee(payee);
+        }
+        ft.commit();
+      } catch (const MyMoneyException &e) {
+        KMessageBox::detailedSorry(this, i18n("Unable to modify payee"), QString::fromLatin1(e.what()));
+      }
+    }
+    d->m_payeesToSync.clear();  // that means end of sync
+    d->m_syncedPayees = 0;
+    d->ui->m_syncAddressbook->setEnabled(true);
     return;
   }
 
-  if (auto item = dynamic_cast<KPayeeListItem*>(d->ui->m_payeesList->item(d->m_payeeRows.at(d->m_payeeRow))))
-    d->m_payee = item->payee();
-  ++d->m_payeeRow;
-
-  d->m_contact->fetchContact(d->m_payee.email()); // search for payee's data in addressbook and receive it in slotContactFetched
+  // search for payee's data in addressbook and receive it in slotContactFetched
+  d->m_contact->fetchContact(d->m_payee.email());
 }
 
 void KPayeesView::slotContactFetched(const ContactData &identity)
 {
   Q_D(KPayeesView);
+  MyMoneyPayee& payee = d->m_payeesToSync[d->m_syncedPayees];
+
   if (!identity.email.isEmpty()) {  // empty e-mail means no identity fetched
     QString txt;
     if (!identity.street.isEmpty())
@@ -613,18 +624,14 @@ void KPayeesView::slotContactFetched(const ContactData &identity)
     if (!identity.postalCode.isEmpty() && d->m_payee.postcode().compare(identity.postalCode) != 0)
       d->m_payee.setPostcode(identity.postalCode);
 
-    if (!identity.phoneNumber.isEmpty() && d->m_payee.telephone().compare(identity.phoneNumber) != 0)
-      d->m_payee.setTelephone(identity.phoneNumber);
+    if (!identity.postalCode.isEmpty() && payee.postcode().compare(identity.postalCode) != 0)
+      payee.setPostcode(identity.postalCode);
 
-    MyMoneyFileTransaction ft;
-    try {
-      MyMoneyFile::instance()->modifyPayee(d->m_payee);
-      ft.commit();
-    } catch (const MyMoneyException &e) {
-      KMessageBox::detailedSorry(this, i18n("Unable to modify payee"), QString::fromLatin1(e.what()));
-    }
+    if (!identity.phoneNumber.isEmpty() && payee.telephone().compare(identity.phoneNumber) != 0)
+      payee.setTelephone(identity.phoneNumber);
   }
 
+  ++d->m_syncedPayees;
   slotSyncAddressBook();  // process next payee
 }
 
@@ -646,7 +653,7 @@ void KPayeesView::executeCustomAction(eView::Action action)
     case eView::Action::SetDefaultFocus:
       {
         Q_D(KPayeesView);
-        QMetaObject::invokeMethod(d->m_searchWidget, "setFocus");
+        QMetaObject::invokeMethod(d->ui->m_searchWidget, "setFocus");
       }
       break;
 
@@ -661,6 +668,7 @@ void KPayeesView::executeCustomAction(eView::Action action)
 
 void KPayeesView::refresh()
 {
+#if 0
   Q_D(KPayeesView);
   if (isVisible()) {
     if (d->m_inSelection) {
@@ -672,6 +680,7 @@ void KPayeesView::refresh()
   } else {
     d->m_needsRefresh = true;
   }
+#endif
 }
 
 void KPayeesView::showEvent(QShowEvent* event)
@@ -680,12 +689,13 @@ void KPayeesView::showEvent(QShowEvent* event)
 
   emit customActionRequested(View::Payees, eView::Action::AboutToShow);
 
+#if 0
   if (d->m_needsRefresh)
     refresh();
 
-  QList<MyMoneyPayee> list;
-  d->selectedPayees(list);
-  emit selectObjects(list);
+  d->ui->
+  emit selectObjects(QList<MyMoneyPayee>());
+#endif
 
   // don't forget base class implementation
   QWidget::showEvent(event);
@@ -789,8 +799,7 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
 void KPayeesView::slotShowPayeesMenu(const QPoint& /*p*/)
 {
   Q_D(KPayeesView);
-  if (dynamic_cast<KPayeeListItem*>(d->ui->m_payeesList->currentItem())) {
-    slotSelectPayee();
+  if (!d->ui->m_payees->selectionModel()->selectedIndexes().isEmpty()) {
     pMenus[eMenu::Menu::Payee]->exec(QCursor::pos());
   }
 }
@@ -803,9 +812,18 @@ void KPayeesView::slotHelp()
 void KPayeesView::slotChangeFilter(int index)
 {
   Q_D(KPayeesView);
-  //update the filter type then reload the payees list
-  d->m_payeeFilterType = index;
-  d->loadPayees();
+  // update the filter type
+  switch(index) {
+    case eReferencedPayees:
+      d->m_renameProxyModel->setReferenceFilter(ItemRenameProxyModel::eReferencedItems);
+      break;
+    case eUnusedPayees:
+      d->m_renameProxyModel->setReferenceFilter(ItemRenameProxyModel::eUnReferencedItems);
+      break;
+    default:
+      d->m_renameProxyModel->setReferenceFilter(ItemRenameProxyModel::eAllItem);
+      break;
+  }
 }
 
 void KPayeesView::slotNewPayee()
@@ -819,8 +837,7 @@ void KPayeesView::slotRenamePayee()
 {
   Q_D(KPayeesView);
   if (d->ui->m_payees->currentIndex().isValid() && d->ui->m_payees->selectionModel()->selectedIndexes().count() == 1) {
-    /// @todo port to new model code
-    // slotStartRename(d->ui->m_payeesList->currentItem());
+    d->ui->m_payees->edit(d->ui->m_payees->currentIndex());
   }
 }
 

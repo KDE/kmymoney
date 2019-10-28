@@ -28,9 +28,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyenums.h"
+#include "mymoneyfile.h"
+
 ItemRenameProxyModel::ItemRenameProxyModel(QObject *parent)
   : QSortFilterProxyModel(parent)
   , m_renameColumn(0)
+  , m_referenceFilter(eAllItem)
 {
 }
 
@@ -60,4 +64,35 @@ Qt::ItemFlags ItemRenameProxyModel::flags(const QModelIndex& idx) const
     flags |= Qt::ItemIsEditable;
   }
   return flags;
+}
+
+void ItemRenameProxyModel::setReferenceFilter(ItemRenameProxyModel::ReferenceFilterType filterType)
+{
+  if (m_referenceFilter != filterType) {
+    m_referenceFilter = filterType;
+    invalidateFilter();
+  }
+}
+
+bool ItemRenameProxyModel::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
+{
+  if (m_referenceFilter != eAllItem) {
+    const auto idx = sourceModel()->index(source_row, 0, source_parent);
+    const auto itemId = idx.data(eMyMoney::Model::IdRole).toString();
+    if (!itemId.isEmpty()) {
+      switch(m_referenceFilter) {
+        case eReferencedItems:
+          if (!MyMoneyFile::instance()->referencedObjects().contains(itemId))
+            return false;
+          break;
+        case eUnReferencedItems:
+          if (MyMoneyFile::instance()->referencedObjects().contains(itemId))
+            return false;
+          break;
+        default:
+          break;
+      }
+    }
+  }
+  return QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
 }

@@ -1,6 +1,7 @@
 /*
  * Copyright 2006       Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2006       Darren Gould <darren_gould@gmx.de>
+ * Copyright 2010-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -24,6 +25,7 @@
 // QT Includes
 
 #include <QMap>
+#include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -397,6 +399,12 @@ bool MyMoneyBudget::hasReferenceTo(const QString& id) const
   Q_D(const MyMoneyBudget);
   // return true if we have an assignment for this id
   return (d->m_accounts.contains(id));
+}
+
+QSet<QString> MyMoneyBudget::referencedObjects() const
+{
+  Q_D(const MyMoneyBudget);
+  return QSet<QString>::fromList(d->m_accounts.keys());
 }
 
 void MyMoneyBudget::removeReference(const QString& id)

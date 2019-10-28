@@ -41,6 +41,7 @@ MyMoneyModelBase::MyMoneyModelBase(QObject* parent, const QString& idLeadin, qui
   , m_dirty(false)
   , m_idMatchExp(QStringLiteral("^%1(\\d+)$").arg(m_idLeadin))
 {
+  connect(this, &QAbstractItemModel::modelReset, this, &MyMoneyModelBase::updateReferencedObjects);
 }
 
 MyMoneyModelBase::~MyMoneyModelBase()
@@ -145,3 +146,7 @@ bool MyMoneyModelBase::isDirty() const
   return m_dirty;
 }
 
+void MyMoneyModelBase::updateReferencedObjects()
+{
+  doUpdateReferencedObjects();
+}

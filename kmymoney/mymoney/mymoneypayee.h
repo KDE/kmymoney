@@ -159,6 +159,11 @@ public:
     */
   bool hasReferenceTo(const QString& id) const override;
 
+  /**
+   * @copydoc MyMoneyObject::referencedObjects
+   */
+  QSet<QString> referencedObjects() const override;
+
   static MyMoneyPayee null;
 };
 

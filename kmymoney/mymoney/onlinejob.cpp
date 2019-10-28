@@ -1,5 +1,6 @@
 /*
  * Copyright 2013-2015  Christian Dávid <christian-david@web.de>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -15,6 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QSet>
+
 #include "onlinejob.h"
 #include "onlinejob_p.h"
 
@@ -26,7 +29,7 @@
 
 onlineJob::onlineJob() :
   MyMoneyObject(*new onlineJobPrivate),
-  m_task(0)
+  m_task(nullptr)
 {
   Q_D(onlineJob);
   d->m_jobSend = QDateTime();
@@ -68,7 +71,7 @@ onlineJob::onlineJob(onlineTask* onlinetask) :
 
 onlineJob::onlineJob(onlineJob const& other) :
   MyMoneyObject(*new onlineJobPrivate(*other.d_func()), other.id()),
-  m_task(0)
+  m_task(nullptr)
 {
   copyPointerFromOtherJob(other);
 }
@@ -114,14 +117,14 @@ void onlineJob::setTask(onlineTask *_task)
 
 onlineTask* onlineJob::task()
 {
-  if (m_task == 0)
+  if (m_task == nullptr)
     throw EMPTYTASKEXCEPTION;
   return m_task;
 }
 
 const onlineTask* onlineJob::task() const
 {
-  if (m_task == 0)
+  if (m_task == nullptr)
     throw EMPTYTASKEXCEPTION;
   return m_task;
 }
@@ -180,7 +183,7 @@ bool onlineJob::isEditable() const
 
 bool onlineJob::isNull() const
 {
-  return (m_task == 0);
+  return (m_task == nullptr);
 }
 
 void onlineJob::setJobSend(const QDateTime &dateTime)
@@ -257,7 +260,7 @@ void onlineJob::clearJobMessageList()
 
 bool onlineJob::isValid() const
 {
-  if (m_task != 0)
+  if (m_task != nullptr)
     return m_task->isValid();
   return false;
 }
@@ -270,7 +273,14 @@ QDateTime onlineJob::sendDate() const
 
 bool onlineJob::hasReferenceTo(const QString& id) const
 {
-  if (m_task != 0)
+  if (m_task != nullptr)
     return m_task->hasReferenceTo(id);
   return false;
+}
+
+QSet<QString> onlineJob::referencedObjects() const
+{
+  if (m_task != nullptr)
+    return m_task->referencedObjects();
+  return {};
 }

@@ -61,6 +61,11 @@ public:
   inline const QString& id() const { return m_id; }
   inline bool hasReferenceTo(const QString& id) const { return m_transaction->hasReferenceTo(id); }
 
+  /**
+   * @copydoc MyMoneyObject::referencedObjects
+   */
+  inline QSet<QString> referencedObjects() const { return m_transaction->referencedObjects(); }
+
   inline void setBalance(const MyMoneyMoney& balance) { m_balance = balance; }
 private:
   QString                             m_id;

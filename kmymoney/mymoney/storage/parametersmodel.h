@@ -44,6 +44,7 @@ public:
   const QString& id() const { return m_id; }
   const QString& value() const { return m_value; }
 
+  QSet<QString> referencedObjects() const { return {}; }
 private:
   QString       m_id;
   QString       m_value;

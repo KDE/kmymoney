@@ -69,7 +69,10 @@ public:
   {
     return false;
   }
-
+  QSet<QString> referencedObjects() const final override
+  {
+    return {};
+  }
   static TestMyMoneyObject readBaseXML(const QDomElement &node, bool forceId = true)
   {
     TestMyMoneyObject obj(node.attribute(QStringLiteral("id")));

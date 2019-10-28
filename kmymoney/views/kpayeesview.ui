@@ -107,25 +107,12 @@
        <item>
         <layout class="QHBoxLayout" name="m_listTopHLayout">
          <item>
+          <widget class="QLineEdit" name="m_searchWidget"/>
+         </item>
+         <item>
           <widget class="KComboBox" name="m_filterBox"/>
          </item>
         </layout>
-       </item>
-       <item>
-        <widget class="QListWidget" name="m_payeesList">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>1</horstretch>
-           <verstretch>1</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="alternatingRowColors">
-          <bool>true</bool>
-         </property>
-         <property name="selectionMode">
-          <enum>QAbstractItemView::ExtendedSelection</enum>
-         </property>
-        </widget>
        </item>
        <item>
         <widget class="QListView" name="m_payees">
@@ -644,7 +631,6 @@
  </customwidgets>
  <tabstops>
   <tabstop>m_tabWidget</tabstop>
-  <tabstop>m_payeesList</tabstop>
   <tabstop>m_newButton</tabstop>
   <tabstop>m_renameButton</tabstop>
   <tabstop>m_deleteButton</tabstop>

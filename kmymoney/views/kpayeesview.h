@@ -91,18 +91,17 @@ private:
   Q_DECLARE_PRIVATE(KPayeesView)
 
 private Q_SLOTS:
-  void slotPayeeSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
   /**
-    * This slot is called whenever the selection in m_payeesList
-    * is about to change.
-    */
-  void slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev);
+   * This slot is called whenever the selection in m_payeesList
+   * is about to change.
+   */
+  void slotPayeeSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
 
   /**
     * This slot is called whenever the selection in m_payeesList
     * has been changed.
     */
-  void slotSelectPayee();
+  // void slotSelectPayee();
 
   /**
     * This slot marks the current selected payee as modified (dirty).

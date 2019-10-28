@@ -2,7 +2,7 @@
  * Copyright 2000-2002  Michael Edwardes <mte@users.sourceforge.net>
  * Copyright 2001       Felix Rodriguez <frodriguez@users.sourceforge.net>
  * Copyright 2002-2003  Kevin Tambascio <ktambascio@users.sourceforge.net>
- * Copyright 2006-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2006-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2006       Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
@@ -31,6 +31,7 @@
 #include <QPixmapCache>
 #include <QPainter>
 #include <QIcon>
+#include <QSet>
 #include <QDebug>
 
 // ----------------------------------------------------------------------------
@@ -352,6 +353,12 @@ bool MyMoneyAccount::hasReferenceTo(const QString& id) const
 {
   Q_D(const MyMoneyAccount);
   return (id == d->m_institution) || (id == d->m_parentAccount) || (id == d->m_currencyId);
+}
+
+QSet<QString> MyMoneyAccount::referencedObjects() const
+{
+  Q_D(const MyMoneyAccount);
+  return { d->m_institution, d->m_parentAccount, d->m_currencyId };
 }
 
 void MyMoneyAccount::setOnlineBankingSettings(const MyMoneyKeyValueContainer& values)

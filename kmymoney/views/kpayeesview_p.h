@@ -82,41 +82,6 @@
 
 using namespace Icons;
 
-// *** KPayeeListItem Implementation ***
-
-class KPayeeListItem : public QListWidgetItem
-{
-public:
-  /**
-    * Constructor to be used to construct a payee entry object.
-    *
-    * @param parent pointer to the QListWidget object this entry should be
-    *               added to.
-    * @param payee const reference to MyMoneyPayee for which
-    *               the QListWidget entry is constructed
-    */
-  explicit KPayeeListItem(QListWidget *parent, const MyMoneyPayee& payee) :
-    QListWidgetItem(parent, QListWidgetItem::UserType),
-    m_id(payee.id())
-  {
-    setText(payee.name());
-    // allow in column rename
-    setFlags(Qt::ItemIsEditable | Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-  }
-
-  ~KPayeeListItem()
-  {
-  }
-
-  MyMoneyPayee payee() const
-  {
-    return MyMoneyFile::instance()->payeesModel()->itemById(m_id);
-  }
-
-private:
-  QString       m_id;
-};
-
 enum filterTypeE { eAllPayees = 0, eReferencedPayees = 1, eUnusedPayees = 2 };
 
 class KPayeesViewPrivate : public KMyMoneyViewBasePrivate
@@ -124,19 +89,18 @@ class KPayeesViewPrivate : public KMyMoneyViewBasePrivate
   Q_DECLARE_PUBLIC(KPayeesView)
 
 public:
-  explicit KPayeesViewPrivate(KPayeesView *qq) :
-    KMyMoneyViewBasePrivate(),
-    q_ptr(qq),
-    ui(new Ui::KPayeesView),
-    m_transactionFilter (nullptr),
-    m_contact(nullptr),
-    m_payeeRow(0),
-    m_needLoad(true),
-    m_searchWidget(nullptr),
-    m_inSelection(false),
-    m_allowEditing(true),
-    m_payeeFilterType(0),
-    m_filterProxyModel(nullptr)
+  explicit KPayeesViewPrivate(KPayeesView *qq)
+    : KMyMoneyViewBasePrivate()
+    , q_ptr(qq)
+    , ui(new Ui::KPayeesView)
+    , m_transactionFilter (nullptr)
+    , m_contact(nullptr)
+    , m_syncedPayees(0)
+    , m_needLoad(true)
+    , m_inSelection(false)
+    , m_allowEditing(true)
+    , m_payeeFilterType(0)
+    , m_filterProxyModel(nullptr)
   {
   }
 
@@ -176,13 +140,6 @@ public:
     ui->matchTypeCombo->addItem(i18nc("@item Match Payees name partially", "Match Payees name (partial)"), static_cast<int>(eMyMoney::Payee::MatchType::Name));
     ui->matchTypeCombo->addItem(i18nc("@item Match Payees name exactly", "Match Payees name (exact)"), static_cast<int>(eMyMoney::Payee::MatchType::NameExact));
     ui->matchTypeCombo->addItem(i18nc("@item Search match in list", "Match on a name listed below"), static_cast<int>(eMyMoney::Payee::MatchType::Key));
-
-    // create the searchline widget
-    // and insert it into the existing layout
-    m_searchWidget = new KListWidgetSearchLine(q, ui->m_payeesList);
-    m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed));
-    ui->m_payeesList->setContextMenuPolicy(Qt::CustomContextMenu);
-    ui->m_listTopHLayout->insertWidget(0, m_searchWidget);
 
     //load the filter type
     ui->m_filterBox->addItem(i18nc("@item Show all payees", "All"));
@@ -225,16 +182,26 @@ public:
     ui->m_register->setSelectionMode(QTableWidget::SingleSelection);
     ui->m_register->setDetailsColumnType(eWidgets::eRegister::DetailColumn::AccountFirst);
 #endif
-    m_renameProxyModel = new ItemRenameProxyModel(q);
-    ui->m_payees->setModel( m_renameProxyModel );
 
+    m_renameProxyModel = new ItemRenameProxyModel(q);
+    ui->m_payees->setModel(m_renameProxyModel);
+    ui->m_payees->setContextMenuPolicy(Qt::CustomContextMenu);
+
+    m_renameProxyModel->setReferenceFilter(ItemRenameProxyModel::eAllItem);
     m_renameProxyModel->setFilterKeyColumn(PayeesModel::Column::Name);
+    m_renameProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
     m_renameProxyModel->setRenameColumn(PayeesModel::Column::Name);
     m_renameProxyModel->setSortRole(eMyMoney::Model::PayeeNameRole);
     m_renameProxyModel->setSortLocaleAware(true);
     m_renameProxyModel->sort(0);
     m_renameProxyModel->setDynamicSortFilter(true);
+
     m_renameProxyModel->setSourceModel(MyMoneyFile::instance()->payeesModel());
+
+    // setup the searchline widget
+    q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_renameProxyModel, &QSortFilterProxyModel::setFilterFixedString);
+    ui->m_searchWidget->setClearButtonEnabled(true);
+    ui->m_searchWidget->setPlaceholderText(i18nc("Placeholder text", "Search"));
 
     ui->m_balanceLabel->hide();
 
@@ -244,14 +211,6 @@ public:
     q->connect(ui->m_payees, &QWidget::customContextMenuRequested, q, &KPayeesView::slotShowPayeesMenu);
     ui->m_payees->setSelectionMode(QListView::ExtendedSelection);
     q->connect( m_renameProxyModel, &ItemRenameProxyModel::renameItem,     q, &KPayeesView::slotRenameSinglePayee);
-
-
-
-    q->connect(ui->m_payeesList, static_cast<void (QListWidget::*)(QListWidgetItem*, QListWidgetItem*)>(&QListWidget::currentItemChanged), q, static_cast<void (KPayeesView::*)(QListWidgetItem*, QListWidgetItem*)>(&KPayeesView::slotSelectPayee));
-    q->connect(ui->m_payeesList, &QListWidget::itemSelectionChanged, q,   static_cast<void (KPayeesView::*)()>(&KPayeesView::slotSelectPayee));
-    // q->connect(ui->m_payeesList, &QListWidget::itemDoubleClicked, q,      &KPayeesView::slotStartRename);
-    // q->connect(ui->m_payeesList, &QListWidget::itemChanged, q,            &KPayeesView::slotRenameSinglePayee);
-    q->connect(ui->m_payeesList, &QWidget::customContextMenuRequested, q, &KPayeesView::slotShowPayeesMenu);
 
     q->connect(ui->m_newButton,     &QAbstractButton::clicked, q, &KPayeesView::slotNewPayee);
     q->connect(ui->m_renameButton,  &QAbstractButton::clicked, q, &KPayeesView::slotRenamePayee);
@@ -327,6 +286,7 @@ public:
     clearItemData();
   }
 
+#if 0
   void loadPayees()
   {
     Q_Q(KPayeesView);
@@ -402,10 +362,10 @@ public:
       ++itemsIt;
     }
   }
+#endif
 
   void ensurePayeeVisible(const QString& id)
   {
-    Q_Q(KPayeesView);
     const auto baseIdx = MyMoneyFile::instance()->payeesModel()->indexById(id);
     if (baseIdx.isValid()) {
       const auto idx = MyMoneyModelBase::mapFromBaseSource(m_renameProxyModel, baseIdx);
@@ -551,10 +511,11 @@ public:
     try {
       // create a transaction filter that contains all payees selected for removal
       MyMoneyTransactionFilter f = MyMoneyTransactionFilter();
-      for (QList<MyMoneyPayee>::const_iterator it = m_selectedPayeesList.constBegin();
-           it != m_selectedPayeesList.constEnd(); ++it) {
-        f.addPayee((*it).id());
+      const auto list = selectedPayees();
+      for (const auto payee : list) {
+        f.addPayee(payee.id());
       }
+
       // request a list of all transactions that still use the payees in question
       QList<MyMoneyTransaction> translist = file->transactionList(f);
   //     qDebug() << "[KPayeesView::slotDeletePayee]  " << translist.count() << " transaction still assigned to payees";
@@ -565,7 +526,7 @@ public:
         // loop over all splits in the transaction of the schedule
         foreach (const auto split, schedule.transaction().splits()) {
           // is the payee in the split to be deleted?
-          if (payeeInList(m_selectedPayeesList, split.payeeId())) {
+          if (payeeInList(list, split.payeeId())) {
             used_schedules.push_back(schedule); // remember this schedule
             break;
           }
@@ -577,10 +538,10 @@ public:
       QList<MyMoneyAccount> allAccounts;
       QList<MyMoneyAccount> usedAccounts;
       file->accountList(allAccounts);
-      foreach (const MyMoneyAccount &account, allAccounts) {
+      for (const MyMoneyAccount &account : allAccounts) {
         if (account.isLoan()) {
           MyMoneyAccountLoan loanAccount(account);
-          foreach (const MyMoneyPayee &payee, m_selectedPayeesList) {
+          for (const MyMoneyPayee &payee : list) {
             if (loanAccount.hasReferenceTo(payee.id())) {
               usedAccounts.append(account);
             }
@@ -597,12 +558,12 @@ public:
         // first create list with all non-selected payees
         QList<MyMoneyPayee> remainingPayees;
         if (type == KPayeeReassignDlg::TypeMerge) {
-          remainingPayees = m_selectedPayeesList;
+          remainingPayees = list;
         } else {
           remainingPayees = file->payeeList();
           QList<MyMoneyPayee>::iterator it_p;
           for (it_p = remainingPayees.begin(); it_p != remainingPayees.end();) {
-            if (m_selectedPayeesList.contains(*it_p)) {
+            if (list.contains(*it_p)) {
               it_p = remainingPayees.erase(it_p);
             } else {
               ++it_p;
@@ -655,7 +616,7 @@ public:
               if (split.isMatched()) {
                 auto tm = split.matchedTransaction();
                 for (auto& sm : tm.splits()) {
-                  if (payeeInList(m_selectedPayeesList, sm.payeeId())) {
+                  if (payeeInList(list , sm.payeeId())) {
                     sm.setPayeeId(payee_id); // first modify payee in current split
                     // then modify the split in our local copy of the transaction list
                     tm.modifySplit(sm); // this does not modify the list object 'splits'!
@@ -664,7 +625,7 @@ public:
                 split.addMatch(tm);
                 transaction.modifySplit(split); // this does not modify the list object 'splits'!
               }
-              if (payeeInList(m_selectedPayeesList, split.payeeId())) {
+              if (payeeInList(list, split.payeeId())) {
                 split.setPayeeId(payee_id); // first modify payee in current split
                 // then modify the split in our local copy of the transaction list
                 transaction.modifySplit(split); // this does not modify the list object 'splits'!
@@ -679,7 +640,7 @@ public:
             auto trans = schedule.transaction();
             // create copy of lists of splits
             for (auto& split : trans.splits()) {
-              if (payeeInList(m_selectedPayeesList, split.payeeId())) {
+              if (payeeInList(list, split.payeeId())) {
                 split.setPayeeId(payee_id);
                 trans.modifySplit(split); // does not modify the list object 'splits'!
               }
@@ -712,8 +673,7 @@ public:
       QStringList deletedPayeeNames;
 
       // now loop over all selected payees and remove them
-      for (QList<MyMoneyPayee>::iterator it = m_selectedPayeesList.begin();
-           it != m_selectedPayeesList.end(); ++it) {
+      for (QList<MyMoneyPayee>::const_iterator it = list.constBegin(); it != list.constEnd(); ++it) {
         if (newPayee.id() != (*it).id()) {
           if (addToMatchList) {
             deletedPayeeNames << (*it).name();
@@ -755,9 +715,6 @@ public:
       }
       ft.commit();
 
-      // If we just deleted the payees, they sure don't exist anymore
-      m_selectedPayeesList.clear();
-
     } catch (const MyMoneyException &e) {
       KMessageBox::detailedSorry(q, i18n("Unable to remove payee(s)"), e.what());
     }
@@ -776,16 +733,12 @@ public:
     */
   bool payeeInList(const QList<MyMoneyPayee>& list, const QString& id) const
   {
-    bool rc = false;
-    QList<MyMoneyPayee>::const_iterator it_p = list.begin();
-    while (it_p != list.end()) {
-      if ((*it_p).id() == id) {
-        rc = true;
-        break;
+    for (const auto& payee : list) {
+      if (payee.id() == id) {
+        return true;
       }
-      ++it_p;
     }
-    return rc;
+    return false;
   }
 
   /** Checks whether the currently selected payee is "dirty"
@@ -811,13 +764,13 @@ public:
   MyMoneyPayee        m_payee;
   QString             m_newName;
   MyMoneyContact*     m_contact;
-  int                 m_payeeRow;
-  QList<int>          m_payeeRows;
+  int                 m_syncedPayees;
+  QList<MyMoneyPayee> m_payeesToSync;
 
   /**
     * List of selected payees
     */
-  QList<MyMoneyPayee> m_selectedPayeesList;
+  // QList<MyMoneyPayee> m_selectedPayeesList;
 
   /**
     * q member holds a list of all transactions
@@ -828,11 +781,6 @@ public:
     * q member holds the load state of page
     */
   bool m_needLoad;
-
-  /**
-    * Search widget for the list
-    */
-  KListWidgetSearchLine*  m_searchWidget;
 
   /**
    * Semaphore to suppress loading during selection

@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2002-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2004       Kevin Tambascio <ktambascio@users.sourceforge.net>
  * Copyright 2005-2006  Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
@@ -23,6 +23,8 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
+#include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -366,6 +368,23 @@ bool MyMoneySplit::hasReferenceTo(const QString& id) const
     if (id == d->m_tagList[i])
       return true;
   return rc || (id == d->m_account) || (id == d->m_payee) || (id == d->m_costCenter);
+}
+
+QSet<QString> MyMoneySplit::referencedObjects() const
+{
+  Q_D(const MyMoneySplit);
+
+  QSet<QString> ids;
+  if (isMatched()) {
+    ids.unite(matchedTransaction().referencedObjects());
+  }
+  for (int i = 0; i < d->m_tagList.size(); i++) {
+    ids.insert(d->m_tagList[i]);
+  }
+  ids.insert(d->m_account);
+  ids.insert(d->m_payee);
+  ids.insert(d->m_costCenter);
+  return ids;
 }
 
 bool MyMoneySplit::isMatched() const

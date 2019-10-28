@@ -1,5 +1,5 @@
 /*
- * Copyright 2005-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2005-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -23,6 +23,7 @@
 // QT Includes
 
 #include <QString>
+#include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -238,6 +239,12 @@ bool MyMoneySecurity::hasReferenceTo(const QString& id) const
 {
   Q_D(const MyMoneySecurity);
   return (id == d->m_tradingCurrency);
+}
+
+QSet<QString> MyMoneySecurity::referencedObjects() const
+{
+  Q_D(const MyMoneySecurity);
+  return { d->m_tradingCurrency };
 }
 
 QString MyMoneySecurity::securityTypeToString(const eMyMoney::Security::Type securityType)
