@@ -669,11 +669,14 @@ void MyMoneyStorageMgr::modifyTransaction(const MyMoneyTransaction& transaction)
   if (it_t == d->m_transactionList.end())
     throw MYMONEYEXCEPTION_CSTRING("invalid transaction key");
 
+  // keep a copy before we remove the transaction from the pool
+  const auto oldTransaction = (*it_t);
+
   // remove old transaction from lists
   d->m_transactionList.remove(oldKey);
 
   // and adjust the balances of the accounts
-  foreach (const auto split, (*it_t).splits()) {
+  foreach (const auto split, oldTransaction.splits()) {
     auto acc = d->m_accountList[split.accountId()];
     d->adjustBalance(acc, split, true);
     acc.touch();
