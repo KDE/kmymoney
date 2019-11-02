@@ -1127,7 +1127,7 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
 
   // extract the splits from the original transaction, but only
   // if there is one because otherwise the currency is overridden
-  if (t.commodity().isEmpty()) {
+  if (torig.splitCount() != 0) {
     KMyMoneyUtils::dissectTransaction(torig, sorig,
                      assetAccountSplit,
                      feeSplits,
