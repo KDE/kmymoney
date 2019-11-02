@@ -1089,7 +1089,7 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
     foreach (const auto split, torig.splits()) {
       if (split.id() != sorig.id()) {
         auto cat = file->account(split.accountId());
-        if (cat.currencyId() != d->m_account.currencyId()) {
+        if (cat.currencyId() != t.commodity()) {
           if (cat.currencyId().isEmpty())
             cat.setCurrencyId(d->m_account.currencyId());
           if (!split.shares().isZero() && !split.value().isZero()) {
