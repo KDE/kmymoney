@@ -74,7 +74,7 @@ class InvestTransactionEditorPrivate : public TransactionEditorPrivate
 public:
   explicit  InvestTransactionEditorPrivate(InvestTransactionEditor* qq) :
       TransactionEditorPrivate(qq),
-      m_activity(0),
+      m_activity(nullptr),
       m_phonyAccount(MyMoneyAccount("Phony-ID", MyMoneyAccount())),
       m_transactionType(eMyMoney::Split::InvestmentTransactionType::BuyShares)
   {
@@ -258,7 +258,7 @@ public:
       }
 
       // focus jumps into the memo field
-      if ((w = q->haveWidget("memo")) != 0) {
+      if ((w = q->haveWidget("memo")) != nullptr) {
         w->setFocus();
       }
 
@@ -1147,7 +1147,7 @@ bool InvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const MyM
   // keep the current activity object and create a new one
   // that can be destroyed later on
   auto activity = d->m_activity;
-  d->m_activity = 0;      // make sure we create a new one
+  d->m_activity = nullptr;      // make sure we create a new one
   d->activityFactory(activity->type());
 
   // if the activity is not set in the combo widget, we keep
