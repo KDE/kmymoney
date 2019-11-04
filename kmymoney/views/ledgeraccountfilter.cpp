@@ -37,6 +37,8 @@
 #include "mymoneyaccount.h"
 #include "mymoneyfile.h"
 #include "journalmodel.h"
+#include "accountsmodel.h"
+#include "onlinebalanceproxymodel.h"
 
 class LedgerAccountFilterPrivate
 {
@@ -47,6 +49,7 @@ public:
   : q_ptr(qq)
   , view(nullptr)
   , concatModel(new KConcatenateRowsProxyModel(qq))
+  , onlinebalanceproxymodel(new OnlineBalanceProxyModel(qq))
   , showValuesInverted(false)
   , balanceCalculationPending(false)
   , newTransactionPresent(false)
@@ -59,6 +62,7 @@ public:
   LedgerAccountFilter*        q_ptr;
   LedgerView*                 view;
   KConcatenateRowsProxyModel* concatModel;
+  OnlineBalanceProxyModel*    onlinebalanceproxymodel;
   MyMoneyAccount              account;
   bool                        showValuesInverted;
   bool                        balanceCalculationPending;
@@ -111,6 +115,11 @@ void LedgerAccountFilter::setupBottomHalf()
   d->view->setModel(this);
   d->concatModel->setObjectName("LedgerView concatModel");
   d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel());
+
+  d->onlinebalanceproxymodel->setObjectName("OnlineBalanceProxyModel");
+  d->onlinebalanceproxymodel->setSourceModel(MyMoneyFile::instance()->accountsModel());
+  d->concatModel->addSourceModel(d->onlinebalanceproxymodel);
+
   setSourceModel(d->concatModel);
 
   // if balance calculation has not been triggered, then run it immediately

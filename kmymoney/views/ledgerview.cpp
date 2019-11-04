@@ -34,7 +34,7 @@
 // Project Includes
 
 #include "mymoneyfile.h"
-#include "ledgerdelegate.h"
+#include "journaldelegate.h"
 #include "ledgermodel.h"
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
@@ -43,12 +43,14 @@
 #include "journalmodel.h"
 #include "columnselector.h"
 #include "mymoneyenums.h"
+#include "delegateproxy.h"
 
 class LedgerView::Private
 {
 public:
   Private(LedgerView* p)
   : q(p)
+  , delegateProxy(new DelegateProxy(p))
   , adjustableColumn(JournalModel::Column::Detail)
   , adjustingColumn(false)
   , showValuesInverted(false)
@@ -56,29 +58,38 @@ public:
   , newTransactionPresent(false)
   , columnSelector(nullptr)
   {
-    delegates.insert(0, new LedgerDelegate(q));
-    q->setItemDelegate(delegates[0]);
+    const auto file = MyMoneyFile::instance();
+
+    auto journalDelegate = new JournalDelegate(q);
+    delegateProxy->addDelegate(file->journalModel(), journalDelegate);
+    delegateProxy->addDelegate(file->journalModel()->newTransaction(), journalDelegate);
+    delegateProxy->addDelegate(file->accountsModel(), journalDelegate);
+
+    // delegateProxy->addDelegate(accountsModel, new ...);
+
+    q->setItemDelegate(delegateProxy);
   }
 
-  LedgerDelegate* delegateForColumn(const QModelIndex& idx)
+  void setSingleLineDetailRole(eMyMoney::Model::Roles role)
   {
-    return delegates[0];
+    for (auto delegate : delegates) {
+      JournalDelegate* journalDelegate = qobject_cast<JournalDelegate*>(delegate);
+      if(journalDelegate) {
+        journalDelegate->setSingleLineRole(role);
+      }
+    }
   }
 
-  LedgerDelegate* delegateForRow(const QModelIndex& idx)
-  {
-    return delegates[0];
-  }
-
-  LedgerView*                 q;
-  QVector<LedgerDelegate*>    delegates;
-  MyMoneyAccount              account;
-  int                         adjustableColumn;
-  bool                        adjustingColumn;
-  bool                        showValuesInverted;
-  bool                        balanceCalculationPending;
-  bool                        newTransactionPresent;
-  ColumnSelector*             columnSelector;
+  LedgerView*                     q;
+  DelegateProxy*                  delegateProxy;
+  QHash<const QAbstractItemModel*, QStyledItemDelegate*>   delegates;
+  MyMoneyAccount                  account;
+  int                             adjustableColumn;
+  bool                            adjustingColumn;
+  bool                            showValuesInverted;
+  bool                            balanceCalculationPending;
+  bool                            newTransactionPresent;
+  ColumnSelector*                 columnSelector;
 };
 
 
@@ -308,19 +319,21 @@ void LedgerView::paintEvent(QPaintEvent* event)
 
 void LedgerView::setSingleLineDetailRole(eMyMoney::Model::Roles role)
 {
-  d->delegates[0]->setSingleLineRole(role);
+  d->setSingleLineDetailRole(role);
 }
 
 int LedgerView::sizeHintForColumn(int col) const
 {
   if (col == JournalModel::Column::Reconciliation) {
     QStyleOptionViewItem opt;
-    QModelIndex index = model()->index(0, col);
-    LedgerDelegate* delegate = d->delegateForColumn(index);
-    int hint = delegate->sizeHint(opt, index).width();
-    if(showGrid())
-      hint += 1;
-    return hint;
+    const QModelIndex index = model()->index(0, col);
+    const auto delegate = d->delegateProxy->delegate(index.model());
+    if (delegate) {
+      int hint = delegate->sizeHint(opt, index).width();
+      if(showGrid())
+        hint += 1;
+      return hint;
+    }
   }
   return QTableView::sizeHintForColumn(col);
 }
@@ -335,9 +348,11 @@ int LedgerView::sizeHintForRow(int row) const
   // We always ask for the detail column as this varies in height
   ensurePolished();
 
-  QModelIndex index = model()->index(row, JournalModel::Column::Detail);
-  LedgerDelegate* delegate = d->delegateForRow(index);
-  if(delegate && (delegate->editorRow() != row)) {
+  const QModelIndex index = model()->index(row, JournalModel::Column::Detail);
+  const auto delegate = d->delegateProxy->delegate(index.model());
+  const auto journalDelegate = qobject_cast<const JournalDelegate*>(delegate);
+
+  if(journalDelegate && (journalDelegate->editorRow() != row)) {
     QStyleOptionViewItem opt;
     opt.state |= (row == currentIndex().row()) ? QStyle::State_Selected : QStyle::State_None;
     int hint = delegate->sizeHint(opt, index).height();

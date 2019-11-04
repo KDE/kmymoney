@@ -28,6 +28,7 @@
 // KDE Includes
 
 #include <KConcatenateRowsProxyModel>
+#include <KDescendantsProxyModel>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -39,6 +40,7 @@ MyMoneyModelBase::MyMoneyModelBase(QObject* parent, const QString& idLeadin, qui
   , m_idLeadin(idLeadin)
   , m_idSize(idSize)
   , m_dirty(false)
+  , m_blockedSignals(false)
   , m_idMatchExp(QStringLiteral("^%1(\\d+)$").arg(m_idLeadin))
 {
   connect(this, &QAbstractItemModel::modelReset, this, &MyMoneyModelBase::updateReferencedObjects);
@@ -64,15 +66,22 @@ QModelIndex MyMoneyModelBase::mapToBaseSource(const QModelIndex& _idx)
   const QSortFilterProxyModel*      sortFilterModel;
   const QIdentityProxyModel*        identityModel;
   const KConcatenateRowsProxyModel* concatModel;
+  const KDescendantsProxyModel*     descendantsModel;
   do {
     if (( sortFilterModel = qobject_cast<const QSortFilterProxyModel*>(idx.model())) != nullptr) {
+      // qDebug() << "QSortFilterProxyModel";
       idx = sortFilterModel->mapToSource(idx);
     } else if((concatModel = qobject_cast<const KConcatenateRowsProxyModel*>(idx.model())) != nullptr) {
+      // qDebug() << "KConcatenateRowsProxyModel";
       idx = concatModel->mapToSource(idx);
     } else if((identityModel = qobject_cast<const QIdentityProxyModel*>(idx.model())) != nullptr) {
+      // qDebug() << "QIdentityProxyModel";
       idx = identityModel->mapToSource(idx);
+    } else if((descendantsModel = qobject_cast<const KDescendantsProxyModel*>(idx.model())) != nullptr) {
+      // qDebug() << "KDescendantsProxyModel";
+      idx = descendantsModel->mapToSource(idx);
     }
-  } while (sortFilterModel || concatModel || identityModel);
+  } while (sortFilterModel || concatModel || identityModel || descendantsModel);
   return idx;
 }
 
@@ -82,6 +91,7 @@ QModelIndex MyMoneyModelBase::mapFromBaseSource(QAbstractItemModel* proxyModel, 
   const QSortFilterProxyModel*      sortFilterModel;
   const QIdentityProxyModel*        identityModel;
   const KConcatenateRowsProxyModel* concatModel;
+  const KDescendantsProxyModel*     descendantsModel;
 
   if (( sortFilterModel = qobject_cast<const QSortFilterProxyModel*>(proxyModel)) != nullptr) {
     if (sortFilterModel->sourceModel() != idx.model()) {
@@ -97,6 +107,11 @@ QModelIndex MyMoneyModelBase::mapFromBaseSource(QAbstractItemModel* proxyModel, 
       idx = mapFromBaseSource(identityModel->sourceModel(), idx);
     }
     idx = identityModel->mapFromSource(idx);
+  } else if((descendantsModel = qobject_cast<const KDescendantsProxyModel*>(idx.model())) != nullptr) {
+    if (descendantsModel->sourceModel() != idx.model()) {
+      idx = mapFromBaseSource(descendantsModel->sourceModel(), idx);
+    }
+    idx = descendantsModel->mapFromSource(idx);
   } else {
     qDebug() << proxyModel->metaObject()->className() << "not supported in" << Q_FUNC_INFO;
     idx = QModelIndex();

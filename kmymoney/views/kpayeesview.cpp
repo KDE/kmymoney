@@ -794,6 +794,7 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
     qWarning("Unexpected exception in KPayeesView::slotSelectPayeeAndTransaction %s", e.what());
   }
 #endif
+  d->ensurePayeeVisible(payeeId);
 }
 
 void KPayeesView::slotShowPayeesMenu(const QPoint& /*p*/)

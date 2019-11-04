@@ -8,6 +8,7 @@ set(libmodels_a_SOURCES
     securitiesfilterproxymodel.cpp
     delegateproxy.cpp
     itemrenameproxymodel.cpp
+    onlinebalanceproxymodel.cpp
 )
 
 if(ENABLE_UNFINISHEDFEATURES)
