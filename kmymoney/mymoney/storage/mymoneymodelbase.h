@@ -94,6 +94,19 @@ protected:
 
   virtual void doUpdateReferencedObjects() = 0;
 
+  /**
+   * Overridden for internal reasons. This version will
+   * block emission of signals during the reset completely
+   */
+  void beginResetModel();
+
+  /**
+   * Overridden for internal reasons. This version will
+   * reset the signal emission state to the state it was
+   * prior to the call of @sa beginResetModel()
+   */
+  void endResetModel();
+
 protected Q_SLOTS:
   void updateReferencedObjects();
 
@@ -105,6 +118,7 @@ protected:
   QString                       m_idLeadin;
   quint8                        m_idSize;
   bool                          m_dirty;
+  bool                          m_blockedSignals;
   QRegularExpression            m_idMatchExp;
 };
 

@@ -150,3 +150,16 @@ void MyMoneyModelBase::updateReferencedObjects()
 {
   doUpdateReferencedObjects();
 }
+
+void MyMoneyModelBase::beginResetModel()
+{
+  m_blockedSignals = signalsBlocked();
+  blockSignals(true);
+  QAbstractItemModel::beginResetModel();
+}
+
+void MyMoneyModelBase::endResetModel()
+{
+  blockSignals(m_blockedSignals);
+  QAbstractItemModel::endResetModel();
+}
