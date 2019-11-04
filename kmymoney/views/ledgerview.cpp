@@ -34,7 +34,6 @@
 // Project Includes
 
 #include "mymoneyfile.h"
-#include "journaldelegate.h"
 #include "ledgermodel.h"
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
@@ -44,6 +43,8 @@
 #include "columnselector.h"
 #include "mymoneyenums.h"
 #include "delegateproxy.h"
+#include "journaldelegate.h"
+#include "onlinebalancedelegate.h"
 
 class LedgerView::Private
 {
@@ -63,7 +64,7 @@ public:
     auto journalDelegate = new JournalDelegate(q);
     delegateProxy->addDelegate(file->journalModel(), journalDelegate);
     delegateProxy->addDelegate(file->journalModel()->newTransaction(), journalDelegate);
-    delegateProxy->addDelegate(file->accountsModel(), journalDelegate);
+    delegateProxy->addDelegate(file->accountsModel(), new OnlineBalanceDelegate(q));
 
     // delegateProxy->addDelegate(accountsModel, new ...);
 

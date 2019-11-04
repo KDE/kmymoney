@@ -28,6 +28,7 @@ if(ENABLE_UNFINISHEDFEATURES)
     ledgerpayeefilter.cpp
     ledgerdelegate.cpp
     journaldelegate.cpp
+    onlinebalancedelegate.cpp
     newspliteditor.cpp
     newtransactioneditor.cpp
     newtransactionform.cpp
