@@ -107,3 +107,39 @@ QSize DelegateProxy::sizeHint(const QStyleOptionViewItem& option, const QModelIn
   return QSize();
 }
 
+QWidget* DelegateProxy::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
+{
+  Q_D(const DelegateProxy);
+  const auto delegate = d->findDelegate(index);
+  if (delegate) {
+    return delegate->createEditor(parent, option, index);
+  }
+  return nullptr;
+}
+
+void DelegateProxy::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const
+{
+  Q_D(const DelegateProxy);
+  const auto delegate = d->findDelegate(index);
+  if (delegate) {
+    delegate->updateEditorGeometry(editor, option, index);
+  }
+}
+
+void DelegateProxy::setEditorData(QWidget* editWidget, const QModelIndex& index) const
+{
+  Q_D(const DelegateProxy);
+  const auto delegate = d->findDelegate(index);
+  if (delegate) {
+    delegate->setEditorData(editWidget, index);
+  }
+}
+
+void DelegateProxy::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
+{
+  Q_D(const DelegateProxy);
+  const auto delegate = d->findDelegate(index);
+  if (delegate) {
+    delegate->setModelData(editor, model, index);
+  }
+}

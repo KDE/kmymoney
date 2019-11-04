@@ -77,11 +77,11 @@ public:
 
   void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
   QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
-  // QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
-  // void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const final override;
-  // void setEditorData(QWidget* editWidget, const QModelIndex& index) const final override;
+  QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
+  void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const final override;
+  void setEditorData(QWidget* editWidget, const QModelIndex& index) const final override;
 
-  // void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
+  void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
 
 
 private:
