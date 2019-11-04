@@ -30,7 +30,6 @@ class QColor;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ledgermodel.h"
 #include "mymoneyenums.h"
 
 class LedgerView;
