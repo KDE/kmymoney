@@ -283,6 +283,12 @@ struct AccountsModel::Private
     return q->MyMoneyModel::itemByIndex(parent);
   }
 
+  bool hasOnlineBalance(const MyMoneyAccount& account)
+  {
+    return !(account.value("lastImportedTransactionDate").isEmpty()
+      || account.value("lastStatementBalance").isEmpty());
+  }
+
   struct DefaultAccounts {
     eMyMoney::Account::Standard groupType;
     eMyMoney::Account::Type     accountType;
@@ -379,6 +385,9 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
   const MyMoneyAccount& account = static_cast<TreeItem<MyMoneyAccount>*>(idx.internalPointer())->constDataRef();
 
   if (d->isFavoriteIndex(idx.parent())) {
+    if (role == eMyMoney::Model::AccountIsFavoriteIndexRole) {
+      return true;
+    }
     const auto accountIdx = indexById(account.id());
     const auto subIdx = index(accountIdx.row(), idx.column(), accountIdx.parent());
     return data(subIdx, role);
@@ -562,6 +571,22 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::AccountGroupRole:
       return static_cast<int>(account.accountGroup());
+
+    case eMyMoney::Model::AccountOnlineBalanceDateRole:
+      if (d->hasOnlineBalance(account)) {
+        return QDate::fromString(account.value("lastImportedTransactionDate"), Qt::ISODate);
+      }
+      break;
+
+    case eMyMoney::Model::AccountOnlineBalanceValueRole:
+      if (d->hasOnlineBalance(account)) {
+        return QVariant::fromValue(MyMoneyMoney(account.value("lastStatementBalance")));
+      }
+      break;
+
+    case eMyMoney::Model::AccountIsFavoriteIndexRole:
+      return false;
+
   }
   return QVariant();
 }
