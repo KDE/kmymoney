@@ -60,6 +60,7 @@
         "Name[pl]": "Eksporter CSV",
         "Name[pt]": "Exportação para CSV",
         "Name[pt_BR]": "Exportador CSV",
+        "Name[ru]": "Экспорт CSV",
         "Name[sk]": "CSV exportér",
         "Name[sv]": "CSV-export",
         "Name[uk]": "Експортування CSV",

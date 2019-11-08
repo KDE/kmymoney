@@ -60,6 +60,7 @@
         "Name[pl]": "Sprawozdanie uzgadniania",
         "Name[pt]": "Relatório de reconciliação",
         "Name[pt_BR]": "Relatório de reconciliação",
+        "Name[ru]": "Отчёт по сверке",
         "Name[sk]": "Zrovnávacia správa",
         "Name[sv]": "Avstämningsrapport",
         "Name[uk]": "Звіт щодо звірки",

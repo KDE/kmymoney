@@ -57,6 +57,7 @@
         "Name[pl]": "Importer GNC",
         "Name[pt]": "Importação de GNC",
         "Name[pt_BR]": "Importador GNC",
+        "Name[ru]": "Импорт GNC",
         "Name[sv]": "GNC-import",
         "Name[uk]": "Імпортування GNC",
         "Name[x-test]": "xxGNC Importerxx",
