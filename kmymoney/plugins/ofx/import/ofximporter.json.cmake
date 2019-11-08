@@ -58,6 +58,7 @@
         "Name[pl]": "Importer OFX",
         "Name[pt]": "Importação de OFX",
         "Name[pt_BR]": "Importador OFX",
+        "Name[ru]": "Импорт OFX",
         "Name[sv]": "QFX-import",
         "Name[uk]": "Інструмент імпортування OFX",
         "Name[x-test]": "xxOFX Importerxx",

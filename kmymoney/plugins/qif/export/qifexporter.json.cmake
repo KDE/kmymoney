@@ -58,6 +58,7 @@
         "Name[pl]": "Eksporter QIF",
         "Name[pt]": "Exportação para QIF",
         "Name[pt_BR]": "Exportador QIF",
+        "Name[ru]": "Экспорт QIF",
         "Name[sv]": "QIF-export",
         "Name[uk]": "Інструмент експортування QIF",
         "Name[x-test]": "xxQIF Exporterxx",

@@ -59,6 +59,7 @@
         "Name[pl]": "Importer CSV",
         "Name[pt]": "Importação de CSV",
         "Name[pt_BR]": "Importador CSV",
+        "Name[ru]": "Импорт CSV",
         "Name[sk]": "Importér CSV",
         "Name[sv]": "CSV-import",
         "Name[uk]": "Імпортування CSV",

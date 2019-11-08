@@ -56,6 +56,7 @@
         "Name[pl]": "KBanking",
         "Name[pt]": "KBanking",
         "Name[pt_BR]": "KBanking",
+        "Name[ru]": "KBanking",
         "Name[sk]": "KBanking",
         "Name[sv]": "Kbank",
         "Name[uk]": "KBanking",

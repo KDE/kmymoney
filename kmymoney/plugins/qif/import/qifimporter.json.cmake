@@ -58,6 +58,7 @@
         "Name[pl]": "Importer QIF",
         "Name[pt]": "Importação de QIF",
         "Name[pt_BR]": "Importador QIF",
+        "Name[ru]": "Импорт QIF",
         "Name[sv]": "QIF-import",
         "Name[uk]": "Інструмент імпортування QIF",
         "Name[x-test]": "xxQIF Importerxx",
