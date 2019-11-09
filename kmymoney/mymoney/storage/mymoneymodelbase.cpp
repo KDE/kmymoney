@@ -169,8 +169,8 @@ void MyMoneyModelBase::updateReferencedObjects()
 void MyMoneyModelBase::beginResetModel()
 {
   m_blockedSignals = signalsBlocked();
-  blockSignals(true);
   QAbstractItemModel::beginResetModel();
+  blockSignals(true);
 }
 
 void MyMoneyModelBase::endResetModel()

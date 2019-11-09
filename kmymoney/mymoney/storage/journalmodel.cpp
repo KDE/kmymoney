@@ -620,7 +620,7 @@ void JournalModel::addTransaction(const QString& id, MyMoneyTransaction& t)
   // insert the items into the model
   insertRows(startRow, rows);
   const QModelIndex startIdx = index(startRow, 0);
-  const QModelIndex endIdx = index(startRow+rows, columnCount());
+  const QModelIndex endIdx = index(startRow+rows-1, columnCount());
 
   d->startBalanceCacheOperation();
 

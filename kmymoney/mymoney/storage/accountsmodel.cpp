@@ -894,8 +894,6 @@ void AccountsModel::updateAccountBalances(const QHash<QString, MyMoneyMoney>& ba
   const MyMoneyFile* file = MyMoneyFile::instance();
   const MyMoneySecurity baseCurrency = file->baseCurrency();
 
-  beginResetModel();
-
   // suppress single updates while processing whole batch
   d->updateOnBalanceChange = false;
   bool approximate = false;
@@ -926,8 +924,6 @@ void AccountsModel::updateAccountBalances(const QHash<QString, MyMoneyMoney>& ba
   MyMoneyMoney newProfit = d->profitLoss();
   if (profit != newProfit)
     emit profitLossChanged(newProfit, approximate);
-
-  endResetModel();
 }
 
 void AccountsModel::addItem(MyMoneyAccount& account)
