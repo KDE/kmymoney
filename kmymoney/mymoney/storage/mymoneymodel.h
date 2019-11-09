@@ -164,8 +164,8 @@ private:
 };
 
 
-template <typename T>
-class MyMoneyModel : public MyMoneyModelBase
+template <typename T, typename U>
+class MyMoneyModelEx : public MyMoneyModelBase
 {
 public:
   enum Operation {
@@ -186,7 +186,7 @@ public:
   public:
     // construction/destruction
 
-    explicit UndoCommand(MyMoneyModel<T>* model, const T& before, const T& after, QUndoCommand* parent = nullptr)
+    explicit UndoCommand(MyMoneyModelEx<T,U>* model, const U& before, const U& after, QUndoCommand* parent = nullptr)
     : QUndoCommand(parent)
     , m_model(model)
     , m_before(before)
@@ -206,14 +206,14 @@ public:
 
 
   protected:
-    MyMoneyModel<T>*    m_model;
-    T                   m_before;
-    T                   m_after;
+    MyMoneyModelEx<T,U>*  m_model;
+    U                     m_before;
+    U                     m_after;
   };
 
 
 
-  explicit MyMoneyModel(QObject* parent, const QString& idLeadin, quint8 idSize, QUndoStack* undoStack)
+  explicit MyMoneyModelEx(QObject* parent, const QString& idLeadin, quint8 idSize, QUndoStack* undoStack)
       : MyMoneyModelBase(parent, idLeadin, idSize)
       , m_undoStack(undoStack)
       , m_idToItemMapper(nullptr)
@@ -221,7 +221,7 @@ public:
     m_rootItem = new TreeItem<T>(T());
   }
 
-  virtual ~MyMoneyModel()
+  virtual ~MyMoneyModelEx()
   {
     delete m_rootItem;
   }
@@ -777,5 +777,16 @@ protected:
   QHash<QString, TreeItem<T>*>* m_idToItemMapper;
   QSet<QString>                 m_referencedObjects;
 };
+
+template <typename T>
+class MyMoneyModel : public MyMoneyModelEx<T, T>
+{
+public:
+  explicit MyMoneyModel(QObject* parent, const QString& idLeadin, quint8 idSize, QUndoStack* undoStack)
+  : MyMoneyModelEx<T, T>(parent, idLeadin, idSize, undoStack)
+  {
+  }
+};
+
 
 #endif // MYMONEYMODEL_H
