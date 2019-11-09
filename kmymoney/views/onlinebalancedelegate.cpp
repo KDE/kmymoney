@@ -100,6 +100,7 @@ public:
   eMyMoney::Model::Roles        m_singleLineRole;
   int                           m_lineHeight;
   int                           m_margin;
+  QBrush                        m_backGround;
 };
 
 
@@ -136,141 +137,63 @@ void OnlineBalanceDelegate::paint(QPainter* painter, const QStyleOptionViewItem&
   if (opt.state & QStyle::State_Selected) {
     opt.state |= QStyle::State_Active;
   }
+  // never draw it as selected but always enabled
+  opt.state &= ~QStyle::State_Selected;
+  opt.state |= QStyle::State_Enabled;
 
   painter->save();
 
   QAbstractItemView* view = qobject_cast< QAbstractItemView* >(parent());
-  const bool editWidgetIsVisible = d->m_view && d->m_view->indexWidget(index);
 
   // Background
   QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
   const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
   const int lineHeight = opt.fontMetrics.lineSpacing() + 2;
 
-  style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
+  const QRect textArea = QRect(opt.rect.x() + margin, opt.rect.y() + margin, opt.rect.width() - 2 * margin, opt.rect.height() - 2 * margin);
 
   QPalette::ColorGroup cg;
 
-  KColorScheme::BackgroundRole role = KColorScheme::PositiveBackground;
+  const auto onlineBalanceDate = index.data(eMyMoney::Model::AccountOnlineBalanceDateRole).toDate();
+  const auto onlineBalanceValue = index.data(eMyMoney::Model::AccountOnlineBalanceValueRole).value<MyMoneyMoney>();
+  const auto accountBalance = MyMoneyFile::instance()->balance(index.data(eMyMoney::Model::IdRole).toString(), onlineBalanceDate);
 
-#if 0
-  role = KColorScheme::NegativeBackground;
-#endif
-  KColorScheme::adjustBackground(opt.palette, role, QPalette::Base, KColorScheme::Button, KSharedConfigPtr());
+  KColorScheme::BackgroundRole role = (accountBalance == onlineBalanceValue) ? KColorScheme::PositiveBackground : KColorScheme::NegativeBackground;
 
+  KColorScheme::adjustBackground(opt.palette, role, QPalette::Base, KColorScheme::View, KSharedConfigPtr());
   // opt.rect.setHeight(lineHeight);
   opt.backgroundBrush = opt.palette.base();
+  d->m_backGround = opt.backgroundBrush;
 
-  // never draw it as selected but always enabled
-  opt.state &= ~QStyle::State_Selected;
+  opt.rect.setX(opt.rect.x()-2);
+  opt.rect.setWidth(opt.rect.width()+5);
   style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
-  if(index.column() == (int)JournalModel::Column::Detail) {
+  switch (index.column()) {
+    case JournalModel::Column::Detail:
       // adjust the rect to cover all columns
       if(view && view->viewport()) {
         opt.rect.setX(0);
         opt.rect.setWidth(view->viewport()->width());
-        style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
       }
       painter->setPen(opt.palette.color(QPalette::Normal, QPalette::Text));
       painter->drawText(opt.rect, Qt::AlignCenter, "Online Balance");
+      break;
+    case JournalModel::Column::Date:
+      painter->setPen(opt.palette.color(QPalette::Normal, QPalette::Text));
+      painter->drawText(textArea, opt.displayAlignment, QLocale().toString(onlineBalanceDate, QLocale::ShortFormat));
+      break;
+    case JournalModel::Column::Balance:
+      painter->setPen(opt.palette.color(QPalette::Normal, QPalette::Text));
+      painter->drawText(textArea, opt.displayAlignment, onlineBalanceValue.formatMoney(index.data(eMyMoney::Model::AccountFractionRole).toInt()));
+      break;
   }
 
-#if 0
-  // Do not paint text if the edit widget is shown
-  if (!editWidgetIsVisible) {
-    if(view && (index.column() == JournalModel::Column::Detail)) {
-      if(view->currentIndex().row() == index.row()) {
-        opt.state |= QStyle::State_HasFocus;
-      }
-    }
-    const QRect textArea = QRect(opt.rect.x() + margin, opt.rect.y() + margin, opt.rect.width() - 2 * margin, opt.rect.height() - 2 * margin);
-    const bool selected = opt.state & QStyle::State_Selected;
-
-    QStringList lines = d->displayString(index, opt);
-
-    const bool erroneous = index.data(eMyMoney::Model::Roles::TransactionErroneousRole).toBool();
-
-    // draw the text items
-    if(!opt.text.isEmpty() || !lines.isEmpty()) {
-
-      /// @todo port to new model code
-#if 0
-      // check if it is a scheduled transaction and display it as inactive
-      if(!index.model()->data(index, (int)eLedgerModel::Role::ScheduleId).toString().isEmpty()) {
-        opt.state &= ~QStyle::State_Enabled;
-      }
-#endif
-      cg = (opt.state & QStyle::State_Enabled) ? QPalette::Normal : QPalette::Disabled;
-
-      if (cg == QPalette::Normal && !(opt.state & QStyle::State_Active)) {
-        cg = QPalette::Inactive;
-      }
-      if (selected) {
-        // always use the normal palette since the background is also in normal
-        painter->setPen(opt.palette.color(QPalette::ColorGroup(QPalette::Normal), QPalette::HighlightedText));
-
-      } else if (erroneous) {
-        painter->setPen(m_erroneousColor);
-
-      } else {
-        painter->setPen(opt.palette.color(cg, QPalette::Text));
-      }
-
-      if (opt.state & QStyle::State_Editing) {
-        painter->setPen(opt.palette.color(cg, QPalette::Text));
-        painter->drawRect(textArea.adjusted(0, 0, -1, -1));
-      }
-
-      // collect data for the various columns
-      if(index.column() == JournalModel::Column::Detail) {
-        for(int i = 0; i < lines.count(); ++i) {
-          painter->drawText(textArea.adjusted(0, lineHeight * i, 0, 0), opt.displayAlignment, lines[i]);
-        }
-
-      } else {
-        painter->drawText(textArea, opt.displayAlignment, opt.text);
-      }
-    }
-
-    // draw the focus rect
-    if(opt.state & QStyle::State_HasFocus) {
-      QStyleOptionFocusRect o;
-      o.QStyleOption::operator=(opt);
-      o.rect = style->proxy()->subElementRect(QStyle::SE_ItemViewItemFocusRect, &opt, opt.widget);
-      o.state |= QStyle::State_KeyboardFocusChange;
-      o.state |= QStyle::State_Item;
-
-      cg = (opt.state & QStyle::State_Enabled) ? QPalette::Normal : QPalette::Disabled;
-      o.backgroundColor = opt.palette.color(cg, (opt.state & QStyle::State_Selected)
-                                              ? QPalette::Highlight : QPalette::Window);
-      style->proxy()->drawPrimitive(QStyle::PE_FrameFocusRect, &o, painter, opt.widget);
-    }
-
-    // draw the attention mark
-    if((index.column() == JournalModel::Column::Detail)
-    && erroneous) {
-      QPixmap attention;
-      attention.loadFromData(attentionSign, sizeof(attentionSign), 0, 0);
-      style->proxy()->drawItemPixmap(painter, option.rect, Qt::AlignRight | Qt::AlignTop, attention);
-    }
-  }
-#endif
   painter->restore();
 }
 
 QSize OnlineBalanceDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-#if 0
-  // get parameters only once per update to speed things up
-  if (index.row() == 0) {
-    QStyleOptionViewItem opt = option;
-    initStyleOption(&opt, index);
-    QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
-    d->m_margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
-    d->m_lineHeight = opt.fontMetrics.lineSpacing();
-  }
-#endif
   QStyleOptionViewItem opt = option;
   initStyleOption(&opt, index);
   QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();

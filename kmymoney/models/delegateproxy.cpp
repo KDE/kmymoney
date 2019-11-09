@@ -48,7 +48,9 @@ public:
 
   const QStyledItemDelegate* findDelegate(const QModelIndex& idx) const
   {
-    const QAbstractItemModel* model = MyMoneyModelBase::baseModel(idx);
+    // create an index for column 0
+    const QModelIndex baseIdx = idx.model()->index(idx.row(), 0, idx.parent());
+    const QAbstractItemModel* model = MyMoneyModelBase::baseModel(baseIdx);
     return mapping.value(model, nullptr);
   }
 

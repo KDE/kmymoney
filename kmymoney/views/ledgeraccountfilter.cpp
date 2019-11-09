@@ -87,6 +87,16 @@ LedgerAccountFilter::~LedgerAccountFilter()
 {
 }
 
+void LedgerAccountFilter::showRowCount() const
+{
+  Q_D(const LedgerAccountFilter);
+
+  qDebug() << "ConcatModel"  << d->concatModel->rowCount();
+  qDebug() << "JournalModel" << MyMoneyFile::instance()->journalModel()->rowCount();
+  qDebug() << "BalanceProxy" << d->onlinebalanceproxymodel->rowCount();
+  qDebug() << "AccountFilter" << rowCount();
+}
+
 void LedgerAccountFilter::setupBottomHalf()
 {
   Q_D(LedgerAccountFilter);

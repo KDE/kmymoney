@@ -173,6 +173,7 @@ void LedgerViewPage::splitterChanged(int pos, int index)
 {
   Q_UNUSED(pos);
   Q_UNUSED(index);
+  d->filter->showRowCount();
 
   d->ui->ledgerView->ensureCurrentItemIsVisible();
 }

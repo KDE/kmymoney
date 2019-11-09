@@ -50,6 +50,8 @@ public:
 
   void setShowEntryForNewTransaction(bool show);
 
+  void showRowCount() const;
+
 public Q_SLOTS:
   /**
    * This method finshes the initial installation

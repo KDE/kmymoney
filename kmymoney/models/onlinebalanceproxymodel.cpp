@@ -83,13 +83,28 @@ int OnlineBalanceProxyModel::columnCount(const QModelIndex& parent) const
   return MyMoneyFile::instance()->journalModel()->columnCount();
 }
 
+QModelIndex OnlineBalanceProxyModel::index(int row, int column, const QModelIndex& parent) const
+{
+  switch(column) {
+    case JournalModel::Column::Balance:
+      column = AccountsModel::Column::Balance;
+      break;
+    default:
+      break;
+  }
+  return QSortFilterProxyModel::index(row, column, parent);
+}
+
 QVariant OnlineBalanceProxyModel::data(const QModelIndex& idx, int role) const
 {
   if (idx.isValid()) {
     switch(role) {
       case Qt::DisplayRole:
-        if (idx.column() == JournalModel::Column::Date) {
-          return QSortFilterProxyModel::data(idx, eMyMoney::Model::AccountOnlineBalanceDateRole);
+        switch (idx.column()) {
+          case JournalModel::Column::Date:
+            return QSortFilterProxyModel::data(idx, eMyMoney::Model::AccountOnlineBalanceDateRole);
+          case JournalModel::Column::Balance:
+            return QSortFilterProxyModel::data(idx, eMyMoney::Model::AccountBalanceRole);
         }
         break;
 
@@ -100,10 +115,30 @@ QVariant OnlineBalanceProxyModel::data(const QModelIndex& idx, int role) const
       case eMyMoney::Model::TransactionPostDateRole:
         return QSortFilterProxyModel::data(idx, eMyMoney::Model::AccountOnlineBalanceDateRole);
 
-      default:
+      case Qt::ForegroundRole:
+        return QVariant();
+
+      case Qt::FontRole:
+        return QVariant();
+
+      case Qt::TextAlignmentRole:
+        switch(idx.column()) {
+          case AccountsModel::Column::Balance:
+            return QVariant(Qt::AlignRight | Qt::AlignVCenter);
+
+          default:
+            return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
+        }
         break;
     }
   }
+
+#if 0
+  if (idx.column() == JournalModel::Column::Balance) {
+    const QModelIndex baseIdx = idx.model()->index(idx.row(), 0, idx.parent());
+    return QSortFilterProxyModel::data(baseIdx, role);
+  }
+#endif
   return QSortFilterProxyModel::data(idx, role);
 }
 
