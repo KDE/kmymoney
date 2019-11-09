@@ -78,7 +78,7 @@ class JournalModelNewTransaction;
 
 /**
   */
-class KMM_MYMONEY_EXPORT JournalModel : public MyMoneyModel<JournalEntry>
+class KMM_MYMONEY_EXPORT JournalModel : public MyMoneyModelEx<JournalEntry, MyMoneyTransaction>
 {
   Q_OBJECT
 

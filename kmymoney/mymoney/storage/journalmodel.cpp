@@ -253,7 +253,7 @@ QVariant JournalModelNewTransaction::data(const QModelIndex& idx, int role) cons
 
 
 JournalModel::JournalModel(QObject* parent, QUndoStack* undoStack)
-  : MyMoneyModel<JournalEntry>(parent, QStringLiteral("T"), JournalModel::ID_SIZE, undoStack)
+  : MyMoneyModelEx<JournalEntry, MyMoneyTransaction>(parent, QStringLiteral("T"), JournalModel::ID_SIZE, undoStack)
   , d(new Private(this))
 {
   setObjectName(QLatin1String("JournalModel"));
@@ -567,7 +567,7 @@ void JournalModel::unload()
 {
   d->balanceCache.clear();
   d->accountCache.clear();
-  MyMoneyModel::unload();
+  MyMoneyModelEx::unload();
 }
 
 MyMoneyTransaction JournalModel::transactionById(const QString& id) const
