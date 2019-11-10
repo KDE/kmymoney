@@ -978,26 +978,29 @@ void AccountsModel::doAddItem(const MyMoneyAccount& item, const QModelIndex& par
   }
 }
 
-void AccountsModel::doModifyItem(const QModelIndex& idx, const MyMoneyAccount& item)
+void AccountsModel::doModifyItem(const MyMoneyAccount& before, const MyMoneyAccount& after)
 {
+  Q_UNUSED(before);
+  const auto idx = indexById(after.id());
   if (idx.isValid()) {
-    MyMoneyModel::doModifyItem(idx, item);
-    if (item.value("PreferredAccount") == QLatin1String("Yes")) {
-      addFavorite(item.id());
+    MyMoneyModel::doModifyItem(before, after);
+    if (after.value("PreferredAccount") == QLatin1String("Yes")) {
+      addFavorite(after.id());
     } else {
-      removeFavorite(item.id());
+      removeFavorite(after.id());
     }
     // MyMoneyModel::doModifyItem already sents this out, so maybe we can skip it here
     // emit dataChanged(idx, index(idx.row(), columnCount(idx.parent())-1));
   }
 }
 
-void AccountsModel::doRemoveItem(const QModelIndex& idx)
+void AccountsModel::doRemoveItem(const MyMoneyAccount& before)
 {
+  const auto idx = indexById(before.id());
   if (idx.isValid()) {
     const auto itemId = idx.data(eMyMoney::Model::IdRole).toString();
-    MyMoneyModel::doRemoveItem(idx);
     static_cast<TreeItem<MyMoneyAccount>*>(idx.parent().internalPointer())->dataRef().removeAccountId(itemId);
+    MyMoneyModel::doRemoveItem(before);
     removeFavorite(itemId);
   }
 }

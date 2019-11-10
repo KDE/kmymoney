@@ -253,7 +253,7 @@ QVariant JournalModelNewTransaction::data(const QModelIndex& idx, int role) cons
 
 
 JournalModel::JournalModel(QObject* parent, QUndoStack* undoStack)
-  : MyMoneyModelEx<JournalEntry, MyMoneyTransaction>(parent, QStringLiteral("T"), JournalModel::ID_SIZE, undoStack)
+  : MyMoneyModel<JournalEntry>(parent, QStringLiteral("T"), JournalModel::ID_SIZE, undoStack)
   , d(new Private(this))
 {
   setObjectName(QLatin1String("JournalModel"));
@@ -567,7 +567,7 @@ void JournalModel::unload()
 {
   d->balanceCache.clear();
   d->accountCache.clear();
-  MyMoneyModelEx::unload();
+  MyMoneyModel::unload();
 }
 
 MyMoneyTransaction JournalModel::transactionById(const QString& id) const
@@ -596,14 +596,19 @@ QString JournalModel::keyForDate(const QDate& date) const
   return MyMoneyTransaction::uniqueSortKey(date, QString());
 }
 
-void JournalModel::addTransaction(MyMoneyTransaction& t)
+void JournalModel::addTransaction(MyMoneyTransaction& item)
 {
-  addTransaction(nextId(), t);
+  item = MyMoneyTransaction(nextId(), item);
+  auto transaction = QSharedPointer<MyMoneyTransaction>(new MyMoneyTransaction(item));
+  JournalEntry entry(QString(), transaction, MyMoneySplit());
+
+  m_undoStack->push(new UndoCommand(this, JournalEntry(), entry));
 }
 
-void JournalModel::addTransaction(const QString& id, MyMoneyTransaction& t)
+void JournalModel::doAddItem(const JournalEntry& item, const QModelIndex& parentIdx)
 {
-  auto transaction = QSharedPointer<MyMoneyTransaction>(new MyMoneyTransaction(id, t));
+  Q_UNUSED(parentIdx);
+  auto transaction = item.sharedtransactionPtr();
   QString key = (*transaction).uniqueSortKey();
 
   // add mapping
@@ -634,31 +639,26 @@ void JournalModel::addTransaction(const QString& id, MyMoneyTransaction& t)
   // add the splits to the balance cache
   d->addTransactionToBalance(originalStartRow, rows);
 
-  // tell the caller what we have done to his transaction
-  t = (*transaction);
-
   emit dataChanged(startIdx, endIdx);
 
   d->finishBalanceCacheOperation();
   setDirty();
 }
 
-void JournalModel::removeTransaction(const MyMoneyTransaction& t)
+void JournalModel::removeTransaction(const MyMoneyTransaction& item)
 {
-  const auto startIdx = firstIndexById(t.id());
-
-  if (!startIdx.isValid())
-    return;
-
-  removeTransaction(startIdx);
+  const auto idx = firstIndexById(item.id());
+  if (idx.isValid()) {
+    const auto currentItem = static_cast<TreeItem<JournalEntry>*>(idx.internalPointer())->constDataRef();
+    m_undoStack->push(new UndoCommand(this, currentItem, JournalEntry()));
+  }
 }
 
-void JournalModel::removeTransaction(const QModelIndex& idx)
+void JournalModel::doRemoveItem(const JournalEntry& before)
 {
-  // we keep a copy of the original transaction
-  // (we don't believe the caller except for the id)
-  const auto transaction = static_cast<TreeItem<JournalEntry>*>(idx.internalPointer())->constDataRef().transaction();
 
+  const auto& transaction = before.transaction();
+  const auto idx = firstIndexById(transaction.id());
   const auto rows = transaction.splitCount();
   d->startBalanceCacheOperation();
   d->removeTransactionFromBalance(idx.row(), rows);
@@ -670,16 +670,29 @@ void JournalModel::removeTransaction(const QModelIndex& idx)
   setDirty();
 }
 
-
 void JournalModel::modifyTransaction(const MyMoneyTransaction& newTransaction)
 {
-  const auto startIdx = firstIndexById(newTransaction.id());
+  const auto idx = firstIndexById(newTransaction.id());
+  if (idx.isValid()) {
+    auto transaction = QSharedPointer<MyMoneyTransaction>(new MyMoneyTransaction(newTransaction));
+    JournalEntry entry(QString(), transaction, MyMoneySplit());
+
+    const auto currentItem = static_cast<TreeItem<JournalEntry>*>(idx.internalPointer())->constDataRef();
+    m_undoStack->push(new UndoCommand(this, currentItem, entry));
+  }
+}
+
+void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& after)
+{
+  Q_UNUSED(before);
+  const auto startIdx = firstIndexById(after.transaction().id());
 
   if (!startIdx.isValid())
     return;
 
   // we keep a copy of the original transaction
   // (we don't believe the caller except for the id)
+  const auto newTransaction = after.transaction();
   const auto oldTransaction = static_cast<TreeItem<JournalEntry>*>(startIdx.internalPointer())->constDataRef().transaction();
   const auto oldKey = oldTransaction.uniqueSortKey();
 
@@ -695,7 +708,7 @@ void JournalModel::modifyTransaction(const MyMoneyTransaction& newTransaction)
   // assign new JournalEntry items to the model. In the other special
   // cases it seems easier to simply remove the existing transaction
   // and add a new one by re-using the id.
-  auto transaction = QSharedPointer<MyMoneyTransaction>(new MyMoneyTransaction(newTransaction));
+  auto transaction = after.sharedtransactionPtr();
   if ((newTransaction.postDate() == oldTransaction.postDate())
   && (newTransaction.splitCount() == oldTransaction.splitCount())) {
     int row = startIdx.row();
@@ -716,9 +729,8 @@ void JournalModel::modifyTransaction(const MyMoneyTransaction& newTransaction)
     d->removeIdKeyMapping(oldTransaction.id());
     removeRows(startIdx.row(), oldTransaction.splitCount());
 
-    // and add the new ones (we need a local copy here to pass a non-const ref)
-    MyMoneyTransaction t(newTransaction);
-    addTransaction(newTransaction.id(), t);
+    JournalEntry journalEntry(QString(), transaction, MyMoneySplit());
+    doAddItem(journalEntry, QModelIndex());
   }
 
   d->finishBalanceCacheOperation();
@@ -844,3 +856,22 @@ MyMoneyMoney JournalModel::balance(const QString& accountId, const QDate& date) 
   }
   return d->balanceCache.value(accountId);
 }
+
+// determine for which type we were created:
+//
+// a) add item: m_after.id() is filled, m_before.id() is empty
+// b) modify item: m_after.id() is filled, m_before.id() is filled
+// c) add item: m_after.id() is empty, m_before.id() is filled
+JournalModel::Operation JournalModel::undoOperation(const JournalEntry& before, const JournalEntry& after) const
+{
+  const auto afterIdEmpty = (after.transactionPtr() == nullptr) || (after.transaction().id().isEmpty());
+  const auto beforeIdEmpty = (before.transactionPtr() == nullptr) || (before.transaction().id().isEmpty());
+  if (!afterIdEmpty && beforeIdEmpty)
+    return Add;
+  if (!afterIdEmpty && !beforeIdEmpty)
+    return Modify;
+  if (afterIdEmpty && !beforeIdEmpty)
+    return Remove;
+  return Invalid;
+}
+

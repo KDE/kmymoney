@@ -54,6 +54,7 @@ public:
   , m_split(sp)
   {}
 
+  inline QSharedPointer<MyMoneyTransaction> sharedtransactionPtr() const { return m_transaction; }
   inline const MyMoneyTransaction* transactionPtr() const { return m_transaction.data(); }
   inline const MyMoneyTransaction& transaction() const { return *m_transaction; }
   inline const MyMoneySplit& split() const { return m_split; }
@@ -78,7 +79,7 @@ class JournalModelNewTransaction;
 
 /**
   */
-class KMM_MYMONEY_EXPORT JournalModel : public MyMoneyModelEx<JournalEntry, MyMoneyTransaction>
+class KMM_MYMONEY_EXPORT JournalModel : public MyMoneyModel<JournalEntry>
 {
   Q_OBJECT
 
@@ -140,6 +141,12 @@ public:
    * to get indexes into the journal based on the date.
    */
   QString keyForDate(const QDate& date) const;
+
+protected:
+  Operation undoOperation(const JournalEntry& before, const JournalEntry& after) const override;
+  void doAddItem(const JournalEntry& item, const QModelIndex& parentIdx) override;
+  void doRemoveItem(const JournalEntry& before) override;
+  void doModifyItem(const JournalEntry& before, const JournalEntry& after) override;
 
 public Q_SLOTS:
   void updateBalances();

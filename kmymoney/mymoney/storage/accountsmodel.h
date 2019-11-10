@@ -143,8 +143,8 @@ protected:
   int processItems(Worker *worker) override;
 
   virtual void doAddItem(const MyMoneyAccount& item, const QModelIndex& parentIdx = QModelIndex()) override;
-  virtual void doModifyItem(const QModelIndex& idx, const MyMoneyAccount& item) override;
-  virtual void doRemoveItem(const QModelIndex& idx) override;
+  virtual void doModifyItem(const MyMoneyAccount& before, const MyMoneyAccount& after) override;
+  virtual void doRemoveItem(const MyMoneyAccount& before) override;
 
   MyMoneyModel<MyMoneyAccount>::Operation undoOperation(const MyMoneyAccount& before, const MyMoneyAccount& after) const override;
   void doReparentItem(const MyMoneyAccount& before, const MyMoneyAccount& after) override;

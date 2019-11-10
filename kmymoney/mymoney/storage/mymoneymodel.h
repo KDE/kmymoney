@@ -164,8 +164,8 @@ private:
 };
 
 
-template <typename T, typename U>
-class MyMoneyModelEx : public MyMoneyModelBase
+template <typename T>
+class MyMoneyModel : public MyMoneyModelBase
 {
 public:
   enum Operation {
@@ -186,7 +186,7 @@ public:
   public:
     // construction/destruction
 
-    explicit UndoCommand(MyMoneyModelEx<T,U>* model, const U& before, const U& after, QUndoCommand* parent = nullptr)
+    explicit UndoCommand(MyMoneyModel<T>* model, const T& before, const T& after, QUndoCommand* parent = nullptr)
     : QUndoCommand(parent)
     , m_model(model)
     , m_before(before)
@@ -206,14 +206,14 @@ public:
 
 
   protected:
-    MyMoneyModelEx<T,U>*  m_model;
-    U                     m_before;
-    U                     m_after;
+    MyMoneyModel<T>*  m_model;
+    T                 m_before;
+    T                 m_after;
   };
 
 
 
-  explicit MyMoneyModelEx(QObject* parent, const QString& idLeadin, quint8 idSize, QUndoStack* undoStack)
+  explicit MyMoneyModel(QObject* parent, const QString& idLeadin, quint8 idSize, QUndoStack* undoStack)
       : MyMoneyModelBase(parent, idLeadin, idSize)
       , m_undoStack(undoStack)
       , m_idToItemMapper(nullptr)
@@ -221,7 +221,7 @@ public:
     m_rootItem = new TreeItem<T>(T());
   }
 
-  virtual ~MyMoneyModelEx()
+  virtual ~MyMoneyModel()
   {
     delete m_rootItem;
   }
@@ -647,16 +647,10 @@ protected:
         doAddItem(after);
         break;
       case Modify:
-        idx = indexById(after.id());
-        if (idx.isValid()) {
-          doModifyItem(idx, after);
-        }
+        doModifyItem(before, after);
         break;
       case Remove:
-        idx = indexById(before.id());
-        if (idx.isValid()) {
-          doRemoveItem(idx);
-        }
+        doRemoveItem(before);
         break;
       case Reparent:
         doReparentItem(before, after);
@@ -669,19 +663,12 @@ protected:
 
   virtual void undo(const T& before, const T& after)
   {
-    QModelIndex idx;
     switch(undoOperation(before, after)) {
       case Add:
-        idx = indexById(after.id());
-        if (idx.isValid()) {
-          doRemoveItem(idx);
-        }
+        doRemoveItem(after);
         break;
       case Modify:
-        idx = indexById(before.id());
-        if (idx.isValid()) {
-          doModifyItem(idx, before);
-        }
+        doModifyItem(after, before);
         break;
       case Remove:
         doAddItem(before);
@@ -709,22 +696,25 @@ protected:
     emit dataChanged(idx, index(row, columnCount()-1, parentIdx));
   }
 
-  virtual void doModifyItem(const QModelIndex& idx, const T& item)
+  virtual void doModifyItem(const T& before, const T& after)
   {
+    Q_UNUSED(before);
+    const auto idx = indexById(after.id());
     if (idx.isValid()) {
       if (m_idToItemMapper) {
         m_idToItemMapper->remove(static_cast<const TreeItem<T>*>(idx.internalPointer())->constDataRef().id());
-        m_idToItemMapper->insert(item.id(), static_cast<TreeItem<T>*>(idx.internalPointer()));
+        m_idToItemMapper->insert(after.id(), static_cast<TreeItem<T>*>(idx.internalPointer()));
       }
-      static_cast<TreeItem<T>*>(idx.internalPointer())->dataRef() = item;
+      static_cast<TreeItem<T>*>(idx.internalPointer())->dataRef() = after;
       setDirty();
       doUpdateReferencedObjects();
       emit dataChanged(idx, index(idx.row(), columnCount(idx.parent())-1));
     }
   }
 
-  virtual void doRemoveItem(const QModelIndex& idx)
+  virtual void doRemoveItem(const T& before)
   {
+    const auto idx = indexById(before.id());
     if (idx.isValid()) {
       if (m_idToItemMapper) {
         m_idToItemMapper->remove(static_cast<const TreeItem<T>*>(idx.internalPointer())->constDataRef().id());
@@ -776,16 +766,6 @@ protected:
   QUndoStack*                   m_undoStack;
   QHash<QString, TreeItem<T>*>* m_idToItemMapper;
   QSet<QString>                 m_referencedObjects;
-};
-
-template <typename T>
-class MyMoneyModel : public MyMoneyModelEx<T, T>
-{
-public:
-  explicit MyMoneyModel(QObject* parent, const QString& idLeadin, quint8 idSize, QUndoStack* undoStack)
-  : MyMoneyModelEx<T, T>(parent, idLeadin, idSize, undoStack)
-  {
-  }
 };
 
 
