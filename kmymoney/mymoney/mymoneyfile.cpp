@@ -673,8 +673,6 @@ void MyMoneyFile::rollbackTransaction()
   d->undoStack.undo();
   qDebug() << "Rolled back transaction with now" << d->undoStack.count() << "commands on stack at index" << d->undoStack.index();
 
-  /// @todo port to new model code
-  // d->m_storage->rollbackTransaction();
   d->m_inTransaction = false;
   d->m_balanceChangedSet.clear();
   d->m_valueChangedSet.clear();
@@ -1034,7 +1032,7 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 
   // check that the account and its parent exist
   // this will throw an exception if the id is unknown
-  const auto idx = d->accountsModel.indexById(account.id());
+  auto idx = d->accountsModel.indexById(account.id());
   if (!idx.isValid())
     throw MYMONEYEXCEPTION_CSTRING("Unable to remove not existing account");
 
@@ -1074,6 +1072,8 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
   }
   acc.setInstitutionId(QString());
 
+  // get the index again as it might have changed
+  idx = d->accountsModel.indexById(account.id());
   d->accountsModel.removeItem(idx);
 
   d->m_balanceCache.clear(acc.id());
