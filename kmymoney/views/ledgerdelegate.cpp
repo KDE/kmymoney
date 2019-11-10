@@ -499,7 +499,7 @@ QWidget* LedgerDelegate::createEditor(QWidget* parent, const QStyleOptionViewIte
     if(d->m_editor) {
       d->m_editorRow = index.row();
       connect(d->m_editor, SIGNAL(done()), this, SLOT(endEdit()));
-      emit sizeHintChanged(index);
+      emit const_cast<LedgerDelegate*>(this)->sizeHintChanged(index);
     }
 
   } else {

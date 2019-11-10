@@ -160,7 +160,7 @@ private:
 
 
 Q_SIGNALS:
-  void balancesChanged(const QHash<QString, MyMoneyMoney>& balances) const;
+  void balancesChanged(const QHash<QString, MyMoneyMoney>& balances);
 
 public Q_SLOTS:
 

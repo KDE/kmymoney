@@ -183,7 +183,7 @@ struct JournalModel::Private
   {
     if (!fullBalanceRecalc.isEmpty()) {
       const auto journalRows = q->rowCount();
-      for (const auto accountId : qAsConst(fullBalanceRecalc)) {
+      for (const auto& accountId : qAsConst(fullBalanceRecalc)) {
         balanceCache[accountId] = MyMoneyMoney();
       }
 
@@ -201,7 +201,7 @@ struct JournalModel::Private
 
     // inform others about the changes
     QHash<QString, MyMoneyMoney> balances;
-    for (const auto accountId : qAsConst(balanceChangedSet)) {
+    for (const auto& accountId : qAsConst(balanceChangedSet)) {
       balances.insert(accountId, balanceCache.value(accountId));
     }
     emit q->balancesChanged(balances);
@@ -762,7 +762,7 @@ void JournalModel::transactionList(QList< QPair<MyMoneyTransaction, MyMoneySplit
     const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
     splits = filter.matchingSplits(journalEntry.transaction());
     if (!splits.isEmpty()) {
-      for (const auto& split : splits) {
+      for (const auto& split : qAsConst(splits)) {
         list.append(qMakePair(journalEntry.transaction(), split));
       }
     }
@@ -779,7 +779,6 @@ unsigned int JournalModel::transactionCount(const QString& accountid) const
 
   } else {
     const int rows = rowCount();
-    QVector<MyMoneySplit> splits;
     for (int row = 0; row < rows; ++row) {
       const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
       if (journalEntry.split().accountId() == accountid) {

@@ -855,7 +855,7 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
   if (!account.institutionId().isEmpty())
     institution(account.institutionId());
 
-  for (const auto sAccount : account.accountList())
+  for (const auto& sAccount : account.accountList())
     this->account(sAccount);
 
   // if the account was moved to another institution, we notify
@@ -1051,14 +1051,14 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
   // re-parent all sub-ordinate accounts to the parent of the account
   // to be deleted. First round check that all accounts exist, second
   // round do the re-parenting.
-  for (const auto accountId : account.accountList()) {
+  for (const auto& accountId : account.accountList()) {
     this->account(accountId);
   }
 
   // if one of the accounts did not exist, an exception had been
   // thrown and we would not make it until here.
   auto newParent = d->accountsModel.itemById(acc.parentAccountId());
-  for (const auto accountId : acc.accountList()) {
+  for (const auto& accountId : acc.accountList()) {
     auto accountToMove = d->accountsModel.itemById(accountId);
     reparentAccount(accountToMove, newParent);
     d->m_changeSet += MyMoneyNotification(File::Mode::Modify, MyMoneyFile::account(accountToMove.id()));
@@ -1948,7 +1948,7 @@ MyMoneyMoney MyMoneyFile::totalBalance(const QString& id, const QDate& date) con
 
   MyMoneyMoney result(balance(id, date));
 
-  for (const auto sAccount : account(id).accountList())
+  for (const auto& sAccount : account(id).accountList())
     result += totalBalance(sAccount, date);
 
   return result;

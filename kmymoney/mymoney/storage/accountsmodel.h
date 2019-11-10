@@ -154,8 +154,8 @@ public Q_SLOTS:
   void updateAccountBalances(const QHash<QString, MyMoneyMoney>& balances);
 
 Q_SIGNALS:
-  void netWorthChanged(const MyMoneyMoney& amount, bool approximate) const;
-  void profitLossChanged(const MyMoneyMoney& amount, bool approximate) const;
+  void netWorthChanged(const MyMoneyMoney& amount, bool approximate);
+  void profitLossChanged(const MyMoneyMoney& amount, bool approximate);
 
 private:
   struct Private;

@@ -111,7 +111,7 @@ protected Q_SLOTS:
   void updateReferencedObjects();
 
 Q_SIGNALS:
-  void modelLoaded() const;
+  void modelLoaded();
 
 protected:
   quint64                       m_nextId;
