@@ -163,6 +163,7 @@ class PriceModel;
 class ParametersModel;
 class OnlineJobsModel;
 class ReportsModel;
+class SpecialDatesModel;
 /// @note add new models here
 
 namespace eMyMoney { namespace Account { enum class Type; }
@@ -966,6 +967,10 @@ public:
    */
   PayeesModel* userModel() const;
 
+  /**
+   * The user model instance
+   */
+  SpecialDatesModel* specialDatesModel() const;
 
 /// @note add new models here
 
@@ -1730,6 +1735,8 @@ protected:
 
 protected Q_SLOTS:
   void finalizeFileOpen();
+
+  void reloadSpecialDates();
 
 Q_SIGNALS:
   /**

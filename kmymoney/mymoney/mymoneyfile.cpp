@@ -34,6 +34,7 @@
 #include <QLocale>
 #include <QBitArray>
 #include <QAction>
+#include <QTimer>
 #include <QDebug>
 
 // ----------------------------------------------------------------------------
@@ -77,6 +78,7 @@
 #include "parametersmodel.h"
 #include "onlinejobsmodel.h"
 #include "reportsmodel.h"
+#include "specialdatesmodel.h"
 /// @note add new models here
 
 #ifdef KMM_MODELTEST
@@ -196,6 +198,7 @@ public:
     , parametersModel(qq, &undoStack)
     , onlineJobsModel(qq, &undoStack)
     , reportsModel(qq, &undoStack)
+    , specialdatesmodel(qq, &undoStack)
     /// @note add new models here
     {
 #ifdef KMM_MODELTEST
@@ -242,7 +245,8 @@ public:
         || priceModel.isDirty()
         || parametersModel.isDirty()
         || onlineJobsModel.isDirty()
-        || reportsModel.isDirty();
+        || reportsModel.isDirty()
+        || specialdatesmodel.isDirty();
         /// @note add new models here
   }
 
@@ -263,6 +267,7 @@ public:
     parametersModel.setDirty(false);
     onlineJobsModel.setDirty(false);
     reportsModel.setDirty(false);
+    specialdatesmodel.setDirty(false);
     /// @note add new models here
   }
 
@@ -396,6 +401,7 @@ public:
   ParametersModel     parametersModel;
   OnlineJobsModel     onlineJobsModel;
   ReportsModel        reportsModel;
+  SpecialDatesModel   specialdatesmodel;
   /// @note add new models here
 };
 
@@ -418,6 +424,7 @@ private:
 MyMoneyFile::MyMoneyFile() :
     d(new Private(this))
 {
+  reloadSpecialDates();
 }
 
 MyMoneyFile::~MyMoneyFile()
@@ -473,6 +480,7 @@ void MyMoneyFile::unload()
   d->parametersModel.unload();
   d->onlineJobsModel.unload();
   d->reportsModel.unload();
+  // specialdatesmodel not unloaded here on purpose
   /// @note add new models here
   d->m_baseCurrency = MyMoneySecurity();
   d->undoStack.clear();
@@ -1682,6 +1690,11 @@ ReportsModel* MyMoneyFile::reportsModel() const
 PayeesModel* MyMoneyFile::userModel() const
 {
   return &d->userModel;
+}
+
+SpecialDatesModel* MyMoneyFile::specialDatesModel() const
+{
+  return &d->specialdatesmodel;
 }
 
 /// @note add new models here
@@ -3973,6 +3986,17 @@ void MyMoneyFile::fixSplitPrecision(MyMoneyTransaction& t) const
       split.setValue(static_cast<const MyMoneyMoney>(split.value().convertDenominator(transactionFraction).canonicalize()));
     }
   }
+}
+
+void MyMoneyFile::reloadSpecialDates()
+{
+  d->specialdatesmodel.load();
+  // calculate the time until midnite
+  const auto now = QDateTime::currentDateTime();
+  auto nextDay = now.addDays(1);
+  nextDay.setTime(QTime(0, 0));
+  auto timeout = now.msecsTo(nextDay);
+  QTimer::singleShot(now.msecsTo(nextDay), this, SLOT(reloadSpecialDates()));
 }
 
 

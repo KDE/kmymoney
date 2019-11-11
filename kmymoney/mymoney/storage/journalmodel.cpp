@@ -412,7 +412,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::JournalTransactionIdRole:
       return journalEntry.transaction().id();
 
-    case eMyMoney::Model::Roles::TransactionPostDateRole:
+    case eMyMoney::Model::TransactionPostDateRole:
       return transaction.postDate();
 
     case eMyMoney::Model::Roles::TransactionErroneousRole:
