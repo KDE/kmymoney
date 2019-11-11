@@ -22,6 +22,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDate>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -31,9 +33,9 @@
 // Project Includes
 
 #include "mymoneyenums.h"
-// #include "modelenums.h"
+#include "mymoneyfile.h"
+#include "accountsmodel.h"
 
-// using namespace eLedgerModel;
 using namespace eMyMoney;
 
 LedgerProxyModel::LedgerProxyModel(QObject* parent)
@@ -118,6 +120,26 @@ bool LedgerProxyModel::lessThan(const QModelIndex& left, const QModelIndex& righ
     return true;
   }
 
+  // make sure that the online balance is the last entry of a day
+  if (left.data(eMyMoney::Model::TransactionPostDateRole).toDate() == right.data(eMyMoney::Model::TransactionPostDateRole).toDate()) {
+    const auto leftModel = MyMoneyModelBase::baseModel(left);
+    const auto rightModel = MyMoneyModelBase::baseModel(right);
+    if (leftModel != rightModel) {
+      if (leftModel == MyMoneyFile::instance()->accountsModel()) {
+        return false;
+      } else if (rightModel == MyMoneyFile::instance()->accountsModel()) {
+        return true;
+#if 0
+      } else if(leftModel == MyMoneyFile::instance()->specialDatesModel()) {
+        return true;
+      } else if(rightModel == MyMoneyFile::instance()->specialDatesModel()) {
+        return false;
+#endif
+      }
+    }
+    // maybe add more logic here to sort the date entries
+  }
+
   // sort the schedules always after the real transactions
   /// @todo port to new model code, make sure to support display within correct date
 #if 0
@@ -145,6 +167,15 @@ bool LedgerProxyModel::filterAcceptsRow(int source_row, const QModelIndex& sourc
     return false;
 
   QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
+#if 0
+  const auto baseModel = MyMoneyModelBase::baseModel(idx);
+  if (baseModel == MyMoneyFile::instance()->specialDatesModel()) {
+    // for now show all date entries, but in the end we only need to
+    // show one if there are more consecutive entries
+    return true;
+  }
+#endif
+
   bool rc = idx.data(m_filterRole).toString().compare(m_filterId) == 0;
   // in case a journal entry has no id, it is the new transaction placeholder
   if(!rc) {
