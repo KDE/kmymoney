@@ -309,7 +309,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     return QVariant();
   }
 
-  const MyMoneyTransaction transaction = journalEntry.transaction();
+  const MyMoneyTransaction& transaction = journalEntry.transaction();
 
   switch(role) {
     case Qt::DisplayRole:
@@ -548,7 +548,7 @@ void JournalModel::load(const QMap<QString, MyMoneyTransaction>& list)
     d->addIdKeyMapping(id, it.key());
     auto transaction = QSharedPointer<MyMoneyTransaction>(new MyMoneyTransaction(*it));
     foreach (const auto split, (*transaction).splits()) {
-      JournalEntry journalEntry(it.key(), transaction, split);
+      const JournalEntry journalEntry(it.key(), transaction, split);
       static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->dataRef() = journalEntry;
       ++row;
     }
