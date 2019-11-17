@@ -79,6 +79,8 @@
 #include "ledgerpayeefilter.h"
 #include "journalmodel.h"
 #include "itemrenameproxymodel.h"
+#include "specialdatesmodel.h"
+#include "specialdatesfilter.h"
 
 using namespace Icons;
 
@@ -123,9 +125,15 @@ public:
 
     ui->m_register->setSingleLineDetailRole(eMyMoney::Model::TransactionCounterAccountRole);
 
-    m_transactionFilter = new LedgerPayeeFilter(ui->m_register);
+    // setup the model stack
+    auto file = MyMoneyFile::instance();
+    m_transactionFilter = new LedgerPayeeFilter(ui->m_register, file->accountsModel(), file->specialDatesModel());
+    auto specialDatesFilter = new SpecialDatesFilter(file->specialDatesModel(), q);
+    specialDatesFilter->setSourceModel(m_transactionFilter);
+    ui->m_register->setModel(specialDatesFilter);
 
-    m_contact = new MyMoneyContact(q);
+    q->connect(ui->m_register, &LedgerView::requestBalanceRecalculation, m_transactionFilter, &LedgerPayeeFilter::recalculateBalancesOnIdle);
+
     m_filterProxyModel = new AccountNamesFilterProxyModel(q);
     m_filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
     m_filterProxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity});
@@ -205,6 +213,7 @@ public:
 
     ui->m_balanceLabel->hide();
 
+    m_contact = new MyMoneyContact(q);
     q->connect(m_contact, &MyMoneyContact::contactFetched, q, &KPayeesView::slotContactFetched);
 
     q->connect(ui->m_payees->selectionModel(), &QItemSelectionModel::selectionChanged, q, &KPayeesView::slotPayeeSelectionChanged);

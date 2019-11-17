@@ -15,54 +15,49 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-#ifndef LEDGERPAYEEFILTER_H
-#define LEDGERPAYEEFILTER_H
+#ifndef LEDGERFILTERBASE_P_H
+#define LEDGERFILTERBASE_P_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QScopedPointer>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
+
+#include "kconcatenaterowsproxymodel.h"
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ledgerfilterbase.h"
 
-class LedgerView;
-class MyMoneyAccount;
-class LedgerPayeeFilterPrivate;
-class LedgerPayeeFilter : public LedgerFilterBase
-{
-  Q_OBJECT
+struct LedgerFilterBasePrivate {
+  LedgerFilterBasePrivate(LedgerFilterBase* qq)
+  : q(qq)
+  , accountsModel(nullptr)
+  , specialDatesModel(nullptr)
+  , concatModel(nullptr)
+  , accountType(eMyMoney::Account::Type::Asset)
+  , newTransactionPresent(false)
+  {
+  }
 
-public:
-  explicit LedgerPayeeFilter(LedgerView* parent, QAbstractItemModel* accountsModel, QAbstractItemModel* specialDatesModel);
-  ~LedgerPayeeFilter() override;
+  inline bool isAccountsModel(const QAbstractItemModel* model) const
+  {
+    return (model == accountsModel);
+  }
 
-  void setShowBalanceInverted(bool inverted = true);
+  inline bool isSpecialDatesModel(const QAbstractItemModel* model) const
+  {
+    return (model == specialDatesModel);
+  }
 
-  void setPayeeIdList(const QStringList& payeeIds);
-
-public Q_SLOTS:
-  void recalculateBalances();
-
-  void recalculateBalancesOnIdle();
-
-protected:
-  /**
-   * This method is overridden and checks if the splits payeeId is
-   * contained in the list provided by setPayeeIdList() and
-   * references an asset or liability account.
-   */
-  bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
-
-private:
-  Q_DECLARE_PRIVATE_D(LedgerFilterBase::d_ptr, LedgerPayeeFilter);
+  LedgerFilterBase*           q;
+  QAbstractItemModel*         accountsModel;
+  QAbstractItemModel*         specialDatesModel;
+  KConcatenateRowsProxyModel* concatModel;
+  eMyMoney::Account::Type     accountType;
+  QStringList                 filterIds;
+  bool                        newTransactionPresent;
 };
 
-#endif // LEDGERPAYEEFILTER_H
-
+#endif

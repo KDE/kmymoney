@@ -54,6 +54,9 @@ public:
   void setAccountType(eMyMoney::Account::Type type);
 
   void setFilterFixedString(const QString& filter);
+  void setFilterFixedStrings(const QStringList& filters);
+
+  QStringList filterFixedStrings() const;
 
   /**
    * This method returns the headerData adjusted to the current
@@ -62,6 +65,11 @@ public:
   QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
   void setShowEntryForNewTransaction(bool show);
+
+  /**
+   * add @a model to the source models
+   */
+  void addSourceModel(QAbstractItemModel* model);
 
 protected:
   LedgerFilterBasePrivate*  d_ptr;

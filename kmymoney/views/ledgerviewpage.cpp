@@ -30,16 +30,20 @@
 
 #include "newtransactionform.h"
 #include "ledgeraccountfilter.h"
+#include "specialdatesfilter.h"
+#include "specialdatesmodel.h"
+#include "accountsmodel.h"
 #include "journalmodel.h"
 #include "ui_ledgerviewpage.h"
 #include "mymoneyenums.h"
+#include "mymoneyfile.h"
 
 class LedgerViewPage::Private
 {
 public:
   Private(QWidget* parent)
   : ui(new Ui_LedgerViewPage)
-  , filter(nullptr)
+  , accountFilter(nullptr)
   , form(nullptr)
   {
     ui->setupUi(parent);
@@ -60,7 +64,8 @@ public:
   }
 
   Ui_LedgerViewPage*    ui;
-  LedgerAccountFilter*  filter;
+  LedgerAccountFilter*  accountFilter;
+  SpecialDatesFilter*   specialDatesFilter;
   NewTransactionForm*   form;
   QSet<QString>         hideFormReasons;
   QString               accountId;
@@ -77,7 +82,13 @@ LedgerViewPage::LedgerViewPage(QWidget* parent)
   connect(d->ui->ledgerView, &LedgerView::aboutToFinishEdit, this, &LedgerViewPage::finishEdit);
   connect(d->ui->splitter, &QSplitter::splitterMoved, this, &LedgerViewPage::splitterChanged);
 
-  d->filter = new LedgerAccountFilter(d->ui->ledgerView);
+
+  // setup the model stack
+  const auto file = MyMoneyFile::instance();
+  d->accountFilter = new LedgerAccountFilter(d->ui->ledgerView, file->accountsModel(), file->specialDatesModel());
+  d->specialDatesFilter = new SpecialDatesFilter(file->specialDatesModel(), this);
+  d->specialDatesFilter->setSourceModel(d->accountFilter);
+  d->ui->ledgerView->setModel(d->specialDatesFilter);
 }
 
 LedgerViewPage::~LedgerViewPage()
@@ -141,7 +152,7 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
 #endif
   }
   d->ui->formWidget->setVisible(d->hideFormReasons.isEmpty());
-  d->filter->setAccount(acc);
+  d->accountFilter->setAccount(acc);
   d->accountId = acc.id();
 }
 
@@ -173,12 +184,11 @@ void LedgerViewPage::splitterChanged(int pos, int index)
 {
   Q_UNUSED(pos);
   Q_UNUSED(index);
-  d->filter->showRowCount();
 
   d->ui->ledgerView->ensureCurrentItemIsVisible();
 }
 
 void LedgerViewPage::setShowEntryForNewTransaction(bool show)
 {
-  d->filter->setShowEntryForNewTransaction(show);
+  d->accountFilter->setShowEntryForNewTransaction(show);
 }

@@ -19,6 +19,7 @@ if(ENABLE_UNFINISHEDFEATURES)
     ledgerschedule.cpp
     ledgersplit.cpp
     ledgertransaction.cpp
+    specialdatesfilter.cpp
     splitmodel.cpp
   )
 endif()

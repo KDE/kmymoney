@@ -55,50 +55,32 @@ public:
   }
 
   LedgerView*                 view;
-  QStringList                 payeeIdList;
   bool                        showValuesInverted;
   bool                        balanceCalculationPending;
 };
 
 
-LedgerPayeeFilter::LedgerPayeeFilter(LedgerView* parent)
-  : LedgerFilterBase(new LedgerPayeeFilterPrivate(this), parent)
+LedgerPayeeFilter::LedgerPayeeFilter(LedgerView* parent, QAbstractItemModel* accountsModel, QAbstractItemModel* specialDatesModel)
+  : LedgerFilterBase(new LedgerPayeeFilterPrivate(this), parent, accountsModel, specialDatesModel)
 {
   Q_D(LedgerPayeeFilter);
 
   d->view = parent;
   setFilterRole(eMyMoney::Model::SplitPayeeIdRole);
   setObjectName("LedgerPayeeFilter");
+  setFilterKeyColumn(0);
 
-  connect(parent, &LedgerView::requestBottomHalfSetup, this, &LedgerPayeeFilter::setupBottomHalf);
-  connect(parent, &LedgerView::requestBalanceRecalculation, this, &LedgerPayeeFilter::recalculateBalancesOnIdle);
+  d->concatModel->setObjectName("LedgerView concatModel");
+  d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel());
+
+  d->concatModel->addSourceModel(specialDatesModel);
+
+  setSourceModel(d->concatModel);
 }
 
 LedgerPayeeFilter::~LedgerPayeeFilter()
 {
 }
-
-void LedgerPayeeFilter::setupBottomHalf()
-{
-  Q_D(LedgerPayeeFilter);
-  d->view->horizontalHeader()->resizeSection(JournalModel::Column::Reconciliation, 15);
-
-  d->showValuesInverted = false;
-
-  setFilterKeyColumn(0);
-
-  setSortRole(eMyMoney::Model::TransactionPostDateRole);
-  sort(JournalModel::Column::Date);
-
-  d->view->setModel(this);
-  d->concatModel->setObjectName("LedgerView concatModel");
-  d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel());
-  setSourceModel(d->concatModel);
-
-  // we need to do this only once
-  disconnect(d->view, &LedgerView::requestBottomHalfSetup, this, &LedgerPayeeFilter::setupBottomHalf);
-}
-
 
 void LedgerPayeeFilter::setShowBalanceInverted(bool inverted)
 {
@@ -121,7 +103,7 @@ void LedgerPayeeFilter::recalculateBalances()
 {
   Q_D(LedgerPayeeFilter);
 
-  if (sourceModel() == nullptr || d->payeeIdList.isEmpty())
+  if (sourceModel() == nullptr || d->filterIds.isEmpty())
     return;
 
   const auto start = index(0, 0);
@@ -152,14 +134,17 @@ void LedgerPayeeFilter::setPayeeIdList(const QStringList& payeeIds)
 {
   Q_D(LedgerPayeeFilter);
 
-  d->payeeIdList = payeeIds;
-  setFilterFixedString(QString());
-  #if 0
+  setFilterFixedStrings(payeeIds);
+
+  setSortRole(eMyMoney::Model::TransactionPostDateRole);
+  sort(JournalModel::Column::Date);
+
   // if balance calculation has not been triggered, then run it immediately
   if(!d->balanceCalculationPending) {
     recalculateBalances();
   }
 
+  #if 0
   /// @todo port to new model code
   if(rowCount() > 0) {
     // we need to check that the last row may contain a scheduled transaction or
@@ -187,22 +172,24 @@ bool LedgerPayeeFilter::filterAcceptsRow(int source_row, const QModelIndex& sour
 {
   Q_D(const LedgerPayeeFilter);
 
-  QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
-  const auto payeeId = idx.data(eMyMoney::Model::SplitPayeeIdRole).toString();
-  // qDebug << payeeId << d->payeeIdList;
-  if (!d->payeeIdList.contains(payeeId)) {
-    return false;
-  }
+  bool rc = LedgerFilterBase::filterAcceptsRow(source_row,  source_parent);
+  if (rc) {
+    QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
+    const auto baseModel = MyMoneyModelBase::baseModel(idx);
+    if (d->isSpecialDatesModel(baseModel)) {
+      return (sortRole() == eMyMoney::Model::TransactionPostDateRole);
+    }
 
-  const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
-  idx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
-  const auto accountGroup = static_cast<eMyMoney::Account::Type>(idx.data(eMyMoney::Model::AccountGroupRole).toInt());
-  switch(accountGroup) {
-    case eMyMoney::Account::Type::Asset:
-    case eMyMoney::Account::Type::Liability:
-      break;
-    default:
-      return false;
+    const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
+    idx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
+    const auto accountGroup = static_cast<eMyMoney::Account::Type>(idx.data(eMyMoney::Model::AccountGroupRole).toInt());
+    switch(accountGroup) {
+      case eMyMoney::Account::Type::Asset:
+      case eMyMoney::Account::Type::Liability:
+        break;
+      default:
+        return false;
+    }
   }
-  return true;
+  return rc;
 }

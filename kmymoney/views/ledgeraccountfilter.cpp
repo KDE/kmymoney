@@ -46,7 +46,7 @@ public:
   explicit LedgerAccountFilterPrivate(LedgerAccountFilter* qq)
   : LedgerFilterBasePrivate(qq)
   , view(nullptr)
-  , onlinebalanceproxymodel(new OnlineBalanceProxyModel(qq))
+  , onlinebalanceproxymodel(nullptr)
   , showValuesInverted(false)
   , balanceCalculationPending(false)
   {}
@@ -63,98 +63,35 @@ public:
 };
 
 
-LedgerAccountFilter::LedgerAccountFilter(LedgerView* parent)
-  : LedgerFilterBase(new LedgerAccountFilterPrivate(this), parent)
+LedgerAccountFilter::LedgerAccountFilter(LedgerView* parent, QAbstractItemModel* accountsModel, QAbstractItemModel* specialDatesModel)
+  : LedgerFilterBase(new LedgerAccountFilterPrivate(this), parent, accountsModel, specialDatesModel)
 {
   Q_D(LedgerAccountFilter);
+  d->onlinebalanceproxymodel = new OnlineBalanceProxyModel(parent);
   d->view = parent;
+
+  setFilterKeyColumn(0);
   setFilterRole(eMyMoney::Model::SplitAccountIdRole);
   setObjectName("LedgerAccountFilter");
 
-  connect(parent, &LedgerView::requestBottomHalfSetup, this, &LedgerAccountFilter::setupBottomHalf);
   connect(parent, &LedgerView::requestBalanceRecalculation, this, &LedgerAccountFilter::recalculateBalancesOnIdle);
+
+  d->concatModel->setObjectName("LedgerView concatModel");
+  d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel());
+
+  d->onlinebalanceproxymodel->setObjectName("OnlineBalanceProxyModel");
+  d->onlinebalanceproxymodel->setSourceModel(accountsModel);
+  d->concatModel->addSourceModel(d->onlinebalanceproxymodel);
+
+  d->concatModel->addSourceModel(specialDatesModel);
+
+  setSortRole(eMyMoney::Model::TransactionPostDateRole);
+  setSourceModel(d->concatModel);
 }
 
 LedgerAccountFilter::~LedgerAccountFilter()
 {
 }
-
-void LedgerAccountFilter::showRowCount() const
-{
-  Q_D(const LedgerAccountFilter);
-
-  qDebug() << "ConcatModel"  << d->concatModel->rowCount();
-  qDebug() << "JournalModel" << MyMoneyFile::instance()->journalModel()->rowCount();
-  qDebug() << "BalanceProxy" << d->onlinebalanceproxymodel->rowCount();
-  qDebug() << "AccountFilter" << rowCount();
-}
-
-void LedgerAccountFilter::setupBottomHalf()
-{
-  Q_D(LedgerAccountFilter);
-  switch(d->account.accountType()) {
-    case eMyMoney::Account::Type::Investment:
-      break;
-
-    default:
-      d->view->horizontalHeader()->resizeSection(JournalModel::Column::Reconciliation, 15);
-      break;
-  }
-
-  d->showValuesInverted = false;
-  if(d->account.accountGroup() == eMyMoney::Account::Type::Liability
-    || d->account.accountGroup() == eMyMoney::Account::Type::Income) {
-    d->showValuesInverted = true;
-  }
-
-  setFilterKeyColumn(0);
-  setFilterFixedString(d->account.id());
-  setAccountType(d->account.accountType());
-
-  d->view->setModel(this);
-  d->concatModel->setObjectName("LedgerView concatModel");
-  d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel());
-
-  d->onlinebalanceproxymodel->setObjectName("OnlineBalanceProxyModel");
-  d->onlinebalanceproxymodel->setSourceModel(MyMoneyFile::instance()->accountsModel());
-  d->concatModel->addSourceModel(d->onlinebalanceproxymodel);
-
-  d->concatModel->addSourceModel(MyMoneyFile::instance()->specialDatesModel());
-
-  setSortRole(eMyMoney::Model::TransactionPostDateRole);
-  setSourceModel(d->concatModel);
-
-  sort(JournalModel::Column::Date);
-
-  // if balance calculation has not been triggered, then run it immediately
-  if(!d->balanceCalculationPending) {
-    recalculateBalances();
-  }
-
-  /// @todo port to new model code
-  if(rowCount() > 0) {
-    // we need to check that the last row may contain a scheduled transaction or
-    // the row that is shown for new transacations.
-    // in that case, we need to go back to find the actual last transaction
-    int row = rowCount()-1;
-    while(row >= 0) {
-      const QModelIndex idx = index(row, 0);
-      if(!idx.data(eMyMoney::Model::IdRole).toString().isEmpty()
-        // && !d->filterModel->data(index, (int)eLedgerModel::Role::TransactionSplitId).toString().isEmpty()
-      ) {
-        d->view->setCurrentIndex(idx);
-        d->view->selectRow(idx.row());
-        d->view->scrollTo(idx, QAbstractItemView::PositionAtBottom);
-        break;
-      }
-      row--;
-    }
-  }
-
-  // we need to do this only once
-  disconnect(d->view, &LedgerView::requestBottomHalfSetup, this, &LedgerAccountFilter::setupBottomHalf);
-}
-
 
 void LedgerAccountFilter::setShowBalanceInverted(bool inverted)
 {
@@ -195,7 +132,6 @@ void LedgerAccountFilter::recalculateBalances()
     setData(dispIndex, QVariant::fromValue(balance), Qt::DisplayRole);
   }
 
-  // filterModel->invalidate();
   const QModelIndex top = index(0, JournalModel::Column::Balance);
   const QModelIndex bottom = index(rowCount()-1, JournalModel::Column::Balance);
 
@@ -208,4 +144,42 @@ void LedgerAccountFilter::setAccount(const MyMoneyAccount& acc)
   Q_D(LedgerAccountFilter);
 
   d->account = acc;
+
+  d->showValuesInverted = false;
+  if(d->account.accountGroup() == eMyMoney::Account::Type::Liability
+    || d->account.accountGroup() == eMyMoney::Account::Type::Income) {
+    d->showValuesInverted = true;
+  }
+
+  setAccountType(d->account.accountType());
+  setFilterFixedString(d->account.id());
+
+  invalidateFilter();
+  setSortRole(eMyMoney::Model::TransactionPostDateRole);
+  sort(JournalModel::Column::Date);
+
+  // if balance calculation has not been triggered, then run it immediately
+  if(!d->balanceCalculationPending) {
+    recalculateBalances();
+  }
+
+  /// @todo port to new model code
+  if(rowCount() > 0) {
+    // we need to check that the last row may contain a scheduled transaction or
+    // the row that is shown for new transacations.
+    // in that case, we need to go back to find the actual last transaction
+    int row = rowCount()-1;
+    while(row >= 0) {
+      const QModelIndex idx = index(row, 0);
+      if(!idx.data(eMyMoney::Model::IdRole).toString().isEmpty()
+        // && !d->filterModel->data(index, (int)eLedgerModel::Role::TransactionSplitId).toString().isEmpty()
+      ) {
+        d->view->setCurrentIndex(idx);
+        d->view->selectRow(idx.row());
+        d->view->scrollTo(idx, QAbstractItemView::PositionAtBottom);
+        break;
+      }
+      row--;
+    }
+  }
 }

@@ -41,21 +41,14 @@ class LedgerAccountFilter : public LedgerFilterBase
   Q_OBJECT
 
 public:
-  explicit LedgerAccountFilter(LedgerView* parent = nullptr);
+  explicit LedgerAccountFilter(LedgerView* parent, QAbstractItemModel* accountsModel, QAbstractItemModel* specialDatesModel);
   ~LedgerAccountFilter() override;
 
   void setShowBalanceInverted(bool inverted = true);
 
   void setAccount(const MyMoneyAccount& acc);
 
-  void showRowCount() const;
-
 public Q_SLOTS:
-  /**
-   * This method finshes the initial installation
-   */
-  void setupBottomHalf();
-
   void recalculateBalances();
 
   void recalculateBalancesOnIdle();

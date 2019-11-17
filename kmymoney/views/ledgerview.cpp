@@ -138,16 +138,12 @@ LedgerView::~LedgerView()
   delete d;
 }
 
-void LedgerView::showEvent(QShowEvent* event)
+void LedgerView::setModel(QAbstractItemModel* model)
 {
-  if (model() == nullptr) {
-    emit requestBottomHalfSetup();
-    if (model() != nullptr) {
-      d->columnSelector->setModel(MyMoneyFile::instance()->journalModel());
-    }
-    horizontalHeader()->setSectionResizeMode(JournalModel::Column::Reconciliation, QHeaderView::ResizeToContents);
-  }
-  QTableView::showEvent(event);
+  QTableView::setModel(model);
+
+  d->columnSelector->setModel(model);
+  horizontalHeader()->setSectionResizeMode(JournalModel::Column::Reconciliation, QHeaderView::ResizeToContents);
 }
 
 bool LedgerView::showValuesInverted() const
@@ -164,16 +160,6 @@ void LedgerView::setColumnsShown(QVector<int> columns)
 {
   d->columnSelector->setAlwaysVisible(columns);
 }
-
-#if 0
-QString LedgerView::accountId() const
-{
-  QString id;
-  if(d->filterModel->filterRole() == eMyMoney::Model::Roles::SplitAccountIdRole)
-    id = d->account.id();
-  return id;
-}
-#endif
 
 void LedgerView::rowsAboutToBeRemoved(const QModelIndex& index, int start, int end)
 {

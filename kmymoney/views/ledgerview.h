@@ -62,6 +62,8 @@ public:
   void setColumnsHidden(QVector<int> columns);
   void setColumnsShown(QVector<int> columns);
 
+  void setModel(QAbstractItemModel * model) override;
+
 public Q_SLOTS:
   /**
    * This method scrolls the ledger so that the current item is visible
@@ -86,8 +88,6 @@ protected:
   void paintEvent(QPaintEvent* event) final override;
   int sizeHintForRow(int row) const final override;
   int sizeHintForColumn(int row) const final override;
-  void showEvent(QShowEvent* event) override;
-  // void setAccount_bh(const MyMoneyAccount& acc);
 
 protected Q_SLOTS:
   void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) final override;
@@ -98,16 +98,11 @@ protected Q_SLOTS:
   virtual void adjustDetailColumn(int newViewportWidth);
   virtual void adjustDetailColumn();
 
-  // virtual void recalculateBalances();
-
-  // virtual void accountChanged();
-
 Q_SIGNALS:
   void transactionSelected(const QString& transactionSplitId);
   void aboutToStartEdit();
   void aboutToFinishEdit();
   void requestBalanceRecalculation();
-  void requestBottomHalfSetup();
 
 protected:
   class Private;

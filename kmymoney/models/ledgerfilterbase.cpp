@@ -46,6 +46,8 @@ LedgerFilterBase::LedgerFilterBase(LedgerFilterBasePrivate* dd, QObject* parent,
   Q_D(LedgerFilterBase);
   d->accountsModel = accountsModel;
   d->specialDatesModel = datesModel;
+  d->concatModel = new KConcatenateRowsProxyModel(parent);
+
   setFilterRole(eMyMoney::Model::Roles::SplitAccountIdRole);
   setFilterKeyColumn(0);
   setSortRole(eMyMoney::Model::Roles::TransactionPostDateRole);
@@ -168,48 +170,22 @@ bool LedgerFilterBase::lessThan(const QModelIndex& left, const QModelIndex& righ
 bool LedgerFilterBase::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
 {
   Q_D(const LedgerFilterBase);
-  if (d->filterId.isEmpty())
+
+  // if no filter is set, we don't display anything
+  if (d->filterIds.isEmpty())
     return false;
 
+  // in case it's a special date entry, we accept it
   QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
-#if 0
-
   const auto baseModel = MyMoneyModelBase::baseModel(idx);
   if (d->isSpecialDatesModel(baseModel)) {
-    // make sure we don't show trailing special date entries
-    const auto rows = sourceModel()->rowCount(source_parent);
-    int row = source_row + 1;
-    bool visible = false;
-    QModelIndex testIdx;
-    for (; !visible && row < rows; ++row) {
-      testIdx = sourceModel()->index(row, 0, source_parent);
-      if(testIdx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
-        // the empty id is the entry for the new transaction entry
-        // we're done scanning
-        break;
-      }
-      const auto testModel = MyMoneyModelBase::baseModel(testIdx);
-      if (!d->isSpecialDatesModel(testModel)) {
-        // we hit a real transaction, we're done and need to display
-        visible = true;
-        break;
-      }
-    }
-
-    // in case this is not a trailing date entry, we need to check
-    // if it is the last of a row of date entries.
-    if (visible && ((source_row + 1) < rows)) {
-      // check if the next is also a date entry
-      testIdx = sourceModel()->index(source_row+1, 0, source_parent);
-      const auto testModel = MyMoneyModelBase::baseModel(testIdx);
-      if (d->isSpecialDatesModel(testModel)) {
-        visible = false;
-      }
-    }
-    return visible;
+    return (sortRole() == eMyMoney::Model::TransactionPostDateRole);
   }
-#endif
-  bool rc = idx.data(filterRole()).toString().compare(d->filterId) == 0;
+
+  // now do the filtering
+  const auto id = idx.data(filterRole()).toString();
+  bool rc = d->filterIds.contains(id);
+
   // in case a journal entry has no id, it is the new transaction placeholder
   if(!rc) {
     rc = idx.data(eMyMoney::Model::IdRole).toString().isEmpty();
@@ -220,8 +196,22 @@ bool LedgerFilterBase::filterAcceptsRow(int source_row, const QModelIndex& sourc
 void LedgerFilterBase::setFilterFixedString(const QString& id)
 {
   Q_D(LedgerFilterBase);
-  d->filterId = id;
+  setFilterFixedStrings(QStringList() << id);
 }
+
+void LedgerFilterBase::setFilterFixedStrings(const QStringList& filters)
+{
+  Q_D(LedgerFilterBase);
+  d->filterIds = filters;
+  invalidateFilter();
+}
+
+QStringList LedgerFilterBase::filterFixedStrings() const
+{
+  Q_D(const LedgerFilterBase);
+  return d->filterIds;
+}
+
 
 void LedgerFilterBase::setShowEntryForNewTransaction(bool show)
 {
@@ -230,9 +220,19 @@ void LedgerFilterBase::setShowEntryForNewTransaction(bool show)
   if (show && !d->newTransactionPresent) {
     d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
     d->newTransactionPresent = true;
+    invalidateFilter();
   } else if (!show && d->newTransactionPresent) {
     d->concatModel->removeSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
     d->newTransactionPresent = false;
+    invalidateFilter();
   }
 }
 
+void LedgerFilterBase::addSourceModel(QAbstractItemModel* model)
+{
+  Q_D(LedgerFilterBase);
+  if (model) {
+    d->concatModel->addSourceModel(model);
+    invalidateFilter();
+  }
+}

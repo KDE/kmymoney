@@ -32,7 +32,6 @@
 // Project Includes
 
 #include "journalmodel.h"
-#include "mymoneyfile.h"
 
 struct SpecialDatesModel::Private
 {
@@ -48,7 +47,7 @@ struct SpecialDatesModel::Private
 };
 
 SpecialDatesModel::SpecialDatesModel(QObject* parent, QUndoStack* undoStack)
-  : MyMoneyModel<SpecialDateEntry>(parent, QStringLiteral("T"), SpecialDatesModel::ID_SIZE, undoStack)
+  : MyMoneyModel<SpecialDateEntry>(parent, QStringLiteral("SD"), SpecialDatesModel::ID_SIZE, undoStack)
   , d(new Private(this))
 {
   setObjectName(QLatin1String("SpecialDatesModel"));
@@ -60,6 +59,7 @@ SpecialDatesModel::~SpecialDatesModel()
 
 int SpecialDatesModel::columnCount(const QModelIndex& parent) const
 {
+  Q_UNUSED(parent);
   return JournalModel::Column::MaxColumns;
 }
 
