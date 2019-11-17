@@ -65,7 +65,7 @@ public:
    * Retrieve the delegate for objects stored in @a model. In case no
    * assignment exists, @c nullptr is returned.
    */
-  const QStyledItemDelegate* delegate(const QAbstractItemModel* model) const;
+  const QStyledItemDelegate* delegate(const QModelIndex& idx) const;
 
   /**
    * This method returns a list of pointers to all registered delegates

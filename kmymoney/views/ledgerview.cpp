@@ -317,7 +317,7 @@ int LedgerView::sizeHintForColumn(int col) const
   if (col == JournalModel::Column::Reconciliation) {
     QStyleOptionViewItem opt;
     const QModelIndex index = model()->index(0, col);
-    const auto delegate = d->delegateProxy->delegate(index.model());
+    const auto delegate = d->delegateProxy->delegate(index);
     if (delegate) {
       int hint = delegate->sizeHint(opt, index).width();
       if(showGrid())
@@ -339,7 +339,7 @@ int LedgerView::sizeHintForRow(int row) const
   ensurePolished();
 
   const QModelIndex index = model()->index(row, JournalModel::Column::Detail);
-  const auto delegate = d->delegateProxy->delegate(index.model());
+  const auto delegate = d->delegateProxy->delegate(index);
   const auto journalDelegate = qobject_cast<const JournalDelegate*>(delegate);
 
   if(journalDelegate && (journalDelegate->editorRow() != row)) {

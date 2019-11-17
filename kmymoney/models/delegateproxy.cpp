@@ -81,11 +81,11 @@ void DelegateProxy::addDelegate(const QAbstractItemModel* model, QStyledItemDele
   }
 }
 
-const QStyledItemDelegate * DelegateProxy::delegate(const QAbstractItemModel* model) const
+const QStyledItemDelegate * DelegateProxy::delegate(const QModelIndex& idx) const
 {
-  if (model != nullptr) {
-    Q_D(const DelegateProxy);
-    return d->mapping.value(model, nullptr);
+  Q_D(const DelegateProxy);
+  if (idx.isValid()) {
+    return d->mapping.value(MyMoneyModelBase::baseModel(idx), nullptr);
   }
   return nullptr;
 }
