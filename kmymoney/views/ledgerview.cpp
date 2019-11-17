@@ -411,6 +411,29 @@ void LedgerView::slotSettingsChanged()
 #endif
 }
 
+void LedgerView::selectMostRecentTransaction()
+{
+  if (model()->rowCount() > 0) {
+
+    // we need to check that the last row may contain a scheduled transaction or
+    // the row that is shown for new transacations.
+    // in that case, we need to go back to find the actual last transaction
+    int row = model()->rowCount()-1;
+    while(row >= 0) {
+      const QModelIndex idx = model()->index(row, 0);
+      if(!idx.data(eMyMoney::Model::IdRole).toString().isEmpty()
+        && !idx.data(eMyMoney::Model::JournalTransactionIdRole).toString().isEmpty()
+      ) {
+        setCurrentIndex(idx);
+        selectRow(idx.row());
+        scrollTo(idx, QAbstractItemView::PositionAtBottom);
+        break;
+      }
+      row--;
+    }
+  }
+}
+
 
 SplitView::SplitView(QWidget* parent)
   : LedgerView(parent)

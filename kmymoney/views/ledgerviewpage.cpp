@@ -157,6 +157,8 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
   d->ui->formWidget->setVisible(d->hideFormReasons.isEmpty());
   d->accountFilter->setAccount(acc);
   d->accountId = acc.id();
+
+  d->ui->ledgerView->selectMostRecentTransaction();
 }
 
 void LedgerViewPage::showTransactionForm(bool show)
