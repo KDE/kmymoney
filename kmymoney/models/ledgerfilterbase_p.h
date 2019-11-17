@@ -38,6 +38,7 @@ struct LedgerFilterBasePrivate {
   , concatModel(nullptr)
   , accountType(eMyMoney::Account::Type::Asset)
   , newTransactionPresent(false)
+  , showValuesInverted(false)
   {
   }
 
@@ -58,6 +59,7 @@ struct LedgerFilterBasePrivate {
   eMyMoney::Account::Type     accountType;
   QStringList                 filterIds;
   bool                        newTransactionPresent;
+  bool                        showValuesInverted;
 };
 
 #endif

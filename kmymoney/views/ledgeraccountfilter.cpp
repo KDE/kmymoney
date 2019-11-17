@@ -22,15 +22,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QHeaderView>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ledgerview.h"
 #include "mymoneyenums.h"
 #include "mymoneymoney.h"
 #include "mymoneyaccount.h"
@@ -45,9 +42,7 @@ class LedgerAccountFilterPrivate : public LedgerFilterBasePrivate
 public:
   explicit LedgerAccountFilterPrivate(LedgerAccountFilter* qq)
   : LedgerFilterBasePrivate(qq)
-  , view(nullptr)
   , onlinebalanceproxymodel(nullptr)
-  , showValuesInverted(false)
   , balanceCalculationPending(false)
   {}
 
@@ -55,26 +50,21 @@ public:
   {
   }
 
-  LedgerView*                 view;
   OnlineBalanceProxyModel*    onlinebalanceproxymodel;
   MyMoneyAccount              account;
-  bool                        showValuesInverted;
   bool                        balanceCalculationPending;
 };
 
 
-LedgerAccountFilter::LedgerAccountFilter(LedgerView* parent, QAbstractItemModel* accountsModel, QAbstractItemModel* specialDatesModel)
+LedgerAccountFilter::LedgerAccountFilter(QObject* parent, QAbstractItemModel* accountsModel, QAbstractItemModel* specialDatesModel)
   : LedgerFilterBase(new LedgerAccountFilterPrivate(this), parent, accountsModel, specialDatesModel)
 {
   Q_D(LedgerAccountFilter);
   d->onlinebalanceproxymodel = new OnlineBalanceProxyModel(parent);
-  d->view = parent;
 
   setFilterKeyColumn(0);
   setFilterRole(eMyMoney::Model::SplitAccountIdRole);
   setObjectName("LedgerAccountFilter");
-
-  connect(parent, &LedgerView::requestBalanceRecalculation, this, &LedgerAccountFilter::recalculateBalancesOnIdle);
 
   d->concatModel->setObjectName("LedgerView concatModel");
   d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel());
@@ -163,6 +153,7 @@ void LedgerAccountFilter::setAccount(const MyMoneyAccount& acc)
     recalculateBalances();
   }
 
+#if 0
   /// @todo port to new model code
   if(rowCount() > 0) {
     // we need to check that the last row may contain a scheduled transaction or
@@ -182,4 +173,5 @@ void LedgerAccountFilter::setAccount(const MyMoneyAccount& acc)
       row--;
     }
   }
+#endif
 }

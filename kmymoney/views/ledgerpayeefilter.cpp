@@ -22,17 +22,12 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QHeaderView>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <KConcatenateRowsProxyModel>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ledgerview.h"
 #include "mymoneyenums.h"
 #include "mymoneymoney.h"
 #include "mymoneyaccount.h"
@@ -45,8 +40,6 @@ class LedgerPayeeFilterPrivate : public LedgerFilterBasePrivate
 public:
   explicit LedgerPayeeFilterPrivate(LedgerPayeeFilter* qq)
   : LedgerFilterBasePrivate(qq)
-  , view(nullptr)
-  , showValuesInverted(false)
   , balanceCalculationPending(false)
   {}
 
@@ -54,18 +47,15 @@ public:
   {
   }
 
-  LedgerView*                 view;
-  bool                        showValuesInverted;
   bool                        balanceCalculationPending;
 };
 
 
-LedgerPayeeFilter::LedgerPayeeFilter(LedgerView* parent, QAbstractItemModel* accountsModel, QAbstractItemModel* specialDatesModel)
+LedgerPayeeFilter::LedgerPayeeFilter(QObject* parent, QAbstractItemModel* accountsModel, QAbstractItemModel* specialDatesModel)
   : LedgerFilterBase(new LedgerPayeeFilterPrivate(this), parent, accountsModel, specialDatesModel)
 {
   Q_D(LedgerPayeeFilter);
 
-  d->view = parent;
   setFilterRole(eMyMoney::Model::SplitPayeeIdRole);
   setObjectName("LedgerPayeeFilter");
   setFilterKeyColumn(0);
@@ -173,13 +163,17 @@ bool LedgerPayeeFilter::filterAcceptsRow(int source_row, const QModelIndex& sour
   Q_D(const LedgerPayeeFilter);
 
   bool rc = LedgerFilterBase::filterAcceptsRow(source_row,  source_parent);
+
   if (rc) {
     QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
+
+    // special dates are shown when sorted by date
     const auto baseModel = MyMoneyModelBase::baseModel(idx);
     if (d->isSpecialDatesModel(baseModel)) {
       return (sortRole() == eMyMoney::Model::TransactionPostDateRole);
     }
 
+    // only display splits that reference an asset or liability account
     const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
     idx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
     const auto accountGroup = static_cast<eMyMoney::Account::Type>(idx.data(eMyMoney::Model::AccountGroupRole).toInt());

@@ -22,8 +22,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QScopedPointer>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -32,7 +30,6 @@
 
 #include "ledgerfilterbase.h"
 
-class LedgerView;
 class MyMoneyAccount;
 class LedgerPayeeFilterPrivate;
 class LedgerPayeeFilter : public LedgerFilterBase
@@ -40,7 +37,7 @@ class LedgerPayeeFilter : public LedgerFilterBase
   Q_OBJECT
 
 public:
-  explicit LedgerPayeeFilter(LedgerView* parent, QAbstractItemModel* accountsModel, QAbstractItemModel* specialDatesModel);
+  explicit LedgerPayeeFilter(QObject* parent, QAbstractItemModel* accountsModel, QAbstractItemModel* specialDatesModel);
   ~LedgerPayeeFilter() override;
 
   void setShowBalanceInverted(bool inverted = true);

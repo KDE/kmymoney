@@ -88,6 +88,9 @@ LedgerViewPage::LedgerViewPage(QWidget* parent)
   d->accountFilter = new LedgerAccountFilter(d->ui->ledgerView, file->accountsModel(), file->specialDatesModel());
   d->specialDatesFilter = new SpecialDatesFilter(file->specialDatesModel(), this);
   d->specialDatesFilter->setSourceModel(d->accountFilter);
+
+  connect(d->ui->ledgerView, &LedgerView::requestBalanceRecalculation, d->accountFilter, &LedgerAccountFilter::recalculateBalancesOnIdle);
+
   d->ui->ledgerView->setModel(d->specialDatesFilter);
 }
 
