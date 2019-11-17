@@ -40,11 +40,13 @@
 #include "mymoneyaccount.h"
 #include "accountsmodel.h"
 #include "journalmodel.h"
+#include "specialdatesmodel.h"
 #include "columnselector.h"
 #include "mymoneyenums.h"
 #include "delegateproxy.h"
 #include "journaldelegate.h"
 #include "onlinebalancedelegate.h"
+#include "specialdatedelegate.h"
 
 class LedgerView::Private
 {
@@ -65,6 +67,7 @@ public:
     delegateProxy->addDelegate(file->journalModel(), journalDelegate);
     delegateProxy->addDelegate(file->journalModel()->newTransaction(), journalDelegate);
     delegateProxy->addDelegate(file->accountsModel(), new OnlineBalanceDelegate(q));
+    delegateProxy->addDelegate(file->specialDatesModel(), new SpecialDateDelegate(q));
 
     // delegateProxy->addDelegate(accountsModel, new ...);
 

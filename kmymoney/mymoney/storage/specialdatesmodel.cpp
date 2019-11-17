@@ -113,6 +113,7 @@ void SpecialDatesModel::load()
   }
 
   endResetModel();
+  setDirty(false);
 }
 
 QVariant SpecialDatesModel::data(const QModelIndex& idx, int role) const
@@ -122,7 +123,7 @@ QVariant SpecialDatesModel::data(const QModelIndex& idx, int role) const
 
   // we report to have the same number of colums as the
   // journal model but we only react on the first column
-  if (idx.row() < 0 || idx.row() >= 1)
+  if (idx.column() < 0 || idx.column() >= JournalModel::Column::MaxColumns)
     return {};
 
   const SpecialDateEntry& dateEntry = static_cast<TreeItem<SpecialDateEntry>*>(idx.internalPointer())->constDataRef();

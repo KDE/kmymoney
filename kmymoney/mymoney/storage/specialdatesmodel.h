@@ -46,7 +46,7 @@ public:
   inline const QString& id() const { return m_id; }
   inline const QString& txt() const { return m_txt; }
   inline const QDate& date() const { return m_date; }
-  inline bool hasReferenceTo(const QString& id) const { return false; }
+  inline bool hasReferenceTo(const QString&) const { return false; }
 
   /**
    * @copydoc MyMoneyObject::referencedObjects

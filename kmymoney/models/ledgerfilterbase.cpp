@@ -1,6 +1,5 @@
 /*
- * Copyright 2016-2018  Thomas Baumgart <tbaumgart@kde.org>
- * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ledgerproxymodel.h"
-#include "journalmodel.h"
+#include "ledgerfilterbase.h"
+#include "ledgerfilterbase_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -34,36 +33,41 @@
 
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"
+#include "journalmodel.h"
 #include "accountsmodel.h"
+#include "specialdatesmodel.h"
 
 using namespace eMyMoney;
 
-LedgerProxyModel::LedgerProxyModel(QObject* parent)
-  : QSortFilterProxyModel(parent)
-  , m_showNewTransaction(false)
-  , m_accountType(Account::Type::Asset)
-  , m_filterRole(Qt::DisplayRole)
+LedgerFilterBase::LedgerFilterBase(LedgerFilterBasePrivate* dd, QObject* parent, QAbstractItemModel* accountsModel, QAbstractItemModel* datesModel)
+: QSortFilterProxyModel(parent)
+, d_ptr(dd)
 {
+  Q_D(LedgerFilterBase);
+  d->accountsModel = accountsModel;
+  d->specialDatesModel = datesModel;
   setFilterRole(eMyMoney::Model::Roles::SplitAccountIdRole);
   setFilterKeyColumn(0);
   setSortRole(eMyMoney::Model::Roles::TransactionPostDateRole);
 }
 
-LedgerProxyModel::~LedgerProxyModel()
+LedgerFilterBase::~LedgerFilterBase()
 {
 }
 
-void LedgerProxyModel::setAccountType(Account::Type type)
+void LedgerFilterBase::setAccountType(Account::Type type)
 {
-  m_accountType = type;
+  Q_D(LedgerFilterBase);
+  d->accountType = type;
 }
 
-QVariant LedgerProxyModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant LedgerFilterBase::headerData(int section, Qt::Orientation orientation, int role) const
 {
   if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
+    Q_D(const LedgerFilterBase);
     switch(section) {
       case JournalModel::Column::Payment:
-        switch(m_accountType) {
+        switch(d->accountType) {
           case Account::Type::CreditCard:
             return i18nc("Payment made with credit card", "Charge");
 
@@ -85,7 +89,7 @@ QVariant LedgerProxyModel::headerData(int section, Qt::Orientation orientation, 
         break;
 
       case JournalModel::Column::Deposit:
-        switch(m_accountType) {
+        switch(d->accountType) {
           case Account::Type::CreditCard:
             return i18nc("Payment towards credit card", "Payment");
 
@@ -110,8 +114,10 @@ QVariant LedgerProxyModel::headerData(int section, Qt::Orientation orientation, 
   return QSortFilterProxyModel::headerData(section, orientation, role);
 }
 
-bool LedgerProxyModel::lessThan(const QModelIndex& left, const QModelIndex& right) const
+bool LedgerFilterBase::lessThan(const QModelIndex& left, const QModelIndex& right) const
 {
+  Q_D(const LedgerFilterBase);
+
   // make sure that the dummy transaction is shown last in any case
   if(left.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
     return false;
@@ -121,23 +127,21 @@ bool LedgerProxyModel::lessThan(const QModelIndex& left, const QModelIndex& righ
   }
 
   // make sure that the online balance is the last entry of a day
+  // and the date headers are the first
   if (left.data(eMyMoney::Model::TransactionPostDateRole).toDate() == right.data(eMyMoney::Model::TransactionPostDateRole).toDate()) {
     const auto leftModel = MyMoneyModelBase::baseModel(left);
     const auto rightModel = MyMoneyModelBase::baseModel(right);
     if (leftModel != rightModel) {
-      if (leftModel == MyMoneyFile::instance()->accountsModel()) {
+      if (d->isAccountsModel(leftModel)) {
         return false;
-      } else if (rightModel == MyMoneyFile::instance()->accountsModel()) {
+      } else if (d->isAccountsModel(rightModel)) {
         return true;
-#if 0
-      } else if(leftModel == MyMoneyFile::instance()->specialDatesModel()) {
+      } else if(d->isSpecialDatesModel(leftModel)) {
         return true;
-      } else if(rightModel == MyMoneyFile::instance()->specialDatesModel()) {
+      } else if(d->isSpecialDatesModel(rightModel)) {
         return false;
-#endif
       }
     }
-    // maybe add more logic here to sort the date entries
   }
 
   // sort the schedules always after the real transactions
@@ -161,22 +165,51 @@ bool LedgerProxyModel::lessThan(const QModelIndex& left, const QModelIndex& righ
   return QSortFilterProxyModel::lessThan(left, right);
 }
 
-bool LedgerProxyModel::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
+bool LedgerFilterBase::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
 {
-  if (m_filterId.isEmpty())
+  Q_D(const LedgerFilterBase);
+  if (d->filterId.isEmpty())
     return false;
 
   QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
 #if 0
+
   const auto baseModel = MyMoneyModelBase::baseModel(idx);
-  if (baseModel == MyMoneyFile::instance()->specialDatesModel()) {
-    // for now show all date entries, but in the end we only need to
-    // show one if there are more consecutive entries
-    return true;
+  if (d->isSpecialDatesModel(baseModel)) {
+    // make sure we don't show trailing special date entries
+    const auto rows = sourceModel()->rowCount(source_parent);
+    int row = source_row + 1;
+    bool visible = false;
+    QModelIndex testIdx;
+    for (; !visible && row < rows; ++row) {
+      testIdx = sourceModel()->index(row, 0, source_parent);
+      if(testIdx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
+        // the empty id is the entry for the new transaction entry
+        // we're done scanning
+        break;
+      }
+      const auto testModel = MyMoneyModelBase::baseModel(testIdx);
+      if (!d->isSpecialDatesModel(testModel)) {
+        // we hit a real transaction, we're done and need to display
+        visible = true;
+        break;
+      }
+    }
+
+    // in case this is not a trailing date entry, we need to check
+    // if it is the last of a row of date entries.
+    if (visible && ((source_row + 1) < rows)) {
+      // check if the next is also a date entry
+      testIdx = sourceModel()->index(source_row+1, 0, source_parent);
+      const auto testModel = MyMoneyModelBase::baseModel(testIdx);
+      if (d->isSpecialDatesModel(testModel)) {
+        visible = false;
+      }
+    }
+    return visible;
   }
 #endif
-
-  bool rc = idx.data(m_filterRole).toString().compare(m_filterId) == 0;
+  bool rc = idx.data(filterRole()).toString().compare(d->filterId) == 0;
   // in case a journal entry has no id, it is the new transaction placeholder
   if(!rc) {
     rc = idx.data(eMyMoney::Model::IdRole).toString().isEmpty();
@@ -184,23 +217,22 @@ bool LedgerProxyModel::filterAcceptsRow(int source_row, const QModelIndex& sourc
   return rc;
 }
 
-void LedgerProxyModel::setFilterFixedString(const QString& id)
+void LedgerFilterBase::setFilterFixedString(const QString& id)
 {
-  m_filterId = id;
+  Q_D(LedgerFilterBase);
+  d->filterId = id;
 }
 
-int LedgerProxyModel::filterRole() const
+void LedgerFilterBase::setShowEntryForNewTransaction(bool show)
 {
-  return m_filterRole;
+  Q_D(LedgerFilterBase);
+
+  if (show && !d->newTransactionPresent) {
+    d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
+    d->newTransactionPresent = true;
+  } else if (!show && d->newTransactionPresent) {
+    d->concatModel->removeSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
+    d->newTransactionPresent = false;
+  }
 }
 
-void LedgerProxyModel::setFilterRole(int role)
-{
-  m_filterRole = role;
-}
-
-bool LedgerProxyModel::setData(const QModelIndex& index, const QVariant& value, int role)
-{
-  QModelIndex sourceIndex = mapToSource(index);
-  return sourceModel()->setData(sourceIndex, value, role);
-}

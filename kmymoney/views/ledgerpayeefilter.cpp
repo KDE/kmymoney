@@ -17,6 +17,7 @@
 
 
 #include "ledgerpayeefilter.h"
+#include "ledgerfilterbase_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -39,37 +40,29 @@
 #include "journalmodel.h"
 #include "accountsmodel.h"
 
-class LedgerPayeeFilterPrivate
+class LedgerPayeeFilterPrivate : public LedgerFilterBasePrivate
 {
-  Q_DECLARE_PUBLIC(LedgerPayeeFilter)
-
 public:
   explicit LedgerPayeeFilterPrivate(LedgerPayeeFilter* qq)
-  : q_ptr(qq)
+  : LedgerFilterBasePrivate(qq)
   , view(nullptr)
-  , concatModel(new KConcatenateRowsProxyModel(qq))
   , showValuesInverted(false)
   , balanceCalculationPending(false)
-  , newTransactionPresent(false)
   {}
 
   ~LedgerPayeeFilterPrivate()
   {
   }
 
-  LedgerPayeeFilter*          q_ptr;
   LedgerView*                 view;
-  KConcatenateRowsProxyModel* concatModel;
   QStringList                 payeeIdList;
   bool                        showValuesInverted;
   bool                        balanceCalculationPending;
-  bool                        newTransactionPresent;
 };
 
 
 LedgerPayeeFilter::LedgerPayeeFilter(LedgerView* parent)
-  : LedgerProxyModel(parent)
-  , d_ptr(new LedgerPayeeFilterPrivate(this))
+  : LedgerFilterBase(new LedgerPayeeFilterPrivate(this), parent)
 {
   Q_D(LedgerPayeeFilter);
 
@@ -188,19 +181,6 @@ void LedgerPayeeFilter::setPayeeIdList(const QStringList& payeeIds)
   }
 #endif
   invalidateFilter();
-}
-
-void LedgerPayeeFilter::setShowEntryForNewTransaction(bool show)
-{
-  Q_D(LedgerPayeeFilter);
-
-  if (show && !d->newTransactionPresent) {
-    d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
-    d->newTransactionPresent = true;
-  } else if (!show && d->newTransactionPresent) {
-    d->concatModel->removeSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
-    d->newTransactionPresent = false;
-  }
 }
 
 bool LedgerPayeeFilter::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const

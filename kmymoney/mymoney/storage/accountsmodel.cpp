@@ -810,7 +810,6 @@ void AccountsModel::removeFavorite(const QString& id)
     // we remove a single row
     const bool dirty = isDirty();
     removeRows(idx.row(), 1, favoriteIdx);
-    endRemoveRows();
     // don't modify the dirty flag here. This is done elsewhere.
     setDirty(dirty);
   }

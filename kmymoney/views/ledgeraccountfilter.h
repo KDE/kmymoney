@@ -30,13 +30,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ledgerproxymodel.h"
+#include "ledgerfilterbase.h"
 
 class LedgerView;
 class MyMoneyAccount;
 class LedgerAccountFilterPrivate;
 
-class LedgerAccountFilter : public LedgerProxyModel
+class LedgerAccountFilter : public LedgerFilterBase
 {
   Q_OBJECT
 
@@ -47,8 +47,6 @@ public:
   void setShowBalanceInverted(bool inverted = true);
 
   void setAccount(const MyMoneyAccount& acc);
-
-  void setShowEntryForNewTransaction(bool show);
 
   void showRowCount() const;
 
@@ -63,8 +61,7 @@ public Q_SLOTS:
   void recalculateBalancesOnIdle();
 
 private:
-  QScopedPointer<LedgerAccountFilterPrivate>  d_ptr;
-  Q_DECLARE_PRIVATE(LedgerAccountFilter)
+  Q_DECLARE_PRIVATE_D(LedgerFilterBase::d_ptr, LedgerAccountFilter)
 };
 
 #endif // LEDGERACCOUNTFILTER_H

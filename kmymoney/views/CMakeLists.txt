@@ -29,6 +29,7 @@ if(ENABLE_UNFINISHEDFEATURES)
     ledgerdelegate.cpp
     journaldelegate.cpp
     onlinebalancedelegate.cpp
+    specialdatedelegate.cpp
     newspliteditor.cpp
     newtransactioneditor.cpp
     newtransactionform.cpp

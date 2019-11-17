@@ -1,6 +1,5 @@
 /*
- * Copyright 2016-2018  Thomas Baumgart <tbaumgart@kde.org>
- * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,14 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LEDGERPROXYMODEL_H
-#define LEDGERPROXYMODEL_H
+#ifndef LEDGERFILTERBASE_H
+#define LEDGERFILTERBASE_H
 
 #include "kmm_models_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <qglobal.h>
 #include <QSortFilterProxyModel>
 
 // ----------------------------------------------------------------------------
@@ -34,9 +34,13 @@
 
 #include "mymoneyenums.h"
 
-class KMM_MODELS_EXPORT LedgerProxyModel : public QSortFilterProxyModel
+class LedgerFilterBasePrivate;
+class KMM_MODELS_EXPORT LedgerFilterBase : public QSortFilterProxyModel
 {
   Q_OBJECT
+  Q_DECLARE_PRIVATE(LedgerFilterBase)
+  Q_DISABLE_COPY(LedgerFilterBase)
+
 public:
   enum GroupSortOrder {
     DateGrouping = 0,
@@ -45,21 +49,11 @@ public:
     OnlineBalance,
   };
 
-  explicit LedgerProxyModel(QObject* parent = nullptr);
-  virtual ~LedgerProxyModel();
+  virtual ~LedgerFilterBase();
 
   void setAccountType(eMyMoney::Account::Type type);
 
   void setFilterFixedString(const QString& filter);
-
-  void setFilterRole(int role);
-
-  int filterRole() const;
-
-  /**
-   * This method maps the @a index to the base model and calls setData on it
-   */
-  bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) override;
 
   /**
    * This method returns the headerData adjusted to the current
@@ -67,7 +61,12 @@ public:
    */
   QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
+  void setShowEntryForNewTransaction(bool show);
+
 protected:
+  LedgerFilterBasePrivate*  d_ptr;
+  explicit LedgerFilterBase(LedgerFilterBasePrivate* dd, QObject* parent = nullptr, QAbstractItemModel* accountsModel = nullptr, QAbstractItemModel* datesModel = nullptr);
+
   bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
   /**
    * Currently filtering only on account id provided by @sa setAccount()
@@ -76,12 +75,7 @@ protected:
    */
   bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
 
-private:
-  bool                      m_showNewTransaction;
-  eMyMoney::Account::Type   m_accountType;
-  QString                   m_filterId;
-  int                       m_filterRole;
 };
 
-#endif // LEDGERPROXYMODEL_H
+#endif // LEDGERFILTERBASE_H
 

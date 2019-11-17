@@ -15,7 +15,7 @@ if(ENABLE_UNFINISHEDFEATURES)
   list(APPEND libmodels_a_SOURCES
     ledgermodel.cpp
     ledgeritem.cpp
-    ledgerproxymodel.cpp
+    ledgerfilterbase.cpp
     ledgerschedule.cpp
     ledgersplit.cpp
     ledgertransaction.cpp

@@ -17,6 +17,7 @@
 
 
 #include "ledgeraccountfilter.h"
+#include "ledgerfilterbase_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -25,8 +26,6 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <KConcatenateRowsProxyModel>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -38,41 +37,34 @@
 #include "mymoneyfile.h"
 #include "journalmodel.h"
 #include "accountsmodel.h"
+#include "specialdatesmodel.h"
 #include "onlinebalanceproxymodel.h"
 
-class LedgerAccountFilterPrivate
+class LedgerAccountFilterPrivate : public LedgerFilterBasePrivate
 {
-  Q_DECLARE_PUBLIC(LedgerAccountFilter)
-
 public:
   explicit LedgerAccountFilterPrivate(LedgerAccountFilter* qq)
-  : q_ptr(qq)
+  : LedgerFilterBasePrivate(qq)
   , view(nullptr)
-  , concatModel(new KConcatenateRowsProxyModel(qq))
   , onlinebalanceproxymodel(new OnlineBalanceProxyModel(qq))
   , showValuesInverted(false)
   , balanceCalculationPending(false)
-  , newTransactionPresent(false)
   {}
 
   ~LedgerAccountFilterPrivate()
   {
   }
 
-  LedgerAccountFilter*        q_ptr;
   LedgerView*                 view;
-  KConcatenateRowsProxyModel* concatModel;
   OnlineBalanceProxyModel*    onlinebalanceproxymodel;
   MyMoneyAccount              account;
   bool                        showValuesInverted;
   bool                        balanceCalculationPending;
-  bool                        newTransactionPresent;
 };
 
 
 LedgerAccountFilter::LedgerAccountFilter(LedgerView* parent)
-  : LedgerProxyModel(parent)
-  , d_ptr(new LedgerAccountFilterPrivate(this))
+  : LedgerFilterBase(new LedgerAccountFilterPrivate(this), parent)
 {
   Q_D(LedgerAccountFilter);
   d->view = parent;
@@ -119,9 +111,6 @@ void LedgerAccountFilter::setupBottomHalf()
   setFilterFixedString(d->account.id());
   setAccountType(d->account.accountType());
 
-  setSortRole(eMyMoney::Model::TransactionPostDateRole);
-  sort(JournalModel::Column::Date);
-
   d->view->setModel(this);
   d->concatModel->setObjectName("LedgerView concatModel");
   d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel());
@@ -130,7 +119,12 @@ void LedgerAccountFilter::setupBottomHalf()
   d->onlinebalanceproxymodel->setSourceModel(MyMoneyFile::instance()->accountsModel());
   d->concatModel->addSourceModel(d->onlinebalanceproxymodel);
 
+  d->concatModel->addSourceModel(MyMoneyFile::instance()->specialDatesModel());
+
+  setSortRole(eMyMoney::Model::TransactionPostDateRole);
   setSourceModel(d->concatModel);
+
+  sort(JournalModel::Column::Date);
 
   // if balance calculation has not been triggered, then run it immediately
   if(!d->balanceCalculationPending) {
@@ -215,17 +209,3 @@ void LedgerAccountFilter::setAccount(const MyMoneyAccount& acc)
 
   d->account = acc;
 }
-
-void LedgerAccountFilter::setShowEntryForNewTransaction(bool show)
-{
-  Q_D(LedgerAccountFilter);
-
-  if (show && !d->newTransactionPresent) {
-    d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
-    d->newTransactionPresent = true;
-  } else if (!show && d->newTransactionPresent) {
-    d->concatModel->removeSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
-    d->newTransactionPresent = false;
-  }
-}
-

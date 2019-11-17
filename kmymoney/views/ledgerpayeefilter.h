@@ -30,13 +30,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ledgerproxymodel.h"
+#include "ledgerfilterbase.h"
 
 class LedgerView;
 class MyMoneyAccount;
 class LedgerPayeeFilterPrivate;
-
-class LedgerPayeeFilter : public LedgerProxyModel
+class LedgerPayeeFilter : public LedgerFilterBase
 {
   Q_OBJECT
 
@@ -45,8 +44,6 @@ public:
   ~LedgerPayeeFilter() override;
 
   void setShowBalanceInverted(bool inverted = true);
-
-  void setShowEntryForNewTransaction(bool show);
 
   void setPayeeIdList(const QStringList& payeeIds);
 
@@ -69,8 +66,7 @@ protected:
   bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
 
 private:
-  LedgerPayeeFilterPrivate*   d_ptr;
-  Q_DECLARE_PRIVATE(LedgerPayeeFilter)
+  Q_DECLARE_PRIVATE_D(LedgerFilterBase::d_ptr, LedgerPayeeFilter);
 };
 
 #endif // LEDGERPAYEEFILTER_H
