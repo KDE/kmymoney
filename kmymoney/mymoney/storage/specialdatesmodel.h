@@ -74,6 +74,7 @@ public:
 
   int columnCount (const QModelIndex & parent) const override;
   QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
+  Qt::ItemFlags flags(const QModelIndex &index) const;
 
 public Q_SLOTS:
   void load();

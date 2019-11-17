@@ -144,7 +144,7 @@ QVariant OnlineBalanceProxyModel::data(const QModelIndex& idx, int role) const
 
 Qt::ItemFlags OnlineBalanceProxyModel::flags(const QModelIndex& index) const
 {
-  return QSortFilterProxyModel::flags(index) & ~(Qt::ItemIsEditable | Qt::ItemIsSelectable);
+  return Qt::NoItemFlags;
 }
 
 bool OnlineBalanceProxyModel::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const

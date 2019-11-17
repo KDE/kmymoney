@@ -63,6 +63,11 @@ int SpecialDatesModel::columnCount(const QModelIndex& parent) const
   return JournalModel::Column::MaxColumns;
 }
 
+Qt::ItemFlags SpecialDatesModel::flags(const QModelIndex& index) const
+{
+  return Qt::NoItemFlags;
+}
+
 void SpecialDatesModel::load()
 {
   beginResetModel();
