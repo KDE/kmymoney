@@ -52,9 +52,7 @@ class SpecialDateDelegate::Private
 {
 public:
   Private()
-  : m_editor(nullptr)
-  , m_view(nullptr)
-  , m_lineHeight(12)
+  : m_lineHeight(12)
   , m_margin(2)
 
   {}
@@ -63,8 +61,6 @@ public:
   {
   }
 
-  NewTransactionEditor*         m_editor;
-  LedgerView*                   m_view;
   int                           m_lineHeight;
   int                           m_margin;
 };
@@ -74,7 +70,6 @@ SpecialDateDelegate::SpecialDateDelegate(LedgerView* parent)
   : QStyledItemDelegate(parent)
   , d(new Private)
 {
-  d->m_view = parent;
 }
 
 SpecialDateDelegate::~SpecialDateDelegate()
@@ -93,14 +88,10 @@ void SpecialDateDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
   // never show the focus
   opt.state &= ~QStyle::State_HasFocus;
 
-  // if selected, always show as active, so that the
-  // background does not change when the editor is shown
-  if (opt.state & QStyle::State_Selected) {
-    opt.state |= QStyle::State_Active;
-  }
-  // never draw it as selected but always enabled
-  opt.state &= ~QStyle::State_Selected;
+  // always draw it as selected and enabled but inactive
+  opt.state |= QStyle::State_Selected;
   opt.state |= QStyle::State_Enabled;
+  opt.state &= ~QStyle::State_Active;
 
   painter->save();
 
@@ -108,18 +99,6 @@ void SpecialDateDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 
   // Background
   QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
-  const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
-  const int lineHeight = opt.fontMetrics.lineSpacing() + 2;
-
-  const QRect textArea = QRect(opt.rect.x() + margin, opt.rect.y() + margin, opt.rect.width() - 2 * margin, opt.rect.height() - 2 * margin);
-
-  QPalette::ColorGroup cg;
-
-  KColorScheme::BackgroundRole role = KColorScheme::PositiveBackground; // : KColorScheme::NegativeBackground;
-
-  KColorScheme::adjustBackground(opt.palette, role, QPalette::Base, KColorScheme::View, KSharedConfigPtr());
-  // opt.rect.setHeight(lineHeight);
-  opt.backgroundBrush = opt.palette.base();
 
   opt.rect.setX(opt.rect.x()-2);
   opt.rect.setWidth(opt.rect.width()+5);
@@ -132,10 +111,14 @@ void SpecialDateDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
         opt.rect.setX(0);
         opt.rect.setWidth(view->viewport()->width());
       }
+      // always paint in bold
+      auto font = painter->font();
+      font.setBold(true);
+      painter->setFont(font);
       const auto idx = index.model()->index(index.row(), 0, index.parent());
       QString txt = idx.data(eMyMoney::Model::TransactionPostDateRole).toDate().toString(Qt::ISODate);
       painter->setPen(opt.palette.color(QPalette::Normal, QPalette::Text));
-      painter->drawText(opt.rect, Qt::AlignCenter, QString("Special Date: %1 - %2").arg(txt, idx.data(Qt::DisplayRole).toString()));
+      painter->drawText(opt.rect, Qt::AlignCenter, idx.data(Qt::DisplayRole).toString());
       break;
   }
 
