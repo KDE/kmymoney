@@ -679,7 +679,7 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
            <string/>
           </property>
          </widget>
-         <widget class="QLabel" name="label_5">
+         <widget class="QLabel" name="m_gwDebugLogLabel">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -692,7 +692,7 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
            <string>Set environment variable GWEN_LOGLEVEL=Debug for further debug logging</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_6">
+         <widget class="QLabel" name="m_aqDebugLogLabel">
           <property name="geometry">
            <rect>
             <x>10</x>

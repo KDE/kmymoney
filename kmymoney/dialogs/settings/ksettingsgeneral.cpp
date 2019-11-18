@@ -60,6 +60,14 @@ KSettingsGeneral::KSettingsGeneral(QWidget* parent) :
   } else {
     m_aqbankingLogPath->setVisible(false);
   }
+
+#ifdef ENABLE_KBANKING
+  m_gwDebugLogLabel->setVisible(true);
+  m_aqDebugLogLabel->setVisible(true);
+#else
+  m_gwDebugLogLabel->setVisible(false);
+  m_aqDebugLogLabel->setVisible(false);
+#endif
 }
 
 KSettingsGeneral::~KSettingsGeneral()
