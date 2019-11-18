@@ -679,6 +679,32 @@ You can use &lt;b&gt;View/Show all accounts&lt;/b&gt; to temporarily show hidden
            <string/>
           </property>
          </widget>
+         <widget class="QLabel" name="label_5">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>50</y>
+            <width>451</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Set environment variable GWEN_LOGLEVEL=Debug for further debug logging</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_6">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>70</y>
+            <width>451</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Set environment variable AQBANKING_LOGLEVEL=debug for further logging</string>
+          </property>
+         </widget>
         </widget>
        </item>
       </layout>
