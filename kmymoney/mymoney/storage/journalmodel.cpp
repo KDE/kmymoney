@@ -297,6 +297,12 @@ QVariant JournalModel::headerData(int section, Qt::Orientation orientation, int 
   return QAbstractItemModel::headerData(section, orientation, role);
 }
 
+Qt::ItemFlags JournalModel::flags(const QModelIndex& index) const
+{
+  Q_UNUSED(index);
+  return (Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable);
+}
+
 QVariant JournalModel::data(const QModelIndex& idx, int role) const
 {
   if (!idx.isValid())

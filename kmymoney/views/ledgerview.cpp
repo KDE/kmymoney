@@ -254,7 +254,6 @@ void LedgerView::currentChanged(const QModelIndex& current, const QModelIndex& p
   if(current.isValid()) {
     QModelIndex index = current.model()->index(current.row(), 0);
     scrollTo(index, EnsureVisible);
-    /// @todo port to new model code
     QString id = current.model()->data(index, eMyMoney::Model::IdRole).toString();
     // For a new transaction the id is completely empty, for a split view the transaction
     // part is filled but the split id is empty and the string ends with a dash

@@ -111,6 +111,7 @@ public:
   int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
   QVariant data(const QModelIndex& idx, int role = Qt::DisplayRole) const override;
   QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;
+  Qt::ItemFlags flags(const QModelIndex & index) const override;
 
   /**
    * Special implementation using a binary search algorithm instead
