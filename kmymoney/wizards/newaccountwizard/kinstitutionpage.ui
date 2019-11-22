@@ -99,7 +99,7 @@ KMyMoney currently uses this number only for some online banking functions.</str
          <property name="whatsThis">
           <string>You can enter the IBAN (International Bank Account Number) into this field if you know it. Usually, people at your institution can tell you the number or it is printed on your statements.
 
-See also http://en.wikipedia.org/wiki/International_Bank_Account_Number for more information.
+See also https://en.wikipedia.org/wiki/International_Bank_Account_Number for more information.
 
 KMyMoney keeps this field only for documentation purposes and does not use it otherwise.</string>
          </property>
