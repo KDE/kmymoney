@@ -184,7 +184,7 @@ set(_uncritial_common_sources ${_uncritial_common_sources}
 
 # in order to use add_dependencies, we need to add this custom target
 # for all generated header files.
-# (see http://www.vtk.org/Wiki/CMake_FAQ#How_can_I_add_a_dependency_to_a_source_file_which_is_generated_in_a_subdirectory.3F )
+# (see https://gitlab.kitware.com/cmake/community/wikis/FAQ#how-can-i-add-a-dependency-to-a-source-file-which-is-generated-in-a-subdirectory )
 add_custom_target(generate_base_ui_srcs DEPENDS
   ${kmymoney_base_ui_srcs})
 

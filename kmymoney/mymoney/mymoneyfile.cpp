@@ -2680,7 +2680,7 @@ QMap<MyMoneySecurity, MyMoneyPrice> MyMoneyFile::ancientCurrencies() const
   ancientCurrencies.insert(MyMoneySecurity("FIM", i18n("Finnish Markka"), QString()),    MyMoneyPrice("FIM", "EUR", QDate(1998, 12, 31), MyMoneyMoney(100000, 594573), QLatin1Literal("KMyMoney")));
   ancientCurrencies.insert(MyMoneySecurity("GRD", i18n("Greek Drachma"), QChar(0x20AF)), MyMoneyPrice("GRD", "EUR", QDate(1998, 12, 31), MyMoneyMoney(100, 34075), QLatin1Literal("KMyMoney")));
 
-    // http://en.wikipedia.org/wiki/Bulgarian_lev
+    // https://en.wikipedia.org/wiki/Bulgarian_lev
   ancientCurrencies.insert(MyMoneySecurity("BGL", i18n("Bulgarian Lev"), "BGL"), MyMoneyPrice("BGL", "BGN", QDate(1999, 7, 5), MyMoneyMoney(1, 1000), QLatin1Literal("KMyMoney")));
 
   ancientCurrencies.insert(MyMoneySecurity("ROL", i18n("Romanian Leu"), "ROL"), MyMoneyPrice("ROL", "RON", QDate(2005, 6, 30), MyMoneyMoney(1, 10000), QLatin1Literal("KMyMoney")));
@@ -2689,17 +2689,17 @@ QMap<MyMoneySecurity, MyMoneyPrice> MyMoneyFile::ancientCurrencies() const
 
   ancientCurrencies.insert(MyMoneySecurity("SIT", i18n("Slovenian Tolar"), "SIT"), MyMoneyPrice("SIT", "EUR", QDate(2006, 12, 31), MyMoneyMoney(1, 23964), QLatin1Literal("KMyMoney")));
 
-    // Source: http://www.tf-portfoliosolutions.net/products/turkishlira.aspx
+    // Source: https://en.wikipedia.org/wiki/Turkish_lira
   ancientCurrencies.insert(MyMoneySecurity("TRL", i18n("Turkish Lira (old)"), "TL"), MyMoneyPrice("TRL", "TRY", QDate(2004, 12, 31), MyMoneyMoney(1, 1000000), QLatin1Literal("KMyMoney")));
 
-    // Source: http://www.focus.de/finanzen/news/malta-und-zypern_aid_66058.html
+    // Source: https://www.focus.de/finanzen/news/malta-und-zypern_aid_66058.html
   ancientCurrencies.insert(MyMoneySecurity("MTL", i18n("Maltese Lira"), "MTL"), MyMoneyPrice("MTL", "EUR", QDate(2008, 1, 1), MyMoneyMoney(429300, 1000000), QLatin1Literal("KMyMoney")));
   ancientCurrencies.insert(MyMoneySecurity("CYP", i18n("Cyprus Pound"), QString("C%1").arg(QChar(0x00A3))), MyMoneyPrice("CYP", "EUR", QDate(2008, 1, 1), MyMoneyMoney(585274, 1000000), QLatin1Literal("KMyMoney")));
 
-    // Source: http://www.focus.de/finanzen/news/waehrungszone-slowakei-ist-neuer-euro-staat_aid_359025.html
+    // Source: https://www.focus.de/finanzen/news/waehrungszone-slowakei-ist-neuer-euro-staat_aid_359025.html
   ancientCurrencies.insert(MyMoneySecurity("SKK", i18n("Slovak Koruna"), "SKK"), MyMoneyPrice("SKK", "EUR", QDate(2008, 12, 31), MyMoneyMoney(1000, 30126), QLatin1Literal("KMyMoney")));
 
-    // Source: http://en.wikipedia.org/wiki/Mozambican_metical
+    // Source: https://en.wikipedia.org/wiki/Mozambican_metical
   ancientCurrencies.insert(MyMoneySecurity("MZM", i18n("Mozambique Metical"), "MT"), MyMoneyPrice("MZM", "MZN", QDate(2006, 7, 1), MyMoneyMoney(1, 1000), QLatin1Literal("KMyMoney")));
 
     // Source https://en.wikipedia.org/wiki/Azerbaijani_manat

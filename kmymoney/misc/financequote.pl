@@ -110,7 +110,7 @@ if ($errcode != 0) {
     # and looked pretty unrealistic for others (e.g. RHAT on 15/5/04 was 12.09-38.32!))
     my $price = $qhash {$symbol, "last"};
     # if no price was found, try to extract it from the price symbol
-    # see http://bugs.kde.org/show_bug.cgi?id=234268 for details
+    # see https://bugs.kde.org/show_bug.cgi?id=234268 for details
     $price = $qhash {$symbol, "price"} if (!$price);
 
     print "\"$symbol\",\"$yyyymmdd\",\"$price\"";

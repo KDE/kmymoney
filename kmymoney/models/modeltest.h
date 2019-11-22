@@ -1,7 +1,7 @@
 /****************************************************************************
 **
 ** Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).
-** Contact: http://www.qt-project.org/
+** Contact: https://www.qt.io/developers/
 **
 ** This file is part of the test suite of the Qt Toolkit.
 **
@@ -24,7 +24,7 @@
 ** and appearing in the file LICENSE.GPL included in the packaging of this
 ** file. Please review the following information to ensure the GNU General
 ** Public License version 3.0 requirements will be met:
-** http://www.gnu.org/copyleft/gpl.html.
+** https://www.gnu.org/copyleft/gpl.html.
 **
 ** Other Usage
 ** Alternatively, this file may be used in accordance with the terms and

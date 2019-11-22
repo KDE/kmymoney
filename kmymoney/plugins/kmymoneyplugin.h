@@ -106,7 +106,7 @@ namespace KMyMoneyPlugin
    @endcode
  * to replace the version variables using cmake.
  *
- * @see http://doc.qt.io/qt-5/plugins-howto.html
+ * @see https://doc.qt.io/qt-5/plugins-howto.html
  * @see https://api.kde.org/frameworks/kcoreaddons/html/classKPluginMetaData.html
  *
  */
@@ -158,7 +158,7 @@ protected:
    *
    * A good tutorial on how to design and develop a plugin
    * structure for a KDE application (e.g. KMyMoney) can be found at
-   * http://developer.kde.org/documentation/tutorials/developing-a-plugin-structure/index.html
+   * http://web.archive.org/web/20100305214125/http://developer.kde.org/documentation/tutorials/developing-a-plugin-structure/index.html
    *
  */
 class KMM_PLUGIN_EXPORT OnlinePlugin
@@ -224,7 +224,7 @@ public:
   *
   * A good tutorial on how to design and develop a plugin
   * structure for a KDE application (e.g. KMyMoney) can be found at
-  * http://developer.kde.org/documentation/tutorials/developing-a-plugin-structure/index.html
+  * http://web.archive.org/web/20100305214125/http://developer.kde.org/documentation/tutorials/developing-a-plugin-structure/index.html
   *
   */
 class KMM_PLUGIN_EXPORT ImporterPlugin

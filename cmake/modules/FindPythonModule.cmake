@@ -1,5 +1,5 @@
 # Find if a Python module is installed
-# Found at http://www.cmake.org/pipermail/cmake/2011-January/041666.html
+# Found at https://www.cmake.org/pipermail/cmake/2011-January/041666.html
 # To use do: find_python_module(PyQt4 REQUIRED)
 function(find_python_module module)
 	string(TOUPPER ${module} module_upper)

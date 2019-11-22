@@ -145,7 +145,7 @@ void PayeesModel::unload()
     d->m_payeeItems.clear();
     // From Qt 5.7, the capacity is preserved. To shed all capacity,
     // swap with a default-constructed vector.
-    // see http://doc.qt.io/qt-5/qvector.html#clear
+    // see https://doc.qt.io/qt-5/qvector.html#clear
     QVector<MyMoneyPayee*>().swap(d->m_payeeItems);
     endRemoveRows();
   }

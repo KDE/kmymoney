@@ -521,7 +521,7 @@ void NewTransactionEditor::loadTransaction(const QString& id)
         d->ui->memoEdit->ensureCursorVisible();
 
         // The calculator for the amount field can simply be added as an icon to the line edit widget.
-        // See http://stackoverflow.com/questions/11381865/how-to-make-an-extra-icon-in-qlineedit-like-this howto do it
+        // See https://stackoverflow.com/questions/11381865/how-to-make-an-extra-icon-in-qlineedit-like-this howto do it
         d->ui->amountEditCredit->setText(model->data(model->index(index.row(), (int)eLedgerModel::Column::Payment)).toString());
         d->ui->amountEditDebit->setText(model->data(model->index(index.row(), (int)eLedgerModel::Column::Deposit)).toString());
 

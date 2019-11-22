@@ -131,7 +131,7 @@ template <class T> class QList;
   * @p QDialog::Rejected.
   *
   * @note The implementation of this class is heavily based on ideas found at
-  *       http://doc.trolltech.com/4.1/dialogs-complexwizard.html
+  *       https://doc.qt.io/qt-5/qtwidgets-dialogs-licensewizard-example.html
   */
 class KMyMoneyWizardPrivate;
 class KMyMoneyWizard : public QDialog

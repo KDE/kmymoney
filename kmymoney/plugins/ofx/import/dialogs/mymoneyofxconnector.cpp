@@ -74,8 +74,8 @@ OfxAppVersion::OfxAppVersion(KComboBox* combo, KLineEdit* versionEdit, const QSt
     m_combo(combo),
     m_versionEdit(versionEdit)
 {
-// http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
-// http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
+// https://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
+// https://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
 
   // Quicken
   m_appMap[i18n("Quicken Windows 2003")] = "QWIN:1200";
@@ -333,8 +333,8 @@ void MyMoneyOfxConnector::initRequest(OfxFiLogin* fi) const
 #endif
 
   // If we don't know better, we pretend to be Quicken 2008
-  // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
-  // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
+  // https://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
+  // https://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
   QString appId = m_account.onlineBankingSettings().value("appId");
   QRegExp exp("(.*):(.*)");
   if (exp.indexIn(appId) != -1) {
