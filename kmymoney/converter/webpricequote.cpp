@@ -1007,7 +1007,7 @@ void FinanceQuoteProcess::launch(const QString& scriptPath)
 {
   QStringList arguments;
   arguments << scriptPath << QLatin1Literal("-l");
-  setProcessChannelMode(QProcess::ForwardedOutputChannel);
+  setProcessChannelMode(QProcess::SeparateChannels);
   start(QLatin1Literal("perl"), arguments);
   if (! waitForStarted()) qWarning("Unable to start FQ script");
   return;
