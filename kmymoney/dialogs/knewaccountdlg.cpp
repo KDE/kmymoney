@@ -777,14 +777,6 @@ void KNewAccountDlg::slotSelectionChanged(const QItemSelection &current, const Q
       d->m_parentAccount = MyMoneyFile::instance()->accountsModel()->itemByIndex(baseIdx);
       d->ui->m_subAccountLabel->setText(i18n("Is a sub account of %1", d->m_parentAccount.name()));
     }
-    /// @todo port to new model code
-    #if 0
-    QVariant account = d->ui->m_parentAccounts->model()->data(current.indexes().front(), (int)eAccountsModel::Role::Account);
-    if (account.isValid()) {
-      d->m_parentAccount = account.value<MyMoneyAccount>();
-      d->ui->m_subAccountLabel->setText(i18n("Is a sub account of %1", d->m_parentAccount.name()));
-    }
-#endif
   }
 }
 

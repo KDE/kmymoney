@@ -263,7 +263,6 @@ Qt::ItemFlags AccountsProxyModel::flags(const QModelIndex& index) const
   */
 bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
 {
-/// @todo port to new model code
   Q_D(const AccountsProxyModel);
   if (source.isValid()) {
     const auto accountTypeValue = sourceModel()->data(source, eMyMoney::Model::Roles::AccountTypeRole);
@@ -317,42 +316,6 @@ bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
         return true;
     }
   }
-  /// @todo cleanup
-  #if 0
-    const auto data = sourceModel()->data(source, (int)Role::Account);
-    if (data.isValid()) {
-      if (data.canConvert<MyMoneyAccount>()) {
-        const auto account = data.value<MyMoneyAccount>();
-        if ((hideClosedAccounts() && account.isClosed()))
-          return false;
-
-        // we hide stock accounts if not in expert mode
-        if (account.isInvest() && hideEquityAccounts())
-          return false;
-
-        // we hide equity accounts if not in expert mode
-        if (account.accountType() == eMyMoney::Account::Type::Equity && hideEquityAccounts())
-          return false;
-
-        // we hide unused income and expense accounts if the specific flag is set
-        if ((account.accountType() == eMyMoney::Account::Type::Income || account.accountType() == eMyMoney::Account::Type::Expense) && hideUnusedIncomeExpenseAccounts()) {
-          const auto totalValue = sourceModel()->data(source, (int)Role::TotalValue);
-          if (totalValue.isValid() && totalValue.value<MyMoneyMoney>().isZero()) {
-            emit const_cast<AccountsProxyModel*>(this)->unusedIncomeExpenseAccountHidden();
-            return false;
-          }
-        }
-
-        if (d->m_typeList.contains(account.accountType()))
-          return true;
-      } else if (data.canConvert<MyMoneyInstitution>() && sourceModel()->rowCount(source) == 0) {
-        // if this is an institution that has no children show it only if hide unused institutions (hide closed accounts for now) is not checked
-        return !hideClosedAccounts();
-      }
-      // let the visibility of all other institutions (the ones with children) be controlled by the visibility of their children
-    }
-#endif
-
   return false;
 }
 
@@ -502,10 +465,10 @@ int AccountsProxyModel::visibleItems(const QModelIndex& index) const
 
 QVector<eMyMoney::Account::Type> AccountsProxyModel::assetLiabilityEquity()
 {
-  return  QVector<eMyMoney::Account::Type>({ eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity });
+  return QVector<eMyMoney::Account::Type>({ eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity });
 }
 
 QVector<eMyMoney::Account::Type> AccountsProxyModel::incomeExpense()
 {
-  return  QVector<eMyMoney::Account::Type>({ eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense });
+  return QVector<eMyMoney::Account::Type>({ eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense });
 }
