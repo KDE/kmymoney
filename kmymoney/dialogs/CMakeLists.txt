@@ -27,7 +27,6 @@ set(libdialogs_a_SOURCES
   kmymoneypricedlg.cpp
   kmymoneysplittable.cpp
   knewaccountdlg.cpp
-  hierarchyfilterproxymodel.cpp
   knewbankdlg.cpp
   knewequityentrydlg.cpp
   editpersonaldatadlg.cpp
