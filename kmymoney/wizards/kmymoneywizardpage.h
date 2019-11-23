@@ -129,7 +129,7 @@ class KMyMoneyWizard;
   * following methods: resetPage, nextPage, isLastPage and isComplete.
   *
   * @note The implementation of this class is heavily based on ideas found at
-  *       http://doc.trolltech.com/4.1/dialogs-complexwizard.html
+  *       https://doc.qt.io/qt-5/qtwidgets-dialogs-licensewizard-example.html
   */
 class KMyMoneyWizardPagePrivate;
 class KMyMoneyWizardPage

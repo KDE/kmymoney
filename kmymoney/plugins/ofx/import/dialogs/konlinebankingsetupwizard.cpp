@@ -362,8 +362,8 @@ bool KOnlineBankingSetupWizard::finishLoginPage()
 #endif
 
     // pretend we're Quicken 2008
-    // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
-    // http://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
+    // https://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-intuit-products/
+    // https://ofxblog.wordpress.com/2007/06/06/ofx-appid-and-appver-for-microsoft-money/
     QString appId = m_appId->appId();
     QRegExp exp("(.*):(.*)");
     if (exp.indexIn(appId) != -1) {

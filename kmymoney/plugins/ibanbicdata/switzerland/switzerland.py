@@ -76,7 +76,7 @@ def processFile(fileName):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Creates a SQLite database for KMyMoney with information about IBAN and BICs based on a swiss BC-Bankenstamm file."
-        " You can get the BC-Bankenstamm file from http://www.six-interbank-clearing.com/de/home/bank-master-data/download-bc-bank-master.html"
+        " You can get the BC-Bankenstamm file from https://www.six-group.com/interbank-clearing/de/home/bank-master-data/download-bc-bank-master.html"
     )
 
     parser.add_argument(dest='file', help='File to load')

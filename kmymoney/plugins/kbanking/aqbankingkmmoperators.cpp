@@ -33,7 +33,7 @@
 /**
  * @brief DTAUS Chars
  *
- * @source http://www.hbci-zka.de/dokumente/spezifikation_deutsch/FinTS_3.0_Messages_Finanzdatenformate_2010-08-06_final_version.pdf
+ * @source https://www.hbci-zka.de/dokumente/spezifikation_deutsch/fintsv3/FinTS_3.0_Messages_Finanzdatenformate_2010-08-06_final_version.pdf
  *
  * @note This file is saved in UTF-8!
  *

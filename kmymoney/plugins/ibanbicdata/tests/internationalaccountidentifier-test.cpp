@@ -79,7 +79,7 @@ void internationalAccountIdentifierTest::paperformatIban_data()
   QTest::addColumn<QString>("iban");
   QTest::addColumn<QString>("paperformat");
 
-  /** Random ibans generated using http://www.mobilefish.com/services/random_iban_generator/random_iban_generator.php */
+  /** Random ibans generated using https://www.mobilefish.com/services/random_iban_generator/random_iban_generator.php */
   QTest::newRow("AL55359338525014419438694535") << "AL55359338525014419438694535" << "AL55 3593 3852 5014 4194 3869 4535";
   QTest::newRow("AD6507599863323512292387")     << "AD6507599863323512292387"     << "AD65 0759 9863 3235 1229 2387";
   QTest::newRow("AT550611200130969602")         << "AT550611200130969602"         << "AT55 0611 2001 3096 9602";

@@ -50,7 +50,7 @@
  *                                                                        *
  * The MandatoryFieldGroup code is courtesy of                            *
  * Mark Summerfield in Qt Quarterly                                       *
- * http://doc.trolltech.com/qq/qq11-mandatoryfields.html                  *
+ * https://doc.qt.io/archives/qq/qq11-mandatoryfields.html                *
  *                                                                        *
  * Enhanced by Thomas Baumgart to support the lineedit field of a         *
  * a KComboBox.                                                           *

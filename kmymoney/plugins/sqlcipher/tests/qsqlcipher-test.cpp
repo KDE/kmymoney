@@ -74,7 +74,7 @@ void qsqlciphertest::createEncryptedDatabase()
   QSqlQuery query(m_db);
   QVERIFY(query.exec(QString::fromLatin1("PRAGMA key = '%1'").arg(passphrase))); // this should happen immediately after opening the database, otherwise it cannot be encrypted
   m_file.open();
-  // http://www.sqlite.org/fileformat.html#database_header
+  // https://www.sqlite.org/fileformat.html#database_header
   auto header = QString(m_file.read(16));
   QVERIFY(header !=  QLatin1String("SQLite format 3\000")); // encrypted database has scrambled content in contrast to its regular SQLite counterpart
   m_file.close();

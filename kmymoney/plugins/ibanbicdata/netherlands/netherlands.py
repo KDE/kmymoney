@@ -68,7 +68,7 @@ def processFile(fileName):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Create an SQLite database for KMyMoney with information about IBAN and BICs based on an 'Excel 2007 sheet' from the Dutch Betaalvereniging for the banks in the netherlands."
-                                     " You can download the source (.xlsx) file at http://www.betaalvereniging.nl/europees-betalen/sepa-documentatie/bic-afleiden-uit-iban/"
+                                     " You can download the source (.xlsx) file at https://www.betaalvereniging.nl/betalingsverkeer/giraal-betalingsverkeer/bic-sepa-transacties/"
                                      )
     parser.add_argument(dest='file', help='File to load')
     parser.add_argument('-o', '--output', default="bankdata.nl.db", help='SQLite database to open/generate')
