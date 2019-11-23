@@ -146,20 +146,23 @@ public:
 
     ui->m_equitiesTree->setModel(m_equitiesProxyModel);
 
-    m_equityColumnSelector = new ColumnSelector(ui->m_equitiesTree, QStringLiteral("KInvestmentView_Equities"));
+    QVector<int> equityColumns( {
+      extraColumnModel->proxyColumnForExtraColumn(EquitiesModel::Column::Symbol),
+      extraColumnModel->proxyColumnForExtraColumn(EquitiesModel::Column::Value),
+      extraColumnModel->proxyColumnForExtraColumn(EquitiesModel::Column::Quantity),
+      extraColumnModel->proxyColumnForExtraColumn(EquitiesModel::Column::Price),
+    });
+
+    m_equityColumnSelector = new ColumnSelector(ui->m_equitiesTree,
+                                                QStringLiteral("KInvestmentView_Equities"),
+                                                extraColumnModel->proxyColumnForExtraColumn(EquitiesModel::Column::Symbol)-1,
+                                                equityColumns);
     m_equityColumnSelector->setModel(m_equitiesProxyModel);
 
     m_equityColumnSelector->setAlwaysVisible(QVector<int>({ AccountsModel::Column::AccountName }));
 
     QVector<int> columns;
     columns = m_equityColumnSelector->columns();
-
-    QVector<int> equityColumns( {
-      extraColumnModel->proxyColumnForExtraColumn(EquitiesModel::Column::Symbol),
-      extraColumnModel->proxyColumnForExtraColumn(EquitiesModel::Column::Value),
-      extraColumnModel->proxyColumnForExtraColumn(EquitiesModel::Column::Quantity),
-      extraColumnModel->proxyColumnForExtraColumn(EquitiesModel::Column::Price),
-      });
 
     int colIdx;
     foreach(auto col, equityColumns) {
@@ -178,29 +181,6 @@ public:
     q->connect(ui->m_equitiesTree, &QWidget::customContextMenuRequested, q, &KInvestmentView::slotInvestmentMenuRequested);
     q->connect(ui->m_equitiesTree->selectionModel(), &QItemSelectionModel::currentRowChanged, q, &KInvestmentView::slotEquitySelected);
     q->connect(ui->m_equitiesTree, &QTreeView::doubleClicked, q, &KInvestmentView::slotEditInvestment);
-
-    #if 0
-    auto cfgGroup = KSharedConfig::openConfig()->group("KInvestmentView_Equities");
-    auto cfgHeader = cfgGroup.readEntry("HeaderState", QByteArray());
-    auto cfgColumns = cfgGroup.readEntry("ColumnsSelection", QList<int>());
-    QList<EquitiesModel::Column> visEColumns {EquitiesModel::Equity};
-    foreach (const auto cfgColumn, cfgColumns) {
-        const auto visColumn = static_cast<EquitiesModel::Column>(cfgColumn);
-        if (!visEColumns.contains(visColumn))
-          visEColumns.append(visColumn);
-    }
-
-    m_equitiesProxyModel = new EquitiesFilterProxyModel(q, MyMoneyFile::instance()->equitiesModel(), visEColumns);
-    ui->m_equitiesTree->setModel(m_equitiesProxyModel);
-    ui->m_equitiesTree->header()->restoreState(cfgHeader);
-    ui->m_equitiesTree->header()->setContextMenuPolicy(Qt::CustomContextMenu);
-
-    q->connect(ui->m_equitiesTree, &QWidget::customContextMenuRequested, q, &KInvestmentView::slotInvestmentMenuRequested);
-    q->connect(ui->m_equitiesTree->selectionModel(), &QItemSelectionModel::currentRowChanged, q, &KInvestmentView::slotEquitySelected);
-    q->connect(ui->m_equitiesTree, &QTreeView::doubleClicked, q, &KInvestmentView::slotEditInvestment);
-    q->connect(ui->m_equitiesTree->header(), &QWidget::customContextMenuRequested, m_equitiesProxyModel, &EquitiesFilterProxyModel::slotColumnsMenu);
-    q->connect(ui->m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, q, &KInvestmentView::slotLoadAccount);
-    #endif
 
     // Securities tab
     m_securitiesProxyModel = new QSortFilterProxyModel(q);

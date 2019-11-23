@@ -176,21 +176,6 @@ public:
     ui->labelDefaultCategory->setEnabled(false);
     ui->comboDefaultCategory->setEnabled(false);
 
-    /// @todo port to new model code
-#if 0
-    QList<eWidgets::eTransaction::Column> cols {
-    eWidgets::eTransaction::Column::Date,
-    eWidgets::eTransaction::Column::Account,
-    eWidgets::eTransaction::Column::Detail,
-    eWidgets::eTransaction::Column::ReconcileFlag,
-    eWidgets::eTransaction::Column::Payment,
-    eWidgets::eTransaction::Column::Deposit};
-
-    ui->m_register->setupRegister(MyMoneyAccount(), cols);
-    ui->m_register->setSelectionMode(QTableWidget::SingleSelection);
-    ui->m_register->setDetailsColumnType(eWidgets::eRegister::DetailColumn::AccountFirst);
-#endif
-
     m_renameProxyModel = new ItemRenameProxyModel(q);
     ui->m_payees->setModel(m_renameProxyModel);
     ui->m_payees->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -211,7 +196,9 @@ public:
     ui->m_searchWidget->setClearButtonEnabled(true);
     ui->m_searchWidget->setPlaceholderText(i18nc("Placeholder text", "Search"));
 
+#if 0
     ui->m_balanceLabel->hide();
+#endif
 
     m_contact = new MyMoneyContact(q);
     q->connect(m_contact, &MyMoneyContact::contactFetched, q, &KPayeesView::slotContactFetched);
@@ -251,8 +238,6 @@ public:
 #if 0
     q->connect(ui->m_register, &KMyMoneyRegister::Register::editTransaction, q, &KPayeesView::slotSelectTransaction);
 #endif
-
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KPayeesView::refresh);
 
     q->connect(ui->m_filterBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), q, &KPayeesView::slotChangeFilter);
 
@@ -294,84 +279,6 @@ public:
     m_payee = MyMoneyPayee(); // make sure we don't access an undefined payee
     clearItemData();
   }
-
-#if 0
-  void loadPayees()
-  {
-    Q_Q(KPayeesView);
-    if (m_inSelection)
-      return;
-
-    QMap<QString, bool> isSelected;
-    QString id;
-    MyMoneyFile* file = MyMoneyFile::instance();
-
-    // remember which items are selected in the list
-    QList<QListWidgetItem *> selectedItems = ui->m_payeesList->selectedItems();
-    QList<QListWidgetItem *>::const_iterator payeesIt = selectedItems.constBegin();
-
-    while (payeesIt != selectedItems.constEnd()) {
-      KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(*payeesIt);
-      if (item)
-        isSelected[item->payee().id()] = true;
-      ++payeesIt;
-    }
-
-    // keep current selected item
-    KPayeeListItem *currentItem = static_cast<KPayeeListItem *>(ui->m_payeesList->currentItem());
-    if (currentItem)
-      id = currentItem->payee().id();
-
-    m_allowEditing = false;
-    // clear the list
-    m_searchWidget->clear();
-    m_searchWidget->updateSearch();
-    ui->m_payeesList->clear();
-
-    /// @todo port to new model code
-    // ui->m_register->clear();
-    currentItem = 0;
-
-    QList<MyMoneyPayee>list = file->payeeList();
-    QList<MyMoneyPayee>::ConstIterator it;
-
-    for (it = list.constBegin(); it != list.constEnd(); ++it) {
-      if (m_payeeFilterType == eAllPayees ||
-          (m_payeeFilterType == eReferencedPayees && file->isReferenced(*it)) ||
-          (m_payeeFilterType == eUnusedPayees && !file->isReferenced(*it))) {
-        KPayeeListItem* item = new KPayeeListItem(ui->m_payeesList, *it);
-        if (item->payee().id() == id)
-          currentItem = item;
-        if (isSelected[item->payee().id()])
-          item->setSelected(true);
-      }
-    }
-    ui->m_payeesList->sortItems();
-
-    if (currentItem) {
-      ui->m_payeesList->setCurrentItem(currentItem);
-      ui->m_payeesList->scrollToItem(currentItem);
-    }
-
-    m_filterProxyModel->invalidate();
-    ui->comboDefaultCategory->expandAll();
-
-    q->slotSelectPayee(0, 0);
-    m_allowEditing = true;
-  }
-
-  void selectedPayees(QList<MyMoneyPayee>& payeesList) const
-  {
-    QList<QListWidgetItem *> selectedItems = ui->m_payeesList->selectedItems();
-    QList<QListWidgetItem *>::ConstIterator itemsIt = selectedItems.constBegin();
-    while (itemsIt != selectedItems.constEnd()) {
-      KPayeeListItem* item = dynamic_cast<KPayeeListItem*>(*itemsIt);
-      if (item)
-        payeesList << item->payee();
-      ++itemsIt;
-    }
-  }
-#endif
 
   void ensurePayeeVisible(const QString& id)
   {
@@ -434,75 +341,43 @@ public:
       payeeIds.append(payee.id());
     }
     m_transactionFilter->setPayeeIdList(payeeIds);
-    /// @todo port to new model code
-#if 0
-    // setup the list and the pointer vector
-    MyMoneyTransactionFilter filter;
 
-    for (QList<MyMoneyPayee>::const_iterator it = m_selectedPayeesList.constBegin();
-         it != m_selectedPayeesList.constEnd();
-         ++it)
-      filter.addPayee((*it).id());
-
-    filter.setDateFilter(KMyMoneySettings::startDate().date(), QDate());
-
-    // retrieve the list from the engine
-    file->transactionList(m_transactionList, filter);
-
-    // create the elements for the register
-    QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
-    QMap<QString, int> uniqueMap;
-    MyMoneyMoney deposit, payment;
-
-    int splitCount = 0;
     bool balanceAccurate = true;
-    for (it = m_transactionList.constBegin(); it != m_transactionList.constEnd(); ++it) {
-      const MyMoneySplit& split = (*it).second;
-      MyMoneyAccount acc = file->account(split.accountId());
-      ++splitCount;
-      uniqueMap[(*it).first.id()]++;
+    QModelIndex idx;
+    MyMoneyMoney deposit, payment;
+    const auto rows = m_transactionFilter->rowCount();
+    for(int row = 0; row < rows; ++row) {
+      idx = m_transactionFilter->index(row, 0);
+      const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
+      // in case of an entry of the specialDatesModel the accountId is empty
+      if (!accountId.isEmpty()) {
+        const auto acc = file->account(accountId);
 
-      KMyMoneyRegister::Register::transactionFactory(ui->m_register, (*it).first, (*it).second, uniqueMap[(*it).first.id()]);
-
-      // take care of foreign currencies
-      MyMoneyMoney val = split.shares().abs();
-      if (acc.currencyId() != base.id()) {
-        const MyMoneyPrice &price = file->price(acc.currencyId(), base.id());
-        // in case the price is valid, we use it. Otherwise, we keep
-        // a flag that tells us that the balance is somewhat inaccurate
-        if (price.isValid()) {
-          val *= price.rate(base.id());
-        } else {
-          balanceAccurate = false;
+        const auto shares = idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+        auto val = shares.abs();
+        if (acc.currencyId() != base.id()) {
+          const MyMoneyPrice &price = file->price(acc.currencyId(), base.id());
+          // in case the price is valid, we use it. Otherwise, we keep
+          // a flag that tells us that the balance is somewhat inaccurate
+          if (price.isValid()) {
+            val *= price.rate(base.id());
+          } else {
+            balanceAccurate = false;
+          }
         }
-      }
 
-      if (split.shares().isNegative()) {
-        payment += val;
-      } else {
-        deposit += val;
+        if (shares.isNegative()) {
+          payment += val;
+        } else {
+          deposit += val;
+        }
       }
     }
     balance = deposit - payment;
 
-    // add the group markers
-    ui->m_register->addGroupMarkers();
-
-    // sort the transactions according to the sort setting
-    ui->m_register->sortItems();
-
-    // remove trailing and adjacent markers
-    ui->m_register->removeUnwantedGroupMarkers();
-
-    ui->m_register->updateRegister(true);
-
-    // we might end up here with updates disabled on the register so
-    // make sure that we enable updates here
-    ui->m_register->setUpdatesEnabled(true);
     ui->m_balanceLabel->setText(i18n("Balance: %1%2",
-                                 balanceAccurate ? "" : "~",
+                                 balanceAccurate ? QString() : QStringLiteral("~"),
                                  balance.formatMoney(file->baseCurrency().smallestAccountFraction())));
-#endif
   }
 
   /**

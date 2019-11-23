@@ -55,8 +55,29 @@ class KMM_WIDGETS_EXPORT ColumnSelector : public QObject
   Q_DISABLE_COPY(ColumnSelector)
 
 public:
-  explicit ColumnSelector(QTreeView* view, const QString& configGroupName = QString());
-  explicit ColumnSelector(QTableView* view, const QString& configGroupName = QString());
+  /**
+   * Creates a ColumnSelector object
+   *
+   * @param view pointer to QTreeView object
+   * @param configGroupName name of the configuration group in the rc file
+   * @param offset offset to be added/subtracted during load/store operation for certain columns
+   * @param columns QVector of column indeces (incl. offset) to which the @a offset should be applied
+   *
+   * @a offset and @a columns are only used for backward compatability and should not be used
+   */
+  explicit ColumnSelector(QTreeView* view, const QString& configGroupName = QString(), int offset = 0, const QVector<int>& columns = QVector<int>());
+
+  /**
+   * Creates a ColumnSelector object
+   *
+   * @param view pointer to QTableView object
+   * @param configGroupName name of the configuration group in the rc file
+   * @param offset offset to be added/subtracted during load/store operation for certain columns
+   * @param columns QVector of column indeces (incl. offset) to which the @a offset should be applied
+   *
+   * @a offset and @a columns are only used for backward compatability and should not be used
+   */
+  explicit ColumnSelector(QTableView* view, const QString& configGroupName = QString(), int offset = 0, const QVector<int>& columns = QVector<int>());
 
   ~ColumnSelector();
 
@@ -66,6 +87,14 @@ public:
   void setModel(QAbstractItemModel* model);
   const QAbstractItemModel* model() const;
   QVector<int> columns() const;
+
+  /**
+   * Set the offset to be subtracted from the actual column number
+   * during load and store operations. This is used to maintain
+   * backward compatability and should not be used on new code.
+   * @a columns contains the indexes to which the @a offset should be applied.
+   */
+  void setColumnOffsetForStorage();
 
 protected Q_SLOT:
   void slotColumnsMenu(const QPoint);

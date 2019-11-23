@@ -492,6 +492,9 @@ namespace eMyMoney {
       TransactionErroneousRole,
       TransactionPostDateRole,
       TransactionCounterAccountRole,
+      TransactionCounterAccountIdRole,
+      TransactionIsTransferRole,
+      TransactionSplitCountRole,
 
       // MyMoneySplit
       SplitSharesSuffixRole,
@@ -505,6 +508,7 @@ namespace eMyMoney {
       SplitPriceRole,
       SplitReconcileFlagRole,
       SplitReconcileDateRole,
+      SplitActionRole,
 
       // Journal
       JournalSplitIdRole,

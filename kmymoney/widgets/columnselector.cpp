@@ -51,9 +51,10 @@ public:
     , tableView(nullptr)
     , headerView(nullptr)
     , model(nullptr)
-    , isInit(false)
     // default is, that column 0 is always visible
     , alwaysVisibleColumns(QVector<int>({ 0 }))
+    , storageOffset(0)
+    , isInit(false)
     {
   }
 
@@ -94,6 +95,12 @@ public:
         headerView->restoreState(columnNames);
 
         visibleColumns = grp.readEntry<int>("ColumnsSelection", QList<int>());
+        // add the storage offset during loading operation
+        for (auto& column : visibleColumns) {
+          if (applyStorageOffsetColumns.contains(column+storageOffset)) {
+            column += storageOffset;
+          }
+        }
       } else {
         // in case no group name is given, all columns are visible
         for (int col = 0; col < maxColumn; ++col) {
@@ -132,33 +139,39 @@ public:
   QTableView*           tableView;
   QHeaderView*          headerView;
   QAbstractItemModel*   model;
-  bool                  isInit;
 
   QVector<int>          selectableColumns;
   QVector<int>          alwaysHiddenColumns;
   QVector<int>          alwaysVisibleColumns;
+  QVector<int>          applyStorageOffsetColumns;
   QString               configGroupName;
 
+  int                   storageOffset;
+  bool                  isInit;
 };
 
 
-ColumnSelector::ColumnSelector(QTableView* view, const QString& configGroupName)
+ColumnSelector::ColumnSelector(QTableView* view, const QString& configGroupName, int offset, const QVector<int>& columns)
 : d_ptr(new ColumnSelectorPrivate(this))
 {
   Q_D(ColumnSelector);
   d->tableView = view;
   d->headerView = view->horizontalHeader();
   d->model = view->model();
+  d->storageOffset = offset;
+  d->applyStorageOffsetColumns = columns;
   d->init(configGroupName);
 }
 
-ColumnSelector::ColumnSelector(QTreeView* view, const QString& configGroupName)
+ColumnSelector::ColumnSelector(QTreeView* view, const QString& configGroupName, int offset, const QVector<int>& columns)
   : d_ptr(new ColumnSelectorPrivate(this))
 {
   Q_D(ColumnSelector);
   d->treeView = view;
   d->headerView = view->header();
   d->model = view->model();
+  d->storageOffset = offset;
+  d->applyStorageOffsetColumns = columns;
   d->init(configGroupName);
 }
 
@@ -231,6 +244,12 @@ void ColumnSelector::slotColumnsMenu(const QPoint)
       }
       if (!d->configGroupName.isEmpty()) {
         auto grp = KSharedConfig::openConfig()->group(d->configGroupName);
+        // subtract offset during storage operation
+        for (auto &column : visibleColumns) {
+          if (d->applyStorageOffsetColumns.contains(column)) {
+            column -= d->storageOffset;
+          }
+        }
         grp.writeEntry("ColumnsSelection", visibleColumns);
       }
 
@@ -290,4 +309,3 @@ QVector<int> ColumnSelector::columns() const
   }
   return columns;
 }
-

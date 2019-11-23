@@ -63,7 +63,6 @@ public:
   ~KPayeesView() override;
 
   void executeCustomAction(eView::Action action) override;
-  void refresh();
   void updatePayeeActions(const QList<MyMoneyPayee>& payees);
 
 public Q_SLOTS:

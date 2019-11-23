@@ -98,6 +98,19 @@ struct JournalModel::Private
     return QString();
   }
 
+  QString counterAccountId(const JournalEntry& journalEntry, const MyMoneyTransaction& transaction)
+  {
+    if (transaction.splitCount() == 2) {
+      const auto& splitId = journalEntry.split().id();
+      for (const auto& sp : transaction.splits()) {
+        if(splitId != sp.id()) {
+          return sp.accountId();
+        }
+      }
+    }
+    return {};
+  }
+
   QString counterAccount(const JournalEntry& journalEntry, const MyMoneyTransaction& transaction)
   {
     // A transaction can have more than 2 splits ...
@@ -106,11 +119,10 @@ struct JournalModel::Private
 
       // ... exactly two splits ...
     } else if(transaction.splitCount() == 2) {
-      const MyMoneySplit split = journalEntry.split();
-      foreach (const auto sp, transaction.splits()) {
-        if(split.id() != sp.id()) {
+      const auto& splitId = journalEntry.split().id();
+      for (const auto& sp : transaction.splits()) {
+        if(splitId != sp.id()) {
           return MyMoneyFile::instance()->accountsModel()->accountIdToHierarchicalName(sp.accountId());
-          break;
         }
       }
 
@@ -412,11 +424,29 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::SplitReconcileDateRole:
       return journalEntry.split().reconcileDate();
 
+    case eMyMoney::Model::SplitActionRole:
+      return journalEntry.split().action();
+
     case eMyMoney::Model::JournalSplitIdRole:
       return journalEntry.split().id();
 
     case eMyMoney::Model::JournalTransactionIdRole:
       return journalEntry.transaction().id();
+
+    case eMyMoney::Model::TransactionSplitCountRole:
+      return journalEntry.transaction().splitCount();
+
+    case eMyMoney::Model::TransactionIsTransferRole:
+      if (journalEntry.transaction().splitCount() == 2) {
+        for (const auto& split : journalEntry.transaction().splits()) {
+          const auto acc = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
+          if (acc.isIncomeExpense()) {
+            return false;
+            break;
+          }
+        }
+      }
+      return true;
 
     case eMyMoney::Model::TransactionPostDateRole:
       return transaction.postDate();
@@ -487,6 +517,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::TransactionCounterAccountRole:
       return d->counterAccount(journalEntry, transaction);
+
+    case eMyMoney::Model::TransactionCounterAccountIdRole:
+      return d->counterAccountId(journalEntry, transaction);
 
     default:
       if (role >= Qt::UserRole)
