@@ -769,7 +769,7 @@
 <title>Settings and Help Menu</title>
 
 <para>&kmymoney; has the default &kde; Settings and Help menu as described in the
-<ulink url="help:/fundamentals/ui.html#menus">&kde; Fundamentals</ulink>
+<ulink url="help:/fundamentals/menus.html">&kde; Fundamentals</ulink>
 with one additional entry:</para>
 
 <variablelist>
