@@ -1187,7 +1187,7 @@ void KMyMoneyApp::initActions()
   toggleAction("view_show_all_accounts")->setChecked(false);
 
   // use the absolute path to your kmymoneyui.rc file for testing purpose in createGUI();
-  setupGUI();
+  setupGUI(KXmlGuiWindow::Default, "kmymoney/kmymoneyui.rc");
 }
 
 void KMyMoneyApp::connectActionsAndViews()
