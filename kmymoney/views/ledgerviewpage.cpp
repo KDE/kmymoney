@@ -197,3 +197,8 @@ void LedgerViewPage::setShowEntryForNewTransaction(bool show)
 {
   d->accountFilter->setShowEntryForNewTransaction(show);
 }
+
+void LedgerViewPage::slotSettingsChanged()
+{
+  d->ui->ledgerView->slotSettingsChanged();
+}

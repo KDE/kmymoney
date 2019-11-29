@@ -21,6 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QSet>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -37,7 +39,6 @@ struct LedgerFilterBasePrivate {
   , specialDatesModel(nullptr)
   , concatModel(nullptr)
   , accountType(eMyMoney::Account::Type::Asset)
-  , newTransactionPresent(false)
   , showValuesInverted(false)
   {
   }
@@ -58,8 +59,8 @@ struct LedgerFilterBasePrivate {
   KConcatenateRowsProxyModel* concatModel;
   eMyMoney::Account::Type     accountType;
   QStringList                 filterIds;
-  bool                        newTransactionPresent;
   bool                        showValuesInverted;
+  QSet<QAbstractItemModel*>   sourceModels;
 };
 
 #endif

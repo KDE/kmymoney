@@ -53,6 +53,7 @@ protected:
 public Q_SLOTS:
   void showTransactionForm(bool show);
   void splitterChanged(int pos, int index);
+  void slotSettingsChanged();
 
 protected Q_SLOTS:
   void startEdit();

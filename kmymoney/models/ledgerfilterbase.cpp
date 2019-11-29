@@ -217,22 +217,30 @@ void LedgerFilterBase::setShowEntryForNewTransaction(bool show)
 {
   Q_D(LedgerFilterBase);
 
-  if (show && !d->newTransactionPresent) {
-    d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
-    d->newTransactionPresent = true;
-    invalidateFilter();
-  } else if (!show && d->newTransactionPresent) {
-    d->concatModel->removeSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
-    d->newTransactionPresent = false;
-    invalidateFilter();
+  if (show) {
+    addSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
+  } else {
+    removeSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
   }
 }
+
 
 void LedgerFilterBase::addSourceModel(QAbstractItemModel* model)
 {
   Q_D(LedgerFilterBase);
-  if (model) {
+  if (model && !d->sourceModels.contains(model)) {
     d->concatModel->addSourceModel(model);
+    d->sourceModels.insert(model);
+    invalidateFilter();
+  }
+}
+
+void LedgerFilterBase::removeSourceModel(QAbstractItemModel* model)
+{
+  Q_D(LedgerFilterBase);
+  if (model && d->sourceModels.contains(model)) {
+    d->concatModel->removeSourceModel(model);
+    d->sourceModels.remove(model);
     invalidateFilter();
   }
 }

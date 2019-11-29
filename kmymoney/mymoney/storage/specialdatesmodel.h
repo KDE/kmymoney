@@ -76,6 +76,8 @@ public:
   QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
   Qt::ItemFlags flags(const QModelIndex &index) const override;
 
+  void setOptions(bool showDateHeaders, const QDate& firstFiscalDate);
+
 public Q_SLOTS:
   void load();
 

@@ -181,6 +181,7 @@ void SimpleLedgerView::openNewLedger(QString accountId, bool makeCurrentLedger)
       d->ui->ledgerTab->setCurrentIndex(d->ui->ledgerTab->count()-1);
       d->ui->ledgerTab->setCurrentIndex(newIdx);
     }
+    connect(this, &SimpleLedgerView::settingsChanged, view, &LedgerViewPage::slotSettingsChanged);
   }
 }
 
@@ -327,4 +328,5 @@ void SimpleLedgerView::slotSettingsChanged()
     d->accountsModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
     d->accountsModel->setHideFavoriteAccounts(false);
   }
+  emit settingsChanged();
 }

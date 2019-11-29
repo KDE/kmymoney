@@ -73,6 +73,7 @@
 #include "accountsmodel.h"
 #include "equitiesmodel.h"
 #include "securitiesmodel.h"
+#include "specialdatesmodel.h"
 #include "icons.h"
 #include "onlinejobadministration.h"
 #include "kmymoneyaccounttreeview.h"
@@ -456,6 +457,12 @@ void KMyMoneyView::removeView(View idView)
 
 void KMyMoneyView::slotSettingsChanged()
 {
+  const auto showHeaders = KMyMoneySettings::showFancyMarker();
+  QDate firstFiscalDate;
+  if (KMyMoneySettings::showFiscalMarker())
+    firstFiscalDate = KMyMoneySettings::firstFiscalDate();
+
+  MyMoneyFile::instance()->specialDatesModel()->setOptions(showHeaders, firstFiscalDate);
   emit settingsChanged();
 }
 

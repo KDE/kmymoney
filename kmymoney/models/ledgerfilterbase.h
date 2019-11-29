@@ -66,10 +66,17 @@ public:
 
   void setShowEntryForNewTransaction(bool show);
 
+  void setShowScheduledTransactions(bool show);
+
   /**
    * add @a model to the source models
    */
   void addSourceModel(QAbstractItemModel* model);
+
+  /**
+   * remove @a model from the source models
+   */
+  void removeSourceModel(QAbstractItemModel* model);
 
 protected:
   LedgerFilterBasePrivate*  d_ptr;

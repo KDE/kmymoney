@@ -72,6 +72,7 @@ private Q_SLOTS:
 
 Q_SIGNALS:
   void showForms(bool show);
+  void settingsChanged();
 
 private:
   Q_DECLARE_PRIVATE(SimpleLedgerView)
