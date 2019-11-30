@@ -144,6 +144,8 @@ public:
   QString keyForDate(const QDate& date) const;
 
 protected:
+  explicit JournalModel(const QString& idLeadin, QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
+
   Operation undoOperation(const JournalEntry& before, const JournalEntry& after) const override;
   void doAddItem(const JournalEntry& item, const QModelIndex& parentIdx) override;
   void doRemoveItem(const JournalEntry& before) override;

@@ -51,8 +51,8 @@ public:
 };
 
 
-LedgerPayeeFilter::LedgerPayeeFilter(QObject* parent, QAbstractItemModel* accountsModel, QAbstractItemModel* specialDatesModel)
-  : LedgerFilterBase(new LedgerPayeeFilterPrivate(this), parent, accountsModel, specialDatesModel)
+LedgerPayeeFilter::LedgerPayeeFilter(QObject* parent, QVector<QAbstractItemModel*> specialJournalModels)
+  : LedgerFilterBase(new LedgerPayeeFilterPrivate(this), parent)
 {
   Q_D(LedgerPayeeFilter);
 
@@ -63,7 +63,9 @@ LedgerPayeeFilter::LedgerPayeeFilter(QObject* parent, QAbstractItemModel* accoun
   d->concatModel->setObjectName("LedgerView concatModel");
   d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel());
 
-  d->concatModel->addSourceModel(specialDatesModel);
+  for (const auto model : specialJournalModels) {
+    d->concatModel->addSourceModel(model);
+  }
 
   setSourceModel(d->concatModel);
 }

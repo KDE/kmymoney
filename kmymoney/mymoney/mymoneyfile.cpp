@@ -60,6 +60,7 @@
 #include "mymoneytransaction.h"
 #include "mymoneycostcenter.h"
 #include "mymoneyexception.h"
+#include "mymoneyforecast.h"
 #include "onlinejob.h"
 #include "storageenums.h"
 #include "mymoneyenums.h"
@@ -79,6 +80,7 @@
 #include "onlinejobsmodel.h"
 #include "reportsmodel.h"
 #include "specialdatesmodel.h"
+#include "schedulesjournalmodel.h"
 /// @note add new models here
 
 #ifdef KMM_MODELTEST
@@ -199,6 +201,7 @@ public:
     , onlineJobsModel(qq, &undoStack)
     , reportsModel(qq, &undoStack)
     , specialdatesmodel(qq, &undoStack)
+    , schedulesJournalModel(qq, &undoStack)
     /// @note add new models here
     {
 #ifdef KMM_MODELTEST
@@ -217,12 +220,15 @@ public:
     new ModelTest(&parametersModel, m_file);
     new ModelTest(&onlineJobsModel, m_file);
     new ModelTest(&reportsModel, m_file);
+    new ModelTest(&specialDatesModel, m_file);
+    new ModelTest(&schedulesJournalModel, m_file);
     /// @note add new models here
 #endif
     qq->connect(qq, &MyMoneyFile::modelsReadyToUse, &journalModel, &JournalModel::updateBalances);
     qq->connect(qq, &MyMoneyFile::modelsReadyToUse, qq, &MyMoneyFile::finalizeFileOpen);
     qq->connect(&journalModel, &JournalModel::balancesChanged, &accountsModel, &AccountsModel::updateAccountBalances);
-
+    qq->connect(&schedulesModel, &SchedulesModel::dataChanged, &schedulesJournalModel, static_cast<void (SchedulesJournalModel::*)()>(&SchedulesJournalModel::updateData));
+    qq->connect(&schedulesModel, &SchedulesModel::modelReset, &schedulesJournalModel, &SchedulesJournalModel::updateData);
   }
 
   ~Private()
@@ -268,6 +274,7 @@ public:
     onlineJobsModel.setDirty(false);
     reportsModel.setDirty(false);
     specialdatesmodel.setDirty(false);
+    schedulesJournalModel.setDirty(false);
     /// @note add new models here
   }
 
@@ -402,6 +409,7 @@ public:
   OnlineJobsModel     onlineJobsModel;
   ReportsModel        reportsModel;
   SpecialDatesModel   specialdatesmodel;
+  SchedulesJournalModel schedulesJournalModel;
   /// @note add new models here
 };
 
@@ -481,6 +489,7 @@ void MyMoneyFile::unload()
   d->onlineJobsModel.unload();
   d->reportsModel.unload();
   // specialdatesmodel not unloaded here on purpose
+  d->schedulesJournalModel.unload();
   /// @note add new models here
   d->m_baseCurrency = MyMoneySecurity();
   d->undoStack.clear();
@@ -892,7 +901,6 @@ void MyMoneyFile::reparentAccount(MyMoneyAccount &acc, MyMoneyAccount& parent)
 {
   d->checkTransaction(Q_FUNC_INFO);
 
-  /// @todo port to new model code
   // check that it's not one of the standard account groups
   if (isStandardAccount(acc.id()))
     throw MYMONEYEXCEPTION_CSTRING("Unable to reparent the standard account groups");
@@ -1224,7 +1232,6 @@ void MyMoneyFile::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& pare
 
 void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
 {
-  /// @todo port to new model code
   d->checkTransaction(Q_FUNC_INFO);
 
   // perform some checks to see that the account stuff is OK. For
@@ -1695,6 +1702,11 @@ PayeesModel* MyMoneyFile::userModel() const
 SpecialDatesModel* MyMoneyFile::specialDatesModel() const
 {
   return &d->specialdatesmodel;
+}
+
+SchedulesJournalModel* MyMoneyFile::schedulesJournalModel() const
+{
+  return &d->schedulesJournalModel;
 }
 
 /// @note add new models here
@@ -2212,6 +2224,27 @@ QList<MyMoneySchedule> MyMoneyFile::scheduleList() const
 {
   return scheduleList(QString(), Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
                       QDate(), QDate(), false);
+}
+
+MyMoneyTransaction MyMoneyFile::scheduledTransaction(const MyMoneySchedule& schedule)
+{
+  MyMoneyTransaction t = schedule.transaction();
+
+  try {
+    if (schedule.type() == eMyMoney::Schedule::Type::LoanPayment) {
+      try {
+        MyMoneyForecast::calculateAutoLoan(schedule, t, QMap<QString, MyMoneyMoney>());
+      } catch (const MyMoneyException &e) {
+        qDebug() <<  "Unable to load schedule details" << QString::fromLatin1(e.what());
+      }
+    }
+  } catch (const MyMoneyException &e) {
+    qDebug() << "Unable to load schedule details for" << schedule.name() << "during transaction match:" << e.what();
+  }
+
+  t.clearId();
+  t.setEntryDate(QDate());
+  return t;
 }
 
 QStringList MyMoneyFile::consistencyCheck()
@@ -3995,7 +4028,6 @@ void MyMoneyFile::reloadSpecialDates()
   const auto now = QDateTime::currentDateTime();
   auto nextDay = now.addDays(1);
   nextDay.setTime(QTime(0, 0));
-  auto timeout = now.msecsTo(nextDay);
   QTimer::singleShot(now.msecsTo(nextDay), this, SLOT(reloadSpecialDates()));
 }
 

@@ -56,8 +56,8 @@ public:
 };
 
 
-LedgerAccountFilter::LedgerAccountFilter(QObject* parent, QAbstractItemModel* accountsModel, QAbstractItemModel* specialDatesModel)
-  : LedgerFilterBase(new LedgerAccountFilterPrivate(this), parent, accountsModel, specialDatesModel)
+LedgerAccountFilter::LedgerAccountFilter(QObject* parent, QVector<QAbstractItemModel*> specialJournalModels)
+  : LedgerFilterBase(new LedgerAccountFilterPrivate(this), parent)
 {
   Q_D(LedgerAccountFilter);
   d->onlinebalanceproxymodel = new OnlineBalanceProxyModel(parent);
@@ -70,10 +70,12 @@ LedgerAccountFilter::LedgerAccountFilter(QObject* parent, QAbstractItemModel* ac
   d->concatModel->addSourceModel(MyMoneyFile::instance()->journalModel());
 
   d->onlinebalanceproxymodel->setObjectName("OnlineBalanceProxyModel");
-  d->onlinebalanceproxymodel->setSourceModel(accountsModel);
+  d->onlinebalanceproxymodel->setSourceModel(MyMoneyFile::instance()->accountsModel());
   d->concatModel->addSourceModel(d->onlinebalanceproxymodel);
 
-  d->concatModel->addSourceModel(specialDatesModel);
+  for (const auto model : specialJournalModels) {
+    d->concatModel->addSourceModel(model);
+  }
 
   setSortRole(eMyMoney::Model::TransactionPostDateRole);
   setSourceModel(d->concatModel);

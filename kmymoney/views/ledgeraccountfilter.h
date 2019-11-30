@@ -38,7 +38,7 @@ class LedgerAccountFilter : public LedgerFilterBase
   Q_OBJECT
 
 public:
-  explicit LedgerAccountFilter(QObject* parent, QAbstractItemModel* accountsModel, QAbstractItemModel* specialDatesModel);
+  explicit LedgerAccountFilter(QObject* parent, QVector<QAbstractItemModel*> specialJournalModels);
   ~LedgerAccountFilter() override;
 
   void setShowBalanceInverted(bool inverted = true);

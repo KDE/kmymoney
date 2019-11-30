@@ -39,6 +39,7 @@
 #include "mymoneyfile.h"
 #include "ledgerview.h"
 #include "journalmodel.h"
+#include "schedulesjournalmodel.h"
 #include "payeesmodel.h"
 #include "newtransactioneditor.h"
 
@@ -293,13 +294,10 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
     // draw the text items
     if(!opt.text.isEmpty() || !lines.isEmpty()) {
 
-      /// @todo port to new model code
-#if 0
       // check if it is a scheduled transaction and display it as inactive
-      if(!index.model()->data(index, (int)eLedgerModel::Role::ScheduleId).toString().isEmpty()) {
+      if (MyMoneyModelBase::baseModel(index) == MyMoneyFile::instance()->schedulesJournalModel()) {
         opt.state &= ~QStyle::State_Enabled;
       }
-#endif
       cg = (opt.state & QStyle::State_Enabled) ? QPalette::Normal : QPalette::Disabled;
 
       if (cg == QPalette::Normal && !(opt.state & QStyle::State_Active)) {

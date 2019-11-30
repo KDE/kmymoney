@@ -47,6 +47,7 @@
 #include "journaldelegate.h"
 #include "onlinebalancedelegate.h"
 #include "specialdatedelegate.h"
+#include "schedulesjournalmodel.h"
 
 class LedgerView::Private
 {
@@ -68,8 +69,7 @@ public:
     delegateProxy->addDelegate(file->journalModel()->newTransaction(), journalDelegate);
     delegateProxy->addDelegate(file->accountsModel(), new OnlineBalanceDelegate(q));
     delegateProxy->addDelegate(file->specialDatesModel(), new SpecialDateDelegate(q));
-
-    // delegateProxy->addDelegate(accountsModel, new ...);
+    delegateProxy->addDelegate(file->schedulesJournalModel(), journalDelegate);
 
     q->setItemDelegate(delegateProxy);
   }
@@ -416,14 +416,14 @@ void LedgerView::selectMostRecentTransaction()
   if (model()->rowCount() > 0) {
 
     // we need to check that the last row may contain a scheduled transaction or
-    // the row that is shown for new transacations.
+    // the row that is shown for new transacations or a special entry (e.g.
+    // online balance or date mark).
     // in that case, we need to go back to find the actual last transaction
     int row = model()->rowCount()-1;
+    const auto journalModel = MyMoneyFile::instance()->journalModel();
     while(row >= 0) {
       const QModelIndex idx = model()->index(row, 0);
-      if(!idx.data(eMyMoney::Model::IdRole).toString().isEmpty()
-        && !idx.data(eMyMoney::Model::JournalTransactionIdRole).toString().isEmpty()
-      ) {
+      if (MyMoneyModelBase::baseModel(idx) == journalModel) {
         setCurrentIndex(idx);
         selectRow(idx.row());
         scrollTo(idx, QAbstractItemView::PositionAtBottom);

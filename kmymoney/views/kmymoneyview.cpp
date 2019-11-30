@@ -74,6 +74,7 @@
 #include "equitiesmodel.h"
 #include "securitiesmodel.h"
 #include "specialdatesmodel.h"
+#include "schedulesjournalmodel.h"
 #include "icons.h"
 #include "onlinejobadministration.h"
 #include "kmymoneyaccounttreeview.h"
@@ -463,6 +464,9 @@ void KMyMoneyView::slotSettingsChanged()
     firstFiscalDate = KMyMoneySettings::firstFiscalDate();
 
   MyMoneyFile::instance()->specialDatesModel()->setOptions(showHeaders, firstFiscalDate);
+  MyMoneyFile::instance()->schedulesJournalModel()->setPreviewPeriod(KMyMoneySettings::schedulePreview());
+  MyMoneyFile::instance()->schedulesJournalModel()->setShowPlannedDate(KMyMoneySettings::showPlannedScheduleDates());
+
   emit settingsChanged();
 }
 

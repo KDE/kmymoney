@@ -31,12 +31,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyfile.h"
 
 struct LedgerFilterBasePrivate {
   LedgerFilterBasePrivate(LedgerFilterBase* qq)
   : q(qq)
-  , accountsModel(nullptr)
-  , specialDatesModel(nullptr)
   , concatModel(nullptr)
   , accountType(eMyMoney::Account::Type::Asset)
   , showValuesInverted(false)
@@ -45,17 +44,15 @@ struct LedgerFilterBasePrivate {
 
   inline bool isAccountsModel(const QAbstractItemModel* model) const
   {
-    return (model == accountsModel);
+    return (model == static_cast<void*>(MyMoneyFile::instance()->accountsModel()));
   }
 
   inline bool isSpecialDatesModel(const QAbstractItemModel* model) const
   {
-    return (model == specialDatesModel);
+    return (model == static_cast<void*>(MyMoneyFile::instance()->specialDatesModel()));
   }
 
   LedgerFilterBase*           q;
-  QAbstractItemModel*         accountsModel;
-  QAbstractItemModel*         specialDatesModel;
   KConcatenateRowsProxyModel* concatModel;
   eMyMoney::Account::Type     accountType;
   QStringList                 filterIds;

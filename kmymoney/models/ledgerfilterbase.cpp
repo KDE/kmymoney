@@ -39,13 +39,11 @@
 
 using namespace eMyMoney;
 
-LedgerFilterBase::LedgerFilterBase(LedgerFilterBasePrivate* dd, QObject* parent, QAbstractItemModel* accountsModel, QAbstractItemModel* datesModel)
+LedgerFilterBase::LedgerFilterBase(LedgerFilterBasePrivate* dd, QObject* parent)
 : QSortFilterProxyModel(parent)
 , d_ptr(dd)
 {
   Q_D(LedgerFilterBase);
-  d->accountsModel = accountsModel;
-  d->specialDatesModel = datesModel;
   d->concatModel = new KConcatenateRowsProxyModel(parent);
 
   setFilterRole(eMyMoney::Model::Roles::SplitAccountIdRole);

@@ -32,7 +32,7 @@
 #include "ledgeraccountfilter.h"
 #include "specialdatesfilter.h"
 #include "specialdatesmodel.h"
-#include "accountsmodel.h"
+#include "schedulesjournalmodel.h"
 #include "journalmodel.h"
 #include "ui_ledgerviewpage.h"
 #include "mymoneyenums.h"
@@ -85,7 +85,8 @@ LedgerViewPage::LedgerViewPage(QWidget* parent)
 
   // setup the model stack
   const auto file = MyMoneyFile::instance();
-  d->accountFilter = new LedgerAccountFilter(d->ui->ledgerView, file->accountsModel(), file->specialDatesModel());
+  d->accountFilter = new LedgerAccountFilter(d->ui->ledgerView, QVector<QAbstractItemModel*> { file->specialDatesModel(), file->schedulesJournalModel() } );
+
   d->specialDatesFilter = new SpecialDatesFilter(file->specialDatesModel(), this);
   d->specialDatesFilter->setSourceModel(d->accountFilter);
 

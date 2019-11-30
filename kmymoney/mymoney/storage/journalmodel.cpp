@@ -271,6 +271,13 @@ JournalModel::JournalModel(QObject* parent, QUndoStack* undoStack)
   setObjectName(QLatin1String("JournalModel"));
 }
 
+JournalModel::JournalModel(const QString& idLeadin, QObject* parent, QUndoStack* undoStack)
+  : MyMoneyModel<JournalEntry>(parent, idLeadin, JournalModel::ID_SIZE, undoStack)
+  , d(new Private(this))
+{
+  setObjectName(QLatin1String("JournalModel"));
+}
+
 JournalModel::~JournalModel()
 {
 }

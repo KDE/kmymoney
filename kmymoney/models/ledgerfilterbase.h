@@ -80,7 +80,7 @@ public:
 
 protected:
   LedgerFilterBasePrivate*  d_ptr;
-  explicit LedgerFilterBase(LedgerFilterBasePrivate* dd, QObject* parent, QAbstractItemModel* accountsModel, QAbstractItemModel* datesModel);
+  explicit LedgerFilterBase(LedgerFilterBasePrivate* dd, QObject* parent);
 
   bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
   /**

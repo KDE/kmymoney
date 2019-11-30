@@ -127,7 +127,7 @@ public:
 
     // setup the model stack
     auto file = MyMoneyFile::instance();
-    m_transactionFilter = new LedgerPayeeFilter(ui->m_register, file->accountsModel(), file->specialDatesModel());
+    m_transactionFilter = new LedgerPayeeFilter(ui->m_register, QVector<QAbstractItemModel*>());
     auto specialDatesFilter = new SpecialDatesFilter(file->specialDatesModel(), q);
     specialDatesFilter->setSourceModel(m_transactionFilter);
     ui->m_register->setModel(specialDatesFilter);

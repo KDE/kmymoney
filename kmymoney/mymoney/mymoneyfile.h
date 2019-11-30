@@ -164,6 +164,7 @@ class ParametersModel;
 class OnlineJobsModel;
 class ReportsModel;
 class SpecialDatesModel;
+class SchedulesJournalModel;
 /// @note add new models here
 
 namespace eMyMoney { namespace Account { enum class Type; }
@@ -972,6 +973,11 @@ public:
    */
   SpecialDatesModel* specialDatesModel() const;
 
+  /**
+   * The scheduled transactions as journal entries
+   */
+  SchedulesJournalModel* schedulesJournalModel() const;
+
 /// @note add new models here
 
 
@@ -1162,6 +1168,16 @@ public:
       const bool overdue) const;
   QList<MyMoneySchedule> scheduleList(const QString& accountId) const;
   QList<MyMoneySchedule> scheduleList() const;
+
+  /**
+   * Returns the transaction for @a schedule. In case of a loan payment the
+   * transaction will be modified by calculateAutoLoan().
+   * The ID of the transaction as well as the entryDate will be reset.
+   *
+   * @returns adjusted transaction
+   */
+  MyMoneyTransaction scheduledTransaction(const MyMoneySchedule& schedule);
+
 
   QStringList consistencyCheck();
 
