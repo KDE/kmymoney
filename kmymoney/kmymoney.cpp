@@ -2281,10 +2281,6 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
   // this should all be handled by calling the KMyMoneyView::slotSettingsChanged() slot
   MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
 
-#ifdef ENABLE_UNFINISHEDFEATURES
-  LedgerSeparator::setFirstFiscalDate(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
-#endif
-
   d->m_myMoneyView->updateViewType();
 
   // update the sql storage module settings
