@@ -509,10 +509,14 @@ namespace eMyMoney {
       SplitReconcileFlagRole,
       SplitReconcileDateRole,
       SplitActionRole,
+      SplitNumberRole,
 
       // Journal
       JournalSplitIdRole,
       JournalTransactionIdRole,
+      JournalSplitPaymentRole,
+      JournalSplitDepositRole,
+
 
       // Ledger
       LedgerDisplayOrderRole,

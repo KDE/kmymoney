@@ -33,6 +33,8 @@
 // Project Includes
 
 class SplitModelPrivate;
+class MyMoneyTransaction;
+class MyMoneySplit;
 class KMM_MODELS_EXPORT SplitModel : public QAbstractTableModel
 {
   Q_OBJECT
@@ -50,9 +52,9 @@ public:
   Qt::ItemFlags flags(const QModelIndex& index) const override;
 
   /**
-   * Adds a single split @a t to the model
+   * Adds a single split @a s of transaction @a t to the model
    */
-  void addSplit(const QString& transactionSplitId);
+  void addSplit(const MyMoneyTransaction& t, const MyMoneySplit& s);
 
   /**
    * Adds a single dummy split to the model which is used for

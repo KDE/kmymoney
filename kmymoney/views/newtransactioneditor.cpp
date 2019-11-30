@@ -46,7 +46,7 @@
 #include "kmymoneyaccountcombo.h"
 #include "accountsmodel.h"
 #include "costcentermodel.h"
-#include "ledgermodel.h"
+#include "journalmodel.h"
 #include "splitmodel.h"
 #include "payeesmodel.h"
 #include "mymoneysplit.h"
@@ -116,7 +116,6 @@ public:
   bool                          costCenterRequired;
   SplitModel                    splitModel;
   QStandardItemModel            statusModel;
-  QString                       transactionSplitId;
   MyMoneyAccount                m_account;
   MyMoneyTransaction            transaction;
   MyMoneySplit                  split;
@@ -480,15 +479,10 @@ void NewTransactionEditor::keyPressEvent(QKeyEvent* e)
   }
 }
 
-void NewTransactionEditor::loadTransaction(const QString& id)
+void NewTransactionEditor::loadTransaction(const QModelIndex& index)
 {
-  /// @todo port to new model code
-#if 0
-  const LedgerModel* model = Models::instance()->ledgerModel();
-  const QString transactionId = model->transactionIdFromTransactionSplitId(id);
-
-  if(id.isEmpty()) {
-    d->transactionSplitId.clear();
+  auto idx = MyMoneyModelBase::mapToBaseSource(index);
+  if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
     d->transaction = MyMoneyTransaction();
     if(lastUsedPostDate()->isValid()) {
       d->ui->dateEdit->setDate(*lastUsedPostDate());
@@ -501,50 +495,49 @@ void NewTransactionEditor::loadTransaction(const QString& id)
 
   } else {
     // find which item has this id and set is as the current item
-    QModelIndexList list = model->match(model->index(0, 0), (int)eLedgerModel::Role::TransactionId,
-                                        QVariant(transactionId),
-                                        -1,                         // all splits
-                                        Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+    const auto selectedSplitRow = idx.row();
 
-    Q_FOREACH(QModelIndex index, list) {
-      // the selected split?
-      const QString transactionSplitId = model->data(index, (int)eLedgerModel::Role::TransactionSplitId).toString();
-      if(transactionSplitId == id) {
-        d->transactionSplitId = id;
-        d->transaction = model->data(index, (int)eLedgerModel::Role::Transaction).value<MyMoneyTransaction>();
-        d->split = model->data(index, (int)eLedgerModel::Role::Split).value<MyMoneySplit>();
-        d->ui->dateEdit->setDate(model->data(index, (int)eLedgerModel::Role::PostDate).toDate());
+    // keep a copy of the transaction and split
+    d->transaction = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).transaction();
+    d->split = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).split();
+    const auto list = idx.model()->match(idx.model()->index(0, 0), eMyMoney::Model::JournalTransactionIdRole,
+                                         idx.data(eMyMoney::Model::JournalTransactionIdRole),
+                                         -1,                         // all splits
+                                         Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
 
-        const QModelIndex payeeIdx = Models::instance()->payeesModel()->indexById(d->split.payeeId());
+    for (const auto& splitIdx : list) {
+      if(selectedSplitRow == splitIdx.row()) {
+        d->ui->dateEdit->setDate(splitIdx.data(eMyMoney::Model::TransactionPostDateRole).toDate());
+
+        const auto payeeId = splitIdx.data(eMyMoney::Model::SplitPayeeIdRole).toString();
+        const QModelIndex payeeIdx = MyMoneyFile::instance()->payeesModel()->indexById(payeeId);
         d->ui->payeeEdit->setCurrentIndex(d->payeesModel->mapFromSource(payeeIdx).row());
 
         d->ui->memoEdit->clear();
-        d->ui->memoEdit->insertPlainText(model->data(index, (int)eLedgerModel::Role::Memo).toString());
+        d->ui->memoEdit->insertPlainText(splitIdx.data(eMyMoney::Model::SplitMemoRole).toString());
         d->ui->memoEdit->moveCursor(QTextCursor::Start);
         d->ui->memoEdit->ensureCursorVisible();
 
         // The calculator for the amount field can simply be added as an icon to the line edit widget.
         // See https://stackoverflow.com/questions/11381865/how-to-make-an-extra-icon-in-qlineedit-like-this howto do it
-        d->ui->amountEditCredit->setText(model->data(model->index(index.row(), (int)eLedgerModel::Column::Payment)).toString());
-        d->ui->amountEditDebit->setText(model->data(model->index(index.row(), (int)eLedgerModel::Column::Deposit)).toString());
+        d->ui->amountEditCredit->setText(splitIdx.data(eMyMoney::Model::JournalSplitPaymentRole).toString());
+        d->ui->amountEditDebit->setText(splitIdx.data(eMyMoney::Model::JournalSplitDepositRole).toString());
 
-        d->ui->numberEdit->setText(model->data(index, (int)eLedgerModel::Role::Number).toString());
-        d->ui->statusCombo->setCurrentIndex(model->data(index, (int)eLedgerModel::Role::Number).toInt());
+        d->ui->numberEdit->setText(splitIdx.data(eMyMoney::Model::SplitNumberRole).toString());
+        d->ui->statusCombo->setCurrentIndex(0); // default is not reconciled
 
-        QModelIndexList stList = d->statusModel.match(d->statusModel.index(0, 0), Qt::UserRole+1, model->data(index, (int)eLedgerModel::Role::Reconciliation).toInt());
-        if(stList.count()) {
+        const QModelIndexList stList = d->statusModel.match(d->statusModel.index(0, 0), Qt::UserRole+1, splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).toInt());
+        if(!stList.isEmpty()) {
           d->ui->statusCombo->setCurrentIndex(stList.front().row());
         }
       } else {
-        d->splitModel.addSplit(transactionSplitId);
+        d->splitModel.addSplit(d->transaction, MyMoneyFile::instance()->journalModel()->itemByIndex(splitIdx).split());
       }
     }
     d->updateWidgetState();
   }
-
   // set focus to date edit once we return to event loop
   QMetaObject::invokeMethod(d->ui->dateEdit, "setFocus", Qt::QueuedConnection);
-#endif
 }
 
 void NewTransactionEditor::numberChanged(const QString& newNumber)
@@ -618,7 +611,7 @@ void NewTransactionEditor::saveTransaction()
 {
   MyMoneyTransaction t;
 
-  if(!d->transactionSplitId.isEmpty()) {
+  if(!d->transaction.id().isEmpty()) {
     t = d->transaction;
   } else {
     // we keep the date when adding a new transaction

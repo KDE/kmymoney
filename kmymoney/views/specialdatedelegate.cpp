@@ -67,7 +67,7 @@ public:
 
 
 SpecialDateDelegate::SpecialDateDelegate(LedgerView* parent)
-  : QStyledItemDelegate(parent)
+  : KMMStyledItemDelegate(parent)
   , d(new Private)
 {
 }

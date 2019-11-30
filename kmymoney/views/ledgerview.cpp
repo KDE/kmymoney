@@ -34,7 +34,7 @@
 // Project Includes
 
 #include "mymoneyfile.h"
-#include "ledgermodel.h"
+// #include "ledgermodel.h"
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
@@ -54,7 +54,7 @@ class LedgerView::Private
 public:
   Private(LedgerView* p)
   : q(p)
-  , delegateProxy(new DelegateProxy(p))
+  , delegateProxy(new DelegateProxy(q))
   , adjustableColumn(JournalModel::Column::Detail)
   , adjustingColumn(false)
   , showValuesInverted(false)
@@ -72,6 +72,7 @@ public:
     delegateProxy->addDelegate(file->schedulesJournalModel(), journalDelegate);
 
     q->setItemDelegate(delegateProxy);
+    // q->setItemDelegate(journalDelegate);
   }
 
   void setSingleLineDetailRole(eMyMoney::Model::Roles role)

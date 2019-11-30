@@ -23,7 +23,6 @@
 // Qt Includes
 
 #include <QObject>
-#include <QStyledItemDelegate>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -31,6 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "kmmstyleditemdelegate.h"
 #include "kmm_models_export.h"
 
 class DelegateProxyPrivate;
@@ -59,7 +59,7 @@ public:
    * still owned by the caller. They are not destroyed when the DelegateProxy
    * is destroyed.
    */
-  void addDelegate(const QAbstractItemModel* model, QStyledItemDelegate* delegate);
+  void addDelegate(const QAbstractItemModel* model, KMMStyledItemDelegate* delegate);
 
   /**
    * Retrieve the delegate for objects stored in @a model. In case no
@@ -82,7 +82,11 @@ public:
   void setEditorData(QWidget* editWidget, const QModelIndex& index) const final override;
 
   void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
+  bool helpEvent ( QHelpEvent* event, QAbstractItemView* view, const QStyleOptionViewItem& option, const QModelIndex& index ) override;
+  bool editorEvent ( QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& option, const QModelIndex& index ) override;
+  void destroyEditor ( QWidget* editor, const QModelIndex& index ) const override;
 
+  bool eventFilter ( QObject* watched, QEvent* event ) override;
 
 private:
   DelegateProxyPrivate * const d_ptr;

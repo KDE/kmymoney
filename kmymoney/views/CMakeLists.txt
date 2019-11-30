@@ -22,11 +22,11 @@ set(libviews_a_SOURCES
 if(ENABLE_UNFINISHEDFEATURES)
   list(APPEND libviews_a_SOURCES
     simpleledgerview.cpp
+    kmmstyleditemdelegate.cpp
     ledgerviewpage.cpp
     ledgerview.cpp
     ledgeraccountfilter.cpp
     ledgerpayeefilter.cpp
-    ledgerdelegate.cpp
     journaldelegate.cpp
     onlinebalancedelegate.cpp
     specialdatedelegate.cpp

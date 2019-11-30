@@ -21,7 +21,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QStyledItemDelegate>
+#include <kmmstyleditemdelegate.h>
 class QColor;
 
 // ----------------------------------------------------------------------------
@@ -30,13 +30,12 @@ class QColor;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ledgermodel.h"
 #include "mymoneyenums.h"
 
 class LedgerView;
 class MyMoneyMoney;
 
-class JournalDelegate : public QStyledItemDelegate
+class JournalDelegate : public KMMStyledItemDelegate
 {
   Q_OBJECT
 public:

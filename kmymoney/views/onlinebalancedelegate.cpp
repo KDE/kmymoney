@@ -105,7 +105,7 @@ public:
 
 
 OnlineBalanceDelegate::OnlineBalanceDelegate(LedgerView* parent)
-  : QStyledItemDelegate(parent)
+  : KMMStyledItemDelegate(parent)
   , d(new Private)
 {
   d->m_view = parent;

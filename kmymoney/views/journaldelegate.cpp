@@ -187,7 +187,7 @@ public:
 
 
 JournalDelegate::JournalDelegate(LedgerView* parent)
-  : QStyledItemDelegate(parent)
+  : KMMStyledItemDelegate(parent)
   , d(new Private)
 {
   d->m_view = parent;
@@ -447,9 +447,7 @@ void JournalDelegate::setEditorData(QWidget* editWidget, const QModelIndex& inde
 {
   NewTransactionEditor* editor = qobject_cast<NewTransactionEditor*>(editWidget);
   if(editor) {
-    /// @todo port to new model code
-    // The role is certainly not correct, maybe we can use the row here
-    // editor->loadTransaction(index.data(eMyMoney::Model::Roles::IdRole).toString());
+    editor->loadTransaction(index);
   }
 }
 

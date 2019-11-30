@@ -50,7 +50,7 @@ public:
 
   /**
    */
-  void loadTransaction(const QString& id);
+  void loadTransaction(const QModelIndex& index);
   void saveTransaction();
 
   /**

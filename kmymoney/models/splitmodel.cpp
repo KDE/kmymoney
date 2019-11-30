@@ -350,29 +350,15 @@ bool SplitModel::setData(const QModelIndex& index, const QVariant& value, int ro
   return rc;
 }
 
-
-void SplitModel::addSplit(const QString& transactionSplitId)
+void SplitModel::addSplit(const MyMoneyTransaction& t, const MyMoneySplit& s)
 {
   Q_D(SplitModel);
-  QRegExp transactionSplitIdExp("^(\\w+)-(\\w+)$");
-  if(transactionSplitIdExp.exactMatch(transactionSplitId)) {
-    const QString transactionId = transactionSplitIdExp.cap(1);
-    const QString splitId = transactionSplitIdExp.cap(2);
-    if(transactionId != d->m_transaction.id()) {
-      try {
-        d->m_transaction = MyMoneyFile::instance()->transaction(transactionId);
-      } catch (const MyMoneyException &e) {
-        d->m_transaction = MyMoneyTransaction();
-      }
-    }
-    try {
-      beginInsertRows(QModelIndex(), rowCount(), rowCount());
-      d->m_splits.append(d->m_transaction.splitById(splitId));
-      endInsertRows();
-    } catch (const MyMoneyException &e) {
-      d->m_transaction = MyMoneyTransaction();
-    }
-  }
+
+  d->m_transaction = t;
+
+  beginInsertRows(QModelIndex(), rowCount(), rowCount());
+  d->m_splits.append(s);
+  endInsertRows();
 }
 
 void SplitModel::addEmptySplitEntry()

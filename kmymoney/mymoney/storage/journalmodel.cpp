@@ -528,6 +528,27 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::TransactionCounterAccountIdRole:
       return d->counterAccountId(journalEntry, transaction);
 
+    case eMyMoney::Model::JournalSplitPaymentRole:
+      if (journalEntry.split().value().isNegative()) {
+        const auto split = journalEntry.split();
+        auto acc = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
+        auto value = split.value(transaction.commodity(), acc.currencyId());
+        return (-value).formatMoney(acc.fraction());
+      }
+      break;
+
+    case eMyMoney::Model::JournalSplitDepositRole:
+      if (!journalEntry.split().value().isNegative()) {
+        const auto split = journalEntry.split();
+        auto acc = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
+        auto value = split.value(transaction.commodity(), acc.currencyId());
+        return value.formatMoney(acc.fraction());
+      }
+      break;
+
+    case eMyMoney::Model::SplitNumberRole:
+      return journalEntry.split().number();
+
     default:
       if (role >= Qt::UserRole)
         qDebug() << "JournalModel::data(), role" << role << "offset" << role-Qt::UserRole << "not implemented";

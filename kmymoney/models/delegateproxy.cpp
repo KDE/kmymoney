@@ -26,6 +26,7 @@
 #include <QSortFilterProxyModel>
 class QAbstractItemDelegate;
 class QAbstractItemModel;
+class QStyleOption;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -46,7 +47,7 @@ public:
   {
   }
 
-  const QStyledItemDelegate* findDelegate(const QModelIndex& idx) const
+  const KMMStyledItemDelegate* findDelegate(const QModelIndex& idx) const
   {
     // create an index for column 0
     const QModelIndex baseIdx = idx.model()->index(idx.row(), 0, idx.parent());
@@ -55,7 +56,7 @@ public:
   }
 
   DelegateProxy      *q_ptr;
-  QHash<const QAbstractItemModel*, const QStyledItemDelegate*>  mapping;
+  QHash<const QAbstractItemModel*, const KMMStyledItemDelegate*>  mapping;
 };
 
 
@@ -65,7 +66,7 @@ DelegateProxy::DelegateProxy(QObject* parent)
 {
 }
 
-void DelegateProxy::addDelegate(const QAbstractItemModel* model, QStyledItemDelegate* delegate)
+void DelegateProxy::addDelegate(const QAbstractItemModel* model, KMMStyledItemDelegate* delegate)
 {
   Q_D(DelegateProxy);
   if (model == nullptr) {
@@ -78,6 +79,9 @@ void DelegateProxy::addDelegate(const QAbstractItemModel* model, QStyledItemDele
   }
   if (delegate) {
     d->mapping[model] = delegate;
+    connect(delegate, &QAbstractItemDelegate::commitData, this, &QAbstractItemDelegate::commitData, Qt::UniqueConnection);
+    connect(delegate, &QAbstractItemDelegate::closeEditor, this, &QAbstractItemDelegate::closeEditor, Qt::UniqueConnection);
+    connect(delegate, &QAbstractItemDelegate::sizeHintChanged, this, &QAbstractItemDelegate::sizeHintChanged, Qt::UniqueConnection);
   }
 }
 
@@ -144,4 +148,45 @@ void DelegateProxy::setModelData(QWidget* editor, QAbstractItemModel* model, con
   if (delegate) {
     delegate->setModelData(editor, model, index);
   }
+}
+
+void DelegateProxy::destroyEditor(QWidget* editor, const QModelIndex& index) const
+{
+  Q_D(const DelegateProxy);
+  const auto delegate = d->findDelegate(index);
+  if (delegate) {
+    delegate->destroyEditor(editor, index);
+  }
+}
+
+bool DelegateProxy::editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& option, const QModelIndex& index)
+{
+  Q_D(const DelegateProxy);
+  auto delegate = const_cast<KMMStyledItemDelegate*>(d->findDelegate(index));
+  if (delegate) {
+    return delegate->editorEvent(event, model, option, index);
+  }
+  return false;
+}
+
+bool DelegateProxy::helpEvent(QHelpEvent* event, QAbstractItemView* view, const QStyleOptionViewItem& option, const QModelIndex& index)
+{
+  Q_D(DelegateProxy);
+  auto delegate = const_cast<KMMStyledItemDelegate*>(d->findDelegate(index));
+  if (delegate) {
+    return delegate->helpEvent(event, view, option, index);
+  }
+  return false;
+}
+
+bool DelegateProxy::eventFilter(QObject* watched, QEvent* event)
+{
+  Q_D(DelegateProxy);
+  bool rc = false;
+  for (auto delegate : d->mapping) {
+    rc |= const_cast<KMMStyledItemDelegate*>(delegate)->eventFilter(watched, event);
+    if (rc)
+      break;
+  }
+  return rc;
 }
