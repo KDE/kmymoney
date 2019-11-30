@@ -115,10 +115,6 @@
 #include "views/kmymoneyview.h"
 #include "accountsmodel.h"
 #include "equitiesmodel.h"
-// #include "models/securitiesmodel.h"
-#ifdef ENABLE_UNFINISHEDFEATURES
-#include "ledgermodel.h"
-#endif
 
 #include "mymoney/mymoneyobject.h"
 #include "mymoney/mymoneyfile.h"
@@ -166,7 +162,6 @@
 #include "kmymoneyutils.h"
 #include "kcreditswindow.h"
 
-#include "ledgerdelegate.h"
 #include "storageenums.h"
 #include "mymoneyenums.h"
 #include "dialogenums.h"
