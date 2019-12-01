@@ -50,12 +50,15 @@ public:
   const KMMStyledItemDelegate* findDelegate(const QModelIndex& idx) const
   {
     // create an index for column 0
-    const QModelIndex baseIdx = idx.model()->index(idx.row(), 0, idx.parent());
-    const QAbstractItemModel* model = MyMoneyModelBase::baseModel(baseIdx);
-    return mapping.value(model, nullptr);
+    if (idx.isValid()) {
+      const QModelIndex baseIdx = idx.model()->index(idx.row(), 0, idx.parent());
+      const QAbstractItemModel* model = MyMoneyModelBase::baseModel(baseIdx);
+      return mapping.value(model, nullptr);
+    }
+    return nullptr;
   }
 
-  DelegateProxy      *q_ptr;
+  DelegateProxy*                                                  q_ptr;
   QHash<const QAbstractItemModel*, const KMMStyledItemDelegate*>  mapping;
 };
 
