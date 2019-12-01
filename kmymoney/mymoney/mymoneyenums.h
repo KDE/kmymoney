@@ -476,6 +476,7 @@ namespace eMyMoney {
       // MyMoneySchedule
       ScheduleNameRole,
       ScheduleTypeRole,
+      ScheduleIsOverdueRole,
 
       // MyMoneySecurity
       SecuritySymbolRole,

@@ -68,8 +68,6 @@ Qt::ItemFlags SchedulesJournalModel::flags(const QModelIndex& index) const
 
 QVariant SchedulesJournalModel::data(const QModelIndex& index, int role) const
 {
-  return JournalModel::data(index, role);
-#if 0
   if (!index.isValid())
     return QVariant();
   if (index.row() < 0 || index.row() >= rowCount(index.parent()))
@@ -79,18 +77,13 @@ QVariant SchedulesJournalModel::data(const QModelIndex& index, int role) const
   QVariant rc;
   const JournalEntry& entry = static_cast<TreeItem<JournalEntry>*>(index.internalPointer())->constDataRef();
   switch (role) {
-    case eMyMoney::Model::Roles::PayeeNameRole:
-    case Qt::DisplayRole:
-    case Qt::EditRole:
-      break;
+    case eMyMoney::Model::ScheduleIsOverdueRole:
+      return entry.transaction().value(QStringLiteral("kmm-is-overdue")).compare(QStringLiteral("yes")) == 0;
 
-    case Qt::TextAlignmentRole:
-      rc = QVariant(Qt::AlignLeft | Qt::AlignVCenter);
+    default:
       break;
-
   }
-  return rc;
-#endif
+  return JournalModel::data(index, role);
 }
 
 bool SchedulesJournalModel::setData(const QModelIndex& index, const QVariant& value, int role)
@@ -174,13 +167,17 @@ void SchedulesJournalModel::doLoad()
         }
 
         MyMoneyTransaction t(s.id(), MyMoneyFile::instance()->scheduledTransaction(s));
-        if (s.isOverdue() && !d->showPlannedDate) {
-          // if the transaction is scheduled and overdue, it can't
-          // certainly be posted in the past. So we take today's date
-          // as the alternative
-          t.setPostDate(s.adjustedDate(QDate::currentDate(), s.weekendOption()));
-        } else {
-          t.setPostDate(s.adjustedNextDueDate());
+        if (s.isOverdue()) {
+          if (!d->showPlannedDate) {
+            // if the transaction is scheduled and overdue, it can't
+            // certainly be posted in the past. So we take today's date
+            // as the alternative
+            qDebug() << "Adjust" << s.name() << "from" << t.postDate() << "to" << s.adjustedDate(QDate::currentDate(), eMyMoney::Schedule::WeekendOption::MoveAfter) << s.weekendOptionToString(eMyMoney::Schedule::WeekendOption::MoveAfter);
+            t.setPostDate(s.adjustedDate(QDate::currentDate(), eMyMoney::Schedule::WeekendOption::MoveAfter));
+          } else {
+            t.setPostDate(s.adjustedNextDueDate());
+          }
+          t.setValue(QLatin1String("kmm-is-overdue"), QLatin1String("yes"));
         }
 
         // add transaction to the list

@@ -279,6 +279,7 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
 
   // Do not paint text if the edit widget is shown
   if (!editWidgetIsVisible) {
+    bool isOverdue = false;
     if(view && (index.column() == JournalModel::Column::Detail)) {
       if(view->currentIndex().row() == index.row()) {
         opt.state |= QStyle::State_HasFocus;
@@ -297,6 +298,7 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
       // check if it is a scheduled transaction and display it as inactive
       if (MyMoneyModelBase::baseModel(index) == MyMoneyFile::instance()->schedulesJournalModel()) {
         opt.state &= ~QStyle::State_Enabled;
+        isOverdue = index.data(eMyMoney::Model::ScheduleIsOverdueRole).toBool();
       }
       cg = (opt.state & QStyle::State_Enabled) ? QPalette::Normal : QPalette::Disabled;
 
@@ -346,7 +348,7 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
 
     // draw the attention mark
     if((index.column() == JournalModel::Column::Detail)
-    && erroneous) {
+    && (erroneous || isOverdue)) {
       QPixmap attention;
       attention.loadFromData(attentionSign, sizeof(attentionSign), 0, 0);
       style->proxy()->drawItemPixmap(painter, option.rect, Qt::AlignRight | Qt::AlignTop, attention);
