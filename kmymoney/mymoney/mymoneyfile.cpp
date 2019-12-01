@@ -81,6 +81,7 @@
 #include "reportsmodel.h"
 #include "specialdatesmodel.h"
 #include "schedulesjournalmodel.h"
+#include "statusmodel.h"
 /// @note add new models here
 
 #ifdef KMM_MODELTEST
@@ -202,6 +203,7 @@ public:
     , reportsModel(qq, &undoStack)
     , specialdatesmodel(qq, &undoStack)
     , schedulesJournalModel(qq, &undoStack)
+    , statusModel(qq)
     /// @note add new models here
     {
 #ifdef KMM_MODELTEST
@@ -275,6 +277,7 @@ public:
     reportsModel.setDirty(false);
     specialdatesmodel.setDirty(false);
     schedulesJournalModel.setDirty(false);
+    statusModel.setDirty(false);
     /// @note add new models here
   }
 
@@ -410,6 +413,7 @@ public:
   ReportsModel        reportsModel;
   SpecialDatesModel   specialdatesmodel;
   SchedulesJournalModel schedulesJournalModel;
+  StatusModel         statusModel;
   /// @note add new models here
 };
 
@@ -1707,6 +1711,11 @@ SpecialDatesModel* MyMoneyFile::specialDatesModel() const
 SchedulesJournalModel* MyMoneyFile::schedulesJournalModel() const
 {
   return &d->schedulesJournalModel;
+}
+
+StatusModel* MyMoneyFile::statusModel() const
+{
+  return &d->statusModel;
 }
 
 /// @note add new models here

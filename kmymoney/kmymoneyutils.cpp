@@ -400,6 +400,7 @@ quint64 KMyMoneyUtils::numericPart(const QString & num)
 
 QString KMyMoneyUtils::reconcileStateToString(eMyMoney::Split::State flag, bool text)
 {
+  /// @todo use MyMoneyFile::instance()->statusModel instead
   QString txt;
   if (text) {
     switch (flag) {

@@ -96,7 +96,7 @@ protected Q_SLOTS:
   virtual void adjustDetailColumn();
 
 Q_SIGNALS:
-  void transactionSelected(const QString& transactionSplitId);
+  void transactionSelected(const QModelIndex& idx);
   void aboutToStartEdit();
   void aboutToFinishEdit();
 

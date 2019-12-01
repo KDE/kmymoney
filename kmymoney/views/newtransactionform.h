@@ -39,7 +39,7 @@ public:
   virtual ~NewTransactionForm();
 
 public Q_SLOTS:
-  void showTransaction(const QString& transactionSplitId);
+  void showTransaction(const QModelIndex& idx);
   void modelDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
 
 private:

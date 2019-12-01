@@ -163,8 +163,11 @@ class PriceModel;
 class ParametersModel;
 class OnlineJobsModel;
 class ReportsModel;
+
+// non permanent models
 class SpecialDatesModel;
 class SchedulesJournalModel;
+class StatusModel;
 /// @note add new models here
 
 namespace eMyMoney { namespace Account { enum class Type; }
@@ -977,6 +980,11 @@ public:
    * The scheduled transactions as journal entries
    */
   SchedulesJournalModel* schedulesJournalModel() const;
+
+  /*
+   * The transaction status model
+   */
+  StatusModel*  statusModel() const;
 
 /// @note add new models here
 

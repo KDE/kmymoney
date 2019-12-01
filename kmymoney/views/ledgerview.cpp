@@ -71,7 +71,6 @@ public:
     delegateProxy->addDelegate(file->schedulesJournalModel(), journalDelegate);
 
     q->setItemDelegate(delegateProxy);
-    // q->setItemDelegate(journalDelegate);
   }
 
   void setSingleLineDetailRole(eMyMoney::Model::Roles role)
@@ -240,13 +239,13 @@ void LedgerView::currentChanged(const QModelIndex& current, const QModelIndex& p
   if(current.isValid()) {
     QModelIndex index = current.model()->index(current.row(), 0);
     scrollTo(index, EnsureVisible);
-    QString id = current.model()->data(index, eMyMoney::Model::IdRole).toString();
+    QString id = index.data(eMyMoney::Model::IdRole).toString();
     // For a new transaction the id is completely empty, for a split view the transaction
     // part is filled but the split id is empty and the string ends with a dash
     if(id.isEmpty() || id.endsWith('-')) {
       edit(index);
     } else {
-      emit transactionSelected(id);
+      emit transactionSelected(MyMoneyModelBase::mapToBaseSource(index));
     }
     QMetaObject::invokeMethod(this, "doItemsLayout", Qt::QueuedConnection);
   }

@@ -220,6 +220,19 @@ struct JournalModel::Private
     emit q->balancesChanged(balances);
   }
 
+  QString formatValue(const MyMoneyTransaction& t, const MyMoneySplit& s, const MyMoneyMoney& factor = MyMoneyMoney::ONE)
+  {
+    auto acc = MyMoneyFile::instance()->accountsModel()->itemById(s.accountId());
+    auto value = s.value(t.commodity(), acc.currencyId());
+    return (value * factor).formatMoney(acc.fraction());
+  }
+
+  QString formatShares(const MyMoneySplit& s)
+  {
+    auto acc = MyMoneyFile::instance()->accountsModel()->itemById(s.accountId());
+    return (s.shares().abs()).formatMoney(acc.fraction());
+  }
+
   JournalModel*                   q;
   JournalModelNewTransaction*     newTransactionModel;
   QMap<QString, QString>          transactionIdKeyMap;
@@ -372,19 +385,13 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
         case Payment:
           if (journalEntry.split().value().isNegative()) {
-            const auto split = journalEntry.split();
-            auto acc = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
-            auto value = split.value(transaction.commodity(), acc.currencyId());
-            return (-value).formatMoney(acc.fraction());
+            return d->formatValue(transaction, journalEntry.split(), MyMoneyMoney::MINUS_ONE);
           }
           break;
 
         case Deposit:
           if (!journalEntry.split().value().isNegative()) {
-            const auto split = journalEntry.split();
-            auto acc = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
-            auto value = split.value(transaction.commodity(), acc.currencyId());
-            return value.formatMoney(acc.fraction());
+            return d->formatValue(transaction, journalEntry.split(), MyMoneyMoney::ONE);
           }
         case Quantity:
         case Price:
@@ -531,21 +538,18 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::JournalSplitPaymentRole:
       if (journalEntry.split().value().isNegative()) {
-        const auto split = journalEntry.split();
-        auto acc = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
-        auto value = split.value(transaction.commodity(), acc.currencyId());
-        return (-value).formatMoney(acc.fraction());
+        return d->formatValue(transaction, journalEntry.split(), MyMoneyMoney::MINUS_ONE);
       }
       break;
 
     case eMyMoney::Model::JournalSplitDepositRole:
       if (!journalEntry.split().value().isNegative()) {
-        const auto split = journalEntry.split();
-        auto acc = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
-        auto value = split.value(transaction.commodity(), acc.currencyId());
-        return value.formatMoney(acc.fraction());
+        return d->formatValue(transaction, journalEntry.split(), MyMoneyMoney::ONE);
       }
       break;
+
+    case eMyMoney::Model::SplitSharesFormattedRole:
+      return d->formatShares(journalEntry.split());
 
     case eMyMoney::Model::SplitNumberRole:
       return journalEntry.split().number();

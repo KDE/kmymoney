@@ -29,8 +29,10 @@
 // Project Includes
 
 #include "ui_newtransactionform.h"
-#include "ledgermodel.h"
 #include "modelenums.h"
+#include "journalmodel.h"
+#include "mymoneyfile.h"
+#include "statusmodel.h"
 
 using namespace eLedgerModel;
 
@@ -39,6 +41,7 @@ class NewTransactionForm::Private
 public:
   Private()
   : ui(new Ui_NewTransactionForm)
+  , row(-1)
   {
   }
 
@@ -47,8 +50,8 @@ public:
     delete ui;
   }
 
-  Ui_NewTransactionForm*      ui;
-  QString                     transactionSplitId;
+  Ui_NewTransactionForm*  ui;
+  int                     row;
 };
 
 
@@ -64,9 +67,28 @@ NewTransactionForm::~NewTransactionForm()
   delete d;
 }
 
-void NewTransactionForm::showTransaction(const QString& transactionSplitId)
+void NewTransactionForm::showTransaction(const QModelIndex& idx)
 {
-  d->transactionSplitId = transactionSplitId;
+  auto index = MyMoneyModelBase::mapToBaseSource(idx);
+  d->row = index.row();
+
+  d->ui->dateEdit->setText(QLocale().toString(index.data(eMyMoney::Model::TransactionPostDateRole).toDate(),
+                                              QLocale::ShortFormat));
+  d->ui->payeeEdit->setText(index.data(eMyMoney::Model::SplitPayeeRole).toString());
+  d->ui->memoEdit->clear();
+  d->ui->memoEdit->insertPlainText(index.data(eMyMoney::Model::SplitMemoRole).toString());
+  d->ui->memoEdit->moveCursor(QTextCursor::Start);
+  d->ui->memoEdit->ensureCursorVisible();
+  d->ui->accountEdit->setText(index.data(eMyMoney::Model::TransactionCounterAccountRole).toString());
+  d->ui->numberEdit->setText(index.data(eMyMoney::Model::SplitNumberRole).toString());
+
+  const QString amount = QString("%1 %2").arg(index.data(eMyMoney::Model::SplitSharesFormattedRole).toString())
+  .arg(index.data(eMyMoney::Model::SplitSharesSuffixRole).toString());
+  d->ui->amountEdit->setText(amount);
+
+  const auto status = index.data(eMyMoney::Model::SplitReconcileFlagRole).toInt();
+  const auto statusIdx = MyMoneyFile::instance()->statusModel()->index(status, 0);
+  d->ui->statusEdit->setText(statusIdx.data(eMyMoney::Model::SplitReconcileStatusRole).toString());
 
   /// @todo port to new model code
 #if 0
@@ -97,6 +119,7 @@ void NewTransactionForm::showTransaction(const QString& transactionSplitId)
 
 void NewTransactionForm::modelDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight)
 {
+#if 0
   const QAbstractItemModel * const model = topLeft.model();
   const int startRow = topLeft.row();
   const int lastRow = bottomRight.row();
@@ -107,4 +130,5 @@ void NewTransactionForm::modelDataChanged(const QModelIndex& topLeft, const QMod
       break;
     }
   }
+#endif
 }

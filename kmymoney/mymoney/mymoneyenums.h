@@ -505,9 +505,11 @@ namespace eMyMoney {
       SplitMemoRole,
       SplitSingleLineMemoRole,
       SplitSharesRole,
+      SplitSharesFormattedRole,
       SplitValueRole,
       SplitPriceRole,
-      SplitReconcileFlagRole,
+      SplitReconcileFlagRole,       // the short status flag
+      SplitReconcileStatusRole,     // the full status name
       SplitReconcileDateRole,
       SplitActionRole,
       SplitNumberRole,
@@ -517,7 +519,6 @@ namespace eMyMoney {
       JournalTransactionIdRole,
       JournalSplitPaymentRole,
       JournalSplitDepositRole,
-
 
       // Ledger
       LedgerDisplayOrderRole,
