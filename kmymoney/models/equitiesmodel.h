@@ -25,10 +25,13 @@
 
 #include <QStandardItemModel>
 
+#include <QSortFilterProxyModel>
+#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
+#include <KItemModels/KRecursiveFilterProxyModel>
+#define QSortFilterProxyModel KRecursiveFilterProxyModel
+#endif
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <KItemModels/KRecursiveFilterProxyModel>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -71,7 +74,7 @@ protected:
   Private* const d;
 };
 
-class KMM_MODELS_EXPORT EquitiesFilterProxyModel : public KRecursiveFilterProxyModel
+class KMM_MODELS_EXPORT EquitiesFilterProxyModel : public QSortFilterProxyModel
 {
   Q_OBJECT
 
@@ -96,6 +99,12 @@ protected:
 private:
   class Private;
   Private* const d;
+#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
+  // provide the interface for backward compatbility 
+  void setRecursiveFilteringEnabled(bool enable) {}
+#endif
+
 };
 
+#undef QSortFilterProxyModel
 #endif // EQUITIESMODEL_H
