@@ -319,6 +319,8 @@ public:
       query.bindValue(":id", deleteList);
       if (!query.execBatch()) throw MYMONEYEXCEPTIONSQL("deleting Institution");
 
+      deleteKeyValuePairs("INSTITUTION", deleteList);
+      // delete the old version in any case
       deleteKeyValuePairs("OFXSETTINGS", deleteList);
     }
   }
@@ -972,8 +974,10 @@ public:
 
     if (!query.execBatch())
       throw MYMONEYEXCEPTIONSQL("writing Institution");
+    deleteKeyValuePairs("INSTITUTION", idList);
+    // delete the old version in any case
     deleteKeyValuePairs("OFXSETTINGS", idList);
-    writeKeyValuePairs("OFXSETTINGS", idList, kvpPairsList);
+    writeKeyValuePairs("INSTITUTION", idList, kvpPairsList);
     // Set m_hiIdInstitutions to 0 to force recalculation the next time it is requested
     m_hiIdInstitutions = 0;
   }
