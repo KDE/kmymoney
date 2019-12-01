@@ -142,24 +142,9 @@ bool LedgerFilterBase::lessThan(const QModelIndex& left, const QModelIndex& righ
         return false;
       }
     }
+    // same model and same post date, the ids decide
+    return left.data(eMyMoney::Model::IdRole).toString() < right.data(eMyMoney::Model::IdRole).toString();
   }
-
-  // sort the schedules always after the real transactions
-  /// @todo port to new model code, make sure to support display within correct date
-#if 0
-  const QString leftString(left.data((int)Role::ScheduleId).toString());
-  const QString rightString(right.data((int)Role::ScheduleId).toString());
-
-  // make sure schedules are shown past real transactions
-  if(!leftString.isEmpty() && rightString.isEmpty()) {
-    // left is schedule, right is not
-    return false;
-
-  } else if(leftString.isEmpty() && !rightString.isEmpty()) {
-    // right is schedule, left is not
-    return true;
-  }
-#endif
 
   // otherwise use normal sorting
   return QSortFilterProxyModel::lessThan(left, right);
