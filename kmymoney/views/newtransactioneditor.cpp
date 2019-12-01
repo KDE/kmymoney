@@ -301,26 +301,22 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
 
 bool NewTransactionEditor::Private::numberChanged(const QString& newNumber)
 {
-  bool rc = true;
+  bool rc = true; // number did change
   WidgetHintFrame::hide(ui->numberEdit, i18n("The check number used for this transaction."));
   if(!newNumber.isEmpty()) {
-    /// @todo port to new model code
-#if 0
-    const LedgerModel* model = Models::instance()->ledgerModel();
-    QModelIndexList list = model->match(model->index(0, 0), (int)eLedgerModel::Role::Number,
+    auto model = MyMoneyFile::instance()->journalModel();
+    const QModelIndexList list = model->match(model->index(0, 0), eMyMoney::Model::SplitNumberRole,
                                         QVariant(newNumber),
                                         -1,                         // all splits
                                         Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
-
-    foreach(QModelIndex index, list) {
-      if(model->data(index, (int)eLedgerModel::Role::AccountId) == m_account.id()
-        && model->data(index, (int)eLedgerModel::Role::TransactionSplitId) != transactionSplitId) {
+    for (const auto& idx : list) {
+      if(idx.data(eMyMoney::Model::SplitAccountIdRole).toString() == m_account.id()
+      && idx.data(eMyMoney::Model::JournalTransactionIdRole).toString().compare(transaction.id())) {
         WidgetHintFrame::show(ui->numberEdit, i18n("The check number <b>%1</b> has already been used in this account.", newNumber));
         rc = false;
         break;
       }
     }
-#endif
   }
   return rc;
 }
