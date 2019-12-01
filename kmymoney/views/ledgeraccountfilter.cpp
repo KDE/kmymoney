@@ -91,14 +91,16 @@ void LedgerAccountFilter::setShowBalanceInverted(bool inverted)
   d->showValuesInverted = inverted;
 }
 
-void LedgerAccountFilter::recalculateBalancesOnIdle()
+void LedgerAccountFilter::recalculateBalancesOnIdle(const QString& accountId)
 {
   Q_D(LedgerAccountFilter);
-
-  // make sure the balances are recalculated but trigger only once
-  if(!d->balanceCalculationPending) {
-    d->balanceCalculationPending = true;
-    QMetaObject::invokeMethod(this, "recalculateBalances", Qt::QueuedConnection);
+  // only start recalc if the caller means us
+  if (!accountId.compare(d->account.id())) {
+    // make sure the balances are recalculated but trigger only once
+    if(!d->balanceCalculationPending) {
+      d->balanceCalculationPending = true;
+      QMetaObject::invokeMethod(this, "recalculateBalances", Qt::QueuedConnection);
+    }
   }
 }
 

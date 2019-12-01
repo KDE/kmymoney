@@ -47,7 +47,7 @@ public:
 public Q_SLOTS:
   void recalculateBalances();
 
-  void recalculateBalancesOnIdle();
+  void recalculateBalancesOnIdle(const QString& accountId);
 
 protected:
   /**

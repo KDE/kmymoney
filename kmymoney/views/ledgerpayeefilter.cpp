@@ -80,8 +80,9 @@ void LedgerPayeeFilter::setShowBalanceInverted(bool inverted)
   d->showValuesInverted = inverted;
 }
 
-void LedgerPayeeFilter::recalculateBalancesOnIdle()
+void LedgerPayeeFilter::recalculateBalancesOnIdle(const QString& accountId)
 {
+  Q_UNUSED(accountId);
   Q_D(LedgerPayeeFilter);
 
   // make sure the balances are recalculated but trigger only once

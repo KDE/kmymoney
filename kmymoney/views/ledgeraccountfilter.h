@@ -46,9 +46,10 @@ public:
   void setAccount(const MyMoneyAccount& acc);
 
 public Q_SLOTS:
-  void recalculateBalances();
+  void recalculateBalancesOnIdle(const QString& accountId);
 
-  void recalculateBalancesOnIdle();
+protected Q_SLOTS:
+  void recalculateBalances();
 
 private:
   Q_DECLARE_PRIVATE_D(LedgerFilterBase::d_ptr, LedgerAccountFilter)

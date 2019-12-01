@@ -34,7 +34,6 @@
 // Project Includes
 
 #include "mymoneyfile.h"
-// #include "ledgermodel.h"
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
@@ -160,20 +159,6 @@ void LedgerView::setColumnsHidden(QVector<int> columns)
 void LedgerView::setColumnsShown(QVector<int> columns)
 {
   d->columnSelector->setAlwaysVisible(columns);
-}
-
-void LedgerView::rowsAboutToBeRemoved(const QModelIndex& index, int start, int end)
-{
-  QAbstractItemView::rowsAboutToBeRemoved(index, start, end);
-  // tell the filter model to recalculate if needed
-  emit requestBalanceRecalculation();
-}
-
-void LedgerView::rowsInserted(const QModelIndex& index, int start, int end)
-{
-  QTableView::rowsInserted(index, start, end);
-  // tell the filter model to recalculate if needed
-  emit requestBalanceRecalculation();
 }
 
 bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger trigger, QEvent* event)

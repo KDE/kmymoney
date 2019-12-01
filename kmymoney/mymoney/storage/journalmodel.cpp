@@ -215,6 +215,7 @@ struct JournalModel::Private
     QHash<QString, MyMoneyMoney> balances;
     for (const auto& accountId : qAsConst(balanceChangedSet)) {
       balances.insert(accountId, balanceCache.value(accountId));
+      emit q->balanceChanged(accountId);
     }
     emit q->balancesChanged(balances);
   }

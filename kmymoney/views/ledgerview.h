@@ -41,9 +41,6 @@ public:
   explicit LedgerView(QWidget* parent = 0);
   virtual ~LedgerView();
 
-  // virtual void setAccount(const MyMoneyAccount& acc);
-  // virtual QString accountId() const;
-
   /**
    * This method is used to modify the visibility of the
    * empty entry at the end of the ledger. The default
@@ -93,8 +90,6 @@ protected:
 
 protected Q_SLOTS:
   void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) final override;
-  void rowsInserted(const QModelIndex& index, int start, int end) final override;
-  void rowsAboutToBeRemoved(const QModelIndex& index, int start, int end) final override;
   void currentChanged(const QModelIndex &current, const QModelIndex &previous) final override;
 
   virtual void adjustDetailColumn(int newViewportWidth);
@@ -104,7 +99,6 @@ Q_SIGNALS:
   void transactionSelected(const QString& transactionSplitId);
   void aboutToStartEdit();
   void aboutToFinishEdit();
-  void requestBalanceRecalculation();
 
 protected:
   class Private;

@@ -132,7 +132,8 @@ public:
     specialDatesFilter->setSourceModel(m_transactionFilter);
     ui->m_register->setModel(specialDatesFilter);
 
-    q->connect(ui->m_register, &LedgerView::requestBalanceRecalculation, m_transactionFilter, &LedgerPayeeFilter::recalculateBalancesOnIdle);
+    // keep track of changing balances
+    q->connect(file->journalModel(), &JournalModel::balanceChanged, m_transactionFilter, &LedgerPayeeFilter::recalculateBalancesOnIdle);
 
     m_filterProxyModel = new AccountNamesFilterProxyModel(q);
     m_filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());

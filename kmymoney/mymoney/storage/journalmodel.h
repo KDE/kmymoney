@@ -164,6 +164,7 @@ private:
 
 Q_SIGNALS:
   void balancesChanged(const QHash<QString, MyMoneyMoney>& balances);
+  void balanceChanged(const QString& accountId);
 
 public Q_SLOTS:
 

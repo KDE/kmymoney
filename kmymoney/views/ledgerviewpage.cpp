@@ -86,11 +86,10 @@ LedgerViewPage::LedgerViewPage(QWidget* parent)
   // setup the model stack
   const auto file = MyMoneyFile::instance();
   d->accountFilter = new LedgerAccountFilter(d->ui->ledgerView, QVector<QAbstractItemModel*> { file->specialDatesModel(), file->schedulesJournalModel() } );
+  connect(file->journalModel(), &JournalModel::balanceChanged, d->accountFilter, &LedgerAccountFilter::recalculateBalancesOnIdle);
 
   d->specialDatesFilter = new SpecialDatesFilter(file->specialDatesModel(), this);
   d->specialDatesFilter->setSourceModel(d->accountFilter);
-
-  connect(d->ui->ledgerView, &LedgerView::requestBalanceRecalculation, d->accountFilter, &LedgerAccountFilter::recalculateBalancesOnIdle);
 
   d->ui->ledgerView->setModel(d->specialDatesFilter);
 }
