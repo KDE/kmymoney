@@ -1206,6 +1206,7 @@ QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions(const QSt
   int addressZipcodeCol = t.fieldNumber("addressZipcode");
   int telephoneCol = t.fieldNumber("telephone");
 
+  QStringList kvpInstitutionList(idList);
   while (query.next()) {
     MyMoneyInstitution inst;
     QString iid = GETSTRING(idCol);
@@ -1216,13 +1217,16 @@ QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions(const QSt
     inst.setCity(GETSTRING(addressCityCol));
     inst.setPostcode(GETSTRING(addressZipcodeCol));
     inst.setTelephone(GETSTRING(telephoneCol));
+    if (idList.isEmpty()) {
+      kvpInstitutionList.append(iid);
+    }
     // get list of subaccounts
     sq.bindValue(":id", iid);
     if (!sq.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading Institution AccountList")); // krazy:exclude=crashy
     QStringList aList;
     while (sq.next()) aList.append(sq.value(0).toString());
     foreach (const QString& it, aList)
-    inst.addAccountId(it);
+      inst.addAccountId(it);
 
     iList[iid] = MyMoneyInstitution(iid, inst);
     ulong id = MyMoneyUtils::extractId(iid);
@@ -1230,6 +1234,20 @@ QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions(const QSt
       lastId = id;
 
     d->signalProgress(++progress, 0);
+  }
+
+  auto kvpResult = d->readKeyValuePairs("INSTITUTION", kvpInstitutionList);
+  // old versions used to store the KVP with the false key (OFXSETTINGS)
+  // but we load it nevertheless in case the new one is empty. During the
+  // next write to the database, the key value pairs will be written with the
+  // right id (INSTITUTION).
+  auto kvpResultOld = d->readKeyValuePairs("OFXSETTINGS", kvpInstitutionList);
+  if (kvpResult.isEmpty()) {
+    kvpResult = kvpResultOld;
+  }
+  const auto kvp_end = kvpResult.constEnd();
+  for (auto it_kvp = kvpResult.constBegin(); it_kvp != kvp_end; ++it_kvp) {
+    iList[it_kvp.key()].setPairs(it_kvp.value().pairs());
   }
   return iList;
 }
