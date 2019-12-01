@@ -1,8 +1,8 @@
 ExternalProject_Add(
   ext_aqbanking
   DOWNLOAD_DIR ${EXT_DOWNLOAD_DIR}
-  URL https://www.aquamaniac.de/rdm/attachments/download/203/aqbanking-5.99.40beta.tar.gz
-  URL_MD5 e70a2a2ede0ef405b406bc1f30a3945a
+  URL https://www.aquamaniac.de/rdm/attachments/download/224/aqbanking-5.99.44beta.tar.gz
+  URL_MD5 022fe6136847b5dc89fc5cfe7c961e4e
 
   CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${EXT_INSTALL_DIR} --enable-local-install ${AT_HOST} ${AT_SHARED_ONLY} CPPFLAGS=${AT_CPP_FLAGS} LDFLAGS=${AT_LD_FLAGS}
   BUILD_COMMAND $(MAKE)
