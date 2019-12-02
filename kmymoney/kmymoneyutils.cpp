@@ -75,6 +75,7 @@
 #include "storageenums.h"
 #include "mymoneyenums.h"
 #include "kmymoneyplugin.h"
+#include "statusmodel.h"
 
 using namespace Icons;
 
@@ -400,43 +401,10 @@ quint64 KMyMoneyUtils::numericPart(const QString & num)
 
 QString KMyMoneyUtils::reconcileStateToString(eMyMoney::Split::State flag, bool text)
 {
-  /// @todo use MyMoneyFile::instance()->statusModel instead
   QString txt;
-  if (text) {
-    switch (flag) {
-      case eMyMoney::Split::State::NotReconciled:
-        txt = i18nc("Reconciliation state 'Not reconciled'", "Not reconciled");
-        break;
-      case eMyMoney::Split::State::Cleared:
-        txt = i18nc("Reconciliation state 'Cleared'", "Cleared");
-        break;
-      case eMyMoney::Split::State::Reconciled:
-        txt = i18nc("Reconciliation state 'Reconciled'", "Reconciled");
-        break;
-      case eMyMoney::Split::State::Frozen:
-        txt = i18nc("Reconciliation state 'Frozen'", "Frozen");
-        break;
-      default:
-        txt = i18nc("Unknown reconciliation state", "Unknown");
-        break;
-    }
-  } else {
-    switch (flag) {
-      case eMyMoney::Split::State::NotReconciled:
-        break;
-      case eMyMoney::Split::State::Cleared:
-        txt = i18nc("Reconciliation flag C", "C");
-        break;
-      case eMyMoney::Split::State::Reconciled:
-        txt = i18nc("Reconciliation flag R", "R");
-        break;
-      case eMyMoney::Split::State::Frozen:
-        txt = i18nc("Reconciliation flag F", "F");
-        break;
-      default:
-        txt = i18nc("Flag for unknown reconciliation state", "?");
-        break;
-    }
+  const QModelIndex idx = MyMoneyFile::instance()->statusModel()->index(static_cast<int>(flag), 0);
+  if (idx.isValid()) {
+    txt = idx.data(text ? eMyMoney::Model::SplitReconcileStatusRole : eMyMoney::Model::SplitReconcileFlagRole).toString();
   }
   return txt;
 }
