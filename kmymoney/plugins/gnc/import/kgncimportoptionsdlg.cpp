@@ -75,8 +75,9 @@ public:
     ui->checkDecode->setChecked(false);
     ui->comboDecode->setEnabled(false);
 
-    ui->buttonGroup18->setExclusive(false);
-    ui->checkTxNotes->setChecked(false);
+    ui->buttonTxNotesGroup->setId(ui->radioTxNotes1, 0); // use memo
+    ui->buttonTxNotesGroup->setId(ui->radioTxNotes2, 1); // use notes
+    ui->buttonTxNotesGroup->setId(ui->radioTxNotes3, 2); // merge memo with notes
 
     ui->buttonGroup3->setExclusive(false);
     ui->checkDebugGeneral->setChecked(false);
@@ -160,10 +161,10 @@ QTextCodec* KGncImportOptionsDlg::decodeOption()
   }
 }
 
-bool KGncImportOptionsDlg::txNotesOption() const
+int KGncImportOptionsDlg::txNotesOption() const
 {
   Q_D(const KGncImportOptionsDlg);
-  return (d->ui->checkTxNotes->isChecked());
+  return (d->ui->buttonTxNotesGroup->checkedId());
 }
 
 bool KGncImportOptionsDlg::generalDebugOption() const
