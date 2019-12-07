@@ -42,6 +42,10 @@ public Q_SLOTS:
   void showTransaction(const QModelIndex& idx);
   void modelDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
 
+protected Q_SLOTS:
+  void rowsInserted(const QModelIndex& parent, int first, int last);
+  void rowsRemoved(const QModelIndex& parent, int first, int last);
+
 private:
   class Private;
   Private * const d;

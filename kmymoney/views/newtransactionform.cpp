@@ -59,12 +59,30 @@ NewTransactionForm::NewTransactionForm(QWidget* parent)
   : QFrame(parent)
   , d(new Private)
 {
+  const auto journalModel = MyMoneyFile::instance()->journalModel();
   d->ui->setupUi(this);
+  connect(journalModel, &QAbstractItemModel::rowsInserted, this, &NewTransactionForm::rowsInserted);
+  connect(journalModel, &QAbstractItemModel::rowsRemoved, this, &NewTransactionForm::rowsRemoved);
+  connect(journalModel, &QAbstractItemModel::dataChanged, this, &NewTransactionForm::modelDataChanged);
 }
 
 NewTransactionForm::~NewTransactionForm()
 {
   delete d;
+}
+
+void NewTransactionForm::rowsInserted(const QModelIndex& parent, int first, int last)
+{
+  if (first <= d->row) {
+    d->row += last - first + 1;
+  }
+}
+
+void NewTransactionForm::rowsRemoved(const QModelIndex& parent, int first, int last)
+{
+  if (first <= d->row) {
+    d->row -= last - first + 1;
+  }
 }
 
 void NewTransactionForm::showTransaction(const QModelIndex& idx)
@@ -89,46 +107,12 @@ void NewTransactionForm::showTransaction(const QModelIndex& idx)
   const auto status = index.data(eMyMoney::Model::SplitReconcileFlagRole).toInt();
   const auto statusIdx = MyMoneyFile::instance()->statusModel()->index(status, 0);
   d->ui->statusEdit->setText(statusIdx.data(eMyMoney::Model::SplitReconcileStatusRole).toString());
-
-  /// @todo port to new model code
-#if 0
-  const QAbstractItemModel* model = Models::instance()->ledgerModel();
-  const QModelIndexList indexes = model->match(model->index(0, 0, QModelIndex()),
-                                              (int)Role::TransactionSplitId,
-                                              QVariant(transactionSplitId),
-                                              1,
-                                              Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
-  if(indexes.count() == 1) {
-    const QModelIndex index = indexes.first();
-    d->ui->dateEdit->setText(QLocale().toString(model->data(index, (int)Role::PostDate).toDate(),
-                                                           QLocale::ShortFormat));
-    d->ui->payeeEdit->setText(model->data(index, (int)Role::PayeeName).toString());
-    d->ui->memoEdit->clear();
-    d->ui->memoEdit->insertPlainText(model->data(index, (int)Role::Memo).toString());
-    d->ui->memoEdit->moveCursor(QTextCursor::Start);
-    d->ui->memoEdit->ensureCursorVisible();
-    d->ui->accountEdit->setText(model->data(index, (int)Role::CounterAccount).toString());
-    d->ui->statusEdit->setText(model->data(index, (int)Role::ReconciliationLong).toString());
-    QString amount = QString("%1 %2").arg(model->data(index, (int)Role::ShareAmount).toString())
-    .arg(model->data(index, (int)Role::ShareAmountSuffix).toString());
-    d->ui->amountEdit->setText(amount);
-    d->ui->numberEdit->setText(model->data(index, (int)Role::Number).toString());
-  }
-#endif
 }
 
 void NewTransactionForm::modelDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight)
 {
-#if 0
-  const QAbstractItemModel * const model = topLeft.model();
-  const int startRow = topLeft.row();
-  const int lastRow = bottomRight.row();
-  for(int row = startRow; row <= lastRow; ++row) {
-    QModelIndex index = model->index(row, 0);
-    if(model->data(index, (int)eLedgerModel::Role::TransactionSplitId).toString() == d->transactionSplitId) {
-      showTransaction(d->transactionSplitId);
-      break;
-    }
+  if ((topLeft.row() <= d->row) && (bottomRight.row() >= d->row)) {
+    const auto idx = MyMoneyFile::instance()->journalModel()->index(d->row, 0);
+    showTransaction(idx);
   }
-#endif
 }
