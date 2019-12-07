@@ -952,9 +952,10 @@ protected:
     Under some usage conditions, non-split GnuCash transactions may contain residual, usually incorrect, memo
     data which is not normally visible to the user. When imported into KMyMoney however, due to display
     differences, this data can become visible. Often, these transactions will have a Notes field describing
-    the real purpose of the transaction, so you can choose to use it instead. It may also be that - depending
-    on the source the transactions were imported from - any of these fields could have been used to store useful
-    information and you don't want to choose just one. In this case, you have an option to merge them together."  */
+    the real purpose of the transaction. It may also be that, depending on the source the transactions were
+    imported from, either of these fields was being used to store useful information and you don't want to
+    import one of them. You can therefore choose to have these notes, if present, used to override the
+    extraneous memo data or to merge them together."  */
   int m_useTxNotes;
   // set gnucash counts (not always accurate!)
   void setGncCommodityCount(int i) {
