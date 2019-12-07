@@ -44,6 +44,7 @@ public:
   Private(QWidget* parent)
   : ui(new Ui_LedgerViewPage)
   , accountFilter(nullptr)
+  , specialDatesFilter(nullptr)
   , form(nullptr)
   {
     ui->setupUi(parent);
