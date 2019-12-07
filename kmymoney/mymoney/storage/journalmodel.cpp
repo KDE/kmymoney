@@ -697,7 +697,7 @@ void JournalModel::doAddItem(const JournalEntry& item, const QModelIndex& parent
   // insert the items into the model
   insertRows(startRow, rows);
   const QModelIndex startIdx = index(startRow, 0);
-  const QModelIndex endIdx = index(startRow+rows-1, columnCount());
+  const QModelIndex endIdx = index(startRow+rows-1, columnCount()-1);
 
   d->startBalanceCacheOperation();
 
@@ -790,7 +790,7 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
       ++row;
     }
     // let the world know that things have changed
-    const QModelIndex endIdx = index(row-1, columnCount());
+    const QModelIndex endIdx = index(row-1, columnCount()-1);
     emit dataChanged(startIdx, endIdx);
 
     d->addTransactionToBalance(startIdx.row(), newTransaction.splitCount());

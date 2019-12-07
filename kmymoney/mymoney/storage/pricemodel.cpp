@@ -215,7 +215,7 @@ void PriceModel::addPrice(const MyMoneyPrice& price)
 
   if (static_cast<TreeItem<PriceEntry>*>(index(row, 0).internalPointer())->dataRef() != newEntry) {
     static_cast<TreeItem<PriceEntry>*>(index(row, 0).internalPointer())->dataRef() = newEntry;
-    emit dataChanged(idx, index(row, columnCount()));
+    emit dataChanged(idx, index(row, columnCount()-1));
     setDirty();
   }
 }
