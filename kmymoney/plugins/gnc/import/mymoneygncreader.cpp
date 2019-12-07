@@ -117,7 +117,8 @@ void MyMoneyGncReader::setOptions()
     // option 2 doesn't really work too well at present
     m_investmentOption = 0;
     m_useFinanceQuote = false;
-    m_useTxNotes = false;
+    // transaction notes import option - 0, use memo field, 1 = use notes field, 2 = merge and import both
+    m_useTxNotes = 0;
     m_decoder = 0;
     gncdebug = false; // general debug messages
     xmldebug = false; // xml trace
@@ -1683,10 +1684,17 @@ void MyMoneyGncReader::convertTransaction(const GncTransaction *gtx)
     split = *it;
     // at this point, if m_potentialTransfer is still true, it is actually one!
     if (m_potentialTransfer) split.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Transfer));
-    if ((m_useTxNotes) // if use txnotes option is set
-        && (nonSplitTx) // and it's a (GnuCash) non-split transaction
+    if ((nonSplitTx) // if it's a (GnuCash) non-split transaction
         && (!tx.memo().isEmpty())) // and tx notes are present
-      split.setMemo(tx.memo());  // use the tx notes as memo
+    {
+      if (m_useTxNotes == 1)
+        split.setMemo(tx.memo());  // use the tx notes as memo
+      else if (m_useTxNotes == 2)
+      {
+        bool addNewline = !split.memo().isEmpty();
+        split.setMemo(split.memo() + (addNewline ? "\n" : "") + tx.memo()); // merge the tx notes and memo
+      }
+    }
     tx.addSplit(split);
     it = m_splitList.erase(it);
   }
