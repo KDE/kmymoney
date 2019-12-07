@@ -52,7 +52,6 @@ SpecialDatesFilter::SpecialDatesFilter(const QAbstractItemModel* datesModel, QOb
   : QSortFilterProxyModel(parent)
   , d_ptr(new SpecialDatesFilterPrivate(const_cast<QAbstractItemModel*>(datesModel)))
 {
-  Q_D(SpecialDatesFilter);
 }
 
 bool SpecialDatesFilter::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
