@@ -45,7 +45,7 @@ public:
   bool quoteOption() const;
   bool scheduleOption() const;
   QTextCodec* decodeOption();
-  bool txNotesOption() const;
+  int txNotesOption() const;
   bool generalDebugOption() const;
   bool xmlDebugOption() const;
   bool anonymizeOption() const;

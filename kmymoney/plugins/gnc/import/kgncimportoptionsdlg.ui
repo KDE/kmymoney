@@ -171,18 +171,41 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="buttonGroupBox18">
+    <widget class="QGroupBox" name="buttonTxNotesGroupBox">
      <property name="title">
-      <string>Transaction Notes option</string>
+      <string>Notes option for non-split transactions</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QCheckBox" name="checkTxNotes">
+       <widget class="QRadioButton" name="radioTxNotes1">
         <property name="text">
-         <string>Use transaction notes on non-split transactions</string>
+         <string>Use transaction memo</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
         </property>
         <attribute name="buttonGroup">
-         <string notr="true">buttonGroup18</string>
+         <string notr="true">buttonTxNotesGroup</string>
+        </attribute>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioTxNotes2">
+        <property name="text">
+         <string>Use transaction notes</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">buttonTxNotesGroup</string>
+        </attribute>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioTxNotes3">
+        <property name="text">
+         <string>Merge memo and notes</string>
+        </property>
+        <attribute name="buttonGroup">
+         <string notr="true">buttonTxNotesGroup</string>
         </attribute>
        </widget>
       </item>
@@ -304,11 +327,12 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup18"/>
-  <buttongroup name="buttonGroup2"/>
   <buttongroup name="buttonGroup3"/>
   <buttongroup name="buttonGroup4"/>
   <buttongroup name="buttonGroup5"/>
+  <buttongroup name="buttonGroup2"/>
+  <buttongroup name="buttonGroup18"/>
   <buttongroup name="buttonInvestGroup"/>
+  <buttongroup name="buttonTxNotesGroup"/>
  </buttongroups>
 </ui>
