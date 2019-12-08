@@ -53,7 +53,7 @@ struct LedgerFilterBasePrivate {
   }
 
   LedgerFilterBase*           q;
-  KConcatenateRowsProxyModel* concatModel;
+  KConcatenateRowsProxyModel* concatModel;          // Qt5.13+ use QConcatenateTablesProxyModel
   eMyMoney::Account::Type     accountType;
   QStringList                 filterIds;
   bool                        showValuesInverted;

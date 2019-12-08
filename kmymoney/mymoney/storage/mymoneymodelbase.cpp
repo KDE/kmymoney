@@ -27,7 +27,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KConcatenateRowsProxyModel>
+#include <KConcatenateRowsProxyModel>           // Qt5.13+ use QConcatenateTablesProxyModel
 #include <KDescendantsProxyModel>
 
 // ----------------------------------------------------------------------------
