@@ -104,17 +104,5 @@ protected:
   class Private;
   Private * const d;
 };
-
-
-class SplitView : public LedgerView
-{
-  Q_OBJECT
-public:
-  explicit SplitView(QWidget* parent = 0);
-  virtual ~SplitView();
-
-protected Q_SLOTS:
-  // void recalculateBalances() final override {}
-};
 #endif // LEDGERVIEW_H
 

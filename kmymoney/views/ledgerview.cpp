@@ -418,13 +418,3 @@ void LedgerView::selectMostRecentTransaction()
     }
   }
 }
-
-
-SplitView::SplitView(QWidget* parent)
-  : LedgerView(parent)
-{
-}
-
-SplitView::~SplitView()
-{
-}
