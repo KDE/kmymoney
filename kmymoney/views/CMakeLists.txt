@@ -33,6 +33,7 @@ if(ENABLE_UNFINISHEDFEATURES)
     newspliteditor.cpp
     newtransactioneditor.cpp
     newtransactionform.cpp
+    splitview.cpp
     splitdialog.cpp
     splitdelegate.cpp
     widgethintframe.cpp

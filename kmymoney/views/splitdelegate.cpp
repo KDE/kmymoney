@@ -435,7 +435,7 @@ void SplitDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, con
     // in case this was a new split, we nned to create a new empty one
     SplitModel* splitModel = qobject_cast<SplitModel*>(model);
     if(splitModel) {
-      splitModel->addEmptySplitEntry();
+      splitModel->appendEmptySplit();
     }
   }
 }

@@ -572,14 +572,10 @@ void NewTransactionEditor::valueChanged()
 
 void NewTransactionEditor::editSplits()
 {
-#if 0
-  JournalModel splitModel;
-
-  splitModel.load();
-  splitModel.deepCopy(d->splitModel, true);
+  SplitModel splitModel(this, nullptr, d->splitModel);
 
   // create an empty split at the end
-  splitModel.addEmptySplitEntry();
+  splitModel.appendEmptySplit();
 
   QPointer<SplitDialog> splitDialog = new SplitDialog(d->m_account, transactionAmount(), this);
   splitDialog->setModel(&splitModel);
@@ -587,27 +583,29 @@ void NewTransactionEditor::editSplits()
   int rc = splitDialog->exec();
 
   if(splitDialog && (rc == QDialog::Accepted)) {
-      // remove that empty split again before we update the splits
-      splitModel.removeEmptySplitEntry();
+#if 0
 
-      // copy the splits model contents
-      d->splitModel.deepCopy(splitModel, true);
+    // remove that empty split again before we update the splits
+    splitModel.removeEmptySplitEntry();
 
-      // update the transaction amount
-      d->amountHelper->setValue(splitDialog->transactionAmount());
+    // copy the splits model contents
+    d->splitModel.deepCopy(splitModel, true);
 
-      d->updateWidgetState();
-      QWidget *next = d->ui->tagComboBox;
-      if(d->ui->costCenterCombo->isEnabled()) {
-        next = d->ui->costCenterCombo;
-      }
-      next->setFocus();
+    // update the transaction amount
+    d->amountHelper->setValue(splitDialog->transactionAmount());
+
+    d->updateWidgetState();
+    QWidget *next = d->ui->tagComboBox;
+    if(d->ui->costCenterCombo->isEnabled()) {
+      next = d->ui->costCenterCombo;
+    }
+    next->setFocus();
+#endif
   }
 
   if(splitDialog) {
     splitDialog->deleteLater();
   }
-#endif
 }
 
 MyMoneyMoney NewTransactionEditor::transactionAmount() const

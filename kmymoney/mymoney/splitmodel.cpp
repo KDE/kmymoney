@@ -54,6 +54,19 @@ SplitModel::SplitModel(QObject* parent, QUndoStack* undoStack)
 {
 }
 
+SplitModel::SplitModel(QObject* parent, QUndoStack* undoStack, const SplitModel& right)
+  : MyMoneyModel<MyMoneySplit>(parent, QStringLiteral("S"), 4, undoStack)
+  , d(new Private(this))
+{
+  d->headerData = right.d->headerData;
+  const auto rows = right.rowCount();
+  for (int row = 0; row < rows; ++row) {
+    const auto idx = right.index(row, 0);
+    const auto split = right.itemByIndex(idx);
+    appendSplit(split);
+  }
+}
+
 SplitModel::~SplitModel()
 {
 }
@@ -123,5 +136,13 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
 
 void SplitModel::appendSplit(const MyMoneySplit& split)
 {
-  m_undoStack->push(new UndoCommand(this, MyMoneySplit(), split));
+  doAddItem(split);
+}
+
+void SplitModel::appendEmptySplit()
+{
+  QModelIndexList list = match(index(0, 0), eMyMoney::Model::IdRole, QString(), -1, Qt::MatchExactly);
+  if(list.count() == 0) {
+    doAddItem(MyMoneySplit());
+  }
 }

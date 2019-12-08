@@ -28,13 +28,14 @@
 // KDE Includes
 
 #include <KLocalizedString>
+#include <KSharedConfig>
+#include <KConfigGroup>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_splitdialog.h"
 #include "mymoneyaccount.h"
-#include "splitdelegate.h"
 #include "newtransactioneditor.h"
 #include "splitadjustdialog.h"
 #include "modelenums.h"
@@ -48,7 +49,6 @@ public:
   Private(SplitDialog* p)
   : parent(p)
   , ui(new Ui_SplitDialog)
-  , splitDelegate(nullptr)
   , transactionEditor(nullptr)
   {
   }
@@ -62,7 +62,6 @@ public:
 
   SplitDialog*                parent;
   Ui_SplitDialog*             ui;
-  SplitDelegate*              splitDelegate;
 
   /**
    * The account in which this split editor was opened
@@ -94,7 +93,7 @@ void SplitDialog::Private::deleteSplits(QModelIndexList indexList)
   // remove from the end so that the row information stays
   // consistent and is not changed due to index changes
   QMap<int, int> sortedList;
-  foreach(auto index, indexList) {
+  for (const auto& index : indexList) {
     sortedList[index.row()] = index.row();
   }
 
@@ -115,30 +114,15 @@ SplitDialog::SplitDialog(const MyMoneyAccount& account, const MyMoneyMoney& amou
   d->transactionTotal = amount;
   d->ui->setupUi(this);
 
-  d->ui->splitView->setColumnHidden((int)eLedgerModel::Column::Date, true);
-  d->ui->splitView->setColumnHidden((int)eLedgerModel::Column::Number, true);
-  d->ui->splitView->setColumnHidden((int)eLedgerModel::Column::Security, true);
-  d->ui->splitView->setColumnHidden((int)eLedgerModel::Column::Reconciliation, true);
-  d->ui->splitView->setColumnHidden((int)eLedgerModel::Column::Payment, false);
-  d->ui->splitView->setColumnHidden((int)eLedgerModel::Column::Deposit, false);
-  d->ui->splitView->setColumnHidden((int)eLedgerModel::Column::Quantity, true);
-  d->ui->splitView->setColumnHidden((int)eLedgerModel::Column::Price, true);
-  d->ui->splitView->setColumnHidden((int)eLedgerModel::Column::Amount, true);
-  d->ui->splitView->setColumnHidden((int)eLedgerModel::Column::Value, true);
-  d->ui->splitView->setColumnHidden((int)eLedgerModel::Column::Balance, true);
   d->ui->splitView->setSelectionMode(QAbstractItemView::ExtendedSelection);
   d->ui->splitView->setSelectionBehavior(QAbstractItemView::SelectRows);
-
-  // setup the item delegate
-  d->splitDelegate = new SplitDelegate(d->ui->splitView);
-  d->ui->splitView->setItemDelegate(d->splitDelegate);
 
   d->ui->okButton->setIcon(Icons::get(Icon::DialogOK));
   d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
 
   // setup some connections
-  connect(d->ui->splitView, &LedgerView::aboutToStartEdit, this, &SplitDialog::disableButtons);
-  connect(d->ui->splitView, &LedgerView::aboutToFinishEdit, this, &SplitDialog::enableButtons);
+  connect(d->ui->splitView, &SplitView::aboutToStartEdit, this, &SplitDialog::disableButtons);
+  connect(d->ui->splitView, &SplitView::aboutToFinishEdit, this, &SplitDialog::enableButtons);
 
   connect(d->ui->deleteAllButton, &QAbstractButton::pressed, this, &SplitDialog::deleteAllSplits);
   connect(d->ui->deleteButton, &QAbstractButton::pressed, this, &SplitDialog::deleteSelectedSplits);
@@ -146,12 +130,22 @@ SplitDialog::SplitDialog(const MyMoneyAccount& account, const MyMoneyMoney& amou
   connect(d->ui->mergeButton, &QAbstractButton::pressed, this, &SplitDialog::mergeSplits);
   connect(d->ui->newSplitButton, &QAbstractButton::pressed, this, &SplitDialog::newSplit);
 
+  ensurePolished();
+
+  QSize size(width(), height());
+  KConfigGroup grp = KSharedConfig::openConfig()->group("SplitTransactionEditor");
+  size = grp.readEntry("Geometry", size);
+  size.setHeight(size.height() - 1);
+  resize(size.expandedTo(minimumSizeHint()));
+
   // finish polishing the widgets
   QMetaObject::invokeMethod(this, "adjustSummary", Qt::QueuedConnection);
 }
 
 SplitDialog::~SplitDialog()
 {
+  auto grp =  KSharedConfig::openConfig()->group("SplitTransactionEditor");
+  grp.writeEntry("Geometry", size());
 }
 
 int SplitDialog::exec()

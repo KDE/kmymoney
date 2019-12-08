@@ -48,6 +48,7 @@ public:
   };
 
   explicit SplitModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
+  SplitModel(QObject* parent, QUndoStack* undoStack, const SplitModel& right);
   virtual ~SplitModel();
 
   int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
@@ -56,6 +57,7 @@ public:
   Qt::ItemFlags flags(const QModelIndex & index) const override;
 
   void appendSplit(const MyMoneySplit& s);
+  void appendEmptySplit();
 
   static QString newSplitId();
   static bool isNewSplitId(const QString& id);

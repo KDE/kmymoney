@@ -17,7 +17,7 @@
    <item>
     <layout class="QVBoxLayout" name="splitsLayout" stretch="10,1">
      <item>
-      <widget class="LedgerView" name="splitView"/>
+      <widget class="SplitView" name="splitView"/>
      </item>
      <item>
       <widget class="QTableWidget" name="summaryView">
@@ -685,9 +685,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>LedgerView</class>
+   <class>SplitView</class>
    <extends>QTableView</extends>
-   <header>ledgerview.h</header>
+   <header>splitview.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
