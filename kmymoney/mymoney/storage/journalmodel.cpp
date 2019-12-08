@@ -309,7 +309,7 @@ int JournalModel::columnCount(const QModelIndex& parent) const
   Q_UNUSED(parent);
   Q_ASSERT(d->headerData.count() == MaxColumns);
 
-  return d->headerData.count();
+  return MaxColumns;
 }
 
 QVariant JournalModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -605,7 +605,7 @@ void JournalModel::load(const QMap<QString, MyMoneyTransaction>& list)
 
   // create the number of required items
   int itemCount = 0;
-  foreach (const auto item, list) {
+  for (const auto& item : qAsConst(list)) {
     itemCount += item.splitCount();
   }
   insertRows(0, itemCount);
