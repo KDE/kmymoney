@@ -47,6 +47,7 @@
 #include "accountsmodel.h"
 #include "costcentermodel.h"
 #include "journalmodel.h"
+#include "statusmodel.h"
 #include "splitmodel.h"
 #include "payeesmodel.h"
 #include "mymoneysplit.h"
@@ -72,12 +73,12 @@ public:
   , payeesModel(new QSortFilterProxyModel(parent))
   , accepted(false)
   , costCenterRequired(false)
+  , splitModel(parent, &undoStack)
   , amountHelper(nullptr)
   {
     accountsModel->setObjectName("NewTransactionEditor::accountsModel");
     costCenterModel->setObjectName("SortedCostCenterModel");
     payeesModel->setObjectName("SortedPayeesModel");
-    statusModel.setObjectName("StatusModel");
     splitModel.setObjectName("SplitModel");
 
     costCenterModel->setSortLocaleAware(true);
@@ -85,11 +86,6 @@ public:
 
     payeesModel->setSortLocaleAware(true);
     payeesModel->setSortCaseSensitivity(Qt::CaseInsensitive);
-
-    createStatusEntry(eMyMoney::Split::State::NotReconciled);
-    createStatusEntry(eMyMoney::Split::State::Cleared);
-    createStatusEntry(eMyMoney::Split::State::Reconciled);
-    // createStatusEntry(eMyMoney::Split::State::Frozen);
   }
 
   ~Private()
@@ -114,20 +110,13 @@ public:
   QSortFilterProxyModel*        payeesModel;
   bool                          accepted;
   bool                          costCenterRequired;
+  QUndoStack                    undoStack;
   SplitModel                    splitModel;
-  QStandardItemModel            statusModel;
   MyMoneyAccount                m_account;
   MyMoneyTransaction            transaction;
   MyMoneySplit                  split;
   CreditDebitHelper*            amountHelper;
 };
-
-void NewTransactionEditor::Private::createStatusEntry(eMyMoney::Split::State status)
-{
-  QStandardItem* p = new QStandardItem(KMyMoneyUtils::reconcileStateToString(status, true));
-  p->setData((int)status);
-  statusModel.appendRow(p);
-}
 
 void NewTransactionEditor::Private::updateWidgetState()
 {
@@ -147,7 +136,7 @@ void NewTransactionEditor::Private::updateWidgetState()
       break;
     case 1:
       index = splitModel.index(0, 0);
-      ui->accountCombo->setSelected(splitModel.data(index, (int)eLedgerModel::Role::AccountId).toString());
+      ui->accountCombo->setSelected(splitModel.data(index, eMyMoney::Model::SplitAccountIdRole).toString());
       break;
     default:
       index = splitModel.index(0, 0);
@@ -165,7 +154,7 @@ void NewTransactionEditor::Private::updateWidgetState()
   if(ui->costCenterCombo->isEnabled()) {
     // extract the cost center
     index = splitModel.index(0, 0);
-    index = MyMoneyFile::instance()->costCenterModel()->indexById(splitModel.data(index, (int)eLedgerModel::Role::CostCenterId).toString());
+    index = MyMoneyFile::instance()->costCenterModel()->indexById(splitModel.data(index, eMyMoney::Model::SplitCostCenterIdRole).toString());
     if (index.isValid())
       ui->costCenterCombo->setCurrentIndex(costCenterModel->mapFromSource(index).row());
   }
@@ -218,12 +207,13 @@ bool NewTransactionEditor::Private::postdateChanged(const QDate& date)
   // collect all account ids
   QStringList accountIds;
   accountIds << m_account.id();
-  for(int row = 0; row < splitModel.rowCount(); ++row) {
-    QModelIndex index = splitModel.index(row, 0);
-    accountIds << splitModel.data(index, (int)eLedgerModel::Role::AccountId).toString();;
+  const auto rows = splitModel.rowCount();
+  for(int row = 0; row < rows; ++row) {
+    const auto index = splitModel.index(row, 0);
+    accountIds << index.data(eMyMoney::Model::SplitAccountIdRole).toString();
   }
 
-  Q_FOREACH(QString accountId, accountIds) {
+  for (const auto& accountId : accountIds) {
     if(!isDatePostOpeningDate(date, accountId)) {
       MyMoneyAccount account = MyMoneyFile::instance()->account(accountId);
       WidgetHintFrame::show(ui->dateEdit, i18n("The posting date is prior to the opening date of account <b>%1</b>.", account.name()));
@@ -245,10 +235,11 @@ bool NewTransactionEditor::Private::costCenterChanged(int costCenterIndex)
       rc = false;
     }
     if(rc == true && splitModel.rowCount() == 1) {
-      QModelIndex index = costCenterModel->index(costCenterIndex, 0);
-      const auto costCenterId = costCenterModel->data(index, eMyMoney::Model::Roles::IdRole).toString();
+      auto index = costCenterModel->index(costCenterIndex, 0);
+      const auto costCenterId = index.data(eMyMoney::Model::IdRole).toString();
       index = splitModel.index(0, 0);
-      splitModel.setData(index, costCenterId, (int)eLedgerModel::Role::CostCenterId);
+
+      splitModel.setData(index, costCenterId, eMyMoney::Model::SplitCostCenterIdRole);
     }
   }
 
@@ -271,7 +262,9 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
       // make sure we have a split in the model
       bool newSplit = false;
       if(splitModel.rowCount() == 0) {
-        splitModel.addEmptySplitEntry();
+        // add an empty split
+        MyMoneySplit s;
+        splitModel.addItem(s);
         newSplit = true;
       }
 
@@ -387,7 +380,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
   d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
   d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
 
-  d->ui->statusCombo->setModel(&d->statusModel);
+  d->ui->statusCombo->setModel(MyMoneyFile::instance()->statusModel());
 
   d->ui->dateEdit->setDisplayFormat(QLocale().dateFormat(QLocale::ShortFormat));
 
@@ -486,7 +479,7 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
       d->ui->dateEdit->setDate(QDate::currentDate());
     }
     bool blocked = d->ui->accountCombo->lineEdit()->blockSignals(true);
-    d->ui->accountCombo->lineEdit()->clear();
+    d->ui->accountCombo->clearEditText();
     d->ui->accountCombo->lineEdit()->blockSignals(blocked);
 
   } else {
@@ -501,6 +494,7 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
                                          -1,                         // all splits
                                          Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
 
+    const auto statusModel = MyMoneyFile::instance()->statusModel();
     for (const auto& splitIdx : list) {
       if(selectedSplitRow == splitIdx.row()) {
         d->ui->dateEdit->setDate(splitIdx.data(eMyMoney::Model::TransactionPostDateRole).toDate());
@@ -508,6 +502,21 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
         const auto payeeId = splitIdx.data(eMyMoney::Model::SplitPayeeIdRole).toString();
         const QModelIndex payeeIdx = MyMoneyFile::instance()->payeesModel()->indexById(payeeId);
         d->ui->payeeEdit->setCurrentIndex(d->payeesModel->mapFromSource(payeeIdx).row());
+
+        bool blocked = d->ui->accountCombo->blockSignals(true);
+        switch(splitIdx.data(eMyMoney::Model::TransactionSplitCountRole).toInt()) {
+          case 1:
+            d->ui->accountCombo->clearEditText();
+            d->ui->accountCombo->setSelected(QString());
+            break;
+          case 2:
+            d->ui->accountCombo->setSelected(splitIdx.data(eMyMoney::Model::TransactionCounterAccountIdRole).toString());
+            break;
+          default:
+            d->ui->accountCombo->setEditText(splitIdx.data(eMyMoney::Model::TransactionCounterAccountRole).toString());
+            break;
+        }
+        d->ui->accountCombo->blockSignals(blocked);
 
         d->ui->memoEdit->clear();
         d->ui->memoEdit->insertPlainText(splitIdx.data(eMyMoney::Model::SplitMemoRole).toString());
@@ -522,12 +531,12 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
         d->ui->numberEdit->setText(splitIdx.data(eMyMoney::Model::SplitNumberRole).toString());
         d->ui->statusCombo->setCurrentIndex(0); // default is not reconciled
 
-        const QModelIndexList stList = d->statusModel.match(d->statusModel.index(0, 0), Qt::UserRole+1, splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).toInt());
+        const QModelIndexList stList = statusModel->match(statusModel->index(0, 0), eMyMoney::Model::SplitReconcileFlagRole, splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).toInt());
         if(!stList.isEmpty()) {
           d->ui->statusCombo->setCurrentIndex(stList.front().row());
         }
       } else {
-        d->splitModel.addSplit(d->transaction, MyMoneyFile::instance()->journalModel()->itemByIndex(splitIdx).split());
+        d->splitModel.appendSplit(MyMoneyFile::instance()->journalModel()->itemByIndex(splitIdx).split());
       }
     }
     d->updateWidgetState();
@@ -563,8 +572,10 @@ void NewTransactionEditor::valueChanged()
 
 void NewTransactionEditor::editSplits()
 {
-  SplitModel splitModel;
+#if 0
+  JournalModel splitModel;
 
+  splitModel.load();
   splitModel.deepCopy(d->splitModel, true);
 
   // create an empty split at the end
@@ -596,6 +607,7 @@ void NewTransactionEditor::editSplits()
   if(splitDialog) {
     splitDialog->deleteLater();
   }
+#endif
 }
 
 MyMoneyMoney NewTransactionEditor::transactionAmount() const

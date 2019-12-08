@@ -984,7 +984,7 @@ public:
   /*
    * The transaction status model
    */
-  StatusModel*  statusModel() const;
+  StatusModel* statusModel() const;
 
 /// @note add new models here
 

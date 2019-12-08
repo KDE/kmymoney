@@ -35,7 +35,6 @@
 #include "mymoneyfile.h"
 #include "mymoneyenums.h"
 #include "accountsmodel.h"
-// #include "modelenums.h"
 
 class KMyMoneyAccountCombo::Private
 {
@@ -55,31 +54,8 @@ public:
   QString                         m_lastSelectedAccount;
   bool                            m_inMakeCompletion;
 
-  QString fullAccountName(const QAbstractItemModel* model, const QModelIndex& index, bool includeMainCategory = false) const;
   void selectFirstMatchingItem();
 };
-
-QString KMyMoneyAccountCombo::Private::fullAccountName(const QAbstractItemModel* model, const QModelIndex& _index, bool includeMainCategory) const
-{
-  QString rc;
-  if(_index.isValid()) {
-    QModelIndex index = _index;
-    QString sep;
-    do {
-      rc = QString("%1%2%3").arg(model->data(index).toString()).arg(sep).arg(rc);
-      sep = QLatin1String(":");
-      index = index.parent();
-    } while(index.isValid());
-
-    if(!includeMainCategory) {
-      QRegExp mainCategory(QString("[^%1]+%2(.*)").arg(sep).arg(sep));
-      if(mainCategory.exactMatch(rc)) {
-        rc = mainCategory.cap(1);
-      }
-    }
-  }
-  return rc;
-}
 
 void KMyMoneyAccountCombo::Private::selectFirstMatchingItem()
 {
@@ -155,9 +131,9 @@ void KMyMoneyAccountCombo::collapseAll()
 
 void KMyMoneyAccountCombo::activated()
 {
-  auto variant = view()->currentIndex().data(eMyMoney::Model::Roles::IdRole);
-  if (variant.isValid()) {
-    setSelected(variant.toString());
+  auto accountId = view()->currentIndex().data(eMyMoney::Model::Roles::IdRole).toString();
+  if (!accountId.isEmpty()) {
+    selectItem(view()->currentIndex());
   }
 }
 
@@ -225,15 +201,14 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
     d->m_lastSelectedAccount = id;
     const auto idx = list.front();
 
+    auto blocked = blockSignals(true);
+    setRootModelIndex(idx.parent());
+    setCurrentIndex(idx.row());
+    setRootModelIndex(QModelIndex());
+    blockSignals(blocked);
+
     if(isEditable()) {
-      lineEdit()->setText(d->fullAccountName(model(), idx));
-    } else {
-      // ensure that combobox is properly set when KMyMoneyAccountCombo::setSelected is called programmatically
-      blockSignals(true);
-      setRootModelIndex(idx.parent());
-      setCurrentIndex(idx.row());
-      setRootModelIndex(QModelIndex());
-      blockSignals(false);
+      lineEdit()->setText(idx.data(eMyMoney::Model::AccountFullNameRole).toString());
     }
     emit accountSelected(id);
   }
@@ -259,7 +234,7 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
 
   // setup filtering criteria
   model->setFilterKeyColumn(AccountsModel::Column::AccountName);
-  model->setFilterRole(eMyMoney::Model::Roles::AccountFullNameRole);
+  model->setFilterRole(eMyMoney::Model::Roles::AccountFullHierarchyNameRole);
 
   // create popup view, attach model and allow to select a single item
   d->m_popupView = new QTreeView(this);
@@ -275,9 +250,6 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
 
   d->m_popupView->expandAll();
 
-  // setup signal connections
-  connect(d->m_popupView, &QAbstractItemView::activated, this, &KMyMoneyAccountCombo::selectItem);
-
   if(isEditable()) {
     connect(lineEdit(), &QLineEdit::textEdited, this, &KMyMoneyAccountCombo::makeCompletion);
   } else {
@@ -287,8 +259,9 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
 
 void KMyMoneyAccountCombo::selectItem(const QModelIndex& index)
 {
-  if(index.isValid() && (model()->flags(index) & Qt::ItemIsSelectable)) {
-    setSelected(model()->data(index, eMyMoney::Model::Roles::IdRole).toString());
+  if(index.isValid() && (index.model()->flags(index) & Qt::ItemIsSelectable)) {
+    // delay the call until the next time in the event loop
+    QMetaObject::invokeMethod(this, "setSelected", Qt::QueuedConnection, Q_ARG(QString, index.data(eMyMoney::Model::Roles::IdRole).toString()));
   }
 }
 
@@ -365,7 +338,16 @@ void KMyMoneyAccountCombo::showPopup()
 void KMyMoneyAccountCombo::hidePopup()
 {
   if(d->m_popupView) {
-    d->m_popupView->hide();
+    // unfortunately the QComboBox does not provide a signal
+    // that spits out the selected QModelIndex when you click
+    // an item in the open popupView. So we collect the required
+    // information from the popupView when the popupView is
+    // closed.
+    if (d->m_popupView->isVisible()) {
+      d->m_popupView->hide();
+      activated();
+      // selectItem(d->m_popupView->currentIndex());
+    }
     d->m_popupView->removeEventFilter(this);
   }
   KComboBox::hidePopup();

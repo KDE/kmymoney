@@ -27,6 +27,7 @@ set(kmm_mymoney_LIB_SRCS
   mymoneycontact.cpp
   payeeidentifiermodel.cpp
   statusmodel.cpp
+  splitmodel.cpp
   )
 
   # storage_a_SOURCES cannot be set in storage directory on MS Windows

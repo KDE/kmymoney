@@ -64,7 +64,6 @@ public:
   explicit KMyMoneyAccountCombo(QWidget* parent = nullptr);
   ~KMyMoneyAccountCombo();
 
-  void setSelected(const QString& id);
   const QString& getSelected() const;
 
   void setModel(QSortFilterProxyModel *model);
@@ -81,6 +80,7 @@ public Q_SLOTS:
   void collapseAll();
   void showPopup() override;
   void hidePopup() override;
+  void setSelected(const QString& id);
 
 protected:
   void wheelEvent(QWheelEvent *ev) override;

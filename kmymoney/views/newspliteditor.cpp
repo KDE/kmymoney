@@ -203,7 +203,7 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
   : QFrame(parent, Qt::FramelessWindowHint /* | Qt::X11BypassWindowManagerHint */)
   , d(new Private(this))
 {
-  SplitView* view = qobject_cast<SplitView*>(parent->parentWidget());
+  auto view = qobject_cast<LedgerView*>(parent->parentWidget());
   Q_ASSERT(view != 0);
   d->splitModel = qobject_cast<SplitModel*>(view->model());
 

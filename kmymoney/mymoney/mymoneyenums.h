@@ -457,6 +457,7 @@ namespace eMyMoney {
       AccountBalanceRole,
       AccountValueRole,
       AccountTotalValueRole,
+      AccountFullHierarchyNameRole,
       AccountFullNameRole,
       AccountDisplayOrderRole,
       AccountFractionRole,
@@ -513,6 +514,7 @@ namespace eMyMoney {
       SplitReconcileDateRole,
       SplitActionRole,
       SplitNumberRole,
+      SplitCostCenterIdRole,
 
       // Journal
       JournalSplitIdRole,

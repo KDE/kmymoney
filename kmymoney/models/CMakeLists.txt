@@ -20,7 +20,6 @@ if(ENABLE_UNFINISHEDFEATURES)
     ledgersplit.cpp
     ledgertransaction.cpp
     specialdatesfilter.cpp
-    splitmodel.cpp
   )
 endif()
 
