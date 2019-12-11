@@ -105,7 +105,7 @@ void SplitDialog::Private::deleteSplits(QModelIndexList indexList)
 }
 
 
-SplitDialog::SplitDialog(const MyMoneyAccount& account, const MyMoneyMoney& amount, NewTransactionEditor* parent, Qt::WindowFlags f)
+SplitDialog::SplitDialog(const MyMoneyAccount& account, const MyMoneySecurity& commodity, const MyMoneyMoney& amount, NewTransactionEditor* parent, Qt::WindowFlags f)
   : QDialog(parent, f)
   , d(new Private(this))
 {
@@ -116,6 +116,7 @@ SplitDialog::SplitDialog(const MyMoneyAccount& account, const MyMoneyMoney& amou
 
   d->ui->splitView->setSelectionMode(QAbstractItemView::ExtendedSelection);
   d->ui->splitView->setSelectionBehavior(QAbstractItemView::SelectRows);
+  d->ui->splitView->setCommodity(commodity);
 
   d->ui->okButton->setIcon(Icons::get(Icon::DialogOK));
   d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
@@ -224,14 +225,13 @@ void SplitDialog::adjustSummary()
   for(int row = 0; row < d->ui->splitView->model()->rowCount(); ++row) {
     QModelIndex index = d->ui->splitView->model()->index(row, 0);
     if(index.isValid()) {
-      d->splitsTotal += d->ui->splitView->model()->data(index, (int)eLedgerModel::Role::SplitValue).value<MyMoneyMoney>();
+      d->splitsTotal += index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
     }
   }
   QString formattedValue = d->splitsTotal.formatMoney(d->account.fraction());
   d->ui->summaryView->item(SumRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
 
   if(d->transactionEditor) {
-    d->transactionTotal = d->transactionEditor->transactionAmount();
     formattedValue = d->transactionTotal.formatMoney(d->account.fraction());
     d->ui->summaryView->item(AmountRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
     if((d->transactionTotal - d->splitsTotal).isNegative()) {

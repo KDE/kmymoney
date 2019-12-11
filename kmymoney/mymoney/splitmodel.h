@@ -56,11 +56,16 @@ public:
   QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;
   Qt::ItemFlags flags(const QModelIndex & index) const override;
 
+  bool setData(const QModelIndex& idx, const QVariant& value, int role = Qt::EditRole) override;
+
   void appendSplit(const MyMoneySplit& s);
   void appendEmptySplit();
+  void removeEmptySplit();
 
   static QString newSplitId();
   static bool isNewSplitId(const QString& id);
+
+  SplitModel& operator= (const SplitModel& right);
 
 private:
   struct Private;

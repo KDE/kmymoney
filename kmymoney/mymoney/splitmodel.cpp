@@ -31,6 +31,9 @@
 // Project Includes
 
 #include "mymoneyenums.h"
+#include "mymoneyfile.h"
+#include "accountsmodel.h"
+#include "mymoneymoney.h"
 
 struct SplitModel::Private
 {
@@ -42,6 +45,18 @@ struct SplitModel::Private
     { Amount, i18nc("Split header", "Amount") },
   }))
   {
+  }
+
+  void copyFrom(const SplitModel& right)
+  {
+    q->unload();
+    headerData = right.d->headerData;
+    const auto rows = right.rowCount();
+    for (int row = 0; row < rows; ++row) {
+      const auto idx = right.index(row, 0);
+      const auto split = right.itemByIndex(idx);
+      q->appendSplit(split);
+    }
   }
 
   SplitModel*   q;
@@ -58,13 +73,13 @@ SplitModel::SplitModel(QObject* parent, QUndoStack* undoStack, const SplitModel&
   : MyMoneyModel<MyMoneySplit>(parent, QStringLiteral("S"), 4, undoStack)
   , d(new Private(this))
 {
-  d->headerData = right.d->headerData;
-  const auto rows = right.rowCount();
-  for (int row = 0; row < rows; ++row) {
-    const auto idx = right.index(row, 0);
-    const auto split = right.itemByIndex(idx);
-    appendSplit(split);
-  }
+  d->copyFrom(right);
+}
+
+SplitModel& SplitModel::operator=(const SplitModel& right)
+{
+  d->copyFrom(right);
+  return *this;
 }
 
 SplitModel::~SplitModel()
@@ -110,7 +125,7 @@ QVariant SplitModel::headerData(int section, Qt::Orientation orientation, int ro
 Qt::ItemFlags SplitModel::flags(const QModelIndex& index) const
 {
   Q_UNUSED(index);
-  return (Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  return (Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable);
 }
 
 QVariant SplitModel::data(const QModelIndex& idx, int role) const
@@ -125,13 +140,116 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
     case Qt::DisplayRole:
     case Qt::EditRole:
       switch(idx.column()) {
+        case Column::Category:
+          return MyMoneyFile::instance()->accountsModel()->itemById(split.accountId()).name();
+
+        case Column::Memo:
+          {
+            QString rc(split.memo());
+            // remove empty lines
+            rc.replace("\n\n", "\n");
+            // replace '\n' with ", "
+            rc.replace('\n', ", ");
+            return rc;
+          }
+
+        case Column::Amount:
+          if (!split.id().isEmpty()) {
+            return split.value().formatMoney(100);
+          }
+          return {};
+
         default:
           break;
       }
       break;
 
+    case Qt::TextAlignmentRole:
+      switch (idx.column()) {
+        case Amount:
+          return QVariant(Qt::AlignRight | Qt::AlignTop);
+
+        default:
+          break;
+      }
+      return QVariant(Qt::AlignLeft | Qt::AlignTop);
+
+    case eMyMoney::Model::IdRole:
+      return split.id();
+
+    case eMyMoney::Model::SplitMemoRole:
+      return split.memo();
+
+    case eMyMoney::Model::SplitAccountIdRole:
+      return split.accountId();
+
+    case eMyMoney::Model::SplitSharesRole:
+      return QVariant::fromValue<MyMoneyMoney>(split.shares());
+
+    case eMyMoney::Model::SplitValueRole:
+      return QVariant::fromValue<MyMoneyMoney>(split.value());
+
+    case eMyMoney::Model::SplitCostCenterIdRole:
+      return split.costCenterId();
+
+    case eMyMoney::Model::SplitNumberRole:
+      return split.number();
+
+    default:
+      break;
   }
   return {};
+}
+
+bool SplitModel::setData(const QModelIndex& idx, const QVariant& value, int role)
+{
+  if(!idx.isValid()) {
+    return false;
+  }
+  if (idx.row() < 0 || idx.row() >= rowCount(idx.parent())) {
+    return false;
+  }
+
+  const auto startIdx = idx.model()->index(idx.row(), 0);
+  const auto endIdx = idx.model()->index(idx.row(), idx.model()->columnCount()-1);
+  MyMoneySplit& split = static_cast<TreeItem<MyMoneySplit>*>(idx.internalPointer())->dataRef();
+  switch(role) {
+    case Qt::DisplayRole:
+    case Qt::EditRole:
+      break;
+
+    case eMyMoney::Model::SplitNumberRole:
+      split.setNumber(value.toString());
+      emit dataChanged(startIdx, endIdx);
+      return true;
+
+    case eMyMoney::Model::SplitMemoRole:
+      split.setMemo(value.toString());
+      emit dataChanged(startIdx, endIdx);
+      return true;
+
+    case eMyMoney::Model::SplitAccountIdRole:
+      split.setAccountId(value.toString());
+      emit dataChanged(startIdx, endIdx);
+      return true;
+
+    case eMyMoney::Model::SplitCostCenterIdRole:
+      split.setCostCenterId(value.toString());
+      emit dataChanged(startIdx, endIdx);
+      return true;
+
+    case eMyMoney::Model::SplitSharesRole:
+      split.setShares(value.value<MyMoneyMoney>());
+      emit dataChanged(startIdx, endIdx);
+      return true;
+
+    case eMyMoney::Model::SplitValueRole:
+      split.setValue(value.value<MyMoneyMoney>());
+      emit dataChanged(startIdx, endIdx);
+      return true;
+
+  }
+  return QAbstractItemModel::setData(idx, value, role);
 }
 
 void SplitModel::appendSplit(const MyMoneySplit& split)
@@ -141,8 +259,16 @@ void SplitModel::appendSplit(const MyMoneySplit& split)
 
 void SplitModel::appendEmptySplit()
 {
-  QModelIndexList list = match(index(0, 0), eMyMoney::Model::IdRole, QString(), -1, Qt::MatchExactly);
-  if(list.count() == 0) {
+  const QModelIndexList list = match(index(0, 0), eMyMoney::Model::IdRole, QString(), -1, Qt::MatchExactly);
+  if(list.isEmpty()) {
     doAddItem(MyMoneySplit());
+  }
+}
+
+void SplitModel::removeEmptySplit()
+{
+  const QModelIndexList list = match(index(0, 0), eMyMoney::Model::IdRole, QString(), -1, Qt::MatchExactly);
+  if(!list.isEmpty()) {
+    removeRow(list.first().row(), list.first().parent());
   }
 }

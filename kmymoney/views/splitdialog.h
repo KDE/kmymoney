@@ -34,13 +34,14 @@
 
 class QAbstractItemModel;
 class MyMoneyAccount;
+class MyMoneySecurity;
 class NewTransactionEditor;
 
 class SplitDialog : public QDialog
 {
   Q_OBJECT
 public:
-  explicit SplitDialog(const MyMoneyAccount& account, const MyMoneyMoney& mainAmount, NewTransactionEditor* parent, Qt::WindowFlags f = 0);
+  explicit SplitDialog(const MyMoneyAccount& account, const MyMoneySecurity& commodity, const MyMoneyMoney& mainAmount, NewTransactionEditor* parent, Qt::WindowFlags f = 0);
   virtual ~SplitDialog();
 
 

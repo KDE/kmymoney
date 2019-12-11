@@ -24,8 +24,8 @@
 #include <QCompleter>
 #include <QSortFilterProxyModel>
 #include <QStringList>
+#include <QDate>
 #include <QDebug>
-#include <QStandardItemModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -47,36 +47,35 @@
 #include "mymoneyexception.h"
 #include "ui_newspliteditor.h"
 #include "widgethintframe.h"
-#include "ledgerview.h"
+#include "splitview.h"
 #include "icons/icons.h"
 #include "mymoneyenums.h"
 #include "modelenums.h"
+#include "mymoneysecurity.h"
+#include "kcurrencycalculator.h"
 
 using namespace Icons;
 
 struct NewSplitEditor::Private
 {
   Private(NewSplitEditor* parent)
-  : ui(new Ui_NewSplitEditor)
+  : q(parent)
+  , ui(new Ui_NewSplitEditor)
   , accountsModel(new AccountNamesFilterProxyModel(parent))
   , costCenterModel(new QSortFilterProxyModel(parent))
   , splitModel(0)
   , accepted(false)
   , costCenterRequired(false)
   , showValuesInverted(false)
+  , haveShares(false)
+  , postDate(QDate::currentDate())
   , amountHelper(nullptr)
   {
     accountsModel->setObjectName("AccountNamesFilterProxyModel");
     costCenterModel->setObjectName("SortedCostCenterModel");
-    statusModel.setObjectName("StatusModel");
 
     costCenterModel->setSortLocaleAware(true);
     costCenterModel->setSortCaseSensitivity(Qt::CaseInsensitive);
-
-    createStatusEntry(eMyMoney::Split::State::NotReconciled);
-    createStatusEntry(eMyMoney::Split::State::Cleared);
-    createStatusEntry(eMyMoney::Split::State::Reconciled);
-    // createStatusEntry(eMyMoney::Split::State::Frozen);
   }
 
   ~Private()
@@ -84,7 +83,6 @@ struct NewSplitEditor::Private
     delete ui;
   }
 
-  void createStatusEntry(eMyMoney::Split::State status);
   bool checkForValidSplit(bool doUserInteraction = true);
 
   bool costCenterChanged(int costCenterIndex);
@@ -92,6 +90,9 @@ struct NewSplitEditor::Private
   bool numberChanged(const QString& newNumber);
   bool amountChanged(CreditDebitHelper* valueHelper);
 
+  void checkMultiCurrency();
+
+  NewSplitEditor*               q;
   Ui_NewSplitEditor*            ui;
   AccountNamesFilterProxyModel* accountsModel;
   QSortFilterProxyModel*        costCenterModel;
@@ -99,19 +100,16 @@ struct NewSplitEditor::Private
   bool                          accepted;
   bool                          costCenterRequired;
   bool                          showValuesInverted;
-  QStandardItemModel            statusModel;
+  bool                          haveShares;
   QString                       transactionSplitId;
   MyMoneyAccount                counterAccount;
   MyMoneyAccount                category;
+  MyMoneySecurity               commodity;
+  MyMoneyMoney                  shares;
+  MyMoneyMoney                  price;
+  QDate                         postDate;
   CreditDebitHelper*            amountHelper;
 };
-
-void NewSplitEditor::Private::createStatusEntry(eMyMoney::Split::State status)
-{
-  QStandardItem* p = new QStandardItem(KMyMoneyUtils::reconcileStateToString(status, true));
-  p->setData((int)status);
-  statusModel.appendRow(p);
-}
 
 bool NewSplitEditor::Private::checkForValidSplit(bool doUserInteraction)
 {
@@ -155,6 +153,8 @@ bool NewSplitEditor::Private::categoryChanged(const QString& accountId)
       ui->numberEdit->setDisabled(isIncomeExpense);
       ui->numberLabel->setDisabled(isIncomeExpense);
 
+      checkMultiCurrency();
+
       costCenterRequired = category.isCostCenterRequired();
       rc &= costCenterChanged(ui->costCenterCombo->currentIndex());
     } catch (MyMoneyException &e) {
@@ -193,17 +193,49 @@ bool NewSplitEditor::Private::numberChanged(const QString& newNumber)
 bool NewSplitEditor::Private::amountChanged(CreditDebitHelper* valueHelper)
 {
   Q_UNUSED(valueHelper);
+  if (valueHelper->haveValue()) {
+
+  } else {
+
+  }
   bool rc = true;
+  checkMultiCurrency();
   return rc;
 }
 
+void NewSplitEditor::Private::checkMultiCurrency()
+{
+  const auto categoryId = q->accountId();
+  auto const model = MyMoneyFile::instance()->accountsModel();
+  auto account = model->itemById(categoryId);
+  auto security = MyMoneyFile::instance()->security(account.currencyId());
+  if (security.id() != commodity.id()) {
+    QPointer<KCurrencyCalculator> calc =
+    new KCurrencyCalculator(commodity,
+                            security,
+                            q->value(),
+                            q->value() * price,
+                            postDate,
+                            security.smallestAccountFraction(),
+                            q);
+
+    if (calc->exec() == QDialog::Accepted && calc) {
+      price = calc->price();
+    }
+    delete calc;
+
+  } else {
+    price = MyMoneyMoney::ONE;
+  }
+  shares = q->value() * price;
+}
 
 
 NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
   : QFrame(parent, Qt::FramelessWindowHint /* | Qt::X11BypassWindowManagerHint */)
   , d(new Private(this))
 {
-  auto view = qobject_cast<LedgerView*>(parent->parentWidget());
+  auto view = qobject_cast<SplitView*>(parent->parentWidget());
   Q_ASSERT(view != 0);
   d->splitModel = qobject_cast<SplitModel*>(view->model());
 
@@ -247,6 +279,16 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
 
 NewSplitEditor::~NewSplitEditor()
 {
+}
+
+void NewSplitEditor::setCommodity(const MyMoneySecurity& commodity)
+{
+  d->commodity = commodity;
+}
+
+void NewSplitEditor::setPostDate(const QDate& date)
+{
+  d->postDate = date;
 }
 
 void NewSplitEditor::setShowValuesInverted(bool inverse)
@@ -315,6 +357,7 @@ QString NewSplitEditor::accountId() const
 
 void NewSplitEditor::setAccountId(const QString& id)
 {
+  QSignalBlocker block(d->ui->accountCombo);
   d->ui->accountCombo->clearEditText();
   d->ui->accountCombo->setSelected(id);
 }
@@ -330,15 +373,33 @@ void NewSplitEditor::setMemo(const QString& memo)
   d->ui->memoEdit->setPlainText(memo);
 }
 
-MyMoneyMoney NewSplitEditor::amount() const
+MyMoneyMoney NewSplitEditor::shares() const
+{
+  return d->shares;
+}
+
+void NewSplitEditor::setShares(const MyMoneyMoney& shares)
+{
+  d->shares = shares;
+  d->haveShares = true;
+}
+
+MyMoneyMoney NewSplitEditor::value() const
 {
   return d->amountHelper->value();
 }
 
-void NewSplitEditor::setAmount(MyMoneyMoney value)
+void NewSplitEditor::setValue(const MyMoneyMoney& value)
 {
+  d->price = MyMoneyMoney::ONE;
+  if (!d->haveShares) {
+    qDebug() << "NewSplitEditor::setValue(): call to setShares() missing, price invalid";
+  } else if (!(d->shares.isZero() || value.isZero())) {
+    d->price = d->shares/value;
+  }
   d->amountHelper->setValue(value);
 }
+
 
 QString NewSplitEditor::costCenterId() const
 {
@@ -350,9 +411,11 @@ QString NewSplitEditor::costCenterId() const
 void NewSplitEditor::setCostCenterId(const QString& id)
 {
   const auto baseIdx = MyMoneyFile::instance()->costCenterModel()->indexById(id);
-  const auto index = CostCenterModel::mapFromBaseSource(d->costCenterModel, baseIdx);
-  if(index.isValid()) {
-    d->ui->costCenterCombo->setCurrentIndex(index.row());
+  if (baseIdx.isValid()) {
+    const auto index = CostCenterModel::mapFromBaseSource(d->costCenterModel, baseIdx);
+    if(index.isValid()) {
+      d->ui->costCenterCombo->setCurrentIndex(index.row());
+    }
   }
 }
 
@@ -389,5 +452,5 @@ void NewSplitEditor::costCenterChanged(int costCenterIndex)
 
 void NewSplitEditor::amountChanged()
 {
-//  d->amountChanged(d->amountHelper); // useless call as reported by coverity scan
+  d->amountChanged(d->amountHelper);
 }

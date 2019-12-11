@@ -29,6 +29,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+class MyMoneySecurity;
+
 class SplitDelegate : public QStyledItemDelegate
 {
   Q_OBJECT
@@ -52,6 +54,8 @@ public:
 
   void setShowValuesInverted(bool inverse);
   bool showValuesInverted();
+
+  void setCommodity(const MyMoneySecurity& commodity);
 
   static void setErroneousColor(const QColor& color);
   static void setImportedColor(const QColor& color);

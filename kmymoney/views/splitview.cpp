@@ -29,7 +29,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -42,12 +41,14 @@
 #include "columnselector.h"
 #include "mymoneyenums.h"
 #include "splitdelegate.h"
+#include "mymoneysecurity.h"
 
 class SplitView::Private
 {
 public:
   Private(SplitView* p)
   : q(p)
+  , splitDelegate(nullptr)
   , adjustableColumn(SplitModel::Column::Memo)
   , adjustingColumn(false)
   , showValuesInverted(false)
@@ -55,7 +56,6 @@ public:
   , newTransactionPresent(false)
   , columnSelector(nullptr)
   {
-    q->setItemDelegate(new SplitDelegate(q));
   }
 
   void setSingleLineDetailRole(eMyMoney::Model::Roles role)
@@ -69,6 +69,7 @@ public:
   }
 
   SplitView*                      q;
+  SplitDelegate*                  splitDelegate;
   MyMoneyAccount                  account;
   int                             adjustableColumn;
   bool                            adjustingColumn;
@@ -113,6 +114,9 @@ SplitView::SplitView(QWidget* parent)
 
   setTabKeyNavigation(false);
 
+  d->splitDelegate = new SplitDelegate(this);
+  setItemDelegate(d->splitDelegate);
+
   d->columnSelector = new ColumnSelector(this, QStringLiteral("SplitEditor"));
 }
 
@@ -126,8 +130,13 @@ void SplitView::setModel(QAbstractItemModel* model)
   QTableView::setModel(model);
 
   d->columnSelector->setModel(model);
-  // horizontalHeader()->setSectionResizeMode(SplitModel::Column::Memo, QHeaderView::Interactive);
-  // horizontalHeader()->setSectionResizeMode(SplitModel::Column::Memo, QHeaderView::ResizeToContents);
+}
+
+void SplitView::setCommodity(const MyMoneySecurity& commodity)
+{
+  if (d->splitDelegate) {
+    d->splitDelegate->setCommodity(commodity);
+  }
 }
 
 bool SplitView::showValuesInverted() const

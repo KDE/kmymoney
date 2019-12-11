@@ -58,6 +58,7 @@
 #include "modelenums.h"
 #include "mymoneyenums.h"
 #include "mymoneypayee.h"
+#include "mymoneysecurity.h"
 
 using namespace Icons;
 
@@ -572,24 +573,53 @@ void NewTransactionEditor::valueChanged()
 
 void NewTransactionEditor::editSplits()
 {
+  auto transactionFactor(MyMoneyMoney::ONE);
+
   SplitModel splitModel(this, nullptr, d->splitModel);
 
+  auto invertSplitValues = [&]() -> void {
+    const auto rows = splitModel.rowCount();
+    MyMoneyMoney v;
+    for (int row = 0; row < rows; ++row) {
+      auto idx = splitModel.index(row, 0);
+      v = idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+      splitModel.setData(idx, QVariant::fromValue<MyMoneyMoney>(-v), eMyMoney::Model::SplitSharesRole);
+      v = idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
+      splitModel.setData(idx, QVariant::fromValue<MyMoneyMoney>(-v), eMyMoney::Model::SplitValueRole);
+    }
+  };
+
+  if (d->amountHelper->value().isNegative()) {
+    transactionFactor = MyMoneyMoney::MINUS_ONE;
+  } else {
+    invertSplitValues();
+  }
+
   // create an empty split at the end
+  // used to create new splits
   splitModel.appendEmptySplit();
 
-  QPointer<SplitDialog> splitDialog = new SplitDialog(d->m_account, transactionAmount(), this);
+  auto commodityId = d->transaction.commodity();
+  if (commodityId.isEmpty())
+    commodityId = d->m_account.currencyId();
+  const auto commodity = MyMoneyFile::instance()->security(commodityId);
+
+  QPointer<SplitDialog> splitDialog = new SplitDialog(d->m_account, commodity, transactionAmount() * transactionFactor, this);
   splitDialog->setModel(&splitModel);
 
   int rc = splitDialog->exec();
 
   if(splitDialog && (rc == QDialog::Accepted)) {
-#if 0
-
     // remove that empty split again before we update the splits
-    splitModel.removeEmptySplitEntry();
+    splitModel.removeEmptySplit();
+
+    // invert splits
+    if (!transactionFactor.isNegative()) {
+      invertSplitValues();
+    }
 
     // copy the splits model contents
-    d->splitModel.deepCopy(splitModel, true);
+    d->splitModel = splitModel;
 
     // update the transaction amount
     d->amountHelper->setValue(splitDialog->transactionAmount());
@@ -600,7 +630,6 @@ void NewTransactionEditor::editSplits()
       next = d->ui->costCenterCombo;
     }
     next->setFocus();
-#endif
   }
 
   if(splitDialog) {
@@ -626,14 +655,15 @@ void NewTransactionEditor::saveTransaction()
   }
 
   // first remove the splits that are gone
-  foreach (const auto split, t.splits()) {
+  for (const auto& split : t.splits()) {
     if(split.id() == d->split.id()) {
       continue;
     }
+    const auto rows = d->splitModel.rowCount();
     int row;
-    for(row = 0; row < d->splitModel.rowCount(); ++row) {
+    for(row = 0; row < rows; ++row) {
       QModelIndex index = d->splitModel.index(row, 0);
-      if(d->splitModel.data(index, (int)eLedgerModel::Role::SplitId).toString() == split.id()) {
+      if(d->splitModel.data(index, eMyMoney::Model::IdRole).toString() == split.id()) {
         break;
       }
     }

@@ -33,6 +33,7 @@
 #include "mymoneyenums.h"
 
 class MyMoneyAccount;
+class MyMoneySecurity;
 
 class SplitView : public QTableView
 {
@@ -60,6 +61,8 @@ public:
   void setColumnsShown(QVector<int> columns);
 
   void setModel(QAbstractItemModel * model) override;
+
+  void setCommodity(const MyMoneySecurity& commodity);
 
   void selectMostRecentTransaction();
 

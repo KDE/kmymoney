@@ -33,6 +33,7 @@ class QWidget;
 // Project Includes
 
 #include "mymoneymoney.h"
+class MyMoneySecurity;
 
 class NewSplitEditor : public QFrame
 {
@@ -53,6 +54,9 @@ public:
 
   void setShowValuesInverted(bool inverse);
   bool showValuesInverted();
+
+  void setCommodity(const MyMoneySecurity& commodity);
+  void setPostDate(const QDate& date);
 
 protected:
   void keyPressEvent(QKeyEvent* e) final override;
@@ -76,8 +80,11 @@ public Q_SLOTS:
   QString memo() const;
   void setMemo(const QString& memo);
 
-  MyMoneyMoney amount() const;
-  void setAmount(MyMoneyMoney value);
+  MyMoneyMoney shares() const;
+  void setShares(const MyMoneyMoney& shares);
+
+  MyMoneyMoney value() const;
+  void setValue(const MyMoneyMoney& value);
 
   QString costCenterId() const;
   void setCostCenterId(const QString& id);
