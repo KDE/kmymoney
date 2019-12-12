@@ -79,6 +79,7 @@
     <p xml:lang="de">KMyMoney ist eine persönliche Finanzverwaltung von KDE mit vielen Funktionen, aber trotzdem leicht zu bedienen.</p>
     <p xml:lang="en-GB">KMyMoney is a personal finance manager by KDE. It comes with a large set of features while being easy to use for the non-technical user.</p>
     <p xml:lang="es">KMyMoney es un gestor de finanzas personales creado por KDE. Contiene un gran número de funciones, aunque es fácil de usar para los usuarios no técnicos.</p>
+    <p xml:lang="et">KMyMoney on KDE isiklike rahaasjade haldur. See pakub rohkelt võimalusi, kuid on lihtne kasutada ka tehnoloogiavõõrale inimesele.</p>
     <p xml:lang="eu">KMyMoney KDEren finantza pertsonalen kudeatzailea da. Eginbide sorta luze batekin dator erabiltzaile ez teknikorako erabilterrazak direnak.</p>
     <p xml:lang="fi">KMyMoney on KDE:n henkilökohtainen taloudenhallintaohjelma. Siinä on monia ominaisuuksia, mutta se on silti helppo myös ei-tekniselle käyttäjälle.</p>
     <p xml:lang="fr">KMyMoney est un gestionnaire de finances personnelles par KDE. Il dispose d'un ensemble de fonctionnalités complètes tout en restant simple d'utilisation pour les utilisateurs peu techniques.</p>
@@ -194,6 +195,7 @@
       <caption xml:lang="de">Verwaltung von Konten nach den zugehörigen Institutionen</caption>
       <caption xml:lang="en-GB">Manage accounts e.g. by institutions they are held at</caption>
       <caption xml:lang="es">Gestionar cuentas (por ejemplo, por las instituciones donde están depositadas)</caption>
+      <caption xml:lang="et">Kontode haldamine näiteks rahaasutuste kaupa, millele nad kuuluvad</caption>
       <caption xml:lang="eu">Kudeatu kontuan dauden erakundeen arabera</caption>
       <caption xml:lang="fi">Hallitse tilejäsi esim. rahalaitoksittain</caption>
       <caption xml:lang="fr">Gestion des comptes, par exemple en fonction des établissements dans lesquels ils sont détenus</caption>
