@@ -48,7 +48,7 @@ struct KMMPrintCheckPlugin::Private {
 };
 
 KMMPrintCheckPlugin::KMMPrintCheckPlugin(QObject *parent, const QVariantList&)
-    : KMyMoneyPlugin::Plugin(parent, "iCalendar"/*must be the same as X-KDE-PluginInfo-Name*/)
+    : KMyMoneyPlugin::Plugin(parent, "Print check"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
   // Tell the host application to load my GUI component
   setComponentData(PrintCheckFactory::componentData());
@@ -185,7 +185,7 @@ void KMMPrintCheckPlugin::slotTransactionsSelected(const KMyMoneyRegister::Selec
 // the plugin loader plugs in a plugin
 void KMMPrintCheckPlugin::slotPlug(KPluginInfo *info)
 {
-  if (info->name() == objectName()) {
+  if (info->pluginName() == objectName()) {
     connect(viewInterface(), SIGNAL(transactionsSelected(KMyMoneyRegister::SelectedTransactions)),
             this, SLOT(slotTransactionsSelected(KMyMoneyRegister::SelectedTransactions)));
   }
@@ -194,7 +194,7 @@ void KMMPrintCheckPlugin::slotPlug(KPluginInfo *info)
 // the plugin loader unplugs a plugin
 void KMMPrintCheckPlugin::slotUnplug(KPluginInfo *info)
 {
-  if (info->name() == objectName()) {
+  if (info->pluginName() == objectName()) {
     disconnect(viewInterface(), SIGNAL(transactionsSelected(KMyMoneyRegister::SelectedTransactions)),
                this, SLOT(slotTransactionsSelected(KMyMoneyRegister::SelectedTransactions)));
   }
