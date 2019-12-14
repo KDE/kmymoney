@@ -580,18 +580,12 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
                 d->ui->memoEdit->moveCursor(QTextCursor::Start);
                 d->ui->memoEdit->ensureCursorVisible();
 
-                // The calculator for the amount field can simply be added as an icon to the line edit widget.
-                // See https://stackoverflow.com/questions/11381865/how-to-make-an-extra-icon-in-qlineedit-like-this howto do it
                 d->ui->amountEditCredit->setText(splitIdx.data(eMyMoney::Model::JournalSplitPaymentRole).toString());
                 d->ui->amountEditDebit->setText(splitIdx.data(eMyMoney::Model::JournalSplitDepositRole).toString());
 
                 d->ui->numberEdit->setText(splitIdx.data(eMyMoney::Model::SplitNumberRole).toString());
-                d->ui->statusCombo->setCurrentIndex(0); // default is not reconciled
 
-                const QModelIndexList stList = statusModel->match(statusModel->index(0, 0), eMyMoney::Model::SplitReconcileFlagRole, splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).toInt());
-                if (!stList.isEmpty()) {
-                    d->ui->statusCombo->setCurrentIndex(stList.front().row());
-                }
+                d->ui->statusCombo->setCurrentIndex(splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).toInt());
             } else {
                 d->splitModel.appendSplit(MyMoneyFile::instance()->journalModel()->itemByIndex(splitIdx).split());
                 if (splitIdx.data(eMyMoney::Model::TransactionSplitCountRole) == 2) {
