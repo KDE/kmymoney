@@ -33,6 +33,7 @@
 // KDE Includes
 
 #include <KLocalizedString>
+#include <KConcatenateRowsProxyModel>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -105,6 +106,7 @@ public:
 
     bool postdateChanged(const QDate& date);
     bool costCenterChanged(int costCenterIndex);
+    bool payeeChanged(int payeeIndex);
     bool categoryChanged(const QString& accountId);
     bool numberChanged(const QString& newNumber);
     bool valueChanged(CreditDebitHelper* valueHelper);
@@ -276,6 +278,7 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
 
             rc &= costCenterChanged(ui->costCenterCombo->currentIndex());
             rc &= postdateChanged(ui->dateEdit->date());
+            payeeChanged(ui->payeeEdit->currentIndex());
 
             if (amountHelper->haveValue()) {
                 splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), eMyMoney::Model::SplitValueRole);
@@ -371,12 +374,23 @@ bool NewTransactionEditor::Private::valueChanged(CreditDebitHelper* valueHelper)
     return rc;
 }
 
+bool NewTransactionEditor::Private::payeeChanged(int payeeIndex)
+{
+    // copy payee information to second split if there are only two splits
+    if (splitModel.rowCount() == 1) {
+        const auto idx = splitModel.index(0, 0);
+        const auto payeeId = payeesModel->index(payeeIndex, 0).data(eMyMoney::Model::IdRole).toString();
+        splitModel.setData(idx, payeeId, eMyMoney::Model::SplitPayeeIdRole);
+    }
+    return true;
+}
 
 NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accountId)
     : QFrame(parent, Qt::FramelessWindowHint /* | Qt::X11BypassWindowManagerHint */)
     , d(new Private(this))
 {
-    auto const model = MyMoneyFile::instance()->accountsModel();
+    auto const file = MyMoneyFile::instance();
+    auto const model = file->accountsModel();
     // extract account information from model
     const auto index = model->indexById(accountId);
     d->m_account = model->itemByIndex(index);
@@ -390,7 +404,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     d->ui->accountCombo->setModel(d->accountsModel);
 
     d->costCenterModel->setSortRole(Qt::DisplayRole);
-    d->costCenterModel->setSourceModel(MyMoneyFile::instance()->costCenterModel());
+    d->costCenterModel->setSourceModel(file->costCenterModel());
     d->costCenterModel->sort(0);
 
     d->ui->costCenterCombo->setEditable(true);
@@ -398,8 +412,11 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     d->ui->costCenterCombo->setModelColumn(0);
     d->ui->costCenterCombo->completer()->setFilterMode(Qt::MatchContains);
 
+    auto concatModel = new KConcatenateRowsProxyModel(parent);
+    concatModel->addSourceModel(file->payeesModel()->emptyPayee());
+    concatModel->addSourceModel(file->payeesModel());
     d->payeesModel->setSortRole(Qt::DisplayRole);
-    d->payeesModel->setSourceModel(MyMoneyFile::instance()->payeesModel());
+    d->payeesModel->setSourceModel(concatModel);
     d->payeesModel->sort(0);
 
     d->ui->payeeEdit->setEditable(true);
@@ -430,6 +447,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     connect(d->ui->accountCombo, SIGNAL(accountSelected(QString)), this, SLOT(categoryChanged(QString)));
     connect(d->ui->dateEdit, SIGNAL(dateChanged(QDate)), this, SLOT(postdateChanged(QDate)));
     connect(d->amountHelper, SIGNAL(valueChanged()), this, SLOT(valueChanged()));
+    connect(d->ui->payeeEdit, SIGNAL(currentIndexChanged(int)), this, SLOT(payeeChanged(int)));
 
     connect(d->ui->cancelButton, SIGNAL(clicked(bool)), this, SLOT(reject()));
     connect(d->ui->enterButton, SIGNAL(clicked(bool)), this, SLOT(acceptEdit()));
@@ -537,7 +555,10 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
 
                 const auto payeeId = splitIdx.data(eMyMoney::Model::SplitPayeeIdRole).toString();
                 const QModelIndex payeeIdx = MyMoneyFile::instance()->payeesModel()->indexById(payeeId);
-                d->ui->payeeEdit->setCurrentIndex(d->payeesModel->mapFromSource(payeeIdx).row());
+                if (payeeIdx.isValid())
+                    d->ui->payeeEdit->setCurrentIndex(d->payeesModel->mapFromSource(payeeIdx).row());
+                else
+                    d->ui->payeeEdit->setCurrentIndex(0);
 
                 bool blocked = d->ui->accountCombo->blockSignals(true);
                 switch (splitIdx.data(eMyMoney::Model::TransactionSplitCountRole).toInt()) {
@@ -611,6 +632,11 @@ void NewTransactionEditor::postdateChanged(const QDate& date)
 void NewTransactionEditor::valueChanged()
 {
     d->valueChanged(d->amountHelper);
+}
+
+void NewTransactionEditor::payeeChanged(int payeeIndex)
+{
+    d->payeeChanged(payeeIndex);
 }
 
 void NewTransactionEditor::editSplits()
@@ -732,8 +758,11 @@ void NewTransactionEditor::saveTransaction()
             sp.setReconcileDate(QDate::currentDate());
         }
         sp.setReconcileFlag(static_cast<eMyMoney::Split::State>(d->ui->statusCombo->currentIndex()));
-        /// @fixme set the payee
-        // sp.setPayeeId(d->ui->payeeEdit->cu)
+
+        const auto payeeRow = d->ui->payeeEdit->currentIndex();
+        const auto payeeIdx = d->payeesModel->index(payeeRow, 0);
+        sp.setPayeeId(payeeIdx.data(eMyMoney::Model::IdRole).toString());
+
         if (sp.id().isEmpty()) {
             t.addSplit(sp);
         } else {

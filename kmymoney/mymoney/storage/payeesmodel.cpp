@@ -37,14 +37,45 @@
 
 struct PayeesModel::Private
 {
-  Private()
+  Private(PayeesModel* parent)
+  : q(parent)
+  , emptyPayeeModel(nullptr)
   {}
 
+  PayeesModel*            q;
+  PayeesModelEmptyPayee*  emptyPayeeModel;
 };
+
+PayeesModelEmptyPayee::PayeesModelEmptyPayee(QObject* parent)
+  : PayeesModel(parent)
+{
+  setObjectName(QLatin1String("PayeesModelEmptyPayee"));
+  QMap<QString, MyMoneyPayee> list;
+  list[QString()] = MyMoneyPayee();
+  PayeesModel::load(list);
+}
+
+PayeesModelEmptyPayee::~PayeesModelEmptyPayee()
+{
+}
+
+QVariant PayeesModelEmptyPayee::data(const QModelIndex& idx, int role) const
+{
+  if (!idx.isValid())
+    return QVariant();
+  if (idx.row() < 0 || idx.row() >= rowCount(idx.parent()))
+    return QVariant();
+
+  // never show any data for the empty payee
+  if ((role == Qt::DisplayRole) || (role == Qt::EditRole))
+    return QString();
+
+  return PayeesModel::data(idx, role);
+}
 
 PayeesModel::PayeesModel(QObject* parent, QUndoStack* undoStack)
   : MyMoneyModel<MyMoneyPayee>(parent, QStringLiteral("P"), PayeesModel::ID_SIZE, undoStack)
-  , d(new Private)
+  , d(new Private(this))
 {
   setObjectName(QLatin1String("PayeesModel"));
 }
@@ -52,6 +83,15 @@ PayeesModel::PayeesModel(QObject* parent, QUndoStack* undoStack)
 PayeesModel::~PayeesModel()
 {
 }
+
+PayeesModelEmptyPayee* PayeesModel::emptyPayee()
+{
+  if (d->emptyPayeeModel == nullptr) {
+    d->emptyPayeeModel = new PayeesModelEmptyPayee(this);
+  }
+  return d->emptyPayeeModel;
+}
+
 
 int PayeesModel::columnCount(const QModelIndex& parent) const
 {

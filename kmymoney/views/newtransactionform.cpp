@@ -73,6 +73,7 @@ NewTransactionForm::~NewTransactionForm()
 
 void NewTransactionForm::rowsInserted(const QModelIndex& parent, int first, int last)
 {
+  Q_UNUSED(parent);
   if (first <= d->row) {
     d->row += last - first + 1;
   }
@@ -80,6 +81,7 @@ void NewTransactionForm::rowsInserted(const QModelIndex& parent, int first, int 
 
 void NewTransactionForm::rowsRemoved(const QModelIndex& parent, int first, int last)
 {
+  Q_UNUSED(parent);
   if (first <= d->row) {
     d->row -= last - first + 1;
   }

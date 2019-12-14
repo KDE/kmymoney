@@ -195,6 +195,9 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::SplitNumberRole:
       return split.number();
 
+    case eMyMoney::Model::SplitPayeeIdRole:
+      return split.payeeId();
+
     default:
       break;
   }
@@ -245,6 +248,11 @@ bool SplitModel::setData(const QModelIndex& idx, const QVariant& value, int role
 
     case eMyMoney::Model::SplitValueRole:
       split.setValue(value.value<MyMoneyMoney>());
+      emit dataChanged(startIdx, endIdx);
+      return true;
+
+    case eMyMoney::Model::SplitPayeeIdRole:
+      split.setPayeeId(value.toString());
       emit dataChanged(startIdx, endIdx);
       return true;
 

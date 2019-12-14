@@ -196,7 +196,7 @@ protected:
     return false;
   }
 
-  void load(const QMap<QString, MyMoneyTransaction>& list);
+  void load(const QMap<QString, MyMoneyTransaction>& list) { Q_UNUSED(list); };
 };
 #endif // JOURNALMODEL_H
 

@@ -31,6 +31,7 @@
 // KDE Includes
 
 #include <KLocalizedString>
+#include <KConcatenateRowsProxyModel>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -43,6 +44,7 @@
 #include "costcentermodel.h"
 #include "ledgermodel.h"
 #include "splitmodel.h"
+#include "payeesmodel.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
 #include "ui_newspliteditor.h"
@@ -62,6 +64,7 @@ struct NewSplitEditor::Private
   : q(parent)
   , ui(new Ui_NewSplitEditor)
   , accountsModel(new AccountNamesFilterProxyModel(parent))
+  , payeesModel(new QSortFilterProxyModel(parent))
   , costCenterModel(new QSortFilterProxyModel(parent))
   , splitModel(0)
   , accepted(false)
@@ -73,9 +76,13 @@ struct NewSplitEditor::Private
   {
     accountsModel->setObjectName("AccountNamesFilterProxyModel");
     costCenterModel->setObjectName("SortedCostCenterModel");
+    payeesModel->setObjectName("SortedPayeesModel");
 
     costCenterModel->setSortLocaleAware(true);
     costCenterModel->setSortCaseSensitivity(Qt::CaseInsensitive);
+
+    payeesModel->setSortLocaleAware(true);
+    payeesModel->setSortCaseSensitivity(Qt::CaseInsensitive);
   }
 
   ~Private()
@@ -95,13 +102,13 @@ struct NewSplitEditor::Private
   NewSplitEditor*               q;
   Ui_NewSplitEditor*            ui;
   AccountNamesFilterProxyModel* accountsModel;
+  QSortFilterProxyModel*        payeesModel;
   QSortFilterProxyModel*        costCenterModel;
   SplitModel*                   splitModel;
   bool                          accepted;
   bool                          costCenterRequired;
   bool                          showValuesInverted;
   bool                          haveShares;
-  QString                       transactionSplitId;
   MyMoneyAccount                counterAccount;
   MyMoneyAccount                category;
   MyMoneySecurity               commodity;
@@ -235,6 +242,7 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
   : QFrame(parent, Qt::FramelessWindowHint /* | Qt::X11BypassWindowManagerHint */)
   , d(new Private(this))
 {
+  auto const file = MyMoneyFile::instance();
   auto view = qobject_cast<SplitView*>(parent->parentWidget());
   Q_ASSERT(view != 0);
   d->splitModel = qobject_cast<SplitModel*>(view->model());
@@ -245,6 +253,18 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
   d->ui->setupUi(this);
   d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
   d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
+
+  auto concatModel = new KConcatenateRowsProxyModel(parent);
+  concatModel->addSourceModel(file->payeesModel()->emptyPayee());
+  concatModel->addSourceModel(file->payeesModel());
+  d->payeesModel->setSortRole(Qt::DisplayRole);
+  d->payeesModel->setSourceModel(concatModel);
+  d->payeesModel->sort(0);
+
+  d->ui->payeeEdit->setEditable(true);
+  d->ui->payeeEdit->setModel(d->payeesModel);
+  d->ui->payeeEdit->setModelColumn(0);
+  d->ui->payeeEdit->completer()->setFilterMode(Qt::MatchContains);
 
   d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity});
   d->accountsModel->setHideEquityAccounts(false);
@@ -430,10 +450,20 @@ void NewSplitEditor::setNumber(const QString& number)
   d->ui->numberEdit->setText(number);
 }
 
-
-QString NewSplitEditor::splitId() const
+QString NewSplitEditor::payeeId() const
 {
-  return d->transactionSplitId;
+  const auto idx = d->payeesModel->index(d->ui->payeeEdit->currentIndex(), 0);
+  return idx.data(eMyMoney::Model::IdRole).toString();
+}
+
+void NewSplitEditor::setPayeeId(const QString& id)
+{
+  QModelIndexList indexes = d->payeesModel->match(d->payeesModel->index(0, 0), eMyMoney::Model::IdRole, QVariant(id), 1, Qt::MatchFlags(Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive)));
+  int row(0);
+  if (!indexes.isEmpty()) {
+    row = indexes.first().row();
+  }
+  d->ui->payeeEdit->setCurrentIndex(row);
 }
 
 void NewSplitEditor::numberChanged(const QString& newNumber)

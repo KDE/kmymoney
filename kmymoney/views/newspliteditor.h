@@ -63,12 +63,6 @@ protected:
 
 public Q_SLOTS:
   /**
-   * This method returns the transaction split id passed
-   * to setSplitId().
-   */
-  QString splitId() const;
-
-  /**
    * Returns the id of the selected account in the category widget
    */
   QString accountId() const;
@@ -91,6 +85,9 @@ public Q_SLOTS:
 
   QString number() const;
   void setNumber(const QString& id);
+
+  QString payeeId() const;
+  void setPayeeId(const QString& id);
 
 protected Q_SLOTS:
   virtual void reject();
