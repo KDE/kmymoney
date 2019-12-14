@@ -231,15 +231,19 @@ void SplitView::currentChanged(const QModelIndex& current, const QModelIndex& pr
   QTableView::currentChanged(current, previous);
 
   if(current.isValid()) {
-    QModelIndex index = current.model()->index(current.row(), 0);
-    scrollTo(index, EnsureVisible);
-    QString id = index.data(eMyMoney::Model::IdRole).toString();
+    QModelIndex idx = current.model()->index(current.row(), 0);
+    QString id = idx.data(eMyMoney::Model::IdRole).toString();
     // For a new transaction the id is completely empty, for a split view the transaction
     // part is filled but the split id is empty and the string ends with a dash
     if(id.isEmpty() || id.endsWith('-')) {
-      edit(index);
+      selectionModel()->clearSelection();
+      setCurrentIndex(idx);
+      selectRow(idx.row());
+      scrollTo(idx, QAbstractItemView::PositionAtBottom);
+      edit(idx);
     } else {
-      emit transactionSelected(MyMoneyModelBase::mapToBaseSource(index));
+      scrollTo(idx, EnsureVisible);
+      emit transactionSelected(MyMoneyModelBase::mapToBaseSource(idx));
     }
     QMetaObject::invokeMethod(this, "doItemsLayout", Qt::QueuedConnection);
   }
