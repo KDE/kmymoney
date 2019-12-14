@@ -126,6 +126,7 @@ void KMMPrintCheckPlugin::slotPrintCheck()
     QString checkHTML = d->m_checkTemplateHTML;
     MyMoneySecurity currency = file->currency(file->account((*it).split().accountId()).currencyId());
     MyMoneyInstitution institution = file->institution(file->account((*it).split().accountId()).institutionId());
+    MyMoneyPayee payee = file->payee((*it).split().payeeId());
 
     // replace the predefined tokens
     // data about the user
@@ -141,14 +142,15 @@ void KMMPrintCheckPlugin::slotPrintCheck()
     checkHTML.replace("$INSTITUTION_CITY", institution.city());
     checkHTML.replace("$INSTITUTION_POSTCODE", institution.postcode());
     checkHTML.replace("$INSTITUTION_MANAGER", institution.manager());
+    // data about the payee
+    checkHTML.replace("$PAYEE_NAME", payee.name());
+    checkHTML.replace("$PAYEE_ADDRESS", payee.address());
+    checkHTML.replace("$PAYEE_CITY", payee.city());
+    checkHTML.replace("$PAYEE_POSTCODE", payee.postcode());
+    checkHTML.replace("$PAYEE_STATE", payee.state());
     // data about the transaction
     checkHTML.replace("$DATE", KGlobal::locale()->formatDate((*it).transaction().postDate(), KLocale::LongDate));
     checkHTML.replace("$CHECK_NUMBER", (*it).split().number());
-    checkHTML.replace("$PAYEE_NAME", file->payee((*it).split().payeeId()).name());
-    checkHTML.replace("$PAYEE_ADDRESS", file->payee((*it).split().payeeId()).address());
-    checkHTML.replace("$PAYEE_CITY", file->payee((*it).split().payeeId()).city());
-    checkHTML.replace("$PAYEE_POSTCODE", file->payee((*it).split().payeeId()).postcode());
-    checkHTML.replace("$PAYEE_STATE", file->payee((*it).split().payeeId()).state());
     checkHTML.replace("$AMOUNT_STRING", converter.convert((*it).split().shares().abs()));
     checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().shares().abs(), currency));
     checkHTML.replace("$MEMO", (*it).split().memo());
