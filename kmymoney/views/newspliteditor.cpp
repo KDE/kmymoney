@@ -330,6 +330,7 @@ void NewSplitEditor::keyPressEvent(QKeyEvent* e)
           reject();
         } else {
           if(d->ui->enterButton->isEnabled()) {
+            d->ui->enterButton->setFocus();
             d->ui->enterButton->click();
           }
           return;

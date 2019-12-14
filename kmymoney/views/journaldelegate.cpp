@@ -225,8 +225,7 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
       emit that->closeEditor(d->m_editor, NoHint);
 
     } else {
-      QString accountId = index.data(eMyMoney::Model::SplitAccountIdRole).toString();
-      d->m_editor = new NewTransactionEditor(parent, accountId);
+      d->m_editor = new NewTransactionEditor(parent, d->m_view->accountId());
     }
 
     if(d->m_editor) {
@@ -460,7 +459,6 @@ void JournalDelegate::setModelData(QWidget* editWidget, QAbstractItemModel* mode
 
   NewTransactionEditor* editor = qobject_cast<NewTransactionEditor*>(editWidget);
   if(editor) {
-    /// @todo port to new model code
-    // editor->saveTransaction();
+    editor->saveTransaction();
   }
 }

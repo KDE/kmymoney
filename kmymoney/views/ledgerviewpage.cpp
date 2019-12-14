@@ -146,19 +146,13 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
       d->ui->formWidget->setLayout(new QHBoxLayout(d->ui->formWidget));
     }
     d->ui->formWidget->layout()->addWidget(d->form);
-    connect(d->ui->ledgerView, &LedgerView::transactionSelected,
-            d->form, &NewTransactionForm::showTransaction);
-
-    /// @todo port to new model code
-#if 0
-    connect(MyMoneyFile::instance()->ledgerModel(), &LedgerModel::dataChanged,
-            d->form, &NewTransactionForm::modelDataChanged);
-#endif
+    connect(d->ui->ledgerView, &LedgerView::transactionSelected, d->form, &NewTransactionForm::showTransaction);
   }
   d->ui->formWidget->setVisible(d->hideFormReasons.isEmpty());
   d->accountFilter->setAccount(acc);
   d->accountId = acc.id();
 
+  d->ui->ledgerView->setAccountId(d->accountId);
   d->ui->ledgerView->selectMostRecentTransaction();
 }
 

@@ -63,6 +63,12 @@ public:
 
   void selectMostRecentTransaction();
 
+  /**
+   * New transactions will be created in account referenced by @a id.
+   */
+  void setAccountId(const QString& id);
+  const QString& accountId() const;
+
 public Q_SLOTS:
   /**
    * This method scrolls the ledger so that the current item is visible

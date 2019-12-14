@@ -36,7 +36,6 @@
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
-#include "mymoneyaccount.h"
 #include "accountsmodel.h"
 #include "journalmodel.h"
 #include "specialdatesmodel.h"
@@ -86,13 +85,13 @@ public:
   LedgerView*                     q;
   DelegateProxy*                  delegateProxy;
   QHash<const QAbstractItemModel*, QStyledItemDelegate*>   delegates;
-  MyMoneyAccount                  account;
   int                             adjustableColumn;
   bool                            adjustingColumn;
   bool                            showValuesInverted;
   bool                            balanceCalculationPending;
   bool                            newTransactionPresent;
   ColumnSelector*                 columnSelector;
+  QString                         accountId;
 };
 
 
@@ -143,6 +142,16 @@ void LedgerView::setModel(QAbstractItemModel* model)
 
   d->columnSelector->setModel(model);
   horizontalHeader()->setSectionResizeMode(JournalModel::Column::Reconciliation, QHeaderView::ResizeToContents);
+}
+
+void LedgerView::setAccountId(const QString& id)
+{
+  d->accountId = id;
+}
+
+const QString& LedgerView::accountId() const
+{
+  return d->accountId;
 }
 
 bool LedgerView::showValuesInverted() const

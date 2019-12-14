@@ -156,26 +156,4 @@ void LedgerAccountFilter::setAccount(const MyMoneyAccount& acc)
   if(!d->balanceCalculationPending) {
     recalculateBalances();
   }
-
-#if 0
-  /// @todo port to new model code
-  if(rowCount() > 0) {
-    // we need to check that the last row may contain a scheduled transaction or
-    // the row that is shown for new transacations.
-    // in that case, we need to go back to find the actual last transaction
-    int row = rowCount()-1;
-    while(row >= 0) {
-      const QModelIndex idx = index(row, 0);
-      if(!idx.data(eMyMoney::Model::IdRole).toString().isEmpty()
-        // && !d->filterModel->data(index, (int)eLedgerModel::Role::TransactionSplitId).toString().isEmpty()
-      ) {
-        d->view->setCurrentIndex(idx);
-        d->view->selectRow(idx.row());
-        d->view->scrollTo(idx, QAbstractItemView::PositionAtBottom);
-        break;
-      }
-      row--;
-    }
-  }
-#endif
 }
