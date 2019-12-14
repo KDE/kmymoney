@@ -250,7 +250,7 @@ JournalModelNewTransaction::JournalModelNewTransaction(QObject* parent)
   QMap<QString, MyMoneyTransaction> list;
   MyMoneyTransaction t;
   MyMoneySplit sp;
-  sp.setAccountId(QStringLiteral("FakeID"));
+  sp.setAccountId(fakeId());
   t.addSplit(sp);
   list[QString()] = t;
   JournalModel::load(list);
@@ -946,3 +946,7 @@ JournalModel::Operation JournalModel::undoOperation(const JournalEntry& before, 
   return Invalid;
 }
 
+QString JournalModel::fakeId() const
+{
+  return QStringLiteral("FakeID");
+}

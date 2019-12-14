@@ -143,6 +143,11 @@ public:
    */
   QString keyForDate(const QDate& date) const;
 
+  /**
+   * Returns the string that shall be used for new transactions
+   */
+  QString fakeId() const;
+
 protected:
   explicit JournalModel(const QString& idLeadin, QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
 
