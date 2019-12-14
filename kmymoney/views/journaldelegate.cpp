@@ -220,12 +220,24 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
        * @todo replace the following three lines with the creation of a special
        * editor that can handle multiple transactions at once
        */
-      d->m_editor = 0;
+      d->m_editor = nullptr;
       JournalDelegate* that = const_cast<JournalDelegate*>(this);
       emit that->closeEditor(d->m_editor, NoHint);
 
     } else {
-      d->m_editor = new NewTransactionEditor(parent, d->m_view->accountId());
+      auto accountId = index.data(eMyMoney::Model::SplitAccountIdRole).toString();
+      if (accountId.isEmpty() || (accountId == MyMoneyFile::instance()->journalModel()->fakeId())) {
+        accountId = d->m_view->accountId();
+      }
+      if (!accountId.isEmpty()) {
+        d->m_editor = new NewTransactionEditor(parent, accountId);
+      } else {
+        qDebug() << "Unable to determine account for editing";
+
+        d->m_editor = nullptr;
+        JournalDelegate* that = const_cast<JournalDelegate*>(this);
+        emit that->closeEditor(d->m_editor, NoHint);
+      }
     }
 
     if(d->m_editor) {
