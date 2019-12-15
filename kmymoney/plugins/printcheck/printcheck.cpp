@@ -158,9 +158,9 @@ void KMMPrintCheckPlugin::slotPrintCheck()
     // data about the transaction
     checkHTML.replace("$DATE", KGlobal::locale()->formatDate((*it).transaction().postDate(), KLocale::LongDate));
     checkHTML.replace("$CHECK_NUMBER", (*it).split().number());
-    checkHTML.replace("$AMOUNT_DECIMAL_WITHOUT_CURRENCY", (*it).split().shares().abs().formatMoney(account.fraction(currency)));
-    checkHTML.replace("$AMOUNT_STRING", converter.convert((*it).split().shares().abs()));
-    checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().shares().abs(), currency));
+    checkHTML.replace("$AMOUNT_DECIMAL_WITHOUT_CURRENCY", (*it).split().value().abs().formatMoney(account.fraction(currency)));
+    checkHTML.replace("$AMOUNT_STRING", converter.convert((*it).split().value().abs()));
+    checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().value().abs(), currency));
     checkHTML.replace("$MEMO", (*it).split().memo());
 
     // print the check
