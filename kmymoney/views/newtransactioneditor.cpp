@@ -266,21 +266,28 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
             ui->costCenterLabel->setEnabled(isIncomeExpense);
             costCenterRequired = category.isCostCenterRequired();
 
+            bool needValueSet = false;
             // make sure we have a split in the model
             if (splitModel.rowCount() == 0) {
                 // add an empty split
                 MyMoneySplit s;
                 splitModel.addItem(s);
+                needValueSet = true;
             }
 
             const QModelIndex index = splitModel.index(0, 0);
+            if (!needValueSet) {
+                // update the values only if the category changes. This prevents
+                // the call of the currency calculator if not needed.
+                needValueSet = (index.data(eMyMoney::Model::SplitAccountIdRole).toString().compare(accountId) != 0);
+            }
             splitModel.setData(index, accountId, eMyMoney::Model::SplitAccountIdRole);
 
             rc &= costCenterChanged(ui->costCenterCombo->currentIndex());
             rc &= postdateChanged(ui->dateEdit->date());
             payeeChanged(ui->payeeEdit->currentIndex());
 
-            if (amountHelper->haveValue()) {
+            if (amountHelper->haveValue() && needValueSet) {
                 splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), eMyMoney::Model::SplitValueRole);
                 splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value() / getPrice()), eMyMoney::Model::SplitSharesRole);
             }
@@ -523,9 +530,9 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
 {
     auto idx = MyMoneyModelBase::mapToBaseSource(index);
     if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
-        d->transaction.clear();
+        d->transaction = MyMoneyTransaction();
         d->transaction.setCommodity(d->m_account.currencyId());
-        d->split.clear();
+        d->split = MyMoneySplit();
         d->split.setAccountId(d->m_account.id());
         if (lastUsedPostDate()->isValid()) {
             d->ui->dateEdit->setDate(*lastUsedPostDate());
@@ -548,7 +555,6 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
                                              -1,                         // all splits
                                              Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
 
-        const auto statusModel = MyMoneyFile::instance()->statusModel();
         for (const auto& splitIdx : list) {
             if (selectedSplitRow == splitIdx.row()) {
                 d->ui->dateEdit->setDate(splitIdx.data(eMyMoney::Model::TransactionPostDateRole).toDate());
@@ -591,7 +597,9 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
                 if (splitIdx.data(eMyMoney::Model::TransactionSplitCountRole) == 2) {
                     const auto shares = splitIdx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
                     const auto value = splitIdx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
-                    d->price = value / shares;
+                    if (!shares.isZero()) {
+                        d->price = value / shares;
+                    }
                 }
             }
         }
@@ -687,7 +695,22 @@ void NewTransactionEditor::editSplits()
         // update the transaction amount
         d->amountHelper->setValue(splitDialog->transactionAmount());
 
+        // the price might have been changed, so we have to update our copy
+        // but only if there is one counter split
+        if (d->splitModel.rowCount() == 1) {
+            const auto splitIdx = d->splitModel.index(0, 0);
+            const auto shares = splitIdx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+            const auto value = splitIdx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
+            if (!shares.isZero()) {
+                d->price = value / shares;
+            }
+        }
+
+        // bypass the currency calculator here, we have all info already
+        d->bypassPriceEditor = true;
         d->updateWidgetState();
+        d->bypassPriceEditor = false;
+
         QWidget* next = d->ui->tagComboBox;
         if (d->ui->costCenterCombo->isEnabled()) {
             next = d->ui->costCenterCombo;
@@ -770,8 +793,12 @@ void NewTransactionEditor::saveTransaction()
             const QModelIndex idx = model->index(row, 0);
             MyMoneySplit s;
             const QString splitId = idx.data(eMyMoney::Model::IdRole).toString();
-            if (!SplitModel::isNewSplitId(splitId)) {
+            // Extract the split from the transaction if
+            // it already exists. Otherwise it remains
+            // an empty split and will be added later.
+            try {
                 s = t.splitById(splitId);
+            } catch(const MyMoneyException&) {
             }
             s.setNumber(idx.data(eMyMoney::Model::SplitNumberRole).toString());
             s.setMemo(idx.data(eMyMoney::Model::SplitMemoRole).toString());
@@ -781,7 +808,6 @@ void NewTransactionEditor::saveTransaction()
             s.setCostCenterId(idx.data(eMyMoney::Model::SplitCostCenterIdRole).toString());
             s.setPayeeId(idx.data(eMyMoney::Model::SplitPayeeIdRole).toString());
 
-            // reconcile flag and date
             if (s.id().isEmpty()) {
                 t.addSplit(s);
             } else {
