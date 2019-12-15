@@ -300,7 +300,7 @@ void KCurrencyCalculator::slotUpdateResult(const QString& /*txt*/)
 {
   Q_D(KCurrencyCalculator);
   MyMoneyMoney result = d->ui->m_toAmount->value();
-  MyMoneyMoney price(0, 1);
+  MyMoneyMoney price(MyMoneyMoney::ONE);
 
   if (result.isNegative()) {
     d->ui->m_toAmount->setValue(-result);
@@ -308,7 +308,7 @@ void KCurrencyCalculator::slotUpdateResult(const QString& /*txt*/)
     return;
   }
 
-  if (!result.isZero()) {
+  if (!result.isZero() && !d->m_value.isZero()) {
     price = result / d->m_value;
 
     d->ui->m_conversionRate->setValue(price);
@@ -372,8 +372,11 @@ MyMoneyMoney KCurrencyCalculator::price() const
   // This should fix https://bugs.kde.org/show_bug.cgi?id=205254 and
   // https://bugs.kde.org/show_bug.cgi?id=325953 as well as
   // https://bugs.kde.org/show_bug.cgi?id=300965
-  if (d->ui->m_amountButton->isChecked())
-    return d->ui->m_toAmount->value().abs() / d->m_value.abs();
-  else
+  if (d->ui->m_amountButton->isChecked()) {
+    if (!d->m_value.isZero()) {
+      return d->ui->m_toAmount->value().abs() / d->m_value.abs();
+    }
+    return MyMoneyMoney::ONE;
+  } else
     return d->ui->m_conversionRate->value();
 }
