@@ -67,6 +67,11 @@ SplitModel::SplitModel(QObject* parent, QUndoStack* undoStack)
   : MyMoneyModel<MyMoneySplit>(parent, QStringLiteral("S"), 4, undoStack)
   , d(new Private(this))
 {
+  // new splits in the split model start with 2 instead of 1
+  // since the first split id is assigned by the transaction
+  // editor when the transaction is created. (see
+  // NewTransactionEditor::saveTransaction() )
+  ++m_nextId;
 }
 
 SplitModel::SplitModel(QObject* parent, QUndoStack* undoStack, const SplitModel& right)
