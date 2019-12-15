@@ -187,6 +187,11 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
   if(isEditable()) {
     lineEdit()->clear();
   }
+
+  // reset the filter of the model
+  auto* filterModel = qobject_cast<QSortFilterProxyModel*>(model());
+  filterModel->setFilterFixedString(QString());
+
   // find which item has this id and set it as the current item
   // and we always skip over the favorite section
   int startRow = model()->index(0, 0).data(eMyMoney::Model::Roles::IdRole).toString() == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Favorite) ? 1 : 0;
