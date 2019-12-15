@@ -39,6 +39,9 @@ install(FILES check_template_green_linen.html
 install(FILES check_all_fields.html
             DESTINATION  ${DATA_INSTALL_DIR}/kmm_printcheck)
 
+install(FILES sepa.html
+            DESTINATION  ${DATA_INSTALL_DIR}/kmm_printcheck)
+
 # the KCM module
 
 set(kcm_kmm_printcheck_PART_SRCS

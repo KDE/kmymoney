@@ -126,6 +126,7 @@ void KMMPrintCheckPlugin::slotPrintCheck()
     QString checkHTML = d->m_checkTemplateHTML;
     MyMoneySecurity currency = file->currency(file->account((*it).split().accountId()).currencyId());
     MyMoneyInstitution institution = file->institution(file->account((*it).split().accountId()).institutionId());
+    MyMoneyAccount account = file->account((*it).split().accountId());
     MyMoneyPayee payee = file->payee((*it).split().payeeId());
 
     // replace the predefined tokens
@@ -142,15 +143,22 @@ void KMMPrintCheckPlugin::slotPrintCheck()
     checkHTML.replace("$INSTITUTION_CITY", institution.city());
     checkHTML.replace("$INSTITUTION_POSTCODE", institution.postcode());
     checkHTML.replace("$INSTITUTION_MANAGER", institution.manager());
+    // data about the account
+    checkHTML.replace("$ACCOUNT_NAME", account.name());
+    checkHTML.replace("$ACCOUNT_NUMBER", account.number());
+    checkHTML.replace("$ACCOUNT_FULL_IBAN", account.value("iban"));
+    checkHTML.replace("$ACCOUNT_IBAN_WITHOUT_COUNTRY", account.value("iban").mid(2));
     // data about the payee
     checkHTML.replace("$PAYEE_NAME", payee.name());
     checkHTML.replace("$PAYEE_ADDRESS", payee.address());
     checkHTML.replace("$PAYEE_CITY", payee.city());
     checkHTML.replace("$PAYEE_POSTCODE", payee.postcode());
     checkHTML.replace("$PAYEE_STATE", payee.state());
+    checkHTML.replace("$PAYEE_NOTES", payee.notes());
     // data about the transaction
     checkHTML.replace("$DATE", KGlobal::locale()->formatDate((*it).transaction().postDate(), KLocale::LongDate));
     checkHTML.replace("$CHECK_NUMBER", (*it).split().number());
+    checkHTML.replace("$AMOUNT_DECIMAL_WITHOUT_CURRENCY", (*it).split().shares().abs().formatMoney(account.fraction(currency)));
     checkHTML.replace("$AMOUNT_STRING", converter.convert((*it).split().shares().abs()));
     checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().shares().abs(), currency));
     checkHTML.replace("$MEMO", (*it).split().memo());
