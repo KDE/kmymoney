@@ -211,6 +211,13 @@ bool Activity::createCategorySplits(const MyMoneyTransaction& t, KMyMoneyCategor
     if (!cat->isSplitTransaction()) {
       splits.clear();
       MyMoneySplit s1;
+      // base the resulting split on the original split
+      // that was provided which avoids loosing data
+      // stored in the split
+      if (!osplits.isEmpty()) {
+        s1 = osplits.first();
+        s1.clearId();
+      }
       QString categoryId;
       categoryId = cat->selectedItem();
       if (!categoryId.isEmpty()) {
