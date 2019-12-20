@@ -161,7 +161,13 @@ void KMMPrintCheckPlugin::slotPrintCheck()
     checkHTML.replace("$AMOUNT_DECIMAL_WITHOUT_CURRENCY", (*it).split().value().abs().formatMoney(account.fraction(currency)));
     checkHTML.replace("$AMOUNT_STRING", converter.convert((*it).split().value().abs()));
     checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().value().abs(), currency));
-    checkHTML.replace("$MEMO", (*it).split().memo());
+    QString memo = (*it).split().memo();
+    QStringList lines = memo.split("\n");
+    if (lines.size() >= 1)
+        checkHTML.replace("$MEMO1", lines.at(0));
+    if (lines.size() > 1)
+        checkHTML.replace("$MEMO2", lines.at(1));
+    checkHTML.replace("$MEMO", memo);
 
     // print the check
     htmlPart->begin();
