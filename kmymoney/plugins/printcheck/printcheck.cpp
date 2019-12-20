@@ -169,6 +169,24 @@ void KMMPrintCheckPlugin::slotPrintCheck()
         checkHTML.replace("$MEMO2", lines.at(1));
     checkHTML.replace("$MEMO", memo);
 
+    const auto currencyId = (*it).transaction().commodity();
+    const auto accountcurrency = MyMoneyFile::instance()->currency(currencyId);
+    checkHTML.replace("$TRANSACTIONCURRENCY", accountcurrency.tradingSymbol());
+    unsigned int numSplits = (*it).transaction().splitCount();
+    const int maxSplits = 11;
+    for (unsigned int i = 0; i < maxSplits; ++i) {
+        const QString valueVariable = QString("$SPLITVALUE%1").arg(i);
+        const QString accountVariable = QString("$SPLITACCOUNTNAME%1").arg(i);
+        if (i < numSplits) {
+            checkHTML.replace(valueVariable, MyMoneyUtils::formatMoney((*it).transaction().splits()[i].value().abs(), currency));
+            checkHTML.replace(accountVariable, (file->account((*it).transaction().splits()[i].accountId())).name());
+        } else {
+            checkHTML.replace(valueVariable, " ");
+            checkHTML.replace(accountVariable, " ");
+        }
+    }
+
+
     // print the check
     htmlPart->begin();
     htmlPart->write(checkHTML);
