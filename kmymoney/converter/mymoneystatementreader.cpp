@@ -820,24 +820,25 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       s2.setValue(s2.shares());
     } else if (statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::CashDividend) {
       // Cash dividends require setting 2 splits to get all of the information
-      // in.  Split #1 will be the income split, and we'll set it to the first
+      // in.  Split #2 will be the income split, and we'll set it to the first
       // income account.  This is a hack, but it's needed in order to get the
       // amount into the transaction.
 
       if (statementTransactionUnderImport.m_strInterestCategory.isEmpty())
-        s1.setAccountId(d->interestId(thisaccount));
+        s2.setAccountId(d->interestId(thisaccount));
       else {//  Ensure category sub-accounts are dealt with properly
-        s1.setAccountId(d->interestId(statementTransactionUnderImport.m_strInterestCategory));
+        s2.setAccountId(d->interestId(statementTransactionUnderImport.m_strInterestCategory));
       }
-      s1.setShares(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
-      s1.setValue(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
+      s2.setShares(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
+      s2.setValue(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
 
-      // Split 2 will be the zero-amount investment split that serves to
+      // Split 1 will be the zero-amount investment split that serves to
       // mark this transaction as a cash dividend and note which stock account
-      // it belongs to.
-      s2.setMemo(statementTransactionUnderImport.m_strMemo);
-      s2.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend));
-      s2.setAccountId(thisaccount.id());
+      // it belongs to and which already contains the correct id and bankId
+      s1.setMemo(statementTransactionUnderImport.m_strMemo);
+      s1.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend));
+      s1.setShares(MyMoneyMoney());
+      s1.setValue(MyMoneyMoney());
 
       /*  at this point any fees have been taken into account already
        *  so don't deduct them again.
@@ -846,23 +847,24 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       transfervalue = statementTransactionUnderImport.m_amount;
     } else if (statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::Interest) {
       if (statementTransactionUnderImport.m_strInterestCategory.isEmpty())
-        s1.setAccountId(d->interestId(thisaccount));
+        s2.setAccountId(d->interestId(thisaccount));
       else {//  Ensure category sub-accounts are dealt with properly
         if (statementTransactionUnderImport.m_amount.isPositive())
-          s1.setAccountId(d->interestId(statementTransactionUnderImport.m_strInterestCategory));
+          s2.setAccountId(d->interestId(statementTransactionUnderImport.m_strInterestCategory));
         else
-          s1.setAccountId(d->expenseId(statementTransactionUnderImport.m_strInterestCategory));
+          s2.setAccountId(d->expenseId(statementTransactionUnderImport.m_strInterestCategory));
       }
-      s1.setShares(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
-      s1.setValue(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
+      s2.setShares(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
+      s2.setValue(-statementTransactionUnderImport.m_amount - statementTransactionUnderImport.m_fees);
 
-/// ***********   Add split as per Div       **********
-      // Split 2 will be the zero-amount investment split that serves to
+      /// ***********   Add split as per Div       **********
+      // Split 1 will be the zero-amount investment split that serves to
       // mark this transaction as a cash dividend and note which stock account
       // it belongs to.
-      s2.setMemo(statementTransactionUnderImport.m_strMemo);
-      s2.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::InterestIncome));
-      s2.setAccountId(thisaccount.id());
+      s1.setMemo(statementTransactionUnderImport.m_strMemo);
+      s1.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::InterestIncome));
+      s1.setShares(MyMoneyMoney());
+      s1.setValue(MyMoneyMoney());
       transfervalue = statementTransactionUnderImport.m_amount;
 
     } else if (statementTransactionUnderImport.m_eAction == eMyMoney::Transaction::Action::Fees) {
