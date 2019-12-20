@@ -163,10 +163,8 @@ void KMMPrintCheckPlugin::slotPrintCheck()
     checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().value().abs(), currency));
     QString memo = (*it).split().memo();
     QStringList lines = memo.split("\n");
-    if (lines.size() >= 1)
-        checkHTML.replace("$MEMO1", lines.at(0));
-    if (lines.size() > 1)
-        checkHTML.replace("$MEMO2", lines.at(1));
+    checkHTML.replace("$MEMO1", lines.size() >= 1 ? lines.at(0) : "");
+    checkHTML.replace("$MEMO2", lines.size() > 1 ? lines.at(1) : "");
     checkHTML.replace("$MEMO", memo);
 
     const auto currencyId = (*it).transaction().commodity();
