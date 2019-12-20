@@ -2096,17 +2096,14 @@ QString MyMoneyFile::categoryToAccount(const QString& category) const
 
 QString MyMoneyFile::nameToAccount(const QString& name) const
 {
-  /// @todo port to new model code
 
   QString id;
 
-#if 0
   // search the category in the asset accounts and if it is not found, try
   // to locate it in the liability accounts
   id = locateSubAccount(MyMoneyFile::instance()->asset(), name);
   if (id.isEmpty())
     id = locateSubAccount(MyMoneyFile::instance()->liability(), name);
-#endif
 
   return id;
 }
