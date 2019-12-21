@@ -289,7 +289,8 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
   detailsReport += QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>").arg(i18np("One outstanding payment of", "Total of %1 outstanding payments amounting to", outstandingPayments)).arg(MyMoneyUtils::formatMoney(outstandingPaymentAmount, currency));
 
   detailsReport += "</table>\n";
-  detailsReport += QString("<h2 class=\"report\">%1</h2>\n").arg(i18n("Outstanding deposits"));
+  detailsReport += QString("<h2 class=\"report\">%1</h2>\n").arg(
+      account.accountType() == eMyMoney::Account::Type::CreditCard ? i18n("Outstanding charges") : i18n("Outstanding deposits"));
   detailsReport += detailsTableHeader;
 
   index = 0;
@@ -321,7 +322,11 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
   }
 
   detailsReport += "<tr class=\"sectionfooter\">"
-                + QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>").arg(i18np("One outstanding deposit of", "Total of %1 outstanding deposits amounting to", outstandingDeposits)).arg(MyMoneyUtils::formatMoney(outstandingDepositAmount, currency))
+                + QString("<td class=\"left1\" colspan=\"5\">%1</td><td>%2</td></tr>").arg(
+                    account.accountType() == eMyMoney::Account::Type::CreditCard ?
+                        i18np("One outstanding charges of", "Total of %1 outstanding charges amounting to", outstandingDeposits) :
+                        i18np("One outstanding deposit of", "Total of %1 outstanding deposits amounting to", outstandingDeposits)
+                  ).arg(MyMoneyUtils::formatMoney(outstandingDepositAmount, currency))
 
   // end of the table
                 + "</table>\n";
