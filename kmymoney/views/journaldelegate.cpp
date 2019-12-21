@@ -140,7 +140,7 @@ public:
   , m_view(nullptr)
   , m_editorRow(-1)
   , m_singleLineRole(eMyMoney::Model::SplitPayeeRole)
-  , m_lineHeight(12)
+  , m_lineHeight(-1)
   , m_margin(2)
 
   {}
@@ -372,7 +372,7 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
 QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
   // get parameters only once per update to speed things up
-  if (index.row() == 0) {
+  if (d->m_lineHeight == -1) {
     QStyleOptionViewItem opt = option;
     initStyleOption(&opt, index);
     QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
