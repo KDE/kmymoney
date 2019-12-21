@@ -209,9 +209,9 @@ void CheckPrinting::slotPrintCheck()
     const auto currencyId = (*it).transaction().commodity();
     const auto accountcurrency = MyMoneyFile::instance()->currency(currencyId);
     checkHTML.replace("$TRANSACTIONCURRENCY", accountcurrency.tradingSymbol());
-    int numSplits = (*it).transaction().splitCount();
+    int numSplits = (int)(*it).transaction().splitCount();
     const int maxSplits = 11;
-    for (int i = 0; i < maxSplits; ++i) {
+    for (int i = maxSplits-1; i >= 0 ; i--) {
         const QString valueVariable = QString("$SPLITVALUE%1").arg(i);
         const QString accountVariable = QString("$SPLITACCOUNTNAME%1").arg(i);
         if (i < numSplits) {
