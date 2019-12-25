@@ -173,6 +173,9 @@ public:
   QString action() const;
   void setAction(const QString& action);
   void setAction(eMyMoney::Split::InvestmentTransactionType type);
+  eMyMoney::Split::InvestmentTransactionType investmentTransactionType() const;
+  eMyMoney::Split::Action actionStringToAction(const QString &text) const;
+
   bool isAmortizationSplit() const;
   bool isInterestSplit() const;
 

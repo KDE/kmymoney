@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,7 +16,7 @@
  */
 
 
-#include "newtransactioneditor.h"
+#include "investtransactioneditor.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -38,7 +38,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_newtransactioneditor.h"
+#include "ui_investtransactioneditor.h"
 #include "creditdebithelper.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
@@ -46,11 +46,9 @@
 #include "kmymoneyutils.h"
 #include "kmymoneyaccountcombo.h"
 #include "accountsmodel.h"
-#include "costcentermodel.h"
 #include "journalmodel.h"
 #include "statusmodel.h"
 #include "splitmodel.h"
-#include "payeesmodel.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "splitdialog.h"
@@ -58,7 +56,6 @@
 #include "icons/icons.h"
 #include "modelenums.h"
 #include "mymoneyenums.h"
-#include "mymoneypayee.h"
 #include "mymoneysecurity.h"
 #include "kcurrencycalculator.h"
 
@@ -66,32 +63,21 @@ using namespace Icons;
 
 Q_GLOBAL_STATIC(QDate, lastUsedPostDate)
 
-class NewTransactionEditor::Private
+class InvestTransactionEditor::Private
 {
 public:
-    Private(NewTransactionEditor* parent)
+    Private(InvestTransactionEditor* parent)
         : q(parent)
-        , ui(new Ui_NewTransactionEditor)
+        , ui(new Ui_InvestTransactionEditor)
         , accountsModel(new AccountNamesFilterProxyModel(parent))
-        , costCenterModel(new QSortFilterProxyModel(parent))
-        , payeesModel(new QSortFilterProxyModel(parent))
         , accepted(false)
-        , costCenterRequired(false)
         , bypassPriceEditor(false)
-        , splitModel(parent, &undoStack)
+        , feeSplitModel(parent, &undoStack)
+        , interestSplitModel(parent, &undoStack)
         , price(MyMoneyMoney::ONE)
-        , amountHelper(nullptr)
     {
-        accountsModel->setObjectName("NewTransactionEditor::accountsModel");
-        costCenterModel->setObjectName("SortedCostCenterModel");
-        payeesModel->setObjectName("SortedPayeesModel");
-        splitModel.setObjectName("SplitModel");
-
-        costCenterModel->setSortLocaleAware(true);
-        costCenterModel->setSortCaseSensitivity(Qt::CaseInsensitive);
-
-        payeesModel->setSortLocaleAware(true);
-        payeesModel->setSortCaseSensitivity(Qt::CaseInsensitive);
+        accountsModel->setObjectName("InvestTransactionEditor::accountsModel");
+        feeSplitModel.setObjectName("SplitModel");
     }
 
     ~Private()
@@ -105,40 +91,32 @@ public:
     bool isDatePostOpeningDate(const QDate& date, const QString& accountId);
 
     bool postdateChanged(const QDate& date);
-    bool costCenterChanged(int costCenterIndex);
-    bool payeeChanged(int payeeIndex);
     bool categoryChanged(const QString& accountId);
-    bool numberChanged(const QString& newNumber);
     bool valueChanged(CreditDebitHelper* valueHelper);
     MyMoneyMoney getPrice();
 
-    NewTransactionEditor*         q;
-    Ui_NewTransactionEditor*      ui;
+    InvestTransactionEditor*      q;
+    Ui_InvestTransactionEditor*   ui;
     AccountNamesFilterProxyModel* accountsModel;
-    QSortFilterProxyModel*        costCenterModel;
-    QSortFilterProxyModel*        payeesModel;
     bool                          accepted;
-    bool                          costCenterRequired;
     bool                          bypassPriceEditor;
     QUndoStack                    undoStack;
-    SplitModel                    splitModel;
+    SplitModel                    feeSplitModel;
+    SplitModel                    interestSplitModel;
     MyMoneyAccount                m_account;
     MyMoneyTransaction            transaction;
     MyMoneySplit                  split;
     MyMoneyMoney                  price;
-    CreditDebitHelper*            amountHelper;
 };
 
-void NewTransactionEditor::Private::updateWidgetState()
+void InvestTransactionEditor::Private::updateWidgetState()
 {
-    // just in case it is disabled we turn it on
-    ui->costCenterCombo->setEnabled(true);
-
     // setup the category/account combo box. If we have a split transaction, we disable the
     // combo box altogether. Changes can only be made via the split dialog editor
     bool blocked = false;
     QModelIndex index;
 
+#if 0
     // update the category combo box
     ui->accountCombo->setEnabled(true);
     index = splitModel.index(0, 0);
@@ -154,8 +132,6 @@ void NewTransactionEditor::Private::updateWidgetState()
         ui->accountCombo->lineEdit()->setText(i18n("Split transaction"));
         ui->accountCombo->setDisabled(true);
         ui->accountCombo->lineEdit()->blockSignals(blocked);
-        ui->costCenterCombo->setDisabled(true);
-        ui->costCenterLabel->setDisabled(true);
         break;
     }
     ui->accountCombo->hidePopup();
@@ -167,19 +143,15 @@ void NewTransactionEditor::Private::updateWidgetState()
         if (index.isValid())
             ui->costCenterCombo->setCurrentIndex(costCenterModel->mapFromSource(index).row());
     }
+#endif
 }
 
-bool NewTransactionEditor::Private::checkForValidTransaction(bool doUserInteraction)
+bool InvestTransactionEditor::Private::checkForValidTransaction(bool doUserInteraction)
 {
     QStringList infos;
     bool rc = true;
     if (!postdateChanged(ui->dateEdit->date())) {
         infos << ui->dateEdit->toolTip();
-        rc = false;
-    }
-
-    if (!costCenterChanged(ui->costCenterCombo->currentIndex())) {
-        infos << ui->costCenterCombo->toolTip();
         rc = false;
     }
 
@@ -189,7 +161,7 @@ bool NewTransactionEditor::Private::checkForValidTransaction(bool doUserInteract
     return rc;
 }
 
-bool NewTransactionEditor::Private::isDatePostOpeningDate(const QDate& date, const QString& accountId)
+bool InvestTransactionEditor::Private::isDatePostOpeningDate(const QDate& date, const QString& accountId)
 {
     bool rc = true;
 
@@ -208,7 +180,7 @@ bool NewTransactionEditor::Private::isDatePostOpeningDate(const QDate& date, con
     return rc;
 }
 
-bool NewTransactionEditor::Private::postdateChanged(const QDate& date)
+bool InvestTransactionEditor::Private::postdateChanged(const QDate& date)
 {
     bool rc = true;
     WidgetHintFrame::hide(ui->dateEdit, i18n("The posting date of the transaction."));
@@ -216,9 +188,9 @@ bool NewTransactionEditor::Private::postdateChanged(const QDate& date)
     // collect all account ids
     QStringList accountIds;
     accountIds << m_account.id();
-    const auto rows = splitModel.rowCount();
+    const auto rows = feeSplitModel.rowCount();
     for (int row = 0; row < rows; ++row) {
-        const auto index = splitModel.index(row, 0);
+        const auto index = feeSplitModel.index(row, 0);
         accountIds << index.data(eMyMoney::Model::SplitAccountIdRole).toString();
     }
 
@@ -234,63 +206,39 @@ bool NewTransactionEditor::Private::postdateChanged(const QDate& date)
 }
 
 
-bool NewTransactionEditor::Private::costCenterChanged(int costCenterIndex)
+bool InvestTransactionEditor::Private::categoryChanged(const QString& accountId)
 {
     bool rc = true;
-    WidgetHintFrame::hide(ui->costCenterCombo, i18n("The cost center this transaction should be assigned to."));
-    if (costCenterIndex != -1) {
-        if (costCenterRequired && ui->costCenterCombo->currentText().isEmpty()) {
-            WidgetHintFrame::show(ui->costCenterCombo, i18n("A cost center assignment is required for a transaction in the selected category."));
-            rc = false;
-        }
-        if (rc == true && splitModel.rowCount() == 1) {
-            auto index = costCenterModel->index(costCenterIndex, 0);
-            const auto costCenterId = index.data(eMyMoney::Model::IdRole).toString();
-            index = splitModel.index(0, 0);
-
-            splitModel.setData(index, costCenterId, eMyMoney::Model::SplitCostCenterIdRole);
-        }
-    }
-
-    return rc;
-}
-
-bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
-{
-    bool rc = true;
-    if (!accountId.isEmpty() && splitModel.rowCount() <= 1) {
+    if (!accountId.isEmpty() && feeSplitModel.rowCount() <= 1) {
         try {
             MyMoneyAccount category = MyMoneyFile::instance()->account(accountId);
             const bool isIncomeExpense = category.isIncomeExpense();
-            ui->costCenterCombo->setEnabled(isIncomeExpense);
-            ui->costCenterLabel->setEnabled(isIncomeExpense);
-            costCenterRequired = category.isCostCenterRequired();
 
             bool needValueSet = false;
             // make sure we have a split in the model
-            if (splitModel.rowCount() == 0) {
+            if (feeSplitModel.rowCount() == 0) {
                 // add an empty split
                 MyMoneySplit s;
-                splitModel.addItem(s);
+                feeSplitModel.addItem(s);
                 needValueSet = true;
             }
 
-            const QModelIndex index = splitModel.index(0, 0);
+            const QModelIndex index = feeSplitModel.index(0, 0);
             if (!needValueSet) {
                 // update the values only if the category changes. This prevents
                 // the call of the currency calculator if not needed.
                 needValueSet = (index.data(eMyMoney::Model::SplitAccountIdRole).toString().compare(accountId) != 0);
             }
-            splitModel.setData(index, accountId, eMyMoney::Model::SplitAccountIdRole);
+            feeSplitModel.setData(index, accountId, eMyMoney::Model::SplitAccountIdRole);
 
-            rc &= costCenterChanged(ui->costCenterCombo->currentIndex());
             rc &= postdateChanged(ui->dateEdit->date());
-            payeeChanged(ui->payeeEdit->currentIndex());
 
+#if 0
             if (amountHelper->haveValue() && needValueSet) {
-                splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), eMyMoney::Model::SplitValueRole);
-                splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value() / getPrice()), eMyMoney::Model::SplitSharesRole);
+                feeSplitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), eMyMoney::Model::SplitValueRole);
+                feeSplitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value() / getPrice()), eMyMoney::Model::SplitSharesRole);
             }
+#endif
 
         } catch (MyMoneyException& e) {
             qDebug() << "Ooops: invalid account id" << accountId << "in" << Q_FUNC_INFO;
@@ -299,39 +247,18 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
     return rc;
 }
 
-bool NewTransactionEditor::Private::numberChanged(const QString& newNumber)
-{
-    bool rc = true; // number did change
-    WidgetHintFrame::hide(ui->numberEdit, i18n("The check number used for this transaction."));
-    if (!newNumber.isEmpty()) {
-        auto model = MyMoneyFile::instance()->journalModel();
-        const QModelIndexList list = model->match(model->index(0, 0), eMyMoney::Model::SplitNumberRole,
-                                     QVariant(newNumber),
-                                     -1,                         // all splits
-                                     Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
-        for (const auto& idx : list) {
-            if (idx.data(eMyMoney::Model::SplitAccountIdRole).toString() == m_account.id()
-                    && idx.data(eMyMoney::Model::JournalTransactionIdRole).toString().compare(transaction.id())) {
-                WidgetHintFrame::show(ui->numberEdit, i18n("The check number <b>%1</b> has already been used in this account.", newNumber));
-                rc = false;
-                break;
-            }
-        }
-    }
-    return rc;
-}
-
-MyMoneyMoney NewTransactionEditor::Private::getPrice()
+MyMoneyMoney InvestTransactionEditor::Private::getPrice()
 {
     MyMoneyMoney result(price);
-    if (!bypassPriceEditor && splitModel.rowCount() > 0) {
-        const QModelIndex idx = splitModel.index(0, 0);
+    if (!bypassPriceEditor && feeSplitModel.rowCount() > 0) {
+        const QModelIndex idx = feeSplitModel.index(0, 0);
         const auto categoryId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
         const auto category = MyMoneyFile::instance()->accountsModel()->itemById(categoryId);
         if (!category.id().isEmpty()) {
             const auto security = MyMoneyFile::instance()->security(category.currencyId());
             if (security.id() != transaction.commodity()) {
                 const auto commodity = MyMoneyFile::instance()->security(transaction.commodity());
+#if 0
                 QPointer<KCurrencyCalculator> calc =
                     new KCurrencyCalculator(commodity,
                                             security,
@@ -345,6 +272,7 @@ MyMoneyMoney NewTransactionEditor::Private::getPrice()
                     result = calc->price();
                 }
                 delete calc;
+#endif
 
             } else {
                 result = MyMoneyMoney::ONE;
@@ -357,17 +285,18 @@ MyMoneyMoney NewTransactionEditor::Private::getPrice()
 }
 
 
-bool NewTransactionEditor::Private::valueChanged(CreditDebitHelper* valueHelper)
+bool InvestTransactionEditor::Private::valueChanged(CreditDebitHelper* valueHelper)
 {
     bool rc = true;
-    if (valueHelper->haveValue() && (splitModel.rowCount() <= 1) && (amountHelper->value() != split.value())) {
+#if 0
+    if (valueHelper->haveValue() && (feeSplitModel.rowCount() <= 1) && (amountHelper->value() != split.value())) {
         rc = false;
         try {
             MyMoneyMoney shares;
-            if (splitModel.rowCount() == 1) {
-                const QModelIndex index = splitModel.index(0, 0);
-                splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), eMyMoney::Model::SplitValueRole);
-                splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value() / getPrice()), eMyMoney::Model::SplitSharesRole);
+            if (feeSplitModel.rowCount() == 1) {
+                const QModelIndex index = feeSplitModel.index(0, 0);
+                feeSplitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), eMyMoney::Model::SplitValueRole);
+                feeSplitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value() / getPrice()), eMyMoney::Model::SplitSharesRole);
             }
             rc = true;
 
@@ -378,21 +307,11 @@ bool NewTransactionEditor::Private::valueChanged(CreditDebitHelper* valueHelper)
         /// @todo ask what to do: if the rest of the splits is the same amount we could simply reverse the sign
         /// of all splits, otherwise we could ask if the user wants to start the split editor or anything else.
     }
+#endif
     return rc;
 }
 
-bool NewTransactionEditor::Private::payeeChanged(int payeeIndex)
-{
-    // copy payee information to second split if there are only two splits
-    if (splitModel.rowCount() == 1) {
-        const auto idx = splitModel.index(0, 0);
-        const auto payeeId = payeesModel->index(payeeIndex, 0).data(eMyMoney::Model::IdRole).toString();
-        splitModel.setData(idx, payeeId, eMyMoney::Model::SplitPayeeIdRole);
-    }
-    return true;
-}
-
-NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accountId)
+InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString& accountId)
     : TransactionEditorBase(parent, accountId)
     , d(new Private(this))
 {
@@ -410,27 +329,6 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     d->accountsModel->sort(AccountsModel::Column::AccountName);
     d->ui->accountCombo->setModel(d->accountsModel);
 
-    d->costCenterModel->setSortRole(Qt::DisplayRole);
-    d->costCenterModel->setSourceModel(file->costCenterModel());
-    d->costCenterModel->sort(0);
-
-    d->ui->costCenterCombo->setEditable(true);
-    d->ui->costCenterCombo->setModel(d->costCenterModel);
-    d->ui->costCenterCombo->setModelColumn(0);
-    d->ui->costCenterCombo->completer()->setFilterMode(Qt::MatchContains);
-
-    auto concatModel = new KConcatenateRowsProxyModel(parent);
-    concatModel->addSourceModel(file->payeesModel()->emptyPayee());
-    concatModel->addSourceModel(file->payeesModel());
-    d->payeesModel->setSortRole(Qt::DisplayRole);
-    d->payeesModel->setSourceModel(concatModel);
-    d->payeesModel->sort(0);
-
-    d->ui->payeeEdit->setEditable(true);
-    d->ui->payeeEdit->setModel(d->payeesModel);
-    d->ui->payeeEdit->setModelColumn(0);
-    d->ui->payeeEdit->completer()->setFilterMode(Qt::MatchContains);
-
     d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
     d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
 
@@ -438,32 +336,34 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 
     d->ui->dateEdit->setDisplayFormat(QLocale().dateFormat(QLocale::ShortFormat));
 
-    d->ui->amountEditCredit->setAllowEmpty(true);
-    d->ui->amountEditDebit->setAllowEmpty(true);
-    d->amountHelper = new CreditDebitHelper(this, d->ui->amountEditCredit, d->ui->amountEditDebit);
+    d->ui->sharesAmountEdit->setAllowEmpty(true);
+    d->ui->sharesAmountEdit->setCalculatorButtonVisible(true);
+
+    d->ui->priceAmountEdit->setAllowEmpty(true);
+    d->ui->priceAmountEdit->setCalculatorButtonVisible(true);
+
+    d->ui->feesAmountEdit->setAllowEmpty(true);
+    d->ui->feesAmountEdit->setCalculatorButtonVisible(true);
+
+    d->ui->interestAmountEdit->setAllowEmpty(true);
+    d->ui->interestAmountEdit->setCalculatorButtonVisible(true);
 
     WidgetHintFrameCollection* frameCollection = new WidgetHintFrameCollection(this);
     frameCollection->addFrame(new WidgetHintFrame(d->ui->dateEdit));
-    frameCollection->addFrame(new WidgetHintFrame(d->ui->costCenterCombo));
-    frameCollection->addFrame(new WidgetHintFrame(d->ui->numberEdit, WidgetHintFrame::Warning));
     frameCollection->addWidget(d->ui->enterButton);
 
-    /// @todo convert to new signal/slot syntax
-    connect(d->ui->numberEdit, SIGNAL(textChanged(QString)), this, SLOT(numberChanged(QString)));
-    connect(d->ui->costCenterCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(costCenterChanged(int)));
-    connect(d->ui->accountCombo, SIGNAL(accountSelected(QString)), this, SLOT(categoryChanged(QString)));
-    connect(d->ui->dateEdit, SIGNAL(dateChanged(QDate)), this, SLOT(postdateChanged(QDate)));
-    connect(d->amountHelper, SIGNAL(valueChanged()), this, SLOT(valueChanged()));
-    connect(d->ui->payeeEdit, SIGNAL(currentIndexChanged(int)), this, SLOT(payeeChanged(int)));
+    connect(d->ui->accountCombo, &KMyMoneyAccountCombo::accountSelected, this, &InvestTransactionEditor::categoryChanged);
+    connect(d->ui->dateEdit, &KMyMoneyDateEdit::dateChanged, this, &InvestTransactionEditor::postdateChanged);
+    connect(d->ui->activityCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &InvestTransactionEditor::setupActivity);
 
+    /// @todo convert to new signal/slot syntax
     connect(d->ui->cancelButton, SIGNAL(clicked(bool)), this, SLOT(reject()));
     connect(d->ui->enterButton, SIGNAL(clicked(bool)), this, SLOT(acceptEdit()));
-    connect(d->ui->splitEditorButton, SIGNAL(clicked(bool)), this, SLOT(editSplits()));
+    connect(d->ui->feesSplitEditorButton, SIGNAL(clicked(bool)), this, SLOT(editFeeSplits()));
+    connect(d->ui->interestSplitEditorButton, SIGNAL(clicked(bool)), this, SLOT(editInterestSplits()));
 
     // handle some events in certain conditions different from default
-    d->ui->payeeEdit->installEventFilter(this);
-    d->ui->costCenterCombo->installEventFilter(this);
-    d->ui->tagComboBox->installEventFilter(this);
+    d->ui->activityCombo->installEventFilter(this);
     d->ui->statusCombo->installEventFilter(this);
 
     // setup tooltip
@@ -471,16 +371,16 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     // setWindowFlags(Qt::FramelessWindowHint | Qt::X11BypassWindowManagerHint);
 }
 
-NewTransactionEditor::~NewTransactionEditor()
+InvestTransactionEditor::~InvestTransactionEditor()
 {
 }
 
-bool NewTransactionEditor::accepted() const
+bool InvestTransactionEditor::accepted() const
 {
     return d->accepted;
 }
 
-void NewTransactionEditor::acceptEdit()
+void InvestTransactionEditor::acceptEdit()
 {
     if (d->checkForValidTransaction()) {
         d->accepted = true;
@@ -488,12 +388,12 @@ void NewTransactionEditor::acceptEdit()
     }
 }
 
-void NewTransactionEditor::reject()
+void InvestTransactionEditor::reject()
 {
     emit done();
 }
 
-void NewTransactionEditor::keyPressEvent(QKeyEvent* e)
+void InvestTransactionEditor::keyPressEvent(QKeyEvent* e)
 {
     if (!e->modifiers() || (e->modifiers() & Qt::KeypadModifier && e->key() == Qt::Key_Enter)) {
         switch (e->key()) {
@@ -526,8 +426,9 @@ void NewTransactionEditor::keyPressEvent(QKeyEvent* e)
     }
 }
 
-void NewTransactionEditor::loadTransaction(const QModelIndex& index)
+void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
 {
+#if 0
     auto idx = MyMoneyModelBase::mapToBaseSource(index);
     if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
         d->transaction = MyMoneyTransaction();
@@ -559,13 +460,6 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
             if (selectedSplitRow == splitIdx.row()) {
                 d->ui->dateEdit->setDate(splitIdx.data(eMyMoney::Model::TransactionPostDateRole).toDate());
 
-                const auto payeeId = splitIdx.data(eMyMoney::Model::SplitPayeeIdRole).toString();
-                const QModelIndex payeeIdx = MyMoneyFile::instance()->payeesModel()->indexById(payeeId);
-                if (payeeIdx.isValid())
-                    d->ui->payeeEdit->setCurrentIndex(d->payeesModel->mapFromSource(payeeIdx).row());
-                else
-                    d->ui->payeeEdit->setCurrentIndex(0);
-
                 bool blocked = d->ui->accountCombo->blockSignals(true);
                 switch (splitIdx.data(eMyMoney::Model::TransactionSplitCountRole).toInt()) {
                 case 1:
@@ -589,8 +483,6 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
                 d->ui->amountEditCredit->setText(splitIdx.data(eMyMoney::Model::JournalSplitPaymentRole).toString());
                 d->ui->amountEditDebit->setText(splitIdx.data(eMyMoney::Model::JournalSplitDepositRole).toString());
 
-                d->ui->numberEdit->setText(splitIdx.data(eMyMoney::Model::SplitNumberRole).toString());
-
                 d->ui->statusCombo->setCurrentIndex(splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).toInt());
             } else {
                 d->splitModel.appendSplit(MyMoneyFile::instance()->journalModel()->itemByIndex(splitIdx).split());
@@ -607,45 +499,39 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
         d->updateWidgetState();
         d->bypassPriceEditor = false;
     }
+#endif
     // set focus to date edit once we return to event loop
     QMetaObject::invokeMethod(d->ui->dateEdit, "setFocus", Qt::QueuedConnection);
 }
 
-void NewTransactionEditor::numberChanged(const QString& newNumber)
+void InvestTransactionEditor::setupActivity(int index)
 {
-    d->numberChanged(newNumber);
+    switch(index) {
+    }
 }
 
-void NewTransactionEditor::categoryChanged(const QString& accountId)
+void InvestTransactionEditor::categoryChanged(const QString& accountId)
 {
     d->categoryChanged(accountId);
 }
 
-void NewTransactionEditor::costCenterChanged(int costCenterIndex)
-{
-    d->costCenterChanged(costCenterIndex);
-}
-
-void NewTransactionEditor::postdateChanged(const QDate& date)
+void InvestTransactionEditor::postdateChanged(const QDate& date)
 {
     d->postdateChanged(date);
 }
 
-void NewTransactionEditor::valueChanged()
+void InvestTransactionEditor::valueChanged()
 {
+#if 0
     d->valueChanged(d->amountHelper);
+#endif
 }
 
-void NewTransactionEditor::payeeChanged(int payeeIndex)
-{
-    d->payeeChanged(payeeIndex);
-}
-
-void NewTransactionEditor::editSplits()
+void InvestTransactionEditor::editFeeSplits()
 {
     auto transactionFactor(MyMoneyMoney::ONE);
 
-    SplitModel splitModel(this, nullptr, d->splitModel);
+    SplitModel splitModel(this, nullptr, d->feeSplitModel);
 
     auto invertSplitValues = [&]() -> void {
         const auto rows = splitModel.rowCount();
@@ -660,11 +546,13 @@ void NewTransactionEditor::editSplits()
         }
     };
 
+#if 0
     if (d->amountHelper->value().isNegative()) {
         transactionFactor = MyMoneyMoney::MINUS_ONE;
     } else {
         invertSplitValues();
     }
+#endif
 
     // create an empty split at the end
     // used to create new splits
@@ -690,15 +578,17 @@ void NewTransactionEditor::editSplits()
         }
 
         // copy the splits model contents
-        d->splitModel = splitModel;
+        d->feeSplitModel = splitModel;
 
         // update the transaction amount
+#if 0
         d->amountHelper->setValue(splitDialog->transactionAmount());
+#endif
 
         // the price might have been changed, so we have to update our copy
         // but only if there is one counter split
-        if (d->splitModel.rowCount() == 1) {
-            const auto splitIdx = d->splitModel.index(0, 0);
+        if (d->feeSplitModel.rowCount() == 1) {
+            const auto splitIdx = d->feeSplitModel.index(0, 0);
             const auto shares = splitIdx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
             const auto value = splitIdx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
             if (!shares.isZero()) {
@@ -711,11 +601,10 @@ void NewTransactionEditor::editSplits()
         d->updateWidgetState();
         d->bypassPriceEditor = false;
 
+#if 0
         QWidget* next = d->ui->tagComboBox;
-        if (d->ui->costCenterCombo->isEnabled()) {
-            next = d->ui->costCenterCombo;
-        }
         next->setFocus();
+#endif
     }
 
     if (splitDialog) {
@@ -723,12 +612,15 @@ void NewTransactionEditor::editSplits()
     }
 }
 
-MyMoneyMoney NewTransactionEditor::transactionAmount() const
+MyMoneyMoney InvestTransactionEditor::transactionAmount() const
 {
+#if 0
     return d->amountHelper->value();
+#endif
+    return {};
 }
 
-void NewTransactionEditor::saveTransaction()
+void InvestTransactionEditor::saveTransaction()
 {
     MyMoneyTransaction t;
 
@@ -745,17 +637,17 @@ void NewTransactionEditor::saveTransaction()
         if (split.id() == d->split.id()) {
             continue;
         }
-        const auto rows = d->splitModel.rowCount();
+        const auto rows = d->feeSplitModel.rowCount();
         int row;
         for (row = 0; row < rows; ++row) {
-            const QModelIndex index = d->splitModel.index(row, 0);
+            const QModelIndex index = d->feeSplitModel.index(row, 0);
             if (index.data(eMyMoney::Model::IdRole).toString() == split.id()) {
                 break;
             }
         }
 
         // if the split is not in the model, we get rid of it
-        if (d->splitModel.rowCount() == row) {
+        if (d->feeSplitModel.rowCount() == row) {
             t.removeSplit(split);
         }
     }
@@ -764,10 +656,11 @@ void NewTransactionEditor::saveTransaction()
     try {
         // new we update the split we are opened for
         MyMoneySplit sp(d->split);
-        sp.setNumber(d->ui->numberEdit->text());
         sp.setMemo(d->ui->memoEdit->toPlainText());
+#if 0
         sp.setShares(d->amountHelper->value());
         sp.setValue(d->amountHelper->value());
+#endif
 
         if (sp.reconcileFlag() != eMyMoney::Split::State::Reconciled
                 && !sp.reconcileDate().isValid()
@@ -775,10 +668,6 @@ void NewTransactionEditor::saveTransaction()
             sp.setReconcileDate(QDate::currentDate());
         }
         sp.setReconcileFlag(static_cast<eMyMoney::Split::State>(d->ui->statusCombo->currentIndex()));
-
-        const auto payeeRow = d->ui->payeeEdit->currentIndex();
-        const auto payeeIdx = d->payeesModel->index(payeeRow, 0);
-        sp.setPayeeId(payeeIdx.data(eMyMoney::Model::IdRole).toString());
 
         if (sp.id().isEmpty()) {
             t.addSplit(sp);
@@ -788,7 +677,7 @@ void NewTransactionEditor::saveTransaction()
         t.setPostDate(d->ui->dateEdit->date());
 
         // now update and add what we have in the model
-        const SplitModel* model = &d->splitModel;
+        const SplitModel* model = &d->feeSplitModel;
         for (int row = 0; row < model->rowCount(); ++row) {
             const QModelIndex idx = model->index(row, 0);
             MyMoneySplit s;
@@ -800,13 +689,10 @@ void NewTransactionEditor::saveTransaction()
                 s = t.splitById(splitId);
             } catch(const MyMoneyException&) {
             }
-            s.setNumber(idx.data(eMyMoney::Model::SplitNumberRole).toString());
             s.setMemo(idx.data(eMyMoney::Model::SplitMemoRole).toString());
             s.setAccountId(idx.data(eMyMoney::Model::SplitAccountIdRole).toString());
             s.setShares(idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>());
             s.setValue(idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>());
-            s.setCostCenterId(idx.data(eMyMoney::Model::SplitCostCenterIdRole).toString());
-            s.setPayeeId(idx.data(eMyMoney::Model::SplitPayeeIdRole).toString());
 
             if (s.id().isEmpty()) {
                 t.addSplit(s);
@@ -828,7 +714,7 @@ void NewTransactionEditor::saveTransaction()
 
 }
 
-bool NewTransactionEditor::eventFilter(QObject* o, QEvent* e)
+bool InvestTransactionEditor::eventFilter(QObject* o, QEvent* e)
 {
     auto cb = qobject_cast<QComboBox*>(o);
     if (o) {

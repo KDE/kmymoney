@@ -151,6 +151,14 @@ void SimpleLedgerView::openNewLedger(QString accountId, bool makeCurrentLedger)
   if(d->inModelUpdate || accountId.isEmpty())
     return;
 
+  // in case a stock account is selected, we switch to the parent which
+  // is the investment account
+  MyMoneyAccount acc = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
+  if (acc.isInvest()) {
+    acc = MyMoneyFile::instance()->accountsModel()->itemById(acc.parentAccountId());
+    accountId = acc.id();
+  }
+
   LedgerViewPage* view = 0;
   // check if ledger is already opened
   for(int idx = 0; idx < d->ui->ledgerTab->count()-1; ++idx) {
@@ -164,7 +172,6 @@ void SimpleLedgerView::openNewLedger(QString accountId, bool makeCurrentLedger)
   }
 
   // need a new tab, we insert it before the rightmost one
-  const MyMoneyAccount acc = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
   if(!acc.id().isEmpty()) {
 
     // create new ledger view page

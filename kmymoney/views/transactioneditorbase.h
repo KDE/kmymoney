@@ -15,48 +15,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-#ifndef LEDGERACCOUNTFILTER_H
-#define LEDGERACCOUNTFILTER_H
+#ifndef TRANSACTIONEDITORBASE_H
+#define TRANSACTIONEDITORBASE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-// ----------------------------------------------------------------------------
-// KDE Includes
+#include <QFrame>
+class QWidget;
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ledgerfilterbase.h"
+#include "mymoneymoney.h"
 
-class MyMoneyAccount;
-class LedgerAccountFilterPrivate;
-
-class LedgerAccountFilter : public LedgerFilterBase
+class TransactionEditorBase : public QFrame
 {
   Q_OBJECT
 
 public:
-  explicit LedgerAccountFilter(QObject* parent, QVector<QAbstractItemModel*> specialJournalModels);
-  ~LedgerAccountFilter() override;
+  explicit TransactionEditorBase(QWidget* parent = 0, const QString& accountId = QString());
+  virtual ~TransactionEditorBase();
 
-  void setShowBalanceInverted(bool inverted = true);
+  virtual bool accepted() const = 0;
+  virtual void loadTransaction(const QModelIndex& index) = 0;
+  virtual void saveTransaction() = 0;
 
-  void setAccount(const MyMoneyAccount& acc);
-
-public Q_SLOTS:
-  void recalculateBalancesOnIdle(const QString& accountId);
-
-protected Q_SLOTS:
-  void recalculateBalances();
-
-protected:
-  bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
+Q_SIGNALS:
+  void done();
 
 private:
-  Q_DECLARE_PRIVATE_D(LedgerFilterBase::d_ptr, LedgerAccountFilter)
+  static QDate  m_lastPostDateUsed;
 };
 
-#endif // LEDGERACCOUNTFILTER_H
+#endif // TRANSACTIONEDITORBASE_H
 

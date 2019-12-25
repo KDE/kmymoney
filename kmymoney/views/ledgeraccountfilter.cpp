@@ -111,25 +111,47 @@ void LedgerAccountFilter::recalculateBalances()
   if (sourceModel() == nullptr || d->account.id().isEmpty())
     return;
 
-  const auto start = index(0, 0);
-  /// @note No idea if additional filtering is necessary, as we filter on an account anyway
-  /// upon no account filter active, we should not show a balance anyway
-  const auto indexes = match(start, eMyMoney::Model::SplitAccountIdRole, d->account.id(), -1);
-  MyMoneyMoney balance;
-  for(const auto &idx : indexes) {
-    if(d->showValuesInverted) {
-      balance -= idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
-    } else {
-      balance += idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
-    }
-    const auto dispIndex = index(idx.row(), JournalModel::Column::Balance);
-    setData(dispIndex, QVariant::fromValue(balance), Qt::DisplayRole);
+  // we need to operate on the base model, not the filtered one
+  // and update only the selected account(s). In case of investment
+  // accounts, we also update the balance of the underlying stock
+  // accounts.
+  bool isInvestmentAccount = false;
+  QStringList accountIds;
+  accountIds << d->account.id();
+  if (d->account.accountType() == eMyMoney::Account::Type::Investment) {
+    isInvestmentAccount = true;
+    accountIds << d->account.accountList();
   }
 
-  const QModelIndex top = index(0, JournalModel::Column::Balance);
-  const QModelIndex bottom = index(rowCount()-1, JournalModel::Column::Balance);
+  QHash<QString, MyMoneyMoney> balances;
+  const auto model = MyMoneyFile::instance()->journalModel();
+  const auto rows = model->rowCount();
+  QModelIndex idx;
+  QString accountId;
+  for (int row = 0; row < rows; ++row) {
+    idx = model->index(row, 0);
+    accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
+    if (accountIds.contains(accountId)) {
+      if (isInvestmentAccount) {
+        if (idx.data(eMyMoney::Model::TransactionIsStockSplitRole).toBool()) {
+          balances[accountId] *= idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+        } else {
+          balances[accountId] += idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+        }
 
-  dataChanged(top, bottom);
+      } else {
+        if(d->showValuesInverted) {
+          balances[accountId] -= idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+        } else {
+          balances[accountId] += idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+        }
+      }
+      const auto dispIndex = model->index(idx.row(), JournalModel::Column::Balance);
+      model->setData(dispIndex, QVariant::fromValue(balances[accountId]), Qt::DisplayRole);
+
+    }
+  }
+
   d->balanceCalculationPending = false;
 }
 
@@ -156,4 +178,19 @@ void LedgerAccountFilter::setAccount(const MyMoneyAccount& acc)
   if(!d->balanceCalculationPending) {
     recalculateBalances();
   }
+}
+
+bool LedgerAccountFilter::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
+{
+  Q_D(const LedgerAccountFilter);
+  auto rc = LedgerFilterBase::filterAcceptsRow(source_row, source_parent);
+
+  // in case we don't have a match and the current account is an investment account
+  // we check if the journal entry references a child account of the investment account
+  // if so, we need to display the transaction
+  if (!rc && d->account.accountType() == eMyMoney::Account::Type::Investment) {
+    const auto idx = sourceModel()->index(source_row, 0, source_parent);
+    rc = d->account.accountList().contains(idx.data(eMyMoney::Model::SplitAccountIdRole).toString());
+  }
+  return rc;
 }

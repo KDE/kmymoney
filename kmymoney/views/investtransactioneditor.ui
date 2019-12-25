@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>InvestTransactionEditor</class>
+ <widget class="QFrame" name="InvestTransactionEditor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>682</width>
+    <height>295</height>
+   </rect>
+  </property>
+  <property name="frameShape">
+   <enum>QFrame::StyledPanel</enum>
+  </property>
+  <property name="frameShadow">
+   <enum>QFrame::Raised</enum>
+  </property>
+  <layout class="QGridLayout" name="gridLayout" columnstretch="0,5,0,2">
+   <property name="verticalSpacing">
+    <number>1</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QLabel" name="activityLabel">
+     <property name="text">
+      <string>Activity</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QComboBox" name="activityCombo"/>
+   </item>
+   <item row="0" column="2">
+    <widget class="QLabel" name="dateLabel">
+     <property name="text">
+      <string>Date</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="3">
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="KMyMoneyDateEdit" name="dateEdit">
+       <property name="displayFormat">
+        <string notr="true">M/d/yy</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="hs2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="securityLabel">
+     <property name="text">
+      <string>Security</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="KMyMoneyAccountCombo" name="securityCombo">
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QLabel" name="sharesLabel">
+     <property name="text">
+      <string>Shares</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="AmountEdit" name="sharesAmountEdit">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="placeholderText">
+      <string>Shares</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="accountLabel">
+     <property name="text">
+      <string>Account</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="KMyMoneyAccountCombo" name="accountCombo">
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="QLabel" name="priceLabel">
+     <property name="text">
+      <string>Price</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3">
+    <widget class="AmountEdit" name="priceAmountEdit">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="placeholderText">
+      <string>Price/share</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="feesLabel">
+     <property name="text">
+      <string>Fees</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="KMyMoneyAccountCombo" name="feesCombo">
+       <property name="editable">
+        <bool>true</bool>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="feesSplitEditorButton">
+       <property name="text">
+        <string>...</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="3" column="2">
+    <widget class="QLabel" name="feesLabel_2">
+     <property name="text">
+      <string>Fees</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="3">
+    <widget class="AmountEdit" name="feesAmountEdit">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="placeholderText">
+      <string>Fees</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="interestLabel">
+     <property name="text">
+      <string>Interest</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="KMyMoneyAccountCombo" name="interestCombo">
+       <property name="editable">
+        <bool>true</bool>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="interestSplitEditorButton">
+       <property name="text">
+        <string>...</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="4" column="2">
+    <widget class="QLabel" name="interestLabel_2">
+     <property name="text">
+      <string>Interest</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="3">
+    <widget class="AmountEdit" name="interestAmountEdit">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="placeholderText">
+      <string>Interest</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Memo</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1" rowspan="3">
+    <widget class="QPlainTextEdit" name="memoEdit">
+     <property name="tabChangesFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="2">
+    <widget class="QLabel" name="label_9">
+     <property name="text">
+      <string>Status</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="3">
+    <widget class="QComboBox" name="statusCombo">
+     <item>
+      <property name="text">
+       <string>Cleared</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="6" column="3">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>48</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="7" column="2" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QToolButton" name="enterButton">
+       <property name="text">
+        <string>Enter</string>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextBesideIcon</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="cancelButton">
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextBesideIcon</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KMyMoneyAccountCombo</class>
+   <extends>QComboBox</extends>
+   <header>kmymoneyaccountcombo.h</header>
+  </customwidget>
+  <customwidget>
+   <class>AmountEdit</class>
+   <extends>QLineEdit</extends>
+   <header>amountedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KMyMoneyDateEdit</class>
+   <extends>QDateEdit</extends>
+   <header>kmymoneydateedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>activityCombo</tabstop>
+  <tabstop>dateEdit</tabstop>
+  <tabstop>securityCombo</tabstop>
+  <tabstop>sharesAmountEdit</tabstop>
+  <tabstop>priceAmountEdit</tabstop>
+  <tabstop>accountCombo</tabstop>
+  <tabstop>feesCombo</tabstop>
+  <tabstop>feesSplitEditorButton</tabstop>
+  <tabstop>feesAmountEdit</tabstop>
+  <tabstop>interestCombo</tabstop>
+  <tabstop>interestSplitEditorButton</tabstop>
+  <tabstop>interestAmountEdit</tabstop>
+  <tabstop>memoEdit</tabstop>
+  <tabstop>statusCombo</tabstop>
+  <tabstop>enterButton</tabstop>
+  <tabstop>cancelButton</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

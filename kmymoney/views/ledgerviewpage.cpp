@@ -115,6 +115,23 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
 
   switch(acc.accountType()) {
     case eMyMoney::Account::Type::Investment:
+      columns = { JournalModel::Column::Number,
+        JournalModel::Column::Account,
+        JournalModel::Column::CostCenter,
+        JournalModel::Column::Amount,
+        JournalModel::Column::Payment,
+        JournalModel::Column::Deposit, };
+      d->ui->ledgerView->setColumnsHidden(columns);
+      columns = {
+        JournalModel::Column::Date,
+        JournalModel::Column::Security,
+        JournalModel::Column::Detail,
+        JournalModel::Column::Reconciliation,
+        JournalModel::Column::Quantity,
+        JournalModel::Column::Price,
+        JournalModel::Column::Value,
+        JournalModel::Column::Balance, };
+      d->ui->ledgerView->setColumnsShown(columns);
       break;
 
     default:

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef NEWTRANSACTIONEDITOR_H
-#define NEWTRANSACTIONEDITOR_H
+#ifndef INVESTTRANSACTIONEDITOR_H
+#define INVESTTRANSACTIONEDITOR_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -30,13 +30,13 @@ class QWidget;
 #include "transactioneditorbase.h"
 #include "mymoneymoney.h"
 
-class NewTransactionEditor : public TransactionEditorBase
+class InvestTransactionEditor : public TransactionEditorBase
 {
   Q_OBJECT
 
 public:
-  explicit NewTransactionEditor(QWidget* parent = 0, const QString& accountId = QString());
-  virtual ~NewTransactionEditor();
+  explicit InvestTransactionEditor(QWidget* parent = 0, const QString& accountId = QString());
+  virtual ~InvestTransactionEditor();
 
   /**
    * This method returns true if the user pressed the enter button.
@@ -66,15 +66,14 @@ protected Q_SLOTS:
   virtual void reject();
   virtual void acceptEdit();
 
-  virtual void editSplits();
+  virtual void editFeeSplits();
 
-  virtual void numberChanged(const QString& newNumber);
   virtual void categoryChanged(const QString& accountId);
-  virtual void costCenterChanged(int costCenterIndex);
   virtual void postdateChanged(const QDate& date);
-  virtual void payeeChanged(int payeeIndex);
 
   void valueChanged();
+
+  void setupActivity(int index);
 
 private:
   class Private;
@@ -82,5 +81,5 @@ private:
   static QDate  m_lastPostDateUsed;
 };
 
-#endif // NEWTRANSACTIONEDITOR_H
+#endif // INVESTTRANSACTIONEDITOR_H
 

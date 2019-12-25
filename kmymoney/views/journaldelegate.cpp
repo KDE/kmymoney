@@ -40,8 +40,10 @@
 #include "ledgerview.h"
 #include "journalmodel.h"
 #include "schedulesjournalmodel.h"
+#include "accountsmodel.h"
 #include "payeesmodel.h"
 #include "newtransactioneditor.h"
+#include "investtransactioneditor.h"
 
 static unsigned char attentionSign[] = {
   0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A,
@@ -153,20 +155,33 @@ public:
   {
     QStringList lines;
     if(index.column() == JournalModel::Column::Detail) {
-      lines << index.data(m_singleLineRole).toString();
-      if(opt.state & QStyle::State_Selected) {
-        lines.clear();
-        lines << index.data(eMyMoney::Model::Roles::SplitPayeeRole).toString();
-        lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
-        lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
+      if (index.data(eMyMoney::Model::TransactionIsInvestmentRole).toBool()) {
+        if(opt.state & QStyle::State_Selected) {
+          lines << index.data(eMyMoney::Model::SplitActivityRole).toString();
+          lines << index.data(eMyMoney::Model::TransactionBrokerageAccountRole).toString();
+          lines << index.data(eMyMoney::Model::TransactionInterestCategoryRole).toString();
+          lines << index.data(eMyMoney::Model::TransactionFeesCategoryRole).toString();
+          lines << index.data(eMyMoney::Model::SplitSingleLineMemoRole).toString();
+        } else {
+          lines << index.data(eMyMoney::Model::SplitActivityRole).toString();
+        }
 
       } else {
-        if(lines.at(0).isEmpty()) {
+        lines << index.data(m_singleLineRole).toString();
+        if(opt.state & QStyle::State_Selected) {
           lines.clear();
-          lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
-        }
-        if(lines.at(0).isEmpty()) {
+          lines << index.data(eMyMoney::Model::Roles::SplitPayeeRole).toString();
           lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
+          lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
+
+        } else {
+          if(lines.at(0).isEmpty()) {
+            lines.clear();
+            lines << index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
+          }
+          if(lines.at(0).isEmpty()) {
+            lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
+          }
         }
       }
       lines.removeAll(QString());
@@ -177,7 +192,7 @@ public:
     return lines;
   }
 
-  NewTransactionEditor*         m_editor;
+  TransactionEditorBase*        m_editor;
   LedgerView*                   m_view;
   int                           m_editorRow;
   eMyMoney::Model::Roles        m_singleLineRole;
@@ -230,7 +245,22 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
         accountId = d->m_view->accountId();
       }
       if (!accountId.isEmpty()) {
-        d->m_editor = new NewTransactionEditor(parent, accountId);
+        // now determine which editor to use. In case we have no transaction (yet)
+        // we use the account type
+        if (index.data(eMyMoney::Model::JournalTransactionIdRole).toString().isEmpty()) {
+          const auto acc = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
+          if (acc.accountType() == eMyMoney::Account::Type::Investment) {
+            d->m_editor = new InvestTransactionEditor(parent, accountId);
+          } else {
+            d->m_editor = new NewTransactionEditor(parent, accountId);
+          }
+        } else {
+          if (index.data(eMyMoney::Model::TransactionIsInvestmentRole).toBool()) {
+            d->m_editor = new InvestTransactionEditor(parent, accountId);
+          } else {
+            d->m_editor = new NewTransactionEditor(parent, accountId);
+          }
+        }
       } else {
         qDebug() << "Unable to determine account for editing";
 
@@ -242,8 +272,9 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
 
     if(d->m_editor) {
       d->m_editorRow = index.row();
-      connect(d->m_editor, SIGNAL(done()), this, SLOT(endEdit()));
-      emit sizeHintChanged(index);
+      connect(d->m_editor, &TransactionEditorBase::done, this, &JournalDelegate::endEdit);
+      JournalDelegate* that = const_cast<JournalDelegate*>(this);
+      emit that->sizeHintChanged(index);
     }
 
   } else {
@@ -398,11 +429,15 @@ QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
   QSize size(10, d->m_lineHeight + 2 * d->m_margin);
 
   if(option.state & QStyle::State_Selected) {
+#if 0
     auto payeeId = index.data(eMyMoney::Model::Roles::SplitPayeeIdRole).toString();
     auto counterAccount = index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
     auto memo = index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
 
     rows = (payeeId.isEmpty() ? 0 : 1) + (counterAccount.isEmpty() ? 0 : 1) + (memo.isEmpty() ? 0 : 1);
+#endif
+    rows = d->displayString(index, option).count();
+
     // make sure we show at least one row
     if(!rows) {
       rows = 1;
@@ -458,7 +493,7 @@ bool JournalDelegate::eventFilter(QObject* o, QEvent* event)
 
 void JournalDelegate::setEditorData(QWidget* editWidget, const QModelIndex& index) const
 {
-  NewTransactionEditor* editor = qobject_cast<NewTransactionEditor*>(editWidget);
+  auto* editor = qobject_cast<TransactionEditorBase*>(editWidget);
   if(editor) {
     editor->loadTransaction(index);
   }
@@ -469,7 +504,7 @@ void JournalDelegate::setModelData(QWidget* editWidget, QAbstractItemModel* mode
   Q_UNUSED(model)
   Q_UNUSED(index)
 
-  NewTransactionEditor* editor = qobject_cast<NewTransactionEditor*>(editWidget);
+  auto* editor = qobject_cast<TransactionEditorBase*>(editWidget);
   if(editor) {
     editor->saveTransaction();
   }

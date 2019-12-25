@@ -30,7 +30,9 @@ if(ENABLE_UNFINISHEDFEATURES)
     journaldelegate.cpp
     onlinebalancedelegate.cpp
     specialdatedelegate.cpp
+    investtransactioneditor.cpp
     newspliteditor.cpp
+    transactioneditorbase.cpp
     newtransactioneditor.cpp
     newtransactionform.cpp
     splitview.cpp
@@ -60,6 +62,7 @@ if(ENABLE_UNFINISHEDFEATURES)
     newspliteditor.ui
     newtransactioneditor.ui
     newtransactionform.ui
+    investtransactioneditor.ui
   )
 endif()
 

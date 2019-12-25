@@ -16,8 +16,7 @@
  */
 
 
-#ifndef LEDGERACCOUNTFILTER_H
-#define LEDGERACCOUNTFILTER_H
+#include "transactioneditorbase.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -28,35 +27,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ledgerfilterbase.h"
 
-class MyMoneyAccount;
-class LedgerAccountFilterPrivate;
 
-class LedgerAccountFilter : public LedgerFilterBase
+TransactionEditorBase::TransactionEditorBase(QWidget* parent, const QString& accountId)
+  : QFrame(parent, Qt::FramelessWindowHint /* | Qt::X11BypassWindowManagerHint */)
 {
-  Q_OBJECT
+}
 
-public:
-  explicit LedgerAccountFilter(QObject* parent, QVector<QAbstractItemModel*> specialJournalModels);
-  ~LedgerAccountFilter() override;
-
-  void setShowBalanceInverted(bool inverted = true);
-
-  void setAccount(const MyMoneyAccount& acc);
-
-public Q_SLOTS:
-  void recalculateBalancesOnIdle(const QString& accountId);
-
-protected Q_SLOTS:
-  void recalculateBalances();
-
-protected:
-  bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
-
-private:
-  Q_DECLARE_PRIVATE_D(LedgerFilterBase::d_ptr, LedgerAccountFilter)
-};
-
-#endif // LEDGERACCOUNTFILTER_H
-
+TransactionEditorBase::~TransactionEditorBase()
+{
+}

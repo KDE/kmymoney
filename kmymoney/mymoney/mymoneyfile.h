@@ -530,6 +530,14 @@ public:
   bool isTransfer(const MyMoneyTransaction& t) const;
 
   /**
+   * Return @a true if transaction @a t is an investment transaction.
+   * A transaction is called an investment transaction if at least
+   * one split references an investment account and one split
+   * references an account denoted in an investment security.
+   */
+  bool isInvestmentTransaction(const MyMoneyTransaction& t) const;
+
+  /**
     * Deletes an existing account from the file global account pool
     * This method only allows to remove accounts that are not
     * referenced by any split. Use moveSplits() to move splits

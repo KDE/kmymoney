@@ -36,7 +36,6 @@
 
 #include "ui_splitdialog.h"
 #include "mymoneyaccount.h"
-#include "newtransactioneditor.h"
 #include "splitadjustdialog.h"
 #include "modelenums.h"
 #include "icons/icons.h"
@@ -71,7 +70,7 @@ public:
   /**
    * The parent transaction editor which opened the split editor
    */
-  NewTransactionEditor*       transactionEditor;
+  QWidget*                    transactionEditor;
 
   MyMoneyMoney                transactionTotal;
   MyMoneyMoney                splitsTotal;
@@ -105,7 +104,7 @@ void SplitDialog::Private::deleteSplits(QModelIndexList indexList)
 }
 
 
-SplitDialog::SplitDialog(const MyMoneyAccount& account, const MyMoneySecurity& commodity, const MyMoneyMoney& amount, NewTransactionEditor* parent, Qt::WindowFlags f)
+SplitDialog::SplitDialog(const MyMoneyAccount& account, const MyMoneySecurity& commodity, const MyMoneyMoney& amount, QWidget* parent, Qt::WindowFlags f)
   : QDialog(parent, f)
   , d(new Private(this))
 {

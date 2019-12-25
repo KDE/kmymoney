@@ -957,7 +957,7 @@ MyMoneyInstitution MyMoneyFile::institution(const QString& id) const
 
 MyMoneyAccount MyMoneyFile::account(const QString& id) const
 {
-  if (Q_UNLIKELY(id.isEmpty())) // FIXME: Stop requesting accounts with empty id
+  if (Q_UNLIKELY(id.isEmpty()) || Q_UNLIKELY(journalModel()->fakeId().compare(id) == 0)) // FIXME: Stop requesting accounts with empty id
     return MyMoneyAccount();
 
   const auto idx = d->accountsModel.indexById(id);
@@ -1041,6 +1041,19 @@ bool MyMoneyFile::isStandardAccount(const QString& id) const
   || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense)
   || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income)
   || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Equity);
+}
+
+bool MyMoneyFile::isInvestmentTransaction(const MyMoneyTransaction& t) const
+{
+  for (const auto& split : t.splits()) {
+    auto acc = account(split.accountId());
+    if (!acc.id().isEmpty()) {
+      if (acc.isInvest() && (split.investmentTransactionType() != eMyMoney::Split::InvestmentTransactionType::UnknownTransactionType)) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
 void MyMoneyFile::removeAccount(const MyMoneyAccount& account)

@@ -304,6 +304,7 @@ namespace eMyMoney {
     inline uint qHash(const InvestmentTransactionType key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 
     enum class Action {
+      Unknown = -1,
       Check,
       Deposit,
       Transfer,
@@ -496,7 +497,12 @@ namespace eMyMoney {
       TransactionCounterAccountRole,
       TransactionCounterAccountIdRole,
       TransactionIsTransferRole,
+      TransactionIsInvestmentRole,
       TransactionSplitCountRole,
+      TransactionBrokerageAccountRole,
+      TransactionInterestCategoryRole,
+      TransactionFeesCategoryRole,
+      TransactionIsStockSplitRole,
 
       // MyMoneySplit
       SplitSharesSuffixRole,
@@ -515,6 +521,7 @@ namespace eMyMoney {
       SplitActionRole,
       SplitNumberRole,
       SplitCostCenterIdRole,
+      SplitActivityRole,
 
       // Journal
       JournalSplitIdRole,

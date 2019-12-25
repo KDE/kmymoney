@@ -46,7 +46,7 @@
 #include "transactionform.h"
 #include "kmymoneylineedit.h"
 #include "kmymoneycombo.h"
-#include "investtransactioneditor.h"
+#include "dialogs/investtransactioneditor.h"
 #include "kmymoneyutils.h"
 #include "amountedit.h"
 

@@ -37,6 +37,7 @@
 #include "accountsmodel.h"
 #include "costcentermodel.h"
 #include "payeesmodel.h"
+#include "securitiesmodel.h"
 #include "mymoneytransaction.h"
 #include "mymoneysplit.h"
 #include "mymoneymoney.h"
@@ -98,6 +99,32 @@ struct JournalModel::Private
     return QString();
   }
 
+  QString investmentActivity(const JournalEntry& journalEntry) const
+  {
+    switch (journalEntry.split().investmentTransactionType()) {
+      case eMyMoney::Split::InvestmentTransactionType::AddShares:
+        return i18nc("Add securities/shares/bonds", "Add shares");
+      case eMyMoney::Split::InvestmentTransactionType::RemoveShares:
+        return i18nc("Remove securities/shares/bonds", "Remove shares");
+      case eMyMoney::Split::InvestmentTransactionType::BuyShares:
+        return i18nc("Buy securities/shares/bonds", "Buy shares");
+      case eMyMoney::Split::InvestmentTransactionType::SellShares:
+        return i18nc("Sell securities/shares/bonds", "Sell shares");
+      case eMyMoney::Split::InvestmentTransactionType::Dividend:
+        return i18n("Dividend");
+      case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
+        return i18n("Reinvest Dividend");
+      case eMyMoney::Split::InvestmentTransactionType::Yield:
+        return i18n("Yield");
+      case eMyMoney::Split::InvestmentTransactionType::SplitShares:
+        return i18nc("Split securities/shares/bonds", "Split shares");
+      case eMyMoney::Split::InvestmentTransactionType::InterestIncome:
+        return i18n("Interest Income");
+      default:
+        return i18nc("Unknown investment activity", "Unknown");
+    }
+  }
+
   QString counterAccountId(const JournalEntry& journalEntry, const MyMoneyTransaction& transaction)
   {
     if (transaction.splitCount() == 2) {
@@ -111,7 +138,7 @@ struct JournalModel::Private
     return {};
   }
 
-  QString counterAccount(const JournalEntry& journalEntry, const MyMoneyTransaction& transaction)
+  QString counterAccount(const JournalEntry& journalEntry, const MyMoneyTransaction& transaction) const
   {
     // A transaction can have more than 2 splits ...
     if(transaction.splitCount() > 2) {
@@ -131,6 +158,59 @@ struct JournalModel::Private
       return i18n("*** UNASSIGNED ***");
     }
     return QString();
+  }
+
+  QString investmentBrokerageAccount(const JournalEntry& journalEntry) const
+  {
+    const auto file = MyMoneyFile::instance();
+    if (file->isInvestmentTransaction(journalEntry.transaction())) {
+      for (const auto& split : journalEntry.transaction().splits()) {
+        const auto acc = file->account(split.accountId());
+        if (acc.isAssetLiability() && !acc.isInvest() && (acc.accountType() != eMyMoney::Account::Type::Investment)) {
+          return acc.name();
+        }
+      }
+    }
+    return {};
+  }
+
+  QString interestOrFeeCategory(const JournalEntry& journalEntry, bool fees) const
+  {
+    QString rc;
+    const auto file = MyMoneyFile::instance();
+    if (file->isInvestmentTransaction(journalEntry.transaction())) {
+      for (const auto& split : journalEntry.transaction().splits()) {
+        const auto acc = file->account(split.accountId());
+        if (acc.isIncomeExpense()) {
+          if (split.shares().isNegative() ^ fees) {
+            if (rc.isEmpty()) {
+              rc = MyMoneyFile::instance()->accountsModel()->accountIdToHierarchicalName(split.accountId());
+            } else {
+              return fees ? i18n("Multiple fee categories") : i18n("Multiple interest categories");
+            }
+          }
+        }
+      }
+    }
+    return rc;
+  }
+
+  QString investmentInterestCategory(const JournalEntry& journalEntry) const
+  {
+    return interestOrFeeCategory(journalEntry, false);
+  }
+
+  QString investmentFeesCategory(const JournalEntry& journalEntry) const
+  {
+    return interestOrFeeCategory(journalEntry, true);
+  }
+
+  QString security(const JournalEntry& journalEntry) const
+  {
+    const auto file = MyMoneyFile::instance();
+    const auto acc = file->accountsModel()->itemById(journalEntry.split().accountId());
+    const auto sec = file->securitiesModel()->itemById(acc.currencyId());
+    return sec.name();
   }
 
   void removeIdKeyMapping(const QString& id)
@@ -364,6 +444,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
           return MyMoneyFile::instance()->accountsModel()->itemById(journalEntry.split().accountId()).name();
 
         case Security:
+          return d->security(journalEntry);
           break;
 
         case CostCenter:
@@ -463,8 +544,23 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
       }
       return true;
 
+    case eMyMoney::Model::TransactionIsInvestmentRole:
+      return MyMoneyFile::instance()->isInvestmentTransaction(journalEntry.transaction());
+
+    case eMyMoney::Model::TransactionBrokerageAccountRole:
+      return d->investmentBrokerageAccount(journalEntry);
+
+    case eMyMoney::Model::TransactionInterestCategoryRole:
+      return d->investmentInterestCategory(journalEntry);
+
+    case eMyMoney::Model::TransactionFeesCategoryRole:
+      return d->investmentFeesCategory(journalEntry);
+
     case eMyMoney::Model::TransactionPostDateRole:
       return transaction.postDate();
+
+    case eMyMoney::Model::TransactionIsStockSplitRole:
+      return transaction.isStockSplit();
 
     case eMyMoney::Model::Roles::TransactionErroneousRole:
       return !transaction.splitSum().isZero();
@@ -553,6 +649,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::SplitNumberRole:
       return journalEntry.split().number();
+
+    case eMyMoney::Model::SplitActivityRole:
+      return d->investmentActivity(journalEntry);
 
     default:
       if (role >= Qt::UserRole)

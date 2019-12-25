@@ -256,6 +256,36 @@ void MyMoneySplit::setAction(eMyMoney::Split::InvestmentTransactionType type)
   }
 }
 
+eMyMoney::Split::InvestmentTransactionType MyMoneySplit::investmentTransactionType() const
+{
+  Q_D(const MyMoneySplit);
+  switch(actionStringToAction(d->m_action)) {
+    case Split::Action::BuyShares:
+      return (d->m_shares.isNegative()) ? Split::InvestmentTransactionType::SellShares : Split::InvestmentTransactionType::BuyShares;
+
+    case Split::Action::Dividend:
+      return Split::InvestmentTransactionType::Dividend;
+
+    case Split::Action::Yield:
+      return Split::InvestmentTransactionType::Yield;
+
+    case Split::Action::ReinvestDividend:
+      return Split::InvestmentTransactionType::ReinvestDividend;
+
+    case Split::Action::AddShares:
+      return (d->m_shares.isNegative()) ? Split::InvestmentTransactionType::RemoveShares : Split::InvestmentTransactionType::AddShares;
+
+    case Split::Action::SplitShares:
+      return Split::InvestmentTransactionType::SplitShares;
+
+    case Split::Action::InterestIncome:
+      return Split::InvestmentTransactionType::InterestIncome;
+
+    default:
+      return Split::InvestmentTransactionType::UnknownTransactionType;
+  }
+}
+
 QString MyMoneySplit::action() const
 {
   Q_D(const MyMoneySplit);
@@ -446,7 +476,7 @@ bool MyMoneySplit::replaceId(const QString& newId, const QString& oldId)
   return changed;
 }
 
-QString MyMoneySplit::actionName(Split::Action action)
+QHash<Split::Action, QString> actionNamesLUT()
 {
   static const QHash<Split::Action, QString> actionNames {
     {Split::Action::Check,            QStringLiteral("Check")},
@@ -464,5 +494,15 @@ QString MyMoneySplit::actionName(Split::Action action)
     {Split::Action::SplitShares,      QStringLiteral("Split")},
     {Split::Action::InterestIncome,   QStringLiteral("IntIncome")},
   };
-  return actionNames[action];
+  return actionNames;
+}
+
+QString MyMoneySplit::actionName(Split::Action action)
+{
+  return actionNamesLUT().value(action);
+}
+
+Split::Action MyMoneySplit::actionStringToAction(const QString &text) const
+{
+  return actionNamesLUT().key(text, Split::Action::Unknown);
 }
