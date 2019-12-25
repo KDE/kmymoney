@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2002-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2003       Michael Edwardes <mte@users.sourceforge.net>
  * Copyright 2004-2006  Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2004       Kevin Tambascio <ktambascio@users.sourceforge.net>
@@ -56,7 +56,6 @@ private Q_SLOTS:
   void testHasReferenceTo();
   void testPaidEarlyOneTime();
   void testReplaceId();
-
 };
 
 #endif
