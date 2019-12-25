@@ -83,9 +83,8 @@ protected:
   explicit LedgerFilterBase(LedgerFilterBasePrivate* dd, QObject* parent);
 
   bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
+
   /**
-   * Currently filtering only on account id provided by @sa setAccount()
-   *
    * @note This does not call the base class implementation for speed purposes
    */
   bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
