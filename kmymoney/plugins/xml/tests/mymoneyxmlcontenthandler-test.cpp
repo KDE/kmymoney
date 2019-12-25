@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2002-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2003       Michael Edwardes <mte@users.sourceforge.net>
  * Copyright 2004-2006  Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2004       Kevin Tambascio <ktambascio@users.sourceforge.net>
@@ -334,18 +334,18 @@ void MyMoneyXmlContentHandlerTest::readTransactionEx()
                      "  <SPLIT payee=\"P000010\" reconciledate=\"\" shares=\"-125000/100\" action=\"Transfer\" bankid=\"A000076-2010-03-05-b6850c0-1\" number=\"\" reconcileflag=\"1\" memo=\"UMBUCHUNG\" value=\"-125000/100\" id=\"S0001\" account=\"A000076\" >\n"
                      "   <KEYVALUEPAIRS>\n"
                      "    <PAIR key=\"kmm-match-split\" value=\"S0002\" />\n"
-                     "    <PAIR key=\"kmm-matched-tx\" value=\"&amp;lt;!DOCTYPE MATCH>\n"
-                     "    &amp;lt;CONTAINER>\n"
-                     "     &amp;lt;TRANSACTION postdate=&quot;2010-03-05&quot; memo=&quot;UMBUCHUNG&quot; id=&quot;&quot; commodity=&quot;EUR&quot; entrydate=&quot;2010-03-08&quot; >\n"
-                     "      &amp;lt;SPLITS>\n"
-                     "       &amp;lt;SPLIT payee=&quot;P000010&quot; reconciledate=&quot;&quot; shares=&quot;125000/100&quot; action=&quot;Transfer&quot; bankid=&quot;&quot; number=&quot;&quot; reconcileflag=&quot;0&quot; memo=&quot;UMBUCHUNG&quot; value=&quot;125000/100&quot; id=&quot;S0001&quot; account=&quot;A000087&quot; />\n"
-                     "       &amp;lt;SPLIT payee=&quot;P000010&quot; reconciledate=&quot;&quot; shares=&quot;-125000/100&quot; action=&quot;&quot; bankid=&quot;A000076-2010-03-05-b6850c0-1&quot; number=&quot;&quot; reconcileflag=&quot;0&quot; memo=&quot;UMBUCHUNG&quot; value=&quot;-125000/100&quot; id=&quot;S0002&quot; account=&quot;A000076&quot; />\n"
-                     "      &amp;lt;/SPLITS>\n"
-                     "      &amp;lt;KEYVALUEPAIRS>\n"
-                     "       &amp;lt;PAIR key=&quot;Imported&quot; value=&quot;true&quot; />\n"
-                     "      &amp;lt;/KEYVALUEPAIRS>\n"
-                     "     &amp;lt;/TRANSACTION>\n"
-                     "    &amp;lt;/CONTAINER>\n"
+                     "    <PAIR key=\"kmm-matched-tx\" value=\"&#60;!DOCTYPE MATCH>\n"
+                     "    &#60;CONTAINER>\n"
+                     "     &#60;TRANSACTION postdate=&quot;2010-03-05&quot; memo=&quot;UMBUCHUNG&quot; id=&quot;&quot; commodity=&quot;EUR&quot; entrydate=&quot;2010-03-08&quot; >\n"
+                     "      &#60;SPLITS>\n"
+                     "       &#60;SPLIT payee=&quot;P000010&quot; reconciledate=&quot;&quot; shares=&quot;125000/100&quot; action=&quot;Transfer&quot; bankid=&quot;&quot; number=&quot;&quot; reconcileflag=&quot;0&quot; memo=&quot;UMBUCHUNG&quot; value=&quot;125000/100&quot; id=&quot;S0001&quot; account=&quot;A000087&quot; />\n"
+                     "       &#60;SPLIT payee=&quot;P000010&quot; reconciledate=&quot;&quot; shares=&quot;-125000/100&quot; action=&quot;&quot; bankid=&quot;A000076-2010-03-05-b6850c0-1&quot; number=&quot;&quot; reconcileflag=&quot;0&quot; memo=&quot;UMBUCHUNG&quot; value=&quot;-125000/100&quot; id=&quot;S0002&quot; account=&quot;A000076&quot; />\n"
+                     "      &#60;/SPLITS>\n"
+                     "      &#60;KEYVALUEPAIRS>\n"
+                     "       &#60;PAIR key=&quot;Imported&quot; value=&quot;true&quot; />\n"
+                     "      &#60;/KEYVALUEPAIRS>\n"
+                     "     &#60;/TRANSACTION>\n"
+                     "    &#60;/CONTAINER>\n"
                      "\" />\n"
                      "    <PAIR key=\"kmm-orig-memo\" value=\"\" />\n"
                      "   </KEYVALUEPAIRS>\n"
@@ -386,6 +386,13 @@ void MyMoneyXmlContentHandlerTest::writeTransaction()
   t.setCommodity("EUR");
   t.setValue("key", "value");
 
+  MyMoneyTransaction matchedTx;
+  matchedTx.setMemo(QLatin1String("TEST <TEST"));
+  MyMoneySplit matchedSplit;
+  matchedSplit.setMemo(matchedTx.memo());
+  matchedSplit.setAccountId("A000076");
+  matchedTx.addSplit(matchedSplit);
+
   MyMoneySplit s;
   s.setPayeeId("P000001");
   QList<QString> tagIdList;
@@ -397,6 +404,8 @@ void MyMoneyXmlContentHandlerTest::writeTransaction()
   s.setAccountId("A000076");
   s.setReconcileFlag(eMyMoney::Split::State::Reconciled);
   s.setBankID("SPID");
+  s.addMatch(matchedTx);
+  QVERIFY(s.matchedTransaction() == matchedTx);
   t.addSplit(s);
 
   QDomDocument doc("TEST");
@@ -438,7 +447,7 @@ void MyMoneyXmlContentHandlerTest::writeTransaction()
   QCOMPARE(split.attribute("number"), QString());
   QCOMPARE(split.attribute("value"), QLatin1String("96379/100"));
   QCOMPARE(split.attribute("memo"), QString());
-  QCOMPARE(split.childNodes().size(), 1);
+  QCOMPARE(split.childNodes().size(), 2);
 
   QVERIFY(split.childNodes().at(0).isElement());
   QDomElement tag = split.childNodes().at(0).toElement();
@@ -456,6 +465,18 @@ void MyMoneyXmlContentHandlerTest::writeTransaction()
   QCOMPARE(keyValuePair1.attribute("key"), QLatin1String("key"));
   QCOMPARE(keyValuePair1.attribute("value"), QLatin1String("value"));
   QCOMPARE(keyValuePair1.childNodes().size(), 0);
+
+  auto tread = MyMoneyXmlContentHandler::readTransaction(transaction);
+  QCOMPARE(tread.postDate(), t.postDate());
+  QCOMPARE(tread.memo(), t.memo());
+  QCOMPARE(tread.splits().count(), t.splits().count());
+  // now check the parts that are important in the matched transaction
+  tread = tread.splits().at(0).matchedTransaction();
+  QCOMPARE(tread.postDate(), matchedTx.postDate());
+  QCOMPARE(tread.memo(), matchedTx.memo());
+  QCOMPARE(tread.splits().count(), matchedTx.splits().count());
+  QCOMPARE(tread.splits().count(), 1);
+  QCOMPARE(tread.splits().at(0).memo(), matchedSplit.memo());
 }
 
 void MyMoneyXmlContentHandlerTest::readSplit()
@@ -610,18 +631,18 @@ void MyMoneyXmlContentHandlerTest::testReplaceIDinSplit()
                      "  <SPLIT payee=\"P000001\" reconciledate=\"\" shares=\"-125000/100\" action=\"Transfer\" bankid=\"A000076-2010-03-05-b6850c0-1\" number=\"\" reconcileflag=\"1\" memo=\"UMBUCHUNG\" value=\"-125000/100\" id=\"S0001\" account=\"A000076\" >\n"
                      "   <KEYVALUEPAIRS>\n"
                      "    <PAIR key=\"kmm-match-split\" value=\"S0002\" />\n"
-                     "    <PAIR key=\"kmm-matched-tx\" value=\"&amp;lt;!DOCTYPE MATCH>\n"
-                     "    &amp;lt;CONTAINER>\n"
-                     "     &amp;lt;TRANSACTION postdate=&quot;2010-03-05&quot; memo=&quot;UMBUCHUNG&quot; id=&quot;&quot; commodity=&quot;EUR&quot; entrydate=&quot;2010-03-08&quot; >\n"
-                     "      &amp;lt;SPLITS>\n"
-                     "       &amp;lt;SPLIT payee=&quot;P000010&quot; reconciledate=&quot;&quot; shares=&quot;125000/100&quot; action=&quot;Transfer&quot; bankid=&quot;&quot; number=&quot;&quot; reconcileflag=&quot;0&quot; memo=&quot;UMBUCHUNG&quot; value=&quot;125000/100&quot; id=&quot;S0001&quot; account=&quot;A000087&quot; />\n"
-                     "       &amp;lt;SPLIT payee=&quot;P000011&quot; reconciledate=&quot;&quot; shares=&quot;-125000/100&quot; action=&quot;&quot; bankid=&quot;A000076-2010-03-05-b6850c0-1&quot; number=&quot;&quot; reconcileflag=&quot;0&quot; memo=&quot;UMBUCHUNG&quot; value=&quot;-125000/100&quot; id=&quot;S0002&quot; account=&quot;A000076&quot; />\n"
-                     "      &amp;lt;/SPLITS>\n"
-                     "      &amp;lt;KEYVALUEPAIRS>\n"
-                     "       &amp;lt;PAIR key=&quot;Imported&quot; value=&quot;true&quot; />\n"
-                     "      &amp;lt;/KEYVALUEPAIRS>\n"
-                     "     &amp;lt;/TRANSACTION>\n"
-                     "    &amp;lt;/CONTAINER>\n"
+                     "    <PAIR key=\"kmm-matched-tx\" value=\"&#60;!DOCTYPE MATCH>\n"
+                     "    &#60;CONTAINER>\n"
+                     "     &#60;TRANSACTION postdate=&quot;2010-03-05&quot; memo=&quot;UMBUCHUNG&quot; id=&quot;&quot; commodity=&quot;EUR&quot; entrydate=&quot;2010-03-08&quot; >\n"
+                     "      &#60;SPLITS>\n"
+                     "       &#60;SPLIT payee=&quot;P000010&quot; reconciledate=&quot;&quot; shares=&quot;125000/100&quot; action=&quot;Transfer&quot; bankid=&quot;&quot; number=&quot;&quot; reconcileflag=&quot;0&quot; memo=&quot;UMBUCHUNG&quot; value=&quot;125000/100&quot; id=&quot;S0001&quot; account=&quot;A000087&quot; />\n"
+                     "       &#60;SPLIT payee=&quot;P000011&quot; reconciledate=&quot;&quot; shares=&quot;-125000/100&quot; action=&quot;&quot; bankid=&quot;A000076-2010-03-05-b6850c0-1&quot; number=&quot;&quot; reconcileflag=&quot;0&quot; memo=&quot;UMBUCHUNG&quot; value=&quot;-125000/100&quot; id=&quot;S0002&quot; account=&quot;A000076&quot; />\n"
+                     "      &#60;/SPLITS>\n"
+                     "      &#60;KEYVALUEPAIRS>\n"
+                     "       &#60;PAIR key=&quot;Imported&quot; value=&quot;true&quot; />\n"
+                     "      &#60;/KEYVALUEPAIRS>\n"
+                     "     &#60;/TRANSACTION>\n"
+                     "    &#60;/CONTAINER>\n"
                      "\" />\n"
                      "    <PAIR key=\"kmm-orig-memo\" value=\"\" />\n"
                      "   </KEYVALUEPAIRS>\n"
