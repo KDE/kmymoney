@@ -823,10 +823,14 @@ public:
       if (statement) {
         const QString aboutDeposits = i18np("%1 deposit (%2)", "%1 deposits (%2)",
                                             deposits[m_currentAccount.id()], depositAmount[m_currentAccount.id()].abs().formatMoney(m_currentAccount.fraction()));
+        const QString aboutCharges = i18np("%1 charge (%2)", "%1 charges (%2)",
+                                           deposits[m_currentAccount.id()], depositAmount[m_currentAccount.id()].abs().formatMoney(m_currentAccount.fraction()));
         const QString aboutPayments = i18np("%1 payment (%2)", "%1 payments (%2)",
                                             payments[m_currentAccount.id()], paymentAmount[m_currentAccount.id()].abs().formatMoney(m_currentAccount.fraction()));
 
-        statement->setText(i18nc("%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments", "%1, %2", aboutDeposits, aboutPayments));
+        statement->setText(i18nc("%1 is a string, e.g. 7 deposits; %2 is a string, e.g. 4 payments", "%1, %2",
+                                 m_currentAccount.accountType() == eMyMoney::Account::Type::CreditCard ? aboutCharges : aboutDeposits,
+                                 aboutPayments));
       }
       if (pStatement) {
         pStatement->setText(i18np("%1 payment (%2)", "%1 payments (%2)", payments[m_currentAccount.id()]
