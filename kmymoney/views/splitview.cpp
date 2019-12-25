@@ -24,6 +24,7 @@
 #include <QPainter>
 #include <QResizeEvent>
 #include <QDate>
+#include <QScrollBar>
 #include <QDebug>
 
 // ----------------------------------------------------------------------------
@@ -66,6 +67,20 @@ public:
       delegate->setSingleLineDetailRole(role);
     }
 #endif
+  }
+
+  void ensureEditorFullyVisible(const QModelIndex& idx)
+  {
+    const auto viewportHeight = q->viewport()->height();
+    const auto verticalOffset = q->verticalHeader()->offset();
+    const auto verticalPosition = q->verticalHeader()->sectionPosition(idx.row());
+    const auto cellHeight = q->verticalHeader()->sectionSize(idx.row());
+
+    // in case the idx is displayed passed the viewport
+    // adjust the position of the scroll area
+    if (verticalPosition - verticalOffset + cellHeight > viewportHeight) {
+      q->verticalScrollBar()->setValue(q->verticalScrollBar()->maximum());
+    }
   }
 
   SplitView*                      q;
@@ -176,6 +191,7 @@ bool SplitView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger tr
       // make sure that the row gets resized according to the requirements of the editor
       // and is completely visible
       resizeRowToContents(index.row());
+      d->ensureEditorFullyVisible(index);
       QMetaObject::invokeMethod(this, "ensureCurrentItemIsVisible", Qt::QueuedConnection);
     } else {
       rc = false;

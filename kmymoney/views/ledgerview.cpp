@@ -24,6 +24,7 @@
 #include <QPainter>
 #include <QResizeEvent>
 #include <QDate>
+#include <QScrollBar>
 #include <QDebug>
 
 // ----------------------------------------------------------------------------
@@ -56,7 +57,6 @@ public:
   , adjustableColumn(JournalModel::Column::Detail)
   , adjustingColumn(false)
   , showValuesInverted(false)
-  , balanceCalculationPending(false)
   , newTransactionPresent(false)
   , columnSelector(nullptr)
   {
@@ -82,13 +82,27 @@ public:
     }
   }
 
+  void ensureEditorFullyVisible(const QModelIndex& idx)
+  {
+    const auto viewportHeight = q->viewport()->height();
+    const auto verticalOffset = q->verticalHeader()->offset();
+    const auto verticalPosition = q->verticalHeader()->sectionPosition(idx.row());
+    const auto cellHeight = q->verticalHeader()->sectionSize(idx.row());
+
+    // in case the idx is displayed passed the viewport
+    // adjust the position of the scroll area
+    if (verticalPosition - verticalOffset + cellHeight > viewportHeight) {
+      q->verticalScrollBar()->setValue(q->verticalScrollBar()->maximum());
+    }
+  }
+
+
   LedgerView*                     q;
   DelegateProxy*                  delegateProxy;
   QHash<const QAbstractItemModel*, QStyledItemDelegate*>   delegates;
   int                             adjustableColumn;
   bool                            adjustingColumn;
   bool                            showValuesInverted;
-  bool                            balanceCalculationPending;
   bool                            newTransactionPresent;
   ColumnSelector*                 columnSelector;
   QString                         accountId;
@@ -191,6 +205,7 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
       // make sure that the row gets resized according to the requirements of the editor
       // and is completely visible
       resizeRowToContents(index.row());
+      d->ensureEditorFullyVisible(index);
       QMetaObject::invokeMethod(this, "ensureCurrentItemIsVisible", Qt::QueuedConnection);
     } else {
       rc = false;
@@ -251,6 +266,10 @@ void LedgerView::currentChanged(const QModelIndex& current, const QModelIndex& p
     // For a new transaction the id is completely empty, for a split view the transaction
     // part is filled but the split id is empty and the string ends with a dash
     if(id.isEmpty() || id.endsWith('-')) {
+      // the next two lines prevent an endless recursive call of this method
+      if (idx == previous) {
+        return;
+      }
       selectionModel()->clearSelection();
       setCurrentIndex(idx);
       selectRow(idx.row());
