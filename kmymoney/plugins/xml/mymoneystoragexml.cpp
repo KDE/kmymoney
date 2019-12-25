@@ -628,7 +628,7 @@ MyMoneySplit MyMoneyXmlContentHandler::readSplit(const QDomElement &node)
 
   auto xml = split.value(attributeName(Attribute::Split::KMMatchedTx));
   if (!xml.isEmpty()) {
-    xml.replace(QLatin1String("&lt;"), QLatin1String("<"));
+    xml.replace(QLatin1String("&#60;"), QLatin1String("<"));
     QDomDocument docMatchedTransaction;
     QDomElement nodeMatchedTransaction;
     docMatchedTransaction.setContent(xml);
@@ -677,7 +677,7 @@ void MyMoneyXmlContentHandler::writeSplit(const MyMoneySplit &_split, QDomDocume
     docMatchedTransaction.appendChild(elMatchedTransaction);
     writeTransaction(split.matchedTransaction(), docMatchedTransaction, elMatchedTransaction);
     auto xml = docMatchedTransaction.toString();
-    xml.replace(QLatin1String("<"), QLatin1String("&lt;"));
+    xml.replace(QLatin1String("<"), QLatin1String("&#60;"));
     split.setValue(attributeName(Attribute::Split::KMMatchedTx), xml);
   } else {
     split.deletePair(attributeName(Attribute::Split::KMMatchedTx));
