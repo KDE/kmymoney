@@ -628,7 +628,12 @@ MyMoneySplit MyMoneyXmlContentHandler::readSplit(const QDomElement &node)
 
   auto xml = split.value(attributeName(Attribute::Split::KMMatchedTx));
   if (!xml.isEmpty()) {
-    xml.replace(QLatin1String("&#60;"), QLatin1String("<"));
+    // determine between the new and old method to escap the less than symbol
+    if (xml.contains(QLatin1String("&#60;"))) {
+      xml.replace(QLatin1String("&#60;"), QLatin1String("<"));
+    } else {
+      xml.replace(QLatin1String("&lt;"), QLatin1String("<"));
+    }
     QDomDocument docMatchedTransaction;
     QDomElement nodeMatchedTransaction;
     docMatchedTransaction.setContent(xml);
