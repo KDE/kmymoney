@@ -697,11 +697,6 @@ void PivotTable::calculateOpeningBalances()
         }
       }
 
-      if (account.isInvest()) {
-        // calculate value of shares
-        value *= account.deepCurrencyPrice(from.addDays(-1));
-      }
-
       // place into the 'opening' column...
       assignCell(outergroup, account, 0, value);
     } else {
@@ -2076,6 +2071,11 @@ void PivotTable::calculateForecast()
             it_row.value()[eForecast][0] -= it_row.value()[eActual][0];
           } else {
             it_row.value()[eForecast][0] += it_row.value()[eActual][0];
+          }
+          // multiply the shares with the price in case of
+          // an investment to obtain the value of it
+          if (it_row.key().isInvest()) {
+            it_row.value()[eForecast][0] *= it_row.key().deepCurrencyPrice(m_beginDate.addDays(-1));
           }
         }
         //check whether columns are days or months
