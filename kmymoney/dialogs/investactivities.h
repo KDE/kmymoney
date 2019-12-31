@@ -80,7 +80,6 @@ public:
 
 protected:
   explicit Activity(InvestTransactionEditor* editor);
-  QWidget* haveWidget(const QString& name) const;
   bool haveAssetAccount() const;
   bool haveFees(bool optional = false) const;
   bool haveInterest(bool optional = false) const;
