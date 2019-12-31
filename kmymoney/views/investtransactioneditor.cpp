@@ -100,9 +100,12 @@ public:
     AccountNamesFilterProxyModel* accountsModel;
     bool                          accepted;
     bool                          bypassPriceEditor;
+    eMyMoney::Split::InvestmentTransactionType m_transactionType;
     QUndoStack                    undoStack;
     SplitModel                    feeSplitModel;
     SplitModel                    interestSplitModel;
+    MyMoneySecurity               security;
+    MyMoneySecurity               currency;
     MyMoneyAccount                m_account;
     MyMoneyTransaction            transaction;
     MyMoneySplit                  split;
@@ -428,6 +431,24 @@ void InvestTransactionEditor::keyPressEvent(QKeyEvent* e)
 
 void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
 {
+    auto idx = MyMoneyModelBase::mapToBaseSource(index);
+    if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
+        d->transaction = MyMoneyTransaction();
+        d->split = MyMoneySplit();
+    } else {
+        // keep a copy of the transaction and split
+        d->transaction = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).transaction();
+        d->split = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).split();
+
+        QModelIndex assetAccountIdx;
+        KMyMoneyUtils::dissectInvestmentTransaction(idx, assetAccountIdx, d->feeSplitModel, d->interestSplitModel, d->security, d->currency, d->m_transactionType);
+    }
+
+
+
+
+
+
 #if 0
     auto idx = MyMoneyModelBase::mapToBaseSource(index);
     if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {

@@ -31,6 +31,7 @@ if(ENABLE_UNFINISHEDFEATURES)
     onlinebalancedelegate.cpp
     specialdatedelegate.cpp
     investtransactioneditor.cpp
+    investactivities.cpp
     newspliteditor.cpp
     transactioneditorbase.cpp
     newtransactioneditor.cpp

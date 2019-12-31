@@ -547,6 +547,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::TransactionIsInvestmentRole:
       return MyMoneyFile::instance()->isInvestmentTransaction(journalEntry.transaction());
 
+    case eMyMoney::Model::TransactionInvestementType:
+      return QVariant::fromValue<eMyMoney::Split::InvestmentTransactionType>(journalEntry.split().investmentTransactionType());
+
     case eMyMoney::Model::TransactionBrokerageAccountRole:
       return d->investmentBrokerageAccount(journalEntry);
 

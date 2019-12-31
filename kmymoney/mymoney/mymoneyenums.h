@@ -498,6 +498,7 @@ namespace eMyMoney {
       TransactionCounterAccountIdRole,
       TransactionIsTransferRole,
       TransactionIsInvestmentRole,
+      TransactionInvestementType,
       TransactionSplitCountRole,
       TransactionBrokerageAccountRole,
       TransactionInterestCategoryRole,
@@ -539,5 +540,6 @@ namespace eMyMoney {
 }
 
 Q_DECLARE_METATYPE(eMyMoney::Split::State)
+Q_DECLARE_METATYPE(eMyMoney::Split::InvestmentTransactionType)
 
 #endif

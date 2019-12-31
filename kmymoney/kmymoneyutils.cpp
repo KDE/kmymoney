@@ -76,6 +76,9 @@
 #include "mymoneyenums.h"
 #include "kmymoneyplugin.h"
 #include "statusmodel.h"
+#include "journalmodel.h"
+#include "splitmodel.h"
+#include "accountsmodel.h"
 
 using namespace Icons;
 
@@ -449,6 +452,54 @@ void KMyMoneyUtils::updateWizardButtons(QWizard* wizard)
   wizard->button(QWizard::BackButton)->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
 }
 
+void KMyMoneyUtils::dissectInvestmentTransaction(const QModelIndex &investSplitIdx, QModelIndex &assetAccountSplitIdx, SplitModel& feeSplitModel, SplitModel& interestSplitModel, MyMoneySecurity &security, MyMoneySecurity &currency, eMyMoney::Split::InvestmentTransactionType &transactionType)
+{
+  // clear split models
+  feeSplitModel.unload();
+  interestSplitModel.unload();
+
+  assetAccountSplitIdx = QModelIndex(); // set to none to check later if it was assigned
+  const auto file = MyMoneyFile::instance();
+
+  // collect the splits. split references the stock account and should already
+  // be set up. assetAccountSplit references the corresponding asset account (maybe
+  // empty), feeSplits is the list of all expenses and interestSplits
+  // the list of all incomes
+  auto idx = MyMoneyModelBase::mapToBaseSource(investSplitIdx);
+  const auto list = idx.model()->match(idx.model()->index(0, 0), eMyMoney::Model::JournalTransactionIdRole,
+                                       idx.data(eMyMoney::Model::JournalTransactionIdRole),
+                                       -1,                         // all splits
+                                       Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+  for (const auto& splitIdx : list) {
+    auto accIdx = file->accountsModel()->indexById(splitIdx.data(eMyMoney::Model::SplitAccountIdRole).toString());
+    const auto accountGroup = accIdx.data(eMyMoney::Model::AccountGroupRole).value<eMyMoney::Account::Type>();
+    if (splitIdx.row() == idx.row()) {
+      security = file->security(accIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString());
+    } else if (accountGroup == eMyMoney::Account::Type::Expense) {
+      feeSplitModel.appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
+    } else if (accountGroup == eMyMoney::Account::Type::Income) {
+        interestSplitModel.appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
+    } else {
+      if (!assetAccountSplitIdx.isValid()) { // first asset Account should be our requested brokerage account
+        assetAccountSplitIdx = splitIdx;
+      } else if (idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>().isNegative()) { // the rest (if present) is handled as fee or interest
+        feeSplitModel.appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
+      } else if (idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>().isPositive()) {
+        interestSplitModel.appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
+      }
+    }
+  }
+
+  // determine transaction type
+  transactionType = idx.data(eMyMoney::Model::SplitActivityRole).value<eMyMoney::Split::InvestmentTransactionType>();
+
+  currency.setTradingSymbol("???");
+  try {
+    currency = file->security(file->journalModel()->itemByIndex(idx).transaction().commodity());
+  } catch (const MyMoneyException &) {
+  }
+}
+
 void KMyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, eMyMoney::Split::InvestmentTransactionType& transactionType)
 {
   // collect the splits. split references the stock account and should already
@@ -478,22 +529,10 @@ void KMyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, co
   }
 
   // determine transaction type
-  if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::AddShares)) {
-    transactionType = (!split.shares().isNegative()) ? eMyMoney::Split::InvestmentTransactionType::AddShares : eMyMoney::Split::InvestmentTransactionType::RemoveShares;
-  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) {
-    transactionType = (!split.value().isNegative()) ? eMyMoney::Split::InvestmentTransactionType::BuyShares : eMyMoney::Split::InvestmentTransactionType::SellShares;
-  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend)) {
-    transactionType = eMyMoney::Split::InvestmentTransactionType::Dividend;
-  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend)) {
-    transactionType = eMyMoney::Split::InvestmentTransactionType::ReinvestDividend;
-  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Yield)) {
-    transactionType = eMyMoney::Split::InvestmentTransactionType::Yield;
-  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares)) {
-    transactionType = eMyMoney::Split::InvestmentTransactionType::SplitShares;
-  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::InterestIncome)) {
-    transactionType = eMyMoney::Split::InvestmentTransactionType::InterestIncome;
-  } else
+  transactionType = split.investmentTransactionType();
+  if (transactionType == eMyMoney::Split::InvestmentTransactionType::UnknownTransactionType) {
     transactionType = eMyMoney::Split::InvestmentTransactionType::BuyShares;
+  }
 
   currency.setTradingSymbol("???");
   try {

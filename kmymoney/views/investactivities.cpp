@@ -38,7 +38,7 @@
 #include "amountedit.h"
 #include "kmymoneyaccountselector.h"
 #include "kmymoneycompletion.h"
-#include <kmymoneysettings.h>
+#include "kmymoneysettings.h"
 #include "mymoneyfile.h"
 #include "mymoneysplit.h"
 #include "mymoneyaccount.h"
@@ -47,7 +47,6 @@
 #include "mymoneyenums.h"
 
 using namespace Invest;
-using namespace KMyMoneyRegister;
 
 class Invest::ActivityPrivate
 {
@@ -138,6 +137,8 @@ bool Activity::haveCategoryAndAmount(const QString& category, const QString& amo
     rc = cat->selector()->contains(cat->currentText()) || cat->isSplitTransaction();
     if (rc && !amount.isEmpty() && !isMultiSelection()) {
       if (cat->isSplitTransaction()) {
+          /// @todo port to new model code
+#if 0
         QList<MyMoneySplit>::const_iterator split;
         QList<MyMoneySplit>::const_iterator splitEnd;
 
@@ -153,6 +154,7 @@ bool Activity::haveCategoryAndAmount(const QString& category, const QString& amo
           if ((*split).value().isZero())
             rc = false;
         }
+#endif
       } else {
         if (auto valueWidget = d->haveWidget<AmountEdit*>(amount))
           rc = !valueWidget->value().isZero();
@@ -201,7 +203,9 @@ bool Activity::havePrice() const
 bool Activity::isMultiSelection() const
 {
   Q_D(const Activity);
-  return d->m_parent->isMultiSelection();
+  /// @todo port to new model code
+  // return d->m_parent->isMultiSelection();
+  return false;
 }
 
 bool Activity::createCategorySplits(const MyMoneyTransaction& t, KMyMoneyCategory* cat, AmountEdit* amount, MyMoneyMoney factor, QList<MyMoneySplit>&splits, const QList<MyMoneySplit>& osplits) const
@@ -224,9 +228,12 @@ bool Activity::createCategorySplits(const MyMoneyTransaction& t, KMyMoneyCategor
       if (!categoryId.isEmpty()) {
         s1.setAccountId(categoryId);
         s1.setValue(amount->value() * factor);
+        /// @todo port to new model code
+#if 0
         if (!s1.value().isZero()) {
           rc = d->m_parent->setupPrice(t, s1);
         }
+#endif
         splits.append(s1);
       }
     } else {
@@ -250,12 +257,14 @@ void Activity::createAssetAccountSplit(MyMoneySplit& split, const MyMoneySplit& 
 MyMoneyMoney Activity::sumSplits(const MyMoneySplit& s0, const QList<MyMoneySplit>& feeSplits, const QList<MyMoneySplit>& interestSplits) const
 {
   auto total = s0.value();
+  /// @todo port to new model code
+#if 0
   foreach (const auto feeSplit, feeSplits)
     total += feeSplit.value();
 
   foreach (const auto interestSplit, interestSplits)
     total += interestSplit.value();
-
+#endif
   return total;
 }
 
@@ -278,6 +287,8 @@ void Activity::preloadAssetAccount()
   Q_D(Activity);
   auto cat = d->haveWidget<KMyMoneyCategory*>("asset-account");
   if (cat && cat->isVisible()) {
+    /// @todo port to new model code
+#if 0
     if (cat->currentText().isEmpty()) {
       MyMoneyAccount acc = MyMoneyFile::instance()->accountByName(i18n("%1 (Brokerage)", d->m_parent->account().name()));
       if (!acc.id().isEmpty()) {
@@ -289,6 +300,7 @@ void Activity::preloadAssetAccount()
         cat->blockSignals(blocked);
       }
     }
+#endif
   }
 }
 
@@ -313,7 +325,9 @@ void Activity::setWidgetVisibility(const QStringList& widgetIds, bool visible) c
 eDialogs::PriceMode Activity::priceMode() const
 {
   Q_D(const Activity);
-  return d->m_parent->priceMode();
+  /// @todo port to new model code
+  // return d->m_parent->priceMode();
+  return eDialogs::PriceMode::Price;
 }
 
 QString Activity::priceLabel() const
@@ -425,8 +439,11 @@ bool Buy::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
 
   assetAccountSplit.setValue(-total);
 
+  /// @todo port to new model code
+#if 0
   if (!d->m_parent->setupPrice(t, assetAccountSplit))
     return false;
+#endif
 
   return true;
 }
@@ -451,9 +468,11 @@ void Sell::showWidgets() const
   static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "fee-amount" << "shares" << "price" << "total" << "interest-account" << "fee-account";
   setWidgetVisibility(visibleWidgetIds, true);
 
+  /// @todo port to new model code
+#if 0
   if (auto shareEdit = d->haveWidget<AmountEdit*>("shares"))
     shareEdit->setPrecision(MyMoneyMoney::denomToPrec(d->m_parent->security().smallestAccountFraction()));
-
+#endif
   setLabelText("interest-amount-label", i18n("Interest"));
   setLabelText("interest-label", i18n("Interest"));
   setLabelText("fee-amount-label", i18n("Fees"));
@@ -479,11 +498,14 @@ bool Sell::isComplete(QString& reason) const
   // account, when the proceeds equal the fees. This will handle sales
   // made solely to cover annual account fees, where there is no money
   // transferred.
+  /// @todo port to new model code
+#if 0
   if (rc) {
     if (!d->m_parent->totalAmount().isZero()) {
       rc &= haveAssetAccount();
     }
   }
+#endif
   return rc;
 }
 
@@ -544,8 +566,11 @@ bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpl
     createAssetAccountSplit(assetAccountSplit, s0);
     assetAccountSplit.setValue(-total);
 
+    /// @todo port to new model code
+#if 0
     if (!d->m_parent->setupPrice(t, assetAccountSplit))
       return false;
+#endif
   }
 
   return true;
@@ -627,8 +652,11 @@ bool Div::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
   MyMoneyMoney total = sumSplits(s0, feeSplits, interestSplits);
   assetAccountSplit.setValue(-total);
 
+  /// @todo port to new model code
+#if 0
   if (!d->m_parent->setupPrice(t, assetAccountSplit))
     return false;
+#endif
 
   return true;
 }
@@ -655,7 +683,10 @@ void Reinvest::showWidgets() const
 
   if (auto shareEdit = d->haveWidget<AmountEdit*>("shares")) {
     shareEdit->show();
+    /// @todo port to new model code
+#if 0
     shareEdit->setPrecision(MyMoneyMoney::denomToPrec(d->m_parent->security().smallestAccountFraction()));
+#endif
   }
 
   setLabelText("interest-amount-label", i18n("Interest"));
@@ -743,8 +774,11 @@ bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMone
 
   s1.setValue(-total);
 
+  /// @todo port to new model code
+#if 0
   if (!d->m_parent->setupPrice(t, s1))
     return false;
+#endif
 
   return true;
 }
@@ -768,7 +802,10 @@ void Add::showWidgets() const
   Q_D(const Activity);
   if (auto shareEdit = d->haveWidget<AmountEdit*>("shares")) {
     shareEdit->show();
+    /// @todo port to new model code
+#if 0
     shareEdit->setPrecision(MyMoneyMoney::denomToPrec(d->m_parent->security().smallestAccountFraction()));
+#endif
   }
 
   setLabelText("shares-label", i18n("Shares"));
@@ -830,7 +867,10 @@ void Remove::showWidgets() const
   Q_D(const Activity);
   if (auto shareEdit = d->haveWidget<AmountEdit*>("shares")) {
     shareEdit->show();
+    /// @todo port to new model code
+#if 0
     shareEdit->setPrecision(MyMoneyMoney::denomToPrec(d->m_parent->security().smallestAccountFraction()));
+#endif
   }
   setLabelText("shares-label", i18n("Shares"));
 }
@@ -943,14 +983,13 @@ eMyMoney::Split::InvestmentTransactionType IntInc::type() const
 
 void IntInc::showWidgets() const
 {
-  static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "total" << "interest-account" << "fee-amount" << "fee-account";
+  static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "total" << "interest-account" << "fee-account";
   setWidgetVisibility(visibleWidgetIds, true);
-  static const QStringList hiddenWidgetIds = QStringList() << "shares" << "price";
+  static const QStringList hiddenWidgetIds = QStringList() << "shares" << "price" << "fee-amount";
   setWidgetVisibility(hiddenWidgetIds, false);
 
   setLabelText("interest-amount-label", i18n("Interest"));
   setLabelText("interest-label", i18n("Interest"));
-  setLabelText("fee-amount-label", i18n("Fees"));
   setLabelText("fee-label", i18n("Fees"));
   setLabelText("asset-label", i18n("Account"));
   setLabelText("total-label", i18nc("Total value", "Total"));
@@ -1002,8 +1041,11 @@ bool IntInc::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneyS
   MyMoneyMoney total = sumSplits(s0, feeSplits, interestSplits);
   assetAccountSplit.setValue(-total);
 
+  /// @todo port to new model code
+#if 0
   if (!d->m_parent->setupPrice(t, assetAccountSplit))
     return false;
+#endif
 
   return true;
 }
