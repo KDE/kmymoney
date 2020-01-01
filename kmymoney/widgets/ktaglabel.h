@@ -44,13 +44,10 @@ class KTagLabel : public QFrame
   Q_DISABLE_COPY(KTagLabel)
 
 public:
-  explicit KTagLabel(const QString& id, const QString& name, QWidget* parent = nullptr);
+  explicit KTagLabel(const QString& name, QWidget* parent = nullptr);
 
 Q_SIGNALS:
   void clicked(bool);
-
-private:
-  QString m_tagId;
 };
 
 #endif

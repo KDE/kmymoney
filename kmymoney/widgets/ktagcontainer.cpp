@@ -104,7 +104,7 @@ void KTagContainer::addTagWidget(const QString& id)
   if (id.isNull() || d->m_tagIdList.contains(id))
     return;
   const QString tagName = d->m_tagCombo->itemText(d->m_tagCombo->findData(QVariant(id), Qt::UserRole, Qt::MatchExactly));
-  KTagLabel *t = new KTagLabel(id, tagName, this);
+  KTagLabel *t = new KTagLabel(tagName, this);
   connect(t, &KTagLabel::clicked, this, &KTagContainer::slotRemoveTagWidget);
   d->m_tagLabelList.append(t);
   d->m_tagNameList.append(tagName);
