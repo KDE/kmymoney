@@ -562,7 +562,7 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
                 const auto payeeId = splitIdx.data(eMyMoney::Model::SplitPayeeIdRole).toString();
                 const QModelIndex payeeIdx = MyMoneyFile::instance()->payeesModel()->indexById(payeeId);
                 if (payeeIdx.isValid())
-                    d->ui->payeeEdit->setCurrentIndex(d->payeesModel->mapFromSource(payeeIdx).row());
+                    d->ui->payeeEdit->setCurrentIndex(MyMoneyModelBase::mapFromBaseSource(d->payeesModel, payeeIdx).row());
                 else
                     d->ui->payeeEdit->setCurrentIndex(0);
 
