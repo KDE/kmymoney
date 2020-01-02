@@ -1,7 +1,7 @@
 /*
  * Copyright 2009-2010  Cristian Oneț <onet.cristian@gmail.com>
  * Copyright 2009-2010  Alvaro Soliverez <asoliverez@gmail.com>
- * Copyright 2011-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2011-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -37,8 +37,9 @@
 
 using namespace Icons;
 
-KTagLabel::KTagLabel(const QString& name, QWidget* parent) :
-  QFrame(parent)
+KTagLabel::KTagLabel(const QString& id, const QString& name, QWidget* parent)
+  : QFrame(parent)
+  , m_id(id)
 {
   QToolButton *t = new QToolButton(this);
   t->setIcon(Icons::get(Icon::DialogClose));

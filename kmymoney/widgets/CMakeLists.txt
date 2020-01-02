@@ -38,7 +38,6 @@ set(kmm_widgets_sources
   kmymoneypayeecombo.cpp
   kmymoneyperiodcombo.cpp
   kmymoneyreconcilecombo.cpp
-  kmymoneytagcombo.cpp
   kmymoneyaccountselector.cpp
   ktagcontainer.cpp
   ktaglabel.cpp

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2019-2020  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -35,6 +35,8 @@
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+
+#include <KConcatenateRowsProxyModel>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -163,6 +165,7 @@ private:
     TreeItem<T> *                           parentItem;
 };
 
+template <typename T> class MyMoneyEmptyModel;
 
 template <typename T>
 class MyMoneyModel : public MyMoneyModelBase
@@ -215,6 +218,7 @@ public:
 
   explicit MyMoneyModel(QObject* parent, const QString& idLeadin, quint8 idSize, QUndoStack* undoStack)
       : MyMoneyModelBase(parent, idLeadin, idSize)
+      , m_emptyItemModel(nullptr)
       , m_undoStack(undoStack)
       , m_idToItemMapper(nullptr)
   {
@@ -224,6 +228,16 @@ public:
   virtual ~MyMoneyModel()
   {
     delete m_rootItem;
+  }
+
+  KConcatenateRowsProxyModel* modelWithEmptyItem()
+  {
+    if (m_emptyItemModel == nullptr) {
+      m_emptyItemModel = new KConcatenateRowsProxyModel(this);
+      m_emptyItemModel->addSourceModel(new MyMoneyEmptyModel<T>(this, m_idLeadin, m_idSize, nullptr));
+      m_emptyItemModel->addSourceModel(this);
+    }
+    return m_emptyItemModel;
   }
 
   void useIdToItemMapper(bool use)
@@ -453,6 +467,18 @@ public:
       }
     }
     return index(row, 0);
+  }
+
+  virtual QModelIndexList indecesById(const QStringList& ids) const
+  {
+    QModelIndexList indeces;
+    for (const auto& id : ids) {
+      const auto idx = indexById(id);
+      if (idx.isValid()) {
+        indeces += idx;
+      }
+    }
+    return indeces;
   }
 
   virtual QModelIndex indexById(const QString& id) const
@@ -698,7 +724,7 @@ protected:
 
   virtual void doModifyItem(const T& before, const T& after)
   {
-    Q_UNUSED(before);
+    Q_UNUSED(before)
     const auto idx = indexById(after.id());
     if (idx.isValid()) {
       if (m_idToItemMapper) {
@@ -727,8 +753,8 @@ protected:
 
   virtual void doReparentItem(const T& before, const T& after)
   {
-    Q_UNUSED(before);
-    Q_UNUSED(after);
+    Q_UNUSED(before)
+    Q_UNUSED(after)
   }
 
   virtual void clearModelItems()
@@ -763,9 +789,55 @@ protected:
 
 protected:
   TreeItem<T> *                 m_rootItem;
+  KConcatenateRowsProxyModel*   m_emptyItemModel;
   QUndoStack*                   m_undoStack;
   QHash<QString, TreeItem<T>*>* m_idToItemMapper;
   QSet<QString>                 m_referencedObjects;
+
+};
+
+template <typename T>
+class MyMoneyEmptyModel : public MyMoneyModel<T>
+{
+public:
+  explicit MyMoneyEmptyModel(MyMoneyModelBase* parent, const QString& idLeadin, quint8 idSize, QUndoStack* undoStack)
+    : MyMoneyModel<T>(parent, idLeadin, idSize, nullptr)
+    , m_dataModel(parent)
+  {
+    Q_UNUSED(undoStack)
+    // use an init() method here to allow virtual override
+    init();
+  }
+
+  virtual void init()
+  {
+    QMap<QString, T> emptyMap;
+    emptyMap[QString()] = T();
+    MyMoneyModel<T>::load(emptyMap);
+  }
+
+  QVariant data(const QModelIndex& idx, int role) const override
+  {
+    Q_UNUSED(idx)
+    Q_UNUSED(role)
+    return QVariant();
+  }
+
+  bool setData(const QModelIndex& idx, const QVariant& value, int role) override
+  {
+    Q_UNUSED(idx)
+    Q_UNUSED(value)
+    Q_UNUSED(role)
+    return false;
+  }
+
+  int columnCount(const QModelIndex& parent) const override
+  {
+    return m_dataModel->columnCount(parent);
+  }
+
+protected:
+  MyMoneyModelBase* m_dataModel;
 };
 
 

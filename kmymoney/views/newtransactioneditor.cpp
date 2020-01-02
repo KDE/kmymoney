@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2015-2020  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -51,6 +51,7 @@
 #include "statusmodel.h"
 #include "splitmodel.h"
 #include "payeesmodel.h"
+#include "tagsmodel.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "splitdialog.h"
@@ -75,6 +76,7 @@ public:
         , accountsModel(new AccountNamesFilterProxyModel(parent))
         , costCenterModel(new QSortFilterProxyModel(parent))
         , payeesModel(new QSortFilterProxyModel(parent))
+        , tagsModel(new QSortFilterProxyModel(parent))
         , accepted(false)
         , costCenterRequired(false)
         , bypassPriceEditor(false)
@@ -103,7 +105,6 @@ public:
     void updateWidgetState();
     bool checkForValidTransaction(bool doUserInteraction = true);
     bool isDatePostOpeningDate(const QDate& date, const QString& accountId);
-
     bool postdateChanged(const QDate& date);
     bool costCenterChanged(int costCenterIndex);
     bool payeeChanged(int payeeIndex);
@@ -117,6 +118,7 @@ public:
     AccountNamesFilterProxyModel* accountsModel;
     QSortFilterProxyModel*        costCenterModel;
     QSortFilterProxyModel*        payeesModel;
+    QSortFilterProxyModel*        tagsModel;
     bool                          accepted;
     bool                          costCenterRequired;
     bool                          bypassPriceEditor;
@@ -411,7 +413,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     d->ui->accountCombo->setModel(d->accountsModel);
 
     d->costCenterModel->setSortRole(Qt::DisplayRole);
-    d->costCenterModel->setSourceModel(file->costCenterModel());
+    d->costCenterModel->setSourceModel(file->costCenterModel()->modelWithEmptyItem());
     d->costCenterModel->sort(0);
 
     d->ui->costCenterCombo->setEditable(true);
@@ -419,12 +421,20 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     d->ui->costCenterCombo->setModelColumn(0);
     d->ui->costCenterCombo->completer()->setFilterMode(Qt::MatchContains);
 
+    /// @todo use new modelWithEmptyItem() method here
     auto concatModel = new KConcatenateRowsProxyModel(parent);
     concatModel->addSourceModel(file->payeesModel()->emptyPayee());
     concatModel->addSourceModel(file->payeesModel());
     d->payeesModel->setSortRole(Qt::DisplayRole);
     d->payeesModel->setSourceModel(concatModel);
     d->payeesModel->sort(0);
+
+    d->tagsModel->setSortRole(Qt::DisplayRole);
+    d->tagsModel->setSourceModel(file->tagsModel()->modelWithEmptyItem());
+    d->tagsModel->sort(0);
+    d->ui->tagComboBox->setModel(d->tagsModel);
+    d->ui->tagComboBox->view()->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    d->ui->tagComboBox->view()->setSelectionBehavior(QAbstractItemView::SelectRows);
 
     d->ui->payeeEdit->setEditable(true);
     d->ui->payeeEdit->setModel(d->payeesModel);
@@ -592,6 +602,13 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
                 d->ui->numberEdit->setText(splitIdx.data(eMyMoney::Model::SplitNumberRole).toString());
 
                 d->ui->statusCombo->setCurrentIndex(splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).toInt());
+
+                const auto tagIds = splitIdx.data(eMyMoney::Model::SplitTagIdRole).toStringList();
+                const auto tagIndeces = MyMoneyFile::instance()->tagsModel()->indecesById(tagIds);
+                auto selectionModel = d->ui->tagComboBox->view()->selectionModel();
+                selectionModel->clear();
+                // d->ui->tagComboBox->setCurrentIndex(MyMoneyModelBase::mapFromBaseSource(d->tagsModel, tagIdx).row());
+                // d->ui->tagComboBox->setCurrentIndex(0);
             } else {
                 d->splitModel.appendSplit(MyMoneyFile::instance()->journalModel()->itemByIndex(splitIdx).split());
                 if (splitIdx.data(eMyMoney::Model::TransactionSplitCountRole) == 2) {

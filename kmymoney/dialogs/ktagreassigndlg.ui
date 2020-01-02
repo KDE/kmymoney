@@ -66,7 +66,7 @@
     </widget>
    </item>
    <item>
-    <widget class="KMyMoneyTagCombo" name="tagCombo" native="true"/>
+    <widget class="QComboBox" name="tagCombo" native="true"/>
    </item>
    <item>
     <spacer name="spacer9">
@@ -104,14 +104,7 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>KMyMoneyTagCombo</class>
-   <extends>QWidget</extends>
-   <header>kmymoneytagcombo.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
+ <customwidgets/>
  <resources/>
  <connections>
   <connection>

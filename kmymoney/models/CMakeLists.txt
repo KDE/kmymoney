@@ -20,6 +20,7 @@ if(ENABLE_UNFINISHEDFEATURES)
     ledgersplit.cpp
     ledgertransaction.cpp
     specialdatesfilter.cpp
+    idfilter.cpp
   )
 endif()
 

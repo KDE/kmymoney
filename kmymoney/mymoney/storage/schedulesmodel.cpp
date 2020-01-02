@@ -1,5 +1,5 @@
 /*
- * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2019-2020  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -227,6 +227,8 @@ void SchedulesModel::load(const QMap<QString, MyMoneySchedule>& list)
 
 void SchedulesModel::doAddItem(const MyMoneySchedule& schedule, const QModelIndex& parentIdx)
 {
+  Q_UNUSED(parentIdx)
+
   if (schedule.type() == eMyMoney::Schedule::Type::Any) {
     qDebug() << "Schedule to be added has no type. Rejected.";
     return;

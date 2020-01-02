@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2007-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -42,7 +42,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneytagcombo.h"
 #include "knewinvestmentwizard.h"
 #include "knewaccountdlg.h"
 #include "ktagcontainer.h"

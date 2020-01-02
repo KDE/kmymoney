@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2007-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -39,7 +39,6 @@
 
 #include "kmymoneyreconcilecombo.h"
 #include "kmymoneyactivitycombo.h"
-#include "kmymoneytagcombo.h"
 #include "ktagcontainer.h"
 #include "investtransaction.h"
 #include "selectedtransactions.h"
@@ -397,12 +396,14 @@ void InvestTransactionEditor::createEditWidgets()
   connect(interest->splitButton(), &QAbstractButton::clicked, this, &InvestTransactionEditor::slotEditInterestSplits);
 
   auto tag = new KTagContainer;
-  tag->tagCombo()->setPlaceholderText(i18n("Tag"));
   tag->tagCombo()->setObjectName(QLatin1String("tag"));
   d->m_editWidgets["tag"] = tag;
   connect(tag->tagCombo(), &QComboBox::editTextChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
+#if 0
+  /// @todo port to new model code
   connect(tag->tagCombo(), &KMyMoneyMVCCombo::createItem, this, &InvestTransactionEditor::slotNewTag);
   connect(tag->tagCombo(), &KMyMoneyMVCCombo::objectCreation, this, &InvestTransactionEditor::objectCreation);
+#endif
 
   auto memo = new KTextEdit;
   memo->setObjectName("memo");

@@ -1,7 +1,7 @@
 /*
  * Copyright 2009-2016  Cristian Oneț <onet.cristian@gmail.com>
  * Copyright 2009-2010  Alvaro Soliverez <asoliverez@gmail.com>
- * Copyright 2010-2016  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2010-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -25,6 +25,8 @@
 // QT Includes
 
 #include <QWidget>
+class QComboBox;
+class QAbstractItemModel;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,15 +36,12 @@
 
 #include "kmm_widgets_export.h"
 
-class KMyMoneyTagCombo;
 class MyMoneyTag;
 
 /**
-  * This widget contain a KMyMoneyTagCombo widget and 0 or more KTagLabel widgets
-  * call KMyMoneyTagCombo.loadTags with the correct list whenever a new KTagLabel is created or
-  * deleted by removing or adding the relative tag
+  * This widget contains a QComboBox widget and 0 or more KTagLabel widgets
   *
-  * @author Alessandro Russo
+  * @author Alessandro Russo, Thomas Baumgart
   */
 class KTagContainerPrivate;
 class KMM_WIDGETS_EXPORT KTagContainer : public QWidget
@@ -54,11 +53,11 @@ public:
   explicit KTagContainer(QWidget* parent = nullptr);
   ~KTagContainer();
 
-  void loadTags(const QList<MyMoneyTag>& list);
-  KMyMoneyTagCombo* tagCombo();
+  void setModel(QAbstractItemModel* model);
+  void loadTags(const QList<QString>& idList);
+
+  QComboBox* tagCombo();
   const QList<QString> selectedTags();
-  void addTagWidget(const QString& id);
-  void RemoveAllTagWidgets();
 
 protected Q_SLOTS:
   void slotRemoveTagWidget();

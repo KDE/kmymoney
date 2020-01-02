@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2009-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -41,7 +41,6 @@
 #include "kmymoneyreconcilecombo.h"
 #include "kmymoneycashflowcombo.h"
 #include "kmymoneypayeecombo.h"
-#include "kmymoneytagcombo.h"
 #include "ktagcontainer.h"
 #include "tabbar.h"
 #include "kmymoneycategory.h"
@@ -53,6 +52,7 @@
 #include "mymoneyfile.h"
 #include "mymoneypayee.h"
 #include "mymoneytag.h"
+#include "tagsmodel.h"
 #include "kmymoneyutils.h"
 #include "kmymoneycompletion.h"
 #include "transaction.h"
@@ -148,12 +148,13 @@ void StdTransactionEditor::createEditWidgets()
     category->splitButton()->setDisabled(d->m_account.id().isEmpty());
 
   auto tag = new KTagContainer;
-  tag->tagCombo()->setPlaceholderText(i18n("Tag"));
   tag->tagCombo()->setObjectName(QLatin1String("Tag"));
   d->m_editWidgets["tag"] = tag;
+#if 0
+  /// @todo port to new model code
   connect(tag->tagCombo(), &KMyMoneyMVCCombo::createItem, this, &StdTransactionEditor::slotNewTag);
   connect(tag->tagCombo(), &KMyMoneyMVCCombo::objectCreation, this, &StdTransactionEditor::objectCreation);
-
+#endif
   auto memo = new KTextEdit;
   memo->setObjectName(QLatin1String("Memo"));
   memo->setTabChangesFocus(true);
@@ -336,7 +337,7 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
   //auto tag = dynamic_cast<KMyMoneyTagCombo*>(m_editWidgets["tag"]);
   auto tag = dynamic_cast<KTagContainer*>(d->m_editWidgets["tag"]);
   if (tag)
-    tag->loadTags(MyMoneyFile::instance()->tagList());
+    tag->setModel(MyMoneyFile::instance()->tagsModel()->modelWithEmptyItem());
 
   // check if the current transaction has a reference to an equity account
   auto haveEquityAccount = false;
@@ -404,10 +405,8 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
     if (payee && !payeeId.isEmpty())
       payee->setSelectedItem(payeeId);
 
-    QList<QString> t = d->m_split.tagIdList();
-    if (tag && !t.isEmpty())
-      for (auto i = 0; i < t.size(); ++i)
-        tag->addTagWidget(t[i]);
+    if (tag)
+      tag->loadTags(d->m_split.tagIdList());
 
     d->m_splits.clear();
     if (d->m_transaction.splitCount() < 2) {
@@ -592,14 +591,6 @@ void StdTransactionEditor::slotReloadEditWidgets()
 
   // reload tag widget
   if (auto tag = dynamic_cast<KTagContainer*>(d->m_editWidgets["tag"])) {
-    QString tagId = tag->tagCombo()->selectedItem();
-
-    tag->loadTags(MyMoneyFile::instance()->tagList());
-
-    if (!tagId.isEmpty()) {
-      tag->RemoveAllTagWidgets();
-      tag->addTagWidget(tagId);
-    }
   }
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2006-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -39,7 +39,6 @@
 
 #include "kmymoneypayeecombo.h"
 #include "kmymoneycombo.h"
-#include "kmymoneytagcombo.h"
 #include "tabbar.h"
 #include "ktagcontainer.h"
 #include "mymoneytransaction.h"
@@ -550,7 +549,7 @@ void StdTransaction::arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidgets)
     if (payee)
       payee->setPlaceholderText(QString());
     if (tag)
-      tag->tagCombo()->setPlaceholderText(QString());
+      tag->tagCombo()->lineEdit()->setPlaceholderText(QString());
   }
 
   auto form = dynamic_cast<KMyMoneyTransactionForm::TransactionForm*>(d->m_form);

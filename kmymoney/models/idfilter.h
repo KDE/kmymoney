@@ -1,6 +1,4 @@
 /*
- * Copyright 2011-2012  Alessandro Russo <axela74@yahoo.it>
- * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
@@ -17,13 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KTAGREASSIGNDLG_H
-#define KTAGREASSIGNDLG_H
+#ifndef IDFILTER_H
+#define IDFILTER_H
+
+#include "kmm_models_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDialog>
+#include <QSortFilterProxyModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -31,36 +31,28 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class KTagReassignDlg; }
-
-/**
- *  Implementation of the dialog that lets the user select a tag in order
- *  to re-assign transactions (for instance, if tags are deleted).
- */
-
-class KTagReassignDlg : public QDialog
+class IdFilterPrivate;
+class KMM_MODELS_EXPORT IdFilter : public QSortFilterProxyModel
 {
   Q_OBJECT
-  Q_DISABLE_COPY(KTagReassignDlg)
+  Q_DECLARE_PRIVATE(IdFilter)
+  Q_DISABLE_COPY(IdFilter)
 
 public:
-  explicit KTagReassignDlg(QWidget* parent = nullptr);
-  ~KTagReassignDlg();
+  explicit IdFilter(QObject* parent);
 
-  /**
-    * This function sets up the dialog, lets the user select a tag and returns
-    * the id of the selected tag in the tagslist.
-    *
-    * @param tagslist reference to QList of tag ids that are not available
-    *                 for re-assignment
-    *
-    * @return Returns the id of the selected tag in the list or QString() if
-    *         the dialog was aborted.
-    */
-  QString show(const QList<QString>& tagslist);
+  void setFilterList(const QStringList& idList);
+  void addFilter(const QString& id);
+  void removeFilter(const QString& id);
+  QList<QString> filterList() const;
+
+protected:
+  bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
+  bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
 
 private:
-  Ui::KTagReassignDlg *ui;
+  IdFilterPrivate*  d_ptr;
 };
 
-#endif // KTAGREASSIGNDLG_H
+#endif // IDFILTER_H
+

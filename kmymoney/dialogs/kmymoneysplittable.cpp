@@ -1,5 +1,5 @@
 /*
- * Copyright 2008-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2008-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -60,7 +60,6 @@
 #include "kmymoneysettings.h"
 #include "kmymoneymvccombo.h"
 #include "mymoneytag.h"
-#include "kmymoneytagcombo.h"
 #include "ktagcontainer.h"
 #include "kcurrencycalculator.h"
 #include "mymoneyutils.h"
@@ -68,6 +67,7 @@
 #include "mymoneyexception.h"
 #include "icons.h"
 #include "mymoneyenums.h"
+#include "tagsmodel.h"
 
 using namespace Icons;
 
@@ -968,9 +968,8 @@ KMyMoneyCategory* KMyMoneySplitTable::createEditWidgets(bool setFocus)
   d->m_editMemo->setFont(cellFont);
 
   d->m_editTag = new KTagContainer;
-  d->m_editTag->tagCombo()->setPlaceholderText(i18n("Tag"));
   d->m_editTag->tagCombo()->setFont(cellFont);
-  d->m_editTag->loadTags(MyMoneyFile::instance()->tagList());
+  d->m_editTag->setModel(MyMoneyFile::instance()->tagsModel());
   connect(d->m_editTag->tagCombo(), SIGNAL(createItem(QString,QString&)), this, SIGNAL(createTag(QString,QString&)));
   connect(d->m_editTag->tagCombo(), SIGNAL(objectCreation(bool)), this, SIGNAL(objectCreation(bool)));
 
@@ -1017,11 +1016,7 @@ KMyMoneyCategory* KMyMoneySplitTable::createEditWidgets(bool setFocus)
     d->m_split.setValue(-diff);
   }
 
-  QList<QString> t = d->m_split.tagIdList();
-  if (!t.isEmpty()) {
-    for (int i = 0; i < t.size(); i++)
-      d->m_editTag->addTagWidget(t[i]);
-  }
+  d->m_editTag->loadTags(d->m_split.tagIdList());
 
   d->m_editMemo->loadText(d->m_split.memo());
   // don't allow automatically calculated values to be modified

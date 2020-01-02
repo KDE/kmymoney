@@ -1,6 +1,7 @@
 /*
  * Copyright 2012       Alessandro Russo <axela74@yahoo.it>
  * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -613,9 +614,11 @@ void KTagsView::slotDeleteTag()
 
   // first create list with all non-selected tags
   QList<MyMoneyTag> remainingTags = file->tagList();
+  QList<QString> selectedTagIds;
   QList<MyMoneyTag>::iterator it_ta;
   for (it_ta = remainingTags.begin(); it_ta != remainingTags.end();) {
     if (d->m_selectedTags.contains(*it_ta)) {
+      selectedTagIds.append((*it_ta).id());
       it_ta = remainingTags.erase(it_ta);
     } else {
       ++it_ta;
@@ -673,9 +676,9 @@ void KTagsView::slotDeleteTag()
       }
 
       // show transaction reassignment dialog
-      auto dlg = new KTagReassignDlg(this);
+      QPointer<KTagReassignDlg> dlg = new KTagReassignDlg(this);
       KMyMoneyMVCCombo::setSubstringSearchForChildren(dlg, !KMyMoneySettings::stringMatchFromStart());
-      auto tag_id = dlg->show(remainingTags);
+      auto tag_id = dlg->show(selectedTagIds);
       delete dlg; // and kill the dialog
       if (tag_id.isEmpty())  //FIXME-ALEX Let the user choose to not reassign a to-be deleted tag to another one.
         return; // the user aborted the dialog, so let's abort as well
