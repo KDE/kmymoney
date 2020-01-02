@@ -62,6 +62,7 @@
 #include "mymoneypayee.h"
 #include "mymoneysecurity.h"
 #include "kcurrencycalculator.h"
+#include "idfilter.h"
 
 using namespace Icons;
 
@@ -76,7 +77,6 @@ public:
         , accountsModel(new AccountNamesFilterProxyModel(parent))
         , costCenterModel(new QSortFilterProxyModel(parent))
         , payeesModel(new QSortFilterProxyModel(parent))
-        , tagsModel(new QSortFilterProxyModel(parent))
         , accepted(false)
         , costCenterRequired(false)
         , bypassPriceEditor(false)
@@ -118,7 +118,6 @@ public:
     AccountNamesFilterProxyModel* accountsModel;
     QSortFilterProxyModel*        costCenterModel;
     QSortFilterProxyModel*        payeesModel;
-    QSortFilterProxyModel*        tagsModel;
     bool                          accepted;
     bool                          costCenterRequired;
     bool                          bypassPriceEditor;
@@ -260,42 +259,46 @@ bool NewTransactionEditor::Private::costCenterChanged(int costCenterIndex)
 bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
 {
     bool rc = true;
-    if (!accountId.isEmpty() && splitModel.rowCount() <= 1) {
-        try {
-            MyMoneyAccount category = MyMoneyFile::instance()->account(accountId);
-            const bool isIncomeExpense = category.isIncomeExpense();
-            ui->costCenterCombo->setEnabled(isIncomeExpense);
-            ui->costCenterLabel->setEnabled(isIncomeExpense);
-            costCenterRequired = category.isCostCenterRequired();
+    if (splitModel.rowCount() <= 1) {
+        if (!accountId.isEmpty()) {
+            try {
+                MyMoneyAccount category = MyMoneyFile::instance()->account(accountId);
+                const bool isIncomeExpense = category.isIncomeExpense();
+                ui->costCenterCombo->setEnabled(isIncomeExpense);
+                ui->costCenterLabel->setEnabled(isIncomeExpense);
+                costCenterRequired = category.isCostCenterRequired();
 
-            bool needValueSet = false;
-            // make sure we have a split in the model
-            if (splitModel.rowCount() == 0) {
-                // add an empty split
-                MyMoneySplit s;
-                splitModel.addItem(s);
-                needValueSet = true;
+                bool needValueSet = false;
+                // make sure we have a split in the model
+                if (splitModel.rowCount() == 0) {
+                    // add an empty split
+                    MyMoneySplit s;
+                    splitModel.addItem(s);
+                    needValueSet = true;
+                }
+
+                const QModelIndex index = splitModel.index(0, 0);
+                if (!needValueSet) {
+                    // update the values only if the category changes. This prevents
+                    // the call of the currency calculator if not needed.
+                    needValueSet = (index.data(eMyMoney::Model::SplitAccountIdRole).toString().compare(accountId) != 0);
+                }
+                splitModel.setData(index, accountId, eMyMoney::Model::SplitAccountIdRole);
+
+                rc &= costCenterChanged(ui->costCenterCombo->currentIndex());
+                rc &= postdateChanged(ui->dateEdit->date());
+                payeeChanged(ui->payeeEdit->currentIndex());
+
+                if (amountHelper->haveValue() && needValueSet) {
+                    splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), eMyMoney::Model::SplitValueRole);
+                    splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value() / getPrice()), eMyMoney::Model::SplitSharesRole);
+                }
+
+            } catch (MyMoneyException& e) {
+                qDebug() << "Ooops: invalid account id" << accountId << "in" << Q_FUNC_INFO;
             }
-
-            const QModelIndex index = splitModel.index(0, 0);
-            if (!needValueSet) {
-                // update the values only if the category changes. This prevents
-                // the call of the currency calculator if not needed.
-                needValueSet = (index.data(eMyMoney::Model::SplitAccountIdRole).toString().compare(accountId) != 0);
-            }
-            splitModel.setData(index, accountId, eMyMoney::Model::SplitAccountIdRole);
-
-            rc &= costCenterChanged(ui->costCenterCombo->currentIndex());
-            rc &= postdateChanged(ui->dateEdit->date());
-            payeeChanged(ui->payeeEdit->currentIndex());
-
-            if (amountHelper->haveValue() && needValueSet) {
-                splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), eMyMoney::Model::SplitValueRole);
-                splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value() / getPrice()), eMyMoney::Model::SplitSharesRole);
-            }
-
-        } catch (MyMoneyException& e) {
-            qDebug() << "Ooops: invalid account id" << accountId << "in" << Q_FUNC_INFO;
+        } else {
+            splitModel.unload();
         }
     }
     return rc;
@@ -412,8 +415,11 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     d->accountsModel->sort(AccountsModel::Column::AccountName);
     d->ui->accountCombo->setModel(d->accountsModel);
 
+    d->ui->tagContainer->setModel(file->tagsModel()->modelWithEmptyItem());
+
     d->costCenterModel->setSortRole(Qt::DisplayRole);
     d->costCenterModel->setSourceModel(file->costCenterModel()->modelWithEmptyItem());
+    d->costCenterModel->setSortLocaleAware(true);
     d->costCenterModel->sort(0);
 
     d->ui->costCenterCombo->setEditable(true);
@@ -421,26 +427,37 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     d->ui->costCenterCombo->setModelColumn(0);
     d->ui->costCenterCombo->completer()->setFilterMode(Qt::MatchContains);
 
-    /// @todo use new modelWithEmptyItem() method here
-    auto concatModel = new KConcatenateRowsProxyModel(parent);
-    concatModel->addSourceModel(file->payeesModel()->emptyPayee());
-    concatModel->addSourceModel(file->payeesModel());
     d->payeesModel->setSortRole(Qt::DisplayRole);
-    d->payeesModel->setSourceModel(concatModel);
+    d->payeesModel->setSourceModel(file->payeesModel()->modelWithEmptyItem());
+    d->payeesModel->setSortLocaleAware(true);
     d->payeesModel->sort(0);
 
-    d->tagsModel->setSortRole(Qt::DisplayRole);
-    d->tagsModel->setSourceModel(file->tagsModel()->modelWithEmptyItem());
-    d->tagsModel->sort(0);
-    d->ui->tagComboBox->setModel(d->tagsModel);
-    d->ui->tagComboBox->view()->setSelectionMode(QAbstractItemView::ExtendedSelection);
-    d->ui->tagComboBox->view()->setSelectionBehavior(QAbstractItemView::SelectRows);
-
     d->ui->payeeEdit->setEditable(true);
+    d->ui->payeeEdit->lineEdit()->setClearButtonEnabled(true);
+
     d->ui->payeeEdit->setModel(d->payeesModel);
     d->ui->payeeEdit->setModelColumn(0);
+    d->ui->payeeEdit->completer()->setCompletionMode(QCompleter::PopupCompletion);
     d->ui->payeeEdit->completer()->setFilterMode(Qt::MatchContains);
 
+    // make sure that there is no selection left in the background
+    // in case there is no text in the edit field
+    connect(d->ui->payeeEdit->lineEdit(), &QLineEdit::textEdited,
+            [&](const QString& txt)
+            {
+                if (txt.isEmpty()) {
+                    d->ui->payeeEdit->setCurrentIndex(0);
+                }
+            }
+    );
+    connect(d->ui->accountCombo->lineEdit(), &QLineEdit::textEdited,
+            [&](const QString& txt)
+            {
+                if (txt.isEmpty()) {
+                    d->ui->accountCombo->setSelected(QString());
+                }
+            }
+    );
     d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
     d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
 
@@ -473,7 +490,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     // handle some events in certain conditions different from default
     d->ui->payeeEdit->installEventFilter(this);
     d->ui->costCenterCombo->installEventFilter(this);
-    d->ui->tagComboBox->installEventFilter(this);
+    d->ui->tagContainer->tagCombo()->installEventFilter(this);
     d->ui->statusCombo->installEventFilter(this);
 
     // setup tooltip
@@ -603,12 +620,7 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
 
                 d->ui->statusCombo->setCurrentIndex(splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).toInt());
 
-                const auto tagIds = splitIdx.data(eMyMoney::Model::SplitTagIdRole).toStringList();
-                const auto tagIndeces = MyMoneyFile::instance()->tagsModel()->indecesById(tagIds);
-                auto selectionModel = d->ui->tagComboBox->view()->selectionModel();
-                selectionModel->clear();
-                // d->ui->tagComboBox->setCurrentIndex(MyMoneyModelBase::mapFromBaseSource(d->tagsModel, tagIdx).row());
-                // d->ui->tagComboBox->setCurrentIndex(0);
+                d->ui->tagContainer->loadTags(splitIdx.data(eMyMoney::Model::SplitTagIdRole).toStringList());
             } else {
                 d->splitModel.appendSplit(MyMoneyFile::instance()->journalModel()->itemByIndex(splitIdx).split());
                 if (splitIdx.data(eMyMoney::Model::TransactionSplitCountRole) == 2) {
@@ -728,7 +740,7 @@ void NewTransactionEditor::editSplits()
         d->updateWidgetState();
         d->bypassPriceEditor = false;
 
-        QWidget* next = d->ui->tagComboBox;
+        QWidget* next = d->ui->tagContainer->tagCombo();
         if (d->ui->costCenterCombo->isEnabled()) {
             next = d->ui->costCenterCombo;
         }
@@ -779,7 +791,7 @@ void NewTransactionEditor::saveTransaction()
 
     MyMoneyFileTransaction ft;
     try {
-        // new we update the split we are opened for
+        // now we update the split we are opened for
         MyMoneySplit sp(d->split);
         sp.setNumber(d->ui->numberEdit->text());
         sp.setMemo(d->ui->memoEdit->toPlainText());

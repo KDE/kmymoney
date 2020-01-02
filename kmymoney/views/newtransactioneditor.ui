@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>675</width>
-    <height>257</height>
+    <width>678</width>
+    <height>261</height>
    </rect>
   </property>
   <property name="frameShape">
@@ -16,10 +16,7 @@
   <property name="frameShadow">
    <enum>QFrame::Raised</enum>
   </property>
-  <layout class="QGridLayout" name="gridLayout" columnstretch="0,3,2,0,2">
-   <property name="verticalSpacing">
-    <number>1</number>
-   </property>
+  <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,5,0,0">
    <item row="0" column="0">
     <widget class="QLabel" name="label_6">
      <property name="text">
@@ -116,8 +113,8 @@
      <property name="editable">
       <bool>true</bool>
      </property>
-     <property name="insertPolicy">
-      <enum>QComboBox::InsertAfterCurrent</enum>
+     <property name="autoCompletion">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -184,7 +181,7 @@
     </widget>
    </item>
    <item row="3" column="1" colspan="2">
-    <widget class="QComboBox" name="tagComboBox"/>
+    <widget class="KTagContainer" name="tagContainer" native="true"/>
    </item>
    <item row="3" column="3">
     <widget class="QLabel" name="label_9">
@@ -287,6 +284,12 @@
    <extends>QDateEdit</extends>
    <header>kmymoneydateedit.h</header>
   </customwidget>
+  <customwidget>
+   <class>KTagContainer</class>
+   <extends>QWidget</extends>
+   <header>ktagcontainer.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>dateEdit</tabstop>
@@ -297,7 +300,6 @@
   <tabstop>accountCombo</tabstop>
   <tabstop>splitEditorButton</tabstop>
   <tabstop>costCenterCombo</tabstop>
-  <tabstop>tagComboBox</tabstop>
   <tabstop>memoEdit</tabstop>
   <tabstop>statusCombo</tabstop>
   <tabstop>enterButton</tabstop>

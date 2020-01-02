@@ -816,10 +816,24 @@ public:
     MyMoneyModel<T>::load(emptyMap);
   }
 
-  QVariant data(const QModelIndex& idx, int role) const override
+  int rowCount(const QModelIndex& idx) const override
   {
     Q_UNUSED(idx)
-    Q_UNUSED(role)
+    // the empty model always has a single item
+    return 1;
+  }
+
+  QVariant data(const QModelIndex& idx, int role) const override
+  {
+    if (!idx.isValid())
+      return QVariant();
+    if (idx.row() < 0 || idx.row() >= rowCount(idx.parent()))
+      return QVariant();
+
+    // never show any data for the empty transaction
+    if ((role == Qt::DisplayRole) || (role == Qt::EditRole) || (role == eMyMoney::Model::IdRole))
+      return QString();
+
     return QVariant();
   }
 

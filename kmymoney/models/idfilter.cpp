@@ -96,5 +96,3 @@ bool IdFilter::lessThan(const QModelIndex& left, const QModelIndex& right) const
   // let the base class do the real work
   return QSortFilterProxyModel::lessThan(left, right);
 }
-
-
