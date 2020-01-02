@@ -47,7 +47,8 @@ class KTagContainerPrivate
 
 public:
   KTagContainerPrivate(KTagContainer* parent)
-    : m_tagCombo(nullptr)
+    : q_ptr(parent)
+    , m_tagCombo(nullptr)
     , m_idFilter(new IdFilter(parent))
   {
   }
