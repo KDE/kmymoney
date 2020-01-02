@@ -41,16 +41,21 @@ KTagLabel::KTagLabel(const QString& id, const QString& name, QWidget* parent)
   : QFrame(parent)
   , m_id(id)
 {
+  setFrameStyle(QFrame::StyledPanel | QFrame::Raised);
+  setBackgroundRole(QPalette::Button);
+
   QToolButton *t = new QToolButton(this);
   t->setIcon(Icons::get(Icon::DialogClose));
   t->setAutoRaise(true);
-  QLabel *l = new QLabel(name, this);
+
   QHBoxLayout *layout = new QHBoxLayout;
-  layout->setContentsMargins(0, 0, 0, 0);
+  layout->setContentsMargins(0, 0, 4, 0);
   layout->setSpacing(0);
-  this->setLayout(layout);
   layout->addWidget(t);
+
+  QLabel *l = new QLabel(name, this);
   layout->addWidget(l);
+
+  setLayout(layout);
   connect(t, &QAbstractButton::clicked, this, &KTagLabel::clicked);
-  //this->setFrameStyle(QFrame::Panel | QFrame::Plain);
 }
