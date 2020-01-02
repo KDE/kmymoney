@@ -739,7 +739,7 @@ void KMyMoneyUtils::newTag(const QString& newnameBase, QString& id)
       for (;;) {
         try {
           MyMoneyFile::instance()->tagByName(newname);
-          newname = QString::fromLatin1("%1 [%2]").arg(newnameBase, ++count);
+          newname = QString::fromLatin1("%1 [%2]").arg(newnameBase).arg(++count);
         } catch (const MyMoneyException &) {
           break;
         }
