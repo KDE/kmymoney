@@ -79,6 +79,7 @@
         "Name[pl]": "Przelewy SEPA",
         "Name[pt]": "Transferências SEPA",
         "Name[pt_BR]": "Ordens SEPA",
+        "Name[sk]": "SEPA príkazy",
         "Name[sv]": "SEPA-order",
         "Name[uk]": "Векселі SEPA",
         "Name[x-test]": "xxSEPA ordersxx",
