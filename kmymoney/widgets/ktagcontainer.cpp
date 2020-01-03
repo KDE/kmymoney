@@ -143,15 +143,6 @@ void KTagContainer::loadTags(const QList<QString>& idList)
   }
 }
 
-void KTagContainer::slotAddTagWidget()
-{
-  Q_D(KTagContainer);
-#if 0
-  /// @todo  port to new model code
-  addTagWidget(d->m_tagCombo->selectedItem());
-#endif
-}
-
 void KTagContainer::slotRemoveTagWidget()
 {
   Q_D(KTagContainer);

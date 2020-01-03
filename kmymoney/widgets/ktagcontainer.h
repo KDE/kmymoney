@@ -61,7 +61,6 @@ public:
 
 protected Q_SLOTS:
   void slotRemoveTagWidget();
-  void slotAddTagWidget();
 
 private:
   KTagContainerPrivate * const d_ptr;
