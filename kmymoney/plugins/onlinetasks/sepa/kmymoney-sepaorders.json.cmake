@@ -41,6 +41,7 @@
                 "Name[pt]": "Christian David",
                 "Name[pt_BR]": "Christian David",
                 "Name[ru]": "Christian David",
+                "Name[sk]": "Christian David",
                 "Name[sv]": "Christian David",
                 "Name[uk]": "Christian David",
                 "Name[x-test]": "xxChristian Davidxx"
@@ -81,6 +82,7 @@
         "Name[pl]": "Przelewy SEPA",
         "Name[pt]": "Transferências SEPA",
         "Name[pt_BR]": "Ordens SEPA",
+        "Name[sk]": "SEPA príkazy",
         "Name[sv]": "SEPA-order",
         "Name[uk]": "Векселі SEPA",
         "Name[x-test]": "xxSEPA ordersxx",

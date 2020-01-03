@@ -19,6 +19,7 @@
                 "Name[pt]": "Christian David",
                 "Name[pt_BR]": "Christian David",
                 "Name[ru]": "Christian David",
+                "Name[sk]": "Christian David",
                 "Name[sv]": "Christian David",
                 "Name[uk]": "Christian David",
                 "Name[x-test]": "xxChristian Davidxx"

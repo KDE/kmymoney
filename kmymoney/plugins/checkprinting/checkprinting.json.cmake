@@ -62,6 +62,7 @@
         "Name[pl]": "Drukowanie czeków",
         "Name[pt]": "Impressão de cheques",
         "Name[pt_BR]": "Impressão de cheques",
+        "Name[sk]": "Skontrolovať tlač",
         "Name[sv]": "Checkutskrift",
         "Name[uk]": "Друк чеків",
         "Name[x-test]": "xxCheck printingxx",

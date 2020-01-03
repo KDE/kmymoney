@@ -19,6 +19,7 @@
                 "Name[pt]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[pt_BR]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[ru]": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[sk]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[sv]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[uk]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[x-test]": "xxAlvaro Soliverez,Łukasz Wojniłowiczxx"
@@ -38,6 +39,7 @@
         "Description[pl]": "Dodaje widok prognoz do KMyMoney",
         "Description[pt]": "Adiciona a área de antevisão ao KMyMoney",
         "Description[pt_BR]": "Adiciona área de previsão no KMyMoney",
+        "Description[sk]": "Pridá pohľad predpovede do KMyMoney",
         "Description[sv]": "Lägger till prognosvy i KMyMoney",
         "Description[uk]": "Панель прогнозів у KMyMoney",
         "Description[x-test]": "xxAdds forecast view to KMyMoneyxx",
@@ -59,6 +61,7 @@
         "Name[pl]": "Widok prognozy",
         "Name[pt]": "Área de Previsão",
         "Name[pt_BR]": "Área de previsão",
+        "Name[sk]": "Pohľad predpovede",
         "Name[sv]": "Prognosvy",
         "Name[uk]": "Перегляд прогнозів",
         "Name[x-test]": "xxForecast viewxx",
