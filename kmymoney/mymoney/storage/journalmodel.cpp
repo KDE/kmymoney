@@ -862,7 +862,7 @@ void JournalModel::modifyTransaction(const MyMoneyTransaction& newTransaction)
 
 void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& after)
 {
-  Q_UNUSED(before);
+  Q_UNUSED(before)
   auto srcIdx = firstIndexById(after.transaction().id());
 
   if (!srcIdx.isValid())
@@ -885,53 +885,20 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
   // is the unique key. It remains the same as long as the postDate()
   // of the two transactions is identical. In case the postDate changed, we
   // need to move the transaction to a new spot in the model. This move
-  // is done first. Then we have to differentiate between three other
-  // cases:
+  // is done last so that we have the complete new data already in the model.
+  // Besides the post date we have to differentiate between three other cases:
+  //
   //   a) number of splits increases
   //   b) number of splits decreases
   //   c) number of splits remains the same
-  // In a second step we take care of cases a) and b) by inserting
+  //
+  // In a first step we take care of cases a) and b) by inserting
   // or removing rows.
-  // In the third step we simply assign new JournalEntry items to
+  // In the next step we simply assign new JournalEntry items to
   // the model for all splits.
+  // And as last act we move the new items around
 
   // Step 1
-  if (newTransaction.postDate() != oldTransaction.postDate()) {
-    const auto destIdx = MyMoneyModelBase::lowerBound(newKey);
-    int row = destIdx.row();
-    if (!destIdx.isValid()) {
-      row = rowCount();
-    }
-    // we can skip moving if there is no transaction between
-    // the current location and the new one
-    if (row != (srcIdx.row() + oldSplitCount)) {
-      beginMoveRows(QModelIndex(), srcIdx.row(), srcIdx.row() + oldSplitCount - 1, QModelIndex(), row);
-
-      d->removeIdKeyMapping(oldTransaction.id());
-
-      QVector<TreeItem<JournalEntry>*> entries;
-      const int srcRow = srcIdx.row();
-      for (int rows = oldSplitCount; rows > 0; --rows) {
-        entries.append(m_rootItem->takeChild(srcRow));
-      }
-      // check if the destination row must be adjusted
-      // since we removed the splits already
-      if (srcIdx.row() < row)
-        row -= oldSplitCount;
-
-      // insert the items at the new location
-      m_rootItem->insertChildren(row, entries);
-
-      d->addIdKeyMapping(oldTransaction.id(), newKey);
-
-      endMoveRows();
-
-      // update the index of the transaction
-      srcIdx = index(row, 0);
-    }
-  }
-
-  // Step 2
   if (newSplitCount > oldSplitCount) {
     insertRows(srcIdx.row() + oldSplitCount, newSplitCount - oldSplitCount);
 
@@ -939,19 +906,70 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
     removeRows(srcIdx.row() + newSplitCount, oldSplitCount - newSplitCount);
   }
 
-  // Step 3
+  // Step 2
   auto transaction = after.sharedtransactionPtr();
 
+  // use the oldKey for now to keep sorting in a correct state
   int row = srcIdx.row();
   foreach (const auto split, newTransaction.splits()) {
-    JournalEntry journalEntry(newKey, transaction, split);
+    JournalEntry journalEntry(oldKey, transaction, split);
     static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->dataRef() = journalEntry;
     ++row;
   }
 
   // let the world know that things have changed
-  const QModelIndex endIdx = index(row-1, columnCount()-1);
+  QModelIndex endIdx = index(row-1, columnCount()-1);
   emit dataChanged(srcIdx, endIdx);
+
+  // Step 3
+  if (newTransaction.postDate() != oldTransaction.postDate()) {
+    const auto destIdx = MyMoneyModelBase::lowerBound(newKey);
+    auto destRow = destIdx.row();
+    if (!destIdx.isValid()) {
+      destRow = rowCount();
+    }
+    // we can skip moving if there is no transaction between
+    // the current location and the new one
+    if (destRow != (srcIdx.row() + newSplitCount)) {
+      beginMoveRows(QModelIndex(), srcIdx.row(), srcIdx.row() + newSplitCount - 1, QModelIndex(), destRow);
+
+      d->removeIdKeyMapping(oldTransaction.id());
+
+      // take the items out of their old location
+      // and update the key (kept in their m_id)
+      QVector<TreeItem<JournalEntry>*> entries;
+      const int srcRow = srcIdx.row();
+      for (int rows = newSplitCount; rows > 0; --rows) {
+        auto journalEntry = m_rootItem->takeChild(srcRow);
+        journalEntry->dataRef().m_id = newKey;
+        entries.append(journalEntry);
+      }
+      // check if the destination row must be adjusted
+      // since we removed the splits already
+      if (srcIdx.row() < destRow)
+        destRow -= newSplitCount;
+
+      // insert the items at the new location
+      m_rootItem->insertChildren(destRow, entries);
+
+      d->addIdKeyMapping(oldTransaction.id(), newKey);
+
+      endMoveRows();
+
+      int firstRow, lastRow;
+      if (srcRow < destRow) {
+          firstRow = srcRow;
+          lastRow = destRow + newSplitCount - 1;
+      } else {
+          firstRow = destRow;
+          lastRow = srcRow + newSplitCount - 1;
+      }
+      emit dataChanged(index(firstRow, 0), index(lastRow, columnCount()-1));
+
+      // update the index of the transaction
+      srcIdx = index(destRow, 0);
+    }
+  }
 
   d->addTransactionToBalance(srcIdx.row(), newTransaction.splitCount());
 
