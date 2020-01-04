@@ -744,6 +744,7 @@ void JournalModel::unload()
 {
   d->balanceCache.clear();
   d->accountCache.clear();
+  d->transactionIdKeyMap.clear();
   MyMoneyModel::unload();
 }
 
