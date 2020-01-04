@@ -1,5 +1,5 @@
 /*
- * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2019-2020  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -42,6 +42,9 @@ class KMM_MODELS_EXPORT SpecialDatesFilter : public QSortFilterProxyModel
 
 public:
   explicit SpecialDatesFilter(const QAbstractItemModel* specialDatesModel, QObject* parent);
+
+public Q_SLOTS:
+  void forceReload();
 
 protected:
   bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;

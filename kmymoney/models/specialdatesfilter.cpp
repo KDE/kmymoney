@@ -1,5 +1,5 @@
 /*
- * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2019-2020  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -97,4 +97,9 @@ bool SpecialDatesFilter::filterAcceptsRow(int source_row, const QModelIndex& sou
     return visible;
   }
   return QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
+}
+
+void SpecialDatesFilter::forceReload()
+{
+  invalidateFilter();
 }
