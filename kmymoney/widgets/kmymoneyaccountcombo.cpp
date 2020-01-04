@@ -132,7 +132,7 @@ void KMyMoneyAccountCombo::collapseAll()
 void KMyMoneyAccountCombo::activated()
 {
   auto accountId = view()->currentIndex().data(eMyMoney::Model::Roles::IdRole).toString();
-  if (!accountId.isEmpty() && !lineEdit()->text().isEmpty()) {
+  if (!accountId.isEmpty() && !(lineEdit() && lineEdit()->text().isEmpty())) {
     selectItem(view()->currentIndex());
   }
 }
