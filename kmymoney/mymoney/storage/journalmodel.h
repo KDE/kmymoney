@@ -121,6 +121,13 @@ public:
    */
   MyMoneyTransaction transactionById(const QString& id) const;
 
+  /**
+   * Returns all indexes for a given transaction @a id or empty
+   * if it does not exist. The indexes contained are only for
+   * columns 0.
+   */
+  QModelIndexList indexesByTransactionId(const QString& id) const;
+
   void addTransaction(MyMoneyTransaction& t);
   void removeTransaction(const MyMoneyTransaction& t);
   void modifyTransaction(const MyMoneyTransaction& newTransaction);

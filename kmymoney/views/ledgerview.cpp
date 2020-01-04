@@ -200,6 +200,7 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
       emit aboutToStartEdit();
       setSpan(index.row(), 0, 1, horizontalHeader()->count());
       QModelIndex editIndex = model()->index(index.row(), 0);
+
       rc = QTableView::edit(editIndex, trigger, event);
 
       // make sure that the row gets resized according to the requirements of the editor
@@ -449,4 +450,72 @@ void LedgerView::selectMostRecentTransaction()
       row--;
     }
   }
+}
+
+QStringList LedgerView::selectedTransactions() const
+{
+  QStringList selection;
+
+  QString id;
+  for (const auto& idx : selectionModel()->selectedIndexes()) {
+    id = idx.data(eMyMoney::Model::JournalTransactionIdRole).toString();
+    if (!selection.contains(id)) {
+      selection.append(id);
+    }
+  }
+  return selection;
+}
+
+void LedgerView::setSelectedTransactions(const QStringList& transactionIds)
+{
+  QItemSelection selection;
+  const auto journalModel = MyMoneyFile::instance()->journalModel();
+  const auto lastColumn = model()->columnCount()-1;
+  int startRow = -1;
+  int lastRow = -1;
+  QModelIndex currentIdx;
+
+  auto createSelectionRange = [&]() {
+    if (startRow != -1) {
+      selection.select(model()->index(startRow, 0), model()->index(lastRow, lastColumn));
+      startRow = -1;
+    }
+  };
+
+  for (const auto& id : transactionIds) {
+    const auto indexes = journalModel->indexesByTransactionId(id);
+    int row = -1;
+    for (const auto baseIdx : indexes) {
+      row = journalModel->mapFromBaseSource(model(), baseIdx).row();
+      if (row != -1) {
+        break;
+      }
+    }
+    if (row == -1) {
+      qDebug() << "transaction" << id << "not found anymore for selection. skipped";
+      continue;
+    }
+
+    if (startRow == -1) {
+      startRow = row;
+      lastRow = row;
+      // use the first as the current index
+      if (!currentIdx.isValid()) {
+        currentIdx = model()->index(startRow, 0);
+      }
+    } else {
+      if (row == lastRow+1) {
+        lastRow = row;
+      } else {
+        // a new range start, so we take care of it
+        createSelectionRange();
+      }
+    }
+  }
+  // add a possibly dangling range
+  createSelectionRange();
+
+  selectionModel()->clearSelection();
+  selectionModel()->select(selection, QItemSelectionModel::Select);
+  selectionModel()->setCurrentIndex(currentIdx, QItemSelectionModel::Select);
 }

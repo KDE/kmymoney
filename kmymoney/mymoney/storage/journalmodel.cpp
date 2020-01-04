@@ -769,6 +769,17 @@ QModelIndex JournalModel::firstIndexById(const QString& id) const
   return MyMoneyModelBase::lowerBound(key);
 }
 
+QModelIndexList JournalModel::indexesByTransactionId(const QString& id) const
+{
+  QModelIndexList indexes;
+  QModelIndex idx = firstIndexById(id);
+  while (idx.isValid() && (idx.data(eMyMoney::Model::JournalTransactionIdRole).toString() == id)) {
+    indexes.append(idx);
+    idx = index(idx.row()+1, 0);
+  }
+  return indexes;
+}
+
 QString JournalModel::keyForDate(const QDate& date) const
 {
   return MyMoneyTransaction::uniqueSortKey(date, QString());
@@ -1118,3 +1129,4 @@ QString JournalModel::fakeId() const
 {
   return QStringLiteral("FakeID");
 }
+

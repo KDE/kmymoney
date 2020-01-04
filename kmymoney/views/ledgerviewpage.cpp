@@ -70,6 +70,7 @@ public:
   NewTransactionForm*   form;
   QSet<QString>         hideFormReasons;
   QString               accountId;
+  QStringList           selection;
 };
 
 LedgerViewPage::LedgerViewPage(QWidget* parent)
@@ -101,7 +102,8 @@ LedgerViewPage::LedgerViewPage(QWidget* parent)
   // and hope that QConcatenateTablesProxyModel has this fixed. But it was
   // only introduced with Qt 5.13 which is a bit new for some distros. As
   // it looks from the source of it the source is still present as of 2020-01-04
-  connect(file->journalModel(), SIGNAL(rowsMoved(const QModelIndex&,int,int,const QModelIndex&,int)), d->specialDatesFilter, SLOT(forceReload()), Qt::QueuedConnection);
+  connect(file->journalModel(), SIGNAL(rowsAboutToBeMoved(const QModelIndex&,int,int,const QModelIndex&,int)), this, SLOT(keepSelection()));
+  connect(file->journalModel(), SIGNAL(rowsMoved(const QModelIndex&,int,int,const QModelIndex&,int)), this, SLOT(reloadFilter()), Qt::QueuedConnection);
 
   d->ui->ledgerView->setModel(d->specialDatesFilter);
 }
@@ -109,6 +111,19 @@ LedgerViewPage::LedgerViewPage(QWidget* parent)
 LedgerViewPage::~LedgerViewPage()
 {
   delete d;
+}
+
+void LedgerViewPage::keepSelection()
+{
+  d->selection = d->ui->ledgerView->selectedTransactions();
+}
+
+void LedgerViewPage::reloadFilter()
+{
+  d->specialDatesFilter->forceReload();
+
+  d->ui->ledgerView->setSelectedTransactions(d->selection);
+  d->selection.clear();
 }
 
 QString LedgerViewPage::accountId() const

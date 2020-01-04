@@ -506,6 +506,12 @@ void JournalDelegate::setModelData(QWidget* editWidget, QAbstractItemModel* mode
 
   auto* editor = qobject_cast<TransactionEditorBase*>(editWidget);
   if(editor) {
+    // saving the transaction may move the selected transaction(s) around
+    // we keep the transaction IDs here and take care of them when we return
+    const auto selection = d->m_view->selectedTransactions();
+
     editor->saveTransaction();
+
+    d->m_view->setSelectedTransactions(selection);
   }
 }

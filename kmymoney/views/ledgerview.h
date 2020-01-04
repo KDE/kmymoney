@@ -61,6 +61,9 @@ public:
 
   void setModel(QAbstractItemModel * model) override;
 
+  QStringList selectedTransactions() const;
+  void setSelectedTransactions(const QStringList& transactionIds);
+
   void selectMostRecentTransaction();
 
   /**

@@ -58,6 +58,8 @@ public Q_SLOTS:
 protected Q_SLOTS:
   void startEdit();
   void finishEdit();
+  void keepSelection();
+  void reloadFilter();
 
 Q_SIGNALS:
   void transactionSelected(const QModelIndex& idx);
