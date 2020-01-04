@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2015-2020  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -91,6 +91,17 @@ LedgerViewPage::LedgerViewPage(QWidget* parent)
 
   d->specialDatesFilter = new SpecialDatesFilter(file->specialDatesModel(), this);
   d->specialDatesFilter->setSourceModel(d->accountFilter);
+
+  // Moving rows in a source model to a KConcatenateRowsProxyModel
+  // does not get propagated through it which destructs our ledger in such cases.
+  //
+  // A workaround is to invalidate the sort filter.
+  //
+  // Since KConcatenateRowsProxyModel is deprecated I did not dare to fix it
+  // and hope that QConcatenateTablesProxyModel has this fixed. But it was
+  // only introduced with Qt 5.13 which is a bit new for some distros. As
+  // it looks from the source of it the source is still present as of 2020-01-04
+  connect(file->journalModel(), SIGNAL(rowsMoved(const QModelIndex&,int,int,const QModelIndex&,int)), d->specialDatesFilter, SLOT(forceReload()), Qt::QueuedConnection);
 
   d->ui->ledgerView->setModel(d->specialDatesFilter);
 }
