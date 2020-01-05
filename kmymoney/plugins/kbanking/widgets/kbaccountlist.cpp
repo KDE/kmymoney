@@ -24,7 +24,7 @@
 
 
 KBAccountListViewItem::KBAccountListViewItem(KBAccountListView *parent,
-    AB_ACCOUNT *acc)
+    AB_ACCOUNT_SPEC *acc)
     : QTreeWidgetItem(parent)
     , _account(acc)
 {
@@ -43,7 +43,7 @@ KBAccountListViewItem::KBAccountListViewItem(const KBAccountListViewItem &item)
 
 KBAccountListViewItem::KBAccountListViewItem(KBAccountListView *parent,
     QTreeWidgetItem *after,
-    AB_ACCOUNT *acc)
+    AB_ACCOUNT_SPEC *acc)
     : QTreeWidgetItem(parent, after)
     , _account(acc)
 {
@@ -55,7 +55,7 @@ KBAccountListViewItem::~KBAccountListViewItem()
 {
 }
 
-AB_ACCOUNT *KBAccountListViewItem::getAccount()
+AB_ACCOUNT_SPEC *KBAccountListViewItem::getAccount()
 {
   return _account;
 }
@@ -70,32 +70,32 @@ void KBAccountListViewItem::_populate()
   i = 0;
 
   // unique id
-  setText(i++, QString::number(AB_Account_GetUniqueId(_account)));
+  setText(i++, QString::number(AB_AccountSpec_GetUniqueId(_account)));
 
   // bank code
-  setText(i++, QString::fromUtf8(AB_Account_GetBankCode(_account)));
+  setText(i++, QString::fromUtf8(AB_AccountSpec_GetBankCode(_account)));
 
   // bank name
-  tmp = AB_Account_GetBankName(_account);
-  if (tmp.isEmpty())
+//  tmp = AB_Account_GetBankName(_account);
+//  if (tmp.isEmpty())
     tmp = i18nc("replacement for institution or account w/o name", "(unnamed)");
   setText(i++, tmp);
 
   // account id
-  setText(i++, QString::fromUtf8(AB_Account_GetAccountNumber(_account)));
+  setText(i++, QString::fromUtf8(AB_AccountSpec_GetAccountNumber(_account)));
 
   // account name
-  tmp = QString::fromUtf8(AB_Account_GetAccountName(_account));
+  tmp = QString::fromUtf8(AB_AccountSpec_GetAccountName(_account));
   if (tmp.isEmpty())
     tmp = i18nc("replacement for institution or account w/o name", "(unnamed)");
   setText(i++, tmp);
 
-  tmp = QString::fromUtf8(AB_Account_GetOwnerName(_account));
+  tmp = QString::fromUtf8(AB_AccountSpec_GetOwnerName(_account));
   if (tmp.isEmpty())
     tmp = "";
   setText(i++, tmp);
 
-  tmp = QString::fromUtf8(AB_Provider_GetName(AB_Account_GetProvider(_account)));
+  tmp = QString::fromUtf8(AB_AccountSpec_GetBackendName(_account));
   if (tmp.isEmpty())
     tmp = i18nc("replacement for institution or account w/o name", "(unnamed)");
   setText(i++, tmp);
@@ -135,21 +135,21 @@ KBAccountListView::~KBAccountListView()
 {
 }
 
-void KBAccountListView::addAccount(AB_ACCOUNT *acc)
+void KBAccountListView::addAccount(AB_ACCOUNT_SPEC *acc)
 {
   new KBAccountListViewItem(this, acc);
 }
 
-void KBAccountListView::addAccounts(const std::list<AB_ACCOUNT*> &accs)
+void KBAccountListView::addAccounts(const std::list<AB_ACCOUNT_SPEC*> &accs)
 {
-  std::list<AB_ACCOUNT*>::const_iterator it;
+  std::list<AB_ACCOUNT_SPEC*>::const_iterator it;
 
   for (it = accs.begin(); it != accs.end(); ++it) {
     new KBAccountListViewItem(this, *it);
   } /* for */
 }
 
-AB_ACCOUNT *KBAccountListView::getCurrentAccount()
+AB_ACCOUNT_SPEC *KBAccountListView::getCurrentAccount()
 {
   KBAccountListViewItem *entry;
 
@@ -160,9 +160,9 @@ AB_ACCOUNT *KBAccountListView::getCurrentAccount()
   return entry->getAccount();
 }
 
-std::list<AB_ACCOUNT*> KBAccountListView::getSelectedAccounts()
+std::list<AB_ACCOUNT_SPEC*> KBAccountListView::getSelectedAccounts()
 {
-  std::list<AB_ACCOUNT*> accs;
+  std::list<AB_ACCOUNT_SPEC*> accs;
   KBAccountListViewItem *entry;
 
   // Create an iterator and give the listview as argument
@@ -179,9 +179,9 @@ std::list<AB_ACCOUNT*> KBAccountListView::getSelectedAccounts()
   return accs;
 }
 
-std::list<AB_ACCOUNT*> KBAccountListView::getSortedAccounts()
+std::list<AB_ACCOUNT_SPEC*> KBAccountListView::getSortedAccounts()
 {
-  std::list<AB_ACCOUNT*> accs;
+  std::list<AB_ACCOUNT_SPEC*> accs;
   KBAccountListViewItem *entry;
 
   // Create an iterator and give the listview as argument

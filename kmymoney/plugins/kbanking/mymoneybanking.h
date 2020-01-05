@@ -116,7 +116,7 @@ private:
    * sets up the reference string consisting out of BLZ and account number
    * in the KMyMoney object so that we can find it later on when importing data.
    */
-  void setupAccountReference(const MyMoneyAccount& acc, AB_ACCOUNT* ab_acc);
+  void setupAccountReference(const MyMoneyAccount& acc, AB_ACCOUNT_SPEC* ab_acc);
 
   /**
    * Returns the value of the parameter @a s with all leading 0's stripped.
@@ -156,12 +156,12 @@ private:
    * This method translates a MyMoneyAccount to the corresponding AB_ACCOUNT object pointer.
    * If no mapped account can be detected, it returns 0.
    */
-  AB_ACCOUNT* aqbAccount(const MyMoneyAccount& acc) const;
+  AB_ACCOUNT_SPEC* aqbAccount(const MyMoneyAccount& acc) const;
 
   /**
    * This is a convenient method for aqbAccount if you have KMyMoney's account id only.
    */
-  AB_ACCOUNT* aqbAccount(const QString& accountId) const;
+  AB_ACCOUNT_SPEC* aqbAccount(const QString& accountId) const;
 
   /**
     * Called by the application framework to update the
@@ -225,9 +225,9 @@ public:
 
   int executeQueue(AB_IMEXPORTER_CONTEXT *ctx);
 
-  int enqueueJob(AB_JOB *j);
-  int dequeueJob(AB_JOB *j);
-  std::list<AB_JOB*> getEnqueuedJobs();
+  int enqueueJob(AB_TRANSACTION *j);
+  int dequeueJob(AB_TRANSACTION *j);
+  std::list<AB_TRANSACTION*> getEnqueuedJobs();
   void transfer();
 
   virtual bool interactiveImport();
@@ -240,7 +240,6 @@ protected:
   QString mappingId(const MyMoneyObject& object) const;
 
   bool importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO *ai, uint32_t flags);
-  const AB_ACCOUNT_STATUS* _getAccountStatus(AB_IMEXPORTER_ACCOUNTINFO *ai);
   void _xaToStatement(MyMoneyStatement &ks,
                       const MyMoneyAccount&,
                       const AB_TRANSACTION *t);
@@ -249,7 +248,7 @@ protected:
 private:
   KBankingPlugin* m_parent;
   QMap<QString, bool> m_hashMap;
-  AB_JOB_LIST2 *_jobQueue;
+  AB_TRANSACTION_LIST2 *_jobQueue;
   QSet<QString>   m_sepaKeywords;
 };
 

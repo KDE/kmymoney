@@ -18,10 +18,10 @@
 
 #include "aqbankingkmmoperators.h"
 
-#include <aqbanking/transactionlimits.h>
-#include <aqbanking/transaction.h>
-#include <aqbanking/account.h>
-#include <aqbanking/value.h>
+#include <aqbanking/types/transactionlimits.h>
+#include <aqbanking/types/transaction.h>
+#include <aqbanking/types/account_spec.h>
+#include <aqbanking/types/value.h>
 
 #include "payeeidentifier/payeeidentifiertyped.h"
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
@@ -65,7 +65,7 @@ QSharedPointer<sepaOnlineTransfer::settings> AB_TransactionLimits_toSepaOnlineTa
   int minLength = AB_TransactionLimits_GetMinLenRemoteName(aqlimits);
   if (minLength == 0)
     minLength = 1;
-  settings->setRecipientNameLimits(AB_TransactionLimits_GetMaxLinesRemoteName(aqlimits),
+  settings->setRecipientNameLimits(1 /*AB_TransactionLimits_GetMaxLinesRemoteName(aqlimits)*/,
                                    AB_TransactionLimits_GetMaxLenRemoteName(aqlimits),
                                    minLength
                                   );
@@ -90,7 +90,7 @@ void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const payeeIde
 
   AB_Transaction_SetRemoteAccountNumber(transaction, ident.accountNumber().toUtf8().constData());
   AB_Transaction_SetRemoteBankCode(transaction, ident.bankCode().toUtf8().constData());
-  AB_Transaction_SetRemoteName(transaction, GWEN_StringList_fromQString(ident.ownerName()));
+  AB_Transaction_SetRemoteName(transaction, ident.ownerName().toUtf8().constData());
 }
 
 void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const payeeIdentifiers::ibanBic& ident)
@@ -99,20 +99,20 @@ void AB_Transaction_SetRemoteAccount(AB_TRANSACTION* transaction, const payeeIde
 
   AB_Transaction_SetRemoteAccountNumber(transaction, ident.electronicIban().toUtf8().constData());
   AB_Transaction_SetRemoteBankCode(transaction, ident.fullStoredBic().toUtf8().constData());
-  AB_Transaction_SetRemoteName(transaction, GWEN_StringList_fromQString(ident.ownerName()));
+  AB_Transaction_SetRemoteName(transaction, ident.ownerName().toUtf8().constData());
 }
 
-void AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const AB_ACCOUNT* account)
+void AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const AB_ACCOUNT_SPEC* account)
 {
   Q_CHECK_PTR(transaction);
   Q_CHECK_PTR(account);
 
-  AB_Transaction_SetLocalName(transaction, AB_Account_GetOwnerName(account));
-  AB_Transaction_SetLocalAccountNumber(transaction, AB_Account_GetAccountNumber(account));
-  AB_Transaction_SetLocalBankCode(transaction, AB_Account_GetBankCode(account));
+  AB_Transaction_SetLocalName(transaction, AB_AccountSpec_GetOwnerName(account));
+  AB_Transaction_SetLocalAccountNumber(transaction, AB_AccountSpec_GetAccountNumber(account));
+  AB_Transaction_SetLocalBankCode(transaction, AB_AccountSpec_GetBankCode(account));
 
-  AB_Transaction_SetLocalIban(transaction, AB_Account_GetIBAN(account));
-  AB_Transaction_SetLocalBic(transaction, AB_Account_GetBIC(account));
+  AB_Transaction_SetLocalIban(transaction, AB_AccountSpec_GetIban(account));
+  AB_Transaction_SetLocalBic(transaction, AB_AccountSpec_GetBic(account));
 }
 
 void AB_Transaction_SetLocalAccount(AB_TRANSACTION* transaction, const payeeIdentifiers::nationalAccount& ident)

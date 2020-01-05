@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright 2009  Cristian Onet onet.cristian@gmail.com                 *
- *   Copyright 2004  Martin Preuss aquamaniac@users.sourceforge.net        *
+ *   Copyright 2018  Martin Preuss aquamaniac@users.sourceforge.net        *
  *   Copyright 2010  Thomas Baumgart ipwizard@users.sourceforge.net        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
@@ -36,7 +36,7 @@
 
 
 KBJobListViewItem::KBJobListViewItem(KBJobListView *parent,
-                                     AB_JOB *j)
+                                     AB_TRANSACTION *j)
     : QTreeWidgetItem(parent)
     , _job(j)
 {
@@ -62,7 +62,7 @@ KBJobListViewItem::~KBJobListViewItem()
 
 
 
-AB_JOB *KBJobListViewItem::getJob()
+AB_TRANSACTION *KBJobListViewItem::getJob()
 {
   return _job;
 }
@@ -72,31 +72,26 @@ void KBJobListViewItem::_populate()
 {
   QString tmp;
   int i;
-  AB_ACCOUNT *a;
-  const char *p;
 
   assert(_job);
 
   i = 0;
 
-  a = AB_Job_GetAccount(_job);
-  assert(a);
-
   // job id
-  setText(i++, QString::number(AB_Job_GetJobId(_job)));
+  setText(i++, QString::number(AB_Transaction_GetIdForApplication(_job)));
 
   // job type
-  switch (AB_Job_GetType(_job)) {
-    case AB_Job_TypeGetBalance:
+  switch (AB_Transaction_GetCommand(_job)) {
+    case AB_Transaction_CommandGetBalance:
       tmp = i18n("Get Balance");
       break;
-    case AB_Job_TypeGetTransactions:
+    case AB_Transaction_CommandGetTransactions:
       tmp = i18n("Get Transactions");
       break;
-    case AB_Job_TypeTransfer:
+    case AB_Transaction_CommandTransfer:
       tmp = i18n("Transfer");
       break;
-    case AB_Job_TypeDebitNote:
+    case AB_Transaction_CommandDebitNote:
       tmp = i18n("Debit Note");
       break;
     default:
@@ -106,62 +101,57 @@ void KBJobListViewItem::_populate()
   setText(i++, tmp);
 
   // bank name
-  tmp = AB_Account_GetBankName(a);
-  if (tmp.isEmpty())
-    tmp = AB_Account_GetBankCode(a);
+  tmp = AB_Transaction_GetLocalBankCode(_job);
   if (tmp.isEmpty())
     tmp = i18nc("Unknown bank code", "(unknown)");
   setText(i++, tmp);
 
   // account name
-  tmp = AB_Account_GetAccountName(a);
-  if (tmp.isEmpty())
-    tmp = AB_Account_GetAccountNumber(a);
+  tmp = AB_Transaction_GetLocalAccountNumber(_job);
   if (tmp.isEmpty())
     tmp = i18nc("Unknown account number", "(unknown)");
   setText(i++, tmp);
 
   // status
-  switch (AB_Job_GetStatus(_job)) {
-    case AB_Job_StatusNew:
+  switch (AB_Transaction_GetStatus(_job)) {
+    case AB_Transaction_StatusNone:
+    case AB_Transaction_StatusUnknown:
       tmp = i18nc("Status of the job", "new");
       break;
-    case AB_Job_StatusUpdated:
-      tmp = i18nc("Status of the job", "updated");
+    case AB_Transaction_StatusAccepted:
+      tmp = i18nc("Status of the job", "accepted");
       break;
-    case AB_Job_StatusEnqueued:
-      tmp = i18nc("Status of the job", "enqueued");
+    case AB_Transaction_StatusRejected:
+      tmp = i18nc("Status of the job", "rejected");
       break;
-    case AB_Job_StatusSent:
-      tmp = i18nc("Status of the job", "sent");
-      break;
-    case AB_Job_StatusPending:
+    case AB_Transaction_StatusPending:
       tmp = i18nc("Status of the job", "pending");
       break;
-    case AB_Job_StatusFinished:
-      tmp = i18nc("Status of the job", "finished");
+    case AB_Transaction_StatusSending:
+      tmp = i18nc("Status of the job", "sending");
       break;
-    case AB_Job_StatusError:
+    case AB_Transaction_StatusAutoReconciled:
+      tmp = i18nc("Status of the job", "reconciled (auto)");
+      break;
+    case AB_Transaction_StatusManuallyReconciled:
+      tmp = i18nc("Status of the job", "reconciled (manual)");
+      break;
+    case AB_Transaction_StatusRevoked:
+      tmp = i18nc("Status of the job", "revoked");
+      break;
+    case AB_Transaction_StatusAborted:
+      tmp = i18nc("Status of the job", "aborted");
+      break;
+    case AB_Transaction_StatusEnqueued:
+      tmp = i18nc("Status of the job", "enqueued");
+      break;
+    case AB_Transaction_StatusError:
       tmp = i18nc("Status of the job", "error");
       break;
     default:
       tmp = i18nc("Status of the job", "(unknown)");
       break;
   }
-  setText(i++, tmp);
-
-  p = AB_Provider_GetName(AB_Account_GetProvider(a));
-  if (!p)
-    tmp = i18nc("Unknown account provider", "(unknown)");
-  else
-    tmp = p;
-  setText(i++, tmp);
-
-  p = AB_Job_GetCreatedBy(_job);
-  if (!p)
-    tmp = i18nc("Unknown creator of the job", "(unknown)");
-  else
-    tmp = p;
   setText(i++, tmp);
 }
 
@@ -176,15 +166,13 @@ void KBJobListViewItem::_populate()
 KBJobListView::KBJobListView(QWidget *parent)
     : QTreeWidget(parent)
 {
-  setColumnCount(7);
+  setColumnCount(5);
   setAllColumnsShowFocus(true);
   setHeaderLabels(QStringList() << i18n("Job Id")
                   << i18n("Job Type")
                   << i18n("Institute")
                   << i18n("Account")
-                  << i18n("Status")
-                  << i18n("Backend")
-                  << i18n("Application"));
+                  << i18n("Status"));
 
   header()->setSortIndicatorShown(true);
 }
@@ -197,16 +185,16 @@ KBJobListView::~KBJobListView()
 
 
 
-void KBJobListView::addJob(AB_JOB *j)
+void KBJobListView::addJob(AB_TRANSACTION *j)
 {
   new KBJobListViewItem(this, j);
 }
 
 
 
-void KBJobListView::addJobs(const std::list<AB_JOB*> &js)
+void KBJobListView::addJobs(const std::list<AB_TRANSACTION*> &js)
 {
-  std::list<AB_JOB*>::const_iterator it;
+  std::list<AB_TRANSACTION*>::const_iterator it;
 
   for (it = js.begin(); it != js.end(); ++it) {
     new KBJobListViewItem(this, *it);
@@ -215,7 +203,7 @@ void KBJobListView::addJobs(const std::list<AB_JOB*> &js)
 
 
 
-AB_JOB *KBJobListView::getCurrentJob()
+AB_TRANSACTION *KBJobListView::getCurrentJob()
 {
   KBJobListViewItem *entry;
 
@@ -229,9 +217,9 @@ AB_JOB *KBJobListView::getCurrentJob()
 
 
 
-std::list<AB_JOB*> KBJobListView::getSelectedJobs()
+std::list<AB_TRANSACTION*> KBJobListView::getSelectedJobs()
 {
-  std::list<AB_JOB*> js;
+  std::list<AB_TRANSACTION*> js;
   KBJobListViewItem *entry;
   // Create an iterator and give the listview as argument
   QTreeWidgetItemIterator it(this, QTreeWidgetItemIterator::Selected);

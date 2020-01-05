@@ -1,5 +1,5 @@
 /*
- * Copyright 2004       Martin Preuss <martin@libchipcard.de>
+ * Copyright 2018       Martin Preuss <martin@libchipcard.de>
  * Copyright 2004-2019  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
@@ -22,12 +22,13 @@
 
 
 #include "banking.hpp"
-#include <aqbanking/banking_be.h>
-#include <aqbanking/banking_cfg.h>
-#include <assert.h>
+
+#include <aqbanking/banking.h>
 
 #include <gwenhywfar/inherit.h>
 #include <gwenhywfar/debug.h>
+
+#include <assert.h>
 
 
 
@@ -68,20 +69,6 @@ int AB_Banking::fini()
 
 
 
-int AB_Banking::onlineInit()
-{
-  return AB_Banking_OnlineInit(_banking);
-}
-
-
-
-int AB_Banking::onlineFini()
-{
-  return AB_Banking_OnlineFini(_banking);
-}
-
-
-
 const char *AB_Banking::getAppName()
 {
   return AB_Banking_GetAppName(_banking);
@@ -89,61 +76,38 @@ const char *AB_Banking::getAppName()
 
 
 
-std::list<AB_ACCOUNT*> AB_Banking::getAccounts()
+AB_ACCOUNT_SPEC *AB_Banking::getAccount(uint32_t uniqueId)
 {
-  AB_ACCOUNT_LIST2 *ll;
-  std::list<AB_ACCOUNT*> rl;
+  int rv;
+  AB_ACCOUNT_SPEC *as=NULL;
 
-  ll = AB_Banking_GetAccounts(_banking);
-  if (ll) {
-    AB_ACCOUNT *a;
-    AB_ACCOUNT_LIST2_ITERATOR *it;
-
-    it = AB_Account_List2_First(ll);
-    assert(it);
-    a = AB_Account_List2Iterator_Data(it);
-    assert(a);
-    while (a) {
-      rl.push_back(a);
-      a = AB_Account_List2Iterator_Next(it);
-    }
-    AB_Account_List2Iterator_free(it);
-    AB_Account_List2_free(ll);
+  rv=AB_Banking_GetAccountSpecByUniqueId(_banking, uniqueId, &as);
+  if (rv<0) {
+    DBG_ERROR(0, "Account spec not found (%d)", rv);
+    return NULL;
   }
-  return rl;
+  return as;
 }
 
 
 
-AB_ACCOUNT *AB_Banking::getAccount(uint32_t uniqueId)
-{
-  return AB_Banking_GetAccount(_banking, uniqueId);
-}
+std::list<AB_ACCOUNT_SPEC*> AB_Banking::getAccounts() {
+  std::list<AB_ACCOUNT_SPEC*> accountSpecList;
+  AB_ACCOUNT_SPEC_LIST *abAccountSpecList=NULL;
+  int rv;
 
+  rv=AB_Banking_GetAccountSpecList(_banking, &abAccountSpecList);
+  if (rv>=0) {
+    AB_ACCOUNT_SPEC *as;
 
-
-std::list<AB_USER*> AB_Banking::getUsers()
-{
-  AB_USER_LIST2 *ll;
-  std::list<AB_USER*> rl;
-
-  ll = AB_Banking_GetUsers(_banking);
-  if (ll) {
-    AB_USER *a;
-    AB_USER_LIST2_ITERATOR *it;
-
-    it = AB_User_List2_First(ll);
-    assert(it);
-    a = AB_User_List2Iterator_Data(it);
-    assert(a);
-    while (a) {
-      rl.push_back(a);
-      a = AB_User_List2Iterator_Next(it);
+    while( (as=AB_AccountSpec_List_First(abAccountSpecList)) ) {
+      AB_AccountSpec_List_Del(as);
+      accountSpecList.push_back(as);
+      as=AB_AccountSpec_List_Next(as);
     }
-    AB_User_List2Iterator_free(it);
-    AB_User_List2_free(ll);
   }
-  return rl;
+  AB_AccountSpec_List_free(abAccountSpecList);
+  return accountSpecList;
 }
 
 
@@ -155,47 +119,9 @@ int AB_Banking::getUserDataDir(GWEN_BUFFER *buf) const
 
 
 
-int AB_Banking::getAppUserDataDir(GWEN_BUFFER *buf) const
-{
-  return AB_Banking_GetAppUserDataDir(_banking, buf);
-}
-
-
-
 AB_BANKING *AB_Banking::getCInterface()
 {
   return _banking;
-}
-
-
-
-std::list<std::string> AB_Banking::getActiveProviders()
-{
-  const GWEN_STRINGLIST *sl;
-  std::list<std::string> l;
-
-  sl = AB_Banking_GetActiveProviders(_banking);
-  if (sl) {
-    GWEN_STRINGLISTENTRY *se;
-
-    se = GWEN_StringList_FirstEntry(sl);
-    assert(se);
-    while (se) {
-      const char *p;
-
-      p = GWEN_StringListEntry_Data(se);
-      assert(p);
-      l.push_back(p);
-      se = GWEN_StringListEntry_Next(se);
-    } /* while */
-  }
-  return l;
-}
-
-
-AB_PROVIDER *AB_Banking::getProvider(const char *name)
-{
-  return AB_Banking_GetProvider(_banking, name);
 }
 
 
@@ -208,7 +134,7 @@ bool AB_Banking::importContext(AB_IMEXPORTER_CONTEXT *ctx, uint32_t flags)
   while (ai) {
     if (!importAccountInfo(ai, flags))
       return false;
-    ai = AB_ImExporterContext_GetNextAccountInfo(ctx);
+    ai = AB_ImExporterAccountInfo_List_Next(ai);
   }
 
   return true;
@@ -223,9 +149,40 @@ bool AB_Banking::importAccountInfo(AB_IMEXPORTER_ACCOUNTINFO*, uint32_t)
 
 
 
-int AB_Banking::executeJobs(AB_JOB_LIST2 *jl, AB_IMEXPORTER_CONTEXT *ctx)
+int AB_Banking::executeJobs(AB_TRANSACTION_LIST2 *jl, AB_IMEXPORTER_CONTEXT *ctx)
 {
-  return AB_Banking_ExecuteJobs(_banking, jl, ctx);
+  return AB_Banking_SendCommands(_banking, jl, ctx);
+}
+
+
+
+std::list<std::string> AB_Banking::getActiveProviders() {
+  std::list<std::string> stringList;
+  GWEN_PLUGIN_DESCRIPTION_LIST2 *pdl;
+
+  pdl=AB_Banking_GetProviderDescrs(_banking);
+  if (pdl) {
+    GWEN_PLUGIN_DESCRIPTION_LIST2_ITERATOR *it;
+
+    it=GWEN_PluginDescription_List2_First(pdl);
+    if (it) {
+      GWEN_PLUGIN_DESCRIPTION *pd;
+
+      pd=GWEN_PluginDescription_List2Iterator_Data(it);
+      while(pd) {
+        const char *s;
+
+        s=GWEN_PluginDescription_GetName(pd);
+        if (s && *s)
+          stringList.push_back(s);
+        pd=GWEN_PluginDescription_List2Iterator_Next(it);
+      }
+      GWEN_PluginDescription_List2Iterator_free(it);
+    }
+    GWEN_PluginDescription_List2_freeAll(pdl);
+  }
+
+  return stringList;
 }
 
 
@@ -335,139 +292,10 @@ int AB_Banking::saveSharedSubConfig(const char *name,
 }
 
 
-int AB_Banking::loadAppConfig(GWEN_DB_NODE **pDb)
+
+void AB_Banking::setAccountAlias(AB_ACCOUNT_SPEC *a, const char *alias)
 {
-  return AB_Banking_LoadAppConfig(_banking, pDb);
-}
-
-
-
-int AB_Banking::saveAppConfig(GWEN_DB_NODE *db)
-{
-  return AB_Banking_SaveAppConfig(_banking, db);
-}
-
-
-
-int AB_Banking::lockAppConfig()
-{
-  return AB_Banking_LockAppConfig(_banking);
-}
-
-
-
-int AB_Banking::unlockAppConfig()
-{
-  return AB_Banking_UnlockAppConfig(_banking);
-}
-
-
-
-int AB_Banking::loadAppSubConfig(const char *subGroup,
-                                 GWEN_DB_NODE **pDb)
-{
-  GWEN_DB_NODE *dbApp = NULL;
-  int rv;
-
-  rv = loadAppConfig(&dbApp);
-  if (rv < 0) {
-    DBG_ERROR(0, "Unable to load config (%d)", rv);
-    GWEN_DB_Group_free(dbApp);
-    return rv;
-  } else {
-    GWEN_DB_NODE *dbSrc;
-
-    dbSrc = GWEN_DB_GetGroup(dbApp,
-                             GWEN_PATH_FLAGS_NAMEMUSTEXIST,
-                             subGroup);
-    if (dbSrc) {
-      *pDb = GWEN_DB_Group_dup(dbSrc);
-    } else {
-      *pDb = GWEN_DB_Group_new("config");
-    }
-    GWEN_DB_Group_free(dbApp);
-
-    return 0;
-  }
-}
-
-
-
-int AB_Banking::saveAppSubConfig(const char *subGroup,
-                                 GWEN_DB_NODE *dbSrc)
-{
-  GWEN_DB_NODE *dbApp = NULL;
-  int rv;
-
-  rv = lockAppConfig();
-  if (rv < 0) {
-    DBG_ERROR(0, "Unable to lock config");
-    return rv;
-  } else {
-    rv = loadAppConfig(&dbApp);
-    if (rv < 0) {
-      DBG_ERROR(0, "Unable to load config (%d)", rv);
-      unlockAppConfig();
-      return rv;
-    } else {
-      GWEN_DB_NODE *dbDst;
-
-      dbDst = GWEN_DB_GetGroup(dbApp,
-                               GWEN_DB_FLAGS_OVERWRITE_GROUPS,
-                               subGroup);
-      assert(dbDst);
-      if (dbSrc)
-        GWEN_DB_AddGroupChildren(dbDst, dbSrc);
-      rv = saveAppConfig(dbApp);
-      if (rv < 0) {
-        DBG_ERROR(0, "Unable to store config (%d)", rv);
-        unlockAppConfig();
-        GWEN_DB_Group_free(dbApp);
-        return rv;
-      }
-      GWEN_DB_Group_free(dbApp);
-    }
-
-    rv = unlockAppConfig();
-    if (rv < 0) {
-      DBG_ERROR(0, "Unable to unlock config (%d)", rv);
-      return rv;
-    }
-  }
-  return 0;
-}
-
-
-int AB_Banking::beginExclUseAccount(AB_ACCOUNT *a)
-{
-  return AB_Banking_BeginExclUseAccount(_banking, a);
-}
-
-
-
-int AB_Banking::endExclUseAccount(AB_ACCOUNT *a, int abandon)
-{
-  return AB_Banking_EndExclUseAccount(_banking, a, abandon);
-}
-
-
-
-int AB_Banking::beginExclUseUser(AB_USER *u)
-{
-  return AB_Banking_BeginExclUseUser(_banking, u);
-}
-
-
-
-int AB_Banking::endExclUseUser(AB_USER *u, int abandon)
-{
-  return AB_Banking_EndExclUseUser(_banking, u, abandon);
-}
-
-
-void AB_Banking::setAccountAlias(AB_ACCOUNT *a, const char *alias)
-{
-  AB_Banking_SetAccountAlias(_banking, a, alias);
+  AB_Banking_SetAccountSpecAlias(_banking, a, alias);
 }
 
 

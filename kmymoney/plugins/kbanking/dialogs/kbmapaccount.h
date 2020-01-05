@@ -20,7 +20,7 @@
 #include "mymoneybanking.h"
 #include "kbaccountlist.h"
 
-#include <aqbanking/account.h>
+#include <aqbanking/types/account_spec.h>
 
 class KMyMoneyBanking;
 
@@ -35,7 +35,7 @@ public:
                Qt::WFlags fl = 0);
   ~KBMapAccount();
 
-  AB_ACCOUNT *getAccount();
+  AB_ACCOUNT_SPEC *getAccount();
 
   void accept();
 
