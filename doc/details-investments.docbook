@@ -7,9 +7,10 @@
       <personname><firstname>Michael</firstname><surname>Carpino</surname></personname>
       <email>mfcarpino@gmail.com</email>
     </author>
+    <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
   </authorgroup>
-  <date>2019-04-04</date>
-  <releaseinfo>5.0.3</releaseinfo>
+  <date>2019-12-30</date>
+  <releaseinfo>5.0.7</releaseinfo>
 </chapterinfo>
 
 <title>Investments</title>
@@ -235,6 +236,43 @@
   </listitem>
 </itemizedlist>
 </sect2>
+
+<sect2 id="details.investments.reuse">
+  <title>Using a Security in more than one Investment Account</title>
+
+<note>
+  <para>
+    This section has been added just in time for the release of Version 5.0.8.  The
+    author felt it was important to include at least the basic information now, since
+    this topic has been a source of difficulty for some time.  The discussion will be
+    expanded and screenshots of the New Security Wizard will be added as soon as
+    possible.
+  </para>
+</note>
+      
+<para>
+  It is possible to own shares of the same security in different investment accounts,
+  such as a regular investment account and also a retirement account.  If you follow the
+  instructions above, you will have that security show up in both accounts, but
+  &kmymoney; will actually treat them as if each of the securities is a different
+  underlying equity.  This results in duplicate storage, such as having two copies of
+  the entire price history of the equity.  Therefore, you may prefer to have both
+  securities refer to the same underlying equity.
+</para>
+
+<para>
+  When you add a security to an investment account, and that security already exists in
+  another investment account, you need to be careful if you want to reuse it rather than
+  creating a new, duplicate security.  When you see the <guilabel>New Investment
+  Wizard</guilabel>, after selecting the type of investment and clicking
+  <guibutton>Next</guibutton>, you need to be sure the <guilabel>Full Name</guilabel>
+  field is empty before entering the <guilabel>Trading Symbol</guilabel>.  When you hit
+  <keycap>Tab</keycap>, if &kmymoney; already has a security using that symbol, it will
+  ask if you wish to reuse it.  If you click <guibutton>Yes</guibutton>, it will fill in
+  the rest of that dialog, and you can then just click <guibutton>Next</guibutton>.
+</para>
+
+</sect2>
 </sect1>
 
 <sect1 id="details.investments.edit">
@@ -251,6 +289,11 @@
   reopen a closed account.  The order for value, quantity and price can be changed
   on the screen by selecting any of them by left clicking on the item in the top bar and
   dragging it to the left or right. 
+</para>
+<para>
+  If you choose to Edit an Investment, you will use the <guilabel>Investment detail
+  wizard</guilabel>, which looks and functions just like the <guilabel>New Investment
+  Wizard</guilabel>, as described in the previous section.
 </para>
 </sect1>
 
@@ -690,4 +733,3 @@
 </para>
 </sect1>
 </chapter>
-
