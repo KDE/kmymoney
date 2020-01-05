@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INVESTACTIVITIES_H
-#define INVESTACTIVITIES_H
+#ifndef OLDINVESTACTIVITIES_H
+#define OLDINVESTACTIVITIES_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -41,7 +41,7 @@ class MyMoneySplit;
 class MyMoneyTransaction;
 class MyMoneySecurity;
 
-class InvestTransactionEditor;
+class OldInvestTransactionEditor;
 
 namespace eMyMoney { namespace Split { enum class InvestmentTransactionType; } }
 namespace eDialogs { enum class PriceMode; }
@@ -52,10 +52,10 @@ template <class Key, class Value> class QMap;
 namespace Invest
 {
 
-class ActivityPrivate;
-class Activity
+class OldActivityPrivate;
+class OldActivity
 {
-  Q_DISABLE_COPY(Activity)
+  Q_DISABLE_COPY(OldActivity)
 
 public:
   virtual eMyMoney::Split::InvestmentTransactionType type() const = 0;
@@ -73,13 +73,13 @@ public:
   virtual bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) = 0;
 
   virtual void preloadAssetAccount();
-  virtual ~Activity();
+  virtual ~OldActivity();
 
   bool &memoChanged();
   QString& memoText();
 
 protected:
-  explicit Activity(InvestTransactionEditor* editor);
+  explicit OldActivity(OldInvestTransactionEditor* editor);
   bool haveAssetAccount() const;
   bool haveFees(bool optional = false) const;
   bool haveInterest(bool optional = false) const;
@@ -96,14 +96,14 @@ protected:
   eDialogs::PriceMode priceMode() const;
 
 protected:
-  ActivityPrivate* d_ptr;
-  Q_DECLARE_PRIVATE(Activity)
+  OldActivityPrivate* d_ptr;
+  Q_DECLARE_PRIVATE(OldActivity)
 };
 
-class Buy : public Activity
+class Buy : public OldActivity
 {
 public:
-  explicit Buy(InvestTransactionEditor* editor);
+  explicit Buy(OldInvestTransactionEditor* editor);
   ~Buy() override;
   eMyMoney::Split::InvestmentTransactionType type() const override;
   void showWidgets() const override;
@@ -111,10 +111,10 @@ public:
   bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
 };
 
-class Sell : public Activity
+class Sell : public OldActivity
 {
 public:
-  explicit Sell(InvestTransactionEditor* editor);
+  explicit Sell(OldInvestTransactionEditor* editor);
   ~Sell() override;
   eMyMoney::Split::InvestmentTransactionType type() const override;
   void showWidgets() const override;
@@ -122,10 +122,10 @@ public:
   bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
 };
 
-class Div : public Activity
+class Div : public OldActivity
 {
 public:
-  explicit Div(InvestTransactionEditor* editor);
+  explicit Div(OldInvestTransactionEditor* editor);
   ~Div() override;
   eMyMoney::Split::InvestmentTransactionType type() const override;
   void showWidgets() const override;
@@ -133,10 +133,10 @@ public:
   bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
 };
 
-class Reinvest : public Activity
+class Reinvest : public OldActivity
 {
 public:
-  explicit Reinvest(InvestTransactionEditor* editor);
+  explicit Reinvest(OldInvestTransactionEditor* editor);
   ~Reinvest() override;
   eMyMoney::Split::InvestmentTransactionType type() const override;
   void showWidgets() const override;
@@ -144,10 +144,10 @@ public:
   bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
 };
 
-class Add : public Activity
+class Add : public OldActivity
 {
 public:
-  explicit Add(InvestTransactionEditor* editor);
+  explicit Add(OldInvestTransactionEditor* editor);
   ~Add() override;
   eMyMoney::Split::InvestmentTransactionType type() const override;
   void showWidgets() const override;
@@ -155,10 +155,10 @@ public:
   bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
 };
 
-class Remove : public Activity
+class Remove : public OldActivity
 {
 public:
-  explicit Remove(InvestTransactionEditor* editor);
+  explicit Remove(OldInvestTransactionEditor* editor);
   ~Remove() override;
   eMyMoney::Split::InvestmentTransactionType type() const override;
   void showWidgets() const override;
@@ -166,10 +166,10 @@ public:
   bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
 };
 
-class Split : public Activity
+class Split : public OldActivity
 {
 public:
-  explicit Split(InvestTransactionEditor* editor);
+  explicit Split(OldInvestTransactionEditor* editor);
   ~Split() override;
   eMyMoney::Split::InvestmentTransactionType type() const override;
   void showWidgets() const override;
@@ -177,10 +177,10 @@ public:
   bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
 };
 
-class IntInc : public Activity
+class IntInc : public OldActivity
 {
 public:
-  explicit IntInc(InvestTransactionEditor* editor);
+  explicit IntInc(OldInvestTransactionEditor* editor);
   ~IntInc() override;
   eMyMoney::Split::InvestmentTransactionType type() const override;
   void showWidgets() const override;

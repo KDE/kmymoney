@@ -927,7 +927,7 @@ TransactionEditor* InvestTransaction::createEditor(TransactionEditorContainer* r
 #ifndef KMM_DESIGNER
   Q_D(InvestTransaction);
   d->m_inRegisterEdit = regForm == d->m_parent;
-  return new InvestTransactionEditor(regForm, this, list, lastPostDate);
+  return new OldInvestTransactionEditor(regForm, this, list, lastPostDate);
 #else
   return NULL;
 #endif

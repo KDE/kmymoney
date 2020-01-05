@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INVESTTRANSACTIONEDITOR_H
-#define INVESTTRANSACTIONEDITOR_H
+#ifndef OLDINVESTTRANSACTIONEDITOR_H
+#define OLDINVESTTRANSACTIONEDITOR_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -40,19 +40,19 @@ namespace KMyMoneyRegister { class InvestTransaction; }
 namespace eMyMoney { namespace Split {
     enum class InvestmentTransactionType; } }
 
-class InvestTransactionEditorPrivate;
-class InvestTransactionEditor : public TransactionEditor
+class OldInvestTransactionEditorPrivate;
+class OldInvestTransactionEditor : public TransactionEditor
 {
   Q_OBJECT
-  Q_DISABLE_COPY(InvestTransactionEditor)
+  Q_DISABLE_COPY(OldInvestTransactionEditor)
 
 public:
-  InvestTransactionEditor();
-  explicit InvestTransactionEditor(TransactionEditorContainer* regForm,
+  OldInvestTransactionEditor();
+  explicit OldInvestTransactionEditor(TransactionEditorContainer* regForm,
                                    KMyMoneyRegister::InvestTransaction* item,
                                    const KMyMoneyRegister::SelectedTransactions& list,
                                    const QDate& lastPostDate);
-  ~InvestTransactionEditor() override;
+  ~OldInvestTransactionEditor() override;
 
   /**
     * This method returns information about the completeness of the data
@@ -147,7 +147,7 @@ protected:
   void setupFinalWidgets() override;
 
 private:
-  Q_DECLARE_PRIVATE(InvestTransactionEditor)
+  Q_DECLARE_PRIVATE(OldInvestTransactionEditor)
 };
 
 #endif // INVESTTRANSACTIONEDITOR_H
