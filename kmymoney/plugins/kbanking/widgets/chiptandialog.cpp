@@ -36,16 +36,15 @@
 #include "kbankingsettings.h"
 
 chipTanDialog::chipTanDialog(QWidget* parent)
-    : QDialog(parent),
-    m_tan(""),
-    m_accepted(true)
+    : QDialog(parent)
+    , m_accepted(true)
 {
   ui = new Ui::chipTanDialog;
   ui->setupUi(this);
 
   connect(ui->dialogButtonBox, SIGNAL(accepted()), SLOT(accept()));
   connect(ui->dialogButtonBox, SIGNAL(rejected()), SLOT(reject()));
-  connect(ui->tanInput, SIGNAL(userTextChanged(QString)), SLOT(tanInputChanged(QString)));
+  connect(ui->tanInput, SIGNAL(textChanged(QString)), SLOT(tanInputChanged(QString)));
 
   ui->declarativeView->setSource(KGlobal::dirs()->findResource("data", QLatin1String("kmm_kbanking/qml/chipTan/ChipTan.qml")));
 
