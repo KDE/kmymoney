@@ -34,7 +34,7 @@ class QWidget;
 class QStringList;
 
 class AmountEdit;
-class KMyMoneyCategory;
+class KMyMoneyAccountCombo;
 
 class MyMoneyMoney;
 class MyMoneySplit;
@@ -87,13 +87,14 @@ protected:
   bool havePrice() const;
   bool isMultiSelection() const;
   QString priceLabel() const;
-  bool createCategorySplits(const MyMoneyTransaction& t, KMyMoneyCategory* cat, AmountEdit* amount, MyMoneyMoney factor, QList<MyMoneySplit>&splits, const QList<MyMoneySplit>& osplits) const;
+  bool createCategorySplits(const MyMoneyTransaction& t, KMyMoneyAccountCombo* cat, AmountEdit* amount, MyMoneyMoney factor, QList<MyMoneySplit>&splits, const QList<MyMoneySplit>& osplits) const;
   void createAssetAccountSplit(MyMoneySplit& split, const MyMoneySplit& stockSplit) const;
   MyMoneyMoney sumSplits(const MyMoneySplit& s0, const QList<MyMoneySplit>& feeSplits, const QList<MyMoneySplit>& interestSplits) const;
   bool haveCategoryAndAmount(const QString& category, const QString& amount, bool optional) const;
   void setLabelText(const QString& idx, const QString& txt) const;
   void setWidgetVisibility(const QStringList& widgetIds, bool visible) const;
   eDialogs::PriceMode priceMode() const;
+  void setupWidgets() const;
 
 protected:
   ActivityPrivate* d_ptr;

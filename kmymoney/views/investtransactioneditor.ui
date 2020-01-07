@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>682</width>
-    <height>295</height>
+    <width>660</width>
+    <height>312</height>
    </rect>
   </property>
   <property name="frameShape">
@@ -16,9 +16,9 @@
   <property name="frameShadow">
    <enum>QFrame::Raised</enum>
   </property>
-  <layout class="QGridLayout" name="gridLayout" columnstretch="0,5,0,2">
+  <layout class="QGridLayout" name="gridLayout" columnstretch="0,5,0,0">
    <property name="verticalSpacing">
-    <number>1</number>
+    <number>2</number>
    </property>
    <item row="0" column="0">
     <widget class="QLabel" name="activityLabel">
@@ -182,7 +182,7 @@
     </layout>
    </item>
    <item row="3" column="2">
-    <widget class="QLabel" name="feesLabel_2">
+    <widget class="QLabel" name="feesAmountLabel">
      <property name="text">
       <string>Fees</string>
      </property>
@@ -236,7 +236,7 @@
     </layout>
    </item>
    <item row="4" column="2">
-    <widget class="QLabel" name="interestLabel_2">
+    <widget class="QLabel" name="interestAmountLabel">
      <property name="text">
       <string>Interest</string>
      </property>
@@ -259,7 +259,7 @@
     </widget>
    </item>
    <item row="5" column="0">
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="memoLabel">
      <property name="text">
       <string>Memo</string>
      </property>
@@ -268,7 +268,7 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="1" rowspan="3">
+   <item row="5" column="1" rowspan="4">
     <widget class="QPlainTextEdit" name="memoEdit">
      <property name="tabChangesFocus">
       <bool>true</bool>
@@ -276,13 +276,36 @@
     </widget>
    </item>
    <item row="5" column="2">
-    <widget class="QLabel" name="label_9">
+    <widget class="QLabel" name="totalLabel">
+     <property name="text">
+      <string>Total</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="3">
+    <widget class="AmountEdit" name="totalAmountEdit">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="placeholderText">
+      <string>Total</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="2">
+    <widget class="QLabel" name="statusLabel">
      <property name="text">
       <string>Status</string>
      </property>
     </widget>
    </item>
-   <item row="5" column="3">
+   <item row="6" column="3">
     <widget class="QComboBox" name="statusCombo">
      <item>
       <property name="text">
@@ -291,7 +314,7 @@
      </item>
     </widget>
    </item>
-   <item row="6" column="3">
+   <item row="7" column="3">
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -304,7 +327,7 @@
      </property>
     </spacer>
    </item>
-   <item row="7" column="2" colspan="2">
+   <item row="8" column="2" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <spacer name="horizontalSpacer">
