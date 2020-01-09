@@ -45,7 +45,8 @@ namespace KDChart {
      */
     class PrintingParameters {
     public:
-        static void setScaleFactor( const qreal scaleFactor );
+        static qreal scaleFactor();
+        static void setScaleFactor( const qreal m_scaleFactor );
         static void resetScaleFactor();
         static QPen scalePen( const QPen& pen );
 
@@ -53,7 +54,7 @@ namespace KDChart {
         PrintingParameters();
         static PrintingParameters* instance();
 
-        qreal scaleFactor;
+        qreal m_scaleFactor;
     };
 }
 

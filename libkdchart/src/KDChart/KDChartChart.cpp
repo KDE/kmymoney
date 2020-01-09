@@ -1334,27 +1334,62 @@ int Chart::globalLeadingBottom() const
     return d->globalLeadingBottom;
 }
 
-void Chart::paint( QPainter* painter, const QRect& rect )
+void Chart::paint( QPainter* painter, const QRect& target )
 {
-    if ( rect.isEmpty() || !painter ) {
+    if ( target.isEmpty() || !painter ) {
         return;
     }
 
     QPaintDevice* prevDevice = GlobalMeasureScaling::paintDevice();
     GlobalMeasureScaling::setPaintDevice( painter->device() );
 
-    if ( dynamic_cast< QWidget* >( painter->device() ) == 0 ) {
+    // Output on a widget
+    if ( dynamic_cast< QWidget* >( painter->device() ) != 0 ) {
+        GlobalMeasureScaling::setFactors( qreal( target.width() ) / qreal( geometry().size().width() ),
+                                          qreal( target.height() ) / qreal( geometry().size().height() ) );
+    } else {
+        // Output onto a QPixmap
         PrintingParameters::setScaleFactor( qreal( painter->device()->logicalDpiX() ) / qreal( logicalDpiX() ) );
+
+        const qreal resX = qreal( logicalDpiX() ) / qreal( painter->device()->logicalDpiX() );
+        const qreal resY = qreal( logicalDpiY() ) / qreal( painter->device()->logicalDpiY() );
+
+        GlobalMeasureScaling::setFactors( qreal( target.width() ) / qreal( geometry().size().width() ) * resX,
+                                          qreal( target.height() ) / qreal( geometry().size().height() ) * resY );
     }
 
-    const QRect oldGeometry( geometry() );
-    if ( oldGeometry != rect )
-        setGeometry( rect );
-    painter->translate( rect.left(), rect.top() );
+    const QPoint translation = target.topLeft();
+    painter->translate( translation );
+
+    // the following layout logic has the disadvantage that repeatedly calling this method can
+    // cause a relayout every time, but since this method's main use seems to be printing, the
+    // gratuitous relayouts shouldn't be much of a performance problem.
+    const bool differentSize = target.size() != size();
+    QRect oldGeometry;
+    if ( differentSize ) {
+        oldGeometry = geometry();
+        d->isPlanesLayoutDirty = true;
+        d->isFloatingLegendsLayoutDirty = true;
+        invalidateLayoutTree( d->dataAndLegendLayout );
+        d->dataAndLegendLayout->setGeometry( QRect( QPoint(), target.size() ) );
+    }
+
+    d->overrideSize = target.size();
     d->paintAll( painter );
-    painter->translate( -rect.left(), -rect.top() );
-    if ( oldGeometry != rect )
-        setGeometry( oldGeometry );
+    d->overrideSize = QSize();
+
+    if ( differentSize ) {
+        invalidateLayoutTree( d->dataAndLegendLayout );
+        d->dataAndLegendLayout->setGeometry( oldGeometry );
+        d->isPlanesLayoutDirty = true;
+        d->isFloatingLegendsLayoutDirty = true;
+    }
+
+    // for debugging
+    // painter->setPen( QPen( Qt::blue, 8 ) );
+    // painter->drawRect( target );
+
+    painter->translate( -translation.x(), -translation.y() );
 
     GlobalMeasureScaling::instance()->resetFactors();
     PrintingParameters::resetScaleFactor();
