@@ -26,6 +26,7 @@
 #include <QList>
 #include <QTreeWidget>
 #include <QStandardPaths>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -175,8 +176,22 @@ void KAccountTemplateSelector::slotLoadTemplateList()
 #ifndef KMM_DESIGNER
   Q_D(KAccountTemplateSelector);
   QStringList dirs;
+
   // get list of template subdirs and scan them for the list of subdirs
+#ifdef IS_APPIMAGE
+  // according to https://docs.appimage.org/packaging-guide/ingredients.html#open-source-applications
+  // QStandardPaths::AppDataLocation is unreliable on AppImages, so apply workaround here in case we fail to find templates
+  // watch out for QStringBuilder here; for yet unknown reason it causes segmentation fault on startup
+  const auto templateDirList = QString("%1%2").arg(QCoreApplication::applicationDirPath(), QLatin1String("/../share/kmymoney/templates/"));
+  if (QFile::exists(templateDirList)) {
+    d->dirlist.append(templateDirList);
+  } else {
+    qWarning() << "Template directory was not found in the following location:" << templateDirList;
+  }
+#else
   d->dirlist = QStandardPaths::locateAll(QStandardPaths::DataLocation, "templates", QStandardPaths::LocateDirectory);
+#endif
+
   QStringList::iterator it;
   for (it = d->dirlist.begin(); it != d->dirlist.end(); ++it) {
     QDir dir(*it);
@@ -286,3 +301,4 @@ QList<MyMoneyTemplate> KAccountTemplateSelector::selectedTemplates() const
   return QList<MyMoneyTemplate>();
 #endif
 }
+
