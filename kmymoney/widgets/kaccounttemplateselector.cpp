@@ -192,12 +192,14 @@ void KAccountTemplateSelector::slotLoadTemplateList()
   d->dirlist = QStandardPaths::locateAll(QStandardPaths::DataLocation, "templates", QStandardPaths::LocateDirectory);
 #endif
 
+  qDebug() << "Scanning" << d->dirlist << "for templates";
   QStringList::iterator it;
   for (it = d->dirlist.begin(); it != d->dirlist.end(); ++it) {
     QDir dir(*it);
     dirs = dir.entryList(QStringList("*"), QDir::Dirs);
     QStringList::iterator it_d;
     for (it_d = dirs.begin(); it_d != dirs.end(); ++it_d) {
+      qDebug() << "Found" << (*it_d);
       // we don't care about . and ..
       if ((*it_d) == ".." || (*it_d) == "." || (*it_d) == "C")
         continue;
@@ -255,9 +257,12 @@ void KAccountTemplateSelector::slotLoadCountry()
   parent->setFlags(parent->flags() & ~Qt::ItemIsSelectable);
   for (QStringList::iterator it = d->dirlist.begin(); it != d->dirlist.end(); ++it) {
     QDir dir(QString("%1/%2").arg(*it).arg(*(d->it_m)));
+    qDebug() << "Check" << dir.canonicalPath();
     if (dir.exists()) {
       QStringList files = dir.entryList(QStringList("*"), QDir::Files);
+      qDebug() << "Found:" << files;
       for (QStringList::iterator it_f = files.begin(); it_f != files.end(); ++it_f) {
+        qDebug() << "Load" << QString("%1/%2").arg(dir.canonicalPath(), *it_f);
         MyMoneyTemplate templ(QUrl::fromUserInput(QString("%1/%2").arg(dir.canonicalPath(), *it_f)));
         d->m_templates[d->id] = templ;
         QTreeWidgetItem *item = new QTreeWidgetItem(parent);
