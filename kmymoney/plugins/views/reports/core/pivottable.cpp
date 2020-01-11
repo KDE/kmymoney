@@ -1330,9 +1330,15 @@ int PivotTable::columnValue(const QDate& _date) const
 
 QDate PivotTable::columnDate(int column) const
 {
-  if (m_config.isColumnsAreDays())
-    return m_beginDate.addDays(m_config.columnPitch() * column - m_startColumn);
-  else
+  if (m_config.isColumnsAreDays()) {
+    // The m_config.columnPitch() return value is defined as 'unsigned int'.
+    // We need to cast this to an 'int' here, because if column is zero (e.g.
+    // for the opening balance) and m_startColumn is one, the result of the
+    // subtraction should be -1 (the day before m_beginDate), but since it
+    // is treated as 'unsigned int' a very large value is added resulting in a
+    // date way in the future.
+    return m_beginDate.addDays(static_cast<int>(m_config.columnPitch() * column) - m_startColumn);
+  } else
     return m_beginDate.addMonths(m_config.columnPitch() * column).addDays(-m_startColumn);
 }
 
