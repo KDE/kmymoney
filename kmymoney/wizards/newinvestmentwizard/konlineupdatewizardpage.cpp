@@ -28,6 +28,7 @@
 // Project Includes
 #include "mymoneymoney.h"
 
+#include <alkimia/alkfinancequoteprocess.h>
 #include <alkimia/alkonlinequotesprofilemanager.h>
 
 KOnlineUpdateWizardPage::KOnlineUpdateWizardPage(QWidget *parent)
@@ -69,9 +70,9 @@ void KOnlineUpdateWizardPage::init2(const MyMoneySecurity& security)
 {
   int idx = -1;
   if (security.value("kmm-online-quote-system") == "Finance::Quote") {
-//    AlkFinanceQuoteProcess p;
-//    m_useFinanceQuote->setChecked(true);
-//    idx = m_onlineSourceCombo->findText(p.niceName(security.value("kmm-online-source")));
+    AlkFinanceQuoteProcess p;
+    m_useFinanceQuote->setChecked(true);
+    idx = m_onlineSourceCombo->findText(p.niceName(security.value("kmm-online-source")));
   } else {
     idx = m_onlineSourceCombo->findText(security.value("kmm-online-source"));
   }
