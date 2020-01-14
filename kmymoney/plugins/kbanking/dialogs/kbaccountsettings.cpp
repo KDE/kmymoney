@@ -60,6 +60,9 @@ void KBAccountSettings::loadUi(const MyMoneyKeyValueContainer& kvp)
     d->ui.m_payeeExceptions->clear();
     d->ui.m_payeeExceptions->insertStringList(kvp.value("kbanking-payee-exceptions").split(';', QString::SkipEmptyParts));
   }
+  QStringList val = kvp.value("kbanking-acc-ref").split("-");
+  d->ui.m_mappedBank->setText(val.size() > 0 ? val.at(0) : "");
+  d->ui.m_mappedAccount->setText(val.size() > 1 ? val.at(1) : "");
 }
 
 void KBAccountSettings::loadKvp(MyMoneyKeyValueContainer& kvp)
