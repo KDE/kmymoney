@@ -62,10 +62,17 @@ public:
   void appendEmptySplit();
   void removeEmptySplit();
 
+  // Reimplemented for internal reasons
+  void doRemoveItem(const MyMoneySplit& before) override;
+  void doAddItem(const MyMoneySplit& item, const QModelIndex& parentIdx = QModelIndex()) override;
+
   static QString newSplitId();
   static bool isNewSplitId(const QString& id);
 
   SplitModel& operator= (const SplitModel& right);
+
+Q_SIGNALS:
+  void itemCountChanged(int cnt);
 
 private:
   struct Private;

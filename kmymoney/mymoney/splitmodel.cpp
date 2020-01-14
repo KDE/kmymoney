@@ -39,6 +39,7 @@ struct SplitModel::Private
 {
   Private(SplitModel* qq)
   : q(qq)
+  , m_splitCount(-1)
   , headerData(QHash<Column, QString> ({
     { Category, i18nc("Split header", "Category") },
     { Memo, i18nc("Split header", "Memo") },
@@ -57,9 +58,62 @@ struct SplitModel::Private
       const auto split = right.itemByIndex(idx);
       q->appendSplit(split);
     }
+        updateItemCount();
+  }
+
+  int splitCount() const
+  {
+    int count = 0;
+    const auto rows = q->rowCount();
+    for (auto row = 0; row < rows; ++row) {
+      const auto idx = q->index(row, 0);
+      if (!idx.data(eMyMoney::Model::SplitAccountIdRole).toString().isEmpty()) {
+        ++count;
+      }
+    }
+    return count;
+  }
+
+  void updateItemCount()
+  {
+    const auto count = splitCount();
+    if (count != m_splitCount) {
+      m_splitCount = count;
+      emit q->itemCountChanged(m_splitCount);
+    }
+  }
+
+
+  QString counterAccount() const
+  {
+    // A transaction can have more than 2 splits ...
+    if(splitCount() > 1) {
+      return i18n("Split transaction");
+
+      // ... exactly two splits ...
+    } else if(splitCount() == 1) {
+      // we have to check which one is filled and which one
+      // could be an empty (new) split
+      const auto rows = q->rowCount();
+      for (auto row = 0; row < rows; ++row) {
+        const auto idx = q->index(row, 0);
+        const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
+        if (!accountId.isEmpty()) {
+          return MyMoneyFile::instance()->accountsModel()->accountIdToHierarchicalName(accountId);
+        }
+      }
+
+      // ... or a single split
+#if 0
+    } else if(!idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>().isZero()) {
+      return i18n("*** UNASSIGNED ***");
+#endif
+    }
+    return QString();
   }
 
   SplitModel*   q;
+  int                       m_splitCount;
   QHash<Column, QString>          headerData;
 };
 
@@ -72,6 +126,7 @@ SplitModel::SplitModel(QObject* parent, QUndoStack* undoStack)
   // editor when the transaction is created. (see
   // NewTransactionEditor::saveTransaction() )
   ++m_nextId;
+  connect(this, &SplitModel::modelReset, this, [&] { d->updateItemCount(); });
 }
 
 SplitModel::SplitModel(QObject* parent, QUndoStack* undoStack, const SplitModel& right)
@@ -203,6 +258,9 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::SplitPayeeIdRole:
       return split.payeeId();
 
+    case eMyMoney::Model::TransactionCounterAccountRole:
+      break;
+
     default:
       break;
   }
@@ -284,4 +342,16 @@ void SplitModel::removeEmptySplit()
   if(!list.isEmpty()) {
     removeRow(list.first().row(), list.first().parent());
   }
+}
+
+void SplitModel::doAddItem(const MyMoneySplit& item, const QModelIndex& parentIdx)
+{
+  MyMoneyModel::doAddItem(item, parentIdx);
+  d->updateItemCount();
+}
+
+void SplitModel::doRemoveItem(const MyMoneySplit& before)
+{
+  MyMoneyModel::doRemoveItem(before);
+  d->updateItemCount();
 }
