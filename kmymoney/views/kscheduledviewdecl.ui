@@ -17,27 +17,31 @@
    <item>
     <layout class="QHBoxLayout" name="m_filterBox">
      <item>
+      <widget class="KPushButton" name="m_collapseButton">
+       <property name="toolTip">
+        <string>Collapse all accounts in the list</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KPushButton" name="m_expandButton">
+       <property name="toolTip">
+        <string>Expand all accounts in the list</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="KPushButton" name="m_accountsCombo">
        <property name="text">
         <string>Filter Accounts</string>
        </property>
       </widget>
-     </item>
-     <item>
-      <spacer name="spacer2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Expanding</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>80</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
      <item>
       <widget class="KPushButton" name="m_qbuttonNew">
@@ -47,16 +51,6 @@
       </widget>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="Line" name="line1">
-     <property name="frameShape">
-      <enum>QFrame::HLine</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Sunken</enum>
-     </property>
-    </widget>
    </item>
    <item>
     <widget class="KTabWidget" name="m_tabWidget">
@@ -152,5 +146,38 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>m_collapseButton</sender>
+   <signal>clicked()</signal>
+   <receiver>m_scheduleTree</receiver>
+   <slot>collapseAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>23</x>
+     <y>17</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>196</x>
+     <y>114</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_expandButton</sender>
+   <signal>clicked()</signal>
+   <receiver>m_scheduleTree</receiver>
+   <slot>expandAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>74</x>
+     <y>17</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>196</x>
+     <y>114</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

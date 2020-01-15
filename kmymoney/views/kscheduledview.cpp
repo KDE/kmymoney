@@ -65,10 +65,22 @@ KScheduledView::KScheduledView(QWidget *parent) :
 {
   setupUi(this);
 
+  // setup icons for collapse and expand button
+  KGuiItem collapseGuiItem("",
+                           KIcon("zoom-out"),
+                           QString(),
+                           QString());
+  KGuiItem expandGuiItem("",
+                         KIcon("zoom-in"),
+                         QString(),
+                         QString());
+  m_collapseButton->setGuiItem(collapseGuiItem);
+  m_expandButton->setGuiItem(expandGuiItem);
+
   // create the searchline widget
   // and insert it into the existing layout
   m_searchWidget = new KTreeWidgetFilterLineWidget(m_listTab, m_scheduleTree);
-  m_filterBox->insertWidget(1, m_searchWidget);
+  m_filterBox->insertWidget(3, m_searchWidget);
 
   //enable custom context menu
   m_scheduleTree->setContextMenuPolicy(Qt::CustomContextMenu);
