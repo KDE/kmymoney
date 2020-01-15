@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>339</width>
-    <height>134</height>
+    <width>355</width>
+    <height>185</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -40,13 +40,6 @@
       <widget class="KPushButton" name="m_accountsCombo">
        <property name="text">
         <string>Filter Accounts</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="KPushButton" name="m_qbuttonNew">
-       <property name="text">
-        <string>New Scheduled transaction...</string>
        </property>
       </widget>
      </item>
@@ -123,6 +116,9 @@
       </layout>
      </widget>
     </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="m_buttonBox"/>
    </item>
   </layout>
  </widget>

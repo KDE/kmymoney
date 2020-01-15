@@ -1783,6 +1783,10 @@ void KMyMoneyView::slotCurrentPageChanged(const QModelIndex current, const QMode
 {
   // remember the current page
   m_lastViewSelected = current.row();
+  if (current.row() == SchedulesView) {
+    kmymoney->action("schedule_new")->setVisible(true);
+    kmymoney->action("schedule_new")->setEnabled(true);
+  }
   // set the current page's title in the header
   if (m_header)
     m_header->setText(m_model->data(current).toString());

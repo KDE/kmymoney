@@ -44,6 +44,7 @@
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kpushbutton.h>
+#include <ktoolbar.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -88,14 +89,18 @@ KScheduledView::KScheduledView(QWidget *parent) :
 
   readConfig();
 
-  connect(m_qbuttonNew, SIGNAL(clicked()), kmymoney->action("schedule_new"), SLOT(trigger()));
+  KToolBar *m_buttonbar = new KToolBar("scheduleview", this, true);
+  m_buttonbar->addAction(kmymoney->action("schedule_new"));
+  m_buttonbar->addAction(kmymoney->action("schedule_edit"));
+  m_buttonbar->addAction(kmymoney->action("schedule_duplicate"));
+  m_buttonbar->addAction(kmymoney->action("schedule_delete"));
+  m_buttonBox->insertWidget(0, m_buttonbar);
 
   // attach popup to 'Filter...' button
   m_kaccPopup = new KMenu(this);
   m_accountsCombo->setMenu(m_kaccPopup);
   connect(m_kaccPopup, SIGNAL(triggered(QAction*)), this, SLOT(slotAccountActivated()));
 
-  m_qbuttonNew->setGuiItem(KMyMoneyUtils::scheduleNewGuiItem());
   m_accountsCombo->setGuiItem(KMyMoneyUtils::accountsFilterGuiItem());
 
   m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_listTab), KIcon("view-calendar-list"));
@@ -434,7 +439,7 @@ void KScheduledView::slotReloadView()
 {
   m_needReload = true;
   if (isVisible()) {
-    m_qbuttonNew->setEnabled(true);
+    kmymoney->action("schedule_new")->setEnabled(true);
     m_tabWidget->setEnabled(true);
 
     refresh(true, m_selectedSchedule);

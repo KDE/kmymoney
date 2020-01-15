@@ -6789,7 +6789,7 @@ void KMyMoneyApp::slotUpdateActions()
   action("transaction_match")->setVisible(!isSchedule);
   action("transaction_accept")->setVisible(!isSchedule);
 
-  action("schedule_new")->setVisible(isSchedule);
+  action("schedule_new")->setVisible(true);
   action("schedule_edit")->setVisible(isSchedule);
   action("schedule_delete")->setVisible(isSchedule);
   action("schedule_duplicate")->setVisible(isSchedule);
