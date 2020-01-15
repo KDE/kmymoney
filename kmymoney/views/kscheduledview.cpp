@@ -94,6 +94,8 @@ KScheduledView::KScheduledView(QWidget *parent) :
   m_buttonbar->addAction(kmymoney->action("schedule_edit"));
   m_buttonbar->addAction(kmymoney->action("schedule_duplicate"));
   m_buttonbar->addAction(kmymoney->action("schedule_delete"));
+  m_buttonbar->setToolButtonStyle(kmymoney->toolBar()->toolButtonStyle());
+  connect(kmymoney, SIGNAL(toolButtonStyleChanged(Qt::ToolButtonStyle)), m_buttonbar, SLOT(setToolButtonStyle(Qt::ToolButtonStyle)));
   m_buttonBox->insertWidget(0, m_buttonbar);
 
   // attach popup to 'Filter...' button

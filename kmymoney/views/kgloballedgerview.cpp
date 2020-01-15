@@ -272,7 +272,9 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent, const char *name)
   buttonLayout->setSpacing(0);
   layout()->addWidget(m_buttonFrame);
   m_buttonbar = new KToolBar(m_buttonFrame, 0, true);
-  m_buttonbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+  // did not find a way to enable context menu from KToolbar, which seems to be fixed to a main window
+  m_buttonbar->setToolButtonStyle(kmymoney->toolBar()->toolButtonStyle());
+  connect(kmymoney, SIGNAL(toolButtonStyleChanged(Qt::ToolButtonStyle)), m_buttonbar, SLOT(setToolButtonStyle(Qt::ToolButtonStyle)));
   buttonLayout->addWidget(m_buttonbar);
 
   m_buttonbar->addAction(kmymoney->action("transaction_new"));

@@ -696,6 +696,10 @@ protected:
    */
   void initStatusBar();
 
+  /** sets up the tool bar for the main window
+   */
+  void initToolBar();
+
   /**
    * @brief Establish connections between actions and views
    *
@@ -1354,6 +1358,11 @@ signals:
     *        transaction/split pairs processed by the reconciliation.
     */
   void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
+
+  /**
+    * This signal is emitted when the style of the tool bar has been changed.
+    */
+  void toolButtonStyleChanged(Qt::ToolButtonStyle style);
 
 public:
   /**

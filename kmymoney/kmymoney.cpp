@@ -443,6 +443,8 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   setCentralWidget(frame);
 
+  initToolBar();
+
   connect(&d->m_proc, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotBackupHandleEvents()));
 
   // force to show the home page if the file is closed
@@ -1250,6 +1252,11 @@ void KMyMoneyApp::initStatusBar()
 
   // hide the progress bar for now
   slotStatusProgressBar(-1, -1);
+}
+
+void KMyMoneyApp::initToolBar()
+{
+    connect(toolBar("mainToolBar"), SIGNAL(toolButtonStyleChanged(Qt::ToolButtonStyle)), this, SIGNAL(toolButtonStyleChanged(Qt::ToolButtonStyle)));
 }
 
 void KMyMoneyApp::saveOptions()
