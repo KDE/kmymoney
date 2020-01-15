@@ -520,6 +520,7 @@ const MyMoneyAccount KEditLoanWizard::account() const
     acc.setInstitutionId(QString());
   }
 
+  acc.setName(d->ui->m_namePage->ui->m_nameEdit->text());
   acc.setFixedInterestRate(field("fixedInterestButton").toBool());
   acc.setFinalPayment(field("finalPaymentEdit").value<MyMoneyMoney>());
   acc.setTerm(d->ui->m_durationPage->term());
