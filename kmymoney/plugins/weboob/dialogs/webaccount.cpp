@@ -21,10 +21,9 @@
 # include <config-kmymoney.h>
 #endif
 
-#include <webaccount.h>
+#include "webaccount.h"
 #include "mymoneykeyvaluecontainer.h"
-#include <ui_webaccount.h>
-
+#include "ui_webaccount.h"
 
 struct WebAccountSettings::Private {
   Ui::WebAccountSettings ui;
