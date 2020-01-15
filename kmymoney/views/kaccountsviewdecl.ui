@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>405</width>
-    <height>185</height>
+    <height>532</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -16,13 +16,6 @@
    </property>
    <item>
     <layout class="QHBoxLayout" name="m_filterLayout">
-     <item>
-      <widget class="KLineEdit" name="m_searchWidget">
-       <property name="showClearButton" stdset="0">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
      <item>
       <widget class="KPushButton" name="m_collapseButton">
        <property name="toolTip">
@@ -40,6 +33,13 @@
        </property>
        <property name="text">
         <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KLineEdit" name="m_searchWidget">
+       <property name="showClearButton" stdset="0">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

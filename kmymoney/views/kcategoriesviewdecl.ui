@@ -17,13 +17,6 @@
    <item>
     <layout class="QHBoxLayout">
      <item>
-      <widget class="KLineEdit" name="m_searchWidget">
-        <property name="showClearButton" stdset="0">
-        <bool>true</bool>
-        </property>
-      </widget>
-     </item>
-     <item>
       <widget class="KPushButton" name="m_collapseButton">
        <property name="toolTip">
         <string>Collapse all accounts in the list</string>
@@ -40,6 +33,13 @@
        </property>
        <property name="text">
         <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KLineEdit" name="m_searchWidget">
+       <property name="showClearButton" stdset="0">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
