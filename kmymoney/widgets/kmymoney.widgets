@@ -37,7 +37,7 @@ IncludeFile=transactionform.h
 ToolTip=The KMyMoney widget that displays categories
 
 [KMyMoneyPayeeCombo]
-ToolTip=The KMyMoney widget that displays payyes
+ToolTip=The KMyMoney widget that displays payees
 IncludeFile=kmymoneymvccombo.h
 
 [KMyMoneyTagCombo]
@@ -49,7 +49,7 @@ ToolTip=The KMyMoney widget that displays time periods
 IncludeFile=kmymoneycombo.h
 
 [KMyMoneyFrequencyCombo]
-ToolTip=The KMyMoney widget that displays frequecies
+ToolTip=The KMyMoney widget that displays frequencies
 IncludeFile=kmymoneycombo.h
 
 [KMyMoneyOccurrencePeriodCombo]
