@@ -274,12 +274,24 @@ void QueryTable::constructTotalRows()
   if (m_rows.isEmpty())
     return;
 
-  // qSort places grand total at last position, because it doesn't belong to any group
-  for (int i = 0; i < m_rows.count(); ++i) {
-    if (m_rows.at(0)[ctRank] == QLatin1String("4") || m_rows.at(0)[ctRank] == QLatin1String("5")) // it should be unlikely that total row is at the top of rows, so...
-      m_rows.move(0, m_rows.count() - 1 - i);                       // ...move it at the bottom
-    else
-      break;
+  // qSort places grand total at first positions, because it doesn't belong to any group
+  // subtotals are placed in front of the topAccount rows
+  const auto rows = m_rows.count();
+  for (int i = 0; i < rows-1; ++i) {
+    // it should be unlikely that total row is at the top of rows, so...
+    if ((m_rows.at(i)[ctRank] == QLatin1String("5")) || (m_rows.at(i)[ctTopAccount].isEmpty())) {
+      m_rows.move(i, rows - 1);                       // ...move it at the end
+      --i; // check the same slot again
+    } else if (m_rows.at(i)[ctRank] == QLatin1String("4")) {
+      // search last entry of same topAccount
+      auto last = i+1;
+      while ((m_rows.at(i)[ctTopAccount] == m_rows.at(last)[ctTopAccount]) && (last < (rows - 1))) {
+        ++last;
+      }
+      // move subtotal to last entry
+      m_rows.move(i, last - 1);                       // ...move to end of entries
+      i = last-1;
+    }
   }
 
   MyMoneyFile* file = MyMoneyFile::instance();
