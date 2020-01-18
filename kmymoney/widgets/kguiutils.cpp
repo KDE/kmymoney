@@ -63,15 +63,17 @@ class KMandatoryFieldGroupPrivate
   Q_DISABLE_COPY(KMandatoryFieldGroupPrivate)
 
 public:
-  KMandatoryFieldGroupPrivate() :
-    m_okButton(0),
-    m_enabled(true)
+  KMandatoryFieldGroupPrivate()
+    : m_okButton(0)
+    , m_enabled(true)
+    , m_externalMandatoryState(true)
   {
   }
 
   QList<QWidget *>      m_widgets;
   QPushButton*          m_okButton;
   bool                  m_enabled;
+  bool                  m_externalMandatoryState;
 };
 
 KMandatoryFieldGroup::KMandatoryFieldGroup(QObject *parent) :
@@ -190,10 +192,19 @@ void KMandatoryFieldGroup::setOkButton(QPushButton *button)
   changed();
 }
 
+void KMandatoryFieldGroup::setExternalMandatoryState(bool state)
+{
+  Q_D(KMandatoryFieldGroup);
+  if (d->m_externalMandatoryState != state) {
+    d->m_externalMandatoryState = state;
+    changed();
+  }
+}
+
 void KMandatoryFieldGroup::changed()
 {
   Q_D(KMandatoryFieldGroup);
-  bool enable = true;
+  bool enable = d->m_externalMandatoryState;
   QList<QWidget *>::ConstIterator i;
   for (i = d->m_widgets.constBegin(); i != d->m_widgets.constEnd(); ++i) {
     QWidget *widget = *i;

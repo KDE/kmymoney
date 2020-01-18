@@ -89,6 +89,15 @@ public Q_SLOTS:
     */
   void changed();
 
+  /**
+   * Use this slot to set the initial @a state when checking
+   * for all mandatory data. This can be used to add support
+   * for widgets that are not directly supported by
+   * this object. The default @a state when this method
+   * was never called is @c true.
+   */
+  void setExternalMandatoryState(bool state);
+
 Q_SIGNALS:
   void stateChanged();
   void stateChanged(bool state);
