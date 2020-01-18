@@ -496,6 +496,8 @@ void MyMoneyFile::unload()
   d->schedulesJournalModel.unload();
   /// @note add new models here
   d->m_baseCurrency = MyMoneySecurity();
+  d->m_balanceCache.clear();
+  d->m_priceCache.clear();
   d->undoStack.clear();
   d->m_dirty = false;
 }
