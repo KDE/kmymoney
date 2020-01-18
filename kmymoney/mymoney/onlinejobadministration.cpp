@@ -393,13 +393,16 @@ bool onlineJobAdministration::canSendAnyTask()
     return false;
 
   // Check if any plugin supports a loaded online task
-  foreach (KMyMoneyPlugin::OnlinePluginExtended* plugin, *m_onlinePlugins) {
+  /// @todo optimize this loop to move the accounts to the outer loop
+  for (KMyMoneyPlugin::OnlinePluginExtended* plugin : qAsConst(*m_onlinePlugins)) {
     QList<MyMoneyAccount> accounts;
     MyMoneyFile::instance()->accountList(accounts, QStringList(), true);
-    foreach (MyMoneyAccount account, accounts) {
-      foreach (QString onlineTaskIid, plugin->availableJobs(account.id())) {
-        if (m_onlineTasks.contains(onlineTaskIid)) {
-          return true;
+    for (const auto& account : qAsConst(accounts)) {
+      if (account.hasOnlineMapping()) {
+        for (const auto& onlineTaskIid : plugin->availableJobs(account.id())) {
+          if (m_onlineTasks.contains(onlineTaskIid)) {
+            return true;
+          }
         }
       }
     }
@@ -419,15 +422,17 @@ bool onlineJobAdministration::canSendCreditTransfer()
   if (!MyMoneyFile::instance()->storageAttached())
     return false;
 
-  foreach (onlineTask* task, m_onlineTasks) {
-    // Check if a online task has the correct type
-    if (dynamic_cast<creditTransfer*>(task) != 0) {
-      foreach (KMyMoneyPlugin::OnlinePluginExtended* plugin, *m_onlinePlugins) {
-        QList<MyMoneyAccount> accounts;
-        MyMoneyFile::instance()->accountList(accounts, QStringList(), true);
-        foreach (MyMoneyAccount account, accounts) {
-          if (plugin->availableJobs(account.id()).contains(task->taskName()))
-            return true;
+  QList<MyMoneyAccount> accounts;
+  MyMoneyFile::instance()->accountList(accounts, QStringList(), true);
+  for (const auto& account : qAsConst(accounts)) {
+    if (account.hasOnlineMapping()) {
+      for (const onlineTask* task : qAsConst(m_onlineTasks)) {
+        // Check if a online task has the correct type
+        if (dynamic_cast<const creditTransfer*>(task) != 0) {
+          for (KMyMoneyPlugin::OnlinePluginExtended* plugin : qAsConst(*m_onlinePlugins)) {
+            if (plugin->availableJobs(account.id()).contains(task->taskName()))
+              return true;
+          }
         }
       }
     }
