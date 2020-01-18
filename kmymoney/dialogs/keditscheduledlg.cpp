@@ -263,7 +263,7 @@ TransactionEditor* KEditScheduleDlg::startEdit()
 
   if (editor) {
     editor->setScheduleInfo(d->ui->m_nameEdit->text());
-    connect(editor, &TransactionEditor::transactionDataSufficient, d->ui->buttonBox->button(QDialogButtonBox::Ok), &QWidget::setEnabled);
+    connect(editor, &TransactionEditor::transactionDataSufficient, d->m_requiredFields, &KMandatoryFieldGroup::setExternalMandatoryState);
     connect(editor, &TransactionEditor::escapePressed, d->ui->buttonBox->button(QDialogButtonBox::Cancel), &QAbstractButton::animateClick);
     connect(editor, &TransactionEditor::returnPressed, d->ui->buttonBox->button(QDialogButtonBox::Ok), &QAbstractButton::animateClick);
 
