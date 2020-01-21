@@ -74,7 +74,7 @@ typedef enum  {
 class OFXImporter::Private
 {
 public:
-  Private() : m_valid(false), m_preferName(PreferId), m_uniqueIdSource(UniqueIdUnknown), m_walletIsOpen(false), m_statusDlg(0), m_wallet(0),
+  Private() : m_valid(false), m_preferName(PreferId), m_uniqueIdSource(UniqueIdUnknown), m_walletIsOpen(false), m_invertAmount(false), m_statusDlg(0), m_wallet(0),
               m_updateStartDate(QDate(1900,1,1)), m_timestampOffset(0) {}
 
   bool m_valid;
@@ -85,6 +85,7 @@ public:
   } m_preferName;
   UniqueTransactionIdSource  m_uniqueIdSource;
   bool m_walletIsOpen;
+  bool m_invertAmount;
   QList<MyMoneyStatement> m_statementlist;
   QList<MyMoneyStatement::Security> m_securitylist;
   QString m_fatalerror;
@@ -183,6 +184,7 @@ void OFXImporter::slotImportFile()
   d->m_preferName = static_cast<OFXImporter::Private::NamePreference>(option->m_preferName->currentIndex());
   d->m_uniqueIdSource = static_cast<UniqueTransactionIdSource>(option->m_uniqueIdSource->currentIndex());
   d->m_timestampOffset = d->constructTimeOffset(option->m_timestampOffset, option->m_timestampOffsetSign);
+  d->m_invertAmount = option->m_invertAmount->isChecked();
 
   if (url.isValid()) {
     const QString filename(url.toLocalFile());
@@ -338,6 +340,9 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
 
   if (data.amount_valid) {
     t.m_amount = MyMoneyMoney(data.amount, 1000);
+    if (pofx->d->m_invertAmount) {
+      t.m_amount = -t.m_amount;
+    }
   }
 
   if (data.check_number_valid) {
@@ -825,6 +830,11 @@ MyMoneyKeyValueContainer OFXImporter::onlineBankingSettings(const MyMoneyKeyValu
       kvp.deletePair(QStringLiteral("kmmofx-timestampOffset"));
     } else {
       kvp.setValue(QStringLiteral("kmmofx-timestampOffset"), QString::number(offset));
+    }
+    if (d->m_statusDlg->m_invertAmount->isChecked()) {
+      kvp.setValue(QStringLiteral("kmmofx-invertamount"), QStringLiteral("yes"));
+    } else {
+      kvp.deletePair(QStringLiteral("kmmofx-invertamount"));
     }
     // get rid of pre 4.6 values
     kvp.deletePair(QStringLiteral("kmmofx-preferPayeeid"));

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>598</width>
-    <height>170</height>
+    <height>184</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -112,6 +112,23 @@
          <widget class="QTimeEdit" name="m_timestampOffset"/>
         </item>
        </layout>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Invert sign of transaction amount</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QCheckBox" name="m_invertAmount">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check this if you need to invert the sign of imported transaction amounts, e.g. if you need to reverse charges and payments because your institution provides them inverted.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
