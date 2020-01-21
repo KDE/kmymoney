@@ -24,6 +24,26 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
+   <customwidget>
+    <class>CheckingStartWizardPage</class>
+    <extends>QWizardPage</extends>
+    <header>checkingstartwizardpage.h</header>
+   </customwidget>
+   <customwidget>
+    <class>CheckingStatementInfoWizardPage</class>
+    <extends>QWizardPage</extends>
+    <header>checkingstatementinfowizardpage.h</header>
+   </customwidget>
+   <customwidget>
+    <class>InterestChargeCheckingsWizardPage</class>
+    <extends>QWizardPage</extends>
+    <header>interestchargecheckingswizardpage.h</header>
+   </customwidget>
+   <customwidget>
+    <class>PreviousPostponeWizardPage</class>
+    <extends>QWizardPage</extends>
+    <header>previouspostponewizardpage.h</header>
+   </customwidget>
   <customwidget>
    <class>KComboBox</class>
    <extends>QComboBox</extends>
