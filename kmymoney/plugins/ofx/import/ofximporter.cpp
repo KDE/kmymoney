@@ -74,14 +74,15 @@ typedef enum  {
 class OFXImporter::Private
 {
 public:
-  Private() : m_valid(false), m_preferName(PreferId), m_uniqueIdSource(UniqueIdUnknown), m_walletIsOpen(false), m_statusDlg(0), m_wallet(0),
+  Private() : m_valid(false), m_preferName(PayeeId), m_uniqueIdSource(UniqueIdUnknown), m_walletIsOpen(false), m_statusDlg(0), m_wallet(0),
               m_updateStartDate(QDate(1900,1,1)), m_timestampOffset(0) {}
 
   bool m_valid;
+
   enum NamePreference {
-    PreferId = 0,
-    PreferName,
-    PreferMemo
+    PayeeId = 0,
+    Name,
+    Memo
   } m_preferName;
   UniqueTransactionIdSource  m_uniqueIdSource;
   bool m_walletIsOpen;
@@ -393,72 +394,57 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
       break;
   }
 
-  // Decide whether to use NAME, PAYEEID or MEMO to construct the payee
-  bool validity[3] = {false, false, false};
-  QStringList values;
-  switch (pofx->d->m_preferName) {
-    case OFXImporter::Private::PreferId:  // PAYEEID
-    default:
-      validity[0] = data.payee_id_valid;
-      validity[1] = data.name_valid;
-      validity[2] = data.memo_valid;
-      values += QString::fromUtf8(data.payee_id);
-      values += QString::fromUtf8(data.name);
-      values += QString::fromUtf8(data.memo);
-      break;
+  // Decide whether to use NAME, PAYEEID or MEMO to construct the payee and memo - name preference is ignored eventually but needed when memo is not valid.
+  QVector<int> payee_preference;
+  QVector<int> memo_preference;
+  QVector<int> name_preference;
 
-    case OFXImporter::Private::PreferName:  // NAME
-      validity[0] = data.name_valid;
-      validity[1] = data.payee_id_valid;
-      validity[2] = data.memo_valid;
-      values += QString::fromUtf8(data.name);
-      values += QString::fromUtf8(data.payee_id);
-      values += QString::fromUtf8(data.memo);
-      break;
+  bool validity[3];
+  validity[OFXImporter::Private::PayeeId] = data.payee_id_valid;
+  validity[OFXImporter::Private::Memo] = data.memo_valid;
+  validity[OFXImporter::Private::Name] = data.name_valid;
 
-    case OFXImporter::Private::PreferMemo:  // MEMO
-      validity[0] = data.memo_valid;
-      validity[1] = data.payee_id_valid;
-      validity[2] = data.name_valid;
-      values += QString::fromUtf8(data.memo);
-      values += QString::fromUtf8(data.payee_id);
-      values += QString::fromUtf8(data.name);
-      break;
-  }
+  QString values[3];
+  values[OFXImporter::Private::PayeeId] = data.payee_id;
+  values[OFXImporter::Private::Memo] = data.memo;
+  values[OFXImporter::Private::Name] = data.name;
 
-  // for investment transactions we don't use the meme as payee
+  // for investment transactions we don't use the memo as payee
   if (data.invtransactiontype_valid) {
-    values.clear();
-    validity[0] = data.payee_id_valid;
-    validity[1] = data.name_valid;
-    validity[2] = false;
-    values += QString::fromUtf8(data.payee_id);
-    values += QString::fromUtf8(data.name);
+      payee_preference = {OFXImporter::Private::PayeeId, OFXImporter::Private::Name}; // {if PayeeId valid, if PayeeId not valid}
+      memo_preference = {OFXImporter::Private::Memo, OFXImporter::Private::Memo};
+      name_preference = {OFXImporter::Private::Name, OFXImporter::Private::Name};
+  }
+  else {
+      switch (pofx->d->m_preferName) {
+      case OFXImporter::Private::PayeeId:
+          payee_preference = {OFXImporter::Private::PayeeId, OFXImporter::Private::Name, OFXImporter::Private::Memo}; // {if PayeeId valid, if PayeeId not valid, if PayeeId and Name not valid}
+          memo_preference = {OFXImporter::Private::Memo, OFXImporter::Private::Memo, OFXImporter::Private::Memo};
+          name_preference = {OFXImporter::Private::Name, OFXImporter::Private::Name, OFXImporter::Private::Memo};
+          break;
+          
+      case OFXImporter::Private::Name:
+          payee_preference = {OFXImporter::Private::Name, OFXImporter::Private::PayeeId, OFXImporter::Private::Memo}; // {if Name valid, if Name not valid, if Name and PayeeId not valid}
+          memo_preference = {OFXImporter::Private::Memo, OFXImporter::Private::Memo, OFXImporter::Private::Memo};
+          name_preference = {OFXImporter::Private::PayeeId, OFXImporter::Private::Memo, OFXImporter::Private::Memo};
+          break;
+          
+      case OFXImporter::Private::Memo:
+          payee_preference = {OFXImporter::Private::Memo, OFXImporter::Private::PayeeId, OFXImporter::Private::Name}; // {if Memo valid, if Memo not valid, if Memo and PayeeId not valid}
+          memo_preference = {OFXImporter::Private::PayeeId, OFXImporter::Private::Name, OFXImporter::Private::Name};
+          name_preference = {OFXImporter::Private::Name, OFXImporter::Private::Name, OFXImporter::Private::Name};
+          break;
+      }
   }
 
-  for (int idx = 0; idx < 3; ++idx) {
-    if (validity[idx]) {
-      t.m_strPayee = values[idx];
-      break;
-    }
+  // search for a valid choice or the last choice
+  int idx = 0;
+  while (!validity[payee_preference[idx]] && idx < payee_preference.length()-1) {
+      ++idx;
   }
 
-  // extract memo field if we haven't used it as payee
-  if ((data.memo_valid)
-      && (pofx->d->m_preferName != OFXImporter::Private::PreferMemo)) {
-    t.m_strMemo = QString::fromUtf8(data.memo);
-  }
-
-  // If the payee or memo fields are blank, set them to
-  // the other one which is NOT blank.  (acejones)
-  if (t.m_strPayee.isEmpty()) {
-    // But we only create a payee for non-investment transactions (ipwizard)
-    if (! t.m_strMemo.isEmpty() && data.invtransactiontype_valid == false)
-      t.m_strPayee = t.m_strMemo;
-  } else {
-    if (t.m_strMemo.isEmpty())
-      t.m_strMemo = t.m_strPayee;
-  }
+  t.m_strPayee = values[payee_preference[idx]];
+  t.m_strMemo = validity[memo_preference[idx]] ? values[memo_preference[idx]] : values[name_preference[idx]]; // if prefered memo's choice is invalid, use the name's
 
   if (data.security_data_valid) {
     struct OfxSecurityData* secdata = data.security_data_ptr;
