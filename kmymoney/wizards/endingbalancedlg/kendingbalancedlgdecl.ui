@@ -55,6 +55,30 @@
    <extends>QWidget</extends>
    <header>kmymoneyaccountselector.h</header>
   </customwidget>
+  <customwidget>
+   <class>CheckingStatementInfoWizardPage</class>
+   <extends>QWizardPage</extends>
+   <header>checkingstatementinfowizardpage.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PreviousPostponeWizardPage</class>
+   <extends>QWizardPage</extends>
+   <header>previouspostponewizardpage.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>InterestChargeCheckingsWizardPage</class>
+   <extends>QWizardPage</extends>
+   <header>interestchargecheckingswizardpage.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CheckingStartWizardPage</class>
+   <extends>QWizardPage</extends>
+   <header>checkingstartwizardpage.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <resources/>
  <connections/>
