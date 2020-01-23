@@ -45,9 +45,9 @@ while ($#args >= 0) {
     $field = $1 if ($a =~ /--field=(.*)/);
 }
 
-die ("Field '$field' not supported.") if ($fields !~ /\;$field\;/);
 die ("Missing account id. Use --acc= to specify.") if ($accountid eq "");
-die ("Missing field name. Use --field= to specifiy.") if ($field eq "");
+die ("Missing field name. Use --field= to specify.") if ($field eq "");
+die ("Field '$field' not supported.") if ($fields !~ /\;$field\;/);
 
 my $transactionid;
 my $splitid;
