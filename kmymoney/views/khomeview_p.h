@@ -943,13 +943,13 @@ public:
       m_html += "</td>";
 
       if (KMyMoneySettings::showCountOfUnmarkedTransactions())
-        m_html += QString("<td class=\"center\">!M</td>");
+        m_html += QString("<td class=\"center\">%1</td>").arg(i18nc("Header not marked", "!M"));
 
       if (KMyMoneySettings::showCountOfClearedTransactions())
-        m_html += QString("<td class=\"center\">C</td>");
+        m_html += QString("<td class=\"center\">%1</td>").arg(i18nc("Header cleared", "C"));
 
       if (KMyMoneySettings::showCountOfNotReconciledTransactions())
-        m_html += QString("<td class=\"center\">!R</td>");
+        m_html += QString("<td class=\"center\">%1</td>").arg(i18nc("Header not reconciled", "!R"));
 
       if (KMyMoneySettings::showDateOfLastReconciliation())
         m_html += QString("<td>%1</td>").arg(i18n("Last Reconciled"));
@@ -1231,7 +1231,7 @@ public:
             // list account if it's the last in the hierarchy or has transactions in it
             if ((*it).accountList().isEmpty() || (file->transactionCount((*it).id()) > 0)) {
 	      // Add it if we are not hiding zero balance liabilities, or the balance is not zero
-              const auto value = 
+              const auto value =
 		      MyMoneyFile::instance()->balance((*it).id(), QDate::currentDate());
 	      if (!(KMyMoneySettings::hideZeroBalanceLiabilities() && value.isZero())) {
                 liabilities << *it;
