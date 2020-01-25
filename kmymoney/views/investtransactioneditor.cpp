@@ -26,8 +26,9 @@
 #include <QStringList>
 #include <QDebug>
 #include <QGlobalStatic>
-#include <QStandardItemModel>
+// #include <QStandardItemModel>
 #include <QAbstractItemView>
+#include <QStringListModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -58,6 +59,7 @@
 #include "mymoneyenums.h"
 #include "mymoneysecurity.h"
 #include "kcurrencycalculator.h"
+#include "investactivities.h"
 
 using namespace Icons;
 
@@ -72,12 +74,28 @@ public:
         , accountsModel(new AccountNamesFilterProxyModel(parent))
         , accepted(false)
         , bypassPriceEditor(false)
-        , feeSplitModel(parent, &undoStack)
-        , interestSplitModel(parent, &undoStack)
+        , feeSplitModel(new SplitModel(parent, &undoStack))
+        , interestSplitModel(new SplitModel(parent, &undoStack))
+        , activitiesModel(new QStringListModel(parent))
+        , currentActivity(nullptr)
         , price(MyMoneyMoney::ONE)
     {
         accountsModel->setObjectName("InvestTransactionEditor::accountsModel");
-        feeSplitModel.setObjectName("SplitModel");
+        feeSplitModel->setObjectName("FeesSplitModel");
+        interestSplitModel->setObjectName("InterestSplitModel");
+
+        QStringList activityItems;
+        activityItems << i18n("Buy shares")
+                      << i18n("Sell shares")
+                      << i18n("Dividend")
+                      << i18n("Reinvest dividend")
+                      << i18n("Yield")
+                      << i18n("Add shares")
+                      << i18n("Remove shares")
+                      << i18n("Split shares")
+                      << i18n("Interest Income");
+
+       activitiesModel->setStringList(activityItems);
     }
 
     ~Private()
@@ -102,8 +120,10 @@ public:
     bool                          bypassPriceEditor;
     eMyMoney::Split::InvestmentTransactionType m_transactionType;
     QUndoStack                    undoStack;
-    SplitModel                    feeSplitModel;
-    SplitModel                    interestSplitModel;
+    SplitModel*                   feeSplitModel;
+    SplitModel*                   interestSplitModel;
+    QStringListModel*             activitiesModel;
+    Invest::Activity*             currentActivity;
     MyMoneySecurity               security;
     MyMoneySecurity               currency;
     MyMoneyAccount                m_account;
@@ -191,9 +211,9 @@ bool InvestTransactionEditor::Private::postdateChanged(const QDate& date)
     // collect all account ids
     QStringList accountIds;
     accountIds << m_account.id();
-    const auto rows = feeSplitModel.rowCount();
+    const auto rows = feeSplitModel->rowCount();
     for (int row = 0; row < rows; ++row) {
-        const auto index = feeSplitModel.index(row, 0);
+        const auto index = feeSplitModel->index(row, 0);
         accountIds << index.data(eMyMoney::Model::SplitAccountIdRole).toString();
     }
 
@@ -212,27 +232,27 @@ bool InvestTransactionEditor::Private::postdateChanged(const QDate& date)
 bool InvestTransactionEditor::Private::categoryChanged(const QString& accountId)
 {
     bool rc = true;
-    if (!accountId.isEmpty() && feeSplitModel.rowCount() <= 1) {
+    if (!accountId.isEmpty() && feeSplitModel->rowCount() <= 1) {
         try {
             MyMoneyAccount category = MyMoneyFile::instance()->account(accountId);
             const bool isIncomeExpense = category.isIncomeExpense();
 
             bool needValueSet = false;
             // make sure we have a split in the model
-            if (feeSplitModel.rowCount() == 0) {
+            if (feeSplitModel->rowCount() == 0) {
                 // add an empty split
                 MyMoneySplit s;
-                feeSplitModel.addItem(s);
+                feeSplitModel->addItem(s);
                 needValueSet = true;
             }
 
-            const QModelIndex index = feeSplitModel.index(0, 0);
+            const QModelIndex index = feeSplitModel->index(0, 0);
             if (!needValueSet) {
                 // update the values only if the category changes. This prevents
                 // the call of the currency calculator if not needed.
                 needValueSet = (index.data(eMyMoney::Model::SplitAccountIdRole).toString().compare(accountId) != 0);
             }
-            feeSplitModel.setData(index, accountId, eMyMoney::Model::SplitAccountIdRole);
+            feeSplitModel->setData(index, accountId, eMyMoney::Model::SplitAccountIdRole);
 
             rc &= postdateChanged(ui->dateEdit->date());
 
@@ -253,8 +273,8 @@ bool InvestTransactionEditor::Private::categoryChanged(const QString& accountId)
 MyMoneyMoney InvestTransactionEditor::Private::getPrice()
 {
     MyMoneyMoney result(price);
-    if (!bypassPriceEditor && feeSplitModel.rowCount() > 0) {
-        const QModelIndex idx = feeSplitModel.index(0, 0);
+    if (!bypassPriceEditor && feeSplitModel->rowCount() > 0) {
+        const QModelIndex idx = feeSplitModel->index(0, 0);
         const auto categoryId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
         const auto category = MyMoneyFile::instance()->accountsModel()->itemById(categoryId);
         if (!category.id().isEmpty()) {
@@ -325,6 +345,8 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     d->m_account = model->itemByIndex(index);
 
     d->ui->setupUi(this);
+
+    d->ui->activityCombo->setModel(d->activitiesModel);
 
     d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity});
     d->accountsModel->setHideEquityAccounts(false);
@@ -431,10 +453,12 @@ void InvestTransactionEditor::keyPressEvent(QKeyEvent* e)
 
 void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
 {
+    d->ui->activityCombo->setCurrentIndex(-1);
     auto idx = MyMoneyModelBase::mapToBaseSource(index);
     if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
         d->transaction = MyMoneyTransaction();
         d->split = MyMoneySplit();
+        d->ui->activityCombo->setCurrentIndex(0);
     } else {
         // keep a copy of the transaction and split
         d->transaction = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).transaction();
@@ -442,6 +466,9 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
 
         QModelIndex assetAccountIdx;
         KMyMoneyUtils::dissectInvestmentTransaction(idx, assetAccountIdx, d->feeSplitModel, d->interestSplitModel, d->security, d->currency, d->m_transactionType);
+        d->ui->activityCombo->setCurrentIndex(static_cast<int>(d->m_transactionType));
+
+
     }
 
 
@@ -527,7 +554,38 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
 
 void InvestTransactionEditor::setupActivity(int index)
 {
-    switch(index) {
+    const auto type = static_cast<eMyMoney::Split::InvestmentTransactionType>(index);
+    if (!d->currentActivity || type != d->currentActivity->type()) {
+        delete d->currentActivity;
+        switch(type) {
+            default:
+            case eMyMoney::Split::InvestmentTransactionType::BuyShares:
+                d->currentActivity = new Invest::Buy(this);
+                break;
+            case eMyMoney::Split::InvestmentTransactionType::SellShares:
+                d->currentActivity = new Invest::Sell(this);
+                break;
+            case eMyMoney::Split::InvestmentTransactionType::Dividend:
+            case eMyMoney::Split::InvestmentTransactionType::Yield:
+                d->currentActivity = new Invest::Div(this);
+                break;
+            case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
+                d->currentActivity = new Invest::Reinvest(this);
+                break;
+            case eMyMoney::Split::InvestmentTransactionType::AddShares:
+                d->currentActivity = new Invest::Add(this);
+                break;
+            case eMyMoney::Split::InvestmentTransactionType::RemoveShares:
+                d->currentActivity = new Invest::Remove(this);
+                break;
+            case eMyMoney::Split::InvestmentTransactionType::SplitShares:
+                d->currentActivity = new Invest::Split(this);
+                break;
+            case eMyMoney::Split::InvestmentTransactionType::InterestIncome:
+                d->currentActivity = new Invest::IntInc(this);
+                break;
+        }
+        d->currentActivity->showWidgets();
     }
 }
 
@@ -552,7 +610,7 @@ void InvestTransactionEditor::editFeeSplits()
 {
     auto transactionFactor(MyMoneyMoney::ONE);
 
-    SplitModel splitModel(this, nullptr, d->feeSplitModel);
+    SplitModel splitModel(this, nullptr, *d->feeSplitModel);
 
     auto invertSplitValues = [&]() -> void {
         const auto rows = splitModel.rowCount();
@@ -599,7 +657,7 @@ void InvestTransactionEditor::editFeeSplits()
         }
 
         // copy the splits model contents
-        d->feeSplitModel = splitModel;
+        *d->feeSplitModel = splitModel;
 
         // update the transaction amount
 #if 0
@@ -608,8 +666,8 @@ void InvestTransactionEditor::editFeeSplits()
 
         // the price might have been changed, so we have to update our copy
         // but only if there is one counter split
-        if (d->feeSplitModel.rowCount() == 1) {
-            const auto splitIdx = d->feeSplitModel.index(0, 0);
+        if (d->feeSplitModel->rowCount() == 1) {
+            const auto splitIdx = d->feeSplitModel->index(0, 0);
             const auto shares = splitIdx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
             const auto value = splitIdx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
             if (!shares.isZero()) {
@@ -658,17 +716,17 @@ void InvestTransactionEditor::saveTransaction()
         if (split.id() == d->split.id()) {
             continue;
         }
-        const auto rows = d->feeSplitModel.rowCount();
+        const auto rows = d->feeSplitModel->rowCount();
         int row;
         for (row = 0; row < rows; ++row) {
-            const QModelIndex index = d->feeSplitModel.index(row, 0);
+            const QModelIndex index = d->feeSplitModel->index(row, 0);
             if (index.data(eMyMoney::Model::IdRole).toString() == split.id()) {
                 break;
             }
         }
 
         // if the split is not in the model, we get rid of it
-        if (d->feeSplitModel.rowCount() == row) {
+        if (d->feeSplitModel->rowCount() == row) {
             t.removeSplit(split);
         }
     }
@@ -698,7 +756,7 @@ void InvestTransactionEditor::saveTransaction()
         t.setPostDate(d->ui->dateEdit->date());
 
         // now update and add what we have in the model
-        const SplitModel* model = &d->feeSplitModel;
+        const SplitModel* model = d->feeSplitModel;
         for (int row = 0; row < model->rowCount(); ++row) {
             const QModelIndex idx = model->index(row, 0);
             MyMoneySplit s;

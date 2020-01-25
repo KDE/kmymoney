@@ -98,6 +98,11 @@ void Invest::Activity::setupWidgets() const
   Q_D(const Activity);
   const auto widgetList = d->m_parent->findChildren<QWidget*>();
   for (const auto w : widgetList) {
+    // make sure to touch only our own widgets
+    if (w->objectName().isEmpty()
+    || w->objectName().startsWith("qt_"))
+      continue;
+
     w->setVisible(false);
   }
 
@@ -105,10 +110,11 @@ void Invest::Activity::setupWidgets() const
     "activityLabel", "activityCombo",
     "dateLabel", "dateEdit",
     "securityLabel", "securityCombo",
-    "sharesLabel", "sharesAmountEdit",
 
-    "statusLabel", "statusCombo",
+    // the ones in between are dynamically handled
+
     "memoLabel", "memoEdit",
+    "statusLabel", "statusCombo",
     "enterButton", "cancelButton",
   };
 
@@ -411,7 +417,12 @@ void Buy::showWidgets() const
 {
   Q_D(const Activity);
   static const QStringList visibleWidgetIds = {
-    "accountCombo", "sharesAmountEdit", "priceAmountEdit", "totalAmountEdit", "feesCombo", "feesAmountEdit", "interestCombo", "interestAmountEdit"
+    "sharesLabel", "sharesAmountEdit",
+    "accountLabel", "accountCombo",
+    "priceLabel", "priceAmountEdit",
+    "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
+    "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
+    "totalLabel", "totalAmountEdit",
   };
 
   setupWidgets();
@@ -521,7 +532,17 @@ eMyMoney::Split::InvestmentTransactionType Sell::type() const
 void Sell::showWidgets() const
 {
   Q_D(const Activity);
-  static const QStringList visibleWidgetIds = QStringList() << "accountCombo" << "interestAmountEdit" << "feesAmountEdit" << "sharesAmountEdit" << "priceAmountEdit" << "totalAmountEdit" << "interestCombo" << "feesCombo";
+
+  static const QStringList visibleWidgetIds = {
+    "sharesLabel", "sharesAmountEdit",
+    "accountLabel", "accountCombo",
+    "priceLabel", "priceAmountEdit",
+    "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
+    "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
+    "totalLabel", "totalAmountEdit",
+  };
+
+  setupWidgets();
   setWidgetVisibility(visibleWidgetIds, true);
 
   /// @todo port to new model code
@@ -529,15 +550,6 @@ void Sell::showWidgets() const
   if (auto shareEdit = d->haveWidget<AmountEdit>("sharesAmountEdit"))
     shareEdit->setPrecision(MyMoneyMoney::denomToPrec(d->m_parent->security().smallestAccountFraction()));
 #endif
-  setLabelText("interest-amount-label", i18n("Interest"));
-  setLabelText("interest-label", i18n("Interest"));
-  setLabelText("fee-amount-label", i18n("Fees"));
-  setLabelText("fee-label", i18n("Fees"));
-  setLabelText("asset-label", i18n("Account"));
-  setLabelText("shares-label", i18n("Shares"));
-  if (d->haveWidget<QLabel>("price-label"))
-    setLabelText("price-label", priceLabel());
-  setLabelText("total-label", i18nc("Total value", "Total"));
 }
 
 bool Sell::isComplete(QString& reason) const
@@ -648,17 +660,15 @@ eMyMoney::Split::InvestmentTransactionType Div::type() const
 
 void Div::showWidgets() const
 {
-  static const QStringList visibleWidgetIds = QStringList() << "accountCombo" << "interestAmountEdit" << "feesAmountEdit" << "totalAmountEdit" << "interestCombo" << "feesCombo";
-  setWidgetVisibility(visibleWidgetIds, true);
-  static const QStringList hiddenWidgetIds = QStringList() << "sharesAmountEdit" << "priceAmountEdit";
-  setWidgetVisibility(hiddenWidgetIds, false);
+  static const QStringList visibleWidgetIds = {
+    "accountLabel", "accountCombo",
+    "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
+    "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
+    "totalLabel", "totalAmountEdit",
+  };
 
-  setLabelText("interest-amount-label", i18n("Interest"));
-  setLabelText("interest-label", i18n("Interest"));
-  setLabelText("fee-amount-label", i18n("Fees"));
-  setLabelText("fee-label", i18n("Fees"));
-  setLabelText("asset-label", i18n("Account"));
-  setLabelText("total-label", i18nc("Total value", "Total"));
+  setupWidgets();
+  setWidgetVisibility(visibleWidgetIds, true);
 }
 
 bool Div::isComplete(QString& reason) const

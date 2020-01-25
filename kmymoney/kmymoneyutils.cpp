@@ -452,11 +452,11 @@ void KMyMoneyUtils::updateWizardButtons(QWizard* wizard)
   wizard->button(QWizard::BackButton)->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
 }
 
-void KMyMoneyUtils::dissectInvestmentTransaction(const QModelIndex &investSplitIdx, QModelIndex &assetAccountSplitIdx, SplitModel& feeSplitModel, SplitModel& interestSplitModel, MyMoneySecurity &security, MyMoneySecurity &currency, eMyMoney::Split::InvestmentTransactionType &transactionType)
+void KMyMoneyUtils::dissectInvestmentTransaction(const QModelIndex &investSplitIdx, QModelIndex &assetAccountSplitIdx, SplitModel* feeSplitModel, SplitModel* interestSplitModel, MyMoneySecurity &security, MyMoneySecurity &currency, eMyMoney::Split::InvestmentTransactionType &transactionType)
 {
   // clear split models
-  feeSplitModel.unload();
-  interestSplitModel.unload();
+  feeSplitModel->unload();
+  interestSplitModel->unload();
 
   assetAccountSplitIdx = QModelIndex(); // set to none to check later if it was assigned
   const auto file = MyMoneyFile::instance();
@@ -476,16 +476,16 @@ void KMyMoneyUtils::dissectInvestmentTransaction(const QModelIndex &investSplitI
     if (splitIdx.row() == idx.row()) {
       security = file->security(accIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString());
     } else if (accountGroup == eMyMoney::Account::Type::Expense) {
-      feeSplitModel.appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
+      feeSplitModel->appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
     } else if (accountGroup == eMyMoney::Account::Type::Income) {
-        interestSplitModel.appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
+        interestSplitModel->appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
     } else {
       if (!assetAccountSplitIdx.isValid()) { // first asset Account should be our requested brokerage account
         assetAccountSplitIdx = splitIdx;
       } else if (idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>().isNegative()) { // the rest (if present) is handled as fee or interest
-        feeSplitModel.appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
+        feeSplitModel->appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
       } else if (idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>().isPositive()) {
-        interestSplitModel.appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
+        interestSplitModel->appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
       }
     }
   }
