@@ -28,12 +28,17 @@
 // Project Includes
 #include "mymoneymoney.h"
 
+#ifdef ENABLE_FINANCEQUOTE
 #include <alkimia/alkfinancequoteprocess.h>
+#endif
 #include <alkimia/alkonlinequotesprofilemanager.h>
 
 KOnlineUpdateWizardPage::KOnlineUpdateWizardPage(QWidget *parent)
     : KOnlineUpdateWizardPageDecl(parent)
 {
+#ifndef ENABLE_FINANCEQUOTE
+  m_useFinanceQuote->setVisible(false);
+#endif
   m_onlineFactor->setValue(MyMoneyMoney::ONE);
   m_onlineFactor->setPrecision(4);
 
@@ -51,7 +56,9 @@ KOnlineUpdateWizardPage::KOnlineUpdateWizardPage(QWidget *parent)
   // appropriate signals to update the "Next" button correctly
   registerField("onlineFactor", m_onlineFactor, "value");
   registerField("onlineSourceCombo", m_onlineSourceCombo, "currentText", SIGNAL(currentIndexChanged(QString)));
+#ifdef ENABLE_FINANCEQUOTE
   registerField("useFinanceQuote", m_useFinanceQuote);
+#endif
   connect(m_onlineSourceCombo, SIGNAL(currentIndexChanged(QString)), this, SLOT(slotCheckPage(QString)));
   connect(m_onlineFactor, SIGNAL(textChanged(QString)),
           this, SIGNAL(completeChanged()));
@@ -59,8 +66,10 @@ KOnlineUpdateWizardPage::KOnlineUpdateWizardPage(QWidget *parent)
   connect(m_onlineSourceCombo, SIGNAL(activated(QString)),
           this, SIGNAL(completeChanged()));
 
+#ifdef ENABLE_FINANCEQUOTE
   connect(m_useFinanceQuote, SIGNAL(toggled(bool)),
           this, SIGNAL(completeChanged()));
+#endif
 }
 
 /**
@@ -69,11 +78,14 @@ KOnlineUpdateWizardPage::KOnlineUpdateWizardPage(QWidget *parent)
 void KOnlineUpdateWizardPage::init2(const MyMoneySecurity& security)
 {
   int idx = -1;
+#ifdef ENABLE_FINANCEQUOTE
   if (security.value("kmm-online-quote-system") == "Finance::Quote") {
     AlkFinanceQuoteProcess p;
     m_useFinanceQuote->setChecked(true);
     idx = m_onlineSourceCombo->findText(p.niceName(security.value("kmm-online-source")));
-  } else {
+  } else
+#endif
+  {
     idx = m_onlineSourceCombo->findText(security.value("kmm-online-source"));
   }
 

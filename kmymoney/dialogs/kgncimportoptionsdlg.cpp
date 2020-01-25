@@ -48,8 +48,11 @@ KGncImportOptionsDlg::KGncImportOptionsDlg(QWidget *)
   m_widget->buttonInvestGroup->setId(m_widget->radioInvest3, 2); // prompt for each stock
 
   m_widget->buttonGroup5->setExclusive(false);
+#ifdef ENABLE_FINANCEQUOTE
   m_widget->checkFinanceQuote->setChecked(true);
-
+#else
+  m_widget->checkFinanceQuote->setVisible(false);
+#endif
   m_widget->buttonGroup2->setExclusive(false);
   m_widget->checkSchedules->setChecked(false);
 

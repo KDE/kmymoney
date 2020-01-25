@@ -259,6 +259,8 @@ if(ENABLE_LIBICAL)
   endif(NOT LIBICAL_FOUND)
 endif(ENABLE_LIBICAL)
 
+option(ENABLE_FINANCEQUOTE "Enable Finance:Quote support (required perl)" OFF)
+
 # check for optional KDE Activities support
 find_package(KActivities)
 
