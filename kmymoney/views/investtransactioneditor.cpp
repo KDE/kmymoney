@@ -26,7 +26,6 @@
 #include <QStringList>
 #include <QDebug>
 #include <QGlobalStatic>
-// #include <QStandardItemModel>
 #include <QAbstractItemView>
 #include <QStringListModel>
 

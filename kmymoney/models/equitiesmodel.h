@@ -24,12 +24,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-
-#include <QSortFilterProxyModel>
-#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
-#include <KItemModels/KRecursiveFilterProxyModel>
-#define QSortFilterProxyModel KRecursiveFilterProxyModel
-#endif
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -66,38 +60,4 @@ private:
   Q_DECLARE_PRIVATE(EquitiesModel);
 };
 
-class KMM_MODELS_EXPORT EquitiesFilterProxyModel : public QSortFilterProxyModel
-{
-  Q_OBJECT
-
-public:
-  EquitiesFilterProxyModel(QObject *parent , EquitiesModel *model, const QList<EquitiesModel::Column> &columns = QList<EquitiesModel::Column>());
-  ~EquitiesFilterProxyModel();
-
-  QList<EquitiesModel::Column> &getVisibleColumns();
-  void setHideClosedAccounts(const bool hideClosedAccounts);
-  void setHideZeroBalanceAccounts(const bool hideZeroBalanceAccounts);
-
-Q_SIGNALS:
-  void columnToggled(const EquitiesModel::Column column, const bool show);
-
-public Q_SLOTS:
-  void slotColumnsMenu(const QPoint);
-
-protected:
-  bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override;
-  bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
-
-private:
-  class Private;
-  Private* const d;
-
-#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
-  // provide the interface for backward compatbility
-  void setRecursiveFilteringEnabled(bool enable) { Q_UNUSED(enable) }
-#endif
-
-};
-
-#undef QSortFilterProxyModel
 #endif // EQUITIESMODEL_H
