@@ -888,7 +888,7 @@ bool MyMoneyReport::hasReferenceTo(const QString& id) const
   payees(list);
   tags(list);
 
-  return (list.contains(id) > 0);
+  return (list.contains(id));
 }
 
 int MyMoneyReport::m_lineWidth = 2;
