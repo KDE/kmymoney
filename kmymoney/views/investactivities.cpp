@@ -93,20 +93,24 @@ Activity::~Activity()
   delete d;
 }
 
-void Invest::Activity::setupWidgets() const
+void Invest::Activity::setupWidgets(const QStringList& activityWidgets) const
 {
   Q_D(const Activity);
-  const auto widgetList = d->m_parent->findChildren<QWidget*>();
-  for (const auto w : widgetList) {
-    // make sure to touch only our own widgets
-    if (w->objectName().isEmpty()
-    || w->objectName().startsWith("qt_"))
-      continue;
 
-    w->setVisible(false);
-  }
+  static const QStringList dynamicWidgetNames = {
+    "sharesLabel", "sharesAmountEdit",
+    "accountLabel", "accountCombo",
+    "priceLabel", "priceAmountEdit",
+    "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
+    "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
+    "totalLabel", "totalAmountEdit",
+  };
 
-  static const QStringList visibleWidgetIds = {
+  setWidgetVisibility(dynamicWidgetNames, false);
+
+  setLabelText("priceLabel", priceLabelText());
+
+  static const QStringList standardWidgetNames = {
     "activityLabel", "activityCombo",
     "dateLabel", "dateEdit",
     "securityLabel", "securityCombo",
@@ -118,8 +122,9 @@ void Invest::Activity::setupWidgets() const
     "enterButton", "cancelButton",
   };
 
-  setWidgetVisibility(visibleWidgetIds, true);
-  setLabelText("priceLabel", priceLabel());
+  setWidgetVisibility(standardWidgetNames, true);
+  setWidgetVisibility(activityWidgets, true);
+
 }
 
 bool& Activity::memoChanged()
@@ -386,7 +391,7 @@ eDialogs::PriceMode Activity::priceMode() const
   return eDialogs::PriceMode::Price;
 }
 
-QString Activity::priceLabel() const
+QString Activity::priceLabelText() const
 {
   QString label;
   if (priceMode() == eDialogs::PriceMode::Price) {
@@ -416,7 +421,7 @@ eMyMoney::Split::InvestmentTransactionType Buy::type() const
 void Buy::showWidgets() const
 {
   Q_D(const Activity);
-  static const QStringList visibleWidgetIds = {
+  static const QStringList activityWidgets = {
     "sharesLabel", "sharesAmountEdit",
     "accountLabel", "accountCombo",
     "priceLabel", "priceAmountEdit",
@@ -425,8 +430,7 @@ void Buy::showWidgets() const
     "totalLabel", "totalAmountEdit",
   };
 
-  setupWidgets();
-  setWidgetVisibility(visibleWidgetIds, true);
+  setupWidgets(activityWidgets);
 
 #if 0
   setLabelText("interest-amount-label", i18n("Interest"));
@@ -533,7 +537,7 @@ void Sell::showWidgets() const
 {
   Q_D(const Activity);
 
-  static const QStringList visibleWidgetIds = {
+  static const QStringList activityWidgets = {
     "sharesLabel", "sharesAmountEdit",
     "accountLabel", "accountCombo",
     "priceLabel", "priceAmountEdit",
@@ -542,8 +546,7 @@ void Sell::showWidgets() const
     "totalLabel", "totalAmountEdit",
   };
 
-  setupWidgets();
-  setWidgetVisibility(visibleWidgetIds, true);
+  setupWidgets(activityWidgets);
 
   /// @todo port to new model code
 #if 0
@@ -660,15 +663,14 @@ eMyMoney::Split::InvestmentTransactionType Div::type() const
 
 void Div::showWidgets() const
 {
-  static const QStringList visibleWidgetIds = {
+  static const QStringList activityWidgets = {
     "accountLabel", "accountCombo",
     "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
     "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
     "totalLabel", "totalAmountEdit",
   };
 
-  setupWidgets();
-  setWidgetVisibility(visibleWidgetIds, true);
+  setupWidgets(activityWidgets);
 }
 
 bool Div::isComplete(QString& reason) const
@@ -744,8 +746,17 @@ eMyMoney::Split::InvestmentTransactionType Reinvest::type() const
 void Reinvest::showWidgets() const
 {
   Q_D(const Activity);
-  static const QStringList visibleWidgetIds = QStringList() << "priceAmountEdit" << "feesCombo" << "interestCombo";
-  setWidgetVisibility(visibleWidgetIds, true);
+
+  static const QStringList activityWidgets = {
+    "sharesLabel", "sharesAmountEdit",
+    "accountLabel", "accountCombo",
+    "priceLabel", "priceAmountEdit",
+    "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
+    "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
+    "totalLabel", "totalAmountEdit",
+  };
+
+  setupWidgets(activityWidgets);
 
   if (auto shareEdit = d->haveWidget<AmountEdit>("sharesAmountEdit")) {
     shareEdit->show();
@@ -754,16 +765,6 @@ void Reinvest::showWidgets() const
     shareEdit->setPrecision(MyMoneyMoney::denomToPrec(d->m_parent->security().smallestAccountFraction()));
 #endif
   }
-
-  setLabelText("interest-amount-label", i18n("Interest"));
-  setLabelText("interest-label", i18n("Interest"));
-  setLabelText("fee-amount-label", i18n("Fees"));
-  setLabelText("fee-label", i18n("Fees"));
-  setLabelText("interest-label", i18n("Interest"));
-  setLabelText("shares-label", i18n("Shares"));
-  if (d->haveWidget<QLabel>("price-label"))
-    setLabelText("price-label", priceLabel());
-  setLabelText("total-label", i18nc("Total value", "Total"));
 }
 
 bool Reinvest::isComplete(QString& reason) const
@@ -866,6 +867,12 @@ eMyMoney::Split::InvestmentTransactionType Add::type() const
 void Add::showWidgets() const
 {
   Q_D(const Activity);
+  static const QStringList activityWidgets = {
+    "sharesLabel", "sharesAmountEdit",
+  };
+
+  setupWidgets(activityWidgets);
+
   if (auto shareEdit = d->haveWidget<AmountEdit>("sharesAmountEdit")) {
     shareEdit->show();
     /// @todo port to new model code
@@ -873,8 +880,6 @@ void Add::showWidgets() const
     shareEdit->setPrecision(MyMoneyMoney::denomToPrec(d->m_parent->security().smallestAccountFraction()));
 #endif
   }
-
-  setLabelText("shares-label", i18n("Shares"));
 }
 
 bool Add::isComplete(QString& reason) const
@@ -931,6 +936,12 @@ eMyMoney::Split::InvestmentTransactionType Remove::type() const
 void Remove::showWidgets() const
 {
   Q_D(const Activity);
+  static const QStringList activityWidgets = {
+    "sharesLabel", "sharesAmountEdit",
+  };
+
+  setupWidgets(activityWidgets);
+
   if (auto shareEdit = d->haveWidget<AmountEdit>("sharesAmountEdit")) {
     shareEdit->show();
     /// @todo port to new model code
@@ -938,7 +949,6 @@ void Remove::showWidgets() const
     shareEdit->setPrecision(MyMoneyMoney::denomToPrec(d->m_parent->security().smallestAccountFraction()));
 #endif
   }
-  setLabelText("shares-label", i18n("Shares"));
 }
 
 bool Remove::isComplete(QString& reason) const
@@ -993,13 +1003,24 @@ eMyMoney::Split::InvestmentTransactionType Invest::Split::type() const
 void Invest::Split::showWidgets() const
 {
   Q_D(const Activity);
+  static const QStringList activityWidgets = {
+    "sharesLabel", "sharesAmountEdit",
+    "priceLabel", "priceAmountEdit"
+  };
+
+  setupWidgets(activityWidgets);
+
   // TODO do we need a special split ratio widget?
   // TODO maybe yes, currently the precision is the one of the fraction and might differ from it
   if (auto shareEdit = d->haveWidget<AmountEdit>("sharesAmountEdit")) {
     shareEdit->show();
     shareEdit->setPrecision(-1);
   }
-  setLabelText("shares-label", i18n("Ratio 1/"));
+}
+
+QString Invest::Split::priceLabelText() const
+{
+  return i18n("Ratio 1/");
 }
 
 bool Invest::Split::isComplete(QString& reason) const
@@ -1049,16 +1070,14 @@ eMyMoney::Split::InvestmentTransactionType IntInc::type() const
 
 void IntInc::showWidgets() const
 {
-  static const QStringList visibleWidgetIds = QStringList() << "accountCombo" << "interestAmountEdit" << "totalAmountEdit" << "interestCombo" << "feesCombo";
-  setWidgetVisibility(visibleWidgetIds, true);
-  static const QStringList hiddenWidgetIds = QStringList() << "sharesAmountEdit" << "priceAmountEdit" << "feesAmountEdit";
-  setWidgetVisibility(hiddenWidgetIds, false);
+  static const QStringList activityWidgets = {
+    "accountLabel", "accountCombo",
+    "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
+    "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
+    "totalLabel", "totalAmountEdit",
+  };
 
-  setLabelText("interest-amount-label", i18n("Interest"));
-  setLabelText("interest-label", i18n("Interest"));
-  setLabelText("fee-label", i18n("Fees"));
-  setLabelText("asset-label", i18n("Account"));
-  setLabelText("total-label", i18nc("Total value", "Total"));
+  setupWidgets(activityWidgets);
 }
 
 bool IntInc::isComplete(QString& reason) const

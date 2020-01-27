@@ -458,16 +458,33 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         d->transaction = MyMoneyTransaction();
         d->split = MyMoneySplit();
         d->ui->activityCombo->setCurrentIndex(0);
+#if 0   /// @todo d->lastUsedPostDate needs to be implemented
+        if (d->lastUsedPostDate.isValid()) {
+            d->ui->dateEdit->setDate(d->lastUsedPostDate);
+        } else {
+            d->ui->dateEdit->setDate(QDate::currentDate());
+        }
+#else
+        d->ui->dateEdit->setDate(QDate::currentDate());
+#endif
     } else {
         // keep a copy of the transaction and split
         d->transaction = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).transaction();
         d->split = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).split();
 
-        QModelIndex assetAccountIdx;
-        KMyMoneyUtils::dissectInvestmentTransaction(idx, assetAccountIdx, d->feeSplitModel, d->interestSplitModel, d->security, d->currency, d->m_transactionType);
+        QModelIndex assetAccountSplitIdx;
+        KMyMoneyUtils::dissectInvestmentTransaction(idx, assetAccountSplitIdx, d->feeSplitModel, d->interestSplitModel, d->security, d->currency, d->m_transactionType);
         d->ui->activityCombo->setCurrentIndex(static_cast<int>(d->m_transactionType));
 
+        // load the widgets
+        d->ui->dateEdit->setDate(d->transaction.postDate());
 
+        d->ui->memoEdit->setPlainText(d->split.memo());
+
+        d->currentActivity->memoText() = d->split.memo();
+        d->currentActivity->memoChanged() = false;
+
+        d->ui->accountCombo->setSelected(assetAccountSplitIdx.data(eMyMoney::Model::SplitAccountIdRole).toString());
     }
 
 

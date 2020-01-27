@@ -86,7 +86,7 @@ protected:
   bool haveShares() const;
   bool havePrice() const;
   bool isMultiSelection() const;
-  QString priceLabel() const;
+  virtual QString priceLabelText() const;
   bool createCategorySplits(const MyMoneyTransaction& t, KMyMoneyAccountCombo* cat, AmountEdit* amount, MyMoneyMoney factor, QList<MyMoneySplit>&splits, const QList<MyMoneySplit>& osplits) const;
   void createAssetAccountSplit(MyMoneySplit& split, const MyMoneySplit& stockSplit) const;
   MyMoneyMoney sumSplits(const MyMoneySplit& s0, const QList<MyMoneySplit>& feeSplits, const QList<MyMoneySplit>& interestSplits) const;
@@ -94,7 +94,7 @@ protected:
   void setLabelText(const QString& idx, const QString& txt) const;
   void setWidgetVisibility(const QStringList& widgetIds, bool visible) const;
   eDialogs::PriceMode priceMode() const;
-  void setupWidgets() const;
+  void setupWidgets(const QStringList& activityWidgets) const;
 
 protected:
   ActivityPrivate* d_ptr;
@@ -176,6 +176,9 @@ public:
   void showWidgets() const override;
   bool isComplete(QString& reason) const override;
   bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
+
+protected:
+  QString priceLabelText() const override;
 };
 
 class IntInc : public Activity

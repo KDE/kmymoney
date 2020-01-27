@@ -132,39 +132,13 @@ public:
 
 void NewTransactionEditor::Private::updateWidgetState()
 {
-    // just in case it is disabled we turn it on
-    ui->costCenterCombo->setEnabled(true);
-
-    // setup the category/account combo box. If we have a split transaction, we disable the
-    // combo box altogether. Changes can only be made via the split dialog editor
-    bool blocked = false;
-    QModelIndex index;
-
     // update the category combo box
-    ui->accountCombo->setEnabled(true);
-    index = splitModel.index(0, 0);
-    switch (splitModel.rowCount()) {
-    case 0:
-        ui->accountCombo->setSelected(QString());
-        break;
-    case 1:
-        ui->accountCombo->setSelected(splitModel.data(index, eMyMoney::Model::SplitAccountIdRole).toString());
-        break;
-    default:
-        blocked = ui->accountCombo->lineEdit()->blockSignals(true);
-        ui->accountCombo->lineEdit()->setText(i18n("Split transaction"));
-        ui->accountCombo->setDisabled(true);
-        ui->accountCombo->lineEdit()->blockSignals(blocked);
-        ui->costCenterCombo->setDisabled(true);
-        ui->costCenterLabel->setDisabled(true);
-        break;
-    }
-    ui->accountCombo->hidePopup();
+    auto index = splitModel.index(0, 0);
 
     // update the costcenter combo box
     if (ui->costCenterCombo->isEnabled()) {
         // extract the cost center
-        index = MyMoneyFile::instance()->costCenterModel()->indexById(splitModel.data(index, eMyMoney::Model::SplitCostCenterIdRole).toString());
+        index = MyMoneyFile::instance()->costCenterModel()->indexById(index.data(eMyMoney::Model::SplitCostCenterIdRole).toString());
         if (index.isValid())
             ui->costCenterCombo->setCurrentIndex(costCenterModel->mapFromSource(index).row());
     }
@@ -408,6 +382,11 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     d->m_account = model->itemByIndex(index);
 
     d->ui->setupUi(this);
+
+    const auto* splitHelper = new KMyMoneyAccountComboSplitHelper(d->ui->accountCombo, &d->splitModel);
+    connect(splitHelper, &KMyMoneyAccountComboSplitHelper::accountComboEnabled, d->ui->costCenterCombo, &QComboBox::setEnabled);
+    connect(splitHelper, &KMyMoneyAccountComboSplitHelper::accountComboEnabled, d->ui->costCenterLabel, &QComboBox::setEnabled);
+
 
     d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity});
     d->accountsModel->setHideEquityAccounts(false);

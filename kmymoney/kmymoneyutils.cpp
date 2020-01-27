@@ -491,7 +491,7 @@ void KMyMoneyUtils::dissectInvestmentTransaction(const QModelIndex &investSplitI
   }
 
   // determine transaction type
-  transactionType = idx.data(eMyMoney::Model::SplitActivityRole).value<eMyMoney::Split::InvestmentTransactionType>();
+  transactionType = idx.data(eMyMoney::Model::TransactionInvestementType).value<eMyMoney::Split::InvestmentTransactionType>();
 
   currency.setTradingSymbol("???");
   try {
