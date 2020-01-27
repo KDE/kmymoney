@@ -98,5 +98,27 @@ private:
   QScopedPointer<Private> const d;
 };
 
+class KMyMoneyAccountComboSplitHelperPrivate;
+class KMyMoneyAccountComboSplitHelper : public QObject
+{
+  Q_OBJECT
+  Q_DISABLE_COPY(KMyMoneyAccountComboSplitHelper)
+
+public:
+  explicit KMyMoneyAccountComboSplitHelper(KMyMoneyAccountCombo* accountCombo, QAbstractItemModel *model);
+  ~KMyMoneyAccountComboSplitHelper();
+
+private Q_SLOTS:
+  void splitCountChanged();
+  void modelDestroyed();
+
+Q_SIGNALS:
+  void accountComboEnabled(bool enabled);
+
+private:
+  Q_DECLARE_PRIVATE(KMyMoneyAccountComboSplitHelper);
+  QScopedPointer<KMyMoneyAccountComboSplitHelperPrivate>  d_ptr;
+};
+
 #endif
 // kate: space-indent on; indent-width 2; remove-trailing-space on; remove-trailing-space-save on;

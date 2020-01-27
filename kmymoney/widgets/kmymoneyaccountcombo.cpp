@@ -29,6 +29,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KLocalizedString>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -357,6 +359,85 @@ void KMyMoneyAccountCombo::hidePopup()
     d->m_popupView->removeEventFilter(this);
   }
   KComboBox::hidePopup();
+}
+
+class KMyMoneyAccountComboSplitHelperPrivate
+{
+  Q_DISABLE_COPY(KMyMoneyAccountComboSplitHelperPrivate)
+  Q_DECLARE_PUBLIC(KMyMoneyAccountComboSplitHelper)
+
+public:
+  KMyMoneyAccountComboSplitHelperPrivate(KMyMoneyAccountComboSplitHelper* qq)
+  : q_ptr(qq)
+  , m_accountCombo(nullptr)
+  , m_splitModel(nullptr)
+  , m_norecursive(false)
+  {
+  }
+
+  KMyMoneyAccountComboSplitHelper*  q_ptr;
+  KMyMoneyAccountCombo*             m_accountCombo;
+  QAbstractItemModel*               m_splitModel;
+  bool                              m_norecursive;
+};
+
+
+KMyMoneyAccountComboSplitHelper::KMyMoneyAccountComboSplitHelper(KMyMoneyAccountCombo* accountCombo, QAbstractItemModel* model)
+  : QObject(accountCombo)
+  , d_ptr(new KMyMoneyAccountComboSplitHelperPrivate(this))
+{
+  Q_D(KMyMoneyAccountComboSplitHelper);
+  d->m_accountCombo = accountCombo;
+  d->m_splitModel = model;
+
+  connect(model, &QAbstractItemModel::rowsInserted, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged, Qt::QueuedConnection);
+  connect(model, &QAbstractItemModel::rowsRemoved, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged, Qt::QueuedConnection);
+  connect(model, &QAbstractItemModel::modelReset, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged, Qt::QueuedConnection);
+  connect(model, &QAbstractItemModel::destroyed, this, &KMyMoneyAccountComboSplitHelper::modelDestroyed);
+
+}
+
+KMyMoneyAccountComboSplitHelper::~KMyMoneyAccountComboSplitHelper()
+{
+}
+
+void KMyMoneyAccountComboSplitHelper::modelDestroyed()
+{
+  Q_D(KMyMoneyAccountComboSplitHelper);
+  qDebug() << "Model destroyed for KMyMoneyAccountComboSplitHelper";
+  d->m_splitModel = nullptr;
+}
+
+void KMyMoneyAccountComboSplitHelper::splitCountChanged()
+{
+  Q_D(KMyMoneyAccountComboSplitHelper);
+  // sanity check
+  if (!d->m_accountCombo || !d->m_splitModel || d->m_norecursive)
+    return;
+
+  d->m_norecursive = true;
+  bool blocked = false;
+  const auto index = d->m_splitModel->index(0, 0);
+
+  d->m_accountCombo->setEnabled(true);
+  switch (d->m_splitModel->rowCount()) {
+    case 0:
+      d->m_accountCombo->setSelected(QString());
+      break;
+    case 1:
+      d->m_accountCombo->setSelected(index.data(eMyMoney::Model::SplitAccountIdRole).toString());
+      break;
+    default:
+      blocked = d->m_accountCombo->lineEdit()->blockSignals(true);
+      d->m_accountCombo->lineEdit()->setText(i18n("Split transaction"));
+      d->m_accountCombo->setDisabled(true);
+      d->m_accountCombo->lineEdit()->blockSignals(blocked);
+      break;
+  }
+  d->m_accountCombo->hidePopup();
+  emit accountComboEnabled(d->m_accountCombo->isEnabled());
+
+  d->m_norecursive = false;
 }
 
 // kate: space-indent on; indent-width 2; remove-trailing-space on; remove-trailing-space-save on;
