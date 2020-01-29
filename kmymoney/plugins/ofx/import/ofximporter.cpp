@@ -292,8 +292,10 @@ bool OFXImporter::import(const QString& filename)
   // files when running in APPIMAGE mode
   const char* env = getenv("APPDIR");
   if (env && *env) {
-    qDebug() << "Set DTD dir to" << env;
-    libofx_set_dtd_dir(ctx, env);
+    QByteArray dir = env;
+    dir.append("/usr/share/libofx/dtd/");
+    qDebug() << "Set DTD dir to" << dir;
+    libofx_set_dtd_dir(ctx, dir.data());
   }
 #endif
 
