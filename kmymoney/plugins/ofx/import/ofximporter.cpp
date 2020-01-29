@@ -286,6 +286,17 @@ bool OFXImporter::import(const QString& filename)
   ofx_set_security_cb(ctx, ofxSecurityCallback, this);
   ofx_set_status_cb(ctx, ofxStatusCallback, this);
   qDebug("process data");
+
+#ifdef IS_APPIMAGE
+  // libofx needs to know where to pick up the DTD
+  // files when running in APPIMAGE mode
+  const char* env = getenv("APPDIR");
+  if (env && *env) {
+    qDebug() << "Set DTD dir to" << env;
+    libofx_set_dtd_dir(ctx, env);
+  }
+#endif
+
   libofx_proc_file(ctx, filename_deep, AUTODETECT);
   qDebug("process data done");
   libofx_free_context(ctx);
