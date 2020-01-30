@@ -716,7 +716,7 @@ QPixmap MyMoneyAccount::accountPixmap(bool reconcileFlag, int size) const
   } else if (reconcileFlag) {
     QPixmap ovly = DesktopIcon("flag-green", size);
     pixmapPainter.drawPixmap(size / 2, size / 2, ovly.width() / 2, ovly.height() / 2, ovly);
-  } else if (!onlineBankingSettings().value("provider").isEmpty()) {
+  } else if (hasOnlineMapping()) {
     QPixmap ovly = DesktopIcon("download", size);
     pixmapPainter.drawPixmap(size / 2, size / 2, ovly.width() / 2, ovly.height() / 2, ovly);
   }
@@ -852,3 +852,7 @@ QList< payeeIdentifier > MyMoneyAccount::payeeIdentifiers() const
   return list;
 }
 
+bool MyMoneyAccount::hasOnlineMapping() const
+{
+  return !m_onlineBankingSettings.value(QLatin1String("provider")).isEmpty();
+}

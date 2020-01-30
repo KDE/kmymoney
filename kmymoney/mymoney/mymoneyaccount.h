@@ -604,6 +604,11 @@ public:
     */
   const QMap<QDate, MyMoneyMoney>& reconciliationHistory();
 
+  /**
+    * @return @c true if account has an online mapping, @c false otherwise
+    */
+  bool hasOnlineMapping() const;
+
   QDataStream &operator<<(const MyMoneyAccount &);
   QDataStream &operator>>(MyMoneyAccount &);
 
