@@ -26,13 +26,13 @@
 MyMoneyMoneyToWordsConverter::MyMoneyMoneyToWordsConverter()
 {
   // Single-digit and small number names
-  m_smallNumbers << i18nc("@item the number 0", "zero") << i18nc("@item the number 1", "one") << i18nc("@item the number 2", "two") << i18nc("@item the number 3", "three") << i18nc("@item the number 4", "four") << i18nc("@item the number 5", "five") << i18nc("@item the number 6", "six") << i18nc("@item the number 7", "seven") << i18nc("@item the number 8", "eight") << i18nc("@item the number 9", "nine") << i18nc("@item the number 10", "ten") << i18nc("@item the number 11", "eleven") << i18nc("@item the number 12", "twelve") << i18nc("@item the number 13", "thirteen") << i18nc("@item the number 14", "fourteen") << i18nc("@item the number 15", "fifteen") << i18nc("@item the number 16", "sixteen") << i18nc("@item the number 17", "seventeen") << i18nc("@item the number 18", "eighteen") << i18nc("@item the number 19", "nineteen");
+  m_smallNumbers << i18nc("@item the number 0", "Zero") << i18nc("@item the number 1", "One") << i18nc("@item the number 2", "Two") << i18nc("@item the number 3", "Three") << i18nc("@item the number 4", "Four") << i18nc("@item the number 5", "Five") << i18nc("@item the number 6", "Six") << i18nc("@item the number 7", "Seven") << i18nc("@item the number 8", "Eight") << i18nc("@item the number 9", "Nine") << i18nc("@item the number 10", "Ten") << i18nc("@item the number 11", "Eleven") << i18nc("@item the number 12", "Twelve") << i18nc("@item the number 13", "Thirteen") << i18nc("@item the number 14", "Fourteen") << i18nc("@item the number 15", "Fifteen") << i18nc("@item the number 16", "Sixteen") << i18nc("@item the number 17", "Seventeen") << i18nc("@item the number 18", "Eighteen") << i18nc("@item the number 19", "Nineteen");
 
   // Tens number names from twenty upwards
-  m_tens << "" << "" << i18nc("@item the number 20", "twenty") << i18nc("@item the number 30", "thirty") << i18nc("@item the number 40", "forty") << i18nc("@item the number 50", "fifty") << i18nc("@item the number 60", "sixty") << i18nc("@item the number 70", "seventy") << i18nc("@item the number 80", "eighty") << i18nc("@item the number 90", "ninety");
+  m_tens << "" << "" << i18nc("@item the number 20", "Twenty") << i18nc("@item the number 30", "Thirty") << i18nc("@item the number 40", "Forty") << i18nc("@item the number 50", "Fifty") << i18nc("@item the number 60", "Sixty") << i18nc("@item the number 70", "Seventy") << i18nc("@item the number 80", "Eighty") << i18nc("@item the number 90", "Ninety");
 
   // Scale number names for use during recombination
-  m_scaleNumbers << "" << i18nc("@item the number 1000", "thousand") << i18nc("@item the number 1,000,000", "million") << i18nc("@item the number 1,000,000,000", "billion");
+  m_scaleNumbers << "" << i18nc("@item the number 1000", "Thousand") << i18nc("@item the number 1,000,000", "Million") << i18nc("@item the number 1,000,000,000", "Billion");
 }
 
 // Converts a three-digit group into English words
@@ -47,7 +47,7 @@ QString MyMoneyMoneyToWordsConverter::convertTreeDigitGroup(int threeDigitNumber
 
   // Hundreds rules
   if (hundreds != 0) {
-    groupText += m_smallNumbers[hundreds] + i18nc("@item This comes after the hundred value digit", " hundred");
+    groupText += m_smallNumbers[hundreds] + i18nc("@item This comes after the hundred value digit", " Hundred");
 
     if (tensUnits != 0)
       groupText += i18nc("@item This comes after the hunder text if the tens unit is different from 0", " and ");
@@ -120,5 +120,6 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money, signed
     return i18nc("@label The first argument is the amount in words, the second is the fractional part and the third is the denominator of the fractional part",
                  "%1 and %2/%3", combined, fraction, denom);
   else
-    return combined;
+    return i18nc("@label The first argument is the amount in words, the second is the fractional part and the third is the denominator of the fractional part",
+                 "%1 and %2/%3", combined, "No", denom);
 }
