@@ -227,6 +227,8 @@ public:
     q->connect(ui->m_mergeButton,   &QAbstractButton::clicked, q, &KPayeesView::slotMergePayee);
 
     q->connect(ui->addressEdit,   &QTextEdit::textChanged, q, &KPayeesView::slotPayeeDataChanged);
+    q->connect(ui->payeecityEdit,  &QLineEdit::textChanged, q, &KPayeesView::slotPayeeDataChanged);
+    q->connect(ui->payeestateEdit,  &QLineEdit::textChanged, q, &KPayeesView::slotPayeeDataChanged);
     q->connect(ui->postcodeEdit,  &QLineEdit::textChanged, q, &KPayeesView::slotPayeeDataChanged);
     q->connect(ui->telephoneEdit, &QLineEdit::textChanged, q, &KPayeesView::slotPayeeDataChanged);
     q->connect(ui->emailEdit,     &QLineEdit::textChanged, q, &KPayeesView::slotPayeeDataChanged);
@@ -358,6 +360,8 @@ public:
   void clearItemData()
   {
     ui->addressEdit->setText(QString());
+    ui->payeecityEdit->setText(QString());
+    ui->payeestateEdit->setText(QString());
     ui->postcodeEdit->setText(QString());
     ui->telephoneEdit->setText(QString());
     ui->emailEdit->setText(QString());

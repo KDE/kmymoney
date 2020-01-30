@@ -164,7 +164,7 @@
         <property name="spacing">
          <number>4</number>
         </property>
-        <item row="3" column="0">
+        <item row="5" column="0">
          <widget class="QLabel" name="TextLabel7">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
@@ -187,6 +187,50 @@
          </widget>
         </item>
         <item row="1" column="0">
+         <widget class="QLabel" name="TextLabel5_1">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>90</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>City:</string>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="TextLabel5_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>90</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>State:</string>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
          <widget class="QLabel" name="TextLabel5">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
@@ -208,7 +252,7 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
+        <item row="4" column="0">
          <widget class="QLabel" name="TextLabel6">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
@@ -230,7 +274,7 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
+        <item row="6" column="0">
          <widget class="QLabel" name="TextLabel4_2">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
@@ -255,7 +299,7 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
+        <item row="5" column="1">
          <widget class="KLineEdit" name="emailEdit"/>
         </item>
         <item row="0" column="0">
@@ -283,7 +327,7 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="2">
+        <item row="5" column="2">
                      <widget class="QPushButton" name="m_sendMail">
              <property name="toolTip">
               <string>Creates new e-mail to your payee.</string>
@@ -296,10 +340,16 @@
              </property>
             </widget>
         </item>
-        <item row="2" column="1" colspan="2">
+        <item row="4" column="1" colspan="2">
          <widget class="KLineEdit" name="telephoneEdit"/>
         </item>
         <item row="1" column="1" colspan="2">
+         <widget class="KLineEdit" name="payeecityEdit"/>
+        </item>
+        <item row="2" column="1" colspan="2">
+         <widget class="KLineEdit" name="payeestateEdit"/>
+        </item>
+        <item row="3" column="1" colspan="2">
          <widget class="KLineEdit" name="postcodeEdit"/>
         </item>
         <item row="0" column="1" colspan="2">
@@ -312,7 +362,7 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="1" colspan="2">
+        <item row="6" column="1" colspan="2">
          <widget class="KTextEdit" name="notesEdit">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -576,6 +626,8 @@
   <tabstop>m_mergeButton</tabstop>
   <tabstop>m_filterBox</tabstop>
   <tabstop>addressEdit</tabstop>
+  <tabstop>payeecityEdit</tabstop>
+  <tabstop>payeestateEdit</tabstop>
   <tabstop>postcodeEdit</tabstop>
   <tabstop>telephoneEdit</tabstop>
   <tabstop>emailEdit</tabstop>
