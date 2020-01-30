@@ -31,6 +31,8 @@ struct ContactData {
   QString email;
   QString phoneNumber;
   QString street;
+  QString city;
+  QString state;
   QString locality;
   QString country;
   QString region;
