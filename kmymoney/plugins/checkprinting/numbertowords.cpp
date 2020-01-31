@@ -121,5 +121,5 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money, signed
                  "%1 and %2/%3", combined, fraction, denom);
   else
     return i18nc("@label The first argument is the amount in words, the second is the fractional part and the third is the denominator of the fractional part",
-                 "%1 and %2/%3", combined, "No", denom);
+                 "%1 and %2/%3", combined, i18nc("@label The word to be printed for no fractional part as in No/00", "No"), denom);
 }
