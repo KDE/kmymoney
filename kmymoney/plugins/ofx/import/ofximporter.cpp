@@ -299,6 +299,14 @@ bool OFXImporter::import(const QString& filename)
   }
 #endif
 
+#ifdef Q_OS_MACOS
+  // libofx needs to know where to pick up the DTD
+  // files when running on MacOS
+  QByteArray dir("/Applications/kmymoney.app/Contents/Resources/libofx/dtd/");
+  qDebug() << "Set DTD dir to" << dir;
+  libofx_set_dtd_dir(ctx, dir.data());
+#endif
+
   libofx_proc_file(ctx, filename_deep, AUTODETECT);
   qDebug("process data done");
   libofx_free_context(ctx);
