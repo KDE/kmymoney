@@ -290,6 +290,10 @@ void KPayeesView::slotSelectPayee()
 
     d->ui->addressEdit->setEnabled(true);
     d->ui->addressEdit->setText(d->m_payee.address());
+    d->ui->payeecityEdit->setEnabled(true);
+    d->ui->payeecityEdit->setText(d->m_payee.city());
+    d->ui->payeestateEdit->setEnabled(true);
+    d->ui->payeestateEdit->setText(d->m_payee.state());
     d->ui->postcodeEdit->setEnabled(true);
     d->ui->postcodeEdit->setText(d->m_payee.postcode());
     d->ui->telephoneEdit->setEnabled(true);
@@ -349,6 +353,10 @@ void KPayeesView::slotPayeeDataChanged()
            || (!d->ui->emailEdit->text().isEmpty() && d->m_payee.email() != d->ui->emailEdit->text()));
     rc |= ((d->m_payee.address().isEmpty() != d->ui->addressEdit->toPlainText().isEmpty())
            || (!d->ui->addressEdit->toPlainText().isEmpty() && d->m_payee.address() != d->ui->addressEdit->toPlainText()));
+    rc |= ((d->m_payee.city().isEmpty() != d->ui->payeecityEdit->text().isEmpty())
+           || (!d->ui->payeecityEdit->text().isEmpty() && d->m_payee.city() != d->ui->payeecityEdit->text()));
+    rc |= ((d->m_payee.state().isEmpty() != d->ui->payeestateEdit->text().isEmpty())
+           || (!d->ui->payeestateEdit->text().isEmpty() && d->m_payee.state() != d->ui->payeestateEdit->text()));
     rc |= ((d->m_payee.postcode().isEmpty() != d->ui->postcodeEdit->text().isEmpty())
            || (!d->ui->postcodeEdit->text().isEmpty() && d->m_payee.postcode() != d->ui->postcodeEdit->text()));
     rc |= ((d->m_payee.telephone().isEmpty() != d->ui->telephoneEdit->text().isEmpty())
@@ -411,6 +419,8 @@ void KPayeesView::slotUpdatePayee()
     try {
       d->m_payee.setName(d->m_newName);
       d->m_payee.setAddress(d->ui->addressEdit->toPlainText());
+      d->m_payee.setCity(d->ui->payeecityEdit->text());
+      d->m_payee.setState(d->ui->payeestateEdit->text());
       d->m_payee.setPostcode(d->ui->postcodeEdit->text());
       d->m_payee.setTelephone(d->ui->telephoneEdit->text());
       d->m_payee.setEmail(d->ui->emailEdit->text());
@@ -451,6 +461,8 @@ void KPayeesView::slotSyncAddressBook()
     if (auto item = dynamic_cast<KPayeeListItem*>(d->ui->m_payeesList->currentItem())) { // update ui if something is selected
       d->m_payee = item->payee();
       d->ui->addressEdit->setText(d->m_payee.address());
+      d->ui->payeecityEdit->setText(d->m_payee.city());
+      d->ui->payeestateEdit->setText(d->m_payee.state());
       d->ui->postcodeEdit->setText(d->m_payee.postcode());
       d->ui->telephoneEdit->setText(d->m_payee.telephone());
     }
@@ -475,8 +487,8 @@ void KPayeesView::slotContactFetched(const ContactData &identity)
       txt.append(identity.street + '\n');
     if (!identity.locality.isEmpty()) {
       txt.append(identity.locality);
-      if (!identity.postalCode.isEmpty())
-        txt.append(' ' + identity.postalCode + '\n');
+    if (!identity.postalCode.isEmpty())
+      txt.append(' ' + identity.postalCode + '\n');
       else
         txt.append('\n');
     }
@@ -485,6 +497,12 @@ void KPayeesView::slotContactFetched(const ContactData &identity)
 
     if (!txt.isEmpty() && d->m_payee.address().compare(txt) != 0)
       d->m_payee.setAddress(txt);
+
+    if (!identity.city.isEmpty() && d->m_payee.city().compare(identity.city) != 0)
+      d->m_payee.setCity(identity.city);
+
+    if (!identity.state.isEmpty() && d->m_payee.state().compare(identity.state) != 0)
+      d->m_payee.setState(identity.state);
 
     if (!identity.postalCode.isEmpty() && d->m_payee.postcode().compare(identity.postalCode) != 0)
       d->m_payee.setPostcode(identity.postalCode);

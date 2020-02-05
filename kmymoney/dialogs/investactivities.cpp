@@ -934,13 +934,14 @@ eMyMoney::Split::InvestmentTransactionType IntInc::type() const
 
 void IntInc::showWidgets() const
 {
-  static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "total" << "interest-account" << "fee-account";
+  static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "total" << "interest-account" << "fee-amount" << "fee-account";
   setWidgetVisibility(visibleWidgetIds, true);
-  static const QStringList hiddenWidgetIds = QStringList() << "shares" << "price" << "fee-amount";
+  static const QStringList hiddenWidgetIds = QStringList() << "shares" << "price";
   setWidgetVisibility(hiddenWidgetIds, false);
 
   setLabelText("interest-amount-label", i18n("Interest"));
   setLabelText("interest-label", i18n("Interest"));
+  setLabelText("fee-amount-label", i18n("Fees"));
   setLabelText("fee-label", i18n("Fees"));
   setLabelText("asset-label", i18n("Account"));
   setLabelText("total-label", i18nc("Total value", "Total"));

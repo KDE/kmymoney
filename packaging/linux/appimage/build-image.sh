@@ -53,6 +53,7 @@ cp -r -v $DEPS_INSTALL_PREFIX/share/mime $APPDIR/usr/share
 # cp -r -v $DEPS_INSTALL_PREFIX/translations $APPDIR/usr/
 cp -r -v $DEPS_INSTALL_PREFIX/openssl/lib/*  $APPDIR/usr/lib
 cp -r -v $DEPS_INSTALL_PREFIX/plugins/* $APPDIR/usr/plugins
+cp -r -v $DEPS_INSTALL_PREFIX/share/libofx $APPDIR/usr/share/libofx
 
 # @todo we still need the following program from /bin or /usr/bin:
 #  true, mount, umount (backup)

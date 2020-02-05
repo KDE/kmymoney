@@ -384,9 +384,13 @@ public:
   bool m_hideZeroBalanceAccounts;
 };
 
+#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
+#define QSortFilterProxyModel KRecursiveFilterProxyModel
+#endif
 EquitiesFilterProxyModel::EquitiesFilterProxyModel(QObject *parent, EquitiesModel *model, const QList<EquitiesModel::Column> &columns)
-  : KRecursiveFilterProxyModel(parent), d(new Private)
+  : QSortFilterProxyModel(parent), d(new Private)
 {
+  setRecursiveFilteringEnabled(true);
   setDynamicSortFilter(true);
   setFilterKeyColumn(-1);
   setSortLocaleAware(true);
@@ -395,6 +399,7 @@ EquitiesFilterProxyModel::EquitiesFilterProxyModel(QObject *parent, EquitiesMode
   d->m_mdlColumns = model->getColumns();
   d->m_visColumns.append(columns);
 }
+#undef QSortFilterProxyModel
 
 EquitiesFilterProxyModel::~EquitiesFilterProxyModel()
 {
