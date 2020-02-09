@@ -131,9 +131,9 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
   //
   if (d->m_initialState.reportType() == eMyMoney::Report::ReportType::PivotTable) {
     // we will use date range together with data range
-    d->m_tabFilters = new KTransactionFilter(this, (report.rowType() == eMyMoney::Report::RowType::Account), false);
+    d->m_tabFilters = new KTransactionFilter(this, (report.rowType() == eMyMoney::Report::RowType::Account), false, false);
   } else {
-    d->m_tabFilters = new KTransactionFilter(this, (report.rowType() == eMyMoney::Report::RowType::Account));
+    d->m_tabFilters = new KTransactionFilter(this, (report.rowType() == eMyMoney::Report::RowType::Account), report.isInvestmentsOnly());
     d->m_dateRange = d->m_tabFilters->dateRange();
   }
 

@@ -38,7 +38,6 @@
 
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
-#include "kmymoneysettings.h"
 #include "icons/icons.h"
 #include "mymoneyenums.h"
 #include "dialogenums.h"
@@ -219,11 +218,12 @@ class AccountSetPrivate
   Q_DISABLE_COPY(AccountSetPrivate)
 
 public:
-  AccountSetPrivate() :
-    m_count(0),
-    m_file(MyMoneyFile::instance()),
-    m_favorites(0),
-    m_hideClosedAccounts(true)
+  AccountSetPrivate()
+    : m_count(0)
+    , m_file(MyMoneyFile::instance())
+    , m_favorites(0)
+    , m_hideClosedAccounts(true)
+    , m_showInvestments(false)
   {
   }
 
@@ -232,6 +232,7 @@ public:
   QList<eMyMoney::Account::Type> m_typeList;
   QTreeWidgetItem*         m_favorites;
   bool                     m_hideClosedAccounts;
+  bool                     m_showInvestments;
 };
 
 AccountSet::AccountSet() :
@@ -243,6 +244,12 @@ AccountSet::~AccountSet()
 {
   Q_D(AccountSet);
   delete d;
+}
+
+void AccountSet::setShowInvestments(bool show)
+{
+  Q_D(AccountSet);
+  d->m_showInvestments = show;
 }
 
 void AccountSet::addAccountGroup(Account::Type group)
@@ -527,7 +534,7 @@ int AccountSet::loadSubAccounts(KMyMoneyAccountSelector* selector, QTreeWidgetIt
   for (it_l = list.constBegin(); it_l != list.constEnd(); ++it_l) {
     const MyMoneyAccount& acc = d->m_file->account(*it_l);
     // don't include stock accounts if not in expert mode
-    if (acc.isInvest() && !KMyMoneySettings::expertMode())
+    if (acc.isInvest() && !d->m_showInvestments)
       continue;
 
     //this will include an account if it matches the account type and

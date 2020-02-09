@@ -41,12 +41,12 @@
 #include "kmymoneysettings.h"
 #include "daterangedlg.h"
 
-KTransactionFilter::KTransactionFilter(QWidget *parent, bool withEquityAccounts, bool withDataTab) :
+KTransactionFilter::KTransactionFilter(QWidget *parent, bool withEquityAccounts, bool withInvestments, bool withDataTab) :
   QWidget(parent),
   d_ptr(new KTransactionFilterPrivate(this))
 {
   Q_D(KTransactionFilter);
-  d->init(withEquityAccounts, withDataTab);
+  d->init(withEquityAccounts, withInvestments, withDataTab);
 }
 
 KTransactionFilter::~KTransactionFilter()

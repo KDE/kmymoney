@@ -177,6 +177,7 @@ public:
 
   void setHideClosedAccounts(bool _bool);
   bool isHidingClosedAccounts() const;
+  void setShowInvestments(bool show);
 
 protected:
   int loadSubAccounts(KMyMoneyAccountSelector* selector, QTreeWidgetItem* parent, const QString& key, const QStringList& list);
