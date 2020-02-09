@@ -279,6 +279,13 @@ bool SplitModel::setData(const QModelIndex& idx, const QVariant& value, int role
   const auto startIdx = idx.model()->index(idx.row(), 0);
   const auto endIdx = idx.model()->index(idx.row(), idx.model()->columnCount()-1);
   MyMoneySplit& split = static_cast<TreeItem<MyMoneySplit>*>(idx.internalPointer())->dataRef();
+
+  // in case we modify the data of a new split, we need to setup an id
+  // this will be updated once we add the split to the transaction
+  if (split.id().isEmpty()) {
+    split = MyMoneySplit(newSplitId(), split);
+  }
+
   switch(role) {
     case Qt::DisplayRole:
     case Qt::EditRole:

@@ -431,18 +431,6 @@ void Buy::showWidgets() const
   };
 
   setupWidgets(activityWidgets);
-
-#if 0
-  setLabelText("interest-amount-label", i18n("Interest"));
-  setLabelText("interest-label", i18n("Interest"));
-  setLabelText("fee-amount-label", i18n("Fees"));
-  setLabelText("fee-label", i18n("Fees"));
-  setLabelText("asset-label", i18n("Account"));
-  setLabelText("shares-label", i18n("Shares"));
-  if (d->haveWidget<QLabel>("price-label"))
-    setLabelText("price-label", priceLabel());
-  setLabelText("total-label", i18nc("Total value", "Total"));
-#endif
 }
 
 bool Buy::isComplete(QString& reason) const
@@ -547,12 +535,6 @@ void Sell::showWidgets() const
   };
 
   setupWidgets(activityWidgets);
-
-  /// @todo port to new model code
-#if 0
-  if (auto shareEdit = d->haveWidget<AmountEdit>("sharesAmountEdit"))
-    shareEdit->setPrecision(MyMoneyMoney::denomToPrec(d->m_parent->security().smallestAccountFraction()));
-#endif
 }
 
 bool Sell::isComplete(QString& reason) const
@@ -569,14 +551,11 @@ bool Sell::isComplete(QString& reason) const
   // account, when the proceeds equal the fees. This will handle sales
   // made solely to cover annual account fees, where there is no money
   // transferred.
-  /// @todo port to new model code
-#if 0
   if (rc) {
     if (!d->m_parent->totalAmount().isZero()) {
       rc &= haveAssetAccount();
     }
   }
-#endif
   return rc;
 }
 

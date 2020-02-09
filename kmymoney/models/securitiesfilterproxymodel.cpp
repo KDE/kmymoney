@@ -294,30 +294,18 @@ class SecuritiesFilterProxyModel::Private
 {
 public:
   Private()
-  : m_mdlColumns({
-      SecuritiesModel::Security,
-      SecuritiesModel::Symbol,
-      SecuritiesModel::Type,
-      SecuritiesModel::Market,
-      SecuritiesModel::Currency,
-      SecuritiesModel::Fraction
-      })
-    , m_file(MyMoneyFile::instance())
   {
   }
 
   ~Private() {}
 
-  QList<SecuritiesModel::Column> m_mdlColumns;
-  QList<SecuritiesModel::Column> m_visColumns;
-
-  MyMoneyFile *m_file;
 };
 
 #if QT_VERSION < QT_VERSION_CHECK(5,10,0)
 #define QSortFilterProxyModel KRecursiveFilterProxyModel
 #endif
-SecuritiesFilterProxyModel::SecuritiesFilterProxyModel(QObject *parent, SecuritiesModel *model, const QList<SecuritiesModel::Column> &columns)
+
+SecuritiesFilterProxyModel::SecuritiesFilterProxyModel(QObject *parent, SecuritiesModel *model)
   : QSortFilterProxyModel(parent), d(new Private)
 {
   setRecursiveFilteringEnabled(true);
@@ -326,8 +314,8 @@ SecuritiesFilterProxyModel::SecuritiesFilterProxyModel(QObject *parent, Securiti
   setSortLocaleAware(true);
   setFilterCaseSensitivity(Qt::CaseInsensitive);
   setSourceModel(model);
-  d->m_visColumns.append(columns);
 }
+
 #undef QSortFilterProxyModel
 
 SecuritiesFilterProxyModel::~SecuritiesFilterProxyModel()
@@ -335,61 +323,8 @@ SecuritiesFilterProxyModel::~SecuritiesFilterProxyModel()
   delete d;
 }
 
-bool SecuritiesFilterProxyModel::filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const
-{
-  Q_UNUSED(source_parent)
-  if (d->m_visColumns.isEmpty() || d->m_visColumns.contains(d->m_mdlColumns.at(source_column)))
-      return true;
-  return false;
-}
-
 bool SecuritiesFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
 {
   const QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
   return !sourceModel()->data(idx, eMyMoney::Model::Roles::IdRole).toString().isEmpty();
-}
-
-QList<SecuritiesModel::Column> &SecuritiesFilterProxyModel::getVisibleColumns()
-{
-  return d->m_visColumns;
-}
-
-void SecuritiesFilterProxyModel::slotColumnsMenu(const QPoint)
-{
-  // construct all hideable columns list
-  const QList<SecuritiesModel::Column> idColumns {
-    SecuritiesModel::Symbol, SecuritiesModel::Type,
-    SecuritiesModel::Market, SecuritiesModel::Currency,
-    SecuritiesModel::Fraction
-  };
-
-  // create menu
-  QMenu menu(i18n("Displayed columns"));
-  QList<QAction *> actions;
-  foreach (const auto idColumn, idColumns) {
-    auto a = new QAction(nullptr);
-    a->setObjectName(QString::number(idColumn));
-    a->setText(sourceModel()->headerData(idColumn, Qt::Horizontal).toString());
-    a->setCheckable(true);
-    a->setChecked(d->m_visColumns.contains(idColumn));
-    actions.append(a);
-  }
-  menu.addActions(actions);
-
-  // execute menu and get result
-  const auto retAction = menu.exec(QCursor::pos());
-  if (retAction) {
-    const auto idColumn = static_cast<SecuritiesModel::Column>(retAction->objectName().toInt());
-    const auto isChecked = retAction->isChecked();
-    const auto contains = d->m_visColumns.contains(idColumn);
-    if (isChecked && !contains) {           // column has just been enabled
-      d->m_visColumns.append(idColumn);     // change filtering variable
-      emit columnToggled(idColumn, true);   // emit signal for method to add column to model
-      invalidate();                         // refresh model to reflect recent changes
-    } else if (!isChecked && contains) {    // column has just been disabled
-      d->m_visColumns.removeOne(idColumn);
-      emit columnToggled(idColumn, false);
-      invalidate();
-    }
-  }
 }

@@ -239,7 +239,7 @@
     </widget>
    </item>
    <item row="1" column="1">
-    <widget class="KMyMoneyAccountCombo" name="securityCombo">
+    <widget class="QComboBox" name="securityCombo">
      <property name="editable">
       <bool>true</bool>
      </property>
@@ -401,8 +401,8 @@
   <tabstop>dateEdit</tabstop>
   <tabstop>securityCombo</tabstop>
   <tabstop>sharesAmountEdit</tabstop>
-  <tabstop>priceAmountEdit</tabstop>
   <tabstop>accountCombo</tabstop>
+  <tabstop>priceAmountEdit</tabstop>
   <tabstop>feesCombo</tabstop>
   <tabstop>feesSplitEditorButton</tabstop>
   <tabstop>feesAmountEdit</tabstop>
@@ -410,6 +410,7 @@
   <tabstop>interestSplitEditorButton</tabstop>
   <tabstop>interestAmountEdit</tabstop>
   <tabstop>memoEdit</tabstop>
+  <tabstop>totalAmountEdit</tabstop>
   <tabstop>statusCombo</tabstop>
   <tabstop>enterButton</tabstop>
   <tabstop>cancelButton</tabstop>

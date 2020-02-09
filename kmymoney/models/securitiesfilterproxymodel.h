@@ -25,10 +25,6 @@
 
 #include <QStandardItemModel>
 #include <QSortFilterProxyModel>
-#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
-#include <KItemModels/KRecursiveFilterProxyModel>
-#define QSortFilterProxyModel KRecursiveFilterProxyModel
-#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -103,13 +99,6 @@ protected:
 private:
   class Private;
   Private* const d;
-
-#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
-  // provide the interface for backward compatbility
-  void setRecursiveFilteringEnabled(bool enable) { Q_UNUSED(enable) }
-#endif
-
 };
 
-#undef QSortFilterProxyModel
 #endif // SECURITIESFILTERPROXYMODEL_H

@@ -36,6 +36,13 @@ class QAbstractItemModel;
 class MyMoneyAccount;
 class MyMoneySecurity;
 
+/**
+ * This dialog allows the user to modify the splits of a transaction.
+ * The splits are passed in form of a SplitModel via setModel(). The
+ * total amount of the transaction is passed as @a mainAmount. If
+ * @a mainAmount equals to MyMoneyMoney::autoCalc then the total
+ * will automatically be adjusted.
+ */
 class SplitDialog : public QDialog
 {
   Q_OBJECT

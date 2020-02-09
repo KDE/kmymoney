@@ -172,7 +172,7 @@ void SchedulesJournalModel::doLoad()
             // if the transaction is scheduled and overdue, it can't
             // certainly be posted in the past. So we take today's date
             // as the alternative
-            qDebug() << "Adjust" << s.name() << "from" << t.postDate() << "to" << s.adjustedDate(QDate::currentDate(), eMyMoney::Schedule::WeekendOption::MoveAfter) << s.weekendOptionToString(eMyMoney::Schedule::WeekendOption::MoveAfter);
+            qDebug() << "Adjust scheduled transaction" << s.name() << "from" << t.postDate() << "to" << s.adjustedDate(QDate::currentDate(), eMyMoney::Schedule::WeekendOption::MoveAfter) << s.weekendOptionToString(eMyMoney::Schedule::WeekendOption::MoveAfter);
             t.setPostDate(s.adjustedDate(QDate::currentDate(), eMyMoney::Schedule::WeekendOption::MoveAfter));
           } else {
             t.setPostDate(s.adjustedNextDueDate());

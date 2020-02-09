@@ -161,7 +161,10 @@ void SplitDialog::accept()
 {
   adjustSummary();
   bool accept = true;
-  if(d->transactionTotal != d->splitsTotal) {
+  if (d->transactionTotal.isAutoCalc()) {
+    d->transactionTotal = d->splitsTotal;
+
+  } else if(d->transactionTotal != d->splitsTotal) {
     QPointer<SplitAdjustDialog> dlg = new SplitAdjustDialog(this);
     dlg->setValues(d->ui->summaryView->item(AmountRow, ValueCol)->data(Qt::DisplayRole).toString(),
                   d->ui->summaryView->item(SumRow, ValueCol)->data(Qt::DisplayRole).toString(),
@@ -231,14 +234,23 @@ void SplitDialog::adjustSummary()
   d->ui->summaryView->item(SumRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
 
   if(d->transactionEditor) {
-    formattedValue = d->transactionTotal.formatMoney(d->account.fraction());
+    if (d->transactionTotal.isAutoCalc()) {
+      formattedValue = d->splitsTotal.formatMoney(d->account.fraction());
+    } else {
+      formattedValue = d->transactionTotal.formatMoney(d->account.fraction());
+    }
     d->ui->summaryView->item(AmountRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
+
     if((d->transactionTotal - d->splitsTotal).isNegative()) {
       d->ui->summaryView->item(DiffRow, HeaderCol)->setData(Qt::DisplayRole, i18nc("Split editor summary", "Assigned too much"));
     } else {
       d->ui->summaryView->item(DiffRow, HeaderCol)->setData(Qt::DisplayRole, i18nc("Split editor summary", "Unassigned"));
     }
-    formattedValue = (d->transactionTotal - d->splitsTotal).abs().formatMoney(d->account.fraction());
+    if (d->transactionTotal.isAutoCalc()) {
+      formattedValue = MyMoneyMoney().formatMoney(d->account.fraction());
+    } else {
+      formattedValue = (d->transactionTotal - d->splitsTotal).abs().formatMoney(d->account.fraction());
+    }
     d->ui->summaryView->item(DiffRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
   } else {
     d->ui->summaryView->item(SumRow, ValueCol)->setData(Qt::DisplayRole, QString());

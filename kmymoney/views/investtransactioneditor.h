@@ -59,6 +59,11 @@ public:
    */
   bool eventFilter(QObject* o, QEvent* e) override;
 
+  /**
+   * Returns the transaction amount
+   */
+  MyMoneyMoney totalAmount() const;
+
 protected:
   virtual void keyPressEvent(QKeyEvent* e) override;
 
@@ -67,9 +72,11 @@ protected Q_SLOTS:
   virtual void acceptEdit();
 
   virtual void editFeeSplits();
+  virtual void editInterestSplits();
 
   virtual void categoryChanged(const QString& accountId);
   virtual void postdateChanged(const QDate& date);
+  virtual void securityChanged(int index);
 
   void valueChanged();
 

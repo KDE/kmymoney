@@ -50,9 +50,8 @@
 #include "kmymoneyaccountcombo.h"
 #include "accountsmodel.h"
 #include "equitiesmodel.h"
-#include "securitiesfilterproxymodel.h"
+#include "securitiesmodel.h"
 #include "icons.h"
-// #include "modelenums.h"
 #include "mymoneyenums.h"
 #include "columnselector.h"
 
