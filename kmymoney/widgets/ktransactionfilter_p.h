@@ -75,7 +75,7 @@ public:
     delete ui;
   }
 
-  void init(bool withEquityAccounts, bool withDataTab)
+  void init(bool withEquityAccounts, bool withInvestments, bool withDataTab)
   {
     Q_Q(KTransactionFilter);
     ui->setupUi(q);
@@ -93,7 +93,7 @@ public:
     // 'cause we don't have a separate setupTextPage
     q->connect(ui->m_textEdit, &QLineEdit::textChanged, q, &KTransactionFilter::slotUpdateSelections);
 
-    setupAccountsPage(withEquityAccounts);
+    setupAccountsPage(withEquityAccounts, withInvestments);
     setupCategoriesPage();
     setupAmountPage();
     setupPayeesPage();
@@ -380,7 +380,7 @@ public:
     q->connect(ui->m_categoriesView, &KMyMoneyAccountSelector::stateChanged, q, &KTransactionFilter::slotUpdateSelections);
   }
 
-  void setupAccountsPage(bool withEquityAccounts)
+  void setupAccountsPage(bool withEquityAccounts, bool withInvestments)
   {
     Q_Q(KTransactionFilter);
     ui->m_accountsView->setSelectionMode(QTreeWidget::MultiSelection);
@@ -392,6 +392,7 @@ public:
 
     // set the accountset to show closed account if the settings say so
     accountSet.setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
+    accountSet.setShowInvestments(withInvestments);
     accountSet.load(ui->m_accountsView);
     q->connect(ui->m_accountsView, &KMyMoneyAccountSelector::stateChanged, q, &KTransactionFilter::slotUpdateSelections);
   }

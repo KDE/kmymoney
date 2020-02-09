@@ -53,7 +53,7 @@ public:
   /**
    @param withEquityAccounts set to false to hide equity accounts in account page
   */
-  explicit KTransactionFilter(QWidget *parent = nullptr, bool withEquityAccounts = false, bool withDataTab = true);
+  explicit KTransactionFilter(QWidget *parent = nullptr, bool withEquityAccounts = false, bool withInvestments = false, bool withDataTab = true);
   ~KTransactionFilter();
 
   MyMoneyTransactionFilter setupFilter();
