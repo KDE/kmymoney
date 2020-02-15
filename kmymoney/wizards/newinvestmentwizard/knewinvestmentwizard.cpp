@@ -43,7 +43,9 @@
 #include "mymoneyfile.h"
 #include "ktoolinvocation.h"
 #include "kmymoneycurrencyselector.h"
+#ifdef HAVE_ALK_FINANCEQUOTE
 #include <alkimia/alkfinancequoteprocess.h>
+#endif
 #include "kmymoneyutils.h"
 
 KNewInvestmentWizard::KNewInvestmentWizard(QWidget *parent) :
@@ -189,11 +191,14 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
     newSecurity.deletePair("kmm-security-id");
 
     if (!field("onlineSourceCombo").toString().isEmpty()) {
+#ifdef HAVE_ALK_FINANCEQUOTE
       if (field("useFinanceQuote").toBool()) {
         AlkFinanceQuoteProcess p;
         newSecurity.setValue("kmm-online-quote-system", "Finance::Quote");
         newSecurity.setValue("kmm-online-source", p.crypticName(field("onlineSourceCombo").toString()));
-      } else {
+      } else
+#endif
+      {
         newSecurity.setValue("kmm-online-source", field("onlineSourceCombo").toString());
       }
     }
