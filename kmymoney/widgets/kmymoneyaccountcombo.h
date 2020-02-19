@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2004-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -98,6 +98,7 @@ private:
   QScopedPointer<Private> const d;
 };
 
+class QAbstractButton;
 class KMyMoneyAccountComboSplitHelperPrivate;
 class KMyMoneyAccountComboSplitHelper : public QObject
 {
@@ -105,8 +106,11 @@ class KMyMoneyAccountComboSplitHelper : public QObject
   Q_DISABLE_COPY(KMyMoneyAccountComboSplitHelper)
 
 public:
-  explicit KMyMoneyAccountComboSplitHelper(KMyMoneyAccountCombo* accountCombo, QAbstractItemModel *model);
+  explicit KMyMoneyAccountComboSplitHelper(QComboBox* accountCombo, QAbstractButton* splitButton, QAbstractItemModel *model);
   ~KMyMoneyAccountComboSplitHelper();
+
+protected:
+  bool eventFilter(QObject *watched, QEvent *event);
 
 private Q_SLOTS:
   void splitCountChanged();

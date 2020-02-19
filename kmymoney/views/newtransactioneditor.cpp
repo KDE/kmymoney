@@ -383,7 +383,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 
     d->ui->setupUi(this);
 
-    const auto* splitHelper = new KMyMoneyAccountComboSplitHelper(d->ui->accountCombo, &d->splitModel);
+    const auto* splitHelper = new KMyMoneyAccountComboSplitHelper(d->ui->accountCombo, d->ui->splitEditorButton, &d->splitModel);
     connect(splitHelper, &KMyMoneyAccountComboSplitHelper::accountComboEnabled, d->ui->costCenterCombo, &QComboBox::setEnabled);
     connect(splitHelper, &KMyMoneyAccountComboSplitHelper::accountComboEnabled, d->ui->costCenterLabel, &QComboBox::setEnabled);
 

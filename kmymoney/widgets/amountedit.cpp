@@ -100,6 +100,7 @@ public:
     int height = q->sizeHint().height();
     int btnSize = q->sizeHint().height() - 5;
 
+    /// @todo change m_calculatorButton to use QLineEdit::addAction (see passwordtoggle.cpp for example)
     m_calculatorButton = new QToolButton(q);
     m_calculatorButton->setIcon(Icons::get(Icon::Calculator));
     m_calculatorButton->setCursor(Qt::ArrowCursor);

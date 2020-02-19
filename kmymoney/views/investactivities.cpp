@@ -1,5 +1,5 @@
 /*
- * Copyright 2007-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2007-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -101,8 +101,8 @@ void Invest::Activity::setupWidgets(const QStringList& activityWidgets) const
     "sharesLabel", "sharesAmountEdit",
     "accountLabel", "accountCombo",
     "priceLabel", "priceAmountEdit",
-    "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
-    "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
+    "feesLabel", "feesCombo", "feesSplitEditorButton", "feesAmountLabel", "feesAmountEdit",
+    "interestLabel", "interestCombo", "interestSplitEditorButton", "interestAmountLabel", "interestAmountEdit",
     "totalLabel", "totalAmountEdit",
   };
 
@@ -332,11 +332,6 @@ void Activity::setLabelText(const QString& idx, const QString& txt) const
   auto w = d->haveWidget<QLabel>(idx);
   if (w) {
     w->setText(txt);
-  } else {
-    if (KMyMoneySettings::transactionForm()) {
-      // labels are only used in the transaction form
-      qDebug() << "Unknown QLabel named" << idx;
-    }
   }
 }
 
@@ -383,14 +378,6 @@ void Activity::setWidgetVisibility(const QStringList& widgetIds, bool visible) c
   }
 }
 
-eDialogs::PriceMode Activity::priceMode() const
-{
-  Q_D(const Activity);
-  /// @todo port to new model code
-  // return d->m_parent->priceMode();
-  return eDialogs::PriceMode::Price;
-}
-
 QString Activity::priceLabelText() const
 {
   QString label;
@@ -403,6 +390,55 @@ QString Activity::priceLabelText() const
   }
   return label;
 }
+
+eDialogs::PriceMode Activity::priceMode() const
+{
+  Q_D(const Activity);
+  eDialogs::PriceMode mode = eDialogs::PriceMode::Price;
+  auto sec = d->haveWidget<QComboBox>("securityCombo");
+  // auto sec = dynamic_cast<KMyMoneySecurity*>(m_editWidgets["security"]);
+
+  QString accId;
+  if (sec && !sec->currentText().isEmpty()) {
+    const auto idx = sec->model()->index(sec->currentIndex(), 0);
+    accId = idx.data(eMyMoney::Model::IdRole).toString();
+#if 0
+    if (accId.isEmpty())
+      accId = d->m_account.id();
+#endif
+  }
+  while (!accId.isEmpty() && mode == eDialogs::PriceMode::Price) {
+    auto acc = MyMoneyFile::instance()->account(accId);
+    if (acc.value("priceMode").isEmpty())
+      accId = acc.parentAccountId();
+    else
+      mode = static_cast<eDialogs::PriceMode>(acc.value("priceMode").toInt());
+  }
+
+  // if mode is still <Price> then use that
+  if (mode == eDialogs::PriceMode::Price)
+    mode = eDialogs::PriceMode::PricePerShare;
+  return mode;
+}
+
+void Activity::loadPriceWidget(const MyMoneySplit & split)
+{
+  Q_D(const Activity);
+  auto priceEdit = d->haveWidget<AmountEdit>("priceAmountEdit");
+
+  if (priceEdit) {
+    if (priceMode() == eDialogs::PriceMode::PricePerTransaction) {
+      priceEdit->setValue(split.value());
+    } else {
+      priceEdit->setValue(split.price());
+    }
+  }
+}
+
+
+
+
+
 
 Buy::Buy(InvestTransactionEditor* editor) :
   Activity(editor)
@@ -425,8 +461,8 @@ void Buy::showWidgets() const
     "sharesLabel", "sharesAmountEdit",
     "accountLabel", "accountCombo",
     "priceLabel", "priceAmountEdit",
-    "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
-    "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
+    "feesLabel", "feesCombo", "feesSplitEditorButton", "feesAmountLabel", "feesAmountEdit",
+    // "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
     "totalLabel", "totalAmountEdit",
   };
 
@@ -529,8 +565,8 @@ void Sell::showWidgets() const
     "sharesLabel", "sharesAmountEdit",
     "accountLabel", "accountCombo",
     "priceLabel", "priceAmountEdit",
-    "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
-    "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
+    "feesLabel", "feesCombo", "feesSplitEditorButton", "feesAmountLabel", "feesAmountEdit",
+    "interestLabel", "interestCombo", "interestSplitEditorButton", "interestAmountLabel", "interestAmountEdit",
     "totalLabel", "totalAmountEdit",
   };
 
@@ -644,8 +680,8 @@ void Div::showWidgets() const
 {
   static const QStringList activityWidgets = {
     "accountLabel", "accountCombo",
-    "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
-    "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
+    "feesLabel", "feesCombo", "feesSplitEditorButton", "feesAmountLabel", "feesAmountEdit",
+    "interestLabel", "interestCombo", "interestSplitEditorButton", "interestAmountLabel", "interestAmountEdit",
     "totalLabel", "totalAmountEdit",
   };
 
@@ -730,8 +766,8 @@ void Reinvest::showWidgets() const
     "sharesLabel", "sharesAmountEdit",
     "accountLabel", "accountCombo",
     "priceLabel", "priceAmountEdit",
-    "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
-    "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
+    "feesLabel", "feesCombo", "feesSplitEditorButton", "feesAmountLabel", "feesAmountEdit",
+    "interestLabel", "interestCombo", "interestSplitEditorButton", "interestAmountLabel", "interestAmountEdit",
     "totalLabel", "totalAmountEdit",
   };
 
@@ -1051,8 +1087,8 @@ void IntInc::showWidgets() const
 {
   static const QStringList activityWidgets = {
     "accountLabel", "accountCombo",
-    "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
-    "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
+    "feesLabel", "feesCombo", "feesSplitEditorButton", "feesAmountLabel", "feesAmountEdit",
+    "interestLabel", "interestCombo", "interestSplitEditorButton", "interestAmountLabel", "interestAmountEdit",
     "totalLabel", "totalAmountEdit",
   };
 

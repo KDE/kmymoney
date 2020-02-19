@@ -256,7 +256,11 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
           }
         } else {
           if (index.data(eMyMoney::Model::TransactionIsInvestmentRole).toBool()) {
-            d->m_editor = new InvestTransactionEditor(parent, accountId);
+            // in case of an investment transaction we need to use
+            // the parent account of the security account and pass
+            // it to the editor.
+            const auto idx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
+            d->m_editor = new InvestTransactionEditor(parent, idx.data(eMyMoney::Model::AccountParentIdRole).toString());
           } else {
             d->m_editor = new NewTransactionEditor(parent, accountId);
           }

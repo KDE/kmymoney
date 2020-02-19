@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2004-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -22,9 +22,11 @@
 // QT Includes
 
 #include <QList>
+#include <QEvent>
 #include <QKeyEvent>
 #include <QTreeView>
 #include <QLineEdit>
+#include <QAbstractButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -62,9 +64,10 @@ public:
 void KMyMoneyAccountCombo::Private::selectFirstMatchingItem()
 {
   if(m_popupView) {
-    bool isBlocked = m_popupView->blockSignals(true);
+    QSignalBlocker blocker(m_popupView);
     m_popupView->setCurrentIndex(QModelIndex());
-    for (auto i = 0; i < m_q->model()->rowCount(QModelIndex()); ++i) {
+    const auto rows = m_q->model()->rowCount();
+    for (auto i = 0; i < rows; ++i) {
       QModelIndex childIndex = m_q->model()->index(i, 0);
       if (m_q->model()->hasChildren(childIndex)) {
         // search the first leaf
@@ -79,7 +82,6 @@ void KMyMoneyAccountCombo::Private::selectFirstMatchingItem()
         break;
       }
     }
-    m_popupView->blockSignals(isBlocked);
   }
 }
 
@@ -109,6 +111,7 @@ void KMyMoneyAccountCombo::setEditable(bool isEditable)
   // don't do the standard behavior
   if(lineEdit()) {
     lineEdit()->setObjectName("AccountComboLineEdit");
+    lineEdit()->setClearButtonEnabled(true);
     connect(lineEdit(), &QLineEdit::textEdited, this, &KMyMoneyAccountCombo::makeCompletion);
   }
 }
@@ -166,6 +169,8 @@ bool KMyMoneyAccountCombo::eventFilter(QObject* o, QEvent* e)
           activated();
           hidePopup();
           break;
+        default:
+          break;
       }
 
     } else if(e->type() == QEvent::FocusOut) {
@@ -186,6 +191,11 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
     return;
   }
 
+  if (id == d->m_lastSelectedAccount) {
+    // nothing to do
+    return;
+  }
+
   // make sure, we have all items available for search
   if(isEditable()) {
     lineEdit()->clear();
@@ -198,10 +208,11 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
   // find which item has this id and set it as the current item
   // and we always skip over the favorite section
   int startRow = model()->index(0, 0).data(eMyMoney::Model::Roles::IdRole).toString() == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Favorite) ? 1 : 0;
-  QModelIndexList list = model()->match(model()->index(startRow, 0), eMyMoney::Model::Roles::IdRole,
-                                        QVariant(id),
-                                        1,
-                                        Qt::MatchFlags(Qt::MatchExactly | Qt::MatchWrap | Qt::MatchRecursive)); // CAUTION: Without Qt::MatchWrap no results for credit card, so nothing happens in ledger view
+  // Note: Without Qt::MatchWrap we might not get results for credit card
+  const auto list = model()->match(model()->index(startRow, 0), eMyMoney::Model::Roles::IdRole,
+                                   QVariant(id),
+                                   1,
+                                   Qt::MatchFlags(Qt::MatchExactly | Qt::MatchWrap | Qt::MatchRecursive));
 
   if (!list.isEmpty()) {
     // make sure the popup is closed from here on
@@ -209,11 +220,11 @@ void KMyMoneyAccountCombo::setSelected(const QString& id)
     d->m_lastSelectedAccount = id;
     const auto idx = list.front();
 
-    auto blocked = blockSignals(true);
+    QSignalBlocker blocker(this);
     setRootModelIndex(idx.parent());
     setCurrentIndex(idx.row());
     setRootModelIndex(QModelIndex());
-    blockSignals(blocked);
+    blocker.unblock();
 
     if(isEditable()) {
       lineEdit()->setText(idx.data(eMyMoney::Model::AccountFullNameRole).toString());
@@ -229,7 +240,7 @@ const QString& KMyMoneyAccountCombo::getSelected() const
 
 void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
 {
-  // CAUTION! Assumption is being made that Account column number is always 0
+  // CAUTION! Assumption is being made that AccountName column number is always 0
   if (AccountsModel::Column::AccountName != 0) {
     qFatal("AccountsModel::Column::AccountName must be 0 in modelenums.h");
   }
@@ -257,6 +268,18 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
   d->m_popupView->setAnimated(true);
 
   d->m_popupView->expandAll();
+  connect(d->m_popupView, &QTreeView::activated, this, &KMyMoneyAccountCombo::selectItem);
+
+  // for some unknown reason, the first selection with the mouse (not with the keyboard)
+  // after the qlineedit had been cleared using the clear button does not trigger the
+  // activated() signal of d->m_popupView. This is a workaround to catch this scenario
+  // and still get valid settings.
+  connect(this, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&]() {
+    const auto idx = d->m_popupView->currentIndex();
+    if (d->m_lastSelectedAccount.isEmpty() && idx.isValid()) {
+      selectItem(idx);
+    }
+  });
 
   if(isEditable()) {
     connect(lineEdit(), &QLineEdit::textEdited, this, &KMyMoneyAccountCombo::makeCompletion);
@@ -267,6 +290,9 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
 
 void KMyMoneyAccountCombo::selectItem(const QModelIndex& index)
 {
+  if (index.model() != model()) {
+    qDebug() << "KMyMoneyAccountCombo::selectItem called with wrong model";
+  }
   if(index.isValid() && (index.model()->flags(index) & Qt::ItemIsSelectable)) {
     // delay the call until the next time in the event loop
     QMetaObject::invokeMethod(this, "setSelected", Qt::QueuedConnection, Q_ARG(QString, index.data(eMyMoney::Model::Roles::IdRole).toString()));
@@ -277,58 +303,61 @@ void KMyMoneyAccountCombo::makeCompletion(const QString& txt)
 {
   if(!d->m_inMakeCompletion) {
     d->m_inMakeCompletion = true;
-    AccountNamesFilterProxyModel* filterModel = qobject_cast<AccountNamesFilterProxyModel*>(model());
+    if (txt.isEmpty()) {
+      d->m_lastSelectedAccount.clear();
+      d->m_popupView->selectionModel()->clearSelection();
+      d->m_popupView->setCurrentIndex(QModelIndex());
+      setRootModelIndex(QModelIndex());
+      setCurrentIndex(-1);
+    } else {
+      AccountNamesFilterProxyModel* filterModel = qobject_cast<AccountNamesFilterProxyModel*>(model());
 
-    if(filterModel) {
-      const auto completionStr = QStringLiteral(".*");
-      if (txt.contains(MyMoneyFile::AccountSeparator) == 0) {
+      if(filterModel) {
+        const auto completionStr = QStringLiteral(".*");
         // for some reason it helps to avoid internal errors if we
         // clear the filter before setting it to a new value
         filterModel->setFilterFixedString(QString());
-        const auto filterString = QString::fromLatin1("%1%2%3").arg(completionStr).arg(QRegExp::escape(txt)).arg(completionStr);
-        filterModel->setFilterRegExp(QRegExp(filterString, Qt::CaseInsensitive));
-      } else {
-        QStringList parts = txt.split(MyMoneyFile::AccountSeparator /*, QString::SkipEmptyParts */);
-        QString pattern;
-        QStringList::iterator it;
-        for (it = parts.begin(); it != parts.end(); ++it) {
-          if (pattern.length() > 1)
-            pattern += MyMoneyFile::AccountSeparator;
-          pattern += QRegExp::escape(QString(*it).trimmed()) + completionStr;
-        }
-        // for some reason it helps to avoid internal errors if we
-        // clear the filter before setting it to a new value
-        filterModel->setFilterFixedString(QString());
-        filterModel->setFilterRegExp(QRegExp(pattern, Qt::CaseInsensitive));
-        // if we don't have a match, we try it again, but this time
-        // we add a wildcard for the top level
-        if (filterModel->visibleItems() == 0) {
-          // for some reason it helps to avoid internal errors if we
-          // clear the filter before setting it to a new value
-          pattern = pattern.prepend(completionStr + MyMoneyFile::AccountSeparator);
-          filterModel->setFilterFixedString(QString());
+        if (txt.contains(MyMoneyFile::AccountSeparator) == 0) {
+          const auto filterString = QString::fromLatin1("%1%2%3").arg(completionStr).arg(QRegExp::escape(txt)).arg(completionStr);
+          filterModel->setFilterRegExp(QRegExp(filterString, Qt::CaseInsensitive));
+        } else {
+          QStringList parts = txt.split(MyMoneyFile::AccountSeparator /*, QString::SkipEmptyParts */);
+          QString pattern;
+          QStringList::iterator it;
+          for (it = parts.begin(); it != parts.end(); ++it) {
+            if (pattern.length() > 1)
+              pattern += MyMoneyFile::AccountSeparator;
+            pattern += QRegExp::escape(QString(*it).trimmed()) + completionStr;
+          }
           filterModel->setFilterRegExp(QRegExp(pattern, Qt::CaseInsensitive));
+          // if we don't have a match, we try it again, but this time
+          // we add a wildcard for the top level
+          if (filterModel->visibleItems() == 0) {
+            // for some reason it helps to avoid internal errors if we
+            // clear the filter before setting it to a new value
+            filterModel->setFilterFixedString(QString());
+            pattern = pattern.prepend(completionStr + MyMoneyFile::AccountSeparator);
+            filterModel->setFilterRegExp(QRegExp(pattern, Qt::CaseInsensitive));
+          }
         }
-      }
 
-      // if nothing is shown, we might as well close the popup
-      switch(filterModel->visibleItems()) {
-        case 0:
-          hidePopup();
-          break;
-        default:
-          setMaxVisibleItems(15);
-          expandAll();
-          showPopup();
-          break;
-      }
-      d->selectFirstMatchingItem();
+        // if nothing is shown, we might as well close the popup
+        switch(filterModel->visibleItems()) {
+          case 0:
+            hidePopup();
+            break;
+          default:
+            setMaxVisibleItems(15);
+            expandAll();
+            showPopup();
+            break;
+        }
+        d->selectFirstMatchingItem();
 
-      // keep current text in edit widget no matter what
-      bool blocked = lineEdit()->signalsBlocked();
-      lineEdit()->blockSignals(true);
-      lineEdit()->setText(txt);
-      lineEdit()->blockSignals(blocked);
+        // keep current text in edit widget no matter what
+        QSignalBlocker blocker(lineEdit());
+        lineEdit()->setText(txt);
+      }
     }
     d->m_inMakeCompletion = false;
   }
@@ -354,7 +383,6 @@ void KMyMoneyAccountCombo::hidePopup()
     if (d->m_popupView->isVisible()) {
       d->m_popupView->hide();
       activated();
-      // selectItem(d->m_popupView->currentIndex());
     }
     d->m_popupView->removeEventFilter(this);
   }
@@ -370,41 +398,63 @@ public:
   KMyMoneyAccountComboSplitHelperPrivate(KMyMoneyAccountComboSplitHelper* qq)
   : q_ptr(qq)
   , m_accountCombo(nullptr)
+  , m_splitButton(nullptr)
   , m_splitModel(nullptr)
   , m_norecursive(false)
   {
   }
 
   KMyMoneyAccountComboSplitHelper*  q_ptr;
-  KMyMoneyAccountCombo*             m_accountCombo;
+  QComboBox*                        m_accountCombo;
+  QAbstractButton*                  m_splitButton;
   QAbstractItemModel*               m_splitModel;
   bool                              m_norecursive;
 };
 
 
-KMyMoneyAccountComboSplitHelper::KMyMoneyAccountComboSplitHelper(KMyMoneyAccountCombo* accountCombo, QAbstractItemModel* model)
+KMyMoneyAccountComboSplitHelper::KMyMoneyAccountComboSplitHelper(QComboBox* accountCombo, QAbstractButton* splitButton, QAbstractItemModel* model)
   : QObject(accountCombo)
   , d_ptr(new KMyMoneyAccountComboSplitHelperPrivate(this))
 {
   Q_D(KMyMoneyAccountComboSplitHelper);
   d->m_accountCombo = accountCombo;
   d->m_splitModel = model;
+  d->m_splitButton = splitButton;
 
-  connect(model, &QAbstractItemModel::rowsInserted, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged, Qt::QueuedConnection);
+  connect(model, &QAbstractItemModel::rowsInserted, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged /*, Qt::QueuedConnection */);
   connect(model, &QAbstractItemModel::rowsRemoved, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged, Qt::QueuedConnection);
   connect(model, &QAbstractItemModel::modelReset, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged, Qt::QueuedConnection);
   connect(model, &QAbstractItemModel::destroyed, this, &KMyMoneyAccountComboSplitHelper::modelDestroyed);
 
+  accountCombo->installEventFilter(this);
+  splitCountChanged();
 }
 
 KMyMoneyAccountComboSplitHelper::~KMyMoneyAccountComboSplitHelper()
 {
 }
 
+bool KMyMoneyAccountComboSplitHelper::eventFilter(QObject* watched, QEvent* event)
+{
+  Q_D(KMyMoneyAccountComboSplitHelper);
+  if (watched == d->m_accountCombo) {
+    if (event->type() == QEvent::FocusIn) {
+      if (d->m_splitModel->rowCount() > 1) {
+        // force focus to split button and press it when
+        // the event loop gets control the next time
+        QMetaObject::invokeMethod(d->m_splitButton, "setFocus");
+        QMetaObject::invokeMethod(d->m_splitButton, "animateClick");
+        // prevent further processing of the event (eat it up)
+        return true;
+      }
+    }
+  }
+  return QObject::eventFilter(watched, event);
+}
+
 void KMyMoneyAccountComboSplitHelper::modelDestroyed()
 {
   Q_D(KMyMoneyAccountComboSplitHelper);
-  qDebug() << "Model destroyed for KMyMoneyAccountComboSplitHelper";
   d->m_splitModel = nullptr;
 }
 
@@ -416,22 +466,31 @@ void KMyMoneyAccountComboSplitHelper::splitCountChanged()
     return;
 
   d->m_norecursive = true;
-  bool blocked = false;
-  const auto index = d->m_splitModel->index(0, 0);
 
-  d->m_accountCombo->setEnabled(true);
+  QModelIndexList indexes;
+  QSignalBlocker blocker(d->m_accountCombo->lineEdit());
+  blocker.unblock();
   switch (d->m_splitModel->rowCount()) {
     case 0:
-      d->m_accountCombo->setSelected(QString());
+      d->m_accountCombo->setCurrentIndex(-1);
+      d->m_accountCombo->setCurrentText(QString());
       break;
     case 1:
-      d->m_accountCombo->setSelected(index.data(eMyMoney::Model::SplitAccountIdRole).toString());
+      indexes = d->m_accountCombo->model()->match(d->m_accountCombo->model()->index(0,0),
+                                                  eMyMoney::Model::IdRole,
+                                                  d->m_splitModel->index(0, 0).data(eMyMoney::Model::SplitAccountIdRole).toString(),
+                                                  1,
+                                                  Qt::MatchFixedString);
+      if (indexes.isEmpty()) {
+        d->m_accountCombo->setCurrentIndex(-1);
+        d->m_accountCombo->setCurrentText(QString());
+      } else {
+        d->m_accountCombo->setCurrentIndex(indexes.first().row());
+      }
       break;
     default:
-      blocked = d->m_accountCombo->lineEdit()->blockSignals(true);
+      blocker.reblock();
       d->m_accountCombo->lineEdit()->setText(i18n("Split transaction"));
-      d->m_accountCombo->setDisabled(true);
-      d->m_accountCombo->lineEdit()->blockSignals(blocked);
       break;
   }
   d->m_accountCombo->hidePopup();

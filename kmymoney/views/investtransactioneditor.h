@@ -1,5 +1,5 @@
 /*
- * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2019-2020  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -77,6 +77,11 @@ protected Q_SLOTS:
   virtual void categoryChanged(const QString& accountId);
   virtual void postdateChanged(const QDate& date);
   virtual void securityChanged(int index);
+  virtual void feesChanged(int index);
+  virtual void feesChanged(const QString& txt);
+  virtual void interestChanged(int index);
+  virtual void interestChanged(const QString& txt);
+
 
   void valueChanged();
 
