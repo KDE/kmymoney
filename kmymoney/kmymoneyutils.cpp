@@ -478,7 +478,7 @@ void KMyMoneyUtils::dissectInvestmentTransaction(const QModelIndex &investSplitI
     } else if (accountGroup == eMyMoney::Account::Type::Expense) {
       feeSplitModel->appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
     } else if (accountGroup == eMyMoney::Account::Type::Income) {
-        interestSplitModel->appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
+      interestSplitModel->appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
     } else {
       if (!assetAccountSplitIdx.isValid()) { // first asset Account should be our requested brokerage account
         assetAccountSplitIdx = splitIdx;
