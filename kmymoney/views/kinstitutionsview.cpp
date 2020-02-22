@@ -83,7 +83,7 @@ void KInstitutionsView::executeCustomAction(eView::Action action)
     case eView::Action::SetDefaultFocus:
       {
         Q_D(KInstitutionsView);
-        QMetaObject::invokeMethod(d->ui->m_accountTree, "setFocus");
+        QMetaObject::invokeMethod(d->ui->m_accountTree, "setFocus", Qt::QueuedConnection);
       }
       break;
 

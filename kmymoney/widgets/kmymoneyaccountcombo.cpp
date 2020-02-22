@@ -442,8 +442,8 @@ bool KMyMoneyAccountComboSplitHelper::eventFilter(QObject* watched, QEvent* even
       if (d->m_splitModel->rowCount() > 1) {
         // force focus to split button and press it when
         // the event loop gets control the next time
-        QMetaObject::invokeMethod(d->m_splitButton, "setFocus");
-        QMetaObject::invokeMethod(d->m_splitButton, "animateClick");
+        QMetaObject::invokeMethod(d->m_splitButton, "setFocus", Qt::QueuedConnection);
+        QMetaObject::invokeMethod(d->m_splitButton, "animateClick", Qt::QueuedConnection);
         // prevent further processing of the event (eat it up)
         return true;
       }

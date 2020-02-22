@@ -73,10 +73,10 @@ void KInvestmentView::setDefaultFocus()
 
   switch (tab) {
   case eView::Investment::Tab::Equities:
-    QMetaObject::invokeMethod(d->ui->m_equitiesTree, "setFocus");
+    QMetaObject::invokeMethod(d->ui->m_equitiesTree, "setFocus", Qt::QueuedConnection);
     break;
   case eView::Investment::Tab::Securities:
-    QMetaObject::invokeMethod(d->ui->m_securitiesTree, "setFocus");
+    QMetaObject::invokeMethod(d->ui->m_securitiesTree, "setFocus", Qt::QueuedConnection);
     break;
   }
 }

@@ -510,7 +510,7 @@ void KPayeesView::executeCustomAction(eView::Action action)
     case eView::Action::SetDefaultFocus:
       {
         Q_D(KPayeesView);
-        QMetaObject::invokeMethod(d->ui->m_searchWidget, "setFocus");
+        QMetaObject::invokeMethod(d->ui->m_searchWidget, "setFocus", Qt::QueuedConnection);
       }
       break;
 

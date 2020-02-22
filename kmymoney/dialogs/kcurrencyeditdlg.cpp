@@ -226,7 +226,7 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
   connect(d->ui->m_editCurrencyButton, &QAbstractButton::clicked, this, &KCurrencyEditDlg::slotEditCurrency);
   connect(d->ui->m_removeUnusedCurrencyButton, &QAbstractButton::clicked, this, &KCurrencyEditDlg::slotRemoveUnusedCurrency);
 
-  QMetaObject::invokeMethod(this, "finishCtor");
+  QMetaObject::invokeMethod(this, "finishCtor", Qt::QueuedConnection);
 }
 
 void KCurrencyEditDlg::finishCtor()

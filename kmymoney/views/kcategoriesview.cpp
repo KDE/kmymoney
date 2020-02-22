@@ -95,7 +95,7 @@ void KCategoriesView::executeCustomAction(eView::Action action)
       break;
 
     case eView::Action::SetDefaultFocus:
-      QMetaObject::invokeMethod(d->ui->m_accountTree, "setFocus");
+      QMetaObject::invokeMethod(d->ui->m_accountTree, "setFocus", Qt::QueuedConnection);
       break;
 
     default:

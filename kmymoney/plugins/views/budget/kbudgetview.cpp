@@ -76,7 +76,7 @@ void KBudgetView::executeCustomAction(eView::Action action)
     case eView::Action::SetDefaultFocus:
       {
         Q_D(KBudgetView);
-        QMetaObject::invokeMethod(d->ui->m_budgetList, "setFocus");
+        QMetaObject::invokeMethod(d->ui->m_budgetList, "setFocus", Qt::QueuedConnection);
       }
       break;
 
