@@ -39,7 +39,7 @@ struct SplitModel::Private
 {
   Private(SplitModel* qq)
   : q(qq)
-  , m_splitCount(-1)
+  , currentSplitCount(-1)
   , headerData(QHash<Column, QString> ({
     { Category, i18nc("Split header", "Category") },
     { Memo, i18nc("Split header", "Memo") },
@@ -77,9 +77,9 @@ struct SplitModel::Private
   void updateItemCount()
   {
     const auto count = splitCount();
-    if (count != m_splitCount) {
-      m_splitCount = count;
-      emit q->itemCountChanged(m_splitCount);
+    if (count != currentSplitCount) {
+            currentSplitCount = count;
+      emit q->itemCountChanged(currentSplitCount);
     }
   }
 
@@ -113,8 +113,8 @@ struct SplitModel::Private
   }
 
   SplitModel*   q;
-  int                       m_splitCount;
-  QHash<Column, QString>          headerData;
+  int                       currentSplitCount;
+  QHash<Column, QString>    headerData;
 };
 
 SplitModel::SplitModel(QObject* parent, QUndoStack* undoStack)
