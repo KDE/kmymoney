@@ -110,7 +110,7 @@
   <varlistentry>
     <term><menuchoice>
       <guimenu>File</guimenu>
-        <guimenuitem>Import</guimenuitem>
+        <guisubmenu>Import</guisubmenu>
         <guimenuitem>...</guimenuitem>
     </menuchoice></term>
     <listitem>

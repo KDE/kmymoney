@@ -108,9 +108,9 @@
 </para>
 
 <para>
-  The Account Number and the <acronym><ulink
-  url="http://en.wikipedia.org/wiki/International_Bank_Account_Number">IBAN
-  (International Bank Account Number)</ulink></acronym> are not currently used
+  The Account Number and the <ulink
+  url="https://en.wikipedia.org/wiki/International_Bank_Account_Number"><acronym>IBAN</acronym>
+  (International Bank Account Number)</ulink> are not currently used
   by &kmymoney;.  These fields may be left blank and filled in at a later time;
   they are only required for online banking.
 </para>
