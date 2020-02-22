@@ -69,6 +69,9 @@ public:
   inline T* haveVisibleWidget(const QString &aName) const
   {
     auto widget = m_parent->findChild<T*>(aName);
+    if (!widget) {
+      qDebug() << "Widget with name" << aName << "not found";
+    }
     if (widget && widget->isVisible())
       return widget;
     return nullptr;
@@ -146,12 +149,11 @@ bool Activity::isComplete(QString& reason) const
   Q_D(const Activity);
   auto rc = false;
   auto security = d->haveWidget<KMyMoneyAccountCombo>("security");
-  /// @todo port to new model code
-#if 0
-  if (security && !security->currentText().isEmpty()) {
-    rc = (security->selector()->contains(security->currentText()) || (isMultiSelection() && d->m_memoChanged));
+
+  if (security && !security->getSelected().isEmpty()) {
+    // rc = (security->selector()->contains(security->currentText()) || (isMultiSelection() && d->m_memoChanged));
+    rc = true;
   }
-#endif
   return rc;
 }
 
@@ -164,24 +166,24 @@ bool Activity::haveAssetAccount() const
     return false;
 
   if (!isMultiSelection())
-    rc = !cat->currentText().isEmpty();
-
-  /// @todo port to new model code
-#if 0
-  if (rc && !cat->currentText().isEmpty())
-    rc = cat->selector()->contains(cat->currentText());
-#endif
+    rc = !cat->getSelected().isEmpty();
 
   return rc;
 }
 
-bool Activity::haveCategoryAndAmount(const QString& category, const QString& amount, bool optional) const
+bool Activity::haveCategoryAndAmount(const QString& categoryWidget, const QString& amountWidget, bool optional) const
 {
   Q_D(const Activity);
-  auto cat = d->haveWidget<KMyMoneyAccountCombo>(category);
-
+  auto cat = d->haveVisibleWidget<KMyMoneyAccountCombo>(categoryWidget);
+  auto amount = d->haveVisibleWidget<AmountEdit>(amountWidget);
   auto rc = true;
 
+  if (cat && amount) {
+    if (cat->isEnabled()) {
+      rc = !cat->getSelected().isEmpty() || optional;
+    }
+    rc = !amount->value().isZero() || optional;
+  }
   /// @todo port to new model code
 #if 0
   if (cat && !cat->currentText().isEmpty()) {
@@ -326,6 +328,41 @@ MyMoneyMoney Activity::sumSplits(const MyMoneySplit& s0, const QList<MyMoneySpli
   return total;
 }
 
+MyMoneyMoney Activity::totalAmount() const
+{
+  Q_D(const Activity);
+  auto result = shareValue().abs();
+  qDebug() << "Start";
+  qDebug() << "result " << result.formatMoney(100);
+  const auto fees = d->haveVisibleWidget<AmountEdit>("feesAmountEdit");
+  const auto interest = d->haveVisibleWidget<AmountEdit>("interestAmountEdit");
+  if (interest) {
+    result += interest->value().abs();
+  }
+  qDebug() << "result " << result.formatMoney(100);
+  if (fees) {
+    result -= fees->value().abs();
+  }
+  qDebug() << "result " << result.formatMoney(100);
+  return result;
+}
+
+MyMoneyMoney Activity::shareValue() const
+{
+  Q_D(const Activity);
+  const auto shares = d->haveVisibleWidget<AmountEdit>("sharesAmountEdit");
+  const auto price = d->haveVisibleWidget<AmountEdit>("priceAmountEdit");
+  MyMoneyMoney result;
+  if (shares && price) {
+    if (priceMode() == eDialogs::PriceMode::PricePerShare) {
+      result = shares->value() * price->value();
+    } else {
+      result = price->value();
+    }
+  }
+  return result;
+}
+
 void Activity::setLabelText(const QString& idx, const QString& txt) const
 {
   Q_D(const Activity);
@@ -467,6 +504,17 @@ void Buy::showWidgets() const
   };
 
   setupWidgets(activityWidgets);
+}
+
+MyMoneyMoney Buy::totalAmount() const
+{
+  Q_D(const Activity);
+  auto result = shareValue().abs();
+  const auto fees = d->haveVisibleWidget<AmountEdit>("feesAmountEdit");
+  if (fees) {
+    result += fees->value().abs();
+  }
+  return result;
 }
 
 bool Buy::isComplete(QString& reason) const

@@ -79,6 +79,7 @@ public:
   QString& memoText();
 
   virtual void loadPriceWidget(const MyMoneySplit& split);
+  virtual MyMoneyMoney totalAmount() const;
 
 protected:
   explicit Activity(InvestTransactionEditor* editor);
@@ -97,6 +98,7 @@ protected:
   void setWidgetVisibility(const QStringList& widgetIds, bool visible) const;
   eDialogs::PriceMode priceMode() const;
   void setupWidgets(const QStringList& activityWidgets) const;
+  virtual MyMoneyMoney shareValue() const;
 
 protected:
   ActivityPrivate* d_ptr;
@@ -112,6 +114,7 @@ public:
   void showWidgets() const override;
   bool isComplete(QString& reason) const override;
   bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
+  virtual MyMoneyMoney totalAmount() const;
 };
 
 class Sell : public Activity

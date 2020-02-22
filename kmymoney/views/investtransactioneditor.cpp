@@ -544,15 +544,19 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     d->ui->sharesAmountEdit->setAllowEmpty(true);
     d->ui->sharesAmountEdit->setCalculatorButtonVisible(true);
+    connect(d->ui->sharesAmountEdit, &AmountEdit::textChanged, this, &InvestTransactionEditor::updateTotalAmount);
 
     d->ui->priceAmountEdit->setAllowEmpty(true);
     d->ui->priceAmountEdit->setCalculatorButtonVisible(true);
+    connect(d->ui->priceAmountEdit, &AmountEdit::textChanged, this, &InvestTransactionEditor::updateTotalAmount);
 
     d->ui->feesAmountEdit->setAllowEmpty(true);
     d->ui->feesAmountEdit->setCalculatorButtonVisible(true);
+    connect(d->ui->feesAmountEdit, &AmountEdit::textChanged, this, &InvestTransactionEditor::updateTotalAmount);
 
     d->ui->interestAmountEdit->setAllowEmpty(true);
     d->ui->interestAmountEdit->setCalculatorButtonVisible(true);
+    connect(d->ui->interestAmountEdit, &AmountEdit::textChanged, this, &InvestTransactionEditor::updateTotalAmount);
 
     WidgetHintFrameCollection* frameCollection = new WidgetHintFrameCollection(this);
     frameCollection->addFrame(new WidgetHintFrame(d->ui->dateEdit));
@@ -577,6 +581,8 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     // handle some events in certain conditions different from default
     d->ui->activityCombo->installEventFilter(this);
     d->ui->statusCombo->installEventFilter(this);
+
+    d->ui->totalAmountEdit->setCalculatorButtonVisible(false);
 
     // setup tooltip
 
@@ -638,6 +644,13 @@ void InvestTransactionEditor::keyPressEvent(QKeyEvent* e)
     }
 }
 
+void InvestTransactionEditor::updateTotalAmount(const QString& txt)
+{
+    if (d->currentActivity) {
+        d->ui->totalAmountEdit->setValue(d->currentActivity->totalAmount());
+    }
+}
+
 void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
 {
     d->ui->activityCombo->setCurrentIndex(-1);
@@ -689,6 +702,9 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         d->ui->interestAmountEdit->setValue(d->splitValue(d->interestSplitModel));
 
         d->currentActivity->loadPriceWidget(d->split);
+
+        // delay update until next run of event loop so that all necessary widgets are visible
+        QMetaObject::invokeMethod(this, "updateTotalAmount", Qt::QueuedConnection, Q_ARG(QString, QString()));
     }
 
 
@@ -815,6 +831,7 @@ void InvestTransactionEditor::setupActivity(int index)
                 break;
         }
         d->currentActivity->showWidgets();
+        d->ui->totalAmountEdit->setValue(d->currentActivity->totalAmount());
     }
 }
 

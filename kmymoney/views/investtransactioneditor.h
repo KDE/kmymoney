@@ -87,6 +87,8 @@ protected Q_SLOTS:
 
   void setupActivity(int index);
 
+  void updateTotalAmount(const QString& txt);
+
 private:
   class Private;
   QScopedPointer<Private> const d;
