@@ -213,7 +213,7 @@
   optional.  As with the personal information dialog, this data is not currently
   used by &kmymoney;, but will be required by future releases for certain
   features.  In particular, the Routing Number and the <acronym><ulink
-  url="http://en.wikipedia.org/wiki/ISO_9362">BIC (Bank Identifier
+  url="https://en.wikipedia.org/wiki/ISO_9362">BIC (Bank Identifier
   Code)</ulink></acronym> will be required for online banking.
 </para>
 </sect2>

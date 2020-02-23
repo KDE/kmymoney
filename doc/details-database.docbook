@@ -55,7 +55,7 @@
   In addition to the database software itself, you must also install the
   corresponding &Qt; driver module. Most distributions will include driver
   modules for the more popular databases. Otherwise, check with the <ulink
-  url="http://qt-project.org">&Qt; software web site</ulink> and search for
+  url="https://www.qt.io/">&Qt; software web site</ulink> and search for
   'SQL drivers'
 </para>
 
@@ -135,8 +135,8 @@
 
 <para>
   Using &kmymoney;, open or import an existing data file, or create a new
-  one. Then select <guimenuitem>Save as Database</guimenuitem> from the
-  <guimenu>File</guimenu> menu. This will present the following dialog:
+  one. Then select <menuchoice><guimenu>File</guimenu><guimenuitem>Save as Database</guimenuitem></menuchoice>
+  menu item. This will present the following dialog:
 </para>
 
 <screenshot>
@@ -160,7 +160,7 @@
   This box lists all &Qt; SQL drivers installed on your system. Select the
   driver for your database type. If the one you want is not in the list, you
   need to install the appropriate driver. See your distribution documentation,
-  or visit the <ulink url="http://qt-project.org/" type="">&Qt; software web
+  or visit the <ulink url="https://www.qt.io/" type="">&Qt; software web
   site</ulink> and search for 'SQL drivers'.
 </para>
 </sect3>
@@ -218,8 +218,8 @@
 <title>Table design</title>
 
 <para>
-  To access your data in &kmymoney;, use the <guimenuitem>Open
-  Database</guimenuitem> entry in the <guimenu>File</guimenu> menu. This will
+  To access your data in &kmymoney;, use the <menuchoice><guimenu>File</guimenu><guimenuitem>Open
+  Database</guimenuitem></menuchoice> menu item. This will
   open a dialog similar to the above.
 </para>
 

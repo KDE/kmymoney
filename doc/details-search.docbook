@@ -115,7 +115,7 @@
   If you check the <guilabel>Treat Text as regular expression</guilabel> box,
   the text will be treated as a regular expression.  For details on how to
   craft a regular expression, visit the &Qt; documentation about the
-  <ulink url="http://qt-project.org/doc/qt-4.8/qregexp.html#1">QRegExp
+  <ulink url="https://doc.qt.io/qt-5/qregexp.html">QRegExp
   class</ulink>.
 </para>
 </sect2>

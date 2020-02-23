@@ -53,7 +53,7 @@
 <para>
   All tips have been extracted from the Frequently Asked Questions list (&FAQ;)
   that provides more detailed help and can be found on the project <ulink
-  url="http://www.kmymoney.org/faq.php">website</ulink> and in <link
+  url="https://www.kmymoney.org/faq.php">website</ulink> and in <link
   linkend="faq">this manual</link>.
 </para>
 
@@ -68,7 +68,7 @@
     this manual.  Many details, such as fonts, colors, and icons, can be
     customized, either using the
     <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-    &kmymoney;...</guimenuitem></menuchoice> dialog or the &kde; &systemsettings;
+    &kmymoney;...</guimenuitem></menuchoice> menu item or the &kde; &systemsettings;
     application, depending on your operating system.
   </para>
 </note>
@@ -357,7 +357,7 @@
 <para>
   To create a new file you can either select
   <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice>
-  from the menu or choose the <inlinemediaobject><imageobject><imagedata
+  menu item or choose the <inlinemediaobject><imageobject><imagedata
   fileref="new.png"/></imageobject><textobject><phrase>New</phrase></textobject></inlinemediaobject>
   icon from the toolbar.  In addition, if the main welcome page is displayed,
   you can also select the first link: "Get started and setup accounts."
@@ -560,7 +560,7 @@
       <para>
         To create an account using the menu select
         <menuchoice><guimenu>Accounts</guimenu><guimenuitem>New
-        account</guimenuitem></menuchoice>.
+        account</guimenuitem></menuchoice> menu item.
       </para>
     </listitem>
   </varlistentry>
@@ -775,8 +775,8 @@
 
 <para>
   To backup your file through &kmymoney; Select
-  <guimenuitem>Backup</guimenuitem> from the <guimenu>File</guimenu> menu and
-  enter the folder where you wish the file to be saved.  If the folder
+  <menuchoice><guimenu>File</guimenu><guimenuitem>Backup</guimenuitem></menuchoice>
+  menu item and enter the folder where you wish the file to be saved. If the folder
   needs mounting first and you have the sufficient privileges then check the
   tick box labeled <guilabel>Mount this directory before backing up</guilabel>
   and click on <guibutton>OK</guibutton>.
@@ -836,7 +836,7 @@
   tell it where you have put the data file, either by running from the command
   line, or from the
   <menuchoice><guimenu>File</guimenu><guimenuitem>Open...</guimenuitem></menuchoice>
-  menu.  You should even be able to move between &Windows;, &MacOS;, and &Linux; systems.
+  menu item. You should even be able to move between &Windows;, &MacOS;, and &Linux; systems.
 </para>
 
 <para>
@@ -894,7 +894,7 @@
   Note that when upgrading from a previous version to version 5.0 or higher, the
   location of the template files used by the plugin for printing checks has
   changed.  Please consult the release notes or the project <ulink
-  url="http://www.kmymoney.org/faq.php">website</ulink> for more details.
+  url="https://www.kmymoney.org/faq.php">website</ulink> for more details.
 </para>
 
 <note>
@@ -938,10 +938,10 @@
 <para>
   To report a bug please use the interface provided by &kmymoney; by selecting
   <menuchoice><guimenu>Help</guimenu><guimenuitem>Report
-  Bug</guimenuitem></menuchoice> and filling in the required information.
+  Bug</guimenuitem></menuchoice> menu item and filling in the required information.
   However, in case you have any difficulties with that method, you can report a
   bug (or file a wish-list or enhancement request) directly at the <ulink
-  url="http://bugs.kde.org">&kde; bug reporting web site</ulink>.  Reports
+  url="https://bugs.kde.org">&kde; bug reporting web site</ulink>.  Reports
   should be filed against the product <quote>kmymoney</quote>.
 </para>
 
@@ -963,14 +963,14 @@
 
 <para>
   Eli Goldberg wrote the canonical Bug-Writing Guideline, available at <ulink
-  url="http://issues.apache.org/bugwritinghelp.html">http://issues.apache.org/bugwritinghelp.html</ulink>.
+  url="https://issues.apache.org/bugwritinghelp.html">https://issues.apache.org/bugwritinghelp.html</ulink>.
   Generally, you'll be well-served by following these guidelines:
 </para>
 
 <formalpara><title>Include your system information</title>
   <para>
     The <menuchoice><guimenu>Help</guimenu><guimenuitem>Report
-    Bug</guimenuitem></menuchoice> menu choice will fill this in automatically,
+    Bug</guimenuitem></menuchoice> menu item will fill this in automatically,
     but if you would prefer not to use this interface, there are several items
     you need to include in the report.  We will need to know what operating
     system you are using (&Linux;, &MacOS;, or &Windows;), the version of &kde;,

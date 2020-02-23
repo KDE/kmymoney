@@ -34,7 +34,7 @@
   </listitem>
 
   <listitem>
-    <formalpara><title>Ease of Use.</title>
+    <formalpara><title>Ease of Use</title>
       <para>
         &kmymoney; strives to be the easiest open source personal finance
         manager to use, especially for the non-technical user.
@@ -43,7 +43,7 @@
   </listitem>
 
   <listitem>
-    <formalpara><title>Correctness.</title>
+    <formalpara><title>Correctness</title>
       <para>
         Based on tried and tested double entry accounting principles &kmymoney;
         ensures that your finances are kept in correct order.
