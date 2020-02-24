@@ -179,7 +179,7 @@
    <para>There is no global search and replace function in KMyMoney.
    Nevertheless, it is easy to change a payees name: select the Payees view and
    find the entry with the name you want to change.  Click with the &RMB; on the
-   payee, and select <guimenuitem>Rename payee</guimenuitem> from de context menu.
+   payee, and select <guimenuitem>Rename payee</guimenuitem> from the context menu.
    Enter the new name. Since the transactions only use a reference to the payees
    record, all transactions now show the new name.</para>
  </answer>
