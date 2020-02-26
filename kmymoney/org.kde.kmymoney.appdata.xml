@@ -74,7 +74,7 @@
   <description>
     <p>KMyMoney is a personal finance manager by KDE. It comes with a large set of features while being easy to use for the non-technical user.</p>
     <p xml:lang="ar">«أموالك» هو مدير ماليّة شخصي من «كدي». يأتي التّطبيق بمجموعة كبيرة من المزايا لكن بأخذ النّظر لتبسيط استخدامه للمستخدمين غير التّقنيّين.</p>
-    <p xml:lang="ca">El KMyMoney és un gestor de les finances personals desenvolupat pel KDE. Té un gran conjunt de funcionalitats encara que és fàcil d'utilitzar pels usuaris no tècnics.</p>
+    <p xml:lang="ca">El KMyMoney és un gestor de les finances personals desenvolupat pel KDE. Té un gran conjunt de característiques encara que és fàcil d'emprar pels usuaris no tècnics.</p>
     <p xml:lang="ca-valencia">El KMyMoney és un gestor de les finances personals desenvolupat pel KDE. Té un gran conjunt de funcionalitats encara que és fàcil d'utilitzar pels usuaris no tècnics.</p>
     <p xml:lang="de">KMyMoney ist eine persönliche Finanzverwaltung von KDE mit vielen Funktionen, aber trotzdem leicht zu bedienen.</p>
     <p xml:lang="en-GB">KMyMoney is a personal finance manager by KDE. It comes with a large set of features while being easy to use for the non-technical user.</p>
@@ -133,7 +133,7 @@
       <caption>KMyMoney has a welcome page to help new users get off to a good start</caption>
       <caption xml:lang="ar">لِ‍«أموالك» صفحة ترحيب تساعد المستخدمين الجدد على البدء</caption>
       <caption xml:lang="bs">KMyMoney ima stranicu dobrodošlice da pomogne novim korisnicima da imaju dobar start</caption>
-      <caption xml:lang="ca">El KMyMoney disposa d'una pàgina de benvinguda per ajudar els nous usuaris a començar amb bon peu</caption>
+      <caption xml:lang="ca">El KMyMoney disposa d'una pàgina de benvinguda per ajudar els usuaris nous a començar amb bon peu</caption>
       <caption xml:lang="ca-valencia">El KMyMoney disposa d'una pàgina de benvinguda per ajudar els nous usuaris a començar amb bon peu</caption>
       <caption xml:lang="da">KMyMoney har en velkomstside til at hjælpe nye brugere godt i gang</caption>
       <caption xml:lang="de">KMyMoney hat eine Willkommensseite, um neue Anwender zu Anfang zu unterstützen</caption>
@@ -190,7 +190,7 @@
     </screenshot>
     <screenshot>
       <caption>Manage accounts e.g. by institutions they are held at</caption>
-      <caption xml:lang="ca">Gestiona els comptes p. ex. per les institucions a on estan dipositats</caption>
+      <caption xml:lang="ca">Gestiona els comptes, p. ex., per a les institucions a on estan dipositats</caption>
       <caption xml:lang="ca-valencia">Gestiona els comptes p. ex. per les institucions a on estan dipositats</caption>
       <caption xml:lang="de">Verwaltung von Konten nach den zugehörigen Institutionen</caption>
       <caption xml:lang="en-GB">Manage accounts e.g. by institutions they are held at</caption>
