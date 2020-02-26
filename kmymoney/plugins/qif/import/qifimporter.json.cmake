@@ -50,7 +50,7 @@
         "License": "GPL",
         "Name": "QIF Importer",
         "Name[ca@valencia]": "importador de QIF",
-        "Name[ca]": "importador de QIF",
+        "Name[ca]": "Importador de QIF",
         "Name[de]": "QIF-Import",
         "Name[en_GB]": "QIF Importer",
         "Name[es]": "Importador QIF",
