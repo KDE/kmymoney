@@ -28,7 +28,7 @@
         ],
         "Description": "Plugin for weboob",
         "Description[ca@valencia]": "Connector pel Weboob",
-        "Description[ca]": "Connector pel Weboob",
+        "Description[ca]": "Connector per al Weboob",
         "Description[de]": "Modul für Weboob",
         "Description[en_GB]": "Plugin for weboob",
         "Description[es]": "Complemento para weboob",
