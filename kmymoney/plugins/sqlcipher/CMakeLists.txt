@@ -48,8 +48,7 @@ include_directories(${QSQLITESOURCE_INCLUDE_DIRS})
 include_directories(${SQLCIPHER_INCLUDE_DIR})
 
 qt4_automoc(${sqlcipherdriver_srcs})
-qt4_wrap_cpp(sqlcipherdriver_moc ${sqlcipherdriver_header})
-add_library(sqlcipherdriver SHARED ${sqlcipherdriver_header} ${sqlcipherdriver_srcs} ${sqlcipherdriver_moc})
+add_library(sqlcipherdriver SHARED ${sqlcipherdriver_header} ${sqlcipherdriver_srcs})
 
 target_link_libraries(sqlcipherdriver LINK_PUBLIC
   ${QT_LIBRARIES}

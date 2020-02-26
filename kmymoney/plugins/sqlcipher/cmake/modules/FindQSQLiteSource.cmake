@@ -34,6 +34,7 @@ find_path(QSQLITESOURCE_SRCS_DIR qsql_sqlite.cpp
   PATH_SUFFIXES
   src/sql/drivers/sqlite/
   PATHS
+  ${CMAKE_SOURCE_DIR}/3rdparty/Qt
   ${QT_INCLUDE_DIR}
 )
 
@@ -43,6 +44,7 @@ find_path(QSQLITESOURCE_INCLUDE_DIR QtSql/private/qsqlcachedresult_p.h
   PATH_SUFFIXES
   include
   PATHS
+  ${CMAKE_SOURCE_DIR}/3rdparty/Qt
   ${QT_INCLUDE_DIR}
 )
 
