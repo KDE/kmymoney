@@ -27,7 +27,7 @@
             }
         ],
         "Description": "Adds online job outbox view to KMyMoney",
-        "Description[ca@valencia]": "Afig la vista en línia de l'eixida dels treballs al KMyMoney",
+        "Description[ca@valencia]": "Afig la vista en línia de la safata d'eixida dels treballs al KMyMoney",
         "Description[ca]": "Afegeix la vista en línia de la safata de sortida dels treballs al KMyMoney",
         "Description[en_GB]": "Adds online job outbox view to KMyMoney",
         "Description[es]": "Añade la vista de la bandeja de salida de trabajos en línea a KMyMoney",
@@ -49,7 +49,7 @@
         "Id": "onlinejoboutboxview",
         "License": "GPL",
         "Name": "Online job outbox view",
-        "Name[ca@valencia]": "Vista en línia de l'eixida dels treballs",
+        "Name[ca@valencia]": "Vista en línia de la safata d'eixida dels treballs",
         "Name[ca]": "Vista en línia de la safata de sortida dels treballs",
         "Name[en_GB]": "Online job outbox view",
         "Name[es]": "Vista de la bandeja de salida de trabajos en línea",
