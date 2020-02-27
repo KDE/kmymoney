@@ -75,6 +75,7 @@ endif()
 
 if (PkgConfig_FOUND)
   pkg_check_modules(SQLCIPHER sqlcipher IMPORTED_TARGET)
+  pkg_check_modules(LIBOFX libofx IMPORTED_TARGET)
 endif()
 
 find_package(Qt5 5.6 REQUIRED
@@ -207,7 +208,6 @@ else(ENABLE_WEBENGINE)
 endif(ENABLE_WEBENGINE)
 
 # check for optional LibOFX support
-find_package(LibOfx)
 cmake_dependent_option(ENABLE_OFXIMPORTER "Enable OFX Importer" ON
                        "LIBOFX_FOUND" OFF)
 
