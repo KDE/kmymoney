@@ -26,7 +26,7 @@
             }
         ],
         "Description": "If mapped to an account, it pretends it could handle all onlineTasks (for developers only).",
-        "Description[ca@valencia]": "Si està mapat a un compte, intenta que puga gestionar totes les tasques en línia (només per als desenvolupadors).",
+        "Description[ca@valencia]": "Si es fa el seguiment a un compte, intenta que puga gestionar totes les tasques en línia (només per als desenvolupadors).",
         "Description[ca]": "Si es fa el seguiment a un compte, intenta que pugui gestionar totes les tasques en línia (només per als desenvolupadors).",
         "Description[en_GB]": "If mapped to an account, it pretends it could handle all onlineTasks (for developers only).",
         "Description[es]": "Si está asignado a una cuenta, simula que puede manejar todas las tareas en línea (solo para desarrolladores).",
