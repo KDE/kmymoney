@@ -60,7 +60,7 @@ target_compile_definitions(qsqlcipher
 
 target_link_libraries(qsqlcipher
   PRIVATE
-    sqlcipher
+    PkgConfig::SQLCIPHER
     Qt5::SqlPrivate
 )
 
