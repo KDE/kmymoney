@@ -117,6 +117,8 @@ add_executable( kmymoney ${kmymoney_SRCS} )
 
 if (ENABLE_SQLCIPHER)
   message( STATUS "     SQLCIPHER INCLUDE   :  " ${SQLCIPHER_INCLUDE_DIRS}) #just for testing it on MS Windows
+  message( STATUS "     SQLCIPHER LIBRARIES :  " ${SQLCIPHER_LIBRARY_DIRS}) #just for testing it on MS Windows
+  link_directories(${SQLCIPHER_LIBRARY_DIRS})
 
   target_compile_definitions(kmymoney
     PRIVATE
@@ -161,7 +163,7 @@ target_link_libraries(kmymoney
   $<$<BOOL:${ENABLE_HOLIDAYS}>:KF5::Holidays>
   $<$<BOOL:${ENABLE_ACTIVITIES}>:KF5::Activities>
   PRIVATE
-    $<$<BOOL:${ENABLE_SQLCIPHER}>:sqlcipher>
+    $<$<BOOL:${ENABLE_SQLCIPHER}>:PkgConfig::SQLCIPHER>
 )
 
 # create symlink to let kcoreaddons find plugins

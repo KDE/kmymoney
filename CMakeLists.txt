@@ -74,7 +74,7 @@ else()
 endif()
 
 if (PkgConfig_FOUND)
-  pkg_check_modules(SQLCIPHER sqlcipher)
+  pkg_check_modules(SQLCIPHER sqlcipher IMPORTED_TARGET)
 endif()
 
 find_package(Qt5 5.6 REQUIRED
