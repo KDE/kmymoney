@@ -38,7 +38,7 @@ target_link_libraries(ofximporter
   KF5::Wallet
   Qt5::Xml
   Alkimia::alkimia
-  ${LIBOFX_LIBRARIES}
+  PkgConfig::LIBOFX
 )
 
 target_include_directories(ofximporter
