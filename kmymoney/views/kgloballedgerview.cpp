@@ -649,7 +649,8 @@ void KGlobalLedgerView::loadView()
       p = p->prevItem();
     }
 
-    p = m_register->lastItem();
+    bool ascending = m_register->primarySortKeyDirection() == KMyMoneyRegister::AscendingOrder;
+    p = ascending ? m_register->lastItem() : m_register->firstItem();
     while (p) {
       KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(p);
       if (t) {
@@ -688,7 +689,7 @@ void KGlobalLedgerView::loadView()
         }
         futureBalance[split.accountId()] = balance;
       }
-      p = p->prevItem();
+      p = ascending ? p->prevItem() : p->nextItem();
     }
 
     clearedBalance[m_account.id()] = MyMoneyFile::instance()->clearedBalance(m_account.id(), reconciliationDate);
