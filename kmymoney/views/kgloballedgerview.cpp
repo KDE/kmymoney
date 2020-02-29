@@ -649,6 +649,7 @@ void KGlobalLedgerView::loadView()
       p = p->prevItem();
     }
 
+    bool showBalance = m_register->primarySortKey() == KMyMoneyRegister::PostDateSort;
     bool ascending = m_register->primarySortKeyDirection() == KMyMoneyRegister::AscendingOrder;
     p = ascending ? m_register->lastItem() : m_register->firstItem();
     while (p) {
@@ -662,7 +663,10 @@ void KGlobalLedgerView::loadView()
 
         const MyMoneySplit& split = t->split();
         MyMoneyMoney balance = futureBalance[split.accountId()];
-        t->setBalance(balance);
+        if (showBalance)
+            t->setBalance(balance);
+        else
+            t->setShowBalance(false);
 
         // if this split is a stock split, we can't just add the amount of shares
         if (t->transaction().isStockSplit()) {
