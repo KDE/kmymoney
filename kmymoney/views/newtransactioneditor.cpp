@@ -393,6 +393,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     d->accountsModel->setSourceModel(model);
     d->accountsModel->sort(AccountsModel::Column::AccountName);
     d->ui->accountCombo->setModel(d->accountsModel);
+    new KMyMoneyAccountComboSplitHelper(d->ui->accountCombo, d->ui->splitEditorButton, &d->splitModel);
 
     d->ui->tagContainer->setModel(file->tagsModel()->modelWithEmptyItem());
 
@@ -567,25 +568,11 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
 
                 const auto payeeId = splitIdx.data(eMyMoney::Model::SplitPayeeIdRole).toString();
                 const QModelIndex payeeIdx = MyMoneyFile::instance()->payeesModel()->indexById(payeeId);
-                if (payeeIdx.isValid())
+                if (payeeIdx.isValid()) {
                     d->ui->payeeEdit->setCurrentIndex(MyMoneyModelBase::mapFromBaseSource(d->payeesModel, payeeIdx).row());
-                else
+                } else {
                     d->ui->payeeEdit->setCurrentIndex(0);
-
-                bool blocked = d->ui->accountCombo->blockSignals(true);
-                switch (splitIdx.data(eMyMoney::Model::TransactionSplitCountRole).toInt()) {
-                case 1:
-                    d->ui->accountCombo->clearEditText();
-                    d->ui->accountCombo->setSelected(QString());
-                    break;
-                case 2:
-                    d->ui->accountCombo->setSelected(splitIdx.data(eMyMoney::Model::TransactionCounterAccountIdRole).toString());
-                    break;
-                default:
-                    d->ui->accountCombo->setEditText(splitIdx.data(eMyMoney::Model::TransactionCounterAccountRole).toString());
-                    break;
                 }
-                d->ui->accountCombo->blockSignals(blocked);
 
                 d->ui->memoEdit->clear();
                 d->ui->memoEdit->insertPlainText(splitIdx.data(eMyMoney::Model::SplitMemoRole).toString());

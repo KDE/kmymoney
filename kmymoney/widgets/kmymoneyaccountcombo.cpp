@@ -421,7 +421,7 @@ KMyMoneyAccountComboSplitHelper::KMyMoneyAccountComboSplitHelper(QComboBox* acco
   d->m_splitModel = model;
   d->m_splitButton = splitButton;
 
-  connect(model, &QAbstractItemModel::rowsInserted, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged /*, Qt::QueuedConnection */);
+  connect(model, &QAbstractItemModel::dataChanged, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged /*, Qt::QueuedConnection */);
   connect(model, &QAbstractItemModel::rowsRemoved, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged, Qt::QueuedConnection);
   connect(model, &QAbstractItemModel::modelReset, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged, Qt::QueuedConnection);
   connect(model, &QAbstractItemModel::destroyed, this, &KMyMoneyAccountComboSplitHelper::modelDestroyed);
@@ -468,8 +468,6 @@ void KMyMoneyAccountComboSplitHelper::splitCountChanged()
   d->m_norecursive = true;
 
   QModelIndexList indexes;
-  QSignalBlocker blocker(d->m_accountCombo->lineEdit());
-  blocker.unblock();
   switch (d->m_splitModel->rowCount()) {
     case 0:
       d->m_accountCombo->setCurrentIndex(-1);
@@ -480,17 +478,23 @@ void KMyMoneyAccountComboSplitHelper::splitCountChanged()
                                                   eMyMoney::Model::IdRole,
                                                   d->m_splitModel->index(0, 0).data(eMyMoney::Model::SplitAccountIdRole).toString(),
                                                   1,
-                                                  Qt::MatchFixedString);
+                                                  Qt::MatchFlags(Qt::MatchExactly | Qt::MatchWrap | Qt::MatchRecursive));
       if (indexes.isEmpty()) {
         d->m_accountCombo->setCurrentIndex(-1);
         d->m_accountCombo->setCurrentText(QString());
       } else {
-        d->m_accountCombo->setCurrentIndex(indexes.first().row());
+        const auto idx = indexes.first();
+        QSignalBlocker comboBoxBlocker(d->m_accountCombo);
+        d->m_accountCombo->setRootModelIndex(idx.parent());
+        d->m_accountCombo->setCurrentIndex(idx.row());
+        d->m_accountCombo->setRootModelIndex(QModelIndex());
       }
       break;
     default:
-      blocker.reblock();
-      d->m_accountCombo->lineEdit()->setText(i18n("Split transaction"));
+      {
+        QSignalBlocker lineEditBlocker(d->m_accountCombo->lineEdit());
+        d->m_accountCombo->lineEdit()->setText(i18n("Split transaction"));
+      }
       break;
   }
   d->m_accountCombo->hidePopup();
