@@ -90,6 +90,10 @@ public:
   {
     if (show && !m_splitAction) {
       m_splitAction = m_q->lineEdit()->addAction(Icons::get(Icons::Icon::Split), QLineEdit::TrailingPosition);
+      // this for some reason does not work and I had to
+      // add logic to the eventFilter below to catch this
+      // key-sequence. Left it here, since it does not hurt either.
+      m_splitAction->setShortcut(QKeySequence(Qt::Key_Control, Qt::Key_Space));
       m_q->connect(m_splitAction, &QAction::triggered, m_q, &KMyMoneyAccountCombo::splitDialogRequest);
 
     } else if(!show && m_splitAction) {
