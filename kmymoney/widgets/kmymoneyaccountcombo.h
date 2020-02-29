@@ -108,7 +108,7 @@ class KMyMoneyAccountComboSplitHelper : public QObject
   Q_DISABLE_COPY(KMyMoneyAccountComboSplitHelper)
 
 public:
-  explicit KMyMoneyAccountComboSplitHelper(QComboBox* accountCombo, QAbstractButton* splitButton, QAbstractItemModel *model);
+  explicit KMyMoneyAccountComboSplitHelper(QComboBox* accountCombo, QAbstractItemModel *model);
   ~KMyMoneyAccountComboSplitHelper();
 
 protected:

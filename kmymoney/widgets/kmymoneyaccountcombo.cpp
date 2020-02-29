@@ -446,7 +446,7 @@ public:
 };
 
 
-KMyMoneyAccountComboSplitHelper::KMyMoneyAccountComboSplitHelper(QComboBox* accountCombo, QAbstractButton* splitButton, QAbstractItemModel* model)
+KMyMoneyAccountComboSplitHelper::KMyMoneyAccountComboSplitHelper(QComboBox* accountCombo, QAbstractItemModel* model)
   : QObject(accountCombo)
   , d_ptr(new KMyMoneyAccountComboSplitHelperPrivate(this))
 {

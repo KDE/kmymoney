@@ -527,13 +527,13 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     d->feesModel->setSourceModel(model);
     d->feesModel->sort(AccountsModel::Column::AccountName);
     d->ui->feesCombo->setModel(d->feesModel);
-    new KMyMoneyAccountComboSplitHelper(d->ui->feesCombo, d->ui->feesSplitEditorButton, d->feeSplitModel);
+    new KMyMoneyAccountComboSplitHelper(d->ui->feesCombo, d->feeSplitModel);
 
     d->interestModel->addAccountGroup(QVector<eMyMoney::Account::Type> { eMyMoney::Account::Type::Income });
     d->interestModel->setSourceModel(model);
     d->interestModel->sort(AccountsModel::Column::AccountName);
     d->ui->interestCombo->setModel(d->interestModel);
-    new KMyMoneyAccountComboSplitHelper(d->ui->interestCombo, d->ui->interestSplitEditorButton, d->interestSplitModel);
+    new KMyMoneyAccountComboSplitHelper(d->ui->interestCombo, d->interestSplitModel);
 
     d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
     d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
@@ -569,14 +569,15 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     connect(d->ui->feesCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, QOverload<int>::of(&InvestTransactionEditor::feesChanged));
     connect(d->ui->feesCombo, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), this, QOverload<const QString&>::of(&InvestTransactionEditor::feesChanged));
+    connect(d->ui->feesCombo, &KMyMoneyAccountCombo::splitDialogRequest, this, &InvestTransactionEditor::editFeeSplits);
+
     connect(d->ui->interestCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, QOverload<int>::of(&InvestTransactionEditor::interestChanged));
     connect(d->ui->interestCombo, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), this, QOverload<const QString&>::of(&InvestTransactionEditor::interestChanged));
+    connect(d->ui->interestCombo, &KMyMoneyAccountCombo::splitDialogRequest, this, &InvestTransactionEditor::editInterestSplits);
 
     /// @todo convert to new signal/slot syntax
     connect(d->ui->cancelButton, SIGNAL(clicked(bool)), this, SLOT(reject()));
     connect(d->ui->enterButton, SIGNAL(clicked(bool)), this, SLOT(acceptEdit()));
-    connect(d->ui->feesSplitEditorButton, SIGNAL(clicked(bool)), this, SLOT(editFeeSplits()));
-    connect(d->ui->interestSplitEditorButton, SIGNAL(clicked(bool)), this, SLOT(editInterestSplits()));
 
     // handle some events in certain conditions different from default
     d->ui->activityCombo->installEventFilter(this);
