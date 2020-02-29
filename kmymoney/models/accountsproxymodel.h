@@ -39,6 +39,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyenums.h"
+
 /**
   * A proxy model to provide various sorting and filtering operations for @ref AccountsModel.
   *
@@ -172,6 +174,17 @@ public:
     if (!idx.parent().isValid())
       return baseProxyModel::flags(idx) & ~Qt::ItemIsSelectable;
     return baseProxyModel::flags(idx);
+  }
+
+  /**
+   * The Qt::EditRole returns the full account name including parent account name
+   */
+  virtual QVariant data(const QModelIndex& idx, int role) const override
+  {
+    if (role == Qt::EditRole) {
+      return baseProxyModel::data(idx, eMyMoney::Model::AccountFullNameRole);
+    }
+    return baseProxyModel::data(idx, role);
   }
 
 protected:
