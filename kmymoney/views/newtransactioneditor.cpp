@@ -393,7 +393,6 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     d->accountsModel->setSourceModel(model);
     d->accountsModel->sort(AccountsModel::Column::AccountName);
     d->ui->accountCombo->setModel(d->accountsModel);
-    new KMyMoneyAccountComboSplitHelper(d->ui->accountCombo, d->ui->splitEditorButton, &d->splitModel);
 
     d->ui->tagContainer->setModel(file->tagsModel()->modelWithEmptyItem());
 
@@ -459,13 +458,13 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     connect(d->ui->numberEdit, SIGNAL(textChanged(QString)), this, SLOT(numberChanged(QString)));
     connect(d->ui->costCenterCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(costCenterChanged(int)));
     connect(d->ui->accountCombo, SIGNAL(accountSelected(QString)), this, SLOT(categoryChanged(QString)));
+    connect(d->ui->accountCombo, &KMyMoneyAccountCombo::splitDialogRequest, this, &NewTransactionEditor::editSplits);
     connect(d->ui->dateEdit, SIGNAL(dateChanged(QDate)), this, SLOT(postdateChanged(QDate)));
     connect(d->amountHelper, SIGNAL(valueChanged()), this, SLOT(valueChanged()));
     connect(d->ui->payeeEdit, SIGNAL(currentIndexChanged(int)), this, SLOT(payeeChanged(int)));
 
     connect(d->ui->cancelButton, SIGNAL(clicked(bool)), this, SLOT(reject()));
     connect(d->ui->enterButton, SIGNAL(clicked(bool)), this, SLOT(acceptEdit()));
-    connect(d->ui->splitEditorButton, SIGNAL(clicked(bool)), this, SLOT(editSplits()));
 
     // handle some events in certain conditions different from default
     d->ui->payeeEdit->installEventFilter(this);

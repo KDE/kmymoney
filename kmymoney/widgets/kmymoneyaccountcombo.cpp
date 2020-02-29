@@ -26,6 +26,7 @@
 #include <QKeyEvent>
 #include <QTreeView>
 #include <QLineEdit>
+#include <QAction>
 #include <QAbstractButton>
 
 // ----------------------------------------------------------------------------
@@ -39,13 +40,15 @@
 #include "mymoneyfile.h"
 #include "mymoneyenums.h"
 #include "accountsmodel.h"
+#include "icons.h"
 
 class KMyMoneyAccountCombo::Private
 {
 public:
   Private(KMyMoneyAccountCombo* q)
     : m_q(q)
-    , m_popupView(0)
+    , m_popupView(nullptr)
+    , m_splitAction(nullptr)
     , m_inMakeCompletion(false)
   {
     m_q->setInsertPolicy(QComboBox::NoInsert);
@@ -55,35 +58,47 @@ public:
 
   KMyMoneyAccountCombo*           m_q;
   QTreeView*                      m_popupView;
+  QAction*                        m_splitAction;
   QString                         m_lastSelectedAccount;
   bool                            m_inMakeCompletion;
 
-  void selectFirstMatchingItem();
-};
+  void selectFirstMatchingItem()
+  {
+    if(m_popupView) {
+      QSignalBlocker blocker(m_popupView);
+      m_popupView->setCurrentIndex(QModelIndex());
+      const auto rows = m_q->model()->rowCount();
+      for (auto i = 0; i < rows; ++i) {
+        QModelIndex childIndex = m_q->model()->index(i, 0);
+        if (m_q->model()->hasChildren(childIndex)) {
+          // search the first leaf
+          do {
+            childIndex = m_q->model()->index(0, 0, childIndex);
+          } while(m_q->model()->hasChildren(childIndex));
 
-void KMyMoneyAccountCombo::Private::selectFirstMatchingItem()
-{
-  if(m_popupView) {
-    QSignalBlocker blocker(m_popupView);
-    m_popupView->setCurrentIndex(QModelIndex());
-    const auto rows = m_q->model()->rowCount();
-    for (auto i = 0; i < rows; ++i) {
-      QModelIndex childIndex = m_q->model()->index(i, 0);
-      if (m_q->model()->hasChildren(childIndex)) {
-        // search the first leaf
-        do {
-          childIndex = m_q->model()->index(0, 0, childIndex);
-        } while(m_q->model()->hasChildren(childIndex));
-
-        // make it the current selection if it's selectable
-        if(m_q->model()->flags(childIndex) & Qt::ItemIsSelectable) {
-          m_popupView->setCurrentIndex(childIndex);
+          // make it the current selection if it's selectable
+          if(m_q->model()->flags(childIndex) & Qt::ItemIsSelectable) {
+            m_popupView->setCurrentIndex(childIndex);
+          }
+          break;
         }
-        break;
       }
     }
   }
-}
+
+  void showSplitAction(bool show)
+  {
+    if (show && !m_splitAction) {
+      m_splitAction = m_q->lineEdit()->addAction(Icons::get(Icons::Icon::Split), QLineEdit::TrailingPosition);
+      m_q->connect(m_splitAction, &QAction::triggered, m_q, &KMyMoneyAccountCombo::splitDialogRequest);
+
+    } else if(!show && m_splitAction) {
+      m_splitAction->deleteLater();
+      m_splitAction = nullptr;
+    }
+  }
+};
+
 
 
 
@@ -93,12 +108,14 @@ KMyMoneyAccountCombo::KMyMoneyAccountCombo(QSortFilterProxyModel *model, QWidget
   , d(new Private(this))
 {
   setModel(model);
+  setObjectName("ComboBox");
 }
 
 KMyMoneyAccountCombo::KMyMoneyAccountCombo(QWidget *parent)
   : KComboBox(parent)
   , d(new Private(this))
 {
+  setObjectName("ComboBox");
 }
 
 KMyMoneyAccountCombo::~KMyMoneyAccountCombo()
@@ -113,6 +130,15 @@ void KMyMoneyAccountCombo::setEditable(bool isEditable)
     lineEdit()->setObjectName("AccountComboLineEdit");
     lineEdit()->setClearButtonEnabled(true);
     connect(lineEdit(), &QLineEdit::textEdited, this, &KMyMoneyAccountCombo::makeCompletion);
+    installEventFilter(this);
+    d->showSplitAction(true);
+  }
+}
+
+void KMyMoneyAccountCombo::showSplitAction(bool show)
+{
+  if (lineEdit()) {
+    d->showSplitAction(show);
   }
 }
 
@@ -144,40 +170,50 @@ void KMyMoneyAccountCombo::activated()
 
 bool KMyMoneyAccountCombo::eventFilter(QObject* o, QEvent* e)
 {
-  if(isEditable() && o == d->m_popupView) {
-    // propagate all relevant key press events to the lineEdit widget
-    if(e->type() == QEvent::KeyPress) {
-      QKeyEvent* kev = static_cast<QKeyEvent*>(e);
-      bool forLineEdit = (kev->text().length() > 0);
-      switch(kev->key()) {
-        case Qt::Key_Escape:
-        case Qt::Key_Up:
-        case Qt::Key_Down:
-          forLineEdit = false;
-          break;
-        default:
-          break;
-      }
-      if(forLineEdit) {
-        return lineEdit()->event(e);
-      }
-    } else if(e->type() == QEvent::KeyRelease) {
-      QKeyEvent* kev = static_cast<QKeyEvent*>(e);
-      switch(kev->key()) {
-        case Qt::Key_Enter:
-        case Qt::Key_Return:
-          activated();
-          hidePopup();
-          break;
-        default:
-          break;
-      }
+  if(isEditable()) {
+    if (o == d->m_popupView) {
+      // propagate all relevant key press events to the lineEdit widget
+      if(e->type() == QEvent::KeyPress) {
+        QKeyEvent* kev = static_cast<QKeyEvent*>(e);
+        bool forLineEdit = (kev->text().length() > 0);
+        switch(kev->key()) {
+          case Qt::Key_Escape:
+          case Qt::Key_Up:
+          case Qt::Key_Down:
+            forLineEdit = false;
+            break;
+          default:
+            break;
+        }
+        if(forLineEdit) {
+          return lineEdit()->event(e);
+        }
+      } else if(e->type() == QEvent::KeyRelease) {
+        QKeyEvent* kev = static_cast<QKeyEvent*>(e);
+        switch(kev->key()) {
+          case Qt::Key_Enter:
+          case Qt::Key_Return:
+            activated();
+            hidePopup();
+            break;
+          default:
+            break;
+        }
 
-    } else if(e->type() == QEvent::FocusOut) {
-      // if we tab out and have a selection in the popup view
-      // than we use that entry completely
-      activated();
-      hidePopup();
+      } else if(e->type() == QEvent::FocusOut) {
+        // if we tab out and have a selection in the popup view
+        // than we use that entry completely
+        activated();
+        hidePopup();
+      }
+    } else if(o == this) {
+      if(e->type() == QEvent::KeyPress) {
+        const auto kev = static_cast<QKeyEvent*>(e);
+        if (kev->modifiers() & Qt::ControlModifier && kev->key() == Qt::Key_Space) {
+          emit splitDialogRequest();
+          return true;
+        }
+      }
     }
   }
   return KComboBox::eventFilter(o, e);
@@ -348,11 +384,11 @@ void KMyMoneyAccountCombo::makeCompletion(const QString& txt)
             break;
           default:
             setMaxVisibleItems(15);
-            expandAll();
             showPopup();
+            expandAll();
+            d->selectFirstMatchingItem();
             break;
         }
-        d->selectFirstMatchingItem();
 
         // keep current text in edit widget no matter what
         QSignalBlocker blocker(lineEdit());
@@ -398,7 +434,6 @@ public:
   KMyMoneyAccountComboSplitHelperPrivate(KMyMoneyAccountComboSplitHelper* qq)
   : q_ptr(qq)
   , m_accountCombo(nullptr)
-  , m_splitButton(nullptr)
   , m_splitModel(nullptr)
   , m_norecursive(false)
   {
@@ -406,7 +441,6 @@ public:
 
   KMyMoneyAccountComboSplitHelper*  q_ptr;
   QComboBox*                        m_accountCombo;
-  QAbstractButton*                  m_splitButton;
   QAbstractItemModel*               m_splitModel;
   bool                              m_norecursive;
 };
@@ -419,7 +453,6 @@ KMyMoneyAccountComboSplitHelper::KMyMoneyAccountComboSplitHelper(QComboBox* acco
   Q_D(KMyMoneyAccountComboSplitHelper);
   d->m_accountCombo = accountCombo;
   d->m_splitModel = model;
-  d->m_splitButton = splitButton;
 
   connect(model, &QAbstractItemModel::dataChanged, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged /*, Qt::QueuedConnection */);
   connect(model, &QAbstractItemModel::rowsRemoved, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged, Qt::QueuedConnection);
@@ -427,6 +460,9 @@ KMyMoneyAccountComboSplitHelper::KMyMoneyAccountComboSplitHelper(QComboBox* acco
   connect(model, &QAbstractItemModel::destroyed, this, &KMyMoneyAccountComboSplitHelper::modelDestroyed);
 
   accountCombo->installEventFilter(this);
+  if (accountCombo->lineEdit()) {
+    accountCombo->lineEdit()->installEventFilter(this);
+  }
   splitCountChanged();
 }
 
@@ -437,16 +473,24 @@ KMyMoneyAccountComboSplitHelper::~KMyMoneyAccountComboSplitHelper()
 bool KMyMoneyAccountComboSplitHelper::eventFilter(QObject* watched, QEvent* event)
 {
   Q_D(KMyMoneyAccountComboSplitHelper);
-  if (watched == d->m_accountCombo) {
-    if (event->type() == QEvent::FocusIn) {
-      if (d->m_splitModel->rowCount() > 1) {
-        // force focus to split button and press it when
-        // the event loop gets control the next time
-        QMetaObject::invokeMethod(d->m_splitButton, "setFocus", Qt::QueuedConnection);
-        QMetaObject::invokeMethod(d->m_splitButton, "animateClick", Qt::QueuedConnection);
-        // prevent further processing of the event (eat it up)
-        return true;
+  if (d->m_splitModel && (d->m_splitModel->rowCount() > 1)) {
+    const auto type = event->type();
+    if (watched == d->m_accountCombo) {
+      if (type == QEvent::FocusIn) {
+        // select the complete text (which is readonly)
+        // to signal focus in the lineedit widget to the user
+        const auto lineEdit = d->m_accountCombo->lineEdit();
+        if (lineEdit) {
+          lineEdit->selectAll();
+        }
       }
+    }
+    if ((type == QEvent::MouseButtonPress)
+      || (type == QEvent::MouseButtonRelease)
+      || (type == QEvent::MouseButtonDblClick)) {
+      // suppress opening the combo box
+      // or selecting text in the lineedit
+      return true;
     }
   }
   return QObject::eventFilter(watched, event);
@@ -468,6 +512,7 @@ void KMyMoneyAccountComboSplitHelper::splitCountChanged()
   d->m_norecursive = true;
 
   QModelIndexList indexes;
+  d->m_accountCombo->lineEdit()->setReadOnly(false);
   switch (d->m_splitModel->rowCount()) {
     case 0:
       d->m_accountCombo->setCurrentIndex(-1);
@@ -494,6 +539,7 @@ void KMyMoneyAccountComboSplitHelper::splitCountChanged()
       {
         QSignalBlocker lineEditBlocker(d->m_accountCombo->lineEdit());
         d->m_accountCombo->lineEdit()->setText(i18n("Split transaction"));
+        d->m_accountCombo->lineEdit()->setReadOnly(true);
       }
       break;
   }

@@ -81,6 +81,7 @@ public Q_SLOTS:
   void showPopup() override;
   void hidePopup() override;
   void setSelected(const QString& id);
+  void showSplitAction(bool show);
 
 protected:
   void wheelEvent(QWheelEvent *ev) override;
@@ -92,6 +93,7 @@ protected Q_SLOTS:
 
 Q_SIGNALS:
   void accountSelected(const QString&);
+  void splitDialogRequest();
 
 private:
   class Private;
