@@ -110,7 +110,7 @@ public:
   ~KMyMoneyAccountComboSplitHelper();
 
 protected:
-  bool eventFilter(QObject *watched, QEvent *event);
+  bool eventFilter(QObject *watched, QEvent *event) override;
 
 private Q_SLOTS:
   void splitCountChanged();
