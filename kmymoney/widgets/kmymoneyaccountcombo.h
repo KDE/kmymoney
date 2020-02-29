@@ -96,6 +96,9 @@ Q_SIGNALS:
   void splitDialogRequest();
 
 private:
+  void init();
+
+private:
   class Private;
   QScopedPointer<Private> const d;
 };

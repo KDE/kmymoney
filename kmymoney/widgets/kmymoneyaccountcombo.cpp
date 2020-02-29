@@ -111,15 +111,22 @@ KMyMoneyAccountCombo::KMyMoneyAccountCombo(QSortFilterProxyModel *model, QWidget
   : KComboBox(parent)
   , d(new Private(this))
 {
+  init();
   setModel(model);
-  setObjectName("ComboBox");
 }
 
 KMyMoneyAccountCombo::KMyMoneyAccountCombo(QWidget *parent)
   : KComboBox(parent)
   , d(new Private(this))
 {
+  init();
+}
+
+void KMyMoneyAccountCombo::init()
+{
   setObjectName("ComboBox");
+  setMaxVisibleItems(15);
+  setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLength);
 }
 
 KMyMoneyAccountCombo::~KMyMoneyAccountCombo()
@@ -133,7 +140,7 @@ void KMyMoneyAccountCombo::setEditable(bool isEditable)
   if(lineEdit()) {
     lineEdit()->setObjectName("AccountComboLineEdit");
     lineEdit()->setClearButtonEnabled(true);
-    connect(lineEdit(), &QLineEdit::textEdited, this, &KMyMoneyAccountCombo::makeCompletion);
+    connect(lineEdit(), &QLineEdit::textEdited, this, &KMyMoneyAccountCombo::makeCompletion, Qt::UniqueConnection);
     installEventFilter(this);
     d->showSplitAction(true);
   }
@@ -195,6 +202,10 @@ bool KMyMoneyAccountCombo::eventFilter(QObject* o, QEvent* e)
       } else if(e->type() == QEvent::KeyRelease) {
         QKeyEvent* kev = static_cast<QKeyEvent*>(e);
         switch(kev->key()) {
+          case Qt::Key_Escape:
+            hidePopup();
+            return true;
+
           case Qt::Key_Enter:
           case Qt::Key_Return:
             activated();
@@ -322,7 +333,7 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
   });
 
   if(isEditable()) {
-    connect(lineEdit(), &QLineEdit::textEdited, this, &KMyMoneyAccountCombo::makeCompletion);
+    connect(lineEdit(), &QLineEdit::textEdited, this, &KMyMoneyAccountCombo::makeCompletion, Qt::UniqueConnection);
   } else {
     connect(this, static_cast<void (KComboBox::*)(int)>(&KMyMoneyAccountCombo::KComboBox::activated), this, &KMyMoneyAccountCombo::activated);
   }
@@ -330,6 +341,9 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
 
 void KMyMoneyAccountCombo::selectItem(const QModelIndex& index)
 {
+  if (d->m_inMakeCompletion)
+    return;
+
   if (index.model() != model()) {
     qDebug() << "KMyMoneyAccountCombo::selectItem called with wrong model";
   }
@@ -387,9 +401,8 @@ void KMyMoneyAccountCombo::makeCompletion(const QString& txt)
             hidePopup();
             break;
           default:
-            setMaxVisibleItems(15);
-            showPopup();
             expandAll();
+            showPopup();
             d->selectFirstMatchingItem();
             break;
         }
@@ -415,15 +428,7 @@ void KMyMoneyAccountCombo::showPopup()
 void KMyMoneyAccountCombo::hidePopup()
 {
   if(d->m_popupView) {
-    // unfortunately the QComboBox does not provide a signal
-    // that spits out the selected QModelIndex when you click
-    // an item in the open popupView. So we collect the required
-    // information from the popupView when the popupView is
-    // closed.
-    if (d->m_popupView->isVisible()) {
-      d->m_popupView->hide();
-      activated();
-    }
+    d->m_popupView->hide();
     d->m_popupView->removeEventFilter(this);
   }
   KComboBox::hidePopup();
