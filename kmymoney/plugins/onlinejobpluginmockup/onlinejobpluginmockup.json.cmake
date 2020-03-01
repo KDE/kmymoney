@@ -26,8 +26,8 @@
             }
         ],
         "Description": "If mapped to an account, it pretends it could handle all onlineTasks (for developers only).",
-        "Description[ca@valencia]": "Si es fa el seguiment a un compte, intenta que puga gestionar totes les tasques en línia (només per als desenvolupadors).",
-        "Description[ca]": "Si es fa el seguiment a un compte, intenta que pugui gestionar totes les tasques en línia (només per als desenvolupadors).",
+        "Description[ca@valencia]": "Si es fa el vincle amb un compte, intenta que es puguen gestionar totes les tasques en línia (només per als desenvolupadors).",
+        "Description[ca]": "Si es fa el vincle amb un compte, intenta que es puguin gestionar totes les tasques en línia (només per als desenvolupadors).",
         "Description[en_GB]": "If mapped to an account, it pretends it could handle all onlineTasks (for developers only).",
         "Description[es]": "Si está asignado a una cuenta, simula que puede manejar todas las tareas en línea (solo para desarrolladores).",
         "Description[eu]": "Kontu batera mapatuz gero, lineako ataza guztiak erabil ditzakeenaren itxura egiten du (garatzaileentzako soilik).",
