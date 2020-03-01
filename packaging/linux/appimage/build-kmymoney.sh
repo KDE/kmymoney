@@ -43,4 +43,4 @@ cmake $KMYMONEY_SOURCES \
     -DIS_APPIMAGE=TRUE
 
 # Build and Install KMyMoney (ready for the next phase)
-make -j1 VERBOSE=1 install
+make -j$CPU_COUNT install
