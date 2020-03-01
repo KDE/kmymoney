@@ -511,7 +511,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::IdRole:
       return journalEntry.id();
 
-    case eMyMoney::Model::Roles::SplitAccountIdRole:
+    case eMyMoney::Model::SplitAccountIdRole:
       return journalEntry.split().accountId();
 
     case eMyMoney::Model::SplitReconcileFlagRole:
@@ -565,24 +565,40 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::TransactionIsStockSplitRole:
       return transaction.isStockSplit();
 
-    case eMyMoney::Model::Roles::TransactionErroneousRole:
+    case eMyMoney::Model::TransactionErroneousRole:
       return !transaction.splitSum().isZero();
 
-    case eMyMoney::Model::Roles::SplitSharesSuffixRole:
+    case eMyMoney::Model::TransactionInvestmentAccountIdRole:
+      if (MyMoneyFile::instance()->isInvestmentTransaction(journalEntry.transaction())) {
+        QString accountId;
+        for (const auto& split : journalEntry.transaction().splits()) {
+          const auto acc = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
+          if (acc.accountType() == eMyMoney::Account::Type::Investment) {
+            return acc.id();
+          }
+          if (acc.isInvest()) {
+            accountId = acc.parentAccountId();
+          }
+        }
+        return accountId;
+      }
+      break;
+
+    case eMyMoney::Model::SplitSharesSuffixRole:
       // figure out if it is a debit or credit split. s.a. https://en.wikipedia.org/wiki/Debits_and_credits#Aspects_of_transactions
       if(journalEntry.split().shares().isNegative()) {
         return i18nc("Credit suffix", "Cr.");
       }
       return i18nc("Debit suffix", "Dr.");
 
-    case eMyMoney::Model::Roles::SplitSharesRole:
+    case eMyMoney::Model::SplitSharesRole:
       {
         QVariant rc;
         rc.setValue(journalEntry.split().shares());
         return rc;
       }
 
-    case eMyMoney::Model::Roles::SplitValueRole:
+    case eMyMoney::Model::SplitValueRole:
     {
       QVariant rc;
       rc.setValue(journalEntry.split().value());

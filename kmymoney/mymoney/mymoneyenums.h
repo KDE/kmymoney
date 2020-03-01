@@ -504,6 +504,7 @@ namespace eMyMoney {
       TransactionInterestCategoryRole,
       TransactionFeesCategoryRole,
       TransactionIsStockSplitRole,
+      TransactionInvestmentAccountIdRole,
 
       // MyMoneySplit
       SplitSharesSuffixRole,
