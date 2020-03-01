@@ -271,7 +271,7 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
   d->accountsModel->setSourceModel(model);
   d->accountsModel->sort(AccountsModel::Column::AccountName);
   d->ui->accountCombo->setModel(d->accountsModel);
-  d->ui->accountCombo->showSplitAction(false);
+  d->ui->accountCombo->setSplitActionVisible(false);
 
   d->costCenterModel->setSortRole(Qt::DisplayRole);
   d->costCenterModel->setSourceModel(MyMoneyFile::instance()->costCenterModel());

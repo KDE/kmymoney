@@ -522,6 +522,7 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     d->accountsModel->setSourceModel(model);
     d->accountsModel->sort(AccountsModel::Column::AccountName);
     d->ui->accountCombo->setModel(d->accountsModel);
+    d->ui->accountCombo->setSplitActionVisible(false);
 
     d->feesModel->addAccountGroup(QVector<eMyMoney::Account::Type> { eMyMoney::Account::Type::Expense });
     d->feesModel->setSourceModel(model);

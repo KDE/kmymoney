@@ -145,7 +145,7 @@ void KMyMoneyAccountCombo::setEditable(bool isEditable)
   }
 }
 
-void KMyMoneyAccountCombo::showSplitAction(bool show)
+void KMyMoneyAccountCombo::setSplitActionVisible(bool show)
 {
   if (lineEdit()) {
     d->showSplitAction(show);
