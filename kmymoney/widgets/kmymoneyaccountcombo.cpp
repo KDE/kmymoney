@@ -500,6 +500,12 @@ bool KMyMoneyAccountComboSplitHelper::eventFilter(QObject* watched, QEvent* even
       // or selecting text in the lineedit
       return true;
     }
+    if (type == QEvent::KeyPress) {
+      auto kev = static_cast<QKeyEvent*>(event);
+      // swallow all keypress except Alt+Space
+      return !(kev->modifiers() & Qt::ControlModifier && kev->key() == Qt::Key_Space);
+    }
+
   }
   return QObject::eventFilter(watched, event);
 }
