@@ -526,7 +526,8 @@ void KMyMoneyAccountComboSplitHelper::splitCountChanged()
   d->m_norecursive = true;
 
   QModelIndexList indexes;
-  d->m_accountCombo->lineEdit()->setReadOnly(false);
+  bool disabled = false;
+
   switch (d->m_splitModel->rowCount()) {
     case 0:
       d->m_accountCombo->setCurrentIndex(-1);
@@ -553,12 +554,15 @@ void KMyMoneyAccountComboSplitHelper::splitCountChanged()
       {
         QSignalBlocker lineEditBlocker(d->m_accountCombo->lineEdit());
         d->m_accountCombo->lineEdit()->setText(i18n("Split transaction"));
-        d->m_accountCombo->lineEdit()->setReadOnly(true);
+        disabled = true;
       }
       break;
   }
   d->m_accountCombo->hidePopup();
-  emit accountComboEnabled(d->m_accountCombo->isEnabled());
+  d->m_accountCombo->lineEdit()->setReadOnly(disabled);
+
+  emit accountComboEnabled(!disabled);
+  emit accountComboDisabled(disabled);
 
   d->m_norecursive = false;
 }

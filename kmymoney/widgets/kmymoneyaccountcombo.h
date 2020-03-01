@@ -123,6 +123,7 @@ private Q_SLOTS:
 
 Q_SIGNALS:
   void accountComboEnabled(bool enabled);
+  void accountComboDisabled(bool disabled);
 
 private:
   Q_DECLARE_PRIVATE(KMyMoneyAccountComboSplitHelper);
