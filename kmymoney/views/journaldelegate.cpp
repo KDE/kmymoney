@@ -483,6 +483,7 @@ void JournalDelegate::endEdit()
     }
     emit closeEditor(d->m_editor, NoHint);
     d->m_editorRow = -1;
+    d->m_editor = nullptr;
   }
 }
 

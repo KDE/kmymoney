@@ -217,7 +217,9 @@ void SimpleLedgerView::closeLedger(int idx)
   Q_D(SimpleLedgerView);
   // don't react on the close request for the new ledger function
   if(idx != (d->ui->ledgerTab->count()-1)) {
+    auto tab = d->ui->ledgerTab->widget(idx);
     d->ui->ledgerTab->removeTab(idx);
+    delete tab;
   }
 }
 
