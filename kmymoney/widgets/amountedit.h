@@ -142,6 +142,11 @@ public Q_SLOTS:
     */
   void setCalculatorButtonVisible(const bool show);
 
+  /**
+   * overridden for internal reasons (keep state of calculator button)
+   */
+  void setReadOnly(bool ro);
+
 Q_SIGNALS:
   /**
     * This signal is sent, when the focus leaves this widget and

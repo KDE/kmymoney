@@ -144,6 +144,10 @@ public:
   void calculatorOpen(QKeyEvent* k)
   {
     Q_Q(AmountEdit);
+    // do not open the calculator in read-only mode
+    if (q->isReadOnly())
+      return;
+
     m_calculator->setInitialValues(q->text(), k);
 
     auto h = m_calculatorFrame->height();
@@ -186,6 +190,13 @@ public:
    * @sa setStandardPrecision()
    */
 };
+
+void AmountEdit::setReadOnly(bool ro)
+{
+  Q_D(AmountEdit);
+  d->m_calculatorButton->setEnabled(!ro);
+  QLineEdit::setReadOnly(ro);
+}
 
 AmountEdit::AmountEdit(QWidget *parent, const int prec) :
   QLineEdit(parent),
