@@ -27,7 +27,6 @@
 #include <QTreeView>
 #include <QLineEdit>
 #include <QAction>
-#include <QAbstractButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
