@@ -1386,8 +1386,16 @@ int StdTransactionEditor::slotEditSplits()
 
       if ((rc = dlg->exec()) == QDialog::Accepted) {
         d->m_transaction = dlg->transaction();
-        if (!d->m_transaction.splits().isEmpty())
+        if (!d->m_transaction.splits().isEmpty()) {
           d->m_split = d->m_transaction.splits().front();
+          // if we have only two splits left, we copy the memo
+          // of the second (data from the split editor) to the
+          // first (data used in the transaction editor)
+          if (d->m_transaction.splitCount() == 2) {
+            d->m_split.setMemo(d->m_transaction.splits().last().memo());
+            d->m_transaction.modifySplit(d->m_split);
+          }
+        }
         loadEditWidgets();
       }
 

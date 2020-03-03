@@ -36,8 +36,8 @@
   source files.  Once the distro package is installed, or the source files are
   compiled and installed, the menu choice to import CSV files will automatically
   show up under the
-  <menuchoice><guimenu>File</guimenu><guimenuitem>Import</guimenuitem></menuchoice>
-  menu.
+  <menuchoice><guimenu>File</guimenu><guisubmenu>Import</guisubmenu></menuchoice>
+  submenu.
 </para>
 
 <para>
@@ -65,7 +65,7 @@
 
 <para>
   To import a CSV file, choose the importer from the menu bar:
-  <menuchoice><guimenu>File</guimenu><guimenuitem>Import</guimenuitem><guimenuitem>CSV...</guimenuitem></menuchoice>.
+  <menuchoice><guimenu>File</guimenu><guisubmenu>Import</guisubmenu> <guimenuitem>CSV...</guimenuitem></menuchoice>.
   If CSV does not show up under Import, you do not have the CSV Importer Plugin
   installed correctly.  Please see the previous section.
 </para>

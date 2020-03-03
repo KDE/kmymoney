@@ -560,7 +560,7 @@
 <para>
   At your request, &kmymoney; will fetch a page from the web that contains the
   latest price for each security.  By default, prices are fetched from
-  <ulink url="http://finance.yahoo.com">finance.yahoo.com</ulink>, and are 
+  <ulink url="https://finance.yahoo.com">finance.yahoo.com</ulink>, and are
   subject to the terms and conditions of that site.
 </para>
 
@@ -575,7 +575,7 @@
 <para>
   To find the trading symbol for a security supported by Yahoo, use the
   <quote>Symbol Lookup</quote> feature
-  at <ulink url="http://finance.yahoo.com">finance.yahoo.com</ulink>.
+  at <ulink url="https://finance.yahoo.com">finance.yahoo.com</ulink>.
 </para>
 </sect3>
 
@@ -705,7 +705,7 @@
 <para>
   The page parser looks for a symbol, a date, and a price.  Regular expressions tell
   it how to extract those items from the page.  Please review the documentation for
-  the <ulink url="http://qt-project.org/doc/qt-4.8/qregexp.html#1">QRegExp
+  the <ulink url="https://doc.qt.io/qt-5/qregexp.html">QRegExp
   class</ulink> for the exact syntax regular expressions used by &kmymoney;.  There
   should be exactly one capture expression, surrounded by parentheses, in each regexp
   field.  The date format further tells the date parser the order of year, month, and

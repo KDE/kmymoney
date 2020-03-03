@@ -179,10 +179,9 @@
    <para>There is no global search and replace function in KMyMoney.
    Nevertheless, it is easy to change a payees name: select the Payees view and
    find the entry with the name you want to change.  Click with the &RMB; on the
-   payee, and select <menuchoice><guimenuitem>Rename
-   payee</guimenuitem></menuchoice>. Enter the new name. Since the transactions
-   only use a reference to the payees record, all transactions now show the new
-   name.</para>
+   payee, and select <guimenuitem>Rename payee</guimenuitem> from the context menu.
+   Enter the new name. Since the transactions only use a reference to the payees
+   record, all transactions now show the new name.</para>
  </answer>
 </qandaentry>
 
@@ -210,8 +209,8 @@
  </question>
  <answer>
    <para>Here are some external sources which might give your more information:
-   <ulink url="http://ofxblog.wordpress.com/">ofxblog</ulink> and <ulink
-   url="http://www.ofxhome.com/">ofxhome</ulink>.</para>
+   <ulink url="https://ofxblog.wordpress.com/">OFX Blog</ulink> and <ulink
+   url="https://www.ofxhome.com/">OFX Home</ulink>.</para>
  </answer>
 </qandaentry>
 
@@ -230,7 +229,7 @@
    Translating &kde;/&Qt;-based applications is very simple, and does not
    require any programming skills. If you would like to translate &kmymoney;
    into your language, please post a message to the proper <ulink
-   url="http://l10n.kde.org/teams-list.php">team mailing list</ulink>. Should
+   url="https://l10n.kde.org/teams-list.php">team mailing list</ulink>. Should
    you fail to find your language in the list or could not contact the team
    members please mail directly to the <ulink url="mailto:kde-i18n-doc@kde.org">KDE
    translation mailing list</ulink> (<ulink

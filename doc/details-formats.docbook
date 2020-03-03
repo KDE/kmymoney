@@ -121,7 +121,7 @@
 <para>
   The details about how to generate a key-pair and how to take care of it are
   beyond the scope of this document.  A Mini Howto on this subject can be found
-  at <ulink url="http://www.gnupg.org/documentation/howtos.en.html">http://www.gnupg.org/documentation/howtos.en.html</ulink>.
+  at <ulink url="https://www.gnupg.org/documentation/howtos.en.html">https://www.gnupg.org/documentation/howtos.en.html</ulink>.
 </para>
 </sect2>
 

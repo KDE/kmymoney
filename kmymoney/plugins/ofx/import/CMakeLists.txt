@@ -38,14 +38,14 @@ target_link_libraries(ofximporter
   KF5::Wallet
   Qt5::Xml
   Alkimia::alkimia
-  ${LIBOFX_LIBRARIES}
+  PkgConfig::LIBOFX
 )
 
 target_include_directories(ofximporter
   PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/dialogs
   ${CMAKE_CURRENT_BINARY_DIR}/dialogs
-  ${LIBOFX_INCLUDE_DIR}
+  ${LIBOFX_INCLUDEDIR}
 )
 
 ########### install files ###############

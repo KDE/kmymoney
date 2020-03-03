@@ -42,7 +42,7 @@
     The program searches for the templates for the printcheck plugin
     in different locations.  The user needs to account for this in the plugins
     setting dialog, <link linkend="details.settings.plugins">see this section for
-    more details.</link>
+    more details</link>.
   </para></listitem>
 </itemizedlist>
 </sect1>

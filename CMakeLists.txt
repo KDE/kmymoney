@@ -74,7 +74,8 @@ else()
 endif()
 
 if (PkgConfig_FOUND)
-  pkg_check_modules(SQLCIPHER sqlcipher)
+  pkg_check_modules(SQLCIPHER sqlcipher IMPORTED_TARGET)
+  pkg_check_modules(LIBOFX libofx IMPORTED_TARGET)
 endif()
 
 find_package(Qt5 5.6 REQUIRED
@@ -217,13 +218,12 @@ else(ENABLE_WEBENGINE)
 endif(ENABLE_WEBENGINE)
 
 # check for optional LibOFX support
-find_package(LibOfx)
 cmake_dependent_option(ENABLE_OFXIMPORTER "Enable OFX Importer" ON
                        "LIBOFX_FOUND" OFF)
 
 if(ENABLE_OFXIMPORTER)
   if(NOT LIBOFX_HAVE_CLIENTUID)
-    set(PATH_TO_LIBOFX_HEADER "${LIBOFX_INCLUDE_DIR}/libofx/libofx.h")
+    set(PATH_TO_LIBOFX_HEADER "${LIBOFX_INCLUDEDIR}/libofx/libofx.h")
     unset(LIBOFX_HAVE_CLIENTUID)
     unset(LIBOFX_HAVE_CLIENTUID CACHE) #not doing this will prevent updating below check
     check_struct_has_member("struct OfxFiLogin" clientuid ${PATH_TO_LIBOFX_HEADER} LIBOFX_HAVE_CLIENTUID LANGUAGE CXX)

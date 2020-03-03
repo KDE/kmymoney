@@ -49,7 +49,7 @@
     <guimenu>File</guimenu><guimenuitem>Open</guimenuitem>
   </menuchoice> or
   <menuchoice>
-    <guimenu>File</guimenu><guimenuitem>Import</guimenuitem>
+    <guimenu>File</guimenu><guisubmenu>Import</guisubmenu>
   </menuchoice> menu items.
 </para>
 
@@ -584,9 +584,8 @@
 
 <para>
   To import a QIF file, first ensure you have a valid &kmymoney; file open.
-  Then select <menuchoice><guimenuitem>Import</guimenuitem>
-  <guimenuitem>QIF...</guimenuitem> </menuchoice> from
-  the <guimenu>File</guimenu> menu.
+  Then select <menuchoice><guimenu>File</guimenu><guisubmenu>Import</guisubmenu>
+  <guimenuitem>QIF...</guimenuitem> </menuchoice> menu item.
 </para>
 	
 <para>
@@ -884,9 +883,10 @@
 <title>QIF Exporter</title>
 <para>
   To export one of your accounts to a QIF file, choose
-  the <menuchoice><guimenuitem>Export</guimenuitem> <guimenuitem>QIF</guimenuitem></menuchoice> from
-  the <guimenu>File</guimenu> menu.  You will be prompted for which single
-  account to export, what file to export it to, and what QIF Profile to use.
+  the <menuchoice><guimenu>File</guimenu><guisubmenu>Export</guisubmenu>
+  <guimenuitem>QIF...</guimenuitem></menuchoice> menu item. You will be prompted for
+  which single account to export, what file to export it to, and what QIF Profile
+  to use.
 </para>
 
 <note><para>
@@ -922,7 +922,7 @@
   not built into the core program.  You must obtain and install the OFX Importer
   Plugin.  Once that is installed, the command to import OFX files will
   automatically show up under the <menuchoice><guimenu>File</guimenu>
-  <guimenuitem>Import</guimenuitem></menuchoice> menu.
+  <guisubmenu>Import</guisubmenu></menuchoice> submenu.
 </para>
 
 <para>
@@ -955,7 +955,7 @@
 
 <para>
   OFX stands for <quote>Open Financial Exchange</quote>.  According to the
-  <ulink url="http://www.ofx.net/">OFX web site</ulink> <quote>Open Financial
+  <ulink url="https://www.ofx.net/">OFX web site</ulink> <quote>Open Financial
   Exchange (OFX) is a unified specification for the electronic exchange of
   financial data between financial institutions, businesses and consumers via
   the Internet. OFX is not a financial institution.</quote> The specification
@@ -975,7 +975,7 @@
 </para>
 
 <para>
-  Another site with good information is <ulink url="http:/ofxhome.com/">OFX
+  Another site with good information is <ulink url="https:/ofxhome.com/">OFX
   Home</ulink>.  They maintain a directory of financial institutions that
   support OFX.  This can be useful if you have problems setting up <link
   linkend="details.impexp.ofxdirectconnect">OFX direct connect.</link> They also
@@ -988,11 +988,10 @@
 
 <para>
   The most basic way to import an OFX file is to choose the importer from the
-  menu bar.  From the <guimenu>File</guimenu> menu,
-  choose <guimenuitem>Import</guimenuitem>, and
-  then <guimenuitem>OFX...</guimenuitem>.  If OFX does not show up under Import,
-  you do not have the OFX Importer Plugin installed correctly.  Please see the
-  previous section.
+  menu bar. From the <menuchoice><guimenu>File</guimenu><guisubmenu>Import</guisubmenu>
+  <guimenuitem>OFX...</guimenuitem></menuchoice> menu item. If OFX does not show
+  up under Import, you do not have the OFX Importer Plugin installed correctly.
+  Please see the previous section.
 </para>
 
 <para>
