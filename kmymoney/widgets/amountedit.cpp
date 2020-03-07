@@ -28,6 +28,7 @@
 #include <QToolButton>
 #include <QFrame>
 #include <QLocale>
+#include <QLabel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -70,13 +71,14 @@ class AmountEditPrivate
   Q_DECLARE_PUBLIC(AmountEdit)
 
 public:
-  explicit AmountEditPrivate(AmountEdit* qq) :
-    q_ptr(qq),
-    m_calculatorFrame(nullptr),
-    m_calculator(nullptr),
-    m_calculatorButton(nullptr),
-    m_prec(2),
-    m_allowEmpty(false)
+  explicit AmountEditPrivate(AmountEdit* qq)
+    : q_ptr(qq)
+    , m_calculatorFrame(nullptr)
+    , m_calculator(nullptr)
+    , m_calculatorButton(nullptr)
+    , m_currencySymbol(nullptr)
+    , m_prec(2)
+    , m_allowEmpty(false)
   {
     Q_Q(AmountEdit);
     m_calculatorFrame = new QFrame(q);
@@ -97,10 +99,8 @@ public:
     q->setValidator(validator);
     q->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
-    int height = q->sizeHint().height();
-    int btnSize = q->sizeHint().height() - 5;
+    const auto btnSize = q->sizeHint().height() - 5;
 
-    /// @todo change m_calculatorButton to use QLineEdit::addAction (see passwordtoggle.cpp for example)
     m_calculatorButton = new QToolButton(q);
     m_calculatorButton->setIcon(Icons::get(Icon::Calculator));
     m_calculatorButton->setCursor(Qt::ArrowCursor);
@@ -109,10 +109,12 @@ public:
     m_calculatorButton->setFocusPolicy(Qt::ClickFocus);
     m_calculatorButton->show();
 
-    int frameWidth = q->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
-    q->setStyleSheet(QString("QLineEdit { padding-right: %1px }")
-                                                .arg(btnSize - frameWidth));
-    q->setMinimumHeight(height);
+    m_currencySymbol = new QLabel(q);
+    m_currencySymbol->setCursor(Qt::ArrowCursor);
+    m_currencySymbol->setFixedSize(btnSize, btnSize);
+    m_currencySymbol->hide();
+
+    updateLineEditSize(true, false);
 
     q->connect(m_calculatorButton, &QAbstractButton::clicked, q, &AmountEdit::slotCalculatorOpen);
 
@@ -174,10 +176,25 @@ public:
     m_calculator->setFocus();
   }
 
+  void updateLineEditSize(bool calculatorVisible, bool currencySymbolVisible)
+  {
+    Q_Q(AmountEdit);
+    int height = q->sizeHint().height();
+    int frameWidth = q->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+    const int btnSize = height - 5;
+    int factor = 0;
+    factor += calculatorVisible ? 1 : 0;
+    factor += currencySymbolVisible ? 1 : 0;
+    q->setStyleSheet(QString("QLineEdit { padding-right: %1px }").arg(factor*btnSize - frameWidth));
+    q->setMinimumHeight(height);
+  }
+
+
   AmountEdit*           q_ptr;
   QFrame*               m_calculatorFrame;
   KMyMoneyCalculator*   m_calculator;
   QToolButton*          m_calculatorButton;
+  QLabel*               m_currencySymbol;
   int                   m_prec;
   bool                  m_allowEmpty;
   QString               m_previousText; // keep track of what has been typed
@@ -244,6 +261,7 @@ void AmountEdit::resizeEvent(QResizeEvent* event)
   Q_UNUSED(event);
   const int frameWidth = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
   d->m_calculatorButton->move(width() - d->m_calculatorButton->width() - frameWidth - 2, 2);
+  d->m_currencySymbol->move(width() - d->m_calculatorButton->width() - d->m_currencySymbol->width() - frameWidth - 2, 2);
 }
 
 void AmountEdit::focusOutEvent(QFocusEvent* event)
@@ -444,6 +462,7 @@ void AmountEdit::setCalculatorButtonVisible(const bool show)
 {
   Q_D(AmountEdit);
   d->m_calculatorButton->setVisible(show);
+  d->updateLineEditSize(show, d->m_currencySymbol->isVisible());
 }
 
 void AmountEdit::setAllowEmpty(bool allowed)
@@ -474,4 +493,12 @@ void AmountEdit::ensureFractionalPart()
   // call to ensureFractionalPart() that does not change anything
   if (s != text())
     QLineEdit::setText(s);
+}
+
+void AmountEdit::showCurrencySymbol(const QString& symbol)
+{
+  Q_D(AmountEdit);
+  d->m_currencySymbol->setText(symbol);
+  d->m_currencySymbol->setHidden(symbol.isEmpty());
+  d->updateLineEditSize(d->m_calculator->isVisible(), !symbol.isEmpty());
 }

@@ -112,6 +112,8 @@ public:
 
   bool isCalculatorButtonVisible() const;
 
+  void showCurrencySymbol(const QString& symbol);
+
   /**
    * This allows to setup the standard precision (number of decimal places)
    * to be used when no other information is available. @a prec must be in
@@ -127,6 +129,7 @@ public:
    * @sa setStandardPrecision
    */
   static int standardPrecision();
+
 
 public Q_SLOTS:
   void resetText();

@@ -60,6 +60,8 @@ public:
    */
   void setValue(const MyMoneyMoney& value);
 
+  void showCurrencySymbol(const QString& symbol);
+
   /**
    * This method returns true if at least one
    * of the two widgets is filled with text.

@@ -136,3 +136,12 @@ void CreditDebitHelper::setValue(const MyMoneyMoney& value)
     qWarning() << "CreditDebitHelper::setValue() called with no objects attached. Skipped.";
   }
 }
+
+void CreditDebitHelper::showCurrencySymbol(const QString& symbol)
+{
+  Q_D(CreditDebitHelper);
+  if(d->m_credit && d->m_debit) {
+    d->m_credit->showCurrencySymbol(symbol);
+    d->m_debit->showCurrencySymbol(symbol);
+  }
+}
