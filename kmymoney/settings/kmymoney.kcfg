@@ -351,6 +351,13 @@
    <default>false</default>
   </entry>
  </group>
+ <!-- Internal options don't have GUI access -->
+ <group name="Internal Options">
+   <entry name="lastUsedPostDate" type="DateTime">
+     <label>Post date last entered by the user</label>
+     <default>QDateTime()</default>
+   </entry>
+ </group>
  <group name="QIF Options">
   <entry name="qifCash" type="String">
    <label>additional names for cash account</label>

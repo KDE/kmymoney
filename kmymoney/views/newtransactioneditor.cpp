@@ -63,10 +63,9 @@
 #include "mymoneysecurity.h"
 #include "kcurrencycalculator.h"
 #include "idfilter.h"
+#include "kmymoneysettings.h"
 
 using namespace Icons;
-
-Q_GLOBAL_STATIC(QDate, lastUsedPostDate)
 
 class NewTransactionEditor::Private
 {
@@ -540,8 +539,9 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
         d->transaction.setCommodity(d->m_account.currencyId());
         d->split = MyMoneySplit();
         d->split.setAccountId(d->m_account.id());
-        if (lastUsedPostDate()->isValid()) {
-            d->ui->dateEdit->setDate(*lastUsedPostDate());
+        const auto lastUsedPostDate = KMyMoneySettings::lastUsedPostDate();
+        if (lastUsedPostDate.isValid()) {
+            d->ui->dateEdit->setDate(lastUsedPostDate.date());
         } else {
             d->ui->dateEdit->setDate(QDate::currentDate());
         }
@@ -731,7 +731,7 @@ void NewTransactionEditor::saveTransaction()
     } else {
         // we keep the date when adding a new transaction
         // for the next new one
-        *lastUsedPostDate() = d->ui->dateEdit->date();
+        KMyMoneySettings::setLastUsedPostDate(QDateTime(d->ui->dateEdit->date()));
     }
 
     // first remove the splits that are gone

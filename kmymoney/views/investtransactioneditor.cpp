@@ -61,10 +61,9 @@
 #include "mymoneysecurity.h"
 #include "kcurrencycalculator.h"
 #include "investactivities.h"
+#include "kmymoneysettings.h"
 
 using namespace Icons;
-
-Q_GLOBAL_STATIC(QDate, lastUsedPostDate)
 
 class InvestTransactionEditor::Private
 {
@@ -673,15 +672,12 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         d->split = MyMoneySplit();
         d->ui->activityCombo->setCurrentIndex(0);
         d->ui->securityCombo->setCurrentIndex(0);
-#if 0   /// @todo d->lastUsedPostDate needs to be implemented
-        if (d->lastUsedPostDate.isValid()) {
-            d->ui->dateEdit->setDate(d->lastUsedPostDate);
+        const auto lastUsedPostDate = KMyMoneySettings::lastUsedPostDate();
+        if (lastUsedPostDate.isValid()) {
+            d->ui->dateEdit->setDate(lastUsedPostDate.date());
         } else {
             d->ui->dateEdit->setDate(QDate::currentDate());
         }
-#else
-        d->ui->dateEdit->setDate(QDate::currentDate());
-#endif
     } else {
         // keep a copy of the transaction and split
         d->transaction = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).transaction();
@@ -930,7 +926,7 @@ void InvestTransactionEditor::saveTransaction()
     } else {
         // we keep the date when adding a new transaction
         // for the next new one
-        *lastUsedPostDate() = d->ui->dateEdit->date();
+        KMyMoneySettings::setLastUsedPostDate(QDateTime(d->ui->dateEdit->date()));
     }
 
     d->removeUnusedSplits(t, d->feeSplitModel);
