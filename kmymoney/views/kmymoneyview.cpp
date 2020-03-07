@@ -52,10 +52,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#ifdef ENABLE_UNFINISHEDFEATURES
 #include "simpleledgerview.h"
-#endif
-
 #include "kmymoneysettings.h"
 #include "kmymoneytitlelabel.h"
 #include "kcurrencyeditdlg.h"
@@ -134,9 +131,7 @@ KMyMoneyView::KMyMoneyView()
   viewBases[View::Payees] = new KPayeesView;
   viewBases[View::Ledgers] = new KGlobalLedgerView;
   viewBases[View::Investments] = new KInvestmentView;
-  #ifdef ENABLE_UNFINISHEDFEATURES
   viewBases[View::NewLedgers] = new SimpleLedgerView;
-  #endif
 
   struct viewInfo
   {
@@ -156,9 +151,7 @@ KMyMoneyView::KMyMoneyView()
     {View::Payees,          i18n("Payees"),                       Icon::Payees},
     {View::Ledgers,         i18n("Ledgers"),                      Icon::Ledger},
     {View::Investments,     i18n("Investments"),                  Icon::Investments},
-    #ifdef ENABLE_UNFINISHEDFEATURES
     {View::NewLedgers,      i18n("New ledger"),                   Icon::DocumentProperties},
-    #endif
   };
 
   for (const viewInfo& view : viewsInfo) {
@@ -204,9 +197,8 @@ void KMyMoneyView::slotFileOpened()
   if (viewBases.contains(View::Ledgers))
     viewBases[View::Ledgers]->executeCustomAction(eView::Action::InitializeAfterFileOpen);
 
-  #ifdef ENABLE_UNFINISHEDFEATURES
   static_cast<SimpleLedgerView*>(viewBases[View::NewLedgers])->openFavoriteLedgers();
-  #endif
+
   // delay the switchToDefaultView call until the event loop is running
   QMetaObject::invokeMethod(this, "switchToDefaultView", Qt::QueuedConnection);
   slotObjectSelected(MyMoneyAccount()); // in order to enable update all accounts on file reload
@@ -227,9 +219,7 @@ void KMyMoneyView::slotFileClosed()
   if (viewBases.contains(View::Ledgers))
     viewBases[View::Ledgers]->executeCustomAction(eView::Action::CleanupBeforeFileClose);
 
-  #ifdef ENABLE_UNFINISHEDFEATURES
   static_cast<SimpleLedgerView*>(viewBases[View::NewLedgers])->closeLedgers();
-  #endif
 
   pActions[eMenu::Action::Print]->setEnabled(false);
   pActions[eMenu::Action::AccountCreditTransfer]->setEnabled(false);
