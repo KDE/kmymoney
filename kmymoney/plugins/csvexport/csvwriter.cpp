@@ -109,7 +109,7 @@ void CsvWriter::writeAccountEntry(QTextStream& stream, const QString& accountId,
     extractInvestmentEntries(accountId, startDate, endDate);
   } else {
     data += QString("%1\n\n").arg(type);
-    m_headerLine << QString(i18n("Date")) << QString(i18n("Payee")) << QString(i18n("Amount")) << QString(i18n("Account/Cat")) << QString(i18n("Memo")) << QString(i18n("Status")) << QString(i18n("Number"));
+    m_headerLine << QString(i18n("Id")) << QString(i18n("Date")) << QString(i18n("Payee")) << QString(i18n("Amount")) << QString(i18n("Account/Cat")) << QString(i18n("Memo")) << QString(i18n("Status")) << QString(i18n("Number"));
     filter.setDateFilter(startDate, endDate);
 
     QList<MyMoneyTransaction> trList = file->transactionList(filter);
@@ -189,6 +189,8 @@ void CsvWriter::writeTransactionEntry(const MyMoneyTransaction& t, const QString
 
   QString str;
   str += QLatin1Char('\n');
+
+  str += QString("%1" + m_separator).arg(t.id());
 
   str += QString("%1" + m_separator).arg(t.postDate().toString(Qt::ISODate));
   MyMoneyPayee payee = file->payee(split.payeeId());
