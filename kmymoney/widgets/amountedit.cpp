@@ -79,6 +79,7 @@ public:
     , m_currencySymbol(nullptr)
     , m_prec(2)
     , m_allowEmpty(false)
+    , m_items(NoItem)
   {
     Q_Q(AmountEdit);
     m_calculatorFrame = new QFrame(q);
@@ -107,21 +108,20 @@ public:
     m_calculatorButton->setStyleSheet("QToolButton { border: none; padding: 2px}");
     m_calculatorButton->setFixedSize(btnSize, btnSize);
     m_calculatorButton->setFocusPolicy(Qt::ClickFocus);
-    m_calculatorButton->show();
 
     m_currencySymbol = new QLabel(q);
     m_currencySymbol->setCursor(Qt::ArrowCursor);
     m_currencySymbol->setFixedSize(btnSize, btnSize);
-    m_currencySymbol->hide();
-
-    updateLineEditSize(true, false);
 
     q->connect(m_calculatorButton, &QAbstractButton::clicked, q, &AmountEdit::slotCalculatorOpen);
 
+    // setup items
     KSharedConfig::Ptr kconfig = KSharedConfig::openConfig();
     KConfigGroup grp = kconfig->group("General Options");
-    if (grp.readEntry("DontShowCalculatorButton", false) == true)
-      q->setCalculatorButtonVisible(false);
+    q->setCalculatorButtonVisible(!grp.readEntry("DontShowCalculatorButton", false));
+    q->showCurrencySymbol(QString());
+
+    updateLineEditSize();
 
     q->connect(q, &QLineEdit::textChanged, q, &AmountEdit::theTextChanged);
     q->connect(m_calculator, &KMyMoneyCalculator::signalResultAvailable, q, &AmountEdit::slotCalculatorResult);
@@ -176,19 +176,26 @@ public:
     m_calculator->setFocus();
   }
 
-  void updateLineEditSize(bool calculatorVisible, bool currencySymbolVisible)
+  void updateLineEditSize()
   {
     Q_Q(AmountEdit);
     int height = q->sizeHint().height();
     int frameWidth = q->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
     const int btnSize = height - 5;
     int factor = 0;
-    factor += calculatorVisible ? 1 : 0;
-    factor += currencySymbolVisible ? 1 : 0;
+    factor += m_items.testFlag(ShowCalculator) ? 1 : 0;
+    factor += m_items.testFlag(ShowCurrencySymbol) ? 1 : 0;
     q->setStyleSheet(QString("QLineEdit { padding-right: %1px }").arg(factor*btnSize - frameWidth));
     q->setMinimumHeight(height);
   }
 
+  enum Item {
+    NoItem = 0x0,
+    ShowCalculator = 0x1,
+    ShowCurrencySymbol = 0x02,
+    ShowAll = 0x3,
+  };
+  Q_DECLARE_FLAGS(Items, Item)
 
   AmountEdit*           q_ptr;
   QFrame*               m_calculatorFrame;
@@ -199,6 +206,8 @@ public:
   bool                  m_allowEmpty;
   QString               m_previousText; // keep track of what has been typed
   QString               m_text;         // keep track of what was the original value
+  QFlags<Item>          m_items;
+
   /**
    * This holds the number of precision to be used
    * when no other information (e.g. from account)
@@ -207,6 +216,7 @@ public:
    * @sa setStandardPrecision()
    */
 };
+Q_DECLARE_OPERATORS_FOR_FLAGS(AmountEditPrivate::Items)
 
 void AmountEdit::setReadOnly(bool ro)
 {
@@ -462,7 +472,8 @@ void AmountEdit::setCalculatorButtonVisible(const bool show)
 {
   Q_D(AmountEdit);
   d->m_calculatorButton->setVisible(show);
-  d->updateLineEditSize(show, d->m_currencySymbol->isVisible());
+  d->m_items.setFlag(AmountEditPrivate::ShowCalculator, show);
+  d->updateLineEditSize();
 }
 
 void AmountEdit::setAllowEmpty(bool allowed)
@@ -500,5 +511,6 @@ void AmountEdit::showCurrencySymbol(const QString& symbol)
   Q_D(AmountEdit);
   d->m_currencySymbol->setText(symbol);
   d->m_currencySymbol->setHidden(symbol.isEmpty());
-  d->updateLineEditSize(d->m_calculator->isVisible(), !symbol.isEmpty());
+  d->m_items.setFlag(AmountEditPrivate::ShowCurrencySymbol, !symbol.isEmpty());
+  d->updateLineEditSize();
 }
