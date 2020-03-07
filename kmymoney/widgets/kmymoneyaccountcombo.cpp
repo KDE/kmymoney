@@ -59,6 +59,7 @@ public:
   QTreeView*                      m_popupView;
   QAction*                        m_splitAction;
   QString                         m_lastSelectedAccount;
+  QModelIndex                     m_lastSelectedIndex;
   bool                            m_inMakeCompletion;
 
   void selectFirstMatchingItem()
@@ -214,12 +215,23 @@ bool KMyMoneyAccountCombo::eventFilter(QObject* o, QEvent* e)
             break;
         }
 
+      } else if(e->type() == QEvent::Show) {
+        // Remember current selection when popup is shown
+        d->m_lastSelectedIndex = d->m_popupView->currentIndex();
+
+      } else if(e->type() == QEvent::Hide) {
+        if (d->m_lastSelectedIndex.isValid() &&  d->m_lastSelectedIndex != d->m_popupView->currentIndex()) {
+          selectItem(d->m_popupView->currentIndex());
+          d->m_lastSelectedIndex = QModelIndex();
+        }
+
       } else if(e->type() == QEvent::FocusOut) {
         // if we tab out and have a selection in the popup view
         // than we use that entry completely
         activated();
         hidePopup();
       }
+
     } else if(o == this) {
       if(e->type() == QEvent::KeyPress) {
         const auto kev = static_cast<QKeyEvent*>(e);
@@ -320,6 +332,8 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
   d->m_popupView->expandAll();
   connect(d->m_popupView, &QTreeView::activated, this, &KMyMoneyAccountCombo::selectItem);
 
+  d->m_popupView->installEventFilter(this);
+
   // for some unknown reason, the first selection with the mouse (not with the keyboard)
   // after the qlineedit had been cleared using the clear button does not trigger the
   // activated() signal of d->m_popupView. This is a workaround to catch this scenario
@@ -343,8 +357,11 @@ void KMyMoneyAccountCombo::selectItem(const QModelIndex& index)
   if (d->m_inMakeCompletion)
     return;
 
+  if (!index.isValid())
+    return;
+
   if (index.model() != model()) {
-    qDebug() << "KMyMoneyAccountCombo::selectItem called with wrong model";
+    qDebug() << "KMyMoneyAccountCombo::selectItem called with wrong model" << index;
   }
   if(index.isValid() && (index.model()->flags(index) & Qt::ItemIsSelectable)) {
     // delay the call until the next time in the event loop
@@ -419,7 +436,6 @@ void KMyMoneyAccountCombo::showPopup()
 {
   if(d->m_popupView) {
     d->m_popupView->show();
-    d->m_popupView->installEventFilter(this);
   }
   KComboBox::showPopup();
 }
@@ -428,7 +444,6 @@ void KMyMoneyAccountCombo::hidePopup()
 {
   if(d->m_popupView) {
     d->m_popupView->hide();
-    d->m_popupView->removeEventFilter(this);
   }
   KComboBox::hidePopup();
 }
