@@ -9,10 +9,6 @@ set(libmodels_a_SOURCES
     delegateproxy.cpp
     itemrenameproxymodel.cpp
     onlinebalanceproxymodel.cpp
-)
-
-if(ENABLE_UNFINISHEDFEATURES)
-  list(APPEND libmodels_a_SOURCES
     ledgermodel.cpp
     ledgeritem.cpp
     ledgerfilterbase.cpp
@@ -21,8 +17,7 @@ if(ENABLE_UNFINISHEDFEATURES)
     ledgertransaction.cpp
     specialdatesfilter.cpp
     idfilter.cpp
-  )
-endif()
+)
 
 if (USE_MODELTEST)
   list(APPEND libmodels_a_SOURCES modeltest.cpp)
@@ -36,8 +31,8 @@ target_link_libraries(kmm_models PUBLIC
     Qt5::Core
     kmm_mymoney
     kmm_settings
+    kmymoney_common
     KF5::ItemModels
-    $<$<BOOL:${ENABLE_UNFINISHEDFEATURES}>:kmymoney_common>
 )
 set_target_properties(kmm_models PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})
 

@@ -17,31 +17,27 @@ set(libviews_a_SOURCES
   kpayeeidentifierview.cpp
   payeeidentifierselectiondelegate.cpp
   kmymoneywebpage.cpp
-)
 
-if(ENABLE_UNFINISHEDFEATURES)
-  list(APPEND libviews_a_SOURCES
-    simpleledgerview.cpp
-    kmmstyleditemdelegate.cpp
-    ledgerviewpage.cpp
-    ledgerview.cpp
-    ledgeraccountfilter.cpp
-    ledgerpayeefilter.cpp
-    journaldelegate.cpp
-    onlinebalancedelegate.cpp
-    specialdatedelegate.cpp
-    investtransactioneditor.cpp
-    investactivities.cpp
-    newspliteditor.cpp
-    transactioneditorbase.cpp
-    newtransactioneditor.cpp
-    newtransactionform.cpp
-    splitview.cpp
-    splitdialog.cpp
-    splitdelegate.cpp
-    widgethintframe.cpp
-  )
-endif()
+  simpleledgerview.cpp
+  kmmstyleditemdelegate.cpp
+  ledgerviewpage.cpp
+  ledgerview.cpp
+  ledgeraccountfilter.cpp
+  ledgerpayeefilter.cpp
+  journaldelegate.cpp
+  onlinebalancedelegate.cpp
+  specialdatedelegate.cpp
+  investtransactioneditor.cpp
+  investactivities.cpp
+  newspliteditor.cpp
+  transactioneditorbase.cpp
+  newtransactioneditor.cpp
+  newtransactionform.cpp
+  splitview.cpp
+  splitdialog.cpp
+  splitdelegate.cpp
+  widgethintframe.cpp
+)
 
 set(libviews_a_UI
   kaccountsview.ui
@@ -52,20 +48,16 @@ set(libviews_a_UI
   kscheduledview.ui
   ktagsview.ui
   kpayeeidentifierview.ui
-)
 
-if(ENABLE_UNFINISHEDFEATURES)
-  list(APPEND libviews_a_UI
-    simpleledgerview.ui
-    ledgerview.ui
-    ledgerviewpage.ui
-    splitdialog.ui
-    newspliteditor.ui
-    newtransactioneditor.ui
-    newtransactionform.ui
-    investtransactioneditor.ui
-  )
-endif()
+  simpleledgerview.ui
+  ledgerview.ui
+  ledgerviewpage.ui
+  splitdialog.ui
+  newspliteditor.ui
+  newtransactioneditor.ui
+  newtransactionform.ui
+  investtransactioneditor.ui
+)
 
 # The handling of these ui files depends
 # on libkmymoney.so (the widgets library)
