@@ -108,6 +108,14 @@ public:
         delete ui;
     }
 
+    void dumpModel(const QAbstractItemModel* model)
+    {
+        const auto rows = model->rowCount();
+        for (int row = 0; row < rows; ++row) {
+            const auto idx = model->index(row, 0);
+            qDebug() << row << idx.data(eMyMoney::Model::IdRole).toString() << idx.data(eMyMoney::Model::AccountFullNameRole).toString();
+        }
+    }
     void createStatusEntry(eMyMoney::Split::State status);
     void updateWidgetState();
     bool checkForValidTransaction(bool doUserInteraction = true);
@@ -428,7 +436,7 @@ void InvestTransactionEditor::Private::editSplits(SplitModel* sourceSplitModel, 
         }
     };
 
-    if (!transactionFactor.isNegative()) {
+    if (transactionFactor.isNegative()) {
         invertSplitValues();
     }
 
@@ -451,7 +459,7 @@ void InvestTransactionEditor::Private::editSplits(SplitModel* sourceSplitModel, 
         splitModel.removeEmptySplit();
 
         // invert splits
-        if (!transactionFactor.isNegative()) {
+        if (transactionFactor.isNegative()) {
             invertSplitValues();
         }
 
@@ -528,13 +536,15 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     d->feesModel->setSourceModel(model);
     d->feesModel->sort(AccountsModel::Column::AccountName);
     d->ui->feesCombo->setModel(d->feesModel);
-    new KMyMoneyAccountComboSplitHelper(d->ui->feesCombo, d->feeSplitModel);
+    auto helper = new KMyMoneyAccountComboSplitHelper(d->ui->feesCombo, d->feeSplitModel);
+    connect(helper, &KMyMoneyAccountComboSplitHelper::accountComboDisabled, d->ui->feesAmountEdit, &AmountEdit::setReadOnly);
 
     d->interestModel->addAccountGroup(QVector<eMyMoney::Account::Type> { eMyMoney::Account::Type::Income });
     d->interestModel->setSourceModel(model);
     d->interestModel->sort(AccountsModel::Column::AccountName);
     d->ui->interestCombo->setModel(d->interestModel);
-    new KMyMoneyAccountComboSplitHelper(d->ui->interestCombo, d->interestSplitModel);
+    helper = new KMyMoneyAccountComboSplitHelper(d->ui->interestCombo, d->interestSplitModel);
+    connect(helper, &KMyMoneyAccountComboSplitHelper::accountComboDisabled, d->ui->interestAmountEdit, &AmountEdit::setReadOnly);
 
     d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
     d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
@@ -570,11 +580,11 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     connect(d->ui->feesCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, QOverload<int>::of(&InvestTransactionEditor::feesChanged));
     connect(d->ui->feesCombo, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), this, QOverload<const QString&>::of(&InvestTransactionEditor::feesChanged));
-    connect(d->ui->feesCombo, &KMyMoneyAccountCombo::splitDialogRequest, this, &InvestTransactionEditor::editFeeSplits);
+    connect(d->ui->feesCombo, &KMyMoneyAccountCombo::splitDialogRequest, this, &InvestTransactionEditor::editFeeSplits, Qt::QueuedConnection);
 
     connect(d->ui->interestCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, QOverload<int>::of(&InvestTransactionEditor::interestChanged));
     connect(d->ui->interestCombo, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), this, QOverload<const QString&>::of(&InvestTransactionEditor::interestChanged));
-    connect(d->ui->interestCombo, &KMyMoneyAccountCombo::splitDialogRequest, this, &InvestTransactionEditor::editInterestSplits);
+    connect(d->ui->interestCombo, &KMyMoneyAccountCombo::splitDialogRequest, this, &InvestTransactionEditor::editInterestSplits, Qt::QueuedConnection);
 
     /// @todo convert to new signal/slot syntax
     connect(d->ui->cancelButton, SIGNAL(clicked(bool)), this, SLOT(reject()));
@@ -693,15 +703,15 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         d->ui->accountCombo->setSelected(assetAccountSplitIdx.data(eMyMoney::Model::SplitAccountIdRole).toString());
 
         d->ui->sharesAmountEdit->setPrecision(MyMoneyMoney::denomToPrec(d->security.smallestAccountFraction()));
-        d->ui->sharesAmountEdit->setValue(d->split.shares());
+        d->ui->sharesAmountEdit->setValue(d->split.shares() * d->currentActivity->sharesFactor());
 
         const auto indexes = d->securitiesModel->match(d->securitiesModel->index(0,0), eMyMoney::Model::IdRole, d->split.accountId(), 1, Qt::MatchFixedString);
         if (!indexes.isEmpty()) {
             d->ui->securityCombo->setCurrentIndex(indexes.first().row());
         }
 
-        d->ui->feesAmountEdit->setValue(d->splitValue(d->feeSplitModel));
-        d->ui->interestAmountEdit->setValue(d->splitValue(d->interestSplitModel));
+        d->ui->feesAmountEdit->setValue(d->splitValue(d->feeSplitModel) * d->currentActivity->feesFactor());
+        d->ui->interestAmountEdit->setValue(d->splitValue(d->interestSplitModel) * d->currentActivity->interestFactor());
 
         d->currentActivity->loadPriceWidget(d->split);
 
@@ -931,10 +941,6 @@ void InvestTransactionEditor::saveTransaction()
         // new we update the split we are opened for
         MyMoneySplit sp(d->split);
         sp.setMemo(d->ui->memoEdit->toPlainText());
-#if 0
-        sp.setShares(d->amountHelper->value());
-        sp.setValue(d->amountHelper->value());
-#endif
 
         if (sp.reconcileFlag() != eMyMoney::Split::State::Reconciled
                 && !sp.reconcileDate().isValid()

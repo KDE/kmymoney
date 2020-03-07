@@ -472,6 +472,20 @@ void Activity::loadPriceWidget(const MyMoneySplit & split)
   }
 }
 
+MyMoneyMoney Activity::sharesFactor() const
+{
+  return MyMoneyMoney::ONE;
+}
+
+MyMoneyMoney Activity::feesFactor() const
+{
+  return MyMoneyMoney::ONE;
+}
+
+MyMoneyMoney Activity::interestFactor() const
+{
+  return MyMoneyMoney::MINUS_ONE;
+}
 
 
 
@@ -708,6 +722,11 @@ bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpl
   }
 
   return true;
+}
+
+MyMoneyMoney Sell::sharesFactor() const
+{
+  return MyMoneyMoney::MINUS_ONE;
 }
 
 Div::Div(InvestTransactionEditor* editor) :
@@ -1048,6 +1067,13 @@ bool Remove::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneyS
 
   return true;
 }
+
+MyMoneyMoney Remove::sharesFactor() const
+{
+  return MyMoneyMoney::MINUS_ONE;
+}
+
+
 
 Invest::Split::Split(InvestTransactionEditor* editor) :
   Activity(editor)

@@ -81,6 +81,10 @@ public:
   virtual void loadPriceWidget(const MyMoneySplit& split);
   virtual MyMoneyMoney totalAmount() const;
 
+  virtual MyMoneyMoney sharesFactor() const;
+  virtual MyMoneyMoney feesFactor() const;
+  virtual MyMoneyMoney interestFactor() const;
+
 protected:
   explicit Activity(InvestTransactionEditor* editor);
   bool haveAssetAccount() const;
@@ -114,7 +118,8 @@ public:
   void showWidgets() const override;
   bool isComplete(QString& reason) const override;
   bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
-  virtual MyMoneyMoney totalAmount() const;
+
+  virtual MyMoneyMoney totalAmount() const override;
 };
 
 class Sell : public Activity
@@ -126,6 +131,8 @@ public:
   void showWidgets() const override;
   bool isComplete(QString& reason) const override;
   bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
+
+  virtual MyMoneyMoney sharesFactor() const override;
 };
 
 class Div : public Activity
@@ -170,6 +177,8 @@ public:
   void showWidgets() const override;
   bool isComplete(QString& reason) const override;
   bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
+
+  virtual MyMoneyMoney sharesFactor() const override;
 };
 
 class Split : public Activity
