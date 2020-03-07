@@ -241,6 +241,13 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
                 ui->costCenterLabel->setEnabled(isIncomeExpense);
                 costCenterRequired = category.isCostCenterRequired();
 
+                const auto security = MyMoneyFile::instance()->security(category.currencyId());
+                if (security.id() != transaction.commodity()) {
+                    amountHelper->showCurrencySymbol(security.tradingSymbol());
+                } else {
+                    amountHelper->showCurrencySymbol(QString());
+                }
+
                 bool needValueSet = false;
                 // make sure we have a split in the model
                 if (splitModel.rowCount() == 0) {
@@ -264,7 +271,11 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
 
                 if (amountHelper->haveValue() && needValueSet) {
                     splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), eMyMoney::Model::SplitValueRole);
-                    splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value() / getPrice()), eMyMoney::Model::SplitSharesRole);
+                    if (!amountHelper->value().isZero()) {
+                        splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value() / getPrice()), eMyMoney::Model::SplitSharesRole);
+                    } else {
+                        splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(MyMoneyMoney()), eMyMoney::Model::SplitSharesRole);
+                    }
                 }
 
             } catch (MyMoneyException& e) {
@@ -311,10 +322,10 @@ MyMoneyMoney NewTransactionEditor::Private::getPrice()
             if (security.id() != transaction.commodity()) {
                 const auto commodity = MyMoneyFile::instance()->security(transaction.commodity());
                 QPointer<KCurrencyCalculator> calc =
-                    new KCurrencyCalculator(commodity,
-                                            security,
-                                            amountHelper->value(),
+                    new KCurrencyCalculator(security,
+                                            commodity,
                                             amountHelper->value() / result,
+                                            amountHelper->value(),
                                             ui->dateEdit->date(),
                                             security.smallestAccountFraction(),
                                             q);
