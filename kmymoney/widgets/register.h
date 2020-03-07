@@ -425,6 +425,8 @@ public:
     return m_sortOrder;
   }
   TransactionSortField primarySortKey() const;
+  SortDirection primarySortKeyDirection() const;
+
   void sortItems();
 
   /**

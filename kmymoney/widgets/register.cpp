@@ -598,7 +598,10 @@ void Register::setupRegister(const MyMoneyAccount& account, bool showAccountColu
     case MyMoneyAccount::Stock:
       break;
     default:
-      showColumn(BalanceColumn);
+      if (primarySortKey() == PostDateSort && primarySortKeyDirection() == AscendingOrder)
+          showColumn(BalanceColumn);
+      else
+          hideColumn(BalanceColumn);
       break;
   }
 
@@ -696,6 +699,8 @@ void Register::setSortOrder(const QString& order)
   for (it = orderList.constBegin(); it != orderList.constEnd(); ++it) {
     m_sortOrder << static_cast<TransactionSortField>((*it).toInt());
   }
+  // update balance column
+  setupRegister(m_account);
 }
 
 void Register::sortItems()
@@ -748,6 +753,13 @@ TransactionSortField Register::primarySortKey() const
   if (!m_sortOrder.isEmpty())
     return static_cast<KMyMoneyRegister::TransactionSortField>(abs(m_sortOrder.first()));
   return UnknownSort;
+}
+
+SortDirection Register::primarySortKeyDirection() const
+{
+  if (!m_sortOrder.isEmpty())
+    return static_cast<int>(m_sortOrder.first()) < 0 ? DescendingOrder : AscendingOrder;
+  return AscendingOrder;
 }
 
 
