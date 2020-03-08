@@ -49,7 +49,7 @@ class SplitDelegate::Private
 {
 public:
   Private()
-  : m_editor(0)
+  : m_editor(nullptr)
   , m_editorRow(-1)
   , m_showValuesInverted(false)
   {}
