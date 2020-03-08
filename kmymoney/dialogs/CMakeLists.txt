@@ -40,11 +40,13 @@ set(libdialogs_a_SOURCES
   stdtransactioneditor.cpp
   transactionmatcher.cpp
   ksaveasquestion.cpp
+  amounteditcurrencyhelper.cpp
 )
 
 set(dialogs_HEADERS
   splitadjustdialog.h
   investtransactioneditor.h kcurrencycalculator.h transactioneditor.h stdtransactioneditor.h
+  amounteditcurrencyhelper.h
   )
 
 set(dialogs_UI

@@ -55,6 +55,7 @@
 #include "modelenums.h"
 #include "mymoneysecurity.h"
 #include "kcurrencycalculator.h"
+#include "amounteditcurrencyhelper.h"
 
 using namespace Icons;
 
@@ -71,6 +72,7 @@ struct NewSplitEditor::Private
   , costCenterRequired(false)
   , showValuesInverted(false)
   , haveShares(false)
+  , loadingSplit(false)
   , postDate(QDate::currentDate())
   , amountHelper(nullptr)
   {
@@ -109,6 +111,7 @@ struct NewSplitEditor::Private
   bool                          costCenterRequired;
   bool                          showValuesInverted;
   bool                          haveShares;
+  bool                          loadingSplit;
   MyMoneyAccount                counterAccount;
   MyMoneyAccount                category;
   MyMoneySecurity               commodity;
@@ -212,16 +215,20 @@ bool NewSplitEditor::Private::amountChanged(CreditDebitHelper* valueHelper)
 
 void NewSplitEditor::Private::checkMultiCurrency()
 {
+  // skip interaction during loading operation
+  if (loadingSplit)
+    return;
+
   const auto categoryId = q->accountId();
   auto const model = MyMoneyFile::instance()->accountsModel();
   auto account = model->itemById(categoryId);
   auto security = MyMoneyFile::instance()->security(account.currencyId());
-  if (security.id() != commodity.id()) {
+  if (security.id() != commodity.id() && !amountHelper->value().isZero()) {
     QPointer<KCurrencyCalculator> calc =
-    new KCurrencyCalculator(commodity,
-                            security,
-                            q->value(),
+    new KCurrencyCalculator(security,
+                            commodity,
                             q->value() * price,
+                            q->value(),
                             postDate,
                             security.smallestAccountFraction(),
                             q);
@@ -238,10 +245,11 @@ void NewSplitEditor::Private::checkMultiCurrency()
 }
 
 
-NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
+NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity, const QString& counterAccountId)
   : QFrame(parent, Qt::FramelessWindowHint /* | Qt::X11BypassWindowManagerHint */)
   , d(new Private(this))
 {
+  d->commodity = commodity;
   auto const file = MyMoneyFile::instance();
   auto view = qobject_cast<SplitView*>(parent->parentWidget());
   Q_ASSERT(view != 0);
@@ -289,6 +297,8 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
 
   d->amountHelper = new CreditDebitHelper(this, d->ui->amountEditCredit, d->ui->amountEditDebit);
 
+  new AmountEditCurrencyHelper(d->ui->accountCombo, d->amountHelper, commodity.id());
+
   connect(d->ui->numberEdit, SIGNAL(textChanged(QString)), this, SLOT(numberChanged(QString)));
   connect(d->ui->costCenterCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(costCenterChanged(int)));
   connect(d->ui->accountCombo, SIGNAL(accountSelected(QString)), this, SLOT(categoryChanged(QString)));
@@ -300,11 +310,6 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
 
 NewSplitEditor::~NewSplitEditor()
 {
-}
-
-void NewSplitEditor::setCommodity(const MyMoneySecurity& commodity)
-{
-  d->commodity = commodity;
 }
 
 void NewSplitEditor::setPostDate(const QDate& date)
@@ -379,7 +384,6 @@ QString NewSplitEditor::accountId() const
 
 void NewSplitEditor::setAccountId(const QString& id)
 {
-  QSignalBlocker block(d->ui->accountCombo);
   d->ui->accountCombo->clearEditText();
   d->ui->accountCombo->setSelected(id);
 }
@@ -486,3 +490,14 @@ void NewSplitEditor::amountChanged()
 {
   d->amountChanged(d->amountHelper);
 }
+
+void NewSplitEditor::startLoadingSplit()
+{
+  d->loadingSplit = true;
+}
+
+void NewSplitEditor::finishLoadingSplit()
+{
+  d->loadingSplit = false;
+}
+

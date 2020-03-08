@@ -64,6 +64,7 @@
 #include "kcurrencycalculator.h"
 #include "idfilter.h"
 #include "kmymoneysettings.h"
+#include "amounteditcurrencyhelper.h"
 
 using namespace Icons;
 
@@ -240,13 +241,6 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
                 ui->costCenterCombo->setEnabled(isIncomeExpense);
                 ui->costCenterLabel->setEnabled(isIncomeExpense);
                 costCenterRequired = category.isCostCenterRequired();
-
-                const auto security = MyMoneyFile::instance()->security(category.currencyId());
-                if (security.id() != transaction.commodity()) {
-                    amountHelper->showCurrencySymbol(security.tradingSymbol());
-                } else {
-                    amountHelper->showCurrencySymbol(QString());
-                }
 
                 bool needValueSet = false;
                 // make sure we have a split in the model
@@ -614,6 +608,8 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
     }
     // set focus to date edit once we return to event loop
     QMetaObject::invokeMethod(d->ui->dateEdit, "setFocus", Qt::QueuedConnection);
+
+    new AmountEditCurrencyHelper(d->ui->accountCombo, d->amountHelper, d->transaction.commodity());
 }
 
 void NewTransactionEditor::numberChanged(const QString& newNumber)

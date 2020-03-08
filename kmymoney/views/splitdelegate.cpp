@@ -105,8 +105,7 @@ QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem
 
     } else {
       QString accountId = index.data(eMyMoney::Model::SplitAccountIdRole).toString();
-      d->m_editor = new NewSplitEditor(parent, accountId);
-      d->m_editor->setCommodity(d->m_commodity);
+      d->m_editor = new NewSplitEditor(parent, d->m_commodity, accountId);
     }
 
     if(d->m_editor) {
@@ -399,6 +398,7 @@ void SplitDelegate::setEditorData(QWidget* editWidget, const QModelIndex& index)
   NewSplitEditor* editor = qobject_cast<NewSplitEditor*>(editWidget);
 
   if(model && editor) {
+    editor->startLoadingSplit();
     editor->setShowValuesInverted(d->m_showValuesInverted);
     editor->setMemo(index.data(eMyMoney::Model::SplitMemoRole).toString());
     editor->setAccountId(index.data(eMyMoney::Model::SplitAccountIdRole).toString());
@@ -407,6 +407,7 @@ void SplitDelegate::setEditorData(QWidget* editWidget, const QModelIndex& index)
     editor->setCostCenterId(index.data(eMyMoney::Model::SplitCostCenterIdRole).toString());
     editor->setNumber(index.data(eMyMoney::Model::SplitNumberRole).toString());
     editor->setPayeeId(index.data(eMyMoney::Model::SplitPayeeIdRole).toString());
+    editor->finishLoadingSplit();
   }
 }
 

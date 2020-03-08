@@ -43,7 +43,7 @@ public:
   /**
    * @a accountId is the current account displayed for the transaction
    */
-  explicit NewSplitEditor(QWidget* parent, const QString& accountId = QString());
+  explicit NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity, const QString& accountId = QString());
   virtual ~NewSplitEditor();
 
   /**
@@ -55,8 +55,10 @@ public:
   void setShowValuesInverted(bool inverse);
   bool showValuesInverted();
 
-  void setCommodity(const MyMoneySecurity& commodity);
   void setPostDate(const QDate& date);
+
+  void startLoadingSplit();
+  void finishLoadingSplit();
 
 protected:
   void keyPressEvent(QKeyEvent* e) final override;
