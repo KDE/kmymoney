@@ -111,7 +111,6 @@ public:
 
     m_currencySymbol = new QLabel(q);
     m_currencySymbol->setCursor(Qt::ArrowCursor);
-    m_currencySymbol->setFixedSize(btnSize, btnSize);
 
     q->connect(m_calculatorButton, &QAbstractButton::clicked, q, &AmountEdit::slotCalculatorOpen);
 
@@ -158,16 +157,17 @@ public:
     // usually, the calculator widget is shown underneath the MoneyEdit widget
     // if it does not fit on the screen, we show it above this widget
     auto p = q->mapToGlobal(QPoint(0, 0));
-    if (p.y() + q->height() + h > QApplication::desktop()->height())
+    if (p.y() + q->height() + h > QApplication::desktop()->height()) {
       p.setY(p.y() - h);
-    else
+    } else {
       p.setY(p.y() + q->height());
+    }
 
     // usually, it is shown left aligned. If it does not fit, we align it
     // to the right edge of the widget
-    if (p.x() + w > QApplication::desktop()->width())
+    if (p.x() + w > QApplication::desktop()->width()) {
       p.setX(p.x() + q->width() - w);
-
+    }
     m_calculatorFrame->show();
 
     QRect r = m_calculator->geometry();
@@ -179,13 +179,25 @@ public:
   void updateLineEditSize()
   {
     Q_Q(AmountEdit);
+    const int currencyWidth = q->fontMetrics().boundingRect(m_currencySymbol->text()).width();
+    const int currencyHeight = q->fontMetrics().boundingRect(m_currencySymbol->text()).height();
+    m_currencySymbol->resize(currencyWidth, currencyHeight);
+
     int height = q->sizeHint().height();
     int frameWidth = q->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
-    const int btnSize = height - 5;
-    int factor = 0;
-    factor += m_items.testFlag(ShowCalculator) ? 1 : 0;
-    factor += m_items.testFlag(ShowCurrencySymbol) ? 1 : 0;
-    q->setStyleSheet(QString("QLineEdit { padding-right: %1px }").arg(factor*btnSize - frameWidth));
+    const int btnHeight = height - 2*frameWidth;
+    const int btnX = (height - btnHeight) / 2;
+    const int currencyX = (height - currencyHeight) / 2;
+
+    int gaps = 0;
+    gaps += m_items.testFlag(ShowCalculator) ? 1 : 0;
+    gaps += m_items.testFlag(ShowCurrencySymbol) ? 1 : 0;
+
+    m_calculatorButton->move(q->width() - m_calculatorButton->width() - frameWidth, btnX);
+    m_currencySymbol->move(q->width() - m_calculatorButton->width() - m_currencySymbol->width() - gaps*frameWidth, currencyX);
+
+    const int padding = m_calculatorButton->width() + m_currencySymbol->width() + ((gaps-1) * frameWidth);
+    q->setStyleSheet(QString("QLineEdit { padding-right: %1px }").arg(padding));
     q->setMinimumHeight(height);
   }
 
@@ -267,11 +279,9 @@ int AmountEdit::standardPrecision()
 
 void AmountEdit::resizeEvent(QResizeEvent* event)
 {
-  Q_D(AmountEdit);
   Q_UNUSED(event);
-  const int frameWidth = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
-  d->m_calculatorButton->move(width() - d->m_calculatorButton->width() - frameWidth - 2, 2);
-  d->m_currencySymbol->move(width() - d->m_calculatorButton->width() - d->m_currencySymbol->width() - frameWidth - 2, 2);
+  Q_D(AmountEdit);
+  d->updateLineEditSize();
 }
 
 void AmountEdit::focusOutEvent(QFocusEvent* event)
@@ -394,18 +404,6 @@ void AmountEdit::setText(const QString& txt)
   if (isEnabled() && !txt.isEmpty())
     d->ensureFractionalPart(d->m_text);
   QLineEdit::setText(d->m_text);
-#if 0
-  m_resetButton->setEnabled(false);
-#endif
-}
-
-void AmountEdit::resetText()
-{
-#if 0
-  Q_D(AmountEdit);
-  setText(d->m_text);
-  m_resetButton->setEnabled(false);
-#endif
 }
 
 void AmountEdit::theTextChanged(const QString & theText)

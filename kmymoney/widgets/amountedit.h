@@ -132,8 +132,6 @@ public:
 
 
 public Q_SLOTS:
-  void resetText();
-
   void setText(const QString& txt);
 
   /**
