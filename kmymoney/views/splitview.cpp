@@ -55,6 +55,7 @@ public:
   , showValuesInverted(false)
   , balanceCalculationPending(false)
   , newTransactionPresent(false)
+  , firstSelectionAfterCreation(true)
   , columnSelector(nullptr)
   {
   }
@@ -91,6 +92,7 @@ public:
   bool                            showValuesInverted;
   bool                            balanceCalculationPending;
   bool                            newTransactionPresent;
+  bool                            firstSelectionAfterCreation;
   ColumnSelector*                 columnSelector;
 };
 
@@ -251,7 +253,7 @@ void SplitView::currentChanged(const QModelIndex& current, const QModelIndex& pr
     QString id = idx.data(eMyMoney::Model::IdRole).toString();
     // For a new transaction the id is completely empty, for a split view the transaction
     // part is filled but the split id is empty and the string ends with a dash
-    if(id.isEmpty() || id.endsWith('-')) {
+    if(!d->firstSelectionAfterCreation && (id.isEmpty() || id.endsWith('-'))) {
       selectionModel()->clearSelection();
       setCurrentIndex(idx);
       selectRow(idx.row());
@@ -261,6 +263,7 @@ void SplitView::currentChanged(const QModelIndex& current, const QModelIndex& pr
       scrollTo(idx, EnsureVisible);
       emit transactionSelected(MyMoneyModelBase::mapToBaseSource(idx));
     }
+    d->firstSelectionAfterCreation = false;
     QMetaObject::invokeMethod(this, "doItemsLayout", Qt::QueuedConnection);
   }
 }
