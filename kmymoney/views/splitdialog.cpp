@@ -309,11 +309,11 @@ void SplitDialog::updateButtonState()
   d->ui->mergeButton->setEnabled(false);
   d->ui->deleteZeroButton->setEnabled(false);
 
-  if(d->ui->splitView->selectionModel()->selectedRows().count() >= 1) {
+  if(d->ui->splitView->selectionModel()->selectedRows().count() >= 2) {
     d->ui->deleteButton->setEnabled(true);
   }
 
-  if(d->ui->splitView->model()->rowCount() > 2) {
+  if(d->ui->splitView->model()->rowCount() > 3) {
     d->ui->deleteAllButton->setEnabled(true);
   }
 
