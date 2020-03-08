@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2010-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
