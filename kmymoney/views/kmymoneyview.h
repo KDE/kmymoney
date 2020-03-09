@@ -45,6 +45,7 @@
 #include "mymoneyschedule.h"
 #include <mymoneysecurity.h>
 #include <selectedtransaction.h>
+#include "kmymoneyutils.h"
 
 #ifdef KActivities_FOUND
 namespace KActivities
@@ -450,6 +451,12 @@ public:
     * This method changes the view type according to the settings.
     */
   void updateViewType();
+
+  /**
+   * Return mapping settings page id for currently displayed view
+   * @return setting page id
+   */
+  KMyMoneyUtils::SettingsPage viewToSettingsPageId();
 
 protected:
   /**

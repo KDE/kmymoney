@@ -130,6 +130,25 @@ public:
     AccountScheduleReference         // account is referenced in a schedule
   };
 
+  /**
+   * Specify a page in the settings dialog
+   */
+  enum class SettingsPage {
+    Undefined,
+    Colors,
+    Encryption,
+    Fonts,
+    Forecast,
+    General,
+    Gpg,
+    Home,
+    OnlineQuotes,
+    Plugins,
+    Register,
+    Reports,
+    Schedules,
+  };
+
   static const int maxHomePageItems = 5;
 
   KMyMoneyUtils();

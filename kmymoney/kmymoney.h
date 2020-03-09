@@ -664,6 +664,12 @@ public:
     */
   bool okToWriteFile(const KUrl& url);
 
+  /**
+   * show settings dialog
+   * @param id page id to show
+   */
+  void showSettingsDialog(KMyMoneyUtils::SettingsPage id = KMyMoneyUtils::SettingsPage::Undefined);
+
 protected:
   /** save general Options like all bar positions and status as well as the geometry and the recent file list to the configuration
    * file

@@ -98,7 +98,6 @@
 #include "kforecastview.h"
 #include "konlinejoboutbox.h"
 #include "kmymoney.h"
-#include "kmymoneyutils.h"
 #include "models.h"
 
 #define COMPRESSION_MIME_TYPE "application/x-gzip"
@@ -359,6 +358,37 @@ void KMyMoneyView::updateViewType()
       }
     }
   }
+}
+
+KMyMoneyUtils::SettingsPage KMyMoneyView::viewToSettingsPageId()
+{
+  QWidget *w = model()->data(model()->index(KPageView::currentPage().row(), 0), KPageModel::WidgetRole).value<QWidget*>();
+  KMyMoneyUtils::SettingsPage id = KMyMoneyUtils::SettingsPage::Undefined;
+  if (dynamic_cast<KHomeView*>(w))
+    id = KMyMoneyUtils::SettingsPage::Home;
+  else if (dynamic_cast<KAccountsView*>(w))
+    ;
+  else if (dynamic_cast<KInstitutionsView*>(w))
+    ;
+  else if (dynamic_cast<KScheduledView*>(w))
+    id = KMyMoneyUtils::SettingsPage::Schedules;
+  else if (dynamic_cast<KCategoriesView*>(w))
+    ;
+  else if (dynamic_cast<KPayeesView*>(w))
+    ;
+  else if (dynamic_cast<KGlobalLedgerView*>(w))
+    id = KMyMoneyUtils::SettingsPage::Register;
+  else if (dynamic_cast<KInvestmentView*>(w))
+    ;
+  else if (dynamic_cast<KReportsView*>(w))
+    id = KMyMoneyUtils::SettingsPage::Reports;
+  else if (dynamic_cast<KBudgetView*>(w))
+    ;
+  else if (dynamic_cast<KForecastView*>(w))
+    id = KMyMoneyUtils::SettingsPage::Forecast;
+  else if (dynamic_cast<KOnlineJobOutbox*>(w))
+    ;
+  return id;
 }
 
 bool KMyMoneyView::showPageHeader() const
