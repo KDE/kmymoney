@@ -120,9 +120,8 @@ void KSettingsSchedules::slotLoadRegion(const QString &region)
   if (!region.isEmpty())
     i = d->ui->m_holidayRegion->findText(d->m_regionMap.key(region));
   if ((i > -1) && (i != d->ui->m_holidayRegion->currentIndex())) {
-    d->ui->m_holidayRegion->blockSignals(true);
+    QSignalBlocker blocked(d->ui->m_holidayRegion);
     d->ui->m_holidayRegion->setCurrentIndex(i);
-    d->ui->m_holidayRegion->blockSignals(false);
   }
 }
 

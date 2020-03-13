@@ -493,14 +493,12 @@ void KEquityPriceUpdateDlg::slotUpdateAllClicked()
 void KEquityPriceUpdateDlg::slotDateChanged()
 {
   Q_D(KEquityPriceUpdateDlg);
-  d->ui->m_fromDate->blockSignals(true);
-  d->ui->m_toDate->blockSignals(true);
+  QSignalBlocker blockFrom(d->ui->m_fromDate);
+  QSignalBlocker blockTo(d->ui->m_toDate);
   if (d->ui->m_toDate->date() > QDate::currentDate())
     d->ui->m_toDate->setDate(QDate::currentDate());
   if (d->ui->m_fromDate->date() > d->ui->m_toDate->date())
     d->ui->m_fromDate->setDate(d->ui->m_toDate->date());
-  d->ui->m_fromDate->blockSignals(false);
-  d->ui->m_toDate->blockSignals(false);
 }
 
 void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _kmmID, const QString& _webID)

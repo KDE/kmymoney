@@ -740,8 +740,7 @@ void MyMoneyFile::removeInstitution(const MyMoneyInstitution& institution)
   if (inst.id().isEmpty())
     throw MYMONEYEXCEPTION_CSTRING("Unknown institution");
 
-  bool blocked = signalsBlocked();
-  blockSignals(true);
+  QSignalBlocker blocker(this);
   const auto accounts = inst.accountList();
   for (const auto& accountId : accounts) {
     auto a = account(accountId);
@@ -749,7 +748,6 @@ void MyMoneyFile::removeInstitution(const MyMoneyInstitution& institution)
     modifyAccount(a);
     d->m_changeSet += MyMoneyNotification(File::Mode::Modify, a);
   }
-  blockSignals(blocked);
 
   d->institutionsModel.removeItem(institution);
 

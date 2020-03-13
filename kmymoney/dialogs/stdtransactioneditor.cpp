@@ -1191,10 +1191,9 @@ MyMoneyMoney StdTransactionEditor::removeVatSplit()
   // ... make sure that the widget is updated ...
   // block the signals to avoid popping up the split editor dialog
   // for nothing
-  d->m_editWidgets["category"]->blockSignals(true);
+  QSignalBlocker blocked(d->m_editWidgets["category"]);
   QString id;
   setupCategoryWidget(id);
-  d->m_editWidgets["category"]->blockSignals(false);
 
   // ... and return the updated amount
   return amount;

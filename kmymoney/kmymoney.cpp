@@ -387,7 +387,7 @@ public:
   bool applyFileFixes()
   {
     const auto file = MyMoneyFile::instance();
-    const auto blocked = file->blockSignals(true);
+    QSignalBlocker blocked(file);
     KSharedConfigPtr config = KSharedConfig::openConfig();
     KConfigGroup grp = config->group("General Options");
 
@@ -433,13 +433,11 @@ public:
         }
         ft.commit();
       } catch (const MyMoneyException &) {
-        file->blockSignals(blocked);
         return false;
       }
     } else {
       qDebug() << "Skipping automatic transaction fix!";
     }
-    file->blockSignals(blocked);
     return true;
   }
 

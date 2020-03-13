@@ -108,9 +108,8 @@ void KSettingsIcons::slotLoadTheme(const QString &theme)
   if (!theme.isEmpty())
     i = d->ui->m_IconsTheme->findText(theme);
   if ((i > -1) && (i != d->ui->m_IconsTheme->currentIndex())) {
-    d->ui->m_IconsTheme->blockSignals(true);
+    QSignalBlocker blocked(d->ui->m_IconsTheme);
     d->ui->m_IconsTheme->setCurrentIndex(i);
-    d->ui->m_IconsTheme->blockSignals(false);
   }
 }
 

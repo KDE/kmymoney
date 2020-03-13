@@ -550,9 +550,8 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
         } else {
             d->ui->dateEdit->setDate(QDate::currentDate());
         }
-        bool blocked = d->ui->accountCombo->lineEdit()->blockSignals(true);
+        QSignalBlocker blocker(d->ui->accountCombo->lineEdit());
         d->ui->accountCombo->clearEditText();
-        d->ui->accountCombo->lineEdit()->blockSignals(blocked);
 
     } else {
         // find which item has this id and set is as the current item

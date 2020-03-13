@@ -389,11 +389,10 @@ void KCurrencyEditDlg::slotSelectCurrency(const QString& id)
 
   while (*it) {
     if ((*it)->text(1) == id) {
-      d->ui->m_currencyList->blockSignals(true);
+      QSignalBlocker blocked(d->ui->m_currencyList);
       slotSelectCurrency(*it);
       d->ui->m_currencyList->setCurrentItem(*it);
       d->ui->m_currencyList->scrollToItem(*it);
-      d->ui->m_currencyList->blockSignals(false);
       break;
     }
     ++it;

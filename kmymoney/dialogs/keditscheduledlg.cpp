@@ -194,9 +194,8 @@ public:
   {
     auto remain = m_schedule.transactionsRemaining();
     if (remain != ui->m_RemainingEdit->value()) {
-      ui->m_RemainingEdit->blockSignals(true);
+      QSignalBlocker blocked(ui->m_RemainingEdit);
       ui->m_RemainingEdit->setValue(remain);
-      ui->m_RemainingEdit->blockSignals(false);
     }
   }
 
@@ -636,9 +635,8 @@ void KEditScheduleDlg::slotRemainingChanged(int value)
   d->m_schedule.setOccurrenceMultiplier(d->ui->m_frequencyNoEdit->value());
 
   if (d->m_schedule.transactionsRemaining() != value) {
-    d->ui->m_FinalPaymentEdit->blockSignals(true);
+    QSignalBlocker blocked(d->ui->m_FinalPaymentEdit);
     d->ui->m_FinalPaymentEdit->setDate(d->m_schedule.dateAfter(value));
-    d->ui->m_FinalPaymentEdit->blockSignals(false);
   }
 }
 
