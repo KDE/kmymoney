@@ -477,7 +477,7 @@ KMyMoneyAccountComboSplitHelper::KMyMoneyAccountComboSplitHelper(QComboBox* acco
   d->m_accountCombo = accountCombo;
   d->m_splitModel = model;
 
-  connect(model, &QAbstractItemModel::dataChanged, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged /*, Qt::QueuedConnection */);
+  connect(model, &QAbstractItemModel::dataChanged, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged);
   connect(model, &QAbstractItemModel::rowsRemoved, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged, Qt::QueuedConnection);
   connect(model, &QAbstractItemModel::modelReset, this, &KMyMoneyAccountComboSplitHelper::splitCountChanged, Qt::QueuedConnection);
   connect(model, &QAbstractItemModel::destroyed, this, &KMyMoneyAccountComboSplitHelper::modelDestroyed);
