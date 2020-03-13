@@ -602,6 +602,10 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
                 }
             }
         }
+
+        if (d->splitModel.rowCount() == 1) {
+            d->ui->accountCombo->setSelected(d->splitModel.index(0, 0).data(eMyMoney::Model::SplitAccountIdRole).toString());
+        }
         d->bypassPriceEditor = true;
         d->updateWidgetState();
         d->bypassPriceEditor = false;

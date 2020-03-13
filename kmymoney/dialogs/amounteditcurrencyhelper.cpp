@@ -64,6 +64,8 @@ public:
     commodityId = _commodityId;
 
     q->connect(category, &KMyMoneyAccountCombo::accountSelected, q, &AmountEditCurrencyHelper::categoryChanged);
+
+    q->categoryChanged(category->getSelected());
   }
 };
 
