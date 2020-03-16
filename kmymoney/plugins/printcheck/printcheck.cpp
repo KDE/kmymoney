@@ -153,6 +153,7 @@ void KMMPrintCheckPlugin::slotPrintCheck()
     checkHTML.replace("$PAYEE_ADDRESS", payee.address());
     checkHTML.replace("$PAYEE_CITY", payee.city());
     checkHTML.replace("$PAYEE_POSTCODE", payee.postcode());
+    checkHTML.replace("$PAYEE_REFERENCE", payee.reference());
     checkHTML.replace("$PAYEE_STATE", payee.state());
     checkHTML.replace("$PAYEE_NOTES", payee.notes());
     // data about the transaction

@@ -39,7 +39,10 @@ install(FILES check_template_green_linen.html
 install(FILES check_all_fields.html
             DESTINATION  ${DATA_INSTALL_DIR}/kmm_printcheck)
 
-install(FILES sepa.html
+install(FILES sepa_iban_notes.html
+            DESTINATION  ${DATA_INSTALL_DIR}/kmm_printcheck)
+
+install(FILES sepa_iban_reference.html
             DESTINATION  ${DATA_INSTALL_DIR}/kmm_printcheck)
 
 # the KCM module

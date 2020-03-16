@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC </td>
+<html>
+<head>
+<title>printing template for sepa bank transfer form</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="Ralf Habacker">
+<meta name="description" content="Print template for sepa bank transfer form\nRequires the IBAN of the payee to be included in the note field of a payee.">
+
+<style type="text/css">
+
+.top {
+    position:absolute;
+    /* adjust according to printer border */
+    left:-0.5cm;
+    top:-1.2cm;
+    /* white-space: nowrap; */
+    font-size: 12pt;
+    font-stretch: extra-expanded;
+    font-family: monospace;
+    white-space: pre;
+    letter-spacing: 0.15cm;
+}
+
+.payee {
+    position:absolute;
+    left:0.9cm;
+    top:2.45cm;
+}
+
+.iban {
+    position:absolute;
+    left:0.9cm;
+    top:3.3cm;
+}
+
+.bic {
+    position:absolute;
+    left:0.9cm;
+    top:4.2cm;
+}
+
+.amount {
+    position:absolute;
+    left:8.3cm;
+    top:5.0cm;
+}
+
+.memo1 {
+    position:absolute;
+    left:0.9cm;
+    top:5.9cm;
+}
+
+.memo2 {
+    position:absolute;
+    left:0.9cm;
+    top:6.75cm;
+}
+
+.owner {
+    position:absolute;
+    left:0.9cm;
+    top:7.6cm;
+}
+
+.accountiban {
+    position:absolute;
+    left:0.9cm;
+    top:8.5cm;
+}
+
+.accountibanwoco {
+    position:absolute;
+    left:1.8cm;
+    top:8.5cm;
+}
+</style>
+
+</head>
+<body>
+<div class="top">
+<div class="payee">$PAYEE_NAME</div>
+<div class="iban">$PAYEE_NOTES</div>
+<div class="amount">$AMOUNT_DECIMAL_WITHOUT_CURRENCY</div>
+<div class="memo1">$MEMO1</div>
+<div class="memo2">$MEMO2</div>
+<div class="owner">$OWNER_NAME</div>
+<div class="accountibanwoco">$ACCOUNT_IBAN_WITHOUT_COUNTRY</div>
+</div>
+</body>
+</html>

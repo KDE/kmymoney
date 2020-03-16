@@ -191,6 +191,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   connect(telephoneEdit, SIGNAL(textChanged(QString)), this, SLOT(slotPayeeDataChanged()));
   connect(emailEdit, SIGNAL(textChanged(QString)), this, SLOT(slotPayeeDataChanged()));
   connect(notesEdit, SIGNAL(textChanged()), this, SLOT(slotPayeeDataChanged()));
+  connect(referenceEdit, SIGNAL(textChanged()), this, SLOT(slotPayeeDataChanged()));
   connect(matchKeyEditList, SIGNAL(changed()), this, SLOT(slotKeyListChanged()));
 
   connect(radioNoMatch, SIGNAL(toggled(bool)), this, SLOT(slotPayeeDataChanged()));
@@ -449,6 +450,7 @@ void KPayeesView::slotSelectPayee()
     emailEdit->setEnabled(true);
     emailEdit->setText(m_payee.email());
     notesEdit->setText(m_payee.notes());
+    referenceEdit->setText(m_payee.reference());
 
     QStringList keys;
     bool ignorecase = false;
@@ -484,6 +486,7 @@ void KPayeesView::clearItemData()
   telephoneEdit->setText(QString());
   emailEdit->setText(QString());
   notesEdit->setText(QString());
+  referenceEdit->setText(QString());
   showTransactions();
 }
 
@@ -602,6 +605,8 @@ void KPayeesView::slotPayeeDataChanged()
            || (!m_newName.isEmpty() && m_payee.name() != m_newName));
     rc |= ((m_payee.notes().isEmpty() != notesEdit->toPlainText().isEmpty())
            || (!notesEdit->toPlainText().isEmpty() && m_payee.notes() != notesEdit->toPlainText()));
+    rc |= ((m_payee.reference().isEmpty() != referenceEdit->text().isEmpty())
+           || (!referenceEdit->text().isEmpty() && m_payee.reference() != referenceEdit->text()));
 
     bool ignorecase = false;
     QStringList keys;
@@ -659,6 +664,7 @@ void KPayeesView::slotUpdatePayee()
       m_payee.setTelephone(telephoneEdit->text());
       m_payee.setEmail(emailEdit->text());
       m_payee.setNotes(notesEdit->toPlainText());
+      m_payee.setReference(referenceEdit->text());
       m_payee.setMatchData(static_cast<MyMoneyPayee::payeeMatchType>(m_matchType->checkedId()), checkMatchIgnoreCase->isChecked(), matchKeyEditList->items());
       m_payee.setDefaultAccountId();
       m_payee.resetPayeeIdentifiers(payeeIdentifiers->identifiers());
