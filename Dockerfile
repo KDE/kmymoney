@@ -15,6 +15,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y openssh-server gdb gdbserver rsync
 RUN apt-get build-dep -y kmymoney
+RUN apt-get install -y breeze-icon-theme
 
 RUN mkdir /var/run/sshd
 RUN echo 'root:root' | chpasswd
