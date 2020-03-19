@@ -732,6 +732,7 @@ void StdTransactionEditor::autoFill(const QString& payeeId)
             break;    // end while loop
           }
         } else if (KMyMoneySettings::autoFillTransaction() == 2) {
+          uniqList[ukey].t = &((*it_t).first);
           (*it_u).cnt++;
           break;      // end while loop
         }
