@@ -283,8 +283,15 @@ bool WebPriceQuote::launchNative(const QString& _webID, const QString& _kmmID, c
     QString program;
     QStringList arguments = url.toLocalFile().split(' ', QString::SkipEmptyParts);
     if (!arguments.isEmpty()) {
+#ifndef IS_APPIMAGE
         program = arguments.first();
         arguments.removeFirst();
+#else
+        program = QStringLiteral("/bin/sh");
+        arguments.clear();
+        arguments << QStringLiteral("-c");
+        arguments << url.toLocalFile();
+#endif
     }
     d->m_filter.setWebID(d->m_webID);
 
