@@ -76,33 +76,33 @@ QDate KGlobalLedgerViewPrivate::m_lastPostDate;
 KGlobalLedgerView::KGlobalLedgerView(QWidget *parent) :
   KMyMoneyViewBase(*new KGlobalLedgerViewPrivate(this), parent)
 {
-  typedef void(KGlobalLedgerView::*KGlobalLedgerViewFunc)();
-  const QHash<Action, KGlobalLedgerViewFunc> actionConnections {
-    {Action::NewTransaction,            &KGlobalLedgerView::slotNewTransaction},
-    {Action::EditTransaction,           &KGlobalLedgerView::slotEditTransaction},
-    {Action::DeleteTransaction,         &KGlobalLedgerView::slotDeleteTransaction},
-    {Action::DuplicateTransaction,      &KGlobalLedgerView::slotDuplicateTransaction},
-    {Action::EnterTransaction,          &KGlobalLedgerView::slotEnterTransaction},
-    {Action::AcceptTransaction,         &KGlobalLedgerView::slotAcceptTransaction},
-    {Action::CancelTransaction,         &KGlobalLedgerView::slotCancelTransaction},
-    {Action::EditSplits,                &KGlobalLedgerView::slotEditSplits},
-    {Action::CopySplits,                &KGlobalLedgerView::slotCopySplits},
-    {Action::GoToPayee,                 &KGlobalLedgerView::slotGoToPayee},
-    {Action::GoToAccount,               &KGlobalLedgerView::slotGoToAccount},
-    {Action::MatchTransaction,          &KGlobalLedgerView::slotMatchTransactions},
-    {Action::CombineTransactions,       &KGlobalLedgerView::slotCombineTransactions},
-    {Action::ToggleReconciliationFlag,  &KGlobalLedgerView::slotToggleReconciliationFlag},
-    {Action::MarkCleared,               &KGlobalLedgerView::slotMarkCleared},
-    {Action::MarkReconciled,            &KGlobalLedgerView::slotMarkReconciled},
-    {Action::MarkNotReconciled,         &KGlobalLedgerView::slotMarkNotReconciled},
-    {Action::SelectAllTransactions,     &KGlobalLedgerView::slotSelectAllTransactions},
-    {Action::NewScheduledTransaction,   &KGlobalLedgerView::slotCreateScheduledTransaction},
-    {Action::AssignTransactionsNumber,  &KGlobalLedgerView::slotAssignNumber},
-    {Action::StartReconciliation,       &KGlobalLedgerView::slotStartReconciliation},
-    {Action::FinishReconciliation,      &KGlobalLedgerView::slotFinishReconciliation},
-    {Action::PostponeReconciliation,    &KGlobalLedgerView::slotPostponeReconciliation},
-    {Action::OpenAccount,               &KGlobalLedgerView::slotOpenAccount},
-    {Action::EditFindTransaction,       &KGlobalLedgerView::slotFindTransaction},
+  const QHash<Action, std::function<void()>> actionConnections {
+    {Action::NewTransaction,            [this](){ KGlobalLedgerView::slotNewTransaction(); }},
+    {Action::EditTransaction,           [this](){ KGlobalLedgerView::slotEditTransaction(); }},
+    {Action::DeleteTransaction,         [this](){ KGlobalLedgerView::slotDeleteTransaction(); }},
+    {Action::DuplicateTransaction,      [this](){ KGlobalLedgerView::slotDuplicateTransaction(); }},
+    {Action::AddReversingTransaction,   [this](){ KGlobalLedgerView::slotDuplicateTransaction(true); }},
+    {Action::EnterTransaction,          [this](){ KGlobalLedgerView::slotEnterTransaction(); }},
+    {Action::AcceptTransaction,         [this](){ KGlobalLedgerView::slotAcceptTransaction(); }},
+    {Action::CancelTransaction,         [this](){ KGlobalLedgerView::slotCancelTransaction(); }},
+    {Action::EditSplits,                [this](){ KGlobalLedgerView::slotEditSplits(); }},
+    {Action::CopySplits,                [this](){ KGlobalLedgerView::slotCopySplits(); }},
+    {Action::GoToPayee,                 [this](){ KGlobalLedgerView::slotGoToPayee(); }},
+    {Action::GoToAccount,               [this](){ KGlobalLedgerView::slotGoToAccount(); }},
+    {Action::MatchTransaction,          [this](){ KGlobalLedgerView::slotMatchTransactions(); }},
+    {Action::CombineTransactions,       [this](){ KGlobalLedgerView::slotCombineTransactions(); }},
+    {Action::ToggleReconciliationFlag,  [this](){ KGlobalLedgerView::slotToggleReconciliationFlag(); }},
+    {Action::MarkCleared,               [this](){ KGlobalLedgerView::slotMarkCleared(); }},
+    {Action::MarkReconciled,            [this](){ KGlobalLedgerView::slotMarkReconciled(); }},
+    {Action::MarkNotReconciled,         [this](){ KGlobalLedgerView::slotMarkNotReconciled(); }},
+    {Action::SelectAllTransactions,     [this](){ KGlobalLedgerView::slotSelectAllTransactions(); }},
+    {Action::NewScheduledTransaction,   [this](){ KGlobalLedgerView::slotCreateScheduledTransaction(); }},
+    {Action::AssignTransactionsNumber,  [this](){ KGlobalLedgerView::slotAssignNumber(); }},
+    {Action::StartReconciliation,       [this](){ KGlobalLedgerView::slotStartReconciliation(); }},
+    {Action::FinishReconciliation,      [this](){ KGlobalLedgerView::slotFinishReconciliation(); }},
+    {Action::PostponeReconciliation,    [this](){ KGlobalLedgerView::slotPostponeReconciliation(); }},
+    {Action::OpenAccount,               [this](){ KGlobalLedgerView::slotOpenAccount(); }},
+    {Action::EditFindTransaction,       [this](){ KGlobalLedgerView::slotFindTransaction(); }},
   };
 
   for (auto a = actionConnections.cbegin(); a != actionConnections.cend(); ++a)
@@ -288,7 +288,7 @@ void KGlobalLedgerView::updateLedgerActionsInternal()
   const QVector<Action> actionsToBeDisabled {
     Action::EditTransaction, Action::EditSplits, Action::EnterTransaction,
     Action::CancelTransaction, Action::DeleteTransaction, Action::MatchTransaction,
-    Action::AcceptTransaction, Action::DuplicateTransaction, Action::ToggleReconciliationFlag, Action::MarkCleared,
+    Action::AcceptTransaction, Action::DuplicateTransaction, Action::AddReversingTransaction, Action::ToggleReconciliationFlag, Action::MarkCleared,
     Action::GoToAccount, Action::GoToPayee, Action::AssignTransactionsNumber, Action::NewScheduledTransaction,
     Action::CombineTransactions, Action::CopySplits,
   };
@@ -319,6 +319,10 @@ void KGlobalLedgerView::updateLedgerActionsInternal()
       QString tooltip = i18n("Duplicate the current selected transactions");
       pActions[Action::DuplicateTransaction]->setEnabled(canDuplicateTransactions(d->m_selectedTransactions, tooltip) && !d->m_selectedTransactions[0].transaction().id().isEmpty());
       pActions[Action::DuplicateTransaction]->setToolTip(tooltip);
+
+      tooltip = i18n("Add reversing transactions to the currently selected");
+      pActions[Action::AddReversingTransaction]->setEnabled(canDuplicateTransactions(d->m_selectedTransactions, tooltip) && !d->m_selectedTransactions[0].transaction().id().isEmpty());
+      pActions[Action::AddReversingTransaction]->setToolTip(tooltip);
 
       if (canEditTransactions(d->m_selectedTransactions, tooltip)) {
         pActions[Action::EditTransaction]->setEnabled(true);
@@ -1514,7 +1518,7 @@ void KGlobalLedgerView::slotDeleteTransaction()
   }
 }
 
-void KGlobalLedgerView::slotDuplicateTransaction()
+void KGlobalLedgerView::slotDuplicateTransaction(bool reverse)
 {
   Q_D(KGlobalLedgerView);
   // since we may jump here via code, we have to make sure to react only
@@ -1541,8 +1545,13 @@ void KGlobalLedgerView::slotDuplicateTransaction()
         // clear invalid data
         t.setEntryDate(QDate());
         t.clearId();
-        // and set the post date to today
-        t.setPostDate(QDate::currentDate());
+
+        if (reverse)
+            // reverse transaction
+            t.reverse();
+        else
+            // set the post date to today
+            t.setPostDate(QDate::currentDate());
 
         MyMoneyFile::instance()->addTransaction(t);
         lt = t;

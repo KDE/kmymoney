@@ -72,7 +72,7 @@ namespace eMenu {
     // *************
     NewTransaction, EditTransaction, DeleteTransaction,
     EnterTransaction, CancelTransaction,
-    DuplicateTransaction,
+    DuplicateTransaction, AddReversingTransaction,
     MatchTransaction, AcceptTransaction,
     EditSplits, CopySplits,
     ToggleReconciliationFlag, MarkCleared,

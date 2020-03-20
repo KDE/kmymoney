@@ -140,6 +140,7 @@ public:
     */
   void setValue(const MyMoneyMoney& value, const QString& transactionCurrencyId, const QString& splitCurrencyId);
 
+  void negateValue();
 
   QString accountId() const;
   void setAccountId(const QString& account);

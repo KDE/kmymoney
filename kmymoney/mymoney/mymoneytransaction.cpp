@@ -316,6 +316,13 @@ MyMoneyMoney MyMoneyTransaction::splitSum() const
   return result;
 }
 
+void MyMoneyTransaction::reverse()
+{
+  Q_D(MyMoneyTransaction);
+  for (MyMoneySplit& split : d->m_splits)
+      split.negateValue();
+}
+
 bool MyMoneyTransaction::isLoanPayment() const
 {
   try {
