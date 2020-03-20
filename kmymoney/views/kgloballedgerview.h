@@ -253,7 +253,7 @@ private Q_SLOTS:
   void slotNewTransaction();
   void slotEditTransaction();
   void slotDeleteTransaction();
-  void slotDuplicateTransaction();
+  void slotDuplicateTransaction(bool reverse = false);
   void slotEnterTransaction();
 
   /**

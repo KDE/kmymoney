@@ -98,7 +98,7 @@ enum class Icon { SVNUpdate, Merge, Reconcile, Split, Tip, Fork,
                   InvestmentNew, InvestmentEdit,
                   InvestmentDelete, InvestmentOnlinePrice,
                   BudgetNew, BudgetRename, BudgetDelete, BudgetCopy,
-                  PriceUpdate, ToolUpdatePrices
+                  PriceUpdate, ToolUpdatePrices, Reverse
                 };
 
 KMM_ICONS_EXPORT void setIconThemeNames(const QString &_themeName);

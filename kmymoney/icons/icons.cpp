@@ -206,7 +206,8 @@ namespace Icons {
       {Icon::PreferencesFont, QStringLiteral("preferences-desktop-font")},
       {Icon::PreferencesIcon, QStringLiteral("preferences-desktop-icon")},
       {Icon::NetworkDisconect, QStringLiteral("network-disconnect")},
-      {Icon::Folder, QStringLiteral("folder")}
+      {Icon::Folder, QStringLiteral("folder")},
+      {Icon::Reverse, QStringLiteral("reverse")},
     };
   }
 
