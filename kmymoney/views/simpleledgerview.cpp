@@ -174,8 +174,17 @@ void SimpleLedgerView::openNewLedger(QString accountId, bool makeCurrentLedger)
   // need a new tab, we insert it before the rightmost one
   if(!acc.id().isEmpty()) {
 
+    QString configGroupName;
+    switch(acc.accountType()) {
+      case eMyMoney::Account::Type::Investment:
+        configGroupName = QStringLiteral("InvestmentLedger");
+        break;
+      default:
+        configGroupName = QStringLiteral("StandardLedger");
+        break;
+    }
     // create new ledger view page
-    view = new LedgerViewPage(this);
+    view = new LedgerViewPage(this, configGroupName);
     view->setAccount(acc);
     view->setShowEntryForNewTransaction();
 
