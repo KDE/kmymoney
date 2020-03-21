@@ -302,7 +302,8 @@ void AmountEdit::focusOutEvent(QFocusEvent* event)
   // in case the widget contains a different value we emit
   // the valueChanged signal
   if (MyMoneyMoney(text()) != MyMoneyMoney(d->m_text)) {
-    emit valueChanged(text());
+    d->m_text = text();
+    emit valueChanged(d->m_text);
   }
 }
 
