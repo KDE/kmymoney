@@ -101,9 +101,11 @@ void AmountEditCurrencyHelper::categoryChanged(const QString& id)
 
   try {
     const auto category = MyMoneyFile::instance()->account(id);
-    const auto security = MyMoneyFile::instance()->security(category.currencyId());
-    if (security.id() != d->commodityId) {
-      currencySymbol = security.tradingSymbol();
+    if (category.isIncomeExpense()) {
+      const auto security = MyMoneyFile::instance()->security(category.currencyId());
+      if (security.id() != d->commodityId) {
+        currencySymbol = security.tradingSymbol();
+      }
     }
   } catch(MyMoneyException& e) {
   }

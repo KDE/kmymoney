@@ -60,6 +60,13 @@ public:
    * @param amount pointer to AmountEdit object
    */
   explicit AmountEditCurrencyHelper(KMyMoneyAccountCombo* category, AmountEdit* amount, const QString& commodityId);
+
+  /**
+   * Creates a AmountEditCurrencyHelper object
+   *
+   * @param category pointer to KMyMoneyAccountCombo object
+   * @param amount pointer to CreditDebitHelper object
+   */
   explicit AmountEditCurrencyHelper(KMyMoneyAccountCombo* category, CreditDebitHelper* amount, const QString& commodityId);
 
   ~AmountEditCurrencyHelper();
