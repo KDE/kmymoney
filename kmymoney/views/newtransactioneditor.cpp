@@ -43,6 +43,7 @@
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
+#include "mymoneyprice.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyaccountcombo.h"
 #include "accountsmodel.h"
@@ -111,7 +112,10 @@ public:
     bool categoryChanged(const QString& accountId);
     bool numberChanged(const QString& newNumber);
     bool valueChanged(CreditDebitHelper* valueHelper);
+    bool isIncomeExpense(const QModelIndex& idx);
+
     MyMoneyMoney getPrice();
+    MyMoneyMoney splitsSum() const;
 
     NewTransactionEditor*         q;
     Ui_NewTransactionEditor*      ui;
@@ -230,6 +234,16 @@ bool NewTransactionEditor::Private::costCenterChanged(int costCenterIndex)
     return rc;
 }
 
+bool NewTransactionEditor::Private::isIncomeExpense(const QModelIndex& idx)
+{
+    const auto categoryId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
+    if (!categoryId.isEmpty()) {
+        MyMoneyAccount category = MyMoneyFile::instance()->account(categoryId);
+        return category.isIncomeExpense();
+    }
+    return false;
+}
+
 bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
 {
     bool rc = true;
@@ -264,10 +278,16 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
                 payeeChanged(ui->payeeEdit->currentIndex());
 
                 if (amountHelper->haveValue() && needValueSet) {
-                    splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), eMyMoney::Model::SplitValueRole);
                     if (!amountHelper->value().isZero()) {
-                        splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value() / getPrice()), eMyMoney::Model::SplitSharesRole);
+                        if (isIncomeExpense) {
+                            splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value() * getPrice()), eMyMoney::Model::SplitValueRole);
+                            splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), eMyMoney::Model::SplitSharesRole);
+                        } else {
+                            splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), eMyMoney::Model::SplitValueRole);
+                            splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value() * getPrice()), eMyMoney::Model::SplitSharesRole);
+                        }
                     } else {
+                        splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(MyMoneyMoney()), eMyMoney::Model::SplitValueRole);
                         splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(MyMoneyMoney()), eMyMoney::Model::SplitSharesRole);
                     }
                 }
@@ -307,23 +327,39 @@ bool NewTransactionEditor::Private::numberChanged(const QString& newNumber)
 MyMoneyMoney NewTransactionEditor::Private::getPrice()
 {
     MyMoneyMoney result(price);
+    const auto file = MyMoneyFile::instance();
     if (!bypassPriceEditor && splitModel.rowCount() > 0) {
         const QModelIndex idx = splitModel.index(0, 0);
         const auto categoryId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
-        const auto category = MyMoneyFile::instance()->accountsModel()->itemById(categoryId);
+        const auto category = file->accountsModel()->itemById(categoryId);
         if (!category.id().isEmpty()) {
-            const auto security = MyMoneyFile::instance()->security(category.currencyId());
+            const auto security = file->security(category.currencyId());
             if (security.id() != transaction.commodity()) {
-                const auto commodity = MyMoneyFile::instance()->security(transaction.commodity());
-                QPointer<KCurrencyCalculator> calc =
-                    new KCurrencyCalculator(security,
-                                            commodity,
-                                            amountHelper->value() / result,
-                                            amountHelper->value(),
-                                            ui->dateEdit->date(),
-                                            security.smallestAccountFraction(),
-                                            q);
-
+                const auto commodity = file->security(transaction.commodity());
+                QPointer<KCurrencyCalculator> calc;
+                if (category.isIncomeExpense()) {
+                    if (result == MyMoneyMoney::ONE) {
+                        result = file->price(security.id(), commodity.id(), QDate()).rate(commodity.id());
+                    }
+                    calc = new KCurrencyCalculator(security,
+                                                   commodity,
+                                                   amountHelper->value(),
+                                                   amountHelper->value() * result,
+                                                   ui->dateEdit->date(),
+                                                   security.smallestAccountFraction(),
+                                                   q);
+                } else {
+                    if (result == MyMoneyMoney::ONE) {
+                        result = file->price(commodity.id(), security.id(), QDate()).rate(security.id());
+                    }
+                    calc = new KCurrencyCalculator(commodity,
+                                                   security,
+                                                   amountHelper->value(),
+                                                   amountHelper->value() * result,
+                                                   ui->dateEdit->date(),
+                                                   security.smallestAccountFraction(),
+                                                   q);
+                }
                 if (calc->exec() == QDialog::Accepted && calc) {
                     result = calc->price();
                 }
@@ -343,14 +379,20 @@ MyMoneyMoney NewTransactionEditor::Private::getPrice()
 bool NewTransactionEditor::Private::valueChanged(CreditDebitHelper* valueHelper)
 {
     bool rc = true;
-    if (valueHelper->haveValue() && (splitModel.rowCount() <= 1) && (amountHelper->value() != split.value())) {
+    if (valueHelper->haveValue() && (splitModel.rowCount() <= 1)) {
+    // if (valueHelper->haveValue() && (splitModel.rowCount() <= 1) && (amountHelper->value() != split.value())) {
         rc = false;
         try {
             MyMoneyMoney shares;
             if (splitModel.rowCount() == 1) {
                 const QModelIndex index = splitModel.index(0, 0);
-                splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), eMyMoney::Model::SplitValueRole);
-                splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value() / getPrice()), eMyMoney::Model::SplitSharesRole);
+                if (isIncomeExpense(index)) {
+                    splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), eMyMoney::Model::SplitSharesRole);
+                    splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value() * getPrice()), eMyMoney::Model::SplitValueRole);
+                } else {
+                    splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value()), eMyMoney::Model::SplitValueRole);
+                    splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(-amountHelper->value() * getPrice()), eMyMoney::Model::SplitSharesRole);
+                }
             }
             rc = true;
 
@@ -373,6 +415,17 @@ bool NewTransactionEditor::Private::payeeChanged(int payeeIndex)
         splitModel.setData(idx, payeeId, eMyMoney::Model::SplitPayeeIdRole);
     }
     return true;
+}
+
+MyMoneyMoney NewTransactionEditor::Private::splitsSum() const
+{
+    const auto rows = splitModel.rowCount();
+    MyMoneyMoney value;
+    for(int row = 0; row < rows; ++row) {
+        const auto idx = splitModel.index(row, 0);
+        value += idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
+    }
+    return value;
 }
 
 NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accountId)
@@ -538,6 +591,11 @@ void NewTransactionEditor::keyPressEvent(QKeyEvent* e)
 
 void NewTransactionEditor::loadTransaction(const QModelIndex& index)
 {
+    // we may also get here during saving the transaction as
+    // a callback from the model, but we can safely ignore it
+    if (d->accepted)
+        return;
+
     auto idx = MyMoneyModelBase::mapToBaseSource(index);
     if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
         d->transaction = MyMoneyTransaction();
@@ -565,6 +623,18 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
                                              -1,                         // all splits
                                              Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
 
+        // make sure the commodity is the one of the current account
+        // in case we have exactly two splits. This is a precondition
+        // used by the transaction editor to work properly.
+        auto transactionValue = d->split.value();
+        if (d->transaction.splitCount() == 2) {
+            transactionValue = d->split.shares();
+            d->split.setValue(transactionValue);
+        }
+
+        // preset the value to be used for the amount widget
+        auto amount = d->split.shares();
+
         for (const auto& splitIdx : list) {
             if (selectedSplitRow == splitIdx.row()) {
                 d->ui->dateEdit->setDate(splitIdx.data(eMyMoney::Model::TransactionPostDateRole).toDate());
@@ -582,30 +652,44 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
                 d->ui->memoEdit->moveCursor(QTextCursor::Start);
                 d->ui->memoEdit->ensureCursorVisible();
 
-                d->ui->amountEditCredit->setText(splitIdx.data(eMyMoney::Model::JournalSplitPaymentRole).toString());
-                d->ui->amountEditDebit->setText(splitIdx.data(eMyMoney::Model::JournalSplitDepositRole).toString());
-
                 d->ui->numberEdit->setText(splitIdx.data(eMyMoney::Model::SplitNumberRole).toString());
-
                 d->ui->statusCombo->setCurrentIndex(splitIdx.data(eMyMoney::Model::SplitReconcileFlagRole).toInt());
-
                 d->ui->tagContainer->loadTags(splitIdx.data(eMyMoney::Model::SplitTagIdRole).toStringList());
             } else {
                 d->splitModel.appendSplit(MyMoneyFile::instance()->journalModel()->itemByIndex(splitIdx).split());
                 if (splitIdx.data(eMyMoney::Model::TransactionSplitCountRole) == 2) {
                     const auto shares = splitIdx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
-                    const auto value = splitIdx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
-                    if (!shares.isZero()) {
-                        d->price = value / shares;
+                    // the following is only relevant for transactions with two splits
+                    // in different currencies
+                    const auto value = -transactionValue;
+                    idx = d->splitModel.index(0, 0);
+                    d->splitModel.setData(idx, QVariant::fromValue<MyMoneyMoney>(value), eMyMoney::Model::SplitValueRole);
+                    if (!value.isZero()) {
+                        d->price = shares / value;
+                    }
+                    // make sure to use a possible foreign currency value
+                    // in case of income and expense categories.
+                    // in this case, we also need to use the reciprocal of the price
+                    if (d->isIncomeExpense(splitIdx)) {
+                        amount = -shares;
+                        if (!shares.isZero()) {
+                            d->price = value / shares;
+                        }
                     }
                 }
             }
         }
+        d->transaction.setCommodity(d->m_account.currencyId());
 
+        // in case we have a single split, we set the accountCombo again
+        // so that a possible foreign currency is also taken care of.
         if (d->splitModel.rowCount() == 1) {
             d->ui->accountCombo->setSelected(d->splitModel.index(0, 0).data(eMyMoney::Model::SplitAccountIdRole).toString());
         }
+        // then setup the amount widget and update the state
+        // of all other widgets without calling the price editor
         d->bypassPriceEditor = true;
+        d->amountHelper->setValue(amount);
         d->updateWidgetState();
         d->bypassPriceEditor = false;
     }
@@ -729,7 +813,11 @@ void NewTransactionEditor::editSplits()
 
 MyMoneyMoney NewTransactionEditor::transactionAmount() const
 {
-    return d->amountHelper->value();
+    auto amount = -d->splitsSum();
+    if (amount.isZero()) {
+        amount = d->amountHelper->value();
+    }
+    return amount;
 }
 
 void NewTransactionEditor::saveTransaction()
@@ -770,8 +858,22 @@ void NewTransactionEditor::saveTransaction()
         MyMoneySplit sp(d->split);
         sp.setNumber(d->ui->numberEdit->text());
         sp.setMemo(d->ui->memoEdit->toPlainText());
-        sp.setShares(d->amountHelper->value());
-        sp.setValue(d->amountHelper->value());
+        // setting up the shares and value members. In case there is
+        // no or more than two splits, we can take the amount shown
+        // in the widgets directly. In case of 2 splits, we take
+        // the negative value of the second split (the one in the
+        // splitModel) and use it as value and shares since the
+        // displayed value in the widget may be shown in a different
+        // currency
+        if (d->splitModel.rowCount() == 1) {
+            const QModelIndex idx = d->splitModel.index(0, 0);
+            const auto val = idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
+            sp.setShares(-val);
+            sp.setValue(-val);
+        } else {
+            sp.setShares(d->amountHelper->value());
+            sp.setValue(d->amountHelper->value());
+        }
 
         if (sp.reconcileFlag() != eMyMoney::Split::State::Reconciled
                 && !sp.reconcileDate().isValid()

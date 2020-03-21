@@ -1,5 +1,5 @@
 /*
- * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2019-2020  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -65,6 +65,9 @@ public:
   void setCommodity(const MyMoneySecurity& commodity);
 
   void selectMostRecentTransaction();
+
+  void skipStartEditing();
+  void blockEditorStart(bool blocked);
 
 public Q_SLOTS:
   /**

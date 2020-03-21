@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2015-2020  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -37,7 +37,6 @@
 #include "ui_splitdialog.h"
 #include "mymoneyaccount.h"
 #include "splitadjustdialog.h"
-#include "modelenums.h"
 #include "icons/icons.h"
 
 using namespace Icons;
@@ -58,6 +57,9 @@ public:
   }
 
   void deleteSplits(QModelIndexList indexList);
+  void blockEditorStart(bool blocked);
+  void blockImmediateEditor();
+  void selectRow(int row);
 
   SplitDialog*                parent;
   Ui_SplitDialog*             ui;
@@ -96,13 +98,37 @@ void SplitDialog::Private::deleteSplits(QModelIndexList indexList)
     sortedList[index.row()] = index.row();
   }
 
+  blockEditorStart(true);
   QMap<int, int>::const_iterator it = sortedList.constEnd();
   do {
     --it;
     ui->splitView->model()->removeRow(*it);
   } while(it != sortedList.constBegin());
+  blockEditorStart(false);
 }
 
+void SplitDialog::Private::blockEditorStart(bool blocked)
+{
+  ui->splitView->blockEditorStart(blocked);
+}
+
+void SplitDialog::Private::blockImmediateEditor()
+{
+  if (ui->splitView->model()->rowCount() <= 1) {
+    ui->splitView->skipStartEditing();
+  }
+}
+
+void SplitDialog::Private::selectRow(int row)
+{
+  if (row >= ui->splitView->model()->rowCount())
+    row = ui->splitView->model()->rowCount()-1;
+  if (row >= 0) {
+    blockEditorStart(true);
+    ui->splitView->selectRow(row);
+    blockEditorStart(false);
+  }
+}
 
 SplitDialog::SplitDialog(const MyMoneyAccount& account, const MyMoneySecurity& commodity, const MyMoneyMoney& amount, QWidget* parent, Qt::WindowFlags f)
   : QDialog(parent, f)
@@ -309,28 +335,29 @@ void SplitDialog::updateButtonState()
   d->ui->mergeButton->setEnabled(false);
   d->ui->deleteZeroButton->setEnabled(false);
 
-  if(d->ui->splitView->selectionModel()->selectedRows().count() >= 2) {
+  if(d->ui->splitView->selectionModel()->selectedRows().count() > 0) {
     d->ui->deleteButton->setEnabled(true);
   }
 
-  if(d->ui->splitView->model()->rowCount() > 3) {
+  if(d->ui->splitView->model()->rowCount() > 2) {
     d->ui->deleteAllButton->setEnabled(true);
   }
 
   QAbstractItemModel* model = d->ui->splitView->model();
   QSet<QString> accountIDs;
-  for(int row = 0; row < model->rowCount(); ++row) {
-    const QModelIndex index = model->index(row,0);
+  const auto rows = model->rowCount();
+  for(int row = 0; row < rows; ++row) {
+    const auto idx = model->index(row, 0);
     // don't check the empty line at the end
-    if(model->data(index, (int)eLedgerModel::Role::SplitId).toString().isEmpty())
+    if(idx.data(eMyMoney::Model::IdRole).toString().isEmpty())
       continue;
 
-    const QString accountID = model->data(index, (int)eLedgerModel::Role::AccountId).toString();
-    const MyMoneyMoney value = model->data(index, (int)eLedgerModel::Role::SplitShares).value<MyMoneyMoney>();
+    const auto accountID = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
+    const auto amount = idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
     if(accountIDs.contains(accountID)) {
       d->ui->mergeButton->setEnabled(true);
     }
-    if(value.isZero()) {
+    if(amount.isZero()) {
       d->ui->deleteZeroButton->setEnabled(true);
     }
   }
@@ -338,46 +365,57 @@ void SplitDialog::updateButtonState()
 
 void SplitDialog::deleteSelectedSplits()
 {
-  d->deleteSplits(d->ui->splitView->selectionModel()->selectedRows());
-  adjustSummary();
+  if (!d->ui->splitView->selectionModel()->selectedRows().isEmpty()) {
+    auto row = d->ui->splitView->selectionModel()->selectedRows().first().row();
+    d->deleteSplits(d->ui->splitView->selectionModel()->selectedRows());
+    adjustSummary();
+    d->selectRow(row);
+  }
 }
 
 void SplitDialog::deleteAllSplits()
 {
   QAbstractItemModel* model = d->ui->splitView->model();
   QModelIndexList list = model->match(model->index(0,0),
-                                      (int)eLedgerModel::Role::SplitId,
+                                      eMyMoney::Model::IdRole,
                                       QLatin1String(".+"),
                                       -1,
                                       Qt::MatchRegExp
                                      );
+  auto row = d->ui->splitView->selectionModel()->selectedRows().first().row();
   d->deleteSplits(list);
   adjustSummary();
+  d->selectRow(row);
 }
 
 void SplitDialog::deleteZeroSplits()
 {
   QAbstractItemModel* model = d->ui->splitView->model();
   QModelIndexList list = model->match(model->index(0,0),
-                                      (int)eLedgerModel::Role::SplitId,
+                                      eMyMoney::Model::IdRole,
                                       QLatin1String(".+"),
                                       -1,
                                       Qt::MatchRegExp
                                      );
-  for(int idx = 0; idx < list.count();) {
-    QModelIndex index = list.at(idx);
-    if(!model->data(index, (int)eLedgerModel::Role::SplitShares).value<MyMoneyMoney>().isZero()) {
-      list.removeAt(idx);
+
+  for(int row = 0; row < list.count();) {
+    const auto idx = list.at(row);
+    if(!idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>().isZero()) {
+      list.removeAt(row);
     } else {
-      ++idx;
+      ++row;
     }
   }
+  auto row = d->ui->splitView->selectionModel()->selectedRows().first().row();
   d->deleteSplits(list);
   adjustSummary();
+  d->selectRow(row);
 }
 
 void SplitDialog::mergeSplits()
 {
+  auto row = d->ui->splitView->selectionModel()->selectedRows().first().row();
   qDebug() << "Merge splits not yet implemented.";
   adjustSummary();
+  d->selectRow(row);
 }

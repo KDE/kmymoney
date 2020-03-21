@@ -1,5 +1,5 @@
 /*
- * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2019-2020  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -56,6 +56,7 @@ public:
   , balanceCalculationPending(false)
   , newTransactionPresent(false)
   , firstSelectionAfterCreation(true)
+  , blockEditorStart(false)
   , columnSelector(nullptr)
   {
   }
@@ -93,6 +94,7 @@ public:
   bool                            balanceCalculationPending;
   bool                            newTransactionPresent;
   bool                            firstSelectionAfterCreation;
+  bool                            blockEditorStart;
   ColumnSelector*                 columnSelector;
 };
 
@@ -120,7 +122,7 @@ SplitView::SplitView(QWidget* parent)
   // horizontalHeader()->setMovable(true);
 
   // make sure to get informed about resize operations on the columns
-  // connect(horizontalHeader(), SIGNAL(sectionResized(int,int,int)), this, SLOT(adjustDetailColumn()));
+  connect(horizontalHeader(), SIGNAL(sectionResized(int,int,int)), this, SLOT(adjustDetailColumn()));
 
   // we don't need autoscroll as we do not support drag/drop
   setAutoScroll(false);
@@ -243,6 +245,16 @@ void SplitView::wheelEvent(QWheelEvent* e)
   QTableView::wheelEvent(e);
 }
 
+void SplitView::skipStartEditing()
+{
+  d->firstSelectionAfterCreation = true;
+}
+
+void SplitView::blockEditorStart(bool blocked)
+{
+  d->blockEditorStart = blocked;
+}
+
 void SplitView::currentChanged(const QModelIndex& current, const QModelIndex& previous)
 {
   // qDebug() << "currentChanged";
@@ -253,7 +265,7 @@ void SplitView::currentChanged(const QModelIndex& current, const QModelIndex& pr
     QString id = idx.data(eMyMoney::Model::IdRole).toString();
     // For a new transaction the id is completely empty, for a split view the transaction
     // part is filled but the split id is empty and the string ends with a dash
-    if(!d->firstSelectionAfterCreation && (id.isEmpty() || id.endsWith('-'))) {
+    if(!d->blockEditorStart && !d->firstSelectionAfterCreation && (id.isEmpty() || id.endsWith('-'))) {
       selectionModel()->clearSelection();
       setCurrentIndex(idx);
       selectRow(idx.row());
@@ -373,7 +385,6 @@ void SplitView::adjustDetailColumn()
 
 void SplitView::adjustDetailColumn(int newViewportWidth)
 {
-#if 0
   // make sure we don't get here recursively
   if(d->adjustingColumn)
     return;
@@ -397,7 +408,6 @@ void SplitView::adjustDetailColumn(int newViewportWidth)
 
   // remember that we're done this time
   d->adjustingColumn = false;
-#endif
 }
 
 void SplitView::ensureCurrentItemIsVisible()

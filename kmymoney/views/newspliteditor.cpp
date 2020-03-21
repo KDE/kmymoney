@@ -47,6 +47,7 @@
 #include "payeesmodel.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
+#include "mymoneyprice.h"
 #include "ui_newspliteditor.h"
 #include "widgethintframe.h"
 #include "splitview.h"
@@ -73,6 +74,7 @@ struct NewSplitEditor::Private
   , showValuesInverted(false)
   , haveShares(false)
   , loadingSplit(false)
+  , isIncomeExpense(false)
   , postDate(QDate::currentDate())
   , amountHelper(nullptr)
   {
@@ -112,10 +114,12 @@ struct NewSplitEditor::Private
   bool                          showValuesInverted;
   bool                          haveShares;
   bool                          loadingSplit;
+  bool                          isIncomeExpense;
   MyMoneyAccount                counterAccount;
   MyMoneyAccount                category;
   MyMoneySecurity               commodity;
   MyMoneyMoney                  shares;
+  MyMoneyMoney                  value;
   MyMoneyMoney                  price;
   QDate                         postDate;
   CreditDebitHelper*            amountHelper;
@@ -152,12 +156,13 @@ bool NewSplitEditor::Private::costCenterChanged(int costCenterIndex)
 bool NewSplitEditor::Private::categoryChanged(const QString& accountId)
 {
   bool rc = true;
+  isIncomeExpense = false;
   if(!accountId.isEmpty()) {
     try {
       const auto model = MyMoneyFile::instance()->accountsModel();
       QModelIndex index = model->indexById(accountId);
       category = model->itemByIndex(index);
-      const bool isIncomeExpense = category.isIncomeExpense();
+      isIncomeExpense = category.isIncomeExpense();
       ui->costCenterCombo->setEnabled(isIncomeExpense);
       ui->costCenterLabel->setEnabled(isIncomeExpense);
       ui->numberEdit->setDisabled(isIncomeExpense);
@@ -204,9 +209,11 @@ bool NewSplitEditor::Private::amountChanged(CreditDebitHelper* valueHelper)
 {
   Q_UNUSED(valueHelper);
   if (valueHelper->haveValue()) {
-
-  } else {
-
+    if (isIncomeExpense) {
+      shares = valueHelper->value();
+    } else {
+      value = valueHelper->value();
+    }
   }
   bool rc = true;
   checkMultiCurrency();
@@ -220,19 +227,35 @@ void NewSplitEditor::Private::checkMultiCurrency()
     return;
 
   const auto categoryId = q->accountId();
-  auto const model = MyMoneyFile::instance()->accountsModel();
+  const auto file = MyMoneyFile::instance();
+  auto const model = file->accountsModel();
   auto account = model->itemById(categoryId);
   auto security = MyMoneyFile::instance()->security(account.currencyId());
   if (security.id() != commodity.id() && !amountHelper->value().isZero()) {
-    QPointer<KCurrencyCalculator> calc =
-    new KCurrencyCalculator(security,
-                            commodity,
-                            q->value() * price,
-                            q->value(),
-                            postDate,
-                            security.smallestAccountFraction(),
-                            q);
-
+    QPointer<KCurrencyCalculator> calc;
+    if (isIncomeExpense) {
+      if (price == MyMoneyMoney::ONE) {
+        price = file->price(security.id(), commodity.id(), QDate()).rate(commodity.id());
+      }
+      calc = new KCurrencyCalculator(security,
+                                     commodity,
+                                     amountHelper->value(),
+                                     amountHelper->value() * price,
+                                     postDate,
+                                     security.smallestAccountFraction(),
+                                     q);
+    } else {
+      if (price == MyMoneyMoney::ONE) {
+        price = file->price(commodity.id(), security.id(), QDate()).rate(security.id());
+      }
+      calc = new KCurrencyCalculator(commodity,
+                                     security,
+                                     amountHelper->value(),
+                                     amountHelper->value() * price,
+                                     postDate,
+                                     security.smallestAccountFraction(),
+                                     q);
+    }
     if (calc->exec() == QDialog::Accepted && calc) {
       price = calc->price();
     }
@@ -241,7 +264,11 @@ void NewSplitEditor::Private::checkMultiCurrency()
   } else {
     price = MyMoneyMoney::ONE;
   }
-  shares = q->value() * price;
+  if (isIncomeExpense) {
+    value = shares * price;
+  } else {
+    shares = value * price;
+  }
 }
 
 
@@ -302,7 +329,7 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
   connect(d->ui->numberEdit, SIGNAL(textChanged(QString)), this, SLOT(numberChanged(QString)));
   connect(d->ui->costCenterCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(costCenterChanged(int)));
   connect(d->ui->accountCombo, SIGNAL(accountSelected(QString)), this, SLOT(categoryChanged(QString)));
-  connect(d->amountHelper, SIGNAL(valueChanged()), this, SLOT(amountChanged()));
+  connect(d->amountHelper, &CreditDebitHelper::valueChanged, this, &NewSplitEditor::amountChanged);
 
   connect(d->ui->cancelButton, SIGNAL(clicked(bool)), this, SLOT(reject()));
   connect(d->ui->enterButton, SIGNAL(clicked(bool)), this, SLOT(acceptEdit()));
@@ -412,18 +439,27 @@ void NewSplitEditor::setShares(const MyMoneyMoney& shares)
 
 MyMoneyMoney NewSplitEditor::value() const
 {
-  return d->amountHelper->value();
+  return d->value;
 }
 
 void NewSplitEditor::setValue(const MyMoneyMoney& value)
 {
   d->price = MyMoneyMoney::ONE;
+  d->value = value;
   if (!d->haveShares) {
     qDebug() << "NewSplitEditor::setValue(): call to setShares() missing, price invalid";
   } else if (!(d->shares.isZero() || value.isZero())) {
     d->price = d->shares/value;
   }
-  d->amountHelper->setValue(value);
+
+  if (d->isIncomeExpense) {
+    d->amountHelper->setValue(d->shares);
+    if (!(d->shares.isZero() || value.isZero())) {
+      d->price = value/d->shares;
+    }
+  } else {
+    d->amountHelper->setValue(value);
+  }
 }
 
 
