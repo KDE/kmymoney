@@ -263,6 +263,10 @@ void KMyMoneyDateInput::toggleDatePicker()
 void KMyMoneyDateInput::keyPressEvent(QKeyEvent * k)
 {
   QKeySequence today(i18nc("Enter todays date into date input widget", "T"));
+  QKeySequence firstDayOfMonth(i18nc("Enter first day of month into date input widget", "M"));
+  QKeySequence lastDayOfMonth(i18nc("Enter last day of month into date input widget", "H"));
+  QKeySequence firstDayOfYear(i18nc("Enter first day of year into date input widget", "Y"));
+  QKeySequence lastDayOfYear(i18nc("Enter last day of year date into date input widget", "R"));
 
   auto adjustDateSection = [&](int offset) {
     switch(d->m_dateEdit->currentSection()) {
@@ -292,8 +296,52 @@ void KMyMoneyDateInput::keyPressEvent(QKeyEvent * k)
       k->accept();
       break;
 
+    case Qt::Key_BraceLeft:
+    case Qt::Key_BracketLeft:
+      slotDateChosen(d->m_date.addMonths(-1));
+      k->accept();
+      break;
+
+    case Qt::Key_BraceRight:
+    case Qt::Key_BracketRight:
+      slotDateChosen(d->m_date.addMonths(1));
+      k->accept();
+      break;
+
+    case Qt::Key_Less:
+    case Qt::Key_Comma:
+      slotDateChosen(d->m_date.addYears(-1));
+      k->accept();
+      break;
+
+    case Qt::Key_Greater:
+    case Qt::Key_Period:
+      slotDateChosen(d->m_date.addYears(1));
+      k->accept();
+      break;
+
     default:
       if (today == QKeySequence(k->key()) || k->key() == Qt::Key_T) {
+        slotDateChosen(QDate::currentDate());
+        k->accept();
+      }
+      else if (firstDayOfMonth == QKeySequence(k->key()) || k->key() == Qt::Key_M) {
+        slotDateChosen(QDate(d->m_date.year(), d->m_date.month(), 1));
+        k->accept();
+      }
+      else if (lastDayOfMonth == QKeySequence(k->key()) || k->key() == Qt::Key_H) {
+        slotDateChosen(QDate(d->m_date.year(), d->m_date.month(), d->m_date.daysInMonth()));
+        k->accept();
+      }
+      else if (firstDayOfYear == QKeySequence(k->key()) || k->key() == Qt::Key_Y) {
+        slotDateChosen(QDate(d->m_date.year(), 1, 1));
+        k->accept();
+      }
+      else if (lastDayOfYear == QKeySequence(k->key()) || k->key() == Qt::Key_R) {
+        slotDateChosen(QDate(d->m_date.year(), 12, 31));
+        k->accept();
+      }
+      else if (today == QKeySequence(k->key()) || k->key() == Qt::Key_T) {
         slotDateChosen(QDate::currentDate());
         k->accept();
       }
