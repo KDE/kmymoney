@@ -66,6 +66,8 @@ public:
 
   void selectMostRecentTransaction();
 
+  void setColumnSelectorGroupName(const QString& groupName);
+
   /**
    * New transactions will be created in account referenced by @a id.
    */

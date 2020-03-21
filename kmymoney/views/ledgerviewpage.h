@@ -35,7 +35,7 @@ class LedgerViewPage : public QWidget
 {
   Q_OBJECT
 public:
-  explicit LedgerViewPage(QWidget* parent = 0);
+  explicit LedgerViewPage(QWidget* parent = 0, const QString& configGroupName = QString());
   virtual ~LedgerViewPage();
 
   virtual void setAccount(const MyMoneyAccount& id);

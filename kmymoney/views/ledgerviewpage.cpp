@@ -73,7 +73,7 @@ public:
   QStringList           selection;
 };
 
-LedgerViewPage::LedgerViewPage(QWidget* parent)
+LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
   : QWidget(parent)
   , d(new Private(this))
 {
@@ -84,6 +84,7 @@ LedgerViewPage::LedgerViewPage(QWidget* parent)
   connect(d->ui->ledgerView, &LedgerView::aboutToFinishEdit, this, &LedgerViewPage::finishEdit);
   connect(d->ui->splitter, &QSplitter::splitterMoved, this, &LedgerViewPage::splitterChanged);
 
+  d->ui->ledgerView->setColumnSelectorGroupName(configGroupName);
 
   // setup the model stack
   const auto file = MyMoneyFile::instance();

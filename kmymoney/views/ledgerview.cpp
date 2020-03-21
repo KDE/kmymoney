@@ -106,6 +106,7 @@ public:
   bool                            newTransactionPresent;
   ColumnSelector*                 columnSelector;
   QString                         accountId;
+  QString                         groupName;
 };
 
 
@@ -141,8 +142,6 @@ LedgerView::LedgerView(QWidget* parent)
   setSelectionBehavior(SelectRows);
 
   setTabKeyNavigation(false);
-
-  d->columnSelector = new ColumnSelector(this);
 }
 
 LedgerView::~LedgerView()
@@ -150,8 +149,20 @@ LedgerView::~LedgerView()
   delete d;
 }
 
+void LedgerView::setColumnSelectorGroupName(const QString& groupName)
+{
+  if (!d->columnSelector) {
+    d->groupName = groupName;
+  } else {
+    qWarning() << "LedgerView::setColumnSelectorGroupName must be called before model assignment";
+  }
+}
+
 void LedgerView::setModel(QAbstractItemModel* model)
 {
+  if (!d->columnSelector) {
+    d->columnSelector = new ColumnSelector(this, d->groupName);
+  }
   QTableView::setModel(model);
 
   d->columnSelector->setModel(model);
