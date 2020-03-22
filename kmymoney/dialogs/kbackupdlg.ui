@@ -7,56 +7,36 @@
     <x>0</x>
     <y>0</y>
     <width>641</width>
-    <height>301</height>
+    <height>369</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Backup</string>
   </property>
-  <layout class="QVBoxLayout">
-   <property name="spacing">
-    <number>6</number>
-   </property>
-   <property name="leftMargin">
-    <number>11</number>
-   </property>
-   <property name="topMargin">
-    <number>11</number>
-   </property>
-   <property name="rightMargin">
-    <number>11</number>
-   </property>
-   <property name="bottomMargin">
-    <number>11</number>
-   </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QHBoxLayout">
-     <property name="spacing">
-      <number>6</number>
-     </property>
-     <property name="leftMargin">
-      <number>0</number>
-     </property>
-     <property name="topMargin">
-      <number>0</number>
-     </property>
-     <property name="rightMargin">
-      <number>0</number>
-     </property>
-     <property name="bottomMargin">
-      <number>0</number>
-     </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QLabel" name="TextLabel1">
        <property name="text">
-        <string>Use this dialog to backup your data. 
+        <string>Use this dialog to backup your data.
 
 Please make sure you have a disk inserted and that the drive is ready. Then choose the mount point from either the Choose button or by entering the path in the available box.
 
-Click OK to perform the backup. If your system does not use an automounter, make sure you mark the checkbox below to &quot;mount this directory before backing up.&quot;</string>
+Click OK to perform the backup.</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignTop</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="txtAutoMount">
+       <property name="text">
+        <string>If your system does not use an automounter, make sure you mark the checkbox below to &quot;mount this directory before backing up.&quot;</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>

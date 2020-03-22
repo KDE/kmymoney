@@ -2,7 +2,7 @@
                           kmymoney.cpp
                              -------------------
     copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
-                           (C) 2002-2019 by Thomas Baumgart <tbaumgart@kde.org>
+                           (C) 2002-2020 by Thomas Baumgart <tbaumgart@kde.org>
                            (C) 2017-2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 
 ****************************************************************************/
@@ -2339,9 +2339,8 @@ void KMyMoneyApp::slotBackupFile()
 
   QPointer<KBackupDlg> backupDlg = new KBackupDlg(this);
   int returncode = backupDlg->exec();
+
   if (returncode == QDialog::Accepted && backupDlg != 0) {
-
-
     d->m_backupMount = backupDlg->mountCheckBoxChecked();
     d->m_proc.clearProgram();
     d->m_backupState = BACKUP_MOUNTING;
@@ -2381,6 +2380,19 @@ bool KMyMoneyApp::slotBackupWriteFile()
   QString today = QDate::currentDate().toString("-yyyy-MM-dd.") + fi.suffix();
   QString backupfile = d->m_mountpoint + '/' + d->m_storageInfo.url.fileName();
   KMyMoneyUtils::appendCorrectFileExt(backupfile, today);
+
+#ifdef Q_OS_WIN
+  // on windows, a leading slash is a problem if a drive letter follows
+  // eg. "/Z:/path". In case we detect such a pattern, we simply remove
+  // the leading slash
+  const QRegularExpression re(QStringLiteral("/(?<path>\\w+:/.+)"),
+                              QRegularExpression::CaseInsensitiveOption|QRegularExpression::UseUnicodePropertiesOption
+                             );
+  const auto match = re.match(backupfile);
+  if (match.hasMatch() && !match.captured(QStringLiteral("path")).isEmpty()) {
+    backupfile = match.captured(QStringLiteral("path"));
+  }
+#endif
 
   // check if file already exists and ask what to do
   QFile f(backupfile);
