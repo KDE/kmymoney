@@ -350,6 +350,7 @@ bool XMLStorage::saveAs()
                     QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.xml")).arg(i18nc("XML (Filefilter)", "XML files")) +
                     QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*")).arg(i18nc("All files (Filefilter)", "All files")));
   dlg->setAcceptMode(QFileDialog::AcceptSave);
+  connect(dlg, &QFileDialog::filterSelected, this, [&](const QString txt) { dlg->setDefaultSuffix(txt.mid(2)); });
 
   if (dlg->exec() == QDialog::Accepted && dlg != 0) {
     QUrl newURL = dlg->selectedUrls().first();
