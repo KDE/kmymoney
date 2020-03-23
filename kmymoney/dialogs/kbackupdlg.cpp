@@ -2,6 +2,7 @@
  * Copyright 2001-2003  Michael Edwardes <mte@users.sourceforge.net>
  * Copyright 2001-2002  Felix Rodriguez <frodriguez@users.sourceforge.net>
  * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -51,6 +52,15 @@ KBackupDlg::KBackupDlg(QWidget* parent) :
 {
   ui->setupUi(this);
   readConfig();
+
+#ifdef Q_OS_WIN
+  // in windows we don't have a mount capability so
+  // we hide that option from the user and deactivate it
+  ui->mountCheckBox->setChecked(false);
+  ui->mountCheckBox->hide();
+  ui->txtAutoMount->hide();
+  ui->lblMountPoint->setText(i18n("Backup location:"));
+#endif
 
   ui->chooseButton->setIcon(Icons::get(Icon::Folder));
 
