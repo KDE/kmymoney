@@ -26,6 +26,7 @@
 #include <QObject>
 
 #include "gwen-gui-qt5/qt5_gui.hpp"
+#include "gwen-gui-qt5/qt5_gui_dialog.hpp"
 
 /**
  * @brief Gwenhywfar Gui by KDE
@@ -49,6 +50,8 @@ public:
                           GWEN_GUI_PASSWORD_METHOD methodId,
                           GWEN_DB_NODE *methodParams,
                           uint32_t guiid) final override;
+
+  int execDialog(GWEN_DIALOG *dlg, GWEN_UNUSED uint32_t guiid) final override;
 
 private:
   int getPasswordText(uint32_t flags,

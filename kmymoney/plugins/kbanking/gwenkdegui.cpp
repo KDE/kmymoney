@@ -23,15 +23,19 @@
 #include "gwenkdegui.h"
 
 #include <gwenhywfar/debug.h>
+#include "gwen-gui-qt5/qt5dialogbox.hpp"
 
 
 #include <QString>
 #include <QStringList>
 #include <QRegularExpression>
+#include <QApplication>
 
 #include <QDebug>
 #include <QPointer>
+#include <QLineEdit>
 
+#include "passwordtoggle.h"
 #include "widgets/chiptandialog.h"
 #include "widgets/phototandialog.h"
 
@@ -47,15 +51,31 @@
 gwenKdeGui::gwenKdeGui()
     : QT5_Gui()
 {
-
 }
 
 gwenKdeGui::~gwenKdeGui()
 {
-
 }
 
+int gwenKdeGui::execDialog(GWEN_DIALOG *dlg, GWEN_UNUSED uint32_t guiid)
+{
+  QT5_GuiDialog qt5Dlg(this, dlg);
+  QWidget *owner = qApp->activeWindow();
 
+  /* setup widget tree for the dialog */
+  if (!(qt5Dlg.setup(owner))) {
+    return GWEN_ERROR_GENERIC;
+  }
+
+  QDialog* dialog = dynamic_cast<QDialog*>(qt5Dlg.getMainWindow());
+  QList<QLineEdit*> lineedits = dialog->findChildren<QLineEdit*>();
+  for(const auto edit : lineedits) {
+    if (edit->echoMode() == QLineEdit::Password) {
+      new PasswordToggle(edit);
+    }
+  }
+  return qt5Dlg.execute();
+}
 
 int gwenKdeGui::getPasswordText(uint32_t flags,
                                 const char *token,
