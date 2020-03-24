@@ -99,6 +99,8 @@ public:
   MyMoneyMoney shares() const;
   void setShares(const MyMoneyMoney& shares);
 
+  void negateShares();
+
   /**
    * This method returns the price. If the member m_price is not zero
    * its value is returned. Otherwise, if m_shares is not zero the quotient
