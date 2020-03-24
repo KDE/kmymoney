@@ -79,5 +79,6 @@ cmake --build . --target ext_kdiagram
 cmake --build . --target ext_aqbanking
 cmake --build . --target ext_gpgme
 cmake --build . --target ext_sqlcipher
+cmake --build . --target ext_qt5sqlcipher
 cmake --build . --target ext_ofx
 cmake --build . --target ext_ical
