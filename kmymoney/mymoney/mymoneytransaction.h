@@ -190,6 +190,11 @@ public:
   MyMoneyMoney splitSum() const;
 
   /**
+    * This method is used to reverse a transaction by reversing the values of each split
+    */
+  void reverse();
+
+  /**
     * This method returns information if the transaction
     * contains information of a loan payment or not.
     * Loan payment transactions have at least one

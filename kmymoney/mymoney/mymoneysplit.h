@@ -99,6 +99,8 @@ public:
   MyMoneyMoney shares() const;
   void setShares(const MyMoneyMoney& shares);
 
+  void negateShares();
+
   /**
    * This method returns the price. If the member m_price is not zero
    * its value is returned. Otherwise, if m_shares is not zero the quotient
@@ -140,6 +142,7 @@ public:
     */
   void setValue(const MyMoneyMoney& value, const QString& transactionCurrencyId, const QString& splitCurrencyId);
 
+  void negateValue();
 
   QString accountId() const;
   void setAccountId(const QString& account);

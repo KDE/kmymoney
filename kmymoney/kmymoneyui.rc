@@ -75,6 +75,7 @@
    <Action name="transaction_editsplits" />
    <Action name="transaction_delete" />
    <Action name="transaction_duplicate" />
+   <Action name="transaction_add_reversing" />
    <Menu name="transaction_mark_menu">
     <text>Mark transaction as...</text>
     <title>Mark transaction</title>
@@ -200,6 +201,7 @@
   <Action name="transaction_editsplits" />
   <Action name="transaction_delete" />
   <Action name="transaction_duplicate" />
+  <Action name="transaction_add_reversing" />
   <Action name="transaction_copy_splits" />
   <Menu name="transaction_move_menu">
    <text>Move transaction to...</text>

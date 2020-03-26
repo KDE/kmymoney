@@ -163,6 +163,12 @@ void MyMoneySplit::setShares(const MyMoneyMoney& shares)
   d->m_shares = shares;
 }
 
+void MyMoneySplit::negateShares()
+{
+  Q_D(MyMoneySplit);
+  d->m_shares = -d->m_shares;
+}
+
 QString MyMoneySplit::value(const QString& key) const
 {
   return MyMoneyKeyValueContainer::value(key);
@@ -185,6 +191,12 @@ void MyMoneySplit::setValue(const MyMoneyMoney& value, const QString& transactio
     setValue(value);
   else
     setShares(value);
+}
+
+void MyMoneySplit::negateValue()
+{
+    Q_D(MyMoneySplit);
+    d->m_value = -d->m_value;
 }
 
 QString MyMoneySplit::payeeId() const
