@@ -8,5 +8,5 @@ ExternalProject_Add(
   BUILD_COMMAND $(MAKE)
   INSTALL_COMMAND $(MAKE) install
 
-  DEPENDS ext_gwenhywfar ext_ktoblzcheck ext_xmlsec1 ext_gmp
+  DEPENDS ext_gwenhywfar ext_xmlsec1 ext_gmp
 )
