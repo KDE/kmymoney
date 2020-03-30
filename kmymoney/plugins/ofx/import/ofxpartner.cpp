@@ -331,7 +331,7 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const QUrl &url, const QByte
 
   KIO::Job* job;
   if(type.toLower() == QStringLiteral("get")) {
-    job = m_getJob = KIO::copy(url, dst, jobFlags);
+    job = m_getJob = KIO::copy(url, QUrl(QString("file://%1").arg(m_dst)), jobFlags);
   } else {
     job = m_postJob = KIO::http_post(url, postData, jobFlags);
     m_postJob->addMetaData("content-type", "Content-type: application/x-ofx");
