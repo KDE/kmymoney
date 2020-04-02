@@ -78,12 +78,12 @@ QVariant BudgetViewProxyModel::data(const QModelIndex &index, int role) const
   if (!MyMoneyFile::instance()->storageAttached())
     return QVariant();
   const auto sourceColumn = d->m_mdlColumns->at(mapToSource(index).column());
+  auto const file = MyMoneyFile::instance();
+  const auto ixAccount = mapToSource(BudgetViewProxyModel::index(index.row(), static_cast<int>(Column::Account), index.parent()));
+  const auto account = ixAccount.data((int)Role::Account).value<MyMoneyAccount>();
+
   static QVector<Column> columnsToProcess {Column::TotalBalance, Column::TotalValue/*, AccountsModel::PostedValue, Column::Account*/};
   if (columnsToProcess.contains(sourceColumn)) {
-        const auto ixAccount = mapToSource(BudgetViewProxyModel::index(index.row(), static_cast<int>(Column::Account), index.parent()));
-        const auto account = ixAccount.data((int)Role::Account).value<MyMoneyAccount>();
-        auto const file = MyMoneyFile::instance();
-
         switch (role) {
           case Qt::DisplayRole:
             {
@@ -103,18 +103,22 @@ QVariant BudgetViewProxyModel::data(const QModelIndex &index, int role) const
               }
               break;
             }
-          case (int)Role::Balance:
-            if (file->security(account.currencyId()) != file->baseCurrency())
-              return QVariant::fromValue(accountBalance(account.id()));
-            else
-              return QVariant();
-          case (int)Role::TotalValue:
-            return QVariant::fromValue(computeTotalValue(ixAccount));
-          case (int)Role::Value:
-            return QVariant::fromValue(accountValue(account, accountBalance(account.id())));
           default:
             break;
         }
+  }
+  switch (role) {
+    case (int)Role::Balance:
+      if (file->security(account.currencyId()) != file->baseCurrency())
+        return QVariant::fromValue(accountBalance(account.id()));
+      else
+        return QVariant();
+    case (int)Role::TotalValue:
+      return QVariant::fromValue(computeTotalValue(ixAccount));
+    case (int)Role::Value:
+      return QVariant::fromValue(accountValue(account, accountBalance(account.id())));
+    default:
+      break;
   }
   return AccountsViewProxyModel::data(index, role);
 }
@@ -158,11 +162,16 @@ void BudgetViewProxyModel::setBudget(const MyMoneyBudget& budget)
 bool BudgetViewProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
   Q_D(const BudgetViewProxyModel);
-  if (hideUnusedIncomeExpenseAccounts()) {
-    const auto index = sourceModel()->index(source_row, static_cast<int>(Column::Account), source_parent);
-    const auto accountData = sourceModel()->data(index, (int)Role::Account);
-    if (accountData.canConvert<MyMoneyAccount>()) {
-      const auto account = accountData.value<MyMoneyAccount>();
+  const auto index = sourceModel()->index(source_row, static_cast<int>(Column::Account), source_parent);
+  const auto accountData = sourceModel()->data(index, (int)Role::Account);
+  if (accountData.canConvert<MyMoneyAccount>()) {
+    const auto account = accountData.value<MyMoneyAccount>();
+    if (!index.parent().isValid()) {
+      if (!account.isIncomeExpense()) {
+        return false;
+      }
+    }
+    if (hideUnusedIncomeExpenseAccounts()) {
       MyMoneyMoney balance;
       // find out if the account is budgeted
       const auto budgetAccount = d->m_budget.account(account.id());
@@ -177,15 +186,16 @@ bool BudgetViewProxyModel::filterAcceptsRow(int source_row, const QModelIndex &s
         }
       }
       if (!balance.isZero())
-        return AccountsProxyModel::filterAcceptsRow(source_row, source_parent);
+        return true;
+      for (auto i = 0; i < sourceModel()->rowCount(index); ++i) {
+        if (filterAcceptsRow(i, index))
+          return true;
+      }
+      return false;
     }
-    for (auto i = 0; i < sourceModel()->rowCount(index); ++i) {
-      if (filterAcceptsRow(i, index))
-        return AccountsProxyModel::filterAcceptsRow(i, index);
-    }
-    return false;
+    return true;
   }
-  return AccountsProxyModel::filterAcceptsRow(source_row, source_parent);
+  return false;
 }
 
 MyMoneyMoney BudgetViewProxyModel::accountBalance(const QString &accountId) const
@@ -230,13 +240,13 @@ void BudgetViewProxyModel::checkBalance()
                                      (int)Role::ID,
                                      MyMoneyFile::instance()->income().id(),
                                      1,
-                                     Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
+                                     Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchWrap));
 
   QModelIndexList expenseList = match(index(0, 0),
                                       (int)Role::ID,
                                       MyMoneyFile::instance()->expense().id(),
                                       1,
-                                      Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
+                                      Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchWrap));
 
   MyMoneyMoney balance;
   if (!incomeList.isEmpty() && !expenseList.isEmpty()) {
