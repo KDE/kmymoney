@@ -1,20 +1,19 @@
-/***************************************************************************
-                             ofxpartner.cpp
-                             ----------
-    begin                : Fri Jan 23 2009
-    copyright            : (C) 2009 by Thomas Baumgart
-    email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-
+/*
+ * Copyright 2009-2020  Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include <config-kmymoney.h>
 
@@ -34,6 +33,8 @@
 #include <QTextStream>
 #include <QDomDocument>
 #include <QDebug>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -293,11 +294,29 @@ public:
 
 OfxHttpRequest::OfxHttpRequest(const QString& type, const QUrl &url, const QByteArray &postData, const QMap<QString, QString>& metaData, const QUrl& dst, bool showProgressInfo)
     : d(new Private)
-    , m_dst(dst)
+    , m_dst(dst.toLocalFile())
     , m_error(-1)
     , m_postJob(0)
     , m_getJob(0)
 {
+#if defined(Q_OS_WIN)
+  // on MS windows, the local file could be presented as
+  //
+  //   "//<drive-letter>/<path-name>"
+  //
+  // which needs to be converted to
+  //
+  //   "<drive-letter>:/<path-name>"
+  //
+  // see https://bugs.kde.org/show_bug.cgi?id=396286 for details of the analysis.
+  QRegularExpression re(QStringLiteral("^//(?<drive>[a-z])/(?<path>.+)$"), QRegularExpression::CaseInsensitiveOption);
+  const auto match = re.match(m_dst);
+  if (match.hasMatch()) {
+    m_dst = QString("/%1:/%2").arg(match.captured(QStringLiteral("drive")), match.captured(QStringLiteral("path")));
+    qDebug() << "destination changed to" << m_dst;
+  }
+#endif
+
   m_eventLoop = new QEventLoop(qApp->activeWindow());
 
   if (KMyMoneySettings::logOfxTransactions()) {
@@ -312,7 +331,7 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const QUrl &url, const QByte
 
   KIO::Job* job;
   if(type.toLower() == QStringLiteral("get")) {
-    job = m_getJob = KIO::copy(url, dst, jobFlags);
+    job = m_getJob = KIO::copy(url, QUrl(QString("file://%1").arg(m_dst)), jobFlags);
   } else {
     job = m_postJob = KIO::http_post(url, postData, jobFlags);
     m_postJob->addMetaData("content-type", "Content-type: application/x-ofx");
@@ -349,8 +368,8 @@ OfxHttpRequest::~OfxHttpRequest()
 
 void OfxHttpRequest::slotOfxConnected(KIO::Job*)
 {
-  qDebug() << "OfxHttpRequest::slotOfxConnected" << m_dst.toLocalFile();
-  m_file.setFileName(m_dst.toLocalFile());
+  qDebug() << "OfxHttpRequest::slotOfxConnected" << m_dst;
+  m_file.setFileName(m_dst);
   m_file.open(QIODevice::WriteOnly);
 }
 
@@ -378,11 +397,11 @@ void OfxHttpRequest::slotOfxFinished(KJob* /* e */)
     m_error = m_postJob->error();
     if (m_error) {
       m_postJob->uiDelegate()->showErrorMessage();
-      QFile::remove(m_dst.toLocalFile());
+      QFile::remove(m_dst);
 
     } else if (m_postJob->isErrorPage()) {
       QString details;
-      QFile f(m_dst.toLocalFile());
+      QFile f(m_dst);
       if (f.open(QIODevice::ReadOnly)) {
         QTextStream stream(&f);
         while (!stream.atEnd()) {
@@ -391,14 +410,14 @@ void OfxHttpRequest::slotOfxFinished(KJob* /* e */)
         f.close();
       }
       KMessageBox::detailedSorry(0, i18n("The HTTP request failed."), details, i18nc("The HTTP request failed", "Failed"));
-      QFile::remove(m_dst.toLocalFile());
+      QFile::remove(m_dst);
     }
 
   } else if(m_getJob) {
     m_error = m_getJob->error();
     if (m_error) {
       m_getJob->uiDelegate()->showErrorMessage();
-      QFile::remove(m_dst.toLocalFile());
+      QFile::remove(m_dst);
     }
   }
 

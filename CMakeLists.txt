@@ -223,7 +223,11 @@ cmake_dependent_option(ENABLE_OFXIMPORTER "Enable OFX Importer" ON
 
 if(ENABLE_OFXIMPORTER)
   if(NOT LIBOFX_HAVE_CLIENTUID)
-    set(PATH_TO_LIBOFX_HEADER "${LIBOFX_INCLUDEDIR}/libofx/libofx.h")
+    get_target_property(PATH_TO_LIBOFX_HEADER PkgConfig::LIBOFX INTERFACE_INCLUDE_DIRECTORIES )
+    if ("${PATH_TO_LIBOFX_HEADER}" STREQUAL "PATH_TO_LIBOFX_HEADER-NOTFOUND")
+      set(PATH_TO_LIBOFX_HEADER ${LIBOFX_INCLUDEDIR})
+    endif()
+    set(PATH_TO_LIBOFX_HEADER "${PATH_TO_LIBOFX_HEADER}/libofx/libofx.h")
     unset(LIBOFX_HAVE_CLIENTUID)
     unset(LIBOFX_HAVE_CLIENTUID CACHE) #not doing this will prevent updating below check
     check_struct_has_member("struct OfxFiLogin" clientuid ${PATH_TO_LIBOFX_HEADER} LIBOFX_HAVE_CLIENTUID LANGUAGE CXX)
