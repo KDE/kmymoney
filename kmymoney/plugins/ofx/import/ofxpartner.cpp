@@ -312,7 +312,7 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const QUrl &url, const QByte
   QRegularExpression re(QStringLiteral("^//(?<drive>[a-z])/(?<path>.+)$"), QRegularExpression::CaseInsensitiveOption);
   const auto match = re.match(m_dst);
   if (match.hasMatch()) {
-    m_dst = QString("%1:/%2").arg(match.captured(QStringLiteral("drive")), match.captured(QStringLiteral("path")));
+    m_dst = QString("/%1:/%2").arg(match.captured(QStringLiteral("drive")), match.captured(QStringLiteral("path")));
     qDebug() << "destination changed to" << m_dst;
   }
 #endif
