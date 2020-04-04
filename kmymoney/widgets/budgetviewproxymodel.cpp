@@ -199,16 +199,11 @@ void BudgetViewProxyModel::setBudget(const MyMoneyBudget& budget)
 bool BudgetViewProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
   Q_D(const BudgetViewProxyModel);
-  // we never show the favorites in budget view
-  if (source_row == 0)
-    return false;
-
-  if (hideUnusedIncomeExpenseAccounts()) {
-    const auto index = sourceModel()->index(source_row, 0, source_parent);
-    const auto accountId = index.data(eMyMoney::Model::IdRole).toString();
-
-    if (!accountId.isEmpty()) {
+  const auto idx = sourceModel()->index(source_row, 0, source_parent);
+  if (idx.data(eMyMoney::Model::AccountIsIncomeExpenseRole).toBool()) {
+    if (hideUnusedIncomeExpenseAccounts()) {
       MyMoneyMoney balance;
+      const auto accountId = idx.data(eMyMoney::Model::IdRole).toString();
       // find out if the account is budgeted
       const auto budgetAccount = d->m_budget.account(accountId);
       if (budgetAccount.id() == accountId) {
