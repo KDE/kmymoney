@@ -504,7 +504,8 @@ bool KMyMoneyAccountComboSplitHelper::eventFilter(QObject* watched, QEvent* even
         // to signal focus in the lineedit widget to the user
         const auto lineEdit = d->m_accountCombo->lineEdit();
         if (lineEdit) {
-          lineEdit->selectAll();
+          lineEdit->end(false);
+          lineEdit->home(true);
         }
       }
     }
@@ -543,7 +544,8 @@ void KMyMoneyAccountComboSplitHelper::splitCountChanged()
   QModelIndexList indexes;
   bool disabled = false;
 
-  switch (d->m_splitModel->rowCount()) {
+  const auto rows = d->m_splitModel->rowCount();
+  switch (rows) {
     case 0:
       d->m_accountCombo->setCurrentIndex(-1);
       d->m_accountCombo->setCurrentText(QString());
@@ -568,7 +570,21 @@ void KMyMoneyAccountComboSplitHelper::splitCountChanged()
     default:
       {
         QSignalBlocker lineEditBlocker(d->m_accountCombo->lineEdit());
-        d->m_accountCombo->lineEdit()->setText(i18n("Split transaction"));
+        QString txt, sep;
+        for (int row = 0; row < rows; ++row) {
+          const auto idx = d->m_splitModel->index(row, 0);
+          indexes = d->m_accountCombo->model()->match(d->m_accountCombo->model()->index(0,0),
+                                                      eMyMoney::Model::IdRole,
+                                                      idx.data(eMyMoney::Model::SplitAccountIdRole).toString(),
+                                                      1,
+                                                      Qt::MatchFlags(Qt::MatchExactly | Qt::MatchWrap | Qt::MatchRecursive));
+          if (!indexes.isEmpty()) {
+            txt += sep + indexes.first().data(eMyMoney::Model::AccountNameRole).toString();
+            sep = QStringLiteral(", ");
+          }
+        }
+        d->m_accountCombo->lineEdit()->setText(txt);
+        d->m_accountCombo->lineEdit()->home(false);
         disabled = true;
       }
       break;

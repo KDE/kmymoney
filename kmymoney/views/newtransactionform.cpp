@@ -100,6 +100,7 @@ void NewTransactionForm::showTransaction(const QModelIndex& idx)
   d->ui->memoEdit->moveCursor(QTextCursor::Start);
   d->ui->memoEdit->ensureCursorVisible();
   d->ui->accountEdit->setText(index.data(eMyMoney::Model::TransactionCounterAccountRole).toString());
+  d->ui->accountEdit->home(false);
   d->ui->numberEdit->setText(index.data(eMyMoney::Model::SplitNumberRole).toString());
 
   const QString amount = QString("%1 %2").arg(index.data(eMyMoney::Model::SplitSharesFormattedRole).toString())

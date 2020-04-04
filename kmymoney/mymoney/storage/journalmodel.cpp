@@ -138,14 +138,37 @@ struct JournalModel::Private
     return {};
   }
 
-  QString counterAccount(const JournalEntry& journalEntry, const MyMoneyTransaction& transaction) const
+  QString counterAccount(const QModelIndex& index, const JournalEntry& journalEntry, const MyMoneyTransaction& transaction) const
   {
     // A transaction can have more than 2 splits ...
-    if(transaction.splitCount() > 2) {
-      return i18n("Split transaction");
+    const int rows = transaction.splitCount();
+    if(rows > 2) {
+      // find the first entry of the transaction
+      QModelIndex idx = index;
+      int row = index.row() - 1;
+      for (; row >= 0; --row) {
+        idx = q->index(row, 0);
+        if (idx.data(eMyMoney::Model::JournalTransactionIdRole).toString() != transaction.id()) {
+          idx = q->index(row++, 0);
+          break;
+        }
+      }
+
+      QString txt, sep;
+      const auto endRow = row + rows;
+      for (; row < endRow; ++row) {
+        idx = q->index(row, index.column());
+        if (idx != index) {
+          const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
+          idx = MyMoneyFile::instance()->accountsModel()->indexById(accountId);
+          txt += sep + idx.data(eMyMoney::Model::AccountNameRole).toString();
+          sep = QStringLiteral(", ");
+        }
+      }
+      return txt;
 
       // ... exactly two splits ...
-    } else if(transaction.splitCount() == 2) {
+    } else if(rows == 2) {
       const auto& splitId = journalEntry.split().id();
       for (const auto& sp : transaction.splits()) {
         if(splitId != sp.id()) {
@@ -458,7 +481,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
           break;
 
         case Detail:
-          return d->counterAccount(journalEntry, transaction);
+          return d->counterAccount(idx, journalEntry, transaction);
 
         case Reconciliation:
           return d->reconciliationStateShort(journalEntry.split().reconcileFlag());
@@ -649,7 +672,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
       return MyMoneyFile::instance()->payeesModel()->itemById(journalEntry.split().payeeId()).name();
 
     case eMyMoney::Model::TransactionCounterAccountRole:
-      return d->counterAccount(journalEntry, transaction);
+      return d->counterAccount(idx, journalEntry, transaction);
 
     case eMyMoney::Model::TransactionCounterAccountIdRole:
       return d->counterAccountId(journalEntry, transaction);
