@@ -3,7 +3,7 @@
  * Copyright 2001-2002  Felix Rodriguez <frodriguez@users.sourceforge.net>
  * Copyright 2002-2004  Kevin Tambascio <ktambascio@users.sourceforge.net>
  * Copyright 2004-2005  Ace Jones <acejones@users.sourceforge.net>
- * Copyright 2006-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2006-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2006       Darren Gould <darren_gould@gmx.de>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
@@ -4061,6 +4061,27 @@ QUndoStack* MyMoneyFile::undoStack() const
   return &d->undoStack;
 }
 
+bool MyMoneyFile::hasValidId(const MyMoneyAccount& acc) const
+{
+  static const QSet<eMyMoney::Account::Standard> stdAccNames {
+    eMyMoney::Account::Standard::Liability,
+    eMyMoney::Account::Standard::Asset,
+    eMyMoney::Account::Standard::Expense,
+    eMyMoney::Account::Standard::Income,
+    eMyMoney::Account::Standard::Equity
+  };
+  const auto id = acc.id();
+  for (const auto idx : qAsConst(stdAccNames)) {
+    if (id == MyMoneyAccount::stdAccName(idx))
+      return true;
+  }
+  return d->accountsModel.isValidId(id);
+}
+
+bool MyMoneyFile::hasValidId(const MyMoneyPayee& payee) const
+{
+  return d->payeesModel.isValidId(payee.id());
+}
 
 class MyMoneyFileTransactionPrivate
 {

@@ -3,7 +3,7 @@
  * Copyright 2001-2002  Felix Rodriguez <frodriguez@users.sourceforge.net>
  * Copyright 2002-2004  Kevin Tambascio <ktambascio@users.sourceforge.net>
  * Copyright 2004-2005  Ace Jones <acejones@users.sourceforge.net>
- * Copyright 2006-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2006-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2006       Darren Gould <darren_gould@gmx.de>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
@@ -1758,6 +1758,9 @@ public:
   const QString& fixedKey(FixedKey key) const;
 
   QUndoStack* undoStack() const;
+
+  bool hasValidId (const MyMoneyAccount& acc) const;
+  bool hasValidId (const MyMoneyPayee& payee) const;
 
 protected:
   /**
