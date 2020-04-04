@@ -1,6 +1,6 @@
 /*
  * Copyright 2002-2004  Kevin Tambascio <ktambascio@users.sourceforge.net>
- * Copyright 2002-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2002-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2004-2005  Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2006       Darren Gould <darren_gould@gmx.de>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
@@ -346,11 +346,17 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
           m_reader->signalProgress(++m_elementCount, 0);
         } else if (s == nodeName(Node::Account)) {
           auto a = readAccount(m_baseNode);
+          if (!m_reader->m_file->hasValidId(a)) {
+            throw MYMONEYEXCEPTION(i18n("ID '%1' is invalid in line %2.").arg(a.id()).arg(m_loc->lineNumber()));
+          }
           if (!a.id().isEmpty())
             m_reader->d->aList[a.id()] = a;
           m_reader->signalProgress(++m_elementCount, 0);
         } else if (s == nodeName(Node::Payee)) {
           auto p = readPayee(m_baseNode);
+          if (!m_reader->m_file->hasValidId(p)) {
+            throw MYMONEYEXCEPTION(i18n("ID '%1' is invalid in line %2.").arg(p.id().arg(m_loc->lineNumber())));
+          }
           if (!p.id().isEmpty())
             m_reader->d->pList[p.id()] = p;
           m_reader->signalProgress(++m_elementCount, 0);
@@ -424,7 +430,7 @@ bool MyMoneyXmlContentHandler::endElement(const QString& /* namespaceURI */, con
           rc = false;
         }
       } catch (const MyMoneyException &e) {
-        m_errMsg = i18n("Exception while creating a %1 element: %2", s, e.what());
+        m_errMsg = i18n("Exception while reading %1 element: %2", s, e.what());
         qWarning() << m_errMsg;
         rc = false;
       }
@@ -1420,7 +1426,7 @@ void MyMoneyStorageXML::readFile(QIODevice* pDevice, MyMoneyFile* file)
   reader.setContentHandler(&mmxml);
 
   if (!reader.parse(&xml, false)) {
-    throw MYMONEYEXCEPTION_CSTRING("File was not parsable!");
+    throw MYMONEYEXCEPTION(i18n("File was not parsable. Reason: %1").arg(mmxml.errorString()));
   }
   qDebug("done parsing file");
 
