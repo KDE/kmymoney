@@ -1,5 +1,5 @@
 /*
- * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2019-2020  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -86,6 +86,12 @@ public:
   void setDirty(bool dirty = true);
   bool isDirty() const;
   QString peekNextId() const;
+
+  /**
+   * checks if the @a id follows the ids created by this model
+   * @returns @c true in case of a valid id, @c false otherwise.
+   */
+  bool isValidId (const QString& id) const;
 
 protected:
   QString nextId();

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2019-2020  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -150,6 +150,14 @@ void MyMoneyModelBase::updateNextObjectId(const QString& id)
   }
 }
 
+bool MyMoneyModelBase::isValidId(const QString& id) const
+{
+  QRegularExpressionMatch m = m_idMatchExp.match(id);
+  if (m.hasMatch()) {
+    return m.captured(1).length() == m_idSize;
+  }
+  return false;
+}
 
 void MyMoneyModelBase::setDirty(bool dirty)
 {
