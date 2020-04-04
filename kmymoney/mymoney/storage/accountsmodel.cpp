@@ -547,6 +547,9 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::AccountFullHierarchyNameRole:
       return indexToHierarchicalName(idx, true);
 
+    case eMyMoney::Model::AccountNameRole:
+      return account.name();
+
     case eMyMoney::Model::AccountFullNameRole:
       return indexToHierarchicalName(idx, false);
 

@@ -460,6 +460,7 @@ namespace eMyMoney {
       AccountTotalValueRole,
       AccountFullHierarchyNameRole,
       AccountFullNameRole,
+      AccountNameRole,
       AccountDisplayOrderRole,
       AccountFractionRole,
       AccountParentIdRole,
