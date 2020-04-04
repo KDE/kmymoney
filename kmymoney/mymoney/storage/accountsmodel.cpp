@@ -538,6 +538,12 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::AccountIsClosedRole:
       return account.isClosed();
 
+    case eMyMoney::Model::AccountIsAssetLiabilityRole:
+      return account.isAssetLiability();
+
+    case eMyMoney::Model::AccountIsIncomeExpenseRole:
+      return account.isIncomeExpense();
+
     case eMyMoney::Model::AccountFullHierarchyNameRole:
       return indexToHierarchicalName(idx, true);
 

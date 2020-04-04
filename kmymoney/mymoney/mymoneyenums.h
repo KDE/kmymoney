@@ -468,6 +468,8 @@ namespace eMyMoney {
       AccountOnlineBalanceDateRole,
       AccountOnlineBalanceValueRole,
       AccountIsFavoriteIndexRole,
+      AccountIsIncomeExpenseRole,
+      AccountIsAssetLiabilityRole,
 
       // MyMoneyInstitution
       InstitutionSortCodeRole,
