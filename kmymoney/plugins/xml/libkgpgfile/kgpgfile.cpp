@@ -327,9 +327,12 @@ QString KGPGFile::errorToString() const
 bool KGPGFile::GPGAvailable()
 {
   GpgME::initializeLibrary();
-  bool rc = (GpgME::checkEngine(GpgME::OpenPGP) == 0);
-  // qDebug("KGPGFile::GPGAvailable returns %d", rc);
-  return rc;
+  const auto engineCheck = GpgME::checkEngine(GpgME::OpenPGP);
+  if (engineCheck.code() != 0) {
+    qDebug() << "GpgME::checkEngine returns" << engineCheck.code() << engineCheck.asString();
+    return false;
+  }
+  return true;
 }
 
 bool KGPGFile::keyAvailable(const QString& name)
