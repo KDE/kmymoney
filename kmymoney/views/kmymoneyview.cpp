@@ -197,7 +197,7 @@ void KMyMoneyView::slotFileOpened()
   if (viewBases.contains(View::Ledgers))
     viewBases[View::Ledgers]->executeCustomAction(eView::Action::InitializeAfterFileOpen);
 
-  static_cast<SimpleLedgerView*>(viewBases[View::NewLedgers])->openFavoriteLedgers();
+  static_cast<SimpleLedgerView*>(viewBases[View::NewLedgers])->openLedgersAfterOpen();
 
   // delay the switchToDefaultView call until the event loop is running
   QMetaObject::invokeMethod(this, "switchToDefaultView", Qt::QueuedConnection);

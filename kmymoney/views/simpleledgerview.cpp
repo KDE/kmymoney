@@ -25,6 +25,10 @@
 #include <QToolButton>
 #include <QUrl>
 #include <QDesktopServices>
+#include <QLineEdit>
+#include <QTreeView>
+#include <QKeyEvent>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -60,6 +64,7 @@ public:
   , accountsModel(nullptr)
   , newTabWidget(nullptr)
   , webSiteButton(nullptr)
+  , accountCombo(nullptr)
   , lastIdx(-1)
   , inModelUpdate(false)
   , m_needLoad(true)
@@ -99,9 +104,8 @@ public:
               QDesktopServices::openUrl(webSiteUrl);
             });
 
-    q->connect(ui->accountCombo, SIGNAL(accountSelected(QString)), q, SLOT(openNewLedger(QString)));
     q->connect(ui->ledgerTab, &QTabWidget::currentChanged, q, &SimpleLedgerView::tabSelected);
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::modelsLoaded, q, &SimpleLedgerView::updateModels);
+    q->connect(ui->ledgerTab, &QTabWidget::tabBarClicked, q, &SimpleLedgerView::tabClicked);
     q->connect(ui->ledgerTab, &QTabWidget::tabCloseRequested, q, &SimpleLedgerView::closeLedger);
     // we reload the icon if the institution data changed
     q->connect(MyMoneyFile::instance()->institutionsModel(), &InstitutionsModel::dataChanged, q, &SimpleLedgerView::setupCornerWidget);
@@ -112,11 +116,18 @@ public:
     auto const model = MyMoneyFile::instance()->accountsModel();
     accountsModel->setSourceModel(model);
     accountsModel->sort(AccountsModel::Column::AccountName);
-    ui->accountCombo->setModel(accountsModel);
+
+    accountCombo = new KMyMoneyAccountCombo(accountsModel, ui->ledgerTab);
+    accountCombo->setEditable(true);
+    accountCombo->setSplitActionVisible(false);
+    accountCombo->hide();
+    q->connect(accountCombo, &KMyMoneyAccountCombo::accountSelected, q, &SimpleLedgerView::openNewLedger);
+
+    accountCombo->installEventFilter(q);
+    accountCombo->popup()->installEventFilter(q);
 
     q->tabSelected(0);
-    q->updateModels();
-    q->openFavoriteLedgers();
+    q->openLedgersAfterOpen();
   }
 
   SimpleLedgerView*             q_ptr;
@@ -124,6 +135,7 @@ public:
   AccountNamesFilterProxyModel* accountsModel;
   QWidget*                      newTabWidget;
   QToolButton*                  webSiteButton;
+  KMyMoneyAccountCombo*         accountCombo;
   QUrl                          webSiteUrl;
   int                           lastIdx;
   bool                          inModelUpdate;
@@ -140,16 +152,34 @@ SimpleLedgerView::~SimpleLedgerView()
 {
 }
 
-void SimpleLedgerView::openNewLedger(QString accountId)
+bool SimpleLedgerView::eventFilter(QObject* o, QEvent* e)
 {
-  openNewLedger(accountId, true);
+  Q_D(SimpleLedgerView);
+
+  if (e->type() == QEvent::KeyPress) {
+    if (o == d->accountCombo) {
+      const auto kev = static_cast<QKeyEvent*>(e);
+      if (kev->key() == Qt::Key_Escape) {
+        d->accountCombo->hide();
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
-void SimpleLedgerView::openNewLedger(QString accountId, bool makeCurrentLedger)
+void SimpleLedgerView::openNewLedger(QString accountId)
+{
+  openLedger(accountId, true);
+}
+
+void SimpleLedgerView::openLedger(QString accountId, bool makeCurrentLedger)
 {
   Q_D(SimpleLedgerView);
   if(d->inModelUpdate || accountId.isEmpty())
     return;
+
+  d->accountCombo->hide();
 
   // in case a stock account is selected, we switch to the parent which
   // is the investment account
@@ -201,24 +231,49 @@ void SimpleLedgerView::openNewLedger(QString accountId, bool makeCurrentLedger)
   }
 }
 
+void SimpleLedgerView::tabClicked(int idx)
+{
+  Q_D(SimpleLedgerView);
+  if (idx == (d->ui->ledgerTab->count()-1)) {
+    const auto rect = d->ui->ledgerTab->tabBar()->tabRect(idx);
+    if (!d->accountCombo->isVisible()) {
+      d->accountCombo->lineEdit()->clear();
+      d->accountCombo->lineEdit()->setFocus();
+      // Using the QMetaObject::invokeMethod calls showPopup too early
+      // so we delay it a bit (not recongnizable for the user)
+      QTimer::singleShot(50, d->accountCombo, SLOT(showPopup()));
+    }
+    // make the combo box visible
+    d->accountCombo->raise();
+    d->accountCombo->show();
+    // and adjust the size to the largest account
+    // shown in the popup treeview
+    const auto popupView = d->accountCombo->popup();
+    popupView->resizeColumnToContents(0);
+    d->accountCombo->resize(popupView->header()->sectionSize(0), d->accountCombo->height());
+    // now place the combobox either left or right aligned to the tab button
+    if (rect.left() + popupView->header()->sectionSize(0) < width()) {
+      d->accountCombo->move(rect.left(), rect.bottom());
+    } else {
+      d->accountCombo->move(rect.left()+rect.width()- popupView->header()->sectionSize(0), rect.bottom());
+    }
+  } else {
+    d->accountCombo->hide();
+  }
+}
+
 void SimpleLedgerView::tabSelected(int idx)
 {
   Q_D(SimpleLedgerView);
   // qDebug() << "tabSelected" << idx << (d->ui->ledgerTab->count()-1);
+  // make sure that the ledger does not change
+  // when the user access the account selection combo box
   if(idx != (d->ui->ledgerTab->count()-1)) {
     d->lastIdx = idx;
+  } else {
+    d->ui->ledgerTab->setCurrentIndex(d->lastIdx);
   }
   setupCornerWidget();
-}
-
-void SimpleLedgerView::updateModels()
-{
-  Q_D(SimpleLedgerView);
-  d->inModelUpdate = true;
-  // d->ui->accountCombo->
-  d->ui->accountCombo->expandAll();
-  d->ui->accountCombo->setSelected(MyMoneyFile::instance()->asset().id());
-  d->inModelUpdate = false;
 }
 
 void SimpleLedgerView::closeLedger(int idx)
@@ -229,6 +284,12 @@ void SimpleLedgerView::closeLedger(int idx)
     auto tab = d->ui->ledgerTab->widget(idx);
     d->ui->ledgerTab->removeTab(idx);
     delete tab;
+    // make sure we always show an account
+    if (d->ui->ledgerTab->currentIndex() == (d->ui->ledgerTab->count()-1)) {
+      if (d->ui->ledgerTab->count() > 1) {
+        d->ui->ledgerTab->setCurrentIndex((d->ui->ledgerTab->count()-2));
+      }
+    }
   }
 }
 
@@ -274,19 +335,36 @@ void SimpleLedgerView::closeLedgers()
   }
 }
 
-void SimpleLedgerView::openFavoriteLedgers()
+
+void SimpleLedgerView::openLedgersAfterOpen()
 {
   Q_D(SimpleLedgerView);
   if (d->m_needLoad)
     return;
 
   AccountsModel* model = MyMoneyFile::instance()->accountsModel();
-  // retrieve all items in the favorite subtree
-  QModelIndexList indexes = model->match(model->index(0, 0, model->favoriteIndex()), Qt::DisplayRole, QString("*"), -1, Qt::MatchWildcard);
 
-  // indexes now has a list of favorite accounts
-  foreach (const auto idx, indexes) {
-    openNewLedger(idx.data(eMyMoney::Model::Roles::IdRole).toString(), false);
+  const auto subtrees = QVector<QModelIndex> ({ model->favoriteIndex(), model->assetIndex(), model->liabilityIndex() });
+
+  bool stopAfterFirstAccount = false;
+  foreach(const auto startIdx, subtrees) {
+    // retrieve all items in the current subtree
+    auto indexes = model->match(model->index(0, 0, startIdx), Qt::DisplayRole, QString("*"), -1, Qt::MatchWildcard);
+
+    // indexes now has a list of favorite accounts
+    foreach (const auto idx, indexes) {
+      openLedger(idx.data(eMyMoney::Model::Roles::IdRole).toString(), false);
+      if (stopAfterFirstAccount) {
+        break;
+      }
+    }
+
+    // if at least one account was found and opened
+    // we stop processing
+    if (!indexes.isEmpty()) {
+      break;
+    }
+    stopAfterFirstAccount = true;
   }
   d->ui->ledgerTab->setCurrentIndex(0);
 }

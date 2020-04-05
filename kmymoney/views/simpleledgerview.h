@@ -48,9 +48,9 @@ public Q_SLOTS:
   void closeLedgers();
 
   /**
-   * This slot creates tabs for the favorite ledgers if not already open
+   * This slot creates tabs for the initial ledgers on file open
    */
-  void openFavoriteLedgers();
+  void openLedgersAfterOpen();
 
   void showEvent(QShowEvent* event) override;
 
@@ -60,15 +60,18 @@ protected:
 
 private Q_SLOTS:
   void tabSelected(int idx);
-  void openNewLedger(QString accountId, bool makeCurrentLedger);
+  void tabClicked(int idx);
+  void openLedger(QString accountId, bool makeCurrentLedger);
   /**
-   * A convenience method that sets @a makeCurrentLedger to @c true.
+   * A convenience method for openLedger() that sets @a makeCurrentLedger to @c true.
    */
   void openNewLedger(QString accountId);
-  void updateModels();
   void closeLedger(int idx);
   void checkTabOrder(int from, int to);
   void setupCornerWidget();
+
+protected:
+  bool eventFilter(QObject* o, QEvent* e) override;
 
 Q_SIGNALS:
   void showForms(bool show);
