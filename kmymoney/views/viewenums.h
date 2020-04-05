@@ -20,7 +20,7 @@
 #include <QHashFunctions>
 
 enum class View { Home = 0, Institutions, Accounts, Schedules, Categories, Tags,
-                  Payees, Ledgers, Investments, Reports, Budget, Forecast, OnlineJobOutbox, NewLedgers, None };
+                  Payees, OldLedgers, Investments, Reports, Budget, Forecast, OnlineJobOutbox, NewLedgers, None };
 
 inline uint qHash(const View key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 

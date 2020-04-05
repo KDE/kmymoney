@@ -129,7 +129,7 @@ KMyMoneyView::KMyMoneyView()
   viewBases[View::Categories] = new KCategoriesView;
   viewBases[View::Tags] = new KTagsView;
   viewBases[View::Payees] = new KPayeesView;
-  viewBases[View::Ledgers] = new KGlobalLedgerView;
+  viewBases[View::OldLedgers] = new KGlobalLedgerView;
   viewBases[View::Investments] = new KInvestmentView;
   viewBases[View::NewLedgers] = new SimpleLedgerView;
 
@@ -149,7 +149,7 @@ KMyMoneyView::KMyMoneyView()
     {View::Categories,      i18n("Categories"),                   Icon::FinancialCategories},
     {View::Tags,            i18n("Tags"),                         Icon::Tags},
     {View::Payees,          i18n("Payees"),                       Icon::Payees},
-    {View::Ledgers,         i18n("Ledgers"),                      Icon::Ledger},
+    {View::OldLedgers,         i18n("Ledgers"),                      Icon::Ledger},
     {View::Investments,     i18n("Investments"),                  Icon::Investments},
     {View::NewLedgers,      i18n("New ledger"),                   Icon::DocumentProperties},
   };
@@ -194,8 +194,8 @@ void KMyMoneyView::slotFileOpened()
   if (viewBases.contains(View::OnlineJobOutbox))
     viewBases[View::OnlineJobOutbox]->executeCustomAction(eView::Action::InitializeAfterFileOpen);
 
-  if (viewBases.contains(View::Ledgers))
-    viewBases[View::Ledgers]->executeCustomAction(eView::Action::InitializeAfterFileOpen);
+  if (viewBases.contains(View::OldLedgers))
+    viewBases[View::OldLedgers]->executeCustomAction(eView::Action::InitializeAfterFileOpen);
 
   static_cast<SimpleLedgerView*>(viewBases[View::NewLedgers])->openLedgersAfterOpen();
 
@@ -216,8 +216,8 @@ void KMyMoneyView::slotFileClosed()
   if (viewBases.contains(View::OnlineJobOutbox))
     viewBases[View::OnlineJobOutbox]->executeCustomAction(eView::Action::CleanupBeforeFileClose);
 
-  if (viewBases.contains(View::Ledgers))
-    viewBases[View::Ledgers]->executeCustomAction(eView::Action::CleanupBeforeFileClose);
+  if (viewBases.contains(View::OldLedgers))
+    viewBases[View::OldLedgers]->executeCustomAction(eView::Action::CleanupBeforeFileClose);
 
   static_cast<SimpleLedgerView*>(viewBases[View::NewLedgers])->closeLedgers();
 
@@ -263,7 +263,7 @@ void KMyMoneyView::slotShowPayeesPage()
 
 void KMyMoneyView::slotShowLedgersPage()
 {
-  showPageAndFocus(View::Ledgers);
+  showPageAndFocus(View::NewLedgers);
 }
 
 void KMyMoneyView::slotShowInvestmentsPage()
@@ -573,7 +573,7 @@ void KMyMoneyView::finishReconciliation(const MyMoneyAccount& /* account */)
 #if 0
   MyMoneyFile::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 #endif
-  static_cast<KGlobalLedgerView*>(viewBases[View::Ledgers])->slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+  static_cast<KGlobalLedgerView*>(viewBases[View::OldLedgers])->slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 }
 
 void KMyMoneyView::viewAccountList(const QString& /*selectAccount*/)
@@ -618,8 +618,8 @@ void KMyMoneyView::slotCurrentPageChanged(const QModelIndex current, const QMode
     }
   }
 
-  if (viewBases.contains(View::Ledgers) && view != viewFrames.value(View::Ledgers))
-    viewBases[View::Ledgers]->executeCustomAction(eView::Action::DisableViewDepenedendActions);
+  if (viewBases.contains(View::OldLedgers) && view != viewFrames.value(View::OldLedgers))
+    viewBases[View::OldLedgers]->executeCustomAction(eView::Action::DisableViewDepenedendActions);
 
   pActions[eMenu::Action::Print]->setEnabled(canPrint());
   pActions[eMenu::Action::AccountCreditTransfer]->setEnabled(onlineJobAdministration::instance()->canSendCreditTransfer());
@@ -692,8 +692,8 @@ void KMyMoneyView::slotOpenObjectRequested(const MyMoneyObject& obj)
     // check if we can open this account
     // currently it make's sense for asset and liability accounts
     if (!MyMoneyFile::instance()->isStandardAccount(acc.id()))
-      if (viewBases.contains(View::Ledgers))
-        viewBases[View::Ledgers]->slotSelectByVariant(QVariantList {QVariant(acc.id()), QVariant(QString()) }, eView::Intent::ShowTransaction );
+      if (viewBases.contains(View::OldLedgers))
+        viewBases[View::OldLedgers]->slotSelectByVariant(QVariantList {QVariant(acc.id()), QVariant(QString()) }, eView::Intent::ShowTransaction );
 
   } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
 //    const auto& inst = static_cast<const MyMoneyInstitution&>(obj);
@@ -723,8 +723,8 @@ void KMyMoneyView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent in
       break;
 
     case eView::Intent::SynchronizeAccountInLedgersView:
-      if (viewBases.contains(View::Ledgers))
-        viewBases[View::Ledgers]->slotSelectByObject(obj, intent);
+      if (viewBases.contains(View::OldLedgers))
+        viewBases[View::OldLedgers]->slotSelectByObject(obj, intent);
       break;
 
     case eView::Intent::OpenObject:
@@ -741,9 +741,9 @@ void KMyMoneyView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent in
       break;
 
     case eView::Intent::FinishEnteringOverdueScheduledTransactions:
-      if (viewBases.contains(View::Ledgers)) {
-        showPage(View::Ledgers);
-        viewBases[View::Ledgers]->slotSelectByObject(obj, intent);
+      if (viewBases.contains(View::OldLedgers)) {
+        showPage(View::OldLedgers);
+        viewBases[View::OldLedgers]->slotSelectByObject(obj, intent);
       }
       break;
 
@@ -782,9 +782,9 @@ void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Inten
       break;
 
     case eView::Intent::ShowTransaction:
-      if (viewBases.contains(View::Ledgers)) {
-        showPage(View::Ledgers);
-        viewBases[View::Ledgers]->slotSelectByVariant(variant, intent);
+      if (viewBases.contains(View::OldLedgers)) {
+        showPage(View::OldLedgers);
+        viewBases[View::OldLedgers]->slotSelectByVariant(variant, intent);
       }
       break;
 
@@ -807,8 +807,8 @@ void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Inten
     case eView::Intent::SelectRegisterTransactions:
       if (variant.count() == 1) {
         emit transactionsSelected(variant.at(0).value<KMyMoneyRegister::SelectedTransactions>()); // for plugins
-        if (viewBases.contains(View::Ledgers))
-          viewBases[View::Ledgers]->slotSelectByVariant(variant, intent);
+        if (viewBases.contains(View::OldLedgers))
+          viewBases[View::OldLedgers]->slotSelectByVariant(variant, intent);
       }
       break;
 
@@ -850,7 +850,7 @@ void KMyMoneyView::slotObjectSelected(const MyMoneyObject& obj)
   // ...so calls to kmymoney still must be here
   if (typeid(obj) == typeid(MyMoneyAccount)) {
     QVector<View> views {View::Investments, View::Categories, View::Accounts,
-                         View::Ledgers, View::Reports, View::OnlineJobOutbox};
+                         View::OldLedgers, View::Reports, View::OnlineJobOutbox};
     for (const auto view : views)
       if (viewBases.contains(view))
         viewBases[view]->slotSelectByObject(obj, eView::Intent::UpdateActions);
