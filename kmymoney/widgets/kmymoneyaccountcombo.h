@@ -22,6 +22,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+class QTreeView;
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -75,6 +77,8 @@ public:
 
   bool eventFilter(QObject* o, QEvent* e) override;
 
+  QTreeView* popup() const;
+
 public Q_SLOTS:
   void expandAll();
   void collapseAll();
@@ -103,6 +107,8 @@ private:
   QScopedPointer<Private> const d;
 };
 
+
+
 class QAbstractButton;
 class KMyMoneyAccountComboSplitHelperPrivate;
 class KMyMoneyAccountComboSplitHelper : public QObject
@@ -129,6 +135,7 @@ private:
   Q_DECLARE_PRIVATE(KMyMoneyAccountComboSplitHelper);
   QScopedPointer<KMyMoneyAccountComboSplitHelperPrivate>  d_ptr;
 };
+
 
 #endif
 // kate: space-indent on; indent-width 2; remove-trailing-space on; remove-trailing-space-save on;

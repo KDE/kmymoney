@@ -448,6 +448,11 @@ void KMyMoneyAccountCombo::hidePopup()
   KComboBox::hidePopup();
 }
 
+QTreeView* KMyMoneyAccountCombo::popup() const
+{
+  return d->m_popupView;
+}
+
 class KMyMoneyAccountComboSplitHelperPrivate
 {
   Q_DISABLE_COPY(KMyMoneyAccountComboSplitHelperPrivate)
