@@ -667,9 +667,9 @@ int MyMoneySchedule::transactionsRemainingUntil(const QDate& endDate) const
   auto counter = 0;
   Q_D(const MyMoneySchedule);
 
-  QDate startDate = d->m_lastPayment.isValid() ? d->m_lastPayment : d->m_startDate;
-  if (startDate.isValid() && endDate.isValid()) {
-    QList<QDate> dates = paymentDates(startDate, endDate);
+  const auto beginDate = d->m_lastPayment.isValid() ? d->m_lastPayment : startDate();
+  if (beginDate.isValid() && endDate.isValid()) {
+    QList<QDate> dates = paymentDates(beginDate, endDate);
     counter = dates.count();
   }
   return counter;
