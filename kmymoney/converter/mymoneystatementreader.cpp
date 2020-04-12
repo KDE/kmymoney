@@ -786,15 +786,14 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           && statementTransactionUnderImport.m_eAction != eMyMoney::Transaction::Action::Shrsout) {
         // update the price, while we're here.  in the future, this should be
         // an option
-        QString basecurrencyid = file->baseCurrency().id();
-        const MyMoneyPrice &price = file->price(currencyid, basecurrencyid, statementTransactionUnderImport.m_datePosted, true);
+        const MyMoneyPrice &price = file->price(currencyid, transactionUnderImport.commodity(), statementTransactionUnderImport.m_datePosted, true);
         if (!price.isValid()  && ((!statementTransactionUnderImport.m_amount.isZero() && !statementTransactionUnderImport.m_shares.isZero()) || !statementTransactionUnderImport.m_price.isZero())) {
           MyMoneyPrice newprice;
           if (!statementTransactionUnderImport.m_price.isZero()) {
-            newprice = MyMoneyPrice(currencyid, basecurrencyid, statementTransactionUnderImport.m_datePosted,
+            newprice = MyMoneyPrice(currencyid, transactionUnderImport.commodity(), statementTransactionUnderImport.m_datePosted,
                                     statementTransactionUnderImport.m_price.abs(), i18n("Statement Importer"));
           } else {
-            newprice = MyMoneyPrice(currencyid, basecurrencyid, statementTransactionUnderImport.m_datePosted,
+            newprice = MyMoneyPrice(currencyid, transactionUnderImport.commodity(), statementTransactionUnderImport.m_datePosted,
                                     (statementTransactionUnderImport.m_amount / statementTransactionUnderImport.m_shares).abs(), i18n("Statement Importer"));
           }
           file->addPrice(newprice);
