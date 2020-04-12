@@ -1279,9 +1279,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     result = existingTrMatchFinder.findMatch(transactionUnderImport, s1);
     if (result != TransactionMatchFinder::MatchNotFound) {
       MyMoneyTransaction matchedTransaction = existingTrMatchFinder.getMatchedTransaction();
-      if (result == TransactionMatchFinder::MatchDuplicate
-      || !matchedTransaction.isImported()
-      || result == TransactionMatchFinder::MatchPrecise) { // don't match with just imported transaction
+      if (!matchedTransaction.isImported()                                 // don't match with just imported transaction
+          && (result == TransactionMatchFinder::MatchDuplicate || result == TransactionMatchFinder::MatchPrecise)) {
         MyMoneySplit matchedSplit = existingTrMatchFinder.getMatchedSplit();
         handleMatchingOfExistingTransaction(matcher, matchedTransaction, matchedSplit, transactionUnderImport, s1, result);
         return;
