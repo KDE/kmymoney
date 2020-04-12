@@ -289,25 +289,34 @@ void MyMoneyStatementReader::Private::scanCategories(QString& id, const MyMoneyA
 
 void MyMoneyStatementReader::Private::assignUniqueBankID(MyMoneySplit& s, const MyMoneyStatement::Transaction& t_in)
 {
-  if (! t_in.m_strBankID.isEmpty()) {
-    // make sure that id's are unique from this point on by appending a -#
-    // postfix if needed
-    QString base(t_in.m_strBankID);
-    QString hash(base);
-    int idx = 1;
-    for (;;) {
-      QMap<QString, bool>::const_iterator it;
-      it = uniqIds.constFind(hash);
-      if (it == uniqIds.constEnd()) {
-        uniqIds[hash] = true;
-        break;
-      }
-      hash = QString("%1-%2").arg(base).arg(idx);
-      ++idx;
-    }
+  QString base(t_in.m_strBankID);
 
-    s.setBankID(hash);
+  if (base.isEmpty()) {
+    // in case the importer did not assign a bankID, we will do it here
+    // we use the same algorith as used in the KBanking plugin as this
+    // has been served well for a long time already.
+    auto h = MyMoneyTransaction::hash(t_in.m_strPayee.trimmed());
+    h = MyMoneyTransaction::hash(t_in.m_strMemo, h);
+    h = MyMoneyTransaction::hash(t_in.m_amount.toString(), h);
+    base = QString("%1-%2-%3").arg(s.accountId(), t_in.m_datePosted.toString(Qt::ISODate)).arg(h, 7, 16, QChar('0'));
   }
+
+  // make sure that id's are unique from this point on by appending a -#
+  // postfix if needed
+  QString hash(base);
+  int idx = 1;
+  for (;;) {
+    QMap<QString, bool>::const_iterator it;
+    it = uniqIds.constFind(hash);
+    if (it == uniqIds.constEnd()) {
+      uniqIds[hash] = true;
+      break;
+    }
+    hash = QString("%1-%2").arg(base).arg(idx);
+    ++idx;
+  }
+
+  s.setBankID(hash);
 }
 
 void MyMoneyStatementReader::Private::setupPrice(MyMoneySplit &s, const MyMoneyAccount &splitAccount, const MyMoneyAccount &transactionAccount, const QDate &postDate)
