@@ -747,6 +747,18 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
                                                         "%d.%m.%y",   // dateformat
                                                         true
                                                         );
+  // The following was contributed by Brendan Coupe <Brendan@CoupeWare.com>
+  result["Yahoo Finance"] = WebPriceQuoteSource("Yahoo Finance",
+                                                "https://query1.finance.yahoo.com/v7/finance/quote?fields=regularMarketPrice&symbols=%1",
+                                                QString(),
+                                                "%1",  // webIDRegExp
+                                                WebPriceQuoteSource::identifyBy::Symbol,
+                                                "\"regularMarketPrice\":((\\d+|\\d{1,3}(?:[,]\\d{3})).\\d+)",  // priceregexp
+                                                "\"regularMarketTime\":([\\d]+)",  // dateregexp
+                                                QString(),
+                                                true
+                                                );
+
   return result;
 }
 
