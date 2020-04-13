@@ -26,8 +26,8 @@
             }
         ],
         "Description": "Adds forecast view to KMyMoney",
-        "Description[ca@valencia]": "Afig la vista de previsions al KMyMoney",
-        "Description[ca]": "Afegeix la vista de previsions al KMyMoney",
+        "Description[ca@valencia]": "Afig la vista de la previsió al KMyMoney",
+        "Description[ca]": "Afegeix la vista de la previsió al KMyMoney",
         "Description[en_GB]": "Adds forecast view to KMyMoney",
         "Description[es]": "Añade la vista de pronósticos a KMyMoney",
         "Description[eu]": "Aurreikuspen ikuspegia gehitzen dio KMyMoneyri",
