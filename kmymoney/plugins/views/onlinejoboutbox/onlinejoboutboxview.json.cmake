@@ -27,8 +27,8 @@
             }
         ],
         "Description": "Adds online job outbox view to KMyMoney",
-        "Description[ca@valencia]": "Afig la vista en línia de la safata d'eixida dels treballs al KMyMoney",
-        "Description[ca]": "Afegeix la vista en línia de la safata de sortida dels treballs al KMyMoney",
+        "Description[ca@valencia]": "Afig la vista de la safata d'eixida dels treballs en línia al KMyMoney",
+        "Description[ca]": "Afegeix la vista de la safata de sortida dels treballs en línia al KMyMoney",
         "Description[en_GB]": "Adds online job outbox view to KMyMoney",
         "Description[es]": "Añade la vista de la bandeja de salida de trabajos en línea a KMyMoney",
         "Description[et]": "KMyMoney võrgutöö väljundkasti vaade",
