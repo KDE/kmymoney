@@ -899,7 +899,7 @@ bool OFXImporter::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
       connect(dlg.data(), &KOfxDirectConnectDlg::statementReady, this, static_cast<void (OFXImporter::*)(const QString &)>(&OFXImporter::slotImportFile));
 
       // get the date of the earliest transaction that we are interested in
-      // from the settings for this account
+      // as well as other parameters from the settings for this account
       MyMoneyKeyValueContainer settings = acc.onlineBankingSettings();
       if (!settings.value(QStringLiteral("provider")).isEmpty()) {
         if ((settings.value(QStringLiteral("kmmofx-todayMinus")).toInt() != 0) && !settings.value(QStringLiteral("kmmofx-numRequestDays")).isEmpty()) {
@@ -916,6 +916,8 @@ bool OFXImporter::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
           //kDebug(0) << "start date = today - 2 months";
           d->m_updateStartDate = QDate::currentDate().addMonths(-2);
         }
+
+        d->m_invertAmount = settings.value("kmmofx-invertamount").toLower() == QStringLiteral("yes");
       }
       d->m_timestampOffset = settings.value("kmmofx-timestampOffset").toInt();
       //kDebug(0) << "ofx plugin: account" << acc.name() << "earliest transaction date to process =" << qPrintable(d->m_updateStartDate.toString(Qt::ISODate));
