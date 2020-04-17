@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>638</width>
-    <height>392</height>
+    <height>435</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -383,7 +383,7 @@
          <property name="title">
           <string>Import options</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout_3" rowstretch="2,0,0,0">
+         <layout class="QGridLayout" name="gridLayout_3" rowstretch="2,0,0,0,0">
           <item row="0" column="1">
            <widget class="QComboBox" name="m_preferredPayee">
             <item>
@@ -479,6 +479,23 @@
            <widget class="QCheckBox" name="m_invertAmount">
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check this if you need to invert the sign of imported transaction amounts, e.g. if you need to reverse charges and payments because your institution provides them inverted.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Fix sign of the investement transaction amount and quantity</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QCheckBox" name="m_fixBuySellSignage">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check this if the investment transactions after importing have incorrect Buy/Sell type assigned, which may be caused by your institution not applying the correct negative/positive sign to the share amount or quantity value.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string/>
