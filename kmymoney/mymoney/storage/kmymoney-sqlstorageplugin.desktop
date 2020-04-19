@@ -11,6 +11,7 @@ Name[fi]=Sallii liitännäisten tallettaa tietoa SQL-tietokantaan
 Name[fr]=Permet aux modules externes de stocker les données dans la base de données sql
 Name[gl]=Permite ao complementos almacenar datos na base de datos SQL
 Name[it]=Abilita le estensioni per archiviare i dati nella banca dati sql
+Name[ko]=SQL 데이터베이스에 플러그인 데이터 저장
 Name[nl]=Schakelt plug-ins in om gegevens in de sql-database op te slaan
 Name[pl]=Włącza wtyczki do przechowywania danych w bazach danych sql
 Name[pt]=Activa os 'plugins' para armazenar dados na base de dados SQL
