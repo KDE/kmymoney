@@ -2784,7 +2784,7 @@ QList<MyMoneySecurity> MyMoneyFile::availableCurrencyList() const
   currencyList.append(MyMoneySecurity("HKD", i18n("Hong Kong Dollar"),       "$"));
   currencyList.append(MyMoneySecurity("HUF", i18n("Hungarian Forint"),       "HUF", 1, 100));
   currencyList.append(MyMoneySecurity("ISK", i18n("Iceland Krona")));
-  currencyList.append(MyMoneySecurity("INR", i18n("Indian Rupee"),           QChar(0x20A8)));
+  currencyList.append(MyMoneySecurity("INR", i18n("Indian Rupee"),           QChar(0x20B9)));
   currencyList.append(MyMoneySecurity("IDR", i18n("Indonesian Rupiah"),      "IDR", 1, 0, 10));
   currencyList.append(MyMoneySecurity("IRR", i18n("Iranian Rial"),           "IRR", 1));
   currencyList.append(MyMoneySecurity("IQD", i18n("Iraqi Dinar"),            "IQD", 1000));
