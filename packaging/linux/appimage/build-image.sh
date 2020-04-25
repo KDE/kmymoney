@@ -46,6 +46,8 @@ if [ ! -d $APPIMAGEPLUGINS ] ; then
 fi
 
 # Step 1: Copy over all the resources provided by dependencies that we need
+cp -r -v $DEPS_INSTALL_PREFIX/lib/x86_64-linux-gnu $APPDIR/usr/lib
+
 cp -r -v $DEPS_INSTALL_PREFIX/share/locale $APPDIR/usr/share/kmymoney
 cp -r -v $DEPS_INSTALL_PREFIX/share/kf5 $APPDIR/usr/share
 cp -r -v $DEPS_INSTALL_PREFIX/share/kservices5 $APPDIR/usr/share
@@ -54,6 +56,9 @@ cp -r -v $DEPS_INSTALL_PREFIX/share/mime $APPDIR/usr/share
 cp -r -v $DEPS_INSTALL_PREFIX/openssl/lib/*  $APPDIR/usr/lib
 cp -r -v $DEPS_INSTALL_PREFIX/plugins/* $APPDIR/usr/plugins
 cp -r -v $DEPS_INSTALL_PREFIX/share/libofx $APPDIR/usr/share/libofx
+
+# no need for cmake files in appimage
+rm -rf $APPDIR/usr/lib/x86_64-linux-gnu/cmake
 
 # @todo we still need the following program from /bin or /usr/bin:
 #  true, mount, umount (backup)
