@@ -448,7 +448,7 @@ void KGlobalLedgerView::slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTr
         balance += t.split().shares();
       }
     }
-    d->m_rightSummaryLabel->setText(QString("%1: %2").arg(QChar(0x2211), balance.formatMoney("", d->m_precision)));
+    d->m_rightSummaryLabel->setText(QString("%1: %2").arg(QChar(0x2211), balance.formatMoney("", -1)));
 
   } else {
     if (d->isReconciliationAccount()) {
