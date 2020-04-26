@@ -83,6 +83,8 @@ for d in gwenhywfar aqbanking; do
 done
 
 # Step 2: Relocate x64 binaries from the architecture specific directory as required for Appimages
+mv -v $APPDIR/usr/lib/x86_64-linux-gnu/pkgconfig/* $APPDIR/usr/lib/pkgconfig
+rmdir $APPDIR/usr/lib/x86_64-linux-gnu/pkgconfig
 mv -v $APPDIR/usr/lib/x86_64-linux-gnu/*  $APPDIR/usr/lib
 rm -rf $APPDIR/usr/lib/x86_64-linux-gnu/
 
