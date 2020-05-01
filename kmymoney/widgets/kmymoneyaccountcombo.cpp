@@ -523,8 +523,20 @@ bool KMyMoneyAccountComboSplitHelper::eventFilter(QObject* watched, QEvent* even
     }
     if (type == QEvent::KeyPress) {
       auto kev = static_cast<QKeyEvent*>(event);
-      // swallow all keypress except Alt+Space
-      return !(kev->modifiers() & Qt::ControlModifier && kev->key() == Qt::Key_Space);
+      // swallow all keypress except Ctrl+Space, Return, Enter and Esc
+      switch(kev->key()) {
+        case Qt::Key_Enter:
+        case Qt::Key_Return:
+        case Qt::Key_Escape:
+          return false;
+
+        case Qt::Key_Space:
+          return !(kev->modifiers() & Qt::ControlModifier);
+
+        default:
+          break;
+      }
+      return true;
     }
 
   }
