@@ -79,9 +79,9 @@ namespace KMyMoneyRegister
         m_payee = file->payee(m_split.payeeId()).name();
       }
       if (m_parent->account().isIncomeExpense()) {
-        m_payeeHeader = m_split.shares().isNegative() ? i18n("From") : i18n("Pay to");
+        m_payeeHeader = m_split.shares().isNegative() ? i18nc("Payer", "From") : i18nc("Payee", "Pay to");
       } else {
-        m_payeeHeader = m_split.shares().isNegative() ? i18n("Pay to") : i18n("From");
+        m_payeeHeader = m_split.shares().isNegative() ? i18nc("Payee", "Pay to") : i18nc("Payer", "From");
       }
 
       // load the tag

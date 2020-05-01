@@ -56,7 +56,7 @@
      <item>
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>From</string>
+        <string comment="@label:chooser Date">From</string>
        </property>
       </widget>
      </item>
@@ -66,7 +66,7 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>To</string>
+        <string comment="@label:chooser Date">To</string>
        </property>
       </widget>
      </item>
