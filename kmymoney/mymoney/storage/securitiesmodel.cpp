@@ -90,7 +90,7 @@ QVariant SecuritiesModel::headerData(int section, Qt::Orientation orientation, i
       case Column::Security:
         return i18n("Security");
       case Column::Symbol:
-        return i18n("Symbol");
+        return i18nc("@title stock symbol column", "Symbol");
       case Column::Type:
         return i18n("Type");
       case Column::Market:

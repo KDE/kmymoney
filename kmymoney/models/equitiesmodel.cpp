@@ -200,10 +200,10 @@ EquitiesModel::EquitiesModel(QObject *parent)
   : KExtraColumnsProxyModel(parent)
   , d_ptr(new EquitiesModelPrivate(this))
 {
-  appendColumn(QStringLiteral("Symbol"));
-  appendColumn(QStringLiteral("Quantity"));
-  appendColumn(QStringLiteral("Price"));
-  appendColumn(QStringLiteral("Value"));
+  appendColumn(i18nc("@title stock symbol column", "Symbol"));
+  appendColumn(i18n("Quantity"));
+  appendColumn(i18n("Price"));
+  appendColumn(i18n("Value"));
 }
 
 EquitiesModel::~EquitiesModel()
