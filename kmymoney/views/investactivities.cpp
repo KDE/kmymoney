@@ -332,18 +332,14 @@ MyMoneyMoney Activity::totalAmount() const
 {
   Q_D(const Activity);
   auto result = shareValue().abs();
-  qDebug() << "Start";
-  qDebug() << "result " << result.formatMoney(100);
   const auto fees = d->haveVisibleWidget<AmountEdit>("feesAmountEdit");
   const auto interest = d->haveVisibleWidget<AmountEdit>("interestAmountEdit");
   if (interest) {
     result += interest->value().abs();
   }
-  qDebug() << "result " << result.formatMoney(100);
   if (fees) {
     result -= fees->value().abs();
   }
-  qDebug() << "result " << result.formatMoney(100);
   return result;
 }
 
