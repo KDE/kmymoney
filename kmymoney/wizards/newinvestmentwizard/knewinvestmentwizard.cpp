@@ -276,7 +276,7 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
     }
     ft.commit();
   } catch (const MyMoneyException &e) {
-    KMessageBox::detailedSorry(this, i18n("Unable to create all objects for the investment"), QString::fromLatin1(e.what()));
+    KMessageBox::detailedSorry(this, i18n("Unexpected error occurred while adding new investment"), QString::fromLatin1(e.what()));
   }
 }
 
