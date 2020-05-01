@@ -34,6 +34,8 @@
 #include "mymoneyfile.h"
 #include "accountsmodel.h"
 #include "mymoneymoney.h"
+#include "mymoneysecurity.h"
+#include "mymoneyexception.h"
 
 struct SplitModel::Private
 {
@@ -43,7 +45,8 @@ struct SplitModel::Private
   , headerData(QHash<Column, QString> ({
     { Category, i18nc("Split header", "Category") },
     { Memo, i18nc("Split header", "Memo") },
-    { Amount, i18nc("Split header", "Amount") },
+    { Payment, i18nc("Split header", "Payment") },
+    { Deposit, i18nc("Split header", "Deposit") },
   }))
   {
   }
@@ -110,6 +113,22 @@ struct SplitModel::Private
 #endif
     }
     return QString();
+  }
+
+  int currencyPrecision(const MyMoneySplit& split) const
+  {
+    const auto account = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
+    if (!account.id().isEmpty()) {
+      try {
+        const auto currency = MyMoneyFile::instance()->currency(account.currencyId());
+        if (Q_UNLIKELY(account.accountType() == eMyMoney::Account::Type::Cash)) {
+          return currency.smallestCashFraction();
+        }
+        return currency.smallestAccountFraction();
+      } catch(MyMoneyException& e) {
+      }
+    }
+    return 100;
   }
 
   SplitModel*   q;
@@ -213,9 +232,21 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
             return rc;
           }
 
-        case Column::Amount:
+        case Column::Payment:
           if (!split.id().isEmpty()) {
-            return split.value().formatMoney(100);
+            const auto value = split.value();
+            if (value.isPositive()) {
+              return value.formatMoney(d->currencyPrecision(split));
+            }
+          }
+          return {};
+
+        case Column::Deposit:
+          if (!split.id().isEmpty()) {
+            const auto value = split.value();
+            if (value.isNegative() || value.isZero()) {
+              return (-value).formatMoney(d->currencyPrecision(split));
+            }
           }
           return {};
 
@@ -226,7 +257,8 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
 
     case Qt::TextAlignmentRole:
       switch (idx.column()) {
-        case Amount:
+        case Payment:
+        case Deposit:
           return QVariant(Qt::AlignRight | Qt::AlignTop);
 
         default:

@@ -76,6 +76,7 @@ public:
 
   MyMoneyMoney                transactionTotal;
   MyMoneyMoney                splitsTotal;
+  MyMoneyMoney                inversionFactor;
 };
 
 static const int SumRow = 0;
@@ -130,13 +131,14 @@ void SplitDialog::Private::selectRow(int row)
   }
 }
 
-SplitDialog::SplitDialog(const MyMoneyAccount& account, const MyMoneySecurity& commodity, const MyMoneyMoney& amount, QWidget* parent, Qt::WindowFlags f)
+SplitDialog::SplitDialog(const MyMoneyAccount& account, const MyMoneySecurity& commodity, const MyMoneyMoney& amount, const MyMoneyMoney& inversionFactor, QWidget* parent, Qt::WindowFlags f)
   : QDialog(parent, f)
   , d(new Private(this))
 {
   d->transactionEditor = parent;
   d->account = account;
   d->transactionTotal = amount;
+  d->inversionFactor = inversionFactor;
   d->ui->setupUi(this);
 
   d->ui->splitView->setSelectionMode(QAbstractItemView::ExtendedSelection);
@@ -256,14 +258,14 @@ void SplitDialog::adjustSummary()
       d->splitsTotal += index.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
     }
   }
-  QString formattedValue = d->splitsTotal.formatMoney(d->account.fraction());
+  QString formattedValue = (d->splitsTotal * d->inversionFactor).formatMoney(d->account.fraction());
   d->ui->summaryView->item(SumRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
 
   if(d->transactionEditor) {
     if (d->transactionTotal.isAutoCalc()) {
-      formattedValue = d->splitsTotal.formatMoney(d->account.fraction());
+      formattedValue = (d->splitsTotal * d->inversionFactor).formatMoney(d->account.fraction());
     } else {
-      formattedValue = d->transactionTotal.formatMoney(d->account.fraction());
+      formattedValue = (d->transactionTotal * d->inversionFactor).formatMoney(d->account.fraction());
     }
     d->ui->summaryView->item(AmountRow, ValueCol)->setData(Qt::DisplayRole, formattedValue);
 

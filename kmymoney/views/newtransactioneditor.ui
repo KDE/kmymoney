@@ -82,7 +82,7 @@
         </sizepolicy>
        </property>
        <property name="placeholderText">
-        <string>Credit</string>
+        <string>Payment</string>
        </property>
       </widget>
      </item>
@@ -95,7 +95,7 @@
         </sizepolicy>
        </property>
        <property name="placeholderText">
-        <string>Debit</string>
+        <string>Deposit</string>
        </property>
       </widget>
      </item>

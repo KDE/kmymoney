@@ -42,7 +42,8 @@ public:
   enum Column {
     Category = 0,
     Memo,
-    Amount,
+    Payment,
+    Deposit,
     // insert new columns above this line
     MaxColumns
   };

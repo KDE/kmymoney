@@ -731,28 +731,9 @@ void NewTransactionEditor::payeeChanged(int payeeIndex)
 
 void NewTransactionEditor::editSplits()
 {
-    auto transactionFactor(MyMoneyMoney::ONE);
+    const auto transactionFactor(d->amountHelper->value().isNegative() ? MyMoneyMoney::ONE : MyMoneyMoney::MINUS_ONE);
 
     SplitModel splitModel(this, nullptr, d->splitModel);
-
-    auto invertSplitValues = [&]() -> void {
-        const auto rows = splitModel.rowCount();
-        MyMoneyMoney v;
-        for (int row = 0; row < rows; ++row)
-        {
-            auto idx = splitModel.index(row, 0);
-            v = idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
-            splitModel.setData(idx, QVariant::fromValue<MyMoneyMoney>(-v), eMyMoney::Model::SplitSharesRole);
-            v = idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
-            splitModel.setData(idx, QVariant::fromValue<MyMoneyMoney>(-v), eMyMoney::Model::SplitValueRole);
-        }
-    };
-
-    if (d->amountHelper->value().isNegative()) {
-        transactionFactor = MyMoneyMoney::MINUS_ONE;
-    } else {
-        invertSplitValues();
-    }
 
     // create an empty split at the end
     // used to create new splits
@@ -763,7 +744,7 @@ void NewTransactionEditor::editSplits()
         commodityId = d->m_account.currencyId();
     const auto commodity = MyMoneyFile::instance()->security(commodityId);
 
-    QPointer<SplitDialog> splitDialog = new SplitDialog(d->m_account, commodity, transactionAmount() * transactionFactor, this);
+    QPointer<SplitDialog> splitDialog = new SplitDialog(d->m_account, commodity, -transactionAmount(), transactionFactor, this);
     splitDialog->setModel(&splitModel);
 
     int rc = splitDialog->exec();
@@ -772,16 +753,11 @@ void NewTransactionEditor::editSplits()
         // remove that empty split again before we update the splits
         splitModel.removeEmptySplit();
 
-        // invert splits
-        if (!transactionFactor.isNegative()) {
-            invertSplitValues();
-        }
-
         // copy the splits model contents
         d->splitModel = splitModel;
 
         // update the transaction amount
-        d->amountHelper->setValue(splitDialog->transactionAmount());
+        d->amountHelper->setValue(-splitDialog->transactionAmount());
 
         // the price might have been changed, so we have to update our copy
         // but only if there is one counter split

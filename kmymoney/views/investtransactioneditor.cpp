@@ -127,7 +127,7 @@ public:
     bool valueChanged(CreditDebitHelper* valueHelper);
     MyMoneyMoney getPrice();
 
-    void editSplits(SplitModel* splitModel, const MyMoneyMoney& factor);
+    void editSplits(SplitModel* splitModel, AmountEdit* editWidget, const MyMoneyMoney& factor);
     void removeUnusedSplits(MyMoneyTransaction& t, SplitModel* splitModel);
     void addSplits(MyMoneyTransaction& t, SplitModel* splitModel);
 
@@ -418,26 +418,9 @@ bool InvestTransactionEditor::Private::valueChanged(CreditDebitHelper* valueHelp
     return rc;
 }
 
-void InvestTransactionEditor::Private::editSplits(SplitModel* sourceSplitModel, const MyMoneyMoney& transactionFactor)
+void InvestTransactionEditor::Private::editSplits(SplitModel* sourceSplitModel, AmountEdit* editWidget, const MyMoneyMoney& transactionFactor)
 {
     SplitModel splitModel(q, nullptr, *sourceSplitModel);
-
-    auto invertSplitValues = [&]() -> void {
-        const auto rows = splitModel.rowCount();
-        MyMoneyMoney v;
-        for (int row = 0; row < rows; ++row)
-        {
-            auto idx = splitModel.index(row, 0);
-            v = idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
-            splitModel.setData(idx, QVariant::fromValue<MyMoneyMoney>(-v), eMyMoney::Model::SplitSharesRole);
-            v = idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
-            splitModel.setData(idx, QVariant::fromValue<MyMoneyMoney>(-v), eMyMoney::Model::SplitValueRole);
-        }
-    };
-
-    if (transactionFactor.isNegative()) {
-        invertSplitValues();
-    }
 
     // create an empty split at the end
     // used to create new splits
@@ -448,7 +431,7 @@ void InvestTransactionEditor::Private::editSplits(SplitModel* sourceSplitModel, 
         commodityId = m_account.currencyId();
     const auto commodity = MyMoneyFile::instance()->security(commodityId);
 
-    QPointer<SplitDialog> splitDialog = new SplitDialog(m_account, commodity, MyMoneyMoney::autoCalc, q);
+    QPointer<SplitDialog> splitDialog = new SplitDialog(m_account, commodity, MyMoneyMoney::autoCalc, transactionFactor, q);
     splitDialog->setModel(&splitModel);
 
     int rc = splitDialog->exec();
@@ -457,18 +440,11 @@ void InvestTransactionEditor::Private::editSplits(SplitModel* sourceSplitModel, 
         // remove that empty split again before we update the splits
         splitModel.removeEmptySplit();
 
-        // invert splits
-        if (transactionFactor.isNegative()) {
-            invertSplitValues();
-        }
-
         // copy the splits model contents
         *sourceSplitModel = splitModel;
 
         // update the transaction amount
-        #if 0
-        d->amountHelper->setValue(splitDialog->transactionAmount());
-        #endif
+        editWidget->setValue(splitDialog->transactionAmount() * transactionFactor);
 
         // the price might have been changed, so we have to update our copy
         // but only if there is one counter split
@@ -882,7 +858,8 @@ void InvestTransactionEditor::valueChanged()
 
 void InvestTransactionEditor::editFeeSplits()
 {
-    d->editSplits(d->feeSplitModel, MyMoneyMoney::ONE);
+    d->editSplits(d->feeSplitModel, d->ui->feesAmountEdit, MyMoneyMoney::ONE);
+
 
 #if 0
     QWidget* next = d->ui->tagComboBox;
@@ -892,7 +869,7 @@ void InvestTransactionEditor::editFeeSplits()
 
 void InvestTransactionEditor::editInterestSplits()
 {
-    d->editSplits(d->interestSplitModel, MyMoneyMoney::MINUS_ONE);
+    d->editSplits(d->interestSplitModel, d->ui->interestAmountEdit, MyMoneyMoney::MINUS_ONE);
 
 #if 0
     QWidget* next = d->ui->tagComboBox;
