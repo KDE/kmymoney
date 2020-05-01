@@ -130,6 +130,8 @@ public:
     void editSplits(SplitModel* splitModel, AmountEdit* editWidget, const MyMoneyMoney& factor);
     void removeUnusedSplits(MyMoneyTransaction& t, SplitModel* splitModel);
     void addSplits(MyMoneyTransaction& t, SplitModel* splitModel);
+    void setupAccount(const QString& accountId);
+    QModelIndex adjustToSecuritySplitIdx(const QModelIndex& idx);
 
     MyMoneyMoney splitValue(SplitModel* model) const;
 
@@ -479,25 +481,58 @@ MyMoneyMoney InvestTransactionEditor::Private::splitValue(SplitModel* model) con
     return sum;
 }
 
+void InvestTransactionEditor::Private::setupAccount(const QString& accountId)
+{
+    auto const file = MyMoneyFile::instance();
+    auto const model = file->accountsModel();
+
+    // extract account information from model
+    const auto index = model->indexById(accountId);
+    m_account = model->itemByIndex(index);
+
+    securitiesModel->setFilterFixedString(accountId);
+}
+
+QModelIndex InvestTransactionEditor::Private::adjustToSecuritySplitIdx(const QModelIndex& index)
+{
+    const auto id = index.data(eMyMoney::Model::IdRole).toString();
+
+    // find the first split of this transaction in the journal
+    QModelIndex idx;
+    int startRow;
+    for (startRow = index.row()-1; startRow >= 0; --startRow) {
+        idx = index.model()->index(startRow, 0);
+        const auto cid = idx.data(eMyMoney::Model::IdRole).toString();
+        if (cid != id)
+            break;
+    }
+    startRow++;
+
+    const auto rows = index.data(eMyMoney::Model::TransactionSplitCountRole).toInt();
+    for(int row = startRow; row < startRow + rows; ++row) {
+        idx = index.model()->index(row, 0);
+        const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
+        const auto account = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
+        if (account.isInvest()) {
+            return idx;
+        }
+    }
+    return {};
+}
+
 InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString& accountId)
     : TransactionEditorBase(parent, accountId)
     , d(new Private(this))
 {
     d->ui->setupUi(this);
 
-    auto const file = MyMoneyFile::instance();
-    auto const model = file->accountsModel();
-    // extract account information from model
-    const auto index = model->indexById(accountId);
-    d->m_account = model->itemByIndex(index);
-
     d->ui->activityCombo->setModel(d->activitiesModel);
 
+    auto const model = MyMoneyFile::instance()->accountsModel();
     d->accountsListModel->setSourceModel(model);
     d->securitiesModel->setSourceModel(d->accountsListModel);
     d->securitiesModel->setFilterRole(eMyMoney::Model::AccountParentIdRole);
     d->securitiesModel->setFilterKeyColumn(0);
-    d->securitiesModel->setFilterFixedString(accountId);
     d->ui->securityCombo->setModel(d->securitiesModel);
 
     d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> { eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability } );
@@ -571,6 +606,8 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
 
     d->ui->totalAmountEdit->setCalculatorButtonVisible(false);
 
+    d->setupAccount(accountId);
+
     // setup tooltip
 
     // setWindowFlags(Qt::FramelessWindowHint | Qt::X11BypassWindowManagerHint);
@@ -638,12 +675,13 @@ void InvestTransactionEditor::updateTotalAmount(const QString& txt)
     }
 }
 
+
 void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
 {
     d->ui->activityCombo->setCurrentIndex(-1);
     d->ui->securityCombo->setCurrentIndex(-1);
-    auto idx = MyMoneyModelBase::mapToBaseSource(index);
-    if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
+    auto idx = d->adjustToSecuritySplitIdx(MyMoneyModelBase::mapToBaseSource(index));
+    if (!idx.isValid() || idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
         d->transaction = MyMoneyTransaction();
         d->split = MyMoneySplit();
         d->ui->activityCombo->setCurrentIndex(0);
