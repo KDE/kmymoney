@@ -1046,7 +1046,7 @@ public:
         beginDay = m_forecast.accountsCycle();
 
       // Now output header
-      m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("%1 Day Forecast", m_forecast.forecastDays()));
+      m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18ncp("Forecast days", "%1 Day Forecast", "%1 Day Forecast", m_forecast.forecastDays()));
       m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
       m_html += "<tr class=\"item\"><td class=\"left\" width=\"40%\">";
       m_html += i18n("Account");
