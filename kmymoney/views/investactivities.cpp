@@ -396,17 +396,7 @@ void Activity::setWidgetVisibility(const QStringList& widgetIds, bool visible) c
   for (QStringList::const_iterator it_w = widgetIds.constBegin(); it_w != widgetIds.constEnd(); ++it_w) {
     auto w = d->haveWidget<QWidget>(*it_w);
     if (w) {
-      /// @todo port to new model code
-#if 0
-      // in case we hit a category with a split button,
-      // we need to manipulate the enclosing QFrame
-      auto cat = qobject_cast<KMyMoneyAccountCombo>(w);
-      if (cat && cat->splitButton()) {
-        cat->parentWidget()->setVisible(visible);
-      } else {
-#endif
-        w->setVisible(visible);
-      // }
+      w->setVisible(visible);
     }
   }
 }
