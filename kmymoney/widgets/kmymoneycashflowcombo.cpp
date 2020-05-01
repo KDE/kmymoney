@@ -60,8 +60,8 @@ KMyMoneyCashFlowCombo::KMyMoneyCashFlowCombo(Account::Type accountType, QWidget*
     addItem(i18nc("Activity for income categories", "Received"), QVariant((int)eRegister::CashFlowDirection::Payment));
     addItem(i18nc("Activity for expense categories", "Paid"), QVariant((int)eRegister::CashFlowDirection::Deposit));
   } else {
-    addItem(i18n("Pay to"), QVariant((int)eRegister::CashFlowDirection::Payment));
-    addItem(i18n("From"), QVariant((int)eRegister::CashFlowDirection::Deposit));
+    addItem(i18nc("Payee", "Pay to"), QVariant((int)eRegister::CashFlowDirection::Payment));
+    addItem(i18nc("Payer", "From"), QVariant((int)eRegister::CashFlowDirection::Deposit));
   }
 
   connect(this, &KMyMoneyMVCCombo::itemSelected, this, &KMyMoneyCashFlowCombo::slotSetDirection);

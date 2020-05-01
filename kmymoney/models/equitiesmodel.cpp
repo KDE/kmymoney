@@ -351,7 +351,7 @@ QString EquitiesModel::getHeaderName(const Column column)
     case Equity:
       return i18n("Equity");
     case Symbol:
-      return i18n("Symbol");
+      return i18nc("@title stock symbol column", "Symbol");
     case Value:
       return i18n("Value");
     case Quantity:

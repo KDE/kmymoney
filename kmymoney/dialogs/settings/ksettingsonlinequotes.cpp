@@ -81,9 +81,9 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent) :
   d->ui->m_deleteButton->setIcon(Icons::get(Icon::EditDelete));
   d->ui->m_newButton->setIcon(Icons::get(Icon::DocumentNew));
 
-  d->ui->m_editIdentifyBy->addItem(i18n("Symbol"), WebPriceQuoteSource::identifyBy::Symbol);
-  d->ui->m_editIdentifyBy->addItem(i18n("Identification number"), WebPriceQuoteSource::identifyBy::IdentificationNumber);
-  d->ui->m_editIdentifyBy->addItem(i18n("Name"), WebPriceQuoteSource::identifyBy::Name);
+  d->ui->m_editIdentifyBy->addItem(i18nc("@item:inlistbox Stock", "Symbol"), WebPriceQuoteSource::identifyBy::Symbol);
+  d->ui->m_editIdentifyBy->addItem(i18nc("@item:inlistbox Stock", "Identification number"), WebPriceQuoteSource::identifyBy::IdentificationNumber);
+  d->ui->m_editIdentifyBy->addItem(i18nc("@item:inlistbox Stock", "Name"), WebPriceQuoteSource::identifyBy::Name);
 
   connect(d->ui->m_dumpCSVProfile, &QAbstractButton::clicked, this, &KSettingsOnlineQuotes::slotDumpCSVProfile);
   connect(d->ui->m_updateButton, &QAbstractButton::clicked, this, &KSettingsOnlineQuotes::slotUpdateEntry);

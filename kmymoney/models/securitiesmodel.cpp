@@ -272,7 +272,7 @@ QString SecuritiesModel::getHeaderName(const Column column)
     case Security:
       return i18n("Security");
     case Symbol:
-      return i18n("Symbol");
+      return i18nc("@title stock symbol column", "Symbol");
     case Type:
       return i18n("Type");
     case Market:
