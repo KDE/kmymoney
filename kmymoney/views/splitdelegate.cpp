@@ -423,7 +423,7 @@ void SplitDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, con
     model->setData(index, splitEditor->costCenterId(), eMyMoney::Model::SplitCostCenterIdRole);
     model->setData(index, splitEditor->payeeId(), eMyMoney::Model::SplitPayeeIdRole);
     model->setData(index, QVariant::fromValue<MyMoneyMoney>(-splitEditor->shares()), eMyMoney::Model::SplitSharesRole);
-    // send out the dataChanged signal with the next setData()
+    // send out the dataChanged signal with the next (last) setData()
     block.unblock();
     model->setData(index, QVariant::fromValue<MyMoneyMoney>(-splitEditor->value()), eMyMoney::Model::SplitValueRole);
 
