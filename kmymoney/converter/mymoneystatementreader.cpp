@@ -61,6 +61,7 @@
 #include "kmymoneyedit.h"
 #include "kaccountselectdlg.h"
 #include "knewaccountwizard.h"
+#include "knewinvestmentwizard.h"
 #include "transactionmatcher.h"
 #include "kenterscheduledlg.h"
 #include "kmymoneyaccountcombo.h"
@@ -767,16 +768,11 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           }
           // this security does not exist in the file.
           else {
-            // This should be rare.  A statement should have a security entry for any
-            // of the securities referred to in the transactions.  The only way to get
-            // here is if that's NOT the case.
-            int ret = KMessageBox::warningContinueCancel(0, i18n("<center>This investment account does not contain the \"%1\" security.</center>"
-                      "<center>Transactions involving this security will be ignored.</center>", statementTransactionUnderImport.m_strSecurity),
-                      i18n("Security not found"), KStandardGuiItem::cont(), KStandardGuiItem::cancel());
-            if (ret == KMessageBox::Cancel) {
-              m_userAbort = true;
-            }
-            return;
+            thisaccount = MyMoneyAccount();
+            thisaccount.setName(statementTransactionUnderImport.m_strSecurity);
+
+            qDebug() << Q_FUNC_INFO << ": opening new investment wizard for security " << statementTransactionUnderImport.m_strSecurity << " under account " << d->m_account.id();
+            KNewInvestmentWizard::newInvestment(thisaccount, d->m_account);
           }
         }
       }
