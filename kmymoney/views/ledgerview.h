@@ -98,6 +98,7 @@ protected:
   void paintEvent(QPaintEvent* event) final override;
   int sizeHintForRow(int row) const final override;
   int sizeHintForColumn(int row) const final override;
+  void keyPressEvent ( QKeyEvent* event ) override;
 
 protected Q_SLOTS:
   void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) final override;

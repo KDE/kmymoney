@@ -30,6 +30,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KMessageWidget>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -48,6 +50,8 @@
 #include "specialdatedelegate.h"
 #include "schedulesjournalmodel.h"
 
+Q_GLOBAL_STATIC(LedgerView*, s_globalEditView);
+
 class LedgerView::Private
 {
 public:
@@ -59,7 +63,10 @@ public:
   , showValuesInverted(false)
   , newTransactionPresent(false)
   , columnSelector(nullptr)
+  , infoMessage(new KMessageWidget(q))
   {
+    infoMessage->hide();
+
     const auto file = MyMoneyFile::instance();
 
     auto journalDelegate = new JournalDelegate(q);
@@ -96,6 +103,22 @@ public:
     }
   }
 
+  bool haveGlobalEditor()
+  {
+    return *s_globalEditView() != nullptr;
+  }
+
+  void registerGlobalEditor()
+  {
+    if (!haveGlobalEditor()) {
+      *s_globalEditView() = q;
+    }
+  }
+
+  void unregisterGlobalEditor()
+  {
+    *s_globalEditView() = nullptr;
+  }
 
   LedgerView*                     q;
   DelegateProxy*                  delegateProxy;
@@ -105,6 +128,7 @@ public:
   bool                            showValuesInverted;
   bool                            newTransactionPresent;
   ColumnSelector*                 columnSelector;
+  KMessageWidget*                 infoMessage;
   QString                         accountId;
   QString                         groupName;
 };
@@ -196,18 +220,18 @@ void LedgerView::setColumnsShown(QVector<int> columns)
 
 bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger trigger, QEvent* event)
 {
-  bool rc = QTableView::edit(index, trigger, event);
+  if(!d->haveGlobalEditor()) {
+    bool rc = QTableView::edit(index, trigger, event);
 
-  if(rc) {
-    // editing started, but we need the editor to cover all columns
-    // so we close it, set the span to have a single row and recreate
-    // the editor in that single cell
-    closeEditor(indexWidget(index), QAbstractItemDelegate::NoHint);
+    if(rc) {
+      // editing started, but we need the editor to cover all columns
+      // so we close it, set the span to have a single row and recreate
+      // the editor in that single cell
+      closeEditor(indexWidget(index), QAbstractItemDelegate::NoHint);
 
-    bool haveEditorInOtherView = false;
-    /// @todo Here we need to make sure that only a single editor can be started at a time
+      d->registerGlobalEditor();
+      d->infoMessage->animatedHide();
 
-    if(!haveEditorInOtherView) {
       emit aboutToStartEdit();
       setSpan(index.row(), 0, 1, horizontalHeader()->count());
       QModelIndex editIndex = model()->index(index.row(), 0);
@@ -222,15 +246,31 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
     } else {
       rc = false;
     }
+    return rc;
+  } else {
+    switch(trigger) {
+      case QAbstractItemView::DoubleClicked:
+      case QAbstractItemView::EditKeyPressed:
+        if (!d->infoMessage->isVisible() && !d->infoMessage->isShowAnimationRunning()) {
+          d->infoMessage->resize(viewport()->width(), d->infoMessage->height());
+          d->infoMessage->setText(i18n("You are already editing a transaction in another view. KMyMoney does not support editing two transactions in parallel."));
+          d->infoMessage->setMessageType(KMessageWidget::Warning);
+          d->infoMessage->animatedShow();
+        }
+        break;
+      default:
+        break;
+    }
   }
-
-  return rc;
+  return false;
 }
 
 void LedgerView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint)
 {
   QTableView::closeEditor(editor, hint);
   clearSpans();
+
+  d->unregisterGlobalEditor();
 
   // we need to resize the row that contained the editor.
   resizeRowsToContents();
@@ -265,6 +305,16 @@ void LedgerView::wheelEvent(QWheelEvent* e)
 {
   // qDebug() << "wheelEvent";
   QTableView::wheelEvent(e);
+}
+
+void LedgerView::keyPressEvent(QKeyEvent* kev)
+{
+  if ((d->infoMessage->isVisible()) && kev->matches(QKeySequence::Cancel)) {
+    kev->accept();
+    d->infoMessage->animatedHide();
+  } else {
+    QTableView::keyPressEvent(kev);
+  }
 }
 
 void LedgerView::currentChanged(const QModelIndex& current, const QModelIndex& previous)
@@ -387,6 +437,10 @@ void LedgerView::resizeEvent(QResizeEvent* event)
   // qDebug() << "resizeEvent, old:" << event->oldSize() << "new:" << event->size() << "viewport:" << viewport()->width();
   QTableView::resizeEvent(event);
   adjustDetailColumn(event->size().width());
+  d->infoMessage->resize(viewport()->width(), d->infoMessage->height());
+  d->infoMessage->setWordWrap(false);
+  d->infoMessage->setWordWrap(true);
+  d->infoMessage->setText(d->infoMessage->text());
 }
 
 void LedgerView::adjustDetailColumn()
