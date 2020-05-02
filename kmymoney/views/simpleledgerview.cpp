@@ -224,6 +224,8 @@ void SimpleLedgerView::openLedger(QString accountId, bool makeCurrentLedger)
     // insert new ledger view page in tab view
     int newIdx = d->ui->ledgerTab->insertTab(d->ui->ledgerTab->count()-1, view, acc.name());
     if (makeCurrentLedger) {
+      // selecting the last tab (the one with the +) and then the new one
+      // makes sure that all signal about the new selection are emitted
       d->ui->ledgerTab->setCurrentIndex(d->ui->ledgerTab->count()-1);
       d->ui->ledgerTab->setCurrentIndex(newIdx);
     }
@@ -322,6 +324,31 @@ void SimpleLedgerView::closeLedgers()
   Q_D(SimpleLedgerView);
   if (d->m_needLoad)
     return;
+
+  // get storage id without the enclosing braces
+  const auto storageId = MyMoneyFile::instance()->storageId().remove(QRegularExpression("[\\{\\}]"));
+  KSharedConfigPtr config = KSharedConfig::openConfig();
+  KConfigGroup grp = config->group("OpenLedgers");
+  grp.deleteEntry(storageId);
+
+  // collect account ids of open ledgers
+  QStringList openLedgers;
+  LedgerViewPage* view = 0;
+  for(int idx = 0; idx < d->ui->ledgerTab->count()-1; ++idx) {
+    view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->widget(idx));
+    if(view) {
+      auto id = view->accountId();
+      if (idx == d->ui->ledgerTab->currentIndex()) {
+        id.append(QLatin1String("*"));
+      }
+      openLedgers.append(id);
+    }
+  }
+  // save the ones we have found
+  if (!openLedgers.isEmpty()) {
+    grp.writeEntry(storageId, openLedgers);
+  }
+
   auto tabCount = d->ui->ledgerTab->count();
   // check that we have a least one tab that can be closed
   if(tabCount > 1) {
@@ -341,6 +368,26 @@ void SimpleLedgerView::openLedgersAfterOpen()
   Q_D(SimpleLedgerView);
   if (d->m_needLoad)
     return;
+
+  // get storage id without the enclosing braces
+  const auto storageId = MyMoneyFile::instance()->storageId().remove(QRegularExpression("[\\{\\}]"));
+  KSharedConfigPtr config = KSharedConfig::openConfig();
+  KConfigGroup grp = config->group("OpenLedgers");
+
+  // in case we have a previous setting, we open them
+  const auto openLedgers = grp.readEntry(storageId, QStringList());
+  if (!openLedgers.isEmpty()) {
+    for (const auto& id: qAsConst(openLedgers)) {
+      auto thisId = id;
+      openLedger(thisId.remove(QLatin1String("*")), id.endsWith(QLatin1String("*")));
+    }
+
+    // in case we have not opened any ledger, we proceed with the favorites
+    if (d->ui->ledgerTab->count() > 1) {
+      return;
+    }
+  }
+
 
   AccountsModel* model = MyMoneyFile::instance()->accountsModel();
 
