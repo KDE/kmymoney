@@ -441,13 +441,6 @@ QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
   QSize size(10, d->m_lineHeight + 2 * d->m_margin);
 
   if(option.state & QStyle::State_Selected) {
-#if 0
-    auto payeeId = index.data(eMyMoney::Model::Roles::SplitPayeeIdRole).toString();
-    auto counterAccount = index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
-    auto memo = index.data(eMyMoney::Model::Roles::SplitSingleLineMemoRole).toString();
-
-    rows = (payeeId.isEmpty() ? 0 : 1) + (counterAccount.isEmpty() ? 0 : 1) + (memo.isEmpty() ? 0 : 1);
-#endif
     rows = d->displayString(index, option).count();
 
     // make sure we show at least one row

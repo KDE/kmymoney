@@ -400,7 +400,6 @@ void OldInvestTransactionEditor::createEditWidgets()
   d->m_editWidgets["tag"] = tag;
   connect(tag->tagCombo(), &QComboBox::editTextChanged, this, &OldInvestTransactionEditor::slotUpdateButtonState);
 #if 0
-  /// @todo port to new model code
   connect(tag->tagCombo(), &KMyMoneyMVCCombo::createItem, this, &OldInvestTransactionEditor::slotNewTag);
   connect(tag->tagCombo(), &KMyMoneyMVCCombo::objectCreation, this, &OldInvestTransactionEditor::objectCreation);
 #endif
