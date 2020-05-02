@@ -145,18 +145,26 @@ public:
   void saveAs(const QString& filename, bool includeCSS = false);
   void updateReport();
   QString createTable(const QString& links = QString());
-  const ReportControl* control() const {
+  const ReportControl* control() const
+  {
     return m_control;
   }
-  bool isReadyToDelete() const {
+
+  bool isReadyToDelete() const
+  {
     return m_deleteMe;
   }
-  void setReadyToDelete(bool f) {
+
+  void setReadyToDelete(bool f)
+  {
     m_deleteMe = f;
   }
-  void modifyReport(const MyMoneyReport& report) {
+
+  void modifyReport(const MyMoneyReport& report)
+  {
     m_report = report;
   }
+
   void showEvent(QShowEvent * event) final override;
   void loadTab();
 
