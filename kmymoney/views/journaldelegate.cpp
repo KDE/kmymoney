@@ -198,6 +198,7 @@ public:
   eMyMoney::Model::Roles        m_singleLineRole;
   int                           m_lineHeight;
   int                           m_margin;
+  int                           m_editorWidthOfs;
 };
 
 
@@ -265,6 +266,13 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
             d->m_editor = new NewTransactionEditor(parent, accountId);
           }
         }
+        d->m_editorWidthOfs = 8;
+        if(d->m_view) {
+          if(d->m_view->verticalScrollBar()->isVisible()) {
+            d->m_editorWidthOfs += d->m_view->verticalScrollBar()->width();
+          }
+        }
+
       } else {
         qDebug() << "Unable to determine account for editing";
 
@@ -456,20 +464,9 @@ void JournalDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionVi
 {
   Q_UNUSED(index);
 
-  QStyle *style = option.widget ? option.widget->style() : QApplication::style();
-  const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
-  const int lineHeight = option.fontMetrics.lineSpacing();
-
-  int ofs = 8;
-  if(d->m_view) {
-    if(d->m_view->verticalScrollBar()->isVisible()) {
-      ofs += d->m_view->verticalScrollBar()->width();
-    }
-  }
-
   QRect r(option.rect);
   if (option.widget)
-    r.setWidth(option.widget->width() - ofs);
+    r.setWidth(option.widget->width() - d->m_editorWidthOfs);
 
   editor->setGeometry(r);
   editor->update();
