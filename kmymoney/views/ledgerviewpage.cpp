@@ -102,7 +102,7 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
   // Since KConcatenateRowsProxyModel is deprecated I did not dare to fix it
   // and hope that QConcatenateTablesProxyModel has this fixed. But it was
   // only introduced with Qt 5.13 which is a bit new for some distros. As
-  // it looks from the source of it the source is still present as of 2020-01-04
+  // it looks from the source of it the problem is still present as of 2020-01-04
   connect(file->journalModel(), SIGNAL(rowsAboutToBeMoved(const QModelIndex&,int,int,const QModelIndex&,int)), this, SLOT(keepSelection()));
   connect(file->journalModel(), SIGNAL(rowsMoved(const QModelIndex&,int,int,const QModelIndex&,int)), this, SLOT(reloadFilter()), Qt::QueuedConnection);
 
