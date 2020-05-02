@@ -163,6 +163,7 @@ public:
   void modifyReport(const MyMoneyReport& report)
   {
     m_report = report;
+    updateReport();
   }
 
   void showEvent(QShowEvent * event) final override;
