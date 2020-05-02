@@ -203,7 +203,7 @@ void ReportTabRange::slotEditingFinished(EDimension dim)
 
     if (dataMajorTick != 0 && // if major tick isn't going to be reset
         dataMajorTick < (dataRangeEnd - dataRangeStart) * 0.01) // constraint major tick to be greater or equal to 1% of data range
-      dataMajorTick = (dataRangeEnd - dataRangeStart) * 0.01;   // that should produce more than 256 Y labels in KReportChartView::slotNeedUpdate
+      dataMajorTick = (dataRangeEnd - dataRangeStart) * 0.01;
 
     //set precision of major tick to be greater by 1
     ui->m_dataMajorTick->setText(locale().toString(dataMajorTick, 'f', ui->m_yLabelsPrecision->value() + 1).remove(locale().groupSeparator()).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + locale().decimalPoint() + "$")));
