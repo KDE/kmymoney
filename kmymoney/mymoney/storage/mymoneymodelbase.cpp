@@ -71,15 +71,17 @@ QModelIndex MyMoneyModelBase::mapToBaseSource(const QModelIndex& _idx)
     if (( sortFilterModel = qobject_cast<const QSortFilterProxyModel*>(idx.model())) != nullptr) {
       // qDebug() << "QSortFilterProxyModel";
       idx = sortFilterModel->mapToSource(idx);
-    } else if((concatModel = qobject_cast<const KConcatenateRowsProxyModel*>(idx.model())) != nullptr) {
+    } else if ((concatModel = qobject_cast<const KConcatenateRowsProxyModel*>(idx.model())) != nullptr) {
       // qDebug() << "KConcatenateRowsProxyModel";
       idx = concatModel->mapToSource(idx);
-    } else if((identityModel = qobject_cast<const QIdentityProxyModel*>(idx.model())) != nullptr) {
+    } else if ((identityModel = qobject_cast<const QIdentityProxyModel*>(idx.model())) != nullptr) {
       // qDebug() << "QIdentityProxyModel";
       idx = identityModel->mapToSource(idx);
-    } else if((descendantsModel = qobject_cast<const KDescendantsProxyModel*>(idx.model())) != nullptr) {
+    } else if ((descendantsModel = qobject_cast<const KDescendantsProxyModel*>(idx.model())) != nullptr) {
       // qDebug() << "KDescendantsProxyModel";
       idx = descendantsModel->mapToSource(idx);
+    } else if ((qobject_cast<const MyMoneyModelBase*>(idx.model())) == nullptr) {
+      qDebug() << "Unknown model type in mapToBaseSource:" << idx.model()->metaObject()->className();
     }
   } while (sortFilterModel || concatModel || identityModel || descendantsModel);
   return idx;
