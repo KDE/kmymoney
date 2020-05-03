@@ -457,6 +457,8 @@ void KMyMoneyView::slotSettingsChanged()
   MyMoneyFile::instance()->schedulesJournalModel()->setPreviewPeriod(KMyMoneySettings::schedulePreview());
   MyMoneyFile::instance()->schedulesJournalModel()->setShowPlannedDate(KMyMoneySettings::showPlannedScheduleDates());
 
+  updateViewType();
+
   emit settingsChanged();
 }
 

@@ -441,72 +441,6 @@ public:
     return true;
   }
 
-  void connectStorageToModels()
-  {
-    /// @todo port to new model code
-#if 0
-    const auto file = MyMoneyFile::instance();
-
-    const auto accountsModel = MyMoneyFile::instance()->accountsModel();
-
-    q->connect(file, &MyMoneyFile::objectAdded,    accountsModel, &AccountsModel::slotObjectAdded);
-    q->connect(file, &MyMoneyFile::objectModified, accountsModel, &AccountsModel::slotObjectModified);
-    q->connect(file, &MyMoneyFile::objectRemoved,  accountsModel, &AccountsModel::slotObjectRemoved);
-    q->connect(file, &MyMoneyFile::balanceChanged, accountsModel, &AccountsModel::slotBalanceOrValueChanged);
-    q->connect(file, &MyMoneyFile::valueChanged,   accountsModel, &AccountsModel::slotBalanceOrValueChanged);
-
-    const auto institutionsModel = MyMoneyFile::instance()->institutionsModel();
-    q->connect(file, &MyMoneyFile::objectAdded,    institutionsModel, &InstitutionsModel::slotObjectAdded);
-    q->connect(file, &MyMoneyFile::objectModified, institutionsModel, &InstitutionsModel::slotObjectModified);
-    q->connect(file, &MyMoneyFile::objectRemoved,  institutionsModel, &InstitutionsModel::slotObjectRemoved);
-    q->connect(file, &MyMoneyFile::balanceChanged, institutionsModel, &AccountsModel::slotBalanceOrValueChanged);
-    q->connect(file, &MyMoneyFile::valueChanged,   institutionsModel, &AccountsModel::slotBalanceOrValueChanged);
-#endif
-
-#if 0
-    const auto equitiesModel = MyMoneyFile::instance()->equitiesModel();
-    q->connect(file, &MyMoneyFile::objectAdded,    equitiesModel, &EquitiesModel::slotObjectAdded);
-    q->connect(file, &MyMoneyFile::objectModified, equitiesModel, &EquitiesModel::slotObjectModified);
-    q->connect(file, &MyMoneyFile::objectRemoved,  equitiesModel, &EquitiesModel::slotObjectRemoved);
-    q->connect(file, &MyMoneyFile::balanceChanged, equitiesModel, &EquitiesModel::slotBalanceOrValueChanged);
-    q->connect(file, &MyMoneyFile::valueChanged,   equitiesModel, &EquitiesModel::slotBalanceOrValueChanged);
-    const auto securitiesModel = MyMoneyFile::instance()->securitiesModel();
-    q->connect(file, &MyMoneyFile::objectAdded,    securitiesModel, &SecuritiesModel::slotObjectAdded);
-    q->connect(file, &MyMoneyFile::objectModified, securitiesModel, &SecuritiesModel::slotObjectModified);
-    q->connect(file, &MyMoneyFile::objectRemoved,  securitiesModel, &SecuritiesModel::slotObjectRemoved);
-#endif
-
-#ifdef ENABLE_UNFINISHEDFEATURES
-#if 0
-    /// @todo port to new model code
-    const auto ledgerModel = MyMoneyFile::instance()->journalModel();
-    q->connect(file, &MyMoneyFile::objectAdded,    ledgerModel, &LedgerModel::slotAddTransaction);
-    q->connect(file, &MyMoneyFile::objectModified, ledgerModel, &LedgerModel::slotModifyTransaction);
-    q->connect(file, &MyMoneyFile::objectRemoved,  ledgerModel, &LedgerModel::slotRemoveTransaction);
-
-    q->connect(file, &MyMoneyFile::objectAdded,    ledgerModel, &LedgerModel::slotAddSchedule);
-    q->connect(file, &MyMoneyFile::objectModified, ledgerModel, &LedgerModel::slotModifySchedule);
-    q->connect(file, &MyMoneyFile::objectRemoved,  ledgerModel, &LedgerModel::slotRemoveSchedule);
-#endif
-#endif
-  }
-
-  void disconnectStorageFromModels()
-  {
-    /// @todo port to new model code
-#if 0
-    const auto file = MyMoneyFile::instance();
-    // q->disconnect(file, nullptr, Models::instance()->accountsModel(), nullptr);
-    // q->disconnect(file, nullptr, Models::instance()->institutionsModel(), nullptr);
-    // q->disconnect(file, nullptr, Models::instance()->equitiesModel(), nullptr);
-    // q->disconnect(file, nullptr, Models::instance()->securitiesModel(), nullptr);
-
-#ifdef ENABLE_UNFINISHEDFEATURES
-    q->disconnect(file, nullptr, Models::instance()->ledgerModel(), nullptr);
-#endif
-#endif
-  }
-
   bool askAboutSaving()
   {
     const auto isFileNotSaved = q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->isEnabled();
@@ -2268,20 +2202,10 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
     return;
   }
 
-  d->m_myMoneyView->slotSettingsChanged();
-
-  /// @todo port to new model code
-  // this should all be handled by calling the KMyMoneyView::slotSettingsChanged() slot
   MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
-
-  d->m_myMoneyView->updateViewType();
-
-  // update the sql storage module settings
-//  MyMoneyStorageSql::setStartDate(KMyMoneySettings::startDate().date());
-
-  // update the report module settings
   MyMoneyReport::setLineWidth(KMyMoneySettings::lineWidth());
-  /// @todo port to new model code --end
+
+  d->m_myMoneyView->slotSettingsChanged();
 
   // update the holiday region configuration
   setHolidayRegion(KMyMoneySettings::holidayRegion());
@@ -3576,9 +3500,6 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
       // setup internal data for which we need all models loaded
       MyMoneyFile::instance()->accountsModel()->setupAccountFractions();
 
-      /// @todo remove old models container
-      connectStorageToModels();
-
       // clean undostack
       MyMoneyFile::instance()->undoStack()->clear();
 
@@ -3628,7 +3549,6 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
 
     case eKMyMoney::FileAction::Closed:
       q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
-      disconnectStorageFromModels();
       q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
       m_myMoneyView->enableViewsIfFileOpen(m_storageInfo.isOpened);
       updateActions();
