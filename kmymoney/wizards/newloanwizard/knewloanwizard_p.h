@@ -440,65 +440,66 @@ public:
     MyMoneySplit sPayment, sInterest, sAmortization;
     // setup accounts. at this point, we cannot fill in the id of the
     // account that the amortization will be performed on, because we
-    // create the account. So the id is yet unknown.
+    // create the account. So the id is yet unknown. But all others
+    // must exist, otherwise we cannot create a schedule.
     sPayment.setAccountId(q->field("paymentAccountEdit").toStringList().first());
+    if (!sPayment.accountId().isEmpty()) {
 
+      //Only create the interest split if not zero
+      if (hasInterest) {
+        sInterest.setAccountId(q->field("interestAccountEdit").toStringList().first());
+        sInterest.setValue(MyMoneyMoney::autoCalc);
+        sInterest.setShares(sInterest.value());
+        sInterest.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Interest));
+      }
 
-    //Only create the interest split if not zero
-    if (hasInterest) {
-      sInterest.setAccountId(q->field("interestAccountEdit").toStringList().first());
-      sInterest.setValue(MyMoneyMoney::autoCalc);
-      sInterest.setShares(sInterest.value());
-      sInterest.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Interest));
-    }
+      // values
+      if (q->field("borrowButton").toBool()) {
+        sPayment.setValue(-q->field("paymentEdit").value<MyMoneyMoney>());
+      } else {
+        sPayment.setValue(q->field("paymentEdit").value<MyMoneyMoney>());
+      }
 
-    // values
-    if (q->field("borrowButton").toBool()) {
-      sPayment.setValue(-q->field("paymentEdit").value<MyMoneyMoney>());
-    } else {
-      sPayment.setValue(q->field("paymentEdit").value<MyMoneyMoney>());
-    }
+      sAmortization.setValue(MyMoneyMoney::autoCalc);
+      // don't forget the shares
+      sPayment.setShares(sPayment.value());
 
-    sAmortization.setValue(MyMoneyMoney::autoCalc);
-    // don't forget the shares
-    sPayment.setShares(sPayment.value());
+      sAmortization.setShares(sAmortization.value());
 
-    sAmortization.setShares(sAmortization.value());
+      // setup the commodity
+      MyMoneyAccount acc = MyMoneyFile::instance()->account(sPayment.accountId());
+      t.setCommodity(acc.currencyId());
 
-    // setup the commodity
-    MyMoneyAccount acc = MyMoneyFile::instance()->account(sPayment.accountId());
-    t.setCommodity(acc.currencyId());
+      // actions
+      sPayment.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization));
+      sAmortization.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization));
 
-    // actions
-    sPayment.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization));
-    sAmortization.setAction(MyMoneySplit::actionName(eMyMoney::Split::Action::Amortization));
+      // payee
+      QString payeeId = q->field("payeeEdit").toString();
+      sPayment.setPayeeId(payeeId);
+      sAmortization.setPayeeId(payeeId);
 
-    // payee
-    QString payeeId = q->field("payeeEdit").toString();
-    sPayment.setPayeeId(payeeId);
-    sAmortization.setPayeeId(payeeId);
+      sAmortization.setAccountId(QStringLiteral("Phony-ID"));
 
-    MyMoneyAccount account("Phony-ID", MyMoneyAccount());
-    sAmortization.setAccountId(account.id());
+      // IMPORTANT: Payment split must be the first one, because
+      //            the schedule view expects it this way during display
+      t.addSplit(sPayment);
+      t.addSplit(sAmortization);
 
-    // IMPORTANT: Payment split must be the first one, because
-    //            the schedule view expects it this way during display
-    t.addSplit(sPayment);
-    t.addSplit(sAmortization);
+      if (hasInterest) {
+        t.addSplit(sInterest);
+      }
 
-    if (hasInterest) {
-      t.addSplit(sInterest);
-    }
-
-    // copy the splits from the other costs and update the payment split
-    foreach (const MyMoneySplit& it, m_transaction.splits()) {
-      if (it.accountId() != account.id()) {
-        MyMoneySplit sp = it;
-        sp.clearId();
-        t.addSplit(sp);
-        sPayment.setValue(sPayment.value() - sp.value());
-        sPayment.setShares(sPayment.value());
-        t.modifySplit(sPayment);
+      // copy the splits from the other costs and update the payment split
+      foreach (const MyMoneySplit& it, m_transaction.splits()) {
+        if (it.accountId() != QStringLiteral("Phony-ID")) {
+          MyMoneySplit sp = it;
+          sp.clearId();
+          t.addSplit(sp);
+          sPayment.setValue(sPayment.value() - sp.value());
+          sPayment.setShares(sPayment.value());
+          t.modifySplit(sPayment);
+        }
       }
     }
     return t;
