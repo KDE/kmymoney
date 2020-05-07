@@ -39,7 +39,7 @@
   when adding or editing a transaction in the Ledger.  Doing any of these steps
   will direct you to the <guilabel>Create new Category</guilabel> dialog.  The
   dialog contains three tabs: <guilabel>General</guilabel>,
-  <guilabel>Hiearachy</guilabel>, and <guilabel>Tax</guilabel>.  The General tab
+  <guilabel>Hierarchy</guilabel>, and <guilabel>Tax</guilabel>.  The General tab
   includes editable fields for the new category name, type, and currency (with
   the default currency preselected,) as well as options for Last check number,
   Notes, and a checkbox for Cost center assignment required.  In the Hierarchy
