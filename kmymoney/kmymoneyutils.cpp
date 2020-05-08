@@ -834,3 +834,11 @@ void KMyMoneyUtils::showStatementImportResult(const QStringList& resultMessages,
                                     QStringList { i18np("No new transaction has been imported.", "No new transactions have been imported.", statementCount) },
                                 i18n("Statement import statistics"));
 }
+
+QString KMyMoneyUtils::normalizeNumericString(const qreal& val, const QLocale& loc, const char f, const int prec)
+{
+    return loc.toString(val, f, prec)
+            .remove(loc.groupSeparator())
+            .remove(QRegularExpression("0+$"))
+            .remove(QRegularExpression("\\" + loc.decimalPoint() + "$"));
+}
