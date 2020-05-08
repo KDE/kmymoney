@@ -2,6 +2,7 @@
     Copyright (C) 2009 Laurent Montel <montel@kde.org>
     (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     Copyright 2018 Michael Kiefer <Michael-Kiefer@web.de>
+    Copyright 2020 Robert Szczesiak <dev.rszczesiak@gmail.com>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -22,6 +23,9 @@
 #include "reporttabimpl.h"
 
 #include <KLocalizedString>
+#include <QtMath>
+
+#include "kmymoneyutils.h"
 #include "daterangedlg.h"
 
 #include "ui_reporttabgeneral.h"
@@ -146,7 +150,8 @@ void ReportTabChart::setNegExpenses(bool set)
 
 ReportTabRange::ReportTabRange(QWidget *parent)
     : QWidget(parent),
-      ui(new Ui::ReportTabRange)
+      ui(new Ui::ReportTabRange),
+      m_logYaxis(false)
 {
   ui->setupUi(this);
   m_dateRange = new DateRangeDlg;
@@ -174,55 +179,94 @@ void ReportTabRange::setRangeLogarythmic(bool set)
     ui->lblDataMinorTick->hide();
     ui->m_dataMajorTick->hide();
     ui->m_dataMinorTick->hide();
+
+    m_logYaxis = true;
   } else {
     ui->lblDataMajorTick->show();
     ui->lblDataMinorTick->show();
     ui->m_dataMajorTick->show();
     ui->m_dataMinorTick->show();
+
+    m_logYaxis = false;
   }
+
+  updateDataRangeValidators(ui->m_yLabelsPrecision->value()); // update data range validators and re-validate
+}
+
+void ReportTabRange::updateDataRangeValidators(const int& precision)
+{
+    ui->m_dataRangeStart->setValidator(nullptr);
+    ui->m_dataRangeEnd->setValidator(nullptr);
+
+    QDoubleValidator *dbValStart;
+    QDoubleValidator *dbValEnd;
+    if (m_logYaxis) {
+        dbValStart = new MyLogarithmicDoubleValidator(precision, qPow(10, -precision), ui->m_dataRangeStart);
+        dbValEnd = new MyLogarithmicDoubleValidator(precision, qPow(10, -precision + 4), ui->m_dataRangeEnd);
+    } else { // the validator will be used by two QLineEdit objects so let this tab be their parent
+        dbValStart = new MyDoubleValidator(precision, this);
+        dbValEnd = dbValStart;
+    }
+
+    ui->m_dataRangeStart->setValidator(dbValStart);
+    ui->m_dataRangeEnd->setValidator(dbValEnd);
+
+    QString dataRangeStart = ui->m_dataRangeStart->text();
+    QString dataRangeEnd = ui->m_dataRangeEnd->text();
+    if (!ui->m_dataRangeStart->hasAcceptableInput()) {
+        dbValStart->fixup(dataRangeStart);
+        ui->m_dataRangeStart->setText(dataRangeStart);
+    }
+    if (ui->m_dataRangeEnd->hasAcceptableInput()) {
+        dbValEnd->fixup(dataRangeEnd);
+        ui->m_dataRangeEnd->setText(dataRangeEnd);
+    }
 }
 
 void ReportTabRange::slotEditingFinished(EDimension dim)
 {
-  qreal dataRangeStart = locale().toDouble(ui->m_dataRangeStart->text());
-  qreal dataRangeEnd = locale().toDouble(ui->m_dataRangeEnd->text());
-  qreal dataMajorTick = locale().toDouble(ui->m_dataMajorTick->text());
-  qreal dataMinorTick = locale().toDouble(ui->m_dataMinorTick->text());
-  if (dataRangeEnd < dataRangeStart) {  // end must be higher than start
-    if (dim == eRangeEnd) {
-      ui->m_dataRangeStart->setText(ui->m_dataRangeEnd->text());
-      dataRangeStart = dataRangeEnd;
-    } else {
-      ui->m_dataRangeEnd->setText(ui->m_dataRangeStart->text());
-      dataRangeEnd = dataRangeStart;
+    qreal dataRangeStart = locale().toDouble(ui->m_dataRangeStart->text());
+    qreal dataRangeEnd = locale().toDouble(ui->m_dataRangeEnd->text());
+
+    if (dataRangeEnd < dataRangeStart) { // end must be higher than start
+        if (dim == eRangeEnd) {
+            ui->m_dataRangeStart->setText(ui->m_dataRangeEnd->text());
+            dataRangeStart = dataRangeEnd;
+        } else {
+            ui->m_dataRangeEnd->setText(ui->m_dataRangeStart->text());
+            dataRangeEnd = dataRangeStart;
+        }
     }
-  }
-  if ((dataRangeStart != 0 || dataRangeEnd != 0)) { // if data range isn't going to be reset
-    if ((dataRangeEnd - dataRangeStart) < dataMajorTick) // major tick cannot be greater than data range
-      dataMajorTick = dataRangeEnd - dataRangeStart;
+    if (!m_logYaxis) { // major and minor ticks only have influence when axis is linear
+        qreal dataMajorTick = locale().toDouble(ui->m_dataMajorTick->text());
+        qreal dataMinorTick = locale().toDouble(ui->m_dataMinorTick->text());
+        if ((dataRangeStart != 0 || dataRangeEnd != 0)) { // if data range isn't going to be reset
+            if ((dataRangeEnd - dataRangeStart) < dataMajorTick) // major tick cannot be greater than data range
+                dataMajorTick = dataRangeEnd - dataRangeStart;
 
-    if (dataMajorTick != 0 && // if major tick isn't going to be reset
-        dataMajorTick < (dataRangeEnd - dataRangeStart) * 0.01) // constraint major tick to be greater or equal to 1% of data range
-      dataMajorTick = (dataRangeEnd - dataRangeStart) * 0.01;
+            if (dataMajorTick != 0 && // if major tick isn't going to be reset
+                    dataMajorTick < (dataRangeEnd - dataRangeStart) * 0.01) // constraint major tick to be greater or equal to 1% of data range
+                dataMajorTick = (dataRangeEnd - dataRangeStart) * 0.01;
 
-    //set precision of major tick to be greater by 1
-    ui->m_dataMajorTick->setText(locale().toString(dataMajorTick, 'f', ui->m_yLabelsPrecision->value() + 1).remove(locale().groupSeparator()).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + locale().decimalPoint() + "$")));
-  }
+            //set precision of major tick to be greater by 1
+            ui->m_dataMajorTick->setText(locale().toString(dataMajorTick, 'f', ui->m_yLabelsPrecision->value() + 1).remove(locale().groupSeparator()).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + locale().decimalPoint() + "$")));
+        }
 
-  if (dataMajorTick < dataMinorTick) { // major tick must be higher than minor
-    if (dim == eMinorTick) {
-      ui->m_dataMajorTick->setText(ui->m_dataMinorTick->text());
-      dataMajorTick = dataMinorTick;
-    } else {
-      ui->m_dataMinorTick->setText(ui->m_dataMajorTick->text());
-      dataMinorTick = dataMajorTick;
+        if (dataMajorTick < dataMinorTick) { // major tick must be higher than minor
+            if (dim == eMinorTick) {
+                ui->m_dataMajorTick->setText(ui->m_dataMinorTick->text());
+                dataMajorTick = dataMinorTick;
+            } else {
+                ui->m_dataMinorTick->setText(ui->m_dataMajorTick->text());
+                dataMinorTick = dataMajorTick;
+            }
+        }
+
+        if (dataMinorTick < dataMajorTick * 0.1) { // constraint minor tick to be greater or equal to 10% of major tick, and set precision to be greater by 1
+            dataMinorTick = dataMajorTick * 0.1;
+            ui->m_dataMinorTick->setText(locale().toString(dataMinorTick, 'f', ui->m_yLabelsPrecision->value() + 1).remove(locale().groupSeparator()).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + locale().decimalPoint() + "$")));
+        }
     }
-  }
-
-  if (dataMinorTick < dataMajorTick * 0.1) { // constraint minor tick to be greater or equal to 10% of major tick, and set precision to be greater by 1
-    dataMinorTick = dataMajorTick * 0.1;
-    ui->m_dataMinorTick->setText(locale().toString(dataMinorTick, 'f', ui->m_yLabelsPrecision->value() + 1).remove(locale().groupSeparator()).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + locale().decimalPoint() + "$")));
-  }
 }
 
 void ReportTabRange::slotEditingFinishedStart()
@@ -247,17 +291,14 @@ void ReportTabRange::slotEditingFinishedMinor()
 
 void ReportTabRange::slotYLabelsPrecisionChanged(const int& value)
 {
-  ui->m_dataRangeStart->setValidator(0);
-  ui->m_dataRangeEnd->setValidator(0);
-  ui->m_dataMajorTick->setValidator(0);
-  ui->m_dataMinorTick->setValidator(0);
+    ui->m_dataMajorTick->setValidator(0);
+    ui->m_dataMinorTick->setValidator(0);
 
-  MyDoubleValidator *dblVal = new MyDoubleValidator(value);
-  ui->m_dataRangeStart->setValidator(dblVal);
-  ui->m_dataRangeEnd->setValidator(dblVal);
-  MyDoubleValidator *dblVal2 = new MyDoubleValidator(value + 1);
-  ui->m_dataMajorTick->setValidator(dblVal2);
-  ui->m_dataMinorTick->setValidator(dblVal2);
+    MyDoubleValidator *dblVal2 = new MyDoubleValidator(value + 1);
+    ui->m_dataMajorTick->setValidator(dblVal2);
+    ui->m_dataMinorTick->setValidator(dblVal2);
+
+    updateDataRangeValidators(value);
 }
 
 void ReportTabRange::slotDataLockChanged(int index) {
@@ -348,4 +389,50 @@ QValidator::State MyDoubleValidator::validate(QString &s, int &i) const
   } else {
     return QValidator::Invalid;
   }
+}
+
+MyLogarithmicDoubleValidator::MyLogarithmicDoubleValidator(const int decimals, const qreal defaultValue, QObject *parent)
+    : QDoubleValidator(qPow(10, -decimals), 0, decimals, parent)
+{
+    m_defaultText = KMyMoneyUtils::normalizeNumericString(defaultValue, locale(), 'f', decimals);
+}
+
+QValidator::State MyLogarithmicDoubleValidator::validate(QString &s, int &i) const
+{
+    Q_UNUSED(i);
+    if (s.isEmpty() || s == QStringLiteral("0")) {
+        return QValidator::Intermediate;
+    }
+
+    QChar decimalPoint = locale().decimalPoint();
+
+    // start numbering placeholders with a two-digit number to avoid
+    // interpreting the following zero as part of the placeholder index
+    const QRegularExpression re((QStringLiteral("^0\\%110{0,%12}$")
+                                 .arg(decimalPoint)
+                                 .arg(decimals() - 1)));
+    if (re.match(s).hasMatch())
+        return QValidator::Intermediate;
+
+    if (s.indexOf(decimalPoint) != -1) {
+        int charsAfterPoint = s.length() - s.indexOf(decimalPoint) - 1;
+
+        if (charsAfterPoint > decimals()) {
+            return QValidator::Invalid;
+        }
+    }
+
+    bool ok;
+    const qreal result = locale().toDouble(s, &ok);
+
+    if (ok && result >= bottom()) {
+        return QValidator::Acceptable;
+    } else {
+        return QValidator::Invalid;
+    }
+}
+
+void MyLogarithmicDoubleValidator::fixup(QString &input) const
+{
+    input = m_defaultText;
 }

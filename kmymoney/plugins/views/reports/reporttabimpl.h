@@ -104,6 +104,14 @@ public:
   void setRangeLogarythmic(bool set);
 private:
   enum EDimension { eRangeStart = 0, eRangeEnd, eMajorTick, eMinorTick};
+  bool m_logYaxis;
+  /**
+   * Update data range start and data range end text validators
+   * and re-validate the contents of those text fields against the updated validator.
+   * If re-validation fails, arbitrary default values will be set depending on vertical axis type.
+   * This fucntion should be called when vertical axis type or labels precision changed.
+   */
+  void updateDataRangeValidators(const int& precision);
 private Q_SLOTS:
   void slotEditingFinished(EDimension dim);
   void slotEditingFinishedStart();
@@ -144,6 +152,17 @@ public:
   explicit MyDoubleValidator(int decimals, QObject * parent = 0);
 
   QValidator::State validate(QString &s, int &i) const final override;
+};
+
+class MyLogarithmicDoubleValidator : public QDoubleValidator
+{
+public:
+  explicit MyLogarithmicDoubleValidator(const int decimals, const qreal defaultValue, QObject *parent = nullptr);
+
+  QValidator::State validate(QString &s, int &i) const final Q_DECL_OVERRIDE;
+  void fixup(QString &input) const final Q_DECL_OVERRIDE;
+private:
+  QString m_defaultText;
 };
 #endif /* REPORTTABIMPL_H */
 
