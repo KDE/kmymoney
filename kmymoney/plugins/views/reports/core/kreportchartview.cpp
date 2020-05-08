@@ -600,32 +600,60 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   //assign model to the diagram
   planeDiagram->setModel(&m_model);
 
-  adjustVerticalRange();
+  adjustVerticalRange(config.yLabelsPrecision());
 }
 
-void KReportChartView::adjustVerticalRange()
+void KReportChartView::adjustVerticalRange(const int precision)
 {
-    // get grid dimensions from Cartesian plane and check if the model is presented as a horizontal line
     KChart::CartesianCoordinatePlane* cartesianPlane = qobject_cast<CartesianCoordinatePlane*>(coordinatePlane());
-    if (cartesianPlane) {
-        QList<DataDimension> grids = coordinatePlane()->gridDimensionsList();
-        // in case we have a horizontal line, we extend the vertical range around it
-        if (cartesianPlane->verticalRange().first == cartesianPlane->verticalRange().second) {
-            const qreal firstValue = cartesianPlane->verticalRange().first;
-            const qreal step = grids.at(1).stepWidth;
-            if (cartesianPlane->axesCalcModeY() == KChart::AbstractCoordinatePlane::Logarithmic) {
-                cartesianPlane->setVerticalRange(qMakePair(firstValue != 0.0 ? firstValue / 100 : step / 100,
-                                                           firstValue != 0.0 ? firstValue * 100 : step * 100));
-                grids[1].start /= 100*step;
-                grids[1].end *= 100*step;
-            } else {
-                cartesianPlane->setVerticalRange(qMakePair(firstValue- 2,
-                                                           firstValue + 2));
-                grids[1].start -= 2*step;
-                grids[1].end += 2*step;
-            }
+    if (!cartesianPlane)
+        return; // only Cartesian planes are supported
+
+    const qreal gridStart = cartesianPlane->gridDimensionsList().at(1).start;
+    const qreal gridEnd = cartesianPlane->gridDimensionsList().at(1).end;
+    const qreal precisionLimit = qPow(10, -precision);
+    qreal dataRangeStart = cartesianPlane->verticalRange().first;
+    qreal dataRangeEnd = cartesianPlane->verticalRange().second;
+
+    bool dataRangeStartAdjusted = false;
+    bool dataRangeEndAdjusted = false;
+
+    if (cartesianPlane->axesCalcModeY() == KChart::AbstractCoordinatePlane::Logarithmic) {
+        if (dataRangeStart == dataRangeEnd) {
+            // if data model is represented by a horizontal line,
+            // extend vertical range by two orders of magnitude upwards and downwards
+            // if the whole data range is equal to zero,
+            // at least draw an empty chart with four orders of magnitude on the vertical exis
+            dataRangeStart = dataRangeStart > 0 ? qPow(10, qFloor(log10(dataRangeStart)) - 2) : precisionLimit;
+            dataRangeEnd = dataRangeEnd > 0 ? qPow(10, qCeil(log10(dataRangeEnd)) + 2) : qPow(10, -precision + 4);
+            dataRangeStartAdjusted = true;
+            dataRangeEndAdjusted = true;
         }
-    }
+
+        if (dataRangeStart < precisionLimit) {
+            // if data range starts below the precision limit,
+            // crop the chart to the precision limit
+            dataRangeStart = precisionLimit;
+            dataRangeStartAdjusted = true;
+        }
+        if (dataRangeEnd < precisionLimit) {
+            // if data range ends below the precision limit,
+            // at least draw an empty chart with four orders of magnitude on the vertical axis
+            dataRangeEnd = qPow(10, -precision + 4);
+            dataRangeEndAdjusted = true;
+        }
+
+        // if data range boundary needed no adjustment,
+        // make sure it matches the original grid boundary
+        if (!dataRangeStartAdjusted)
+            dataRangeStart = gridStart;
+        if (!dataRangeEndAdjusted)
+            dataRangeEnd = gridEnd;
+        cartesianPlane->setVerticalRange(qMakePair(dataRangeStart, dataRangeEnd));
+    } else if (dataRangeStart == dataRangeEnd) // vertical axis type must be Linear then
+        // if data model is represented by a horizontal line,
+        // extend vertical range by two upwards and downwards
+        cartesianPlane->setVerticalRange(qMakePair(dataRangeStart - 2, dataRangeEnd + 2));
 }
 
 int KReportChartView::drawPivotGridRow(int rowNum, const PivotGridRow& gridRow, const QString& legendText, const int startColumn, const int columnsToDraw, const int precision)
