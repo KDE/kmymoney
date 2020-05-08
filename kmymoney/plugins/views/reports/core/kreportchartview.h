@@ -76,10 +76,10 @@ public:
 private:
 
   /**
-   * Extend vertical range if the model is presented as a horizontal line.
-   * Both logarithmic and linear axis types are suppoerted.
+   * Adjust vertical range if data model is represented by a horizontal line
+   * or the range starts below precision limit when logarithmic axis is used
    */
-  void adjustVerticalRange();
+  void adjustVerticalRange(const int precision = 2);
 
   /**
     * Draw a PivotGridRow in a chart
