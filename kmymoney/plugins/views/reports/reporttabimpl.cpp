@@ -195,11 +195,15 @@ void ReportTabRange::setRangeLogarythmic(bool set)
 
 void ReportTabRange::updateDataRangeValidators(const int& precision)
 {
-    ui->m_dataRangeStart->setValidator(nullptr);
-    ui->m_dataRangeEnd->setValidator(nullptr);
 
-    QDoubleValidator *dbValStart;
-    QDoubleValidator *dbValEnd;
+    const QValidator *dbValStart = ui->m_dataRangeStart->validator();
+    const QValidator *dbValEnd = ui->m_dataRangeEnd->validator();
+
+    delete dbValStart;
+    if (dbValStart != dbValEnd) {
+        delete dbValEnd;
+    }
+
     if (m_logYaxis) {
         dbValStart = new MyLogarithmicDoubleValidator(precision, qPow(10, -precision), ui->m_dataRangeStart);
         dbValEnd = new MyLogarithmicDoubleValidator(precision, qPow(10, -precision + 4), ui->m_dataRangeEnd);
