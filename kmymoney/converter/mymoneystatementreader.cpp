@@ -706,6 +706,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       brokerageactid = file->nameToAccount(thisaccount.brokerageName());
     }
     if (brokerageactid.isEmpty()) {
+      brokerageactid = file->accountByName(thisaccount.brokerageName()).id();
+    }
+    if (brokerageactid.isEmpty()) {
       brokerageactid = SelectBrokerageAccount();
     }
 
