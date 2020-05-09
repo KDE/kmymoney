@@ -391,7 +391,7 @@ QStringList MyMoneyStatementReader::importStatement(const MyMoneyStatement& s, b
   // keep a copy of the statement
   if (KMyMoneySettings::logImportedStatements()) {
     auto logFile = QString::fromLatin1("%1/kmm-statement-%2.txt").arg(KMyMoneySettings::logPath(),
-                                                                      QDateTime::currentDateTimeUtc().toString(QStringLiteral("yyyy-MM-dd hh-mm-ss")));
+                                                                      QDateTime::currentDateTimeUtc().toString(QStringLiteral("yyyy-MM-dd hh-mm-ss.zzz")));
     MyMoneyStatement::writeXMLFile(s, logFile);
  }
 
@@ -704,6 +704,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     }
     if (brokerageactid.isEmpty()) {
       brokerageactid = file->nameToAccount(thisaccount.brokerageName());
+    }
+    if (brokerageactid.isEmpty()) {
+      brokerageactid = file->accountByName(thisaccount.brokerageName()).id();
     }
     if (brokerageactid.isEmpty()) {
       brokerageactid = SelectBrokerageAccount();

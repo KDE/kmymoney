@@ -96,8 +96,18 @@ KInvestmentDetailsWizardPage::~KInvestmentDetailsWizardPage()
  */
 void KInvestmentDetailsWizardPage::init2(const MyMoneySecurity& security)
 {
-  MyMoneySecurity tradingCurrency = MyMoneyFile::instance()->currency(security.tradingCurrency());
+  const auto file = MyMoneyFile::instance();
+  MyMoneySecurity tradingCurrency = file->currency(security.tradingCurrency());
   ui->m_investmentSymbol->setText(security.tradingSymbol());
+  // add any trading market found in the data to the combo box
+  const auto securities = file->securityList();
+  for(const auto& sec: securities) {
+    if (!sec.tradingMarket().isEmpty()) {
+      if (ui->m_tradingMarket->findText(sec.tradingMarket(), Qt::MatchExactly) == -1) {
+        ui->m_tradingMarket->addItem(sec.tradingMarket());
+      }
+    }
+  }
   ui->m_tradingMarket->setCurrentIndex(ui->m_tradingMarket->findText(security.tradingMarket(), Qt::MatchExactly));
   if (security.roundingMethod() == AlkValue::RoundNever)
     ui->m_roundingMethod->setCurrentIndex(0);
