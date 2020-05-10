@@ -251,7 +251,7 @@ bool ReportAccount::operator<(const ReportAccount& second) const
 
 /**
   * The name of only this account.  No matter how deep the hierarchy, this
-  * method only returns the last name in the list, which is the engine name]
+  * method only returns the last name in the list, which is the engine name
   * of this account.
   *
   * @return QString The account's name
