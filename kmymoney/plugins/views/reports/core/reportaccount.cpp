@@ -314,4 +314,21 @@ QString ReportAccount::topParentName() const
   return m_nameHierarchy.first();
 }
 
+QString ReportAccount::institutionId() const
+{
+  DEBUG_ENTER(Q_FUNC_INFO);
+
+  MyMoneyFile* file = MyMoneyFile::instance();
+  QString resultid = MyMoneyAccount::institutionId();
+  QString parentid = parentAccountId();
+
+  while (resultid.isEmpty() && !parentid.isEmpty() && !file->isStandardAccount(parentid)) {
+    const auto account = file->account(parentid);
+    resultid = account.institutionId();
+    // and try again
+    parentid = account.parentAccountId();
+  }
+  return resultid;
+}
+
 }  // end namespace reports
