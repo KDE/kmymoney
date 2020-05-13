@@ -174,7 +174,6 @@ namespace Icons {
       {Icon::PayeeMerge, QStringLiteral("merge")},
       {Icon::PayeeRename, QStringLiteral("user-properties")},
       {Icon::UserProperties, QStringLiteral("system-users")},
-      {Icon::FileArchiver, QStringLiteral("package")},
       {Icon::Calculator, QStringLiteral("accessories-calculator")},
       {Icon::MailReceive, QStringLiteral("mail-receive")},
       {Icon::MailMessageNew, QStringLiteral("mail-message-new")},
@@ -237,7 +236,6 @@ namespace Icons {
       {Icon::ViewInstitutions, QStringLiteral("view-bank")},
       {Icon::ViewCategories, QStringLiteral("view-categories")},
       {Icon::ViewFinancialCategories, QStringLiteral("view-categories")},
-      {Icon::FileArchiver, QStringLiteral("utilities-file-archiver")},
       {Icon::UserProperties, QStringLiteral("user-properties")},
       {Icon::SortAscending, QStringLiteral("view-sort-ascending")},
       {Icon::SortDescending, QStringLiteral("view-sort-descending")},
@@ -269,7 +267,6 @@ namespace Icons {
       {Icon::ViewFinancialTransfer, QStringLiteral("view-financial-transfer")},
       {Icon::ViewFinancialList, QStringLiteral("view-financial-list")},
       {Icon::Refresh, QStringLiteral("refresh")},
-      {Icon::InvestApplet, QStringLiteral("invest-applet")}
     };
   }
 
