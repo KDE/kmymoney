@@ -268,7 +268,7 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     m_control->ui->buttonDelete->setEnabled(false);
 
   int tabNr = parent->addTab(this,
-                         Icons::get(Icon::Spreadsheet),
+                         Icons::get(Icon::Report),
                          report.name());
   parent->setTabEnabled(tabNr, true);
   parent->setCurrentIndex(tabNr);

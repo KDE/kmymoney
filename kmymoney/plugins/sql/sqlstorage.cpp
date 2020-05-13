@@ -287,7 +287,7 @@ void SQLStorage::createActions()
 {
   m_openDBaction = actionCollection()->addAction("open_database");
   m_openDBaction->setText(i18n("Open database..."));
-  m_openDBaction->setIcon(Icons::get(Icon::SVNUpdate));
+  m_openDBaction->setIcon(Icons::get(Icon::OpenDatabase));
   connect(m_openDBaction, &QAction::triggered, this, &SQLStorage::slotOpenDatabase);
 
   m_generateDB = actionCollection()->addAction("tools_generate_sql");

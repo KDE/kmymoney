@@ -97,7 +97,7 @@ public:
         m_nextButton->setIcon(KStandardGuiItem::forward(KStandardGuiItem::UseRTL).icon());
         m_finishButton->setIcon(Icons::get(Icon::DialogOKApply));
         m_cancelButton->setIcon(Icons::get(Icon::DialogCancel));
-        m_helpButton->setIcon(Icons::get(Icon::HelpContents));
+        m_helpButton->setIcon(Icons::get(Icon::Help));
       }
 
     // create button layout

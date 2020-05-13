@@ -101,7 +101,7 @@ public:
     int btnSize = q->sizeHint().height() - 5;
 
     m_calculatorButton = new QToolButton(q);
-    m_calculatorButton->setIcon(Icons::get(Icon::AccessoriesCalculator));
+    m_calculatorButton->setIcon(Icons::get(Icon::Calculator));
     m_calculatorButton->setCursor(Qt::ArrowCursor);
     m_calculatorButton->setStyleSheet("QToolButton { border: none; padding: 2px}");
     m_calculatorButton->setFixedSize(btnSize, btnSize);

@@ -82,7 +82,7 @@ RegisterSearchLine::RegisterSearchLine(QWidget* parent, Register* reg) :
   parentWidget()->layout()->addWidget(d->combo);
   // don't change the order of the following lines unless updating
   // the case labels in RegisterSearchLine::itemMatches() at the same time
-  d->combo->insertItem((int)eRegister::ItemState::Any, Icons::get(Icon::SystemRun), i18n("Any status"));
+  d->combo->insertItem((int)eRegister::ItemState::Any, Icons::get(Icon::Unknown), i18n("Any status"));
   d->combo->insertItem((int)eRegister::ItemState::Imported, Icons::get(Icon::DocumentImport), i18n("Imported"));
   d->combo->insertItem((int)eRegister::ItemState::Matched, Icons::get(Icon::TransactionMatch), i18n("Matched"));
   d->combo->insertItem((int)eRegister::ItemState::Erroneous, Icons::get(Icon::TaskAttention), i18n("Erroneous"));

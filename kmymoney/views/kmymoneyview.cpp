@@ -155,7 +155,7 @@ KMyMoneyView::KMyMoneyView()
     {View::Tags,            i18n("Tags"),                         Icon::ViewTags},
     {View::Payees,          i18n("Payees"),                       Icon::ViewPayees},
     {View::Ledgers,         i18n("Ledgers"),                      Icon::ViewLedgers},
-    {View::Investments,     i18n("Investments"),                  Icon::ViewInvestment},
+    {View::Investments,     i18n("Investments"),                  Icon::ViewInvestments},
     #ifdef ENABLE_UNFINISHEDFEATURES
     {View::NewLedgers,      i18n("New ledger"),                   Icon::DocumentProperties},
     #endif

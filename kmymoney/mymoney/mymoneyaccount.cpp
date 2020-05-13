@@ -481,7 +481,7 @@ QPixmap MyMoneyAccount::accountPixmap(const bool reconcileFlag, const int size) 
   if (isClosed())
     ixIcon = Icon::AccountClosed;
   else if (reconcileFlag)
-    ixIcon = Icon::FlagGreen;
+    ixIcon = Icon::Reconciled;
   else if (hasOnlineMapping())
     ixIcon = Icon::Download;
   else

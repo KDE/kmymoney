@@ -92,7 +92,7 @@ KAccountSelectDlg::KAccountSelectDlg(const eDialogs::Category accountType, const
   d->ui->m_kButtonAbort->hide();
 
   KGuiItem skipButtonItem(i18n("&Skip"),
-                          Icons::get(Icon::MediaSkipForward),
+                          Icons::get(Icon::SkipForward),
                           i18n("Skip this transaction"),
                           i18n("Use this to skip importing this transaction and proceed with the next one."));
   KGuiItem::assign(d->ui->m_qbuttonCancel, skipButtonItem);
