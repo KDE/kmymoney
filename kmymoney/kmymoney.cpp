@@ -1183,54 +1183,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   layout->setContentsMargins(2, 2, 2, 2);
   layout->setSpacing(6);
 
-  {
-    #if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
-    const auto appDataIconsLocation = QStringLiteral("kmymoney/icons");
-    #else
-    const auto appDataIconsLocation = QStringLiteral("icons");
-    #endif
-
-    const QString customIconRelativePath = appDataIconsLocation + QStringLiteral("/hicolor/16x16/actions/account-add.png");
-#ifndef IS_APPIMAGE
-    // find where our custom icons were installed based on an custom icon that we know should exist after installation
-    auto customIconAbsolutePath = QStandardPaths::locate(QStandardPaths::AppDataLocation, customIconRelativePath);
-    if (customIconAbsolutePath.isEmpty()) {
-      qWarning("Custom icons were not found in any of the following QStandardPaths::AppDataLocation:");
-      for (const auto &standardPath : QStandardPaths::standardLocations(QStandardPaths::AppDataLocation))
-        qWarning() << standardPath;
-    }
-#else
-    // according to https://docs.appimage.org/packaging-guide/ingredients.html#open-source-applications
-    // QStandardPaths::AppDataLocation is unreliable on AppImages, so apply workaround here in case we fail to find icons
-    QString customIconAbsolutePath;
-    const auto appImageAppDataLocation = QString("%1%2%3").arg(QCoreApplication::applicationDirPath(), QString("/../share/kmymoney/"), customIconRelativePath);
-    if (QFile::exists(appImageAppDataLocation )) {
-      customIconAbsolutePath = appImageAppDataLocation ;
-    } else {
-      qWarning("Custom icons were not found in the following location:");
-      qWarning() << appImageAppDataLocation ;
-    }
-#endif
-
-    // add our custom icons path to icons search path
-    if (!customIconAbsolutePath.isEmpty()) {
-      customIconAbsolutePath.chop(customIconRelativePath.length());
-      customIconAbsolutePath.append(appDataIconsLocation);
-      auto paths = QIcon::themeSearchPaths();
-      paths.append(customIconAbsolutePath);
-      QIcon::setThemeSearchPaths(paths);
-    }
-
-    #if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
-    QString themeName = QLatin1Literal("system");                       // using QIcon::setThemeName on Craft build system causes icons to disappear
-    #else
-    QString themeName = KMyMoneySettings::iconsTheme();                 // get theme user wants
-    #endif
-    if (!themeName.isEmpty() && themeName != QLatin1Literal("system"))  // if it isn't default theme then set it
-      QIcon::setThemeName(themeName);
-    Icons::setIconThemeNames(QIcon::themeName());                       // get whatever theme user ends up with and hope our icon names will fit that theme
-  }
-
+  initIcons();
   initStatusBar();
   pActions = initActions();
   pMenus = initMenus();
@@ -1760,6 +1713,55 @@ void KMyMoneyApp::initStatusBar()
 
   // hide the progress bar for now
   slotStatusProgressBar(-1, -1);
+}
+
+void KMyMoneyApp::initIcons()
+{
+#if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
+  const auto appDataIconsLocation = QStringLiteral("kmymoney/icons");
+#else
+  const auto appDataIconsLocation = QStringLiteral("icons");
+#endif
+
+  const QString customIconRelativePath = appDataIconsLocation + QStringLiteral("/hicolor/16x16/actions/account-add.png");
+#ifndef IS_APPIMAGE
+  // find where our custom icons were installed based on an custom icon that we know should exist after installation
+  auto customIconAbsolutePath = QStandardPaths::locate(QStandardPaths::AppDataLocation, customIconRelativePath);
+  if (customIconAbsolutePath.isEmpty()) {
+    qWarning("Custom icons were not found in any of the following QStandardPaths::AppDataLocation:");
+    for (const auto &standardPath : QStandardPaths::standardLocations(QStandardPaths::AppDataLocation))
+      qWarning() << standardPath;
+  }
+#else
+  // according to https://docs.appimage.org/packaging-guide/ingredients.html#open-source-applications
+  // QStandardPaths::AppDataLocation is unreliable on AppImages, so apply workaround here in case we fail to find icons
+  QString customIconAbsolutePath;
+  const auto appImageAppDataLocation = QString("%1%2%3").arg(QCoreApplication::applicationDirPath(), QString("/../share/kmymoney/"), customIconRelativePath);
+  if (QFile::exists(appImageAppDataLocation )) {
+    customIconAbsolutePath = appImageAppDataLocation ;
+  } else {
+    qWarning("Custom icons were not found in the following location:");
+    qWarning() << appImageAppDataLocation ;
+  }
+#endif
+
+  // add our custom icons path to icons search path
+  if (!customIconAbsolutePath.isEmpty()) {
+    customIconAbsolutePath.chop(customIconRelativePath.length());
+    customIconAbsolutePath.append(appDataIconsLocation);
+    auto paths = QIcon::themeSearchPaths();
+    paths.append(customIconAbsolutePath);
+    QIcon::setThemeSearchPaths(paths);
+  }
+
+#if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
+  QString themeName = QLatin1Literal("system");                       // using QIcon::setThemeName on Craft build system causes icons to disappear
+#else
+  QString themeName = KMyMoneySettings::iconsTheme();                 // get theme user wants
+#endif
+  if (!themeName.isEmpty() && themeName != QLatin1Literal("system"))  // if it isn't default theme then set it
+    QIcon::setThemeName(themeName);
+  setIconThemeNames(QIcon::themeName());                       // get whatever theme user ends up with and hope our icon names will fit that theme
 }
 
 void KMyMoneyApp::saveOptions()
