@@ -77,9 +77,9 @@ CSVWizard::CSVWizard(CSVImporter *plugin) :
 
   m_wiz->button(QWizard::BackButton)->setIcon(Icons::get(Icon::ArrowLeft));
   m_wiz->button(QWizard::CancelButton)->setIcon(Icons::get(Icon::DialogCancel));
-  m_wiz->button(QWizard::FinishButton)->setIcon(Icons::get(Icon::KMyMoney));
-  m_wiz->button(QWizard::CustomButton1)->setIcon(Icons::get(Icon::FileArchiver));
-  m_wiz->button(QWizard::CustomButton2)->setIcon(Icons::get(Icon::InvestApplet));
+  m_wiz->button(QWizard::FinishButton)->setIcon(Icons::get(Icon::DocumentImport));
+  m_wiz->button(QWizard::CustomButton1)->setIcon(Icons::get(Icon::DocumentOpen));
+  m_wiz->button(QWizard::CustomButton2)->setIcon(Icons::get(Icon::DocumentExport));
   m_wiz->button(QWizard::NextButton)->setIcon(Icons::get(Icon::ArrowRight));
 
   m_pageIntro = new IntroPage(this, m_imp);
