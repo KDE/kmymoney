@@ -796,7 +796,7 @@ public:
           MyMoneySplit sp = t.splitByAccount(acc.id(), true);
 
           QString pathEnter = QPixmapToDataUri(Icons::get(Icon::KeyEnter).pixmap(QSize(16,16)));
-          QString pathSkip = QPixmapToDataUri(Icons::get(Icon::MediaSkipForward).pixmap(QSize(16,16)));
+          QString pathSkip = QPixmapToDataUri(Icons::get(Icon::SkipForward).pixmap(QSize(16, 16)));
 
           //show payment date
           tmp = QString("<td>") +

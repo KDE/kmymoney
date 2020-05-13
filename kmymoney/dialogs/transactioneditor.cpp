@@ -702,7 +702,7 @@ bool TransactionEditor::enterTransactions(QString& newId, bool askForSchedule, b
                                  i18n("Accepts the entered data and stores it"),
                                  i18n("Use this to enter the transaction into the ledger."));
             KGuiItem scheduleButton(i18n("&Schedule"),
-                                    Icons::get(Icon::AppointmentNew),
+                                    Icons::get(Icon::NewSchedule),
                                     i18n("Accepts the entered data and stores it as schedule"),
                                     i18n("Use this to schedule the transaction for later entry into the ledger."));
 

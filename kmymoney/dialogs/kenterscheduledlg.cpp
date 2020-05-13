@@ -120,7 +120,7 @@ KEnterScheduleDlg::KEnterScheduleDlg(QWidget *parent, const MyMoneySchedule& sch
   d->m_schedule = schedule;
   d->m_extendedReturnCode = eDialogs::ScheduleResultCode::Enter;
   d->ui->buttonOk->setIcon(Icons::get(Icon::KeyEnter));
-  d->ui->buttonSkip->setIcon(Icons::get(Icon::MediaSeekForward));
+  d->ui->buttonSkip->setIcon(Icons::get(Icon::SeekForward));
   KGuiItem::assign(d->ui->buttonCancel, KStandardGuiItem::cancel());
   KGuiItem::assign(d->ui->buttonHelp, KStandardGuiItem::help());
   d->ui->buttonIgnore->setHidden(true);
