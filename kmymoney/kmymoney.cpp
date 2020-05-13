@@ -1180,7 +1180,13 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   layout->setSpacing(6);
 
   {
-    const auto customIconRelativePath = QString(QStringLiteral("icons/hicolor/16x16/actions/account-add.png"));
+    #if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
+    const auto appDataIconsLocation = QStringLiteral("kmymoney/icons");
+    #else
+    const auto appDataIconsLocation = QStringLiteral("icons");
+    #endif
+
+    const QString customIconRelativePath = appDataIconsLocation + QStringLiteral("/hicolor/16x16/actions/account-add.png");
 #ifndef IS_APPIMAGE
     // find where our custom icons were installed based on an custom icon that we know should exist after installation
     auto customIconAbsolutePath = QStandardPaths::locate(QStandardPaths::AppDataLocation, customIconRelativePath);
@@ -1205,7 +1211,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
     // add our custom icons path to icons search path
     if (!customIconAbsolutePath.isEmpty()) {
       customIconAbsolutePath.chop(customIconRelativePath.length());
-      customIconAbsolutePath.append(QLatin1String("icons"));
+      customIconAbsolutePath.append(appDataIconsLocation);
       auto paths = QIcon::themeSearchPaths();
       paths.append(customIconAbsolutePath);
       QIcon::setThemeSearchPaths(paths);
