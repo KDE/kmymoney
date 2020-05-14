@@ -149,7 +149,7 @@ public:
     calculatorFrameVBoxLayout->addWidget(m_calculator);
     forceUpdate(m_calculatorFrame);
 
-    m_calcButton = new QPushButton(Icons::get(Icon::AccessoriesCalculator), QString(), q);
+    m_calcButton = new QPushButton(Icons::get(Icon::Calculator), QString(), q);
     m_calcButton->setFocusProxy(m_edit);
     editLayout->addWidget(m_calcButton);
 
