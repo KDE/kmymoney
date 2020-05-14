@@ -215,6 +215,13 @@ public:
     */
   unsigned hierarchyDepth() const;
 
+  /**
+   * Returns the first institution id found when walking up the
+   * account hierarchy. If none was found when a top level account
+   * is reached, an empty string is returned.
+   */
+  QString institutionId() const;
+
 protected:
   /**
     * Calculates the full account hierarchy of this account

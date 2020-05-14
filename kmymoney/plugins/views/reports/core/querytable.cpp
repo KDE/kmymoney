@@ -1601,12 +1601,7 @@ void QueryTable::constructAccountTable()
           qaccountrow[ctValue] = (netprice * shares).convert(fraction).toString();
           qaccountrow[ctShares] = shares.toString();
 
-          QString iid = account.institutionId();
-
-          // If an account does not have an institution, get it from the top-parent.
-          if (iid.isEmpty() && !account.isTopLevel())
-            iid = account.topParent().institutionId();
-
+          const auto iid = account.institutionId();
           if (iid.isEmpty())
             qaccountrow[ctInstitution] = i18nc("No institution", "None");
           else

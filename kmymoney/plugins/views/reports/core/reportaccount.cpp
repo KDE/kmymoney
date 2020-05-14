@@ -251,7 +251,7 @@ bool ReportAccount::operator<(const ReportAccount& second) const
 
 /**
   * The name of only this account.  No matter how deep the hierarchy, this
-  * method only returns the last name in the list, which is the engine name]
+  * method only returns the last name in the list, which is the engine name
   * of this account.
   *
   * @return QString The account's name
@@ -312,6 +312,23 @@ ReportAccount ReportAccount::topParent() const
 QString ReportAccount::topParentName() const
 {
   return m_nameHierarchy.first();
+}
+
+QString ReportAccount::institutionId() const
+{
+  DEBUG_ENTER(Q_FUNC_INFO);
+
+  MyMoneyFile* file = MyMoneyFile::instance();
+  QString resultid = MyMoneyAccount::institutionId();
+  QString parentid = parentAccountId();
+
+  while (resultid.isEmpty() && !parentid.isEmpty() && !file->isStandardAccount(parentid)) {
+    const auto account = file->account(parentid);
+    resultid = account.institutionId();
+    // and try again
+    parentid = account.parentAccountId();
+  }
+  return resultid;
 }
 
 }  // end namespace reports
