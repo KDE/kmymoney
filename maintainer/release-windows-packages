@@ -67,6 +67,7 @@ dryrun=0
 update=0
 update_symlink=1
 curl=curl
+force=0
 
 # check options
 for var in "$@"; do
@@ -98,6 +99,11 @@ case $var in
 --dryrun) ## simulate upload only
     dryrun=1
     curl="echo curl"
+    shift
+    ;;
+
+--force) ## force action
+    force=1
     shift
     ;;
 
@@ -167,7 +173,7 @@ function update_package() {
 
     # update tarball
     local f=$(find -maxdepth 1 -name $fn)
-    if [ -z "$f" ]; then
+    if [ -z "$f" ] || [ $force -eq 1 ]; then
         $osc rm $RELEASE_NAME-*.tar.xz || true
         cp $releaseme_dir/$fn .
         $osc add $fn
