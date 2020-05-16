@@ -64,252 +64,252 @@ curl=curl
 for var in "$@"; do
 case $var in
 --update-32) ## update i686 variant
-	use64=0
-	usesrc=0
-	update=1
-	shift
-	;;
+    use64=0
+    usesrc=0
+    update=1
+    shift
+    ;;
 
 --update-64) ## update x86_64 variant
-	use32=0
-	usesrc=0
-	update=1
-	shift
-	;;
+    use32=0
+    usesrc=0
+    update=1
+    shift
+    ;;
 
 --symlink) ## update 'latest' symbolic link
-	update_symlink=1
-	shift
-	;;
+    update_symlink=1
+    shift
+    ;;
 
 --dryrun) ## simulate upload only
-	dryrun=1
-	curl="echo curl"
-	shift
-	;;
+    dryrun=1
+    curl="echo curl"
+    shift
+    ;;
 esac
 done
 
 function clean() {
-	rm -rf work/*
+    rm -rf work/*
 }
 
 function download() {
-	cd work
-	rm -rf binaries
-	if test $use32 -eq 1; then
-		osc $oscoptions getbinaries --multibuild-package=$PACKAGENAME32-installer $ROOT32 $PACKAGENAME32 $REPO x86_64
-		VERSION=$(find binaries/ -name "*$PACKAGENAME32-setup*" | sed "s,^.*$PACKAGENAME32-setup-,,g;s,-.*$,,g")
-		echo $VERSION > VERSION
-	fi
-	if test $use64 -eq 1; then
-		osc $oscoptions getbinaries --multibuild-package=$PACKAGENAME64-installer $ROOT64 $PACKAGENAME64 $REPO x86_64
-		VERSION=$(find binaries/ -name "*$PACKAGENAME64-setup*" | sed "s,^.*$PACKAGENAME64-setup-,,g;s,-.*$,,g")
-		echo $VERSION > VERSION
-	fi
-	cd ..
-	if test $usesrc -eq 1; then
-		downloadsrc
-	fi
-	touch work/$1.finished
+    cd work
+    rm -rf binaries
+    if test $use32 -eq 1; then
+        osc $oscoptions getbinaries --multibuild-package=$PACKAGENAME32-installer $ROOT32 $PACKAGENAME32 $REPO x86_64
+        VERSION=$(find binaries/ -name "*$PACKAGENAME32-setup*" | sed "s,^.*$PACKAGENAME32-setup-,,g;s,-.*$,,g")
+        echo $VERSION > VERSION
+    fi
+    if test $use64 -eq 1; then
+        osc $oscoptions getbinaries --multibuild-package=$PACKAGENAME64-installer $ROOT64 $PACKAGENAME64 $REPO x86_64
+        VERSION=$(find binaries/ -name "*$PACKAGENAME64-setup*" | sed "s,^.*$PACKAGENAME64-setup-,,g;s,-.*$,,g")
+        echo $VERSION > VERSION
+    fi
+    cd ..
+    if test $usesrc -eq 1; then
+        downloadsrc
+    fi
+    touch work/$1.finished
 }
 
 function getversion() {
-	if ! test -f work/VERSION; then
-		echo "no version found"
-		exit 1;
-	fi
-	VERSION=$(cat work/VERSION)
+    if ! test -f work/VERSION; then
+        echo "no version found"
+        exit 1;
+    fi
+    VERSION=$(cat work/VERSION)
 }
 
 function downloadsrc() {
-	cd work
-	# fetch source package
-	src32pkg=$(osc $oscoptions ls -b -r $SRCREPO -a x86_64 $SRCROOT32 $PACKAGENAME32 | grep src)
-	osc $oscoptions getbinaries --sources $SRCROOT32 $PACKAGENAME32 $SRCREPO x86_64 $src32pkg
-	# we only need once source package
-	#src64pkg=$(osc $oscoptions ls -b -r $SRCREPO -a x86_64 $SRCROOT64 mingw64-umbrello | grep src)
-	#osc $oscoptions getbinaries --sources $SRCROOT64 mingw64-umbrello $SRCREPO x86_64 $src64pkg
-	# fetch debug packages
-	debug32pkg=$(osc $oscoptions ls -b -r $SRCREPO -a x86_64 $SRCROOT32 $PACKAGENAME32 | grep debug)
-	osc $oscoptions getbinaries $SRCROOT32 $PACKAGENAME32 $SRCREPO x86_64 $debug32pkg
-	if test -n "$ROOT64"; then
-	    debug64pkg=$(osc $oscoptions ls -b -r $SRCREPO -a x86_64 $SRCROOT64 $PACKAGENAME64 | grep debug)
-	    osc $oscoptions getbinaries $SRCROOT64 $PACKAGENAME64 $SRCREPO x86_64 $debug64pkg
-	fi
-	cd ..
-	touch $1.finished
+    cd work
+    # fetch source package
+    src32pkg=$(osc $oscoptions ls -b -r $SRCREPO -a x86_64 $SRCROOT32 $PACKAGENAME32 | grep src)
+    osc $oscoptions getbinaries --sources $SRCROOT32 $PACKAGENAME32 $SRCREPO x86_64 $src32pkg
+    # we only need once source package
+    #src64pkg=$(osc $oscoptions ls -b -r $SRCREPO -a x86_64 $SRCROOT64 mingw64-umbrello | grep src)
+    #osc $oscoptions getbinaries --sources $SRCROOT64 mingw64-umbrello $SRCREPO x86_64 $src64pkg
+    # fetch debug packages
+    debug32pkg=$(osc $oscoptions ls -b -r $SRCREPO -a x86_64 $SRCROOT32 $PACKAGENAME32 | grep debug)
+    osc $oscoptions getbinaries $SRCROOT32 $PACKAGENAME32 $SRCREPO x86_64 $debug32pkg
+    if test -n "$ROOT64"; then
+        debug64pkg=$(osc $oscoptions ls -b -r $SRCREPO -a x86_64 $SRCROOT64 $PACKAGENAME64 | grep debug)
+        osc $oscoptions getbinaries $SRCROOT64 $PACKAGENAME64 $SRCREPO x86_64 $debug64pkg
+    fi
+    cd ..
+    touch $1.finished
 }
 
 function unpack()  {
-	getversion
-	cd work
-	files=$(cd binaries; find -name '*setup*' -o -name '*portable*' -o -name '*src*' -o -name '*debugpackage*' | grep "$VERSION" | sed 's,^.,binaries,g')
-	if test -d tmp; then
-		rm -rf tmp
-	fi
-	mkdir -p tmp
-	for i in $(echo $files); do
-		(cd tmp; rpm2cpio ../$i | cpio -idmv)
-	done
-	cd ..
-	touch $1.finished
+    getversion
+    cd work
+    files=$(cd binaries; find -name '*setup*' -o -name '*portable*' -o -name '*src*' -o -name '*debugpackage*' | grep "$VERSION" | sed 's,^.,binaries,g')
+    if test -d tmp; then
+        rm -rf tmp
+    fi
+    mkdir -p tmp
+    for i in $(echo $files); do
+        (cd tmp; rpm2cpio ../$i | cpio -idmv)
+    done
+    cd ..
+    touch $1.finished
 }
 
 function movepackage() {
-	cd work
-	rm -rf out
-	mkdir -p out
-	find tmp/ -type f -name '*.exe' -exec cp {} out \;
-	find tmp/ -type f -name '*.7z' -exec cp {} out \;
-	find tmp/ -type f -name '*.xz' -exec cp {} out \;
-	cd ..
-	touch $1.finished
+    cd work
+    rm -rf out
+    mkdir -p out
+    find tmp/ -type f -name '*.exe' -exec cp {} out \;
+    find tmp/ -type f -name '*.7z' -exec cp {} out \;
+    find tmp/ -type f -name '*.xz' -exec cp {} out \;
+    cd ..
+    touch $1.finished
 }
 
 function repacksource() {
-	# repackage source package
-	srcfile=$(find work/tmp -name "$NAME*.xz")
-	outfile=$(basename $srcfile | sed 's,\.tar\.xz,\.7z,g')
-	(mkdir -p work/srctmp; cd work/srctmp; tar -xJf ../../$srcfile; 7za a ../out/$outfile *; cd ..; rm -rf srctmp)
-	touch work/$1.finished
+    # repackage source package
+    srcfile=$(find work/tmp -name "$NAME*.xz")
+    outfile=$(basename $srcfile | sed 's,\.tar\.xz,\.7z,g')
+    (mkdir -p work/srctmp; cd work/srctmp; tar -xJf ../../$srcfile; 7za a ../out/$outfile *; cd ..; rm -rf srctmp)
+    touch work/$1.finished
 }
 
 function createsha() {
-	(cd work/out; find -type f -name '*.7z' -o -name '*.exe' -o -name '*.xz' | sed 's,\./,,g' | sort | xargs sha256sum > $NAME.sha256sum)
-	touch work/$1.finished
+    (cd work/out; find -type f -name '*.7z' -o -name '*.exe' -o -name '*.xz' | sed 's,\./,,g' | sort | xargs sha256sum > $NAME.sha256sum)
+    touch work/$1.finished
 }
 
 function upload() {
-	for i in $(find work/out -name '*.7z' -o -name '*.exe' -o -name '*.xz'); do
-		$curl -T $i ftp://upload.kde.org/incoming/
-		if test $? -ne 0; then
-			echo "upload failed"
-			exit 1
-		fi
-	done
-	touch work/$1.finished
+    for i in $(find work/out -name '*.7z' -o -name '*.exe' -o -name '*.xz'); do
+        $curl -T $i ftp://upload.kde.org/incoming/
+        if test $? -ne 0; then
+            echo "upload failed"
+            exit 1
+        fi
+    done
+    touch work/$1.finished
 }
 
 function createdescription() {
-	getversion
-	description="Please move the $RELEASE_NAME related files which have been uploaded to upload.kde.org/incoming to download mirror 'stable/$RELEASE_NAME/$VERSION' location"
-	if test $update -eq 1; then
-		description="$description and remove the old files from this directory."
-	elif test $update_symlink -eq 1; then
-		description="$description and update the symbolic link 'stable/$RELEASE_NAME/latest' to 'stable/$RELEASE_NAME/$VERSION'."
-	else
-		description="$description."
-	fi
-	sums=$(cat work/out/$NAME.sha256sum | gawk 'BEGIN { print "dir	 shasum								   file"}  $2 ~ /mingw32/ { print "win32 " $0 } $2 ~ /mingw64/ { print "win64 " $0 } $2 ~ /\-src/ { print "src   " $0 }')
-	echo -e "$description\n\n$sums" > work/description
-	cat work/description
-	touch work/$1.finished
+    getversion
+    description="Please move the $RELEASE_NAME related files which have been uploaded to upload.kde.org/incoming to download mirror 'stable/$RELEASE_NAME/$VERSION' location"
+    if test $update -eq 1; then
+        description="$description and remove the old files from this directory."
+    elif test $update_symlink -eq 1; then
+        description="$description and update the symbolic link 'stable/$RELEASE_NAME/latest' to 'stable/$RELEASE_NAME/$VERSION'."
+    else
+        description="$description."
+    fi
+    sums=$(cat work/out/$NAME.sha256sum | gawk 'BEGIN { print "dir   shasum                                file"}  $2 ~ /mingw32/ { print "win32 " $0 } $2 ~ /mingw64/ { print "win64 " $0 } $2 ~ /\-src/ { print "src   " $0 }')
+    echo -e "$description\n\n$sums" > work/description
+    cat work/description
+    touch work/$1.finished
 }
 
 function ticket() {
-	getversion
-	description=$(cat work/description)
-	$curl $PHABURL/api/maniphest.createtask \
-	-d api.token=$apitoken \
-	-d "title=tarball move request for stable/$RELEASE_NAME/$VERSION" \
-	-d "description=$description" \
-	-d "$options"
-	touch work/$1.finished
+    getversion
+    description=$(cat work/description)
+    $curl $PHABURL/api/maniphest.createtask \
+    -d api.token=$apitoken \
+    -d "title=tarball move request for stable/$RELEASE_NAME/$VERSION" \
+    -d "description=$description" \
+    -d "$options"
+    touch work/$1.finished
 }
 
 function sf() {
-	clean
-	download
-	unpack
-	movepackage
-	if test $usesrc -eq 1; then
-		repacksource
-	fi
-	createsha
-	echo "All release related files are located in work/out"
-	ls work/out
-	touch work/$1.finished
+    clean
+    download
+    unpack
+    movepackage
+    if test $usesrc -eq 1; then
+        repacksource
+    fi
+    createsha
+    echo "All release related files are located in work/out"
+    ls work/out
+    touch work/$1.finished
 }
 
 function kde() {
-	clean
-	download
-	unpack
-	movepackage
-	if test $usesrc -eq 1; then
-		repacksource
-	fi
-	createsha
-	upload
-	echo "Content for ticket creating:"
-	createdescription
-	echo run "$0 ticket" to submit ticket
-	touch work/$1.finished
+    clean
+    download
+    unpack
+    movepackage
+    if test $usesrc -eq 1; then
+        repacksource
+    fi
+    createsha
+    upload
+    echo "Content for ticket creating:"
+    createdescription
+    echo run "$0 ticket" to submit ticket
+    touch work/$1.finished
 }
 
 function help() {
-	echo "syntax: release-windows-packages [<options>] <mode>"
-	echo
-	echo "options:"
-	gawk '$0 ~ /^--[a-z].*) ##/ { sub(/) ##/,"",$0); a = $1; $1 = ""; printf("    %-20s  - %s\n",a, $0); }' $0
-	echo
-	echo "modes:"
-	gawk '$0 ~ /^[a-z].*) ##/ { sub(/) ##/,"",$0); a = $1; $1 = ""; printf("    %-20s  - %s\n",a, $0); }' $0
+    echo "syntax: release-windows-packages [<options>] <mode>"
+    echo
+    echo "options:"
+    gawk '$0 ~ /^--[a-z].*) ##/ { sub(/) ##/,"",$0); a = $1; $1 = ""; printf("    %-20s  - %s\n",a, $0); }' $0
+    echo
+    echo "modes:"
+    gawk '$0 ~ /^[a-z].*) ##/ { sub(/) ##/,"",$0); a = $1; $1 = ""; printf("    %-20s  - %s\n",a, $0); }' $0
 
 }
 
 case $1 in
 clean) ## clean working area
-	clean;
-	;;
+    clean;
+    ;;
 
 download) ## download rpm packages
-	download
-	;;
+    download
+    ;;
 
 downloadsrc) ## download source
-	downloadsrc
-	;;
+    downloadsrc
+    ;;
 
 unpack) ## unpack rpm files
-	unpack
-	;;
+    unpack
+    ;;
 
 movepackage) ## move windows binary packages into upload folder
-	movepackage
-	;;
+    movepackage
+    ;;
 
 repacksource) ## repackage source tar ball to 7z
-	repacksource
-	;;
+    repacksource
+    ;;
 
 createsha) ## create sha256sums
-	createsha
-	;;
+    createsha
+    ;;
 
 upload) ## upload files to staging area
-	upload
-	;;
+    upload
+    ;;
 
 createdescription) ## create ticket description
-	createdescription
-	;;
+    createdescription
+    ;;
 
 ticket) ## submit phabricator ticket
-	ticket
-	;;
+    ticket
+    ;;
 
 sf) ## run all required targets for releasing on sourceforge
-	sf
-	;;
+    sf
+    ;;
 
 kde) ## run all required targets for releasing on download.kde.org
-	kde
-	;;
+    kde
+    ;;
 *)
-	help
-	;;
+    help
+    ;;
 esac
 
 exit 0
