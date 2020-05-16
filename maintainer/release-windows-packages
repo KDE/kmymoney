@@ -16,14 +16,15 @@ NAME=kmymoney
 # package name on download.kde.org
 RELEASE_NAME=$NAME
 
+ROOT=home:rhabacker:branches:
 PACKAGENAME32=mingw32-$NAME
-ROOT32=windows\:mingw\:win32
+ROOT32=${ROOT}windows\:mingw\:win32
 SRCROOT32=${ROOT32}
 ARCHOUT32=i686-w64-mingw32
 use32=1
 
 PACKAGENAME64=mingw64-$NAME
-ROOT64=windows\:mingw\:win64
+ROOT64=${ROOT}windows\:mingw\:win64
 SRCROOT64=${ROOT64}
 ARCHOUT64=x86_64-w64-mingw32
 use64=1
@@ -32,8 +33,15 @@ REPO=openSUSE_Leap_42.3
 SRCREPO=$REPO
 usesrc=0
 
-PHABURL=https://phabricator.kde.org
+# osc
 oscoptions="-A https://api.opensuse.org"
+osc="/usr/bin/osc $oscoptions"
+
+# releaseme
+releaseme_dir=~/src/releaseme
+
+# phabricator
+PHABURL=https://phabricator.kde.org
 apitoken=cli-uxo23l4q5qrzoyscbz5kp4zcngqp
 options='projectPHIDs[]=PHID-PROJ-3qa4tomwgrmcmp4ym2ow'
 
@@ -77,6 +85,11 @@ case $var in
     shift
     ;;
 
+--update) ## update already installed release
+    update=1
+    shift
+    ;;
+
 --symlink) ## update 'latest' symbolic link
     update_symlink=1
     shift
@@ -87,23 +100,92 @@ case $var in
     curl="echo curl"
     shift
     ;;
+
+--version) ## set package version
+    shift
+    version=$1
+    shift
+    echo $version > work/VERSION
+    ;;
+
+--tarversion) ## set tarball version used by update-package
+    shift
+    tarversion=$1
+    shift
+    echo $tarversion > work/TARVERSION
+    ;;
 esac
 done
 
+function build_tarball() {
+    check_releaseme
+    tarversion
+    (cd $releaseme_dir; ./$RELEASE_NAME.rb --version $TARVERSION)
+}
+
+function check_releaseme() {
+    if ! [ -d "$releaseme_dir" ]; then
+        echo "error: releaseme is not installed"
+        exit 1
+    fi
+}
+
 function clean() {
     rm -rf work/*
+}
+
+function update_package() {
+    check_releaseme
+    local arch=$1
+    local rootname=ROOT$arch
+    local pkgname=PACKAGENAME$arch
+    local pkg=${!rootname}/${!pkgname}
+    getversion
+    tarversion
+    local fn="$RELEASE_NAME-$TARVERSION.tar.xz"
+    p=$PWD
+    cd work
+    if test -d $pkg; then
+        cd $pkg
+        $osc revert
+        $osc update
+    else
+        $osc co $pkg
+        cd $pkg
+    fi
+
+    # update _service if present
+    if [ -f _service ]; then
+        local pattern="<param name=\"version\">@VERSION@</param>"
+        local i=$(echo $pattern | sed 's,@VERSION@,.*,g')
+        local o=$(echo $pattern | sed "s,@VERSION@,$VERSION,g")
+        local v=$(grep "$o" _service)
+        if [ -z "$v" ]; then
+            sed -i "s,$i,$o,g" _service
+        fi
+    fi
+
+    # update tarball
+    local f=$(find -maxdepth 1 -name $fn)
+    if [ -z "$f" ]; then
+        $osc rm $RELEASE_NAME-*.tar.xz || true
+        cp $releaseme_dir/$fn .
+        $osc add $fn
+    fi
+    $osc ci -m "update to $VERSION"
+    cd $p
 }
 
 function download() {
     cd work
     rm -rf binaries
     if test $use32 -eq 1; then
-        osc $oscoptions getbinaries --multibuild-package=$PACKAGENAME32-installer $ROOT32 $PACKAGENAME32 $REPO x86_64
+        $osc getbinaries --multibuild-package=$PACKAGENAME32-installer $ROOT32 $PACKAGENAME32 $REPO x86_64
         VERSION=$(find binaries/ -name "*$PACKAGENAME32-setup*" | sed "s,^.*$PACKAGENAME32-setup-,,g;s,-.*$,,g")
         echo $VERSION > VERSION
     fi
     if test $use64 -eq 1; then
-        osc $oscoptions getbinaries --multibuild-package=$PACKAGENAME64-installer $ROOT64 $PACKAGENAME64 $REPO x86_64
+        $osc getbinaries --multibuild-package=$PACKAGENAME64-installer $ROOT64 $PACKAGENAME64 $REPO x86_64
         VERSION=$(find binaries/ -name "*$PACKAGENAME64-setup*" | sed "s,^.*$PACKAGENAME64-setup-,,g;s,-.*$,,g")
         echo $VERSION > VERSION
     fi
@@ -122,20 +204,28 @@ function getversion() {
     VERSION=$(cat work/VERSION)
 }
 
+function tarversion() {
+    TARVERSION=$(cat work/TARVERSION)
+    if [ -z $TARVERSION ]; then
+        getversion
+        TARVERSION=$VERSION
+    fi
+}
+
 function downloadsrc() {
     cd work
     # fetch source package
-    src32pkg=$(osc $oscoptions ls -b -r $SRCREPO -a x86_64 $SRCROOT32 $PACKAGENAME32 | grep src)
-    osc $oscoptions getbinaries --sources $SRCROOT32 $PACKAGENAME32 $SRCREPO x86_64 $src32pkg
+    src32pkg=$($osc ls -b -r $SRCREPO -a x86_64 $SRCROOT32 $PACKAGENAME32 | grep src)
+    $osc getbinaries --sources $SRCROOT32 $PACKAGENAME32 $SRCREPO x86_64 $src32pkg
     # we only need once source package
-    #src64pkg=$(osc $oscoptions ls -b -r $SRCREPO -a x86_64 $SRCROOT64 mingw64-umbrello | grep src)
-    #osc $oscoptions getbinaries --sources $SRCROOT64 mingw64-umbrello $SRCREPO x86_64 $src64pkg
+    #src64pkg=$($osc ls -b -r $SRCREPO -a x86_64 $SRCROOT64 mingw64-umbrello | grep src)
+    #$osc getbinaries --sources $SRCROOT64 mingw64-umbrello $SRCREPO x86_64 $src64pkg
     # fetch debug packages
-    debug32pkg=$(osc $oscoptions ls -b -r $SRCREPO -a x86_64 $SRCROOT32 $PACKAGENAME32 | grep debug)
-    osc $oscoptions getbinaries $SRCROOT32 $PACKAGENAME32 $SRCREPO x86_64 $debug32pkg
+    debug32pkg=$($osc ls -b -r $SRCREPO -a x86_64 $SRCROOT32 $PACKAGENAME32 | grep debug)
+    $osc getbinaries $SRCROOT32 $PACKAGENAME32 $SRCREPO x86_64 $debug32pkg
     if test -n "$ROOT64"; then
-        debug64pkg=$(osc $oscoptions ls -b -r $SRCREPO -a x86_64 $SRCROOT64 $PACKAGENAME64 | grep debug)
-        osc $oscoptions getbinaries $SRCROOT64 $PACKAGENAME64 $SRCREPO x86_64 $debug64pkg
+        debug64pkg=$($osc ls -b -r $SRCREPO -a x86_64 $SRCROOT64 $PACKAGENAME64 | grep debug)
+        $osc getbinaries $SRCROOT64 $PACKAGENAME64 $SRCREPO x86_64 $debug64pkg
     fi
     cd ..
     touch $1.finished
@@ -260,6 +350,10 @@ function help() {
 }
 
 case $1 in
+build-tarball) ## build tarball
+    build_tarball
+    ;;
+
 clean) ## clean working area
     clean;
     ;;
@@ -307,6 +401,16 @@ sf) ## run all required targets for releasing on sourceforge
 kde) ## run all required targets for releasing on download.kde.org
     kde
     ;;
+
+update-package) ## update obs package to requested version
+    if [ $use32 -ne 0 ]; then
+        update_package 32
+    fi
+    if [ $use64 -ne 0 ]; then
+        update_package 64
+    fi
+    ;;
+
 *)
     help
     ;;
