@@ -1755,13 +1755,14 @@ void KMyMoneyApp::initIcons()
   }
 
 #if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
-  QString themeName = QLatin1Literal("system");                       // using QIcon::setThemeName on Craft build system causes icons to disappear
+  auto themeName = QStringLiteral("breeze");                      // only breeze is available for craft packages
 #else
-  QString themeName = KMyMoneySettings::iconsTheme();                 // get theme user wants
-#endif
-  if (!themeName.isEmpty() && themeName != QLatin1Literal("system"))  // if it isn't default theme then set it
+  auto themeName = KMyMoneySettings::iconsTheme();                    // get theme user wants
+  if (!themeName.isEmpty() && themeName != QStringLiteral("system"))  // if it isn't default theme then set it
     QIcon::setThemeName(themeName);
-  setIconThemeNames(QIcon::themeName());                       // get whatever theme user ends up with and hope our icon names will fit that theme
+#endif
+
+  setUpMappings(themeName);
 }
 
 void KMyMoneyApp::saveOptions()
