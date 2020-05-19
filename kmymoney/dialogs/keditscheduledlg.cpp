@@ -663,6 +663,7 @@ void KEditScheduleDlg::slotPostDateChanged(const QDate& date)
   if (d->m_schedule.nextDueDate() != date) {
     if (d->ui->m_endOptionsFrame->isEnabled()) {
       d->m_schedule.setNextDueDate(date);
+      d->m_schedule.setStartDate(date);
       d->m_schedule.setOccurrenceMultiplier(d->ui->m_frequencyNoEdit->value());
       d->m_schedule.setOccurrencePeriod(static_cast<Schedule::Occurrence>(d->ui->m_frequencyEdit->currentItem()));
       d->m_schedule.setEndDate(d->ui->m_FinalPaymentEdit->date());
