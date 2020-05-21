@@ -255,7 +255,7 @@ QPixmap MyMoneyInstitution::pixmap(const int size)
 {
   QPixmap pxIcon;
   auto kyIcon = QString::fromLatin1("view_institution%1").arg(QString::number(size));
-  if (!QPixmapCache::find(kyIcon, pxIcon)) {
+  if (!QPixmapCache::find(kyIcon, &pxIcon)) {
     pxIcon = Icons::get(Icon::ViewInstitutions).pixmap(size);
     QPixmapCache::insert(kyIcon, pxIcon);
   }
