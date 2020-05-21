@@ -269,7 +269,8 @@ bool MyMoneyStorageSql::readFile()
     if (d->m_loadAll) {
       d->readTransactions();
     } else {
-      if (d->m_preferred.filterSet().singleFilter.accountFilter) readTransactions(d->m_preferred);
+      if (d->m_preferred.filterSet().testFlag(MyMoneyTransactionFilter::accountFilterActive))
+        readTransactions(d->m_preferred);
     }
     d->readSchedules();
     d->readPrices();
@@ -1956,8 +1957,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
     d->alert("text filter set");
     canImplementFilter = false;
   }
-  MyMoneyTransactionFilter::FilterSet s = filter.filterSet();
-  if (s.singleFilter.validityFilter) {
+  if (filter.filterSet().testFlag(MyMoneyTransactionFilter::validityFilterActive)) {
     d->alert("Validity filter set");
     canImplementFilter = false;
   }
