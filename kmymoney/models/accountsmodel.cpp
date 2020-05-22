@@ -1,6 +1,7 @@
 /*
  * Copyright 2010-2014  Cristian Oneț <onet.cristian@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Robert Szczesiak <dev.rszczesiak@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -83,14 +84,14 @@ public:
       return;
 
     auto favRow = toNode->rowCount();
-    if (auto favItem = itemFromAccountId(toNode, acc.id()))
-      favRow = favItem->row();
-
-    for (auto i = 0; i < fromNode->columnCount(); ++i) {
-      auto itemToClone = fromNode->child(row, i);
-      if (itemToClone)
-        toNode->setChild(favRow, i, itemToClone->clone());
+    if (auto favItem = itemFromAccountId(toNode, acc.id())) {
+        favRow = favItem->row();
+        toNode->removeRow(favRow);
     }
+
+    auto itemToClone = fromNode->child(row);
+    if (itemToClone)
+        toNode->insertRow(favRow, itemToClone->clone());
   }
 
   /**
