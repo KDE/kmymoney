@@ -434,7 +434,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="m_hiearchyTab">
+     <widget class="QWidget" name="m_hierarchyTab">
       <attribute name="title">
        <string>Hierarchy</string>
       </attribute>
