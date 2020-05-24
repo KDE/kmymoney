@@ -61,22 +61,20 @@ protected:
   MyMoneyTransactionFilterPrivate* d_ptr;  // name shouldn't colide with the one in mymoneyreport.h
 
 public:
-  typedef union {
-    unsigned  allFilter;
-    struct {
-      unsigned textFilter       : 1;
-      unsigned accountFilter    : 1;
-      unsigned payeeFilter      : 1;
-      unsigned tagFilter        : 1;
-      unsigned categoryFilter   : 1;
-      unsigned nrFilter         : 1;
-      unsigned dateFilter       : 1;
-      unsigned amountFilter     : 1;
-      unsigned typeFilter       : 1;
-      unsigned stateFilter      : 1;
-      unsigned validityFilter   : 1;
-    } singleFilter;
-  } FilterSet;
+  enum FilterFlags {
+    textFilterActive     = 0x0001,
+    accountFilterActive  = 0x0002,
+    payeeFilterActive    = 0x0004,
+    tagFilterActive      = 0x0008,
+    categoryFilterActive = 0x0010,
+    nrFilterActive       = 0x0020,
+    dateFilterActive     = 0x0040,
+    amountFilterActive   = 0x0080,
+    typeFilterActive     = 0x0100,
+    stateFilterActive    = 0x0200,
+    validityFilterActive = 0x0400
+  };
+  Q_DECLARE_FLAGS(FilterSet, FilterFlags)
 
   /**
     * This is the standard constructor for a transaction filter.
@@ -600,5 +598,6 @@ inline MyMoneyTransactionFilter & MyMoneyTransactionFilter::operator=(MyMoneyTra
   * Make it possible to hold @ref MyMoneyTransactionFilter objects inside @ref QVariant objects.
   */
 Q_DECLARE_METATYPE(MyMoneyTransactionFilter)
+Q_DECLARE_OPERATORS_FOR_FLAGS(MyMoneyTransactionFilter::FilterSet)
 
 #endif
