@@ -2846,7 +2846,7 @@ QList<MyMoneySecurity> MyMoneyFile::availableCurrencyList() const
   currencyList.append(MyMoneySecurity("SBD", i18n("Solomon Islands Dollar"), "$"));
   currencyList.append(MyMoneySecurity("SOS", i18n("Somali Shilling")));
   currencyList.append(MyMoneySecurity("ZAR", i18n("South African Rand")));
-  currencyList.append(MyMoneySecurity("KRW", i18n("South Korean Won"),       QChar(0x20A9)));
+  currencyList.append(MyMoneySecurity("KRW", i18n("South Korean Won"),       QChar(0x20A9), 1));
   currencyList.append(MyMoneySecurity("LKR", i18n("Sri Lanka Rupee")));
   currencyList.append(MyMoneySecurity("SHP", i18n("St. Helena Pound"),       QChar(0x00A3)));
   currencyList.append(MyMoneySecurity("SDD", i18n("Sudanese Dinar")));
