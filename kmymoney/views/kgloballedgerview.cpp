@@ -1959,10 +1959,12 @@ void KGlobalLedgerView::slotStartReconciliation()
   Q_D(KGlobalLedgerView);
 
   // we cannot reconcile standard accounts
-  if (!MyMoneyFile::instance()->isStandardAccount(d->m_currentAccount.id()))
+  if (!MyMoneyFile::instance()->isStandardAccount(d->m_currentAccount.id())) {
+    emit selectByObject(d->m_currentAccount, eView::Intent::SynchronizeAccountInLedgersView);
     emit selectByObject(d->m_currentAccount, eView::Intent::StartEnteringOverdueScheduledTransactions);
-  // asynchronous call to KScheduledView::slotEnterOverdueSchedules is made here
-  // after that all activity should be continued in KGlobalLedgerView::slotContinueReconciliation()
+    // asynchronous call to KScheduledView::slotEnterOverdueSchedules is made here
+    // after that all activity should be continued in KGlobalLedgerView::slotContinueReconciliation()
+  }
 }
 
 void KGlobalLedgerView::slotFinishReconciliation()

@@ -27,6 +27,8 @@
 #include <QFile>
 #include <QTemporaryFile>
 #include <QFileDialog>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -350,7 +352,21 @@ bool XMLStorage::saveAs()
                     QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.xml")).arg(i18nc("XML (Filefilter)", "XML files")) +
                     QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*")).arg(i18nc("All files (Filefilter)", "All files")));
   dlg->setAcceptMode(QFileDialog::AcceptSave);
-  connect(dlg, &QFileDialog::filterSelected, this, [&](const QString txt) { dlg->setDefaultSuffix(txt.mid(2)); });
+  connect(dlg, &QFileDialog::filterSelected, this, [&](const QString txt) {
+    // for some reason, txt sometimes contains the filter expression only
+    // e.g. "*.xml" and in some others it contains the full text with
+    // the filter expression appended in parenthesis e.g.
+    // "KMyMoney files (*.xml)". The following logic extracts the
+    // filter and sets the default suffix based on it.
+    QRegularExpression filter(QStringLiteral("\\*\\.(?<extension>[a-z\\.]+)"));
+    const auto match = filter.match(txt);
+    if (match.hasMatch()) {
+      dlg->setDefaultSuffix(match.captured(QStringLiteral("extension")));
+    } else {
+      dlg->setDefaultSuffix(QString());
+    }
+
+  });
 
   if (dlg->exec() == QDialog::Accepted && dlg != 0) {
     QUrl newURL = dlg->selectedUrls().first();

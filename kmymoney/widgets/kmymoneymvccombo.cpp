@@ -3,6 +3,7 @@
  * Copyright 2010-2016  Cristian Oneț <onet.cristian@gmail.com>
  * Copyright 2010       Alvaro Soliverez <asoliverez@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Robert Szczesiak <dev.rszczesiak@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -206,7 +207,7 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
     return;
   }
 
-  //check if the focus went to a widget in TransactionFrom or in the Register
+  //check if the focus went to a widget in TransactionFrom, in the Register, or on a WizardPage
   if (e->reason() == Qt::MouseFocusReason) {
     QObject *w = this->parent();
     QObject *q = qApp->focusWidget()->parent();
@@ -215,7 +216,7 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
       w = w->parent();
     while (q && q->objectName() != "qt_scrollarea_viewport")
       q = q->parent();
-    if (q != w && qApp->focusWidget()->objectName() != "register") {
+    if (q != w && qApp->focusWidget()->parent() != w && qApp->focusWidget()->objectName() != "register") {
       KComboBox::focusOutEvent(e);
       return;
     }
@@ -270,20 +271,21 @@ void KMyMoneyMVCCombo::focusOutEvent(QFocusEvent* e)
 void KMyMoneyMVCCombo::checkCurrentText()
 {
   Q_D(KMyMoneyMVCCombo);
-  if (!contains(currentText())) {
+  const auto payeeName = currentText();
+  if (!contains(payeeName)) {
     QString id;
     // annouce that we go into a possible dialog to create an object
     // This can be used by upstream widgets to disable filters etc.
     emit objectCreation(true);
 
-    emit createItem(currentText(), id);
+    emit createItem(payeeName, id);
 
     // Announce that we return from object creation
     emit objectCreation(false);
 
     // update the field to a possibly created object
     d->m_id = id;
-    addEntry(currentText(), id);
+    addEntry(payeeName, id);
     setCurrentTextById(id);
   }
 }
@@ -299,7 +301,7 @@ void KMyMoneyMVCCombo::addEntry(const QString& newTxt, const QString& id)
       }
     }
     // and insert the new item
-    insertItem(idx - 1, QIcon(), currentText(), id);
+    insertItem(idx - 1, QIcon(), newTxt, id);
 }
 
 void KMyMoneyMVCCombo::setCurrentTextById(const QString& id)
