@@ -2,6 +2,7 @@
  * Copyright 2002-2003  Michael Edwardes <mte@users.sourceforge.net>
  * Copyright 2005-2018  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Robert Szczesiak <dev.rszczesiak@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -82,11 +83,11 @@ QModelIndex HierarchyFilterProxyModel::getSelectedParentAccountIndex() const
   */
 bool HierarchyFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
-  if (!source_parent.isValid()) {
-    const auto data = sourceModel()->index(source_row, (int)eAccountsModel::Column::Account, source_parent).data((int)eAccountsModel::Role::ID);
-    if (data.isValid() && data.toString() == AccountsModel::favoritesAccountId)
-      return false;
-  }
+  const auto index = sourceModel()->index(source_row, (int)eAccountsModel::Column::Account, source_parent);
+  const auto data = source_parent.isValid() ? index.parent().data((int)eAccountsModel::Role::ID)
+                                            : index.data((int)eAccountsModel::Role::ID);
+  if (data.isValid() && data.toString() == AccountsModel::favoritesAccountId)
+    return false;
   return AccountsProxyModel::filterAcceptsRow(source_row, source_parent);
 }
 
