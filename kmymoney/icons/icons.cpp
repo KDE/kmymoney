@@ -361,6 +361,8 @@ namespace Icons {
        {{IconSet::Common, QStringLiteral("view-calendar-upcoming-events")}}},
       {Icon::ZoomIn, {{IconSet::Common, QStringLiteral("zoom-in")}}},
       {Icon::ZoomOut, {{IconSet::Common, QStringLiteral("zoom-out")}}},
+      {Icon::Visibility, {{IconSet::Common, QStringLiteral("visibility")}}},
+      {Icon::NoVisibility, {{IconSet::Common, QStringLiteral("hint")}}}
   };
 
   const QHash<Icon, iconDescription> sComposedIcons {
