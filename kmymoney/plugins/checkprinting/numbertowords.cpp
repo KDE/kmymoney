@@ -89,6 +89,14 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money, signed
   int integer = static_cast<int>(money.toDouble()); // retain the integer part
   int fraction = qRound((money.toDouble() - integer) * denom);
 
+  // Enable scripting of converting numbers to words by translators
+  // If this is untranslated, then use the internal logic
+  QString filterString = i18nc("Translate this string into \"custom\" if the construction of numerals are different from English.", "english");
+  if (filterString == QStringLiteral("custom")) {
+    QString customString = i18nc("@item Can be used to script translation of numerals. Leave untranslated when not needed. %1 = integer, %2 = fraction, %3 = denominator", "%1 %2 %3", integer, fraction, denom);
+    return customString;
+  }
+
   // Extract the three-digit groups
   for (int i = 0; i < 4; i++) {
     digitGroups.push_back(integer % 1000);
