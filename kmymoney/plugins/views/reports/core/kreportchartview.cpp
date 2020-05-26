@@ -593,7 +593,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   dataValueAttr.setDecimalDigits(config.yLabelsPrecision());
   dataValueAttr.setVisible(config.isChartDataLabels());
   planeDiagram->setDataValueAttributes(dataValueAttr);
-  planeDiagram->setAllowOverlappingDataValueTexts(true);
+  planeDiagram->setAllowOverlappingDataValueTexts(false);
 
   m_model.blockSignals(blocked); // reenable dataChanged() signal
 
