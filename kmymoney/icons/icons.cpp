@@ -377,7 +377,6 @@ namespace Icons {
     {Icon::AccountDelete,               {Icon::ViewBankAccount,          Icon::EditDelete,     Qt::BottomRightCorner}},
     {Icon::AccountClose,                {Icon::ViewBankAccount,          Icon::DialogClose,    Qt::BottomRightCorner}},
     {Icon::AccountReopen,               {Icon::ViewBankAccount,          Icon::DialogOK,       Qt::BottomRightCorner}},
-    {Icon::AccountUpdateMenu,           {Icon::ViewBankAccount,          Icon::Download,       Qt::BottomRightCorner}},
     {Icon::AccountUpdate,               {Icon::ViewBankAccount,          Icon::Download,       Qt::BottomRightCorner}},
     {Icon::AccountUpdateAll,            {Icon::ViewBankAccount,          Icon::Download,       Qt::BottomRightCorner}},
     {Icon::AccountCreditTransfer,       {Icon::ViewBankAccount,          Icon::MailMessageNew, Qt::BottomRightCorner}},
