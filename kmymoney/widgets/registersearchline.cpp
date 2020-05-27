@@ -86,7 +86,7 @@ RegisterSearchLine::RegisterSearchLine(QWidget* parent, Register* reg) :
   d->combo->insertItem((int)eRegister::ItemState::Imported, Icons::get(Icon::DocumentImport), i18n("Imported"));
   d->combo->insertItem((int)eRegister::ItemState::Matched, Icons::get(Icon::TransactionMatch), i18n("Matched"));
   d->combo->insertItem((int)eRegister::ItemState::Erroneous, Icons::get(Icon::Warning), i18n("Erroneous"));
-  d->combo->insertItem((int)eRegister::ItemState::Scheduled, Icons::get(Icon::ViewSchedules), i18n("Scheduled"));
+  d->combo->insertItem((int)eRegister::ItemState::Scheduled, Icons::get(Icon::Schedule), i18n("Scheduled"));
   d->combo->insertItem((int)eRegister::ItemState::NotMarked, i18n("Not marked"));
   d->combo->insertItem((int)eRegister::ItemState::NotReconciled, i18n("Not reconciled"));
   d->combo->insertItem((int)eRegister::ItemState::Cleared, i18nc("Reconciliation state 'Cleared'", "Cleared"));

@@ -167,7 +167,7 @@ KMyMoneyDateInput::KMyMoneyDateInput(QWidget *parent, Qt::AlignmentFlag flags)
   d->m_datePicker->setCloseButton(true);
 
   // the next line is a try to add an icon to the button
-  d->m_dateButton = new QPushButton(Icons::get(Icon::ViewCalendarDay), QString(), this);
+  d->m_dateButton = new QPushButton(Icons::get(Icon::CalendarDay), QString(), this);
   dateInputLayout->addWidget(d->m_dateButton);
 
   connect(d->m_dateButton, &QAbstractButton::clicked, this, &KMyMoneyDateInput::toggleDatePicker);

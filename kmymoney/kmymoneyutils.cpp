@@ -119,7 +119,7 @@ KGuiItem KMyMoneyUtils::scheduleNewGuiItem()
 KGuiItem KMyMoneyUtils::accountsFilterGuiItem()
 {
   KGuiItem splitGuiItem(i18n("&Filter"),
-                        Icons::get(Icon::ViewFilter),
+                        Icons::get(Icon::Filter),
                         i18n("Filter out accounts"),
                         i18n("Use this to filter out accounts"));
 

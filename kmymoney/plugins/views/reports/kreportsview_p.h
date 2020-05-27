@@ -431,7 +431,7 @@ void KReportTab::toggleChart()
 
     m_control->ui->buttonChart->setText(i18n("Report"));
     m_control->ui->buttonChart->setToolTip(i18n("Show the report version of this chart"));
-    m_control->ui->buttonChart->setIcon(Icons::get(Icon::ViewFinancialList));
+    m_control->ui->buttonChart->setIcon(Icons::get(Icon::Ledger));
   }
   m_showingChart = ! m_showingChart;
 }

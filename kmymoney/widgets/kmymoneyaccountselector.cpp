@@ -357,7 +357,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
   //get the account icon from cache or insert it if it is not there
   QPixmap accountPixmap;
   if (!QPixmapCache::find("account", accountPixmap)) {
-    QIcon icon = Icons::get(Icon::ViewBankAccount);
+    QIcon icon = Icons::get(Icon::BankAccount);
     if (!icon.availableSizes().isEmpty())
       accountPixmap = icon.pixmap(icon.availableSizes().first());
     QPixmapCache::insert("account", accountPixmap);
