@@ -100,7 +100,8 @@ enum class Icon { OpenDatabase, Merge, Reconcile, Split, Tip, PerformanceTest,
                   InvestmentNew, InvestmentEdit,
                   InvestmentDelete, InvestmentOnlinePrice,
                   BudgetNew, BudgetRename, BudgetDelete, BudgetCopy,
-                  PriceUpdate, InvestmentOnlinePriceAll, Reverse, Visibility, NoVisibility
+                  PriceUpdate, InvestmentOnlinePriceAll, Reverse, Visibility, NoVisibility,
+                  SelectAll
                 };
 
 KMM_ICONS_EXPORT void setUpMappings(const QString & themeName);
