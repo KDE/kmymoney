@@ -362,7 +362,8 @@ namespace Icons {
       {Icon::ZoomIn, {{IconSet::Common, QStringLiteral("zoom-in")}}},
       {Icon::ZoomOut, {{IconSet::Common, QStringLiteral("zoom-out")}}},
       {Icon::Visibility, {{IconSet::Common, QStringLiteral("visibility")}}},
-      {Icon::NoVisibility, {{IconSet::Common, QStringLiteral("hint")}}}
+      {Icon::NoVisibility, {{IconSet::Common, QStringLiteral("hint")}}},
+      {Icon::SelectAll, {{IconSet::Common, QStringLiteral("edit-select-all")}}}
   };
 
   const QHash<Icon, iconDescription> sComposedIcons {
