@@ -164,7 +164,7 @@ namespace Icons {
         {IconSet::Oxygen, QStringLiteral("office-chart-line")},
         {IconSet::Breeze, QStringLiteral("office-chart-line")},
         {IconSet::Tango, QStringLiteral("report-line")}}},
-      {Icon::OpenDatabase, {{IconSet::Common, QStringLiteral("svn-update")}}},
+      {Icon::OpenDatabase, {{IconSet::Common, QStringLiteral("server-database")}}},
       {Icon::Pause,
        {{IconSet::Common, QStringLiteral("media-playback-pause")}}},
       {Icon::PayeeMerge, {{IconSet::Common, QStringLiteral("merge")}}},
