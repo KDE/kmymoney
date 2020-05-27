@@ -113,7 +113,7 @@ namespace Icons {
       {Icon::EditClear, {{IconSet::Common, QStringLiteral("edit-clear")}}},
       {Icon::EditCopy, {{IconSet::Common, QStringLiteral("edit-copy")}}},
       {Icon::EditDelete, {{IconSet::Common, QStringLiteral("edit-delete")}}},
-      {Icon::EditFind, {{IconSet::Common, QStringLiteral("edit-find")}}},
+      {Icon::Find, {{IconSet::Common, QStringLiteral("edit-find")}}},
       {Icon::EditRename,
        {{IconSet::Common, QStringLiteral("edit-rename")},
         {IconSet::Tango, QStringLiteral("text-editor")}}},
@@ -362,7 +362,6 @@ namespace Icons {
   };
 
   const QHash<Icon, iconDescription> sComposedIcons {
-    {Icon::EditFindTransaction,         {Icon::Transaction, Icon::EditFind, Qt::BottomRightCorner}},
     {Icon::InstitutionNew,              {Icon::Bank, Icon::ListAdd, Qt::BottomRightCorner}},
     {Icon::InstitutionEdit,             {Icon::Bank, Icon::DocumentEdit, Qt::BottomRightCorner}},
     {Icon::InstitutionDelete,           {Icon::Bank, Icon::EditDelete, Qt::BottomRightCorner}},

@@ -1393,7 +1393,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       // *************
       // The Edit menu
       // *************
-      {Action::EditFindTransaction,           QStringLiteral("edit_find_transaction"),          i18n("Find transaction..."),                        Icon::EditFindTransaction},
+      {Action::EditFindTransaction,           QStringLiteral("edit_find_transaction"),          i18n("Find transaction..."),                        Icon::Find},
       // *************
       // The View menu
       // *************
