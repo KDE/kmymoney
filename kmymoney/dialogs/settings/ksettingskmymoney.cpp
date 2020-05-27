@@ -51,9 +51,9 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
   const auto pluginsPage = new KSettingsPlugins();
 
   addPage(generalPage, i18nc("General settings", "General"), Icons::get(Icon::PreferencesGeneral).name());
-  addPage(homePage, i18n("Home"), Icons::get(Icon::ViewHome).name());
-  addPage(registerPage, i18nc("Ledger view settings", "Ledger"), Icons::get(Icon::ViewFinancialList).name());
-  addPage(schedulesPage, QString(i18n("Scheduled\ntransactions")).replace(QLatin1Char('\n'), QString::fromUtf8("\xe2\x80\xa8")), Icons::get(Icon::ViewSchedules).name());
+  addPage(homePage, i18n("Home"), Icons::get(Icon::Home).name());
+  addPage(registerPage, i18nc("Ledger view settings", "Ledger"), Icons::get(Icon::Ledger).name());
+  addPage(schedulesPage, QString(i18n("Scheduled\ntransactions")).replace(QLatin1Char('\n'), QString::fromUtf8("\xe2\x80\xa8")), Icons::get(Icon::Schedule).name());
   addPage(onlineQuotesPage, i18n("Online Quotes"), Icons::get(Icon::PreferencesNetwork).name());
   addPage(colorsPage, i18n("Colors"), Icons::get(Icon::PreferencesColors).name());
   addPage(fontsPage, i18n("Fonts"), Icons::get(Icon::PreferencesFonts).name());
