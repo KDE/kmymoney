@@ -166,10 +166,8 @@ bool BudgetViewProxyModel::filterAcceptsRow(int source_row, const QModelIndex &s
   const auto accountData = sourceModel()->data(index, (int)Role::Account);
   if (accountData.canConvert<MyMoneyAccount>()) {
     const auto account = accountData.value<MyMoneyAccount>();
-    if (!index.parent().isValid()) {
-      if (!account.isIncomeExpense()) {
-        return false;
-      }
+    if (!account.isIncomeExpense()) {
+      return false;
     }
     if (hideUnusedIncomeExpenseAccounts()) {
       MyMoneyMoney balance;
