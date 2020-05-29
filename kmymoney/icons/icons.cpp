@@ -3,6 +3,7 @@
                              -------------------
     begin                : Sun Jun 25 2017
     copyright            : (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2020 by Dawid Wróbel <me@dawidwrobel.com>
 
 ***************************************************************************/
 
@@ -171,7 +172,9 @@ namespace Icons {
       {Icon::PayeeRename,
        {{IconSet::Common, QStringLiteral("user-properties")},
         {IconSet::Oxygen, QStringLiteral("payee-rename")}}},
-      {Icon::PerformanceTest, {{IconSet::Common, QStringLiteral("fork")}}},
+      {Icon::PerformanceTest,
+       {{IconSet::Common, QStringLiteral("fork")},
+        {IconSet::Breeze, QStringLiteral("speedometer")}}},
       {Icon::PreferencesColors,
        {{IconSet::Common, QStringLiteral("preferences-desktop-color")}}},
       {Icon::PreferencesFonts,
