@@ -3,25 +3,32 @@
 <chapterinfo>
   <authorgroup>
     <author>&Cristian.Onet; &Cristian.Onet.mail;</author>
+    <author>&Michael.Carpino; &Michael.Carpino.mail;</author>
   </authorgroup>
-  <date>2014-08-30</date>
-  <releaseinfo>4.7.01</releaseinfo>
+  <date>2020-02-06</date>
+  <releaseinfo>5.0.8</releaseinfo>
 </chapterinfo>
 
 <title>Tags</title>
 
 <para>
-  The Tags screen provides detailed information about all the tags which are
-  applied to transactions. The Tags screen is split into two main
-  areas: a tags list and a detail area.
+  The Tags View provides information about all the tags that have been added by
+  the user.  The Tags screen is split into two main areas: a list of tags and a
+  detail area, which has two tabs: Transactions and Details.  The
+  <guilabel>Transactions</guilabel> tab displays all the transactions associated
+  with the tag.  The <guilabel>Details</guilabel> tab includes a user defined
+  color, as well as Notes, which are not used elsewhere.  Note that if you
+  change the color, which is used in the symbol displayed before the tag name in
+  any associated transactions, you need to click the check button at the lower
+  right of the Details area for it to be saved.
   </para>
 
 <sect1 id="details.tags.list">
 <title>Tags List</title>
 
 <para>
-  A list of tags is on the left side of this screen. The tags list
-  is sorted alphabetically.
+  A list of all tags, sorted alphabetically, is displayed on the left side of
+  this screen.
 
   <screenshot>
   <mediaobject>
@@ -35,12 +42,15 @@
 <sect2>
 <title>Adding a Tag</title>
 <para>
-  To add a tag, either click on the Add tag icon
-  <guiicon><inlinemediaobject><imageobject><imagedata
+  Creating a tag can be done by 1 of 3 different ways. First you can click on the
+  Add tag icon  <guiicon><inlinemediaobject><imageobject><imagedata
   fileref="list-add.png"/></imageobject></inlinemediaobject></guiicon> or
   right-click on any tag and choose <guimenuitem>New tag</guimenuitem>. This
   creates a new tag called <quote>New tag</quote>. Right-click on this tag and
   select <guimenuitem>Rename tag</guimenuitem> to enter the name of the new tag.
+  Finally you can add a new tag directly into the ledger page or within a split 
+  transaction by typing the name of the tag in the tag field.  &kmymoney; will
+  ask if you want to add this tag and after selecting yes it will be added.
 </para>
 </sect2>
 
@@ -68,10 +78,10 @@
 
 <note>
 <para>
-  As Tags have just been introduced to &kmymoney; in version 4.7, none of the
-  methods for importing data are able to import tags.  It is understood that
-  this is an important feature, and each import method is likely to introduce
-  it in an upcoming release.
+  As Tags were only introduced to &kmymoney; in version 4.7, none of the methods
+  for importing data are able to import tags.  It is understood that this is an
+  important feature, and each import method is likely to introduce it in an
+  upcoming release.
 </para>
 </note>
 </sect2>
@@ -125,22 +135,24 @@
     </listitem>
     <listitem>
       <para>
-        To modify the notes associated with the tag, just edit the text in the
-        box.
-      </para>
-    </listitem>
-    <listitem>
-      <para>
         Clicking the <guilabel>Closed</guilabel> checkbox will not alter any
         transactions already associated with the tag, but it will prevent
         assigning the tag to any additional transactions.
       </para>
     </listitem>
+    <listitem>
+      <para>
+        To modify the notes associated with the tag, just edit the text in the
+        box.
+      </para>
+    </listitem>
   </itemizedlist>
 <para>
-  When you are done, don't forget to click the <guiicon>Update</guiicon> button, although you will
-  be prompted if you leave the dialog without having done so.
+  When you are done, don't forget to click the <guiicon>Update</guiicon> button,
+  at the lower right of the window, although you will be prompted if you leave
+  the dialog without having done so.
 </para>
 </sect2>
 </sect1>
 </chapter>
+

@@ -3,9 +3,10 @@
 <chapterinfo>
   <authorgroup>
     <author> &Thomas.Baumgart; &Thomas.Baumgart.mail; </author>
+    <author>&Michael.Carpino; &Michael.Carpino.mail;</author>
   </authorgroup>
-  <date>2014-08-30</date>
-  <releaseinfo>4.7.01</releaseinfo>
+  <date>2020-02-20</date>
+  <releaseinfo>5.0.8</releaseinfo>
 </chapterinfo>
 
 <title>Currencies</title>
@@ -20,11 +21,12 @@
 <title>Base currency</title>
 
 <para>
-  Once you create a &kmymoney; file, you will be asked for the base currency. The
-  base currency is the one that all income and expense categories use and that
-  reports will be based on. Usually, the base currency is the currency you use
-  in your country. If not otherwise selected, new accounts will use this
-  currency as the default.
+  During the initial &kmymoney; New FIle Setup, you will be asked to select the
+  base currency.  Usually, the base currency is the currency you use in your
+  country.  The base currency is the one that all income and expense categories
+  use and that reports will be based on. When you setup a new account &kmymoney;
+  will automatically default to the base currency.  If your account requires you
+  to use a different currency, you can change it during the New Account Setup.
 </para>
 
 <para>
@@ -71,10 +73,11 @@
 <title>Account setup</title>
 
 <para>
-  If you create a new account you have the option to specify the currency in
-  which it will be managed. The ledger for the account will then show all values
-  in the selected currency. The new account wizard defaults this setting to the
-  <link linkend="details.currencies.basecurrency">base currency</link>.
+  When you create a new account, you specify the currency in which it will be
+  managed. The New Account wizard defaults this setting to the <link
+  linkend="details.currencies.basecurrency">base currency</link>.  If you
+  require a different currency, you need to select it during this initial setup.
+  The ledger for the account will then show all values in the selected currency.
 </para>
 </sect1>
 
@@ -167,3 +170,4 @@
 </sect2>
 </sect1>
 </chapter>
+
