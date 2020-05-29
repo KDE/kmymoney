@@ -16,7 +16,7 @@
   the user.  The Tags screen is split into two main areas: a list of tags and a
   detail area, which has two tabs: Transactions and Details.  The
   <guilabel>Transactions</guilabel> tab displays all the transactions associated
-  with the tag.  The <guilabel>Details</guilabel> tab includes a user defined
+  with the tag.  The <guilabel>Details</guilabel> tab includes a user-defined
   color, as well as Notes, which are not used elsewhere.  Note that if you
   change the color, which is used in the symbol displayed before the tag name in
   any associated transactions, you need to click the check button at the lower
@@ -50,7 +50,7 @@
   select <guimenuitem>Rename tag</guimenuitem> to enter the name of the new tag.
   Finally you can add a new tag directly into the ledger page or within a split 
   transaction by typing the name of the tag in the tag field.  &kmymoney; will
-  ask if you want to add this tag and after selecting yes it will be added.
+  ask if you want to add this tag and after selecting <quote>yes</quote> it will be added.
 </para>
 </sect2>
 

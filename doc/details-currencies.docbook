@@ -21,10 +21,10 @@
 <title>Base currency</title>
 
 <para>
-  During the initial &kmymoney; New FIle Setup, you will be asked to select the
+  During the initial &kmymoney; New File Setup, you will be asked to select the
   base currency.  Usually, the base currency is the currency you use in your
   country.  The base currency is the one that all income and expense categories
-  use and that reports will be based on. When you setup a new account &kmymoney;
+  use and that reports will be based on. When you set up a new account &kmymoney;
   will automatically default to the base currency.  If your account requires you
   to use a different currency, you can change it during the New Account Setup.
 </para>
