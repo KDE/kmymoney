@@ -280,7 +280,6 @@ void KBudgetView::slotOpenContextMenu(const QPoint&)
     {&KBudgetView::slotStartRename,      i18n("Rename budget"),            Icon::BudgetRename, actionStates[eMenu::Action::RenameBudget]},
     {&KBudgetView::slotDeleteBudget,     i18n("Delete budget"),            Icon::BudgetDelete, actionStates[eMenu::Action::DeleteBudget]},
     {&KBudgetView::slotCopyBudget,       i18n("Copy budget"),              Icon::BudgetCopy,   actionStates[eMenu::Action::CopyBudget]},
-    {&KBudgetView::slotChangeBudgetYear, i18n("Change budget year"),       Icon::Calendar,     actionStates[eMenu::Action::ChangeBudgetYear]},
     {&KBudgetView::slotBudgetForecast,   i18n("Budget based on forecast"), Icon::Forecast,     actionStates[eMenu::Action::BudgetForecast]}
   };
   auto menu = new QMenu(i18nc("Menu header", "Budget options"));
