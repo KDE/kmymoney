@@ -51,7 +51,6 @@
 #include <KMessageBox>
 #include <KActionCollection>
 #include <QMenu>
-#include <KIconLoader>
 #include <KGuiItem>
 #include <KLineEdit>
 #include <KComboBox>

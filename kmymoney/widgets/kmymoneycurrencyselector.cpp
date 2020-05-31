@@ -166,7 +166,7 @@ void KMyMoneySecuritySelector::update(const QString& id)
         break;
     }
     if ((*it).id() == baseCurrency) {
-      insertItem(itemId,  Icons::get(Icon::ViewBankAccount), display);
+      insertItem(itemId, Icons::get(Icon::BankAccount), display);
     } else {
       insertItem(itemId, emptyIcon, display);
     }

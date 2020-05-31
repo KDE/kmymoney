@@ -147,15 +147,15 @@ KMyMoneyView::KMyMoneyView()
 
   const QVector<viewInfo> viewsInfo
   {
-    {View::Home,            i18n("Home"),                         Icon::ViewHome},
-    {View::Institutions,    i18n("Institutions"),                 Icon::ViewInstitutions},
-    {View::Accounts,        i18n("Accounts"),                     Icon::ViewAccounts},
-    {View::Schedules,       i18n("Scheduled\ntransactions"),      Icon::ViewSchedules},
-    {View::Categories,      i18n("Categories"),                   Icon::ViewCategories},
-    {View::Tags,            i18n("Tags"),                         Icon::ViewTags},
-    {View::Payees,          i18n("Payees"),                       Icon::ViewPayees},
-    {View::Ledgers,         i18n("Ledgers"),                      Icon::ViewLedgers},
-    {View::Investments,     i18n("Investments"),                  Icon::ViewInvestments},
+    {View::Home,            i18n("Home"),                         Icon::Home},
+    {View::Institutions,    i18n("Institutions"),                 Icon::Institutions},
+    {View::Accounts,        i18n("Accounts"),                     Icon::Accounts},
+    {View::Schedules,       i18n("Scheduled\ntransactions"),      Icon::Schedule},
+    {View::Categories,      i18n("Categories"),                   Icon::FinancialCategories},
+    {View::Tags,            i18n("Tags"),                         Icon::Tags},
+    {View::Payees,          i18n("Payees"),                       Icon::Payees},
+    {View::Ledgers,         i18n("Ledgers"),                      Icon::Ledger},
+    {View::Investments,     i18n("Investments"),                  Icon::Investments},
     #ifdef ENABLE_UNFINISHEDFEATURES
     {View::NewLedgers,      i18n("New ledger"),                   Icon::DocumentProperties},
     #endif
@@ -412,19 +412,19 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
   connect(viewBases[idView], &KMyMoneyViewBase::selectByVariant, this, &KMyMoneyView::slotSelectByVariant);
   connect(viewBases[idView], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
 
-  auto icon = Icon::ViewForecast;
+  auto icon = Icon::Forecast;
   switch (idView) {
     case View::Reports:
-      icon = Icon::ViewReports;
+      icon = Icon::Reports;
       break;
     case View::Budget:
-      icon = Icon::ViewBudgets;
+      icon = Icon::Budget;
       break;
     case View::Forecast:
-      icon = Icon::ViewForecast;
+      icon = Icon::Forecast;
       break;
     case View::OnlineJobOutbox:
-      icon = Icon::ViewOutbox;
+      icon = Icon::OnlineJobOutbox;
       break;
     default:
       break;

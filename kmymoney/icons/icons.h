@@ -3,6 +3,8 @@
                              -------------------
     begin                : Sun Jun 25 2017
     copyright            : (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2020 by Dawid Wróbel <me@dawidwrobel.com>
+
 
 ***************************************************************************/
 
@@ -31,6 +33,8 @@ class QIcon;
 
 namespace Icons {
 
+enum class IconSet { Common, Oxygen, Tango, Breeze };
+
 enum class Icon { OpenDatabase, Merge, Reconcile, Split, Tip, PerformanceTest,
                   Calculator,
                   UserProperties, DocumentProperties,
@@ -38,26 +42,26 @@ enum class Icon { OpenDatabase, Merge, Reconcile, Split, Tip, PerformanceTest,
                   Pause, SeekForward,
                   SkipForward,
                   HideReconciled, HideCategories,
-                  ViewHome, ViewInstitutions,
-                  ViewAccounts, ViewCategories,
-                  ViewSchedules, ViewTags,
-                  ViewPayees, ViewLedgers,
-                  ViewInvestments, ViewReports,
-                  ViewBudgets, ViewForecast,
-                  ViewOutbox, ViewFilter,
-                  ViewLoan, ViewStock,
-                  ViewChecking,
-                  ViewSaving,
-                  ViewLoanAsset, ViewCreditCard,
-                  ViewCash, ViewEquity,
-                  ViewIncome, ViewExpense,
-                  ViewAsset, ViewLiability,
-                  ViewUpcominEvents, ViewCalendarDay,
-                  ViewFinancialList, ViewBankAccount,
-                  ViewCurrencyList, ViewFinancialCategories,
-                  ViewFinancialTransfer, ViewBank,
-                  Budget, ViewCalendar,
-                  ViewTransactionDetail, ViewClose,
+                  Home, Institution, Institutions,
+                  Accounts,
+                  Schedule, Tags,
+                  Payees,
+                  Investment, Investments, Reports,
+                  Budget, Forecast,
+                  OnlineJobOutbox, Filter,
+                  Loan, Stock,
+                  Checking,
+                  Savings,
+                  LoanAsset, CreditCard,
+                  Cash, Equity,
+                  Income, Expense,
+                  Asset, Liability,
+                  UpcomingEvents, CalendarDay,
+                  Ledger, BankAccount,
+                  Currencies, FinancialCategories,
+                  Transaction, Bank,
+                  Calendar,
+                  TransactionDetails, Close,
                   DialogOK, DialogClose, DialogCancel,
                   DialogOKApply, DialogError, DialogWarning,
                   DialogInformation,
@@ -66,7 +70,7 @@ enum class Icon { OpenDatabase, Merge, Reconcile, Split, Tip, PerformanceTest,
                   ListAddTag, ListRemoveTag,
                   GoTo, KeyEnter, Download, TagRename,
                   EditDelete, EditCopy, EditRename,
-                  EditFind, EditUndo, EditClear,
+                  Find, EditUndo, EditClear,
                   DocumentEdit,
                   DocumentNew, DocumentSave,
                   DocumentClose, DocumentOpen,
@@ -81,16 +85,16 @@ enum class Icon { OpenDatabase, Merge, Reconcile, Split, Tip, PerformanceTest,
                   Report, Refresh, PreferencesGeneral,
                   SortAscending, SortDescending,
                   ArrowUp, ArrowDown, ArrowRight, ArrowLeft,
-                  TaskAttention, TaskComplete,
+                  Warning, TaskComplete,
                   TaskReject, TaskAccepted, TaskOngoing,
                   Help, Folder,
-                  PreferencesFont, PreferencesColor, PreferencesIcon,
-                  PreferencesNetwork, PreferencesPlugin,
-                  Empty, EditFindTransaction,
+                  PreferencesFonts, PreferencesColors, PreferencesIcons,
+                  PreferencesNetwork, PreferencesPlugins,
+                  Empty,
                   InstitutionNew, InstitutionEdit, InstitutionDelete,
                   AccountNew, AccountEdit, AccountDelete,
                   AccountClose, AccountReopen,
-                  AccountUpdateMenu, AccountUpdate, AccountUpdateAll,
+                  AccountUpdate, AccountUpdateAll,
                   AccountCreditTransfer, AccountFinishReconciliation,
                   CategoryNew, CategoryEdit, CategoryDelete,
                   TransactionNew, TransactionEdit,
@@ -98,10 +102,11 @@ enum class Icon { OpenDatabase, Merge, Reconcile, Split, Tip, PerformanceTest,
                   InvestmentNew, InvestmentEdit,
                   InvestmentDelete, InvestmentOnlinePrice,
                   BudgetNew, BudgetRename, BudgetDelete, BudgetCopy,
-                  PriceUpdate, ToolUpdatePrices, Reverse
+                  PriceUpdate, InvestmentOnlinePriceAll, Reverse, Visibility, NoVisibility,
+                  SelectAll
                 };
 
-KMM_ICONS_EXPORT void setIconThemeNames(const QString &_themeName);
+KMM_ICONS_EXPORT void setUpMappings(const QString & themeName);
 KMM_ICONS_EXPORT QIcon get(Icons::Icon icon);
 
 

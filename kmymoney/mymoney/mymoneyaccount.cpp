@@ -452,23 +452,23 @@ void MyMoneyAccount::setBalance(const MyMoneyMoney& val)
 QPixmap MyMoneyAccount::accountPixmap(const bool reconcileFlag, const int size) const
 {
   static const QHash<Account::Type, Icon> accToIco {
-    {Account::Type::Asset, Icon::ViewAsset},
-    {Account::Type::Investment, Icon::ViewStock},
-    {Account::Type::Stock, Icon::ViewStock},
-    {Account::Type::MoneyMarket, Icon::ViewStock},
-    {Account::Type::Checkings, Icon::ViewChecking},
-    {Account::Type::Savings, Icon::ViewSaving},
-    {Account::Type::AssetLoan, Icon::ViewLoanAsset},
-    {Account::Type::Loan, Icon::ViewLoan},
-    {Account::Type::CreditCard, Icon::ViewCreditCard},
-    {Account::Type::Asset, Icon::ViewAsset},
-    {Account::Type::Cash, Icon::ViewCash},
-    {Account::Type::Income, Icon::ViewIncome},
-    {Account::Type::Expense, Icon::ViewExpense},
-    {Account::Type::Equity, Icon::ViewEquity}
+    {Account::Type::Asset, Icon::Asset},
+    {Account::Type::Investment, Icon::Stock},
+    {Account::Type::Stock, Icon::Stock},
+    {Account::Type::MoneyMarket, Icon::Stock},
+    {Account::Type::Checkings, Icon::Checking},
+    {Account::Type::Savings, Icon::Savings},
+    {Account::Type::AssetLoan, Icon::LoanAsset},
+    {Account::Type::Loan, Icon::Loan},
+    {Account::Type::CreditCard, Icon::CreditCard},
+    {Account::Type::Asset, Icon::Asset},
+    {Account::Type::Cash, Icon::Cash},
+    {Account::Type::Income, Icon::Income},
+    {Account::Type::Expense, Icon::Expense},
+    {Account::Type::Equity, Icon::Equity}
   };
 
-  Icon ixIcon = accToIco.value(accountType(), Icon::ViewLiability);
+  Icon ixIcon = accToIco.value(accountType(), Icon::Liability);
 
   QString kyIcon = accountTypeToString(accountType()) + QString::number(size);
   QPixmap pxIcon;

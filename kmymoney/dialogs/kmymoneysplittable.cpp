@@ -200,7 +200,7 @@ KMyMoneySplitTable::KMyMoneySplitTable(QWidget *parent) :
   // setup the context menu
   d->m_contextMenu = new QMenu(this);
   d->m_contextMenu->setTitle(i18n("Split Options"));
-  d->m_contextMenu->setIcon(Icons::get(Icon::ViewFinancialTransfer));
+  d->m_contextMenu->setIcon(Icons::get(Icon::Transaction));
   d->m_contextMenu->addAction(Icons::get(Icon::DocumentEdit), i18n("Edit..."), this, SLOT(slotStartEdit()));
   d->m_contextMenuDuplicate = d->m_contextMenu->addAction(Icons::get(Icon::EditCopy), i18nc("To duplicate a split", "Duplicate"), this, SLOT(slotDuplicateSplit()));
   d->m_contextMenuDelete = d->m_contextMenu->addAction(Icons::get(Icon::EditDelete),

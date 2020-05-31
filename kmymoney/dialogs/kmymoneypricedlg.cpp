@@ -148,7 +148,7 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
   d->ui->m_newButton->setIcon(Icons::get(Icon::DocumentNew));
   d->ui->m_editButton->setIcon(Icons::get(Icon::DocumentEdit));
 
-  d->ui->m_onlineQuoteButton->setIcon(Icons::get(Icon::ToolUpdatePrices));
+  d->ui->m_onlineQuoteButton->setIcon(Icons::get(Icon::InvestmentOnlinePriceAll));
 
   connect(d->ui->m_editButton, &QAbstractButton::clicked, this, &KMyMoneyPriceDlg::slotEditPrice);
   connect(d->ui->m_deleteButton, &QAbstractButton::clicked, this, &KMyMoneyPriceDlg::slotDeletePrice);
