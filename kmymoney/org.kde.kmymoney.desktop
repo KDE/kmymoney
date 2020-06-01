@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=KMyMoney
 Name[ar]=أموالك
+Name[ast]=KMyMoney
 Name[bs]=KMyMoney
 Name[ca]=KMyMoney
 Name[ca@valencia]=KMyMoney
@@ -64,7 +65,7 @@ GenericName[nds]=Geldsaken plegen
 GenericName[nl]=Persoonlijk financieel beheer
 GenericName[pl]=Zarządzanie finansami osobistymi
 GenericName[pt]=Gestor de Finanças Pessoais
-GenericName[pt_BR]=Gerenciador de finanças pessoais
+GenericName[pt_BR]=Gerenciador de Finanças Pessoais
 GenericName[ro]=Gestionar de finanțe personale
 GenericName[ru]=Учёт финансов
 GenericName[sk]=Osobný manažér financií
@@ -102,7 +103,7 @@ Comment[nds]=Geldsaken plegen
 Comment[nl]=Persoonlijk financieel beheerder
 Comment[pl]=Zarządzanie finansami osobistymi
 Comment[pt]=Gestor de Finanças Pessoais
-Comment[pt_BR]=Gerenciador de finanças pessoais
+Comment[pt_BR]=Gerenciador de Finanças Pessoais
 Comment[ro]=Programul de gestionare a finanțelor personale, liber și ușor de folosit, pentru KDE
 Comment[ru]=Учёт финансов
 Comment[sk]=Osobný manažér financií
