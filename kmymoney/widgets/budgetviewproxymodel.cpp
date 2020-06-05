@@ -63,6 +63,7 @@ public:
 BudgetViewProxyModel::BudgetViewProxyModel(QObject *parent) :
   AccountsViewProxyModel(*new BudgetViewProxyModelPrivate, parent)
 {
+  setFilterCaseSensitivity(Qt::CaseInsensitive);
 }
 
 BudgetViewProxyModel::~BudgetViewProxyModel()
@@ -185,14 +186,14 @@ bool BudgetViewProxyModel::filterAcceptsRow(int source_row, const QModelIndex &s
         }
       }
       if (!balance.isZero())
-        return true;
+        return AccountsViewProxyModel::filterAcceptsRow(source_row, source_parent);
       for (auto i = 0; i < sourceModel()->rowCount(index); ++i) {
         if (filterAcceptsRow(i, index))
           return true;
       }
       return false;
     }
-    return true;
+    return AccountsViewProxyModel::filterAcceptsRow(source_row, source_parent);
   }
   return false;
 }
