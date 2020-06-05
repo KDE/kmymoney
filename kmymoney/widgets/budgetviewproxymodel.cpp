@@ -217,14 +217,14 @@ bool BudgetViewProxyModel::filterAcceptsRow(int source_row, const QModelIndex &s
         }
       }
       if (!balance.isZero())
-        return AccountsViewProxyModel::filterAcceptsRow(source_row, source_parent);
-      for (auto i = 0; i < sourceModel()->rowCount(index); ++i) {
-        if (filterAcceptsRow(i, index))
+        return AccountsProxyModel::filterAcceptsRow(source_row, source_parent);
+      for (auto i = 0; i < sourceModel()->rowCount(idx); ++i) {
+        if (filterAcceptsRow(i, idx))
           return true;
       }
       return false;
     }
-    return AccountsViewProxyModel::filterAcceptsRow(source_row, source_parent);
+    return AccountsProxyModel::filterAcceptsRow(source_row, source_parent);
   }
   return false;
 }
