@@ -39,6 +39,13 @@
   <name xml:lang="zh-CN">KMyMoney</name>
   <name xml:lang="zh-TW">KMyMoney</name>
   <summary>Personal finance manager based on double-entry bookkeeping</summary>
+  <summary xml:lang="ca">Gestor de les finances personals, basat en la comptabilitat de doble entrada</summary>
+  <summary xml:lang="es">Gestor de finanzas personales basado en el sistema de partida doble</summary>
+  <summary xml:lang="nl">Persoonlijk financieel beheer gebaseerd op dubbel boekhouden</summary>
+  <summary xml:lang="pt">Gestor de finanças pessoais com base na contabilidade por duplo registo</summary>
+  <summary xml:lang="sv">Hemekonomihanterare baserad på dubbel bokföring</summary>
+  <summary xml:lang="uk">Програма для керування особистими фінансами, яку засновано на бухгалтерській системі із подвійним записом</summary>
+  <summary xml:lang="x-test">xxPersonal finance manager based on double-entry bookkeepingxx</summary>
   <description>
     <p>KMyMoney is a personal finance manager by KDE. It comes with a large set of features while being easy to use for the non-technical user.</p>
     <p xml:lang="ca">El KMyMoney és un gestor de les finances personals desenvolupat pel KDE. Té un gran conjunt de característiques encara que és fàcil d'emprar pels usuaris no tècnics.</p>
