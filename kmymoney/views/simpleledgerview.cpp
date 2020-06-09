@@ -29,6 +29,7 @@
 #include <QTreeView>
 #include <QKeyEvent>
 #include <QTimer>
+#include <QHeaderView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
