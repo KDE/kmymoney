@@ -38,7 +38,7 @@
 // Project Includes
 
 #ifndef KMYMONEY_DEPRECATED
-#  define KMYMONEY_DEPRECATED __attribute__ ((__deprecated__))
+#  define KMYMONEY_DEPRECATED Q_DECL_DEPRECATED
 #endif
 
 
