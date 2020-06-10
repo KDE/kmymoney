@@ -213,5 +213,15 @@
         </artifact>
       </artifacts>
     </release>
+    <release date="2019-09-22" version="5.0.7">
+      <url>https://kmymoney.org/changelogs/kmymoney-5-0-7-release-notes.html</url>
+      <artifacts>
+        <artifact type="source">
+          <location>https://download.kde.org/stable/kmymoney/5.0.7/src/kmymoney-5.0.7.tar.xz</location>
+          <checksum type="sha256">d5dcac31db410861fe74955109715012bcddfd095cdbb18c91827a77dffeb5c0</checksum>
+          <size type="download">11667088</size>
+        </artifact>
+      </artifacts>
+    </release>
   </releases>
 </component>
