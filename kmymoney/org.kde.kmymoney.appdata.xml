@@ -197,5 +197,21 @@
   <project_group>KDE</project_group>
   <provides>
     <binary>kmymoney</binary>
+    <id>org.kde.kmymoney.desktop</id>
   </provides>
+  <releases>
+    <!-- Note: website infrastructure uses the appstream file from the master branch
+               to determine the last release, so this entry must always reflect the
+               last actual release -->
+    <release date="2020-01-19" version="5.0.8">
+      <url>https://kmymoney.org/changelogs/kmymoney-5-0-8-release-notes.html</url>
+      <artifacts>
+        <artifact type="source">
+          <location>https://download.kde.org/stable/kmymoney/5.0.8/src/kmymoney-5.0.8.tar.xz</location>
+          <checksum type="sha256">ac6bcef37def09ca2530276254eab5e9ae57f3a1cd5ed7c87c3d38045400d4c0</checksum>
+          <size type="download">11753276</size>
+        </artifact>
+      </artifacts>
+    </release>
+  </releases>
 </component>
