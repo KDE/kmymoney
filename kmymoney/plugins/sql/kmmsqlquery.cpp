@@ -15,22 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MYSQLQUERY_H
-#define MYSQLQUERY_H
-
-#include "config-kmymoney.h"
-
-#if ENABLE_SQLTRACER
-
+#include "kmmsqlquery.h"
 #undef QSqlQuery
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QObject>
-#include <QString>
-#include <QSqlDatabase>
-#include <QSqlQuery>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -38,27 +29,56 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class QSqlResult;
+int KMMSqlQuery::queryId = 1;
 
-class MySqlQuery : public QSqlQuery
+KMMSqlQuery::KMMSqlQuery(QSqlResult *r, char *file, int line)
+  : QSqlQuery(r)
 {
-  static int queryId;
-public:
-  explicit MySqlQuery(QSqlResult *r, char *file, int line);
-  explicit MySqlQuery(const QString& query = QString(), QSqlDatabase db = QSqlDatabase());
-  explicit MySqlQuery(QSqlDatabase db);
-  virtual ~MySqlQuery();
+  id = queryId++;
+  qDebug() << "Created" << id << file << line;
+}
 
-  bool exec(const QString &query);
-  bool exec();
-  void finish();
-  bool prepare(const QString& cmd);
+KMMSqlQuery::KMMSqlQuery(const QString& query, QSqlDatabase db)
+  : QSqlQuery(query, db)
+{
+  id = queryId++;
+  qDebug() << "Created" << id;
+}
 
-private:
-  int id;
-  QString cmd;
-};
+KMMSqlQuery::KMMSqlQuery(QSqlDatabase db)
+  : QSqlQuery(db)
+{
+  id = queryId++;
+  qDebug() << "Created" << id;
+}
 
-#define QSqlQuery MySqlQuery
-#endif // ENABLE_SQLTRACER
-#endif // MYSQLQUERY_H
+KMMSqlQuery::~KMMSqlQuery()
+{
+  qDebug() << "Destroyed" << id;
+}
+
+bool KMMSqlQuery::prepare(const QString& _cmd)
+{
+  cmd = _cmd;
+  return QSqlQuery::prepare(cmd);
+}
+
+bool KMMSqlQuery::exec()
+{
+  bool rc = QSqlQuery::exec();
+  qDebug() << id << "executed" << cmd;
+  return rc;
+}
+
+bool KMMSqlQuery::exec(const QString& query)
+{
+  bool rc = QSqlQuery::exec(query);
+  qDebug() << id << "executed" << query;
+  return rc;
+}
+
+void KMMSqlQuery::finish()
+{
+  QSqlQuery::finish();
+  qDebug() << id << "finished";
+}

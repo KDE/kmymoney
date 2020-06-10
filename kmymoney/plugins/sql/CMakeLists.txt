@@ -11,7 +11,7 @@ set(sqlstorage_SOURCES
 
 if (ENABLE_SQLTRACER)
   list(APPEND sqlstorage_SOURCES
-    mysqlquery.cpp
+    kmmsqlquery.cpp
   )
 endif()
 

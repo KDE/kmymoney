@@ -15,13 +15,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "mysqlquery.h"
+#ifndef MYSQLQUERY_H
+#define MYSQLQUERY_H
+
+#include "config-kmymoney.h"
+
+#if ENABLE_SQLTRACER
+
 #undef QSqlQuery
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDebug>
+#include <QObject>
+#include <QString>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,56 +38,27 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-int MySqlQuery::queryId = 1;
+class QSqlResult;
 
-MySqlQuery::MySqlQuery(QSqlResult *r, char *file, int line)
-  : QSqlQuery(r)
+class KMMSqlQuery : public QSqlQuery
 {
-  id = queryId++;
-  qDebug() << "Created" << id << file << line;
-}
+  static int queryId;
+public:
+  explicit KMMSqlQuery (QSqlResult *r, char *file, int line);
+  explicit KMMSqlQuery (const QString& query = QString(), QSqlDatabase db = QSqlDatabase());
+  explicit KMMSqlQuery (QSqlDatabase db);
+  virtual ~KMMSqlQuery();
 
-MySqlQuery::MySqlQuery(const QString& query, QSqlDatabase db)
-  : QSqlQuery(query, db)
-{
-  id = queryId++;
-  qDebug() << "Created" << id;
-}
+  bool exec(const QString &query);
+  bool exec();
+  void finish();
+  bool prepare(const QString& cmd);
 
-MySqlQuery::MySqlQuery(QSqlDatabase db)
-  : QSqlQuery(db)
-{
-  id = queryId++;
-  qDebug() << "Created" << id;
-}
+private:
+  int id;
+  QString cmd;
+};
 
-MySqlQuery::~MySqlQuery()
-{
-  qDebug() << "Destroyed" << id;
-}
-
-bool MySqlQuery::prepare(const QString& _cmd)
-{
-  cmd = _cmd;
-  return QSqlQuery::prepare(cmd);
-}
-
-bool MySqlQuery::exec()
-{
-  bool rc = QSqlQuery::exec();
-  qDebug() << id << "executed" << cmd;
-  return rc;
-}
-
-bool MySqlQuery::exec(const QString& query)
-{
-  bool rc = QSqlQuery::exec(query);
-  qDebug() << id << "executed" << query;
-  return rc;
-}
-
-void MySqlQuery::finish()
-{
-  QSqlQuery::finish();
-  qDebug() << id << "finished";
-}
+#define QSqlQuery KMMSqlQuery
+#endif // ENABLE_SQLTRACER
+#endif // MYSQLQUERY_H

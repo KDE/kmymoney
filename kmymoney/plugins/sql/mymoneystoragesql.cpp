@@ -21,7 +21,7 @@
 #include "config-kmymoney.h"
 
 #if ENABLE_SQLTRACER
-#include "mysqlquery.h"
+#include "kmmsqlquery.h"
 #endif
 
 #include "mymoneystoragesql_p.h"
