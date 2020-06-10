@@ -1741,7 +1741,6 @@ void KMyMoneyApp::initIcons()
   }
 #endif
 
-  qDebug() << "Fallback icon search paths as reported by QT: " << QIcon::fallbackSearchPaths();
   // add our custom icons path to icons search path
   if (!customIconAbsolutePath.isEmpty()) {
     customIconAbsolutePath.chop(customIconRelativePath.length());
