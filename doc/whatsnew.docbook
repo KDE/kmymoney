@@ -82,6 +82,8 @@
 	    <member><link linkend="firsttime">Using &kmymoney; for the first time</link></member>
 	    <member><link linkend="details.institutions">Institutions</link></member>
 	    <member><link linkend="details.accounts">Accounts</link></member>
+	    <member><link linkend="details.categories">Categories</link></member>
+	    <member><link linkend="details.tags">Tags</link></member>
 	    <member><link linkend="details.payees">Payees</link></member>
 	    <member><link linkend="details.reconcile">Schedules</link></member>
 	    <member><link linkend="details.ledgers">Ledgers</link></member>
@@ -93,8 +95,6 @@
 	</entry>
 	<entry valign="top">
 	  <simplelist>
-	    <member><link linkend="details.categories">Categories</link></member>
-	    <member><link linkend="details.tags">Tags</link></member>
 	    <member><link linkend="details.currencies">Currencies</link></member>
 	    <member><link linkend="details.reconcile">Reconciliation</link></member>
 	    <member><link linkend="details.reports">Reports</link></member>

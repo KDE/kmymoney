@@ -39,7 +39,7 @@ InterestEditWizardPage::InterestEditWizardPage(QWidget *parent)
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
   registerField("newInterestRateEdit", ui->m_newInterestRateEdit, "value", SIGNAL(textChanged(QString)));
-  connect(ui->m_newInterestRateEdit, &KMyMoneyEdit::textChanged, this, &QWizardPage::completeChanged);
+  connect(ui->m_newInterestRateEdit, &AmountEdit::textChanged, this, &QWizardPage::completeChanged);
 }
 
 InterestEditWizardPage::~InterestEditWizardPage()

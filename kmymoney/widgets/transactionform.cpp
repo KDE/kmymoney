@@ -39,9 +39,9 @@
 
 #include "transactionformitemdelegate.h"
 #include "tabbar.h"
+#include "amountedit.h"
 #include "mymoneyaccount.h"
 #include "kmymoneydateinput.h"
-#include "kmymoneyedit.h"
 #include "kmymoneycategory.h"
 #include "transaction.h"
 
@@ -323,7 +323,7 @@ void TransactionForm::adjustColumn(eTransactionForm::Column col)
   // the possible edit widgets so that they fit if they pop up
   if (col == eTransactionForm::Column::Value2) {
     KMyMoneyDateInput dateInput;
-    KMyMoneyEdit valInput;
+    AmountEdit valInput;
     w = qMax(dateInput.sizeHint().width(), valInput.sizeHint().width());
   }
 

@@ -3,6 +3,7 @@
  * Copyright 2006       Darren Gould <darren_gould@gmx.de>
  * Copyright 2007-2010  Alvaro Soliverez <asoliverez@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2018       Michael Kiefer <Michael-Kiefer@web.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -68,6 +69,7 @@ public:
     m_chartByDefault(false),
     m_chartLineWidth(MyMoneyReport::m_lineWidth),
     m_logYaxis(false),
+    m_negExpenses(false),
     m_dataRangeStart('0'),
     m_dataRangeEnd('0'),
     m_dataMajorTick('0'),
@@ -252,6 +254,11 @@ public:
   bool m_logYaxis;
 
   /**
+    * Whether expenses should be plotted downwards
+    */
+  bool m_negExpenses;
+
+  /**
     * Y data range
     */
   QString m_dataRangeStart;
@@ -329,7 +336,7 @@ public:
   bool m_mixedTime;
   /**
    * This stores the column for the current date
-   * This value is calculated dinamically and thus it is not saved in the file
+   * This value is calculated dynamically and thus it is not saved in the file
    */
   int m_currentDateColumn;
   /**

@@ -122,7 +122,7 @@ namespace NewAccountWizard
    * This method returns the payout transaction for loans.
    * If the account to be created is not a loan or no
    * payout transaction should be generated, this method
-   * returns an emtpy transaction.
+   * returns an empty transaction.
    */
     MyMoneyTransaction payoutTransaction();
 

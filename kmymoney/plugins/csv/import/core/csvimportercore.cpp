@@ -495,7 +495,7 @@ eMyMoney::Transaction::Action CSVImporterCore::processActionTypeField(const Inve
   QString type = m_file->m_model->item(row, col)->text();
   QList<eMyMoney::Transaction::Action> actions;
   actions << eMyMoney::Transaction::Action::Buy << eMyMoney::Transaction::Action::Sell <<                       // first and second most frequent action
-             eMyMoney::Transaction::Action::ReinvestDividend << eMyMoney::Transaction::Action::CashDividend <<  // we don't want "reinv-dividend" to be accidentaly caught by "dividend"
+             eMyMoney::Transaction::Action::ReinvestDividend << eMyMoney::Transaction::Action::CashDividend <<  // we don't want "reinv-dividend" to be accidentally caught by "dividend"
              eMyMoney::Transaction::Action::Interest <<
              eMyMoney::Transaction::Action::Shrsin << eMyMoney::Transaction::Action::Shrsout;
 
@@ -612,7 +612,7 @@ DecimalSymbol CSVImporterCore::detectDecimalSymbol(const int col, const QString 
         dotIsDecimalSeparator = true;
       else if (dotPos < commaPos && dotIsDecimalSeparator == false) // following case 1.234,56
         commaIsDecimalSeparator = true;
-      else                                                          // following case 1.234,56 and somwhere earlier there was 1,234.56 so unresolvable conflict
+      else                                                          // following case 1.234,56 and somewhere earlier there was 1,234.56 so unresolvable conflict
         return detectedSymbol;
     } else if (dotPos != -1) {                 // following case 1.23
       if (dotIsDecimalSeparator)               // it's already know that dotIsDecimalSeparator
@@ -622,9 +622,9 @@ DecimalSymbol CSVImporterCore::detectDecimalSymbol(const int col, const QString 
       else {
         if (txt.count(QLatin1Char('.')) > 1)                // following case 1.234.567 so OK
           continue;
-        else if (txt.length() - 4 == dotPos)   // following case 1.234 and somwhere earlier there was 1.234,56 so OK
+        else if (txt.length() - 4 == dotPos)   // following case 1.234 and somewhere earlier there was 1.234,56 so OK
           continue;
-        else                                   // following case 1.23 and somwhere earlier there was 1,23 so unresolvable conflict
+        else                                   // following case 1.23 and somewhere earlier there was 1,23 so unresolvable conflict
           return detectedSymbol;
       }
     } else if (commaPos != -1) {               // following case 1,23
@@ -635,9 +635,9 @@ DecimalSymbol CSVImporterCore::detectDecimalSymbol(const int col, const QString 
       else {
         if (txt.count(QLatin1Char(',')) > 1)                // following case 1,234,567 so OK
           continue;
-        else if (txt.length() - 4 == commaPos) // following case 1,234 and somwhere earlier there was 1,234.56 so OK
+        else if (txt.length() - 4 == commaPos) // following case 1,234 and somewhere earlier there was 1,234.56 so OK
           continue;
-        else                                   // following case 1,23 and somwhere earlier there was 1.23 so unresolvable conflict
+        else                                   // following case 1,23 and somewhere earlier there was 1.23 so unresolvable conflict
           return detectedSymbol;
       }
 

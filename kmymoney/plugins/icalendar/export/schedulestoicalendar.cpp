@@ -350,7 +350,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
       icalcomponent_remove_component(schedule, oldAlarm);
 
     if (PluginSettings::createAlarm() && (!oldAlarm || settingsChaged)) {
-      // alarm: beginning wiht one day before the todo is due every one hour
+      // alarm: beginning with one day before the todo is due every one hour
       icalcomponent* alarm = icalcomponent_new_valarm();
       // alarm: action
       icalcomponent_add_property(alarm, icalproperty_new_action(ICAL_ACTION_DISPLAY));
@@ -370,7 +370,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
       icalcomponent_add_component(schedule, alarm);
     }
 
-    // add the schedule to the caledar
+    // add the schedule to the calendar
     if (newTodo)
       icalcomponent_add_component(vCalendar, schedule);
   }

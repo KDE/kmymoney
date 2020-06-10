@@ -45,10 +45,10 @@
 #include "register.h"
 #include "transactionform.h"
 #include "kmymoneylineedit.h"
-#include "kmymoneyedit.h"
 #include "kmymoneycombo.h"
 #include "investtransactioneditor.h"
 #include "kmymoneyutils.h"
+#include "amountedit.h"
 
 #include "kmymoneysettings.h"
 #include "widgetenums.h"
@@ -632,7 +632,7 @@ void InvestTransaction::arrangeWidgetsInForm(QMap<QString, QWidget*>& editWidget
   for (it = editWidgets.begin(); it != editWidgets.end(); ++it) {
     KMyMoneyCombo* combo = dynamic_cast<KMyMoneyCombo*>(*it);
     KMyMoneyLineEdit* lineedit = dynamic_cast<KMyMoneyLineEdit*>(*it);
-    KMyMoneyEdit* edit = dynamic_cast<KMyMoneyEdit*>(*it);
+    AmountEdit* edit = dynamic_cast<AmountEdit*>(*it);
     KMyMoneyPayeeCombo* payee = dynamic_cast<KMyMoneyPayeeCombo*>(*it);
     if (combo)
       combo->setPlaceholderText(QString());

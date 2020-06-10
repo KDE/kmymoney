@@ -58,7 +58,7 @@
 #include "kmymoneysettings.h"
 #include "transactioneditor.h"
 #include "stdtransactioneditor.h"
-#include "kmymoneyedit.h"
+#include "amountedit.h"
 #include "kaccountselectdlg.h"
 #include "knewaccountwizard.h"
 #include "knewinvestmentwizard.h"
@@ -228,7 +228,7 @@ void MyMoneyStatementReader::Private::previouslyUsedCategories(const QString& in
       MyMoneySplit s = (*it_t).second;
 
       acc = file->account(s.accountId());
-      // stock split shouldn't be fee or interest bacause it won't play nice with dissectTransaction
+      // stock split shouldn't be fee or interest because it won't play nice with dissectTransaction
       // it was caused by processTransactionEntry adding splits in wrong order != with manual transaction entering
       if (acc.accountGroup() == Account::Type::Expense || acc.accountGroup() == Account::Type::Income) {
         foreach (auto sNew , t.splits()) {
@@ -323,7 +323,7 @@ void MyMoneyStatementReader::Private::assignUniqueBankID(MyMoneySplit& s, const 
 void MyMoneyStatementReader::Private::setupPrice(MyMoneySplit &s, const MyMoneyAccount &splitAccount, const MyMoneyAccount &transactionAccount, const QDate &postDate)
 {
   if (transactionAccount.currencyId() != splitAccount.currencyId()) {
-    // a currency converstion is needed assume that split has already a proper value
+    // a currency conversion is needed assume that split has already a proper value
     MyMoneyFile* file = MyMoneyFile::instance();
     MyMoneySecurity toCurrency = file->security(splitAccount.currencyId());
     MyMoneySecurity fromCurrency = file->security(transactionAccount.currencyId());
@@ -738,7 +738,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
         }
       }
 
-      // If there was no stock account under the m_acccount investment account,
+      // If there was no stock account under the m_account investment account,
       // add one using the security.
       if (!found) {
         // The security should always be available, because the statement file
@@ -1127,7 +1127,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       // handle it.
       //
       const MyMoneyPayee& payeeObj = MyMoneyFile::instance()->payee(payeeid);
-      if (statementTransactionUnderImport.m_listSplits.isEmpty() && payeeObj.defaultAccountEnabled()) {
+      if (statementTransactionUnderImport.m_listSplits.isEmpty() && !payeeObj.defaultAccountId().isEmpty()) {
         MyMoneyAccount splitAccount = file->account(payeeObj.defaultAccountId());
         MyMoneySplit s;
         s.setReconcileFlag(eMyMoney::Split::State::Cleared);
@@ -1510,7 +1510,7 @@ void MyMoneyStatementReader::handleMatchingOfScheduledTransaction(TransactionMat
             // sure to use only the absolute value of the amount, because
             // the editor keeps the sign in a different position (deposit,
             // withdrawal tab)
-            KMyMoneyEdit* amount = dynamic_cast<KMyMoneyEdit*>(se->haveWidget("amount"));
+            AmountEdit* amount = dynamic_cast<AmountEdit*>(se->haveWidget("amount"));
             if (amount) {
               amount->setValue(importedSplit.shares().abs());
               se->slotUpdateAmount(importedSplit.shares().abs().toString());

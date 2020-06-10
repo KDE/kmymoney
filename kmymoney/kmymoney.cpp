@@ -67,15 +67,12 @@
 #include <KRecentDirs>
 #include <KProcess>
 #include <KAboutApplicationDialog>
-#include <KIO/StoredTransferJob>
-#include <KJobWidgets>
-#include <KCompressionDevice>
 #include <KBackup>
-#ifdef KF5Holidays_FOUND
+#ifdef ENABLE_HOLIDAYS
 #include <KHolidays/Holiday>
 #include <KHolidays/HolidayRegion>
 #endif
-#ifdef KF5Activities_FOUND
+#ifdef ENABLE_ACTIVITIES
 #include <KActivities/ResourceInstance>
 #endif
 
@@ -112,7 +109,6 @@
 #include "widgets/kmymoneyaccountselector.h"
 #include "widgets/kmymoneypayeecombo.h"
 #include "widgets/amountedit.h"
-#include "widgets/kmymoneyedit.h"
 #include "widgets/kmymoneymvccombo.h"
 
 #include "views/kmymoneyview.h"
@@ -220,10 +216,10 @@ public:
       m_autoSavePeriod(0),
       m_inAutoSaving(false),
       m_recentFiles(nullptr),
-#ifdef KF5Holidays_FOUND
+#ifdef ENABLE_HOLIDAYS
       m_holidayRegion(nullptr),
 #endif
-#ifdef KF5Activities_FOUND
+#ifdef ENABLE_ACTIVITIES
       m_activityResourceInstance(nullptr),
 #endif
       m_applicationIsReady(true),
@@ -309,12 +305,12 @@ public:
 
   KRecentFilesAction*   m_recentFiles;
 
-#ifdef KF5Holidays_FOUND
+#ifdef ENABLE_HOLIDAYS
   // used by the calendar interface for schedules
   KHolidays::HolidayRegion* m_holidayRegion;
 #endif
 
-#ifdef KF5Activities_FOUND
+#ifdef ENABLE_ACTIVITIES
   KActivities::ResourceInstance * m_activityResourceInstance;
 #endif
 
@@ -1194,7 +1190,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   connect(d->m_myMoneyView, &KMyMoneyView::statusProgress, this, &KMyMoneyApp::slotStatusProgressBar);
 
   // Initialize kactivities resource instance
-#ifdef KF5Activities_FOUND
+#ifdef ENABLE_ACTIVITIES
   d->m_activityResourceInstance = new KActivities::ResourceInstance(window()->winId(), this);
 #endif
 
@@ -1254,11 +1250,11 @@ KMyMoneyApp::~KMyMoneyApp()
   KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Unload, pPlugins, this, guiFactory());
   d->removeStorage();
 
-#ifdef KF5Holidays_FOUND
+#ifdef ENABLE_HOLIDAYS
   delete d->m_holidayRegion;
 #endif
 
-#ifdef KF5Activities_FOUND
+#ifdef ENABLE_ACTIVITIES
   delete d->m_activityResourceInstance;
 #endif
 
@@ -2835,7 +2831,7 @@ void KMyMoneyApp::Private::consistencyCheck(bool alwaysDisplayResult)
   }
 
   // in case the consistency check was OK, we get a single line as result
-  // in all errneous cases, we get more than one line and force the
+  // in all erroneous cases, we get more than one line and force the
   // display of them.
 
   if (alwaysDisplayResult || m_consistencyCheckResult.size() > 1) {
@@ -3076,7 +3072,7 @@ QList<QString> KMyMoneyApp::instanceList() const
     // build a list of service names of all running kmymoney applications without this one
     for (it = apps.constBegin(); it != apps.constEnd(); ++it) {
       // please change this method of creating a list of 'all the other kmymoney instances that are running on the system'
-      // since assuming that D-Bus creates service names with org.kde.kmymoney-PID is an observation I don't think that it's documented somwhere
+      // since assuming that D-Bus creates service names with org.kde.kmymoney-PID is an observation I don't think that it's documented somewhere
       if ((*it).indexOf("org.kde.kmymoney-") == 0) {
         uint thisProcPid = platformTools::processId();
         if ((*it).indexOf(QString("org.kde.kmymoney-%1").arg(thisProcPid)) != 0)
@@ -3225,7 +3221,7 @@ void KMyMoneyApp::slotDateChanged()
 
 void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)
 {
-#ifdef KF5Holidays_FOUND
+#ifdef ENABLE_HOLIDAYS
   //since the cost of updating the cache is now not negligible
   //check whether the region has been modified
   if (!d->m_holidayRegion || d->m_holidayRegion->regionCode() != holidayRegion) {
@@ -3246,7 +3242,7 @@ bool KMyMoneyApp::isProcessingDate(const QDate& date) const
 {
   if (!d->m_processingDays.testBit(date.dayOfWeek()))
     return false;
-#ifdef KF5Holidays_FOUND
+#ifdef ENABLE_HOLIDAYS
   if (!d->m_holidayRegion || !d->m_holidayRegion->isValid())
     return true;
 
@@ -3265,8 +3261,8 @@ bool KMyMoneyApp::isProcessingDate(const QDate& date) const
 
 void KMyMoneyApp::preloadHolidays()
 {
-#ifdef KF5Holidays_FOUND
-  // clear the cache before loading
+#ifdef ENABLE_HOLIDAYS
+  //clear the cache before loading
   d->m_holidayMap.clear();
   // only do this if it is a valid region
   if (d->m_holidayRegion && d->m_holidayRegion->isValid()) {
@@ -3588,7 +3584,6 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
 
       // setup the standard precision
       AmountEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
-      KMyMoneyEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
 
       applyFileFixes();
       Models::instance()->fileOpened();
@@ -3605,7 +3600,7 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
       onlineJobAdministration::instance()->updateOnlineTaskProperties();
       q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
 
-#ifdef KF5Activities_FOUND
+#ifdef ENABLE_ACTIVITIES
       {
         // make sure that we don't store the DB password in activity
         QUrl url(m_storageInfo.url);

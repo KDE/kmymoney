@@ -43,7 +43,7 @@ namespace eMyMoney {
       Expense,              /**< Denotes an expense account */
       AssetLoan,            /**< Denotes a loan (asset of the owner of this object) */
       Stock,                /**< Denotes an security account as sub-account for an investment */
-      Equity,               /**< Denotes an equity account e.g. opening/closeing balance */
+      Equity,               /**< Denotes an equity account e.g. opening/closing balance */
 
       /* insert new account types above this line */
       MaxAccountTypes       /**< Denotes the number of different account types */
@@ -185,7 +185,7 @@ namespace eMyMoney {
   }
 
   namespace TransactionFilter {
-    // Make sure to keep the following enum valus in sync with the values
+    // Make sure to keep the following enum values in sync with the values
     // used by the GUI (for KMyMoney in kfindtransactiondlgdecl.ui)
     enum class Type {
       All = 0,
@@ -196,7 +196,7 @@ namespace eMyMoney {
       LastType
     };
 
-    // Make sure to keep the following enum valus in sync with the values
+    // Make sure to keep the following enum values in sync with the values
     // used by the GUI (for KMyMoney in kfindtransactiondlgdecl.ui)
     enum class State {
       All = 0,
@@ -208,7 +208,7 @@ namespace eMyMoney {
       LastState
     };
 
-    // Make sure to keep the following enum valus in sync with the values
+    // Make sure to keep the following enum values in sync with the values
     // used by the GUI (for KMyMoney in kfindtransactiondlgdecl.ui)
     enum class Validity {
       Any = 0,
@@ -218,7 +218,7 @@ namespace eMyMoney {
       LastValidity
     };
 
-    // Make sure to keep the following enum valus in sync with the values
+    // Make sure to keep the following enum values in sync with the values
     // used by the GUI (for KMyMoney in kfindtransactiondlgdecl.ui)
     enum class Date {
       All = 0,
@@ -335,7 +335,7 @@ namespace eMyMoney {
     };
 
     /**
-      * notificationMode identifies the type of notifiation
+      * notificationMode identifies the type of notification
       * (add, modify, remove)
       */
     enum class Mode {
@@ -355,11 +355,11 @@ namespace eMyMoney {
     enum class MessageType {
       Debug, /**< Just for debug purposes. In normal scenarios the user should not see this. No need to store this message. Plugins should
         not create them at all if debug mode is not enabled. */
-      Log, /**< A piece of information the user should not see during normal operation. It is not shown in any UI by default. It is stored persistantly. */
+      Log, /**< A piece of information the user should not see during normal operation. It is not shown in any UI by default. It is stored persistently. */
       Information, /**< Information that should be kept but without the need to burden the user. The user can
         see this during normal operation. */
       Warning, /**< A piece of information the user should see but not be enforced to do so (= no modal dialog). E.g. a task is expected to have
-        direct effect but insted you have to wait a day (and that is commen behavior). */
+        direct effect but instead you have to wait a day (and that is common behavior). */
       Error /**< Important for the user - he must be warned. E.g. a task could unexpectedly not be executed */
     };
 
@@ -368,8 +368,8 @@ namespace eMyMoney {
      */
     enum class sendingState {
       noBankAnswer, /**< Used during or before sending or if sendDate().isValid() the job was successfully sent */
-      acceptedByBank, /**< bank definetly confirmed the job */
-      rejectedByBank, /**< bank definetly rejected this job */
+      acceptedByBank, /**< bank definitely confirmed the job */
+      rejectedByBank, /**< bank definitely rejected this job */
       abortedByUser, /**< aborted by user during sending */
       sendingError /**< an error occurred, the job is certainly not executed by the bank */
     };

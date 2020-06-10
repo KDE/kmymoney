@@ -127,7 +127,7 @@ public:
     * @param occurrence numerical representation of the MyMoneySchedule
     *                  occurrence type
     *
-    * @return QString representing the human readable format translated according to the language cataglogue
+    * @return QString representing the human readable format translated according to the language catalog
     *
     * @sa MyMoneySchedule::occurrenceToString()
     *
@@ -142,7 +142,7 @@ public:
     * @param paymentType numerical representation of the MyMoneySchedule
     *                  payment type
     *
-    * @return QString representing the human readable format translated according to the language cataglogue
+    * @return QString representing the human readable format translated according to the language catalog
     *
     * @sa MyMoneySchedule::paymentMethodToString()
     */
@@ -155,7 +155,7 @@ public:
     * @param weekendOption numerical representation of the MyMoneySchedule
     *                  weekend option
     *
-    * @return QString representing the human readable format translated according to the language cataglogue
+    * @return QString representing the human readable format translated according to the language catalog
     *
     * @sa MyMoneySchedule::weekendOptionToString()
     */
@@ -168,7 +168,7 @@ public:
     * @param type numerical representation of the MyMoneySchedule
     *                  schedule type
     *
-    * @return QString representing the human readable format translated according to the language cataglogue
+    * @return QString representing the human readable format translated according to the language catalog
     *
     * @sa MyMoneySchedule::scheduleTypeToString()
     */

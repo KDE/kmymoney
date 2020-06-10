@@ -76,7 +76,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="KMyMoneyEdit" name="value">
+      <widget class="AmountEdit" name="value">
        <property name="minimumSize">
         <size>
          <width>100</width>
@@ -174,11 +174,10 @@
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
   </customwidget>
-  <customwidget>
-   <class>KMyMoneyEdit</class>
-   <extends>QFrame</extends>
-   <header>kmymoneyedit.h</header>
-   <container>1</container>
+  <customwidget>                                   
+   <class>AmountEdit</class>
+   <extends>QLineEdit</extends>                   
+   <header location="global">amountedit.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneyTextEdit</class>

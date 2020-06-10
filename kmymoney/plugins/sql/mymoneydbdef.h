@@ -272,7 +272,7 @@ public:
     *
     * @param int database version which has to be checked
     *
-    * @return bool table has a priimary key
+    * @return bool table has a primary key
     */
   bool hasPrimaryKey(int version = std::numeric_limits<int>::max()) const;
   /**

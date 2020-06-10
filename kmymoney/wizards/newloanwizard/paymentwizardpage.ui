@@ -61,7 +61,7 @@ Please enter the amount you pay for principal and interest or leave the field em
           </widget>
         </item>
         <item>
-          <widget class="KMyMoneyEdit" name="m_paymentEdit"/>
+          <widget class="AmountEdit" name="m_paymentEdit"/>
         </item>
       </layout>
     </item>
@@ -243,6 +243,11 @@ Please enter the amount you pay for principal and interest or leave the field em
  <resources/>
  <connections/>
  <customwidgets>
+   <customwidget>
+     <class>AmountEdit</class>
+     <extends>QLineEdit</extends>
+     <header location="global">amountedit.h</header>
+   </customwidget>		 
  </customwidgets>
  <tabstops>
  </tabstops>

@@ -51,7 +51,7 @@
 #include "mymoneyexception.h"
 #include "kmymoneycategory.h"
 #include "kmymoneymvccombo.h"
-#include "kmymoneyedit.h"
+#include "amountedit.h"
 #include "kmymoneylineedit.h"
 #include "mymoneyfile.h"
 #include "mymoneyprice.h"
@@ -153,7 +153,7 @@ void TransactionEditor::setupPrecision()
   for (it_w = widgets.constBegin(); it_w != widgets.constEnd(); ++it_w) {
     QWidget * w;
     if ((w = haveWidget(*it_w)) != 0) {
-      if (auto precisionWidget = dynamic_cast<KMyMoneyEdit*>(w))
+      if (auto precisionWidget = dynamic_cast<AmountEdit*>(w))
         precisionWidget->setPrecision(prec);
     }
   }
@@ -187,7 +187,7 @@ void TransactionEditor::setup(QWidgetList& tabOrderWidgets, const MyMoneyAccount
       ++it_w;
     } else {
       // before we remove the widget, we make sure it's not a part of a known one.
-      // these could be a direct child in case of KMyMoneyDateInput and KMyMoneyEdit
+      // these could be a direct child in case of KMyMoneyDateInput and AmountEdit
       // where we store the pointer to the surrounding frame in editWidgets
       // or the parent is called "KMyMoneyCategoryFrame"
       if (*it_w) {
@@ -277,7 +277,7 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
         case Qt::Key_Return:
         case Qt::Key_Enter:
           // we check, if the object is one of the m_finalEditWidgets and if it's
-          // a KMyMoneyEdit object that the value is not 0. If any of that is the
+          // a AmountEdit object that the value is not 0. If any of that is the
           // case, it's the final object. In other cases, we convert the enter
           // key into a TAB key to move between the fields. Of course, we only need
           // to do this as long as the appropriate option is set. In all other cases,
@@ -285,7 +285,7 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
           if (KMyMoneySettings::enterMovesBetweenFields()) {
             for (it_w = d->m_finalEditWidgets.constBegin(); !isFinal && it_w != d->m_finalEditWidgets.constEnd(); ++it_w) {
               if (*it_w == o) {
-                if (auto widget = dynamic_cast<const KMyMoneyEdit*>(*it_w)) {
+                if (auto widget = dynamic_cast<const AmountEdit*>(*it_w)) {
                   isFinal = !(widget->value().isZero());
                 } else
                   isFinal = true;

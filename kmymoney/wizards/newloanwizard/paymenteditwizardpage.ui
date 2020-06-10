@@ -75,7 +75,7 @@ Please enter the amount you pay for principal and interest or leave the field em
               <number>6</number>
             </property>
             <item row="0" column="1">
-              <widget class="KMyMoneyEdit" name="m_newPaymentEdit"/>
+              <widget class="AmountEdit" name="m_newPaymentEdit"/>
             </item>
             <item row="1" column="0">
               <widget class="QLabel" name="TextLabel2_4">
@@ -163,6 +163,11 @@ If KMyMoney should calculate this value for you, then leave the field blank.</st
  <resources/>
  <connections/>
  <customwidgets>
+   <customwidget>
+     <class>AmountEdit</class>
+     <extends>QLineEdit</extends>
+     <header location="global">amountedit.h</header>
+   </customwidget>		 
  </customwidgets>
  <tabstops>
  </tabstops>

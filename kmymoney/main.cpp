@@ -218,7 +218,7 @@ int main(int argc, char *argv[])
   QString fname;
   // in case a filename is provided we need to check if it is a local
   // file. In case the name does not start with "file://" or "./" or "/"
-  // we need to prepend "./" to fake a relative filename. Otherwiese, QUrl prepends
+  // we need to prepend "./" to fake a relative filename. Otherwise, QUrl prepends
   // "http://" and uses the full path which will not work.
   // On MS-Windows we also need to check if the filename starts with a
   // drive letter or the backslash variants.

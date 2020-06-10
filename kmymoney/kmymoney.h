@@ -266,7 +266,7 @@ public:
   QUrl lastOpenedURL();
 
   /**
-    * construtor of KMyMoneyApp, calls all init functions to create the application.
+    * constructor of KMyMoneyApp, calls all init functions to create the application.
     */
   explicit KMyMoneyApp(QWidget* parent = 0);
 
@@ -385,7 +385,7 @@ protected:
   void initDynamicMenus();
 
   /**
-   * sets up the statusbar for the main window by initialzing a statuslabel.
+   * sets up the statusbar for the main window by initializing a statuslabel.
    */
   void initStatusBar();
 

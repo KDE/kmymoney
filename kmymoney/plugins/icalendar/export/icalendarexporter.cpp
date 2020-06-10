@@ -58,7 +58,6 @@ iCalendarExporter::iCalendarExporter(QObject *parent, const QVariantList &args) 
   d->m_profileName = "iCalendarPlugin";
   d->m_iCalendarFileEntryName = "iCalendarFile";
 
-  // Tell the host application to load my GUI component
   const auto componentName = QLatin1String("icalendarexporter");
   const auto rcFileName = QLatin1String("icalendarexporter.rc");
   setComponentName(componentName, i18n("iCalendar exporter"));

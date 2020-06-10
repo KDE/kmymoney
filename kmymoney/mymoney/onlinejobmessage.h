@@ -28,7 +28,7 @@ class QDateTime;
 namespace eMyMoney { namespace OnlineJob { enum class MessageType; } }
 
 /**
- * @brief Represets a log message for onlineJobs
+ * @brief Represents a log message for onlineJobs
  */
 class onlineJobMessagePrivate;
 class KMM_MYMONEY_EXPORT onlineJobMessage

@@ -71,7 +71,7 @@
         </widget>
        </item>
        <item>
-        <widget class="KMyMoneyEdit" name="edtFraction" native="true"/>
+        <widget class="AmountEdit" name="edtFraction" native="true"/>
        </item>
       </layout>
      </item>
@@ -164,10 +164,9 @@
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KMyMoneyEdit</class>
-   <extends>QWidget</extends>
-   <header>kmymoneyedit.h</header>
-   <container>1</container>
+   <class>AmountEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">amountedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

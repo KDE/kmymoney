@@ -34,7 +34,7 @@
 // Project Includes
 #include "selectedtransactions.h"
 
-#ifdef KF5Activities_FOUND
+#ifdef ENABLE_ACTIVITIES
 namespace KActivities
 {
 class ResourceInstance;

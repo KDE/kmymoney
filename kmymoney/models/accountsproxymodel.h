@@ -24,10 +24,16 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QtGlobal> // for QT_VERSION macro
+#include <QSortFilterProxyModel>
+
+#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
+#include <KItemModels/KRecursiveFilterProxyModel>
+#define QSortFilterProxyModel KRecursiveFilterProxyModel
+#endif
+
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <KItemModels/KRecursiveFilterProxyModel>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -58,7 +64,7 @@ namespace eMyMoney { namespace Account {enum class Type;} }
 namespace eAccountsModel { enum class Column; }
 
 class AccountsProxyModelPrivate;
-class KMM_MODELS_EXPORT AccountsProxyModel : public KRecursiveFilterProxyModel
+class KMM_MODELS_EXPORT AccountsProxyModel : public QSortFilterProxyModel
 {
   Q_OBJECT
   Q_DISABLE_COPY(AccountsProxyModel)
@@ -103,6 +109,13 @@ Q_SIGNALS:
 
 private:
   Q_DECLARE_PRIVATE(AccountsProxyModel)
+
+#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
+  // provide the interface for backward compatbility
+  void setRecursiveFilteringEnabled(bool enable) { Q_UNUSED(enable) }
+#endif
+
 };
 
+#undef QSortFilterProxyModel
 #endif

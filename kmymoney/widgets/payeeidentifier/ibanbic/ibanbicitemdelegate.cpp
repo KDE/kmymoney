@@ -145,7 +145,7 @@ void ibanBicItemDelegate::updateEditorGeometry(QWidget* editor, const QStyleOpti
 }
 
 /**
- * Internal helper to direcly convert the QVariant into the correct pointer type.
+ * Internal helper to directly convert the QVariant into the correct pointer type.
  */
 payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBicItemDelegate::ibanBicByIndex(const QModelIndex& index) const
 {

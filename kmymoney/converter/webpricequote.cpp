@@ -442,7 +442,7 @@ void WebPriceQuote::slotParseQuote(const QString& _quotedata)
 
   if (! quotedata.isEmpty()) {
     if (!d->m_source.m_skipStripping) {
-      // First, remove extranous non-data elements
+      // First, remove extraneous non-data elements
 
       // HTML tags
       quotedata.remove(QRegularExpression("<[^>]*>"));
@@ -1068,10 +1068,10 @@ const QString FinanceQuoteProcess::niceName(const QString& crypticName) const
 // Universal date converter
 //
 
-// In 'strict' mode, this is designed to be compatable with the QIF profile date
+// In 'strict' mode, this is designed to be compatible with the QIF profile date
 // converter.  However, that converter deals with the concept of an apostrophe
 // format in a way I don't understand.  So for the moment, they are 99%
-// compatable, waiting on that issue. (acejones)
+// compatible, waiting on that issue. (acejones)
 
 const QDate MyMoneyDateFormat::convertString(const QString& _in, bool _strict, unsigned _centurymidpoint) const
 {

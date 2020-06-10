@@ -11,6 +11,7 @@
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
                            Ace Jones <ace.j@hotpop.com>
                            (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           2018 by Michael Kiefer <Michael-Kiefer@web.de>
  ***************************************************************************/
 
 /***************************************************************************
@@ -165,6 +166,7 @@ KReportConfigurationFilterDlg::KReportConfigurationFilterDlg(MyMoneyReport repor
       connect(d->m_tabRange->ui->m_comboColumns, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, static_cast<void (KReportConfigurationFilterDlg::*)(int)>(&KReportConfigurationFilterDlg::slotUpdateColumnsCombo));
     }
     connect(d->m_tabChart->ui->m_logYaxis, &QCheckBox::stateChanged, this, &KReportConfigurationFilterDlg::slotLogAxisChanged);
+    connect(d->m_tabChart->ui->m_negExpenses, &QCheckBox::stateChanged, this, &KReportConfigurationFilterDlg::slotNegExpensesChanged);
   } else if (d->m_initialState.reportType() == eMyMoney::Report::ReportType::QueryTable) {
     // eInvestmentHoldings is a special-case report, and you cannot configure the
     // rows & columns of that report.
@@ -313,6 +315,7 @@ void KReportConfigurationFilterDlg::slotSearch()
     d->m_currentState.setChartByDefault(d->m_tabChart->ui->m_checkShowChart->isChecked());
     d->m_currentState.setChartLineWidth(d->m_tabChart->ui->m_lineWidth->value());
     d->m_currentState.setLogYAxis(d->m_tabChart->ui->m_logYaxis->isChecked());
+    d->m_currentState.setNegExpenses(d->m_tabChart->ui->m_negExpenses->isChecked());
   }
 
   if (d->m_tabRange) {
@@ -389,6 +392,12 @@ void KReportConfigurationFilterDlg::slotLogAxisChanged(int state)
     d->m_tabRange->setRangeLogarythmic(true);
   else
     d->m_tabRange->setRangeLogarythmic(false);
+}
+
+void KReportConfigurationFilterDlg::slotNegExpensesChanged(int state)
+{
+  Q_D(KReportConfigurationFilterDlg);
+  d->m_tabChart->setNegExpenses(state == Qt::Checked);
 }
 
 void KReportConfigurationFilterDlg::slotReset()
@@ -569,6 +578,7 @@ void KReportConfigurationFilterDlg::slotReset()
     d->m_tabChart->ui->m_checkShowChart->setChecked(d->m_initialState.isChartByDefault());
     d->m_tabChart->ui->m_lineWidth->setValue(d->m_initialState.chartLineWidth());
     d->m_tabChart->ui->m_logYaxis->setChecked(d->m_initialState.isLogYAxis());
+    d->m_tabChart->ui->m_negExpenses->setChecked(d->m_initialState.isNegExpenses());
   }
 
   if (d->m_tabRange) {

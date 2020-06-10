@@ -147,7 +147,7 @@ void nationalAccountDelegate::updateEditorGeometry(QWidget* editor, const QStyle
 }
 
 /**
- * Internal helper to direcly convert the QVariant into the correct pointer type.
+ * Internal helper to directly convert the QVariant into the correct pointer type.
  */
 payeeIdentifierTyped<payeeIdentifiers::nationalAccount> nationalAccountDelegate::identByIndex(const QModelIndex& index) const
 {

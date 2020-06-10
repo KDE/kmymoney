@@ -48,7 +48,8 @@
 
 #define MYMONEYEXCEPTION_CSTRING(exceptionMessage) MyMoneyException(exceptionMessage " " __FILE__ ":" KMM_TOSTRING(__LINE__))
 
-// krazy:exclude=dpointer
+// krazy:excludeall=dpointer
+// krazy:excludeall=inline
 
 #if defined(Q_OS_WIN)
 // Otherwise

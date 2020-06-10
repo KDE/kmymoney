@@ -46,7 +46,7 @@
 #include "transactioneditorcontainer.h"
 #include "kmymoneycategory.h"
 #include "kmymoneydateinput.h"
-#include "kmymoneyedit.h"
+#include "amountedit.h"
 #include "kmymoneyaccountselector.h"
 #include "kmymoneymvccombo.h"
 #include "mymoneyfile.h"
@@ -199,7 +199,7 @@ public:
       if (w)
         w->setFocus();
 
-      auto amount = dynamic_cast<KMyMoneyEdit*>(q->haveWidget(amountWidgetName));
+      auto amount = dynamic_cast<AmountEdit*>(q->haveWidget(amountWidgetName));
       if (!amount)
         return rc;
 
@@ -271,8 +271,8 @@ public:
   {
     Q_Q(InvestTransactionEditor);
     if (auto label = dynamic_cast<QLabel*>(q->haveWidget("price-label"))) {
-      auto sharesEdit = dynamic_cast<KMyMoneyEdit*>(q->haveWidget("shares"));
-      auto priceEdit = dynamic_cast<KMyMoneyEdit*>(q->haveWidget("price"));
+      auto sharesEdit = dynamic_cast<AmountEdit*>(q->haveWidget("shares"));
+      auto priceEdit = dynamic_cast<AmountEdit*>(q->haveWidget("price"));
 
       if (!sharesEdit || !priceEdit)
         return;
@@ -332,7 +332,7 @@ InvestTransactionEditor::InvestTransactionEditor(TransactionEditorContainer* reg
                       lastPostDate)
 {
   Q_D(InvestTransactionEditor);
-  // after the gometries of the container are updated hide the widgets which are not needed by the current activity
+  // after the geometries of the container are updated hide the widgets which are not needed by the current activity
   connect(d->m_regForm, &TransactionEditorContainer::geometriesUpdated, this, &InvestTransactionEditor::slotTransactionContainerGeometriesUpdated);
 
   // dissect the transaction into its type, splits, currency, security etc.
@@ -414,39 +414,39 @@ void InvestTransactionEditor::createEditWidgets()
   d->m_activity->memoText().clear();
   d->m_activity->memoChanged() = false;
 
-  KMyMoneyEdit* value = new KMyMoneyEdit;
+  AmountEdit* value = new AmountEdit;
   value->setObjectName("shares");
   value->setPlaceholderText(i18n("Shares"));
-  value->setResetButtonVisible(false);
+  value->setCalculatorButtonVisible(true);
   d->m_editWidgets["shares"] = value;
-  connect(value, &KMyMoneyEdit::textChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
-  connect(value, &KMyMoneyEdit::valueChanged, this, &InvestTransactionEditor::slotUpdateTotalAmount);
+  connect(value, &AmountEdit::textChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
+  connect(value, &AmountEdit::valueChanged, this, &InvestTransactionEditor::slotUpdateTotalAmount);
 
-  value = new KMyMoneyEdit;
+  value = new AmountEdit;
   value->setObjectName("price");
   value->setPlaceholderText(i18n("Price"));
-  value->setResetButtonVisible(false);
+  value->setCalculatorButtonVisible(true);
   d->m_editWidgets["price"] = value;
-  connect(value, &KMyMoneyEdit::textChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
-  connect(value, &KMyMoneyEdit::valueChanged, this, &InvestTransactionEditor::slotUpdateTotalAmount);
+  connect(value, &AmountEdit::textChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
+  connect(value, &AmountEdit::valueChanged, this, &InvestTransactionEditor::slotUpdateTotalAmount);
 
-  value = new KMyMoneyEdit;
+  value = new AmountEdit;
   value->setObjectName("fee-amount");
   // TODO once we have the selected transactions as array of Transaction
   // we can allow multiple splits for fee and interest
-  value->setResetButtonVisible(false);
+  value->setCalculatorButtonVisible(true);
   d->m_editWidgets["fee-amount"] = value;
-  connect(value, &KMyMoneyEdit::textChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
-  connect(value, &KMyMoneyEdit::valueChanged, this, &InvestTransactionEditor::slotUpdateTotalAmount);
+  connect(value, &AmountEdit::textChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
+  connect(value, &AmountEdit::valueChanged, this, &InvestTransactionEditor::slotUpdateTotalAmount);
 
-  value = new KMyMoneyEdit;
+  value = new AmountEdit;
   value->setObjectName("interest-amount");
   // TODO once we have the selected transactions as array of Transaction
   // we can allow multiple splits for fee and interest
-  value->setResetButtonVisible(false);
+  value->setCalculatorButtonVisible(true);
   d->m_editWidgets["interest-amount"] = value;
-  connect(value, &KMyMoneyEdit::textChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
-  connect(value, &KMyMoneyEdit::valueChanged, this, &InvestTransactionEditor::slotUpdateTotalAmount);
+  connect(value, &AmountEdit::textChanged, this, &InvestTransactionEditor::slotUpdateButtonState);
+  connect(value, &AmountEdit::valueChanged, this, &InvestTransactionEditor::slotUpdateTotalAmount);
 
   auto reconcile = new KMyMoneyReconcileCombo;
   reconcile->setObjectName("reconcile");
@@ -618,7 +618,7 @@ void InvestTransactionEditor::loadEditWidgets()
   auto activity = dynamic_cast<KMyMoneyActivityCombo*>(haveWidget("activity"));
   auto asset = dynamic_cast<KMyMoneyCategory*>(haveWidget("asset-account"));
   auto memo = dynamic_cast<KTextEdit*>(d->m_editWidgets["memo"]);
-  KMyMoneyEdit* value;
+  AmountEdit* value;
   auto interest = dynamic_cast<KMyMoneyCategory*>(haveWidget("interest-account"));
   auto fees = dynamic_cast<KMyMoneyCategory*>(haveWidget("fee-account"));
 
@@ -696,7 +696,7 @@ void InvestTransactionEditor::loadEditWidgets()
     // shares
     // don't set the value if the number of shares is zero so that
     // we can see the hint
-    value = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
+    value = dynamic_cast<AmountEdit*>(haveWidget("shares"));
     if (!value)
       return;
     if (typeid(*(d->m_activity)) != typeid(Invest::Split(this)))
@@ -711,14 +711,14 @@ void InvestTransactionEditor::loadEditWidgets()
     d->updatePriceMode(d->m_split);
 
     // fee amount
-    value = dynamic_cast<KMyMoneyEdit*>(haveWidget("fee-amount"));
+    value = dynamic_cast<AmountEdit*>(haveWidget("fee-amount"));
     if (!value)
       return;
     value->setPrecision(MyMoneyMoney::denomToPrec(d->m_currency.smallestAccountFraction()));
     value->setValue(d->subtotal(d->m_feeSplits));
 
     // interest amount
-    value = dynamic_cast<KMyMoneyEdit*>(haveWidget("interest-amount"));
+    value = dynamic_cast<AmountEdit*>(haveWidget("interest-amount"));
     if (!value)
       return;
     value->setPrecision(MyMoneyMoney::denomToPrec(d->m_currency.smallestAccountFraction()));
@@ -753,7 +753,7 @@ void InvestTransactionEditor::loadEditWidgets()
     QStringList fields;
     fields << "shares" << "price" << "fee-amount" << "interest-amount";
     for (auto it_f = fields.constBegin(); it_f != fields.constEnd(); ++it_f) {
-      value = dynamic_cast<KMyMoneyEdit*>(haveWidget((*it_f)));
+      value = dynamic_cast<AmountEdit*>(haveWidget((*it_f)));
       if (!value)
         return;
       value->setText("");
@@ -823,7 +823,7 @@ void InvestTransactionEditor::slotUpdateSecurity(const QString& stockId)
   if (!currencyKnown) {
     d->m_currency.setTradingSymbol("???");
   } else {
-    auto sharesWidget = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
+    auto sharesWidget = dynamic_cast<AmountEdit*>(haveWidget("shares"));
     if (sharesWidget) {
       if (typeid(*(d->m_activity)) != typeid(Invest::Split(this)))
         sharesWidget->setPrecision(MyMoneyMoney::denomToPrec(d->m_security.smallestAccountFraction()));
@@ -857,10 +857,10 @@ MyMoneyMoney InvestTransactionEditor::totalAmount() const
   MyMoneyMoney amount;
 
   auto activityCombo = dynamic_cast<KMyMoneyActivityCombo*>(haveWidget("activity"));
-  auto sharesEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("shares"));
-  auto priceEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("price"));
-  auto feesEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("fee-amount"));
-  auto interestEdit = dynamic_cast<KMyMoneyEdit*>(haveWidget("interest-amount"));
+  auto sharesEdit = dynamic_cast<AmountEdit*>(haveWidget("shares"));
+  auto priceEdit = dynamic_cast<AmountEdit*>(haveWidget("price"));
+  auto feesEdit = dynamic_cast<AmountEdit*>(haveWidget("fee-amount"));
+  auto interestEdit = dynamic_cast<AmountEdit*>(haveWidget("interest-amount"));
 
   if (!activityCombo || !sharesEdit || !priceEdit ||
       !feesEdit || !interestEdit)

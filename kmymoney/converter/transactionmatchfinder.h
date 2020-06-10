@@ -111,7 +111,7 @@ protected:
    * Splits are considered a match if both of them:
    * - reference the same account
    * - have matching bankID-s
-   * - have matching ammounts
+   * - have matching amounts
    * - have empty or matching payees
    * - are not marked as matched already
    */

@@ -47,13 +47,13 @@ class KMyMoneyMoneyValidator : public QDoubleValidator
 
 public:
   /**
-    * Constuct a locale-aware KDoubleValidator with default range
+    * Construct a locale-aware KDoubleValidator with default range
     * (whatever QDoubleValidator uses for that) and parent @p
     * parent
     */
   explicit KMyMoneyMoneyValidator(QObject * parent);
   /**
-    * Constuct a locale-aware KDoubleValidator for range [@p bottom,@p
+    * Construct a locale-aware KDoubleValidator for range [@p bottom,@p
     * top] and a precision of @p digits after the decimal
     * point.
     */

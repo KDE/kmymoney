@@ -39,7 +39,6 @@
 #include "ui_kgeneralloaninfopage.h"
 
 #include "kmymoneydateinput.h"
-#include "kmymoneyedit.h"
 #include "kmymoneyfrequencycombo.h"
 #include "kmymoneypayeecombo.h"
 #include "kmymoneywizardpage.h"
@@ -82,7 +81,7 @@ namespace NewAccountWizard
 
     connect(d->ui->m_interestType, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), object(),  &KMyMoneyWizardPagePrivate::completeStateChanged);
     connect(d->ui->m_interestChangeDateEdit, &KMyMoneyDateInput::dateChanged, object(),  &KMyMoneyWizardPagePrivate::completeStateChanged);
-    connect(d->ui->m_openingBalance, &KMyMoneyEdit::textChanged, object(),  &KMyMoneyWizardPagePrivate::completeStateChanged);
+    connect(d->ui->m_openingBalance, &AmountEdit::textChanged, object(),  &KMyMoneyWizardPagePrivate::completeStateChanged);
 
     connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &GeneralLoanInfoPage::slotLoadWidgets);
   }
@@ -138,7 +137,7 @@ namespace NewAccountWizard
 
     d->ui->m_openingBalance->setDisabled(recordAllPayments());
 
-    if (d->ui->m_openingBalance->isEnabled() && d->ui->m_openingBalance->lineedit()->text().length() == 0) {
+    if (d->ui->m_openingBalance->isEnabled() && d->ui->m_openingBalance->text().length() == 0) {
         rc = false;
         d->m_wizard->d_func()->m_nextButton->setToolTip(i18n("No opening balance supplied"));
       }

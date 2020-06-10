@@ -190,7 +190,7 @@ void MyMoneyForecastTest::testDoForecast()
   MyMoneyAccount a_credit = file->account(acCredit);
 
   //test empty forecast
-  a.doForecast(); //this is just to check nothing goes wrong if forecast is run agains an empty template
+  a.doForecast(); //this is just to check nothing goes wrong if forecast is run against an empty template
 
   //setup some transactions
   TransactionHelper t1(QDate::currentDate().addDays(-1), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), this->moT1, acChecking, acSolo);
@@ -289,12 +289,12 @@ void MyMoneyForecastTest::testCalculateAccountTrend()
   try {
     MyMoneyForecast::calculateAccountTrend(a_checking, 0);
   } catch (const MyMoneyException &e) {
-    QVERIFY(QString::fromLatin1(e.what()).startsWith("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0"));
+    QVERIFY(QString::fromLatin1(e.what()).startsWith(QLatin1String("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0")));
   }
   try {
     MyMoneyForecast::calculateAccountTrend(a_checking, -10);
   } catch (const MyMoneyException &e) {
-    QVERIFY(QString::fromLatin1(e.what()).startsWith("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0"));
+    QVERIFY(QString::fromLatin1(e.what()).startsWith(QLatin1String("Illegal arguments when calling calculateAccountTrend. trendDays must be higher than 0")));
   }
 
   //test that it calculates correctly

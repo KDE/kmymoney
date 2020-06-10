@@ -30,7 +30,7 @@
 /**
  * @brief Model for MyMoneyPayeeIdentifierContainer
  *
- * Changes the user does have initernal effect only.
+ * Changes the user does have internal effect only.
  *
  * @see payeeIdentifierModel
  */

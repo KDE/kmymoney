@@ -46,7 +46,7 @@ private:
 private Q_SLOTS:
 
   /**
-    * Called when the user wishes to import tab delimeted transactions
+    * Called when the user wishes to import tab delimited transactions
     * into the current account.  An account must be open for this to
     * work.  Calls KMyMoneyView::slotAccountImportAscii.
     *

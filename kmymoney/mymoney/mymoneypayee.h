@@ -1,6 +1,6 @@
 /*
  * Copyright 2000-2001  Michael Edwardes <mte@users.sourceforge.net>
- * Copyright 2002-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2002-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2003       Kevin Tambascio <ktambascio@users.sourceforge.net>
  * Copyright 2006       Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
@@ -56,14 +56,6 @@ class KMM_MYMONEY_EXPORT MyMoneyPayee : public MyMoneyObject, public MyMoneyPaye
 public:
   MyMoneyPayee();
   explicit MyMoneyPayee(const QString &id);
-
-  explicit MyMoneyPayee(const QString& name,
-                        const QString& address,
-                        const QString& city = QString(),
-                        const QString& state = QString(),
-                        const QString& postcode = QString(),
-                        const QString& telephone = QString(),
-                        const QString& email = QString());
 
   MyMoneyPayee(const QString& id,
                const MyMoneyPayee& other);
@@ -147,13 +139,9 @@ public:
    */
   void setMatchData(eMyMoney::Payee::MatchType type, bool ignorecase, const QString& keys);
 
-
-  bool defaultAccountEnabled() const;
-
   QString defaultAccountId() const;
 
-  void setDefaultAccountId(const QString& id);
-  void setDefaultAccountId();
+  void setDefaultAccountId(const QString& id = QString());
 
   // Equality operator
   bool operator == (const MyMoneyPayee &) const;

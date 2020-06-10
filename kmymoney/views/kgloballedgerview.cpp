@@ -514,7 +514,7 @@ void KGlobalLedgerView::slotSetReconcileAccount(const MyMoneyAccount& acc, const
       d->m_buttonbar->addAction(pActions[Action::FinishReconciliation]);
       // when we start reconciliation, we need to reload the view
       // because no data has been changed. When postponing or finishing
-      // reconciliation, the data change in the engine takes care of updateing
+      // reconciliation, the data change in the engine takes care of updating
       // the view.
       refresh();
     }
@@ -1019,7 +1019,7 @@ bool KGlobalLedgerView::focusNextPrevChild(bool next)
 
         if (((w->focusPolicy() & Qt::TabFocus) == Qt::TabFocus) && w->isVisible() && w->isEnabled()) {
           // qDebug() << "Set focus to" << w->objectName();
-          w->setFocus();
+          w->setFocus(next ? Qt::TabFocusReason: Qt::BacktabFocusReason);
           rc = true;
           break;
         }
@@ -1711,20 +1711,20 @@ void KGlobalLedgerView::slotCopyTransactionToClipboard()
     try {
       const auto& s = st.split();
       // Date
-      txt += i18n("Date: %1").arg(st.transaction().postDate().toString(Qt::DefaultLocaleShortDate));
+      txt += i18n("Date: %1", st.transaction().postDate().toString(Qt::DefaultLocaleShortDate));
       txt += QStringLiteral("\n");
       // Payee
       QString payee = i18nc("Name for unknown payee", "Unknown");
       if (!s.payeeId().isEmpty()) {
         payee = file->payee(s.payeeId()).name();
       }
-      txt += i18n("Payee: %1").arg(payee);
+      txt += i18n("Payee: %1", payee);
       txt += QStringLiteral("\n");
       // Amount
-      txt += i18n("Amount: %1").arg(s.value().formatMoney(currency.tradingSymbol(),  MyMoneyMoney::denomToPrec(acc.fraction(currency))));
+      txt += i18n("Amount: %1", s.value().formatMoney(currency.tradingSymbol(),  MyMoneyMoney::denomToPrec(acc.fraction(currency))));
       txt += QStringLiteral("\n");
       // Memo
-      txt += i18n("Memo: %1").arg(s.memo());
+      txt += i18n("Memo: %1", s.memo());
       txt += QStringLiteral("\n");
 
     } catch (MyMoneyException &) {

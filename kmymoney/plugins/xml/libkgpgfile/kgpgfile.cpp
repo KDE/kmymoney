@@ -40,7 +40,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#ifdef Gpgmepp_FOUND
+#ifdef ENABLE_GPG
 #include <gpgme++/context.h>
 #include <gpgme++/encryptionresult.h>
 #include <gpgme++/decryptionresult.h>
@@ -327,9 +327,12 @@ QString KGPGFile::errorToString() const
 bool KGPGFile::GPGAvailable()
 {
   GpgME::initializeLibrary();
-  bool rc = (GpgME::checkEngine(GpgME::OpenPGP) == 0);
-  // qDebug("KGPGFile::GPGAvailable returns %d", rc);
-  return rc;
+  const auto engineCheck = GpgME::checkEngine(GpgME::OpenPGP);
+  if (engineCheck.code() != 0) {
+    qDebug() << "GpgME::checkEngine returns" << engineCheck.code() << engineCheck.asString();
+    return false;
+  }
+  return true;
 }
 
 bool KGPGFile::keyAvailable(const QString& name)
@@ -429,7 +432,7 @@ void KGPGFile::keyList(QStringList& list, bool secretKeys, const QString& patter
   }
 }
 
-#else // not Gpgmepp_FOUND
+#else // not ENABLE_GPG
 
 // NOOP implementation
 KGPGFile::KGPGFile(const QString& fn, const QString& homedir, const QString& options) : d(0)

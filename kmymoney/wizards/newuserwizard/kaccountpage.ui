@@ -174,7 +174,7 @@
                   </widget>
                 </item>
                 <item>
-                  <widget class="KMyMoneyEdit" name="m_openingBalanceEdit">
+                  <widget class="AmountEdit" name="m_openingBalanceEdit">
                     <property name="resetButtonVisibility" stdset="0">
                       <bool>false</bool>
                     </property>
@@ -235,6 +235,13 @@
       </item>
     </layout>
   </widget>
+  <customwidgets>
+    <customwidget>
+      <class>AmountEdit</class>
+      <extends>QLineEdit</extends>
+      <header location="global">amountedit.h</header>
+    </customwidget>
+  </customwidgets>
   <layoutdefault spacing="6" margin="11"/>
     <tabstops>
     <tabstop>m_accountNameEdit</tabstop>

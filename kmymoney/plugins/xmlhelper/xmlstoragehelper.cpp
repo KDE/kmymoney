@@ -3,6 +3,7 @@
  * Copyright 2006       Darren Gould <darren_gould@gmx.de>
  * Copyright 2007-2010  Alvaro Soliverez <asoliverez@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2018       Michael Kiefer <Michael-Kiefer@web.de>
  * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
@@ -87,6 +88,7 @@ namespace Attribute {
     SettlementPeriod, ShowSTLTCapitalGains, TermsSeparator,
     Pattern, CaseSensitive, RegEx, InvertText, State,
     From, To,
+    NegExpenses,
     Validity, ChartPalette,
     // insert new entries above this line
     LastAttribute
@@ -202,7 +204,8 @@ namespace MyMoneyXmlContentHandler2 {
       {Attribute::Report::State,                  QStringLiteral("state")},
       {Attribute::Report::From,                   QStringLiteral("from")},
       {Attribute::Report::To,                     QStringLiteral("to")},
-      {Attribute::Report::Validity,               QStringLiteral("validity")}
+      {Attribute::Report::Validity,               QStringLiteral("validity")},
+      {Attribute::Report::NegExpenses,            QStringLiteral("negexpenses")}
     };
     return attributeNames.value(attributeID);
   }
@@ -767,6 +770,7 @@ namespace MyMoneyXmlContentHandler2 {
         report.setChartDataLabels(node.attribute(attributeName(Attribute::Report::ChartDataLabels), "1").toUInt());
         report.setChartByDefault(node.attribute(attributeName(Attribute::Report::ChartByDefault), "0").toUInt());
         report.setLogYAxis(node.attribute(attributeName(Attribute::Report::LogYAxis), "0").toUInt());
+        report.setNegExpenses(node.attribute(attributeName(Attribute::Report::NegExpenses), "0").toUInt());
         report.setChartLineWidth(node.attribute(attributeName(Attribute::Report::ChartLineWidth), QString(MyMoneyReport::lineWidth())).toUInt());
 
         // read range tab
@@ -966,6 +970,7 @@ namespace MyMoneyXmlContentHandler2 {
         el.setAttribute(attributeName(Attribute::Report::ChartDataLabels), report.isChartDataLabels());
         el.setAttribute(attributeName(Attribute::Report::ChartByDefault), report.isChartByDefault());
         el.setAttribute(attributeName(Attribute::Report::LogYAxis), report.isLogYAxis());
+        el.setAttribute(attributeName(Attribute::Report::NegExpenses), report.isNegExpenses());
         el.setAttribute(attributeName(Attribute::Report::ChartLineWidth), report.chartLineWidth());
         el.setAttribute(attributeName(Attribute::Report::ColumnType), reportNames(report.columnType()));
         el.setAttribute(attributeName(Attribute::Report::DataLock), reportNames(report.dataFilter()));

@@ -7,18 +7,18 @@
 
 #cmakedefine KMM_DBUS 1
 
-#cmakedefine KF5Holidays_FOUND 1
+#cmakedefine ENABLE_HOLIDAYS 1
 
-#cmakedefine Gpgmepp_FOUND 1
+#cmakedefine ENABLE_ADDRESSBOOK 1
 
-#cmakedefine KMM_ADDRESSBOOK_FOUND 1
-
-#cmakedefine KF5Activities_FOUND 1
+#cmakedefine ENABLE_ACTIVITIES 1
 
 #cmakedefine ENABLE_WEBENGINE 1
 
 #cmakedefine ENABLE_UNFINISHEDFEATURES 1
 
 #cmakedefine ENABLE_SQLCIPHER 1
+
+#cmakedefine ENABLE_GPG 1
 
 #cmakedefine IS_APPIMAGE 1

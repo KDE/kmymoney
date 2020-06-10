@@ -42,7 +42,6 @@
 
 #include <KMessageBox>
 #include <KTitleWidget>
-#include <KCompressionDevice>
 #include <KSharedConfig>
 #include <KBackup>
 #include <KActionCollection>
@@ -75,17 +74,16 @@
 #include "equitiesmodel.h"
 #include "securitiesmodel.h"
 #include "icons.h"
-#include "amountedit.h"
 #include "onlinejobadministration.h"
 #include "kmymoneyaccounttreeview.h"
 #include "accountsviewproxymodel.h"
+#include "mymoneymoney.h"
 #include "mymoneyprice.h"
 #include "mymoneyschedule.h"
 #include "mymoneysplit.h"
 #include "mymoneyaccount.h"
 #include "mymoneyinstitution.h"
 #include "mymoneytag.h"
-#include "kmymoneyedit.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneyreport.h"

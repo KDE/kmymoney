@@ -34,14 +34,14 @@ class MyMoneyAccount;
 namespace eMyMoney { namespace OnlineJob { enum class sendingState; } }
 
 /**
- * @brief Class to share jobs which can be procceded by an online banking plugin
+ * @brief Class to share jobs which can be processed by an online banking plugin
  *
  * This class stores only the status information and a pointer to an @r onlineTask which stores
  * the real data. So onlineJob is similar to an shared pointer.
  *
  * If you know the type of the onlineTask, @r onlineJobTyped is the first choice to use.
  *
- * It is save to use because accesses to pointers (e.g. task() ) throw an execption if onlineJob is null.
+ * It is save to use because accesses to pointers (e.g. task() ) throw an exception if onlineJob is null.
  *
  * Online jobs are usually not created directly but over @r onlineJobAdministration::createOnlineJob. This is
  * required to allow loading of onlineTasks at runtime and only if needed.
@@ -62,7 +62,7 @@ class KMM_MYMONEY_EXPORT onlineJob : public MyMoneyObject
 
 public:
    /**
-   * @brief Contructor for null onlineJobs
+   * @brief Constructor for null onlineJobs
    *
    * A onlineJob which is null cannot become valid again.
    * @see isNull()
@@ -71,7 +71,7 @@ public:
   explicit onlineJob(const QString &id);
 
   /**
-   * @brief Default construtor
+   * @brief Default constructor
    *
    * The onlineJob takes ownership of the task. The task is deleted in the destructor.
    */
@@ -120,7 +120,7 @@ public:
   /**
    * @brief Returns task of type T attached to this onlineJob
    *
-   * Internaly a dynamic_cast is done and the result is checked.
+   * Internally a dynamic_cast is done and the result is checked.
    *
    * @throws emptyTask if isNull()
    * @throws badTaskCast if attached task cannot be casted to T
@@ -298,7 +298,7 @@ public:
     explicit emptyTask(const char *msg) : std::runtime_error(msg) {}  // krazy:exclude=inline
   };
 
-  /** @brief onlineTask attatched to this job */
+  /** @brief onlineTask attached to this job */
   onlineTask* m_task;
 
 private:

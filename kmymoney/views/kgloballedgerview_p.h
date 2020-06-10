@@ -942,7 +942,7 @@ public:
               }
             try {
               const auto& t = m_selectedTransactions[0].transaction();
-              // search the first non-income/non-expense accunt and use it for the 'goto account'
+              // search the first non-income/non-expense account and use it for the 'goto account'
               const auto& selectedTransactionSplit = m_selectedTransactions[0].split();
               foreach (const auto split, t.splits()) {
                   if (split.id() != selectedTransactionSplit.id()) {
@@ -1082,7 +1082,7 @@ public:
     }
   }
 
-  // used to store the id of an item and the id of an immeadiate unselected sibling
+  // used to store the id of an item and the id of an immediate unselected sibling
   void storeId(KMyMoneyRegister::RegisterItem *item, QString &id, QString &backupId) {
     if (item) {
       // the id of the item
@@ -1325,7 +1325,7 @@ public:
   /**
     * Mark the selected transactions as provided by @a flag. If
     * flag is @a MyMoneySplit::Unknown, the future state depends
-    * on the current stat of the split's flag accoring to the
+    * on the current stat of the split's flag according to the
     * following table:
     *
     * - NotReconciled --> Cleared

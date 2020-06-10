@@ -46,7 +46,7 @@ class MyMoneyTransaction;
   */
 
 /**
-  * This class implementes a wizard for the creation of loan accounts.
+  * This class implements a wizard for the creation of loan accounts.
   * The user is asked a set of questions and according to the answers
   * the respective MyMoneyAccount object can be requested from the
   * wizard when accept() has been called. A MyMoneySchedule is also

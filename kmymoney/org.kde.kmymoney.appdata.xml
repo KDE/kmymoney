@@ -38,40 +38,16 @@
   <name xml:lang="x-test">xxKMyMoneyxx</name>
   <name xml:lang="zh-CN">KMyMoney</name>
   <name xml:lang="zh-TW">KMyMoney</name>
-  <summary>Personal Finance Manager</summary>
-  <summary xml:lang="ar">مدير ماليّة شخصيّ</summary>
-  <summary xml:lang="bs">Lični upravnik finansijama</summary>
-  <summary xml:lang="ca">Gestor per a les finances personals</summary>
-  <summary xml:lang="ca-valencia">Gestor per a les finances personals</summary>
-  <summary xml:lang="cs">Osobní správce financí</summary>
-  <summary xml:lang="da">Styring af privatøkonomi</summary>
-  <summary xml:lang="de">Persönliche Finanzverwaltung</summary>
-  <summary xml:lang="en-GB">Personal Finance Manager</summary>
-  <summary xml:lang="es">Gestor de finanzas personales</summary>
-  <summary xml:lang="et">Isiklike rahaasjade haldur</summary>
-  <summary xml:lang="eu">Finantza pertsonalen kudeatzailea</summary>
-  <summary xml:lang="fi">Henkilökohtainen talouskirjanpito</summary>
-  <summary xml:lang="fr">Gestionnaire de finances personnelles</summary>
-  <summary xml:lang="gl">Xestor das finanzas persoais</summary>
-  <summary xml:lang="hu">Személyes pénzügyi kezelő</summary>
-  <summary xml:lang="id">Pengelola Keuangan Personal</summary>
-  <summary xml:lang="it">Gestore delle finanze personali</summary>
-  <summary xml:lang="ko">개인 재무 관리자</summary>
-  <summary xml:lang="lt">Asmeninių finansų tvarkytuvė</summary>
-  <summary xml:lang="nl">Persoonlijk financieel beheer</summary>
-  <summary xml:lang="nn">Rekneskapsprogram for privatøkonomien</summary>
-  <summary xml:lang="pl">Zarządzanie finansami osobistymi</summary>
-  <summary xml:lang="pt">Gestor de Finanças Pessoais</summary>
-  <summary xml:lang="pt-BR">Gerenciador de finanças pessoais</summary>
-  <summary xml:lang="ro">Gestionar de finanțe personale</summary>
-  <summary xml:lang="ru">Учёт финансов</summary>
-  <summary xml:lang="sk">Osobný manažér financií</summary>
-  <summary xml:lang="sv">Hemekonomihanterare</summary>
-  <summary xml:lang="tr">Kişisel Finans Yöneticisi</summary>
-  <summary xml:lang="uk">Програма для керування особистими фінансами</summary>
-  <summary xml:lang="x-test">xxPersonal Finance Managerxx</summary>
-  <summary xml:lang="zh-CN">个人金融管理器</summary>
-  <summary xml:lang="zh-TW">個人財務管理程式</summary>
+  <summary>Personal finance manager based on double-entry bookkeeping</summary>
+  <summary xml:lang="ca">Gestor de les finances personals, basat en la comptabilitat de doble entrada</summary>
+  <summary xml:lang="es">Gestor de finanzas personales basado en el sistema de partida doble</summary>
+  <summary xml:lang="fr">Gestionnaire de compte personnel reposant sur à une comptabilité à double entrée</summary>
+  <summary xml:lang="it">Gestore delle finanze personali basato sulla contabilità in partita doppia</summary>
+  <summary xml:lang="nl">Persoonlijk financieel beheer gebaseerd op dubbel boekhouden</summary>
+  <summary xml:lang="pt">Gestor de finanças pessoais com base na contabilidade por duplo registo</summary>
+  <summary xml:lang="sv">Hemekonomihanterare baserad på dubbel bokföring</summary>
+  <summary xml:lang="uk">Програма для керування особистими фінансами, яку засновано на бухгалтерській системі із подвійним записом</summary>
+  <summary xml:lang="x-test">xxPersonal finance manager based on double-entry bookkeepingxx</summary>
   <description>
     <p>KMyMoney is a personal finance manager by KDE. It comes with a large set of features while being easy to use for the non-technical user.</p>
     <p xml:lang="ca">El KMyMoney és un gestor de les finances personals desenvolupat pel KDE. Té un gran conjunt de característiques encara que és fàcil d'emprar pels usuaris no tècnics.</p>

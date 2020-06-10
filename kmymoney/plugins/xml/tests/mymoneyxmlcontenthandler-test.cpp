@@ -853,22 +853,20 @@ void MyMoneyXmlContentHandlerTest::readWritePayee()
   QDomElement el = parent.firstChild().toElement();
   QVERIFY(!el.isNull());
   auto payee2 = MyMoneyXmlContentHandler::readPayee(el);
-  QVERIFY(!payee2.defaultAccountEnabled());
   QVERIFY(payee2.defaultAccountId().isEmpty());
   el = el.nextSibling().toElement();
   QVERIFY(!el.isNull());
   auto payee3 = MyMoneyXmlContentHandler::readPayee(el);
-  QVERIFY(payee3.defaultAccountEnabled());
+  QVERIFY(!payee3.defaultAccountId().isEmpty());
   QVERIFY(payee3.defaultAccountId() == temp1);
   el = el.nextSibling().toElement();
   QVERIFY(!el.isNull());
   auto payee4 = MyMoneyXmlContentHandler::readPayee(el);
-  QVERIFY(payee4.defaultAccountEnabled());
+  QVERIFY(!payee4.defaultAccountId().isEmpty());
   QVERIFY(payee4.defaultAccountId() == temp2);
   el = el.nextSibling().toElement();
   QVERIFY(!el.isNull());
   auto payee5 = MyMoneyXmlContentHandler::readPayee(el);
-  QVERIFY(!payee5.defaultAccountEnabled());
   QVERIFY(payee5.defaultAccountId().isEmpty());
 }
 

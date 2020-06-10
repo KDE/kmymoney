@@ -165,14 +165,14 @@ bool KMyMoneyUtils::appendCorrectFileExt(QString& str, const QString& strExtToUs
   bool rc = false;
 
   if (!str.isEmpty()) {
-    //find last . delminator
+    //find last . deliminator
     int nLoc = str.lastIndexOf('.');
     if (nLoc != -1) {
       QString strExt, strTemp;
       strTemp = str.left(nLoc + 1);
       strExt = str.right(str.length() - (nLoc + 1));
       if (strExt.indexOf(strExtToUse, 0, Qt::CaseInsensitive) == -1) {
-        // if the extension given contains a period, we remove our's
+        // if the extension given contains a period, we remove ours
         if (strExtToUse.indexOf('.') != -1)
           strTemp = strTemp.left(strTemp.length() - 1);
         //append extension to make complete file name

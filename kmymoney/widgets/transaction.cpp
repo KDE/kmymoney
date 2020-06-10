@@ -51,7 +51,6 @@
 #include "kmymoneycategory.h"
 #include "kmymoneydateinput.h"
 #include "transactionform.h"
-#include "kmymoneyedit.h"
 #include "kmymoneyutils.h"
 #include "registerfilter.h"
 #include "tabbar.h"
@@ -843,7 +842,7 @@ bool Transaction::matches(const RegisterFilter& filter) const
       }
     }
     const MyMoneyAccount& acc = file->account(split.accountId());
-    // search for account hierachy
+    // search for account hierarchy
     if (filter.text.contains(MyMoneyFile::AccountSeparator)) {
       QStringList names;
       MyMoneyAccount current = acc;

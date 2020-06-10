@@ -145,7 +145,7 @@ public:
   onlineJob convertBest(const onlineJob& original, const QStringList& convertTaskIids, onlineTaskConverter::convertType& convertType, QString& userInformation, const QString& onlineJobId) const;
 
   /**
-   * @brief Convinient for convertBest() which crates an onlineJob with the same id as original.
+   * @brief Convenient for convertBest() which crates an onlineJob with the same id as original.
    */
   onlineJob convertBest(const onlineJob& original, const QStringList& convertTaskIids, onlineTaskConverter::convertType& convertType, QString& userInformation) const;
 
@@ -304,7 +304,7 @@ private:
   QMultiMap<QString, onlineTaskConverter*> m_onlineTaskConverter;
 
   /**
-   * Intances of editors
+   * Instances of editors
    */
   QList<IonlineJobEdit*> m_onlineTaskEditors;
 

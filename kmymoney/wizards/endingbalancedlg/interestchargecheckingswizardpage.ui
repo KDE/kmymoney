@@ -114,7 +114,7 @@
            <item>
             <layout class="QHBoxLayout">
              <item>
-              <widget class="KMyMoneyEdit" name="m_interestEdit">
+              <widget class="AmountEdit" name="m_interestEdit">
                <property name="resetButtonVisibility" stdset="0">
                 <bool>false</bool>
                </property>
@@ -150,7 +150,7 @@
            <item>
             <layout class="QHBoxLayout">
              <item>
-              <widget class="KMyMoneyEdit" name="m_chargesEdit">
+              <widget class="AmountEdit" name="m_chargesEdit">
                <property name="resetButtonVisibility" stdset="0">
                 <bool>false</bool>
                </property>
@@ -211,6 +211,11 @@
    <header>kmymoneypayeecombo.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>AmountEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">amountedit.h</header>
+  </customwidget>	  
  </customwidgets>
  <tabstops>
  </tabstops>

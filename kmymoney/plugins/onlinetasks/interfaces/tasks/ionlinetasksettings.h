@@ -29,8 +29,8 @@
  * once. But this amount could depend on the account and the user's
  * contract with the bank.
  *
- * Therefor onlineTasks can offer thier own set of configurations. There
- * is no predifined behavior, only subclass onlineTask::settings.
+ * Therefor onlineTasks can offer their own set of configurations. There
+ * is no predefined behavior, only subclass onlineTask::settings.
  * Of course onlinePlugins and widgets which support that task
  * need to know how to handle that specific settings.
  *

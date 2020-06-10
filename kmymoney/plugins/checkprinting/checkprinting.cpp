@@ -21,9 +21,8 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>  *
  ***************************************************************************/
 
-#include "checkprinting.h"
-
 #include <config-kmymoney.h>
+#include "checkprinting.h"
 
 // QT includes
 #include <QAction>
@@ -100,7 +99,7 @@ CheckPrinting::CheckPrinting(QObject *parent, const QVariantList &args) :
   d->m_action = actionCollection()->addAction("transaction_checkprinting", this, SLOT(slotPrintCheck()));
   d->m_action->setText(actionName);
 
-  // wait until a transaction is selected before enableing the action
+  // wait until a transaction is selected before enabling the action
   d->m_action->setEnabled(false);
   d->m_printedTransactionIdList = PluginSettings::printedChecks();
   readCheckTemplate();

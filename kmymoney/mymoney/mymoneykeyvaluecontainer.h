@@ -74,7 +74,7 @@ public:
     *
     * @param key const reference to QString with the key to search for
     * @return reference to value of this key. If the key does not exist,
-    *         an emtpy string is returned.
+    *         an empty string is returned.
     */
   QString value(const QString& key) const;
 

@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <config-kmymoney.h>
 
 #include "kbanking.h"
@@ -190,6 +191,8 @@ KBanking::~KBanking()
 
 void KBanking::plug()
 {
+  const auto componentName = QLatin1String("kbanking");
+  const auto rcFileName = QLatin1String("kbanking.rc");
   m_kbanking = new KBankingExt(this, "KMyMoney");
 
   d->passwordCacheTimer = new QTimer(this);
@@ -205,8 +208,6 @@ void KBanking::plug()
 
     if (m_kbanking->init() == 0) {
       // Tell the host application to load my GUI component
-      const auto componentName = QLatin1String("kbanking");
-      const auto rcFileName = QLatin1String("kbanking.rc");
       setComponentName(componentName, "KBanking");
 
 #ifdef IS_APPIMAGE
@@ -868,7 +869,7 @@ KBankingExt::KBankingExt(KBanking* parent, const char* appname, const char* fnam
     if (!*q)
       q = appname;
   }
-  registerFinTs(regkey.data(), match.captured(1).toLatin1());
+  registerFinTs(regkey.data(), match.captured(1).remove(QLatin1Char('.')).left(5).toLatin1());
 }
 
 

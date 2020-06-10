@@ -36,19 +36,25 @@
 
 using namespace eAccountsModel;
 
+#if QT_VERSION < QT_VERSION_CHECK(5,10,0)
+#define QSortFilterProxyModel KRecursiveFilterProxyModel
+#endif
 AccountsProxyModel::AccountsProxyModel(QObject *parent) :
-  KRecursiveFilterProxyModel(parent),
+  QSortFilterProxyModel(parent),
   d_ptr(new AccountsProxyModelPrivate)
 {
+  setRecursiveFilteringEnabled(true);
   setDynamicSortFilter(true);
   setSortLocaleAware(true);
   setFilterCaseSensitivity(Qt::CaseInsensitive);
 }
 
 AccountsProxyModel::AccountsProxyModel(AccountsProxyModelPrivate &dd, QObject *parent) :
-  KRecursiveFilterProxyModel(parent), d_ptr(&dd)
+  QSortFilterProxyModel(parent), d_ptr(&dd)
 {
+  setRecursiveFilteringEnabled(true);
 }
+#undef QSortFilterProxyModel
 
 AccountsProxyModel::~AccountsProxyModel()
 {

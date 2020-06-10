@@ -24,7 +24,7 @@
 #
 # transactionId;splitId;<selected-field>[;numeric amount]
 #
-# in case the selected field is either 'shares' or 'value' the colum 'amount'
+# in case the selected field is either 'shares' or 'value' the column 'amount'
 # will be added to the output which contains the value in a form that can be
 # processed by spreadsheet programs
 #

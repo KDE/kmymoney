@@ -261,7 +261,7 @@ private:
 
   /**
    * This methods returns the account from the list of accounts identified by
-   * an account id or account name including an account hierachy.
+   * an account id or account name including an account hierarchy.
    *
    * The parent account specifies from which account the search should be started.
    * In case the parent account does not have an id, the method scans all top-level accounts.

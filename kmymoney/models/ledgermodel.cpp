@@ -481,7 +481,7 @@ void LedgerModel::load()
   addTransactions(tList);
   qDebug() << "Loaded" << rowCount() << "elements";
 
-  // load all scheduled transactoins and splits into the model
+  // load all scheduled transactions and splits into the model
   const int splitCount = rowCount();
   QList<MyMoneySchedule> sList = MyMoneyFile::instance()->scheduleList();
   addSchedules(sList, KMyMoneySettings::schedulePreview());

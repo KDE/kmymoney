@@ -143,7 +143,7 @@
            </widget>
           </item>
           <item row="1" column="3">
-           <widget class="KMyMoneyEdit" name="m_openingBalanceEdit" native="true"/>
+           <widget class="AmountEdit" name="m_openingBalanceEdit" native="true"/>
           </item>
          </layout>
         </widget>
@@ -482,7 +482,7 @@
           </widget>
          </item>
          <item row="2" column="2">
-          <widget class="KMyMoneyEdit" name="m_minBalanceAbsoluteEdit" native="true">
+          <widget class="AmountEdit" name="m_minBalanceAbsoluteEdit" native="true">
            <property name="resetButtonVisibility" stdset="0">
             <bool>false</bool>
            </property>
@@ -509,21 +509,21 @@
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="KMyMoneyEdit" name="m_maxCreditEarlyEdit" native="true">
+          <widget class="AmountEdit" name="m_maxCreditEarlyEdit" native="true">
            <property name="resetButtonVisibility" stdset="0">
             <bool>false</bool>
            </property>
           </widget>
          </item>
          <item row="3" column="2">
-          <widget class="KMyMoneyEdit" name="m_maxCreditAbsoluteEdit" native="true">
+          <widget class="AmountEdit" name="m_maxCreditAbsoluteEdit" native="true">
            <property name="resetButtonVisibility" stdset="0">
             <bool>false</bool>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="KMyMoneyEdit" name="m_minBalanceEarlyEdit" native="true">
+          <widget class="AmountEdit" name="m_minBalanceEarlyEdit" native="true">
            <property name="resetButtonVisibility" stdset="0">
             <bool>false</bool>
            </property>
@@ -633,7 +633,7 @@
                <item>
                 <layout class="QHBoxLayout">
                  <item>
-                  <widget class="KMyMoneyEdit" name="m_vatRate" native="true"/>
+                  <widget class="AmountEdit" name="m_vatRate" native="true"/>
                  </item>
                  <item>
                   <spacer name="spacer17">
@@ -838,11 +838,10 @@
    <extends>QTextEdit</extends>
    <header>ktextedit.h</header>
   </customwidget>
-  <customwidget>
-   <class>KMyMoneyEdit</class>
-   <extends>QWidget</extends>
-   <header>../widgets/kmymoneyedit.h</header>
-   <container>1</container>
+  <customwidget>                                   
+   <class>AmountEdit</class>
+   <extends>QLineEdit</extends>                   
+   <header location="global">amountedit.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneyGeneralCombo</class>

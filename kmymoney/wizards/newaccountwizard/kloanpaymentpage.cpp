@@ -37,7 +37,6 @@
 
 #include "ui_kloanpaymentpage.h"
 
-#include "kmymoneyedit.h"
 #include "knewaccountwizard.h"
 #include "knewaccountwizard_p.h"
 #include "kloandetailspage.h"

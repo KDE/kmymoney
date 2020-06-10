@@ -2339,7 +2339,7 @@ QStringList MyMoneyFile::consistencyCheck()
   }
 
   //look for accounts which have currencies other than the base currency but no price on the opening date
-  //all accounts using base currency are excluded, since that's the base used for foreing currency calculation
+  //all accounts using base currency are excluded, since that's the base used for foreign currency calculation
   //thus it is considered as always present
   //accounts that represent Income/Expense categories are also excluded as price is irrelevant for their
   //fake opening date since a forex rate is required for all multi-currency transactions
@@ -2515,7 +2515,7 @@ QString MyMoneyFile::checkCategory(const QString& name, const MyMoneyMoney& valu
   bool found = true;
 
   if (!name.isEmpty()) {
-    // The category might be constructed with an arbitraty depth (number of
+    // The category might be constructed with an arbitrary depth (number of
     // colon delimited fields). We try to find a parent account within this
     // hierarchy by searching the following sequence:
     //

@@ -41,7 +41,6 @@
 #include "ui_kgeneralloaninfopage.h"
 #include "ui_kloandetailspage.h"
 
-#include "kmymoneyedit.h"
 #include "kmymoneyfrequencycombo.h"
 #include "knewaccountwizard.h"
 #include "knewaccountwizard_p.h"
@@ -75,10 +74,10 @@ namespace NewAccountWizard
 
     connect(d->ui->m_termAmount, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &LoanDetailsPage::slotValuesChanged);
     connect(d->ui->m_termUnit, static_cast<void (QComboBox::*)(int)>(&QComboBox::highlighted), this, &LoanDetailsPage::slotValuesChanged);
-    connect(d->ui->m_loanAmount, &KMyMoneyEdit::textChanged, this, &LoanDetailsPage::slotValuesChanged);
-    connect(d->ui->m_interestRate, &KMyMoneyEdit::textChanged, this, &LoanDetailsPage::slotValuesChanged);
-    connect(d->ui->m_paymentAmount, &KMyMoneyEdit::textChanged, this, &LoanDetailsPage::slotValuesChanged);
-    connect(d->ui->m_balloonAmount, &KMyMoneyEdit::textChanged, this, &LoanDetailsPage::slotValuesChanged);
+    connect(d->ui->m_loanAmount, &AmountEdit::textChanged, this, &LoanDetailsPage::slotValuesChanged);
+    connect(d->ui->m_interestRate, &AmountEdit::textChanged, this, &LoanDetailsPage::slotValuesChanged);
+    connect(d->ui->m_paymentAmount, &AmountEdit::textChanged, this, &LoanDetailsPage::slotValuesChanged);
+    connect(d->ui->m_balloonAmount, &AmountEdit::textChanged, this, &LoanDetailsPage::slotValuesChanged);
 
     connect(d->ui->m_calculateButton, &QAbstractButton::clicked, this, &LoanDetailsPage::slotCalculate);
   }
@@ -95,8 +94,8 @@ namespace NewAccountWizard
 
     d->m_mandatoryGroup->clear();
     if (!d->m_wizard->openingBalance().isZero()) {
-        d->m_mandatoryGroup->add(d->ui->m_loanAmount->lineedit());
-        if (d->ui->m_loanAmount->lineedit()->text().length() == 0) {
+        d->m_mandatoryGroup->add(d->ui->m_loanAmount);
+        if (d->ui->m_loanAmount->text().length() == 0) {
             d->ui->m_loanAmount->setValue(d->m_wizard->openingBalance().abs());
           }
       }
@@ -129,7 +128,7 @@ namespace NewAccountWizard
   {
     Q_D(LoanDetailsPage);
     MyMoneyFinancialCalculator calc;
-    double val;
+    MyMoneyMoney val;
     int PF, CF;
     QString result;
     bool moneyBorrowed = d->m_wizard->moneyBorrowed();
@@ -150,30 +149,30 @@ namespace NewAccountWizard
     calc.setCF(CF);
 
 
-    if (!d->ui->m_loanAmount->lineedit()->text().isEmpty()) {
-        val = d->ui->m_loanAmount->value().abs().toDouble();
+    if (!d->ui->m_loanAmount->text().isEmpty()) {
+        val = d->ui->m_loanAmount->value().abs();
         if (moneyBorrowed)
           val = -val;
-        calc.setPv(val);
+        calc.setPv(val.toDouble());
       }
 
-    if (!d->ui->m_interestRate->lineedit()->text().isEmpty()) {
-        val = d->ui->m_interestRate->value().abs().toDouble();
-        calc.setIr(val);
+    if (!d->ui->m_interestRate->text().isEmpty()) {
+        val = d->ui->m_interestRate->value().abs();
+        calc.setIr(val.toDouble());
       }
 
-    if (!d->ui->m_paymentAmount->lineedit()->text().isEmpty()) {
-        val = d->ui->m_paymentAmount->value().abs().toDouble();
+    if (!d->ui->m_paymentAmount->text().isEmpty()) {
+        val = d->ui->m_paymentAmount->value().abs();
         if (moneyLend)
           val = -val;
-        calc.setPmt(val);
+        calc.setPmt(val.toDouble());
       }
 
-    if (!d->ui->m_balloonAmount->lineedit()->text().isEmpty()) {
-        val = d->ui->m_balloonAmount->value().abs().toDouble();
+    if (!d->ui->m_balloonAmount->text().isEmpty()) {
+        val = d->ui->m_balloonAmount->value().abs();
         if (moneyLend)
           val = -val;
-        calc.setFv(val);
+        calc.setFv(val.toDouble());
       }
 
     if (d->ui->m_termAmount->value() != 0) {
@@ -182,71 +181,70 @@ namespace NewAccountWizard
 
     // setup of parameters is done, now do the calculation
     try {
-      if (d->ui->m_loanAmount->lineedit()->text().isEmpty()) {
+      if (d->ui->m_loanAmount->text().isEmpty()) {
           // calculate the amount of the loan out of the other information
-          val = calc.presentValue();
-          d->ui->m_loanAmount->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney(QString(), d->m_wizard->d_func()->precision()));
-          result = i18n("KMyMoney has calculated the amount of the loan as %1.", d->ui->m_loanAmount->lineedit()->text());
+          val = MyMoneyMoney(calc.presentValue());
+          d->ui->m_loanAmount->setValue(val);
+          result = i18n("KMyMoney has calculated the amount of the loan as %1.", d->ui->m_loanAmount->text());
 
-        } else if (d->ui->m_interestRate->lineedit()->text().isEmpty()) {
+        } else if (d->ui->m_interestRate->text().isEmpty()) {
           // calculate the interest rate out of the other information
-          val = calc.interestRate();
+          val = MyMoneyMoney(calc.interestRate());
 
-          d->ui->m_interestRate->loadText(MyMoneyMoney(static_cast<double>(val)).abs().formatMoney(QString(), 3));
-          result = i18n("KMyMoney has calculated the interest rate to %1%.", d->ui->m_interestRate->lineedit()->text());
+          d->ui->m_interestRate->setValue(val);
+          result = i18n("KMyMoney has calculated the interest rate to %1%.", d->ui->m_interestRate->text());
 
-        } else if (d->ui->m_paymentAmount->lineedit()->text().isEmpty()) {
+        } else if (d->ui->m_paymentAmount->text().isEmpty()) {
           // calculate the periodical amount of the payment out of the other information
-          val = calc.payment();
-          d->ui->m_paymentAmount->setValue(MyMoneyMoney(static_cast<double>(val)).abs());
+          val = MyMoneyMoney(calc.payment());
+          d->ui->m_paymentAmount->setValue(val.abs());
           // reset payment as it might have changed due to rounding
-          val = d->ui->m_paymentAmount->value().abs().toDouble();
+          val = d->ui->m_paymentAmount->value().abs();
           if (moneyLend)
             val = -val;
-          calc.setPmt(val);
+          calc.setPmt(val.toDouble());
 
-          result = i18n("KMyMoney has calculated a periodic payment of %1 to cover principal and interest.", d->ui->m_paymentAmount->lineedit()->text());
+          result = i18n("KMyMoney has calculated a periodic payment of %1 to cover principal and interest.", d->ui->m_paymentAmount->text());
 
-          val = calc.futureValue();
-          if ((moneyBorrowed && val < 0 && qAbs(val) >= qAbs(calc.payment()))
-              || (moneyLend && val > 0 && qAbs(val) >= qAbs(calc.payment()))) {
+          val = MyMoneyMoney(calc.futureValue());
+          if ((moneyBorrowed && val < MyMoneyMoney() && qAbs(val.toDouble()) >= qAbs(calc.payment()))
+              || (moneyLend && val > MyMoneyMoney() && qAbs(val.toDouble()) >= qAbs(calc.payment()))) {
               calc.setNpp(calc.npp() - 1);
               // updateTermWidgets(calc.npp());
-              val = calc.futureValue();
-              MyMoneyMoney refVal(static_cast<double>(val));
-              d->ui->m_balloonAmount->loadText(refVal.abs().formatMoney(QString(), d->m_wizard->d_func()->precision()));
+              val = MyMoneyMoney(calc.futureValue());
+              MyMoneyMoney refVal(val);
+              d->ui->m_balloonAmount->setValue(refVal);
               result += QString(" ");
-              result += i18n("The number of payments has been decremented and the balloon payment has been modified to %1.", d->ui->m_balloonAmount->lineedit()->text());
-            } else if ((moneyBorrowed && val < 0 && qAbs(val) < qAbs(calc.payment()))
-                       || (moneyLend && val > 0 && qAbs(val) < qAbs(calc.payment()))) {
-              d->ui->m_balloonAmount->loadText(MyMoneyMoney().formatMoney(QString(), d->m_wizard->d_func()->precision()));
+              result += i18n("The number of payments has been decremented and the balloon payment has been modified to %1.", d->ui->m_balloonAmount->text());
+            } else if ((moneyBorrowed && val < MyMoneyMoney() && qAbs(val.toDouble()) < qAbs(calc.payment()))
+                       || (moneyLend && val > MyMoneyMoney() && qAbs(val.toDouble()) < qAbs(calc.payment()))) {
+              d->ui->m_balloonAmount->setValue(MyMoneyMoney());
             } else {
-              MyMoneyMoney refVal(static_cast<double>(val));
-              d->ui->m_balloonAmount->loadText(refVal.abs().formatMoney(QString(), d->m_wizard->d_func()->precision()));
-              result += i18n("The balloon payment has been modified to %1.", d->ui->m_balloonAmount->lineedit()->text());
+              MyMoneyMoney refVal(val);
+              d->ui->m_balloonAmount->setValue(refVal);
+              result += i18n("The balloon payment has been modified to %1.", d->ui->m_balloonAmount->text());
             }
 
         } else if (d->ui->m_termAmount->value() == 0) {
           // calculate the number of payments out of the other information
-          val = calc.numPayments();
+          val = MyMoneyMoney(calc.numPayments());
           if (val == 0)
-            throw MYMONEYEXCEPTION_CSTRING("incorrect fincancial calculation");
+            throw MYMONEYEXCEPTION_CSTRING("incorrect financial calculation");
 
           // if the number of payments has a fractional part, then we
           // round it to the smallest integer and calculate the balloon payment
-          result = i18n("KMyMoney has calculated the term of your loan as %1. ", updateTermWidgets(qFloor(val)));
+          result = i18n("KMyMoney has calculated the term of your loan as %1. ", updateTermWidgets(qFloor(val.toDouble())));
 
-          if (val != qFloor(val)) {
-              calc.setNpp(qFloor(val));
-              val = calc.futureValue();
-              MyMoneyMoney refVal(static_cast<double>(val));
-              d->ui->m_balloonAmount->loadText(refVal.abs().formatMoney(QString(), d->m_wizard->d_func()->precision()));
-              result += i18n("The balloon payment has been modified to %1.", d->ui->m_balloonAmount->lineedit()->text());
+          if (val.toDouble() != qFloor(val.toDouble())) {
+              calc.setNpp(qFloor(val.toDouble()));
+              val = MyMoneyMoney(calc.futureValue());
+              d->ui->m_balloonAmount->setValue(val);
+              result += i18n("The balloon payment has been modified to %1.", d->ui->m_balloonAmount->text());
             }
 
         } else {
           // calculate the future value of the loan out of the other information
-          val = calc.futureValue();
+          val = MyMoneyMoney(calc.futureValue());
 
           // we differentiate between the following cases:
           // a) the future value is greater than a payment
@@ -258,28 +256,27 @@ namespace NewAccountWizard
           //    less in value than regular payments. That means, that the
           //    future value is to be treated as  (fully payed back)
           // c) the loan is not payed back yet
-          if ((moneyBorrowed && val < 0 && qAbs(val) > qAbs(calc.payment()))
-              || (moneyLend && val > 0 && qAbs(val) > qAbs(calc.payment()))) {
+          if ((moneyBorrowed && val < MyMoneyMoney() && qAbs(val.toDouble()) > qAbs(calc.payment()))
+              || (moneyLend && val > MyMoneyMoney() && qAbs(val.toDouble()) > qAbs(calc.payment()))) {
               // case a)
-              qDebug("Future Value is %f", val);
-              throw MYMONEYEXCEPTION_CSTRING("incorrect fincancial calculation");
+              qDebug("Future Value is %f", val.toDouble());
+              throw MYMONEYEXCEPTION_CSTRING("incorrect financial calculation");
 
-            } else if ((moneyBorrowed && val < 0 && qAbs(val) <= qAbs(calc.payment()))
-                       || (moneyLend && val > 0 && qAbs(val) <= qAbs(calc.payment()))) {
+            } else if ((moneyBorrowed && val < MyMoneyMoney() && qAbs(val.toDouble()) <= qAbs(calc.payment()))
+                       || (moneyLend && val > MyMoneyMoney() && qAbs(val.toDouble()) <= qAbs(calc.payment()))) {
               // case b)
               val = 0;
             }
 
-          MyMoneyMoney refVal(static_cast<double>(val));
-          result = i18n("KMyMoney has calculated a balloon payment of %1 for this loan.", refVal.abs().formatMoney(QString(), d->m_wizard->d_func()->precision()));
+          result = i18n("KMyMoney has calculated a balloon payment of %1 for this loan.", val.abs().formatMoney(QString(), d->m_wizard->d_func()->precision()));
 
-          if (!d->ui->m_balloonAmount->lineedit()->text().isEmpty()) {
-              if ((d->ui->m_balloonAmount->value().abs() - refVal.abs()).abs().toDouble() > 1) {
-                  throw MYMONEYEXCEPTION_CSTRING("incorrect fincancial calculation");
+          if (!d->ui->m_balloonAmount->text().isEmpty()) {
+              if ((d->ui->m_balloonAmount->value().abs() - val.abs()).abs().toDouble() > 1) {
+                  throw MYMONEYEXCEPTION_CSTRING("incorrect financial calculation");
                 }
               result = i18n("KMyMoney has successfully verified your loan information.");
             }
-          d->ui->m_balloonAmount->loadText(refVal.abs().formatMoney(QString(), d->m_wizard->d_func()->precision()));
+          d->ui->m_balloonAmount->setValue(val);
         }
 
     } catch (const MyMoneyException &) {
@@ -371,11 +368,11 @@ namespace NewAccountWizard
 
     int fieldCnt = 0;
 
-    if (d->ui->m_loanAmount->lineedit()->text().length() > 0) {
+    if (d->ui->m_loanAmount->text().length() > 0) {
         fieldCnt++;
       }
 
-    if (d->ui->m_interestRate->lineedit()->text().length() > 0) {
+    if (d->ui->m_interestRate->text().length() > 0) {
         fieldCnt++;
       }
 
@@ -383,11 +380,11 @@ namespace NewAccountWizard
         fieldCnt++;
       }
 
-    if (d->ui->m_paymentAmount->lineedit()->text().length() > 0) {
+    if (d->ui->m_paymentAmount->text().length() > 0) {
         fieldCnt++;
       }
 
-    if (d->ui->m_balloonAmount->lineedit()->text().length() > 0) {
+    if (d->ui->m_balloonAmount->text().length() > 0) {
         fieldCnt++;
       }
 

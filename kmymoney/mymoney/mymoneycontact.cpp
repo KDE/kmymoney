@@ -19,7 +19,7 @@
 
 #include "mymoneycontact.h"
 
-#ifdef KMM_ADDRESSBOOK_FOUND
+#ifdef ENABLE_ADDRESSBOOK
 #include <KIdentityManagement/IdentityManager>
 #include <KIdentityManagement/Identity>
 #include <AkonadiCore/RecursiveItemFetchJob>
@@ -35,7 +35,7 @@ MyMoneyContact::MyMoneyContact(QObject *parent) : QObject(parent)
 
 bool MyMoneyContact::ownerExists() const
 {
-#ifdef KMM_ADDRESSBOOK_FOUND
+#ifdef ENABLE_ADDRESSBOOK
   KIdentityManagement::IdentityManager im;
   KIdentityManagement::Identity id = im.defaultIdentity();
   return !id.isNull();
@@ -46,7 +46,7 @@ bool MyMoneyContact::ownerExists() const
 
 QString MyMoneyContact::ownerEmail() const
 {
-#ifdef KMM_ADDRESSBOOK_FOUND
+#ifdef ENABLE_ADDRESSBOOK
   KIdentityManagement::IdentityManager im;
   KIdentityManagement::Identity id = im.defaultIdentity();
   return id.primaryEmailAddress();
@@ -57,7 +57,7 @@ QString MyMoneyContact::ownerEmail() const
 
 QString MyMoneyContact::ownerFullName() const
 {
-#ifdef KMM_ADDRESSBOOK_FOUND
+#ifdef ENABLE_ADDRESSBOOK
   KIdentityManagement::IdentityManager im;
   KIdentityManagement::Identity id = im.defaultIdentity();
   return id.fullName();
@@ -68,7 +68,7 @@ QString MyMoneyContact::ownerFullName() const
 
 void MyMoneyContact::fetchContact(const QString &email)
 {
-#ifdef KMM_ADDRESSBOOK_FOUND
+#ifdef ENABLE_ADDRESSBOOK
   QRegularExpression re(".+@.+");
   if (!re.match(email).hasMatch()) {
     ContactData contact;
@@ -91,7 +91,7 @@ void MyMoneyContact::fetchContact(const QString &email)
 
 void MyMoneyContact::searchContactResult(KJob *job)
 {
-#ifdef KMM_ADDRESSBOOK_FOUND
+#ifdef ENABLE_ADDRESSBOOK
   const Akonadi::RecursiveItemFetchJob *contactJob = qobject_cast<Akonadi::RecursiveItemFetchJob*>(job);
   Akonadi::Item::List items;
   if (contactJob)

@@ -96,7 +96,7 @@
          </widget>
         </item>
         <item row="1" column="1">
-          <widget class="KMyMoneyEdit" name="m_previousBalance">
+          <widget class="AmountEdit" name="m_previousBalance">
             <property name="enabled">
               <bool>false</bool>
             </property>
@@ -113,7 +113,7 @@
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="KMyMoneyEdit" name="m_endingBalance"/>
+         <widget class="AmountEdit" name="m_endingBalance"/>
         </item>
        </layout>
       </item>
@@ -169,6 +169,11 @@
  <resources/>
  <connections/>
  <customwidgets>
+   <customwidget>
+     <class>AmountEdit</class>
+     <extends>QLineEdit</extends>
+     <header location="global">amountedit.h</header>
+   </customwidget>		 
  </customwidgets>
  <tabstops>
  </tabstops>

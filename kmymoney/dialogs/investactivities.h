@@ -33,7 +33,7 @@
 class QWidget;
 class QStringList;
 
-class KMyMoneyEdit;
+class AmountEdit;
 class KMyMoneyCategory;
 
 class MyMoneyMoney;
@@ -88,7 +88,7 @@ protected:
   bool havePrice() const;
   bool isMultiSelection() const;
   QString priceLabel() const;
-  bool createCategorySplits(const MyMoneyTransaction& t, KMyMoneyCategory* cat, KMyMoneyEdit* amount, MyMoneyMoney factor, QList<MyMoneySplit>&splits, const QList<MyMoneySplit>& osplits) const;
+  bool createCategorySplits(const MyMoneyTransaction& t, KMyMoneyCategory* cat, AmountEdit* amount, MyMoneyMoney factor, QList<MyMoneySplit>&splits, const QList<MyMoneySplit>& osplits) const;
   void createAssetAccountSplit(MyMoneySplit& split, const MyMoneySplit& stockSplit) const;
   MyMoneyMoney sumSplits(const MyMoneySplit& s0, const QList<MyMoneySplit>& feeSplits, const QList<MyMoneySplit>& interestSplits) const;
   bool haveCategoryAndAmount(const QString& category, const QString& amount, bool optional) const;

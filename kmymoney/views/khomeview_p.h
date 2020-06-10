@@ -39,7 +39,8 @@
 #include <QUrlQuery>
 #include <QWheelEvent>
 #include <QPrintDialog>
-#include <QPointer>
+#include <QVBoxLayout>
+#include <QPrinter>
 #ifdef ENABLE_WEBENGINE
 #include <QWebEngineView>
 #else
@@ -50,8 +51,6 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KChartAbstractCoordinatePlane>
-#include <KChartChart>
 #include <KLocalizedString>
 #include <KXmlGuiWindow>
 #include <KActionCollection>

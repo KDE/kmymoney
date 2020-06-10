@@ -120,6 +120,7 @@ public:
 
   const MyMoneyMoney& operator=(const QString& pszAmount);
   const MyMoneyMoney& operator=(const AlkValue& val);
+  const MyMoneyMoney& operator=(const MyMoneyMoney& val);
 
   // comparison
   bool operator==(const MyMoneyMoney& Amount) const;
@@ -213,6 +214,12 @@ inline MyMoneyMoney::MyMoneyMoney(const AlkValue& Amount) :
 }
 
 inline const MyMoneyMoney& MyMoneyMoney::operator=(const AlkValue & val)
+{
+  AlkValue::operator=(val);
+  return *this;
+}
+
+inline const MyMoneyMoney& MyMoneyMoney::operator=(const MyMoneyMoney & val)
 {
   AlkValue::operator=(val);
   return *this;

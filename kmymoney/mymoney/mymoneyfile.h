@@ -103,7 +103,7 @@
   * implement the general access to multiple currencies held in the engine.
   * The methods baseCurrency() and setBaseCurrency() allow to retrieve/set
   * the currency selected by the user as base currency. If a currency
-  * reference is emtpy, it will usually be interpreted as baseCurrency().
+  * reference is empty, it will usually be interpreted as baseCurrency().
   *
   * The methods liability(), asset(), expense(), income() and equity() are
   * used to retrieve the five standard accounts. isStandardAccount()
@@ -114,7 +114,7 @@
   * The MyMoneyFile object emits the dataChanged() signal when data
   * has been changed.
   *
-  * For abritrary values that have to be stored with the storage object
+  * For arbitrary values that have to be stored with the storage object
   * but are of importance to the application only, the object is derived
   * for MyMoneyKeyValueContainer which provides a container to store
   * these values indexed by an alphanumeric key.
@@ -456,7 +456,7 @@ public:
   unsigned int moveSplits(const QString& oldAccount, const QString& newAccount);
 
   /**
-    * This method is used to determince, if the account with the
+    * This method is used to determine, if the account with the
     * given ID is referenced by any split in m_transactionList.
     *
     * @param id id of the account to be checked for
@@ -505,7 +505,7 @@ public:
   void removeAccount(const MyMoneyAccount& account);
 
   /**
-    * Deletes existing accounts and their subaccounts recursivly
+    * Deletes existing accounts and their subaccounts recursively
     * from the global account pool.
     * This method expects that all accounts and their subaccounts
     * are no longer assigned to any transactions or splits.
@@ -627,7 +627,7 @@ public:
     * This method is used to return the cleared balance of an account
     * without it's sub-ordinate accounts for a specific date. All
     * recorded  transactions are included in the balance.
-    * This method is used by the reconcialition functionality
+    * This method is used by the reconciliation functionality
     *
     * @param id id of the account in question
     * @param date return cleared balance for specific date
@@ -739,7 +739,7 @@ public:
 
   /**
     * This method returns a list of accounts inside a MyMoneyFile object.
-    * An optional parameter is a list of id's. If this list is emtpy (the default)
+    * An optional parameter is a list of id's. If this list is empty (the default)
     * the returned list contains all accounts, otherwise only those referenced
     * in the id-list.
     *
@@ -945,7 +945,7 @@ public:
     * @param key const reference to QString containing the key
     * @param val const reference to QString containing the value
     *
-    * @note Keys starting with the leadin @p kmm- are reserved for internal use
+    * @note Keys starting with the leading @p kmm- are reserved for internal use
     *       by the MyMoneyFile object.
     */
   void setValue(const QString& key, const QString& val);
@@ -1272,7 +1272,7 @@ public:
     * is available, 1.0 will be returned as price.
     *
     * @param fromId the id of the currency in question
-    * @param toId the id of the currency to convert to (if emtpy, baseCurrency)
+    * @param toId the id of the currency to convert to (if empty, baseCurrency)
     * @param date the date for which the price should be returned (default = today)
     * @param exactDate if true, entry for date must exist, if false any price information
     *                  with a date less or equal to @p date will be returned
@@ -1393,7 +1393,7 @@ public:
     *
     * @param budget QString reference to name of budget
     *
-    * @return MyMoneyBudget refernce to object of budget
+    * @return MyMoneyBudget reference to object of budget
     */
   MyMoneyBudget budgetByName(const QString& budget) const;
 

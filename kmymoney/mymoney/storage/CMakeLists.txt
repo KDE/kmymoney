@@ -5,6 +5,7 @@ endif()
 set(storage_HEADERS
   imymoneystorageformat.h
   mymoneystoragemgr.h
+  payeesmodel.h
   )
 
 ########### install files ###############

@@ -77,7 +77,7 @@ public:
   explicit PivotTable(const MyMoneyReport& _report);
 
   /**
-    * virtual Destructur
+    * virtual Destructor
     */
   virtual ~PivotTable() {}
 
@@ -154,7 +154,7 @@ private:
     *
     * If @a amount is negative the formatted value is enclosed in an
     * HTML font tag to modify the color to reflect the user settings for
-    * negtive numbers.
+    * negative numbers.
     *
     * Example: 1.23 is returned as '1.23' whereas -1.23 is returned as
     *          @verbatim <font color="rgb($red,$green,$blue)">-1.23</font>@endverbatim
@@ -169,7 +169,7 @@ protected:
   /**
     * Creates a row in the grid if it doesn't already exist
     *
-    * Downsteam assignment functions will assume that this row already
+    * Downstream assignment functions will assume that this row already
     * exists, so this function creates a row of the needed length populated
     * with zeros.
     *

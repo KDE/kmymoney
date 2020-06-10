@@ -257,7 +257,7 @@ void PivotTableTest::testNetWorthOpening()
   PivotTable nt_opening2(filter);
   writeTabletoCSV(nt_opening2, "networth-opening-2.csv");
 
-  QVERIFY(nt_opening2.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][0] == MyMoneyMoney(18700000)); // opening value is equall to the value after t6 transaction
+  QVERIFY(nt_opening2.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][0] == MyMoneyMoney(18700000)); // opening value is equal to the value after t6 transaction
   QVERIFY(nt_opening2.m_grid["Asset"]["Basic Account"][ReportAccount(acBasicAccount)][eActual][12] == MyMoneyMoney(14800000));
 }
 
@@ -1075,7 +1075,7 @@ void PivotTableTest::testBudget()
   //  - Totals for D, D:1, D:2 show up.  D:2:a and D:2:b do not
   //  - D actuals (only) compare against D budget
   //  - Ditto for D:1
-  //  - D:2 acutals and children compare against D:2 budget
+  //  - D:2 actuals and children compare against D:2 budget
 
   // 5. Budget on E, no transactions on E
   {

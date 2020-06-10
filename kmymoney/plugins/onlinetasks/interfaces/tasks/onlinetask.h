@@ -47,7 +47,7 @@ class onlineJob;
  *
  * \section onlineTaskMeta The onlineTask Meta System
  *
- * To prevent accidently using a super-class if sub-class should be used, the onlineTasks
+ * To prevent accidentally using a super-class if sub-class should be used, the onlineTasks
  * have a meta system. Each onlineTask has an iid which can be requested with a virtual
  * method or a static method.
  *
@@ -79,7 +79,7 @@ class onlineJob;
 /**
  * @brief Base class for tasks which can be proceeded by online banking plugins
  *
- * @notice This docu describes the inteded way of the onlineTask/Job system. The loading during runtime or plugin
+ * @notice This docu describes the intended way of the onlineTask/Job system. The loading during runtime or plugin
  * infrastructure is not realized yet (and needs further changes at the storage). The docu is just forward compatible.
  *
  * Everything an online plugin can do is represented as a task. But also imported data can be represented by an

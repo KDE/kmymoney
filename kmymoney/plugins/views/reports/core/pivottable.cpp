@@ -1205,7 +1205,7 @@ void PivotTable::calculateTotals()
         //so far the invert only applies to actual and budget
         if (invert_total && m_rowTypeList[i] != eBudgetDiff && m_rowTypeList[i] != eForecast)
           value = -value;
-        // forecast income expense reports should be inverted as oposed to asset/liability reports
+        // forecast income expense reports should be inverted as opposed to asset/liability reports
         if (invert_total && isIncomeExpense && m_rowTypeList[i] == eForecast)
           value = -value;
 
@@ -1449,7 +1449,7 @@ QString PivotTable::renderCSV() const
                   precision = pricePrecision;
               } else {
                 if (currencyPrecision == 0) {
-                  if (it_row.key().isInvest()) // stock account isn't eveluated in currency, so take investment account instead
+                  if (it_row.key().isInvest()) // stock account isn't evaluated in currency, so take investment account instead
                     currencyPrecision = MyMoneyMoney::denomToPrec(it_row.key().parent().fraction());
                   else
                     currencyPrecision = MyMoneyMoney::denomToPrec(it_row.key().fraction());
@@ -1752,7 +1752,7 @@ QString PivotTable::renderHTML() const
                       precision = pricePrecision;
                   } else {
                     if (currencyPrecision == 0) {
-                      if (it_row.key().isInvest()) // stock account isn't eveluated in currency, so take investment account instead
+                      if (it_row.key().isInvest()) // stock account isn't evaluated in currency, so take investment account instead
                         currencyPrecision = MyMoneyMoney::denomToPrec(it_row.key().parent().fraction());
                       else
                         currencyPrecision = MyMoneyMoney::denomToPrec(it_row.key().fraction());

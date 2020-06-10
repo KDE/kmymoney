@@ -37,13 +37,13 @@ KAboutData initializeCreditsData()
   if (!aboutData.homepage().isEmpty())
     return aboutData;
   QStringList features;
-#ifdef Gpgmepp_FOUND
+#ifdef ENABLE_GPG
   features << i18n("GPG encryption");
 #endif
-#ifdef KMM_ADDRESSBOOK_FOUND
+#ifdef ENABLE_ADDRESSBOOK
   features << i18n("Addressbook integration");
 #endif
-#ifdef KF5Holidays_FOUND
+#ifdef ENABLE_HOLIDAYS
   features << i18n("Holiday regions integration");
 #endif
 

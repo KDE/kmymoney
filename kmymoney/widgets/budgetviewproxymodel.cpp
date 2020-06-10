@@ -2,6 +2,7 @@
  * Copyright 2006       Darren Gould <darren_gould@gmx.de>
  * Copyright 2009-2014  Alvaro Soliverez <asoliverez@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Robert Szczesiak <dev.rszczesiak@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -62,6 +63,7 @@ public:
 BudgetViewProxyModel::BudgetViewProxyModel(QObject *parent) :
   AccountsViewProxyModel(*new BudgetViewProxyModelPrivate, parent)
 {
+  setFilterCaseSensitivity(Qt::CaseInsensitive);
 }
 
 BudgetViewProxyModel::~BudgetViewProxyModel()
@@ -166,10 +168,8 @@ bool BudgetViewProxyModel::filterAcceptsRow(int source_row, const QModelIndex &s
   const auto accountData = sourceModel()->data(index, (int)Role::Account);
   if (accountData.canConvert<MyMoneyAccount>()) {
     const auto account = accountData.value<MyMoneyAccount>();
-    if (!index.parent().isValid()) {
-      if (!account.isIncomeExpense()) {
-        return false;
-      }
+    if (!account.isIncomeExpense()) {
+      return false;
     }
     if (hideUnusedIncomeExpenseAccounts()) {
       MyMoneyMoney balance;
@@ -186,14 +186,14 @@ bool BudgetViewProxyModel::filterAcceptsRow(int source_row, const QModelIndex &s
         }
       }
       if (!balance.isZero())
-        return true;
+        return AccountsViewProxyModel::filterAcceptsRow(source_row, source_parent);
       for (auto i = 0; i < sourceModel()->rowCount(index); ++i) {
         if (filterAcceptsRow(i, index))
           return true;
       }
       return false;
     }
-    return true;
+    return AccountsViewProxyModel::filterAcceptsRow(source_row, source_parent);
   }
   return false;
 }

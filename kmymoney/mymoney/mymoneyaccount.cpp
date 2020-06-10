@@ -473,7 +473,7 @@ QPixmap MyMoneyAccount::accountPixmap(const bool reconcileFlag, const int size) 
   QString kyIcon = accountTypeToString(accountType()) + QString::number(size);
   QPixmap pxIcon;
 
-  if (!QPixmapCache::find(kyIcon, pxIcon)) {
+  if (!QPixmapCache::find(kyIcon, &pxIcon)) {
     pxIcon = Icons::get(ixIcon).pixmap(size); // Qt::AA_UseHighDpiPixmaps (in Qt 5.7) doesn't return highdpi pixmap
     QPixmapCache::insert(kyIcon, pxIcon);
   }

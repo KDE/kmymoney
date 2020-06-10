@@ -42,7 +42,7 @@ public Q_SLOTS:
   void removeFeedback();
 
   /**
-   * @brief Removes a sepecific feedback
+   * @brief Removes a specific feedback
    *
    * Removes the feedback only if type and message fit. This is useful
    * if several objects are connected to setFeedback().

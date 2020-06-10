@@ -1050,7 +1050,7 @@ void MyMoneyStorageSql::removeOnlineJob(const onlineJob& job)
   Q_D(MyMoneyStorageSql);
   MyMoneyDbTransaction t(*this, Q_FUNC_INFO);
 
-  // Remove onlineTask first, because it could have a contraint
+  // Remove onlineTask first, because it could have a constraint
   // which could block the removal of the onlineJob
 
   try {
@@ -2688,10 +2688,10 @@ ulong MyMoneyStorageSql::incrementBudgetId()
 }
 
 /**
- * @warning This method uses getNextAccountId() internaly. The database is not informed which can cause issues
+ * @warning This method uses getNextAccountId() internally. The database is not informed which can cause issues
  * when the database is accessed concurrently. Then maybe a single id is used twice but the RDBMS will detect the
- * issue and KMyMoney crashes. This issue can only occour when two instances of KMyMoney access the same database.
- * But in this unlikley case MyMoneyStorageSql will have a lot more issues, I think.
+ * issue and KMyMoney crashes. This issue can only occur when two instances of KMyMoney access the same database.
+ * But in this unlikly case MyMoneyStorageSql will have a lot more issues, I think.
  */
 ulong MyMoneyStorageSql::incrementAccountId()
 {

@@ -150,6 +150,13 @@
        </property>
       </widget>
      </item>
+     <item row="5" column="0">
+      <widget class="QCheckBox" name="m_negExpenses">
+       <property name="text">
+        <string>Plot expenses downwards</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>
@@ -234,6 +241,7 @@
   <tabstop>m_checkValues</tabstop>
   <tabstop>m_checkShowChart</tabstop>
   <tabstop>m_logYaxis</tabstop>
+  <tabstop>m_negExpenses</tabstop>
   <tabstop>m_lineWidth</tabstop>
  </tabstops>
  <resources/>

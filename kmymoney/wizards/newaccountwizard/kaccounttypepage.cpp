@@ -43,7 +43,6 @@
 #include "kequitypriceupdatedlg.h"
 #include "kmymoneycurrencyselector.h"
 #include "kmymoneydateinput.h"
-#include "kmymoneyedit.h"
 #include "kmymoneygeneralcombo.h"
 #include "kmymoneysettings.h"
 #include "kmymoneywizardpage.h"
@@ -90,15 +89,15 @@ namespace NewAccountWizard
     d->ui->m_currencyComboBox->setSecurity(MyMoneyFile::instance()->baseCurrency());
 
     d->m_mandatoryGroup->add(d->ui->m_accountName);
-    d->m_mandatoryGroup->add(d->ui->m_conversionRate->lineedit());
+    d->m_mandatoryGroup->add(d->ui->m_conversionRate);
 
     d->ui->m_conversionRate->setValue(MyMoneyMoney::ONE);
     slotUpdateCurrency();
 
     connect(d->ui->m_typeSelection, &KMyMoneyGeneralCombo::itemSelected, this, &AccountTypePage::slotUpdateType);
     connect(d->ui->m_currencyComboBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &AccountTypePage::slotUpdateCurrency);
-    connect(d->ui->m_conversionRate, &KMyMoneyEdit::textChanged, this, &AccountTypePage::slotUpdateConversionRate);
-    connect(d->ui->m_conversionRate, &KMyMoneyEdit::valueChanged, this, &AccountTypePage::slotPriceWarning);
+    connect(d->ui->m_conversionRate, &AmountEdit::textChanged, this, &AccountTypePage::slotUpdateConversionRate);
+    connect(d->ui->m_conversionRate, &AmountEdit::valueChanged, this, &AccountTypePage::slotPriceWarning);
     connect(d->ui->m_onlineQuote, &QAbstractButton::clicked, this, &AccountTypePage::slotGetOnlineQuote);
   }
 
@@ -166,7 +165,7 @@ namespace NewAccountWizard
     d->ui->m_conversionRate->setEnabled(show);       // make sure to include/exclude in mandatoryGroup
     d->ui->m_conversionRate->setPrecision(d->ui->m_currencyComboBox->security().pricePrecision());
     d->m_mandatoryGroup->changed();
-    slotUpdateConversionRate(d->ui->m_conversionRate->lineedit()->text());
+    slotUpdateConversionRate(d->ui->m_conversionRate->text());
   }
 
   void AccountTypePage::slotGetOnlineQuote()

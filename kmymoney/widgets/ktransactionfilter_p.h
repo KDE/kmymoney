@@ -34,7 +34,6 @@
 
 #include "ui_ktransactionfilter.h"
 
-#include "kmymoneyedit.h"
 #include "mymoneyaccount.h"
 #include "mymoneyfile.h"
 #include "mymoneypayee.h"
@@ -361,9 +360,9 @@ public:
     q->connect(ui->m_amountButton, &QAbstractButton::clicked, q, &KTransactionFilter::slotAmountSelected);
     q->connect(ui->m_amountRangeButton, &QAbstractButton::clicked, q, &KTransactionFilter::slotAmountRangeSelected);
 
-    q->connect(ui->m_amountEdit,      &KMyMoneyEdit::textChanged, q, &KTransactionFilter::slotUpdateSelections);
-    q->connect(ui->m_amountFromEdit,  &KMyMoneyEdit::textChanged, q, &KTransactionFilter::slotUpdateSelections);
-    q->connect(ui->m_amountToEdit,    &KMyMoneyEdit::textChanged, q, &KTransactionFilter::slotUpdateSelections);
+    q->connect(ui->m_amountEdit,      &AmountEdit::textChanged, q, &KTransactionFilter::slotUpdateSelections);
+    q->connect(ui->m_amountFromEdit,  &AmountEdit::textChanged, q, &KTransactionFilter::slotUpdateSelections);
+    q->connect(ui->m_amountToEdit,    &AmountEdit::textChanged, q, &KTransactionFilter::slotUpdateSelections);
 
     ui->m_amountButton->setChecked(true);
     q->slotAmountSelected();

@@ -107,7 +107,7 @@
         </widget>
        </item>
        <item>
-        <widget class="KMyMoneyEdit" name="m_fraction" native="true"/>
+        <widget class="AmountEdit" name="m_fraction" native="true"/>
        </item>
       </layout>
      </item>
@@ -263,9 +263,9 @@ number</string>
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
-   <class>KMyMoneyEdit</class>
-   <extends>QWidget</extends>
-   <header>kmymoneyedit.h</header>
+   <class>AmountEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">amountedit.h</header>
   </customwidget>
   <customwidget>
    <class>KMyMoneyLineEdit</class>
