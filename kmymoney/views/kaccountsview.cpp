@@ -1,6 +1,7 @@
 /*
  * Copyright 2007-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Robert Szczesiak <dev.rszczesiak@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -270,7 +271,10 @@ void KAccountsView::slotUnusedIncomeExpenseAccountHidden()
 void KAccountsView::slotNetWorthChanged(const MyMoneyMoney &netWorth, bool isApproximate)
 {
   Q_D(KAccountsView);
-  d->updateNetWorthLabel(netWorth, isApproximate, d->ui->m_totalProfitsLabel, i18n("Net Worth: %1"));
+  const auto formattedValue = d->formatViewLabelValue(netWorth);
+  d->updateViewLabel(d->ui->m_totalProfitsLabel,
+                         isApproximate ? i18nc("Approximate net worth", "Net Worth: ~%1", formattedValue)
+                                       : i18n("Net Worth: %1", formattedValue));
 }
 
 void KAccountsView::slotShowAccountMenu(const MyMoneyAccount& acc)

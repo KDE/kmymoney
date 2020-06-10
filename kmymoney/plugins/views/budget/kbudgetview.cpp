@@ -7,6 +7,7 @@
                            Alvaro Soliverez <asoliverez@gmail.com>
                            (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
                            (C) 2019 Thomas Baumgart <tbaumgart@kde.org>
+                           (C) 2020 Robert Szczesiak <dev.rszczesiak@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -386,7 +387,11 @@ void KBudgetView::cb_includesSubaccounts_clicked()
 void KBudgetView::slotBudgetBalanceChanged(const MyMoneyMoney &balance)
 {
   Q_D(KBudgetView);
-  d->updateNetWorthLabel(balance, false, d->ui->m_balanceLabel, balance.isNegative() ? i18nc("Profit/Loss", "Loss: %1") : i18nc("Profit/Loss", "Profit: %1"));
+  const auto formattedValue = balance.isNegative() ? d->formatViewLabelValue(-balance, KMyMoneySettings::schemeColor(SchemeColor::Negative))
+                                                   : d->formatViewLabelValue(balance, KMyMoneySettings::schemeColor(SchemeColor::Positive));
+  d->updateViewLabel(d->ui->m_balanceLabel,
+                         balance.isNegative() ? i18nc("Profit/Loss", "Loss: %1", formattedValue)
+                                              : i18nc("Profit/Loss", "Profit: %1", formattedValue));
 }
 
 void KBudgetView::slotSelectBudget()

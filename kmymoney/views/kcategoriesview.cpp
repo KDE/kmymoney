@@ -9,6 +9,7 @@
                            Thomas Baumgart <ipwizard@users.sourceforge.net>
                            Kevin Tambascio <ktambascio@users.sourceforge.net>
                            (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2020 by Robert Szczesiak <dev.rszczesiak@gmail.com>
  ***************************************************************************/
 
 /***************************************************************************
@@ -197,11 +198,16 @@ void KCategoriesView::slotUnusedIncomeExpenseAccountHidden()
 void KCategoriesView::slotProfitLossChanged(const MyMoneyMoney &profit, bool isApproximate)
 {
   Q_D(KCategoriesView);
-  if (profit.isNegative()) {
-    d->updateNetWorthLabel(-profit, isApproximate, d->ui->m_totalProfitsLabel, i18n("Loss: %1"), KMyMoneySettings::schemeColor(SchemeColor::Negative));
-  } else {
-    d->updateNetWorthLabel(profit, isApproximate, d->ui->m_totalProfitsLabel, i18n("Profit: %1"), KMyMoneySettings::schemeColor(SchemeColor::Positive));
-  }
+  const auto formattedValue = profit.isNegative() ? d->formatViewLabelValue(-profit, KMyMoneySettings::schemeColor(SchemeColor::Negative))
+                                                  : d->formatViewLabelValue(profit, KMyMoneySettings::schemeColor(SchemeColor::Positive));
+  if (profit.isNegative())
+    d->updateViewLabel(d->ui->m_totalProfitsLabel,
+                           isApproximate ? i18nc("Approximate loss", "Loss: ~%1", formattedValue)
+                                         : i18n("Loss: %1", formattedValue));
+  else
+    d->updateViewLabel(d->ui->m_totalProfitsLabel,
+                           isApproximate ? i18nc("Approximate profit", "Profit: ~%1", formattedValue)
+                                         : i18n("Profit: %1", formattedValue));
 }
 
 void KCategoriesView::slotShowCategoriesMenu(const MyMoneyAccount& acc)
