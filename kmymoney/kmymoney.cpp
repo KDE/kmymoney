@@ -1664,6 +1664,7 @@ void KMyMoneyApp::initIcons()
   }
 #endif
 
+  qDebug() << "Fallback icon search paths as reported by QT: " << QIcon::fallbackSearchPaths();
   // add our custom icons path to icons search path
   if (!customIconAbsolutePath.isEmpty()) {
     customIconAbsolutePath.chop(customIconRelativePath.length());
@@ -1673,12 +1674,15 @@ void KMyMoneyApp::initIcons()
     QIcon::setThemeSearchPaths(paths);
   }
 
+  qDebug() << "System icon theme as reported by QT: " << QIcon::themeName();
 #if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
   auto themeName = QStringLiteral("breeze");                      // only breeze is available for craft packages
 #else
-  auto themeName = KMyMoneySettings::iconsTheme();                    // get theme user wants
+  auto themeName = KMyMoneySettings::iconsTheme();                        // get theme user wants
   if (!themeName.isEmpty() && themeName != QStringLiteral("system"))  // if it isn't default theme then set it
     QIcon::setThemeName(themeName);
+  else
+    themeName = QIcon::themeName();
 #endif
 
   setUpMappings(themeName);
