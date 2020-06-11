@@ -5,7 +5,7 @@
 ExternalProject_Add(
   ext_qt
   DOWNLOAD_DIR ${EXT_DOWNLOAD_DIR}
-  URL https://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-src-5.11.3.tar.xz
+  URL https://ftp.osuosl.org/pub/blfs/conglomeration/qt5/qt-everywhere-src-5.11.3.tar.xz    # make sure to also update the ext_libsqlcipher to match QT version
   URL_MD5 02b353bfe7a40a8dc4274e1d17226d2b
 
   PATCH_COMMAND ${PATCH_COMMAND} -p1 -i ${CMAKE_CURRENT_SOURCE_DIR}/qsql_mysql.diff
@@ -14,5 +14,5 @@ ExternalProject_Add(
 
   BUILD_COMMAND $(MAKE)
   INSTALL_COMMAND $(MAKE) install
-  DEPENDS ext_xslt ext_mysql ext_sqlite ext_postgresql ext_pcre2
+  DEPENDS ext_xslt ext_mysql ext_postgresql ext_pcre2
 )

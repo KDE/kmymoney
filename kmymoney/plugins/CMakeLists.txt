@@ -23,10 +23,6 @@ if (ENABLE_KBANKING)
   add_subdirectory( kbanking )
 endif (ENABLE_KBANKING)
 
-if (ENABLE_SQLCIPHER)
-  add_subdirectory(sqlcipher)
-endif()
-
 option(ENABLE_ONLINEJOBPLUGINMOCKUP "Enable onlineJob-plugin mockup (only for developers)" OFF)
 if (ENABLE_ONLINEJOBPLUGINMOCKUP)
   add_subdirectory(onlinejobpluginmockup)
