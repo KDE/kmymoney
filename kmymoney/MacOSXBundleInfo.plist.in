@@ -30,6 +30,59 @@
         <string>????</string>
         <key>CFBundleVersion</key>
         <string>${MACOSX_BUNDLE_BUNDLE_VERSION}</string>
+        <key>CFBundleDocumentTypes</key>
+        <array>
+            <dict>
+                <key>CFBundleTypeName</key>
+                <string>${MACOSX_BUNDLE_DISPLAY_NAME} Document</string>
+                <key>CFBundleTypeExtensions</key>
+                <array>
+                    <string>kmy</string>
+                </array>
+                <key>CFBundleTypeIconFile</key>
+                <string>${MACOSX_BUNDLE_ICON_FILE}</string>
+                <key>CFBundleTypeRole</key>
+                <string>Editor</string>
+            </dict>
+            <dict>
+                <key>CFBundleTypeName</key>
+                <string>OFX Financial Statement</string>
+                <key>CFBundleTypeExtensions</key>
+                <array>
+                    <string>ofx</string>
+                    <string>qfx</string>
+                </array>
+                <key>CFBundleTypeIconFile</key>
+                <string>${MACOSX_BUNDLE_ICON_FILE}</string>
+                <key>CFBundleTypeRole</key>
+                <string>Viewer</string>
+            </dict>
+            <dict>
+                <key>CFBundleTypeName</key>
+                <string>QIF Financial Statement</string>
+                <key>CFBundleTypeExtensions</key>
+                <array>
+                    <string>qif</string>
+                </array>
+                <key>CFBundleTypeIconFile</key>
+                <string>${MACOSX_BUNDLE_ICON_FILE}</string>
+                <key>CFBundleTypeRole</key>
+                <string>Viewer</string>
+            </dict>
+           <dict>
+                <key>CFBundleTypeName</key>
+                <string>CSV Financial Statement</string>
+                <key>CFBundleTypeExtensions</key>
+                <array>
+                    <string>csv</string>
+                    <string>txt</string>
+                </array>
+                <key>CFBundleTypeIconFile</key>
+                <string>${MACOSX_BUNDLE_ICON_FILE}</string>
+                <key>CFBundleTypeRole</key>
+                <string>Viewer</string>
+            </dict>
+        </array>
         <key>CSResourcesFileMapped</key>
         <true/>
         <key>LSRequiresCarbon</key>
@@ -40,18 +93,5 @@
         <true/>
         <key>NSRequiresAquaSystemAppearance</key>
         <true/>
-        <key>CFBundleDocumentTypes</key>
-        <array>
-            <dict>
-                <key>CFBundleTypeExtensions</key>
-                <array>
-                        <string>*</string>
-                </array>
-                <key>CFBundleTypeName</key>
-                <string>NSStringPboardType</string>
-                <key>CFBundleTypeRole</key>
-                <string>Editor</string>
-            </dict>
-        </array>
 </dict>
 </plist>
