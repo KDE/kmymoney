@@ -190,10 +190,9 @@ if(APPLE)
     set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME "KMyMoney")
     set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_DISPLAY_NAME "KMyMoney")
     set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_INFO_STRING "KMyMoney - Personal Finances Manager")
-    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_LONG_VERSION_STRING "KMyMoney ${KDE_APPLICATIONS_VERSION}")
-    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_SHORT_VERSION_STRING "${KDE_APPLICATIONS_VERSION_MAJOR}.${KDE_APPLICATIONS_VERSION_MINOR}")
-    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_BUNDLE_VERSION "${KDE_APPLICATIONS_VERSION}")
-    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_COPYRIGHT "2000-${CURRENT_YEAR} The KMyMoney Authors")
+    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_SHORT_VERSION_STRING "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSION_MINOR}.${RELEASE_SERVICE_VERSION_MICRO}")
+    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_BUNDLE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSION_MINOR}.${RELEASE_SERVICE_VERSION_MICRO}")
+    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_COPYRIGHT "© 2000-${CURRENT_YEAR} The KMyMoney Authors")
 endif()
 
 ########### install files ###############

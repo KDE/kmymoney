@@ -1,8 +1,13 @@
 # The CMake version we require
 cmake_minimum_required(VERSION 3.1)
 
+set(RELEASE_SERVICE_VERSION_MAJOR "5")
+set(RELEASE_SERVICE_VERSION_MINOR "1")
+set(RELEASE_SERVICE_VERSION_MICRO "80")
+set(RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSION_MINOR}.${RELEASE_SERVICE_VERSION_MICRO}")
+
 # Setting the name of the main project
-project(KMyMoney VERSION "5.1.80" LANGUAGES CXX)
+project(KMyMoney VERSION "${RELEASE_SERVICE_VERSION}" LANGUAGES CXX)
 
 # Determine the GIT reference (if we're based on GIT)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
