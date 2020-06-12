@@ -93,5 +93,23 @@
         <true/>
         <key>NSRequiresAquaSystemAppearance</key>
         <true/>
+        <key>UTExportedTypeDeclarations</key>
+        <array>
+            <dict>
+                <key>UTTypeIdentifier</key>
+                <string>org.kde.kmymoney</string>
+                <key>UTTypeTagSpecification</key>
+                <dict>
+                    <key>public.filename-extension</key>
+                    <array>
+                        <string>kmy</string>
+                    </array>
+                </dict>
+                <key>UTTypeDescription</key>
+                <string>${MACOSX_BUNDLE_DISPLAY_NAME} Document</string>
+                <key>UTTypeIconFile</key>
+                <string>${MACOSX_BUNDLE_ICON_FILE}</string>
+            </dict>
+        </array>
 </dict>
 </plist>
