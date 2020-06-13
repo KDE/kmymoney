@@ -35,6 +35,12 @@
 class StatusEntry {
 public:
   explicit StatusEntry() {}
+  explicit StatusEntry(const QString& id, const StatusEntry& other)
+  : m_id(id)
+  , m_shortName(other.m_shortName)
+  , m_longName(other.m_longName)
+  , m_state(other.m_state)
+  {}
   explicit StatusEntry(const QString& id, eMyMoney::Split::State state, const QString& shortName, const QString& longName)
   : m_id(id)
   , m_shortName(shortName)
@@ -47,6 +53,7 @@ public:
   inline const QString& longName() const { return m_longName; }
   inline eMyMoney::Split::State state() const { return m_state; }
   inline QSet<QString> referencedObjects() const { return {}; }
+  bool hasReferenceTo(const QString& id) const { Q_UNUSED(id) return false; }
 
 private:
   QString                 m_id;

@@ -50,6 +50,12 @@ public:
   friend class JournalModel;
 
   explicit JournalEntry() {}
+  explicit JournalEntry(const QString& id, const JournalEntry& other)
+  : m_id(id)
+  , m_transaction(other.m_transaction)
+  , m_split(other.m_split)
+  , m_balance(other.m_balance)
+  {}
   JournalEntry(QString id, QSharedPointer<MyMoneyTransaction> t, const MyMoneySplit& sp)
   : m_id(id)
   , m_transaction(t)

@@ -39,12 +39,19 @@ class KMM_MYMONEY_EXPORT  ParameterItem
   friend ParametersModel;
 public:
   explicit ParameterItem();
+  explicit ParameterItem(const QString& id, const ParameterItem& other)
+  {
+    Q_UNUSED(id)
+    *this = other;
+  }
   ParameterItem(const QString& key, const QString& value);
 
   const QString& id() const { return m_id; }
   const QString& value() const { return m_value; }
 
   QSet<QString> referencedObjects() const { return {}; }
+  bool hasReferenceTo(const QString& id) const { Q_UNUSED(id) return false; }
+
 private:
   QString       m_id;
   QString       m_value;

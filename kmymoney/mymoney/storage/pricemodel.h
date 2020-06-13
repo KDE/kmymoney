@@ -44,6 +44,11 @@ class PriceEntry : public MyMoneyPrice
 {
 public:
   explicit PriceEntry() : MyMoneyPrice() {}
+  explicit PriceEntry(const QString& id, const PriceEntry& other)
+  {
+    *this = other;
+    m_id = id;
+  }
   explicit PriceEntry(const MyMoneyPrice& price);
 
   /**
@@ -58,6 +63,9 @@ public:
    * two security ids.
    */
   QPair<QString,QString> pricePair() const;
+
+  QSet<QString> referencedObjects() const { return {}; }
+  bool hasReferenceTo(const QString& id) const { Q_UNUSED(id) return false; }
 
 private:
   QString       m_id;
