@@ -40,9 +40,10 @@
 
 // ----------------------------------------------------------------------------
 
-BankingPage::BankingPage(CSVWizard *dlg, CSVImporterCore *imp) :
-  CSVWizardPage(dlg, imp),
-  ui(new Ui::BankingPage)
+BankingPage::BankingPage(CSVWizard *dlg, CSVImporterCore *imp)
+  : CSVWizardPage(dlg, imp)
+  , m_profile(nullptr)
+  , ui(new Ui::BankingPage)
 {
   ui->setupUi(this);
 
@@ -61,8 +62,6 @@ BankingPage::BankingPage(CSVWizard *dlg, CSVImporterCore *imp) :
   m_dlg->m_colTypeName.insert(Column::Category,i18n("Category"));
   m_dlg->m_colTypeName.insert(Column::Memo,i18n("Memo"));
 
-  m_profile = dynamic_cast<BankingProfile *>(m_imp->m_profile);
-
   void (QComboBox::* signal)(int) = &QComboBox::currentIndexChanged;
   connect(ui->m_amountCol, signal, this, &BankingPage::amountColSelected);
   connect(ui->m_debitCol, signal, this, &BankingPage::debitColSelected);
@@ -74,8 +73,6 @@ BankingPage::BankingPage(CSVWizard *dlg, CSVImporterCore *imp) :
   connect(ui->m_categoryCol, signal, this, &BankingPage::categoryColSelected);
 
   connect(ui->m_clearMemoColumns, &QToolButton::clicked, this, &BankingPage::clearMemoColumns);
-
-  updateCurrentMemoSelection();
 }
 
 BankingPage::~BankingPage()
@@ -89,6 +86,9 @@ void BankingPage::initializePage()
                                            {Column::Credit, ui->m_creditCol}, {Column::Memo, ui->m_memoCol},
                                            {Column::Number, ui->m_numberCol}, {Column::Date, ui->m_dateCol},
                                            {Column::Payee,  ui->m_payeeCol},  {Column::Category, ui->m_categoryCol}};
+
+  m_profile = dynamic_cast<BankingProfile *>(m_imp->m_profile);
+  updateCurrentMemoSelection();
 
   if (ui->m_dateCol->count() != m_imp->m_file->m_columnCount)
     m_dlg->initializeComboBoxes(columns);
