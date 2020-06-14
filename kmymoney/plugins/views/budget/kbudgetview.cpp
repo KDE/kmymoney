@@ -92,19 +92,16 @@ void KBudgetView::slotNewBudget()
   d->askSave();
   auto date = QDate::currentDate();
   date.setDate(date.year(), KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
-  auto newname = i18n("Budget %1", date.year());
+  auto newname = i18nc("@item:intable Your budgets, %1 budget year", "Budget %1", QString::number(date.year()));
 
   MyMoneyBudget budget;
 
   // make sure we have a unique name
   try {
-    int i = 1;
     // Exception thrown when the name is not found
-    while (1) {
-      if (!MyMoneyFile::instance()->budgetByName(newname).id().isEmpty())
-        newname = i18n("Budget %1 %2", date.year(), i++);
-      break;
-    }
+    int i = 1;
+    while (!MyMoneyFile::instance()->budgetByName(newname).id().isEmpty())
+      newname = i18nc("@item:intable Your bugets, %1 budget year, %2 unique index", "Budget %1 (%2)", QString::number(date.year()), i++);
   } catch (const MyMoneyException &) {
     // all ok, the name is unique
   }
