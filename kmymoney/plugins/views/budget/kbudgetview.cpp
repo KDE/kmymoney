@@ -230,9 +230,9 @@ void KBudgetView::slotResetBudget()
   try {
     d->ui->m_budgetValue->clear();
     d->m_budget = MyMoneyFile::instance()->budget(d->m_budget.id());
+    d->ui->m_updateButton->setEnabled(false);
     slotSelectBudget();
     d->loadBudgetAccountsView();
-
   } catch (const MyMoneyException &e) {
     KMessageBox::detailedSorry(this, i18n("Unable to reset budget"), QString::fromLatin1(e.what()));
   }
@@ -245,6 +245,7 @@ void KBudgetView::slotUpdateBudget()
   try {
     MyMoneyFile::instance()->modifyBudget(d->m_budget);
     ft.commit();
+    d->ui->m_updateButton->setEnabled(false);
     // load updated data
     slotSelectBudget();
   } catch (const MyMoneyException &e) {
