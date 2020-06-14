@@ -129,9 +129,9 @@ KMyMoneyView::KMyMoneyView()
   viewBases[View::Categories] = new KCategoriesView;
   viewBases[View::Tags] = new KTagsView;
   viewBases[View::Payees] = new KPayeesView;
-  viewBases[View::OldLedgers] = new KGlobalLedgerView;
-  viewBases[View::Investments] = new KInvestmentView;
   viewBases[View::NewLedgers] = new SimpleLedgerView;
+  viewBases[View::Investments] = new KInvestmentView;
+  viewBases[View::OldLedgers] = new KGlobalLedgerView;
 
   struct viewInfo
   {
@@ -149,9 +149,10 @@ KMyMoneyView::KMyMoneyView()
     {View::Categories,      i18n("Categories"),                   Icon::FinancialCategories},
     {View::Tags,            i18n("Tags"),                         Icon::Tags},
     {View::Payees,          i18n("Payees"),                       Icon::Payees},
-    {View::OldLedgers,         i18n("Ledgers"),                      Icon::Ledger},
+    {View::NewLedgers,      i18n("Ledgers"),                      Icon::Ledger},
     {View::Investments,     i18n("Investments"),                  Icon::Investments},
-    {View::NewLedgers,      i18n("New ledger"),                   Icon::DocumentProperties},
+    /// @todo remove when new ledger is fully functional
+    {View::OldLedgers,      i18n("Old ledgers"),                  Icon::DocumentProperties},
   };
 
   for (const viewInfo& view : viewsInfo) {
