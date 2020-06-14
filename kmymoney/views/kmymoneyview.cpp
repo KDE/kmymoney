@@ -203,7 +203,7 @@ void KMyMoneyView::slotFileOpened()
 
 void KMyMoneyView::slotFileClosed()
 {
-  slotShowHomePage();
+  showPageAndFocus(View::Home);
 
   for( const auto view : qAsConst(viewBases)) {
     view->executeCustomAction(eView::Action::CleanupBeforeFileClose);
@@ -212,71 +212,6 @@ void KMyMoneyView::slotFileClosed()
   pActions[eMenu::Action::Print]->setEnabled(false);
   pActions[eMenu::Action::AccountCreditTransfer]->setEnabled(false);
   pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(false);
-}
-
-void KMyMoneyView::slotShowHomePage()
-{
-  showPageAndFocus(View::Home);
-}
-
-void KMyMoneyView::slotShowInstitutionsPage()
-{
-  showPageAndFocus(View::Institutions);
-}
-
-void KMyMoneyView::slotShowAccountsPage()
-{
-  showPageAndFocus(View::Accounts);
-}
-
-void KMyMoneyView::slotShowSchedulesPage()
-{
-  showPageAndFocus(View::Schedules);
-}
-
-void KMyMoneyView::slotShowCategoriesPage()
-{
-  showPageAndFocus(View::Categories);
-}
-
-void KMyMoneyView::slotShowTagsPage()
-{
-  showPageAndFocus(View::Tags);
-}
-
-void KMyMoneyView::slotShowPayeesPage()
-{
-  showPageAndFocus(View::Payees);
-}
-
-void KMyMoneyView::slotShowLedgersPage()
-{
-  showPageAndFocus(View::NewLedgers);
-}
-
-void KMyMoneyView::slotShowInvestmentsPage()
-{
-  showPageAndFocus(View::Investments);
-}
-
-void KMyMoneyView::slotShowReportsPage()
-{
-  showPageAndFocus(View::Reports);
-}
-
-void KMyMoneyView::slotShowBudgetPage()
-{
-  showPageAndFocus(View::Budget);
-}
-
-void KMyMoneyView::slotShowForecastPage()
-{
-  showPageAndFocus(View::Forecast);
-}
-
-void KMyMoneyView::slotShowOutboxPage()
-{
-  showPageAndFocus(View::OnlineJobOutbox);
 }
 
 void KMyMoneyView::showTitleBar(bool show)
@@ -455,26 +390,25 @@ QHash<eMenu::Action, QAction *> KMyMoneyView::actionsToBeConnected()
   using namespace eMenu;
   // add fast switching of main views through Ctrl + NUM_X
   struct pageInfo {
-    Action           view;
-    KMyMoneyViewFunc callback;
+    Action           action;
+    View             view;
     QString          text;
     QKeySequence     shortcut = QKeySequence();
   };
-
   const QVector<pageInfo> pageInfos {
-    {Action::ShowHomeView,            &KMyMoneyView::slotShowHomePage,          i18n("Show home page"),                   Qt::CTRL + Qt::Key_1},
-    {Action::ShowInstitutionsView,    &KMyMoneyView::slotShowInstitutionsPage,  i18n("Show institutions page"),           Qt::CTRL + Qt::Key_2},
-    {Action::ShowAccountsView,        &KMyMoneyView::slotShowAccountsPage,      i18n("Show accounts page"),               Qt::CTRL + Qt::Key_3},
-    {Action::ShowSchedulesView,       &KMyMoneyView::slotShowSchedulesPage,     i18n("Show scheduled transactions page"), Qt::CTRL + Qt::Key_4},
-    {Action::ShowCategoriesView,      &KMyMoneyView::slotShowCategoriesPage,    i18n("Show categories page"),             Qt::CTRL + Qt::Key_5},
-    {Action::ShowTagsView,            &KMyMoneyView::slotShowTagsPage,          i18n("Show tags page"),                   },
-    {Action::ShowPayeesView,          &KMyMoneyView::slotShowPayeesPage,        i18n("Show payees page"),                 Qt::CTRL + Qt::Key_6},
-    {Action::ShowLedgersView,         &KMyMoneyView::slotShowLedgersPage,       i18n("Show ledgers page"),                Qt::CTRL + Qt::Key_7},
-    {Action::ShowInvestmentsView,     &KMyMoneyView::slotShowInvestmentsPage,   i18n("Show investments page"),            Qt::CTRL + Qt::Key_8},
-    {Action::ShowReportsView,         &KMyMoneyView::slotShowReportsPage,       i18n("Show reports page"),                Qt::CTRL + Qt::Key_9},
-    {Action::ShowBudgetView,          &KMyMoneyView::slotShowBudgetPage,        i18n("Show budget page"),                },
-    {Action::ShowForecastView,        &KMyMoneyView::slotShowForecastPage,      i18n("Show forecast page"),              },
-    {Action::ShowOnlineJobOutboxView, &KMyMoneyView::slotShowOutboxPage,        i18n("Show outbox page")                 }
+    {Action::ShowHomeView,            View::Home,               i18n("Show home page"),                   Qt::CTRL + Qt::Key_1},
+    {Action::ShowInstitutionsView,    View::Institutions,       i18n("Show institutions page"),           Qt::CTRL + Qt::Key_2},
+    {Action::ShowAccountsView,        View::Accounts,           i18n("Show accounts page"),               Qt::CTRL + Qt::Key_3},
+    {Action::ShowSchedulesView,       View::Schedules,          i18n("Show scheduled transactions page"), Qt::CTRL + Qt::Key_4},
+    {Action::ShowCategoriesView,      View::Categories,         i18n("Show categories page"),             Qt::CTRL + Qt::Key_5},
+    {Action::ShowTagsView,            View::Tags,               i18n("Show tags page"),                   },
+    {Action::ShowPayeesView,          View::Payees,             i18n("Show payees page"),                 Qt::CTRL + Qt::Key_6},
+    {Action::ShowLedgersView,         View::NewLedgers,            i18n("Show ledgers page"),                Qt::CTRL + Qt::Key_7},
+    {Action::ShowInvestmentsView,     View::Investments,        i18n("Show investments page"),            Qt::CTRL + Qt::Key_8},
+    {Action::ShowReportsView,         View::Reports,            i18n("Show reports page"),                Qt::CTRL + Qt::Key_9},
+    {Action::ShowBudgetView,          View::Budget,             i18n("Show budget page"),                 },
+    {Action::ShowForecastView,        View::Forecast,           i18n("Show forecast page"),               },
+    {Action::ShowOnlineJobOutboxView, View::OnlineJobOutbox,    i18n("Show outbox page")                  }
   };
 
   QHash<Action, QAction *> lutActions;
@@ -485,8 +419,9 @@ QHash<eMenu::Action, QAction *> KMyMoneyView::actionsToBeConnected()
     // so, as better alternative, set it here right from the start
     a->setObjectName(QString::fromLatin1("ShowPage%1").arg(QString::number(pageCount++)));
     a->setText(info.text);
-    connect(a, &QAction::triggered, this, info.callback);
-    lutActions.insert(info.view, a);  // store QAction's pointer for later processing
+    a->setData(static_cast<int>(info.view));
+    connect(a, &QAction::triggered, [this, a] { showPageAndFocus(static_cast<View>(a->data().toUInt())); } );
+    lutActions.insert(info.action, a);  // store QAction's pointer for later processing
     if (!info.shortcut.isEmpty())
       a->setShortcut(info.shortcut);
   }
