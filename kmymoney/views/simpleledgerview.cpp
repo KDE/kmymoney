@@ -474,3 +474,17 @@ void SimpleLedgerView::slotSettingsChanged()
   }
   emit settingsChanged();
 }
+
+void SimpleLedgerView::executeCustomAction(eView::Action action)
+{
+  switch(action) {
+    case eView::Action::InitializeAfterFileOpen:
+      openLedgersAfterOpen();
+      break;
+    case eView::Action::CleanupBeforeFileClose:
+      closeLedgers();
+      break;
+    default:
+      break;
+  }
+}

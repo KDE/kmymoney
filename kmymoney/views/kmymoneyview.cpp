@@ -192,13 +192,9 @@ KMyMoneyView::~KMyMoneyView()
 
 void KMyMoneyView::slotFileOpened()
 {
-  if (viewBases.contains(View::OnlineJobOutbox))
-    viewBases[View::OnlineJobOutbox]->executeCustomAction(eView::Action::InitializeAfterFileOpen);
-
-  if (viewBases.contains(View::OldLedgers))
-    viewBases[View::OldLedgers]->executeCustomAction(eView::Action::InitializeAfterFileOpen);
-
-  static_cast<SimpleLedgerView*>(viewBases[View::NewLedgers])->openLedgersAfterOpen();
+  for( const auto view : qAsConst(viewBases)) {
+    view->executeCustomAction(eView::Action::InitializeAfterFileOpen);
+  }
 
   // delay the switchToDefaultView call until the event loop is running
   QMetaObject::invokeMethod(this, "switchToDefaultView", Qt::QueuedConnection);
@@ -208,19 +204,10 @@ void KMyMoneyView::slotFileOpened()
 void KMyMoneyView::slotFileClosed()
 {
   slotShowHomePage();
-  if (viewBases.contains(View::Home))
-    viewBases[View::Home]->executeCustomAction(eView::Action::CleanupBeforeFileClose);
 
-  if (viewBases.contains(View::Reports))
-    viewBases[View::Reports]->executeCustomAction(eView::Action::CleanupBeforeFileClose);
-
-  if (viewBases.contains(View::OnlineJobOutbox))
-    viewBases[View::OnlineJobOutbox]->executeCustomAction(eView::Action::CleanupBeforeFileClose);
-
-  if (viewBases.contains(View::OldLedgers))
-    viewBases[View::OldLedgers]->executeCustomAction(eView::Action::CleanupBeforeFileClose);
-
-  static_cast<SimpleLedgerView*>(viewBases[View::NewLedgers])->closeLedgers();
+  for( const auto view : qAsConst(viewBases)) {
+    view->executeCustomAction(eView::Action::CleanupBeforeFileClose);
+  }
 
   pActions[eMenu::Action::Print]->setEnabled(false);
   pActions[eMenu::Action::AccountCreditTransfer]->setEnabled(false);
