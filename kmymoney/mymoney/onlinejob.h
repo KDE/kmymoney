@@ -23,6 +23,7 @@
 #define BADTASKEXCEPTION badTaskCast("Casted onlineTask with wrong type. " __FILE__ ":" TOSTRING(__LINE__))
 #define EMPTYTASKEXCEPTION emptyTask("Requested onlineTask of onlineJob without any task. " __FILE__ ":" TOSTRING(__LINE__))
 
+#include <stdexcept>
 #include <QMetaType>
 #include <QString>
 #include "mymoneyobject.h"
