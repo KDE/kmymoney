@@ -19,6 +19,7 @@ Name[pt_BR]=Permite que os plugins armazenem dados no banco de dados SQL
 Name[sk]=Umožní pluginom uložiť údaje v sql databáze
 Name[sv]=Gör det möjligt för insticksprogram att lagra data i SQL-databasen
 Name[uk]=Надає змогу додаткам зберігати дані у базі даних SQL
+Name[x-test]=xxEnables plugins to store data in the sql databasexx
 
 [PropertyDef::X-KMyMoney-PluginIid]
 Type=QStringList

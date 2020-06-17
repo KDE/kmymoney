@@ -17,6 +17,7 @@ Name[pt_BR]=Pintura do identificador do beneficiário
 Name[sk]=Identifikátor maliara príjemcu
 Name[sv]=Uppritning av betalningsmottagarens identifierare
 Name[uk]=Засіб малювання для ідентифікатора отримувача
+Name[x-test]=xxPainter of payee identifierxx
 
 [PropertyDef::X-KMyMoney-payeeIdentifierIds]
 Type=QStringList
