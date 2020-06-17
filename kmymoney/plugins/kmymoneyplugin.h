@@ -135,7 +135,7 @@ public Q_SLOTS:
   virtual void configurationChanged() ;
 
 protected:
-  /** See KMyMoneyApp::toggleAction() for a description */
+  /** See KMyMoney::toggleAction() for a description */
   KToggleAction* toggleAction(const QString& name) const;
 
   // define interface classes here. The interface classes provide a mechanism

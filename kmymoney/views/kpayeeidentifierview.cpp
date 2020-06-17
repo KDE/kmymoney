@@ -80,7 +80,7 @@ KPayeeIdentifierView::~KPayeeIdentifierView()
 void KPayeeIdentifierView::setSource(MyMoneyPayeeIdentifierContainer container)
 {
   if (ui->view->model() == 0) {
-    // this model must be closed after each KMyMoneyApp::fileLoaded signal
+    // this model must be closed after each KMyMoney::fileLoaded signal
     // to limit includes, it is connected outside of this class
     auto model = new payeeIdentifierContainerModel(ui->view);
     connect(model, &payeeIdentifierContainerModel::dataChanged, this, &KPayeeIdentifierView::dataChanged);

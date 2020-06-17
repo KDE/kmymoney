@@ -625,7 +625,7 @@ public:
     if (pActions[eMenu::Action::CancelTransaction]->isEnabled()) {
       // make sure, we block the enter function
       pActions[eMenu::Action::EnterTransaction]->setEnabled(false);
-      // qDebug("KMyMoneyApp::slotTransactionsCancel");
+      // qDebug("KMyMoney::slotTransactionsCancel");
       delete editor;
       emit q->selectByObject(schedule, eView::Intent::None);
     }

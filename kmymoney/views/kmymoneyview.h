@@ -49,7 +49,7 @@ namespace eView { enum class Intent; }
 namespace eView { enum class Action; }
 namespace Icons { enum class Icon; }
 
-class KMyMoneyApp;
+class KMyMoney;
 class KHomeView;
 class KAccountsView;
 class KCategoriesView;
@@ -159,7 +159,7 @@ public:
 
   /**
    * @brief actionsToBeConnected are actions that need ActionCollection
-   * which is available in KMyMoneyApp
+   * which is available in KMyMoney
    * @return QHash of action id and QAction itself
    */
   QHash<eMenu::Action, QAction *> actionsToBeConnected();

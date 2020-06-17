@@ -160,7 +160,7 @@ protected:
       if (child == parent)
         return true;
       // if we are at the application level, we don't have a match
-      if (child->inherits("KMyMoneyApp"))
+      if (child->inherits("KMyMoney"))
         return false;
       // If one of the ancestors is a KPassivePopup or a KDialog or a popup widget then
       // it's as if it is a child of our own because these widgets could

@@ -199,7 +199,7 @@ public:
   bool isInherited(const QString& taskIid) const;
 
   /**
-   * @brief makes plugins loaded in KMyMoneyApp available here
+   * @brief makes plugins loaded in KMyMoney available here
    * @param plugins
    */
   void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePluginExtended*>& plugins);

@@ -1359,7 +1359,7 @@ void KGlobalLedgerView::slotCancelOrEnterTransactions(bool& okToSelect)
   if (!oneTime) {
     oneTime = true;
     auto dontShowAgain = "CancelOrEditTransaction";
-    // qDebug("KMyMoneyApp::slotCancelOrEndEdit");
+    // qDebug("KMyMoney::slotCancelOrEndEdit");
     if (d->m_transactionEditor) {
       if (KMyMoneySettings::focusChangeIsEnter() && pActions[Action::EnterTransaction]->isEnabled()) {
         slotEnterTransaction();
@@ -1478,7 +1478,7 @@ void KGlobalLedgerView::slotNewTransaction()
 void KGlobalLedgerView::slotEditTransaction()
 {
   Q_D(KGlobalLedgerView);
-  // qDebug("KMyMoneyApp::slotTransactionsEdit()");
+  // qDebug("KMyMoney::slotTransactionsEdit()");
   // since we jump here via code, we have to make sure to react only
   // if the action is enabled
   if (pActions[Action::EditTransaction]->isEnabled()) {
@@ -1649,7 +1649,7 @@ void KGlobalLedgerView::slotCancelTransaction()
   if (pActions[Action::CancelTransaction]->isEnabled()) {
     // make sure, we block the enter function
     pActions[Action::EnterTransaction]->setEnabled(false);
-    // qDebug("KMyMoneyApp::slotTransactionsCancel");
+    // qDebug("KMyMoney::slotTransactionsCancel");
     d->deleteTransactionEditor();
     updateLedgerActions(d->m_selectedTransactions);
     emit selectByVariant(QVariantList {QVariant::fromValue(d->m_selectedTransactions)}, eView::Intent::SelectRegisterTransactions);

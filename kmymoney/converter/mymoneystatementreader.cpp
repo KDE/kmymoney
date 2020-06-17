@@ -149,7 +149,7 @@ const QString& MyMoneyStatementReader::Private::interestId(const MyMoneyAccount&
 
 QString MyMoneyStatementReader::Private::nameToId(const QString& name, MyMoneyAccount& parent)
 {
-  //  Adapted from KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
+  //  Adapted from KMyMoney::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
   //  Needed to find/create category:sub-categories
   MyMoneyFile* file = MyMoneyFile::instance();
 

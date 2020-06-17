@@ -69,8 +69,8 @@ namespace KMyMoneyPlugin
    * @brief It should be used to handle all plugin actions
    * @param action Action to be taken to all plugins
    * @param ctnPlugins Plugin container to be loaded/unloaded with plugins
-   * @param parent Parent of plugins. This should be KMyMoneyApp
-   * @param guiFactory GUI Factory of plugins. This should be GUI Factory of KMyMoneyApp
+   * @param parent Parent of plugins. This should be KMyMoney
+   * @param guiFactory GUI Factory of plugins. This should be GUI Factory of KMyMoney
    */
   void pluginHandling(Action action, Container& ctnPlugins, QObject* parent, KXMLGUIFactory* guiFactory);
 }

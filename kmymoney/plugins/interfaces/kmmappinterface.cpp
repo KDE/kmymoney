@@ -29,11 +29,11 @@
 
 #include "kmymoney.h"
 
-KMyMoneyPlugin::KMMAppInterface::KMMAppInterface(KMyMoneyApp* app, QObject* parent, const char* name) :
+KMyMoneyPlugin::KMMAppInterface::KMMAppInterface(KMyMoney* app, QObject* parent, const char* name) :
     AppInterface(parent, name),
     m_app(app)
 {
-  connect(m_app, &KMyMoneyApp::kmmFilePlugin, this, &AppInterface::kmmFilePlugin);
+  connect(m_app, &KMyMoney::kmmFilePlugin, this, &AppInterface::kmmFilePlugin);
 }
 
 bool KMyMoneyPlugin::KMMAppInterface::fileOpen()

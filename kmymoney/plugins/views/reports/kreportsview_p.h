@@ -324,7 +324,7 @@ void KReportTab::print()
         QLocale locale;
         painter.drawText(0, 0, QDate::currentDate().toString(locale.dateFormat(QLocale::ShortFormat)));
 
-        /// @todo extract url from KMyMoneyApp
+        /// @todo extract url from KMyMoney
         QUrl file;
         if (file.isValid()) {
           painter.drawText(0, painter.window().height(), file.toLocalFile());

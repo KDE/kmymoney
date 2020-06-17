@@ -92,7 +92,7 @@ namespace eMenu { enum class Action;
   *
   * @short Main application class.
   */
-class KMyMoneyApp : public KXmlGuiWindow, public IMyMoneyProcessingCalendar
+class KMyMoney : public KXmlGuiWindow, public IMyMoneyProcessingCalendar
 {
   Q_OBJECT
 
@@ -114,7 +114,7 @@ protected Q_SLOTS:
     * received modifications to its contents), and call the appropriate method to
     * save the file. Furthermore, re-starts the timer (possibly not needed).
     * @author mvillarino 2005
-    * @see KMyMoneyApp::slotDataChanged()
+    * @see KMyMoney::slotDataChanged()
     */
   void slotAutoSave();
 
@@ -266,14 +266,14 @@ public:
   QUrl lastOpenedURL();
 
   /**
-    * constructor of KMyMoneyApp, calls all init functions to create the application.
+    * constructor of KMyMoney, calls all init functions to create the application.
     */
-  explicit KMyMoneyApp(QWidget* parent = 0);
+  explicit KMyMoney(QWidget* parent = 0);
 
   /**
     * Destructor
     */
-  ~KMyMoneyApp();
+  ~KMyMoney();
 
   static void progressCallback(int current, int total, const QString&);
 
@@ -637,7 +637,7 @@ public Q_SLOTS:
   void slotFileQuit();
 };
 
-extern KMyMoneyApp *kmymoney;
+extern KMyMoney *kmymoney;
 
 class KMStatus
 {

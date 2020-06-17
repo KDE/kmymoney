@@ -32,7 +32,7 @@
 
 #include "appinterface.h"
 
-class KMyMoneyApp;
+class KMyMoney;
 
 namespace KMyMoneyPlugin
 {
@@ -45,7 +45,7 @@ namespace KMyMoneyPlugin
     Q_OBJECT
 
   public:
-    explicit KMMAppInterface(KMyMoneyApp* app, QObject* parent, const char* name = 0);
+    explicit KMMAppInterface(KMyMoney* app, QObject* parent, const char* name = 0);
     ~KMMAppInterface() override = default;
 
     /**
@@ -69,7 +69,7 @@ namespace KMyMoneyPlugin
     void consistencyCheck(bool alwaysDisplayResult) override;
 
   private:
-    KMyMoneyApp* m_app;
+    KMyMoney* m_app;
   };
 
 }

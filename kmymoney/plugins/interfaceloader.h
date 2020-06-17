@@ -26,7 +26,7 @@ namespace KMyMoneyPlugin { class ImportInterface; }
 namespace KMyMoneyPlugin { class StatementInterface; }
 namespace KMyMoneyPlugin { class ViewInterface; }
 
-class KMyMoneyApp;
+class KMyMoney;
 
 namespace KMyMoneyPlugin
 {
@@ -52,7 +52,7 @@ class InterfaceLoader {
   KMyMoneyPlugin::ImportInterface* importInterface;
   /** @} */
 
-  friend KMyMoneyApp;
+  friend KMyMoney;
   friend KMyMoneyPlugin::Plugin;
 };
 
