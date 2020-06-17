@@ -22,8 +22,7 @@
                 "Name[ru]": "Christian David",
                 "Name[sk]": "Christian David",
                 "Name[sv]": "Christian David",
-                "Name[uk]": "Christian David",
-                "Name[x-test]": "xxChristian Davidxx"
+                "Name[uk]": "Christian David"
             }
         ],
         "Description": "If mapped to an account, it pretends it could handle all onlineTasks (for developers only).",
@@ -43,7 +42,6 @@
         "Description[sk]": "Ak je namapované na účet, zabraňuje spracovaniu všetkých online úloh (len pre vývojárov)",
         "Description[sv]": "Om tilldelad till ett konto, låtsas det att det kan hantera alla nätuppgifter (bara för utvecklare).",
         "Description[uk]": "Якщо пов'язано із рахунком, імітує можливість обробки усіх інтернет-завдань (лише для розробників).",
-        "Description[x-test]": "xxIf mapped to an account, it pretends it could handle all onlineTasks (for developers only).xx",
         "EnabledByDefault": true,
         "Id": "onlinejobpluginmockup",
         "License": "GPL",
@@ -64,7 +62,6 @@
         "Name[sk]": "onlinejobpluginmockup",
         "Name[sv]": "Insticksprogram med nätjobbsattrapp",
         "Name[uk]": "onlinejobpluginmockup",
-        "Name[x-test]": "xxonlinejobpluginmockupxx",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

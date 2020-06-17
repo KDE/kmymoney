@@ -21,8 +21,7 @@
                 "Name[ru]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
                 "Name[sk]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
                 "Name[sv]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
-                "Name[uk]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
-                "Name[x-test]": "xxMartin Preuss,Thomas Baumgart,Christian Dávidxx"
+                "Name[uk]": "Martin Preuss,Thomas Baumgart,Christian Dávid"
             }
         ],
         "Description": "Add HBCI/FinTs online banking to KMyMoney",
@@ -42,7 +41,6 @@
         "Description[sk]": "Pridať HBCI/FinTs online banking do KMyMoney",
         "Description[sv]": "Lägg till HBCI/FinTs Internetbank till KMyMoney",
         "Description[uk]": "Онлайн-банкінг HBCI/FinTs у KMyMoney",
-        "Description[x-test]": "xxAdd HBCI/FinTs online banking to KMyMoneyxx",
         "EnabledByDefault": true,
         "Icon": "network-connect",
         "Id": "kbanking",
@@ -67,7 +65,6 @@
         "Name[sk]": "KBanking",
         "Name[sv]": "Kbank",
         "Name[uk]": "KBanking",
-        "Name[x-test]": "xxKBankingxx",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],
