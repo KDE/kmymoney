@@ -89,7 +89,6 @@ void KBudgetView::executeCustomAction(eView::Action action)
 void KBudgetView::slotNewBudget()
 {
   Q_D(KBudgetView);
-  d->askSave();
   auto date = QDate::currentDate();
   date.setDate(date.year(), KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
   auto newname = i18nc("@item:intable Your budgets, %1 budget year", "Budget %1", QString::number(date.year()));
@@ -113,6 +112,8 @@ void KBudgetView::slotNewBudget()
 
     MyMoneyFile::instance()->addBudget(budget);
     ft.commit();
+    // select the newly created budget
+    d->ui->m_budgetList->setCurrentIndex(MyMoneyFile::instance()->budgetsModel()->indexById(budget.id()));
   } catch (const MyMoneyException &e) {
     KMessageBox::detailedSorry(this, i18n("Unable to add budget"), QString::fromLatin1(e.what()));
   }
