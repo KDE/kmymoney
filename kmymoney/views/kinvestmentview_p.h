@@ -185,16 +185,17 @@ public:
     m_securitiesProxyModel = new QSortFilterProxyModel(q);
     ui->m_securitiesTree->setModel(m_securitiesProxyModel);
     m_securitiesProxyModel->setSourceModel(MyMoneyFile::instance()->securitiesModel());
+    m_securitiesProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 
     m_securityColumnSelector = new ColumnSelector(ui->m_securitiesTree, QStringLiteral("KInvestmentView_Securities"));
     m_securityColumnSelector->setModel(MyMoneyFile::instance()->securitiesModel());
     m_securityColumnSelector->setAlwaysVisible(QVector<int>({0}));
     m_securityColumnSelector->setSelectable(m_securityColumnSelector->columns());
 
-    ui->m_searchSecurities->setProxy(m_securitiesProxyModel);
     ui->m_deleteSecurityButton->setIcon(Icons::get(Icon::EditDelete));
     ui->m_editSecurityButton->setIcon(Icons::get(Icon::DocumentEdit));
 
+    q->connect(ui->m_searchSecurities, &QLineEdit::textChanged, m_securitiesProxyModel, &QSortFilterProxyModel::setFilterFixedString);
     q->connect(ui->m_securitiesTree->selectionModel(), &QItemSelectionModel::currentRowChanged, q, &KInvestmentView::slotSecuritySelected);
     q->connect(ui->m_editSecurityButton, &QAbstractButton::clicked, q, &KInvestmentView::slotEditSecurity);
     q->connect(ui->m_deleteSecurityButton, &QAbstractButton::clicked, q, &KInvestmentView::slotDeleteSecurity);
