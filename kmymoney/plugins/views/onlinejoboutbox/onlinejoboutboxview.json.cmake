@@ -23,8 +23,7 @@
                 "Name[ru]": "Christian Dávid",
                 "Name[sk]": "Christian Dávid",
                 "Name[sv]": "Christian Dávid",
-                "Name[uk]": "Christian Dávid",
-                "Name[x-test]": "xxChristian Dávidxx"
+                "Name[uk]": "Christian Dávid"
             }
         ],
         "Description": "Adds online job outbox view to KMyMoney",
@@ -44,7 +43,6 @@
         "Description[pt_BR]": "Adiciona área da caixa de saída das tarefas online",
         "Description[sv]": "Lägger till utkorgsvy för nätjobb i KMyMoney",
         "Description[uk]": "Панель вихідних інтернет-завдань у KMyMoney",
-        "Description[x-test]": "xxAdds online job outbox view to KMyMoneyxx",
         "EnabledByDefault": true,
         "Icon": "online-banking",
         "Id": "onlinejoboutboxview",
@@ -66,7 +64,6 @@
         "Name[pt_BR]": "Área da caixa de saída das tarefas online",
         "Name[sv]": "Utkorgsvy för nätjobb",
         "Name[uk]": "Панель вихідних даних інтернет-завдань",
-        "Name[x-test]": "xxOnline job outbox viewxx",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

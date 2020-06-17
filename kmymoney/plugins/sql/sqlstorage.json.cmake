@@ -22,8 +22,7 @@
                 "Name[ru]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[sk]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[sv]": "Tony Bloomfield,Łukasz Wojniłowicz",
-                "Name[uk]": "Tony Bloomfield,Łukasz Wojniłowicz",
-                "Name[x-test]": "xxTony Bloomfield,Łukasz Wojniłowiczxx"
+                "Name[uk]": "Tony Bloomfield,Łukasz Wojniłowicz"
             }
         ],
         "Description": "Adds SQL storage support to KMyMoney",
@@ -44,7 +43,6 @@
         "Description[sk]": "Pridáva podporu SQL úložiska do KMyMoney",
         "Description[sv]": "Lägger till stöd för SQL-lagring i KMyMoney",
         "Description[uk]": "Підтримка сховища даних SQL у KMyMoney",
-        "Description[x-test]": "xxAdds SQL storage support to KMyMoneyxx",
         "EnabledByDefault": true,
         "Icon": "server-database",
         "Id": "sqlstorage",
@@ -69,7 +67,6 @@
         "Name[sk]": "SQL Úložisko",
         "Name[sv]": "SQL-lagring",
         "Name[uk]": "Сховище SQL",
-        "Name[x-test]": "xxSQL Storagexx",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

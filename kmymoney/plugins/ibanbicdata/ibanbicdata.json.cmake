@@ -23,8 +23,7 @@
                 "Name[ru]": "Christian Dávid",
                 "Name[sk]": "Christian Dávid",
                 "Name[sv]": "Christian Dávid",
-                "Name[uk]": "Christian Dávid",
-                "Name[x-test]": "xxChristian Dávidxx"
+                "Name[uk]": "Christian Dávid"
             }
         ],
         "Description": "Adds predefined IBAN/BIC numbers to KMyMoney",
@@ -45,7 +44,6 @@
         "Description[sk]": "Pridá preddefinované IBAN/BIC čísla do KMyMoney",
         "Description[sv]": "Lägger till fördefinierade IBAN/BIC-nummer i KMyMoney",
         "Description[uk]": "Попередньо визначені номери IBAN/BIC у KMyMoney",
-        "Description[x-test]": "xxAdds predefined IBAN/BIC numbers to KMyMoneyxx",
         "EnabledByDefault": true,
         "Icon": "server-database",
         "Id": "ibanbicdata",
@@ -69,7 +67,6 @@
         "Name[sk]": "IBAN/BIC Údaje",
         "Name[sv]": "IBAN- och BIC-data",
         "Name[uk]": "Дані IBAN та BIC",
-        "Name[x-test]": "xxIBAN/BIC Dataxx",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],
