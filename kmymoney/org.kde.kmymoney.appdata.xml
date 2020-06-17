@@ -30,7 +30,6 @@
   <name xml:lang="sv">KMyMoney</name>
   <name xml:lang="tr">KMyMoney</name>
   <name xml:lang="uk">KMyMoney</name>
-  <name xml:lang="x-test">xxKMyMoneyxx</name>
   <summary>Personal Finance Manager</summary>
   <summary xml:lang="bs">Lični upravnik finansijama</summary>
   <summary xml:lang="ca">Gestor per a les finances personals</summary>
@@ -58,7 +57,6 @@
   <summary xml:lang="sv">Hemekonomihanterare</summary>
   <summary xml:lang="tr">Kişisel Finans Yönetici</summary>
   <summary xml:lang="uk">Програма для керування особистими фінансами</summary>
-  <summary xml:lang="x-test">xxPersonal Finance Managerxx</summary>
   <description>
     <p>
       KMyMoney is a personal finance manager for KDE.
@@ -87,7 +85,6 @@
     <p xml:lang="sv">KMyMoney är en hemekonomihanterare för KDE.</p>
     <p xml:lang="tr">KMyMoney, KDE için kişisel finans yöneticisidir.</p>
     <p xml:lang="uk">KMyMoney — програма для керування особистими фінансами для KDE.</p>
-    <p xml:lang="x-test">xxKMyMoney is a personal finance manager for KDE.xx</p>
     <p>
       It supports different account types, categorisation of expenses and incomes, reconciliation of bank accounts and import/export to the “QIF” file format.
       Direct download using the OFX and HBCI formats is also possible via plugins.
@@ -115,7 +112,6 @@
     <p xml:lang="sv">Den stöder olika kontotyper, kategorisering av utgifter och inkomster, avstämning av bankkonton samt import från och export till filformatet "QIF". Direkt nerladdning med användning av formaten OFX och HBCI är också möjlig via insticksprogram. Stöd för internetbank (nerladdning av kontoutdrag) tillhandahålls också för protokollen OFX och HBCI.</p>
     <p xml:lang="tr">Farklı hesap türlerini, gelir ve giderlerin sınıflandırmasını, banka hesaplarının uzlaştırılmasını ve "QIF" biçiminde içe/dışa aktarmayı destekler. Eklentilerle OFX ve HBCI biçimlerinde doğrudan indirme mümkündür. OFX ve HBCI protokolleri için çevrimiçi bankacılık desteği de mevcuttur.</p>
     <p xml:lang="uk">У програмі передбачено різні типи рахунків, категоризацію за витратами та надходженнями коштів, звірення банківських рахунків, а також імпортування та експортування даних у форматі QIF. Крім того, можливе безпосереднє отримання банківських даних (виписок) з інтернету у форматах OFX та HBCI за допомогою додатків.</p>
-    <p xml:lang="x-test">xxIt supports different account types, categorisation of expenses and incomes, reconciliation of bank accounts and import/export to the “QIF” file format. Direct download using the OFX and HBCI formats is also possible via plugins. Online banking support (statement download) is also provided for the OFX and HBCI protocols.xx</p>
   </description>
   <screenshots>
     <screenshot type="default">
@@ -142,7 +138,6 @@
       <caption xml:lang="sv">KMyMoney har en välkomstsida för att hjälpa nya användare att komma igång</caption>
       <caption xml:lang="tr">KMyMoney yeni kullanıcıların iyi bir başlangıç yapmalarına yardımcı olmak için bir hoş geldiniz sayfasına sahiptir</caption>
       <caption xml:lang="uk">У KMyMoney передбачено сторінку вітання, за допомогою якої новим користувачам буде простіше розпочати користування програмою.</caption>
-      <caption xml:lang="x-test">xxKMyMoney has a welcome page to help new users get off to a good startxx</caption>
       <image>https://kmymoney.org/images/screenshots/large/kmm1.png</image>
     </screenshot>
     <screenshot>
@@ -169,7 +164,6 @@
       <caption xml:lang="sv">Den ekonomiska sammanfattningen ger en översikt av ekonomin</caption>
       <caption xml:lang="tr">Mali durumunuzu gözden geçirmeniz için bir özet sunar</caption>
       <caption xml:lang="uk">За допомогою сторінки фінансового резюме вам буде простіше розібратися з поточним фінансовим станом.</caption>
-      <caption xml:lang="x-test">xxThe financial summary gives you an overview of your financesxx</caption>
       <image>https://kmymoney.org/images/screenshots/large/kmm2.png</image>
     </screenshot>
     <screenshot>
@@ -196,7 +190,6 @@
       <caption xml:lang="sv">I den här vyn organiseras, granskas och hanteras konton enligt institution som de hör till</caption>
       <caption xml:lang="tr">Bu görünümde hesaplarınız onları yöneten kurumlara göre düzenlenmiş şekilde görüntülenirler</caption>
       <caption xml:lang="uk">Рахунки на сторінці резюме упорядковано за установами, з якими ці рахунки пов’язано.</caption>
-      <caption xml:lang="x-test">xxIn this view your accounts are organized, viewed, and managed by the institutions they are held atxx</caption>
       <image>https://kmymoney.org/images/screenshots/large/kmm3.png</image>
     </screenshot>
   </screenshots>
