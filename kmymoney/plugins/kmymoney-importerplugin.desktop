@@ -30,7 +30,6 @@ Name[sk]=Importný plugin KMyMoney
 Name[sv]=Kmymoney importinsticksprogram
 Name[tr]=KMyMoney İçe Aktarma Eklentisi
 Name[uk]=Додаток імпортування KMyMoney
-Name[x-test]=xxKMyMoney Importer Pluginxx
 Name[zh_CN]=KMyMoney 导入插件
 Name[zh_TW]=KMyMoney 匯入器外掛程式
 X-KDE-ServiceType=KMyMoneyImporterPlugin
@@ -65,6 +64,5 @@ Comment[sk]=Plugin KMyMoney
 Comment[sv]=Ett Kmymoney insticksprogram
 Comment[tr]=Bir KMyMoney eklentisi
 Comment[uk]=Додаток KMyMoney
-Comment[x-test]=xxA KMyMoney pluginxx
 Comment[zh_TW]=KMyMoney 外掛程式
 

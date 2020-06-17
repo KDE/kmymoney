@@ -16,7 +16,6 @@ Name[pt_BR]=onlinejobpluginmockup
 Name[sk]=onlinejobpluginmockup
 Name[sv]=Insticksprogram med nätjobbsattrapp
 Name[uk]=onlinejobpluginmockup
-Name[x-test]=xxonlinejobpluginmockupxx
 Comment=If mapped to an account, it pretends it could handle all onlineTasks (for developers only).
 Comment[ca]=Si està vinculat a un compte, fa veure que pot gestionar totes les tasques en línia (només per a desenvolupadors).
 Comment[ca@valencia]=Si està vinculat a un compte, fa veure que pot gestionar totes les tasques en línia (només per a desenvolupadors).
@@ -33,7 +32,6 @@ Comment[pt_BR]=Se estiver associado a uma conta, simula que pode lidar com todas
 Comment[sk]=Ak je namapované na účet, zabraňuje spracovaniu všetkých online úloh (len pre vývojárov)
 Comment[sv]=Om tilldelad till ett konto, låtsas det att det kan hantera alla nätuppgifter (bara för utvecklare).
 Comment[uk]=Якщо пов’язано із рахунком, запобігає обробці усіх мережевих завдань (лише для розробників).
-Comment[x-test]=xxIf mapped to an account, it pretends it could handle all onlineTasks (for developers only).xx
 ServiceTypes=KMyMoneyPlugin
 Type=Service
 
