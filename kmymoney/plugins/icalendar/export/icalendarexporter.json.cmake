@@ -22,7 +22,8 @@
                 "Name[ru]": "Cristian Oneț",
                 "Name[sk]": "Cristian Oneț",
                 "Name[sv]": "Cristian Oneț",
-                "Name[uk]": "Cristian Oneț"
+                "Name[uk]": "Cristian Oneț",
+                "Name[x-test]": "xxCristian Onețxx"
             }
         ],
         "Description": "Exports schedules to iCalendar files",
@@ -43,6 +44,7 @@
         "Description[sk]": "Exportovať rozvrhy do súborov iCalendar",
         "Description[sv]": "Exporterar scheman till iCalendar-filer",
         "Description[uk]": "Експортування розкладів до файлів iCalendar",
+        "Description[x-test]": "xxExports schedules to iCalendar filesxx",
         "EnabledByDefault": true,
         "Icon": "x-office-calendar",
         "Id": "icalendarexporter",
@@ -66,6 +68,7 @@
         "Name[sk]": "iCalendar",
         "Name[sv]": "iCalendar",
         "Name[uk]": "iCalendar",
+        "Name[x-test]": "xxiCalendarxx",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

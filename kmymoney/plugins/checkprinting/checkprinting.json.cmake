@@ -22,7 +22,8 @@
                 "Name[ru]": "Cristian Oneț",
                 "Name[sk]": "Cristian Oneț",
                 "Name[sv]": "Cristian Oneț",
-                "Name[uk]": "Cristian Oneț"
+                "Name[uk]": "Cristian Oneț",
+                "Name[x-test]": "xxCristian Onețxx"
             }
         ],
         "Description": "Provides the capability to print checks",
@@ -43,6 +44,7 @@
         "Description[sk]": "Poskytuje možnosť tlačiť účty",
         "Description[sv]": "Tillhandahåller möjlighet att skriva ut checkar",
         "Description[uk]": "Можливість друку чеків",
+        "Description[x-test]": "xxProvides the capability to print checksxx",
         "EnabledByDefault": true,
         "Icon": "document-print",
         "Id": "checkprinting",
@@ -65,6 +67,7 @@
         "Name[sk]": "Skontrolovať tlač",
         "Name[sv]": "Checkutskrift",
         "Name[uk]": "Друк чеків",
+        "Name[x-test]": "xxCheck printingxx",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

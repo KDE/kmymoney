@@ -22,7 +22,8 @@
                 "Name[ru]": "Darren Gould",
                 "Name[sk]": "Darren Gould",
                 "Name[sv]": "Darren Gould",
-                "Name[uk]": "Darren Gould"
+                "Name[uk]": "Darren Gould",
+                "Name[x-test]": "xxDarren Gouldxx"
             }
         ],
         "Description": "Adds budget view to KMyMoney",
@@ -42,6 +43,7 @@
         "Description[sk]": "Pridá pohľad rozpočtu do KMyMoney",
         "Description[sv]": "Lägger till budgetvy i KMyMoney",
         "Description[uk]": "Панель бюджетів у KMyMoney",
+        "Description[x-test]": "xxAdds budget view to KMyMoneyxx",
         "EnabledByDefault": true,
         "Icon": "budget",
         "Id": "budgetview",
@@ -64,6 +66,7 @@
         "Name[sk]": "Pohľad rozpočtu ",
         "Name[sv]": "Budgetvy",
         "Name[uk]": "Панель бюджету",
+        "Name[x-test]": "xxBudget viewxx",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],
