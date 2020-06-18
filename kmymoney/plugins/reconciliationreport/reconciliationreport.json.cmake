@@ -23,7 +23,8 @@
                 "Name[ru]": "Cristian Oneț",
                 "Name[sk]": "Cristian Oneț",
                 "Name[sv]": "Cristian Oneț",
-                "Name[uk]": "Cristian Oneț"
+                "Name[uk]": "Cristian Oneț",
+                "Name[x-test]": "xxCristian Onețxx"
             }
         ],
         "Description": "Creates a report after each reconciliation containing data about the reconciliation process",
@@ -45,6 +46,7 @@
         "Description[sk]": "Vytvorí report po každom zrovnaní obsahujúcom dáta o procese zrovnania",
         "Description[sv]": "Skapar en rapport efter varje avstämning som innehåller information om avstämningsprocessen",
         "Description[uk]": "Створення звітів після кожного узгодження із даними щодо процедури узгодження",
+        "Description[x-test]": "xxCreates a report after each reconciliation containing data about the reconciliation processxx",
         "EnabledByDefault": true,
         "Icon": "application-vnd.oasis.opendocument.spreadsheet",
         "Id": "reconciliationreport",
@@ -70,6 +72,7 @@
         "Name[sk]": "Zrovnávacia správa",
         "Name[sv]": "Avstämningsrapport",
         "Name[uk]": "Звіт щодо звірки",
+        "Name[x-test]": "xxReconciliation reportxx",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

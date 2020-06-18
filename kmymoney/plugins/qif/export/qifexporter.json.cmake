@@ -23,7 +23,8 @@
                 "Name[ru]": "Michael Edwardes",
                 "Name[sk]": "Michael Edwardes",
                 "Name[sv]": "Michael Edwardes",
-                "Name[uk]": "Michael Edwardes"
+                "Name[uk]": "Michael Edwardes",
+                "Name[x-test]": "xxMichael Edwardesxx"
             }
         ],
         "Description": "Add QIF exporting to KMyMoney",
@@ -45,6 +46,7 @@
         "Description[sk]": "Pridať QIF export do KMyMoney",
         "Description[sv]": "Lägg till QIF-export till KMyMoney",
         "Description[uk]": "Експортування даних QIF у KMyMoney",
+        "Description[x-test]": "xxAdd QIF exporting to KMyMoneyxx",
         "EnabledByDefault": true,
         "Icon": "document-export",
         "Id": "qifexporter",
@@ -69,6 +71,7 @@
         "Name[sk]": "QIF Exporter",
         "Name[sv]": "QIF-export",
         "Name[uk]": "Інструмент експортування QIF",
+        "Name[x-test]": "xxQIF Exporterxx",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],
