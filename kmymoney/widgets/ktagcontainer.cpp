@@ -72,6 +72,15 @@ public:
     q->layout()->addWidget(t);
   }
 
+  QStringList tagIdList() const
+  {
+    QStringList tags;
+    for(const auto tag : qAsConst(m_tagLabelList)) {
+      tags << tag->id();
+    }
+    return tags;
+  }
+
   KTagContainer*              q_ptr;
   QComboBox*                  m_tagCombo;
   QScopedPointer<IdFilter>    m_idFilter;
@@ -105,6 +114,7 @@ KTagContainer::KTagContainer(QWidget* parent) :
             const auto idx = d->m_tagCombo->model()->index(row, 0);
             const auto id = idx.data(eMyMoney::Model::IdRole).toString();
             d->addTagWidget(id);
+            emit tagsChanged(d->tagIdList());
           }
          );
 }
@@ -151,6 +161,8 @@ void KTagContainer::slotRemoveTagWidget()
   int index = d->m_tagLabelList.indexOf(tagLabel);
   d->m_tagLabelList.removeAt(index);
   delete tagLabel;
+
+  emit tagsChanged(d->tagIdList());
 
   d->m_tagCombo->setCurrentIndex(0);
   d->m_tagCombo->setFocus();
