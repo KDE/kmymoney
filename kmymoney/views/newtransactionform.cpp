@@ -1,5 +1,6 @@
 /*
  * Copyright 2015-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2020       Robert Szczesiak <dev.rszczesiak@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -32,6 +33,7 @@
 #include "modelenums.h"
 #include "journalmodel.h"
 #include "mymoneyfile.h"
+#include "tagsmodel.h"
 #include "statusmodel.h"
 
 using namespace eLedgerModel;
@@ -101,6 +103,16 @@ void NewTransactionForm::showTransaction(const QModelIndex& idx)
   d->ui->memoEdit->ensureCursorVisible();
   d->ui->accountEdit->setText(index.data(eMyMoney::Model::TransactionCounterAccountRole).toString());
   d->ui->accountEdit->home(false);
+
+  d->ui->tagEdit->clear();
+  QStringList splitTagList = index.data(eMyMoney::Model::SplitTagIdRole).toStringList();
+  if (!splitTagList.isEmpty()) {
+    std::transform(splitTagList.begin(), splitTagList.end(), splitTagList.begin(),
+                   [] (QString tagId) { return MyMoneyFile::instance()->tagsModel()->itemById(tagId).name(); });
+    d->ui->tagEdit->setText(splitTagList.join(", "));
+    d->ui->tagEdit->home(false);
+  }
+
   d->ui->numberEdit->setText(index.data(eMyMoney::Model::SplitNumberRole).toString());
 
   const QString amount = QString("%1 %2").arg(index.data(eMyMoney::Model::SplitSharesFormattedRole).toString())
