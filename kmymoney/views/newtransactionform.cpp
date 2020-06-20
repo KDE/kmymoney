@@ -91,7 +91,7 @@ void NewTransactionForm::rowsRemoved(const QModelIndex& parent, int first, int l
 
 void NewTransactionForm::showTransaction(const QModelIndex& idx)
 {
-  auto index = MyMoneyFile::baseModel()->mapToBaseSource(idx);
+  const auto index = MyMoneyFile::baseModel()->mapToBaseSource(idx);
   d->row = index.row();
 
   d->ui->dateEdit->setText(QLocale().toString(index.data(eMyMoney::Model::TransactionPostDateRole).toDate(),
@@ -108,16 +108,17 @@ void NewTransactionForm::showTransaction(const QModelIndex& idx)
   QStringList splitTagList = index.data(eMyMoney::Model::SplitTagIdRole).toStringList();
   if (!splitTagList.isEmpty()) {
     std::transform(splitTagList.begin(), splitTagList.end(), splitTagList.begin(),
-                   [] (QString tagId) { return MyMoneyFile::instance()->tagsModel()->itemById(tagId).name(); });
+                   [] (const QString& tagId) { return MyMoneyFile::instance()->tagsModel()->itemById(tagId).name(); });
     d->ui->tagEdit->setText(splitTagList.join(", "));
     d->ui->tagEdit->home(false);
   }
 
   d->ui->numberEdit->setText(index.data(eMyMoney::Model::SplitNumberRole).toString());
 
-  const QString amount = QString("%1 %2").arg(index.data(eMyMoney::Model::SplitSharesFormattedRole).toString())
-  .arg(index.data(eMyMoney::Model::SplitSharesSuffixRole).toString());
-  d->ui->amountEdit->setText(amount);
+  d->ui->amountEdit->setText(i18nc("@item:intext Amount, %1 transaction amount, %2 abbreviated Credit/Debit suffix: Cr. or Dr.",
+                                   "%1 %2",
+                                   index.data(eMyMoney::Model::SplitSharesFormattedRole).toString(),
+                                   index.data(eMyMoney::Model::SplitSharesSuffixRole).toString()));
 
   const auto status = index.data(eMyMoney::Model::SplitReconcileFlagRole).toInt();
   const auto statusIdx = MyMoneyFile::instance()->statusModel()->index(status, 0);

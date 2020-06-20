@@ -1,5 +1,6 @@
 /*
  * Copyright 2015-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2020       Robert Szczesiak <dev.rszczesiak@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -35,7 +36,7 @@ class NewTransactionForm : public QFrame
 {
   Q_OBJECT
 public:
-  explicit NewTransactionForm(QWidget* parent = 0);
+  explicit NewTransactionForm(QWidget* parent = nullptr);
   virtual ~NewTransactionForm();
 
 public Q_SLOTS:
