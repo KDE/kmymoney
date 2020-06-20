@@ -70,7 +70,7 @@ public:
   const QAbstractItemModel* baseModel(const QModelIndex& idx);
 
   /**
-   * This static method returns the model index in the base model of a
+   * This method returns the model index in the base model of a
    * QModelIndex @a idx. The method traverses any possible filter
    * model until it finds the base model. In case the index already
    * points to the base model or points to an unknown filter model type
