@@ -274,7 +274,7 @@ void SplitView::currentChanged(const QModelIndex& current, const QModelIndex& pr
       edit(idx);
     } else {
       scrollTo(idx, EnsureVisible);
-      emit transactionSelected(MyMoneyModelBase::mapToBaseSource(idx));
+      emit transactionSelected(MyMoneyFile::baseModel()->mapToBaseSource(idx));
     }
     d->firstSelectionAfterCreation = false;
     QMetaObject::invokeMethod(this, "doItemsLayout", Qt::QueuedConnection);

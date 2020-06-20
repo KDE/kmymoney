@@ -680,7 +680,7 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
 {
     d->ui->activityCombo->setCurrentIndex(-1);
     d->ui->securityCombo->setCurrentIndex(-1);
-    auto idx = d->adjustToSecuritySplitIdx(MyMoneyModelBase::mapToBaseSource(index));
+    auto idx = d->adjustToSecuritySplitIdx(MyMoneyFile::baseModel()->mapToBaseSource(index));
     if (!idx.isValid() || idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
         d->transaction = MyMoneyTransaction();
         d->split = MyMoneySplit();
@@ -735,7 +735,7 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
 
 
 #if 0
-    auto idx = MyMoneyModelBase::mapToBaseSource(index);
+    auto idx = MyMoneyFile::baseModel()->mapToBaseSource(index);
     if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
         d->transaction = MyMoneyTransaction();
         d->transaction.setCommodity(d->m_account.currencyId());

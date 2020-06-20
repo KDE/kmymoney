@@ -33,6 +33,10 @@
 
 #include "kmm_models_export.h"
 
+#ifdef Q_OS_WIN
+#undef KMM_MODELS_EXPORT
+#define KMM_MODELS_EXPORT
+#endif
 
 class KMM_MODELS_EXPORT MyMoneyModelBase : public QAbstractItemModel
 {
@@ -63,7 +67,7 @@ public:
    *
    * @sa mapToBaseSource
    */
-  static const QAbstractItemModel* baseModel(const QModelIndex& idx);
+  const QAbstractItemModel* baseModel(const QModelIndex& idx);
 
   /**
    * This static method returns the model index in the base model of a
@@ -75,13 +79,13 @@ public:
    * @note The following filter models (and any derivatives are supported:
    * QSortFilterProxyModel, KConcatenateRowsProxyModel
    */
-  static QModelIndex mapToBaseSource(const QModelIndex& idx);
+  QModelIndex mapToBaseSource(const QModelIndex& idx);
 
   /**
    * This method returns a QModelIndex for a stacked @a proxyModel based
    * on the model index @a idx pointing to the base model.
    */
-  static QModelIndex mapFromBaseSource(QAbstractItemModel* proxyModel, const QModelIndex& idx);
+  QModelIndex mapFromBaseSource(QAbstractItemModel* proxyModel, const QModelIndex& idx);
 
   void setDirty(bool dirty = true);
   bool isDirty() const;

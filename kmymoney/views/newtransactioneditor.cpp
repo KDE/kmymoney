@@ -607,7 +607,7 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
     if (d->accepted)
         return;
 
-    auto idx = MyMoneyModelBase::mapToBaseSource(index);
+    auto idx = MyMoneyFile::baseModel()->mapToBaseSource(index);
     if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
         d->transaction = MyMoneyTransaction();
         d->transaction.setCommodity(d->m_account.currencyId());
@@ -653,7 +653,7 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
                 const auto payeeId = splitIdx.data(eMyMoney::Model::SplitPayeeIdRole).toString();
                 const QModelIndex payeeIdx = MyMoneyFile::instance()->payeesModel()->indexById(payeeId);
                 if (payeeIdx.isValid()) {
-                    d->ui->payeeEdit->setCurrentIndex(MyMoneyModelBase::mapFromBaseSource(d->payeesModel, payeeIdx).row());
+                    d->ui->payeeEdit->setCurrentIndex(MyMoneyFile::baseModel()->mapFromBaseSource(d->payeesModel, payeeIdx).row());
                 } else {
                     d->ui->payeeEdit->setCurrentIndex(0);
                 }

@@ -465,7 +465,7 @@ void KMyMoneyUtils::dissectInvestmentTransaction(const QModelIndex &investSplitI
   // be set up. assetAccountSplit references the corresponding asset account (maybe
   // empty), feeSplits is the list of all expenses and interestSplits
   // the list of all incomes
-  auto idx = MyMoneyModelBase::mapToBaseSource(investSplitIdx);
+  auto idx = MyMoneyFile::baseModel()->mapToBaseSource(investSplitIdx);
   const auto list = idx.model()->match(idx.model()->index(0, 0), eMyMoney::Model::JournalTransactionIdRole,
                                        idx.data(eMyMoney::Model::JournalTransactionIdRole),
                                        -1,                         // all splits

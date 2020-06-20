@@ -61,7 +61,7 @@ public:
   {
     Q_Q(KMyMoneyAccountTreeView);
     if (index.isValid()) {
-      QModelIndex baseIdx = MyMoneyModelBase::mapToBaseSource(index);
+      QModelIndex baseIdx = MyMoneyFile::baseModel()->mapToBaseSource(index);
       // baseIdx could point into the accountsModel or the institutionsModel.
       // in case of the institutionsModel it is unclear if it is an account or
       // an institution. So we simply extract the id and check where we find

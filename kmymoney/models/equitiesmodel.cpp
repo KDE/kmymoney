@@ -217,7 +217,7 @@ QVariant EquitiesModel::extraColumnData(const QModelIndex& parent, int row, int 
   const auto file = MyMoneyFile::instance();
 
   auto idx = index(row, 0, parent);
-  auto baseIdx = AccountsModel::mapToBaseSource(idx);
+  auto baseIdx = MyMoneyFile::baseModel()->mapToBaseSource(idx);
   auto model = qobject_cast<const AccountsModel*>(baseIdx.model());
 
   auto acc = model->itemByIndex(baseIdx);

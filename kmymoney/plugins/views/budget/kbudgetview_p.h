@@ -211,7 +211,7 @@ public:
     MyMoneyBudget budget;
     auto currentIdx = ui->m_budgetList->selectionModel()->currentIndex();
     if (currentIdx.isValid() && !ui->m_budgetList->selectionModel()->selectedIndexes().isEmpty()) {
-      const auto baseIdx = BudgetsModel::mapToBaseSource( currentIdx );
+      const auto baseIdx = MyMoneyFile::baseModel()->mapToBaseSource( currentIdx );
       budget = MyMoneyFile::instance()->budgetsModel()->itemByIndex(baseIdx);
     }
     return budget;

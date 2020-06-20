@@ -163,6 +163,7 @@ class PriceModel;
 class ParametersModel;
 class OnlineJobsModel;
 class ReportsModel;
+class MyMoneyModelBase;
 
 // non permanent models
 class SpecialDatesModel;
@@ -204,6 +205,8 @@ public:
     * This is the destructor for any MyMoneyFile object
     */
   ~MyMoneyFile();
+
+  static MyMoneyModelBase* baseModel();
 
   /**
    * This returns the currently implemented highest fix version

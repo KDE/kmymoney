@@ -187,7 +187,7 @@ void KBudgetView::slotBudgetForecast()
     MyMoneyFileTransaction ft;
     try {
       auto idx = d->ui->m_budgetList->selectionModel()->selectedIndexes().first();
-      idx = BudgetsModel::mapToBaseSource(idx);
+      idx = MyMoneyFile::baseModel()->mapToBaseSource(idx);
       if (idx.isValid()) {
         auto budget = file->budgetsModel()->itemByIndex(idx);
         bool calcBudget = budget.getaccounts().count() == 0;
@@ -408,7 +408,7 @@ void KBudgetView::slotSelectBudget()
     d->loadBudgetAccountsView();
     const auto idx = d->ui->m_accountTree->currentIndex();
     if (idx.isValid()) {
-      const auto baseIdx = AccountsModel::mapToBaseSource(idx);
+      const auto baseIdx = MyMoneyFile::baseModel()->mapToBaseSource(idx);
       const auto account = MyMoneyFile::instance()->accountsModel()->itemByIndex(baseIdx);
       slotSelectAccount(account, eView::Intent::None);
     } else {

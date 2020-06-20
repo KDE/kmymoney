@@ -42,7 +42,7 @@
 #include "accountsproxymodel_p.h"
 #include "budgetviewproxymodel.h"
 #include "mymoneyenums.h"
-
+#include "mymoneymodelbase.h"
 
 
 class BudgetViewProxyModelPrivate : public AccountsProxyModelPrivate
@@ -103,7 +103,7 @@ QVariant BudgetViewProxyModel::data(const QModelIndex & idx, int role) const
 #endif
 
   // get index in base model
-  const auto accountIdx = AccountsModel::mapToBaseSource(idx);
+  const auto accountIdx = MyMoneyFile::baseModel()->mapToBaseSource(idx);
 
   switch (role) {
     case Qt::DisplayRole:
@@ -172,7 +172,7 @@ Qt::ItemFlags BudgetViewProxyModel::flags(const QModelIndex &index) const
   // flag set. If so, we don't allow selecting this account
   QModelIndex idx = index.parent();
   while (idx.isValid()) {
-    const auto accountIdx = AccountsModel::mapToBaseSource(index);
+    const auto accountIdx = MyMoneyFile::baseModel()->mapToBaseSource(index);
     const auto accountId = accountIdx.data(eMyMoney::Model::IdRole).toString();
     if (!accountId.isEmpty()) {
       // find out if the account is budgeted
@@ -262,10 +262,11 @@ void BudgetViewProxyModel::checkBalance()
 {
   Q_D(BudgetViewProxyModel);
   const auto file = MyMoneyFile::instance();
+  const auto baseModel = MyMoneyFile::baseModel();
   MyMoneyMoney balance;
 
-  const auto incomeIdx = AccountsModel::mapFromBaseSource(this, file->accountsModel()->incomeIndex());
-  const auto expenseIdx = AccountsModel::mapFromBaseSource(this, file->accountsModel()->expenseIndex());
+  const auto incomeIdx = baseModel->mapFromBaseSource(this, file->accountsModel()->incomeIndex());
+  const auto expenseIdx = baseModel->mapFromBaseSource(this, file->accountsModel()->expenseIndex());
 
   balance = incomeIdx.data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>()
   - expenseIdx.data(eMyMoney::Model::AccountTotalValueRole).value<MyMoneyMoney>();

@@ -293,7 +293,7 @@ public:
     */
   MyMoneyAccount currentEquity()
   {
-    QModelIndex idx = AccountsModel::mapToBaseSource(ui->m_equitiesTree->currentIndex());
+    QModelIndex idx = MyMoneyFile::baseModel()->mapToBaseSource(ui->m_equitiesTree->currentIndex());
     return MyMoneyFile::instance()->accountsModel()->itemByIndex(idx);
   }
 

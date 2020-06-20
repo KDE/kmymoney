@@ -36,6 +36,13 @@ class AmountEdit;
 class CreditDebitHelper;
 class AmountEditCurrencyHelperPrivate;
 
+#ifdef Q_OS_WIN
+#undef KMM_WIDGETS_EXPORT
+#define KMM_WIDGETS_EXPORT
+#endif
+
+
+
 /**
  * This class takes care of the selection of visible columns of a tree view and
  * their sizes and stores the selection in the global application configuration.

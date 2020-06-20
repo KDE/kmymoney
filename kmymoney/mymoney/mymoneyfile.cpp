@@ -467,6 +467,11 @@ MyMoneyFile* MyMoneyFile::instance()
   return &file;
 }
 
+MyMoneyModelBase* MyMoneyFile::baseModel()
+{
+  return instance()->accountsModel();
+}
+
 void MyMoneyFile::finalizeFileOpen()
 {
   d->institutionsModel.slotLoadAccountsWithoutInstitutions(d->accountsModel.accountsWithoutInstitutions());

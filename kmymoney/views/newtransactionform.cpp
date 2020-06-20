@@ -91,7 +91,7 @@ void NewTransactionForm::rowsRemoved(const QModelIndex& parent, int first, int l
 
 void NewTransactionForm::showTransaction(const QModelIndex& idx)
 {
-  auto index = MyMoneyModelBase::mapToBaseSource(idx);
+  auto index = MyMoneyFile::baseModel()->mapToBaseSource(idx);
   d->row = index.row();
 
   d->ui->dateEdit->setText(QLocale().toString(index.data(eMyMoney::Model::TransactionPostDateRole).toDate(),

@@ -258,7 +258,7 @@ void KInvestmentView::slotInvestmentMenuRequested(const QPoint&)
   MyMoneyAccount acc;
   auto treeItem = d->ui->m_equitiesTree->currentIndex();
   if (treeItem.isValid()) {
-    auto idx = AccountsModel::mapToBaseSource(treeItem);
+    auto idx = MyMoneyFile::baseModel()->mapToBaseSource(treeItem);
     acc = MyMoneyFile::instance()->accountsModel()->itemByIndex(idx);
   }
   slotShowInvestmentMenu(acc);

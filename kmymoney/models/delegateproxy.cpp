@@ -34,7 +34,8 @@ class QStyleOption;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneymodelbase.h>
+#include "mymoneymodelbase.h"
+#include "mymoneyfile.h"
 
 class DelegateProxyPrivate
 {
@@ -52,7 +53,7 @@ public:
     // create an index for column 0
     if (idx.isValid()) {
       const QModelIndex baseIdx = idx.model()->index(idx.row(), 0, idx.parent());
-      const QAbstractItemModel* model = MyMoneyModelBase::baseModel(baseIdx);
+      const QAbstractItemModel* model = MyMoneyFile::baseModel()->baseModel(baseIdx);
       return mapping.value(model, nullptr);
     }
     return nullptr;
@@ -92,7 +93,7 @@ const QStyledItemDelegate * DelegateProxy::delegate(const QModelIndex& idx) cons
 {
   Q_D(const DelegateProxy);
   if (idx.isValid()) {
-    return d->mapping.value(MyMoneyModelBase::baseModel(idx), nullptr);
+    return d->mapping.value(MyMoneyFile::baseModel()->baseModel(idx), nullptr);
   }
   return nullptr;
 }
