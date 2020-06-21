@@ -99,7 +99,7 @@ cp -r -v $PLUGINS/* $APPIMAGEPLUGINS
 # Step 5: Determine the version of KMyMoney we have just built
 # This is needed for linuxdeployqt/appimagetool to do the right thing
 cd $KMYMONEY_SOURCES
-KMYMONEY_VERSION=$(grep "KMyMoney VERSION" CMakeLists.txt | cut -d '"' -f 2)
+KMYMONEY_VERSION=$(grep 'set(RELEASE_SERVICE_VERSION_' CMakeLists.txt | cut -d'"' -f 2 | tr '\n' '.' | sed -e 's/\.$//')
 
 # Also find out the revision of Git we built
 # Then use that to generate a combined name we'll distribute
