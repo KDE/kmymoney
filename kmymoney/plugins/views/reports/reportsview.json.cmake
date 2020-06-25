@@ -22,6 +22,7 @@
                 "Name[pt_BR]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[ru]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[sk]": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[sl]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[sv]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[uk]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[x-test]": "xxAlvaro Soliverez,Łukasz Wojniłowiczxx"
@@ -43,6 +44,7 @@
         "Description[pt]": "Adiciona a área de relatórios ao KMyMoney",
         "Description[pt_BR]": "Adiciona área de relatórios no KMyMoney",
         "Description[sk]": "Pridá pohľad výpisov do KMyMoney",
+        "Description[sl]": "Doda pogled poročil v KMyMoney",
         "Description[sv]": "Lägger till rapportvy i KMyMoney",
         "Description[uk]": "Панель звітів у KMyMoney",
         "Description[x-test]": "xxAdds reports view to KMyMoneyxx",
@@ -67,6 +69,7 @@
         "Name[pt]": "Área de relatórios",
         "Name[pt_BR]": "Área de relatórios",
         "Name[sk]": "Pohľad výpisov",
+        "Name[sl]": "Pogled poročil",
         "Name[sv]": "Rapportvy",
         "Name[uk]": "Перегляд звітів",
         "Name[x-test]": "xxReports viewxx",

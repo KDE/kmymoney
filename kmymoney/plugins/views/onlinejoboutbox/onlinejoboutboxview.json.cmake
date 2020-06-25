@@ -22,6 +22,7 @@
                 "Name[pt_BR]": "Christian Dávid",
                 "Name[ru]": "Christian Dávid",
                 "Name[sk]": "Christian Dávid",
+                "Name[sl]": "Christian Dávid",
                 "Name[sv]": "Christian Dávid",
                 "Name[uk]": "Christian Dávid",
                 "Name[x-test]": "xxChristian Dávidxx"
@@ -42,6 +43,7 @@
         "Description[pl]": "Dodaje widok skrzynki wyjściowej zadań w sieci do KMyMoney",
         "Description[pt]": "Adiciona a área da caixa de saída das tarefas 'online' ao KMyMoney",
         "Description[pt_BR]": "Adiciona área da caixa de saída das tarefas online",
+        "Description[sl]": "V KMyMoney doda pogled na oddano e-pošto",
         "Description[sv]": "Lägger till utkorgsvy för nätjobb i KMyMoney",
         "Description[uk]": "Панель вихідних інтернет-завдань у KMyMoney",
         "Description[x-test]": "xxAdds online job outbox view to KMyMoneyxx",
@@ -64,6 +66,7 @@
         "Name[pl]": "Skrzynka wyjściowa zadań w sieci",
         "Name[pt]": "Caixa de saída das tarefas 'online'",
         "Name[pt_BR]": "Área da caixa de saída das tarefas online",
+        "Name[sl]": "Pogled na spletne posle",
         "Name[sv]": "Utkorgsvy för nätjobb",
         "Name[uk]": "Панель вихідних даних інтернет-завдань",
         "Name[x-test]": "xxOnline job outbox viewxx",
