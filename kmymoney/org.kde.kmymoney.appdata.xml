@@ -31,6 +31,7 @@
   <name xml:lang="ro">KMyMoney</name>
   <name xml:lang="ru">KMyMoney</name>
   <name xml:lang="sk">KMyMoney</name>
+  <name xml:lang="sl">KMyMoney</name>
   <name xml:lang="sv">KMyMoney</name>
   <name xml:lang="tr">KMyMoney</name>
   <name xml:lang="uk">KMyMoney</name>
@@ -46,6 +47,7 @@
   <summary xml:lang="nl">Persoonlijk financieel beheer gebaseerd op dubbel boekhouden</summary>
   <summary xml:lang="pt">Gestor de finanças pessoais com base na contabilidade por duplo registo</summary>
   <summary xml:lang="pt-BR">Gerenciador de finanças pessoais com base na contabilidade de entrada dupla</summary>
+  <summary xml:lang="sl">Osebni finančni upravitelj na osnovi dvostavnega knjigovodstva</summary>
   <summary xml:lang="sv">Hemekonomihantering baserad på dubbel bokföring</summary>
   <summary xml:lang="uk">Програма для керування особистими фінансами, яку засновано на бухгалтерській системі із подвійним записом</summary>
   <summary xml:lang="x-test">xxPersonal finance manager based on double-entry bookkeepingxx</summary>
@@ -70,6 +72,7 @@
     <p xml:lang="pl">KMyMoney jest programem do zarządzania osobistymi finansami stworzony w ramach KDE. Posada wiele funkcji, będąc przy tym łatwym w użyciu przez nietechicznych użytkowników.</p>
     <p xml:lang="pt">O KMyMoney é um gestor de finanças pessoais do KDE. Vem com um grande conjunto de funcionalidades, embora seja simples de usar com um utilizador não técnico.</p>
     <p xml:lang="pt-BR">O KMyMoney é um gerenciador de finanças pessoal do KDE. Ele vem com um grande conjunto de recursos sendo fácil de usar para o usuário não técnico.</p>
+    <p xml:lang="sl">KMyMoney je osebni finančni upravitelj namizja KDE. Priložen je velik nabor funkcij, ki so enostavne za uporabo za netehničnega uporabnika.</p>
     <p xml:lang="sv">KMyMoney är en hemekonomihanterare av KDE. Den levereras med ett stort antal funktioner, medan den är lätt att använda för den icke-tekniska användaren.</p>
     <p xml:lang="tr">KMyMoney, KDE tarafından bir kişisel bir finans yöneticisidir. Teknik olmayan kullanıcılar için kullanımı kolayken, geniş bir özellik seti ile birlikte gelir.</p>
     <p xml:lang="uk">KMyMoney — програма для керування особистими фінансами від KDE. У програмі передбачено багато можливостей, якими просто користуватися навіть технічно не обізнаним користувачам.</p>
@@ -101,6 +104,7 @@
     <p xml:lang="pt">Suporta diferentes tipos de contas, a classificação das despesas e receitas, a reconciliação de contas bancárias e a importação/exportação para o formato de ficheiros "QIF". A transferência directa com os formatos OFX e HBCI também é possível através de 'plugins'. O suporte para a banca 'online' (transferência de extractos) também é permitida para os protocolos OFX e HBCI.</p>
     <p xml:lang="pt-BR">Tem suporte a diferentes tipos de contas, a classificação de despesas e receitas por categoria, a conciliação das contas bancárias e a importação/exportação para o formato de arquivos "QIF". Por meio de plugins, também é possível baixar diretamente usando os formatos OFX e HBCI. Também há suporte para banco online (baixar extratos) através dos protocolos OFX e HBCI.</p>
     <p xml:lang="sk">Podporuje rôzne typy účtov, kategorizáciu výdavkov a príjmov, súlad bankových účtov a import/export do súborového formátu "QIF". Priame sťahovanie pomocou formátov OFX a HBCI je tiež možné pomocou pluginov. Podpora online bankingu (sťahovanie prehľadov) je tiež možná cez protokoly OFX a HBCI.</p>
+    <p xml:lang="sl">Podpira različne vrste računov, kategorizacijo stroškov in dohodkov, uskladitev bančnih računov in uvoz/izvoz v format datoteke "QIF".Z uporabo formatov OFX in HBCI je možen neposreden prenos prek vtičnikov. Podpora za spletno bančništvo (prenos izjav) je na voljo tudi za protokole OFX inHBCI.</p>
     <p xml:lang="sv">Den stöder olika kontotyper, kategorisering av utgifter och inkomster, avstämning av bankkonton samt import från och export till filformatet "QIF". Direkt nerladdning med användning av formaten OFX och HBCI är också möjlig via insticksprogram. Stöd för internetbank (nerladdning av kontoutdrag) tillhandahålls också för protokollen OFX och HBCI.</p>
     <p xml:lang="tr">Değişik hesap türlerini, gider ve gelirlerin kategorilenmesi, banka hesaplarının anlaşmaları ve “QIF” dosya biçiminin içe/dışa aktarımını destekler. Eklentiler vasıtasıyla OFX ve HBCI biçimleri kullanarak doğrudan indirme de mümkündür. Çevrimiçi bankacılık desteği (rapor indirme) de OFX ve HBCI protokolleriyle sağlanmıştır.</p>
     <p xml:lang="uk">У програмі передбачено різні типи рахунків, категоризацію за витратами та надходженнями коштів, звірення банківських рахунків, а також імпортування та експортування даних у форматі QIF. Крім того, можливе безпосереднє отримання банківських даних (виписок) з інтернету у форматах OFX та HBCI за допомогою додатків.</p>
@@ -130,6 +134,7 @@
       <caption xml:lang="pt">O KMyMoney tem uma página de boas-vindas para ajudar os novos utilizadores a terem um bom ponto de partida</caption>
       <caption xml:lang="pt-BR">O KMyMoney tem uma página de boas-vindas para ajudar os novos usuários a terem um bom começo</caption>
       <caption xml:lang="sk">KMyMoney má uvítaciu stránku na pomoc novým používateľom na dobrý začiatok</caption>
+      <caption xml:lang="sl">KMyMoney ima stran dobrodošlice, s katero lahko novim uporabnikom pomaga do dobrega začetka</caption>
       <caption xml:lang="sv">KMyMoney har en välkomstsida för att hjälpa nya användare att komma igång</caption>
       <caption xml:lang="tr">KMyMoney iyi bir başlangıç yapması için bir hoş geldiniz sayfası vardır</caption>
       <caption xml:lang="uk">У KMyMoney передбачено сторінку вітання, за допомогою якої новим користувачам буде простіше розпочати користування програмою.</caption>
@@ -160,6 +165,7 @@
       <caption xml:lang="pt">O resumo financeiro dá-lhe uma visão geral sobre as suas finanças</caption>
       <caption xml:lang="pt-BR">O resumo financeiro lhe apresenta uma visão geral das suas finanças</caption>
       <caption xml:lang="sk">Finančný sumár vám poskytne prehľad vašich financií</caption>
+      <caption xml:lang="sl">Finančni povzetek vam daje pregled vaših financ</caption>
       <caption xml:lang="sv">Den ekonomiska sammanfattningen ger en översikt av ekonomin</caption>
       <caption xml:lang="tr">Finansal özet mali durumunuzun genel görünümünü verir</caption>
       <caption xml:lang="uk">За допомогою сторінки фінансового резюме вам буде простіше розібратися з поточним фінансовим станом.</caption>
@@ -185,6 +191,7 @@
       <caption xml:lang="pl">Zarządzanie kontami np. przez instytucje, w których zostały założone</caption>
       <caption xml:lang="pt">Faz a gestão das contas p.ex. das instituições onde estão guardadas</caption>
       <caption xml:lang="pt-BR">Gerencie contas por ex. pelas instituições em que estão guardadas</caption>
+      <caption xml:lang="sl">Upravlja račune, npr. po institucijah, kjer imajo sedež</caption>
       <caption xml:lang="sv">Hantera konton, t.ex. enligt institution som de hör till</caption>
       <caption xml:lang="tr">Hesapları yönetin ör. tutuldukları kurumlar tarafından </caption>
       <caption xml:lang="uk">Керування рахунками, наприклад, за установами, де їх відкрито.</caption>
