@@ -291,13 +291,34 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
         break;
 
     default:
+      // make sure to use the locale's decimalPoint when the
+      // keypad comma/dot is pressed
+      auto keyText = event->text();
+      auto key = event->key();
+      if (event->modifiers() & Qt::KeypadModifier) {
+        if ((key == Qt::Key_Period) || (key == Qt::Key_Comma)) {
+          key = QLocale().decimalPoint().unicode();
+          keyText = QLocale().decimalPoint();
+        }
+      }
+      // create a (possibly adjusted) copy of the event
+      QKeyEvent newEvent(event->type(),
+                         key,
+                         event->modifiers(),
+                         event->nativeScanCode(),
+                         event->nativeVirtualKey(),
+                         event->nativeModifiers(),
+                         keyText,
+                         event->isAutoRepeat(),
+                         event->count());
+
       // in case all text is selected and the user presses the decimal point
       // we fill the widget with the leading "0". The outcome of this will be
       // that the widget then contains "0.".
-      if ((event->key() == QLocale().decimalPoint()) && (selectedText() == text())) {
+      if ((newEvent.key() == QLocale().decimalPoint()) && (selectedText() == text())) {
         QLineEdit::setText(QLatin1String("0"));
       }
-      QLineEdit::keyPressEvent(event);
+      QLineEdit::keyPressEvent(&newEvent);
       break;
   }
 }
