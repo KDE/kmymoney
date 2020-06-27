@@ -21,6 +21,8 @@
 #ifndef KMYMONEYRECONCILECOMBO_H
 #define KMYMONEYRECONCILECOMBO_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -40,7 +42,7 @@ namespace eMyMoney { namespace Split { enum class State; } }
   * reconciliation.
   */
 
-class KMM_WIDGETS_EXPORT KMyMoneyReconcileCombo : public KMyMoneyMVCCombo
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyReconcileCombo : public KMyMoneyMVCCombo
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyReconcileCombo)

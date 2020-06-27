@@ -20,7 +20,7 @@
 #define KMYMONEYTEXTEDITHIGHLIGHTER_H
 
 #include <KTextEdit>
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 /**
  * @brief KTextEdit with restricted character set and length
@@ -29,7 +29,7 @@
  * slots as well (not possible with KTextEdit).
  */
 class KMyMoneyTextEditPrivate;
-class KMM_WIDGETS_EXPORT KMyMoneyTextEdit : public KTextEdit
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyTextEdit : public KTextEdit
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyTextEdit)

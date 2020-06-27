@@ -21,11 +21,11 @@
 #include <QValidator>
 #include <KLineEdit>
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 class QAbstractItemDelegate;
 
-class KMM_WIDGETS_EXPORT KBicEdit : public KLineEdit
+class KMM_BASE_WIDGETS_EXPORT KBicEdit : public KLineEdit
 {
   Q_OBJECT
 

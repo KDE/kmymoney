@@ -20,6 +20,8 @@
 #ifndef KMYMONEYCOMBO_H
 #define KMYMONEYCOMBO_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -38,7 +40,7 @@ class KMyMoneySelector;
   * @author Thomas Baumgart
   */
 class KMyMoneyComboPrivate;
-class KMyMoneyCombo : public KComboBox
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyCombo : public KComboBox
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyCombo)
@@ -46,7 +48,7 @@ class KMyMoneyCombo : public KComboBox
 
 public:
   explicit KMyMoneyCombo(QWidget *parent = nullptr);
-  explicit KMyMoneyCombo(bool rw = false, QWidget *parent = nullptr);
+  explicit KMyMoneyCombo(bool rw, QWidget *parent = nullptr);
   virtual ~KMyMoneyCombo();
 
   /**

@@ -21,6 +21,8 @@
 #ifndef KMYMONEYPERIODCOMBO_H
 #define KMYMONEYPERIODCOMBO_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -38,7 +40,7 @@ namespace eMyMoney { namespace TransactionFilter { enum class Date; } }
  * This class implements a time period selector
  * @author Thomas Baumgart
  */
-class KMM_WIDGETS_EXPORT KMyMoneyPeriodCombo : public KMyMoneyGeneralCombo
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyPeriodCombo : public KMyMoneyGeneralCombo
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyPeriodCombo)

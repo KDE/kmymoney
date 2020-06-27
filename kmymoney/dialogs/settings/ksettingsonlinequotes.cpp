@@ -36,7 +36,7 @@
 
 #include "ui_ksettingsonlinequotes.h"
 
-#include "kmymoney/converter/webpricequote.h"
+#include "kmymoney/misc/webpricequote.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "icons/icons.h"

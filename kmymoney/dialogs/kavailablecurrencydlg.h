@@ -18,6 +18,8 @@
 #ifndef KAVAILABLECURRENCYDLG_H
 #define KAVAILABLECURRENCYDLG_H
 
+#include "kmm_base_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -35,7 +37,7 @@ class KAvailableCurrencyDlg;
 }
 
 class KTreeWidgetSearchLineWidget;
-class KAvailableCurrencyDlg : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KAvailableCurrencyDlg : public QDialog
 {
   Q_OBJECT
 public:

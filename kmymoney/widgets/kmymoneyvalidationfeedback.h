@@ -21,12 +21,12 @@
 
 #include <QWidget>
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 namespace eWidgets { namespace ValidationFeedback { enum class MessageType; } }
 
 class KMyMoneyValidationFeedbackPrivate;
-class KMM_WIDGETS_EXPORT KMyMoneyValidationFeedback : public QWidget
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyValidationFeedback : public QWidget
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyValidationFeedback)

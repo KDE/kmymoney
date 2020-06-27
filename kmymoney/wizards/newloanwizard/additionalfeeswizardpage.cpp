@@ -35,7 +35,8 @@
 
 #include "knewloanwizard.h"
 #include "knewloanwizard_p.h"
-#include "ksplittransactiondlg.h"
+/// @todo port to new model code
+// #include "ksplittransactiondlg.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneyaccount.h"
@@ -66,6 +67,8 @@ AdditionalFeesWizardPage::~AdditionalFeesWizardPage()
 
 void AdditionalFeesWizardPage::slotAdditionalFees()
 {
+  /// @todo port to new model code
+#if 0
   // KMessageBox::information(0, QString("Not yet implemented ... if you want to help, contact kmymoney-devel@kde.org"), QString("Development notice"));
   MyMoneyAccount account("Phony-ID", MyMoneyAccount());
 
@@ -86,7 +89,7 @@ void AdditionalFeesWizardPage::slotAdditionalFees()
   }
 
   delete dlg;
-
+#endif
   updatePeriodicPayment(qobject_cast<KNewLoanWizard*>(wizard())->d_func()->m_account);
 }
 

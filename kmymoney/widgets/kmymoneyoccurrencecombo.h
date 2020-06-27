@@ -21,6 +21,8 @@
 #ifndef KMYMONEYOCCURRENCECOMBO_H
 #define KMYMONEYOCCURRENCECOMBO_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -40,7 +42,7 @@ namespace eMyMoney { namespace Schedule { enum class Occurrence; } }
  *
  * @author Colin Wright
  */
-class KMM_WIDGETS_EXPORT KMyMoneyOccurrenceCombo : public KMyMoneyGeneralCombo
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyOccurrenceCombo : public KMyMoneyGeneralCombo
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyOccurrenceCombo)

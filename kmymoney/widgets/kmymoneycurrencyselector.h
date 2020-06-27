@@ -19,6 +19,8 @@
 #ifndef KMYMONEYCURRENCYSELECTOR_H
 #define KMYMONEYCURRENCYSELECTOR_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -36,9 +38,9 @@
   * @author Thomas Baumgart
   */
 class KMyMoneySecuritySelectorPrivate;
-class KMyMoneySecuritySelector : public KComboBox
+class KMM_BASE_WIDGETS_EXPORT KMyMoneySecuritySelector : public KComboBox
 {
-  Q_OBJECT  
+  Q_OBJECT
   Q_DISABLE_COPY(KMyMoneySecuritySelector)
   Q_PROPERTY(MyMoneySecurity security READ security WRITE setSecurity DESIGNABLE false STORED false)
 
@@ -56,7 +58,7 @@ protected:
   Q_DECLARE_PRIVATE(KMyMoneySecuritySelector)
 };
 
-class KMyMoneyCurrencySelector : public KMyMoneySecuritySelector
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyCurrencySelector : public KMyMoneySecuritySelector
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyCurrencySelector)

@@ -49,6 +49,7 @@ add_subdirectory( templates )
 add_subdirectory( misc )
 add_subdirectory( icons )
 add_subdirectory( menus )
+add_subdirectory( oldregister )
 if(BUILD_TESTING)
   add_subdirectory( tests )
 endif()
@@ -72,7 +73,7 @@ target_link_libraries(kmymoney_common
     KF5::KIONTLM
     Alkimia::alkimia
     kmm_mymoney
-    kmm_utils_webconnect
+    kmm_webconnect
     kmm_utils_platformtools
     PRIVATE
     KF5::I18n
@@ -81,9 +82,9 @@ target_link_libraries(kmymoney_common
 
 # must build kmymoney/transactionsortoption.h
 # from transactionsortoption.ui first
-add_dependencies(kmymoney_common generate_base_ui_srcs kmm_settings)
-add_dependencies(wizardpages widgets)
-add_dependencies(dialogs widgets)
+add_dependencies(kmymoney_common kmm_settings)
+add_dependencies(wizardpages kmm_widgets)
+# add_dependencies(kmm_dialogs kmm_widgets)
 
 if(USE_MODELTEST)
   set( kmymoney_common_LIBS ${kmymoney_common_LIBS} ${QT_QTTEST_LIBRARY})
@@ -136,7 +137,6 @@ endif()
 target_link_libraries(kmymoney
   PUBLIC
   views
-  kmymoney_base
   kmymoney_common
   newuserwizard
   newaccountwizard
@@ -144,10 +144,10 @@ target_link_libraries(kmymoney
   newloanwizard
   endingbalancedlg
   wizardpages
-  dialogs
-  widgets
+  kmm_oldregister
+  kmm_extended_dialogs
+  kmm_base_dialogs
   settings
-  converter
   kmm_models
   kmm_settings
   kmm_menus

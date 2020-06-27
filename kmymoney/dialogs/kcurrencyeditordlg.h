@@ -18,6 +18,8 @@
 #ifndef KCURRENCYEDITORDLG_H
 #define KCURRENCYEDITORDLG_H
 
+#include "kmm_base_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -35,7 +37,7 @@ class KCurrencyEditorDlg;
 }
 
 class MyMoneySecurity;
-class KCurrencyEditorDlg : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KCurrencyEditorDlg : public QDialog
 {
   Q_OBJECT
 public:

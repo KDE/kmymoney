@@ -19,7 +19,7 @@
 #ifndef KACCOUNTTEMPLATESELECTOR_H
 #define KACCOUNTTEMPLATESELECTOR_H
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -39,7 +39,7 @@
  */
 
 class KAccountTemplateSelectorPrivate;
-class KMM_WIDGETS_EXPORT KAccountTemplateSelector : public QWidget
+class KMM_BASE_WIDGETS_EXPORT KAccountTemplateSelector : public QWidget
 {
   Q_OBJECT
   Q_DISABLE_COPY(KAccountTemplateSelector)

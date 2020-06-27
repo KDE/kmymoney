@@ -96,7 +96,7 @@
 #include "dialogs/knewaccountdlg.h"
 #include "dialogs/editpersonaldatadlg.h"
 #include "dialogs/kcurrencycalculator.h"
-#include "dialogs/keditscheduledlg.h"
+#include "keditscheduledlg.h"
 #include "wizards/newloanwizard/keditloanwizard.h"
 #include "dialogs/kpayeereassigndlg.h"
 #include "dialogs/kcategoryreassigndlg.h"
@@ -3495,6 +3495,8 @@ void KMyMoneyApp::slotFileQuit()
 
 void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
 {
+  AmountEdit amountEdit;
+
   switch(action) {
     case eKMyMoney::FileAction::Opened:
       q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
@@ -3503,7 +3505,7 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
       selectBaseCurrency();
 
       // setup the standard precision
-      AmountEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
+      amountEdit.setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
 
       applyFileFixes();
       // setup internal data for which we need all models loaded

@@ -19,6 +19,7 @@
 #ifndef KPRICETREEITEM_H
 #define KPRICETREEITEM_H
 
+#include "kmm_widgets_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -33,7 +34,7 @@
 // Project Includes
 
 
-class KPriceTreeItem : public QTreeWidgetItem
+class KMM_WIDGETS_EXPORT KPriceTreeItem : public QTreeWidgetItem
 {
 public:
   explicit KPriceTreeItem(QTreeWidget* parent);

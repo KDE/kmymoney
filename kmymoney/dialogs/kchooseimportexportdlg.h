@@ -20,6 +20,8 @@
 #ifndef KCHOOSEIMPORTEXPORTDLG_H
 #define KCHOOSEIMPORTEXPORTDLG_H
 
+#include "kmm_base_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -36,7 +38,7 @@
   */
 
 class KChooseImportExportDlgPrivate;
-class KChooseImportExportDlg : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KChooseImportExportDlg : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(KChooseImportExportDlg)

@@ -38,10 +38,11 @@ target_link_libraries(settings PUBLIC
   KF5::KCMUtils
   KF5::ItemViews
   Alkimia::alkimia
+  kmm_oldregister
 )
 
 if (ENABLE_HOLIDAYS)
   target_link_libraries(settings PUBLIC KF5::Holidays)
 endif()
 
-add_dependencies(settings widgets kmm_settings)
+add_dependencies(settings kmm_widgets kmm_settings)

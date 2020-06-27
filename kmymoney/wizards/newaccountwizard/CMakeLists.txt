@@ -27,7 +27,7 @@ ki18n_wrap_ui(libnewaccountwizard_a_SOURCES ${libnewaccountwizard_a_UI} )
 
 add_library(newaccountwizard STATIC ${libnewaccountwizard_a_SOURCES})
 # TODO: clean dependencies
-target_link_libraries(newaccountwizard kmymoneywizard
+target_link_libraries(newaccountwizard
   KF5::XmlGui
   KF5::Service
   KF5::IconThemes
@@ -39,7 +39,8 @@ target_link_libraries(newaccountwizard kmymoneywizard
   Qt5::Widgets
   Qt5::Xml
   Alkimia::alkimia
+  kmm_wizard
   )
 
 # we rely on some dialogs to be generated
-add_dependencies(newaccountwizard dialogs)
+# add_dependencies(newaccountwizard)

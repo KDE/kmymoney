@@ -19,6 +19,8 @@
 #ifndef KMYMONEYACCOUNTCOMBO_H
 #define KMYMONEYACCOUNTCOMBO_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -56,7 +58,7 @@ typedef AccountNamesFilterProxyModelTpl<OnlineBankingAccountsFilterProxyModel> O
   *
   * @author Cristian Onet
   */
-class KMyMoneyAccountCombo : public KComboBox
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyAccountCombo : public KComboBox
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyAccountCombo)
@@ -111,7 +113,7 @@ private:
 
 class QAbstractButton;
 class KMyMoneyAccountComboSplitHelperPrivate;
-class KMyMoneyAccountComboSplitHelper : public QObject
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyAccountComboSplitHelper : public QObject
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyAccountComboSplitHelper)

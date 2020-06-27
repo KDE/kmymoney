@@ -21,6 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include "kmm_base_dialogs_export.h"
+
 #include <QObject>
 class QString;
 class QWidget;
@@ -33,7 +35,7 @@ class QWidget;
 
 class MyMoneyAccount;
 
-class KBalanceWarning : public QObject
+class KMM_BASE_DIALOGS_EXPORT KBalanceWarning : public QObject
 {
   Q_OBJECT
 public:

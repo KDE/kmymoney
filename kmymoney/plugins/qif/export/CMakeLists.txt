@@ -8,7 +8,6 @@ set(qifexporter_PART_SRCS
   ../config/mymoneyqifprofile.cpp
   mymoneyqifwriter.cpp
   kexportdlg.cpp
-  ${CMAKE_SOURCE_DIR}/kmymoney/widgets/kmymoneyaccountcombo.cpp
 )
 
 set(qifexporter_PART_UI
@@ -30,6 +29,7 @@ set_target_properties(qifexporter
 target_link_libraries(qifexporter
   kmm_plugin
   kmm_models
+  kmm_base_widgets
   kmm_widgets
 )
 

@@ -7,4 +7,11 @@ set (libinterfaces_a_SOURCES
 
 add_library(interfaces STATIC ${libinterfaces_a_SOURCES})
 # TODO: fix dependencies
-target_link_libraries(interfaces KF5::Service KF5::XmlGui Alkimia::alkimia Qt5::Xml KF5::I18n)
+target_link_libraries(interfaces
+    kmm_oldregister
+    KF5::Service
+    KF5::XmlGui
+    Alkimia::alkimia
+    Qt5::Xml
+    KF5::I18n
+)

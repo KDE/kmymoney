@@ -18,7 +18,7 @@
 #ifndef IBANVALIDATOR_H
 #define IBANVALIDATOR_H
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 #include <QValidator>
 
@@ -26,7 +26,7 @@
 
 namespace eWidgets { namespace ValidationFeedback { enum class MessageType; } }
 
-class KMM_WIDGETS_EXPORT ibanValidator : public QValidator
+class KMM_BASE_WIDGETS_EXPORT ibanValidator : public QValidator
 {
   Q_OBJECT
 

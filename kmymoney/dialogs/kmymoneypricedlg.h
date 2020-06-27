@@ -19,6 +19,8 @@
 #ifndef KMYMONEYPRICEDLG_H
 #define KMYMONEYPRICEDLG_H
 
+#include "kmm_extended_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -34,7 +36,7 @@ class MyMoneyPrice;
 class QTreeWidgetItem;
 
 class KMyMoneyPriceDlgPrivate;
-class KMyMoneyPriceDlg : public QDialog
+class KMM_EXTENDED_DIALOGS_EXPORT KMyMoneyPriceDlg : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyPriceDlg)

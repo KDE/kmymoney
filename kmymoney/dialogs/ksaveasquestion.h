@@ -18,12 +18,14 @@
 #ifndef KSAVEASQUESTION_H
 #define KSAVEASQUESTION_H
 
+#include "kmm_base_dialogs_export.h"
+
 #include <QDialog>
 
 namespace Ui { class KSaveAsQuestion; }
 namespace eKMyMoney { enum class StorageType; }
 
-class KSaveAsQuestion : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KSaveAsQuestion : public QDialog
 {
   Q_DISABLE_COPY(KSaveAsQuestion)
 

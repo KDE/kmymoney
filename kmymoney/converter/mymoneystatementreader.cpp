@@ -56,14 +56,15 @@
 #include "mymoneystatement.h"
 #include "mymoneysecurity.h"
 #include "kmymoneysettings.h"
-#include "transactioneditor.h"
-#include "stdtransactioneditor.h"
+/// @todo port to new model code
+// #include "transactioneditor.h"
+// #include "stdtransactioneditor.h"
+// #include "kenterscheduledlg.h"
 #include "amountedit.h"
 #include "kaccountselectdlg.h"
 #include "knewaccountwizard.h"
 #include "knewinvestmentwizard.h"
 #include "transactionmatcher.h"
-#include "kenterscheduledlg.h"
 #include "kmymoneyaccountcombo.h"
 #include "accountsmodel.h"
 #include "existingtransactionmatchfinder.h"
@@ -1484,6 +1485,8 @@ void MyMoneyStatementReader::handleMatchingOfScheduledTransaction(TransactionMat
     const MyMoneyTransaction & importedTransaction,
     const MyMoneySplit & importedSplit)
 {
+  /// @todo port to new model code
+#if 0
   QPointer<TransactionEditor> editor;
 
   if (askUserToEnterScheduleForMatching(matchedSchedule, importedSplit, importedTransaction)) {
@@ -1545,6 +1548,7 @@ void MyMoneyStatementReader::handleMatchingOfScheduledTransaction(TransactionMat
     // delete the editor
     delete editor;
   }
+#endif
 }
 
 void MyMoneyStatementReader::addTransaction(MyMoneyTransaction& transaction)

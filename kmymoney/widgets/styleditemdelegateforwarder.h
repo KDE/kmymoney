@@ -20,7 +20,7 @@
 
 #include <QAbstractItemDelegate>
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 /**
  * @brief Helper to use multiple item delegates in a view
@@ -28,7 +28,7 @@
  * This class allows to select the used item delegate based on the QModelIndex.
  *
  */
-class KMM_WIDGETS_EXPORT StyledItemDelegateForwarder : public QAbstractItemDelegate
+class KMM_BASE_WIDGETS_EXPORT StyledItemDelegateForwarder : public QAbstractItemDelegate
 {
   Q_OBJECT
 

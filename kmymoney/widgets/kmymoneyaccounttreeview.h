@@ -20,7 +20,7 @@
 #ifndef KMYMONEYACCOUNTTREEVIEW_H
 #define KMYMONEYACCOUNTTREEVIEW_H
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -45,7 +45,7 @@ enum class View;
 /**
   * This view was created to handle the actions that could be performed with the accounts.
   */
-class KMM_WIDGETS_EXPORT KMyMoneyAccountTreeView : public QTreeView
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyAccountTreeView : public QTreeView
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyAccountTreeView)

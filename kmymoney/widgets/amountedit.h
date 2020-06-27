@@ -19,7 +19,7 @@
 #ifndef AMOUNTEDIT_H
 #define AMOUNTEDIT_H
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -45,7 +45,7 @@ class MyMoneySecurity;
   * @author Thomas Baumgart
   */
 class AmountEditPrivate;
-class KMM_WIDGETS_EXPORT AmountEdit : public QLineEdit
+class KMM_BASE_WIDGETS_EXPORT AmountEdit : public QLineEdit
 {
   Q_OBJECT
   Q_DISABLE_COPY(AmountEdit)
@@ -67,7 +67,6 @@ public:
   explicit AmountEdit(const MyMoneySecurity& eq, QWidget* parent = nullptr);
   virtual ~AmountEdit();
 
-  static AmountEdit* global();
 
   MyMoneyMoney value() const;
 
@@ -121,14 +120,14 @@ public:
    *
    * @sa standardPrecision
    */
-  static void setStandardPrecision(int prec);
+  void setStandardPrecision(int prec);
 
   /**
    * This returns the global selected standard precision
    *
    * @sa setStandardPrecision
    */
-  static int standardPrecision();
+  int standardPrecision();
 
 
 public Q_SLOTS:
@@ -168,6 +167,11 @@ protected:
     * fractional part.
     */
   void ensureFractionalPart();
+
+  /**
+   * return a pointer to the global object for the settings
+   */
+  AmountEdit* global();
 
   /**
    * Overridden to support calculator button.

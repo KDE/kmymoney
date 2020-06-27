@@ -33,7 +33,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 // Ideas neatly taken from korganizer
 // Respective authors are credited.
@@ -76,7 +76,7 @@ namespace KMyMoney {
   * which is based on an edit field with spin boxes and adds a QPushButton
   * to open a KDatePicker.
   */
-class KMM_WIDGETS_EXPORT KMyMoneyDateInput : public QWidget
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyDateInput : public QWidget
 {
   Q_OBJECT
   Q_PROPERTY(QDate date READ date WRITE setDate STORED false)

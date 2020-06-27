@@ -21,6 +21,8 @@
 #ifndef KMYMONEYOCCURRENCEPERIODCOMBO_H
 #define KMYMONEYOCCURRENCEPERIODCOMBO_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -37,7 +39,7 @@
  *
  * @author Colin Wright
  */
-class KMM_WIDGETS_EXPORT KMyMoneyOccurrencePeriodCombo : public KMyMoneyOccurrenceCombo
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyOccurrencePeriodCombo : public KMyMoneyOccurrenceCombo
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyOccurrencePeriodCombo)

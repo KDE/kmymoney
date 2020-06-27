@@ -19,6 +19,8 @@
 #ifndef KCONFIRMMANUALENTERDLG_H
 #define KCONFIRMMANUALENTERDLG_H
 
+#include "kmm_base_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -35,7 +37,7 @@ class MyMoneyTransaction;
 
 namespace Ui { class KConfirmManualEnterDlg; }
 
-class KConfirmManualEnterDlg : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KConfirmManualEnterDlg : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(KConfirmManualEnterDlg)

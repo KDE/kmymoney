@@ -20,6 +20,8 @@
 #ifndef ONLINETASK_H
 #define ONLINETASK_H
 
+#include "onlinetask_interfaces_export.h"
+
 #include <QString>
 
 #include <qobject.h>
@@ -107,7 +109,7 @@ class onlineJob;
  */
 class QDomDocument;
 class QDomElement;
-class onlineTask
+class ONLINETASK_INTERFACES_EXPORT onlineTask
 {
 public:
   ONLINETASK_META_BASE(onlineTask, "org.kmymoney.onlineTask", /* no attribute here */);

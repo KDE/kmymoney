@@ -18,7 +18,7 @@
 #ifndef AMOUNTEDITCURRENCYHELPER_H
 #define AMOUNTEDITCURRENCYHELPER_H
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_dialogs_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -54,7 +54,7 @@ class AmountEditCurrencyHelperPrivate;
  *
  * @author Thomas Baumgart
  */
-class KMM_WIDGETS_EXPORT AmountEditCurrencyHelper : public QObject
+class KMM_BASE_DIALOGS_EXPORT AmountEditCurrencyHelper : public QObject
 {
   Q_OBJECT
   Q_DISABLE_COPY(AmountEditCurrencyHelper)

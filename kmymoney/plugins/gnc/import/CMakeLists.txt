@@ -32,6 +32,7 @@ target_link_libraries(gncimporter
   PUBLIC
     kmm_plugin
   PRIVATE
+    kmm_oldregister
     kmm_models
     KF5::Completion
     KF5::Archive

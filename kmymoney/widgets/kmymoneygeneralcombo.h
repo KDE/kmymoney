@@ -21,7 +21,7 @@
 #ifndef KMYMONEYGENERALCOMBO_H
 #define KMYMONEYGENERALCOMBO_H
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -34,7 +34,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class KMM_WIDGETS_EXPORT KMyMoneyGeneralCombo : public KComboBox
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyGeneralCombo : public KComboBox
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyGeneralCombo)

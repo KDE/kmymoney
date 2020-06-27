@@ -31,7 +31,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 /**
   * This class represents a special verson of a KLineEdit object that
@@ -44,7 +44,7 @@
   */
 class QFocusEvent;
 class QKeyEvent;
-class KMM_WIDGETS_EXPORT KMyMoneyLineEdit : public KLineEdit
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyLineEdit : public KLineEdit
 {
   Q_OBJECT
 public:

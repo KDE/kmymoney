@@ -22,4 +22,4 @@ add_library(endingbalancedlg STATIC ${libendingbalancedlg_a_SOURCES})
 target_link_libraries(endingbalancedlg KF5::ConfigWidgets KF5::WidgetsAddons KF5::I18n KF5::Completion Qt5::Widgets Qt5::Xml Alkimia::alkimia)
 
 # we rely on some widgets to be generated
-add_dependencies(endingbalancedlg widgets dialogs)
+# add_dependencies(endingbalancedlg widgets)

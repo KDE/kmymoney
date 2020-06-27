@@ -30,7 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 /**
   *@author Thomas Baumgart
@@ -47,7 +47,7 @@
   * for details.
   */
 class KMyMoneyCalculatorPrivate;
-class KMM_WIDGETS_EXPORT KMyMoneyCalculator : public QFrame
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyCalculator : public QFrame
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyCalculator)

@@ -19,6 +19,8 @@
 #ifndef EDITPERSONALDATADLG_H
 #define EDITPERSONALDATADLG_H
 
+#include "kmm_base_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -35,7 +37,7 @@ struct ContactData;
 // This dialog lets the user create/edit a file.
 // Use the second constructor to edit a file.
 class EditPersonalDataDlgPrivate;
-class EditPersonalDataDlg : public QDialog
+class KMM_BASE_DIALOGS_EXPORT EditPersonalDataDlg : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(EditPersonalDataDlg)

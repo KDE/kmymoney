@@ -20,6 +20,8 @@
 #ifndef KTAGREASSIGNDLG_H
 #define KTAGREASSIGNDLG_H
 
+#include "kmm_base_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -38,7 +40,7 @@ namespace Ui { class KTagReassignDlg; }
  *  to re-assign transactions (for instance, if tags are deleted).
  */
 
-class KTagReassignDlg : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KTagReassignDlg : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(KTagReassignDlg)

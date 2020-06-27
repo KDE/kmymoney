@@ -19,13 +19,15 @@
 #ifndef SPLITADJUSTDIALOG_H
 #define SPLITADJUSTDIALOG_H
 
+#include "kmm_extended_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QDialog>
 #include <QScopedPointer>
 
-class SplitAdjustDialog : public QDialog
+class KMM_EXTENDED_DIALOGS_EXPORT SplitAdjustDialog : public QDialog
 {
   Q_OBJECT
 public:

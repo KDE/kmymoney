@@ -31,7 +31,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 /**
   * This class implements a general selector for id based objects. It is based
@@ -49,7 +49,7 @@
   *   by marking the item in the view.
   */
 class KMyMoneySelectorPrivate;
-class KMM_WIDGETS_EXPORT KMyMoneySelector : public QWidget
+class KMM_BASE_WIDGETS_EXPORT KMyMoneySelector : public QWidget
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneySelector)

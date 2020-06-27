@@ -48,4 +48,4 @@ add_library(newloanwizard STATIC ${libnewloanwizard_a_SOURCES})
 target_link_libraries(newloanwizard newaccountwizard KF5::XmlGui KF5::IconThemes KF5::Service KF5::I18n KF5::Completion KF5::WidgetsAddons KF5::TextWidgets Qt5::Widgets Qt5::Xml Alkimia::alkimia)
 
 # we rely on some dialogs to be generated
-add_dependencies(newloanwizard dialogs)
+# add_dependencies(newloanwizard)

@@ -20,6 +20,8 @@
 #ifndef TRANSACTIONMATCHER_H
 #define TRANSACTIONMATCHER_H
 
+#include "kmm_base_dialogs_export.h"
+
 #include <qglobal.h>
 
 class MyMoneySplit;
@@ -27,7 +29,7 @@ class MyMoneyTransaction;
 class MyMoneyAccount;
 
 class TransactionMatcherPrivate;
-class TransactionMatcher
+class KMM_BASE_DIALOGS_EXPORT TransactionMatcher
 {
 public:
   Q_DISABLE_COPY(TransactionMatcher)

@@ -19,6 +19,8 @@
 #ifndef KNEWBANKDLG_H
 #define KNEWBANKDLG_H
 
+#include "kmm_base_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -35,7 +37,7 @@ class KJob;
 
 /// This dialog lets the user create or edit an institution
 class KNewBankDlgPrivate;
-class KNewBankDlg : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KNewBankDlg : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(KNewBankDlg)

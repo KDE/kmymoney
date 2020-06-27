@@ -34,6 +34,7 @@ target_link_libraries(xmlstorage
     kmymoney_common
     kmm_mymoney
     xmlstoragehelper
+    onlinetask_interfaces
 )
 
 # install(FILES kmymoney-xmlstorageplugin.desktop

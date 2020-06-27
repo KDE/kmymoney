@@ -45,7 +45,6 @@
 #include "mymoneysecurity.h"
 #include "securitiesmodel.h"
 #include "mymoneyprice.h"
-#include "kmymoneysettings.h"
 
 #include "icons.h"
 

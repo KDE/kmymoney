@@ -18,6 +18,8 @@
 #ifndef KMYMONEYWIZARDPAGE_P_H
 #define KMYMONEYWIZARDPAGE_P_H
 
+#include "kmm_wizard_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -40,7 +42,7 @@ class KMandatoryFieldGroup;
   * derived from QObject directly.
   */
 
-class KMyMoneyWizardPagePrivate : public QObject
+class KMM_WIZARD_EXPORT KMyMoneyWizardPagePrivate : public QObject
 {
     Q_OBJECT
     Q_DISABLE_COPY(KMyMoneyWizardPagePrivate)

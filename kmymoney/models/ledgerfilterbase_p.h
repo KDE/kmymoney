@@ -33,7 +33,8 @@
 
 #include "mymoneyfile.h"
 
-struct LedgerFilterBasePrivate {
+class LedgerFilterBasePrivate {
+public:
   LedgerFilterBasePrivate(LedgerFilterBase* qq)
   : q(qq)
   , concatModel(nullptr)

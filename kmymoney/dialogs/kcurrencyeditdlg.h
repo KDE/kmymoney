@@ -20,6 +20,8 @@
 #ifndef KCURRENCYEDITDLG_H
 #define KCURRENCYEDITDLG_H
 
+#include "kmm_base_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -41,7 +43,7 @@ class MyMoneySecurity;
   * @author Thomas Baumgart
   */
 class KCurrencyEditDlgPrivate;
-class KCurrencyEditDlg : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KCurrencyEditDlg : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(KCurrencyEditDlg)

@@ -34,7 +34,7 @@ class QAbstractItemModel;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 class MyMoneyTag;
 
@@ -44,7 +44,7 @@ class MyMoneyTag;
   * @author Alessandro Russo, Thomas Baumgart
   */
 class KTagContainerPrivate;
-class KMM_WIDGETS_EXPORT KTagContainer : public QWidget
+class KMM_BASE_WIDGETS_EXPORT KTagContainer : public QWidget
 {
   Q_OBJECT
   Q_DISABLE_COPY(KTagContainer)

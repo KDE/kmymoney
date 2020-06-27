@@ -18,7 +18,7 @@
 #ifndef COLUMNSELECTOR_H
 #define COLUMNSELECTOR_H
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -49,7 +49,7 @@ class ColumnSelectorPrivate;
  *
  * @author Thomas Baumgart
  */
-class KMM_WIDGETS_EXPORT ColumnSelector : public QObject
+class KMM_BASE_WIDGETS_EXPORT ColumnSelector : public QObject
 {
   Q_OBJECT
   Q_DISABLE_COPY(ColumnSelector)

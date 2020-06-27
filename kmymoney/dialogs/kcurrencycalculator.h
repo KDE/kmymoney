@@ -19,6 +19,8 @@
 #ifndef KCURRENCYCALCULATOR_H
 #define KCURRENCYCALCULATOR_H
 
+#include "kmm_base_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -46,7 +48,7 @@ typedef qint64 signed64;
   */
 
 class KCurrencyCalculatorPrivate;
-class KCurrencyCalculator : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KCurrencyCalculator : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(KCurrencyCalculator)

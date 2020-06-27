@@ -31,14 +31,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmm_models_export.h"
+#include "kmm_mymoney_export.h"
 
-#ifdef Q_OS_WIN
-#undef KMM_MODELS_EXPORT
-#define KMM_MODELS_EXPORT
-#endif
-
-class KMM_MODELS_EXPORT MyMoneyModelBase : public QAbstractItemModel
+class KMM_MYMONEY_EXPORT MyMoneyModelBase : public QAbstractItemModel
 {
   Q_OBJECT
 public:
