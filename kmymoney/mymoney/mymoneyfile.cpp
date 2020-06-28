@@ -6,6 +6,7 @@
  * Copyright 2006-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2006       Darren Gould <darren_gould@gmx.de>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Robert Szczesiak <dev.rszczesiak@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -99,56 +100,14 @@ const QString MyMoneyFile::AccountSeparator = QChar(':');
 typedef QList<std::pair<QString, QDate> > BalanceNotifyList;
 typedef QMap<QString, bool> CacheNotifyList;
 
-/// @todo make this template based
 class MyMoneyNotification
 {
 public:
-  MyMoneyNotification(File::Mode mode, const MyMoneyTransaction& t) :
-      m_objType(File::Object::Transaction),
-      m_notificationMode(mode),
-      m_id(t.id()) {
-  }
 
-  MyMoneyNotification(File::Mode mode, const MyMoneyAccount& acc) :
-      m_objType(File::Object::Account),
+  MyMoneyNotification(File::Mode mode, File::Object objType, const QString& id) :
+      m_objType(objType),
       m_notificationMode(mode),
-      m_id(acc.id()) {
-  }
-
-  MyMoneyNotification(File::Mode mode, const MyMoneyInstitution& institution) :
-      m_objType(File::Object::Institution),
-      m_notificationMode(mode),
-      m_id(institution.id()) {
-  }
-
-  MyMoneyNotification(File::Mode mode, const MyMoneyPayee& payee) :
-      m_objType(File::Object::Payee),
-      m_notificationMode(mode),
-      m_id(payee.id()) {
-  }
-
-  MyMoneyNotification(File::Mode mode, const MyMoneyTag& tag) :
-      m_objType(File::Object::Tag),
-      m_notificationMode(mode),
-      m_id(tag.id()) {
-  }
-
-  MyMoneyNotification(File::Mode mode, const MyMoneySchedule& schedule) :
-      m_objType(File::Object::Schedule),
-      m_notificationMode(mode),
-      m_id(schedule.id()) {
-  }
-
-  MyMoneyNotification(File::Mode mode, const MyMoneySecurity& security) :
-      m_objType(File::Object::Security),
-      m_notificationMode(mode),
-      m_id(security.id()) {
-  }
-
-  MyMoneyNotification(File::Mode mode, const onlineJob& job) :
-      m_objType(File::Object::OnlineJob),
-      m_notificationMode(mode),
-      m_id(job.id()) {
+      m_id(id) {
   }
 
   File::Object objectType() const {
@@ -619,15 +578,15 @@ void MyMoneyFile::commitTransaction()
       case eMyMoney::File::Object::Schedule:
       case eMyMoney::File::Object::Tag:
       case eMyMoney::File::Object::Security:
-      // case eMyMoney::File::Object::Currency:
-      // case eMyMoney::File::Object::Budget:
+      case eMyMoney::File::Object::Currency:
+      case eMyMoney::File::Object::Budget:
       case eMyMoney::File::Object::Account:
       case eMyMoney::File::Object::Institution:
       case eMyMoney::File::Object::Transaction:
-      // case eMyMoney::File::Object::Price:
-      // case eMyMoney::File::Object::Parameter:
+      case eMyMoney::File::Object::Price:
+      case eMyMoney::File::Object::Parameter:
       case eMyMoney::File::Object::OnlineJob:
-      // case eMyMoney::File::Object::Report:
+      case eMyMoney::File::Object::Report:
         changed = true;
         break;
       default:
@@ -720,7 +679,7 @@ void MyMoneyFile::addInstitution(MyMoneyInstitution& institution)
   d->checkTransaction(Q_FUNC_INFO);
   d->institutionsModel.addItem(institution);
 
-  d->m_changeSet += MyMoneyNotification(File::Mode::Add, institution);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Add, File::Object::Institution, institution.id());
 }
 
 void MyMoneyFile::modifyInstitution(const MyMoneyInstitution& institution)
@@ -733,7 +692,7 @@ void MyMoneyFile::modifyInstitution(const MyMoneyInstitution& institution)
   }
 
   d->institutionsModel.modifyItem(institution);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, institution);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Institution, institution.id());
 }
 
 void MyMoneyFile::removeInstitution(const MyMoneyInstitution& institution)
@@ -751,12 +710,12 @@ void MyMoneyFile::removeInstitution(const MyMoneyInstitution& institution)
     auto a = account(accountId);
     a.setInstitutionId(QString());
     modifyAccount(a);
-    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, a);
+    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Account, a.id());
   }
 
   d->institutionsModel.removeItem(institution);
 
-  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, institution);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, File::Object::Institution, institution.id());
 }
 
 QList<MyMoneyInstitution> MyMoneyFile::institutionList() const
@@ -844,7 +803,7 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
   for (const auto& split : splits3)
     d->addCacheNotification(split.accountId(), tCopy.postDate());
 
-  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, transaction);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Transaction, transaction.id());
 }
 
 void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
@@ -903,7 +862,7 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
   }
 
   d->accountsModel.modifyItem(account);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, account);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Account, account.id());
 }
 
 void MyMoneyFile::reparentAccount(MyMoneyAccount &acc, MyMoneyAccount& parent)
@@ -940,9 +899,9 @@ void MyMoneyFile::reparentAccount(MyMoneyAccount &acc, MyMoneyAccount& parent)
     acc = d->accountsModel.itemById(acc.id());
     parent = d->accountsModel.itemById(parent.id());
 
-    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, curParent);
-    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, parent);
-    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, acc);
+    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Account, curParent.id());
+    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Account, parent.id());
+    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Account, acc.id());
 
   } else
     throw MYMONEYEXCEPTION_CSTRING("Unable to reparent to different account type");
@@ -1030,7 +989,7 @@ void MyMoneyFile::removeTransaction(const MyMoneyTransaction& transaction)
     }
   }
 
-  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, transaction);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, File::Object::Transaction, transaction.id());
 }
 
 
@@ -1099,7 +1058,7 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
   for (const auto& accountId : acc.accountList()) {
     auto accountToMove = d->accountsModel.itemById(accountId);
     reparentAccount(accountToMove, newParent);
-    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, MyMoneyFile::account(accountToMove.id()));
+    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Account, accountToMove.id());
   }
 
   // don't forget the a possible institution
@@ -1116,8 +1075,8 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 
   d->m_balanceCache.clear(acc.id());
 
-  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, parent);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, acc);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Account, parent.id());
+  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, File::Object::Account, acc.id());
 }
 
 void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned int level)
@@ -1342,19 +1301,19 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
   d->accountsModel.addItem(account);
 
   // d->m_storage->addAccount(account);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Add, account);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Add, File::Object::Account, account.id());
 
   parent.addAccountId(account.id());
   d->accountsModel.modifyItem(parent);
 
   // d->m_storage->addAccount(parent, account);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, parent);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Account, parent.id());
 
   if (account.institutionId().length() != 0) {
     institution.addAccountId(account.id());
     d->institutionsModel.modifyItem(institution);
     // d->m_storage->modifyInstitution(institution);
-    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, institution);
+    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Institution, institution.id());
   }
 }
 
@@ -1616,7 +1575,7 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
     d->addCacheNotification(split.accountId(), transaction.postDate());
   }
 
-  d->m_changeSet += MyMoneyNotification(File::Mode::Add, transaction);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Add, File::Object::Transaction, transaction.id());
 }
 MyMoneyTransaction MyMoneyFile::transaction(const QString& id) const
 {
@@ -1743,7 +1702,7 @@ void MyMoneyFile::addPayee(MyMoneyPayee& payee)
   d->checkTransaction(Q_FUNC_INFO);
 
   d->payeesModel.addItem(payee);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Add, payee);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Add, File::Object::Payee, payee.id());
 }
 
 MyMoneyPayee MyMoneyFile::payee(const QString& id) const
@@ -1768,7 +1727,7 @@ void MyMoneyFile::modifyPayee(const MyMoneyPayee& payee)
   d->checkTransaction(Q_FUNC_INFO);
 
   d->payeesModel.modifyItem(payee);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, payee);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Payee, payee.id());
 }
 
 void MyMoneyFile::removePayee(const MyMoneyPayee& payee)
@@ -1777,7 +1736,7 @@ void MyMoneyFile::removePayee(const MyMoneyPayee& payee)
 
   // FIXME we need to make sure, that the payee is not referenced anymore
   d->payeesModel.removeItem(payee);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, payee);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, File::Object::Payee, payee.id());
 }
 
 void MyMoneyFile::addTag(MyMoneyTag& tag)
@@ -1785,7 +1744,7 @@ void MyMoneyFile::addTag(MyMoneyTag& tag)
   d->checkTransaction(Q_FUNC_INFO);
 
   d->tagsModel.addItem(tag);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Add, tag);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Add, File::Object::Tag, tag.id());
 }
 
 MyMoneyTag MyMoneyFile::tag(const QString& id) const
@@ -1803,7 +1762,7 @@ void MyMoneyFile::modifyTag(const MyMoneyTag& tag)
   d->checkTransaction(Q_FUNC_INFO);
 
   d->tagsModel.modifyItem(tag);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, tag);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Tag, tag.id());
 }
 
 void MyMoneyFile::removeTag(const MyMoneyTag& tag)
@@ -1812,7 +1771,7 @@ void MyMoneyFile::removeTag(const MyMoneyTag& tag)
 
   // FIXME we need to make sure, that the tag is not referenced anymore
   d->tagsModel.removeItem(tag);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, tag);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, File::Object::Tag, tag.id());
 }
 
 void MyMoneyFile::accountList(QList<MyMoneyAccount>& list, const QStringList& idlist, const bool recursive) const
@@ -2188,7 +2147,7 @@ void MyMoneyFile::addSchedule(MyMoneySchedule& sched)
   }
 
   d->schedulesModel.addItem(sched);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Add, sched);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Add, File::Object::Schedule, sched.id());
 }
 
 void MyMoneyFile::modifySchedule(const MyMoneySchedule& sched)
@@ -2209,7 +2168,7 @@ void MyMoneyFile::modifySchedule(const MyMoneySchedule& sched)
   }
 
   d->schedulesModel.modifyItem(sched);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, sched);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Schedule, sched.id());
 }
 
 void MyMoneyFile::removeSchedule(const MyMoneySchedule& sched)
@@ -2217,7 +2176,7 @@ void MyMoneyFile::removeSchedule(const MyMoneySchedule& sched)
   d->checkTransaction(Q_FUNC_INFO);
 
   d->schedulesModel.removeItem(sched);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, sched);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, File::Object::Schedule, sched.id());
 }
 
 MyMoneySchedule MyMoneyFile::schedule(const QString& id) const
@@ -3038,7 +2997,7 @@ void MyMoneyFile::addSecurity(MyMoneySecurity& security)
   d->checkTransaction(Q_FUNC_INFO);
 
   d->securitiesModel.addItem(security);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Add, security);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Add, File::Object::Security, security.id());
 }
 
 void MyMoneyFile::modifySecurity(const MyMoneySecurity& security)
@@ -3046,7 +3005,7 @@ void MyMoneyFile::modifySecurity(const MyMoneySecurity& security)
   d->checkTransaction(Q_FUNC_INFO);
 
   d->securitiesModel.modifyItem(security);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, security);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Security, security.id());
 }
 
 void MyMoneyFile::removeSecurity(const MyMoneySecurity& security)
@@ -3056,7 +3015,7 @@ void MyMoneyFile::removeSecurity(const MyMoneySecurity& security)
   // FIXME check that security is not referenced by other object
 
   d->securitiesModel.removeItem(security);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, security);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, File::Object::Security, security.id());
 }
 
 MyMoneySecurity MyMoneyFile::security(const QString& id) const
@@ -3086,7 +3045,7 @@ void MyMoneyFile::addCurrency(const MyMoneySecurity& currency)
   d->checkTransaction(Q_FUNC_INFO);
 
   d->currenciesModel.addCurrency(currency);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Add, currency);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Add, File::Object::Currency, currency.id());
 }
 
 void MyMoneyFile::modifyCurrency(const MyMoneySecurity& currency)
@@ -3098,7 +3057,7 @@ void MyMoneyFile::modifyCurrency(const MyMoneySecurity& currency)
     d->m_baseCurrency.clearId();
 
   d->currenciesModel.modifyItem(currency);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, currency);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Currency, currency.id());
 }
 
 void MyMoneyFile::removeCurrency(const MyMoneySecurity& currency)
@@ -3111,7 +3070,7 @@ void MyMoneyFile::removeCurrency(const MyMoneySecurity& currency)
   // FIXME check that security is not referenced by other object
 
   d->currenciesModel.removeItem(currency);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, currency);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, File::Object::Currency, currency.id());
 }
 
 MyMoneySecurity MyMoneyFile::currency(const QString& id) const
@@ -3543,6 +3502,7 @@ void MyMoneyFile::addBudget(MyMoneyBudget &budget)
   d->checkTransaction(Q_FUNC_INFO);
 
   d->budgetsModel.addItem(budget);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Add, File::Object::Budget, budget.id());
 }
 
 MyMoneyBudget MyMoneyFile::budgetByName(const QString& name) const
@@ -3559,6 +3519,7 @@ void MyMoneyFile::modifyBudget(const MyMoneyBudget& budget)
   d->checkTransaction(Q_FUNC_INFO);
 
   d->budgetsModel.modifyItem(budget);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Budget, budget.id());
 }
 
 unsigned MyMoneyFile::countBudgets() const
@@ -3576,6 +3537,7 @@ void MyMoneyFile::removeBudget(const MyMoneyBudget& budget)
   d->checkTransaction(Q_FUNC_INFO);
 
   d->budgetsModel.removeItem(budget);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, File::Object::Budget, budget.id());
 }
 
 void MyMoneyFile::addOnlineJob(onlineJob& job)
@@ -3583,7 +3545,7 @@ void MyMoneyFile::addOnlineJob(onlineJob& job)
   d->checkTransaction(Q_FUNC_INFO);
 
   d->onlineJobsModel.addItem(job);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Add, job);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Add, File::Object::OnlineJob, job.id());
 }
 
 void MyMoneyFile::modifyOnlineJob(const onlineJob job)
@@ -3591,7 +3553,7 @@ void MyMoneyFile::modifyOnlineJob(const onlineJob job)
   d->checkTransaction(Q_FUNC_INFO);
 
   d->onlineJobsModel.modifyItem(job);
-  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, job);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::OnlineJob, job.id());
 }
 
 onlineJob MyMoneyFile::getOnlineJob(const QString &jobId) const
@@ -3622,7 +3584,7 @@ void MyMoneyFile::removeOnlineJob(const onlineJob& job)
   if (job.isLocked()) {
     return;
   }
-  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, job);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, File::Object::OnlineJob, job.id());
   d->onlineJobsModel.removeItem(job);
 }
 
