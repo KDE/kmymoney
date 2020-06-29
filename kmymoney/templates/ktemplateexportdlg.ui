@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>397</width>
-    <height>284</height>
+    <height>362</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -66,7 +66,7 @@
  <tabstops>
   <tabstop>m_title</tabstop>
   <tabstop>m_shortDescription</tabstop>
-  <tabstop>buttonBox</tabstop>
+  <tabstop>m_longDescription</tabstop>
  </tabstops>
  <resources/>
  <connections>

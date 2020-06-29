@@ -181,10 +181,6 @@ QVariant PayeesModel::data(const QModelIndex& index, int role) const
 
 bool PayeesModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-  if (!index.isValid()) {
-    return false;
-  }
-
   if (!index.isValid())
     return false;
   if (index.row() < 0 || index.row() >= rowCount(index.parent()))

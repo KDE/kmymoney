@@ -101,8 +101,6 @@
 #include "dialogs/kpayeereassigndlg.h"
 #include "dialogs/kcategoryreassigndlg.h"
 #include "wizards/endingbalancedlg/kendingbalancedlg.h"
-#include "dialogs/kloadtemplatedlg.h"
-#include "dialogs/ktemplateexportdlg.h"
 #include "dialogs/transactionmatcher.h"
 #include "wizards/newuserwizard/knewuserwizard.h"
 #include "wizards/newaccountwizard/knewaccountwizard.h"
@@ -134,9 +132,13 @@
 #include "mymoney/mymoneytransactionfilter.h"
 #include "mymoneyexception.h"
 
+#include "mymoneytemplate.h"
+#include "templateloader.h"
+#include "templatewriter.h"
+#include "kloadtemplatedlg.h"
+#include "ktemplateexportdlg.h"
 
 #include "converter/mymoneystatementreader.h"
-#include "converter/mymoneytemplate.h"
 
 #include "plugins/interfaces/kmmappinterface.h"
 #include "plugins/interfaces/kmmviewinterface.h"
@@ -2098,12 +2100,12 @@ void KMyMoneyApp::slotLoadAccountTemplates()
   QPointer<KLoadTemplateDlg> dlg = new KLoadTemplateDlg();
   if (dlg->exec() == QDialog::Accepted && dlg != 0) {
     MyMoneyFileTransaction ft;
+    TemplateLoader loader(this);
     try {
       // import the account templates
-      QList<MyMoneyTemplate> templates = dlg->templates();
-      QList<MyMoneyTemplate>::iterator it_t;
-      for (it_t = templates.begin(); it_t != templates.end(); ++it_t) {
-        (*it_t).importTemplate(progressCallback);
+      const auto templates = dlg->templates();
+      for (const auto& tmpl : qAsConst(templates)) {
+        loader.importTemplate(tmpl);
       }
       ft.commit();
     } catch (const MyMoneyException &e) {
@@ -2144,18 +2146,19 @@ void KMyMoneyApp::slotSaveAccountTemplates()
       newName.append(".kmt");
     }
 
-    if (okToWriteFile(QUrl::fromLocalFile(newName))) {
-      QPointer <KTemplateExportDlg> dlg = new KTemplateExportDlg(this);
-      if (dlg->exec() == QDialog::Accepted && dlg) {
-          MyMoneyTemplate templ;
-          templ.setTitle(dlg->title());
-          templ.setShortDescription(dlg->shortDescription());
-          templ.setLongDescription(dlg->longDescription());
-          templ.exportTemplate(progressCallback);
-          templ.saveTemplate(QUrl::fromLocalFile(newName));
+    QPointer <KTemplateExportDlg> dlg = new KTemplateExportDlg(this);
+    if ((dlg->exec() == QDialog::Accepted) && dlg) {
+      MyMoneyTemplate tmpl;
+      tmpl.setTitle(dlg->title());
+      tmpl.setShortDescription(dlg->shortDescription());
+      tmpl.setLongDescription(dlg->longDescription());
+
+      TemplateWriter templateWriter(this);
+      if (!templateWriter.exportTemplate(tmpl, QUrl::fromLocalFile(newName))) {
+        KMessageBox::error(this, templateWriter.errorMessage(), i18nc("@title:window Error display", "Template export"), 0);
       }
-      delete dlg;
     }
+    delete dlg;
   }
 }
 
@@ -3256,8 +3259,11 @@ bool KMyMoneyApp::slotFileNew()
     }
 
     // import the account templates
-    for (auto &tmpl : wizard.templates())
-      tmpl.importTemplate(progressCallback);
+    const auto templates = wizard.templates();
+    TemplateLoader loader(this);
+    for (const auto& tmpl : templates) {
+      loader.importTemplate(tmpl);
+    }
 
     ft.commit();
     KMyMoneySettings::setFirstTimeRun(false);

@@ -546,6 +546,14 @@ namespace eMyMoney {
 
       // Parameter
       ParameterValueRole,
+
+      // Templates
+      TemplatesCountryRole,
+      TemplatesTypeRole,
+      TemplatesDescriptionRole,
+      TemplatesLongDescriptionRole,
+      TemplatesDomRole,
+      TemplatesLocaleRole,
     };
   }
 }

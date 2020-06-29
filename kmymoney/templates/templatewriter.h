@@ -1,6 +1,5 @@
 /*
- * Copyright 2008-2018  Thomas Baumgart <tbaumgart@kde.org>
- * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,15 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KACCOUNTTEMPLATESELECTOR_H
-#define KACCOUNTTEMPLATESELECTOR_H
+#ifndef TEMPLATEWRITER_H
+#define TEMPLATEWRITER_H
 
-#include "kmm_widgets_export.h"
+#include "kmm_templates_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
+#include <QObject>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -32,32 +31,28 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <templatesmodel.h>
+class MyMoneyTemplate;
 
 /**
  * @author Thomas Baumgart
  */
 
-class KAccountTemplateSelectorPrivate;
-class KMM_WIDGETS_EXPORT KAccountTemplateSelector : public QWidget
+class TemplateWriterPrivate;
+class KMM_TEMPLATES_EXPORT TemplateWriter : public QObject
 {
   Q_OBJECT
-  Q_DISABLE_COPY(KAccountTemplateSelector)
+  Q_DISABLE_COPY(TemplateWriter)
+  Q_DECLARE_PRIVATE(TemplateWriter)
 
 public:
-  explicit KAccountTemplateSelector(QWidget* parent = nullptr);
-  ~KAccountTemplateSelector();
+  explicit TemplateWriter(QWidget* parent = nullptr);
+  ~TemplateWriter();
 
-  void setModel(TemplatesModel* model);
-
-  QList<MyMoneyTemplate> selectedTemplates() const;
-
-public Q_SLOTS:
-  void setupInitialSelection();
+  bool exportTemplate(const MyMoneyTemplate& tmpl, const QUrl &url);
+  QString errorMessage() const;
 
 private:
-  KAccountTemplateSelectorPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KAccountTemplateSelector)
+  TemplateWriterPrivate * const d_ptr;
 };
 
 #endif

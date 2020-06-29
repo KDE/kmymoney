@@ -1,3 +1,46 @@
+set (kmm_templates_SOURCES
+  templateloader.cpp
+  templatewriter.cpp
+  kloadtemplatedlg.cpp
+  ktemplateexportdlg.cpp
+)
+
+set(kmm_templates_UI
+  kloadtemplatedlg.ui
+  ktemplateexportdlg.ui
+)
+
+ki18n_wrap_ui(kmm_templates_SOURCES ${kmm_templates_UI} )
+
+add_library(kmm_templates SHARED ${kmm_templates_SOURCES})
+
+#   kmm_settings
+#  KF5::KIOWidgets
+#  KF5::Completion
+#  KF5::Notifications
+#  KF5::ItemViews
+#  Qt5::Gui
+#  Qt5::Core
+#  Alkimia::alkimia
+#  kmm_mymoney
+
+
+target_link_libraries(kmm_templates PUBLIC
+  KF5::TextWidgets
+  KF5::I18n
+  kmm_models
+  kmm_widgets
+)
+
+set_target_properties(kmm_templates PROPERTIES
+  VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
+)
+
+generate_export_header(kmm_templates)
+
+install(TARGETS kmm_templates ${INSTALL_TARGETS_DEFAULT_ARGS} )
+
+
 ########### install files ###############
 
 install(DIRECTORY

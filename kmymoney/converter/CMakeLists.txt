@@ -4,7 +4,6 @@ endif()
 
 set (libconverter_a_SOURCES
   mymoneystatementreader.cpp
-  mymoneytemplate.cpp
   webpricequote.cpp
   transactionmatchfinder.cpp
   existingtransactionmatchfinder.cpp
@@ -36,7 +35,4 @@ target_link_libraries(converter
 add_dependencies(converter dialogs)
 
 ########### install files ###############
-
-install(FILES mymoneytemplate.h
-  DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
 
