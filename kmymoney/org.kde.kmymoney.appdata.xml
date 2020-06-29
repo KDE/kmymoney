@@ -205,7 +205,6 @@
   <project_group>KDE</project_group>
   <provides>
     <binary>kmymoney</binary>
-    <id>org.kde.kmymoney.desktop</id>
   </provides>
   <releases>
     <!-- Note: website infrastructure uses the appstream file from the master branch
