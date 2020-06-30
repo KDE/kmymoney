@@ -31,6 +31,9 @@
 #include <QUrl>
 #include <QDebug>
 #include <QTemporaryFile>
+#ifdef IS_APPIMAGE
+#include <QCoreApplication>
+#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
