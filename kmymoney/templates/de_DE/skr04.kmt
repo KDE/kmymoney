@@ -14,6 +14,7 @@
  <longdesc>BETA-Version eines Kontenrahmes SKR04 für 2005. Mehr Informationen unter https://wiki.gnucash.org/wiki/De/SKR04</longdesc>
  <accounts>
   <account type="12" name="01. Betriebliche Erträge">
+   <flag name="Tax" value="Yes"/>
    <account type="12" name="Erlösschmälerungen">
     <account type="12" name="Erlösschmäl.i.and.EG-Ld.stpfl.Liefer."/>
     <account type="12" name="Erlösschmälerung EG-Lieferung 15% USt"/>
@@ -63,34 +64,72 @@
     <account type="12" name="Erlöse Geldspielautomaten 16% USt"/>
     <account type="12" name="Erlöse Kleinunternehmer §19 UStG"/>
     <account type="12" name="Erlöse Leergut"/>
-    <account type="12" name="Erlöse aus Leistungen, für die der Leistungsempfänger die Steuer nach §13b UStG schuldet."/>
-    <account type="12" name="Erlöse aus im Drittland steuerbaren Leistungen, im Inland nicht steuerbare Umsätze"/>
-    <account type="12" name="Erlöse aus im Inland steuerpflichtigen EG Lieferungen 16% USt"/>
-    <account type="12" name="Erlöse aus im Inland steuerpflichtigen EG Lieferungen 19% USt"/>
-    <account type="12" name="Erlöse aus im Inland steuerpflichtigen EG Lieferungen 7% USt"/>
-    <account type="12" name="Erlöse aus im anderen EG-Land steuerbaren Leistungen, im Inland nicht steuerbare Umsätze"/>
+    <account type="12" name="Erlöse aus Leistungen, für die der Leistungsempfänger die Steuer nach §13b UStG schuldet.">
+     <flag name="Tax" value="Yes"/>
+    </account>
+    <account type="12" name="Erlöse aus im Drittland steuerbaren Leistungen, im Inland nicht steuerbare Umsätze">
+     <flag name="Tax" value="Yes"/>
+    </account>
+    <account type="12" name="Erlöse aus im Inland steuerpflichtigen EG Lieferungen 16% USt">
+     <flag name="Tax" value="Yes"/>
+    </account>
+    <account type="12" name="Erlöse aus im Inland steuerpflichtigen EG Lieferungen 19% USt">
+     <flag name="Tax" value="Yes"/>
+    </account>
+    <account type="12" name="Erlöse aus im Inland steuerpflichtigen EG Lieferungen 7% USt">
+     <flag name="Tax" value="Yes"/>
+    </account>
+    <account type="12" name="Erlöse aus im anderen EG-Land steuerbaren Leistungen, im Inland nicht steuerbare Umsätze">
+     <flag name="Tax" value="Yes"/>
+    </account>
     <account type="12" name="Erlöse aus im anderen EG-Land steuerpflichtigen Lieferungen"/>
-    <account type="12" name="Erlöse die mit den Durchschnittssätzen des §24 UStG versteuert werden"/>
+    <account type="12" name="Erlöse die mit den Durchschnittssätzen des §24 UStG versteuert werden">
+     <flag name="Tax" value="Yes"/>
+    </account>
     <account type="12" name="Provisionserlöse">
-     <account type="12" name="Provisionserlöse 16% USt"/>
-     <account type="12" name="Provisionserlöse 7% USt"/>
+     <account type="12" name="Provisionserlöse 16% USt">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="12" name="Provisionserlöse 7% USt">
+      <flag name="Tax" value="Yes"/>
+     </account>
      <account type="12" name="Provisionserlöse, steuerfrei §4 Nr.5"/>
      <account type="12" name="Provisionserlöse, steuerfrei §4 Nr.8ff"/>
     </account>
     <account type="12" name="Steuerfreie Umsätze">
-     <account type="12" name="Innergemeinschaftl. Dreiecksgeschäft, Lieferung des ersten Abnehmers (§25b Abs. 2 UStG)"/>
+     <account type="12" name="Innergemeinschaftl. Dreiecksgeschäft, Lieferung des ersten Abnehmers (§25b Abs. 2 UStG)">
+      <flag name="Tax" value="Yes"/>
+     </account>
      <account type="12" name="Sonstige steuerfr. Umsätze Inland"/>
-     <account type="12" name="Steuerfr. EG-Lief.v.Neufahrzg.ohne UStID"/>
-     <account type="12" name="Steuerfreie EG-Lieferungen (§4,1b UStG) an Abnehmer mit UStID"/>
-     <account type="12" name="Steuerfreie Umsätze Offshore usw."/>
-     <account type="12" name="Steuerfreie Umsätze §4 Nr. 1a UStG"/>
-     <account type="12" name="Steuerfreie Umsätze §4 Nr. 2-7 UStG"/>
-     <account type="12" name="Steuerfreie Umsätze §4 Nr. 8 ff UStG"/>
+     <account type="12" name="Steuerfr. EG-Lief.v.Neufahrzg.ohne UStID">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="12" name="Steuerfreie EG-Lieferungen (§4,1b UStG) an Abnehmer mit UStID">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="12" name="Steuerfreie Umsätze Offshore usw.">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="12" name="Steuerfreie Umsätze §4 Nr. 1a UStG">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="12" name="Steuerfreie Umsätze §4 Nr. 2-7 UStG">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="12" name="Steuerfreie Umsätze §4 Nr. 8 ff UStG">
+      <flag name="Tax" value="Yes"/>
+     </account>
     </account>
     <account type="12" name="Umsatzerlöse"/>
-    <account type="12" name="Umsatzerlöse 16% USt"/>
-    <account type="12" name="Umsatzerlöse 19% USt"/>
-    <account type="12" name="Umsatzerlöse 7% USt"/>
+    <account type="12" name="Umsatzerlöse 16% USt">
+     <flag name="Tax" value="Yes"/>
+    </account>
+    <account type="12" name="Umsatzerlöse 19% USt">
+     <flag name="Tax" value="Yes"/>
+    </account>
+    <account type="12" name="Umsatzerlöse 7% USt">
+     <flag name="Tax" value="Yes"/>
+    </account>
    </account>
    <account type="12" name="b) Statistische Konten EÜR Umsatzerlöse">
     <account type="12" name="Gegenkonto 4580 - 4582 bei Aufteilung der Erlöse nach Steuersätzen (EÜR)"/>
@@ -120,7 +159,9 @@
    <account type="12" name="Erlöse Verkäufe immat.Vermögensgegenst"/>
    <account type="12" name="Erlöse a. Verkäufen Finanzanlagen"/>
    <account type="12" name="Erlöse aus Verkäufen Finanzanlagen 100 %/50 % steuerfrei"/>
-   <account type="12" name="Erlöse aus Verkäufen des Anlagevermögens 16% USt"/>
+   <account type="12" name="Erlöse aus Verkäufen des Anlagevermögens 16% USt">
+    <flag name="Tax" value="Yes"/>
+   </account>
    <account type="12" name="Erträge aus Abgang von Gegenständen des Anlagevermögens"/>
    <account type="12" name="Erträge aus Kursdifferenzen">
     <account type="12" name="Erträge Bewertung Finanzmittelfonds"/>
@@ -151,8 +192,12 @@
    <account type="12" name="Investitionszulagen"/>
    <account type="12" name="Investitionszuschüsse"/>
    <account type="12" name="Periodenfremde Erträge"/>
-   <account type="12" name="Sachbezüge 16% USt"/>
-   <account type="12" name="Sachbezüge 7% USt"/>
+   <account type="12" name="Sachbezüge 16% USt">
+    <flag name="Tax" value="Yes"/>
+   </account>
+   <account type="12" name="Sachbezüge 7% USt">
+    <flag name="Tax" value="Yes"/>
+   </account>
    <account type="12" name="Sonstige betriebliche Erträge">
     <account type="12" name="Sonstige Erträge betriebl., regelm. 16%"/>
     <account type="12" name="Sonstige Erträge unregelmäßig"/>
@@ -182,9 +227,13 @@
      <account type="13" name="Waren aus einem Umsatzsteuerlager, 13a UStG 16% Vorsteuer und 16% Umsatzsteuer"/>
      <account type="13" name="Waren aus einem Umsatzsteuerlager, 13a UStG 7% Vorsteuer und 7% Umsatzsteuer"/>
      <account type="13" name="Wareneingang"/>
-     <account type="13" name="Wareneingang 16% Vorsteuer"/>
+     <account type="13" name="Wareneingang 16% Vorsteuer">
+      <flag name="Tax" value="Yes"/>
+     </account>
      <account type="13" name="Wareneingang 5% Vorsteuer"/>
-     <account type="13" name="Wareneingang 7% Vorsteuer"/>
+     <account type="13" name="Wareneingang 7% Vorsteuer">
+      <flag name="Tax" value="Yes"/>
+     </account>
      <account type="13" name="Wareneingang 9% Vorsteuer"/>
      <account type="13" name="lnnergemeinschaftlicher Erwerb 7% Vorsteuer und 7% Umsatzsteuer"/>
      <account type="13" name="lnnergemeinschaftlicher Erwerb ohne Vorsteuerabzug und 16% Umsatzsteuer"/>
@@ -228,7 +277,9 @@
    </account>
    <account type="13" name="b) Aufwendungen für bezogene Leistungen">
     <account type="13" name="01. Fremdleistungen">
-     <account type="13" name="Fremdleistungen"/>
+     <account type="13" name="Fremdleistungen">
+      <flag name="Tax" value="Yes"/>
+     </account>
     </account>
     <account type="13" name="02. Umstäze, für die als Leistungsempfänger die Steuer nach 13b Abs. 2 UStG geschuldet wird">
      <account type="13" name="Bauleistungen eines im Inland ansässigen Unternehmers 16% Vorsteuer und 16% Umsatzsteuer"/>
@@ -310,8 +361,12 @@
      <account type="13" name="Vorwegnahme künftiger Wertschwankungen im Umlaufvermögen"/>
     </account>
     <account type="13" name="Forderungsverluste">
-     <account type="13" name="Forderungsverluste 16% USt"/>
-     <account type="13" name="Forderungsverluste 7% USt"/>
+     <account type="13" name="Forderungsverluste 16% USt">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="13" name="Forderungsverluste 7% USt">
+      <flag name="Tax" value="Yes"/>
+     </account>
     </account>
    </account>
   </account>
@@ -337,20 +392,25 @@
    <account type="13" name="a) ordentliche betriebliche Aufwendungen">
     <account type="13" name="1) Raumkosten">
      <account type="13" name="Abgaben für betrieblich genutzen Grundbesitz">
+      <flag name="Tax" value="Yes"/>
       <account type="13" name="Abgaben für Grundbesitz, der nicht zum Betriebsvermögen gehört"/>
      </account>
      <account type="13" name="Aufwendungen für ein häusliches Arbeitszimmer (abziehbarer Anteil)"/>
      <account type="13" name="Aufwendungen für ein häusliches Arbeitszimmer (nicht abziehbarer Anteil)"/>
      <account type="13" name="Gas, Strom, Wasser">
+      <flag name="Tax" value="Yes"/>
       <account type="13" name="Gas, Strom, Wasser für Gebäude, die nicht zum Betriebsvermögen gehören"/>
      </account>
      <account type="13" name="Heizung">
+      <flag name="Tax" value="Yes"/>
       <account type="13" name="Heizung für Gebäude, die nicht zum Betriebsvermögen gehren"/>
      </account>
      <account type="13" name="Instandhaltung betrieblicher Räume">
+      <flag name="Tax" value="Yes"/>
       <account type="13" name="Instandhaltung betrieblicher Räume in Gebäuden, die nicht zum Betriebs- Geschäftsausvermögen gehören"/>
      </account>
      <account type="13" name="Miete">
+      <flag name="Tax" value="Yes"/>
       <account type="13" name="Gewerbesteuerlich zu berücksichtigende Miete §8 GewStG"/>
       <account type="13" name="Vergütungen an Mitunternehmer für die mietweise Überlassung ihrer Wirtschaftsgüter §16 EStG"/>
      </account>
@@ -358,14 +418,19 @@
       <account type="13" name="GewStl. zu berücksichtigende Pacht §8 GewStG"/>
       <account type="13" name="Vergütungen an Mitunternehmer für die pachtweise Überlassung ihrer Wirtschaftsgüter §15 EStG"/>
      </account>
-     <account type="13" name="Raumkosten"/>
+     <account type="13" name="Raumkosten">
+      <flag name="Tax" value="Yes"/>
+     </account>
      <account type="13" name="Reinigung">
+      <flag name="Tax" value="Yes"/>
       <account type="13" name="Reinigung für Gebäude nicht im BV"/>
      </account>
      <account type="13" name="Sonstige Grundstücksaufwendungen">
+      <flag name="Tax" value="Yes"/>
       <account type="13" name="Grundstücksaufwendungen für Gebäude, die nicht zum Betriebsvermögen gehören"/>
      </account>
      <account type="13" name="Sonstige Raumkosten">
+      <flag name="Tax" value="Yes"/>
       <account type="13" name="Sonstige Raumkosten für Gebäude, die nicht zum Betriebsvermögen gehören"/>
      </account>
     </account>
@@ -383,36 +448,55 @@
     </account>
     <account type="13" name="4) Reparaturen und Instandhaltungen">
      <account type="13" name="Mietleasing">
+      <flag name="Tax" value="Yes"/>
       <account type="13" name="Gewerbesteuerlich zu berücksichtigendes Mietleasing §8 GewStG"/>
      </account>
      <account type="13" name="Reparaturen und Instandhaltung von Bauten">
+      <flag name="Tax" value="Yes"/>
       <account type="13" name="Reparaturen und Instandhaltung von Bauten, die nicht zum Betriebsvermögen gehören"/>
      </account>
-     <account type="13" name="Reparaturen und Instandhaltung von Betriebs- und Geschäftsausstattung"/>
+     <account type="13" name="Reparaturen und Instandhaltung von Betriebs- und Geschäftsausstattung">
+      <flag name="Tax" value="Yes"/>
+     </account>
      <account type="13" name="Reparaturen und Instandhaltung von anderen Anlagen"/>
      <account type="13" name="Reparaturen und Instandhaltung von technischen Anlagen und Maschinen"/>
      <account type="13" name="Sonstige Reparaturen und Instandhaltung"/>
-     <account type="13" name="Wartungskosten für Hard- und Software"/>
+     <account type="13" name="Wartungskosten für Hard- und Software">
+      <flag name="Tax" value="Yes"/>
+     </account>
     </account>
     <account type="13" name="5) Fahrzeugkosten">
+     <flag name="Tax" value="Yes"/>
      <account type="13" name="Fremdfahrzeugkosten"/>
-     <account type="13" name="Garagenmiete"/>
+     <account type="13" name="Garagenmiete">
+      <flag name="Tax" value="Yes"/>
+     </account>
      <account type="13" name="Kfz-Kosten für betrieblich genutzte, zum Privatvermögen gehörende Kraftfahrzeuge"/>
-     <account type="13" name="Kfz-Reparaturen"/>
+     <account type="13" name="Kfz-Reparaturen">
+      <flag name="Tax" value="Yes"/>
+     </account>
      <account type="13" name="Kfz-Versicherungen"/>
-     <account type="13" name="Laufende Kfz-Betriebskosten"/>
-     <account type="13" name="Leasingfahrzeugkosten"/>
+     <account type="13" name="Laufende Kfz-Betriebskosten">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="13" name="Leasingfahrzeugkosten">
+      <flag name="Tax" value="Yes"/>
+     </account>
      <account type="13" name="Mautgebühren"/>
-     <account type="13" name="Sonstige Kfz-Kosten"/>
+     <account type="13" name="Sonstige Kfz-Kosten">
+      <flag name="Tax" value="Yes"/>
+     </account>
     </account>
     <account type="13" name="6) Werbe- und Reisekosten">
      <account type="13" name="Reisekosten Arbeitnehmer">
+      <flag name="Tax" value="Yes"/>
       <account type="13" name="Kilometergelderstattung Arbeitnehmer"/>
       <account type="13" name="Reisekosten Arbeitnehmer Fahrtkosten"/>
       <account type="13" name="Reisekosten Arbeitnehmer Verpflegungsmehraufwand"/>
       <account type="13" name="Reisekosten Arbeitnehmer Übernachtungsaufwand"/>
      </account>
      <account type="13" name="Reisekosten Unternehmer">
+      <flag name="Tax" value="Yes"/>
       <account type="13" name="Fahrten Wohnung zwischen Wohnung und Arbeitsstätte (Haben)"/>
       <account type="13" name="Fahrten zwischen Wohnung und Arbeitsstätte (abziehbarer Anteil)"/>
       <account type="13" name="Fahrten zwischen Wohnung und Arbeitsstätte (nicht abziehbarer Anteil)"/>
@@ -421,38 +505,66 @@
       <account type="13" name="Reisekosten Unternehmer Übernachtungsaufwand"/>
      </account>
      <account type="13" name="Werbekosten">
-      <account type="13" name="Aufmerksamkeiten"/>
-      <account type="13" name="Bewirtungskosten"/>
+      <flag name="Tax" value="Yes"/>
+      <account type="13" name="Aufmerksamkeiten">
+       <flag name="Tax" value="Yes"/>
+      </account>
+      <account type="13" name="Bewirtungskosten">
+       <flag name="Tax" value="Yes"/>
+      </account>
       <account type="13" name="Geschenke ausschlielich betrieblich genutzt"/>
-      <account type="13" name="Geschenke bis 40 €"/>
-      <account type="13" name="Geschenke über 40 €"/>
-      <account type="13" name="Nicht abzugsfähige Betriebsausgaben aus Werbe-, Repräsentations- und Reisekosten (nicht abziehbarer Anteil)"/>
-      <account type="13" name="Nicht abzugsfähige Bewirtungskosten"/>
-      <account type="13" name="Repräsentationskosten"/>
+      <account type="13" name="Geschenke bis 40 €">
+       <flag name="Tax" value="Yes"/>
+      </account>
+      <account type="13" name="Geschenke über 40 €">
+       <flag name="Tax" value="Yes"/>
+      </account>
+      <account type="13" name="Nicht abzugsfähige Betriebsausgaben aus Werbe-, Repräsentations- und Reisekosten (nicht abziehbarer Anteil)">
+       <flag name="Tax" value="Yes"/>
+      </account>
+      <account type="13" name="Nicht abzugsfähige Bewirtungskosten">
+       <flag name="Tax" value="Yes"/>
+      </account>
+      <account type="13" name="Repräsentationskosten">
+       <flag name="Tax" value="Yes"/>
+      </account>
       <account type="13" name="Sonstige eingeschränkt abziehbare Betriebsausgaben (abziehbarer Anteil)"/>
       <account type="13" name="Sonstige eingeschränkt abziehbare Betriebsausgaben (nicht abziehbarer Anteil)"/>
      </account>
     </account>
     <account type="13" name="7) Kosten der Warenabgabe">
-     <account type="13" name="Aufwand für Gewährleistung"/>
+     <account type="13" name="Aufwand für Gewährleistung">
+      <flag name="Tax" value="Yes"/>
+     </account>
      <account type="13" name="Ausgangsfrachten"/>
-     <account type="13" name="Fremdarbeiten (Vertrieb)"/>
+     <account type="13" name="Fremdarbeiten (Vertrieb)">
+      <flag name="Tax" value="Yes"/>
+     </account>
      <account type="13" name="Transportversicherungen"/>
-     <account type="13" name="Verkaufsprovisionen"/>
+     <account type="13" name="Verkaufsprovisionen">
+      <flag name="Tax" value="Yes"/>
+     </account>
      <account type="13" name="Verpackungsmaterial"/>
     </account>
     <account type="13" name="8) verschiedene betriebliche Kosten">
-     <account type="13" name="Abschluß- und Prüfungskosten"/>
+     <account type="13" name="Abschluß- und Prüfungskosten">
+      <flag name="Tax" value="Yes"/>
+     </account>
      <account type="13" name="Abziehbare Aufsichtsratsvergütungen"/>
      <account type="13" name="Aufwendungen aus Anteilen an Kapitalgesellschaften 100 %/ 50 % nicht abzugsfähig (inländische Kap.Ges.)"/>
      <account type="13" name="Aufwendungen aus der Veräußerung von Anteilen an Kapitalgesellschaften 100 %/50 % nicht abzugsfähig"/>
      <account type="13" name="Aufwendungen für Abraum- und Abfallbeseitigung"/>
-     <account type="13" name="Buchführungskosten"/>
-     <account type="13" name="Bürobedarf"/>
+     <account type="13" name="Buchführungskosten">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="13" name="Bürobedarf">
+      <flag name="Tax" value="Yes"/>
+     </account>
      <account type="13" name="Fortbildungskosten"/>
      <account type="13" name="Freiwillige Sozialleistungen"/>
      <account type="13" name="Haftungsvergütung an Mitunternehmer §15 EStG"/>
      <account type="13" name="Mieten für Einrichtungen">
+      <flag name="Tax" value="Yes"/>
       <account type="13" name="Gewerbesteuerlich zu berücksichtigende Miete für Einrichtungen §8 GewStG"/>
      </account>
      <account type="13" name="Mietleasing">
@@ -465,18 +577,31 @@
       <account type="13" name="Nicht abziehbare Vorsteuer 7%"/>
      </account>
      <account type="13" name="Porto"/>
-     <account type="13" name="Rechts- und Beratungskosten"/>
-     <account type="13" name="Sonstiger Betriebsbedarf"/>
-     <account type="13" name="Telefax und Internetkosten"/>
-     <account type="13" name="Telefon"/>
+     <account type="13" name="Rechts- und Beratungskosten">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="13" name="Sonstiger Betriebsbedarf">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="13" name="Telefax und Internetkosten">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="13" name="Telefon">
+      <flag name="Tax" value="Yes"/>
+     </account>
      <account type="13" name="Vergütungen an Mitunternehmer §15 EStG"/>
-     <account type="13" name="Werkzeuge und Kleingeräte"/>
-     <account type="13" name="Zeitschriften, Bücher"/>
+     <account type="13" name="Werkzeuge und Kleingeräte">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="13" name="Zeitschriften, Bücher">
+      <flag name="Tax" value="Yes"/>
+     </account>
     </account>
     <account type="13" name="Aufwendungen aus Bewertung Finanzmittelfonds"/>
     <account type="13" name="Aufwendungen aus Kursdifferenzen"/>
     <account type="13" name="Aufwendungen aus der Währungsumstellung auf den Euro (Art. 43 Abs. 1 EGHGB)"/>
     <account type="13" name="sonstige betriebliche Aufwendungen">
+     <flag name="Tax" value="Yes"/>
      <account type="13" name="Fremdleistungen und Fremdarbeiten"/>
      <account type="13" name="Sonstige betriebl.u.regelm.Aufwendungen"/>
     </account>
@@ -630,12 +755,14 @@
   <account type="12" name="14. Ergebnis der gewöhnlichen Geschäftstätigkeit"/>
   <account type="12" name="15. außerordentliche Erträge">
    <account type="12" name="Außerordentliche Erträge">
+    <flag name="Tax" value="Yes"/>
     <account type="12" name="Außerordentliche Erträge finanzwirksam"/>
     <account type="12" name="Außerordentliche Erträge nicht finanzwirksam"/>
    </account>
   </account>
   <account type="13" name="16. außerordentliche Aufwendungen">
    <account type="13" name="Außerordentliche Aufwendungen">
+    <flag name="Tax" value="Yes"/>
     <account type="13" name="Außerordentliche Aufwendungen finanzwirksam"/>
     <account type="13" name="Außerordentliche Aufwendungen nicht finanzwirksam"/>
    </account>
@@ -704,6 +831,7 @@
   <account type="9" name="22. Konten zur statistischen Auswertung und internen Verrechnung"/>
   <account type="9" name="Aktiva">
    <account type="9" name="A. Anlagevermögen">
+    <flag name="Tax" value="Yes"/>
     <account type="9" name="I. Ausstehende Einlagen">
      <account type="9" name="a) Kapitalgesellschaft">
       <account type="9" name="Ausstehende Einlagen auf das gezeichnete Kapital, eingefordert (Aktivausweis)"/>
@@ -723,7 +851,9 @@
     <account type="9" name="III. Immaterielle Vermögensgegenstände">
      <account type="9" name="01. Konzessionen, gewerbliche Schutzrechte und ähnliche Rechte und Werte sowie Lizenzen an solchen Rechten und Werten">
       <account type="9" name="Konzessionen und gewerbl.Schutzrechte">
-       <account type="9" name="EDV-Software"/>
+       <account type="9" name="EDV-Software">
+        <flag name="Tax" value="Yes"/>
+       </account>
        <account type="9" name="Gewerbliche Schutzrechte"/>
        <account type="9" name="Konzessionen"/>
        <account type="9" name="Lizenzen an gewerblichen Schutzrechten und ähnlichen Rechten und Werten"/>
@@ -740,6 +870,7 @@
      </account>
     </account>
     <account type="9" name="IV. Sachanlagen">
+     <flag name="Tax" value="Yes"/>
      <account type="9" name="01. Grundstücke, grundstücksgleiche Rechte und Bauten einschließlich der Bauten auf fremden Grundstücken">
       <account type="9" name="Bauten auf eigenen Grundstücken">
        <account type="9" name="Andere Bauten"/>
@@ -767,13 +898,16 @@
        <account type="9" name="Unbebaute Grundstücke"/>
       </account>
       <account type="9" name="Wohnbauten">
-       <account type="9" name="Außenanlagen"/>
+       <account type="9" name="Außenanlagen">
+        <flag name="Tax" value="Yes"/>
+       </account>
        <account type="9" name="Einrichtungen für Wohnbauten"/>
        <account type="9" name="Garagen"/>
        <account type="9" name="Hof- und Wegebefestigungen"/>
       </account>
      </account>
      <account type="9" name="02. Technische Anlagen und Maschinen">
+      <flag name="Tax" value="Yes"/>
       <account type="9" name="Betriebsvorrichtungen"/>
       <account type="9" name="Maschinen"/>
       <account type="9" name="Maschinengebundene Werkzeuge"/>
@@ -781,17 +915,29 @@
      </account>
      <account type="9" name="03. Andere Anlagen, Betriebs- und Geschäftsausstattung">
       <account type="9" name="Andere Anlagen"/>
-      <account type="9" name="Büroeinrichtung"/>
+      <account type="9" name="Büroeinrichtung">
+       <flag name="Tax" value="Yes"/>
+      </account>
       <account type="9" name="Computer"/>
       <account type="9" name="Einbauten in fremde Grundstücke"/>
-      <account type="9" name="Geringwertige Wirtschaftsgüter bis 410€"/>
+      <account type="9" name="Geringwertige Wirtschaftsgüter bis 410€">
+       <flag name="Tax" value="Yes"/>
+      </account>
       <account type="9" name="Gerüst- und Schalungsmaterial"/>
-      <account type="9" name="LKW"/>
+      <account type="9" name="LKW">
+       <flag name="Tax" value="Yes"/>
+      </account>
       <account type="9" name="Ladeneinrichtung"/>
-      <account type="9" name="PKW"/>
-      <account type="9" name="Sonstige Betriebs- und Geschäftsausstattung"/>
+      <account type="9" name="PKW">
+       <flag name="Tax" value="Yes"/>
+      </account>
+      <account type="9" name="Sonstige Betriebs- und Geschäftsausstattung">
+       <flag name="Tax" value="Yes"/>
+      </account>
       <account type="9" name="Sonstige Transportmittel"/>
-      <account type="9" name="Werkzeuge"/>
+      <account type="9" name="Werkzeuge">
+       <flag name="Tax" value="Yes"/>
+      </account>
      </account>
      <account type="9" name="04. Geleistete Anzahlungen und Anlagen im Bau">
       <account type="9" name="Andere Anlagen, Betriebs- und Geschäftsausstattung im Bau"/>
@@ -849,12 +995,18 @@
       <account type="9" name="Waren (Bestand)"/>
      </account>
      <account type="9" name="04. Geleistete Anzahlungen auf Vorräte">
-      <account type="9" name="Geleistete Anzahlungen 16% Vorsteuer"/>
-      <account type="9" name="Geleistete Anzahlungen 7% Vorsteuer"/>
+      <account type="9" name="Geleistete Anzahlungen 16% Vorsteuer">
+       <flag name="Tax" value="Yes"/>
+      </account>
+      <account type="9" name="Geleistete Anzahlungen 7% Vorsteuer">
+       <flag name="Tax" value="Yes"/>
+      </account>
      </account>
      <account type="9" name="05. Erhaltene Anzahlungen auf Bestellungen">
       <account type="9" name="Erhaltene Anzahlungen 16% MWSt"/>
-      <account type="9" name="Erhaltene Anzahlungen 7% MWSt"/>
+      <account type="9" name="Erhaltene Anzahlungen 7% MWSt">
+       <flag name="Tax" value="Yes"/>
+      </account>
      </account>
     </account>
     <account type="9" name="II. Forderungen und sonstige Vermögensgegenstände">
@@ -866,7 +1018,9 @@
       <account type="9" name="Forderungen aus Lieferungen und Leistungen ohne Kontokorrent">
        <account type="9" name="Forderg. aus steuerfreien oder nicht steuerbaren steuerbaren L+L"/>
        <account type="9" name="Forderungen aus L+L allgem. Steuersatz oder eines Kleinunternehmers"/>
-       <account type="9" name="Forderungen aus L+L ermäßigt. Steuersatz"/>
+       <account type="9" name="Forderungen aus L+L ermäßigt. Steuersatz">
+        <flag name="Tax" value="Yes"/>
+       </account>
        <account type="9" name="Forderungen aus L+L gemäß §24 UStG"/>
        <account type="9" name="Gegenkonto 1215 - 1218 bei Aufteilung der Forderungen nach Steuersätzen (EÜR)"/>
       </account>
@@ -923,17 +1077,32 @@
      <account type="9" name="04. Sonstige Vermögensgegenstände">
       <account type="9" name="Abziehbare Vorsteuer">
        <account type="9" name="Abziehbare Vorsteuer aus innergemeinschaftlichem Erwerb">
-        <account type="9" name="Abziehbare Vorsteuer aus innergemeinschaftlichem Erwerb 15%/16%"/>
-        <account type="9" name="Abziehbare Vorsteuer aus innergemeinschaftlichem Erwerb 19%"/>
+        <flag name="Tax" value="Yes"/>
+        <account type="9" name="Abziehbare Vorsteuer aus innergemeinschaftlichem Erwerb 15%/16%">
+         <flag name="Tax" value="Yes"/>
+        </account>
+        <account type="9" name="Abziehbare Vorsteuer aus innergemeinschaftlichem Erwerb 19%">
+         <flag name="Tax" value="Yes"/>
+        </account>
        </account>
-       <account type="9" name="Abziehbare Vorsteuer aus innergemeinschaftlichem Erwerb von Neufahrzeugen von Lieferanten ohne UStId-Nr"/>
+       <account type="9" name="Abziehbare Vorsteuer aus innergemeinschaftlichem Erwerb von Neufahrzeugen von Lieferanten ohne UStId-Nr">
+        <flag name="Tax" value="Yes"/>
+       </account>
        <account type="9" name="Abziehbare Vorsteuer nach §13b UStG">
+        <flag name="Tax" value="Yes"/>
         <account type="9" name="Abziehbare Vorsteuer nach §13b UStG 16%"/>
        </account>
        <account type="9" name="Abziehbare Vorsteuern Inland">
-        <account type="9" name="Abziehbare Vorsteuer 16%"/>
-        <account type="9" name="Abziehbare Vorsteuer 19%"/>
-        <account type="9" name="Abziehbare Vorsteuer 7%"/>
+        <flag name="Tax" value="Yes"/>
+        <account type="9" name="Abziehbare Vorsteuer 16%">
+         <flag name="Tax" value="Yes"/>
+        </account>
+        <account type="9" name="Abziehbare Vorsteuer 19%">
+         <flag name="Tax" value="Yes"/>
+        </account>
+        <account type="9" name="Abziehbare Vorsteuer 7%">
+         <flag name="Tax" value="Yes"/>
+        </account>
        </account>
        <account type="9" name="Aufzuteilende Vorsteuer">
         <account type="9" name="Aufzuteilende Vorsteuer 15%"/>
@@ -943,9 +1112,13 @@
         <account type="9" name="Aufzuteilende Vorsteuer nach §§13a/13b UStG"/>
         <account type="9" name="Aufzuteilende Vorsteuer nach §§13a/13b UStG 16 %"/>
        </account>
-       <account type="9" name="Bezahlte Einfuhrumsatzsteuer"/>
+       <account type="9" name="Bezahlte Einfuhrumsatzsteuer">
+        <flag name="Tax" value="Yes"/>
+       </account>
        <account type="9" name="Vorsteuer aus der Auslagerung von Gegenständen aus einem Umsatzsteuerlager"/>
-       <account type="9" name="Vorsteuer nach allgemeinen Durchschnittsätzen"/>
+       <account type="9" name="Vorsteuer nach allgemeinen Durchschnittsätzen">
+        <flag name="Tax" value="Yes"/>
+       </account>
       </account>
       <account type="9" name="Auflösung Vorsteuer aus Vorjahr §4/3 EStG"/>
       <account type="9" name="Darlehen">
@@ -1046,7 +1219,7 @@
    <account type="16" name="Saldenvorträge Debitoren"/>
    <account type="16" name="Saldenvorträge Kreditoren"/>
    <account type="16" name="Saldenvorträge Sachkonten">
-     <flag name="OpeningBalanceAccount"/>
+    <flag name="OpeningBalanceAccount" value="Yes"/>
    </account>
   </account>
   <account type="10" name="Passiva">
@@ -1340,7 +1513,9 @@
     </account>
     <account type="10" name="10. Umsatzsteuer">
      <account type="10" name="Aufgeschobene Einfuhr-Umsatzsteuer"/>
-     <account type="10" name="In Rechnung unberechtigt ausgewiesene und geschuldete Steuerbeträge"/>
+     <account type="10" name="In Rechnung unberechtigt ausgewiesene und geschuldete Steuerbeträge">
+      <flag name="Tax" value="Yes"/>
+     </account>
      <account type="10" name="Steuerzahlungen an andere EG-Länder"/>
      <account type="10" name="Umsatzsteuer 16%"/>
      <account type="10" name="Umsatzsteuer 7%"/>
@@ -1365,7 +1540,9 @@
       </account>
      </account>
      <account type="10" name="Umsatzsteuervorauszahlungen">
-      <account type="10" name="Nachsteuer"/>
+      <account type="10" name="Nachsteuer">
+       <flag name="Tax" value="Yes"/>
+      </account>
       <account type="10" name="USt EG-Erwerb Neufahrzeuge ohne UStID"/>
       <account type="10" name="Umsatzsteuer nach §13a UStG"/>
       <account type="10" name="Umsatzsteuer nach §13b UStG">

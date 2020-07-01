@@ -23,6 +23,7 @@
   </account>
   <account type="9" name="2. Apgrozāmie līdzekļi">
    <account type="9" name="2.1 Krājumi">
+    <flag name="Tax" value="Yes"/>
     <account type="9" name="2150 Uzņēmuma rīcībā esošais  mazvērtīgais inventārs"/>
     <account type="9" name="2190 Avansa maksājumi par precēm"/>
    </account>
@@ -61,7 +62,9 @@
     <account type="10" name="5210 Norēķini par saņemtajiem avansiem"/>
    </account>
    <account type="10" name="5.3. Norēķini ar piegādātājiem un darbuzņēmējiem">
-    <account type="10" name="5310 Norēķini ar piegādātājiem un darbuzņēmējiem"/>
+    <account type="10" name="5310 Norēķini ar piegādātājiem un darbuzņēmējiem">
+     <flag name="Tax" value="Yes"/>
+    </account>
     <account type="10" name="5311 Norēķini ar piegādātājiem un darbuzņēmējiem Eiro"/>
     <account type="10" name="5312 Norēķini ar piegādātājiem un darbuzņēmējiem USD"/>
    </account>

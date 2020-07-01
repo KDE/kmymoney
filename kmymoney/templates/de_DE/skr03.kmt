@@ -15,11 +15,18 @@
  <accounts>
   <account type="9" name="Aktiva">
    <account type="9" name="Anlage- u. Kapitalkonten 0">
-    <account type="9" name="0027 EDV-Software"/>
+    <flag name="Tax" value="Yes"/>
+    <account type="9" name="0027 EDV-Software">
+     <flag name="Tax" value="Yes"/>
+    </account>
     <account type="9" name="0210 Maschinen"/>
     <account type="9" name="0400 Betriebsausstattung"/>
-    <account type="9" name="0410 Geschäftsausstattung"/>
-    <account type="9" name="0420 Büroeinrichtung"/>
+    <account type="9" name="0410 Geschäftsausstattung">
+     <flag name="Tax" value="Yes"/>
+    </account>
+    <account type="9" name="0420 Büroeinrichtung">
+     <flag name="Tax" value="Yes"/>
+    </account>
     <account type="9" name="0430 Ladeneinrichtung"/>
     <account type="9" name="0565 Darlehen"/>
    </account>
@@ -35,13 +42,15 @@
    </account>
    <account type="9" name="Wareneingangs- u. Bestandskonten 3">
     <account type="9" name="3120 Leistungen §13b UStG 19% Vorsteuer, 19% Umsatzsteuer"/>
-    <account type="9" name="3400 Wareneingang VSt. 19%"/>
+    <account type="9" name="3400 Wareneingang VSt. 19%">
+     <flag name="Tax" value="Yes"/>
+    </account>
    </account>
   </account>
   <account type="16" name="Anfangsbestand 9">
    <account type="16" name="Saldenvortragskonten">
     <account type="16" name="9000 Saldenvortrag Sachkonten">
-      <flag name="OpeningBalanceAccount"/>
+     <flag name="OpeningBalanceAccount" value="Yes"/>
     </account>
     <account type="16" name="9008 Saldenvorträge Debitoren"/>
     <account type="16" name="9009 Saldenvorträge Kreditoren"/>
@@ -107,7 +116,9 @@
   <account type="12" name="Erlöse u. Erträge 2/8">
    <account type="12" name="Erlöskonten 8">
     <account type="12" name="8300 Erlöse USt. 7%"/>
-    <account type="12" name="8400 Erlöse USt. 19%"/>
+    <account type="12" name="8400 Erlöse USt. 19%">
+     <flag name="Tax" value="Yes"/>
+    </account>
    </account>
    <account type="12" name="Ertragskonten 2">
     <account type="12" name="2500 Außerordentliche Erträge"/>

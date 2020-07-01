@@ -568,7 +568,9 @@ Ersteller: Christoph Franzen, christoph@alte-pflasterei.de</longdesc>
       <account type="13" name="83011 Gehälter der kaufmännischen Angestellten"/>
      </account>
     </account>
-    <account type="13" name="831 soziale Abgaben"/>
+    <account type="13" name="831 soziale Abgaben">
+     <flag name="Tax" value="Yes"/>
+    </account>
     <account type="13" name="832 Aufwendungen für Altersversorgung">
      <account type="13" name="8320 Zuführung zu Pensionsrückstellungen"/>
      <account type="13" name="8321 Pensionszahlungen"/>
@@ -649,25 +651,52 @@ Ersteller: Christoph Franzen, christoph@alte-pflasterei.de</longdesc>
     <account type="13" name="885 außerordentliche Aufwendungen"/>
    </account>
    <account type="13" name="890-891 Steuern">
+    <flag name="Tax" value="Yes"/>
     <account type="13" name="890 Steuern vom Einkommen und vom Ertrag">
-     <account type="13" name="8900 Körperschaftssteuer"/>
-     <account type="13" name="8901 Kapitalertragsteuer"/>
+     <flag name="Tax" value="Yes"/>
+     <account type="13" name="8900 Körperschaftssteuer">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="13" name="8901 Kapitalertragsteuer">
+      <flag name="Tax" value="Yes"/>
+     </account>
      <account type="13" name="8902 Solidaritätszuschlag"/>
-     <account type="13" name="8903 Gewerbeertragsteuer"/>
-     <account type="13" name="8906 latente Steuern"/>
-     <account type="13" name="8909 Steuererstattungen und -Nachzahlungen für frühere Jahre"/>
+     <account type="13" name="8903 Gewerbeertragsteuer">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="13" name="8906 latente Steuern">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="13" name="8909 Steuererstattungen und -Nachzahlungen für frühere Jahre">
+      <flag name="Tax" value="Yes"/>
+     </account>
     </account>
     <account type="13" name="891 sonstige Steuern">
-     <account type="13" name="8910 Grundsteuer"/>
-     <account type="13" name="8911 Kraftfahrzeugsteuer"/>
-     <account type="13" name="8912 Vermögenssteuer"/>
-     <account type="13" name="8913 Gewerbekapitalsteuer"/>
-     <account type="13" name="8919 Steuererstattungen und -Nachzahlungen für frühere Jahre"/>
+     <flag name="Tax" value="Yes"/>
+     <account type="13" name="8910 Grundsteuer">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="13" name="8911 Kraftfahrzeugsteuer">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="13" name="8912 Vermögenssteuer">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="13" name="8913 Gewerbekapitalsteuer">
+      <flag name="Tax" value="Yes"/>
+     </account>
+     <account type="13" name="8919 Steuererstattungen und -Nachzahlungen für frühere Jahre">
+      <flag name="Tax" value="Yes"/>
+     </account>
     </account>
    </account>
    <account type="13" name="895-896 Aufwendungen aus Gewinnabführungsverträgen,  Erträge aus Verlustübernahme">
-    <account type="13" name="895 Aufwendungen aus Gewinnabführungsverträgen"/>
-    <account type="12" name="896 Erträge aus Verlustübernahme"/>
+    <account type="13" name="895 Aufwendungen aus Gewinnabführungsverträgen">
+     <flag name="Tax" value="Yes"/>
+    </account>
+    <account type="12" name="896 Erträge aus Verlustübernahme">
+     <flag name="Tax" value="Yes"/>
+    </account>
    </account>
   </account>
   <account type="12" name="9 Abschlußkonten und Verrechnungskonten">

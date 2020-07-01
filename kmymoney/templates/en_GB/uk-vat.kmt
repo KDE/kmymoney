@@ -82,6 +82,7 @@
    <account type="10" name="Owed Tax/NI"/>
   </account>
   <account type="10" name="VAT">
+   <flag name="Tax" value="Yes"/>
    <account type="9" name="Input"/>
    <account type="10" name="Output">
     <account type="10" name="EU"/>
