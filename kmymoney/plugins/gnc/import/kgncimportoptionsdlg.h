@@ -42,7 +42,6 @@ public:
   ~KGncImportOptionsDlg();
 
   int investmentOption() const;
-  bool quoteOption() const;
   bool scheduleOption() const;
   QTextCodec* decodeOption();
   bool txNotesOption() const;

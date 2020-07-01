@@ -102,7 +102,6 @@ void ConverterTest::testWebQuotes_data()
 //  QTest::newRow("Gielda Papierow Wartosciowych (GPW)") << "TDB647" << "test Gielda Papierow Wartosciowych (GPW)" << "Gielda Papierow Wartosciowych (GPW)";
 //  QTest::newRow("OMX Baltic") << "TDB647" << "test OMX Baltic funds" << "OMX Baltic funds";
 
-  QTest::newRow("Finance::Quote usa") << "DIS" << "test F::Q usa" << "Finance::Quote usa";
 //UNTESTED: Other F::Q sources, local files, user custom sources
 }
 

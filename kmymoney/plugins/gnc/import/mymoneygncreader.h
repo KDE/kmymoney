@@ -944,11 +944,7 @@ protected:
        N.B. :- option 2 doesn't really work quite as desired at present
   */
   unsigned int m_investmentOption;
-  /**           Online quotes
-    The user has the option to use the Finance::Quote system, as used by GnuCash, to
-    retrieve online share price quotes
-  */
-  bool m_useFinanceQuote;
+
   /**           Tx Notes handling
     Under some usage conditions, non-split GnuCash transactions may contain residual, usually incorrect, memo
     data which is not normally visible to the user. When imported into KMyMoney however, due to display

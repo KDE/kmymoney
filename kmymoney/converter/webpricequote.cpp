@@ -55,10 +55,6 @@
 Q_DECLARE_LOGGING_CATEGORY(WEBPRICEQUOTE)
 Q_LOGGING_CATEGORY(WEBPRICEQUOTE, "kmymoney_webpricequote")
 
-// define static members
-QString WebPriceQuote::m_financeQuoteScriptPath;
-QStringList WebPriceQuote::m_financeQuoteSources;
-
 class WebPriceQuote::Private
 {
 public:
@@ -78,11 +74,6 @@ WebPriceQuote::WebPriceQuote(QObject* _parent):
     QObject(_parent),
     d(new Private)
 {
-  // only do this once (I know, it is not thread safe, but it should
-  // always yield the same result so we don't do any semaphore foo here)
-  if (m_financeQuoteScriptPath.isEmpty()) {
-    m_financeQuoteScriptPath = QStandardPaths::locate(QStandardPaths::DataLocation, QString("misc/financequote.pl"));
-  }
   connect(&d->m_filter, SIGNAL(processExited(QString)), this, SLOT(slotParseQuote(QString)));
 }
 
@@ -99,9 +90,7 @@ void WebPriceQuote::setDate(const QDate& _from, const QDate& _to)
 
 bool WebPriceQuote::launch(const QString& _webID, const QString& _kmmID, const QString& _sourcename)
 {
-  if (_sourcename.contains("Finance::Quote"))
-    return (launchFinanceQuote(_webID, _kmmID, _sourcename));
-  else if ((!d->m_fromDate.isValid() || !d->m_toDate.isValid()) ||
+  if ((!d->m_fromDate.isValid() || !d->m_toDate.isValid()) ||
            (d->m_fromDate == d->m_toDate && d->m_toDate == QDate::currentDate()))
     return (launchNative(_webID, _kmmID, _sourcename));
   else
@@ -373,41 +362,6 @@ void WebPriceQuote::downloadResult(KJob* job)
     emit error(job->errorString());
     slotParseQuote(QString());
   }
-}
-
-bool WebPriceQuote::launchFinanceQuote(const QString& _webID, const QString& _kmmID,
-                                       const QString& _sourcename)
-{
-  bool result = true;
-  d->m_webID = _webID;
-  d->m_kmmID = _kmmID;
-  QString FQSource = _sourcename.section(' ', 1);
-  d->m_source = WebPriceQuoteSource(_sourcename, m_financeQuoteScriptPath, m_financeQuoteScriptPath,
-                                    "\"([^,\"]*)\",.*",  // webIDRegExp
-                                    WebPriceQuoteSource::identifyBy::Symbol,
-                                    "[^,]*,[^,]*,\"([^\"]*)\"", // price regexp
-                                    "[^,]*,([^,]*),.*", // date regexp
-                                    "%y-%m-%d"); // date format
-
-  //emit status(QString("(Debug) symbol=%1 id=%2...").arg(_symbol,_id));
-
-  QStringList arguments;
-  arguments << m_financeQuoteScriptPath << FQSource << KShell::quoteArg(_webID);
-  d->m_filter.setWebID(d->m_webID);
-  emit status(i18nc("Executing 'script' 'online source' 'investment symbol' ", "Executing %1 %2 %3...", m_financeQuoteScriptPath, FQSource, _webID));
-
-  d->m_filter.setProcessChannelMode(QProcess::MergedChannels);
-  d->m_filter.start(QLatin1Literal("perl"), arguments);
-
-  // This seems to work best if we just block until done.
-  if (d->m_filter.waitForFinished()) {
-    result = true;
-  } else {
-    emit error(i18n("Unable to launch: %1", m_financeQuoteScriptPath));
-    slotParseQuote(QString());
-  }
-
-  return result;
 }
 
 void WebPriceQuote::slotParseCSVQuote(const QString& filename)
@@ -762,15 +716,7 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
   return result;
 }
 
-const QStringList WebPriceQuote::quoteSources(const _quoteSystemE _system)
-{
-  if (_system == Native)
-    return (quoteSourcesNative());
-  else
-    return (quoteSourcesFinanceQuote());
-}
-
-const QStringList WebPriceQuote::quoteSourcesNative()
+const QStringList WebPriceQuote::quoteSources()
 {
   KSharedConfigPtr kconfig = KSharedConfig::openConfig();
   QStringList groups = kconfig->groupList();
@@ -836,28 +782,6 @@ const QStringList WebPriceQuote::quoteSourcesNative()
 
   return groups;
 }
-
-const QStringList WebPriceQuote::quoteSourcesFinanceQuote()
-{
-  if (m_financeQuoteSources.empty()) { // run the process one time only
-    // since this is a static function it can be called without constructing an object
-    // so we need to make sure that m_financeQuoteScriptPath is properly initialized
-    if (m_financeQuoteScriptPath.isEmpty()) {
-      m_financeQuoteScriptPath = QStandardPaths::locate(QStandardPaths::DataLocation, QString("misc/financequote.pl"));
-    }
-    FinanceQuoteProcess getList;
-    getList.launch(m_financeQuoteScriptPath);
-    while (!getList.isFinished()) {
-      QCoreApplication::processEvents();
-    }
-    m_financeQuoteSources = getList.getSourceList();
-  }
-  return (m_financeQuoteSources);
-}
-
-//
-// Helper class to load/save an individual source
-//
 
 WebPriceQuoteSource::WebPriceQuoteSource(const QString& name, const QString& url, const QString &csvUrl, const QString& id, const identifyBy idBy, const QString& price, const QString& date, const QString& dateformat, bool skipStripping):
     m_name(name),
@@ -941,129 +865,6 @@ void WebPriceQuoteProcess::slotProcessExited(int /*exitCode*/, QProcess::ExitSta
   m_string.truncate(0);
 }
 
-//
-// Helper class to babysit the KProcess used for running the Finance Quote sources script
-//
-
-FinanceQuoteProcess::FinanceQuoteProcess()
-{
-  m_isDone = false;
-  m_string = "";
-  m_fqNames["aex"] = "AEX";
-  m_fqNames["aex_futures"] = "AEX Futures";
-  m_fqNames["aex_options"] = "AEX Options";
-  m_fqNames["amfiindia"] = "AMFI India";
-  m_fqNames["asegr"] = "ASE";
-  m_fqNames["asia"] = "Asia (Yahoo, ...)";
-  m_fqNames["asx"] = "ASX";
-  m_fqNames["australia"] = "Australia (ASX, Yahoo, ...)";
-  m_fqNames["bmonesbittburns"] = "BMO NesbittBurns";
-  m_fqNames["brasil"] = "Brasil (Yahoo, ...)";
-  m_fqNames["canada"] = "Canada (Yahoo, ...)";
-  m_fqNames["canadamutual"] = "Canada Mutual (Fund Library, ...)";
-  m_fqNames["deka"] = "Deka Investments";
-  m_fqNames["dutch"] = "Dutch (AEX, ...)";
-  m_fqNames["dwsfunds"] = "DWS";
-  m_fqNames["europe"] = "Europe (Yahoo, ...)";
-  m_fqNames["fidelity"] = "Fidelity (Fidelity, ...)";
-  m_fqNames["fidelity_direct"] = "Fidelity Direct";
-  m_fqNames["financecanada"] = "Finance Canada";
-  m_fqNames["ftportfolios"] = "First Trust (First Trust, ...)";
-  m_fqNames["ftportfolios_direct"] = "First Trust Portfolios";
-  m_fqNames["fundlibrary"] = "Fund Library";
-  m_fqNames["greece"] = "Greece (ASE, ...)";
-  m_fqNames["indiamutual"] = "India Mutual (AMFI, ...)";
-  m_fqNames["maninv"] = "Man Investments";
-  m_fqNames["fool"] = "Motley Fool";
-  m_fqNames["nasdaq"] = "Nasdaq (Yahoo, ...)";
-  m_fqNames["nz"] = "New Zealand (Yahoo, ...)";
-  m_fqNames["nyse"] = "NYSE (Yahoo, ...)";
-  m_fqNames["nzx"] = "NZX";
-  m_fqNames["platinum"] = "Platinum Asset Management";
-  m_fqNames["seb_funds"] = "SEB";
-  m_fqNames["sharenet"] = "Sharenet";
-  m_fqNames["za"] = "South Africa (Sharenet, ...)";
-  m_fqNames["troweprice_direct"] = "T. Rowe Price";
-  m_fqNames["troweprice"] = "T. Rowe Price";
-  m_fqNames["tdefunds"] = "TD Efunds";
-  m_fqNames["tdwaterhouse"] = "TD Waterhouse Canada";
-  m_fqNames["tiaacref"] = "TIAA-CREF";
-  m_fqNames["trustnet"] = "Trustnet";
-  m_fqNames["uk_unit_trusts"] = "U.K. Unit Trusts";
-  m_fqNames["unionfunds"] = "Union Investments";
-  m_fqNames["tsp"] = "US Govt. Thrift Savings Plan";
-  m_fqNames["usfedbonds"] = "US Treasury Bonds";
-  m_fqNames["usa"] = "USA (Yahoo, Fool ...)";
-  m_fqNames["vanguard"] = "Vanguard";
-  m_fqNames["vwd"] = "VWD";
-  m_fqNames["yahoo"] = "Yahoo";
-  m_fqNames["yahoo_asia"] = "Yahoo Asia";
-  m_fqNames["yahoo_australia"] = "Yahoo Australia";
-  m_fqNames["yahoo_brasil"] = "Yahoo Brasil";
-  m_fqNames["yahoo_europe"] = "Yahoo Europe";
-  m_fqNames["yahoo_nz"] = "Yahoo New Zealand";
-  m_fqNames["zifunds"] = "Zuerich Investments";
-  connect(this, SIGNAL(readyReadStandardOutput()), this, SLOT(slotReceivedDataFromFilter()));
-  connect(this, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotProcessExited()));
-  connect(this, SIGNAL(error(QProcess::ProcessError)), this, SLOT(slotProcessExited()));
-}
-
-void FinanceQuoteProcess::slotReceivedDataFromFilter()
-{
-  QByteArray data(readAllStandardOutput());
-
-//   qDebug() << "WebPriceQuoteProcess::slotReceivedDataFromFilter(): " << QString(data);
-  m_string += QString(data);
-}
-
-void FinanceQuoteProcess::slotProcessExited()
-{
-//   qDebug() << "WebPriceQuoteProcess::slotProcessExited()";
-  m_isDone = true;
-}
-
-void FinanceQuoteProcess::launch(const QString& scriptPath)
-{
-  QStringList arguments;
-  arguments << scriptPath << QLatin1Literal("-l");
-  setProcessChannelMode(QProcess::SeparateChannels);
-  start(QLatin1Literal("perl"), arguments);
-  if (! waitForStarted()) qWarning("Unable to start FQ script");
-  return;
-}
-
-const QStringList FinanceQuoteProcess::getSourceList() const
-{
-  QStringList raw = m_string.split(0x0A, QString::SkipEmptyParts);
-  QStringList sources;
-  QStringList::iterator it;
-  for (it = raw.begin(); it != raw.end(); ++it) {
-    if (m_fqNames[*it].isEmpty()) sources.append(*it);
-    else sources.append(m_fqNames[*it]);
-  }
-  sources.sort();
-  return (sources);
-}
-
-const QString FinanceQuoteProcess::crypticName(const QString& niceName) const
-{
-  QString ret(niceName);
-  fqNameMap::const_iterator it;
-  for (it = m_fqNames.begin(); it != m_fqNames.end(); ++it) {
-    if (niceName == it.value()) {
-      ret = it.key();
-      break;
-    }
-  }
-  return (ret);
-}
-
-const QString FinanceQuoteProcess::niceName(const QString& crypticName) const
-{
-  QString ret(m_fqNames[crypticName]);
-  if (ret.isEmpty()) ret = crypticName;
-  return (ret);
-}
 //
 // Universal date converter
 //

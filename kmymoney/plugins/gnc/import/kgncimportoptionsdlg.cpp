@@ -63,9 +63,6 @@ public:
     ui->buttonInvestGroup->setId(ui->radioInvest2, 1); // one invest acct for all stocks
     ui->buttonInvestGroup->setId(ui->radioInvest3, 2); // prompt for each stock
 
-    ui->buttonGroup5->setExclusive(false);
-    ui->checkFinanceQuote->setChecked(true);
-
     ui->buttonGroup2->setExclusive(false);
     ui->checkSchedules->setChecked(false);
 
@@ -135,12 +132,6 @@ int KGncImportOptionsDlg::investmentOption() const
 {
   Q_D(const KGncImportOptionsDlg);
   return (d->ui->buttonInvestGroup->checkedId());
-};
-
-bool KGncImportOptionsDlg::quoteOption() const
-{
-  Q_D(const KGncImportOptionsDlg);
-  return (d->ui->checkFinanceQuote->isChecked());
 };
 
 bool KGncImportOptionsDlg::scheduleOption() const

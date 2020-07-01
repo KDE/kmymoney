@@ -76,25 +76,6 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="buttonGroupBox5">
-     <property name="title">
-      <string>Online price quotes</string>
-     </property>
-     <layout class="QVBoxLayout">
-      <item>
-       <widget class="QCheckBox" name="checkFinanceQuote">
-        <property name="text">
-         <string>Use Finance::Quote for share price quotes</string>
-        </property>
-        <attribute name="buttonGroup">
-         <string notr="true">buttonGroup5</string>
-        </attribute>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
     <widget class="QGroupBox" name="buttonGroupBox2">
      <property name="title">
       <string>Scheduled Transactions</string>
@@ -304,11 +285,10 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup18"/>
-  <buttongroup name="buttonGroup2"/>
   <buttongroup name="buttonGroup3"/>
-  <buttongroup name="buttonGroup4"/>
-  <buttongroup name="buttonGroup5"/>
+  <buttongroup name="buttonGroup2"/>
   <buttongroup name="buttonInvestGroup"/>
+  <buttongroup name="buttonGroup4"/>
+  <buttongroup name="buttonGroup18"/>
  </buttongroups>
 </ui>

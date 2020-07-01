@@ -212,17 +212,10 @@
 <itemizedlist>
   <listitem>
     <para>
-      Use Finance::Quote.  This is an option for GnuCash users who are used to
-      this style of quotes.  Most users can leave this unchecked.
-    </para>
-  </listitem>
-
-  <listitem>
-    <para>
       Online Source.  The online source you'd like to use for this particular
-      investment.  The most common choice is <quote>Yahoo</quote>.  Try that first,
-      and if the investment cannot be found using this source, then experiment with
-      the others.
+      investment.  The most common choice is <quote>Yahoo Finance</quote>.  Try that
+      first, and if the investment cannot be found using this source, then experiment
+      with the others.
     </para>
   </listitem>
 
@@ -598,17 +591,6 @@
   Detail Wizard, click <guibutton>Next</guibutton> twice, for the Online Update
   section.  In the Online source dropdown box, select the online source for your
   needs.
-</para>
-
-<para>
-  Versions of &kmymoney; starting with 0.9 contain support for the Finance::Quote
-  package for obtaining online quotes.  This is intended primarily as a convenience
-  for those users converting from the GnuCash finance package, which uses it as its
-  native method.  If you do select this option, you should see a different list of
-  sources, those supported by Finance::Quote. If the list is empty, it suggests that
-  the package is not properly installed.  See their web site at
-  <ulink url="http://finance-quote.sourceforge.net">
-  http://finance-quote.sourceforge.net</ulink> for more information.
 </para>
 </sect3>
 

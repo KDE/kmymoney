@@ -58,7 +58,6 @@ public:
 
 public Q_SLOTS:
   void slotCheckPage(const QString&);
-  void slotSourceChanged(bool);
 
 private:
   Ui::KOnlineUpdateWizardPage  *ui;

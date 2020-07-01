@@ -315,10 +315,9 @@
 
 <para>
   For obtaining online price and currency rate quotations, GnuCash uses a
-  package called Finance::Quote. Recent versions of &kmymoney; contain support
-  for this package for obtaining stock quotes, and this will be used by default
-  when importing data.  You may however select to convert to the native method
-  used by &kmymoney; which is covered in more detail in
+  package called Finance::Quote. &kmymoney; no longer supports it, but you may,
+  however, select to convert to the native method used by &kmymoney; which is
+  covered in more detail in
   <link linkend="details.investments.onlinequotes">online quotes</link>.
 </para>
 
@@ -328,8 +327,7 @@
   for which online quotes are required. However, the stock (ticker) symbol will
   be imported unchanged. Since this symbol will almost certainly be different in
   the two packages, it will need to be manually edited after completion of the
-  import process.  Future currency rate updates will not use Finance::Quote, and
-  will always use the native retrieval method.
+  import process.
 </para>
 
 <para>

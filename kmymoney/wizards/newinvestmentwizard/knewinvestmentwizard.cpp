@@ -64,8 +64,6 @@ public:
   void init1()
   {
     Q_Q(KNewInvestmentWizard);
-    ui->m_onlineUpdatePage->slotSourceChanged(false);
-
     // make sure, the back button does not clear fields
     q->setOption(QWizard::IndependentPages, true);
 
@@ -225,13 +223,7 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
     newSecurity.deletePair("kmm-security-id");
 
     if (!field("onlineSourceCombo").toString().isEmpty()) {
-      if (field("useFinanceQuote").toBool()) {
-        FinanceQuoteProcess p;
-        newSecurity.setValue("kmm-online-quote-system", "Finance::Quote");
-        newSecurity.setValue("kmm-online-source", p.crypticName(field("onlineSourceCombo").toString()));
-      } else {
         newSecurity.setValue("kmm-online-source", field("onlineSourceCombo").toString());
-      }
     }
     if (d->ui->m_onlineUpdatePage->isOnlineFactorEnabled() && (field("onlineFactor").value<MyMoneyMoney>() != MyMoneyMoney::ONE))
       newSecurity.setValue("kmm-online-factor", field("onlineFactor").value<MyMoneyMoney>().toString());

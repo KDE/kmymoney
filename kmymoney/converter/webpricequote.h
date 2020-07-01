@@ -63,38 +63,6 @@ private:
 };
 
 /**
-Helper class to run the Finance::Quote process. This is used only for the purpose of obtaining
-a list of valid sources. The actual price quotes are obtained thru WebPriceQuoteProcess.
-The class also contains functions to convert between the rather cryptic source names used
-by the Finance::Quote package, and more user-friendly names.
-
-@author Thomas Baumgart <thb@net-bembel.de> & Ace Jones <acejones@users.sourceforge.net>, Tony B<tonybloom@users.sourceforge.net>
- */
-class FinanceQuoteProcess: public QProcess
-{
-  Q_OBJECT
-public:
-  FinanceQuoteProcess();
-  void launch(const QString& scriptPath);
-  bool isFinished() const {
-    return(m_isDone);
-  };
-  const QStringList getSourceList() const;
-  const QString crypticName(const QString& niceName) const;
-  const QString niceName(const QString& crypticName) const;
-
-public Q_SLOTS:
-  void slotReceivedDataFromFilter();
-  void slotProcessExited();
-
-private:
-  bool m_isDone;
-  QString m_string;
-  typedef QMap<QString, QString> fqNameMap;
-  fqNameMap m_fqNames;
-};
-
-/**
   * @author Thomas Baumgart & Ace Jones
   *
   * This is a helper class to store information about an online source
@@ -134,11 +102,6 @@ public:
   explicit WebPriceQuote(QObject* = 0);
   ~WebPriceQuote();
 
-  typedef enum _quoteSystemE {
-    Native = 0,
-    FinanceQuote
-  } quoteSystemE;
-
   void setDate(const QDate& _from, const QDate& _to);
   /**
     * This launches a web-based quote update for the given @p _webID.
@@ -160,10 +123,9 @@ public:
     * This returns a list of the names of the quote sources
     * currently defined.
     *
-   * @param _system whether to return Native or Finance::Quote source list
    * @return QStringList of quote source names
     */
-  static const QStringList quoteSources(const _quoteSystemE _system = Native);
+  static const QStringList quoteSources();
   static const QMap<QString, PricesProfile> defaultCSVQuoteSources();
 
 Q_SIGNALS:
@@ -185,21 +147,13 @@ protected:
 private:
   bool launchCSV(const QString& _webID, const QString& _kmmID, const QString& _source = QString());
   bool launchNative(const QString& _webID, const QString& _kmmID, const QString& _source = QString());
-  bool launchFinanceQuote(const QString& _webID, const QString& _kmmID, const QString& _source = QString());
   void enter_loop();
-
-  static const QStringList quoteSourcesNative();
-  static const QStringList quoteSourcesFinanceQuote();
 
 private:
   /// \internal d-pointer class.
   class Private;
   /// \internal d-pointer instance.
   Private* const d;
-
-  static QString m_financeQuoteScriptPath;
-  static QStringList m_financeQuoteSources;
-
 };
 
 class MyMoneyDateFormat

@@ -50,22 +50,20 @@ KOnlineUpdateWizardPage::KOnlineUpdateWizardPage(QWidget *parent) :
   ui->m_onlineSourceCombo->model()->setParent(proxy);
   ui->m_onlineSourceCombo->setModel(proxy);
 
-  // Connect signals-slots
-  connect(ui->m_useFinanceQuote, &QAbstractButton::toggled, this, &KOnlineUpdateWizardPage::slotSourceChanged);
+  ui->m_onlineSourceCombo->clear();
+  ui->m_onlineSourceCombo->insertItem(0, QString());
+  ui->m_onlineSourceCombo->addItems(WebPriceQuote::quoteSources());
+  ui->m_onlineSourceCombo->model()->sort(0);
 
   // Register the fields with the QWizard and connect the
   // appropriate signals to update the "Next" button correctly
   registerField("onlineFactor", ui->m_onlineFactor, "value");
   registerField("onlineSourceCombo", ui->m_onlineSourceCombo, "currentText", SIGNAL(currentIndexChanged(QString)));
-  registerField("useFinanceQuote", ui->m_useFinanceQuote);
   connect(ui->m_onlineSourceCombo, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged), this, &KOnlineUpdateWizardPage::slotCheckPage);
   connect(ui->m_onlineFactor, &AmountEdit::textChanged,
           this, &QWizardPage::completeChanged);
 
   connect(ui->m_onlineSourceCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),
-          this, &QWizardPage::completeChanged);
-
-  connect(ui->m_useFinanceQuote, &QAbstractButton::toggled,
           this, &QWizardPage::completeChanged);
 }
 
@@ -79,14 +77,7 @@ KOnlineUpdateWizardPage::~KOnlineUpdateWizardPage()
  */
 void KOnlineUpdateWizardPage::init2(const MyMoneySecurity& security)
 {
-  int idx;
-  if (security.value("kmm-online-quote-system") == "Finance::Quote") {
-    FinanceQuoteProcess p;
-    ui->m_useFinanceQuote->setChecked(true);
-    idx = ui->m_onlineSourceCombo->findText(p.niceName(security.value("kmm-online-source")));
-  } else {
-    idx = ui->m_onlineSourceCombo->findText(security.value("kmm-online-source"));
-  }
+  int idx = ui->m_onlineSourceCombo->findText(security.value("kmm-online-source"));
 
   // in case we did not find the entry, we use the empty one
   if (idx == -1)
@@ -114,16 +105,4 @@ bool KOnlineUpdateWizardPage::isOnlineFactorEnabled() const
 void KOnlineUpdateWizardPage::slotCheckPage(const QString& txt)
 {
   ui->m_onlineFactor->setEnabled(!txt.isEmpty());
-}
-
-void KOnlineUpdateWizardPage::slotSourceChanged(bool useFQ)
-{
-  ui->m_onlineSourceCombo->clear();
-  ui->m_onlineSourceCombo->insertItem(0, QString());
-  if (useFQ) {
-    ui->m_onlineSourceCombo->addItems(WebPriceQuote::quoteSources(WebPriceQuote::FinanceQuote));
-  } else {
-    ui->m_onlineSourceCombo->addItems(WebPriceQuote::quoteSources());
-  }
-  ui->m_onlineSourceCombo->model()->sort(0);
 }

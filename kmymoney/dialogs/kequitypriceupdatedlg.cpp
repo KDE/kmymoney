@@ -298,10 +298,7 @@ public:
           item->setText(DATE_COL, pr.date().toString(Qt::ISODate));
         }
         item->setText(KMMID_COL, id);
-        if (inv.value("kmm-online-quote-system") == "Finance::Quote")
-          item->setText(SOURCE_COL, QString("Finance::Quote %1").arg(inv.value("kmm-online-source")));
-        else
-          item->setText(SOURCE_COL, inv.value("kmm-online-source"));
+        item->setText(SOURCE_COL, inv.value("kmm-online-source"));
 
         ui->lvEquityList->invisibleRootItem()->addChild(item);
 
@@ -534,7 +531,6 @@ void KEquityPriceUpdateDlg::slotQuoteFailed(const QString& _kmmID, const QString
 
       // Set the quote source to blank
       security.setValue("kmm-online-source", QString());
-      security.setValue("kmm-online-quote-system", QString());
 
       // Re-commit the security
       MyMoneyFile::instance()->modifySecurity(security);
