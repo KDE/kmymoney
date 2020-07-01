@@ -13,7 +13,7 @@
  <shortdesc>Utgifter ved leie av bolig</shortdesc>
  <longdesc>Du vil nok velge dette oppsettet hvis du leier et hus eller en leilighet (leie, leie forsikring).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Utgifter">
    <account type="13" name="Forsikring">
     <account type="13" name="Leie Forsikring"/>
    </account>

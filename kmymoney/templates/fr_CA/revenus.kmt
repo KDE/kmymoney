@@ -13,7 +13,7 @@
  <shortdesc>Comptes pour le suivi des revenus d'emploi.</shortdesc>
  <longdesc>Sélectionnez ce groupe de comptes si vous voulez faire le suivi de vos revenus et dépenses d'emploi.</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Dépenses">
    <account type="13" name="Taxes et impôts">
     <account type="13" name="Emploi">
      <account type="13" name="Assurance emploi"/>
@@ -24,7 +24,7 @@
     </account>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Revenus">
    <account type="12" name="Emploi">
     <account type="12" name="Commisssions"/>
     <account type="12" name="Frais remboursés"/>

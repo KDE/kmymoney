@@ -13,7 +13,7 @@
  <shortdesc>Expenses associated with renting a home</shortdesc>
  <longdesc>You would want to select this set of accounts if you rent a home or apartment (rent, renter's insurance).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Expenses">
    <account type="13" name="Insurance">
     <account type="13" name="Rental Insurance"/>
    </account>

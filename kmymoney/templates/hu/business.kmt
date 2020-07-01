@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hu/acctchrt_business.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Vállalkozás-számlák</title>
+ <shortdesc>Teljes számlakészlet vállalkozásoknak.</shortdesc>
+ <longdesc>Vállalkozóknak inkább ez ajánlott, a többi lehetőség helyett. Ez tartalmazza az összes számlát, amelyre egy vállalkozásnak leggyakrabban szüksége van. Tartalmazza Kötelezettségek-, Követelések-, Bevétel- és Költségszámlákat.</longdesc>
+ <accounts>
+  <account type="12" name="Bevétel">
+   <account type="12" name="Egyéb bevétel"/>
+   <account type="12" name="Eladások"/>
+   <account type="12" name="Kamatbevétel"/>
+   <account type="12" name="Visszatérített költségek"/>
+  </account>
+  <account type="9" name="Eszközök">
+   <account type="9" name="Forgóeszközök">
+    <account type="1" name="Betétszámla"/>
+    <account type="1" name="Folyószámla"/>
+    <account type="3" name="Készpénz"/>
+   </account>
+   <account type="9" name="Követelések"/>
+  </account>
+  <account type="13" name="Költségek">
+   <account type="13" name="Adók">
+    <account type="13" name="EVA"/>
+    <account type="13" name="Egyéb adók"/>
+    <account type="13" name="Helyi adók"/>
+    <account type="13" name="IJ"/>
+    <account type="13" name="Ingatlanadó"/>
+    <account type="13" name="Munkavállalói járulék"/>
+    <account type="13" name="Nyereségadó"/>
+    <account type="13" name="TBJ"/>
+    <account type="13" name="ÁFA"/>
+   </account>
+   <account type="13" name="Autó">
+    <account type="13" name="Díjak"/>
+    <account type="13" name="Javítás és karbantartás"/>
+    <account type="13" name="Parkolás"/>
+    <account type="13" name="Üzemanyag"/>
+   </account>
+   <account type="13" name="Bankköltség"/>
+   <account type="13" name="Biztosítás">
+    <account type="13" name="Felelősségbiztosítás"/>
+    <account type="13" name="Rokkantsági biztosítás"/>
+   </account>
+   <account type="13" name="Bérleti díj"/>
+   <account type="13" name="Felszerelés kölcsönzés"/>
+   <account type="13" name="Irodaszerek"/>
+   <account type="13" name="Javítások">
+    <account type="13" name="Felszerelés javítások"/>
+    <account type="13" name="Számítógép javítások"/>
+    <account type="13" name="Épület-karbantartás"/>
+    <account type="13" name="Épületjavítás"/>
+   </account>
+   <account type="13" name="Jogosítványok és engedélyek"/>
+   <account type="13" name="Jótékonyság"/>
+   <account type="13" name="Kiigazítás"/>
+   <account type="13" name="Képzés"/>
+   <account type="13" name="Könyvek"/>
+   <account type="13" name="Külső szolgáltatások"/>
+   <account type="13" name="Különféle"/>
+   <account type="13" name="Munkabér"/>
+   <account type="13" name="Nyomtatás és fénymásolás"/>
+   <account type="13" name="Postaköltség és futárszolgálat"/>
+   <account type="13" name="Rezsi">
+    <account type="13" name="Gáz"/>
+    <account type="13" name="Internet"/>
+    <account type="13" name="Kábel TV"/>
+    <account type="13" name="Mobil telefon"/>
+    <account type="13" name="Szemétszállítás"/>
+    <account type="13" name="Telefon"/>
+    <account type="13" name="Villany"/>
+    <account type="13" name="Víz"/>
+   </account>
+   <account type="13" name="Szakértői illetmény">
+    <account type="13" name="Jogi költségek"/>
+    <account type="13" name="Könyvelés"/>
+   </account>
+   <account type="13" name="Tagdíjak és előfizetések"/>
+   <account type="13" name="Utazás és Szórakozás">
+    <account type="13" name="Szórakozás"/>
+    <account type="13" name="Utazás"/>
+    <account type="13" name="Étkezések"/>
+   </account>
+   <account type="13" name="Árengedmények"/>
+   <account type="13" name="Értékcsökkenés"/>
+   <account type="13" name="Étkezés"/>
+  </account>
+  <account type="10" name="Kötelezettségek">
+   <account type="4" name="Hitelkártya"/>
+   <account type="10" name="Tartozások"/>
+  </account>
+  <account type="16" name="Saját tőke">
+   <account type="16" name="Céltartalékok"/>
+   <account type="16" name="Nyitóegyenlegek"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

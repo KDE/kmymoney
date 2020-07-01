@@ -9,28 +9,29 @@
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>Conta de Investimentos</title>
- <shortdesc>Conta de corretagem com contas de investimentos relacionados
-    (acções, obrigações, fundos de investimento, fundos de índices, juros, dividendos)</shortdesc>
- <longdesc>Você desejará seleccionar este conjunto de acções caso possua investimentos (acções, obrigações, fundos de investimento, fundos de índices, juros, dividendos).</longdesc>
+ <title>Conta de investimentos</title>
+ <shortdesc>Conta de correctagem</shortdesc>
+ <longdesc>Desejará seleccionar este conjunto de contas de investimentos caso
+  possua investimentos (acções, obrigações, fundos de investimento,
+  fundos de índices, juros, dividendos).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Activos">
    <account type="9" name="Investimentos">
-    <account type="1" name="Conta na Corretora">
+    <account type="1" name="Conta na correctora">
      <account type="9" name="Acção"/>
-     <account type="9" name="Fundo de Investimento"/>
+     <account type="9" name="Fundo de investimento"/>
      <account type="9" name="Obrigação"/>
-     <account type="9" name="Índice de Mercado"/>
+     <account type="9" name="Índice de mercado"/>
     </account>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Despesas">
    <account type="13" name="Comissões"/>
   </account>
-  <account type="12" name="">
-   <account type="12" name="Receita de Dividendos"/>
-   <account type="12" name="Receita de Juros">
-    <account type="12" name="Juros de Obigações"/>
+  <account type="12" name="Receita">
+   <account type="12" name="Receita de dividendos"/>
+   <account type="12" name="Receita de juros">
+    <account type="12" name="Juros de obrigações"/>
    </account>
   </account>
  </accounts>

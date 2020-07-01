@@ -15,26 +15,26 @@
     Se bokföringsförordningen 3 § (konton).
     Bokföringslagens definitioner (kapitel 4).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Aktiva">
    <account type="9" name="Bestående aktiva"/>
    <account type="9" name="Rörliga aktiva">
     <account type="1" name="Bankkonto"/>
    </account>
   </account>
-  <account type="12" name=""/>
-  <account type="16" name="">
+  <account type="12" name="Allmänna understöd"/>
+  <account type="16" name="Eget kapital">
    <account type="16" name="Balanserad vinst (förlust) från tidigare räkenskapsperioder"/>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Extraordinära poster">
    <account type="12" name="Extraordinära intäkter"/>
    <account type="13" name="Extraordinära kostnader"/>
   </account>
-  <account type="10" name=""/>
-  <account type="12" name="">
+  <account type="10" name="Främmande kapital"/>
+  <account type="12" name="Investerings- och finansieringsverksamhet">
    <account type="12" name="Intäkter"/>
    <account type="13" name="Kostnader"/>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Ordinarie verksamhet">
    <account type="12" name="Intäkter"/>
    <account type="13" name="Kostnader">
     <account type="13" name="Avskrivningar"/>
@@ -42,8 +42,8 @@
     <account type="13" name="Övriga kostnader"/>
    </account>
   </account>
-  <account type="10" name=""/>
-  <account type="12" name="">
+  <account type="10" name="Resultatregleringar"/>
+  <account type="12" name="Tillförda medel">
    <account type="12" name="Intäkter"/>
    <account type="13" name="Kostnader"/>
   </account>

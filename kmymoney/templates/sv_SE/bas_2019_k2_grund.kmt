@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/sv_SE/bas_2019_k2_grund.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Kontoplan BAS 2019 Grundläggande K2</title>
+ <shortdesc>Kontoplan BAS 2019 Grundläggande K2</shortdesc>
+ <longdesc>Kontoplan BAS 2019 med grundläggande konton för företag som tillämpar K2-regler
+
+   För mer information om BAS kontoplaner se https://www.bas.se/.</longdesc>
+ <accounts>
+  <account type="9" name="1 TILLGÅNGAR">
+   <account type="9" name="10 Immateriella anläggningstillgångar">
+    <account type="9" name="1030 Patent">
+     <account type="9" name="1039 Ackumulerade avskrivningar på patent"/>
+    </account>
+    <account type="9" name="1060 Hyresrätter, tomträtter och liknande">
+     <account type="9" name="1069 Ackumulerade avskrivningar på hyresrätter, tomträtter och liknande"/>
+    </account>
+   </account>
+   <account type="9" name="11 Byggnader och mark">
+    <account type="9" name="1110 Byggnader">
+     <account type="9" name="1119 Ackumulerade avskrivningar på byggnader"/>
+    </account>
+    <account type="9" name="1130 Mark"/>
+    <account type="9" name="1150 Markanläggningar">
+     <account type="9" name="1159 Ackumulerade avskrivningar på markanläggningar"/>
+    </account>
+   </account>
+   <account type="9" name="12 Maskiner och inventarier">
+    <account type="9" name="1210 Maskiner och andra tekniska anläggningar">
+     <account type="9" name="1219 Ackumulerade avskrivningar på maskiner och andra tekniska anläggningar"/>
+    </account>
+    <account type="9" name="1220 Inventarier och verktyg">
+     <account type="9" name="1229 Ackumulerade avskrivningar på inventarier och verktyg"/>
+    </account>
+    <account type="9" name="1240 Bilar och andra transportmedel">
+     <account type="9" name="1249 Ackumulerade avskrivningar på bilar och andra transportmedel"/>
+    </account>
+    <account type="9" name="1250 Datorer">
+     <account type="9" name="1259 Ackumulerade avskrivningar på datorer"/>
+    </account>
+    <account type="9" name="1290 Övriga materiella anläggningstillgångar">
+     <account type="9" name="1291 Konst och liknande tillgångar"/>
+     <account type="9" name="1299 Ackumulerade avskrivningar på övriga materiella anläggningstillgångar"/>
+    </account>
+   </account>
+   <account type="9" name="13 Finansiella anläggningstillgångar">
+    <account type="9" name="1350 Andelar och värdepapper i andra företag"/>
+    <account type="9" name="1380 Andra långfristiga fordringar"/>
+   </account>
+   <account type="9" name="14 Lager, produkter i arbete och pågående arbeten">
+    <account type="9" name="1410 Lager av råvaror">
+     <account type="9" name="1419 Förändring av lager av råvaror"/>
+    </account>
+    <account type="9" name="1440 Produkter i arbete">
+     <account type="9" name="1449 Förändring av produkter i arbete"/>
+    </account>
+    <account type="9" name="1450 Lager av färdiga varor">
+     <account type="9" name="1459 Förändring av lager av färdiga varor"/>
+    </account>
+    <account type="9" name="1460 Lager av handelsvaror">
+     <account type="9" name="1469 Förändring av lager av handelsvaror"/>
+    </account>
+    <account type="9" name="1470 Pågående arbeten">
+     <account type="9" name="1479 Förändring av pågående arbeten"/>
+    </account>
+    <account type="9" name="1480 Förskott för varor och tjänster"/>
+    <account type="9" name="1490 Övriga lagertillgångar"/>
+   </account>
+   <account type="9" name="15 Kundfordringar">
+    <account type="9" name="1510 Kundfordringar">
+     <account type="9" name="1513 Kundfordringar - delad faktura"/>
+     <account type="9" name="1519 Nedskrivning av kundfordringar"/>
+    </account>
+    <account type="9" name="1580 Fordringar för kontokort och kuponger"/>
+   </account>
+   <account type="9" name="16 Övriga kortfristiga fordringar">
+    <account type="9" name="1610 Kortfristiga fordringar hos anställda"/>
+    <account type="9" name="1630 Avräkning för skatter och avgifter (skattekonto)"/>
+    <account type="9" name="1640 Skattefordringar"/>
+    <account type="9" name="1650 Momsfordran"/>
+    <account type="9" name="1680 Andra kortfristiga fordringar"/>
+   </account>
+   <account type="9" name="17 Förutbetalda kostnader och upplupna intäkter">
+    <account type="9" name="1710 Förutbetalda hyreskostnader"/>
+    <account type="9" name="1720 Förutbetalda leasingavgifter, kortfristig del"/>
+    <account type="9" name="1730 Förutbetalda försäkringspremier"/>
+    <account type="9" name="1740 Förutbetalda räntekostnader"/>
+    <account type="9" name="1750 Upplupna hyresintäkter"/>
+    <account type="9" name="1760 Upplupna ränteintäkter"/>
+    <account type="9" name="1790 Övriga förutbetalda kostnader och upplupna intäkter"/>
+   </account>
+   <account type="9" name="18 Kortfristiga placeringar">
+    <account type="9" name="1810 Andelar i börsnoterade företag"/>
+    <account type="9" name="1880 Andra kortfristiga placeringar"/>
+    <account type="9" name="1890 Nedskrivning av kortfristiga placeringar"/>
+   </account>
+   <account type="9" name="19 Kassa och bank">
+    <account type="3" name="1910 Kassa"/>
+    <account type="1" name="1920 PlusGiro"/>
+    <account type="1" name="1930 Företagskonto/checkkonto/affärskonto"/>
+    <account type="1" name="1940 Övriga bankkonton"/>
+   </account>
+  </account>
+  <account type="10" name="2 EGET KAPITAL OCH SKULDER">
+   <account type="10" name="20 Eget kapital">
+    <account type="10" name="2010 Eget kapital, delägare 1">
+     <account type="10" name="2011 Egna varuuttag"/>
+     <account type="10" name="2013 Övriga egna uttag"/>
+     <account type="10" name="2017 Årets kapitaltillskott"/>
+     <account type="10" name="2018 Övriga egna insättningar"/>
+     <account type="10" name="2019 Årets resultat, delägare 1"/>
+    </account>
+    <account type="10" name="2020 Eget kapital, delägare 2"/>
+    <account type="10" name="2030 Eget kapital, delägare 3"/>
+    <account type="10" name="2040 Eget kapital, delägare 4"/>
+    <account type="10" name="2060 Eget kapital i ideella föreningar, stiftelser och registrerade trossamfund"/>
+    <account type="10" name="2070 Ändamålsbestämda medel"/>
+    <account type="10" name="2080 Bundet eget kapital">
+     <account type="10" name="2081 Aktiekapital"/>
+     <account type="10" name="2083 Medlemsinsatser"/>
+     <account type="10" name="2086 Reservfond"/>
+    </account>
+    <account type="10" name="2090 Fritt eget kapital">
+     <account type="10" name="2091 Balanserad vinst eller förlust"/>
+     <account type="10" name="2098 Vinst eller förlust från föregående år"/>
+     <account type="10" name="2099 Årets resultat"/>
+    </account>
+   </account>
+   <account type="10" name="21 Obeskattade reserver">
+    <account type="10" name="2110 Periodiseringsfonder">
+     <account type="10" name="2113 Periodiseringsfond vid 2013 års taxering"/>
+    </account>
+    <account type="10" name="2120 Periodiseringsfonder">
+     <account type="10" name="2123 Periodiseringsfond 2013"/>
+     <account type="10" name="2124 Periodiseringsfond 2014"/>
+     <account type="10" name="2125 Periodiseringsfond 2015"/>
+     <account type="10" name="2126 Periodiseringsfond 2016"/>
+     <account type="10" name="2127 Periodiseringsfond 2017"/>
+     <account type="10" name="2128 Periodiseringsfond 2018"/>
+     <account type="10" name="2129 Periodiseringsfond 2019"/>
+    </account>
+    <account type="10" name="2150 Ackumulerade överavskrivningar"/>
+   </account>
+   <account type="10" name="22 Avsättningar">
+    <account type="10" name="2210 Avsättningar för pensioner enligt tryggandelagen"/>
+    <account type="10" name="2220 Avsättningar för garantier"/>
+    <account type="10" name="2290 Övriga avsättningar"/>
+   </account>
+   <account type="10" name="23 Långfristiga skulder">
+    <account type="10" name="2330 Checkräkningskredit"/>
+    <account type="10" name="2350 Andra långfristiga skulder till kreditinstitut"/>
+    <account type="10" name="2390 Övriga långfristiga skulder">
+     <account type="10" name="2393 Lån från närstående personer, långfristig del"/>
+    </account>
+   </account>
+   <account type="10" name="24 Kortfristiga skulder till kreditinstitut, kunder och leverantörer">
+    <account type="10" name="2410 Andra kortfristiga låneskulder till kreditinstitut"/>
+    <account type="10" name="2420 Förskott från kunder"/>
+    <account type="10" name="2440 Leverantörsskulder"/>
+    <account type="10" name="2480 Checkräkningskredit, kortfristig"/>
+    <account type="10" name="2490 Övriga kortfristiga skulder till kreditinstitut, kunder och leverantörer"/>
+   </account>
+   <account type="10" name="25 Skatteskulder">
+    <account type="10" name="2510 Skatteskulder"/>
+   </account>
+   <account type="10" name="26 Moms och särskilda punktskatter">
+    <account type="10" name="2610 Utgående moms, 25 %">
+     <account type="10" name="2611 Utgående moms på försäljning inom Sverige, 25 %"/>
+     <account type="10" name="2612 Utgående moms på egna uttag, 25 %"/>
+     <account type="10" name="2613 Utgående moms för uthyrning, 25 %"/>
+     <account type="10" name="2614 Utgående moms omvänd skattskyldighet, 25 %"/>
+     <account type="10" name="2615 Utgående moms import av varor, 25 %"/>
+     <account type="10" name="2616 Utgående moms VMB 25 %"/>
+    </account>
+    <account type="10" name="2620 Utgående moms, 12 %">
+     <account type="10" name="2621 Utgående moms på försäljning inom Sverige, 12 %"/>
+     <account type="10" name="2622 Utgående moms på egna uttag, 12 %"/>
+     <account type="10" name="2623 Utgående moms för uthyrning, 12 %"/>
+     <account type="10" name="2624 Utgående moms omvänd skattskyldighet, 12 %"/>
+     <account type="10" name="2625 Utgående moms import av varor, 12 %"/>
+     <account type="10" name="2626 Utgående moms VMB 12 %"/>
+    </account>
+    <account type="10" name="2630 Utgående moms, 6 %">
+     <account type="10" name="2631 Utgående moms på försäljning inom Sverige, 6 %"/>
+     <account type="10" name="2632 Utgående moms på egna uttag, 6 %"/>
+     <account type="10" name="2633 Utgående moms för uthyrning, 6 %"/>
+     <account type="10" name="2634 Utgående moms omvänd skattskyldighet, 6 %"/>
+     <account type="10" name="2635 Utgående moms import av varor, 6 %"/>
+     <account type="10" name="2636 Utgående moms VMB 6 %"/>
+    </account>
+    <account type="10" name="2640 Ingående moms">
+     <account type="10" name="2641 Debiterad ingående moms"/>
+     <account type="10" name="2642 Debiterad ingående moms i anslutning till frivillig skattskyldighet"/>
+     <account type="10" name="2645 Beräknad ingående moms på förvärv från utlandet"/>
+     <account type="10" name="2646 Ingående moms på uthyrning"/>
+     <account type="10" name="2647 Ingående moms omvänd skattskyldighet varor och tjänster i Sverige"/>
+     <account type="10" name="2648 Vilande ingående moms"/>
+     <account type="10" name="2649 Ingående moms, blandad verksamhet"/>
+    </account>
+    <account type="10" name="2650 Redovisningskonto för moms"/>
+   </account>
+   <account type="10" name="27 Personalens skatter, avgifter och löneavdrag">
+    <account type="10" name="2710 Personalskatt"/>
+    <account type="10" name="2730 Lagstadgade sociala avgifter och särskild löneskatt"/>
+    <account type="10" name="2740 Avtalade sociala avgifter"/>
+    <account type="10" name="2790 Övriga löneavdrag"/>
+   </account>
+   <account type="10" name="28 Övriga kortfristiga skulder">
+    <account type="10" name="2820 Kortfristiga skulder till anställda"/>
+    <account type="10" name="2840 Kortfristiga låneskulder"/>
+    <account type="10" name="2890 Övriga kortfristiga skulder"/>
+   </account>
+   <account type="10" name="29 Upplupna kostnader och förutbetalda intäkter">
+    <account type="10" name="2910 Upplupna löner"/>
+    <account type="10" name="2920 Upplupna semesterlöner"/>
+    <account type="10" name="2940 Upplupna lagstadgade sociala och andra avgifter"/>
+    <account type="10" name="2950 Upplupna avtalade sociala avgifter"/>
+    <account type="10" name="2960 Upplupna räntekostnader"/>
+    <account type="10" name="2970 Förutbetalda intäkter"/>
+    <account type="10" name="2990 Övriga upplupna kostnader och förutbetalda intäkter">
+     <account type="10" name="2999 OBS-konto"/>
+    </account>
+   </account>
+  </account>
+  <account type="12" name="3 RÖRELSENS INKOMSTER/INTÄKTER">
+   <account type="12" name="30–34 Huvudintäkter">
+    <account type="12" name="3000 Försäljning inom Sverige">
+     <account type="12" name="3001 Försäljning inom Sverige, 25 % moms"/>
+     <account type="12" name="3002 Försäljning inom Sverige, 12 % moms"/>
+     <account type="12" name="3003 Försäljning inom Sverige, 6 % moms"/>
+     <account type="12" name="3004 Försäljning inom Sverige, momsfri"/>
+    </account>
+    <account type="12" name="3100 Försäljning av varor utanför Sverige">
+     <account type="12" name="3105 Försäljning varor till land utanför EU"/>
+     <account type="12" name="3106 Försäljning varor till annat EU-land, momspliktig"/>
+     <account type="12" name="3108 Försäljning varor till annat EU-land, momsfri"/>
+    </account>
+    <account type="12" name="3200 Försäljning VMB och omvänd moms">
+     <account type="12" name="3211 Försäljning positiv VMB 25 %"/>
+     <account type="12" name="3212 Försäljning negativ VMB 25 %"/>
+     <account type="12" name="3231 Försäljning inom byggsektorn, omvänd skattskyldighet moms"/>
+    </account>
+    <account type="12" name="3300 Försäljning av tjänster utanför Sverige">
+     <account type="12" name="3305 Försäljning tjänster till land utanför EU"/>
+     <account type="12" name="3308 Försäljning tjänster till annat EU-land"/>
+    </account>
+    <account type="12" name="3400 Försäljning, egna uttag">
+     <account type="12" name="3401 Egna uttag momspliktiga, 25 %"/>
+     <account type="12" name="3402 Egna uttag momspliktiga, 12 %"/>
+     <account type="12" name="3403 Egna uttag momspliktiga, 6 %"/>
+     <account type="12" name="3404 Egna uttag, momsfria"/>
+    </account>
+   </account>
+   <account type="12" name="35 Fakturerade kostnader">
+    <account type="12" name="3500 Fakturerade kostnader (gruppkonto)"/>
+    <account type="12" name="3510 Fakturerat emballage"/>
+    <account type="12" name="3520 Fakturerade frakter">
+     <account type="12" name="3521 Fakturerade frakter, EU-land"/>
+     <account type="12" name="3522 Fakturerade frakter, export"/>
+    </account>
+    <account type="12" name="3530 Fakturerade tull- och speditionskostnader m.m."/>
+    <account type="12" name="3540 Faktureringsavgifter">
+     <account type="12" name="3541 Faktureringsavgifter, EU-land"/>
+     <account type="12" name="3542 Faktureringsavgifter, export"/>
+    </account>
+   </account>
+   <account type="12" name="36 Rörelsens sidointäkter">
+    <account type="12" name="3600 Rörelsens sidointäkter (gruppkonto)"/>
+   </account>
+   <account type="12" name="37 Intäktskorrigeringar">
+    <account type="12" name="3730 Lämnade rabatter"/>
+    <account type="12" name="3740 Öres- och kronutjämning"/>
+   </account>
+   <account type="12" name="38 Aktiverat arbete för egen räkning">
+    <account type="12" name="3800 Aktiverat arbete för egen räkning (gruppkonto)"/>
+   </account>
+   <account type="12" name="39 Övriga rörelseintäkter">
+    <account type="12" name="3900 Övriga rörelseintäkter (gruppkonto)"/>
+    <account type="12" name="3910 Hyres- och arrendeintäkter">
+     <account type="12" name="3913 Frivilligt momspliktiga hyresintäkter"/>
+    </account>
+    <account type="12" name="3960 Valutakursvinster på fordringar och skulder av rörelsekaraktär"/>
+    <account type="12" name="3970 Vinst vid avyttring av immateriella och materiella anläggningstillgångar"/>
+    <account type="12" name="3980 Erhållna offentliga stöd m.m."/>
+   </account>
+  </account>
+  <account type="13" name="4 UTGIFTER/KOSTNADER FÖR VAROR, MATERIAL OCH VISSA KÖPTA TJÄNSTER">
+   <account type="13" name="40–45 Inköp av varor och material">
+    <account type="13" name="4000 Inköp av varor från Sverige"/>
+    <account type="13" name="4200 Sålda varor VMB">
+     <account type="13" name="4211 Sålda varor positiv VMB 25 %"/>
+     <account type="13" name="4212 Sålda varor negativ VMB 25 %"/>
+    </account>
+    <account type="13" name="4400 Momspliktiga inköp i Sverige">
+     <account type="13" name="4415 Inköpta varor i Sverige, omvänd skattskyldighet, 25 % moms"/>
+     <account type="13" name="4426 Inköpta tjänster i Sverige, omvänd skattskyldighet, 12 %"/>
+     <account type="13" name="4427 Inköpta tjänster i Sverige, omvänd skattskyldighet, 6 %"/>
+    </account>
+    <account type="13" name="4500 Övriga momspliktiga inköp">
+     <account type="13" name="4515 Inköp av varor från annat EU-land, 25 %"/>
+     <account type="13" name="4516 Inköp av varor från annat EU-land, 12 %"/>
+     <account type="13" name="4517 Inköp av varor från annat EU-land, 6 %"/>
+     <account type="13" name="4518 Inköp av varor från annat EU-land, momsfri"/>
+     <account type="13" name="4531 Inköp av tjänster från ett land utanför EU, 25 % moms"/>
+     <account type="13" name="4532 Inköp av tjänster från ett land utanför EU, 12 % moms"/>
+     <account type="13" name="4533 Inköp av tjänster från ett land utanför EU, 6 % moms"/>
+     <account type="13" name="4535 Inköp av tjänster från annat EU-land, 25 %"/>
+     <account type="13" name="4536 Inköp av tjänster från annat EU-land, 12 %"/>
+     <account type="13" name="4537 Inköp av tjänster från annat EU-land, 6 %"/>
+     <account type="13" name="4538 Inköp av tjänster från annat EU-land, momsfri"/>
+     <account type="13" name="4545 Import av varor, 25 % moms"/>
+     <account type="13" name="4546 Import av varor, 12 % moms"/>
+     <account type="13" name="4547 Import av varor, 6 % moms"/>
+    </account>
+   </account>
+   <account type="13" name="46 Legoarbeten, underentreprenader">
+    <account type="13" name="4600 Legoarbeten och underentreprenader (gruppkonto)"/>
+   </account>
+   <account type="13" name="47 Reduktion av inköpspriser">
+    <account type="13" name="4700 Reduktion av inköpspriser (gruppkonto)"/>
+   </account>
+   <account type="13" name="49 Förändring av lager, produkter i arbete och pågående arbeten">
+    <account type="13" name="4900 Förändring av lager (gruppkonto)"/>
+    <account type="13" name="4910 Förändring av lager av råvaror"/>
+    <account type="13" name="4920 Förändring av lager av tillsatsmaterial och förnödenheter"/>
+    <account type="13" name="4940 Förändring av produkter i arbete"/>
+    <account type="13" name="4950 Förändring av lager av färdiga varor"/>
+    <account type="13" name="4960 Förändring av lager av handelsvaror"/>
+    <account type="13" name="4970 Förändring av pågående arbeten, nedlagda kostnader"/>
+   </account>
+  </account>
+  <account type="13" name="5–6 ÖVRIGA EXTERNA RÖRELSEUTGIFTER/KOSTNADER">
+   <account type="13" name="50 Lokalkostnader">
+    <account type="13" name="5010 Lokalhyra"/>
+    <account type="13" name="5020 El för belysning"/>
+    <account type="13" name="5030 Värme"/>
+    <account type="13" name="5040 Vatten och avlopp"/>
+    <account type="13" name="5060 Städning och renhållning"/>
+    <account type="13" name="5070 Reparation och underhåll av lokaler"/>
+   </account>
+   <account type="13" name="51 Fastighetskostnader">
+    <account type="13" name="5120 El för belysning"/>
+    <account type="13" name="5130 Värme"/>
+    <account type="13" name="5140 Vatten och avlopp"/>
+    <account type="13" name="5160 Städning och renhållning"/>
+    <account type="13" name="5170 Reparation och underhåll av fastighet"/>
+   </account>
+   <account type="13" name="52 Hyra av anläggningstillgångar">
+    <account type="13" name="5200 Hyra av anläggningstillgångar (gruppkonto)"/>
+   </account>
+   <account type="13" name="53 Energikostnader">
+    <account type="13" name="5300 Energikostnader (gruppkonto)"/>
+   </account>
+   <account type="13" name="54 Förbrukningsinventarier och förbrukningsmaterial">
+    <account type="13" name="5410 Förbrukningsinventarier"/>
+    <account type="13" name="5420 Programvaror"/>
+    <account type="13" name="5460 Förbrukningsmaterial"/>
+   </account>
+   <account type="13" name="55 Reparation och underhåll">
+    <account type="13" name="5500 Reparation och underhåll (gruppkonto)"/>
+   </account>
+   <account type="13" name="56 Kostnader för transportmedel">
+    <account type="13" name="5600 Kostnader för transportmedel (gruppkonto)"/>
+    <account type="13" name="5610 Personbilskostnader">
+     <account type="13" name="5611 Drivmedel för personbilar"/>
+     <account type="13" name="5612 Försäkring och skatt för personbilar"/>
+     <account type="13" name="5613 Reparation och underhåll av personbilar"/>
+     <account type="13" name="5615 Leasing av personbilar"/>
+    </account>
+   </account>
+   <account type="13" name="57 Frakter och transporter">
+    <account type="13" name="5700 Frakter och transporter (gruppkonto)"/>
+   </account>
+   <account type="13" name="58 Resekostnader">
+    <account type="13" name="5800 Resekostnader (gruppkonto)"/>
+    <account type="13" name="5810 Biljetter"/>
+    <account type="13" name="5820 Hyrbilskostnader"/>
+    <account type="13" name="5830 Kost och logi">
+     <account type="13" name="5831 Kost och logi i Sverige"/>
+     <account type="13" name="5832 Kost och logi i utlandet"/>
+    </account>
+   </account>
+   <account type="13" name="59 Reklam och PR">
+    <account type="13" name="5900 Reklam och PR (gruppkonto)"/>
+   </account>
+   <account type="13" name="60 Övriga försäljningskostnader">
+    <account type="13" name="6070 Representation">
+     <account type="13" name="6071 Representation, avdragsgill"/>
+     <account type="13" name="6072 Representation, ej avdragsgill"/>
+    </account>
+    <account type="13" name="6090 Övriga försäljningskostnader"/>
+   </account>
+   <account type="13" name="61 Kontorsmateriel och trycksaker">
+    <account type="13" name="6100 Kontorsmateriel och trycksaker (gruppkonto)"/>
+   </account>
+   <account type="13" name="62 Tele och post">
+    <account type="13" name="6210 Telekommunikation"/>
+    <account type="13" name="6250 Postbefordran"/>
+   </account>
+   <account type="13" name="63 Företagsförsäkringar och övriga riskkostnader">
+    <account type="13" name="6310 Företagsförsäkringar"/>
+    <account type="13" name="6350 Förluster på kundfordringar"/>
+    <account type="13" name="6390 Övriga riskkostnader"/>
+   </account>
+   <account type="13" name="64 Förvaltningskostnader">
+    <account type="13" name="6410 Styrelsearvoden som inte är lön"/>
+    <account type="13" name="6420 Ersättningar till revisor"/>
+   </account>
+   <account type="13" name="65 Övriga externa tjänster">
+    <account type="13" name="6530 Redovisningstjänster"/>
+    <account type="13" name="6540 IT-tjänster"/>
+    <account type="13" name="6550 Konsultarvoden"/>
+    <account type="13" name="6560 Serviceavgifter till branschorganisationer"/>
+    <account type="13" name="6570 Bankkostnader"/>
+    <account type="13" name="6590 Övriga externa tjänster"/>
+   </account>
+   <account type="13" name="68 Inhyrd personal">
+    <account type="13" name="6800 Inhyrd personal (gruppkonto)"/>
+   </account>
+   <account type="13" name="69 Övriga externa kostnader">
+    <account type="13" name="6970 Tidningar, tidskrifter och facklitteratur"/>
+    <account type="13" name="6980 Föreningsavgifter"/>
+    <account type="13" name="6990 Övriga externa kostnader">
+     <account type="13" name="6991 Övriga externa kostnader, avdragsgilla"/>
+     <account type="13" name="6992 Övriga externa kostnader, ej avdragsgilla"/>
+    </account>
+   </account>
+  </account>
+  <account type="13" name="7 UTGIFTER/KOSTNADER FÖR PERSONAL, AVSKRIVNINGAR M.M.">
+   <account type="13" name="70 Löner till kollektivanställda">
+    <account type="13" name="7010 Löner till kollektivanställda"/>
+    <account type="13" name="7090 Förändring av semesterlöneskuld"/>
+   </account>
+   <account type="13" name="72 Löner till tjänstemän och företagsledare">
+    <account type="13" name="7210 Löner till tjänstemän"/>
+    <account type="13" name="7220 Löner till företagsledare"/>
+    <account type="13" name="7240 Styrelsearvoden"/>
+    <account type="13" name="7290 Förändring av semesterlöneskuld"/>
+   </account>
+   <account type="13" name="73 Kostnadsersättningar och förmåner">
+    <account type="13" name="7310 Kontanta extraersättningar"/>
+    <account type="13" name="7320 Traktamenten vid tjänsteresa">
+     <account type="13" name="7321 Skattefria traktamenten, Sverige"/>
+     <account type="13" name="7322 Skattepliktiga traktamenten, Sverige"/>
+     <account type="13" name="7323 Skattefria traktamenten, utlandet"/>
+     <account type="13" name="7324 Skattepliktiga traktamenten, utlandet"/>
+    </account>
+    <account type="13" name="7330 Bilersättningar">
+     <account type="13" name="7331 Skattefria bilersättningar"/>
+     <account type="13" name="7332 Skattepliktiga bilersättningar"/>
+    </account>
+    <account type="13" name="7380 Kostnader för förmåner till anställda">
+     <account type="13" name="7385 Kostnader för fri bil"/>
+    </account>
+    <account type="13" name="7390 Övriga kostnadsersättningar och förmåner"/>
+   </account>
+   <account type="13" name="74 Pensionskostnader">
+    <account type="13" name="7410 Pensionsförsäkringspremier"/>
+    <account type="13" name="7490 Övriga pensionskostnader"/>
+   </account>
+   <account type="13" name="75 Sociala och andra avgifter enligt lag och avtal">
+    <account type="13" name="7510 Arbetsgivaravgifter 31,42 %">
+     <account type="13" name="7511 Arbetsgivaravgifter för löner och ersättningar"/>
+     <account type="13" name="7512 Arbetsgivaravgifter för förmånsvärden"/>
+     <account type="13" name="7519 Arbetsgivaravgifter för semester- och löneskulder"/>
+    </account>
+    <account type="13" name="7520 Avgifter 16,36 %"/>
+    <account type="13" name="7530 Särskild löneskatt"/>
+    <account type="13" name="7550 Avkastningsskatt på pensionsmedel"/>
+    <account type="13" name="7570 Premier för arbetsmarknadsförsäkringar"/>
+    <account type="13" name="7580 Gruppförsäkringspremier"/>
+    <account type="13" name="7590 Övriga sociala och andra avgifter enligt lag och avtal"/>
+   </account>
+   <account type="13" name="76 Övriga personalkostnader">
+    <account type="13" name="7600 Övriga personalkostnader (gruppkonto)"/>
+    <account type="13" name="7610 Utbildning"/>
+    <account type="13" name="7620 Sjuk- och hälsovård">
+     <account type="13" name="7621 Sjuk- och hälsovård, avdragsgill"/>
+     <account type="13" name="7622 Sjuk- och hälsovård, ej avdragsgill"/>
+    </account>
+    <account type="13" name="7630 Personalrepresentation">
+     <account type="13" name="7631 Personalrepresentation, avdragsgill"/>
+     <account type="13" name="7632 Personalrepresentation, ej avdragsgill"/>
+    </account>
+   </account>
+   <account type="13" name="77 Nedskrivningar och återföring av nedskrivningar">
+    <account type="13" name="7720 Nedskrivningar av byggnader och mark"/>
+    <account type="13" name="7730 Nedskrivningar av maskiner och inventarier"/>
+   </account>
+   <account type="13" name="78 Avskrivningar enligt plan">
+    <account type="13" name="7810 Avskrivningar på immateriella anläggningstillgångar"/>
+    <account type="13" name="7820 Avskrivningar på byggnader och markanläggningar"/>
+    <account type="13" name="7830 Avskrivningar på maskiner och inventarier"/>
+   </account>
+   <account type="13" name="79 Övriga rörelsekostnader">
+    <account type="13" name="7970 Förlust vid avyttring av immateriella och materiella anläggningstillgångar"/>
+    <account type="13" name="7990 Övriga rörelsekostnader"/>
+   </account>
+  </account>
+  <account type="12" name="8 FINANSIELLA OCH ANDRA INKOMSTER/INTÄKTER OCH UTGIFTER/KOSTNADER">
+   <account type="12" name="82 Resultat från övriga värdepapper och långfristiga fordringar (anläggningstillgångar)">
+    <account type="12" name="8210 Utdelningar på andelar i andra företag"/>
+    <account type="12" name="8220 Resultat vid försäljning av värdepapper i och långfristiga fordringar hos andra företag"/>
+    <account type="12" name="8250 Ränteintäkter från långfristiga fordringar hos och värdepapper i andra företag"/>
+    <account type="12" name="8270 Nedskrivningar av innehav av andelar i och långfristiga fordringar hos andra företag"/>
+   </account>
+   <account type="12" name="83 Övriga ränteintäkter och liknande resultatposter">
+    <account type="12" name="8310 Ränteintäkter från omsättningstillgångar">
+     <account type="12" name="8314 Skattefria ränteintäkter"/>
+    </account>
+    <account type="12" name="8330 Valutakursdifferenser på kortfristiga fordringar och placeringar"/>
+    <account type="12" name="8340 Utdelningar på kortfristiga placeringar"/>
+    <account type="12" name="8350 Resultat vid försäljning av kortfristiga placeringar"/>
+    <account type="12" name="8390 Övriga finansiella intäkter"/>
+   </account>
+   <account type="12" name="84 Räntekostnader och liknande resultatposter">
+    <account type="12" name="8410 Räntekostnader för långfristiga skulder"/>
+    <account type="12" name="8420 Räntekostnader för kortfristiga skulder">
+     <account type="12" name="8422 Dröjsmålsräntor för leverantörsskulder"/>
+     <account type="12" name="8423 Räntekostnader för skatter och avgifter"/>
+    </account>
+    <account type="12" name="8430 Valutakursdifferenser på skulder"/>
+   </account>
+   <account type="12" name="88 Bokslutsdispositioner">
+    <account type="12" name="8810 Förändring av periodiseringsfond">
+     <account type="12" name="8811 Avsättning till periodiseringsfond"/>
+     <account type="12" name="8819 Återföring från periodiseringsfond"/>
+    </account>
+    <account type="12" name="8850 Förändring av överavskrivningar"/>
+   </account>
+   <account type="12" name="89 Skatter och årets resultat">
+    <account type="12" name="8910 Skatt som belastar årets resultat"/>
+    <account type="12" name="8990 Resultat">
+     <account type="12" name="8999 Årets resultat"/>
+    </account>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

@@ -13,7 +13,7 @@
  <shortdesc>Et konto oppsett for næringsvirksomhet.</shortdesc>
  <longdesc>Brukere som driver egen næring burde velge dette oppsettet. Det inkluderer alle kontoene du trenger for de fleste typer næring, inkludert Payables, Receivables, Inntekter og Utgifter.</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Aktiva">
    <account type="9" name="Nåværende Aktiva">
     <account type="1" name="Sjekkonto"/>
     <account type="3" name="Småpenger"/>
@@ -21,21 +21,21 @@
    </account>
    <account type="9" name="Utestående Fordringer"/>
   </account>
-  <account type="16" name="">
+  <account type="16" name="Equity">
    <account type="16" name="Inngående Balanse"/>
    <account type="16" name="Retained Earnings"/>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Gjeld">
    <account type="10" name="Accounts Payable"/>
    <account type="4" name="Kreditt Kort"/>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Inntekt">
    <account type="12" name="Annen Inntekt"/>
    <account type="12" name="Refunderte Utgifter"/>
    <account type="12" name="Renteinntekt"/>
    <account type="12" name="Salg"/>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Utgifter">
    <account type="13" name="Avskrivning"/>
    <account type="13" name="Bank Gebyr"/>
    <account type="13" name="Bil">

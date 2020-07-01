@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/de_CH/acctchrt_kmu.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>KMU Kontenrahmen 2013</title>
+ <shortdesc>Kontenrahmen fuer Schweizer KMU ab 2013</shortdesc>
+ <longdesc>Kontenrahmen fuer Schweizer KMU gem Sterchi I Mattle I Helbling publiziert vom veb.ch.
+Dies ist der Grundplan gemäss offiziellem Plan.</longdesc>
+ <accounts>
+  <account type="12" name="Abschluss">
+   <account type="12" name="Jahresgewinn oder Jahresverlust">
+    <account type="12" name="Hilfskonten Gewinnverwendung"/>
+   </account>
+  </account>
+  <account type="9" name="Aktiven">
+   <account type="9" name="Anlagevermögen">
+    <account type="9" name="Beteiligungen">
+     <account type="9" name="Beteiligungen"/>
+     <account type="9" name="Wertberichtigungen Beteiligungen"/>
+    </account>
+    <account type="9" name="Finanzanlagen">
+     <account type="9" name="Darlehen"/>
+     <account type="9" name="Hypotheken"/>
+     <account type="9" name="Wertberichtigungen Wertschriften"/>
+     <account type="9" name="Wertberichtigungen langfristige Forderungen"/>
+     <account type="9" name="Wertschriften"/>
+    </account>
+    <account type="9" name="Immaterielle Anlagen">
+     <account type="9" name="Goodwill"/>
+     <account type="9" name="Patente, Know-how, Lizenzen, Rechte, Entwicklungen"/>
+     <account type="9" name="Wertberichtigungen Goodwill"/>
+     <account type="9" name="Wertberichtigungen Patente, Know-how, Lizenzen, Rechte, Entwicklungen"/>
+    </account>
+    <account type="9" name="Immobile Sachanlagen">
+     <account type="9" name="Geschäftsliegenschaften"/>
+     <account type="9" name="Wertberichtigungen Geschäftsliegenschaften"/>
+    </account>
+    <account type="9" name="Mobile Sachanlagen">
+     <account type="9" name="Büromaschinen, Informatik, Kommunikationstechnologie"/>
+     <account type="9" name="Fahrzeuge"/>
+     <account type="9" name="Maschinen und Apparate"/>
+     <account type="9" name="Mobiliar und Einrichtungen"/>
+     <account type="9" name="Werkzeuge und Geräte"/>
+     <account type="9" name="Wertberichtigungen Büromaschinen, Informatik, Kommunikationstechnologie"/>
+     <account type="9" name="Wertberichtigungen Fahrzeuge"/>
+     <account type="9" name="Wertberichtigungen Maschinen und Apparate"/>
+     <account type="9" name="Wertberichtigungen Mobiliar und Einrichtungen"/>
+     <account type="9" name="Wertberichtigungen Werkzeuge und Geräte"/>
+    </account>
+    <account type="9" name="Nicht einbezahltes Grund-, Gesellschafter- oder Stiftungskapital">
+     <account type="9" name="Nicht einbezahltes Aktien-, Stamm-, Anteilschein- oder Stiftungskapital"/>
+    </account>
+   </account>
+   <account type="9" name="Umlaufvermögen">
+    <account type="9" name="Aktive Rechnungsabgrenzung">
+     <account type="9" name="Bezahlter Aufwand des Folgejahres"/>
+     <account type="9" name="Noch nicht erhaltener Ertrag"/>
+    </account>
+    <account type="9" name="Flüssige Mittel">
+     <account type="1" name="Bank (Kontokorrent)"/>
+     <account type="3" name="Kasse"/>
+     <account type="1" name="Post"/>
+    </account>
+    <account type="9" name="Forderungen aus Lieferungen und Leistungen">
+     <account type="9" name="Delkredere"/>
+     <account type="9" name="Forderungen aus Lieferungen und Leistungen (Debitoren)"/>
+    </account>
+    <account type="9" name="Kurzfristig gehaltene Aktiven mit Börsenkurs">
+     <account type="9" name="Wertberichtigungen Wertschriften"/>
+     <account type="9" name="Wertschriften"/>
+    </account>
+    <account type="9" name="Vorräte und nicht fakturierte Dienstleistungen">
+     <account type="9" name="Fertige Erzeugnisse"/>
+     <account type="9" name="Handelswaren"/>
+     <account type="9" name="Hilfs- und Verbrauchsmaterial"/>
+     <account type="9" name="Nicht fakturierte Dienstleistungen"/>
+     <account type="9" name="Rohstoffe"/>
+     <account type="9" name="Unfertige Erzeugnisse"/>
+     <account type="9" name="Waren in Konsignation"/>
+     <account type="9" name="Werkstoffe"/>
+    </account>
+    <account type="9" name="Übrige kurzfristige Forderungen">
+     <account type="9" name="Forderungen gegenüber Sozialversicherungen und Vorsorgeeinrichtungen"/>
+     <account type="9" name="Quellensteuer"/>
+     <account type="9" name="Sonstige kurzfristige Forderungen"/>
+     <account type="9" name="Verrechnungssteuer"/>
+     <account type="9" name="Vorschüsse und Darlehen"/>
+     <account type="9" name="Vorsteuer MWST Investitionen, übriger Betriebsaufwand"/>
+     <account type="9" name="Vorsteuer MWST Material, Waren, Dienstleistungen, Energie"/>
+     <account type="9" name="Wertberichtigungen Vorschüsse und Darlehen"/>
+     <account type="9" name="Wertberichtigungen sonstige kurzfristige Forderungen"/>
+    </account>
+   </account>
+  </account>
+  <account type="13" name="Aufwand für Material, Handelswaren, Dienstleistungen und Energie">
+   <account type="13" name="Aufwand für bezogene Dienstleistungen"/>
+   <account type="13" name="Aufwandminderungen"/>
+   <account type="13" name="Energieaufwand zur Leistungserstellung"/>
+   <account type="13" name="Handelswarenaufwand"/>
+   <account type="13" name="Materialaufwand Produktion"/>
+  </account>
+  <account type="12" name="Betrieblicher Ertrag aus Lieferungen und Leistungen">
+   <account type="12" name="Bestandesänderungen fertige Erzeugnisse"/>
+   <account type="12" name="Bestandesänderungen nicht fakturierte Dienstleistungen"/>
+   <account type="12" name="Bestandesänderungen unfertige Erzeugnisse"/>
+   <account type="12" name="Dienstleistungserlöse"/>
+   <account type="12" name="Eigenleistungen"/>
+   <account type="12" name="Eigenverbrauch"/>
+   <account type="12" name="Erlösminderungen"/>
+   <account type="12" name="Handelserlöse"/>
+   <account type="12" name="Produktionserlöse"/>
+   <account type="12" name="Verluste Forderungen (Debitoren), Veränderung Delkredere"/>
+   <account type="12" name="Übrige Erlöse aus Lieferungen und Leistungen"/>
+  </account>
+  <account type="12" name="Betrieblicher Nebenerfolg">
+   <account type="12" name="Aufwand Nebenbetrieb"/>
+   <account type="12" name="Aufwand betriebliche Liegenschaft"/>
+   <account type="12" name="Ertrag Nebenbetrieb"/>
+   <account type="12" name="Ertrag betriebliche Liegenschaft"/>
+  </account>
+  <account type="12" name="Betriebsfremder, ausserordentlicher, einmaliger oder periodenfremder Aufwand und Ertrag">
+   <account type="12" name="Ausserordentlicher, einmaliger oder periodenfremder Aufwand"/>
+   <account type="12" name="Ausserordentlicher, einmaliger oder periodenfremder Ertrag"/>
+   <account type="12" name="Betriebsfremder Aufwand"/>
+   <account type="12" name="Betriebsfremder Ertrag"/>
+   <account type="12" name="Direkte Steuern"/>
+  </account>
+  <account type="16" name="Eigenkapital (juristische Personen)">
+   <account type="16" name="Grund-, Gesellschafter- oder Stiftungskapital">
+    <account type="16" name="Aktien-, Stamm-, Anteilschein- oder Stiftungskapital"/>
+   </account>
+   <account type="16" name="Reserven und Jahresgewinn oder Jahresverlust">
+    <account type="16" name="Aufwertungsreserve"/>
+    <account type="16" name="Eigene Aktien, Stammanteile oder Anteilscheine (Minusposten)"/>
+    <account type="16" name="Freiwillige Gewinnreserven"/>
+    <account type="16" name="Gesetzliche Gewinnreserve"/>
+    <account type="16" name="Gesetzliche Kapitalreserve"/>
+    <account type="16" name="Gewinnvortrag oder Verlustvortrag"/>
+    <account type="16" name="Jahresgewinn oder Jahresverlust"/>
+   </account>
+  </account>
+  <account type="10" name="Passiven">
+   <account type="10" name="Kurzfristiges Fremdkapital">
+    <account type="10" name="Kurzfristige verzinsliche Verbindlichkeiten">
+     <account type="10" name="Bankverbindlichkeiten"/>
+     <account type="10" name="Verbindlichkeiten aus Finanzierungsleasing"/>
+     <account type="10" name="Übrige verzinsliche Verbindlichkeiten"/>
+    </account>
+    <account type="10" name="Passive Rechnungsabgrenzungen und kurzfristige Rückstellungen">
+     <account type="10" name="Erhaltener Ertrag des Folgejahres"/>
+     <account type="10" name="Kurzfristige Rückstellungen"/>
+     <account type="10" name="Noch nicht bezahlter Aufwand"/>
+    </account>
+    <account type="10" name="Verbindlichkeiten aus Lieferungen und Leistungen">
+     <account type="10" name="Erhaltene Anzahlungen"/>
+     <account type="10" name="Verbindlichkeiten aus Lieferungen und Leistungen (Kreditoren)"/>
+    </account>
+    <account type="10" name="Übrige kurzfristige Verbindlichkeiten">
+     <account type="10" name="Abrechnungskonto MWST"/>
+     <account type="10" name="Beschlossene Ausschüttungen"/>
+     <account type="10" name="Direkte Steuern"/>
+     <account type="10" name="Geschuldete MWST (Umsatzsteuer)"/>
+     <account type="10" name="Quellensteuer"/>
+     <account type="10" name="Sonstige kurzfristige Verbindlichkeiten"/>
+     <account type="10" name="Sozialversicherungen und Vorsorgeeinrichtungen"/>
+     <account type="10" name="Verrechnungssteuer"/>
+    </account>
+   </account>
+   <account type="10" name="Langfristiges Fremdkapital">
+    <account type="10" name="Langfristige verzinsliche Verbindlichkeiten">
+     <account type="10" name="Bankverbindlichkeiten"/>
+     <account type="10" name="Darlehen"/>
+     <account type="10" name="Hypotheken"/>
+     <account type="10" name="Obligationenanleihen"/>
+     <account type="10" name="Verbindlichkeiten aus Finanzierungsleasing"/>
+    </account>
+    <account type="10" name="Rückstellungen sowie vom Gesetz vorgesehene ähnliche Positionen">
+     <account type="10" name="Rückstellungen"/>
+    </account>
+    <account type="10" name="Übrige langfristige Verbindlichkeiten">
+     <account type="10" name="Übrige langfristige Verbindlichkeiten (unverzinslich)"/>
+    </account>
+   </account>
+  </account>
+  <account type="13" name="Personalaufwand">
+   <account type="13" name="Leistungen Dritter"/>
+   <account type="13" name="Lohnaufwand"/>
+   <account type="13" name="Sozialversicherungsaufwand"/>
+   <account type="13" name="Übriger Personalaufwand"/>
+  </account>
+  <account type="13" name="Übriger betrieblicher Aufwand, Abschreibungen und Wertberichtigungen sowie Finanzergebnis">
+   <account type="13" name="Abschreibungen und Wertberichtigungen auf Positionen des Anlagevermögens"/>
+   <account type="13" name="Energie- und Entsorgungsaufwand"/>
+   <account type="13" name="Fahrzeug- und Transportaufwand"/>
+   <account type="13" name="Finanzaufwand"/>
+   <account type="13" name="Finanzertrag"/>
+   <account type="13" name="Informatikaufwand inkl. Leasing"/>
+   <account type="13" name="Leasingaufwand mobile Sachanlagen"/>
+   <account type="13" name="Raumaufwand"/>
+   <account type="13" name="Sachversicherungen, Abgaben, Gebühren, Bewilligungen"/>
+   <account type="13" name="Sonstiger betrieblicher Aufwand"/>
+   <account type="13" name="Unterhalt, Reparaturen, Ersatz mobile Sachanlagen"/>
+   <account type="13" name="Verwaltungsaufwand"/>
+   <account type="13" name="Werbeaufwand"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

@@ -13,20 +13,20 @@
  <shortdesc>Podstawowy zestaw kont, będący w powszechnym użyciu</shortdesc>
  <longdesc>Większość użytkowników będzie potrzebowała tego zestawu. Obejmuje najczęściej używane konta (ROR, oszczędności, gotówkę, kartę kredytową, najczęstsze wydatki).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Aktywa">
    <account type="9" name="Aktywa bieżące">
     <account type="3" name="Gotówka w portfelu"/>
     <account type="1" name="Oszczędności"/>
     <account type="1" name="ROR"/>
    </account>
   </account>
-  <account type="16" name="">
+  <account type="16" name="Kapitał własny">
    <account type="16" name="Bilanse otwarcia"/>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Pasywa">
    <account type="4" name="Karta kredytowa"/>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Przychód">
    <account type="12" name="Otrzymane prezenty"/>
    <account type="12" name="Pensja"/>
    <account type="12" name="Premia"/>
@@ -37,7 +37,7 @@
     <account type="12" name="Odsetki z oszczędności"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Wydatki">
    <account type="13" name="Artykuły spożywcze"/>
    <account type="13" name="Datki charytatywne"/>
    <account type="13" name="Dostawy"/>

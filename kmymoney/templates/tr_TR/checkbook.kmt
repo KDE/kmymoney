@@ -13,14 +13,14 @@
  <shortdesc>Temel hesap planı.</shortdesc>
  <longdesc>Maaş/vadesiz hesabınızı takip etmek için bu planı kullanın. Dilerseniz gelir ve giderlerinizi daha da detaylı takip edebilirsiniz.</longdesc>
  <accounts>
-  <account type="12" name=""/>
-  <account type="13" name=""/>
-  <account type="9" name="">
+  <account type="12" name="Gelir"/>
+  <account type="13" name="Gider"/>
+  <account type="9" name="Varlıklar">
    <account type="9" name="Dönen Varlıklar">
     <account type="1" name="Banka"/>
    </account>
   </account>
-  <account type="16" name="">
+  <account type="16" name="Özkaynak">
    <account type="16" name="Açılış Bakiyeleri"/>
   </account>
  </accounts>

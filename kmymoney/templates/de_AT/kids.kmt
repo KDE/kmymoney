@@ -13,10 +13,10 @@
  <shortdesc>Konten im Zusammenhang mit Kindern</shortdesc>
  <longdesc>Kindergeld, Kindergarten</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Aufwendungen">
    <account type="13" name="Kindergarten"/>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Erträge">
    <account type="12" name="Gehalt">
     <account type="12" name="Kindergeld"/>
    </account>

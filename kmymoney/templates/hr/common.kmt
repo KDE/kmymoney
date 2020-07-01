@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hr/acctchrt_common.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Opći kontni plan</title>
+ <shortdesc>Opći kontni plan za privatnu upotrebu</shortdesc>
+ <longdesc>Kontni plan za privatnu upotrebu (nije mišljen za poduzeća), koji uključuje uobičajeno upotrebljena konta (žiro račun, štednju, gotovinu, kreditne kartice, uobičajene troškove, itd.).</longdesc>
+ <accounts>
+  <account type="9" name="Imovina">
+   <account type="9" name="Trenutačna imovina">
+    <account type="3" name="Gotovina"/>
+    <account type="1" name="Tekući račun"/>
+    <account type="1" name="Štedni račun"/>
+    <account type="1" name="Žiro račun"/>
+   </account>
+  </account>
+  <account type="16" name="Kapital">
+   <account type="16" name="Početni saldo"/>
+  </account>
+  <account type="10" name="Obveze">
+   <account type="10" name="Krediti">
+    <account type="10" name="Kredit"/>
+   </account>
+   <account type="4" name="Kreditna kartica"/>
+  </account>
+  <account type="12" name="Prihod">
+   <account type="12" name="Dohodak">
+    <account type="12" name="Dodaci"/>
+    <account type="12" name="Osobni dohodak"/>
+   </account>
+   <account type="12" name="Kamate">
+    <account type="12" name="Kamate po tekućem računu"/>
+    <account type="12" name="Kamate po štednom računu"/>
+    <account type="12" name="Kamate po žiro računu"/>
+   </account>
+   <account type="12" name="Ostalo"/>
+  </account>
+  <account type="13" name="Rashod">
+   <account type="13" name="Kamate">
+    <account type="13" name="Kamate na kredit"/>
+   </account>
+   <account type="13" name="Lijekovi"/>
+   <account type="13" name="Namirnice"/>
+   <account type="13" name="Obrazovanje">
+    <account type="13" name="Knjige"/>
+    <account type="13" name="Pretplate"/>
+    <account type="13" name="Uredski materijal"/>
+   </account>
+   <account type="13" name="Odjeća i obuća"/>
+   <account type="13" name="Osiguranje">
+    <account type="13" name="Osiguranje imovine"/>
+    <account type="13" name="Osiguranje kućanstva"/>
+    <account type="13" name="Zdravstveno osiguranje"/>
+   </account>
+   <account type="13" name="Porezi">
+    <account type="13" name="Ostali porezi"/>
+   </account>
+   <account type="13" name="Prijevoz"/>
+   <account type="13" name="Razni troškovi">
+    <account type="13" name="Bankovne naknade"/>
+    <account type="13" name="Izlasci"/>
+    <account type="13" name="Putovanja"/>
+    <account type="13" name="Razno"/>
+    <account type="13" name="Sport"/>
+   </account>
+   <account type="13" name="Stanovanje">
+    <account type="13" name="Najamnina"/>
+    <account type="13" name="Režije">
+     <account type="13" name="Grijanje"/>
+     <account type="13" name="Komunalna naknada"/>
+     <account type="13" name="Plin"/>
+     <account type="13" name="Pričuva"/>
+     <account type="13" name="Struja"/>
+     <account type="13" name="Voda"/>
+     <account type="13" name="Čistoća"/>
+    </account>
+    <account type="13" name="Telekomunikacija">
+     <account type="13" name="Internet"/>
+     <account type="13" name="Mrežne usluge"/>
+     <account type="13" name="Telefon"/>
+     <account type="13" name="Televizija"/>
+    </account>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

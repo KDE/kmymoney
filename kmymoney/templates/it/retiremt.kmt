@@ -13,7 +13,7 @@
  <shortdesc>Conto per il fondo pensione e relativi sottoconti d'investimento</shortdesc>
  <longdesc>Selezionare questo insieme di conti se si possiedono dei fondi pensione (azioni, buoni, fondi comuni, fondi indicizzati).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Attività">
    <account type="9" name="Investimenti">
     <account type="1" name="Pensione">
      <account type="15" name="Azioni"/>

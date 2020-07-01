@@ -13,12 +13,12 @@
  <shortdesc>Conti per tenere traccia di altri mutui e relativi interessi</shortdesc>
  <longdesc>Selezionare questo insieme di conti se si possiedono altri mutui oltre a quello per la casa (altri mutui, interessi).</longdesc>
  <accounts>
-  <account type="10" name="">
+  <account type="10" name="Passività">
    <account type="10" name="Mutui">
     <account type="10" name="Altri mutui"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Uscite">
    <account type="13" name="Interessi">
     <account type="13" name="Altri interessi"/>
    </account>

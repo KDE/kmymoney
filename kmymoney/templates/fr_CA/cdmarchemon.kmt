@@ -13,13 +13,13 @@
  <shortdesc>Comptes corrrespondant aux certificats de dépôt et au marché monétaire.</shortdesc>
  <longdesc>Sélectionnez ce groupe de comptes (CD/CPG , marché monétaire et intérêts) si vous détenez des certificats de dépôt et d'autres titres du marché monétaire.</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Actif">
    <account type="9" name="Liquidités">
     <account type="1" name="CD/CPG bancaires"/>
     <account type="1" name="Marché monétaire"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Revenus">
    <account type="12" name="Intérêts">
     <account type="12" name="CD/CPG"/>
     <account type="12" name="Marché monétaire"/>

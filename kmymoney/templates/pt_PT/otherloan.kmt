@@ -9,18 +9,20 @@
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>Outros Empréstimos</title>
- <shortdesc>Contas para controlar outros empréstimos e juros associados</shortdesc>
- <longdesc>Desejará seleccionar este conjunto de contas se tiver outro empréstimo para além do crédito à habitação (outro empréstimo, juros do outro empréstimo).</longdesc>
+ <title>Outros empréstimos</title>
+ <shortdesc>Contas para empréstimos e juros associados</shortdesc>
+ <longdesc>Desejará seleccionar este conjunto de contas se tiver outro empréstimo
+  para além do crédito à habitação (outro empréstimo, juros do outro
+  empréstimo).</longdesc>
  <accounts>
-  <account type="13" name="">
-   <account type="13" name="Juro">
-    <account type="13" name="Outro Juro"/>
+  <account type="13" name="Despesas">
+   <account type="13" name="Juros">
+    <account type="13" name="Outros juros"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Passivo">
    <account type="10" name="Empréstimos">
-    <account type="10" name="Outros Empréstimo"/>
+    <account type="10" name="Outros empréstimos"/>
    </account>
   </account>
  </accounts>

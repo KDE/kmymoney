@@ -13,7 +13,7 @@
  <shortdesc>Konta przeznaczone do śledzenia środków trwałych</shortdesc>
  <longdesc>Ten zestaw będzie kont potrzebny, jeśli posiadasz majątek trwały (np. dom, pojazd, domek letniskowy itp.).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Aktywa">
    <account type="9" name="Środki trwałe">
     <account type="9" name="Dom"/>
     <account type="9" name="Inne"/>

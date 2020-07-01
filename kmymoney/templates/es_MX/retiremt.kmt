@@ -15,7 +15,7 @@
    jubilación (de acciones, bonos, fondos de inversión, fondos de
    índice).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Activo">
    <account type="9" name="Inversiones">
     <account type="1" name="Jubilación">
      <account type="15" name="Acciones"/>

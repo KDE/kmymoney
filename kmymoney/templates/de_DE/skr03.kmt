@@ -13,7 +13,7 @@
  <shortdesc>Standardkontenrahmen SKR03</shortdesc>
  <longdesc>Beta Version des Kontenrahmes SKR03 zum Erweitern und Umstrukturieren. Der Kontenrahmen sollte den eigenen Bedürfnissen angepasst werden was Struktur und Kontenbezeichnungen angeht. WICHTIG!: Die Privatkonten fließen nicht in die Berechnung des Berichtes Bilanz, sind jedoch im Bericht Bilanz aufgeführt. Die im Bericht Bilanz aufgeführte Passiva &quot;Gewinnrücklagen&quot; gibt den Saldo der GuV aus. Die Anlage dieses Kontenrahmens wurde von der Firma LiHAS - Linuxhaus Stuttgart - unterstützt.</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Aktiva">
    <account type="9" name="Anlage- u. Kapitalkonten 0">
     <account type="9" name="0027 EDV-Software"/>
     <account type="9" name="0210 Maschinen"/>
@@ -21,11 +21,11 @@
     <account type="9" name="0410 Geschäftsausstattung"/>
     <account type="9" name="0420 Büroeinrichtung"/>
     <account type="9" name="0430 Ladeneinrichtung"/>
-    <account type="9" name="0565 Dahrlehn"/>
+    <account type="9" name="0565 Darlehen"/>
    </account>
    <account type="9" name="Finanzkonten 1">
-    <account type="9" name="1100 Postbank"/>
-    <account type="9" name="1200 Bankkonto"/>
+    <account type="1" name="1100 Postbank"/>
+    <account type="1" name="1200 Bankkonto"/>
     <account type="9" name="1371 Gewinnermittlung §4/3 nicht Ergebniswirksam"/>
     <account type="9" name="1400 Ford. a. Lieferungen und Leistungen"/>
     <account type="9" name="1571 Abziehbare VSt. 7%"/>
@@ -38,7 +38,7 @@
     <account type="9" name="3400 Wareneingang VSt. 19%"/>
    </account>
   </account>
-  <account type="16" name="">
+  <account type="16" name="Anfangsbestand 9">
    <account type="16" name="Saldenvortragskonten">
     <account type="16" name="9000 Saldenvortrag Sachkonten">
       <flag name="OpeningBalanceAccount"/>
@@ -47,7 +47,7 @@
     <account type="16" name="9009 Saldenvorträge Kreditoren"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Aufwendungen 2/4">
    <account type="13" name="Abschreibungen">
     <account type="13" name="4855 Sofortabschreibung GWG"/>
    </account>
@@ -104,7 +104,7 @@
     <account type="13" name="4985 Werkzeuge und Kleingeräte"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Erlöse u. Erträge 2/8">
    <account type="12" name="Erlöskonten 8">
     <account type="12" name="8300 Erlöse USt. 7%"/>
     <account type="12" name="8400 Erlöse USt. 19%"/>
@@ -115,7 +115,7 @@
     <account type="12" name="2700 Sonstige Erträge"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Passiva">
    <account type="10" name="Umsatzsteuer">
     <account type="10" name="1771 Umsatzsteuer 7%"/>
     <account type="10" name="1776 Umsatzsteuer 19%"/>
@@ -129,7 +129,7 @@
     <account type="10" name="1600 Verblk. aus Lieferungen u. Leistungen"/>
    </account>
   </account>
-  <account type="16" name="">
+  <account type="16" name="Privatkonten 1">
    <account type="16" name="Privatentnahmen/-einlagen">
     <account type="16" name="1800 Privatentnahme allgemein"/>
     <account type="16" name="1810 Privatsteuern"/>

@@ -13,7 +13,7 @@
  <shortdesc>Konti lielu īpašumu uzskaitei</shortdesc>
  <longdesc>Pievienojiet šos kontus, lai uzskaitītu lielus īpašumus (māju, transporta līdzekli, vacarnīcu u.tml.).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Aktīvi">
    <account type="9" name="Īpašumi">
     <account type="9" name="Citi īpašumi"/>
     <account type="9" name="Mājas"/>

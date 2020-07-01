@@ -13,7 +13,7 @@
  <shortdesc>Ar mājokli (māju vai dzīvokli) saistītie izdevumi</shortdesc>
  <longdesc>Pievienojiet šos kontus, lai uzskaitītu ar mājokli saistītos izdevumus. Šajā kontu grupā ir konti, kuros var uzskaitīt mājas kredīta, nodokļu un uzturēšanas izmaksas.</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Izdevumi">
    <account type="13" name="Apdrošināšana">
     <account type="13" name="Mājokļa apdrošināšana"/>
    </account>

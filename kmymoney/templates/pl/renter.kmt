@@ -13,7 +13,7 @@
  <shortdesc>Koszty związane z wynajmem domu</shortdesc>
  <longdesc>Wybierzesz ten zestaw, jeśli wynajmujesz dom lub mieszkanie (czynsz, ubezpieczenie wynajmu).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Wydatki">
    <account type="13" name="Czynsz"/>
    <account type="13" name="Ubezpieczenie">
     <account type="13" name="Ubezpieczenie wynajmu"/>

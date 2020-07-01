@@ -13,7 +13,7 @@
  <shortdesc>Uscite associate all'affitto di una casa</shortdesc>
  <longdesc>Selezionare questo insieme di conti se si ha in affitto una casa o un appartamento.</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Uscite">
    <account type="13" name="Affitto"/>
   </account>
  </accounts>

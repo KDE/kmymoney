@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ca/acctchrt_spouseinc.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Ingressos de cònjuge</title>
+ <shortdesc>Comptes per controlar els ingressos del cònjuge de manera separada</shortdesc>
+ <longdesc>Voldreu seleccionar aquest joc de comptes si el vostre cònjuge treballa (sou (cònjuge), impostos (cònjuge)).</longdesc>
+ <accounts>
+  <account type="13" name="Despeses">
+   <account type="13" name="Impostos (Cònjuge)">
+    <account type="13" name="Altres impostos"/>
+    <account type="13" name="IRPF"/>
+    <account type="13" name="Municipals"/>
+    <account type="13" name="Retencions"/>
+    <account type="13" name="Seguretat Social"/>
+   </account>
+  </account>
+  <account type="12" name="Ingressos">
+   <account type="12" name="Sou (Cònjuge)"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

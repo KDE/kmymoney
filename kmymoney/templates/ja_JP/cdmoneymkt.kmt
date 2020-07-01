@@ -13,13 +13,13 @@
  <shortdesc>定期預金とMMF投資用の勘定科目</shortdesc>
  <longdesc>定期預金かMMFの口座を持っている場合は、この勘定科目集を選ぶとよいでしょう。</longdesc>
  <accounts>
-  <account type="12" name="">
+  <account type="12" name="収益">
    <account type="12" name="利子収入">
     <account type="12" name="MMF利子"/>
     <account type="12" name="定期預金利子"/>
    </account>
   </account>
-  <account type="9" name="">
+  <account type="9" name="資産">
    <account type="9" name="流動資産">
     <account type="1" name="MMF"/>
     <account type="1" name="定期預金"/>

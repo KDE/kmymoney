@@ -15,12 +15,12 @@
    distinto a un préstamo hipotecario (otro préstamo, interés de
    otro préstamo).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Gastos">
    <account type="13" name="Intereses">
     <account type="13" name="Otro interés"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Pasivo">
    <account type="10" name="Préstamos">
     <account type="10" name="Otro préstamo"/>
    </account>

@@ -13,10 +13,10 @@
  <shortdesc>Účty na osobitné zaznamenávanie príjmu životného partnera</shortdesc>
  <longdesc>Túto sadu účtov si zvoľte, ak váš životný partner pracuje.</longdesc>
  <accounts>
-  <account type="12" name="">
+  <account type="12" name="Príjem">
    <account type="12" name="Mzda (Partnerova)"/>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Výdaje">
    <account type="13" name="Dane a poplatky (Partnerove)">
     <account type="13" name="Celoštátne dane"/>
     <account type="13" name="Miestne dane"/>

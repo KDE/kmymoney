@@ -17,21 +17,21 @@
     Ref: http://www.tieke.fi/display/XBRL/SBR+Taksonomia
     Eget kapital använder LIABILITY-typen i stället för EQUITY för att lättare skapa balansräkningar enligt bokföringsförordningen.</longdesc>
  <accounts>
-  <account type="10" name="">
+  <account type="10" name="Ackumulerade bokslutsdispositioner">
    <account type="10" name="Avskrivningsdifferens"/>
    <account type="10" name="Skattemässiga reserver"/>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Avskrivningar och nedskrivningar">
    <account type="13" name="Avskrivningar enligt plan"/>
    <account type="13" name="Exceptionella nedskrivningar av rörliga aktiva"/>
    <account type="13" name="Nedskrivningar av tillgångar bland bestående aktiva"/>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Avsättningar">
    <account type="10" name="Avsättningar för pensioner"/>
    <account type="10" name="Skatteavsättningar"/>
    <account type="10" name="Övriga avsättningar"/>
   </account>
-  <account type="9" name="">
+  <account type="9" name="Bestående aktiva">
    <account type="9" name="Immateriella tillgångar">
     <account type="9" name="Förskottsbetalningar"/>
     <account type="9" name="Goodwill"/>
@@ -61,12 +61,12 @@
     <account type="9" name="Övriga fordringar"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Bokslutsdispositioner">
    <account type="12" name="Förändring av avskrivningsdifferens"/>
    <account type="12" name="Förändring av skattemässiga reserver"/>
    <account type="12" name="Koncernbidrag"/>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Eget kapital">
    <account type="10" name="Aktie- eller andelskapital eller annat motsvarande kapital"/>
    <account type="10" name="Balanserad vinst (förlust) från tidigare räkenskapsperioder"/>
    <account type="10" name="Bolagsinsats"/>
@@ -84,8 +84,8 @@
     <account type="10" name="Övriga fonder"/>
    </account>
   </account>
-  <account type="13" name=""/>
-  <account type="12" name="">
+  <account type="13" name="Extraordinära poster"/>
+  <account type="12" name="Finansiella intäkter och kostnader">
    <account type="12" name="Intäkter från andelar i företag inom samma koncern"/>
    <account type="12" name="Intäkter från andelar i ägarintresseföretag"/>
    <account type="12" name="Intäkter från övriga placeringar bland bestående aktiva"/>
@@ -94,7 +94,7 @@
    <account type="13" name="Räntekostnader och övriga finansiella kostnader"/>
    <account type="12" name="Övriga ränteintäkter och finansiella intäkter"/>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Främmande kapital, kortfristigt">
    <account type="10" name="Erhållna förskott"/>
    <account type="10" name="Finansieringsväxlar"/>
    <account type="10" name="Latenta skatteskulder"/>
@@ -108,7 +108,7 @@
    <account type="10" name="Återlåning från arbetspensionsförsäkringsanstalter"/>
    <account type="10" name="Övriga skulder"/>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Främmande kapital, långfristigt">
    <account type="10" name="Erhållna förskott"/>
    <account type="10" name="Finansieringsväxlar"/>
    <account type="10" name="Kapitallån"/>
@@ -123,29 +123,29 @@
    <account type="10" name="Återlåning från arbetspensionsförsäkringsanstalter"/>
    <account type="10" name="Övriga skulder"/>
   </account>
-  <account type="13" name=""/>
-  <account type="13" name=""/>
-  <account type="10" name=""/>
-  <account type="13" name="">
+  <account type="13" name="Förändring av lager av färdiga varor och varor under tillverkning"/>
+  <account type="13" name="Inkomstskatt"/>
+  <account type="10" name="Koncernreserv"/>
+  <account type="13" name="Material och tjänster">
    <account type="13" name="Köpta tjänster"/>
    <account type="13" name="Material, förnödenheter och varor">
     <account type="13" name="Förändring av lager"/>
     <account type="13" name="Inköp under räkenskapsperioden"/>
    </account>
   </account>
-  <account type="10" name=""/>
-  <account type="13" name=""/>
-  <account type="12" name=""/>
-  <account type="13" name="">
+  <account type="10" name="Minoritetsandelar"/>
+  <account type="13" name="Minoritetsandelar"/>
+  <account type="12" name="Omsättning"/>
+  <account type="13" name="Personalkostnader">
    <account type="13" name="Lönebikostnader">
     <account type="13" name="Pensionskostnader"/>
     <account type="13" name="Övriga lönebikostnader"/>
    </account>
    <account type="13" name="Löner och arvoden"/>
   </account>
-  <account type="13" name=""/>
-  <account type="13" name=""/>
-  <account type="9" name="">
+  <account type="13" name="Räkenskapsperiodens resultat"/>
+  <account type="13" name="Rörelsevinst"/>
+  <account type="9" name="Rörliga aktiva">
    <account type="9" name="Finansiella värdepapper">
     <account type="9" name="Andelar i företag inom samma koncern"/>
     <account type="9" name="Övriga aktier eller andelar"/>
@@ -184,10 +184,10 @@
     <account type="9" name="Övriga omsättningstillgångar"/>
    </account>
   </account>
-  <account type="12" name=""/>
-  <account type="13" name=""/>
-  <account type="13" name=""/>
-  <account type="12" name=""/>
-  <account type="13" name=""/>
+  <account type="12" name="Tillverkning för eget bruk"/>
+  <account type="13" name="Vinst (förlust) före bokslutsdispositioner och skatter"/>
+  <account type="13" name="Övriga direkta skatter"/>
+  <account type="12" name="Övriga rörelseintäkter"/>
+  <account type="13" name="Övriga rörelsekostnader"/>
  </accounts>
 </kmymoney-account-template>

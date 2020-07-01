@@ -13,12 +13,12 @@
  <shortdesc>Konta pożyczki na dom i związanych z nią odsetek</shortdesc>
  <longdesc>Wybierzesz ten zestaw kont, jeśli spłacasz kredyt za mieszkanie lub don (kredyt hipoteczny, odsetki od kredytu hipotecznego).</longdesc>
  <accounts>
-  <account type="10" name="">
+  <account type="10" name="Pasywa">
    <account type="10" name="Kredyty">
     <account type="10" name="Kredyt hipoteczny"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Wydatki">
    <account type="13" name="Odsetki">
     <account type="13" name="Odsetki od kredytu hipotecznego"/>
    </account>

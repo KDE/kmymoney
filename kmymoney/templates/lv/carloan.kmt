@@ -13,12 +13,12 @@
  <shortdesc>Konti auto līzingam un ar tiem saistītajiem izdevumiem</shortdesc>
  <longdesc>Pievienojiet šos kontus, lai uzskaitītu auto līzinga un ar to saistītos izdevumus (līzings un līzinga procenti).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Izdevumi">
    <account type="13" name="Procenti">
     <account type="13" name="Autolīzinga procenti"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Saistības">
    <account type="10" name="Aizņēmumi">
     <account type="10" name="Auto līzings"/>
    </account>

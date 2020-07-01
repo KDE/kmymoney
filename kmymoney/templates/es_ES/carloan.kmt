@@ -15,12 +15,12 @@
    su automóvil (plazos de automóvil, intereses por plazos de
    automóvil).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Gastos">
    <account type="13" name="Intereses">
     <account type="13" name="Intereses pago plazos vehículo"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Pasivo">
    <account type="10" name="Préstamos">
     <account type="10" name="Vehículo a plazos"/>
    </account>

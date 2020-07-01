@@ -13,7 +13,7 @@
  <shortdesc>Dépenses associés avec la possesion d'un logement</shortdesc>
  <longdesc>Vous devriez sélectionner cet ensemble de comptes si vous avez un logement. Cet ensemble fournit un groupe de comptes pour suivre les dépenses du logement (assurance, taxes, entretien du logement).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Dépenses">
    <account type="13" name="Assurances">
     <account type="13" name="Assurance habitation"/>
    </account>

@@ -13,7 +13,7 @@
  <shortdesc>Despesas associadas com uma casa alugada</shortdesc>
  <longdesc>Deverá selecionar este conjunto de contas caso tenha uma casa alugada (renda).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Despesas">
    <account type="13" name="Renda"/>
    <account type="13" name="Seguro"/>
   </account>

@@ -13,7 +13,7 @@
  <shortdesc>Penzijní účet se vztahem na investiční podúčty</shortdesc>
  <longdesc>Zvolte si tuto sadu účtů, pokud máte účty, ze kterých vám plyne renta (akcie, dluhopisy, podílové listy, index fondů).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Aktiva">
    <account type="9" name="Investice">
     <account type="1" name="Penze">
      <account type="15" name="Akcie"/>

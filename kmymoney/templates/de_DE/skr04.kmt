@@ -11,9 +11,9 @@
 <kmymoney-account-template>
  <title>Kontenrahmen SKR04</title>
  <shortdesc>Standardkontenrahmen SKR04, Stand 2005</shortdesc>
- <longdesc>BETA-Version eines Kontenrahmes SKR04 für 2005. Mehr Informationen unter http://wiki.gnucash.org/wiki/De/SKR04</longdesc>
+ <longdesc>BETA-Version eines Kontenrahmes SKR04 für 2005. Mehr Informationen unter https://wiki.gnucash.org/wiki/De/SKR04</longdesc>
  <accounts>
-  <account type="12" name="">
+  <account type="12" name="01. Betriebliche Erträge">
    <account type="12" name="Erlösschmälerungen">
     <account type="12" name="Erlösschmäl.i.and.EG-Ld.stpfl.Liefer."/>
     <account type="12" name="Erlösschmälerung EG-Lieferung 15% USt"/>
@@ -99,17 +99,17 @@
     <account type="12" name="Statistisches Konto Erlöse zum ermäßigten Umsatzsteuersatz (EÜR)"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="02. Erhöhung oder Verminderung des Bestandes an fertigen und unfertigen Erzeugnissen">
    <account type="12" name="Bestandsveränd.unfertige Erzeugnisse"/>
    <account type="12" name="Bestandsveränderung Aufträge in Arbeit"/>
    <account type="12" name="Bestandsveränderung Bauaufträge"/>
    <account type="12" name="Bestandsveränderung unfertige Leistung"/>
    <account type="12" name="Bestandsveränderungen fertige Erzeugnisse"/>
   </account>
-  <account type="12" name="">
+  <account type="12" name="03. Andere aktivierte Eigenleistungen">
    <account type="12" name="Andere aktivierte Eigenleistungen"/>
   </account>
-  <account type="12" name="">
+  <account type="12" name="04. Sonstige betriebliche Erträge">
    <account type="12" name="Abgänge Finanzanlagen"/>
    <account type="12" name="Anlagenabgänge Finanzanlagen 100 %/50 % steuerfrei"/>
    <account type="12" name="Anlagenabgänge Sachanlagen"/>
@@ -167,7 +167,7 @@
    <account type="12" name="Verrechnete sonstige Sachbezüge ohne Umsatzsteuer"/>
    <account type="12" name="Versicherungsentschädigungen"/>
   </account>
-  <account type="13" name="">
+  <account type="13" name="05. Materialaufwand">
    <account type="13" name="a) Aufwendungen für Roh-, Hilfs- und Betriebsstoffe und für bezogene Waren">
     <account type="13" name="01. Aufwendungen für Roh-, Hilfs- und Betriebsstoffe und für bezogene Waren">
      <account type="13" name="Aufwendungen für Roh-, Hilfs- und Betriebsstoffe und für bezogene Waren"/>
@@ -243,7 +243,7 @@
     </account>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="06. Personalaufwand">
    <account type="13" name="a) Löhne und Gehälter">
     <account type="13" name="Aushilfslöhne"/>
     <account type="13" name="Bedienungsgelder"/>
@@ -279,7 +279,7 @@
     <account type="13" name="Versorgungskassen"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="07. Abschreibungen">
    <account type="13" name="a) auf immaterielle Vermögensgegenstände des Anlagevermögens und Sachanlagen">
     <account type="13" name="Abschreibungen auf Aufwendungen für die Ingangsetzung und Erweiterung des Geschäftsbetriebs"/>
     <account type="13" name="Abschreibungen auf Aufwendungen für die Währungsumstellung auf den Euro"/>
@@ -315,7 +315,7 @@
     </account>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="08. sonstige betriebliche Aufwendungen">
    <account type="13" name="Einstellung in die Einzelwertberichtigung zu Forderungen"/>
    <account type="13" name="Einstellungen in Sonderposten mit Rücklageanteil (Ansparabschreibungen)"/>
    <account type="13" name="Einstellungen in Sonderposten mit Rücklageanteil (Existenzgründerrücklage)"/>
@@ -538,7 +538,7 @@
     <account type="13" name="Verwaltungskosten"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="09. Erträge aus Beteiligungen">
    <account type="12" name="- davon aus verbundenen Unternehmen">
     <account type="12" name="Erträge aus Beteiligungen an Finanzverbundenen Unternehmen"/>
     <account type="12" name="Laufende Erträge aus Anteilen an Kapitalgesellschaften (verbundene Unternehmen) 100 % / 50 % steuerfrei"/>
@@ -549,7 +549,7 @@
     <account type="12" name="Laufende Erträge aus Anteilen an Kapitalgesellschaften (Beteiligung) 100 %/50 % steuerfrei"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="10. Erträge aus anderen Wertpapieren und Ausleihungen des Finanzanlagevermögens">
    <account type="12" name="- davon aus verbundenen Unternehmen">
     <account type="12" name="Erträge aus anderen Wertpapieren und Ausleihungen des Finanzanlagevermögens aus Finanzverbundenen Unternehmen"/>
     <account type="12" name="Laufende Erträge aus Anteilen Wertpapiean Kapitalgesellschaften (verbundene Unternehmen) 100 %/50 % steuerfrei"/>
@@ -558,7 +558,7 @@
    <account type="12" name="Laufende Erträge aus Anteilen Wertpapiere an Kapitalgesellschaften (verbundene Unternehmen) 100 %/50 % steuerfrei"/>
    <account type="12" name="Laufende Erträge aus Anteilen an Kapitalgesellschaften (Finanzanlagevermögen) 100 %/50 % steuerfrei"/>
   </account>
-  <account type="12" name="">
+  <account type="12" name="11. sonstige Zinsen und ähnliche Erträge">
    <account type="12" name="- davon aus verbundenen Unternehmen">
     <account type="12" name="Diskonterträge aus verbundenen Unternehmen"/>
     <account type="12" name="Laufende Erträge aus Anteilen an Kapitalgesellschaften (verbundene Unternehmen) 100 % / 50% steuerfrei"/>
@@ -580,7 +580,7 @@
     <account type="12" name="Zinsähnliche Erträge"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="12. Abschreibungen auf Finanzanlagen und auf Wertpapiere des Umlaufvermögens">
    <account type="13" name="Abschreibungen auf Finanzanlagen">
     <account type="13" name="Abschreibungen auf Finanzanlagen 100% / 50% nicht abzugsfähig"/>
     <account type="13" name="Abschreibungen auf Finanzanlagen auf Grund steuerlicher Sondervorschriften 100% / 50% nicht abzugsfähig"/>
@@ -591,7 +591,7 @@
     <account type="13" name="Vorwegnahme künfiger Wertschwankungen bei Wertpapieren des Umlaufvermögens"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="13. Zinsen und ähnliche Aufwendungen">
    <account type="13" name="- davon an verbundene Unternehmen">
     <account type="13" name="Diskontaufwendungen an verbundene Unternehmen"/>
     <account type="13" name="Zinsaufwendungen für kurzfristige Verbindlichkeiten an verbundene Unternehmen"/>
@@ -627,21 +627,21 @@
    <account type="13" name="Zinsen und ähnliche Aufwendungen 100 %/50 % nicht abzugsfähig"/>
    <account type="13" name="Zinsähnliche Aufwendungen"/>
   </account>
-  <account type="12" name=""/>
-  <account type="12" name="">
+  <account type="12" name="14. Ergebnis der gewöhnlichen Geschäftstätigkeit"/>
+  <account type="12" name="15. außerordentliche Erträge">
    <account type="12" name="Außerordentliche Erträge">
     <account type="12" name="Außerordentliche Erträge finanzwirksam"/>
     <account type="12" name="Außerordentliche Erträge nicht finanzwirksam"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="16. außerordentliche Aufwendungen">
    <account type="13" name="Außerordentliche Aufwendungen">
     <account type="13" name="Außerordentliche Aufwendungen finanzwirksam"/>
     <account type="13" name="Außerordentliche Aufwendungen nicht finanzwirksam"/>
    </account>
   </account>
-  <account type="12" name=""/>
-  <account type="13" name="">
+  <account type="12" name="17. außerordentliches Ergebnis"/>
+  <account type="13" name="18. Steuern vom Einkommen und vom Ertrag">
    <account type="13" name="Anrechenbarer Solidaritätszuschlag auf Kapitelertragsteuer 20%"/>
    <account type="13" name="Anrechenbarer Solidaritätszuschlag auf Zinsabschlagsteuer"/>
    <account type="12" name="Erträge aus der Auflösung von Rückstellungen für Steuern vom Einkommen und Ertrag"/>
@@ -660,7 +660,7 @@
    <account type="13" name="Steuernachzahlungen Vorjahre für Steuern vom Einkommen und Ertrag"/>
    <account type="13" name="Zinsabschlagsteuer"/>
   </account>
-  <account type="13" name="">
+  <account type="13" name="19. sonstige Steuern">
    <account type="13" name="Sonstige Steuern">
     <account type="13" name="Erträge aus der Auflösung von Rückstellungen für sonstige Steuern"/>
     <account type="13" name="Grundsteuer">
@@ -673,8 +673,8 @@
     <account type="13" name="Ökosteuer"/>
    </account>
   </account>
-  <account type="16" name=""/>
-  <account type="16" name="">
+  <account type="16" name="20. Jahresüberschuß/Jahresfehlbetrag"/>
+  <account type="16" name="21. Veränderungen Vorträge und Rücklagen">
    <account type="16" name="01. Gewinn-/Verlustvortrag nach Verwendung">
     <account type="16" name="Entnahmen aus der Kapitalrücklage"/>
     <account type="16" name="Gewinnvortrag 0% Vorbelastung (EK02)"/>
@@ -701,8 +701,8 @@
     <account type="16" name="Vortrag auf neue Rechnung (GuV)"/>
    </account>
   </account>
-  <account type="9" name=""/>
-  <account type="9" name="">
+  <account type="9" name="22. Konten zur statistischen Auswertung und internen Verrechnung"/>
+  <account type="9" name="Aktiva">
    <account type="9" name="A. Anlagevermögen">
     <account type="9" name="I. Ausstehende Einlagen">
      <account type="9" name="a) Kapitalgesellschaft">
@@ -1042,14 +1042,14 @@
     </account>
    </account>
   </account>
-  <account type="16" name="">
+  <account type="16" name="Anfangsbestand">
    <account type="16" name="Saldenvorträge Debitoren"/>
    <account type="16" name="Saldenvorträge Kreditoren"/>
    <account type="16" name="Saldenvorträge Sachkonten">
      <flag name="OpeningBalanceAccount"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Passiva">
    <account type="10" name="A. Eigenkapital">
     <account type="10" name="a) Personengesellschaft">
      <account type="10" name="I. Kapital / Vollhafter / Einzelunternehmer">
@@ -1255,7 +1255,7 @@
      </account>
     </account>
     <account type="10" name="07. Verbindlichkeiten gegenüber Unternehmen, mit denen ein Beteiligungsverhältnis besteht">
-     <account type="10" name="Verbindl. gg.UN mit Beteiligungsverh.">
+     <account type="10" name="Verbindl. gg. UN mit Beteiligungsverh.">
       <account type="10" name="Verbindl. gg. UN mit Beteiligg.verh. 1-5 J"/>
       <account type="10" name="Verbindl. gg. UN mit Beteiligg.verh. b. 1 J"/>
       <account type="10" name="Verbindl. gg. UN mit Beteiligg.verh. g. 5 J"/>

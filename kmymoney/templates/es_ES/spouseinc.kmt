@@ -14,7 +14,7 @@
  <longdesc>Deseará seleccionar este juego de cuentas si su cónyuge trabaja
    (sueldo (cónyuge), impuestos (cónyuge)).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Gastos">
    <account type="13" name="Impuestos (Cónyuge)">
     <account type="13" name="IRPF"/>
     <account type="13" name="Municipales"/>
@@ -23,7 +23,7 @@
     <account type="13" name="Seguridad Social"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Ingresos">
    <account type="12" name="Sueldo (Cónyuge)"/>
   </account>
  </accounts>

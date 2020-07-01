@@ -13,7 +13,7 @@
  <shortdesc>Compte de placements pour retraite du (de la) conjoint(e) et autres comptes associés.</shortdesc>
  <longdesc>Sélectionnez ce groupe si vous faites le suivi d'un compte de placements (actions, obligations, fonds communs et fonds d'indices boursiers) pour la retraite de votre conjoint(e).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Actif">
    <account type="9" name="Placements">
     <account type="9" name="Retraite - Conjoint(e)">
      <account type="9" name="Actions"/>

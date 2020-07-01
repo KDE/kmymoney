@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hr/acctchrt_homeloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Hipotekarni kredit</title>
+ <shortdesc>Kontni plan za hipotekarni kredit</shortdesc>
+ <longdesc>Kontni plan za knjiženje i praćenje hipotekarnog kredita.</longdesc>
+ <accounts>
+  <account type="10" name="Obveze">
+   <account type="10" name="Krediti">
+    <account type="10" name="Hipotekarni kredit"/>
+   </account>
+  </account>
+  <account type="13" name="Rashod">
+   <account type="13" name="Kamate">
+    <account type="13" name="Hipotekarne kamate"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

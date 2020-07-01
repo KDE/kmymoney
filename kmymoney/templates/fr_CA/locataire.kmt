@@ -13,7 +13,7 @@
  <shortdesc>Frais associés à la location d'une résidence ou d'un logis.</shortdesc>
  <longdesc>Sélectionnez ce groupe de compte si vous louez une résidence ou un logis (Loyer, assurances, ...).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Dépenses">
    <account type="13" name="Assurances">
     <account type="13" name="Locataire"/>
    </account>

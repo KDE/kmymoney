@@ -13,12 +13,12 @@
  <shortdesc>Konto oppsett for Huslån - Pantegjeld</shortdesc>
  <longdesc>Du vil nok velge dette oppsettet dersom du har et huslån (pantegjeld, rente).</longdesc>
  <accounts>
-  <account type="10" name="">
+  <account type="10" name="Gjeld">
    <account type="10" name="Lån">
     <account type="10" name="Pantegjeld"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Utgifter">
    <account type="13" name="Renter">
     <account type="13" name="Pantegjeld Rente"/>
    </account>

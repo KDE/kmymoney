@@ -13,13 +13,13 @@
  <shortdesc>Minimāla ienākumu un izdevumu uzskaite</shortdesc>
  <longdesc>Izmantojiet šos kontus, lai veiktu vienkāršu ienākumu un izdevumu uzskaiti. Vēlāk jūs varat pievienot citus kontus, lai veiktu detalizētāku uzskaiti.</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Aktīvi">
    <account type="1" name="Bankas konts"/>
   </account>
-  <account type="16" name="">
+  <account type="16" name="Bilance">
    <account type="16" name="Sākuma bilance"/>
   </account>
-  <account type="12" name=""/>
-  <account type="13" name=""/>
+  <account type="12" name="Ienākumi"/>
+  <account type="13" name="Izdevumi"/>
  </accounts>
 </kmymoney-account-template>

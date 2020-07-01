@@ -13,12 +13,12 @@
  <shortdesc>Conti per il mutuo dell'auto e relativi interessi</shortdesc>
  <longdesc>Selezionare questo insieme di conti se si possiede un mutuo per l'automobile (mutuo automobile, interessi sul mutuo).</longdesc>
  <accounts>
-  <account type="10" name="">
+  <account type="10" name="Passività">
    <account type="10" name="Mutui">
     <account type="10" name="Mutuo automobile"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Uscite">
    <account type="13" name="Interessi">
     <account type="13" name="Interessi mutuo automobile"/>
    </account>

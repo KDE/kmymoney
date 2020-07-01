@@ -13,7 +13,7 @@
  <shortdesc>Brokerage account with related investment accounts (stock, bond, mutual fund, index fund, interest, dividend)</shortdesc>
  <longdesc>You would want to select this set of accounts if you have investments (stock, bond, mutual fund, index fund, interest, dividend).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Assets">
    <account type="9" name="Investments">
     <account type="1" name="Brokerage Account">
      <account type="9" name="Bond"/>
@@ -23,10 +23,10 @@
     </account>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Expenses">
    <account type="13" name="Commissions"/>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Income">
    <account type="12" name="Dividend Income"/>
    <account type="12" name="Interest Income">
     <account type="12" name="Bond Interest"/>

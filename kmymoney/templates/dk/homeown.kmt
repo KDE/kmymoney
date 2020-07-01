@@ -13,7 +13,7 @@
  <shortdesc>Udgifter i forbindelse med at eje en bolig</shortdesc>
  <longdesc>Du vil have nytte af disse konti, hvis du ejer en bolig. Konti til at holde øje med udgifter til boligen er medtaget (forsikring, skatter, vedligehold)</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Udgifter">
    <account type="13" name="Forsikring">
     <account type="13" name="Husforsikring"/>
    </account>

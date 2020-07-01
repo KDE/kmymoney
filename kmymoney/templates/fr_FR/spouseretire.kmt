@@ -11,9 +11,9 @@
 <kmymoney-account-template>
  <title>Comptes d'épargne retraite du conjoint</title>
  <shortdesc>Compte d'épargne retraite avec ses sous-comptes d'investissements relatifs du conjoint</shortdesc>
- <longdesc>Vous devriez sélectionner cet ensemble de comptes si conjoint a des comptes d'épargne retraite (actions, obligations, fonds communs, fonds d'indices, intérêts, dividendes).</longdesc>
+ <longdesc>Vous devriez sélectionner cet ensemble de comptes si votre conjoint a des comptes d'épargne retraite (actions, obligations, fonds communs, fonds d'indices, intérêts, dividendes).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Actif">
    <account type="9" name="Investissements">
     <account type="1" name="Retraite du conjoint">
      <account type="15" name="Actions"/>

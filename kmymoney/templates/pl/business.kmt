@@ -13,7 +13,7 @@
  <shortdesc>Bilans kont potrzebnych do działalności firmy.</shortdesc>
  <longdesc>Użytkownicy prowadzący interes wybiorą ten zestaw zamiast innych. Obejmuje on wszystkie konta niezbędne do prowadzenia firmy, w tym wierzytelności, zobowiązania, przychody i rozchody.</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Aktywa">
    <account type="9" name="Aktywa bieżące">
     <account type="3" name="Kasa podręczna"/>
     <account type="1" name="Oszczędności"/>
@@ -21,21 +21,21 @@
    </account>
    <account type="9" name="Należności"/>
   </account>
-  <account type="16" name="">
+  <account type="16" name="Kapitał własny">
    <account type="16" name="Bilanse otwarcia"/>
    <account type="16" name="Zyski zatrzymane"/>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Pasywa">
    <account type="4" name="Karta kredytowa"/>
    <account type="10" name="Zobowiązania"/>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Przychód">
    <account type="12" name="Przychód inny"/>
    <account type="12" name="Przychód z odsetek"/>
    <account type="12" name="Sprzedaż"/>
    <account type="12" name="Wydatki refundowane"/>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Wydatki">
    <account type="13" name="Amortyzacja"/>
    <account type="13" name="Czynsz"/>
    <account type="13" name="Datki charytatywne"/>

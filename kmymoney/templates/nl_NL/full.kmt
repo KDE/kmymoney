@@ -13,7 +13,7 @@
  <shortdesc>Volledig overzicht van alle rekeningen.</shortdesc>
  <longdesc></longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Activa">
    <account type="9" name="Huidige Activa">
     <account type="1" name="Deposito"/>
     <account type="1" name="Geldmarkt"/>
@@ -48,10 +48,10 @@
     <account type="9" name="Wagenpark"/>
    </account>
   </account>
-  <account type="16" name="">
+  <account type="16" name="Eigen Vermogen">
    <account type="16" name="Openingsbalans"/>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Inkomen">
    <account type="12" name="Bonus"/>
    <account type="12" name="Dividenduitkering"/>
    <account type="12" name="Ontvangen Giften"/>
@@ -67,7 +67,7 @@
    <account type="12" name="Salaris"/>
    <account type="12" name="Salaris (Echtgenoot/Partner)"/>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Onkosten">
    <account type="13" name="Abonnementen"/>
    <account type="13" name="Afschrijving Wagenpark">
     <account type="13" name="Brandstof"/>
@@ -138,7 +138,7 @@
    <account type="13" name="Was/Stomerij"/>
    <account type="13" name="Zorgverzekeringskosten"/>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Passiva">
    <account type="4" name="Creditkaart"/>
    <account type="4" name="Kredietlijn"/>
    <account type="10" name="Leningen">

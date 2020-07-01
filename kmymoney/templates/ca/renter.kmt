@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ca/acctchrt_renter.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Despeses d'inquilí</title>
+ <shortdesc>Despeses associades a llogar una casa</shortdesc>
+ <longdesc>Voldreu escollir aquest joc de comptes si llogueu una casa o un apartament (lloguer, assegurança d'inquilí).</longdesc>
+ <accounts>
+  <account type="13" name="Despeses">
+   <account type="13" name="Assegurances">
+    <account type="13" name="Assegurança de l'inquilí"/>
+   </account>
+   <account type="13" name="Lloguer"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

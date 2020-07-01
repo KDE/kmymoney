@@ -13,12 +13,12 @@
  <shortdesc>Contas para controlar outros empréstimos e juros associados</shortdesc>
  <longdesc>Deverá selecionar este conjunto de contas se tiver empréstimo em geral (outro empréstimo, juros do outro empréstimo).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Despesas">
    <account type="13" name="Juro">
     <account type="13" name="Outro Juro"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Passivo">
    <account type="10" name="Empréstimos">
     <account type="10" name="Outros Empréstimo"/>
    </account>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hu/acctchrt_otherloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Más hitelek</title>
+ <shortdesc>Számlák más hitelek nyomonkövetésére</shortdesc>
+ <longdesc>Akkor érdemes ezt választani, ha ön vesz fel más, kisebb hiteleket.</longdesc>
+ <accounts>
+  <account type="13" name="Költségek">
+   <account type="13" name="Kamat">
+    <account type="13" name="Más kamat"/>
+   </account>
+  </account>
+  <account type="10" name="Kötelezettségek">
+   <account type="10" name="Hitelek">
+    <account type="10" name="Más hitel"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

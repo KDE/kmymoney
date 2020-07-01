@@ -13,10 +13,10 @@
  <shortdesc>En enkel kontoplan</shortdesc>
  <longdesc>Denna kontoplan passar för flesta användare. Den innehåller de vanligaste kontona (brukskonto, sparkonto, kontanter, kreditkort, inkomster, utgifter).</longdesc>
  <accounts>
-  <account type="16" name="">
+  <account type="16" name="Aktier">
    <account type="16" name="Startvärde"/>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Inkomster">
    <account type="12" name="Andra inkomster"/>
    <account type="12" name="Bonus"/>
    <account type="12" name="Lön"/>
@@ -27,17 +27,17 @@
     <account type="12" name="Sparräntor"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Skulder">
    <account type="4" name="Kreditkort"/>
   </account>
-  <account type="9" name="">
+  <account type="9" name="Tillgångar">
    <account type="9" name="Likvida medel">
     <account type="1" name="Brukskonto"/>
     <account type="3" name="Kontanter"/>
     <account type="1" name="Sparkonto"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Utgifter">
    <account type="13" name="Allmänna kommunikationsmedel"/>
    <account type="13" name="Bankavgifter"/>
    <account type="13" name="Bil">

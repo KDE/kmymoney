@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/fr_BE/acctchrt_currency.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Compte de commerce de devises/monnaies</title>
+ <shortdesc>Compte pour le commerce et la conversion d'une monnaie étrangère</shortdesc>
+ <longdesc>Vous devriez sélectionner cet ensemble de comptes si vous convertissez des monnaies étrangères.
+
+  Note: compte actuellement en DEM; editer le compte pour changer la monnaie.</longdesc>
+ <accounts>
+  <account type="9" name="Actif">
+   <account type="9" name="Investissements">
+    <account type="11" name="Marché monétaire"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

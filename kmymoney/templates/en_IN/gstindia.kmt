@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/en_IN/acctchrt_gstindia.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>GST Indian Business</title>
+ <shortdesc>Business accounts for India with GST.</shortdesc>
+ <longdesc>This is the base module for setting up accounts for an Indian Business with Goods and Service Tax (GST). Mostly uses Indian terminology to ease the filing of Income tax returns, MCA returns and GST returns.</longdesc>
+ <accounts>
+  <account type="9" name="Assets">
+   <account type="9" name="Current Assets">
+    <account type="9" name="Advance Professional Tax"/>
+    <account type="3" name="Cash"/>
+    <account type="1" name="Current Account"/>
+    <account type="1" name="Savings Account"/>
+   </account>
+   <account type="9" name="Fixed Assets">
+    <account type="9" name="Depreciation"/>
+    <account type="9" name="Plant Machine etc"/>
+   </account>
+   <account type="9" name="Inventories"/>
+   <account type="9" name="Long Term Loans and Advances"/>
+   <account type="9" name="Other Assets"/>
+   <account type="9" name="Purchase">
+    <account type="9" name="GST">
+     <account type="9" name="CGST"/>
+     <account type="9" name="IGST"/>
+     <account type="9" name="SGST"/>
+    </account>
+    <account type="9" name="NonGST">
+     <account type="9" name="CGST"/>
+     <account type="9" name="IGST"/>
+     <account type="9" name="SGST"/>
+    </account>
+   </account>
+   <account type="9" name="Short Term Loans and Advances"/>
+   <account type="9" name="Tax Credit"/>
+   <account type="9" name="Trade Receivables">
+    <account type="9" name="GST"/>
+    <account type="9" name="NonGST"/>
+   </account>
+  </account>
+  <account type="16" name="Equity">
+   <account type="16" name="Opening Balances"/>
+   <account type="16" name="Reserves and Surplus"/>
+   <account type="16" name="Share Capital"/>
+  </account>
+  <account type="13" name="Expenses">
+   <account type="13" name="Adjustment"/>
+   <account type="13" name="Bank Service Charge"/>
+   <account type="13" name="Commission"/>
+   <account type="13" name="Depreciation"/>
+   <account type="13" name="Director Remuneration"/>
+   <account type="13" name="Donation"/>
+   <account type="13" name="GST Adjustment"/>
+   <account type="13" name="Gifts"/>
+   <account type="13" name="Maintenance"/>
+   <account type="13" name="Medical Expenses"/>
+   <account type="13" name="Miscellaneous"/>
+   <account type="13" name="Purchase">
+    <account type="13" name="GST"/>
+    <account type="13" name="NonGST"/>
+    <account type="13" name="Roundoff"/>
+   </account>
+   <account type="13" name="Salary"/>
+   <account type="13" name="Taxes">
+    <account type="13" name="Income Tax"/>
+    <account type="13" name="Other Tax"/>
+    <account type="13" name="Professional Tax"/>
+    <account type="13" name="TDS"/>
+   </account>
+   <account type="13" name="Travel"/>
+   <account type="13" name="Utilities">
+    <account type="13" name="Electric"/>
+    <account type="13" name="Gas"/>
+    <account type="13" name="Phone"/>
+    <account type="13" name="Water"/>
+   </account>
+  </account>
+  <account type="12" name="Income">
+   <account type="12" name="Interest Income">
+    <account type="12" name="Bank Interest"/>
+    <account type="12" name="FD Interest"/>
+    <account type="12" name="Other Interest"/>
+   </account>
+   <account type="12" name="Other Income"/>
+   <account type="12" name="Sales">
+    <account type="12" name="GST"/>
+    <account type="12" name="NonGST"/>
+    <account type="12" name="Roundoff"/>
+   </account>
+  </account>
+  <account type="10" name="Liabilities">
+   <account type="10" name="Audit Fees"/>
+   <account type="10" name="Commission"/>
+   <account type="10" name="Director Remuneration"/>
+   <account type="10" name="Income Tax"/>
+   <account type="10" name="Other Liabilities"/>
+   <account type="10" name="Sales">
+    <account type="10" name="GST">
+     <account type="10" name="CGST"/>
+     <account type="10" name="IGST"/>
+     <account type="10" name="SGST"/>
+    </account>
+    <account type="10" name="NonGST">
+     <account type="10" name="CGST"/>
+     <account type="10" name="IGST"/>
+     <account type="10" name="SGST"/>
+    </account>
+   </account>
+   <account type="10" name="TDS"/>
+   <account type="10" name="Trade Payables">
+    <account type="10" name="GST"/>
+    <account type="10" name="NonGST"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

@@ -13,7 +13,7 @@
  <shortdesc>Un compte pour le suivi de vos frais pour un enfant à charge.</shortdesc>
  <longdesc>Sélectionnez ce groupe si vous avez un jeune enfant .</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Dépenses">
    <account type="13" name="Garderie"/>
   </account>
  </accounts>

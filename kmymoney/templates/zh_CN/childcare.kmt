@@ -13,7 +13,7 @@
  <shortdesc>用于跟踪育儿开销的科目</shortdesc>
  <longdesc>如果您有育儿开销，您可能希望选择这套科目。</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="支出">
    <account type="13" name="育儿"/>
   </account>
  </accounts>

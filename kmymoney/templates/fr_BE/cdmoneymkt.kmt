@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/fr_BE/acctchrt_cdmoneymkt.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>CD et marché monétaire</title>
+ <shortdesc>Comptes pour CD et investissements sur marché monétaire</shortdesc>
+ <longdesc>Vous devriez sélectionner cet ensemble de comptes si vous avez des CDs ou comptes de marché monétaire(CD, intérêt CD, marché monétaire, intérêt du marché monétaire).</longdesc>
+ <accounts>
+  <account type="9" name="Actif">
+   <account type="9" name="Actifs actuels">
+    <account type="1" name="CD bancaire"/>
+    <account type="1" name="Marché monétaire"/>
+   </account>
+  </account>
+  <account type="12" name="Revenus">
+   <account type="12" name="Revenu d'intérêts">
+    <account type="12" name="Intérêt CD"/>
+    <account type="12" name="Intérêt du marché monétaire"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

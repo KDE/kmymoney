@@ -13,7 +13,7 @@
  <shortdesc>Contas de aposentadoria com subcontas de investimentos relacionados</shortdesc>
  <longdesc>Deverá selecionar este conjunto de contas caso tenha contas de aposentadoria (ações, obrigações, fundos de investimento, fundos de índices).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Ativos">
    <account type="9" name="Investimentos">
     <account type="1" name="Aposentadoria">
      <account type="15" name="Ações"/>

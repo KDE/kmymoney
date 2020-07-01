@@ -13,12 +13,12 @@
  <shortdesc>Emprunt pour études et frais d'intérêts associés.</shortdesc>
  <longdesc>Selectionnez ce groupe si vous devez gérer un emprunt pour études.</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Dépenses">
    <account type="13" name="Intérêts">
     <account type="13" name="Études"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Passif">
    <account type="10" name="Emprunts">
     <account type="10" name="Études"/>
    </account>

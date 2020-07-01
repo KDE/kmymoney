@@ -13,7 +13,7 @@
  <shortdesc>Sonstige Sachanlagen</shortdesc>
  <longdesc>Sonstige Sachanlagen</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Aktiva">
    <account type="9" name="Sachanlagen">
     <account type="9" name="Sonstige"/>
    </account>

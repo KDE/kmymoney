@@ -13,12 +13,12 @@
  <shortdesc>Účty pre zaznamenávanie ostatných pôžičiek</shortdesc>
  <longdesc>Zvoľte si túto sadu účtov, ak máte aj inú než hypotekárnu pôžičku.</longdesc>
  <accounts>
-  <account type="10" name="">
+  <account type="10" name="Pasíva">
    <account type="10" name="Dlhy">
     <account type="10" name="Iné pôžičky"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Výdaje">
    <account type="13" name="Úrok">
     <account type="13" name="Ostatné úroky"/>
    </account>

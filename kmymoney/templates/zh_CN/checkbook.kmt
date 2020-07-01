@@ -13,12 +13,12 @@
  <shortdesc>使用 GnuCash 的最基本的科目。</shortdesc>
  <longdesc>如果您只是想平衡您的账本那么请使用这套科目。以后如果需要，您可以更加详细的跟踪收入和支出。</longdesc>
  <accounts>
-  <account type="16" name="">
+  <account type="16" name="所有者权益">
    <account type="16" name="期初余额"/>
   </account>
-  <account type="13" name=""/>
-  <account type="12" name=""/>
-  <account type="9" name="">
+  <account type="13" name="支出"/>
+  <account type="12" name="收入"/>
+  <account type="9" name="资产">
    <account type="9" name="流动资产">
     <account type="1" name="活期存款"/>
    </account>

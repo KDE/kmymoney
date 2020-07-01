@@ -13,12 +13,12 @@
  <shortdesc>Contas para empréstimo para automóvel e juros associados</shortdesc>
  <longdesc>Deverá selecionar este conjunto de contas caso tenha um empréstimo para automóvel (empréstimo para automóvel, juro do empréstimo).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Despesas">
    <account type="13" name="Juro">
     <account type="13" name="Juro Empréstimo Automóvel"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Passivo">
    <account type="10" name="Empréstimos">
     <account type="10" name="Empréstimo Automóvel"/>
    </account>

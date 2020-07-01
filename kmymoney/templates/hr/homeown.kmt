@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hr/acctchrt_homeown.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Kućevlasnik</title>
+ <shortdesc>Razni troškovi vezani uz vlasništvo kuće</shortdesc>
+ <longdesc>Kontni plan za knjiženje i praćenje troškova kućevlasnika. Ovaj plan pruža osnovna konta za troškove kuće (osiguranje, porez, kućni popravci).</longdesc>
+ <accounts>
+  <account type="13" name="Rashod">
+   <account type="13" name="Kućni popravci"/>
+   <account type="13" name="Osiguranje">
+    <account type="13" name="Osiguranje stambenog objekta"/>
+   </account>
+   <account type="13" name="Porez">
+    <account type="13" name="Porez na nekretnine"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

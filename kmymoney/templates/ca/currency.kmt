@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ca/acctchrt_currency.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Compte de conversió monetària</title>
+ <shortdesc>Compte per convertir i comerciar amb moneda estrangera</shortdesc>
+ <longdesc>Hauríeu de seleccionar aquest joc de comptes si convertiu monedes estrangeres.
+  
+  Nota: El compte es troba en USD; editi el compte per modificar la moneda</longdesc>
+ <accounts>
+  <account type="9" name="Actiu">
+   <account type="9" name="Inversions">
+    <account type="11" name="Comerç de monedes estrangeres"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

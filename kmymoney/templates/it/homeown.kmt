@@ -13,7 +13,7 @@
  <shortdesc>Uscite associate al possesso di una casa</shortdesc>
  <longdesc>Selezionare questo insieme di conti se si possiede una casa. L'insieme fornisce un gruppo di conti utili a tenere traccia delle spese di casa (assicurazione, imposte, riparazioni).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Uscite">
    <account type="13" name="Assicurazione">
     <account type="13" name="Assicurazione casa"/>
    </account>

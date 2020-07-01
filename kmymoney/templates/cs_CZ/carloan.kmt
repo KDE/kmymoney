@@ -13,12 +13,12 @@
  <shortdesc>Účty pro úvěr na auto</shortdesc>
  <longdesc>Zvolte si tuto sadu účtů, pokud máte půjčku na auto.</longdesc>
  <accounts>
-  <account type="10" name="">
+  <account type="10" name="Pasiva">
    <account type="10" name="Dluhy">
     <account type="10" name="Úvěr na dopravní prostředek"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Výdaje">
    <account type="13" name="Úrok">
     <account type="13" name="Úrok z úvěru na dopravní prostředek"/>
    </account>

@@ -13,7 +13,7 @@
  <shortdesc>배우자의 투자 계정과 관련딘 퇴직 계정</shortdesc>
  <longdesc>배우자명의 투자를 한다면 이 계정을 선택합니다.(주식, 채권, 뮤추얼 펀드, 인덱스 펀드, 이자, 배당).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="자산">
    <account type="9" name="투자">
     <account type="1" name="배우자 퇴직">
      <account type="15" name="마켓 인덱스"/>

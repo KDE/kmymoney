@@ -13,13 +13,13 @@
  <shortdesc>CD 및 머니 마켓 투자 계정</shortdesc>
  <longdesc>CD 및 머니 마켓 투자 계정이 있다면 이 계쩡을 선택합니다.(CD, CD 이자, 머니 마켓, 머니 마켓 이자).</longdesc>
  <accounts>
-  <account type="12" name="">
+  <account type="12" name="소득">
    <account type="12" name="이자 소득">
     <account type="12" name="CD 이자"/>
     <account type="12" name="머니 마켓 이자"/>
    </account>
   </account>
-  <account type="9" name="">
+  <account type="9" name="자산">
    <account type="9" name="현재 자산">
     <account type="1" name="머니 마켓"/>
     <account type="1" name="은행 CD"/>

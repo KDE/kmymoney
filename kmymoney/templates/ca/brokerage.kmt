@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ca/acctchrt_brokerage.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Compte d'Inversió</title>
+ <shortdesc>Compte de corredor de borsa amb els comptes d'inversions associades</shortdesc>
+ <longdesc>Hauríeu d'escollir aquest joc de comptes si teniu inversions (accions, bons, fons d'inversió, fons indexats, interessos, dividents).</longdesc>
+ <accounts>
+  <account type="9" name="Actiu">
+   <account type="9" name="Inversions">
+    <account type="1" name="Compte d'inversió">
+     <account type="9" name="Accions"/>
+     <account type="9" name="Bons"/>
+     <account type="9" name="Fons d'inversió"/>
+     <account type="9" name="Fons d'índex"/>
+    </account>
+   </account>
+  </account>
+  <account type="13" name="Despeses">
+   <account type="13" name="Comissions"/>
+  </account>
+  <account type="12" name="Ingressos">
+   <account type="12" name="Ingressos per dividents"/>
+   <account type="12" name="Ingressos per interessos">
+    <account type="12" name="Interessos de bons"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

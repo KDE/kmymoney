@@ -13,12 +13,12 @@
  <shortdesc>Accounts for school loan and associated interest</shortdesc>
  <longdesc>You would want to select this set of accounts if you have an educational loan (education loan, education loan interest).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Expenses">
    <account type="13" name="Interest">
     <account type="13" name="Education Loan Interest"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Liabilities">
    <account type="10" name="Loans">
     <account type="10" name="Education Loan"/>
    </account>

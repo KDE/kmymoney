@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hu/acctchrt_brokerage.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Befektetési számlák</title>
+ <shortdesc>Brókerszámla a hozzá tartozó befektetési számlákkal (részvény, kötvény, befektetési alap, hozam, kamat, osztalék)</shortdesc>
+ <longdesc>Jelölje ki e számlahalmazt, ha foglalkozik befektetésekkel (részvény, kötvény, befektetési alap, hozam, kamat, osztalék)!</longdesc>
+ <accounts>
+  <account type="12" name="Bevétel">
+   <account type="12" name="Kamat">
+    <account type="12" name="Kötvény kamat"/>
+   </account>
+   <account type="12" name="Osztalék"/>
+  </account>
+  <account type="9" name="Eszközök">
+   <account type="9" name="Befektetések">
+    <account type="1" name="Brókerszámla">
+     <account type="9" name="Befektetési alap"/>
+     <account type="9" name="Kötvény"/>
+     <account type="9" name="Részvény"/>
+    </account>
+   </account>
+  </account>
+  <account type="13" name="Költségek">
+   <account type="13" name="Jutalék"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

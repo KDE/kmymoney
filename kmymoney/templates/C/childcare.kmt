@@ -13,7 +13,7 @@
  <shortdesc>An account for tracking childcare costs</shortdesc>
  <longdesc>You would want to select this set of accounts if you have childcare expenses.</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Expenses">
    <account type="13" name="Childcare"/>
   </account>
  </accounts>

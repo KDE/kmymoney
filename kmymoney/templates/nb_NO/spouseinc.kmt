@@ -13,7 +13,7 @@
  <shortdesc>Accounts for tracking spouse's income separately</shortdesc>
  <longdesc>You would want to select this set of accounts if you have a working spouse (salary (spouse), taxes (spouse)).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Expenses">
    <account type="13" name="Taxes (Spouse)">
     <account type="13" name="Federal"/>
     <account type="13" name="Medicare"/>
@@ -22,7 +22,7 @@
     <account type="13" name="State/Province"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Income">
    <account type="12" name="Salary (Spouse)"/>
   </account>
  </accounts>

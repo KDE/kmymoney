@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hu/acctchrt_checkbook.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Egyszerű folyószámla</title>
+ <shortdesc>Minimális számlakészlet GnuCash használatához.</shortdesc>
+ <longdesc>Akkor érdemes ezt kiválasztani, ha csak a folyószámlája forgalmát kívánja ellenőrizni. Később elkezdheti a bevételei és költségei alaposabb nyomonkövetését, ha szükségét érzi.</longdesc>
+ <accounts>
+  <account type="12" name="Bevétel"/>
+  <account type="9" name="Eszközök">
+   <account type="9" name="Forgóeszközök">
+    <account type="1" name="Folyószámla"/>
+   </account>
+  </account>
+  <account type="13" name="Költségek"/>
+  <account type="16" name="Saját tőke">
+   <account type="16" name="Nyitóegyenlegek"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

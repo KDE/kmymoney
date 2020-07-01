@@ -13,7 +13,7 @@
  <shortdesc>Comptes pour la gestion de vos actifs fixes.importants.</shortdesc>
  <longdesc>Sélectionnez ce groupe de comptes si vous possédez des immobilisations ou actifs fixes importants tels que résidence, chalet, auto ou autres actifs.</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Actif">
    <account type="9" name="Actifs fixes">
     <account type="9" name="Autres biens immobilisés"/>
     <account type="9" name="Résidence"/>

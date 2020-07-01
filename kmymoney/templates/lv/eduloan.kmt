@@ -13,12 +13,12 @@
  <shortdesc>Konti studiju kredīta izdevumu uzskaitei</shortdesc>
  <longdesc>Izmantojiet šos kontus, lai uzskaitītu studiju kredīta izdevumus (studiju kredītu un kredīta procentus).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Izdevumi">
    <account type="13" name="Procenti">
     <account type="13" name="Studiju kredīta procenti"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Saistības">
    <account type="10" name="Kredīti">
     <account type="10" name="Studiju kredīts"/>
    </account>

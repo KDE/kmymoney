@@ -13,7 +13,7 @@
  <shortdesc>Sonstige Kredite</shortdesc>
  <longdesc>Weitere Kredite</longdesc>
  <accounts>
-  <account type="10" name="">
+  <account type="10" name="Fremdkapital">
    <account type="10" name="Kredite">
     <account type="10" name="Sonstige"/>
    </account>

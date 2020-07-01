@@ -13,7 +13,7 @@
  <shortdesc>Výdaje, ktoré sú spojené s vlastnením domu</shortdesc>
  <longdesc>Zvoľte si túto sadu účtov, ak vlastníte dom. Táto sada poskytuje skupinu účtov na sledovanie výdajov na dom (poistenie, dane, opravy domu).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Výdaje">
    <account type="13" name="Dane">
     <account type="13" name="Majetková daň"/>
    </account>

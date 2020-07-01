@@ -10,10 +10,10 @@
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
  <title>Revenus du conjoint</title>
- <shortdesc>Comptes pour le suivi du conjoint séparément</shortdesc>
+ <shortdesc>Comptes pour le suivi des revenus du conjoint séparément</shortdesc>
  <longdesc>Vous devriez sélectionner cet ensemble de comptes si votre conjoint travaille (son salaire, ses impôts).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Dépenses">
    <account type="13" name="Taxes (conjoint)">
     <account type="13" name="Autres taxes"/>
     <account type="13" name="Complémentaire maladie"/>
@@ -22,7 +22,7 @@
     <account type="13" name="État/Province"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Revenus">
    <account type="12" name="Salaire (conjoint)"/>
   </account>
  </accounts>

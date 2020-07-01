@@ -13,7 +13,7 @@
  <shortdesc>Dépenses associées avec la location d'un logement</shortdesc>
  <longdesc>Vous devriez sélectionner cet ensemble de comptes si vous louez une maison ou un appartement (location, assurance du locataire).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Dépenses">
    <account type="13" name="Assurances">
     <account type="13" name="Assurance locative"/>
    </account>

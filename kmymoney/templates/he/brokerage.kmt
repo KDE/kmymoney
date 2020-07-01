@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/he/acctchrt_brokerage.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>חשבונות השקעה</title>
+ <shortdesc>חשבון תיק השקעות עם חשבונות השקעה קשורים (מניות, איגרות חוב, קרן נאמנות, תעודות סל, ריבית, דיבידנד)</shortdesc>
+ <longdesc>בחרו בתרשים חשבונות זה לצורך ניהול ומעקב תיק השקעות שבבעלותכם: מניות, אגרות חוב,קרנות נאמנות, תעודות סל, ריבית ודיבידנד.</longdesc>
+ <accounts>
+  <account type="13" name="הוצאות">
+   <account type="13" name="עמלות">
+    <account type="13" name="דמי ניהול"/>
+   </account>
+  </account>
+  <account type="12" name="הכנסות">
+   <account type="12" name="הכנסות מדיבידנד"/>
+   <account type="12" name="הכנסות ריבית">
+    <account type="12" name="הכנסות ריבית אחרות"/>
+    <account type="12" name="ריבית יתרת זכות בבנק"/>
+    <account type="12" name="ריבית מאג&quot;ח"/>
+    <account type="12" name="ריבית מהלוואות שנתנו"/>
+    <account type="12" name="ריבית ממניות"/>
+    <account type="12" name="ריבית מתוכניות חיסכון"/>
+   </account>
+   <account type="12" name="מתנות שנתקבלו"/>
+  </account>
+  <account type="9" name="השקעות">
+   <account type="11" name="מטבע חוץ"/>
+   <account type="1" name="נירות ערך">
+    <account type="15" name="אגרות חוב"/>
+    <account type="15" name="מניות"/>
+    <account type="15" name="קרנות נאמנות"/>
+    <account type="15" name="תעודות סל"/>
+   </account>
+   <account type="1" name="קרן פנסיה">
+    <account type="15" name="אגרות חוב"/>
+    <account type="15" name="מניות"/>
+    <account type="15" name="קרנות נאמנות"/>
+    <account type="15" name="תעודות סל"/>
+   </account>
+   <account type="1" name="קרן פנסיה בן/בת זוג">
+    <account type="15" name="אגרות חוב"/>
+    <account type="15" name="מניות"/>
+    <account type="15" name="קרנות נאמנות"/>
+    <account type="15" name="תעודות סל"/>
+   </account>
+  </account>
+  <account type="9" name="נכסים"/>
+ </accounts>
+</kmymoney-account-template>

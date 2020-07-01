@@ -13,12 +13,12 @@
  <shortdesc>Konti i forbindelse med realkreditlån og tilhørende renter</shortdesc>
  <longdesc>Du vil have nytte af disse konti, hvis du har et realkreditlån.</longdesc>
  <accounts>
-  <account type="10" name="">
+  <account type="10" name="Passiver">
    <account type="10" name="Lån">
     <account type="10" name="Realkreditlån"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Udgifter">
    <account type="13" name="Renter">
     <account type="13" name="Realkreditrenter"/>
    </account>

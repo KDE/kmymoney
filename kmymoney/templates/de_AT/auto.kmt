@@ -13,12 +13,12 @@
  <shortdesc>Ausgaben von Autobesitzern</shortdesc>
  <longdesc>Diese Auswahl erstellt Konten, die Ausgaben für ein Auto repräsentieren.</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Aktiva">
    <account type="9" name="Sachanlagen">
     <account type="9" name="Auto"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Aufwendungen">
    <account type="13" name="Fahrtkosten">
     <account type="13" name="Auto">
      <account type="13" name="Abgaben"/>

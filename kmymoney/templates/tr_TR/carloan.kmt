@@ -13,12 +13,12 @@
  <shortdesc>Taşıt Kredisi ve faizine yönelik hesap planı</shortdesc>
  <longdesc>Taşıt kredisi kullandıysanız bu hesap planını seçin.</longdesc>
  <accounts>
-  <account type="10" name="">
+  <account type="10" name="Borçlar">
    <account type="10" name="Krediler">
     <account type="10" name="Taşıt Kredisi"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Gider">
    <account type="13" name="Faiz">
     <account type="13" name="Taşıt Kredisi Faizi"/>
    </account>

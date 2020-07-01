@@ -13,7 +13,7 @@
  <shortdesc>Penzijní účet partnera</shortdesc>
  <longdesc>Zvolte si tuto sadu účtů, pokud investujete na účet partnera (akcie, dluhopisy, podílové listy).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Aktiva">
    <account type="9" name="Investice">
     <account type="1" name="Partnerova penze">
      <account type="15" name="Akcie"/>

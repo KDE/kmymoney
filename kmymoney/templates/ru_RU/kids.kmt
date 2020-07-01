@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ru/acctchrt_kids.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Дети</title>
+ <shortdesc>Расходы на детей</shortdesc>
+ <longdesc>Счета для учёта расходов связанных с детьми.</longdesc>
+ <accounts>
+  <account type="12" name="Доходы">
+   <account type="12" name="Помощь">
+    <account type="12" name="Пособие на ребёнка"/>
+   </account>
+  </account>
+  <account type="13" name="Расходы">
+   <account type="13" name="Дети">
+    <account type="13" name="Детский сад"/>
+    <account type="13" name="Школа"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

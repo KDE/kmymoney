@@ -13,12 +13,12 @@
  <shortdesc>기타 대출 및 이와 관련된 이자를 위한 계정</shortdesc>
  <longdesc>집 대출 이상의 대출이 있다면 이 계정을 선택합니다.(기타 대출, 기타 대출 이자).</longdesc>
  <accounts>
-  <account type="10" name="">
+  <account type="10" name="부채">
    <account type="10" name="대출">
     <account type="10" name="기타 대출"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="지출">
    <account type="13" name="이자">
     <account type="13" name="기타 이자"/>
    </account>

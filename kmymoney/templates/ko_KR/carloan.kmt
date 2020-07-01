@@ -13,12 +13,12 @@
  <shortdesc>차 대출 및 이자와 과년된 계정</shortdesc>
  <longdesc>차 대출을 하였다면 이 계정을 선택합니다 (차 대출, 차 대출 이자).</longdesc>
  <accounts>
-  <account type="10" name="">
+  <account type="10" name="부채">
    <account type="10" name="대출">
     <account type="10" name="차량 대출"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="지출">
    <account type="13" name="이자">
     <account type="13" name="차량 대출 이자"/>
    </account>

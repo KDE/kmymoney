@@ -13,15 +13,15 @@
  <shortdesc>Konten für Studentinnen und Studenten</shortdesc>
  <longdesc>BAFöG, Studiengebühren</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Aufwendungen">
    <account type="13" name="Bildung">
     <account type="13" name="Studiengebühren"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Erträge">
    <account type="12" name="BAFöG"/>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Fremdkapital">
    <account type="10" name="Kredite">
     <account type="10" name="BAFöG"/>
    </account>

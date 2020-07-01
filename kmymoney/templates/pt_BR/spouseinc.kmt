@@ -13,7 +13,7 @@
  <shortdesc>Contas para registar separadamente as receitas do cônjuge</shortdesc>
  <longdesc>Deverá selecionar este conjunto de contas caso tenha um cônjuge que tenha emprego (salário, impostos).</longdesc>
  <accounts>
-  <account type="12" name="">
+  <account type="12" name="Receita">
    <account type="13" name="Impostos (Cônjuge)">
     <account type="13" name="IRF"/>
     <account type="13" name="Outros Impostos"/>

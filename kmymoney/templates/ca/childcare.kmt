@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ca/acctchrt_childcare.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Despeses de la llar d'infants</title>
+ <shortdesc>Compte per gestionar despeses de la llar d'infants</shortdesc>
+ <longdesc>Hauríeu de seleccionar aquest joc de comptes si teniu despeses de llar d'infants.</longdesc>
+ <accounts>
+  <account type="13" name="Despeses">
+   <account type="13" name="Llar d'infants"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

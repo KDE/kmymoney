@@ -13,7 +13,7 @@
  <shortdesc>关于拥有一套房屋的费用</shortdesc>
  <longdesc>如果您有一个房屋，您可能希望选择这套科目。这套科目提供了一套用于跟踪房屋费用(保险、税、房屋维修)的科目。</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="支出">
    <account type="13" name="保险">
     <account type="13" name="家居保险"/>
    </account>

@@ -13,12 +13,12 @@
  <shortdesc>Contas para empréstimo de habitação e juros associados</shortdesc>
  <longdesc>Deverá selecionar este conjunto de contas caso tenha contraido um empréstimo para habitação (emprétimo habitação, juro do empréstimo).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Despesas">
    <account type="13" name="Juros">
     <account type="13" name="Juros Empréstimo"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Passivo">
    <account type="10" name="Empréstimos">
     <account type="10" name="Empréstimo Habitação"/>
    </account>

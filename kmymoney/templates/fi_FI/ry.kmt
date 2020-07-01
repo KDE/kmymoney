@@ -15,23 +15,23 @@
     tilit. Ks. kirjanpitoasetuksen 3 § (tilit).
     Kirjanpitolaissa on määritelmät (luku 4).</longdesc>
  <accounts>
-  <account type="16" name="">
+  <account type="16" name="Oma pääoma">
    <account type="16" name="Avaussaldo"/>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Satunnaiset erät">
    <account type="13" name="Satunnaiset kulut"/>
    <account type="12" name="Satunnaiset tuotot"/>
   </account>
-  <account type="10" name=""/>
-  <account type="12" name="">
+  <account type="10" name="Siirtovelat"/>
+  <account type="12" name="Sijoitus- ja rahoitustoiminta">
    <account type="13" name="Kulut"/>
    <account type="12" name="Tuotot"/>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Varainhankinta">
    <account type="13" name="Kulut"/>
    <account type="12" name="Tuotot"/>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Varsinainen toiminta">
    <account type="13" name="Kulut">
     <account type="13" name="Henkilöstökulut"/>
     <account type="13" name="Muut kulut"/>
@@ -39,13 +39,13 @@
    </account>
    <account type="12" name="Tuotot"/>
   </account>
-  <account type="9" name="">
+  <account type="9" name="Vastaavaa">
    <account type="9" name="Pysyvät vastaavat"/>
    <account type="9" name="Vaihtuvat vastaavat">
     <account type="1" name="Pankkitili"/>
    </account>
   </account>
-  <account type="10" name=""/>
-  <account type="12" name=""/>
+  <account type="10" name="Vieras pääoma"/>
+  <account type="12" name="Yleisavustukset"/>
  </accounts>
 </kmymoney-account-template>

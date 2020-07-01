@@ -13,17 +13,17 @@
  <shortdesc>En samling grundlæggende konti</shortdesc>
  <longdesc>De fleste brugere kan have nytte af disse konti. Almindelige brugte konti er medtaget (check, lønkonto, kontant, kreditkort, indkomst og almindelige udgifter)</longdesc>
  <accounts>
-  <account type="16" name="">
+  <account type="16" name="Afstemning">
    <account type="16" name="Åbningssaldi"/>
   </account>
-  <account type="9" name="">
+  <account type="9" name="Aktiver">
    <account type="9" name="Aktuelle aktiver">
     <account type="1" name="Checkkonto"/>
     <account type="3" name="Kontanter på lommen"/>
     <account type="1" name="Lønkonto"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Indtægter">
    <account type="12" name="Andre indtægter"/>
    <account type="12" name="Bonus"/>
    <account type="12" name="Løn"/>
@@ -34,12 +34,12 @@
     <account type="12" name="Lønkontorenter"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Passiver">
    <account type="10" name="Forventede udgifter">
     <account type="4" name="Kreditkort"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Udgifter">
    <account type="13" name="Abonnementer"/>
    <account type="13" name="Antenne"/>
    <account type="13" name="Bankgebyrer"/>

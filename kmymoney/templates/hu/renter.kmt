@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hu/acctchrt_renter.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Bérköltségek</title>
+ <shortdesc>Bérlakás költségei</shortdesc>
+ <longdesc>Akkor érdemes ezt választani, ha ön bérel lakást (lakbér, lakásbiztosítás)</longdesc>
+ <accounts>
+  <account type="13" name="Költségek">
+   <account type="13" name="Biztosítás">
+    <account type="13" name="Bérleti biztosítás"/>
+   </account>
+   <account type="13" name="Lakbér"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

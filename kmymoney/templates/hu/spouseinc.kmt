@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hu/acctchrt_spouseinc.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Hitvesi jövedelem</title>
+ <shortdesc>Számlák a hitvesi jövedelmek nyomonkövetésére</shortdesc>
+ <longdesc>Akkor érdemes ezt kiválasztani, ha önnek van dolgozó hitvese (fizetés (hitves), adók (hitves)).</longdesc>
+ <accounts>
+  <account type="12" name="Bevétel">
+   <account type="12" name="Fizetés (hitves)"/>
+  </account>
+  <account type="13" name="Költségek">
+   <account type="13" name="Adók (hitves)">
+    <account type="13" name="Munkavállalói"/>
+    <account type="13" name="Más adó"/>
+    <account type="13" name="SzJA"/>
+    <account type="13" name="TBJ"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

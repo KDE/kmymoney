@@ -13,13 +13,13 @@
  <shortdesc>Contas para Depósitos a Prazo e investimentos no mercado monetário</shortdesc>
  <longdesc>Deverá selecionar este conjunto de contas caso tenha depósitos a prazo ou contas no mercado financeiro (DP, Juros DP, mercado monetário, juro mercado monetário).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Ativos">
    <account type="9" name="Ativos Atuais">
     <account type="1" name="DP Banco"/>
     <account type="1" name="Mercado Monetário"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Receita">
    <account type="12" name="Juros da Receita">
     <account type="12" name="Juros do DP"/>
     <account type="12" name="Juros do Mercado Monetário"/>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/fr_BE/acctchrt_spouseretire.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Comptes d'épargne retraite du conjoint</title>
+ <shortdesc>Compte d'épargne retraite avec ses sous-comptes d'investissements relatifs du conjoint</shortdesc>
+ <longdesc>Vous devriez sélectionner cet ensemble de comptes si votre conjoint a des comptes d'épargne retraite (actions, obligations, fonds communs, fonds d'indices, intérêts, dividendes).</longdesc>
+ <accounts>
+  <account type="9" name="Actif">
+   <account type="9" name="Investissements">
+    <account type="1" name="Retraite du conjoint">
+     <account type="15" name="Actions"/>
+     <account type="15" name="Fonds communs"/>
+     <account type="15" name="Marché d'indices"/>
+     <account type="15" name="Obligations"/>
+    </account>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

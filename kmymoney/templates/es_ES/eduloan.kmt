@@ -15,12 +15,12 @@
    para educación (préstamo para educación, intereses de préstamo
    para educación)</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Gastos">
    <account type="13" name="Intereses">
     <account type="13" name="Intereses de préstamo para educación"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Pasivo">
    <account type="10" name="Préstamos">
     <account type="10" name="Préstamo para educación"/>
    </account>

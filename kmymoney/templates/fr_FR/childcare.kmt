@@ -13,7 +13,7 @@
  <shortdesc>Un compte de suivi des coûts de garderie d'enfants</shortdesc>
  <longdesc>Vous devriez sélectionner cet ensemble de comptes si vous avez des dépenses de garderie.</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Dépenses">
    <account type="13" name="Garderie"/>
   </account>
  </accounts>

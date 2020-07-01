@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hu/acctchrt_common.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Gyakori számlák</title>
+ <shortdesc>A leggyakrabban használt alapvető számlák</shortdesc>
+ <longdesc>A legtöbb felhasználónak ezt célszerű választani. Magában foglalja a leggyakrabban használt számlákat (folyószámla, betét, készpénz, hitelkártya, bevétel, gyakori költségek).</longdesc>
+ <accounts>
+  <account type="12" name="Bevétel">
+   <account type="12" name="Fizetés"/>
+   <account type="12" name="Jutalom"/>
+   <account type="12" name="Kamatbevétel">
+    <account type="12" name="Betétkamat"/>
+    <account type="12" name="Folyószámlakamat"/>
+    <account type="12" name="Más kamat"/>
+   </account>
+   <account type="12" name="Kapott ajándék"/>
+   <account type="12" name="Más bevétel"/>
+  </account>
+  <account type="9" name="Eszközök">
+   <account type="9" name="Forgóeszközök">
+    <account type="1" name="Betétszámla"/>
+    <account type="1" name="Folyószámla"/>
+    <account type="3" name="Készpénz"/>
+   </account>
+  </account>
+  <account type="13" name="Költségek">
+   <account type="13" name="Adók">
+    <account type="13" name="Munkavállalói"/>
+    <account type="13" name="Más adó"/>
+    <account type="13" name="SzJA"/>
+    <account type="13" name="TBJ"/>
+   </account>
+   <account type="13" name="Ajándékok"/>
+   <account type="13" name="Autó">
+    <account type="13" name="Díjak"/>
+    <account type="13" name="Javítás és karbantartás"/>
+    <account type="13" name="Parkolás"/>
+    <account type="13" name="Üzemanyag"/>
+   </account>
+   <account type="13" name="Bankköltség"/>
+   <account type="13" name="Biztosítás">
+    <account type="13" name="Autó biztosítás"/>
+    <account type="13" name="Egészségbiztosítás"/>
+    <account type="13" name="Életbiztosítás"/>
+   </account>
+   <account type="13" name="Előfizetések"/>
+   <account type="13" name="Gyógykezelés"/>
+   <account type="13" name="Háztartási"/>
+   <account type="13" name="Jótékonyság"/>
+   <account type="13" name="Kedvtelés"/>
+   <account type="13" name="Kellékek"/>
+   <account type="13" name="Kiigazítás"/>
+   <account type="13" name="Kábel TV"/>
+   <account type="13" name="Képzés"/>
+   <account type="13" name="Könyvek"/>
+   <account type="13" name="Különféle"/>
+   <account type="13" name="Mosás/tisztítás"/>
+   <account type="13" name="Online szolgáltatások"/>
+   <account type="13" name="Rezsi">
+    <account type="13" name="Gáz"/>
+    <account type="13" name="Hulladékgyűjtés"/>
+    <account type="13" name="Villany"/>
+    <account type="13" name="Víz"/>
+   </account>
+   <account type="13" name="Ruhák"/>
+   <account type="13" name="Számítógép"/>
+   <account type="13" name="Szórakozás">
+    <account type="13" name="Pihenés"/>
+    <account type="13" name="Utazás"/>
+    <account type="13" name="Zene/filmek"/>
+   </account>
+   <account type="13" name="Telefon"/>
+   <account type="13" name="Tömegközlekedés"/>
+   <account type="13" name="Étkezés"/>
+  </account>
+  <account type="10" name="Kötelezettségek">
+   <account type="4" name="Hitelkártya"/>
+  </account>
+  <account type="16" name="Saját tőke">
+   <account type="16" name="Nyitóegyenlegek"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

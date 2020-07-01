@@ -13,14 +13,14 @@
  <shortdesc>Kredit für Autokauf</shortdesc>
  <longdesc>Falls Sie einen Kredit zum Autokauf besitzen, können Sie mit dieser Auswahl die passenden Konten bekommen.</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Aufwendungen">
    <account type="13" name="Fahrtkosten">
     <account type="13" name="Auto">
      <account type="13" name="Kreditzinsen"/>
     </account>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Fremdkapital">
    <account type="10" name="Kredite">
     <account type="10" name="Auto"/>
    </account>

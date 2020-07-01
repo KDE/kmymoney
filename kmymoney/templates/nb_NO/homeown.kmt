@@ -13,7 +13,7 @@
  <shortdesc>Utgifter ved å eie et hus</shortdesc>
  <longdesc>Du vil nok velge dette oppsettet dersom du eier et hus. Det inneholder kontoer for å følgeutgifter på huset (forsikring, avgifter, hus reperasjoner).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Utgifter">
    <account type="13" name="Forsikring">
     <account type="13" name="Husforsikring"/>
    </account>

@@ -13,7 +13,7 @@
  <shortdesc>Conti per tenere traccia di attività ingenti</shortdesc>
  <longdesc>Selezionare questo insieme di conti se si possiedono delle attività di notevole valore e durata (casa, automobile, seconda casa, altre attività).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Attività">
    <account type="9" name="Attività ingenti">
     <account type="9" name="Altre attività"/>
     <account type="9" name="Automobile"/>

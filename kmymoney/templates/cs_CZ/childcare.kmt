@@ -13,7 +13,7 @@
  <shortdesc>Účet na zaznamenávání výdajů na péči o dítě</shortdesc>
  <longdesc>Zvolte si tuto sadu účtů, pokud máte výdaje na péči o dítě.</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Výdaje">
    <account type="13" name="Péče o dítě"/>
   </account>
  </accounts>

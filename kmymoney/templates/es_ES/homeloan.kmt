@@ -14,12 +14,12 @@
  <longdesc>Deseará escoger este juego de cuentas si tiene contratado un
    préstamo hipotecario (préstamo hipotecario, interés hipoteca).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Gastos">
    <account type="13" name="Intereses">
     <account type="13" name="Interés de hipoteca"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Pasivo">
    <account type="10" name="Préstamos">
     <account type="10" name="Préstamo hipotecario"/>
    </account>

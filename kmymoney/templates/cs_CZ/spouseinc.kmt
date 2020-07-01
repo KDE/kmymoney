@@ -13,10 +13,10 @@
  <shortdesc>Účty pro oddělené zaznamenávání příjmů partnera</shortdesc>
  <longdesc>Tuto sadu účtů si zvolte, pokud váš chcete vést odděleně příjmy partnera.</longdesc>
  <accounts>
-  <account type="12" name="">
+  <account type="12" name="Příjem">
    <account type="12" name="Mzda (Partner)"/>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Výdaje">
    <account type="13" name="Daně a poplatky (Partner)">
     <account type="13" name="Celostátní daně"/>
     <account type="13" name="Místní daně"/>

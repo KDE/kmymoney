@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/fr_BE/acctchrt_renter.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Dépenses de location</title>
+ <shortdesc>Dépenses associées avec la location d'un logement</shortdesc>
+ <longdesc>Vous devriez sélectionner cet ensemble de comptes si vous louez une maison ou un appartement (location, assurance du locataire).</longdesc>
+ <accounts>
+  <account type="13" name="Dépenses">
+   <account type="13" name="Assurances">
+    <account type="13" name="Assurance locative"/>
+   </account>
+   <account type="13" name="Location"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

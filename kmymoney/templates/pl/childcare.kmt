@@ -13,7 +13,7 @@
  <shortdesc>Konta pomagające śledzić wydatki związane z dziećmi</shortdesc>
  <longdesc>Wybierzesz ten zestaw, jeśli posiadasz wydatki związane z opieką nad dziećmi.</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Wydatki">
    <account type="13" name="Wydatki na dzieci"/>
   </account>
  </accounts>

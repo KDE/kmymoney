@@ -13,12 +13,12 @@
  <shortdesc>Ev kredisi ve faizine yönelik hesaplar</shortdesc>
  <longdesc>Ev kredisi ve faizini takip etmek için bu planı seçin.</longdesc>
  <accounts>
-  <account type="10" name="">
+  <account type="10" name="Borçlar">
    <account type="10" name="Krediler">
     <account type="10" name="Morgıç Kredisi"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Gider">
    <account type="13" name="Faiz">
     <account type="13" name="Morgıç Faizi"/>
    </account>

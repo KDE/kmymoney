@@ -13,12 +13,12 @@
  <shortdesc>跟踪其它贷款和相关利息的科目</shortdesc>
  <longdesc>如果您有一些房屋贷款以外的其它贷款(其它贷款，其它贷款利息)，您可能希望选择这套科目。</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="支出">
    <account type="13" name="利息">
     <account type="13" name="其他利息"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="负债">
    <account type="10" name="贷款">
     <account type="10" name="其它贷款"/>
    </account>

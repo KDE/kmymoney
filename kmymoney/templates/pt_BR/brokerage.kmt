@@ -14,7 +14,7 @@
     (ações, obrigações, fundos de investimento, fundos de índices, juros, dividendos)</shortdesc>
  <longdesc>Deverá selecionar este conjunto de contas caso possua investimentos (ações, obrigações, fundos de investimento, fundos de índices, juros, dividendos).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Ativos">
    <account type="9" name="Investimentos">
     <account type="1" name="Conta na Corretora">
      <account type="9" name="Ação"/>
@@ -24,10 +24,10 @@
     </account>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Despesas">
    <account type="13" name="Comissões"/>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Receita">
    <account type="12" name="Receita de Dividendos"/>
    <account type="12" name="Receita de Juros">
     <account type="12" name="Juros de Obigações"/>

@@ -13,7 +13,7 @@
  <shortdesc>Izdevumiem par pērniem</shortdesc>
  <longdesc>Pievienojiet šos kontus, lai uzskaitītu ar bērniem saistītos izdevumus.</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Izdevumi">
    <account type="13" name="Bērni">
     <account type="13" name="Aukle"/>
     <account type="13" name="Bērnudārzs un skola"/>

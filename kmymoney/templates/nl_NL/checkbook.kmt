@@ -13,14 +13,14 @@
  <shortdesc>De minimaal benodigde rekeningen binnen GnuCash.</shortdesc>
  <longdesc>Deze verzameling bevat uitsluitend de minimaal benodigde rekeningen. Eventuele verfijningen kunt u zelf op een later tijdstip probleemloos toevoegen.</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Activa">
    <account type="9" name="Vlottende activa">
     <account type="1" name="Betaalrekening"/>
    </account>
   </account>
-  <account type="12" name=""/>
-  <account type="13" name=""/>
-  <account type="16" name="">
+  <account type="12" name="Inkomsten"/>
+  <account type="13" name="Uitgaven"/>
+  <account type="16" name="Vermogen">
    <account type="16" name="Beginsaldi"/>
   </account>
  </accounts>

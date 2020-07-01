@@ -13,7 +13,7 @@
  <shortdesc>Mājokļa īres izdevumi</shortdesc>
  <longdesc>Pievienojiet šos kontus, lai uzskaitītu ar mājokļa īres izdevumus.</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Izdevumi">
    <account type="13" name="Mājokļa īre"/>
   </account>
  </accounts>

@@ -13,12 +13,12 @@
  <shortdesc>Konti mājokļa kredīta uzskaitei</shortdesc>
  <longdesc>Pievienojiet šos kontus, lai uzskaitītu ar mājokļa kredītu saistītos izdevumus (mājokļa kredītu un kredīta procentus).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Izdevumi">
    <account type="13" name="Procenti">
     <account type="13" name="Mājokļa kredīta procenti"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Saistības">
    <account type="10" name="Aizņēmums">
     <account type="10" name="Mājokļa kredīts"/>
    </account>

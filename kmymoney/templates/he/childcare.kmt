@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/he/acctchrt_childcare.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>הוצאות טיפול בילדים</title>
+ <shortdesc>חשבון למעקב אחר הוצאות גידול ילדים</shortdesc>
+ <longdesc>תוכלו לבחור בתרשים חשבונות זה במידה ויש לכם הוצאות גידול ילדים.</longdesc>
+ <accounts>
+  <account type="13" name="הוצאות">
+   <account type="13" name="טיפול בילדים"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

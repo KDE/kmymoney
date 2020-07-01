@@ -13,13 +13,13 @@
  <shortdesc>Repo, Mevduat Sertifikası ve diğer para piyasası araçları</shortdesc>
  <longdesc>Repo, Mevduat Sertifikası gibi para piyasası araçlarınızı takip etmenizi sağlayan hesaplar</longdesc>
  <accounts>
-  <account type="12" name="">
+  <account type="12" name="Gelir">
    <account type="12" name="Faiz Geliri">
     <account type="12" name="MS Faizi"/>
     <account type="12" name="Repo Faizi"/>
    </account>
   </account>
-  <account type="9" name="">
+  <account type="9" name="Varlıklar">
    <account type="9" name="Cari Varlıklar">
     <account type="1" name="Mevduat Sertifikası"/>
     <account type="1" name="Repo"/>

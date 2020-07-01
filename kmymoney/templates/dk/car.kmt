@@ -13,7 +13,7 @@
  <shortdesc>Udgifter vedrørende bil</shortdesc>
  <longdesc>Udgifter i forbindelse med at holde bil. Vedligehold, drift og skatter.</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Udgifter">
    <account type="13" name="Bil">
     <account type="13" name="Benzin"/>
     <account type="13" name="Parking"/>

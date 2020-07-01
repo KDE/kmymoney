@@ -13,7 +13,7 @@
  <shortdesc>집 소유와 관련된 지출</shortdesc>
  <longdesc>집 소유시 이 계정을 선택합니다. 이 계정은 집 지출 비용과 관계된 계정 구룹을 제공합니다.(보험, 세금, 집 수리비).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="지출">
    <account type="13" name="보험">
     <account type="13" name="집 보험"/>
    </account>

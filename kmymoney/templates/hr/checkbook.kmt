@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hr/acctchrt_checkbook.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Osnovni kontni plan</title>
+ <shortdesc>Osnovni kontni plan za rad s GnuCash programom</shortdesc>
+ <longdesc>Osnovni kontni plan za jednostavno knjiženje i praćenje promjena na tvojem žiro računu.</longdesc>
+ <accounts>
+  <account type="9" name="Imovina">
+   <account type="9" name="Trenutačna imovina">
+    <account type="1" name="Žiro račun"/>
+   </account>
+  </account>
+  <account type="16" name="Kapital">
+   <account type="16" name="Početni saldo"/>
+  </account>
+  <account type="12" name="Prihod"/>
+  <account type="13" name="Rashod"/>
+ </accounts>
+</kmymoney-account-template>

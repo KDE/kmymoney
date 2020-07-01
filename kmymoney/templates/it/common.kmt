@@ -13,17 +13,17 @@
  <shortdesc>Un insieme basilare comprendente i conti più comunemente usati</shortdesc>
  <longdesc>Questo insieme di conti è selezionato dalla maggior parte degli utenti. L'insieme comprende i conti usati più comunemente (conto corrente, di risparmio, contanti, carta di credito, entrate, uscite comuni).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Attività">
    <account type="9" name="Attività correnti">
     <account type="1" name="Conto corrente"/>
     <account type="1" name="Conto risparmio"/>
     <account type="3" name="Liquidità"/>
    </account>
   </account>
-  <account type="16" name="">
+  <account type="16" name="Capitali">
    <account type="16" name="Bilanci d'apertura"/>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Entrate">
    <account type="12" name="Altre entrate"/>
    <account type="12" name="Entrate extra"/>
    <account type="12" name="Entrate interessi">
@@ -34,10 +34,10 @@
    <account type="12" name="Regali ricevuti"/>
    <account type="12" name="Stipendio"/>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Passività">
    <account type="4" name="Carta credito"/>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Uscite">
    <account type="13" name="Abbigliamento"/>
    <account type="13" name="Abbonamenti"/>
    <account type="13" name="Alimentari"/>

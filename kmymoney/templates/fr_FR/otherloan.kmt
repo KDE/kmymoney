@@ -13,12 +13,12 @@
  <shortdesc>Comptes pour le suivi d'autres emprunts et de leurs intérêts associés</shortdesc>
  <longdesc>Vous devriez sélectionner cet ensemble de comptes si vous avez quelque chose d'autre qu'un emprunt immobilier (autre emprunt, autres intérêts d'emprunt).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Dépenses">
    <account type="13" name="Intérêts">
     <account type="13" name="Autres intérets"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Passif">
    <account type="10" name="Emprunts">
     <account type="10" name="Autre emprunt"/>
    </account>

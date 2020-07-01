@@ -14,7 +14,7 @@
  <longdesc>Deseará escoger este juego de cuentas si alquila una casa o
    apartamento (alquiler, seguro de inquilino).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Gastos">
    <account type="13" name="Alquiler"/>
    <account type="13" name="Seguros">
     <account type="13" name="Seguro de inquilino"/>

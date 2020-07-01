@@ -13,12 +13,12 @@
  <shortdesc>Konta kredytu samochowego i związanych z nim odsetek</shortdesc>
  <longdesc>Będziesz potrzebował tego zestawu, jeśli spłacasz kredyt na samochód (kredyt na samochód, odsetki od kredytu).</longdesc>
  <accounts>
-  <account type="10" name="">
+  <account type="10" name="Pasywa">
    <account type="10" name="Kredyty">
     <account type="10" name="Kredyt na samochód"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Wydatki">
    <account type="13" name="Odsetki">
     <account type="13" name="Odsetki kredytu na samochód"/>
    </account>

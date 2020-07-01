@@ -13,22 +13,22 @@
  <shortdesc>Základná sada najčastejšie používaných účtov</shortdesc>
  <longdesc>Väčšina užívateľov si zvolí túto sadu, lebo obsahuje bežne používané účty (šeky, úspory, hotovosť, platobné karty, príjmy, bežné výdaje).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Aktíva">
    <account type="9" name="Aktuálne aktíva">
     <account type="3" name="Hotovosť v peňaženke"/>
     <account type="1" name="Úspory"/>
     <account type="1" name="Šekový účet"/>
    </account>
   </account>
-  <account type="16" name="">
+  <account type="16" name="Majetok">
    <account type="16" name="Počiatočný stav"/>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Pasíva">
    <account type="10" name="Splatné účty">
     <account type="4" name="Platobná karta"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Príjem">
    <account type="12" name="Bonus"/>
    <account type="12" name="Mzda"/>
    <account type="12" name="Ostatné príjmy"/>
@@ -39,7 +39,7 @@
     <account type="12" name="Šekový úrok"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Výdaje">
    <account type="13" name="Auto">
     <account type="13" name="Benzín"/>
     <account type="13" name="Opravy a udržiavanie"/>

@@ -13,12 +13,12 @@
  <shortdesc>Comptes d'emprunt automobile et des intérets associés</shortdesc>
  <longdesc>Vous devriez sélectionner cet ensemble de comptes si vous avez un emprunt automobile (emprunt automobile, intérêts d'emprunt automobile).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Dépenses">
    <account type="13" name="Intérêts">
     <account type="13" name="Intérêts emprunt automobile"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Passif">
    <account type="10" name="Emprunts">
     <account type="10" name="Emprunt automobile"/>
    </account>

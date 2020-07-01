@@ -13,7 +13,7 @@
  <shortdesc>Wydatki związane z utrzymaniem domu</shortdesc>
  <longdesc>Ten zestaw wybierzesz, jesli posiadasz dom. Zestaw zawiera grupę kont związanych z wydatkami domowymi (ubezpieczenie, podatki, naprawy).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Wydatki">
    <account type="13" name="Naprawy w domu"/>
    <account type="13" name="Podatki">
     <account type="13" name="Podatek od nieruchomości"/>

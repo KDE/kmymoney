@@ -13,12 +13,12 @@
  <shortdesc>Λογαριασμοί δανείου για την αγορά αυτοκινήτου</shortdesc>
  <longdesc>Επιλέξτε αυτούς τους λογαριασμούς αν έχετε πάρει δάνειο για αγορά αυτοκινήτου (δάνειο αυτοκινήτου, τόκοι δανείου).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Έξοδα">
    <account type="13" name="Τόκοι">
     <account type="13" name="Τόκοι δανείου αυτοκινήτου"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Παθητικό">
    <account type="10" name="Δάνεια">
     <account type="10" name="Δάνειο αυτοκινήτου"/>
    </account>

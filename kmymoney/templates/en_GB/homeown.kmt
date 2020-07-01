@@ -13,7 +13,7 @@
  <shortdesc>Expenses associated with owning a home</shortdesc>
  <longdesc>You would want to select this set of accounts if you own a home. This set provides a group of accounts to track home expenses (insurance, taxes, home repair).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Expenses">
    <account type="13" name="Home Repair"/>
    <account type="13" name="Insurance">
     <account type="13" name="Home Insurance"/>

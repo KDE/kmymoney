@@ -13,7 +13,7 @@
  <shortdesc>Grundlegende Konten für Kleinunternehmen</shortdesc>
  <longdesc>Kleinunternehmer können diesen Kontorahmen anstelle der anderen Kontorahmen verwenden. Sie finden hier die grundlegenden Konten für ein Kleinunternehmen wie Forderungen, Verbindlichkeiten, Steuer, Aufwendungen und Erträge.</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Aktiva">
    <account type="9" name="Barvermögen">
     <account type="3" name="Bargeld"/>
     <account type="1" name="Girokonto"/>
@@ -24,8 +24,8 @@
    </account>
    <account type="9" name="Vorsteuer"/>
   </account>
-  <account type="16" name=""/>
-  <account type="13" name="">
+  <account type="16" name="Anfangsbestand"/>
+  <account type="13" name="Aufwendungen">
    <account type="13" name="Abschreibungen"/>
    <account type="13" name="Beratungskosten">
     <account type="13" name="Buchhaltung"/>
@@ -82,7 +82,7 @@
     <account type="13" name="Sozialversicherung"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Erträge">
    <account type="12" name="Sonstiges"/>
    <account type="12" name="Zinsen">
     <account type="12" name="Girokonto"/>
@@ -90,7 +90,7 @@
    </account>
    <account type="12" name="Zurückerstattete Aufwendungen"/>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Fremdkapital">
    <account type="10" name="Barverbindlichkeiten">
     <account type="4" name="Kreditkarte"/>
    </account>

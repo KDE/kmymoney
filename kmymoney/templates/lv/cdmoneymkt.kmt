@@ -13,13 +13,13 @@
  <shortdesc>Konti noguldījumiem un finanšu tirgiem</shortdesc>
  <longdesc>Pievienojiet šos kontus, lai uzskaitītu noguldījumus un naudas investīcijas (naudas noguldījumus, finanšu tirgus un to procentus).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Aktīvi">
    <account type="9" name="Tekošie aktīvi">
     <account type="1" name="Bankas noguldījumi"/>
     <account type="1" name="Finanšu tirgus"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Ienākumi">
    <account type="12" name="Procenti">
     <account type="12" name="Finanšu tirgu procenti"/>
     <account type="12" name="Noguldījumu procenti"/>

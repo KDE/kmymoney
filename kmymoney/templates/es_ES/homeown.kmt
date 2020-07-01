@@ -15,7 +15,7 @@
    juego le proporciona un grupo de cuentas para controlar los
    gastos domésticos (seguro, impuestos, reparaciones).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Gastos">
    <account type="13" name="Impuestos">
     <account type="13" name="Contribución"/>
    </account>

@@ -15,7 +15,7 @@
 
   Nota: conta encontra-se em BRL; edite a conta para alterar a moeda.</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Ativos">
    <account type="9" name="Investimentos">
     <account type="11" name="Conversão de Moeda"/>
    </account>

@@ -13,13 +13,13 @@
  <shortdesc>Konta przeznaczone do inwestycji na rynku pieniężnym i certyfikatów depozytowych</shortdesc>
  <longdesc>Użytkownicy inwestujący na rynku pieniężnym i certyfikatów depozytowych wybiorą ten zestaw (certyfikaty depozytów, odsetki od certyfikatów, rynek pieniężny, odsetki z rynku pieniężnego).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Aktywa">
    <account type="9" name="Aktywa bieżące">
     <account type="1" name="Bankowe certyfikaty depozytowe"/>
     <account type="1" name="Rynek pieniężny"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Przychód">
    <account type="12" name="Przychód z odsetek">
     <account type="12" name="Odsetki od certyfikatów"/>
     <account type="12" name="Odsetki z rynku pieniężnego"/>

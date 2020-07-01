@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/fr_BE/acctchrt_homeloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Hypothèque d'emprunt immobilier</title>
+ <shortdesc>Comptes pour emprunt immobilier et les intérets associés.</shortdesc>
+ <longdesc>Vous devriez sélectionner cet ensemble de comptes si vous avez un emprunt immobilier(Hypothèque d'un emprunt, Hypothèque sur des intérêts).</longdesc>
+ <accounts>
+  <account type="13" name="Dépenses">
+   <account type="13" name="Intérêts">
+    <account type="13" name="Hypothèque d'intérêts"/>
+   </account>
+  </account>
+  <account type="10" name="Passif">
+   <account type="10" name="Emprunts">
+    <account type="10" name="Hypothèque d'emprunt"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

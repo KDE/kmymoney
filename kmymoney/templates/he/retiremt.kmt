@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/he/acctchrt_retiremt.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>חשבונות פרישה</title>
+ <shortdesc>חשבונות פרישה עם חשבונות משנה השקעות</shortdesc>
+ <longdesc>תוכלו להשתמש בתרשים חשבונות זה אם במידה ופרשתם לגמלאות ויש לכם השקעות (תוכניות חיסכון, תיק מניות, קרנות נאמנות, אג&quot;ח וכו').</longdesc>
+ <accounts>
+  <account type="9" name="רכוש">
+   <account type="9" name="השקעות">
+    <account type="1" name="פרישה">
+     <account type="15" name="אגרות חוב"/>
+     <account type="15" name="נירות ערך"/>
+     <account type="15" name="קרנות נאמנות"/>
+     <account type="15" name="תעודות סל"/>
+    </account>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

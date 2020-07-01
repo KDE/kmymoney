@@ -13,7 +13,7 @@
  <shortdesc>Un conto per tenere traccia dei costi della baby sitter</shortdesc>
  <longdesc>Selezionare questo insieme di conti se si hanno delle uscite per la baby sitter.</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Uscite">
    <account type="13" name="Baby sitter"/>
   </account>
  </accounts>

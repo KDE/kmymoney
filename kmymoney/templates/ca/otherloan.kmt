@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ca/acctchrt_otherloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Altres préstecs</title>
+ <shortdesc>Comptes per controlar altres préstecs, junt amb el seu interès associat</shortdesc>
+ <longdesc>Desitjareu seleccionar aquest joc de comptes si teniu un préstec diferent a un préstec hipotecari (altres préstecs, interessos d'altres préstecs).</longdesc>
+ <accounts>
+  <account type="13" name="Despeses">
+   <account type="13" name="Interessos">
+    <account type="13" name="Altre interès"/>
+   </account>
+  </account>
+  <account type="10" name="Passiu">
+   <account type="10" name="Préstecs">
+    <account type="10" name="Altres préstecs"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

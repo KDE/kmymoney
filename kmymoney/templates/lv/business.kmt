@@ -13,7 +13,7 @@
  <shortdesc>Kontu plāns uzņēmējdarbībai saskaņā ar Latvijas likumdošanu.</shortdesc>
  <longdesc>Izmantojiet šo kontu plānu, ja vēlaties veikt finanšu uzskaiti uzņēmējdarbībā. Šis kontu plāns ir veidots saskaņā ar Latvijas likumdošanu.</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="1. Ilgtermiņa ieguldījumi">
    <account type="9" name="1.2. Pamatlīdzekļi">
     <account type="9" name="1220 Tehnoloģiskās iekārtas un mašīnas"/>
     <account type="9" name="1230 Pārējie pamatlīdzekļi un inventārs"/>
@@ -21,7 +21,7 @@
     <account type="9" name="1290 Pamatlīdzekļu nolietojums (pasīvā)"/>
    </account>
   </account>
-  <account type="9" name="">
+  <account type="9" name="2. Apgrozāmie līdzekļi">
    <account type="9" name="2.1 Krājumi">
     <account type="9" name="2150 Uzņēmuma rīcībā esošais  mazvērtīgais inventārs"/>
     <account type="9" name="2190 Avansa maksājumi par precēm"/>
@@ -39,7 +39,7 @@
     <account type="9" name="2680 Valūtas konvertācijas konts"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="3. Pašu kapitāls">
    <account type="10" name="3.1 Pamatkapitāls vai līdzdalības kapitāls agio, ilgtermiņa ieguldījumu pārvērtēšanas rezerve">
     <account type="10" name="3110 Pamatkapitāls vai līdzdalības kapitāls"/>
    </account>
@@ -48,12 +48,12 @@
     <account type="10" name="3420 Iepriekšējo gadu nesadalītā peļņa vai nesegtie zaudējumi"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="4. Uzkrājumi">
    <account type="10" name="4.3. Citi uzkrājumi">
     <account type="10" name="4310 Citi uzkrājumi"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="5. Kreditori">
    <account type="10" name="5.1. Norēķini par aizņēmumiem">
     <account type="10" name="5140 Citi aizņēmumi"/>
    </account>
@@ -90,7 +90,7 @@
     <account type="10" name="5910 Nākošo periodu ieņēmumi"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="6. Ieņēmumi no uzņēmuma saimnieciskās darbības">
    <account type="12" name="6.1. Ieņēmumi no pārdošanas, kas apliekami ar nodokļiem vispārējā kārtībā">
     <account type="12" name="6110 Ieņēmumi no pamatdarbības produkcijas un pakalpojumu pārdošanas"/>
     <account type="12" name="6111 Projekti ar pašvaldību"/>
@@ -101,7 +101,7 @@
     <account type="12" name="6560 Ieņēmumos pātskaitītais uzkrājumu samazinājums"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="7. Saimnieciskās darbības izdevumi">
    <account type="13" name="7.1. Izdevumi izejvielu, materiālu un preču iepirkšanai">
     <account type="13" name="7120 Preču piegādes, pakalpojumu sniegšanas  izdevumi"/>
     <account type="13" name="7170 Samaksa par darbiem un pakalpojumiem no ārienes"/>
@@ -137,7 +137,7 @@
     <account type="13" name="7771 Reprezentācijas izdevumi"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="8. Dažādi ieņēmumi un izdevumi, pelņa un zaudējumi">
    <account type="12" name="8.1. Dažādi ieņēmumi">
     <account type="12" name="8120 Pārējie ieņēmumi no procentiem un tiem pielīdzināmi ieņēmumi"/>
    </account>
@@ -156,6 +156,6 @@
     <account type="12" name="8810 Nodoklis no peļņas (ienākuma nodoklis)"/>
    </account>
   </account>
-  <account type="1" name=""/>
+  <account type="1" name="Imbalance-EUR"/>
  </accounts>
 </kmymoney-account-template>

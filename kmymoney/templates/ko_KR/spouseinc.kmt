@@ -13,10 +13,10 @@
  <shortdesc>개별적으로 배우자 소득을 계산하기 위한 계정</shortdesc>
  <longdesc>일하는 배우자가 있다면 이 계정을 선택합니다.(봉급(배우자), 세금(배우자)).</longdesc>
  <accounts>
-  <account type="12" name="">
+  <account type="12" name="소득">
    <account type="12" name="봉급(배우자)"/>
   </account>
-  <account type="13" name="">
+  <account type="13" name="지출">
    <account type="13" name="세금(배우자)">
     <account type="13" name="건강보조"/>
     <account type="13" name="국세"/>

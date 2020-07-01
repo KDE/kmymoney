@@ -9,18 +9,18 @@
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>Ипотечный займ</title>
- <shortdesc>Счета ипотечного займа и связанных платежей</shortdesc>
- <longdesc>Вы можете выбрать этот набор счетов, если взяли ссуду на дом (ипотечный займ, ипотечные выплаты)</longdesc>
+ <title>Кредит на недвижимость</title>
+ <shortdesc>Кредит на недвижимость</shortdesc>
+ <longdesc>Счета для учёта расходов связанных с оплатой кредита на недвижимость.</longdesc>
  <accounts>
-  <account type="10" name="">
-   <account type="10" name="Займы">
-    <account type="10" name="Ипотечные займы"/>
+  <account type="10" name="Обязательства">
+   <account type="10" name="Кредиты">
+    <account type="10" name="Ипотечный кредит"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Расходы">
    <account type="13" name="Проценты">
-    <account type="13" name="Ипотечные проценты"/>
+    <account type="13" name="Ипотечный кредит"/>
    </account>
   </account>
  </accounts>

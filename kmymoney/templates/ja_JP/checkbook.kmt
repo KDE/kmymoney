@@ -13,12 +13,12 @@
  <shortdesc>GnuCashを使う上で最小限の勘定科目集</shortdesc>
  <longdesc>小切手帳の収支を合わせるだけであればこれを使ってください。必要になれば、あとから詳細な収益や費用の管理を始めることができます。</longdesc>
  <accounts>
-  <account type="12" name=""/>
-  <account type="16" name="">
+  <account type="12" name="収益"/>
+  <account type="16" name="純資産">
    <account type="16" name="開始残高"/>
   </account>
-  <account type="13" name=""/>
-  <account type="9" name="">
+  <account type="13" name="費用"/>
+  <account type="9" name="資産">
    <account type="9" name="流動資産">
     <account type="1" name="当座預金"/>
    </account>

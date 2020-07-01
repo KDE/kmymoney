@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hr/acctchrt_fixedassets.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Dugotrajna imovina</title>
+ <shortdesc>Kontni plan za praćenje dugotrajne imovine</shortdesc>
+ <longdesc>Kontni plan za praćenje dugotrajne imovine (kuća, stan, vikendica, auto, ostala imovina).</longdesc>
+ <accounts>
+  <account type="9" name="Imovina">
+   <account type="9" name="Dugotrajna imovina">
+    <account type="9" name="Kuća/Stan"/>
+    <account type="9" name="Osobno vozilo"/>
+    <account type="9" name="Ostala imovina"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

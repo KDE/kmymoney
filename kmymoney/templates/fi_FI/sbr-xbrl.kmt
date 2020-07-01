@@ -17,19 +17,19 @@
     Ref: http://www.tieke.fi/display/XBRL/SBR+Taksonomia
     Vaihtuvat vastaavat käyttää LIABILITY sihasta EQUITY.</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Henkilöstökulut">
    <account type="13" name="Henkilösivukulut">
     <account type="13" name="Eläkekulut"/>
     <account type="13" name="Muut henkilösivukulut"/>
    </account>
    <account type="13" name="Palkat ja palkkiot"/>
   </account>
-  <account type="10" name=""/>
-  <account type="13" name=""/>
-  <account type="12" name=""/>
-  <account type="12" name=""/>
-  <account type="13" name=""/>
-  <account type="10" name="">
+  <account type="10" name="Konsernireservi"/>
+  <account type="13" name="Liiketoiminnan muut kulut"/>
+  <account type="12" name="Liiketoiminnan muut tuotot"/>
+  <account type="12" name="Liikevaihto"/>
+  <account type="13" name="Liikevoitto (-tappio)"/>
+  <account type="10" name="Lyhytaikainen vieras pääoma">
    <account type="10" name="Joukkovelkakirjalainat"/>
    <account type="10" name="Lainat rahoituslaitoksilta"/>
    <account type="10" name="Laskennalliset verovela"/>
@@ -43,15 +43,15 @@
    <account type="10" name="Velat omistusyhteysyrityksille"/>
    <account type="10" name="Velat saman konsernin yrityksille"/>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Materiaalit ja palvelut">
    <account type="13" name="Aineet tarvikkeet ja tavarat">
     <account type="13" name="Ostot tilikauden aikana"/>
     <account type="13" name="Varastojen muutos"/>
    </account>
    <account type="13" name="Ulkopuoliset palvelut"/>
   </account>
-  <account type="13" name=""/>
-  <account type="10" name="">
+  <account type="13" name="Muut välittömät verot"/>
+  <account type="10" name="Oma pääoma">
    <account type="10" name="Arvonkorotusrahasto"/>
    <account type="10" name="Arvonkorotusrahasto (ay, ky, tmi)"/>
    <account type="10" name="Edellisten tilikausien voitto (tappio)"/>
@@ -69,12 +69,12 @@
    <account type="10" name="Tilikauden voitto (tappio) (ay, ky, tmi)"/>
    <account type="10" name="Ylikurssirahasto"/>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Pakolliset varaukset">
    <account type="10" name="Eläkevaraukset"/>
    <account type="10" name="Muut pakolliset varaukset"/>
    <account type="10" name="Verovaraukset"/>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Pitkäaikainen vieras pääoma">
    <account type="10" name="Joukkovelkakirjalainat"/>
    <account type="10" name="Lainat rahoituslaitoksilta"/>
    <account type="10" name="Laskennalliset verovela"/>
@@ -89,12 +89,12 @@
    <account type="10" name="Velat omistusyhteysyrityksille"/>
    <account type="10" name="Velat saman konsernin yrityksille"/>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Poistot ja arvonalentumiset">
    <account type="13" name="Arvonalentumiset pysyvien vastaavien hyödykkeistä"/>
    <account type="13" name="Suunnitelman mukaiset poistot"/>
    <account type="13" name="Vaihtuvien vastaavien poikkeukselliset arvonalentumiset"/>
   </account>
-  <account type="9" name="">
+  <account type="9" name="Pysyvät vastaavat">
    <account type="9" name="Aineelliset hyödykkeet">
     <account type="9" name="Ennakkomaksut ja keskeneräiset hankinnat"/>
     <account type="9" name="Koneet ja kalusto"/>
@@ -124,7 +124,7 @@
     <account type="9" name="Sijoitusten arvonkorotukset"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Rahoitustuotot ja –kulut">
    <account type="13" name="Arvonalentumiset pysyvien vastaavien sijoituksista"/>
    <account type="13" name="Arvonalentumiset vaihtuvien vastaavien rahoitusarvopapereista"/>
    <account type="13" name="Korkokulut ja muut rahoituskulut"/>
@@ -133,19 +133,19 @@
    <account type="12" name="Tuotot osuuksista omistusyhteysyrityksissä"/>
    <account type="12" name="Tuotot osuuksista saman konsernin yrityksissä"/>
   </account>
-  <account type="13" name=""/>
-  <account type="13" name=""/>
-  <account type="12" name="">
+  <account type="13" name="Satunnaiset erät"/>
+  <account type="13" name="Tilikauden voitto (tappio)"/>
+  <account type="12" name="Tilinpäätössiirrot">
    <account type="12" name="Konserniavustus"/>
    <account type="12" name="Poistoeron muutos"/>
    <account type="12" name="Verotusperusteisten varausten muutos"/>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Tilinpäätössiirtojen kertymä">
    <account type="10" name="Poistoero"/>
    <account type="10" name="Verotusperäiset varaukset"/>
   </account>
-  <account type="13" name=""/>
-  <account type="9" name="">
+  <account type="13" name="Tuloverot"/>
+  <account type="9" name="Vaihtuvat vastaavat">
    <account type="9" name="Lyhytaikaiset saamiset">
     <account type="9" name="Lainasaamiset"/>
     <account type="9" name="Muut saamiset">
@@ -184,10 +184,10 @@
     <account type="9" name="Valmiit tuotteet/tavarat"/>
    </account>
   </account>
-  <account type="13" name=""/>
-  <account type="12" name=""/>
-  <account type="13" name=""/>
-  <account type="13" name=""/>
-  <account type="10" name=""/>
+  <account type="13" name="Valmiiden ja keskeneräisten tuotteiden varastojen muutos"/>
+  <account type="12" name="Valmistus omaan käyttöön"/>
+  <account type="13" name="Voitto (tappio) ennen tilinpäätössiirtoja ja veroja"/>
+  <account type="13" name="Vähemmistöosuudet"/>
+  <account type="10" name="Vähemmistöosuudet"/>
  </accounts>
 </kmymoney-account-template>

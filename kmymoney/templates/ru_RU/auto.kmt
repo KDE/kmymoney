@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ru/acctchrt_auto.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Автомобиль</title>
+ <shortdesc>Расходы на автомобиль</shortdesc>
+ <longdesc>Счета для учёта расходов связанных с автомобилем.</longdesc>
+ <accounts>
+  <account type="13" name="Расходы">
+   <account type="13" name="Транспорт">
+    <account type="13" name="Автомобиль">
+     <account type="13" name="Автостраховка"/>
+     <account type="13" name="Гараж"/>
+     <account type="13" name="Парковка"/>
+     <account type="13" name="Ремонт и обслуживание"/>
+     <account type="13" name="Сборы"/>
+     <account type="13" name="Топливо"/>
+     <account type="13" name="Транспортный налог"/>
+    </account>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

@@ -13,7 +13,7 @@
  <shortdesc>Comptes pour le suivi distinct des revenus du (de la) conjoint(e)</shortdesc>
  <longdesc>Sélectionnez ce groupe de comptes si vous voulez suivre séparément les revenus et dépenses d'emploi du (de la) conjoint(e).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Dépenses">
    <account type="13" name="Taxes et impôts">
     <account type="13" name="Emploi - Conjoint(e)">
      <account type="13" name="Assurance emploi"/>
@@ -24,7 +24,7 @@
     </account>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Revenus">
    <account type="12" name="Emploi - Conjoint(e)">
     <account type="12" name="Commissions"/>
     <account type="12" name="Frais remboursés"/>

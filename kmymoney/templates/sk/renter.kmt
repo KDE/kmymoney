@@ -13,7 +13,7 @@
  <shortdesc>Výdavky spojené s nájmom domu</shortdesc>
  <longdesc>Túto sadu účtov si zvoľte, ak si prenajímate dom alebo byt (nájomné, poistenie)</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Výdaje">
    <account type="13" name="Nájomné"/>
    <account type="13" name="Poistenie">
     <account type="13" name="Poistenie nájomného"/>

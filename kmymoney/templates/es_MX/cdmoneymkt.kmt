@@ -15,13 +15,13 @@
    cuentas de mercado monetario (pagarés, intereses de pagarés,
    mercado monetario, intereses de mercado monetario).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Activo">
    <account type="9" name="Activo circulante">
     <account type="1" name="Mercado de dinero"/>
     <account type="1" name="Pagaré de banco"/>
    </account>
   </account>
-  <account type="12" name="">
+  <account type="12" name="Ingresos">
    <account type="12" name="Ingresos por intereses">
     <account type="12" name="Interés de mercado de dinero"/>
     <account type="12" name="Interés de pagarés"/>

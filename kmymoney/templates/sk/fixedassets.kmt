@@ -13,7 +13,7 @@
  <shortdesc>Účty pre zaznamenávanie rozsiahlych fixných aktív</shortdesc>
  <longdesc>Zvoľte si túto sadu účtov, ak vlastníte veľké fixné aktíva (dom, dopravné prostriedky, ostatné aktíva).</longdesc>
  <accounts>
-  <account type="9" name="">
+  <account type="9" name="Aktíva">
    <account type="9" name="Fixné aktíva">
     <account type="9" name="Dom"/>
     <account type="9" name="Dopravný prostriedok"/>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/he/acctchrt_renter.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>הוצאות שכירות</title>
+ <shortdesc>הוצאות הקשורות בדכירות בית או דירה</shortdesc>
+ <longdesc>בחרו להשתמש בתרשים חשבונות זה במידה ואתם שוכרים בית או דירה (הוצאות שכר דירה, ביטוח, אחזקה וכו')</longdesc>
+ <accounts>
+  <account type="13" name="הוצאות">
+   <account type="13" name="ביטוח">
+    <account type="13" name="ביטוח מבנה"/>
+   </account>
+   <account type="13" name="שכר דירה"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

@@ -13,12 +13,12 @@
  <shortdesc>Účty pro hypotéční úvěr a s tím související úrok</shortdesc>
  <longdesc>Zvolte si tuto sadu účtů, pokud máte úvěr na dům (hypotéku).</longdesc>
  <accounts>
-  <account type="10" name="">
+  <account type="10" name="Pasiva">
    <account type="10" name="Dluhy">
     <account type="10" name="Hypotéční úvěr"/>
    </account>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Výdaje">
    <account type="13" name="Úrok">
     <account type="13" name="Úrok z hypotéky"/>
    </account>

@@ -13,12 +13,12 @@
  <shortdesc>Konti citu aizņēmumu un ar tiem saistīto izdevumu uzskaitei</shortdesc>
  <longdesc>Pievienojiet šos kontus, lai uzskaitītu ar citiem aizņēmumiem saistītos izdevumus (aizņēmumu un tā procentus).</longdesc>
  <accounts>
-  <account type="13" name="">
+  <account type="13" name="Izdevumi">
    <account type="13" name="Procenti">
     <account type="13" name="Citu aizņēmumu procenti"/>
    </account>
   </account>
-  <account type="10" name="">
+  <account type="10" name="Saistības">
    <account type="10" name="Aizņēmumi">
     <account type="10" name="Citi aizņēmumi"/>
    </account>

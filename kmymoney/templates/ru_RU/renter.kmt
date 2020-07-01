@@ -9,14 +9,13 @@
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>Арендные расходы</title>
+ <title>Аренда</title>
  <shortdesc>Расходы связанные с арендой недвижимости</shortdesc>
- <longdesc>Вы можете выбрать этот набор счетов, если арендуете дом, квартиру или другую недвижимость.</longdesc>
+ <longdesc>Счета для учёта расходов связанных с арендой дома или квартиры.</longdesc>
  <accounts>
-  <account type="13" name="">
-   <account type="13" name="Арендная плата"/>
-   <account type="13" name="Страхование">
-    <account type="13" name="Страховка аренды"/>
+  <account type="13" name="Расходы">
+   <account type="13" name="Проживание">
+    <account type="13" name="Арендная плата"/>
    </account>
   </account>
  </accounts>

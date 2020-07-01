@@ -13,10 +13,10 @@
  <shortdesc>Conti per tener traccia separatamente delle entrate del coniuge</shortdesc>
  <longdesc>Selezionare questo insieme di conti se il coniuge lavora (stipendio ed imposte del coniuge).</longdesc>
  <accounts>
-  <account type="12" name="">
+  <account type="12" name="Entrate">
    <account type="12" name="Stipendio (coniuge)"/>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Uscite">
    <account type="13" name="Imposte (coniuge)">
     <account type="13" name="Altre imposte"/>
     <account type="13" name="Pensione"/>

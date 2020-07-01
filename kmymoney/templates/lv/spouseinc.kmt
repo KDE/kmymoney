@@ -13,10 +13,10 @@
  <shortdesc>Konti dzīvesbiedra/draudzenes ienākumu atsevišķai uzskaitei</shortdesc>
  <longdesc>Izmantojiet šos kontus, lai atsevišķi uzskaitītu sava dzīvesbiedra vai draudzenes ienākumus un izdevumus viņa/viņas vietā.</longdesc>
  <accounts>
-  <account type="12" name="">
+  <account type="12" name="Ienākumi">
    <account type="12" name="Dzīvesbiedra alga"/>
   </account>
-  <account type="13" name="">
+  <account type="13" name="Izdevumi">
    <account type="13" name="Dzīvesbiedra nodokļi">
     <account type="13" name="Citi nodokļi"/>
     <account type="13" name="Pašvaldības"/>
