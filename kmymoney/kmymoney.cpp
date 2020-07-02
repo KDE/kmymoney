@@ -426,8 +426,12 @@ public:
               fixFile_4();
               file->setFileFixVersion(5);
               break;
+            case 5:
+              fixFile_5();
+              file->setFileFixVersion(6);
+              break;
 
-              // add new levels above. Don't forget to increase currentFixVersion() for all
+              // add new levels above. Don't forget to increase availableFixVersion() and currentFixVersion() for all
               // the storage backends this fix applies to
             default:
               throw MYMONEYEXCEPTION(QString::fromLatin1("Unknown fix level in input file"));
@@ -563,9 +567,37 @@ public:
   }
 
 
-  /* DO NOT ADD code to this function or any of it's called ones.
-     Instead, create a new function, fixFile_n, and modify the initializeStorage()
-     logic above to call it */
+  /* DO NOT add code to these functions or any of their called ones.
+   * Instead, create a new function, fixFile_n, and modify the initializeStorage() logic above to call it */
+
+  void fixFile_5()
+  {
+    auto file = MyMoneyFile::instance();
+    QList<MyMoneySecurity> securities = file->securityList();
+    static const QHash<QString,QString> mappings = {{ QStringLiteral("yahoo"), QStringLiteral("Yahoo Finance")},
+                                                    { QStringLiteral("yahoo_asia"), QStringLiteral("Yahoo Finance")},
+                                                    { QStringLiteral("yahoo_australia"), QStringLiteral("Yahoo Finance")},
+                                                    { QStringLiteral("yahoo_brasil"), QStringLiteral("Yahoo Finance")},
+                                                    { QStringLiteral("yahoo_europe"), QStringLiteral("Yahoo Finance")},
+                                                    { QStringLiteral("yahoo_nz"), QStringLiteral("Yahoo Finance")}};
+
+    foreach(auto security, securities)
+    {
+      if (security.value(QStringLiteral("kmm-online-quote-system")) == QStringLiteral("Finance::Quote"))
+      {
+        auto replacement = mappings[security.value(QStringLiteral("kmm-online-source"))];
+
+        if (!replacement.isEmpty())
+          security.setValue(QStringLiteral("kmm-online-source"), replacement);
+        else
+          security.setValue(QStringLiteral("kmm-online-source"), QString());
+
+        security.deletePair(QStringLiteral("kmm-online-quote-system"));
+
+        file->modifySecurity(security);
+      }
+    }
+  }
 
   void fixFile_4()
   {

@@ -211,7 +211,7 @@ public:
   /**
    * This returns the currently implemented highest fix version
    */
-  constexpr static int availableFixVersion() { return 5; }
+  constexpr static int availableFixVersion() { return 6; }
 
   /**
    * returns the current file fix version of the loaded data
