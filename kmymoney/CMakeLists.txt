@@ -58,7 +58,7 @@ set( _HEADERS kmymoneyutils.h )
 ########### common code (kmymoney_common) STATIC ###############
 # will be linked into kmymoney, kmymoneytest, and libkmymoney.so
 
-set( kmymoney_common_SRCS kmymoneyutils.cpp kstartuplogo.cpp kcreditswindow.cpp )
+set( kmymoney_common_SRCS kmymoneyutils.cpp kcreditswindow.cpp )
 add_library(kmymoney_common STATIC ${kmymoney_common_SRCS})
 
 target_link_libraries(kmymoney_common
