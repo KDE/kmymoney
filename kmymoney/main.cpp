@@ -307,11 +307,6 @@ int runKMyMoney(QApplication &a, const QUrl &file, bool noFile)
     }
   }
 
-  // we cannot call kmymoney->show() directly as this causes a crash
-  // when running on some non KDE desktops (e.g. XFCE) with QWebEngine
-  // enabled. Postponing the call until we are inside the event loop
-  // solved the problem.
-  //QMetaObject::invokeMethod(kmymoney, "show", Qt::QueuedConnection);
   kmymoney->show();
 
   kmymoney->centralWidget()->setEnabled(false);
