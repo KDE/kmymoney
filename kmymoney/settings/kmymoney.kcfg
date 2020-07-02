@@ -122,10 +122,6 @@
    <label>Run in expert (accountant) mode</label>
    <default>false</default>
   </entry>
-  <entry name="ShowSplash" type="Bool">
-   <label>Show splash screen during startup</label>
-   <default>true</default>
-  </entry>
   <entry name="syncLedgerInvestment" type="Bool">
    <label>Synchronize account in ledger and investment view</label>
    <default>true</default>

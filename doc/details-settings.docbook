@@ -41,17 +41,6 @@
 
 <variablelist>
   <varlistentry>
-    <term><guilabel>Startup options</guilabel></term>
-    <listitem>
-      <para>If you check the <guilabel>Show splash screen</guilabel> box,
-      &kmymoney; will display the splash screen when &kmymoney; starts.  The splash
-      screen shows which version of the program you are running in the lower
-      left hand corner.  Unchecking the box prevents the splash screen from
-      appearing at startup.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
     <term><guilabel>Autosave options</guilabel></term>
 <!-- I would prefer to use a more consistent hierarchy and use of levels on this
      page, but for now, I'm minimizing changes. -->

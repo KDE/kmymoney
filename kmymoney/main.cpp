@@ -25,7 +25,6 @@
 #include <QStringList>
 #include <QApplication>
 #include <QCommandLineParser>
-#include <QSplashScreen>
 #include <QStandardPaths>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
@@ -48,7 +47,6 @@
 #include "mymoney/mymoneyfile.h"
 #include "mymoneyexception.h"
 #include "kmymoney.h"
-#include "kstartuplogo.h"
 #include "kcreditswindow.h"
 #include "kmymoneyutils.h"
 #include "kmymoneysettings.h"
@@ -64,7 +62,7 @@ bool timersOn = false;
 
 KMyMoneyApp* kmymoney;
 
-static int runKMyMoney(QApplication& a, std::unique_ptr<QSplashScreen> splash, const QUrl & file, bool noFile);
+static int runKMyMoney(QApplication &a, const QUrl &file, bool noFile);
 static void migrateConfigFiles();
 
 int main(int argc, char *argv[])
@@ -178,10 +176,6 @@ int main(int argc, char *argv[])
 
   KMyMoneyUtils::checkConstants();
 
-  // show startup logo
-  std::unique_ptr<QSplashScreen> splash(KMyMoneySettings::showSplash() ? createStartupLogo() : nullptr);
-  app.processEvents();
-
   // setup the MyMoneyMoney locale settings according to the KDE settings
   MyMoneyMoney::setThousandSeparator(QLocale().groupSeparator());
   MyMoneyMoney::setDecimalSeparator(QLocale().decimalPoint());
@@ -277,10 +271,10 @@ int main(int argc, char *argv[])
   int rc = 0;
   if (isNoCatchOption) {
     qDebug("Running w/o global try/catch block");
-    rc = runKMyMoney(app, std::move(splash), url, isNoFileOption);
+    rc = runKMyMoney(app, url, isNoFileOption);
   } else {
     try {
-      rc = runKMyMoney(app, std::move(splash), url, isNoFileOption);
+      rc = runKMyMoney(app, url, isNoFileOption);
     } catch (const MyMoneyException &e) {
       KMessageBox::detailedError(0, i18n("Uncaught error. Please report the details to the developers"), QString::fromLatin1(e.what()));
       throw;
@@ -290,7 +284,7 @@ int main(int argc, char *argv[])
   return rc;
 }
 
-int runKMyMoney(QApplication& a, std::unique_ptr<QSplashScreen> splash, const QUrl & file, bool noFile)
+int runKMyMoney(QApplication &a, const QUrl &file, bool noFile)
 {
   bool instantQuit = false;
 
@@ -312,6 +306,13 @@ int runKMyMoney(QApplication& a, std::unique_ptr<QSplashScreen> splash, const QU
       }
     }
   }
+
+  // we cannot call kmymoney->show() directly as this causes a crash
+  // when running on some non KDE desktops (e.g. XFCE) with QWebEngine
+  // enabled. Postponing the call until we are inside the event loop
+  // solved the problem.
+  //QMetaObject::invokeMethod(kmymoney, "show", Qt::QueuedConnection);
+  kmymoney->show();
 
   kmymoney->centralWidget()->setEnabled(false);
 
@@ -348,18 +349,12 @@ int runKMyMoney(QApplication& a, std::unique_ptr<QSplashScreen> splash, const QU
       kmymoney->slotFileOpenRecent(url);
 
     } else if (KMyMoneySettings::firstTimeRun()) {
-      // resetting the splash here is needed for ms-windows to have access
-      // to the new file wizard
-      splash.reset();
       kmymoney->slotFileNew();
     }
 
     KMyMoneySettings::setFirstTimeRun(false);
 
     if (!importfile.isEmpty()) {
-      // resetting the splash here is needed for ms-windows to have access
-      // to the web connect widgets
-      splash.reset();
       kmymoney->webConnect(importfile, QByteArray());
     }
 
@@ -369,13 +364,6 @@ int runKMyMoney(QApplication& a, std::unique_ptr<QSplashScreen> splash, const QU
   }
 
   kmymoney->centralWidget()->setEnabled(true);
-
-  // we cannot call kmymoney->show() directly as this causes a crash
-  // when running on some non KDE desktops (e.g. XFCE) with QWebEngine
-  // enabled. Postponing the call until we are inside the event loop
-  // solved the problem.
-  QMetaObject::invokeMethod(kmymoney, "show", Qt::QueuedConnection);
-  splash.reset();
 
   const int rc = a.exec();      //krazy:exclude=crashy
   return rc;
