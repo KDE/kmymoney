@@ -19,6 +19,7 @@ set(kmm_mymoney_LIB_SRCS
   mymoneyaccount.cpp mymoneyaccountloan.cpp
   mymoneyreport.cpp mymoneystatement.cpp mymoneyprice.cpp mymoneybudget.cpp
   mymoneyforecast.cpp
+  mymoneytemplate.cpp
   mymoneybalancecache.cpp
   onlinejob.cpp
   onlinejobadministration.cpp
@@ -51,6 +52,7 @@ set(kmm_mymoney_LIB_SRCS
     ./storage/reportsmodel.cpp
     ./storage/specialdatesmodel.cpp
     ./storage/schedulesjournalmodel.cpp
+    ./storage/templatesmodel.cpp
     )
 
   set(onlineTask_a_SOURCES
@@ -85,6 +87,7 @@ set(mymoney_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/kmm_mymoney_export.h
   imymoneyprocessingcalendar.h
   mymoneycostcenter.h
   mymoneyenums.h
+  mymoneytemplate.h
   mymoneyunittestable.h
   mymoneypayeeidentifiercontainer.h
   onlinejob.h

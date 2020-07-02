@@ -41,6 +41,8 @@ public:
 
   virtual void showTransactionForm(bool = true);
 
+  virtual void executeCustomAction(eView::Action action) override;
+
 public Q_SLOTS:
   /**
    * This method closes all open ledgers

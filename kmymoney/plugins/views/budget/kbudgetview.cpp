@@ -89,22 +89,18 @@ void KBudgetView::executeCustomAction(eView::Action action)
 void KBudgetView::slotNewBudget()
 {
   Q_D(KBudgetView);
-  d->askSave();
   auto date = QDate::currentDate();
   date.setDate(date.year(), KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
-  auto newname = i18n("Budget %1", date.year());
+  auto newname = i18nc("@item:intable Your budgets, %1 budget year", "Budget %1", QString::number(date.year()));
 
   MyMoneyBudget budget;
 
   // make sure we have a unique name
   try {
-    int i = 1;
     // Exception thrown when the name is not found
-    while (1) {
-      if (!MyMoneyFile::instance()->budgetByName(newname).id().isEmpty())
-        newname = i18n("Budget %1 %2", date.year(), i++);
-      break;
-    }
+    int i = 1;
+    while (!MyMoneyFile::instance()->budgetByName(newname).id().isEmpty())
+      newname = i18nc("@item:intable Your bugets, %1 budget year, %2 unique index", "Budget %1 (%2)", QString::number(date.year()), i++);
   } catch (const MyMoneyException &) {
     // all ok, the name is unique
   }
@@ -116,6 +112,8 @@ void KBudgetView::slotNewBudget()
 
     MyMoneyFile::instance()->addBudget(budget);
     ft.commit();
+    // select the newly created budget
+    d->ui->m_budgetList->setCurrentIndex(MyMoneyFile::instance()->budgetsModel()->indexById(budget.id()));
   } catch (const MyMoneyException &e) {
     KMessageBox::detailedSorry(this, i18n("Unable to add budget"), QString::fromLatin1(e.what()));
   }
@@ -189,7 +187,7 @@ void KBudgetView::slotBudgetForecast()
     MyMoneyFileTransaction ft;
     try {
       auto idx = d->ui->m_budgetList->selectionModel()->selectedIndexes().first();
-      idx = BudgetsModel::mapToBaseSource(idx);
+      idx = MyMoneyFile::baseModel()->mapToBaseSource(idx);
       if (idx.isValid()) {
         auto budget = file->budgetsModel()->itemByIndex(idx);
         bool calcBudget = budget.getaccounts().count() == 0;
@@ -230,9 +228,9 @@ void KBudgetView::slotResetBudget()
   try {
     d->ui->m_budgetValue->clear();
     d->m_budget = MyMoneyFile::instance()->budget(d->m_budget.id());
+    d->ui->m_updateButton->setEnabled(false);
     slotSelectBudget();
     d->loadBudgetAccountsView();
-
   } catch (const MyMoneyException &e) {
     KMessageBox::detailedSorry(this, i18n("Unable to reset budget"), QString::fromLatin1(e.what()));
   }
@@ -245,6 +243,7 @@ void KBudgetView::slotUpdateBudget()
   try {
     MyMoneyFile::instance()->modifyBudget(d->m_budget);
     ft.commit();
+    d->ui->m_updateButton->setEnabled(false);
     // load updated data
     slotSelectBudget();
   } catch (const MyMoneyException &e) {
@@ -409,7 +408,7 @@ void KBudgetView::slotSelectBudget()
     d->loadBudgetAccountsView();
     const auto idx = d->ui->m_accountTree->currentIndex();
     if (idx.isValid()) {
-      const auto baseIdx = AccountsModel::mapToBaseSource(idx);
+      const auto baseIdx = MyMoneyFile::baseModel()->mapToBaseSource(idx);
       const auto account = MyMoneyFile::instance()->accountsModel()->itemByIndex(baseIdx);
       slotSelectAccount(account, eView::Intent::None);
     } else {

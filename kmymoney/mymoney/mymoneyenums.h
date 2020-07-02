@@ -1,6 +1,7 @@
 /*
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  * Copyright 2019-2020  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2020       Robert Szczesiak <dev.rszczesiak@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -338,7 +339,12 @@ namespace eMyMoney {
       Schedule,
       Security,
       OnlineJob,
-      CostCenter
+      CostCenter,
+      Budget,
+      Currency,
+      Price,
+      Parameter,
+      Report
     };
 
     /**
@@ -540,6 +546,14 @@ namespace eMyMoney {
 
       // Parameter
       ParameterValueRole,
+
+      // Templates
+      TemplatesCountryRole,
+      TemplatesTypeRole,
+      TemplatesDescriptionRole,
+      TemplatesLongDescriptionRole,
+      TemplatesDomRole,
+      TemplatesLocaleRole,
     };
   }
 }

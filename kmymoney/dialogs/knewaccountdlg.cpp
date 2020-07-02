@@ -772,7 +772,7 @@ void KNewAccountDlg::slotSelectionChanged(const QItemSelection &current, const Q
   Q_UNUSED(previous)
   Q_D(KNewAccountDlg);
   if (!current.indexes().empty()) {
-    auto baseIdx = AccountsModel::mapToBaseSource(current.indexes().front());
+    auto baseIdx = MyMoneyFile::baseModel()->mapToBaseSource(current.indexes().front());
     if (baseIdx.isValid()) {
       d->m_parentAccount = MyMoneyFile::instance()->accountsModel()->itemByIndex(baseIdx);
       d->ui->m_subAccountLabel->setText(i18n("Is a sub account of %1", d->m_parentAccount.name()));

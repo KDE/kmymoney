@@ -21,7 +21,6 @@ set(libdialogs_a_SOURCES
   kequitypriceupdatedlg.cpp
   kequitypriceupdateconfdlg.cpp
   kfindtransactiondlg.cpp
-  kloadtemplatedlg.cpp
   kmergetransactionsdlg.cpp
   kmymoneyfileinfodlg.cpp
   kmymoneypricedlg.cpp
@@ -34,7 +33,6 @@ set(libdialogs_a_SOURCES
   ktagreassigndlg.cpp
   kselecttransactionsdlg.cpp
   ksplittransactiondlg.cpp
-  ktemplateexportdlg.cpp
   kupdatestockpricedlg.cpp
   transactioneditor.cpp
   stdtransactioneditor.cpp
@@ -59,14 +57,12 @@ set(dialogs_UI
   kenterscheduledlg.ui
   kequitypriceupdatedlg.ui kequitypriceupdateconfdlg.ui
   kfindtransactiondlg.ui
-  kloadtemplatedlg.ui
   kmymoneyfileinfodlg.ui kmymoneypricedlg.ui
   knewaccountdlg.ui knewbankdlg.ui
   knewequityentrydlg.ui editpersonaldatadlg.ui kpayeereassigndlg.ui
   ktagreassigndlg.ui
   kselecttransactionsdlg.ui
   ksortoptiondlg.ui ksplitcorrectiondlg.ui ksplittransactiondlg.ui
-  ktemplateexportdlg.ui
   kupdatestockpricedlg.ui
   ksaveasquestion.ui
 )
@@ -87,6 +83,7 @@ target_link_libraries(dialogs
     onlinetask_interfaces
     kmm_widgets
     kmm_utils_platformtools
+    kmm_templates
   PRIVATE
     KF5::KIOGui
 )

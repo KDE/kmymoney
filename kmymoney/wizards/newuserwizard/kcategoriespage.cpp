@@ -37,6 +37,8 @@
 #include "kpreferencepage.h"
 #include "wizardpage_p.h"
 #include "mymoneytemplate.h"
+#include "templatesmodel.h"
+#include "templateloader.h"
 
 namespace NewUserWizard
 {
@@ -49,12 +51,19 @@ namespace NewUserWizard
       WizardPagePrivate<Wizard>(parent)
     {
     }
+    TemplatesModel        model;
+    TemplateLoader        loader;
   };
 
   CategoriesPage::CategoriesPage(Wizard* wizard) :
     Accounts(wizard),
     WizardPage<Wizard>(*new CategoriesPagePrivate(wizard), stepCount++, this, wizard)
   {
+    Q_D(CategoriesPage);
+    d->loader.load(&d->model);
+    ui->m_templateSelector->setModel(&d->model);
+
+    connect(&d->loader, &TemplateLoader::loadingFinished, ui->m_templateSelector, &KAccountTemplateSelector::setupInitialSelection);
   }
 
   CategoriesPage::~CategoriesPage()

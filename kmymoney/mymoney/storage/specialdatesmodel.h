@@ -37,6 +37,12 @@ class /* no export here on purpose */ SpecialDateEntry
 {
 public:
   explicit SpecialDateEntry() {}
+  explicit SpecialDateEntry(const QString& id, const SpecialDateEntry& other)
+  : m_id(id)
+  , m_txt(other.m_txt)
+  , m_date(other.m_date)
+  {}
+
   SpecialDateEntry(const QString& id, const QDate& date, const QString& txt)
   : m_id(id)
   , m_txt(txt)

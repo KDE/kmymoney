@@ -62,6 +62,9 @@ public:
 protected Q_SLOTS:
   void slotRemoveTagWidget();
 
+Q_SIGNALS:
+  void tagsChanged(const QStringList& tagIdList);
+
 private:
   KTagContainerPrivate * const d_ptr;
   Q_DECLARE_PRIVATE(KTagContainer)

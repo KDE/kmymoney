@@ -126,11 +126,12 @@ bool LedgerFilterBase::lessThan(const QModelIndex& left, const QModelIndex& righ
     return true;
   }
 
+  const auto model = MyMoneyFile::baseModel();
   // make sure that the online balance is the last entry of a day
   // and the date headers are the first
   if (left.data(eMyMoney::Model::TransactionPostDateRole).toDate() == right.data(eMyMoney::Model::TransactionPostDateRole).toDate()) {
-    const auto leftModel = MyMoneyModelBase::baseModel(left);
-    const auto rightModel = MyMoneyModelBase::baseModel(right);
+    const auto leftModel = model->baseModel(left);
+    const auto rightModel = model->baseModel(right);
     if (leftModel != rightModel) {
       if (d->isAccountsModel(leftModel)) {
         return false;
@@ -160,7 +161,7 @@ bool LedgerFilterBase::filterAcceptsRow(int source_row, const QModelIndex& sourc
 
   // in case it's a special date entry, we accept it
   QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
-  const auto baseModel = MyMoneyModelBase::baseModel(idx);
+  const auto baseModel = MyMoneyFile::baseModel()->baseModel(idx);
   if (d->isSpecialDatesModel(baseModel)) {
     return (sortRole() == eMyMoney::Model::TransactionPostDateRole);
   }

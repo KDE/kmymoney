@@ -16,12 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "kloadtemplatedlg.h"
+#ifndef KLOADTEMPLATEDLG_H
+#define KLOADTEMPLATEDLG_H
+
+#include "kmm_templates_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
+#include <QDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -29,29 +32,31 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kloadtemplatedlg.h"
+template <typename T> class QList;
 
-#include "mymoneytemplate.h"
-#include "kaccounttemplateselector.h"
+namespace Ui { class KLoadTemplateDlg; }
 
-KLoadTemplateDlg::KLoadTemplateDlg(QWidget* parent) :
-  QDialog(parent),
-  ui(new Ui::KLoadTemplateDlg)
+class MyMoneyTemplate;
+class KLoadTemplateDlgPrivate;
+
+/// This dialog lets the user load more account templates
+class KMM_TEMPLATES_EXPORT KLoadTemplateDlg : public QDialog
 {
-  ui->setupUi(this);
-  connect(ui->buttonBox, &QDialogButtonBox::helpRequested, this, &KLoadTemplateDlg::slotHelp);
-}
+  Q_OBJECT
+  Q_DISABLE_COPY(KLoadTemplateDlg)
+  Q_DECLARE_PRIVATE(KLoadTemplateDlg)
 
-KLoadTemplateDlg::~KLoadTemplateDlg()
-{
-  delete ui;
-}
+public:
+  explicit KLoadTemplateDlg(QWidget *parent = nullptr);
+  ~KLoadTemplateDlg();
 
-QList<MyMoneyTemplate> KLoadTemplateDlg::templates() const
-{
-  return ui->m_templateSelector->selectedTemplates();
-}
+  QList<MyMoneyTemplate> templates() const;
 
-void KLoadTemplateDlg::slotHelp()
-{
-}
+private Q_SLOTS:
+  void slotHelp();
+
+private:
+  KLoadTemplateDlgPrivate * const d_ptr;
+};
+
+#endif

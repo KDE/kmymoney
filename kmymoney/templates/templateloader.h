@@ -1,6 +1,5 @@
 /*
- * Copyright 2008       Thomas Baumgart <tbaumgart@kde.org>
- * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,13 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KLOADTEMPLATEDLG_H
-#define KLOADTEMPLATEDLG_H
+#ifndef TEMPLATELOADER_H
+#define TEMPLATELOADER_H
+
+#include "kmm_templates_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDialog>
+#include <QObject>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -30,29 +31,36 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-template <typename T> class QList;
-
-namespace Ui { class KLoadTemplateDlg; }
-
+class TemplatesModel;
 class MyMoneyTemplate;
 
-/// This dialog lets the user load more account templates
-class KLoadTemplateDlg : public QDialog
+/**
+ * @author Thomas Baumgart
+ */
+
+class TemplateLoaderPrivate;
+class KMM_TEMPLATES_EXPORT TemplateLoader : public QObject
 {
   Q_OBJECT
-  Q_DISABLE_COPY(KLoadTemplateDlg)
+  Q_DISABLE_COPY(TemplateLoader)
+  Q_DECLARE_PRIVATE(TemplateLoader)
 
 public:
-  explicit KLoadTemplateDlg(QWidget *parent = nullptr);
-  ~KLoadTemplateDlg();
+  explicit TemplateLoader(QWidget* parent = nullptr);
+  ~TemplateLoader();
 
-  QList<MyMoneyTemplate> templates() const;
+  void load(TemplatesModel* model);
+
+  bool importTemplate(const MyMoneyTemplate& tmpl);
 
 private Q_SLOTS:
-  void slotHelp();
+  void slotLoadCountry();
+
+Q_SIGNALS:
+  void loadingFinished();
 
 private:
-  Ui::KLoadTemplateDlg *ui;
+  TemplateLoaderPrivate * const d_ptr;
 };
 
 #endif

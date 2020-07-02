@@ -171,7 +171,7 @@ bool LedgerPayeeFilter::filterAcceptsRow(int source_row, const QModelIndex& sour
     QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
 
     // special dates are shown when sorted by date
-    const auto baseModel = MyMoneyModelBase::baseModel(idx);
+    const auto baseModel = MyMoneyFile::baseModel()->baseModel(idx);
     if (d->isSpecialDatesModel(baseModel)) {
       return (sortRole() == eMyMoney::Model::TransactionPostDateRole);
     }

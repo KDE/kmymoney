@@ -73,6 +73,7 @@ protected Q_SLOTS:
   virtual void costCenterChanged(int costCenterIndex);
   virtual void postdateChanged(const QDate& date);
   virtual void payeeChanged(int payeeIndex);
+  virtual void tagsChanged(const QStringList& tagIds);
 
   void valueChanged();
 

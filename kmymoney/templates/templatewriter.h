@@ -1,6 +1,5 @@
 /*
- * Copyright 2015-2019  Thomas Baumgart <tbaumgart@kde.org>
- * Copyright 2020       Robert Szczesiak <dev.rszczesiak@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,14 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef NEWTRANSACTIONFORM_H
-#define NEWTRANSACTIONFORM_H
+#ifndef TEMPLATEWRITER_H
+#define TEMPLATEWRITER_H
+
+#include "kmm_templates_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QFrame>
-class QModelIndex;
+#include <QObject>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -31,26 +31,28 @@ class QModelIndex;
 // ----------------------------------------------------------------------------
 // Project Includes
 
+class MyMoneyTemplate;
 
-class NewTransactionForm : public QFrame
+/**
+ * @author Thomas Baumgart
+ */
+
+class TemplateWriterPrivate;
+class KMM_TEMPLATES_EXPORT TemplateWriter : public QObject
 {
   Q_OBJECT
+  Q_DISABLE_COPY(TemplateWriter)
+  Q_DECLARE_PRIVATE(TemplateWriter)
+
 public:
-  explicit NewTransactionForm(QWidget* parent = nullptr);
-  virtual ~NewTransactionForm();
+  explicit TemplateWriter(QWidget* parent = nullptr);
+  ~TemplateWriter();
 
-public Q_SLOTS:
-  void showTransaction(const QModelIndex& idx);
-  void modelDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
-
-protected Q_SLOTS:
-  void rowsInserted(const QModelIndex& parent, int first, int last);
-  void rowsRemoved(const QModelIndex& parent, int first, int last);
+  bool exportTemplate(const MyMoneyTemplate& tmpl, const QUrl &url);
+  QString errorMessage() const;
 
 private:
-  class Private;
-  Private * const d;
+  TemplateWriterPrivate * const d_ptr;
 };
 
-#endif // NEWTRANSACTIONFORM_H
-
+#endif

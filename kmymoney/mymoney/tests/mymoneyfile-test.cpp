@@ -1844,7 +1844,7 @@ void MyMoneyFileTest::testBaseCurrency()
     unexpectedException(e);
   }
 
-#warning "Cleanup dead code"
+/// @todo "Cleanup dead code"
 #if 0 // invalid test with new model based backend
   // check if it gets reset when attaching a new storage
   m->detachStorage(storage);

@@ -23,6 +23,7 @@ set(kmymoney_STAT_HEADERS
 
 ########### Shared widget library ###########
 set(kmm_widgets_sources
+  kaccounttemplateselector.cpp
   columnselector.cpp
   kmymoneydateinput.cpp
   kmymoneyvalidationfeedback.cpp
@@ -155,7 +156,6 @@ set(_uncritial_common_sources
 
 # sources that contain the KMM_DESIGNER flag
 set (_critial_common_sources
-  kaccounttemplateselector.cpp
   kmymoneycurrencyselector.cpp
   kmymoneyaccountcompletion.cpp
   kmymoneycategory.cpp
@@ -259,6 +259,7 @@ set(libwidgets_a_UI
 
 
 ki18n_wrap_ui(widgets_ui_srcs ${libwidgets_a_UI})
+
 add_custom_target(generate_widgets_ui_srcs DEPENDS ${widgets_ui_srcs})
 
 add_library(widgets STATIC

@@ -1,6 +1,7 @@
 /*
  * Copyright 2017       Ralf Habacker <ralf.habacker@freenet.de>
  * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -19,13 +20,15 @@
 #ifndef KTEMPLATEEXPORTDLG_H
 #define KTEMPLATEEXPORTDLG_H
 
+#include "kmm_templates_export.h"
+
 #include <QDialog>
 
 namespace Ui {
-class KTemplateExportDlg;
+  class KTemplateExportDlg;
 }
 
-class KTemplateExportDlg : public QDialog
+class KMM_TEMPLATES_EXPORT KTemplateExportDlg : public QDialog
 {
     Q_OBJECT
 

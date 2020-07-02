@@ -59,7 +59,8 @@ bool SpecialDatesFilter::filterAcceptsRow(int source_row, const QModelIndex& sou
   Q_D(const SpecialDatesFilter);
 
   QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
-  const auto baseModel = MyMoneyModelBase::baseModel(idx);
+  const auto model = MyMoneyFile::baseModel();
+  const auto baseModel = model->baseModel(idx);
   if (d->isSpecialDatesModel(baseModel)) {
     // make sure we don't show trailing special date entries
     const auto rows = sourceModel()->rowCount(source_parent);
@@ -73,7 +74,7 @@ bool SpecialDatesFilter::filterAcceptsRow(int source_row, const QModelIndex& sou
         // we're done scanning
         break;
       }
-      const auto testModel = MyMoneyModelBase::baseModel(testIdx);
+      const auto testModel = model->baseModel(testIdx);
       if (!d->isSpecialDatesModel(testModel)) {
         // we did not hit a special date entry
         // now we need to check for a real transaction or the online balance one
@@ -89,7 +90,7 @@ bool SpecialDatesFilter::filterAcceptsRow(int source_row, const QModelIndex& sou
     if (visible && ((source_row + 1) < rows)) {
       // check if the next is also a date entry
       testIdx = sourceModel()->index(source_row+1, 0, source_parent);
-      const auto testModel = MyMoneyModelBase::baseModel(testIdx);
+      const auto testModel = model->baseModel(testIdx);
       if (d->isSpecialDatesModel(testModel)) {
         visible = false;
       }

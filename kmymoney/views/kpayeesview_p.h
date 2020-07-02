@@ -285,7 +285,7 @@ public:
   {
     const auto baseIdx = MyMoneyFile::instance()->payeesModel()->indexById(id);
     if (baseIdx.isValid()) {
-      const auto idx = MyMoneyModelBase::mapFromBaseSource(m_renameProxyModel, baseIdx);
+      const auto idx = MyMoneyFile::baseModel()->mapFromBaseSource(m_renameProxyModel, baseIdx);
       ui->m_payees->setCurrentIndex(idx);
       ui->m_payees->scrollTo(idx);
     }

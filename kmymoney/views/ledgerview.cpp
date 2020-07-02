@@ -339,7 +339,7 @@ void LedgerView::currentChanged(const QModelIndex& current, const QModelIndex& p
       edit(idx);
     } else {
       scrollTo(idx, EnsureVisible);
-      emit transactionSelected(MyMoneyModelBase::mapToBaseSource(idx));
+      emit transactionSelected(MyMoneyFile::baseModel()->mapToBaseSource(idx));
     }
     QMetaObject::invokeMethod(this, "doItemsLayout", Qt::QueuedConnection);
   }
@@ -506,7 +506,7 @@ void LedgerView::selectMostRecentTransaction()
     const auto journalModel = MyMoneyFile::instance()->journalModel();
     while(row >= 0) {
       const QModelIndex idx = model()->index(row, 0);
-      if (MyMoneyModelBase::baseModel(idx) == journalModel) {
+      if (MyMoneyFile::baseModel()->baseModel(idx) == journalModel) {
         setCurrentIndex(idx);
         selectRow(idx.row());
         scrollTo(idx, QAbstractItemView::PositionAtBottom);

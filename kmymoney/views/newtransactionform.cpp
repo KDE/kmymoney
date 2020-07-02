@@ -1,5 +1,6 @@
 /*
  * Copyright 2015-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2020       Robert Szczesiak <dev.rszczesiak@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -32,6 +33,7 @@
 #include "modelenums.h"
 #include "journalmodel.h"
 #include "mymoneyfile.h"
+#include "tagsmodel.h"
 #include "statusmodel.h"
 
 using namespace eLedgerModel;
@@ -89,7 +91,7 @@ void NewTransactionForm::rowsRemoved(const QModelIndex& parent, int first, int l
 
 void NewTransactionForm::showTransaction(const QModelIndex& idx)
 {
-  auto index = MyMoneyModelBase::mapToBaseSource(idx);
+  const auto index = MyMoneyFile::baseModel()->mapToBaseSource(idx);
   d->row = index.row();
 
   d->ui->dateEdit->setText(QLocale().toString(index.data(eMyMoney::Model::TransactionPostDateRole).toDate(),
@@ -101,11 +103,22 @@ void NewTransactionForm::showTransaction(const QModelIndex& idx)
   d->ui->memoEdit->ensureCursorVisible();
   d->ui->accountEdit->setText(index.data(eMyMoney::Model::TransactionCounterAccountRole).toString());
   d->ui->accountEdit->home(false);
+
+  d->ui->tagEdit->clear();
+  QStringList splitTagList = index.data(eMyMoney::Model::SplitTagIdRole).toStringList();
+  if (!splitTagList.isEmpty()) {
+    std::transform(splitTagList.begin(), splitTagList.end(), splitTagList.begin(),
+                   [] (const QString& tagId) { return MyMoneyFile::instance()->tagsModel()->itemById(tagId).name(); });
+    d->ui->tagEdit->setText(splitTagList.join(", "));
+    d->ui->tagEdit->home(false);
+  }
+
   d->ui->numberEdit->setText(index.data(eMyMoney::Model::SplitNumberRole).toString());
 
-  const QString amount = QString("%1 %2").arg(index.data(eMyMoney::Model::SplitSharesFormattedRole).toString())
-  .arg(index.data(eMyMoney::Model::SplitSharesSuffixRole).toString());
-  d->ui->amountEdit->setText(amount);
+  d->ui->amountEdit->setText(i18nc("@item:intext Amount, %1 transaction amount, %2 abbreviated Credit/Debit suffix: Cr. or Dr.",
+                                   "%1 %2",
+                                   index.data(eMyMoney::Model::SplitSharesFormattedRole).toString(),
+                                   index.data(eMyMoney::Model::SplitSharesSuffixRole).toString()));
 
   const auto status = index.data(eMyMoney::Model::SplitReconcileFlagRole).toInt();
   const auto statusIdx = MyMoneyFile::instance()->statusModel()->index(status, 0);

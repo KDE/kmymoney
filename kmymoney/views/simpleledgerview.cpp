@@ -68,7 +68,7 @@ public:
   , accountCombo(nullptr)
   , lastIdx(-1)
   , inModelUpdate(false)
-  , m_needLoad(true)
+  , m_needInit(true)
   {}
 
   ~SimpleLedgerViewPrivate()
@@ -79,7 +79,7 @@ public:
   void init()
   {
     Q_Q(SimpleLedgerView);
-    m_needLoad = false;
+    m_needInit = false;
     ui->setupUi(q);
     ui->ledgerTab->setTabIcon(0, Icons::get(Icon::ListAdd));
     ui->ledgerTab->setTabText(0, QString());
@@ -140,7 +140,7 @@ public:
   QUrl                          webSiteUrl;
   int                           lastIdx;
   bool                          inModelUpdate;
-  bool                          m_needLoad;
+  bool                          m_needInit;
 };
 
 
@@ -323,7 +323,7 @@ void SimpleLedgerView::showTransactionForm(bool show)
 void SimpleLedgerView::closeLedgers()
 {
   Q_D(SimpleLedgerView);
-  if (d->m_needLoad)
+  if (d->m_needInit)
     return;
 
   // get storage id without the enclosing braces
@@ -367,7 +367,7 @@ void SimpleLedgerView::closeLedgers()
 void SimpleLedgerView::openLedgersAfterOpen()
 {
   Q_D(SimpleLedgerView);
-  if (d->m_needLoad)
+  if (d->m_needInit)
     return;
 
   // get storage id without the enclosing braces
@@ -420,7 +420,7 @@ void SimpleLedgerView::openLedgersAfterOpen()
 void SimpleLedgerView::showEvent(QShowEvent* event)
 {
   Q_D(SimpleLedgerView);
-  if (d->m_needLoad)
+  if (d->m_needInit)
     d->init();
 
   // don't forget base class implementation
@@ -473,4 +473,18 @@ void SimpleLedgerView::slotSettingsChanged()
     d->accountsModel->setHideFavoriteAccounts(false);
   }
   emit settingsChanged();
+}
+
+void SimpleLedgerView::executeCustomAction(eView::Action action)
+{
+  switch(action) {
+    case eView::Action::InitializeAfterFileOpen:
+      openLedgersAfterOpen();
+      break;
+    case eView::Action::CleanupBeforeFileClose:
+      closeLedgers();
+      break;
+    default:
+      break;
+  }
 }

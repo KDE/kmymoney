@@ -350,7 +350,7 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
     if(!opt.text.isEmpty() || !lines.isEmpty()) {
 
       // check if it is a scheduled transaction and display it as inactive
-      if (MyMoneyModelBase::baseModel(index) == MyMoneyFile::instance()->schedulesJournalModel()) {
+      if (MyMoneyFile::baseModel()->baseModel(index) == MyMoneyFile::instance()->schedulesJournalModel()) {
         opt.state &= ~QStyle::State_Enabled;
         isOverdue = index.data(eMyMoney::Model::ScheduleIsOverdueRole).toBool();
       }

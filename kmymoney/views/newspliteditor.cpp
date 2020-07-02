@@ -474,7 +474,7 @@ void NewSplitEditor::setCostCenterId(const QString& id)
 {
   const auto baseIdx = MyMoneyFile::instance()->costCenterModel()->indexById(id);
   if (baseIdx.isValid()) {
-    const auto index = CostCenterModel::mapFromBaseSource(d->costCenterModel, baseIdx);
+    const auto index = MyMoneyFile::baseModel()->mapFromBaseSource(d->costCenterModel, baseIdx);
     if(index.isValid()) {
       d->ui->costCenterCombo->setCurrentIndex(index.row());
     }

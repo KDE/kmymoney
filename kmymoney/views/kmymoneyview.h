@@ -241,22 +241,6 @@ public Q_SLOTS:
   void slotFileClosed();
 
 private Q_SLOTS:
-  /**
-    * This slots switches the view to the specific page
-    */
-  void slotShowHomePage();
-  void slotShowInstitutionsPage();
-  void slotShowAccountsPage();
-  void slotShowSchedulesPage();
-  void slotShowCategoriesPage();
-  void slotShowTagsPage();
-  void slotShowPayeesPage();
-  void slotShowLedgersPage();
-  void slotShowInvestmentsPage();
-  void slotShowReportsPage();
-  void slotShowBudgetPage();
-  void slotShowForecastPage();
-  void slotShowOutboxPage();
   void switchToDefaultView();
 
   /**

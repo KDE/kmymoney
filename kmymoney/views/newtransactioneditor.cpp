@@ -113,6 +113,7 @@ public:
     bool numberChanged(const QString& newNumber);
     bool valueChanged(CreditDebitHelper* valueHelper);
     bool isIncomeExpense(const QModelIndex& idx);
+    bool tagsChanged(const QStringList& ids);
 
     MyMoneyMoney getPrice();
     MyMoneyMoney splitsSum() const;
@@ -417,6 +418,15 @@ bool NewTransactionEditor::Private::payeeChanged(int payeeIndex)
     return true;
 }
 
+bool NewTransactionEditor::Private::tagsChanged(const QStringList& ids)
+{
+    if (splitModel.rowCount() == 1) {
+        const auto idx = splitModel.index(0, 0);
+        splitModel.setData(idx, ids, eMyMoney::Model::SplitTagIdRole);
+    }
+    return true;
+}
+
 MyMoneyMoney NewTransactionEditor::Private::splitsSum() const
 {
     const auto rows = splitModel.rowCount();
@@ -519,6 +529,7 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     connect(d->ui->dateEdit, SIGNAL(dateChanged(QDate)), this, SLOT(postdateChanged(QDate)));
     connect(d->amountHelper, SIGNAL(valueChanged()), this, SLOT(valueChanged()));
     connect(d->ui->payeeEdit, SIGNAL(currentIndexChanged(int)), this, SLOT(payeeChanged(int)));
+    connect(d->ui->tagContainer, &KTagContainer::tagsChanged, this, &NewTransactionEditor::tagsChanged);
 
     connect(d->ui->cancelButton, SIGNAL(clicked(bool)), this, SLOT(reject()));
     connect(d->ui->enterButton, SIGNAL(clicked(bool)), this, SLOT(acceptEdit()));
@@ -596,7 +607,7 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
     if (d->accepted)
         return;
 
-    auto idx = MyMoneyModelBase::mapToBaseSource(index);
+    auto idx = MyMoneyFile::baseModel()->mapToBaseSource(index);
     if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
         d->transaction = MyMoneyTransaction();
         d->transaction.setCommodity(d->m_account.currencyId());
@@ -642,7 +653,7 @@ void NewTransactionEditor::loadTransaction(const QModelIndex& index)
                 const auto payeeId = splitIdx.data(eMyMoney::Model::SplitPayeeIdRole).toString();
                 const QModelIndex payeeIdx = MyMoneyFile::instance()->payeesModel()->indexById(payeeId);
                 if (payeeIdx.isValid()) {
-                    d->ui->payeeEdit->setCurrentIndex(MyMoneyModelBase::mapFromBaseSource(d->payeesModel, payeeIdx).row());
+                    d->ui->payeeEdit->setCurrentIndex(MyMoneyFile::baseModel()->mapFromBaseSource(d->payeesModel, payeeIdx).row());
                 } else {
                     d->ui->payeeEdit->setCurrentIndex(0);
                 }
@@ -727,6 +738,11 @@ void NewTransactionEditor::valueChanged()
 void NewTransactionEditor::payeeChanged(int payeeIndex)
 {
     d->payeeChanged(payeeIndex);
+}
+
+void NewTransactionEditor::tagsChanged(const QStringList& tagIds)
+{
+    d->tagsChanged(tagIds);
 }
 
 void NewTransactionEditor::editSplits()
@@ -861,6 +877,7 @@ void NewTransactionEditor::saveTransaction()
         const auto payeeRow = d->ui->payeeEdit->currentIndex();
         const auto payeeIdx = d->payeesModel->index(payeeRow, 0);
         sp.setPayeeId(payeeIdx.data(eMyMoney::Model::IdRole).toString());
+        sp.setTagIdList(d->ui->tagContainer->selectedTags());
 
         if (sp.id().isEmpty()) {
             t.addSplit(sp);
@@ -889,6 +906,7 @@ void NewTransactionEditor::saveTransaction()
             s.setValue(idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>());
             s.setCostCenterId(idx.data(eMyMoney::Model::SplitCostCenterIdRole).toString());
             s.setPayeeId(idx.data(eMyMoney::Model::SplitPayeeIdRole).toString());
+            s.setTagIdList(idx.data(eMyMoney::Model::SplitTagIdRole).toStringList());
 
             if (s.id().isEmpty()) {
                 t.addSplit(s);
