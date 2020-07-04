@@ -232,6 +232,8 @@ else(ENABLE_WEBENGINE)
   find_package(KF5WebKit REQUIRED)
 endif(ENABLE_WEBENGINE)
 
+add_feature_info("QWebEngine" ENABLE_WEBENGINE "A next-gen QT Web Engine.")
+
 # check for optional LibOFX support
 cmake_dependent_option(ENABLE_OFXIMPORTER "Enable OFX Importer" ON
                        "LIBOFX_FOUND" OFF)
