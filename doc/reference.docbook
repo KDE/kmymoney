@@ -115,7 +115,7 @@
     </menuchoice></term>
     <listitem>
       <para><action>Imports financial data from other file types, such as QIF
-        and Gnucash, or a template file of accounts and categories that can be
+        and &gnucash;, or a template file of accounts and categories that can be
         used in setting up new accounts.</action></para>
     </listitem>
   </varlistentry>
@@ -193,7 +193,7 @@
       <guimenu>File</guimenu><guimenuitem>Quit</guimenuitem>
     </menuchoice></term>
     <listitem>
-      <para><action>Quit &kmymoney;</action></para>
+      <para><action>Quit &kmymoney;.</action></para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -448,7 +448,7 @@
     </menuchoice></term>
     <listitem>
       <para><action>Imports transactions from online banking for an
-        account</action></para>
+        account.</action></para>
     </listitem>
   </varlistentry>
 

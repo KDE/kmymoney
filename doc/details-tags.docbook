@@ -69,11 +69,10 @@
 <sect2>
 <title>Deleting a Tag</title>
 <para>
-  To remove a tag, either click on the Delete tag icon
-  <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="list-remove.png"/></imageobject></inlinemediaobject></guiicon> or
-  right-click the name and select <guimenuitem>Delete tag</guimenuitem>. If the
-  tag has any transactions, you will be presented with a dialog that allows you
+  To remove a tag, either click on the <guiicon><inlinemediaobject><imageobject><imagedata
+  fileref="list-remove.png" format='PNG'/></imageobject></inlinemediaobject></guiicon>
+  delete tag icon or right-click the name and select <guimenuitem>Delete tag</guimenuitem>.
+  If the tag has any transactions, you will be presented with a dialog that allows you
   to reassign them to a different tag.
 </para>
 

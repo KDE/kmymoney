@@ -24,8 +24,8 @@
   the <emphasis>date entry widget</emphasis>. This widget consists of three
   fields and a button. The fields present the <emphasis>day</emphasis>, the
   <emphasis>month</emphasis>, and the <emphasis>year</emphasis>, separated by
-  the date separator characters specified by your locale settings. The button -
-  if pressed - opens the <emphasis>datepicker</emphasis> widget.
+  the date separator characters specified by your locale settings. If you push
+  the button, will open the <emphasis>datepicker</emphasis> widget.
 </para>
 
 <para>
@@ -43,9 +43,9 @@
 </para>
 
 <para>
-  Within the date entry widget, the left/right cursor keys can be used to switch
+  Within the date entry widget, the &Left;/&Right; cursor keys can be used to switch
   between the <emphasis>day</emphasis>, the <emphasis>month</emphasis>, and the
-  <emphasis>year</emphasis> fields. Using the up/down cursor keys, the value of
+  <emphasis>year</emphasis> fields. Using the &Up;/&Down; cursor keys, the value of
   the selected field can be incremented/decremented.  The <keycap>+</keycap> and
   <keycap>-</keycap> keys can be used to increment/decrement a single day.
   Month and year boundaries are considered and incremented/decremented if
@@ -57,7 +57,7 @@
   <emphasis>day</emphasis>, <emphasis>month</emphasis>, or
   <emphasis>year</emphasis> field selects the field. The value can then be
   incremented/decremented using the arrow buttons on the right of the
-  widget. They act exactly the same as the up/down key.
+  widget. They act exactly the same as the &Up;/&Down; cursor keys.
 </para>
 
 <para>
@@ -93,7 +93,8 @@
   thousands separators, and decimal symbols) as well as a button to the
   right. Use the digits to enter the value. Separate the fractional part by
   entering the decimal separator for your locale. If you click on the button to
-  the right or press a key representing a numeric operation (&eg;, +,-,/,* or %)
+  the right or press a key representing a numeric operation (&eg;, <keycap>+</keycap>,
+  <keycap>-</keycap>, <keycap>/</keycap>, <keycap>*</keycap> or <keycap>%</keycap>)
   a little calculator will pop up and allow you to calculate the final value.
 </para>
 
@@ -120,7 +121,8 @@
 
 <para>
   Use the calculator widget just like a normal calculator and once done leave
-  it by clicking on the '=' button or press the '=' key on your keyboard.
+  it by clicking on the <guibutton>=</guibutton> button or press the <keycap>=</keycap>
+  key on your keyboard.
 </para>
 </sect2>
 
@@ -132,8 +134,8 @@
   entering the name by pressing keys on your keyboard.  As long as matching
   entries exist in the list of payees/payers maintained by &kmymoney; they will
   be presented in a box beneath or above the text entry area. Using the mouse or
-  the up/down keys one can select a name from that list. Using the keyboard
-  additionally requires you to select the entry by pressing the RETURN key.
+  the &Up;/&Down; keys one can select a name from that list. Using the keyboard
+  additionally requires you to select the entry by pressing the &Enter; key.
 </para>
 
 <para>
@@ -173,8 +175,8 @@
   start entering the name by pressing keys on your keyboard.  As long as
   matching entries exist in the list of categories/accounts known to &kmymoney;
   they will be presented in a box beneath or above the text entry area. Using
-  the mouse or the up/down keys one can select a name from that list. Using the
-  keyboard additionally requires you to select the entry by pressing the RETURN
+  the mouse or the &Up;/&Down; keys one can select a name from that list. Using the
+  keyboard additionally requires you to select the entry by pressing the &Enter;
   key.
 </para>
 

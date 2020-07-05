@@ -60,25 +60,21 @@
 <sect1 id="details.accounts.create">
 <title>Creating an Account</title>
 
-<para>
-  <emphasis>
-    NOTE: You must have a file open before you can create a new account. If you
+<note><para>
+    You must have a file open before you can create a new account. If you
     do not have an existing file, you will need to <link
     linkend="firsttime.3">create one</link>.
-  </emphasis>
-</para>
+</para></note>
 
 <para>
-  To create a new account, you can either select
-  <menuchoice><guimenu>Account</guimenu><guimenuitem>New
-  account...</guimenuitem></menuchoice> from the menu or choose the New
-  account... icon <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="newacct.png" format="PNG"/></imageobject><textobject>
-  <phrase>New</phrase></textobject></inlinemediaobject></guiicon> from the
-  toolbar.  You can also create an account from the Accounts view; click on the
-  Accounts icon in the view selector and then right click on the Asset or
-  Liability tree icon and select <guimenuitem>New account...</guimenuitem> from
-  the popup menu.
+  To create a new account, you can either select the <menuchoice>
+  <guimenu>Account</guimenu><guimenuitem>New account...</guimenuitem></menuchoice>
+  menu item or choose the <guiicon><inlinemediaobject><imageobject><imagedata
+  fileref="newacct.png" format="PNG"/></imageobject><textobject></inlinemediaobject>
+  </guiicon> new account icon from the toolbar. You can also create an account
+  from the Accounts view; click on the Accounts icon in the view selector and
+  then right click on the Asset or Liability tree icon and select <guimenuitem>New
+  account...</guimenuitem> from the popup menu.
 </para>
 
 <sect2 id="details.accounts.create.institution">
@@ -371,8 +367,8 @@
 
 <para>
   The next three items are for handling Loans on which you've already made
-  payments.  If you select Yes in the <guilabel>"Did you make/receive any
-  payments yet?"</guilabel> dropdown, you can then select whether you want to
+  payments.  If you select <guibutton>Yes</guibutton> in the <guilabel>Did you make/receive any
+  payments yet?</guilabel> dropdown, you can then select whether you want to
   record all payments or just those from the beginning of the current year.  If
   you want to record from the beginning of the current year, you are than asked
   to input the balance at the beginning of this year.
@@ -393,7 +389,7 @@
 <para>
   Finally, enter information about how the interest rate varies.  If the loan is
   fixed-rate there is nothing to do.  If the rate varies, select Variable in
-  <guilabel>"Type of interest rate"</guilabel> and then enter the interval
+  <guilabel>Type of interest rate</guilabel> and then enter the interval
   between interest rate changes and the date the first change of interest rate
   is due: &kmymoney; will ask you to update the interest rate when that date
   arrives.  Click <guibutton>Next</guibutton> to continue.
@@ -582,14 +578,14 @@
 </para>
 	
 <para>
-  If you re-financed an existing Loan, check the <guilabel>"Refinance existing
-  loan"</guilabel> check box, select the Loan account and &kmymoney; will create
+  If you re-financed an existing Loan, check the <guilabel>Refinance existing
+  loan</guilabel> check box, select the Loan account and &kmymoney; will create
   a transfer transaction paying off the existing loan.
 </para>
 	
 <para>
-  If you don't want to create the payout transaction, check the <guilabel>"Do
-  not create payout transaction"</guilabel> check box.
+  If you don't want to create the payout transaction, check the <guilabel>Do
+  not create payout transaction</guilabel> check box.
 </para>
 </sect2>
 
@@ -654,10 +650,9 @@
   <guibutton>Cancel</guibutton> to abandon creating the new account.
 </para>
 
-<para>
-  NOTE: The Type and Currency cannot at present be changed after the account is
-  created.
-</para>
+<note><para>
+  The Type and Currency cannot at present be changed after the account is created.
+</para></note>
 </sect2>
 </sect1>
 
@@ -667,8 +662,8 @@
 <para>
   To open an account in the Ledger view you can either click on the link to the
   account from the Home view, or click on the <guiicon><inlinemediaobject>
-  <imageobject> <imagedata fileref="ledgers_view.png" /> </imageobject>
-  </inlinemediaobject>Ledgers</guiicon> icon in the view selector and select the
+  <imageobject><imagedata fileref="ledgers_view.png" format='PNG'/></imageobject>
+  </inlinemediaobject></guiicon> ledgers icon in the view selector and select the
   account in the drop down box at the top of the view. Alternatively, in the
   <guiicon>Account</guiicon> view, either double-click the account entry or
   right click and select <guimenuitem>Open ledger</guimenuitem>.
@@ -680,9 +675,8 @@
 
 <para>
   To edit a particular account, right-click that account and choose
-  <menuchoice><guimenuitem>Edit account...</guimenuitem></menuchoice> or
-  with that account open in the ledger, select
-  <menuchoice><guimenu>Account</guimenu><guimenuitem>Edit
+  <guimenuitem>Edit account...</guimenuitem> or with that account open in the
+  ledger, select <menuchoice><guimenu>Account</guimenu><guimenuitem>Edit
   Account...</guimenuitem></menuchoice>. A window will pop-up with several
   tabs, each allowing you to view and change certain information about the
   account.  For more information on any of these details, see the section on
@@ -760,7 +754,7 @@
 <itemizedlist>
 <listitem>
 <para>
-  <emphasis>Account Details</emphasis> This shows the status of the
+  <emphasis>Account Details</emphasis>: This shows the status of the
   online connection, the bank/broker and account number, and allows
   you to store or change the password for the online account.
 </para>
@@ -768,7 +762,7 @@
 
 <listitem>
 <para>
-  <emphasis>OFX Details</emphasis> Here you can adjust certain details
+  <emphasis>OFX Details</emphasis>: Here you can adjust certain details
   &kmymoney; uses when it establishes an OFX connection with the
   institution.  This should only be necessary if you get certain
   errors when you first set up the online account, or perhaps if your
@@ -778,7 +772,7 @@
 
 <listitem>
 <para>
-  <emphasis>Import Details</emphasis> Here you can tell &kmymoney;
+  <emphasis>Import Details</emphasis>: Here you can tell &kmymoney;
  what to use as the start date for the import.  In addition, starting
  with version 4.6, you can choose whether the payee's name is based
  on the PAYEEID, NAME, or MEMO field of the imported transaction.

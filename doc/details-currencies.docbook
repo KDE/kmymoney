@@ -55,16 +55,14 @@
 </para>
 
 <para>
-  To manually add a currency, select
+  To manually add a currency, select the
   <menuchoice><guimenu>Tools</guimenu><guimenuitem>Currencies...</guimenuitem></menuchoice>
-  to display the <guilabel>Currencies</guilabel> dialog, as shown above.  Right
-  click on any existing currency and select <menuchoice><guimenuitem>New
-  currency</guimenuitem></menuchoice> from the <menuchoice><guimenu>Currency
-  Options</guimenu></menuchoice> context menu.  Enter the official code for the
+  menu item to display the <guilabel>Currencies</guilabel> dialog, as shown above. Right
+  click on any existing currency and select <guimenuitem>New currency</guimenuitem>
+  from the <guimenu>Currency Options</guimenu> context menu.  Enter the official code for the
   currency and click <guilabel>OK</guilabel>.  The currency will be created with
   the name <quote>New Currency</quote>.  To change the name, either press
-  <keycap>F2</keycap> or right click and select <menuchoice><guimenuitem>Rename
-  currency</guimenuitem></menuchoice>.
+  <keycap>F2</keycap> or right click and select <guimenuitem>Rename currency</guimenuitem>.
 </para>
 </sect2>
 </sect1>
@@ -109,7 +107,7 @@
   The price database editor allows you to enter exchange rates between
   currencies or prices for investments.  You can pull it up using the
   <menuchoice><guimenu>Tools</guimenu><guimenuitem>Prices...</guimenuitem></menuchoice>
-  menu option.
+  menu item.
 </para>
 
 <para>

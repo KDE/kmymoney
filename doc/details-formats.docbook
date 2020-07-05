@@ -13,7 +13,7 @@
 <para>
   Unless you choose to use a <link linkend="details.database">relational
   database</link>, &kmymoney; will store all your financial information in a
-  file ending in .kmy.  Also, unless you use a <link
+  file ending in <filename class="extension">.kmy</filename>. Also, unless you use a <link
   linkend="firsttime.launch">command line option</link> that tells it not to do
   so, when you launch &kmymoney;, it will open the last file it had open.
   However, it is important to know that there is more than one type of file
@@ -24,7 +24,7 @@
   This chapter describes the formats in which &kmymoney; stores its data in
   permanent form on the user's storage device. In general, &kmymoney; stores its
   information in form of an &XML; document. Depending on the actual format, this
-  &XML; document will be written
+  &XML; document will be written:
 
 <itemizedlist>
   <listitem><para>as a <link linkend="details.formats.plain">plain text
@@ -48,7 +48,7 @@
   This is the most space consuming format supported, as no compression is
   performed. It is not intended for normal use, and is provided to support
   debugging purposes and the capability to modify the file manually. If you end
-  a filename in <literal role="extension">.xml</literal>, the file will be
+  a filename in <filename class="extension">.xml</filename>, the file will be
   stored in this format.
 
 <caution>
@@ -67,7 +67,7 @@
 <title>GZIP-compressed file</title>
 <para>
   This is the normal format used by &kmymoney; when you store a file with the
-  extension <literal role="extension">.kmy</literal>.
+  extension <filename class="extension">.kmy</filename>.
 </para>
 
 <note>
@@ -79,15 +79,15 @@
 
 <para>
   If you want to look at the contents of a GZIP compressed file, rename it to a
-  filename ending in <literal role="extension">.gz</literal> (&eg;,
+  filename ending in <filename class="extension">.gz</filename> (&eg;,
   rename <filename>myfinances.kmy</filename>
   to <filename>myfinances.kmy.gz</filename>), then use <command>gunzip</command>
   to uncompress the file and look at it. You don't have to compress it before
   loading it into &kmymoney; the next time, because &kmymoney; can read the
   uncompressed data as well. Nevertheless, if you save it thereafter, it will be
-  saved compressed again. Use
-  the <link linkend="details.formats.plain">.xml</link> extension to write it in
-  uncompressed format.
+  saved compressed again. Use the <link linkend="details.formats.plain"><filename
+  class="extension">.xml</filename></link> extension to write it in uncompressed
+  format.
 </para>
 </sect1>
 
@@ -100,7 +100,7 @@
   cipher the data using GPG and the key you provided before actually storing
   it. When opening an encrypted file, you have to provide the passphrase
   necessary to open your keyring. The encrypted file itself will be stored in
-  GPG's <emphasis>ASCII armored</emphasis> format.
+  GPG's <emphasis>&ASCII; armored</emphasis> format.
   <note>
     <para>
       When using GPG encryption, GPG also compresses the file, so no extra
@@ -177,7 +177,7 @@
   supported so that in case of a problem, you can supply the &kmymoney;
   development team with your file without disclosing any of the confidential
   details in your financial data.  For example, it changes institution, account,
-  payee, and category names to strings such as "I000001" and "A000001," it makes
+  payee, and category names to strings such as "I000001" and "A000001", it makes
   similar changes to all data such as account numbers, and it also randomly
   changes the amounts of transactions.
 </para>
@@ -186,7 +186,7 @@
   If instructed by the developers, use the <guimenuitem>Save as...</guimenuitem>
   menu item to store your data in anonymous format by selecting <literal
   role="filter">Anonymous files</literal> as the filter. This also changes the
-  file extension to <literal role="extension">.anon.xml</literal>.
+  file extension to <filename class="extension">.anon.xml</filename>.
 </para>
 
 <para>

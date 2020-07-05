@@ -164,8 +164,8 @@
 
 <para>
   In &kmymoney;, a loan is a type of account. Therefore, to create a new loan,
-  you begin by selecting <menuchoice><guimenu>Account</guimenu><guimenuitem>New
-  Account</guimenuitem></menuchoice>. Continue by answering the questions that
+  you begin by selecting the <menuchoice><guimenu>Account</guimenu><guimenuitem>New
+  Account</guimenuitem></menuchoice> menu item. Continue by answering the questions that
   the wizard poses to you.
 </para>
 
@@ -213,12 +213,12 @@
   </listitem>
 </itemizedlist>
 
-<para>
-  Note: If you are doubling the principal repaid with every periodic payment,
+<note><para>
+  If you are doubling the principal repaid with every periodic payment,
   you will need to recalculate the loan schedule for each installment. This will
   allow there to be an accurate value for the required principal repayment with
   each installment.
-</para>
+</para></note>
 </sect1>
 </chapter>
 
