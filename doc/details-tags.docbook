@@ -42,15 +42,16 @@
 <sect2>
 <title>Adding a Tag</title>
 <para>
-  Creating a tag can be done by 1 of 3 different ways. First you can click on the
-  Add tag icon  <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="list-add.png"/></imageobject></inlinemediaobject></guiicon> or
-  right-click on any tag and choose <guimenuitem>New tag</guimenuitem>. This
-  creates a new tag called <quote>New tag</quote>. Right-click on this tag and
-  select <guimenuitem>Rename tag</guimenuitem> to enter the name of the new tag.
-  Finally you can add a new tag directly into the ledger page or within a split 
-  transaction by typing the name of the tag in the tag field.  &kmymoney; will
-  ask if you want to add this tag and after selecting <quote>yes</quote> it will be added.
+  There are three different ways to create a new tag.  First, you can click on
+  the <guiicon><inlinemediaobject><imageobject><imagedata
+  fileref="list-add.png"/></imageobject></inlinemediaobject></guiicon> new tag
+  icon.  Second, you can right-click on any tag and choose <guimenuitem>New
+  tag</guimenuitem>. This creates a new tag called <quote>New tag.</quote>
+  Right-click on this tag and select <guimenuitem>Rename tag</guimenuitem> to
+  enter the name of the new tag.  Finally, you can add a new tag directly into
+  the ledger page or within a split transaction by typing the name of the tag in
+  the tag field.  &kmymoney; will ask if you want to add this tag and after
+  selecting <quote>yes</quote> it will be added.
 </para>
 </sect2>
 
