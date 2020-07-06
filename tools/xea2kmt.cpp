@@ -190,7 +190,7 @@ public:
                     readSlots(xml);
                 else
                 {
-                    xml.readElementText(QXmlStreamReader::SkipChildElements).trimmed();
+                    xml.readElementText(QXmlStreamReader::SkipChildElements);
                     if (debug)
                         qDebug() << "skipping" << _name.toString();
                 }
