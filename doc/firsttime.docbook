@@ -358,7 +358,7 @@
   To create a new file you can either select
   <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice>
   menu item or choose the <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="new.png" format='PNG'/></imageobject></inlinemediaobject></guiicon> new
+  fileref="new.png" format="PNG"/></imageobject></inlinemediaobject></guiicon> new
   icon from the toolbar. In addition, if the main welcome page is displayed,
   you can also select the first link: "Get started and setup accounts."
 </para>
@@ -571,7 +571,7 @@
       <para>
         To create an account using the accounts view click on the <guiicon>
         <inlinemediaobject><imageobject><imagedata fileref="accounts_view.png"
-        format='PNG'/></imageobject></inlinemediaobject></guiicon> accounts icon
+        format="PNG"/></imageobject></inlinemediaobject></guiicon> accounts icon
         in the view selector to display the Accounts View.  Right click on the
         either the Asset tree icon or the Liability tree icon in the right hand
         view and select <guimenuitem>New account</guimenuitem> from the popup
@@ -641,7 +641,7 @@
 <para>
   To maintain <link linkend="details.schedules">schedules</link> click on the
   <guiicon><inlinemediaobject><imageobject><imagedata fileref="schedule_view.png"
-  format='PNG'/></imageobject></inlinemediaobject></guiicon> schedules icon in
+  format="PNG"/></imageobject></inlinemediaobject></guiicon> schedules icon in
   the view selector.
 </para>
 </sect1>
@@ -652,7 +652,7 @@
 <para>
   To maintain <link linkend="details.categories">categories</link> click on the
   <guiicon><inlinemediaobject><imageobject><imagedata fileref="categories_view.png"
-  format='PNG'/></imageobject></inlinemediaobject></guiicon> categories icon in
+  format="PNG"/></imageobject></inlinemediaobject></guiicon> categories icon in
   the view selector.
 </para>
 
@@ -667,7 +667,7 @@
 
 <para>
   To maintain <link linkend="details.tags">tags</link> click on the <guiicon>
-  <inlinemediaobject><imageobject><imagedata fileref="mail-tagged.png" format='PNG'/>
+  <inlinemediaobject><imageobject><imagedata fileref="mail-tagged.png" format="PNG"/>
   </imageobject></inlinemediaobject></guiicon> tags icon in the view selector.
 </para>
 
@@ -682,7 +682,7 @@
 
 <para>
   To maintain your list of payees click on the <guiicon><inlinemediaobject>
-  <imageobject><imagedata fileref="payees_view.png" format='PNG'/></imageobject>
+  <imageobject><imagedata fileref="payees_view.png" format="PNG"/></imageobject>
   </inlinemediaobject></guiicon> payees icon in the view selector.
 </para>
 
@@ -721,7 +721,7 @@
 <para>
   The search dialog can be opened from the toolbar using the <guiicon>
   <inlinemediaobject><imageobject><imagedata fileref="transaction_find.png"
-  format='PNG'/></imageobject></inlinemediaobject></guiicon> find icon or by
+  format="PNG"/></imageobject></inlinemediaobject></guiicon> find icon or by
   selecting the <menuchoice><guimenu>Edit</guimenu><guimenuitem>Find
   Transaction</guimenuitem></menuchoice> menu item.
 </para>
