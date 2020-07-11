@@ -348,7 +348,7 @@
       </row>
       <row>
         <entry valign="top">
-          <para><literal>Accounts and Securities (see Note 2)</para>
+          <para><literal>Accounts and Securities (see Note 2)</literal></para>
         </entry>
         <entry valign="top">
           <para><literal>kmmAccounts.currencyId</literal></para>
@@ -411,7 +411,7 @@
   format, and, with a field name suffixed with '<literal>Formatted</literal>',
   in the form as shown on your screens.
 </para>
-  
+
 <para>
   Similarly, some fields, such as account type appear both as a numeric code,
   and in a field suffixed '<literal>String</literal>' in the form and language
@@ -422,7 +422,7 @@
 <sect3>
 <title>Updating your data</title>
 
-<para> 
+<para>
   Having data in an industry standard format does give you the ability to modify
   it outside the &kmymoney; application. DO NOT DO IT unless you really know
   what you are doing, and always be certain to make a backup copy of your data

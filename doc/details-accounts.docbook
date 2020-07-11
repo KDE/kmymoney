@@ -9,7 +9,7 @@
   <date>2018-02-01</date>
   <releaseinfo>5.0.0</releaseinfo>
 </chapterinfo>
-  
+
 <title>Accounts</title>
 
 <sect1 id="details.accounts.view">
@@ -70,7 +70,7 @@
   To create a new account, you can either select the <menuchoice>
   <guimenu>Account</guimenu><guimenuitem>New account...</guimenuitem></menuchoice>
   menu item or choose the <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="newacct.png" format="PNG"/></imageobject><textobject></inlinemediaobject>
+  fileref="newacct.png" format="PNG"/></imageobject></inlinemediaobject>
   </guiicon> new account icon from the toolbar. You can also create an account
   from the Accounts view; click on the Accounts icon in the view selector and
   then right click on the Asset or Liability tree icon and select <guimenuitem>New
@@ -348,7 +348,7 @@
             </mediaobject>
   </screenshot>
 </para>
-	
+
 <para>
   On the Details page you enter the general information about the loan.
 </para>
@@ -358,7 +358,7 @@
   borrowing money the loan will be listed in Accounts under Liabilities.  If you
   are lending money the loan will be listed under Assets.
 </para>
-	
+
 <para>
   Next, select the payee or payer of the loan.  As always, if the name doesn't
   yet exist in the Payees list, enter it here and &kmymoney; will create it for
@@ -373,7 +373,7 @@
   you want to record from the beginning of the current year, you are than asked
   to input the balance at the beginning of this year.
 </para>
-	
+
 <para>
   Next, select how often payments will be made and how often interest is
   compounded.  Compounding is where the interest is added to the amount owed on
@@ -385,7 +385,7 @@
 <para>
   Next, enter the date the first payment to be recorded.
 </para>
-	
+
 <para>
   Finally, enter information about how the interest rate varies.  If the loan is
   fixed-rate there is nothing to do.  If the rate varies, select Variable in
@@ -394,7 +394,7 @@
   is due: &kmymoney; will ask you to update the interest rate when that date
   arrives.  Click <guibutton>Next</guibutton> to continue.
 </para>
-	
+
 <para>
   <screenshot>
             <mediaobject>
@@ -407,7 +407,7 @@
             </mediaobject>
   </screenshot>
 </para>
-  
+
 <para>
   The Payments page is where you enter the payment and interest values for the
   loan.
@@ -480,7 +480,7 @@
   and will instead have to use a Liability or Asset account to track the loan
   manually.
 </para>
-	
+
 <para>
   If you omit one value, &kmymoney; will try to calculate it for you.  If you
   have entered all values &kmymoney; will check the values are consistent.
@@ -494,7 +494,7 @@
   Once the values are consistent, the <guibutton>Next</guibutton> button is
   enabled and you can advance to the next page.
 </para>
-	
+
 <para>
   <screenshot>
             <mediaobject>
@@ -538,17 +538,17 @@
   transaction</link> for your loan.  The Schedule page is where you enter the
   remaining details needed to create the schedule.
 </para>
-	
+
 <para>
   First enter the Category to which loan interest will be assigned.  Then enter
   the account from which the loan payment will be made.
 </para>
-	
+
 <para>
   The page also displays the first payment date for which the Schedule will be
   created.
 </para>
-	
+
 <para>
   <screenshot>
             <mediaobject>
@@ -566,23 +566,23 @@
   Optionally, &kmymoney; can create a transaction representing what was received
   or paid when the loan was created.
 </para>
-	
+
 <para>
   If you borrowed or lent cash select the account from which or to which the
   loan amount was paid.
 </para>
-	
+
 <para>
   If you borrowed money to purchase a car you can select or create an Asset
   account to help you track the value of the new car.
 </para>
-	
+
 <para>
   If you re-financed an existing Loan, check the <guilabel>Refinance existing
   loan</guilabel> check box, select the Loan account and &kmymoney; will create
   a transfer transaction paying off the existing loan.
 </para>
-	
+
 <para>
   If you don't want to create the payout transaction, check the <guilabel>Do
   not create payout transaction</guilabel> check box.
