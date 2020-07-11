@@ -425,7 +425,7 @@
   When a Budget's values are first modified, the <guibutton>Update</guibutton>
   and <guibutton>Revert</guibutton> buttons are enabled. Multiple changes can be
   made to the Budget. Pressing <guibutton>Update</guibutton> will store the changes
-  and disable this buttons.
+  and disable these buttons.
 </para>
 
 <para>
