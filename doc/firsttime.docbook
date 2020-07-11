@@ -45,8 +45,8 @@
 
 <note>
   <para>
-    Tips can be read at anytime by selecting <guimenuitem>Show tip of the
-    day</guimenuitem> from the <guimenu>Help</guimenu> menu within &kmymoney;.
+    Tips can be read at anytime by selecting the <menuchoice><guimenu>Help</guimenu>
+    <guimenuitem>Show tip of the day</guimenuitem></menuchoice> menu item within &kmymoney;.
   </para>
 </note>
 
@@ -246,10 +246,10 @@
 	<inlinemediaobject>
 	  <imageobject>
 	    <imagedata fileref="ledgers_view.png" format="PNG"/>
-          </imageobject>
+      </imageobject>
 	  <textobject>
 	    <phrase>Ledgers View</phrase>
-          </textobject>
+      </textobject>
 	</inlinemediaobject>
       </guiicon>
       Ledgers: Your account transactions.
@@ -264,7 +264,7 @@
 	    <imagedata fileref="investments_view.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-            <phrase>Investments View</phrase>
+        <phrase>Investments View</phrase>
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
@@ -298,10 +298,10 @@
 	  </imageobject>
 	  <textobject>
 	    <phrase>Budgets View</phrase>
-          </textobject>
+      </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Budgets: Your budgets
+      Budgets: Your budgets.
     </para>
   </listitem>
 
@@ -317,7 +317,7 @@
 	  </textobject>
 	</inlinemediaobject>
       </guiicon>
-      Forecast: This view provides a forecast of your accounts and categories
+      Forecast: This view provides a forecast of your accounts and categories.
     </para>
   </listitem>
 
@@ -357,9 +357,9 @@
 <para>
   To create a new file you can either select
   <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice>
-  menu item or choose the <inlinemediaobject><imageobject><imagedata
-  fileref="new.png"/></imageobject><textobject><phrase>New</phrase></textobject></inlinemediaobject>
-  icon from the toolbar.  In addition, if the main welcome page is displayed,
+  menu item or choose the <guiicon><inlinemediaobject><imageobject><imagedata
+  fileref="new.png" format='PNG'/></imageobject></inlinemediaobject></guiicon> new
+  icon from the toolbar. In addition, if the main welcome page is displayed,
   you can also select the first link: "Get started and setup accounts."
 </para>
 
@@ -569,9 +569,9 @@
     <term>Using the Accounts view</term>
     <listitem>
       <para>
-        To create an account using the accounts view click on the Accounts icon
-        <guiicon><inlinemediaobject><imageobject><imagedata
-        fileref="accounts_view.png"/></imageobject></inlinemediaobject></guiicon>
+        To create an account using the accounts view click on the <guiicon>
+        <inlinemediaobject><imageobject><imagedata fileref="accounts_view.png"
+        format='PNG'/></imageobject></inlinemediaobject></guiicon> accounts icon
         in the view selector to display the Accounts View.  Right click on the
         either the Asset tree icon or the Liability tree icon in the right hand
         view and select <guimenuitem>New account</guimenuitem> from the popup
@@ -640,8 +640,8 @@
 
 <para>
   To maintain <link linkend="details.schedules">schedules</link> click on the
-  Schedules icon <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="schedule_view.png"/></imageobject></inlinemediaobject></guiicon> in
+  <guiicon><inlinemediaobject><imageobject><imagedata fileref="schedule_view.png"
+  format='PNG'/></imageobject></inlinemediaobject></guiicon> schedules icon in
   the view selector.
 </para>
 </sect1>
@@ -651,9 +651,9 @@
 
 <para>
   To maintain <link linkend="details.categories">categories</link> click on the
-  <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="categories_view.png"/></imageobject></inlinemediaobject></guiicon>
-  Categories icon in the view selector.
+  <guiicon><inlinemediaobject><imageobject><imagedata fileref="categories_view.png"
+  format='PNG'/></imageobject></inlinemediaobject></guiicon> categories icon in
+  the view selector.
 </para>
 
 <para>
@@ -666,10 +666,9 @@
 <title>Tags</title>
 
 <para>
-  To maintain <link linkend="details.tags">tags</link> click on the Tags icon
-  <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="mail-tagged.png"/></imageobject></inlinemediaobject></guiicon> in the
-  view selector.
+  To maintain <link linkend="details.tags">tags</link> click on the <guiicon>
+  <inlinemediaobject><imageobject><imagedata fileref="mail-tagged.png" format='PNG'/>
+  </imageobject></inlinemediaobject></guiicon> tags icon in the view selector.
 </para>
 
 <para>
@@ -682,10 +681,9 @@
 <title>Payees</title>
 
 <para>
-  To maintain your list of payees click on the Payees icon
-  <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="payees_view.png"/></imageobject></inlinemediaobject></guiicon> in the
-  view selector.
+  To maintain your list of payees click on the <guiicon><inlinemediaobject>
+  <imageobject><imagedata fileref="payees_view.png" format='PNG'/></imageobject>
+  </inlinemediaobject></guiicon> payees icon in the view selector.
 </para>
 
 <para>
@@ -721,11 +719,11 @@
 </para>
 
 <para>
-  The search dialog can be opened from the toolbar using the Find icon
-  <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="transaction_find.png"/></imageobject></inlinemediaobject></guiicon>
-  or by selecting <guimenuitem>Find Transaction</guimenuitem> from the
-  <guimenu>Edit</guimenu> menu.
+  The search dialog can be opened from the toolbar using the <guiicon>
+  <inlinemediaobject><imageobject><imagedata fileref="transaction_find.png"
+  format='PNG'/></imageobject></inlinemediaobject></guiicon> find icon or by
+  selecting the <menuchoice><guimenu>Edit</guimenu><guimenuitem>Find
+  Transaction</guimenuitem></menuchoice> menu item.
 </para>
 
 <para>
@@ -751,8 +749,8 @@
   To reconcile an account, first select the account, either from
   <guiicon>Accounts</guiicon> view or from <guiicon>Ledgers</guiicon>
   view. Then, either click on the <guiicon>Reconcile</guiicon> icon on the
-  Toolbar, or select <guimenuitem>Reconcile</guimenuitem> from the
-  <guimenu>Account</guimenu> menu.
+  Toolbar, or select the <menuchoice><guimenu>Account</guimenu>
+  <guimenuitem>Reconcile</guimenuitem></menuchoice> menu item.
 </para>
 
 <para>
@@ -778,7 +776,7 @@
   <menuchoice><guimenu>File</guimenu><guimenuitem>Backup</guimenuitem></menuchoice>
   menu item and enter the folder where you wish the file to be saved. If the folder
   needs mounting first and you have the sufficient privileges then check the
-  tick box labeled <guilabel>Mount this directory before backing up</guilabel>
+  tick box labeled <guilabel>Mount this folder before backing up</guilabel>
   and click on <guibutton>OK</guibutton>.
 </para>
 
@@ -817,7 +815,7 @@
     instead of the last file it had open.  You can use the name of any valid
     &kmymoney; file, as described in the chapter on <link
     linkend="details.formats">file formats</link>.  In addition, this can be
-    used to import a <link linkend="details.impexp.gnucash">GnuCash</link> file.
+    used to import a <link linkend="details.impexp.gnucash">&gnucash;</link> file.
   </para>
 </formalpara>
 </sect1>
@@ -831,10 +829,10 @@
 <para>
   If you get a new computer, it's very easy to move your data.  In fact, all you
   have to do is to copy your &kmymoney; data file.  The name of the file is
-  shown in the title bar when &kmymoney; is running, it usually ends in .kmy.
-  The first time you run the application on the new computer you will have to
-  tell it where you have put the data file, either by running from the command
-  line, or from the
+  shown in the title bar when &kmymoney; is running, it usually ends in <filename
+  class="extension">.kmy</filename>. The first time you run the application on the
+  new computer you will have to tell it where you have put the data file, either
+  by running from the command line, or from the
   <menuchoice><guimenu>File</guimenu><guimenuitem>Open...</guimenuitem></menuchoice>
   menu item. You should even be able to move between &Windows;, &MacOS;, and &Linux; systems.
 </para>
@@ -865,12 +863,12 @@
   previous section, &kmymoney; will work correctly, but you will have lost any
   settings you changed from the default on your old machine.  To maintain these
   settings, you also need to copy your configuration file.  This file is called
-  <quote>kmymoneyrc</quote>.  This file will be in a directory with other &kde;
-  application configuration files.  On a &Linux; system, this will be in
-  <quote>$KDEHOME/share/config</quote> where <quote>$KDEHOME</quote> is usually
-  <quote>.config</quote> within your home directory.  If you are migrating from
-  a version of &kmymoney; prior to 5.0 to 5.0 or later, the old location
-  of <quote>$KDEHOME</quote> was <quote>.kde4</quote>.
+  <filename>kmymoneyrc</filename>. This file will be in a folder with other &kde;
+  application configuration files. On a &Linux; system, this will be in
+  <filename class="directory">$KDEHOME/share/config</filename> where <envar>$KDEHOME</envar> is usually
+  <quote>.config</quote> within your home folder. If you are migrating from
+  a version of &kmymoney; prior to 5.0 or later, the old location
+  of <envar>$KDEHOME</envar> was <filename class="directory">.kde4</filename>.
 </para>
 
 <sect3 id="firsttime.newpc.settings.plugins">
@@ -878,9 +876,9 @@
 
 <para>
   If you have run any &kmymoney; plugin, such as the csv importer or exporter,
-  it may also have created a configuration file in that same directory, such as
-  csvimporterrc or csvexporterrc.  These should also be copied to the new
-  computer.
+  it may also have created a configuration file in that same folder, such as
+  <filename>csvimporterrc</filename> or <filename>csvexporterrc</filename>.
+  These should also be copied to the new computer.
 </para>
 
 <para>
@@ -903,7 +901,7 @@
   However, there may be important items which are stored by &kde; and not by
   &kmymoney;, such as passwords stored in kwallet.  Moving other parts of
   your &kde; setup is beyond the scope of this manual, although many of the
-  relevant files are also stored under <quote>$KDEHOME</quote>.
+  relevant files are also stored under <envar>$KDEHOME</envar>.
 </para>
 </note>
 </sect3>

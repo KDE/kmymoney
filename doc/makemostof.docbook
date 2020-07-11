@@ -200,7 +200,7 @@
     <term>Asset</term>
     <listitem>
       <para>
-        Property, collections, &etc;.
+        Property, collections, &etc;
       </para>
     </listitem>
   </varlistentry>
@@ -229,7 +229,7 @@
     <term>Loan</term>
     <listitem>
       <para>
-        Loans made to you, mortgages, &etc;.
+        Loans made to you, mortgages, &etc;
       </para>
     </listitem>
   </varlistentry>
@@ -314,9 +314,8 @@
   probably make use of one or more institutions where you have accounts, which
   may be in credit or debit. In order to familiarize yourself with the way
   &kmymoney; works, choose an account you want to track with &kmymoney; and
-  select <menuchoice><guimenu>File</guimenu>
-  <guimenuitem>New</guimenuitem></menuchoice> in order
-  to set up an account file.
+  select the <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem>
+  </menuchoice> menu item in order to set up an account file.
 </para>
 
 <para>

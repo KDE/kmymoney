@@ -34,13 +34,13 @@
 
   <varlistentry>
     <term>Yearly</term>
-    <listitem><para>specify a single value to divide evenly across each month in
+    <listitem><para>Specify a single value to divide evenly across each month in
       the Budget</para></listitem>
   </varlistentry>
 
   <varlistentry>
     <term>Individual</term>
-    <listitem><para>specify separate values for each month.</para>
+    <listitem><para>Specify separate values for each month.</para>
       <para>This is used for income and expenses spread irregularly through the
           year.</para></listitem>
   </varlistentry>
@@ -105,7 +105,7 @@
 <para>
   Values from the selected Budget are displayed to the right. To select a
   different Budget you can click on the Budget in the list.  Alternatively, when
-  the list has focus, you can select a different Budget using the up and down
+  the list has focus, you can select a different Budget using the &Up; and &Down;
   keys. If you have made changes to a Budget and then select a different budget
   &kmymoney; will ask you whether you want to save or discard the changes.
 </para>
@@ -139,7 +139,7 @@
   <varlistentry>
     <term>Delete</term>
     <listitem>
-      <para>Delete the selected Budget</para>
+      <para>Delete the selected Budget.</para>
     </listitem>
   </varlistentry>
 
@@ -286,14 +286,14 @@
 <!-- It would be nice to include the actual button icons here to confirm
      which buttons are referred to.  -->
 <para>
-  Below the Accounts List are several controls.  The Update and Revert buttons
-  are described further below.  The collapse and expand buttons collapse or
-  expand the entire Accounts List.
+  Below the Accounts List are several controls. The <guibutton>Update</guibutton>
+  and <guibutton>Revert</guibutton> buttons are described further below. The collapse
+  and expand buttons collapse or expand the entire Accounts List.
 </para>
 
 <para>
-  The Accounts List can be filtered in two ways.  Checking the "Hide
-  unused categories" checkbox hides any Categories for which no value
+  The Accounts List can be filtered in two ways. Checking the <guilabel>Hide
+  unused categories</guilabel> checkbox hides any Categories for which no value
   has been assigned to the Category or any of its Subcategories.  To
   the right of this, is an unlabelled text box.  Only categories which
   include whatever is typed in this box are listed, but their parent
@@ -301,8 +301,8 @@
 </para>
 
 <para>
-  Note that changing either the "Hide unused budget categories" or the
-  filter value is likely to change the list of Categories display.
+  Note that changing either the <guilabel>Hide unused budget categories</guilabel>
+  or the filter value is likely to change the list of Categories display.
   You may need to re-expand the list to see all the Categories that
   should be displayed with the current settings.
 </para>
@@ -330,7 +330,7 @@
   <varlistentry>
     <term>Total</term>
     <listitem>
-      <para>Displays the total yearly value assigned to the Category</para>
+      <para>Displays the total yearly value assigned to the Category.</para>
     </listitem>
   </varlistentry>
 
@@ -353,27 +353,27 @@
         Category.</para>
 
       <para>In general, for you will either check this box and assign
-	values to the Category and not to any of its Subcategories, or
-	not check the box, and assign values to the Subcategories but
-	not the Category.  If any Subcategories have assigned amounts
-	when this box is checked, then those amounts are rolled up to
-	the Category.</para>
+        values to the Category and not to any of its Subcategories, or
+        not check the box, and assign values to the Subcategories but
+        not the Category.  If any Subcategories have assigned amounts
+        when this box is checked, then those amounts are rolled up to
+        the Category.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term>Clear</term>
     <listitem>
-      <para>The Clear button resets the budgeted category value or values to
-        zero.</para>
+      <para>The <guibutton>Clear</guibutton> button resets the budgeted
+        category value or values to zero.</para>
     </listitem>
   </varlistentry>
 
   <varlistentry>
     <term>Period</term>
     <listitem>
-      <para>The Period radio buttons allow you to select the period for which
-        the value applies</para>
+      <para>The <guilabel>Period</guilabel> radio buttons allow you to
+        select the period for which the value applies</para>
 
       <variablelist>
 	<varlistentry>
@@ -416,32 +416,34 @@
 <title>Update and Revert</title>
 
 <para>
-  For performance reasons, changes made to a Budget are not saved
-  immediately.  Instead, they must first be stored using the Update
-  button and then permanently saved using the &kmymoney; Save.
+  For performance reasons, changes made to a Budget are not saved immediately.
+  Instead, they must first be stored using the <guibutton>Update</guibutton>
+  button and then permanently saved using the <guibutton>Save</guibutton> button.
 </para>
 
 <para>
-  When a Budget's values are first modified, the Update and Revert buttons are
-  enabled.  Multiple changes can be made to the Budget.  Pressing Update will
-  store the changes and disable the Update and Revert buttons.
+  When a Budget's values are first modified, the <guibutton>Update</guibutton>
+  and <guibutton>Revert</guibutton> buttons are enabled. Multiple changes can be
+  made to the Budget. Pressing <guibutton>Update</guibutton> will store the changes
+  and disable this buttons.
 </para>
 
 <para>
-  The &kmymoney; Save only saves changes that have been stored using the Update
-  button. Thus, if you have modified a Budget but not yet stored the changes
-  &kmymoney; Save will not affect the modified Budget and the Update and Revert
+  The <guibutton>Save</guibutton> button only saves changes that have been stored
+  using the <guibutton>Update</guibutton> button. Thus, if you have modified a Budget
+  but not yet stored the changes <guibutton>Save</guibutton> button will not affect
+  the modified Budget and the <guibutton>Update</guibutton> and <guibutton>Revert</guibutton>
   buttons remain enabled.
 </para>
 
 <para>
   Revert undoes any changes made to a Budget since the last Update and disables
-  the Update and Revert buttons.
+  the <guibutton>Update</guibutton> and <guibutton>Revert</guibutton> buttons.
 </para>
 
 <para>
-  Changes stored using Update but not yet saved using &kmymoney; Save can only
-  be reverted by reloading the &kmymoney; file.
+  Changes stored using <guibutton>Update</guibutton> but not yet saved using
+  <guibutton>Save</guibutton> can only be reverted by reloading the &kmymoney; file.
 </para>
 </sect2>
 </sect1>

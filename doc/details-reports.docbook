@@ -309,7 +309,7 @@
   For transaction reports:
 <itemizedlist>
   <listitem><para>Organize by: Choose how to group the transactions in this
-    report</para></listitem>
+    report.</para></listitem>
   <listitem><para>Show Columns: Choose which columns should be shown in the
     report. The date and transaction amount are always shown.</para></listitem>
   <listitem><para>Include only Tax Categories: Only show categories which have

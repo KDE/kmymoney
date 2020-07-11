@@ -15,15 +15,15 @@
   <author>&Tony.Bloomfield; &Tony.Bloomfield.mail;</author>
 </sect1info>
 
-<title>GnuCash Importer</title>
+<title>&gnucash; Importer</title>
 
 <sect2>
-<title>GnuCash Files</title>
+<title>&gnucash; Files</title>
 
 <para>
-  The &kmymoney; GnuCash importer handles direct reading of standard (&XML;)
-  files as produced by GnuCash versions 1.8 and 2.0. The following are not
-  supported:
+  The &kmymoney; &gnucash; importer handles direct
+  reading of standard (&XML;) files as produced by &gnucash;
+  versions 1.8 and 2.0. The following are not supported:
 </para>
 
 <itemizedlist>
@@ -32,13 +32,14 @@
   <listitem><para>import into an existing &kmymoney; file</para></listitem>
   <listitem><para>import of small-business specific features (Employees,
     Invoices, &etc;)</para></listitem>
-  <listitem><para>export to GnuCash files.</para></listitem>
+  <listitem><para>export to &gnucash; files.</para></listitem>
 </itemizedlist>
 
 <para>
-  The import will probably only work correctly if presented with a valid
-  file. It is recommended that the GnuCash <guimenuitem>Check &amp; Repair All</guimenuitem> function (in
-  the <guimenu>Actions</guimenu> menu) be run before attempting to import.
+  The import will probably only work correctly if presented with a valid file.
+  It is recommended that the <menuchoice><guimenu>Actions</guimenu><guimenuitem>Check
+  &amp; Repair All</guimenuitem></menuchoice> menu item of &gnucash; be run
+  before attempting to import.
 </para>
 
 <para>
@@ -71,7 +72,7 @@
 <para>
   It should be noted that &kmymoney; is a <emphasis>personal</emphasis> finance
   manager, and as such, does not directly support any of the business features
-  of GnuCash, such as tax tables, payroll, and tracking of lots. Any Accounts
+  of &gnucash;, such as tax tables, payroll, and tracking of lots. Any Accounts
   Payable or Receivable accounts found in a file will be imported as Liability
   or Asset accounts respectively.
 </para>
@@ -90,7 +91,7 @@
   Checking, Credit Card, &etc;  &kmymoney; includes a 'standard' account for
   each of these five types, and all other accounts are held subordinate to one
   of these. &kmymoney; enforces more consistency (or less flexibility, depending
-  on your point of view) between account types than does GnuCash, and the
+  on your point of view) between account types than does &gnucash;, and the
   importer will correct any inconsistencies it detects. This may result in a
   slightly different account structure, though this can, within reason, be
   amended after the import is complete.
@@ -102,7 +103,7 @@
 
 <para>
   &kmymoney; uses the term Category to denote an account of an Income or Expense
-  type. Unlike GnuCash, these are not considered as 'ledger' accounts, and entry
+  type. Unlike &gnucash;, these are not considered as 'ledger' accounts, and entry
   of transactions folder into categories is not supported; allocations are made
   during transaction entry into other account types.
 </para>
@@ -112,12 +113,12 @@
 <title>Structure and Placeholders</title>
 
 <para>
-  GnuCash supports the use of Placeholder accounts. In effect, these are just
-  read-only accounts into which no transactions can be entered, but which
-  function in an analogous fashion to folders in a folder structure, as a
-  holder for other accounts. Though &kmymoney; does not support this feature as
-  such, it does provide a parent/child account relationship, so the importer
-  simulates placeholders by creating empty accounts.
+  &gnucash; supports the use of Placeholder accounts. In effect, these are just
+  read-only accounts into which no transactions can be entered, but which function
+  in an analogous fashion to folders in a folder structure, as a holder for other
+  accounts. Though &kmymoney; does not support this feature as such, it does
+  provide a parent/child account relationship, so the importer simulates
+  placeholders by creating empty accounts.
 </para>
 </sect4>
 
@@ -128,57 +129,57 @@
 <tgroup cols='2' align='left' colsep='1' rowsep='1'>
 <thead>
   <row>
-    <entry>GnuCash type</entry><entry>&kmymoney; type</entry>
+    <entry>&gnucash; type</entry><entry>&kmymoney; type</entry>
   </row>
 </thead>
 <tbody>
   <row>
-    <entry>BANK</entry><entry>Checking</entry>
+    <entry><literal>BANK</literal></entry><entry><literal>Checking</literal></entry>
   </row>
   <row>
-    <entry>CHECKING</entry><entry>Checking</entry>
+    <entry><literal>CHECKING</literal></entry><entry><literal>Checking</literal></entry>
   </row>
   <row>
-    <entry>SAVINGS</entry><entry>Savings</entry>
+    <entry><literal>SAVINGS</literal></entry><entry><literal>Savings</literal></entry>
   </row>
   <row>
-    <entry>ASSET</entry><entry>Asset</entry>
+    <entry><literal>ASSET</literal></entry><entry><literal>Asset</literal></entry>
   </row>
   <row>
-    <entry>CASH</entry><entry>Cash</entry>
+    <entry><literal>CASH</literal></entry><entry><literal>Cash</literal></entry>
   </row>
   <row>
-    <entry>CURRENCY</entry><entry>Cash</entry>
+    <entry><literal>CURRENCY</literal></entry><entry><literal>Cash</literal></entry>
   </row>
   <row>
-    <entry>MONEYMRKT</entry><entry>MoneyMarket</entry>
+    <entry><literal>MONEYMRKT</literal></entry><entry><literal>MoneyMarket</literal></entry>
   </row>
   <row>
-    <entry>STOCK</entry><entry>Stock</entry>
+    <entry><literal>STOCK</literal></entry><entry><literal>Stock</literal></entry>
   </row>
   <row>
-    <entry>MUTUAL</entry><entry>Stock</entry>
+    <entry><literal>MUTUAL</literal></entry><entry><literal>Stock</literal></entry>
   </row>
   <row>
-    <entry>EQUITY</entry><entry>Equity</entry>
+    <entry><literal>EQUITY</literal></entry><entry><literal>Equity</literal></entry>
   </row>
   <row>
-    <entry>LIABILITY</entry><entry>Liability</entry>
+    <entry><literal>LIABILITY</literal></entry><entry><literal>Liability</literal></entry>
   </row>
   <row>
-    <entry>CREDIT</entry><entry>CreditCard</entry>
+    <entry><literal>CREDIT</literal></entry><entry><literal>CreditCard</literal></entry>
   </row>
   <row>
-    <entry>INCOME</entry><entry>Income</entry>
+    <entry><literal>INCOME</literal></entry><entry><literal>Income</literal></entry>
   </row>
   <row>
-    <entry>EXPENSE</entry><entry>Expense</entry>
+    <entry><literal>EXPENSE</literal></entry><entry><literal>Expense</literal></entry>
   </row>
   <row>
-    <entry>RECEIVABLE</entry><entry>Asset</entry>
+    <entry><literal>RECEIVABLE</literal></entry><entry><literal>Asset</literal></entry>
   </row>
   <row>
-    <entry>PAYABLE</entry><entry>Liability</entry>
+    <entry><literal>PAYABLE</literal></entry><entry><literal>Liability</literal></entry>
   </row>
 </tbody>
 </tgroup>
@@ -193,9 +194,9 @@
 <title>Balanced transactions</title>
 
 <para>
-  As with GnuCash, data is entered in the form of transactions, each generally
-  consisting of 2 or more split entries. In fact, valid GnuCash transactions
-  will always contain at least 2 splits, and to conform to GnuCash's
+  As with &gnucash;, data is entered in the form of transactions, each generally
+  consisting of 2 or more split entries. In fact, valid &gnucash; transactions
+  will always contain at least 2 splits, and to conform to &gnucash;'s
   double-entry bookkeeping standard, these must be in monetary balance (&ie;,
   they must balance out to zero). &kmymoney; encourages, but does not enforce,
   this standard, but any imported transaction which is not balanced will be
@@ -208,9 +209,9 @@
 
 <para>
   &kmymoney; prefers that all transactions have a Payee (a generic term that
-  encompasses both payees and payers), and unlike GnuCash, a list of these
+  encompasses both payees and payers), and unlike &gnucash;, a list of these
   payees is maintained. Payee names are generated by the importer from the
-  GnuCash transaction's Description field.
+  &gnucash; transaction's Description field.
 </para>
 </sect4>
 
@@ -229,7 +230,7 @@
 
 <para>
   &kmymoney; provides an account reconciliation function similar to that of
-  GnuCash, and the corresponding transaction status will be imported.
+  &gnucash;, and the corresponding transaction status will be imported.
 </para>
 </sect4>
 </sect3>
@@ -238,7 +239,7 @@
 <title>Commodities</title>
 
 <para>
-  GnuCash uses the term Commodity to cover both currencies and non-currency
+  &gnucash; uses the term Commodity to cover both currencies and non-currency
   assets. These are treated separately in &kmymoney;.
 </para>
 
@@ -254,12 +255,12 @@
   alternative.
 </para>
 
-<para>
-  (NOTE: &kmymoney; does not currently support accounts denominated in 'defunct'
+<note><para>
+  &kmymoney; does not currently support accounts denominated in 'defunct'
   currencies (except those replaced by the Euro). At present, it will be
-  necessary to remove any such accounts from your GnuCash file before
-  importing. We hope to improve on this situation in a future release.)
-</para>
+  necessary to remove any such accounts from your &gnucash; file before
+  importing. We hope to improve on this situation in a future release.
+</para></note>
 </sect4>
 
 <sect4 id="gncsecurities">
@@ -271,7 +272,7 @@
   that &kmymoney; requires any account denominated in a security to be
   subordinate to an Investment Account. This is described in more detail in the
   chapter on <link linkend="details.investments">Investments</link>. Though
-  users may have implemented such a relationship, GnuCash imposes no defined
+  users may have implemented such a relationship, &gnucash; imposes no defined
   structure on it, so the importer is unable to detect it and perform an
   automatic conversion. Three options are therefore made available:
 </para>
@@ -304,7 +305,7 @@
 <title>Prices and currency rates</title>
 
 <para>
-  Security prices and currency exchange rates as displayed in the GnuCash Price
+  Security prices and currency exchange rates as displayed in the &gnucash; Price
   Editor will be imported. In addition, price and rate entries will be generated
   from all transactions involving securities and multiple currencies.
 </para>
@@ -314,11 +315,11 @@
 <title>Online Quotes</title>
 
 <para>
-  For obtaining online price and currency rate quotations, GnuCash uses a
-  package called Finance::Quote. Recent versions of &kmymoney; contain support
-  for this package for obtaining stock quotes, and this will be used by default
-  when importing data.  You may however select to convert to the native method
-  used by &kmymoney; which is covered in more detail in
+  For obtaining online price and currency rate quotations, &gnucash; uses a
+  package called <literal>Finance::Quote</literal>. Recent versions of &kmymoney;
+  contain support for this package for obtaining stock quotes, and this will be
+  used by default when importing data. You may however select to convert to the
+  native method used by &kmymoney; which is covered in more detail in
   <link linkend="details.investments.onlinequotes">online quotes</link>.
 </para>
 
@@ -328,8 +329,8 @@
   for which online quotes are required. However, the stock (ticker) symbol will
   be imported unchanged. Since this symbol will almost certainly be different in
   the two packages, it will need to be manually edited after completion of the
-  import process.  Future currency rate updates will not use Finance::Quote, and
-  will always use the native retrieval method.
+  import process. Future currency rate updates will not use <literal>Finance::Quote</literal>,
+  and will always use the native retrieval method.
 </para>
 
 <para>
@@ -348,7 +349,7 @@
 <title>Scheduled Transactions</title>
 
 <para>
-  &kmymoney; does not retain the separation made in GnuCash between template
+  &kmymoney; does not retain the separation made in &gnucash; between template
   transactions and their frequency of occurrence. Transaction data will be
   duplicated if the same template is used in different schedules, but this is
   not likely to be of great significance.
@@ -359,7 +360,7 @@
 
 <para>
   &kmymoney; classifies all schedules as one of three types, Bills, Deposits, or
-  Transfers. Since GnuCash does not make such a distinction, the importer
+  Transfers. Since &gnucash; does not make such a distinction, the importer
   attempts to determine the classification from the accounts and direction of
   money movements. It may be that in some cases incorrect assumptions are made,
   and these will need manual correction.
@@ -370,7 +371,7 @@
 <title>Suspect Schedules</title>
 
 <para>
-  Some features of GnuCash scheduled transactions are not available in
+  Some features of &gnucash; scheduled transactions are not available in
   &kmymoney;, so the importer tries in each case to reach a reasonable
   compromise in converting the data. These transactions will be flagged as
   suspect, and the user will be given the option of editing them directly during
@@ -379,7 +380,7 @@
 
 <itemizedlist>
   <listitem>
-    <para>some frequency intervals supported in GnuCash are not currently
+    <para>some frequency intervals supported in &gnucash; are not currently
     available in &kmymoney;</para>
   </listitem>
 
@@ -409,7 +410,7 @@
   &kmymoney; provides a comprehensive selection of configurable reports,
   described in more detail in <link linkend="details.reports">Reports.</link>
   These will not necessarily, however, match precisely those reports available
-  in GnuCash.
+  in &gnucash;.
 </para>
 </sect3>
 </sect2>
@@ -462,7 +463,7 @@
 <para>
   If your native language is written in letters or symbols which are different
   from those used in the 'Latin' languages (&ie;, generally Western European),
-  these are represented in a special fashion ('encoded') in your GnuCash file.
+  these are represented in a special fashion ('encoded') in your &gnucash; file.
   If these letters are not displayed correctly on your screen, then they must be
   decoded.  Currently, it is often not possible to detect accurately which form
   of decoding must be used, so you may need to set this option and select an
@@ -470,7 +471,7 @@
   which is considered appropriate for your locale (&ie;, the country and
   language which was selected as native when your operating system was
   installed), so this should be tried first.  Since the import process does not
-  overwrite your GnuCash file, you are free to experiment with any of these
+  overwrite your &gnucash; file, you are free to experiment with any of these
   selections.
 </para>
 </sect3>
@@ -479,7 +480,7 @@
 <title>Transaction Notes option</title>
 
 <para>
-  Under some usage conditions, non-split GnuCash transactions may contain
+  Under some usage conditions, non-split &gnucash; transactions may contain
   residual, often incorrect, memo data which is not normally visible to the
   user. When imported into &kmymoney; however, due to display differences, this
   data can become visible. Often, these transactions will have a Notes field
@@ -495,8 +496,8 @@
   These need only be used in the event of import problems.  If you have such
   problems, you should also report them to the &kmymoney; developer list
   &devlist;.  Note that the traces produced by these options may contain data of
-  a confidential nature, and the Anonymize option should be used if they are to
-  be made publicly available.
+  a confidential nature, and the <guilabel>Anonymize data</guilabel> option
+  should be used if they are to be made publicly available.
 </para>
 </sect3>
 </sect2>
@@ -573,9 +574,9 @@
 </itemizedlist>
 
 <para>
-  This is generally why Intuit stopped supporting QIF input at all with Quicken
-  2005.  If you have the option of getting data some other way, like OFX, always
-  choose that option.
+  This is generally why Intuit stopped supporting QIF input at all with
+  <application>Quicken</application> 2005. If you have the option of getting
+  data some other way, like OFX, always choose that option.
 </para>
 </sect2>
 
@@ -841,8 +842,9 @@
 
 <para>
   A common problem is to convert a list of comma-separated-values into a QIF
-  file.  This is a textbook case for the awk tool.  Create a script called
-  csv2qif.awk, with the following two lines as contents:
+  file. This is a textbook case for the <command>awk</command> tool. Create
+  a script called <filename>csv2qif.awk</filename>, with the following two
+  lines as contents:
 </para>
 
 <programlisting>
@@ -852,7 +854,7 @@
 </programlisting>
 
 <para>
-  Then, change the QIF keys (D,T,N,P,M) to match the order of your csv data.
+  Then, change the QIF keys (D,T,N,P,M) to match the order of your CSV data.
   Set the input filter to <userinput>awk -f csv2qif.awk</userinput>.
 </para>
 
@@ -934,8 +936,8 @@
 
 <para>
   If you have installed from RPM, the OFX Importer Plugin is contained within
-  the kmymoney-ofx RPM.  It should be available from whatever source you got the
-  base &kmymoney; RPM.  If you have built from sources, all you need to do is
+  the kmymoney-ofx package. It should be available from whatever source you got the
+  base &kmymoney; package. If you have built from sources, all you need to do is
   have preferably the libOFX 0.9 development headers and libraries installed on
   your system.  The &kmymoney; build process will detect these and compile the
   plugin.  At the time of release of &kmymoney; 4.6, the latest libofx version
@@ -945,8 +947,8 @@
 <para>
   Should you run into trouble trying to compile &kmymoney;, and you are certain
   you have the correct version of libOFX installed, please contact the
-  developers list &devlist; for assistance.  Include a copy of your config.log
-  file, compressed first via gzip.
+  developers list &devlist; for assistance. Include a copy of your
+  <filename>config.log</filename> file, compressed first via <command>gzip</command>.
 </para>
 </sect2>
 
@@ -1057,14 +1059,15 @@
 
 <para>
   To enable this feature, you must compile &kmymoney; with the
-  --enable-ofxbanking switch (now the default).
+  <userinput><option>--enable-ofxbanking</option></userinput> switch (now the default).
 </para>
 
 <para>
   Please be warned: Many banks require a separate signup, will give you a
   separate password or PIN, and may even charge you a separate fee for this
   service.  No bank directly supports &kmymoney;.  You will have to tell them
-  you want to bank directly from MS Money or Quicken.
+  you want to bank directly from <application>MS Money</application> or
+  <application>Quicken</application>.
 </para>
 
 <para>
@@ -1073,7 +1076,7 @@
   configure, and choose <guimenuitem>Map to online account...</guimenuitem>. 
   In case more than one online banking plugin is installed on your system
   you will be asked which one to use. For the internal OFX method select
-  <guimenuitem>KMyMoney OFX</guimenuitem>.  A list of   banks will be downloaded
+  <guimenuitem>&kmymoney; OFX</guimenuitem>. A list of banks will be downloaded
   from the Internet and a wizard will guide you through choosing a bank,
   entering your username and password, and selecting an account.  Should you
   find that your bank is not listed, then it may still be possible to use the
@@ -1099,19 +1102,19 @@
 
 <para>
   Once you have an account set up with online banking, go to the ledger for that
-  account.  Then from the <guimenu>Account</guimenu> menu, choose <guimenuitem>Update
-  account...</guimenuitem>.  This will connect to your bank, and download a statement
-  for the last 60 days.
+  account. Then choose <menuchoice><guimenu>Account</guimenu><guimenuitem>Update
+  account...</guimenuitem></menuchoice> menu item. This will connect to your bank,
+  and download a statement for the last 60 days.
 </para>
 
 <note>
   <para>
-    In version of &kmymoney; prior to 4.6, the payee name was always taken
-    from the PAYEEID field.  As of version 4.6, the payee name can be based on
-    either the PAYEEID, NAME, or MEMO field in the OFX transaction.  You can
-    configure this feature and some other OFX direct connect settings by
-    selecting the appropriate tab in
-    the <link linkend="details.accounts.edit">Edit account</link> dialog.
+    In version of &kmymoney; prior to 4.6, the payee name was always taken from the
+    <literal>PAYEEID</literal> field. As of version 4.6, the payee name can be based
+    on either the <literal>PAYEEID</literal>, <literal>NAME</literal>, or
+    <literal>MEMO</literal> field in the OFX transaction. You can configure this
+    feature and some other OFX direct connect settings by selecting the appropriate
+    tab in the <link linkend="details.accounts.edit">Edit account</link> dialog.
   </para>
 </note>
 </sect2>

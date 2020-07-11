@@ -45,7 +45,7 @@
   distributions are now built with the CSV importer already included or
   available as a separate package.  Ensure that it is enabled within &kmymoney;.
   Check the <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-  KMyMoney</guimenuitem><guimenuitem>Plugins</guimenuitem></menuchoice> menu.
+  &kmymoney;...</guimenuitem><guimenuitem>Plugins</guimenuitem></menuchoice> menu item.
   If the CSV importer does not seem to be installed in your version, the first
   place to check is in the same place you got your base &kmymoney; package. See
   if a later version is available, or if the importer is available as a separate
@@ -54,8 +54,8 @@
 
 <para> 
   If you have installed from RPM or Deb, the CSV Importer Plugin should be
-  contained within the &kmymoney; package.  If you have built from source, there
-  should be no additional requirements.  The &kmymoney; build process should
+  contained within the kmymoney package. If you have built from source, there
+  should be no additional requirements. The &kmymoney; build process should
   detect the plugin source and compile the plugin.
 </para>
 </sect2>
@@ -161,7 +161,7 @@
   different one.  In fact, attempting to do so will reset any field choices you
   may already have made.  There is also a selector for the <guilabel>Text
   Delimiter</guilabel>, but generally the quote (") is correct.  Now click on
-  the <guilabel>Next</guilabel> button.  Depending upon the earlier selection
+  the <guibutton>Next</guibutton> button. Depending upon the earlier selection
   you made, you will now be on either the Banking page or the Investment page.
 </para>
 </sect3>
@@ -189,11 +189,10 @@
 <listitem>
 <para>
   In the center are two radio buttons. If your file has a single column for all
-  values, select <guilabel>Amount col</guilabel>. However, if there are separate
-  columns for debits and credits, select <guilabel>Debit/credit col</guilabel>.
-  This will enable either the <guilabel>Amount column</guilabel> selector or the
-  <guilabel>Debit column</guilabel> and <guilabel>Credit column</guilabel>
-  selectors.
+  values, select <guilabel>Amount</guilabel> column. However, if there are separate
+  columns for debits and credits, select <guilabel>Debit/credit</guilabel> column.
+  This will enable either the <guilabel>Amount</guilabel> column selector or the
+  <guilabel>Debit</guilabel> and <guilabel>Credit</guilabel> column selectors.
 </para>
 </listitem>
 
@@ -327,7 +326,7 @@
   a problem, as long as it uniquely identifies that security in the import file.
   Sometimes the actual activity type is embedded in the detail column, possibly
   prefixed by a standard text. For instance, if the field contains <quote>type:
-  dividend</quote>, enter into the <guilabel>Filter text</guilabel> box
+  dividend</quote>, go to <guilabel>Filter</guilabel> text box and enter
   <quote>type: </quote> including the trailing space.
   </para>
   </listitem>
@@ -384,9 +383,9 @@
   This needs to be set according to the order of year, month, and day in the
   dates in the file.  If the plugin finds data incompatible with this setting,
   it will complain when you try to import.  However, if the setting is wrong,
-  but does not produce invalid results (such as data with no days higher than 12,
-  so month and day could be switched) you will simply get incorrect data,
-  because the plugin cannot know you made a mistake.  In this case, the error will be
+  but it produce invalid results not detected (such as data with no days higher
+  than 12, so month and day could be switched) you will simply get incorrect data,
+  because the plugin cannot know you made a mistake. In this case, the error will be
   obvious in the ledger after import.
 </para>
 </formalpara>
@@ -467,9 +466,8 @@
   name is rather long, just enter a few characters.  The import will proceed but
   the transactions will be flagged by &kmymoney; as missing a category
   assignment, and you will need to select the correct transfer account after the
-  import. Click <guilabel>OK</guilabel> when done. The import process then gets
-  handed over to
-  &kmymoney;
+  import. Click <guibutton>OK</guibutton> when done. The import process then gets
+  handed over to &kmymoney;.
 </para>
 
 <para>
@@ -479,7 +477,7 @@
   select each transaction.  While still holding the &Ctrl; key,
   all those symbol cells should still be selected, so click on one and enter the
   symbol.  Click inside the window but outside that column, or hit
-  &Enter; (not <guilabel>OK</guilabel>).  Now that those
+  &Enter; (not <guibutton>OK</guibutton>).  Now that those
   transactions all have the same symbol, double click one detail entry and edit
   the security name as you wish.  Click elsewhere on the window (or
   &Enter;) to accept the edit, which will then change all
@@ -488,13 +486,13 @@
 </para>
 
 <para>
-  Now click <guilabel>OK</guilabel>, then <guilabel>Import</guilabel>.  In the
+  Now click <guibutton>OK</guibutton>, then <guibutton>Import</guibutton>.  In the
   <guilabel>Enter Account</guilabel> box, enter the name of a Brokerage/checking
   account for funds.  If you enter a valid name that account will be used.  If
   you can't be bothered entering a correct but long name, enter a few
   characters.  The import will accept that but the transactions in the ledger
   after import will need a proper account to be selected.  For the
-  <guilabel>Brokerage Item</guilabel> box, enter the number of the column
+  <guilabel>Brokerage</guilabel> box, enter the number of the column
   containing that detail. Now, on the <guilabel>Invalid transaction</guilabel>
   box you may get a few entries because the activity type does not match the
   qty/price/amount combination.  On each message, click <guilabel>Select
@@ -503,7 +501,7 @@
 </para>
 
 <para>
-  Now the import has occurred and you're into KMM to select the investment
+  Now the import has occurred and you're into &kmymoney; to select the investment
   account to use.  Then the checking account, if there were any brokerage type
   transactions.
 </para>
@@ -514,20 +512,20 @@
 <para>
   On reaching the Final page, the plugin automatically validates the values.  If
   the numeric value column/s is/are highlighted in green, then the validation
-  was successful and all that is necessary is to click <guilabel>Import
-  CSV</guilabel> and control then passes to the main &kmymoney; program.
+  was successful and all that is necessary is to click <guibutton>Import
+  CSV</guibutton> and control then passes to the main &kmymoney; program.
   However, if the start and/or end lines are incorrectly set, or if the wrong
   columns were selected, the highlighting will be in red, and an error message
   will appear indicating where the error lies.  The user will then need to click
-  <guilabel>Back</guilabel> to get to the relevant page to correct the error.
+  <guibutton>Back</guibutton> to get to the relevant page to correct the error.
 </para>
 
 <para>
   It might also be that if debit and credit columns are in use, one of those
   columns may legitimately contain no entries.  This would mean that that column
   has no decimal symbol present, and this would result in a warning.  If you see
-  that this is the case, you may click either of the <guilabel>Accept</guilabel>
-  buttons (<guilabel>Accept this</guilabel> or <guilabel>Accept all</guilabel>.)
+  that this is the case, you may click either of the buttons to accept
+  (<guibutton>Accept this</guibutton> or <guibutton>Accept all</guibutton>.)
 </para>
  
 <formalpara><title>Decimal Symbol</title>
@@ -568,7 +566,7 @@
 <title>Make QIF File</title>
 <para>
   This button gives you the ability, after the import has been completed, to
-  save the data from the csv file as a qif file, should you require one for any
+  save the data from the CSV file as a QIF file, should you require one for any
   reason. This was actually the original functionality that drove the creation
   of this plugin.  However, as &kmymoney; itself is now able to export a qif
   file, the capability is now probably of little use and is likely to be removed
@@ -589,12 +587,12 @@
   the plugin will validate the column contents to ensure they match the action
   type.  For instance, if a quantity appears but no price or amount, it is
   assumed that the transaction can be only an Add or Remove Shares.  Or, if
-  there is an amount but no quantity or price, then a Dividend is assumed, &etc;.
+  there is an amount but no quantity or price, then a Dividend is assumed, &etc;
 </para>
 
 <para>
   If you wish to save your settings, remember to click the
-  <guilabel>Finish</guilabel> button, and the plugin will then close.
+  <guibutton>Finish</guibutton> button, and the plugin will then close.
 </para>
 </sect3>
 
@@ -604,17 +602,19 @@
   If you find that your investment statements keep including activity types that
   are not recognized, just add them to the section in the resource file.  (See
   <link linkend="details.impexp.csv.config">below</link> for more details on
-  this file.)  For instance, in the [InvestmentSettings] section of the file,
-  the BuyParam field includes entries for Purchase, Buy, New Inv, and Switch In.
-  If you find a different one, add it to the correct list and restart the
-  plugin.  You may notice that there are similarities in the entries in
-  different fields, and you may find that the wrong activity type is being
-  selected.  The plugin checks these lists in the following order: Shrsin, DivX,
-  Reinvdiv, Brokerage, Buy, Sell, Remove.  Re-ordering the lists to suit this
-  does not work as might be expected, since the entries in the resource file get
-  sorted into alphabetical order. If the offending parameter is one you don't
-  need, just delete it from the file.  If that is not possible, you may need to
-  edit your file before input.
+  this file.) For instance, in the <literal>[InvestmentSettings]</literal> section
+  of the file, the <literal>BuyParam</literal> field includes entries for
+  <literal>Purchase</literal>, <literal>Buy</literal>, <literal>New Inv</literal>,
+  and <literal>Switch In</literal>. If you find a different one, add it to the
+  correct list and restart the plugin. You may notice that there are similarities
+  in the entries in different fields, and you may find that the wrong activity type
+  is being selected. The plugin checks these lists in the following order:
+  <literal>Shrsin</literal>, <literal>DivX</literal>, <literal>Reinvdiv</literal>,
+  <literal>Brokerage</literal>, <literal>Buy</literal>, <literal>Sell</literal>, and
+  <literal>Remove</literal>. Re-ordering the lists to suit this does not work as
+  might be expected, since the entries in the resource file get sorted into
+  alphabetical order. If the offending parameter is one you don't need, just delete
+  it from the file. If that is not possible, you may need to edit your file before input.
 </para>
 </sect3>
 
@@ -627,23 +627,30 @@
  no agreed standard at all.  With investment files, in particular, there is
  much more scope for variation in specifying the different types of activities
  represented in the data.  The plugin handles this by listing these activity
- types in a resource file, called csvimporterrc. The location of this file
- depends on your distribution.  It will usually be located in ~/.kde4/share/config/,
- or in ~/.kde/... instead. Using this resource file allows the user to add an
- activity type that the developer had not encountered.  If the file does not
- exist when the importer first runs, the plugin will create a default version,
- containing a few of the more obvious descriptions.
+ types in a resource file, called <filename>csvimporterrc</filename>. The location
+ of this file depends on your distribution. On a &Linux; system, this will be in
+ <filename class="directory">$KDEHOME/share/config</filename> where
+ <envar>$KDEHOME</envar> is usually <quote>.config</quote> within your home folder.
+ If you are migrating from a version of &kmymoney; prior to 5.0 or later, the old
+ location of <envar>$KDEHOME</envar> was <filename class="directory">.kde4</filename>.
+ Using this resource file allows the user to add an activity type that the developer
+ had not encountered. If the file does not exist when the importer first runs, the
+ plugin will create a default version, containing a few of the more obvious
+ descriptions.
 </para>
 
 <para>
- A number of sample csv files are provided (in the kmymoney/contrib/csvimporter/
- folder in the source tree) in the hope that they may help.  For example, in the
- investment sample, an activity type is "ReInvestorContract Buy : ReInvested Units".
- In the validation process, the first successful match is on the ReInv in
- ReInvestorContract Buy, so the transaction therefore gets classed as Reinvdiv,
- even though Buy also is mentioned. Another example which has been observed is an
- activity type of Reinvest even though the transaction included neither price nor
- amount, but only a quantity, so that needed to be treated as Add Shares, or Shrsin.
+ A number of sample CSV files are provided (in the <filename class="directory">
+ kmymoney/contrib/csvimporter/</filename> folder in the source tree) in the hope
+ that they may help.  For example, in the investment sample, an activity type is
+ "<literal>ReInvestorContract Buy : ReInvested Units</literal>". In the validation
+ process, the first successful match is on the <literal>ReInv</literal> in
+ <literal>ReInvestorContract Buy</literal>, so the transaction therefore gets
+ classed as <literal>Reinvdiv</literal>, even though <literal>Buy</literal> also is
+ mentioned. Another example which has been observed is an activity type of
+ <literal>Reinvest</literal> even though the transaction included neither price nor
+ amount, but only a quantity, so that needed to be treated as <literal>Add
+ Shares</literal>, or <literal>Shrsin</literal>.
 </para>
 
 <para>

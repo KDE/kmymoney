@@ -93,11 +93,10 @@
 
 <para>
   The first step on the path to working with investments is to create an account
-  to hold your defined securities.  Choose <menuchoice><guimenu>Account</guimenu>
-  <guimenuitem>New account...</guimenuitem></menuchoice> to begin the process.
-  Create an account as previously defined in the adding
-  <menuchoice><guimenu>Account</guimenu></menuchoice> section, making sure to choose
-  <quote>Investment</quote> as the type of account.
+  to hold your defined securities. Choose the <menuchoice><guimenu>Account</guimenu>
+  <guimenuitem>New account...</guimenuitem></menuchoice> menu item to begin the process.
+  Create an account as previously defined in the adding <guilabel>Account</guilabel>
+  section, making sure to choose <quote>Investment</quote> as the type of account.
 </para>
 
 <para>
@@ -212,7 +211,7 @@
 <itemizedlist>
   <listitem>
     <para>
-      Use Finance::Quote.  This is an option for GnuCash users who are used to
+      Use Finance::Quote.  This is an option for &gnucash; users who are used to
       this style of quotes.  Most users can leave this unchecked.
     </para>
   </listitem>
@@ -603,7 +602,7 @@
 <para>
   Versions of &kmymoney; starting with 0.9 contain support for the Finance::Quote
   package for obtaining online quotes.  This is intended primarily as a convenience
-  for those users converting from the GnuCash finance package, which uses it as its
+  for those users converting from the &gnucash; finance package, which uses it as its
   native method.  If you do select this option, you should see a different list of
   sources, those supported by Finance::Quote. If the list is empty, it suggests that
   the package is not properly installed.  See their web site at
@@ -640,7 +639,7 @@
   Typically, you will update the prices for all your securities and currencies as a
   single operation.  Choose the
   <menuchoice><guimenu>Tools</guimenu><guimenuitem>Update Stock and Currency
-  Prices...</guimenuitem></menuchoice> menu option to bring up the online price
+  Prices...</guimenuitem></menuchoice> menu item to bring up the online price
   quotes dialog.  Press <guibutton>Update All</guibutton> to fetch quotes for all
   securities and currencies in your &kmymoney; file.
 </para>
@@ -675,9 +674,9 @@
 
 <para>
   If you do feel up to the challenge, here's how it works.  The quote sources are
-  contained in the settings dialog.  Choose
+  contained in the settings dialog. Choose the
   <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-  &kmymoney;</guimenuitem></menuchoice>.  From there, choose the <guilabel>Online
+  &kmymoney;</guimenuitem></menuchoice> menu item. From there, choose the <guilabel>Online
   Quotes</guilabel> section.  You can choose an existing source to edit, or create a
   new one.  When you are done with your changes, be sure to press
   the <guibutton>Update</guibutton> button before exiting the dialog.  Your changes
