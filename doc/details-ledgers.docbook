@@ -398,7 +398,7 @@
   This is performed by selecting the <menuchoice><guimenu>Settings</guimenu>
   <guimenuitem>Configure &kmymoney;...</guimenuitem></menuchoice> menu item and
   selecting the <guiicon><inlinemediaobject><imageobject><imagedata
-  fileref="ledgers_view.png" format='PNG'/></imageobject></inlinemediaobject>
+  fileref="ledgers_view.png" format="PNG"/></imageobject></inlinemediaobject>
   </guiicon> register icon from the list on the left. The option to uncheck is
   labeled <guilabel>Show transaction form</guilabel>. When finished click on
   <guibutton>OK</guibutton> to be ready to directly enter or edit transactions.
@@ -619,7 +619,7 @@
   Ledger view in terms of transactions. These settings are found by selecting
   <guimenu>Settings</guimenu><guimenuitem>Configure &kmymoney;</guimenuitem>
   from the menu bar, and selecting the <guiicon><inlinemediaobject><imageobject>
-  <imagedata fileref="ledgers_view.png" format='PNG'/></imageobject>
+  <imagedata fileref="ledgers_view.png" format="PNG"/></imageobject>
   </inlinemediaobject></guiicon> ledger icon from the list on the left.
 </para> 
 

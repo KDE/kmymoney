@@ -26,7 +26,7 @@
 <para>
   To reconcile an account, choose your account from the drop down box and click
   on the <guiicon><inlinemediaobject><imageobject><imagedata fileref="reconcile.png"
-  format='PNG'/></imageobject></inlinemediaobject></guiicon> reconcile icon, select
+  format="PNG"/></imageobject></inlinemediaobject></guiicon> reconcile icon, select
   the <menuchoice><guimenu>Account</guimenu> <guimenuitem>Reconcile...</guimenuitem>
   </menuchoice> menu item or use the <keycombo>&Ctrl;&Shift;<keycap>R</keycap></keycombo>
   shortcut.

@@ -662,7 +662,7 @@
 <para>
   To open an account in the Ledger view you can either click on the link to the
   account from the Home view, or click on the <guiicon><inlinemediaobject>
-  <imageobject><imagedata fileref="ledgers_view.png" format='PNG'/></imageobject>
+  <imageobject><imagedata fileref="ledgers_view.png" format="PNG"/></imageobject>
   </inlinemediaobject></guiicon> ledgers icon in the view selector and select the
   account in the drop down box at the top of the view. Alternatively, in the
   <guiicon>Account</guiicon> view, either double-click the account entry or
