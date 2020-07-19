@@ -492,7 +492,6 @@ public:
 
       QWidget* parent = QApplication::activeWindow();
       QPointer<KEnterScheduleDlg> dlg = new KEnterScheduleDlg(parent, schedule);
-      qDebug() << "parent widget" << (void*) parent;
 
       try {
         QDate origDueDate = schedule.nextDueDate();
