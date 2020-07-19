@@ -67,6 +67,11 @@ namespace KMyMoney {
 
   private:
     QDateEdit::Section  m_initialSection;
+    enum {
+      Created,
+      GotFocus,
+      FirstMousePress
+    }                   m_initStage;
   };
 }; // namespace
 

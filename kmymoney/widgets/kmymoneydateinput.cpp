@@ -59,6 +59,7 @@ const QDate INVALID_DATE = QDate(1800, 1, 1);
 KMyMoney::OldDateEdit::OldDateEdit(const QDate& date, QWidget* parent)
   : QDateEdit(date, parent)
   , m_initialSection(QDateTimeEdit::DaySection)
+  , m_initStage(Created)
 {
 }
 
@@ -96,6 +97,31 @@ bool KMyMoney::OldDateEdit::event(QEvent* e)
     p->loadDate(d);
   } else {
     rc = QDateEdit::event(e);
+  }
+  switch (m_initStage) {
+    case Created:
+      if (e->type() == QEvent::FocusIn) {
+        m_initStage = GotFocus;
+      }
+      break;
+    case GotFocus:
+      if (e->type() == QEvent::MouseButtonPress) {
+        // create a phony corresponding release event
+        QMouseEvent* mev = static_cast<QMouseEvent*>(e);
+        QMouseEvent release(QEvent::MouseButtonRelease,
+                            mev->localPos(),
+                            mev->windowPos(),
+                            mev->screenPos(),
+                            mev->button(),
+                            mev->buttons(),
+                            mev->modifiers(),
+                            mev->source());
+        QApplication::sendEvent(this, &release);
+        m_initStage = FirstMousePress;
+      }
+      break;
+    case FirstMousePress:
+      break;
   }
   return rc;
 }
