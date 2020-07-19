@@ -228,7 +228,6 @@ void KExportDlg::loadAccounts()
   auto filterProxyModel = new AccountNamesFilterProxyModel(this);
   filterProxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability});
   auto const model = Models::instance()->accountsModel();
-  model->load();
   filterProxyModel->setSourceColumns(model->getColumns());
   filterProxyModel->setSourceModel(model);
   filterProxyModel->sort((int)eAccountsModel::Column::Account);
