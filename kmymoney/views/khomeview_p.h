@@ -217,8 +217,15 @@ public:
       tmp = QString("<td class=\"center\">%1</td>").arg(cellStatus);
     }
 
-    tmp += QString("<td>") +
-           link(VIEW_LEDGER, QString("?id=%1").arg(acc.id())) + acc.name() + linkend() + "</td>";
+    tmp += QString("<td>") + link(VIEW_LEDGER, QString("?id=%1").arg(acc.id()));
+    if (acc.isClosed()) {
+      tmp += QLatin1String("<strike>");
+    }
+    tmp +=  acc.name();
+    if (acc.isClosed()) {
+      tmp += QLatin1String("</strike>");
+    }
+    tmp += linkend() + "</td>";
 
     int countNotMarked = 0, countCleared = 0, countNotReconciled = 0;
     QString countStr;
@@ -848,7 +855,7 @@ public:
     int prec = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
     QList<MyMoneyAccount> accounts;
 
-    auto showClosedAccounts = KMyMoneySettings::showAllAccounts();
+    const auto showClosedAccounts = !KMyMoneySettings::hideClosedAccounts() || KMyMoneySettings::showAllAccounts();
 
     // get list of all accounts
     file->accountList(accounts);
@@ -1202,8 +1209,10 @@ public:
     // get list of all accounts
     file->accountList(accounts);
 
+    const auto showClosedAccounts = !KMyMoneySettings::hideClosedAccounts() || KMyMoneySettings::showAllAccounts();
+
     for (it = accounts.constBegin(); it != accounts.constEnd();) {
-      if (!(*it).isClosed()) {
+      if (!(*it).isClosed() || showClosedAccounts) {
         switch ((*it).accountType()) {
             // group all assets into one list but make sure that investment accounts always show up
           case Account::Type::Investment:
