@@ -1806,7 +1806,7 @@ QString PivotTable::renderHTML() const
                                 .arg(rowname.isTopLevel() ? " id=\"topparent\"" : "")
                                 .arg("") //.arg((*it_row).m_total.isZero() ? colspan : "")  // colspan the distance if this row will be blank
                                 .arg(rowname.hierarchyDepth() - 1)
-                                .arg(rowname.name().replace(QRegExp(" "), "&nbsp;"))
+                                .arg(rowname.name().replace(QRegExp(" "), "&nbsp;").replace("<", "&lt;").replace(">", "&gt;"))
                                 .arg((m_config.isConvertCurrency() || !rowname.isForeignCurrency()) ? QString() : QString(" (%1)").arg(rowname.currency().id()));
 
               // Don't print this row if it's going to be all zeros
@@ -1859,7 +1859,7 @@ QString PivotTable::renderHTML() const
                        .arg(rownum & 0x01 ? "even" : "odd")
                        .arg(m_config.detailLevel() == eMyMoney::Report::DetailLevel::All ? "id=\"solo\"" : "")
                        .arg(rowname.hierarchyDepth() - 1)
-                       .arg(rowname.name().replace(QRegExp(" "), "&nbsp;"))
+                       .arg(rowname.name().replace(QRegExp(" "), "&nbsp;").replace("<", "&lt;").replace(">", "&gt;"))
                        .arg((m_config.isConvertCurrency() || !rowname.isForeignCurrency()) ? QString() : QString(" (%1)").arg(rowname.currency().id()));
           }
 

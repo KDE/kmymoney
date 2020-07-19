@@ -222,7 +222,7 @@ public:
     if (acc.isClosed()) {
       tmp += QLatin1String("<strike>");
     }
-    tmp +=  acc.name();
+    tmp +=  acc.name().replace("<", "&lt;").replace(">", "&gt;");
     if (acc.isClosed()) {
       tmp += QLatin1String("</strike>");
     }
