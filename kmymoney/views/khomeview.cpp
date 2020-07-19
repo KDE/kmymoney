@@ -52,6 +52,19 @@ void KHomeView::slotAdjustScrollPos()
 #endif
 }
 
+bool KHomeView::eventFilter(QObject* o, QEvent* e)
+{
+  Q_D(KHomeView);
+  if (o == d->m_view) {
+    // we simply suppress the context menu as it
+    // does not provide useful functions
+    if (e->type() == QEvent::ContextMenu) {
+      return true;
+    }
+  }
+  return KMyMoneyViewBase::eventFilter(o, e);
+}
+
 void KHomeView::wheelEvent(QWheelEvent* event)
 {
   Q_D(KHomeView);

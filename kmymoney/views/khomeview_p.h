@@ -161,6 +161,7 @@ public:
   #else
     m_view = new KWebView(q);
   #endif
+    m_view->installEventFilter(q);
     m_view->setPage(new MyQWebEnginePage(m_view));
 
     vbox->addWidget(m_view);
