@@ -54,6 +54,7 @@
 #include <icons/icons.h>
 #include "mymoneyenums.h"
 #include "modelenums.h"
+#include "../config/mymoneyqifprofile.h"
 
 using namespace Icons;
 
@@ -123,6 +124,17 @@ void KExportDlg::loadProfiles(const bool selectLast)
 
   list = grp.readEntry("profiles", QStringList());
   list.sort();
+  if (list.isEmpty()) {
+    // in case the list is empty, we need to create the default profile
+    MyMoneyQifProfile defaultProfile;
+    defaultProfile.setProfileDescription(i18n("The default QIF profile"));
+    defaultProfile.setProfileName("Profile-Default");
+
+    list += "Default";
+    grp.writeEntry("profiles", list);
+
+    defaultProfile.saveProfile();
+  }
   m_profileComboBox->insertItems(0, list);
 
   if (selectLast == true) {
