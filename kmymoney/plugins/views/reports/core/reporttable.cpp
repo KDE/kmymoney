@@ -122,6 +122,10 @@ QString reports::ReportTable::renderReport(const QString &type, const QByteArray
   MyMoneyFile* file = MyMoneyFile::instance();
   QString result;
 
+  // convert a possible infinite report period to valid dates
+  QDate fromDate, toDate;
+  m_config.validDateRange(fromDate, toDate);
+
   if (type == QLatin1String("html")) {
     //this renders the HEAD tag and sets the correct css file
     result = renderHeader(title, encoding, includeCSS);
@@ -133,8 +137,8 @@ QString reports::ReportTable::renderReport(const QString &type, const QByteArray
       // report's date range
       result.append(QString::fromLatin1("<div class=\"subtitle\">%1</div>\n"
                                         "<div class=\"gap\">&nbsp;</div>\n").arg(i18nc("Report date range", "%1 through %2",
-                                                                                       m_config.fromDate().toString(Qt::SystemLocaleShortDate),
-                                                                                       m_config.toDate().toString(Qt::SystemLocaleShortDate))));
+                                                                                       fromDate.toString(Qt::SystemLocaleShortDate),
+                                                                                       toDate.toString(Qt::SystemLocaleShortDate))));
       // report's currency information
       if (m_containsNonBaseCurrency)
         result.append(QString::fromLatin1("<div class=\"subtitle\">%1</div>\n"
@@ -154,8 +158,8 @@ QString reports::ReportTable::renderReport(const QString &type, const QByteArray
   } else if (type == QLatin1String("csv")) {
     result.append(QString::fromLatin1("\"Report: %1\"\n").arg(m_config.name()));
     result.append(QString::fromLatin1("%1\n").arg(i18nc("Report date range", "%1 through %2",
-                                                        m_config.fromDate().toString(Qt::SystemLocaleShortDate),
-                                                        m_config.toDate().toString(Qt::SystemLocaleShortDate))));
+                                                        fromDate.toString(Qt::SystemLocaleShortDate),
+                                                        toDate.toString(Qt::SystemLocaleShortDate))));
     if (m_containsNonBaseCurrency)
       result.append(QString::fromLatin1("%1\n").arg(m_config.isConvertCurrency() ?
                                                       i18n("All currencies converted to %1" , file->baseCurrency().name()) :
