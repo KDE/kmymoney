@@ -265,6 +265,17 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
         case Qt::Key_Escape:
           QTimer::singleShot(0, this, SIGNAL(escapePressed()));
           break;
+        case Qt::Key_Comma:
+          if (k->modifiers() & Qt::KeypadModifier && o == haveWidget("number")) {
+              QString num = m_account.value("lastNumberUsed");
+              QString key = ".";
+              QKeyEvent evt(e->type(),
+                            Qt::Key_Period, 0, key,
+                            k->isAutoRepeat(), k->count());
+              QApplication::sendEvent(o, &evt);
+              rc = true;
+          }
+          break;
       }
     }
   }
@@ -886,7 +897,7 @@ void StdTransactionEditor::createEditWidgets()
     number->setObjectName(QLatin1String("Number"));
     m_editWidgets["number"] = number;
     connect(number, SIGNAL(lineChanged(QString)), this, SLOT(slotNumberChanged(QString)));
-    // number->installEventFilter(this);
+    number->installEventFilter(this);
   }
 
   kMyMoneyDateInput* postDate = new kMyMoneyDateInput;
