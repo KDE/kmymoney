@@ -53,8 +53,8 @@
   <summary xml:lang="x-test">xxPersonal finance manager based on double-entry bookkeepingxx</summary>
   <description>
     <p>KMyMoney is a personal finance manager by KDE. It comes with a large set of features while being easy to use for the non-technical user.</p>
-    <p xml:lang="ca">El KMyMoney és un gestor de les finances personals desenvolupat per la comunitat KDE. Té un gran conjunt de característiques encara que és fàcil d'emprar pels usuaris no tècnics.</p>
-    <p xml:lang="ca-valencia">El KMyMoney és un gestor de les finances personals desenvolupat per la comunitat KDE. Té un gran conjunt de característiques encara que és fàcil d'emprar pels usuaris no tècnics.</p>
+    <p xml:lang="ca">El KMyMoney és un gestor de les finances personals desenvolupat per la comunitat KDE. Té un gran conjunt de característiques encara que és fàcil d'emprar per als usuaris no tècnics.</p>
+    <p xml:lang="ca-valencia">El KMyMoney és un gestor de les finances personals desenvolupat per la comunitat KDE. Té un gran conjunt de característiques encara que és fàcil d'emprar per als usuaris no tècnics.</p>
     <p xml:lang="de">KMyMoney ist eine persönliche Finanzverwaltung von KDE mit vielen Funktionen, aber trotzdem leicht zu bedienen.</p>
     <p xml:lang="en-GB">KMyMoney is a personal finance manager by KDE. It comes with a large set of features while being easy to use for the non-technical user.</p>
     <p xml:lang="es">KMyMoney es un gestor de finanzas personales creado por KDE. Contiene un gran número de funciones, aunque es fácil de usar para los usuarios no técnicos.</p>
