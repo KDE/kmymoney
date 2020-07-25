@@ -334,8 +334,8 @@ QVector<MyMoneySplit> MyMoneyTransactionFilter::matchingSplits(const MyMoneyTran
     }
   }
 
-  auto categoryMatched = !(filter & categoryFilterActive);
-  auto accountMatched = !(filter & accountFilterActive);
+  auto categoryMatched = !(filter.testFlag(categoryFilterActive));
+  auto accountMatched = !(filter.testFlag(accountFilterActive));
   auto isTransfer = true;
 
   // check the transaction's validity
@@ -355,14 +355,13 @@ QVector<MyMoneySplit> MyMoneyTransactionFilter::matchingSplits(const MyMoneyTran
   extendedFilter.setFlag(accountFilterActive, false);
   extendedFilter.setFlag(categoryFilterActive, false);
 
-  if (filter.testFlag(accountFilterActive) ||
-      filter.testFlag(categoryFilterActive) ||
+  const auto needAccountMatch = filter.testFlag(accountFilterActive);
+  const auto needCategoryMatch = filter.testFlag(categoryFilterActive);
+  if (needAccountMatch || needCategoryMatch ||
       extendedFilter != 0) {
     const auto& splits = transaction.splits();
     for (const auto& s : splits) {
-
-      if (filter.testFlag(accountFilterActive) ||
-          filter.testFlag(categoryFilterActive)) {
+      if (needAccountMatch || needCategoryMatch) {
         auto removeSplit = true;
         if (d->m_considerCategory) {
           switch (file->account(s.accountId()).accountGroup()) {
@@ -370,7 +369,7 @@ QVector<MyMoneySplit> MyMoneyTransactionFilter::matchingSplits(const MyMoneyTran
             case eMyMoney::Account::Type::Expense:
               isTransfer = false;
               // check if the split references one of the categories in the list
-              if (filter.testFlag(categoryFilterActive)) {
+              if (needCategoryMatch) {
                 if (d->m_categories.isEmpty()) {
                   // we're looking for transactions with 'no' categories
                   d->m_matchingSplitsCount = 0;
@@ -484,6 +483,16 @@ QVector<MyMoneySplit> MyMoneyTransactionFilter::matchingSplits(const MyMoneyTran
         matchingSplits.append(s);
 
       isMatchingSplitsEmpty = false;
+    }
+
+    // check if we're looking for transactions without assigned category
+    if (!categoryMatched && transaction.splitCount() == 1 && d->m_categories.isEmpty())
+      categoryMatched = true;
+
+    if ((needAccountMatch && !accountMatched) ||
+        (needCategoryMatch && !categoryMatched)) {
+      matchingSplits.clear();
+      return matchingSplits;
     }
   } else if (d->m_reportAllSplits) {
     const auto& splits = transaction.splits();
