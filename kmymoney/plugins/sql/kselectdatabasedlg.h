@@ -35,7 +35,6 @@
 namespace Ui { class KSelectDatabaseDlg; }
 
 class KMandatoryFieldGroup;
-class QAction;
 class KSelectDatabaseDlg : public QDialog
 {
   Q_OBJECT
