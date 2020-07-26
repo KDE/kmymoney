@@ -531,6 +531,8 @@ void QueryTable::constructTransactionTable()
   for (QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.constBegin(); it_transaction != transactions.constEnd(); ++it_transaction) {
 
     TableRow qA, qS;
+    QList<TableRow> qStack;
+
     QDate pd;
     QList<QString> tagIdListCache;
 
@@ -620,6 +622,7 @@ void QueryTable::constructTransactionTable()
     QString baseCurrency = file->baseCurrency().id();
 
     QMap<QString, MyMoneyMoney> xrMap; // container for conversion rates from given currency to myBeginCurrency
+
     do {
       MyMoneyMoney xr;
       ReportAccount splitAcc((* it_split).accountId());
@@ -786,7 +789,6 @@ void QueryTable::constructTransactionTable()
 
           } else {
             if ((splits.count() > 2) && use_summary) {
-
               // add the "summarized" split transaction
               // this is the sub-total of the split detail
               // convert to lowest fraction
@@ -795,6 +797,25 @@ void QueryTable::constructTransactionTable()
               qA[ctTopCategory] = i18nc("Split transaction", "Split");
               qA[ctCategoryType] = i18nc("Split transaction", "Split");
               m_rows += qA;
+            } else if (splits.count() > 2) {
+              // this applies when the transaction has more than 2 splits
+              // and each is shown seperately
+              switch (m_config.rowType()) {
+                case eMyMoney::Report::RowType::Category:
+                case eMyMoney::Report::RowType::TopCategory:
+                case eMyMoney::Report::RowType::Tag:
+                case eMyMoney::Report::RowType::Payee:
+                  if (splitAcc.isAssetLiability())
+                    qA[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString(); // needed for category reports, in case of multicurrency transaction it breaks it
+                    break;
+                default:
+                  break;
+              }
+              qA[ctSplit].clear();
+              qA[ctRank] = QLatin1Char('1');
+              // keep it for now and don't add the data immediately
+              // as we may find a better match in one of the other splits
+              qStack += qA;
             }
           }
         }
@@ -913,6 +934,8 @@ void QueryTable::constructTransactionTable()
                     }
                   }
                   m_rows += qA;
+                  // we don't need the stacked data
+                  qStack.clear();
                 }
               }
             }
@@ -971,6 +994,7 @@ void QueryTable::constructTransactionTable()
                     && (transaction_text
                         || m_config.match((*it_split))))) {
               m_rows += qS;
+              qStack.clear();
 
               // track accts that will need opening and closing balances
               accts.insert(splitAcc.id(), splitAcc);
@@ -996,9 +1020,12 @@ void QueryTable::constructTransactionTable()
         break;
 
     } while (it_split != myBegin);
+
     if (loan_special_case) {
       m_rows += qA;
+      qStack.clear();
     }
+    m_rows += qStack;
   }
 
   // now run through our accts list and add opening and closing balances
