@@ -19,7 +19,7 @@
           <account name="Interest" type="13">
             <flag name="Tax"/>
           </account>
-          <account name="Principle" type="13">
+          <account name="Principal" type="13">
             <flag name="Tax"/>
           </account>
           <account name="PMI" type="13">

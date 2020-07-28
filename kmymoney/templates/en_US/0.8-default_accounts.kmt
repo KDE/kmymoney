@@ -23,7 +23,7 @@
    </account>
    <account type="12" name="Banking" >
     <account type="12" name="Interest Earned" />
-    <account type="12" name="Loan Principle Received" />
+    <account type="12" name="Loan Principal Received" />
    </account>
    <account type="12" name="Other Income" >
     <account type="12" name="Alimony" />
@@ -59,7 +59,7 @@
     <account type="13" name="Rent" />
     <account type="13" name="Mortgage" >
      <account type="13" name="Interest" />
-     <account type="13" name="Principle" />
+     <account type="13" name="Principal" />
      <account type="13" name="PMI (Private Mortgage Insurance)" />
     </account>
     <account type="13" name="Cable / Satellite TV" />
