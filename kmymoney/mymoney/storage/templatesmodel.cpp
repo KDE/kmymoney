@@ -40,7 +40,6 @@
 
 #include "mymoneyfile.h"
 #include "mymoneyenums.h"
-#include "kmymoneysettings.h"
 
 #include "icons.h"
 
