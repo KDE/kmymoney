@@ -3158,7 +3158,7 @@ QList<MyMoneySecurity> MyMoneyFile::availableCurrencyList() const
   currencyList.append(MyMoneySecurity("BHD", i18n("Bahraini Dinar"),         "BHD", 1000));
   currencyList.append(MyMoneySecurity("BDT", i18n("Bangladeshi Taka")));
   currencyList.append(MyMoneySecurity("BBD", i18n("Barbados Dollar"),        "$"));
-  currencyList.append(MyMoneySecurity("BTC", i18n("Bitcoin"),                "BTC"));
+  currencyList.append(MyMoneySecurity("BTC", i18n("Bitcoin"),                "BTC", 100000000, 100000000));
   currencyList.append(MyMoneySecurity("BYN", i18n("Belarusian Ruble"),       "Br"));
   currencyList.append(MyMoneySecurity("BZD", i18n("Belize Dollar"),          "$"));
   currencyList.append(MyMoneySecurity("BMD", i18n("Bermudian Dollar"),       "$"));
