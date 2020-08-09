@@ -3460,6 +3460,7 @@ void MyMoneyFile::addReport(MyMoneyReport& report)
   d->checkTransaction(Q_FUNC_INFO);
 
   d->reportsModel.addItem(report);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Add, File::Object::Report, report.id());
 }
 
 void MyMoneyFile::modifyReport(const MyMoneyReport& report)
@@ -3467,6 +3468,7 @@ void MyMoneyFile::modifyReport(const MyMoneyReport& report)
   d->checkTransaction(Q_FUNC_INFO);
 
   d->reportsModel.modifyItem(report);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Report, report.id());
 }
 
 void MyMoneyFile::removeReport(const MyMoneyReport& report)
@@ -3474,6 +3476,7 @@ void MyMoneyFile::removeReport(const MyMoneyReport& report)
   d->checkTransaction(Q_FUNC_INFO);
 
   d->reportsModel.removeItem(report);
+  d->m_changeSet += MyMoneyNotification(File::Mode::Remove, File::Object::Report, report.id());
 }
 
 MyMoneyReport MyMoneyFile::report(const QString& id) const
