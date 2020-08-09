@@ -42,6 +42,7 @@
 #include "mymoneysplit.h"
 #include "mymoneymoney.h"
 #include "mymoneytransactionfilter.h"
+#include "mymoneyutils.h"
 
 struct JournalModel::Private
 {
@@ -228,12 +229,38 @@ struct JournalModel::Private
     return interestOrFeeCategory(journalEntry, true);
   }
 
-  QString security(const JournalEntry& journalEntry) const
+  MyMoneyMoney interestOrFeeValue(const JournalEntry& journalEntry, bool fees) const
+  {
+    MyMoneyMoney value;
+    const auto file = MyMoneyFile::instance();
+    if (file->isInvestmentTransaction(journalEntry.transaction())) {
+      for (const auto& split : journalEntry.transaction().splits()) {
+        const auto acc = file->account(split.accountId());
+        if (acc.isIncomeExpense()) {
+          if (split.shares().isNegative() ^ fees) {
+            value += split.value();
+          }
+        }
+      }
+    }
+    return value;
+  }
+
+  MyMoneyMoney interestValue(const JournalEntry& journalEntry) const
+  {
+    return interestOrFeeValue(journalEntry, false);
+  }
+
+  MyMoneyMoney feeValue(const JournalEntry& journalEntry) const
+  {
+    return interestOrFeeValue(journalEntry, true);
+  }
+
+  MyMoneySecurity security(const JournalEntry& journalEntry) const
   {
     const auto file = MyMoneyFile::instance();
     const auto acc = file->accountsModel()->itemById(journalEntry.split().accountId());
-    const auto sec = file->securitiesModel()->itemById(acc.currencyId());
-    return sec.name();
+    return file->securitiesModel()->itemById(acc.currencyId());
   }
 
   void removeIdKeyMapping(const QString& id)
@@ -452,6 +479,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
   }
 
   const MyMoneyTransaction& transaction = journalEntry.transaction();
+  const MyMoneySplit& split = journalEntry.split();
 
   switch(role) {
     case Qt::DisplayRole:
@@ -467,7 +495,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
           return MyMoneyFile::instance()->accountsModel()->itemById(journalEntry.split().accountId()).name();
 
         case Security:
-          return d->security(journalEntry);
+          return d->security(journalEntry).name();
           break;
 
         case CostCenter:
@@ -497,16 +525,70 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
           if (!journalEntry.split().value().isNegative()) {
             return d->formatValue(transaction, journalEntry.split(), MyMoneyMoney::ONE);
           }
+          break;
+
         case Quantity:
+          switch(journalEntry.split().investmentTransactionType()) {
+            case eMyMoney::Split::InvestmentTransactionType::Dividend:
+            case eMyMoney::Split::InvestmentTransactionType::Yield:
+            case eMyMoney::Split::InvestmentTransactionType::InterestIncome:
+              break;
+            case eMyMoney::Split::InvestmentTransactionType::SplitShares:
+              return QString("1 / %1").arg(split.shares().abs().formatMoney(QString(), -1));
+              break;
+            default:
+              return split.shares().abs().formatMoney(QString(), MyMoneyMoney::denomToPrec(d->security(journalEntry).smallestAccountFraction()));
+          }
+          break;
+
         case Price:
+          switch(journalEntry.split().investmentTransactionType()) {
+            case eMyMoney::Split::InvestmentTransactionType::BuyShares:
+            case eMyMoney::Split::InvestmentTransactionType::SellShares:
+            case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
+              if (!split.shares().isZero()) {
+                return split.price().formatMoney(MyMoneyFile::instance()->currency(transaction.commodity()).tradingSymbol(), d->security(journalEntry).pricePrecision());
+
+              }
+              break;
+            default:
+              break;
+          }
+          break;
+
         case Amount:
         case Value:
+          {
+            MyMoneySplit assetAccountSplit;
+            QList<MyMoneySplit> feeSplits, interestSplits;
+            MyMoneySecurity security, currency;
+            MyMoneyMoney amount;
+            eMyMoney::Split::InvestmentTransactionType transactionType;
+            MyMoneyUtils::dissectTransaction(transaction, split, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
+            switch(transactionType) {
+              case eMyMoney::Split::InvestmentTransactionType::BuyShares:
+              case eMyMoney::Split::InvestmentTransactionType::SellShares:
+              case eMyMoney::Split::InvestmentTransactionType::Dividend:
+              case eMyMoney::Split::InvestmentTransactionType::Yield:
+              case eMyMoney::Split::InvestmentTransactionType::InterestIncome:
+                return MyMoneyUtils::formatMoney(assetAccountSplit.value().abs(), currency);
+
+              case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
+                for(const auto& sp : qAsConst(interestSplits)) {
+                  amount += sp.value();
+                }
+                return  MyMoneyUtils::formatMoney(-amount, currency);
+
+              default:
+                break;
+            }
+          }
           break;
 
         case Balance:
           {
-            const auto split = journalEntry.split();
-            auto acc = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
+            const auto sp = journalEntry.split();
+            auto acc = MyMoneyFile::instance()->accountsModel()->itemById(sp.accountId());
             return journalEntry.balance().formatMoney(acc.fraction());
           }
           break;
@@ -521,6 +603,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         case Payment:
         case Deposit:
         case Balance:
+        case Value:
           return QVariant(Qt::AlignRight | Qt::AlignTop);
 
         case Reconciliation:
@@ -557,11 +640,10 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::TransactionIsTransferRole:
       if (journalEntry.transaction().splitCount() == 2) {
-        for (const auto& split : journalEntry.transaction().splits()) {
-          const auto acc = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
+        for (const auto& sp : journalEntry.transaction().splits()) {
+          const auto acc = MyMoneyFile::instance()->accountsModel()->itemById(sp.accountId());
           if (acc.isIncomeExpense()) {
             return false;
-            break;
           }
         }
       }
@@ -594,8 +676,8 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::TransactionInvestmentAccountIdRole:
       if (MyMoneyFile::instance()->isInvestmentTransaction(journalEntry.transaction())) {
         QString accountId;
-        for (const auto& split : journalEntry.transaction().splits()) {
-          const auto acc = MyMoneyFile::instance()->accountsModel()->itemById(split.accountId());
+        for (const auto& sp : journalEntry.transaction().splits()) {
+          const auto acc = MyMoneyFile::instance()->accountsModel()->itemById(sp.accountId());
           if (acc.accountType() == eMyMoney::Account::Type::Investment) {
             return acc.id();
           }
@@ -606,6 +688,15 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         return accountId;
       }
       break;
+
+    case eMyMoney::Model::TransactionInterestValueRole:
+      return QVariant::fromValue<MyMoneyMoney>(d->interestValue(journalEntry));
+
+    case eMyMoney::Model::TransactionFeesValueRole:
+      return QVariant::fromValue<MyMoneyMoney>(d->feeValue(journalEntry));
+
+    case eMyMoney::Model::TransactionCommodityRole:
+      return transaction.commodity();
 
     case eMyMoney::Model::SplitSharesSuffixRole:
       // figure out if it is a debit or credit split. s.a. https://en.wikipedia.org/wiki/Debits_and_credits#Aspects_of_transactions

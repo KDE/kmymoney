@@ -44,6 +44,8 @@
 #include "payeesmodel.h"
 #include "newtransactioneditor.h"
 #include "investtransactioneditor.h"
+#include "mymoneyutils.h"
+#include "mymoneysecurity.h"
 
 static unsigned char attentionSign[] = {
   0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A,
@@ -186,6 +188,27 @@ public:
       }
       lines.removeAll(QString());
 
+    } else if(index.column() == JournalModel::Column::Quantity) {
+      if (index.data(eMyMoney::Model::TransactionIsInvestmentRole).toBool()) {
+        lines << opt.text;
+        if(opt.state & QStyle::State_Selected) {
+          // we have to pay attention here as later on empty items will be removed
+          // from the lines all together. Since we use the column detail as label
+          // we have to make that we are not off. Therefor, if the detail column
+          // is filled, we add a simple blank here instead of an empty line.
+          lines << (index.data(eMyMoney::Model::TransactionBrokerageAccountRole).toString().isEmpty() ? QString() : QStringLiteral(" "));
+
+          MyMoneySecurity currency = MyMoneyFile::instance()->currency(index.data(eMyMoney::Model::TransactionCommodityRole).toString());
+
+          MyMoneyMoney value = index.data(eMyMoney::Model::TransactionInterestValueRole).value<MyMoneyMoney>();
+          lines << (index.data(eMyMoney::Model::TransactionInterestCategoryRole).toString().isEmpty() ? QString() : MyMoneyUtils::formatMoney(value.abs(), currency));
+
+          value = index.data(eMyMoney::Model::TransactionFeesValueRole).value<MyMoneyMoney>();
+          lines << (index.data(eMyMoney::Model::TransactionFeesCategoryRole).toString().isEmpty() ? QString() : MyMoneyUtils::formatMoney(value.abs(), currency));
+        } else {
+          lines << opt.text;
+        }
+      }
     } else {
       lines << opt.text;
     }
@@ -376,13 +399,8 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
       }
 
       // collect data for the various columns
-      if(index.column() == JournalModel::Column::Detail) {
-        for(int i = 0; i < lines.count(); ++i) {
-          painter->drawText(textArea.adjusted(0, lineHeight * i, 0, 0), opt.displayAlignment, lines[i]);
-        }
-
-      } else {
-        painter->drawText(textArea, opt.displayAlignment, opt.text);
+      for(int i = 0; i < lines.count(); ++i) {
+        painter->drawText(textArea.adjusted(0, lineHeight * i, 0, 0), opt.displayAlignment, lines[i]);
       }
     }
 
