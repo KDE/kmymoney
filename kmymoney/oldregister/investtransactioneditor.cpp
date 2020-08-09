@@ -58,6 +58,7 @@
 #include "investactivities.h"
 #include "kmymoneycompletion.h"
 #include "dialogenums.h"
+#include "mymoneyutils.h"
 
 using namespace eMyMoney;
 using namespace KMyMoneyRegister;
@@ -335,7 +336,7 @@ OldInvestTransactionEditor::OldInvestTransactionEditor(TransactionEditorContaine
   connect(d->m_regForm, &TransactionEditorContainer::geometriesUpdated, this, &OldInvestTransactionEditor::slotTransactionContainerGeometriesUpdated);
 
   // dissect the transaction into its type, splits, currency, security etc.
-  KMyMoneyUtils::dissectTransaction(d->m_transaction, d->m_split,
+  MyMoneyUtils::dissectTransaction(d->m_transaction, d->m_split,
                                     d->m_assetAccountSplit,
                                     d->m_feeSplits,
                                     d->m_interestSplits,
@@ -1128,7 +1129,7 @@ bool OldInvestTransactionEditor::createTransaction(MyMoneyTransaction& t, const 
   // extract the splits from the original transaction, but only
   // if there is one because otherwise the currency is overridden
   if (torig.splitCount() != 0) {
-    KMyMoneyUtils::dissectTransaction(torig, sorig,
+    MyMoneyUtils::dissectTransaction(torig, sorig,
                      assetAccountSplit,
                      feeSplits,
                      interestSplits,

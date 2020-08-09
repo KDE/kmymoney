@@ -365,7 +365,6 @@ public:
     */
   static void updateWizardButtons(QWizard *);
 
-  static KMYMONEY_DEPRECATED void dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, eMyMoney::Split::InvestmentTransactionType& transactionType);
   static void dissectInvestmentTransaction(const QModelIndex &investSplitIdx, QModelIndex &assetAccountSplitIdx, SplitModel* feeSplitModel, SplitModel* interestSplitModel, MyMoneySecurity &security, MyMoneySecurity &currency, eMyMoney::Split::InvestmentTransactionType &transactionType);
   static void processPriceList(const MyMoneyStatement& st);
 

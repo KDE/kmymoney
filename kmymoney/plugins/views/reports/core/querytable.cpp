@@ -46,6 +46,7 @@
 #include "mymoneytransaction.h"
 #include "mymoneyreport.h"
 #include "mymoneyexception.h"
+#include "mymoneyutils.h"
 #include "kmymoneyutils.h"
 #include "reportaccount.h"
 #include "mymoneyenums.h"
@@ -706,7 +707,7 @@ void QueryTable::constructTransactionTable()
           MyMoneySecurity currency;
           MyMoneySecurity security;
           eMyMoney::Split::InvestmentTransactionType transactionType;
-          KMyMoneyUtils::dissectTransaction((*it_transaction), stockSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
+          MyMoneyUtils::dissectTransaction((*it_transaction), stockSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
           if (!(assetAccountSplit == MyMoneySplit())) {
             for (it_split = splits.begin(); it_split != splits.end(); ++it_split) {
               if ((*it_split) == assetAccountSplit) {
@@ -1207,7 +1208,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
       MyMoneySecurity security;
       MyMoneySecurity currency;
       eMyMoney::Split::InvestmentTransactionType transactionType;
-      KMyMoneyUtils::dissectTransaction((*it_t), shareSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
+      MyMoneyUtils::dissectTransaction((*it_t), shareSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
       QDate postDate = (*it_t).postDate();
       MyMoneyMoney price;
       //get price for the day of the transaction if we have to calculate base currency
@@ -1329,7 +1330,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
       MyMoneySecurity security;
       MyMoneySecurity currency;
       eMyMoney::Split::InvestmentTransactionType transactionType;
-      KMyMoneyUtils::dissectTransaction(transaction, shareSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
+      MyMoneyUtils::dissectTransaction(transaction, shareSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
       QDate postDate = transaction.postDate();
       MyMoneyMoney price;
       if (m_config.isConvertCurrency())

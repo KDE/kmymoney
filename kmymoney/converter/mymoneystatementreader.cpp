@@ -72,6 +72,7 @@
 #include "dialogenums.h"
 #include "mymoneyenums.h"
 #include "modelenums.h"
+#include "mymoneyutils.h"
 #include "kmymoneyutils.h"
 
 using namespace eMyMoney;
@@ -249,7 +250,7 @@ void MyMoneyStatementReader::Private::previouslyUsedCategories(const QString& in
       MyMoneySecurity security;
       MyMoneySecurity currency;
       eMyMoney::Split::InvestmentTransactionType transactionType;
-      KMyMoneyUtils::dissectTransaction(t, s, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
+      MyMoneyUtils::dissectTransaction(t, s, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
       if (!feeSplits.isEmpty()) {
         feesId = feeSplits.first().accountId();
         if (!interestId.isEmpty())

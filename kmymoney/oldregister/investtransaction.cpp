@@ -47,7 +47,6 @@
 #include "kmymoneylineedit.h"
 #include "kmymoneycombo.h"
 #include "investtransactioneditor.h"
-#include "kmymoneyutils.h"
 #include "amountedit.h"
 
 #include "kmymoneysettings.h"
@@ -63,7 +62,7 @@ InvestTransaction::InvestTransaction(Register *parent, const MyMoneyTransaction&
   Q_D(InvestTransaction);
 #ifndef KMM_DESIGNER
   // dissect the transaction into its type, splits, currency, security etc.
-  KMyMoneyUtils::dissectTransaction(d->m_transaction, d->m_split,
+  MyMoneyUtils::dissectTransaction(d->m_transaction, d->m_split,
                                     d->m_assetAccountSplit,
                                     d->m_feeSplits,
                                     d->m_interestSplits,
