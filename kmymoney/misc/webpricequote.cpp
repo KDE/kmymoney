@@ -640,13 +640,45 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
   // To: kmymoney@kde.org
   // Date: Sat, 6 Apr 2013 13:22:45 +0100
   // Updated on 2017-06 by Łukasz Wojniłowicz
-  result["Financial Times - UK Funds"] = WebPriceQuoteSource("Financial Times",
-                                                           "http://funds.ft.com/uk/Tearsheet/Summary?s=%1",
+  // Noted to be broken on 2020-08-11 by Richard Leszczynski (richardjrl@posteo.net) and
+  // edited and augmented with three additional new Financial Times price sources below:
+  result["Financial Times - UK ETFs"] = WebPriceQuoteSource("Financial Times - UK ETFs",
+                                                           "https://markets.ft.com/data/etfs/tearsheet/summary?s=%1",
+                                                           QString(),
+                                                           QString(), // webIDRegExp
+                                                           WebPriceQuoteSource::identifyBy::IdentificationNumber,
+                                                           "Price\\D+([\\d,]*\\d+\\.\\d+)", // price regexp
+                                                           "Data delayed at least 20 minutes, as of\\ (.*)\\.", // date regexp
+                                                           "%m %d %y", // date format
+                                                           true // skip HTML stripping
+                                                           );
+  result["Financial Times - UK Funds"] = WebPriceQuoteSource("Financial Times - UK Funds",
+                                                           "https://markets.ft.com/data/funds/tearsheet/summary?s=%1",
                                                            QString(),
                                                            QString(), // webIDRegExp
                                                            WebPriceQuoteSource::identifyBy::IdentificationNumber,
                                                            "Price\\D+([\\d,]*\\d+\\.\\d+)", // price regexp
                                                            "Data delayed at least 15 minutes, as of\\ (.*)\\.", // date regexp
+                                                           "%m %d %y", // date format
+                                                           true // skip HTML stripping
+                                                           );
+  result["Financial Times - UK Investment Trusts"] = WebPriceQuoteSource("Financial Times - UK Investment Trusts",
+                                                           "https://markets.ft.com/data/investment-trust/tearsheet/summary?s=%1",
+                                                           QString(),
+                                                           QString(), // webIDRegExp
+                                                           WebPriceQuoteSource::identifyBy::IdentificationNumber,
+                                                           "Price\\D+([\\d,]*\\d+\\.\\d+)", // price regexp
+                                                           "Data delayed at least 20 minutes, as of\\ (.*)\\.", // date regexp
+                                                           "%m %d %y", // date format
+                                                           true // skip HTML stripping
+                                                           );
+  result["Financial Times - UK Shares"] = WebPriceQuoteSource("Financial Times - UK Shares",
+                                                           "https://markets.ft.com/data/equities/tearsheet/summary?s=%1",
+                                                           QString(),
+                                                           QString(), // webIDRegExp
+                                                           WebPriceQuoteSource::identifyBy::IdentificationNumber,
+                                                           "Price\\D+([\\d,]*\\d+\\.\\d+)", // price regexp
+                                                           "Data delayed at least 20 minutes, as of\\ (.*)\\.", // date regexp
                                                            "%m %d %y", // date format
                                                            true // skip HTML stripping
                                                            );
