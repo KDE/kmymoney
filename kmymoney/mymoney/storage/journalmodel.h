@@ -163,6 +163,13 @@ public:
    */
   QString fakeId() const;
 
+  /**
+   * Returns a QModelIndex to the first split of the transaction referenced
+   * by @a index or returns an invalid QModelIndex in case
+   * @a index points to a different model or is invalid itself.
+   */
+  QModelIndex adjustToFirstSplitIdx(const QModelIndex& index) const;
+
 protected:
   explicit JournalModel(const QString& idLeadin, QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
 

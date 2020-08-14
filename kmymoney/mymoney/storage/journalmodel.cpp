@@ -1260,3 +1260,24 @@ QString JournalModel::fakeId() const
   return QStringLiteral("FakeID");
 }
 
+QModelIndex JournalModel::adjustToFirstSplitIdx(const QModelIndex& index) const
+{
+  if (!index.isValid() || index.model() != this) {
+    return {};
+  }
+
+  const auto id = index.data(eMyMoney::Model::IdRole).toString();
+
+  // find the first split of this transaction in the journal
+  QModelIndex idx;
+  int startRow;
+  for (startRow = index.row()-1; startRow >= 0; --startRow) {
+    idx = index.model()->index(startRow, 0);
+    const auto cid = idx.data(eMyMoney::Model::IdRole).toString();
+    if (cid != id)
+      break;
+  }
+  startRow++;
+
+  return index.model()->index(startRow, index.column());
+}
