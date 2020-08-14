@@ -634,6 +634,7 @@ void MyMoneyFile::commitTransaction()
   const auto& m_valueChanges = d->m_valueChangedSet;
   for (const auto& id : m_valueChanges) {
     if (!removedObjects.contains(id)) {
+      changed = true;
       emit valueChanged(account(id));
     }
   }

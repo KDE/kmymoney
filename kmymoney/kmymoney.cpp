@@ -1153,6 +1153,9 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   // connect the WebConnect server
   connect(d->m_webConnect, &WebConnect::gotUrl, this, &KMyMoneyApp::webConnectUrl);
 
+  // connection to update caption
+  connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, [&]() { d->updateCaption(); });
+
   // setup the initial configuration
   slotUpdateConfiguration(QString());
 
