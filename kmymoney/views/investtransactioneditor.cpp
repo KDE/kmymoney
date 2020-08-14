@@ -692,6 +692,11 @@ void InvestTransactionEditor::loadTransaction(const QModelIndex& index)
         } else {
             d->ui->dateEdit->setDate(QDate::currentDate());
         }
+        // select the associated brokerage account if it exists
+        const auto& brokerageAccount = MyMoneyFile::instance()->accountsModel()->itemByName(d->m_account.brokerageName());
+        if (!brokerageAccount.id().isEmpty()) {
+            d->ui->accountCombo->setSelected(brokerageAccount.id());
+        }
     } else {
         // keep a copy of the transaction and split
         d->transaction = MyMoneyFile::instance()->journalModel()->itemByIndex(idx).transaction();
