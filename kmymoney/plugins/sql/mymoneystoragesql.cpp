@@ -20,7 +20,7 @@
 
 #include "config-kmymoney.h"
 
-#if ENABLE_SQLTRACER
+#ifdef ENABLE_SQLTRACER
 #include "kmmsqlquery.h"
 #endif
 
