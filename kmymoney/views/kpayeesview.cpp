@@ -219,9 +219,9 @@ void KPayeesView::slotPayeeSelectionChanged(const QItemSelection& selected, cons
   d->ui->m_deleteButton->setEnabled(true); //re-enable delete button
   d->ui->m_syncAddressbook->setEnabled(true);
 
+  d->ui->m_tabWidget->setEnabled(false); // disable tab widget
   switch (selectedItemCount) {
     case 0: // no selection
-      d->ui->m_tabWidget->setEnabled(false); // disable tab widget
       d->ui->m_balanceLabel->hide();
       d->ui->m_deleteButton->setEnabled(false); //disable delete, rename and merge buttons
       d->ui->m_renameButton->setEnabled(false);
@@ -232,19 +232,18 @@ void KPayeesView::slotPayeeSelectionChanged(const QItemSelection& selected, cons
       return; // make sure we don't access an undefined payee
 
     case 1: // single selection
+      d->ui->m_tabWidget->setEnabled(true); // enable tab widget
       d->ui->m_mergeButton->setEnabled(false);
       d->ui->m_renameButton->setEnabled(true);
       break;
 
     default:  // if we have multiple payees selected, clear and disable the payee information
-      d->ui->m_tabWidget->setEnabled(false); // disable tab widget
       d->ui->m_renameButton->setEnabled(false); // disable also the rename button
       d->ui->m_mergeButton->setEnabled(true);
       d->ui->m_balanceLabel->hide();
       d->clearItemData();
       break;
   }
-  d->ui->m_tabWidget->setEnabled(true); // enable tab widget
 
   const auto selectedPayees = d->selectedPayees();
   d->m_payee = MyMoneyPayee();
@@ -259,15 +258,13 @@ void KPayeesView::slotPayeeSelectionChanged(const QItemSelection& selected, cons
   try {
     d->m_newName = d->m_payee.name();
 
-    d->ui->addressEdit->setEnabled(true);
     d->ui->addressEdit->setText(d->m_payee.address());
-    d->ui->postcodeEdit->setEnabled(true);
     d->ui->postcodeEdit->setText(d->m_payee.postcode());
-    d->ui->telephoneEdit->setEnabled(true);
     d->ui->telephoneEdit->setText(d->m_payee.telephone());
-    d->ui->emailEdit->setEnabled(true);
     d->ui->emailEdit->setText(d->m_payee.email());
     d->ui->notesEdit->setText(d->m_payee.notes());
+    d->ui->payeestateEdit->setText(d->m_payee.state());
+    d->ui->payeecityEdit->setText(d->m_payee.city());
 
     QStringList keys;
     bool ignorecase = false;
