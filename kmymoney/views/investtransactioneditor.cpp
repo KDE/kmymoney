@@ -495,22 +495,16 @@ void InvestTransactionEditor::Private::setupAccount(const QString& accountId)
 
 QModelIndex InvestTransactionEditor::Private::adjustToSecuritySplitIdx(const QModelIndex& index)
 {
-    const auto id = index.data(eMyMoney::Model::IdRole).toString();
-
-    // find the first split of this transaction in the journal
-    QModelIndex idx;
-    int startRow;
-    for (startRow = index.row()-1; startRow >= 0; --startRow) {
-        idx = index.model()->index(startRow, 0);
-        const auto cid = idx.data(eMyMoney::Model::IdRole).toString();
-        if (cid != id)
-            break;
+    if (!index.isValid()) {
+        return {};
     }
-    startRow++;
+    const auto first = MyMoneyFile::instance()->journalModel()->adjustToFirstSplitIdx(index);
+    const auto id = first.data(eMyMoney::Model::IdRole).toString();
 
-    const auto rows = index.data(eMyMoney::Model::TransactionSplitCountRole).toInt();
-    for(int row = startRow; row < startRow + rows; ++row) {
-        idx = index.model()->index(row, 0);
+    const auto rows = first.data(eMyMoney::Model::TransactionSplitCountRole).toInt();
+    const auto endRow = first.row() + rows;
+    for(int row = first.row(); row < endRow; ++row) {
+        const auto idx = index.model()->index(row, 0);
         const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
         const auto account = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
         if (account.isInvest()) {
