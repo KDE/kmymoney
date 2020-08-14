@@ -771,9 +771,10 @@ QModelIndex AccountsModel::indexById(const QString& id) const
   return indexes.first();
 }
 
-QModelIndexList AccountsModel::indexListByName(const QString& name) const
+QModelIndexList AccountsModel::indexListByName(const QString& name, const QModelIndex& parent) const
 {
   // never search in the first row which is favorites
+  Q_UNUSED(parent)
   return match(assetIndex(), Qt::DisplayRole, name, 1, Qt::MatchFixedString | Qt::MatchCaseSensitive | Qt::MatchRecursive);
 }
 

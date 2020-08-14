@@ -50,7 +50,7 @@ MyMoneyModelBase::~MyMoneyModelBase()
 {
 }
 
-QModelIndexList MyMoneyModelBase::indexListByName(const QString& name, const QModelIndex parent) const
+QModelIndexList MyMoneyModelBase::indexListByName(const QString& name, const QModelIndex& parent) const
 {
   return match(index(0, 0, parent), Qt::DisplayRole, name, 1, Qt::MatchFixedString | Qt::MatchCaseSensitive);
 }

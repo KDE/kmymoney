@@ -80,7 +80,7 @@ public:
 
   QList<MyMoneyAccount> itemList() const;
   QModelIndex indexById(const QString& id) const override;
-  QModelIndexList indexListByName(const QString& name) const;
+  QModelIndexList indexListByName(const QString& name, const QModelIndex& parent = QModelIndex()) const override;
 
 
   /**

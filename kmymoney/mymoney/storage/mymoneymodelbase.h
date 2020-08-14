@@ -46,7 +46,7 @@ public:
    *
    * @sa
    */
-  QModelIndexList indexListByName(const QString& name, const QModelIndex parent = QModelIndex()) const;
+  virtual QModelIndexList indexListByName(const QString& name, const QModelIndex& parent = QModelIndex()) const;
 
   QModelIndex lowerBound(const QString& id) const;
 
