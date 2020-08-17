@@ -220,7 +220,26 @@ void LedgerView::setColumnsShown(QVector<int> columns)
 
 bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger trigger, QEvent* event)
 {
-  if(!d->haveGlobalEditor()) {
+  bool suppressDuplicateEditorStart = false;
+
+  switch(trigger) {
+    case QAbstractItemView::DoubleClicked:
+    case QAbstractItemView::EditKeyPressed:
+        suppressDuplicateEditorStart = true;
+      break;
+    default:
+      break;
+  }
+
+  if(d->haveGlobalEditor() && suppressDuplicateEditorStart) {
+    if (!d->infoMessage->isVisible() && !d->infoMessage->isShowAnimationRunning()) {
+      d->infoMessage->resize(viewport()->width(), d->infoMessage->height());
+      d->infoMessage->setText(i18n("You are already editing a transaction in another view. KMyMoney does not support editing two transactions in parallel."));
+      d->infoMessage->setMessageType(KMessageWidget::Warning);
+      d->infoMessage->animatedShow();
+    }
+
+  } else {
     bool rc = QTableView::edit(index, trigger, event);
 
     if(rc) {
@@ -243,24 +262,8 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
       resizeRowToContents(index.row());
       d->ensureEditorFullyVisible(index);
       QMetaObject::invokeMethod(this, "ensureCurrentItemIsVisible", Qt::QueuedConnection);
-    } else {
-      rc = false;
     }
     return rc;
-  } else {
-    switch(trigger) {
-      case QAbstractItemView::DoubleClicked:
-      case QAbstractItemView::EditKeyPressed:
-        if (!d->infoMessage->isVisible() && !d->infoMessage->isShowAnimationRunning()) {
-          d->infoMessage->resize(viewport()->width(), d->infoMessage->height());
-          d->infoMessage->setText(i18n("You are already editing a transaction in another view. KMyMoney does not support editing two transactions in parallel."));
-          d->infoMessage->setMessageType(KMessageWidget::Warning);
-          d->infoMessage->animatedShow();
-        }
-        break;
-      default:
-        break;
-    }
   }
   return false;
 }
