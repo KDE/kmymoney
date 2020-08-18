@@ -806,9 +806,13 @@ void QueryTable::constructTransactionTable()
                 case eMyMoney::Report::RowType::TopCategory:
                 case eMyMoney::Report::RowType::Tag:
                 case eMyMoney::Report::RowType::Payee:
-                  if (splitAcc.isAssetLiability())
+                  if (splitAcc.isAssetLiability()) {
                     qA[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString(); // needed for category reports, in case of multicurrency transaction it breaks it
-                    break;
+                    // make sure we use the right currency of the category
+                    // (will be ignored when converting to base currency)
+                    qA[ctCurrency] = splitAcc.currencyId();
+                  }
+                  break;
                 default:
                   break;
               }
@@ -880,8 +884,12 @@ void QueryTable::constructTransactionTable()
                 case eMyMoney::Report::RowType::TopCategory:
                 case eMyMoney::Report::RowType::Tag:
                 case eMyMoney::Report::RowType::Payee:
-                  if (splitAcc.isIncomeExpense())
+                  if (splitAcc.isIncomeExpense()) {
                     qA[ctValue] = (-(*it_split).shares() * xr).convert(fraction).toString(); // needed for category reports, in case of multicurrency transaction it breaks it
+                    // make sure we use the right currency of the category
+                    // (will be ignored when converting to base currency)
+                    qA[ctCurrency] = splitAcc.currencyId();
+                  }
                   break;
                 default:
                   break;
