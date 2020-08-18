@@ -140,11 +140,16 @@ QString reports::ReportTable::renderReport(const QString &type, const QByteArray
                                                                                        fromDate.toString(Qt::SystemLocaleShortDate),
                                                                                        toDate.toString(Qt::SystemLocaleShortDate))));
       // report's currency information
-      if (m_containsNonBaseCurrency)
+      if (m_containsNonBaseCurrency) {
         result.append(QString::fromLatin1("<div class=\"subtitle\">%1</div>\n"
                                           "<div class=\"gap\">&nbsp;</div>\n").arg(m_config.isConvertCurrency() ?
                                                                                      i18n("All currencies converted to %1" , file->baseCurrency().name()) :
                                                                                      i18n("All values shown in %1 unless otherwise noted" , file->baseCurrency().name())));
+      } else {
+        result.append(QString::fromLatin1("<div class=\"subtitle\">%1</div>\n"
+                                          "<div class=\"gap\">&nbsp;</div>\n").arg(
+                                            i18n("All values shown in %1" , file->baseCurrency().name())));
+      }
 
       //this method is implemented by each concrete class
       result.append(renderHTML());
