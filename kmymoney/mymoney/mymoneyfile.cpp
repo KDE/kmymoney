@@ -3137,6 +3137,10 @@ QMap<MyMoneySecurity, MyMoneyPrice> MyMoneyFile::ancientCurrencies() const
 
     // Source: https://en.wikipedia.org/wiki/Belarusian_ruble
   ancientCurrencies.insert(MyMoneySecurity("BYR", i18n("Belarusian Ruble (old)"), "BYR"), MyMoneyPrice("BYR", "BYN", QDate(2016, 7, 1), MyMoneyMoney(1, 10000), QLatin1Literal("KMyMoney")));
+
+  // Source: https://en.wikipedia.org/wiki/Zambian_kwacha, triggered by b.k.o ticket #425530
+  ancientCurrencies.insert(MyMoneySecurity("ZMK", i18n("Zambian Kwacha (old)"), "K"), MyMoneyPrice("ZMK", "ZMW", QDate(2013, 1, 1), MyMoneyMoney(1, 1000), QLatin1Literal("KMyMoney")));
+
   return ancientCurrencies;
 }
 
@@ -3302,7 +3306,7 @@ QList<MyMoneySecurity> MyMoneyFile::availableCurrencyList() const
   currencyList.append(MyMoneySecurity("VUV", i18n("Vanuatu Vatu")));
   currencyList.append(MyMoneySecurity("VEB", i18n("Venezuelan Bolivar")));
   currencyList.append(MyMoneySecurity("VND", i18n("Vietnamese Dong"),        QChar(0x20AB)));
-  currencyList.append(MyMoneySecurity("ZMK", i18n("Zambian Kwacha")));
+  currencyList.append(MyMoneySecurity("ZMW", i18n("Zambian Kwacha"),         "K"));
   currencyList.append(MyMoneySecurity("ZWD", i18n("Zimbabwe Dollar"),        "$"));
 
   currencyList.append(ancientCurrencies().keys());
