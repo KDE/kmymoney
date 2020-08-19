@@ -518,8 +518,33 @@ void KCurrencyEditDlg::slotAddCurrency()
     foreach (auto currencyRow, currencyRows) {
       MyMoneySecurity currency = currencyRow->data(0, Qt::UserRole).value<MyMoneySecurity>();
       file->addCurrency(currency);
-      if (ancientCurrencies.value(currency, MyMoneyPrice()) != MyMoneyPrice()) // if ancient currency is added...
-        file->addPrice(ancientCurrencies[currency]);                           // ...we want to add last known exchange rate as well
+      if (ancientCurrencies.value(currency, MyMoneyPrice()) != MyMoneyPrice()) { // if ancient currency is added...
+        file->addPrice(ancientCurrencies[currency]);                             // ...we want to add last known exchange rate as well
+      } else {
+        // check if a new currency is added and the old one is already on file.
+        // in that case, we want to add the last know exchange rate as well
+        for (const auto &price : qAsConst(ancientCurrencies)) {
+          QString ancientCurrencyId;
+          if (price.from() == currency.id()) {
+            ancientCurrencyId = price.to();
+          } else if (price.to() == currency.id()) {
+            ancientCurrencyId = price.from();
+          }
+          if (!ancientCurrencyId.isEmpty()) {
+            // we found a replacement record, so we look for the
+            // older variant
+            try {
+              const auto ancientCurrency = file->currency(ancientCurrencyId);
+              if (!ancientCurrency.id().isEmpty()) {
+                file->addPrice(ancientCurrencies[ancientCurrency]);
+              }
+            } catch (MyMoneyException& e) {
+              // nothing to do because ancient currency is not on file
+            }
+            break;
+          }
+        }
+      }
     }
     ft.commit();
     d->ui->m_removeUnusedCurrencyButton->setDisabled(file->currencyList().count() <= 1);
