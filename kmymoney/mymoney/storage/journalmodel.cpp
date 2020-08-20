@@ -256,6 +256,25 @@ struct JournalModel::Private
     return interestOrFeeValue(journalEntry, true);
   }
 
+  bool haveInterestOrFeeSplit(const JournalEntry& journalEntry, bool fees) const
+  {
+    const auto file = MyMoneyFile::instance();
+    if (file->isInvestmentTransaction(journalEntry.transaction())) {
+      for (const auto& split : journalEntry.transaction().splits()) {
+        const auto acc = file->account(split.accountId());
+        if (acc.isIncomeExpense()) {
+          if (split.shares().isNegative() && !fees) {
+            return true;
+          }
+          else if (split.shares().isPositive() && fees) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
   MyMoneySecurity security(const JournalEntry& journalEntry) const
   {
     const auto file = MyMoneyFile::instance();
@@ -694,6 +713,12 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::TransactionFeesValueRole:
       return QVariant::fromValue<MyMoneyMoney>(d->feeValue(journalEntry));
+
+    case eMyMoney::Model::TransactionInterestSplitPresentRole:
+      return d->haveInterestOrFeeSplit(journalEntry, false);
+
+    case eMyMoney::Model::TransactionFeeSplitPresentRole:
+      return d->haveInterestOrFeeSplit(journalEntry, true);
 
     case eMyMoney::Model::TransactionCommodityRole:
       return transaction.commodity();

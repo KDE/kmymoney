@@ -510,12 +510,14 @@ namespace eMyMoney {
       TransactionInvestementType,
       TransactionSplitCountRole,
       TransactionBrokerageAccountRole,
+      TransactionInterestSplitPresentRole,
+      TransactionFeeSplitPresentRole,
       TransactionInterestCategoryRole,
       TransactionFeesCategoryRole,
-      TransactionIsStockSplitRole,
-      TransactionInvestmentAccountIdRole,
       TransactionInterestValueRole,
       TransactionFeesValueRole,
+      TransactionIsStockSplitRole,
+      TransactionInvestmentAccountIdRole,
       TransactionCommodityRole,
 
       // MyMoneySplit
