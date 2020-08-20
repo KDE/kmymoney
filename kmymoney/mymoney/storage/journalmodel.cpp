@@ -46,6 +46,11 @@
 
 struct JournalModel::Private
 {
+  typedef enum {
+    Interest,
+    Fees
+  } category_t;
+
   Private(JournalModel* qq)
     : q(qq)
     , newTransactionModel(nullptr)
@@ -198,8 +203,9 @@ struct JournalModel::Private
     return {};
   }
 
-  QString interestOrFeeCategory(const JournalEntry& journalEntry, bool fees) const
+  QString interestOrFeeCategory(const JournalEntry& journalEntry, category_t type) const
   {
+    const bool fees = (type == Fees);
     QString rc;
     const auto file = MyMoneyFile::instance();
     if (file->isInvestmentTransaction(journalEntry.transaction())) {
@@ -219,18 +225,9 @@ struct JournalModel::Private
     return rc;
   }
 
-  QString investmentInterestCategory(const JournalEntry& journalEntry) const
+  MyMoneyMoney interestOrFeeValue(const JournalEntry& journalEntry, category_t type) const
   {
-    return interestOrFeeCategory(journalEntry, false);
-  }
-
-  QString investmentFeesCategory(const JournalEntry& journalEntry) const
-  {
-    return interestOrFeeCategory(journalEntry, true);
-  }
-
-  MyMoneyMoney interestOrFeeValue(const JournalEntry& journalEntry, bool fees) const
-  {
+    const bool fees = (type == Fees);
     MyMoneyMoney value;
     const auto file = MyMoneyFile::instance();
     if (file->isInvestmentTransaction(journalEntry.transaction())) {
@@ -246,27 +243,17 @@ struct JournalModel::Private
     return value;
   }
 
-  MyMoneyMoney interestValue(const JournalEntry& journalEntry) const
-  {
-    return interestOrFeeValue(journalEntry, false);
-  }
-
-  MyMoneyMoney feeValue(const JournalEntry& journalEntry) const
-  {
-    return interestOrFeeValue(journalEntry, true);
-  }
-
-  bool haveInterestOrFeeSplit(const JournalEntry& journalEntry, bool fees) const
+  bool haveInterestOrFeeSplit(const JournalEntry& journalEntry, category_t type) const
   {
     const auto file = MyMoneyFile::instance();
     if (file->isInvestmentTransaction(journalEntry.transaction())) {
       for (const auto& split : journalEntry.transaction().splits()) {
         const auto acc = file->account(split.accountId());
         if (acc.isIncomeExpense()) {
-          if (split.shares().isNegative() && !fees) {
+          if (split.shares().isNegative() && (type == Interest)) {
             return true;
           }
-          else if (split.shares().isPositive() && fees) {
+          else if (split.shares().isPositive() && (type == Fees)) {
             return true;
           }
         }
@@ -678,10 +665,10 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
       return d->investmentBrokerageAccount(journalEntry);
 
     case eMyMoney::Model::TransactionInterestCategoryRole:
-      return d->investmentInterestCategory(journalEntry);
+      return d->interestOrFeeCategory(journalEntry, Private::Interest);
 
     case eMyMoney::Model::TransactionFeesCategoryRole:
-      return d->investmentFeesCategory(journalEntry);
+      return d->interestOrFeeCategory(journalEntry, Private::Fees);
 
     case eMyMoney::Model::TransactionPostDateRole:
       return transaction.postDate();
@@ -709,16 +696,16 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
       break;
 
     case eMyMoney::Model::TransactionInterestValueRole:
-      return QVariant::fromValue<MyMoneyMoney>(d->interestValue(journalEntry));
+      return QVariant::fromValue<MyMoneyMoney>(d->interestOrFeeValue(journalEntry, Private::Interest));
 
     case eMyMoney::Model::TransactionFeesValueRole:
-      return QVariant::fromValue<MyMoneyMoney>(d->feeValue(journalEntry));
+      return QVariant::fromValue<MyMoneyMoney>(d->interestOrFeeValue(journalEntry, Private::Fees));
 
     case eMyMoney::Model::TransactionInterestSplitPresentRole:
-      return d->haveInterestOrFeeSplit(journalEntry, false);
+      return d->haveInterestOrFeeSplit(journalEntry, Private::Interest);
 
     case eMyMoney::Model::TransactionFeeSplitPresentRole:
-      return d->haveInterestOrFeeSplit(journalEntry, true);
+      return d->haveInterestOrFeeSplit(journalEntry, Private::Fees);
 
     case eMyMoney::Model::TransactionCommodityRole:
       return transaction.commodity();
