@@ -196,19 +196,28 @@ public:
           // from the lines all together. Since we use the column detail as label
           // we have to make that we are not off. Therefor, if the detail column
           // is filled, we add a simple blank here instead of an empty line.
+          // The first line is always present, so we make sure it is not empty in this column.
+          if (lines[0].isEmpty())
+            lines[0] = QStringLiteral(" ");
           lines << (index.data(eMyMoney::Model::TransactionBrokerageAccountRole).toString().isEmpty() ? QString() : QStringLiteral(" "));
 
           MyMoneySecurity currency = MyMoneyFile::instance()->currency(index.data(eMyMoney::Model::TransactionCommodityRole).toString());
 
-          MyMoneyMoney value = index.data(eMyMoney::Model::TransactionInterestValueRole).value<MyMoneyMoney>();
-          lines << (index.data(eMyMoney::Model::TransactionInterestCategoryRole).toString().isEmpty() ? QString() : MyMoneyUtils::formatMoney(value.abs(), currency));
+          if (index.data(eMyMoney::Model::TransactionInterestSplitPresentRole).toBool()) {
+            const auto value = index.data(eMyMoney::Model::TransactionInterestValueRole).value<MyMoneyMoney>();
+            lines << (index.data(eMyMoney::Model::TransactionInterestCategoryRole).toString().isEmpty() ? QString() : MyMoneyUtils::formatMoney(value.abs(), currency));
+          }
 
-          value = index.data(eMyMoney::Model::TransactionFeesValueRole).value<MyMoneyMoney>();
-          lines << (index.data(eMyMoney::Model::TransactionFeesCategoryRole).toString().isEmpty() ? QString() : MyMoneyUtils::formatMoney(value.abs(), currency));
+          if (index.data(eMyMoney::Model::TransactionFeeSplitPresentRole).toBool()) {
+            const auto value = index.data(eMyMoney::Model::TransactionFeesValueRole).value<MyMoneyMoney>();
+            lines << (index.data(eMyMoney::Model::TransactionFeesCategoryRole).toString().isEmpty() ? QString() : MyMoneyUtils::formatMoney(value.abs(), currency));
+          }
         } else {
           lines << opt.text;
         }
       }
+      lines.removeAll(QString());
+
     } else {
       lines << opt.text;
     }
