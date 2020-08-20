@@ -312,8 +312,10 @@ void KTagsView::showTransactions()
 
   int splitCount = 0;
   bool balanceAccurate = true;
+  QSet<QString> accountIds;
   for (it = d->m_transactionList.constBegin(); it != d->m_transactionList.constEnd(); ++it) {
     const MyMoneySplit& split = (*it).second;
+    accountIds.insert(split.accountId());
     MyMoneyAccount acc = file->account(split.accountId());
     ++splitCount;
     uniqueMap[(*it).first.id()]++;
@@ -358,6 +360,8 @@ void KTagsView::showTransactions()
   d->ui->m_balanceLabel->setText(i18n("Balance: %1%2",
                                balanceAccurate ? "" : "~",
                                balance.formatMoney(file->baseCurrency().smallestAccountFraction())));
+  // only make balance visible if all transactions cover a single account
+  d->ui->m_balanceLabel->setVisible(accountIds.count() < 2);
 }
 
 void KTagsView::slotTagDataChanged()
