@@ -485,9 +485,12 @@ void JournalDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionVi
   Q_UNUSED(index);
 
   QRect r(option.rect);
-  if (option.widget)
-    r.setWidth(option.widget->width() - d->m_editorWidthOfs);
-
+  // respect the vertical scrollbar if visible
+  if (option.widget
+    && d->m_view
+    && d->m_view->verticalScrollBar()->isVisible() ) {
+      r.setWidth(option.widget->width() - d->m_view->verticalScrollBar()->width());
+  }
   editor->setGeometry(r);
   editor->update();
 }

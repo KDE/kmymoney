@@ -366,17 +366,15 @@ QSize SplitDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
 void SplitDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
   Q_UNUSED(index);
+
   QStyleOptionViewItem opt = option;
-  int ofs = 8;
   const auto view = qobject_cast<const SplitView*>(opt.widget);
-  if(view) {
-    if(view->verticalScrollBar()->isVisible()) {
-      ofs += view->verticalScrollBar()->width();
-    }
-  }
 
   QRect r(opt.rect);
-  r.setWidth(opt.widget->width() - ofs);
+  if(view && view->verticalScrollBar()->isVisible()) {
+    r.setWidth(opt.widget->width() - view->verticalScrollBar()->width());
+  }
+
   editor->setGeometry(r);
   editor->update();
 }
