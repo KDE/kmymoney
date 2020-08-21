@@ -43,6 +43,7 @@ public:
 
 Q_SIGNALS:
   void done();
+  void editorLayoutChanged();
 
 private:
   static QDate  m_lastPostDateUsed;
