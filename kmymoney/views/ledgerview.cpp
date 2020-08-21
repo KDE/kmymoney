@@ -49,6 +49,7 @@
 #include "onlinebalancedelegate.h"
 #include "specialdatedelegate.h"
 #include "schedulesjournalmodel.h"
+#include "transactioneditorbase.h"
 
 Q_GLOBAL_STATIC(LedgerView*, s_globalEditView);
 
@@ -131,6 +132,7 @@ public:
   KMessageWidget*                 infoMessage;
   QString                         accountId;
   QString                         groupName;
+  QPersistentModelIndex           editIndex;
 };
 
 
@@ -253,19 +255,27 @@ bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger t
 
       emit aboutToStartEdit();
       setSpan(index.row(), 0, 1, horizontalHeader()->count());
-      QModelIndex editIndex = model()->index(index.row(), 0);
+      d->editIndex = model()->index(index.row(), 0);
 
-      rc = QTableView::edit(editIndex, trigger, event);
+      rc = QTableView::edit(d->editIndex, trigger, event);
 
       // make sure that the row gets resized according to the requirements of the editor
       // and is completely visible
-      resizeRowToContents(index.row());
-      d->ensureEditorFullyVisible(index);
-      QMetaObject::invokeMethod(this, "ensureCurrentItemIsVisible", Qt::QueuedConnection);
+      const auto editor = qobject_cast<TransactionEditorBase*>(indexWidget(d->editIndex));
+      connect(editor, &TransactionEditorBase::editorLayoutChanged, this, &LedgerView::resizeEditorRow);
+
+      resizeEditorRow();
     }
     return rc;
   }
   return false;
+}
+
+void LedgerView::resizeEditorRow()
+{
+  resizeRowToContents(d->editIndex.row());
+  d->ensureEditorFullyVisible(d->editIndex);
+  QMetaObject::invokeMethod(this, "ensureCurrentItemIsVisible", Qt::QueuedConnection);
 }
 
 void LedgerView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint)
@@ -280,6 +290,7 @@ void LedgerView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint
 
   emit aboutToFinishEdit();
 
+  d->editIndex = QModelIndex();
   QMetaObject::invokeMethod(this, "ensureCurrentItemIsVisible", Qt::QueuedConnection);
 }
 

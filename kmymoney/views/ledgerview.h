@@ -103,6 +103,7 @@ protected:
 protected Q_SLOTS:
   void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) final override;
   void currentChanged(const QModelIndex &current, const QModelIndex &previous) final override;
+  void resizeEditorRow();
 
   virtual void adjustDetailColumn(int newViewportWidth);
   virtual void adjustDetailColumn();
