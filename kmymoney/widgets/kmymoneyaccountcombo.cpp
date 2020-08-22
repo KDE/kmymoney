@@ -379,6 +379,7 @@ void KMyMoneyAccountCombo::makeCompletion(const QString& txt)
       d->m_popupView->setCurrentIndex(QModelIndex());
       setRootModelIndex(QModelIndex());
       setCurrentIndex(-1);
+      emit accountSelected(QString());
     } else {
       AccountNamesFilterProxyModel* filterModel = qobject_cast<AccountNamesFilterProxyModel*>(model());
 
