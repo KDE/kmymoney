@@ -45,6 +45,7 @@
 #include "mymoneysecurity.h"
 #include "dialogenums.h"
 #include "mymoneyenums.h"
+#include "widgethintframe.h"
 
 using namespace Invest;
 
@@ -112,6 +113,7 @@ void Invest::Activity::setupWidgets(const QStringList& activityWidgets) const
   setWidgetVisibility(dynamicWidgetNames, false);
 
   setLabelText("priceLabel", priceLabelText());
+  setLabelText("sharesLabel", sharesLabelText());
 
   static const QStringList standardWidgetNames = {
     "activityLabel", "activityCombo",
@@ -127,7 +129,6 @@ void Invest::Activity::setupWidgets(const QStringList& activityWidgets) const
 
   setWidgetVisibility(standardWidgetNames, true);
   setWidgetVisibility(activityWidgets, true);
-
 }
 
 bool& Activity::memoChanged()
@@ -147,14 +148,13 @@ bool Activity::isComplete(QString& reason) const
   Q_UNUSED(reason)
 
   Q_D(const Activity);
-  auto rc = false;
-  auto security = d->haveWidget<KMyMoneyAccountCombo>("security");
+  const auto security = d->haveWidget<QComboBox>("securityCombo");
 
-  if (security && !security->getSelected().isEmpty()) {
-    // rc = (security->selector()->contains(security->currentText()) || (isMultiSelection() && d->m_memoChanged));
-    rc = true;
+  if (!security || security->currentText().isEmpty()) {
+    reason = i18nc("@info:tooltip", "Missing security assignment for investment transaction");
+    return false;
   }
-  return rc;
+  return true;
 }
 
 bool Activity::haveAssetAccount() const
@@ -171,61 +171,36 @@ bool Activity::haveAssetAccount() const
   return rc;
 }
 
-bool Activity::haveCategoryAndAmount(const QString& categoryWidget, const QString& amountWidget, bool optional) const
+bool Activity::haveCategoryAndAmount(const QString& categoryWidget, const QString& amountWidget, fieldRequired_t optional) const
 {
   Q_D(const Activity);
-  auto cat = d->haveVisibleWidget<KMyMoneyAccountCombo>(categoryWidget);
-  auto amount = d->haveVisibleWidget<AmountEdit>(amountWidget);
+  const auto cat = d->haveVisibleWidget<KMyMoneyAccountCombo>(categoryWidget);
+  const auto amount = d->haveVisibleWidget<AmountEdit>(amountWidget);
   auto rc = true;
 
   if (cat && amount) {
-    if (cat->isEnabled()) {
-      rc = !cat->getSelected().isEmpty() || optional;
+    switch(optional) {
+      case Unused:
+        break;
+      case Optional:
+        // both must be filled or empty to be OK
+        rc = cat->currentText().isEmpty() == amount->value().isZero();
+        break;
+      case Mandatory:
+        // both must be filled to be OK
+        rc = !(cat->currentText().isEmpty() || amount->value().isZero());
+        break;
     }
-    rc = !amount->value().isZero() || optional;
   }
-  /// @todo port to new model code
-#if 0
-  if (cat && !cat->currentText().isEmpty()) {
-    rc = cat->selector()->contains(cat->currentText()) || cat->isSplitTransaction();
-    if (rc && !amount.isEmpty() && !isMultiSelection()) {
-      if (cat->isSplitTransaction()) {
-          /// @todo port to new model code
-#if 0
-        QList<MyMoneySplit>::const_iterator split;
-        QList<MyMoneySplit>::const_iterator splitEnd;
-
-        if (category == "feesCombo") {
-          split = d->m_parent->feeSplits().cbegin();
-          splitEnd = d->m_parent->feeSplits().cend();
-        } else if (category == "interestCombo") {
-          split = d->m_parent->interestSplits().cbegin();
-          splitEnd = d->m_parent->interestSplits().cend();
-        }
-
-        for (; split != splitEnd; ++split) {
-          if ((*split).value().isZero())
-            rc = false;
-        }
-#endif
-      } else {
-        if (auto valueWidget = d->haveWidget<AmountEdit>(amount))
-          rc = !valueWidget->value().isZero();
-      }
-    }
-  } else if (!isMultiSelection() && !optional) {
-    rc = false;
-  }
-#endif
   return rc;
 }
 
-bool Activity::haveFees(bool optional) const
+bool Activity::haveFees(fieldRequired_t optional) const
 {
   return haveCategoryAndAmount("feesCombo", "feesAmountEdit", optional);
 }
 
-bool Activity::haveInterest(bool optional) const
+bool Activity::haveInterest(fieldRequired_t optional) const
 {
   return haveCategoryAndAmount("interestCombo", "interestAmountEdit", optional);
 }
@@ -401,15 +376,20 @@ void Activity::setWidgetVisibility(const QStringList& widgetIds, bool visible) c
   }
 }
 
+QString Invest::Activity::sharesLabelText() const
+{
+  return i18nc("@label:textbox", "Shares");
+}
+
 QString Activity::priceLabelText() const
 {
   QString label;
   if (priceMode() == eDialogs::PriceMode::Price) {
-    label = i18n("Price");
+    label = i18nc("@label:textbox", "Price");
   } else if (priceMode() == eDialogs::PriceMode::PricePerShare) {
-    label = i18n("Price/share");
+    label = i18nc("@label:textbox", "Price/share");
   } else if (priceMode() == eDialogs::PriceMode::PricePerTransaction) {
-    label = i18n("Transaction amount");
+    label = i18nc("@label:textbox", "Transaction amount");
   }
   return label;
 }
@@ -476,7 +456,6 @@ MyMoneyMoney Activity::interestFactor() const
 
 
 
-
 Buy::Buy(InvestTransactionEditor* editor) :
   Activity(editor)
 {
@@ -521,7 +500,7 @@ bool Buy::isComplete(QString& reason) const
 {
   auto rc = Activity::isComplete(reason);
   rc &= haveAssetAccount();
-  rc &= haveFees(true);
+  rc &= haveFees(Optional);
   rc &= haveShares();
   rc &= havePrice();
 
@@ -626,8 +605,8 @@ bool Sell::isComplete(QString& reason) const
   Q_D(const Activity);
 
   auto rc = Activity::isComplete(reason);
-  rc &= haveFees(true);
-  rc &= haveInterest(true);
+  rc &= haveFees(Optional);
+  rc &= haveInterest(Optional);
   rc &= haveShares();
   rc &= havePrice();
 
@@ -641,6 +620,12 @@ bool Sell::isComplete(QString& reason) const
     }
   }
   return rc;
+}
+
+Invest::Activity::fieldRequired_t Invest::Sell::assetAccountRequired() const
+{
+  Q_D(const Activity);
+  return d->m_parent->totalAmount().isZero() ? Unused : Mandatory;
 }
 
 bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
@@ -747,8 +732,7 @@ bool Div::isComplete(QString& reason) const
 
   auto rc = Activity::isComplete(reason);
   rc &= haveAssetAccount();
-  rc &= haveCategoryAndAmount("interestCombo", QString(), false);
-  rc &= haveInterest(false);
+  rc &= haveInterest(Optional);
   return rc;
 }
 
@@ -838,8 +822,8 @@ void Reinvest::showWidgets() const
 bool Reinvest::isComplete(QString& reason) const
 {
   auto rc = Activity::isComplete(reason);
-  rc &= haveCategoryAndAmount("interestCombo", QString(), false);
-  rc &= haveFees(true);
+  rc &= haveInterest();
+  rc &= haveFees(Optional);
   rc &= haveShares();
   rc &= havePrice();
   return rc;
@@ -1080,7 +1064,6 @@ void Invest::Split::showWidgets() const
   Q_D(const Activity);
   static const QStringList activityWidgets = {
     "sharesLabel", "sharesAmountEdit",
-    "priceLabel", "priceAmountEdit"
   };
 
   setupWidgets(activityWidgets);
@@ -1093,9 +1076,11 @@ void Invest::Split::showWidgets() const
   }
 }
 
-QString Invest::Split::priceLabelText() const
+
+
+QString Invest::Split::sharesLabelText() const
 {
-  return i18n("Ratio 1/");
+  return i18nc("@label:textbox", "Ratio 1/");
 }
 
 bool Invest::Split::isComplete(QString& reason) const
@@ -1161,8 +1146,7 @@ bool IntInc::isComplete(QString& reason) const
 
   auto rc = Activity::isComplete(reason);
   rc &= haveAssetAccount();
-  rc &= haveCategoryAndAmount("interestCombo", QString(), false);
-  rc &= haveInterest(false);
+  rc &= haveInterest(Mandatory);
   return rc;
 }
 

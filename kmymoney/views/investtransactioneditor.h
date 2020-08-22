@@ -74,25 +74,22 @@ protected Q_SLOTS:
   virtual void editFeeSplits();
   virtual void editInterestSplits();
 
-  virtual void categoryChanged(const QString& accountId);
+  virtual void feeCategoryChanged(const QString& accountId);
+  virtual void interestCategoryChanged(const QString& accountId);
+  virtual void feesValueChanged();
+  virtual void interestValueChanged();
   virtual void postdateChanged(const QDate& date);
   virtual void securityChanged(int index);
-  virtual void feesChanged(int index);
-  virtual void feesChanged(const QString& txt);
-  virtual void interestChanged(int index);
-  virtual void interestChanged(const QString& txt);
 
+  void accountChanged(const QString& accountId);
 
-  void valueChanged();
-
-  void setupActivity(int index);
-
+  void activityChanged (int index);
+  void updateWidgets();
   void updateTotalAmount(const QString& txt);
 
 private:
   class Private;
   QScopedPointer<Private> const d;
-  static QDate  m_lastPostDateUsed;
 };
 
 #endif // INVESTTRANSACTIONEDITOR_H

@@ -58,6 +58,12 @@ class Activity
   Q_DISABLE_COPY(Activity)
 
 public:
+  typedef enum {
+    Unused,
+    Optional,
+    Mandatory
+  } fieldRequired_t;
+
   virtual eMyMoney::Split::InvestmentTransactionType type() const = 0;
   virtual void showWidgets() const = 0;
   virtual bool isComplete(QString& reason) const = 0;
@@ -85,19 +91,26 @@ public:
   virtual MyMoneyMoney feesFactor() const;
   virtual MyMoneyMoney interestFactor() const;
 
+  virtual fieldRequired_t feesRequired() const { return Unused; }
+  virtual fieldRequired_t interestRequired() const { return Unused; }
+  virtual fieldRequired_t assetAccountRequired() const { return Unused; }
+  virtual fieldRequired_t priceRequired() const { return Unused; }
+
+  bool haveFees( fieldRequired_t = Mandatory) const;
+  bool haveInterest( fieldRequired_t = Mandatory) const;
+  bool haveAssetAccount() const;
+
 protected:
   explicit Activity(InvestTransactionEditor* editor);
-  bool haveAssetAccount() const;
-  bool haveFees(bool optional = false) const;
-  bool haveInterest(bool optional = false) const;
   bool haveShares() const;
   bool havePrice() const;
   bool isMultiSelection() const;
   virtual QString priceLabelText() const;
+  virtual QString sharesLabelText() const;
   bool createCategorySplits(const MyMoneyTransaction& t, KMyMoneyAccountCombo* cat, AmountEdit* amount, MyMoneyMoney factor, QList<MyMoneySplit>&splits, const QList<MyMoneySplit>& osplits) const;
   void createAssetAccountSplit(MyMoneySplit& split, const MyMoneySplit& stockSplit) const;
   MyMoneyMoney sumSplits(const MyMoneySplit& s0, const QList<MyMoneySplit>& feeSplits, const QList<MyMoneySplit>& interestSplits) const;
-  bool haveCategoryAndAmount(const QString& category, const QString& amount, bool optional) const;
+  bool haveCategoryAndAmount(const QString& category, const QString& amount, fieldRequired_t optional) const;
   void setLabelText(const QString& idx, const QString& txt) const;
   void setWidgetVisibility(const QStringList& widgetIds, bool visible) const;
   eDialogs::PriceMode priceMode() const;
@@ -119,7 +132,10 @@ public:
   bool isComplete(QString& reason) const override;
   bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
 
-  virtual MyMoneyMoney totalAmount() const override;
+  MyMoneyMoney totalAmount() const override;
+  fieldRequired_t feesRequired() const override { return Optional; }
+  fieldRequired_t assetAccountRequired() const override { return Mandatory; }
+  fieldRequired_t priceRequired() const override { return Mandatory; }
 };
 
 class Sell : public Activity
@@ -132,7 +148,11 @@ public:
   bool isComplete(QString& reason) const override;
   bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
 
-  virtual MyMoneyMoney sharesFactor() const override;
+  MyMoneyMoney sharesFactor() const override;
+  fieldRequired_t feesRequired() const override { return Optional; }
+  fieldRequired_t interestRequired() const override { return Optional; }
+  fieldRequired_t assetAccountRequired() const override;
+  fieldRequired_t priceRequired() const override { return Mandatory; }
 };
 
 class Div : public Activity
@@ -144,6 +164,8 @@ public:
   void showWidgets() const override;
   bool isComplete(QString& reason) const override;
   bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
+  fieldRequired_t interestRequired() const override { return Mandatory; }
+  fieldRequired_t assetAccountRequired() const override { return Mandatory; }
 };
 
 class Reinvest : public Activity
@@ -155,6 +177,10 @@ public:
   void showWidgets() const override;
   bool isComplete(QString& reason) const override;
   bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
+
+  fieldRequired_t feesRequired() const override { return Optional; }
+  fieldRequired_t interestRequired() const override { return Mandatory; }
+  fieldRequired_t priceRequired() const override { return Mandatory; }
 };
 
 class Add : public Activity
@@ -192,7 +218,7 @@ public:
   bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
 
 protected:
-  QString priceLabelText() const override;
+  QString sharesLabelText() const override;
 };
 
 class IntInc : public Activity
@@ -204,6 +230,10 @@ public:
   void showWidgets() const override;
   bool isComplete(QString& reason) const override;
   bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
+
+  fieldRequired_t feesRequired() const override { return Optional; }
+  fieldRequired_t interestRequired() const override { return Mandatory; }
+  fieldRequired_t assetAccountRequired() const override { return Mandatory; }
 };
 
 } // namespace Invest
