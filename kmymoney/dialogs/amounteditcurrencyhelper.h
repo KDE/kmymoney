@@ -78,6 +78,8 @@ public:
 
   ~AmountEditCurrencyHelper();
 
+  void setCommodity(const QString& commodityId);
+
 public Q_SLOTS:
   void categoryChanged(const QString& id);
 

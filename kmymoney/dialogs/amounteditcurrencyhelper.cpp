@@ -94,6 +94,12 @@ AmountEditCurrencyHelper::~AmountEditCurrencyHelper()
   delete d;
 }
 
+void AmountEditCurrencyHelper::setCommodity(const QString& commodityId)
+{
+  Q_D(AmountEditCurrencyHelper);
+  d->commodityId = commodityId;
+}
+
 void AmountEditCurrencyHelper::categoryChanged(const QString& id)
 {
   Q_D(AmountEditCurrencyHelper);
