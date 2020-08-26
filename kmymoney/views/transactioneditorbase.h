@@ -27,7 +27,10 @@ class QWidget;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymoney.h"
+#include "mymoneysplit.h"
+
+class MyMoneyTransaction;
+class SplitModel;
 
 class TransactionEditorBase : public QFrame
 {
@@ -41,12 +44,14 @@ public:
   virtual void loadTransaction(const QModelIndex& index) = 0;
   virtual void saveTransaction() = 0;
 
+protected:
+  void addSplitsFromModel(MyMoneyTransaction& t, const SplitModel* model);
+  void addSplitsFromModel(QList<MyMoneySplit>& splits, const SplitModel* model);
+
 Q_SIGNALS:
   void done();
   void editorLayoutChanged();
 
-private:
-  static QDate  m_lastPostDateUsed;
 };
 
 #endif // TRANSACTIONEDITORBASE_H
