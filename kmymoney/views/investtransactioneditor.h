@@ -29,6 +29,7 @@ class QWidget;
 
 #include "transactioneditorbase.h"
 #include "mymoneymoney.h"
+#include "investactivities.h"
 
 class InvestTransactionEditor : public TransactionEditorBase
 {
@@ -68,24 +69,23 @@ protected:
   virtual void keyPressEvent(QKeyEvent* e) override;
 
 protected Q_SLOTS:
-  virtual void reject();
-  virtual void acceptEdit();
-
-  virtual void editFeeSplits();
-  virtual void editInterestSplits();
-
-  virtual void feeCategoryChanged(const QString& accountId);
-  virtual void interestCategoryChanged(const QString& accountId);
-  virtual void feesValueChanged();
-  virtual void interestValueChanged();
-  virtual void postdateChanged(const QDate& date);
-  virtual void securityChanged(int index);
-
-  void accountChanged(const QString& accountId);
+  void editFeeSplits();
+  void editInterestSplits();
 
   void activityChanged (int index);
+  void sharesChanged();
+
+  void feeCategoryChanged(const QString& accountId);
+  void interestCategoryChanged(const QString& accountId);
+  void feesValueChanged();
+  void interestValueChanged();
+  void postdateChanged(const QDate& date);
+  void securityAccountChanged (int index);
+
+  void assetAccountChanged (const QString& accountId);
+
   void updateWidgets();
-  void updateTotalAmount(const QString& txt);
+  void updateTotalAmount();
 
 private:
   class Private;

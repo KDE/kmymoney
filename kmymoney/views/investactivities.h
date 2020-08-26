@@ -1,6 +1,5 @@
 /*
- * Copyright 2007-2020  Thomas Baumgart <tbaumgart@kde.org>
- * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -23,6 +22,7 @@
 // QT Includes
 
 #include <qglobal.h>
+class QStringList;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -30,24 +30,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class QWidget;
-class QStringList;
-
-class AmountEdit;
-class KMyMoneyAccountCombo;
-
 class MyMoneyMoney;
 class MyMoneySplit;
-class MyMoneyTransaction;
-class MyMoneySecurity;
-
+class SplitModel;
 class InvestTransactionEditor;
 
 namespace eMyMoney { namespace Split { enum class InvestmentTransactionType; } }
-namespace eDialogs { enum class PriceMode; }
-
-template <typename T> class QList;
-template <class Key, class Value> class QMap;
 
 namespace Invest
 {
@@ -66,26 +54,13 @@ public:
 
   virtual eMyMoney::Split::InvestmentTransactionType type() const = 0;
   virtual void showWidgets() const = 0;
-  virtual bool isComplete(QString& reason) const = 0;
 
-  /**
-    * Create a transaction @p t based on the split @p s0 and the data contained
-    * in the widgets. In multiselection mode, @p assetAccountSplit, @p feeSplits, @p
-    * interestSplits, @p security and @p currency are taken from the original
-    * transaction and should be used as well.
-    *
-    * @return @p true if creation was successful, @p false otherwise
-    */
-  virtual bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) = 0;
+  virtual void adjustStockSplit(MyMoneySplit& stockSplit) = 0;
 
-  virtual void preloadAssetAccount();
   virtual ~Activity();
 
-  bool &memoChanged();
-  QString& memoText();
-
   virtual void loadPriceWidget(const MyMoneySplit& split);
-  virtual MyMoneyMoney totalAmount() const;
+  virtual MyMoneyMoney totalAmount(const MyMoneySplit& stockSplit, const SplitModel* feesModel, const SplitModel* interestModel) const;
 
   virtual MyMoneyMoney sharesFactor() const;
   virtual MyMoneyMoney feesFactor() const;
@@ -98,24 +73,16 @@ public:
 
   bool haveFees( fieldRequired_t = Mandatory) const;
   bool haveInterest( fieldRequired_t = Mandatory) const;
-  bool haveAssetAccount() const;
 
 protected:
   explicit Activity(InvestTransactionEditor* editor);
-  bool haveShares() const;
-  bool havePrice() const;
-  bool isMultiSelection() const;
   virtual QString priceLabelText() const;
   virtual QString sharesLabelText() const;
-  bool createCategorySplits(const MyMoneyTransaction& t, KMyMoneyAccountCombo* cat, AmountEdit* amount, MyMoneyMoney factor, QList<MyMoneySplit>&splits, const QList<MyMoneySplit>& osplits) const;
-  void createAssetAccountSplit(MyMoneySplit& split, const MyMoneySplit& stockSplit) const;
-  MyMoneyMoney sumSplits(const MyMoneySplit& s0, const QList<MyMoneySplit>& feeSplits, const QList<MyMoneySplit>& interestSplits) const;
+
   bool haveCategoryAndAmount(const QString& category, const QString& amount, fieldRequired_t optional) const;
   void setLabelText(const QString& idx, const QString& txt) const;
   void setWidgetVisibility(const QStringList& widgetIds, bool visible) const;
-  eDialogs::PriceMode priceMode() const;
   void setupWidgets(const QStringList& activityWidgets) const;
-  virtual MyMoneyMoney shareValue() const;
 
 protected:
   ActivityPrivate* d_ptr;
@@ -129,10 +96,8 @@ public:
   ~Buy() override;
   eMyMoney::Split::InvestmentTransactionType type() const override;
   void showWidgets() const override;
-  bool isComplete(QString& reason) const override;
-  bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
+  virtual void adjustStockSplit(MyMoneySplit&) override {}
 
-  MyMoneyMoney totalAmount() const override;
   fieldRequired_t feesRequired() const override { return Optional; }
   fieldRequired_t assetAccountRequired() const override { return Mandatory; }
   fieldRequired_t priceRequired() const override { return Mandatory; }
@@ -145,8 +110,7 @@ public:
   ~Sell() override;
   eMyMoney::Split::InvestmentTransactionType type() const override;
   void showWidgets() const override;
-  bool isComplete(QString& reason) const override;
-  bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
+  virtual void adjustStockSplit(MyMoneySplit&) override {}
 
   MyMoneyMoney sharesFactor() const override;
   fieldRequired_t feesRequired() const override { return Optional; }
@@ -162,8 +126,8 @@ public:
   ~Div() override;
   eMyMoney::Split::InvestmentTransactionType type() const override;
   void showWidgets() const override;
-  bool isComplete(QString& reason) const override;
-  bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
+  virtual void adjustStockSplit(MyMoneySplit&) override {}
+  fieldRequired_t feesRequired() const override { return Optional; }
   fieldRequired_t interestRequired() const override { return Mandatory; }
   fieldRequired_t assetAccountRequired() const override { return Mandatory; }
 };
@@ -175,8 +139,8 @@ public:
   ~Reinvest() override;
   eMyMoney::Split::InvestmentTransactionType type() const override;
   void showWidgets() const override;
-  bool isComplete(QString& reason) const override;
-  bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
+  virtual void adjustStockSplit(MyMoneySplit&) override {}
+  MyMoneyMoney totalAmount(const MyMoneySplit& stockSplit, const SplitModel* feesModel, const SplitModel* interestModel) const override;
 
   fieldRequired_t feesRequired() const override { return Optional; }
   fieldRequired_t interestRequired() const override { return Mandatory; }
@@ -190,8 +154,8 @@ public:
   ~Add() override;
   eMyMoney::Split::InvestmentTransactionType type() const override;
   void showWidgets() const override;
-  bool isComplete(QString& reason) const override;
-  bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
+  void adjustStockSplit(MyMoneySplit& stockSplit) override;
+  MyMoneyMoney totalAmount(const MyMoneySplit& stockSplit, const SplitModel* feesModel, const SplitModel* interestModel) const override;
 };
 
 class Remove : public Activity
@@ -201,8 +165,8 @@ public:
   ~Remove() override;
   eMyMoney::Split::InvestmentTransactionType type() const override;
   void showWidgets() const override;
-  bool isComplete(QString& reason) const override;
-  bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
+  void adjustStockSplit(MyMoneySplit& stockSplit) override;
+  MyMoneyMoney totalAmount(const MyMoneySplit& stockSplit, const SplitModel* feesModel, const SplitModel* interestModel) const override;
 
   virtual MyMoneyMoney sharesFactor() const override;
 };
@@ -214,8 +178,8 @@ public:
   ~Split() override;
   eMyMoney::Split::InvestmentTransactionType type() const override;
   void showWidgets() const override;
-  bool isComplete(QString& reason) const override;
-  bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
+  virtual void adjustStockSplit(MyMoneySplit& stockSplit) override;
+  MyMoneyMoney totalAmount(const MyMoneySplit& stockSplit, const SplitModel* feesModel, const SplitModel* interestModel) const override;
 
 protected:
   QString sharesLabelText() const override;
@@ -228,8 +192,7 @@ public:
   ~IntInc() override;
   eMyMoney::Split::InvestmentTransactionType type() const override;
   void showWidgets() const override;
-  bool isComplete(QString& reason) const override;
-  bool createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency) override;
+  virtual void adjustStockSplit(MyMoneySplit&) override {}
 
   fieldRequired_t feesRequired() const override { return Optional; }
   fieldRequired_t interestRequired() const override { return Mandatory; }

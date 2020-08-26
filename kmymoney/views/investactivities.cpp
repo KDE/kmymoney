@@ -1,6 +1,5 @@
 /*
- * Copyright 2007-2020  Thomas Baumgart <tbaumgart@kde.org>
- * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -46,6 +45,7 @@
 #include "dialogenums.h"
 #include "mymoneyenums.h"
 #include "widgethintframe.h"
+#include "splitmodel.h"
 
 using namespace Invest;
 
@@ -54,22 +54,21 @@ class Invest::ActivityPrivate
   Q_DISABLE_COPY(ActivityPrivate)
 
 public:
-  ActivityPrivate(InvestTransactionEditor* parent) :
-    m_parent(parent),
-    m_memoChanged(false)
+  ActivityPrivate(InvestTransactionEditor* parent)
+    : editor(parent)
   {
   }
 
   template <typename T>
   inline T* haveWidget(const QString &aName) const
   {
-    return m_parent->findChild<T*>(aName);
+    return editor->findChild<T*>(aName);
   }
 
   template <typename T>
   inline T* haveVisibleWidget(const QString &aName) const
   {
-    auto widget = m_parent->findChild<T*>(aName);
+    auto widget = editor->findChild<T*>(aName);
     if (!widget) {
       qDebug() << "Widget with name" << aName << "not found";
     }
@@ -78,11 +77,69 @@ public:
     return nullptr;
   }
 
+  void createAssetAccountSplit(MyMoneySplit& split, const MyMoneySplit& stockSplit) const
+  {
+    auto cat = haveWidget<KMyMoneyAccountCombo>("assetAccountCombo");
+    if (cat) {
+      auto categoryId = cat->getSelected();
+      split.setAccountId(categoryId);
+    }
+    split.setMemo(stockSplit.memo());
+  }
 
-  InvestTransactionEditor*     m_parent;
-  QMap<QString, MyMoneyMoney>  m_priceInfo;
-  QString                      m_memoText;
-  bool                         m_memoChanged;
+  MyMoneyMoney sumSplits(const MyMoneySplit& s0, const SplitModel* feesModel, const SplitModel* interestModel) const
+  {
+    auto total = s0.value();
+
+    if (feesModel) {
+      total += feesModel->valueSum();
+    }
+    if (interestModel) {
+      total += interestModel->valueSum();
+    }
+    return total;
+  }
+
+  eDialogs::PriceMode priceMode() const
+  {
+    eDialogs::PriceMode mode = eDialogs::PriceMode::Price;
+    auto sec = haveWidget<QComboBox>("securityAccountCombo");
+
+    QString accId;
+    if (sec && !sec->currentText().isEmpty()) {
+      const auto idx = sec->model()->index(sec->currentIndex(), 0);
+      accId = idx.data(eMyMoney::Model::IdRole).toString();
+    }
+    while (!accId.isEmpty() && mode == eDialogs::PriceMode::Price) {
+      auto acc = MyMoneyFile::instance()->account(accId);
+      if (acc.value("priceMode").isEmpty())
+        accId = acc.parentAccountId();
+      else
+        mode = static_cast<eDialogs::PriceMode>(acc.value("priceMode").toInt());
+    }
+
+    // if mode is still <Price> then use that
+    if (mode == eDialogs::PriceMode::Price)
+      mode = eDialogs::PriceMode::PricePerShare;
+    return mode;
+  }
+
+  MyMoneyMoney shareValue() const
+  {
+    const auto shares = haveVisibleWidget<AmountEdit>("sharesAmountEdit");
+    const auto price = haveVisibleWidget<AmountEdit>("priceAmountEdit");
+    MyMoneyMoney result;
+    if (shares && price) {
+      if (priceMode() == eDialogs::PriceMode::PricePerShare) {
+        result = shares->value() * price->value();
+      } else {
+        result = price->value();
+      }
+    }
+    return result;
+  }
+
+  InvestTransactionEditor*     editor;
 };
 
 
@@ -103,10 +160,10 @@ void Invest::Activity::setupWidgets(const QStringList& activityWidgets) const
 
   static const QStringList dynamicWidgetNames = {
     "sharesLabel", "sharesAmountEdit",
-    "accountLabel", "accountCombo",
+    "assetAccountLabel", "assetAccountCombo",
     "priceLabel", "priceAmountEdit",
-    "feesLabel", "feesCombo", "feesSplitEditorButton", "feesAmountLabel", "feesAmountEdit",
-    "interestLabel", "interestCombo", "interestSplitEditorButton", "interestAmountLabel", "interestAmountEdit",
+    "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
+    "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
     "totalLabel", "totalAmountEdit",
   };
 
@@ -118,7 +175,7 @@ void Invest::Activity::setupWidgets(const QStringList& activityWidgets) const
   static const QStringList standardWidgetNames = {
     "activityLabel", "activityCombo",
     "dateLabel", "dateEdit",
-    "securityLabel", "securityCombo",
+    "securityLabel", "securityAccountCombo",
 
     // the ones in between are dynamically handled
 
@@ -129,46 +186,6 @@ void Invest::Activity::setupWidgets(const QStringList& activityWidgets) const
 
   setWidgetVisibility(standardWidgetNames, true);
   setWidgetVisibility(activityWidgets, true);
-}
-
-bool& Activity::memoChanged()
-{
-  Q_D(Activity);
-  return d->m_memoChanged;
-}
-
-QString& Activity::memoText()
-{
-  Q_D(Activity);
-  return d->m_memoText;
-}
-
-bool Activity::isComplete(QString& reason) const
-{
-  Q_UNUSED(reason)
-
-  Q_D(const Activity);
-  const auto security = d->haveWidget<QComboBox>("securityCombo");
-
-  if (!security || security->currentText().isEmpty()) {
-    reason = i18nc("@info:tooltip", "Missing security assignment for investment transaction");
-    return false;
-  }
-  return true;
-}
-
-bool Activity::haveAssetAccount() const
-{
-  Q_D(const Activity);
-  auto rc = true;
-  auto cat = d->haveWidget<KMyMoneyAccountCombo>("accountCombo");
-  if (!cat)
-    return false;
-
-  if (!isMultiSelection())
-    rc = !cat->getSelected().isEmpty();
-
-  return rc;
 }
 
 bool Activity::haveCategoryAndAmount(const QString& categoryWidget, const QString& amountWidget, fieldRequired_t optional) const
@@ -205,132 +222,18 @@ bool Activity::haveInterest(fieldRequired_t optional) const
   return haveCategoryAndAmount("interestCombo", "interestAmountEdit", optional);
 }
 
-bool Activity::haveShares() const
+MyMoneyMoney Activity::totalAmount(const MyMoneySplit& stockSplit, const SplitModel* feesModel, const SplitModel* interestModel) const
 {
-  Q_D(const Activity);
-  if (auto amount = d->haveWidget<AmountEdit>("sharesAmountEdit")) {
-    if (isMultiSelection() && amount->value().isZero())
-      return true;
+  auto result = stockSplit.value();
 
-    return !amount->value().isZero();
+  if (feesModel && (feesRequired() != Unused)) {
+    result += feesModel->valueSum();
   }
-  return false;
-}
 
-bool Activity::havePrice() const
-{
-  Q_D(const Activity);
-  if (auto amount = d->haveWidget<AmountEdit>("priceAmountEdit")) {
-    if (isMultiSelection() && amount->value().isZero())
-      return true;
-
-    return !amount->value().isZero();
+  if (interestModel && (interestRequired() != Unused)) {
+    result += interestModel->valueSum();
   }
-  return false;
-}
 
-bool Activity::isMultiSelection() const
-{
-  Q_D(const Activity);
-  /// @todo port to new model code
-  // return d->m_parent->isMultiSelection();
-  return false;
-}
-
-bool Activity::createCategorySplits(const MyMoneyTransaction& t, KMyMoneyAccountCombo* cat, AmountEdit* amount, MyMoneyMoney factor, QList<MyMoneySplit>&splits, const QList<MyMoneySplit>& osplits) const
-{
-  Q_D(const Activity);
-  auto rc = true;
-  if (!isMultiSelection() || !cat->currentText().isEmpty()) {
-    /// @todo port to new model code
-#if 0
-    if (!cat->isSplitTransaction()) {
-      splits.clear();
-      MyMoneySplit s1;
-      // base the resulting split on the original split
-      // that was provided which avoids loosing data
-      // stored in the split
-      if (!osplits.isEmpty()) {
-        s1 = osplits.first();
-        s1.clearId();
-      }
-      QString categoryId;
-      categoryId = cat->selectedItem();
-      if (!categoryId.isEmpty()) {
-        s1.setAccountId(categoryId);
-        s1.setValue(amount->value() * factor);
-        /// @todo port to new model code
-#if 0
-        if (!s1.value().isZero()) {
-          rc = d->m_parent->setupPrice(t, s1);
-        }
-#endif
-        splits.append(s1);
-      }
-    } else {
-      splits = osplits;
-    }
-#endif
-  }
-  return rc;
-}
-
-void Activity::createAssetAccountSplit(MyMoneySplit& split, const MyMoneySplit& stockSplit) const
-{
-  Q_D(const Activity);
-  auto cat = d->haveWidget<KMyMoneyAccountCombo>("accountCombo");
-  /// @todo port to new model code
-#if 0
-  if (cat && (!isMultiSelection() || !cat->currentText().isEmpty())) {
-    auto categoryId = cat->selectedItem();
-    split.setAccountId(categoryId);
-  }
-#endif
-  split.setMemo(stockSplit.memo());
-}
-
-MyMoneyMoney Activity::sumSplits(const MyMoneySplit& s0, const QList<MyMoneySplit>& feeSplits, const QList<MyMoneySplit>& interestSplits) const
-{
-  auto total = s0.value();
-  /// @todo port to new model code
-#if 0
-  foreach (const auto feeSplit, feeSplits)
-    total += feeSplit.value();
-
-  foreach (const auto interestSplit, interestSplits)
-    total += interestSplit.value();
-#endif
-  return total;
-}
-
-MyMoneyMoney Activity::totalAmount() const
-{
-  Q_D(const Activity);
-  auto result = shareValue().abs();
-  const auto fees = d->haveVisibleWidget<AmountEdit>("feesAmountEdit");
-  const auto interest = d->haveVisibleWidget<AmountEdit>("interestAmountEdit");
-  if (interest) {
-    result += interest->value().abs();
-  }
-  if (fees) {
-    result -= fees->value().abs();
-  }
-  return result;
-}
-
-MyMoneyMoney Activity::shareValue() const
-{
-  Q_D(const Activity);
-  const auto shares = d->haveVisibleWidget<AmountEdit>("sharesAmountEdit");
-  const auto price = d->haveVisibleWidget<AmountEdit>("priceAmountEdit");
-  MyMoneyMoney result;
-  if (shares && price) {
-    if (priceMode() == eDialogs::PriceMode::PricePerShare) {
-      result = shares->value() * price->value();
-    } else {
-      result = price->value();
-    }
-  }
   return result;
 }
 
@@ -343,35 +246,15 @@ void Activity::setLabelText(const QString& idx, const QString& txt) const
   }
 }
 
-void Activity::preloadAssetAccount()
-{
-  Q_D(Activity);
-  auto cat = d->haveWidget<KMyMoneyAccountCombo>("accountCombo");
-  if (cat && cat->isVisible()) {
-    /// @todo port to new model code
-#if 0
-    if (cat->currentText().isEmpty()) {
-      MyMoneyAccount acc = MyMoneyFile::instance()->accountByName(i18n("%1 (Brokerage)", d->m_parent->account().name()));
-      if (!acc.id().isEmpty()) {
-        bool blocked = cat->signalsBlocked();
-        // block signals, so that the focus does not go crazy
-        cat->blockSignals(true);
-        cat->completion()->setSelected(acc.id());
-        cat->slotItemSelected(acc.id());
-        cat->blockSignals(blocked);
-      }
-    }
-#endif
-  }
-}
-
 void Activity::setWidgetVisibility(const QStringList& widgetIds, bool visible) const
 {
   Q_D(const Activity);
-  for (QStringList::const_iterator it_w = widgetIds.constBegin(); it_w != widgetIds.constEnd(); ++it_w) {
-    auto w = d->haveWidget<QWidget>(*it_w);
+  for (const auto& name : qAsConst(widgetIds)) {
+    auto w = d->haveWidget<QWidget>(name);
     if (w) {
       w->setVisible(visible);
+    } else {
+      qCritical() << "Activity::setWidgetVisibility unknown widget" << name;
     }
   }
 }
@@ -383,45 +266,16 @@ QString Invest::Activity::sharesLabelText() const
 
 QString Activity::priceLabelText() const
 {
+  Q_D(const Activity);
   QString label;
-  if (priceMode() == eDialogs::PriceMode::Price) {
+  if (d->priceMode() == eDialogs::PriceMode::Price) {
     label = i18nc("@label:textbox", "Price");
-  } else if (priceMode() == eDialogs::PriceMode::PricePerShare) {
+  } else if (d->priceMode() == eDialogs::PriceMode::PricePerShare) {
     label = i18nc("@label:textbox", "Price/share");
-  } else if (priceMode() == eDialogs::PriceMode::PricePerTransaction) {
+  } else if (d->priceMode() == eDialogs::PriceMode::PricePerTransaction) {
     label = i18nc("@label:textbox", "Transaction amount");
   }
   return label;
-}
-
-eDialogs::PriceMode Activity::priceMode() const
-{
-  Q_D(const Activity);
-  eDialogs::PriceMode mode = eDialogs::PriceMode::Price;
-  auto sec = d->haveWidget<QComboBox>("securityCombo");
-  // auto sec = dynamic_cast<KMyMoneySecurity*>(m_editWidgets["security"]);
-
-  QString accId;
-  if (sec && !sec->currentText().isEmpty()) {
-    const auto idx = sec->model()->index(sec->currentIndex(), 0);
-    accId = idx.data(eMyMoney::Model::IdRole).toString();
-#if 0
-    if (accId.isEmpty())
-      accId = d->m_account.id();
-#endif
-  }
-  while (!accId.isEmpty() && mode == eDialogs::PriceMode::Price) {
-    auto acc = MyMoneyFile::instance()->account(accId);
-    if (acc.value("priceMode").isEmpty())
-      accId = acc.parentAccountId();
-    else
-      mode = static_cast<eDialogs::PriceMode>(acc.value("priceMode").toInt());
-  }
-
-  // if mode is still <Price> then use that
-  if (mode == eDialogs::PriceMode::Price)
-    mode = eDialogs::PriceMode::PricePerShare;
-  return mode;
 }
 
 void Activity::loadPriceWidget(const MyMoneySplit & split)
@@ -430,7 +284,7 @@ void Activity::loadPriceWidget(const MyMoneySplit & split)
   auto priceEdit = d->haveWidget<AmountEdit>("priceAmountEdit");
 
   if (priceEdit) {
-    if (priceMode() == eDialogs::PriceMode::PricePerTransaction) {
+    if (d->priceMode() == eDialogs::PriceMode::PricePerTransaction) {
       priceEdit->setValue(split.value());
     } else {
       priceEdit->setValue(split.price());
@@ -475,100 +329,16 @@ void Buy::showWidgets() const
   Q_D(const Activity);
   static const QStringList activityWidgets = {
     "sharesLabel", "sharesAmountEdit",
-    "accountLabel", "accountCombo",
+    "assetAccountLabel", "assetAccountCombo",
     "priceLabel", "priceAmountEdit",
-    "feesLabel", "feesCombo", "feesSplitEditorButton", "feesAmountLabel", "feesAmountEdit",
-    // "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
+    "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
     "totalLabel", "totalAmountEdit",
   };
 
   setupWidgets(activityWidgets);
 }
 
-MyMoneyMoney Buy::totalAmount() const
-{
-  Q_D(const Activity);
-  auto result = shareValue().abs();
-  const auto fees = d->haveVisibleWidget<AmountEdit>("feesAmountEdit");
-  if (fees) {
-    result += fees->value().abs();
-  }
-  return result;
-}
 
-bool Buy::isComplete(QString& reason) const
-{
-  auto rc = Activity::isComplete(reason);
-  rc &= haveAssetAccount();
-  rc &= haveFees(Optional);
-  rc &= haveShares();
-  rc &= havePrice();
-
-  return rc;
-}
-
-bool Buy::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
-{
-  Q_UNUSED(m_interestSplits)
-  Q_UNUSED(security)
-  Q_UNUSED(currency)
-
-  Q_D(Activity);
-  QString reason;
-  if (!isComplete(reason))
-    return false;
-
-  auto sharesEdit = d->haveWidget<AmountEdit>("sharesAmountEdit");
-  auto priceEdit = d->haveWidget<AmountEdit>("priceAmountEdit");
-
-  s0.setAction(eMyMoney::Split::InvestmentTransactionType::BuyShares);
-
-  MyMoneyMoney shares = s0.shares();
-  MyMoneyMoney price;
-  if (!s0.shares().isZero())
-    price = (s0.value() / s0.shares()).reduce();
-
-  if (sharesEdit && (!isMultiSelection() || !sharesEdit->value().isZero())) {
-    shares = sharesEdit->value().abs();
-    s0.setShares(shares);
-    s0.setValue((shares * price).reduce());
-    s0.setPrice(price);
-  }
-  if (priceEdit && (!isMultiSelection() || !priceEdit->value().isZero())) {
-    price = priceEdit->value().abs();
-    if (priceMode() == eDialogs::PriceMode::PricePerTransaction) {
-      s0.setValue(price.reduce());
-      if (!s0.shares().isZero())
-        s0.setPrice((price / s0.shares()).reduce());
-    } else {
-      s0.setValue((shares * price).reduce());
-      s0.setPrice(price);
-    }
-  }
-
-  auto feeAccountWidget = d->haveWidget<KMyMoneyAccountCombo>("feesCombo");
-  auto feeAmountWidget = d->haveWidget<AmountEdit>("feesAmountEdit");
-  if (!feeAccountWidget || !feeAmountWidget ||
-      !createCategorySplits(t, feeAccountWidget, feeAmountWidget, MyMoneyMoney::ONE, feeSplits, m_feeSplits))
-    return false;
-
-  createAssetAccountSplit(assetAccountSplit, s0);
-
-  MyMoneyMoney total = sumSplits(s0, feeSplits, QList<MyMoneySplit>());
-
-  //  Clear any leftover value from previous Dividend.
-  interestSplits.clear();
-
-  assetAccountSplit.setValue(-total);
-
-  /// @todo port to new model code
-#if 0
-  if (!d->m_parent->setupPrice(t, assetAccountSplit))
-    return false;
-#endif
-
-  return true;
-}
 
 Sell::Sell(InvestTransactionEditor* editor) :
   Activity(editor)
@@ -590,109 +360,20 @@ void Sell::showWidgets() const
 
   static const QStringList activityWidgets = {
     "sharesLabel", "sharesAmountEdit",
-    "accountLabel", "accountCombo",
+    "assetAccountLabel", "assetAccountCombo",
     "priceLabel", "priceAmountEdit",
-    "feesLabel", "feesCombo", "feesSplitEditorButton", "feesAmountLabel", "feesAmountEdit",
-    "interestLabel", "interestCombo", "interestSplitEditorButton", "interestAmountLabel", "interestAmountEdit",
+    "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
+    "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
     "totalLabel", "totalAmountEdit",
   };
 
   setupWidgets(activityWidgets);
 }
 
-bool Sell::isComplete(QString& reason) const
-{
-  Q_D(const Activity);
-
-  auto rc = Activity::isComplete(reason);
-  rc &= haveFees(Optional);
-  rc &= haveInterest(Optional);
-  rc &= haveShares();
-  rc &= havePrice();
-
-  // Allow a sell operation to be saved without specifying a brokerage
-  // account, when the proceeds equal the fees. This will handle sales
-  // made solely to cover annual account fees, where there is no money
-  // transferred.
-  if (rc) {
-    if (!d->m_parent->totalAmount().isZero()) {
-      rc &= haveAssetAccount();
-    }
-  }
-  return rc;
-}
-
 Invest::Activity::fieldRequired_t Invest::Sell::assetAccountRequired() const
 {
   Q_D(const Activity);
-  return d->m_parent->totalAmount().isZero() ? Unused : Mandatory;
-}
-
-bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
-{
-  Q_UNUSED(m_interestSplits)
-  Q_UNUSED(security)
-  Q_UNUSED(currency)
-
-  Q_D(Activity);
-  QString reason;
-  if (!isComplete(reason))
-    return false;
-
-  auto sharesEdit = d->haveWidget<AmountEdit>("sharesAmountEdit");
-  auto priceEdit = d->haveWidget<AmountEdit>("priceAmountEdit");
-
-  s0.setAction(eMyMoney::Split::InvestmentTransactionType::BuyShares);
-
-  MyMoneyMoney shares = s0.shares();
-  MyMoneyMoney price;
-  if (!s0.shares().isZero())
-    price = (s0.value() / s0.shares()).reduce();
-
-  if (sharesEdit && (!isMultiSelection() || !sharesEdit->value().isZero())) {
-    shares = -sharesEdit->value().abs();
-    s0.setShares(shares);
-    s0.setValue((shares * price).reduce());
-    s0.setPrice(price);
-  }
-  if (priceEdit && (!isMultiSelection() || !priceEdit->value().isZero())) {
-    price = priceEdit->value().abs();
-    if (priceMode() == eDialogs::PriceMode::PricePerTransaction) {
-      price = -price;
-      s0.setValue(price.reduce());
-      if (!s0.shares().isZero())
-        s0.setPrice((price / s0.shares()).reduce());
-    } else {
-      s0.setValue((shares * price).reduce());
-      s0.setPrice(price);
-    }
-  }
-
-  auto feeAccountWidget = d->haveWidget<KMyMoneyAccountCombo>("feesCombo");
-  auto feeAmountWidget = d->haveWidget<AmountEdit>("feesAmountEdit");
-  if (!feeAccountWidget || !feeAmountWidget ||
-      !createCategorySplits(t, feeAccountWidget, feeAmountWidget, MyMoneyMoney::ONE, feeSplits, m_feeSplits))
-    return false;
-
-  auto interestAccountWidget = d->haveWidget<KMyMoneyAccountCombo>("interestCombo");
-  auto interestAmountWidget = d->haveWidget<AmountEdit>("interestAmountEdit");
-  if (!interestAccountWidget || !interestAmountWidget ||
-      !createCategorySplits(t, interestAccountWidget, interestAmountWidget, MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
-    return false;
-
-  const auto total = sumSplits(s0, feeSplits, interestSplits);
-  if (!total.isZero()) {
-    createAssetAccountSplit(assetAccountSplit, s0);
-    assetAccountSplit.setValue(-total);
-
-    /// @todo port to new model code
-#if 0
-    if (!d->m_parent->setupPrice(t, assetAccountSplit))
-      return false;
-#endif
-  }
-
-  return true;
+  return d->editor->totalAmount().isZero() ? Unused : Mandatory;
 }
 
 MyMoneyMoney Sell::sharesFactor() const
@@ -717,68 +398,13 @@ eMyMoney::Split::InvestmentTransactionType Div::type() const
 void Div::showWidgets() const
 {
   static const QStringList activityWidgets = {
-    "accountLabel", "accountCombo",
-    "feesLabel", "feesCombo", "feesSplitEditorButton", "feesAmountLabel", "feesAmountEdit",
-    "interestLabel", "interestCombo", "interestSplitEditorButton", "interestAmountLabel", "interestAmountEdit",
+    "assetAccountLabel", "assetAccountCombo",
+    "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
+    "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
     "totalLabel", "totalAmountEdit",
   };
 
   setupWidgets(activityWidgets);
-}
-
-bool Div::isComplete(QString& reason) const
-{
-  Q_UNUSED(reason)
-
-  auto rc = Activity::isComplete(reason);
-  rc &= haveAssetAccount();
-  rc &= haveInterest(Optional);
-  return rc;
-}
-
-bool Div::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
-{
-  Q_UNUSED(m_feeSplits)
-  Q_UNUSED(security)
-  Q_UNUSED(currency)
-
-  Q_D(Activity);
-  QString reason;
-  if (!isComplete(reason))
-    return false;
-
-  s0.setAction(eMyMoney::Split::InvestmentTransactionType::Dividend);
-
-  // for dividends, we only use the stock split as a marker
-  MyMoneyMoney shares;
-  s0.setShares(shares);
-  s0.setValue(shares);
-  s0.setPrice(MyMoneyMoney::ONE);
-
-  auto feeAccountWidget = d->haveWidget<KMyMoneyAccountCombo>("feesCombo");
-  auto feeAmountWidget = d->haveWidget<AmountEdit>("feesAmountEdit");
-  if (!feeAccountWidget || !feeAmountWidget ||
-      !createCategorySplits(t, feeAccountWidget, feeAmountWidget, MyMoneyMoney::ONE, feeSplits, m_feeSplits))
-    return false;
-
-  auto interestAccountWidget = d->haveWidget<KMyMoneyAccountCombo>("interestCombo");
-  auto interestAmountWidget = d->haveWidget<AmountEdit>("interestAmountEdit");
-  if (!interestAccountWidget || !interestAmountWidget ||
-      !createCategorySplits(t, interestAccountWidget, interestAmountWidget, MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
-    return false;
-
-  createAssetAccountSplit(assetAccountSplit, s0);
-
-  MyMoneyMoney total = sumSplits(s0, feeSplits, interestSplits);
-  assetAccountSplit.setValue(-total);
-
-  /// @todo port to new model code
-#if 0
-  if (!d->m_parent->setupPrice(t, assetAccountSplit))
-    return false;
-#endif
-
-  return true;
 }
 
 Reinvest::Reinvest(InvestTransactionEditor* editor) :
@@ -801,105 +427,24 @@ void Reinvest::showWidgets() const
 
   static const QStringList activityWidgets = {
     "sharesLabel", "sharesAmountEdit",
-    "accountLabel", "accountCombo",
+    "assetAccountLabel", "assetAccountCombo",
     "priceLabel", "priceAmountEdit",
-    "feesLabel", "feesCombo", "feesSplitEditorButton", "feesAmountLabel", "feesAmountEdit",
-    "interestLabel", "interestCombo", "interestSplitEditorButton", "interestAmountLabel", "interestAmountEdit",
+    "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
+    "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
     "totalLabel", "totalAmountEdit",
   };
 
   setupWidgets(activityWidgets);
-
-  if (auto shareEdit = d->haveWidget<AmountEdit>("sharesAmountEdit")) {
-    shareEdit->show();
-    /// @todo port to new model code
-#if 0
-    shareEdit->setPrecision(MyMoneyMoney::denomToPrec(d->m_parent->security().smallestAccountFraction()));
-#endif
-  }
 }
 
-bool Reinvest::isComplete(QString& reason) const
+
+MyMoneyMoney Invest::Reinvest::totalAmount(const MyMoneySplit & stockSplit, const SplitModel * feesModel, const SplitModel * interestModel) const
 {
-  auto rc = Activity::isComplete(reason);
-  rc &= haveInterest();
-  rc &= haveFees(Optional);
-  rc &= haveShares();
-  rc &= havePrice();
-  return rc;
-}
+  Q_UNUSED(stockSplit)
+  Q_UNUSED(feesModel)
+  Q_UNUSED(interestModel)
 
-bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
-{
-  Q_UNUSED(assetAccountSplit)
-  Q_UNUSED(security)
-  Q_UNUSED(currency)
-
-  Q_D(Activity);
-  QString reason;
-  if (!isComplete(reason))
-    return false;
-
-  auto sharesEdit = d->haveWidget<AmountEdit>("sharesAmountEdit");
-  auto priceEdit = d->haveWidget<AmountEdit>("priceAmountEdit");
-
-  s0.setAction(eMyMoney::Split::InvestmentTransactionType::ReinvestDividend);
-
-  MyMoneyMoney shares = s0.shares();
-  MyMoneyMoney price;
-  if (!s0.shares().isZero())
-    price = (s0.value() / s0.shares()).reduce();
-
-  if (sharesEdit && (!isMultiSelection() || !sharesEdit->value().isZero())) {
-    shares = sharesEdit->value().abs();
-    s0.setShares(shares);
-    s0.setValue((shares * price).reduce());
-    s0.setPrice(price);
-  }
-  if (priceEdit && (!isMultiSelection() || !priceEdit->value().isZero())) {
-    price = priceEdit->value().abs();
-    if (priceMode() == eDialogs::PriceMode::PricePerTransaction) {
-      s0.setValue(price.reduce());
-      if (!s0.shares().isZero())
-        s0.setPrice((price / s0.shares()).reduce());
-    } else {
-      s0.setValue((shares * price).reduce());
-      s0.setPrice(price);
-    }
-  }
-
-  auto feeAccountWidget = d->haveWidget<KMyMoneyAccountCombo>("feesCombo");
-  auto feeAmountWidget = d->haveWidget<AmountEdit>("feesAmountEdit");
-  if (feeAmountWidget && feeAccountWidget) {
-    if (!createCategorySplits(t, feeAccountWidget, feeAmountWidget, MyMoneyMoney::ONE, feeSplits, m_feeSplits))
-      return false;
-  }
-
-  auto interestAccountWidget = d->haveWidget<KMyMoneyAccountCombo>("interestCombo");
-  auto interestAmountWidget = d->haveWidget<AmountEdit>("interestAmountEdit");
-  if (!interestAccountWidget || !interestAmountWidget ||
-      !createCategorySplits(t, interestAccountWidget, interestAmountWidget, MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
-    return false;
-
-  if (interestSplits.count() != 1) {
-    qDebug("more or less than one interest split in Reinvest::createTransaction. Not created.");
-    return false;
-  }
-  assetAccountSplit.setAccountId(QString());
-
-  MyMoneySplit& s1 = interestSplits[0];
-
-  MyMoneyMoney total = sumSplits(s0, feeSplits, QList<MyMoneySplit>());
-
-  s1.setValue(-total);
-
-  /// @todo port to new model code
-#if 0
-  if (!d->m_parent->setupPrice(t, s1))
-    return false;
-#endif
-
-  return true;
+  return {};
 }
 
 Add::Add(InvestTransactionEditor* editor) :
@@ -924,52 +469,24 @@ void Add::showWidgets() const
   };
 
   setupWidgets(activityWidgets);
-
-  if (auto shareEdit = d->haveWidget<AmountEdit>("sharesAmountEdit")) {
-    shareEdit->show();
-    /// @todo port to new model code
-#if 0
-    shareEdit->setPrecision(MyMoneyMoney::denomToPrec(d->m_parent->security().smallestAccountFraction()));
-#endif
-  }
 }
 
-bool Add::isComplete(QString& reason) const
+
+void Add::adjustStockSplit(MyMoneySplit& stockSplit)
 {
-  auto rc = Activity::isComplete(reason);
-  rc &= haveShares();
-  return rc;
+  stockSplit.setValue(MyMoneyMoney());
+  stockSplit.setPrice(MyMoneyMoney());
 }
 
-bool Add::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
+MyMoneyMoney Invest::Add::totalAmount(const MyMoneySplit & stockSplit, const SplitModel * feesModel, const SplitModel * interestModel) const
 {
-  Q_UNUSED(t)
-  Q_UNUSED(assetAccountSplit)
-  Q_UNUSED(m_feeSplits)
-  Q_UNUSED(m_interestSplits)
-  Q_UNUSED(security)
-  Q_UNUSED(currency)
+  Q_UNUSED(stockSplit)
+  Q_UNUSED(feesModel)
+  Q_UNUSED(interestModel)
 
-  Q_D(Activity);
-  QString reason;
-  if (!isComplete(reason))
-    return false;
-
-  auto sharesEdit = d->haveWidget<AmountEdit>("sharesAmountEdit");
-
-  s0.setAction(eMyMoney::Split::InvestmentTransactionType::AddShares);
-  if (sharesEdit)
-    s0.setShares(sharesEdit->value().abs());
-  s0.setValue(MyMoneyMoney());
-  s0.setPrice(MyMoneyMoney());
-
-  assetAccountSplit.setValue(MyMoneyMoney());//  Clear any leftover value from previous Dividend.
-
-  feeSplits.clear();
-  interestSplits.clear();
-
-  return true;
+  return {};
 }
+
 
 Remove::Remove(InvestTransactionEditor* editor) :
   Activity(editor)
@@ -993,50 +510,23 @@ void Remove::showWidgets() const
   };
 
   setupWidgets(activityWidgets);
-
-  if (auto shareEdit = d->haveWidget<AmountEdit>("sharesAmountEdit")) {
-    shareEdit->show();
-    /// @todo port to new model code
-#if 0
-    shareEdit->setPrecision(MyMoneyMoney::denomToPrec(d->m_parent->security().smallestAccountFraction()));
-#endif
-  }
 }
 
-bool Remove::isComplete(QString& reason) const
+void Remove::adjustStockSplit(MyMoneySplit& stockSplit)
 {
-  auto rc = Activity::isComplete(reason);
-  rc &= haveShares();
-  return rc;
+  stockSplit.setValue(MyMoneyMoney());
+  stockSplit.setPrice(MyMoneyMoney());
 }
 
-bool Remove::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
+MyMoneyMoney Invest::Remove::totalAmount(const MyMoneySplit & stockSplit, const SplitModel * feesModel, const SplitModel * interestModel) const
 {
-  Q_UNUSED(t)
-  Q_UNUSED(assetAccountSplit)
-  Q_UNUSED(m_feeSplits)
-  Q_UNUSED(m_interestSplits)
-  Q_UNUSED(security)
-  Q_UNUSED(currency)
+  Q_UNUSED(stockSplit)
+  Q_UNUSED(feesModel)
+  Q_UNUSED(interestModel)
 
-  Q_D(Activity);
-  QString reason;
-  if (!isComplete(reason))
-    return false;
-
-  s0.setAction(eMyMoney::Split::InvestmentTransactionType::AddShares);
-  if (auto sharesEdit = d->haveWidget<AmountEdit>("sharesAmountEdit"))
-    s0.setShares(-(sharesEdit->value().abs()));
-  s0.setValue(MyMoneyMoney());
-  s0.setPrice(MyMoneyMoney());
-
-  assetAccountSplit.setValue(MyMoneyMoney());//  Clear any leftover value from previous Dividend.
-
-  feeSplits.clear();
-  interestSplits.clear();
-
-  return true;
+  return {};
 }
+
 
 MyMoneyMoney Remove::sharesFactor() const
 {
@@ -1067,13 +557,6 @@ void Invest::Split::showWidgets() const
   };
 
   setupWidgets(activityWidgets);
-
-  // TODO do we need a special split ratio widget?
-  // TODO maybe yes, currently the precision is the one of the fraction and might differ from it
-  if (auto shareEdit = d->haveWidget<AmountEdit>("sharesAmountEdit")) {
-    shareEdit->show();
-    shareEdit->setPrecision(-1);
-  }
 }
 
 
@@ -1083,36 +566,21 @@ QString Invest::Split::sharesLabelText() const
   return i18nc("@label:textbox", "Ratio 1/");
 }
 
-bool Invest::Split::isComplete(QString& reason) const
+void Invest::Split::adjustStockSplit(MyMoneySplit & stockSplit)
 {
-  auto rc = Activity::isComplete(reason);
-  rc &= haveShares();
-  return rc;
+  stockSplit.setValue(MyMoneyMoney());
+  stockSplit.setPrice(MyMoneyMoney());
 }
 
-bool Invest::Split::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
+MyMoneyMoney Invest::Split::totalAmount(const MyMoneySplit & stockSplit, const SplitModel * feesModel, const SplitModel * interestModel) const
 {
-  Q_UNUSED(t)
-  Q_UNUSED(assetAccountSplit)
-  Q_UNUSED(m_feeSplits)
-  Q_UNUSED(m_interestSplits)
-  Q_UNUSED(security)
-  Q_UNUSED(currency)
+  Q_UNUSED(stockSplit)
+  Q_UNUSED(feesModel)
+  Q_UNUSED(interestModel)
 
-  Q_D(Activity);
-  auto sharesEdit = d->haveWidget<AmountEdit>("sharesAmountEdit");
-
-  s0.setAction(eMyMoney::Split::InvestmentTransactionType::SplitShares);
-  if (sharesEdit)
-    s0.setShares(sharesEdit->value().abs());
-  s0.setValue(MyMoneyMoney());
-  s0.setPrice(MyMoneyMoney());
-
-  feeSplits.clear();
-  interestSplits.clear();
-
-  return true;
+  return {};
 }
+
 
 IntInc::IntInc(InvestTransactionEditor* editor) :
   Activity(editor)
@@ -1131,65 +599,11 @@ eMyMoney::Split::InvestmentTransactionType IntInc::type() const
 void IntInc::showWidgets() const
 {
   static const QStringList activityWidgets = {
-    "accountLabel", "accountCombo",
-    "feesLabel", "feesCombo", "feesSplitEditorButton", "feesAmountLabel", "feesAmountEdit",
-    "interestLabel", "interestCombo", "interestSplitEditorButton", "interestAmountLabel", "interestAmountEdit",
+    "assetAccountLabel", "assetAccountCombo",
+    "feesLabel", "feesCombo", "feesAmountLabel", "feesAmountEdit",
+    "interestLabel", "interestCombo", "interestAmountLabel", "interestAmountEdit",
     "totalLabel", "totalAmountEdit",
   };
 
   setupWidgets(activityWidgets);
-}
-
-bool IntInc::isComplete(QString& reason) const
-{
-  Q_UNUSED(reason)
-
-  auto rc = Activity::isComplete(reason);
-  rc &= haveAssetAccount();
-  rc &= haveInterest(Mandatory);
-  return rc;
-}
-
-bool IntInc::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& m_feeSplits, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& m_interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency)
-{
-  Q_UNUSED(security)
-  Q_UNUSED(currency)
-
-  Q_D(Activity);
-  QString reason;
-  if (!isComplete(reason))
-    return false;
-
-  s0.setAction(eMyMoney::Split::InvestmentTransactionType::InterestIncome);
-
-  // for dividends, we only use the stock split as a marker
-  MyMoneyMoney shares;
-  s0.setShares(shares);
-  s0.setValue(shares);
-  s0.setPrice(MyMoneyMoney::ONE);
-
-  auto feeAccountWidget = d->haveWidget<KMyMoneyAccountCombo>("feesCombo");
-  auto feeAmountWidget = d->haveWidget<AmountEdit>("feesAmountEdit");
-  if (!feeAccountWidget || !feeAmountWidget ||
-      !createCategorySplits(t, feeAccountWidget, feeAmountWidget, MyMoneyMoney::ONE, feeSplits, m_feeSplits))
-    return false;
-
-  auto interestAccountWidget = d->haveWidget<KMyMoneyAccountCombo>("interestCombo");
-  auto interestAmountWidget = d->haveWidget<AmountEdit>("interestAmountEdit");
-  if (!interestAccountWidget || !interestAmountWidget ||
-      !createCategorySplits(t, interestAccountWidget, interestAmountWidget, MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
-    return false;
-
-  createAssetAccountSplit(assetAccountSplit, s0);
-
-  MyMoneyMoney total = sumSplits(s0, feeSplits, interestSplits);
-  assetAccountSplit.setValue(-total);
-
-  /// @todo port to new model code
-#if 0
-  if (!d->m_parent->setupPrice(t, assetAccountSplit))
-    return false;
-#endif
-
-  return true;
 }
