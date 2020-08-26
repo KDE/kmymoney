@@ -72,6 +72,8 @@ public:
 
   SplitModel& operator= (const SplitModel& right);
 
+  MyMoneyMoney valueSum() const;
+
 Q_SIGNALS:
   void itemCountChanged(int cnt);
 

@@ -394,3 +394,14 @@ void SplitModel::doRemoveItem(const MyMoneySplit& before)
   MyMoneyModel::doRemoveItem(before);
   d->updateItemCount();
 }
+
+MyMoneyMoney SplitModel::valueSum() const
+{
+  MyMoneyMoney sum;
+  const auto rows = rowCount();
+  for (int row = 0; row < rows; ++row) {
+    const auto idx = index(row, 0);
+        sum += idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
+  }
+  return sum;
+}
