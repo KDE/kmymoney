@@ -583,7 +583,7 @@ void InvestTransactionEditor::Private::updateWidgetState()
             WidgetHintFrame::show(ui->feesCombo, i18nc("@info:tooltip", "Enter category for fees"));
         }
         if (ui->feesAmountEdit->value().isZero()) {
-            WidgetHintFrame::show(ui->feesAmountEdit, i18nc("@info:tooltip", "Enter amout of fees"));
+            WidgetHintFrame::show(ui->feesAmountEdit, i18nc("@info:tooltip", "Enter amount of fees"));
         }
     }
 
@@ -592,7 +592,7 @@ void InvestTransactionEditor::Private::updateWidgetState()
             WidgetHintFrame::show(ui->interestCombo, i18nc("@info:tooltip", "Enter category for interest"));
         }
         if (ui->interestAmountEdit->value().isZero()) {
-            WidgetHintFrame::show(ui->interestAmountEdit, i18nc("@info:tooltip", "Enter amout of interest"));
+            WidgetHintFrame::show(ui->interestAmountEdit, i18nc("@info:tooltip", "Enter amount of interest"));
         }
     }
 }
