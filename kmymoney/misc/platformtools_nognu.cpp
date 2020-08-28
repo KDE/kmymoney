@@ -22,6 +22,7 @@
 #include <windows.h>
 #include <lmcons.h>
 #include <process.h>
+#include <locale.h>
 
 #include <QString>
 
@@ -43,12 +44,26 @@ uint platformTools::processId()
 
 platformTools::currencySymbolPosition_t platformTools::currencySymbolPosition(bool negativeValues)
 {
-  Q_UNUSED(negativeValues)
-  return platformTools::AfterQuantityMoneyWithSpace;
+  platformTools::currencySymbolPosition_t  rc = platformTools::AfterQuantityMoneyWithSpace;
+  struct lconv* lc = localeconv();
+  if (lc) {
+    const char precedes = negativeValues ? lc->n_cs_precedes : lc->p_cs_precedes;
+    const char space = negativeValues ? lc->n_sep_by_space : lc->p_sep_by_space;
+    if (precedes != 0) {
+      rc = (space != 0) ? platformTools::BeforeQuantityMoneyWithSpace : platformTools::BeforeQuantityMoney;
+    } else {
+      rc = (space != 0) ? platformTools::AfterQuantityMoneyWithSpace : platformTools::AfterQuantityMoney;
+    }
+  }
+  return rc;
 }
 
 platformTools::currencySignPosition_t platformTools::currencySignPosition(bool negativeValues)
 {
-  Q_UNUSED(negativeValues)
-  return platformTools::PreceedQuantityAndSymbol;
+  platformTools::currencySignPosition_t rc = platformTools::PreceedQuantityAndSymbol;
+  struct lconv* lc = localeconv();
+  if (lc) {
+    rc = static_cast<platformTools::currencySignPosition_t>(negativeValues ? lc->n_sign_posn : lc->p_sign_posn);
+  }
+  return rc;
 }
