@@ -43,7 +43,7 @@ void MyMoneyMoneyTest::init()
 
   MyMoneyMoney::setDecimalSeparator('.');
   MyMoneyMoney::setThousandSeparator(',');
-  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::BeforeQuantityMoney);
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::PreceedQuantityAndSymbol);
 }
 
 void MyMoneyMoneyTest::cleanup()
@@ -575,16 +575,9 @@ void MyMoneyMoneyTest::testToString()
   MyMoneyMoney m2(1234, 100);
   MyMoneyMoney m3;
 
-  //qDebug("Created: %s", m3.valueRef().get_str().c_str());
-
-  //QVERIFY(m1.toString() == QString("-100/100"));
-  QVERIFY(m1.toString() == QString("-1/1"));
-// qDebug("Current value: %s",qPrintable( m2.toString()) );
-  //QVERIFY(m2.toString() == QString("1234/100"));
-  QVERIFY(m2.toString() == QString("617/50"));
-  QVERIFY(m3.toString() == QString("0/1"));
-  //FIXME check the impact of the canonicalize in the whole code
-  //QVERIFY(m3.toString() == QString("0"));
+  QCOMPARE(m1.toString(), QStringLiteral("-1/1"));
+  QCOMPARE(m2.toString(), QStringLiteral("617/50"));
+  QCOMPARE(m3.toString(), QStringLiteral("0/1"));
 }
 
 void MyMoneyMoneyTest::testNegativeSignPos()
@@ -593,29 +586,55 @@ void MyMoneyMoneyTest::testNegativeSignPos()
 
   eMyMoney::Money::signPosition pos = MyMoneyMoney::negativeMonetarySignPosition();
 
+  MyMoneyMoney::setNegativeSpaceSeparatesSymbol(true);
   MyMoneyMoney::setNegativePrefixCurrencySymbol(false);
   MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::ParensAround);
-  QVERIFY(m.formatMoney("CUR", 2) == "(1,234.56) CUR");
-  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::BeforeQuantityMoney);
-  QVERIFY(m.formatMoney("CUR", 2) == "-1,234.56 CUR");
-  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::AfterQuantityMoney);
-  QVERIFY(m.formatMoney("CUR", 2) == "1,234.56- CUR");
-  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::BeforeMoney);
-  QVERIFY(m.formatMoney("CUR", 2) == "1,234.56 -CUR");
-  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::AfterMoney);
-  QVERIFY(m.formatMoney("CUR", 2) == "1,234.56 CUR-");
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("(1,234.56 CUR)"));
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::PreceedQuantityAndSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("-1,234.56 CUR"));
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::SucceedQuantityAndSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("1,234.56- CUR"));
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::PreceedSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("1,234.56 -CUR"));
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::SucceedSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("1,234.56 CUR-"));
 
   MyMoneyMoney::setNegativePrefixCurrencySymbol(true);
   MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::ParensAround);
-  QVERIFY(m.formatMoney("CUR", 2) == "CUR (1,234.56)");
-  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::BeforeQuantityMoney);
-  QVERIFY(m.formatMoney("CUR", 2) == "CUR -1,234.56");
-  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::AfterQuantityMoney);
-  QVERIFY(m.formatMoney("CUR", 2) == "CUR 1,234.56-");
-  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::BeforeMoney);
-  QVERIFY(m.formatMoney("CUR", 2) == "-CUR 1,234.56");
-  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::AfterMoney);
-  QVERIFY(m.formatMoney("CUR", 2) == "CUR- 1,234.56");
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("(CUR 1,234.56)"));
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::PreceedQuantityAndSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("CUR -1,234.56"));
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::SucceedQuantityAndSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("CUR 1,234.56-"));
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::PreceedSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("-CUR 1,234.56"));
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::SucceedSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("CUR- 1,234.56"));
+
+  MyMoneyMoney::setNegativeSpaceSeparatesSymbol(false);
+  MyMoneyMoney::setNegativePrefixCurrencySymbol(false);
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::ParensAround);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("(1,234.56CUR)"));
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::PreceedQuantityAndSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("-1,234.56CUR"));
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::SucceedQuantityAndSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("1,234.56-CUR"));
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::PreceedSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("1,234.56-CUR"));
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::SucceedSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("1,234.56CUR-"));
+
+  MyMoneyMoney::setNegativePrefixCurrencySymbol(true);
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::ParensAround);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("(CUR1,234.56)"));
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::PreceedQuantityAndSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("CUR-1,234.56"));
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::SucceedQuantityAndSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("CUR1,234.56-"));
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::PreceedSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("-CUR1,234.56"));
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::SucceedSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("CUR-1,234.56"));
 
   MyMoneyMoney::setNegativeMonetarySignPosition(pos);
 }
@@ -626,29 +645,56 @@ void MyMoneyMoneyTest::testPositiveSignPos()
 
   eMyMoney::Money::signPosition pos = MyMoneyMoney::positiveMonetarySignPosition();
 
+  MyMoneyMoney::setPositiveSpaceSeparatesSymbol(true);
   MyMoneyMoney::setPositivePrefixCurrencySymbol(false);
   MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::ParensAround);
-  QVERIFY(m.formatMoney("CUR", 2) == "(1,234.56) CUR");
-  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::BeforeQuantityMoney);
-  QVERIFY(m.formatMoney("CUR", 2) == "1,234.56 CUR");
-  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::AfterQuantityMoney);
-  QVERIFY(m.formatMoney("CUR", 2) == "1,234.56 CUR");
-  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::BeforeMoney);
-  QVERIFY(m.formatMoney("CUR", 2) == "1,234.56 CUR");
-  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::AfterMoney);
-  QVERIFY(m.formatMoney("CUR", 2) == "1,234.56 CUR");
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("(1,234.56 CUR)"));
+  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::PreceedQuantityAndSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("1,234.56 CUR"));
+  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::SucceedQuantityAndSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("1,234.56 CUR"));
+  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::PreceedSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("1,234.56 CUR"));
+  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::SucceedSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("1,234.56 CUR"));
 
   MyMoneyMoney::setPositivePrefixCurrencySymbol(true);
   MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::ParensAround);
-  QVERIFY(m.formatMoney("CUR", 2) == "CUR (1,234.56)");
-  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::BeforeQuantityMoney);
-  QVERIFY(m.formatMoney("CUR", 2) == "CUR 1,234.56");
-  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::AfterQuantityMoney);
-  QVERIFY(m.formatMoney("CUR", 2) == "CUR 1,234.56");
-  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::BeforeMoney);
-  QVERIFY(m.formatMoney("CUR", 2) == "CUR 1,234.56");
-  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::AfterMoney);
-  QVERIFY(m.formatMoney("CUR", 2) == "CUR 1,234.56");
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("(CUR 1,234.56)"));
+  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::PreceedQuantityAndSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("CUR 1,234.56"));
+  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::SucceedQuantityAndSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("CUR 1,234.56"));
+  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::PreceedSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("CUR 1,234.56"));
+  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::SucceedSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("CUR 1,234.56"));
+
+  MyMoneyMoney::setPositiveSpaceSeparatesSymbol(false);
+  MyMoneyMoney::setPositivePrefixCurrencySymbol(false);
+  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::ParensAround);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("(1,234.56CUR)"));
+  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::PreceedQuantityAndSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("1,234.56CUR"));
+  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::SucceedQuantityAndSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("1,234.56CUR"));
+  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::PreceedSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("1,234.56CUR"));
+  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::SucceedSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("1,234.56CUR"));
+
+  MyMoneyMoney::setPositivePrefixCurrencySymbol(true);
+  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::ParensAround);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("(CUR1,234.56)"));
+  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::PreceedQuantityAndSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("CUR1,234.56"));
+  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::SucceedQuantityAndSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("CUR1,234.56"));
+  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::PreceedSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("CUR1,234.56"));
+  MyMoneyMoney::setPositiveMonetarySignPosition(eMyMoney::Money::SucceedSymbol);
+  QCOMPARE(m.formatMoney("CUR", 2), QStringLiteral("CUR1,234.56"));
+
 
   MyMoneyMoney::setPositiveMonetarySignPosition(pos);
 }
@@ -665,7 +711,7 @@ void MyMoneyMoneyTest::testNegativeStringConstructor()
   QVERIFY(m1->valueRef().get_den() == 1000);
   delete m1;
 
-  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::BeforeQuantityMoney);
+  MyMoneyMoney::setNegativeMonetarySignPosition(eMyMoney::Money::PreceedQuantityAndSymbol);
   m1 = new MyMoneyMoney("x1.234,567- EUR");
   //qDebug("Created: %s", m1->valueRef().get_str().c_str());
 

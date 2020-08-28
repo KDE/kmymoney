@@ -70,8 +70,9 @@ public:
   /**
     * This method returns a formatted string according to the settings
     * of _thousandSeparator, _decimalSeparator, _negativeMonetarySignPosition,
-    * _positiveMonetaryPosition, _negativePrefixCurrencySymbol and
-    * _positivePrefixCurrencySymbol. Those values can be modified using
+    * _positiveMonetaryPosition, _negativePrefixCurrencySymbol,
+    * _positivePrefixCurrencySymbol, _negativeSpaceSeparatesSymbol and
+    * _positiveSpaceSeparatesSymbol. Those values can be modified using
     * the appropriate set-methods.
     *
     * @param currency The currency symbol
@@ -110,8 +111,10 @@ public:
   static void setDecimalSeparator(const QChar &);
   static void setNegativeMonetarySignPosition(const eMyMoney::Money::signPosition pos);
   static void setPositiveMonetarySignPosition(const eMyMoney::Money::signPosition pos);
-  static void setNegativePrefixCurrencySymbol(const bool flags);
-  static void setPositivePrefixCurrencySymbol(const bool flags);
+  static void setNegativePrefixCurrencySymbol(const bool flag);
+  static void setPositivePrefixCurrencySymbol(const bool flag);
+  static void setNegativeSpaceSeparatesSymbol(const bool flag);
+  static void setPositiveSpaceSeparatesSymbol(const bool flag);
 
   static const QChar thousandSeparator();
   static const QChar decimalSeparator();
