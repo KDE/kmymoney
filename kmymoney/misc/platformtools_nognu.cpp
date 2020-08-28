@@ -1,6 +1,7 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2017 Marc Hübner <mahueb55@gmail.com>
+ * Copyright 2017       Marc Hübner <mahueb55@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,4 +45,10 @@ platformTools::currencySymbolPosition_t platformTools::currencySymbolPosition(bo
 {
   Q_UNUSED(negativeValues)
   return platformTools::AfterQuantityMoneyWithSpace;
+}
+
+platformTools::currencySignPosition_t platformTools::currencySignPosition(bool negativeValues)
+{
+  Q_UNUSED(negativeValues)
+  return platformTools::PreceedQuantityAndSymbol;
 }
