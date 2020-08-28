@@ -333,7 +333,6 @@ void LedgerView::keyPressEvent(QKeyEvent* kev)
 
 void LedgerView::currentChanged(const QModelIndex& current, const QModelIndex& previous)
 {
-  // qDebug() << "currentChanged" << current;
   QTableView::currentChanged(current, previous);
 
   if(current.isValid()) {
@@ -344,6 +343,13 @@ void LedgerView::currentChanged(const QModelIndex& current, const QModelIndex& p
     if(id.isEmpty() || id.endsWith('-')) {
       // the next two lines prevent an endless recursive call of this method
       if (idx == previous) {
+        return;
+      }
+      // check for an empty account being opened. we can detect
+      // that by an invalid previous index and don't start
+      // editing right away.
+      if (!previous.isValid()) {
+        selectRow(idx.row());
         return;
       }
       selectionModel()->clearSelection();
