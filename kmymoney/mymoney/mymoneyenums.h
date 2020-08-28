@@ -423,12 +423,12 @@ namespace eMyMoney {
 
   namespace Money {
     enum signPosition : int {
-      // keep those in sync with the ones defined in klocale.h
+      // keep those in sync with the ones defined in localeconv
       ParensAround = 0,
-      BeforeQuantityMoney = 1,
-      AfterQuantityMoney = 2,
-      BeforeMoney = 3,
-      AfterMoney = 4
+      PreceedQuantityAndSymbol = 1,
+      SucceedQuantityAndSymbol = 2,
+      PreceedSymbol = 3,
+      SucceedSymbol = 4
     };
   }
 

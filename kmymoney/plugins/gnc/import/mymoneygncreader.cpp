@@ -1954,7 +1954,7 @@ void MyMoneyGncReader::convertTemplateSplit(const QString& schedName, const GncT
       }
       // validate numeric, work out sign
       MyMoneyMoney exFormula;
-      exFormula.setNegativeMonetarySignPosition(eMyMoney::Money::BeforeQuantityMoney);
+      exFormula.setNegativeMonetarySignPosition(eMyMoney::Money::PreceedQuantityAndSymbol);
       QString numericTest;
       char crdr = 0 ;
       if (!gncCreditFormula.isEmpty()) {

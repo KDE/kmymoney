@@ -185,11 +185,42 @@ int main(int argc, char *argv[])
   // setup the MyMoneyMoney locale settings according to the KDE settings
   MyMoneyMoney::setThousandSeparator(QLocale().groupSeparator());
   MyMoneyMoney::setDecimalSeparator(QLocale().decimalPoint());
-  // TODO: port to kf5 (negative numbers in parens)
-  //MyMoneyMoney::setNegativeMonetarySignPosition(static_cast<MyMoneyMoney::signPosition>(KLocale::global()->negativeMonetarySignPosition()));
-  //MyMoneyMoney::setPositiveMonetarySignPosition(static_cast<MyMoneyMoney::signPosition>(KLocale::global()->positiveMonetarySignPosition()));
-  MyMoneyMoney::setNegativePrefixCurrencySymbol(platformTools::currencySymbolPosition(true) < platformTools::AfterQuantityMoney);
-  MyMoneyMoney::setPositivePrefixCurrencySymbol(platformTools::currencySymbolPosition(false) < platformTools::AfterQuantityMoney);
+
+  // setup format of negative values
+  MyMoneyMoney::setNegativeSpaceSeparatesSymbol(false);
+  MyMoneyMoney::setNegativePrefixCurrencySymbol(false);
+  MyMoneyMoney::setNegativeMonetarySignPosition(static_cast<eMyMoney::Money::signPosition>(platformTools::currencySignPosition(true)));
+  switch(platformTools::currencySymbolPosition(true)) {
+    case platformTools::AfterQuantityMoneyWithSpace:
+      MyMoneyMoney::setNegativeSpaceSeparatesSymbol(true);
+      // intentional fall through
+    case platformTools::AfterQuantityMoney:
+      break;
+
+    case platformTools::BeforeQuantityMoneyWithSpace:
+      MyMoneyMoney::setNegativeSpaceSeparatesSymbol(true);
+      // intentional fall through
+    case platformTools::BeforeQuantityMoney:
+      MyMoneyMoney::setNegativePrefixCurrencySymbol(true);
+      break;
+  }
+  // setup format of positive values
+  MyMoneyMoney::setPositiveSpaceSeparatesSymbol(false);
+  MyMoneyMoney::setPositivePrefixCurrencySymbol(false);
+  MyMoneyMoney::setPositiveMonetarySignPosition(static_cast<eMyMoney::Money::signPosition>(platformTools::currencySignPosition(false)));
+  switch(platformTools::currencySymbolPosition(false)) {
+    case platformTools::AfterQuantityMoneyWithSpace:
+      MyMoneyMoney::setPositiveSpaceSeparatesSymbol(true);
+      // intentional fall through
+    case platformTools::AfterQuantityMoney:
+      break;
+    case platformTools::BeforeQuantityMoneyWithSpace:
+      MyMoneyMoney::setPositiveSpaceSeparatesSymbol(true);
+      // intentional fall through
+    case platformTools::BeforeQuantityMoney:
+      MyMoneyMoney::setPositivePrefixCurrencySymbol(true);
+      break;
+  }
 
 //  QString language = parser.value(langOption);
 //  if (!language.isEmpty()) {
