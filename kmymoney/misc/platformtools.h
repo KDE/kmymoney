@@ -1,6 +1,8 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2017 Marc Hübner <mahueb55@gmail.com>
+ * Copyright 2017       Marc Hübner <mahueb55@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
+ *
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,6 +50,17 @@ namespace platformTools
   };
 
   currencySymbolPosition_t currencySymbolPosition(bool negativeValues = false);
+
+  enum currencySignPosition_t
+  {
+    ParensAround,
+    PreceedQuantityAndSymbol,
+    SucceedQuantityAndSymbol,
+    PreceedSymbol,
+    SucceedSymbol
+  };
+
+  currencySignPosition_t currencySignPosition(bool negativeValues = false);
 };
 
 #endif // PLATFORMTOOLS_H
