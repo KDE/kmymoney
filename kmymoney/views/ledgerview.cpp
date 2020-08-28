@@ -562,6 +562,8 @@ void LedgerView::setSelectedTransactions(const QStringList& transactionIds)
   };
 
   for (const auto& id : transactionIds) {
+    if (id.isEmpty())
+      continue;
     const auto indexes = journalModel->indexesByTransactionId(id);
     int row = -1;
     for (const auto baseIdx : indexes) {
@@ -591,6 +593,16 @@ void LedgerView::setSelectedTransactions(const QStringList& transactionIds)
       }
     }
   }
+
+  // if no selection has been setup but we have
+  // transactions in the ledger, we select the
+  // last. The very last entry is the empty line,
+  // so we have to skip that.
+  if ((lastRow == -1) && (model()->rowCount() > 1)) {
+    startRow = lastRow = model()->rowCount()-2;
+    currentIdx = model()->index(startRow, 0);
+  }
+
   // add a possibly dangling range
   createSelectionRange();
 
