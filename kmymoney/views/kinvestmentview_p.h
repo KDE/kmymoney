@@ -69,8 +69,7 @@ class KInvestmentViewPrivate : public KMyMoneyViewBasePrivate
 
 public:
   explicit KInvestmentViewPrivate(KInvestmentView *qq)
-    : KMyMoneyViewBasePrivate()
-    , q_ptr(qq)
+    : KMyMoneyViewBasePrivate(qq)
     , ui(new Ui::KInvestmentView)
     , m_idInvAcc(QString())
     , m_needLoad(true)
@@ -297,7 +296,6 @@ public:
     return MyMoneyFile::instance()->accountsModel()->itemByIndex(idx);
   }
 
-  KInvestmentView     *q_ptr;
   Ui::KInvestmentView *ui;
   QString             m_idInvAcc;
 

@@ -92,8 +92,7 @@ class KPayeesViewPrivate : public KMyMoneyViewBasePrivate
 
 public:
   explicit KPayeesViewPrivate(KPayeesView *qq)
-    : KMyMoneyViewBasePrivate()
-    , q_ptr(qq)
+    : KMyMoneyViewBasePrivate(qq)
     , ui(new Ui::KPayeesView)
     , m_transactionFilter (nullptr)
     , m_contact(nullptr)
@@ -642,7 +641,6 @@ public:
     ui->m_updateButton->setEnabled(dirty);
   }
 
-  KPayeesView*        q_ptr;
   Ui::KPayeesView*    ui;
   LedgerPayeeFilter*  m_transactionFilter;
 

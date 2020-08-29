@@ -39,10 +39,16 @@
 #include <mymoneysecurity.h>
 #include <mymoneyutils.h>
 
+class KMyMoneyViewBase;
 class KMyMoneyViewBasePrivate
 {
 public:
-  virtual ~KMyMoneyViewBasePrivate(){}
+
+  explicit KMyMoneyViewBasePrivate(KMyMoneyViewBase* parent)
+  : q_ptr(parent)
+  {}
+
+  virtual ~KMyMoneyViewBasePrivate() {}
 
    /**
    * @brief Sets label text and font
@@ -78,7 +84,8 @@ public:
     return formatViewLabelValue(value, scheme);
   }
 
-  bool m_needsRefresh;
+  bool                  m_needsRefresh;
+  KMyMoneyViewBase*     q_ptr;
 };
 
 #endif

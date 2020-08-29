@@ -65,7 +65,7 @@ class KAccountsViewPrivate : public KMyMoneyViewBasePrivate
 
 public:
   explicit KAccountsViewPrivate(KAccountsView *qq)
-    : q_ptr(qq)
+    : KMyMoneyViewBasePrivate(qq)
     , ui(new Ui::KAccountsView)
     , m_haveUnusedCategories(false)
     , m_onlinePlugins(nullptr)
@@ -391,7 +391,6 @@ public:
     KMyMoneyUtils::showStatementImportResult(MyMoneyStatementReader::resultMessages(), processedAccounts);
   }
 
-  KAccountsView       *q_ptr;
   Ui::KAccountsView   *ui;
   bool                m_haveUnusedCategories;
   MyMoneyAccount      m_currentAccount;

@@ -56,13 +56,12 @@ class KOnlineJobOutboxViewPrivate : public KMyMoneyViewBasePrivate
   Q_DECLARE_PUBLIC(KOnlineJobOutboxView)
 
 public:
-  explicit KOnlineJobOutboxViewPrivate(KOnlineJobOutboxView *qq) :
-    KMyMoneyViewBasePrivate(),
-    q_ptr(qq),
-    ui(new Ui::KOnlineJobOutboxView),
-    m_needLoad(true),
-    m_onlinePlugins(nullptr),
-    m_onlineJobModel(nullptr)
+  explicit KOnlineJobOutboxViewPrivate(KOnlineJobOutboxView *qq)
+    : KMyMoneyViewBasePrivate(qq)
+    , ui(new Ui::KOnlineJobOutboxView)
+    , m_needLoad(true)
+    , m_onlinePlugins(nullptr)
+    , m_onlineJobModel(nullptr)
   {
   }
 
@@ -144,7 +143,6 @@ public:
     transferForm->show();
   }
 
-  KOnlineJobOutboxView     *q_ptr;
   std::unique_ptr<Ui::KOnlineJobOutboxView> ui;
 
   /**

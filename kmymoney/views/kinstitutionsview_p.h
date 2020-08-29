@@ -47,7 +47,7 @@ class KInstitutionsViewPrivate : public KMyMoneyViewBasePrivate
 
 public:
   explicit KInstitutionsViewPrivate(KInstitutionsView *qq)
-    : q_ptr(qq)
+    : KMyMoneyViewBasePrivate(qq)
     , ui(new Ui::KInstitutionsView)
     , m_proxyModel(nullptr)
   {
@@ -101,7 +101,6 @@ public:
 #endif
   }
 
-  KInstitutionsView       *q_ptr;
   Ui::KInstitutionsView   *ui;
   MyMoneyInstitution      m_currentInstitution;
   AccountsProxyModel*     m_proxyModel;

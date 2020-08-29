@@ -484,15 +484,15 @@ class KReportsViewPrivate : public KMyMoneyViewBasePrivate
   Q_DECLARE_PUBLIC(KReportsView)
 
 public:
-  explicit KReportsViewPrivate(KReportsView *qq):
-    q_ptr(qq),
-    m_needLoad(true),
-    m_reportListView(nullptr),
-    m_reportTabWidget(nullptr),
-    m_listTab(nullptr),
-    m_listTabLayout(nullptr),
-    m_tocTreeWidget(nullptr),
-    m_columnsAlreadyAdjusted(false)
+  explicit KReportsViewPrivate(KReportsView *qq)
+    : KMyMoneyViewBasePrivate(qq)
+    , m_needLoad(true)
+    , m_reportListView(nullptr)
+    , m_reportTabWidget(nullptr)
+    , m_listTab(nullptr)
+    , m_listTabLayout(nullptr)
+    , m_tocTreeWidget(nullptr)
+    , m_columnsAlreadyAdjusted(false)
   {
   }
 
@@ -1483,8 +1483,6 @@ public:
   {
     m_columnsAlreadyAdjusted = adjusted;
   }
-
-  KReportsView       *q_ptr;
 
   /**
     * This member holds the load state of page

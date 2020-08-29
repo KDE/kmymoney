@@ -119,14 +119,13 @@ class KHomeViewPrivate : public KMyMoneyViewBasePrivate
   Q_DECLARE_PUBLIC(KHomeView)
 
 public:
-  explicit KHomeViewPrivate(KHomeView *qq) :
-    KMyMoneyViewBasePrivate(),
-    q_ptr(qq),
-    m_view(nullptr),
-    m_showAllSchedules(false),
-    m_needLoad(true),
-    m_netWorthGraphLastValidSize(400, 300),
-    m_scrollBarPos(0)
+  explicit KHomeViewPrivate(KHomeView *qq)
+    : KMyMoneyViewBasePrivate(qq)
+    , m_view(nullptr)
+    , m_showAllSchedules(false)
+    , m_needLoad(true)
+    , m_netWorthGraphLastValidSize(400, 300)
+    , m_scrollBarPos(0)
   {
   }
 
@@ -1830,8 +1829,6 @@ public:
     m_html += "</div></div>";
   }
 
-
-  KHomeView     *q_ptr;
 
   /**
    * daily balances of an account

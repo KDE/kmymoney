@@ -49,7 +49,7 @@ class KCategoriesViewPrivate : public KMyMoneyViewBasePrivate
 
 public:
   explicit KCategoriesViewPrivate(KCategoriesView *qq)
-    : q_ptr(qq)
+    : KMyMoneyViewBasePrivate(qq)
     , ui(new Ui::KCategoriesView)
     , m_haveUnusedCategories(false)
     , m_proxyModel(nullptr)
@@ -106,7 +106,6 @@ public:
 #endif
   }
 
-  KCategoriesView       *q_ptr;
   Ui::KCategoriesView   *ui;
   bool                  m_haveUnusedCategories;
   MyMoneyAccount        m_currentCategory;

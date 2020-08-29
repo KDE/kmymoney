@@ -83,18 +83,17 @@ class KScheduledViewPrivate : public KMyMoneyViewBasePrivate
   Q_DECLARE_PUBLIC(KScheduledView)
 
 public:
-  explicit KScheduledViewPrivate(KScheduledView *qq) :
-    KMyMoneyViewBasePrivate(),
-    q_ptr(qq),
-    ui(new Ui::KScheduledView),
-    m_kaccPopup(nullptr),
-    m_openBills(true),
-    m_openDeposits(true),
-    m_openTransfers(true),
-    m_openLoans(true),
-    m_needLoad(true),
-    m_searchWidget(nullptr),
-    m_balanceWarning(nullptr)
+  explicit KScheduledViewPrivate(KScheduledView *qq)
+    : KMyMoneyViewBasePrivate(qq)
+    , ui(new Ui::KScheduledView)
+    , m_kaccPopup(nullptr)
+    , m_openBills(true)
+    , m_openDeposits(true)
+    , m_openTransfers(true)
+    , m_openLoans(true)
+    , m_needLoad(true)
+    , m_searchWidget(nullptr)
+    , m_balanceWarning(nullptr)
   {
   }
 
@@ -660,7 +659,6 @@ public:
     }
   }
 
-  KScheduledView      *q_ptr;
   Ui::KScheduledView  *ui;
   /// The selected schedule id in the list view.
   QMenu *m_kaccPopup;

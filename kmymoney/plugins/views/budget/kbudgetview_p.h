@@ -68,8 +68,7 @@ class KBudgetViewPrivate : public KMyMoneyViewBasePrivate
 
 public:
   explicit KBudgetViewPrivate(KBudgetView *qq)
-    : KMyMoneyViewBasePrivate()
-    , q_ptr(qq)
+    : KMyMoneyViewBasePrivate(qq)
     , ui(new Ui::KBudgetView)
     , m_budgetProxyModel(nullptr)
   {
@@ -251,7 +250,6 @@ public:
     return rc;
   }
 
-  KBudgetView*          q_ptr;
   Ui::KBudgetView*      ui;
   BudgetViewProxyModel* m_budgetProxyModel;
 

@@ -60,15 +60,15 @@ class SimpleLedgerViewPrivate : public KMyMoneyViewBasePrivate
 
 public:
   explicit SimpleLedgerViewPrivate(SimpleLedgerView* qq)
-  : q_ptr(qq)
-  , ui(new Ui_SimpleLedgerView)
-  , accountsModel(nullptr)
-  , newTabWidget(nullptr)
-  , webSiteButton(nullptr)
-  , accountCombo(nullptr)
-  , lastIdx(-1)
-  , inModelUpdate(false)
-  , m_needInit(true)
+    : KMyMoneyViewBasePrivate(qq)
+    , ui(new Ui_SimpleLedgerView)
+    , accountsModel(nullptr)
+    , newTabWidget(nullptr)
+    , webSiteButton(nullptr)
+    , accountCombo(nullptr)
+    , lastIdx(-1)
+    , inModelUpdate(false)
+    , m_needInit(true)
   {}
 
   ~SimpleLedgerViewPrivate()
@@ -131,7 +131,6 @@ public:
     q->openLedgersAfterOpen();
   }
 
-  SimpleLedgerView*             q_ptr;
   Ui_SimpleLedgerView*          ui;
   AccountNamesFilterProxyModel* accountsModel;
   QWidget*                      newTabWidget;

@@ -226,36 +226,36 @@ class KGlobalLedgerViewPrivate : public KMyMoneyViewBasePrivate
   Q_DECLARE_PUBLIC(KGlobalLedgerView)
 
 public:
-  explicit KGlobalLedgerViewPrivate(KGlobalLedgerView *qq) :
-    q_ptr(qq),
-    m_mousePressFilter(0),
-    m_registerSearchLine(0),
-    m_precision(2),
-    m_recursion(false),
-    m_showDetails(false),
-    m_action(eWidgets::eRegister::Action::None),
-    m_filterProxyModel(0),
-    m_accountComboBox(0),
-    m_balanceIsApproximated(false),
-    m_toolbarFrame(nullptr),
-    m_registerFrame(nullptr),
-    m_buttonFrame(nullptr),
-    m_formFrame(nullptr),
-    m_summaryFrame(nullptr),
-    m_register(nullptr),
-    m_buttonbar(nullptr),
-    m_leftSummaryLabel(nullptr),
-    m_centerSummaryLabel(nullptr),
-    m_rightSummaryLabel(nullptr),
-    m_form(nullptr),
-    m_needLoad(true),
-    m_newAccountLoaded(true),
-    m_inEditMode(false),
-    m_transactionEditor(nullptr),
-    m_balanceWarning(nullptr),
-    m_moveToAccountSelector(nullptr),
-    m_endingBalanceDlg(nullptr),
-    m_searchDlg(nullptr)
+  explicit KGlobalLedgerViewPrivate(KGlobalLedgerView *qq)
+    : KMyMoneyViewBasePrivate(qq)
+    , m_mousePressFilter(0)
+    , m_registerSearchLine(0)
+    , m_precision(2)
+    , m_recursion(false)
+    , m_showDetails(false)
+    , m_action(eWidgets::eRegister::Action::None)
+    , m_filterProxyModel(0)
+    , m_accountComboBox(0)
+    , m_balanceIsApproximated(false)
+    , m_toolbarFrame(nullptr)
+    , m_registerFrame(nullptr)
+    , m_buttonFrame(nullptr)
+    , m_formFrame(nullptr)
+    , m_summaryFrame(nullptr)
+    , m_register(nullptr)
+    , m_buttonbar(nullptr)
+    , m_leftSummaryLabel(nullptr)
+    , m_centerSummaryLabel(nullptr)
+    , m_rightSummaryLabel(nullptr)
+    , m_form(nullptr)
+    , m_needLoad(true)
+    , m_newAccountLoaded(true)
+    , m_inEditMode(false)
+    , m_transactionEditor(nullptr)
+    , m_balanceWarning(nullptr)
+    , m_moveToAccountSelector(nullptr)
+    , m_endingBalanceDlg(nullptr)
+    , m_searchDlg(nullptr)
   {
   }
 
@@ -1590,7 +1590,6 @@ public:
     return result;
   }
 
-  KGlobalLedgerView   *q_ptr;
   MousePressFilter    *m_mousePressFilter;
   KMyMoneyRegister::RegisterSearchLineWidget* m_registerSearchLine;
 //  QString              m_reconciliationAccount;
