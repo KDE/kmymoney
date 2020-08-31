@@ -269,6 +269,10 @@ bool TransactionEditor::eventFilter(QObject* o, QEvent* e)
           if (k->modifiers() & Qt::KeypadModifier && o == haveWidget("number")) {
               QString num = m_account.value("lastNumberUsed");
               QString key = ".";
+              foreach(const QString &s, QStringList() << "." << "/" << "-") {
+                if (num.contains(s))
+                  key = s;
+              }
               QKeyEvent evt(e->type(),
                             Qt::Key_Period, 0, key,
                             k->isAutoRepeat(), k->count());
