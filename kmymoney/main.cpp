@@ -276,11 +276,12 @@ int runKMyMoney(QApplication &a, const QUrl &file, bool noFile)
     }
   }
 
+  // show the main window and force it to repaint
   kmymoney->show();
+  qApp->processEvents();
 
+  // now disable input and repaint again
   kmymoney->centralWidget()->setEnabled(false);
-
-  // force complete paint of widgets
   qApp->processEvents();
 
   if (!instantQuit) {
