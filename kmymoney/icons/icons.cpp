@@ -398,35 +398,25 @@ namespace Icons {
 
   KMM_ICONS_EXPORT void setUpMappings(const QString& themeName)
   {
+    IconSet themeIconSet;
+
+    if (themeName.contains(QStringLiteral("oxygen"), Qt::CaseInsensitive))
+      themeIconSet = IconSet::Oxygen;
+    else if (themeName.contains(QStringLiteral("tango"), Qt::CaseInsensitive))
+      themeIconSet = IconSet::Tango;
+    // default to breeze mappings
+    else
+      themeIconSet = IconSet::Breeze;
+
     for (auto iconDef = iconMappings.cbegin(); iconDef != iconMappings.cend(); ++iconDef) {
       const auto icon = iconDef.key();
-      for (auto mapping = iconDef.value().cbegin(); mapping != iconDef->cend(); ++mapping)
-      {
-        switch (mapping.key())
-        {
-          case (IconSet::Oxygen):
-            if (themeName.contains(QStringLiteral("oxygen"), Qt::CaseInsensitive)) {
-              sStandardIcons.insert(icon, mapping.value());
-              continue;
-            }
-            break;
-          case (IconSet::Tango):
-            if (themeName.contains(QStringLiteral("tango"), Qt::CaseInsensitive)) {
-              sStandardIcons.insert(icon, mapping.value());
-              continue;
-            }
-            break;
-          case (IconSet::Breeze):
-            if (themeName.contains(QStringLiteral("breeze"), Qt::CaseInsensitive)) {
-              sStandardIcons.insert(icon, mapping.value());
-              continue;
-            }
-            break;
-          case (IconSet::Common):
-            sStandardIcons.insert(icon, mapping.value());
-            break;
-        }
-      }
+      auto name = iconDef.value().value(themeIconSet);
+
+      // get common mapping if theme-specific does not exist
+      if (name.isEmpty())
+        name = iconDef.value().value(IconSet::Common);
+
+      sStandardIcons.insert(icon, name);
     }
   }
 
