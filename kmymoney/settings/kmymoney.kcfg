@@ -72,10 +72,6 @@
    <min>0</min>
    <max>999</max>
   </entry>
-  <entry name="CopyTypeToNr" type="Bool">
-   <label>Insert transaction type into No. field for new transactions</label>
-   <default>false</default>
-  </entry>
   <entry name="FocusChangeIsEnter" type="Bool">
    <label>Keep changes when selecting a different transaction/split</label>
    <default>false</default>
