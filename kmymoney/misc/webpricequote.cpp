@@ -623,6 +623,30 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
                                               "%d.%m.%y" // dateformat
                                               );
 
+  // Finanztreff for fonds supplied by Pierre Metzner
+  result["Finanztreff"] = WebPriceQuoteSource("Finanztreff - Fonds",
+                                              "http://fonds.finanztreff.de/fonds_einzelkurs_uebersicht.htn?i=%1",
+                                              "",
+                                              QString(),  // webIDRegExp
+                                              WebPriceQuoteSource::identifyBy::IdentificationNumber,
+                                              "<td class="fade">\D*([0-9]+,\d+)", // priceregexp
+                                              "Zeit:.(\d+\D+\d+\D+\d+)", // dateregexp
+                                              "%d.%m.%y" // dateformat
+                                              true // skip HTML stripping
+                                              );
+
+  // Börse Berlin supplied by Pierre Metzner
+  result["Börse Berlin"] = WebPriceQuoteSource("Börse Berlin",
+                                              "https://www.boerse-berlin.com/index.php/Funds?isin=%1",
+                                              "",
+                                              QString(),  // webIDRegExp
+                                              WebPriceQuoteSource::identifyBy::IdentificationNumber,
+                                              "_last">([0-9.]+.\d+)", // priceregexp
+                                              "_dateTime">(\d+\D+\d+\D+\d+)", // dateregexp
+                                              "%d %m %y" // dateformat
+                                              true // skip HTML stripping
+                                              );
+
   // First revision by Michael Zimmerman
   // Update on 2017-06 by Łukasz Wojniłowicz
   result["boerseonlineaktien"] = WebPriceQuoteSource("Börse Online - Aktien",
