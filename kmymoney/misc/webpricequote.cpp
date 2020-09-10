@@ -629,8 +629,8 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
                                               "",
                                               QString(),  // webIDRegExp
                                               WebPriceQuoteSource::identifyBy::IdentificationNumber,
-                                              "\"fade\">\D*([0-9\.]+,\d+)", // priceregexp
-                                              "Zeit:.(\d+\D+\d+\D+\d+)", // dateregexp
+                                              "\\\"fade\\\">\\D*([0-9\\.]+,\\d+)", // priceregexp
+                                              "Zeit:.(\\d+\\D+\\d+\\D+\\d+)", // dateregexp
                                               "%d.%m.%y" // dateformat
                                               true // skip HTML stripping
                                               );
@@ -641,8 +641,8 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
                                               "",
                                               QString(),  // webIDRegExp
                                               WebPriceQuoteSource::identifyBy::IdentificationNumber,
-                                              "_last\">([0-9,]+\.\d+)", // priceregexp
-                                              "_dateTime">(\d+\D+\d+\D+\d+)", // dateregexp
+                                              "_last\">([0-9,]+\\.\\d+)", // priceregexp
+                                              "_dateTime\">(\\d+\\D+\\d+\\D+\\d+)", // dateregexp
                                               "%d %m %y" // dateformat
                                               true // skip HTML stripping
                                               );
