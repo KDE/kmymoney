@@ -1,5 +1,6 @@
 cmake-build*/
 build*/
+vcpkg_installed
 .svn/
 *.orig
 *.rej
