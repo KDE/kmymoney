@@ -42,10 +42,20 @@ uint platformTools::processId()
     return _getpid();
 }
 
+static struct lconv* localeconv_with_init()
+{
+  static bool needInit = true;
+  if (needInit) {
+    setlocale(LC_ALL, ".UTF8");
+    needInit = false;
+  }
+  return localeconv();
+}
+
 platformTools::currencySymbolPosition_t platformTools::currencySymbolPosition(bool negativeValues)
 {
   platformTools::currencySymbolPosition_t  rc = platformTools::AfterQuantityMoneyWithSpace;
-  struct lconv* lc = localeconv();
+  struct lconv* lc = localeconv_with_init();
   if (lc) {
     const char precedes = negativeValues ? lc->n_cs_precedes : lc->p_cs_precedes;
     const char space = negativeValues ? lc->n_sep_by_space : lc->p_sep_by_space;
@@ -61,7 +71,7 @@ platformTools::currencySymbolPosition_t platformTools::currencySymbolPosition(bo
 platformTools::currencySignPosition_t platformTools::currencySignPosition(bool negativeValues)
 {
   platformTools::currencySignPosition_t rc = platformTools::PreceedQuantityAndSymbol;
-  struct lconv* lc = localeconv();
+  struct lconv* lc = localeconv_with_init();
   if (lc) {
     rc = static_cast<platformTools::currencySignPosition_t>(negativeValues ? lc->n_sign_posn : lc->p_sign_posn);
   }
