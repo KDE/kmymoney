@@ -131,8 +131,9 @@ void KInstitutionsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)
 void KInstitutionsView::slotNewInstitution()
 {
   Q_D(KInstitutionsView);
-  d->m_currentInstitution.clearId();
-  QPointer<KNewBankDlg> dlg = new KNewBankDlg(d->m_currentInstitution);
+  MyMoneyInstitution institution;
+
+  QPointer<KNewBankDlg> dlg = new KNewBankDlg(institution);
   if (dlg->exec() == QDialog::Accepted && dlg != 0) {
     d->m_currentInstitution = dlg->institution();
 
