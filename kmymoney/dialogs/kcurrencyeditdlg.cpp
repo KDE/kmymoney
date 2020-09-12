@@ -40,6 +40,7 @@
 
 #include <KTreeWidgetSearchLineWidget>
 #include <KMessageBox>
+#include <KLocalizedString>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -362,23 +363,18 @@ void KCurrencyEditDlg::slotUpdateCurrency(QTreeWidgetItem* citem, QTreeWidgetIte
 {
   Q_D(KCurrencyEditDlg);
   Q_UNUSED(pitem)
-  //if there is no current item selected, exit
+  // if there is no current item selected, exit
   if (!d->ui->m_currencyList->currentItem() || citem != d->ui->m_currencyList->currentItem())
     return;
 
-  //verify that the stored currency id is not empty and the edited fields are not empty either
-  if (!d->m_currentCurrency.id().isEmpty()
-      && !d->ui->m_currencyList->currentItem()->text(2).isEmpty()
-      && !d->ui->m_currencyList->currentItem()->text(0).isEmpty()) {
-    //check that either the name or the id have changed
-    if (d->ui->m_currencyList->currentItem()->text(2) != d->m_currentCurrency.tradingSymbol()
-        || d->ui->m_currencyList->currentItem()->text(0) != d->m_currentCurrency.name()) {
-      //update the name and the id
-      d->m_currentCurrency.setName(d->ui->m_currencyList->currentItem()->text(0));
-      d->m_currentCurrency.setTradingSymbol(d->ui->m_currencyList->currentItem()->text(2));
+  const auto newName = d->ui->m_currencyList->currentItem()->text(0);
+  const auto newSymbol = d->ui->m_currencyList->currentItem()->text(2);
 
-      d->updateCurrency(d->m_currentCurrency.id(), d->m_currentCurrency.name(), d->m_currentCurrency.tradingSymbol());
-    }
+  // verify that the stored currency id is not empty and the edited fields are not empty either
+  if (!d->m_currentCurrency.id().isEmpty()
+      && !newSymbol.isEmpty()
+      && !newName.isEmpty()) {
+    d->updateCurrency(d->m_currentCurrency.id(), newName, newSymbol);
   }
 }
 
@@ -603,7 +599,7 @@ void KCurrencyEditDlg::slotRenameCurrency()
   Q_D(KCurrencyEditDlg);
   QTreeWidgetItemIterator it_l(d->ui->m_currencyList, QTreeWidgetItemIterator::Selected);
   QTreeWidgetItem* it_v;
-  if ((it_v = *it_l) != 0) {
+  if ((it_v = *it_l) != nullptr) {
     d->ui->m_currencyList->editItem(it_v, 0);
   }
 }
