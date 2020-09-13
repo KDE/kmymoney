@@ -1,5 +1,6 @@
 /*
  * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -37,18 +38,21 @@ class KCurrencyEditorDlg;
 }
 
 class MyMoneySecurity;
+class KCurrencyEditorDlgPrivate;
 class KMM_BASE_DIALOGS_EXPORT KCurrencyEditorDlg : public QDialog
 {
+  Q_DISABLE_COPY(KCurrencyEditorDlg)
+
   Q_OBJECT
 public:
-  explicit KCurrencyEditorDlg(MyMoneySecurity &currency, QWidget *parent = nullptr);
+  explicit KCurrencyEditorDlg(const MyMoneySecurity &currency, QWidget *parent = nullptr);
   ~KCurrencyEditorDlg();
 
-  Ui::KCurrencyEditorDlg*   ui;
+  MyMoneySecurity currency() const;
 
-protected Q_SLOTS:
-  void loadCurrency(MyMoneySecurity& currency);
-
+private:
+  KCurrencyEditorDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KCurrencyEditorDlg)
 };
 
 #endif
