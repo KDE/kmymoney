@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2004-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2009-2010  Alvaro Soliverez <asoliverez@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
@@ -47,8 +47,6 @@
 // Project Includes
 
 #include "ui_kcurrencyeditdlg.h"
-#include "ui_kcurrencyeditordlg.h"
-#include "ui_kavailablecurrencydlg.h"
 
 #include "mymoneyexception.h"
 #include "mymoneysecurity.h"
@@ -189,6 +187,48 @@ public:
     }
   }
 
+  /**
+   * Edit or create a currency
+   *
+   * @param currency reference to currency object
+   *
+   * @returns @c true in case the operation was successful @c false otherwise
+   * @note @a currency will be updated with the modified values
+   */
+  bool editCurrency(MyMoneySecurity& currency)
+  {
+    QScopedPointer<KCurrencyEditorDlg> currencyEditorDlg(new KCurrencyEditorDlg(currency, q_ptr));
+    bool rc = true;
+    do {
+      if (currencyEditorDlg->exec() != QDialog::Rejected) {
+        auto file = MyMoneyFile::instance();
+        MyMoneyFileTransaction ft;
+        try {
+          if (currency.id().isEmpty()) {
+            file->addCurrency(currencyEditorDlg->currency());
+          } else {
+            file->modifyCurrency(currencyEditorDlg->currency());
+          }
+          ft.commit();
+          // if the modification worked, then we copy the data
+          // to inform caller
+          currency = currencyEditorDlg->currency();
+
+        } catch (const MyMoneyException &e) {
+          if (currency.id().isEmpty()) {
+            KMessageBox::sorry(q_ptr, i18n("Cannot create new currency. %1", QString::fromLatin1(e.what())), i18n("New currency"));
+          } else {
+            KMessageBox::sorry(q_ptr, i18n("Cannot modify currency. %1", QString::fromLatin1(e.what())), i18n("Edit currency"));
+          }
+        }
+      } else {
+        rc = false;   // aborted by user
+      }
+    } while(false);
+
+    return rc;
+  }
+
   KCurrencyEditDlg      *q_ptr;
   Ui::KCurrencyEditDlg  *ui;
 
@@ -214,6 +254,7 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
   d->ui->verticalLayout->insertWidget(0, d->m_searchWidget);
   d->ui->m_currencyList->setItemDelegate(new KCurrencyEditDelegate(d->ui->m_currencyList));
   d->ui->m_closeButton->setIcon(Icons::get(Icon::DialogClose));
+  d->ui->m_newCurrencyButton->setIcon(Icons::get(Icon::DocumentNew));
   d->ui->m_editCurrencyButton->setIcon(Icons::get(Icon::DocumentEdit));
   d->ui->m_selectBaseCurrencyButton->setIcon(Icons::get(Icon::KMyMoney));
 
@@ -224,6 +265,7 @@ KCurrencyEditDlg::KCurrencyEditDlg(QWidget *parent) :
 
   connect(d->ui->m_selectBaseCurrencyButton, &QAbstractButton::clicked, this, &KCurrencyEditDlg::slotSelectBaseCurrency);
   connect(d->ui->m_addCurrencyButton, &QAbstractButton::clicked, this, &KCurrencyEditDlg::slotAddCurrency);
+  connect(d->ui->m_newCurrencyButton, &QAbstractButton::clicked, this, &KCurrencyEditDlg::slotNewCurrency);
   connect(d->ui->m_removeCurrencyButton, &QAbstractButton::clicked, this, &KCurrencyEditDlg::slotRemoveCurrency);
   connect(d->ui->m_editCurrencyButton, &QAbstractButton::clicked, this, &KCurrencyEditDlg::slotEditCurrency);
   connect(d->ui->m_removeUnusedCurrencyButton, &QAbstractButton::clicked, this, &KCurrencyEditDlg::slotRemoveUnusedCurrency);
@@ -470,7 +512,7 @@ void KCurrencyEditDlg::slotShowCurrencyMenu(const QPoint& p)
     };
 
     const QVector<actionInfo> actionInfos {
-      {eMenu::Action::NewCurrency,      &KCurrencyEditDlg::slotNewCurrency,     i18n("New currency"),            Icon::ListAdd,     true},
+      {eMenu::Action::NewCurrency,      &KCurrencyEditDlg::slotNewCurrency,     i18n("New currency"),            Icon::DocumentNew, true},
       {eMenu::Action::RenameCurrency,   &KCurrencyEditDlg::slotRenameCurrency,  i18n("Rename currency"),         Icon::EditRename,  cond1},
       {eMenu::Action::DeleteCurrency,   &KCurrencyEditDlg::slotDeleteCurrency,  i18n("Delete currency"),         Icon::EditDelete,  cond2},
       {eMenu::Action::SetBaseCurrency,  &KCurrencyEditDlg::slotSetBaseCurrency, i18n("Select as base currency"), Icon::KMyMoney,    cond3}
@@ -563,36 +605,23 @@ void KCurrencyEditDlg::slotRemoveUnusedCurrency()
 void KCurrencyEditDlg::slotEditCurrency()
 {
   Q_D(KCurrencyEditDlg);
-  MyMoneySecurity currency = d->ui->m_currencyList->currentItem()->data(0, Qt::UserRole).value<MyMoneySecurity>();
-  d->m_currencyEditorDlg = new KCurrencyEditorDlg(currency);                                   // create new dialog for editing currency
-  if (d->m_currencyEditorDlg->exec() != QDialog::Rejected) {
-    auto file = MyMoneyFile::instance();
-    MyMoneyFileTransaction ft;
-    currency.setPricePrecision(d->m_currencyEditorDlg->ui->m_pricePrecision->value());
-    try {
-      file->modifyCurrency(currency);
-      ft.commit();
-    } catch (const MyMoneyException &e) {
-      qDebug("%s", e.what());
-    }
-  }
-  delete d->m_currencyEditorDlg;
+  auto currency = d->ui->m_currencyList->currentItem()->data(0, Qt::UserRole).value<MyMoneySecurity>();
+  d->editCurrency(currency);
+
+  // update the model data
+  const auto item = d->ui->m_currencyList->currentItem();
+  item->setData(0, Qt::UserRole, QVariant::fromValue(currency));
+  item->setText(0, currency.name());
+  item->setText(1, currency.id());
+  item->setText(2, currency.tradingSymbol());
 }
 
 void KCurrencyEditDlg::slotNewCurrency()
 {
-  QString sid = QInputDialog::getText(0, i18n("New currency"), i18n("Enter ISO 4217 code for the new currency"));
-  if (!sid.isEmpty()) {
-    QString id(sid);
-    MyMoneySecurity currency(id, i18n("New currency"));
-    MyMoneyFileTransaction ft;
-    try {
-      MyMoneyFile::instance()->addCurrency(currency);
-      ft.commit();
-    } catch (const MyMoneyException &e) {
-      KMessageBox::sorry(this, i18n("Cannot create new currency. %1", QString::fromLatin1(e.what())), i18n("New currency"));
-    }
-    slotSelectCurrency(id);
+  Q_D(KCurrencyEditDlg);
+  MyMoneySecurity currency;
+  if (d->editCurrency(currency)) {
+    slotSelectCurrency(currency.id());
   }
 }
 

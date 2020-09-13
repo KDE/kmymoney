@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>226</width>
-    <height>206</height>
+    <width>303</width>
+    <height>314</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,90 +20,156 @@
    <item>
     <layout class="QFormLayout" name="formLayout">
      <item row="0" column="0">
-      <widget class="QLabel" name="lblName">
+      <widget class="QLabel" name="lblIsoCode">
        <property name="text">
-        <string>Name:</string>
+        <string>ISO Code</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
+     <item row="2" column="0">
       <widget class="QLabel" name="lblSymbol">
        <property name="text">
         <string>Symbol:</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
+     <item row="3" column="0">
       <widget class="QLabel" name="lblCashFraction">
+       <property name="text">
+        <string>Smallest account unit:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="lblAccountFraction">
        <property name="text">
         <string>Smallest cash unit:</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="lblAccountFraction">
-       <property name="text">
-        <string>Smallest money unit:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
+     <item row="5" column="0">
       <widget class="QLabel" name="lblRemainder">
        <property name="text">
-        <string>Remainder:</string>
+        <string>Rounding method</string>
        </property>
       </widget>
      </item>
-     <item row="5" column="0">
+     <item row="6" column="0">
       <widget class="QLabel" name="lblpricePrecision">
        <property name="text">
         <string>Price precision:</string>
        </property>
       </widget>
      </item>
-     <item row="5" column="1">
-      <widget class="QSpinBox" name="m_pricePrecision">
+     <item row="6" column="1">
+      <widget class="QSpinBox" name="spbPricePrecision">
+       <property name="toolTip">
+        <string comment="@info:tooltip">Enter the price precision for this currency to be used for exchange rates.</string>
+       </property>
        <property name="minimum">
         <number>2</number>
        </property>
        <property name="maximum">
         <number>10</number>
        </property>
+       <property name="value">
+        <number>4</number>
+       </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="leName">
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblName">
        <property name="text">
-        <string>TextLabel</string>
+        <string>Name</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLabel" name="leSymbol">
-       <property name="text">
-        <string>TextLabel</string>
+      <widget class="QLineEdit" name="leName">
+       <property name="toolTip">
+        <string comment="@info:tooltip">Enter the name of the currency here (e.g. Euro)</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="leIsoCode">
+       <property name="toolTip">
+        <string comment="@info:tooltip">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter the ISO4217 code for the currency here (e.g. EUR for the Euro). This cannot be changed once the currency is created.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QLabel" name="leAccountFraction">
-       <property name="text">
-        <string>TextLabel</string>
+      <widget class="QLineEdit" name="leSymbol">
+       <property name="toolTip">
+        <string comment="@info:tooltip">Enter the monetary symbol of the currency here (e.g. € for the Euro)</string>
        </property>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QLabel" name="leCashFraction">
-       <property name="text">
-        <string>TextLabel</string>
+      <widget class="QLineEdit" name="leAccountFraction">
+       <property name="toolTip">
+        <string comment="@info:tooltip">Enter the smallest fraction of the currency used for bank accounts here. This cannot be changed once the currency is created.</string>
        </property>
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="QLabel" name="leRoundingMethod">
-       <property name="text">
-        <string>TextLabel</string>
+      <widget class="QLineEdit" name="leCashFraction">
+       <property name="toolTip">
+        <string comment="@info:tooltip">Enter the smallest fraction of the currency used for cash accounts here. This cannot be changed once the currency is created.</string>
        </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QComboBox" name="comboRoundingMethod">
+       <property name="toolTip">
+        <string comment="@info:tooltip">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter the rounding method used for this currency.  See &lt;span style=&quot; font-weight:600;&quot;&gt;What's this&lt;/span&gt; for more details.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="whatsThis">
+        <string comment="@info:whatsthis">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;RoundNever&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Don't do any rounding, simply truncate and print a warning in case of a remainder. Otherwise the same as RoundTrunc.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;RoundFloor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Round to the largest integral value not greater than the value. E.g. 0.5 -&amp;gt; 0.0 and -0.5 -&amp;gt; -1.0&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;RoundCeil&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Round to the smallest integral value not less than the value. E.g. 0.5 -&amp;gt; 1.0 and -0.5 -&amp;gt; -0.0&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;RoundTruncate&lt;/span&gt;&lt;/p&gt;&lt;p&gt;No rounding, simply truncate any fraction&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;RoundPromote&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Use RoundCeil for positive and RoundFloor for negative values. E.g. 0.5 -&amp;gt; 1.0 and -0.5 -&amp;gt; -1.0&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;RoundHalfDown&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Round up or down with the following constraints: 0.1 .. 0.5 -&amp;gt; 0.0 and 0.6 .. 0.9 -&amp;gt; 1.0&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;RoundHalfUp&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Round up or down with the following constraints: 0.1 .. 0.4 -&amp;gt; 0.0 and 0.5 .. 0.9 -&amp;gt; 1.0&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;RoundRound&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Use RoundHalfDown for 0.1 .. 0.4 and RoundHalfUp for 0.6 .. 0.9. Use RoundHalfUp for 0.5 in case the resulting numerator is odd, RoundHalfDown in case the resulting numerator is even. E.g. 0.5 -&amp;gt; 0.0 and 1.5 -&amp;gt; 2.0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="currentIndex">
+        <number>7</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Never</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Floor</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Ceil</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Truncate</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Promote</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Half Down</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Half Up</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Round</string>
+        </property>
+       </item>
       </widget>
      </item>
     </layout>
@@ -118,6 +184,15 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>leIsoCode</tabstop>
+  <tabstop>leName</tabstop>
+  <tabstop>leSymbol</tabstop>
+  <tabstop>leAccountFraction</tabstop>
+  <tabstop>leCashFraction</tabstop>
+  <tabstop>comboRoundingMethod</tabstop>
+  <tabstop>spbPricePrecision</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
