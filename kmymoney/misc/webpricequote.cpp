@@ -615,7 +615,7 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
   // Finanztreff (replaces VWD.DE) supplied by Michael Zimmerman
   result["Finanztreff"] = WebPriceQuoteSource("Finanztreff",
                                               "http://finanztreff.de/kurse_einzelkurs_detail.htn?u=100&i=%1",
-                                              "",
+                                              QString(),
                                               QString(),  // webIDRegExp
                                               WebPriceQuoteSource::identifyBy::IdentificationNumber,
                                               "([0-9]+,\\d+).+Gattung:Fonds", // priceregexp
@@ -625,25 +625,25 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
 
   // Finanztreff for fonds supplied by Pierre Metzner
   result["FinanztreffFonds"] = WebPriceQuoteSource("Finanztreff - Fonds",
-                                              "http://fonds.finanztreff.de/fonds_einzelkurs_uebersicht.htn?i=%1",
-                                              "",
+                                              "https://fonds.finanztreff.de/fonds_einzelkurs_uebersicht.htn?i=%1",
+                                              QString(),
                                               QString(),  // webIDRegExp
                                               WebPriceQuoteSource::identifyBy::IdentificationNumber,
-                                              "\\\"fade\\\">\\D*([0-9\\.]+,\\d+)", // priceregexp
+                                              "\"fade\">\\D*([0-9\\.]+,\\d+)", // priceregexp
                                               "Zeit:.(\\d+\\D+\\d+\\D+\\d+)", // dateregexp
-                                              "%d.%m.%y" // dateformat
+                                              "%d.%m.%y", // dateformat
                                               true // skip HTML stripping
                                               );
 
   // Börse Berlin supplied by Pierre Metzner
-  result["Boerse Berlin"] = WebPriceQuoteSource("Börse Berlin",
+  result["Boerse Berlin"] = WebPriceQuoteSource(QString::fromUtf8("Börse Berlin"),
                                               "https://www.boerse-berlin.com/index.php/Funds?isin=%1",
-                                              "",
+                                              QString(),
                                               QString(),  // webIDRegExp
                                               WebPriceQuoteSource::identifyBy::IdentificationNumber,
                                               "_last\">([0-9,]+\\.\\d+)", // priceregexp
                                               "_dateTime\">(\\d+\\D+\\d+\\D+\\d+)", // dateregexp
-                                              "%d %m %y" // dateformat
+                                              "%d %m %y", // dateformat
                                               true // skip HTML stripping
                                               );
 
@@ -680,7 +680,7 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
 
   result["Wallstreet-Online.DE (Default)"] = WebPriceQuoteSource("Wallstreet-Online.DE (Default)",
                                                                  "http://www.wallstreet-online.de/si/?k=%1&spid=ws",
-                                                                 "",
+                                                                 QString(),
                                                                  "Symbol:(\\w+)",  // webIDRegExp
                                                                  WebPriceQuoteSource::identifyBy::Symbol,
                                                                  "Letzter Kurs: ([0-9.]+,\\d+)", // priceregexp
