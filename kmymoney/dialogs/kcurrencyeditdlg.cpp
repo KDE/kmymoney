@@ -510,7 +510,7 @@ void KCurrencyEditDlg::slotAddCurrency()
     auto file = MyMoneyFile::instance();
     QMap<MyMoneySecurity, MyMoneyPrice> ancientCurrencies = file->ancientCurrencies();
     MyMoneyFileTransaction ft;
-    QList<QTreeWidgetItem *> currencyRows = d->m_availableCurrencyDlg->ui->m_currencyList->selectedItems(); // get selected currencies from new dialog
+    QList<QTreeWidgetItem *> currencyRows = d->m_availableCurrencyDlg->selectedItems(); // get selected currencies from new dialog
     foreach (auto currencyRow, currencyRows) {
       MyMoneySecurity currency = currencyRow->data(0, Qt::UserRole).value<MyMoneySecurity>();
       file->addCurrency(currency);
