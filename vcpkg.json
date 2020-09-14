@@ -11,8 +11,17 @@
     "kf5coreaddons",
     "kf5config",
     "kf5completion",
+    "kf5kcmutils",
+    "kf5configwidgets",
     "kf5itemmodels",
     "kf5itemviews",
-    "kf5i18n"
+    "kf5i18n",
+    "kf5service",
+    "kf5wallet",
+    "kf5iconthemes",
+    "kf5xmlgui",
+    "kf5textwidgets",
+    "kf5notifications",
+    "kf5kio"
   ]
 }
