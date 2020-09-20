@@ -35,6 +35,7 @@
 
 #include <QRegExp>
 #include <QDate>
+#include <QLocale>
 
 QString MyMoneyUtils::getFileExtension(QString strFileName)
 {
@@ -148,3 +149,14 @@ void MyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, con
   }
 }
 
+QString MyMoneyUtils::formatDate(const QDate& date)
+{
+  static QString format;
+  if (format.isEmpty()) {
+     format = QLocale().dateFormat(QLocale::ShortFormat);
+    if (!format.contains(QLatin1String("yyyy")) && format.contains(QLatin1String("yy"))) {
+      format.replace(QLatin1String("yy"), QLatin1String("yyyy"));
+    }
+  }
+  return date.toString(format);
+}
