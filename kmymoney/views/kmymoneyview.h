@@ -235,27 +235,12 @@ public Q_SLOTS:
   void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent);
   void slotSelectByVariant(const QVariantList& variant, eView::Intent intent);
   void slotCustomActionRequested(View view, eView::Action action);
+  void slotSettingsChanged();
 
   void slotFileOpened();
   void slotFileClosed();
 
 private Q_SLOTS:
-  /**
-    * This slots switches the view to the specific page
-    */
-  void slotShowHomePage();
-  void slotShowInstitutionsPage();
-  void slotShowAccountsPage();
-  void slotShowSchedulesPage();
-  void slotShowCategoriesPage();
-  void slotShowTagsPage();
-  void slotShowPayeesPage();
-  void slotShowLedgersPage();
-  void slotShowInvestmentsPage();
-  void slotShowReportsPage();
-  void slotShowBudgetPage();
-  void slotShowForecastPage();
-  void slotShowOutboxPage();
   void switchToDefaultView();
 
   /**
@@ -322,6 +307,8 @@ Q_SIGNALS:
     * by plugins to get information about changes.
     */
   void accountSelected(const MyMoneyAccount& account);
+
+  void settingsChanged();
 };
 
 #endif

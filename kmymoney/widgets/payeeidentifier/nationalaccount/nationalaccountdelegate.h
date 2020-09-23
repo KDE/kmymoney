@@ -18,14 +18,14 @@
 #ifndef NATIONALACCOUNTDELEGATE_H
 #define NATIONALACCOUNTDELEGATE_H
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 #include <QStyledItemDelegate>
 
 #include "payeeidentifier/nationalaccount/nationalaccount.h"
 #include "payeeidentifier/payeeidentifiertyped.h"
 
-class KMM_WIDGETS_EXPORT nationalAccountDelegate : public QStyledItemDelegate
+class KMM_BASE_WIDGETS_EXPORT nationalAccountDelegate : public QStyledItemDelegate
 {
   Q_OBJECT
 public:

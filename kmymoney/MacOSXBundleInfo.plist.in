@@ -18,8 +18,6 @@
         <string>${MACOSX_BUNDLE_GUI_IDENTIFIER}</string>
         <key>CFBundleInfoDictionaryVersion</key>
         <string>6.0</string>
-        <key>CFBundleLongVersionString</key>
-        <string>${MACOSX_BUNDLE_LONG_VERSION_STRING}</string>
         <key>CFBundleName</key>
         <string>${MACOSX_BUNDLE_BUNDLE_NAME}</string>
         <key>CFBundlePackageType</key>
@@ -30,6 +28,59 @@
         <string>????</string>
         <key>CFBundleVersion</key>
         <string>${MACOSX_BUNDLE_BUNDLE_VERSION}</string>
+        <key>CFBundleDocumentTypes</key>
+        <array>
+            <dict>
+                <key>CFBundleTypeName</key>
+                <string>${MACOSX_BUNDLE_DISPLAY_NAME} Document</string>
+                <key>CFBundleTypeExtensions</key>
+                <array>
+                    <string>kmy</string>
+                </array>
+                <key>CFBundleTypeIconFile</key>
+                <string>${MACOSX_BUNDLE_ICON_FILE}</string>
+                <key>CFBundleTypeRole</key>
+                <string>Editor</string>
+            </dict>
+            <dict>
+                <key>CFBundleTypeName</key>
+                <string>OFX Financial Statement</string>
+                <key>CFBundleTypeExtensions</key>
+                <array>
+                    <string>ofx</string>
+                    <string>qfx</string>
+                </array>
+                <key>CFBundleTypeIconFile</key>
+                <string>${MACOSX_BUNDLE_ICON_FILE}</string>
+                <key>CFBundleTypeRole</key>
+                <string>Viewer</string>
+            </dict>
+            <dict>
+                <key>CFBundleTypeName</key>
+                <string>QIF Financial Statement</string>
+                <key>CFBundleTypeExtensions</key>
+                <array>
+                    <string>qif</string>
+                </array>
+                <key>CFBundleTypeIconFile</key>
+                <string>${MACOSX_BUNDLE_ICON_FILE}</string>
+                <key>CFBundleTypeRole</key>
+                <string>Viewer</string>
+            </dict>
+           <dict>
+                <key>CFBundleTypeName</key>
+                <string>CSV Financial Statement</string>
+                <key>CFBundleTypeExtensions</key>
+                <array>
+                    <string>csv</string>
+                    <string>txt</string>
+                </array>
+                <key>CFBundleTypeIconFile</key>
+                <string>${MACOSX_BUNDLE_ICON_FILE}</string>
+                <key>CFBundleTypeRole</key>
+                <string>Viewer</string>
+            </dict>
+        </array>
         <key>CSResourcesFileMapped</key>
         <true/>
         <key>LSRequiresCarbon</key>
@@ -38,17 +89,24 @@
         <string>${MACOSX_BUNDLE_COPYRIGHT}</string>
         <key>LSMultipleInstancesProhibited</key>
         <true/>
-        <key>CFBundleDocumentTypes</key>
+        <key>NSRequiresAquaSystemAppearance</key>
+        <true/>
+        <key>UTExportedTypeDeclarations</key>
         <array>
             <dict>
-                <key>CFBundleTypeExtensions</key>
-                <array>
-                        <string>*</string>
-                </array>
-                <key>CFBundleTypeName</key>
-                <string>NSStringPboardType</string>
-                <key>CFBundleTypeRole</key>
-                <string>Editor</string>
+                <key>UTTypeIdentifier</key>
+                <string>org.kde.kmymoney</string>
+                <key>UTTypeTagSpecification</key>
+                <dict>
+                    <key>public.filename-extension</key>
+                    <array>
+                        <string>kmy</string>
+                    </array>
+                </dict>
+                <key>UTTypeDescription</key>
+                <string>${MACOSX_BUNDLE_DISPLAY_NAME} Document</string>
+                <key>UTTypeIconFile</key>
+                <string>${MACOSX_BUNDLE_ICON_FILE}</string>
             </dict>
         </array>
 </dict>

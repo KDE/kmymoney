@@ -24,9 +24,13 @@
 #include <QString>
 #include "kmm_mymoney_export.h"
 
+#include "mymoneyenums.h"
+
 class MyMoneyMoney;
 class MyMoneySecurity;
 class MyMoneyAccount;
+class MyMoneyTransaction;
+class MyMoneySplit;
 class QDate;
 class QString;
 
@@ -80,6 +84,9 @@ namespace MyMoneyUtils
   KMM_MYMONEY_EXPORT QString QStringEmpty(const QString&);
 
   KMM_MYMONEY_EXPORT unsigned long extractId(const QString& txt);
+
+  KMM_MYMONEY_EXPORT void dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, eMyMoney::Split::InvestmentTransactionType& transactionType);
+
 }
 
 #endif

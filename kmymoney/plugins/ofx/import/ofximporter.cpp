@@ -74,7 +74,7 @@ typedef enum  {
 class OFXImporter::Private
 {
 public:
-  Private() : m_valid(false), m_preferName(PreferId), m_uniqueIdSource(UniqueIdUnknown), m_walletIsOpen(false), m_invertAmount(false), m_statusDlg(0), m_wallet(0),
+  Private() : m_valid(false), m_preferName(PreferId), m_uniqueIdSource(UniqueIdUnknown), m_walletIsOpen(false), m_invertAmount(false), m_fixBuySellSignage(false), m_statusDlg(0), m_wallet(0),
               m_updateStartDate(QDate(1900,1,1)), m_timestampOffset(0) {}
 
   bool m_valid;
@@ -86,6 +86,7 @@ public:
   UniqueTransactionIdSource  m_uniqueIdSource;
   bool m_walletIsOpen;
   bool m_invertAmount;
+  bool m_fixBuySellSignage;
   QList<MyMoneyStatement> m_statementlist;
   QList<MyMoneyStatement::Security> m_securitylist;
   QString m_fatalerror;
@@ -185,6 +186,7 @@ void OFXImporter::slotImportFile()
   d->m_uniqueIdSource = static_cast<UniqueTransactionIdSource>(option->m_uniqueIdSource->currentIndex());
   d->m_timestampOffset = d->constructTimeOffset(option->m_timestampOffset, option->m_timestampOffsetSign);
   d->m_invertAmount = option->m_invertAmount->isChecked();
+  d->m_fixBuySellSignage = option->m_fixBuySellSignage->isChecked();
 
   if (url.isValid()) {
     const QString filename(url.toLocalFile());
@@ -359,8 +361,95 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
     }
   }
 
+  bool unhandledtype = false;
+  QString type;
+
+  if (data.invtransactiontype_valid) {
+    switch (data.invtransactiontype) {
+      case OFX_BUYDEBT:
+      case OFX_BUYMF:
+      case OFX_BUYOPT:
+      case OFX_BUYOTHER:
+      case OFX_BUYSTOCK:
+        t.m_eAction = eMyMoney::Transaction::Action::Buy;
+        break;
+      case OFX_REINVEST:
+        t.m_eAction = eMyMoney::Transaction::Action::ReinvestDividend;
+        break;
+      case OFX_SELLDEBT:
+      case OFX_SELLMF:
+      case OFX_SELLOPT:
+      case OFX_SELLOTHER:
+      case OFX_SELLSTOCK:
+        t.m_eAction = eMyMoney::Transaction::Action::Sell;
+        break;
+      case OFX_INCOME:
+        t.m_eAction = eMyMoney::Transaction::Action::CashDividend;
+        // NOTE: With CashDividend, the amount of the dividend should
+        // be in data.amount.  Since I've never seen an OFX file with
+        // cash dividends, this is an assumption on my part. (acejones)
+        break;
+
+        //
+        // These types are all not handled.  We will generate a warning for them.
+        //
+      case OFX_CLOSUREOPT:
+        unhandledtype = true;
+        type = QStringLiteral("CLOSUREOPT (Close a position for an option)");
+        break;
+      case OFX_INVEXPENSE:
+        unhandledtype = true;
+        type = QStringLiteral("INVEXPENSE (Misc investment expense that is associated with a specific security)");
+        break;
+      case OFX_JRNLFUND:
+        unhandledtype = true;
+        type = QStringLiteral("JRNLFUND (Journaling cash holdings between subaccounts within the same investment account)");
+        break;
+      case OFX_MARGININTEREST:
+        unhandledtype = true;
+        type = QStringLiteral("MARGININTEREST (Margin interest expense)");
+        break;
+      case OFX_RETOFCAP:
+        unhandledtype = true;
+        type = QStringLiteral("RETOFCAP (Return of capital)");
+        break;
+      case OFX_SPLIT:
+        unhandledtype = true;
+        type = QStringLiteral("SPLIT (Stock or mutial fund split)");
+        break;
+      case OFX_TRANSFER:
+        unhandledtype = true;
+        type = QStringLiteral("TRANSFER (Transfer holdings in and out of the investment account)");
+        break;
+      default:
+        unhandledtype = true;
+        type = QString("UNKNOWN %1").arg(data.invtransactiontype);
+        break;
+    }
+  } else
+    t.m_eAction = eMyMoney::Transaction::Action::None;
+
+  t.m_shares = MyMoneyMoney();
+  if (data.units_valid) {
+    t.m_shares = MyMoneyMoney(data.units, 100000).reduce();
+  }
+
+  t.m_amount = MyMoneyMoney();
   if (data.amount_valid) {
     t.m_amount = MyMoneyMoney(data.amount, 1000);
+
+    if (pofx->d->m_fixBuySellSignage) {
+      if (t.m_eAction == eMyMoney::Transaction::Action::Buy
+          || t.m_eAction == eMyMoney::Transaction::Action::ReinvestDividend) {
+        t.m_amount = -t.m_amount.abs();
+        t.m_shares = t.m_shares.abs();
+      }
+      else if (t.m_eAction == eMyMoney::Transaction::Action::Sell) {
+        t.m_amount = t.m_amount.abs();
+        t.m_shares = -t.m_shares.abs();
+      }
+    }
+
     if (pofx->d->m_invertAmount) {
       t.m_amount = -t.m_amount;
     }
@@ -498,11 +587,6 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
     }
   }
 
-  t.m_shares = MyMoneyMoney();
-  if (data.units_valid) {
-    t.m_shares = MyMoneyMoney(data.units, 100000).reduce();
-  }
-
   t.m_price = MyMoneyMoney();
   if (data.unitprice_valid) {
     t.m_price = MyMoneyMoney(data.unitprice, 100000).reduce();
@@ -516,74 +600,6 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
   if (data.commission_valid) {
     t.m_fees += MyMoneyMoney(data.commission, 1000).reduce();
   }
-
-  bool unhandledtype = false;
-  QString type;
-
-  if (data.invtransactiontype_valid) {
-    switch (data.invtransactiontype) {
-      case OFX_BUYDEBT:
-      case OFX_BUYMF:
-      case OFX_BUYOPT:
-      case OFX_BUYOTHER:
-      case OFX_BUYSTOCK:
-        t.m_eAction = eMyMoney::Transaction::Action::Buy;
-        break;
-      case OFX_REINVEST:
-        t.m_eAction = eMyMoney::Transaction::Action::ReinvestDividend;
-        break;
-      case OFX_SELLDEBT:
-      case OFX_SELLMF:
-      case OFX_SELLOPT:
-      case OFX_SELLOTHER:
-      case OFX_SELLSTOCK:
-        t.m_eAction = eMyMoney::Transaction::Action::Sell;
-        break;
-      case OFX_INCOME:
-        t.m_eAction = eMyMoney::Transaction::Action::CashDividend;
-        // NOTE: With CashDividend, the amount of the dividend should
-        // be in data.amount.  Since I've never seen an OFX file with
-        // cash dividends, this is an assumption on my part. (acejones)
-        break;
-
-        //
-        // These types are all not handled.  We will generate a warning for them.
-        //
-      case OFX_CLOSUREOPT:
-        unhandledtype = true;
-        type = QStringLiteral("CLOSUREOPT (Close a position for an option)");
-        break;
-      case OFX_INVEXPENSE:
-        unhandledtype = true;
-        type = QStringLiteral("INVEXPENSE (Misc investment expense that is associated with a specific security)");
-        break;
-      case OFX_JRNLFUND:
-        unhandledtype = true;
-        type = QStringLiteral("JRNLFUND (Journaling cash holdings between subaccounts within the same investment account)");
-        break;
-      case OFX_MARGININTEREST:
-        unhandledtype = true;
-        type = QStringLiteral("MARGININTEREST (Margin interest expense)");
-        break;
-      case OFX_RETOFCAP:
-        unhandledtype = true;
-        type = QStringLiteral("RETOFCAP (Return of capital)");
-        break;
-      case OFX_SPLIT:
-        unhandledtype = true;
-        type = QStringLiteral("SPLIT (Stock or mutial fund split)");
-        break;
-      case OFX_TRANSFER:
-        unhandledtype = true;
-        type = QStringLiteral("TRANSFER (Transfer holdings in and out of the investment account)");
-        break;
-      default:
-        unhandledtype = true;
-        type = QString("UNKNOWN %1").arg(data.invtransactiontype);
-        break;
-    }
-  } else
-    t.m_eAction = eMyMoney::Transaction::Action::None;
 
   // In the case of investment transactions, the 'total' is supposed to the total amount
   // of the transaction.  units * unitprice +/- commission.  Easy, right?  Sadly, it seems
@@ -857,6 +873,11 @@ MyMoneyKeyValueContainer OFXImporter::onlineBankingSettings(const MyMoneyKeyValu
     } else {
       kvp.deletePair(QStringLiteral("kmmofx-invertamount"));
     }
+    if (d->m_statusDlg->m_fixBuySellSignage->isChecked()) {
+      kvp.setValue(QStringLiteral("kmmofx-fixbuysellsignage"), QStringLiteral("yes"));
+    } else {
+      kvp.deletePair(QStringLiteral("kmmofx-fixbuysellsignage"));
+    }
     // get rid of pre 4.6 values
     kvp.deletePair(QStringLiteral("kmmofx-preferPayeeid"));
   }
@@ -899,7 +920,7 @@ bool OFXImporter::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
       connect(dlg.data(), &KOfxDirectConnectDlg::statementReady, this, static_cast<void (OFXImporter::*)(const QString &)>(&OFXImporter::slotImportFile));
 
       // get the date of the earliest transaction that we are interested in
-      // from the settings for this account
+      // as well as other parameters from the settings for this account
       MyMoneyKeyValueContainer settings = acc.onlineBankingSettings();
       if (!settings.value(QStringLiteral("provider")).isEmpty()) {
         if ((settings.value(QStringLiteral("kmmofx-todayMinus")).toInt() != 0) && !settings.value(QStringLiteral("kmmofx-numRequestDays")).isEmpty()) {
@@ -916,6 +937,9 @@ bool OFXImporter::updateAccount(const MyMoneyAccount& acc, bool moreAccounts)
           //kDebug(0) << "start date = today - 2 months";
           d->m_updateStartDate = QDate::currentDate().addMonths(-2);
         }
+
+        d->m_invertAmount = settings.value("kmmofx-invertamount").toLower() == QStringLiteral("yes");
+        d->m_fixBuySellSignage= settings.value("kmmofx-fixbuysellsignage").toLower() == QStringLiteral("yes");
       }
       d->m_timestampOffset = settings.value("kmmofx-timestampOffset").toInt();
       //kDebug(0) << "ofx plugin: account" << acc.name() << "earliest transaction date to process =" << qPrintable(d->m_updateStartDate.toString(Qt::ISODate));

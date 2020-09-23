@@ -22,7 +22,23 @@ set (libnewuserwizard_a_UI
 ki18n_wrap_ui(libnewuserwizard_a_SOURCES ${libnewuserwizard_a_UI})
 
 add_library(newuserwizard STATIC ${libnewuserwizard_a_SOURCES})
+
+
 # TODO: clean dependencies
-target_link_libraries(newuserwizard kmymoneywizard KF5::ConfigGui KF5::KIOWidgets KF5::TextWidgets KF5::Completion KF5::ConfigWidgets Qt5::Widgets Qt5::Xml Alkimia::alkimia)
-add_dependencies(newuserwizard widgets wizardpages)
+target_link_libraries(newuserwizard
+    KF5::ConfigGui
+    KF5::KIOWidgets
+    KF5::TextWidgets
+    KF5::Completion
+    KF5::ConfigWidgets
+    Qt5::Widgets
+    Qt5::Xml
+    Alkimia::alkimia
+    kmm_mymoney
+    kmm_wizard
+    kmm_templates
+    kmm_widgets
+)
+
+add_dependencies(newuserwizard wizardpages)
 

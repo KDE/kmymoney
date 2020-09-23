@@ -36,7 +36,6 @@
 #include <KMessageBox>
 #include <KActionCollection>
 
-#include "models.h"
 #include "onlinejobmodel.h"
 #include "onlinejobadministration.h"
 #include "onlinejobtyped.h"
@@ -57,13 +56,12 @@ class KOnlineJobOutboxViewPrivate : public KMyMoneyViewBasePrivate
   Q_DECLARE_PUBLIC(KOnlineJobOutboxView)
 
 public:
-  explicit KOnlineJobOutboxViewPrivate(KOnlineJobOutboxView *qq) :
-    KMyMoneyViewBasePrivate(),
-    q_ptr(qq),
-    ui(new Ui::KOnlineJobOutboxView),
-    m_needLoad(true),
-    m_onlinePlugins(nullptr),
-    m_onlineJobModel(nullptr)
+  explicit KOnlineJobOutboxViewPrivate(KOnlineJobOutboxView *qq)
+    : KMyMoneyViewBasePrivate(qq)
+    , ui(new Ui::KOnlineJobOutboxView)
+    , m_needLoad(true)
+    , m_onlinePlugins(nullptr)
+    , m_onlineJobModel(nullptr)
   {
   }
 
@@ -108,7 +106,7 @@ public:
       m_onlineJobModel = new onlineJobModel(q);
   #ifdef KMM_MODELTEST
       /// @todo using the ModelTest feature on the onlineJobModel crashes. Need to fix.
-      // new ModelTest(m_onlineJobModel, Models::instance());
+      // new ModelTest(m_onlineJobModel, MyMoneyFile::instance());
   #endif
     }
     return m_onlineJobModel;
@@ -145,7 +143,6 @@ public:
     transferForm->show();
   }
 
-  KOnlineJobOutboxView     *q_ptr;
   std::unique_ptr<Ui::KOnlineJobOutboxView> ui;
 
   /**

@@ -171,6 +171,17 @@ void KImportDlg::loadProfiles(const bool selectLast)
 
   list = grp.readEntry("profiles", QStringList());
   list.sort();
+  if (list.isEmpty()) {
+    // in case the list is empty, we need to create the default profile
+    MyMoneyQifProfile defaultProfile;
+    defaultProfile.setProfileDescription(i18n("The default QIF profile"));
+    defaultProfile.setProfileName("Profile-Default");
+
+    list += "Default";
+    grp.writeEntry("profiles", list);
+
+    defaultProfile.saveProfile();
+  }
   m_profileComboBox->addItems(list);
 
   if (selectLast == true) {

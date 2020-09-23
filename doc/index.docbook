@@ -14,6 +14,8 @@
        from entities/general.entities and $LANG/user.entities. -->
   <!ENTITY devlist "<email>kmymoney-devel@kde.org</email>">
   <!ENTITY userlist "<email>kmymoney@kde.org</email>">
+  <!-- Support for bulding against old kdoctools versions, included in 5.69 -->
+  <!ENTITY gnucash "<application>GnuCash</application>">
 
   <!-- the following author entity was added to contributor.entities in 4.5 branch and trunk of svn
        they can be removed from this file once they are present in the kdelibs minimum version required by &kmymoney; -->
@@ -38,6 +40,12 @@
 
   <!ENTITY Christian.David "<personname><firstname>Christian</firstname><surname>Dávid</surname></personname>">
   <!ENTITY Christian.David.mail "<email>christian-david@web.de</email>">
+
+  <!-- the following author entity was added to contributor.entities for the 5.0 release
+       it can be removed from this file once it is present in the kdelibs minimum version required by &kmymoney; -->
+
+  <!ENTITY Michael.Carpino "<personname><firstname>Michael</firstname><surname>Carpino</surname></personname>">
+  <!ENTITY Michael.Carpino.mail "<email>mfcarpino@gmail.com</email>">
 
   <!-- the following entities have been added to user.entities in trunk and probably 4.7 branch of svn
        they are only in the french branch, and are required for processing of the french documentation

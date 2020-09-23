@@ -79,6 +79,11 @@ namespace NewAccountWizard
     connect(d->ui->m_paymentAmount, &AmountEdit::textChanged, this, &LoanDetailsPage::slotValuesChanged);
     connect(d->ui->m_balloonAmount, &AmountEdit::textChanged, this, &LoanDetailsPage::slotValuesChanged);
 
+    d->ui->m_loanAmount->setAllowEmpty();
+    d->ui->m_interestRate->setAllowEmpty();
+    d->ui->m_paymentAmount->setAllowEmpty();
+    d->ui->m_balloonAmount->setAllowEmpty();
+
     connect(d->ui->m_calculateButton, &QAbstractButton::clicked, this, &LoanDetailsPage::slotCalculate);
   }
 

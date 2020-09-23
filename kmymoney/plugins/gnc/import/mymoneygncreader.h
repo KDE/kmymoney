@@ -844,10 +844,11 @@ public:
     *
     */
 #ifndef _GNCFILEANON
-  void readFile(QIODevice* pDevice, MyMoneyStorageMgr *storage) final override;  // main entry point, IODevice is gnucash file
-  void writeFile(QIODevice*, MyMoneyStorageMgr*) final override {
-    return ;
-  } // dummy entry needed by kmymoneywiew. we will not be writing
+  /// @todo port to new model code
+  void readFile(QIODevice* pDevice, MyMoneyFile* file) final override;  // main entry point, IODevice is gnucash file
+  // dummy entry needed by kmymoneywiew. we will not be writing
+  void writeFile(QIODevice*, MyMoneyFile*) final override {}
+
   void setProgressCallback(void(*callback)(int, int, const QString&)) final override;
 #else
   void readFile(QString, QString);
@@ -1005,7 +1006,7 @@ private:
   bool writeReportToFile(const QList<QString>&);
   // main storage
 #ifndef _GNCFILEANON
-  MyMoneyStorageMgr *m_storage;
+  MyMoneyFile *m_storage;
 #else
   QTextStream oStream;
 #endif // _GNCFILEANON

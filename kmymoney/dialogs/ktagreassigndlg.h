@@ -1,6 +1,7 @@
 /*
  * Copyright 2011-2012  Alessandro Russo <axela74@yahoo.it>
  * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -18,6 +19,8 @@
 
 #ifndef KTAGREASSIGNDLG_H
 #define KTAGREASSIGNDLG_H
+
+#include "kmm_base_dialogs_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -37,9 +40,7 @@ namespace Ui { class KTagReassignDlg; }
  *  to re-assign transactions (for instance, if tags are deleted).
  */
 
-class MyMoneyTag;
-
-class KTagReassignDlg : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KTagReassignDlg : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(KTagReassignDlg)
@@ -52,15 +53,13 @@ public:
     * This function sets up the dialog, lets the user select a tag and returns
     * the id of the selected tag in the tagslist.
     *
-    * @param tagslist reference to QList of MyMoneyTag objects to be contained in the list
+    * @param tagslist reference to QList of tag ids that are not available
+    *                 for re-assignment
     *
     * @return Returns the id of the selected tag in the list or QString() if
-    *         the dialog was aborted. QString() is also returned if the tagslist is empty.
+    *         the dialog was aborted.
     */
-  QString show(const QList<MyMoneyTag>& tagslist);
-
-protected:
-  void accept() override;
+  QString show(const QList<QString>& tagslist);
 
 private:
   Ui::KTagReassignDlg *ui;

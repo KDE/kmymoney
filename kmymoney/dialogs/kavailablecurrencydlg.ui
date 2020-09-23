@@ -49,7 +49,7 @@
      </column>
      <column>
       <property name="text">
-       <string>Symbol</string>
+       <string comment="@title currency symbol column">Symbol</string>
       </property>
      </column>
     </widget>

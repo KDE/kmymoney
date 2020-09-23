@@ -54,7 +54,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneystoragemgr.h"
+#include "mymoneyfile.h"
 #include "onlinejobadministration.h"
 #include "onlinetasks/interfaces/tasks/onlinetask.h"
 #include "mymoneycostcenter.h"
@@ -83,9 +83,21 @@
 #include "onlinetasks/sepa/sepaonlinetransferimpl.h"
 #include "xmlstoragehelper.h"
 #include "mymoneyenums.h"
+#include "parametersmodel.h"
+#include "institutionsmodel.h"
+#include "accountsmodel.h"
+#include "payeesmodel.h"
+#include "securitiesmodel.h"
+#include "reportsmodel.h"
+#include "schedulesmodel.h"
+#include "journalmodel.h"
+#include "pricemodel.h"
+#include "budgetsmodel.h"
+#include "onlinejobsmodel.h"
 
 using namespace eMyMoney;
 
+#if 0
 class FilterFail
 {
 public:
@@ -102,6 +114,7 @@ public:
 private:
   MyMoneyTransactionFilter m_filter;
 };
+#endif
 
 //*****************************************************************************
 // Create a class to handle db transactions using scope
@@ -197,7 +210,6 @@ public:
   explicit MyMoneyStorageSqlPrivate(MyMoneyStorageSql* qq) :
     q_ptr(qq),
     m_dbVersion(0),
-    m_storage(nullptr),
     m_loadAll(false),
     m_override(false),
     m_institutions(0),
@@ -287,7 +299,7 @@ public:
     if (!query.exec()) throw MYMONEYEXCEPTIONSQL("building Institution list"); // krazy:exclude=crashy
     while (query.next()) dbList.append(query.value(0).toString());
 
-    const QList<MyMoneyInstitution> list = m_storage->institutionList();
+    const QList<MyMoneyInstitution> list = m_file->institutionList();
     QList<MyMoneyInstitution> insertList;
     QList<MyMoneyInstitution> updateList;
     QSqlQuery query2(*q);
@@ -340,8 +352,8 @@ public:
     while (query.next())
       dbList.append(query.value(0).toString());
 
-    QList<MyMoneyPayee> list = m_storage->payeeList();
-    MyMoneyPayee user(QString("USER"), m_storage->user());
+    QList<MyMoneyPayee> list = m_file->payeeList();
+    MyMoneyPayee user(QString("USER"), m_file->user());
     list.prepend(user);
     signalProgress(0, list.count(), "Writing Payees...");
 
@@ -373,7 +385,7 @@ public:
     if (!query.exec()) throw MYMONEYEXCEPTIONSQL("building Tag list"); // krazy:exclude=crashy
     while (query.next()) dbList.append(query.value(0).toString());
 
-    QList<MyMoneyTag> list = m_storage->tagList();
+    QList<MyMoneyTag> list = m_file->tagList();
     signalProgress(0, list.count(), "Writing Tags...");
     QSqlQuery query2(*q);
     query.prepare(m_db.m_tables["kmmTags"].updateString());
@@ -412,7 +424,7 @@ public:
     while (query.next()) dbList.append(query.value(0).toString());
 
     QList<MyMoneyAccount> list;
-    m_storage->accountList(list);
+    m_file->accountList(list);
     unsigned progress = 0;
     signalProgress(0, list.count(), "Writing Accounts...");
     if (dbList.isEmpty()) { // new table, insert standard accounts
@@ -420,14 +432,15 @@ public:
     } else {
       query.prepare(m_db.m_tables["kmmAccounts"].updateString());
     }
+    /// @todo port to new model code - it does not fail anymore
     // Attempt to write the standard accounts. For an empty db, this will fail.
     try {
       QList<MyMoneyAccount> stdList;
-      stdList << m_storage->asset();
-      stdList << m_storage->liability();
-      stdList << m_storage->expense();
-      stdList << m_storage->income();
-      stdList << m_storage->equity();
+      stdList << m_file->asset();
+      stdList << m_file->liability();
+      stdList << m_file->expense();
+      stdList << m_file->income();
+      stdList << m_file->equity();
       writeAccountList(stdList, query);
       m_accounts += stdList.size();
     } catch (const MyMoneyException &) {
@@ -475,7 +488,7 @@ public:
     QList<MyMoneyAccount> insertList;
     // Update the accounts that exist; insert the ones that do not.
     foreach (const MyMoneyAccount& it, list) {
-      m_transactionCountMap[it.id()] = m_storage->transactionCount(it.id());
+      m_transactionCountMap[it.id()] = m_file->transactionCount(it.id());
       if (dbList.contains(it.id())) {
         dbList.removeAll(it.id());
         updateList << it;
@@ -495,7 +508,7 @@ public:
 
       query.prepare("DELETE FROM kmmAccounts WHERE id = :id");
       foreach (const QString& it, dbList) {
-        if (!m_storage->isStandardAccount(it)) {
+        if (!m_file->isStandardAccount(it)) {
           kvpList << it;
         }
       }
@@ -520,7 +533,7 @@ public:
     MyMoneyTransactionFilter filter;
     filter.setReportAllSplits(false);
     QList<MyMoneyTransaction> list;
-    m_storage->transactionList(list, filter);
+    m_file->transactionList(list, filter);
     signalProgress(0, list.count(), "Writing Transactions...");
     QSqlQuery q2(*q);
     query.prepare(m_db.m_tables["kmmTransactions"].updateString());
@@ -552,7 +565,7 @@ public:
     if (!query.exec()) throw MYMONEYEXCEPTIONSQL("building Schedule list"); // krazy:exclude=crashy
     while (query.next()) dbList.append(query.value(0).toString());
 
-    const auto list = m_storage->scheduleList(QString(), Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
+    const auto list = m_file->scheduleList(QString(), Schedule::Type::Any, Schedule::Occurrence::Any, Schedule::PaymentType::Any,
                                               QDate(), QDate(), false);
     QSqlQuery query2(*q);
     //TODO: find a way to prepare the queries outside of the loop.  writeSchedule()
@@ -561,13 +574,11 @@ public:
     foreach (const MyMoneySchedule& it, list) {
       query.prepare(m_db.m_tables["kmmSchedules"].updateString());
       query2.prepare(m_db.m_tables["kmmSchedules"].insertString());
-      bool insert = true;
       if (dbList.contains(it.id())) {
         dbList.removeAll(it.id());
-        insert = false;
-        writeSchedule(it, query, insert);
+        writeSchedule(it, query, false);
       } else {
-        writeSchedule(it, query2, insert);
+        writeSchedule(it, query2, true);
       }
       signalProgress(++m_schedules, 0);
     }
@@ -590,7 +601,7 @@ public:
     if (!query.exec()) throw MYMONEYEXCEPTIONSQL("building security list"); // krazy:exclude=crashy
     while (query.next()) dbList.append(query.value(0).toString());
 
-    const QList<MyMoneySecurity> securityList = m_storage->securityList();
+    const QList<MyMoneySecurity> securityList = m_file->securityList();
     signalProgress(0, securityList.count(), "Writing Securities...");
     query.prepare(m_db.m_tables["kmmSecurities"].updateString());
     query2.prepare(m_db.m_tables["kmmSecurities"].insertString());
@@ -634,7 +645,7 @@ public:
     if (!query.exec()) throw MYMONEYEXCEPTIONSQL("deleting Prices"); // krazy:exclude=crashy
     m_prices = 0;
 
-    const MyMoneyPriceList list = m_storage->priceList();
+    const MyMoneyPriceList list = m_file->priceList();
     signalProgress(0, list.count(), "Writing Prices...");
     MyMoneyPriceList::ConstIterator it;
     for (it = list.constBegin(); it != list.constEnd(); ++it)   {
@@ -653,7 +664,7 @@ public:
     if (!query.exec()) throw MYMONEYEXCEPTIONSQL("building Currency list"); // krazy:exclude=crashy
     while (query.next()) dbList.append(query.value(0).toString());
 
-    const QList<MyMoneySecurity> currencyList = m_storage->currencyList();
+    const QList<MyMoneySecurity> currencyList = m_file->currencyList();
     signalProgress(0, currencyList.count(), "Writing Currencies...");
     query.prepare(m_db.m_tables["kmmCurrencies"].updateString());
     query2.prepare(m_db.m_tables["kmmCurrencies"].insertString());
@@ -687,7 +698,7 @@ public:
     QVariantList kvpList;
     kvpList << "";
     QList<QMap<QString, QString> > pairs;
-    pairs << m_storage->pairs();
+    pairs << m_file->parametersModel()->pairs();
     deleteKeyValuePairs("STORAGE", kvpList);
     writeKeyValuePairs("STORAGE", kvpList, pairs);
 
@@ -745,11 +756,11 @@ public:
     );
 
     query.bindValue(":version", m_dbVersion);
-    query.bindValue(":fixLevel", m_storage->fileFixVersion());
-    query.bindValue(":created", m_storage->creationDate().toString(Qt::ISODate));
+    query.bindValue(":fixLevel", m_file->parametersModel()->itemById(m_file->fixedKey(MyMoneyFile::FileFixVersion)).value());
+    query.bindValue(":created", m_file->parametersModel()->itemById(m_file->fixedKey(MyMoneyFile::CreationDate)).value());
     //q.bindValue(":lastModified", m_storage->lastModificationDate().toString(Qt::ISODate));
     query.bindValue(":lastModified", QDate::currentDate().toString(Qt::ISODate));
-    query.bindValue(":baseCurrency", m_storage->pairs()["kmm-baseCurrency"]);
+    query.bindValue(":baseCurrency", m_file->baseCurrency().id());
     query.bindValue(":dateRangeStart", QDate());
     query.bindValue(":dateRangeEnd", QDate());
 
@@ -767,6 +778,7 @@ public:
 
     //! @todo The following bindings are for backwards compatibility only
     //! remove backwards compatibility in a later version
+    //! @todo port to new model code - use the model's nextId value directly or remove stuff
     query.bindValue(":hiInstitutionId", QVariant::fromValue(q->getNextInstitutionId()));
     query.bindValue(":hiPayeeId", QVariant::fromValue(q->getNextPayeeId()));
     query.bindValue(":hiTagId", QVariant::fromValue(q->getNextTagId()));
@@ -815,7 +827,7 @@ public:
     if (!query.exec()) throw MYMONEYEXCEPTIONSQL("building Report list"); // krazy:exclude=crashy
     while (query.next()) dbList.append(query.value(0).toString());
 
-    QList<MyMoneyReport> list = m_storage->reportList();
+    QList<MyMoneyReport> list = m_file->reportList();
     signalProgress(0, list.count(), "Writing Reports...");
     query.prepare(m_db.m_tables["kmmReportConfig"].updateString());
     query2.prepare(m_db.m_tables["kmmReportConfig"].insertString());
@@ -855,7 +867,7 @@ public:
     while (query.next())
       dbList.append(query.value(0).toString());
 
-    QList<MyMoneyBudget> list = m_storage->budgetList();
+    QList<MyMoneyBudget> list = m_file->budgetList();
     signalProgress(0, list.count(), "Writing Budgets...");
     query.prepare(m_db.m_tables["kmmBudgetConfig"].updateString());
     query2.prepare(m_db.m_tables["kmmBudgetConfig"].insertString());
@@ -909,7 +921,7 @@ public:
     if (!clearTable(QStringLiteral("kmmNationalAccountNumber"), query))
       throw MYMONEYEXCEPTIONSQL("Clean kmmNationalAccountNumber table");
 
-    const QList<onlineJob> jobs(m_storage->onlineJobList());
+    const QList<onlineJob> jobs(m_file->onlineJobList());
     signalProgress(0, jobs.count(), i18n("Inserting online jobs."));
     // Create list for onlineJobs which failed and the reason therefor
     QList<QPair<onlineJob, QString> > failedJobs;
@@ -1083,7 +1095,7 @@ public:
       //FIXME: Using exceptions for branching always feels like a kludge.
       //       Look for a better way.
       try {
-        MyMoneyMoney bal = m_storage->balance(a.id(), QDate());
+        MyMoneyMoney bal = m_file->balance(a.id(), QDate());
         balanceList << bal.toString();
         balanceFormattedList << bal.formatMoney("", -1, false);
       } catch (const MyMoneyException &) {
@@ -1280,8 +1292,8 @@ public:
       valueList << s.value().toString();
       valueFormattedList << s.value().formatMoney("", -1, false).replace(QChar(','), QChar('.'));
       sharesList << s.shares().toString();
-      MyMoneyAccount acc = m_storage->account(s.accountId());
-      MyMoneySecurity sec = m_storage->security(acc.currencyId());
+      MyMoneyAccount acc = m_file->account(s.accountId());
+      MyMoneySecurity sec = m_file->security(acc.currencyId());
       sharesFormattedList << s.price().
       formatMoney("", MyMoneyMoney::denomToPrec(sec.smallestAccountFraction()), false).
       replace(QChar(','), QChar('.'));
@@ -1600,8 +1612,11 @@ public:
       throw MYMONEYEXCEPTIONSQL("retrieving FileInfo");
 
     QSqlRecord rec = query.record();
-    m_storage->setCreationDate(GETDATE(rec.indexOf("created")));
-    m_storage->setLastModificationDate(GETDATE(rec.indexOf("lastModified")));
+    QDate date;
+    date = GETDATE(rec.indexOf("created"));
+    m_file->parametersModel()->addItem(m_file->fixedKey(MyMoneyFile::CreationDate), date.toString(Qt::ISODate));
+    date = GETDATE(rec.indexOf("lastModified"));
+    m_file->parametersModel()->addItem(m_file->fixedKey(MyMoneyFile::LastModificationDate), date.toString(Qt::ISODate));
 
     m_institutions = (ulong) GETULL(rec.indexOf("institutions"));
     m_accounts = (ulong) GETULL(rec.indexOf("accounts"));
@@ -1624,7 +1639,10 @@ public:
     m_logonAt = GETDATETIME(rec.indexOf("logonAt"));
 
     signalProgress(1, 0);
-    m_storage->setPairs(readKeyValuePairs("STORAGE", QString("")).pairs());
+    const auto params = readKeyValuePairs("STORAGE", QString("")).pairs();
+    for (auto it = params.constBegin(); it != params.constEnd(); ++it) {
+      m_file->parametersModel()->addItem(it.key(), it.value());
+    }
   }
 
   void readLogonData();
@@ -1634,8 +1652,7 @@ public:
   {
     Q_Q(MyMoneyStorageSql);
     try {
-      QMap<QString, MyMoneyInstitution> iList = q->fetchInstitutions();
-      m_storage->loadInstitutions(iList);
+      m_file->institutionsModel()->load(q->fetchInstitutions());
       readFileInfo();
     } catch (const MyMoneyException &) {
       throw;
@@ -1645,14 +1662,16 @@ public:
   void readAccounts()
   {
     Q_Q(MyMoneyStorageSql);
-    m_storage->loadAccounts(q->fetchAccounts());
+    m_file->accountsModel()->load(q->fetchAccounts());
   }
 
+#if 0
   void readTransactions(const QString& tidList, const QString& dateClause)
   {
     Q_Q(MyMoneyStorageSql);
     try {
-      m_storage->loadTransactions(q->fetchTransactions(tidList, dateClause));
+      m_file->journalModel()->load(q->fetchTransactions(tidList, dateClause));
+
     } catch (const MyMoneyException &) {
       throw;
     }
@@ -1662,6 +1681,7 @@ public:
   {
     readTransactions(QString(), QString());
   }
+#endif
 
   MyMoneySplit readSplit(const QSqlQuery& query) const
   {
@@ -1788,7 +1808,7 @@ public:
   {
     Q_Q(MyMoneyStorageSql);
     try {
-      m_storage->loadSchedules(q->fetchSchedules());
+      m_file->schedulesModel()->load(q->fetchSchedules());
     } catch (const MyMoneyException &) {
       throw;
     }
@@ -1799,7 +1819,7 @@ public:
   {
     Q_Q(MyMoneyStorageSql);
     try {
-      m_storage->loadSecurities(q->fetchSecurities());
+      m_file->securitiesModel()->load(q->fetchSecurities());
     } catch (const MyMoneyException &) {
       throw;
     }
@@ -1810,7 +1830,7 @@ public:
   {
     Q_Q(MyMoneyStorageSql);
     try {
-      m_storage->loadPrices(q->fetchPrices());
+      m_file->priceModel()->load(q->fetchPrices());
     } catch (const MyMoneyException &) {
       throw;
     }
@@ -1820,7 +1840,7 @@ public:
   {
     Q_Q(MyMoneyStorageSql);
     try {
-      m_storage->loadCurrencies(q->fetchCurrencies());
+      m_file->currenciesModel()->load(q->fetchCurrencies());
     } catch (const MyMoneyException &) {
       throw;
     }
@@ -1830,7 +1850,7 @@ public:
   {
     Q_Q(MyMoneyStorageSql);
     try {
-      m_storage->loadReports(q->fetchReports());
+      m_file->reportsModel()->load(q->fetchReports());
     } catch (const MyMoneyException &) {
       throw;
     }
@@ -1839,13 +1859,13 @@ public:
   void readBudgets()
   {
     Q_Q(MyMoneyStorageSql);
-    m_storage->loadBudgets(q->fetchBudgets());
+    m_file->budgetsModel()->load(q->fetchBudgets());
   }
 
   void readOnlineJobs()
   {
     Q_Q(MyMoneyStorageSql);
-    m_storage->loadOnlineJobs(q->fetchOnlineJobs());
+    m_file->onlineJobsModel()->load(q->fetchOnlineJobs());
   }
 
   /** @} */
@@ -2073,12 +2093,13 @@ public:
         return(1);
       } else {
         m_dbVersion = m_db.currentVersion();
-        m_storage->setFileFixVersion(m_storage->currentFixVersion());
+        const auto fixVersion = QString("%1").arg(m_file->availableFixVersion());
+        m_file->parametersModel()->addItem(m_file->fixedKey(MyMoneyFile::FileFixVersion), fixVersion);
         QSqlQuery query2(*q);
         query2.prepare("UPDATE kmmFileInfo SET version = :version, \
                   fixLevel = :fixLevel;");
         query2.bindValue(":version", m_dbVersion);
-        query2.bindValue(":fixLevel", m_storage->currentFixVersion());
+        query2.bindValue(":fixLevel", fixVersion);
         if (!query2.exec()) { // krazy:exclude=crashy
           buildError(query2, Q_FUNC_INFO, "Error updating file info(version)");
           return(1);
@@ -2089,9 +2110,10 @@ public:
     // prior to dbv6, 'version' format was 'dbversion.fixLevel+1'
     // as of dbv6, these are separate fields
     QString version = query.value(0).toString();
+    QString fixVersion;
     if (version.contains('.')) {
       m_dbVersion = query.value(0).toString().section('.', 0, 0).toUInt();
-      m_storage->setFileFixVersion(query.value(0).toString().section('.', 1, 1).toUInt() - 1);
+      fixVersion = QString("%1").arg(query.value(0).toString().section('.', 1, 1).toUInt() - 1);
     } else {
       m_dbVersion = version.toUInt();
       query.prepare("SELECT fixLevel FROM kmmFileInfo;");
@@ -2099,8 +2121,9 @@ public:
         buildError(query, Q_FUNC_INFO, "Error retrieving file info (fixLevel)");
         return(1);
       }
-      m_storage->setFileFixVersion(query.value(0).toUInt());
+      fixVersion = query.value(0).toString();
     }
+    m_file->parametersModel()->addItem(m_file->fixedKey(MyMoneyFile::FileFixVersion), fixVersion);
 
     if (m_dbVersion == m_db.currentVersion())
       return 0;
@@ -2566,7 +2589,7 @@ public:
       if (query.value(0).toInt() == 0) {
         query.prepare(QLatin1String("INSERT INTO kmmFileInfo (version, fixLevel) VALUES(?,?);"));
         query.bindValue(0, m_dbVersion);
-        query.bindValue(1, m_storage->fileFixVersion());
+        query.bindValue(1, m_file->parametersModel()->itemById(m_file->fixedKey(MyMoneyFile::FileFixVersion)).value());
         if (!query.exec())
           throw MYMONEYEXCEPTIONSQL(QString::fromLatin1("Saving database version"));
       }
@@ -3228,12 +3251,14 @@ public:
 
   MyMoneyDbDef m_db;
   uint m_dbVersion;
-  MyMoneyStorageMgr *m_storage;
+  MyMoneyFile       *m_file;
   // input options
   bool m_loadAll; // preload all data
   bool m_override; // override open if already in use
   // error message
   QString m_error;
+
+  /// @todo get rid of counts and id maintenance. This is now handled by the models
   // record counts
   ulong m_institutions;
   ulong m_accounts;

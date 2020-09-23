@@ -20,6 +20,8 @@
 #ifndef KBACKUPDLG_H
 #define KBACKUPDLG_H
 
+#include "kmm_base_dialogs_export.h"
+
 #include <QDialog>
 
 namespace Ui { class KBackupDlg; }
@@ -28,7 +30,7 @@ namespace Ui { class KBackupDlg; }
   *@author Michael Edwardes
   */
 
-class KBackupDlg : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KBackupDlg : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(KBackupDlg)

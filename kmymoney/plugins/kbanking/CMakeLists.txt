@@ -37,8 +37,9 @@ target_link_libraries(kbanking
                       kbanking_widgets
                       kbanking_tasksettings
                       kmm_mymoney
-                      kmm_widgets
+                      kmm_base_widgets
                       kmm_plugin
+                      kmm_oldregister
                       KF5::ConfigCore
                       KF5::ConfigGui
                       Qt5::Core

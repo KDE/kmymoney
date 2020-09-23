@@ -33,7 +33,6 @@
 #include "mymoneyexception.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransaction_p.h"
-#include "storage/mymoneystoragemgr.h"
 
 QTEST_GUILESS_MAIN(MyMoneyScheduleTest)
 

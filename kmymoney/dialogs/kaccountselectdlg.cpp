@@ -43,7 +43,6 @@
 #include "kmymoneycategory.h"
 #include "kmymoneyaccountselector.h"
 #include "knewaccountdlg.h"
-#include "models.h"
 #include "accountsmodel.h"
 
 #include "dialogenums.h"
@@ -92,7 +91,7 @@ KAccountSelectDlg::KAccountSelectDlg(const eDialogs::Category accountType, const
   d->ui->m_kButtonAbort->hide();
 
   KGuiItem skipButtonItem(i18n("&Skip"),
-                          Icons::get(Icon::MediaSkipForward),
+                          Icons::get(Icon::SkipForward),
                           i18n("Skip this transaction"),
                           i18n("Use this to skip importing this transaction and proceed with the next one."));
   KGuiItem::assign(d->ui->m_qbuttonCancel, skipButtonItem);
@@ -134,10 +133,8 @@ KAccountSelectDlg::KAccountSelectDlg(const eDialogs::Category accountType, const
   filterProxyModel->setHideEquityAccounts(true);
   filterProxyModel->addAccountGroup(accountTypes);
 
-  auto model = Models::instance()->accountsModel();
-  filterProxyModel->setSourceModel(model);
-  filterProxyModel->setSourceColumns(model->getColumns());
-  filterProxyModel->sort((int)eAccountsModel::Column::Account);
+  filterProxyModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
+  filterProxyModel->sort(AccountsModel::Column::AccountName);
 
   d->ui->m_accountSelector->setModel(filterProxyModel);
 

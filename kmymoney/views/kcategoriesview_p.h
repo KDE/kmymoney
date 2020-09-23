@@ -35,23 +35,24 @@
 // Project Includes
 
 #include "ui_kcategoriesview.h"
-#include "kmymoneyaccountsviewbase_p.h"
-
-#include "accountsviewproxymodel.h"
+#include "kmymoneyviewbase_p.h"
+#include "accountsproxymodel.h"
 #include "mymoneyaccount.h"
 #include "icons.h"
+#include "columnselector.h"
 
 using namespace Icons;
 
-class KCategoriesViewPrivate : public KMyMoneyAccountsViewBasePrivate
+class KCategoriesViewPrivate : public KMyMoneyViewBasePrivate
 {
   Q_DECLARE_PUBLIC(KCategoriesView)
 
 public:
-  explicit KCategoriesViewPrivate(KCategoriesView *qq) :
-    q_ptr(qq),
-    ui(new Ui::KCategoriesView),
-    m_haveUnusedCategories(false)
+  explicit KCategoriesViewPrivate(KCategoriesView *qq)
+    : KMyMoneyViewBasePrivate(qq)
+    , ui(new Ui::KCategoriesView)
+    , m_haveUnusedCategories(false)
+    , m_proxyModel(nullptr)
   {
   }
 
@@ -62,6 +63,32 @@ public:
 
   void init()
   {
+    Q_Q(KCategoriesView);
+    ui->setupUi(q);
+
+    // setup icons for collapse and expand button
+    ui->m_collapseButton->setIcon(Icons::get(Icon::ListCollapse));
+    ui->m_expandButton->setIcon(Icons::get(Icon::ListExpand));
+
+    // setup filter
+    m_proxyModel = ui->m_accountTree->proxyModel();
+    q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
+
+    auto columnSelector = new ColumnSelector(ui->m_accountTree, q->metaObject()->className());
+    columnSelector->setAlwaysVisible(QVector<int>({ AccountsModel::Column::AccountName }));
+    columnSelector->setAlwaysHidden(QVector<int>({ AccountsModel::Column::Balance, AccountsModel::Column::PostedValue }));
+
+    ui->m_accountTree->setModel(MyMoneyFile::instance()->accountsModel());
+    m_proxyModel->addAccountGroup(AccountsProxyModel::incomeExpense());
+
+    columnSelector->setModel(m_proxyModel);
+    q->slotSettingsChanged();
+
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KCategoriesView::selectByObject);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KCategoriesView::selectByVariant);
+
+    /// @todo port to new model code or cleanup
+#if 0
     Q_Q(KCategoriesView);
     m_accountTree = &ui->m_accountTree;
 
@@ -76,12 +103,13 @@ public:
     q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KCategoriesView::selectByObject);
     q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KCategoriesView::selectByVariant);
     q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KCategoriesView::refresh);
+#endif
   }
 
-  KCategoriesView       *q_ptr;
   Ui::KCategoriesView   *ui;
   bool                  m_haveUnusedCategories;
   MyMoneyAccount        m_currentCategory;
+  AccountsProxyModel*   m_proxyModel;
 };
 
 #endif

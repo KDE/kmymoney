@@ -18,13 +18,15 @@
 #ifndef KMYMONEYDATEEDIT_H
 #define KMYMONEYDATEEDIT_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QDateEdit>
 
 // TODO: check if this class is really necessary
-class KMyMoneyDateEdit : public QDateEdit
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyDateEdit : public QDateEdit
 {
   Q_OBJECT
 

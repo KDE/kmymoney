@@ -3,6 +3,7 @@
  * Copyright 2005-2018  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  * Copyright 2018       Michael Kiefer <mlkiefer@users.noreply.github.com>
+ * Copyright 2020       Robert Szczesiak <dev.rszczesiak@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -46,6 +47,7 @@
 #include <KChartCartesianAxis>
 #include <KChartFrameAttributes>
 #include "kmymoneysettings.h"
+#include "kreportcartesianaxis.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneyenums.h"
@@ -166,7 +168,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
       xAxis->setRulerAttributes(xAxisRulerAttr);
 
       //set-up y axis
-      KChart::CartesianAxis *yAxis = new KChart::CartesianAxis;
+      KReportCartesianAxis *yAxis = new KReportCartesianAxis(loc, config.yLabelsPrecision());
       yAxis->setPosition(CartesianAxis::Left);
 
       if (config.isIncludingPrice())
@@ -597,71 +599,67 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
   dataValueAttr.setDecimalDigits(config.yLabelsPrecision());
   dataValueAttr.setVisible(config.isChartDataLabels());
   planeDiagram->setDataValueAttributes(dataValueAttr);
-  planeDiagram->setAllowOverlappingDataValueTexts(true);
+  planeDiagram->setAllowOverlappingDataValueTexts(false);
 
   m_model.blockSignals(blocked); // reenable dataChanged() signal
 
   //assign model to the diagram
   planeDiagram->setModel(&m_model);
 
-  // connect needLayoutPlanes, so dimension of chart can be known, so custom Y labels can be generated
-  connect(cPlane, &KChart::AbstractCoordinatePlane::needLayoutPlanes, this, &KReportChartView::slotNeedUpdate, Qt::QueuedConnection);
+  adjustVerticalRange(config.yLabelsPrecision());
 }
-void KReportChartView::slotNeedUpdate()
+
+void KReportChartView::adjustVerticalRange(const int precision)
 {
-  disconnect(coordinatePlane(), &KChart::AbstractCoordinatePlane::needLayoutPlanes, this, &KReportChartView::slotNeedUpdate); // this won't cause hang-up in KReportsView::slotConfigure
-  QList<DataDimension> grids = coordinatePlane()->gridDimensionsList();
-  if (grids.isEmpty())  // ring and pie charts have no dimensions
-    return;
+    KChart::CartesianCoordinatePlane* cartesianPlane = qobject_cast<CartesianCoordinatePlane*>(coordinatePlane());
+    if (!cartesianPlane)
+        return; // only Cartesian planes are supported
 
-  if (grids.at(1).stepWidth == 0) // no labels?
-    return;
-  QLocale loc = locale();
-  QChar separator = loc.groupSeparator();
-  QChar decimalPoint = loc.decimalPoint();
+    const qreal gridStart = cartesianPlane->gridDimensionsList().at(1).start;
+    const qreal gridEnd = cartesianPlane->gridDimensionsList().at(1).end;
+    const qreal precisionLimit = qPow(10, -precision);
+    qreal dataRangeStart = cartesianPlane->verticalRange().first;
+    qreal dataRangeEnd = cartesianPlane->verticalRange().second;
 
-  QStringList labels;
-  if (m_precision > 10 || m_precision <= 0) // assure that conversion through QLocale::toString() will always work
-    m_precision = 1;
+    bool dataRangeStartAdjusted = false;
+    bool dataRangeEndAdjusted = false;
 
-  CartesianCoordinatePlane* cartesianplane = qobject_cast<CartesianCoordinatePlane*>(coordinatePlane());
-  if (cartesianplane) {
-    if (cartesianplane->axesCalcModeY() == KChart::AbstractCoordinatePlane::Logarithmic) {
-      qreal labelValue = qFloor(log10(grids.at(1).start)); // first label is 10 to power of labelValue
-      /// @todo this might also need some vertical adjustment in case of a horizontal line
-      ///       see below how this has been solved for linear graphs
-      int labelCount = qFloor(log10(grids.at(1).end)) - qFloor(log10(grids.at(1).start)) + 1;
-      for (auto i = 0; i < labelCount; ++i) {
-        labels.append(loc.toString(qPow(10.0, labelValue), 'f', m_precision).remove(separator).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + decimalPoint + "$")));
-        ++labelValue; // next label is 10 to power of previous exponent + 1
-      }
-    } else {
-      qreal labelValue = grids.at(1).start; // first label is start value
-      qreal step = grids.at(1).stepWidth;
-      // in case we have a horizontal line, we extend the vertical range around it
-      if (cartesianplane->verticalRange().first == cartesianplane->verticalRange().second) {
-        cartesianplane->setVerticalRange(qMakePair(cartesianplane->verticalRange().first - 2,
-                                                   cartesianplane->verticalRange().first + 2));
-        grids[1].start -= 2*step;
-        grids[1].end += 2*step;
-        labelValue -= 2*step;
-      }
-      int labelCount = qFloor((grids.at(1).end - grids.at(1).start) / grids.at(1).stepWidth) + 1;
-      for (auto i = 0; i < labelCount; ++i) {
-        labels.append(loc.toString(labelValue, 'f', m_precision).remove(separator).remove(QRegularExpression("0+$")).remove(QRegularExpression("\\" + decimalPoint + "$")));
-        labelValue += step; // next label is previous value + step value
-      }
-    }
-  } else
-    return; // nothing but cartesian plane is handled
+    if (cartesianPlane->axesCalcModeY() == KChart::AbstractCoordinatePlane::Logarithmic) {
+        if (dataRangeStart == dataRangeEnd) {
+            // if data model is represented by a horizontal line,
+            // extend vertical range by two orders of magnitude upwards and downwards
+            // if the whole data range is equal to zero,
+            // at least draw an empty chart with four orders of magnitude on the vertical exis
+            dataRangeStart = dataRangeStart > 0 ? qPow(10, qFloor(log10(dataRangeStart)) - 2) : precisionLimit;
+            dataRangeEnd = dataRangeEnd > 0 ? qPow(10, qCeil(log10(dataRangeEnd)) + 2) : qPow(10, -precision + 4);
+            dataRangeStartAdjusted = true;
+            dataRangeEndAdjusted = true;
+        }
 
-  KChart::LineDiagram* lineDiagram = qobject_cast<LineDiagram*>(coordinatePlane()->diagram());
-  if (lineDiagram)
-    lineDiagram->axes().at(1)->setLabels(labels);
+        if (dataRangeStart < precisionLimit) {
+            // if data range starts below the precision limit,
+            // crop the chart to the precision limit
+            dataRangeStart = precisionLimit;
+            dataRangeStartAdjusted = true;
+        }
+        if (dataRangeEnd < precisionLimit) {
+            // if data range ends below the precision limit,
+            // at least draw an empty chart with four orders of magnitude on the vertical axis
+            dataRangeEnd = qPow(10, -precision + 4);
+            dataRangeEndAdjusted = true;
+        }
 
-  KChart::BarDiagram* barDiagram = qobject_cast<BarDiagram*>(coordinatePlane()->diagram());
-  if (barDiagram)
-    barDiagram->axes().at(1)->setLabels(labels);
+        // if data range boundary needed no adjustment,
+        // make sure it matches the original grid boundary
+        if (!dataRangeStartAdjusted)
+            dataRangeStart = gridStart;
+        if (!dataRangeEndAdjusted)
+            dataRangeEnd = gridEnd;
+        cartesianPlane->setVerticalRange(qMakePair(dataRangeStart, dataRangeEnd));
+    } else if (dataRangeStart == dataRangeEnd) // vertical axis type must be Linear then
+        // if data model is represented by a horizontal line,
+        // extend vertical range by two upwards and downwards
+        cartesianPlane->setVerticalRange(qMakePair(dataRangeStart - 2, dataRangeEnd + 2));
 }
 
 int reports::KReportChartView::drawPivotGridRow ( int rowNum, const reports::PivotGridRow& gridRow, const QString& legendText, const int startColumn, const int columnsToDraw, const int precision, const bool invertValue )

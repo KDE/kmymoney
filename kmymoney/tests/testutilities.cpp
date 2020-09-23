@@ -1,5 +1,5 @@
 /*
- * Copyright 2005-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2005-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2005-2006  Ace Jones <acejones@users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or
@@ -58,6 +58,7 @@ QString acLiability;
 QString acExpense;
 QString acIncome;
 QString acChecking;
+QString acTransfer;
 QString acCredit;
 QString acSolo;
 QString acParent;
@@ -85,6 +86,7 @@ QString acInterest;
 QString acFees;
 QString acTax;
 QString acCash;
+QString curBase;
 
 TransactionHelper::TransactionHelper(const QDate& _date, const QString& _action, MyMoneyMoney _value, const QString& _accountid, const QString& _categoryid, const QString& _currencyid, const QString& _payee)
 {
@@ -240,6 +242,24 @@ void InvTransactionHelper::init(const QDate& _date, const QString& _action, MyMo
   //qDebug() << "successfully added " << id();
 }
 
+QString makeAccount(const QString& id, const QString& _name, eMyMoney::Account::Type _type, MyMoneyMoney _balance, const QDate& _open, const QString& _parent, QString _currency, bool _taxReport, bool _openingBalance)
+{
+  int maxTries = 1000;
+  QString cid;
+  do {
+    if (!cid.isEmpty()) {
+      auto acc = MyMoneyFile::instance()->account(cid);
+      MyMoneyFileTransaction ft;
+      MyMoneyFile::instance()->removeAccount(acc);
+      ft.commit();
+    }
+    cid = makeAccount(_name, _type, _balance, _open, _parent, _currency, _taxReport, _openingBalance);
+  } while(maxTries-- && id != cid);
+  if (maxTries <= 0)
+    throw MYMONEYEXCEPTION_CSTRING("Account could not be prepared");
+  return cid;
+}
+
 QString makeAccount(const QString& _name, eMyMoney::Account::Type _type, MyMoneyMoney _balance, const QDate& _open, const QString& _parent, QString _currency, bool _taxReport, bool _openingBalance)
 {
   MyMoneyAccount info;
@@ -308,6 +328,20 @@ void makeEquityPrice(const QString& _id, const QDate& _date, const MyMoneyMoney&
     file->addPrice(newprice);
   }
   ft.commit();
+}
+
+QString makeBaseCurrency(const MyMoneySecurity& base)
+{
+  auto file = MyMoneyFile::instance();
+  MyMoneyFileTransaction ft;
+  try {
+    file->currency(base.id());
+  } catch (const MyMoneyException &e) {
+    file->addCurrency(base);
+  }
+  file->setBaseCurrency(base);
+  ft.commit();
+  return base.id();
 }
 
 void writeRCFtoXMLDoc(const MyMoneyReport& filter, QDomDocument* doc)

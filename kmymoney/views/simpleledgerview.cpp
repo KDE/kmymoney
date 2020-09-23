@@ -1,19 +1,20 @@
-/***************************************************************************
-                          simpleledgerview.cpp
-                             -------------------
-    begin                : Sat Aug 8 2015
-    copyright            : (C) 2015 by Thomas Baumgart
-    email                : Thomas Baumgart <tbaumgart@kde.org>
- ***************************************************************************/
+/*
+ * Copyright 2015-2019  Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
 
 #include "simpleledgerview.h"
 
@@ -24,6 +25,11 @@
 #include <QToolButton>
 #include <QUrl>
 #include <QDesktopServices>
+#include <QLineEdit>
+#include <QTreeView>
+#include <QKeyEvent>
+#include <QTimer>
+#include <QHeaderView>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -32,18 +38,19 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_simpleledgerview.h"
 #include "kmymoneyviewbase_p.h"
 #include "ledgerviewpage.h"
-#include "models.h"
 #include "accountsmodel.h"
+#include "institutionsmodel.h"
 #include "kmymoneyaccountcombo.h"
-#include "ui_simpleledgerview.h"
-#include "icons/icons.h"
+#include "icons.h"
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyenums.h"
 #include "modelenums.h"
+#include "kmymoneysettings.h"
 
 using namespace Icons;
 
@@ -53,14 +60,15 @@ class SimpleLedgerViewPrivate : public KMyMoneyViewBasePrivate
 
 public:
   explicit SimpleLedgerViewPrivate(SimpleLedgerView* qq)
-  : q_ptr(qq)
-  , ui(new Ui_SimpleLedgerView)
-  , accountsModel(nullptr)
-  , newTabWidget(nullptr)
-  , webSiteButton(nullptr)
-  , lastIdx(-1)
-  , inModelUpdate(false)
-  , m_needLoad(true)
+    : KMyMoneyViewBasePrivate(qq)
+    , ui(new Ui_SimpleLedgerView)
+    , accountsModel(nullptr)
+    , newTabWidget(nullptr)
+    , webSiteButton(nullptr)
+    , accountCombo(nullptr)
+    , lastIdx(-1)
+    , inModelUpdate(false)
+    , m_needInit(true)
   {}
 
   ~SimpleLedgerViewPrivate()
@@ -71,13 +79,14 @@ public:
   void init()
   {
     Q_Q(SimpleLedgerView);
-    m_needLoad = false;
+    m_needInit = false;
     ui->setupUi(q);
     ui->ledgerTab->setTabIcon(0, Icons::get(Icon::ListAdd));
     ui->ledgerTab->setTabText(0, QString());
     newTabWidget = ui->ledgerTab->widget(0);
 
-    accountsModel= new AccountNamesFilterProxyModel(q);
+    accountsModel = new AccountNamesFilterProxyModel(q);
+    q->slotSettingsChanged();
 
     // remove close button from new page
     QTabBar* bar = ui->ledgerTab->findChild<QTabBar*>();
@@ -96,36 +105,41 @@ public:
               QDesktopServices::openUrl(webSiteUrl);
             });
 
-    q->connect(ui->accountCombo, SIGNAL(accountSelected(QString)), q, SLOT(openNewLedger(QString)));
     q->connect(ui->ledgerTab, &QTabWidget::currentChanged, q, &SimpleLedgerView::tabSelected);
-    q->connect(Models::instance(), &Models::modelsLoaded, q, &SimpleLedgerView::updateModels);
+    q->connect(ui->ledgerTab, &QTabWidget::tabBarClicked, q, &SimpleLedgerView::tabClicked);
     q->connect(ui->ledgerTab, &QTabWidget::tabCloseRequested, q, &SimpleLedgerView::closeLedger);
     // we reload the icon if the institution data changed
-    q->connect(Models::instance()->institutionsModel(), &InstitutionsModel::dataChanged, q, &SimpleLedgerView::setupCornerWidget);
+    q->connect(MyMoneyFile::instance()->institutionsModel(), &InstitutionsModel::dataChanged, q, &SimpleLedgerView::setupCornerWidget);
 
     accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity});
 
     accountsModel->setHideEquityAccounts(false);
-    auto const model = Models::instance()->accountsModel();
+    auto const model = MyMoneyFile::instance()->accountsModel();
     accountsModel->setSourceModel(model);
-    accountsModel->setSourceColumns(model->getColumns());
-    accountsModel->sort((int)eAccountsModel::Column::Account);
-    ui->accountCombo->setModel(accountsModel);
+    accountsModel->sort(AccountsModel::Column::AccountName);
+
+    accountCombo = new KMyMoneyAccountCombo(accountsModel, ui->ledgerTab);
+    accountCombo->setEditable(true);
+    accountCombo->setSplitActionVisible(false);
+    accountCombo->hide();
+    q->connect(accountCombo, &KMyMoneyAccountCombo::accountSelected, q, &SimpleLedgerView::openNewLedger);
+
+    accountCombo->installEventFilter(q);
+    accountCombo->popup()->installEventFilter(q);
 
     q->tabSelected(0);
-    q->updateModels();
-    q->openFavoriteLedgers();
+    q->openLedgersAfterOpen();
   }
 
-  SimpleLedgerView*             q_ptr;
   Ui_SimpleLedgerView*          ui;
   AccountNamesFilterProxyModel* accountsModel;
   QWidget*                      newTabWidget;
   QToolButton*                  webSiteButton;
+  KMyMoneyAccountCombo*         accountCombo;
   QUrl                          webSiteUrl;
   int                           lastIdx;
   bool                          inModelUpdate;
-  bool                          m_needLoad;
+  bool                          m_needInit;
 };
 
 
@@ -138,15 +152,46 @@ SimpleLedgerView::~SimpleLedgerView()
 {
 }
 
+bool SimpleLedgerView::eventFilter(QObject* o, QEvent* e)
+{
+  Q_D(SimpleLedgerView);
+
+  if (e->type() == QEvent::KeyPress) {
+    if (o == d->accountCombo) {
+      const auto kev = static_cast<QKeyEvent*>(e);
+      if (kev->key() == Qt::Key_Escape) {
+        d->accountCombo->hide();
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 void SimpleLedgerView::openNewLedger(QString accountId)
+{
+  openLedger(accountId, true);
+}
+
+void SimpleLedgerView::openLedger(QString accountId, bool makeCurrentLedger)
 {
   Q_D(SimpleLedgerView);
   if(d->inModelUpdate || accountId.isEmpty())
     return;
 
+  d->accountCombo->hide();
+
+  // in case a stock account is selected, we switch to the parent which
+  // is the investment account
+  MyMoneyAccount acc = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
+  if (acc.isInvest()) {
+    acc = MyMoneyFile::instance()->accountsModel()->itemById(acc.parentAccountId());
+    accountId = acc.id();
+  }
+
   LedgerViewPage* view = 0;
   // check if ledger is already opened
-  for(int idx=0; idx < d->ui->ledgerTab->count()-1; ++idx) {
+  for(int idx = 0; idx < d->ui->ledgerTab->count()-1; ++idx) {
     view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->widget(idx));
     if(view) {
       if(accountId == view->accountId()) {
@@ -157,22 +202,65 @@ void SimpleLedgerView::openNewLedger(QString accountId)
   }
 
   // need a new tab, we insert it before the rightmost one
-  QModelIndex index = Models::instance()->accountsModel()->accountById(accountId);
-  if(index.isValid()) {
+  if(!acc.id().isEmpty()) {
 
+    QString configGroupName;
+    switch(acc.accountType()) {
+      case eMyMoney::Account::Type::Investment:
+        configGroupName = QStringLiteral("InvestmentLedger");
+        break;
+      default:
+        configGroupName = QStringLiteral("StandardLedger");
+        break;
+    }
     // create new ledger view page
-    MyMoneyAccount acc = Models::instance()->accountsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
-    view = new LedgerViewPage(this);
-    view->setShowEntryForNewTransaction();
+    view = new LedgerViewPage(this, configGroupName);
     view->setAccount(acc);
+    view->setShowEntryForNewTransaction();
 
     /// @todo setup current global setting for form visibility
     // view->showTransactionForm(...);
 
     // insert new ledger view page in tab view
     int newIdx = d->ui->ledgerTab->insertTab(d->ui->ledgerTab->count()-1, view, acc.name());
-    d->ui->ledgerTab->setCurrentIndex(d->ui->ledgerTab->count()-1);
-    d->ui->ledgerTab->setCurrentIndex(newIdx);
+    if (makeCurrentLedger) {
+      // selecting the last tab (the one with the +) and then the new one
+      // makes sure that all signal about the new selection are emitted
+      d->ui->ledgerTab->setCurrentIndex(d->ui->ledgerTab->count()-1);
+      d->ui->ledgerTab->setCurrentIndex(newIdx);
+    }
+    connect(this, &SimpleLedgerView::settingsChanged, view, &LedgerViewPage::slotSettingsChanged);
+  }
+}
+
+void SimpleLedgerView::tabClicked(int idx)
+{
+  Q_D(SimpleLedgerView);
+  if (idx == (d->ui->ledgerTab->count()-1)) {
+    const auto rect = d->ui->ledgerTab->tabBar()->tabRect(idx);
+    if (!d->accountCombo->isVisible()) {
+      d->accountCombo->lineEdit()->clear();
+      d->accountCombo->lineEdit()->setFocus();
+      // Using the QMetaObject::invokeMethod calls showPopup too early
+      // so we delay it a bit (not recongnizable for the user)
+      QTimer::singleShot(50, d->accountCombo, SLOT(showPopup()));
+    }
+    // make the combo box visible
+    d->accountCombo->raise();
+    d->accountCombo->show();
+    // and adjust the size to the largest account
+    // shown in the popup treeview
+    const auto popupView = d->accountCombo->popup();
+    popupView->resizeColumnToContents(0);
+    d->accountCombo->resize(popupView->header()->sectionSize(0), d->accountCombo->height());
+    // now place the combobox either left or right aligned to the tab button
+    if (rect.left() + popupView->header()->sectionSize(0) < width()) {
+      d->accountCombo->move(rect.left(), rect.bottom());
+    } else {
+      d->accountCombo->move(rect.left()+rect.width()- popupView->header()->sectionSize(0), rect.bottom());
+    }
+  } else {
+    d->accountCombo->hide();
   }
 }
 
@@ -180,20 +268,14 @@ void SimpleLedgerView::tabSelected(int idx)
 {
   Q_D(SimpleLedgerView);
   // qDebug() << "tabSelected" << idx << (d->ui->ledgerTab->count()-1);
+  // make sure that the ledger does not change
+  // when the user access the account selection combo box
   if(idx != (d->ui->ledgerTab->count()-1)) {
     d->lastIdx = idx;
+  } else {
+    d->ui->ledgerTab->setCurrentIndex(d->lastIdx);
   }
   setupCornerWidget();
-}
-
-void SimpleLedgerView::updateModels()
-{
-  Q_D(SimpleLedgerView);
-  d->inModelUpdate = true;
-  // d->ui->accountCombo->
-  d->ui->accountCombo->expandAll();
-  d->ui->accountCombo->setSelected(MyMoneyFile::instance()->asset().id());
-  d->inModelUpdate = false;
 }
 
 void SimpleLedgerView::closeLedger(int idx)
@@ -201,7 +283,15 @@ void SimpleLedgerView::closeLedger(int idx)
   Q_D(SimpleLedgerView);
   // don't react on the close request for the new ledger function
   if(idx != (d->ui->ledgerTab->count()-1)) {
+    auto tab = d->ui->ledgerTab->widget(idx);
     d->ui->ledgerTab->removeTab(idx);
+    delete tab;
+    // make sure we always show an account
+    if (d->ui->ledgerTab->currentIndex() == (d->ui->ledgerTab->count()-1)) {
+      if (d->ui->ledgerTab->count() > 1) {
+        d->ui->ledgerTab->setCurrentIndex((d->ui->ledgerTab->count()-2));
+      }
+    }
   }
 }
 
@@ -232,8 +322,33 @@ void SimpleLedgerView::showTransactionForm(bool show)
 void SimpleLedgerView::closeLedgers()
 {
   Q_D(SimpleLedgerView);
-  if (d->m_needLoad)
+  if (d->m_needInit)
     return;
+
+  // get storage id without the enclosing braces
+  const auto storageId = MyMoneyFile::instance()->storageId().remove(QRegularExpression("[\\{\\}]"));
+  KSharedConfigPtr config = KSharedConfig::openConfig();
+  KConfigGroup grp = config->group("OpenLedgers");
+  grp.deleteEntry(storageId);
+
+  // collect account ids of open ledgers
+  QStringList openLedgers;
+  LedgerViewPage* view = 0;
+  for(int idx = 0; idx < d->ui->ledgerTab->count()-1; ++idx) {
+    view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->widget(idx));
+    if(view) {
+      auto id = view->accountId();
+      if (idx == d->ui->ledgerTab->currentIndex()) {
+        id.append(QLatin1String("*"));
+      }
+      openLedgers.append(id);
+    }
+  }
+  // save the ones we have found
+  if (!openLedgers.isEmpty()) {
+    grp.writeEntry(storageId, openLedgers);
+  }
+
   auto tabCount = d->ui->ledgerTab->count();
   // check that we have a least one tab that can be closed
   if(tabCount > 1) {
@@ -247,31 +362,65 @@ void SimpleLedgerView::closeLedgers()
   }
 }
 
-void SimpleLedgerView::openFavoriteLedgers()
+
+void SimpleLedgerView::openLedgersAfterOpen()
 {
   Q_D(SimpleLedgerView);
-  if (d->m_needLoad)
+  if (d->m_needInit)
     return;
 
-  AccountsModel* model = Models::instance()->accountsModel();
-  QModelIndex start = model->index(0, 0);
-  QModelIndexList indexes = model->match(start, (int)eAccountsModel::Role::Favorite, QVariant(true), -1, Qt::MatchRecursive);
+  // get storage id without the enclosing braces
+  const auto storageId = MyMoneyFile::instance()->storageId().remove(QRegularExpression("[\\{\\}]"));
+  KSharedConfigPtr config = KSharedConfig::openConfig();
+  KConfigGroup grp = config->group("OpenLedgers");
 
-  // indexes now has a list of favorite accounts but two entries for each.
-  // that doesn't matter here, since openNewLedger() can handle duplicates
-  Q_FOREACH(QModelIndex index, indexes) {
-    openNewLedger(model->data(index, (int)eAccountsModel::Role::ID).toString());
+  // in case we have a previous setting, we open them
+  const auto openLedgers = grp.readEntry(storageId, QStringList());
+  if (!openLedgers.isEmpty()) {
+    for (const auto& id: qAsConst(openLedgers)) {
+      auto thisId = id;
+      openLedger(thisId.remove(QLatin1String("*")), id.endsWith(QLatin1String("*")));
+    }
+
+    // in case we have not opened any ledger, we proceed with the favorites
+    if (d->ui->ledgerTab->count() > 1) {
+      return;
+    }
+  }
+
+
+  AccountsModel* model = MyMoneyFile::instance()->accountsModel();
+
+  const auto subtrees = QVector<QModelIndex> ({ model->favoriteIndex(), model->assetIndex(), model->liabilityIndex() });
+
+  bool stopAfterFirstAccount = false;
+  foreach(const auto startIdx, subtrees) {
+    // retrieve all items in the current subtree
+    auto indexes = model->match(model->index(0, 0, startIdx), Qt::DisplayRole, QString("*"), -1, Qt::MatchWildcard);
+
+    // indexes now has a list of favorite accounts
+    foreach (const auto idx, indexes) {
+      openLedger(idx.data(eMyMoney::Model::Roles::IdRole).toString(), false);
+      if (stopAfterFirstAccount) {
+        break;
+      }
+    }
+
+    // if at least one account was found and opened
+    // we stop processing
+    if (!indexes.isEmpty()) {
+      break;
+    }
+    stopAfterFirstAccount = true;
   }
   d->ui->ledgerTab->setCurrentIndex(0);
 }
 
 void SimpleLedgerView::showEvent(QShowEvent* event)
 {
-  if (MyMoneyFile::instance()->storageAttached()) {
-    Q_D(SimpleLedgerView);
-    if (d->m_needLoad)
-      d->init();
-  }
+  Q_D(SimpleLedgerView);
+  if (d->m_needInit)
+    d->init();
 
   // don't forget base class implementation
   QWidget::showEvent(event);
@@ -288,13 +437,15 @@ void SimpleLedgerView::setupCornerWidget()
   d->webSiteButton->hide();
   auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());
   if (view) {
-    auto index = Models::instance()->accountsModel()->accountById(view->accountId());
+    const auto accountsModel = MyMoneyFile::instance()->accountsModel();
+    auto index = accountsModel->indexById(view->accountId());
     if(index.isValid()) {
       // get icon name and url via account and institution object
-      const auto acc = Models::instance()->accountsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
+      const auto acc = accountsModel->itemByIndex(index);
       if (!acc.institutionId().isEmpty()) {
-        index = Models::instance()->institutionsModel()->accountById(acc.institutionId());
-        const auto institution = Models::instance()->institutionsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyInstitution>();
+        const auto institutionsModel = MyMoneyFile::instance()->institutionsModel();
+        index = institutionsModel->indexById(acc.institutionId());
+        const auto institution = institutionsModel->itemByIndex(index);
         const auto url = institution.value(QStringLiteral("url"));
         const auto iconName = institution.value(QStringLiteral("icon"));
         if (!url.isEmpty() && !iconName.isEmpty()) {
@@ -312,3 +463,27 @@ void SimpleLedgerView::setupCornerWidget()
   }
 }
 
+void SimpleLedgerView::slotSettingsChanged()
+{
+  Q_D(SimpleLedgerView);
+  if (d->accountsModel) {
+    d->accountsModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
+    d->accountsModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+    d->accountsModel->setHideFavoriteAccounts(false);
+  }
+  emit settingsChanged();
+}
+
+void SimpleLedgerView::executeCustomAction(eView::Action action)
+{
+  switch(action) {
+    case eView::Action::InitializeAfterFileOpen:
+      openLedgersAfterOpen();
+      break;
+    case eView::Action::CleanupBeforeFileClose:
+      closeLedgers();
+      break;
+    default:
+      break;
+  }
+}

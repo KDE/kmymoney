@@ -36,9 +36,8 @@ class MyMoneyAccount;
 namespace NewAccountWizard
 {
   class Wizard;
-  class HierarchyFilterProxyModel;
-
   class HierarchyPagePrivate;
+
   class HierarchyPage : public QWidget, public WizardPage<Wizard>
   {
     Q_OBJECT
@@ -51,7 +50,7 @@ namespace NewAccountWizard
     void enterPage() override;
     KMyMoneyWizardPage* nextPage() const override;
     QWidget* initialFocusWidget() const override;
-    const MyMoneyAccount& parentAccount();
+    MyMoneyAccount parentAccount() const;
 
     bool isComplete() const override;
 

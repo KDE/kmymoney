@@ -1,19 +1,20 @@
-/***************************************************************************
-                          newspliteditor.h
-                             -------------------
-    begin                : Sat Apr 9 2016
-    copyright            : (C) 2016 by Thomas Baumgart
-    email                : Thomas Baumgart <tbaumgart@kde.org>
- ***************************************************************************/
+/*
+ * Copyright 2016-2020  Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
 
 #ifndef NEWSPLITEDITOR_H
 #define NEWSPLITEDITOR_H
@@ -32,6 +33,7 @@ class QWidget;
 // Project Includes
 
 #include "mymoneymoney.h"
+class MyMoneySecurity;
 
 class NewSplitEditor : public QFrame
 {
@@ -41,7 +43,7 @@ public:
   /**
    * @a accountId is the current account displayed for the transaction
    */
-  explicit NewSplitEditor(QWidget* parent, const QString& accountId = QString());
+  explicit NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity, const QString& accountId = QString());
   virtual ~NewSplitEditor();
 
   /**
@@ -53,16 +55,15 @@ public:
   void setShowValuesInverted(bool inverse);
   bool showValuesInverted();
 
+  void setPostDate(const QDate& date);
+
+  void startLoadingSplit();
+  void finishLoadingSplit();
+
 protected:
   void keyPressEvent(QKeyEvent* e) final override;
 
 public Q_SLOTS:
-  /**
-   * This method returns the transaction split id passed
-   * to setSplitId().
-   */
-  QString splitId() const;
-
   /**
    * Returns the id of the selected account in the category widget
    */
@@ -75,14 +76,20 @@ public Q_SLOTS:
   QString memo() const;
   void setMemo(const QString& memo);
 
-  MyMoneyMoney amount() const;
-  void setAmount(MyMoneyMoney value);
+  MyMoneyMoney shares() const;
+  void setShares(const MyMoneyMoney& shares);
+
+  MyMoneyMoney value() const;
+  void setValue(const MyMoneyMoney& value);
 
   QString costCenterId() const;
   void setCostCenterId(const QString& id);
 
   QString number() const;
   void setNumber(const QString& id);
+
+  QString payeeId() const;
+  void setPayeeId(const QString& id);
 
 protected Q_SLOTS:
   virtual void reject();

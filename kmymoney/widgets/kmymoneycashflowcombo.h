@@ -21,6 +21,8 @@
 #ifndef KMYMONEYCASHFLOWCOMBO_H
 #define KMYMONEYCASHFLOWCOMBO_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -41,7 +43,7 @@ namespace eWidgets { namespace eRegister { enum class CashFlowDirection; } }
   * actions (Deposit, Withdrawal, etc.).
   */
 class KMyMoneyCashFlowComboPrivate;
-class KMM_WIDGETS_EXPORT KMyMoneyCashFlowCombo : public KMyMoneyMVCCombo
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyCashFlowCombo : public KMyMoneyMVCCombo
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyCashFlowCombo)

@@ -19,6 +19,8 @@
 #ifndef KACCOUNTTEMPLATESELECTOR_H
 #define KACCOUNTTEMPLATESELECTOR_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -30,14 +32,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class MyMoneyTemplate;
+#include <templatesmodel.h>
 
 /**
- * @author Thomas Baumgart <ipwizard@users.sourceforge.net>
+ * @author Thomas Baumgart
  */
 
 class KAccountTemplateSelectorPrivate;
-class KAccountTemplateSelector : public QWidget
+class KMM_BASE_WIDGETS_EXPORT KAccountTemplateSelector : public QWidget
 {
   Q_OBJECT
   Q_DISABLE_COPY(KAccountTemplateSelector)
@@ -46,12 +48,12 @@ public:
   explicit KAccountTemplateSelector(QWidget* parent = nullptr);
   ~KAccountTemplateSelector();
 
+  void setModel(TemplatesModel* model);
+
   QList<MyMoneyTemplate> selectedTemplates() const;
 
-private Q_SLOTS:
-  void slotLoadHierarchy();
-  void slotLoadCountry();
-  void slotLoadTemplateList();
+public Q_SLOTS:
+  void setupInitialSelection();
 
 private:
   KAccountTemplateSelectorPrivate * const d_ptr;

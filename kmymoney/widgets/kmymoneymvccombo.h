@@ -21,7 +21,7 @@
 #ifndef KMYMONEYMVCCOMBO_H
 #define KMYMONEYMVCCOMBO_H
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -40,7 +40,7 @@
   * This class will replace the KMyMoneyCombo class when all widgets will use the MVC
   */
 class KMyMoneyMVCComboPrivate;
-class KMM_WIDGETS_EXPORT KMyMoneyMVCCombo : public KComboBox
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyMVCCombo : public KComboBox
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyMVCCombo)

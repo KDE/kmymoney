@@ -6,6 +6,7 @@
     email                : darren_gould@gmx.de
                            Alvaro Soliverez <asoliverez@gmail.com>
                            (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2019 Thomas Baumgart <tbaumgart@kde.org>
 ***************************************************************************/
 
 /***************************************************************************
@@ -29,7 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyaccountsviewbase.h"
+#include "kmymoneyviewbase.h"
 
 class QTreeWidgetItem;
 
@@ -42,7 +43,7 @@ class MyMoneyMoney;
   * @author Thomas Baumgart
   */
 class KBudgetViewPrivate;
-class KBudgetView : public KMyMoneyAccountsViewBase
+class KBudgetView : public KMyMoneyViewBase
 {
   Q_OBJECT
 
@@ -51,7 +52,9 @@ public:
   ~KBudgetView() override;
 
   void executeCustomAction(eView::Action action) override;
-  void refresh();
+
+public Q_SLOTS:
+  void slotSettingsChanged() override;
 
 protected:
   KBudgetView(KBudgetViewPrivate &dd, QWidget *parent);
@@ -64,11 +67,10 @@ private Q_SLOTS:
   void slotNewBudget();
   void slotDeleteBudget();
   void slotCopyBudget();
-  void slotChangeBudgetYear();
+  void slotStartRename();
   void slotBudgetForecast();
   void slotResetBudget();
   void slotUpdateBudget();
-  void slotStartRename();
 
   /**
     * This slot receives the signal from the listview control that an
@@ -78,7 +80,6 @@ private Q_SLOTS:
     * @param p position of the pointing device
     */
   void slotOpenContextMenu(const QPoint&);
-  void slotItemChanged(QTreeWidgetItem* p, int col);
   void slotSelectAccount(const MyMoneyObject &obj, eView::Intent intent);
   void slotBudgetedAmountChanged();
   /**

@@ -48,7 +48,7 @@
     <term>Account</term>
     <listitem>
       <para>
-        The name of the institution or account
+        The name of the institution or account.
       </para>
     </listitem>
   </varlistentry>
@@ -200,13 +200,11 @@
   </screenshot>
 </para>
 
-<para>
-  <emphasis>
-    NOTE: You must have a file open before you can create a new institution. If
-    you do not have an existing file, you will need to <link
-    linkend="firsttime.3">create one</link>.
-  </emphasis>
-</para>
+<note><para>
+  You must have a file open before you can create a new institution. If
+  you do not have an existing file, you will need to <link
+  linkend="firsttime.3">create one</link>.
+</para></note>
 
 <para>
   Only the name is required in the New Institution Dialog, all other fields are

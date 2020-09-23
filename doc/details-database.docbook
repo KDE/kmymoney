@@ -19,8 +19,8 @@
   As of release 1.0, &kmymoney; allows you to hold your data in a relational
   database. One of the advantages of using this industry-standard format is that
   it may allow you to view your data using one of the graphic front ends such as
-  OpenOffice.org<trademark class="copyright"/> or LibreOffice<trademark
-  class="copyright"/>, perhaps in some format that &kmymoney; currently doesn't
+  <trademark>OpenOffice.org</trademark> or <trademark>LibreOffice</trademark>,
+  perhaps in some format that &kmymoney; currently doesn't
   provide. Also, a little knowledge of SQL (Structured Query Language, the
   language used world-wide to access relational databases) should enable you
   more easily to export data to an external program, for example, a budgeting
@@ -36,9 +36,9 @@
   Software as part of their &Qt; programming system. This module supports a
   number of different database systems through a collection of drivers. Among
   the more popular open-source systems for which drivers are available are
-  MySQL<trademark class="registered"/>, SQLite (version 3 and upwards only), and PostgreSQL. The module also
-  supports the 'heavier', more industrial, systems such as Oracle<trademark
-  class="registered"/> and IBM DB2<trademark class="registered"/>.
+  <trademark>MySQL</trademark>, SQLite (version 3 and upwards only), and PostgreSQL.
+  The module also supports the 'heavier', more industrial, systems such as <trademark
+  class="registered">Oracle</trademark> and IBM <trademark class="registered">DB2</trademark>.
 </para>
 
 <para>
@@ -56,7 +56,7 @@
   corresponding &Qt; driver module. Most distributions will include driver
   modules for the more popular databases. Otherwise, check with the <ulink
   url="https://www.qt.io/">&Qt; software web site</ulink> and search for
-  'SQL drivers'
+  'SQL drivers'.
 </para>
 
 <note>
@@ -107,9 +107,10 @@
   database layout changes, you will need permission (also called privileges) to
   create and alter tables and views (see next paragraph). There may be different
   names for the permission/privilege in different systems, but something like
-  CREATE and ALTER should be commonplace. For normal running, you will need to
-  be able to read and write records; these are normally defined in SQL as
-  SELECT, INSERT, UPDATE, and DELETE permissions.
+  <literal>CREATE</literal> and <literal>ALTER</literal> should be commonplace.
+  For normal running, you will need to be able to read and write records; these
+  are normally defined in SQL as <literal>SELECT</literal>, <literal>INSERT</literal>,
+  <literal>UPDATE</literal>, and <literal>DELETE</literal> permissions.
 </para>
 </sect3>
 
@@ -160,8 +161,8 @@
   This box lists all &Qt; SQL drivers installed on your system. Select the
   driver for your database type. If the one you want is not in the list, you
   need to install the appropriate driver. See your distribution documentation,
-  or visit the <ulink url="https://www.qt.io/" type="">&Qt; software web
-  site</ulink> and search for 'SQL drivers'.
+  or visit the <ulink url="https://www.qt.io/">&Qt; software web site</ulink>
+  and search for 'SQL drivers'.
 </para>
 </sect3>
 
@@ -181,13 +182,12 @@
 <sect3>
 <title>Database name (others)</title>
 <para>
-  The default database name is KMyMoney, but you may choose some other name if
-  you like.
-  For some database types, &kmymoney; may not be able to create the
-  database, so it must be pre-created using the appropriate administrative
-  procedure. However, &kmymoney; will usually be able to create all table structures where
-  necessary. If not, you can create them yourself. See <link
-  linkend="details.database.generatesql">Manual Database Creation</link> for more information.
+  The default database name is <literal>KMyMoney</literal>, but you may choose some other
+  name if you like. For some database types, &kmymoney; may not be able to create the
+  database, so it must be pre-created using the appropriate administrative procedure.
+  However, &kmymoney; will usually be able to create all table structures where necessary.
+  If not, you can create them yourself. See <link linkend="details.database.generatesql">Manual
+  Database Creation</link> for more information.
 </para>
 </sect3>
 
@@ -230,8 +230,8 @@
   subsequent changes to your data are saved only in the database, not in the
   file.  This means that you can use the file as a backup or snapshot of your
   data at a particular time.  To make a new backup like this, open your
-  database, do <menuchoice><guimenu>File</guimenu><guimenuitem>Save
-  As...</guimenuitem></menuchoice>, giving an appropriate file name.  Remember
+  database, choose the <menuchoice><guimenu>File</guimenu><guimenuitem>Save
+  As...</guimenuitem></menuchoice> menu item, giving an appropriate file name.  Remember
   to re-open your database, so &kmymoney; does not continue to use the file.
 </para>
 </note>
@@ -239,8 +239,8 @@
 <para>
   To access your data in other formats, you will need to know a little about how
   it is held in relational databases. By far the easiest way to get a feel for
-  this is to open the database in a front-end such as OpenOffice.org. This
-  provides a list of the various tables which make up the database, and
+  this is to open the database in a front-end such as <trademark>OpenOffice.org</trademark>.
+  This provides a list of the various tables which make up the database, and
   enables you to see the layout of each of them.
 </para>
 
@@ -274,10 +274,10 @@
           <para>Institutions and Accounts</para>
         </entry>
         <entry valign="top">
-          <para>kmmInstitutions.id</para>
+          <para><literal>kmmInstitutions.id</literal></para>
         </entry>
         <entry valign="top">
-          <para>kmmAccounts.institutionId</para>
+          <para><literal>kmmAccounts.institutionId</literal></para>
         </entry>
       </row>
       <row>
@@ -285,10 +285,10 @@
           <para>Accounts Parent/Child</para>
         </entry>
         <entry valign="top">
-          <para>kmmAccounts.id</para>
+          <para><literal>kmmAccounts.id</literal></para>
         </entry>
         <entry valign="top">
-          <para>kmmAccounts.parentId</para>
+          <para><literal>kmmAccounts.parentId</literal></para>
         </entry>
       </row>
       <row>
@@ -296,10 +296,10 @@
           <para>Transactions and Splits (see Note 1)</para>
         </entry>
         <entry valign="top">
-          <para>kmmTransactions.id</para>
+          <para><literal>kmmTransactions.id</literal></para>
         </entry>
         <entry valign="top">
-          <para>kmmSplits.transactionId</para>
+          <para><literal>kmmSplits.transactionId</literal></para>
         </entry>
       </row>
       <row>
@@ -307,10 +307,10 @@
           <para>Accounts and Splits</para>
         </entry>
         <entry valign="top">
-          <para>kmmAccounts.id</para>
+          <para><literal>kmmAccounts.id</literal></para>
         </entry>
         <entry valign="top">
-          <para>kmmSplits.accountId</para>
+          <para><literal>kmmSplits.accountId</literal></para>
         </entry>
       </row>
       <row>
@@ -318,10 +318,10 @@
           <para>Payees and Splits</para>
         </entry>
         <entry valign="top">
-          <para>kmmPayees.id</para>
+          <para><literal>kmmPayees.id</literal></para>
         </entry>
         <entry valign="top">
-          <para>kmmSplits.payeeId</para>
+          <para><literal>kmmSplits.payeeId</literal></para>
         </entry>
       </row>
       <row>
@@ -329,10 +329,10 @@
           <para>Schedules and Transactions</para>
         </entry>
         <entry valign="top">
-          <para>kmmSchedules.id</para>
+          <para><literal>kmmSchedules.id</literal></para>
         </entry>
         <entry valign="top">
-          <para>kmmTransactions.id</para>
+          <para><literal>kmmTransactions.id</literal></para>
         </entry>
       </row>
       <row>
@@ -340,21 +340,21 @@
           <para>Transactions and Currencies</para>
         </entry>
         <entry valign="top">
-          <para>kmmTransactions.currencyId</para>
+          <para><literal>kmmTransactions.currencyId</literal></para>
         </entry>
         <entry valign="top">
-          <para>kmmCurrencies.ISOCode</para>
+          <para><literal>kmmCurrencies.ISOCode</literal></para>
         </entry>
       </row>
       <row>
         <entry valign="top">
-          <para>Accounts and Securities (see Note 2)</para>
+          <para><literal>Accounts and Securities (see Note 2)</literal></para>
         </entry>
         <entry valign="top">
-          <para>kmmAccounts.currencyId</para>
+          <para><literal>kmmAccounts.currencyId</literal></para>
         </entry>
         <entry valign="top">
-          <para>kmmSecurities.id</para>
+          <para><literal>kmmSecurities.id</literal></para>
         </entry>
       </row>
       <row>
@@ -362,10 +362,10 @@
           <para>Securities and Prices</para>
         </entry>
         <entry valign="top">
-          <para>kmmSecurities.id</para>
+          <para><literal>kmmSecurities.id</literal></para>
         </entry>
         <entry valign="top">
-          <para>kmmPrices.fromId or kmmPrices.toId</para>
+          <para><literal>kmmPrices.fromId</literal> or <literal>kmmPrices.toId</literal></para>
         </entry>
       </row>
       <row>
@@ -373,10 +373,10 @@
           <para>Currency Rates</para>
         </entry>
         <entry valign="top">
-          <para>kmmCurrencies.ISOCode</para>
+          <para><literal>kmmCurrencies.ISOCode</literal></para>
         </entry>
         <entry valign="top">
-          <para>kmmPrices.fromId or kmmPrices.toId</para>
+          <para><literal>kmmPrices.fromId</literal> or <literal>kmmPrices.toId</literal></para>
         </entry>
       </row>
     </tbody>
@@ -408,20 +408,21 @@
 
 <para>
   Monetary amounts and share values are shown both in numerator/denominator
-  format, and, with a field name suffixed with 'Formatted', in the form as shown
-  on your screens.
+  format, and, with a field name suffixed with '<literal>Formatted</literal>',
+  in the form as shown on your screens.
 </para>
-  
+
 <para>
   Similarly, some fields, such as account type appear both as a numeric code,
-  and in a field suffixed 'String' in the form and language of the application.
+  and in a field suffixed '<literal>String</literal>' in the form and language
+  of the application.
 </para>
 </sect3>
 
 <sect3>
 <title>Updating your data</title>
 
-<para> 
+<para>
   Having data in an industry standard format does give you the ability to modify
   it outside the &kmymoney; application. DO NOT DO IT unless you really know
   what you are doing, and always be certain to make a backup copy of your data
@@ -437,9 +438,9 @@
   Most database systems allow you to store commonly used queries and procedures,
   and in some cases, these may be held as tables or other objects within your
   database itself. As you will have guessed from the above, all the tables used
-  by &kmymoney; begin with the lowercase letters 'kmm'. This standard will be
-  maintained, and only tables beginning with these letters will be
-  updated. Thus, provided you avoid these in the naming of your queries &etc;,
+  by &kmymoney; begin with the lowercase letters '<literal>kmm</literal>'. This
+  standard will be maintained, and only tables beginning with these letters will
+  be updated. Thus, provided you avoid these in the naming of your queries &etc;,
   you should not experience any problems.
 </para>
 </sect3>
@@ -461,18 +462,20 @@
   to standard SQL usage, or support may be introduced for new systems which have not been fully tested in &kmymoney;.
 </para>
 <para>
-  Prior to using this facility, you should try just creating the database entry itself (&ie; with the CREATE DATABASE
-  statement). Provided the database exists, &kmymoney; may well be able to create the tables, &etc; in the normal
-  database save procedure described above.
+  Prior to using this facility, you should try just creating the database
+  entry itself (&ie; with the <literal>CREATE DATABASE</literal> statement).
+  Provided the database exists, &kmymoney; may well be able to create the
+  tables, &etc; in the normal database save procedure described above.
 </para>
 </sect3>
 
 <sect3>
 <title>Generating the SQL</title>
 <para>
-  If this fails, it is possible to generate the basic SQL commands needed to create the various tables, views and indexes 
-  required by the application. Select <guimenuitem>Generate Database SQL</guimenuitem> from the
-  <guimenu>Tools</guimenu> menu. This will present the following dialog:
+  If this fails, it is possible to generate the basic SQL commands needed to
+  create the various tables, views and indexes required by the application.
+  Select the <menuchoice><guimenu>Tools</guimenu><guimenuitem>Generate Database
+  SQL</guimenuitem></menuchoice> menu item. This will present the following dialog:
 </para>
 <screenshot>
   <mediaobject>
@@ -488,12 +491,12 @@
   must be created using the administrative functions provided by the database system.
 </para>
 <para>
-  If after editing the text in the dialog, you want &kmymoney; to create the database, you will need
-  to complete the other fields in the dialog, as detailed in <link
+  If after editing the text in the dialog, you want &kmymoney; to create the database,
+  you will need to complete the other fields in the dialog, as detailed in <link
   linkend="details.database.selectdatabase">Creating a Database</link> above,
-  and click <guibutton>Create Tables</guibutton>. Note that,
-  except in the case of SQLite, you will need either to include a suitable CREATE DATABASE statement
-  as the first command, or have previously issued such a command externally to &kmymoney;
+  and click <guibutton>Create Tables</guibutton>. Note that, except in the case of
+  SQLite, you will need either to include a suitable <literal>CREATE DATABASE</literal> statement
+  as the first command, or have previously issued such a command externally to &kmymoney;.
 </para>
 </sect3>
 
@@ -501,7 +504,7 @@
 <title>Warning</title>
 <para>
   You should be very careful editing the definitions of any of the basic tables or views
-  (those with names beginning with 'kmm'). Some changes,
+  (those with names beginning with '<literal>kmm</literal>'). Some changes,
   such as increasing the length of an integer field, may have little impact, but you should not
   remove or change the sequence of any fields, or &kmymoney; may refuse to function, or may corrupt your data.
 </para>

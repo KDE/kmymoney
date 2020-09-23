@@ -42,7 +42,8 @@
 #include "kloandetailspage.h"
 #include "kloandetailspage_p.h"
 #include "kloanschedulepage.h"
-#include "ksplittransactiondlg.h"
+/// @todo port to new model code
+// #include "ksplittransactiondlg.h"
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
 #include "mymoneysplit.h"
@@ -117,6 +118,8 @@ namespace NewAccountWizard
 
   void LoanPaymentPage::slotAdditionalFees()
   {
+    /// @todo port to new model code
+#if 0
     Q_D(LoanPaymentPage);
     QMap<QString, MyMoneyMoney> priceInfo;
     QPointer<KSplitTransactionDlg> dlg = new KSplitTransactionDlg(d->additionalFeesTransaction, d->phonySplit, d->phonyAccount, false, !d->m_wizard->moneyBorrowed(), MyMoneyMoney(), priceInfo);
@@ -137,6 +140,7 @@ namespace NewAccountWizard
       }
 
     delete dlg;
+#endif
   }
 
   KMyMoneyWizardPage* LoanPaymentPage::nextPage() const
@@ -144,5 +148,5 @@ namespace NewAccountWizard
     Q_D(const LoanPaymentPage);
     return d->m_wizard->d_func()->m_loanSchedulePage;
   }
-  
+
 }

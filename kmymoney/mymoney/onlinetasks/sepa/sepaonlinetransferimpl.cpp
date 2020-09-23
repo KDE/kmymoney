@@ -1,5 +1,6 @@
 /*
  * Copyright 2013-2018  Christian Dávid <christian-david@web.de>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -18,6 +19,7 @@
 #include "sepaonlinetransferimpl.h"
 
 #include <QVariant>
+#include <QSet>
 
 #include "mymoneyutils.h"
 #include "mymoneyaccount.h"
@@ -279,6 +281,11 @@ sepaOnlineTransfer* sepaOnlineTransferImpl::createFromXml(const QDomElement& ele
 bool sepaOnlineTransferImpl::hasReferenceTo(const QString& id) const
 {
   return (id == _originAccount);
+}
+
+QSet<QString> sepaOnlineTransferImpl::referencedObjects() const
+{
+  return { _originAccount };
 }
 
 QString sepaOnlineTransferImpl::jobTypeName() const

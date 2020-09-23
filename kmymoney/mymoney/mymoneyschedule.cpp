@@ -1,6 +1,6 @@
 /*
  * Copyright 2000-2004  Michael Edwardes <mte@users.sourceforge.net>
- * Copyright 2002-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2002-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2005       Ace Jones <acejones@users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or
@@ -25,6 +25,7 @@
 
 #include <QList>
 #include <QMap>
+#include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -185,7 +186,7 @@ void MyMoneySchedule::setTransaction(const MyMoneyTransaction& transaction, bool
       // simply skip the test
       // Don't check for accounts with an id of 'Phony-ID' which is used
       // internally for non-existing accounts (during creation of accounts)
-      if (file->storageAttached() && s.accountId() != QString("Phony-ID")) {
+      if (s.accountId() != QString("Phony-ID")) {
         auto acc = file->account(s.accountId());
         if (acc.isIncomeExpense()) {
           s.setPayeeId(QString());
@@ -869,6 +870,12 @@ bool MyMoneySchedule::hasReferenceTo(const QString& id) const
 {
   Q_D(const MyMoneySchedule);
   return d->m_transaction.hasReferenceTo(id);
+}
+
+QSet<QString> MyMoneySchedule::referencedObjects() const
+{
+  Q_D(const MyMoneySchedule);
+  return d->m_transaction.referencedObjects();
 }
 
 QString MyMoneySchedule::occurrenceToString() const

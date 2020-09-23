@@ -48,9 +48,6 @@ protected Q_SLOTS:
 protected:
   void showEvent(QShowEvent* event) override;
 
-public Q_SLOTS:
-  void slotUpdateEquitiesVisibility();
-
 private:
   KSettingsGeneralPrivate * const d_ptr;
   Q_DECLARE_PRIVATE(KSettingsGeneral)

@@ -1,19 +1,19 @@
-/***************************************************************************
-                          splitdialog.h
-                             -------------------
-    begin                : Sat Aug 8 2015
-    copyright            : (C) 2015 by Thomas Baumgart
-    email                : Thomas Baumgart <tbaumgart@kde.org>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2015-2020  Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef SPLITDIALOG_H
 #define SPLITDIALOG_H
@@ -34,13 +34,20 @@
 
 class QAbstractItemModel;
 class MyMoneyAccount;
-class NewTransactionEditor;
+class MyMoneySecurity;
 
+/**
+ * This dialog allows the user to modify the splits of a transaction.
+ * The splits are passed in form of a SplitModel via setModel(). The
+ * total amount of the transaction is passed as @a mainAmount. If
+ * @a mainAmount equals to MyMoneyMoney::autoCalc then the total
+ * will automatically be adjusted.
+ */
 class SplitDialog : public QDialog
 {
   Q_OBJECT
 public:
-  explicit SplitDialog(const MyMoneyAccount& account, const MyMoneyMoney& mainAmount, NewTransactionEditor* parent, Qt::WindowFlags f = 0);
+  explicit SplitDialog(const MyMoneyAccount& account, const MyMoneySecurity& commodity, const MyMoneyMoney& mainAmount, const MyMoneyMoney& inversionFactor, QWidget* parent, Qt::WindowFlags f = 0);
   virtual ~SplitDialog();
 
 

@@ -2,7 +2,7 @@
  * Copyright 2000-2002  Michael Edwardes <mte@users.sourceforge.net>
  * Copyright 2001       Felix Rodriguez <frodriguez@users.sourceforge.net>
  * Copyright 2002-2003  Kevin Tambascio <ktambascio@users.sourceforge.net>
- * Copyright 2006-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2006-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2006       Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
@@ -31,6 +31,7 @@
 #include <QPixmapCache>
 #include <QPainter>
 #include <QIcon>
+#include <QSet>
 #include <QDebug>
 
 // ----------------------------------------------------------------------------
@@ -354,6 +355,12 @@ bool MyMoneyAccount::hasReferenceTo(const QString& id) const
   return (id == d->m_institution) || (id == d->m_parentAccount) || (id == d->m_currencyId);
 }
 
+QSet<QString> MyMoneyAccount::referencedObjects() const
+{
+  Q_D(const MyMoneyAccount);
+  return { d->m_institution, d->m_parentAccount, d->m_currencyId };
+}
+
 void MyMoneyAccount::setOnlineBankingSettings(const MyMoneyKeyValueContainer& values)
 {
   Q_D(MyMoneyAccount);
@@ -426,9 +433,23 @@ MyMoneyMoney MyMoneyAccount::balance() const
   return d->m_balance;
 }
 
+MyMoneyMoney MyMoneyAccount::postedValue() const
+{
+  Q_D(const MyMoneyAccount);
+  return d->m_postedValue;
+}
+
+MyMoneyMoney MyMoneyAccount::totalPostedValue() const
+{
+  Q_D(const MyMoneyAccount);
+  return d->m_totalPostedValue;
+}
+
 void MyMoneyAccount::adjustBalance(const MyMoneySplit& s, bool reverse)
 {
   Q_D(MyMoneyAccount);
+  const MyMoneyMoney oldBalance = d->m_balance;
+
   if (s.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares)) {
     if (reverse)
       d->m_balance = d->m_balance / s.shares();
@@ -440,7 +461,6 @@ void MyMoneyAccount::adjustBalance(const MyMoneySplit& s, bool reverse)
     else
       d->m_balance += s.shares();
   }
-
 }
 
 void MyMoneyAccount::setBalance(const MyMoneyMoney& val)
@@ -449,31 +469,43 @@ void MyMoneyAccount::setBalance(const MyMoneyMoney& val)
   d->m_balance = val;
 }
 
+void MyMoneyAccount::setPostedValue(const MyMoneyMoney& val)
+{
+  Q_D(MyMoneyAccount);
+  d->m_postedValue = val;
+}
+
+void MyMoneyAccount::setTotalPostedValue(const MyMoneyMoney& val)
+{
+  Q_D(MyMoneyAccount);
+  d->m_totalPostedValue = val;
+}
+
 QPixmap MyMoneyAccount::accountPixmap(const bool reconcileFlag, const int size) const
 {
   static const QHash<Account::Type, Icon> accToIco {
-    {Account::Type::Asset, Icon::ViewAsset},
-    {Account::Type::Investment, Icon::ViewStock},
-    {Account::Type::Stock, Icon::ViewStock},
-    {Account::Type::MoneyMarket, Icon::ViewStock},
-    {Account::Type::Checkings, Icon::ViewChecking},
-    {Account::Type::Savings, Icon::ViewSaving},
-    {Account::Type::AssetLoan, Icon::ViewLoanAsset},
-    {Account::Type::Loan, Icon::ViewLoan},
-    {Account::Type::CreditCard, Icon::ViewCreditCard},
-    {Account::Type::Asset, Icon::ViewAsset},
-    {Account::Type::Cash, Icon::ViewCash},
-    {Account::Type::Income, Icon::ViewIncome},
-    {Account::Type::Expense, Icon::ViewExpense},
-    {Account::Type::Equity, Icon::ViewEquity}
+    {Account::Type::Asset, Icon::Asset},
+    {Account::Type::Investment, Icon::Stock},
+    {Account::Type::Stock, Icon::Stock},
+    {Account::Type::MoneyMarket, Icon::Stock},
+    {Account::Type::Checkings, Icon::Checking},
+    {Account::Type::Savings, Icon::Savings},
+    {Account::Type::AssetLoan, Icon::LoanAsset},
+    {Account::Type::Loan, Icon::Loan},
+    {Account::Type::CreditCard, Icon::CreditCard},
+    {Account::Type::Asset, Icon::Asset},
+    {Account::Type::Cash, Icon::Cash},
+    {Account::Type::Income, Icon::Income},
+    {Account::Type::Expense, Icon::Expense},
+    {Account::Type::Equity, Icon::Equity}
   };
 
-  Icon ixIcon = accToIco.value(accountType(), Icon::ViewLiability);
+  Icon ixIcon = accToIco.value(accountType(), Icon::Liability);
 
   QString kyIcon = accountTypeToString(accountType()) + QString::number(size);
   QPixmap pxIcon;
 
-  if (!QPixmapCache::find(kyIcon, pxIcon)) {
+  if (!QPixmapCache::find(kyIcon, &pxIcon)) {
     pxIcon = Icons::get(ixIcon).pixmap(size); // Qt::AA_UseHighDpiPixmaps (in Qt 5.7) doesn't return highdpi pixmap
     QPixmapCache::insert(kyIcon, pxIcon);
   }
@@ -481,7 +513,7 @@ QPixmap MyMoneyAccount::accountPixmap(const bool reconcileFlag, const int size) 
   if (isClosed())
     ixIcon = Icon::AccountClosed;
   else if (reconcileFlag)
-    ixIcon = Icon::FlagGreen;
+    ixIcon = Icon::Reconciled;
   else if (hasOnlineMapping())
     ixIcon = Icon::Download;
   else
@@ -622,6 +654,12 @@ QString MyMoneyAccount::stdAccName(eMyMoney::Account::Standard stdAccID)
     {eMyMoney::Account::Standard::Expense,   QStringLiteral("AStd::Expense")},
     {eMyMoney::Account::Standard::Income,    QStringLiteral("AStd::Income")},
     {eMyMoney::Account::Standard::Equity,    QStringLiteral("AStd::Equity")},
+    {eMyMoney::Account::Standard::Favorite,  QStringLiteral("AStd::Favorite")},
   };
   return stdAccNames.value(stdAccID);
+}
+
+QString MyMoneyAccount::accountSeparator()
+{
+  return QStringLiteral(":");
 }

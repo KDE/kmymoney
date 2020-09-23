@@ -56,26 +56,29 @@ namespace eMyMoney
 
     QChar _thousandSeparator = QLatin1Char(',');
     QChar _decimalSeparator = QLatin1Char('.');
-    eMyMoney::Money::signPosition _negativeMonetarySignPosition = BeforeQuantityMoney;
-    eMyMoney::Money::signPosition _positiveMonetarySignPosition = BeforeQuantityMoney;
+    eMyMoney::Money::signPosition _negativeMonetarySignPosition = PreceedQuantityAndSymbol;
+    eMyMoney::Money::signPosition _positiveMonetarySignPosition = PreceedQuantityAndSymbol;
     bool _negativePrefixCurrencySymbol = false;
     bool _positivePrefixCurrencySymbol = false;
+    bool _negativeSpaceSeparatesSymbol = true;
+    bool _positiveSpaceSeparatesSymbol = true;
     eMyMoney::Money::fileVersionE _fileVersion = fileVersionE::FILE_4_BYTE_VALUE;
   }
 }
 
-//eMyMoney::Money::_thousandSeparator = QLatin1Char(',');
-//eMyMoney::Money::_decimalSeparator = QLatin1Char('.');
-//eMyMoney::Money::signPosition eMyMoney::Money::_negativeMonetarySignPosition = BeforeQuantityMoney;
-//eMyMoney::Money::signPosition eMyMoney::Money::_positiveMonetarySignPosition = BeforeQuantityMoney;
-//bool eMyMoney::Money::_negativePrefixCurrencySymbol = false;
-//bool eMyMoney::Money::_positivePrefixCurrencySymbol = false;
-
-//MyMoneyMoney::fileVersionE eMyMoney::Money::_fileVersion = MyMoneyMoney::FILE_4_BYTE_VALUE;
-
 MyMoneyMoney MyMoneyMoney::maxValue = MyMoneyMoney(INT64_MAX, 100);
 MyMoneyMoney MyMoneyMoney::minValue = MyMoneyMoney(INT64_MIN, 100);
 MyMoneyMoney MyMoneyMoney::autoCalc = MyMoneyMoney(INT64_MIN + 1, 100);
+
+void MyMoneyMoney::setNegativeSpaceSeparatesSymbol(const bool flag)
+{
+  eMyMoney::Money::_negativeSpaceSeparatesSymbol= flag;
+}
+
+void MyMoneyMoney::setPositiveSpaceSeparatesSymbol(const bool flag)
+{
+  eMyMoney::Money::_positiveSpaceSeparatesSymbol= flag;
+}
 
 void MyMoneyMoney::setNegativePrefixCurrencySymbol(const bool flag)
 {
@@ -292,30 +295,38 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
 
   switch (signpos) {
     case eMyMoney::Money::ParensAround:
-      res.prepend(QLatin1Char('('));
-      res.append(QLatin1Char(')'));
+      // do nothing here
       break;
-    case eMyMoney::Money::BeforeQuantityMoney:
+    case eMyMoney::Money::PreceedQuantityAndSymbol:
       res.prepend(sign);
       break;
-    case eMyMoney::Money::AfterQuantityMoney:
+    case eMyMoney::Money::SucceedQuantityAndSymbol:
       res.append(sign);
       break;
-    case eMyMoney::Money::BeforeMoney:
+    case eMyMoney::Money::PreceedSymbol:
       tmpCurrency.prepend(sign);
       break;
-    case eMyMoney::Money::AfterMoney:
+    case eMyMoney::Money::SucceedSymbol:
       tmpCurrency.append(sign);
       break;
   }
   if (!tmpCurrency.isEmpty()) {
     if (bNegative ? eMyMoney::Money::_negativePrefixCurrencySymbol : eMyMoney::Money::_positivePrefixCurrencySymbol) {
-      res.prepend(QLatin1Char(' '));
+      if (bNegative ? eMyMoney::Money::_negativeSpaceSeparatesSymbol : eMyMoney::Money::_positiveSpaceSeparatesSymbol) {
+        res.prepend(QLatin1Char(' '));
+      }
       res.prepend(tmpCurrency);
     } else {
-      res.append(QLatin1Char(' '));
+      if (bNegative ? eMyMoney::Money::_negativeSpaceSeparatesSymbol : eMyMoney::Money::_positiveSpaceSeparatesSymbol) {
+        res.append(QLatin1Char(' '));
+      }
       res.append(tmpCurrency);
     }
+  }
+
+  if (signpos == eMyMoney::Money::ParensAround) {
+    res.prepend(QLatin1Char('('));
+    res.append(QLatin1Char(')'));
   }
 
   return res;

@@ -1,6 +1,7 @@
 /*
  * Copyright 2012       Alessandro Russo <axela74@yahoo.it>
  * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -128,20 +129,16 @@ void KTagsView::slotRenameSingleTag(QListWidgetItem* ta)
     MyMoneyFileTransaction ft;
     try {
       // check if we already have a tag with the new name
-      try {
-        // this function call will throw an exception, if the tag
-        // hasn't been found.
-        MyMoneyFile::instance()->tagByName(new_name);
-        // the name already exists, ask the user whether he's sure to keep the name
+      const auto tag = MyMoneyFile::instance()->tagByName(new_name);
+      // if the name already exists, ask the user whether he's sure to keep the name
+      if (!tag.id().isEmpty()) {
         if (KMessageBox::questionYesNo(this,
-                                       i18n("A tag with the name '%1' already exists. It is not advisable to have "
+                                        i18n("A tag with the name '%1' already exists. It is not advisable to have "
                                             "multiple tags with the same identification name. Are you sure you would like "
                                             "to rename the tag?", new_name)) != KMessageBox::Yes) {
           ta->setText(d->m_tag.name());
           return;
         }
-      } catch (const MyMoneyException &) {
-        // all ok, the name is unique
       }
 
       d->m_tag.setName(new_name);
@@ -315,8 +312,10 @@ void KTagsView::showTransactions()
 
   int splitCount = 0;
   bool balanceAccurate = true;
+  QSet<QString> accountIds;
   for (it = d->m_transactionList.constBegin(); it != d->m_transactionList.constEnd(); ++it) {
     const MyMoneySplit& split = (*it).second;
+    accountIds.insert(split.accountId());
     MyMoneyAccount acc = file->account(split.accountId());
     ++splitCount;
     uniqueMap[(*it).first.id()]++;
@@ -361,6 +360,8 @@ void KTagsView::showTransactions()
   d->ui->m_balanceLabel->setText(i18n("Balance: %1%2",
                                balanceAccurate ? "" : "~",
                                balance.formatMoney(file->baseCurrency().smallestAccountFraction())));
+  // only make balance visible if all transactions cover a single account
+  d->ui->m_balanceLabel->setVisible(accountIds.count() < 2);
 }
 
 void KTagsView::slotTagDataChanged()
@@ -401,20 +402,18 @@ void KTagsView::slotUpdateTag()
 
 void KTagsView::showEvent(QShowEvent* event)
 {
-  if (MyMoneyFile::instance()->storageAttached()) {
-    Q_D(KTagsView);
-    if (d->m_needLoad)
-      d->init();
+  Q_D(KTagsView);
+  if (d->m_needLoad)
+    d->init();
 
-    emit customActionRequested(View::Tags, eView::Action::AboutToShow);
+  emit customActionRequested(View::Tags, eView::Action::AboutToShow);
 
-    if (d->m_needsRefresh)
-      refresh();
+  if (d->m_needsRefresh)
+    refresh();
 
-    QList<MyMoneyTag> list;
-    selectedTags(list);
-    slotSelectTags(list);
-  }
+  QList<MyMoneyTag> list;
+  selectedTags(list);
+  slotSelectTags(list);
 
   // don't forget base class implementation
   QWidget::showEvent(event);
@@ -619,9 +618,11 @@ void KTagsView::slotDeleteTag()
 
   // first create list with all non-selected tags
   QList<MyMoneyTag> remainingTags = file->tagList();
+  QList<QString> selectedTagIds;
   QList<MyMoneyTag>::iterator it_ta;
   for (it_ta = remainingTags.begin(); it_ta != remainingTags.end();) {
     if (d->m_selectedTags.contains(*it_ta)) {
+      selectedTagIds.append((*it_ta).id());
       it_ta = remainingTags.erase(it_ta);
     } else {
       ++it_ta;
@@ -679,9 +680,9 @@ void KTagsView::slotDeleteTag()
       }
 
       // show transaction reassignment dialog
-      auto dlg = new KTagReassignDlg(this);
+      QPointer<KTagReassignDlg> dlg = new KTagReassignDlg(this);
       KMyMoneyMVCCombo::setSubstringSearchForChildren(dlg, !KMyMoneySettings::stringMatchFromStart());
-      auto tag_id = dlg->show(remainingTags);
+      auto tag_id = dlg->show(selectedTagIds);
       delete dlg; // and kill the dialog
       if (tag_id.isEmpty())  //FIXME-ALEX Let the user choose to not reassign a to-be deleted tag to another one.
         return; // the user aborted the dialog, so let's abort as well

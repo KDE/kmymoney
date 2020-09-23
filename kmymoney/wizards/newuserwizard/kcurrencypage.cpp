@@ -69,7 +69,7 @@ namespace NewUserWizard
     QList<MyMoneySecurity>::const_iterator it;
 
     QString localCurrency(QLocale().currencySymbol(QLocale::CurrencyIsoCode));
-    QString baseCurrency = MyMoneyFile::instance()->storageAttached() ? MyMoneyFile::instance()->baseCurrency().id() : QString();
+    QString baseCurrency = MyMoneyFile::instance()->baseCurrency().id();
 
 
     ui->m_currencyList->clear();
@@ -77,7 +77,7 @@ namespace NewUserWizard
       QTreeWidgetItem* p = insertCurrency(*it);
       if ((*it).id() == baseCurrency) {
         first = p;
-        QIcon icon = Icons::get(Icon::ViewBankAccount);
+        QIcon icon = Icons::get(Icon::BankAccount);
         p->setIcon(0, icon);
       } else {
         p->setIcon(0, QIcon());

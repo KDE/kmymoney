@@ -2,7 +2,7 @@
  * Copyright 2000-2002  Michael Edwardes <mte@users.sourceforge.net>
  * Copyright 2001       Felix Rodriguez <frodriguez@users.sourceforge.net>
  * Copyright 2002-2003  Kevin Tambascio <ktambascio@users.sourceforge.net>
- * Copyright 2006-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2006-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2006       Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
@@ -123,8 +123,8 @@ public:
   bool operator == (const MyMoneyAccount &) const;
 
   /**
-    * This converts the account type into one of the four
-    * major account types liability, asset, expense or income.
+    * This converts the account type into one of the five
+    * major account types liability, asset, expense, income or equity.
     *
     * The current assignment is as follows:
     *
@@ -150,6 +150,9 @@ public:
     *
     * - Expense
     *   - Expense
+    *
+    * - Equity
+    *   - Equity
     *
     * @return accountTypeE of major account type
     */
@@ -381,10 +384,29 @@ public:
   bool hasReferenceTo(const QString& id) const override;
 
   /**
+   * @copydoc MyMoneyObject::referencedObjects
+   */
+  QSet<QString> referencedObjects() const override;
+
+  /**
     * This member returns the balance of this account based on
     * all transactions stored in the journal.
     */
   MyMoneyMoney balance() const;
+
+  /**
+   * This member returns the value of this account based on
+   * all transactions stored in the journal and currently available
+   * price information.
+   */
+  MyMoneyMoney postedValue() const;
+
+  /**
+   * This member returns the value of this account and all its
+   * subaccounts based on all transactions stored in the journal
+   * and currently available price information.
+   */
+  MyMoneyMoney totalPostedValue() const;
 
   /**
     * This method adjusts the balance of this account
@@ -407,6 +429,24 @@ public:
     *             value to be assigned to the balance
     */
   void setBalance(const MyMoneyMoney& val);
+
+  /**
+   * This method sets the total value of this account to @p val. This
+   * does not include the subaccounts
+   *
+   * @param val const reference to MyMoneyMoney object containing the
+   *             value to be assigned to the total posted value
+   */
+  void setPostedValue(const MyMoneyMoney& val);
+
+  /**
+   * This method sets the total value of this account and all its
+   * subaccounts to @p val.
+   *
+   * @param val const reference to MyMoneyMoney object containing the
+   *             value to be assigned to the total posted value
+   */
+  void setTotalPostedValue(const MyMoneyMoney& val);
 
   /**
     * This method sets the kvp's for online banking with this account
@@ -588,6 +628,7 @@ public:
   bool hasOnlineMapping() const;
 
   static QString stdAccName(eMyMoney::Account::Standard stdAccID);
+  static QString accountSeparator();
 
   QDataStream &operator<<(const MyMoneyAccount &);
   QDataStream &operator>>(MyMoneyAccount &);

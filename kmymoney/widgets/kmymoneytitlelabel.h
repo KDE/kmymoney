@@ -19,6 +19,8 @@
 #ifndef KMYMONEYTITLELABEL_H
 #define KMYMONEYTITLELABEL_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -35,7 +37,7 @@
   * @author ace jones
   */
 class KMyMoneyTitleLabelPrivate;
-class KMyMoneyTitleLabel : public QLabel
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyTitleLabel : public QLabel
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyTitleLabel)

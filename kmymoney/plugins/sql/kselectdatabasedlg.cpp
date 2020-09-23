@@ -22,7 +22,6 @@
 // QT Includes
 
 #include <QUrlQuery>
-#include <QAction>
 
 // ----------------------------------------------------------------------------
 // KDE Includes

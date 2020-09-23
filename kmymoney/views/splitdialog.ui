@@ -687,7 +687,7 @@
   <customwidget>
    <class>SplitView</class>
    <extends>QTableView</extends>
-   <header>ledgerview.h</header>
+   <header>splitview.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

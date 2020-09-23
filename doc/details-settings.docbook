@@ -20,10 +20,10 @@
    to customize it to meet the needs of your unique financial affairs, and to
    modify its look and feel to match your personality.  These settings can be
    changed through <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-   &kmymoney;...</guimenuitem></menuchoice> or by using the keyboard shortcut
-   <keycombo action="simul">&Ctrl; &Shift;
-   <keycap>,</keycap></keycombo>. In order for any changes to take effect the
-   <guibutton>Apply</guibutton> button must be clicked.
+   &kmymoney;...</guimenuitem></menuchoice> menu item or by using the keyboard
+   shortcut <keycombo action="simul">&Ctrl; &Shift;<keycap>,</keycap></keycombo>.
+   In order for any changes to take effect the <guibutton>Apply</guibutton>
+   button must be clicked.
 </para>
 
 <para>
@@ -40,17 +40,6 @@
 <title>Global tab</title>
 
 <variablelist>
-  <varlistentry>
-    <term><guilabel>Startup options</guilabel></term>
-    <listitem>
-      <para>If you check the <guilabel>Show splash screen</guilabel> box,
-      &kmymoney; will display the splash screen when &kmymoney; starts.  The splash
-      screen shows which version of the program you are running in the lower
-      left hand corner.  Unchecking the box prevents the splash screen from
-      appearing at startup.</para>
-    </listitem>
-  </varlistentry>
-
   <varlistentry>
     <term><guilabel>Autosave options</guilabel></term>
 <!-- I would prefer to use a more consistent hierarchy and use of levels on this
@@ -87,7 +76,7 @@
       then two ways to launch the program.</para>
       <para>First, you can use
       <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-      Toolbars...</guimenuitem></menuchoice> to place the
+      Toolbars...</guimenuitem></menuchoice> menu item to place the
       <guilabel>Calculator</guilabel> icon on the Toolbar.  Then, when you click
       that icon on the Toolbar, &kmymoney; will launch the selected
       application.</para>
@@ -98,9 +87,9 @@
            doc page. -->
       <para>Second, you can use
       <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-      Shortcuts...</guimenuitem></menuchoice> to set a custom keyboard shortcut.
-      (The entry is under KMyMoney/Calculator in that list.)  You can then use
-      that shortcut to launch the application.</para>
+      Shortcuts...</guimenuitem></menuchoice> menu item to set a custom keyboard
+      shortcut. (The entry is under &kmymoney;/Calculator in that list.)  You can
+      then use that shortcut to launch the application.</para>
       <!-- FIXME is not currently possible to launch the calculator from some menu
            item.  I have filed a wishlist, and when implemented, it should be
            described here, probably as the first choice. -->
@@ -125,7 +114,7 @@
   </varlistentry>
 
   <varlistentry>
-  <term><guilabel>Type of the KMyMoney view</guilabel></term>
+  <term><guilabel>Type of the &kmymoney; view</guilabel></term>
     <listitem>
       <para> You can select one of three general layouts for &kmymoney; to use.  If
       you select the List or Tree view, the icons and their labels will be located at
@@ -140,7 +129,7 @@
     <listitem>
       <para>Checking this box will display the blue &kmymoney; title bar across the
       top of each page.  Unchecking it will remove the title bar and provide a larger
-      area for viewing the content of each page</para>
+      area for viewing the content of each page.</para>
     </listitem>
   </varlistentry>
 
@@ -299,7 +288,7 @@
     <listitem>
       <para>This will display the accounts that are identified as Preferred accounts
       within the <menuchoice><guimenu>Account</guimenu><guimenuitem>Edit account...
-      </guimenuitem></menuchoice>Configuration dialog.</para>
+      </guimenuitem></menuchoice> Configuration dialog.</para>
       <para>For this and all other account list sections addressed by this set of
       options, the display will include the account name and current balance, and
       other columns specific to that type of report, and in some cases, as configured
@@ -577,7 +566,7 @@ of accounts.</para>
 <para>
   This tab controls the default sort order of the ledger while in the
   Reconciliation view.  This is the display of transactions shown during the
-  process of <link linkend="details.reconcile">Reconciliation</link>
+  process of <link linkend="details.reconcile">Reconciliation</link>.
 </para>
 </sect3>
 
@@ -594,15 +583,6 @@ of accounts.</para>
 <para>These options affect the process of creating new transactions.</para>
 
 <variablelist>
-  <varlistentry>
-    <term><guilabel>Insert transaction type into No. field for new
-    transactions</guilabel></term>
-    <listitem>
-      <para>Enabling this will automatically place the type of the transaction,
-      &eg;, Deposit, Withdrawal, &etc;, in the No. field.</para>
-    </listitem>
-  </varlistentry>
-
   <varlistentry>
     <term><guilabel>Auto increment check number</guilabel></term>
     <listitem>
@@ -941,7 +921,7 @@ of accounts.</para>
   institution to show where they will be printed on the check.  &kmymoney; is
   shipped with some sample template files.  You should either be able to use one
   of them, or modify one to suit your needs.  When the default template is
-  selected, the configuration dialog will show you the directory which contains
+  selected, the configuration dialog will show you the folder which contains
   the sample files.
 </para>
 

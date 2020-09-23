@@ -40,7 +40,8 @@
 
 #include "ui_kaccounttypepage.h"
 
-#include "kequitypriceupdatedlg.h"
+/// @todo port to new model code
+// #include "kequitypriceupdatedlg.h"
 #include "kmymoneycurrencyselector.h"
 #include "kmymoneydateinput.h"
 #include "kmymoneygeneralcombo.h"
@@ -170,6 +171,8 @@ namespace NewAccountWizard
 
   void AccountTypePage::slotGetOnlineQuote()
   {
+    /// @todo port to new model code
+#if 0
     Q_D(AccountTypePage);
     QString id = MyMoneyFile::instance()->baseCurrency().id() + ' ' + d->ui->m_currencyComboBox->security().id();
     QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this, id);
@@ -183,6 +186,7 @@ namespace NewAccountWizard
           }
       }
     delete dlg;
+#endif
   }
 
   void AccountTypePage::slotPriceWarning()

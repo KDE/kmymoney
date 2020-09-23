@@ -1,19 +1,19 @@
-/***************************************************************************
-                          ledgerview.cpp
-                             -------------------
-    begin                : Sat Aug 8 2015
-    copyright            : (C) 2015 by Thomas Baumgart
-    email                : Thomas Baumgart <tbaumgart@kde.org>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2015-2019  Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "ledgerview.h"
 
@@ -24,87 +24,115 @@
 #include <QPainter>
 #include <QResizeEvent>
 #include <QDate>
+#include <QScrollBar>
 #include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KMessageWidget>
+#include <KLocalizedString>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ledgerproxymodel.h"
-#include "ledgerdelegate.h"
-#include "ledgermodel.h"
-#include "models.h"
+#include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
-#include "mymoneyaccount.h"
 #include "accountsmodel.h"
+#include "journalmodel.h"
+#include "specialdatesmodel.h"
+#include "columnselector.h"
+#include "mymoneyenums.h"
+#include "delegateproxy.h"
+#include "journaldelegate.h"
+#include "onlinebalancedelegate.h"
+#include "specialdatedelegate.h"
+#include "schedulesjournalmodel.h"
+#include "transactioneditorbase.h"
+
+Q_GLOBAL_STATIC(LedgerView*, s_globalEditView);
 
 class LedgerView::Private
 {
 public:
   Private(LedgerView* p)
   : q(p)
-  , delegate(0)
-  , filterModel(new LedgerProxyModel(p))
-  , adjustableColumn((int)eLedgerModel::Column::Detail)
+  , delegateProxy(new DelegateProxy(q))
+  , adjustableColumn(JournalModel::Column::Detail)
   , adjustingColumn(false)
   , showValuesInverted(false)
-  , balanceCalculationPending(false)
+  , newTransactionPresent(false)
+  , columnSelector(nullptr)
+  , infoMessage(new KMessageWidget(q))
   {
-    filterModel->setFilterRole((int)eLedgerModel::Role::AccountId);
-    filterModel->setSourceModel(Models::instance()->ledgerModel());
+    infoMessage->hide();
+
+    const auto file = MyMoneyFile::instance();
+
+    auto journalDelegate = new JournalDelegate(q);
+    delegateProxy->addDelegate(file->journalModel(), journalDelegate);
+    delegateProxy->addDelegate(file->journalModel()->newTransaction(), journalDelegate);
+    delegateProxy->addDelegate(file->accountsModel(), new OnlineBalanceDelegate(q));
+    delegateProxy->addDelegate(file->specialDatesModel(), new SpecialDateDelegate(q));
+    delegateProxy->addDelegate(file->schedulesJournalModel(), journalDelegate);
+
+    q->setItemDelegate(delegateProxy);
   }
 
-  void setDelegate(LedgerDelegate* _delegate)
+  void setSingleLineDetailRole(eMyMoney::Model::Roles role)
   {
-    delete delegate;
-    delegate = _delegate;
-  }
-
-  void setSortRole(eLedgerModel::Role role, int column)
-  {
-    Q_ASSERT(delegate);
-    Q_ASSERT(filterModel);
-
-    delegate->setSortRole(role);
-    filterModel->setSortRole((int)role);
-    filterModel->sort(column);
-  }
-
-  void recalculateBalances()
-  {
-    const auto start = filterModel->index(0, 0);
-    const auto indexes = filterModel->match(start, (int)eLedgerModel::Role::AccountId, account.id(), -1);
-    MyMoneyMoney balance;
-    for(const auto &index : indexes) {
-      if(showValuesInverted) {
-        balance -= filterModel->data(index, (int)eLedgerModel::Role::SplitShares).value<MyMoneyMoney>();
-      } else {
-        balance += filterModel->data(index, (int)eLedgerModel::Role::SplitShares).value<MyMoneyMoney>();
+    for (auto delegate : delegates) {
+      JournalDelegate* journalDelegate = qobject_cast<JournalDelegate*>(delegate);
+      if(journalDelegate) {
+        journalDelegate->setSingleLineRole(role);
       }
-      const auto txt = balance.formatMoney(account.fraction());
-      const auto dispIndex = filterModel->index(index.row(), (int)eLedgerModel::Column::Balance);
-      filterModel->setData(dispIndex, txt, Qt::DisplayRole);
     }
-
-    // filterModel->invalidate();
-    const QModelIndex top = filterModel->index(0, (int)eLedgerModel::Column::Balance);
-    const QModelIndex bottom = filterModel->index(filterModel->rowCount()-1, (int)eLedgerModel::Column::Balance);
-
-    q->dataChanged(top, bottom);
-    balanceCalculationPending = false;
   }
 
-  LedgerView*                 q;
-  LedgerDelegate*             delegate;
-  LedgerProxyModel*           filterModel;
-  MyMoneyAccount              account;
-  int                         adjustableColumn;
-  bool                        adjustingColumn;
-  bool                        showValuesInverted;
-  bool                        balanceCalculationPending;
+  void ensureEditorFullyVisible(const QModelIndex& idx)
+  {
+    const auto viewportHeight = q->viewport()->height();
+    const auto verticalOffset = q->verticalHeader()->offset();
+    const auto verticalPosition = q->verticalHeader()->sectionPosition(idx.row());
+    const auto cellHeight = q->verticalHeader()->sectionSize(idx.row());
+
+    // in case the idx is displayed passed the viewport
+    // adjust the position of the scroll area
+    if (verticalPosition - verticalOffset + cellHeight > viewportHeight) {
+      q->verticalScrollBar()->setValue(q->verticalScrollBar()->maximum());
+    }
+  }
+
+  bool haveGlobalEditor()
+  {
+    return *s_globalEditView() != nullptr;
+  }
+
+  void registerGlobalEditor()
+  {
+    if (!haveGlobalEditor()) {
+      *s_globalEditView() = q;
+    }
+  }
+
+  void unregisterGlobalEditor()
+  {
+    *s_globalEditView() = nullptr;
+  }
+
+  LedgerView*                     q;
+  DelegateProxy*                  delegateProxy;
+  QHash<const QAbstractItemModel*, QStyledItemDelegate*>   delegates;
+  int                             adjustableColumn;
+  bool                            adjustingColumn;
+  bool                            showValuesInverted;
+  bool                            newTransactionPresent;
+  ColumnSelector*                 columnSelector;
+  KMessageWidget*                 infoMessage;
+  QString                         accountId;
+  QString                         groupName;
+  QPersistentModelIndex           editIndex;
 };
 
 
@@ -113,10 +141,12 @@ LedgerView::LedgerView(QWidget* parent)
   : QTableView(parent)
   , d(new Private(this))
 {
-  verticalHeader()->setDefaultSectionSize(15);
-  verticalHeader()->setMinimumSectionSize(15);
+  // keep rows as small as possible
+  verticalHeader()->setMinimumSectionSize(1);
   verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
   verticalHeader()->hide();
+
+  horizontalHeader()->setMinimumSectionSize(20);
 
   // since we don't have a vertical header, it does not make sense
   // to use the first column to select all items in the view
@@ -138,8 +168,6 @@ LedgerView::LedgerView(QWidget* parent)
   setSelectionBehavior(SelectRows);
 
   setTabKeyNavigation(false);
-
-  setModel(d->filterModel);
 }
 
 LedgerView::~LedgerView()
@@ -147,158 +175,107 @@ LedgerView::~LedgerView()
   delete d;
 }
 
+void LedgerView::setColumnSelectorGroupName(const QString& groupName)
+{
+  if (!d->columnSelector) {
+    d->groupName = groupName;
+  } else {
+    qWarning() << "LedgerView::setColumnSelectorGroupName must be called before model assignment";
+  }
+}
+
+void LedgerView::setModel(QAbstractItemModel* model)
+{
+  if (!d->columnSelector) {
+    d->columnSelector = new ColumnSelector(this, d->groupName);
+  }
+  QTableView::setModel(model);
+
+  d->columnSelector->setModel(model);
+  horizontalHeader()->setSectionResizeMode(JournalModel::Column::Reconciliation, QHeaderView::ResizeToContents);
+}
+
+void LedgerView::setAccountId(const QString& id)
+{
+  d->accountId = id;
+}
+
+const QString& LedgerView::accountId() const
+{
+  return d->accountId;
+}
+
 bool LedgerView::showValuesInverted() const
 {
   return d->showValuesInverted;
 }
 
-void LedgerView::setAccount(const MyMoneyAccount& acc)
+void LedgerView::setColumnsHidden(QVector<int> columns)
 {
-  d->account = acc;
-  switch(acc.accountType()) {
-    case eMyMoney::Account::Type::Investment:
-      break;
-
-    default:
-      setColumnHidden((int)eLedgerModel::Column::Security, true);
-      setColumnHidden((int)eLedgerModel::Column::CostCenter, true);
-      setColumnHidden((int)eLedgerModel::Column::Quantity, true);
-      setColumnHidden((int)eLedgerModel::Column::Price, true);
-      setColumnHidden((int)eLedgerModel::Column::Amount, true);
-      setColumnHidden((int)eLedgerModel::Column::Value, true);
-
-      horizontalHeader()->resizeSection((int)eLedgerModel::Column::Reconciliation, 20);
-
-      d->setDelegate(new LedgerDelegate(this));
-      setItemDelegate(d->delegate);
-      break;
-  }
-
-  d->showValuesInverted = false;
-  if(acc.accountGroup() == eMyMoney::Account::Type::Liability
-  || acc.accountGroup() == eMyMoney::Account::Type::Income) {
-    d->showValuesInverted = true;
-  }
-
-  d->filterModel->setFilterRole((int)eLedgerModel::Role::AccountId);
-  d->filterModel->setFilterKeyColumn(0);
-  d->filterModel->setFilterFixedString(acc.id());
-  d->filterModel->setAccountType(acc.accountType());
-
-  d->setSortRole(eLedgerModel::Role::PostDate, (int)eLedgerModel::Column::Date);
-
-  if (acc.hasOnlineMapping()) {
-    connect(Models::instance()->accountsModel(), &AccountsModel::dataChanged, this, &LedgerView::accountChanged);
-  } else {
-    disconnect(Models::instance()->accountsModel(), &AccountsModel::dataChanged, this, &LedgerView::accountChanged);
-    d->delegate->setOnlineBalance(QDate(), MyMoneyMoney());
-  }
-  accountChanged();
-
-  // if balance calculation has not been triggered, then run it immediately
-  if(!d->balanceCalculationPending) {
-    recalculateBalances();
-  }
-
-  if(d->filterModel->rowCount() > 0) {
-    // we need to check that the last row may contain a scheduled transaction or
-    // the row that is shown for new transacations.
-    // in that case, we need to go back to find the actual last transaction
-    int row = d->filterModel->rowCount()-1;
-    while(row >= 0) {
-      const QModelIndex index = d->filterModel->index(row, 0);
-      if(d->filterModel->data(index, (int)eLedgerModel::Role::ScheduleId).toString().isEmpty()
-      && !d->filterModel->data(index, (int)eLedgerModel::Role::TransactionSplitId).toString().isEmpty() ) {
-        setCurrentIndex(index);
-        selectRow(index.row());
-        scrollTo(index, PositionAtBottom);
-        break;
-      }
-      row--;
-    }
-  }
+  d->columnSelector->setAlwaysHidden(columns);
 }
 
-QString LedgerView::accountId() const
+void LedgerView::setColumnsShown(QVector<int> columns)
 {
-  QString id;
-  if(d->filterModel->filterRole() == (int)eLedgerModel::Role::AccountId)
-    id = d->account.id();
-  return id;
-}
-
-void LedgerView::accountChanged()
-{
-  QString id = accountId();
-  if(!id.isEmpty()) {
-    d->account = MyMoneyFile::instance()->account(id);
-    QDate onlineBalanceDate = QDate::fromString(d->account.value(QLatin1String("lastImportedTransactionDate")), Qt::ISODate);
-    MyMoneyMoney amount(d->account.value(QLatin1String("lastStatementBalance")));
-    if (d->showValuesInverted) {
-      amount = -amount;
-    }
-    d->delegate->setOnlineBalance(onlineBalanceDate, amount, d->account.fraction());
-  } else {
-    d->delegate->setOnlineBalance(QDate(), MyMoneyMoney());
-  }
-  // force redraw
-  d->filterModel->invalidate();
-}
-
-void LedgerView::recalculateBalances()
-{
-  d->recalculateBalances();
-}
-
-void LedgerView::rowsAboutToBeRemoved(const QModelIndex& index, int start, int end)
-{
-  QAbstractItemView::rowsAboutToBeRemoved(index, start, end);
-  // make sure the balances are recalculated but trigger only once
-  if(!d->balanceCalculationPending) {
-    d->balanceCalculationPending = true;
-    QMetaObject::invokeMethod(this, "recalculateBalances", Qt::QueuedConnection);
-  }
-}
-
-void LedgerView::rowsInserted(const QModelIndex& index, int start, int end)
-{
-  QTableView::rowsInserted(index, start, end);
-  // make sure the balances are recalculated but trigger only once
-  if(!d->balanceCalculationPending) {
-    d->balanceCalculationPending = true;
-    QMetaObject::invokeMethod(this, "recalculateBalances", Qt::QueuedConnection);
-  }
+  d->columnSelector->setAlwaysVisible(columns);
 }
 
 bool LedgerView::edit(const QModelIndex& index, QAbstractItemView::EditTrigger trigger, QEvent* event)
 {
-  bool rc = QTableView::edit(index, trigger, event);
+  bool suppressDuplicateEditorStart = false;
 
-  if(rc) {
-    // editing started, but we need the editor to cover all columns
-    // so we close it, set the span to have a single row and recreate
-    // the editor in that single cell
-    closeEditor(indexWidget(index), QAbstractItemDelegate::NoHint);
+  switch(trigger) {
+    case QAbstractItemView::DoubleClicked:
+    case QAbstractItemView::EditKeyPressed:
+        suppressDuplicateEditorStart = true;
+      break;
+    default:
+      break;
+  }
 
-//    bool haveEditorInOtherView = false;
-    /// @todo Here we need to make sure that only a single editor can be started at a time
+  if(d->haveGlobalEditor() && suppressDuplicateEditorStart) {
+    if (!d->infoMessage->isVisible() && !d->infoMessage->isShowAnimationRunning()) {
+      d->infoMessage->resize(viewport()->width(), d->infoMessage->height());
+      d->infoMessage->setText(i18n("You are already editing a transaction in another view. KMyMoney does not support editing two transactions in parallel."));
+      d->infoMessage->setMessageType(KMessageWidget::Warning);
+      d->infoMessage->animatedShow();
+    }
 
-//    if(!haveEditorInOtherView) {
+  } else {
+    bool rc = QTableView::edit(index, trigger, event);
+
+    if(rc) {
+      // editing started, but we need the editor to cover all columns
+      // so we close it, set the span to have a single row and recreate
+      // the editor in that single cell
+      closeEditor(indexWidget(index), QAbstractItemDelegate::NoHint);
+
+      d->registerGlobalEditor();
+      d->infoMessage->animatedHide();
+
       emit aboutToStartEdit();
       setSpan(index.row(), 0, 1, horizontalHeader()->count());
-      QModelIndex editIndex = model()->index(index.row(), 0);
-      rc = QTableView::edit(editIndex, trigger, event);
+      d->editIndex = model()->index(index.row(), 0);
+
+      rc = QTableView::edit(d->editIndex, trigger, event);
 
       // make sure that the row gets resized according to the requirements of the editor
       // and is completely visible
-      resizeRowToContents(index.row());
-      QMetaObject::invokeMethod(this, "ensureCurrentItemIsVisible", Qt::QueuedConnection);
-//    } else {
-//      rc = false;
-//    }
-  }
+      const auto editor = qobject_cast<TransactionEditorBase*>(indexWidget(d->editIndex));
+      connect(editor, &TransactionEditorBase::editorLayoutChanged, this, &LedgerView::resizeEditorRow);
 
-  return rc;
+      resizeEditorRow();
+    }
+    return rc;
+  }
+  return false;
+}
+
+void LedgerView::resizeEditorRow()
+{
+  resizeRowToContents(d->editIndex.row());
+  d->ensureEditorFullyVisible(d->editIndex);
+  QMetaObject::invokeMethod(this, "ensureCurrentItemIsVisible", Qt::QueuedConnection);
 }
 
 void LedgerView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint)
@@ -306,11 +283,14 @@ void LedgerView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint
   QTableView::closeEditor(editor, hint);
   clearSpans();
 
+  d->unregisterGlobalEditor();
+
   // we need to resize the row that contained the editor.
   resizeRowsToContents();
 
   emit aboutToFinishEdit();
 
+  d->editIndex = QModelIndex();
   QMetaObject::invokeMethod(this, "ensureCurrentItemIsVisible", Qt::QueuedConnection);
 }
 
@@ -341,21 +321,45 @@ void LedgerView::wheelEvent(QWheelEvent* e)
   QTableView::wheelEvent(e);
 }
 
+void LedgerView::keyPressEvent(QKeyEvent* kev)
+{
+  if ((d->infoMessage->isVisible()) && kev->matches(QKeySequence::Cancel)) {
+    kev->accept();
+    d->infoMessage->animatedHide();
+  } else {
+    QTableView::keyPressEvent(kev);
+  }
+}
+
 void LedgerView::currentChanged(const QModelIndex& current, const QModelIndex& previous)
 {
-  // qDebug() << "currentChanged";
   QTableView::currentChanged(current, previous);
 
   if(current.isValid()) {
-    QModelIndex index = current.model()->index(current.row(), 0);
-    scrollTo(index, EnsureVisible);
-    QString id = current.model()->data(index, (int)eLedgerModel::Role::TransactionSplitId).toString();
+    QModelIndex idx = current.model()->index(current.row(), 0);
+    QString id = idx.data(eMyMoney::Model::IdRole).toString();
     // For a new transaction the id is completely empty, for a split view the transaction
     // part is filled but the split id is empty and the string ends with a dash
     if(id.isEmpty() || id.endsWith('-')) {
-      edit(index);
+      // the next two lines prevent an endless recursive call of this method
+      if (idx == previous) {
+        return;
+      }
+      // check for an empty account being opened. we can detect
+      // that by an invalid previous index and don't start
+      // editing right away.
+      if (!previous.isValid()) {
+        selectRow(idx.row());
+        return;
+      }
+      selectionModel()->clearSelection();
+      setCurrentIndex(idx);
+      selectRow(idx.row());
+      scrollTo(idx, QAbstractItemView::PositionAtBottom);
+      edit(idx);
     } else {
-      emit transactionSelected(id);
+      scrollTo(idx, EnsureVisible);
+      emit transactionSelected(MyMoneyFile::baseModel()->mapToBaseSource(idx));
     }
     QMetaObject::invokeMethod(this, "doItemsLayout", Qt::QueuedConnection);
   }
@@ -401,6 +405,27 @@ void LedgerView::paintEvent(QPaintEvent* event)
   }
 }
 
+void LedgerView::setSingleLineDetailRole(eMyMoney::Model::Roles role)
+{
+  d->setSingleLineDetailRole(role);
+}
+
+int LedgerView::sizeHintForColumn(int col) const
+{
+  if (col == JournalModel::Column::Reconciliation) {
+    QStyleOptionViewItem opt;
+    const QModelIndex index = model()->index(0, col);
+    const auto delegate = d->delegateProxy->delegate(index);
+    if (delegate) {
+      int hint = delegate->sizeHint(opt, index).width();
+      if(showGrid())
+        hint += 1;
+      return hint;
+    }
+  }
+  return QTableView::sizeHintForColumn(col);
+}
+
 int LedgerView::sizeHintForRow(int row) const
 {
   // we can optimize the sizeHintForRow() operation by asking the
@@ -408,10 +433,17 @@ int LedgerView::sizeHintForRow(int row) const
   // method which scans over all items in a column and takes a long
   // time in large ledgers. In case the editor is open in the row, we
   // use the regular method.
-  QModelIndex index = d->filterModel->index(row, 0);
-  if(d->delegate && (d->delegate->editorRow() != row)) {
+  // We always ask for the detail column as this varies in height
+  ensurePolished();
+
+  const QModelIndex index = model()->index(row, JournalModel::Column::Detail);
+  const auto delegate = d->delegateProxy->delegate(index);
+  const auto journalDelegate = qobject_cast<const JournalDelegate*>(delegate);
+
+  if(journalDelegate && (journalDelegate->editorRow() != row)) {
     QStyleOptionViewItem opt;
-    int hint = d->delegate->sizeHint(opt, index).height();
+    opt.state |= (row == currentIndex().row()) ? QStyle::State_Selected : QStyle::State_None;
+    int hint = delegate->sizeHint(opt, index).height();
     if(showGrid())
       hint += 1;
     return hint;
@@ -425,6 +457,10 @@ void LedgerView::resizeEvent(QResizeEvent* event)
   // qDebug() << "resizeEvent, old:" << event->oldSize() << "new:" << event->size() << "viewport:" << viewport()->width();
   QTableView::resizeEvent(event);
   adjustDetailColumn(event->size().width());
+  d->infoMessage->resize(viewport()->width(), d->infoMessage->height());
+  d->infoMessage->setWordWrap(false);
+  d->infoMessage->setWordWrap(true);
+  d->infoMessage->setText(d->infoMessage->text());
 }
 
 void LedgerView::adjustDetailColumn()
@@ -464,16 +500,119 @@ void LedgerView::ensureCurrentItemIsVisible()
   scrollTo(currentIndex(), EnsureVisible);
 }
 
-void LedgerView::setShowEntryForNewTransaction(bool show)
+void LedgerView::slotSettingsChanged()
 {
-  d->filterModel->setShowNewTransaction(show);
+#if 0
+
+  // KMyMoneySettings::showGrid()
+  // KMyMoneySettings::sortNormalView()
+  // KMyMoneySettings::ledgerLens()
+  // KMyMoneySettings::showRegisterDetailed()
+  d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
+  d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+  d->m_proxyModel->setHideFavoriteAccounts(true);
+#endif
 }
 
-SplitView::SplitView(QWidget* parent)
-  : LedgerView(parent)
+void LedgerView::selectMostRecentTransaction()
 {
+  if (model()->rowCount() > 0) {
+
+    // we need to check that the last row may contain a scheduled transaction or
+    // the row that is shown for new transacations or a special entry (e.g.
+    // online balance or date mark).
+    // in that case, we need to go back to find the actual last transaction
+    int row = model()->rowCount()-1;
+    const auto journalModel = MyMoneyFile::instance()->journalModel();
+    while(row >= 0) {
+      const QModelIndex idx = model()->index(row, 0);
+      if (MyMoneyFile::baseModel()->baseModel(idx) == journalModel) {
+        setCurrentIndex(idx);
+        selectRow(idx.row());
+        scrollTo(idx, QAbstractItemView::PositionAtBottom);
+        break;
+      }
+      row--;
+    }
+  }
 }
 
-SplitView::~SplitView()
+QStringList LedgerView::selectedTransactions() const
 {
+  QStringList selection;
+
+  QString id;
+  for (const auto& idx : selectionModel()->selectedIndexes()) {
+    id = idx.data(eMyMoney::Model::JournalTransactionIdRole).toString();
+    if (!selection.contains(id)) {
+      selection.append(id);
+    }
+  }
+  return selection;
+}
+
+void LedgerView::setSelectedTransactions(const QStringList& transactionIds)
+{
+  QItemSelection selection;
+  const auto journalModel = MyMoneyFile::instance()->journalModel();
+  const auto lastColumn = model()->columnCount()-1;
+  int startRow = -1;
+  int lastRow = -1;
+  QModelIndex currentIdx;
+
+  auto createSelectionRange = [&]() {
+    if (startRow != -1) {
+      selection.select(model()->index(startRow, 0), model()->index(lastRow, lastColumn));
+      startRow = -1;
+    }
+  };
+
+  for (const auto& id : transactionIds) {
+    if (id.isEmpty())
+      continue;
+    const auto indexes = journalModel->indexesByTransactionId(id);
+    int row = -1;
+    for (const auto baseIdx : indexes) {
+      row = journalModel->mapFromBaseSource(model(), baseIdx).row();
+      if (row != -1) {
+        break;
+      }
+    }
+    if (row == -1) {
+      qDebug() << "transaction" << id << "not found anymore for selection. skipped";
+      continue;
+    }
+
+    if (startRow == -1) {
+      startRow = row;
+      lastRow = row;
+      // use the first as the current index
+      if (!currentIdx.isValid()) {
+        currentIdx = model()->index(startRow, 0);
+      }
+    } else {
+      if (row == lastRow+1) {
+        lastRow = row;
+      } else {
+        // a new range start, so we take care of it
+        createSelectionRange();
+      }
+    }
+  }
+
+  // if no selection has been setup but we have
+  // transactions in the ledger, we select the
+  // last. The very last entry is the empty line,
+  // so we have to skip that.
+  if ((lastRow == -1) && (model()->rowCount() > 1)) {
+    startRow = lastRow = model()->rowCount()-2;
+    currentIdx = model()->index(startRow, 0);
+  }
+
+  // add a possibly dangling range
+  createSelectionRange();
+
+  selectionModel()->clearSelection();
+  selectionModel()->select(selection, QItemSelectionModel::Select);
+  selectionModel()->setCurrentIndex(currentIdx, QItemSelectionModel::Select);
 }

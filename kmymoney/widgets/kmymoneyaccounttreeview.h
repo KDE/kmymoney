@@ -1,6 +1,7 @@
 /*
  * Copyright 2010-2014  Cristian Oneț <onet.cristian@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -19,12 +20,13 @@
 #ifndef KMYMONEYACCOUNTTREEVIEW_H
 #define KMYMONEYACCOUNTTREEVIEW_H
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QTreeView>
+#include <QScopedPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,7 +35,8 @@
 // Project Includes
 
 class MyMoneyObject;
-class AccountsViewProxyModel;
+class AccountsProxyModel;
+class KMyMoneyAccountTreeViewPrivate;
 
 namespace eAccountsModel { enum class Column; }
 namespace eView { enum class Intent; }
@@ -42,8 +45,7 @@ enum class View;
 /**
   * This view was created to handle the actions that could be performed with the accounts.
   */
-class KMyMoneyAccountTreeViewPrivate;
-class KMM_WIDGETS_EXPORT KMyMoneyAccountTreeView : public QTreeView
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyAccountTreeView : public QTreeView
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyAccountTreeView)
@@ -52,7 +54,22 @@ public:
   explicit KMyMoneyAccountTreeView(QWidget* parent = nullptr);
   ~KMyMoneyAccountTreeView();
 
-  AccountsViewProxyModel *init(View view);
+  AccountsProxyModel* proxyModel() const;
+
+  /**
+   * This method attaches the @a model to the view while
+   * inserting the @sa proxyModel() in between them.
+   */
+  void setModel(QAbstractItemModel* model) override;
+
+  /**
+   * This method replaces the existing proxy model with @a model.
+   * @a model will be reparented to the this object.
+   *
+   * @note It is advisable to replace this soon after construction
+   * and not during operation.
+   */
+  void setProxyModel(AccountsProxyModel* model);
 
 protected:
   void mouseDoubleClickEvent(QMouseEvent *event) override;
@@ -67,11 +84,8 @@ Q_SIGNALS:
   void selectByVariant(const QVariantList&, eView::Intent);
 
 private:
-  KMyMoneyAccountTreeViewPrivate * const d_ptr;
+  const QScopedPointer<KMyMoneyAccountTreeViewPrivate> d_ptr;
   Q_DECLARE_PRIVATE(KMyMoneyAccountTreeView)
-
-private Q_SLOTS:
-  void slotColumnToggled(const eAccountsModel::Column column, const bool show);
 };
 
 #endif // KMYMONEYACCOUNTTREEVIEW_H

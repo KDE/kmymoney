@@ -1,19 +1,20 @@
-/***************************************************************************
-                          newtransactioneform.cpp
-                             -------------------
-    begin                : Sat Aug 8 2015
-    copyright            : (C) 2015 by Thomas Baumgart
-    email                : Thomas Baumgart <tbaumgart@kde.org>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2015-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2020       Robert Szczesiak <dev.rszczesiak@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "newtransactionform.h"
 
@@ -28,10 +29,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "models.h"
-#include "ledgermodel.h"
-#include "modelenums.h"
 #include "ui_newtransactionform.h"
+#include "modelenums.h"
+#include "journalmodel.h"
+#include "mymoneyfile.h"
+#include "tagsmodel.h"
+#include "statusmodel.h"
 
 using namespace eLedgerModel;
 
@@ -40,6 +43,7 @@ class NewTransactionForm::Private
 public:
   Private()
   : ui(new Ui_NewTransactionForm)
+  , row(-1)
   {
   }
 
@@ -48,8 +52,8 @@ public:
     delete ui;
   }
 
-  Ui_NewTransactionForm*      ui;
-  QString                     transactionSplitId;
+  Ui_NewTransactionForm*  ui;
+  int                     row;
 };
 
 
@@ -57,7 +61,11 @@ NewTransactionForm::NewTransactionForm(QWidget* parent)
   : QFrame(parent)
   , d(new Private)
 {
+  const auto journalModel = MyMoneyFile::instance()->journalModel();
   d->ui->setupUi(this);
+  connect(journalModel, &QAbstractItemModel::rowsInserted, this, &NewTransactionForm::rowsInserted);
+  connect(journalModel, &QAbstractItemModel::rowsRemoved, this, &NewTransactionForm::rowsRemoved);
+  connect(journalModel, &QAbstractItemModel::dataChanged, this, &NewTransactionForm::modelDataChanged);
 }
 
 NewTransactionForm::~NewTransactionForm()
@@ -65,44 +73,62 @@ NewTransactionForm::~NewTransactionForm()
   delete d;
 }
 
-void NewTransactionForm::showTransaction(const QString& transactionSplitId)
+void NewTransactionForm::rowsInserted(const QModelIndex& parent, int first, int last)
 {
-  d->transactionSplitId = transactionSplitId;
-
-  const QAbstractItemModel* model = Models::instance()->ledgerModel();
-  const QModelIndexList indexes = model->match(model->index(0, 0, QModelIndex()),
-                                              (int)Role::TransactionSplitId,
-                                              QVariant(transactionSplitId),
-                                              1,
-                                              Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive));
-  if(indexes.count() == 1) {
-    const QModelIndex index = indexes.first();
-    d->ui->dateEdit->setText(QLocale().toString(model->data(index, (int)Role::PostDate).toDate(),
-                                                           QLocale::ShortFormat));
-    d->ui->payeeEdit->setText(model->data(index, (int)Role::PayeeName).toString());
-    d->ui->memoEdit->clear();
-    d->ui->memoEdit->insertPlainText(model->data(index, (int)Role::Memo).toString());
-    d->ui->memoEdit->moveCursor(QTextCursor::Start);
-    d->ui->memoEdit->ensureCursorVisible();
-    d->ui->accountEdit->setText(model->data(index, (int)Role::CounterAccount).toString());
-    d->ui->statusEdit->setText(model->data(index, (int)Role::ReconciliationLong).toString());
-    QString amount = QString("%1 %2").arg(model->data(index, (int)Role::ShareAmount).toString())
-    .arg(model->data(index, (int)Role::ShareAmountSuffix).toString());
-    d->ui->amountEdit->setText(amount);
-    d->ui->numberEdit->setText(model->data(index, (int)Role::Number).toString());
+  Q_UNUSED(parent);
+  if (first <= d->row) {
+    d->row += last - first + 1;
   }
+}
+
+void NewTransactionForm::rowsRemoved(const QModelIndex& parent, int first, int last)
+{
+  Q_UNUSED(parent);
+  if (first <= d->row) {
+    d->row -= last - first + 1;
+  }
+}
+
+void NewTransactionForm::showTransaction(const QModelIndex& idx)
+{
+  const auto index = MyMoneyFile::baseModel()->mapToBaseSource(idx);
+  d->row = index.row();
+
+  d->ui->dateEdit->setText(QLocale().toString(index.data(eMyMoney::Model::TransactionPostDateRole).toDate(),
+                                              QLocale::ShortFormat));
+  d->ui->payeeEdit->setText(index.data(eMyMoney::Model::SplitPayeeRole).toString());
+  d->ui->memoEdit->clear();
+  d->ui->memoEdit->insertPlainText(index.data(eMyMoney::Model::SplitMemoRole).toString());
+  d->ui->memoEdit->moveCursor(QTextCursor::Start);
+  d->ui->memoEdit->ensureCursorVisible();
+  d->ui->accountEdit->setText(index.data(eMyMoney::Model::TransactionCounterAccountRole).toString());
+  d->ui->accountEdit->home(false);
+
+  d->ui->tagEdit->clear();
+  QStringList splitTagList = index.data(eMyMoney::Model::SplitTagIdRole).toStringList();
+  if (!splitTagList.isEmpty()) {
+    std::transform(splitTagList.begin(), splitTagList.end(), splitTagList.begin(),
+                   [] (const QString& tagId) { return MyMoneyFile::instance()->tagsModel()->itemById(tagId).name(); });
+    d->ui->tagEdit->setText(splitTagList.join(", "));
+    d->ui->tagEdit->home(false);
+  }
+
+  d->ui->numberEdit->setText(index.data(eMyMoney::Model::SplitNumberRole).toString());
+
+  d->ui->amountEdit->setText(i18nc("@item:intext Amount, %1 transaction amount, %2 abbreviated Credit/Debit suffix: Cr. or Dr.",
+                                   "%1 %2",
+                                   index.data(eMyMoney::Model::SplitSharesFormattedRole).toString(),
+                                   index.data(eMyMoney::Model::SplitSharesSuffixRole).toString()));
+
+  const auto status = index.data(eMyMoney::Model::SplitReconcileFlagRole).toInt();
+  const auto statusIdx = MyMoneyFile::instance()->statusModel()->index(status, 0);
+  d->ui->statusEdit->setText(statusIdx.data(eMyMoney::Model::SplitReconcileStatusRole).toString());
 }
 
 void NewTransactionForm::modelDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight)
 {
-  const QAbstractItemModel * const model = topLeft.model();
-  const int startRow = topLeft.row();
-  const int lastRow = bottomRight.row();
-  for(int row = startRow; row <= lastRow; ++row) {
-    QModelIndex index = model->index(row, 0);
-    if(model->data(index, (int)eLedgerModel::Role::TransactionSplitId).toString() == d->transactionSplitId) {
-      showTransaction(d->transactionSplitId);
-      break;
-    }
+  if ((topLeft.row() <= d->row) && (bottomRight.row() >= d->row)) {
+    const auto idx = MyMoneyFile::instance()->journalModel()->index(d->row, 0);
+    showTransaction(idx);
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -15,13 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 #include "equitiesmodel.h"
+#include "accountsmodel.h"
+#include "mymoneyfile.h"
+#include "securitiesmodel.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
-
-#include <QMenu>
-#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -31,26 +32,24 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymoney.h"
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "mymoneysecurity.h"
 #include "mymoneyprice.h"
+#include "mymoneymoney.h"
 #include "mymoneyenums.h"
 
-class EquitiesModel::Private
+class EquitiesModelPrivate
 {
+  Q_DECLARE_PUBLIC(EquitiesModel);
+  EquitiesModel* q_ptr;
+
 public:
-  Private() : m_file(MyMoneyFile::instance())
+  EquitiesModelPrivate(EquitiesModel* qq)
+    : q_ptr(qq)
   {
-    QVector<Column> columns {Column::Equity, Column::Symbol, Column::Value,
-                            Column::Quantity, Column::Price};
-    foreach (auto const column, columns)
-      m_columns.append(column);
   }
 
-  ~Private() {}
+  ~EquitiesModelPrivate() {}
 
+#if 0
   void loadInvestmentAccount(QStandardItem *node, const MyMoneyAccount &invAcc)
   {
     auto itInvAcc = new QStandardItem(invAcc.name());
@@ -135,7 +134,7 @@ public:
 
     auto balance = m_file->balance(account.id());
     auto security = m_file->security(account.currencyId());
-    auto tradingCurrency = m_file->security(security.tradingCurrency());
+    auto tradingCurrency = m_file->currency(security.tradingCurrency());
     auto price = m_file->price(account.currencyId(), tradingCurrency.id());
 
     // Value
@@ -194,41 +193,95 @@ public:
 
   MyMoneyFile *m_file;
   QList<EquitiesModel::Column> m_columns;
+#endif
 };
 
 EquitiesModel::EquitiesModel(QObject *parent)
-    : QStandardItemModel(parent), d(new Private)
+  : KExtraColumnsProxyModel(parent)
+  , d_ptr(new EquitiesModelPrivate(this))
 {
-  init();
+  appendColumn(i18nc("@title stock symbol column", "Symbol"));
+  appendColumn(i18n("Quantity"));
+  appendColumn(i18n("Price"));
+  appendColumn(i18n("Value"));
 }
 
 EquitiesModel::~EquitiesModel()
 {
+  Q_D(EquitiesModel);
   delete d;
 }
 
-void EquitiesModel::init()
+QVariant EquitiesModel::extraColumnData(const QModelIndex& parent, int row, int extraColumn, int role) const
 {
-  QStringList headerLabels;
-  foreach (const auto column, d->m_columns)
-    headerLabels.append(getHeaderName(column));
-  setHorizontalHeaderLabels(headerLabels);
+  const auto file = MyMoneyFile::instance();
+
+  auto idx = index(row, 0, parent);
+  auto baseIdx = MyMoneyFile::baseModel()->mapToBaseSource(idx);
+  auto model = qobject_cast<const AccountsModel*>(baseIdx.model());
+
+  auto acc = model->itemByIndex(baseIdx);
+
+//   auto balance = m_file->balance(account.id());
+//   auto security = m_file->security(account.currencyId());
+//   auto tradingCurrency = m_file->currency(security.tradingCurrency());
+//   auto price = m_file->price(account.currencyId(), tradingCurrency.id());
+
+
+
+  if (role == Qt::DisplayRole || role == Qt::EditRole) {
+
+    auto securityIdx = file->securitiesModel()->indexById(acc.currencyId());
+    auto tradingCurrencyIdx = securityIdx.data(eMyMoney::Model::SecurityTradingCurrencyIndexRole).value<QModelIndex>();
+
+    switch (extraColumn) {
+      case Symbol:
+        return securityIdx.data(eMyMoney::Model::SecuritySymbolRole);
+
+      case Value:
+        break;
+
+      case Quantity:
+        {
+          auto balance = baseIdx.data(eMyMoney::Model::AccountBalanceRole).value<MyMoneyMoney>();
+          auto prec = MyMoneyMoney::denomToPrec(securityIdx.data(eMyMoney::Model::SecuritySmallestAccountFractionRole).toInt());
+          return balance.formatMoney(QString(), prec);
+        }
+
+      case Price:
+        {
+          const auto tradingCurrencyId = tradingCurrencyIdx.data(eMyMoney::Model::IdRole).toString();
+          const auto prec = securityIdx.data(eMyMoney::Model::SecurityPricePrecisionRole).toInt();
+          const auto tradingCurrencySymbol = tradingCurrencyIdx.data(eMyMoney::Model::SecuritySymbolRole).toString();
+          return file->price(acc.currencyId(), tradingCurrencyId).rate(tradingCurrencyId).formatMoney(tradingCurrencySymbol, prec);
+        }
+
+      default:
+        break;
+    }
+  } else {
+    switch(role) {
+      case Qt::DecorationRole:
+        return QVariant();
+
+      case Qt::TextAlignmentRole:
+        switch(extraColumn) {
+          case Symbol:
+            return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
+          default:
+            return QVariant(Qt::AlignRight | Qt::AlignVCenter);
+        }
+        break;
+
+      default:
+        return idx.data(role);
+    }
+  }
+  return QVariant();
 }
 
-void EquitiesModel::load()
-{
-  this->blockSignals(true);
 
-  auto rootItem = invisibleRootItem();
-  QList<MyMoneyAccount> accList;
-  d->m_file->accountList(accList);                        // get all available accounts
-  foreach (const auto acc, accList)
-    if (acc.accountType() == eMyMoney::Account::Type::Investment)  // but add only investment accounts (and its children) to the model
-        d->loadInvestmentAccount(rootItem, acc);
-
-  this->blockSignals(false);
-}
-
+#if 0
 /**
   * Notify the model that an object has been added. An action is performed only if the object is an account.
   */
@@ -351,7 +404,7 @@ QString EquitiesModel::getHeaderName(const Column column)
     case Equity:
       return i18n("Equity");
     case Symbol:
-      return i18n("Symbol");
+      return i18nc("@title stock symbol column", "Symbol");
     case Value:
       return i18n("Value");
     case Quantity:
@@ -492,3 +545,4 @@ void EquitiesFilterProxyModel::slotColumnsMenu(const QPoint)
     }
   }
 }
+#endif

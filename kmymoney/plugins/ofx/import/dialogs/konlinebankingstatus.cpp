@@ -108,6 +108,7 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
   m_timestampOffset->setTime(QTime::fromMSecsSinceStartOfDay(qAbs(offset)*60*1000));
 
   m_invertAmount->setChecked(settings.value("kmmofx-invertamount").toLower() == QStringLiteral("yes"));
+  m_fixBuySellSignage->setChecked(settings.value("kmmofx-fixbuysellsignage").toLower() == QStringLiteral("yes"));
 
   QString key = OFX_PASSWORD_KEY(settings.value("url"), settings.value("uniqueId"));
   QString pwd;

@@ -29,6 +29,7 @@
 // QT Includes
 
 #include <QString>
+#include <QModelIndexList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -43,6 +44,7 @@ class KListWidgetSearchLine;
 struct ContactData;
 class MyMoneyContact;
 class MyMoneyPayee;
+class QItemSelection;
 
 /**
   * @author Michael Edwardes, Thomas Baumgart
@@ -61,12 +63,10 @@ public:
   ~KPayeesView() override;
 
   void executeCustomAction(eView::Action action) override;
-  void refresh();
   void updatePayeeActions(const QList<MyMoneyPayee>& payees);
 
 public Q_SLOTS:
   void slotSelectPayeeAndTransaction(const QString& payeeId, const QString& accountId = QString(), const QString& transactionId = QString());
-  void slotStartRename(QListWidgetItem*);
   void slotHelp();
 
   /**
@@ -85,20 +85,22 @@ protected:
   void showEvent(QShowEvent* event) override;
 
 private:
+  void updatePayeeActions(int payeeCount);
+
   Q_DECLARE_PRIVATE(KPayeesView)
 
 private Q_SLOTS:
   /**
-    * This slot is called whenever the selection in m_payeesList
-    * is about to change.
-    */
-  void slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev);
+   * This slot is called whenever the selection in m_payeesList
+   * is about to change.
+   */
+  void slotPayeeSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
 
   /**
     * This slot is called whenever the selection in m_payeesList
     * has been changed.
     */
-  void slotSelectPayee();
+  // void slotSelectPayee();
 
   /**
     * This slot marks the current selected payee as modified (dirty).
@@ -110,7 +112,8 @@ private Q_SLOTS:
     * This slot is called when the name of a payee is changed inside
     * the payee list view and only a single payee is selected.
     */
-  void slotRenameSinglePayee(QListWidgetItem *p);
+  // void slotRenameSinglePayee(QListWidgetItem *p);
+  void slotRenameSinglePayee(const QModelIndex& idx, const QVariant& value);
 
   /**
     * Updates the payee data in m_payee from the information in the

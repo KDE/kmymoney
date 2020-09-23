@@ -1,6 +1,7 @@
 /*
  * Copyright 2011-2012  Alessandro Russo <axela74@yahoo.it>
  * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -17,34 +18,28 @@
  */
 
 #include "ktagreassigndlg.h"
+#include "ui_ktagreassigndlg.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
 #include <QList>
-#include <QPushButton>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KMessageBox>
-#include <kguiutils.h>
-#include <KLocalizedString>
-
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_ktagreassigndlg.h"
-#include <kmymoneymvccombo.h>
+#include "mymoneyfile.h"
+#include "tagsmodel.h"
+#include "idfilter.h"
 
 KTagReassignDlg::KTagReassignDlg(QWidget* parent) :
     QDialog(parent),
     ui(new Ui::KTagReassignDlg)
 {
   ui->setupUi(this);
-  auto mandatory = new KMandatoryFieldGroup(this);
-  mandatory->add(ui->tagCombo);
-  mandatory->setOkButton(ui->buttonBox->button(QDialogButtonBox::Ok));
 }
 
 KTagReassignDlg::~KTagReassignDlg()
@@ -52,29 +47,20 @@ KTagReassignDlg::~KTagReassignDlg()
   delete ui;
 }
 
-QString KTagReassignDlg::show(const QList<MyMoneyTag>& tagslist)
+QString KTagReassignDlg::show(const QList<QString>& tagslist)
 {
-  if (tagslist.isEmpty())
-    return QString(); // no tag available? nothing can be selected...
-
-  ui->tagCombo->loadTags(tagslist);
+  auto filter = new IdFilter(this);
+  filter->setFilterList(tagslist);
+  filter->setSourceModel(MyMoneyFile::instance()->tagsModel());
+  filter->setSortLocaleAware(true);
+  filter->sort(0);
+  ui->tagCombo->setModel(filter);
 
   // execute dialog and if aborted, return empty string
   if (this->exec() == QDialog::Rejected)
     return QString();
 
-  // otherwise return index of selected tag
-  return ui->tagCombo->selectedItem();
-}
-
-void KTagReassignDlg::accept()
-{
-  // force update of ui->tagCombo
-  ui->buttonBox->button(QDialogButtonBox::Ok)->setFocus();
-
-  if (ui->tagCombo->selectedItem().isEmpty()) {
-    KMessageBox::information(this, i18n("This dialog does not allow new tags to be created. Please pick a tag from the list."), i18n("Tag creation"));
-  } else {
-    QDialog::accept();
-  }
+  // otherwise return id of selected tag
+  const auto idx = filter->index(ui->tagCombo->currentIndex(), 0);
+  return idx.data(eMyMoney::Model::IdRole).toString();
 }

@@ -32,7 +32,9 @@ target_link_libraries(xmlstorage
     KF5::CoreAddons
     kgpgfile
     kmymoney_common
+    kmm_mymoney
     xmlstoragehelper
+    onlinetask_interfaces
 )
 
 # install(FILES kmymoney-xmlstorageplugin.desktop

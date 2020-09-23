@@ -19,11 +19,13 @@
 #ifndef WEBCONNECT_H
 #define WEBCONNECT_H
 
+#include "kmm_webconnect_export.h"
+
 #include <QObject>
 #include <QLoggingCategory>
 Q_DECLARE_LOGGING_CATEGORY(WebConnectLog)
 
-class WebConnect : public QObject
+class KMM_WEBCONNECT_EXPORT WebConnect : public QObject
 {
     Q_OBJECT
 public:

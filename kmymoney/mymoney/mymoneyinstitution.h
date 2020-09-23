@@ -1,6 +1,6 @@
 /*
  * Copyright 2000-2001  Michael Edwardes <mte@users.sourceforge.net>
- * Copyright 2002-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2002-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2003       Kevin Tambascio <ktambascio@users.sourceforge.net>
  * Copyright 2004-2006  Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
@@ -159,6 +159,11 @@ public:
     * @retval false This object does not reference the object with id @p id.
     */
   bool hasReferenceTo(const QString& id) const override;
+
+  /**
+   * @copydoc MyMoneyObject::referencedObjects
+   */
+  QSet<QString> referencedObjects() const override;
 
   static QPixmap pixmap(const int size = 64);
 };

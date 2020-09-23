@@ -1,5 +1,6 @@
 /*
  * Copyright 2013-2015  Christian Dávid <christian-david@web.de>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -23,6 +24,7 @@
 #define BADTASKEXCEPTION badTaskCast("Casted onlineTask with wrong type. " __FILE__ ":" TOSTRING(__LINE__))
 #define EMPTYTASKEXCEPTION emptyTask("Requested onlineTask of onlineJob without any task. " __FILE__ ":" TOSTRING(__LINE__))
 
+#include <stdexcept>
 #include <QMetaType>
 #include <QString>
 #include "mymoneyobject.h"
@@ -139,6 +141,11 @@ public:
 
   /** @todo implement */
   bool hasReferenceTo(const QString &id) const override;
+
+  /**
+   * @copydoc MyMoneyObject::referencedObjects
+   */
+  QSet<QString> referencedObjects() const override;
 
   /**
    * @brief Account this job is related to

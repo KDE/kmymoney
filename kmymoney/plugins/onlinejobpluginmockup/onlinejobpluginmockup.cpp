@@ -73,7 +73,7 @@ bool onlineJobPluginMockup::updateAccount(const MyMoneyAccount& acc, bool moreAc
   return false;
 }
 
-QStringList onlineJobPluginMockup::availableJobs(QString accountId)
+QStringList onlineJobPluginMockup::availableJobs(QString accountId) const
 {
   try {
     if (MyMoneyFile::instance()->account(accountId).onlineBankingSettings().value("provider").toLower() == objectName().toLower())

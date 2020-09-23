@@ -120,8 +120,10 @@ void chipTanDialog::setTanLimits(const int& minLength, const int& maxLength)
 void chipTanDialog::setFlickerFieldWidth(const int& width)
 {
   QQuickItem* rootObject = ui->declarativeView->rootObject();
-  if (rootObject)
+  if (rootObject) {
     QMetaObject::invokeMethod(rootObject, "setFlickerFieldWidth", Q_ARG(QVariant, QVariant(width)));
+    ui->declarativeView->setFixedWidth(width);
+  }
 }
 
 int chipTanDialog::flickerFieldWidth()

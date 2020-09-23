@@ -1,6 +1,6 @@
 /*
  * Copyright 2000-2002  Michael Edwardes <mte@users.sourceforge.net>
- * Copyright 2001-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2001-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2001       Felix Rodriguez <frodriguez@users.sourceforge.net>
  * Copyright 2003       Kevin Tambascio <ktambascio@users.sourceforge.net>
  * Copyright 2004-2005  Ace Jones <acejones@users.sourceforge.net>
@@ -28,6 +28,7 @@
 
 #include <QStringList>
 #include <QMap>
+#include <QSet>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -417,6 +418,17 @@ bool MyMoneyTransaction::hasReferenceTo(const QString& id) const
   return false;
 }
 
+QSet<QString> MyMoneyTransaction::referencedObjects() const
+{
+  Q_D(const MyMoneyTransaction);
+  QSet<QString> ids;
+  ids.insert(d->m_commodity);
+  for (const auto split : d->m_splits) {
+    ids.unite(split.referencedObjects());
+  }
+  return ids;
+}
+
 bool MyMoneyTransaction::hasAutoCalcSplit() const
 {
   Q_D(const MyMoneyTransaction);
@@ -449,12 +461,16 @@ QString MyMoneyTransaction::accountSignature(bool includeSplitCount) const
 QString MyMoneyTransaction::uniqueSortKey() const
 {
   Q_D(const MyMoneyTransaction);
-  QString year, month, day, key;
-  const auto postdate = postDate();
-  year = year.setNum(postdate.year()).rightJustified(MyMoneyTransactionPrivate::YEAR_SIZE, '0');
-  month = month.setNum(postdate.month()).rightJustified(MyMoneyTransactionPrivate::MONTH_SIZE, '0');
-  day = day.setNum(postdate.day()).rightJustified(MyMoneyTransactionPrivate::DAY_SIZE, '0');
-  key = QString::fromLatin1("%1-%2-%3-%4").arg(year, month, day, d->m_id);
+  return uniqueSortKey(postDate(), d->m_id);
+}
+
+QString MyMoneyTransaction::uniqueSortKey(const QDate& date, const QString& id)
+{
+  QString year, month, day;
+  year = year.setNum(date.year()).rightJustified(MyMoneyTransactionPrivate::YEAR_SIZE, '0');
+  month = month.setNum(date.month()).rightJustified(MyMoneyTransactionPrivate::MONTH_SIZE, '0');
+  day = day.setNum(date.day()).rightJustified(MyMoneyTransactionPrivate::DAY_SIZE, '0');
+  const auto key = QString::fromLatin1("%1-%2-%3-%4").arg(year, month, day, id);
   return key;
 }
 

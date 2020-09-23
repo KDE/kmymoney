@@ -68,6 +68,7 @@
 #include <KProcess>
 #include <KAboutApplicationDialog>
 #include <KBackup>
+#include <KUndoActions>
 #ifdef ENABLE_HOLIDAYS
 #include <KHolidays/Holiday>
 #include <KHolidays/HolidayRegion>
@@ -95,13 +96,11 @@
 #include "dialogs/knewaccountdlg.h"
 #include "dialogs/editpersonaldatadlg.h"
 #include "dialogs/kcurrencycalculator.h"
-#include "dialogs/keditscheduledlg.h"
+#include "keditscheduledlg.h"
 #include "wizards/newloanwizard/keditloanwizard.h"
 #include "dialogs/kpayeereassigndlg.h"
 #include "dialogs/kcategoryreassigndlg.h"
 #include "wizards/endingbalancedlg/kendingbalancedlg.h"
-#include "dialogs/kloadtemplatedlg.h"
-#include "dialogs/ktemplateexportdlg.h"
 #include "dialogs/transactionmatcher.h"
 #include "wizards/newuserwizard/knewuserwizard.h"
 #include "wizards/newaccountwizard/knewaccountwizard.h"
@@ -112,13 +111,8 @@
 #include "widgets/kmymoneymvccombo.h"
 
 #include "views/kmymoneyview.h"
-#include "models/models.h"
-#include "models/accountsmodel.h"
-#include "models/equitiesmodel.h"
-#include "models/securitiesmodel.h"
-#ifdef ENABLE_UNFINISHEDFEATURES
-#include "models/ledgermodel.h"
-#endif
+#include "accountsmodel.h"
+#include "equitiesmodel.h"
 
 #include "mymoney/mymoneyobject.h"
 #include "mymoney/mymoneyfile.h"
@@ -138,9 +132,13 @@
 #include "mymoney/mymoneytransactionfilter.h"
 #include "mymoneyexception.h"
 
+#include "mymoneytemplate.h"
+#include "templateloader.h"
+#include "templatewriter.h"
+#include "kloadtemplatedlg.h"
+#include "ktemplateexportdlg.h"
 
 #include "converter/mymoneystatementreader.h"
-#include "converter/mymoneytemplate.h"
 
 #include "plugins/interfaces/kmmappinterface.h"
 #include "plugins/interfaces/kmmviewinterface.h"
@@ -157,7 +155,6 @@
 
 #include "misc/webconnect.h"
 
-#include "storage/mymoneystoragemgr.h"
 #include "imymoneystorageformat.h"
 
 #include "transactioneditor.h"
@@ -167,7 +164,6 @@
 #include "kmymoneyutils.h"
 #include "kcreditswindow.h"
 
-#include "ledgerdelegate.h"
 #include "storageenums.h"
 #include "mymoneyenums.h"
 #include "dialogenums.h"
@@ -392,9 +388,9 @@ public:
 
   bool applyFileFixes()
   {
-    const auto blocked = MyMoneyFile::instance()->blockSignals(true);
+    const auto file = MyMoneyFile::instance();
+    QSignalBlocker blocked(file);
     KSharedConfigPtr config = KSharedConfig::openConfig();
-
     KConfigGroup grp = config->group("General Options");
 
     // For debugging purposes, we can turn off the automatic fix manually
@@ -403,33 +399,32 @@ public:
       MyMoneyFileTransaction ft;
       try {
         // Check if we have to modify the file before we allow to work with it
-        auto s = MyMoneyFile::instance()->storage();
-        while (s->fileFixVersion() < s->currentFixVersion()) {
-          qDebug("%s", qPrintable((QString("testing fileFixVersion %1 < %2").arg(s->fileFixVersion()).arg(s->currentFixVersion()))));
-          switch (s->fileFixVersion()) {
+        while (file->fileFixVersion() < file->availableFixVersion()) {
+          qDebug() << "testing fileFixVersion" << file->fileFixVersion() << "<" << file->availableFixVersion();
+          switch (file->fileFixVersion()) {
             case 0:
               fixFile_0();
-              s->setFileFixVersion(1);
+              file->setFileFixVersion(1);
               break;
 
             case 1:
               fixFile_1();
-              s->setFileFixVersion(2);
+              file->setFileFixVersion(2);
               break;
 
             case 2:
               fixFile_2();
-              s->setFileFixVersion(3);
+              file->setFileFixVersion(3);
               break;
 
             case 3:
               fixFile_3();
-              s->setFileFixVersion(4);
+              file->setFileFixVersion(4);
               break;
 
             case 4:
               fixFile_4();
-              s->setFileFixVersion(5);
+              file->setFileFixVersion(5);
               break;
 
               // add new levels above. Don't forget to increase currentFixVersion() for all
@@ -440,69 +435,12 @@ public:
         }
         ft.commit();
       } catch (const MyMoneyException &) {
-        MyMoneyFile::instance()->blockSignals(blocked);
         return false;
       }
     } else {
-      qDebug("Skipping automatic transaction fix!");
+      qDebug() << "Skipping automatic transaction fix!";
     }
-    MyMoneyFile::instance()->blockSignals(blocked);
     return true;
-  }
-
-  void connectStorageToModels()
-  {
-    const auto file = MyMoneyFile::instance();
-
-    const auto accountsModel = Models::instance()->accountsModel();
-    q->connect(file, &MyMoneyFile::objectAdded,    accountsModel, &AccountsModel::slotObjectAdded);
-    q->connect(file, &MyMoneyFile::objectModified, accountsModel, &AccountsModel::slotObjectModified);
-    q->connect(file, &MyMoneyFile::objectRemoved,  accountsModel, &AccountsModel::slotObjectRemoved);
-    q->connect(file, &MyMoneyFile::balanceChanged, accountsModel, &AccountsModel::slotBalanceOrValueChanged);
-    q->connect(file, &MyMoneyFile::valueChanged,   accountsModel, &AccountsModel::slotBalanceOrValueChanged);
-
-    const auto institutionsModel = Models::instance()->institutionsModel();
-    q->connect(file, &MyMoneyFile::objectAdded,    institutionsModel, &InstitutionsModel::slotObjectAdded);
-    q->connect(file, &MyMoneyFile::objectModified, institutionsModel, &InstitutionsModel::slotObjectModified);
-    q->connect(file, &MyMoneyFile::objectRemoved,  institutionsModel, &InstitutionsModel::slotObjectRemoved);
-    q->connect(file, &MyMoneyFile::balanceChanged, institutionsModel, &AccountsModel::slotBalanceOrValueChanged);
-    q->connect(file, &MyMoneyFile::valueChanged,   institutionsModel, &AccountsModel::slotBalanceOrValueChanged);
-
-    const auto equitiesModel = Models::instance()->equitiesModel();
-    q->connect(file, &MyMoneyFile::objectAdded,    equitiesModel, &EquitiesModel::slotObjectAdded);
-    q->connect(file, &MyMoneyFile::objectModified, equitiesModel, &EquitiesModel::slotObjectModified);
-    q->connect(file, &MyMoneyFile::objectRemoved,  equitiesModel, &EquitiesModel::slotObjectRemoved);
-    q->connect(file, &MyMoneyFile::balanceChanged, equitiesModel, &EquitiesModel::slotBalanceOrValueChanged);
-    q->connect(file, &MyMoneyFile::valueChanged,   equitiesModel, &EquitiesModel::slotBalanceOrValueChanged);
-
-    const auto securitiesModel = Models::instance()->securitiesModel();
-    q->connect(file, &MyMoneyFile::objectAdded,    securitiesModel, &SecuritiesModel::slotObjectAdded);
-    q->connect(file, &MyMoneyFile::objectModified, securitiesModel, &SecuritiesModel::slotObjectModified);
-    q->connect(file, &MyMoneyFile::objectRemoved,  securitiesModel, &SecuritiesModel::slotObjectRemoved);
-
-#ifdef ENABLE_UNFINISHEDFEATURES
-    const auto ledgerModel = Models::instance()->ledgerModel();
-    q->connect(file, &MyMoneyFile::objectAdded,    ledgerModel, &LedgerModel::slotAddTransaction);
-    q->connect(file, &MyMoneyFile::objectModified, ledgerModel, &LedgerModel::slotModifyTransaction);
-    q->connect(file, &MyMoneyFile::objectRemoved,  ledgerModel, &LedgerModel::slotRemoveTransaction);
-
-    q->connect(file, &MyMoneyFile::objectAdded,    ledgerModel, &LedgerModel::slotAddSchedule);
-    q->connect(file, &MyMoneyFile::objectModified, ledgerModel, &LedgerModel::slotModifySchedule);
-    q->connect(file, &MyMoneyFile::objectRemoved,  ledgerModel, &LedgerModel::slotRemoveSchedule);
-#endif
-  }
-
-  void disconnectStorageFromModels()
-  {
-    const auto file = MyMoneyFile::instance();
-    q->disconnect(file, nullptr, Models::instance()->accountsModel(), nullptr);
-    q->disconnect(file, nullptr, Models::instance()->institutionsModel(), nullptr);
-    q->disconnect(file, nullptr, Models::instance()->equitiesModel(), nullptr);
-    q->disconnect(file, nullptr, Models::instance()->securitiesModel(), nullptr);
-
-#ifdef ENABLE_UNFINISHEDFEATURES
-    q->disconnect(file, nullptr, Models::instance()->ledgerModel(), nullptr);
-#endif
   }
 
   bool askAboutSaving()
@@ -537,29 +475,12 @@ public:
   }
 
   /**
-    * This method attaches an empty storage object to the MyMoneyFile
-    * object. It calls removeStorage() to remove a possibly attached
-    * storage object.
-    */
-  void newStorage()
-  {
-    removeStorage();
-    auto file = MyMoneyFile::instance();
-    file->attachStorage(new MyMoneyStorageMgr);
-  }
-
-  /**
-    * This method removes an attached storage from the MyMoneyFile
-    * object.
+    * This method removes all data from the MyMoneyFile object
+    * and resets the dirty flag(s).
     */
   void removeStorage()
   {
-    auto file = MyMoneyFile::instance();
-    auto p = file->storage();
-    if (p) {
-      file->detachStorage(p);
-      delete p;
-    }
+    MyMoneyFile::instance()->unload();
   }
 
   /**
@@ -608,7 +529,7 @@ public:
         QString cid;
         try {
           if (!(*it).currencyId().isEmpty() || (*it).currencyId().length() != 0)
-            cid = MyMoneyFile::instance()->currency((*it).currencyId()).id();
+            cid = MyMoneyFile::instance()->security((*it).currencyId()).id();
         } catch (const MyMoneyException &e) {
           qDebug() << QLatin1String("Account") << (*it).id() << (*it).name() << e.what();
         }
@@ -1179,48 +1100,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   layout->setContentsMargins(2, 2, 2, 2);
   layout->setSpacing(6);
 
-  {
-    const auto customIconRelativePath = QString(QStringLiteral("icons/hicolor/16x16/actions/account-add.png"));
-#ifndef IS_APPIMAGE
-    // find where our custom icons were installed based on an custom icon that we know should exist after installation
-    auto customIconAbsolutePath = QStandardPaths::locate(QStandardPaths::AppDataLocation, customIconRelativePath);
-    if (customIconAbsolutePath.isEmpty()) {
-      qWarning("Custom icons were not found in any of the following QStandardPaths::AppDataLocation:");
-      for (const auto &standardPath : QStandardPaths::standardLocations(QStandardPaths::AppDataLocation))
-        qWarning() << standardPath;
-    }
-#else
-    // according to https://docs.appimage.org/packaging-guide/ingredients.html#open-source-applications
-    // QStandardPaths::AppDataLocation is unreliable on AppImages, so apply workaround here in case we fail to find icons
-    QString customIconAbsolutePath;
-    const auto appImageAppDataLocation = QString("%1%2%3").arg(QCoreApplication::applicationDirPath(), QString("/../share/kmymoney/"), customIconRelativePath);
-    if (QFile::exists(appImageAppDataLocation )) {
-      customIconAbsolutePath = appImageAppDataLocation ;
-    } else {
-      qWarning("Custom icons were not found in the following location:");
-      qWarning() << appImageAppDataLocation ;
-    }
-#endif
-
-    // add our custom icons path to icons search path
-    if (!customIconAbsolutePath.isEmpty()) {
-      customIconAbsolutePath.chop(customIconRelativePath.length());
-      customIconAbsolutePath.append(QLatin1String("icons"));
-      auto paths = QIcon::themeSearchPaths();
-      paths.append(customIconAbsolutePath);
-      QIcon::setThemeSearchPaths(paths);
-    }
-
-    #if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
-    QString themeName = QLatin1Literal("system");                       // using QIcon::setThemeName on Craft build system causes icons to disappear
-    #else
-    QString themeName = KMyMoneySettings::iconsTheme();                 // get theme user wants
-    #endif
-    if (!themeName.isEmpty() && themeName != QLatin1Literal("system"))  // if it isn't default theme then set it
-      QIcon::setThemeName(themeName);
-    Icons::setIconThemeNames(QIcon::themeName());                       // get whatever theme user ends up with and hope our icon names will fit that theme
-  }
-
+  initIcons();
   initStatusBar();
   pActions = initActions();
   pMenus = initMenus();
@@ -1272,6 +1152,9 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   // connect the WebConnect server
   connect(d->m_webConnect, &WebConnect::gotUrl, this, &KMyMoneyApp::webConnectUrl);
+
+  // connection to update caption
+  connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, [&]() { d->updateCaption(); });
 
   // setup the initial configuration
   slotUpdateConfiguration(QString());
@@ -1430,11 +1313,11 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       // *************
       // The Edit menu
       // *************
-      {Action::EditFindTransaction,           QStringLiteral("edit_find_transaction"),          i18n("Find transaction..."),                        Icon::EditFindTransaction},
+      {Action::EditFindTransaction,           QStringLiteral("edit_find_transaction"),          i18n("Find transaction..."),                        Icon::Find},
       // *************
       // The View menu
       // *************
-      {Action::ViewTransactionDetail,         QStringLiteral("view_show_transaction_detail"),   i18n("Show Transaction Detail"),                    Icon::ViewTransactionDetail},
+      {Action::ViewTransactionDetail,         QStringLiteral("view_show_transaction_detail"),   i18n("Show Transaction Detail"),                    Icon::TransactionDetails},
       {Action::ViewHideReconciled,            QStringLiteral("view_hide_reconciled_transactions"), i18n("Hide reconciled transactions"),            Icon::HideReconciled},
       {Action::ViewHideCategories,            QStringLiteral("view_hide_unused_categories"),    i18n("Hide unused categories"),                     Icon::HideCategories},
       {Action::ViewShowAll,                   QStringLiteral("view_show_all_accounts"),         i18n("Show all accounts"),                          Icon::Empty},
@@ -1448,21 +1331,21 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       // The accounts menu
       // *****************
       {Action::NewAccount,                    QStringLiteral("account_new"),                    i18n("New account..."),                             Icon::AccountNew},
-      {Action::OpenAccount,                   QStringLiteral("account_open"),                   i18n("Open ledger"),                                Icon::ViewFinancialList},
+      {Action::OpenAccount,                   QStringLiteral("account_open"),                   i18n("Open ledger"),                                Icon::Ledger},
       {Action::StartReconciliation,           QStringLiteral("account_reconcile"),              i18n("Reconcile..."),                               Icon::Reconcile},
-      {Action::FinishReconciliation,          QStringLiteral("account_reconcile_finish"),       i18nc("Finish reconciliation", "Finish"),           Icon::AccountFinishReconciliation},
-      {Action::PostponeReconciliation,        QStringLiteral("account_reconcile_postpone"),     i18n("Postpone reconciliation"),                    Icon::MediaPlaybackPause},
+      {Action::FinishReconciliation,          QStringLiteral("account_reconcile_finish"),       i18nc("Finish reconciliation", "Finish"),    Icon::AccountFinishReconciliation},
+      {Action::PostponeReconciliation,        QStringLiteral("account_reconcile_postpone"),     i18n("Postpone reconciliation"),                    Icon::Pause},
       {Action::EditAccount,                   QStringLiteral("account_edit"),                   i18n("Edit account..."),                            Icon::AccountEdit},
       {Action::DeleteAccount,                 QStringLiteral("account_delete"),                 i18n("Delete account..."),                          Icon::AccountDelete},
       {Action::CloseAccount,                  QStringLiteral("account_close"),                  i18n("Close account"),                              Icon::AccountClose},
       {Action::ReopenAccount,                 QStringLiteral("account_reopen"),                 i18n("Reopen account"),                             Icon::AccountReopen},
-      {Action::ReportAccountTransactions,     QStringLiteral("account_transaction_report"),     i18n("Transaction report"),                         Icon::ViewFinancialList},
+      {Action::ReportAccountTransactions,     QStringLiteral("account_transaction_report"),     i18n("Transaction report"),                         Icon::Report},
       {Action::ChartAccountBalance,           QStringLiteral("account_chart"),                  i18n("Show balance chart..."),                      Icon::OfficeChartLine},
-      {Action::MapOnlineAccount,              QStringLiteral("account_online_map"),             i18n("Map account..."),                             Icon::NewsSubscribe},
-      {Action::UnmapOnlineAccount,            QStringLiteral("account_online_unmap"),           i18n("Unmap account..."),                           Icon::NewsUnsubscribe},
+      {Action::MapOnlineAccount,              QStringLiteral("account_online_map"),             i18n("Map account..."),                             Icon::MapOnlineAccount},
+      {Action::UnmapOnlineAccount,            QStringLiteral("account_online_unmap"),           i18n("Unmap account..."),                           Icon::UnmapOnlineAccount},
       {Action::UpdateAccount,                 QStringLiteral("account_online_update"),          i18n("Update account..."),                          Icon::AccountUpdate},
       {Action::UpdateAllAccounts,             QStringLiteral("account_online_update_all"),      i18n("Update all accounts..."),                     Icon::AccountUpdateAll},
-      {Action::AccountCreditTransfer,         QStringLiteral("account_online_new_credit_transfer"), i18n("New credit transfer"),                        Icon::AccountCreditTransfer},
+      {Action::AccountCreditTransfer,         QStringLiteral("account_online_new_credit_transfer"), i18n("New credit transfer"),                    Icon::AccountCreditTransfer},
       // *******************
       // The categories menu
       // *******************
@@ -1472,12 +1355,12 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       // **************
       // The tools menu
       // **************
-      {Action::ToolCurrencies,                QStringLiteral("tools_currency_editor"),          i18n("Currencies..."),                              Icon::ViewCurrencyList},
+      {Action::ToolCurrencies,                QStringLiteral("tools_currency_editor"),          i18n("Currencies..."),                              Icon::Currencies},
       {Action::ToolPrices,                    QStringLiteral("tools_price_editor"),             i18n("Prices..."),                                  Icon::Empty},
-      {Action::ToolUpdatePrices,              QStringLiteral("tools_update_prices"),            i18n("Update Stock and Currency Prices..."),        Icon::ToolUpdatePrices},
+      {Action::ToolUpdatePrices,              QStringLiteral("tools_update_prices"),            i18n("Update Stock and Currency Prices..."),        Icon::InvestmentOnlinePriceAll},
       {Action::ToolConsistency,               QStringLiteral("tools_consistency_check"),        i18n("Consistency Check"),                          Icon::Empty},
-      {Action::ToolPerformance,               QStringLiteral("tools_performancetest"),          i18n("Performance-Test"),                           Icon::Fork},
-      {Action::ToolCalculator,                QStringLiteral("tools_kcalc"),                    i18n("Calculator..."),                              Icon::AccessoriesCalculator},
+      {Action::ToolPerformance,               QStringLiteral("tools_performancetest"),          i18n("Performance-Test"),                           Icon::PerformanceTest},
+      {Action::ToolCalculator,                QStringLiteral("tools_kcalc"),                    i18n("Calculator..."),                              Icon::Calculator},
       // *****************
       // The settings menu
       // *****************
@@ -1503,12 +1386,12 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::MarkCleared,                   QStringLiteral("transaction_mark_cleared"),       i18nc("Mark transaction cleared", "Cleared"),       Icon::Empty},
       {Action::MarkReconciled,                QStringLiteral("transaction_mark_reconciled"),    i18nc("Mark transaction reconciled", "Reconciled"), Icon::Empty},
       {Action::MarkNotReconciled,             QStringLiteral("transaction_mark_notreconciled"), i18nc("Mark transaction not reconciled", "Not reconciled"),     Icon::Empty},
-      {Action::SelectAllTransactions,         QStringLiteral("transaction_select_all"),         i18nc("Select all transactions", "Select all"),     Icon::Empty},
-      {Action::GoToAccount,                   QStringLiteral("transaction_goto_account"),       i18n("Go to account"),                              Icon::GoJump},
-      {Action::GoToPayee,                     QStringLiteral("transaction_goto_payee"),         i18n("Go to payee"),                                Icon::GoJump},
-      {Action::NewScheduledTransaction,       QStringLiteral("transaction_create_schedule"),    i18n("Create scheduled transaction..."),            Icon::AppointmentNew},
+      {Action::SelectAllTransactions,         QStringLiteral("transaction_select_all"),         i18nc("Select all transactions", "Select all"),     Icon::SelectAll},
+      {Action::GoToAccount,                   QStringLiteral("transaction_goto_account"),       i18n("Go to account"),                              Icon::GoTo},
+      {Action::GoToPayee,                     QStringLiteral("transaction_goto_payee"),         i18n("Go to payee"),                                Icon::GoTo},
+      {Action::NewScheduledTransaction,       QStringLiteral("transaction_create_schedule"),    i18n("Create scheduled transaction..."),            Icon::NewSchedule},
       {Action::AssignTransactionsNumber,      QStringLiteral("transaction_assign_number"),      i18n("Assign next number"),                         Icon::Empty},
-      {Action::CombineTransactions,           QStringLiteral("transaction_combine"),            i18nc("Combine transactions", "Combine"),           Icon::Empty},
+      {Action::CombineTransactions,           QStringLiteral("transaction_combine"),            i18nc("Combine transactions", "Combine"),    Icon::Empty},
       {Action::CopySplits,                    QStringLiteral("transaction_copy_splits"),        i18n("Copy splits"),                                Icon::Empty},
       //Investment
       {Action::NewInvestment,                 QStringLiteral("investment_new"),                 i18n("New investment..."),                          Icon::InvestmentNew},
@@ -1517,12 +1400,12 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::UpdatePriceOnline,             QStringLiteral("investment_online_price_update"), i18n("Online price update..."),                     Icon::InvestmentOnlinePrice},
       {Action::UpdatePriceManually,           QStringLiteral("investment_manual_price_update"), i18n("Manual price update..."),                     Icon::Empty},
       //Schedule
-      {Action::NewSchedule,                   QStringLiteral("schedule_new"),                   i18n("New scheduled transaction"),                  Icon::AppointmentNew},
+      {Action::NewSchedule,                   QStringLiteral("schedule_new"),                   i18n("New scheduled transaction"),                  Icon::NewSchedule},
       {Action::EditSchedule,                  QStringLiteral("schedule_edit"),                  i18n("Edit scheduled transaction"),                 Icon::DocumentEdit},
       {Action::DeleteSchedule,                QStringLiteral("schedule_delete"),                i18n("Delete scheduled transaction"),               Icon::EditDelete},
       {Action::DuplicateSchedule,             QStringLiteral("schedule_duplicate"),             i18n("Duplicate scheduled transaction"),            Icon::EditCopy},
       {Action::EnterSchedule,                 QStringLiteral("schedule_enter"),                 i18n("Enter next transaction..."),                  Icon::KeyEnter},
-      {Action::SkipSchedule,                  QStringLiteral("schedule_skip"),                  i18n("Skip next transaction..."),                   Icon::MediaSeekForward},
+      {Action::SkipSchedule,                  QStringLiteral("schedule_skip"),                  i18n("Skip next transaction..."),                   Icon::SeekForward},
       //Payees
       {Action::NewPayee,                      QStringLiteral("payee_new"),                      i18n("New payee"),                                  Icon::ListAddUser},
       {Action::RenamePayee,                   QStringLiteral("payee_rename"),                   i18n("Rename payee"),                               Icon::PayeeRename},
@@ -1555,7 +1438,11 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       a->setEnabled(false);
       lutActions.insert(info.action, a);  // store QAction's pointer for later processing
     }
+
   }
+
+  lutActions.insert(Action::EditUndo, KUndoActions::createUndoAction(MyMoneyFile::instance()->undoStack(), aC));
+  lutActions.insert(Action::EditRedo, KUndoActions::createRedoAction(MyMoneyFile::instance()->undoStack(), aC));
 
   {
     // List with slots that get connected here. Other slots get connected in e.g. appropriate views
@@ -1750,6 +1637,59 @@ void KMyMoneyApp::initStatusBar()
 
   // hide the progress bar for now
   slotStatusProgressBar(-1, -1);
+}
+
+void KMyMoneyApp::initIcons()
+{
+#if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
+  const auto appDataIconsLocation = QStringLiteral("kmymoney/icons");
+#else
+  const auto appDataIconsLocation = QStringLiteral("icons");
+#endif
+
+  const QString customIconRelativePath = appDataIconsLocation + QStringLiteral("/hicolor/16x16/actions/account-add.png");
+#ifndef IS_APPIMAGE
+  // find where our custom icons were installed based on an custom icon that we know should exist after installation
+  auto customIconAbsolutePath = QStandardPaths::locate(QStandardPaths::AppDataLocation, customIconRelativePath);
+  if (customIconAbsolutePath.isEmpty()) {
+    qWarning("Custom icons were not found in any of the following QStandardPaths::AppDataLocation:");
+    for (const auto &standardPath : QStandardPaths::standardLocations(QStandardPaths::AppDataLocation))
+      qWarning() << standardPath;
+  }
+#else
+  // according to https://docs.appimage.org/packaging-guide/ingredients.html#open-source-applications
+  // QStandardPaths::AppDataLocation is unreliable on AppImages, so apply workaround here in case we fail to find icons
+  QString customIconAbsolutePath;
+  const auto appImageAppDataLocation = QString("%1%2%3").arg(QCoreApplication::applicationDirPath(), QString("/../share/kmymoney/"), customIconRelativePath);
+  if (QFile::exists(appImageAppDataLocation )) {
+    customIconAbsolutePath = appImageAppDataLocation ;
+  } else {
+    qWarning("Custom icons were not found in the following location:");
+    qWarning() << appImageAppDataLocation ;
+  }
+#endif
+
+  // add our custom icons path to icons search path
+  if (!customIconAbsolutePath.isEmpty()) {
+    customIconAbsolutePath.chop(customIconRelativePath.length());
+    customIconAbsolutePath.append(appDataIconsLocation);
+    auto paths = QIcon::themeSearchPaths();
+    paths.append(customIconAbsolutePath);
+    QIcon::setThemeSearchPaths(paths);
+  }
+
+  qDebug() << "System icon theme as reported by QT: " << QIcon::themeName();
+#if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
+  auto themeName = QStringLiteral("breeze");                      // only breeze is available for craft packages
+#else
+  auto themeName = KMyMoneySettings::iconsTheme();                        // get theme user wants
+  if (!themeName.isEmpty() && themeName != QStringLiteral("system"))  // if it isn't default theme then set it
+    QIcon::setThemeName(themeName);
+  else
+    themeName = QIcon::themeName();
+#endif
+
+  setUpMappings(themeName);
 }
 
 void KMyMoneyApp::saveOptions()
@@ -2036,7 +1976,7 @@ void KMyMoneyApp::slotFileFileInfo()
   g.open(QIODevice::WriteOnly);
   QDataStream st(&g);
   MyMoneyStorageDump dumper;
-  dumper.writeStream(st, MyMoneyFile::instance()->storage());
+  dumper.writeStream(st, MyMoneyFile::instance());
   g.close();
 }
 
@@ -2163,12 +2103,12 @@ void KMyMoneyApp::slotLoadAccountTemplates()
   QPointer<KLoadTemplateDlg> dlg = new KLoadTemplateDlg();
   if (dlg->exec() == QDialog::Accepted && dlg != 0) {
     MyMoneyFileTransaction ft;
+    TemplateLoader loader(this);
     try {
       // import the account templates
-      QList<MyMoneyTemplate> templates = dlg->templates();
-      QList<MyMoneyTemplate>::iterator it_t;
-      for (it_t = templates.begin(); it_t != templates.end(); ++it_t) {
-        (*it_t).importTemplate(progressCallback);
+      const auto templates = dlg->templates();
+      for (const auto& tmpl : qAsConst(templates)) {
+        loader.importTemplate(tmpl);
       }
       ft.commit();
     } catch (const MyMoneyException &e) {
@@ -2209,18 +2149,19 @@ void KMyMoneyApp::slotSaveAccountTemplates()
       newName.append(".kmt");
     }
 
-    if (okToWriteFile(QUrl::fromLocalFile(newName))) {
-      QPointer <KTemplateExportDlg> dlg = new KTemplateExportDlg(this);
-      if (dlg->exec() == QDialog::Accepted && dlg) {
-          MyMoneyTemplate templ;
-          templ.setTitle(dlg->title());
-          templ.setShortDescription(dlg->shortDescription());
-          templ.setLongDescription(dlg->longDescription());
-          templ.exportTemplate(progressCallback);
-          templ.saveTemplate(QUrl::fromLocalFile(newName));
+    QPointer <KTemplateExportDlg> dlg = new KTemplateExportDlg(this);
+    if ((dlg->exec() == QDialog::Accepted) && dlg) {
+      MyMoneyTemplate tmpl;
+      tmpl.setTitle(dlg->title());
+      tmpl.setShortDescription(dlg->shortDescription());
+      tmpl.setLongDescription(dlg->longDescription());
+
+      TemplateWriter templateWriter(this);
+      if (!templateWriter.exportTemplate(tmpl, QUrl::fromLocalFile(newName))) {
+        KMessageBox::error(this, templateWriter.errorMessage(), i18nc("@title:window Error display", "Template export"), 0);
       }
-      delete dlg;
     }
+    delete dlg;
   }
 }
 
@@ -2269,19 +2210,11 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
     d->m_myMoneyView->slotRefreshViews();
     return;
   }
+
   MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
-
-#ifdef ENABLE_UNFINISHEDFEATURES
-  LedgerSeparator::setFirstFiscalDate(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
-#endif
-
-  d->m_myMoneyView->updateViewType();
-
-  // update the sql storage module settings
-//  MyMoneyStorageSql::setStartDate(KMyMoneySettings::startDate().date());
-
-  // update the report module settings
   MyMoneyReport::setLineWidth(KMyMoneySettings::lineWidth());
+
+  d->m_myMoneyView->slotSettingsChanged();
 
   // update the holiday region configuration
   setHolidayRegion(KMyMoneySettings::holidayRegion());
@@ -3298,11 +3231,10 @@ bool KMyMoneyApp::slotFileNew()
   d->m_storageInfo.url = QUrl();
 
   try {
-    auto storage = new MyMoneyStorageMgr;
-    MyMoneyFile::instance()->attachStorage(storage);
-
     MyMoneyFileTransaction ft;
     auto file = MyMoneyFile::instance();
+    file->unload();
+
     // store the user info
     file->setUser(wizard.user());
 
@@ -3330,8 +3262,11 @@ bool KMyMoneyApp::slotFileNew()
     }
 
     // import the account templates
-    for (auto &tmpl : wizard.templates())
-      tmpl.importTemplate(progressCallback);
+    const auto templates = wizard.templates();
+    TemplateLoader loader(this);
+    for (const auto& tmpl : templates) {
+      loader.importTemplate(tmpl);
+    }
 
     ft.commit();
     KMyMoneySettings::setFirstTimeRun(false);
@@ -3394,6 +3329,8 @@ bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
     return false;
   }
 
+  qDebug() << "Open file" << url;
+
   if (url.scheme() != QLatin1String("sql") && !KMyMoneyUtils::fileExists(url)) {
     KMessageBox::sorry(this, i18n("<p><b>%1</b> is either an invalid filename or the file does not exist. You can open another file or create a new one.</p>", url.toDisplayString(QUrl::PreferLocalFile)), i18n("File not found"));
     return false;
@@ -3407,8 +3344,7 @@ bool KMyMoneyApp::slotFileOpenRecent(const QUrl &url)
   d->m_storageInfo.type = eKMyMoney::StorageType::None;
   for (auto &plugin : pPlugins.storage) {
     try {
-      if (auto pStorage = plugin->open(url)) {
-        MyMoneyFile::instance()->attachStorage(pStorage);
+      if (plugin->open(url)) {
         d->m_storageInfo.type = plugin->storageType();
         if (plugin->storageType() != eKMyMoney::StorageType::GNC) {
           d->m_storageInfo.url = plugin->openUrl();
@@ -3562,6 +3498,8 @@ void KMyMoneyApp::slotFileQuit()
 
 void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
 {
+  AmountEdit amountEdit;
+
   switch(action) {
     case eKMyMoney::FileAction::Opened:
       q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
@@ -3570,12 +3508,17 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
       selectBaseCurrency();
 
       // setup the standard precision
-      AmountEdit::setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
+      amountEdit.setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
 
       applyFileFixes();
-      Models::instance()->fileOpened();
-      connectStorageToModels();
+      // setup internal data for which we need all models loaded
+      MyMoneyFile::instance()->accountsModel()->setupAccountFractions();
+
+      // clean undostack
+      MyMoneyFile::instance()->undoStack()->clear();
+
       // inform everyone about new data
+      MyMoneyFile::instance()->modelsReadyToUse();
       MyMoneyFile::instance()->forceDataChanged();
       // Enable save in case the fix changed the contents
       q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(dirty());
@@ -3615,12 +3558,11 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
       disconnect(m_myMoneyView, &KMyMoneyView::viewActivated, q, &KMyMoneyApp::slotViewSelected);
       m_myMoneyView->slotFileClosed();
       // notify the models that the file is going to be closed (we should have something like dataChanged that reaches the models first)
-      Models::instance()->fileClosed();
+      MyMoneyFile::instance()->unload();
       break;
 
     case eKMyMoney::FileAction::Closed:
       q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
-      disconnectStorageFromModels();
       q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
       m_myMoneyView->enableViewsIfFileOpen(m_storageInfo.isOpened);
       updateActions();
@@ -3657,9 +3599,9 @@ KMStatus::~KMStatus()
 
 void KMyMoneyApp::Private::unlinkStatementXML()
 {
-  QDir d(KMyMoneySettings::logPath(), "kmm-statement*");
-  for (uint i = 0; i < d.count(); ++i) {
-    qDebug("Remove %s", qPrintable(d[i]));
-    d.remove(KMyMoneySettings::logPath() + QString("/%1").arg(d[i]));
+  QDir dir(KMyMoneySettings::logPath(), "kmm-statement*");
+  for (uint i = 0; i < dir.count(); ++i) {
+    qDebug("Remove %s", qPrintable(dir[i]));
+        dir.remove(KMyMoneySettings::logPath() + QString("/%1").arg(dir[i]));
   }
 }

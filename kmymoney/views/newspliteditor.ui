@@ -51,7 +51,7 @@
         </sizepolicy>
        </property>
        <property name="placeholderText">
-        <string>Credit</string>
+        <string>Payment</string>
        </property>
       </widget>
      </item>
@@ -64,7 +64,7 @@
         </sizepolicy>
        </property>
        <property name="placeholderText">
-        <string>Debit</string>
+        <string>Deposit</string>
        </property>
       </widget>
      </item>
@@ -209,18 +209,6 @@
     </spacer>
    </item>
   </layout>
-  <zorder>memoEdit</zorder>
-  <zorder>tagsLabel</zorder>
-  <zorder>payeeEdit</zorder>
-  <zorder>numberLabel</zorder>
-  <zorder>payToLabel</zorder>
-  <zorder>accountCombo</zorder>
-  <zorder>categoryLabel</zorder>
-  <zorder>costCenterLabel</zorder>
-  <zorder>numberEdit</zorder>
-  <zorder>costCenterCombo</zorder>
-  <zorder>memoLabel</zorder>
-  <zorder>comboBox</zorder>
  </widget>
  <customwidgets>
   <customwidget>

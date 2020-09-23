@@ -19,6 +19,8 @@
 #ifndef KMYMONEYFILEINFODLG_H
 #define KMYMONEYFILEINFODLG_H
 
+#include "kmm_base_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -36,7 +38,7 @@ namespace Ui { class KMyMoneyFileInfoDlg; }
   * @author Thomas Baumgart
   */
 
-class KMyMoneyFileInfoDlg : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KMyMoneyFileInfoDlg : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyFileInfoDlg)

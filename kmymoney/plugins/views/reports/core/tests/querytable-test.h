@@ -21,13 +21,11 @@
 
 #include <QObject>
 #include "mymoneyfile.h"
-#include "mymoneystoragemgr.h"
 
 class QueryTableTest : public QObject
 {
   Q_OBJECT
 private:
-  MyMoneyStorageMgr* storage;
   MyMoneyFile* file;
 
 private Q_SLOTS:

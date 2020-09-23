@@ -1,8 +1,13 @@
 # The CMake version we require
 cmake_minimum_required(VERSION 3.1)
 
+set(RELEASE_SERVICE_VERSION_MAJOR "5")
+set(RELEASE_SERVICE_VERSION_MINOR "1")
+set(RELEASE_SERVICE_VERSION_MICRO "80")
+set(RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSION_MINOR}.${RELEASE_SERVICE_VERSION_MICRO}")
+
 # Setting the name of the main project
-project(KMyMoney VERSION "5.0.80" LANGUAGES CXX)
+project(KMyMoney VERSION "${RELEASE_SERVICE_VERSION}" LANGUAGES CXX)
 
 # Determine the GIT reference (if we're based on GIT)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
@@ -37,6 +42,11 @@ endif()
 if (CMAKE_COMPILER_IS_GNUCXX AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 6.0.0)
     message(FATAL_ERROR "This version of KMyMoney requires at least gcc 6.0.0 to be built successfully")
 endif()
+
+# To build shared libraries in Windows, we set CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS to TRUE.
+# See https://cmake.org/cmake/help/v3.4/variable/CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS.html
+# See https://blog.kitware.com/create-dlls-on-windows-without-declspec-using-new-cmake-export-all-feature/
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 find_package(ECM 5.42 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
@@ -192,6 +202,9 @@ add_feature_info("SQL Storage" ENABLE_SQLSTORAGE "Allows storing your financial 
 cmake_dependent_option(ENABLE_SQLCIPHER "Enable SQLCipher support." ON
                        "SQLCIPHER_FOUND" OFF)
 
+cmake_dependent_option(ENABLE_SQLTRACER "Dump SQL requests to console" OFF
+                       "ENABLE_SQLSTORAGE" OFF)
+
 # Otherwise compilers halt on something like that:
 # ld: library not found for -lsqlcipher
 # on MS Windows, FreeBSD, macOS, and Ubuntu 14.04 (Ubuntu has CMake 3.5.1 but I'm not sure if it's the one to blame).
@@ -200,6 +213,8 @@ if(ENABLE_SQLCIPHER AND (NOT CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_VERSION 
 endif()
 
 add_feature_info("SQLCipher" ENABLE_SQLCIPHER "Allows encrypting your SQLite3 database.")
+
+add_feature_info("SQL Tracer" ENABLE_SQLTRACER "It traces the SQL queries to the console.")
 
 cmake_dependent_option(ENABLE_IBANBICDATA "Enable IBAN/BIC data support." OFF
                        "Qt5Sql_FOUND" OFF)
@@ -216,6 +231,8 @@ if(ENABLE_WEBENGINE)
 else(ENABLE_WEBENGINE)
   find_package(KF5WebKit REQUIRED)
 endif(ENABLE_WEBENGINE)
+
+add_feature_info("QWebEngine" ENABLE_WEBENGINE "A next-gen QT Web Engine.")
 
 # check for optional LibOFX support
 cmake_dependent_option(ENABLE_OFXIMPORTER "Enable OFX Importer" ON

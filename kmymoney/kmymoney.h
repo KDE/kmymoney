@@ -389,6 +389,9 @@ protected:
    */
   void initStatusBar();
 
+  /** sets up the application icons */
+  void initIcons();
+
   /** queryClose is called by KMainWindow on each closeEvent of a window. Against the
    * default implementation (only returns true), this calls saveModified() on the document object to ask if the document shall
    * be saved if Modified; on cancel the closeEvent is rejected.

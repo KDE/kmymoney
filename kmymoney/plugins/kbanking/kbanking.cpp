@@ -51,7 +51,6 @@
 #include <KMessageBox>
 #include <KActionCollection>
 #include <QMenu>
-#include <KIconLoader>
 #include <KGuiItem>
 #include <KLineEdit>
 #include <KComboBox>
@@ -192,8 +191,6 @@ KBanking::~KBanking()
 
 void KBanking::plug()
 {
-  const auto componentName = QLatin1String("kbanking");
-  const auto rcFileName = QLatin1String("kbanking.rc");
   m_kbanking = new KBankingExt(this, "KMyMoney");
 
   d->passwordCacheTimer = new QTimer(this);
@@ -669,7 +666,7 @@ void KBanking::sendOnlineJob(QList<onlineJob>& jobs)
 }
 
 
-QStringList KBanking::availableJobs(QString accountId)
+QStringList KBanking::availableJobs(QString accountId) const
 {
   try {
     MyMoneyAccount acc = MyMoneyFile::instance()->account(accountId);

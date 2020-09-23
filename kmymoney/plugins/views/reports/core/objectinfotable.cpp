@@ -150,7 +150,7 @@ void ObjectInfoTable::init()
   }
 
   TableRow::setSortCriteria(sort);
-  qSort(m_rows);
+  std::sort(m_rows.begin(), m_rows.end());
 }
 
 void ObjectInfoTable::constructScheduleTable()

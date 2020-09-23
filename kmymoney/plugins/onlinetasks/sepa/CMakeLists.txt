@@ -26,7 +26,7 @@ set_target_properties(konlinetasks_sepa
 target_link_libraries( konlinetasks_sepa_interface
   INTERFACE
   kmm_mymoney
-  kmm_widgets
+  kmm_base_widgets
   kmm_plugin
   onlinetask_interfaces
   Qt5::Xml

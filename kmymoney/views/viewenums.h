@@ -20,7 +20,7 @@
 #include <QHashFunctions>
 
 enum class View { Home = 0, Institutions, Accounts, Schedules, Categories, Tags,
-                  Payees, Ledgers, Investments, Reports, Budget, Forecast, OnlineJobOutbox, NewLedgers, None };
+                  Payees, NewLedgers, Investments, Reports, Budget, Forecast, OnlineJobOutbox, OldLedgers, None };
 
 inline uint qHash(const View key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 
@@ -42,8 +42,8 @@ namespace eView {
     SynchronizeAccountInInvestmentView,
     SynchronizeAccountInLedgersView,
     ToggleColumn,
-    UpdateNetWorth,
-    UpdateProfit,
+    UpdateNetWorth,                             // deprecated
+    UpdateProfit,                               // deprecated
     StartEnteringOverdueScheduledTransactions,
     FinishEnteringOverdueScheduledTransactions,
     EnterSchedule,

@@ -1,5 +1,7 @@
 /*
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019-2020  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2020       Robert Szczesiak <dev.rszczesiak@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -18,6 +20,8 @@
 #ifndef MYMONEYENUMS_H
 #define MYMONEYENUMS_H
 
+#include <QtCore/qnamespace.h>
+#include <QMetaType>
 #include <QHashFunctions>
 
 namespace eMyMoney {
@@ -55,7 +59,10 @@ namespace eMyMoney {
       Asset,
       Expense,
       Income,
-      Equity
+      Equity,
+      Favorite,             /**< Used internally as parent for all favorite accounts */
+      // insert new groups above this line
+      MaxGroups
     };
 
     inline uint qHash(const Standard key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
@@ -292,12 +299,13 @@ namespace eMyMoney {
       AddShares,
       RemoveShares,
       SplitShares,
-      InterestIncome///
+      InterestIncome
     };
 
     inline uint qHash(const InvestmentTransactionType key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 
     enum class Action {
+      Unknown = -1,
       Check,
       Deposit,
       Transfer,
@@ -331,7 +339,12 @@ namespace eMyMoney {
       Schedule,
       Security,
       OnlineJob,
-      CostCenter
+      CostCenter,
+      Budget,
+      Currency,
+      Price,
+      Parameter,
+      Report
     };
 
     /**
@@ -410,14 +423,147 @@ namespace eMyMoney {
 
   namespace Money {
     enum signPosition : int {
-      // keep those in sync with the ones defined in klocale.h
+      // keep those in sync with the ones defined in localeconv
       ParensAround = 0,
-      BeforeQuantityMoney = 1,
-      AfterQuantityMoney = 2,
-      BeforeMoney = 3,
-      AfterMoney = 4
+      PreceedQuantityAndSymbol = 1,
+      SucceedQuantityAndSymbol = 2,
+      PreceedSymbol = 3,
+      SucceedSymbol = 4
     };
   }
 
+  /// @todo port to new model code
+  // think about moving this to modelenums.h
+  namespace Model {
+    enum Roles {
+      // The IdRole is used by all model items whereas the id of all other roles id unique
+      // for each model. This way, we can identify if an id is used on the wrong model.
+      IdRole  = Qt::UserRole,      // must remain Qt::UserRole due to KMyMoneyMVCCombo::selectedItem
+      ItemReferenceRole,
+
+      // MyMoneyPayee
+      PayeeNameRole,
+      PayeeAddressRole,
+      PayeeCityRole,
+      PayeeStateRole,
+      PayeePostCodeRole,
+      PayeeTelephoneRole,
+      PayeeEmailRole,
+      PayeeNotesRole,
+      PayeeReferenceRole,
+      PayeeMatchTypeRole,
+      PayeeMatchKeyRole,
+      PayeeMatchCaseRole,
+      PayeeDefaultAccountRole,
+
+      // MyMoneyAccount
+      AccountTypeRole,
+      AccountGroupRole,
+      AccountIsClosedRole,
+      AccountIsInvestRole,
+      AccountBalanceRole,
+      AccountValueRole,
+      AccountTotalValueRole,
+      AccountFullHierarchyNameRole,
+      AccountFullNameRole,
+      AccountNameRole,
+      AccountDisplayOrderRole,
+      AccountFractionRole,
+      AccountParentIdRole,
+      AccountCurrencyIdRole,
+      AccountInstitutionIdRole,
+      AccountOnlineBalanceDateRole,
+      AccountOnlineBalanceValueRole,
+      AccountIsFavoriteIndexRole,
+      AccountIsIncomeExpenseRole,
+      AccountIsAssetLiabilityRole,
+
+      // MyMoneyInstitution
+      InstitutionSortCodeRole,
+
+      // MyMoneyCostCenter
+      CostCenterShortNameRole,
+
+      // MyMoneySchedule
+      ScheduleNameRole,
+      ScheduleTypeRole,
+      ScheduleIsOverdueRole,
+
+      // MyMoneySecurity
+      SecuritySymbolRole,
+      SecurityTradingCurrencyIdRole,
+      SecurityTradingCurrencyIndexRole,
+      SecurityPricePrecisionRole,
+      SecuritySmallestAccountFractionRole,
+      SecuritySmallestCashFractionRole,
+
+      // MyMoneyBudget
+      BudgetNameRole,
+
+      // MyMoneyTransaction
+      TransactionErroneousRole,
+      TransactionPostDateRole,
+      TransactionCounterAccountRole,
+      TransactionCounterAccountIdRole,
+      TransactionIsTransferRole,
+      TransactionIsInvestmentRole,
+      TransactionInvestementType,
+      TransactionSplitCountRole,
+      TransactionBrokerageAccountRole,
+      TransactionInterestSplitPresentRole,
+      TransactionFeeSplitPresentRole,
+      TransactionInterestCategoryRole,
+      TransactionFeesCategoryRole,
+      TransactionInterestValueRole,
+      TransactionFeesValueRole,
+      TransactionIsStockSplitRole,
+      TransactionInvestmentAccountIdRole,
+      TransactionCommodityRole,
+
+      // MyMoneySplit
+      SplitSharesSuffixRole,
+      SplitAccountIdRole,
+      SplitPayeeIdRole,
+      SplitPayeeRole,
+      SplitMemoRole,
+      SplitSingleLineMemoRole,
+      SplitSharesRole,
+      SplitSharesFormattedRole,
+      SplitValueRole,
+      SplitPriceRole,
+      SplitReconcileFlagRole,       // the short status flag
+      SplitReconcileStatusRole,     // the full status name
+      SplitReconcileDateRole,
+      SplitActionRole,
+      SplitNumberRole,
+      SplitCostCenterIdRole,
+      SplitActivityRole,
+      SplitTagIdRole,
+
+      // Journal
+      JournalSplitIdRole,
+      JournalTransactionIdRole,
+      JournalSplitPaymentRole,
+      JournalSplitDepositRole,
+
+      // Ledger
+      LedgerDisplayOrderRole,
+
+      // Parameter
+      ParameterValueRole,
+
+      // Templates
+      TemplatesCountryRole,
+      TemplatesTypeRole,
+      TemplatesDescriptionRole,
+      TemplatesLongDescriptionRole,
+      TemplatesDomRole,
+      TemplatesLocaleRole,
+    };
+  }
 }
+
+Q_DECLARE_METATYPE(eMyMoney::Split::State)
+Q_DECLARE_METATYPE(eMyMoney::Split::InvestmentTransactionType)
+
 #endif

@@ -21,6 +21,8 @@
 #ifndef KNEWEQUITYENTRYDLG_H
 #define KNEWEQUITYENTRYDLG_H
 
+#include "kmm_base_dialogs_export.h"
+
 #include <QDialog>
 
 /**
@@ -32,7 +34,7 @@
   */
 
 class KNewEquityEntryDlgPrivate;
-class KNewEquityEntryDlg : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KNewEquityEntryDlg : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(KNewEquityEntryDlg)

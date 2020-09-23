@@ -37,7 +37,6 @@ void MatchFinderTest::init()
 {
   file = MyMoneyFile::instance();
 
-  setupStorage();
   setupCurrency();
   setupAccounts();
   setupPayees();
@@ -52,13 +51,10 @@ void MatchFinderTest::init()
 
 void MatchFinderTest::cleanup()
 {
-  file->detachStorage(storage.data());
 }
 
 void MatchFinderTest::setupStorage()
 {
-  storage.reset(new MyMoneyStorageMgr);
-  file->attachStorage(storage.data());
 }
 
 void MatchFinderTest::setupCurrency()

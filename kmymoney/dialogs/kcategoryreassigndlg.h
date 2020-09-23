@@ -19,6 +19,8 @@
 #ifndef KCATEGORYREASSIGNDLG_H
 #define KCATEGORYREASSIGNDLG_H
 
+#include "kmm_base_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -38,7 +40,7 @@ namespace Ui { class KCategoryReassignDlg; }
  *  to re-assign transactions (for instance, if payees are deleted).
  */
 
-class KCategoryReassignDlg : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KCategoryReassignDlg : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(KCategoryReassignDlg)

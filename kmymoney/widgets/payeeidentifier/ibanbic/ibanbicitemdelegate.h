@@ -18,14 +18,14 @@
 #ifndef IBANBICITEMDELEGATE_H
 #define IBANBICITEMDELEGATE_H
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 #include <QStyledItemDelegate>
 
 #include "payeeidentifier/payeeidentifiertyped.h"
 #include "payeeidentifier/ibanbic/ibanbic.h"
 
-class KMM_WIDGETS_EXPORT ibanBicItemDelegate : public QStyledItemDelegate
+class KMM_BASE_WIDGETS_EXPORT ibanBicItemDelegate : public QStyledItemDelegate
 {
   Q_OBJECT
 

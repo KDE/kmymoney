@@ -75,6 +75,10 @@
 #include "storageenums.h"
 #include "mymoneyenums.h"
 #include "kmymoneyplugin.h"
+#include "statusmodel.h"
+#include "journalmodel.h"
+#include "splitmodel.h"
+#include "accountsmodel.h"
 
 using namespace Icons;
 
@@ -119,7 +123,7 @@ KGuiItem KMyMoneyUtils::scheduleNewGuiItem()
 KGuiItem KMyMoneyUtils::accountsFilterGuiItem()
 {
   KGuiItem splitGuiItem(i18n("&Filter"),
-                        Icons::get(Icon::ViewFilter),
+                        Icons::get(Icon::Filter),
                         i18n("Filter out accounts"),
                         i18n("Use this to filter out accounts"));
 
@@ -401,41 +405,9 @@ quint64 KMyMoneyUtils::numericPart(const QString & num)
 QString KMyMoneyUtils::reconcileStateToString(eMyMoney::Split::State flag, bool text)
 {
   QString txt;
-  if (text) {
-    switch (flag) {
-      case eMyMoney::Split::State::NotReconciled:
-        txt = i18nc("Reconciliation state 'Not reconciled'", "Not reconciled");
-        break;
-      case eMyMoney::Split::State::Cleared:
-        txt = i18nc("Reconciliation state 'Cleared'", "Cleared");
-        break;
-      case eMyMoney::Split::State::Reconciled:
-        txt = i18nc("Reconciliation state 'Reconciled'", "Reconciled");
-        break;
-      case eMyMoney::Split::State::Frozen:
-        txt = i18nc("Reconciliation state 'Frozen'", "Frozen");
-        break;
-      default:
-        txt = i18nc("Unknown reconciliation state", "Unknown");
-        break;
-    }
-  } else {
-    switch (flag) {
-      case eMyMoney::Split::State::NotReconciled:
-        break;
-      case eMyMoney::Split::State::Cleared:
-        txt = i18nc("Reconciliation flag C", "C");
-        break;
-      case eMyMoney::Split::State::Reconciled:
-        txt = i18nc("Reconciliation flag R", "R");
-        break;
-      case eMyMoney::Split::State::Frozen:
-        txt = i18nc("Reconciliation flag F", "F");
-        break;
-      default:
-        txt = i18nc("Flag for unknown reconciliation state", "?");
-        break;
-    }
+  const QModelIndex idx = MyMoneyFile::instance()->statusModel()->index(static_cast<int>(flag), 0);
+  if (idx.isValid()) {
+    txt = idx.data(text ? eMyMoney::Model::SplitReconcileStatusRole : eMyMoney::Model::SplitReconcileFlagRole).toString();
   }
   return txt;
 }
@@ -480,55 +452,50 @@ void KMyMoneyUtils::updateWizardButtons(QWizard* wizard)
   wizard->button(QWizard::BackButton)->setIcon(KStandardGuiItem::back(KStandardGuiItem::UseRTL).icon());
 }
 
-void KMyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, eMyMoney::Split::InvestmentTransactionType& transactionType)
+void KMyMoneyUtils::dissectInvestmentTransaction(const QModelIndex &investSplitIdx, QModelIndex &assetAccountSplitIdx, SplitModel* feeSplitModel, SplitModel* interestSplitModel, MyMoneySecurity &security, MyMoneySecurity &currency, eMyMoney::Split::InvestmentTransactionType &transactionType)
 {
+  // clear split models
+  feeSplitModel->unload();
+  interestSplitModel->unload();
+
+  assetAccountSplitIdx = QModelIndex(); // set to none to check later if it was assigned
+  const auto file = MyMoneyFile::instance();
+
   // collect the splits. split references the stock account and should already
   // be set up. assetAccountSplit references the corresponding asset account (maybe
   // empty), feeSplits is the list of all expenses and interestSplits
   // the list of all incomes
-  assetAccountSplit = MyMoneySplit(); // set to none to check later if it was assigned
-  auto file = MyMoneyFile::instance();
-  foreach (const auto tsplit, transaction.splits()) {
-    auto acc = file->account(tsplit.accountId());
-    if (tsplit.id() == split.id()) {
-      security = file->security(acc.currencyId());
-    } else if (acc.accountGroup() == eMyMoney::Account::Type::Expense) {
-      feeSplits.append(tsplit);
-      // feeAmount += tsplit.value();
-    } else if (acc.accountGroup() == eMyMoney::Account::Type::Income) {
-      interestSplits.append(tsplit);
-      // interestAmount += tsplit.value();
+  auto idx = MyMoneyFile::baseModel()->mapToBaseSource(investSplitIdx);
+  const auto list = idx.model()->match(idx.model()->index(0, 0), eMyMoney::Model::JournalTransactionIdRole,
+                                       idx.data(eMyMoney::Model::JournalTransactionIdRole),
+                                       -1,                         // all splits
+                                       Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+  for (const auto& splitIdx : list) {
+    auto accIdx = file->accountsModel()->indexById(splitIdx.data(eMyMoney::Model::SplitAccountIdRole).toString());
+    const auto accountGroup = accIdx.data(eMyMoney::Model::AccountGroupRole).value<eMyMoney::Account::Type>();
+    if (splitIdx.row() == idx.row()) {
+      security = file->security(accIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString());
+    } else if (accountGroup == eMyMoney::Account::Type::Expense) {
+      feeSplitModel->appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
+    } else if (accountGroup == eMyMoney::Account::Type::Income) {
+      interestSplitModel->appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
     } else {
-      if (assetAccountSplit == MyMoneySplit()) // first asset Account should be our requested brokerage account
-        assetAccountSplit = tsplit;
-      else if (tsplit.value().isNegative())  // the rest (if present) is handled as fee or interest
-        feeSplits.append(tsplit);              // and shouldn't be allowed to override assetAccountSplit
-      else if (tsplit.value().isPositive())
-        interestSplits.append(tsplit);
+      if (!assetAccountSplitIdx.isValid()) { // first asset Account should be our requested brokerage account
+        assetAccountSplitIdx = splitIdx;
+      } else if (idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>().isNegative()) { // the rest (if present) is handled as fee or interest
+        feeSplitModel->appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
+      } else if (idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>().isPositive()) {
+        interestSplitModel->appendSplit(file->journalModel()->itemByIndex(splitIdx).split());
+      }
     }
   }
 
   // determine transaction type
-  if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::AddShares)) {
-    transactionType = (!split.shares().isNegative()) ? eMyMoney::Split::InvestmentTransactionType::AddShares : eMyMoney::Split::InvestmentTransactionType::RemoveShares;
-  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::BuyShares)) {
-    transactionType = (!split.value().isNegative()) ? eMyMoney::Split::InvestmentTransactionType::BuyShares : eMyMoney::Split::InvestmentTransactionType::SellShares;
-  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Dividend)) {
-    transactionType = eMyMoney::Split::InvestmentTransactionType::Dividend;
-  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::ReinvestDividend)) {
-    transactionType = eMyMoney::Split::InvestmentTransactionType::ReinvestDividend;
-  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::Yield)) {
-    transactionType = eMyMoney::Split::InvestmentTransactionType::Yield;
-  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::SplitShares)) {
-    transactionType = eMyMoney::Split::InvestmentTransactionType::SplitShares;
-  } else if (split.action() == MyMoneySplit::actionName(eMyMoney::Split::Action::InterestIncome)) {
-    transactionType = eMyMoney::Split::InvestmentTransactionType::InterestIncome;
-  } else
-    transactionType = eMyMoney::Split::InvestmentTransactionType::BuyShares;
+  transactionType = idx.data(eMyMoney::Model::TransactionInvestementType).value<eMyMoney::Split::InvestmentTransactionType>();
 
   currency.setTradingSymbol("???");
   try {
-    currency = file->security(transaction.commodity());
+    currency = file->security(file->journalModel()->itemByIndex(idx).transaction().commodity());
   } catch (const MyMoneyException &) {
   }
 }
@@ -689,9 +656,12 @@ bool KMyMoneyUtils::newPayee(const QString& newnameBase, QString& id)
       QString newname(newnameBase);
       // adjust name until a unique name has been created
       int count = 0;
+
       for (;;) {
         try {
-          MyMoneyFile::instance()->payeeByName(newname);
+          const auto payee = MyMoneyFile::instance()->payeeByName(newname);
+          if (payee.id().isEmpty())
+            break;
           newname = QString::fromLatin1("%1 [%2]").arg(newnameBase).arg(++count);
         } catch (const MyMoneyException &) {
           break;
@@ -738,7 +708,9 @@ void KMyMoneyUtils::newTag(const QString& newnameBase, QString& id)
       int count = 0;
       for (;;) {
         try {
-          MyMoneyFile::instance()->tagByName(newname);
+          if (MyMoneyFile::instance()->tagByName(newname).id().isEmpty()) {
+            break;
+          }
           newname = QString::fromLatin1("%1 [%2]").arg(newnameBase).arg(++count);
         } catch (const MyMoneyException &) {
           break;
@@ -799,8 +771,6 @@ bool KMyMoneyUtils::canUpdateAllAccounts()
 {
   const auto file = MyMoneyFile::instance();
   auto rc = false;
-  if (!file->storageAttached())
-    return rc;
 
   QList<MyMoneyAccount> accList;
   file->accountList(accList);
@@ -833,4 +803,12 @@ void KMyMoneyUtils::showStatementImportResult(const QStringList& resultMessages,
                                     resultMessages :
                                     QStringList { i18np("No new transaction has been imported.", "No new transactions have been imported.", statementCount) },
                                 i18n("Statement import statistics"));
+}
+
+QString KMyMoneyUtils::normalizeNumericString(const qreal& val, const QLocale& loc, const char f, const int prec)
+{
+    return loc.toString(val, f, prec)
+            .remove(loc.groupSeparator())
+            .remove(QRegularExpression("0+$"))
+            .remove(QRegularExpression("\\" + loc.decimalPoint() + "$"));
 }

@@ -50,7 +50,6 @@
 
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
-#include "storage/mymoneystoragemgr.h"
 #include "kguiutils.h"
 #include "misc/platformtools.h"
 #include "mymoneydbdriver.h"
@@ -67,9 +66,7 @@ public:
     ui(new Ui::KGenerateSqlDlg),
     m_createTablesButton(nullptr),
     m_saveSqlButton(nullptr),
-    m_sqliteSelected(false),
-    m_storage(nullptr),
-    m_mustDetachStorage(false)
+    m_sqliteSelected(false)
   {
   }
 
@@ -138,8 +135,6 @@ public:
   bool m_sqliteSelected;
   QExplicitlySharedDataPointer<MyMoneyDbDriver> m_dbDriver;
   QString m_dbName;
-  MyMoneyStorageMgr* m_storage;
-  bool m_mustDetachStorage;
 };
 
 
@@ -320,20 +315,9 @@ void KGenerateSqlDlg::slotdriverSelected()
   d->ui->textSQL->setEnabled(true);
   // check if we have a storage; if not, create a skeleton one
   // we need a storage for MyMoneyDbDef to generate standard accounts
-  d->m_storage = new MyMoneyStorageMgr;
-  d->m_mustDetachStorage = true;
-  try {
-    MyMoneyFile::instance()->attachStorage(d->m_storage);
-  } catch (const MyMoneyException &) {
-    d->m_mustDetachStorage = false; // there is already a storage attached
-  }
   MyMoneyDbDef db;
   d->ui->textSQL->setText
   (db.generateSQL(d->m_dbDriver));
-  if (d->m_mustDetachStorage) {
-    MyMoneyFile::instance()->detachStorage();
-  }
-  delete d->m_storage;
 
   d->m_saveSqlButton->setEnabled(true);
   connect(d->m_saveSqlButton, &QPushButton::clicked, this, &KGenerateSqlDlg::slotsaveSQL);

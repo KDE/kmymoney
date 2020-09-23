@@ -16,7 +16,7 @@ set ( onlinetask_interfaces_SRCS
 )
 
 # At the moment onlinetask_interfaces is linked into kmm_mymoney and should not be used anywhere else!
-add_library(onlinetask_interfaces STATIC ${onlinetask_interfaces_SRCS})
+add_library(onlinetask_interfaces SHARED ${onlinetask_interfaces_SRCS})
 
 target_link_libraries( onlinetask_interfaces
   PUBLIC
@@ -24,6 +24,12 @@ target_link_libraries( onlinetask_interfaces
     Qt5::Widgets
     Alkimia::alkimia
 )
+
+set_target_properties(onlinetask_interfaces PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})
+
+generate_export_header(onlinetask_interfaces BASE_NAME onlinetask_interfaces)
+
+install(TARGETS onlinetask_interfaces ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install(FILES ${onlinetask_interfaces_HEADER}
     DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney/onlinetasks/interfaces/ COMPONENT Devel)

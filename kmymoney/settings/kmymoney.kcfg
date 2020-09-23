@@ -72,10 +72,6 @@
    <min>0</min>
    <max>999</max>
   </entry>
-  <entry name="CopyTypeToNr" type="Bool">
-   <label>Insert transaction type into No. field for new transactions</label>
-   <default>false</default>
-  </entry>
   <entry name="FocusChangeIsEnter" type="Bool">
    <label>Keep changes when selecting a different transaction/split</label>
    <default>false</default>
@@ -121,10 +117,6 @@
   <entry name="ExpertMode" type="Bool">
    <label>Run in expert (accountant) mode</label>
    <default>false</default>
-  </entry>
-  <entry name="ShowSplash" type="Bool">
-   <label>Show splash screen during startup</label>
-   <default>true</default>
   </entry>
   <entry name="syncLedgerInvestment" type="Bool">
    <label>Synchronize account in ledger and investment view</label>
@@ -350,6 +342,13 @@
    <label>During import, ask for a new payee's default category</label>
    <default>false</default>
   </entry>
+ </group>
+ <!-- Internal options don't have GUI access -->
+ <group name="Internal Options">
+   <entry name="lastUsedPostDate" type="DateTime">
+     <label>Post date last entered by the user</label>
+     <default>QDateTime()</default>
+   </entry>
  </group>
  <group name="QIF Options">
   <entry name="qifCash" type="String">

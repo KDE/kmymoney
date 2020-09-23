@@ -19,6 +19,8 @@
 #ifndef KMYMONEYCOMPLETION_H
 #define KMYMONEYCOMPLETION_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -40,7 +42,7 @@ class KMyMoneySelector;
   */
 
 class KMyMoneyCompletionPrivate;
-class KMyMoneyCompletion : public QWidget
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyCompletion : public QWidget
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyCompletion)

@@ -20,7 +20,6 @@
 #define MYMONEYTRANSACTIONFILTERTEST_H
 
 #include <QObject>
-class MyMoneyStorageMgr;
 class MyMoneyFile;
 
 class MyMoneyTransactionFilterTest : public QObject
@@ -54,7 +53,6 @@ private:
     QString acCheckingId;
     QString acExpenseId;
     QString acIncomeId;
-    MyMoneyStorageMgr* storage;
     MyMoneyFile* file;
 };
 

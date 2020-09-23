@@ -2,6 +2,7 @@
  * Copyright 2004-2006  Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2006       Darren Gould <darren_gould@gmx.de>
  * Copyright 2007-2010  Alvaro Soliverez <asoliverez@gmail.com>
+ * Copyright 2010-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  * Copyright 2018       Michael Kiefer <Michael-Kiefer@web.de>
  *
@@ -23,6 +24,8 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
+#include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -870,11 +873,14 @@ void MyMoneyReport::validDateRange(QDate& db, QDate& de)
   // year as the filter criteria.
 
   if (!db.isValid() || !de.isValid()) {
+    /// @todo port to new model code
+    /// use first and last index into journal model instead
+    /// of retrieving the whole list of transactions.
     QList<MyMoneyTransaction> list = MyMoneyFile::instance()->transactionList(*this);
     QDate tmpBegin, tmpEnd;
 
     if (!list.isEmpty()) {
-      qSort(list);
+      std::sort(list.begin(), list.end());
       // try to use the post dates
       tmpBegin = list.front().postDate();
       tmpEnd = list.back().postDate();
@@ -984,6 +990,16 @@ bool MyMoneyReport::hasReferenceTo(const QString& id) const
   tags(list);
 
   return list.contains(id);
+}
+
+QSet<QString> MyMoneyReport::referencedObjects() const
+{
+  QStringList list;
+  accounts(list);
+  categories(list);
+  payees(list);
+  tags(list);
+  return QSet<QString>::fromList(list);
 }
 
 int MyMoneyReport::m_lineWidth = 2;

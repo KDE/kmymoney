@@ -18,6 +18,12 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "config-kmymoney.h"
+
+#ifdef ENABLE_SQLTRACER
+#include "kmmsqlquery.h"
+#endif
+
 #include "mymoneystoragesql_p.h"
 
 // ----------------------------------------------------------------------------
@@ -36,13 +42,17 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "tagsmodel.h"
+
+/// @todo port to new model code
+
 //************************ Constructor/Destructor *****************************
-MyMoneyStorageSql::MyMoneyStorageSql(MyMoneyStorageMgr *storage, const QUrl &url) :
+MyMoneyStorageSql::MyMoneyStorageSql(MyMoneyFile* file, const QUrl &url) :
   QSqlDatabase(QUrlQuery(url).queryItemValue("driver")),
   d_ptr(new MyMoneyStorageSqlPrivate(this))
 {
   Q_D(MyMoneyStorageSql);
-  d->m_storage = storage;
+  d->m_file = file;
 }
 
 MyMoneyStorageSql::~MyMoneyStorageSql()
@@ -197,7 +207,12 @@ int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
     }
     if (rc != 0) return (rc);
     // bypass logon check if we are creating a database
-    if (d->m_newDatabase) return(0);
+    if (d->m_newDatabase) {
+      d->m_logonUser = url.userName() + '@' + url.host();
+      d->m_logonAt = QDateTime::currentDateTime();
+      d->writeFileInfo();
+      return(0);
+    }
     // check if the database is locked, if not lock it
     d->readFileInfo();
     if (!d->m_logonUser.isEmpty() && (!d->m_override)) {
@@ -211,7 +226,6 @@ int MyMoneyStorageSql::open(const QUrl &url, int openMode, bool clear)
     } else {
       d->m_logonUser = url.userName() + '@' + url.host();
       d->m_logonAt = QDateTime::currentDateTime();
-      d->writeFileInfo();
     }
     return(rc);
   } catch (const QString& s) {
@@ -252,46 +266,37 @@ bool MyMoneyStorageSql::readFile()
 {
   Q_D(MyMoneyStorageSql);
   d->m_displayStatus = true;
+  MyMoneyFile* file = MyMoneyFile::instance();
+
   try {
+    file->unload();
     d->readFileInfo();
-    d->readInstitutions();
-    if (d->m_loadAll) {
-      readPayees();
-    } else {
-      QList<QString> user;
-      user.append(QString("USER"));
-      readPayees(user);
-    }
-    readTags();
-    d->readCurrencies();
-    d->readSecurities();
-    d->readAccounts();
-    if (d->m_loadAll) {
-      d->readTransactions();
-    } else {
-      if (d->m_preferred.filterSet().singleFilter.accountFilter) readTransactions(d->m_preferred);
-    }
-    d->readSchedules();
-    d->readPrices();
-    d->readReports();
-    d->readBudgets();
-    d->readOnlineJobs();
+    file->institutionsModel()->load(fetchInstitutions());
+    file->payeesModel()->load(fetchPayees());
+    file->tagsModel()->load(fetchTags());
+    file->currenciesModel()->loadCurrencies(fetchCurrencies());
+    file->securitiesModel()->load(fetchSecurities());
+    file->accountsModel()->load(fetchAccounts());
+    file->journalModel()->load(fetchTransactions());
+    file->schedulesModel()->load(fetchSchedules());
+    file->priceModel()->load(fetchPrices());
+    file->reportsModel()->load(fetchReports());
+    file->budgetsModel()->load(fetchBudgets());
+    file->onlineJobsModel()->load(fetchOnlineJobs());
+    file->setDirty(false);
+
     //FIXME - ?? if (m_mode == 0)
     //m_storage->rebuildAccountBalances();
-    // this seems to be nonsense, but it clears the dirty flag
-    // as a side-effect.
-    d->m_storage->setLastModificationDate(d->m_storage->lastModificationDate());
     // FIXME?? if (m_mode == 0) m_storage = NULL;
     // make sure the progress bar is not shown any longer
     d->signalProgress(-1, -1);
     d->m_displayStatus = false;
     //MyMoneySqlQuery::traceOn();
     return true;
+
   } catch (const QString &) {
     return false;
   }
-  // this seems to be nonsense, but it clears the dirty flag
-  // as a side-effect.
 }
 
 // The following is called from 'SaveAsDatabase'
@@ -335,10 +340,11 @@ bool MyMoneyStorageSql::writeFile()
     // make sure the progress bar is not shown any longer
     d->signalProgress(-1, -1);
     d->m_displayStatus = false;
-    // this seems to be nonsense, but it clears the dirty flag
-    // as a side-effect.
-    d->m_storage->setLastModificationDate(d->m_storage->lastModificationDate());
+
+    /// @todo the engine needs to reset the dirty flags in all models
+    /// signal fileSaved?
     return true;
+
   } catch (const QString &) {
     return false;
   }
@@ -394,6 +400,7 @@ void MyMoneyStorageSql::cancelCommitUnit(const QString& callingFunction)
 }
 
 /////////////////////////////////////////////////////////////////////
+#if 0
 void MyMoneyStorageSql::fillStorage()
 {
   Q_D(MyMoneyStorageSql);
@@ -402,6 +409,7 @@ void MyMoneyStorageSql::fillStorage()
 //  if (!m_payeeListRead)
   readPayees();
 }
+#endif
 
 //------------------------------ Write SQL routines ----------------------------------------
 // **** Institutions ****
@@ -718,7 +726,7 @@ void MyMoneyStorageSql::addTransaction(const MyMoneyTransaction& tx)
   QList<MyMoneyAccount> aList;
   // for each split account, update lastMod date, balance, txCount
   foreach (const MyMoneySplit& it_s, tx.splits()) {
-    MyMoneyAccount acc = d->m_storage->account(it_s.accountId());
+    MyMoneyAccount acc = d->m_file->account(it_s.accountId());
     ++d->m_transactionCountMap[acc.id()];
     aList << acc;
   }
@@ -746,7 +754,7 @@ void MyMoneyStorageSql::modifyTransaction(const MyMoneyTransaction& tx)
   QList<MyMoneyAccount> aList;
   // for each split account, update lastMod date, balance, txCount
   foreach (const MyMoneySplit& it_s, tx.splits()) {
-    MyMoneyAccount acc = d->m_storage->account(it_s.accountId());
+    MyMoneyAccount acc = d->m_file->account(it_s.accountId());
     ++d->m_transactionCountMap[acc.id()];
     aList << acc;
   }
@@ -766,7 +774,7 @@ void MyMoneyStorageSql::removeTransaction(const MyMoneyTransaction& tx)
   QList<MyMoneyAccount> aList;
   // for each split account, update lastMod date, balance, txCount
   foreach (const MyMoneySplit& it_s, tx.splits()) {
-    MyMoneyAccount acc = d->m_storage->account(it_s.accountId());
+    MyMoneyAccount acc = d->m_file->account(it_s.accountId());
     --d->m_transactionCountMap[acc.id()];
     aList << acc;
   }
@@ -874,7 +882,7 @@ void MyMoneyStorageSql::addPrice(const MyMoneyPrice& p)
   query.bindValue(":toId", p.to());
   query.bindValue(":priceDate", p.date().toString(Qt::ISODate));
   query.bindValue(":price", p.rate(QString()).toString());
-  const MyMoneySecurity sec = d->m_storage->security(p.to());
+  const MyMoneySecurity sec = d->m_file->security(p.to());
   query.bindValue(":priceFormatted",
               p.rate(QString()).formatMoney("", sec.pricePrecision()));
   query.bindValue(":priceSource", p.source());
@@ -1229,6 +1237,7 @@ QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions(const QSt
       inst.addAccountId(it);
 
     iList[iid] = MyMoneyInstitution(iid, inst);
+    /// @todo cleanup, the following can go
     ulong id = MyMoneyUtils::extractId(iid);
     if (id > lastId)
       lastId = id;
@@ -1257,6 +1266,8 @@ QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions() const
   return fetchInstitutions(QStringList(), false);
 }
 
+#if 0
+/// @todo cleanup, the following can go
 void MyMoneyStorageSql::readPayees(const QString& id)
 {
   QList<QString> list;
@@ -1268,7 +1279,8 @@ void MyMoneyStorageSql::readPayees(const QList<QString>& pid)
 {
   Q_D(MyMoneyStorageSql);
   try {
-    d->m_storage->loadPayees(fetchPayees(pid));
+    d->m_file->payeesModel()->load(fetchPayees(pid));
+    d->m_file->userModel()->setDirty(false);
   } catch (const MyMoneyException &) {
   }
 //  if (pid.isEmpty()) m_payeeListRead = true;
@@ -1278,6 +1290,7 @@ void MyMoneyStorageSql::readPayees()
 {
   readPayees(QList<QString>());
 }
+#endif
 
 QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees(const QStringList& idList, bool /*forUpdate*/) const
 {
@@ -1379,9 +1392,14 @@ QMap<QString, MyMoneyPayee> MyMoneyStorageSql::fetchPayees(const QStringList& id
         payee.resetPayeeIdentifiers(identifier);
       }
 
-      if (pid == "USER")
-        d->m_storage->setUser(payee);
-      else
+      if (pid == "USER") {
+        // make sure it is the sole item in the model
+        d->m_file->userModel()->unload();
+        MyMoneyPayee user = MyMoneyPayee(d->m_file->fixedKey(MyMoneyFile::UserID), payee);
+        d->m_file->userModel()->addItem(user);
+        // loading does not count as making dirty
+        d->m_file->userModel()->setDirty(false);
+      } else
         pList[pid] = MyMoneyPayee(pid, payee);
 
       if (d->m_displayStatus)
@@ -1407,7 +1425,7 @@ void MyMoneyStorageSql::readTags(const QList<QString>& pid)
 {
   Q_D(MyMoneyStorageSql);
   try {
-    d->m_storage->loadTags(fetchTags(pid));
+    d->m_file->tagsModel()->load(fetchTags(pid));
   } catch (const MyMoneyException &) {
   }
 }
@@ -1415,6 +1433,59 @@ void MyMoneyStorageSql::readTags(const QList<QString>& pid)
 void MyMoneyStorageSql::readTags()
 {
   readTags(QList<QString>());
+}
+
+QMap<QString, MyMoneyTag> MyMoneyStorageSql::fetchTags(const QStringList& idList, bool /*forUpdate*/) const
+{
+  Q_D(const MyMoneyStorageSql);
+  MyMoneyDbTransaction trans(const_cast <MyMoneyStorageSql&>(*this), Q_FUNC_INFO);
+  if (d->m_displayStatus) {
+    int tagsNb = (idList.isEmpty() ? d->m_tags : idList.size());
+    d->signalProgress(0, tagsNb, QObject::tr("Loading tags..."));
+  } else {
+    //    if (m_tagListRead) return;
+  }
+  int progress = 0;
+  QMap<QString, MyMoneyTag> taList;
+  //ulong lastId;
+  const MyMoneyDbTable& t = d->m_db.m_tables["kmmTags"];
+  QSqlQuery query(*const_cast <MyMoneyStorageSql*>(this));
+  if (idList.isEmpty()) {
+    query.prepare(t.selectAllString());
+  } else {
+    QString whereClause = " where (";
+    QString itemConnector = "";
+    foreach (const QString& it, idList) {
+      whereClause.append(QString("%1id = '%2'").arg(itemConnector).arg(it));
+      itemConnector = " or ";
+    }
+    whereClause += ')';
+    query.prepare(t.selectAllString(false) + whereClause);
+  }
+  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading Tag")); // krazy:exclude=crashy
+  int idCol = t.fieldNumber("id");
+  int nameCol = t.fieldNumber("name");
+  int notesCol = t.fieldNumber("notes");
+  int tagColorCol = t.fieldNumber("tagColor");
+  int closedCol = t.fieldNumber("closed");
+
+  while (query.next()) {
+    QString pid;
+    MyMoneyTag tag;
+    pid = GETSTRING(idCol);
+    tag.setName(GETSTRING(nameCol));
+    tag.setNotes(GETSTRING(notesCol));
+    tag.setClosed((GETSTRING(closedCol) == "Y"));
+    tag.setTagColor(QColor(GETSTRING(tagColorCol)));
+    taList[pid] = MyMoneyTag(pid, tag);
+    if (d->m_displayStatus) d->signalProgress(++progress, 0);
+  }
+  return taList;
+}
+
+QMap<QString, MyMoneyTag> MyMoneyStorageSql::fetchTags() const
+{
+  return fetchTags(QStringList(), false);
 }
 
 QMap<QString, onlineJob> MyMoneyStorageSql::fetchOnlineJobs(const QStringList& idList, bool forUpdate) const
@@ -1521,59 +1592,6 @@ QMap< QString, payeeIdentifier > MyMoneyStorageSql::fetchPayeeIdentifiers(const 
 QMap< QString, payeeIdentifier > MyMoneyStorageSql::fetchPayeeIdentifiers() const
 {
   return fetchPayeeIdentifiers(QStringList());
-}
-
-QMap<QString, MyMoneyTag> MyMoneyStorageSql::fetchTags(const QStringList& idList, bool /*forUpdate*/) const
-{
-  Q_D(const MyMoneyStorageSql);
-  MyMoneyDbTransaction trans(const_cast <MyMoneyStorageSql&>(*this), Q_FUNC_INFO);
-  if (d->m_displayStatus) {
-    int tagsNb = (idList.isEmpty() ? d->m_tags : idList.size());
-    d->signalProgress(0, tagsNb, QObject::tr("Loading tags..."));
-  } else {
-//    if (m_tagListRead) return;
-  }
-  int progress = 0;
-  QMap<QString, MyMoneyTag> taList;
-  //ulong lastId;
-  const MyMoneyDbTable& t = d->m_db.m_tables["kmmTags"];
-  QSqlQuery query(*const_cast <MyMoneyStorageSql*>(this));
-  if (idList.isEmpty()) {
-    query.prepare(t.selectAllString());
-  } else {
-    QString whereClause = " where (";
-    QString itemConnector = "";
-    foreach (const QString& it, idList) {
-      whereClause.append(QString("%1id = '%2'").arg(itemConnector).arg(it));
-      itemConnector = " or ";
-    }
-    whereClause += ')';
-    query.prepare(t.selectAllString(false) + whereClause);
-  }
-  if (!query.exec()) throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading Tag")); // krazy:exclude=crashy
-  int idCol = t.fieldNumber("id");
-  int nameCol = t.fieldNumber("name");
-  int notesCol = t.fieldNumber("notes");
-  int tagColorCol = t.fieldNumber("tagColor");
-  int closedCol = t.fieldNumber("closed");
-
-  while (query.next()) {
-    QString pid;
-    MyMoneyTag tag;
-    pid = GETSTRING(idCol);
-    tag.setName(GETSTRING(nameCol));
-    tag.setNotes(GETSTRING(notesCol));
-    tag.setClosed((GETSTRING(closedCol) == "Y"));
-    tag.setTagColor(QColor(GETSTRING(tagColorCol)));
-    taList[pid] = MyMoneyTag(pid, tag);
-    if (d->m_displayStatus) d->signalProgress(++progress, 0);
-  }
-  return taList;
-}
-
-QMap<QString, MyMoneyTag> MyMoneyStorageSql::fetchTags() const
-{
-  return fetchTags(QStringList(), false);
 }
 
 QMap<QString, MyMoneyAccount> MyMoneyStorageSql::fetchAccounts(const QStringList& idList, bool forUpdate) const
@@ -1782,16 +1800,19 @@ QMap<QString, MyMoneyMoney> MyMoneyStorageSql::fetchBalance(const QStringList& i
   return returnValue;
 }
 
+#if 0
 void MyMoneyStorageSql::readTransactions(const MyMoneyTransactionFilter& filter)
 {
   Q_D(MyMoneyStorageSql);
   try {
-    d->m_storage->loadTransactions(fetchTransactions(filter));
+    d->m_file->journalModel()->load(fetchTransactions(filter));
   } catch (const MyMoneyException &) {
     throw;
   }
 }
+#endif
 
+#if 0
 QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const QString& tidList, const QString& dateClause, bool /*forUpdate*/) const
 {
   Q_D(const MyMoneyStorageSql);
@@ -1901,12 +1922,123 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const QSt
 {
   return fetchTransactions(tidList, QString(), false);
 }
+#endif
 
 QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions() const
 {
-  return fetchTransactions(QString(), QString(), false);
+  // return fetchTransactions(QString(), QString(), false);
+
+  Q_D(const MyMoneyStorageSql);
+
+  const MyMoneyDbTable& t = d->m_db.m_tables["kmmTransactions"];
+  const MyMoneyDbTable& ts = d->m_db.m_tables["kmmSplits"];
+  QSqlQuery query(*const_cast <MyMoneyStorageSql*>(this));
+
+  const auto queryString = QString("SELECT %1, %2 from %3 left join %4 on %4.id = %3.transactionId where %3.txType = 'N' ORDER BY transactionId,splitId;").arg(ts.fullQualifiedColumnList(), t.fullQualifiedColumnList(), ts.name(), t.name());
+  if (!query.exec(queryString)) {   // krazy:exclude=crashy
+    throw MYMONEYEXCEPTIONSQL_D("reading Splits");
+  }
+
+  static const int splitIdCol = ts.fieldNumber("splitId");
+  static const int transactionIdCol = ts.fieldNumber("transactionId");
+  static const int payeeIdCol = ts.fieldNumber("payeeId");
+  static const int reconcileDateCol = ts.fieldNumber("reconcileDate");
+  static const int actionCol = ts.fieldNumber("action");
+  static const int reconcileFlagCol = ts.fieldNumber("reconcileFlag");
+  static const int valueCol = ts.fieldNumber("value");
+  static const int sharesCol = ts.fieldNumber("shares");
+  static const int priceCol = ts.fieldNumber("price");
+  static const int memoCol = ts.fieldNumber("memo");
+  static const int accountIdCol = ts.fieldNumber("accountId");
+  static const int costCenterIdCol = ts.fieldNumber("costCenterId");
+  static const int checkNumberCol = ts.fieldNumber("checkNumber");
+  static const int bankIdCol = ts.fieldNumber("bankId");
+
+  static int base = bankIdCol + 1;
+  static const int txIdCol = base + t.fieldNumber("id");
+  static const int txPostDateCol = base + t.fieldNumber("postDate");
+  static const int txMemoCol = base + t.fieldNumber("memo");
+  static const int txEntryDateCol = base + t.fieldNumber("entryDate");
+  static const int txCurrencyIdCol = base + t.fieldNumber("currencyId");
+  static const int txBankIdCol = base + t.fieldNumber("bankId");
+
+  QMap <QString, MyMoneyTransaction> txMap;
+  MyMoneyTransaction tx;
+
+  QSqlQuery tagQuery(*const_cast <MyMoneyStorageSql*>(this));
+  tagQuery.prepare("SELECT tagId FROM kmmTagSplits WHERE splitId = :id AND transactionId = :transactionId");
+
+  QSqlQuery kvpQuery(*const_cast <MyMoneyStorageSql*>(this));
+  kvpQuery.prepare("SELECT kvpKey, kvpData FROM kmmKeyValuePairs WHERE kvpType = :type AND kvpId = :id;");
+  kvpQuery.bindValue(":type", QStringLiteral("TRANSACTION"));
+
+  while (query.next()) {
+    QString txId = GETSTRING(txIdCol);
+    // check if the transaction has been collected completely
+    // and store it in the map
+    if (txId != tx.id()) {
+      if (!tx.id().isEmpty()) {
+        txMap.insert(tx.uniqueSortKey(), tx);
+      }
+      // start a new transaction
+      tx = MyMoneyTransaction(txId, MyMoneyTransaction());
+      tx.setPostDate(GETDATE_D(txPostDateCol));
+      tx.setMemo(GETSTRING(txMemoCol));
+      tx.setEntryDate(GETDATE_D(txEntryDateCol));
+      tx.setCommodity(GETSTRING(txCurrencyIdCol));
+      tx.setBankID(GETSTRING(txBankIdCol));
+
+      // get the KVPs
+      kvpQuery.bindValue(":id", txId);
+      if (!kvpQuery.exec()) {   // krazy:exclude=crashy
+        throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("reading Kvp for %1 %2").arg(kvpQuery.boundValue(":type").toString(), txId));
+      }
+
+      QMap<QString, QString> pairs;
+      while (kvpQuery.next()) {
+        pairs.insert(kvpQuery.value(0).toString(), kvpQuery.value(1).toString());
+      }
+      tx.setPairs(pairs);
+    }
+
+    // prepare split
+    MyMoneySplit s;
+    s.setPayeeId(GETSTRING(payeeIdCol));
+    s.setReconcileDate(GETDATE_D(reconcileDateCol));
+    s.setAction(GETSTRING(actionCol));
+    s.setReconcileFlag(static_cast<Split::State>(GETINT(reconcileFlagCol)));
+    s.setValue(MyMoneyMoney(MyMoneyUtils::QStringEmpty(GETSTRING(valueCol))));
+    s.setShares(MyMoneyMoney(MyMoneyUtils::QStringEmpty(GETSTRING(sharesCol))));
+    s.setPrice(MyMoneyMoney(MyMoneyUtils::QStringEmpty(GETSTRING(priceCol))));
+    s.setMemo(GETSTRING(memoCol));
+    s.setAccountId(GETSTRING(accountIdCol));
+    s.setCostCenterId(GETSTRING(costCenterIdCol));
+    s.setNumber(GETSTRING(checkNumberCol));
+    s.setBankID(GETSTRING(bankIdCol));
+
+    // add tag list
+    QList<QString> tagIdList;
+    tagQuery.bindValue(":id", GETSTRING(splitIdCol));
+    tagQuery.bindValue(":transactionId", GETSTRING(transactionIdCol));
+    if (!tagQuery.exec()) {    // krazy:exclude=crashy
+      throw MYMONEYEXCEPTIONSQL_D("reading tagId in Split");
+    }
+    while (tagQuery.next())
+      tagIdList << tagQuery.value(0).toString();
+
+    s.setTagIdList(tagIdList);
+    tx.addSplit(s);
+  }
+
+  // make sure to not forget the last transaction
+  if (!tx.id().isEmpty()) {
+    txMap.insert(tx.uniqueSortKey(), tx);
+  }
+
+  return txMap;
 }
 
+#if 0
 QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyMoneyTransactionFilter& filter) const
 {
   Q_D(const MyMoneyStorageSql);
@@ -1956,8 +2088,7 @@ QMap<QString, MyMoneyTransaction> MyMoneyStorageSql::fetchTransactions(const MyM
     d->alert("text filter set");
     canImplementFilter = false;
   }
-  MyMoneyTransactionFilter::FilterSet s = filter.filterSet();
-  if (s.singleFilter.validityFilter) {
+  if (filter.filterSet().testFlag(MyMoneyTransactionFilter::validityFilterActive)) {
     d->alert("Validity filter set");
     canImplementFilter = false;
   }
@@ -2102,6 +2233,7 @@ ulong MyMoneyStorageSql::transactionCount(const QString& aid) const
   else
     return d->m_transactionCountMap[aid];
 }
+#endif
 
 QHash<QString, ulong> MyMoneyStorageSql::transactionCountMap() const
 {
@@ -2248,7 +2380,8 @@ QMap<QString, MyMoneySchedule> MyMoneyStorageSql::fetchSchedules(const QStringLi
       tx.setPostDate(nextPaymentDue);
     }
 
-    s.setTransaction(tx);
+    // make sure to skip the date check for transactions
+    s.setTransaction(tx, true);
 
     // read in the recorded payments
     sq.bindValue(":id", s.id());
@@ -2309,7 +2442,7 @@ QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchSecurities(const QStringL
     e.setTradingMarket(GETSTRING(tradingMarketCol));
 
     if (e.tradingCurrency().isEmpty())
-      e.setTradingCurrency(d->m_storage->pairs()["kmm-baseCurrency"]);
+      e.setTradingCurrency(d->m_file->baseCurrency().id());
     if (saf == 0)
       saf = 100;
     if (pp == 0 || pp > 10)
@@ -2526,6 +2659,7 @@ QMap<QString, MyMoneySecurity> MyMoneyStorageSql::fetchCurrencies(const QStringL
     c.setSmallestAccountFraction(GETINT(smallestAccountFractionCol));
     c.setPricePrecision(GETINT(pricePrecisionCol));
     c.setTradingSymbol(QString(symbol, 3).trimmed());
+    c.setRoundingMethod(AlkValue::RoundNever);
 
     cList[id] = MyMoneySecurity(id, c);
 
@@ -2855,14 +2989,14 @@ void MyMoneyStorageSql::setProgressCallback(void(*callback)(int, int, const QStr
   d->m_progressCallback = callback;
 }
 
-void MyMoneyStorageSql::readFile(QIODevice* s, MyMoneyStorageMgr* storage)
+void MyMoneyStorageSql::readFile(QIODevice* s, MyMoneyFile* file)
 {
-  Q_UNUSED(s); Q_UNUSED(storage)
+  Q_UNUSED(s); Q_UNUSED(file);
 }
 
-void MyMoneyStorageSql::writeFile(QIODevice* s, MyMoneyStorageMgr* storage)
+void MyMoneyStorageSql::writeFile(QIODevice* s, MyMoneyFile* file)
 {
-  Q_UNUSED(s); Q_UNUSED(storage)
+  Q_UNUSED(s); Q_UNUSED(file);
 }
 
 // **************************** Error display routine *******************************

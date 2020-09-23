@@ -26,7 +26,6 @@
 
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
-#include "storage/mymoneystoragemgr.h"
 
 class MyMoneyFileTest : public QObject
 {
@@ -36,7 +35,6 @@ public:
 
 protected:
   MyMoneyFile *m;
-  MyMoneyStorageMgr* storage;
   MyMoneyAccount  m_inv;
 
 private Q_SLOTS:
@@ -67,16 +65,15 @@ private Q_SLOTS:
   void testModifyTransactionNewAccount();
   void testRemoveTransaction();
   void testBalanceTotal();
-  void testSetAccountName();
+  /// @todo cleanup
+  // void testSetAccountName();
   void testAddPayee();
   void testModifyPayee();
   void testRemovePayee();
   void testPayeeWithIdentifier();
   void testAddTransactionStd();
-  void testAttachStorage();
   void testAccount2Category();
   void testCategory2Account();
-  void testAttachedStorage();
   void testHasAccount();
   void testAddEquityAccount();
   void testReparentEquity();
@@ -123,7 +120,8 @@ private:
   void testRemoveStdAccount(const MyMoneyAccount& acc);
   void testReparentEquity(QList<eMyMoney::Account::Type>& list, MyMoneyAccount& parent);
   void clearObjectLists();
-  void AddOneAccount();
+  void addOneAccount();
+  void setupBaseCurrency();
 
 private:
   QStringList m_objectsAdded;

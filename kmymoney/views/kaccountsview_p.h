@@ -1,18 +1,20 @@
-/***************************************************************************
-                          kaccountsview.cpp
-                             -------------------
-    copyright            : (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2007-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef KACCOUNTSVIEW_P_H
 #define KACCOUNTSVIEW_P_H
@@ -34,7 +36,9 @@
 // Project Includes
 
 #include "ui_kaccountsview.h"
-#include "kmymoneyaccountsviewbase_p.h"
+#include "kmymoneyviewbase_p.h"
+#include "mymoneyfile.h"
+#include "accountsmodel.h"
 
 #include "mymoneyexception.h"
 #include "mymoneysplit.h"
@@ -44,27 +48,28 @@
 #include "keditloanwizard.h"
 #include "mymoneyaccount.h"
 #include "mymoneymoney.h"
-#include "mymoneyfile.h"
-#include "accountsviewproxymodel.h"
+#include "accountsproxymodel.h"
 #include "kmymoneyplugin.h"
 #include "icons.h"
 #include "mymoneyenums.h"
 #include "menuenums.h"
 #include "mymoneystatementreader.h"
 #include "kmymoneyutils.h"
+#include "columnselector.h"
 
 using namespace Icons;
 
-class KAccountsViewPrivate : public KMyMoneyAccountsViewBasePrivate
+class KAccountsViewPrivate : public KMyMoneyViewBasePrivate
 {
   Q_DECLARE_PUBLIC(KAccountsView)
 
 public:
-  explicit KAccountsViewPrivate(KAccountsView *qq) :
-    q_ptr(qq),
-    ui(new Ui::KAccountsView),
-    m_haveUnusedCategories(false),
-    m_onlinePlugins(nullptr)
+  explicit KAccountsViewPrivate(KAccountsView *qq)
+    : KMyMoneyViewBasePrivate(qq)
+    , ui(new Ui::KAccountsView)
+    , m_haveUnusedCategories(false)
+    , m_onlinePlugins(nullptr)
+    , m_proxyModel(nullptr)
   {
   }
 
@@ -76,12 +81,32 @@ public:
   void init()
   {
     Q_Q(KAccountsView);
-    m_accountTree = &ui->m_accountTree;
+
+    ui->setupUi(q);
 
     // setup icons for collapse and expand button
     ui->m_collapseButton->setIcon(Icons::get(Icon::ListCollapse));
     ui->m_expandButton->setIcon(Icons::get(Icon::ListExpand));
 
+    // setup filter
+    m_proxyModel = ui->m_accountTree->proxyModel();
+    q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
+
+    auto columnSelector = new ColumnSelector(ui->m_accountTree, q->metaObject()->className());
+    columnSelector->setAlwaysVisible(QVector<int>({ AccountsModel::Column::AccountName }));
+    columnSelector->setAlwaysHidden(QVector<int>({ AccountsModel::Column::Balance, AccountsModel::Column::PostedValue }));
+
+    ui->m_accountTree->setModel(MyMoneyFile::instance()->accountsModel());
+    m_proxyModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquity());
+
+    columnSelector->setModel(m_proxyModel);
+    q->slotSettingsChanged();
+
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KAccountsView::selectByObject);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KAccountsView::selectByVariant);
+    /// @todo port to new model code or cleanup
+#if 0
+    m_accountTree = &ui->m_accountTree;
     m_proxyModel = ui->m_accountTree->init(View::Accounts);
     q->connect(m_proxyModel, &AccountsProxyModel::unusedIncomeExpenseAccountHidden, q, &KAccountsView::slotUnusedIncomeExpenseAccountHidden);
     q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
@@ -89,6 +114,7 @@ public:
     q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KAccountsView::selectByVariant);
 
     q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KAccountsView::refresh);
+#endif
   }
 
   void editLoan()
@@ -365,11 +391,11 @@ public:
     KMyMoneyUtils::showStatementImportResult(MyMoneyStatementReader::resultMessages(), processedAccounts);
   }
 
-  KAccountsView       *q_ptr;
   Ui::KAccountsView   *ui;
   bool                m_haveUnusedCategories;
   MyMoneyAccount      m_currentAccount;
   QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* m_onlinePlugins;
+  AccountsProxyModel* m_proxyModel;
 };
 
 #endif

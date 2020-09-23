@@ -19,6 +19,8 @@
 #ifndef TABBAR_H
 #define TABBAR_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -38,7 +40,7 @@ namespace KMyMoneyTransactionForm
   * @author Thomas Baumgart
   */
   class TabBarPrivate;
-  class TabBar : public QTabBar
+  class KMM_BASE_WIDGETS_EXPORT TabBar : public QTabBar
   {
     Q_OBJECT
     Q_DISABLE_COPY(TabBar)

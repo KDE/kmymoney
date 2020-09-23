@@ -49,6 +49,7 @@
 #include "mymoneytransaction.h"
 #include "mymoneyexception.h"
 #include "mymoneyenums.h"
+#include "journalmodel.h"
 
 namespace KChart { class Widget; }
 
@@ -260,7 +261,7 @@ void PivotTable::init()
     QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.constBegin();
     int colofs = columnValue(m_beginDate) - m_startColumn;
     while (it_transaction != transactions.constEnd()) {
-      MyMoneyTransaction tx = (*it_transaction);
+      MyMoneyTransaction tx(*it_transaction);
       if (m_openingBalanceTransactions.contains(tx.id())) {
         ++it_transaction;
         continue;
@@ -649,6 +650,10 @@ void PivotTable::calculateOpeningBalances()
 
   QList<MyMoneyAccount>::const_iterator it_account = accounts.constBegin();
 
+  JournalModel* journalModel = file->journalModel();
+  const auto start = journalModel->MyMoneyModelBase::lowerBound(journalModel->keyForDate(m_beginDate)).row();
+  const auto end = journalModel->MyMoneyModelBase::upperBound(journalModel->keyForDate(m_endDate)).row();
+
   while (it_account != accounts.constEnd()) {
     ReportAccount account(*it_account);
 
@@ -658,14 +663,23 @@ void PivotTable::calculateOpeningBalances()
 
       //do not include account if it is closed and it has no transactions in the report period
       if (account.isClosed()) {
-        //check if the account has transactions for the report timeframe
-        MyMoneyTransactionFilter filter;
-        filter.addAccount(account.id());
-        filter.setDateFilter(m_beginDate, m_endDate);
-        filter.setReportAllSplits(false);
-        QList<MyMoneyTransaction> transactions = file->transactionList(filter);
-        //if a closed account has no transactions in that timeframe, do not include it
-        if (transactions.size() == 0) {
+        // check if the account has transactions for the report timeframe
+        if ((start == -1) || (end == -1)) {
+          ++it_account;
+          continue;
+        }
+        QModelIndex idx;
+        bool canSkip = true;
+        for (int row = start; canSkip && (row < end); ++row) {
+          idx = journalModel->index(row, 0);
+          if (idx.data(eMyMoney::Model::SplitAccountIdRole).toString() == account.id()) {
+            if (!idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>().isZero()) {
+              canSkip = false;
+              break;
+            }
+          }
+        }
+        if (canSkip) {
           DEBUG_OUTPUT(QString("DOES NOT INCLUDE account %1").arg(account.name()));
           ++it_account;
           continue;
@@ -1696,7 +1710,7 @@ QString PivotTable::renderHTML() const
 
       ++it_outergroup_map;
     }
-    qSort(outergroups.begin(), outergroups.end());
+    std::sort(outergroups.begin(), outergroups.end());
 
     QList<PivotOuterGroup>::const_iterator it_outergroup = outergroups.constBegin();
     while (it_outergroup != outergroups.constEnd()) {
@@ -1792,7 +1806,7 @@ QString PivotTable::renderHTML() const
                                 .arg(rowname.isTopLevel() ? " id=\"topparent\"" : "")
                                 .arg("") //.arg((*it_row).m_total.isZero() ? colspan : "")  // colspan the distance if this row will be blank
                                 .arg(rowname.hierarchyDepth() - 1)
-                                .arg(rowname.name().replace(QRegExp(" "), "&nbsp;"))
+                                .arg(rowname.name().replace(QRegExp(" "), "&nbsp;").replace("<", "&lt;").replace(">", "&gt;"))
                                 .arg((m_config.isConvertCurrency() || !rowname.isForeignCurrency()) ? QString() : QString(" (%1)").arg(rowname.currency().id()));
 
               // Don't print this row if it's going to be all zeros
@@ -1845,7 +1859,7 @@ QString PivotTable::renderHTML() const
                        .arg(rownum & 0x01 ? "even" : "odd")
                        .arg(m_config.detailLevel() == eMyMoney::Report::DetailLevel::All ? "id=\"solo\"" : "")
                        .arg(rowname.hierarchyDepth() - 1)
-                       .arg(rowname.name().replace(QRegExp(" "), "&nbsp;"))
+                       .arg(rowname.name().replace(QRegExp(" "), "&nbsp;").replace("<", "&lt;").replace(">", "&gt;"))
                        .arg((m_config.isConvertCurrency() || !rowname.isForeignCurrency()) ? QString() : QString(" (%1)").arg(rowname.currency().id()));
           }
 

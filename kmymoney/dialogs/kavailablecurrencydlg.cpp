@@ -1,5 +1,6 @@
 /*
  * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -35,10 +36,11 @@
 // Project Includes
 
 #include "mymoneyfile.h"
-#include "ui_kavailablecurrencydlg.h"
+#include <ui_kavailablecurrencydlg.h>
 #include "mymoneysecurity.h"
 
-KAvailableCurrencyDlg::KAvailableCurrencyDlg(QWidget *parent) : ui(new Ui::KAvailableCurrencyDlg)
+KAvailableCurrencyDlg::KAvailableCurrencyDlg(QWidget *parent)
+  : ui(new Ui::KAvailableCurrencyDlg)
 {
   Q_UNUSED(parent);
   ui->setupUi(this);
@@ -96,4 +98,9 @@ void KAvailableCurrencyDlg::slotLoadCurrencies()
 void KAvailableCurrencyDlg::slotItemSelectionChanged()
 {
   ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!ui->m_currencyList->selectedItems().isEmpty());
+}
+
+QList<QTreeWidgetItem*> KAvailableCurrencyDlg::selectedItems() const
+{
+  return ui->m_currencyList->selectedItems();
 }

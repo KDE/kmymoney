@@ -2,7 +2,7 @@
  * Copyright 2001-2002  Michael Edwardes <mte@users.sourceforge.net>
  * Copyright 2001       Felix Rodriguez <frodriguez@users.sourceforge.net>
  * Copyright 2002-2003  Kevin Tambascio <ktambascio@users.sourceforge.net>
- * Copyright 2006-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2006-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2006       Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
@@ -95,6 +95,11 @@ public:
     * @retval false This object does not reference the object with id @p id.
     */
   bool hasReferenceTo(const QString& id) const final override;
+
+  /**
+   * @copydoc MyMoneyObject::referencedObjects
+   */
+  QSet<QString> referencedObjects() const override;
 
 };
 

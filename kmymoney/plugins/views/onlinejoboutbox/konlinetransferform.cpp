@@ -41,7 +41,6 @@
 #include "accountsmodel.h"
 #include "mymoneyexception.h"
 
-#include "models/models.h"
 #include "icons/icons.h"
 using namespace Icons;
 
@@ -58,7 +57,7 @@ kOnlineTransferForm::kOnlineTransferForm(QWidget *parent)
   delete ui->creditTransferEdit->takeWidget();
 
   OnlineBankingAccountNamesFilterProxyModel* accountsModel = new OnlineBankingAccountNamesFilterProxyModel(this);
-  accountsModel->setSourceModel(Models::instance()->accountsModel());
+  accountsModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
   ui->originAccount->setModel(accountsModel);
 
   ui->convertMessage->hide();

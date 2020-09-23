@@ -21,6 +21,8 @@
 #ifndef KMYMONEYPAYEECOMBO_H
 #define KMYMONEYPAYEECOMBO_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -51,7 +53,7 @@ class MyMoneyPayee;
   *
   * @author Thomas Baumgart
   */
-class KMM_WIDGETS_EXPORT KMyMoneyPayeeCombo : public KMyMoneyMVCCombo
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyPayeeCombo : public KMyMoneyMVCCombo
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyPayeeCombo)

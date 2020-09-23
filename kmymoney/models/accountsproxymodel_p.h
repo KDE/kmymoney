@@ -1,6 +1,5 @@
 /*
- * Copyright 2010-2014  Cristian Oneț <onet.cristian@gmail.com>
- * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,13 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ACCOUNTSPROXYMODELPRIVATE_H
-#define ACCOUNTSPROXYMODELPRIVATE_H
+#ifndef ACCOUNTSPROXYMODEL_P_H
+#define ACCOUNTSPROXYMODEL_P_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
-
-#include <QList>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -31,19 +28,19 @@
 // Project Includes
 
 #include "mymoneyenums.h"
-#include "modelenums.h"
 
 class AccountsProxyModelPrivate
 {
   Q_DISABLE_COPY(AccountsProxyModelPrivate)
 
 public:
-  AccountsProxyModelPrivate() :
-    m_mdlColumns(nullptr),
-    m_hideClosedAccounts(true),
-    m_hideEquityAccounts(true),
-    m_hideUnusedIncomeExpenseAccounts(false),
-    m_haveHiddenUnusedIncomeExpenseAccounts(false)
+  AccountsProxyModelPrivate()
+    : m_hideClosedAccounts(true)
+    , m_hideEquityAccounts(true)
+    , m_hideUnusedIncomeExpenseAccounts(false)
+    , m_haveHiddenUnusedIncomeExpenseAccounts(false)
+    , m_hideFavoriteAccounts(true)
+    , m_hideAllEntries(false)
   {
   }
 
@@ -51,12 +48,14 @@ public:
   {
   }
 
-  QList<eMyMoney::Account::Type> m_typeList;
-  QList<eAccountsModel::Column> *m_mdlColumns;
-  bool m_hideClosedAccounts;
-  bool m_hideEquityAccounts;
-  bool m_hideUnusedIncomeExpenseAccounts;
-  bool m_haveHiddenUnusedIncomeExpenseAccounts;
+  QList<eMyMoney::Account::Type>  m_typeList;
+  QString                         m_notSelectableId;
+  bool                            m_hideClosedAccounts;
+  bool                            m_hideEquityAccounts;
+  bool                            m_hideUnusedIncomeExpenseAccounts;
+  bool                            m_haveHiddenUnusedIncomeExpenseAccounts;
+  bool                            m_hideFavoriteAccounts;
+  bool                            m_hideAllEntries;
 };
 
-#endif
+#endif // ACCOUNTSPROXYMODEL_P_H

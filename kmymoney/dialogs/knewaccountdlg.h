@@ -20,6 +20,8 @@
 #ifndef KNEWACCOUNTDLG_H
 #define KNEWACCOUNTDLG_H
 
+#include "kmm_base_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -38,7 +40,7 @@ class MyMoneyMoney;
 class MyMoneyAccount;
 
 class KNewAccountDlgPrivate;
-class KNewAccountDlg : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KNewAccountDlg : public QDialog
 {  
   Q_OBJECT
 

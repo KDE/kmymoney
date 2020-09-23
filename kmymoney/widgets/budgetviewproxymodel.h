@@ -2,6 +2,7 @@
  * Copyright 2006       Darren Gould <darren_gould@gmx.de>
  * Copyright 2009-2014  Alvaro Soliverez <asoliverez@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -31,7 +32,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "accountsviewproxymodel.h"
+#include "accountsproxymodel.h"
+#include "accountsmodel.h"
 
 class MyMoneyAccount;
 class MyMoneyBudget;
@@ -45,7 +47,7 @@ class MyMoneyMoney;
   * @author Cristian Oneț
   */
 class BudgetViewProxyModelPrivate;
-class KMM_WIDGETS_EXPORT BudgetViewProxyModel : public AccountsViewProxyModel
+class KMM_WIDGETS_EXPORT BudgetViewProxyModel : public AccountsProxyModel
 {
   Q_OBJECT
   Q_DISABLE_COPY(BudgetViewProxyModel)
@@ -54,10 +56,11 @@ public:
   explicit BudgetViewProxyModel(QObject *parent = nullptr);
   ~BudgetViewProxyModel() override;
 
-  virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
-  Qt::ItemFlags flags(const QModelIndex &index) const override;
+  virtual QVariant data(const QModelIndex &idx, int role = Qt::DisplayRole) const override;
+  Qt::ItemFlags flags(const QModelIndex &idx) const override;
 
   void setBudget(const MyMoneyBudget& budget);
+  void setColorScheme(AccountsModel::ColorScheme scheme, const QColor& color);
 
 Q_SIGNALS:
   /**

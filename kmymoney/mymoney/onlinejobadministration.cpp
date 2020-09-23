@@ -389,9 +389,6 @@ bool onlineJobAdministration::canSendAnyTask()
     registerAllOnlineTasks();
   }
 
-  if (!MyMoneyFile::instance()->storageAttached())
-    return false;
-
   // Check if any plugin supports a loaded online task
   /// @todo optimize this loop to move the accounts to the outer loop
   for (KMyMoneyPlugin::OnlinePluginExtended* plugin : qAsConst(*m_onlinePlugins)) {
@@ -418,9 +415,6 @@ bool onlineJobAdministration::canSendCreditTransfer()
   if (m_onlineTasks.isEmpty()) {
     registerAllOnlineTasks();
   }
-
-  if (!MyMoneyFile::instance()->storageAttached())
-    return false;
 
   QList<MyMoneyAccount> accounts;
   MyMoneyFile::instance()->accountList(accounts, QStringList(), true);

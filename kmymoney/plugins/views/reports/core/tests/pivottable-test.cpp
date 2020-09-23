@@ -82,9 +82,8 @@ void PivotTableTest::setup()
 
 void PivotTableTest::init()
 {
-  storage = new MyMoneyStorageMgr;
   file = MyMoneyFile::instance();
-  file->attachStorage(storage);
+  file->unload();
 
   MyMoneyFileTransaction ft;
   file->addCurrency(MyMoneySecurity("CAD", "Canadian Dollar",        "C$"));
@@ -123,8 +122,6 @@ void PivotTableTest::init()
 
 void PivotTableTest::cleanup()
 {
-  file->detachStorage(storage);
-  delete storage;
 }
 
 void PivotTableTest::testNetWorthSingle()

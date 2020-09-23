@@ -20,6 +20,8 @@
 #ifndef KUPDATESTOCKPRICEDLG_H
 #define KUPDATESTOCKPRICEDLG_H
 
+#include "kmm_base_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -41,7 +43,7 @@ class MyMoneyMoney;
   * @author Kevin Tambascio
   */
 
-class KUpdateStockPriceDlg : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KUpdateStockPriceDlg : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(KUpdateStockPriceDlg)

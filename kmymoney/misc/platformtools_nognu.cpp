@@ -1,6 +1,7 @@
 /*
  * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * Copyright (C) 2017 Marc Hübner <mahueb55@gmail.com>
+ * Copyright 2017       Marc Hübner <mahueb55@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +22,7 @@
 #include <windows.h>
 #include <lmcons.h>
 #include <process.h>
+#include <locale.h>
 
 #include <QString>
 
@@ -40,8 +42,38 @@ uint platformTools::processId()
     return _getpid();
 }
 
+static struct lconv* localeconv_with_init()
+{
+  static bool needInit = true;
+  if (needInit) {
+    setlocale(LC_ALL, ".UTF8");
+    needInit = false;
+  }
+  return localeconv();
+}
+
 platformTools::currencySymbolPosition_t platformTools::currencySymbolPosition(bool negativeValues)
 {
-  Q_UNUSED(negativeValues)
-  return platformTools::AfterQuantityMoneyWithSpace;
+  platformTools::currencySymbolPosition_t  rc = platformTools::AfterQuantityMoneyWithSpace;
+  struct lconv* lc = localeconv_with_init();
+  if (lc) {
+    const char precedes = negativeValues ? lc->n_cs_precedes : lc->p_cs_precedes;
+    const char space = negativeValues ? lc->n_sep_by_space : lc->p_sep_by_space;
+    if (precedes != 0) {
+      rc = (space != 0) ? platformTools::BeforeQuantityMoneyWithSpace : platformTools::BeforeQuantityMoney;
+    } else {
+      rc = (space != 0) ? platformTools::AfterQuantityMoneyWithSpace : platformTools::AfterQuantityMoney;
+    }
+  }
+  return rc;
+}
+
+platformTools::currencySignPosition_t platformTools::currencySignPosition(bool negativeValues)
+{
+  platformTools::currencySignPosition_t rc = platformTools::PreceedQuantityAndSymbol;
+  struct lconv* lc = localeconv_with_init();
+  if (lc) {
+    rc = static_cast<platformTools::currencySignPosition_t>(negativeValues ? lc->n_sign_posn : lc->p_sign_posn);
+  }
+  return rc;
 }

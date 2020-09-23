@@ -40,18 +40,16 @@ QString MyMoneyMoneyToWordsConverter::convertTreeDigitGroup(int threeDigitNumber
 {
   // Initialise the return text
   QString groupText;
+  QString hundredsText;
+  QString tensText;
 
   // Determine the hundreds and the remainder
   int hundreds = threeDigitNumber / 100;
   int tensUnits = threeDigitNumber % 100;
 
   // Hundreds rules
-  if (hundreds != 0) {
-    groupText += m_smallNumbers[hundreds] + i18nc("@item This comes after the hundred value digit", " Hundred");
-
-    if (tensUnits != 0)
-      groupText += i18nc("@item This comes after the hunder text if the tens unit is different from 0", " and ");
-  }
+  if (hundreds != 0)
+    hundredsText = i18nc("@item %1 = hundred value digit", "%1 Hundred", m_smallNumbers[hundreds]);
 
   // Determine the tens and units
   int tens = tensUnits / 10;
@@ -59,12 +57,22 @@ QString MyMoneyMoneyToWordsConverter::convertTreeDigitGroup(int threeDigitNumber
 
   // Tens rules
   if (tens >= 2) {
-    groupText += m_tens[tens];
-    if (units != 0)
-      //This comes after the tens text if the unit is not 0
-      groupText += QString(" ") + m_smallNumbers[units];
+    if (units != 0) {
+      // This comes after the tens text if the unit is not 0
+      tensText = i18nc("@item %1 = tens text, %2 = ones text", "%1 %2", m_tens[tens], m_smallNumbers[units]);
+    } else
+      tensText = m_tens[tens];
   } else if (tensUnits != 0)
-    groupText += m_smallNumbers[tensUnits];
+    tensText = m_smallNumbers[tensUnits];
+
+  // Combine all parts
+  if (tensUnits != 0) {
+    if (hundreds != 0)
+      groupText = i18nc("@item %1 = hundreds text, %2 = tens and ones text", "%1 and %2", hundredsText, tensText);
+    else
+      groupText = tensText;
+  } else
+    groupText = hundredsText;
 
   return groupText;
 }
@@ -80,6 +88,14 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money, signed
 
   int integer = static_cast<int>(money.toDouble()); // retain the integer part
   int fraction = qRound((money.toDouble() - integer) * denom);
+
+  // Enable scripting of converting numbers to words by translators
+  // If this is untranslated, then use the internal logic
+  QString filterString = i18nc("Translate this string into \"custom\" if the construction of numerals are different from English.", "english");
+  if (filterString == QStringLiteral("custom")) {
+    QString customString = i18nc("@item Can be used to script translation of numerals. Leave untranslated when not needed. %1 = integer, %2 = fraction, %3 = denominator", "%1 %2 %3", integer, fraction, denom);
+    return customString;
+  }
 
   // Extract the three-digit groups
   for (int i = 0; i < 4; i++) {
@@ -104,7 +120,7 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money, signed
     // Only add non-zero items
     if (digitGroups[i] != 0) {
       // Build the string to add as a prefix
-      QString prefix = groupText[i] + ' ' + m_scaleNumbers[i];
+      QString prefix = i18nc("@item %1 = numeral <1000, %2 = scale", "%1 %2", groupText[i], m_scaleNumbers[i]);
       if (!combined.isEmpty())
         prefix += appendAnd ? i18nc("@item Appears last as separator", " and ") : i18nc("@item Separator", ", ");
 
@@ -120,6 +136,6 @@ QString MyMoneyMoneyToWordsConverter::convert(const MyMoneyMoney & money, signed
     return i18nc("@label The first argument is the amount in words, the second is the fractional part and the third is the denominator of the fractional part",
                  "%1 and %2/%3", combined, fraction, denom);
   else
-    return i18nc("@label The first argument is the amount in words, the second is the fractional part and the third is the denominator of the fractional part",
-                 "%1 and %2/%3", combined, i18nc("@label The word to be printed for no fractional part as in No/00", "No"), denom);
+    return i18nc("@label The first argument is the amount in words, the second is the denominator of the fractional part",
+                 "%1 and No/%2", combined, denom);
 }

@@ -1,5 +1,6 @@
 /*
  * Copyright 2013-2018  Christian Dávid <christian-david@web.de>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -95,6 +96,11 @@ public:
   }
 
   bool hasReferenceTo(const QString& id) const final override;
+
+  /**
+   * @copydoc MyMoneyObject::referencedObjects
+   */
+  QSet<QString> referencedObjects() const override;
 
   QSharedPointer<const sepaOnlineTransfer::settings> getSettings() const final override;
 

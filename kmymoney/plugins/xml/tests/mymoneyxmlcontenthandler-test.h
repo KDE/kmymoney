@@ -32,6 +32,8 @@ class MyMoneyXmlContentHandlerTest : public QObject
   Q_OBJECT
 
 private Q_SLOTS:
+  void init();
+  void cleanup();
   void readMyMoneyObject();
   void readKeyValueContainer();
   void writeKeyValueContainer();
@@ -56,6 +58,9 @@ private Q_SLOTS:
   void testHasReferenceTo();
   void testPaidEarlyOneTime();
   void testReplaceId();
+
+private:
+  void setupAccounts();
 };
 
 #endif

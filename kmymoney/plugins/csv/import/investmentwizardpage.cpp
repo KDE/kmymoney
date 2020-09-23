@@ -66,7 +66,7 @@ InvestmentPage::InvestmentPage(CSVWizard *dlg, CSVImporterCore *imp) :
   m_dlg->m_colTypeName.insert(Column::Fee, i18n("Fee"));
   m_dlg->m_colTypeName.insert(Column::Date, i18n("Date"));
   m_dlg->m_colTypeName.insert(Column::Amount, i18n("Amount"));
-  m_dlg->m_colTypeName.insert(Column::Symbol, i18n("Symbol"));
+  m_dlg->m_colTypeName.insert(Column::Symbol, i18nc("@title stock symbol column", "Symbol"));
   m_dlg->m_colTypeName.insert(Column::Name, i18n("Name"));
   m_dlg->m_colTypeName.insert(Column::Memo, i18n("Memo"));
 

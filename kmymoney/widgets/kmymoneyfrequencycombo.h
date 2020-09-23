@@ -21,6 +21,8 @@
 #ifndef KMYMONEYFREQUENCYCOMBO_H
 #define KMYMONEYFREQUENCYCOMBO_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -36,7 +38,7 @@
  * This class implements a payment frequency selector
  * @author Thomas Baumgart
  */
-class KMM_WIDGETS_EXPORT KMyMoneyFrequencyCombo : public KMyMoneyOccurrenceCombo
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyFrequencyCombo : public KMyMoneyOccurrenceCombo
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyFrequencyCombo)

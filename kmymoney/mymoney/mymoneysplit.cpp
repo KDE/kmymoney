@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2002-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2004       Kevin Tambascio <ktambascio@users.sourceforge.net>
  * Copyright 2005-2006  Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
@@ -23,6 +23,8 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
+#include <QSet>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -254,6 +256,36 @@ void MyMoneySplit::setAction(eMyMoney::Split::InvestmentTransactionType type)
   }
 }
 
+eMyMoney::Split::InvestmentTransactionType MyMoneySplit::investmentTransactionType() const
+{
+  Q_D(const MyMoneySplit);
+  switch(actionStringToAction(d->m_action)) {
+    case Split::Action::BuyShares:
+      return (d->m_shares.isNegative()) ? Split::InvestmentTransactionType::SellShares : Split::InvestmentTransactionType::BuyShares;
+
+    case Split::Action::Dividend:
+      return Split::InvestmentTransactionType::Dividend;
+
+    case Split::Action::Yield:
+      return Split::InvestmentTransactionType::Yield;
+
+    case Split::Action::ReinvestDividend:
+      return Split::InvestmentTransactionType::ReinvestDividend;
+
+    case Split::Action::AddShares:
+      return (d->m_shares.isNegative()) ? Split::InvestmentTransactionType::RemoveShares : Split::InvestmentTransactionType::AddShares;
+
+    case Split::Action::SplitShares:
+      return Split::InvestmentTransactionType::SplitShares;
+
+    case Split::Action::InterestIncome:
+      return Split::InvestmentTransactionType::InterestIncome;
+
+    default:
+      return Split::InvestmentTransactionType::UnknownTransactionType;
+  }
+}
+
 QString MyMoneySplit::action() const
 {
   Q_D(const MyMoneySplit);
@@ -368,6 +400,23 @@ bool MyMoneySplit::hasReferenceTo(const QString& id) const
   return rc || (id == d->m_account) || (id == d->m_payee) || (id == d->m_costCenter);
 }
 
+QSet<QString> MyMoneySplit::referencedObjects() const
+{
+  Q_D(const MyMoneySplit);
+
+  QSet<QString> ids;
+  if (isMatched()) {
+    ids.unite(matchedTransaction().referencedObjects());
+  }
+  for (int i = 0; i < d->m_tagList.size(); i++) {
+    ids.insert(d->m_tagList[i]);
+  }
+  ids.insert(d->m_account);
+  ids.insert(d->m_payee);
+  ids.insert(d->m_costCenter);
+  return ids;
+}
+
 bool MyMoneySplit::isMatched() const
 {
   Q_D(const MyMoneySplit);
@@ -427,7 +476,7 @@ bool MyMoneySplit::replaceId(const QString& newId, const QString& oldId)
   return changed;
 }
 
-QString MyMoneySplit::actionName(Split::Action action)
+QHash<Split::Action, QString> actionNamesLUT()
 {
   static const QHash<Split::Action, QString> actionNames {
     {Split::Action::Check,            QStringLiteral("Check")},
@@ -445,5 +494,15 @@ QString MyMoneySplit::actionName(Split::Action action)
     {Split::Action::SplitShares,      QStringLiteral("Split")},
     {Split::Action::InterestIncome,   QStringLiteral("IntIncome")},
   };
-  return actionNames[action];
+  return actionNames;
+}
+
+QString MyMoneySplit::actionName(Split::Action action)
+{
+  return actionNamesLUT().value(action);
+}
+
+Split::Action MyMoneySplit::actionStringToAction(const QString &text) const
+{
+  return actionNamesLUT().key(text, Split::Action::Unknown);
 }

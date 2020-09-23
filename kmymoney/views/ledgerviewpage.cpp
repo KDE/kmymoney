@@ -1,19 +1,20 @@
-/***************************************************************************
-                          ledgerviewpage.cpp
-                             -------------------
-    begin                : Sat Aug 8 2015
-    copyright            : (C) 2015 by Thomas Baumgart
-    email                : Thomas Baumgart <tbaumgart@kde.org>
- ***************************************************************************/
+/*
+ * Copyright 2015-2020  Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
 
 #include "ledgerviewpage.h"
 #include "mymoneyaccount.h"
@@ -28,17 +29,23 @@
 // Project Includes
 
 #include "newtransactionform.h"
-#include "models.h"
-#include "ledgermodel.h"
+#include "ledgeraccountfilter.h"
+#include "specialdatesfilter.h"
+#include "specialdatesmodel.h"
+#include "schedulesjournalmodel.h"
+#include "journalmodel.h"
 #include "ui_ledgerviewpage.h"
 #include "mymoneyenums.h"
+#include "mymoneyfile.h"
 
 class LedgerViewPage::Private
 {
 public:
   Private(QWidget* parent)
   : ui(new Ui_LedgerViewPage)
-  , form(0)
+  , accountFilter(nullptr)
+  , specialDatesFilter(nullptr)
+  , form(nullptr)
   {
     ui->setupUi(parent);
 
@@ -57,12 +64,16 @@ public:
     delete ui;
   }
 
-  Ui_LedgerViewPage*  ui;
-  NewTransactionForm* form;
-  QSet<QString>       hideFormReasons;
+  Ui_LedgerViewPage*    ui;
+  LedgerAccountFilter*  accountFilter;
+  SpecialDatesFilter*   specialDatesFilter;
+  NewTransactionForm*   form;
+  QSet<QString>         hideFormReasons;
+  QString               accountId;
+  QStringList           selection;
 };
 
-LedgerViewPage::LedgerViewPage(QWidget* parent)
+LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
   : QWidget(parent)
   , d(new Private(this))
 {
@@ -72,6 +83,30 @@ LedgerViewPage::LedgerViewPage(QWidget* parent)
   connect(d->ui->ledgerView, &LedgerView::aboutToStartEdit, this, &LedgerViewPage::startEdit);
   connect(d->ui->ledgerView, &LedgerView::aboutToFinishEdit, this, &LedgerViewPage::finishEdit);
   connect(d->ui->splitter, &QSplitter::splitterMoved, this, &LedgerViewPage::splitterChanged);
+
+  d->ui->ledgerView->setColumnSelectorGroupName(configGroupName);
+
+  // setup the model stack
+  const auto file = MyMoneyFile::instance();
+  d->accountFilter = new LedgerAccountFilter(d->ui->ledgerView, QVector<QAbstractItemModel*> { file->specialDatesModel(), file->schedulesJournalModel() } );
+  connect(file->journalModel(), &JournalModel::balanceChanged, d->accountFilter, &LedgerAccountFilter::recalculateBalancesOnIdle);
+
+  d->specialDatesFilter = new SpecialDatesFilter(file->specialDatesModel(), this);
+  d->specialDatesFilter->setSourceModel(d->accountFilter);
+
+  // Moving rows in a source model to a KConcatenateRowsProxyModel
+  // does not get propagated through it which destructs our ledger in such cases.
+  //
+  // A workaround is to invalidate the sort filter.
+  //
+  // Since KConcatenateRowsProxyModel is deprecated I did not dare to fix it
+  // and hope that QConcatenateTablesProxyModel has this fixed. But it was
+  // only introduced with Qt 5.13 which is a bit new for some distros. As
+  // it looks from the source of it the problem is still present as of 2020-01-04
+  connect(file->journalModel(), SIGNAL(rowsAboutToBeMoved(const QModelIndex&,int,int,const QModelIndex&,int)), this, SLOT(keepSelection()));
+  connect(file->journalModel(), SIGNAL(rowsMoved(const QModelIndex&,int,int,const QModelIndex&,int)), this, SLOT(reloadFilter()), Qt::QueuedConnection);
+
+  d->ui->ledgerView->setModel(d->specialDatesFilter);
 }
 
 LedgerViewPage::~LedgerViewPage()
@@ -79,13 +114,27 @@ LedgerViewPage::~LedgerViewPage()
   delete d;
 }
 
+void LedgerViewPage::keepSelection()
+{
+  d->selection = d->ui->ledgerView->selectedTransactions();
+}
+
+void LedgerViewPage::reloadFilter()
+{
+  d->specialDatesFilter->forceReload();
+
+  d->ui->ledgerView->setSelectedTransactions(d->selection);
+  d->selection.clear();
+}
+
 QString LedgerViewPage::accountId() const
 {
-  return d->ui->ledgerView->accountId();
+  return d->accountId;
 }
 
 void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
 {
+  QVector<int> columns;
   // get rid of current form
   delete d->form;
   d->form = 0;
@@ -93,9 +142,43 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
 
   switch(acc.accountType()) {
     case eMyMoney::Account::Type::Investment:
+      columns = { JournalModel::Column::Number,
+        JournalModel::Column::Account,
+        JournalModel::Column::CostCenter,
+        JournalModel::Column::Amount,
+        JournalModel::Column::Payment,
+        JournalModel::Column::Deposit, };
+      d->ui->ledgerView->setColumnsHidden(columns);
+      columns = {
+        JournalModel::Column::Date,
+        JournalModel::Column::Security,
+        JournalModel::Column::Detail,
+        JournalModel::Column::Reconciliation,
+        JournalModel::Column::Quantity,
+        JournalModel::Column::Price,
+        JournalModel::Column::Value,
+        JournalModel::Column::Balance, };
+      d->ui->ledgerView->setColumnsShown(columns);
       break;
 
     default:
+      columns = { JournalModel::Column::Account,
+        JournalModel::Column::Security,
+        JournalModel::Column::CostCenter,
+        JournalModel::Column::Quantity,
+        JournalModel::Column::Price,
+        JournalModel::Column::Amount,
+        JournalModel::Column::Value, };
+      d->ui->ledgerView->setColumnsHidden(columns);
+      columns = { JournalModel::Column::Number,
+        JournalModel::Column::Date,
+        JournalModel::Column::Detail,
+        JournalModel::Column::Reconciliation,
+        JournalModel::Column::Payment,
+        JournalModel::Column::Deposit,
+        JournalModel::Column::Balance, };
+      d->ui->ledgerView->setColumnsShown(columns);
+
       d->form = new NewTransactionForm(d->ui->formWidget);
       break;
   }
@@ -107,13 +190,14 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
       d->ui->formWidget->setLayout(new QHBoxLayout(d->ui->formWidget));
     }
     d->ui->formWidget->layout()->addWidget(d->form);
-    connect(d->ui->ledgerView, &LedgerView::transactionSelected,
-            d->form, &NewTransactionForm::showTransaction);
-    connect(Models::instance()->ledgerModel(), &LedgerModel::dataChanged,
-            d->form, &NewTransactionForm::modelDataChanged);
+    connect(d->ui->ledgerView, &LedgerView::transactionSelected, d->form, &NewTransactionForm::showTransaction);
   }
   d->ui->formWidget->setVisible(d->hideFormReasons.isEmpty());
-  d->ui->ledgerView->setAccount(acc);
+  d->accountFilter->setAccount(acc);
+  d->accountId = acc.id();
+
+  d->ui->ledgerView->setAccountId(d->accountId);
+  d->ui->ledgerView->selectMostRecentTransaction();
 }
 
 void LedgerViewPage::showTransactionForm(bool show)
@@ -150,5 +234,10 @@ void LedgerViewPage::splitterChanged(int pos, int index)
 
 void LedgerViewPage::setShowEntryForNewTransaction(bool show)
 {
-  d->ui->ledgerView->setShowEntryForNewTransaction(show);
+  d->accountFilter->setShowEntryForNewTransaction(show);
+}
+
+void LedgerViewPage::slotSettingsChanged()
+{
+  d->ui->ledgerView->slotSettingsChanged();
 }

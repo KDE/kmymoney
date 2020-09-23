@@ -21,7 +21,7 @@
 
 #include <qobjectdefs.h>
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -38,7 +38,7 @@ class AmountEdit;
 class MyMoneyMoney;
 
 class CreditDebitHelperPrivate;
-class KMM_WIDGETS_EXPORT CreditDebitHelper : public QObject
+class KMM_BASE_WIDGETS_EXPORT CreditDebitHelper : public QObject
 {
   Q_OBJECT
   Q_DISABLE_COPY(CreditDebitHelper)
@@ -59,6 +59,8 @@ public:
    * widget, otherwise into the debit widget.
    */
   void setValue(const MyMoneyMoney& value);
+
+  void showCurrencySymbol(const QString& symbol);
 
   /**
    * This method returns true if at least one

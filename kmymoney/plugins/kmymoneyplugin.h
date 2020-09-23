@@ -294,11 +294,10 @@ public:
 
   /**
    * @brief Loads file into storage
-   * @param storage Storage manager for the file
    * @param url URL of the file
    * @return true if successfully opened
    */
-  virtual MyMoneyStorageMgr *open(const QUrl &url) = 0;
+  virtual bool open(const QUrl &url) = 0;
 
   /**
    * @brief Saves storage into file

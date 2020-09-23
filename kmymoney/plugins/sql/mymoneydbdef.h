@@ -257,16 +257,29 @@ public:
   }
   inline const QString& insertString() const {
     return (m_insertString);
-  };
+  }
+
+  inline QString fullQualifiedColumnList() const {
+    QStringList columns = columnList().remove(QChar(' ')).split(',');
+    const auto maxColumn = columns.count();
+    QString qs;
+    for (int i = 0; i < maxColumn; ++i) {
+      qs += QString("%1.%2, ").arg(m_name, columns.at(i));
+    }
+    if (!qs.isEmpty())
+      qs = qs.left(qs.length() - 2);
+    return qs;
+  }
+
   inline const QString selectAllString(bool terminate = true) const {
-    return (terminate ? QString(m_selectAllString + ";") : m_selectAllString);
-  };
+    return terminate ? QString(m_selectAllString + ";") : m_selectAllString;
+  }
   inline const QString& updateString() const {
     return (m_updateString);
-  };
+  }
   inline const QString& deleteString() const {
     return (m_deleteString);
-  };
+  }
   /**
     * This method determines whether the table has a primary key field
     *
@@ -295,7 +308,7 @@ public:
     *
     * @sa addFieldNameChange()
     */
-  const QString columnList(const int version = std::numeric_limits<int>::max(), bool useNewNames = false) const;
+  QString columnList(const int version = std::numeric_limits<int>::max(), bool useNewNames = false) const;
   /**
     * This method returns the string for changing a column's definition.  It covers statements
     * like ALTER TABLE..CHANGE COLUMN, MODIFY COLUMN, etc.

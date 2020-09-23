@@ -18,13 +18,13 @@
 #ifndef KIBANLINEEDIT_H
 #define KIBANLINEEDIT_H
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 #include <KLineEdit>
 
 class ibanValidator;
 
-class KMM_WIDGETS_EXPORT KIbanLineEdit : public KLineEdit
+class KMM_BASE_WIDGETS_EXPORT KIbanLineEdit : public KLineEdit
 {
   Q_OBJECT
 

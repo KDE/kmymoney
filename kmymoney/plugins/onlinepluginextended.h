@@ -54,7 +54,7 @@ public:
    *
    * @return A QStringList with supported onlineTask::name()s as values.
    */
-  virtual QStringList availableJobs(QString accountId) = 0;
+  virtual QStringList availableJobs(QString accountId) const = 0;
 
   /**
    * @brief Get settings for onlineTask

@@ -10,6 +10,7 @@ target_link_libraries(mymoneystoragexml
   PUBLIC
     Qt5::Xml
     KF5::I18n
+    onlinetask_interfaces
     kmm_mymoney
   PRIVATE
     xmlstoragehelper
@@ -20,4 +21,5 @@ ecm_add_tests(${tests_sources}
   LINK_LIBRARIES
     Qt5::Test
     mymoneystoragexml
+    kmm_testutilities
 )

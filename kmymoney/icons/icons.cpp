@@ -3,6 +3,7 @@
                              -------------------
     begin                : Sun Jun 25 2017
     copyright            : (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+                           (C) 2020 by Dawid Wróbel <me@dawidwrobel.com>
 
 ***************************************************************************/
 
@@ -23,7 +24,6 @@
 #include <QPixmapCache>
 #include <QPainter>
 #include <QRegularExpression>
-#include <QRegularExpressionMatch>
 #include <QDir>
 #include <QStandardPaths>
 
@@ -35,307 +35,389 @@ namespace Icons {
     return ::qHash(static_cast<uint>(key), seed);
   }
 
+  uint qHash(const IconSet key, uint seed)
+  {
+    return ::qHash(static_cast<uint>(key), seed);
+  }
+
   struct iconDescription {
-    Icon baseIcon;
-    Icon overlayIcon;
-    Qt::Corner corner;
+      Icon baseIcon;
+      Icon overlayIcon;
+      Qt::Corner corner;
+  };
+
+  const QHash<Icon, QHash<IconSet, QString> > iconMappings{
+      {Icon::AccountClosed,
+       {{IconSet::Common, QStringLiteral("account-types-closed")},
+        {IconSet::Oxygen, QStringLiteral("dialog-close")},
+        {IconSet::Breeze, QStringLiteral("dialog-close")}}},
+      {Icon::ArrowDown,
+       {{IconSet::Common, QStringLiteral("arrow-down")},
+        {IconSet::Tango, QStringLiteral("go-down")}}},
+      {Icon::ArrowLeft,
+       {{IconSet::Common, QStringLiteral("arrow-left")},
+        {IconSet::Tango, QStringLiteral("go-previous")}}},
+      {Icon::ArrowRight,
+       {{IconSet::Common, QStringLiteral("arrow-right")},
+        {IconSet::Tango, QStringLiteral("go-next")}}},
+      {Icon::ArrowUp,
+       {{IconSet::Common, QStringLiteral("arrow-up")},
+        {IconSet::Tango, QStringLiteral("go-up")}}},
+      {Icon::Budget,
+       {{IconSet::Common, QStringLiteral("budget")},
+        {IconSet::Oxygen, QStringLiteral("view-time-schedule-calculus")},
+        {IconSet::Breeze, QStringLiteral("view-time-schedule-calculus")}}},
+      {Icon::Calculator,
+       {{IconSet::Common, QStringLiteral("accessories-calculator")}}},
+      {Icon::Configure,
+       {{IconSet::Common, QStringLiteral("configure")},
+        {IconSet::Tango, QStringLiteral("preferences-system")}}},
+      {Icon::DialogCancel,
+       {{IconSet::Common, QStringLiteral("dialog-cancel")},
+        {IconSet::Tango, QStringLiteral("stop")}}},
+      {Icon::DialogClose, {{IconSet::Common, QStringLiteral("dialog-close")}}},
+      {Icon::DialogError, {{IconSet::Common, QStringLiteral("dialog-error")}}},
+      {Icon::DialogInformation,
+       {{IconSet::Common, QStringLiteral("dialog-information")}}},
+      {Icon::DialogOK,
+       {{IconSet::Common, QStringLiteral("dialog-ok")},
+        {IconSet::Tango, QStringLiteral("finish")}}},
+      {Icon::DialogOKApply,
+       {{IconSet::Common, QStringLiteral("dialog-ok-apply")}}},
+      {Icon::DialogWarning,
+       {{IconSet::Common, QStringLiteral("dialog-warning")}}},
+      {Icon::DocumentClose,
+       {{IconSet::Common, QStringLiteral("document-close")},
+        {IconSet::Tango, QStringLiteral("stop")}}},
+      {Icon::DocumentEdit,
+       {{IconSet::Common, QStringLiteral("document-edit")},
+        {IconSet::Tango, QStringLiteral("text-editor")}}},
+      {Icon::DocumentExport,
+       {{IconSet::Common, QStringLiteral("format-indent-more")},
+        {IconSet::Oxygen, QStringLiteral("document-export")},
+        {IconSet::Breeze, QStringLiteral("document-export")}}},
+      {Icon::DocumentImport,
+       {{IconSet::Common, QStringLiteral("format-indent-less")},
+        {IconSet::Oxygen, QStringLiteral("document-import")},
+        {IconSet::Breeze, QStringLiteral("document-import")}}},
+      {Icon::DocumentNew, {{IconSet::Common, QStringLiteral("document-new")}}},
+      {Icon::DocumentOpen,
+       {{IconSet::Common, QStringLiteral("document-open")}}},
+      {Icon::DocumentProperties,
+       {{IconSet::Common, QStringLiteral("document-properties")}}},
+      {Icon::DocumentSave,
+       {{IconSet::Common, QStringLiteral("document-save")}}},
+      {Icon::Download,
+       {{IconSet::Breeze, QStringLiteral("edit-download")},
+        {IconSet::Common, QStringLiteral("go-down")},
+        {IconSet::Oxygen, QStringLiteral("download")}}},
+      {Icon::EditClear, {{IconSet::Common, QStringLiteral("edit-clear")}}},
+      {Icon::EditCopy, {{IconSet::Common, QStringLiteral("edit-copy")}}},
+      {Icon::EditDelete, {{IconSet::Common, QStringLiteral("edit-delete")}}},
+      {Icon::Find, {{IconSet::Common, QStringLiteral("edit-find")}}},
+      {Icon::EditRename,
+       {{IconSet::Common, QStringLiteral("edit-rename")},
+        {IconSet::Tango, QStringLiteral("text-editor")}}},
+      {Icon::EditUndo, {{IconSet::Common, QStringLiteral("edit-undo")}}},
+      {Icon::Folder, {{IconSet::Common, QStringLiteral("folder")}}},
+      {Icon::GoTo, {{IconSet::Common, QStringLiteral("go-jump")}}},
+      {Icon::Help, {{IconSet::Common, QStringLiteral("help-contents")}}},
+      {Icon::HideCategories,
+       {{IconSet::Common, QStringLiteral("hide-categories")}}},
+      {Icon::HideReconciled,
+       {{IconSet::Common, QStringLiteral("hide-reconciled")}}},
+      {Icon::KMyMoney, {{IconSet::Common, QStringLiteral("kmymoney")}}},
+      {Icon::KeyEnter,
+       {{IconSet::Common, QStringLiteral("input-keyboard")},
+        {IconSet::Oxygen, QStringLiteral("key-enter")},
+        {IconSet::Breeze, QStringLiteral("key-enter")}}},
+      {Icon::ListAdd, {{IconSet::Common, QStringLiteral("list-add")}}},
+      {Icon::ListAddTag, {{IconSet::Common, QStringLiteral("list-add-tag")}}},
+      {Icon::ListAddUser,
+       {{IconSet::Common, QStringLiteral("list-add-user")}}},
+      {Icon::ListCollapse,
+       {{IconSet::Common, QStringLiteral("zoom-out")},
+        {IconSet::Tango, QStringLiteral("list-remove")}}},
+      {Icon::ListExpand,
+       {{IconSet::Common, QStringLiteral("zoom-in")},
+        {IconSet::Tango, QStringLiteral("list-add")}}},
+      {Icon::ListRemoveTag,
+       {{IconSet::Common, QStringLiteral("list-remove-tag")}}},
+      {Icon::ListRemoveUser,
+       {{IconSet::Common, QStringLiteral("list-remove-user")}}},
+      {Icon::MailMessage,
+       {{IconSet::Common, QStringLiteral("internet-mail")},
+        {IconSet::Oxygen, QStringLiteral("mail-message")},
+        {IconSet::Breeze, QStringLiteral("mail-message")}}},
+      {Icon::MailMessageNew,
+       {{IconSet::Common, QStringLiteral("mail-message-new")}}},
+      {Icon::MailReceive, {{IconSet::Common, QStringLiteral("mail-receive")}}},
+      {Icon::MapOnlineAccount,
+       {{IconSet::Common, QStringLiteral("news-subscribe")}}},
+      {Icon::Merge,
+       {{IconSet::Common, QStringLiteral("reconcile")},
+        {IconSet::Oxygen, QStringLiteral("merge")},
+        {IconSet::Breeze, QStringLiteral("merge")}}},
+      {Icon::NewSchedule,
+       {{IconSet::Common, QStringLiteral("appointment-new")}}},
+      {Icon::OfficeChartLine,
+       {{IconSet::Common, QStringLiteral("account-types-investments")},
+        {IconSet::Oxygen, QStringLiteral("office-chart-line")},
+        {IconSet::Breeze, QStringLiteral("office-chart-line")},
+        {IconSet::Tango, QStringLiteral("report-line")}}},
+      {Icon::OpenDatabase, {{IconSet::Common, QStringLiteral("server-database")}}},
+      {Icon::Pause,
+       {{IconSet::Common, QStringLiteral("media-playback-pause")}}},
+      {Icon::PayeeMerge, {{IconSet::Common, QStringLiteral("merge")}}},
+      {Icon::PayeeRename,
+       {{IconSet::Common, QStringLiteral("user-properties")},
+        {IconSet::Oxygen, QStringLiteral("payee-rename")}}},
+      {Icon::PerformanceTest,
+       {{IconSet::Common, QStringLiteral("fork")},
+        {IconSet::Breeze, QStringLiteral("speedometer")}}},
+      {Icon::PreferencesColors,
+       {{IconSet::Common, QStringLiteral("preferences-desktop-color")}}},
+      {Icon::PreferencesFonts,
+       {{IconSet::Common, QStringLiteral("preferences-desktop-font")}}},
+      {Icon::PreferencesGeneral,
+       {{IconSet::Common, QStringLiteral("system-run")},
+        {IconSet::Tango, QStringLiteral("media-playback-start")}}},
+      {Icon::PreferencesIcons,
+       {{IconSet::Common, QStringLiteral("preferences-desktop-icon")}}},
+      {Icon::PreferencesNetwork,
+       {{IconSet::Common, QStringLiteral("preferences-system-network")}}},
+      {Icon::PreferencesPlugins,
+       {{IconSet::Common, QStringLiteral("network-disconnect")}}},
+      {Icon::Reconcile,
+       {{IconSet::Common, QStringLiteral("reconcile")},
+        {IconSet::Oxygen, QStringLiteral("merge")},
+        {IconSet::Breeze, QStringLiteral("merge")}}},
+      {Icon::Reconciled,
+       {{IconSet::Common, QStringLiteral("reconciled")},
+        {IconSet::Oxygen, QStringLiteral("flag-green")},
+        {IconSet::Breeze, QStringLiteral("flag-green")}}},
+      {Icon::Refresh,
+       {{IconSet::Breeze, QStringLiteral("view-refresh")},
+        {IconSet::Oxygen, QStringLiteral("refresh")}}},
+      {Icon::Report,
+       {{IconSet::Common, QStringLiteral("application-vnd.oasis.opendocument.spreadsheet")}}},
+      {Icon::Reverse, {{IconSet::Common, QStringLiteral("reverse")}}},
+      {Icon::SeekForward,
+       {{IconSet::Common, QStringLiteral("media-seek-forward")}}},
+      {Icon::SkipForward,
+       {{IconSet::Common, QStringLiteral("media-skip-forward")}}},
+      {Icon::SortAscending,
+       {{IconSet::Common, QStringLiteral("go-up")},
+        {IconSet::Oxygen, QStringLiteral("view-sort-ascending")},
+        {IconSet::Breeze, QStringLiteral("view-sort-ascending")}}},
+      {Icon::SortDescending,
+       {{IconSet::Common, QStringLiteral("go-down")},
+        {IconSet::Oxygen, QStringLiteral("view-sort-descending")},
+        {IconSet::Breeze, QStringLiteral("view-sort-descending")}}},
+      {Icon::Split,
+       {{IconSet::Common, QStringLiteral("transaction-split")},
+        {IconSet::Oxygen, QStringLiteral("split")},
+        {IconSet::Breeze, QStringLiteral("split")}}},
+      {Icon::TagRename, {{IconSet::Common, QStringLiteral("tag-rename")}}},
+      {Icon::TaskAccepted,
+       {{IconSet::Common, QStringLiteral("task-accepted")}}},
+      {Icon::TaskComplete,
+       {{IconSet::Common, QStringLiteral("task-complete")}}},
+      {Icon::TaskOngoing, {{IconSet::Common, QStringLiteral("task-ongoing")}}},
+      {Icon::TaskReject, {{IconSet::Common, QStringLiteral("task-reject")}}},
+      {Icon::Warning,
+       {{IconSet::Common, QStringLiteral("dialog-warning")}}},
+      {Icon::Tip,
+       {{IconSet::Common, QStringLiteral("info")},
+        {IconSet::Oxygen, QStringLiteral("ktip")}}},
+      {Icon::Unknown, {{IconSet::Common, QStringLiteral("unknown")}}},
+      {Icon::UnmapOnlineAccount,
+       {{IconSet::Common, QStringLiteral("news-unsubscribe")}}},
+      {Icon::UserProperties,
+       {{IconSet::Common, QStringLiteral("system-users")},
+        {IconSet::Oxygen, QStringLiteral("user-properties")},
+        {IconSet::Breeze, QStringLiteral("user-properties")}}},
+      {Icon::Accounts,
+       {{IconSet::Common, QStringLiteral("account")},
+        {IconSet::Oxygen, QStringLiteral("view-bank-account")},
+        {IconSet::Breeze, QStringLiteral("view-bank-account")}}},
+      {Icon::Asset,
+       {{IconSet::Common, QStringLiteral("account-types-asset")},
+        {IconSet::Oxygen, QStringLiteral("view-bank-account")},
+        {IconSet::Breeze, QStringLiteral("view-bank-account")}}},
+      {Icon::Bank,
+       {{IconSet::Common, QStringLiteral("bank")},
+        {IconSet::Oxygen, QStringLiteral("view-bank")},
+        {IconSet::Breeze, QStringLiteral("view-bank")}}},
+      {Icon::BankAccount,
+       {{IconSet::Common, QStringLiteral("account")},
+        {IconSet::Oxygen, QStringLiteral("view-bank-account")},
+        {IconSet::Breeze, QStringLiteral("view-bank-account")}}},
+      {Icon::Calendar,
+       {{IconSet::Common, QStringLiteral("view-calendar")}}},
+      {Icon::CalendarDay,
+       {{IconSet::Common, QStringLiteral("office-calendar")},
+        {IconSet::Oxygen, QStringLiteral("view-calendar-day")},
+        {IconSet::Breeze, QStringLiteral("view-calendar-day")}}},
+      {Icon::Cash,
+       {{IconSet::Common, QStringLiteral("account-types-cash")}}},
+      {Icon::Checking,
+       {{IconSet::Common, QStringLiteral("account-types-checking")},
+        {IconSet::Oxygen, QStringLiteral("view-bank-account-checking")},
+        {IconSet::Breeze, QStringLiteral("view-bank-account-checking")}}},
+      {Icon::Close, {{IconSet::Common, QStringLiteral("view-close")}}},
+      {Icon::CreditCard,
+       {{IconSet::Breeze, QStringLiteral("skrooge_credit_card")},
+        {IconSet::Common, QStringLiteral("account-types-credit-card")},
+        {IconSet::Oxygen, QStringLiteral("view-credit-card-account")}}},
+      {Icon::Currencies,
+       {{IconSet::Common, QStringLiteral("view-currency-list")}}},
+      {Icon::Equity,
+       {{IconSet::Common, QStringLiteral("account")},
+        {IconSet::Oxygen, QStringLiteral("view-bank-account")},
+        {IconSet::Breeze, QStringLiteral("view-bank-account")}}},
+      {Icon::Expense,
+       {{IconSet::Breeze, QStringLiteral("view-categories-expenditures")},
+        {IconSet::Common, QStringLiteral("account-types-expense")},
+        {IconSet::Oxygen, QStringLiteral("view-expenses-categories")}}},
+      {Icon::Filter, {{IconSet::Common, QStringLiteral("view-filter")}}},
+      {Icon::FinancialCategories,
+       {{IconSet::Common, QStringLiteral("categories")},
+        {IconSet::Oxygen, QStringLiteral("view-categories")},
+        {IconSet::Breeze, QStringLiteral("view-categories")},
+        {IconSet::Oxygen, QStringLiteral("view-financial-categories")}}},
+      {Icon::Ledger,
+       {{IconSet::Common, QStringLiteral("ledger")},
+        {IconSet::Oxygen, QStringLiteral("view-financial-list")}}},
+      {Icon::Transaction,
+       {{IconSet::Common, QStringLiteral("ledger")},
+        {IconSet::Oxygen, QStringLiteral("view-financial-transfer")}}},
+      {Icon::Forecast,
+       {{IconSet::Common, QStringLiteral("forecast")},
+        {IconSet::Oxygen, QStringLiteral("view-financial-forecast")}}},
+      {Icon::Home,
+       {{IconSet::Common, QStringLiteral("home")},
+        {IconSet::Oxygen, QStringLiteral("go-home")},
+        {IconSet::Breeze, QStringLiteral("go-home")}}},
+      {Icon::Income,
+       {{IconSet::Breeze, QStringLiteral("view-categories-incomes")},
+        {IconSet::Common, QStringLiteral("account-types-income")},
+        {IconSet::Oxygen, QStringLiteral("view-income-categories")}}},
+      {Icon::Institution,
+       {{IconSet::Common, QStringLiteral("institution")},
+        {IconSet::Oxygen, QStringLiteral("view-bank")},
+        {IconSet::Breeze, QStringLiteral("view-bank")}}},
+      {Icon::Institutions,
+       {{IconSet::Common, QStringLiteral("institution")},
+        {IconSet::Oxygen, QStringLiteral("view-bank")},
+        {IconSet::Breeze, QStringLiteral("view-bank")}}},
+      {Icon::Investment,
+       {{IconSet::Common, QStringLiteral("investment")},
+        {IconSet::Oxygen, QStringLiteral("view-investment")}}},
+      {Icon::Investments,
+       {{IconSet::Common, QStringLiteral("investment")},
+        {IconSet::Oxygen, QStringLiteral("view-investment")}}},
+      {Icon::Liability,
+       {{IconSet::Common, QStringLiteral("account-types-liability")},
+        {IconSet::Oxygen, QStringLiteral("view-loan")}}},
+      {Icon::Loan,
+       {{IconSet::Common, QStringLiteral("account-types-loan")},
+        {IconSet::Oxygen, QStringLiteral("view-loan")}}},
+      {Icon::LoanAsset,
+       {{IconSet::Common, QStringLiteral("account-types-loan")},
+        {IconSet::Oxygen, QStringLiteral("view-loan-asset")}}},
+      {Icon::OnlineJobOutbox,
+       {{IconSet::Common, QStringLiteral("online-banking")}}},
+      {Icon::Payees,
+       {{IconSet::Common, QStringLiteral("payee")},
+        {IconSet::Oxygen, QStringLiteral("system-users")},
+        {IconSet::Breeze, QStringLiteral("system-users")}}},
+      {Icon::Reports,
+       {{IconSet::Common, QStringLiteral("report")},
+        {IconSet::Oxygen, QStringLiteral("office-chart-bar")},
+        {IconSet::Breeze, QStringLiteral("office-chart-bar")}}},
+      {Icon::Savings,
+       {{IconSet::Common, QStringLiteral("account-types-savings")},
+        {IconSet::Oxygen, QStringLiteral("view-bank-account-savings")},
+        {IconSet::Breeze, QStringLiteral("view-bank-account-savings")}}},
+      {Icon::Schedule,
+       {{IconSet::Common, QStringLiteral("schedule")},
+        {IconSet::Oxygen, QStringLiteral("view-pim-calendar")},
+        {IconSet::Breeze, QStringLiteral("view-pim-calendar")}}},
+      {Icon::Stock,
+       {{IconSet::Common, QStringLiteral("account-types-investments")},
+        {IconSet::Oxygen, QStringLiteral("view-stock-account")}}},
+      {Icon::Tags,
+       {{IconSet::Common, QStringLiteral("bookmark-new")},
+        {IconSet::Oxygen, QStringLiteral("mail-tagged")},
+        {IconSet::Breeze, QStringLiteral("mail-tagged")}}},
+      {Icon::TransactionDetails,
+       {{IconSet::Common, QStringLiteral("edit-find")},
+        {IconSet::Oxygen, QStringLiteral("zoom-in")},
+        {IconSet::Breeze, QStringLiteral("zoom-in")}}},
+      {Icon::UpcomingEvents,
+       {{IconSet::Common, QStringLiteral("view-calendar-upcoming-events")}}},
+      {Icon::ZoomIn, {{IconSet::Common, QStringLiteral("zoom-in")}}},
+      {Icon::ZoomOut, {{IconSet::Common, QStringLiteral("zoom-out")}}},
+      {Icon::Visibility, {{IconSet::Common, QStringLiteral("visibility")}}},
+      {Icon::NoVisibility, {{IconSet::Common, QStringLiteral("hint")}}},
+      {Icon::SelectAll, {{IconSet::Common, QStringLiteral("edit-select-all")}}}
   };
 
   const QHash<Icon, iconDescription> sComposedIcons {
-    {Icon::EditFindTransaction,         {Icon::ViewFinancialTransfer,    Icon::EditFind,       Qt::BottomRightCorner}},
-    {Icon::InstitutionNew,              {Icon::ViewBank,                 Icon::ListAdd,        Qt::BottomRightCorner}},
-    {Icon::InstitutionEdit,             {Icon::ViewBank,                 Icon::DocumentEdit,   Qt::BottomRightCorner}},
-    {Icon::InstitutionDelete,           {Icon::ViewBank,                 Icon::EditDelete,     Qt::BottomRightCorner}},
-    {Icon::AccountNew,                  {Icon::ViewBankAccount,          Icon::ListAdd,        Qt::TopRightCorner}},
+    {Icon::InstitutionNew,              {Icon::Bank, Icon::ListAdd, Qt::BottomRightCorner}},
+    {Icon::InstitutionEdit,             {Icon::Bank, Icon::DocumentEdit, Qt::BottomRightCorner}},
+    {Icon::InstitutionDelete,           {Icon::Bank, Icon::EditDelete, Qt::BottomRightCorner}},
+    {Icon::AccountNew,                  {Icon::BankAccount, Icon::ListAdd, Qt::TopRightCorner}},
     {Icon::AccountFinishReconciliation, {Icon::Merge,                    Icon::DialogOK,       Qt::BottomRightCorner}},
-    {Icon::AccountEdit,                 {Icon::ViewBankAccount,          Icon::DocumentEdit,   Qt::BottomRightCorner}},
-    {Icon::AccountDelete,               {Icon::ViewBankAccount,          Icon::EditDelete,     Qt::BottomRightCorner}},
-    {Icon::AccountClose,                {Icon::ViewBankAccount,          Icon::DialogClose,    Qt::BottomRightCorner}},
-    {Icon::AccountReopen,               {Icon::ViewBankAccount,          Icon::DialogOK,       Qt::BottomRightCorner}},
-    {Icon::AccountUpdateMenu,           {Icon::ViewBankAccount,          Icon::Download,       Qt::BottomRightCorner}},
-    {Icon::AccountUpdate,               {Icon::ViewBankAccount,          Icon::Download,       Qt::BottomRightCorner}},
-    {Icon::AccountUpdateAll,            {Icon::ViewBankAccount,          Icon::Download,       Qt::BottomRightCorner}},
-    {Icon::AccountCreditTransfer,       {Icon::ViewBankAccount,          Icon::MailMessageNew, Qt::BottomRightCorner}},
-    {Icon::CategoryNew,                 {Icon::ViewFinancialCategories,  Icon::ListAdd,        Qt::TopRightCorner}},
-    {Icon::CategoryEdit,                {Icon::ViewFinancialCategories,  Icon::DocumentEdit,   Qt::BottomRightCorner}},
-    {Icon::CategoryDelete,              {Icon::ViewFinancialCategories,  Icon::EditDelete,     Qt::BottomRightCorner}},
-    {Icon::ToolUpdatePrices,            {Icon::ViewInvestment,           Icon::Download,       Qt::BottomRightCorner}},
-    {Icon::TransactionNew,              {Icon::ViewFinancialTransfer,    Icon::ListAdd,        Qt::TopRightCorner}},
-    {Icon::TransactionEdit,             {Icon::ViewFinancialTransfer,    Icon::DocumentEdit,   Qt::BottomRightCorner}},
-    {Icon::TransactionMatch,            {Icon::ViewFinancialTransfer,    Icon::DocumentImport, Qt::BottomRightCorner}},
-    {Icon::TransactionAccept,           {Icon::ViewFinancialTransfer,    Icon::DialogOKApply,  Qt::BottomRightCorner}},
-    {Icon::InvestmentNew,               {Icon::ViewInvestment,           Icon::ListAdd,        Qt::TopRightCorner}},
-    {Icon::InvestmentEdit,              {Icon::ViewInvestment,           Icon::DocumentEdit,   Qt::BottomRightCorner}},
-    {Icon::InvestmentDelete,            {Icon::ViewInvestment,           Icon::EditDelete,     Qt::BottomRightCorner}},
-    {Icon::InvestmentOnlinePrice,       {Icon::ViewInvestment,           Icon::Download,       Qt::BottomRightCorner}},
-    {Icon::BudgetNew,                   {Icon::ViewTimeScheduleCalculus, Icon::ListAdd,        Qt::TopRightCorner}},
-    {Icon::BudgetRename,                {Icon::ViewTimeScheduleCalculus, Icon::DocumentEdit,   Qt::BottomRightCorner}},
-    {Icon::BudgetDelete,                {Icon::ViewTimeScheduleCalculus, Icon::EditDelete,     Qt::BottomRightCorner}},
-    {Icon::BudgetCopy,                  {Icon::ViewTimeScheduleCalculus, Icon::EditCopy,       Qt::BottomRightCorner}},
-    {Icon::PriceUpdate,                 {Icon::ViewCurrencyList,         Icon::Download,       Qt::BottomRightCorner}}
+    {Icon::AccountEdit,                 {Icon::BankAccount, Icon::DocumentEdit, Qt::BottomRightCorner}},
+    {Icon::AccountDelete,               {Icon::BankAccount, Icon::EditDelete, Qt::BottomRightCorner}},
+    {Icon::AccountClose,                {Icon::BankAccount, Icon::DialogClose, Qt::BottomRightCorner}},
+    {Icon::AccountReopen,               {Icon::BankAccount, Icon::DialogOK, Qt::BottomRightCorner}},
+    {Icon::AccountUpdate,               {Icon::BankAccount, Icon::Download, Qt::BottomRightCorner}},
+    {Icon::AccountUpdateAll,            {Icon::BankAccount, Icon::Download, Qt::BottomRightCorner}},
+    {Icon::AccountCreditTransfer,       {Icon::BankAccount, Icon::MailMessageNew, Qt::BottomRightCorner}},
+    {Icon::CategoryNew,                 {Icon::FinancialCategories, Icon::ListAdd, Qt::TopRightCorner}},
+    {Icon::CategoryEdit,                {Icon::FinancialCategories, Icon::DocumentEdit, Qt::BottomRightCorner}},
+    {Icon::CategoryDelete,              {Icon::FinancialCategories, Icon::EditDelete, Qt::BottomRightCorner}},
+    {Icon::TransactionNew,              {Icon::Transaction, Icon::ListAdd, Qt::TopRightCorner}},
+    {Icon::TransactionEdit,             {Icon::Transaction, Icon::DocumentEdit, Qt::BottomRightCorner}},
+    {Icon::TransactionMatch,            {Icon::Transaction, Icon::DocumentImport, Qt::BottomRightCorner}},
+    {Icon::TransactionAccept,           {Icon::Transaction, Icon::DialogOKApply, Qt::BottomRightCorner}},
+    {Icon::InvestmentNew,               {Icon::Investment, Icon::ListAdd, Qt::TopRightCorner}},
+    {Icon::InvestmentEdit,              {Icon::Investment, Icon::DocumentEdit, Qt::BottomRightCorner}},
+    {Icon::InvestmentDelete,            {Icon::Investment, Icon::EditDelete, Qt::BottomRightCorner}},
+    {Icon::InvestmentOnlinePrice,       {Icon::Investment, Icon::Download, Qt::BottomRightCorner}},
+    {Icon::InvestmentOnlinePriceAll,    {Icon::Investment, Icon::Download, Qt::BottomRightCorner}},
+    {Icon::BudgetNew,                   {Icon::Budget, Icon::ListAdd, Qt::TopRightCorner}},
+    {Icon::BudgetRename,                {Icon::Budget, Icon::DocumentEdit, Qt::BottomRightCorner}},
+    {Icon::BudgetDelete,                {Icon::Budget, Icon::EditDelete, Qt::BottomRightCorner}},
+    {Icon::BudgetCopy,                  {Icon::Budget, Icon::EditCopy, Qt::BottomRightCorner}},
+    {Icon::PriceUpdate,                 {Icon::Currencies, Icon::Download, Qt::BottomRightCorner}}
   };
 
-  QHash<Icon, QString> getCommonNames();
-  QHash<Icon, QString> getKDENames();
-  QHash<Icon, QString> getOxygenNames();
-  QHash<Icon, QString> getBreezeNames();
-  QHash<Icon, QString> getTangoNames();
-
-  QHash<Icon, QString> getCommonNames()
+  KMM_ICONS_EXPORT void setUpMappings(const QString& themeName)
   {
-    return {
-      {Icon::ListCollapse, QStringLiteral("zoom-out")},
-      {Icon::ListExpand, QStringLiteral("zoom-in")},
-      {Icon::ListAdd, QStringLiteral("list-add")},
-      {Icon::ListRemoveTag, QStringLiteral("list-remove-tag")},
-      {Icon::ListAddTag, QStringLiteral("list-add-tag")},
-      {Icon::ListRemoveUser, QStringLiteral("list-remove-user")},
-      {Icon::ListAddUser, QStringLiteral("list-add-user")},
-      {Icon::AppointmentNew, QStringLiteral("appointment-new")},
-      {Icon::KeyEnter, QStringLiteral("input-keyboard")},
-      {Icon::GoJump, QStringLiteral("go-jump")},
-      {Icon::EditUndo, QStringLiteral("edit-undo")},
-      {Icon::EditFind, QStringLiteral("edit-find")},
-      {Icon::EditRename, QStringLiteral("edit-rename")},
-      {Icon::EditCopy, QStringLiteral("edit-copy")},
-      {Icon::EditDelete, QStringLiteral("edit-delete")},
-      {Icon::EditClear, QStringLiteral("edit-clear")},
-      {Icon::DialogClose, QStringLiteral("dialog-close")},
-      {Icon::DialogCancel, QStringLiteral("dialog-cancel")},
-      {Icon::DialogOK, QStringLiteral("dialog-ok")},
-      {Icon::DialogOKApply, QStringLiteral("dialog-ok-apply")},
-      {Icon::DialogWarning, QStringLiteral("dialog-warning")},
-      {Icon::DialogError, QStringLiteral("dialog-error")},
-      {Icon::DialogInformation, QStringLiteral("dialog-information")},
-      {Icon::DocumentClose, QStringLiteral("document-close")},
-      {Icon::DocumentOpen, QStringLiteral("document-open")},
-      {Icon::DocumentSave, QStringLiteral("document-save")},
-      {Icon::DocumentImport, QStringLiteral("format-indent-less")},
-      {Icon::DocumentNew, QStringLiteral("document-new")},
-      {Icon::DocumentEdit, QStringLiteral("document-edit")},
-      {Icon::DocumentProperties, QStringLiteral("document-properties")},
-      {Icon::DocumentImport, QStringLiteral("format-indent-less")},
-      {Icon::DocumentExport, QStringLiteral("format-indent-more")},
-      {Icon::NewsUnsubscribe, QStringLiteral("news-unsubscribe")},
-      {Icon::NewsSubscribe, QStringLiteral("news-subscribe")},
-      {Icon::OfficeChartLine, QStringLiteral("account-types-investments")},
-      {Icon::MediaSkipForward, QStringLiteral("media-skip-forward")},
-      {Icon::MediaSeekForward, QStringLiteral("media-seek-forward")},
-      {Icon::MediaPlaybackPause, QStringLiteral("media-playback-pause")},
-      {Icon::Reconcile, QStringLiteral("reconcile")},
-      {Icon::Merge, QStringLiteral("reconcile")},
-      {Icon::Fork, QStringLiteral("fork")},
-      {Icon::ViewEquity, QStringLiteral("account")},
-      {Icon::ViewExpense, QStringLiteral("account-types-expense")},
-      {Icon::ViewIncome, QStringLiteral("account-types-income")},
-      {Icon::ViewCash, QStringLiteral("account-types-cash")},
-      {Icon::ViewCreditCard, QStringLiteral("account-types-credit-card")},
-      {Icon::ViewLoan, QStringLiteral("account-types-loan")},
-      {Icon::ViewLoanAsset, QStringLiteral("account-types-loan")},
-      {Icon::ViewSaving, QStringLiteral("account-types-savings")},
-      {Icon::ViewChecking, QStringLiteral("account-types-checking")},
-      {Icon::ViewStock, QStringLiteral("account-types-investments")},
-      {Icon::ViewLiability, QStringLiteral("account-types-liability")},
-      {Icon::ViewAsset, QStringLiteral("account-types-asset")},
-      {Icon::ViewOutbox, QStringLiteral("online-banking")},
-      {Icon::ViewForecast, QStringLiteral("forecast")},
-      {Icon::ViewBudgets, QStringLiteral("budget")},
-      {Icon::ViewReports, QStringLiteral("report")},
-      {Icon::ViewInvestment, QStringLiteral("investment")},
-      {Icon::ViewLedgers, QStringLiteral("ledger")},
-      {Icon::ViewPayees, QStringLiteral("payee")},
-      {Icon::ViewTags, QStringLiteral("bookmark-new")},
-      {Icon::ViewCategories, QStringLiteral("categories")},
-      {Icon::ViewSchedules, QStringLiteral("schedule")},
-      {Icon::ViewAccounts, QStringLiteral("account")},
-      {Icon::ViewInstitutions, QStringLiteral("institution")},
-      {Icon::ViewHome, QStringLiteral("home")},
-      {Icon::ViewClose, QStringLiteral("view-close")},
-      {Icon::ViewBank, QStringLiteral("bank")},
-      {Icon::ViewBankAccount, QStringLiteral("account")},
-      {Icon::ViewTimeScheduleCalculus, QStringLiteral("budget")},
-      {Icon::ViewCalendar, QStringLiteral("view-calendar")},
-      {Icon::ViewCurrencyList, QStringLiteral("view-currency-list")},
-      {Icon::ViewUpcominEvents, QStringLiteral("view-calendar-upcoming-events")},
-      {Icon::ViewCalendarDay, QStringLiteral("office-calendar")},
-      {Icon::ViewFinancialTransfer, QStringLiteral("ledger")},
-      {Icon::ViewFinancialCategories, QStringLiteral("categories")},
-      {Icon::ViewFinancialList, QStringLiteral("ledger")},
-      {Icon::ViewFilter, QStringLiteral("view-filter")},
-      {Icon::SortAscending, QStringLiteral("go-up")},
-      {Icon::SortDescending, QStringLiteral("go-down")},
-      {Icon::HideCategories, QStringLiteral("hide-categories")},
-      {Icon::HideReconciled, QStringLiteral("hide-reconciled")},
-      {Icon::ViewTransactionDetail, QStringLiteral("edit-find")},
-      {Icon::ZoomOut, QStringLiteral("zoom-out")},
-      {Icon::ZoomIn, QStringLiteral("zoom-in")},
-      {Icon::DocumentProperties, QStringLiteral("document-properties")},
-      {Icon::TagRename, QStringLiteral("tag-rename")},
-      {Icon::PayeeMerge, QStringLiteral("merge")},
-      {Icon::PayeeRename, QStringLiteral("user-properties")},
-      {Icon::UserProperties, QStringLiteral("system-users")},
-      {Icon::FileArchiver, QStringLiteral("package")},
-      {Icon::AccessoriesCalculator, QStringLiteral("accessories-calculator")},
-      {Icon::MailReceive, QStringLiteral("mail-receive")},
-      {Icon::MailMessageNew, QStringLiteral("mail-message-new")},
-      {Icon::MailMessage, QStringLiteral("internet-mail")},
-      {Icon::SVNUpdate, QStringLiteral("svn-update")},
-      {Icon::Split, QStringLiteral("transaction-split")},
-      {Icon::Download, QStringLiteral("go-down")},
-      {Icon::Tip, QStringLiteral("info")},
-      {Icon::KMyMoney, QStringLiteral("kmymoney")},
-      {Icon::FlagGreen, QStringLiteral("reconciled")},
-      {Icon::AccountClosed, QStringLiteral("account-types-closed")},
-      {Icon::Unknown, QStringLiteral("unknown")},
-      {Icon::Configure, QStringLiteral("configure")},
-      {Icon::Spreadsheet, QStringLiteral("application-vnd.oasis.opendocument.spreadsheet")},
-      {Icon::ArrowUp, QStringLiteral("arrow-up")},
-      {Icon::ArrowDown, QStringLiteral("arrow-down")},
-      {Icon::ArrowLeft, QStringLiteral("arrow-left")},
-      {Icon::ArrowRight, QStringLiteral("arrow-right")},
-      {Icon::SystemRun, QStringLiteral("system-run")},
-      {Icon::TaskAttention, QStringLiteral("task-attention")},
-      {Icon::TaskOngoing, QStringLiteral("task-ongoing")},
-      {Icon::TaskComplete, QStringLiteral("task-complete")},
-      {Icon::TaskReject, QStringLiteral("task-reject")},
-      {Icon::TaskAccepted, QStringLiteral("task-accepted")},
-      {Icon::HelpContents, QStringLiteral("help-contents")},
-      {Icon::Kgpg, QStringLiteral("kgpg")},
-      {Icon::PreferencesNetwork, QStringLiteral("preferences-system-network")},
-      {Icon::PreferencesColor, QStringLiteral("preferences-desktop-color")},
-      {Icon::PreferencesFont, QStringLiteral("preferences-desktop-font")},
-      {Icon::PreferencesIcon, QStringLiteral("preferences-desktop-icon")},
-      {Icon::NetworkDisconect, QStringLiteral("network-disconnect")},
-      {Icon::Folder, QStringLiteral("folder")},
-      {Icon::Reverse, QStringLiteral("reverse")},
-    };
-  }
+    IconSet themeIconSet;
 
-  QHash<Icon, QString> getKDENames()
-  {
-    return {
-      {Icon::ViewHome, QStringLiteral("go-home")},
-      {Icon::KeyEnter, QStringLiteral("key-enter")},
-      {Icon::Split, QStringLiteral("split")},
-      {Icon::Reconcile, QStringLiteral("merge")},
-      {Icon::OfficeChartLine, QStringLiteral("office-chart-line")},
-      {Icon::Merge, QStringLiteral("merge")},
-      {Icon::ViewEquity, QStringLiteral("view-bank-account")},
-      {Icon::ViewSaving, QStringLiteral("view-bank-account-savings")},
-      {Icon::ViewChecking, QStringLiteral("view-bank-account-checking")},
-      {Icon::ViewAsset, QStringLiteral("view-bank-account")},
-      {Icon::ViewBank, QStringLiteral("view-bank")},
-      {Icon::ViewBankAccount, QStringLiteral("view-bank-account")},
-      {Icon::ViewTimeScheduleCalculus, QStringLiteral("view-time-schedule-calculus")},
-      {Icon::ViewBudgets, QStringLiteral("view-time-schedule-calculus")},
-      {Icon::ViewCalendarDay, QStringLiteral("view-calendar-day")},
-      {Icon::ViewTransactionDetail, QStringLiteral("zoom-in")},
-      {Icon::ViewReports, QStringLiteral("office-chart-bar")},
-      {Icon::ViewPayees, QStringLiteral("system-users")},
-      {Icon::ViewTags, QStringLiteral("mail-tagged")},
-      {Icon::ViewSchedules, QStringLiteral("view-pim-calendar")},
-      {Icon::ViewAccounts, QStringLiteral("view-bank-account")},
-      {Icon::ViewInstitutions, QStringLiteral("view-bank")},
-      {Icon::ViewCategories, QStringLiteral("view-categories")},
-      {Icon::ViewFinancialCategories, QStringLiteral("view-categories")},
-      {Icon::FileArchiver, QStringLiteral("utilities-file-archiver")},
-      {Icon::UserProperties, QStringLiteral("user-properties")},
-      {Icon::SortAscending, QStringLiteral("view-sort-ascending")},
-      {Icon::SortDescending, QStringLiteral("view-sort-descending")},
-      {Icon::FlagGreen, QStringLiteral("flag-green")},
-      {Icon::AccountClosed, QStringLiteral("dialog-close")},
-      {Icon::MailMessage, QStringLiteral("mail-message")},
-      {Icon::DocumentImport, QStringLiteral("document-import")},
-      {Icon::DocumentExport, QStringLiteral("document-export")}
-    };
-  }
-
-  QHash<Icon, QString> getOxygenNames()
-  {
-    return {
-      {Icon::Download, QStringLiteral("download")},
-      {Icon::Tip, QStringLiteral("ktip")},
-      {Icon::ViewExpense, QStringLiteral("view-expenses-categories")},
-      {Icon::ViewIncome, QStringLiteral("view-income-categories")},
-      {Icon::ViewCreditCard, QStringLiteral("view-credit-card-account")},
-      {Icon::ViewLoan, QStringLiteral("view-loan")},
-      {Icon::ViewLoanAsset, QStringLiteral("view-loan-asset")},
-      {Icon::ViewStock, QStringLiteral("view-stock-account")},
-      {Icon::ViewLiability, QStringLiteral("view-loan")},
-      {Icon::ViewForecast, QStringLiteral("view-financial-forecast")},
-      {Icon::ViewInvestment, QStringLiteral("view-investment")},
-      {Icon::ViewLedgers, QStringLiteral("view-financial-list")},
-      {Icon::ViewCategories, QStringLiteral("view-financial-categories")},
-      {Icon::ViewFinancialCategories, QStringLiteral("view-financial-categories")},
-      {Icon::ViewFinancialTransfer, QStringLiteral("view-financial-transfer")},
-      {Icon::ViewFinancialList, QStringLiteral("view-financial-list")},
-      {Icon::Refresh, QStringLiteral("refresh")},
-      {Icon::InvestApplet, QStringLiteral("invest-applet")}
-    };
-  }
-
-  QHash<Icon, QString> getBreezeNames()
-  {
-    return {
-      {Icon::ViewExpense, QStringLiteral("view-categories-expenditures")},
-      {Icon::ViewIncome, QStringLiteral("view-categories-incomes")},
-      {Icon::ViewCreditCard, QStringLiteral("skrooge_credit_card")},
-      {Icon::Download, QStringLiteral("edit-download")},
-      {Icon::Refresh, QStringLiteral("view-refresh")}
-    };
-  }
-
-  QHash<Icon, QString> getTangoNames()
-  {
-    return {
-      {Icon::OfficeChartLine, QStringLiteral("report-line")},
-      {Icon::ListCollapse, QStringLiteral("list-remove")},
-      {Icon::ListExpand, QStringLiteral("list-add")},
-      {Icon::DocumentEdit, QStringLiteral("text-editor")},
-      {Icon::DialogCancel, QStringLiteral("stop")},
-      {Icon::DialogOK, QStringLiteral("finish")},
-      {Icon::EditRename, QStringLiteral("text-editor")},
-      {Icon::DocumentClose, QStringLiteral("stop")},
-      {Icon::Configure, QStringLiteral("preferences-system")},
-      {Icon::ArrowUp, QStringLiteral("go-up")},
-      {Icon::ArrowDown, QStringLiteral("go-down")},
-      {Icon::ArrowLeft, QStringLiteral("go-previous")},
-      {Icon::ArrowRight, QStringLiteral("go-next")},
-      {Icon::SystemRun, QStringLiteral("media-playback-start")},
-      {Icon::TaskAttention, QStringLiteral("dialog-warning")}
-    };
-  }
-
-  KMM_ICONS_EXPORT void setIconThemeNames(const QString &_themeName)
-  {
-    sStandardIcons = getCommonNames();
-    auto hasIconsResource = false;
-
-#if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
-    hasIconsResource = true;
-#endif
-
-    QStringList kdeThemes {QStringLiteral("oxygen"), QStringLiteral("breeze"), QStringLiteral("breeze-dark")};
-    QHash<Icon, QString> iconNames;
-
-    if (kdeThemes.contains(_themeName) || hasIconsResource) { // on Craft build system there is breeze icon theme, but it's in no way discoverable
-      iconNames = getKDENames();
-      for (auto it = iconNames.cbegin(); it != iconNames.cend(); ++it)
-        sStandardIcons.insert(it.key(), it.value());
-    }
-
-    // get icon replacements for specific theme
-    if (_themeName == kdeThemes.at(0))
-      iconNames = getOxygenNames();
-    else if (_themeName == kdeThemes.at(1) || _themeName == kdeThemes.at(2) || hasIconsResource)
-      iconNames = getBreezeNames();
-    else if (_themeName == QLatin1String("Tango"))
-      iconNames = getTangoNames();
+    if (themeName.contains(QStringLiteral("oxygen"), Qt::CaseInsensitive))
+      themeIconSet = IconSet::Oxygen;
+    else if (themeName.contains(QStringLiteral("tango"), Qt::CaseInsensitive))
+      themeIconSet = IconSet::Tango;
+    // default to breeze mappings
     else
-      return;
+      themeIconSet = IconSet::Breeze;
 
-    for (auto it = iconNames.cbegin(); it != iconNames.cend(); ++it)
-      sStandardIcons.insert(it.key(), it.value());
+    for (auto iconDef = iconMappings.cbegin(); iconDef != iconMappings.cend(); ++iconDef) {
+      const auto icon = iconDef.key();
+      auto name = iconDef.value().value(themeIconSet);
+
+      // get common mapping if theme-specific does not exist
+      if (name.isEmpty())
+        name = iconDef.value().value(IconSet::Common);
+
+      sStandardIcons.insert(icon, name);
+    }
   }
 
   /**
@@ -405,7 +487,6 @@ namespace Icons {
 
   QString iconCacheDir()
   {
-
     const QString cachePath = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
     if (QDir::root().mkpath(cachePath)) {
       return cachePath;
@@ -434,7 +515,7 @@ namespace Icons {
   KMM_ICONS_EXPORT QIcon loadIconFromApplicationCache(const QString& name)
   {
     const QHash<QString, Icon> sEnumIcons {
-      { QStringLiteral("ViewBank"), Icon::ViewBank },
+      { QStringLiteral("Bank"), Icon::Bank },
     };
 
     // split the icon name from the type

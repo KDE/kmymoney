@@ -50,21 +50,20 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
   const auto onlineQuotesPage = new KSettingsOnlineQuotes();
   const auto pluginsPage = new KSettingsPlugins();
 
-  addPage(generalPage, i18nc("General settings", "General"), Icons::get(Icon::SystemRun).name());
-  addPage(homePage, i18n("Home"), Icons::get(Icon::ViewHome).name());
-  addPage(registerPage, i18nc("Ledger view settings", "Ledger"), Icons::get(Icon::ViewFinancialList).name());
-  addPage(schedulesPage, QString(i18n("Scheduled\ntransactions")).replace(QLatin1Char('\n'), QString::fromUtf8("\xe2\x80\xa8")), Icons::get(Icon::ViewSchedules).name());
+  addPage(generalPage, i18nc("General settings", "General"), Icons::get(Icon::PreferencesGeneral).name());
+  addPage(homePage, i18n("Home"), Icons::get(Icon::Home).name());
+  addPage(registerPage, i18nc("Ledger view settings", "Ledger"), Icons::get(Icon::Ledger).name());
+  addPage(schedulesPage, QString(i18n("Scheduled\ntransactions")).replace(QLatin1Char('\n'), QString::fromUtf8("\xe2\x80\xa8")), Icons::get(Icon::Schedule).name());
   addPage(onlineQuotesPage, i18n("Online Quotes"), Icons::get(Icon::PreferencesNetwork).name());
-  addPage(colorsPage, i18n("Colors"), Icons::get(Icon::PreferencesColor).name());
-  addPage(fontsPage, i18n("Fonts"), Icons::get(Icon::PreferencesFont).name());
-  addPage(iconsPage, i18n("Icons"), Icons::get(Icon::PreferencesIcon).name());
-  addPage(pluginsPage, i18n("Plugins"), Icons::get(Icon::NetworkDisconect).name(), QString(), false);
+  addPage(colorsPage, i18n("Colors"), Icons::get(Icon::PreferencesColors).name());
+  addPage(fontsPage, i18n("Fonts"), Icons::get(Icon::PreferencesFonts).name());
+  addPage(iconsPage, i18n("Icons"), Icons::get(Icon::PreferencesIcons).name());
+  addPage(pluginsPage, i18n("Plugins"), Icons::get(Icon::PreferencesPlugins).name(), QString(), false);
 
   setHelp("details.settings", "kmymoney");
 
   connect(this, &KConfigDialog::rejected, schedulesPage, &KSettingsSchedules::slotResetRegion);
   connect(this, &KConfigDialog::rejected, iconsPage, &KSettingsIcons::slotResetTheme);
-  connect(this, &KConfigDialog::settingsChanged, generalPage, &KSettingsGeneral::slotUpdateEquitiesVisibility);
 
   auto defaultButton = button(QDialogButtonBox::RestoreDefaults);
   auto applyButton = button(QDialogButtonBox::Apply);

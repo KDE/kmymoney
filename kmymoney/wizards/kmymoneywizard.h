@@ -18,6 +18,8 @@
 #ifndef KMYMONEYWIZARD_H
 #define KMYMONEYWIZARD_H
 
+#include "kmm_wizard_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -134,7 +136,7 @@ template <class T> class QList;
   *       https://doc.qt.io/qt-5/qtwidgets-dialogs-licensewizard-example.html
   */
 class KMyMoneyWizardPrivate;
-class KMyMoneyWizard : public QDialog
+class KMM_WIZARD_EXPORT KMyMoneyWizard : public QDialog
 {
   friend class KMyMoneyWizardPage;
 

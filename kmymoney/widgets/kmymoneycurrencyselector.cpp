@@ -113,7 +113,7 @@ void KMyMoneySecuritySelector::update(const QString& id)
     d->m_list += MyMoneyFile::instance()->securityList();
 
   // sort
-  qSort(d->m_list);
+  std::sort(d->m_list.begin(), d->m_list.end());
 
   QList<MyMoneySecurity>::ConstIterator it;
 
@@ -166,7 +166,7 @@ void KMyMoneySecuritySelector::update(const QString& id)
         break;
     }
     if ((*it).id() == baseCurrency) {
-      insertItem(itemId,  Icons::get(Icon::ViewBankAccount), display);
+      insertItem(itemId, Icons::get(Icon::BankAccount), display);
     } else {
       insertItem(itemId, emptyIcon, display);
     }

@@ -56,21 +56,23 @@
 #include "mymoneystatement.h"
 #include "mymoneysecurity.h"
 #include "kmymoneysettings.h"
-#include "transactioneditor.h"
-#include "stdtransactioneditor.h"
+/// @todo port to new model code
+// #include "transactioneditor.h"
+// #include "stdtransactioneditor.h"
+// #include "kenterscheduledlg.h"
 #include "amountedit.h"
 #include "kaccountselectdlg.h"
 #include "knewaccountwizard.h"
+#include "knewinvestmentwizard.h"
 #include "transactionmatcher.h"
-#include "kenterscheduledlg.h"
 #include "kmymoneyaccountcombo.h"
 #include "accountsmodel.h"
-#include "models.h"
 #include "existingtransactionmatchfinder.h"
 #include "scheduledtransactionmatchfinder.h"
 #include "dialogenums.h"
 #include "mymoneyenums.h"
 #include "modelenums.h"
+#include "mymoneyutils.h"
 #include "kmymoneyutils.h"
 
 using namespace eMyMoney;
@@ -248,7 +250,7 @@ void MyMoneyStatementReader::Private::previouslyUsedCategories(const QString& in
       MyMoneySecurity security;
       MyMoneySecurity currency;
       eMyMoney::Split::InvestmentTransactionType transactionType;
-      KMyMoneyUtils::dissectTransaction(t, s, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
+      MyMoneyUtils::dissectTransaction(t, s, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
       if (!feeSplits.isEmpty()) {
         feesId = feeSplits.first().accountId();
         if (!interestId.isEmpty())
@@ -390,7 +392,7 @@ QStringList MyMoneyStatementReader::importStatement(const MyMoneyStatement& s, b
   // keep a copy of the statement
   if (KMyMoneySettings::logImportedStatements()) {
     auto logFile = QString::fromLatin1("%1/kmm-statement-%2.txt").arg(KMyMoneySettings::logPath(),
-                                                                      QDateTime::currentDateTimeUtc().toString(QStringLiteral("yyyy-MM-dd hh-mm-ss")));
+                                                                      QDateTime::currentDateTimeUtc().toString(QStringLiteral("yyyy-MM-dd hh-mm-ss.zzz")));
     MyMoneyStatement::writeXMLFile(s, logFile);
  }
 
@@ -705,6 +707,9 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
       brokerageactid = file->nameToAccount(thisaccount.brokerageName());
     }
     if (brokerageactid.isEmpty()) {
+      brokerageactid = file->accountByName(thisaccount.brokerageName()).id();
+    }
+    if (brokerageactid.isEmpty()) {
       brokerageactid = SelectBrokerageAccount();
     }
 
@@ -767,16 +772,11 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           }
           // this security does not exist in the file.
           else {
-            // This should be rare.  A statement should have a security entry for any
-            // of the securities referred to in the transactions.  The only way to get
-            // here is if that's NOT the case.
-            int ret = KMessageBox::warningContinueCancel(0, i18n("<center>This investment account does not contain the \"%1\" security.</center>"
-                      "<center>Transactions involving this security will be ignored.</center>", statementTransactionUnderImport.m_strSecurity),
-                      i18n("Security not found"), KStandardGuiItem::cont(), KStandardGuiItem::cancel());
-            if (ret == KMessageBox::Cancel) {
-              m_userAbort = true;
-            }
-            return;
+            thisaccount = MyMoneyAccount();
+            thisaccount.setName(statementTransactionUnderImport.m_strSecurity);
+
+            qDebug() << Q_FUNC_INFO << ": opening new investment wizard for security " << statementTransactionUnderImport.m_strSecurity << " under account " << d->m_account.id();
+            KNewInvestmentWizard::newInvestment(thisaccount, d->m_account);
           }
         }
       }
@@ -1055,10 +1055,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
           filterProxyModel->addAccountGroup(QVector<Account::Type> {Account::Type::Asset, Account::Type::Liability, Account::Type::Equity, Account::Type::Income, Account::Type::Expense});
 
-          auto const model = Models::instance()->accountsModel();
-          filterProxyModel->setSourceModel(model);
-          filterProxyModel->setSourceColumns(model->getColumns());
-          filterProxyModel->sort((int)eAccountsModel::Column::Account);
+          filterProxyModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
+          filterProxyModel->sort(AccountsModel::Column::AccountName);
 
           QPointer<KMyMoneyAccountCombo> accountCombo = new KMyMoneyAccountCombo(filterProxyModel);
           topcontents->addWidget(accountCombo);
@@ -1488,6 +1486,8 @@ void MyMoneyStatementReader::handleMatchingOfScheduledTransaction(TransactionMat
     const MyMoneyTransaction & importedTransaction,
     const MyMoneySplit & importedSplit)
 {
+  /// @todo port to new model code
+#if 0
   QPointer<TransactionEditor> editor;
 
   if (askUserToEnterScheduleForMatching(matchedSchedule, importedSplit, importedTransaction)) {
@@ -1549,6 +1549,7 @@ void MyMoneyStatementReader::handleMatchingOfScheduledTransaction(TransactionMat
     // delete the editor
     delete editor;
   }
+#endif
 }
 
 void MyMoneyStatementReader::addTransaction(MyMoneyTransaction& transaction)

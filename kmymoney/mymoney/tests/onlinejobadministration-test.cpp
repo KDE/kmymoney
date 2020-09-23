@@ -22,24 +22,38 @@
 #include "onlinejobadministration.h"
 #include "mymoney/mymoneyfile.h"
 #include "mymoneyaccount.h"
-#include "mymoney/storage/mymoneystoragemgr.h"
 #include "onlinetasks/dummy/tasks/dummytask.h"
 #include "mymoneyexception.h"
 #include "mymoneyenums.h"
+#include "mymoneysecurity.h"
 
 QTEST_GUILESS_MAIN(onlineJobAdministrationTest)
 
 onlineJobAdministrationTest::onlineJobAdministrationTest()
-  : storage(nullptr)
-  , file(nullptr)
+  : file(nullptr)
 {
 }
 
-void onlineJobAdministrationTest::initTestCase()
+void onlineJobAdministrationTest::setupBaseCurrency()
 {
   file = MyMoneyFile::instance();
-  storage = new MyMoneyStorageMgr;
-  file->attachStorage(storage);
+
+  MyMoneySecurity base("EUR", "Euro", QChar(0x20ac));
+  MyMoneyFileTransaction ft;
+  try {
+    file->currency(base.id());
+  } catch (const MyMoneyException &e) {
+    file->addCurrency(base);
+  }
+  file->setBaseCurrency(base);
+  ft.commit();
+}
+
+
+void onlineJobAdministrationTest::initTestCase()
+{
+  setupBaseCurrency();
+  file = MyMoneyFile::instance();
 
   try {
     MyMoneyAccount account = MyMoneyAccount();
@@ -57,8 +71,6 @@ void onlineJobAdministrationTest::initTestCase()
 
 void onlineJobAdministrationTest::cleanupTestCase()
 {
-  file->detachStorage(storage);
-  delete storage;
 }
 
 void onlineJobAdministrationTest::init()

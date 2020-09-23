@@ -27,6 +27,8 @@
 #include <QFile>
 #include <QTemporaryFile>
 #include <QFileDialog>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -45,7 +47,6 @@
 #include "appinterface.h"
 #include "viewinterface.h"
 #include "mymoneyfile.h"
-#include "mymoneystoragemgr.h"
 #include "mymoneyexception.h"
 #include "mymoneystoragebin.h"
 #include "mymoneystoragexml.h"
@@ -84,12 +85,12 @@ XMLStorage::~XMLStorage()
   qDebug("Plugins: xmlstorage unloaded");
 }
 
-MyMoneyStorageMgr *XMLStorage::open(const QUrl &url)
+bool XMLStorage::open(const QUrl &url)
 {
   fileUrl.clear();
 
   if (url.scheme() == QLatin1String("sql"))
-    return nullptr;
+    return false;
 
   QString fileName;
   auto downloadedFile = false;
@@ -199,16 +200,11 @@ MyMoneyStorageMgr *XMLStorage::open(const QUrl &url)
   QRegExp kmyexp("<!DOCTYPE KMYMONEY-FILE>");
   QByteArray txt(qbaFileHeader, 70);
   if (kmyexp.indexIn(txt) == -1)
-    return nullptr;
+    return false;
 
-  // attach the storage before reading the file, since the online
-  // onlineJobAdministration object queries the engine during
-  // loading.
-
-  auto storage = new MyMoneyStorageMgr;
   MyMoneyStorageXML pReader;
   pReader.setProgressCallback(appInterface()->progressCallback());
-  pReader.readFile(qfile, storage);
+  pReader.readFile(qfile, MyMoneyFile::instance());
   pReader.setProgressCallback(0);
 
   qfile->close();
@@ -222,21 +218,19 @@ MyMoneyStorageMgr *XMLStorage::open(const QUrl &url)
 
   // make sure we setup the encryption key correctly
   if (isEncrypted) {
-    MyMoneyFile::instance()->attachStorage(storage);
     if (MyMoneyFile::instance()->value("kmm-encryption-key").isEmpty()) {
       // encapsulate transactions to the engine to be able to commit/rollback
       MyMoneyFileTransaction ft;
       MyMoneyFile::instance()->setValue("kmm-encryption-key", KMyMoneySettings::gpgRecipientList().join(","));
       ft.commit();
     }
-    MyMoneyFile::instance()->detachStorage();
   }
 
   fileUrl = url;
   //write the directory used for this file as the default one for next time.
   appInterface()->writeLastUsedDir(url.toDisplayString(QUrl::RemoveFilename | QUrl::PreferLocalFile | QUrl::StripTrailingSlash));
 
-  return storage;
+  return true;
 }
 
 QUrl XMLStorage::openUrl() const
@@ -350,7 +344,21 @@ bool XMLStorage::saveAs()
                     QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*.xml")).arg(i18nc("XML (Filefilter)", "XML files")) +
                     QString(QLatin1String("%2 (%1);;")).arg(QStringLiteral("*")).arg(i18nc("All files (Filefilter)", "All files")));
   dlg->setAcceptMode(QFileDialog::AcceptSave);
-  connect(dlg, &QFileDialog::filterSelected, this, [&](const QString txt) { dlg->setDefaultSuffix(txt.mid(2)); });
+  connect(dlg, &QFileDialog::filterSelected, this, [&](const QString txt) {
+    // for some reason, txt sometimes contains the filter expression only
+    // e.g. "*.xml" and in some others it contains the full text with
+    // the filter expression appended in parenthesis e.g.
+    // "KMyMoney files (*.xml)". The following logic extracts the
+    // filter and sets the default suffix based on it.
+    QRegularExpression filter(QStringLiteral("\\*\\.(?<extension>[a-z\\.]+)"));
+    const auto match = filter.match(txt);
+    if (match.hasMatch()) {
+      dlg->setDefaultSuffix(match.captured(QStringLiteral("extension")));
+    } else {
+      dlg->setDefaultSuffix(QString());
+    }
+
+  });
 
   if (dlg->exec() == QDialog::Accepted && dlg != 0) {
     QUrl newURL = dlg->selectedUrls().first();
@@ -514,7 +522,7 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
   }
 
   pWriter->setProgressCallback(appInterface()->progressCallback());
-  pWriter->writeFile(device.get(), MyMoneyFile::instance()->storage());
+  pWriter->writeFile(device.get(), MyMoneyFile::instance());
   device->close();
 
   // Check for errors if possible, only possible for KGPGFile

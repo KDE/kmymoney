@@ -1,18 +1,21 @@
-/***************************************************************************
-                          kaccountsview.cpp
-                             -------------------
-    copyright            : (C) 2007 by Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2007-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Robert Szczesiak <dev.rszczesiak@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "kaccountsview_p.h"
 
@@ -21,7 +24,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QTimer>
 #include <QMenu>
 #include <QAction>
 #include <QBitArray>
@@ -40,15 +42,16 @@
 #include "kmymoneysettings.h"
 #include "storageenums.h"
 #include "menuenums.h"
+#include "accountdelegate.h"
+#include "accountsmodel.h"
 
 using namespace Icons;
 
 KAccountsView::KAccountsView(QWidget *parent) :
-    KMyMoneyAccountsViewBase(*new KAccountsViewPrivate(this), parent)
+    KMyMoneyViewBase(*new KAccountsViewPrivate(this), parent)
 {
   Q_D(KAccountsView);
-  d->ui->setupUi(this);
-
+  d->init();
   connect(pActions[eMenu::Action::NewAccount],          &QAction::triggered, this, &KAccountsView::slotNewAccount);
   connect(pActions[eMenu::Action::EditAccount],         &QAction::triggered, this, &KAccountsView::slotEditAccount);
   connect(pActions[eMenu::Action::DeleteAccount],       &QAction::triggered, this, &KAccountsView::slotDeleteAccount);
@@ -59,10 +62,31 @@ KAccountsView::KAccountsView(QWidget *parent) :
   connect(pActions[eMenu::Action::UnmapOnlineAccount],  &QAction::triggered, this, &KAccountsView::slotAccountUnmapOnline);
   connect(pActions[eMenu::Action::UpdateAccount],       &QAction::triggered, this, &KAccountsView::slotAccountUpdateOnline);
   connect(pActions[eMenu::Action::UpdateAllAccounts],   &QAction::triggered, this, &KAccountsView::slotAccountUpdateOnlineAll);
+
+  d->ui->m_accountTree->setItemDelegate(new AccountDelegate(d->ui->m_accountTree));
+  connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::netWorthChanged, this, &KAccountsView::slotNetWorthChanged);
 }
 
 KAccountsView::~KAccountsView()
 {
+}
+
+void KAccountsView::slotSettingsChanged()
+{
+  Q_D(KAccountsView);
+  d->m_proxyModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
+  d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+  d->m_proxyModel->setHideFavoriteAccounts(true);
+
+  if (KMyMoneySettings::showCategoriesInAccountsView()) {
+    d->m_proxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense});
+  } else {
+    d->m_proxyModel->removeAccountType(eMyMoney::Account::Type::Income);
+    d->m_proxyModel->removeAccountType(eMyMoney::Account::Type::Expense);
+  }
+
+  MyMoneyFile::instance()->accountsModel()->setColorScheme(AccountsModel::Positive, KMyMoneySettings::schemeColor(SchemeColor::Positive));
+  MyMoneyFile::instance()->accountsModel()->setColorScheme(AccountsModel::Negative, KMyMoneySettings::schemeColor(SchemeColor::Negative));
 }
 
 void KAccountsView::executeCustomAction(eView::Action action)
@@ -75,7 +99,7 @@ void KAccountsView::executeCustomAction(eView::Action action)
     case eView::Action::SetDefaultFocus:
       {
         Q_D(KAccountsView);
-        QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
+        QMetaObject::invokeMethod(d->ui->m_accountTree, "setFocus", Qt::QueuedConnection);
       }
       break;
 
@@ -86,12 +110,15 @@ void KAccountsView::executeCustomAction(eView::Action action)
 
 void KAccountsView::refresh()
 {
+  /// @todo port to new model code or cleanup
+#if 0
   Q_D(KAccountsView);
   if (!isVisible()) {
     d->m_needsRefresh = true;
     return;
   }
   d->m_needsRefresh = false;
+
   // TODO: check why the invalidate is needed here
   d->m_proxyModel->invalidate();
   d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
@@ -107,10 +134,13 @@ void KAccountsView::refresh()
   d->m_haveUnusedCategories = false;
   d->ui->m_hiddenCategories->hide();  // hides label
   d->m_proxyModel->setHideUnusedIncomeExpenseAccounts(KMyMoneySettings::hideUnusedCategory());
+#endif
 }
 
 void KAccountsView::showEvent(QShowEvent * event)
 {
+  /// @todo port to new model code or cleanup
+#if 0
   Q_D(KAccountsView);
   if (!d->m_proxyModel)
     d->init();
@@ -120,6 +150,7 @@ void KAccountsView::showEvent(QShowEvent * event)
   if (d->m_needsRefresh)
     refresh();
 
+#endif
   // don't forget base class implementation
   QWidget::showEvent(event);
 }
@@ -237,10 +268,13 @@ void KAccountsView::slotUnusedIncomeExpenseAccountHidden()
   d->ui->m_hiddenCategories->setVisible(d->m_haveUnusedCategories);
 }
 
-void KAccountsView::slotNetWorthChanged(const MyMoneyMoney &netWorth)
+void KAccountsView::slotNetWorthChanged(const MyMoneyMoney &netWorth, bool isApproximate)
 {
   Q_D(KAccountsView);
-  d->netBalProChanged(netWorth, d->ui->m_totalProfitsLabel, View::Accounts);
+  const auto formattedValue = d->formatViewLabelValue(netWorth);
+  d->updateViewLabel(d->ui->m_totalProfitsLabel,
+                         isApproximate ? i18nc("Approximate net worth", "Net Worth: ~%1", formattedValue)
+                                       : i18n("Net Worth: %1", formattedValue));
 }
 
 void KAccountsView::slotShowAccountMenu(const MyMoneyAccount& acc)
@@ -269,11 +303,13 @@ void KAccountsView::slotSelectByVariant(const QVariantList& variant, eView::Inte
 {
   Q_D(KAccountsView);
   switch (intent) {
+    /// @todo cleanup
+#if 0
     case eView::Intent::UpdateNetWorth:
       if (variant.count() == 1)
         slotNetWorthChanged(variant.first().value<MyMoneyMoney>());
       break;
-
+#endif
     case eView::Intent::SetOnlinePlugins:
       if (variant.count() == 1)
         d->m_onlinePlugins = static_cast<QMap<QString, KMyMoneyPlugin::OnlinePlugin*>*>(variant.first().value<void*>());

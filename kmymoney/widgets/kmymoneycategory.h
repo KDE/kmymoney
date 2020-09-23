@@ -19,6 +19,8 @@
 #ifndef KMYMONEYCATEGORY_H
 #define KMYMONEYCATEGORY_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -51,7 +53,7 @@ class KMyMoneyAccountSelector;
   * @author Thomas Baumgart
   */
 class KMyMoneyCategoryPrivate;
-class KMyMoneyCategory : public KMyMoneyCombo
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyCategory : public KMyMoneyCombo
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyCategory)
@@ -168,7 +170,7 @@ private:
 };
 
 
-class KMyMoneySecurity : public KMyMoneyCategory
+class KMM_BASE_WIDGETS_EXPORT KMyMoneySecurity : public KMyMoneyCategory
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneySecurity)

@@ -39,7 +39,7 @@
 #include "mymoneypayee.h"
 #include "mymoneytag.h"
 #include "kmymoneysettings.h"
-#include "transaction.h"
+// #include "transaction.h"
 #include "daterangedlg.h"
 #include "mymoneytransactionfilter.h"
 

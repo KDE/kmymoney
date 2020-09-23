@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2016  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2016-2019  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -21,6 +21,7 @@
 // QT Includes
 
 #include <QCollator>
+#include <QSet>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -79,6 +80,11 @@ bool MyMoneyCostCenter::operator < (const MyMoneyCostCenter& right) const
 bool MyMoneyCostCenter::hasReferenceTo(const QString& /*id*/) const
 {
   return false;
+}
+
+QSet<QString> MyMoneyCostCenter::referencedObjects() const
+{
+  return {};
 }
 
 QString MyMoneyCostCenter::name() const

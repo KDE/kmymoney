@@ -1,6 +1,6 @@
 /*
  * Copyright 2002-2004  Kevin Tambascio <ktambascio@users.sourceforge.net>
- * Copyright 2002-2016  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2002-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2004-2005  Ace Jones <acejones@users.sourceforge.net>
  * Copyright 2006       Darren Gould <darren_gould@gmx.de>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
@@ -27,6 +27,7 @@
 
 #include <QMap>
 #include <QString>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -46,7 +47,6 @@ class QDomElement;
 class QDomDocument;
 class QDate;
 
-class MyMoneyStorageMgr;
 class MyMoneyInstitution;
 class MyMoneyAccount;
 class MyMoneySecurity;
@@ -59,6 +59,8 @@ class MyMoneyPrice;
 class MyMoneyTransaction;
 class MyMoneyCostCenter;
 class onlineJob;
+class MyMoneyFile;
+class PriceEntry;
 
 template <typename T> class QList;
 typedef QPair<QString, QString> MyMoneySecurityPair;
@@ -77,8 +79,8 @@ public:
     Writing = 1           /**< version to be used when writing a file */
   };
 
-  void readFile(QIODevice* s, MyMoneyStorageMgr* storage) override;
-  void writeFile(QIODevice* s, MyMoneyStorageMgr* storage) override;
+  void readFile(QIODevice* s, MyMoneyFile* file) override;
+  void writeFile(QIODevice* s, MyMoneyFile* file) override;
   void setProgressCallback(void(*callback)(int, int, const QString&)) override;
 
   protected:
@@ -111,8 +113,9 @@ public:
   virtual void writeInstitutions(QDomElement& institutions);
 
   virtual void writePrices(QDomElement& prices);
-  virtual void writePricePair(QDomElement& price, const MyMoneyPriceEntries& p);
-  virtual void writePrice(QDomElement& prices, const MyMoneyPrice& p);
+  /// @todo cleanup
+  // virtual void writePricePair(QDomElement& price, const MyMoneyPriceEntries& p);
+  // virtual void writePrice(QDomElement& prices, const MyMoneyPrice& p);
 
   virtual void writePayees(QDomElement& payees);
   virtual void writePayee(QDomElement& payees, const MyMoneyPayee& p);
@@ -158,8 +161,8 @@ private:
   void (*m_progressCallback)(int, int, const QString&);
 
 protected:
-  MyMoneyStorageMgr *m_storage;
-  QDomDocument *m_doc;
+  MyMoneyFile*        m_file;
+  QDomDocument*       m_doc;
 
 private:
   /// \internal d-pointer class.

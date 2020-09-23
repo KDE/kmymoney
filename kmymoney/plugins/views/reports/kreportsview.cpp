@@ -155,21 +155,20 @@ void KReportsView::refresh()
 
 void KReportsView::showEvent(QShowEvent * event)
 {
-  if (MyMoneyFile::instance()->storageAttached()) {
-    Q_D(KReportsView);
-    if (d->m_needLoad)
-      d->init();
+  Q_D(KReportsView);
+  if (d->m_needLoad)
+    d->init();
 
-    emit customActionRequested(View::Reports, eView::Action::AboutToShow);
+  emit customActionRequested(View::Reports, eView::Action::AboutToShow);
 
-    if (d->m_needsRefresh)
-      refresh();
+  if (d->m_needsRefresh)
+    refresh();
 
-    if (auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->currentWidget()))
-      emit reportSelected(tab->report());
-    else
-      emit reportSelected(MyMoneyReport());
-  }
+  if (auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->currentWidget()))
+    emit reportSelected(tab->report());
+  else
+    emit reportSelected(MyMoneyReport());
+
   // don't forget base class implementation
   QWidget::showEvent(event);
 }

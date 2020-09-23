@@ -22,7 +22,6 @@
 
 #include "mymoneytestutils.h"
 
-#include "mymoneystoragemgr.h"
 #include "mymoneymap.h"
 
 class MyMoneyMapTest : public QObject

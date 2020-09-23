@@ -19,6 +19,8 @@
 #ifndef IONLINEJOBEDIT_H
 #define IONLINEJOBEDIT_H
 
+#include "onlinetask_interfaces_export.h"
+
 #include <QWidget>
 #include <QVariant>
 
@@ -30,7 +32,7 @@ class onlineJob;
  *
  * @since 4.8.0
  */
-class IonlineJobEdit : public QWidget
+class ONLINETASK_INTERFACES_EXPORT IonlineJobEdit : public QWidget
 {
   Q_OBJECT
 

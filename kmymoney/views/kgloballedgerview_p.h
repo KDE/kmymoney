@@ -66,7 +66,6 @@
 #include "registersearchline.h"
 #include "scheduledtransaction.h"
 #include "accountsmodel.h"
-#include "models.h"
 #include "mymoneyprice.h"
 #include "mymoneyschedule.h"
 #include "mymoneysecurity.h"
@@ -227,36 +226,36 @@ class KGlobalLedgerViewPrivate : public KMyMoneyViewBasePrivate
   Q_DECLARE_PUBLIC(KGlobalLedgerView)
 
 public:
-  explicit KGlobalLedgerViewPrivate(KGlobalLedgerView *qq) :
-    q_ptr(qq),
-    m_mousePressFilter(0),
-    m_registerSearchLine(0),
-    m_precision(2),
-    m_recursion(false),
-    m_showDetails(false),
-    m_action(eWidgets::eRegister::Action::None),
-    m_filterProxyModel(0),
-    m_accountComboBox(0),
-    m_balanceIsApproximated(false),
-    m_toolbarFrame(nullptr),
-    m_registerFrame(nullptr),
-    m_buttonFrame(nullptr),
-    m_formFrame(nullptr),
-    m_summaryFrame(nullptr),
-    m_register(nullptr),
-    m_buttonbar(nullptr),
-    m_leftSummaryLabel(nullptr),
-    m_centerSummaryLabel(nullptr),
-    m_rightSummaryLabel(nullptr),
-    m_form(nullptr),
-    m_needLoad(true),
-    m_newAccountLoaded(true),
-    m_inEditMode(false),
-    m_transactionEditor(nullptr),
-    m_balanceWarning(nullptr),
-    m_moveToAccountSelector(nullptr),
-    m_endingBalanceDlg(nullptr),
-    m_searchDlg(nullptr)
+  explicit KGlobalLedgerViewPrivate(KGlobalLedgerView *qq)
+    : KMyMoneyViewBasePrivate(qq)
+    , m_mousePressFilter(0)
+    , m_registerSearchLine(0)
+    , m_precision(2)
+    , m_recursion(false)
+    , m_showDetails(false)
+    , m_action(eWidgets::eRegister::Action::None)
+    , m_filterProxyModel(0)
+    , m_accountComboBox(0)
+    , m_balanceIsApproximated(false)
+    , m_toolbarFrame(nullptr)
+    , m_registerFrame(nullptr)
+    , m_buttonFrame(nullptr)
+    , m_formFrame(nullptr)
+    , m_summaryFrame(nullptr)
+    , m_register(nullptr)
+    , m_buttonbar(nullptr)
+    , m_leftSummaryLabel(nullptr)
+    , m_centerSummaryLabel(nullptr)
+    , m_rightSummaryLabel(nullptr)
+    , m_form(nullptr)
+    , m_needLoad(true)
+    , m_newAccountLoaded(true)
+    , m_inEditMode(false)
+    , m_transactionEditor(nullptr)
+    , m_balanceWarning(nullptr)
+    , m_moveToAccountSelector(nullptr)
+    , m_endingBalanceDlg(nullptr)
+    , m_searchDlg(nullptr)
   {
   }
 
@@ -281,11 +280,9 @@ public:
 
     // the proxy filter model
     m_filterProxyModel = new AccountNamesFilterProxyModel(q);
-    m_filterProxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity});
-    auto const model = Models::instance()->accountsModel();
-    m_filterProxyModel->setSourceModel(model);
-    m_filterProxyModel->setSourceColumns(model->getColumns());
-    m_filterProxyModel->sort((int)eAccountsModel::Column::Account);
+    m_filterProxyModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquity());
+    m_filterProxyModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
+    m_filterProxyModel->sort(AccountsModel::Column::AccountName);
 
     // create the toolbar frame at the top of the view
     m_toolbarFrame = new QFrame();
@@ -418,22 +415,25 @@ public:
 
     // TODO: check why the invalidate is needed here
     m_filterProxyModel->invalidate();
-    m_filterProxyModel->sort((int)eAccountsModel::Column::Account);
+    m_filterProxyModel->setHideFavoriteAccounts(false);
     m_filterProxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
     m_filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
+    m_filterProxyModel->sort(AccountsModel::Column::AccountName);
     m_accountComboBox->expandAll();
 
+    /// @todo port to new model code
+// #if 0
     if (m_currentAccount.id().isEmpty()) {
       // find the first favorite account
-      QModelIndexList list = m_filterProxyModel->match(m_filterProxyModel->index(0, 0),
-                             (int)eAccountsModel::Role::Favorite,
-                             QVariant(true),
+      QModelIndexList list = m_filterProxyModel->match(m_filterProxyModel->index(0, 0, m_filterProxyModel->index(0, 0)),
+                             eMyMoney::Model::Roles::IdRole,
+                             QVariant(QString("*")),
                              1,
-                             Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+                             Qt::MatchFlags(Qt::MatchWildcard));
       if (list.count() > 0) {
-        QVariant accountId = list.front().data((int)eAccountsModel::Role::ID);
-        if (accountId.isValid()) {
-          m_currentAccount = file->account(accountId.toString());
+        auto accountId = list.front().data(eMyMoney::Model::Roles::IdRole).toString();
+        if (!accountId.isEmpty()) {
+          m_currentAccount = file->accountsModel()->itemById(accountId);
         }
       }
 
@@ -447,18 +447,19 @@ public:
         for (QModelIndexList::ConstIterator it = list.constBegin(); it != list.constEnd(); ++it) {
           if (!it->parent().isValid())
             continue; // skip the top level accounts
-          QVariant accountId = (*it).data((int)eAccountsModel::Role::ID);
-          if (accountId.isValid()) {
-            MyMoneyAccount a = file->account(accountId.toString());
-            if (!a.isInvest() && !a.isClosed()) {
-              m_currentAccount = a;
+
+          auto acc = file->accountsModel()->itemByIndex(m_filterProxyModel->mapToSource(*it));
+          qDebug() << Q_FUNC_INFO << acc.name();
+          if (!acc.id().isEmpty()) {
+            if (!acc.isInvest() && !acc.isClosed()) {
+              m_currentAccount = acc;
               break;
             }
           }
         }
       }
     }
-
+// #endif
     if (!m_currentAccount.id().isEmpty()) {
       m_accountComboBox->setSelected(m_currentAccount.id());
       try {
@@ -1555,7 +1556,7 @@ public:
       QList<MyMoneyMoney> unionList;
       unionList.append(tempList);
       unionList.append(sumList);
-      qSort(unionList);
+      std::sort(unionList.begin(), unionList.end());
       sumList.clear();
       MyMoneyMoney smallestSumFromUnion = unionList.first();
       sumList.append(smallestSumFromUnion);
@@ -1589,7 +1590,6 @@ public:
     return result;
   }
 
-  KGlobalLedgerView   *q_ptr;
   MousePressFilter    *m_mousePressFilter;
   KMyMoneyRegister::RegisterSearchLineWidget* m_registerSearchLine;
 //  QString              m_reconciliationAccount;

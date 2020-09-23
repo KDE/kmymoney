@@ -19,6 +19,8 @@
 #ifndef KACCOUNTSELECTDLG_H
 #define KACCOUNTSELECTDLG_H
 
+#include "kmm_base_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -40,7 +42,7 @@ class MyMoneyInstitution;
 namespace eDialogs { enum Category : int; }
 
 class KAccountSelectDlgPrivate;
-class KAccountSelectDlg : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KAccountSelectDlg : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(KAccountSelectDlg)

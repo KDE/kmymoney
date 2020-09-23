@@ -46,6 +46,7 @@
 #include "mymoneytransaction.h"
 #include "mymoneyreport.h"
 #include "mymoneyexception.h"
+#include "mymoneyutils.h"
 #include "kmymoneyutils.h"
 #include "reportaccount.h"
 #include "mymoneyenums.h"
@@ -264,7 +265,7 @@ void QueryTable::init()
     m_postcolumns << ctBalance;
 
   TableRow::setSortCriteria(sort);
-  qSort(m_rows);
+  std::sort(m_rows.begin(), m_rows.end());
   if (m_config.isShowingColumnTotals())
     constructTotalRows(); // adds total rows to m_rows
 }
@@ -471,6 +472,9 @@ void QueryTable::constructTotalRows()
         totalsRow[ctDepth] = QString();
 
         m_rows.append(totalsRow);
+        if (!m_containsNonBaseCurrency && totalsRow[ctCurrency] != file->baseCurrency().id()) {
+          m_containsNonBaseCurrency = true;
+        }
         ++currencyGrp;
       }
       break;                                      // no use to loop further
@@ -531,6 +535,8 @@ void QueryTable::constructTransactionTable()
   for (QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.constBegin(); it_transaction != transactions.constEnd(); ++it_transaction) {
 
     TableRow qA, qS;
+    QList<TableRow> qStack;
+
     QDate pd;
     QList<QString> tagIdListCache;
 
@@ -543,8 +549,6 @@ void QueryTable::constructTransactionTable()
     qA[ctMonth] = qS[ctMonth] = i18n("Month of %1", QDate(pd.year(), pd.month(), 1).toString(Qt::ISODate));
     qA[ctWeek] = qS[ctWeek] = i18n("Week of %1", pd.addDays(1 - pd.dayOfWeek()).toString(Qt::ISODate));
 
-    if (!m_containsNonBaseCurrency && (*it_transaction).commodity() != file->baseCurrency().id())
-      m_containsNonBaseCurrency = true;
     if (report.isConvertCurrency())
       qA[ctCurrency] = qS[ctCurrency] = file->baseCurrency().id();
     else
@@ -620,6 +624,7 @@ void QueryTable::constructTransactionTable()
     QString baseCurrency = file->baseCurrency().id();
 
     QMap<QString, MyMoneyMoney> xrMap; // container for conversion rates from given currency to myBeginCurrency
+
     do {
       MyMoneyMoney xr;
       ReportAccount splitAcc((* it_split).accountId());
@@ -651,8 +656,6 @@ void QueryTable::constructTransactionTable()
         else if (splitAcc.isInvest())         // if it's stock split...
           xr *= (*it_split).price();          // ...multiply it by stock price stored in split
 
-        if (!m_containsNonBaseCurrency && myBeginCurrency != baseCurrency)
-          m_containsNonBaseCurrency = true;
         if (myBeginCurrency != baseCurrency) {                             // myBeginCurrency can differ from baseCurrency...
           MyMoneyPrice price = file->price(myBeginCurrency, baseCurrency,
                                            (*it_transaction).postDate());  // ...so check conversion rate...
@@ -703,15 +706,13 @@ void QueryTable::constructTransactionTable()
           MyMoneySecurity currency;
           MyMoneySecurity security;
           eMyMoney::Split::InvestmentTransactionType transactionType;
-          KMyMoneyUtils::dissectTransaction((*it_transaction), stockSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
+          MyMoneyUtils::dissectTransaction((*it_transaction), stockSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
           if (!(assetAccountSplit == MyMoneySplit())) {
             for (it_split = splits.begin(); it_split != splits.end(); ++it_split) {
               if ((*it_split) == assetAccountSplit) {
                 splitAcc = ReportAccount(assetAccountSplit.accountId()); // switch over from stock split to asset split because amount in stock split doesn't take fees/interests into account
                 myBegin = it_split;                       // set myBegin to asset split, so stock split can be listed in details under splits
                 myBeginCurrency = (file->account((*myBegin).accountId())).currencyId();
-                if (!m_containsNonBaseCurrency && myBeginCurrency != baseCurrency)
-                  m_containsNonBaseCurrency = true;
                 if (m_config.isConvertCurrency()) {
                   if (myBeginCurrency != baseCurrency) {
                     MyMoneyPrice price = file->price(myBeginCurrency, baseCurrency, (*it_transaction).postDate());
@@ -786,7 +787,6 @@ void QueryTable::constructTransactionTable()
 
           } else {
             if ((splits.count() > 2) && use_summary) {
-
               // add the "summarized" split transaction
               // this is the sub-total of the split detail
               // convert to lowest fraction
@@ -795,6 +795,32 @@ void QueryTable::constructTransactionTable()
               qA[ctTopCategory] = i18nc("Split transaction", "Split");
               qA[ctCategoryType] = i18nc("Split transaction", "Split");
               m_rows += qA;
+              if (!m_containsNonBaseCurrency && qA[ctCurrency] != file->baseCurrency().id()) {
+                m_containsNonBaseCurrency = true;
+              }
+            } else if (splits.count() > 2) {
+              // this applies when the transaction has more than 2 splits
+              // and each is shown seperately
+              switch (m_config.rowType()) {
+                case eMyMoney::Report::RowType::Category:
+                case eMyMoney::Report::RowType::TopCategory:
+                case eMyMoney::Report::RowType::Tag:
+                case eMyMoney::Report::RowType::Payee:
+                  if (splitAcc.isAssetLiability()) {
+                    qA[ctValue] = ((*it_split).shares() * xr).convert(fraction).toString(); // needed for category reports, in case of multicurrency transaction it breaks it
+                    // make sure we use the right currency of the category
+                    // (will be ignored when converting to base currency)
+                    qA[ctCurrency] = splitAcc.currencyId();
+                  }
+                  break;
+                default:
+                  break;
+              }
+              qA[ctSplit].clear();
+              qA[ctRank] = QLatin1Char('1');
+              // keep it for now and don't add the data immediately
+              // as we may find a better match in one of the other splits
+              qStack += qA;
             }
           }
         }
@@ -858,8 +884,12 @@ void QueryTable::constructTransactionTable()
                 case eMyMoney::Report::RowType::TopCategory:
                 case eMyMoney::Report::RowType::Tag:
                 case eMyMoney::Report::RowType::Payee:
-                  if (splitAcc.isIncomeExpense())
+                  if (splitAcc.isIncomeExpense()) {
                     qA[ctValue] = (-(*it_split).shares() * xr).convert(fraction).toString(); // needed for category reports, in case of multicurrency transaction it breaks it
+                    // make sure we use the right currency of the category
+                    // (will be ignored when converting to base currency)
+                    qA[ctCurrency] = splitAcc.currencyId();
+                  }
                   break;
                 default:
                   break;
@@ -870,8 +900,6 @@ void QueryTable::constructTransactionTable()
 
             qA [ctMemo] = (*it_split).memo();
 
-            if (!m_containsNonBaseCurrency && splitAcc.currencyId() != file->baseCurrency().id())
-              m_containsNonBaseCurrency = true;
             if (report.isConvertCurrency())
               qS[ctCurrency] = file->baseCurrency().id();
             else
@@ -913,6 +941,12 @@ void QueryTable::constructTransactionTable()
                     }
                   }
                   m_rows += qA;
+                  if (!m_containsNonBaseCurrency && qA[ctCurrency] != file->baseCurrency().id()) {
+                    m_containsNonBaseCurrency = true;
+                  }
+
+                  // we don't need the stacked data
+                  qStack.clear();
                 }
               }
             }
@@ -971,6 +1005,10 @@ void QueryTable::constructTransactionTable()
                     && (transaction_text
                         || m_config.match((*it_split))))) {
               m_rows += qS;
+              qStack.clear();
+              if (!m_containsNonBaseCurrency && qS[ctCurrency] != file->baseCurrency().id()) {
+                m_containsNonBaseCurrency = true;
+              }
 
               // track accts that will need opening and closing balances
               accts.insert(splitAcc.id(), splitAcc);
@@ -996,9 +1034,22 @@ void QueryTable::constructTransactionTable()
         break;
 
     } while (it_split != myBegin);
+
     if (loan_special_case) {
       m_rows += qA;
+      if (!m_containsNonBaseCurrency && qA[ctCurrency] != file->baseCurrency().id()) {
+        m_containsNonBaseCurrency = true;
+      }
+      qStack.clear();
     }
+    // check if the stack contains a foreign currency
+    for (const auto& row : qAsConst(qStack)) {
+      if (!m_containsNonBaseCurrency && row[ctCurrency] != file->baseCurrency().id()) {
+        m_containsNonBaseCurrency = true;
+        break;
+      }
+    }
+    m_rows += qStack;
   }
 
   // now run through our accts list and add opening and closing balances
@@ -1062,8 +1113,6 @@ void QueryTable::constructTransactionTable()
 
     //starting balance
     // don't show currency if we're converting or if it's not foreign
-    if (!m_containsNonBaseCurrency && account.currency().id() != file->baseCurrency().id())
-      m_containsNonBaseCurrency = true;
     if (m_config.isConvertCurrency())
       qA[ctCurrency] = file->baseCurrency().id();
     else
@@ -1098,6 +1147,9 @@ void QueryTable::constructTransactionTable()
     qA[ctRank] = QLatin1Char('3');
     qA[ctID] = QLatin1Char('Z');
     m_rows += qA;
+    if (!m_containsNonBaseCurrency && qA[ctCurrency] != file->baseCurrency().id()) {
+      m_containsNonBaseCurrency = true;
+    }
   }
 }
 
@@ -1180,7 +1232,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
       MyMoneySecurity security;
       MyMoneySecurity currency;
       eMyMoney::Split::InvestmentTransactionType transactionType;
-      KMyMoneyUtils::dissectTransaction((*it_t), shareSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
+      MyMoneyUtils::dissectTransaction((*it_t), shareSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
       QDate postDate = (*it_t).postDate();
       MyMoneyMoney price;
       //get price for the day of the transaction if we have to calculate base currency
@@ -1302,7 +1354,7 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
       MyMoneySecurity security;
       MyMoneySecurity currency;
       eMyMoney::Split::InvestmentTransactionType transactionType;
-      KMyMoneyUtils::dissectTransaction(transaction, shareSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
+      MyMoneyUtils::dissectTransaction(transaction, shareSplit, assetAccountSplit, feeSplits, interestSplits, security, currency, transactionType);
       QDate postDate = transaction.postDate();
       MyMoneyMoney price;
       if (m_config.isConvertCurrency())
@@ -1567,8 +1619,6 @@ void QueryTable::constructAccountTable()
           if (!qaccountrow.isEmpty()) {
             // assuming that that report is grouped by topaccount
             qaccountrow[ctTopAccount] = account.topParentName();
-            if (!m_containsNonBaseCurrency && account.currency().id() != file->baseCurrency().id())
-              m_containsNonBaseCurrency = true;
             if (m_config.isConvertCurrency())
               qaccountrow[ctCurrency] = file->baseCurrency().id();
             else
@@ -1601,12 +1651,7 @@ void QueryTable::constructAccountTable()
           qaccountrow[ctValue] = (netprice * shares).convert(fraction).toString();
           qaccountrow[ctShares] = shares.toString();
 
-          QString iid = account.institutionId();
-
-          // If an account does not have an institution, get it from the top-parent.
-          if (iid.isEmpty() && !account.isTopLevel())
-            iid = account.topParent().institutionId();
-
+          const auto iid = account.institutionId();
           if (iid.isEmpty())
             qaccountrow[ctInstitution] = i18nc("No institution", "None");
           else
@@ -1623,13 +1668,14 @@ void QueryTable::constructAccountTable()
       qaccountrow[ctAccount] = account.name();
       qaccountrow[ctAccountID] = account.id();
       qaccountrow[ctTopAccount] = account.topParentName();
-      if (!m_containsNonBaseCurrency && account.currency().id() != file->baseCurrency().id())
-        m_containsNonBaseCurrency = true;
       if (m_config.isConvertCurrency())
         qaccountrow[ctCurrency] = file->baseCurrency().id();
       else
         qaccountrow[ctCurrency] = account.currency().id();
       m_rows.append(qaccountrow);
+      if (!m_containsNonBaseCurrency && qaccountrow[ctCurrency] != file->baseCurrency().id()) {
+        m_containsNonBaseCurrency = true;
+      }
     }
   }
 
@@ -1647,6 +1693,9 @@ void QueryTable::constructAccountTable()
         qtotalsrow[ctCurrency] = currencyAccGrp.key();
         currencyGrandCashFlow[currencyAccGrp.key()] += topAccount.value();  // cumulative sum of cashflows of each topaccount
         m_rows.append(qtotalsrow);            // rows aren't sorted yet, so no problem with adding them randomly at the end
+        if (!m_containsNonBaseCurrency && qtotalsrow[ctCurrency] != file->baseCurrency().id()) {
+          m_containsNonBaseCurrency = true;
+        }
       }
       ++currencyAccGrp;
     }
@@ -1656,6 +1705,9 @@ void QueryTable::constructAccountTable()
       qtotalsrow[ctReturn] = helperIRR(currencyGrp.value());
       qtotalsrow[ctCurrency] = currencyGrp.key();
       m_rows.append(qtotalsrow);
+      if (!m_containsNonBaseCurrency && qtotalsrow[ctCurrency] != file->baseCurrency().id()) {
+        m_containsNonBaseCurrency = true;
+      }
       ++currencyGrp;
     }
   }
@@ -1691,8 +1743,6 @@ void QueryTable::constructSplitsTable()
     qA[ctMonth] = qS[ctMonth] = i18n("Month of %1", QDate(pd.year(), pd.month(), 1).toString(Qt::ISODate));
     qA[ctWeek] = qS[ctWeek] = i18n("Week of %1", pd.addDays(1 - pd.dayOfWeek()).toString(Qt::ISODate));
 
-    if (!m_containsNonBaseCurrency && (*it_transaction).commodity() != file->baseCurrency().id())
-      m_containsNonBaseCurrency = true;
     if (report.isConvertCurrency())
       qA[ctCurrency] = qS[ctCurrency] = file->baseCurrency().id();
     else
@@ -1891,6 +1941,9 @@ void QueryTable::constructSplitsTable()
         qA [ctCategoryType] = MyMoneyAccount::accountTypeToString(splitAcc.accountGroup());
 
         m_rows += qA;
+        if (!m_containsNonBaseCurrency && qA[ctCurrency] != file->baseCurrency().id()) {
+          m_containsNonBaseCurrency = true;
+        }
 
         // track accts that will need opening and closing balances
         accts.insert(splitAcc.id(), splitAcc);
@@ -1911,6 +1964,9 @@ void QueryTable::constructSplitsTable()
 
     if (loan_special_case) {
       m_rows += qA;
+      if (!m_containsNonBaseCurrency && qA[ctCurrency] != file->baseCurrency().id()) {
+        m_containsNonBaseCurrency = true;
+      }
     }
   }
 
@@ -1975,8 +2031,6 @@ void QueryTable::constructSplitsTable()
 
     //starting balance
     // don't show currency if we're converting or if it's not foreign
-    if (!m_containsNonBaseCurrency && account.currency().id() != file->baseCurrency().id())
-      m_containsNonBaseCurrency = true;
     if (m_config.isConvertCurrency())
       qA[ctCurrency] = file->baseCurrency().id();
     else
@@ -2012,6 +2066,9 @@ void QueryTable::constructSplitsTable()
     qA[ctBalance] = endBalance.toString();
     qA[ctID] = QLatin1Char('Z');
     m_rows += qA;
+    if (!m_containsNonBaseCurrency && qA[ctCurrency] != file->baseCurrency().id()) {
+      m_containsNonBaseCurrency = true;
+    }
   }
 }
 

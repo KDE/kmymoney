@@ -9,6 +9,12 @@ set(sqlstorage_SOURCES
   kgeneratesqldlg.cpp
   )
 
+if (ENABLE_SQLTRACER)
+  list(APPEND sqlstorage_SOURCES
+    kmmsqlquery.cpp
+  )
+endif()
+
 ki18n_wrap_ui(sqlstorage_SOURCES kselectdatabasedlg.ui kgeneratesqldlg.ui)
 
 kcoreaddons_add_plugin(sqlstorage

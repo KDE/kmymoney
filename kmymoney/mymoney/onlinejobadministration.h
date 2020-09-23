@@ -18,6 +18,8 @@
 #ifndef ONLINEJOBADMINISTRATION_H
 #define ONLINEJOBADMINISTRATION_H
 
+#include "kmm_mymoney_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 

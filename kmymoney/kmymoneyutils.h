@@ -37,6 +37,11 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#ifndef KMYMONEY_DEPRECATED
+#  define KMYMONEY_DEPRECATED Q_DECL_DEPRECATED
+#endif
+
+
 class QIcon;
 
 /**
@@ -61,6 +66,7 @@ class MyMoneyTransaction;
 class MyMoneyStatement;
 class MyMoneyInstitution;
 class MyMoneyForecast;
+class SplitModel;
 
 namespace eMyMoney { namespace Schedule { enum class Occurrence;
                                           enum class PaymentType;
@@ -359,8 +365,7 @@ public:
     */
   static void updateWizardButtons(QWizard *);
 
-  static void dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, eMyMoney::Split::InvestmentTransactionType& transactionType);
-
+  static void dissectInvestmentTransaction(const QModelIndex &investSplitIdx, QModelIndex &assetAccountSplitIdx, SplitModel* feeSplitModel, SplitModel* interestSplitModel, MyMoneySecurity &security, MyMoneySecurity &currency, eMyMoney::Split::InvestmentTransactionType &transactionType);
   static void processPriceList(const MyMoneyStatement& st);
 
   /**
@@ -395,6 +400,27 @@ public:
   static bool canUpdateAllAccounts();
 
   static void showStatementImportResult(const QStringList& resultMessages, uint statementCount);
+
+  /**
+    * This method returns a double converted into a QString
+    * after removing any group separators, trailing zeros,
+    * and decimal separators.
+    *
+    * @param val reference to a qreal value to be converted
+    * @param loc reference to a Qlocale converter
+    * @param f format specifier:
+    *          e - format as [-]9.9e[+|-]999
+    *          E - format as [-]9.9E[+|-]999
+    *          f - format as [-]9.9
+    *          g - use e or f format, whichever is the most concise
+    *          G - use E or f format, whichever is the most concise
+    * @param prec precision representing the number of digits
+    *             after the decimal point ('e', 'E' and 'f' formats)
+    *             or the maximum number of significant digits
+    *             (trailing zeroes are omitted) ('g' and 'G' formats)
+    * @return QString object containing the converted value
+    */
+  static QString normalizeNumericString(const qreal& val, const QLocale& loc, const char f = 'g', const int prec = 6);
 };
 
 #endif

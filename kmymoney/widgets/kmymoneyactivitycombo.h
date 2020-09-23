@@ -21,6 +21,8 @@
 #ifndef KMYMONEYACTIVITYCOMBO_H
 #define KMYMONEYACTIVITYCOMBO_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -40,7 +42,7 @@ namespace eMyMoney { namespace Split { enum class InvestmentTransactionType; } }
   * for investment transactions (buy, sell, dividend, etc.)
   */
 class KMyMoneyActivityComboPrivate;
-class KMM_WIDGETS_EXPORT KMyMoneyActivityCombo : public KMyMoneyMVCCombo
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyActivityCombo : public KMyMoneyMVCCombo
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyActivityCombo)

@@ -27,13 +27,15 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-KMyMoneyViewBase::KMyMoneyViewBase(QWidget* parent) :
-    QWidget(parent), d_ptr(new KMyMoneyViewBasePrivate)
+KMyMoneyViewBase::KMyMoneyViewBase(QWidget* parent)
+  : QWidget(parent)
+  , d_ptr(new KMyMoneyViewBasePrivate(this))
 {
 }
 
 KMyMoneyViewBase::KMyMoneyViewBase(KMyMoneyViewBasePrivate &dd, QWidget *parent)
-    : QWidget(parent), d_ptr(&dd)
+  : QWidget(parent)
+  , d_ptr(&dd)
 {
 }
 

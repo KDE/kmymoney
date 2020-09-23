@@ -6,7 +6,8 @@ set( kmm_utils_validators_SRCS
   validators.cpp
 )
 
-set( kmm_utils_webconnect_SRCS
+set( kmm_webconnect_SRCS
+  webpricequote.cpp
   webconnect.cpp
 )
 
@@ -27,7 +28,8 @@ set( kmm_utils_validators_HEADER
   validators.h
 )
 
-set( kmm_utils_webconnect_HEADER
+set( kmm_webconnect_HEADER
+  webpricequote.h
   webconnect.h
 )
 
@@ -41,8 +43,8 @@ set( kmm_printer_SRCS
 
 
 add_library(kmm_utils_validators STATIC ${kmm_utils_validators_SRCS})
-add_library(kmm_utils_webconnect STATIC ${kmm_utils_webconnect_SRCS})
 add_library(kmm_utils_platformtools STATIC ${kmm_utils_platformtools_SRCS})
+add_library(kmm_webconnect SHARED ${kmm_webconnect_SRCS})
 add_library(kmm_printer SHARED ${kmm_printer_SRCS})
 
 target_link_libraries( kmm_utils_validators
@@ -51,10 +53,20 @@ target_link_libraries( kmm_utils_validators
   Qt5::Gui
 )
 
-target_link_libraries( kmm_utils_webconnect
+target_link_libraries( kmm_webconnect
   PUBLIC
-  Qt5::Core
-  Qt5::Network
+    Qt5::Core
+    Qt5::Network
+    KF5::ConfigCore
+    KF5::Service
+    KF5::Codecs
+    KF5::KIOCore
+    KF5::KIOWidgets
+    Alkimia::alkimia
+    kmm_mymoney
+    kmm_csvimportercore
+  PRIVATE
+    KF5::I18n
 )
 
 target_link_libraries( kmm_utils_platformtools
@@ -74,7 +86,14 @@ set_target_properties(kmm_printer PROPERTIES
 
 generate_export_header(kmm_printer)
 
-install(TARGETS kmm_printer ${INSTALL_TARGETS_DEFAULT_ARGS} )
+set_target_properties(kmm_webconnect PROPERTIES
+  VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
+)
+
+generate_export_header(kmm_webconnect)
+
+install(TARGETS kmm_printer kmm_webconnect ${INSTALL_TARGETS_DEFAULT_ARGS} )
+
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_printer_export.h
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
 

@@ -230,7 +230,7 @@ QStringList CsvExportDlg::getAccounts()
     }
     ++it_account;
   }
-  qSort(list.begin(), list.end(), caseInsensitiveLessThan);
+  std::sort(list.begin(), list.end(), caseInsensitiveLessThan);
   return list;
 }
 

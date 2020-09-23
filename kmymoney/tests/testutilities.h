@@ -1,5 +1,5 @@
 /*
- * Copyright 2005-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2005-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2005-2006  Ace Jones <acejones@users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or
@@ -27,6 +27,7 @@ class QDomDocument;
 #include "mymoneyaccount.h"
 #include "mymoneytransaction.h"
 #include "mymoneymoney.h"
+#include "mymoneysecurity.h"
 class MyMoneyReport;
 
 namespace reports
@@ -56,6 +57,7 @@ extern QString acLiability;
 extern QString acExpense;
 extern QString acIncome;
 extern QString acChecking;
+extern QString acTransfer;
 extern QString acCredit;
 extern QString acSolo;
 extern QString acParent;
@@ -83,6 +85,7 @@ extern QString acInterest;
 extern QString acFees;
 extern QString acTax;
 extern QString acCash;
+extern QString curBase;
 
 class TransactionHelper: public MyMoneyTransaction
 {
@@ -120,6 +123,8 @@ class BudgetHelper: public QList<BudgetEntryHelper>
   MyMoneyMoney budgetAmount(const QDate& _date, const QString& _categoryid, bool& _applytosub);
 };
 
+extern QString makeBaseCurrency(const MyMoneySecurity& currency = MyMoneySecurity("EUR", "Euro", QChar(0x20ac)));
+extern QString makeAccount(const QString& id, const QString& _name, eMyMoney::Account::Type _type, MyMoneyMoney _balance, const QDate& _open, const QString& _parent, QString _currency = "", bool _taxReport = false, bool _openingBalance = false);
 extern QString makeAccount(const QString& _name, eMyMoney::Account::Type _type, MyMoneyMoney _balance, const QDate& _open, const QString& _parent, QString _currency = "", bool _taxReport = false, bool _openingBalance = false);
 extern void makePrice(const QString& _currencyid, const QDate& _date, const MyMoneyMoney& _price);
 QString makeEquity(const QString& _name, const QString& _symbol);

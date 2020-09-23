@@ -32,7 +32,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyaccountsviewbase.h"
+#include "kmymoneyviewbase.h"
 
 class MyMoneyMoney;
 class MyMoneyAccount;
@@ -58,7 +58,7 @@ class MyMoneyAccount;
   * accessible from either the main menu or the context menu.
   */
 class KCategoriesViewPrivate;
-class KCategoriesView : public KMyMoneyAccountsViewBase
+class KCategoriesView : public KMyMoneyViewBase
 {
   Q_OBJECT
 
@@ -71,11 +71,13 @@ public:
   void updateActions(const MyMoneyObject& obj);
 
 public Q_SLOTS:
-  void slotProfitChanged(const MyMoneyMoney &);
+  void slotProfitLossChanged(const MyMoneyMoney &profit, bool isApproximate);
   void slotShowCategoriesMenu(const MyMoneyAccount& acc);
 
   void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
   void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
+
+  void slotSettingsChanged() override;
 
 protected:
   void showEvent(QShowEvent * event) override;

@@ -11,7 +11,16 @@
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -25,15 +34,50 @@
      <widget class="QWidget" name="newLedgerTab">
       <attribute name="icon">
        <iconset theme="list-add">
-        <normaloff/>
-       </iconset>
+        <normaloff>.</normaloff>.</iconset>
       </attribute>
       <attribute name="title">
        <string notr="true"/>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="2,0,2">
        <item>
-        <widget class="KMyMoneyAccountCombo" name="accountCombo"/>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This page shows the accounts ledger. Currently, no account exist so this text is shown instead.&lt;/p&gt;&lt;p&gt;Once you created the first asset or liability account its transactions will be presented here.&lt;/p&gt;&lt;p&gt;Accounts marked as favorites will be opened automatically after KMyMoney opened the file or database. Use the + button on the tabbar above to add accounts.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -41,13 +85,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KMyMoneyAccountCombo</class>
-   <extends>QComboBox</extends>
-   <header>kmymoneyaccountcombo.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

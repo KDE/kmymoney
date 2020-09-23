@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Currencies</string>
+   <string comment="@title:window">Currencies</string>
   </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>
@@ -39,27 +39,27 @@
      </property>
      <column>
       <property name="text">
-       <string comment="@title header of the currency name column">Name</string>
+       <string comment="@title:column currency name">Name</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>ID</string>
+       <string comment="@title:column currency ISO4217 code">ISO 4217 ID</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Symbol</string>
+       <string comment="@title:column currency symbol">Symbol</string>
       </property>
      </column>
     </widget>
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="1">
+     <item row="1" column="2">
       <widget class="QPushButton" name="m_removeCurrencyButton">
        <property name="text">
-        <string>Remove</string>
+        <string comment="@action:button Remove currency">Remove</string>
        </property>
        <property name="icon">
         <iconset theme="list-remove">
@@ -70,7 +70,7 @@
      <item row="1" column="0">
       <widget class="QPushButton" name="m_addCurrencyButton">
        <property name="text">
-        <string>Add</string>
+        <string comment="@action:button Add currency from existing list">Add</string>
        </property>
        <property name="icon">
         <iconset theme="list-add">
@@ -78,17 +78,17 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="2">
+     <item row="1" column="3">
       <widget class="QPushButton" name="m_editCurrencyButton">
        <property name="text">
-        <string>Edit</string>
+        <string comment="@action:button Edit currency">Edit</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="0" colspan="3">
+     <item row="2" column="0" colspan="4">
       <widget class="QPushButton" name="m_removeUnusedCurrencyButton">
        <property name="text">
-        <string>Remove unused currencies</string>
+        <string comment="@action:button">Remove unused currencies</string>
        </property>
        <property name="icon">
         <iconset theme="edit-clear">
@@ -96,17 +96,24 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="2">
+     <item row="4" column="3">
       <widget class="QPushButton" name="m_closeButton">
        <property name="text">
-        <string>Close</string>
+        <string comment="@action:button Close currency dialog">Close</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="0" colspan="2">
+     <item row="4" column="0" colspan="3">
       <widget class="QPushButton" name="m_selectBaseCurrencyButton">
        <property name="text">
-        <string>Select as base currency</string>
+        <string comment="@action:button">Select as base currency</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="m_newCurrencyButton">
+       <property name="text">
+        <string comment="@action:button Create new currency">New</string>
        </property>
       </widget>
      </item>
@@ -118,6 +125,7 @@
  <tabstops>
   <tabstop>m_currencyList</tabstop>
   <tabstop>m_addCurrencyButton</tabstop>
+  <tabstop>m_newCurrencyButton</tabstop>
   <tabstop>m_removeCurrencyButton</tabstop>
   <tabstop>m_editCurrencyButton</tabstop>
   <tabstop>m_removeUnusedCurrencyButton</tabstop>

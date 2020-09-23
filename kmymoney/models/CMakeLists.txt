@@ -1,26 +1,22 @@
 set(libmodels_a_SOURCES
-    costcentermodel.cpp
-    accountsmodel.cpp
     accountsproxymodel.cpp
+    institutionsproxymodel.cpp
     onlinebankingaccountsfilterproxymodel.cpp
-    ../plugins/onlinetasks/interfaces/tasks/credittransfer.cpp
-    models.cpp
     payeeidentifiercontainermodel.cpp
     equitiesmodel.cpp
-    securitiesmodel.cpp
-)
-
-if(ENABLE_UNFINISHEDFEATURES)
-  list(APPEND libmodels_a_SOURCES
+    securitiesfilterproxymodel.cpp
+    delegateproxy.cpp
+    itemrenameproxymodel.cpp
+    onlinebalanceproxymodel.cpp
     ledgermodel.cpp
     ledgeritem.cpp
-    ledgerproxymodel.cpp
+    ledgerfilterbase.cpp
     ledgerschedule.cpp
     ledgersplit.cpp
     ledgertransaction.cpp
-    splitmodel.cpp
-  )
-endif()
+    specialdatesfilter.cpp
+    idfilter.cpp
+)
 
 if (USE_MODELTEST)
   list(APPEND libmodels_a_SOURCES modeltest.cpp)
@@ -34,8 +30,9 @@ target_link_libraries(kmm_models PUBLIC
     Qt5::Core
     kmm_mymoney
     kmm_settings
+    kmymoney_common
+    onlinetask_interfaces
     KF5::ItemModels
-    $<$<BOOL:${ENABLE_UNFINISHEDFEATURES}>:kmymoney_common>
 )
 set_target_properties(kmm_models PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR})
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2004-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2009-2010  Alvaro Soliverez <asoliverez@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
@@ -19,6 +19,8 @@
 
 #ifndef KCURRENCYEDITDLG_H
 #define KCURRENCYEDITDLG_H
+
+#include "kmm_base_dialogs_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -41,7 +43,7 @@ class MyMoneySecurity;
   * @author Thomas Baumgart
   */
 class KCurrencyEditDlgPrivate;
-class KCurrencyEditDlg : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KCurrencyEditDlg : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(KCurrencyEditDlg)
@@ -67,7 +69,7 @@ private:
   Q_DECLARE_PRIVATE(KCurrencyEditDlg)
 
 private Q_SLOTS:
-  void timerDone();
+  void finishCtor();
   void slotSelectBaseCurrency();
   void slotAddCurrency();
   void slotRemoveCurrency();

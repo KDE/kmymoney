@@ -44,7 +44,7 @@
 <qandaentry>
  <question>
    <para>Will &kmymoney; work on my X/&ubuntu; desktop? Will &kmymoney; work
-   without a full KDE desktop?</para>
+   without a full &kde; desktop?</para>
  </question>
  <answer>
    <para>Yes, &kmymoney; will work without a full &kde; desktop, but you will
@@ -176,7 +176,7 @@
    transaction. Is there a global search/replace?</para>
  </question>
  <answer>
-   <para>There is no global search and replace function in KMyMoney.
+   <para>There is no global search and replace function in &kmymoney;.
    Nevertheless, it is easy to change a payees name: select the Payees view and
    find the entry with the name you want to change.  Click with the &RMB; on the
    payee, and select <guimenuitem>Rename payee</guimenuitem> from the context menu.
@@ -231,7 +231,7 @@
    into your language, please post a message to the proper <ulink
    url="https://l10n.kde.org/teams-list.php">team mailing list</ulink>. Should
    you fail to find your language in the list or could not contact the team
-   members please mail directly to the <ulink url="mailto:kde-i18n-doc@kde.org">KDE
+   members please mail directly to the <ulink url="mailto:kde-i18n-doc@kde.org">&kde;
    translation mailing list</ulink> (<ulink
    url="https://mail.kde.org/mailman/listinfo/kde-i18n-doc">subscription</ulink>
    required) and we will give you the details on how you can

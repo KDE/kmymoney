@@ -541,10 +541,11 @@ const MyMoneyTransaction KEditLoanWizard::transaction() const
 {
   Q_D(const KEditLoanWizard);
   auto t = d->transaction();
-  auto s = t.splitByAccount(QString("Phony-ID"));
+  if (t.splitCount() > 1) {
+    auto s = t.splitByAccount(QString("Phony-ID"));
 
-  s.setAccountId(d->m_account.id());
-  t.modifySplit(s);
-
+    s.setAccountId(d->m_account.id());
+    t.modifySplit(s);
+  }
   return t;
 }

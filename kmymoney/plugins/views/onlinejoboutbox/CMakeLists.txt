@@ -6,7 +6,6 @@ set(onlinejoboutboxview_SOURCES
   konlinetransferform.cpp
   onlinejobmodel.cpp
   onlinejobmessagesmodel.cpp
-  ${CMAKE_SOURCE_DIR}/kmymoney/widgets/kmymoneyaccountcombo.cpp
   )
 
 ki18n_wrap_ui(onlinejoboutboxview_SOURCES
@@ -29,6 +28,7 @@ target_link_libraries(onlinejoboutboxview
     kmm_plugin
     kmm_models
     kmm_widgets
+    kmm_base_widgets
     onlinetask_interfaces
     KF5::TextWidgets
     kmm_menus

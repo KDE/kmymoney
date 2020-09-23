@@ -193,7 +193,7 @@ protected:
     * @param stockSplit Whether this is a stock split (@p true) or an actual
     *                   value (@p false). Defaults to @p false.
     */
-  inline void assignCell(const QString& outergroup, const ReportAccount& row, int column, MyMoneyMoney value, bool budget = false, bool stockSplit = false);
+  void assignCell(const QString& outergroup, const ReportAccount& row, int column, MyMoneyMoney value, bool budget = false, bool stockSplit = false);
 
   /**
     * Create a row for each included account. This is used when

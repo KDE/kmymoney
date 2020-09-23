@@ -53,6 +53,7 @@ public:
 
   ibanBic();
   ibanBic(const ibanBic& other);
+  ibanBic& operator=(const ibanBic& other) = default;
 
   ibanBic* clone() const final override;
   ibanBic* createFromXml(const QDomElement& element) const final override;

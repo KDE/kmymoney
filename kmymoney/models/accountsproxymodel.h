@@ -1,6 +1,7 @@
 /*
  * Copyright 2010-2014  Cristian Oneț <onet.cristian@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019-2020  Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -38,6 +39,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyenums.h"
+
 /**
   * A proxy model to provide various sorting and filtering operations for @ref AccountsModel.
   *
@@ -45,10 +48,9 @@
   * (in the example @a widget is a pointer to a model/view widget):
   *
   * @code
-  *   AccountsFilterProxyModel *filterModel = new AccountsFilterProxyModel(widget);
-  *   filterModel->addAccountGroup(eMyMoney::Account::Type::Asset);
-  *   filterModel->addAccountGroup(eMyMoney::Account::Type::Liability);
-  *   filterModel->setSourceModel(Models::instance()->accountsModel());
+  *   AccountsProxyModel *filterModel = new AccountsProxyModel(widget);
+  *   filterModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquity());
+  *   filterModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
   *   filterModel->sort(0);
   *
   *   widget->setModel(filterModel);
@@ -57,6 +59,7 @@
   * @see AccountsModel
   *
   * @author Cristian Onet 2010
+  * @author Thomas Baumgart 2019
   *
   */
 
@@ -88,9 +91,31 @@ public:
   void setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncomeExpenseAccounts);
   bool hideUnusedIncomeExpenseAccounts() const;
 
+  void setHideFavoriteAccounts(bool hideFavoriteAccounts);
+  bool hideFavoriteAccounts() const;
+
+  void setHideAllEntries(bool hideAllEntries);
+  bool hideAllEntries() const;
+
   int visibleItems(bool includeBaseAccounts = false) const;
 
-  void setSourceColumns(QList<eAccountsModel::Column> *columns);
+  void setNotSelectable(const QString& accountId);
+
+  Qt::ItemFlags flags(const QModelIndex &index) const override;
+
+  /**
+   * This is a convenience method which returns a prefilled vector
+   * to be used with accAccountGroup() for asset, liability and equity
+   * accounts.
+   */
+  static QVector<eMyMoney::Account::Type> assetLiabilityEquity();
+
+  /**
+   * This is a convenience method which returns a prefilled vector
+   * to be used with accAccountGroup() for income and expense
+   * accounts.
+   */
+  static QVector<eMyMoney::Account::Type> incomeExpense();
 
 protected:
   const QScopedPointer<AccountsProxyModelPrivate> d_ptr;
@@ -105,17 +130,97 @@ protected:
   int visibleItems(const QModelIndex& index) const;
 
 Q_SIGNALS:
-  void unusedIncomeExpenseAccountHidden();
+  void unusedIncomeExpenseAccountHidden() const;
 
 private:
   Q_DECLARE_PRIVATE(AccountsProxyModel)
 
 #if QT_VERSION < QT_VERSION_CHECK(5,10,0)
   // provide the interface for backward compatbility
-  void setRecursiveFilteringEnabled(bool) {}
+  void setRecursiveFilteringEnabled(bool enable) { Q_UNUSED(enable) }
 #endif
 
 };
 
 #undef QSortFilterProxyModel
+
+/**
+ * A proxy model used to filter all the data from the core accounts model leaving
+ * only the name of the accounts so this model can be used in the account
+ * completion combo.
+ *
+ * It shows only the first column (account name) and makes top level items non-selectable.
+ *
+ * @see AccountsModel
+ * @see AccountsProxyModel
+ *
+ * @author Cristian Onet 2010
+ * @author Christian David
+ */
+
+template <class baseProxyModel>
+class AccountNamesFilterProxyModelTpl : public baseProxyModel
+{
+public:
+  explicit AccountNamesFilterProxyModelTpl(QObject *parent = 0)
+    : baseProxyModel(parent)
+  {}
+
+  /**
+   * Top items are not selectable because they are not real accounts but are only used for grouping.
+   */
+  virtual Qt::ItemFlags flags(const QModelIndex &idx) const override
+  {
+    if (!idx.parent().isValid())
+      return baseProxyModel::flags(idx) & ~Qt::ItemIsSelectable;
+    return baseProxyModel::flags(idx);
+  }
+
+  /**
+   * The Qt::EditRole returns the full account name including parent account name
+   */
+  virtual QVariant data(const QModelIndex& idx, int role) const override
+  {
+    if (role == Qt::EditRole) {
+      return baseProxyModel::data(idx, eMyMoney::Model::AccountFullNameRole);
+    }
+    return baseProxyModel::data(idx, role);
+  }
+
+protected:
+  /**
+   * Filter all but the first column.
+   */
+  bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override
+  {
+    Q_UNUSED(source_parent)
+    if (source_column == 0)
+      return true;
+    return false;
+  }
+};
+
+/**
+ * @brief "typedef" for AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel>
+ *
+ * To create valid Qt moc data this class inherits the template and uses Q_OBJECT.
+ * Simply using a typedef like
+ *
+ * @code
+ * typedef AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel> AccountNamesFilterProxyModel;
+ * @endcode
+ *
+ * does not work, because at some point the code needs to use qobject_cast<> to promote a
+ * returned QSortFilterProxyModel pointer to an AccountNamesFilterProxyModel which is
+ * only possible with Q_OBJECT being in place.
+ */
+class KMM_MODELS_EXPORT AccountNamesFilterProxyModel : public AccountNamesFilterProxyModelTpl<AccountsProxyModel>
+{
+  Q_OBJECT
+public:
+  explicit AccountNamesFilterProxyModel(QObject* parent = 0)
+  : AccountNamesFilterProxyModelTpl< AccountsProxyModel >(parent) {}
+};
+
+
 #endif

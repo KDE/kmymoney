@@ -92,14 +92,14 @@ class KTagsViewPrivate : public KMyMoneyViewBasePrivate
   Q_DECLARE_PUBLIC(KTagsView)
 
 public:
-  explicit KTagsViewPrivate(KTagsView *qq) :
-    q_ptr(qq),
-    ui(new Ui::KTagsView),
-    m_needLoad(true),
-    m_searchWidget(nullptr),
-    m_inSelection(false),
-    m_allowEditing(true),
-    m_tagFilterType(0)
+  explicit KTagsViewPrivate(KTagsView *qq)
+    : KMyMoneyViewBasePrivate(qq)
+    , ui(new Ui::KTagsView)
+    , m_needLoad(true)
+    , m_searchWidget(nullptr)
+    , m_inSelection(false)
+    , m_allowEditing(true)
+    , m_tagFilterType(0)
   {
   }
 
@@ -212,7 +212,6 @@ public:
     return rc;
   }
 
-  KTagsView       *q_ptr;
   Ui::KTagsView   *ui;
 
   MyMoneyTag   m_tag;

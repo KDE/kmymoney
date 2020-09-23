@@ -57,7 +57,6 @@
 #include "registersearchline.h"
 #include "kfindtransactiondlg.h"
 #include "accountsmodel.h"
-#include "models.h"
 #include "mymoneyschedule.h"
 #include "mymoneysecurity.h"
 #include "mymoneytransaction.h"
@@ -174,38 +173,36 @@ void KGlobalLedgerView::refresh()
 
 void KGlobalLedgerView::showEvent(QShowEvent* event)
 {
-  if (MyMoneyFile::instance()->storageAttached()) {
-    Q_D(KGlobalLedgerView);
-    if (d->m_needLoad)
-      d->init();
+  Q_D(KGlobalLedgerView);
+  if (d->m_needLoad)
+    d->init();
 
-    emit customActionRequested(View::Ledgers, eView::Action::AboutToShow);
+  emit customActionRequested(View::OldLedgers, eView::Action::AboutToShow);
 
-    if (d->m_needsRefresh) {
-      if (!d->m_inEditMode) {
-        setUpdatesEnabled(false);
-        d->loadView();
-        setUpdatesEnabled(true);
-        d->m_needsRefresh = false;
-        d->m_newAccountLoaded = false;
-      }
-
-    } else {
-      if (!d->m_lastSelectedAccountID.isEmpty()) {
-        try {
-          const auto acc = MyMoneyFile::instance()->account(d->m_lastSelectedAccountID);
-          slotSelectAccount(acc.id());
-        } catch (const MyMoneyException &) {
-          d->m_lastSelectedAccountID.clear();                                               // account is invalid
-        }
-      } else {
-        slotSelectAccount(d->m_accountComboBox->getSelected());
-      }
-
-      KMyMoneyRegister::SelectedTransactions list(d->m_register);
-      updateLedgerActions(list);
-      emit selectByVariant(QVariantList {QVariant::fromValue(list)}, eView::Intent::SelectRegisterTransactions);
+  if (d->m_needsRefresh) {
+    if (!d->m_inEditMode) {
+      setUpdatesEnabled(false);
+      d->loadView();
+      setUpdatesEnabled(true);
+      d->m_needsRefresh = false;
+      d->m_newAccountLoaded = false;
     }
+
+  } else {
+    if (!d->m_lastSelectedAccountID.isEmpty()) {
+      try {
+        const auto acc = MyMoneyFile::instance()->account(d->m_lastSelectedAccountID);
+        slotSelectAccount(acc.id());
+      } catch (const MyMoneyException &) {
+        d->m_lastSelectedAccountID.clear();                                               // account is invalid
+      }
+    } else {
+      slotSelectAccount(d->m_accountComboBox->getSelected());
+    }
+
+    KMyMoneyRegister::SelectedTransactions list(d->m_register);
+    updateLedgerActions(list);
+    emit selectByVariant(QVariantList {QVariant::fromValue(list)}, eView::Intent::SelectRegisterTransactions);
   }
 
   pActions[Action::SelectAllTransactions]->setEnabled(true);
@@ -448,7 +445,7 @@ void KGlobalLedgerView::slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTr
         balance += t.split().shares();
       }
     }
-    d->m_rightSummaryLabel->setText(QString("%1: %2").arg(QChar(0x2211), balance.formatMoney("", d->m_precision)));
+    d->m_rightSummaryLabel->setText(QString("%1: %2").arg(QChar(0x2211), balance.formatMoney("", -1)));
 
   } else {
     if (d->isReconciliationAccount()) {
@@ -476,14 +473,13 @@ void KGlobalLedgerView::slotUpdateSummaryLine(const KMyMoneyRegister::SelectedTr
 
 void KGlobalLedgerView::resizeEvent(QResizeEvent* ev)
 {
-  if (MyMoneyFile::instance()->storageAttached()) {
-    Q_D(KGlobalLedgerView);
-    if (d->m_needLoad)
-      d->init();
+  Q_D(KGlobalLedgerView);
+  if (d->m_needLoad)
+    d->init();
 
-    d->m_register->resize((int)eWidgets::eTransaction::Column::Detail);
-    d->m_form->resize((int)eWidgets::eTransactionForm::Column::Value1);
-  }
+  d->m_register->resize((int)eWidgets::eTransaction::Column::Detail);
+  d->m_form->resize((int)eWidgets::eTransactionForm::Column::Value1);
+
   KMyMoneyViewBase::resizeEvent(ev);
 }
 
@@ -597,8 +593,11 @@ void KGlobalLedgerView::slotContinueReconciliation()
         if (!file->isStandardAccount(account.id()) &&
             account.isAssetLiability()) {
           if (!isVisible())
-            emit customActionRequested(View::Ledgers, eView::Action::SwitchView);
-          Models::instance()->accountsModel()->slotReconcileAccount(account, d->m_endingBalanceDlg->statementDate(), d->m_endingBalanceDlg->endingBalance());
+            emit customActionRequested(View::OldLedgers, eView::Action::SwitchView);
+/// @todo port to new model code
+#if 0
+          MyMoneyFile::instance()->accountsModel()->slotReconcileAccount(account, d->m_endingBalanceDlg->statementDate(), d->m_endingBalanceDlg->endingBalance());
+#endif
           slotSetReconcileAccount(account, d->m_endingBalanceDlg->statementDate(), d->m_endingBalanceDlg->endingBalance());
 
           // check if the user requests us to create interest
@@ -657,7 +656,7 @@ void KGlobalLedgerView::slotLedgerSelected(const QString& _accId, const QString&
     case Account::Type::Investment:
     case Account::Type::Equity:
       if (!isVisible())
-        emit customActionRequested(View::Ledgers, eView::Action::SwitchView);
+        emit customActionRequested(View::OldLedgers, eView::Action::SwitchView);
       slotSelectAccount(accId, transaction);
       break;
 
@@ -1959,10 +1958,12 @@ void KGlobalLedgerView::slotStartReconciliation()
   Q_D(KGlobalLedgerView);
 
   // we cannot reconcile standard accounts
-  if (!MyMoneyFile::instance()->isStandardAccount(d->m_currentAccount.id()))
+  if (!MyMoneyFile::instance()->isStandardAccount(d->m_currentAccount.id())) {
+    emit selectByObject(d->m_currentAccount, eView::Intent::SynchronizeAccountInLedgersView);
     emit selectByObject(d->m_currentAccount, eView::Intent::StartEnteringOverdueScheduledTransactions);
-  // asynchronous call to KScheduledView::slotEnterOverdueSchedules is made here
-  // after that all activity should be continued in KGlobalLedgerView::slotContinueReconciliation()
+    // asynchronous call to KScheduledView::slotEnterOverdueSchedules is made here
+    // after that all activity should be continued in KGlobalLedgerView::slotContinueReconciliation()
+  }
 }
 
 void KGlobalLedgerView::slotFinishReconciliation()
@@ -2005,7 +2006,7 @@ void KGlobalLedgerView::slotFinishReconciliation()
     d->m_reconciliationAccount = file->account(d->m_reconciliationAccount.id());
 
     // Turn off reconciliation mode
-//    Models::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+//    MyMoneyFile::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 //    slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 //    d->m_myMoneyView->finishReconciliation(d->m_reconciliationAccount);
 
@@ -2091,7 +2092,10 @@ void KGlobalLedgerView::slotFinishReconciliation()
       qDebug("Unexpected exception when setting cleared to reconcile");
     }
     // Turn off reconciliation mode
-    Models::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+/// @todo port to new model code
+#if 0
+    MyMoneyFile::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+#endif
     slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
   }
   // Turn off reconciliation mode
@@ -2113,7 +2117,7 @@ void KGlobalLedgerView::slotPostponeReconciliation()
     d->m_reconciliationAccount = file->account(d->m_reconciliationAccount.id());
 
     // Turn off reconciliation mode
-//    Models::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+//    MyMoneyFile::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 //    slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 //    d->m_myMoneyView->finishReconciliation(d->m_reconciliationAccount);
 
@@ -2134,7 +2138,10 @@ void KGlobalLedgerView::slotPostponeReconciliation()
       d->m_reconciliationAccount = file->account(d->m_reconciliationAccount.id());
     }
     // Turn off reconciliation mode
-    Models::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+/// @todo port to new model code
+#if 0
+    MyMoneyFile::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+#endif
     slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
     d->loadView();
   }

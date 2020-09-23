@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2002-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2004       Ace Jones <acejones@users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or
@@ -25,8 +25,8 @@
 #include <QList>
 #include <QtTest>
 
-#include "mymoneystoragemgr_p.h"
 #include "mymoneytestutils.h"
+#include "mymoneyexception.h"
 #include "mymoneymoney.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
@@ -38,15 +38,16 @@
 #include "mymoneypayee.h"
 #include "mymoneyenums.h"
 #include "onlinejob.h"
+#include "payeesmodel.h"
+#include "accountsmodel.h"
 
 #include "payeeidentifier/ibanbic/ibanbic.h"
 #include "payeeidentifiertyped.h"
 
 QTEST_GUILESS_MAIN(MyMoneyFileTest)
 
-MyMoneyFileTest::MyMoneyFileTest() :
-  m(nullptr),
-  storage(nullptr)
+MyMoneyFileTest::MyMoneyFileTest()
+  : m(nullptr)
 {
 }
 
@@ -87,6 +88,19 @@ void MyMoneyFileTest::valueChanged(const MyMoneyAccount& account)
   m_valueChanged += account.id();
 }
 
+void MyMoneyFileTest::setupBaseCurrency()
+{
+  MyMoneySecurity base("EUR", "Euro", QChar(0x20ac));
+  MyMoneyFileTransaction ft;
+  try {
+    m->currency(base.id());
+  } catch (const MyMoneyException &e) {
+    m->addCurrency(base);
+  }
+  m->setBaseCurrency(base);
+  ft.commit();
+}
+
 // this method will be called once at the beginning of the test
 void MyMoneyFileTest::initTestCase()
 {
@@ -102,16 +116,13 @@ void MyMoneyFileTest::initTestCase()
 // this method will be called before each testfunction
 void MyMoneyFileTest::init()
 {
-  storage = new MyMoneyStorageMgr;
-  m->attachStorage(storage);
   clearObjectLists();
 }
 
 // this method will be called after each testfunction
 void MyMoneyFileTest::cleanup()
 {
-  m->detachStorage(storage);
-  delete storage;
+  m->unload();
 }
 
 void MyMoneyFileTest::testEmptyConstructor()
@@ -128,7 +139,7 @@ void MyMoneyFileTest::testEmptyConstructor()
 
   QCOMPARE(m->institutionCount(), static_cast<unsigned>(0));
   QCOMPARE(m->dirty(), false);
-  QCOMPARE(m->accountCount(), static_cast<unsigned>(5));
+  QCOMPARE(m->accountsModel()->itemList().count(), 0);
 }
 
 void MyMoneyFileTest::testAddOneInstitution()
@@ -149,7 +160,8 @@ void MyMoneyFileTest::testAddOneInstitution()
   institution_noname.setName(QString());
 
   QCOMPARE(m->institutionCount(), static_cast<unsigned>(0));
-  storage->d_func()->m_dirty = false;
+
+  m->setDirty(false);
 
   clearObjectLists();
   MyMoneyFileTransaction ft;
@@ -207,7 +219,8 @@ void MyMoneyFileTest::testAddTwoInstitutions()
   institution.setManager("manager");
   institution.setSortcode("sortcode");
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
+
   MyMoneyFileTransaction ft;
   try {
     m->addInstitution(institution);
@@ -220,7 +233,7 @@ void MyMoneyFileTest::testAddTwoInstitutions()
     QFAIL("Unexpected exception");
   }
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
   try {
     institution = m->institution("I000001");
@@ -251,7 +264,7 @@ void MyMoneyFileTest::testRemoveInstitution()
 
   clearObjectLists();
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
   MyMoneyFileTransaction ft;
   try {
     m->removeInstitution(i);
@@ -269,7 +282,7 @@ void MyMoneyFileTest::testRemoveInstitution()
     QFAIL("Unexpected exception");
   }
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
   try {
     m->institution("I000001");
@@ -297,7 +310,7 @@ void MyMoneyFileTest::testInstitutionRetrieval()
 
   testAddOneInstitution();
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
   MyMoneyInstitution institution;
 
@@ -325,14 +338,14 @@ void MyMoneyFileTest::testInstitutionListRetrieval()
 {
   QList<MyMoneyInstitution> list;
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
   list = m->institutionList();
   QCOMPARE(m->dirty(), false);
   QCOMPARE(list.count(), 0);
 
   testAddTwoInstitutions();
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
   list = m->institutionList();
   QCOMPARE(m->dirty(), false);
   QCOMPARE(list.count(), 2);
@@ -361,7 +374,7 @@ void MyMoneyFileTest::testInstitutionModify()
   institution.setName("new name");
   institution.setSortcode("new sortcode");
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
   clearObjectLists();
   MyMoneyFileTransaction ft;
@@ -394,7 +407,7 @@ void MyMoneyFileTest::testInstitutionModify()
   QCOMPARE(newInstitution.name(), QLatin1String("new name"));
   QCOMPARE(newInstitution.sortcode(), QLatin1String("new sortcode"));
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
   ft.restart();
   MyMoneyInstitution failInstitution2("I000003", newInstitution);
@@ -422,35 +435,35 @@ void MyMoneyFileTest::testSetFunctions()
   QCOMPARE(user.email(), QString());
 
   MyMoneyFileTransaction ft;
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
   user.setName("Name");
   m->setUser(user);
   QCOMPARE(m->dirty(), true);
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
   user.setAddress("Street");
   m->setUser(user);
   QCOMPARE(m->dirty(), true);
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
   user.setCity("Town");
   m->setUser(user);
   QCOMPARE(m->dirty(), true);
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
   user.setState("County");
   m->setUser(user);
   QCOMPARE(m->dirty(), true);
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
   user.setPostcode("Postcode");
   m->setUser(user);
   QCOMPARE(m->dirty(), true);
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
   user.setTelephone("Telephone");
   m->setUser(user);
   QCOMPARE(m->dirty(), true);
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
   user.setEmail("Email");
   m->setUser(user);
   QCOMPARE(m->dirty(), true);
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
   ft.commit();
   user = m->user();
@@ -466,15 +479,16 @@ void MyMoneyFileTest::testSetFunctions()
 void MyMoneyFileTest::testAddAccounts()
 {
   testAddTwoInstitutions();
+  setupBaseCurrency();
   MyMoneyAccount  a, b, c;
   a.setAccountType(eMyMoney::Account::Type::Checkings);
   b.setAccountType(eMyMoney::Account::Type::Checkings);
 
   MyMoneyInstitution institution;
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
-  QCOMPARE(m->accountCount(), static_cast<unsigned>(5));
+  QCOMPARE(m->accountsModel()->itemList().count(), 0);
 
   institution = m->institution("I000001");
   QCOMPARE(institution.id(), QLatin1String("I000001"));
@@ -489,7 +503,7 @@ void MyMoneyFileTest::testAddAccounts()
     MyMoneyAccount parent = m->asset();
     m->addAccount(a, parent);
     ft.commit();
-    QCOMPARE(m->accountCount(), static_cast<unsigned>(6));
+    QCOMPARE(m->accountsModel()->itemList().count(), 1);
     QCOMPARE(a.parentAccountId(), QLatin1String("AStd::Asset"));
     QCOMPARE(a.id(), QLatin1String("A000001"));
     QCOMPARE(a.institutionId(), QLatin1String("I000001"));
@@ -531,7 +545,7 @@ void MyMoneyFileTest::testAddAccounts()
   a = m->account("A000001");
   QCOMPARE(a.name(), QLatin1String("Account1"));
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
   // check if we can get the same info to a different object
   c = m->account("A000001");
@@ -557,7 +571,7 @@ void MyMoneyFileTest::testAddAccounts()
     QCOMPARE(b.id(), QLatin1String("A000002"));
     QCOMPARE(b.currencyId(), QLatin1String("EUR"));
     QCOMPARE(b.parentAccountId(), QLatin1String("AStd::Asset"));
-    QCOMPARE(m->accountCount(), static_cast<unsigned>(7));
+    QCOMPARE(m->accountsModel()->itemList().count(), 2);
 
     institution = m->institution("I000001");
     QCOMPARE(institution.accountCount(), static_cast<unsigned>(1));
@@ -596,14 +610,16 @@ void MyMoneyFileTest::testAddAccounts()
 
 void MyMoneyFileTest::testAddCategories()
 {
+  setupBaseCurrency();
+
   MyMoneyAccount  a, b, c;
   a.setAccountType(eMyMoney::Account::Type::Income);
   a.setOpeningDate(QDate::currentDate());
   b.setAccountType(eMyMoney::Account::Type::Expense);
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
-  QCOMPARE(m->accountCount(), static_cast<unsigned>(5));
+  QCOMPARE(m->accountsModel()->itemList().count(), 0);
   QCOMPARE(a.openingDate(), QDate::currentDate());
   QVERIFY(!b.openingDate().isValid());
 
@@ -616,7 +632,7 @@ void MyMoneyFileTest::testAddCategories()
     MyMoneyAccount parent = m->income();
     m->addAccount(a, parent);
     ft.commit();
-    QCOMPARE(m->accountCount(), static_cast<unsigned>(6));
+    QCOMPARE(m->accountsModel()->itemList().count(), 1);
     QCOMPARE(a.parentAccountId(), QLatin1String("AStd::Income"));
     QCOMPARE(a.id(), QLatin1String("A000001"));
     QCOMPARE(a.institutionId(), QString());
@@ -645,7 +661,7 @@ void MyMoneyFileTest::testAddCategories()
     QCOMPARE(b.currencyId(), QLatin1String("EUR"));
     QCOMPARE(b.openingDate(), QDate(1900, 1, 1));
     QCOMPARE(b.parentAccountId(), QLatin1String("AStd::Expense"));
-    QCOMPARE(m->accountCount(), static_cast<unsigned>(7));
+    QCOMPARE(m->accountsModel()->itemList().count(), 2);
 
     QCOMPARE(m->income().accountList().count(), 1);
     QCOMPARE(m->expense().accountList().count(), 1);
@@ -668,7 +684,7 @@ void MyMoneyFileTest::testAddCategories()
 void MyMoneyFileTest::testModifyAccount()
 {
   testAddAccounts();
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
   MyMoneyAccount p = m->account("A000001");
   MyMoneyInstitution institution;
@@ -684,7 +700,7 @@ void MyMoneyFileTest::testModifyAccount()
     ft.commit();
 
     QCOMPARE(m->dirty(), true);
-    QCOMPARE(m->accountCount(), static_cast<unsigned>(7));
+    QCOMPARE(m->accountsModel()->itemList().count(), 2);
     QCOMPARE(p.accountType(), eMyMoney::Account::Type::Checkings);
     QCOMPARE(p.name(), QLatin1String("New account name"));
 
@@ -698,7 +714,7 @@ void MyMoneyFileTest::testModifyAccount()
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception!");
   }
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
   // try to move account to new institution
   p.setInstitutionId("I000002");
@@ -709,7 +725,7 @@ void MyMoneyFileTest::testModifyAccount()
     ft.commit();
 
     QCOMPARE(m->dirty(), true);
-    QCOMPARE(m->accountCount(), static_cast<unsigned>(7));
+    QCOMPARE(m->accountsModel()->itemList().count(), 2);
     QCOMPARE(p.accountType(), eMyMoney::Account::Type::Checkings);
     QCOMPARE(p.name(), QLatin1String("New account name"));
     QCOMPARE(p.institutionId(), QLatin1String("I000002"));
@@ -734,7 +750,7 @@ void MyMoneyFileTest::testModifyAccount()
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception!");
   }
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
   // try to change to an account type that is allowed
   p.setAccountType(eMyMoney::Account::Type::Savings);
@@ -744,14 +760,14 @@ void MyMoneyFileTest::testModifyAccount()
     ft.commit();
 
     QCOMPARE(m->dirty(), true);
-    QCOMPARE(m->accountCount(), static_cast<unsigned>(7));
+    QCOMPARE(m->accountsModel()->itemList().count(), 2);
     QCOMPARE(p.accountType(), eMyMoney::Account::Type::Savings);
     QCOMPARE(p.name(), QLatin1String("New account name"));
 
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception!");
   }
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
   // try to change to an account type that is not allowed
   p.setAccountType(eMyMoney::Account::Type::CreditCard);
@@ -762,7 +778,7 @@ void MyMoneyFileTest::testModifyAccount()
   } catch (const MyMoneyException &) {
     ft.commit();
   }
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
   // try to fool engine a bit
   p.setParentAccountId("A000001");
@@ -778,7 +794,7 @@ void MyMoneyFileTest::testModifyAccount()
 void MyMoneyFileTest::testReparentAccount()
 {
   testAddAccounts();
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
   MyMoneyAccount p = m->account("A000001");
   MyMoneyAccount q = m->account("A000002");
@@ -834,8 +850,8 @@ void MyMoneyFileTest::testRemoveAccount()
   MyMoneyInstitution institution;
 
   testAddAccounts();
-  QCOMPARE(m->accountCount(), static_cast<unsigned>(7));
-  storage->d_func()->m_dirty = false;
+  QCOMPARE(m->accountsModel()->itemList().count(), 2);
+  m->setDirty(false);
 
   MyMoneyAccount p = m->account("A000001");
 
@@ -859,7 +875,7 @@ void MyMoneyFileTest::testRemoveAccount()
     m->removeAccount(p);
     ft.commit();
     QCOMPARE(m->dirty(), true);
-    QCOMPARE(m->accountCount(), static_cast<unsigned>(6));
+    QCOMPARE(m->accountsModel()->itemList().count(), 1);
     institution = m->institution("I000001");
     QCOMPARE(institution.accountCount(), static_cast<unsigned>(0));
     QCOMPARE(m->asset().accountList().count(), 1);
@@ -901,7 +917,7 @@ void MyMoneyFileTest::testRemoveAccountTree()
     ft.commit();
 
     QCOMPARE(m_objectsRemoved.count(), 1);
-    QCOMPARE(m_objectsModified.count(), 3);
+    QCOMPARE(m_objectsModified.count(), 5);
     QCOMPARE(m_objectsAdded.count(), 0);
     QCOMPARE(m_balanceChanged.count(), 0);
     QCOMPARE(m_valueChanged.count(), 0);
@@ -914,7 +930,7 @@ void MyMoneyFileTest::testRemoveAccountTree()
   } catch (const MyMoneyException &) {
     QFAIL("Unexpected exception!");
   }
-  QCOMPARE(m->accountCount(), static_cast<unsigned>(6));
+  QCOMPARE(m->accountsModel()->itemList().count(), 1);
 
   // make sure it's gone
   try {
@@ -936,14 +952,14 @@ void MyMoneyFileTest::testAccountListRetrieval()
 {
   QList<MyMoneyAccount> list;
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
   m->accountList(list);
   QCOMPARE(m->dirty(), false);
   QCOMPARE(list.count(), 0);
 
   testAddAccounts();
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
   list.clear();
   m->accountList(list);
   QCOMPARE(m->dirty(), false);
@@ -956,6 +972,8 @@ void MyMoneyFileTest::testAccountListRetrieval()
 void MyMoneyFileTest::testAddTransaction()
 {
   testAddAccounts();
+  setupBaseCurrency();
+
   MyMoneyTransaction t, p;
 
   MyMoneyAccount exp1;
@@ -988,7 +1006,7 @@ void MyMoneyFileTest::testAddTransaction()
   }
   ft.restart();
 
-  QCOMPARE(m->accountCount(), static_cast<unsigned>(9));
+  QCOMPARE(m->accountsModel()->itemList().count(), 4);
   a = m->account("A000001");
   QCOMPARE(a.lastModified(), QDate(1, 2, 3));
 
@@ -1021,7 +1039,7 @@ void MyMoneyFileTest::testAddTransaction()
           t.setNumber("1234");
           t.setState(MyMoneyCheckingTransaction::Cleared);
   */
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
   ft.restart();
   clearObjectLists();
@@ -1049,13 +1067,13 @@ void MyMoneyFileTest::testAddTransaction()
   // check the balance of the accounts
   a = m->account("A000001");
   QCOMPARE(a.lastModified(), QDate::currentDate());
-  QCOMPARE(a.balance(), MyMoneyMoney(-1000, 100));
+  QCOMPARE(a.balance().toDouble(), MyMoneyMoney(-1000, 100).toDouble());
 
   MyMoneyAccount b = m->account("A000003");
   QCOMPARE(b.lastModified(), QDate::currentDate());
   QCOMPARE(b.balance(), MyMoneyMoney(1000, 100));
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
   // locate transaction in MyMoneyFile via id
 
@@ -1125,7 +1143,7 @@ void MyMoneyFileTest::testModifyTransactionSimple()
 
   MyMoneyTransaction t = m->transaction("T000000000000000001");
   t.setMemo("New Memotext");
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
   MyMoneyFileTransaction ft;
   clearObjectLists();
@@ -1156,7 +1174,7 @@ void MyMoneyFileTest::testModifyTransactionNewPostDate()
 
   MyMoneyTransaction t = m->transaction("T000000000000000001");
   t.setPostDate(QDate(2004, 2, 1));
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
   MyMoneyFileTransaction ft;
   clearObjectLists();
@@ -1193,7 +1211,7 @@ void MyMoneyFileTest::testModifyTransactionNewAccount()
   s.setAccountId("A000002");
   t.modifySplit(s);
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
   MyMoneyFileTransaction ft;
   clearObjectLists();
   try {
@@ -1236,7 +1254,7 @@ void MyMoneyFileTest::testRemoveTransaction()
   MyMoneyTransaction t;
   t = m->transaction("T000000000000000001");
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
   MyMoneyFileTransaction ft;
   clearObjectLists();
   try {
@@ -1359,6 +1377,8 @@ void MyMoneyFileTest::testBalanceTotal()
 
 }
 
+/// @todo cleanup
+#if 0
 void MyMoneyFileTest::testSetAccountName()
 {
   MyMoneyFileTransaction ft;
@@ -1435,6 +1455,7 @@ void MyMoneyFileTest::testSetAccountName()
   } catch (const MyMoneyException &) {
   }
 }
+#endif
 
 void MyMoneyFileTest::testAddPayee()
 {
@@ -1588,7 +1609,7 @@ void MyMoneyFileTest::testAddTransactionStd()
           t.setNumber("1234");
           t.setState(MyMoneyCheckingTransaction::Cleared);
   */
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
   MyMoneyFileTransaction ft;
   try {
@@ -1599,42 +1620,6 @@ void MyMoneyFileTest::testAddTransactionStd()
   }
 
   QCOMPARE(m->dirty(), false);
-}
-
-void MyMoneyFileTest::testAttachStorage()
-{
-  MyMoneyStorageMgr *store = new MyMoneyStorageMgr;
-  MyMoneyFile *file = new MyMoneyFile;
-
-  QCOMPARE(file->storageAttached(), false);
-  try {
-    file->attachStorage(store);
-    QCOMPARE(file->storageAttached(), true);
-  } catch (const MyMoneyException &) {
-    QFAIL("Unexpected exception!");
-  }
-
-  try {
-    file->attachStorage(store);
-    QFAIL("Exception expected!");
-  } catch (const MyMoneyException &) {
-  }
-
-  try {
-    file->attachStorage(0);
-    QFAIL("Exception expected!");
-  } catch (const MyMoneyException &) {
-  }
-
-  try {
-    file->detachStorage(store);
-    QCOMPARE(file->storageAttached(), false);
-  } catch (const MyMoneyException &) {
-    QFAIL("Unexpected exception!");
-  }
-
-  delete store;
-  delete file;
 }
 
 
@@ -1663,19 +1648,6 @@ void MyMoneyFileTest::testCategory2Account()
   }
 }
 
-void MyMoneyFileTest::testAttachedStorage()
-{
-  QCOMPARE(m->storageAttached(), true);
-  QVERIFY(m->storage() != 0);
-  MyMoneyStorageMgr *p = m->storage();
-  m->detachStorage(p);
-  QCOMPARE(m->storageAttached(), false);
-  QCOMPARE(m->storage(), static_cast<MyMoneyStorageMgr*>(0));
-  m->attachStorage(p);
-  QCOMPARE(m->storageAttached(), true);
-  QVERIFY(m->storage() != 0);
-}
-
 void MyMoneyFileTest::testHasAccount()
 {
   testAddAccounts();
@@ -1688,7 +1660,7 @@ void MyMoneyFileTest::testHasAccount()
   try {
     m->addAccount(a, b);
     ft.commit();
-    QCOMPARE(m->accountCount(), static_cast<unsigned>(8));
+    QCOMPARE(m->accountsModel()->itemList().count(), 3);
     QCOMPARE(a.parentAccountId(), QLatin1String("A000001"));
     QCOMPARE(m->hasAccount("A000001", "Account3"), true);
     QCOMPARE(m->hasAccount("A000001", "Account2"), false);
@@ -1703,6 +1675,8 @@ void MyMoneyFileTest::testAddEquityAccount()
   MyMoneyAccount i;
   i.setName("Investment");
   i.setAccountType(eMyMoney::Account::Type::Investment);
+
+  setupBaseCurrency();
 
   MyMoneyFileTransaction ft;
   try {
@@ -1870,6 +1844,8 @@ void MyMoneyFileTest::testBaseCurrency()
     unexpectedException(e);
   }
 
+/// @todo "Cleanup dead code"
+#if 0 // invalid test with new model based backend
   // check if it gets reset when attaching a new storage
   m->detachStorage(storage);
 
@@ -1887,6 +1863,7 @@ void MyMoneyFileTest::testBaseCurrency()
   QCOMPARE(ref.id(), QLatin1String("EUR"));
   QCOMPARE(ref.name(), QLatin1String("Euro"));
   QVERIFY(ref.tradingSymbol() == QChar(0x20ac));
+#endif
 }
 
 void MyMoneyFileTest::testOpeningBalanceNoBase()
@@ -1906,7 +1883,7 @@ void MyMoneyFileTest::testOpeningBalance()
 {
   MyMoneyAccount openingAcc;
   MyMoneySecurity second("USD", "US Dollar", "$");
-  testBaseCurrency();
+  setupBaseCurrency();
 
   try {
     openingAcc = m->openingBalanceAccount(m->baseCurrency());
@@ -1940,8 +1917,9 @@ void MyMoneyFileTest::testOpeningBalance()
 void MyMoneyFileTest::testModifyStdAccount()
 {
   QVERIFY(m->asset().currencyId().isEmpty());
-  QCOMPARE(m->asset().name(), QLatin1String("Asset"));
-  testBaseCurrency();
+  QCOMPARE(m->asset().name(), QLatin1String("Asset accounts"));
+  setupBaseCurrency();
+  // testBaseCurrency();
   QVERIFY(m->asset().currencyId().isEmpty());
   QVERIFY(!m->baseCurrency().id().isEmpty());
 
@@ -1974,7 +1952,7 @@ void MyMoneyFileTest::testModifyStdAccount()
 void MyMoneyFileTest::testAddPrice()
 {
   testAddAccounts();
-  testBaseCurrency();
+  setupBaseCurrency();
   MyMoneyAccount p;
 
   MyMoneyFileTransaction ft;
@@ -2077,9 +2055,9 @@ void MyMoneyFileTest::testAddAccountMissingCurrency()
 
   MyMoneyInstitution institution;
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
-  QCOMPARE(m->accountCount(), static_cast<unsigned>(5));
+  QCOMPARE(m->accountsModel()->itemList().count(), 0);
 
   institution = m->institution("I000001");
   QCOMPARE(institution.id(), QLatin1String("I000001"));
@@ -2142,7 +2120,7 @@ void MyMoneyFileTest::testStorageId()
 
 void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithoutImportedBalance()
 {
-  AddOneAccount();
+  addOneAccount();
 
   MyMoneyAccount a = m->account("A000001");
 
@@ -2151,7 +2129,7 @@ void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithoutImportedBa
 
 void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithEqualImportedBalance()
 {
-  AddOneAccount();
+  addOneAccount();
 
   MyMoneyAccount a = m->account("A000001");
 
@@ -2167,7 +2145,7 @@ void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithEqualImported
 
 void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithUnequalImportedBalance()
 {
-  AddOneAccount();
+  addOneAccount();
 
   MyMoneyAccount a = m->account("A000001");
 
@@ -2183,7 +2161,7 @@ void MyMoneyFileTest::testHasMatchingOnlineBalance_emptyAccountWithUnequalImport
 
 void MyMoneyFileTest::testHasNewerTransaction_withoutAnyTransaction_afterLastImportedTransaction()
 {
-  AddOneAccount();
+  addOneAccount();
 
   MyMoneyAccount a = m->account("A000001");
 
@@ -2196,7 +2174,8 @@ void MyMoneyFileTest::testHasNewerTransaction_withoutAnyTransaction_afterLastImp
 void MyMoneyFileTest::testHasNewerTransaction_withoutNewerTransaction_afterLastImportedTransaction()
 {
 
-  AddOneAccount();
+  addOneAccount();
+  setupBaseCurrency();
 
   QString accId("A000001");
   QDate dateOfLastTransactionImport(2011, 12, 1);
@@ -2224,7 +2203,8 @@ void MyMoneyFileTest::testHasNewerTransaction_withoutNewerTransaction_afterLastI
 void MyMoneyFileTest::testHasNewerTransaction_withNewerTransaction_afterLastImportedTransaction()
 {
 
-  AddOneAccount();
+  addOneAccount();
+  setupBaseCurrency();
 
   QString accId("A000001");
   QDate dateOfLastTransactionImport(2011, 12, 1);
@@ -2250,15 +2230,16 @@ void MyMoneyFileTest::testHasNewerTransaction_withNewerTransaction_afterLastImpo
   QCOMPARE(m->hasNewerTransaction(accId, dateOfLastTransactionImport), true);
 }
 
-void MyMoneyFileTest::AddOneAccount()
+void MyMoneyFileTest::addOneAccount()
 {
+  setupBaseCurrency();
   QString accountId = "A000001";
   MyMoneyAccount  a;
   a.setAccountType(eMyMoney::Account::Type::Checkings);
 
-  storage->d_func()->m_dirty = false;
+  m->setDirty(false);
 
-  QCOMPARE(m->accountCount(), static_cast<unsigned>(5));
+  QCOMPARE(m->accountsModel()->itemList().count(), 0);
 
   a.setName("Account1");
   a.setCurrencyId("EUR");
@@ -2269,7 +2250,7 @@ void MyMoneyFileTest::AddOneAccount()
     MyMoneyAccount parent = m->asset();
     m->addAccount(a, parent);
     ft.commit();
-    QCOMPARE(m->accountCount(), static_cast<unsigned>(6));
+    QCOMPARE(m->accountsModel()->itemList().count(), 1);
     QCOMPARE(a.parentAccountId(), QLatin1String("AStd::Asset"));
     QCOMPARE(a.id(), accountId);
     QCOMPARE(a.currencyId(), QLatin1String("EUR"));
@@ -2292,7 +2273,7 @@ void MyMoneyFileTest::AddOneAccount()
 
 void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState_noTransactions()
 {
-  AddOneAccount();
+  addOneAccount();
   QString accountId = "A000001";
 
   QCOMPARE(m->countTransactionsWithSpecificReconciliationState(accountId, eMyMoney::TransactionFilter::State::NotReconciled), 0);
@@ -2300,7 +2281,9 @@ void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState_noTra
 
 void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState_transactionWithWantedReconcileState()
 {
-  AddOneAccount();
+  addOneAccount();
+  setupBaseCurrency();
+
   QString accountId = "A000001";
 
   // construct split & transaction
@@ -2323,7 +2306,9 @@ void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState_trans
 
 void MyMoneyFileTest::testCountTransactionsWithSpecificReconciliationState_transactionWithUnwantedReconcileState()
 {
-  AddOneAccount();
+  addOneAccount();
+  setupBaseCurrency();
+
   QString accountId = "A000001";
 
   // construct split & transaction
@@ -2557,7 +2542,7 @@ void MyMoneyFileTest::testClearedBalance()
 void MyMoneyFileTest::testAdjustedValues()
 {
   // create a checking account, an expense, an investment account and a stock
-  AddOneAccount();
+  addOneAccount();
 
   MyMoneyAccount exp1;
   exp1.setAccountType(eMyMoney::Account::Type::Expense);
@@ -2575,12 +2560,14 @@ void MyMoneyFileTest::testAdjustedValues()
 
   testAddEquityAccount();
 
-  testBaseCurrency();
-  MyMoneySecurity stockSecurity(QLatin1String("Blubber"), QLatin1String("TestsockSecurity"), QLatin1String("BLUB"), 1000, 1000, 1000);
+  MyMoneySecurity stockSecurity(QLatin1String("Blubber"), QLatin1String("TestStockSecurity"), QLatin1String("BLUB"), 1000, 1000, 1000);
   stockSecurity.setTradingCurrency(QLatin1String("BLUB"));
+  MyMoneySecurity tradingCurrency("BLUB", "BlubCurrency");
+
   // add the security
   ft.restart();
   try {
+    m->addCurrency(tradingCurrency);
     m->addSecurity(stockSecurity);
     ft.commit();
   } catch (const MyMoneyException &e) {
@@ -2783,7 +2770,7 @@ void MyMoneyFileTest::testEmptyFilter()
 void MyMoneyFileTest::testAddSecurity()
 {
   // create a checking account, an expense, an investment account and a stock
-  AddOneAccount();
+  addOneAccount();
 
   MyMoneyAccount exp1;
   exp1.setAccountType(eMyMoney::Account::Type::Expense);
@@ -2801,7 +2788,6 @@ void MyMoneyFileTest::testAddSecurity()
 
   testAddEquityAccount();
 
-  testBaseCurrency();
   MyMoneySecurity stockSecurity(QLatin1String("Blubber"), QLatin1String("TestsockSecurity"), QLatin1String("BLUB"), 1000, 1000, 1000);
   stockSecurity.setTradingCurrency(QLatin1String("BLUB"));
   // add the security

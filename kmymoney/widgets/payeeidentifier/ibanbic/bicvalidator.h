@@ -19,12 +19,12 @@
 #define BICVALIDATOR_H
 
 #include <QValidator>
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 #include "kmymoneyvalidationfeedback.h"
 
 namespace eWidgets { namespace ValidationFeedback { enum class MessageType; } }
 
-class KMM_WIDGETS_EXPORT bicValidator : public QValidator
+class KMM_BASE_WIDGETS_EXPORT bicValidator : public QValidator
 {
   Q_OBJECT
 

@@ -1,20 +1,25 @@
-/***************************************************************************
-                          kinvestmentview.cpp  -  description
-                             -------------------
-    begin                : Mon Mar 12 2007
-    copyright            : (C) 2007 by Thomas Baumgart
-    email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           (C) 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
+/*
+ * Copyright 2002-2004  Kevin Tambascio <ktambascio@users.sourceforge.net>
+ * Copyright 2003-2019  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2004-2005  Ace Jones <acejones@users.sourceforge.net>
+ * Copyright 2009-2010  Alvaro Soliverez <asoliverez@kde.org>
+ * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+
 
 #include "kinvestmentview_p.h"
 
@@ -68,11 +73,11 @@ void KInvestmentView::setDefaultFocus()
 
   switch (tab) {
   case eView::Investment::Tab::Equities:
-      QTimer::singleShot(0, d->ui->m_equitiesTree, SLOT(setFocus()));
-      break;
-    case eView::Investment::Tab::Securities:
-      QTimer::singleShot(0, d->ui->m_securitiesTree, SLOT(setFocus()));
-      break;
+    QMetaObject::invokeMethod(d->ui->m_equitiesTree, "setFocus", Qt::QueuedConnection);
+    break;
+  case eView::Investment::Tab::Securities:
+    QMetaObject::invokeMethod(d->ui->m_securitiesTree, "setFocus", Qt::QueuedConnection);
+    break;
   }
 }
 
@@ -172,7 +177,11 @@ void KInvestmentView::slotEquitySelected(const QModelIndex &current, const QMode
   Q_D(KInvestmentView);
   Q_UNUSED(current);
   Q_UNUSED(previous);
-  emit selectByObject(d->currentEquity(), eView::Intent::None);
+
+  const auto equ = d->currentEquity();
+  updateActions(equ);
+
+  emit selectByObject(equ, eView::Intent::None);
 }
 
 void KInvestmentView::slotSecuritySelected(const QModelIndex &current, const QModelIndex &previous)
@@ -219,16 +228,27 @@ void KInvestmentView::slotSelectAccount(const MyMoneyObject &obj)
 void KInvestmentView::slotLoadAccount(const QString &id)
 {
   Q_D(KInvestmentView);
-  const auto indexList = d->m_equitiesProxyModel->match(d->m_equitiesProxyModel->index(0,0), EquitiesModel::InvestmentID, id, 1,
-                                                   Qt::MatchFlags(Qt::MatchExactly | Qt::MatchRecursive | Qt::MatchWrap));
+  MyMoneyAccount acc;
 
-  const auto acc = MyMoneyFile::instance()->account(id);
-  if (!indexList.isEmpty()) {
-    d->ui->m_equitiesTree->setRootIndex(indexList.first());
-    d->m_idInvAcc = id;
-    if (isVisible())
-      emit selectByObject(acc, eView::Intent::SynchronizeAccountInLedgersView);
+  auto baseModel = MyMoneyFile::instance()->accountsModel();
+  auto baseIdx = baseModel->indexById(id);
+  QModelIndex idx;
+
+  d->m_equitiesProxyModel->setHideAllEntries(true);
+  if (baseIdx.isValid()) {
+    acc = MyMoneyFile::instance()->accountsModel()->itemByIndex(baseIdx);
+    if (acc.accountType() == eMyMoney::Account::Type::Investment) {
+      d->m_equitiesProxyModel->setHideAllEntries(false);
+      idx = baseModel->mapFromBaseSource(d->m_equitiesProxyModel, baseIdx);
+      d->m_idInvAcc = id;
+      if (isVisible())
+        emit selectByObject(acc, eView::Intent::SynchronizeAccountInLedgersView);
+    } else {
+      idx = QModelIndex();
+    }
   }
+  d->ui->m_equitiesTree->setRootIndex(idx);
+
   updateActions(acc);
 }
 
@@ -238,8 +258,8 @@ void KInvestmentView::slotInvestmentMenuRequested(const QPoint&)
   MyMoneyAccount acc;
   auto treeItem = d->ui->m_equitiesTree->currentIndex();
   if (treeItem.isValid()) {
-    auto mdlItem = d->m_equitiesProxyModel->index(treeItem.row(), EquitiesModel::Equity, treeItem.parent());
-    acc = MyMoneyFile::instance()->account(mdlItem.data(EquitiesModel::EquityID).toString());
+    auto idx = MyMoneyFile::baseModel()->mapToBaseSource(treeItem);
+    acc = MyMoneyFile::instance()->accountsModel()->itemByIndex(idx);
   }
   slotShowInvestmentMenu(acc);
 }
@@ -318,7 +338,7 @@ void KInvestmentView::slotUpdatePriceOnline()
   Q_D(KInvestmentView);
   if (!d->m_currentEquity.id().isEmpty()) {
     QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(0, d->m_currentEquity.currencyId());
-    if (dlg->exec() == QDialog::Accepted && dlg != nullptr)
+    if ((dlg->exec() == QDialog::Accepted) && (dlg != nullptr))
       dlg->storePrices();
     delete dlg;
   }

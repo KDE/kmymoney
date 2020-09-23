@@ -1,19 +1,19 @@
-/***************************************************************************
-                          newtransactioneditor.h
-                             -------------------
-    begin                : Sat Aug 8 2015
-    copyright            : (C) 2015 by Thomas Baumgart
-    email                : Thomas Baumgart <tbaumgart@kde.org>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * Copyright 2015-2019  Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef NEWTRANSACTIONEDITOR_H
 #define NEWTRANSACTIONEDITOR_H
@@ -27,9 +27,10 @@ class QWidget;
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "transactioneditorbase.h"
 #include "mymoneymoney.h"
 
-class NewTransactionEditor : public QFrame
+class NewTransactionEditor : public TransactionEditorBase
 {
   Q_OBJECT
 
@@ -41,7 +42,7 @@ public:
    * This method returns true if the user pressed the enter button.
    * It remains false, in case the user pressed the cancel button.
    */
-  virtual bool accepted() const;
+  virtual bool accepted() const override;
 
   /**
    * Returns the currently entered amount
@@ -50,8 +51,8 @@ public:
 
   /**
    */
-  void loadTransaction(const QString& id);
-  void saveTransaction();
+  void loadTransaction(const QModelIndex& index) override;
+  void saveTransaction() override;
 
   /**
    * Reimplemented to suppress some events in certain conditions
@@ -71,12 +72,10 @@ protected Q_SLOTS:
   virtual void categoryChanged(const QString& accountId);
   virtual void costCenterChanged(int costCenterIndex);
   virtual void postdateChanged(const QDate& date);
+  virtual void payeeChanged(int payeeIndex);
+  virtual void tagsChanged(const QStringList& tagIds);
 
   void valueChanged();
-
-Q_SIGNALS:
-  void done();
-  void transactionChanged(const QString&);
 
 private:
   class Private;

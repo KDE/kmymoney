@@ -79,10 +79,8 @@ namespace NewAccountWizard
     connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &CreditCardSchedulePage::slotLoadWidgets);
 
     d->ui->m_method->insertItem(i18n("Write check"), (int)Schedule::PaymentType::WriteChecque);
-#if 0
-    d->ui->m_method->insertItem(i18n("Direct debit"), Schedule::PaymentType::DirectDebit);
-    d->ui->m_method->insertItem(i18n("Bank transfer"), Schedule::PaymentType::BankTransfer);
-#endif
+    d->ui->m_method->insertItem(i18n("Direct debit"), (int)Schedule::PaymentType::DirectDebit);
+    d->ui->m_method->insertItem(i18n("Bank transfer"), (int)Schedule::PaymentType::BankTransfer);
     d->ui->m_method->insertItem(i18n("Standing order"), (int)Schedule::PaymentType::StandingOrder);
     d->ui->m_method->insertItem(i18n("Manual deposit"), (int)Schedule::PaymentType::ManualDeposit);
     d->ui->m_method->insertItem(i18n("Direct deposit"), (int)Schedule::PaymentType::DirectDeposit);
@@ -137,7 +135,7 @@ namespace NewAccountWizard
             msg = i18n("No name assigned for schedule");
           }
       }
-    d->m_wizard->d_func()->m_finishButton->setToolTip(msg);
+    d->m_wizard->d_func()->m_nextButton->setToolTip(msg);
 
     return rc;
   }

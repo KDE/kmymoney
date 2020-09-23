@@ -79,9 +79,8 @@ void QueryTableTest::setup()
 
 void QueryTableTest::init()
 {
-  storage = new MyMoneyStorageMgr;
   file = MyMoneyFile::instance();
-  file->attachStorage(storage);
+  file->unload();
   MyMoneyFileTransaction ft;
   file->addCurrency(MyMoneySecurity("CAD", "Canadian Dollar",        "C$"));
   file->addCurrency(MyMoneySecurity("USD", "US Dollar",              "$"));
@@ -116,8 +115,6 @@ void QueryTableTest::init()
 
 void QueryTableTest::cleanup()
 {
-  file->detachStorage(storage);
-  delete storage;
 }
 
 void QueryTableTest::testQueryBasics()

@@ -21,6 +21,8 @@
 #ifndef KEQUITYPRICEUPDATEDLG_H
 #define KEQUITYPRICEUPDATEDLG_H
 
+#include "kmm_extended_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -45,7 +47,7 @@ typedef QMap<MyMoneySecurityPair, MyMoneyPriceEntries> MyMoneyPriceList;
   */
 
 class KEquityPriceUpdateDlgPrivate;
-class KEquityPriceUpdateDlg : public QDialog
+class KMM_EXTENDED_DIALOGS_EXPORT KEquityPriceUpdateDlg : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(KEquityPriceUpdateDlg)

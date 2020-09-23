@@ -30,7 +30,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 class QWidget;
 class QPushButton;
@@ -39,7 +39,7 @@ class QPushButton;
   * @author Tony Bloomfield
   */
 class KMandatoryFieldGroupPrivate;
-class KMM_WIDGETS_EXPORT KMandatoryFieldGroup : public QObject
+class KMM_BASE_WIDGETS_EXPORT KMandatoryFieldGroup : public QObject
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMandatoryFieldGroup)

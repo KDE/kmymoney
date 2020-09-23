@@ -8,7 +8,7 @@
 <title>Credits</title>
 
 <para>
-  Program Copyright &copy; 2000-2019 The KMyMoney Development Team
+  Program Copyright &copy; 2000-2019 The &kmymoney; Development Team
 </para>
 
 <para>
@@ -16,7 +16,7 @@
 </para>
 
 <para>
-  Documentation Copyright &copy; 2000-2019 The KMyMoney Development Team
+  Documentation Copyright &copy; 2000-2019 The &kmymoney; Development Team
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
@@ -160,7 +160,7 @@
   <listitem>
     <formalpara>
       <title>Tony Bloomfield &Tony.Bloomfield.mail;</title>
-      <para>GnuCash Importer. Database support.</para>
+      <para>&gnucash; Importer. Database support.</para>
     </formalpara>
   </listitem>
 

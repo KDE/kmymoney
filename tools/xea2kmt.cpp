@@ -349,7 +349,7 @@ public:
             if (account.parent == parentID)
                 list.append(&account);
         }
-        qSort(list.begin(), list.end(), nameLessThan);
+        std::sort(list.begin(), list.end(), nameLessThan);
         return list;
     }
 

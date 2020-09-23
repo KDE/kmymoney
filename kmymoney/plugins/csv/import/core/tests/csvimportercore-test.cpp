@@ -21,7 +21,8 @@
 
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"
-#include <mymoneystoragemgr.h>
+#include "mymoneysecurity.h"
+#include "mymoneyexception.h"
 
 #include "csvimportercore.h"
 #include "csvimporttestcommon.h"
@@ -35,11 +36,25 @@ void CSVImporterCoreTest::initTestCase()
   MyMoneyMoney::setDecimalSeparator(QLocale().decimalPoint());
 }
 
+void CSVImporterCoreTest::setupBaseCurrency()
+{
+  file = MyMoneyFile::instance();
+
+  MyMoneySecurity base("EUR", "Euro", QChar(0x20ac));
+  MyMoneyFileTransaction ft;
+  try {
+    file->currency(base.id());
+  } catch (const MyMoneyException &e) {
+    file->addCurrency(base);
+  }
+  file->setBaseCurrency(base);
+  ft.commit();
+}
+
 void CSVImporterCoreTest::init()
 {
-  storage = new MyMoneyStorageMgr;
+  setupBaseCurrency();
   file = MyMoneyFile::instance();
-  file->attachStorage(storage);
 
   csvImporter = new CSVImporterCore;
 
@@ -84,8 +99,6 @@ void CSVImporterCoreTest::cleanup()
   delete pricesProfile;
   delete amountProfile;
   delete csvImporter;
-  file->detachStorage(storage);
-  delete storage;
 }
 
 void CSVImporterCoreTest::testBasicPriceTable()
@@ -269,7 +282,7 @@ void CSVImporterCoreTest::testAutoDecimalSymbol()
 }
 
 void CSVImporterCoreTest::testInvAccountAutodetection()
-{  
+{
   MyMoneyFileTransaction ft;
   makeAccount("Eas", "123", eMyMoney::Account::Type::Investment, QDate(2017, 8, 1), file->asset().id());
   makeAccount("BigInvestments", "", eMyMoney::Account::Type::Investment, QDate(2017, 8, 1), file->asset().id());

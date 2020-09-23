@@ -58,6 +58,7 @@ Q_SIGNALS:
 public slots:
   virtual void slotSelectByObject(const MyMoneyObject&, eView::Intent) {}
   virtual void slotSelectByVariant(const QVariantList&, eView::Intent) {}
+  virtual void slotSettingsChanged() {}
 
 protected:
   const QScopedPointer<KMyMoneyViewBasePrivate> d_ptr;

@@ -19,6 +19,8 @@
 #ifndef KMYMONEYACCOUNTCOMPLETION_H
 #define KMYMONEYACCOUNTCOMPLETION_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -37,7 +39,7 @@ class KMyMoneyAccountSelector;
 /**
   * @author Thomas Baumgart
   */
-class KMyMoneyAccountCompletion : public KMyMoneyCompletion
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyAccountCompletion : public KMyMoneyCompletion
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyAccountCompletion)

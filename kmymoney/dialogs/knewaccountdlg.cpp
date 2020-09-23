@@ -1,6 +1,6 @@
 /*
  * Copyright 2000-2003  Michael Edwardes <mte@users.sourceforge.net>
- * Copyright 2005-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2005-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -29,6 +29,7 @@
 #include <QTabWidget>
 #include <QRadioButton>
 #include <QList>
+#include <QStringListModel>
 
 // ----------------------------------------------------------------------------
 // KDE Headers
@@ -51,11 +52,11 @@
 #include "kmymoneysettings.h"
 #include "kmymoneycurrencyselector.h"
 #include "knewbankdlg.h"
-#include "models.h"
 #include "accountsmodel.h"
-#include "hierarchyfilterproxymodel.h"
+#include "accountsproxymodel.h"
 #include "mymoneyenums.h"
 #include "modelenums.h"
+#include "columnselector.h"
 
 using namespace eMyMoney;
 
@@ -119,20 +120,38 @@ public:
     ui->m_amountGroup->setId(ui->m_netAmount, 1);
 
     // the proxy filter model
-    m_filterProxyModel = new HierarchyFilterProxyModel(q);
+    m_filterProxyModel = ui->m_parentAccounts->proxyModel();
     m_filterProxyModel->setHideClosedAccounts(true);
     m_filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
     m_filterProxyModel->addAccountGroup(filterAccountGroup);
-    m_filterProxyModel->setCurrentAccountId(m_account.id());
-    auto const model = Models::instance()->accountsModel();
-    m_filterProxyModel->setSourceModel(model);
-    m_filterProxyModel->setSourceColumns(model->getColumns());
+    // don't allow to select ourself as parent
+    m_filterProxyModel->setNotSelectable(m_account.id());
+    auto const model = MyMoneyFile::instance()->accountsModel();
     m_filterProxyModel->setDynamicSortFilter(true);
 
-    ui->m_parentAccounts->setModel(m_filterProxyModel);
-    ui->m_parentAccounts->sortByColumn((int)eAccountsModel::Column::Account, Qt::AscendingOrder);
+    ui->m_parentAccounts->setModel(model);
+
+    // only show the name column for the parent account
+    auto columnSelector = new ColumnSelector(ui->m_parentAccounts);
+    columnSelector->setAlwaysHidden(columnSelector->columns());
+    columnSelector->setAlwaysVisible(QVector<int>({ AccountsModel::Column::AccountName }));
+
+    ui->m_parentAccounts->sortByColumn(AccountsModel::Column::AccountName, Qt::AscendingOrder);
+
+    columnSelector->setModel(m_filterProxyModel);
 
     ui->m_subAccountLabel->setText(i18n("Is a sub account"));
+    q->connect(ui->m_parentAccounts->selectionModel(), &QItemSelectionModel::selectionChanged,
+               q, &KNewAccountDlg::slotSelectionChanged);
+
+    // select the current parent in the hierarchy
+    QModelIndex idx = model->indexById(m_account.parentAccountId());
+    if (idx.isValid()) {
+      idx = model->mapFromBaseSource(m_filterProxyModel, idx);
+      ui->m_parentAccounts->selectionModel()->select(idx, QItemSelectionModel::SelectCurrent);
+      ui->m_parentAccounts->expand(idx);
+      ui->m_parentAccounts->scrollTo(idx, QAbstractItemView::PositionAtTop);
+    }
 
     ui->accountNameEdit->setText(m_account.name());
     ui->descriptionEdit->setText(m_account.description());
@@ -352,8 +371,6 @@ public:
 
     q->connect(ui->buttonBox, &QDialogButtonBox::rejected, q, &QDialog::reject);
     q->connect(ui->buttonBox, &QDialogButtonBox::accepted, q, &KNewAccountDlg::okClicked);
-    q->connect(ui->m_parentAccounts->selectionModel(), &QItemSelectionModel::selectionChanged,
-            q, &KNewAccountDlg::slotSelectionChanged);
     q->connect(ui->m_qbuttonNew, &QAbstractButton::clicked, q, &KNewAccountDlg::slotNewClicked);
     q->connect(ui->typeCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), q, &KNewAccountDlg::slotAccountTypeChanged);
 
@@ -373,11 +390,6 @@ public:
     q->connect(ui->m_maxCreditAbsoluteEdit,   &AmountEdit::valueChanged, q, &KNewAccountDlg::slotAdjustMaxCreditEarlyEdit);
 
     q->connect(ui->m_qcomboboxInstitutions, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::activated), q, &KNewAccountDlg::slotLoadInstitutions);
-
-    auto parentIndex = m_filterProxyModel->getSelectedParentAccountIndex();
-    ui->m_parentAccounts->expand(parentIndex);
-    ui->m_parentAccounts->selectionModel()->select(parentIndex, QItemSelectionModel::SelectCurrent);
-    ui->m_parentAccounts->scrollTo(parentIndex, QAbstractItemView::PositionAtTop);
 
     ui->m_vatCategory->setChecked(false);
     ui->m_vatAssignment->setChecked(false);
@@ -458,7 +470,7 @@ public:
 
   void storeKVP(const QString& key, AmountEdit* widget)
   {
-    storeKVP(key, widget->text(), widget->text());
+    storeKVP(key, widget->text(), widget->value().toString());
   }
 
   void storeKVP(const QString& key, KLineEdit* widget)
@@ -554,11 +566,11 @@ public:
     }
   }
 
-  KNewAccountDlg             *q_ptr;
-  Ui::KNewAccountDlg         *ui;
+  KNewAccountDlg*             q_ptr;
+  Ui::KNewAccountDlg*         ui;
   MyMoneyAccount              m_account;
   MyMoneyAccount              m_parentAccount;
-  HierarchyFilterProxyModel  *m_filterProxyModel;
+  AccountsProxyModel*         m_filterProxyModel;
 
   bool m_categoryEditor;
   bool m_isEditing;
@@ -760,9 +772,9 @@ void KNewAccountDlg::slotSelectionChanged(const QItemSelection &current, const Q
   Q_UNUSED(previous)
   Q_D(KNewAccountDlg);
   if (!current.indexes().empty()) {
-    QVariant account = d->ui->m_parentAccounts->model()->data(current.indexes().front(), (int)eAccountsModel::Role::Account);
-    if (account.isValid()) {
-      d->m_parentAccount = account.value<MyMoneyAccount>();
+    auto baseIdx = MyMoneyFile::baseModel()->mapToBaseSource(current.indexes().front());
+    if (baseIdx.isValid()) {
+      d->m_parentAccount = MyMoneyFile::instance()->accountsModel()->itemByIndex(baseIdx);
       d->ui->m_subAccountLabel->setText(i18n("Is a sub account of %1", d->m_parentAccount.name()));
     }
   }
@@ -771,30 +783,39 @@ void KNewAccountDlg::slotSelectionChanged(const QItemSelection &current, const Q
 void KNewAccountDlg::slotLoadInstitutions(const QString& name)
 {
   Q_D(KNewAccountDlg);
-  d->ui->m_qcomboboxInstitutions->clear();
-  // Are we forcing the user to use institutions?
-  d->ui->m_qcomboboxInstitutions->addItem(i18n("(No Institution)"));
+  d->ui->m_qcomboboxInstitutions->model()->deleteLater();
+
+  auto model = new QStringListModel(this);
+  auto list = MyMoneyFile::instance()->institutionList();
+  QStringList names;
+
   d->ui->m_bicValue->setText(" ");
   d->ui->ibanEdit->setEnabled(false);
   d->ui->accountNoEdit->setEnabled(false);
-  try {
-    auto file = MyMoneyFile::instance();
 
-    QList<MyMoneyInstitution> list = file->institutionList();
-    QList<MyMoneyInstitution>::ConstIterator institutionIterator;
-    for (institutionIterator = list.constBegin(); institutionIterator != list.constEnd(); ++institutionIterator) {
-      if ((*institutionIterator).name() == name) {
-        d->ui->ibanEdit->setEnabled(true);
-        d->ui->accountNoEdit->setEnabled(true);
-        d->ui->m_bicValue->setText((*institutionIterator).value("bic"));
-      }
-      d->ui->m_qcomboboxInstitutions->addItem((*institutionIterator).name());
+  QString search(i18n("(No Institution)"));
+
+  for (const auto institution : qAsConst(list)) {
+    names << institution.name();
+    if (institution.name() == name) {
+      d->ui->ibanEdit->setEnabled(true);
+      d->ui->accountNoEdit->setEnabled(true);
+      d->ui->m_bicValue->setText(institution.value("bic"));
+      search = name;
     }
-
-    d->ui->m_qcomboboxInstitutions->setCurrentItem(name, false);
-  } catch (const MyMoneyException &e) {
-    qDebug("Exception in institution load: %s", e.what());
   }
+  model->setStringList(names);
+  model->sort(0);
+  model->insertRow(0);
+  QModelIndex idx = model->index(0, 0);
+  model->setData(idx, i18n("(No Institution)"), Qt::DisplayRole);
+
+  d->ui->m_qcomboboxInstitutions->setModel(model);
+
+  auto i = d->ui->m_qcomboboxInstitutions->findText(search);
+  if (i == -1)
+    i = 0;
+  d->ui->m_qcomboboxInstitutions->setCurrentIndex(i);
 }
 
 void KNewAccountDlg::slotNewClicked()

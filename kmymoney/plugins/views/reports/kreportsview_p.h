@@ -145,18 +145,27 @@ public:
   void saveAs(const QString& filename, bool includeCSS = false);
   void updateReport();
   QString createTable(const QString& links = QString());
-  const ReportControl* control() const {
+  const ReportControl* control() const
+  {
     return m_control;
   }
-  bool isReadyToDelete() const {
+
+  bool isReadyToDelete() const
+  {
     return m_deleteMe;
   }
-  void setReadyToDelete(bool f) {
+
+  void setReadyToDelete(bool f)
+  {
     m_deleteMe = f;
   }
-  void modifyReport(const MyMoneyReport& report) {
+
+  void modifyReport(const MyMoneyReport& report)
+  {
     m_report = report;
+    updateReport();
   }
+
   void showEvent(QShowEvent * event) final override;
   void loadTab();
 
@@ -268,7 +277,7 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
     m_control->ui->buttonDelete->setEnabled(false);
 
   int tabNr = parent->addTab(this,
-                         Icons::get(Icon::Spreadsheet),
+                         Icons::get(Icon::Report),
                          report.name());
   parent->setTabEnabled(tabNr, true);
   parent->setCurrentIndex(tabNr);
@@ -432,7 +441,7 @@ void KReportTab::toggleChart()
 
     m_control->ui->buttonChart->setText(i18n("Report"));
     m_control->ui->buttonChart->setToolTip(i18n("Show the report version of this chart"));
-    m_control->ui->buttonChart->setIcon(Icons::get(Icon::ViewFinancialList));
+    m_control->ui->buttonChart->setIcon(Icons::get(Icon::Report));
   }
   m_showingChart = ! m_showingChart;
 }
@@ -475,15 +484,15 @@ class KReportsViewPrivate : public KMyMoneyViewBasePrivate
   Q_DECLARE_PUBLIC(KReportsView)
 
 public:
-  explicit KReportsViewPrivate(KReportsView *qq):
-    q_ptr(qq),
-    m_needLoad(true),
-    m_reportListView(nullptr),
-    m_reportTabWidget(nullptr),
-    m_listTab(nullptr),
-    m_listTabLayout(nullptr),
-    m_tocTreeWidget(nullptr),
-    m_columnsAlreadyAdjusted(false)
+  explicit KReportsViewPrivate(KReportsView *qq)
+    : KMyMoneyViewBasePrivate(qq)
+    , m_needLoad(true)
+    , m_reportListView(nullptr)
+    , m_reportTabWidget(nullptr)
+    , m_listTab(nullptr)
+    , m_listTabLayout(nullptr)
+    , m_tocTreeWidget(nullptr)
+    , m_columnsAlreadyAdjusted(false)
   {
   }
 
@@ -1474,8 +1483,6 @@ public:
   {
     m_columnsAlreadyAdjusted = adjusted;
   }
-
-  KReportsView       *q_ptr;
 
   /**
     * This member holds the load state of page

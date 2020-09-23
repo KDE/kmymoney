@@ -23,7 +23,6 @@
 #include "mymoneyenums.h"
 #include "mymoneytransactionfilter.h"
 #include "mymoneyfile.h"
-#include "mymoneystoragemgr.h"
 #include "mymoneyaccount.h"
 #include "mymoneypayee.h"
 #include "mymoneysecurity.h"
@@ -41,16 +40,13 @@ QTEST_GUILESS_MAIN(MyMoneyTransactionFilterTest)
 
 
 MyMoneyTransactionFilterTest::MyMoneyTransactionFilterTest::MyMoneyTransactionFilterTest()
-  : storage(nullptr)
-  , file(nullptr)
+  : file(nullptr)
 {
 }
 
 void MyMoneyTransactionFilterTest::init()
 {
-  storage = new MyMoneyStorageMgr;
   file = MyMoneyFile::instance();
-  file->attachStorage(storage);
 
   MyMoneyFileTransaction ft;
   file->addCurrency(MyMoneySecurity("USD", "US Dollar", "$"));
@@ -76,8 +72,6 @@ void MyMoneyTransactionFilterTest::init()
 
 void MyMoneyTransactionFilterTest::cleanup()
 {
-  file->detachStorage(storage);
-  delete storage;
 }
 
 void MyMoneyTransactionFilterTest::testMatchAmount()
@@ -521,7 +515,7 @@ void MyMoneyTransactionFilterTest::testMatchTransactionTag()
   QVERIFY(filter.match(transaction));
   QCOMPARE(filter.matchingSplits(transaction).size(), 1);
 
-  // check disabled category splits support
+  // check no category support
   MyMoneySplit split4;
   split4.setAccountId(acExpenseId);
   split4.setShares(MyMoneyMoney(123.00));
@@ -535,10 +529,7 @@ void MyMoneyTransactionFilterTest::testMatchTransactionTag()
   QVERIFY(!filter.match(transaction2));
   QCOMPARE(filter.matchingSplits(transaction2).size(), 0);
 
-  // check enabled category splits support
-  filter.setConsiderCategorySplits(true);
-  QVERIFY(filter.match(transaction2));
-  QCOMPARE(filter.matchingSplits(transaction2).size(), 1);
+  qDebug() << "tags on categories could not be tested";
 }
 
 void MyMoneyTransactionFilterTest::testMatchTransactionTypeAllTypes()

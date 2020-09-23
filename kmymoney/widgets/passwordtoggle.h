@@ -18,7 +18,7 @@
 #ifndef PASSWORDTOGGLE_H
 #define PASSWORDTOGGLE_H
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -34,7 +34,7 @@
 class QLineEdit;
 class QAction;
 
-class KMM_WIDGETS_EXPORT PasswordToggle : public QObject
+class KMM_BASE_WIDGETS_EXPORT PasswordToggle : public QObject
 {
   Q_OBJECT
 public:

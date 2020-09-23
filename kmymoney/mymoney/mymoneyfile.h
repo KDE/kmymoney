@@ -3,7 +3,7 @@
  * Copyright 2001-2002  Felix Rodriguez <frodriguez@users.sourceforge.net>
  * Copyright 2002-2004  Kevin Tambascio <ktambascio@users.sourceforge.net>
  * Copyright 2004-2005  Ace Jones <acejones@users.sourceforge.net>
- * Copyright 2006-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2006-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2006       Darren Gould <darren_gould@gmx.de>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
@@ -127,6 +127,7 @@ template <class Key, class T> class QMap;
 class QString;
 class QStringList;
 class QBitArray;
+class QUndoStack;
 class MyMoneyStorageMgr;
 class MyMoneyCostCenter;
 class MyMoneyAccount;
@@ -148,6 +149,28 @@ class MyMoneyTransaction;
 class MyMoneyTransactionFilter;
 class onlineJob;
 
+// the models
+class PayeesModel;
+class CostCenterModel;
+class SchedulesModel;
+class TagsModel;
+class SecuritiesModel;
+class BudgetsModel;
+class AccountsModel;
+class InstitutionsModel;
+class JournalModel;
+class PriceModel;
+class ParametersModel;
+class OnlineJobsModel;
+class ReportsModel;
+class MyMoneyModelBase;
+
+// non permanent models
+class SpecialDatesModel;
+class SchedulesJournalModel;
+class StatusModel;
+/// @note add new models here
+
 namespace eMyMoney { namespace Account { enum class Type; }
                      namespace File { enum class Object; }
                      namespace Schedule { enum class Type;
@@ -156,6 +179,7 @@ namespace eMyMoney { namespace Account { enum class Type; }
                      namespace TransactionFilter { enum class State; }
                    }
 
+
 class KMM_MYMONEY_EXPORT MyMoneyFile : public QObject
 {
   Q_OBJECT
@@ -163,6 +187,13 @@ class KMM_MYMONEY_EXPORT MyMoneyFile : public QObject
 
 public:
   friend class MyMoneyNotifier;
+
+  typedef enum {
+    CreationDate,
+    LastModificationDate,
+    FileFixVersion,
+    UserID,
+  } FixedKey;
 
   /**
     * This is the function to access the MyMoneyFile object.
@@ -175,14 +206,26 @@ public:
     */
   ~MyMoneyFile();
 
+  static MyMoneyModelBase* baseModel();
+
   /**
-    * @deprecated This is a convenience constructor. Do not use it anymore.
-    * It will be deprecated in a future version of the engine.
-    *
-    * @param storage pointer to object that implements the MyMoneyStorageMgr
-    *                interface.
-    */
-  explicit MyMoneyFile(MyMoneyStorageMgr *storage);
+   * This returns the currently implemented highest fix version
+   */
+  constexpr static int availableFixVersion() { return 5; }
+
+  /**
+   * returns the current file fix version of the loaded data
+   *
+   * @sa setFileFixVersion(), availableFixVersion()
+   */
+  int fileFixVersion() const;
+
+  /**
+   * Sets the file fix level to @a version
+   *
+   * @sa fileFixVersion(), availableFixVersion()
+   */
+  void setFileFixVersion(int version);
 
   // general get functions
   MyMoneyPayee user() const;
@@ -237,7 +280,12 @@ public:
     * @return const pointer to the current attached storage object.
     *         If no object is attached, returns 0.
     */
-  MyMoneyStorageMgr* storage() const;
+  // MyMoneyStorageMgr* storage() const;
+
+  /**
+   * This method clears all data in all storage models
+   */
+  void unload();
 
   /**
     * This method must be called before any single change or a series of changes
@@ -246,8 +294,10 @@ public:
     * commitTransaction() must be called to finalize all changes. If an error occurs
     * during the processing of the changes call rollbackTransaction() to undo the
     * changes done so far.
+    *
+    * The @a undoActionText will be attached to the transaction
     */
-  void startTransaction();
+  void startTransaction(const QString& undoActionText = QString());
 
   /**
     * This method returns whether a transaction has been started (@a true)
@@ -365,7 +415,7 @@ public:
     * flag after a failed upload to a server when the save operation
     * to a local temp file was OK.
     */
-  void setDirty() const;
+  void setDirty(bool dirty = true) const;
 
   /**
     * Adds an institution to the file-global institution pool. A
@@ -483,15 +533,12 @@ public:
   bool isTransfer(const MyMoneyTransaction& t) const;
 
   /**
-    * This method is used to set the name for the specified standard account
-    * within the storage area. An exception will be thrown, if an error
-    * occurs
-    *
-    * @param id QString reference to one of the standard accounts.
-    * @param name QString reference to the name to be set
-    *
-    */
-  void setAccountName(const QString& id, const QString& name) const;
+   * Return @a true if transaction @a t is an investment transaction.
+   * A transaction is called an investment transaction if at least
+   * one split references an investment account and one split
+   * references an account denoted in an investment security.
+   */
+  bool isInvestmentTransaction(const MyMoneyTransaction& t) const;
 
   /**
     * Deletes an existing account from the file global account pool
@@ -654,15 +701,14 @@ public:
     * This method returns the number of transactions currently known to file
     * in the range 0..MAXUINT
     *
-    * @param account QString reference to account id. If account is empty
-    +                all transactions (the journal) will be counted. If account
-    *                is not empty it returns the number of transactions
-    *                that have splits in this account.
+    * @param accountId QString reference to account id. If account is empty
+    +                  all transactions (the journal) will be counted. If account
+    *                  is not empty it returns the number of transactions
+    *                  that have splits in this account.
     *
     * @return number of transactions in journal/account
     */
-  unsigned int transactionCount(const QString& account) const;
-  unsigned int transactionCount() const;
+  unsigned int transactionCount(const QString& accountId = QString()) const;
 
   /**
     * This method returns a QMap filled with the number of transactions
@@ -862,6 +908,99 @@ public:
   QList<MyMoneyPayee> payeeList() const;
 
   /**
+   * The payees model instance
+   */
+  PayeesModel* payeesModel() const;
+
+  /**
+   * The costcenter model instance
+   */
+  CostCenterModel* costCenterModel() const;
+
+  /**
+   * The schedules model instance
+   */
+  SchedulesModel* schedulesModel() const;
+
+  /**
+   * The tags model instance
+   */
+  TagsModel* tagsModel() const;
+
+  /**
+   * The securities model instance
+   */
+  SecuritiesModel* securitiesModel() const;
+
+  /**
+   * The currencies model instance
+   */
+  SecuritiesModel* currenciesModel() const;
+
+  /**
+   * The budgets model instance
+   */
+  BudgetsModel* budgetsModel() const;
+
+  /**
+   * The accounts model instance
+   */
+  AccountsModel* accountsModel() const;
+
+  /**
+   * The institutions model instance
+   */
+  InstitutionsModel* institutionsModel() const;
+
+  /**
+   * The journal model instance
+   */
+  JournalModel* journalModel() const;
+
+  /**
+   * The price model instance
+   */
+  PriceModel* priceModel() const;
+
+  /**
+   * The parameters model instance
+   */
+  ParametersModel* parametersModel() const;
+
+  /**
+   * The online jobs model instance
+   */
+  OnlineJobsModel* onlineJobsModel() const;
+
+  /**
+   * The reports model instance
+   */
+  ReportsModel* reportsModel() const;
+
+  /**
+   * The user model instance
+   */
+  PayeesModel* userModel() const;
+
+  /**
+   * The user model instance
+   */
+  SpecialDatesModel* specialDatesModel() const;
+
+  /**
+   * The scheduled transactions as journal entries
+   */
+  SchedulesJournalModel* schedulesJournalModel() const;
+
+  /*
+   * The transaction status model
+   */
+  StatusModel* statusModel() const;
+
+/// @note add new models here
+
+
+  /**
     * This method is used to create a new tag
     *
     * An exception will be thrown upon error conditions
@@ -1048,6 +1187,16 @@ public:
       const bool overdue) const;
   QList<MyMoneySchedule> scheduleList(const QString& accountId) const;
   QList<MyMoneySchedule> scheduleList() const;
+
+  /**
+   * Returns the transaction for @a schedule. In case of a loan payment the
+   * transaction will be modified by calculateAutoLoan().
+   * The ID of the transaction as well as the entryDate will be reset.
+   *
+   * @returns adjusted transaction
+   */
+  MyMoneyTransaction scheduledTransaction(const MyMoneySchedule& schedule);
+
 
   QStringList consistencyCheck();
 
@@ -1478,6 +1627,14 @@ public:
   bool isReferenced(const MyMoneyObject& obj) const;
 
   /**
+   * This method returns the set of ids that are referenced by
+   * other objects in all of the data objects.
+   *
+   * @returns QSet<QString> of referenced objects
+   */
+  QSet<QString> referencedObjects() const;
+
+  /**
     * Returns true if any of the accounts referenced by the splits
     * of transaction @a t is closed.
     */
@@ -1593,11 +1750,31 @@ public:
    */
   void removeOnlineJob(const QStringList onlineJobIds);
 
+  /**
+   * mark all models as clean
+   */
+  void fileSaved();
+
+  /**
+   * This returns the string for specific parameters
+   */
+  const QString& fixedKey(FixedKey key) const;
+
+  QUndoStack* undoStack() const;
+
+  bool hasValidId (const MyMoneyAccount& acc) const;
+  bool hasValidId (const MyMoneyPayee& payee) const;
+
 protected:
   /**
     * This is the constructor for a new empty file description
     */
   MyMoneyFile();
+
+protected Q_SLOTS:
+  void finalizeFileOpen();
+
+  void reloadSpecialDates();
 
 Q_SIGNALS:
   /**
@@ -1657,9 +1834,20 @@ Q_SIGNALS:
     */
   void valueChanged(const MyMoneyAccount& acc);
 
-private:
-  static MyMoneyFile file;
+  /**
+   * This signal is emitted once all data of a new backend is loaded.
+   */
+  void modelsLoaded();
 
+  /**
+   * This signal is emitted once all data of a new backend is ready to be used.
+   * The difference to modelsLoaded() is that some internal fixes can be applied
+   * in the meantime. Right before this signal is sent out, the dirty flag of all
+   * models will be reset.
+   */
+  void modelsReadyToUse();
+
+private:
   MyMoneyFile& operator=(MyMoneyFile&); // not allowed for singleton
   MyMoneyFile(const MyMoneyFile&);      // not allowed for singleton
 

@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui version="45" name="kmymoney" >
+<kpartgui version="47" name="kmymoney" >
  <MenuBar>
   <Menu name="file" >
    <DefineGroup name="open_db_group" append="open_merge"/>
@@ -20,12 +20,15 @@
    </Menu>
    <Action name="file_backup" />
    <Separator/>
-   <Action icon="user-properties" name="view_personal_data" />
+   <Action name="view_personal_data" />
    <Action name="view_file_info" />
    <Action name="file_dump" />
   </Menu>
   <Menu name="edit" >
-   <Action icon="transaction-find" name="edit_find_transaction" />
+   <Action name="edit_undo" />
+   <Action name="edit_redo" />
+   <Separator/>
+   <Action name="edit_find_transaction" />
   </Menu>
   <Menu name="view" >
    <Action name="view_show_transaction_detail" />
@@ -35,13 +38,13 @@
   </Menu>
   <Menu name="institution" >
    <text>&amp;Institution</text>
-   <Action icon="institution-add" name="institution_new" />
+   <Action name="institution_new" />
    <Action name="institution_edit" />
    <Action name="institution_delete" />
   </Menu>
   <Menu name="account" >
    <text>&amp;Account</text>
-   <Action icon="account-add" name="account_new" />
+   <Action name="account_new" />
    <Action name="account_edit" />
    <Action name="account_delete" />
    <Action name="account_open" />
@@ -240,6 +243,9 @@
   <Action name="file_open" />
   <Action name="file_save" />
   <Action name="file_print" />
+  <Separator lineSeparator="true"/>
+  <Action name="edit_undo" />
+  <Action name="edit_redo" />
   <Separator lineSeparator="true"/>
   <Action name="institution_new" />
   <Action name="account_new" />

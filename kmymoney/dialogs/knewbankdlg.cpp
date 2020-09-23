@@ -111,7 +111,7 @@ KNewBankDlg::KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent) :
   connect(d->ui->iconButton, &QToolButton::pressed, this,
           [=] {
             QUrl url;
-            url.setUrl(QString::fromLatin1("https://%1/").arg(d->ui->urlEdit->text()));
+            url.setUrl(QString::fromLatin1("https://%1").arg(d->ui->urlEdit->text()));
             QDesktopServices::openUrl(url);
           });
 
@@ -187,7 +187,7 @@ void KNewBankDlg::slotUrlChanged(const QString& newUrl)
   QRegularExpressionMatch matcher = protocol.match(newUrl);
   if (matcher.hasMatch()) {
     d->ui->urlEdit->setText(matcher.captured(QStringLiteral("url")));
-    d->ui->messageWidget->setText(QLatin1String("The protocol part has been removed by KMyMoney because it is fixed to https."));
+    d->ui->messageWidget->setText(i18nc("@info:usagetip", "The protocol part has been removed by KMyMoney because it is fixed to https for security reasons."));
     d->ui->messageWidget->setMessageType(KMessageWidget::Information);
     d->ui->messageWidget->animatedShow();
   }
@@ -238,8 +238,8 @@ void KNewBankDlg::slotIconLoaded(KJob* job)
       // There is an answer from the server, but no favicon. In case we
       // already have one, we keep it
       d->ui->iconButton->setEnabled(true);
-      d->m_favIcon = Icons::get(Icons::Icon::ViewBank);
-      d->m_iconName = QStringLiteral("enum:ViewBank");
+      d->m_favIcon = Icons::get(Icons::Icon::Bank);
+      d->m_iconName = QStringLiteral("enum:Bank");
       break;
     case 0:
       // There is an answer from the server, and the favicon is found

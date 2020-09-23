@@ -43,7 +43,7 @@ public:
   explicit XMLStorage(QObject *parent, const QVariantList &args);
   ~XMLStorage() override;
 
-  MyMoneyStorageMgr *open(const QUrl &url) override;
+  bool open(const QUrl &url) override;
   bool save(const QUrl &url) override;
   bool saveAs() override;
   eKMyMoney::StorageType storageType() const override;

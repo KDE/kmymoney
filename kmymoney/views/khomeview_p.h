@@ -119,14 +119,13 @@ class KHomeViewPrivate : public KMyMoneyViewBasePrivate
   Q_DECLARE_PUBLIC(KHomeView)
 
 public:
-  explicit KHomeViewPrivate(KHomeView *qq) :
-    KMyMoneyViewBasePrivate(),
-    q_ptr(qq),
-    m_view(nullptr),
-    m_showAllSchedules(false),
-    m_needLoad(true),
-    m_netWorthGraphLastValidSize(400, 300),
-    m_scrollBarPos(0)
+  explicit KHomeViewPrivate(KHomeView *qq)
+    : KMyMoneyViewBasePrivate(qq)
+    , m_view(nullptr)
+    , m_showAllSchedules(false)
+    , m_needLoad(true)
+    , m_netWorthGraphLastValidSize(400, 300)
+    , m_scrollBarPos(0)
   {
   }
 
@@ -161,6 +160,7 @@ public:
   #else
     m_view = new KWebView(q);
   #endif
+    m_view->installEventFilter(q);
     m_view->setPage(new MyQWebEnginePage(m_view));
 
     vbox->addWidget(m_view);
@@ -217,8 +217,15 @@ public:
       tmp = QString("<td class=\"center\">%1</td>").arg(cellStatus);
     }
 
-    tmp += QString("<td>") +
-           link(VIEW_LEDGER, QString("?id=%1").arg(acc.id())) + acc.name() + linkend() + "</td>";
+    tmp += QString("<td>") + link(VIEW_LEDGER, QString("?id=%1").arg(acc.id()));
+    if (acc.isClosed()) {
+      tmp += QLatin1String("<strike>");
+    }
+    tmp +=  acc.name().replace("<", "&lt;").replace(">", "&gt;");
+    if (acc.isClosed()) {
+      tmp += QLatin1String("</strike>");
+    }
+    tmp += linkend() + "</td>";
 
     int countNotMarked = 0, countCleared = 0, countNotReconciled = 0;
     QString countStr;
@@ -414,9 +421,7 @@ public:
     m_view->setZoomFactor(KMyMoneySettings::zoomFactor());
 
     QList<MyMoneyAccount> list;
-    if (MyMoneyFile::instance()->storage()) {
-      MyMoneyFile::instance()->accountList(list);
-    }
+    MyMoneyFile::instance()->accountList(list);
     if (list.isEmpty()) {
       m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
     } else {
@@ -593,7 +598,7 @@ public:
     if (!overdues.isEmpty()) {
       m_html += "<div class=\"gap\">&nbsp;</div>\n";
 
-      qSort(overdues);
+      std::sort(overdues.begin(), overdues.end());
       QList<MyMoneySchedule>::Iterator it;
       QList<MyMoneySchedule>::Iterator it_f;
 
@@ -630,7 +635,7 @@ public:
     }
 
     if (!schedule.isEmpty()) {
-      qSort(schedule);
+      std::sort(schedule.begin(), schedule.end());
 
       // Extract todays payments if any
       QList<MyMoneySchedule> todays;
@@ -711,7 +716,7 @@ public:
         bool needMoreLess = m_showAllSchedules;
 
         QDate lastDate = QDate::currentDate().addMonths(1);
-        qSort(schedule);
+        std::sort(schedule.begin(), schedule.end());
         do {
           it = schedule.begin();
           if (it == schedule.end())
@@ -761,7 +766,7 @@ public:
           }
 
           (*it).setNextDueDate((*it).nextPayment((*it).nextDueDate()));
-          qSort(schedule);
+          std::sort(schedule.begin(), schedule.end());
         } while (1);
 
         if (needMoreLess) {
@@ -795,7 +800,7 @@ public:
           MyMoneySplit sp = t.splitByAccount(acc.id(), true);
 
           QString pathEnter = QPixmapToDataUri(Icons::get(Icon::KeyEnter).pixmap(QSize(16,16)));
-          QString pathSkip = QPixmapToDataUri(Icons::get(Icon::MediaSkipForward).pixmap(QSize(16,16)));
+          QString pathSkip = QPixmapToDataUri(Icons::get(Icon::SkipForward).pixmap(QSize(16, 16)));
 
           //show payment date
           tmp = QString("<td>") +
@@ -850,7 +855,7 @@ public:
     int prec = MyMoneyMoney::denomToPrec(file->baseCurrency().smallestAccountFraction());
     QList<MyMoneyAccount> accounts;
 
-    auto showClosedAccounts = KMyMoneySettings::showAllAccounts();
+    const auto showClosedAccounts = !KMyMoneySettings::hideClosedAccounts() || KMyMoneySettings::showAllAccounts();
 
     // get list of all accounts
     file->accountList(accounts);
@@ -1045,7 +1050,7 @@ public:
         beginDay = m_forecast.accountsCycle();
 
       // Now output header
-      m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18n("%1 Day Forecast", m_forecast.forecastDays()));
+      m_html += QString("<div class=\"shadow\"><div class=\"displayblock\"><div class=\"summaryheader\">%1</div>\n<div class=\"gap\">&nbsp;</div>\n").arg(i18ncp("Forecast days", "%1 Day Forecast", "%1 Day Forecast", m_forecast.forecastDays()));
       m_html += "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" class=\"summarytable\" >";
       m_html += "<tr class=\"item\"><td class=\"left\" width=\"40%\">";
       m_html += i18n("Account");
@@ -1204,8 +1209,10 @@ public:
     // get list of all accounts
     file->accountList(accounts);
 
+    const auto showClosedAccounts = !KMyMoneySettings::hideClosedAccounts() || KMyMoneySettings::showAllAccounts();
+
     for (it = accounts.constBegin(); it != accounts.constEnd();) {
-      if (!(*it).isClosed()) {
+      if (!(*it).isClosed() || showClosedAccounts) {
         switch ((*it).accountType()) {
             // group all assets into one list but make sure that investment accounts always show up
           case Account::Type::Investment:
@@ -1253,7 +1260,7 @@ public:
       QString statusHeader;
       if (KMyMoneySettings::showBalanceStatusOfOnlineAccounts()) {
         QString pathStatusHeader;
-        pathStatusHeader = QPixmapToDataUri(Icons::get(Icon::ViewOutbox).pixmap(QSize(16,16)));
+        pathStatusHeader = QPixmapToDataUri(Icons::get(Icon::OnlineJobOutbox).pixmap(QSize(16, 16)));
         statusHeader = QString("<img src=\"%1\" border=\"0\">").arg(pathStatusHeader);
       }
 
@@ -1822,8 +1829,6 @@ public:
     m_html += "</div></div>";
   }
 
-
-  KHomeView     *q_ptr;
 
   /**
    * daily balances of an account

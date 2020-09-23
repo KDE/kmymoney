@@ -18,6 +18,8 @@
 #ifndef KMYMONEYWIZARDPAGE_H
 #define KMYMONEYWIZARDPAGE_H
 
+#include "kmm_wizard_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -132,7 +134,7 @@ class KMyMoneyWizard;
   *       https://doc.qt.io/qt-5/qtwidgets-dialogs-licensewizard-example.html
   */
 class KMyMoneyWizardPagePrivate;
-class KMyMoneyWizardPage
+class KMM_WIZARD_EXPORT KMyMoneyWizardPage
 {
 public:
   /**

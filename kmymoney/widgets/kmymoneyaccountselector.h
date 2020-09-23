@@ -19,7 +19,7 @@
 #ifndef KMYMONEYACCOUNTSELECTOR_H
 #define KMYMONEYACCOUNTSELECTOR_H
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -55,7 +55,7 @@ namespace eMyMoney { namespace Account { enum class Type; } }
   *   by marking the account in the view.
   */
 class KMyMoneyAccountSelectorPrivate;
-class KMM_WIDGETS_EXPORT KMyMoneyAccountSelector : public KMyMoneySelector
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyAccountSelector : public KMyMoneySelector
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyAccountSelector)
@@ -154,7 +154,7 @@ private:
 };
 
 class AccountSetPrivate;
-class KMM_WIDGETS_EXPORT AccountSet
+class KMM_BASE_WIDGETS_EXPORT AccountSet
 {
   Q_DISABLE_COPY(AccountSet)
 

@@ -54,6 +54,7 @@ class payeeIdentifier;
 class onlineJob;
 class MyMoneyStorageSql;
 class MyMoneyStorageMgr;
+class MyMoneyFile;
 
 template <class T1, class T2> struct QPair;
 template <class Key, class Value> class QMap;
@@ -79,7 +80,7 @@ class MyMoneyStorageSql : public IMyMoneyOperationsFormat, public QSqlDatabase, 
   KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  explicit MyMoneyStorageSql(MyMoneyStorageMgr *storage, const QUrl&);
+  explicit MyMoneyStorageSql(MyMoneyFile* file, const QUrl&);
   ~MyMoneyStorageSql() override;
 
   uint currentVersion() const;
@@ -132,7 +133,7 @@ public:
    * be saved in a different file or format. It will ensure that all data
    * from the database is available in memory to enable it to be written.
    */
-  virtual void fillStorage();
+  // virtual void fillStorage();
 
   /**
     * The following functions correspond to the identically named (usually) functions
@@ -255,8 +256,8 @@ public:
   void readTransactions(const MyMoneyTransactionFilter& filter);
   void setProgressCallback(void(*callback)(int, int, const QString&)) override;
 
-  void readFile(QIODevice* s, MyMoneyStorageMgr* storage) override;
-  void writeFile(QIODevice* s, MyMoneyStorageMgr* storage) override;
+  void readFile(QIODevice* s, MyMoneyFile* file) override;
+  void writeFile(QIODevice* s, MyMoneyFile* file) override;
 
   void startCommitUnit(const QString& callingFunction);
   bool endCommitUnit(const QString& callingFunction);

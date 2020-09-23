@@ -1,5 +1,5 @@
 /*
- * Copyright 2005-2018  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2005-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -74,6 +74,14 @@ class KMM_MYMONEY_EXPORT MyMoneyObject
     * @retval false This object does not reference the object with id @p id.
     */
   virtual bool hasReferenceTo(const QString& id) const = 0;
+
+  /**
+   * This method must be provided by all derived object. It returns
+   * a QSet of object ids that this object references.
+   *
+   * @returns QSet<QString> of referenced objects
+   */
+  virtual QSet<QString> referencedObjects() const = 0;
 
   bool operator == (const MyMoneyObject& right) const;
 

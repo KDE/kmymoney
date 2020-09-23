@@ -46,6 +46,8 @@ if [ ! -d $APPIMAGEPLUGINS ] ; then
 fi
 
 # Step 1: Copy over all the resources provided by dependencies that we need
+cp -r -v $DEPS_INSTALL_PREFIX/lib/x86_64-linux-gnu $APPDIR/usr/lib
+
 cp -r -v $DEPS_INSTALL_PREFIX/share/locale $APPDIR/usr/share/kmymoney
 cp -r -v $DEPS_INSTALL_PREFIX/share/kf5 $APPDIR/usr/share
 cp -r -v $DEPS_INSTALL_PREFIX/share/kservices5 $APPDIR/usr/share
@@ -54,6 +56,9 @@ cp -r -v $DEPS_INSTALL_PREFIX/share/mime $APPDIR/usr/share
 cp -r -v $DEPS_INSTALL_PREFIX/openssl/lib/*  $APPDIR/usr/lib
 cp -r -v $DEPS_INSTALL_PREFIX/plugins/* $APPDIR/usr/plugins
 cp -r -v $DEPS_INSTALL_PREFIX/share/libofx $APPDIR/usr/share/libofx
+
+# no need for cmake files in appimage
+rm -rf $APPDIR/usr/lib/x86_64-linux-gnu/cmake
 
 # @todo we still need the following program from /bin or /usr/bin:
 #  true, mount, umount (backup)
@@ -78,6 +83,8 @@ for d in gwenhywfar aqbanking; do
 done
 
 # Step 2: Relocate x64 binaries from the architecture specific directory as required for Appimages
+mv -v $APPDIR/usr/lib/x86_64-linux-gnu/pkgconfig/* $APPDIR/usr/lib/pkgconfig
+rmdir $APPDIR/usr/lib/x86_64-linux-gnu/pkgconfig
 mv -v $APPDIR/usr/lib/x86_64-linux-gnu/*  $APPDIR/usr/lib
 rm -rf $APPDIR/usr/lib/x86_64-linux-gnu/
 
@@ -92,7 +99,7 @@ cp -r -v $PLUGINS/* $APPIMAGEPLUGINS
 # Step 5: Determine the version of KMyMoney we have just built
 # This is needed for linuxdeployqt/appimagetool to do the right thing
 cd $KMYMONEY_SOURCES
-KMYMONEY_VERSION=$(grep "KMyMoney VERSION" CMakeLists.txt | cut -d '"' -f 2)
+KMYMONEY_VERSION=$(grep 'set(RELEASE_SERVICE_VERSION_' CMakeLists.txt | cut -d'"' -f 2 | tr '\n' '.' | sed -e 's/\.$//')
 
 # Also find out the revision of Git we built
 # Then use that to generate a combined name we'll distribute

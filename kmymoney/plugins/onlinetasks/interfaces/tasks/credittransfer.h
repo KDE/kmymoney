@@ -20,6 +20,8 @@
 #ifndef CREDITTRANSFER_H
 #define CREDITTRANSFER_H
 
+#include "onlinetask_interfaces_export.h"
+
 #include <QtPlugin>
 #include "payeeidentifier/payeeidentifier.h"
 
@@ -33,7 +35,7 @@ class MyMoneySecurity;
  * This class is used by KMyMoney to create a MyMoneySchedule
  * after a task was sent to the bank.
  */
-class creditTransfer
+class ONLINETASK_INTERFACES_EXPORT creditTransfer
 {
 
 public:

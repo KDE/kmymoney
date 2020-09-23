@@ -49,6 +49,7 @@ add_subdirectory( templates )
 add_subdirectory( misc )
 add_subdirectory( icons )
 add_subdirectory( menus )
+add_subdirectory( oldregister )
 if(BUILD_TESTING)
   add_subdirectory( tests )
 endif()
@@ -58,7 +59,7 @@ set( _HEADERS kmymoneyutils.h )
 ########### common code (kmymoney_common) STATIC ###############
 # will be linked into kmymoney, kmymoneytest, and libkmymoney.so
 
-set( kmymoney_common_SRCS kmymoneyutils.cpp kstartuplogo.cpp kcreditswindow.cpp )
+set( kmymoney_common_SRCS kmymoneyutils.cpp kcreditswindow.cpp )
 add_library(kmymoney_common STATIC ${kmymoney_common_SRCS})
 
 target_link_libraries(kmymoney_common
@@ -72,7 +73,7 @@ target_link_libraries(kmymoney_common
     KF5::KIONTLM
     Alkimia::alkimia
     kmm_mymoney
-    kmm_utils_webconnect
+    kmm_webconnect
     kmm_utils_platformtools
     PRIVATE
     KF5::I18n
@@ -81,9 +82,9 @@ target_link_libraries(kmymoney_common
 
 # must build kmymoney/transactionsortoption.h
 # from transactionsortoption.ui first
-add_dependencies(kmymoney_common generate_base_ui_srcs kmm_settings)
-add_dependencies(wizardpages widgets)
-add_dependencies(dialogs widgets)
+add_dependencies(kmymoney_common kmm_settings)
+add_dependencies(wizardpages kmm_widgets)
+# add_dependencies(kmm_dialogs kmm_widgets)
 
 if(USE_MODELTEST)
   set( kmymoney_common_LIBS ${kmymoney_common_LIBS} ${QT_QTTEST_LIBRARY})
@@ -136,7 +137,6 @@ endif()
 target_link_libraries(kmymoney
   PUBLIC
   views
-  kmymoney_base
   kmymoney_common
   newuserwizard
   newaccountwizard
@@ -144,10 +144,10 @@ target_link_libraries(kmymoney
   newloanwizard
   endingbalancedlg
   wizardpages
-  dialogs
-  widgets
+  kmm_oldregister
+  kmm_extended_dialogs
+  kmm_base_dialogs
   settings
-  converter
   kmm_models
   kmm_settings
   kmm_menus
@@ -159,6 +159,7 @@ target_link_libraries(kmymoney
   KF5::ConfigGui
   KF5::WidgetsAddons
   KF5::CoreAddons
+  kmm_templates
   $<$<BOOL:${USE_MODELTEST}>:Qt5::Test>
   $<$<BOOL:${ENABLE_HOLIDAYS}>:KF5::Holidays>
   $<$<BOOL:${ENABLE_ACTIVITIES}>:KF5::Activities>
@@ -179,6 +180,7 @@ endif()
 
 # own plist magic for mac os
 if(APPLE)
+    string(TIMESTAMP CURRENT_YEAR "%Y")
     # own plist template
     set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/MacOSXBundleInfo.plist.in)
 
@@ -189,10 +191,9 @@ if(APPLE)
     set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME "KMyMoney")
     set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_DISPLAY_NAME "KMyMoney")
     set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_INFO_STRING "KMyMoney - Personal Finances Manager")
-    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_LONG_VERSION_STRING "KMyMoney ${KDE_APPLICATIONS_VERSION}")
-    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_SHORT_VERSION_STRING "${KDE_APPLICATIONS_VERSION_MAJOR}.${KDE_APPLICATIONS_VERSION_MINOR}")
-    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_BUNDLE_VERSION "${KDE_APPLICATIONS_VERSION}")
-    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_COPYRIGHT "2000-2016 The KMyMoney Authors")
+    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_SHORT_VERSION_STRING "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSION_MINOR}.${RELEASE_SERVICE_VERSION_MICRO}")
+    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_BUNDLE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSION_MINOR}.${RELEASE_SERVICE_VERSION_MICRO}")
+    set_target_properties(kmymoney PROPERTIES MACOSX_BUNDLE_COPYRIGHT "© 2000-${CURRENT_YEAR} The KMyMoney Authors")
 endif()
 
 ########### install files ###############

@@ -87,18 +87,17 @@ class KForecastViewPrivate : public KMyMoneyViewBasePrivate
   Q_DECLARE_PUBLIC(KForecastView)
 
 public:
-  explicit KForecastViewPrivate(KForecastView *qq) :
-    KMyMoneyViewBasePrivate(),
-    q_ptr(qq),
-    ui(new Ui::KForecastView),
-    m_needLoad(true),
-    m_totalItem(0),
-    m_assetItem(0),
-    m_liabilityItem(0),
-    m_incomeItem(0),
-    m_expenseItem(0),
-    m_chartLayout(0),
-    m_forecastChart(nullptr)
+  explicit KForecastViewPrivate(KForecastView *qq)
+    : KMyMoneyViewBasePrivate(qq)
+    , ui(new Ui::KForecastView)
+    , m_needLoad(true)
+    , m_totalItem(nullptr)
+    , m_assetItem(nullptr)
+    , m_liabilityItem(nullptr)
+    , m_incomeItem(nullptr)
+    , m_expenseItem(nullptr)
+    , m_chartLayout(nullptr)
+    , m_forecastChart(nullptr)
   {
   }
 
@@ -120,7 +119,7 @@ public:
     KConfigGroup grp = config->group("Last Use Settings");
     ui->m_tab->setCurrentIndex(grp.readEntry("KForecastView_LastType", 0));
 
-    ui->m_forecastButton->setIcon(Icons::get(Icon::ViewForecast));
+    ui->m_forecastButton->setIcon(Icons::get(Icon::Forecast));
 
     q->connect(ui->m_tab, &QTabWidget::currentChanged, q, &KForecastView::slotTabChanged);
 
@@ -1002,7 +1001,6 @@ public:
 //    return prices;
 //  }
 
-  KForecastView     *q_ptr;
   Ui::KForecastView *ui;
 
   bool m_needReload[MaxViewTabs];

@@ -20,6 +20,8 @@
 #ifndef KPAYEEREASSIGNDLG_H
 #define KPAYEEREASSIGNDLG_H
 
+#include "kmm_base_dialogs_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -39,7 +41,7 @@
 class MyMoneyPayee;
 
 class KPayeeReassignDlgPrivate;
-class KPayeeReassignDlg : public QDialog
+class KMM_BASE_DIALOGS_EXPORT KPayeeReassignDlg : public QDialog
 {
   Q_OBJECT
   Q_DISABLE_COPY(KPayeeReassignDlg)

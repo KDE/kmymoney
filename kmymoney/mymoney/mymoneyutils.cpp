@@ -25,6 +25,10 @@
 #include "mymoneyaccount.h"
 #include "mymoneymoney.h"
 #include "mymoneysecurity.h"
+#include "mymoneytransaction.h"
+#include "mymoneysplit.h"
+#include "mymoneyfile.h"
+#include "mymoneyexception.h"
 
 #include <cstdio>
 #include <cstdarg>
@@ -101,5 +105,46 @@ unsigned long MyMoneyUtils::extractId(const QString& txt)
     rc = txt.mid(pos).toInt();
   }
   return rc;
+}
+
+void MyMoneyUtils::dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, eMyMoney::Split::InvestmentTransactionType& transactionType)
+{
+  // collect the splits. split references the stock account and should already
+  // be set up. assetAccountSplit references the corresponding asset account (maybe
+  // empty), feeSplits is the list of all expenses and interestSplits
+  // the list of all incomes
+  assetAccountSplit = MyMoneySplit(); // set to none to check later if it was assigned
+  auto file = MyMoneyFile::instance();
+  foreach (const auto tsplit, transaction.splits()) {
+    auto acc = file->account(tsplit.accountId());
+    if (tsplit.id() == split.id()) {
+      security = file->security(acc.currencyId());
+    } else if (acc.accountGroup() == eMyMoney::Account::Type::Expense) {
+      feeSplits.append(tsplit);
+      // feeAmount += tsplit.value();
+    } else if (acc.accountGroup() == eMyMoney::Account::Type::Income) {
+      interestSplits.append(tsplit);
+      // interestAmount += tsplit.value();
+    } else {
+      if (assetAccountSplit == MyMoneySplit()) // first asset Account should be our requested brokerage account
+        assetAccountSplit = tsplit;
+      else if (tsplit.value().isNegative())  // the rest (if present) is handled as fee or interest
+        feeSplits.append(tsplit);              // and shouldn't be allowed to override assetAccountSplit
+        else if (tsplit.value().isPositive())
+          interestSplits.append(tsplit);
+    }
+  }
+
+  // determine transaction type
+  transactionType = split.investmentTransactionType();
+  if (transactionType == eMyMoney::Split::InvestmentTransactionType::UnknownTransactionType) {
+    transactionType = eMyMoney::Split::InvestmentTransactionType::BuyShares;
+  }
+
+  currency.setTradingSymbol("???");
+  try {
+    currency = file->security(transaction.commodity());
+  } catch (const MyMoneyException &) {
+  }
 }
 

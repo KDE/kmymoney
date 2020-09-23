@@ -1,5 +1,5 @@
 /*
- * Copyright 2005-2011  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2005-2019  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -150,6 +150,11 @@ public:
     * @retval false This object does not reference the object with id @p id.
     */
   bool hasReferenceTo(const QString& id) const;
+
+  /**
+   * @copydoc MyMoneyObject::referencedObjects
+   */
+  QSet<QString> referencedObjects() const;
 };
 
 inline void swap(MyMoneyPrice& first, MyMoneyPrice& second) // krazy:exclude=inline

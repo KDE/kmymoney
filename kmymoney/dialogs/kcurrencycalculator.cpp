@@ -58,18 +58,18 @@ public:
   explicit KCurrencyCalculatorPrivate(KCurrencyCalculator *qq,
                                       const MyMoneySecurity& from,
                                       const MyMoneySecurity& to,
-                                      const MyMoneyMoney& value,
-                                      const MyMoneyMoney& shares,
+                                      const MyMoneyMoney& fromAmount,
+                                      const MyMoneyMoney& toAmount,
                                       const QDate& date,
-                                      const signed64 resultFraction) :
-    q_ptr(qq),
-    ui(new Ui::KCurrencyCalculator),
-    m_fromCurrency(from),
-    m_toCurrency(to),
-    m_result(shares.abs()),
-    m_value(value.abs()),
-    m_date(date),
-    m_resultFraction(resultFraction)
+                                      const signed64 resultFraction)
+    : q_ptr(qq)
+    , ui(new Ui::KCurrencyCalculator)
+    , m_fromCurrency(from)
+    , m_toCurrency(to)
+    , m_toAmount(toAmount.abs())
+    , m_fromAmount(fromAmount.abs())
+    , m_date(date)
+    , m_resultFraction(resultFraction)
   {
   }
 
@@ -101,27 +101,25 @@ public:
     auto boldFont = ui->m_fromCurrencyText->font();
     boldFont.setBold(true);
     ui->m_fromCurrencyText->setFont(boldFont);
-    boldFont = ui->m_toCurrencyText->font();
-    boldFont.setBold(true);
     ui->m_toCurrencyText->setFont(boldFont);
 
-    ui->m_fromAmount->setText(m_value.formatMoney(QString(), MyMoneyMoney::denomToPrec(m_fromCurrency.smallestAccountFraction())));
+    ui->m_fromAmount->setText(m_fromAmount.formatMoney(QString(), MyMoneyMoney::denomToPrec(m_fromCurrency.smallestAccountFraction())));
 
     ui->m_dateText->setText(QLocale().toString(m_date));
 
     ui->m_updateButton->setChecked(KMyMoneySettings::priceHistoryUpdate());
 
     // setup initial result
-    if (m_result == MyMoneyMoney() && !m_value.isZero()) {
+    if (m_toAmount.isZero() && !m_fromAmount.isZero()) {
       const MyMoneyPrice &pr = file->price(m_fromCurrency.id(), m_toCurrency.id(), m_date);
       if (pr.isValid()) {
-        m_result = m_value * pr.rate(m_toCurrency.id());
+        m_toAmount = m_fromAmount * pr.rate(m_toCurrency.id());
       }
     }
 
     // fill in initial values
     ui->m_toAmount->setPrecision(MyMoneyMoney::denomToPrec(m_resultFraction));
-    ui->m_toAmount->setValue(m_result);
+    ui->m_toAmount->setValue(m_toAmount);
 
     ui->m_conversionRate->setPrecision(m_fromCurrency.pricePrecision());
 
@@ -173,8 +171,8 @@ public:
   Ui::KCurrencyCalculator *ui;
   MyMoneySecurity          m_fromCurrency;
   MyMoneySecurity          m_toCurrency;
-  MyMoneyMoney             m_result;
-  MyMoneyMoney             m_value;
+  MyMoneyMoney             m_toAmount;
+  MyMoneyMoney             m_fromAmount;
   QDate                    m_date;
   signed64                 m_resultFraction;
 };
@@ -300,7 +298,7 @@ void KCurrencyCalculator::slotUpdateResult(const QString& /*txt*/)
 {
   Q_D(KCurrencyCalculator);
   MyMoneyMoney result = d->ui->m_toAmount->value();
-  MyMoneyMoney price(0, 1);
+  MyMoneyMoney price(MyMoneyMoney::ONE);
 
   if (result.isNegative()) {
     d->ui->m_toAmount->setValue(-result);
@@ -308,12 +306,12 @@ void KCurrencyCalculator::slotUpdateResult(const QString& /*txt*/)
     return;
   }
 
-  if (!result.isZero()) {
-    price = result / d->m_value;
+  if (!result.isZero() && !d->m_fromAmount.isZero()) {
+    price = result / d->m_fromAmount;
 
     d->ui->m_conversionRate->setValue(price);
-    d->m_result = (d->m_value * price).convert(d->m_resultFraction);
-    d->ui->m_toAmount->setValue(d->m_result);
+    d->m_toAmount = (d->m_fromAmount * price).convert(d->m_resultFraction);
+    d->ui->m_toAmount->setValue(d->m_toAmount);
   }
   d->updateExample(price);
 }
@@ -331,8 +329,8 @@ void KCurrencyCalculator::slotUpdateRate(const QString& /*txt*/)
 
   if (!price.isZero()) {
     d->ui->m_conversionRate->setValue(price);
-    d->m_result = (d->m_value * price).convert(d->m_resultFraction);
-    d->ui->m_toAmount->setValue(d->m_result);
+    d->m_toAmount = (d->m_fromAmount * price).convert(d->m_resultFraction);
+    d->ui->m_toAmount->setValue(d->m_toAmount);
   }
   d->updateExample(price);
 }
@@ -372,8 +370,11 @@ MyMoneyMoney KCurrencyCalculator::price() const
   // This should fix https://bugs.kde.org/show_bug.cgi?id=205254 and
   // https://bugs.kde.org/show_bug.cgi?id=325953 as well as
   // https://bugs.kde.org/show_bug.cgi?id=300965
-  if (d->ui->m_amountButton->isChecked())
-    return d->ui->m_toAmount->value().abs() / d->m_value.abs();
-  else
+  if (d->ui->m_amountButton->isChecked()) {
+    if (!d->m_fromAmount.isZero()) {
+      return d->ui->m_toAmount->value().abs() / d->m_fromAmount.abs();
+    }
+    return MyMoneyMoney::ONE;
+  } else
     return d->ui->m_conversionRate->value();
 }

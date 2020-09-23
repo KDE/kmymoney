@@ -1,5 +1,5 @@
 /*
- * Copyright 2004-2017  Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2004-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -19,8 +19,12 @@
 #ifndef KMYMONEYACCOUNTCOMBO_H
 #define KMYMONEYACCOUNTCOMBO_H
 
+#include "kmm_base_widgets_export.h"
+
 // ----------------------------------------------------------------------------
 // QT Includes
+
+class QTreeView;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -32,51 +36,6 @@
 
 #include "accountsproxymodel.h"
 #include "onlinebankingaccountsfilterproxymodel.h"
-
-/**
-  * A proxy model used to filter all the data from the core accounts model leaving
-  * only the name of the accounts so this model can be used in the account
-  * completion combo.
-  *
-  * It shows only the first column (account name) and makes top level items non-selectable.
-  *
-  * @see AccountsModel
-  * @see AccountsFilterProxyModel
-  *
-  * @author Cristian Onet 2010
-  * @author Christian David
-  */
-
-template <class baseProxyModel>
-class AccountNamesFilterProxyModelTpl : public baseProxyModel
-{
-public:
-  explicit AccountNamesFilterProxyModelTpl(QObject *parent = 0);
-
-  virtual Qt::ItemFlags flags(const QModelIndex &index) const override;
-
-protected:
-  bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override;
-};
-
-/**
- * @brief "typedef" for AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel>
- *
- * To create valid Qt moc data this class inherits the template and uses Q_OBJECT.
- *
- * @code
- * typedef AccountNamesFilterProxyModelTpl<AccountsFilterProxyModel> AccountNamesFilterProxyModel;
- * @endcode
- *
- * should work as well.
- */
-class AccountNamesFilterProxyModel : public AccountNamesFilterProxyModelTpl<AccountsProxyModel>
-{
-  Q_OBJECT
-public:
-  explicit AccountNamesFilterProxyModel(QObject* parent = 0)
-      : AccountNamesFilterProxyModelTpl< AccountsProxyModel >(parent) {}
-};
 
 /**
  * @brief OnlineBankingAccountFilterProxyModel showing only the name column
@@ -99,7 +58,7 @@ typedef AccountNamesFilterProxyModelTpl<OnlineBankingAccountsFilterProxyModel> O
   *
   * @author Cristian Onet
   */
-class KMyMoneyAccountCombo : public KComboBox
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyAccountCombo : public KComboBox
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyAccountCombo)
@@ -109,7 +68,6 @@ public:
   explicit KMyMoneyAccountCombo(QWidget* parent = nullptr);
   ~KMyMoneyAccountCombo();
 
-  void setSelected(const QString& id);
   const QString& getSelected() const;
 
   void setModel(QSortFilterProxyModel *model);
@@ -121,11 +79,15 @@ public:
 
   bool eventFilter(QObject* o, QEvent* e) override;
 
+  QTreeView* popup() const;
+
 public Q_SLOTS:
   void expandAll();
   void collapseAll();
   void showPopup() override;
   void hidePopup() override;
+  void setSelected(const QString& id);
+  void setSplitActionVisible(bool show);
 
 protected:
   void wheelEvent(QWheelEvent *ev) override;
@@ -137,39 +99,45 @@ protected Q_SLOTS:
 
 Q_SIGNALS:
   void accountSelected(const QString&);
+  void splitDialogRequest();
+
+private:
+  void init();
 
 private:
   class Private;
   QScopedPointer<Private> const d;
 };
 
-template <class baseProxyModel>
-AccountNamesFilterProxyModelTpl<baseProxyModel>::AccountNamesFilterProxyModelTpl(QObject *parent)
-    : baseProxyModel(parent)
-{
-}
 
-/**
- * Top items are not selectable because they are not real accounts but are only used for grouping.
- */
-template <class baseProxyModel>
-Qt::ItemFlags AccountNamesFilterProxyModelTpl<baseProxyModel>::flags(const QModelIndex &index) const
-{
-  if (!index.parent().isValid())
-    return baseProxyModel::flags(index) & ~Qt::ItemIsSelectable;
-  return baseProxyModel::flags(index);
-}
 
-/**
- * Filter all but the first column.
- */
-template <class baseProxyModel>
-bool AccountNamesFilterProxyModelTpl<baseProxyModel>::filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const
+class QAbstractButton;
+class KMyMoneyAccountComboSplitHelperPrivate;
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyAccountComboSplitHelper : public QObject
 {
-  Q_UNUSED(source_parent)
-  if (source_column == 0)
-    return true;
-  return false;
-}
+  Q_OBJECT
+  Q_DISABLE_COPY(KMyMoneyAccountComboSplitHelper)
+
+public:
+  explicit KMyMoneyAccountComboSplitHelper(QComboBox* accountCombo, QAbstractItemModel *model);
+  ~KMyMoneyAccountComboSplitHelper();
+
+protected:
+  bool eventFilter(QObject *watched, QEvent *event) override;
+
+private Q_SLOTS:
+  void splitCountChanged();
+  void modelDestroyed();
+
+Q_SIGNALS:
+  void accountComboEnabled(bool enabled);
+  void accountComboDisabled(bool disabled);
+
+private:
+  Q_DECLARE_PRIVATE(KMyMoneyAccountComboSplitHelper);
+  QScopedPointer<KMyMoneyAccountComboSplitHelperPrivate>  d_ptr;
+};
+
+
 #endif
 // kate: space-indent on; indent-width 2; remove-trailing-space on; remove-trailing-space-save on;

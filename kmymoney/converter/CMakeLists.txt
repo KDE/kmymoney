@@ -4,8 +4,6 @@ endif()
 
 set (libconverter_a_SOURCES
   mymoneystatementreader.cpp
-  mymoneytemplate.cpp
-  webpricequote.cpp
   transactionmatchfinder.cpp
   existingtransactionmatchfinder.cpp
   scheduledtransactionmatchfinder.cpp
@@ -22,10 +20,10 @@ target_link_libraries(converter
     KF5::Completion
     KF5::TextWidgets
     KF5::WidgetsAddons
-    KF5::ConfigCore
     Alkimia::alkimia
     KF5::KIOWidgets
     kmm_csvimportercore
+    # kmm_dialogs
   PRIVATE
     KF5::I18n
     kmymoney_common
@@ -33,10 +31,7 @@ target_link_libraries(converter
 )
 
 # we rely on some dialogs to be generated
-add_dependencies(converter dialogs)
+# add_dependencies(converter)
 
 ########### install files ###############
-
-install(FILES mymoneytemplate.h
-  DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
 

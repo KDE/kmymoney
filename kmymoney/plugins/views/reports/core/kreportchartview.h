@@ -45,8 +45,6 @@ namespace reports
 class KReportChartView: public Chart
 {
   Q_OBJECT
-public Q_SLOTS:
-  void slotNeedUpdate();
 public:
   explicit KReportChartView(QWidget* parent);
   ~KReportChartView() {}
@@ -76,6 +74,12 @@ public:
   void removeLegend();
 
 private:
+
+  /**
+   * Adjust vertical range if data model is represented by a horizontal line
+   * or the range starts below precision limit when logarithmic axis is used
+   */
+  void adjustVerticalRange(const int precision = 2);
 
   /**
     * Draw a PivotGridRow in a chart

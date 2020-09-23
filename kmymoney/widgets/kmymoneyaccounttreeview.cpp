@@ -1,6 +1,7 @@
 /*
  * Copyright 2010-2014  Cristian Oneț <onet.cristian@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -21,6 +22,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QObject>
 #include <QHeaderView>
 #include <QMouseEvent>
 #include <QPoint>
@@ -34,102 +36,61 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyaccount.h"
-#include "models.h"
 #include "accountsmodel.h"
-#include "accountsviewproxymodel.h"
-#include "budgetviewproxymodel.h"
+#include "institutionsmodel.h"
+#include "accountsproxymodel.h"
+// #include "budgetviewproxymodel.h"
 #include "modelenums.h"
 #include "mymoneyenums.h"
 #include "viewenums.h"
 
 class KMyMoneyAccountTreeViewPrivate
 {
-  Q_DISABLE_COPY(KMyMoneyAccountTreeViewPrivate)
   Q_DECLARE_PUBLIC(KMyMoneyAccountTreeView)
 
 public:
-  explicit KMyMoneyAccountTreeViewPrivate(KMyMoneyAccountTreeView *qq) :
-    q_ptr(qq),
-    m_model(nullptr),
-    m_view(View::None)
-  {
-  }
-
-  ~KMyMoneyAccountTreeViewPrivate()
-  {
-  }
-
-  QVector<eMyMoney::Account::Type> getVisibleGroups(const View view)
-  {
-    switch (view) {
-      case View::Institutions:
-      case View::Accounts:
-        return QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity};
-      case View::Categories:
-      case View::Budget:
-        return QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense};
-      default:
-        return QVector<eMyMoney::Account::Type> ();
-    }
-  }
-
-  QSet<eAccountsModel::Column> readVisibleColumns(const View view)
-  {
-    QSet<eAccountsModel::Column> columns;
-
-    const auto grp = KSharedConfig::openConfig()->group(getConfGrpName(view));
-    const auto cfgColumns = grp.readEntry("ColumnsSelection", QList<int>());
-    columns.insert(eAccountsModel::Column::Account);
-    foreach (const auto column, cfgColumns)
-      columns.insert(static_cast<eAccountsModel::Column>(column));
-    return columns;
-  }
+  KMyMoneyAccountTreeViewPrivate(KMyMoneyAccountTreeView *qq)
+    : q_ptr(qq),
+    proxyModel(new AccountsProxyModel(qq))
+    {}
 
   void openIndex(const QModelIndex &index)
   {
     Q_Q(KMyMoneyAccountTreeView);
     if (index.isValid()) {
-      QVariant data = q->model()->data(index, (int)eAccountsModel::Role::Account);
-      if (data.isValid()) {
-        if (data.canConvert<MyMoneyAccount>()) {
-          emit q->selectByObject(data.value<MyMoneyAccount>(), eView::Intent::OpenObject);
-        }
-        if (data.canConvert<MyMoneyInstitution>()) {
-          emit q->selectByObject(data.value<MyMoneyInstitution>(), eView::Intent::OpenObject);
+      QModelIndex baseIdx = MyMoneyFile::baseModel()->mapToBaseSource(index);
+      // baseIdx could point into the accountsModel or the institutionsModel.
+      // in case of the institutionsModel it is unclear if it is an account or
+      // an institution. So we simply extract the id and check where we find
+      // the object.
+      const auto objId = baseIdx.data(eMyMoney::Model::IdRole).toString();
+      auto idx = MyMoneyFile::instance()->accountsModel()->indexById(objId);
+      if (idx.isValid()) {
+        const auto account = MyMoneyFile::instance()->accountsModel()->itemByIndex(idx);
+        emit q->selectByObject(account, eView::Intent::OpenObject);
+      } else {
+        idx = MyMoneyFile::instance()->institutionsModel()->indexById(objId);
+        if (idx.isValid()) {
+          const auto institution = MyMoneyFile::instance()->institutionsModel()->itemByIndex(idx);
+          emit q->selectByObject(institution, eView::Intent::OpenObject);
         }
       }
     }
   }
 
-  static QString getConfGrpName(const View view)
-  {
-    switch (view) {
-      case View::Institutions:
-        return QStringLiteral("KInstitutionsView");
-      case View::Accounts:
-        return QStringLiteral("KAccountsView");
-      case View::Categories:
-        return QStringLiteral("KCategoriesView");
-      case View::Budget:
-        return QStringLiteral("KBudgetsView");
-      default:
-        return QString();
-    }
-  }
-
-  KMyMoneyAccountTreeView *q_ptr;
-  AccountsViewProxyModel  *m_model;
-  View                     m_view;
+  KMyMoneyAccountTreeView*  q_ptr;
+  AccountsProxyModel*       proxyModel;
 };
 
-KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent) :
-  QTreeView(parent),
-  d_ptr(new KMyMoneyAccountTreeViewPrivate(this))
+KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent)
+  : QTreeView(parent)
+  , d_ptr(new KMyMoneyAccountTreeViewPrivate(this))
 {
+  Q_D(KMyMoneyAccountTreeView);
   setContextMenuPolicy(Qt::CustomContextMenu);            // allow context menu to be opened on tree items
-  header()->setContextMenuPolicy(Qt::CustomContextMenu);  // allow context menu to be opened on tree header for columns selection
   connect(this, &QWidget::customContextMenuRequested, this, &KMyMoneyAccountTreeView::customContextMenuRequested);
   setAllColumnsShowFocus(true);
   setAlternatingRowColors(true);
@@ -139,20 +100,46 @@ KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent) :
 
 KMyMoneyAccountTreeView::~KMyMoneyAccountTreeView()
 {
-  Q_D(KMyMoneyAccountTreeView);
-  if (d->m_view != View::None) {
-    auto grp = KSharedConfig::openConfig()->group(d->getConfGrpName(d->m_view));
-    const auto columns = header()->saveState();
-    grp.writeEntry("HeaderState", columns);
-    QList<int> visColumns;
-    foreach (const auto column, d->m_model->getVisibleColumns())
-      visColumns.append(static_cast<int>(column));
-    grp.writeEntry("ColumnsSelection", visColumns);
-    grp.sync();
-  }
-  delete d;
 }
 
+
+void KMyMoneyAccountTreeView::setModel(QAbstractItemModel* model)
+{
+  Q_D(KMyMoneyAccountTreeView);
+  d->proxyModel->setSourceModel(model);
+  QTreeView::setModel(d->proxyModel);
+}
+
+void KMyMoneyAccountTreeView::setProxyModel(AccountsProxyModel* model)
+{
+  Q_D(KMyMoneyAccountTreeView);
+  // unlink a possible sourceModel
+  QAbstractItemModel* sourceModel = d->proxyModel->sourceModel();
+  if (sourceModel) {
+    d->proxyModel->setSourceModel(nullptr);
+  }
+
+  // delete the old proxy
+  d->proxyModel->deleteLater();
+
+  // reparent the new proxy
+  model->setParent(this);
+
+  // and insert it into the chain
+  d->proxyModel = model;
+  d->proxyModel->setSourceModel(sourceModel);
+  QTreeView::setModel(d->proxyModel);
+
+}
+
+AccountsProxyModel* KMyMoneyAccountTreeView::proxyModel() const
+{
+  Q_D(const KMyMoneyAccountTreeView);
+  return d->proxyModel;
+}
+
+/// @todo cleanup
+#if 0
 AccountsViewProxyModel *KMyMoneyAccountTreeView::init(View view)
 {
   Q_D(KMyMoneyAccountTreeView);
@@ -164,8 +151,8 @@ AccountsViewProxyModel *KMyMoneyAccountTreeView::init(View view)
 
   d->m_model->addAccountGroup(d->getVisibleGroups(view));
 
-  const auto accountsModel = Models::instance()->accountsModel();
-  const auto institutionsModel = Models::instance()->institutionsModel();
+  const auto accountsModel = MyMoneyFile::instance()->accountsModel();
+  const auto institutionsModel = MyMoneyFile::instance()->institutionsModel();
 
   AccountsModel *sourceModel;
   if (view != View::Institutions)
@@ -193,6 +180,7 @@ AccountsViewProxyModel *KMyMoneyAccountTreeView::init(View view)
 
   return d->m_model;
 }
+#endif
 
 void KMyMoneyAccountTreeView::mouseDoubleClickEvent(QMouseEvent *event)
 {
@@ -203,8 +191,8 @@ void KMyMoneyAccountTreeView::mouseDoubleClickEvent(QMouseEvent *event)
 
 void KMyMoneyAccountTreeView::keyPressEvent(QKeyEvent *event)
 {
-  Q_D(KMyMoneyAccountTreeView);
   if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
+    Q_D(KMyMoneyAccountTreeView);
     d->openIndex(currentIndex());
     event->accept();
   } else {
@@ -214,17 +202,22 @@ void KMyMoneyAccountTreeView::keyPressEvent(QKeyEvent *event)
 
 void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint)
 {
-  const auto index = model()->index(currentIndex().row(), (int)eAccountsModel::Column::Account, currentIndex().parent());
-  if (index.isValid() && (model()->flags(index) & Qt::ItemIsSelectable)) {
-    const auto dataVariant = model()->data(index, (int)eAccountsModel::Role::Account);
-    if (dataVariant.isValid()) {
-      if (dataVariant.canConvert<MyMoneyAccount>()) {
-        emit selectByObject(dataVariant.value<MyMoneyAccount>(), eView::Intent::None);
-        emit selectByObject(dataVariant.value<MyMoneyAccount>(), eView::Intent::OpenContextMenu);
-      }
-      if (dataVariant.canConvert<MyMoneyInstitution>()) {
-        emit selectByObject(dataVariant.value<MyMoneyInstitution>(), eView::Intent::None);
-        emit selectByObject(dataVariant.value<MyMoneyInstitution>(), eView::Intent::OpenContextMenu);
+  if (currentIndex().isValid() && (model()->flags(currentIndex()) & Qt::ItemIsSelectable)) {
+    auto objId = currentIndex().data(eMyMoney::Model::IdRole).toString();
+    const auto account = MyMoneyFile::instance()->accountsModel()->itemById(objId);
+    if (!account.id().isEmpty()) {
+      emit selectByObject(account, eView::Intent::None);
+      emit selectByObject(account, eView::Intent::OpenContextMenu);
+    }
+    const auto institution = MyMoneyFile::instance()->institutionsModel()->itemById(objId);
+    if (!institution.id().isEmpty()) {
+      // the institutions model also reports accounts as institutions at this point.
+      // We can differentiate between the two objects by looking at the parent of
+      // the index. If it is valid, we have been called via an account,
+      // if it is invalid the source is an institution.
+      if (!currentIndex().parent().isValid()) {
+        emit selectByObject(institution, eView::Intent::None);
+        emit selectByObject(institution, eView::Intent::OpenContextMenu);
       }
     }
   }
@@ -233,6 +226,29 @@ void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint)
 void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
 {
   QTreeView::selectionChanged(selected, deselected);
+  if (!selected.isEmpty()) {
+    QModelIndexList idxList = selected.indexes();
+    if (!idxList.isEmpty()) {
+      auto objId = selected.indexes().front().data(eMyMoney::Model::IdRole).toString();
+      const auto account = MyMoneyFile::instance()->accountsModel()->itemById(objId);
+      if (!account.id().isEmpty()) {
+        emit selectByObject(account, eView::Intent::None);
+        return;
+      }
+
+      const auto institution = MyMoneyFile::instance()->institutionsModel()->itemById(objId);
+      if (!institution.id().isEmpty()) {
+        emit selectByObject(institution, eView::Intent::None);
+        return;
+      }
+    }
+  }
+  // since no object was selected reset the object selection
+  emit selectByObject(MyMoneyAccount(), eView::Intent::None);
+  emit selectByObject(MyMoneyInstitution(), eView::Intent::None);
+
+/// @todo cleanup
+#if 0
   if (!selected.empty()) {
     auto indexes = selected.front().indexes();
     if (!indexes.empty()) {
@@ -249,12 +265,13 @@ void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, c
       }
     }
   }
-  // since no object was selected reset the object selection
-  emit selectByObject(MyMoneyAccount(), eView::Intent::None);
-  emit selectByObject(MyMoneyInstitution(), eView::Intent::None);
+#endif
 }
 
+/// @todo cleanup
+#if 0
 void KMyMoneyAccountTreeView::slotColumnToggled(const eAccountsModel::Column column, const bool show)
 {
   emit selectByVariant(QVariantList {QVariant::fromValue(column), QVariant(show)}, eView::Intent::ToggleColumn);
 }
+#endif

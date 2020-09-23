@@ -33,6 +33,7 @@ namespace eStorage {
     Currency,
     Price,
     Tag,
+    CostCenter,
     // insert new entries above this line
     Count
     };

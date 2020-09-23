@@ -1,19 +1,20 @@
-/***************************************************************************
-                          newspliteditor.cpp
-                             -------------------
-    begin                : Sat Apr 9 2016
-    copyright            : (C) 2016 by Thomas Baumgart
-    email                : Thomas Baumgart <tbaumgart@kde.org>
- ***************************************************************************/
+/*
+ * Copyright 2016-2020  Thomas Baumgart <tbaumgart@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
 
 #include "newspliteditor.h"
 
@@ -23,13 +24,14 @@
 #include <QCompleter>
 #include <QSortFilterProxyModel>
 #include <QStringList>
+#include <QDate>
 #include <QDebug>
-#include <QStandardItemModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
 #include <KLocalizedString>
+#include <KConcatenateRowsProxyModel>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -37,45 +39,54 @@
 #include "creditdebithelper.h"
 #include "kmymoneyutils.h"
 #include "kmymoneyaccountcombo.h"
-#include "models.h"
+#include "mymoneyfile.h"
 #include "accountsmodel.h"
 #include "costcentermodel.h"
 #include "ledgermodel.h"
 #include "splitmodel.h"
+#include "payeesmodel.h"
 #include "mymoneyaccount.h"
 #include "mymoneyexception.h"
+#include "mymoneyprice.h"
 #include "ui_newspliteditor.h"
 #include "widgethintframe.h"
-#include "ledgerview.h"
+#include "splitview.h"
 #include "icons/icons.h"
 #include "mymoneyenums.h"
 #include "modelenums.h"
+#include "mymoneysecurity.h"
+#include "kcurrencycalculator.h"
+#include "amounteditcurrencyhelper.h"
 
 using namespace Icons;
 
 struct NewSplitEditor::Private
 {
   Private(NewSplitEditor* parent)
-  : ui(new Ui_NewSplitEditor)
+  : q(parent)
+  , ui(new Ui_NewSplitEditor)
   , accountsModel(new AccountNamesFilterProxyModel(parent))
+  , payeesModel(new QSortFilterProxyModel(parent))
   , costCenterModel(new QSortFilterProxyModel(parent))
   , splitModel(0)
   , accepted(false)
   , costCenterRequired(false)
   , showValuesInverted(false)
+  , haveShares(false)
+  , loadingSplit(false)
+  , isIncomeExpense(false)
+  , postDate(QDate::currentDate())
   , amountHelper(nullptr)
   {
     accountsModel->setObjectName("AccountNamesFilterProxyModel");
     costCenterModel->setObjectName("SortedCostCenterModel");
-    statusModel.setObjectName("StatusModel");
+    payeesModel->setObjectName("SortedPayeesModel");
 
     costCenterModel->setSortLocaleAware(true);
     costCenterModel->setSortCaseSensitivity(Qt::CaseInsensitive);
 
-    createStatusEntry(eMyMoney::Split::State::NotReconciled);
-    createStatusEntry(eMyMoney::Split::State::Cleared);
-    createStatusEntry(eMyMoney::Split::State::Reconciled);
-    // createStatusEntry(eMyMoney::Split::State::Frozen);
+    payeesModel->setSortLocaleAware(true);
+    payeesModel->setSortCaseSensitivity(Qt::CaseInsensitive);
   }
 
   ~Private()
@@ -83,7 +94,6 @@ struct NewSplitEditor::Private
     delete ui;
   }
 
-  void createStatusEntry(eMyMoney::Split::State status);
   bool checkForValidSplit(bool doUserInteraction = true);
 
   bool costCenterChanged(int costCenterIndex);
@@ -91,26 +101,29 @@ struct NewSplitEditor::Private
   bool numberChanged(const QString& newNumber);
   bool amountChanged(CreditDebitHelper* valueHelper);
 
+  void checkMultiCurrency();
+
+  NewSplitEditor*               q;
   Ui_NewSplitEditor*            ui;
   AccountNamesFilterProxyModel* accountsModel;
+  QSortFilterProxyModel*        payeesModel;
   QSortFilterProxyModel*        costCenterModel;
   SplitModel*                   splitModel;
   bool                          accepted;
   bool                          costCenterRequired;
   bool                          showValuesInverted;
-  QStandardItemModel            statusModel;
-  QString                       transactionSplitId;
+  bool                          haveShares;
+  bool                          loadingSplit;
+  bool                          isIncomeExpense;
   MyMoneyAccount                counterAccount;
   MyMoneyAccount                category;
+  MyMoneySecurity               commodity;
+  MyMoneyMoney                  shares;
+  MyMoneyMoney                  value;
+  MyMoneyMoney                  price;
+  QDate                         postDate;
   CreditDebitHelper*            amountHelper;
 };
-
-void NewSplitEditor::Private::createStatusEntry(eMyMoney::Split::State status)
-{
-  QStandardItem* p = new QStandardItem(KMyMoneyUtils::reconcileStateToString(status, true));
-  p->setData((int)status);
-  statusModel.appendRow(p);
-}
 
 bool NewSplitEditor::Private::checkForValidSplit(bool doUserInteraction)
 {
@@ -143,15 +156,19 @@ bool NewSplitEditor::Private::costCenterChanged(int costCenterIndex)
 bool NewSplitEditor::Private::categoryChanged(const QString& accountId)
 {
   bool rc = true;
+  isIncomeExpense = false;
   if(!accountId.isEmpty()) {
     try {
-      QModelIndex index = Models::instance()->accountsModel()->accountById(accountId);
-      category = Models::instance()->accountsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
-      const bool isIncomeExpense = category.isIncomeExpense();
+      const auto model = MyMoneyFile::instance()->accountsModel();
+      QModelIndex index = model->indexById(accountId);
+      category = model->itemByIndex(index);
+      isIncomeExpense = category.isIncomeExpense();
       ui->costCenterCombo->setEnabled(isIncomeExpense);
       ui->costCenterLabel->setEnabled(isIncomeExpense);
       ui->numberEdit->setDisabled(isIncomeExpense);
       ui->numberLabel->setDisabled(isIncomeExpense);
+
+      checkMultiCurrency();
 
       costCenterRequired = category.isCostCenterRequired();
       rc &= costCenterChanged(ui->costCenterCombo->currentIndex());
@@ -167,6 +184,8 @@ bool NewSplitEditor::Private::numberChanged(const QString& newNumber)
   bool rc = true;
   WidgetHintFrame::hide(ui->numberEdit, i18n("The check number used for this transaction."));
   if(!newNumber.isEmpty()) {
+    /// @todo port to new model code
+#if 0
     const LedgerModel* model = Models::instance()->ledgerModel();
     QModelIndexList list = model->match(model->index(0, 0), (int)eLedgerModel::Role::Number,
                                         QVariant(newNumber),
@@ -181,6 +200,7 @@ bool NewSplitEditor::Private::numberChanged(const QString& newNumber)
         break;
       }
     }
+#endif
   }
   return rc;
 }
@@ -188,38 +208,109 @@ bool NewSplitEditor::Private::numberChanged(const QString& newNumber)
 bool NewSplitEditor::Private::amountChanged(CreditDebitHelper* valueHelper)
 {
   Q_UNUSED(valueHelper);
+  if (valueHelper->haveValue()) {
+    if (isIncomeExpense) {
+      shares = valueHelper->value();
+    } else {
+      value = valueHelper->value();
+    }
+  }
   bool rc = true;
+  checkMultiCurrency();
   return rc;
 }
 
+void NewSplitEditor::Private::checkMultiCurrency()
+{
+  // skip interaction during loading operation
+  if (loadingSplit)
+    return;
+
+  const auto categoryId = q->accountId();
+  const auto file = MyMoneyFile::instance();
+  auto const model = file->accountsModel();
+  auto account = model->itemById(categoryId);
+  auto security = MyMoneyFile::instance()->security(account.currencyId());
+  if (security.id() != commodity.id() && !amountHelper->value().isZero()) {
+    QPointer<KCurrencyCalculator> calc;
+    if (isIncomeExpense) {
+      if (price == MyMoneyMoney::ONE) {
+        price = file->price(security.id(), commodity.id(), QDate()).rate(commodity.id());
+      }
+      calc = new KCurrencyCalculator(security,
+                                     commodity,
+                                     amountHelper->value(),
+                                     amountHelper->value() * price,
+                                     postDate,
+                                     security.smallestAccountFraction(),
+                                     q);
+    } else {
+      if (price == MyMoneyMoney::ONE) {
+        price = file->price(commodity.id(), security.id(), QDate()).rate(security.id());
+      }
+      calc = new KCurrencyCalculator(commodity,
+                                     security,
+                                     amountHelper->value(),
+                                     amountHelper->value() * price,
+                                     postDate,
+                                     security.smallestAccountFraction(),
+                                     q);
+    }
+    if (calc->exec() == QDialog::Accepted && calc) {
+      price = calc->price();
+    }
+    delete calc;
+
+  } else {
+    price = MyMoneyMoney::ONE;
+  }
+  if (isIncomeExpense) {
+    value = shares * price;
+  } else {
+    shares = value * price;
+  }
+}
 
 
-NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
+NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity, const QString& counterAccountId)
   : QFrame(parent, Qt::FramelessWindowHint /* | Qt::X11BypassWindowManagerHint */)
   , d(new Private(this))
 {
-  SplitView* view = qobject_cast<SplitView*>(parent->parentWidget());
+  d->commodity = commodity;
+  auto const file = MyMoneyFile::instance();
+  auto view = qobject_cast<SplitView*>(parent->parentWidget());
   Q_ASSERT(view != 0);
   d->splitModel = qobject_cast<SplitModel*>(view->model());
 
-  QModelIndex index = Models::instance()->accountsModel()->accountById(counterAccountId);
-  d->counterAccount = Models::instance()->accountsModel()->data(index, (int)eAccountsModel::Role::Account).value<MyMoneyAccount>();
+  auto const model = MyMoneyFile::instance()->accountsModel();
+  d->counterAccount = model->itemById(counterAccountId);
 
   d->ui->setupUi(this);
   d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
   d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
 
+  auto concatModel = new KConcatenateRowsProxyModel(parent);
+  concatModel->addSourceModel(file->payeesModel()->emptyPayee());
+  concatModel->addSourceModel(file->payeesModel());
+  d->payeesModel->setSortRole(Qt::DisplayRole);
+  d->payeesModel->setSourceModel(concatModel);
+  d->payeesModel->sort(0);
+
+  d->ui->payeeEdit->setEditable(true);
+  d->ui->payeeEdit->setModel(d->payeesModel);
+  d->ui->payeeEdit->setModelColumn(0);
+  d->ui->payeeEdit->completer()->setFilterMode(Qt::MatchContains);
+
   d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity});
   d->accountsModel->setHideEquityAccounts(false);
-  auto const model = Models::instance()->accountsModel();
   d->accountsModel->setSourceModel(model);
-  d->accountsModel->setSourceColumns(model->getColumns());
-  d->accountsModel->sort((int)eAccountsModel::Column::Account);
+  d->accountsModel->sort(AccountsModel::Column::AccountName);
   d->ui->accountCombo->setModel(d->accountsModel);
+  d->ui->accountCombo->setSplitActionVisible(false);
 
   d->costCenterModel->setSortRole(Qt::DisplayRole);
-  d->costCenterModel->setSourceModel(Models::instance()->costCenterModel());
-  d->costCenterModel->sort((int)eAccountsModel::Column::Account);
+  d->costCenterModel->setSourceModel(MyMoneyFile::instance()->costCenterModel());
+  d->costCenterModel->sort(AccountsModel::Column::AccountName);
 
   d->ui->costCenterCombo->setEditable(true);
   d->ui->costCenterCombo->setModel(d->costCenterModel);
@@ -233,10 +324,12 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
 
   d->amountHelper = new CreditDebitHelper(this, d->ui->amountEditCredit, d->ui->amountEditDebit);
 
+  new AmountEditCurrencyHelper(d->ui->accountCombo, d->amountHelper, commodity.id());
+
   connect(d->ui->numberEdit, SIGNAL(textChanged(QString)), this, SLOT(numberChanged(QString)));
   connect(d->ui->costCenterCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(costCenterChanged(int)));
   connect(d->ui->accountCombo, SIGNAL(accountSelected(QString)), this, SLOT(categoryChanged(QString)));
-  connect(d->amountHelper, SIGNAL(valueChanged()), this, SLOT(amountChanged()));
+  connect(d->amountHelper, &CreditDebitHelper::valueChanged, this, &NewSplitEditor::amountChanged);
 
   connect(d->ui->cancelButton, SIGNAL(clicked(bool)), this, SLOT(reject()));
   connect(d->ui->enterButton, SIGNAL(clicked(bool)), this, SLOT(acceptEdit()));
@@ -244,6 +337,11 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
 
 NewSplitEditor::~NewSplitEditor()
 {
+}
+
+void NewSplitEditor::setPostDate(const QDate& date)
+{
+  d->postDate = date;
 }
 
 void NewSplitEditor::setShowValuesInverted(bool inverse)
@@ -285,6 +383,7 @@ void NewSplitEditor::keyPressEvent(QKeyEvent* e)
           reject();
         } else {
           if(d->ui->enterButton->isEnabled()) {
+            d->ui->enterButton->setFocus();
             d->ui->enterButton->click();
           }
           return;
@@ -327,28 +426,58 @@ void NewSplitEditor::setMemo(const QString& memo)
   d->ui->memoEdit->setPlainText(memo);
 }
 
-MyMoneyMoney NewSplitEditor::amount() const
+MyMoneyMoney NewSplitEditor::shares() const
 {
-  return d->amountHelper->value();
+  return d->shares;
 }
 
-void NewSplitEditor::setAmount(MyMoneyMoney value)
+void NewSplitEditor::setShares(const MyMoneyMoney& shares)
 {
-  d->amountHelper->setValue(value);
+  d->shares = shares;
+  d->haveShares = true;
 }
+
+MyMoneyMoney NewSplitEditor::value() const
+{
+  return d->value;
+}
+
+void NewSplitEditor::setValue(const MyMoneyMoney& value)
+{
+  d->price = MyMoneyMoney::ONE;
+  d->value = value;
+  if (!d->haveShares) {
+    qDebug() << "NewSplitEditor::setValue(): call to setShares() missing, price invalid";
+  } else if (!(d->shares.isZero() || value.isZero())) {
+    d->price = d->shares/value;
+  }
+
+  if (d->isIncomeExpense) {
+    d->amountHelper->setValue(d->shares);
+    if (!(d->shares.isZero() || value.isZero())) {
+      d->price = value/d->shares;
+    }
+  } else {
+    d->amountHelper->setValue(value);
+  }
+}
+
 
 QString NewSplitEditor::costCenterId() const
 {
   const int row = d->ui->costCenterCombo->currentIndex();
   QModelIndex index = d->ui->costCenterCombo->model()->index(row, 0);
-  return d->ui->costCenterCombo->model()->data(index, CostCenterModel::CostCenterIdRole).toString();
+  return d->ui->costCenterCombo->model()->data(index, eMyMoney::Model::Roles::IdRole).toString();
 }
 
 void NewSplitEditor::setCostCenterId(const QString& id)
 {
-  QModelIndex index = Models::indexById(d->costCenterModel, CostCenterModel::CostCenterIdRole, id);
-  if(index.isValid()) {
-    d->ui->costCenterCombo->setCurrentIndex(index.row());
+  const auto baseIdx = MyMoneyFile::instance()->costCenterModel()->indexById(id);
+  if (baseIdx.isValid()) {
+    const auto index = MyMoneyFile::baseModel()->mapFromBaseSource(d->costCenterModel, baseIdx);
+    if(index.isValid()) {
+      d->ui->costCenterCombo->setCurrentIndex(index.row());
+    }
   }
 }
 
@@ -362,10 +491,20 @@ void NewSplitEditor::setNumber(const QString& number)
   d->ui->numberEdit->setText(number);
 }
 
-
-QString NewSplitEditor::splitId() const
+QString NewSplitEditor::payeeId() const
 {
-  return d->transactionSplitId;
+  const auto idx = d->payeesModel->index(d->ui->payeeEdit->currentIndex(), 0);
+  return idx.data(eMyMoney::Model::IdRole).toString();
+}
+
+void NewSplitEditor::setPayeeId(const QString& id)
+{
+  QModelIndexList indexes = d->payeesModel->match(d->payeesModel->index(0, 0), eMyMoney::Model::IdRole, QVariant(id), 1, Qt::MatchFlags(Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive)));
+  int row(0);
+  if (!indexes.isEmpty()) {
+    row = indexes.first().row();
+  }
+  d->ui->payeeEdit->setCurrentIndex(row);
 }
 
 void NewSplitEditor::numberChanged(const QString& newNumber)
@@ -385,5 +524,16 @@ void NewSplitEditor::costCenterChanged(int costCenterIndex)
 
 void NewSplitEditor::amountChanged()
 {
-//  d->amountChanged(d->amountHelper); // useless call as reported by coverity scan
+  d->amountChanged(d->amountHelper);
 }
+
+void NewSplitEditor::startLoadingSplit()
+{
+  d->loadingSplit = true;
+}
+
+void NewSplitEditor::finishLoadingSplit()
+{
+  d->loadingSplit = false;
+}
+
