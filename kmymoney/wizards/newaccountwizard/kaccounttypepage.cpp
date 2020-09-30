@@ -73,16 +73,25 @@ namespace NewAccountWizard
     Q_D(AccountTypePage);
     d->ui->setupUi(this);
     d->m_showPriceWarning = true;
-    d->ui->m_typeSelection->insertItem(i18n("Checking"), (int)Account::Type::Checkings);
-    d->ui->m_typeSelection->insertItem(i18n("Savings"), (int)Account::Type::Savings);
-    d->ui->m_typeSelection->insertItem(i18n("Credit Card"), (int)Account::Type::CreditCard);
-    d->ui->m_typeSelection->insertItem(i18n("Cash"), (int)Account::Type::Cash);
-    d->ui->m_typeSelection->insertItem(i18n("Loan"), (int)Account::Type::Loan);
-    d->ui->m_typeSelection->insertItem(i18n("Investment"), (int)Account::Type::Investment);
-    d->ui->m_typeSelection->insertItem(i18n("Asset"), (int)Account::Type::Asset);
-    d->ui->m_typeSelection->insertItem(i18n("Liability"), (int)Account::Type::Liability);
+    d->ui->m_typeSelection->insertItem(i18n("Checking"), (int)Account::Type::Checkings, 0);
+    d->ui->m_typeSelection->setItemIcon(0, Icons::get(Icon::Checking));
+    d->ui->m_typeSelection->insertItem(i18n("Savings"), (int)Account::Type::Savings, 1);
+    d->ui->m_typeSelection->setItemIcon(1, Icons::get(Icon::Savings));
+    d->ui->m_typeSelection->insertItem(i18n("Credit Card"), (int)Account::Type::CreditCard, 2);
+    d->ui->m_typeSelection->setItemIcon(2, Icons::get(Icon::CreditCard));
+    d->ui->m_typeSelection->insertItem(i18n("Cash"), (int)Account::Type::Cash, 3);
+    d->ui->m_typeSelection->setItemIcon(3, Icons::get(Icon::Cash));
+    d->ui->m_typeSelection->insertItem(i18n("Loan"), (int)Account::Type::Loan, 4);
+    d->ui->m_typeSelection->setItemIcon(4, Icons::get(Icon::Loan));
+    d->ui->m_typeSelection->insertItem(i18n("Investment"), (int)Account::Type::Investment, 5);
+    d->ui->m_typeSelection->setItemIcon(5, Icons::get(Icon::Investment));
+    d->ui->m_typeSelection->insertItem(i18n("Asset"), (int)Account::Type::Asset, 6);
+    d->ui->m_typeSelection->setItemIcon(6, Icons::get(Icon::Asset));
+    d->ui->m_typeSelection->insertItem(i18n("Liability"), (int)Account::Type::Liability, 7);
+    d->ui->m_typeSelection->setItemIcon(7, Icons::get(Icon::Liability));
     if (KMyMoneySettings::expertMode()) {
-        d->ui->m_typeSelection->insertItem(i18n("Equity"), (int)Account::Type::Equity);
+        d->ui->m_typeSelection->insertItem(i18n("Equity"), (int)Account::Type::Equity, 8);
+        d->ui->m_typeSelection->setItemIcon(8, Icons::get(Icon::Equity));
       }
 
     d->ui->m_typeSelection->setCurrentItem((int)Account::Type::Checkings);
