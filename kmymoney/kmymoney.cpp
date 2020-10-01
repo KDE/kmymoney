@@ -1641,53 +1641,43 @@ void KMyMoneyApp::initStatusBar()
 
 void KMyMoneyApp::initIcons()
 {
-#if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
-  const auto appDataIconsLocation = QStringLiteral("kmymoney/icons");
-#else
-  const auto appDataIconsLocation = QStringLiteral("icons");
-#endif
-
-  const QString customIconRelativePath = appDataIconsLocation + QStringLiteral("/hicolor/16x16/actions/account-add.png");
-#ifndef IS_APPIMAGE
-  // find where our custom icons were installed based on an custom icon that we know should exist after installation
-  auto customIconAbsolutePath = QStandardPaths::locate(QStandardPaths::AppDataLocation, customIconRelativePath);
-  if (customIconAbsolutePath.isEmpty()) {
-    qWarning("Custom icons were not found in any of the following QStandardPaths::AppDataLocation:");
-    for (const auto &standardPath : QStandardPaths::standardLocations(QStandardPaths::AppDataLocation))
-      qWarning() << standardPath;
-  }
-#else
-  // according to https://docs.appimage.org/packaging-guide/ingredients.html#open-source-applications
-  // QStandardPaths::AppDataLocation is unreliable on AppImages, so apply workaround here in case we fail to find icons
-  QString customIconAbsolutePath;
-  const auto appImageAppDataLocation = QString("%1%2%3").arg(QCoreApplication::applicationDirPath(), QString("/../share/kmymoney/"), customIconRelativePath);
-  if (QFile::exists(appImageAppDataLocation )) {
-    customIconAbsolutePath = appImageAppDataLocation ;
-  } else {
-    qWarning("Custom icons were not found in the following location:");
-    qWarning() << appImageAppDataLocation ;
-  }
-#endif
-
-  // add our custom icons path to icons search path
-  if (!customIconAbsolutePath.isEmpty()) {
-    customIconAbsolutePath.chop(customIconRelativePath.length());
-    customIconAbsolutePath.append(appDataIconsLocation);
-    auto paths = QIcon::themeSearchPaths();
-    paths.append(customIconAbsolutePath);
-    QIcon::setThemeSearchPaths(paths);
-  }
-
   qDebug() << "System icon theme as reported by QT: " << QIcon::themeName();
-#if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
-  auto themeName = QStringLiteral("breeze");                      // only breeze is available for craft packages
-#else
-  auto themeName = KMyMoneySettings::iconsTheme();                        // get theme user wants
-  if (!themeName.isEmpty() && themeName != QStringLiteral("system"))  // if it isn't default theme then set it
-    QIcon::setThemeName(themeName);
-  else
-    themeName = QIcon::themeName();
+
+  auto themeName = KMyMoneySettings::iconsTheme();
+  qDebug() << "App icon theme as configured in KMyMoney: " << themeName;
+
+#if defined(Q_OS_WIN)
+  // @todo add support for dark icons, e.g. https://www.thetopsites.net/article/51334674.shtml
+
+  themeName = QStringLiteral("breeze");                      // only breeze is available for craft packages
+  qDebug() << "Running under Windows, so will be forcing the icon theme to: " << themeName;
+#elif defined(Q_OS_MACOS)
+  // @todo requires https://phabricator.kde.org/D25119 or icons/CMakeList.txt to generate for macOS as well
+
+  constexpr int OSX_LIGHT_MODE = 236;
+  constexpr int OSX_DARK_MODE = 50;
+
+  auto bg = palette().color(QPalette::Active, QPalette::Window);
+
+  if (bg.lightness() == OSX_LIGHT_MODE) {
+    themeName = QStringLiteral("breeze");
+    qDebug() << "Detected macOS light mode, so will be forcing the icon theme to: " << themeName;
+  }
+  else {
+    themeName = QStringLiteral("breeze-dark");
+    qDebug() << "Detected macOS dark mode, so will be forcing the icon theme to: " << themeName;
+  }
 #endif
+
+  // if it isn't default theme then set it
+  if (!themeName.isEmpty() && themeName != QStringLiteral("system")) {
+    QIcon::setThemeName(themeName);
+    qDebug() << "Setting icon theme to: " << themeName;
+  }
+  else {
+    themeName = QIcon::themeName();
+    qDebug() << "Obeying the system-wide icon theme, currently set to: " << themeName;
+  }
 
   setUpMappings(themeName);
 }
