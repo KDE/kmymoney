@@ -292,6 +292,13 @@ int main(int argc, char *argv[])
 
 int runKMyMoney(QApplication& a, std::unique_ptr<QSplashScreen> splash, const QUrl & file, bool noFile)
 {
+
+#ifdef Q_OS_MAC
+  kmymoney->setUnifiedTitleAndToolBarOnMac(true);
+  kmymoney->setAttribute(Qt::WA_TranslucentBackground, true);
+  kmymoney->setWindowFlag(Qt::MacWindowToolBarButtonHint);
+#endif
+
   bool instantQuit = false;
 
   /**
