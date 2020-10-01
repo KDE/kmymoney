@@ -82,11 +82,11 @@ RegisterSearchLine::RegisterSearchLine(QWidget* parent, Register* reg) :
   parentWidget()->layout()->addWidget(d->combo);
   // don't change the order of the following lines unless updating
   // the case labels in RegisterSearchLine::itemMatches() at the same time
-  d->combo->insertItem((int)eRegister::ItemState::Any, Icons::get(Icon::Unknown), i18n("Any status"));
-  d->combo->insertItem((int)eRegister::ItemState::Imported, Icons::get(Icon::DocumentImport), i18n("Imported"));
-  d->combo->insertItem((int)eRegister::ItemState::Matched, Icons::get(Icon::TransactionMatch), i18n("Matched"));
-  d->combo->insertItem((int)eRegister::ItemState::Erroneous, Icons::get(Icon::Warning), i18n("Erroneous"));
-  d->combo->insertItem((int)eRegister::ItemState::Scheduled, Icons::get(Icon::Schedule), i18n("Scheduled"));
+  d->combo->insertItem((int)eRegister::ItemState::Any, i18n("Any status"));
+  d->combo->insertItem((int)eRegister::ItemState::Imported, Icons::get(Icon::TransactionStateImported), i18n("Imported"));
+  d->combo->insertItem((int)eRegister::ItemState::Matched, Icons::get(Icon::TransactionStateMatched), i18n("Matched"));
+  d->combo->insertItem((int)eRegister::ItemState::Erroneous, Icons::get(Icon::TransactionStateErroneous), i18n("Erroneous"));
+  d->combo->insertItem((int)eRegister::ItemState::Scheduled, Icons::get(Icon::TransactionStateScheduled), i18n("Scheduled"));
   d->combo->insertItem((int)eRegister::ItemState::NotMarked, i18n("Not marked"));
   d->combo->insertItem((int)eRegister::ItemState::NotReconciled, i18n("Not reconciled"));
   d->combo->insertItem((int)eRegister::ItemState::Cleared, i18nc("Reconciliation state 'Cleared'", "Cleared"));

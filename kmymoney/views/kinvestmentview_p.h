@@ -191,7 +191,7 @@ public:
     m_securityColumnSelector->setAlwaysVisible(QVector<int>({0}));
     m_securityColumnSelector->setSelectable(m_securityColumnSelector->columns());
 
-    ui->m_deleteSecurityButton->setIcon(Icons::get(Icon::EditDelete));
+    ui->m_deleteSecurityButton->setIcon(Icons::get(Icon::EditRemove));
     ui->m_editSecurityButton->setIcon(Icons::get(Icon::DocumentEdit));
 
     q->connect(ui->m_searchSecurities, &QLineEdit::textChanged, m_securitiesProxyModel, &QSortFilterProxyModel::setFilterFixedString);

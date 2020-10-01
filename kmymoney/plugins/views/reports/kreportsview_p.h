@@ -229,7 +229,7 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
   m_control->ui->buttonClose->setIcon(Icons::get(Icon::DocumentClose));
   m_control->ui->buttonConfigure->setIcon(Icons::get(Icon::Configure));
   m_control->ui->buttonCopy->setIcon(Icons::get(Icon::EditCopy));
-  m_control->ui->buttonDelete->setIcon(Icons::get(Icon::EditDelete));
+  m_control->ui->buttonDelete->setIcon(Icons::get(Icon::EditRemove));
   m_control->ui->buttonExport->setIcon(Icons::get(Icon::DocumentExport));
   m_control->ui->buttonNew->setIcon(Icons::get(Icon::DocumentNew));
 

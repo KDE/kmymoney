@@ -351,14 +351,14 @@ public:
     item->setData(0, KScheduleTreeItem::OrderRole, schedule.name());
     if (!schedule.isFinished()) {
       if (schedule.isOverdue()) {
-        item->setIcon(0, Icons::get(Icon::UpcomingEvents));
+        item->setIcon(0, Icons::get(Icon::ScheduleOverdue));
         QBrush brush = item->foreground(0);
         brush.setColor(Qt::red);
         for (int i = 0; i < ui->m_scheduleTree->columnCount(); ++i) {
           item->setForeground(i, brush);
         }
       } else {
-        item->setIcon(0, Icons::get(Icon::CalendarDay));
+        item->setIcon(0, Icons::get(Icon::ScheduleOnTime));
       }
     } else {
       item->setIcon(0, Icons::get(Icon::DialogClose));

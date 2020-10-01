@@ -144,7 +144,7 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
   d->ui->m_priceList->header()->setStretchLastSection(true);
   d->ui->m_priceList->setContextMenuPolicy(Qt::CustomContextMenu);
 
-  d->ui->m_deleteButton->setIcon(Icons::get(Icon::EditDelete));
+  d->ui->m_deleteButton->setIcon(Icons::get(Icon::EditRemove));
   d->ui->m_newButton->setIcon(Icons::get(Icon::DocumentNew));
   d->ui->m_editButton->setIcon(Icons::get(Icon::DocumentEdit));
 
@@ -380,7 +380,7 @@ void KMyMoneyPriceDlg::slotShowPriceMenu(const QPoint& p)
       {eMenu::Action::NewPrice,    &KMyMoneyPriceDlg::slotNewPrice,          i18n("New price..."),           Icon::DocumentNew,   true},
       {eMenu::Action::EditPrice,   &KMyMoneyPriceDlg::slotEditPrice,         i18n("Edit price..."),          Icon::DocumentEdit,  cond1},
       {eMenu::Action::UpdatePrice, &KMyMoneyPriceDlg::slotOnlinePriceUpdate, i18n("Online Price Update..."), Icon::PriceUpdate,   cond2},
-      {eMenu::Action::DeletePrice, &KMyMoneyPriceDlg::slotDeletePrice,       i18n("Delete price..."),        Icon::EditDelete,    cond1}
+      {eMenu::Action::DeletePrice, &KMyMoneyPriceDlg::slotDeletePrice,       i18n("Delete price...")       , Icon::EditRemove,    cond1}
     };
 
     QList<QAction*> LUTActions;

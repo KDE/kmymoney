@@ -155,9 +155,9 @@ public:
     ui->m_filterBox->addItem(i18nc("@item Show only unused payees", "Unused"));
     ui->m_filterBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-    ui->m_newButton->setIcon(Icons::get(Icon::ListAddUser));
+    ui->m_newButton->setIcon(Icons::get(Icon::PayeeNew));
     ui->m_renameButton->setIcon(Icons::get(Icon::UserProperties));
-    ui->m_deleteButton->setIcon(Icons::get(Icon::ListRemoveUser));
+    ui->m_deleteButton->setIcon(Icons::get(Icon::PayeeRemove));
     ui->m_mergeButton->setIcon(Icons::get(Icon::Merge));
     ui->m_updateButton->setIcon(Icons::get(Icon::DialogOK));
     ui->m_syncAddressbook->setIcon(Icons::get(Icon::Refresh));
