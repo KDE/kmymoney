@@ -412,6 +412,8 @@ protected:
     */
   void preloadHolidays();
 
+  bool event(QEvent * event) override;
+
 public Q_SLOTS:
 
   void slotFileInfoDialog();
