@@ -78,7 +78,7 @@ KSettingsOnlineQuotes::KSettingsOnlineQuotes(QWidget *parent) :
   d->ui->m_updateButton->setEnabled(false);
 
   d->ui->m_updateButton->setIcon(Icons::get(Icon::DialogOK));
-  d->ui->m_deleteButton->setIcon(Icons::get(Icon::EditDelete));
+  d->ui->m_deleteButton->setIcon(Icons::get(Icon::EditRemove));
   d->ui->m_newButton->setIcon(Icons::get(Icon::DocumentNew));
 
   d->ui->m_editIdentifyBy->addItem(i18nc("@item:inlistbox Stock", "Symbol"), WebPriceQuoteSource::identifyBy::Symbol);

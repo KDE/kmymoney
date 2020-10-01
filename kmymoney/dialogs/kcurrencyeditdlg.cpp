@@ -512,7 +512,7 @@ void KCurrencyEditDlg::slotShowCurrencyMenu(const QPoint& p)
     const QVector<actionInfo> actionInfos {
       {eMenu::Action::NewCurrency,      &KCurrencyEditDlg::slotNewCurrency,     i18n("New currency"),            Icon::DocumentNew, true},
       {eMenu::Action::RenameCurrency,   &KCurrencyEditDlg::slotRenameCurrency,  i18n("Rename currency"),         Icon::EditRename,  cond1},
-      {eMenu::Action::DeleteCurrency,   &KCurrencyEditDlg::slotDeleteCurrency,  i18n("Delete currency"),         Icon::EditDelete,  cond2},
+      {eMenu::Action::DeleteCurrency,   &KCurrencyEditDlg::slotDeleteCurrency,  i18n("Delete currency"),         Icon::EditRemove,  cond2},
       {eMenu::Action::SetBaseCurrency,  &KCurrencyEditDlg::slotSetBaseCurrency, i18n("Select as base currency"), Icon::KMyMoney,    cond3}
     };
 

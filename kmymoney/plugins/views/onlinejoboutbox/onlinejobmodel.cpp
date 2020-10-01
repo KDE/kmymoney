@@ -156,7 +156,7 @@ QVariant onlineJobModel::data(const QModelIndex & index, int role) const
       if (job.sendDate().isValid()) {
         return Icons::get(Icon::TaskAccepted);
       } else if (!job.isValid()) {
-        return Icons::get(Icon::Warning);
+        return Icons::get(Icon::DialogWarning);
       }
     } else if (role == Qt::ToolTipRole) {
       if (job.isLocked())
