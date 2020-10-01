@@ -188,13 +188,6 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QCheckBox" name="kcfg_CopyTypeToNr">
-         <property name="text">
-          <string>Insert transaction type into No. field for new transactions</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QCheckBox" name="kcfg_AutoIncCheckNumber">
          <property name="text">
           <string>Auto increment check number</string>

@@ -1,5 +1,6 @@
 /*
  * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -37,6 +38,7 @@ class KAvailableCurrencyDlg;
 }
 
 class KTreeWidgetSearchLineWidget;
+class QTreeWidgetItem;
 class KMM_BASE_DIALOGS_EXPORT KAvailableCurrencyDlg : public QDialog
 {
   Q_OBJECT
@@ -44,13 +46,14 @@ public:
   explicit KAvailableCurrencyDlg(QWidget *parent = nullptr);
   ~KAvailableCurrencyDlg();
 
-  Ui::KAvailableCurrencyDlg*   ui;
+  QList<QTreeWidgetItem *> selectedItems() const;
 
 protected Q_SLOTS:
   void slotLoadCurrencies();
   void slotItemSelectionChanged();
 
 private:
+  Ui::KAvailableCurrencyDlg*    ui;
   KTreeWidgetSearchLineWidget*  m_searchWidget;
 };
 

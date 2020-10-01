@@ -87,6 +87,8 @@ namespace MyMoneyUtils
 
   KMM_MYMONEY_EXPORT void dissectTransaction(const MyMoneyTransaction& transaction, const MyMoneySplit& split, MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& feeSplits, QList<MyMoneySplit>& interestSplits, MyMoneySecurity& security, MyMoneySecurity& currency, eMyMoney::Split::InvestmentTransactionType& transactionType);
 
+  KMM_MYMONEY_EXPORT QString formatDate(const QDate& date);
+
 }
 
 #endif

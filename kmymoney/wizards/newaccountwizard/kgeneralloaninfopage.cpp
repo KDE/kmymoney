@@ -62,6 +62,11 @@ namespace NewAccountWizard
   {
     Q_D(GeneralLoanInfoPage);
     d->ui->setupUi(this);
+
+    // reduce the amount of characters shown for a payee
+    d->ui->m_payee->setMinimumContentsLength(40);
+    d->ui->m_payee->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLength);
+
     d->m_firstTime = true;
     d->m_mandatoryGroup->add(d->ui->m_payee);
 
@@ -170,5 +175,5 @@ namespace NewAccountWizard
     Q_D(GeneralLoanInfoPage);
     d->ui->m_payee->loadPayees(MyMoneyFile::instance()->payeeList());
   }
-  
+
 }
