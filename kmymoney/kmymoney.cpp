@@ -3205,6 +3205,15 @@ void KMyMoneyApp::preloadHolidays()
 #endif
 }
 
+bool KMyMoneyApp::event(QEvent * event) {
+  if (event->type() == QEvent::PaletteChange) {
+      this->initIcons();
+      return true;
+  }
+
+  return KXmlGuiWindow::event(event);
+}
+
 bool KMyMoneyApp::slotFileNew()
 {
   KMSTATUS(i18n("Creating new document..."));
