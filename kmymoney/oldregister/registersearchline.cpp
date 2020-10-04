@@ -82,14 +82,14 @@ RegisterSearchLine::RegisterSearchLine(QWidget* parent, Register* reg) :
   parentWidget()->layout()->addWidget(d->combo);
   // don't change the order of the following lines unless updating
   // the case labels in RegisterSearchLine::itemMatches() at the same time
-  d->combo->insertItem((int)eRegister::ItemState::Any, i18n("Any status"));
+  d->combo->insertItem((int)eRegister::ItemState::Any, Icons::get(Icon::TransactionStateAny), i18n("Any status"));
   d->combo->insertItem((int)eRegister::ItemState::Imported, Icons::get(Icon::TransactionStateImported), i18n("Imported"));
   d->combo->insertItem((int)eRegister::ItemState::Matched, Icons::get(Icon::TransactionStateMatched), i18n("Matched"));
   d->combo->insertItem((int)eRegister::ItemState::Erroneous, Icons::get(Icon::TransactionStateErroneous), i18n("Erroneous"));
   d->combo->insertItem((int)eRegister::ItemState::Scheduled, Icons::get(Icon::TransactionStateScheduled), i18n("Scheduled"));
-  d->combo->insertItem((int)eRegister::ItemState::NotMarked, i18n("Not marked"));
-  d->combo->insertItem((int)eRegister::ItemState::NotReconciled, i18n("Not reconciled"));
-  d->combo->insertItem((int)eRegister::ItemState::Cleared, i18nc("Reconciliation state 'Cleared'", "Cleared"));
+  d->combo->insertItem((int)eRegister::ItemState::NotMarked, Icons::get(Icon::TransactionStateNotMarked), i18n("Not marked"));
+  d->combo->insertItem((int)eRegister::ItemState::NotReconciled, Icons::get(Icon::TransactionStateNotReconciled), i18n("Not reconciled"));
+  d->combo->insertItem((int)eRegister::ItemState::Cleared, Icons::get(Icon::TransactionStateCleared), i18nc("Reconciliation state 'Cleared'", "Cleared"));
   d->combo->setCurrentIndex((int)eRegister::ItemState::Any);
   connect(d->combo, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &RegisterSearchLine::slotStatusChanged);
   label->setBuddy(d->combo);

@@ -182,8 +182,6 @@ namespace Icons {
        {{IconSet::Breeze, QStringLiteral("preferences-plugin")}}},
       {Icon::Reconcile,
        {{IconSet::Breeze, QStringLiteral("view-financial-transfer-reconcile")}}},
-      {Icon::Reconciled,
-       {{IconSet::Breeze, QStringLiteral("view-financial-transfer-reconciled")}}},
       {Icon::Refresh,
        {{IconSet::Common, QStringLiteral("view-refresh-symbolic")}}},
       {Icon::Report,
@@ -347,6 +345,7 @@ namespace Icons {
       {Icon::TransactionStateMatched, {{IconSet::Breeze, QStringLiteral("view-financial-transfer-matched")}}},
       {Icon::TransactionStateErroneous, {{IconSet::Breeze, QStringLiteral("dialog-symbolic-warning")}}},
       {Icon::TransactionStateScheduled, {{IconSet::Breeze, QStringLiteral("view-calendar-upcoming-days")}}},
+      {Icon::TransactionStateReconciled, {{IconSet::Breeze, QStringLiteral("view-financial-transfer-reconciled")}}},
       {Icon::TransactionStateNotReconciled, {{IconSet::Breeze, QStringLiteral("view-financial-transfer-unreconciled")}}},
       {Icon::TransactionStateNotMarked, {{IconSet::Breeze, QStringLiteral("view-financial-transfer-notmarked")}}},
       {Icon::TransactionStateCleared, {{IconSet::Breeze, QStringLiteral("view-financial-transfer-cleared")}}}
