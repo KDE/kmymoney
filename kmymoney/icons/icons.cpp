@@ -343,7 +343,7 @@ namespace Icons {
       {Icon::TransactionStateAny, {{IconSet::Common, QStringLiteral("unknown")}}},
       {Icon::TransactionStateImported, {{IconSet::Breeze, QStringLiteral("document-import")}}},
       {Icon::TransactionStateMatched, {{IconSet::Breeze, QStringLiteral("view-financial-transfer-matched")}}},
-      {Icon::TransactionStateErroneous, {{IconSet::Breeze, QStringLiteral("dialog-symbolic-warning")}}},
+      {Icon::TransactionStateErroneous, {{IconSet::Breeze, QStringLiteral("dialog-warning-symbolic")}}},
       {Icon::TransactionStateScheduled, {{IconSet::Breeze, QStringLiteral("view-calendar-upcoming-days")}}},
       {Icon::TransactionStateReconciled, {{IconSet::Breeze, QStringLiteral("view-financial-transfer-reconciled")}}},
       {Icon::TransactionStateNotReconciled, {{IconSet::Breeze, QStringLiteral("view-financial-transfer-unreconciled")}}},
