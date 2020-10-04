@@ -351,6 +351,8 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
         return i18n("Name");
       case Column::Type:
         return i18n("Type");
+      case Column::HasOnlineMapping:
+        return i18n("Online");
       case Column::Tax:
         return i18nc("Column heading for category in tax report", "Tax");
       case Column::Vat:
@@ -507,6 +509,12 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
             return Icons::get(Icons::Icon::BankAccount);
           } else {
             return account.accountIcon();
+          }
+          break;
+
+        case AccountsModel::Column::HasOnlineMapping:
+          if (account.hasOnlineMapping()) {
+            return Icons::get(Icons::Icon::DialogOK);
           }
           break;
 
