@@ -119,7 +119,7 @@ public:
     KConfigGroup grp = config->group("Last Use Settings");
     ui->m_tab->setCurrentIndex(grp.readEntry("KForecastView_LastType", 0));
 
-    ui->m_forecastButton->setIcon(Icons::get(Icon::Forecast));
+    ui->m_forecastButton->setIcon(Icons::get(Icon::OfficeChartLineForecast));
 
     q->connect(ui->m_tab, &QTabWidget::currentChanged, q, &KForecastView::slotTabChanged);
 
