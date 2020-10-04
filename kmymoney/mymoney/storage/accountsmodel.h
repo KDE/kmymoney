@@ -45,6 +45,7 @@ public:
   enum Column {
     AccountName = 0,
     Type,
+    HasOnlineMapping,
     Tax,
     Vat,
     CostCenter,
