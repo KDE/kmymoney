@@ -257,7 +257,7 @@ public:
 
       forecastItem = new QTreeWidgetItem(parentItem);
       forecastItem->setText(0, subAccount.name());
-      forecastItem->setIcon(0, subAccount.accountPixmap());
+      forecastItem->setIcon(0, subAccount.accountIcon());
       forecastItem->setData(0, ForecastRole, QVariant::fromValue(forecast));
       forecastItem->setData(0, AccountRole, QVariant::fromValue(subAccount));
       forecastItem->setExpanded(true);
@@ -528,7 +528,7 @@ public:
 
       advancedItem = new QTreeWidgetItem(ui->m_advancedList, advancedItem, false);
       advancedItem->setText(0, acc.name());
-      advancedItem->setIcon(0, acc.accountPixmap());
+      advancedItem->setIcon(0, acc.accountIcon());
       auto it_c = 1; // iterator for the columns of the listview
 
       //get minimum balance list
@@ -702,14 +702,14 @@ public:
 
     m_assetItem = new QTreeWidgetItem(m_totalItem);
     m_assetItem->setText(0, file->asset().name());
-    m_assetItem->setIcon(0, file->asset().accountPixmap());
+    m_assetItem->setIcon(0, file->asset().accountIcon());
     m_assetItem->setData(0, ForecastRole, QVariant::fromValue(forecast));
     m_assetItem->setData(0, AccountRole, QVariant::fromValue(file->asset()));
     m_assetItem->setExpanded(true);
 
     m_liabilityItem = new QTreeWidgetItem(m_totalItem);
     m_liabilityItem->setText(0, file->liability().name());
-    m_liabilityItem->setIcon(0, file->liability().accountPixmap());
+    m_liabilityItem->setIcon(0, file->liability().accountIcon());
     m_liabilityItem->setData(0, ForecastRole, QVariant::fromValue(forecast));
     m_liabilityItem->setData(0, AccountRole, QVariant::fromValue(file->liability()));
     m_liabilityItem->setExpanded(true);
@@ -721,14 +721,14 @@ public:
 
     m_incomeItem = new QTreeWidgetItem(m_totalItem);
     m_incomeItem->setText(0, file->income().name());
-    m_incomeItem->setIcon(0, file->income().accountPixmap());
+    m_incomeItem->setIcon(0, file->income().accountIcon());
     m_incomeItem->setData(0, ForecastRole, QVariant::fromValue(forecast));
     m_incomeItem->setData(0, AccountRole, QVariant::fromValue(file->income()));
     m_incomeItem->setExpanded(true);
 
     m_expenseItem = new QTreeWidgetItem(m_totalItem);
     m_expenseItem->setText(0, file->expense().name());
-    m_expenseItem->setIcon(0, file->expense().accountPixmap());
+    m_expenseItem->setIcon(0, file->expense().accountIcon());
     m_expenseItem->setData(0, ForecastRole, QVariant::fromValue(forecast));
     m_expenseItem->setData(0, AccountRole, QVariant::fromValue(file->expense()));
     m_expenseItem->setExpanded(true);
@@ -743,7 +743,7 @@ public:
     font.setBold(true);
     m_totalItem->setFont(0, font);
     m_totalItem->setText(0, i18nc("Total balance", "Total"));
-    m_totalItem->setIcon(0, file->asset().accountPixmap());
+    m_totalItem->setIcon(0, file->asset().accountIcon());
     m_totalItem->setData(0, ForecastRole, QVariant::fromValue(forecast));
     m_totalItem->setData(0, AccountRole, QVariant::fromValue(file->asset()));
     m_totalItem->setExpanded(true);

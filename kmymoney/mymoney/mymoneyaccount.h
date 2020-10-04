@@ -38,13 +38,13 @@
 
 class QString;
 class QDate;
-class QPixmap;
 class MyMoneySecurity;
 class MyMoneyMoney;
 class MyMoneySplit;
 class payeeIdentifier;
 namespace eMyMoney { namespace Account { enum class Type; } }
 namespace eMyMoney { namespace Account { enum class Standard; } }
+namespace Icons { enum class Icon; }
 template <class T> class payeeIdentifierTyped;
 
 /**
@@ -588,12 +588,9 @@ public:
   QString brokerageName() const;
 
   /**
-   * @param reconcileFlag if set to @a true a reconcile overlay will be
-   *                      added to the pixmap returned
-   * @param size is a hint for the size of the icon
-   * @return a pixmap using DesktopIcon for the account type
+   * @return an QIcon for the account.
    */
-  QPixmap accountPixmap(const bool reconcileFlag = false, const int size = 64) const;
+  QIcon accountIcon() const;
 
   /**
    * This method is used to convert the internal representation of

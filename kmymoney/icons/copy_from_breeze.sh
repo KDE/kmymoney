@@ -8,6 +8,8 @@ used_in_code=$(sed -E -n -e "s/^.*{IconSet\:\:(Breeze|Common), QStringLiteral\(\
 additional=" index application-x-kmymoney"
 all_icons=$used_in_code$additional
 
+rm -r breeze breeze-dark
+
 for i in $all_icons; do
   for f in $(find $1 -name "$i.*"); do
      r=${f/#$1\/icons/breeze}
@@ -17,3 +19,5 @@ for i in $all_icons; do
      cp "$f" "$r"
    done
 done
+
+rm icons.qrc
