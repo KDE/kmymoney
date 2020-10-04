@@ -1349,9 +1349,9 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       // *******************
       // The categories menu
       // *******************
-      {Action::NewCategory,                   QStringLiteral("category_new"),                   i18n("New category..."),                            Icon::CategoryNew},
-      {Action::EditCategory,                  QStringLiteral("category_edit"),                  i18n("Edit category..."),                           Icon::CategoryEdit},
-      {Action::DeleteCategory,                QStringLiteral("category_delete"),                i18n("Delete category..."),                         Icon::CategoryRemove},
+      {Action::NewCategory,                   QStringLiteral("category_new"),                   i18n("New category..."),                            Icon::FinancialCategoryNew},
+      {Action::EditCategory,                  QStringLiteral("category_edit"),                  i18n("Edit category..."),                           Icon::FinancialCategoryEdit},
+      {Action::DeleteCategory,                QStringLiteral("category_delete"),                i18n("Delete category..."),                         Icon::FinancialCategoryRemove},
       // **************
       // The tools menu
       // **************
