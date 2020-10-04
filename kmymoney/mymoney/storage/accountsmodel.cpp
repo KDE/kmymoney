@@ -506,8 +506,7 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
           if (d->isFavoriteIndex(idx)) {
             return Icons::get(Icons::Icon::BankAccount);
           } else {
-            const bool isReconciledAccount = false;
-            return QIcon(account.accountPixmap(isReconciledAccount));
+            return account.accountIcon();
           }
           break;
 
