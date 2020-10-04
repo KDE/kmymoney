@@ -5,7 +5,7 @@
 # (must contain "icons" and "icons-dark" subfolders).
 
 used_in_code=$(sed -E -n -e "s/^.*{IconSet\:\:(Breeze|Common), QStringLiteral\(\"(.*)\"\)}.*/\2/p" icons.cpp)
-additional=" index application-x-kmymoney"
+additional=" index application-x-kmymoney edit-undo edit-redo document-print"
 all_icons=$used_in_code$additional
 
 rm -r breeze breeze-dark
