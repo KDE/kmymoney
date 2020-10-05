@@ -288,7 +288,7 @@ namespace Icons {
       {Icon::InstitutionRemove,
        {{IconSet::Breeze, QStringLiteral("view-institution-delete")}}},
       {Icon::Institutions,
-       {{IconSet::Breeze, QStringLiteral("go-institution")}}},
+       {{IconSet::Breeze, QStringLiteral("view-institution")}}},
       {Icon::Investment,
        {{IconSet::Common, QStringLiteral("investment")},
         {IconSet::Oxygen, QStringLiteral("view-investment")}}},
