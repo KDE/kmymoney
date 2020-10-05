@@ -149,8 +149,8 @@ namespace Icons {
         {IconSet::Breeze, QStringLiteral("merge")}}},
       {Icon::NewSchedule,
        {{IconSet::Common, QStringLiteral("appointment-new")}}},
-      {Icon::OfficeChartLine,
-       {{IconSet::Breeze, QStringLiteral("office-chart-line")}}},
+      {Icon::OfficeCharBar,
+       {{IconSet::Breeze, QStringLiteral("office-chart-bar")}}},
       {Icon::OfficeChartLineForecast,
        {{IconSet::Breeze, QStringLiteral("office-chart-line-forecast")}}},
       {Icon::OpenDatabase, {{IconSet::Common, QStringLiteral("server-database")}}},
@@ -294,8 +294,7 @@ namespace Icons {
       {Icon::InvestmentClosed,
        {{IconSet::Breeze, QStringLiteral("view-investment-account-closed")}}},
       {Icon::Investments,
-       {{IconSet::Common, QStringLiteral("investment")},
-        {IconSet::Oxygen, QStringLiteral("view-investment")}}},
+       {{IconSet::Breeze, QStringLiteral("labplot")}}},
       {Icon::Liability,
        {{IconSet::Breeze, QStringLiteral("view-liability-account")}}},
       {Icon::LiabilityClosed,
@@ -308,6 +307,8 @@ namespace Icons {
         {IconSet::Oxygen, QStringLiteral("view-loan-asset")}}},
       {Icon::OnlineJobOutbox,
        {{IconSet::Breeze, QStringLiteral("internet-mail")}}},
+      {Icon::OnlinePriceUpdate,
+       {{IconSet::Breeze, QStringLiteral("office-chart-line")}}},
       {Icon::Payees,
        {{IconSet::Common, QStringLiteral("payee")},
         {IconSet::Oxygen, QStringLiteral("system-users")},
@@ -364,13 +365,10 @@ namespace Icons {
     {Icon::InvestmentNew,               {Icon::Investment, Icon::ListAdd, Qt::TopRightCorner}},
     {Icon::InvestmentEdit,              {Icon::Investment, Icon::DocumentEdit, Qt::BottomRightCorner}},
     {Icon::InvestmentRemove,            {Icon::Investment, Icon::EditRemove, Qt::BottomRightCorner}},
-    {Icon::InvestmentOnlinePrice,       {Icon::Investment, Icon::Download, Qt::BottomRightCorner}},
-    {Icon::InvestmentOnlinePriceAll,    {Icon::Investment, Icon::Download, Qt::BottomRightCorner}},
     {Icon::BudgetNew,                   {Icon::Budget, Icon::ListAdd, Qt::TopRightCorner}},
     {Icon::BudgetRename,                {Icon::Budget, Icon::DocumentEdit, Qt::BottomRightCorner}},
     {Icon::BudgetRemove,                {Icon::Budget, Icon::EditRemove, Qt::BottomRightCorner}},
-    {Icon::BudgetCopy,                  {Icon::Budget, Icon::EditCopy, Qt::BottomRightCorner}},
-    {Icon::PriceUpdate,                 {Icon::Currencies, Icon::Download, Qt::BottomRightCorner}}
+    {Icon::BudgetCopy,                  {Icon::Budget, Icon::EditCopy, Qt::BottomRightCorner}}
   };
 
   KMM_ICONS_EXPORT void setUpMappings(const QString& themeName)

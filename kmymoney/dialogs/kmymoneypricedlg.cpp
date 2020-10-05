@@ -148,7 +148,7 @@ KMyMoneyPriceDlg::KMyMoneyPriceDlg(QWidget* parent) :
   d->ui->m_newButton->setIcon(Icons::get(Icon::DocumentNew));
   d->ui->m_editButton->setIcon(Icons::get(Icon::DocumentEdit));
 
-  d->ui->m_onlineQuoteButton->setIcon(Icons::get(Icon::InvestmentOnlinePriceAll));
+  d->ui->m_onlineQuoteButton->setIcon(Icons::get(Icon::OnlinePriceUpdate));
 
   connect(d->ui->m_editButton, &QAbstractButton::clicked, this, &KMyMoneyPriceDlg::slotEditPrice);
   connect(d->ui->m_deleteButton, &QAbstractButton::clicked, this, &KMyMoneyPriceDlg::slotDeletePrice);
@@ -377,10 +377,10 @@ void KMyMoneyPriceDlg::slotShowPriceMenu(const QPoint& p)
     };
 
     const QVector<actionInfo> actionInfos {
-      {eMenu::Action::NewPrice,    &KMyMoneyPriceDlg::slotNewPrice,          i18n("New price..."),           Icon::DocumentNew,   true},
-      {eMenu::Action::EditPrice,   &KMyMoneyPriceDlg::slotEditPrice,         i18n("Edit price..."),          Icon::DocumentEdit,  cond1},
-      {eMenu::Action::UpdatePrice, &KMyMoneyPriceDlg::slotOnlinePriceUpdate, i18n("Online Price Update..."), Icon::PriceUpdate,   cond2},
-      {eMenu::Action::DeletePrice, &KMyMoneyPriceDlg::slotDeletePrice,       i18n("Delete price...")       , Icon::EditRemove,    cond1}
+      {eMenu::Action::NewPrice,    &KMyMoneyPriceDlg::slotNewPrice,          i18n("New price..."),           Icon::DocumentNew,       true},
+      {eMenu::Action::EditPrice,   &KMyMoneyPriceDlg::slotEditPrice,         i18n("Edit price..."),          Icon::DocumentEdit,      cond1},
+      {eMenu::Action::UpdatePrice, &KMyMoneyPriceDlg::slotOnlinePriceUpdate, i18n("Online Price Update..."), Icon::OnlinePriceUpdate, cond2},
+      {eMenu::Action::DeletePrice, &KMyMoneyPriceDlg::slotDeletePrice,       i18n("Delete price...")       , Icon::EditRemove,        cond1}
     };
 
     QList<QAction*> LUTActions;

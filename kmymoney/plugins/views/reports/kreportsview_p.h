@@ -225,7 +225,7 @@ KReportTab::KReportTab(QTabWidget* parent, const MyMoneyReport& report, const KR
   m_tableView->setZoomFactor(KMyMoneySettings::zoomFactor());
 
   //set button icons
-  m_control->ui->buttonChart->setIcon(Icons::get(Icon::OfficeChartLine));
+  m_control->ui->buttonChart->setIcon(Icons::get(Icon::OfficeCharBar));
   m_control->ui->buttonClose->setIcon(Icons::get(Icon::DocumentClose));
   m_control->ui->buttonConfigure->setIcon(Icons::get(Icon::Configure));
   m_control->ui->buttonCopy->setIcon(Icons::get(Icon::EditCopy));
@@ -431,7 +431,7 @@ void KReportTab::toggleChart()
 
     m_control->ui->buttonChart->setText(i18n("Chart"));
     m_control->ui->buttonChart->setToolTip(i18n("Show the chart version of this report"));
-    m_control->ui->buttonChart->setIcon(Icons::get(Icon::OfficeChartLine));
+    m_control->ui->buttonChart->setIcon(Icons::get(Icon::OfficeCharBar));
   } else {
     if (!m_isChartViewValid)
       m_table->drawChart(*m_chartView);
