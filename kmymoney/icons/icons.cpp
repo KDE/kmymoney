@@ -185,7 +185,7 @@ namespace Icons {
       {Icon::Refresh,
        {{IconSet::Common, QStringLiteral("view-refresh-symbolic")}}},
       {Icon::Report,
-       {{IconSet::Common, QStringLiteral("x-office-spreads")}}},
+       {{IconSet::Breeze, QStringLiteral("labplot-spreadsheet")}}},
       {Icon::Reverse, {{IconSet::Breeze, QStringLiteral("reverse")}}},
       {Icon::SeekForward,
        {{IconSet::Common, QStringLiteral("media-seek-forward")}}},
