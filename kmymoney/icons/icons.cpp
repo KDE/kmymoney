@@ -133,7 +133,7 @@ namespace Icons {
       {Icon::TagNew, {{IconSet::Breeze, QStringLiteral("tag-new")}}},
       {Icon::TagRemove,
        {{IconSet::Breeze, QStringLiteral("tag-delete")}}},
-      {Icon::TagRename, {{IconSet::Common, QStringLiteral("edit-symbolic")}}},
+      {Icon::TagRename, {{IconSet::Breeze, QStringLiteral("tag-edit")}}},
       {Icon::MailMessage,
        {{IconSet::Common, QStringLiteral("internet-mail")},
         {IconSet::Oxygen, QStringLiteral("mail-message")},
