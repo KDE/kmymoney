@@ -493,7 +493,7 @@ QIcon MyMoneyAccount::accountIcon() const
     case Account::Type::CreditCard:
       return Icons::get(isClosed() ? Icons::Icon::CreditCardClosed : Icons::Icon::CreditCard);
     case Account::Type::Loan:
-      return Icons::get(Icons::Icon::Loan);
+      return Icons::get(isClosed() ? Icons::Icon::LoanClosed : Icons::Icon::Loan);
     case Account::Type::Investment:
     case Account::Type::MoneyMarket:
       return Icons::get(isClosed()? Icons::Icon::InvestmentClosed : Icons::Icon::Investment);
@@ -506,7 +506,7 @@ QIcon MyMoneyAccount::accountIcon() const
     case Account::Type::Expense:
       return Icons::get(Icons::Icon::Expense);
     case Account::Type::AssetLoan:
-      return Icons::get(Icons::Icon::LoanAsset);
+      return Icons::get(isClosed() ? Icons::Icon::AssetLoanClosed : Icons::Icon::AssetLoan);
     case Account::Type::Stock:
       return Icons::get(Icons::Icon::Stock);
     case Account::Type::Equity:
