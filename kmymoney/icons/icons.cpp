@@ -255,7 +255,7 @@ namespace Icons {
        {{IconSet::Breeze, QStringLiteral("view-categories-expenditures")}}},
       {Icon::Filter, {{IconSet::Common, QStringLiteral("view-filter")}}},
       {Icon::FinancialCategories,
-       {{IconSet::Breeze, QStringLiteral("view-categories")}}},
+       {{IconSet::Breeze, QStringLiteral("preferences-devices-tree")}}},
       {Icon::FinancialCategoryNew,
        {{IconSet::Breeze, QStringLiteral("view-categories-add")}}},
       {Icon::FinancialCategoryEdit,
