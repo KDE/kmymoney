@@ -270,7 +270,7 @@ namespace Icons {
        {{IconSet::Common, QStringLiteral("ledger")},
         {IconSet::Oxygen, QStringLiteral("view-financial-transfer")}}},
       {Icon::Forecast,
-       {{IconSet::Breeze, QStringLiteral("weather-few-clouds-wind")}}},
+       {{IconSet::Breeze, QStringLiteral("weather-clouds-wind")}}},
       {Icon::Home,
        {{IconSet::Common, QStringLiteral("home")},
         {IconSet::Oxygen, QStringLiteral("go-home")},
