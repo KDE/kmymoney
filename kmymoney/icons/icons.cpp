@@ -294,7 +294,7 @@ namespace Icons {
       {Icon::InvestmentClosed,
        {{IconSet::Breeze, QStringLiteral("view-investment-account-closed")}}},
       {Icon::Investments,
-       {{IconSet::Breeze, QStringLiteral("labplot")}}},
+       {{IconSet::Breeze, QStringLiteral("massif-visualizer")}}},
       {Icon::Liability,
        {{IconSet::Breeze, QStringLiteral("view-liability-account")}}},
       {Icon::LiabilityClosed,
