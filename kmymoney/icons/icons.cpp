@@ -142,11 +142,11 @@ namespace Icons {
        {{IconSet::Common, QStringLiteral("internet-mail")},
         {IconSet::Oxygen, QStringLiteral("mail-message")},
         {IconSet::Breeze, QStringLiteral("mail-message")}}},
-      {Icon::MailMessageNew,
-       {{IconSet::Common, QStringLiteral("mail-message-new")}}},
       {Icon::MailReceive, {{IconSet::Common, QStringLiteral("mail-receive")}}},
       {Icon::MapOnlineAccount,
        {{IconSet::Common, QStringLiteral("news-subscribe")}}},
+      { Icon::OnlineTransfer,
+        {{IconSet::Breeze, QStringLiteral("document-send")}}},
       {Icon::Merge,
        {{IconSet::Common, QStringLiteral("reconcile")},
         {IconSet::Oxygen, QStringLiteral("merge")},
@@ -368,7 +368,6 @@ namespace Icons {
 
   const QHash<Icon, iconDescription> sComposedIcons {
     {Icon::AccountFinishReconciliation, {Icon::Merge,                    Icon::DialogOK,       Qt::BottomRightCorner}},
-    {Icon::AccountCreditTransfer,       {Icon::BankAccount, Icon::MailMessageNew, Qt::BottomRightCorner}},
     {Icon::TransactionNew,              {Icon::Transaction, Icon::ListAdd, Qt::TopRightCorner}},
     {Icon::TransactionEdit,             {Icon::Transaction, Icon::DocumentEdit, Qt::BottomRightCorner}},
     {Icon::TransactionMatch,            {Icon::Transaction, Icon::DocumentImport, Qt::BottomRightCorner}},
