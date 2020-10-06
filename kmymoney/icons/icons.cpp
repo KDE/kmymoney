@@ -57,6 +57,10 @@ namespace Icons {
        {{IconSet::Breeze, QStringLiteral("view-bank-account-close")}}},
       {Icon::AccountReopen,
        {{IconSet::Breeze, QStringLiteral("view-bank-account-reopen")}}},
+      {Icon::AccountUpdate,
+       {{IconSet::Breeze, QStringLiteral("edit-download")}}},
+      {Icon::AccountUpdateAll,
+       {{IconSet::Breeze, QStringLiteral("edit-download")}}},
       {Icon::ArrowDown,
        {{IconSet::Common, QStringLiteral("arrow-down")}}},
       {Icon::ArrowLeft,
@@ -364,8 +368,6 @@ namespace Icons {
 
   const QHash<Icon, iconDescription> sComposedIcons {
     {Icon::AccountFinishReconciliation, {Icon::Merge,                    Icon::DialogOK,       Qt::BottomRightCorner}},
-    {Icon::AccountUpdate,               {Icon::BankAccount, Icon::Download, Qt::BottomRightCorner}},
-    {Icon::AccountUpdateAll,            {Icon::BankAccount, Icon::Download, Qt::BottomRightCorner}},
     {Icon::AccountCreditTransfer,       {Icon::BankAccount, Icon::MailMessageNew, Qt::BottomRightCorner}},
     {Icon::TransactionNew,              {Icon::Transaction, Icon::ListAdd, Qt::TopRightCorner}},
     {Icon::TransactionEdit,             {Icon::Transaction, Icon::DocumentEdit, Qt::BottomRightCorner}},
