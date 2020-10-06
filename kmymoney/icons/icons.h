@@ -101,7 +101,7 @@ enum class Icon { OpenDatabase, Merge, Reconcile, Split, Tip, PerformanceTest,
                   InvestmentNew, InvestmentEdit,
                   InvestmentRemove, OnlinePriceUpdate,
                   Reverse, Visibility, NoVisibility,
-                  SelectAll
+                  SelectAll, Backup
                 };
 
 KMM_ICONS_EXPORT QIcon get(Icons::Icon icon);

@@ -184,6 +184,7 @@ namespace Icons {
       {Icon::ZoomOut, QStringLiteral("zoom-out")},
       {Icon::Visibility, QStringLiteral("visibility")},
       {Icon::NoVisibility, QStringLiteral("hint")},
+      {Icon::Backup, QStringLiteral("backup")},
       {Icon::TransactionStateAny, QStringLiteral("unknown")},
       {Icon::TransactionStateImported, QStringLiteral("document-import")},
       {Icon::TransactionStateMatched, QStringLiteral("merge")},
