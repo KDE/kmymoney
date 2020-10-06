@@ -310,7 +310,7 @@ namespace Icons {
       {Icon::OnlineJobOutbox,
        {{IconSet::Breeze, QStringLiteral("internet-mail")}}},
       {Icon::OnlinePriceUpdate,
-       {{IconSet::Breeze, QStringLiteral("office-chart-line")}}},
+       {{IconSet::Breeze, QStringLiteral("view-refresh-symbolic")}}},
       {Icon::Payees,
        {{IconSet::Common, QStringLiteral("payee")},
         {IconSet::Oxygen, QStringLiteral("system-users")},
