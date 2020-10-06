@@ -186,6 +186,8 @@ namespace Icons {
        {{IconSet::Breeze, QStringLiteral("preferences-plugin")}}},
       {Icon::Reconcile,
        {{IconSet::Breeze, QStringLiteral("view-financial-transfer-reconcile")}}},
+      {Icon::Reconciled,
+       {{IconSet::Breeze, QStringLiteral("view-financial-transfer-reconciled")}}},
       {Icon::Refresh,
        {{IconSet::Common, QStringLiteral("view-refresh-symbolic")}}},
       {Icon::Report,
@@ -367,7 +369,6 @@ namespace Icons {
   };
 
   const QHash<Icon, iconDescription> sComposedIcons {
-    {Icon::AccountFinishReconciliation, {Icon::Merge,                    Icon::DialogOK,       Qt::BottomRightCorner}},
     {Icon::TransactionNew,              {Icon::Transaction, Icon::ListAdd, Qt::TopRightCorner}},
     {Icon::TransactionEdit,             {Icon::Transaction, Icon::DocumentEdit, Qt::BottomRightCorner}},
     {Icon::TransactionMatch,            {Icon::Transaction, Icon::DocumentImport, Qt::BottomRightCorner}},
