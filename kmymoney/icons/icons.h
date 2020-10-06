@@ -33,8 +33,6 @@ class QIcon;
 
 namespace Icons {
 
-enum class IconSet { Common, Oxygen, Tango, Breeze };
-
 enum class Icon { OpenDatabase, Merge, Reconcile, Split, Tip, PerformanceTest,
                   Calculator,
                   UserProperties, DocumentProperties,
@@ -97,19 +95,15 @@ enum class Icon { OpenDatabase, Merge, Reconcile, Split, Tip, PerformanceTest,
                   AccountUpdate, AccountUpdateAll,
                   OnlineTransfer, Reconciled,
                   FinancialCategoryNew, FinancialCategoryEdit, FinancialCategoryRemove,
-                  TransactionNew, TransactionEdit,
-                  TransactionMatch, TransactionAccept,
                   TransactionStateAny, TransactionStateImported, TransactionStateMatched,
                   TransactionStateErroneous, TransactionStateScheduled, TransactionStateNotReconciled,
                   TransactionStateNotMarked, TransactionStateCleared,
                   InvestmentNew, InvestmentEdit,
                   InvestmentRemove, OnlinePriceUpdate,
-                  BudgetNew, BudgetRename, BudgetRemove, BudgetCopy,
                   Reverse, Visibility, NoVisibility,
                   SelectAll
                 };
 
-KMM_ICONS_EXPORT void setUpMappings(const QString & themeName);
 KMM_ICONS_EXPORT QIcon get(Icons::Icon icon);
 
 

@@ -1372,16 +1372,16 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       // ***************************
       // Actions w/o main menu entry
       // ***************************
-      {Action::NewTransaction,                QStringLiteral("transaction_new"),                i18nc("New transaction button", "New"),             Icon::TransactionNew},
-      {Action::EditTransaction,               QStringLiteral("transaction_edit"),               i18nc("Edit transaction button", "Edit"),           Icon::TransactionEdit},
+      {Action::NewTransaction,                QStringLiteral("transaction_new"),                i18nc("New transaction button", "New"),             Icon::DocumentNew},
+      {Action::EditTransaction,               QStringLiteral("transaction_edit"),               i18nc("Edit transaction button", "Edit"),           Icon::DocumentEdit},
       {Action::EnterTransaction,              QStringLiteral("transaction_enter"),              i18nc("Enter transaction", "Enter"),                Icon::DialogOK},
       {Action::EditSplits,                    QStringLiteral("transaction_editsplits"),         i18nc("Edit split button", "Edit splits"),          Icon::Split},
       {Action::CancelTransaction,             QStringLiteral("transaction_cancel"),             i18nc("Cancel transaction edit", "Cancel"),         Icon::DialogCancel},
       {Action::DeleteTransaction,             QStringLiteral("transaction_delete"),             i18nc("Delete transaction", "Delete"),              Icon::EditRemove},
       {Action::DuplicateTransaction,          QStringLiteral("transaction_duplicate"),          i18nc("Duplicate transaction", "Duplicate"),        Icon::EditCopy},
       {Action::AddReversingTransaction,       QStringLiteral("transaction_add_reversing"),      i18nc("Add reversing transaction", "Add reversing"),Icon::Reverse},
-      {Action::MatchTransaction,              QStringLiteral("transaction_match"),              i18nc("Button text for match transaction", "Match"),Icon::TransactionMatch},
-      {Action::AcceptTransaction,             QStringLiteral("transaction_accept"),             i18nc("Accept 'imported' and 'matched' transaction", "Accept"), Icon::TransactionAccept},
+      {Action::MatchTransaction,              QStringLiteral("transaction_match"),              i18nc("Button text for match transaction", "Match"),Icon::Merge},
+      {Action::AcceptTransaction,             QStringLiteral("transaction_accept"),             i18nc("Accept 'imported' and 'matched' transaction", "Accept"), Icon::DialogOK},
       {Action::ToggleReconciliationFlag,      QStringLiteral("transaction_mark_toggle"),        i18nc("Toggle reconciliation flag", "Toggle"),     Icon::Empty},
       {Action::MarkCleared,                   QStringLiteral("transaction_mark_cleared"),       i18nc("Mark transaction cleared", "Cleared"),       Icon::Empty},
       {Action::MarkReconciled,                QStringLiteral("transaction_mark_reconciled"),    i18nc("Mark transaction reconciled", "Reconciled"), Icon::Empty},
@@ -1678,8 +1678,6 @@ void KMyMoneyApp::initIcons()
     themeName = QIcon::themeName();
     qDebug() << "Obeying the system-wide icon theme, currently set to: " << themeName;
   }
-
-  setUpMappings(themeName);
 }
 
 void KMyMoneyApp::saveOptions()

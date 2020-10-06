@@ -4,7 +4,7 @@
 # where breeze-icon\ is a path to a root folder of a cloned breeze-icon git repository
 # (must contain "icons" and "icons-dark" subfolders).
 
-used_in_code=$(sed -E -n -e "s/^.*{IconSet\:\:(Breeze|Common), QStringLiteral\(\"(.*)\"\)}.*/\2/p" icons.cpp)
+used_in_code=$(sed -E -n -e "s/^.*{Icon\:\:[[:alnum:]]*, QStringLiteral\(\"(.*)\"\)},/\1/p" icons.cpp)
 additional=" index application-x-kmymoney edit-undo edit-redo document-print"
 all_icons=$used_in_code$additional
 

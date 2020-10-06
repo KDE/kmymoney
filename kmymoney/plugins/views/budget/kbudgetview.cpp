@@ -276,10 +276,10 @@ void KBudgetView::slotOpenContextMenu(const QPoint&)
   const auto actionStates = d->actionStates();
 
   const QVector<actionInfo> actionInfos {
-    {&KBudgetView::slotNewBudget,        i18n("New budget"),               Icon::BudgetNew,                   actionStates[eMenu::Action::NewBudget]},
-    {&KBudgetView::slotStartRename,      i18n("Rename budget"),            Icon::BudgetRename,                actionStates[eMenu::Action::RenameBudget]},
-    {&KBudgetView::slotDeleteBudget,     i18n("Delete budget"),            Icon::BudgetRemove,                actionStates[eMenu::Action::DeleteBudget]},
-    {&KBudgetView::slotCopyBudget,       i18n("Copy budget"),              Icon::BudgetCopy,                  actionStates[eMenu::Action::CopyBudget]},
+    {&KBudgetView::slotNewBudget,        i18n("New budget"),               Icon::DocumentNew,                 actionStates[eMenu::Action::NewBudget]},
+    {&KBudgetView::slotStartRename,      i18n("Rename budget"),            Icon::DocumentEdit,                actionStates[eMenu::Action::RenameBudget]},
+    {&KBudgetView::slotDeleteBudget,     i18n("Delete budget"),            Icon::EditRemove,                  actionStates[eMenu::Action::DeleteBudget]},
+    {&KBudgetView::slotCopyBudget,       i18n("Copy budget"),              Icon::EditCopy,                    actionStates[eMenu::Action::CopyBudget]},
     {&KBudgetView::slotBudgetForecast,   i18n("Budget based on forecast"), Icon::OfficeChartLineForecast,     actionStates[eMenu::Action::BudgetForecast]}
   };
   auto menu = new QMenu(i18nc("Menu header", "Budget options"));
