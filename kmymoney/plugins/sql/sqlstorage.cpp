@@ -109,6 +109,9 @@ SQLStorage::SQLStorage(QObject *parent, const QVariantList &args) :
 
 SQLStorage::~SQLStorage()
 {
+  actionCollection()->removeAction(m_openDBaction);
+  actionCollection()->removeAction(m_generateDB);
+
   qDebug("Plugins: sqlstorage unloaded");
 }
 

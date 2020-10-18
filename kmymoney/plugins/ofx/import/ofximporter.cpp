@@ -74,7 +74,8 @@ typedef enum  {
 class OFXImporter::Private
 {
 public:
-  Private() : m_valid(false), m_preferName(PreferId), m_uniqueIdSource(UniqueIdUnknown), m_walletIsOpen(false), m_invertAmount(false), m_fixBuySellSignage(false), m_statusDlg(0), m_wallet(0),
+  Private() : m_valid(false), m_preferName(PreferId), m_uniqueIdSource(UniqueIdUnknown), m_walletIsOpen(false), m_invertAmount(false), m_fixBuySellSignage(false),
+              m_statusDlg(nullptr), m_wallet(nullptr), m_action(nullptr),
               m_updateStartDate(QDate(1900,1,1)), m_timestampOffset(0) {}
 
   bool m_valid;
@@ -95,6 +96,7 @@ public:
   QStringList m_errors;
   KOnlineBankingStatus* m_statusDlg;
   Wallet *m_wallet;
+  QAction* m_action;
   QDate m_updateStartDate;
   int m_timestampOffset;
   QSet<QString> m_hashes;
@@ -160,11 +162,10 @@ OFXImporter::~OFXImporter()
 
 void OFXImporter::createActions()
 {
-  const auto &kpartgui = QStringLiteral("file_import_ofx");
-  auto a = actionCollection()->addAction(kpartgui);
-  a->setText(i18n("OFX..."));
-  connect(a, &QAction::triggered, this, static_cast<void (OFXImporter::*)()>(&OFXImporter::slotImportFile));
-  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action(qPrintable(kpartgui)), &QAction::setEnabled);
+  d->m_action = actionCollection()->addAction(QStringLiteral("file_import_ofx"));
+  d->m_action->setText(i18n("OFX..."));
+  connect(d->m_action, &QAction::triggered, this, static_cast<void (OFXImporter::*)()>(&OFXImporter::slotImportFile));
+  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, d->m_action, &QAction::setEnabled);
 }
 
 void OFXImporter::slotImportFile()

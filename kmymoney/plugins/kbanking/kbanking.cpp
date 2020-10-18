@@ -165,6 +165,7 @@ public:
   QTimer *passwordCacheTimer;
   QMap<QString, QStringList>  jobList;
   QString                     fileId;
+  QSet<QAction *>             actions;
 };
 
 
@@ -245,8 +246,12 @@ void KBanking::unplug()
   if (m_kbanking) {
     m_kbanking->fini();
     delete m_kbanking;
-    qDebug("Plugins: kbanking unplugged");
   }
+  // remove and delete the actions for this plugin
+  for (const auto& action : d->actions) {
+    actionCollection()->removeAction(action);
+  }
+  qDebug("Plugins: kbanking unplugged");
 }
 
 
@@ -315,10 +320,12 @@ void KBanking::createActions()
   QAction *settings_aqbanking = actionCollection()->addAction("settings_aqbanking");
   settings_aqbanking->setText(i18n("Configure Aq&Banking..."));
   connect(settings_aqbanking, &QAction::triggered, this, &KBanking::slotSettings);
+  d->actions.insert(settings_aqbanking);
 
   QAction *file_import_aqbanking = actionCollection()->addAction("file_import_aqbanking");
   file_import_aqbanking->setText(i18n("AqBanking importer..."));
   connect(file_import_aqbanking, &QAction::triggered, this, &KBanking::slotImport);
+  d->actions.insert(file_import_aqbanking);
 
   Q_CHECK_PTR(viewInterface());
   connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action("file_import_aqbanking"), &QAction::setEnabled);
@@ -334,6 +341,7 @@ void KBanking::createActions()
     connect(dlg, &QDialog::rejected, dlg, &chipTanDialog::deleteLater);
     dlg->show();
   });
+  d->actions.insert(openChipTanDialog);
 
   QAction *openPhotoTanDialog = actionCollection()->addAction("open_phototan_dialog");
   openPhotoTanDialog->setText("Open PhotoTan Dialog");
@@ -348,6 +356,7 @@ void KBanking::createActions()
     connect(dlg, &QDialog::rejected, dlg, &chipTanDialog::deleteLater);
     dlg->show();
   });
+  d->actions.insert(openPhotoTanDialog);
 #endif
 }
 

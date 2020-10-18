@@ -107,6 +107,7 @@ iCalendarExporter::iCalendarExporter(QObject *parent, const QVariantList &args) 
 
 iCalendarExporter::~iCalendarExporter()
 {
+  actionCollection()->removeAction(d->m_action);
   qDebug("Plugins: icalendarexporter unloaded");
 }
 
