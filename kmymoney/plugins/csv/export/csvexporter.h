@@ -38,13 +38,13 @@ public:
   explicit CSVExporter(QObject *parent, const QVariantList &args);
   ~CSVExporter() override;
 
-  QAction*          m_action;
   bool              okToWriteFile(const QUrl &url);
   CsvExportDlg*     exporterDialog() {
     return m_dlg;
   }
 
 private:
+  QAction*          m_action;
   CsvExportDlg*     m_dlg;
 
 protected Q_SLOTS:
