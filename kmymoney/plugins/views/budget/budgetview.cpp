@@ -50,7 +50,7 @@ BudgetView::~BudgetView()
 void BudgetView::plug()
 {
   m_view = new KBudgetView;
-  viewInterface()->addView(m_view, i18n("Budgets"), View::Budget);
+  viewInterface()->addView(m_view, i18n("Budgets"), View::Budget, Icons::Icon::Budget);
 }
 
 void BudgetView::unplug()

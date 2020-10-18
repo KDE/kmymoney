@@ -154,7 +154,7 @@ public:
    */
   eDialogs::ScheduleResultCode enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys);
 
-  void addView(KMyMoneyViewBase* view, const QString& name, View idView);
+  void addView(KMyMoneyViewBase* view, const QString& name, View idView, Icons::Icon icon);
   void removeView(View idView);
 
   /**

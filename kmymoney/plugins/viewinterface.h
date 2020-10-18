@@ -35,6 +35,7 @@
 #include "mymoneysplit.h"
 
 #include <kmm_plugin_export.h>
+#include "icons.h"
 
 namespace KMyMoneyRegister
 {
@@ -90,7 +91,7 @@ public:
     */
 //  virtual void addWidget(KMyMoneyViewBase* view, QWidget* w) = 0;
 
-    virtual void addView(KMyMoneyViewBase* view, const QString& name, View idView) = 0;
+    virtual void addView(KMyMoneyViewBase* view, const QString& name, View idView, Icons::Icon icon) = 0;
     virtual void removeView(View idView) = 0;
 
 Q_SIGNALS:

@@ -60,7 +60,7 @@ ReportsView::~ReportsView()
 void ReportsView::plug()
 {
   m_view = new KReportsView;
-  viewInterface()->addView(m_view, i18n("Reports"), View::Reports);
+  viewInterface()->addView(m_view, i18n("Reports"), View::Reports, Icons::Icon::Reports);
 }
 
 void ReportsView::unplug()
