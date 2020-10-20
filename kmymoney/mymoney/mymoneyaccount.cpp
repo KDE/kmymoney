@@ -508,7 +508,7 @@ QIcon MyMoneyAccount::accountIcon() const
     case Account::Type::AssetLoan:
       return Icons::get(isClosed() ? Icons::Icon::AssetLoanClosed : Icons::Icon::AssetLoan);
     case Account::Type::Stock:
-      return Icons::get(isClosed() ? Icons::Icon::StockClosed : Icons::Icon::Stock);
+      return Icons::get(isClosed() ? Icons::Icon::SecurityClosed : Icons::Icon::Security);
     case Account::Type::Equity:
       return Icons::get(Icons::Icon::Equity);
     default:
