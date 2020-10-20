@@ -309,7 +309,7 @@ qint64 KGPGFile::readData(char *data, qint64 maxlen)
   // size_t boundaries.
   qint64 bytesRead = 0;
   while (maxlen) {
-    qint64 len = 2 ^ 31;
+    qint64 len = 1LL << 31;
     if (len > maxlen)
       len = maxlen;
     bytesRead += d->m_data.read(data, len);

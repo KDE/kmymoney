@@ -50,7 +50,7 @@ ForecastView::~ForecastView()
 void ForecastView::plug()
 {
   m_view = new KForecastView;
-  viewInterface()->addView(m_view, i18n("Forecast"), View::Forecast);
+  viewInterface()->addView(m_view, i18n("Forecast"), View::Forecast, Icons::Icon::Forecast);
 }
 
 void ForecastView::unplug()

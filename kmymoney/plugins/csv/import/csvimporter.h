@@ -86,6 +86,7 @@ public:
 
 private:
   bool              m_silent;
+  QAction*          m_action;
 
 protected Q_SLOTS:
   void startWizardRun();

@@ -115,6 +115,7 @@ CheckPrinting::CheckPrinting(QObject *parent, const QVariantList &args) :
  */
 CheckPrinting::~CheckPrinting()
 {
+  actionCollection()->removeAction(d->m_action);
   qDebug("Plugins: checkprinting unloaded");
 }
 
