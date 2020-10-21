@@ -141,6 +141,9 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
             return d->institutionValue(idx).formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
           }
 
+        case AccountsModel::Column::BankCode:
+          return institution.bankcode();
+
         case AccountsModel::Column::Bic:
           return institution.value("bic");
 
