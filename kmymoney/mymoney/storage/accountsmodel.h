@@ -55,6 +55,8 @@ public:
     Number,
     BankCode,
     Balance,
+    Bic,
+    Iban,
     // insert new columns above this line
     MaxColumns
   };

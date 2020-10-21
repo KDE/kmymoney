@@ -367,8 +367,12 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
         return i18n("Total Value");
       case Column::Number:
         return i18n("Number");
+      case Column::Iban:
+        return i18n("IBAN");
       case Column::BankCode:
         return i18nc("Consider using both generic and the language-specific term, if one is common, e.g. 'Bank Code (Routing Code)' (en_US) or 'Bank Code (Sort Code)' (en_GB)", "Bank Code");
+      case Column::Bic:
+        return i18n("BIC");
       default:
         return QVariant();
     }
@@ -449,10 +453,13 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
           return d->adjustedBalance(account.totalPostedValue(), account).formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
         }
 
+        case Column::Bic:
+          return account.value("bic");
+
         case Column::Number:
           return account.number();
 
-        case Column::BankCode:
+        case Column::Iban:
           return account.value("iban");
 
         default:
