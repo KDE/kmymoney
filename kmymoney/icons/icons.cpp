@@ -27,8 +27,6 @@
 #include <QStandardPaths>
 
 namespace Icons {
-  QHash<Icon, QString> sStandardIcons;
-
   uint qHash(const Icon key, uint seed)
   {
     return ::qHash(static_cast<uint>(key), seed);
