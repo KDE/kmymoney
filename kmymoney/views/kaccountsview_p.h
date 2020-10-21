@@ -97,7 +97,8 @@ public:
     columnSelector->setAlwaysHidden(QVector<int>({ AccountsModel::Column::Balance,
                                                    AccountsModel::Column::PostedValue,
                                                    AccountsModel::Column::BankCode,
-                                                   AccountsModel::Column::Bic }));
+                                                   AccountsModel::Column::Bic,
+                                                   AccountsModel::Column::CostCenter }));
 
     ui->m_accountTree->setModel(MyMoneyFile::instance()->accountsModel());
     m_proxyModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquity());
