@@ -107,7 +107,7 @@ namespace NewUserWizard
       if (d->m_accountPage->d_func()->ui->m_institutionNameEdit->text().length()) {
         inst.setName(d->m_accountPage->d_func()->ui->m_institutionNameEdit->text());
         if (d->m_accountPage->d_func()->ui->m_institutionNumberEdit->text().length())
-          inst.setSortcode(d->m_accountPage->d_func()->ui->m_institutionNumberEdit->text());
+          inst.setBankCode(d->m_accountPage->d_func()->ui->m_institutionNumberEdit->text());
       }
     }
     return inst;

@@ -1129,7 +1129,7 @@ MyMoneyInstitution MyMoneyXmlContentHandler::readInstitution(const QDomElement &
 
   addToKeyValueContainer(institution, node.elementsByTagName(nodeName(Node::KeyValuePairs)).item(0).toElement());
 
-  institution.setSortcode(node.attribute(attributeName(Attribute::Institution::SortCode)));
+  institution.setBankCode(node.attribute(attributeName(Attribute::Institution::BankCode)));
   institution.setName(node.attribute(attributeName(Attribute::Institution::Name)));
   institution.setManager(node.attribute(attributeName(Attribute::Institution::Manager)));
 
@@ -1161,7 +1161,7 @@ void MyMoneyXmlContentHandler::writeInstitution(const MyMoneyInstitution &instit
 
   el.setAttribute(attributeName(Attribute::Institution::Name), institution.name());
   el.setAttribute(attributeName(Attribute::Institution::Manager), institution.manager());
-  el.setAttribute(attributeName(Attribute::Institution::SortCode), institution.sortcode());
+  el.setAttribute(attributeName(Attribute::Institution::BankCode), institution.bankcode());
 
   auto address = document.createElement(elementName(Element::Institution::Address));
   address.setAttribute(attributeName(Attribute::Institution::Street), institution.street());

@@ -66,7 +66,7 @@
        </widget>
       </item>
       <item row="5" column="1" colspan="4">
-       <widget class="KLineEdit" name="sortCodeEdit"/>
+       <widget class="KLineEdit" name="bankCodeEdit"/>
       </item>
       <item row="6" column="0">
        <widget class="QLabel" name="TextLabel7">
@@ -166,7 +166,7 @@
          </size>
         </property>
         <property name="text">
-         <string>Routing Number:</string>
+         <string>Bank Code:</string>
         </property>
         <property name="wordWrap">
          <bool>false</bool>
@@ -231,7 +231,7 @@
   <tabstop>streetEdit</tabstop>
   <tabstop>postcodeEdit</tabstop>
   <tabstop>telephoneEdit</tabstop>
-  <tabstop>sortCodeEdit</tabstop>
+  <tabstop>bankCodeEdit</tabstop>
   <tabstop>bicEdit</tabstop>
   <tabstop>urlEdit</tabstop>
   <tabstop>iconButton</tabstop>

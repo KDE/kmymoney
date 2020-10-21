@@ -322,7 +322,7 @@ QString attributeName(Attribute::Institution attributeID)
     {Attribute::Institution::ID,         QStringLiteral("id")},
     {Attribute::Institution::Name,       QStringLiteral("name")},
     {Attribute::Institution::Manager,    QStringLiteral("manager")},
-    {Attribute::Institution::SortCode,   QStringLiteral("sortcode")},
+    {Attribute::Institution::BankCode,   QStringLiteral("sortcode")},
     {Attribute::Institution::Street,     QStringLiteral("street")},
     {Attribute::Institution::City,       QStringLiteral("city")},
     {Attribute::Institution::Zip,        QStringLiteral("zip")},

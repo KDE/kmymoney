@@ -70,7 +70,7 @@ public:
                               const QString& postcode,
                               const QString& telephone,
                               const QString& manager,
-                              const QString& sortCode);
+                              const QString& bankcode);
 
   MyMoneyInstitution(const MyMoneyInstitution & other);
   MyMoneyInstitution(MyMoneyInstitution && other);
@@ -111,8 +111,8 @@ public:
   QString city() const;
   void setCity(const QString& town);
 
-  QString sortcode() const;
-  void setSortcode(const QString& code);
+  QString bankcode() const;
+  void setBankCode(const QString& code);
 
   /**
     * This method adds the id of an account to the account list of

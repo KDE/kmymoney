@@ -367,8 +367,8 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
         return i18n("Total Value");
       case Column::Number:
         return i18n("Number");
-      case Column::SortCode:
-        return i18n("SortCode");
+      case Column::BankCode:
+        return i18nc("Consider using both generic and the language-specific term, if one is common, e.g. 'Bank Code (Routing Code)' (en_US) or 'Bank Code (Sort Code)' (en_GB)", "Bank Code");
       default:
         return QVariant();
     }
@@ -452,7 +452,7 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
         case Column::Number:
           return account.number();
 
-        case Column::SortCode:
+        case Column::BankCode:
           return account.value("iban");
 
         default:

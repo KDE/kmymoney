@@ -152,7 +152,7 @@ void MyMoneyFileTest::testAddOneInstitution()
   institution.setPostcode("postcode");
   institution.setTelephone("telephone");
   institution.setManager("manager");
-  institution.setSortcode("sortcode");
+  institution.setBankCode("sortcode");
 
   // MyMoneyInstitution institution_file("", institution);
   MyMoneyInstitution institution_id("I000002", institution);
@@ -217,7 +217,7 @@ void MyMoneyFileTest::testAddTwoInstitutions()
   institution.setPostcode("postcode");
   institution.setTelephone("telephone");
   institution.setManager("manager");
-  institution.setSortcode("sortcode");
+  institution.setBankCode("sortcode");
 
   m->setDirty(false);
 
@@ -372,7 +372,7 @@ void MyMoneyFileTest::testInstitutionModify()
   institution.setTelephone("new telephone");
   institution.setManager("new manager");
   institution.setName("new name");
-  institution.setSortcode("new sortcode");
+  institution.setBankCode("new sortcode");
 
   m->setDirty(false);
 
@@ -405,7 +405,7 @@ void MyMoneyFileTest::testInstitutionModify()
   QCOMPARE(newInstitution.telephone(), QLatin1String("new telephone"));
   QCOMPARE(newInstitution.manager(), QLatin1String("new manager"));
   QCOMPARE(newInstitution.name(), QLatin1String("new name"));
-  QCOMPARE(newInstitution.sortcode(), QLatin1String("new sortcode"));
+  QCOMPARE(newInstitution.bankcode(), QLatin1String("new sortcode"));
 
   m->setDirty(false);
 
