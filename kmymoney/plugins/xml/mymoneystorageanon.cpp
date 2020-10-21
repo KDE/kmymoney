@@ -103,7 +103,7 @@ void MyMoneyStorageANON::writeInstitution(QDomElement& institution, const MyMone
   // mangle fields
   i.setName(i.id());
   i.setManager(hideString(i.manager()));
-  i.setSortcode(hideString(i.sortcode()));
+  i.setBankCode(hideString(i.bankcode()));
 
   i.setStreet(hideString(i.street()));
   i.setCity(hideString(i.city()));

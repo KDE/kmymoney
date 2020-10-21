@@ -179,8 +179,8 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::Roles::IdRole:
       return institution.id();
 
-    case eMyMoney::Model::InstitutionSortCodeRole:
-      return institution.sortcode();
+    case eMyMoney::Model::InstitutionBankCodeRole:
+      return institution.bankcode();
 
     case eMyMoney::Model::AccountDisplayOrderRole:
       // make sure the no bank assigned accounts show up at the top

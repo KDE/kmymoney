@@ -52,7 +52,7 @@ namespace eMyMoney {
       Version,
       AccountName,
       AccountNumber,
-      RoutingNumber,
+      BankCode,
       Currency,
       BeginDate,
       EndDate,
@@ -124,7 +124,7 @@ QString getAttrName(const Statement::Attribute attr)
     {Statement::Attribute::Version,              QStringLiteral("version")},
     {Statement::Attribute::AccountName,          QStringLiteral("accountname")},
     {Statement::Attribute::AccountNumber,        QStringLiteral("accountnumber")},
-    {Statement::Attribute::RoutingNumber,        QStringLiteral("routingnumber")},
+    {Statement::Attribute::BankCode,             QStringLiteral("routingnumber")},
     {Statement::Attribute::Currency,             QStringLiteral("currency")},
     {Statement::Attribute::BeginDate,            QStringLiteral("begindate")},
     {Statement::Attribute::EndDate,              QStringLiteral("enddate")},
@@ -156,7 +156,7 @@ void MyMoneyStatement::write(QDomElement& _root, QDomDocument* _doc) const
   e.setAttribute(getAttrName(Statement::Attribute::Version), QStringLiteral("1.1"));
   e.setAttribute(getAttrName(Statement::Attribute::AccountName), m_strAccountName);
   e.setAttribute(getAttrName(Statement::Attribute::AccountNumber), m_strAccountNumber);
-  e.setAttribute(getAttrName(Statement::Attribute::RoutingNumber), m_strRoutingNumber);
+  e.setAttribute(getAttrName(Statement::Attribute::BankCode), m_strBankCode);
   e.setAttribute(getAttrName(Statement::Attribute::Currency), m_strCurrency);
   e.setAttribute(getAttrName(Statement::Attribute::BeginDate), m_dateBegin.toString(Qt::ISODate));
   e.setAttribute(getAttrName(Statement::Attribute::EndDate), m_dateEnd.toString(Qt::ISODate));
@@ -227,7 +227,7 @@ bool MyMoneyStatement::read(const QDomElement& _e)
 
     m_strAccountName = _e.attribute(getAttrName(Statement::Attribute::AccountName));
     m_strAccountNumber = _e.attribute(getAttrName(Statement::Attribute::AccountNumber));
-    m_strRoutingNumber = _e.attribute(getAttrName(Statement::Attribute::RoutingNumber));
+    m_strBankCode = _e.attribute(getAttrName(Statement::Attribute::BankCode));
     m_strCurrency = _e.attribute(getAttrName(Statement::Attribute::Currency));
     m_dateBegin = QDate::fromString(_e.attribute(getAttrName(Statement::Attribute::BeginDate)), Qt::ISODate);
     m_dateEnd = QDate::fromString(_e.attribute(getAttrName(Statement::Attribute::EndDate)), Qt::ISODate);

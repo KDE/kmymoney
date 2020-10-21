@@ -257,7 +257,7 @@ namespace Attribute {
     ID = 0,
     Name,
     Manager,
-    SortCode,
+    BankCode,
     Street,
     City,
     Zip,

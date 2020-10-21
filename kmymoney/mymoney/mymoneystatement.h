@@ -91,7 +91,7 @@ public:
 
   QString m_strAccountName;
   QString m_strAccountNumber;
-  QString m_strRoutingNumber;
+  QString m_strBankCode;
 
   /**
    * The statement provider's information for the statement reader how to find the

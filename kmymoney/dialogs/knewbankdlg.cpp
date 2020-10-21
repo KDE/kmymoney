@@ -89,7 +89,7 @@ KNewBankDlg::KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent) :
   d->ui->streetEdit->setText(institution.street());
   d->ui->postcodeEdit->setText(institution.postcode());
   d->ui->telephoneEdit->setText(institution.telephone());
-  d->ui->sortCodeEdit->setText(institution.sortcode());
+  d->ui->bankCodeEdit->setText(institution.bankcode());
   d->ui->bicEdit->setText(institution.value(QStringLiteral("bic")));
   d->ui->urlEdit->setText(institution.value(QStringLiteral("url")));
 
@@ -149,7 +149,7 @@ void KNewBankDlg::okClicked()
   d->m_institution.setStreet(d->ui->streetEdit->text());
   d->m_institution.setPostcode(d->ui->postcodeEdit->text());
   d->m_institution.setTelephone(d->ui->telephoneEdit->text());
-  d->m_institution.setSortcode(d->ui->sortCodeEdit->text());
+  d->m_institution.setBankCode(d->ui->bankCodeEdit->text());
   d->m_institution.setValue(QStringLiteral("bic"), d->ui->bicEdit->text());
   d->m_institution.setValue(QStringLiteral("url"), d->ui->urlEdit->text());
   d->m_institution.deletePair(QStringLiteral("icon"));

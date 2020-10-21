@@ -53,7 +53,7 @@ public:
     PostedValue,
     TotalPostedValue,
     Number,
-    SortCode,
+    BankCode,
     Balance,
     // insert new columns above this line
     MaxColumns
