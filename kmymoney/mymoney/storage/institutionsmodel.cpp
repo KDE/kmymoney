@@ -100,7 +100,7 @@ InstitutionsModel::~InstitutionsModel()
 int InstitutionsModel::columnCount(const QModelIndex& parent) const
 {
   Q_UNUSED(parent);
-  return Column::MaxColumns;
+  return AccountsModel::Column::MaxColumns;
 }
 
 QVariant InstitutionsModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -131,7 +131,7 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
     case Qt::DisplayRole:
     case Qt::EditRole:
       switch(idx.column()) {
-        case Column::AccountName:
+        case AccountsModel::Column::AccountName:
           // make sure to never return any displayable text for the dummy entry
           return institution.name();
 
