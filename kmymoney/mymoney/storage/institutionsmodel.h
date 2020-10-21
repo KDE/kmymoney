@@ -44,22 +44,6 @@ class KMM_MYMONEY_EXPORT InstitutionsModel : public MyMoneyModel<MyMoneyInstitut
   Q_OBJECT
 
 public:
-  enum Column {
-    AccountName = 0,
-    Type,
-    Tax,
-    Vat,
-    CostCenter,
-    TotalBalance,
-    PostedValue,
-    TotalValue,
-    Number,
-    SortCode,
-    // insert new columns above this line
-    MaxColumns
-  };
-
-
   explicit InstitutionsModel(AccountsModel* accountsModel, QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
   virtual ~InstitutionsModel();
 
