@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KNEWBANKDLG_H
-#define KNEWBANKDLG_H
+#ifndef KNEWINSTITUTIONDLG_H
+#define KNEWINSTITUTIONDLG_H
 
 #include "kmm_base_dialogs_export.h"
 
@@ -36,15 +36,15 @@ class MyMoneyInstitution;
 class KJob;
 
 /// This dialog lets the user create or edit an institution
-class KNewBankDlgPrivate;
-class KMM_BASE_DIALOGS_EXPORT KNewBankDlg : public QDialog
+class KNewInstitutionDlgPrivate;
+class KMM_BASE_DIALOGS_EXPORT KNewInstitutionDlg : public QDialog
 {
   Q_OBJECT
-  Q_DISABLE_COPY(KNewBankDlg)
+  Q_DISABLE_COPY(KNewInstitutionDlg)
 
 public:
-  explicit KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent = nullptr);
-  ~KNewBankDlg();
+  explicit KNewInstitutionDlg(MyMoneyInstitution& institution, QWidget *parent = nullptr);
+  ~KNewInstitutionDlg();
   const MyMoneyInstitution& institution();
 
   static void newInstitution(MyMoneyInstitution& institution);
@@ -58,8 +58,8 @@ private Q_SLOTS:
   void killIconLoad();
 
 private:
-  KNewBankDlgPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KNewBankDlg)
+  KNewInstitutionDlgPrivate * const d_ptr;
+  Q_DECLARE_PRIVATE(KNewInstitutionDlg)
 };
 
 #endif
