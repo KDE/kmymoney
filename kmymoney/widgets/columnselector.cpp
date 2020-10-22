@@ -87,6 +87,7 @@ public:
     if ((treeView || tableView) && model) {
       const auto maxColumn = model->columnCount();
       QList<int> visibleColumns;
+
       if (!configGroupName.isEmpty()) {
         // restore the headers when we have a group name
         const auto grp = KSharedConfig::openConfig()->group(configGroupName);
@@ -95,13 +96,15 @@ public:
 
         visibleColumns = grp.readEntry<int>("ColumnsSelection", QList<int>());
         // add the storage offset during loading operation
-        for (auto& column : visibleColumns) {
-          if (applyStorageOffsetColumns.contains(column+storageOffset)) {
+        for (auto &column : visibleColumns) {
+          if (applyStorageOffsetColumns.contains(column + storageOffset)) {
             column += storageOffset;
           }
         }
-      } else {
-        // in case no group name is given, all columns are visible
+      }
+
+      if (visibleColumns.isEmpty()) {
+        // in case no column was marked as visible so far, all should
         for (int col = 0; col < maxColumn; ++col) {
           visibleColumns += col;
         }
