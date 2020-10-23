@@ -1,6 +1,8 @@
 [Icon Theme]
 Name=Breeze
 Name[ca]=Brisa
+Name[es]=Brisa
+Name[it]=Brezza
 Name[nl]=Breeze
 Name[pt]=Brisa
 Name[pt_BR]=Breeze
@@ -10,6 +12,8 @@ Name[x-test]=xxBreezexx
 
 Comment=Breeze by the KDE VDG
 Comment[ca]=Brisa, creat pel VDG del KDE
+Comment[es]=Brisa por KDE VDG
+Comment[it]=Brezza del KDE VDG
 Comment[nl]=Breeze door de KDE VDG
 Comment[pt]=Brisa da VDG do KDE
 Comment[pt_BR]=Breeze pelo KDE VDG
