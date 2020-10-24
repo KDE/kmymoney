@@ -53,6 +53,7 @@ class MyQWebEnginePage;
 class TocItemGroup;
 class ReportControl;
 class ReportGroup;
+class SelectedObjects;
 
 #ifdef ENABLE_WEBENGINE
 class QWebEngineView;
@@ -88,7 +89,7 @@ public:
 
   void executeCustomAction(eView::Action action) override;
   void refresh();
-  void updateActions(const MyMoneyObject &obj);
+  void updateActions(const MyMoneyObject &obj) Q_DECL_DEPRECATED;
 
 Q_SIGNALS:
   /**
@@ -135,6 +136,8 @@ public Q_SLOTS:
   void slotDeleteFromList();
 
   void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
+
+  void updateActions(const SelectedObjects& selections) override;
 
 private:
   Q_DECLARE_PRIVATE(KReportsView)

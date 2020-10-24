@@ -416,7 +416,6 @@ void KBudgetView::slotSelectBudget()
     }
   }
 
-  d->actionStates();
   d->updateButtonStates();
 }
 
@@ -427,4 +426,10 @@ void KBudgetView::slotHideUnused(bool toggled)
   const auto prevState = !toggled;
   if (prevState != d->ui->m_hideUnusedButton->isChecked())
     d->m_budgetProxyModel->setHideUnusedIncomeExpenseAccounts(d->ui->m_hideUnusedButton->isChecked());
+}
+
+void KBudgetView::updateActions(const SelectedObjects& selections)
+{
+  /// @todo updateActions
+
 }

@@ -36,6 +36,7 @@
 
 class MyMoneyAccount;
 class MyMoneyObject;
+class SelectedObjects;
 
 /**
   * @author Kevin Tambascio
@@ -53,7 +54,7 @@ public:
   void executeCustomAction(eView::Action action) override;
   void setDefaultFocus();
   void refresh();
-  void updateActions(const MyMoneyObject &obj);
+  void updateActions(const MyMoneyObject &obj) Q_DECL_DEPRECATED;
 
 public Q_SLOTS:
   /**
@@ -63,6 +64,8 @@ public Q_SLOTS:
 
   void slotShowInvestmentMenu(const MyMoneyAccount& acc);
   void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
+
+  void updateActions(const SelectedObjects& selections) override;
 
 protected:
   void showEvent(QShowEvent* event) override;

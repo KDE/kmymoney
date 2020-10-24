@@ -419,10 +419,9 @@ void KTagsView::showEvent(QShowEvent* event)
   QWidget::showEvent(event);
 }
 
-void KTagsView::updateTagActions(const QList<MyMoneyTag>& tags)
+void KTagsView::updateActions(const SelectedObjects& selections)
 {
-  pActions[eMenu::Action::NewTag]->setEnabled(true);
-  const auto tagsCount = tags.count();
+  const auto tagsCount = selections.selection(SelectedObjects::Tag).count();
   auto b = tagsCount == 1 ? true : false;
   pActions[eMenu::Action::RenameTag]->setEnabled(b);
   b = tagsCount >= 1 ? true : false;
@@ -590,7 +589,12 @@ void KTagsView::slotSelectTags(const QList<MyMoneyTag>& list)
 {
   Q_D(KTagsView);
   d->m_selectedTags = list;
-  updateTagActions(list);
+  QStringList tagIds;
+  for (const auto& tag : list) {
+    tagIds.append(tag.id());
+  }
+  d->m_selections.setSelection(SelectedObjects::Tag, tagIds);
+  emit requestSelectionChange(d->m_selections);
 }
 
 void KTagsView::slotNewTag()

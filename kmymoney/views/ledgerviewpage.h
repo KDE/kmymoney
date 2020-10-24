@@ -30,6 +30,7 @@
 // Project Includes
 
 class MyMoneyAccount;
+class SelectedObjects;
 
 class LedgerViewPage : public QWidget
 {
@@ -48,6 +49,8 @@ public:
    */
   void setShowEntryForNewTransaction(bool show = true);
 
+  const SelectedObjects& selections() const;
+
 protected:
 
 public Q_SLOTS:
@@ -62,6 +65,8 @@ protected Q_SLOTS:
   void reloadFilter();
 
 Q_SIGNALS:
+  void selectionChanged(const SelectedObjects& selection);
+
   void transactionSelected(const QModelIndex& idx);
   void aboutToStartEdit();
   void aboutToFinishEdit();

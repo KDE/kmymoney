@@ -46,7 +46,6 @@
 // Project Includes
 
 #include <config-kmymoney.h>
-#include "ui_kpayeesview.h"
 #include "kmymoneyviewbase_p.h"
 #include "kpayeeidentifierview.h"
 #include "mymoneypayee.h"
@@ -83,7 +82,6 @@ KPayeesView::KPayeesView(QWidget *parent) :
   connect(pActions[eMenu::Action::RenamePayee], &QAction::triggered, this, &KPayeesView::slotRenamePayee);
   connect(pActions[eMenu::Action::DeletePayee], &QAction::triggered, this, &KPayeesView::slotDeletePayee);
   connect(pActions[eMenu::Action::MergePayee],  &QAction::triggered, this, &KPayeesView::slotMergePayee);
-
 }
 
 KPayeesView::~KPayeesView()
@@ -138,8 +136,7 @@ void KPayeesView::slotChooseDefaultAccount()
 void KPayeesView::slotClosePayeeIdentifierSource()
 {
   Q_D(KPayeesView);
-  if (!d->m_needLoad)
-    d->ui->payeeIdentifiers->closeSource();
+  d->ui->payeeIdentifiers->closeSource();
 }
 
 void KPayeesView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
@@ -158,7 +155,7 @@ void KPayeesView::slotRenameSinglePayee(const QModelIndex& idx, const QVariant& 
 {
   Q_D(KPayeesView);
   //if there is no current item selected, exit
-  if (d->m_allowEditing == false || !idx.isValid())
+  if (!idx.isValid())
     return;
 
   //qDebug() << "[KPayeesView::slotRenamePayee]";
@@ -199,6 +196,41 @@ void KPayeesView::slotRenameSinglePayee(const QModelIndex& idx, const QVariant& 
   }
 }
 
+void KPayeesView::updateActions(const SelectedObjects& selections)
+{
+  Q_D(KPayeesView);
+  const auto selectedItemCount = selections.selection(SelectedObjects::Payee).count();
+
+  d->ui->m_syncAddressbook->setEnabled(true);
+  d->ui->m_tabWidget->setEnabled(false); // disable tab widget
+
+  pActions[eMenu::Action::RenamePayee]->setEnabled(false);
+  pActions[eMenu::Action::DeletePayee]->setEnabled(false);
+  pActions[eMenu::Action::MergePayee]->setEnabled(false);
+
+  switch (selectedItemCount) {
+    case 0: // no selection
+      d->ui->m_balanceLabel->hide();
+      d->clearItemData();
+      d->m_payee = MyMoneyPayee();
+      d->ui->m_syncAddressbook->setEnabled(false);
+      break;
+
+    case 1: // single selection
+      pActions[eMenu::Action::RenamePayee]->setEnabled(true);
+      pActions[eMenu::Action::DeletePayee]->setEnabled(true);
+      d->ui->m_tabWidget->setEnabled(true); // enable tab widget
+      break;
+
+    default:  // if we have multiple payees selected, clear and disable the payee information
+      pActions[eMenu::Action::DeletePayee]->setEnabled(true);
+      pActions[eMenu::Action::MergePayee]->setEnabled(true);
+      d->ui->m_balanceLabel->hide();
+      d->clearItemData();
+      break;
+  }
+}
+
 void KPayeesView::slotPayeeSelectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
 {
   Q_D(KPayeesView);
@@ -213,43 +245,15 @@ void KPayeesView::slotPayeeSelectionChanged(const QItemSelection& selected, cons
     }
   }
 
-  const auto selectedItemCount = d->ui->m_payees->selectionModel()->selectedIndexes().count();
-  updatePayeeActions(selectedItemCount);
-
-  d->ui->m_deleteButton->setEnabled(true); //re-enable delete button
-  d->ui->m_syncAddressbook->setEnabled(true);
-
-  d->ui->m_tabWidget->setEnabled(false); // disable tab widget
-  switch (selectedItemCount) {
-    case 0: // no selection
-      d->ui->m_balanceLabel->hide();
-      d->ui->m_deleteButton->setEnabled(false); //disable delete, rename and merge buttons
-      d->ui->m_renameButton->setEnabled(false);
-      d->ui->m_mergeButton->setEnabled(false);
-      d->clearItemData();
-      d->m_payee = MyMoneyPayee();
-      d->ui->m_syncAddressbook->setEnabled(false);
-      return; // make sure we don't access an undefined payee
-
-    case 1: // single selection
-      d->ui->m_tabWidget->setEnabled(true); // enable tab widget
-      d->ui->m_mergeButton->setEnabled(false);
-      d->ui->m_renameButton->setEnabled(true);
-      break;
-
-    default:  // if we have multiple payees selected, clear and disable the payee information
-      d->ui->m_renameButton->setEnabled(false); // disable also the rename button
-      d->ui->m_mergeButton->setEnabled(true);
-      d->ui->m_balanceLabel->hide();
-      d->clearItemData();
-      break;
-  }
+  d->m_selections.setSelection(SelectedObjects::Payee, d->selectedPayeeIds());
+  emit requestSelectionChange(d->m_selections);
 
   const auto selectedPayees = d->selectedPayees();
   d->m_payee = MyMoneyPayee();
   if (!selectedPayees.isEmpty()) {
     d->m_payee = selectedPayees.at(0);
   }
+  /// @todo cleanup once the new selection code is completely in place
   emit selectObjects(selectedPayees);
 
   // as of now we are updating only the last selected payee, and until
@@ -418,18 +422,6 @@ void KPayeesView::slotSyncAddressBook()
   }
 
   if (d->m_payeesToSync.count() <= d->m_syncedPayees) {
-#if 0
-    if (auto item = dynamic_cast<KPayeeListItem*>(d->ui->m_payeesList->currentItem())) { // update ui if something is selected
-      d->m_payee = item->payee();
-      d->ui->addressEdit->setText(d->m_payee.address());
-      d->ui->payeecityEdit->setText(d->m_payee.city());
-      d->ui->payeestateEdit->setText(d->m_payee.state());
-      d->ui->postcodeEdit->setText(d->m_payee.postcode());
-      d->ui->telephoneEdit->setText(d->m_payee.telephone());
-    }
-    // update synced data in engine
-#endif
-
     if (!d->m_payeesToSync.isEmpty()) {
       MyMoneyFileTransaction ft;
       try {
@@ -448,7 +440,7 @@ void KPayeesView::slotSyncAddressBook()
   }
 
   // search for payee's data in addressbook and receive it in slotContactFetched
-  d->m_contact->fetchContact(d->m_payee.email());
+  d->m_contact->fetchContact(d->m_payeesToSync[d->m_syncedPayees].email());
 }
 
 void KPayeesView::slotContactFetched(const ContactData &identity)
@@ -528,30 +520,6 @@ void KPayeesView::showEvent(QShowEvent* event)
 
   // don't forget base class implementation
   QWidget::showEvent(event);
-}
-
-/// @todo cleanup
-void KPayeesView::updatePayeeActions(const QList<MyMoneyPayee> &payees)
-{
-  pActions[eMenu::Action::NewPayee]->setEnabled(true);
-  const auto payeesCount = payees.count();
-  auto b = payeesCount == 1 ? true : false;
-  pActions[eMenu::Action::RenamePayee]->setEnabled(b);
-  b = payeesCount > 1 ? true : false;
-  pActions[eMenu::Action::MergePayee]->setEnabled(b);
-  b = payeesCount == 0 ? false : true;
-  pActions[eMenu::Action::DeletePayee]->setEnabled(b);
-}
-
-void KPayeesView::updatePayeeActions(int payeesCount)
-{
-  pActions[eMenu::Action::NewPayee]->setEnabled(true);
-  auto b = payeesCount == 1 ? true : false;
-  pActions[eMenu::Action::RenamePayee]->setEnabled(b);
-  b = payeesCount > 1 ? true : false;
-  pActions[eMenu::Action::MergePayee]->setEnabled(b);
-  b = payeesCount == 0 ? false : true;
-  pActions[eMenu::Action::DeletePayee]->setEnabled(b);
 }
 
 void KPayeesView::slotSelectTransaction()

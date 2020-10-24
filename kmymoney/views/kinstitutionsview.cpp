@@ -132,6 +132,11 @@ void KInstitutionsView::showEvent(QShowEvent * event)
   QWidget::showEvent(event);
 }
 
+void KInstitutionsView::updateActions(const SelectedObjects& selections)
+{
+  /// @todo updateActions
+}
+
 void KInstitutionsView::updateActions(const MyMoneyObject& obj)
 {
   Q_D(KInstitutionsView);

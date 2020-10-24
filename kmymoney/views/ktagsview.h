@@ -34,6 +34,7 @@ class QListWidgetItem;
 class KListWidgetSearchLine;
 class MyMoneyObject;
 class MyMoneyTag;
+class SelectedObjects;
 
 template <typename T> class QList;
 
@@ -50,7 +51,6 @@ public:
   explicit KTagsView(QWidget *parent = nullptr);
   ~KTagsView() override;
 
-  void updateTagActions(const QList<MyMoneyTag>& tags);
   void executeCustomAction(eView::Action action) override;
 
 public Q_SLOTS:
@@ -60,6 +60,7 @@ public Q_SLOTS:
   void slotHelp();
 
   void refresh();
+  void updateActions(const SelectedObjects& selections) override;
 
 protected:
   void showEvent(QShowEvent* event) override;

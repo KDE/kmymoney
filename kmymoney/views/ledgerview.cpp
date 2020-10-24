@@ -50,6 +50,7 @@
 #include "specialdatedelegate.h"
 #include "schedulesjournalmodel.h"
 #include "transactioneditorbase.h"
+#include "selectedobjects.h"
 
 Q_GLOBAL_STATIC(LedgerView*, s_globalEditView);
 
@@ -133,6 +134,7 @@ public:
   QString                         accountId;
   QString                         groupName;
   QPersistentModelIndex           editIndex;
+  SelectedObjects                 selection;
 };
 
 
@@ -198,6 +200,7 @@ void LedgerView::setModel(QAbstractItemModel* model)
 void LedgerView::setAccountId(const QString& id)
 {
   d->accountId = id;
+  d->selection.setSelection(SelectedObjects::Account, id);
 }
 
 const QString& LedgerView::accountId() const
@@ -537,6 +540,13 @@ void LedgerView::selectMostRecentTransaction()
   }
 }
 
+void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
+{
+  QTableView::selectionChanged(selected, deselected);
+  d->selection.setSelection(SelectedObjects::Transaction, selectedTransactions());
+  emit transactionSelectionChanged(d->selection);
+}
+
 QStringList LedgerView::selectedTransactions() const
 {
   QStringList selection;
@@ -612,7 +622,11 @@ void LedgerView::setSelectedTransactions(const QStringList& transactionIds)
   // add a possibly dangling range
   createSelectionRange();
 
+  qDebug() << "setSelectedTransactions 1";
   selectionModel()->clearSelection();
+  qDebug() << "setSelectedTransactions 2";
   selectionModel()->select(selection, QItemSelectionModel::Select);
+  qDebug() << "setSelectedTransactions 3";
   selectionModel()->setCurrentIndex(currentIdx, QItemSelectionModel::Select);
+  qDebug() << "setSelectedTransactions 4";
 }

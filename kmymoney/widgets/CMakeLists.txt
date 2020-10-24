@@ -189,6 +189,7 @@ target_link_libraries(kmm_widgets PUBLIC
   kmm_settings
   kmm_base_dialogs
   kmm_base_widgets
+  kmm_selections
 )
 
 set_target_properties(kmm_widgets PROPERTIES

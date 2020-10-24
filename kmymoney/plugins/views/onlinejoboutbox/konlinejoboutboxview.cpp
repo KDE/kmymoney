@@ -165,6 +165,11 @@ KOnlineJobOutboxView::~KOnlineJobOutboxView()
 {
 }
 
+void KOnlineJobOutboxView::updateActions(const SelectedObjects& selections)
+{
+  /// @todo updateActions
+}
+
 void KOnlineJobOutboxView::updateButtonState() const
 {
   Q_D(const KOnlineJobOutboxView);

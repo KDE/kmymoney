@@ -38,6 +38,7 @@ class QTreeWidgetItem;
 class KTreeWidgetSearchLineWidget;
 class MyMoneySchedule;
 class MyMoneyAccount;
+class SelectedObjects;
 
 namespace eDialogs { enum class ScheduleResultCode; }
 namespace eView { namespace Schedules { enum class Requester; } }
@@ -71,7 +72,7 @@ public:
 
   void executeCustomAction(eView::Action action) override;
   void refresh();
-  void updateActions(const MyMoneyObject& obj);
+  void updateActions(const MyMoneyObject& obj) Q_DECL_DEPRECATED;
 
   // TODO: remove that function
   /**
@@ -87,6 +88,7 @@ public Q_SLOTS:
   void slotEnterOverdueSchedules(const MyMoneyAccount& acc);
 
   void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
+  void updateActions(const SelectedObjects& selections) override;
 
 Q_SIGNALS:
   void enterOverdueSchedulesFinished(eView::Schedules::Requester req);

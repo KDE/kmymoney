@@ -36,6 +36,7 @@
 
 class MyMoneyMoney;
 class MyMoneyAccount;
+class SelectedObjects;
 
 /**
   * @brief  This class contains the implementation of the categories view.
@@ -78,6 +79,7 @@ public Q_SLOTS:
   void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
   void slotSettingsChanged() override;
+  void updateActions(const SelectedObjects& selections) override;
 
 protected:
   void showEvent(QShowEvent * event) override;

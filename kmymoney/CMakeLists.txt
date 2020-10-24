@@ -164,6 +164,7 @@ target_link_libraries(kmymoney
   $<$<BOOL:${ENABLE_HOLIDAYS}>:KF5::Holidays>
   $<$<BOOL:${ENABLE_ACTIVITIES}>:KF5::Activities>
   PRIVATE
+    kmm_selections
     $<$<BOOL:${ENABLE_SQLCIPHER}>:PkgConfig::SQLCIPHER>
 )
 

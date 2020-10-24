@@ -163,6 +163,11 @@ void KScheduledView::showEvent(QShowEvent* event)
   QWidget::showEvent(event);
 }
 
+void KScheduledView::updateActions(const SelectedObjects& selections)
+{
+  /// @todo updateActions
+}
+
 void KScheduledView::updateActions(const MyMoneyObject& obj)
 {
   Q_D(KScheduledView);

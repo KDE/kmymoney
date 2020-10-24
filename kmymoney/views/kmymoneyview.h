@@ -75,6 +75,7 @@ class MyMoneyMoney;
 class MyMoneyObject;
 class QLabel;
 class KMyMoneyViewBase;
+class SelectedObjects;
 
 /**
   * This class represents the view of the MyMoneyFile which contains
@@ -240,6 +241,8 @@ public Q_SLOTS:
   void slotFileOpened();
   void slotFileClosed();
 
+  void updateActions(const SelectedObjects& selections);
+
 private Q_SLOTS:
   void switchToDefaultView();
 
@@ -255,6 +258,7 @@ private Q_SLOTS:
    */
   void slotContextMenuRequested(const MyMoneyObject& obj);
 
+
 private:
 
   /**
@@ -262,14 +266,18 @@ private:
     */
   void accountNew(const bool createCategory);
 
-  void resetViewSelection();
+  /**
+   * @deprecated will be replaced by the new SelectedObjects method
+   * which has an inherited reset all the time
+   */
+  void resetViewSelection() Q_DECL_DEPRECATED;
 
 Q_SIGNALS:
    /**
     * This signal is emitted whenever a view is selected.
     * The parameter @p view is identified as one of KMyMoneyView::viewID.
     */
-  void viewActivated(View view);
+  void viewActivated(View view) Q_DECL_DEPRECATED;
 
   void accountSelectedForContextMenu(const MyMoneyAccount& acc);
 
@@ -307,6 +315,9 @@ Q_SIGNALS:
     * by plugins to get information about changes.
     */
   void accountSelected(const MyMoneyAccount& account);
+
+  // these signals request a change by the application
+  void requestSelectionChange (const SelectedObjects& selection);
 
   void settingsChanged();
 };

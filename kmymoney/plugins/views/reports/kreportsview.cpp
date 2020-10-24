@@ -173,6 +173,11 @@ void KReportsView::showEvent(QShowEvent * event)
   QWidget::showEvent(event);
 }
 
+void KReportsView::updateActions(const SelectedObjects& selections)
+{
+  /// @todo updateActions
+}
+
 void KReportsView::updateActions(const MyMoneyObject& obj)
 {
   Q_D(KReportsView);

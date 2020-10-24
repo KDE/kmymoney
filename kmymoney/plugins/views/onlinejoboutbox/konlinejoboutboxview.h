@@ -28,6 +28,7 @@ class QModelIndex;
 namespace KMyMoneyPlugin { class OnlinePlugin; }
 
 class KOnlineJobOutboxViewPrivate;
+class SelectedObjects;
 class KOnlineJobOutboxView : public KMyMoneyViewBase
 {
   Q_OBJECT
@@ -46,6 +47,8 @@ public Q_SLOTS:
   void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
   void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
+  void updateActions(const SelectedObjects& selections) override;
+
 Q_SIGNALS:
   void sendJobs(QList<onlineJob>);
   void editJob(QString);
@@ -60,7 +63,7 @@ private:
 
 private Q_SLOTS:
   void updateNewCreditTransferButton();
-  void updateButtonState() const;
+  void updateButtonState() const Q_DECL_DEPRECATED;
 
   void slotRemoveJob();
 

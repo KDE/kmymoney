@@ -1,6 +1,6 @@
 /*
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- * Copyright 2019       Thomas Baumgart <tbaumgart@kde.org>
+ * Copyright 2019-2020  Thomas Baumgart <tbaumgart@kde.org>
  * Copyright 2020       Robert Szczesiak <dev.rszczesiak@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
@@ -38,6 +38,7 @@
 #include <kmymoneysettings.h>
 #include <mymoneysecurity.h>
 #include <mymoneyutils.h>
+#include "selectedobjects.h"
 
 class KMyMoneyViewBase;
 class KMyMoneyViewBasePrivate
@@ -64,7 +65,7 @@ public:
   /**
    * @brief Returns formatted rich text
    * @param value reference to a MyMoneyMoney object containing the value to be formatted
-   * @param scheme reference to a QColor object containging color scheme
+   * @param scheme reference to a QColor object containing color scheme
    * @return Qstring representing label value with added formatting
    */
   QString formatViewLabelValue(const MyMoneyMoney& value, const QColor& scheme)
@@ -86,6 +87,7 @@ public:
 
   bool                  m_needsRefresh;
   KMyMoneyViewBase*     q_ptr;
+  SelectedObjects       m_selections;
 };
 
 #endif

@@ -1,5 +1,6 @@
 /*
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -28,12 +29,15 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "viewenums.h"
 
 class MyMoneyObject;
+class KPageWidgetItem;
+class SelectedObjects;
 
 /**
   * This class is an abstract base class that all specific views
@@ -50,12 +54,31 @@ public:
 
   virtual void executeCustomAction(eView::Action) {}
 
+protected:
+  void changeEvent(QEvent* ev) override;
+
 Q_SIGNALS:
-  void selectByObject(const MyMoneyObject&, eView::Intent);
-  void selectByVariant(const QVariantList&, eView::Intent);
+  // these signals are send to application logic
+  void requestSelectionChange (const SelectedObjects& selection);
+
+  void viewStateChanged(bool enabled);
+
+  /**
+   * @deprecated use selectionChanged() instead
+   */
+  void selectByObject(const MyMoneyObject&, eView::Intent) Q_DECL_DEPRECATED;
+  /**
+   * @deprecated use selectionChanged() instead
+   */
+  void selectByVariant(const QVariantList&, eView::Intent) Q_DECL_DEPRECATED;
+
   void customActionRequested(View, eView::Action);
 
 public slots:
+  void viewChanged(KPageWidgetItem* current, KPageWidgetItem* before);
+
+  virtual void updateActions(const SelectedObjects& selections) { Q_UNUSED(selections) }
+
   virtual void slotSelectByObject(const MyMoneyObject&, eView::Intent) {}
   virtual void slotSelectByVariant(const QVariantList&, eView::Intent) {}
   virtual void slotSettingsChanged() {}

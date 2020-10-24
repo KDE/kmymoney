@@ -32,6 +32,7 @@
 
 class MyMoneyInstitution;
 class MyMoneyMoney;
+class SelectedObjects;
 
 /**
   * @author Thomas Baumgart
@@ -50,7 +51,7 @@ public:
 
   void executeCustomAction(eView::Action action) override;
   void refresh();
-  void updateActions(const MyMoneyObject &obj);
+  void updateActions(const MyMoneyObject &obj) Q_DECL_DEPRECATED;
 
 public Q_SLOTS:
   void slotNetWorthChanged(const MyMoneyMoney &netWorth, bool isApproximate);
@@ -60,6 +61,7 @@ public Q_SLOTS:
   void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
   void slotSettingsChanged() override;
+  void updateActions(const SelectedObjects& selections) override;
 
 protected:
   void showEvent(QShowEvent * event) override;

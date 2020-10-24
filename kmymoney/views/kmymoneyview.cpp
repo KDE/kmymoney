@@ -88,11 +88,10 @@
 #include "kmymoneyplugin.h"
 #include "mymoneyenums.h"
 #include "menuenums.h"
+#include "selectedobjects.h"
 
 using namespace Icons;
 using namespace eMyMoney;
-
-typedef void(KMyMoneyView::*KMyMoneyViewFunc)();
 
 KMyMoneyView::KMyMoneyView()
     : KPageWidget(nullptr),
@@ -324,12 +323,20 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
   connect(viewBases[idView], &KMyMoneyViewBase::selectByVariant, this, &KMyMoneyView::slotSelectByVariant);
   connect(viewBases[idView], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
   connect(this, &KMyMoneyView::settingsChanged, viewBases[idView], &KMyMoneyViewBase::slotSettingsChanged);
+
+  connect(this, &KMyMoneyView::currentPageChanged, viewBases[idView], &KMyMoneyViewBase::viewChanged);
+  connect(viewBases[idView], &KMyMoneyViewBase::viewStateChanged, viewFrames[idView], &KPageWidgetItem::setEnabled);
+  connect(viewBases[idView], &KMyMoneyViewBase::requestSelectionChange, this, &KMyMoneyView::requestSelectionChange);
 }
 
 void KMyMoneyView::removeView(View idView)
 {
   if (!viewBases.contains(idView))
     return;
+
+  disconnect(this, &KMyMoneyView::currentPageChanged, viewBases[idView], &KMyMoneyViewBase::viewChanged);
+  disconnect(viewBases[idView], &KMyMoneyViewBase::viewStateChanged, viewFrames[idView], &KPageWidgetItem::setEnabled);
+  disconnect(viewBases[idView], &KMyMoneyViewBase::requestSelectionChange, this, &KMyMoneyView::requestSelectionChange);
 
   disconnect(viewBases[idView], &KMyMoneyViewBase::selectByObject, this, &KMyMoneyView::slotSelectByObject);
   disconnect(viewBases[idView], &KMyMoneyViewBase::selectByVariant, this, &KMyMoneyView::slotSelectByVariant);
@@ -339,6 +346,13 @@ void KMyMoneyView::removeView(View idView)
   m_model->removePage(viewFrames[idView]);
   viewFrames.remove(idView);
   viewBases.remove(idView);
+}
+
+void KMyMoneyView::updateActions(const SelectedObjects& selections)
+{
+  for (auto const view : viewBases) {
+    view->updateActions(selections);
+  }
 }
 
 void KMyMoneyView::slotSettingsChanged()
@@ -432,8 +446,11 @@ bool KMyMoneyView::canPrint()
 void KMyMoneyView::enableViewsIfFileOpen(bool fileOpen)
 {
   // call set enabled only if the state differs to avoid widgets 'bouncing on the screen' while doing this
-  Q_ASSERT_X(((int)(View::Home)+1) == (int)View::Institutions, "viewenums.h", "View::Home must be first and View::Institutions second entry");
+  Q_ASSERT_X((int)(View::Home) == 0, "viewenums.h", "View::Home must be the first entry");
+  Q_ASSERT_X(((int)(View::Home)+1) == (int)View::Institutions, "viewenums.h", "View::Institutions must be the second entry");
 
+  // the home view is always enabled
+  viewFrames[View::Home]->setEnabled(true);
   for (auto i = (int)View::Institutions; i < (int)View::None; ++i)
     if (viewFrames.contains(View(i)))
       if (viewFrames[View(i)]->isEnabled() != fileOpen)

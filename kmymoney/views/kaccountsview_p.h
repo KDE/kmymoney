@@ -386,9 +386,60 @@ public:
     }
 
     // re-enable the disabled actions
-    q->updateActions(m_currentAccount);
+    updateActions(m_currentAccount);
 
     KMyMoneyUtils::showStatementImportResult(MyMoneyStatementReader::resultMessages(), processedAccounts);
+  }
+
+  void updateActions(const MyMoneyAccount& acc)
+  {
+    const auto file = MyMoneyFile::instance();
+    switch (acc.accountGroup()) {
+      case eMyMoney::Account::Type::Asset:
+      case eMyMoney::Account::Type::Liability:
+      case eMyMoney::Account::Type::Equity:
+      {
+        pActions[eMenu::Action::EditAccount]->setEnabled(true);
+        pActions[eMenu::Action::DeleteAccount]->setEnabled(!file->isReferenced(acc));
+
+        auto b = acc.isClosed() ? true : false;
+        pActions[eMenu::Action::ReopenAccount]->setEnabled(b);
+        pActions[eMenu::Action::CloseAccount]->setEnabled(!b);
+
+        if (!acc.isClosed()) {
+          b = (canCloseAccount(acc) == KAccountsViewPrivate::AccountCanClose) ? true : false;
+          pActions[eMenu::Action::CloseAccount]->setEnabled(b);
+          hintCloseAccountAction(acc, pActions[eMenu::Action::CloseAccount]);
+        }
+
+        pActions[eMenu::Action::ChartAccountBalance]->setEnabled(true);
+
+        if (m_currentAccount.hasOnlineMapping()) {
+          pActions[eMenu::Action::UnmapOnlineAccount]->setEnabled(true);
+
+          if (m_onlinePlugins) {
+            // check if provider is available
+            QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
+            it_p = m_onlinePlugins->constFind(m_currentAccount.onlineBankingSettings().value(QLatin1String("provider")).toLower());
+            if (it_p != m_onlinePlugins->constEnd()) {
+              QStringList protocols;
+              (*it_p)->protocols(protocols);
+              if (protocols.count() > 0) {
+                pActions[eMenu::Action::UpdateAccount]->setEnabled(true);
+              }
+            }
+          }
+
+        } else {
+          pActions[eMenu::Action::MapOnlineAccount]->setEnabled(!acc.isClosed() && m_onlinePlugins && !m_onlinePlugins->isEmpty());
+        }
+
+        break;
+      }
+      default:
+        break;
+    }
+    pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(KMyMoneyUtils::canUpdateAllAccounts());
   }
 
   Ui::KAccountsView   *ui;

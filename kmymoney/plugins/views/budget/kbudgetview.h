@@ -43,6 +43,7 @@ class MyMoneyMoney;
   * @author Thomas Baumgart
   */
 class KBudgetViewPrivate;
+class SelectedObjects;
 class KBudgetView : public KMyMoneyViewBase
 {
   Q_OBJECT
@@ -55,6 +56,7 @@ public:
 
 public Q_SLOTS:
   void slotSettingsChanged() override;
+  void updateActions(const SelectedObjects& selections) override;
 
 protected:
   KBudgetView(KBudgetViewPrivate &dd, QWidget *parent);

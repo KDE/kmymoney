@@ -49,7 +49,7 @@
 // Project Includes
 
 #include <config-kmymoney.h>
-#include "ui_kpayeesview.h"
+#include <ui_kpayeesview.h>
 #include "kmymoneyviewbase_p.h"
 #include "kmymoneyutils.h"
 #include "kmymoneymvccombo.h"
@@ -97,29 +97,23 @@ public:
     , m_transactionFilter (nullptr)
     , m_contact(nullptr)
     , m_syncedPayees(0)
-    , m_needLoad(true)
     , m_inSelection(false)
-    , m_allowEditing(true)
-    , m_payeeFilterType(0)
     , m_filterProxyModel(nullptr)
   {
   }
 
   ~KPayeesViewPrivate()
   {
-    if(!m_needLoad) {
-      // remember the splitter settings for startup
-      auto grp = KSharedConfig::openConfig()->group("Last Use Settings");
-      grp.writeEntry("KPayeesViewSplitterSize", ui->m_splitter->saveState());
-      grp.sync();
-    }
+    // remember the splitter settings for startup
+    auto grp = KSharedConfig::openConfig()->group("Last Use Settings");
+    grp.writeEntry("KPayeesViewSplitterSize", ui->m_splitter->saveState());
+    grp.sync();
     delete ui;
   }
 
   void init()
   {
     Q_Q(KPayeesView);
-    m_needLoad = false;
     ui->setupUi(q);
 
     ui->m_register->setSingleLineDetailRole(eMyMoney::Model::TransactionCounterAccountRole);
@@ -155,10 +149,6 @@ public:
     ui->m_filterBox->addItem(i18nc("@item Show only unused payees", "Unused"));
     ui->m_filterBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-    ui->m_newButton->setIcon(Icons::get(Icon::PayeeNew));
-    ui->m_renameButton->setIcon(Icons::get(Icon::UserProperties));
-    ui->m_deleteButton->setIcon(Icons::get(Icon::PayeeRemove));
-    ui->m_mergeButton->setIcon(Icons::get(Icon::Merge));
     ui->m_updateButton->setIcon(Icons::get(Icon::DialogOK));
     ui->m_syncAddressbook->setIcon(Icons::get(Icon::Refresh));
     ui->m_sendMail->setIcon(Icons::get(Icon::MailMessage));
@@ -208,10 +198,10 @@ public:
     ui->m_payees->setSelectionMode(QListView::ExtendedSelection);
     q->connect( m_renameProxyModel, &ItemRenameProxyModel::renameItem,     q, &KPayeesView::slotRenameSinglePayee);
 
-    q->connect(ui->m_newButton,     &QAbstractButton::clicked, q, &KPayeesView::slotNewPayee);
-    q->connect(ui->m_renameButton,  &QAbstractButton::clicked, q, &KPayeesView::slotRenamePayee);
-    q->connect(ui->m_deleteButton,  &QAbstractButton::clicked, q, &KPayeesView::slotDeletePayee);
-    q->connect(ui->m_mergeButton,   &QAbstractButton::clicked, q, &KPayeesView::slotMergePayee);
+    ui->m_newButton->setDefaultAction(pActions[eMenu::Action::NewPayee]);
+    ui->m_renameButton->setDefaultAction(pActions[eMenu::Action::RenamePayee]);
+    ui->m_deleteButton->setDefaultAction(pActions[eMenu::Action::DeletePayee]);
+    ui->m_mergeButton->setDefaultAction(pActions[eMenu::Action::MergePayee]);
 
     q->connect(ui->addressEdit,   &QTextEdit::textChanged, q, &KPayeesView::slotPayeeDataChanged);
     q->connect(ui->payeecityEdit,  &QLineEdit::textChanged, q, &KPayeesView::slotPayeeDataChanged);
@@ -272,9 +262,6 @@ public:
 
     // At start we haven't any payee selected
     ui->m_tabWidget->setEnabled(false); // disable tab widget
-    ui->m_deleteButton->setEnabled(false); //disable delete, rename and merge buttons
-    ui->m_renameButton->setEnabled(false);
-    ui->m_mergeButton->setEnabled(false);
 
     m_payee = MyMoneyPayee(); // make sure we don't access an undefined payee
     clearItemData();
@@ -300,6 +287,21 @@ public:
     ui->emailEdit->setText(QString());
     ui->notesEdit->setText(QString());
     showTransactions();
+  }
+
+  QStringList selectedPayeeIds() const
+  {
+    QStringList payees;
+    auto baseModel = MyMoneyFile::instance()->payeesModel();
+    const QModelIndexList selection = ui->m_payees->selectionModel()->selectedIndexes();
+    for (const auto idx : selection) {
+      auto baseIdx = baseModel->mapToBaseSource(idx);
+      const auto id = baseIdx.data(eMyMoney::Model::IdRole).toString();
+      if (!id.isEmpty()) {
+        payees.append(id);
+      }
+    }
+    return payees;
   }
 
   QList<MyMoneyPayee> selectedPayees() const
@@ -337,7 +339,7 @@ public:
     }
 
     QStringList payeeIds;
-    for (const auto payee : selection) {
+    for (const auto& payee : selection) {
       payeeIds.append(payee.id());
     }
     m_transactionFilter->setPayeeIdList(payeeIds);
@@ -396,7 +398,7 @@ public:
       // create a transaction filter that contains all payees selected for removal
       MyMoneyTransactionFilter f = MyMoneyTransactionFilter();
       const auto list = selectedPayees();
-      for (const auto payee : list) {
+      for (const auto& payee : list) {
         f.addPayee(payee.id());
       }
 
@@ -661,24 +663,9 @@ public:
   QList<QPair<MyMoneyTransaction, MyMoneySplit> > m_transactionList;
 
   /**
-    * q member holds the load state of page
-    */
-  bool m_needLoad;
-
-  /**
    * Semaphore to suppress loading during selection
    */
   bool m_inSelection;
-
-  /**
-   * q signals whether a payee can be edited
-   **/
-  bool m_allowEditing;
-
-  /**
-    * q holds the filter type
-    */
-  int m_payeeFilterType;
 
   AccountNamesFilterProxyModel *m_filterProxyModel;
   ItemRenameProxyModel*         m_renameProxyModel;

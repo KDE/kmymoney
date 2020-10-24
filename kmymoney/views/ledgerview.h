@@ -33,6 +33,7 @@
 #include "mymoneyenums.h"
 
 class MyMoneyAccount;
+class SelectedObjects;
 
 class LedgerView : public QTableView
 {
@@ -101,6 +102,7 @@ protected:
   void keyPressEvent ( QKeyEvent* event ) override;
 
 protected Q_SLOTS:
+  void selectionChanged ( const QItemSelection& selected, const QItemSelection& deselected ) override;
   void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) final override;
   void currentChanged(const QModelIndex &current, const QModelIndex &previous) final override;
   void resizeEditorRow();
@@ -109,6 +111,7 @@ protected Q_SLOTS:
   virtual void adjustDetailColumn();
 
 Q_SIGNALS:
+  void transactionSelectionChanged (const SelectedObjects& selection);
   void transactionSelected(const QModelIndex& idx);
   void aboutToStartEdit();
   void aboutToFinishEdit();

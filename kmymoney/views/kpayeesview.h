@@ -56,6 +56,7 @@ class QItemSelection;
 class KPayeesViewPrivate;
 class KPayeesView : public KMyMoneyViewBase
 {
+  Q_DECLARE_PRIVATE(KPayeesView)
   Q_OBJECT
 
 public:
@@ -63,7 +64,6 @@ public:
   ~KPayeesView() override;
 
   void executeCustomAction(eView::Action action) override;
-  void updatePayeeActions(const QList<MyMoneyPayee>& payees);
 
 public Q_SLOTS:
   void slotSelectPayeeAndTransaction(const QString& payeeId, const QString& accountId = QString(), const QString& transactionId = QString());
@@ -76,6 +76,8 @@ public Q_SLOTS:
 
   void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
+  void updateActions(const SelectedObjects& selections) override;
+
 Q_SIGNALS:
   void transactionSelected(const QString& accountId, const QString& transactionId);
   void openContextMenu(const MyMoneyObject& obj);
@@ -83,11 +85,6 @@ Q_SIGNALS:
 
 protected:
   void showEvent(QShowEvent* event) override;
-
-private:
-  void updatePayeeActions(int payeeCount);
-
-  Q_DECLARE_PRIVATE(KPayeesView)
 
 private Q_SLOTS:
   /**

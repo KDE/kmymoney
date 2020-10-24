@@ -166,12 +166,12 @@ public:
     return actionStates;
   }
 
-  void updateButtonStates()
+  void updateButtonStates() Q_DECL_DEPRECATED
   {
-    const auto actionStates = KBudgetViewPrivate::actionStates();
-    ui->m_newButton->setEnabled(actionStates[eMenu::Action::NewBudget]);
-    ui->m_renameButton->setEnabled(actionStates[eMenu::Action::RenameBudget]);
-    ui->m_deleteButton->setEnabled(actionStates[eMenu::Action::DeleteBudget]);
+    const auto states = actionStates();
+    ui->m_newButton->setEnabled( states[eMenu::Action::NewBudget]);
+    ui->m_renameButton->setEnabled( states[eMenu::Action::RenameBudget]);
+    ui->m_deleteButton->setEnabled( states[eMenu::Action::DeleteBudget]);
   }
 
   void askSave()

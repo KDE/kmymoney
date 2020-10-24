@@ -33,6 +33,7 @@
 class MyMoneyMoney;
 class MyMoneyAccount;
 class MyMoneyObject;
+class SelectedObjects;
 
 namespace eMenu { enum class Action; }
 namespace KMyMoneyPlugin { class OnlinePlugin; }
@@ -54,7 +55,6 @@ public:
 
   void executeCustomAction(eView::Action action) override;
   void refresh();
-  void updateActions(const MyMoneyObject &obj);
 
 public Q_SLOTS:
   void slotNetWorthChanged(const MyMoneyMoney &netWorth, bool isApproximate);
@@ -64,6 +64,7 @@ public Q_SLOTS:
   void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
   void slotSettingsChanged() override;
+  void updateActions(const SelectedObjects& selections) override;
 
 protected:
   void showEvent(QShowEvent * event) override;

@@ -37,6 +37,7 @@
 #include "ui_ledgerviewpage.h"
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"
+#include "selectedobjects.h"
 
 class LedgerViewPage::Private
 {
@@ -70,7 +71,7 @@ public:
   NewTransactionForm*   form;
   QSet<QString>         hideFormReasons;
   QString               accountId;
-  QStringList           selection;
+  SelectedObjects       selections;
 };
 
 LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
@@ -82,6 +83,7 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
   connect(d->ui->ledgerView, &LedgerView::aboutToFinishEdit, this, &LedgerViewPage::aboutToFinishEdit);
   connect(d->ui->ledgerView, &LedgerView::aboutToStartEdit, this, &LedgerViewPage::startEdit);
   connect(d->ui->ledgerView, &LedgerView::aboutToFinishEdit, this, &LedgerViewPage::finishEdit);
+  connect(d->ui->ledgerView, &LedgerView::transactionSelectionChanged, this, &LedgerViewPage::selectionChanged);
   connect(d->ui->splitter, &QSplitter::splitterMoved, this, &LedgerViewPage::splitterChanged);
 
   d->ui->ledgerView->setColumnSelectorGroupName(configGroupName);
@@ -116,15 +118,16 @@ LedgerViewPage::~LedgerViewPage()
 
 void LedgerViewPage::keepSelection()
 {
-  d->selection = d->ui->ledgerView->selectedTransactions();
+  d->selections.setSelection(SelectedObjects::Transaction, d->ui->ledgerView->selectedTransactions());
 }
 
 void LedgerViewPage::reloadFilter()
 {
   d->specialDatesFilter->forceReload();
 
-  d->ui->ledgerView->setSelectedTransactions(d->selection);
-  d->selection.clear();
+  d->ui->ledgerView->setSelectedTransactions(d->selections.selection(SelectedObjects::Transaction));
+  // not sure if the following statement must be removed (THB - 2020-09-20)
+  d->selections.clearSelections(SelectedObjects::Transaction);
 }
 
 QString LedgerViewPage::accountId() const
@@ -197,6 +200,7 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
   d->accountId = acc.id();
 
   d->ui->ledgerView->setAccountId(d->accountId);
+  d->selections.setSelection(SelectedObjects::Account, d->accountId);
   d->ui->ledgerView->selectMostRecentTransaction();
 }
 
@@ -240,4 +244,10 @@ void LedgerViewPage::setShowEntryForNewTransaction(bool show)
 void LedgerViewPage::slotSettingsChanged()
 {
   d->ui->ledgerView->slotSettingsChanged();
+}
+
+const SelectedObjects& LedgerViewPage::selections() const
+{
+  d->selections.setSelection(SelectedObjects::Transaction, d->ui->ledgerView->selectedTransactions());
+  return d->selections;
 }
