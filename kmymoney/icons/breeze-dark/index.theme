@@ -1,6 +1,7 @@
 [Icon Theme]
 Name=Breeze Dark
 Name[ca]=Brisa fosca
+Name[en_GB]=Breeze Dark
 Name[es]=Brisa oscuro
 Name[fr]=Breeze sombre
 Name[it]=Brezza scuro
@@ -14,6 +15,7 @@ Name[x-test]=xxBreeze Darkxx
 
 Comment=Breeze Dark by the KDE VDG
 Comment[ca]=Brisa fosca, creat pel VDG del KDE
+Comment[en_GB]=Breeze Dark by the KDE VDG
 Comment[es]=Brisa oscuro por KDE VDG
 Comment[fr]=Breeze sombre par l'équipe de graphistes de KDE
 Comment[it]=Brezza scuro del KDE VDG
