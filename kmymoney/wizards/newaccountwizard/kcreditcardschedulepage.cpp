@@ -63,10 +63,16 @@ namespace NewAccountWizard
   {
     Q_D(CreditCardSchedulePage);
     d->ui->setupUi(this);
+
+    // reduce the amount of characters shown for a payee
+    d->ui->m_payee->setMinimumContentsLength(40);
+    d->ui->m_payee->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLength);
+
     d->m_mandatoryGroup->add(d->ui->m_name);
     d->m_mandatoryGroup->add(d->ui->m_payee);
     d->m_mandatoryGroup->add(d->ui->m_amount);
     d->m_mandatoryGroup->add(d->ui->m_paymentAccount);
+
     connect(d->ui->m_paymentAccount, &KMyMoneyCombo::itemSelected, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
     connect(d->ui->m_payee, &KMyMoneyMVCCombo::itemSelected, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
     connect(d->ui->m_date, &KMyMoneyDateInput::dateChanged, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);

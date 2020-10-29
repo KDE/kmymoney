@@ -66,17 +66,17 @@ QIFExporter::QIFExporter(QObject *parent, const QVariantList &args) :
 
 QIFExporter::~QIFExporter()
 {
+  actionCollection()->removeAction(m_action);
   qDebug("Plugins: qifexporter unloaded");
 }
 
 
 void QIFExporter::createActions()
 {
-  const auto &kpartgui = QStringLiteral("file_export_qif");
-  m_action = actionCollection()->addAction(kpartgui);
+  m_action = actionCollection()->addAction(QStringLiteral("file_export_qif"));
   m_action->setText(i18n("QIF..."));
   connect(m_action, &QAction::triggered, this, &QIFExporter::slotQifExport);
-  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action(qPrintable(kpartgui)), &QAction::setEnabled);
+  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, m_action, &QAction::setEnabled);
 }
 
 

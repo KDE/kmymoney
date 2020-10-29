@@ -110,8 +110,6 @@ void KAccountsView::executeCustomAction(eView::Action action)
 
 void KAccountsView::refresh()
 {
-  /// @todo port to new model code or cleanup
-#if 0
   Q_D(KAccountsView);
   if (!isVisible()) {
     d->m_needsRefresh = true;
@@ -134,7 +132,6 @@ void KAccountsView::refresh()
   d->m_haveUnusedCategories = false;
   d->ui->m_hiddenCategories->hide();  // hides label
   d->m_proxyModel->setHideUnusedIncomeExpenseAccounts(KMyMoneySettings::hideUnusedCategory());
-#endif
 }
 
 void KAccountsView::showEvent(QShowEvent * event)

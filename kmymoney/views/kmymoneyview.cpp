@@ -156,29 +156,10 @@ KMyMoneyView::KMyMoneyView()
   };
 
   for (const viewInfo& view : viewsInfo) {
-    /* There is a bug in
-    static int layoutText(QTextLayout *layout, int maxWidth)
-    from kpageview_p.cpp from kwidgetsaddons.
-    The method doesn't break strings that are too long. Following line
-    workarounds this by using LINE SEPARATOR character which is accepted by
-    QTextLayout::createLine().*/
-    viewFrames[view.id] = m_model->addPage(viewBases[view.id], QString(view.name).replace(QLatin1Char('\n'), QString::fromUtf8("\xe2\x80\xa8")));
-    viewFrames[view.id]->setIcon(Icons::get(view.icon));
-    connect(viewBases[view.id], &KMyMoneyViewBase::selectByObject, this, &KMyMoneyView::slotSelectByObject);
-    connect(viewBases[view.id], &KMyMoneyViewBase::selectByVariant, this, &KMyMoneyView::slotSelectByVariant);
-    connect(viewBases[view.id], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
-    connect(this, &KMyMoneyView::settingsChanged, viewBases[view.id], &KMyMoneyViewBase::slotSettingsChanged);
+    addView(viewBases[view.id], view.name, view.id, view.icon);
   }
 
-/// @todo cleanup
-#if 0
-  connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::netWorthChanged, this, &KMyMoneyView::slotSelectByVariant);
-  connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::profitChanged, this, &KMyMoneyView::slotSelectByVariant);
-  connect(MyMoneyFile::instance()->institutionsModel(), &AccountsModel::netWorthChanged, this, &KMyMoneyView::slotSelectByVariant);
-  connect(MyMoneyFile::instance()->institutionsModel(), &AccountsModel::profitChanged, this, &KMyMoneyView::slotSelectByVariant);
-#endif
-
-  //set the model
+  // set the model
   setModel(m_model);
   setCurrentPage(viewFrames[View::Home]);
   connect(this, SIGNAL(currentPageChanged(QModelIndex,QModelIndex)), this, SLOT(slotCurrentPageChanged(QModelIndex,QModelIndex)));
@@ -314,44 +295,35 @@ eDialogs::ScheduleResultCode KMyMoneyView::enterSchedule(MyMoneySchedule& schedu
   return static_cast<KScheduledView*>(viewBases[View::Schedules])->enterSchedule(schedule, autoEnter, extendedKeys);
 }
 
-void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idView)
+void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idView, Icons::Icon icon)
 {
+  /* There is a bug in
+   *    static int layoutText(QTextLayout *layout, int maxWidth)
+   *    from kpageview_p.cpp from kwidgetsaddons.
+   *    The method doesn't break strings that are too long. Following line
+   *    workarounds this by using LINE SEPARATOR character which is accepted by
+   *    QTextLayout::createLine().*/
+  auto adjustedName(name);
+  adjustedName.replace(QLatin1Char('\n'), QString::fromUtf8("\xe2\x80\xa8"));
+
   auto isViewInserted = false;
   for (auto i = (int)idView; i < (int)View::None; ++i) {
     if (viewFrames.contains((View)i)) {
-      viewFrames[idView] = m_model->insertPage(viewFrames[(View)i],view, name);
+      viewFrames[idView] = m_model->insertPage(viewFrames[(View)i],view, adjustedName);
       isViewInserted = true;
       break;
     }
   }
 
   if (!isViewInserted)
-    viewFrames[idView] = m_model->addPage(view, name);
+    viewFrames[idView] = m_model->addPage(view, adjustedName);
 
+  viewFrames[idView]->setIcon(Icons::get(icon));
   viewBases[idView] = view;
   connect(viewBases[idView], &KMyMoneyViewBase::selectByObject, this, &KMyMoneyView::slotSelectByObject);
   connect(viewBases[idView], &KMyMoneyViewBase::selectByVariant, this, &KMyMoneyView::slotSelectByVariant);
   connect(viewBases[idView], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
   connect(this, &KMyMoneyView::settingsChanged, viewBases[idView], &KMyMoneyViewBase::slotSettingsChanged);
-
-  auto icon = Icon::Forecast;
-  switch (idView) {
-    case View::Reports:
-      icon = Icon::Reports;
-      break;
-    case View::Budget:
-      icon = Icon::Budget;
-      break;
-    case View::Forecast:
-      icon = Icon::Forecast;
-      break;
-    case View::OnlineJobOutbox:
-      icon = Icon::OnlineJobOutbox;
-      break;
-    default:
-      break;
-  }
-  viewFrames[idView]->setIcon(Icons::get(icon));
 }
 
 void KMyMoneyView::removeView(View idView)

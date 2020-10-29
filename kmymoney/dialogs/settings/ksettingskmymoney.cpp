@@ -57,7 +57,9 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
   addPage(onlineQuotesPage, i18n("Online Quotes"), Icons::get(Icon::PreferencesNetwork).name());
   addPage(colorsPage, i18n("Colors"), Icons::get(Icon::PreferencesColors).name());
   addPage(fontsPage, i18n("Fonts"), Icons::get(Icon::PreferencesFonts).name());
+#if not defined(Q_OS_MACOS) and not defined(Q_OS_WIN)
   addPage(iconsPage, i18n("Icons"), Icons::get(Icon::PreferencesIcons).name());
+#endif
   addPage(pluginsPage, i18n("Plugins"), Icons::get(Icon::PreferencesPlugins).name(), QString(), false);
 
   setHelp("details.settings", "kmymoney");

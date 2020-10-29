@@ -238,7 +238,7 @@ void KNewBankDlg::slotIconLoaded(KJob* job)
       // There is an answer from the server, but no favicon. In case we
       // already have one, we keep it
       d->ui->iconButton->setEnabled(true);
-      d->m_favIcon = Icons::get(Icons::Icon::Bank);
+      d->m_favIcon = Icons::get(Icons::Icon::Institution);
       d->m_iconName = QStringLiteral("enum:Bank");
       break;
     case 0:

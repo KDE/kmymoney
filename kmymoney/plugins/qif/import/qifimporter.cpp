@@ -71,16 +71,16 @@ QIFImporter::QIFImporter(QObject *parent, const QVariantList &args) :
 QIFImporter::~QIFImporter()
 {
   delete m_qifReader;
+  actionCollection()->removeAction(m_action);
   qDebug("Plugins: qifimporter unloaded");
 }
 
 void QIFImporter::createActions()
 {
-  const auto &kpartgui = QStringLiteral("file_import_qif");
-  m_action = actionCollection()->addAction(kpartgui);
+  m_action = actionCollection()->addAction(QStringLiteral("file_import_qif"));
   m_action->setText(i18n("QIF..."));
   connect(m_action, &QAction::triggered, this, &QIFImporter::slotQifImport);
-  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action(qPrintable(kpartgui)), &QAction::setEnabled);
+  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, m_action, &QAction::setEnabled);
 }
 
 void QIFImporter::slotQifImport()

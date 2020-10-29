@@ -50,7 +50,7 @@ OnlineJobOutboxView::~OnlineJobOutboxView()
 void OnlineJobOutboxView::plug()
 {
   m_view = new KOnlineJobOutboxView;
-  viewInterface()->addView(m_view, i18n("Outbox"), View::OnlineJobOutbox);
+  viewInterface()->addView(m_view, i18n("Outbox"), View::OnlineJobOutbox, Icons::Icon::OnlineJobOutbox);
 }
 
 void OnlineJobOutboxView::unplug()

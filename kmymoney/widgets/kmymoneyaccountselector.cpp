@@ -370,7 +370,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
       ++d->m_count;
       key = QString("B%1").arg(i18n("Asset"));
       item = selector->newItem(i18n("Asset accounts"), key);
-      item->setIcon(0, d->m_file->asset().accountPixmap());
+      item->setIcon(0, d->m_file->asset().accountIcon());
       list = d->m_file->asset().accountList();
     }
 
@@ -378,7 +378,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
       ++d->m_count;
       key = QString("C%1").arg(i18n("Liability"));
       item = selector->newItem(i18n("Liability accounts"), key);
-      item->setIcon(0, d->m_file->liability().accountPixmap());
+      item->setIcon(0, d->m_file->liability().accountIcon());
       list = d->m_file->liability().accountList();
     }
 
@@ -386,7 +386,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
       ++d->m_count;
       key = QString("D%1").arg(i18n("Income"));
       item = selector->newItem(i18n("Income categories"), key);
-      item->setIcon(0, d->m_file->income().accountPixmap());
+      item->setIcon(0, d->m_file->income().accountIcon());
       list = d->m_file->income().accountList();
       if (selector->selectionMode() == QTreeWidget::MultiSelection) {
         selector->d_func()->m_incomeCategoriesButton->show();
@@ -397,7 +397,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
       ++d->m_count;
       key = QString("E%1").arg(i18n("Expense"));
       item = selector->newItem(i18n("Expense categories"), key);
-      item->setIcon(0, d->m_file->expense().accountPixmap());
+      item->setIcon(0, d->m_file->expense().accountIcon());
       list = d->m_file->expense().accountList();
       if (selector->selectionMode() == QTreeWidget::MultiSelection) {
         selector->d_func()->m_expenseCategoriesButton->show();
@@ -408,7 +408,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
       ++d->m_count;
       key = QString("F%1").arg(i18n("Equity"));
       item = selector->newItem(i18n("Equity accounts"), key);
-      item->setIcon(0, d->m_file->equity().accountPixmap());
+      item->setIcon(0, d->m_file->equity().accountIcon());
       list = d->m_file->equity().accountList();
     }
 
@@ -428,10 +428,10 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
           QString tmpKey;
           tmpKey = key + MyMoneyFile::AccountSeparator + acc.name();
           QTreeWidgetItem* subItem = selector->newItem(item, acc.name(), tmpKey, acc.id());
-          subItem->setIcon(0, acc.accountPixmap());
+          subItem->setIcon(0, acc.accountIcon());
           if (acc.value("PreferredAccount") == "Yes"
               && d->m_typeList.contains(acc.accountType())) {
-            selector->newItem(d->m_favorites, acc.name(), tmpKey, acc.id())->setIcon(0, acc.accountPixmap());;
+            selector->newItem(d->m_favorites, acc.name(), tmpKey, acc.id())->setIcon(0, acc.accountIcon());;
           }
           if (acc.accountList().count() > 0) {
             subItem->setExpanded(true);
@@ -493,7 +493,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector, const QString& baseName,
     QString tmpKey;
     // the first character must be preset. Since we don't know any sort order here, we just use A
     tmpKey = QString("A%1%2%3").arg(baseName, MyMoneyFile::AccountSeparator, acc.name());
-    selector->newItem(item, acc.name(), tmpKey, acc.id())->setIcon(0, acc.accountPixmap());
+    selector->newItem(item, acc.name(), tmpKey, acc.id())->setIcon(0, acc.accountIcon());
     ++d->m_count;
     ++count;
   }
@@ -546,10 +546,10 @@ int AccountSet::loadSubAccounts(KMyMoneyAccountSelector* selector, QTreeWidgetIt
       ++count;
       ++d->m_count;
       QTreeWidgetItem* item = selector->newItem(parent, acc.name(), tmpKey, acc.id());
-      item->setIcon(0, acc.accountPixmap());
+      item->setIcon(0, acc.accountIcon());
       if (acc.value("PreferredAccount") == "Yes"
           && d->m_typeList.contains(acc.accountType())) {
-        selector->newItem(d->m_favorites, acc.name(), tmpKey, acc.id())->setIcon(0, acc.accountPixmap());
+        selector->newItem(d->m_favorites, acc.name(), tmpKey, acc.id())->setIcon(0, acc.accountIcon());
       }
       if (acc.accountList().count() > 0) {
         item->setExpanded(true);

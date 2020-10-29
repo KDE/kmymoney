@@ -89,8 +89,6 @@
         <string>${MACOSX_BUNDLE_COPYRIGHT}</string>
         <key>LSMultipleInstancesProhibited</key>
         <true/>
-        <key>NSRequiresAquaSystemAppearance</key>
-        <true/>
         <key>UTExportedTypeDeclarations</key>
         <array>
             <dict>

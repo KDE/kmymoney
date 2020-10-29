@@ -44,8 +44,9 @@
 #include "statementinterface.h"
 #include "viewinterface.h"
 
-CSVImporter::CSVImporter(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, "csvimporter"/*must be the same as X-KDE-PluginInfo-Name*/)
+CSVImporter::CSVImporter(QObject *parent, const QVariantList &args)
+  : KMyMoneyPlugin::Plugin(parent, "csvimporter"/*must be the same as X-KDE-PluginInfo-Name*/)
+  , m_action(nullptr)
 {
   Q_UNUSED(args);
   const auto componentName = QLatin1String("csvimporter");
@@ -70,15 +71,16 @@ CSVImporter::CSVImporter(QObject *parent, const QVariantList &args) :
 
 CSVImporter::~CSVImporter()
 {
+  actionCollection()->removeAction(m_action);
   qDebug("Plugins: csvimporter unloaded");
 }
 
 void CSVImporter::createActions()
 {
   const auto &kpartgui = QStringLiteral("file_import_csv");
-  auto importAction = actionCollection()->addAction(kpartgui);
-  importAction->setText(i18n("CSV..."));
-  connect(importAction, &QAction::triggered, this, &CSVImporter::startWizardRun);
+  m_action = actionCollection()->addAction(kpartgui);
+  m_action->setText(i18n("CSV..."));
+  connect(m_action, &QAction::triggered, this, &CSVImporter::startWizardRun);
   connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action(qPrintable(kpartgui)), &QAction::setEnabled);
 }
 

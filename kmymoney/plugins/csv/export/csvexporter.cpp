@@ -44,9 +44,10 @@
 #include "csvwriter.h"
 #include "viewinterface.h"
 
-CSVExporter::CSVExporter(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, "csvexporter"/*must be the same as X-KDE-PluginInfo-Name*/)
-{
+CSVExporter::CSVExporter(QObject *parent, const QVariantList &args)
+  : KMyMoneyPlugin::Plugin(parent, "csvexporter"/*must be the same as X-KDE-PluginInfo-Name*/)
+  , m_action(nullptr)
+  {
   Q_UNUSED(args);
   const auto componentName = QLatin1String("csvexporter");
   const auto rcFileName = QLatin1String("csvexporter.rc");
@@ -69,6 +70,7 @@ CSVExporter::CSVExporter(QObject *parent, const QVariantList &args) :
 
 CSVExporter::~CSVExporter()
 {
+  actionCollection()->removeAction(m_action);
   qDebug("Plugins: csvexporter unloaded");
 }
 

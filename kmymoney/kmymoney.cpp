@@ -1301,7 +1301,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       // *************
       // The File menu
       // *************
-      {Action::FileBackup,                    QStringLiteral("file_backup"),                    i18n("Backup..."),                                  Icon::Empty},
+      {Action::FileBackup,                    QStringLiteral("file_backup"),                    i18n("Backup..."),                                  Icon::Backup},
       {Action::FileImportStatement,           QStringLiteral("file_import_statement"),          i18n("Statement file..."),                          Icon::Empty},
       {Action::FileImportTemplate,            QStringLiteral("file_import_template"),           i18n("Account Template..."),                        Icon::Empty},
       {Action::FileExportTemplate,            QStringLiteral("file_export_template"),           i18n("Account Template..."),                        Icon::Empty},
@@ -1326,38 +1326,38 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       // *********************
       {Action::NewInstitution,                QStringLiteral("institution_new"),                i18n("New institution..."),                         Icon::InstitutionNew},
       {Action::EditInstitution,               QStringLiteral("institution_edit"),               i18n("Edit institution..."),                        Icon::InstitutionEdit},
-      {Action::DeleteInstitution,             QStringLiteral("institution_delete"),             i18n("Delete institution..."),                      Icon::InstitutionDelete},
+      {Action::DeleteInstitution,             QStringLiteral("institution_delete"),             i18n("Delete institution..."),                      Icon::InstitutionRemove},
       // *****************
       // The accounts menu
       // *****************
       {Action::NewAccount,                    QStringLiteral("account_new"),                    i18n("New account..."),                             Icon::AccountNew},
       {Action::OpenAccount,                   QStringLiteral("account_open"),                   i18n("Open ledger"),                                Icon::Ledger},
       {Action::StartReconciliation,           QStringLiteral("account_reconcile"),              i18n("Reconcile..."),                               Icon::Reconcile},
-      {Action::FinishReconciliation,          QStringLiteral("account_reconcile_finish"),       i18nc("Finish reconciliation", "Finish"),    Icon::AccountFinishReconciliation},
+      {Action::FinishReconciliation,          QStringLiteral("account_reconcile_finish"),       i18nc("Finish reconciliation", "Finish"),   Icon::Reconciled},
       {Action::PostponeReconciliation,        QStringLiteral("account_reconcile_postpone"),     i18n("Postpone reconciliation"),                    Icon::Pause},
       {Action::EditAccount,                   QStringLiteral("account_edit"),                   i18n("Edit account..."),                            Icon::AccountEdit},
-      {Action::DeleteAccount,                 QStringLiteral("account_delete"),                 i18n("Delete account..."),                          Icon::AccountDelete},
+      {Action::DeleteAccount,                 QStringLiteral("account_delete"),                 i18n("Delete account..."),                          Icon::AccountRemove},
       {Action::CloseAccount,                  QStringLiteral("account_close"),                  i18n("Close account"),                              Icon::AccountClose},
       {Action::ReopenAccount,                 QStringLiteral("account_reopen"),                 i18n("Reopen account"),                             Icon::AccountReopen},
       {Action::ReportAccountTransactions,     QStringLiteral("account_transaction_report"),     i18n("Transaction report"),                         Icon::Report},
-      {Action::ChartAccountBalance,           QStringLiteral("account_chart"),                  i18n("Show balance chart..."),                      Icon::OfficeChartLine},
+      {Action::ChartAccountBalance,           QStringLiteral("account_chart"),                  i18n("Show balance chart..."),                      Icon::OfficeCharBar},
       {Action::MapOnlineAccount,              QStringLiteral("account_online_map"),             i18n("Map account..."),                             Icon::MapOnlineAccount},
       {Action::UnmapOnlineAccount,            QStringLiteral("account_online_unmap"),           i18n("Unmap account..."),                           Icon::UnmapOnlineAccount},
       {Action::UpdateAccount,                 QStringLiteral("account_online_update"),          i18n("Update account..."),                          Icon::AccountUpdate},
       {Action::UpdateAllAccounts,             QStringLiteral("account_online_update_all"),      i18n("Update all accounts..."),                     Icon::AccountUpdateAll},
-      {Action::AccountCreditTransfer,         QStringLiteral("account_online_new_credit_transfer"), i18n("New credit transfer"),                    Icon::AccountCreditTransfer},
+      {Action::AccountCreditTransfer,         QStringLiteral("account_online_new_credit_transfer"), i18n("New credit transfer"),                    Icon::OnlineTransfer},
       // *******************
       // The categories menu
       // *******************
-      {Action::NewCategory,                   QStringLiteral("category_new"),                   i18n("New category..."),                            Icon::CategoryNew},
-      {Action::EditCategory,                  QStringLiteral("category_edit"),                  i18n("Edit category..."),                           Icon::CategoryEdit},
-      {Action::DeleteCategory,                QStringLiteral("category_delete"),                i18n("Delete category..."),                         Icon::CategoryDelete},
+      {Action::NewCategory,                   QStringLiteral("category_new"),                   i18n("New category..."),                            Icon::FinancialCategoryNew},
+      {Action::EditCategory,                  QStringLiteral("category_edit"),                  i18n("Edit category..."),                           Icon::FinancialCategoryEdit},
+      {Action::DeleteCategory,                QStringLiteral("category_delete"),                i18n("Delete category..."),                         Icon::FinancialCategoryRemove},
       // **************
       // The tools menu
       // **************
       {Action::ToolCurrencies,                QStringLiteral("tools_currency_editor"),          i18n("Currencies..."),                              Icon::Currencies},
       {Action::ToolPrices,                    QStringLiteral("tools_price_editor"),             i18n("Prices..."),                                  Icon::Empty},
-      {Action::ToolUpdatePrices,              QStringLiteral("tools_update_prices"),            i18n("Update Stock and Currency Prices..."),        Icon::InvestmentOnlinePriceAll},
+      {Action::ToolUpdatePrices,              QStringLiteral("tools_update_prices"),            i18n("Update Stock and Currency Prices..."),        Icon::OnlinePriceUpdate},
       {Action::ToolConsistency,               QStringLiteral("tools_consistency_check"),        i18n("Consistency Check"),                          Icon::Empty},
       {Action::ToolPerformance,               QStringLiteral("tools_performancetest"),          i18n("Performance-Test"),                           Icon::PerformanceTest},
       {Action::ToolCalculator,                QStringLiteral("tools_kcalc"),                    i18n("Calculator..."),                              Icon::Calculator},
@@ -1372,16 +1372,16 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       // ***************************
       // Actions w/o main menu entry
       // ***************************
-      {Action::NewTransaction,                QStringLiteral("transaction_new"),                i18nc("New transaction button", "New"),             Icon::TransactionNew},
-      {Action::EditTransaction,               QStringLiteral("transaction_edit"),               i18nc("Edit transaction button", "Edit"),           Icon::TransactionEdit},
+      {Action::NewTransaction,                QStringLiteral("transaction_new"),                i18nc("New transaction button", "New"),             Icon::DocumentNew},
+      {Action::EditTransaction,               QStringLiteral("transaction_edit"),               i18nc("Edit transaction button", "Edit"),           Icon::DocumentEdit},
       {Action::EnterTransaction,              QStringLiteral("transaction_enter"),              i18nc("Enter transaction", "Enter"),                Icon::DialogOK},
       {Action::EditSplits,                    QStringLiteral("transaction_editsplits"),         i18nc("Edit split button", "Edit splits"),          Icon::Split},
       {Action::CancelTransaction,             QStringLiteral("transaction_cancel"),             i18nc("Cancel transaction edit", "Cancel"),         Icon::DialogCancel},
-      {Action::DeleteTransaction,             QStringLiteral("transaction_delete"),             i18nc("Delete transaction", "Delete"),              Icon::EditDelete},
+      {Action::DeleteTransaction,             QStringLiteral("transaction_delete"),             i18nc("Delete transaction", "Delete"),              Icon::EditRemove},
       {Action::DuplicateTransaction,          QStringLiteral("transaction_duplicate"),          i18nc("Duplicate transaction", "Duplicate"),        Icon::EditCopy},
       {Action::AddReversingTransaction,       QStringLiteral("transaction_add_reversing"),      i18nc("Add reversing transaction", "Add reversing"),Icon::Reverse},
-      {Action::MatchTransaction,              QStringLiteral("transaction_match"),              i18nc("Button text for match transaction", "Match"),Icon::TransactionMatch},
-      {Action::AcceptTransaction,             QStringLiteral("transaction_accept"),             i18nc("Accept 'imported' and 'matched' transaction", "Accept"), Icon::TransactionAccept},
+      {Action::MatchTransaction,              QStringLiteral("transaction_match"),              i18nc("Button text for match transaction", "Match"),Icon::Merge},
+      {Action::AcceptTransaction,             QStringLiteral("transaction_accept"),             i18nc("Accept 'imported' and 'matched' transaction", "Accept"), Icon::DialogOK},
       {Action::ToggleReconciliationFlag,      QStringLiteral("transaction_mark_toggle"),        i18nc("Toggle reconciliation flag", "Toggle"),     Icon::Empty},
       {Action::MarkCleared,                   QStringLiteral("transaction_mark_cleared"),       i18nc("Mark transaction cleared", "Cleared"),       Icon::Empty},
       {Action::MarkReconciled,                QStringLiteral("transaction_mark_reconciled"),    i18nc("Mark transaction reconciled", "Reconciled"), Icon::Empty},
@@ -1396,25 +1396,25 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       //Investment
       {Action::NewInvestment,                 QStringLiteral("investment_new"),                 i18n("New investment..."),                          Icon::InvestmentNew},
       {Action::EditInvestment,                QStringLiteral("investment_edit"),                i18n("Edit investment..."),                         Icon::InvestmentEdit},
-      {Action::DeleteInvestment,              QStringLiteral("investment_delete"),              i18n("Delete investment..."),                       Icon::InvestmentDelete},
-      {Action::UpdatePriceOnline,             QStringLiteral("investment_online_price_update"), i18n("Online price update..."),                     Icon::InvestmentOnlinePrice},
+      {Action::DeleteInvestment,              QStringLiteral("investment_delete"),              i18n("Delete investment..."),                       Icon::InvestmentRemove},
+      {Action::UpdatePriceOnline,             QStringLiteral("investment_online_price_update"), i18n("Online price update..."),                     Icon::OnlinePriceUpdate},
       {Action::UpdatePriceManually,           QStringLiteral("investment_manual_price_update"), i18n("Manual price update..."),                     Icon::Empty},
       //Schedule
       {Action::NewSchedule,                   QStringLiteral("schedule_new"),                   i18n("New scheduled transaction"),                  Icon::NewSchedule},
       {Action::EditSchedule,                  QStringLiteral("schedule_edit"),                  i18n("Edit scheduled transaction"),                 Icon::DocumentEdit},
-      {Action::DeleteSchedule,                QStringLiteral("schedule_delete"),                i18n("Delete scheduled transaction"),               Icon::EditDelete},
+      {Action::DeleteSchedule,                QStringLiteral("schedule_delete"),                i18n("Delete scheduled transaction"),               Icon::EditRemove},
       {Action::DuplicateSchedule,             QStringLiteral("schedule_duplicate"),             i18n("Duplicate scheduled transaction"),            Icon::EditCopy},
       {Action::EnterSchedule,                 QStringLiteral("schedule_enter"),                 i18n("Enter next transaction..."),                  Icon::KeyEnter},
       {Action::SkipSchedule,                  QStringLiteral("schedule_skip"),                  i18n("Skip next transaction..."),                   Icon::SeekForward},
       //Payees
-      {Action::NewPayee,                      QStringLiteral("payee_new"),                      i18n("New payee"),                                  Icon::ListAddUser},
+      {Action::NewPayee,                      QStringLiteral("payee_new"),                      i18n("New payee"),                                  Icon::PayeeNew},
       {Action::RenamePayee,                   QStringLiteral("payee_rename"),                   i18n("Rename payee"),                               Icon::PayeeRename},
-      {Action::DeletePayee,                   QStringLiteral("payee_delete"),                   i18n("Delete payee"),                               Icon::ListRemoveUser},
+      {Action::DeletePayee,                   QStringLiteral("payee_delete"),                   i18n("Delete payee"),                               Icon::PayeeRemove},
       {Action::MergePayee,                    QStringLiteral("payee_merge"),                    i18n("Merge payees"),                               Icon::PayeeMerge},
       //Tags
-      {Action::NewTag,                        QStringLiteral("tag_new"),                        i18n("New tag"),                                    Icon::ListAddTag},
+      {Action::NewTag,                        QStringLiteral("tag_new"),                        i18n("New tag"),                                    Icon::TagNew},
       {Action::RenameTag,                     QStringLiteral("tag_rename"),                     i18n("Rename tag"),                                 Icon::TagRename},
-      {Action::DeleteTag,                     QStringLiteral("tag_delete"),                     i18n("Delete tag"),                                 Icon::ListRemoveTag},
+      {Action::DeleteTag,                     QStringLiteral("tag_delete"),                     i18n("Delete tag"),                                 Icon::TagRemove},
       //debug actions
 #ifdef KMM_DEBUG
       {Action::WizardNewUser,                 QStringLiteral("new_user_wizard"),                i18n("Test new feature"),                           Icon::Empty},
@@ -1422,7 +1422,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
 #endif
       {Action::DebugTimers,                   QStringLiteral("debug_timers"),                   i18n("Debug Timers"),                               Icon::Empty},
       // onlineJob actions
-      {Action::DeleteOnlineJob,               QStringLiteral("onlinejob_delete"),               i18n("Remove credit transfer"),                     Icon::EditDelete},
+      {Action::DeleteOnlineJob,               QStringLiteral("onlinejob_delete"),               i18n("Remove credit transfer"),                     Icon::EditRemove},
       {Action::EditOnlineJob,                 QStringLiteral("onlinejob_edit"),                 i18n("Edit credit transfer"),                       Icon::DocumentEdit},
       {Action::LogOnlineJob,                  QStringLiteral("onlinejob_log"),                  i18n("Show log"),                                   Icon::Empty},
     };
@@ -1641,55 +1641,43 @@ void KMyMoneyApp::initStatusBar()
 
 void KMyMoneyApp::initIcons()
 {
-#if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
-  const auto appDataIconsLocation = QStringLiteral("kmymoney/icons");
-#else
-  const auto appDataIconsLocation = QStringLiteral("icons");
-#endif
-
-  const QString customIconRelativePath = appDataIconsLocation + QStringLiteral("/hicolor/16x16/actions/account-add.png");
-#ifndef IS_APPIMAGE
-  // find where our custom icons were installed based on an custom icon that we know should exist after installation
-  auto customIconAbsolutePath = QStandardPaths::locate(QStandardPaths::AppDataLocation, customIconRelativePath);
-  if (customIconAbsolutePath.isEmpty()) {
-    qWarning("Custom icons were not found in any of the following QStandardPaths::AppDataLocation:");
-    for (const auto &standardPath : QStandardPaths::standardLocations(QStandardPaths::AppDataLocation))
-      qWarning() << standardPath;
-  }
-#else
-  // according to https://docs.appimage.org/packaging-guide/ingredients.html#open-source-applications
-  // QStandardPaths::AppDataLocation is unreliable on AppImages, so apply workaround here in case we fail to find icons
-  QString customIconAbsolutePath;
-  const auto appImageAppDataLocation = QString("%1%2%3").arg(QCoreApplication::applicationDirPath(), QString("/../share/kmymoney/"), customIconRelativePath);
-  if (QFile::exists(appImageAppDataLocation )) {
-    customIconAbsolutePath = appImageAppDataLocation ;
-  } else {
-    qWarning("Custom icons were not found in the following location:");
-    qWarning() << appImageAppDataLocation ;
-  }
-#endif
-
-  // add our custom icons path to icons search path
-  if (!customIconAbsolutePath.isEmpty()) {
-    customIconAbsolutePath.chop(customIconRelativePath.length());
-    customIconAbsolutePath.append(appDataIconsLocation);
-    auto paths = QIcon::themeSearchPaths();
-    paths.append(customIconAbsolutePath);
-    QIcon::setThemeSearchPaths(paths);
-  }
-
   qDebug() << "System icon theme as reported by QT: " << QIcon::themeName();
-#if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
-  auto themeName = QStringLiteral("breeze");                      // only breeze is available for craft packages
-#else
-  auto themeName = KMyMoneySettings::iconsTheme();                        // get theme user wants
-  if (!themeName.isEmpty() && themeName != QStringLiteral("system"))  // if it isn't default theme then set it
-    QIcon::setThemeName(themeName);
-  else
-    themeName = QIcon::themeName();
+
+  auto themeName = KMyMoneySettings::iconsTheme();
+  qDebug() << "App icon theme as configured in KMyMoney: " << themeName;
+
+#if defined(Q_OS_WIN)
+  // @todo add support for dark icons, e.g. https://www.thetopsites.net/article/51334674.shtml
+
+  themeName = QStringLiteral("breeze");                      // only breeze is available for craft packages
+  qDebug() << "Running under Windows, so will be forcing the icon theme to: " << themeName;
+#elif defined(Q_OS_MACOS)
+  // @todo requires https://phabricator.kde.org/D25119 or icons/CMakeList.txt to generate for macOS as well
+
+  constexpr int OSX_LIGHT_MODE = 236;
+  constexpr int OSX_DARK_MODE = 50;
+
+  auto bg = palette().color(QPalette::Active, QPalette::Window);
+
+  if (bg.lightness() == OSX_LIGHT_MODE) {
+    themeName = QStringLiteral("breeze");
+    qDebug() << "Detected macOS light mode, so will be forcing the icon theme to: " << themeName;
+  }
+  else {
+    themeName = QStringLiteral("breeze-dark");
+    qDebug() << "Detected macOS dark mode, so will be forcing the icon theme to: " << themeName;
+  }
 #endif
 
-  setUpMappings(themeName);
+  // if it isn't default theme then set it
+  if (!themeName.isEmpty() && themeName != QStringLiteral("system")) {
+    QIcon::setThemeName(themeName);
+    qDebug() << "Setting icon theme to: " << themeName;
+  }
+  else {
+    themeName = QIcon::themeName();
+    qDebug() << "Obeying the system-wide icon theme, currently set to: " << themeName;
+  }
 }
 
 void KMyMoneyApp::saveOptions()
@@ -3213,6 +3201,15 @@ void KMyMoneyApp::preloadHolidays()
     }
   }
 #endif
+}
+
+bool KMyMoneyApp::event(QEvent * event) {
+  if (event->type() == QEvent::PaletteChange) {
+      this->initIcons();
+      return true;
+  }
+
+  return KXmlGuiWindow::event(event);
 }
 
 bool KMyMoneyApp::slotFileNew()

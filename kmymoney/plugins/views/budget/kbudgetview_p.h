@@ -92,9 +92,9 @@ public:
     ui->setupUi(q);
 
     ui->m_budgetList->setContextMenuPolicy(Qt::CustomContextMenu);
-    ui->m_newButton->setIcon(Icons::get(Icon::BudgetNew));
-    ui->m_renameButton->setIcon(Icons::get(Icon::BudgetRename));
-    ui->m_deleteButton->setIcon(Icons::get(Icon::BudgetDelete));
+    ui->m_newButton->setIcon(Icons::get(Icon::DocumentNew));
+    ui->m_renameButton->setIcon(Icons::get(Icon::DocumentEdit));
+    ui->m_deleteButton->setIcon(Icons::get(Icon::EditRemove));
     ui->m_updateButton->setIcon(Icons::get(Icon::DocumentSave));
     ui->m_resetButton->setIcon(Icons::get(Icon::EditUndo));
     ui->m_collapseButton->setIcon(Icons::get(Icon::ListCollapse));

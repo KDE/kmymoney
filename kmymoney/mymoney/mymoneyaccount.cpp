@@ -481,50 +481,39 @@ void MyMoneyAccount::setTotalPostedValue(const MyMoneyMoney& val)
   d->m_totalPostedValue = val;
 }
 
-QPixmap MyMoneyAccount::accountPixmap(const bool reconcileFlag, const int size) const
+QIcon MyMoneyAccount::accountIcon() const
 {
-  static const QHash<Account::Type, Icon> accToIco {
-    {Account::Type::Asset, Icon::Asset},
-    {Account::Type::Investment, Icon::Stock},
-    {Account::Type::Stock, Icon::Stock},
-    {Account::Type::MoneyMarket, Icon::Stock},
-    {Account::Type::Checkings, Icon::Checking},
-    {Account::Type::Savings, Icon::Savings},
-    {Account::Type::AssetLoan, Icon::LoanAsset},
-    {Account::Type::Loan, Icon::Loan},
-    {Account::Type::CreditCard, Icon::CreditCard},
-    {Account::Type::Asset, Icon::Asset},
-    {Account::Type::Cash, Icon::Cash},
-    {Account::Type::Income, Icon::Income},
-    {Account::Type::Expense, Icon::Expense},
-    {Account::Type::Equity, Icon::Equity}
-  };
-
-  Icon ixIcon = accToIco.value(accountType(), Icon::Liability);
-
-  QString kyIcon = accountTypeToString(accountType()) + QString::number(size);
-  QPixmap pxIcon;
-
-  if (!QPixmapCache::find(kyIcon, &pxIcon)) {
-    pxIcon = Icons::get(ixIcon).pixmap(size); // Qt::AA_UseHighDpiPixmaps (in Qt 5.7) doesn't return highdpi pixmap
-    QPixmapCache::insert(kyIcon, pxIcon);
+  switch (accountType()) {
+    case Account::Type::Checkings:
+      return Icons::get(isClosed() ? Icons::Icon::CheckingClosed : Icons::Icon::Checking);
+    case Account::Type::Savings:
+      return Icons::get(isClosed() ? Icons::Icon::SavingsClosed : Icons::Icon::Savings);
+    case Account::Type::Cash:
+      return Icons::get(isClosed() ? Icons::Icon::CashClosed : Icons::Icon::Cash);
+    case Account::Type::CreditCard:
+      return Icons::get(isClosed() ? Icons::Icon::CreditCardClosed : Icons::Icon::CreditCard);
+    case Account::Type::Loan:
+      return Icons::get(isClosed() ? Icons::Icon::LoanClosed : Icons::Icon::Loan);
+    case Account::Type::Investment:
+    case Account::Type::MoneyMarket:
+      return Icons::get(isClosed()? Icons::Icon::InvestmentClosed : Icons::Icon::Investment);
+    case Account::Type::Asset:
+      return Icons::get(isClosed() ? Icons::Icon::AssetClosed : Icons::Icon::Asset);
+    case Account::Type::Liability:
+      return Icons::get(isClosed() ? Icons::Icon::LiabilityClosed : Icons::Icon::Liability);
+    case Account::Type::Income:
+      return Icons::get(Icons::Icon::Income);
+    case Account::Type::Expense:
+      return Icons::get(Icons::Icon::Expense);
+    case Account::Type::AssetLoan:
+      return Icons::get(isClosed() ? Icons::Icon::AssetLoanClosed : Icons::Icon::AssetLoan);
+    case Account::Type::Stock:
+      return Icons::get(isClosed() ? Icons::Icon::SecurityClosed : Icons::Icon::Security);
+    case Account::Type::Equity:
+      return Icons::get(Icons::Icon::Equity);
+    default:
+      return Icons::get(isClosed() ? Icons::Icon::BankAccountClosed : Icons::Icon::BankAccount);
   }
-
-  if (isClosed())
-    ixIcon = Icon::AccountClosed;
-  else if (reconcileFlag)
-    ixIcon = Icon::Reconciled;
-  else if (hasOnlineMapping())
-    ixIcon = Icon::Download;
-  else
-    return pxIcon;
-
-  QPixmap pxOverlay = Icons::get(ixIcon).pixmap(size);
-  QPainter pxPainter(&pxIcon);
-  const QSize szIcon = pxIcon.size();
-  pxPainter.drawPixmap(szIcon.width() / 2, szIcon.height() / 2,
-                       szIcon.width() / 2, szIcon.height() / 2, pxOverlay);
-  return pxIcon;
 }
 
 QString MyMoneyAccount::accountTypeToString(const Account::Type accountType)

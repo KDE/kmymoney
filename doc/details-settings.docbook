@@ -584,15 +584,6 @@ of accounts.</para>
 
 <variablelist>
   <varlistentry>
-    <term><guilabel>Insert transaction type into No. field for new
-    transactions</guilabel></term>
-    <listitem>
-      <para>Enabling this will automatically place the type of the transaction,
-      &eg;, Deposit, Withdrawal, &etc;, in the No. field.</para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
     <term><guilabel>Auto increment check number</guilabel></term>
     <listitem>
       <para>Enabling this will automatically increment the check number whenever

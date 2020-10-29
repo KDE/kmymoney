@@ -9,3 +9,4 @@ vcpkg_installed
 ui_*.h
 moc_*.cpp
 *.moc
+kmymoney/icons/icons.qrc

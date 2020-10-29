@@ -47,38 +47,11 @@ public:
   KMMViewInterface(KMyMoneyView* view, QObject* parent, const char* name = 0);
   ~KMMViewInterface() {}
 
-  /**
-    * This method returns a pointer to a newly created view
-    * with title @p item and icon @p pixmap.
-    *
-    * @param item Name of view
-    * @param icon name for the icon to be used for the view
-    *
-    * @return pointer to KMyMoneyViewBase object
-    */
-//  KMyMoneyViewBase* addPage(const QString& item, const QString& icon);
-
-  /**
-    * This method allows to add a widget to the view
-    * created with addPage()
-    *
-    * @param view pointer to view object
-    * @param w pointer to widget
-    */
-//  void addWidget(KMyMoneyViewBase* view, QWidget* w);
-
-  /**
-    * Brings up a dialog to change the list(s) settings and saves them into the
-    * class KMyMoneySettings (a singleton).
-    *
-    * @see KListSettingsDlg
-    * Refreshes all views. Used e.g. after settings have been changed or
-    * data has been loaded from external sources (QIF import).
-    **/
   void slotRefreshViews() override;
 
-  void addView(KMyMoneyViewBase* view, const QString& name, View idView) override;
+  void addView(KMyMoneyViewBase* view, const QString& name, View idView, Icons::Icon icon) override;
   void removeView(View idView) override;
+
 private:
   KMyMoneyView* m_view;
 };
