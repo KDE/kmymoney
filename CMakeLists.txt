@@ -110,9 +110,12 @@ include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
 
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}" )
 
+option(BUILD_APIDOC "Create api documentation" ON)
+option(BUILD_QCH "Build with QCH support" ON)
+
 # check for Doxygen
 find_package(Doxygen)
-if(DOXYGEN_FOUND)
+if(DOXYGEN_FOUND AND BUILD_APIDOC)
   find_program(QHELPGENERATOR_EXECUTABLE qhelpgenerator)
   set(DOXYGEN_CALLER_GRAPH           NO)
   set(DOXYGEN_CALL_GRAPH             NO)
@@ -144,7 +147,7 @@ if(DOXYGEN_FOUND)
   set(DOXYGEN_SOURCE_BROWSER         YES)
   set(DOXYGEN_UML_LOOK               YES)
   set(DOXYGEN_TEMPLATE_RELATIONS     YES)
-  if(QHELPGENERATOR_EXECUTABLE)
+  if(QHELPGENERATOR_EXECUTABLE AND BUILD_QCH)
     set(DOXYGEN_GENERATE_QHP           YES)
     set(DOXYGEN_QCH_FILE               ${CMAKE_CURRENT_BINARY_DIR}/kmymoney.qch)
     set(DOXYGEN_QHG_LOCATION           ${QHELPGENERATOR_EXECUTABLE})
