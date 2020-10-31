@@ -24,26 +24,40 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+class QTreeWidgetItem;
+class QMenu;
+
 // ----------------------------------------------------------------------------
 // KDE Includes
+
+class KActionCollection;
+class KXMLGUIClient;
+class KXMLGUIFactory;
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "kmymoneyviewbase.h"
 
-class QTreeWidgetItem;
 
 class MyMoneyObject;
 class MyMoneyBudget;
 class MyMoneyMoney;
+class SelectedObjects;
+
+namespace eMenu {
+  enum class BudgetAction {
+    NewBudget, RenameBudget, DeleteBudget,
+    CopyBudget, BudgetForecast,
+  };
+  inline uint qHash(const BudgetAction key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+};
 
 /**
   * @author Darren Gould
   * @author Thomas Baumgart
   */
 class KBudgetViewPrivate;
-class SelectedObjects;
 class KBudgetView : public KMyMoneyViewBase
 {
   Q_OBJECT
@@ -54,12 +68,14 @@ public:
 
   void executeCustomAction(eView::Action action) override;
 
+  void createActions(KXMLGUIClient* guiClient);
+  void removeActions();
+
 public Q_SLOTS:
   void slotSettingsChanged() override;
   void updateActions(const SelectedObjects& selections) override;
 
 protected:
-  KBudgetView(KBudgetViewPrivate &dd, QWidget *parent);
   void showEvent(QShowEvent * event) override;
 
 private:

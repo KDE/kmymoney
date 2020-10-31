@@ -49,7 +49,6 @@ class KMM_WIDGETS_EXPORT KMyMoneyViewBase : public QWidget
   Q_OBJECT
 
 public:
-  explicit KMyMoneyViewBase(QWidget* parent = nullptr);
   virtual ~KMyMoneyViewBase();
 
   virtual void executeCustomAction(eView::Action) {}
@@ -85,6 +84,9 @@ public slots:
 
 protected:
   const QScopedPointer<KMyMoneyViewBasePrivate> d_ptr;
+
+  // we do not allow to create objects of this class
+  explicit KMyMoneyViewBase(QWidget* parent = nullptr);
   KMyMoneyViewBase(KMyMoneyViewBasePrivate &dd, QWidget *parent);
 
 private:

@@ -1,0 +1,11 @@
+<!DOCTYPE kpartgui>
+<kpartgui name="kmymoneyplugin-budgetview" version="0">
+  <Menu name="budget_context_menu">
+   <title>Budget options</title>
+    <Action name="budget_new"/>
+    <Action name="budget_rename"/>
+    <Action name="budget_delete"/>
+    <Action name="budget_copy"/>
+    <Action name="budget_base_on_forecast"/>
+  </Menu>
+</kpartgui>

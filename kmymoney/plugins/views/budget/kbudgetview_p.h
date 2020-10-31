@@ -71,6 +71,8 @@ public:
     : KMyMoneyViewBasePrivate(qq)
     , ui(new Ui::KBudgetView)
     , m_budgetProxyModel(nullptr)
+    , m_contextMenu(nullptr)
+    , m_actionCollection(nullptr)
   {
   }
 
@@ -92,9 +94,12 @@ public:
     ui->setupUi(q);
 
     ui->m_budgetList->setContextMenuPolicy(Qt::CustomContextMenu);
-    ui->m_newButton->setIcon(Icons::get(Icon::DocumentNew));
-    ui->m_renameButton->setIcon(Icons::get(Icon::DocumentEdit));
-    ui->m_deleteButton->setIcon(Icons::get(Icon::EditRemove));
+
+    // assign actions to tool buttons
+    ui->m_newButton->setDefaultAction(m_actions[eMenu::BudgetAction::NewBudget]);
+    ui->m_renameButton->setDefaultAction(m_actions[eMenu::BudgetAction::RenameBudget]);
+    ui->m_deleteButton->setDefaultAction(m_actions[eMenu::BudgetAction::DeleteBudget]);
+
     ui->m_updateButton->setIcon(Icons::get(Icon::DocumentSave));
     ui->m_resetButton->setIcon(Icons::get(Icon::EditUndo));
     ui->m_collapseButton->setIcon(Icons::get(Icon::ListCollapse));
@@ -143,35 +148,9 @@ public:
 
     q->slotSettingsChanged();
 
-    // setup initial state
-    updateButtonStates();
-
     auto grp = KSharedConfig::openConfig()->group("Last Use Settings");
     ui->m_splitter->restoreState(grp.readEntry("KBudgetViewSplitterSize", QByteArray()));
     ui->m_splitter->setChildrenCollapsible(false);
-  }
-
-  QHash<eMenu::Action, bool> actionStates()
-  {
-    QHash<eMenu::Action, bool> actionStates;
-    actionStates[eMenu::Action::NewBudget] = true;
-    auto b = !ui->m_budgetList->selectionModel()->selectedIndexes().isEmpty();
-    actionStates[eMenu::Action::DeleteBudget] = b;
-
-    b = (ui->m_budgetList->selectionModel()->selectedIndexes().count() == 2);
-    actionStates[eMenu::Action::ChangeBudgetYear] = b;
-    actionStates[eMenu::Action::CopyBudget] = b;
-    actionStates[eMenu::Action::RenameBudget] = b;
-    actionStates[eMenu::Action::BudgetForecast] = b;
-    return actionStates;
-  }
-
-  void updateButtonStates() Q_DECL_DEPRECATED
-  {
-    const auto states = actionStates();
-    ui->m_newButton->setEnabled( states[eMenu::Action::NewBudget]);
-    ui->m_renameButton->setEnabled( states[eMenu::Action::RenameBudget]);
-    ui->m_deleteButton->setEnabled( states[eMenu::Action::DeleteBudget]);
   }
 
   void askSave()
@@ -250,10 +229,12 @@ public:
     return rc;
   }
 
-  Ui::KBudgetView*      ui;
-  BudgetViewProxyModel* m_budgetProxyModel;
-
-  MyMoneyBudget         m_budget;
+  Ui::KBudgetView*                      ui;
+  BudgetViewProxyModel*                 m_budgetProxyModel;
+  MyMoneyBudget                         m_budget;
+  QHash<eMenu::BudgetAction, QAction*>  m_actions;
+  QMenu*                                m_contextMenu;
+  KActionCollection*                    m_actionCollection;
 };
 
 #endif

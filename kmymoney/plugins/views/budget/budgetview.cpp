@@ -20,6 +20,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDebug>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -37,7 +39,6 @@ BudgetView::BudgetView(QObject *parent, const QVariantList &args) :
   m_view(nullptr)
 {
   Q_UNUSED(args)
-  setComponentName("budgetview", i18n("Budgets view"));
   // For information, announce that we have been loaded.
   qDebug("Plugins: budgetview loaded");
 }
@@ -50,11 +51,31 @@ BudgetView::~BudgetView()
 void BudgetView::plug()
 {
   m_view = new KBudgetView;
+
+  // Tell the host application to load my GUI component
+  const auto componentName = QLatin1String("budgetview");
+  const auto rcFileName = QLatin1String("budgetview.rc");
+  setComponentName(componentName, i18n("Budgets view"));
+
+  #ifdef IS_APPIMAGE
+  const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
+  setXMLFile(rcFilePath);
+
+  const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+  setLocalXMLFile(localRcFilePath);
+  #else
+  setXMLFile(rcFileName);
+  #endif
+
+  // create my actions and menus
+  m_view->createActions(this);
+
   viewInterface()->addView(m_view, i18n("Budgets"), View::Budget, Icons::Icon::Budget);
 }
 
 void BudgetView::unplug()
 {
+  m_view->removeActions();
   viewInterface()->removeView(View::Budget);
 }
 

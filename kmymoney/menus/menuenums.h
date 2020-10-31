@@ -116,11 +116,6 @@ namespace eMenu {
     // *************
     NewTag, RenameTag, DeleteTag,
     // *************
-    // The budget menu
-    // *************
-    NewBudget, RenameBudget, DeleteBudget,
-    CopyBudget, ChangeBudgetYear, BudgetForecast,
-    // *************
     // The show actions
     // *************
     ShowHomeView, ShowInstitutionsView, ShowAccountsView,

@@ -29,3 +29,7 @@ target_link_libraries(budgetview
     kmm_widgets
     kmymoney_common
 )
+
+install(FILES budgetview.rc
+        DESTINATION ${KXMLGUI_INSTALL_DIR}/budgetview)
+
