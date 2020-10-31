@@ -1281,6 +1281,8 @@ void KMyMoneyApp::slotSelectionChanged(const SelectedObjects& selections)
       qDebug() << "Payees:" << selections.selection(SelectedObjects::Payee);
     if (!selections.isEmpty(SelectedObjects::Schedule))
       qDebug() << "Schedules:" << selections.selection(SelectedObjects::Schedule);
+    if (!selections.isEmpty(SelectedObjects::Budget))
+      qDebug() << "Budgets:" << selections.selection(SelectedObjects::Budget);
   } else {
     qDebug() << "selection reset";
   }
