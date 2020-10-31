@@ -26,6 +26,8 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+class KXMLGUIClient;
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -56,6 +58,9 @@ public:
 
   void executeCustomAction(eView::Action action) override;
   void refresh();
+
+  void createActions(KXMLGUIClient* guiClient);
+  void removeActions();
 
 protected:
   void showEvent(QShowEvent* event) override;

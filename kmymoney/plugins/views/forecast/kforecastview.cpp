@@ -133,3 +133,12 @@ void KForecastView::itemCollapsed(QTreeWidgetItem *item)
     d->showAmount(item, i, item->data(i, ValueRole).value<MyMoneyMoney>(), MyMoneyFile::instance()->baseCurrency());
   }
 }
+
+void KForecastView::createActions(KXMLGUIClient* guiClient)
+{
+  Q_UNUSED(guiClient)
+}
+
+void KForecastView::removeActions()
+{
+}

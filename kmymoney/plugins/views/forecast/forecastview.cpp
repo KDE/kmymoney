@@ -38,7 +38,6 @@ ForecastView::ForecastView(QObject *parent, const QVariantList &args) :
   m_view(nullptr)
 {
   Q_UNUSED(args)
-  setComponentName("forecastview", i18n("Forecast view"));
   // For information, announce that we have been loaded.
   qDebug("Plugins: forecastview loaded");
 }
@@ -51,11 +50,31 @@ ForecastView::~ForecastView()
 void ForecastView::plug()
 {
   m_view = new KForecastView;
+
+  // Tell the host application to load my GUI component
+  const auto componentName = QLatin1String("forecastview");
+  const auto rcFileName = QLatin1String("forecastview.rc");
+  setComponentName(componentName, i18n("Forecast view"));
+
+  #ifdef IS_APPIMAGE
+  const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
+  setXMLFile(rcFilePath);
+
+  const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+  setLocalXMLFile(localRcFilePath);
+  #else
+  setXMLFile(rcFileName);
+  #endif
+
+  // create my actions and menus
+  m_view->createActions(this);
+
   viewInterface()->addView(m_view, i18n("Forecast"), View::Forecast, Icons::Icon::Forecast);
 }
 
 void ForecastView::unplug()
 {
+  m_view->removeActions();
   viewInterface()->removeView(View::Forecast);
 }
 

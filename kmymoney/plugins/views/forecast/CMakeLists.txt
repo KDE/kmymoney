@@ -60,3 +60,6 @@ target_link_libraries(kcm_forecastview
 
 install(FILES kcm_forecastview.desktop
         DESTINATION "${SERVICES_INSTALL_DIR}")
+
+install(FILES forecastview.rc
+        DESTINATION ${KXMLGUI_INSTALL_DIR}/forecastview)
