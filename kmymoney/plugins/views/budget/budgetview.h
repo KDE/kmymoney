@@ -37,8 +37,8 @@ public:
   explicit BudgetView(QObject *parent, const QVariantList &args);
   ~BudgetView() override;
 
-  void plug() override;
-  void unplug() override;
+  void plug() final override;
+  void unplug() final override;
 
 private:
   KBudgetView* m_view;

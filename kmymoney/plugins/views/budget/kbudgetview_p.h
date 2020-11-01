@@ -124,7 +124,6 @@ public:
 
     q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KBudgetView::slotSelectAccount);
 
-    q->connect(ui->m_budgetList, &QTableView::customContextMenuRequested, q, &KBudgetView::slotOpenContextMenu);
     q->connect(ui->m_budgetList->selectionModel(), &QItemSelectionModel::selectionChanged, q, &KBudgetView::slotSelectBudget);
 
     q->connect(ui->m_cbBudgetSubaccounts, &QAbstractButton::clicked, q, &KBudgetView::cb_includesSubaccounts_clicked);

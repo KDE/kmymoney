@@ -90,14 +90,6 @@ private Q_SLOTS:
   void slotResetBudget();
   void slotUpdateBudget();
 
-  /**
-    * This slot receives the signal from the listview control that an
-    * item was right-clicked,
-    * If @p p points to a real budget item, emits openContextMenu().
-    *
-    * @param p position of the pointing device
-    */
-  void slotOpenContextMenu(const QPoint&);
   void slotSelectAccount(const MyMoneyObject &obj, eView::Intent intent);
   void slotBudgetedAmountChanged();
   /**

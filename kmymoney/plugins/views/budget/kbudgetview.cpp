@@ -61,6 +61,16 @@ void KBudgetView::showEvent(QShowEvent * event)
   Q_D(KBudgetView);
   if (!d->m_budgetProxyModel) {
     d->init();
+
+    connect(d->ui->m_budgetList, &QTableView::customContextMenuRequested, this, [&](const QPoint&) {
+      Q_D(KBudgetView);
+      if (d->m_contextMenu) {
+        d->m_contextMenu->exec(QCursor::pos());
+      } else {
+        qDebug() << "No context menu assigned in KBudgetView";
+      }
+    });
+
     slotSelectBudget();
   }
   emit customActionRequested(View::Budget, eView::Action::AboutToShow);
@@ -257,17 +267,6 @@ void KBudgetView::slotStartRename()
     auto idx = d->ui->m_budgetList->model()->index(row, 0);
     d->ui->m_budgetList->setCurrentIndex(idx);
     d->ui->m_budgetList->edit(idx);
-  }
-}
-
-void KBudgetView::slotOpenContextMenu(const QPoint&)
-{
-  Q_D(KBudgetView);
-  if (d->m_contextMenu) {
-    qDebug() << d->m_contextMenu->title();
-    d->m_contextMenu->exec(QCursor::pos());
-  } else {
-    qDebug() << "No context menu assigned in KBudgetView";
   }
 }
 
