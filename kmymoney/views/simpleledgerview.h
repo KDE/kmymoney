@@ -45,6 +45,7 @@ public:
   virtual void executeCustomAction(eView::Action action) override;
 
 public Q_SLOTS:
+  void viewChanged(KPageWidgetItem* current, KPageWidgetItem* before) override;
   void showEvent(QShowEvent* event) override;
 
   void slotSettingsChanged() override;

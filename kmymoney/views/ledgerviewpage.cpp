@@ -83,7 +83,7 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
   connect(d->ui->ledgerView, &LedgerView::aboutToFinishEdit, this, &LedgerViewPage::aboutToFinishEdit);
   connect(d->ui->ledgerView, &LedgerView::aboutToStartEdit, this, &LedgerViewPage::startEdit);
   connect(d->ui->ledgerView, &LedgerView::aboutToFinishEdit, this, &LedgerViewPage::finishEdit);
-  connect(d->ui->ledgerView, &LedgerView::transactionSelectionChanged, this, &LedgerViewPage::selectionChanged);
+  connect(d->ui->ledgerView, &LedgerView::transactionSelectionChanged, this, &LedgerViewPage::requestSelectionChanged);
   connect(d->ui->splitter, &QSplitter::splitterMoved, this, &LedgerViewPage::splitterChanged);
 
   d->ui->ledgerView->setColumnSelectorGroupName(configGroupName);

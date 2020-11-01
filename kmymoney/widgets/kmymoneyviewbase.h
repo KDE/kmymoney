@@ -73,8 +73,8 @@ Q_SIGNALS:
 
   void customActionRequested(View, eView::Action);
 
-public slots:
-  void viewChanged(KPageWidgetItem* current, KPageWidgetItem* before);
+public Q_SLOTS:
+  virtual void viewChanged(KPageWidgetItem* current, KPageWidgetItem* before);
 
   virtual void updateActions(const SelectedObjects& selections) { Q_UNUSED(selections) }
 

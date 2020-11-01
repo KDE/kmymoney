@@ -65,7 +65,7 @@ protected Q_SLOTS:
   void reloadFilter();
 
 Q_SIGNALS:
-  void selectionChanged(const SelectedObjects& selection);
+  void requestSelectionChanged(const SelectedObjects& selection);
 
   void transactionSelected(const QModelIndex& idx);
   void aboutToStartEdit();

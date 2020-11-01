@@ -34,6 +34,7 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KPageWidgetItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -242,7 +243,9 @@ public:
         ui->ledgerTab->setCurrentIndex(ui->ledgerTab->count()-1);
         ui->ledgerTab->setCurrentIndex(newIdx);
       }
-      q->connect(view, &LedgerViewPage::selectionChanged, q, &SimpleLedgerView::requestSelectionChange);
+
+      q->connect(view, &LedgerViewPage::requestSelectionChanged, q, &SimpleLedgerView::requestSelectionChange);
+
       q->connect(q, &SimpleLedgerView::settingsChanged, view, &LedgerViewPage::slotSettingsChanged);
     }
   }
@@ -470,6 +473,24 @@ void SimpleLedgerView::setupCornerWidget()
         }
       }
     }
+  }
+}
+
+void SimpleLedgerView::viewChanged(KPageWidgetItem* current, KPageWidgetItem* before)
+{
+  Q_D(SimpleLedgerView);
+  // did I get selected?
+  if (current->widget() == this) {
+    d->m_selections.clearSelections();
+    // in case we have at least one account open
+    if (d->ui->ledgerTab->count() > 1) {
+      // use its current selection
+      const auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());
+      if (view) {
+        d->m_selections = view->selections();
+      }
+    }
+    emit requestSelectionChange(d->m_selections);
   }
 }
 
