@@ -50,6 +50,11 @@ void SelectedObjects::clearSelections(SelectedObjects::Object_t type)
   m_selections.remove(type);
 }
 
+void SelectedObjects::clearSelections()
+{
+  m_selections.clear();
+}
+
 int SelectedObjects::count(SelectedObjects::Object_t type) const
 {
   return m_selections[type].count();

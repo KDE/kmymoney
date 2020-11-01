@@ -44,7 +44,8 @@ public:
         Schedule,
         Split,
         Tag,
-        Budget
+        Budget,
+        OnlineJob
     } Object_t;
     SelectedObjects();
 
@@ -54,7 +55,9 @@ public:
     void setSelection( Object_t type, const QString& id);
 
     void clearSelections( Object_t type);
+    void clearSelections();
     QStringList selection( Object_t type) const;
+
     int count( Object_t type) const;
     /**
      * Returns @c true if the selected @a type has no
