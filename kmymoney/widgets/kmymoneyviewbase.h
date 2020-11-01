@@ -58,7 +58,7 @@ protected:
 
 Q_SIGNALS:
   // these signals are send to application logic
-  void requestSelectionChange (const SelectedObjects& selection);
+  void requestSelectionChange (const SelectedObjects& selection) const;
 
   void viewStateChanged(bool enabled);
 

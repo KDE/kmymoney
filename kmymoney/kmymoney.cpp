@@ -1260,7 +1260,6 @@ QHash<eMenu::Menu, QMenu *> KMyMoneyApp::initMenus()
     {Menu::MoveTransaction,         QStringLiteral("transaction_move_menu")},
     {Menu::MarkTransaction,         QStringLiteral("transaction_mark_menu")},
     {Menu::MarkTransactionContext,  QStringLiteral("transaction_context_mark_menu")},
-    {Menu::OnlineJob,               QStringLiteral("onlinejob_context_menu")}
   };
 
   for (auto it = menuNames.cbegin(); it != menuNames.cend(); ++it)
@@ -1283,6 +1282,8 @@ void KMyMoneyApp::slotSelectionChanged(const SelectedObjects& selections)
       qDebug() << "Schedules:" << selections.selection(SelectedObjects::Schedule);
     if (!selections.isEmpty(SelectedObjects::Budget))
       qDebug() << "Budgets:" << selections.selection(SelectedObjects::Budget);
+    if (!selections.isEmpty(SelectedObjects::OnlineJob))
+      qDebug() << "OnlineJobs:" << selections.selection(SelectedObjects::OnlineJob);
   } else {
     qDebug() << "selection reset";
   }
@@ -1379,7 +1380,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::UnmapOnlineAccount,            QStringLiteral("account_online_unmap"),           i18n("Unmap account..."),                           Icon::UnmapOnlineAccount},
       {Action::UpdateAccount,                 QStringLiteral("account_online_update"),          i18n("Update account..."),                          Icon::AccountUpdate},
       {Action::UpdateAllAccounts,             QStringLiteral("account_online_update_all"),      i18n("Update all accounts..."),                     Icon::AccountUpdateAll},
-      {Action::AccountCreditTransfer,         QStringLiteral("account_online_new_credit_transfer"), i18n("New credit transfer"),                    Icon::OnlineTransfer},
       // *******************
       // The categories menu
       // *******************
@@ -1456,9 +1456,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
 #endif
       {Action::DebugTimers,                   QStringLiteral("debug_timers"),                   i18n("Debug Timers"),                               Icon::Empty},
       // onlineJob actions
-      {Action::DeleteOnlineJob,               QStringLiteral("onlinejob_delete"),               i18n("Remove credit transfer"),                     Icon::EditRemove},
-      {Action::EditOnlineJob,                 QStringLiteral("onlinejob_edit"),                 i18n("Edit credit transfer"),                       Icon::DocumentEdit},
-      {Action::LogOnlineJob,                  QStringLiteral("onlinejob_log"),                  i18n("Show log"),                                   Icon::Empty},
     };
 
     for (const auto& info : actionInfos) {
@@ -1600,7 +1597,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
   // *************
   // Misc settings
   // *************
-  connect(onlineJobAdministration::instance(), &onlineJobAdministration::canSendCreditTransferChanged,  lutActions.value(Action::AccountCreditTransfer), &QAction::setEnabled);
 
   // Setup transaction detail switch
   lutActions[Action::ViewTransactionDetail]->setChecked(KMyMoneySettings::showRegisterDetailed());

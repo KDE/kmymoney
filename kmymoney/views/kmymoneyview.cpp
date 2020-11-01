@@ -190,7 +190,6 @@ void KMyMoneyView::slotFileClosed()
   }
 
   pActions[eMenu::Action::Print]->setEnabled(false);
-  pActions[eMenu::Action::AccountCreditTransfer]->setEnabled(false);
   pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(false);
 }
 
@@ -536,7 +535,6 @@ void KMyMoneyView::slotCurrentPageChanged(const QModelIndex current, const QMode
     viewBases[View::OldLedgers]->executeCustomAction(eView::Action::DisableViewDepenedendActions);
 
   pActions[eMenu::Action::Print]->setEnabled(canPrint());
-  pActions[eMenu::Action::AccountCreditTransfer]->setEnabled(onlineJobAdministration::instance()->canSendCreditTransfer());
 }
 
 void KMyMoneyView::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& newAccount)

@@ -37,7 +37,6 @@ OnlineJobOutboxView::OnlineJobOutboxView(QObject *parent, const QVariantList &ar
   m_view(nullptr)
 {
   Q_UNUSED(args)
-  setComponentName("onlinejoboutboxview", i18n("Reports view"));
   // For information, announce that we have been loaded.
   qDebug("Plugins: onlinejoboutboxview loaded");
 }
@@ -50,7 +49,26 @@ OnlineJobOutboxView::~OnlineJobOutboxView()
 void OnlineJobOutboxView::plug()
 {
   m_view = new KOnlineJobOutboxView;
-  viewInterface()->addView(m_view, i18n("Outbox"), View::OnlineJobOutbox, Icons::Icon::OnlineJobOutbox);
+
+  // Tell the host application to load my GUI component
+  const auto componentName = QLatin1String("onlinejoboutboxview");
+  const auto rcFileName = QLatin1String("onlinejoboutboxview.rc");
+  setComponentName(componentName, i18nc("@item:inlistbox", "Budgets view"));
+
+  #ifdef IS_APPIMAGE
+  const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
+  setXMLFile(rcFilePath);
+
+  const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+  setLocalXMLFile(localRcFilePath);
+  #else
+  setXMLFile(rcFileName);
+  #endif
+
+  // create my actions and menus
+  m_view->createActions(this);
+
+  viewInterface()->addView(m_view, i18nc("@item name of view", "Outbox"), View::OnlineJobOutbox, Icons::Icon::OnlineJobOutbox);
 }
 
 void OnlineJobOutboxView::unplug()

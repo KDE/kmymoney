@@ -226,13 +226,6 @@
   <Action name="transaction_match" />
   <Action name="transaction_accept" />
  </Menu>
- <Menu name="onlinejob_context_menu">
-   <title>Credit transfer options</title>
-   <Action name="account_online_new_credit_transfer" />
-   <Action name="onlinejob_edit" />
-   <Action name="onlinejob_delete" />
-   <Action name="onlinejob_log" />
- </Menu>
  <Menu name="account_online_menu">
   <Action name="account_online_update" />
   <Action name="account_online_update_all" />

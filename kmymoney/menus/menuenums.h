@@ -64,7 +64,6 @@ namespace eMenu {
     ReportAccountTransactions, ChartAccountBalance,
     UpdateAccountMenu, UpdateAccount, UpdateAllAccounts,
     MapOnlineAccount, UnmapOnlineAccount,
-    AccountCreditTransfer,
     // *************
     // The category menu
     // *************
