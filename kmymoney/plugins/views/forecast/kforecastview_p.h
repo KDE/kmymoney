@@ -186,7 +186,6 @@ public:
     forecast.doForecast();
 
     ui->m_forecastList->clear();
-    ui->m_forecastList->setColumnCount(0);
     ui->m_forecastList->setIconSize(QSize(22, 22));
     ui->m_forecastList->setSortingEnabled(true);
     ui->m_forecastList->sortByColumn(0, Qt::AscendingOrder);
@@ -207,6 +206,7 @@ public:
     headerLabels << i18n("Total variation");
 
     //set the columns
+    ui->m_forecastList->setColumnCount(headerLabels.count());
     ui->m_forecastList->setHeaderLabels(headerLabels);
 
     //add default rows
@@ -317,6 +317,7 @@ public:
 
     ui->m_summaryList->clear();
     //set the columns
+    ui->m_summaryList->setColumnCount(headerLabels.count());
     ui->m_summaryList->setHeaderLabels(headerLabels);
 
     ui->m_summaryList->setIconSize(QSize(22, 22));
@@ -480,7 +481,6 @@ public:
     }
     //clear the list, including columns
     ui->m_advancedList->clear();
-    ui->m_advancedList->setColumnCount(0);
     ui->m_advancedList->setIconSize(QSize(22, 22));
 
     QStringList headerLabels;
@@ -506,6 +506,7 @@ public:
     }
     headerLabels << i18nc("Average balance", "Average");
 
+    ui->m_advancedList->setColumnCount(headerLabels.count());
     ui->m_advancedList->setHeaderLabels(headerLabels);
 
     QTreeWidgetItem *advancedItem = 0;
@@ -633,6 +634,7 @@ public:
     headerLabels << i18nc("Total balance", "Total");
 
     //set the columns
+    ui->m_budgetList->setColumnCount(headerLabels.count());
     ui->m_budgetList->setHeaderLabels(headerLabels);
 
     //add default rows
