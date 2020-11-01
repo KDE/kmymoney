@@ -233,7 +233,7 @@ struct AccountsModel::Private
         security = file->currency(account.currencyId());
         if (!security.id().isEmpty()) {
           price = file->price(account.currencyId(), baseCurrency.id());
-          if (price.isValid()) {
+          if (!price.isValid()) {
             price = MyMoneyPrice(account.currencyId(), baseCurrency.id(), QDate::currentDate(), MyMoneyMoney::ONE, "internal");
             approximate = true;
           }
