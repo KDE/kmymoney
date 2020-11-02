@@ -453,10 +453,10 @@
   use &kmymoney; to manage all your finances as of 2008-01-01, then enter the
   balance of the account at the beginning of this date.  The number can possibly
   be obtained from a paper statement.  You may also enter the name and the bank
-  code of the institution.  The latter, known as the routing number in the US or 
-  the sort code in the UK, is optional and only required for online banking 
+  code of the institution.  The latter, known as the routing number in the US or
+  the sort code in the UK, is optional and only required for online banking
   purposes, but it may also be helpful when importing bank statements in some of
-  the formats supported (OFX, QFX). 
+  the formats supported (OFX, QFX).
 </para>
 
 <para>
