@@ -318,8 +318,8 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
 
   viewFrames[idView]->setIcon(Icons::get(icon));
   viewBases[idView] = view;
-  connect(viewBases[idView], &KMyMoneyViewBase::selectByObject, this, &KMyMoneyView::slotSelectByObject);
-  connect(viewBases[idView], &KMyMoneyViewBase::selectByVariant, this, &KMyMoneyView::slotSelectByVariant);
+  connect(viewBases[idView], &KMyMoneyViewBase::requestCustomContextMenu, this, &KMyMoneyView::requestCustomContextMenu);
+  connect(viewBases[idView], &KMyMoneyViewBase::requestActionTrigger, this, &KMyMoneyView::requestActionTrigger);
   connect(viewBases[idView], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
   connect(this, &KMyMoneyView::settingsChanged, viewBases[idView], &KMyMoneyViewBase::slotSettingsChanged);
 
@@ -337,8 +337,8 @@ void KMyMoneyView::removeView(View idView)
   disconnect(viewBases[idView], &KMyMoneyViewBase::viewStateChanged, viewFrames[idView], &KPageWidgetItem::setEnabled);
   disconnect(viewBases[idView], &KMyMoneyViewBase::requestSelectionChange, this, &KMyMoneyView::requestSelectionChange);
 
-  disconnect(viewBases[idView], &KMyMoneyViewBase::selectByObject, this, &KMyMoneyView::slotSelectByObject);
-  disconnect(viewBases[idView], &KMyMoneyViewBase::selectByVariant, this, &KMyMoneyView::slotSelectByVariant);
+  disconnect(viewBases[idView], &KMyMoneyViewBase::requestCustomContextMenu, this, &KMyMoneyView::requestCustomContextMenu);
+  disconnect(viewBases[idView], &KMyMoneyViewBase::requestActionTrigger, this, &KMyMoneyView::requestActionTrigger);
   disconnect(viewBases[idView], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
   disconnect(this, &KMyMoneyView::settingsChanged, viewBases[idView], &KMyMoneyViewBase::slotSettingsChanged);
 

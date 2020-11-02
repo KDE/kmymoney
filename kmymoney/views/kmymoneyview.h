@@ -42,7 +42,7 @@ class ResourceInstance;
 #endif
 
 namespace eAccountsModel { enum class Column; }
-namespace eMenu { enum class Action; }
+namespace eMenu { enum class Action; enum class Menu; }
 namespace KMyMoneyPlugin { class OnlinePlugin; }
 namespace eDialogs { enum class ScheduleResultCode; }
 namespace eView { enum class Intent; }
@@ -318,6 +318,8 @@ Q_SIGNALS:
 
   // these signals request a change by the application
   void requestSelectionChange (const SelectedObjects& selection);
+  void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos) const;
+  void requestActionTrigger(eMenu::Action action);
 
   void settingsChanged();
 };

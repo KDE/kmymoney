@@ -308,12 +308,6 @@ public:
   void dumpActions() const;
 #endif
 
-  /**
-    * Popup the context menu with the respective @p containerName.
-    * Valid container names are defined in kmymoneyui.rc
-    */
-  void showContextMenu(const QString& containerName);
-
   void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
 
   QString filename() const;

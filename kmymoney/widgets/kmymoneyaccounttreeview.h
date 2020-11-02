@@ -34,13 +34,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class MyMoneyObject;
 class AccountsProxyModel;
 class KMyMoneyAccountTreeViewPrivate;
+class SelectedObjects;
 
-namespace eAccountsModel { enum class Column; }
-namespace eView { enum class Intent; }
-enum class View;
+namespace eMenu {
+  enum class Action;
+  enum class Menu;
+}
 
 /**
   * This view was created to handle the actions that could be performed with the accounts.
@@ -80,8 +81,9 @@ protected Q_SLOTS:
   void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) override;
 
 Q_SIGNALS:
-  void selectByObject(const MyMoneyObject&, eView::Intent);
-  void selectByVariant(const QVariantList&, eView::Intent);
+  void requestSelectionChange (const SelectedObjects& selections) const;
+  void requestCustomContextMenu(eMenu::Menu contextMenu, const QPoint& pos) const;
+  void requestActionTrigger(eMenu::Action action);
 
 private:
   const QScopedPointer<KMyMoneyAccountTreeViewPrivate> d_ptr;

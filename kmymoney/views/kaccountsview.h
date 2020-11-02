@@ -58,9 +58,7 @@ public:
 
 public Q_SLOTS:
   void slotNetWorthChanged(const MyMoneyMoney &netWorth, bool isApproximate);
-  void slotShowAccountMenu(const MyMoneyAccount& acc);
 
-  void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
   void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
   void slotSettingsChanged() override;

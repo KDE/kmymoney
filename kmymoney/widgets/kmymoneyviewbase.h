@@ -25,6 +25,7 @@
 // QT Includes
 
 #include <QWidget>
+class QPoint;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -38,6 +39,10 @@
 class MyMoneyObject;
 class KPageWidgetItem;
 class SelectedObjects;
+namespace eMenu {
+  enum class Action;
+  enum class Menu;
+}
 
 /**
   * This class is an abstract base class that all specific views
@@ -58,7 +63,9 @@ protected:
 
 Q_SIGNALS:
   // these signals are send to application logic
-  void requestSelectionChange (const SelectedObjects& selection) const;
+  void requestSelectionChange(const SelectedObjects& selection) const;
+  void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos) const;
+  void requestActionTrigger(eMenu::Action action);
 
   void viewStateChanged(bool enabled);
 
@@ -78,8 +85,8 @@ public Q_SLOTS:
 
   virtual void updateActions(const SelectedObjects& selections) { Q_UNUSED(selections) }
 
-  virtual void slotSelectByObject(const MyMoneyObject&, eView::Intent) {}
-  virtual void slotSelectByVariant(const QVariantList&, eView::Intent) {}
+  virtual void slotSelectByObject(const MyMoneyObject&, eView::Intent) Q_DECL_DEPRECATED {}
+  virtual void slotSelectByVariant(const QVariantList&, eView::Intent) Q_DECL_DEPRECATED {}
   virtual void slotSettingsChanged() {}
 
 protected:

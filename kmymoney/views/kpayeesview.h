@@ -80,8 +80,6 @@ public Q_SLOTS:
 
 Q_SIGNALS:
   void transactionSelected(const QString& accountId, const QString& transactionId);
-  void openContextMenu(const MyMoneyObject& obj);
-  void selectObjects(const QList<MyMoneyPayee>& payees);
 
 protected:
   void showEvent(QShowEvent* event) override;
@@ -121,14 +119,6 @@ private Q_SLOTS:
   void slotSelectTransaction();
 
   void slotChangeFilter(int index);
-
-  /**
-    * This slot receives the signal from the listview control that an item was right-clicked,
-    * If @p points to a real payee item, emits openContextMenu().
-    *
-    * @param p position of the pointer device
-    */
-  void slotShowPayeesMenu(const QPoint& p);
 
   void slotChooseDefaultAccount();
 

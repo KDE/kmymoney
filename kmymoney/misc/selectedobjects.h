@@ -39,6 +39,7 @@ class KMM_SELECTIONS_EXPORT SelectedObjects
 public:
     typedef enum {
         Account,
+        Institution,
         Payee,
         Transaction,
         Schedule,

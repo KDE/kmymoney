@@ -212,32 +212,6 @@ void KAccountsView::slotNetWorthChanged(const MyMoneyMoney &netWorth, bool isApp
                                        : i18n("Net Worth: %1", formattedValue));
 }
 
-void KAccountsView::slotShowAccountMenu(const MyMoneyAccount& acc)
-{
-  Q_UNUSED(acc);
-  pMenus[eMenu::Menu::Account]->exec(QCursor::pos());
-}
-
-void KAccountsView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
-{
-  SelectedObjects selections;
-  switch(intent) {
-    case eView::Intent::UpdateActions:
-      if (typeid(obj) == typeid(MyMoneyAccount)) {
-        selections.addSelection(SelectedObjects::Account, obj.id());
-        updateActions(selections);
-      }
-      break;
-
-    case eView::Intent::OpenContextMenu:
-      slotShowAccountMenu(static_cast<const MyMoneyAccount&>(obj));
-      break;
-
-    default:
-      break;
-  }
-}
-
 void KAccountsView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
 {
   Q_D(KAccountsView);

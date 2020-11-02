@@ -373,6 +373,18 @@ void KBudgetView::slotBudgetBalanceChanged(const MyMoneyMoney &balance)
                                               : i18nc("Profit/Loss", "Profit: %1", formattedValue));
 }
 
+void KBudgetView::slotAccountSelectionChanged(const SelectedObjects& selections)
+{
+  Q_UNUSED(selections)
+  Q_D(KBudgetView);
+  const auto idx = d->ui->m_accountTree->currentIndex();
+  if (idx.isValid()) {
+    const auto baseIdx = MyMoneyFile::baseModel()->mapToBaseSource(idx);
+    const auto account = MyMoneyFile::instance()->accountsModel()->itemByIndex(baseIdx);
+    slotSelectAccount(account, eView::Intent::None);
+  }
+}
+
 void KBudgetView::slotSelectBudget()
 {
   Q_D(KBudgetView);

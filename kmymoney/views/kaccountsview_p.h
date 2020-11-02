@@ -102,19 +102,10 @@ public:
     columnSelector->setModel(m_proxyModel);
     q->slotSettingsChanged();
 
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KAccountsView::selectByObject);
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KAccountsView::selectByVariant);
-    /// @todo port to new model code or cleanup
-#if 0
-    m_accountTree = &ui->m_accountTree;
-    m_proxyModel = ui->m_accountTree->init(View::Accounts);
-    q->connect(m_proxyModel, &AccountsProxyModel::unusedIncomeExpenseAccountHidden, q, &KAccountsView::slotUnusedIncomeExpenseAccountHidden);
-    q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KAccountsView::selectByObject);
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KAccountsView::selectByVariant);
-
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KAccountsView::refresh);
-#endif
+    // forward the widget requests
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestCustomContextMenu, q, &KAccountsView::requestCustomContextMenu);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestSelectionChange, q, &KAccountsView::requestSelectionChange);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestActionTrigger, q, &KAccountsView::requestActionTrigger);
   }
 
   void editLoan()

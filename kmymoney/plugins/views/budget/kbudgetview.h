@@ -100,6 +100,7 @@ private Q_SLOTS:
   void slotSelectBudget();
   void slotHideUnused(bool toggled);
 
+  void slotAccountSelectionChanged (const SelectedObjects& selections);
 };
 
 #endif

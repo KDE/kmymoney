@@ -215,43 +215,6 @@ void KCategoriesView::slotProfitLossChanged(const MyMoneyMoney &profit, bool isA
                                          : i18n("Profit: %1", formattedValue));
 }
 
-void KCategoriesView::slotShowCategoriesMenu(const MyMoneyAccount& acc)
-{
-  Q_UNUSED(acc);
-  pMenus[eMenu::Menu::Category]->exec(QCursor::pos());
-}
-
-void KCategoriesView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
-{
-  switch(intent) {
-    case eView::Intent::UpdateActions:
-      updateActions(obj);
-      break;
-
-    case eView::Intent::OpenContextMenu:
-      slotShowCategoriesMenu(static_cast<const MyMoneyAccount&>(obj));
-      break;
-
-    default:
-      break;
-  }
-}
-
-void KCategoriesView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
-{
-  /// @todo cleanup
-#if 0
-  switch (intent) {
-    case eView::Intent::UpdateProfit:
-      if (variant.count() == 1)
-        slotProfitLossChanged(variant.first().value<MyMoneyMoney>());
-      break;
-    default:
-      break;
-  }
-#endif
-}
-
 void KCategoriesView::slotNewCategory()
 {
   Q_D(KCategoriesView);

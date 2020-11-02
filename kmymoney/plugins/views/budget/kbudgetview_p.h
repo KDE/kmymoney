@@ -122,28 +122,17 @@ public:
 
     q->connect(m_budgetProxyModel, &BudgetViewProxyModel::balanceChanged, q, &KBudgetView::slotBudgetBalanceChanged);
 
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KBudgetView::slotSelectAccount);
-
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestSelectionChange, q, &KBudgetView::slotAccountSelectionChanged );
     q->connect(ui->m_budgetList->selectionModel(), &QItemSelectionModel::selectionChanged, q, &KBudgetView::slotSelectBudget);
-
     q->connect(ui->m_cbBudgetSubaccounts, &QAbstractButton::clicked, q, &KBudgetView::cb_includesSubaccounts_clicked);
 
-    // connect the buttons to the actions. Make sure the enabled state
-    // of the actions is reflected by the buttons
-    q->connect(ui->m_renameButton, &QAbstractButton::clicked, q, &KBudgetView::slotStartRename);
-    q->connect(ui->m_deleteButton, &QAbstractButton::clicked, q, &KBudgetView::slotDeleteBudget);
-
-    q->connect(ui->m_budgetValue, &KBudgetValues::valuesChanged, q, &KBudgetView::slotBudgetedAmountChanged);
-
-    q->connect(ui->m_newButton, &QAbstractButton::clicked, q, &KBudgetView::slotNewBudget);
+    /// @todo possibly create a QAction and use a toolbutton for these
     q->connect(ui->m_updateButton, &QAbstractButton::clicked, q, &KBudgetView::slotUpdateBudget);
     q->connect(ui->m_resetButton, &QAbstractButton::clicked, q, &KBudgetView::slotResetBudget);
-
     q->connect(ui->m_hideUnusedButton, &QAbstractButton::toggled, q, &KBudgetView::slotHideUnused);
 
+    q->connect(ui->m_budgetValue, &KBudgetValues::valuesChanged, q, &KBudgetView::slotBudgetedAmountChanged);
     q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_budgetProxyModel, &QSortFilterProxyModel::setFilterFixedString);
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KBudgetView::selectByObject);
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KBudgetView::selectByVariant);
 
     q->slotSettingsChanged();
 

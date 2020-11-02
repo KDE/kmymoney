@@ -73,10 +73,6 @@ public:
 
 public Q_SLOTS:
   void slotProfitLossChanged(const MyMoneyMoney &profit, bool isApproximate);
-  void slotShowCategoriesMenu(const MyMoneyAccount& acc);
-
-  void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
-  void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
   void slotSettingsChanged() override;
   void updateActions(const SelectedObjects& selections) override;

@@ -81,8 +81,10 @@ public:
     columnSelector->setModel(m_proxyModel);
     q->slotSettingsChanged();
 
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KInstitutionsView::selectByObject);
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KInstitutionsView::selectByVariant);
+    // forward the widget requests
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestCustomContextMenu, q, &KInstitutionsView::requestCustomContextMenu);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestSelectionChange, q, &KInstitutionsView::requestSelectionChange);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestActionTrigger, q, &KInstitutionsView::requestActionTrigger);
     /// @todo port to new model code
 #if 0
     Q_Q(KInstitutionsView);

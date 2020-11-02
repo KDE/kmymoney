@@ -145,6 +145,7 @@ target_link_libraries(kmm_base_widgets PUBLIC
 #  Qt5::Widgets
 #  Qt5::Xml
   Alkimia::alkimia
+  kmm_selections
   kmm_mymoney
   kmm_settings
   kmm_models

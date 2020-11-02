@@ -42,6 +42,11 @@ KMyMoneyViewBase::KMyMoneyViewBase(KMyMoneyViewBasePrivate &dd, QWidget *parent)
   : QWidget(parent)
   , d_ptr(&dd)
 {
+  // make sure we keep a copy of what we send out
+  connect(this, &KMyMoneyViewBase::requestSelectionChange, this, [&](const SelectedObjects& selections) {
+    Q_D(KMyMoneyViewBase);
+    d->m_selections = selections;
+  });
 }
 
 KMyMoneyViewBase::~KMyMoneyViewBase()
@@ -54,7 +59,7 @@ void KMyMoneyViewBase::viewChanged(KPageWidgetItem* current, KPageWidgetItem* be
   Q_D(KMyMoneyViewBase);
 
   // did I get selected?
-  if (current->widget() == this) {
+  if (current->widget() == static_cast<QWidget*>(this)) {
     // tell everyone what is selected here
     emit requestSelectionChange(d->m_selections);
   }

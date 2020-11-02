@@ -1113,9 +1113,23 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   layout->addWidget(d->m_myMoneyView, 10);
   connect(d->m_myMoneyView, &KMyMoneyView::statusMsg, this, &KMyMoneyApp::slotStatusMsg);
   connect(d->m_myMoneyView, &KMyMoneyView::statusProgress, this, &KMyMoneyApp::slotStatusProgressBar);
-
   // connect view requests
   connect(d->m_myMoneyView, &KMyMoneyView::requestSelectionChange, this, &KMyMoneyApp::slotSelectionChanged);
+
+  connect(d->m_myMoneyView, &KMyMoneyView::requestCustomContextMenu, this, [&](eMenu::Menu type, const QPoint& pos) {
+    if (pMenus.contains(type)) {
+      pMenus[type]->exec(pos);
+    } else
+      qDebug() << "Context menu for type" << static_cast<int>(type) << " not found";
+  });
+
+  connect(d->m_myMoneyView, &KMyMoneyView::requestActionTrigger, this, [&](eMenu::Action action) {
+    if (pActions.contains(action)) {
+      if (pActions[action]->isEnabled()) {
+        pActions[action]->trigger();
+      }
+    }
+  });
 
   // Initialize kactivities resource instance
 #ifdef ENABLE_ACTIVITIES
@@ -2672,15 +2686,6 @@ void KMyMoneyApp::Private::moveInvestmentTransaction(const QString& /*fromId*/,
   s.setAccountId(newStockAccountId);
   t.modifySplit(s);
   MyMoneyFile::instance()->modifyTransaction(t);
-}
-
-void KMyMoneyApp::showContextMenu(const QString& containerName)
-{
-  QWidget* w = factory()->container(containerName, this);
-  if (auto menu = dynamic_cast<QMenu*>(w))
-    menu->exec(QCursor::pos());
-  else
-    qDebug("menu '%s' not found: w = %p, menu = %p", qPrintable(containerName), w, menu);
 }
 
 void KMyMoneyApp::slotPrintView()

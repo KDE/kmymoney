@@ -78,10 +78,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   Q_D(KPayeesView);
   d->init();
 
-  connect(pActions[eMenu::Action::NewPayee],    &QAction::triggered, this, &KPayeesView::slotNewPayee);
-  connect(pActions[eMenu::Action::RenamePayee], &QAction::triggered, this, &KPayeesView::slotRenamePayee);
-  connect(pActions[eMenu::Action::DeletePayee], &QAction::triggered, this, &KPayeesView::slotDeletePayee);
-  connect(pActions[eMenu::Action::MergePayee],  &QAction::triggered, this, &KPayeesView::slotMergePayee);
+  connect(d->ui->m_payees, &QWidget::customContextMenuRequested, this, [&](QPoint pos) { emit requestCustomContextMenu(eMenu::Menu::Payee, pos); });
 }
 
 KPayeesView::~KPayeesView()
@@ -253,8 +250,6 @@ void KPayeesView::slotPayeeSelectionChanged(const QItemSelection& selected, cons
   if (!selectedPayees.isEmpty()) {
     d->m_payee = selectedPayees.at(0);
   }
-  /// @todo cleanup once the new selection code is completely in place
-  emit selectObjects(selectedPayees);
 
   // as of now we are updating only the last selected payee, and until
   // selection mode of the QListView has been changed to Extended, this
@@ -592,14 +587,6 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
   }
 #endif
   d->ensurePayeeVisible(payeeId);
-}
-
-void KPayeesView::slotShowPayeesMenu(const QPoint& /*p*/)
-{
-  Q_D(KPayeesView);
-  if (!d->ui->m_payees->selectionModel()->selectedIndexes().isEmpty()) {
-    pMenus[eMenu::Menu::Payee]->exec(QCursor::pos());
-  }
 }
 
 void KPayeesView::slotHelp()
