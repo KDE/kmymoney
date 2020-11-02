@@ -4,29 +4,17 @@
     <comment>KMyMoney File</comment>
     <comment xml:lang="ca">Fitxer del KMyMoney</comment>
     <comment xml:lang="ca@valencia">Fitxer del KMyMoney</comment>
-    <comment xml:lang="cs">Soubor KMyMoney</comment>
-    <comment xml:lang="de">KMyMoney-Datei</comment>
-    <comment xml:lang="en_GB">KMyMoney File</comment>
     <comment xml:lang="es">Archivo de KMyMoney</comment>
-    <comment xml:lang="et">KMyMoney fail</comment>
-    <comment xml:lang="eu">KMyMoney fitxategia</comment>
-    <comment xml:lang="fi">KMyMoney-tiedosto</comment>
-    <comment xml:lang="fr">Fichier KMyMoney</comment>
-    <comment xml:lang="gl">Ficheiro de KMyMoney</comment>
-    <comment xml:lang="it">File KMyMoney</comment>
-    <comment xml:lang="ko">KMyMoney 파일</comment>
+    <comment xml:lang="eu">KMyMoney-ko fitxategia</comment>
+    <comment xml:lang="fr">Fichier pour KMyMoney</comment>
+    <comment xml:lang="it">File di KMyMoney</comment>
+    <comment xml:lang="lt">KMyMoney failas</comment>
     <comment xml:lang="nl">KMyMoney-bestand</comment>
     <comment xml:lang="nn">KMyMoney-fil</comment>
-    <comment xml:lang="pl">Plik KMyMoney</comment>
     <comment xml:lang="pt">Ficheiro do KMyMoney</comment>
-    <comment xml:lang="pt_BR">Arquivo do KMyMoney</comment>
-    <comment xml:lang="ru">Файл KMyMoney</comment>
-    <comment xml:lang="sk">Súbor KMyMoney</comment>
     <comment xml:lang="sl">Datoteka KMyMoney</comment>
     <comment xml:lang="sv">KMyMoney-fil</comment>
     <comment xml:lang="uk">файл KMyMoney</comment>
-    <comment xml:lang="zh_CN">KMyMoney 文件</comment>
-    <comment xml:lang="zh_TW">KMyMoney 檔案</comment>
     <glob pattern="*.kmy"/>
     <glob pattern="*.kmt"/>
   </mime-type>
