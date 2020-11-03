@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KNewBankDlg</class>
- <widget class="QDialog" name="KNewBankDlg">
+ <class>KNewInstitutionDlg</class>
+ <widget class="QDialog" name="KNewInstitutionDlg">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -66,7 +66,11 @@
        </widget>
       </item>
       <item row="5" column="1" colspan="4">
-       <widget class="KLineEdit" name="sortCodeEdit"/>
+       <widget class="KLineEdit" name="bankCodeEdit">
+        <property name="toolTip">
+         <string extracomment="Tooltip for 'Bank Code' field. Include an example of the culture-specific term for 'Bank Code' here, if one is common (https://en.wikipedia.org/wiki/Bank_code).">A bank code assigned to Institution by a central bank, a bank supervisory body or a Bankers Association. Known as 'Routing Number' (US accounts) or a 'Sort Code' (UK accounts).</string>
+        </property>
+       </widget>
       </item>
       <item row="6" column="0">
        <widget class="QLabel" name="TextLabel7">
@@ -77,7 +81,7 @@
          </size>
         </property>
         <property name="text">
-         <string>BIC</string>
+         <string>SWIFT/BIC</string>
         </property>
         <property name="wordWrap">
          <bool>false</bool>
@@ -91,7 +95,11 @@
        <widget class="KLineEdit" name="urlEdit"/>
       </item>
       <item row="6" column="1" colspan="4">
-       <widget class="KLineEdit" name="bicEdit"/>
+       <widget class="KLineEdit" name="bicEdit">
+        <property name="toolTip">
+         <string extracomment="Tooltip for 'SWIFT/BIC' field">A Business Identifier Code, also known as SWIFT.</string>
+        </property>
+       </widget>
       </item>
       <item row="8" column="0" colspan="5">
        <widget class="KMessageWidget" name="messageWidget" native="true"/>
@@ -166,7 +174,7 @@
          </size>
         </property>
         <property name="text">
-         <string>Routing Number:</string>
+         <string>Bank Code:</string>
         </property>
         <property name="wordWrap">
          <bool>false</bool>
@@ -231,7 +239,7 @@
   <tabstop>streetEdit</tabstop>
   <tabstop>postcodeEdit</tabstop>
   <tabstop>telephoneEdit</tabstop>
-  <tabstop>sortCodeEdit</tabstop>
+  <tabstop>bankCodeEdit</tabstop>
   <tabstop>bicEdit</tabstop>
   <tabstop>urlEdit</tabstop>
   <tabstop>iconButton</tabstop>

@@ -90,7 +90,7 @@
 #include "dialogs/kcurrencyeditdlg.h"
 #include "dialogs/kequitypriceupdatedlg.h"
 #include "dialogs/kmymoneyfileinfodlg.h"
-#include "dialogs/knewbankdlg.h"
+#include "dialogs/knewinstitutiondlg.h"
 #include "dialogs/ksaveasquestion.h"
 #include "wizards/newinvestmentwizard/knewinvestmentwizard.h"
 #include "dialogs/knewaccountdlg.h"

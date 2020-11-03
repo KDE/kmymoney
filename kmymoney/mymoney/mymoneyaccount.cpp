@@ -619,7 +619,7 @@ QList< payeeIdentifier > MyMoneyAccount::payeeIdentifiers() const
   if (!number().isEmpty()) {
     payeeIdentifierTyped<payeeIdentifiers::nationalAccount> national(new payeeIdentifiers::nationalAccount);
     national->setAccountNumber(number());
-    national->setBankCode(file->institution(institutionId()).sortcode());
+    national->setBankCode(file->institution(institutionId()).bankcode());
     if (file->user().state().length() == 2)
       national->setCountry(file->user().state());
     national->setOwnerName(file->user().name());

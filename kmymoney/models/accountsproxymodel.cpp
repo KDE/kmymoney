@@ -234,7 +234,7 @@ bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
   if (source.isValid()) {
     const auto accountTypeValue = sourceModel()->data(source, eMyMoney::Model::Roles::AccountTypeRole);
     const bool isValidAccountEntry = accountTypeValue.isValid();
-    const bool isValidInstititonEntry = sourceModel()->data(source, eMyMoney::Model::Roles::InstitutionSortCodeRole).isValid();
+    const bool isValidInstititonEntry = sourceModel()->data(source, eMyMoney::Model::Roles::InstitutionBankCodeRole).isValid();
 
     if (isValidAccountEntry) {
       const auto accountType = static_cast<eMyMoney::Account::Type>(accountTypeValue.toInt());

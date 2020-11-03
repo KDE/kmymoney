@@ -233,7 +233,7 @@ struct AccountsModel::Private
         security = file->currency(account.currencyId());
         if (!security.id().isEmpty()) {
           price = file->price(account.currencyId(), baseCurrency.id());
-          if (price.isValid()) {
+          if (!price.isValid()) {
             price = MyMoneyPrice(account.currencyId(), baseCurrency.id(), QDate::currentDate(), MyMoneyMoney::ONE, "internal");
             approximate = true;
           }
@@ -345,32 +345,83 @@ int AccountsModel::columnCount(const QModelIndex& parent) const
 
 QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-  if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
-    switch(section) {
-      case Column::AccountName:
-        return i18n("Name");
-      case Column::Type:
-        return i18n("Type");
-      case Column::HasOnlineMapping:
-        return i18n("Online");
-      case Column::Tax:
-        return i18nc("Column heading for category in tax report", "Tax");
-      case Column::Vat:
-        return i18nc("Column heading for VAT category", "VAT");
-      case Column::CostCenter:
-        return i18nc("Column heading for Cost Center", "CC");
-      case Column::TotalBalance:
-        return i18n("Balance");
-      case Column::PostedValue:
-        return i18n("Posted Value");
-      case Column::TotalPostedValue:
-        return i18n("Total Value");
-      case Column::Number:
-        return i18n("Number");
-      case Column::SortCode:
-        return i18n("SortCode");
-      default:
-        return QVariant();
+  if(orientation == Qt::Horizontal) {
+    if (role == Qt::DisplayRole) {
+      switch (section) {
+        case Column::AccountName:
+          return i18n("Name");
+        case Column::Type:
+          return i18n("Type");
+        case Column::HasOnlineMapping:
+          return i18n("Online");
+        case Column::Tax:
+          return i18nc("Column heading for category in tax report", "Tax");
+        case Column::Vat:
+          return i18nc("Column heading for VAT category", "VAT");
+        case Column::CostCenter:
+          return i18nc("Column heading for Cost Center", "CC");
+        case Column::TotalBalance:
+          return i18n("Balance");
+        case Column::PostedValue:
+          return i18n("Posted Value");
+        case Column::TotalPostedValue:
+          return i18n("Total Value");
+        case Column::Number:
+          return i18n("Number");
+        case Column::Iban:
+          return i18n("IBAN");
+        case Column::BankCode:
+          return i18nc(
+              "Column heading for Bank Code. Use a generic form, do not translate using a culture-specific term, e.g. 'Routing Number' (en_US) or 'Sort Code' (en_GB)",
+              "Bank Code");
+        case Column::Bic:
+          return i18n("SWIFT/BIC");
+        default:
+          return QVariant();
+      }
+    }
+
+    if (role == Qt::ToolTipRole) {
+      switch (section) {
+        case Column::AccountName:
+          return i18nc("Tooltip for 'Name' column. Used in Account, Category and Institution context, so avoid being too specific",
+                       "Full name");
+        case Column::Type:
+          return i18nc("Toolip for a 'Type' column, used in both Account and Category context",
+                       "Type");
+        case Column::HasOnlineMapping:
+          return i18nc("Tooltip for a YES/NO column",
+                       "Whether account has online mapping set up");
+        case Column::Tax:
+          return i18nc("Tooltip for a YES/NO column",
+                       "Whether account is included in tax reports");
+        case Column::Vat:
+          return i18nc("Tooltip for a column showing a VAT % rate",
+                       "VAT percentage rate, if configured.");
+        case Column::CostCenter:
+          return i18nc("Tooltip for a YES/NO column",
+                       "Whether a cost center assignment is necessary when entering a transaction.");
+        case Column::TotalBalance:
+          return i18n("Balance");
+        case Column::PostedValue:
+          return i18n("Posted Value");
+        case Column::TotalPostedValue:
+          return i18n("Total Value");
+        case Column::Number:
+          return i18nc("Tooltip for 'Account Number' column",
+                       "Account or credit card number, as as assigned by the institution.");
+        case Column::Iban:
+          return i18nc("Tooltip for 'IBAN' column",
+                       "Account number in IBAN (International Bank Account Number) format");
+        case Column::BankCode:
+          return i18nc("Tooltip for 'Bank Code' column. Include an example of the culture-specific term for 'Bank Code' here, if one is common (https://en.wikipedia.org/wiki/Bank_code).",
+                       "A bank code assigned to Institution by a central bank, a bank supervisory body or a Bankers Association. Known as 'Routing Number' (US accounts) or a 'Sort Code' (UK accounts).");
+        case Column::Bic:
+          return i18nc("Tooltip for 'SWIFT/BIC' column",
+              "A Business Identifier Code, also known as SWIFT.");
+        default:
+          return QVariant();
+      }
     }
   }
   return QAbstractItemModel::headerData(section, orientation, role);
@@ -449,10 +500,13 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
           return d->adjustedBalance(account.totalPostedValue(), account).formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
         }
 
+        case Column::Bic:
+          return account.value("bic");
+
         case Column::Number:
           return account.number();
 
-        case Column::SortCode:
+        case Column::Iban:
           return account.value("iban");
 
         default:

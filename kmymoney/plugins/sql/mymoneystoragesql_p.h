@@ -956,7 +956,7 @@ public:
     QVariantList idList;
     QVariantList nameList;
     QVariantList managerList;
-    QVariantList routingCodeList;
+    QVariantList bankCodeList;
     QVariantList addressStreetList;
     QVariantList addressCityList;
     QVariantList addressZipcodeList;
@@ -967,7 +967,7 @@ public:
       idList << i.id();
       nameList << i.name();
       managerList << i.manager();
-      routingCodeList << i.sortcode();
+      bankCodeList << i.bankcode();
       addressStreetList << i.street();
       addressCityList << i.city();
       addressZipcodeList << i.postcode();
@@ -978,7 +978,7 @@ public:
     query.bindValue(":id", idList);
     query.bindValue(":name", nameList);
     query.bindValue(":manager", managerList);
-    query.bindValue(":routingCode", routingCodeList);
+    query.bindValue(":routingCode", bankCodeList);
     query.bindValue(":addressStreet", addressStreetList);
     query.bindValue(":addressCity", addressCityList);
     query.bindValue(":addressZipcode", addressZipcodeList);

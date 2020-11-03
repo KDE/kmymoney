@@ -689,10 +689,10 @@ int OFXImporter::ofxAccountCallback(struct OfxAccountData data, void * pv)
     s.m_strAccountNumber = QString::fromUtf8(data.account_id);
   }
   if (data.bank_id_valid) {
-    s.m_strRoutingNumber = QString::fromUtf8(data.bank_id);
+    s.m_strBankCode = QString::fromUtf8(data.bank_id);
   }
   if (data.broker_id_valid) {
-    s.m_strRoutingNumber = QString::fromUtf8(data.broker_id);
+    s.m_strBankCode = QString::fromUtf8(data.broker_id);
   }
   if (data.currency_valid) {
     s.m_strCurrency = QString::fromUtf8(data.currency);
@@ -719,8 +719,8 @@ int OFXImporter::ofxAccountCallback(struct OfxAccountData data, void * pv)
 
   // ask KMyMoney for an account id
   // but only if we have any information to ask for
-  if (!s.m_strAccountNumber.isEmpty() || !s.m_strRoutingNumber.isEmpty()) {
-    s.m_accountId = pofx->account(QStringLiteral("kmmofx-acc-ref"), QString("%1-%2").arg(s.m_strRoutingNumber, s.m_strAccountNumber)).id();
+  if (!s.m_strAccountNumber.isEmpty() || !s.m_strBankCode.isEmpty()) {
+    s.m_accountId = pofx->account(QStringLiteral("kmmofx-acc-ref"), QString("%1-%2").arg(s.m_strBankCode, s.m_strAccountNumber)).id();
   }
 
   // copy over the securities

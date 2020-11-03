@@ -38,7 +38,7 @@
 #include "mymoneymoney.h"
 #include "kmymoneysettings.h"
 #include "mymoneyexception.h"
-#include "knewbankdlg.h"
+#include "knewinstitutiondlg.h"
 #include "menuenums.h"
 #include "accountdelegate.h"
 
@@ -167,7 +167,7 @@ void KInstitutionsView::slotNewInstitution()
   Q_D(KInstitutionsView);
   MyMoneyInstitution institution;
 
-  QPointer<KNewBankDlg> dlg = new KNewBankDlg(institution);
+  QPointer<KNewInstitutionDlg> dlg = new KNewInstitutionDlg(institution);
   if (dlg->exec() == QDialog::Accepted && dlg != 0) {
     d->m_currentInstitution = dlg->institution();
 
@@ -200,7 +200,7 @@ void KInstitutionsView::slotEditInstitution()
     auto institution = file->institution(d->m_currentInstitution.id());
 
     // bankSuccess is not checked anymore because d->m_file->institution will throw anyway
-    QPointer<KNewBankDlg> dlg = new KNewBankDlg(institution);
+    QPointer<KNewInstitutionDlg> dlg = new KNewInstitutionDlg(institution);
     if (dlg->exec() == QDialog::Accepted && dlg != 0) {
       MyMoneyFileTransaction ft;
       try {

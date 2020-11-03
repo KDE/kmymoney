@@ -32,7 +32,7 @@ email                : jpwhiting@kde.org
 
 #include "ui_loanattributeswizardpage.h"
 
-#include "knewbankdlg.h"
+#include "knewinstitutiondlg.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 #include "mymoneyexception.h"
@@ -97,7 +97,7 @@ void LoanAttributesWizardPage::slotNewClicked()
 {
   MyMoneyInstitution institution;
 
-  QPointer<KNewBankDlg> dlg = new KNewBankDlg(institution, this);
+  QPointer<KNewInstitutionDlg> dlg = new KNewInstitutionDlg(institution, this);
   if (dlg->exec() && dlg != 0) {
     MyMoneyFileTransaction ft;
     try {

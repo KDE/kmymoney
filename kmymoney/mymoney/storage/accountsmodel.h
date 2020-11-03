@@ -53,8 +53,10 @@ public:
     PostedValue,
     TotalPostedValue,
     Number,
-    SortCode,
+    BankCode,
     Balance,
+    Bic,
+    Iban,
     // insert new columns above this line
     MaxColumns
   };

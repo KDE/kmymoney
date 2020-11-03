@@ -1208,7 +1208,7 @@ QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions(const QSt
   int idCol = t.fieldNumber("id");
   int nameCol = t.fieldNumber("name");
   int managerCol = t.fieldNumber("manager");
-  int routingCodeCol = t.fieldNumber("routingCode");
+  int bankCodeCol = t.fieldNumber("routingCode");
   int addressStreetCol = t.fieldNumber("addressStreet");
   int addressCityCol = t.fieldNumber("addressCity");
   int addressZipcodeCol = t.fieldNumber("addressZipcode");
@@ -1220,7 +1220,7 @@ QMap<QString, MyMoneyInstitution> MyMoneyStorageSql::fetchInstitutions(const QSt
     QString iid = GETSTRING(idCol);
     inst.setName(GETSTRING(nameCol));
     inst.setManager(GETSTRING(managerCol));
-    inst.setSortcode(GETSTRING(routingCodeCol));
+    inst.setBankCode(GETSTRING(bankCodeCol));
     inst.setStreet(GETSTRING(addressStreetCol));
     inst.setCity(GETSTRING(addressCityCol));
     inst.setPostcode(GETSTRING(addressZipcodeCol));

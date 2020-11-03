@@ -41,7 +41,7 @@
 #include "kaccounttypepage.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
-#include "knewbankdlg.h"
+#include "knewinstitutiondlg.h"
 #include "wizardpage.h"
 
 namespace NewAccountWizard
@@ -86,7 +86,7 @@ namespace NewAccountWizard
     Q_D(InstitutionPage);
     MyMoneyInstitution institution;
 
-    KNewBankDlg::newInstitution(institution);
+    KNewInstitutionDlg::newInstitution(institution);
 
     if (!institution.id().isEmpty()) {
         QList<MyMoneyInstitution>::const_iterator it_l;
