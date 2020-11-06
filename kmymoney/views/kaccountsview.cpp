@@ -134,29 +134,18 @@ void KAccountsView::refresh()
   d->m_proxyModel->setHideUnusedIncomeExpenseAccounts(KMyMoneySettings::hideUnusedCategory());
 }
 
-void KAccountsView::showEvent(QShowEvent * event)
-{
-  /// @todo port to new model code or cleanup
-#if 0
-  Q_D(KAccountsView);
-  if (!d->m_proxyModel)
-    d->init();
-
-  emit customActionRequested(View::Accounts, eView::Action::AboutToShow);
-
-  if (d->m_needsRefresh)
-    refresh();
-
-#endif
-  // don't forget base class implementation
-  QWidget::showEvent(event);
-}
-
 void KAccountsView::updateActions(const SelectedObjects& selections)
 {
   Q_D(KAccountsView);
 
   const auto file = MyMoneyFile::instance();
+
+  // remember a possibly selected institution which we use
+  // for new accounts
+  d->m_selectedInstitution.clear();
+  if (!selections.selection(SelectedObjects::Institution).isEmpty()) {
+    d->m_selectedInstitution = selections.selection(SelectedObjects::Institution).at(0);
+  }
 
   // check if there is anything todo and quit if not
   if (selections.selection(SelectedObjects::Account).count() < 1
@@ -165,7 +154,7 @@ void KAccountsView::updateActions(const SelectedObjects& selections)
   }
 
   const QVector<eMenu::Action> actionsToBeDisabled {
-    eMenu::Action::NewAccount, eMenu::Action::EditAccount, eMenu::Action::DeleteAccount,
+    eMenu::Action::EditAccount, eMenu::Action::DeleteAccount,
     eMenu::Action::CloseAccount, eMenu::Action::ReopenAccount,
     eMenu::Action::ChartAccountBalance,
     eMenu::Action::UnmapOnlineAccount, eMenu::Action::MapOnlineAccount,
@@ -235,8 +224,10 @@ void KAccountsView::slotSelectByVariant(const QVariantList& variant, eView::Inte
 
 void KAccountsView::slotNewAccount()
 {
+  Q_D(KAccountsView);
   MyMoneyAccount account;
   account.setOpeningDate(KMyMoneySettings::firstFiscalDate());
+  account.setInstitutionId(d->m_selectedInstitution);
   NewAccountWizard::Wizard::newAccount(account);
 }
 
@@ -253,7 +244,6 @@ void KAccountsView::slotEditAccount()
       d->editAccount();
       break;
   }
-  emit selectByObject(d->m_currentAccount, eView::Intent::None);
 }
 
 void KAccountsView::slotDeleteAccount()
@@ -290,7 +280,6 @@ void KAccountsView::slotDeleteAccount()
   try {
     file->removeAccount(d->m_currentAccount);
     d->m_currentAccount.clearId();
-    emit selectByObject(MyMoneyAccount(), eView::Intent::None);
     ft.commit();
   } catch (const MyMoneyException &e) {
     KMessageBox::error(this, i18n("Unable to delete account '%1'. Cause: %2", selectedAccountName, QString::fromLatin1(e.what())));
@@ -304,7 +293,6 @@ void KAccountsView::slotCloseAccount()
   try {
     d->m_currentAccount.setClosed(true);
     MyMoneyFile::instance()->modifyAccount(d->m_currentAccount);
-    emit selectByObject(d->m_currentAccount, eView::Intent::None);
     ft.commit();
     if (KMyMoneySettings::hideClosedAccounts())
       KMessageBox::information(this, i18n("<qt>You have closed this account. It remains in the system because you have transactions which still refer to it, but it is not shown in the views. You can make it visible again by going to the View menu and selecting <b>Show all accounts</b> or by deselecting the <b>Do not show closed accounts</b> setting.</qt>"), i18n("Information"), "CloseAccountInfo");
@@ -324,7 +312,6 @@ void KAccountsView::slotReopenAccount()
       file->modifyAccount(acc);
       acc = file->account(acc.parentAccountId());
     }
-    emit selectByObject(d->m_currentAccount, eView::Intent::None);
     ft.commit();
   } catch (const MyMoneyException &) {
   }

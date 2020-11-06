@@ -190,6 +190,7 @@ void KMyMoneyAccountTreeView::selectionChanged(const QItemSelection &selected, c
       const auto account = MyMoneyFile::instance()->accountsModel()->itemById(objId);
       if (!account.id().isEmpty()) {
         selections.addSelection(SelectedObjects::Account, account.id());
+        selections.addSelection(SelectedObjects::Institution, account.institutionId());
       } else {
 
         const auto institution = MyMoneyFile::instance()->institutionsModel()->itemById(objId);

@@ -64,9 +64,6 @@ public Q_SLOTS:
   void slotSettingsChanged() override;
   void updateActions(const SelectedObjects& selections) override;
 
-protected:
-  void showEvent(QShowEvent * event) override;
-
 private:
   Q_DECLARE_PRIVATE(KAccountsView)
 

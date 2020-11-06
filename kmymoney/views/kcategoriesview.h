@@ -68,17 +68,12 @@ public:
   ~KCategoriesView();
 
   void executeCustomAction(eView::Action action) override;
-  void refresh();
-  void updateActions(const MyMoneyObject& obj);
 
 public Q_SLOTS:
   void slotProfitLossChanged(const MyMoneyMoney &profit, bool isApproximate);
 
   void slotSettingsChanged() override;
   void updateActions(const SelectedObjects& selections) override;
-
-protected:
-  void showEvent(QShowEvent * event) override;
 
 protected Q_SLOTS:
   void slotUnusedIncomeExpenseAccountHidden();

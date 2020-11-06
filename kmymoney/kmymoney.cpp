@@ -1981,19 +1981,19 @@ void KMyMoneyApp::slotShowTransactionDetail()
 void KMyMoneyApp::slotHideReconciledTransactions()
 {
   KMyMoneySettings::setHideReconciledTransactions(pActions[Action::ViewHideReconciled]->isChecked());
-  d->m_myMoneyView->slotRefreshViews();
+  d->m_myMoneyView->slotSettingsChanged();
 }
 
 void KMyMoneyApp::slotHideUnusedCategories()
 {
   KMyMoneySettings::setHideUnusedCategory(pActions[Action::ViewHideCategories]->isChecked());
-  d->m_myMoneyView->slotRefreshViews();
+  d->m_myMoneyView->slotSettingsChanged();
 }
 
 void KMyMoneyApp::slotShowAllAccounts()
 {
   KMyMoneySettings::setShowAllAccounts(pActions[Action::ViewShowAll]->isChecked());
-  d->m_myMoneyView->slotRefreshViews();
+  d->m_myMoneyView->slotSettingsChanged();
 }
 
 #ifdef KMM_DEBUG
@@ -2251,7 +2251,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
   // update the holiday region configuration
   setHolidayRegion(KMyMoneySettings::holidayRegion());
 
-  d->m_myMoneyView->slotRefreshViews();
+  d->m_myMoneyView->slotSettingsChanged();
 
   // re-read autosave configuration
   d->m_autoSaveEnabled = KMyMoneySettings::autoSaveFile();

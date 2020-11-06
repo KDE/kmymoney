@@ -83,8 +83,13 @@ bool InstitutionsProxyModel::lessThan(const QModelIndex &left, const QModelIndex
   */
 bool InstitutionsProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
-  const auto index = sourceModel()->index(source_row, AccountsModel::Column::AccountName, source_parent);
-  return true;
+  if (source_parent.isValid()) {
+    // if the entry has a valid parent it is an account
+    const auto idx = sourceModel()->index(source_row, AccountsModel::Column::AccountName, source_parent);
+    return AccountsProxyModel::filterAcceptsRow(source_row, source_parent);
+  } else {
+    return filterAcceptsRowOrChildRows(source_row, source_parent);
+  }
 }
 
 /**

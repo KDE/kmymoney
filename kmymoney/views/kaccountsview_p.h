@@ -394,16 +394,16 @@ public:
       case eMyMoney::Account::Type::Liability:
       case eMyMoney::Account::Type::Equity:
       {
-        pActions[eMenu::Action::EditAccount]->setEnabled(true);
+        auto isClosed = acc.isClosed() ? true : false;
+        pActions[eMenu::Action::EditAccount]->setEnabled(!isClosed);
         pActions[eMenu::Action::DeleteAccount]->setEnabled(!file->isReferenced(acc));
 
-        auto b = acc.isClosed() ? true : false;
-        pActions[eMenu::Action::ReopenAccount]->setEnabled(b);
-        pActions[eMenu::Action::CloseAccount]->setEnabled(!b);
+        pActions[eMenu::Action::ReopenAccount]->setEnabled(isClosed);
+        pActions[eMenu::Action::CloseAccount]->setEnabled(!isClosed);
 
-        if (!acc.isClosed()) {
-          b = (canCloseAccount(acc) == KAccountsViewPrivate::AccountCanClose) ? true : false;
-          pActions[eMenu::Action::CloseAccount]->setEnabled(b);
+        if (!isClosed) {
+          const auto canClose = (canCloseAccount(acc) == KAccountsViewPrivate::AccountCanClose) ? true : false;
+          pActions[eMenu::Action::CloseAccount]->setEnabled(canClose);
           hintCloseAccountAction(acc, pActions[eMenu::Action::CloseAccount]);
         }
 
@@ -440,6 +440,7 @@ public:
   Ui::KAccountsView   *ui;
   bool                m_haveUnusedCategories;
   MyMoneyAccount      m_currentAccount;
+  QString             m_selectedInstitution;
   QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* m_onlinePlugins;
   AccountsProxyModel* m_proxyModel;
 };

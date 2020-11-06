@@ -17,14 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "kinstitutionsview_p.h"
-
-#include <typeinfo>
+#include "kinstitutionsview.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
-
-#include <QMenu>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -34,15 +30,86 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ui_kinstitutionsview.h"
+#include "kmymoneyviewbase_p.h"
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "kmymoneysettings.h"
 #include "mymoneyexception.h"
+#include "mymoneyinstitution.h"
 #include "knewinstitutiondlg.h"
 #include "menuenums.h"
 #include "accountdelegate.h"
+#include "institutionsmodel.h"
+#include "accountsproxymodel.h"
+#include "institutionsproxymodel.h"
+#include "icons.h"
+#include "columnselector.h"
+#include "kmymoneyaccounttreeview.h"
 
 using namespace Icons;
+
+
+class KInstitutionsViewPrivate : public KMyMoneyViewBasePrivate
+{
+  Q_DECLARE_PUBLIC(KInstitutionsView)
+
+public:
+  explicit KInstitutionsViewPrivate(KInstitutionsView *qq)
+  : KMyMoneyViewBasePrivate(qq)
+  , ui(new Ui::KInstitutionsView)
+  , m_proxyModel(nullptr)
+  {
+  }
+
+  ~KInstitutionsViewPrivate()
+  {
+    delete ui;
+  }
+
+  void init()
+  {
+    Q_Q(KInstitutionsView);
+    ui->setupUi(q);
+
+    // setup icons for collapse and expand button
+    ui->m_collapseButton->setIcon(Icons::get(Icon::ListCollapse));
+    ui->m_expandButton->setIcon(Icons::get(Icon::ListExpand));
+
+    ui->m_accountTree->setProxyModel(new InstitutionsProxyModel);
+    m_proxyModel = ui->m_accountTree->proxyModel();
+    q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
+
+    auto columnSelector = new ColumnSelector(ui->m_accountTree, q->metaObject()->className());
+    columnSelector->setAlwaysVisible(QVector<int>({ AccountsModel::Column::AccountName }));
+    columnSelector->setAlwaysHidden(QVector<int>({ AccountsModel::Column::Balance,
+      AccountsModel::Column::PostedValue,
+      AccountsModel::Column::Type,
+      AccountsModel::Column::CostCenter,
+      AccountsModel::Column::Tax,
+      AccountsModel::Column::Vat,
+      AccountsModel::Column::Iban,
+      AccountsModel::Column::Number,
+      AccountsModel::Column::HasOnlineMapping }));
+
+    ui->m_accountTree->setModel(MyMoneyFile::instance()->institutionsModel());
+    m_proxyModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquity());
+
+    columnSelector->setModel(m_proxyModel);
+    q->slotSettingsChanged();
+
+    // forward the widget requests
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestCustomContextMenu, q, &KInstitutionsView::requestCustomContextMenu);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestSelectionChange, q, &KInstitutionsView::requestSelectionChange);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestActionTrigger, q, &KInstitutionsView::requestActionTrigger);
+  }
+
+  Ui::KInstitutionsView   *ui;
+  MyMoneyInstitution      m_currentInstitution;
+  AccountsProxyModel*     m_proxyModel;
+};
+
+
 
 KInstitutionsView::KInstitutionsView(QWidget *parent) :
     KMyMoneyViewBase(*new KInstitutionsViewPrivate(this), parent)
@@ -77,10 +144,6 @@ void KInstitutionsView::slotSettingsChanged()
 void KInstitutionsView::executeCustomAction(eView::Action action)
 {
   switch(action) {
-    case eView::Action::Refresh:
-      refresh();
-      break;
-
     case eView::Action::SetDefaultFocus:
       {
         Q_D(KInstitutionsView);
@@ -97,56 +160,29 @@ void KInstitutionsView::executeCustomAction(eView::Action action)
   }
 }
 
-void KInstitutionsView::refresh()
-{
-  Q_D(KInstitutionsView);
-  if (!isVisible()) {
-    d->m_needsRefresh = true;
-    return;
-  }
-  d->m_needsRefresh = false;
-  d->m_proxyModel->invalidate();
-
-/// @todo port to new model code or cleanup
-#if 0
-  d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
-  d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
-#endif
-}
-
-void KInstitutionsView::showEvent(QShowEvent * event)
-{
-  /// @todo port to new model code or cleanup
-#if 0
-  Q_D(KInstitutionsView);
-  if (!d->m_proxyModel)
-    d->init();
-
-  emit customActionRequested(View::Institutions, eView::Action::AboutToShow);
-
-  if (d->m_needsRefresh)
-    refresh();
-#endif
-
-  // don't forget base class implementation
-  QWidget::showEvent(event);
-}
-
 void KInstitutionsView::updateActions(const SelectedObjects& selections)
 {
-  /// @todo updateActions
-}
-
-void KInstitutionsView::updateActions(const MyMoneyObject& obj)
-{
   Q_D(KInstitutionsView);
-  if (typeid(obj) != typeid(MyMoneyInstitution) ||
-      (obj.id().isEmpty() && d->m_currentInstitution.id().isEmpty())) // do not disable actions that were already disabled
-    return;
-
-  const auto& inst = static_cast<const MyMoneyInstitution&>(obj);
 
   pActions[eMenu::Action::NewInstitution]->setEnabled(true);
+  pActions[eMenu::Action::EditInstitution]->setEnabled(false);
+  pActions[eMenu::Action::DeleteInstitution]->setEnabled(false);
+
+  // check if there is anything todo and quit if not
+  if (selections.selection(SelectedObjects::Institution).count() < 1
+    && d->m_currentInstitution.id().isEmpty() ) {
+    return;
+  }
+
+  const auto ids = selections.selection(SelectedObjects::Institution);
+  if (ids.isEmpty()) {
+    d->m_currentInstitution = MyMoneyInstitution();
+    return;
+  }
+
+  const auto file = MyMoneyFile::instance();
+  const auto inst = file->institutionsModel()->itemById(ids.at(0));
+
   auto b = inst.id().isEmpty() ? false : true;
   pActions[eMenu::Action::EditInstitution]->setEnabled(b);
   pActions[eMenu::Action::DeleteInstitution]->setEnabled(b && !MyMoneyFile::instance()->isReferenced(inst));
@@ -206,7 +242,6 @@ void KInstitutionsView::slotEditInstitution()
       try {
         file->modifyInstitution(dlg->institution());
         ft.commit();
-        emit selectByObject(dlg->institution(), eView::Intent::None);
       } catch (const MyMoneyException &e) {
         KMessageBox::information(this, i18n("Unable to store institution: %1", QString::fromLatin1(e.what())));
       }
@@ -216,42 +251,6 @@ void KInstitutionsView::slotEditInstitution()
   } catch (const MyMoneyException &e) {
     KMessageBox::information(this, i18n("Unable to edit institution: %1", QString::fromLatin1(e.what())));
   }
-}
-
-void KInstitutionsView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
-{
-  switch(intent) {
-    case eView::Intent::UpdateActions:
-      updateActions(obj);
-      break;
-
-    case eView::Intent::OpenContextMenu:
-      if (MyMoneyFile::instance()->accountsModel()->indexById(obj.id()).isValid()) {
-        pMenus[eMenu::Menu::Account]->exec(QCursor::pos());
-
-      } else if (MyMoneyFile::instance()->institutionsModel()->indexById(obj.id()).isValid()) {
-        pMenus[eMenu::Menu::Institution]->exec(QCursor::pos());
-      }
-      break;
-
-    default:
-      break;
-  }
-}
-
-void KInstitutionsView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
-{
-  /// @todo cleanup
-#if 0
-  switch (intent) {
-    case eView::Intent::UpdateNetWorth:
-      if (variant.count() == 1)
-        slotNetWorthChanged(variant.first().value<MyMoneyMoney>());
-      break;
-    default:
-      break;
-  }
-#endif
 }
 
 void KInstitutionsView::slotDeleteInstitution()
@@ -266,7 +265,6 @@ void KInstitutionsView::slotDeleteInstitution()
 
     try {
       file->removeInstitution(institution);
-      emit selectByObject(MyMoneyInstitution(), eView::Intent::None);
       ft.commit();
     } catch (const MyMoneyException &e) {
       KMessageBox::information(this, i18n("Unable to delete institution: %1", QString::fromLatin1(e.what())));
