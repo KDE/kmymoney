@@ -209,6 +209,12 @@
   <provides>
     <binary>kmymoney</binary>
   </provides>
+  <custom>
+    <value key="KDE::forum">69</value>
+    <value key="KDE::mailinglist">kmymoney@kde.org</value>
+    <value key="KDE::mailinglist-devel">kmymoney-devel@kde.org</value>
+    <value key="KDE::irc">#kmymoney</value>
+  </custom>
   <releases>
     <!-- Note: website infrastructure uses the appstream file from the master branch
                to determine the last release, so this entry must always reflect the

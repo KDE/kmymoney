@@ -36,7 +36,7 @@ namespace eAccountsModel {
         PostedValue,
         TotalValue,
         AccountNumber,
-        AccountSortCode,
+        AccountBankCode,
         LastColumnMarker
     };
 

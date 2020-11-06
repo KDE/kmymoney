@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "knewbankdlg.h"
+#include "knewinstitutiondlg.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -41,7 +41,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_knewbankdlg.h"
+#include "ui_knewinstitutiondlg.h"
 
 #include "mymoneyinstitution.h"
 #include "kmymoneyutils.h"
@@ -49,23 +49,23 @@
 
 #include <errno.h>
 
-class KNewBankDlgPrivate
+class KNewInstitutionDlgPrivate
 {
-  Q_DISABLE_COPY(KNewBankDlgPrivate)
+  Q_DISABLE_COPY(KNewInstitutionDlgPrivate)
 
 public:
-  KNewBankDlgPrivate() :
-    ui(new Ui::KNewBankDlg)
+  KNewInstitutionDlgPrivate() :
+    ui(new Ui::KNewInstitutionDlg)
   {
     m_iconLoadTimer.setSingleShot(true);
   }
 
-  ~KNewBankDlgPrivate()
+  ~KNewInstitutionDlgPrivate()
   {
     delete ui;
   }
 
-  Ui::KNewBankDlg*                  ui;
+  Ui::KNewInstitutionDlg*           ui;
   MyMoneyInstitution                m_institution;
   QTimer                            m_iconLoadTimer;
   QPointer<KIO::FavIconRequestJob>  m_favIconJob;
@@ -74,11 +74,11 @@ public:
   QUrl                              m_url;
 };
 
-KNewBankDlg::KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent) :
+KNewInstitutionDlg::KNewInstitutionDlg(MyMoneyInstitution& institution, QWidget *parent) :
   QDialog(parent),
-  d_ptr(new KNewBankDlgPrivate)
+  d_ptr(new KNewInstitutionDlgPrivate)
 {
-  Q_D(KNewBankDlg);
+  Q_D(KNewInstitutionDlg);
   d->ui->setupUi(this);
   d->m_institution = institution;
   setModal(true);
@@ -89,7 +89,7 @@ KNewBankDlg::KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent) :
   d->ui->streetEdit->setText(institution.street());
   d->ui->postcodeEdit->setText(institution.postcode());
   d->ui->telephoneEdit->setText(institution.telephone());
-  d->ui->sortCodeEdit->setText(institution.sortcode());
+  d->ui->bankCodeEdit->setText(institution.bankcode());
   d->ui->bicEdit->setText(institution.value(QStringLiteral("bic")));
   d->ui->urlEdit->setText(institution.value(QStringLiteral("url")));
 
@@ -103,11 +103,11 @@ KNewBankDlg::KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent) :
 
   d->ui->messageWidget->hide();
 
-  connect(d->ui->buttonBox, &QDialogButtonBox::accepted, this, &KNewBankDlg::okClicked);
+  connect(d->ui->buttonBox, &QDialogButtonBox::accepted, this, &KNewInstitutionDlg::okClicked);
   connect(d->ui->buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
-  connect(d->ui->nameEdit, &QLineEdit::textChanged, this, &KNewBankDlg::institutionNameChanged);
-  connect(d->ui->urlEdit, &QLineEdit::textChanged, this, &KNewBankDlg::slotUrlChanged);
-  connect(&d->m_iconLoadTimer, &QTimer::timeout, this, &KNewBankDlg::slotLoadIcon);
+  connect(d->ui->nameEdit, &QLineEdit::textChanged, this, &KNewInstitutionDlg::institutionNameChanged);
+  connect(d->ui->urlEdit, &QLineEdit::textChanged, this, &KNewInstitutionDlg::slotUrlChanged);
+  connect(&d->m_iconLoadTimer, &QTimer::timeout, this, &KNewInstitutionDlg::slotLoadIcon);
   connect(d->ui->iconButton, &QToolButton::pressed, this,
           [=] {
             QUrl url;
@@ -123,21 +123,21 @@ KNewBankDlg::KNewBankDlg(MyMoneyInstitution& institution, QWidget *parent) :
   requiredFields->add(d->ui->nameEdit);
 }
 
-void KNewBankDlg::institutionNameChanged(const QString &_text)
+void KNewInstitutionDlg::institutionNameChanged(const QString &_text)
 {
-  Q_D(KNewBankDlg);
+  Q_D(KNewInstitutionDlg);
   d->ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(!_text.isEmpty());
 }
 
-KNewBankDlg::~KNewBankDlg()
+KNewInstitutionDlg::~KNewInstitutionDlg()
 {
-  Q_D(KNewBankDlg);
+  Q_D(KNewInstitutionDlg);
   delete d;
 }
 
-void KNewBankDlg::okClicked()
+void KNewInstitutionDlg::okClicked()
 {
-  Q_D(KNewBankDlg);
+  Q_D(KNewInstitutionDlg);
   if (d->ui->nameEdit->text().isEmpty()) {
     KMessageBox::information(this, i18n("The institution name field is empty.  Please enter the name."), i18n("Adding New Institution"));
     d->ui->nameEdit->setFocus();
@@ -149,7 +149,7 @@ void KNewBankDlg::okClicked()
   d->m_institution.setStreet(d->ui->streetEdit->text());
   d->m_institution.setPostcode(d->ui->postcodeEdit->text());
   d->m_institution.setTelephone(d->ui->telephoneEdit->text());
-  d->m_institution.setSortcode(d->ui->sortCodeEdit->text());
+  d->m_institution.setBankCode(d->ui->bankCodeEdit->text());
   d->m_institution.setValue(QStringLiteral("bic"), d->ui->bicEdit->text());
   d->m_institution.setValue(QStringLiteral("url"), d->ui->urlEdit->text());
   d->m_institution.deletePair(QStringLiteral("icon"));
@@ -161,16 +161,16 @@ void KNewBankDlg::okClicked()
   accept();
 }
 
-const MyMoneyInstitution& KNewBankDlg::institution()
+const MyMoneyInstitution& KNewInstitutionDlg::institution()
 {
-  Q_D(KNewBankDlg);
+  Q_D(KNewInstitutionDlg);
   return d->m_institution;
 }
 
-void KNewBankDlg::newInstitution(MyMoneyInstitution& institution)
+void KNewInstitutionDlg::newInstitution(MyMoneyInstitution& institution)
 {
   institution.clearId();
-  QPointer<KNewBankDlg> dlg = new KNewBankDlg(institution);
+  QPointer<KNewInstitutionDlg> dlg = new KNewInstitutionDlg(institution);
   if (dlg->exec() == QDialog::Accepted && dlg != 0) {
     institution = dlg->institution();
     KMyMoneyUtils::newInstitution(institution);
@@ -178,9 +178,9 @@ void KNewBankDlg::newInstitution(MyMoneyInstitution& institution)
   delete dlg;
 }
 
-void KNewBankDlg::slotUrlChanged(const QString& newUrl)
+void KNewInstitutionDlg::slotUrlChanged(const QString& newUrl)
 {
-  Q_D(KNewBankDlg);
+  Q_D(KNewInstitutionDlg);
 
   // remove a possible leading protocol since we only provide https for now
   QRegularExpression protocol(QStringLiteral("^[a-zA-Z]+://(?<url>.*)"), QRegularExpression::CaseInsensitiveOption);
@@ -194,9 +194,9 @@ void KNewBankDlg::slotUrlChanged(const QString& newUrl)
   d->m_iconLoadTimer.start(200);
 }
 
-void KNewBankDlg::slotLoadIcon()
+void KNewInstitutionDlg::slotLoadIcon()
 {
-  Q_D(KNewBankDlg);
+  Q_D(KNewInstitutionDlg);
 
   // if currently a check is running, retry later
   if (d->m_favIconJob) {
@@ -214,24 +214,24 @@ void KNewBankDlg::slotLoadIcon()
     d->m_url = QUrl(QString::fromLatin1("https://%1").arg(path));
     KIO::Scheduler::checkSlaveOnHold(true);
     d->m_favIconJob = new KIO::FavIconRequestJob(d->m_url);
-    connect(d->m_favIconJob, &KIO::FavIconRequestJob::result, this, &KNewBankDlg::slotIconLoaded);
+    connect(d->m_favIconJob, &KIO::FavIconRequestJob::result, this, &KNewInstitutionDlg::slotIconLoaded);
     // we force to end the job after 1 second to avoid blocking this mechanism in case the thing fails
-    QTimer::singleShot(1000, this, &KNewBankDlg::killIconLoad);
+    QTimer::singleShot(1000, this, &KNewInstitutionDlg::killIconLoad);
   }
 }
 
-void KNewBankDlg::killIconLoad()
+void KNewInstitutionDlg::killIconLoad()
 {
-  Q_D(KNewBankDlg);
+  Q_D(KNewInstitutionDlg);
   if (d->m_favIconJob) {
     d->m_favIconJob->kill();
     d->m_favIconJob->deleteLater();
   }
 }
 
-void KNewBankDlg::slotIconLoaded(KJob* job)
+void KNewInstitutionDlg::slotIconLoaded(KJob* job)
 {
-  Q_D(KNewBankDlg);
+  Q_D(KNewInstitutionDlg);
 
   switch(job->error()) {
     case ECONNREFUSED:

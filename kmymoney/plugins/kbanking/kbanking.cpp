@@ -450,9 +450,9 @@ void KBanking::setupAccountReference(const MyMoneyAccount& acc, AB_ACCOUNT_SPEC*
 
   if (ab_acc) {
     QString accountNumber = stripLeadingZeroes(AB_AccountSpec_GetAccountNumber(ab_acc));
-    QString routingNumber = stripLeadingZeroes(AB_AccountSpec_GetBankCode(ab_acc));
+    QString bankCode = stripLeadingZeroes(AB_AccountSpec_GetBankCode(ab_acc));
 
-    QString val = QString("%1-%2-%3").arg(routingNumber, accountNumber).arg(AB_AccountSpec_GetType(ab_acc));
+    QString val = QString("%1-%2-%3").arg(bankCode, accountNumber).arg(AB_AccountSpec_GetType(ab_acc));
 
     if (val != acc.onlineBankingSettings().value("kbanking-acc-ref")) {
       kvp.clear();
@@ -1035,13 +1035,13 @@ bool KBankingExt::askMapAccount(const MyMoneyAccount& acc)
 
   QString bankId;
   QString accountId;
-  // extract some information about the bank. if we have a sortcode
+  // extract some information about the bank. if we have a bank code
   // (BLZ) we display it, otherwise the name is enough.
   try {
     const MyMoneyInstitution &bank = file->institution(acc.institutionId());
     bankId = bank.name();
-    if (!bank.sortcode().isEmpty())
-      bankId = bank.sortcode();
+    if (!bank.bankcode().isEmpty())
+      bankId = bank.bankcode();
   } catch (const MyMoneyException &e) {
     // no bank assigned, we just leave the field empty
   }
@@ -1441,12 +1441,12 @@ bool KBankingExt::importAccountInfo(AB_IMEXPORTER_CONTEXT *ctx,
 
   p = AB_ImExporterAccountInfo_GetBankCode(ai);
   if (p) {
-    ks.m_strRoutingNumber = m_parent->stripLeadingZeroes(p);
+    ks.m_strBankCode = m_parent->stripLeadingZeroes(p);
   }
 
   MyMoneyAccount kacc;
-  if (!ks.m_strAccountNumber.isEmpty() || !ks.m_strRoutingNumber.isEmpty()) {
-    kacc = m_parent->account("kbanking-acc-ref", QString("%1-%2-%3").arg(ks.m_strRoutingNumber, ks.m_strAccountNumber).arg(AB_ImExporterAccountInfo_GetAccountType(ai)));
+  if (!ks.m_strAccountNumber.isEmpty() || !ks.m_strBankCode.isEmpty()) {
+    kacc = m_parent->account("kbanking-acc-ref", QString("%1-%2-%3").arg(ks.m_strBankCode, ks.m_strAccountNumber).arg(AB_ImExporterAccountInfo_GetAccountType(ai)));
     ks.m_accountId = kacc.id();
   }
 

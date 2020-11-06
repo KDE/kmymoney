@@ -82,7 +82,7 @@ void MyMoneyInstitutionTest::testNonemptyConstructor()
   QVERIFY(n->telephone() == "telephone");
   QVERIFY(n->manager() == "manager");
   QVERIFY(n->name() == "name");
-  QVERIFY(n->sortcode() == "sortcode");
+  QVERIFY(n->bankcode() == "sortcode");
 }
 
 void MyMoneyInstitutionTest::testCopyConstructor()
@@ -105,7 +105,7 @@ void MyMoneyInstitutionTest::testMyMoneyFileConstructor()
   QVERIFY(t->telephone() == "telephone");
   QVERIFY(t->manager() == "manager");
   QVERIFY(t->name() == "name");
-  QVERIFY(t->sortcode() == "sortcode");
+  QVERIFY(t->bankcode() == "sortcode");
 }
 
 void MyMoneyInstitutionTest::testEquality()

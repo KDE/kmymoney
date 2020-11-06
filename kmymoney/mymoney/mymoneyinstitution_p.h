@@ -74,11 +74,10 @@ public:
   QString m_manager;
 
   /**
-    * This member variable keeps the sort code of the institution.
-    * FIXME: I have no idea
-    * what it is good for. I keep it because it was in the old engine.
+    * This member variable keeps the bank code (e.g. sort code,
+    * routing number) of the institution.
     */
-  QString m_sortcode;
+  QString m_bankcode;
 
   /**
     * This member variable keeps the sorted list of the account ids

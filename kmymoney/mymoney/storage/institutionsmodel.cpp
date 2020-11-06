@@ -100,7 +100,7 @@ InstitutionsModel::~InstitutionsModel()
 int InstitutionsModel::columnCount(const QModelIndex& parent) const
 {
   Q_UNUSED(parent);
-  return Column::MaxColumns;
+  return AccountsModel::Column::MaxColumns;
 }
 
 QVariant InstitutionsModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -131,7 +131,7 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
     case Qt::DisplayRole:
     case Qt::EditRole:
       switch(idx.column()) {
-        case Column::AccountName:
+        case AccountsModel::Column::AccountName:
           // make sure to never return any displayable text for the dummy entry
           return institution.name();
 
@@ -140,6 +140,12 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
             const auto baseCurrency = MyMoneyFile::instance()->baseCurrency();
             return d->institutionValue(idx).formatMoney(baseCurrency.tradingSymbol(), MyMoneyMoney::denomToPrec(baseCurrency.smallestAccountFraction()));
           }
+
+        case AccountsModel::Column::BankCode:
+          return institution.bankcode();
+
+        case AccountsModel::Column::Bic:
+          return institution.value("bic");
 
         default:
           return QString();
@@ -179,8 +185,8 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::Roles::IdRole:
       return institution.id();
 
-    case eMyMoney::Model::InstitutionSortCodeRole:
-      return institution.sortcode();
+    case eMyMoney::Model::InstitutionBankCodeRole:
+      return institution.bankcode();
 
     case eMyMoney::Model::AccountDisplayOrderRole:
       // make sure the no bank assigned accounts show up at the top

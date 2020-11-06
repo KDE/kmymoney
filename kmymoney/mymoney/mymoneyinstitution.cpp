@@ -59,7 +59,7 @@ MyMoneyInstitution::MyMoneyInstitution(const QString& name,
                                        const QString& postcode,
                                        const QString& telephone,
                                        const QString& manager,
-                                       const QString& sortcode) :
+                                       const QString& bankcode) :
   MyMoneyObject(*new MyMoneyInstitutionPrivate),
   MyMoneyKeyValueContainer()
 {
@@ -71,7 +71,7 @@ MyMoneyInstitution::MyMoneyInstitution(const QString& name,
   d->m_postcode = postcode;
   d->m_telephone = telephone;
   d->m_manager = manager;
-  d->m_sortcode = sortcode;
+  d->m_bankcode = bankcode;
 }
 
 MyMoneyInstitution::MyMoneyInstitution(const MyMoneyInstitution& other) :
@@ -172,16 +172,16 @@ void MyMoneyInstitution::setCity(const QString& town)
   setTown(town);
 }
 
-QString MyMoneyInstitution::sortcode() const
+QString MyMoneyInstitution::bankcode() const
 {
   Q_D(const MyMoneyInstitution);
-  return d->m_sortcode;
+  return d->m_bankcode;
 }
 
-void MyMoneyInstitution::setSortcode(const QString& code)
+void MyMoneyInstitution::setBankCode(const QString& code)
 {
   Q_D(MyMoneyInstitution);
-  d->m_sortcode = code;
+  d->m_bankcode = code;
 }
 
 void MyMoneyInstitution::addAccountId(const QString& account)
@@ -239,7 +239,7 @@ bool MyMoneyInstitution::operator == (const MyMoneyInstitution& right) const
       ((d->m_street.length() == 0 && d2->m_street.length() == 0) || (d->m_street == d2->m_street)) &&
       ((d->m_postcode.length() == 0 && d2->m_postcode.length() == 0) || (d->m_postcode == d2->m_postcode)) &&
       ((d->m_telephone.length() == 0 && d2->m_telephone.length() == 0) || (d->m_telephone == d2->m_telephone)) &&
-      ((d->m_sortcode.length() == 0 && d2->m_sortcode.length() == 0) || (d->m_sortcode == d2->m_sortcode)) &&
+      ((d->m_bankcode.length() == 0 && d2->m_bankcode.length() == 0) || (d->m_bankcode == d2->m_bankcode)) &&
       ((d->m_manager.length() == 0 && d2->m_manager.length() == 0) || (d->m_manager == d2->m_manager)) &&
       (d->m_accountList == d2->m_accountList)) {
     return true;

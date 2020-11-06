@@ -479,7 +479,7 @@ namespace eMyMoney {
       AccountIsAssetLiabilityRole,
 
       // MyMoneyInstitution
-      InstitutionSortCodeRole,
+      InstitutionBankCodeRole,
 
       // MyMoneyCostCenter
       CostCenterShortNameRole,

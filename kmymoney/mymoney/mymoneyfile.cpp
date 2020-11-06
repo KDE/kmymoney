@@ -1715,7 +1715,7 @@ MyMoneyPayee MyMoneyFile::payee(const QString& id) const
   if (idx.isValid())
     return d->payeesModel.itemByIndex(idx);
 
-  throw MYMONEYEXCEPTION_CSTRING("Unknown payee");
+  throw MYMONEYEXCEPTION(QString::fromLatin1("Unknown payee ID: %1").arg(id));
 }
 
 MyMoneyPayee MyMoneyFile::payeeByName(const QString& name) const

@@ -17,7 +17,7 @@ set(kmm_base_dialogs_SOURCES
   kcurrencyeditordlg.cpp
   kmymoneyfileinfodlg.cpp
   knewaccountdlg.cpp
-  knewbankdlg.cpp
+  knewinstitutiondlg.cpp
   knewequityentrydlg.cpp
   kpayeereassigndlg.cpp
   ksaveasquestion.cpp
@@ -39,7 +39,7 @@ set(base_dialogs_UI
   kcurrencyeditordlg.ui
   kmymoneyfileinfodlg.ui
   knewaccountdlg.ui
-  knewbankdlg.ui
+  knewinstitutiondlg.ui
   knewequityentrydlg.ui
   kpayeereassigndlg.ui
   ksaveasquestion.ui

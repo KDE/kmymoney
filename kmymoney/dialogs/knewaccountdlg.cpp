@@ -51,7 +51,7 @@
 #include "mymoneyaccount.h"
 #include "kmymoneysettings.h"
 #include "kmymoneycurrencyselector.h"
-#include "knewbankdlg.h"
+#include "knewinstitutiondlg.h"
 #include "accountsmodel.h"
 #include "accountsproxymodel.h"
 #include "mymoneyenums.h"
@@ -822,7 +822,7 @@ void KNewAccountDlg::slotNewClicked()
 {
   MyMoneyInstitution institution;
 
-  QPointer<KNewBankDlg> dlg = new KNewBankDlg(institution, this);
+  QPointer<KNewInstitutionDlg> dlg = new KNewInstitutionDlg(institution, this);
   if (dlg->exec()) {
     MyMoneyFileTransaction ft;
     try {

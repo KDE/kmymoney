@@ -495,7 +495,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
           return journalEntry.split().number();
 
         case Date:
-          return QLocale().toString(transaction.postDate(), QLocale::ShortFormat);
+          return MyMoneyUtils::formatDate(transaction.postDate());
 
         case Account:
           return MyMoneyFile::instance()->accountsModel()->itemById(journalEntry.split().accountId()).name();

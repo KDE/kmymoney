@@ -964,7 +964,7 @@ void MyMoneyXmlContentHandlerTest::readInstitution()
     alist << "A000001" << "A000003";
     i = MyMoneyXmlContentHandler::readInstitution(node);
 
-    QVERIFY(i.sortcode() == "sortcode");
+    QVERIFY(i.bankcode() == "sortcode");
     QVERIFY(i.id() == "I00001");
     QVERIFY(i.manager() == "manager");
     QVERIFY(i.name() == "name");

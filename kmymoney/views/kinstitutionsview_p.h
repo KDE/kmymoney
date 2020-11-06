@@ -73,7 +73,15 @@ public:
 
     auto columnSelector = new ColumnSelector(ui->m_accountTree, q->metaObject()->className());
     columnSelector->setAlwaysVisible(QVector<int>({ AccountsModel::Column::AccountName }));
-    columnSelector->setAlwaysHidden(QVector<int>({ AccountsModel::Column::Balance, AccountsModel::Column::PostedValue }));
+    columnSelector->setAlwaysHidden(QVector<int>({ AccountsModel::Column::Balance,
+                                                   AccountsModel::Column::PostedValue,
+                                                   AccountsModel::Column::Type,
+                                                   AccountsModel::Column::CostCenter,
+                                                   AccountsModel::Column::Tax,
+                                                   AccountsModel::Column::Vat,
+                                                   AccountsModel::Column::Iban,
+                                                   AccountsModel::Column::Number,
+                                                   AccountsModel::Column::HasOnlineMapping }));
 
     ui->m_accountTree->setModel(MyMoneyFile::instance()->institutionsModel());
     m_proxyModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquity());
