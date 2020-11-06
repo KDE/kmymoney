@@ -159,7 +159,11 @@ void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint pos)
     auto objId = currentIndex().data(eMyMoney::Model::IdRole).toString();
     const auto account = MyMoneyFile::instance()->accountsModel()->itemById(objId);
     if (!account.id().isEmpty()) {
-      emit requestCustomContextMenu(eMenu::Menu::Account, mapToGlobal(pos));
+      if (account.isIncomeExpense()) {
+        emit requestCustomContextMenu(eMenu::Menu::Category, mapToGlobal(pos));
+      } else {
+        emit requestCustomContextMenu(eMenu::Menu::Account, mapToGlobal(pos));
+      }
     }
     const auto institution = MyMoneyFile::instance()->institutionsModel()->itemById(objId);
     if (!institution.id().isEmpty()) {
