@@ -24,17 +24,10 @@
 #ifndef KPAYEESVIEW_P_H
 #define KPAYEESVIEW_P_H
 
-#include "kpayeesview.h"
-
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QMap>
-#include <QList>
-#include <QTimer>
 #include <QDesktopServices>
-#include <QIcon>
-#include <QSortFilterProxyModel>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -43,7 +36,6 @@
 #include <KMessageBox>
 #include <KHelpClient>
 #include <KSharedConfig>
-#include <KListWidgetSearchLine>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -69,9 +61,8 @@
 #include "mymoneysplit.h"
 #include "mymoneyprice.h"
 #include "mymoneytransaction.h"
-#include "icons/icons.h"
+#include "icons.h"
 #include "transaction.h"
-#include "widgetenums.h"
 #include "mymoneyenums.h"
 #include "modelenums.h"
 #include "payeesmodel.h"
@@ -209,28 +200,21 @@ public:
     q->connect(ui->telephoneEdit, &QLineEdit::textChanged, q, &KPayeesView::slotPayeeDataChanged);
     q->connect(ui->emailEdit,     &QLineEdit::textChanged, q, &KPayeesView::slotPayeeDataChanged);
     q->connect(ui->notesEdit,     &QTextEdit::textChanged, q, &KPayeesView::slotPayeeDataChanged);
-    q->connect(ui->matchKeyEditList, &KEditListWidget::changed, q, &KPayeesView::slotKeyListChanged);
-
-    q->connect(ui->matchTypeCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), q, &KPayeesView::slotPayeeDataChanged);
+    q->connect(ui->payeeIdentifiers, &KPayeeIdentifierView::dataChanged, q, &KPayeesView::slotPayeeDataChanged);
+    q->connect(ui->matchTypeCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), q, &KPayeesView::slotPayeeDataChanged);
     q->connect(ui->checkMatchIgnoreCase, &QAbstractButton::toggled, q, &KPayeesView::slotPayeeDataChanged);
-
     q->connect(ui->checkEnableDefaultCategory,  &QAbstractButton::toggled, q,               &KPayeesView::slotPayeeDataChanged);
     q->connect(ui->comboDefaultCategory,        &KMyMoneyAccountCombo::accountSelected, q,  &KPayeesView::slotPayeeDataChanged);
+
     q->connect(ui->buttonSuggestACategory,      &QAbstractButton::clicked, q,               &KPayeesView::slotChooseDefaultAccount);
+
+    q->connect(ui->matchKeyEditList, &KEditListWidget::changed, q, &KPayeesView::slotKeyListChanged);
 
     q->connect(ui->m_updateButton,    &QAbstractButton::clicked, q, &KPayeesView::slotUpdatePayee);
     q->connect(ui->m_syncAddressbook, &QAbstractButton::clicked, q, &KPayeesView::slotSyncAddressBook);
     q->connect(ui->m_helpButton,      &QAbstractButton::clicked, q, &KPayeesView::slotHelp);
     q->connect(ui->m_sendMail,        &QAbstractButton::clicked, q, &KPayeesView::slotSendMail);
 
-    /// @todo port to new model code
-#if 0
-    q->connect(ui->m_register, &KMyMoneyRegister::Register::editTransaction, q, &KPayeesView::slotSelectTransaction);
-#endif
-
-    q->connect(ui->m_filterBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), q, &KPayeesView::slotChangeFilter);
-
-    q->connect(ui->payeeIdentifiers, &KPayeeIdentifierView::dataChanged, q, &KPayeesView::slotPayeeDataChanged);
 
     // use the size settings of the last run (if any)
     KConfigGroup grp = KSharedConfig::openConfig()->group("Last Use Settings");

@@ -39,8 +39,6 @@
 
 #include "kmymoneyviewbase.h"
 
-class QListWidgetItem;
-class KListWidgetSearchLine;
 struct ContactData;
 class MyMoneyContact;
 class MyMoneyPayee;
@@ -92,22 +90,11 @@ private Q_SLOTS:
   void slotPayeeSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
 
   /**
-    * This slot is called whenever the selection in m_payeesList
-    * has been changed.
-    */
-  // void slotSelectPayee();
-
-  /**
     * This slot marks the current selected payee as modified (dirty).
     */
   void slotPayeeDataChanged();
   void slotKeyListChanged();
 
-  /**
-    * This slot is called when the name of a payee is changed inside
-    * the payee list view and only a single payee is selected.
-    */
-  // void slotRenameSinglePayee(QListWidgetItem *p);
   void slotRenameSinglePayee(const QModelIndex& idx, const QVariant& value);
 
   /**
@@ -115,10 +102,6 @@ private Q_SLOTS:
     * payee information widget.
     */
   void slotUpdatePayee();
-
-  void slotSelectTransaction();
-
-  void slotChangeFilter(int index);
 
   void slotChooseDefaultAccount();
 

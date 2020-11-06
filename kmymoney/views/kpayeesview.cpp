@@ -21,52 +21,17 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kpayeesview.h"
 #include "kpayeesview_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QMap>
-#include <QList>
-#include <QMenu>
-#include <QDesktopServices>
-#include <QIcon>
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KLocalizedString>
-#include <KMessageBox>
-#include <KGuiItem>
-#include <KHelpClient>
-#include <KSharedConfig>
-#include <KListWidgetSearchLine>
-
 // ----------------------------------------------------------------------------
 // Project Includes
-
-#include <config-kmymoney.h>
-#include "kmymoneyviewbase_p.h"
-#include "kpayeeidentifierview.h"
-#include "mymoneypayee.h"
-#include "mymoneyexception.h"
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "mymoneymoney.h"
-#include "mymoneytransactionfilter.h"
-#include "kmymoneysettings.h"
-#include "accountsmodel.h"
-#include "mymoneysecurity.h"
-#include "mymoneycontact.h"
-#include "mymoneyprice.h"
-#include "mymoneysplit.h"
-#include "mymoneytransaction.h"
-#include "icons/icons.h"
-#include "transaction.h"
-#include "widgetenums.h"
-#include "mymoneyenums.h"
-#include "modelenums.h"
-#include "menuenums.h"
 
 using namespace Icons;
 
@@ -79,6 +44,23 @@ KPayeesView::KPayeesView(QWidget *parent) :
   d->init();
 
   connect(d->ui->m_payees, &QWidget::customContextMenuRequested, this, [&](QPoint pos) { emit requestCustomContextMenu(eMenu::Menu::Payee, pos); });
+
+  connect(d->ui->m_filterBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int index) {
+    Q_D(KPayeesView);
+    // update the filter type
+    switch(index) {
+      case eReferencedPayees:
+        d->m_renameProxyModel->setReferenceFilter(ItemRenameProxyModel::eReferencedItems);
+        break;
+      case eUnusedPayees:
+        d->m_renameProxyModel->setReferenceFilter(ItemRenameProxyModel::eUnReferencedItems);
+        break;
+      default:
+        d->m_renameProxyModel->setReferenceFilter(ItemRenameProxyModel::eAllItem);
+        break;
+    }
+  });
+
 }
 
 KPayeesView::~KPayeesView()
@@ -284,8 +266,8 @@ void KPayeesView::slotPayeeSelectionChanged(const QItemSelection& selected, cons
 
   } catch (const MyMoneyException &e) {
     qDebug("exception during display of payee: %s", e.what());
-    /// @todo port to new model code
-    // d->ui->m_register->clear();
+    // clear display data
+    d->m_transactionFilter->setPayeeIdList(QStringList());
     d->m_payee = MyMoneyPayee();
   }
 }
@@ -517,20 +499,6 @@ void KPayeesView::showEvent(QShowEvent* event)
   QWidget::showEvent(event);
 }
 
-void KPayeesView::slotSelectTransaction()
-{
-  Q_D(KPayeesView);
-  /// @todo port to new model code
-#if 0
-  auto list = d->ui->m_register->selectedItems();
-  if (!list.isEmpty()) {
-    const auto t = dynamic_cast<KMyMoneyRegister::Transaction*>(list[0]);
-    if (t)
-      emit selectByVariant(QVariantList {QVariant(t->split().accountId()), QVariant(t->transaction().id()) }, eView::Intent::ShowTransaction);
-  }
-#endif
-}
-
 void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QString& accountId, const QString& transactionId)
 {
   Q_D(KPayeesView);
@@ -592,23 +560,6 @@ void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QS
 void KPayeesView::slotHelp()
 {
   KHelpClient::invokeHelp("details.payees");
-}
-
-void KPayeesView::slotChangeFilter(int index)
-{
-  Q_D(KPayeesView);
-  // update the filter type
-  switch(index) {
-    case eReferencedPayees:
-      d->m_renameProxyModel->setReferenceFilter(ItemRenameProxyModel::eReferencedItems);
-      break;
-    case eUnusedPayees:
-      d->m_renameProxyModel->setReferenceFilter(ItemRenameProxyModel::eUnReferencedItems);
-      break;
-    default:
-      d->m_renameProxyModel->setReferenceFilter(ItemRenameProxyModel::eAllItem);
-      break;
-  }
 }
 
 void KPayeesView::slotNewPayee()
