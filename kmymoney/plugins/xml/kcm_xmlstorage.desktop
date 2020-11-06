@@ -25,7 +25,6 @@ Name[zh_TW]=XML 儲存空間設定
 Icon=server-database
 Type=Service
 ServiceTypes=KCModule
-Exec=kcmshell5 xmlstorage
 Categories=Qt;KDE;kmymoney;
 Keywords=xmlstorage;kmymoney;
 Keywords[ca]=xmlstorage;kmymoney;
