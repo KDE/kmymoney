@@ -160,7 +160,7 @@ public:
     , parametersModel(qq, &undoStack)
     , onlineJobsModel(qq, &undoStack)
     , reportsModel(qq, &undoStack)
-    , specialdatesmodel(qq, &undoStack)
+    , specialDatesModel(qq, &undoStack)
     , schedulesJournalModel(qq, &undoStack)
     , statusModel(qq)
     /// @note add new models here
@@ -171,7 +171,7 @@ public:
     new ModelTest(&costCenterModel, m_file);
     new ModelTest(&schedulesModel, m_file);
     new ModelTest(&tagsModel, m_file);
-    new ModelTest(&securitiesmodel, m_file);
+    new ModelTest(&securitiesModel, m_file);
     new ModelTest(&currenciesModel, m_file);
     new ModelTest(&budgetsModel, m_file);
     new ModelTest(&accountsModel, m_file);
@@ -213,7 +213,7 @@ public:
         || parametersModel.isDirty()
         || onlineJobsModel.isDirty()
         || reportsModel.isDirty()
-        || specialdatesmodel.isDirty();
+        || specialDatesModel.isDirty();
         /// @note add new models here
   }
 
@@ -234,7 +234,7 @@ public:
     parametersModel.setDirty(false);
     onlineJobsModel.setDirty(false);
     reportsModel.setDirty(false);
-    specialdatesmodel.setDirty(false);
+    specialDatesModel.setDirty(false);
     schedulesJournalModel.setDirty(false);
     statusModel.setDirty(false);
     /// @note add new models here
@@ -370,7 +370,7 @@ public:
   ParametersModel     parametersModel;
   OnlineJobsModel     onlineJobsModel;
   ReportsModel        reportsModel;
-  SpecialDatesModel   specialdatesmodel;
+  SpecialDatesModel   specialDatesModel;
   SchedulesJournalModel schedulesJournalModel;
   StatusModel         statusModel;
   /// @note add new models here
@@ -848,17 +848,21 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
   // the old one as well as the new one and the structure change
   if (acc.institutionId() != account.institutionId()) {
     MyMoneyInstitution inst;
+    d->institutionsModel.removeAccount(acc.institutionId(), acc.id());
     if (!acc.institutionId().isEmpty()) {
       inst = institution(acc.institutionId());
       inst.removeAccountId(acc.id());
       modifyInstitution(inst);
-      // modifyInstitution updates d->m_changeSet already
     }
     if (!account.institutionId().isEmpty()) {
       inst = institution(account.institutionId());
       inst.addAccountId(acc.id());
       modifyInstitution(inst);
-      // modifyInstitution updates d->m_changeSet already
+
+      // don't forget the entry in the institution model for asset, liability and equity
+      if (!account.isIncomeExpense()) {
+        d->institutionsModel.addAccount(account.institutionId(), account.id());
+      }
     }
   }
 
@@ -1065,13 +1069,18 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
   // don't forget the a possible institution
   if (!acc.institutionId().isEmpty()) {
     MyMoneyInstitution institution = d->institutionsModel.itemById(acc.institutionId());
-    institution.removeAccountId(account.id());
+    institution.removeAccountId(acc.id());
     modifyInstitution(institution);
   }
+  // don't forget the entry in the institution model for asset, liability and equity
+  if (!acc.isIncomeExpense()) {
+    d->institutionsModel.removeAccount(acc.institutionId(), acc.id());
+  }
+
   acc.setInstitutionId(QString());
 
   // get the index again as it might have changed
-  idx = d->accountsModel.indexById(account.id());
+  idx = d->accountsModel.indexById(acc.id());
   d->accountsModel.removeItem(idx);
 
   d->m_balanceCache.clear(acc.id());
@@ -1310,11 +1319,16 @@ void MyMoneyFile::addAccount(MyMoneyAccount& account, MyMoneyAccount& parent)
   // d->m_storage->addAccount(parent, account);
   d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Account, parent.id());
 
-  if (account.institutionId().length() != 0) {
+  if (!account.institutionId().isEmpty()) {
     institution.addAccountId(account.id());
     d->institutionsModel.modifyItem(institution);
     // d->m_storage->modifyInstitution(institution);
     d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::Institution, institution.id());
+  }
+
+  // don't forget the entry in the institution model for asset, liability and equity
+  if (!account.isIncomeExpense()) {
+    d->institutionsModel.addAccount(account.institutionId(), account.id());
   }
 }
 
@@ -1683,7 +1697,7 @@ PayeesModel* MyMoneyFile::userModel() const
 
 SpecialDatesModel* MyMoneyFile::specialDatesModel() const
 {
-  return &d->specialdatesmodel;
+  return &d->specialDatesModel;
 }
 
 SchedulesJournalModel* MyMoneyFile::schedulesJournalModel() const
@@ -1715,7 +1729,7 @@ MyMoneyPayee MyMoneyFile::payee(const QString& id) const
   if (idx.isValid())
     return d->payeesModel.itemByIndex(idx);
 
-  throw MYMONEYEXCEPTION_CSTRING("Unknown payee");
+  throw MYMONEYEXCEPTION(QString::fromLatin1("Unknown payee ID: %1").arg(id));
 }
 
 MyMoneyPayee MyMoneyFile::payeeByName(const QString& name) const
@@ -4017,7 +4031,7 @@ void MyMoneyFile::fixSplitPrecision(MyMoneyTransaction& t) const
 
 void MyMoneyFile::reloadSpecialDates()
 {
-  d->specialdatesmodel.load();
+  d->specialDatesModel.load();
   // calculate the time until midnite
   const auto now = QDateTime::currentDateTime();
   auto nextDay = now.addDays(1);

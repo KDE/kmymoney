@@ -18,10 +18,6 @@ set(libmodels_a_SOURCES
     idfilter.cpp
 )
 
-if (USE_MODELTEST)
-  list(APPEND libmodels_a_SOURCES modeltest.cpp)
-endif()
-
 add_library(kmm_models SHARED ${libmodels_a_SOURCES})
 
 generate_export_header(kmm_models BASE_NAME kmm_models)

@@ -24,7 +24,6 @@ Name[zh_TW]=預測檢視設定
 Icon=forecast
 Type=Service
 ServiceTypes=KCModule
-Exec=kcmshell5 forecastview
 Categories=Qt;KDE;kmymoney;
 Keywords=forecastview;kmymoney;
 Keywords[ca]=vista de previsió;kmymoney;
