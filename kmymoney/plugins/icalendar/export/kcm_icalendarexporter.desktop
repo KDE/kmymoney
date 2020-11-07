@@ -36,7 +36,6 @@ Name[zh_TW]=設定 icalendar 匯出外掛程式
 Icon=x-office-calendar
 Type=Service
 ServiceTypes=KCModule
-Exec=kcmshell5 icalendarexporter
 Categories=Qt;KDE;kmymoney;
 Keywords=icalendarexporter;kmymoney;
 Keywords[ca]=icalendarexporter;kmymoney;

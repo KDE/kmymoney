@@ -28,7 +28,6 @@ Name[zh_TW]=CSV 匯入工具設定
 Icon=document-import
 Type=Service
 ServiceTypes=KCModule
-Exec=kcmshell5 csvimporter
 Categories=Qt;KDE;kmymoney;
 Keywords=csvimporter;kmymoney;
 Keywords[ca]=csvimporter;kmymoney;

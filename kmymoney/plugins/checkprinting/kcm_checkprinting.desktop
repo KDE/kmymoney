@@ -23,7 +23,6 @@ Name[x-test]=xxConfigure the check printing pluginxx
 Icon=document-print
 Type=Service
 ServiceTypes=KCModule
-Exec=kcmshell5 checkprinting
 Categories=Qt;KDE;kmymoney;
 Keywords=checkprinting;kmymoney;
 Keywords[ca]=impressió de xec;kmymoney;

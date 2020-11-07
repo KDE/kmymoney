@@ -26,7 +26,6 @@ Name[zh_TW]=QIF 匯入程式設定
 Icon=document-import
 Type=Service
 ServiceTypes=KCModule
-Exec=kcmshell5 qifimporter
 Categories=Qt;KDE;kmymoney;
 Keywords=qifimporter;kmymoney;
 Keywords[ca]=qifimporter;kmymoney;
