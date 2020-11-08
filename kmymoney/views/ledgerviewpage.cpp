@@ -83,7 +83,9 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
   connect(d->ui->ledgerView, &LedgerView::aboutToFinishEdit, this, &LedgerViewPage::aboutToFinishEdit);
   connect(d->ui->ledgerView, &LedgerView::aboutToStartEdit, this, &LedgerViewPage::startEdit);
   connect(d->ui->ledgerView, &LedgerView::aboutToFinishEdit, this, &LedgerViewPage::finishEdit);
-  connect(d->ui->ledgerView, &LedgerView::transactionSelectionChanged, this, &LedgerViewPage::requestSelectionChanged);
+  connect(d->ui->ledgerView, &LedgerView::transactionSelectionChanged, this, &LedgerViewPage::slotRequestSelectionChanged);
+  connect(d->ui->ledgerView, &LedgerView::requestCustomContextMenu, this, &LedgerViewPage::requestCustomContextMenu);
+
   connect(d->ui->splitter, &QSplitter::splitterMoved, this, &LedgerViewPage::splitterChanged);
 
   d->ui->ledgerView->setColumnSelectorGroupName(configGroupName);
@@ -244,6 +246,13 @@ void LedgerViewPage::setShowEntryForNewTransaction(bool show)
 void LedgerViewPage::slotSettingsChanged()
 {
   d->ui->ledgerView->slotSettingsChanged();
+}
+
+void LedgerViewPage::slotRequestSelectionChanged(const SelectedObjects& selections) const
+{
+  d->selections.clearSelections(SelectedObjects::Transaction);
+  d->selections.setSelection(SelectedObjects::Transaction, selections.selection(SelectedObjects::Transaction));
+  emit requestSelectionChanged(d->selections);
 }
 
 const SelectedObjects& LedgerViewPage::selections() const

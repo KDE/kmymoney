@@ -25,6 +25,7 @@
 #include <QResizeEvent>
 #include <QDate>
 #include <QScrollBar>
+#include <QAction>
 #include <QDebug>
 
 // ----------------------------------------------------------------------------
@@ -36,6 +37,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "menuenums.h"
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
@@ -122,6 +124,51 @@ public:
     *s_globalEditView() = nullptr;
   }
 
+  void updateDynamicActions()
+  {
+    const auto indexes = q->selectionModel()->selectedIndexes();
+    auto const gotoAccount = pActions[eMenu::Action::GoToAccount];
+    auto const gotoPayee = pActions[eMenu::Action::GoToPayee];
+
+    gotoAccount->setText(i18nc("@action:inmenu open account", "Go to account"));
+    gotoAccount->setEnabled(false);
+    gotoPayee->setText(i18nc("@action:inmenu open payee", "Go to payee"));
+    gotoPayee->setEnabled(false);
+
+    if (!indexes.isEmpty()) {
+      const auto journalId = indexes.at(0).data(eMyMoney::Model::IdRole).toString();
+      const auto journalEntry = MyMoneyFile::instance()->journalModel()->itemById(journalId);
+      for (const auto& split : journalEntry.transaction().splits()) {
+        if (split.id() != journalEntry.split().id()) {
+          auto acc = MyMoneyFile::instance()->account(split.accountId());
+          if (!acc.isIncomeExpense()) {
+            // for stock accounts we show the portfolio account
+            if (acc.isInvest()) {
+              acc = MyMoneyFile::instance()->account(acc.parentAccountId());
+            }
+            auto name = acc.name();
+            name.replace(QRegExp("&(?!&)"), "&&");
+            gotoAccount->setEnabled(true);
+            gotoAccount->setText(i18nc("@action:inmenu open account", "Go to '%1'", name));
+            gotoAccount->setData(acc.id());
+            break;
+          }
+        }
+      }
+
+      if (!journalEntry.split().payeeId().isEmpty()) {
+        auto payeeId = indexes.at(0).data(eMyMoney::Model::SplitPayeeIdRole).toString();
+        if (!payeeId.isEmpty()) {
+          auto name = indexes.at(0).data(eMyMoney::Model::SplitPayeeRole).toString();
+          name.replace(QRegExp("&(?!&)"), "&&");
+          gotoPayee->setEnabled(true);
+          gotoPayee->setText(i18nc("@action:inmenu open payee", "Go to '%1'", name));
+          gotoPayee->setData(payeeId);
+        }
+      }
+    }
+  }
+
   LedgerView*                     q;
   DelegateProxy*                  delegateProxy;
   QHash<const QAbstractItemModel*, QStyledItemDelegate*>   delegates;
@@ -169,6 +216,12 @@ LedgerView::LedgerView(QWidget* parent)
 
   setSelectionBehavior(SelectRows);
 
+  // setup context menu
+  setContextMenuPolicy(Qt::CustomContextMenu);
+  connect(this, &QWidget::customContextMenuRequested, this, [&](QPoint pos) {
+    d->updateDynamicActions();
+    emit requestCustomContextMenu(eMenu::Menu::Transaction, mapToGlobal(pos));
+  });
   setTabKeyNavigation(false);
 }
 

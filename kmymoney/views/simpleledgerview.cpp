@@ -245,6 +245,7 @@ public:
       }
 
       q->connect(view, &LedgerViewPage::requestSelectionChanged, q, &SimpleLedgerView::requestSelectionChange);
+      q->connect(view, &LedgerViewPage::requestCustomContextMenu, q, &SimpleLedgerView::requestCustomContextMenu);
 
       q->connect(q, &SimpleLedgerView::settingsChanged, view, &LedgerViewPage::slotSettingsChanged);
     }

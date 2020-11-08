@@ -35,6 +35,8 @@
 class MyMoneyAccount;
 class SelectedObjects;
 
+namespace eMenu { enum class Menu; }
+
 class LedgerView : public QTableView
 {
   Q_OBJECT
@@ -111,10 +113,11 @@ protected Q_SLOTS:
   virtual void adjustDetailColumn();
 
 Q_SIGNALS:
-  void transactionSelectionChanged (const SelectedObjects& selection);
-  void transactionSelected(const QModelIndex& idx);
-  void aboutToStartEdit();
-  void aboutToFinishEdit();
+  void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos) const;
+  void transactionSelectionChanged (const SelectedObjects& selection) const;
+  void transactionSelected(const QModelIndex& idx) const;
+  void aboutToStartEdit() const;
+  void aboutToFinishEdit() const;
 
 protected:
   class Private;

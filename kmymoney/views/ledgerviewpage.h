@@ -29,6 +29,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+namespace eMenu { enum class Menu; }
+
 class MyMoneyAccount;
 class SelectedObjects;
 
@@ -63,9 +65,11 @@ protected Q_SLOTS:
   void finishEdit();
   void keepSelection();
   void reloadFilter();
+  void slotRequestSelectionChanged(const SelectedObjects& selections) const;
 
 Q_SIGNALS:
-  void requestSelectionChanged(const SelectedObjects& selection);
+  void requestSelectionChanged(const SelectedObjects& selection) const;
+  void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos) const;
 
   void transactionSelected(const QModelIndex& idx);
   void aboutToStartEdit();
