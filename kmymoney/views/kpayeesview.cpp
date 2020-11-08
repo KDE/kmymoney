@@ -43,7 +43,10 @@ KPayeesView::KPayeesView(QWidget *parent) :
   Q_D(KPayeesView);
   d->init();
 
-  connect(d->ui->m_payees, &QWidget::customContextMenuRequested, this, [&](QPoint pos) { emit requestCustomContextMenu(eMenu::Menu::Payee, pos); });
+  connect(d->ui->m_payees, &QWidget::customContextMenuRequested, this, [&](QPoint pos) {
+    Q_D(KPayeesView);
+    emit requestCustomContextMenu(eMenu::Menu::Payee, d->ui->m_payees->mapToGlobal(pos));
+  });
 
   connect(d->ui->m_filterBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int index) {
     Q_D(KPayeesView);
