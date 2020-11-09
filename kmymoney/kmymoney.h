@@ -253,6 +253,9 @@ protected Q_SLOTS:
 
   void slotCheckSchedules();
 
+  void slotGoToPayee();
+  void slotGoToAccount();
+
 public:
   /**
     * This method checks if there is at least one asset or liability account

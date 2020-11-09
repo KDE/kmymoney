@@ -38,7 +38,7 @@ namespace eView {
     OpenContextMenu,
     OpenObject,
     ShowPayee,
-    ShowTransaction,
+    ShowTransactionInLedger,
     SynchronizeAccountInInvestmentView,
     SynchronizeAccountInLedgersView,
     ToggleColumn,

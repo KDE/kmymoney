@@ -194,16 +194,6 @@ public Q_SLOTS:
   void slotRefreshViews();
 
   /**
-    * Called, whenever the payees view should pop up and a specific
-    * transaction in an account should be shown.
-    *
-    * @param payeeId The ID of the payee to be shown
-    * @param accountId The ID of the account to be shown
-    * @param transactionId The ID of the transaction to be selected
-    */
-  void slotPayeeSelected(const QString& payeeId, const QString& accountId, const QString& transactionId);
-
-  /**
     * Called, whenever the tags view should pop up and a specific
     * transaction in an account should be shown.
     *

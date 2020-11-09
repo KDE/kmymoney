@@ -17,7 +17,6 @@
 
 
 #include "ledgerviewpage.h"
-#include "mymoneyaccount.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -28,16 +27,17 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include <ui_ledgerviewpage.h>
 #include "newtransactionform.h"
 #include "ledgeraccountfilter.h"
 #include "specialdatesfilter.h"
 #include "specialdatesmodel.h"
 #include "schedulesjournalmodel.h"
 #include "journalmodel.h"
-#include "ui_ledgerviewpage.h"
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"
 #include "selectedobjects.h"
+#include "mymoneyaccount.h"
 
 class LedgerViewPage::Private
 {
@@ -259,4 +259,9 @@ const SelectedObjects& LedgerViewPage::selections() const
 {
   d->selections.setSelection(SelectedObjects::Transaction, d->ui->ledgerView->selectedTransactions());
   return d->selections;
+}
+
+void LedgerViewPage::selectTransaction(const QString& id)
+{
+  d->ui->ledgerView->setSelectedTransactions(QStringList { id });
 }

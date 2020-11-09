@@ -520,3 +520,17 @@ void SimpleLedgerView::executeCustomAction(eView::Action action)
       break;
   }
 }
+
+void SimpleLedgerView::slotSelectByVariant(const QVariantList& args, eView::Intent intent)
+{
+  Q_D(SimpleLedgerView);
+  if ((intent == eView::Intent::ShowTransactionInLedger) && (args.count() == 2)) {
+    const auto accountId = args.at(0).toString();
+    const auto transactionId = args.at(1).toString();
+    openLedger(accountId);
+    auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());
+    if (view) {
+      view->selectTransaction(transactionId);
+    }
+  }
+}

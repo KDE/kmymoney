@@ -167,7 +167,7 @@ void KHomeView::slotOpenUrl(const QUrl &url)
     KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
     Q_CHECK_PTR(mw);
     if (view == VIEW_LEDGER) {
-      emit selectByVariant(QVariantList {QVariant(id), QVariant(QString())}, eView::Intent::ShowTransaction);
+      emit selectByVariant(QVariantList {QVariant(id), QVariant(QString())}, eView::Intent::ShowTransactionInLedger);
 
     } else if (view == VIEW_SCHEDULE) {
       if (mode == QLatin1String("enter")) {

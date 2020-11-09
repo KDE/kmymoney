@@ -50,6 +50,11 @@ KPayeesView::KPayeesView(QWidget *parent) :
     emit requestCustomContextMenu(eMenu::Menu::Payee, d->ui->m_payees->mapToGlobal(pos));
   });
 
+  connect(d->ui->m_register, &QWidget::customContextMenuRequested, this, [&](QPoint pos) {
+    Q_D(KPayeesView);
+    emit requestCustomContextMenu(eMenu::Menu::Transaction, d->ui->m_register->mapToGlobal(pos));
+  });
+
   connect(d->ui->m_filterBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int index) {
     Q_D(KPayeesView);
     // update the filter type
@@ -125,10 +130,11 @@ void KPayeesView::slotClosePayeeIdentifierSource()
 
 void KPayeesView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
 {
+  Q_D(KPayeesView);
   switch (intent) {
     case eView::Intent::ShowPayee:
       if (variant.count() == 3)
-        slotSelectPayeeAndTransaction(variant.at(0).toString(), variant.at(1).toString(), variant.at(2).toString());
+        d->selectPayeeAndTransaction(variant.at(0).toString(), variant.at(1).toString(), variant.at(2).toString());
       break;
     default:
       break;
@@ -504,64 +510,6 @@ void KPayeesView::showEvent(QShowEvent* event)
   QWidget::showEvent(event);
 }
 
-void KPayeesView::slotSelectPayeeAndTransaction(const QString& payeeId, const QString& accountId, const QString& transactionId)
-{
-  Q_D(KPayeesView);
-  if (!isVisible())
-    return;
-
-  /// @todo port to new model code
-#if 0
-  try {
-    // clear filter
-    d->m_searchWidget->clear();
-    d->m_searchWidget->updateSearch();
-
-    // deselect all other selected items
-    QList<QListWidgetItem *> selectedItems = d->ui->m_payeesList->selectedItems();
-    QList<QListWidgetItem *>::const_iterator payeesIt = selectedItems.constBegin();
-    while (payeesIt != selectedItems.constEnd()) {
-      if (auto item = dynamic_cast<KPayeeListItem*>(*payeesIt))
-        item->setSelected(false);
-      ++payeesIt;
-    }
-
-    // find the payee in the list
-    QListWidgetItem* it;
-    for (int i = 0; i < d->ui->m_payeesList->count(); ++i) {
-      it = d->ui->m_payeesList->item(i);
-      auto item = dynamic_cast<KPayeeListItem *>(it);
-      if (item && item->payee().id() == payeeId) {
-        d->ui->m_payeesList->scrollToItem(it, QAbstractItemView::PositionAtCenter);
-
-        d->ui->m_payeesList->setCurrentItem(it);     // active item and deselect all others
-        d->ui->m_payeesList->setCurrentRow(i, QItemSelectionModel::ClearAndSelect); // and select it
-
-        //make sure the payee selection is updated and transactions are updated accordingly
-        slotSelectPayee();
-
-        KMyMoneyRegister::RegisterItem *registerItem = 0;
-        for (i = 0; i < d->ui->m_register->rowCount(); ++i) {
-          registerItem = d->ui->m_register->itemAtRow(i);
-          if (auto t = dynamic_cast<KMyMoneyRegister::Transaction*>(registerItem)) {
-            if (t->transaction().id() == transactionId && t->transaction().accountReferenced(accountId)) {
-              d->ui->m_register->selectItem(registerItem);
-              d->ui->m_register->ensureItemVisible(registerItem);
-              break;
-            }
-          }
-        }
-        // quit out of outer for() loop
-        break;
-      }
-    }
-  } catch (const MyMoneyException &e) {
-    qWarning("Unexpected exception in KPayeesView::slotSelectPayeeAndTransaction %s", e.what());
-  }
-#endif
-  d->ensurePayeeVisible(payeeId);
-}
-
 void KPayeesView::slotHelp()
 {
   KHelpClient::invokeHelp("details.payees");
@@ -569,9 +517,10 @@ void KPayeesView::slotHelp()
 
 void KPayeesView::slotNewPayee()
 {
+  Q_D(KPayeesView);
   QString id;
   KMyMoneyUtils::newPayee(i18n("New Payee"), id);
-  slotSelectPayeeAndTransaction(id);
+  d->selectPayeeAndTransaction(id);
 }
 
 void KPayeesView::slotRenamePayee()

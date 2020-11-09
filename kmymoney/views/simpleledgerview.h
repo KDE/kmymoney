@@ -48,6 +48,7 @@ public Q_SLOTS:
   void viewChanged(KPageWidgetItem* current, KPageWidgetItem* before) override;
   void showEvent(QShowEvent* event) override;
 
+  void slotSelectByVariant(const QVariantList& args, eView::Intent intent) override;
   void slotSettingsChanged() override;
 
 private Q_SLOTS:

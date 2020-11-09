@@ -136,24 +136,35 @@ public:
     gotoPayee->setEnabled(false);
 
     if (!indexes.isEmpty()) {
-      const auto journalId = indexes.at(0).data(eMyMoney::Model::IdRole).toString();
-      const auto journalEntry = MyMoneyFile::instance()->journalModel()->itemById(journalId);
-      for (const auto& split : journalEntry.transaction().splits()) {
-        if (split.id() != journalEntry.split().id()) {
-          auto acc = MyMoneyFile::instance()->account(split.accountId());
-          if (!acc.isIncomeExpense()) {
-            // for stock accounts we show the portfolio account
-            if (acc.isInvest()) {
-              acc = MyMoneyFile::instance()->account(acc.parentAccountId());
+      const auto baseIdx = MyMoneyFile::instance()->journalModel()->mapToBaseSource(indexes.at(0));
+      const auto journalEntry = MyMoneyFile::instance()->journalModel()->itemByIndex(baseIdx);
+      MyMoneyAccount acc;
+      if (!q->isColumnHidden(JournalModel::Column::Account)) {
+        // in case the account column is shown, we jump to that account
+        acc = MyMoneyFile::instance()->account(journalEntry.split().accountId());
+      } else {
+        // otherwise, we try to find a suitable asset/liability account
+        for (const auto& split : journalEntry.transaction().splits()) {
+          acc = MyMoneyFile::instance()->account(split.accountId());
+          if (split.id() != journalEntry.split().id()) {
+            if (!acc.isIncomeExpense()) {
+              // for stock accounts we show the portfolio account
+              if (acc.isInvest()) {
+                acc = MyMoneyFile::instance()->account(acc.parentAccountId());
+              }
+              break;
             }
-            auto name = acc.name();
-            name.replace(QRegExp("&(?!&)"), "&&");
-            gotoAccount->setEnabled(true);
-            gotoAccount->setText(i18nc("@action:inmenu open account", "Go to '%1'", name));
-            gotoAccount->setData(acc.id());
-            break;
           }
         }
+      }
+
+      // found an account, update the action
+      if (!acc.id().isEmpty()) {
+        auto name = acc.name();
+        name.replace(QRegExp("&(?!&)"), "&&");
+        gotoAccount->setEnabled(true);
+        gotoAccount->setText(i18nc("@action:inmenu open account", "Go to '%1'", name));
+        gotoAccount->setData(acc.id());
       }
 
       if (!journalEntry.split().payeeId().isEmpty()) {

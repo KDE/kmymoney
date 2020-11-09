@@ -64,7 +64,6 @@ public:
   void executeCustomAction(eView::Action action) override;
 
 public Q_SLOTS:
-  void slotSelectPayeeAndTransaction(const QString& payeeId, const QString& accountId = QString(), const QString& transactionId = QString());
   void slotHelp();
 
   /**

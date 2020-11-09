@@ -239,7 +239,7 @@ void KReportsView::slotOpenUrl(const QUrl &url)
       qWarning() << i18n("Unknown command '%1' in KReportsView::slotOpenUrl()", qPrintable(command));
 
   } else if (view == VIEW_LEDGER) {
-    emit selectByVariant(QVariantList {QVariant(id), QVariant(tid)}, eView::Intent::ShowTransaction);
+    emit selectByVariant(QVariantList {QVariant(id), QVariant(tid)}, eView::Intent::ShowTransactionInLedger);
   } else {
     qWarning() << i18n("Unknown view '%1' in KReportsView::slotOpenUrl()", qPrintable(view));
   }

@@ -51,6 +51,8 @@ public:
    */
   void setShowEntryForNewTransaction(bool show = true);
 
+  void selectTransaction(const QString& id);
+
   const SelectedObjects& selections() const;
 
 protected:

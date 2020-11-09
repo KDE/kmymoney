@@ -388,7 +388,7 @@ QHash<eMenu::Action, QAction *> KMyMoneyView::actionsToBeConnected()
     {Action::ShowCategoriesView,      View::Categories,         i18n("Show categories page"),             Qt::CTRL + Qt::Key_5},
     {Action::ShowTagsView,            View::Tags,               i18n("Show tags page"),                   },
     {Action::ShowPayeesView,          View::Payees,             i18n("Show payees page"),                 Qt::CTRL + Qt::Key_6},
-    {Action::ShowLedgersView,         View::NewLedgers,            i18n("Show ledgers page"),                Qt::CTRL + Qt::Key_7},
+    {Action::ShowLedgersView,         View::NewLedgers,         i18n("Show ledgers page"),                Qt::CTRL + Qt::Key_7},
     {Action::ShowInvestmentsView,     View::Investments,        i18n("Show investments page"),            Qt::CTRL + Qt::Key_8},
     {Action::ShowReportsView,         View::Reports,            i18n("Show reports page"),                Qt::CTRL + Qt::Key_9},
     {Action::ShowBudgetView,          View::Budget,             i18n("Show budget page"),                 },
@@ -466,12 +466,6 @@ void KMyMoneyView::switchToDefaultView()
   // if we currently see a different page, then select the right one
   if (viewFrames.contains(idView) && viewFrames[idView] != currentPage())
     showPage(idView);
-}
-
-void KMyMoneyView::slotPayeeSelected(const QString& payee, const QString& account, const QString& transaction)
-{
-  showPage(View::Payees);
-  static_cast<KPayeesView*>(viewBases[View::Payees])->slotSelectPayeeAndTransaction(payee, account, transaction);
 }
 
 void KMyMoneyView::slotTagSelected(const QString& tag, const QString& account, const QString& transaction)
@@ -605,7 +599,7 @@ void KMyMoneyView::slotOpenObjectRequested(const MyMoneyObject& obj)
     // currently it make's sense for asset and liability accounts
     if (!MyMoneyFile::instance()->isStandardAccount(acc.id()))
       if (viewBases.contains(View::OldLedgers))
-        viewBases[View::OldLedgers]->slotSelectByVariant(QVariantList {QVariant(acc.id()), QVariant(QString()) }, eView::Intent::ShowTransaction );
+        viewBases[View::OldLedgers]->slotSelectByVariant(QVariantList {QVariant(acc.id()), QVariant(QString()) }, eView::Intent::ShowTransactionInLedger );
 
   } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
 //    const auto& inst = static_cast<const MyMoneyInstitution&>(obj);
@@ -693,10 +687,10 @@ void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Inten
         viewBases[View::Categories]->slotSelectByVariant(variant, intent);
       break;
 
-    case eView::Intent::ShowTransaction:
-      if (viewBases.contains(View::OldLedgers)) {
-        showPage(View::OldLedgers);
-        viewBases[View::OldLedgers]->slotSelectByVariant(variant, intent);
+    case eView::Intent::ShowTransactionInLedger:
+      if (viewBases.contains(View::NewLedgers)) {
+        showPage(View::NewLedgers);
+        viewBases[View::NewLedgers]->slotSelectByVariant(variant, intent);
       }
       break;
 

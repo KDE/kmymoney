@@ -86,8 +86,6 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent) :
     {Action::CancelTransaction,         [this](){ KGlobalLedgerView::slotCancelTransaction(); }},
     {Action::EditSplits,                [this](){ KGlobalLedgerView::slotEditSplits(); }},
     {Action::CopySplits,                [this](){ KGlobalLedgerView::slotCopySplits(); }},
-    {Action::GoToPayee,                 [this](){ KGlobalLedgerView::slotGoToPayee(); }},
-    {Action::GoToAccount,               [this](){ KGlobalLedgerView::slotGoToAccount(); }},
     {Action::MatchTransaction,          [this](){ KGlobalLedgerView::slotMatchTransactions(); }},
     {Action::CombineTransactions,       [this](){ KGlobalLedgerView::slotCombineTransactions(); }},
     {Action::ToggleReconciliationFlag,  [this](){ KGlobalLedgerView::slotToggleReconciliationFlag(); }},
@@ -695,7 +693,7 @@ void KGlobalLedgerView::slotSelectByObject(const MyMoneyObject& obj, eView::Inte
 void KGlobalLedgerView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
 {
   switch(intent) {
-    case eView::Intent::ShowTransaction:
+    case eView::Intent::ShowTransactionInLedger:
       if (variant.count() == 2)
         slotLedgerSelected(variant.at(0).toString(), variant.at(1).toString());
       break;
@@ -1812,43 +1810,6 @@ void KGlobalLedgerView::slotCopySplits()
       } catch (const MyMoneyException &) {
         qDebug() << "transactionCopySplits() failed";
       }
-    }
-  }
-}
-
-void KGlobalLedgerView::slotGoToPayee()
-{
-  Q_D(KGlobalLedgerView);
-  if (!d->m_payeeGoto.isEmpty()) {
-    try {
-      QString transactionId;
-      if (d->m_selectedTransactions.count() == 1) {
-        transactionId = d->m_selectedTransactions[0].transaction().id();
-      }
-      // make sure to pass copies, as d->myMoneyView->slotPayeeSelected() overrides
-      // d->m_payeeGoto and d->m_currentAccount while calling slotUpdateActions()
-      QString payeeId = d->m_payeeGoto;
-      QString accountId = d->m_currentAccount.id();
-      emit selectByVariant(QVariantList {QVariant(payeeId), QVariant(accountId), QVariant(transactionId)}, eView::Intent::ShowPayee);
-//      emit openPayeeRequested(payeeId, accountId, transactionId);
-    } catch (const MyMoneyException &) {
-    }
-  }
-}
-
-void KGlobalLedgerView::slotGoToAccount()
-{
-  Q_D(KGlobalLedgerView);
-  if (!d->m_accountGoto.isEmpty()) {
-    try {
-      QString transactionId;
-      if (d->m_selectedTransactions.count() == 1) {
-        transactionId = d->m_selectedTransactions[0].transaction().id();
-      }
-      // make sure to pass a copy, as d->myMoneyView->slotLedgerSelected() overrides
-      // d->m_accountGoto while calling slotUpdateActions()
-      slotLedgerSelected(d->m_accountGoto, transactionId);
-    } catch (const MyMoneyException &) {
     }
   }
 }

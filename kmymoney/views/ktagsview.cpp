@@ -496,7 +496,7 @@ void KTagsView::slotSelectTransaction()
   if (!list.isEmpty()) {
     KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(list[0]);
     if (t)
-      emit selectByVariant(QVariantList {QVariant(t->split().accountId()), QVariant(t->transaction().id())}, eView::Intent::ShowTransaction);
+      emit selectByVariant(QVariantList {QVariant(t->split().accountId()), QVariant(t->transaction().id())}, eView::Intent::ShowTransactionInLedger);
   }
 }
 

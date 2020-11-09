@@ -269,8 +269,6 @@ private Q_SLOTS:
    * splits of the @b src transaction to all others.
    */
   void slotCopySplits();
-  void slotGoToPayee();
-  void slotGoToAccount();
   void slotMatchTransactions();
   void slotCombineTransactions();
   void slotToggleReconciliationFlag();

@@ -626,6 +626,43 @@ public:
     ui->m_updateButton->setEnabled(dirty);
   }
 
+  void selectPayeeAndTransaction(const QString& payeeId, const QString& accountId = QString(), const QString& transactionId = QString())
+  {
+    Q_Q(KPayeesView);
+    if (!q->isVisible())
+      return;
+
+    const auto model = ui->m_register->model();
+    Q_ASSERT(model != nullptr);
+
+    const auto rows = model->rowCount();
+    QModelIndex idx;
+    int transactionRow = -1;
+    // scan all transactions shown for this payee
+    for (int row = 0; row < rows; ++row) {
+      idx = model->index(row, 0);
+      if (idx.data(eMyMoney::Model::JournalTransactionIdRole).toString() == transactionId) {
+        // if the transaction id matches and we don't have a match already we keep it
+        if (transactionRow == -1)
+          transactionRow = row;
+        // in case the account is available and it matches, we use it right away
+        if (!accountId.isEmpty() && (idx.data(eMyMoney::Model::SplitAccountIdRole).toString() == accountId)) {
+          transactionRow = row;
+          break;
+        }
+      } else if (transactionRow != -1) {
+        // if we have a match for a transaction, we use it
+        break;
+      }
+    }
+
+    if (transactionRow != -1) {
+      ui->m_register->setCurrentIndex(model->index(transactionRow, 0));
+    }
+
+    ensurePayeeVisible(payeeId);
+  }
+
   Ui::KPayeesView*    ui;
   LedgerPayeeFilter*  m_transactionFilter;
 
@@ -634,16 +671,6 @@ public:
   MyMoneyContact*     m_contact;
   int                 m_syncedPayees;
   QList<MyMoneyPayee> m_payeesToSync;
-
-  /**
-    * List of selected payees
-    */
-  // QList<MyMoneyPayee> m_selectedPayeesList;
-
-  /**
-    * q member holds a list of all transactions
-    */
-  QList<QPair<MyMoneyTransaction, MyMoneySplit> > m_transactionList;
 
   /**
    * Semaphore to suppress loading during selection

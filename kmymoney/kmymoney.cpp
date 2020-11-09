@@ -1542,6 +1542,9 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::DebugTraces,                   &KMyMoneyApp::slotToggleTraces},
 #endif
       {Action::DebugTimers,                   &KMyMoneyApp::slotToggleTimers},
+      {Action::GoToPayee,                     &KMyMoneyApp::slotGoToPayee},
+      {Action::GoToAccount,                   &KMyMoneyApp::slotGoToAccount},
+
     };
 
     for (auto connection = actionConnections.cbegin(); connection != actionConnections.cend(); ++connection)
@@ -1978,6 +1981,38 @@ bool KMyMoneyApp::isFileOpenedInAnotherInstance(const QUrl &url)
 void KMyMoneyApp::slotShowTransactionDetail()
 {
 
+}
+
+
+void KMyMoneyApp::slotGoToPayee()
+{
+  const auto action = qobject_cast<QAction*>(sender());
+  if (action) {
+    QString payeeId, accountId, transactionId;
+    payeeId = action->data().toString();
+    if (!d->m_selections.isEmpty(SelectedObjects::Account)) {
+      accountId = d->m_selections.selection(SelectedObjects::Account).at(0);
+    }
+    if (!d->m_selections.isEmpty(SelectedObjects::Transaction)) {
+      transactionId = d->m_selections.selection(SelectedObjects::Transaction).at(0);
+    }
+    QVariantList args = { payeeId, accountId, transactionId };
+    d->m_myMoneyView->slotSelectByVariant(args, eView::Intent::ShowPayee );
+  }
+}
+
+void KMyMoneyApp::slotGoToAccount()
+{
+  const auto action = qobject_cast<QAction*>(sender());
+  if (action) {
+    QString accountId, transactionId;
+    accountId = action->data().toString();
+    if (!d->m_selections.isEmpty(SelectedObjects::Transaction)) {
+      transactionId = d->m_selections.selection(SelectedObjects::Transaction).at(0);
+    }
+    QVariantList args = { accountId, transactionId };
+    d->m_myMoneyView->slotSelectByVariant(args, eView::Intent::ShowTransactionInLedger );
+  }
 }
 
 void KMyMoneyApp::slotHideReconciledTransactions()
