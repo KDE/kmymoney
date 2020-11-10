@@ -83,14 +83,16 @@ if (PkgConfig_FOUND)
   pkg_check_modules(LIBOFX libofx IMPORTED_TARGET)
 endif()
 
-find_package(Qt5 5.6 REQUIRED
-  COMPONENTS Core DBus Widgets Svg Xml Test PrintSupport
-  OPTIONAL_COMPONENTS Sql Concurrent QuickWidgets)
+find_package(Qt5 5.6 REQUIRED COMPONENTS
+  Core DBus Widgets Svg Xml Test PrintSupport)
+find_package(Qt5 5.6 OPTIONAL_COMPONENTS
+  Sql Concurrent)
 
-find_package(KF5 5.2 REQUIRED
-  COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet IconThemes XmlGui TextWidgets Notifications KIO
-  OPTIONAL_COMPONENTS ${OPT_KF5_COMPONENTS}
-)
+find_package(KF5 5.2 REQUIRED COMPONENTS
+  Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet IconThemes XmlGui TextWidgets Notifications KIO)
+find_package(KF5 5.2 OPTIONAL_COMPONENTS
+  ${OPT_KF5_COMPONENTS})
+
 
 if(LibAlkimia5_DIR)
   set(_LibAlkimia5_DIR ${LibAlkimia5_DIR})
