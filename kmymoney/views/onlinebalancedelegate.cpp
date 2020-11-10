@@ -37,6 +37,7 @@
 // Project Includes
 
 #include "mymoneyfile.h"
+#include "mymoneyutils.h"
 #include "ledgerview.h"
 #include "journalmodel.h"
 #include "payeesmodel.h"
@@ -181,7 +182,7 @@ void OnlineBalanceDelegate::paint(QPainter* painter, const QStyleOptionViewItem&
       break;
     case JournalModel::Column::Date:
       painter->setPen(opt.palette.color(QPalette::Normal, QPalette::Text));
-      painter->drawText(textArea, opt.displayAlignment, QLocale().toString(onlineBalanceDate, QLocale::ShortFormat));
+      painter->drawText(textArea, opt.displayAlignment, MyMoneyUtils::formatDate(onlineBalanceDate));
       break;
     case JournalModel::Column::Balance:
       painter->setPen(opt.palette.color(QPalette::Normal, QPalette::Text));
