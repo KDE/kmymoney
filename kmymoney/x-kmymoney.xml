@@ -17,6 +17,7 @@
     <comment xml:lang="sl">Datoteka KMyMoney</comment>
     <comment xml:lang="sv">KMyMoney-fil</comment>
     <comment xml:lang="uk">файл KMyMoney</comment>
+    <comment xml:lang="zh_CN">KMyMoney 文件</comment>
     <glob pattern="*.kmy"/>
     <glob pattern="*.kmt"/>
   </mime-type>
