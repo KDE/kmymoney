@@ -632,11 +632,22 @@ public:
     if (!q->isVisible())
       return;
 
+    QModelIndex idx;
+    const auto list = ui->m_payees->model()->match(ui->m_payees->model()->index(0, 0), eMyMoney::Model::IdRole,
+                                         payeeId,
+                                         -1,                         // all splits
+                                         Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+
+    if (list.isEmpty()) {
+      qDebug() << "selectPayeeAndTransaction: Payee not found" << payeeId;
+      return;
+    }
+    ui->m_payees->setCurrentIndex(list.at(0));
+
     const auto model = ui->m_register->model();
     Q_ASSERT(model != nullptr);
 
     const auto rows = model->rowCount();
-    QModelIndex idx;
     int transactionRow = -1;
     // scan all transactions shown for this payee
     for (int row = 0; row < rows; ++row) {

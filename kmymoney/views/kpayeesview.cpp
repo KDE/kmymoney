@@ -133,8 +133,9 @@ void KPayeesView::slotSelectByVariant(const QVariantList& variant, eView::Intent
   Q_D(KPayeesView);
   switch (intent) {
     case eView::Intent::ShowPayee:
-      if (variant.count() == 3)
+      if (variant.count() == 3) {
         d->selectPayeeAndTransaction(variant.at(0).toString(), variant.at(1).toString(), variant.at(2).toString());
+      }
       break;
     default:
       break;
