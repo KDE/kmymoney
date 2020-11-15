@@ -70,7 +70,6 @@ public:
   ~KScheduledView() override;
 
   void executeCustomAction(eView::Action action) override;
-  void updateActions(const MyMoneyObject& obj) Q_DECL_DEPRECATED;
 
   // TODO: remove that function
   /**
@@ -99,9 +98,6 @@ private:
   Q_DECLARE_PRIVATE(KScheduledView)
 
 private Q_SLOTS:
-
-  void customContextMenuRequested(const QPoint);
-
   void slotListViewCollapsed(const QModelIndex& idx);
   void slotListViewExpanded(const QModelIndex& idx);
 

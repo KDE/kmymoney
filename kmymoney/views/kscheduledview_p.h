@@ -141,11 +141,6 @@ public:
     }
   }
 
-  static bool accountNameLessThan(const MyMoneyAccount& acc1, const MyMoneyAccount& acc2)
-  {
-    return acc1.name().toLower() < acc2.name().toLower();
-  }
-
   void settingsChanged()
   {
     if (m_filterModel) {
@@ -347,7 +342,6 @@ public:
       pActions[eMenu::Action::EnterTransaction]->setEnabled(false);
       // qDebug("KMyMoneyApp::slotTransactionsCancel");
       delete editor;
-      emit q->selectByObject(schedule, eView::Intent::None);
     }
   }
 

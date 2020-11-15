@@ -204,6 +204,14 @@ QVariant SchedulesModel::headerData(int section, Qt::Orientation orientation, in
   return QAbstractItemModel::headerData(section, orientation, role);
 }
 
+Qt::ItemFlags SchedulesModel::flags(const QModelIndex& index) const
+{
+  if (index.parent().isValid()) {
+    return (Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  }
+  return Qt::ItemIsEnabled;
+}
+
 QVariant SchedulesModel::data(const QModelIndex& idx, int role) const
 {
   if (!idx.isValid())
