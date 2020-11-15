@@ -160,9 +160,9 @@ void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint pos)
     const auto account = MyMoneyFile::instance()->accountsModel()->itemById(objId);
     if (!account.id().isEmpty()) {
       if (account.isIncomeExpense()) {
-        emit requestCustomContextMenu(eMenu::Menu::Category, mapToGlobal(pos));
+        emit requestCustomContextMenu(eMenu::Menu::Category, viewport()->mapToGlobal(pos));
       } else {
-        emit requestCustomContextMenu(eMenu::Menu::Account, mapToGlobal(pos));
+        emit requestCustomContextMenu(eMenu::Menu::Account, viewport()->mapToGlobal(pos));
       }
     }
     const auto institution = MyMoneyFile::instance()->institutionsModel()->itemById(objId);
@@ -172,7 +172,7 @@ void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint pos)
       // the index. If it is valid, we have been called via an account,
       // if it is invalid the source is an institution.
       if (!currentIndex().parent().isValid()) {
-        emit requestCustomContextMenu(eMenu::Menu::Institution, mapToGlobal(pos));
+        emit requestCustomContextMenu(eMenu::Menu::Institution, viewport()->mapToGlobal(pos));
       }
     }
   }

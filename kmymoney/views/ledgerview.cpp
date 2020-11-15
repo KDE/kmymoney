@@ -231,7 +231,7 @@ LedgerView::LedgerView(QWidget* parent)
   setContextMenuPolicy(Qt::CustomContextMenu);
   connect(this, &QWidget::customContextMenuRequested, this, [&](QPoint pos) {
     d->updateDynamicActions();
-    emit requestCustomContextMenu(eMenu::Menu::Transaction, mapToGlobal(pos));
+    emit requestCustomContextMenu(eMenu::Menu::Transaction, viewport()->mapToGlobal(pos));
   });
   setTabKeyNavigation(false);
 }
