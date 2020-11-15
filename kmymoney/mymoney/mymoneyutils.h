@@ -89,6 +89,20 @@ namespace MyMoneyUtils
 
   KMM_MYMONEY_EXPORT QString formatDate(const QDate& date);
 
+  /**
+   * This method is used to convert the payment type from its
+   * internal representation into a human readable format.
+   *
+   * @param paymentType numerical representation of the MyMoneySchedule
+   *                  payment type
+   *
+   * @return QString representing the human readable format translated according to the language catalog
+   *
+   * @sa MyMoneySchedule::paymentMethodToString()
+   */
+  KMM_MYMONEY_EXPORT QString paymentMethodToString(eMyMoney::Schedule::PaymentType paymentType);
+
+
 }
 
 #endif

@@ -12,7 +12,6 @@ set(libviews_a_SOURCES
   kmymoneyview.cpp
   kpayeesview.cpp
   kscheduledview.cpp
-  kscheduletreeitem.cpp
   ktagsview.cpp
   kpayeeidentifierview.cpp
   payeeidentifierselectiondelegate.cpp

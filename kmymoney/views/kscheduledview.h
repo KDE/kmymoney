@@ -34,8 +34,7 @@
 
 #include "kmymoneyviewbase.h"
 
-class QTreeWidgetItem;
-class KTreeWidgetSearchLineWidget;
+class QItemSelection;
 class MyMoneySchedule;
 class MyMoneyAccount;
 
@@ -70,7 +69,6 @@ public:
   ~KScheduledView() override;
 
   void executeCustomAction(eView::Action action) override;
-  void refresh();
   void updateActions(const MyMoneyObject& obj);
 
   // TODO: remove that function
@@ -79,8 +77,9 @@ public:
    */
   eDialogs::ScheduleResultCode enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys);
 
+  void slotSettingsChanged() override;
+
 public Q_SLOTS:
-  void slotSelectSchedule(const QString& schedule);
   void slotShowScheduleMenu(const MyMoneySchedule& sch);
   void slotEditSchedule();
 
@@ -100,18 +99,11 @@ private:
 private Q_SLOTS:
 
   void customContextMenuRequested(const QPoint);
-  void slotListItemExecuted(QTreeWidgetItem*, int);
 
-  void slotAccountActivated();
+  void slotListViewCollapsed(const QModelIndex& idx);
+  void slotListViewExpanded(const QModelIndex& idx);
 
-  void slotListViewCollapsed(QTreeWidgetItem* item);
-  void slotListViewExpanded(QTreeWidgetItem* item);
-
-  void slotTimerDone();
-
-  void slotSetSelectedItem();
-
-  void slotRearrange();
+  void slotSetSelectedItem(const QItemSelection& selected, const QItemSelection& deselected);
 
   void slotNewSchedule();
   void slotDeleteSchedule();
