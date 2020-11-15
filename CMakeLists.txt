@@ -91,7 +91,7 @@ endif()
 find_package(Qt5 5.6 REQUIRED COMPONENTS
   Core DBus Widgets Svg Xml Test PrintSupport)
 find_package(Qt5 5.6 OPTIONAL_COMPONENTS
-  Sql Concurrent)
+  Sql Concurrent QuickWidgets)
 
 find_package(KF5 5.2 REQUIRED COMPONENTS
   Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet IconThemes XmlGui TextWidgets Notifications KIO)

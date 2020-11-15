@@ -20,7 +20,20 @@
 
 #include "mymoneyutils.h"
 
-#include <iostream>
+// ----------------------------------------------------------------------------
+// QT Includes
+
+#include <QRegExp>
+#include <QDate>
+#include <QLocale>
+
+// ----------------------------------------------------------------------------
+// KDE Headers
+
+#include <KLocalizedString>
+
+// ----------------------------------------------------------------------------
+// Project Includes
 
 #include "mymoneyaccount.h"
 #include "mymoneymoney.h"
@@ -29,13 +42,7 @@
 #include "mymoneysplit.h"
 #include "mymoneyfile.h"
 #include "mymoneyexception.h"
-
-#include <cstdio>
-#include <cstdarg>
-
-#include <QRegExp>
-#include <QDate>
-#include <QLocale>
+#include "mymoneyschedule.h"
 
 QString MyMoneyUtils::getFileExtension(QString strFileName)
 {
@@ -160,3 +167,9 @@ QString MyMoneyUtils::formatDate(const QDate& date)
   }
   return date.toString(format);
 }
+
+QString MyMoneyUtils::paymentMethodToString(eMyMoney::Schedule::PaymentType paymentType)
+{
+  return i18nc("Scheduled Transaction payment type", MyMoneySchedule::paymentMethodToString(paymentType).toLatin1());
+}
+
