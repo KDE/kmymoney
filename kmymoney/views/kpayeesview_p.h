@@ -337,7 +337,7 @@ public:
     }
 
     QStringList payeeIds;
-    for (const auto payee : selection) {
+    for (const auto& payee : selection) {
       payeeIds.append(payee.id());
     }
     m_transactionFilter->setPayeeIdList(payeeIds);
