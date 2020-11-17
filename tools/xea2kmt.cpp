@@ -46,6 +46,7 @@ QDebug operator <<(QDebug dbg, const QXmlStreamAttribute &a)
 }
 
 static bool debug = false;
+static bool verbose = false;
 static bool withID = false;
 static bool noLevel1Names = false;
 static bool withTax = false;
@@ -555,7 +556,7 @@ int convertFileStructure(const QString &indir, const QString &outdir)
     // process templates
     foreach (const QString &file, files)
     {
-        if (debug)
+        if (debug || verbose)
             qDebug() << "processing" << file;
 
         // create output file dir
@@ -598,6 +599,7 @@ int main(int argc, char *argv[])
         qWarning() << "          --help                    - this page";
         qWarning() << "          --no-level1-names         - do not export account names for top level accounts";
         qWarning() << "          --prefix-name-with-code   - prefix account name with account code if present";
+        qWarning() << "          --verbose                 - output processing information";
         qWarning() << "          --with-id                 - write account id attribute";
         qWarning() << "          --with-tax-related        - parse and export gnucash 'tax-related' flag";
         qWarning() << "          --in-dir <dir>            - search for gnucash templates files in <dir>";
@@ -614,6 +616,8 @@ int main(int argc, char *argv[])
         QString arg = QLatin1String(argv[i]);
         if (arg == "--debug")
             debug = true;
+        else if (arg == "--verbose")
+            verbose = true;
         else if (arg == "--with-id")
             withID = true;
         else if (arg == "--no-level1-names")
