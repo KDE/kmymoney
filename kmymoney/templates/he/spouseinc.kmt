@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/he/acctchrt_spouseinc.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>הכנסות בן/בת זוג</title>
+ <shortdesc>חשבונות לניהול ומעקב הכנסות בן/בת זוגץ</shortdesc>
+ <longdesc>תוכלו להשתמש בתרשים חשבונות זה עם בן/בת הזוג עובדים ותרצו לנהל בנפרד את הכנסותיהם.</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="מיסים (בן/בת זוג)">
+    <account type="13" name="בטוח לאומי"/>
+    <account type="13" name="מ"/>
+    <account type="13" name="מיסים אחרים"/>
+    <account type="13" name="מס בריאות"/>
+    <account type="13" name="מס רווח הון"/>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="משכורת (בן/בת זוג)"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

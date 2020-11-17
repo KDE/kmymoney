@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/he/acctchrt_cdmoneymkt.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>חסכונות ושוק ההון</title>
+ <shortdesc>חשבונות להשקעות בשוק ההון וחיסכונות</shortdesc>
+ <longdesc>בחרו להשתמש בתרשים חשבונות זה אם יש לכם השקעות בשוק ההון ותוכניות חיסכון (חשבונות ריבית משוק ההון, ריבית, נירות ערך וכו).</longdesc>
+ <accounts>
+  <account type="12" name="">
+   <account type="12" name="הכנסות ריבית">
+    <account type="12" name="ריבית מחסכונות"/>
+    <account type="12" name="ריבית משוק ההון"/>
+   </account>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="רכוש שוטף">
+    <account type="1" name="חיסכון בבנק"/>
+    <account type="1" name="שוק ההון"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

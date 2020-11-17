@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ca/acctchrt_retiremt.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Comptes de jubilació</title>
+ <shortdesc>Compte de jubilació amb subcomptes d'inversions relacionades</shortdesc>
+ <longdesc>Voldreu escollir aquest joc de comptes si teniu comptes de jubilació (d'accions, bons, fons d'inversió, fons d'índex).</longdesc>
+ <accounts>
+  <account type="9" name="">
+   <account type="9" name="Inversions">
+    <account type="1" name="Jubilació">
+     <account type="15" name="Accions"/>
+     <account type="15" name="Bons"/>
+     <account type="15" name="Fons d'inversió"/>
+     <account type="15" name="Fons d'índex"/>
+    </account>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

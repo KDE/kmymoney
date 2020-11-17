@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/fr_BE/acctchrt_brokerage.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Comptes d'investissement</title>
+ <shortdesc>Compte de bourse/titres avec les comptes d'investissement apparentés
+    (action, obligation, fond commun, fond d'indices, intérêt, dividende)</shortdesc>
+ <longdesc>Vous devriez sélectionner cet ensemble de comptes si vous avez des investissements (action, obligation, fond commun, fond d'indices, intérêt, dividende).</longdesc>
+ <accounts>
+  <account type="9" name="">
+   <account type="9" name="Investissements">
+    <account type="1" name="Compte de bourse/titre">
+     <account type="9" name="Action"/>
+     <account type="9" name="Fond commun"/>
+     <account type="9" name="Marché d'indice"/>
+     <account type="9" name="Obligation"/>
+    </account>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Commissions"/>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Revenu d'intérêts">
+    <account type="12" name="Intérêts d'obligation"/>
+   </account>
+   <account type="12" name="Revenu de dividende"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

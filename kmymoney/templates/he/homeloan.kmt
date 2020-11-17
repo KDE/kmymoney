@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/he/acctchrt_homeloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>משכנתא</title>
+ <shortdesc>חשבונות משכנתא וחשבונות ריבית קשורים</shortdesc>
+ <longdesc>תוכלו להשתמש בתרשים חשבונות זה למעקב אחר תשלומי המשכנתא והריבית בגין המשכנתא.</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="ריבית">
+    <account type="13" name="ריבית על משכנתא"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="הלוואות">
+    <account type="10" name="משכנתא"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

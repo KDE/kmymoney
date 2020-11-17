@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/he/acctchrt_carloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>הלוואת רכב</title>
+ <shortdesc>תרשים חשבונות לניהול ומעקב אחר הלוואת רכב וחשבונות קשורים כגון ריבית על הלוואה ועלויות קשורות נוספות</shortdesc>
+ <longdesc>תוכלו להשתמש בתרשים חשבונות זה במידה ויש לכם הלוואה לרכישת רב, חשבון הלוואה וחשבון ריבית</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="ריבית">
+    <account type="13" name="ריבית על הלוואת רכב"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="הלוואות">
+    <account type="10" name="הלוואת רכב"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>
