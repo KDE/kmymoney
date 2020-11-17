@@ -565,6 +565,12 @@ namespace eMyMoney {
       TemplatesLongDescriptionRole,
       TemplatesDomRole,
       TemplatesLocaleRole,
+
+      // Tags
+      TagNameRole,
+
+      // General state
+      ClosedRole,
     };
   }
 }
