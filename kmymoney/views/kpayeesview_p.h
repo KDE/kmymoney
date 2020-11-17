@@ -82,13 +82,17 @@ class KPayeesViewPrivate : public KMyMoneyViewBasePrivate
   Q_DECLARE_PUBLIC(KPayeesView)
 
 public:
+  enum struct eTransactionDisplay {
+    ShowTransactions,
+    ClearTransactionDisplay
+  };
+
   explicit KPayeesViewPrivate(KPayeesView *qq)
     : KMyMoneyViewBasePrivate(qq)
     , ui(new Ui::KPayeesView)
     , m_transactionFilter (nullptr)
     , m_contact(nullptr)
     , m_syncedPayees(0)
-    , m_inSelection(false)
     , m_filterProxyModel(nullptr)
   {
   }
@@ -135,9 +139,9 @@ public:
     ui->matchTypeCombo->addItem(i18nc("@item Search match in list", "Match on a name listed below"), static_cast<int>(eMyMoney::Payee::MatchType::Key));
 
     //load the filter type
-    ui->m_filterBox->addItem(i18nc("@item Show all payees", "All"));
-    ui->m_filterBox->addItem(i18nc("@item Show only used payees", "Used"));
-    ui->m_filterBox->addItem(i18nc("@item Show only unused payees", "Unused"));
+    ui->m_filterBox->addItem(i18nc("@item Show all tags", "All"), ItemRenameProxyModel::eAllItem);
+    ui->m_filterBox->addItem(i18nc("@item Show only used tags", "Used"), ItemRenameProxyModel::eReferencedItems);
+    ui->m_filterBox->addItem(i18nc("@item Show only unused tags", "Unused"), ItemRenameProxyModel::eUnReferencedItems);
     ui->m_filterBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
     ui->m_updateButton->setIcon(Icons::get(Icon::DialogOK));
@@ -295,7 +299,7 @@ public:
     ui->telephoneEdit->setText(QString());
     ui->emailEdit->setText(QString());
     ui->notesEdit->setText(QString());
-    showTransactions();
+    showTransactions(eTransactionDisplay::ClearTransactionDisplay);
   }
 
   QStringList selectedPayeeIds() const
@@ -328,13 +332,7 @@ public:
     return payees;
   }
 
-  /**
-    * This method loads the m_transactionList, clears
-    * the m_TransactionPtrVector and rebuilds and sorts
-    * it according to the current settings. Then it
-    * loads the m_transactionView with the transaction data.
-    */
-  void showTransactions()
+  void showTransactions(eTransactionDisplay clearDisplay = eTransactionDisplay::ShowTransactions)
   {
     MyMoneyMoney balance;
     const auto file = MyMoneyFile::instance();
@@ -348,8 +346,10 @@ public:
     }
 
     QStringList payeeIds;
-    for (const auto& payee : selection) {
-      payeeIds.append(payee.id());
+    if (clearDisplay == eTransactionDisplay::ShowTransactions) {
+      for (const auto& payee : selection) {
+        payeeIds.append(payee.id());
+      }
     }
     m_transactionFilter->setPayeeIdList(payeeIds);
 
@@ -700,6 +700,18 @@ public:
     ensurePayeeVisible(payeeId);
   }
 
+  void finalizePendingChanges()
+  {
+    Q_Q(KPayeesView);
+    if (isDirty()) {
+      if (KMessageBox::questionYesNo(q,
+        i18n("<qt>Do you want to save the changes for <b>%1</b>?</qt>", m_newName),
+                                     i18n("Save changes")) == KMessageBox::Yes) {
+        q->slotUpdatePayee();
+      }
+    }
+  }
+
   Ui::KPayeesView*    ui;
   LedgerPayeeFilter*  m_transactionFilter;
 
@@ -708,11 +720,6 @@ public:
   MyMoneyContact*     m_contact;
   int                 m_syncedPayees;
   QList<MyMoneyPayee> m_payeesToSync;
-
-  /**
-   * Semaphore to suppress loading during selection
-   */
-  bool m_inSelection;
 
   AccountNamesFilterProxyModel *m_filterProxyModel;
   ItemRenameProxyModel*         m_renameProxyModel;

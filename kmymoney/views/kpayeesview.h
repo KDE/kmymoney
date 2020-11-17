@@ -80,6 +80,8 @@ Q_SIGNALS:
 
 protected:
   void showEvent(QShowEvent* event) override;
+  void aboutToShow() override;
+  void aboutToHide() override;
 
 private Q_SLOTS:
   /**
