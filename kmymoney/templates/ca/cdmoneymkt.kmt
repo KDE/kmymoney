@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ca/acctchrt_cdmoneymkt.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Pagarés i mercat monetari</title>
+ <shortdesc>Comptes per pagarés i inversions de mercat monetari</shortdesc>
+ <longdesc>Hauríeu de seleccionar aquest joc de comptes si empreu pagarés o comptes de mercat monetari (pagarés, interessos de pagarés, mercat monetari, interessos de mercat monetari).</longdesc>
+ <accounts>
+  <account type="9" name="">
+   <account type="9" name="Actiu circulant">
+    <account type="1" name="Mercat monetari"/>
+    <account type="1" name="Pagaré de banc"/>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Ingressos per interessos">
+    <account type="12" name="Interès de mercat monetari"/>
+    <account type="12" name="Interès de pagarés"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

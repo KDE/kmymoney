@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hu/acctchrt_eduloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Diákhitel</title>
+ <shortdesc>Diákhitelszámla és kamat</shortdesc>
+ <longdesc>Annak érdemes kiválasztani ezt, aki vett fel diákhitelt (DH, DH-kamat)</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Kamat">
+    <account type="13" name="Diákhitel kamata"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Hitelek">
+    <account type="10" name="Diákhitel"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

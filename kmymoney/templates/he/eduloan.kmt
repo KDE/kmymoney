@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/he/acctchrt_eduloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>הלוואת שכר לימוד</title>
+ <shortdesc>חשבונות הלוואת שכר לימוד וחשבונות ריבית קשורים</shortdesc>
+ <longdesc>תוכלו לבחור בתרשים חשבונות זה במידה וקיימת הלוואת לימודים והוצאות ריבית בגין ההלוואה.</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="ריבית">
+    <account type="13" name="ריבית על הלוואת לימודים"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="הלוואות">
+    <account type="10" name="הלוואת לימודים"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

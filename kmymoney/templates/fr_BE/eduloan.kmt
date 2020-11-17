@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/fr_BE/acctchrt_eduloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Emprunt Etudiant</title>
+ <shortdesc>Comptes pour pour les emprunts étudiants et les intérêts associés.</shortdesc>
+ <longdesc>Vous devriez sélectionner cet ensemble de comptes si vous avez un emprunt étudiant (emprunt étudiant, intérêts d'emprunt étudiant).</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Intérêts">
+    <account type="13" name="Intérêts d'emprunt étudiant"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Emprunts">
+    <account type="10" name="emprunt étudiant"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

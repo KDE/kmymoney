@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/he/acctchrt_full.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>תרשים חשבונות מלא</title>
+ <shortdesc>תרשים עץ חשבונות מלא המכיל את כל חשבונות ברירת המחדל.</shortdesc>
+ <longdesc></longdesc>
+ <accounts>
+  <account type="16" name="">
+   <account type="16" name="יתרות פתיחה"/>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="אחזקת מקום"/>
+   <account type="13" name="ארוח">
+    <account type="13" name="נופש"/>
+    <account type="13" name="נסיעה"/>
+    <account type="13" name="פנאי/סרטים"/>
+   </account>
+   <account type="13" name="ביגוד"/>
+   <account type="13" name="ביטוח">
+    <account type="13" name="ביטוח בריאות"/>
+    <account type="13" name="ביטוח חיים"/>
+    <account type="13" name="ביטוח מבנה"/>
+    <account type="13" name="ביטוח רכב"/>
+    <account type="13" name="ביטוח תכולה"/>
+   </account>
+   <account type="13" name="דמי מנוי"/>
+   <account type="13" name="הוצאות רפואיות"/>
+   <account type="13" name="חומרי ניקוי"/>
+   <account type="13" name="חינוך"/>
+   <account type="13" name="טיפול בצאצאים"/>
+   <account type="13" name="טלפון"/>
+   <account type="13" name="כביסה/ניקוי יבש"/>
+   <account type="13" name="כבלים"/>
+   <account type="13" name="כרב">
+    <account type="13" name="דלק"/>
+    <account type="13" name="חניה"/>
+    <account type="13" name="עמלות"/>
+    <account type="13" name="תיקונים ואחזקה"/>
+   </account>
+   <account type="13" name="מזון ומצרכים"/>
+   <account type="13" name="מיחשוב"/>
+   <account type="13" name="מיסים">
+    <account type="13" name="ארנונה"/>
+    <account type="13" name="בטוח לאומי"/>
+    <account type="13" name="מיסים אחרים"/>
+    <account type="13" name="מס בריאות"/>
+    <account type="13" name="מס הכנסה"/>
+    <account type="13" name="מס רווח הון"/>
+   </account>
+   <account type="13" name="מיסים בן/בת זוג">
+    <account type="13" name="ארנונה"/>
+    <account type="13" name="בטוח לאומי"/>
+    <account type="13" name="מיסים אחרים"/>
+    <account type="13" name="מס בריאות"/>
+    <account type="13" name="מס הכנסה"/>
+   </account>
+   <account type="13" name="מסעדות"/>
+   <account type="13" name="מתנות"/>
+   <account type="13" name="ספרות"/>
+   <account type="13" name="עמלות"/>
+   <account type="13" name="עמלות בנק"/>
+   <account type="13" name="פעולות תיקון"/>
+   <account type="13" name="ריבית">
+    <account type="13" name="ריבית אחרת"/>
+    <account type="13" name="ריבית על הלוואת שכר לימוד"/>
+    <account type="13" name="ריבית על משכנתא"/>
+    <account type="13" name="ריבת על הלוואת רכב"/>
+   </account>
+   <account type="13" name="שונות"/>
+   <account type="13" name="שכירות"/>
+   <account type="13" name="שרותים מקוונים"/>
+   <account type="13" name="שרותים מקומיים">
+    <account type="13" name="גז"/>
+    <account type="13" name="חשמל"/>
+    <account type="13" name="מיים"/>
+    <account type="13" name="פינוי אשפה"/>
+   </account>
+   <account type="13" name="תחבורה ציבורית"/>
+   <account type="13" name="תחביבים"/>
+   <account type="13" name="תרומות"/>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="בונוס"/>
+   <account type="12" name="הכנסות אחרות"/>
+   <account type="12" name="הכנסות מדיבידנד"/>
+   <account type="12" name="הכנסות ריבית">
+    <account type="12" name="הכנסות ריבית אחרות"/>
+    <account type="12" name="ריבית יתרת זכות בבנק"/>
+    <account type="12" name="ריבית מאג&quot;ח"/>
+    <account type="12" name="ריבית מהלוואות שנתנו"/>
+    <account type="12" name="ריבית ממניות"/>
+    <account type="12" name="ריבית מתוכניות חיסכון"/>
+   </account>
+   <account type="12" name="משכורת"/>
+   <account type="12" name="משכורת בן/בת זוג"/>
+   <account type="12" name="מתנות שנתקבלו"/>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="הלוואות">
+    <account type="10" name="הלוואות אחרות"/>
+    <account type="10" name="הלוואת כלי רכב"/>
+    <account type="10" name="הלוואת שכר לימוד"/>
+    <account type="10" name="משכנתא"/>
+   </account>
+   <account type="4" name="כרטיס אשראי"/>
+   <account type="4" name="קו אשראי"/>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="השקעות">
+    <account type="11" name="מטבע חוץ"/>
+    <account type="1" name="נירות ערך">
+     <account type="15" name="אגרות חוב"/>
+     <account type="15" name="מניות"/>
+     <account type="15" name="קרנות נאמנות"/>
+     <account type="15" name="תעודות סל"/>
+    </account>
+    <account type="1" name="קרן פנסיה">
+     <account type="15" name="אגרות חוב"/>
+     <account type="15" name="מניות"/>
+     <account type="15" name="קרנות נאמנות"/>
+     <account type="15" name="תעודות סל"/>
+    </account>
+    <account type="1" name="קרן פנסיה בן/בת זוג">
+     <account type="15" name="אגרות חוב"/>
+     <account type="15" name="מניות"/>
+     <account type="15" name="קרנות נאמנות"/>
+     <account type="15" name="תעודות סל"/>
+    </account>
+   </account>
+   <account type="9" name="רכוש קבוע">
+    <account type="9" name="כלי רכב"/>
+    <account type="9" name="מבנה"/>
+    <account type="9" name="רכוש אחר"/>
+   </account>
+   <account type="9" name="רכוש שוטף">
+    <account type="1" name="בנק"/>
+    <account type="1" name="חיסכון"/>
+    <account type="3" name="מזומנים"/>
+    <account type="1" name="עובר ושב"/>
+    <account type="1" name="שוק ההון"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

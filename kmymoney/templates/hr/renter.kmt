@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hr/acctchrt_renter.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Unajmitelj stana/kuće</title>
+ <shortdesc>Troškovi unajmitelja stana ili kuće</shortdesc>
+ <longdesc>Kontni plan za knjiženje i praćenje troškova, kad unajmiš stan ili kuću (osiguranje, najamnina, režije, telekomunikacija)</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Osiguranje">
+    <account type="13" name="Osiguranje kućanstva"/>
+   </account>
+   <account type="13" name="Stanovanje">
+    <account type="13" name="Najamnina"/>
+    <account type="13" name="Režije">
+     <account type="13" name="Grijanje"/>
+     <account type="13" name="Komunalna naknada"/>
+     <account type="13" name="Plin"/>
+     <account type="13" name="Pričuva"/>
+     <account type="13" name="Struja"/>
+     <account type="13" name="Voda"/>
+     <account type="13" name="Čistoća"/>
+    </account>
+    <account type="13" name="Telekomunikacija">
+     <account type="13" name="Internet"/>
+     <account type="13" name="Telefon"/>
+     <account type="13" name="Televizija"/>
+    </account>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

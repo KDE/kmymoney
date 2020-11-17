@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/fr_BE/acctchrt_business.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Comptes d'affaires</title>
+ <shortdesc>Hiérarchie complète de comptes pour les affaires.</shortdesc>
+ <longdesc>Les utilisateurs gérant une entreprise sélectionneront ceci au lieu des autres choix. Ceci inclut tous les comptes dont vous avez besoin dans la plupart des activités, y compris les paiements différés, les rentrées et les sorties.</longdesc>
+ <accounts>
+  <account type="9" name="">
+   <account type="9" name="Actifs actuels">
+    <account type="1" name="Compte courant"/>
+    <account type="1" name="Compte d'épargne"/>
+    <account type="3" name="Liquidités"/>
+   </account>
+   <account type="9" name="Compte à recevoir"/>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Ajustement"/>
+   <account type="13" name="Assurance">
+    <account type="13" name="Assurance incapacité"/>
+    <account type="13" name="Assurance responsabilité"/>
+    <account type="13" name="Personnel"/>
+   </account>
+   <account type="13" name="Auto">
+    <account type="13" name="Carburant"/>
+    <account type="13" name="Frais"/>
+    <account type="13" name="Parking"/>
+    <account type="13" name="Réparations et entretien"/>
+   </account>
+   <account type="13" name="Charges professionelles">
+    <account type="13" name="Charges légales"/>
+    <account type="13" name="Comptabilité"/>
+   </account>
+   <account type="13" name="Charité"/>
+   <account type="13" name="Cotisations et abonnements"/>
+   <account type="13" name="Divers"/>
+   <account type="13" name="Dépenses de personnel"/>
+   <account type="13" name="Dépréciation"/>
+   <account type="13" name="Formation"/>
+   <account type="13" name="Fournitures de bureau"/>
+   <account type="13" name="Frais bancaires"/>
+   <account type="13" name="Impression et Reproduction"/>
+   <account type="13" name="Licences et autorisations"/>
+   <account type="13" name="Livres"/>
+   <account type="13" name="Location"/>
+   <account type="13" name="Location d'équipement"/>
+   <account type="13" name="Poste et livraisons"/>
+   <account type="13" name="Remises"/>
+   <account type="13" name="Repas"/>
+   <account type="13" name="Réparations">
+    <account type="13" name="Dépenses d'entretien"/>
+    <account type="13" name="Réparations des immeubles"/>
+    <account type="13" name="Réparations des ordinateurs"/>
+    <account type="13" name="Réparations des équipements"/>
+   </account>
+   <account type="13" name="Services">
+    <account type="13" name="Câble"/>
+    <account type="13" name="Eau"/>
+    <account type="13" name="Gaz"/>
+    <account type="13" name="Internet"/>
+    <account type="13" name="Ordures ménagères"/>
+    <account type="13" name="Téléphone"/>
+    <account type="13" name="Téléphone portable"/>
+    <account type="13" name="Électricité"/>
+   </account>
+   <account type="13" name="Services extérieurs"/>
+   <account type="13" name="Taxes">
+    <account type="13" name="Autres Taxes"/>
+    <account type="13" name="Emp-FICA"/>
+    <account type="13" name="FICA"/>
+    <account type="13" name="Federal"/>
+    <account type="13" name="Immobilier"/>
+    <account type="13" name="Local"/>
+    <account type="13" name="URSSAF"/>
+    <account type="13" name="État/Département"/>
+   </account>
+   <account type="13" name="Voyages et divertissements">
+    <account type="13" name="Divertissements"/>
+    <account type="13" name="Repas"/>
+    <account type="13" name="Voyages"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="4" name="Carte de crédit"/>
+   <account type="10" name="Compte à payer"/>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Autres rentrées"/>
+   <account type="12" name="Dépenses remboursées"/>
+   <account type="12" name="Revenus d'intérêts"/>
+   <account type="12" name="Ventes"/>
+  </account>
+  <account type="16" name="">
+   <account type="16" name="Gains enregistrés"/>
+   <account type="16" name="Soldes initiaux">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

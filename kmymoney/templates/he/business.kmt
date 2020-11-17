@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/he/acctchrt_business.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>חשבונותעסקיים</title>
+ <shortdesc>תרשים עץ חשבונות מלא עבור עסקים.</shortdesc>
+ <longdesc>בחרו להשתמשבתרשים חשבונות זה לניהול עסק. התרשים יתאים לרוב העסקים וכולל חשבונות חייבים וזכאים, הון והתחייבויות, הכנסות והוצאות.</longdesc>
+ <accounts>
+  <account type="16" name="">
+   <account type="16" name="יתרות פתיחה"/>
+   <account type="16" name="רווחים מיועדים"/>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="אגרות ורישיונות"/>
+   <account type="13" name="ארוח"/>
+   <account type="13" name="ביטוח">
+    <account type="13" name="ביטוח חבות צד ג'"/>
+    <account type="13" name="ביטוח נכות"/>
+    <account type="13" name="סוציאליות"/>
+   </account>
+   <account type="13" name="דואר ומשלוחים"/>
+   <account type="13" name="דמי חבר ומינויים"/>
+   <account type="13" name="דפוס"/>
+   <account type="13" name="הוצאות שכר"/>
+   <account type="13" name="הנחות מזומן שנתנו"/>
+   <account type="13" name="השכלה"/>
+   <account type="13" name="מיסים">
+    <account type="13" name="ארנונה"/>
+    <account type="13" name="ביטוח לאומי מעביד"/>
+    <account type="13" name="מס אחר"/>
+    <account type="13" name="מס בריאות מעביד"/>
+    <account type="13" name="מס הכנסה"/>
+    <account type="13" name="מס מעסיקים"/>
+    <account type="13" name="מס רווח הון"/>
+    <account type="13" name="מס שבח"/>
+   </account>
+   <account type="13" name="נסיעות עיסקיות">
+    <account type="13" name="ארוח"/>
+    <account type="13" name="ארוחות"/>
+    <account type="13" name="נסיעה"/>
+   </account>
+   <account type="13" name="ספרות"/>
+   <account type="13" name="פחת"/>
+   <account type="13" name="פעולות תיקון והתאמה"/>
+   <account type="13" name="צורכי משרד"/>
+   <account type="13" name="רכב">
+    <account type="13" name="אחזקה ותיקונים"/>
+    <account type="13" name="דלק"/>
+    <account type="13" name="חניה"/>
+    <account type="13" name="עמלות"/>
+   </account>
+   <account type="13" name="שונות"/>
+   <account type="13" name="שירותי חוץ"/>
+   <account type="13" name="שירותים בנקאיים"/>
+   <account type="13" name="שירותים מקומיים">
+    <account type="13" name="אינטרנט"/>
+    <account type="13" name="גז"/>
+    <account type="13" name="חשמל"/>
+    <account type="13" name="טלפון"/>
+    <account type="13" name="טלפון נייד"/>
+    <account type="13" name="כבלים"/>
+    <account type="13" name="מיים"/>
+    <account type="13" name="פינוי אשפה"/>
+   </account>
+   <account type="13" name="שירותים מקצועיים">
+    <account type="13" name="הנהלת חשבונות וביקורת"/>
+    <account type="13" name="משפטיות"/>
+   </account>
+   <account type="13" name="שכירות"/>
+   <account type="13" name="שכירות ציוד"/>
+   <account type="13" name="תיקונים">
+    <account type="13" name="אחזקת מבנה"/>
+    <account type="13" name="אחזקת מחשוב"/>
+    <account type="13" name="אחזקת ציוד"/>
+    <account type="13" name="הוצאות ניקיון"/>
+   </account>
+   <account type="13" name="תרומות"/>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="החזר הוצאות"/>
+   <account type="12" name="הכנסות אחרות"/>
+   <account type="12" name="הכנסות ריבית"/>
+   <account type="12" name="מכירות"/>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="זכאים"/>
+   <account type="4" name="כרטיס אשראי"/>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="חייבים"/>
+   <account type="9" name="רכוש שוטף">
+    <account type="1" name="חשבון חיסכון"/>
+    <account type="1" name="חשבון עובר ושב"/>
+    <account type="3" name="קופה קטנה"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>
