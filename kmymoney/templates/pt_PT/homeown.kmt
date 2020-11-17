@@ -9,17 +9,19 @@
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>Despesas da Casa</title>
+ <title>Despesas da casa</title>
  <shortdesc>Despesas associadas à posse de uma habitação</shortdesc>
- <longdesc>Desejará seleccionar este conjunto de contas caso possua uma habitação própria. Este conjunto disponibiliza um grupo de contas para acompanhar despesas da casa (seguro, impostos, reparações).</longdesc>
+ <longdesc>Desejará seleccionar este conjunto de contas caso possua uma habitação
+  própria. Este conjunto disponibiliza um grupo de contas para acompanhar
+  despesas da casa (seguro, impostos, reparações).</longdesc>
  <accounts>
   <account type="13" name="">
    <account type="13" name="Impostos">
-    <account type="13" name="Contribuição Autárquica"/>
+    <account type="13" name="Imposto Municipal sobre Imóveis"/>
    </account>
-   <account type="13" name="Reparações na Casa"/>
+   <account type="13" name="Reparações em casa"/>
    <account type="13" name="Seguro">
-    <account type="13" name="Seguro da Casa"/>
+    <account type="13" name="Seguro da casa"/>
    </account>
   </account>
  </accounts>

@@ -83,7 +83,9 @@
    </account>
   </account>
   <account type="16" name="">
-   <account type="16" name="Αρχικά υπόλοιπα"/>
+   <account type="16" name="Αρχικά υπόλοιπα">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="10" name="">
    <account type="10" name="Λογαριασμοί πληρωτέοι">

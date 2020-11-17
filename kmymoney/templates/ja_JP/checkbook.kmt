@@ -15,7 +15,9 @@
  <accounts>
   <account type="12" name=""/>
   <account type="16" name="">
-   <account type="16" name="開始残高"/>
+   <account type="16" name="開始残高">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="13" name=""/>
   <account type="9" name="">

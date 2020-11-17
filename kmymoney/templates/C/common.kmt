@@ -11,7 +11,7 @@
 <kmymoney-account-template>
  <title>Common Accounts</title>
  <shortdesc>A basic set of accounts most commonly used</shortdesc>
- <longdesc>Most users will want to select this set of accounts. It includes most commonly used accounts (checking, savings, cash, credit card, income, common expenses).</longdesc>
+ <longdesc>Most personal users, but not business users, will want to select this set of accounts. It includes most commonly used accounts (checking, savings, cash, credit card, income, common expenses).</longdesc>
  <accounts>
   <account type="9" name="">
    <account type="9" name="Current Assets">
@@ -21,13 +21,15 @@
    </account>
   </account>
   <account type="16" name="">
-   <account type="16" name="Opening Balances"/>
+   <account type="16" name="Opening Balances">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="13" name="">
    <account type="13" name="Adjustment"/>
    <account type="13" name="Auto">
     <account type="13" name="Fees"/>
-    <account type="13" name="Gas"/>
+    <account type="13" name="Fuel"/>
     <account type="13" name="Parking"/>
     <account type="13" name="Repair and Maintenance"/>
    </account>

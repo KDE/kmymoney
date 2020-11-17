@@ -14,7 +14,9 @@
  <longdesc>De fleste brugere kan have nytte af disse konti. Almindelige brugte konti er medtaget (check, lønkonto, kontant, kreditkort, indkomst og almindelige udgifter)</longdesc>
  <accounts>
   <account type="16" name="">
-   <account type="16" name="Åbningssaldi"/>
+   <account type="16" name="Åbningssaldi">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="9" name="">
    <account type="9" name="Aktuelle aktiver">

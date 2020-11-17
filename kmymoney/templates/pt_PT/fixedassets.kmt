@@ -9,15 +9,16 @@
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>Imobilizado Corpóreo</title>
- <shortdesc>Contas para registar activos fixos de grandes dimensões</shortdesc>
- <longdesc>Desejará seleccionar este conjunto de contas se tiver activos fixos de grandes dimensões (casa, automóvel, casa de férias, outros activos).</longdesc>
+ <title>Imobilizado corpóreo</title>
+ <shortdesc>Contas para activos fixos de grandes dimensões</shortdesc>
+ <longdesc>Desejará seleccionar este conjunto de contas se tiver activos fixos
+  de grandes dimensões (casa, automóvel, casa de férias, outros activos).</longdesc>
  <accounts>
   <account type="9" name="">
-   <account type="9" name="Activos Fixos">
+   <account type="9" name="Activos fixos">
     <account type="9" name="Automóvel"/>
     <account type="9" name="Casa"/>
-    <account type="9" name="Outro Activo"/>
+    <account type="9" name="Outros activos"/>
    </account>
   </account>
  </accounts>

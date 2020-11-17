@@ -9,18 +9,20 @@
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>Empréstimo para Educação</title>
- <shortdesc>Contas para empréstimos para estudos e juros associados</shortdesc>
- <longdesc>Desejará seleccionar este conjunto de contas se possuir um empréstimo para educação (empréstimo para educação, juros do empréstimo para educação).</longdesc>
+ <title>Empréstimo para educação</title>
+ <shortdesc>Contas de empréstimo estudantil e seus juros</shortdesc>
+ <longdesc>Desejará seleccionar este conjunto de contas se tiver um empréstimo
+  para educação (empréstimo para educação, juros do empréstimo para
+  educação).</longdesc>
  <accounts>
   <account type="13" name="">
    <account type="13" name="Juros">
-    <account type="13" name="Juros do Empréstimo para Educação"/>
+    <account type="13" name="Juros do empréstimo para educação"/>
    </account>
   </account>
   <account type="10" name="">
    <account type="10" name="Empréstimos">
-    <account type="10" name="Empréstimo para Educação"/>
+    <account type="10" name="Empréstimo para educação"/>
    </account>
   </account>
  </accounts>

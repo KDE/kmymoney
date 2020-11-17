@@ -9,12 +9,13 @@
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>Despesas de Cuidados Infantís</title>
- <shortdesc>Uma conta para acompanhar despesas com cuidados infantís</shortdesc>
- <longdesc>Desejará seleccionar este conjunto de contas caso tenha despesas com crianças.</longdesc>
+ <title>Despesas de cuidados infantis</title>
+ <shortdesc>Contas para despesas com cuidados infantis</shortdesc>
+ <longdesc>Desejará seleccionar este conjunto de contas caso tenha despesas com
+  crianças.</longdesc>
  <accounts>
   <account type="13" name="">
-   <account type="13" name="Cuidados Infantís"/>
+   <account type="13" name="Cuidados infantis"/>
   </account>
  </accounts>
 </kmymoney-account-template>
