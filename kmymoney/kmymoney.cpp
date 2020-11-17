@@ -1300,6 +1300,8 @@ void KMyMoneyApp::slotSelectionChanged(const SelectedObjects& selections)
       qDebug() << "Budgets:" << selections.selection(SelectedObjects::Budget);
     if (!selections.isEmpty(SelectedObjects::OnlineJob))
       qDebug() << "OnlineJobs:" << selections.selection(SelectedObjects::OnlineJob);
+    if (!selections.isEmpty(SelectedObjects::Tag))
+      qDebug() << "Tags:" << selections.selection(SelectedObjects::Tag);
   } else {
     qDebug() << "selection reset";
   }
@@ -3615,9 +3617,6 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
       // start the check for scheduled transactions that need to be
       // entered as soon as the event loop becomes active.
       QMetaObject::invokeMethod(q, "slotCheckSchedules",  Qt::QueuedConnection);
-
-      // make sure to catch view activations
-      connect(m_myMoneyView, &KMyMoneyView::viewActivated, q, &KMyMoneyApp::slotViewSelected);
       break;
 
     case eKMyMoney::FileAction::Saved:

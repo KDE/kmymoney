@@ -161,7 +161,7 @@ KMyMoneyView::KMyMoneyView()
   // set the model
   setModel(m_model);
   setCurrentPage(viewFrames[View::Home]);
-  connect(this, SIGNAL(currentPageChanged(QModelIndex,QModelIndex)), this, SLOT(slotCurrentPageChanged(QModelIndex,QModelIndex)));
+  connect(this, &KMyMoneyView::currentPageChanged, this, &KMyMoneyView::slotSwitchView);
 
   updateViewType();
 }
@@ -179,10 +179,15 @@ void KMyMoneyView::slotFileOpened()
   // delay the switchToDefaultView call until the event loop is running
   QMetaObject::invokeMethod(this, "switchToDefaultView", Qt::QueuedConnection);
   slotObjectSelected(MyMoneyAccount()); // in order to enable update all accounts on file reload
+
+  // make sure to catch view activations
+  connect(this, &KMyMoneyView::viewActivated, this, &KMyMoneyView::slotRememberLastView);
 }
 
 void KMyMoneyView::slotFileClosed()
 {
+  disconnect(this, &KMyMoneyView::viewActivated, this, &KMyMoneyView::slotRememberLastView);
+
   showPageAndFocus(View::Home);
 
   for( const auto view : qAsConst(viewBases)) {
@@ -323,7 +328,6 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
   connect(viewBases[idView], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
   connect(this, &KMyMoneyView::settingsChanged, viewBases[idView], &KMyMoneyViewBase::slotSettingsChanged);
 
-  connect(this, &KMyMoneyView::currentPageChanged, viewBases[idView], &KMyMoneyViewBase::viewChanged);
   connect(viewBases[idView], &KMyMoneyViewBase::viewStateChanged, viewFrames[idView], &KPageWidgetItem::setEnabled);
   connect(viewBases[idView], &KMyMoneyViewBase::requestSelectionChange, this, &KMyMoneyView::requestSelectionChange);
 }
@@ -333,7 +337,6 @@ void KMyMoneyView::removeView(View idView)
   if (!viewBases.contains(idView))
     return;
 
-  disconnect(this, &KMyMoneyView::currentPageChanged, viewBases[idView], &KMyMoneyViewBase::viewChanged);
   disconnect(viewBases[idView], &KMyMoneyViewBase::viewStateChanged, viewFrames[idView], &KPageWidgetItem::setEnabled);
   disconnect(viewBases[idView], &KMyMoneyViewBase::requestSelectionChange, this, &KMyMoneyView::requestSelectionChange);
 
@@ -507,28 +510,42 @@ void KMyMoneyView::slotShowTransactionDetail(bool detailed)
   slotRefreshViews();
 }
 
-void KMyMoneyView::slotCurrentPageChanged(const QModelIndex current, const QModelIndex previous)
+void KMyMoneyView::slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* previous)
 {
+  if (previous != nullptr) {
+    const auto view = qobject_cast<KMyMoneyViewBase*>(previous->widget());
+    if (view) {
+      view->aboutToHide();
+    }
+  }
+
   // set the current page's title in the header
   if (m_header)
-    m_header->setText(m_model->data(current, KPageModel::HeaderRole).toString());
+    m_header->setText(current->header());
 
-  const auto view = currentPage();
-  // remember the selected view if there is a real change
-  if (previous.isValid()) {
-    QHash<View, KPageWidgetItem*>::const_iterator it;
-    for(it = viewFrames.cbegin(); it != viewFrames.cend(); ++it) {
-      if ((*it) == view) {
-        emit viewActivated(it.key());
-        break;
+  if (current != nullptr) {
+    const auto view = qobject_cast<KMyMoneyViewBase*>(current->widget());
+    if (view) {
+      view->aboutToShow();
+      // remember last selected view
+      // omit the initial page selection
+      if (previous != nullptr) {
+        for (auto it = viewFrames.constBegin(); it != viewFrames.constEnd(); ++it) {
+          if (it.value() == current) {
+            emit viewActivated(it.key());
+            break;
+          }
+        }
       }
     }
   }
 
-  if (viewBases.contains(View::OldLedgers) && view != viewFrames.value(View::OldLedgers))
-    viewBases[View::OldLedgers]->executeCustomAction(eView::Action::DisableViewDepenedendActions);
-
   pActions[eMenu::Action::Print]->setEnabled(canPrint());
+}
+
+void KMyMoneyView::slotRememberLastView(View view)
+{
+  KMyMoneySettings::setLastViewSelected(static_cast<int>(view));
 }
 
 void KMyMoneyView::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& newAccount)

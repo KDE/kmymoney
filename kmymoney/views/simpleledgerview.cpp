@@ -477,22 +477,20 @@ void SimpleLedgerView::setupCornerWidget()
   }
 }
 
-void SimpleLedgerView::viewChanged(KPageWidgetItem* current, KPageWidgetItem* before)
+void SimpleLedgerView::aboutToShow()
 {
   Q_D(SimpleLedgerView);
-  // did I get selected?
-  if (current->widget() == this) {
-    d->m_selections.clearSelections();
-    // in case we have at least one account open
-    if (d->ui->ledgerTab->count() > 1) {
-      // use its current selection
-      const auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());
-      if (view) {
-        d->m_selections = view->selections();
-      }
+
+  d->m_selections.clearSelections();
+  // in case we have at least one account open
+  if (d->ui->ledgerTab->count() > 1) {
+    // use its current selection
+    const auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());
+    if (view) {
+      d->m_selections = view->selections();
     }
-    emit requestSelectionChange(d->m_selections);
   }
+  emit requestSelectionChange(d->m_selections);
 }
 
 void SimpleLedgerView::slotSettingsChanged()

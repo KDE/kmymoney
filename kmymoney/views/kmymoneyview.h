@@ -178,10 +178,10 @@ public Q_SLOTS:
     * in the kmymoney.rc file so that it can be selected automatically when
     * the application is started again.
     *
-    * @param current QModelIndex of the current page item
-    * @param previous QModelIndex of the previous page item
+    * @param current KPageWidgetItem pointer to the current page item
+    * @param previous KPageWidgetItem pointer to the previous page item
     */
-  void slotCurrentPageChanged(const QModelIndex current, const QModelIndex previous);
+  void slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* previous);
 
   /**
     * Brings up a dialog to change the list(s) settings and saves them into the
@@ -248,6 +248,7 @@ private Q_SLOTS:
    */
   void slotContextMenuRequested(const MyMoneyObject& obj);
 
+  void slotRememberLastView(View view);
 
 private:
 
@@ -267,7 +268,7 @@ Q_SIGNALS:
     * This signal is emitted whenever a view is selected.
     * The parameter @p view is identified as one of KMyMoneyView::viewID.
     */
-  void viewActivated(View view) Q_DECL_DEPRECATED;
+  void viewActivated(View view);
 
   void accountSelectedForContextMenu(const MyMoneyAccount& acc);
 

@@ -45,7 +45,6 @@ public:
   virtual void executeCustomAction(eView::Action action) override;
 
 public Q_SLOTS:
-  void viewChanged(KPageWidgetItem* current, KPageWidgetItem* before) override;
   void showEvent(QShowEvent* event) override;
 
   void slotSelectByVariant(const QVariantList& args, eView::Intent intent) override;
@@ -64,6 +63,7 @@ private Q_SLOTS:
 
 protected:
   bool eventFilter(QObject* o, QEvent* e) override;
+  void aboutToShow() override;
 
 Q_SIGNALS:
   void showForms(bool show);

@@ -53,16 +53,16 @@ KMyMoneyViewBase::~KMyMoneyViewBase()
 {
 }
 
-void KMyMoneyViewBase::viewChanged(KPageWidgetItem* current, KPageWidgetItem* before)
+void KMyMoneyViewBase::aboutToShow()
 {
-  Q_UNUSED(before)
   Q_D(KMyMoneyViewBase);
 
-  // did I get selected?
-  if (current->widget() == static_cast<QWidget*>(this)) {
-    // tell everyone what is selected here
-    emit requestSelectionChange(d->m_selections);
-  }
+  // tell everyone what is selected here
+  emit requestSelectionChange(d->m_selections);
+}
+
+void KMyMoneyViewBase::aboutToHide()
+{
 }
 
 void KMyMoneyViewBase::changeEvent(QEvent* ev)

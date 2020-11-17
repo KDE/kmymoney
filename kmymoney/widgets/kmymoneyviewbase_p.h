@@ -47,6 +47,8 @@ public:
 
   explicit KMyMoneyViewBasePrivate(KMyMoneyViewBase* parent)
   : q_ptr(parent)
+  , m_needsRefresh(false)
+  , m_havePendingChanges(false)
   {}
 
   virtual ~KMyMoneyViewBasePrivate() {}
@@ -85,9 +87,10 @@ public:
     return formatViewLabelValue(value, scheme);
   }
 
-  bool                  m_needsRefresh;
   KMyMoneyViewBase*     q_ptr;
   SelectedObjects       m_selections;
+  bool                  m_needsRefresh;
+  bool                  m_havePendingChanges;
 };
 
 #endif

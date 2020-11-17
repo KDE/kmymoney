@@ -58,6 +58,26 @@ public:
 
   virtual void executeCustomAction(eView::Action) {}
 
+  /**
+   * This method is called during a view change on the view
+   * that is left. In case you override it, make sure to
+   * call the base class method as well.
+   */
+  virtual void aboutToHide();
+
+  /**
+   * This method is called during a view change on the view
+   * that is entered. In case you override it, make sure to
+   * call the base class method as well. The base class
+   * implementation takes care of saving the last selected
+   * view and informs the application about the current
+   * selected objects in this view by emitting the
+   * requestSelectionChange() signal.
+   *
+   * @sa requestSelectionChange()
+   */
+  virtual void aboutToShow();
+
 protected:
   void changeEvent(QEvent* ev) override;
 
@@ -81,12 +101,10 @@ Q_SIGNALS:
   void customActionRequested(View, eView::Action);
 
 public Q_SLOTS:
-  virtual void viewChanged(KPageWidgetItem* current, KPageWidgetItem* before);
-
   virtual void updateActions(const SelectedObjects& selections) { Q_UNUSED(selections) }
 
   virtual void slotSelectByObject(const MyMoneyObject&, eView::Intent) Q_DECL_DEPRECATED {}
-  virtual void slotSelectByVariant(const QVariantList& args, eView::Intent intent) {}
+  virtual void slotSelectByVariant(const QVariantList& args, eView::Intent intent) { Q_UNUSED(args) Q_UNUSED(intent)}
   virtual void slotSettingsChanged() {}
 
 protected:
