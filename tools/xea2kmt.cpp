@@ -299,6 +299,12 @@ public:
                         xml.writeEndElement();
                     }
                 }
+                if (account->slotList.contains("equity-type") && account->slotList["equity-type"] == "opening-balance") {
+                    xml.writeStartElement("flag");
+                    xml.writeAttribute("name","OpeningBalanceAccount");
+                    xml.writeAttribute("value","Yes");
+                    xml.writeEndElement();
+                }
             }
             index++;
             writeAccountsAsXml(xml, account->id, index);
