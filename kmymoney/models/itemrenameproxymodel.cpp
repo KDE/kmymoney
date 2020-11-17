@@ -66,6 +66,14 @@ Qt::ItemFlags ItemRenameProxyModel::flags(const QModelIndex& idx) const
   return flags;
 }
 
+void ItemRenameProxyModel::setReferenceFilter(const QVariant& filterType)
+{
+  const uint type = filterType.toUInt();
+  if (type < eMaxItems) {
+    setReferenceFilter(static_cast<ReferenceFilterType>(type));
+  }
+}
+
 void ItemRenameProxyModel::setReferenceFilter(ItemRenameProxyModel::ReferenceFilterType filterType)
 {
   if (m_referenceFilter != filterType) {
@@ -80,6 +88,7 @@ bool ItemRenameProxyModel::filterAcceptsRow(int source_row, const QModelIndex& s
     const auto idx = sourceModel()->index(source_row, 0, source_parent);
     const auto itemId = idx.data(eMyMoney::Model::IdRole).toString();
     if (!itemId.isEmpty()) {
+      QVariant rc;
       switch(m_referenceFilter) {
         case eReferencedItems:
           if (!MyMoneyFile::instance()->referencedObjects().contains(itemId))
@@ -88,6 +97,18 @@ bool ItemRenameProxyModel::filterAcceptsRow(int source_row, const QModelIndex& s
         case eUnReferencedItems:
           if (MyMoneyFile::instance()->referencedObjects().contains(itemId))
             return false;
+          break;
+        case eOpenedItems:
+          rc = idx.data(eMyMoney::Model::ClosedRole);
+          if (rc.isValid() && (rc.toBool() == true)) {
+            return false;
+          }
+          break;
+        case eClosedItems:
+          rc = idx.data(eMyMoney::Model::ClosedRole);
+          if (rc.isValid() && (rc.toBool() == false)) {
+            return false;
+          }
           break;
         default:
           break;

@@ -1,6 +1,7 @@
 /*
  * Copyright 2012       Alessandro Russo <axela74@yahoo.it>
  * Copyright 2017       Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baugart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -32,7 +33,6 @@
 #include <KLocalizedString>
 #include <KSharedConfig>
 #include <KConfigGroup>
-#include <KListWidgetSearchLine>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -47,59 +47,29 @@
 #include "icons.h"
 #include "viewenums.h"
 #include "widgetenums.h"
+#include "itemrenameproxymodel.h"
+#include "tagsmodel.h"
+#include "journalmodel.h"
+#include "ledgertagfilter.h"
+#include "specialdatesmodel.h"
+#include "specialdatesfilter.h"
 
 using namespace Icons;
 namespace Ui { class KTagsView; }
-
-// *** KTagListItem Implementation ***
-
-/**
-  * This class represents an item in the tags list view.
-  */
-class KTagListItem : public QListWidgetItem
-{
-public:
-  /**
-    * Constructor to be used to construct a tag entry object.
-    *
-    * @param parent pointer to the QListWidget object this entry should be
-    *               added to.
-    * @param tag    const reference to MyMoneyTag for which
-    *               the QListWidget entry is constructed
-    */
-  explicit KTagListItem(QListWidget *parent, const MyMoneyTag& tag) :
-    QListWidgetItem(parent, QListWidgetItem::UserType),
-    m_tag(tag)
-  {
-    setText(tag.name());
-    // allow in column rename
-    setFlags(Qt::ItemIsEditable | Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-  }
-
-  ~KTagListItem() {}
-
-  MyMoneyTag tag() const
-  {
-    return m_tag;
-  }
-
-private:
-  MyMoneyTag  m_tag;
-};
 
 class KTagsViewPrivate : public KMyMoneyViewBasePrivate
 {
   Q_DECLARE_PUBLIC(KTagsView)
 
 public:
+
   explicit KTagsViewPrivate(KTagsView *qq)
     : KMyMoneyViewBasePrivate(qq)
     , ui(new Ui::KTagsView)
+    , m_transactionFilter(nullptr)
+    , m_renameProxyModel(nullptr)
     , m_needLoad(true)
-    , m_searchWidget(nullptr)
-    , m_inSelection(false)
     , m_allowEditing(true)
-    , m_tagFilterType(0)
   {
   }
 
@@ -120,19 +90,14 @@ public:
     m_needLoad = false;
     ui->setupUi(q);
 
-    // create the searchline widget
-    // and insert it into the existing layout
-    m_searchWidget = new KListWidgetSearchLine(q, ui->m_tagsList);
-    m_searchWidget->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed));
+    ui->m_register->setSingleLineDetailRole(eMyMoney::Model::TransactionCounterAccountRole);
     ui->m_tagsList->setContextMenuPolicy(Qt::CustomContextMenu);
-    ui->m_listTopHLayout->insertWidget(0, m_searchWidget);
 
-    //load the filter type
-    ui->m_filterBox->addItem(i18nc("@item Show all tags", "All"));
-    ui->m_filterBox->addItem(i18nc("@item Show only used tags", "Used"));
-    ui->m_filterBox->addItem(i18nc("@item Show only unused tags", "Unused"));
-    ui->m_filterBox->addItem(i18nc("@item Show only opened tags", "Opened"));
-    ui->m_filterBox->addItem(i18nc("@item Show only closed tags", "Closed"));
+    ui->m_filterBox->addItem(i18nc("@item Show all tags", "All"), ItemRenameProxyModel::eAllItem);
+    ui->m_filterBox->addItem(i18nc("@item Show only used tags", "Used"), ItemRenameProxyModel::eReferencedItems);
+    ui->m_filterBox->addItem(i18nc("@item Show only unused tags", "Unused"), ItemRenameProxyModel::eUnReferencedItems);
+    ui->m_filterBox->addItem(i18nc("@item Show only opened tags", "Opened"), ItemRenameProxyModel::eOpenedItems);
+    ui->m_filterBox->addItem(i18nc("@item Show only closed tags", "Closed"), ItemRenameProxyModel::eClosedItems);
     ui->m_filterBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
     ui->m_newButton->setIcon(Icons::get(Icon::TagNew));
@@ -141,22 +106,36 @@ public:
     ui->m_updateButton->setIcon(Icons::get(Icon::DialogOK));
     ui->m_updateButton->setEnabled(false);
 
-    ui->m_register->setupRegister(MyMoneyAccount(),
-                                  QList<eWidgets::eTransaction::Column> { eWidgets::eTransaction::Column::Date,
-                                                                          eWidgets::eTransaction::Column::Account,
-                                                                          eWidgets::eTransaction::Column::Detail,
-                                                                          eWidgets::eTransaction::Column::ReconcileFlag,
-                                                                          eWidgets::eTransaction::Column::Payment,
-                                                                          eWidgets::eTransaction::Column::Deposit
-                                  });
-    ui->m_register->setSelectionMode(QTableWidget::SingleSelection);
-    ui->m_register->setDetailsColumnType(eWidgets::eRegister::DetailColumn::AccountFirst);
+    // setup the model stack
+    auto file = MyMoneyFile::instance();
+    m_transactionFilter = new LedgerTagFilter(ui->m_register, QVector<QAbstractItemModel*>());
+    auto specialDatesFilter = new SpecialDatesFilter(file->specialDatesModel(), q);
+    specialDatesFilter->setSourceModel(m_transactionFilter);
+    ui->m_register->setModel(specialDatesFilter);
+
+    // keep track of changing balances
+    q->connect(file->journalModel(), &JournalModel::balanceChanged, m_transactionFilter, &LedgerTagFilter::recalculateBalancesOnIdle);
+
     ui->m_balanceLabel->hide();
 
-    q->connect(ui->m_tagsList, &QListWidget::currentItemChanged, q, static_cast<void (KTagsView::*)(QListWidgetItem *, QListWidgetItem *)>(&KTagsView::slotSelectTag));
-    q->connect(ui->m_tagsList, &QListWidget::itemSelectionChanged, q, static_cast<void (KTagsView::*)()>(&KTagsView::slotSelectTag));
-    q->connect(ui->m_tagsList, &QListWidget::itemDoubleClicked, q, &KTagsView::slotStartRename);
-    q->connect(ui->m_tagsList, &QListWidget::itemChanged, q, &KTagsView::slotRenameSingleTag);
+    m_renameProxyModel = new ItemRenameProxyModel(q);
+    ui->m_tagsList->setModel(m_renameProxyModel);
+
+    m_renameProxyModel->setReferenceFilter(ItemRenameProxyModel::eAllItem);
+    m_renameProxyModel->setFilterKeyColumn(TagsModel::Column::Name);
+    m_renameProxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    m_renameProxyModel->setRenameColumn(TagsModel::Column::Name);
+    m_renameProxyModel->setSortRole(eMyMoney::Model::TagNameRole);
+    m_renameProxyModel->setSortLocaleAware(true);
+    m_renameProxyModel->sort(0);
+    m_renameProxyModel->setDynamicSortFilter(true);
+
+    m_renameProxyModel->setSourceModel(MyMoneyFile::instance()->tagsModel());
+
+    q->connect(ui->m_tagsList->selectionModel(), &QItemSelectionModel::selectionChanged, q, &KTagsView::slotTagSelectionChanged);
+
+    q->connect(m_renameProxyModel, &ItemRenameProxyModel::renameItem, q, &KTagsView::slotRenameSingleTag);
+    q->connect(m_renameProxyModel, &ItemRenameProxyModel::dataChanged, q, &KTagsView::slotModelDataChanged);
     q->connect(ui->m_tagsList, &QWidget::customContextMenuRequested, q, &KTagsView::slotShowTagsMenu);
 
     q->connect(ui->m_newButton,    &QAbstractButton::clicked, q, &KTagsView::slotNewTag);
@@ -170,23 +149,163 @@ public:
     q->connect(ui->m_updateButton, &QAbstractButton::clicked, q, &KTagsView::slotUpdateTag);
     q->connect(ui->m_helpButton, &QAbstractButton::clicked,   q, &KTagsView::slotHelp);
 
-    q->connect(ui->m_register, &KMyMoneyRegister::Register::editTransaction, q, &KTagsView::slotSelectTransaction);
-
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KTagsView::refresh);
-
-    q->connect(ui->m_filterBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), q, &KTagsView::slotChangeFilter);
-
     // use the size settings of the last run (if any)
     auto grp = KSharedConfig::openConfig()->group("Last Use Settings");
     ui->m_splitter->restoreState(grp.readEntry("KTagsViewSplitterSize", QByteArray()));
     ui->m_splitter->setChildrenCollapsible(false);
 
+    QVector<int> columns;
+    columns = {
+      JournalModel::Column::Number,
+      JournalModel::Column::Security,
+      JournalModel::Column::CostCenter,
+      JournalModel::Column::Quantity,
+      JournalModel::Column::Price,
+      JournalModel::Column::Amount,
+      JournalModel::Column::Value,
+      JournalModel::Column::Balance,
+    };
+    ui->m_register->setColumnsHidden(columns);
+    columns = {
+      JournalModel::Column::Date,
+      JournalModel::Column::Account,
+      JournalModel::Column::Detail,
+      JournalModel::Column::Reconciliation,
+      JournalModel::Column::Payment,
+      JournalModel::Column::Deposit,
+    };
+    ui->m_register->setColumnsShown(columns);
+
     // At start we haven't any tag selected
     ui->m_tabWidget->setEnabled(false); // disable tab widget
     ui->m_deleteButton->setEnabled(false); // disable delete and rename button
     ui->m_renameButton->setEnabled(false);
+
     m_tag = MyMoneyTag(); // make sure we don't access an undefined tag
-    q->clearItemData();
+    clearItemData();
+  }
+
+  void clearItemData()
+  {
+    ui->m_colorbutton->setColor(QColor());
+    ui->m_closed->setChecked(false);
+    ui->m_notes->setText(QString());
+    showTransactions();
+  }
+
+  void showTransactions()
+  {
+    Q_Q(KTagsView);
+    MyMoneyMoney balance;
+    auto file = MyMoneyFile::instance();
+    MyMoneySecurity base = file->baseCurrency();
+
+    const auto selection = q->selectedTags();
+
+    if (selection.isEmpty() || !ui->m_tabWidget->isEnabled()) {
+      ui->m_balanceLabel->setText(i18n("Balance: %1", balance.formatMoney(file->baseCurrency().smallestAccountFraction())));
+      return;
+    }
+
+    QStringList tagIds;
+    for (const auto& tag : selection) {
+        tagIds.append(tag.id());
+    }
+    m_transactionFilter->setTagIdList(tagIds);
+
+    MyMoneyMoney deposit, payment;
+    bool balanceAccurate = true;
+    QSet<QString> accountIds;
+    /// @todo port to new model code
+#if 0
+    // setup the list and the pointer vector
+    MyMoneyTransactionFilter filter;
+    filter.setConsiderCategorySplits();
+    filter.addTag(d->m_tag.id());
+    filter.setDateFilter(KMyMoneySettings::startDate().date(), QDate());
+
+    // retrieve the list from the engine
+    file->transactionList(d->m_transactionList, filter);
+
+    // create the elements for the register
+    QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
+    QMap<QString, int> uniqueMap;
+    MyMoneyMoney deposit, payment;
+
+    int splitCount = 0;
+    bool balanceAccurate = true;
+    QSet<QString> accountIds;
+    for (it = d->m_transactionList.constBegin(); it != d->m_transactionList.constEnd(); ++it) {
+        const MyMoneySplit& split = (*it).second;
+        accountIds.insert(split.accountId());
+        MyMoneyAccount acc = file->account(split.accountId());
+        ++splitCount;
+        uniqueMap[(*it).first.id()]++;
+
+        KMyMoneyRegister::Register::transactionFactory(d->ui->m_register, (*it).first, (*it).second, uniqueMap[(*it).first.id()]);
+
+        // take care of foreign currencies
+        MyMoneyMoney val = split.shares().abs();
+        if (acc.currencyId() != base.id()) {
+          const MyMoneyPrice &price = file->price(acc.currencyId(), base.id());
+          // in case the price is valid, we use it. Otherwise, we keep
+          // a flag that tells us that the balance is somewhat inaccurate
+          if (price.isValid()) {
+              val *= price.rate(base.id());
+          } else {
+              balanceAccurate = false;
+          }
+        }
+
+        if (split.shares().isNegative()) {
+          payment += val;
+        } else {
+          deposit += val;
+        }
+    }
+
+
+    // add the group markers
+    ui->m_register->addGroupMarkers();
+
+    // sort the transactions according to the sort setting
+    ui->m_register->sortItems();
+
+    // remove trailing and adjacent markers
+    ui->m_register->removeUnwantedGroupMarkers();
+
+    ui->m_register->updateRegister(true);
+
+    // we might end up here with updates disabled on the register so
+    // make sure that we enable updates here
+    ui->m_register->setUpdatesEnabled(true);
+#endif
+    balance = deposit - payment;
+    ui->m_balanceLabel->setText(i18n("Balance: %1%2",
+                                balanceAccurate ? "" : "~",
+                                balance.formatMoney(file->baseCurrency().smallestAccountFraction())));
+    // only make balance visible if all transactions cover a single account
+    ui->m_balanceLabel->setVisible(accountIds.count() < 2);
+  }
+
+  void ensureTagVisible(const QString& id)
+  {
+    const auto baseIdx = MyMoneyFile::instance()->tagsModel()->indexById(id);
+    if (baseIdx.isValid()) {
+      const auto idx = MyMoneyFile::baseModel()->mapFromBaseSource(m_renameProxyModel, baseIdx);
+      ui->m_tagsList->setCurrentIndex(idx);
+      ui->m_tagsList->scrollTo(idx);
+    }
+  }
+
+  void loadDetails()
+  {
+    ui->m_colorbutton->setEnabled(true);
+    ui->m_colorbutton->setColor(m_tag.tagColor());
+    ui->m_closed->setEnabled(true);
+    ui->m_closed->setChecked(m_tag.isClosed());
+    ui->m_notes->setEnabled(true);
+    ui->m_notes->setText(m_tag.notes());
   }
 
   /**
@@ -212,40 +331,22 @@ public:
     return rc;
   }
 
-  Ui::KTagsView   *ui;
+  Ui::KTagsView*                ui;
+  LedgerTagFilter*              m_transactionFilter;
+  ItemRenameProxyModel*         m_renameProxyModel;
 
-  MyMoneyTag   m_tag;
-  QString      m_newName;
-
-  /**
-      * This member holds a list of all transactions
-      */
-  QList<QPair<MyMoneyTransaction, MyMoneySplit> > m_transactionList;
+  MyMoneyTag                    m_tag;
+  QString                       m_newName;
 
   /**
-      * This member holds the load state of page
-      */
+    * This member holds the load state of page
+    */
   bool m_needLoad;
 
   /**
-      * Search widget for the list
-      */
-  KListWidgetSearchLine*  m_searchWidget;
-
-  /**
-     * Semaphore to suppress loading during selection
-     */
-  bool m_inSelection;
-
-  /**
-     * This signals whether a tag can be edited
-     **/
+    * This signals whether a tag can be edited
+    **/
   bool m_allowEditing;
-
-  /**
-      * This holds the filter type
-      */
-  int m_tagFilterType;
 
   QList<MyMoneyTag> m_selectedTags;
 };

@@ -25,6 +25,7 @@
 
 #include <QTimer>
 #include <QMenu>
+#include <QComboBox>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -51,10 +52,6 @@
 
 using namespace Icons;
 
-/* -------------------------------------------------------------------------*/
-/*                         KTransactionPtrVector                            */
-/* -------------------------------------------------------------------------*/
-
 // *** KTagsView Implementation ***
 KTagsView::KTagsView(QWidget *parent) :
     KMyMoneyViewBase(*new KTagsViewPrivate(this), parent)
@@ -77,14 +74,10 @@ KTagsView::~KTagsView()
 void KTagsView::executeCustomAction(eView::Action action)
 {
   switch(action) {
-    case eView::Action::Refresh:
-      refresh();
-      break;
-
     case eView::Action::SetDefaultFocus:
       {
         Q_D(KTagsView);
-        QTimer::singleShot(0, d->m_searchWidget, SLOT(setFocus()));
+        QMetaObject::invokeMethod(d->ui->m_searchWidget, "setFocus");
       }
       break;
 
@@ -93,38 +86,16 @@ void KTagsView::executeCustomAction(eView::Action action)
   }
 }
 
-void KTagsView::refresh()
-{
-  Q_D(KTagsView);
-  if (isVisible()) {
-    if (d->m_inSelection)
-      QTimer::singleShot(0, this, SLOT(refresh()));
-    else
-      loadTags();
-    d->m_needsRefresh = false;
-  } else {
-    d->m_needsRefresh = true;
-  }
-}
-
-void KTagsView::slotStartRename(QListWidgetItem* item)
-{
-  Q_D(KTagsView);
-  d->m_allowEditing = true;
-  d->ui->m_tagsList->editItem(item);
-}
-
-// This variant is only called when a single tag is selected and renamed.
-void KTagsView::slotRenameSingleTag(QListWidgetItem* ta)
+void KTagsView::slotRenameSingleTag(const QModelIndex& idx, const QVariant& value)
 {
   Q_D(KTagsView);
   //if there is no current item selected, exit
-  if (d->m_allowEditing == false || !d->ui->m_tagsList->currentItem() || ta != d->ui->m_tagsList->currentItem())
+  if (d->m_allowEditing == false || !idx.isValid())
     return;
 
   //qDebug() << "[KTagsView::slotRenameTag]";
   // create a copy of the new name without appended whitespaces
-  auto new_name = ta->text();
+  const auto new_name = value.toString();
   if (d->m_tag.name() != new_name) {
     MyMoneyFileTransaction ft;
     try {
@@ -136,7 +107,6 @@ void KTagsView::slotRenameSingleTag(QListWidgetItem* ta)
                                         i18n("A tag with the name '%1' already exists. It is not advisable to have "
                                             "multiple tags with the same identification name. Are you sure you would like "
                                             "to rename the tag?", new_name)) != KMessageBox::Yes) {
-          ta->setText(d->m_tag.name());
           return;
         }
       }
@@ -151,57 +121,37 @@ void KTagsView::slotRenameSingleTag(QListWidgetItem* ta)
 
       // make sure, that the record is visible even if it moved
       // out of sight due to the rename operation
-      ensureTagVisible(d->m_tag.id());
+      d->ensureTagVisible(d->m_tag.id());
 
       ft.commit();
 
     } catch (const MyMoneyException &e) {
       KMessageBox::detailedSorry(this, i18n("Unable to modify tag"), QString::fromLatin1(e.what()));
     }
-  } else {
-    ta->setText(new_name);
   }
 }
 
-void KTagsView::ensureTagVisible(const QString& id)
-{
-  Q_D(KTagsView);
-  for (int i = 0; i < d->ui->m_tagsList->count(); ++i) {
-    KTagListItem* ta = dynamic_cast<KTagListItem*>(d->ui->m_tagsList->item(0));
-    if (ta && ta->tag().id() == id) {
-      d->ui->m_tagsList->scrollToItem(ta, QAbstractItemView::PositionAtCenter);
-
-      d->ui->m_tagsList->setCurrentItem(ta);      // active item and deselect all others
-      d->ui->m_tagsList->setCurrentRow(i, QItemSelectionModel::ClearAndSelect);   // and select it
-      break;
-    }
-  }
-}
-
-void KTagsView::selectedTags(QList<MyMoneyTag>& tagsList) const
+QList<MyMoneyTag> KTagsView::selectedTags() const
 {
   Q_D(const KTagsView);
-  QList<QListWidgetItem *> selectedItems = d->ui->m_tagsList->selectedItems();
-  QList<QListWidgetItem *>::ConstIterator itemsIt = selectedItems.constBegin();
-  while (itemsIt != selectedItems.constEnd()) {
-    KTagListItem* item = dynamic_cast<KTagListItem*>(*itemsIt);
-    if (item)
-      tagsList << item->tag();
-    ++itemsIt;
+  QList<MyMoneyTag> tags;
+  auto baseModel = MyMoneyFile::instance()->tagsModel();
+  const QModelIndexList selection = d->ui->m_tagsList->selectionModel()->selectedIndexes();
+  for (const auto& idx : selection) {
+    const auto baseIdx = baseModel->mapToBaseSource(idx);
+    const auto tag = baseModel->itemByIndex(baseIdx);
+    if (!tag.id().isEmpty()) {
+      tags.append(tag);
+    }
   }
+  return tags;
 }
 
-void KTagsView::slotSelectTag(QListWidgetItem* cur, QListWidgetItem* prev)
+void KTagsView::slotTagSelectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
 {
-  Q_D(KTagsView);
-  Q_UNUSED(cur);
-  Q_UNUSED(prev);
+  Q_UNUSED(selected)
+  Q_UNUSED(deselected)
 
-  d->m_allowEditing = false;
-}
-
-void KTagsView::slotSelectTag()
-{
   Q_D(KTagsView);
   // check if the content of a currently selected tag was modified
   // and ask to store the data
@@ -209,23 +159,22 @@ void KTagsView::slotSelectTag()
     if (KMessageBox::questionYesNo(this, QString("<qt>%1</qt>").arg(
                                      i18n("Do you want to save the changes for <b>%1</b>?", d->m_newName)),
                                    i18n("Save changes")) == KMessageBox::Yes) {
-      d->m_inSelection = true;
       slotUpdateTag();
-      d->m_inSelection = false;
     }
   }
+
   // loop over all tags and count the number of tags, also
   // obtain last selected tag
-  QList<MyMoneyTag> tagsList;
-  selectedTags(tagsList);
-  slotSelectTags(tagsList);
+  const auto selectedItems = selectedTags();
 
-  if (tagsList.isEmpty()) {
+  const auto selectedItemCount = selectedItems.count();
+
+  if (selectedItemCount == 0) {
     d->ui->m_tabWidget->setEnabled(false); // disable tab widget
     d->ui->m_balanceLabel->hide();
     d->ui->m_deleteButton->setEnabled(false); //disable delete and rename button
     d->ui->m_renameButton->setEnabled(false);
-    clearItemData();
+    d->clearItemData();
     d->m_tag = MyMoneyTag();
     return; // make sure we don't access an undefined tag
   }
@@ -233,12 +182,14 @@ void KTagsView::slotSelectTag()
   d->ui->m_deleteButton->setEnabled(true); //re-enable delete button
 
   // if we have multiple tags selected, clear and disable the tag information
-  if (tagsList.count() > 1) {
+  if (selectedItemCount > 1) {
     d->ui->m_tabWidget->setEnabled(false); // disable tab widget
     d->ui->m_renameButton->setEnabled(false); // disable also the rename button
     d->ui->m_balanceLabel->hide();
-    clearItemData();
-  } else d->ui->m_renameButton->setEnabled(true);
+    d->clearItemData();
+  } else {
+    d->ui->m_renameButton->setEnabled(true);
+  }
 
   // otherwise we have just one selected, enable tag information widget and renameButton
   d->ui->m_tabWidget->setEnabled(true);
@@ -247,121 +198,39 @@ void KTagsView::slotSelectTag()
   // as of now we are updating only the last selected tag, and until
   // selection mode of the QListView has been changed to Extended, this
   // will also be the only selection and behave exactly as before - Andreas
-  try {
-    d->m_tag = tagsList[0];
+  d->m_tag = MyMoneyTag();
+  if (!selectedItems.isEmpty()) {
+    d->m_tag = selectedItems.at(0);
+  }
 
+  try {
     d->m_newName = d->m_tag.name();
-    d->ui->m_colorbutton->setEnabled(true);
-    d->ui->m_colorbutton->setColor(d->m_tag.tagColor());
-    d->ui->m_closed->setEnabled(true);
-    d->ui->m_closed->setChecked(d->m_tag.isClosed());
-    d->ui->m_notes->setEnabled(true);
-    d->ui->m_notes->setText(d->m_tag.notes());
+    d->loadDetails();
     slotTagDataChanged();
 
-    showTransactions();
+    d->showTransactions();
 
   } catch (const MyMoneyException &e) {
     qDebug("exception during display of tag: %s", e.what());
-    d->ui->m_register->clear();
     d->m_tag = MyMoneyTag();
   }
   d->m_allowEditing = true;
 }
 
-void KTagsView::clearItemData()
+void KTagsView::slotModelDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight)
 {
   Q_D(KTagsView);
-  d->ui->m_colorbutton->setColor(QColor());
-  d->ui->m_closed->setChecked(false);
-  d->ui->m_notes->setText(QString());
-  showTransactions();
-}
-
-void KTagsView::showTransactions()
-{
-  Q_D(KTagsView);
-  MyMoneyMoney balance;
-  auto file = MyMoneyFile::instance();
-  MyMoneySecurity base = file->baseCurrency();
-
-  // setup sort order
-  d->ui->m_register->setSortOrder(KMyMoneySettings::sortSearchView());
-
-  // clear the register
-  d->ui->m_register->clear();
-
-  if (d->m_tag.id().isEmpty() || !d->ui->m_tabWidget->isEnabled()) {
-    d->ui->m_balanceLabel->setText(i18n("Balance: %1", balance.formatMoney(file->baseCurrency().smallestAccountFraction())));
-    return;
-  }
-
-  // setup the list and the pointer vector
-  MyMoneyTransactionFilter filter;
-  filter.setConsiderCategorySplits();
-  filter.addTag(d->m_tag.id());
-  filter.setDateFilter(KMyMoneySettings::startDate().date(), QDate());
-
-  // retrieve the list from the engine
-  file->transactionList(d->m_transactionList, filter);
-
-  // create the elements for the register
-  QList<QPair<MyMoneyTransaction, MyMoneySplit> >::const_iterator it;
-  QMap<QString, int> uniqueMap;
-  MyMoneyMoney deposit, payment;
-
-  int splitCount = 0;
-  bool balanceAccurate = true;
-  QSet<QString> accountIds;
-  for (it = d->m_transactionList.constBegin(); it != d->m_transactionList.constEnd(); ++it) {
-    const MyMoneySplit& split = (*it).second;
-    accountIds.insert(split.accountId());
-    MyMoneyAccount acc = file->account(split.accountId());
-    ++splitCount;
-    uniqueMap[(*it).first.id()]++;
-
-    KMyMoneyRegister::Register::transactionFactory(d->ui->m_register, (*it).first, (*it).second, uniqueMap[(*it).first.id()]);
-
-    // take care of foreign currencies
-    MyMoneyMoney val = split.shares().abs();
-    if (acc.currencyId() != base.id()) {
-      const MyMoneyPrice &price = file->price(acc.currencyId(), base.id());
-      // in case the price is valid, we use it. Otherwise, we keep
-      // a flag that tells us that the balance is somewhat inaccurate
-      if (price.isValid()) {
-        val *= price.rate(base.id());
-      } else {
-        balanceAccurate = false;
+  QModelIndex idx;
+  if (topLeft.model() == d->m_renameProxyModel) {
+    const auto baseModel = MyMoneyFile::instance()->tagsModel();
+    for (int row = topLeft.row(); row <= bottomRight.row(); ++row) {
+      idx = topLeft.model()->index(row, 0, topLeft.parent());
+      if (d->m_tag.id() == idx.data(eMyMoney::Model::IdRole).toString()) {
+        d->m_tag = baseModel->itemById(d->m_tag.id());
+        d->loadDetails();
       }
     }
-
-    if (split.shares().isNegative()) {
-      payment += val;
-    } else {
-      deposit += val;
-    }
   }
-  balance = deposit - payment;
-
-  // add the group markers
-  d->ui->m_register->addGroupMarkers();
-
-  // sort the transactions according to the sort setting
-  d->ui->m_register->sortItems();
-
-  // remove trailing and adjacent markers
-  d->ui->m_register->removeUnwantedGroupMarkers();
-
-  d->ui->m_register->updateRegister(true);
-
-  // we might end up here with updates disabled on the register so
-  // make sure that we enable updates here
-  d->ui->m_register->setUpdatesEnabled(true);
-  d->ui->m_balanceLabel->setText(i18n("Balance: %1%2",
-                               balanceAccurate ? "" : "~",
-                               balance.formatMoney(file->baseCurrency().smallestAccountFraction())));
-  // only make balance visible if all transactions cover a single account
-  d->ui->m_balanceLabel->setVisible(accountIds.count() < 2);
 }
 
 void KTagsView::slotTagDataChanged()
@@ -403,18 +272,14 @@ void KTagsView::slotUpdateTag()
 void KTagsView::showEvent(QShowEvent* event)
 {
   Q_D(KTagsView);
-  if (d->m_needLoad)
+  if (d->m_needLoad) {
     d->init();
+    connect(d->ui->m_filterBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int idx) {
+      Q_D(KTagsView);
+      d->m_renameProxyModel->setReferenceFilter(d->ui->m_filterBox->itemData(idx));
+    } );
 
-  emit customActionRequested(View::Tags, eView::Action::AboutToShow);
-
-  if (d->m_needsRefresh)
-    refresh();
-
-  QList<MyMoneyTag> list;
-  selectedTags(list);
-  slotSelectTags(list);
-
+  }
   // don't forget base class implementation
   QWidget::showEvent(event);
 }
@@ -428,83 +293,13 @@ void KTagsView::updateActions(const SelectedObjects& selections)
   pActions[eMenu::Action::DeleteTag]->setEnabled(b);
 }
 
-void KTagsView::loadTags()
-{
-  Q_D(KTagsView);
-  if (d->m_inSelection)
-    return;
-
-  QMap<QString, bool> isSelected;
-  QString id;
-  MyMoneyFile* file = MyMoneyFile::instance();
-
-  // remember which items are selected in the list
-  QList<QListWidgetItem *> selectedItems = d->ui->m_tagsList->selectedItems();
-  QList<QListWidgetItem *>::const_iterator tagsIt = selectedItems.constBegin();
-
-  while (tagsIt != selectedItems.constEnd()) {
-    KTagListItem* item = dynamic_cast<KTagListItem*>(*tagsIt);
-    if (item)
-      isSelected[item->tag().id()] = true;
-    ++tagsIt;
-  }
-
-  // keep current selected item
-  KTagListItem *currentItem = static_cast<KTagListItem *>(d->ui->m_tagsList->currentItem());
-  if (currentItem)
-    id = currentItem->tag().id();
-
-  d->m_allowEditing = false;
-  // clear the list
-  d->m_searchWidget->clear();
-  d->m_searchWidget->updateSearch();
-  d->ui->m_tagsList->clear();
-  d->ui->m_register->clear();
-  currentItem = 0;
-
-  QList<MyMoneyTag>list = file->tagList();
-  QList<MyMoneyTag>::ConstIterator it;
-
-  for (it = list.constBegin(); it != list.constEnd(); ++it) {
-    if (d->m_tagFilterType == (int)eView::Tag::All ||
-        (d->m_tagFilterType == (int)eView::Tag::Referenced && file->isReferenced(*it)) ||
-        (d->m_tagFilterType == (int)eView::Tag::Unused && !file->isReferenced(*it)) ||
-        (d->m_tagFilterType == (int)eView::Tag::Opened && !(*it).isClosed()) ||
-        (d->m_tagFilterType == (int)eView::Tag::Closed && (*it).isClosed())) {
-      KTagListItem* item = new KTagListItem(d->ui->m_tagsList, *it);
-      if (item->tag().id() == id)
-        currentItem = item;
-      if (isSelected[item->tag().id()])
-        item->setSelected(true);
-    }
-  }
-  d->ui->m_tagsList->sortItems();
-
-  if (currentItem) {
-    d->ui->m_tagsList->setCurrentItem(currentItem);
-    d->ui->m_tagsList->scrollToItem(currentItem);
-  }
-
-  slotSelectTag(0, 0);
-  d->m_allowEditing = true;
-}
-
-void KTagsView::slotSelectTransaction()
-{
-  Q_D(KTagsView);
-  QList<KMyMoneyRegister::RegisterItem*> list = d->ui->m_register->selectedItems();
-  if (!list.isEmpty()) {
-    KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(list[0]);
-    if (t)
-      emit selectByVariant(QVariantList {QVariant(t->split().accountId()), QVariant(t->transaction().id())}, eView::Intent::ShowTransactionInLedger);
-  }
-}
-
 void KTagsView::slotSelectTagAndTransaction(const QString& tagId, const QString& accountId, const QString& transactionId)
 {
   if (!isVisible())
     return;
 
+  /// @todo port to new model code
+#if 0
   Q_D(KTagsView);
   try {
     // clear filter
@@ -554,6 +349,7 @@ void KTagsView::slotSelectTagAndTransaction(const QString& tagId, const QString&
   } catch (const MyMoneyException &e) {
     qWarning("Unexpected exception in KTagsView::slotSelectTagAndTransaction %s", e.what());
   }
+#endif
 }
 
 void KTagsView::slotSelectTagAndTransaction(const QString& tagId)
@@ -564,9 +360,7 @@ void KTagsView::slotSelectTagAndTransaction(const QString& tagId)
 void KTagsView::slotShowTagsMenu(const QPoint& /*ta*/)
 {
   Q_D(KTagsView);
-  auto item = dynamic_cast<KTagListItem*>(d->ui->m_tagsList->currentItem());
-  if (item) {
-    slotSelectTag();
+  if (!d->ui->m_tagsList->selectionModel()->selectedIndexes().isEmpty()) {
     pMenus[eMenu::Menu::Tag]->exec(QCursor::pos());
   }
 }
@@ -575,26 +369,6 @@ void KTagsView::slotHelp()
 {
   KHelpClient::invokeHelp("details.tags.attributes");
   //FIXME-ALEX update help file
-}
-
-void KTagsView::slotChangeFilter(int index)
-{
-  Q_D(KTagsView);
-  //update the filter type then reload the tags list
-  d->m_tagFilterType = index;
-  loadTags();
-}
-
-void KTagsView::slotSelectTags(const QList<MyMoneyTag>& list)
-{
-  Q_D(KTagsView);
-  d->m_selectedTags = list;
-  QStringList tagIds;
-  for (const auto& tag : list) {
-    tagIds.append(tag.id());
-  }
-  d->m_selections.setSelection(SelectedObjects::Tag, tagIds);
-  emit requestSelectionChange(d->m_selections);
 }
 
 void KTagsView::slotNewTag()
@@ -607,14 +381,15 @@ void KTagsView::slotNewTag()
 void KTagsView::slotRenameTag()
 {
   Q_D(KTagsView);
-  if (d->ui->m_tagsList->currentItem() && d->ui->m_tagsList->selectedItems().count() == 1) {
-    slotStartRename(d->ui->m_tagsList->currentItem());
+  if (d->ui->m_tagsList->currentIndex().isValid() && d->ui->m_tagsList->selectionModel()->selectedIndexes().count() == 1) {
+    d->ui->m_tagsList->edit(d->ui->m_tagsList->currentIndex());
   }
 }
 
 void KTagsView::slotDeleteTag()
 {
   Q_D(KTagsView);
+  d->m_selectedTags = selectedTags();
   if (d->m_selectedTags.isEmpty())
     return; // shouldn't happen
 
@@ -700,7 +475,7 @@ void KTagsView::slotDeleteTag()
         for (auto& transaction : translist) {
           // create a copy of the splits list in the transaction
           // loop over all splits
-          for (auto& split : transaction.splits()) {
+          for (auto split : transaction.splits()) {
             QList<QString> tagIdList = split.tagIdList();
             for (int i = 0; i < tagIdList.size(); ++i) {
               // if the split is assigned to one of the selected tags, we need to modify it
@@ -753,9 +528,6 @@ void KTagsView::slotDeleteTag()
     }
 
     ft.commit();
-
-    // If we just deleted the tags, they sure don't exist anymore
-    slotSelectTags(QList<MyMoneyTag>());
 
   } catch (const MyMoneyException &e) {
     KMessageBox::detailedSorry(this, i18n("Unable to remove tag(s)"), QString::fromLatin1(e.what()));

@@ -119,6 +119,9 @@ private Q_SLOTS:
   void slotRenamePayee();
   void slotDeletePayee();
   void slotMergePayee();
+
+  void slotModelDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
+
 };
 
 #endif

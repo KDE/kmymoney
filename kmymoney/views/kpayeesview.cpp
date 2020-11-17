@@ -250,28 +250,7 @@ void KPayeesView::slotPayeeSelectionChanged(const QItemSelection& selected, cons
   // will also be the only selection and behave exactly as before - Andreas
   try {
     d->m_newName = d->m_payee.name();
-
-    d->ui->addressEdit->setText(d->m_payee.address());
-    d->ui->postcodeEdit->setText(d->m_payee.postcode());
-    d->ui->telephoneEdit->setText(d->m_payee.telephone());
-    d->ui->emailEdit->setText(d->m_payee.email());
-    d->ui->notesEdit->setText(d->m_payee.notes());
-    d->ui->payeestateEdit->setText(d->m_payee.state());
-    d->ui->payeecityEdit->setText(d->m_payee.city());
-
-    QStringList keys;
-    bool ignorecase = false;
-    auto type = d->m_payee.matchData(ignorecase, keys);
-
-    d->ui->matchTypeCombo->setCurrentIndex(d->ui->matchTypeCombo->findData(static_cast<int>(type)));
-    d->ui->matchKeyEditList->clear();
-    d->ui->matchKeyEditList->insertStringList(keys);
-    d->ui->checkMatchIgnoreCase->setChecked(ignorecase);
-
-    d->ui->checkEnableDefaultCategory->setChecked(!d->m_payee.defaultAccountId().isEmpty());
-    d->ui->comboDefaultCategory->setSelected(d->m_payee.defaultAccountId());
-
-    d->ui->payeeIdentifiers->setSource(d->m_payee);
+    d->loadDetails();
 
     slotPayeeDataChanged();
     d->showTransactions();
@@ -297,6 +276,23 @@ void KPayeesView::slotKeyListChanged()
   }
   d->setDirty(rc);
 }
+
+void KPayeesView::slotModelDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight)
+{
+  Q_D(KPayeesView);
+  QModelIndex idx;
+  if (topLeft.model() == d->m_renameProxyModel) {
+    const auto baseModel = MyMoneyFile::instance()->payeesModel();
+    for (int row = topLeft.row(); row <= bottomRight.row(); ++row) {
+      idx = topLeft.model()->index(row, 0, topLeft.parent());
+      if (d->m_payee.id() == idx.data(eMyMoney::Model::IdRole).toString()) {
+        d->m_payee = baseModel->itemById(d->m_payee.id());
+        d->loadDetails();
+      }
+    }
+  }
+}
+
 
 void KPayeesView::slotPayeeDataChanged()
 {

@@ -186,7 +186,8 @@ public:
 
     q->connect(ui->m_payees->selectionModel(), &QItemSelectionModel::selectionChanged, q, &KPayeesView::slotPayeeSelectionChanged);
     ui->m_payees->setSelectionMode(QListView::ExtendedSelection);
-    q->connect( m_renameProxyModel, &ItemRenameProxyModel::renameItem,     q, &KPayeesView::slotRenameSinglePayee);
+    q->connect(m_renameProxyModel, &ItemRenameProxyModel::renameItem,  q, &KPayeesView::slotRenameSinglePayee);
+    q->connect(m_renameProxyModel, &ItemRenameProxyModel::dataChanged, q, &KPayeesView::slotModelDataChanged);
 
     ui->m_newButton->setDefaultAction(pActions[eMenu::Action::NewPayee]);
     ui->m_renameButton->setDefaultAction(pActions[eMenu::Action::RenamePayee]);
@@ -258,6 +259,31 @@ public:
       ui->m_payees->setCurrentIndex(idx);
       ui->m_payees->scrollTo(idx);
     }
+  }
+
+  void loadDetails()
+  {
+    ui->addressEdit->setText(m_payee.address());
+    ui->postcodeEdit->setText(m_payee.postcode());
+    ui->telephoneEdit->setText(m_payee.telephone());
+    ui->emailEdit->setText(m_payee.email());
+    ui->notesEdit->setText(m_payee.notes());
+    ui->payeestateEdit->setText(m_payee.state());
+    ui->payeecityEdit->setText(m_payee.city());
+
+    QStringList keys;
+    bool ignorecase = false;
+    auto type = m_payee.matchData(ignorecase, keys);
+
+    ui->matchTypeCombo->setCurrentIndex(ui->matchTypeCombo->findData(static_cast<int>(type)));
+    ui->matchKeyEditList->clear();
+    ui->matchKeyEditList->insertStringList(keys);
+    ui->checkMatchIgnoreCase->setChecked(ignorecase);
+
+    ui->checkEnableDefaultCategory->setChecked(!m_payee.defaultAccountId().isEmpty());
+    ui->comboDefaultCategory->setSelected(m_payee.defaultAccountId());
+
+    ui->payeeIdentifiers->setSource(m_payee);
   }
 
   void clearItemData()

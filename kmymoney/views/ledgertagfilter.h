@@ -15,8 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef TAGSMODEL_H
-#define TAGSMODEL_H
+
+#ifndef LEDGERTAGFILTER_H
+#define LEDGERTAGFILTER_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -27,44 +28,38 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneymodel.h"
-#include "mymoneyenums.h"
-#include "kmm_mymoney_export.h"
+#include "ledgerfilterbase.h"
 
-#include "mymoneytag.h"
-
-class QUndoStack;
-/**
-  */
-class KMM_MYMONEY_EXPORT TagsModel : public MyMoneyModel<MyMoneyTag>
+class MyMoneyAccount;
+class LedgerTagFilterPrivate;
+class LedgerTagFilter : public LedgerFilterBase
 {
   Q_OBJECT
 
 public:
-  class Column {
-  public:
-    enum {
-      Name
-    } Columns;
-  };
+  explicit LedgerTagFilter(QObject* parent, QVector<QAbstractItemModel*> specialJournalModels);
+  ~LedgerTagFilter() override;
 
-  explicit TagsModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
-  virtual ~TagsModel();
+  void setShowBalanceInverted(bool inverted = true);
 
-  static const int ID_SIZE = 6;
-
-  int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
-  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
-  QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;
-
-  bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
+  void setTagIdList (const QStringList& payeeIds);
 
 public Q_SLOTS:
+  void recalculateBalances();
+
+  void recalculateBalancesOnIdle(const QString& accountId);
+
+protected:
+  /**
+   * This method is overridden and checks if the splits payeeId is
+   * contained in the list provided by setPayeeIdList() and
+   * references an asset or liability account.
+   */
+  bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
 
 private:
-  struct Private;
-  QScopedPointer<Private> d;
+  Q_DECLARE_PRIVATE_D(LedgerFilterBase::d_ptr, LedgerTagFilter);
 };
 
-#endif // TAGSMODEL_H
+#endif // LEDGERTAGFILTER_H
 
