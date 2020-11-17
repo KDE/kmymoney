@@ -93,25 +93,19 @@
          <item>
           <layout class="QHBoxLayout" name="m_listTopHLayout">
            <item>
-            <widget class="KComboBox" name="m_filterBox"/>
+            <widget class="QLineEdit" name="m_searchWidget">
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="m_filterBox"/>
            </item>
           </layout>
          </item>
          <item>
-          <widget class="QListWidget" name="m_tagsList">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>1</horstretch>
-             <verstretch>1</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="alternatingRowColors">
-            <bool>true</bool>
-           </property>
-           <property name="selectionMode">
-            <enum>QAbstractItemView::ExtendedSelection</enum>
-           </property>
-          </widget>
+          <widget class="QListView" name="m_tagsList"/>
          </item>
         </layout>
        </widget>
@@ -169,20 +163,7 @@
                 <number>0</number>
                </property>
                <item>
-                <widget class="KMyMoneyRegister::Register" name="m_register">
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                 <column/>
-                </widget>
+                <widget class="LedgerView" name="m_register"/>
                </item>
                <item>
                 <widget class="QLabel" name="m_balanceLabel">
@@ -230,6 +211,16 @@
              <property name="spacing">
               <number>6</number>
              </property>
+             <item row="2" column="1">
+              <widget class="KTextEdit" name="m_notes"/>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="m_closed">
+               <property name="text">
+                <string>Closed</string>
+               </property>
+              </widget>
+             </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_3">
                <property name="text">
@@ -239,9 +230,6 @@
                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
                </property>
               </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="KTextEdit" name="m_notes"/>
              </item>
              <item row="0" column="0">
               <widget class="QLabel" name="TextLabel4">
@@ -268,16 +256,6 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="m_closed">
-               <property name="text">
-                <string>Closed</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="KColorButton" name="m_colorbutton"/>
-             </item>
              <item row="0" column="2">
               <spacer name="horizontalSpacer">
                <property name="orientation">
@@ -290,6 +268,9 @@
                 </size>
                </property>
               </spacer>
+             </item>
+             <item row="0" column="1">
+              <widget class="KColorButton" name="m_colorbutton"/>
              </item>
             </layout>
            </widget>
@@ -374,24 +355,19 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KColorButton</class>
-   <extends>QPushButton</extends>
-   <header>kcolorbutton.h</header>
-  </customwidget>
-  <customwidget>
    <class>KTextEdit</class>
    <extends>QTextEdit</extends>
    <header>ktextedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
+   <class>KColorButton</class>
+   <extends>QPushButton</extends>
+   <header>kcolorbutton.h</header>
   </customwidget>
   <customwidget>
-   <class>KMyMoneyRegister::Register</class>
-   <extends>QTableWidget</extends>
-   <header>register.h</header>
+   <class>LedgerView</class>
+   <extends>QTableView</extends>
+   <header>ledgerview.h</header>
   </customwidget>
  </customwidgets>
  <includes>

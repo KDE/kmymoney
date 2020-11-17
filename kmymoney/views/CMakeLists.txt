@@ -23,6 +23,7 @@ set(libviews_a_SOURCES
   ledgerview.cpp
   ledgeraccountfilter.cpp
   ledgerpayeefilter.cpp
+  ledgertagfilter.cpp
   journaldelegate.cpp
   onlinebalancedelegate.cpp
   specialdatedelegate.cpp
