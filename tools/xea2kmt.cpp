@@ -48,11 +48,11 @@ QDebug operator <<(QDebug out, const QXmlStreamAttribute &a)
     return out;
 }
 
-bool debug = false;
-bool withID = false;
-bool noLevel1Names = false;
-bool withTax = false;
-bool prefixNameWithCode = false;
+static bool debug = false;
+static bool withID = false;
+static bool noLevel1Names = false;
+static bool withTax = false;
+static bool prefixNameWithCode = false;
 
 typedef QMap<QString,QString> DirNameMapType;
 
