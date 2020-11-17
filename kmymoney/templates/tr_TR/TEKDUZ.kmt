@@ -406,9 +406,7 @@
     <account type="16" name="Sermaye">
      <flag name="OpeningBalanceAccount" value="Yes"/>
     </account>
-    <account type="16" name="Sermaye Düzeltmesi Olumlu Farkları">
-     <flag name="OpeningBalanceAccount" value="Yes"/>
-    </account>
+    <account type="16" name="Sermaye Düzeltmesi Olumlu Farkları"/>
     <account type="16" name="Sermaye Düzeltmesi Olumsuz Farkları(-)"/>
     <account type="16" name="Ödenmemiş Sermaye(-)"/>
    </account>
