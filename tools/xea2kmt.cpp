@@ -230,6 +230,7 @@ public:
     QString title;
     QString longDescription;
     QString shortDescription;
+    QString fileName;
     TemplateAccount::List accounts;
     TemplateAccount *openingBalanceAccount{nullptr};
 
@@ -306,7 +307,10 @@ public:
                 }
                 if (account->slotList.contains("equity-type") && account->slotList["equity-type"] == "opening-balance") {
                     if (openingBalanceAccount) {
-                        qWarning() << "template already has specified '" << openingBalanceAccount->name << "' as opening balance account";
+                        qWarning() << "template" << fileName << "already has specified"
+                                   << openingBalanceAccount->m_name
+                                   << "as opening balance account,"
+                                   << "ignoring account" << account->m_name;
                         continue;
                     }
                     xml.writeStartElement("flag");
@@ -504,6 +508,7 @@ protected:
         ).arg(fileName));
         xml.writeDTD("<!DOCTYPE KMYMONEY-TEMPLATE>");
         xml.writeStartElement("","kmymoney-account-template");
+        _template.fileName = fileName;
         bool result = _template.writeAsXml(xml);
         xml.writeEndElement();
         xml.writeEndDocument();
