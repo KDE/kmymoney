@@ -42,6 +42,7 @@ class KMM_MYMONEY_EXPORT TagsModel : public MyMoneyModel<MyMoneyTag>
 
 public:
   class Column {
+  public:
     enum {
       Name
     } Columns;
