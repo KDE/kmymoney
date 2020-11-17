@@ -109,7 +109,9 @@
    </account>
   </account>
   <account type="16" name="Ausgleichskonto">
-   <account type="16" name="Anfangsbestand"/>
+   <account type="16" name="Anfangsbestand">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="12" name="Erträge">
    <account type="12" name="BAFöG"/>

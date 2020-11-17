@@ -14,7 +14,9 @@
  <longdesc>大多数用户会希望选择这套科目。它包括了大多数常用的科目(活期存款、储蓄、现金、信用卡、收入、常见支出)。</longdesc>
  <accounts>
   <account type="16" name="所有者权益">
-   <account type="16" name="期初余额"/>
+   <account type="16" name="期初余额">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="13" name="支出">
    <account type="13" name="书籍"/>

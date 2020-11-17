@@ -16,7 +16,9 @@
     Kirjanpitolaissa on määritelmät (luku 4).</longdesc>
  <accounts>
   <account type="16" name="Oma pääoma">
-   <account type="16" name="Avaussaldo"/>
+   <account type="16" name="Avaussaldo">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="12" name="Satunnaiset erät">
    <account type="13" name="Satunnaiset kulut"/>

@@ -2106,6 +2106,7 @@ Erweitert auf den Stand 2018: Christoph Franzen 2017-2018, christoph@alte-pflast
   <account type="9" name="9 Statistik- &amp; Vortragskonten">
    <account type="9" name="9000-9249 STATISTISCHE KONTEN">
     <account type="9" name="9000 Saldenvorträge Sachkonten">
+     <flag name="OpeningBalanceAccount" value="Yes"/>
      <account type="9" name="9001-9007 Saldenvorträge, Sachkonten"/>
     </account>
     <account type="9" name="9008 Saldenvorträge Debitoren"/>

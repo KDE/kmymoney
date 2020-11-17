@@ -15,7 +15,9 @@
  <accounts>
   <account type="12" name="収益"/>
   <account type="16" name="純資産">
-   <account type="16" name="開始残高"/>
+   <account type="16" name="開始残高">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="13" name="費用"/>
   <account type="9" name="資産">

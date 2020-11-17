@@ -33,7 +33,9 @@
     <account type="12" name="Премия"/>
    </account>
   </account>
-  <account type="16" name="Начальное сальдо"/>
+  <account type="16" name="Начальное сальдо">
+   <flag name="OpeningBalanceAccount" value="Yes"/>
+  </account>
   <account type="10" name="Обязательства">
    <account type="4" name="Кредитная карта"/>
   </account>

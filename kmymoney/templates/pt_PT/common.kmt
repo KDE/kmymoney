@@ -94,7 +94,9 @@
    <account type="12" name="Salário"/>
   </account>
   <account type="16" name="Resultado">
-   <account type="16" name="Saldos iniciais"/>
+   <account type="16" name="Saldos iniciais">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
  </accounts>
 </kmymoney-account-template>

@@ -21,7 +21,9 @@
    </account>
   </account>
   <account type="16" name="Capitaux propres">
-   <account type="16" name="Soldes initiaux"/>
+   <account type="16" name="Soldes initiaux">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="13" name="Dépenses">
    <account type="13" name="Abonnements"/>

@@ -19,7 +19,9 @@
    </account>
   </account>
   <account type="16" name="Capitali">
-   <account type="16" name="Bilanci d'apertura"/>
+   <account type="16" name="Bilanci d'apertura">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="12" name="Entrate"/>
   <account type="13" name="Uscite"/>

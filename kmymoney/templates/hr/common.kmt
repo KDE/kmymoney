@@ -22,7 +22,9 @@
    </account>
   </account>
   <account type="16" name="Kapital">
-   <account type="16" name="Početni saldo"/>
+   <account type="16" name="Početni saldo">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="10" name="Obveze">
    <account type="10" name="Krediti">

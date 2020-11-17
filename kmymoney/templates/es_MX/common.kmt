@@ -24,7 +24,9 @@
    </account>
   </account>
   <account type="16" name="Capital">
-   <account type="16" name="Balances de apertura"/>
+   <account type="16" name="Balances de apertura">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="13" name="Gastos">
    <account type="13" name="Ajustes"/>

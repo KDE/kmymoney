@@ -36,7 +36,9 @@
     <account type="16" name="Shareholder Dividends 1"/>
    </account>
    <account type="16" name="Grants"/>
-   <account type="16" name="Opening Balances"/>
+   <account type="16" name="Opening Balances">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="13" name="Expenses">
    <account type="13" name="Depreciation"/>

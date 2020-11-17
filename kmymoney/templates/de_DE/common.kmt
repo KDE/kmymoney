@@ -20,7 +20,9 @@
     <account type="1" name="Sparkonto"/>
    </account>
   </account>
-  <account type="16" name="Anfangsbestand"/>
+  <account type="16" name="Anfangsbestand">
+   <flag name="OpeningBalanceAccount" value="Yes"/>
+  </account>
   <account type="13" name="Aufwendungen">
    <account type="13" name="Bildung">
     <account type="13" name="Abonnements"/>

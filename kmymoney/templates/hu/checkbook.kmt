@@ -21,7 +21,9 @@
   </account>
   <account type="13" name="Költségek"/>
   <account type="16" name="Saját tőke">
-   <account type="16" name="Nyitóegyenlegek"/>
+   <account type="16" name="Nyitóegyenlegek">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
  </accounts>
 </kmymoney-account-template>

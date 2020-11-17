@@ -70,7 +70,9 @@
    <account type="13" name="Vestuário"/>
   </account>
   <account type="16" name="Líquido">
-   <account type="16" name="Saldos Iniciais"/>
+   <account type="16" name="Saldos Iniciais">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="10" name="Passivo">
    <account type="10" name="Contas a Pagar">

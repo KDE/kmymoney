@@ -22,7 +22,9 @@
    <account type="9" name="Należności"/>
   </account>
   <account type="16" name="Kapitał własny">
-   <account type="16" name="Bilanse otwarcia"/>
+   <account type="16" name="Bilanse otwarcia">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
    <account type="16" name="Zyski zatrzymane"/>
   </account>
   <account type="10" name="Pasywa">

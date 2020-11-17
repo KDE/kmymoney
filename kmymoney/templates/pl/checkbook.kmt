@@ -19,7 +19,9 @@
    </account>
   </account>
   <account type="16" name="Kapitał własny">
-   <account type="16" name="Bilanse otwarcia"/>
+   <account type="16" name="Bilanse otwarcia">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="12" name="Przychód"/>
   <account type="13" name="Wydatki"/>

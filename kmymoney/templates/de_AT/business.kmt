@@ -24,7 +24,9 @@
    </account>
    <account type="9" name="Vorsteuer"/>
   </account>
-  <account type="16" name="Anfangsbestand"/>
+  <account type="16" name="Anfangsbestand">
+   <flag name="OpeningBalanceAccount" value="Yes"/>
+  </account>
   <account type="13" name="Aufwendungen">
    <account type="13" name="Abschreibungen"/>
    <account type="13" name="Beratungskosten">

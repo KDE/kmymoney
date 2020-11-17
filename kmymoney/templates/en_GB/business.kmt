@@ -22,15 +22,17 @@
    </account>
   </account>
   <account type="16" name="Equity">
-   <account type="16" name="Opening Balances"/>
+   <account type="16" name="Opening Balances">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
    <account type="16" name="Retained Earnings"/>
   </account>
   <account type="13" name="Expenses">
    <account type="13" name="Adjustment"/>
    <account type="13" name="Auto">
     <account type="13" name="Fees"/>
+    <account type="13" name="Fuel"/>
     <account type="13" name="Parking"/>
-    <account type="13" name="Petrol"/>
     <account type="13" name="Repair and Maintenance"/>
    </account>
    <account type="13" name="Bank Service Charge"/>

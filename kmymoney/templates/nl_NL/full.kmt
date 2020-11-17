@@ -49,7 +49,9 @@
    </account>
   </account>
   <account type="16" name="Eigen Vermogen">
-   <account type="16" name="Openingsbalans"/>
+   <account type="16" name="Openingsbalans">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="12" name="Inkomen">
    <account type="12" name="Bonus"/>
