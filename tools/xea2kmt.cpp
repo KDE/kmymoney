@@ -231,6 +231,7 @@ public:
     QString longDescription;
     QString shortDescription;
     TemplateAccount::List accounts;
+    TemplateAccount *openingBalanceAccount{nullptr};
 
     bool read(QXmlStreamReader &xml)
     {
@@ -304,10 +305,15 @@ public:
                     }
                 }
                 if (account->slotList.contains("equity-type") && account->slotList["equity-type"] == "opening-balance") {
+                    if (openingBalanceAccount) {
+                        qWarning() << "template already has specified '" << openingBalanceAccount->name << "' as opening balance account";
+                        continue;
+                    }
                     xml.writeStartElement("flag");
                     xml.writeAttribute("name","OpeningBalanceAccount");
                     xml.writeAttribute("value","Yes");
                     xml.writeEndElement();
+                    openingBalanceAccount = account;
                 }
             }
             index++;
