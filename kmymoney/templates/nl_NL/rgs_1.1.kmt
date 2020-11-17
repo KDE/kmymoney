@@ -2311,8 +2311,8 @@
     <account type="13" name="Vaste vergoeding voor consumpties (ambulante werknemer)"/>
     <account type="13" name="Vergoeding reiskosten (tot € 0,19) per kilometer"/>
     <account type="13" name="Verstrekte producten en kortingen op producten uit eigen bedrijf (voor zover vrijgesteld)"/>
+    <account type="13" name="Zakelijke verhuiskosten - kosten overbrenging boedel"/>
     <account type="13" name="Zakelijke verhuiskosten exclusief kosten overbrenging boedel"/>
-    <account type="13" name="Zakelijke verhuiskosten: kosten overbrenging boedel"/>
    </account>
    <account type="13" name="Werkkosten intermediair">
     <account type="13" name="Maaltijden met zakelijke relaties"/>

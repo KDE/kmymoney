@@ -49,7 +49,9 @@
    </account>
   </account>
   <account type="16" name="">
-   <account type="16" name="Bilanse otwarcia"/>
+   <account type="16" name="Bilanse otwarcia">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="10" name="">
    <account type="4" name="Karta kredytowa"/>

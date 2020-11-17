@@ -11,7 +11,7 @@
 <kmymoney-account-template>
  <title>Base de comptes communs</title>
  <shortdesc>Ensemble des comptes de base les plus couramment utilisés</shortdesc>
- <longdesc>La plupart des utilisateurs sélectionneront ce groupe/hiérarchie de comptes. Il inclut des comptes de base couramment utilisés par les particuliers, tels que compte chèques, compte d'épargne, encaisse, carte de crédit. revenus et dépenses.</longdesc>
+ <longdesc>La plupart des particuliers, mais pas les utilisateurs professionnels, sélectionneront ce groupe/hiérarchie de comptes. Il inclut des comptes de base couramment utilisés par les particuliers, tels que compte chèques, compte d'épargne, encaisse, carte de crédit. revenus et dépenses.</longdesc>
  <accounts>
   <account type="9" name="">
    <account type="9" name="Liquidités">

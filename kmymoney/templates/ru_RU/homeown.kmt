@@ -9,17 +9,17 @@
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>Расходы домовладельца</title>
+ <title>Дом/Квартира</title>
  <shortdesc>Расходы связанные с домовладением</shortdesc>
- <longdesc>Вы можете выбрать этот набор счетов если являетесь домовладельцем. Этот набор предоставляет группу счетов, позволяющую управлять такими расходами, как страховка, налоги и ремонт.</longdesc>
+ <longdesc>Счета для учёта расходов связанных с владением квартирой или домом (страховка, налоги и ремонт).</longdesc>
  <accounts>
   <account type="13" name="">
    <account type="13" name="Налоги">
+    <account type="13" name="Земельный налог"/>
     <account type="13" name="Налог на имущество"/>
    </account>
-   <account type="13" name="Ремонт дома"/>
    <account type="13" name="Страхование">
-    <account type="13" name="Страховка дома"/>
+    <account type="13" name="Страхование имущества"/>
    </account>
   </account>
  </accounts>
