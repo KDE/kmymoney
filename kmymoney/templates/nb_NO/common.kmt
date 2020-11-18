@@ -21,7 +21,9 @@
    </account>
   </account>
   <account type="16" name="">
-   <account type="16" name="Opening Balances"/>
+   <account type="16" name="Opening Balances">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="13" name="">
    <account type="13" name="Adjustment"/>

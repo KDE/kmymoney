@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hu/acctchrt_carloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Autóhitel</title>
+ <shortdesc>Számlák autóhitelhez és annak kamataihoz</shortdesc>
+ <longdesc>Akkor érdemes ezt kiválasztani, ha ön vásárol autót hitelre (autóhitel, autóhitelkamat).</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Kamat">
+    <account type="13" name="Járműhitelkamat"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Hitelek">
+    <account type="10" name="Járműhitel"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

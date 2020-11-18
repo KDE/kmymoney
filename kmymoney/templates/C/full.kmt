@@ -49,13 +49,15 @@
    </account>
   </account>
   <account type="16" name="">
-   <account type="16" name="Opening Balances"/>
+   <account type="16" name="Opening Balances">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="13" name="">
    <account type="13" name="Adjustment"/>
    <account type="13" name="Auto">
     <account type="13" name="Fees"/>
-    <account type="13" name="Gas"/>
+    <account type="13" name="Fuel"/>
     <account type="13" name="Parking"/>
     <account type="13" name="Repair and Maintenance"/>
    </account>

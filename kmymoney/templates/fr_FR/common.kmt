@@ -11,7 +11,7 @@
 <kmymoney-account-template>
  <title>Comptes communs</title>
  <shortdesc>Un ensemble de base de comptes les plus habituellement utilisés</shortdesc>
- <longdesc>La plupart des utilisateurs devront sélectionner cet ensemble de comptes. Il comprend la plupart des comptes communément utilisés (chèques, épargne, liquidités carte de crédit, revenu, dépenses habituelles).</longdesc>
+ <longdesc>La plupart des particuliers, mais pas les utilisateurs professionnels, devront sélectionner cet ensemble de comptes. Il comprend la plupart des comptes communément utilisés (chèques, épargne, liquidités, carte de crédit, revenu, dépenses habituelles).</longdesc>
  <accounts>
   <account type="9" name="">
    <account type="9" name="Actifs actuels">
@@ -21,7 +21,9 @@
    </account>
   </account>
   <account type="16" name="">
-   <account type="16" name="Soldes initiaux"/>
+   <account type="16" name="Soldes initiaux">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="13" name="">
    <account type="13" name="Abonnements"/>

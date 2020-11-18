@@ -9,20 +9,22 @@
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>Depósitos a Prazo e Mercado Monetário</title>
- <shortdesc>Contas para Depósitos a Prazo e investimentos no mercado monetário</shortdesc>
- <longdesc>Desejará utilizar este conjunto de contas caso tenha depósitos a prazo ou contas no mercado financeiro (DP, Juros DP, mercado monetário, juro mercado monetário).</longdesc>
+ <title>Depósitos a prazo e mercado monetário</title>
+ <shortdesc>Contas para poupanças e investimentos monetários</shortdesc>
+ <longdesc>Desejará utilizar este conjunto de contas caso tenha depósitos a
+  prazo ou contas no mercado financeiro (DP, Juros DP, mercado monetário,
+  juros do mercado monetário).</longdesc>
  <accounts>
   <account type="9" name="">
-   <account type="9" name="Activos Actuais">
+   <account type="9" name="Activos actuais">
     <account type="1" name="DP Banco"/>
-    <account type="1" name="Mercado Monetário"/>
+    <account type="1" name="Mercado monetário"/>
    </account>
   </account>
   <account type="12" name="">
-   <account type="12" name="Juros da Receita">
+   <account type="12" name="Juros da receita">
     <account type="12" name="Juros do DP"/>
-    <account type="12" name="Juros do Mercado Monetário"/>
+    <account type="12" name="Juros do mercado monetário"/>
    </account>
   </account>
  </accounts>

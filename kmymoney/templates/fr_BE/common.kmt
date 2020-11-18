@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/fr_BE/acctchrt_common.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Comptes communs</title>
+ <shortdesc>Un ensemble de base de comptes les plus habituellement utilisés</shortdesc>
+ <longdesc>La plupart des particuliers, mais pas les utilisateurs professionnels, devront sélectionner cet ensemble de comptes. Il comprend la plupart des comptes communément utilisés (courant, épargne, liquidités, carte de crédit, revenu, dépenses habituelles).</longdesc>
+ <accounts>
+  <account type="9" name="">
+   <account type="9" name="Actifs actuels">
+    <account type="3" name="Argent du porte-monnaie"/>
+    <account type="1" name="Compte courant"/>
+    <account type="1" name="Compte d'épargne"/>
+   </account>
+  </account>
+  <account type="16" name="">
+   <account type="16" name="Soldes initiaux">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Abonnements"/>
+   <account type="13" name="Ajustement"/>
+   <account type="13" name="Alimentaire"/>
+   <account type="13" name="Assurances">
+    <account type="13" name="Assurance automobile"/>
+    <account type="13" name="Assurance santé"/>
+    <account type="13" name="Assurance vie"/>
+   </account>
+   <account type="13" name="Auto">
+    <account type="13" name="Carburant"/>
+    <account type="13" name="Frais"/>
+    <account type="13" name="Maintenance et réparation"/>
+    <account type="13" name="Stationnement"/>
+   </account>
+   <account type="13" name="Cable"/>
+   <account type="13" name="Charité"/>
+   <account type="13" name="Divers"/>
+   <account type="13" name="Dons/Cadeaux"/>
+   <account type="13" name="Dépenses médicales"/>
+   <account type="13" name="Education"/>
+   <account type="13" name="Fournisseurs"/>
+   <account type="13" name="Frais de service bancaire"/>
+   <account type="13" name="Informatique"/>
+   <account type="13" name="Laverie/Pressing"/>
+   <account type="13" name="Livres"/>
+   <account type="13" name="Loisirs">
+    <account type="13" name="Divertissements"/>
+    <account type="13" name="Musique/Films"/>
+    <account type="13" name="Voyage"/>
+   </account>
+   <account type="13" name="Passe-temps"/>
+   <account type="13" name="Restaurant"/>
+   <account type="13" name="Services en ligne"/>
+   <account type="13" name="Taxes">
+    <account type="13" name="Autres taxes"/>
+    <account type="13" name="Complémentaire maladie"/>
+    <account type="13" name="Etat/Province"/>
+    <account type="13" name="Impôts"/>
+    <account type="13" name="Sécurité sociale"/>
+   </account>
+   <account type="13" name="Transports publics"/>
+   <account type="13" name="Téléphone"/>
+   <account type="13" name="Utilitaires">
+    <account type="13" name="Collecte d'ordures"/>
+    <account type="13" name="Eau"/>
+    <account type="13" name="Electricité"/>
+    <account type="13" name="Gaz"/>
+   </account>
+   <account type="13" name="Vêtements"/>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Comptes de dettes">
+    <account type="4" name="Carte de crédit"/>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Autre revenu"/>
+   <account type="12" name="Bonus"/>
+   <account type="12" name="Dons reçus"/>
+   <account type="12" name="Revenu d'intérêts">
+    <account type="12" name="Autres intérêts"/>
+    <account type="12" name="Intérets du compte courant"/>
+    <account type="12" name="Intérêts d'épargne"/>
+   </account>
+   <account type="12" name="Salaire"/>
+  </account>
+ </accounts>
+</kmymoney-account-template>

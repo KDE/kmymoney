@@ -11,7 +11,7 @@
 <kmymoney-account-template>
  <title>Общие счета</title>
  <shortdesc>Базовый набор наиболее используемых счетов</shortdesc>
- <longdesc>Большинство пользователей предпочитает этот набор счетов. Он включает наиболее часто используемые счета (чеки, депозиты, наличные, кредитные карты, доходы, общие расходы).</longdesc>
+ <longdesc>Наиболее часто используемые счета (чеки, депозиты, наличные, кредитные карты, доходы, общие расходы).</longdesc>
  <accounts>
   <account type="9" name="">
    <account type="9" name="Текущие активы">
@@ -20,72 +20,80 @@
     <account type="1" name="Чековый счет"/>
    </account>
   </account>
-  <account type="10" name="">
-   <account type="4" name="Кредитная карта"/>
-  </account>
   <account type="12" name="">
    <account type="12" name="Другие доходы"/>
-   <account type="12" name="Заработная плата"/>
    <account type="12" name="Полученные подарки"/>
-   <account type="12" name="Премия"/>
    <account type="12" name="Процентный доход">
     <account type="12" name="Депозитные проценты"/>
     <account type="12" name="Другие процентные доходы"/>
     <account type="12" name="Чековые проценты"/>
    </account>
+   <account type="12" name="Работа">
+    <account type="12" name="Заработная плата"/>
+    <account type="12" name="Премия"/>
+   </account>
+  </account>
+  <account type="16" name="">
+   <flag name="OpeningBalanceAccount" value="Yes"/>
+  </account>
+  <account type="10" name="">
+   <account type="4" name="Кредитная карта"/>
   </account>
   <account type="13" name="">
-   <account type="13" name="Автомобиль">
-    <account type="13" name="Парковка"/>
-    <account type="13" name="Ремонт и обслуживание"/>
-    <account type="13" name="Сборы"/>
-    <account type="13" name="Топливо"/>
-   </account>
-   <account type="13" name="Банковское обслуживание"/>
-   <account type="13" name="Благотворительность"/>
-   <account type="13" name="Интернет услуги"/>
-   <account type="13" name="Кабельное телевидение"/>
-   <account type="13" name="Книги"/>
-   <account type="13" name="Коммунальные услуги">
-    <account type="13" name="Вода"/>
-    <account type="13" name="Вывоз мусора"/>
-    <account type="13" name="Газ"/>
-    <account type="13" name="Электричество"/>
-   </account>
-   <account type="13" name="Компьютер"/>
-   <account type="13" name="Корректировка"/>
    <account type="13" name="Медицинские расходы"/>
    <account type="13" name="Налоги">
     <account type="13" name="Другие налоги"/>
-    <account type="13" name="Общественная безопасность"/>
-    <account type="13" name="Региональные"/>
-    <account type="13" name="Федеральные"/>
+    <account type="13" name="Подоходный налог"/>
    </account>
-   <account type="13" name="Обеды"/>
-   <account type="13" name="Общественный транспорт"/>
+   <account type="13" name="Образование">
+    <account type="13" name="Книги"/>
+    <account type="13" name="Подписки"/>
+    <account type="13" name="Учёба"/>
+   </account>
    <account type="13" name="Одежда"/>
-   <account type="13" name="Питание"/>
    <account type="13" name="Подарки"/>
-   <account type="13" name="Подписки"/>
+   <account type="13" name="Проживание">
+    <account type="13" name="Коммунальные услуги">
+     <account type="13" name="Вода"/>
+     <account type="13" name="Вывоз мусора"/>
+     <account type="13" name="Газ"/>
+     <account type="13" name="Другие сборы"/>
+     <account type="13" name="Электричество"/>
+    </account>
+    <account type="13" name="Ремонт"/>
+   </account>
+   <account type="13" name="Пропитание">
+    <account type="13" name="Продукты"/>
+    <account type="13" name="Столовая"/>
+   </account>
    <account type="13" name="Развлечения">
     <account type="13" name="Музыка и кино"/>
     <account type="13" name="Отдых"/>
     <account type="13" name="Путешествия"/>
+    <account type="13" name="Спорт"/>
    </account>
-   <account type="13" name="Разное"/>
+   <account type="13" name="Разное">
+    <account type="13" name="Банковское обслуживание"/>
+    <account type="13" name="Благотворительность"/>
+    <account type="13" name="Разное"/>
+    <account type="13" name="Хобби"/>
+   </account>
+   <account type="13" name="Связь и телевидение">
+    <account type="13" name="Интернет услуги"/>
+    <account type="13" name="Кабельное телевидение"/>
+    <account type="13" name="Телефон"/>
+   </account>
    <account type="13" name="Страхование">
-    <account type="13" name="Автостраховка"/>
-    <account type="13" name="Медстраховка"/>
+    <account type="13" name="Медицинское страхование"/>
+    <account type="13" name="Пенсионное страхование"/>
+    <account type="13" name="Социальное страхование"/>
     <account type="13" name="Страхование жизни"/>
    </account>
-   <account type="13" name="Телефон"/>
-   <account type="13" name="Учёба"/>
-   <account type="13" name="Химчистка/прачечная"/>
-   <account type="13" name="Хобби"/>
+   <account type="13" name="Техника"/>
+   <account type="13" name="Транспорт">
+    <account type="13" name="Общественный транспорт"/>
+   </account>
    <account type="13" name="Хозтовары"/>
-  </account>
-  <account type="16" name="">
-   <account type="16" name="Начальное сальдо"/>
   </account>
  </accounts>
 </kmymoney-account-template>

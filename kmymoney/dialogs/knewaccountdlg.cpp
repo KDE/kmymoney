@@ -89,32 +89,43 @@ public:
     auto file = MyMoneyFile::instance();
 
     // initialize the m_parentAccount member
+    if (!m_account.parentAccountId().isEmpty()) {
+      try {
+        m_parentAccount = file->account(m_account.parentAccountId());
+      } catch (MyMoneyException&) {
+        m_account.setParentAccountId(QString());
+      }
+    }
+
+    // assign a standard account if the selected parent is not set/found
     QVector<Account::Type> filterAccountGroup {m_account.accountGroup()};
-    switch (m_account.accountGroup()) {
-      case Account::Type::Asset:
-        m_parentAccount = file->asset();
-        break;
-      case Account::Type::Liability:
-        m_parentAccount = file->liability();
-        break;
-      case Account::Type::Income:
-        m_parentAccount = file->income();
-        break;
-      case Account::Type::Expense:
-        m_parentAccount = file->expense();
-        break;
-      case Account::Type::Equity:
-        m_parentAccount = file->equity();
-        break;
-      default:
-        qDebug("Seems we have an account that hasn't been mapped to the top five");
-        if (m_categoryEditor) {
-          m_parentAccount = file->income();
-          filterAccountGroup[0] = Account::Type::Income;
-        } else {
+    if (m_account.parentAccountId().isEmpty()) {
+      switch (m_account.accountGroup()) {
+        case Account::Type::Asset:
           m_parentAccount = file->asset();
-          filterAccountGroup[0] = Account::Type::Asset;
-        }
+          break;
+        case Account::Type::Liability:
+          m_parentAccount = file->liability();
+          break;
+        case Account::Type::Income:
+          m_parentAccount = file->income();
+          break;
+        case Account::Type::Expense:
+          m_parentAccount = file->expense();
+          break;
+        case Account::Type::Equity:
+          m_parentAccount = file->equity();
+          break;
+        default:
+          qDebug("Seems we have an account that hasn't been mapped to the top five");
+          if (m_categoryEditor) {
+            m_parentAccount = file->income();
+            filterAccountGroup[0] = Account::Type::Income;
+          } else {
+            m_parentAccount = file->asset();
+            filterAccountGroup[0] = Account::Type::Asset;
+          }
+      }
     }
 
     ui->m_amountGroup->setId(ui->m_grossAmount, 0);
@@ -392,6 +403,13 @@ public:
 
     q->connect(ui->m_qcomboboxInstitutions, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::activated), q, &KNewAccountDlg::slotLoadInstitutions);
 
+    QModelIndex parentIndex;
+    if (!m_parentAccount.id().isEmpty()) {
+      const auto baseIdx = model->indexById(m_parentAccount.id());
+      parentIndex = m_filterProxyModel->mapFromSource(baseIdx);
+    }
+    selectParentAccount(parentIndex);
+
     ui->m_vatCategory->setChecked(false);
     ui->m_vatAssignment->setChecked(false);
 
@@ -565,6 +583,14 @@ public:
     } else {
       ui->m_qcheckboxOpeningBalance->setVisible(false);
     }
+  }
+
+  void selectParentAccount(const QModelIndex& parentIndex)
+  {
+    ui->m_parentAccounts->expand(parentIndex);
+    ui->m_parentAccounts->selectionModel()->select(parentIndex, QItemSelectionModel::SelectCurrent);
+    ui->m_parentAccounts->setCurrentIndex(parentIndex);
+    ui->m_parentAccounts->scrollTo(parentIndex, QAbstractItemView::PositionAtCenter);
   }
 
   KNewAccountDlg*             q_ptr;
@@ -853,6 +879,8 @@ void KNewAccountDlg::slotAccountTypeChanged(int index)
       // update the account group displayed in the accounts hierarchy
       d->m_filterProxyModel->clear();
       d->m_filterProxyModel->addAccountGroup(QVector<Account::Type> {d->m_account.accountGroup()});
+      d->selectParentAccount(d->m_filterProxyModel->index(0, 0));
+
     }
   } catch (const MyMoneyException &) {
     qWarning("Unexpected exception in KNewAccountDlg::slotAccountTypeChanged()");

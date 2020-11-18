@@ -15,6 +15,7 @@
                 "Name[fi]": "Michael Edwardes",
                 "Name[fr]": "Michael Edwardes",
                 "Name[gl]": "Michael Edwardes",
+                "Name[ia]": "Michael Edwardes",
                 "Name[it]": "Michael Edwardes",
                 "Name[ko]": "Michael Edwardes",
                 "Name[nl]": "Michael Edwardes",

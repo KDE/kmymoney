@@ -17,7 +17,9 @@
    <account type="1" name="Bankas konts"/>
   </account>
   <account type="16" name="">
-   <account type="16" name="Sākuma bilance"/>
+   <account type="16" name="Sākuma bilance">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="12" name=""/>
   <account type="13" name=""/>

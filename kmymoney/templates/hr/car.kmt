@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hr/acctchrt_car.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Auto</title>
+ <shortdesc>Razni troškovi vezani uz osobno vozilo</shortdesc>
+ <longdesc>Kontni plan za knjiženje i praćenje troškova i kredita/zajmova za osobno vozilo (auto, motocikl, laki četverocikl ili četverocikl).</longdesc>
+ <accounts>
+  <account type="9" name="">
+   <account type="9" name="Dugotrajna imovina">
+    <account type="9" name="Osobno vozilo"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Krediti">
+    <account type="10" name="Kredit/zajam za auto"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Troškovi korištenja">
+    <account type="13" name="Osobno vozilo">
+     <account type="13" name="Amortizacija"/>
+     <account type="13" name="Auto-gume"/>
+     <account type="13" name="Gorivo i ulje"/>
+     <account type="13" name="Kamate po kreditima i zajmovima"/>
+     <account type="13" name="Naknade i pristojbe"/>
+     <account type="13" name="Održavanje i popravak"/>
+     <account type="13" name="Osiguranje">
+      <account type="13" name="Kasko osiguranje"/>
+      <account type="13" name="Obavezno osiguranje"/>
+     </account>
+     <account type="13" name="Porez na vozilo"/>
+     <account type="13" name="Pranje vozila i sl."/>
+     <account type="13" name="Registracija i tehnički pregled"/>
+     <account type="13" name="Rent-a-car usluga"/>
+     <account type="13" name="Servis vozila"/>
+     <account type="13" name="Trošak za vozila u najmu"/>
+    </account>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

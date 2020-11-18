@@ -14,6 +14,7 @@
                 "Name[fi]": "Tony Bloomfield, Łukasz Wojniłowicz",
                 "Name[fr]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[gl]": "Tony Bloomfield,Łukasz Wojniłowicz",
+                "Name[ia]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[it]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[ko]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[nl]": "Tony Bloomfield,Łukasz Wojniłowicz",

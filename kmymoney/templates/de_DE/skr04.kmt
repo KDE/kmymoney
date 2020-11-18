@@ -11,7 +11,7 @@
 <kmymoney-account-template>
  <title>Kontenrahmen SKR04</title>
  <shortdesc>Standardkontenrahmen SKR04, Stand 2005</shortdesc>
- <longdesc>BETA-Version eines Kontenrahmes SKR04 für 2005. Mehr Informationen unter http://wiki.gnucash.org/wiki/De/SKR04</longdesc>
+ <longdesc>BETA-Version eines Kontenrahmes SKR04 für 2005. Mehr Informationen unter https://wiki.gnucash.org/wiki/De/SKR04</longdesc>
  <accounts>
   <account type="12" name="">
    <account type="12" name="Erlösschmälerungen">
@@ -1046,7 +1046,7 @@
    <account type="16" name="Saldenvorträge Debitoren"/>
    <account type="16" name="Saldenvorträge Kreditoren"/>
    <account type="16" name="Saldenvorträge Sachkonten">
-     <flag name="OpeningBalanceAccount"/>
+    <flag name="OpeningBalanceAccount" value="Yes"/>
    </account>
   </account>
   <account type="10" name="">
@@ -1255,7 +1255,7 @@
      </account>
     </account>
     <account type="10" name="07. Verbindlichkeiten gegenüber Unternehmen, mit denen ein Beteiligungsverhältnis besteht">
-     <account type="10" name="Verbindl. gg.UN mit Beteiligungsverh.">
+     <account type="10" name="Verbindl. gg. UN mit Beteiligungsverh.">
       <account type="10" name="Verbindl. gg. UN mit Beteiligg.verh. 1-5 J"/>
       <account type="10" name="Verbindl. gg. UN mit Beteiligg.verh. b. 1 J"/>
       <account type="10" name="Verbindl. gg. UN mit Beteiligg.verh. g. 5 J"/>

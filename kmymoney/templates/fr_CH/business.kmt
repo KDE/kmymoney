@@ -99,7 +99,9 @@
   </account>
   <account type="16" name="">
    <account type="16" name="Gains enregistrés"/>
-   <account type="16" name="Soldes initiaux"/>
+   <account type="16" name="Soldes initiaux">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
  </accounts>
 </kmymoney-account-template>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hr/acctchrt_cdmoneymkt.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Potvrde o depozitu i tržište novca</title>
+ <shortdesc>Potvrde o depozitu i investicije u tržištu novca</shortdesc>
+ <longdesc>Kontni plan za knjiženje i praćenje potvrda o depozitu (CD) ili računa za tržište novca (CD, tržište novca i kamate)</longdesc>
+ <accounts>
+  <account type="9" name="">
+   <account type="9" name="Trenutačna imovina">
+    <account type="1" name="Potvrda o depozitu"/>
+    <account type="1" name="Tržište novca"/>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="12" name="Prihodi od kamata">
+    <account type="12" name="Kamate po potvrdi o depozitu"/>
+    <account type="12" name="Kamate po tržištu novca"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>
