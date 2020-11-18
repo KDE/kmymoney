@@ -15,6 +15,7 @@
                 "Name[fi]": "Christian Dávid",
                 "Name[fr]": "Christian Dávid",
                 "Name[gl]": "Christian Dávid",
+                "Name[ia]": "Christian Dávid",
                 "Name[it]": "Christian Dávid",
                 "Name[ko]": "Christian Dávid",
                 "Name[nl]": "Christian Dávid",

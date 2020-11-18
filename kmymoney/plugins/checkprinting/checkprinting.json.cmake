@@ -65,6 +65,7 @@
         "Name[fi]": "Sekkien tulostus",
         "Name[fr]": "Impression de chèques",
         "Name[gl]": "Impresión de cheques",
+        "Name[ia]": "Imprimente cheque",
         "Name[it]": "Stampa degli assegni",
         "Name[ko]": "수표 발행",
         "Name[nl]": "Printen van een cheque",

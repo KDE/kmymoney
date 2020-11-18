@@ -15,6 +15,7 @@
                 "Name[fi]": "Christian David",
                 "Name[fr]": "Christian David",
                 "Name[gl]": "Christian David",
+                "Name[ia]": "Christian David",
                 "Name[it]": "Christian David",
                 "Name[ko]": "Christian David",
                 "Name[nl]": "Christian David",
