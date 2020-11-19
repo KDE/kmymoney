@@ -8,6 +8,8 @@ include:
 build_local_ubuntu_1804:
   stage: build
   image: ubuntu:18.04
+  variables:
+    - DEBIAN_FRONTEND: "noninteractive"
   before_script:
     - echo "Installing dependencies."
     - sed -i -- 's/#[ ]*deb-src/deb-src/g' /etc/apt/sources.list
