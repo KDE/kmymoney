@@ -268,9 +268,9 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>                                   
+  <customwidget>
    <class>AmountEdit</class>
-   <extends>QLineEdit</extends>                   
+   <extends>QLineEdit</extends>
    <header location="global">amountedit.h</header>
   </customwidget>
   <customwidget>
@@ -285,7 +285,7 @@
   </customwidget>
   <customwidget>
    <class>KMessageWidget</class>
-   <extends>QWidget</extends>
+   <extends>QFrame</extends>
    <header location="global">KMessageWidget</header>
    <container>1</container>
   </customwidget>
