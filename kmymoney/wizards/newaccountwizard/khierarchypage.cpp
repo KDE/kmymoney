@@ -121,6 +121,13 @@ namespace NewAccountWizard
     d->ui->m_parentAccounts->proxyModel()->clear();
     d->ui->m_parentAccounts->proxyModel()->addAccountGroup(QVector<Account::Type> {topAccount.accountGroup()});
     d->ui->m_parentAccounts->expandAll();
+
+    const auto file = MyMoneyFile::instance();
+    const auto baseIdx = file->accountsModel()->indexById(topAccount.id());
+    const auto idx = file->accountsModel()->mapFromBaseSource(d->ui->m_parentAccounts->model(), baseIdx);
+    d->ui->m_parentAccounts->selectionModel()->select(idx, QItemSelectionModel::SelectCurrent);
+    d->ui->m_parentAccounts->setCurrentIndex(idx);
+    d->ui->m_parentAccounts->scrollTo(idx, QAbstractItemView::PositionAtCenter);
   }
 
   KMyMoneyWizardPage* HierarchyPage::nextPage() const
