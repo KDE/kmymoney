@@ -16,7 +16,7 @@ build_local_ubuntu_1804:
     - apt update
     - apt install -y apt-utils
     - apt build-dep -y kmymoney
-    - apt install -y qt5-default libsqlcipher-dev libqt5sql5-*
+    - apt install -y qt5-default libsqlcipher-dev libqt5sql5-* qtbase5-private-dev
 
   script:
     - echo "Building."
