@@ -1,5 +1,24 @@
+# default KDe build env
 include:
   - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-before.yml
   - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-applications-linux.yml
   - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-applications-freebsd.yml
 
+# custom builds
+build_local_ubuntu_1804:
+  stage: build
+  image: ubuntu:18.04
+  variables:
+    DEBIAN_FRONTEND: "noninteractive"
+  before_script:
+    - echo "Installing dependencies."
+    - sed -i -- 's/#[ ]*deb-src/deb-src/g' /etc/apt/sources.list
+    - apt update
+    - apt install -y apt-utils
+    - apt build-dep -y kmymoney
+    - apt install -y qt5-default libsqlcipher-dev libqt5sql5-* qtbase5-private-dev
+
+  script:
+    - echo "Building."
+    - cmake -DCMAKE_BUILD_TYPE=Debug
+    - make
