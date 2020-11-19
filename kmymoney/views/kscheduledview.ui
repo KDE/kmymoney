@@ -52,7 +52,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QTreeView" name="m_scheduleTree">
+    <widget class="KMyMoneyTreeView" name="m_scheduleTree">
      <property name="alternatingRowColors">
       <bool>true</bool>
      </property>
@@ -64,6 +64,13 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>KMyMoneyTreeView</class>
+   <extends>QTreeView</extends>
+   <header>kmymoneytreeview.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

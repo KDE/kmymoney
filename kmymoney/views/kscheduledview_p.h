@@ -30,10 +30,7 @@
 // QT Includes
 
 #include <QList>
-#include <QTimer>
-#include <QPushButton>
-#include <QMenu>
-#include <QIcon>
+#include <QAction>
 #include <QScopedPointer>
 #include <QDebug>
 

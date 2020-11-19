@@ -64,6 +64,7 @@ set(kmm_base_widgets_SOURCES
   passwordtoggle.cpp
   styleditemdelegateforwarder.cpp
   tabbar.cpp
+  kmymoneytreeview.cpp
   )
 
 set(kmm_widgets_SOURCES

@@ -83,7 +83,7 @@ public:
 };
 
 KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent)
-  : QTreeView(parent)
+  : KMyMoneyTreeView(parent)
   , d_ptr(new KMyMoneyAccountTreeViewPrivate(this))
 {
   Q_D(KMyMoneyAccountTreeView);
@@ -93,6 +93,8 @@ KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent)
   setAlternatingRowColors(true);
   setIconSize(QSize(22, 22));
   setSortingEnabled(true);
+
+  connect(this, &KMyMoneyTreeView::startEdit, this, [&](const QModelIndex& idx) { Q_D(KMyMoneyAccountTreeView); d->openIndex(idx); });
 }
 
 KMyMoneyAccountTreeView::~KMyMoneyAccountTreeView()
@@ -133,24 +135,6 @@ AccountsProxyModel* KMyMoneyAccountTreeView::proxyModel() const
 {
   Q_D(const KMyMoneyAccountTreeView);
   return d->proxyModel;
-}
-
-void KMyMoneyAccountTreeView::mouseDoubleClickEvent(QMouseEvent *event)
-{
-  Q_D(KMyMoneyAccountTreeView);
-  d->openIndex(currentIndex());
-  event->accept();
-}
-
-void KMyMoneyAccountTreeView::keyPressEvent(QKeyEvent *event)
-{
-  if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
-    Q_D(KMyMoneyAccountTreeView);
-    d->openIndex(currentIndex());
-    event->accept();
-  } else {
-    QTreeView::keyPressEvent(event);
-  }
 }
 
 void KMyMoneyAccountTreeView::customContextMenuRequested(const QPoint pos)

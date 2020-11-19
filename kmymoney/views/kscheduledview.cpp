@@ -26,20 +26,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QList>
-#include <QTimer>
-#include <QPushButton>
 #include <QMenu>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
-
-#include <KLocalizedString>
-#include <KConfig>
-#include <KMessageBox>
-#include <KSharedConfig>
-#include <KTreeWidgetSearchLine>
-#include <KTreeWidgetSearchLineWidget>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -108,6 +98,8 @@ void KScheduledView::showEvent(QShowEvent* event)
       Q_D(KScheduledView);
       emit requestCustomContextMenu(eMenu::Menu::Schedule, d->ui->m_scheduleTree->viewport()->mapToGlobal(pos));
     });
+    connect(d->ui->m_scheduleTree, &KMyMoneyTreeView::startEdit, this, &KScheduledView::slotEditSchedule);
+
     connect(d->ui->m_scheduleTree->header(), &QHeaderView::sortIndicatorChanged, this, [&](int logicalIndex, Qt::SortOrder order) {
       Q_D(KScheduledView);
       d->m_filterModel->sort(logicalIndex, order);
@@ -116,6 +108,7 @@ void KScheduledView::showEvent(QShowEvent* event)
       Q_D(KScheduledView);
       d->m_filterModel->invalidate();
     });
+
   }
   emit customActionRequested(View::Schedules, eView::Action::AboutToShow);
 

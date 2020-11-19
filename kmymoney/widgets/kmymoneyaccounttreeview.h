@@ -25,7 +25,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QTreeView>
 #include <QScopedPointer>
 
 // ----------------------------------------------------------------------------
@@ -33,6 +32,8 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
+
+#include "kmymoneytreeview.h"
 
 class AccountsProxyModel;
 class KMyMoneyAccountTreeViewPrivate;
@@ -46,7 +47,7 @@ namespace eMenu {
 /**
   * This view was created to handle the actions that could be performed with the accounts.
   */
-class KMM_BASE_WIDGETS_EXPORT KMyMoneyAccountTreeView : public QTreeView
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyAccountTreeView : public KMyMoneyTreeView
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyAccountTreeView)
@@ -71,10 +72,6 @@ public:
    * and not during operation.
    */
   void setProxyModel(AccountsProxyModel* model);
-
-protected:
-  void mouseDoubleClickEvent(QMouseEvent *event) override;
-  void keyPressEvent(QKeyEvent *event) override;
 
 protected Q_SLOTS:
   void customContextMenuRequested(const QPoint);
