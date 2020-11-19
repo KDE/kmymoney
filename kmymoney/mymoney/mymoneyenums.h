@@ -151,6 +151,7 @@ namespace eMyMoney {
       Transfer = 4,
       LoanPayment = 5
     };
+    inline uint qHash(const Type key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 
     /**
       * This enum is used to describe the schedule's payment type.
@@ -487,7 +488,12 @@ namespace eMyMoney {
       // MyMoneySchedule
       ScheduleNameRole,
       ScheduleTypeRole,
+      ScheduleAccountRole,
+      SchedulePayeeRole,
+      ScheduleNextDueDateRole,
       ScheduleIsOverdueRole,
+      ScheduleIsFinishedRole,
+      ScheduleFrequencyRole,
 
       // MyMoneySecurity
       SecuritySymbolRole,
@@ -559,6 +565,12 @@ namespace eMyMoney {
       TemplatesLongDescriptionRole,
       TemplatesDomRole,
       TemplatesLocaleRole,
+
+      // Tags
+      TagNameRole,
+
+      // General state
+      ClosedRole,
     };
   }
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ca/acctchrt_homeloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Préstec hipotecari</title>
+ <shortdesc>Comptes per a préstec hipotecari i interès associat</shortdesc>
+ <longdesc>Hauríeu d'escollir aquest joc de comptes si teniu contractat un préstec hipotecari (préstec hipotecari, interès hipoteca).</longdesc>
+ <accounts>
+  <account type="13" name="">
+   <account type="13" name="Interessos">
+    <account type="13" name="Interès de la hipoteca"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="Préstecs">
+    <account type="10" name="Préstec hipotecari"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

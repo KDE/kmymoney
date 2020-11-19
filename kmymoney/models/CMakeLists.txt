@@ -16,11 +16,8 @@ set(libmodels_a_SOURCES
     ledgertransaction.cpp
     specialdatesfilter.cpp
     idfilter.cpp
+    scheduleproxymodel.cpp
 )
-
-if (USE_MODELTEST)
-  list(APPEND libmodels_a_SOURCES modeltest.cpp)
-endif()
 
 add_library(kmm_models SHARED ${libmodels_a_SOURCES})
 

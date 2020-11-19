@@ -9,14 +9,15 @@
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>Despesas de Aluguer</title>
+ <title>Despesas de aluguer</title>
  <shortdesc>Despesas associadas com uma casa alugada</shortdesc>
- <longdesc>Desejará seleccionar este conjunto de contas caso tenha uma casa alugada (renda, seguro de arrendamento).</longdesc>
+ <longdesc>Desejará seleccionar este conjunto de contas caso tenha uma casa
+  alugada (renda, seguro de arrendamento).</longdesc>
  <accounts>
   <account type="13" name="">
    <account type="13" name="Renda"/>
    <account type="13" name="Seguro">
-    <account type="13" name="Seguro de Arrendamento"/>
+    <account type="13" name="Seguro de arrendamento"/>
    </account>
   </account>
  </accounts>

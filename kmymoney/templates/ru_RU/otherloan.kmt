@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/ru/acctchrt_otherloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Другие кредиты</title>
+ <shortdesc>Различные кредиты и связанные с ними платежи</shortdesc>
+ <longdesc>Счета для различных кредитов и связанных с ними платежей.</longdesc>
+ <accounts>
+  <account type="10" name="">
+   <account type="10" name="Кредиты">
+    <account type="10" name="Другие кредиты"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Проценты">
+    <account type="13" name="Другие кредиты"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

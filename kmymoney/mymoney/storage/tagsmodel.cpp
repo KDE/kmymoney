@@ -77,6 +77,7 @@ QVariant TagsModel::data(const QModelIndex& index, int role) const
   QVariant rc;
   const MyMoneyTag& tag = static_cast<TreeItem<MyMoneyTag>*>(index.internalPointer())->constDataRef();
   switch(role) {
+    case eMyMoney::Model::TagNameRole:
     case Qt::DisplayRole:
     case Qt::EditRole:
       // make sure to never return any displayable text for the dummy entry
@@ -94,16 +95,36 @@ QVariant TagsModel::data(const QModelIndex& index, int role) const
     case eMyMoney::Model::Roles::IdRole:
       rc = tag.id();
       break;
+
+    case eMyMoney::Model::ClosedRole:
+      rc = tag.isClosed();
+      break;
   }
   return rc;
 }
 
 bool TagsModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-  if(!index.isValid()) {
+  if (!index.isValid())
     return false;
-  }
+  if (index.row() < 0 || index.row() >= rowCount(index.parent()))
+    return false;
 
-  qDebug() << "setData(" << index.row() << index.column() << ")" << value << role;
-  return QAbstractItemModel::setData(index, value, role);
+  MyMoneyTag& tag = static_cast<TreeItem<MyMoneyTag>*>(index.internalPointer())->dataRef();
+
+  switch(role) {
+    case eMyMoney::Model::TagNameRole:
+    case Qt::DisplayRole:
+    case Qt::EditRole:
+      // make sure to never return any displayable text for the dummy entry
+      if (!tag.id().isEmpty()) {
+        tag.setName(value.toString());
+        return true;
+      }
+      break;
+
+    default:
+      break;
+  }
+  return false;
 }

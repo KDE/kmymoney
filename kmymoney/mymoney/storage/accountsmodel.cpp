@@ -409,7 +409,7 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
           return i18n("Total Value");
         case Column::Number:
           return i18nc("Tooltip for 'Account Number' column",
-                       "Account or credit card number, as as assigned by the institution.");
+                       "Account or credit card number, as assigned by the institution.");
         case Column::Iban:
           return i18nc("Tooltip for 'IBAN' column",
                        "Account number in IBAN (International Bank Account Number) format");

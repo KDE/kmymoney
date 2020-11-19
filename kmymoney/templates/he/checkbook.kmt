@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/he/acctchrt_checkbook.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>פנקס המחאות</title>
+ <shortdesc>תרשים חשבונות מזערילשימוש בגנוקש.</shortdesc>
+ <longdesc>בחרו בתרשים חשבונות זה לניהול פנקס ההמחאות שלכם, מאוחר יותר ניתן יהיה להרחיב את התרשים גם לניהול הכנסות והוצאות ככל שידרש.</longdesc>
+ <accounts>
+  <account type="16" name="">
+   <account type="16" name="יתרת פתיחה">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
+  </account>
+  <account type="13" name=""/>
+  <account type="12" name=""/>
+  <account type="9" name="">
+   <account type="9" name="רכוש שוטף">
+    <account type="1" name="חשבון עובר ושב"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

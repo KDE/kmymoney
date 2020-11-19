@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hr/acctchrt_eduloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Kredit za obrazovanje</title>
+ <shortdesc>Kontni plan za kredit za obrazovanje</shortdesc>
+ <longdesc>Kontni plan za knjiženje i praćenje kredita za obrazovanje te njegovih kamata.
+  You would want to select this set of accounts if you have an educational loan (education loan, education loan interest).</longdesc>
+ <accounts>
+  <account type="10" name="">
+   <account type="10" name="Krediti">
+    <account type="10" name="Kredit za obrazovanje"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Kamate">
+    <account type="13" name="Kamate na kredit za obrazovanje"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

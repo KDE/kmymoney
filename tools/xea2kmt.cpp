@@ -48,11 +48,12 @@ QDebug operator <<(QDebug out, const QXmlStreamAttribute &a)
     return out;
 }
 
-bool debug = false;
-bool withID = false;
-bool noLevel1Names = false;
-bool withTax = false;
-bool prefixNameWithCode = false;
+static bool debug = false;
+static bool verbose = false;
+static bool withID = false;
+static bool noLevel1Names = false;
+static bool withTax = false;
+static bool prefixNameWithCode = false;
 
 typedef QMap<QString,QString> DirNameMapType;
 
@@ -192,6 +193,7 @@ public:
                     readSlots(xml);
                 else
                 {
+                    xml.readElementText(QXmlStreamReader::SkipChildElements);
                     if (debug)
                         qDebug() << "skipping" << _name.toString();
                 }
@@ -228,7 +230,9 @@ public:
     QString title;
     QString longDescription;
     QString shortDescription;
+    QString fileName;
     TemplateAccount::List accounts;
+    TemplateAccount *openingBalanceAccount{nullptr};
 
     bool read(QXmlStreamReader &xml)
     {
@@ -300,6 +304,20 @@ public:
                         xml.writeAttribute("value",account->slotList["tax-related"] == "1" ? "Yes" : "No");
                         xml.writeEndElement();
                     }
+                }
+                if (account->slotList.contains("equity-type") && account->slotList["equity-type"] == "opening-balance") {
+                    if (openingBalanceAccount) {
+                        qWarning() << "template" << fileName << "already has specified"
+                                   << openingBalanceAccount->m_name
+                                   << "as opening balance account,"
+                                   << "ignoring account" << account->m_name;
+                        continue;
+                    }
+                    xml.writeStartElement("flag");
+                    xml.writeAttribute("name","OpeningBalanceAccount");
+                    xml.writeAttribute("value","Yes");
+                    xml.writeEndElement();
+                    openingBalanceAccount = account;
                 }
             }
             index++;
@@ -490,6 +508,7 @@ protected:
         ).arg(fileName));
         xml.writeDTD("<!DOCTYPE KMYMONEY-TEMPLATE>");
         xml.writeStartElement("","kmymoney-account-template");
+        _template.fileName = fileName;
         bool result = _template.writeAsXml(xml);
         xml.writeEndElement();
         xml.writeEndDocument();
@@ -551,7 +570,7 @@ int convertFileStructure(const QString &indir, const QString &outdir)
     // process templates
     foreach (const QString &file, files)
     {
-        if (debug)
+        if (debug || verbose)
             qDebug() << "processing" << file;
 
         // create output file dir
@@ -597,6 +616,7 @@ int main(int argc, char *argv[])
         qWarning() << "          --help                    - this page";
         qWarning() << "          --no-level1-names         - do not export account names for top level accounts";
         qWarning() << "          --prefix-name-with-code   - prefix account name with account code if present";
+        qWarning() << "          --verbose                 - output processing information";
         qWarning() << "          --with-id                 - write account id attribute";
         qWarning() << "          --with-tax-related        - parse and export gnucash 'tax-related' flag";
         qWarning() << "          --in-dir <dir>            - search for gnucash templates files in <dir>";
@@ -613,6 +633,8 @@ int main(int argc, char *argv[])
         QString arg = QLatin1String(argv[i]);
         if (arg == "--debug")
             debug = true;
+        else if (arg == "--verbose")
+            verbose = true;
         else if (arg == "--with-id")
             withID = true;
         else if (arg == "--no-level1-names")

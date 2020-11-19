@@ -15,6 +15,7 @@
                 "Name[fi]": "Allan Anderson, Łukasz Wojniłowicz",
                 "Name[fr]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[gl]": "Allan Anderson,Łukasz Wojniłowicz",
+                "Name[ia]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[it]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[ko]": "Allan Anderson,Łukasz Wojniłowicz",
                 "Name[nl]": "Allan Anderson,Łukasz Wojniłowicz",

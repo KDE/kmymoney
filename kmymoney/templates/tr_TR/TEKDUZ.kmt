@@ -403,10 +403,13 @@
     <account type="16" name="İştirakler Yeniden Değerleme Artışları"/>
    </account>
    <account type="16" name="Ödenmiş Sermaye">
-    <account type="16" name="Sermaye"/>
-    <account type="16" name="Sermaye Düzeltmesi Olumlu Farkları"/>
-    <account type="16" name="Sermaye Düzeltmesi Olumsuz Farkları(-)"/>
-    <account type="16" name="Ödenmemiş Sermaye(-)"/>
+    <account type="16" name="Sermaye">
+     <flag name="OpeningBalanceAccount" value="Yes"/>
+    </account>
+    <account type="16" name="Sermaye Düzeltmesi Olumlu Farkları">
+     <account type="16" name="Sermaye Düzeltmesi Olumsuz Farkları(-)"/>
+     <account type="16" name="Ödenmemiş Sermaye(-)"/>
+    </account>
    </account>
   </account>
  </accounts>

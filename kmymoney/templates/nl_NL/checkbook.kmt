@@ -21,7 +21,9 @@
   <account type="12" name=""/>
   <account type="13" name=""/>
   <account type="16" name="">
-   <account type="16" name="Beginsaldi"/>
+   <account type="16" name="Beginsaldi">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
  </accounts>
 </kmymoney-account-template>

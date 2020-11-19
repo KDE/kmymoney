@@ -9,21 +9,22 @@
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>Receitas da Esposa</title>
- <shortdesc>Contas para registar separadamente as receitas da esposa</shortdesc>
- <longdesc>Desejará seleccionar este conjunto de contas caso tenha uma esposa que tenha emprego (salário (esposa), impostos (esposa)).</longdesc>
+ <title>Receitas da esposa</title>
+ <shortdesc>Contas de receitas do cônjuge</shortdesc>
+ <longdesc>Desejará seleccionar este conjunto de contas caso tenha um cônjuge
+  que tenha emprego (salário, impostos).</longdesc>
  <accounts>
   <account type="13" name="">
-   <account type="13" name="Impostos (Esposa)">
+   <account type="13" name="Impostos (esposa)">
     <account type="13" name="IRS"/>
-    <account type="13" name="Municipais"/>
-    <account type="13" name="Outros Impostos"/>
+    <account type="13" name="Impostos municipais"/>
+    <account type="13" name="Outros impostos"/>
     <account type="13" name="Segurança Social"/>
-    <account type="13" name="Seguro Saúde"/>
+    <account type="13" name="Seguro de saúde"/>
    </account>
   </account>
   <account type="12" name="">
-   <account type="12" name="Salário (Esposa)"/>
+   <account type="12" name="Salário (esposa)"/>
   </account>
  </accounts>
 </kmymoney-account-template>

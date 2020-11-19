@@ -12,7 +12,6 @@ set(libviews_a_SOURCES
   kmymoneyview.cpp
   kpayeesview.cpp
   kscheduledview.cpp
-  kscheduletreeitem.cpp
   ktagsview.cpp
   kpayeeidentifierview.cpp
   payeeidentifierselectiondelegate.cpp
@@ -24,6 +23,7 @@ set(libviews_a_SOURCES
   ledgerview.cpp
   ledgeraccountfilter.cpp
   ledgerpayeefilter.cpp
+  ledgertagfilter.cpp
   journaldelegate.cpp
   onlinebalancedelegate.cpp
   specialdatedelegate.cpp

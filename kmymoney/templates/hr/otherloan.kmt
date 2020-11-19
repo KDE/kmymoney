@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Converted using xea2kmt from GnuCash sources
+
+        accounts/hr/acctchrt_otherloan.gnucash-xea
+
+     Please check the source file for possible copyright
+     and license information.
+-->
+<!DOCTYPE KMYMONEY-TEMPLATE>
+<kmymoney-account-template>
+ <title>Razni krediti</title>
+ <shortdesc>Kontni plan za razne kredite i njihovih kamata</shortdesc>
+ <longdesc>Kontni plan za knjiženje i praćenje raznih kredita i njihovih kamata.</longdesc>
+ <accounts>
+  <account type="10" name="">
+   <account type="10" name="Krediti">
+    <account type="10" name="Ostali krediti"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="Kamate">
+    <account type="13" name="Ostale kamate"/>
+   </account>
+  </account>
+ </accounts>
+</kmymoney-account-template>

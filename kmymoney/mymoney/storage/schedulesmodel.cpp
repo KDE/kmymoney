@@ -23,6 +23,8 @@
 #include <QDebug>
 #include <QString>
 #include <QDate>
+#include <QColor>
+#include <QFont>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -36,11 +38,22 @@
 #include "mymoneytransaction.h"
 #include "mymoneysplit.h"
 #include "mymoneyaccount.h"
+#include "mymoneyutils.h"
+#include "mymoneymoney.h"
+#include "mymoneypayee.h"
+#include "mymoneysecurity.h"
 
 struct SchedulesModel::Private
 {
+  typedef struct {
+    QString     name;
+    QString     amount;
+  } ScheduleInfo;
+
   Private(SchedulesModel* qq)
   : q(qq)
+  , overdueScheme(QColor(Qt::red))
+  , finishedScheme(QColor(Qt::darkGreen))
   {
   }
 
@@ -52,7 +65,83 @@ struct SchedulesModel::Private
     return indexes.first();
   }
 
-  SchedulesModel* q;
+  ScheduleInfo scheduleInfo(const MyMoneySchedule& schedule) const
+  {
+    ScheduleInfo rc;
+    const auto transaction = schedule.transaction();
+    const auto s1 = (transaction.splits().size() < 1) ? MyMoneySplit() : transaction.splits()[0];
+    const auto s2 = (transaction.splits().size() < 2) ? MyMoneySplit() : transaction.splits()[1];
+    MyMoneySplit split;
+    MyMoneyAccount acc;
+
+    switch (schedule.type()) {
+      case eMyMoney::Schedule::Type::Deposit:
+        if (s1.value().isNegative())
+          split = s2;
+        else
+          split = s1;
+        break;
+
+      case eMyMoney::Schedule::Type::LoanPayment:
+        {
+          auto found = false;
+          QStringList list;
+          for (const auto& s : transaction.splits()) {
+            acc = MyMoneyFile::instance()->account(s.accountId());
+            list.append(acc.id());
+            if (acc.accountGroup() == eMyMoney::Account::Type::Asset
+              || acc.accountGroup() == eMyMoney::Account::Type::Liability) {
+              if (acc.accountType() != eMyMoney::Account::Type::Loan
+              && acc.accountType() != eMyMoney::Account::Type::AssetLoan) {
+                split = s;
+                found = true;
+                break;
+              }
+            }
+          }
+          if (!found) {
+            qWarning() << "Split for payment account in" << schedule.id() << "not found in" << __FILE__ << __LINE__ ;
+          }
+        }
+        break;
+
+      default:
+        if (!s1.value().isPositive())
+          split = s1;
+        else
+          split = s2;
+        break;
+    }
+    acc = MyMoneyFile::instance()->account(split.accountId());
+    rc.name = acc.name();
+
+    const auto currency = MyMoneyFile::instance()->currency(acc.currencyId());
+    const auto amount = split.shares().abs();
+    if (!acc.id().isEmpty()) {
+      rc.amount = MyMoneyUtils::formatMoney(amount, acc, currency);
+
+    } else {
+      // there are some cases where the schedule does not have an account
+      // in those cases the account will not have a fraction
+      // use base currency instead
+      rc.amount = MyMoneyUtils::formatMoney(amount, MyMoneyFile::instance()->baseCurrency());
+    }
+    return rc;
+  }
+
+  QString payee(const MyMoneySchedule& schedule) const
+  {
+    const auto transaction = schedule.transaction();
+    const auto s1 = (transaction.splits().size() < 1) ? MyMoneySplit() : transaction.splits()[0];
+    if (s1.payeeId().isEmpty()) {
+      return {};
+    }
+    return MyMoneyFile::instance()->payee(s1.payeeId()).name();
+  }
+
+  SchedulesModel*   q;
+  QColor            overdueScheme;
+  QColor            finishedScheme;
 };
 
 SchedulesModel::SchedulesModel(QObject* parent, QUndoStack* undoStack)
@@ -71,10 +160,10 @@ SchedulesModel::~SchedulesModel()
 void SchedulesModel::clearModelItems()
 {
   const QVector<QPair<eMyMoney::Schedule::Type, QString>> types = {
-    { eMyMoney::Schedule::Type::Bill, i18n("Bills") },
-    { eMyMoney::Schedule::Type::Deposit, i18n("Deposits") },
-    { eMyMoney::Schedule::Type::Transfer, i18n("Transfers") },
-    { eMyMoney::Schedule::Type::LoanPayment, i18n("Loans") }
+    { eMyMoney::Schedule::Type::Bill, i18nc("Schedule group", "Bills") },
+    { eMyMoney::Schedule::Type::Deposit, i18nc("Schedule group", "Deposits") },
+    { eMyMoney::Schedule::Type::Transfer, i18nc("Schedule group", "Transfers") },
+    { eMyMoney::Schedule::Type::LoanPayment, i18nc("Schedule group", "Loans") }
   };
   MyMoneyModel<MyMoneySchedule>::clearModelItems();
 
@@ -92,10 +181,6 @@ void SchedulesModel::clearModelItems()
 int SchedulesModel::columnCount(const QModelIndex& parent) const
 {
   Q_UNUSED(parent);
-  // The group entries have only a single column
-  if (!parent.isValid()) {
-    return 1;
-  }
   return static_cast<int>(Column::MaxColumns);
 }
 
@@ -119,33 +204,90 @@ QVariant SchedulesModel::headerData(int section, Qt::Orientation orientation, in
   return QAbstractItemModel::headerData(section, orientation, role);
 }
 
-QVariant SchedulesModel::data(const QModelIndex& index, int role) const
+QVariant SchedulesModel::data(const QModelIndex& idx, int role) const
 {
-  if (!index.isValid())
+  if (!idx.isValid())
     return QVariant();
-  if (index.row() < 0 || index.row() >= rowCount(index.parent()))
+  if (idx.row() < 0 || idx.row() >= rowCount(idx.parent()))
     return QVariant();
 
+  // The group entries have only a single column
+  if (!idx.parent().isValid() && idx.column() > 0) {
+    return QVariant();
+  }
+
   QVariant rc;
-  const MyMoneySchedule& schedule = static_cast<TreeItem<MyMoneySchedule>*>(index.internalPointer())->constDataRef();
+  const MyMoneySchedule& schedule = static_cast<TreeItem<MyMoneySchedule>*>(idx.internalPointer())->constDataRef();
   switch(role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-      // make sure to never return any displayable text for the dummy entries
-      // other than the type/name column
-      switch(index.column()) {
+      switch(idx.column()) {
         case Column::Name:
           rc = schedule.name();
           break;
+
+        case Column::Account:
+          rc = d->scheduleInfo(schedule).name;
+          break;
+
+        case Column::Payee:
+          rc = d->payee(schedule);
+          break;
+
+        case Column::Amount:
+          rc = d->scheduleInfo(schedule).amount;
+          break;
+
+        case Column::NextDueDate:
+          if (!schedule.isFinished()) {
+            rc = MyMoneyUtils::formatDate(schedule.nextDueDate());
+          } else {
+            rc = i18nc("Finished schedule", "Finished");
+          }
+          break;
+
+        case Column::Frequency:
+          rc = i18n(schedule.occurrenceToString(schedule.occurrenceMultiplier(), schedule.occurrence()).toLatin1());
+          break;
+
+        case Column::PaymentMethod:
+          rc = MyMoneyUtils::paymentMethodToString(schedule.paymentType());
+          break;
       }
 
-      if (schedule.id().isEmpty() && index.column() != Column::Name) {
+      // make sure to never return any displayable text for the dummy entries
+      // other than the type/name column
+      if (schedule.id().isEmpty() && idx.column() != Column::Name) {
         rc.clear();
       }
       break;
 
+    case Qt::ForegroundRole:
+      if (idx.parent().isValid()) {
+        if (schedule.isFinished())
+          return d->finishedScheme;
+        if (schedule.isOverdue())
+          return d->overdueScheme;
+      }
+      break;
+
+    case Qt::FontRole:
+      {
+        QFont font;
+        // display top level account groups in bold
+        if (!idx.parent().isValid()) {
+          font.setBold(true);
+        }
+        return font;
+      }
+      break;
+
     case Qt::TextAlignmentRole:
-      rc = QVariant(Qt::AlignLeft | Qt::AlignVCenter);
+      if (idx.column() == Column::Amount) {
+        rc = QVariant(Qt::AlignRight | Qt::AlignVCenter);
+      } else {
+        rc = QVariant(Qt::AlignLeft | Qt::AlignVCenter);
+      }
       break;
 
     case eMyMoney::Model::Roles::IdRole:
@@ -154,6 +296,30 @@ QVariant SchedulesModel::data(const QModelIndex& index, int role) const
 
     case eMyMoney::Model::Roles::ScheduleTypeRole:
       rc = static_cast<int>(schedule.type());
+      break;
+
+    case eMyMoney::Model::ScheduleIsFinishedRole:
+      rc = schedule.isFinished();
+      break;
+
+    case eMyMoney::Model::ScheduleIsOverdueRole:
+      rc = schedule.isOverdue();
+      break;
+
+    case eMyMoney::Model::ScheduleAccountRole:
+      rc = d->scheduleInfo(schedule).name;
+      break;
+
+    case eMyMoney::Model::SchedulePayeeRole:
+      rc = d->payee(schedule);
+      break;
+
+    case eMyMoney::Model::ScheduleNextDueDateRole:
+      rc = schedule.nextDueDate();
+      break;
+
+    case eMyMoney::Model::ScheduleFrequencyRole:
+      rc = schedule.occurrenceMultiplier() * schedule.daysBetweenEvents(schedule.occurrence());
       break;
   }
   return rc;
@@ -192,6 +358,19 @@ bool SchedulesModel::setData(const QModelIndex& index, const QVariant& value, in
   m_dirty |= rc;
   return rc;
 }
+
+void SchedulesModel::setColorScheme(SchedulesModel::ColorScheme scheme, const QColor& color)
+{
+  switch(scheme) {
+    case Overdue:
+      d->overdueScheme= color;
+      break;
+    case Finished:
+      d->finishedScheme = color;
+      break;
+  }
+}
+
 
 void SchedulesModel::load(const QMap<QString, MyMoneySchedule>& list)
 {

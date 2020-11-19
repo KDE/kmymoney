@@ -60,8 +60,12 @@ class KMM_MODELS_EXPORT ItemRenameProxyModel : public QSortFilterProxyModel
 public:
   typedef enum  {
     eAllItem = 0,
-    eReferencedItems = 1,
-    eUnReferencedItems = 2
+    eReferencedItems,
+    eUnReferencedItems,
+    eOpenedItems,
+    eClosedItems,
+    // insert new values above this line
+    eMaxItems
   } ReferenceFilterType;
 
   explicit ItemRenameProxyModel(QObject *parent = nullptr);
@@ -73,6 +77,7 @@ public:
   void setRenameColumn(int column);
 
   void setReferenceFilter(ReferenceFilterType filterType);
+  void setReferenceFilter(const QVariant& filterType);
 
 protected:
   virtual bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;

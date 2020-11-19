@@ -45,6 +45,7 @@ public:
     enum {
       Name,
       Type = Name,
+      Account,
       Payee,
       Amount,
       NextDueDate,
@@ -53,6 +54,11 @@ public:
       // insert new values above this line
       MaxColumns
     } Columns;
+  };
+
+  enum ColorScheme {
+    Overdue,
+    Finished
   };
 
   explicit SchedulesModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
@@ -88,6 +94,7 @@ public:
 
 
   void load(const QMap<QString, MyMoneySchedule>& list);
+  void setColorScheme(ColorScheme scheme, const QColor& color);
 
 protected:
   void clearModelItems() override;

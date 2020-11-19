@@ -19,7 +19,9 @@
    <account type="3" name="Skaidrā nauda"/>
   </account>
   <account type="16" name="">
-   <account type="16" name="Sākuma bilances"/>
+   <account type="16" name="Sākuma bilances">
+    <flag name="OpeningBalanceAccount" value="Yes"/>
+   </account>
   </account>
   <account type="12" name="">
    <account type="12" name="Alga"/>

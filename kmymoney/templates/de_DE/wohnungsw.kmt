@@ -9,9 +9,11 @@
 -->
 <!DOCTYPE KMYMONEY-TEMPLATE>
 <kmymoney-account-template>
- <title>Kontenrahmen für Wohnungswirtschaft</title>
- <shortdesc>Kontenrahmen für Wohnungswirtschaft</shortdesc>
- <longdesc>BETA-Version eines allgemeinen Kontenrahmes für Wohnungswirtschaft, bearbeitet von Christoph Franzen. Fehlermeldungen an ChristophFranzen@gmx.net .</longdesc>
+ <title>Kontenrahmen für die Wohnungswirtschaft</title>
+ <shortdesc>Kontenrahmen für die Immobilienwirtschaft (Stand 2012)</shortdesc>
+ <longdesc>Kontenrahmen für die Wohnungswirtschaft nach GdW / Hammonia Verlag (jetzt Haufe), Stand 2012
+Hinweise zur Verwendung: https://wiki.gnucash.org/wiki/De/Wohnungswirtschaft
+Ersteller: Christoph Franzen, christoph@alte-pflasterei.de</longdesc>
  <accounts>
   <account type="9" name="">
    <account type="9" name="00 Grundstücke mit Wohnbauten">
@@ -48,14 +50,25 @@
     </account>
    </account>
    <account type="9" name="04 Technische Anlagen und Maschinen">
-    <account type="9" name="040 geringwertige Wirtschaftsgüter"/>
+    <account type="9" name="040 geringwertige Wirtschaftsgüter">
+     <account type="9" name="040xx GWG 150€ bis 1000€ in 2008 / 2009 / …"/>
+    </account>
     <account type="9" name="041 sonstige Wirtschaftsgüter"/>
    </account>
    <account type="9" name="05 Andere Anlagen, Betriebs- und Geschäftsausstattung">
     <account type="9" name="050 geringwertige Wirtschaftsgüter"/>
     <account type="9" name="051 sonstige Wirtschaftsgüter"/>
    </account>
-   <account type="9" name="06 Anlagen im Bau"/>
+   <account type="9" name="06 Anlagen im Bau">
+    <account type="9" name="061 Kosten des Baugrundstücks"/>
+    <account type="9" name="062 Kosten der Erschließung"/>
+    <account type="9" name="063 Kosten des Bauwerks"/>
+    <account type="9" name="064 Kosten des Geräts"/>
+    <account type="9" name="065 Kosten der Außenanlagen"/>
+    <account type="9" name="066 Kosten für zusätzliche Maßnahmen"/>
+    <account type="9" name="067 Baunebenkosten"/>
+    <account type="9" name="069 Baukostenminderungen"/>
+   </account>
    <account type="9" name="07 Bauvorbereitungskosten und geleistete Anzahlungen">
     <account type="9" name="070 Bauvorbereitungskosten"/>
     <account type="9" name="077 geleistete Anzahlungen"/>
@@ -70,11 +83,616 @@
     <account type="9" name="087 sonstige Ausleihungen"/>
     <account type="9" name="089 andere Finanzanlagen"/>
    </account>
-   <account type="9" name="09 Ingangsetzung / Erweiterung des Geschäftsbetriebes, Immaterielles">
-    <account type="9" name="090 Aufwendungen für die Ingangsetzung und Erweiterung des Geschäftsbetriebes"/>
-    <account type="9" name="091 Konzessionen, gewerbliche Schutzrechte und ähnliche Rechte"/>
+   <account type="9" name="09 Immaterielle Vermögensgegenstände">
+    <account type="9" name="090 Selbstgeschaffene gewerbliche Schutzrechte und ähnliche Rechte und Werte"/>
+    <account type="9" name="091 entgeltlich erworbene Konzessionen, gewerbliche Schutzrechte und ähnliche Rechte und Werte"/>
     <account type="9" name="092 Geschäfts- oder Firmenwert"/>
     <account type="9" name="093 geleistete Anzahlungen"/>
+   </account>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="10 Grundstücke ohne Bauten">
+    <account type="9" name="100 nicht erschlossen"/>
+    <account type="9" name="101 im Zustand der Erschließung"/>
+    <account type="9" name="102 erschlossen"/>
+   </account>
+   <account type="9" name="11 selbst erschlossene Grundstücke ohne Bauten">
+    <account type="9" name="110 im Zustand der eigenen Erschließung"/>
+    <account type="9" name="111 selbst erschlossen"/>
+   </account>
+   <account type="9" name="12 Bauvorbereitungskosten"/>
+   <account type="9" name="13 Grundstücke mit unfertigen Bauten"/>
+   <account type="9" name="14 Grundstücke mit fertigen Bauten"/>
+   <account type="9" name="15 noch nicht abgerechnete Betriebskosten">
+    <account type="9" name="150 noch nicht abgerechnete Beheizungs- und Warmwasserkosten"/>
+    <account type="9" name="159 noch nicht abgerechnete andere Betriebskosten"/>
+   </account>
+   <account type="9" name="16 andere unfertige Leistungen">
+    <account type="9" name="160 noch nicht abgerechnete Betreuungsleistungen"/>
+    <account type="9" name="161 unfertige Bauleistungen auf fremdem Grund und Boden"/>
+    <account type="9" name="169 andere unfertige Leistungen"/>
+   </account>
+   <account type="9" name="17 andere Vorräte">
+    <account type="9" name="170 Heizmaterial"/>
+    <account type="9" name="171 Reparaturmaterial"/>
+   </account>
+   <account type="9" name="18 geleistete Anzahlungen">
+    <account type="9" name="180 Anzahlungen auf zum Verkauf bestimmte Grundstücke"/>
+    <account type="9" name="181 andere Anzahlungen"/>
+   </account>
+  </account>
+  <account type="9" name="">
+   <account type="9" name="20 Forderungen aus Vermietung">
+    <account type="9" name="200 Mietforderungen">
+     <account type="9" name="2000 Mietenkontokorrent - Sammelkonto"/>
+     <account type="9" name="2001 Forderungen an ehemalige Mieter"/>
+     <account type="9" name="2002 Mietforderungen aus Umlagen"/>
+     <account type="9" name="2003 Forderungen aus Verpachtung"/>
+     <account type="9" name="2004 Zweifelhafte Mietforderungen"/>
+    </account>
+    <account type="9" name="201 Umlagenabrechnung"/>
+    <account type="9" name="205 zweifelhafte Mietforderungen"/>
+    <account type="9" name="209 Wertberichtigungen zu Mietforderungen"/>
+   </account>
+   <account type="9" name="21 Forderungen aus dem Verkauf von Grundstücken">
+    <account type="9" name="210 Forderungen aus dem Verkauf von Grundstücken"/>
+    <account type="9" name="215 zweifelhafte Forderungen aus dem Verkauf von Grundstücken"/>
+    <account type="9" name="219 Wertberichtigungen zu Forderungen uas dem Verkauf von Grundstücken"/>
+   </account>
+   <account type="9" name="22 Forderungen aus Betreuungstätigkeit">
+    <account type="9" name="220 Forderungen aus Betreuungstätigkeit"/>
+    <account type="9" name="225 zweifelhafte Forderungen aus Betreuungstätigkeit"/>
+    <account type="9" name="229 Wertberichtigungen aus Betreuungstätigkeiten"/>
+   </account>
+   <account type="9" name="23 Forderungen aus anderen Lieferungen und Leistungen">
+    <account type="9" name="230 Forderungen aus anderen Lieferungen und Leistungen"/>
+    <account type="9" name="234 Forderungen aus Inventarverkäufen"/>
+    <account type="9" name="235 zweifelhafte Forderungen aus anderen Lieferungen und Leistungen"/>
+    <account type="9" name="239 Wertberichtigungen zu Forderungen aus sonstigen Lieferungen und Leistungen"/>
+   </account>
+   <account type="9" name="24 unternehmesrechtliche Sonderposten">
+    <account type="9" name="240 Forderungen an verbundene Unternehmen"/>
+    <account type="9" name="241 Forderungen an Unternehmen, mit denen ein Beteiligungsverhältnis besteht"/>
+    <account type="9" name="242 Forderungen an Gesellschafter"/>
+   </account>
+   <account type="9" name="25 sonstige Vermögensgegenstände">
+    <account type="9" name="250 Kostenvorschüsse"/>
+    <account type="9" name="251 Forderungen aus Lohn-, Gehalts- und Reisekostenvorschüssen"/>
+    <account type="9" name="252 Schadenersatzansprüche gegenüber Versicherungen"/>
+    <account type="9" name="253 Vorsteuer"/>
+    <account type="9" name="254 aufgelaufene Zinsen für Wertpapiere und Festgeldguthaben"/>
+    <account type="9" name="255 rückständige und aufgelaufene Darlehenszinsen"/>
+    <account type="9" name="256 rückständige und aufgelaufene Erbbauzinsen"/>
+    <account type="9" name="257 rückständige und aufgelaufene Aufwandssubventionen"/>
+    <account type="9" name="258 Darlehensforderungen"/>
+    <account type="9" name="259 Forderungen aus aufgelaufenen sonstigen Erträgen"/>
+   </account>
+   <account type="9" name="26 Wertpapiere">
+    <account type="9" name="260 Anteile an verbundenen Unternehmen"/>
+    <account type="9" name="261 eigene Anteile"/>
+    <account type="9" name="262 sonstige Wertpapiere"/>
+   </account>
+   <account type="9" name="27 flüssige Mittel">
+    <account type="9" name="270 Schecks"/>
+    <account type="3" name="271 Kassenbestand"/>
+    <account type="1" name="272 Bundesbankguthaben"/>
+    <account type="1" name="273 Postbankguthaben"/>
+    <account type="1" name="274 Guthaben bei Kreditinstituten">
+     <account type="1" name="2740 Bank"/>
+     <account type="1" name="2745 Guthaben auf Sonderkonten"/>
+    </account>
+   </account>
+   <account type="1" name="28 Bausparguthaben"/>
+   <account type="9" name="29 aktive Rechnungsabgrenzungsposten">
+    <account type="9" name="290 Geldbeschaffungskosten"/>
+    <account type="9" name="291 andere Rechnungsabgrenzungsposten"/>
+    <account type="9" name="292 aktive Steuerabgrenzung"/>
+    <account type="9" name="295 aktive latente Steuern"/>
+    <account type="9" name="298 aktiver Unterschiedsbetrag aus der Vermögensverrechnung"/>
+   </account>
+  </account>
+  <account type="16" name="">
+   <account type="16" name="30 gezeichnetes Kapital">
+    <account type="16" name="300 Grundkapital / Stammkapital / Geschäftsguthaben">
+     <account type="16" name="30 Geschäftsguthaben"/>
+     <account type="16" name="30 Grundkapital / Stammkapital"/>
+    </account>
+    <account type="16" name="301 Eigenkapital">
+     <account type="16" name="3010 Privateinlagen"/>
+     <account type="16" name="3011 Privatentnahmen"/>
+    </account>
+   </account>
+   <account type="16" name="31 ausstehende Einlagen auf das gezeichnete Kapital und eigene Anteile">
+    <account type="16" name="310 Grundkapital/Stammkapital"/>
+    <account type="16" name="311 eigene Anteile"/>
+   </account>
+   <account type="16" name="32 Kapitalrücklagen"/>
+   <account type="16" name="33 Gewinnrücklagen">
+    <account type="16" name="330 gesetzliche Rücklage"/>
+    <account type="16" name="331 Rücklage für eigene Anteile"/>
+    <account type="16" name="332 gesellschaftsvertragliche / satzungsmäßige Rücklagen"/>
+    <account type="16" name="333 Bauerneuerungsrücklagen"/>
+    <account type="16" name="334 andere Gewinn- / Ergebnisrücklagen">
+     <account type="16" name="3340 Andere Gewinnrücklagen/Andere Ergebnisrücklagen"/>
+     <account type="16" name="3341 Differenzbetrag Eigene Anteile"/>
+    </account>
+    <account type="16" name="335 Sonderrücklage gemäß DMBilG"/>
+   </account>
+   <account type="16" name="34 Ergebnis">
+    <account type="16" name="340 Gewinn- / Verlustvortrag"/>
+    <account type="16" name="341 Jahresüberschuß / -Fehlbetrag"/>
+    <account type="16" name="342 Bilanzgewinn / -Verlust"/>
+   </account>
+   <account type="16" name="35 Sonderposten mit Rücklageanteil / steuerrechtliche Wertberichtigungen">
+    <account type="16" name="350-353 Sonderposten mit Rücklageanteil"/>
+    <account type="16" name="354 Sonderposten für Investitionszulagen zum Anlagevermögen"/>
+    <account type="16" name="355-359 steuerrechtliche Wertberichtigungen"/>
+   </account>
+   <account type="16" name="36 Rückstellungen für Pensionen und ähnliche Verpflichtungen"/>
+   <account type="16" name="37 Steuerrückstellungen">
+    <account type="16" name="370 Körperschaftssteuer"/>
+    <account type="16" name="371 Gewerbesteuer"/>
+    <account type="16" name="372 Vermögenssteuer"/>
+    <account type="16" name="373 sonstige Steuern"/>
+    <account type="16" name="379 Rückstellung für latente Steuern"/>
+   </account>
+   <account type="16" name="38 Rückstellungen für Bauinstandhaltung"/>
+   <account type="16" name="39 sonstige Rückstellungen">
+    <account type="16" name="390 Rückstellungen für unterlassene Instandhaltungen"/>
+    <account type="16" name="391 Rückstellungen für unterlassene Instandhaltung innerhalb des 4.-12. Monats"/>
+    <account type="16" name="392 Rückstellungen für Abraumbeseitigung"/>
+    <account type="16" name="393 Rückstellungen für drohende Verluste aus schwebenden Geschäften"/>
+    <account type="16" name="394 Rückstellungen für Gewährleistungsverpflichtungen"/>
+    <account type="16" name="395 Rückstellungen für Kosten der Hausbewirtschaftung"/>
+    <account type="16" name="396 Rückstellungen für Abschluß-, Prüfungs- und Veröffentlichungskosten"/>
+    <account type="16" name="397 Rückstellungen für sonstige Verwaltungskosten"/>
+    <account type="16" name="398 Rückstellungen für noch anfallende Kosten"/>
+    <account type="16" name="399 andere Rückstellungen"/>
+   </account>
+  </account>
+  <account type="10" name="">
+   <account type="10" name="40 Anleihen und Spareinlagen">
+    <account type="10" name="400 Anleihen"/>
+    <account type="10" name="401 Spareinlagen"/>
+    <account type="10" name="402 Verbindlichkeiten aus Sparbriefen"/>
+   </account>
+   <account type="10" name="41 Verbindlichkeiten gegenüber Kreditinstituten">
+    <account type="10" name="410 Objektfinanzierungsmittel für das Anlagevermögen"/>
+    <account type="10" name="411 Objektfinanzierungsmittel für das Umlaufvermögen"/>
+    <account type="10" name="412 Unternehmensfinanzierungsmittel"/>
+    <account type="10" name="413 Grundstücksankaufkredite für das Anlagevermögen"/>
+    <account type="10" name="414 Grundstücksankaufkredite für das Umlaufvermögen"/>
+    <account type="10" name="415 Bauzwischenkredite für das Anlagevermögen"/>
+    <account type="10" name="416 Bauzwischenkredite für das Umlaufvermögen"/>
+    <account type="10" name="419 sonstige Verbindlichkeiten gegenüber Kreditinstituten"/>
+   </account>
+   <account type="10" name="42 Verbindlichkeiten gegenüber anderen Kreditgebern">
+    <account type="10" name="420 Objektfinanzierungsmittel für das Anlagevermögen"/>
+    <account type="10" name="421 Objektfinanzierungsmittel für das Umlaufvermögen"/>
+    <account type="10" name="422 Unternehmensfinanzierungsmittel"/>
+    <account type="10" name="423 Grundstücksankaufkredite für das Anlagevermögen"/>
+    <account type="10" name="424 Grundstücksankaufkredite für das Umlaufvermögen"/>
+    <account type="10" name="425 Bauzwischenkredite für das Anlagevermögen"/>
+    <account type="10" name="426 Bauzwischenkredite für das Umlaufvermögen"/>
+    <account type="10" name="429 sonstige Verbindlichkeiten gegenüber anderen Kreditgebern"/>
+   </account>
+   <account type="10" name="43 erhaltene Anzahlungen">
+    <account type="10" name="430 Anzahlungen auf Verkaufsgrundstücke"/>
+    <account type="10" name="431 Anzahlungen auf unfertige Leistungen">
+     <account type="10" name="4311 Anzahlungen auf noch nicht abgerechnete &quot;kalte&quot; Betriebskosten"/>
+     <account type="10" name="4312 Anzahlungen auf noch nicht abgerechnete Warmwasser- und Heizkosten"/>
+    </account>
+    <account type="10" name="439 sonstige Anzahlungen"/>
+   </account>
+   <account type="10" name="44 Verbindlichkeiten aus Vermietung / Betreuungstätigkeiten / Lieferungen und Leistungen">
+    <account type="10" name="440 Verbindlichkeiten aus Vermietung">
+     <account type="10" name="4400 Mietüberzahlungen"/>
+     <account type="10" name="4401 Überzahlungen aus der Umlagenabrechnung"/>
+    </account>
+    <account type="10" name="441 Verbindlichkeiten aus Betreuungstätigkeiten"/>
+    <account type="10" name="442 Verbindlichkeiten aus Lieferungen und Leistungen">
+     <account type="10" name="4420 Verbindlichkeiten aus Bau- und Instandhaltungsleistungen">
+      <account type="10" name="44200 Verbindlichkeiten aus Bau- und Instandhaltungsleistungen - laufende Rechnungen"/>
+      <account type="10" name="44201 Verbindlichkeiten aus Bau- und Instandhaltungsleistungen - Garantieeinbehalte"/>
+      <account type="10" name="44202 Verbindlichkeiten aus Instandhaltungsrechnungen"/>
+     </account>
+     <account type="10" name="4421 Verbindlichkeiten aus anderen Lieferungen und Leistungen">
+      <account type="10" name="44210 Verbindlichkeiten aus Grundstückskäufen"/>
+      <account type="10" name="44211 Verbindlichkeiten aus sächlichen Verwaltungsaufwendungen"/>
+      <account type="10" name="44212 Verbindlichkeiten aus der Hausbewirtschaftung"/>
+      <account type="10" name="44219 Verbindlichkeiten aus sonstigen Lieferungen und Leistungen"/>
+     </account>
+    </account>
+   </account>
+   <account type="10" name="45 Wechsel"/>
+   <account type="10" name="46 unternehmensrechtliche Sonderposten">
+    <account type="10" name="460 Verbindlichkeiten gegenüber verbundenen Unternehmen"/>
+    <account type="10" name="461 Verbindlichkeiten gegenüber Unternehmen, mit denen ein Beteiligungsverhältnis besteht"/>
+    <account type="10" name="462 Verbindlichkeiten gegenüber Gesellschaftern"/>
+   </account>
+   <account type="10" name="47 sonstige Verbindlichkeiten">
+    <account type="10" name="470 Verbindlichkeiten aus Steuern">
+     <account type="10" name="4700 Verbindlichkeiten aus Lohn- und Kirchensteuern"/>
+     <account type="10" name="4701 Verbindlichkeiten aus der Umsatzsteuer"/>
+     <account type="10" name="4709 Verbindlcihkeiten aus sonstigen Steuern"/>
+    </account>
+    <account type="10" name="471 Verbindlichkeiten im Rahmen der sozialen Sicherheit"/>
+    <account type="10" name="472 Verbindlichkeiten gegenüber Mitgliedern"/>
+    <account type="10" name="473 Verbindlichkeiten aus Löhnen und Gehältern"/>
+    <account type="10" name="474 Verbindlichkeiten vermögenswirksame Sparleistungen"/>
+    <account type="10" name="479 andere Verbindlichkeiten">
+     <account type="10" name="4790 Verbindlichkeiten gegenüber Aktionären / Gesellschaftern"/>
+     <account type="10" name="47900 Verbindlichkeiten aus Lohn und Gehalt"/>
+     <account type="10" name="47901 Verbindlichkeiten aus vermögenswirksamen Leistungen"/>
+     <account type="10" name="4799 Verbindlichkeiten aus sonstigen aufgelaufenen Aufwendungen"/>
+    </account>
+   </account>
+   <account type="10" name="49 passive Rechnungsabgrenzungsposten und passive latente Steuern">
+    <account type="10" name="490 Passive Rechnungsabgrenzungsposten"/>
+    <account type="10" name="495 Passive latente Steuern"/>
+   </account>
+  </account>
+  <account type="13" name=""/>
+  <account type="12" name="">
+   <account type="12" name="60 Umsatzerlöse aus der Hausbewirtschaftung">
+    <account type="12" name="600 Sollmieten"/>
+    <account type="12" name="601 Umlagen"/>
+    <account type="12" name="602 Gebühren und Zuschläge"/>
+    <account type="12" name="603 Miet-, Zins- und Aufwendungszuschüsse"/>
+    <account type="12" name="604 Erträge aus nicht passivierten Aufwendungsdarlehen"/>
+    <account type="12" name="605 Pachterlöse"/>
+    <account type="12" name="606 Erlöse aus Sondereinrichtungen"/>
+    <account type="12" name="607 Erträge aus Mieterbelastung"/>
+    <account type="13" name="609 Erlösschmälerungen"/>
+   </account>
+   <account type="12" name="61 Umsatzerlöse aus Verkauf von Grundstücken">
+    <account type="12" name="610 Umsatzerlöse aus dem Verkauf von bebauten Grundstücken"/>
+    <account type="12" name="611 Umsatzerlöse aus dem Verkauf von unbebauten Grundstücken"/>
+   </account>
+   <account type="12" name="62 Umsatzerlöse aus Betreuungstätigkeit">
+    <account type="12" name="620 Umsatzerlöse aus Baubetreuung"/>
+    <account type="12" name="621 Umsatzerlöse aus verwaltungsmäßiger Betreuung"/>
+    <account type="12" name="629 Umsatzerlöse aus sonstiger Betreuungstätigkeit"/>
+   </account>
+   <account type="12" name="63 Umsatzerlöse aus anderen Lieferungen und Leistungen">
+    <account type="12" name="631 Provisionsertrag"/>
+   </account>
+   <account type="12" name="64 Bestandsveränderungen">
+    <account type="12" name="640-643 Bestandserhöhungen bei Verkaufsobjekten">
+     <account type="12" name="640 Bestandserhöhungen aus aktivierten Fremdkosten"/>
+     <account type="12" name="641 Bestandserhöhungen aus der Übernahme unbebauter Grundstücke in die Bebauung"/>
+     <account type="12" name="642 Bestandserhöhungen aus aktivierten eigenen Architekten- und Verwaltungsleistungen"/>
+     <account type="12" name="643 Bestandserhöhung aus anderen Aktivierungen">
+      <account type="12" name="6430 Bestandserhöhungen aus aktivierten Fremdzinsen"/>
+      <account type="12" name="6431 Bestandserhöhungen aus sonstigen Aktivierungen"/>
+      <account type="12" name="6432 Zuschreibungen"/>
+      <account type="12" name="6439 Sonstige Bestandserhöhungen"/>
+     </account>
+    </account>
+    <account type="12" name="644-645 Bestandsverminderungen bei Verkaufsobjekten">
+     <account type="13" name="644 Bestandsverminderungen aus Veräußerungen"/>
+     <account type="13" name="645 Wertminderungen">
+      <account type="13" name="6450 Wertminderungen"/>
+      <account type="13" name="6451 steuerliche Sonderabschreibungen"/>
+      <account type="13" name="6452 Kostenerstattungen für frühere Jahre"/>
+     </account>
+    </account>
+    <account type="12" name="646-647 Bestandserhöhungen bei unfertigen Leistungen">
+     <account type="12" name="646 Bestandserhöhungen aus noch nicht abgerechneten Betriebskosten"/>
+     <account type="12" name="647 Bestandserhöhungen aus anderen unfertigen Leistungen"/>
+    </account>
+    <account type="13" name="648-649 Bestandsverminderungen bei unfertigen Leistungen">
+     <account type="13" name="648 Bestandsverminderungen aus noch nicht abgerechneten Betriebskosten"/>
+     <account type="13" name="649 Bestandsverminderungen aus anderen unfertigen Leistungen"/>
+    </account>
+   </account>
+   <account type="12" name="65 andere aktivierte Eigenleistungen">
+    <account type="12" name="650 aktivierte eigene Architekten- und Verwaltungsleistungen"/>
+    <account type="12" name="659 Sonstige aktivierte Eigenleistungen">
+     <account type="12" name="6590 aktivierte Fremdzinsen"/>
+     <account type="12" name="6591 aktivierte Grundsteuer"/>
+     <account type="12" name="6592 aktivierte Erbbauzinsen"/>
+    </account>
+   </account>
+   <account type="12" name="66 sonstige betriebliche Erträge">
+    <account type="12" name="660 Erträge aus Anlageverkäufen"/>
+    <account type="12" name="661 Erträge aus Zuschreibungen"/>
+    <account type="12" name="662 Erträge aus der Auflösung von Rückstellungen"/>
+    <account type="12" name="663 Eintrittsgelder und Bearbeitungsgebühren"/>
+    <account type="12" name="664 Erträge aus Materialverkäufen"/>
+    <account type="12" name="665 Erträge aus unbebauten Grundstücken"/>
+    <account type="12" name="666 Erträge aus früheren Jahren"/>
+    <account type="12" name="667 Erträge aus der Auflösung von Sonderposten mit Rücklageanteil, steuerrechtliche Wertberichtigungen">
+     <account type="12" name="6670-6673 Erträge aus der Auflösung von Sonderposten mit Rücklageanteil"/>
+     <account type="12" name="6674 Erträge aus der Auflösung von Sonderposten für Investitionszulagen zum Anlagevermögen"/>
+     <account type="12" name="6675-6679 Erträge aus steuerrechtlichen Wertberichtigungen"/>
+    </account>
+    <account type="12" name="668 Verbrauch der Rückstellung für Bauinstandhaltung"/>
+    <account type="12" name="669 verschiedene sonstige Erträge">
+     <account type="12" name="6690 Zinszuschüsse"/>
+     <account type="12" name="6691 Baukostenzuschüsse"/>
+     <account type="12" name="6692 Instandhaltungskostenzuschüsse"/>
+     <account type="12" name="6693 Erbbauzinsen"/>
+     <account type="12" name="6694 Inanspruchnahme aus der Rückstellung für noch anfallende Kosten für verkaufte Grundstücke"/>
+     <account type="12" name="6695 Zuwendungen"/>
+     <account type="12" name="6698 Versicherungsentschädigungen und Entschädigungen für unterlassene Schönheitsreparaturen">
+      <account type="12" name="66980 Erstattungen Versicherungsbelastung"/>
+      <account type="12" name="66982 Erträge Mieterbelastung"/>
+     </account>
+     <account type="12" name="6699 Schuldnachlässe, Erträge aus Kontenbereinigung, Aufzinsungsbeträge u.a.">
+      <account type="12" name="66991 Eingänge auf in früheren Jahren abgeschriebene Forderungen"/>
+      <account type="12" name="66992 Erträge aus der Auflösung von Wertberichtigungen zu Forderungen"/>
+     </account>
+    </account>
+   </account>
+   <account type="12" name="67 Erträge aus Beteiligungen, Wertpapieren, Ausleihungen">
+    <account type="12" name="670-672 Erträge aus Beteiligungen">
+     <account type="12" name="670 Erträge aus Beteiligungen an verbundenen Unternehmen"/>
+     <account type="12" name="671 Erträge aus anderen Beteiligungen"/>
+     <account type="12" name="672 Erträge aus Beteiligungen an Unternehmen (Gewinnabführung)"/>
+    </account>
+    <account type="12" name="673-677 Erträge aus anderen Wertpapieren und Ausleihungen des Finanzanlagevermögens">
+     <account type="12" name="673 Erträge aus Ausleihungen an verbundene Unternehmen"/>
+     <account type="12" name="674 Erträge aus Ausleihungen an Unternehmen, mit denen ein Beteiligungsverhältnis besteht"/>
+     <account type="12" name="675 Erträge aus Wertpapieren des Anlagevermögens"/>
+     <account type="12" name="676 Erträge aus sonstigen Ausleihungen"/>
+     <account type="12" name="677 Erträge aus anderen Finanzanlagen"/>
+    </account>
+   </account>
+   <account type="12" name="68 sonstige Zinsen und ähnliche Erträge">
+    <account type="12" name="687 sonstige Zinsen und ähnliche Erträge aus verbundenen Unternehmen"/>
+    <account type="12" name="688 sonstige Zinsen und ähnliche Erträge aus sonstigen Wertpapieren des Umlaufvermögens"/>
+    <account type="12" name="689 andere Zinsen und ähnliche Erträge"/>
+   </account>
+   <account type="12" name="69 außerordentliche Erträge oder aus Verlustübernahme">
+    <account type="12" name="690 Außerordentliche Erträge"/>
+    <account type="12" name="691 Erträge aus Verlustübernahme"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="70 Bauten des Anlagevermögens">
+    <account type="13" name="700 Kosten der Bauvorbereitung"/>
+    <account type="13" name="701 Kosten des Baugrundstücks"/>
+    <account type="13" name="702 Kosten der Erschließung"/>
+    <account type="13" name="703 Kosten des Bauwerks"/>
+    <account type="13" name="704 Kosten des Geräts"/>
+    <account type="13" name="705 Kosten der Außenanlagen"/>
+    <account type="13" name="706 Kosten für zusätzliche Maßnahmen"/>
+    <account type="13" name="707 Baunebenkosten"/>
+    <account type="12" name="709 Baukostenminderung"/>
+   </account>
+   <account type="13" name="71 Bauten des Umlaufvermögens">
+    <account type="13" name="710 Kosten der Bauvorbereitung"/>
+    <account type="13" name="711 Kosten des Baugrundstücks"/>
+    <account type="13" name="712 Kosten der Erschließung"/>
+    <account type="13" name="713 Kosten des Bauwerks"/>
+    <account type="13" name="714 Kosten des Geräts"/>
+    <account type="13" name="715 Kosten der Außenanlagen"/>
+    <account type="13" name="716 Kosten für zusätzliche Maßnahmen"/>
+    <account type="13" name="717 Baunebenkosten"/>
+    <account type="12" name="719 Baukostenminderung"/>
+   </account>
+   <account type="13" name="72 Betreuungskosten">
+    <account type="13" name="720 Kosten der Bauvorbereitung"/>
+    <account type="13" name="721 Kosten des Baugrundstücks"/>
+    <account type="13" name="722 Kosten der Erschließung"/>
+    <account type="13" name="723 Kosten des Bauwerks"/>
+    <account type="13" name="724 Kosten des Geräts"/>
+    <account type="13" name="725 Kosten der Außenanlagen"/>
+    <account type="13" name="726 Kosten für zusätzliche Maßnahmen"/>
+    <account type="13" name="727 Baunebenkosten"/>
+    <account type="12" name="729 Baukostenminderung"/>
+   </account>
+  </account>
+  <account type="13" name="">
+   <account type="13" name="80 Aufwendungen für die Hausbewirtschaftung">
+    <account type="13" name="800-804 Betriebskosten">
+     <account type="13" name="8000 Kosten der Wasserversorgung"/>
+     <account type="13" name="8001 Kosten der Entwässerung"/>
+     <account type="13" name="8002 Kosten der Beheizung"/>
+     <account type="13" name="8003 Kosten der Warmwasserversorgung"/>
+     <account type="13" name="8004 Kosten für Aufzugsanlagen"/>
+     <account type="13" name="8005 Kosten der Straßenreinigung"/>
+     <account type="13" name="8006 Kosten der Müllabfuhr"/>
+     <account type="13" name="8007 Kosten der Hausreinigung"/>
+     <account type="13" name="8008 Kosten der Ungezieferbekämpfung"/>
+     <account type="13" name="8009 Kosten der Gartenpflege"/>
+     <account type="13" name="8010 Kosten für Spielplätze"/>
+     <account type="13" name="8011 Kosten für Beleuchtung"/>
+     <account type="13" name="8012 Kosten für Schornsteinreinigung"/>
+     <account type="13" name="8013 Kosten für Sach- und Haftpflichversicherung"/>
+     <account type="13" name="8014 Kosten für fremde Hauswartleistungen"/>
+     <account type="13" name="8015 Kosten des Betriebs von Gemeinschaftsantennen"/>
+     <account type="13" name="8016 Kosten des Betriebs der mit einem Breitbandkabelnetz verbundenen privaten Verteileranlagen"/>
+     <account type="13" name="8017 Kosten des Betriebs der maschinellen Wascheinrichtungen"/>
+     <account type="13" name="8018 Grundsteuer"/>
+     <account type="13" name="8019 Grundsteuer"/>
+     <account type="13" name="802-804 andere Betriebskosten"/>
+    </account>
+    <account type="13" name="805-808 Instandhaltung">
+     <account type="13" name="805 Instandhaltungskosten">
+      <account type="13" name="8050 Kosten der baulichen Instandhaltung"/>
+      <account type="13" name="8051 Kosten für Schönheitsreparaturen"/>
+      <account type="13" name="8052 Kosten der Instandhaltung unternehmenseigener Straßen und Wege"/>
+      <account type="13" name="8053 Kosten der Instandhaltung für Gemeinschaftsanlagen und Folgeeinrichtungen"/>
+     </account>
+     <account type="13" name="806-807 andere Instandhaltungskosten"/>
+     <account type="13" name="808 Zuführung zur Rückstellung für unterlassene Instandhaltung"/>
+    </account>
+    <account type="13" name="809 andere Aufwendungen der Hausbewirtschaftung">
+     <account type="13" name="8090 Pachtaufwendungen"/>
+     <account type="13" name="8091 Kosten für Miet- und Räumungsklagen"/>
+     <account type="13" name="8092 Fremdkosten für von Unternehmen betriebene Gemeinschaftseinrichtungen"/>
+     <account type="13" name="8093 Erbbauzinsen"/>
+     <account type="13" name="8094 Vertriebskosten"/>
+     <account type="13" name="8098 Versicherungsbelastung"/>
+     <account type="13" name="8099 Mieterbelastung"/>
+    </account>
+   </account>
+   <account type="13" name="81 Aufwendungen für Verkaufsgrundstücke">
+    <account type="13" name="810 Fremdkosten">
+     <account type="13" name="8100 Kosten der Bauvorbereitung"/>
+     <account type="13" name="8102 Kosten der Erschließung"/>
+     <account type="13" name="8103 Kosten des Bauwerks"/>
+     <account type="13" name="8104 Kosten des Geräts"/>
+     <account type="13" name="8105 Kosten der Außenanlagen"/>
+     <account type="13" name="8106 Kosten für zusätzliche Maßnahmen"/>
+     <account type="13" name="8107 Baunebenkosten"/>
+    </account>
+    <account type="13" name="811 Buchwert der in die Bebauung übernommenen Grundstücke"/>
+    <account type="13" name="812 Buchwert der verkauften unbebauten Grundstücke"/>
+    <account type="13" name="813 Buchwert bebaut erworbener Grundstücke"/>
+    <account type="13" name="814 Zuführungen zu Rückstellungen für noch anfallende Kosten"/>
+    <account type="13" name="815 laufende Aufwendungen für Eigentumsobjekte während des Vorhaltezeitraums"/>
+    <account type="13" name="817 Vertriebskosten"/>
+    <account type="13" name="818 Abschreibungen auf unbebaute Grundstücke des Umlaufvermögens">
+     <account type="13" name="8180 noch nicht erschlossen"/>
+     <account type="13" name="8182 durch Dritte erschlossen"/>
+    </account>
+    <account type="13" name="819 sonstige Aufwendungen für Verkaufsgrundstücke"/>
+   </account>
+   <account type="13" name="82 Aufwendungen für andere Lieferungen und Leistungen">
+    <account type="13" name="820 Fremdkosten für die Baubetreuung"/>
+    <account type="13" name="821 Fremdksoten für die Verwaltungsbetreuung"/>
+    <account type="13" name="822 Kosten für die Geschäftsbesorgung durch Dritte"/>
+    <account type="13" name="829 Aufwendungen für andere Sach- und Dientsleistungen"/>
+   </account>
+   <account type="13" name="83 Personalaufwand">
+    <account type="13" name="830 Löhne und Gehälter">
+     <account type="13" name="8300 Löhne">
+      <account type="13" name="83000 Löhne für Verwalter und Hausmeister"/>
+      <account type="13" name="83001 Löhne für Handwerker"/>
+     </account>
+     <account type="13" name="8301 Gehälter">
+      <account type="13" name="83010 Gehälter der Geschäftsleitung"/>
+      <account type="13" name="83011 Gehälter der kaufmännischen Angestellten"/>
+     </account>
+    </account>
+    <account type="13" name="831 soziale Abgaben"/>
+    <account type="13" name="832 Aufwendungen für Altersversorgung">
+     <account type="13" name="8320 Zuführung zu Pensionsrückstellungen"/>
+     <account type="13" name="8321 Pensionszahlungen"/>
+     <account type="13" name="8322 Zahlungen an Lebensversicherungen und Pensionskassen"/>
+    </account>
+    <account type="13" name="833 Aufwendungen für Unterstützung"/>
+    <account type="13" name="834 vermögenswirksame Leistungen"/>
+   </account>
+   <account type="13" name="84 Abschreibungen">
+    <account type="13" name="840 Abschreibungen auf immaterielle Vermögensgegenstände des Anlagevermögens und Sachanlagen"/>
+    <account type="13" name="841 Sonderabschreibungen auf Sachanlagen"/>
+    <account type="13" name="843 Abschreibungen auf Vermögensgegenstände des Umlaufvermögens"/>
+   </account>
+   <account type="13" name="85 sonstige betriebliche Aufwendungen">
+    <account type="13" name="850 sächliche Verwaltungsaufwendungen">
+     <account type="13" name="8500 Büroaufwendungen und Sachversicherungen">
+      <account type="13" name="85000 Post- und Telekommunikationskosten"/>
+      <account type="13" name="85001 Büromaterial, Drucksachen, Zeitschriften, Bücher"/>
+      <account type="13" name="85002 Raumkosten für Geschäftsräume"/>
+      <account type="13" name="85003 Reparaturen und Wartung der Büroeinrichtung"/>
+      <account type="13" name="85004 Sach- und Haftpflichtversicherung"/>
+     </account>
+     <account type="13" name="8501 Fahr-, Reise- und Autobetriebskosten/Kommunikationskosten">
+      <account type="13" name="85010 Fahr- und Reisekosten"/>
+      <account type="13" name="85011 Autobetriebskosten"/>
+      <account type="13" name="85015 Kosten für die elektronische Datenverarbeitung"/>
+     </account>
+     <account type="13" name="8502 Bewirtung aus geschäftlichem Anlaß"/>
+     <account type="13" name="8503 sonstige Bewirtungskosten"/>
+     <account type="13" name="8504 Werbegeschenke über 25 Euro"/>
+     <account type="13" name="8505 sonstige Werbegeschenke über 25 Euro"/>
+     <account type="13" name="8506 Kostenerstattungen an Aufsichtsräte"/>
+     <account type="13" name="8507 Aufsichtsratsvergütungen"/>
+     <account type="13" name="8508 Übrige Unternehmenskosten">
+      <account type="13" name="85080 Kosten der Haupt-, General- oder Gesellschafterversammlungen sowie Kosten der Offenlegung und Veröffentlichungen"/>
+      <account type="13" name="85081 Gerichts- und Anwaltskosten"/>
+      <account type="13" name="85082 Prüfungs- und Beratungskosten"/>
+      <account type="13" name="85083 Verbands- und andere Beiträge"/>
+      <account type="13" name="85084 Kosten des Betriebsrates"/>
+     </account>
+     <account type="13" name="8509 Sonstige sächliche Verwaltungsaufwendungen"/>
+    </account>
+    <account type="13" name="851 freiwillige soziale Aufwendungen und Aufwendungen für Gemeinschaftspflege">
+     <account type="13" name="8510 freiwillige soziale Aufwendungen"/>
+     <account type="13" name="8511 Aufwendungen für die Gemeinschaftspflege"/>
+    </account>
+    <account type="13" name="852 Erbbauzins und andere Aufwendungen für unbebaute Grundstücke"/>
+    <account type="13" name="853 genossenschaftliche Rückvergütungen"/>
+    <account type="13" name="854 Verluste aus dem Abgang von Gegenständen des Anlagevermögens"/>
+    <account type="13" name="855 Abschreibungen auf Forderungen und sonstige Vermögensgegenstände">
+     <account type="13" name="8550 Abschreibungen auf Forderungen"/>
+     <account type="13" name="8555 Zuführung zu Wertberichtigungen zu Forderungen"/>
+    </account>
+    <account type="13" name="856 Spenden"/>
+    <account type="13" name="857 Einstellung in Sonderposten mit Rücklagenanteil und steuerliche Wertberichtigungen">
+     <account type="13" name="8570-8574 Einstellung in Sonderposten mit Rücklageanteil"/>
+     <account type="13" name="8575-8579 Einstellung in steuerrechtliche Wertberichtigungen"/>
+    </account>
+    <account type="13" name="858 Zuführung zu Rückstellungen für die Bauinstandhaltung"/>
+    <account type="13" name="859 übrige Aufwendungen"/>
+   </account>
+   <account type="13" name="86 Abschreibungen auf Finanzanlagen und Wertpapiere">
+    <account type="13" name="860 Abschreibungen auf Finanzanlagen"/>
+    <account type="13" name="868 Abschreibungen auf Wertpapiere des Umlaufvermögens"/>
+   </account>
+   <account type="13" name="87 Zinsen und ähnliche Aufwendungen">
+    <account type="13" name="870 Zinsen auf Anleihen"/>
+    <account type="13" name="871 Zinsen auf Spareinlagen und Sparbriefe"/>
+    <account type="13" name="872 Zinsen auf Verbindlichkeiten gegenüber Kreditinstituten"/>
+    <account type="13" name="873 Zinsen auf Verbindlichkeiten gegenüber anderen Kreditgebern"/>
+    <account type="13" name="874 Aufwendungen für übrige Verbindlichkeiten"/>
+    <account type="13" name="875 Abschreibung auf Geldbeschaffungskosten, Disagio"/>
+    <account type="13" name="876 Aufwendungen für Verbindlichkeiten gegenüber verbundenen Unternehmen"/>
+    <account type="13" name="879 andere Zinsen und ähnliche Aufwendungen"/>
+   </account>
+   <account type="13" name="88 Verlustübernahmen und außerordentliche Aufwendungen">
+    <account type="13" name="880 Aufwendungen aus Verlustübernahmen"/>
+    <account type="13" name="885 außerordentliche Aufwendungen"/>
+   </account>
+   <account type="13" name="890-891 Steuern">
+    <account type="13" name="890 Steuern vom Einkommen und vom Ertrag">
+     <account type="13" name="8900 Körperschaftssteuer"/>
+     <account type="13" name="8901 Kapitalertragsteuer"/>
+     <account type="13" name="8902 Solidaritätszuschlag"/>
+     <account type="13" name="8903 Gewerbeertragsteuer"/>
+     <account type="13" name="8906 latente Steuern"/>
+     <account type="13" name="8909 Steuererstattungen und -Nachzahlungen für frühere Jahre"/>
+    </account>
+    <account type="13" name="891 sonstige Steuern">
+     <account type="13" name="8910 Grundsteuer"/>
+     <account type="13" name="8911 Kraftfahrzeugsteuer"/>
+     <account type="13" name="8912 Vermögenssteuer"/>
+     <account type="13" name="8913 Gewerbekapitalsteuer"/>
+     <account type="13" name="8919 Steuererstattungen und -Nachzahlungen für frühere Jahre"/>
+    </account>
+   </account>
+   <account type="13" name="895-896 Aufwendungen aus Gewinnabführungsverträgen,  Erträge aus Verlustübernahme">
+    <account type="13" name="895 Aufwendungen aus Gewinnabführungsverträgen"/>
+    <account type="12" name="896 Erträge aus Verlustübernahme"/>
+   </account>
+  </account>
+  <account type="12" name="">
+   <account type="13" name="90 Herstellungskosten der zur Erzielung der Umsatzerlöse erbrachten Leistungen">
+    <account type="13" name="901 Hausbewirtschaftung"/>
+    <account type="13" name="902 Verkauf von Grundstücken des Umlaufvermögens"/>
+    <account type="13" name="903 Betreuungstätigkeit"/>
+    <account type="13" name="904 andere Lieferungen und Leistungen"/>
+   </account>
+   <account type="13" name="91 Vertriebskosten"/>
+   <account type="13" name="92 allgemeine Verwaltungskosten"/>
+   <account type="13" name="93 sonstige betriebliche Aufwendungen"/>
+   <account type="13" name="94-97 Verwaltungskosten – Verrechnungskonten">
+    <account type="13" name="94 Personalkosten"/>
+    <account type="13" name="95 sächliche Kosten"/>
+    <account type="13" name="96 Aufwandsverrechnungskonten"/>
+    <account type="13" name="97 Verrechnungskonten für Aktivierungen"/>
+   </account>
+   <account type="12" name="98 Abschlußkonten">
+    <account type="13" name="980 Eröffnungsbilanzkonten"/>
+    <account type="12" name="981 Rohergebnis"/>
+    <account type="12" name="982 Jahresüberschuß/Jahresfehlbetrag"/>
+    <account type="13" name="983 Entnahme aus Rücklagen"/>
+    <account type="12" name="984 Einstellung in Rücklagen"/>
+    <account type="12" name="989 Schlußbilanzkonten"/>
    </account>
   </account>
  </accounts>

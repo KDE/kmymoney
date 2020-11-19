@@ -15,6 +15,7 @@
                 "Name[fi]": "Alvaro Soliverez, Łukasz Wojniłowicz",
                 "Name[fr]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[gl]": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[ia]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[it]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[ko]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[nl]": "Alvaro Soliverez,Łukasz Wojniłowicz",

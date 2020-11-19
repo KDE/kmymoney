@@ -1,122 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-  <class>KScheduledView</class>
-  <widget class="QWidget" name="KScheduledView">
-    <property name="geometry">
-      <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>339</width>
-        <height>134</height>
-      </rect>
-    </property>
-    <layout class="QVBoxLayout">
-      <property name="margin">
-        <number>0</number>
-      </property>
-      <item>
-        <layout class="QHBoxLayout">
-          <item>
-            <widget class="QPushButton" name="m_qbuttonNew">
-              <property name="text">
-                <string>New Scheduled transaction...</string>
-              </property>
-            </widget>
-          </item>
-          <item>
-            <spacer name="spacer2">
-              <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeType">
-                <enum>QSizePolicy::Expanding</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-                <size>
-                  <width>80</width>
-                  <height>20</height>
-                </size>
-              </property>
-            </spacer>
-          </item>
-          <item>
-            <widget class="QPushButton" name="m_accountsCombo">
-              <property name="text">
-                <string>Filter Accounts</string>
-              </property>
-            </widget>
-          </item>
-        </layout>
-      </item>
-      <item>
-        <widget class="Line" name="line1">
-          <property name="frameShape">
-            <enum>QFrame::HLine</enum>
-          </property>
-          <property name="frameShadow">
-            <enum>QFrame::Sunken</enum>
-          </property>
-        </widget>
-      </item>
-      <item>
-        <widget class="QTreeWidget" name="m_scheduleTree">
-          <property name="alternatingRowColors">
-            <bool>true</bool>
-          </property>
-          <property name="rootIsDecorated">
-            <bool>true</bool>
-          </property>
-          <property name="allColumnsShowFocus">
-            <bool>true</bool>
-          </property>
-          <column>
-            <property name="text">
-              <string>Type/Name</string>
-            </property>
-          </column>
-          <column>
-            <property name="text">
-              <string>Account</string>
-            </property>
-          </column>
-          <column>
-            <property name="text">
-              <string>Payee</string>
-            </property>
-          </column>
-          <column>
-            <property name="text">
-              <string>Amount</string>
-            </property>
-          </column>
-          <column>
-            <property name="text">
-              <string>Next Due Date</string>
-            </property>
-          </column>
-          <column>
-            <property name="text">
-              <string>Frequency</string>
-            </property>
-          </column>
-          <column>
-            <property name="text">
-              <string>Payment Method</string>
-            </property>
-          </column>
-        </widget>
-      </item>
+ <class>KScheduledView</class>
+ <widget class="QWidget" name="KScheduledView">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>759</width>
+    <height>450</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <layout class="QHBoxLayout">
+     <item>
+      <widget class="QPushButton" name="m_qbuttonNew">
+       <property name="text">
+        <string>New Scheduled transaction...</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="m_searchWidget">
+       <property name="placeholderText">
+        <string comment="Placeholdertext in schedulesview">Filter</string>
+       </property>
+      </widget>
+     </item>
     </layout>
-  </widget>
-  <layoutdefault spacing="6" margin="11"/>
-  <customwidgets>
-    <customwidget>
-      <class>QTabWidget</class>
-      <extends>QTabWidget</extends>
-      <header>ktabwidget.h</header>
-      <container>1</container>
-    </customwidget>
-  </customwidgets>
-  <resources/>
-  <connections/>
+   </item>
+   <item>
+    <widget class="Line" name="line1">
+     <property name="frameShape">
+      <enum>QFrame::HLine</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Sunken</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTreeView" name="m_scheduleTree">
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="allColumnsShowFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
 </ui>

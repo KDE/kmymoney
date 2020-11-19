@@ -57,6 +57,7 @@ public:
 
   void load(const QMap<QString, MyMoneyInstitution>& list);
   void addAccount(const QString& institutionId, const QString& accountId);
+  void removeAccount(const QString& institutionId, const QString& accountId);
 
   void setColorScheme(AccountsModel::ColorScheme scheme, const QColor& color);
 
