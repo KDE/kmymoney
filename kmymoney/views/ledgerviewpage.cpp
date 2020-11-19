@@ -203,6 +203,9 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
 
   d->ui->ledgerView->setAccountId(d->accountId);
   d->selections.setSelection(SelectedObjects::Account, d->accountId);
+  if (!acc.institutionId().isEmpty()) {
+    d->selections.setSelection(SelectedObjects::Institution, acc.institutionId());
+  }
   d->ui->ledgerView->selectMostRecentTransaction();
 }
 
