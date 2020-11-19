@@ -440,7 +440,6 @@ public:
   Ui::KAccountsView   *ui;
   bool                m_haveUnusedCategories;
   MyMoneyAccount      m_currentAccount;
-  QString             m_selectedInstitution;
   QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* m_onlinePlugins;
   AccountsProxyModel* m_proxyModel;
 };

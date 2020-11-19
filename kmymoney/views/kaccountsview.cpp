@@ -140,13 +140,6 @@ void KAccountsView::updateActions(const SelectedObjects& selections)
 
   const auto file = MyMoneyFile::instance();
 
-  // remember a possibly selected institution which we use
-  // for new accounts
-  d->m_selectedInstitution.clear();
-  if (!selections.selection(SelectedObjects::Institution).isEmpty()) {
-    d->m_selectedInstitution = selections.selection(SelectedObjects::Institution).at(0);
-  }
-
   // check if there is anything todo and quit if not
   if (selections.selection(SelectedObjects::Account).count() < 1
     && d->m_currentAccount.id().isEmpty() ) {
@@ -227,7 +220,12 @@ void KAccountsView::slotNewAccount()
   Q_D(KAccountsView);
   MyMoneyAccount account;
   account.setOpeningDate(KMyMoneySettings::firstFiscalDate());
-  account.setInstitutionId(d->m_selectedInstitution);
+  if (!d->m_selections.selection(SelectedObjects::Institution).isEmpty()) {
+    account.setInstitutionId(d->m_selections.selection(SelectedObjects::Institution).at(0));
+  }
+  if (!d->m_selections.selection(SelectedObjects::Account).isEmpty()) {
+    account.setParentAccountId(d->m_selections.selection(SelectedObjects::Account).at(0));
+  }
   NewAccountWizard::Wizard::newAccount(account);
 }
 
