@@ -255,6 +255,7 @@ protected Q_SLOTS:
 
   void slotGoToPayee();
   void slotGoToAccount();
+  void slotOpenReport();
 
 public:
   /**

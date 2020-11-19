@@ -158,6 +158,8 @@ public:
   void addView(KMyMoneyViewBase* view, const QString& name, View idView, Icons::Icon icon);
   void removeView(View idView);
 
+  void selectView(View idView, const QVariantList& args);
+
   /**
    * @brief actionsToBeConnected are actions that need ActionCollection
    * which is available in KMyMoneyApp

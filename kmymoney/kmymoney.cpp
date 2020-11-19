@@ -1125,9 +1125,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   connect(d->m_myMoneyView, &KMyMoneyView::requestActionTrigger, this, [&](eMenu::Action action) {
     if (pActions.contains(action)) {
-      if (pActions[action]->isEnabled()) {
-        pActions[action]->trigger();
-      }
+      pActions[action]->trigger();
     }
   });
 
@@ -1467,6 +1465,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::NewTag,                        QStringLiteral("tag_new"),                        i18n("New tag"),                                    Icon::TagNew},
       {Action::RenameTag,                     QStringLiteral("tag_rename"),                     i18n("Rename tag"),                                 Icon::TagRename},
       {Action::DeleteTag,                     QStringLiteral("tag_delete"),                     i18n("Delete tag"),                                 Icon::TagRemove},
+      //Reports
+      {Action::ReportOpen,                    QStringLiteral("report_open"),                    i18n("Open report"),                                Icon::Report},
       //debug actions
 #ifdef KMM_DEBUG
       {Action::WizardNewUser,                 QStringLiteral("new_user_wizard"),                i18n("Test new feature"),                           Icon::Empty},
@@ -1546,6 +1546,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::DebugTimers,                   &KMyMoneyApp::slotToggleTimers},
       {Action::GoToPayee,                     &KMyMoneyApp::slotGoToPayee},
       {Action::GoToAccount,                   &KMyMoneyApp::slotGoToAccount},
+      {Action::ReportOpen,                    &KMyMoneyApp::slotOpenReport},
 
     };
 
@@ -2014,6 +2015,15 @@ void KMyMoneyApp::slotGoToAccount()
     }
     QVariantList args = { accountId, transactionId };
     d->m_myMoneyView->slotSelectByVariant(args, eView::Intent::ShowTransactionInLedger );
+  }
+}
+
+void KMyMoneyApp::slotOpenReport()
+{
+  const auto origin = qobject_cast<QAction*>(sender());
+  if (origin) {
+    d->m_myMoneyView->selectView(View::Reports, QVariantList { origin->data() } );
+    origin->setData(QVariant());
   }
 }
 

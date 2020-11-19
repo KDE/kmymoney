@@ -89,7 +89,6 @@ public:
 
   void executeCustomAction(eView::Action action) override;
   void refresh();
-  void updateActions(const MyMoneyObject &obj) Q_DECL_DEPRECATED;
 
 Q_SIGNALS:
   /**
@@ -136,6 +135,7 @@ public Q_SLOTS:
   void slotDeleteFromList();
 
   void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
+  void slotSelectByVariant ( const QVariantList& args, eView::Intent intent ) override;
 
   void updateActions(const SelectedObjects& selections) override;
 

@@ -64,6 +64,7 @@ public Q_SLOTS:
     * Print the current view
     */
   void slotPrintView();
+  void slotSettingsChanged() override;
 
 private:
   Q_DECLARE_PRIVATE(KHomeView)

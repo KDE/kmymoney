@@ -146,6 +146,11 @@ void KHomeView::slotOpenUrl(const QUrl &url)
 {
   Q_D(KHomeView);
 
+  auto triggerAction = [&](eMenu::Action action, const QString& id) {
+    pActions[action]->setData(id);
+    emit requestActionTrigger(action);
+  };
+
   QString protocol = url.scheme();
   QString view = url.fileName();
 
@@ -167,18 +172,19 @@ void KHomeView::slotOpenUrl(const QUrl &url)
     KXmlGuiWindow* mw = KMyMoneyUtils::mainWindow();
     Q_CHECK_PTR(mw);
     if (view == VIEW_LEDGER) {
-      emit selectByVariant(QVariantList {QVariant(id), QVariant(QString())}, eView::Intent::ShowTransactionInLedger);
+      pActions[eMenu::Action::GoToAccount]->setData(id);
+      emit requestActionTrigger(eMenu::Action::GoToAccount);
 
     } else if (view == VIEW_SCHEDULE) {
       if (mode == QLatin1String("enter")) {
-        emit selectByObject(file->schedule(id), eView::Intent::None);
-        QTimer::singleShot(0, pActions[eMenu::Action::EnterSchedule], SLOT(trigger()));
+        triggerAction(eMenu::Action::EnterSchedule, id);
+
       } else if (mode == QLatin1String("edit")) {
-        emit selectByObject(file->schedule(id), eView::Intent::None);
-        QTimer::singleShot(0, pActions[eMenu::Action::EditSchedule], SLOT(trigger()));
+        triggerAction(eMenu::Action::EditSchedule, id);
+
       } else if (mode == QLatin1String("skip")) {
-        emit selectByObject(file->schedule(id), eView::Intent::None);
-        QTimer::singleShot(0, pActions[eMenu::Action::SkipSchedule], SLOT(trigger()));
+        triggerAction(eMenu::Action::SkipSchedule, id);
+
       } else if (mode == QLatin1String("full")) {
         d->m_showAllSchedules = true;
         d->loadView();
@@ -189,8 +195,7 @@ void KHomeView::slotOpenUrl(const QUrl &url)
       }
 
     } else if (view == VIEW_REPORTS) {
-      emit selectByObject(file->report(id), eView::Intent::OpenObject);
-//      emit openObjectRequested(file->report(id));
+      triggerAction(eMenu::Action::ReportOpen, id);
 
     } else if (view == VIEW_WELCOME) {
       if (mode == QLatin1String("whatsnew"))
@@ -199,7 +204,8 @@ void KHomeView::slotOpenUrl(const QUrl &url)
         d->m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
 
     } else if (view == QLatin1String("action")) {
-      QTimer::singleShot(0, mw->actionCollection()->action(id), SLOT(trigger()));
+      QMetaObject::invokeMethod(mw->actionCollection()->action(id), "trigger");
+
     } else if (view == VIEW_HOME) {
       QList<MyMoneyAccount> list;
       // it could be, that we don't even have a storage object attached.
@@ -219,6 +225,12 @@ void KHomeView::slotOpenUrl(const QUrl &url)
     }
   }
 }
+
+void KHomeView::slotSettingsChanged()
+{
+  refresh();
+}
+
 // Make sure, that these definitions are only used within this file
 // this does not seem to be necessary, but when building RPMs the
 // build option 'final' is used and all CPP files are concatenated.

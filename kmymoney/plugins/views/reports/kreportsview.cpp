@@ -175,37 +175,26 @@ void KReportsView::showEvent(QShowEvent * event)
 
 void KReportsView::updateActions(const SelectedObjects& selections)
 {
-  /// @todo updateActions
-}
-
-void KReportsView::updateActions(const MyMoneyObject& obj)
-{
-  Q_D(KReportsView);
-  if (typeid(obj) != typeid(MyMoneyAccount) &&
-      (obj.id().isEmpty() && d->m_currentAccount.id().isEmpty())) // do not disable actions that were already disabled)))
-    return;
-
-  const auto& acc = static_cast<const MyMoneyAccount&>(obj);
-
-  bool b;
-  if (MyMoneyFile::instance()->isStandardAccount(acc.id())) {
-    b = false;
-  } else {
-    switch (acc.accountType()) {
-      case eMyMoney::Account::Type::Asset:
-      case eMyMoney::Account::Type::Liability:
-      case eMyMoney::Account::Type::Equity:
-      case eMyMoney::Account::Type::Checkings:
-        b = true;
-        break;
-      default:
-        b = false;
-        break;
+  bool enable = false;
+  if (!selections.selection(SelectedObjects::Account).isEmpty()) {
+    const auto file = MyMoneyFile::instance();
+    const auto accId = selections.selection(SelectedObjects::Account).at(0);
+    if (!file->isStandardAccount(accId)) {
+      Q_D(KReportsView);
+      d->m_currentAccount = file->accountsModel()->itemById(accId);
+      switch (d->m_currentAccount.accountType()) {
+        case eMyMoney::Account::Type::Asset:
+        case eMyMoney::Account::Type::Liability:
+        case eMyMoney::Account::Type::Equity:
+        case eMyMoney::Account::Type::Checkings:
+          enable = true;
+          break;
+        default:
+          break;
+      }
     }
   }
-  pActions[eMenu::Action::ReportAccountTransactions]->setEnabled(b);
-
-  d->m_currentAccount = acc;
+  pActions[eMenu::Action::ReportAccountTransactions]->setEnabled(enable);
 }
 
 void KReportsView::slotOpenUrl(const QUrl &url)
@@ -437,6 +426,7 @@ void KReportsView::slotDelete()
   }
 }
 
+
 void KReportsView::slotOpenReport(const QString& id)
 {
   Q_D(KReportsView);
@@ -472,7 +462,6 @@ void KReportsView::slotOpenReport(const MyMoneyReport& report)
   Q_D(KReportsView);
   if (d->m_needLoad)
     d->init();
-  qDebug() << Q_FUNC_INFO << " " << report.name();
   KReportTab* page = 0;
 
   // Find the tab which contains the report indicated by this list item
@@ -721,14 +710,18 @@ void KReportsView::slotDeleteFromList()
 void KReportsView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
 {
   switch(intent) {
-    case eView::Intent::UpdateActions:
-      updateActions(obj);
-      break;
-
     case eView::Intent::OpenObject:
       slotOpenReport(static_cast<const MyMoneyReport&>(obj));
     default:
       break;
+  }
+}
+
+void KReportsView::slotSelectByVariant(const QVariantList& args, eView::Intent intent)
+{
+  Q_UNUSED(intent)
+  if (!args.isEmpty()) {
+    slotOpenReport(args.at(0).toString());
   }
 }
 

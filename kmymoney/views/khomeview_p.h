@@ -32,7 +32,6 @@
 
 #include <QList>
 #include <QPixmap>
-#include <QTimer>
 #include <QBuffer>
 #include <QStandardPaths>
 #include <QDesktopServices>

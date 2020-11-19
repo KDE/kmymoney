@@ -251,7 +251,16 @@ void KScheduledView::slotNewSchedule()
 void KScheduledView::slotEditSchedule()
 {
   Q_D(KScheduledView);
-  KEditScheduleDlg::editSchedule(d->m_currentSchedule);
+  auto scheduleId = d->m_currentSchedule.id();
+  if (scheduleId.isEmpty()) {
+    scheduleId = pActions[eMenu::Action::EditSchedule]->data().toString();
+  }
+  try {
+    auto schedule = MyMoneyFile::instance()->schedule(scheduleId);
+    KEditScheduleDlg::editSchedule(schedule);
+  } catch (const MyMoneyException &e) {
+    KMessageBox::detailedSorry(this, i18n("Unknown scheduled transaction '%1'", d->m_currentSchedule.name()), QString::fromLatin1(e.what()));
+  }
 }
 
 void KScheduledView::slotDeleteSchedule()
@@ -316,9 +325,13 @@ void KScheduledView::slotDuplicateSchedule()
 void KScheduledView::slotEnterSchedule()
 {
   Q_D(KScheduledView);
-  if (!d->m_currentSchedule.id().isEmpty()) {
+  auto scheduleId = d->m_currentSchedule.id();
+  if (scheduleId.isEmpty()) {
+    scheduleId = pActions[eMenu::Action::EnterSchedule]->data().toString();
+  }
+  if (!scheduleId.isEmpty()) {
     try {
-      auto schedule = MyMoneyFile::instance()->schedule(d->m_currentSchedule.id());
+      auto schedule = MyMoneyFile::instance()->schedule(scheduleId);
       d->enterSchedule(schedule);
     } catch (const MyMoneyException &e) {
       KMessageBox::detailedSorry(this, i18n("Unknown scheduled transaction '%1'", d->m_currentSchedule.name()), QString::fromLatin1(e.what()));
@@ -329,9 +342,13 @@ void KScheduledView::slotEnterSchedule()
 void KScheduledView::slotSkipSchedule()
 {
   Q_D(KScheduledView);
-  if (!d->m_currentSchedule.id().isEmpty()) {
+  auto scheduleId = d->m_currentSchedule.id();
+  if (scheduleId.isEmpty()) {
+    scheduleId = pActions[eMenu::Action::SkipSchedule]->data().toString();
+  }
+  if (!scheduleId.isEmpty()) {
     try {
-      auto schedule = MyMoneyFile::instance()->schedule(d->m_currentSchedule.id());
+      auto schedule = MyMoneyFile::instance()->schedule(scheduleId);
       d->skipSchedule(schedule);
     } catch (const MyMoneyException &e) {
       KMessageBox::detailedSorry(this, i18n("Unknown scheduled transaction '%1'", d->m_currentSchedule.name()), QString::fromLatin1(e.what()));

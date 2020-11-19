@@ -675,6 +675,14 @@ void KMyMoneyView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent in
   }
 }
 
+void KMyMoneyView::selectView(View idView, const QVariantList& args)
+{
+  if (viewBases.contains(idView)) {
+    showPage(idView);
+    viewBases[idView]->slotSelectByVariant(args, eView::Intent::None);
+  }
+}
+
 void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
 {
   switch(intent) {
