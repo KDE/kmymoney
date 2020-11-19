@@ -679,18 +679,18 @@ void LedgerView::setSelectedTransactions(const QStringList& transactionIds)
   // last. The very last entry is the empty line,
   // so we have to skip that.
   if ((lastRow == -1) && (model()->rowCount() > 1)) {
-    startRow = lastRow = model()->rowCount()-2;
-    currentIdx = model()->index(startRow, 0);
+    // find the last 'real' transaction
+    startRow = model()->rowCount()-1;
+    do {
+      --startRow;
+      currentIdx = model()->index(startRow, 0);
+    } while (startRow > 0 && journalModel->baseModel(currentIdx) != journalModel);
+    lastRow = startRow;
   }
 
   // add a possibly dangling range
   createSelectionRange();
 
-  qDebug() << "setSelectedTransactions 1";
-  selectionModel()->clearSelection();
-  qDebug() << "setSelectedTransactions 2";
-  selectionModel()->select(selection, QItemSelectionModel::Select);
-  qDebug() << "setSelectedTransactions 3";
-  selectionModel()->setCurrentIndex(currentIdx, QItemSelectionModel::Select);
-  qDebug() << "setSelectedTransactions 4";
+  selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
+  setCurrentIndex(currentIdx);
 }
