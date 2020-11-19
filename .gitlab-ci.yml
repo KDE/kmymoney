@@ -5,9 +5,9 @@ include:
   - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-applications-freebsd.yml
 
 # custom builds
-build_local_ubuntu_1804:
+build_local_ubuntu_2004:
   stage: build
-  image: ubuntu:18.04
+  image: ubuntu:20.04
   variables:
     DEBIAN_FRONTEND: "noninteractive"
   before_script:
