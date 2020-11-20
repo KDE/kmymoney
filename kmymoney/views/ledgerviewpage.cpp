@@ -101,33 +101,6 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
 
   d->ui->m_ledgerView->setColumnSelectorGroupName(configGroupName);
 
-  // prepare filter container
-  d->ui->m_closeButton->setIcon(Icons::get(Icon::DialogClose));
-  d->ui->m_closeButton->setAutoRaise(true);
-
-  d->ui->m_filterBox->insertItem((int)eRegister::ItemState::Any, Icons::get(Icon::TransactionStateAny), i18n("Any status"));
-  d->ui->m_filterBox->insertItem((int)eRegister::ItemState::Imported, Icons::get(Icon::TransactionStateImported), i18n("Imported"));
-  d->ui->m_filterBox->insertItem((int)eRegister::ItemState::Matched, Icons::get(Icon::TransactionStateMatched), i18n("Matched"));
-  d->ui->m_filterBox->insertItem((int)eRegister::ItemState::Erroneous, Icons::get(Icon::TransactionStateErroneous), i18n("Erroneous"));
-  d->ui->m_filterBox->insertItem((int)eRegister::ItemState::Scheduled, Icons::get(Icon::TransactionStateScheduled), i18n("Scheduled"));
-  d->ui->m_filterBox->insertItem((int)eRegister::ItemState::NotMarked, Icons::get(Icon::TransactionStateNotMarked), i18n("Not marked"));
-  d->ui->m_filterBox->insertItem((int)eRegister::ItemState::NotReconciled, Icons::get(Icon::TransactionStateNotReconciled), i18n("Not reconciled"));
-  d->ui->m_filterBox->insertItem((int)eRegister::ItemState::Cleared, Icons::get(Icon::TransactionStateCleared), i18nc("Reconciliation state 'Cleared'", "Cleared"));
-  d->ui->m_filterBox->setCurrentIndex((int)eRegister::ItemState::Any);
-  // connect(d->ui->m_filterBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &RegisterSearchLine::slotStatusChanged);
-  // label->setBuddy(d->ui->m_filterBox);
-
-
-
-  d->ui->m_filterContainer->hide();
-
-  connect(d->ui->m_closeButton, &QToolButton::clicked, d->ui->m_filterContainer, &QWidget::hide);
-  connect(pActions[eMenu::Action::ShowFilterWidget], &QAction::triggered, this, [&]() {
-    if (isVisible()) {
-      d->ui->m_filterContainer->show();
-    }
-  });
-
   // setup the model stack
   const auto file = MyMoneyFile::instance();
   d->accountFilter = new LedgerAccountFilter(d->ui->m_ledgerView, QVector<QAbstractItemModel*> { file->specialDatesModel(), file->schedulesJournalModel() } );
@@ -135,9 +108,27 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
 
   d->stateFilter = new LedgerFilter(d->ui->m_ledgerView);
   d->stateFilter->setSourceModel(d->accountFilter);
+  d->stateFilter->setComboBox(d->ui->m_filterBox);
+  d->stateFilter->setLineEdit(d->ui->m_searchWidget);
 
   d->specialDatesFilter = new SpecialDatesFilter(file->specialDatesModel(), this);
   d->specialDatesFilter->setSourceModel(d->stateFilter);
+
+  // prepare the filter container
+  d->ui->m_closeButton->setIcon(Icons::get(Icon::DialogClose));
+  d->ui->m_closeButton->setAutoRaise(true);
+  d->ui->m_filterContainer->hide();
+
+  connect(d->ui->m_closeButton, &QToolButton::clicked, this, [&]() {
+    d->stateFilter->clearFilter();
+    d->ui->m_filterContainer->hide();
+  });
+  connect(pActions[eMenu::Action::ShowFilterWidget], &QAction::triggered, this, [&]() {
+    if (isVisible()) {
+      d->ui->m_filterContainer->show();
+      d->ui->m_searchWidget->setFocus();
+    }
+  });
 
   // Moving rows in a source model to a KConcatenateRowsProxyModel
   // does not get propagated through it which destructs our ledger in such cases.

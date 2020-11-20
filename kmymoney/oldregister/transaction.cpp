@@ -784,32 +784,32 @@ bool Transaction::matches(const RegisterFilter& filter) const
     switch (filter.state) {
       default:
         break;
-      case eRegister::ItemState::Imported:
+      case LedgerFilter::State::Imported:
         if (!transaction().isImported())
           return false;
         break;
-      case eRegister::ItemState::Matched:
+      case LedgerFilter::State::Matched:
         if (!split().isMatched())
           return false;
         break;
-      case eRegister::ItemState::Erroneous:
+      case LedgerFilter::State::Erroneous:
         if (transaction().splitSum().isZero())
           return false;
         break;
-      case eRegister::ItemState::NotMarked:
+      case LedgerFilter::State::NotMarked:
         if (split().reconcileFlag() != eMyMoney::Split::State::NotReconciled)
           return false;
         break;
-      case eRegister::ItemState::NotReconciled:
+      case LedgerFilter::State::NotReconciled:
         if (split().reconcileFlag() != eMyMoney::Split::State::NotReconciled
             && split().reconcileFlag() != eMyMoney::Split::State::Cleared)
           return false;
         break;
-      case eRegister::ItemState::Cleared:
+      case LedgerFilter::State::Cleared:
         if (split().reconcileFlag() != eMyMoney::Split::State::Cleared)
           return false;
         break;
-      case eRegister::ItemState::Scheduled:
+      case LedgerFilter::State::Scheduled:
         if (!isScheduled())
           return false;
         break;

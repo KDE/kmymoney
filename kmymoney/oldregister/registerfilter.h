@@ -32,6 +32,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "ledgerfilter.h"
+
 namespace eWidgets { namespace eRegister { enum class ItemState; } }
 
 namespace KMyMoneyRegister
@@ -40,9 +42,9 @@ namespace KMyMoneyRegister
   * Used to filter items from the register.
   */
   struct KMM_OLDREGISTER_EXPORT RegisterFilter {
-    explicit RegisterFilter(const QString &t, eWidgets::eRegister::ItemState s);
+    explicit RegisterFilter(const QString &t, LedgerFilter::State s);
 
-    eWidgets::eRegister::ItemState state;
+    LedgerFilter::State  state;
     QString text;
   };
 

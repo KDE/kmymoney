@@ -77,17 +77,6 @@ namespace eWidgets {
   }
 
   namespace eRegister {
-    enum class ItemState {
-      Any,
-      Imported,
-      Matched,
-      Erroneous,
-      NotMarked,
-      NotReconciled,
-      Cleared,
-      Scheduled
-    };
-
     enum class Action {
       None = -1,
       Check = 0,

@@ -80,6 +80,9 @@ QVariant SchedulesJournalModel::data(const QModelIndex& index, int role) const
     case eMyMoney::Model::ScheduleIsOverdueRole:
       return entry.transaction().value(QStringLiteral("kmm-is-overdue")).compare(QStringLiteral("yes")) == 0;
 
+    case eMyMoney::Model::TransactionScheduleRole:
+      return true;
+
     default:
       break;
   }
