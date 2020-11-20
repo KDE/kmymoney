@@ -6,18 +6,82 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>320</width>
-    <height>393</height>
+    <width>321</width>
+    <height>400</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item>
-    <widget class="QSplitter" name="splitter">
+    <widget class="QSplitter" name="m_splitter">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <widget class="LedgerView" name="ledgerView"/>
-     <widget class="QWidget" name="formWidget" native="true"/>
+     <property name="handleWidth">
+      <number>2</number>
+     </property>
+     <widget class="QWidget" name="">
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>1</number>
+       </property>
+       <item>
+        <widget class="LedgerView" name="m_ledgerView"/>
+       </item>
+       <item>
+        <widget class="QWidget" name="m_filterContainer" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,2,0">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>1</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>1</number>
+          </property>
+          <item>
+           <widget class="QToolButton" name="m_closeButton">
+            <property name="text">
+             <string>...</string>
+            </property>
+            <property name="autoRaise">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="m_searchWidget"/>
+          </item>
+          <item>
+           <widget class="QComboBox" name="m_filterBox"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="m_formWidget" native="true"/>
     </widget>
    </item>
   </layout>

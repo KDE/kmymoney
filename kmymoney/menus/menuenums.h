@@ -121,7 +121,7 @@ namespace eMenu {
     ShowSchedulesView, ShowCategoriesView, ShowTagsView,
     ShowPayeesView, ShowLedgersView, ShowInvestmentsView,
     ShowReportsView, ShowBudgetView, ShowForecastView,
-    ShowOnlineJobOutboxView,
+    ShowOnlineJobOutboxView, ShowFilterWidget,
     // *************
     // The misc actions
     // *************

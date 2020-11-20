@@ -1443,6 +1443,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::AssignTransactionsNumber,      QStringLiteral("transaction_assign_number"),      i18n("Assign next number"),                         Icon::Empty},
       {Action::CombineTransactions,           QStringLiteral("transaction_combine"),            i18nc("Combine transactions", "Combine"),    Icon::Empty},
       {Action::CopySplits,                    QStringLiteral("transaction_copy_splits"),        i18n("Copy splits"),                                Icon::Empty},
+      {Action::ShowFilterWidget,              QStringLiteral("filter_show_widget"),             i18n("Show filter widget"),                         Icon::Empty},
       //Investment
       {Action::NewInvestment,                 QStringLiteral("investment_new"),                 i18n("New investment..."),                          Icon::InvestmentNew},
       {Action::EditInvestment,                QStringLiteral("investment_edit"),                i18n("Edit investment..."),                         Icon::InvestmentEdit},
@@ -1609,7 +1610,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
 #ifdef KMM_DEBUG
       {qMakePair(Action::WizardNewUser,               Qt::CTRL + Qt::Key_G)},
 #endif
-      {qMakePair(Action::AssignTransactionsNumber,    Qt::CTRL + Qt::SHIFT + Qt::Key_N)}
+      {qMakePair(Action::AssignTransactionsNumber,    Qt::CTRL + Qt::SHIFT + Qt::Key_N)},
+      {qMakePair(Action::ShowFilterWidget,            Qt::CTRL + Qt::SHIFT + Qt::Key_F)},
     };
 
     for(const auto& it : actionShortcuts)
@@ -2764,15 +2766,14 @@ void KMyMoneyApp::Private::updateActions(const SelectedObjects& selections)
     Action::FileDump,
 #endif
     Action::EditFindTransaction, Action::NewCategory, Action::ToolCurrencies, Action::ToolPrices, Action::ToolUpdatePrices,
-    Action::ToolConsistency, Action::ToolPerformance, Action::NewAccount, Action::NewInstitution, Action::NewSchedule
+    Action::ToolConsistency, Action::ToolPerformance, Action::NewAccount, Action::NewInstitution, Action::NewSchedule,
+    Action::ShowFilterWidget, Action::NewPayee, Action::NewTag
   };
 
   for (const auto &action : actions)
     pActions[action]->setEnabled(m_storageInfo.isOpened);
 
   pActions[Action::FileBackup]->setEnabled(m_storageInfo.isOpened && m_storageInfo.type == eKMyMoney::StorageType::XML);
-  pActions[Action::NewPayee]->setEnabled(m_storageInfo.isOpened);
-  pActions[Action::NewTag]->setEnabled(m_storageInfo.isOpened);
 
   auto aC = q->actionCollection();
   aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::SaveAs)))->setEnabled(canFileSaveAs());

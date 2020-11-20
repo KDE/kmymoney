@@ -21,6 +21,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QAction>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -30,14 +32,21 @@
 #include <ui_ledgerviewpage.h>
 #include "newtransactionform.h"
 #include "ledgeraccountfilter.h"
+#include "ledgerfilter.h"
 #include "specialdatesfilter.h"
 #include "specialdatesmodel.h"
 #include "schedulesjournalmodel.h"
 #include "journalmodel.h"
 #include "mymoneyenums.h"
+#include "widgetenums.h"
+#include "menuenums.h"
 #include "mymoneyfile.h"
 #include "selectedobjects.h"
 #include "mymoneyaccount.h"
+#include "icons.h"
+
+using namespace Icons;
+using namespace eWidgets;
 
 class LedgerViewPage::Private
 {
@@ -46,18 +55,19 @@ public:
   : ui(new Ui_LedgerViewPage)
   , accountFilter(nullptr)
   , specialDatesFilter(nullptr)
+  , stateFilter(nullptr)
   , form(nullptr)
   {
     ui->setupUi(parent);
 
     // make sure, we can disable the detail form but not the ledger view
-    ui->splitter->setCollapsible(0, false);
-    ui->splitter->setCollapsible(1, true);
+    ui->m_splitter->setCollapsible(0, false);
+    ui->m_splitter->setCollapsible(1, true);
 
     // make sure the ledger gets all the stretching
-    ui->splitter->setStretchFactor(0, 3);
-    ui->splitter->setStretchFactor(1, 1);
-    ui->splitter->setSizes(QList<int>() << 10000 << ui->formWidget->sizeHint().height());
+    ui->m_splitter->setStretchFactor(0, 3);
+    ui->m_splitter->setStretchFactor(1, 1);
+    ui->m_splitter->setSizes(QList<int>() << 10000 << ui->m_formWidget->sizeHint().height());
   }
 
   ~Private()
@@ -68,6 +78,7 @@ public:
   Ui_LedgerViewPage*    ui;
   LedgerAccountFilter*  accountFilter;
   SpecialDatesFilter*   specialDatesFilter;
+  LedgerFilter*         stateFilter;
   NewTransactionForm*   form;
   QSet<QString>         hideFormReasons;
   QString               accountId;
@@ -78,25 +89,55 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
   : QWidget(parent)
   , d(new Private(this))
 {
-  connect(d->ui->ledgerView, &LedgerView::transactionSelected, this, &LedgerViewPage::transactionSelected);
-  connect(d->ui->ledgerView, &LedgerView::aboutToStartEdit, this, &LedgerViewPage::aboutToStartEdit);
-  connect(d->ui->ledgerView, &LedgerView::aboutToFinishEdit, this, &LedgerViewPage::aboutToFinishEdit);
-  connect(d->ui->ledgerView, &LedgerView::aboutToStartEdit, this, &LedgerViewPage::startEdit);
-  connect(d->ui->ledgerView, &LedgerView::aboutToFinishEdit, this, &LedgerViewPage::finishEdit);
-  connect(d->ui->ledgerView, &LedgerView::transactionSelectionChanged, this, &LedgerViewPage::slotRequestSelectionChanged);
-  connect(d->ui->ledgerView, &LedgerView::requestCustomContextMenu, this, &LedgerViewPage::requestCustomContextMenu);
+  connect(d->ui->m_ledgerView, &LedgerView::transactionSelected, this, &LedgerViewPage::transactionSelected);
+  connect(d->ui->m_ledgerView, &LedgerView::aboutToStartEdit, this, &LedgerViewPage::aboutToStartEdit);
+  connect(d->ui->m_ledgerView, &LedgerView::aboutToFinishEdit, this, &LedgerViewPage::aboutToFinishEdit);
+  connect(d->ui->m_ledgerView, &LedgerView::aboutToStartEdit, this, &LedgerViewPage::startEdit);
+  connect(d->ui->m_ledgerView, &LedgerView::aboutToFinishEdit, this, &LedgerViewPage::finishEdit);
+  connect(d->ui->m_ledgerView, &LedgerView::transactionSelectionChanged, this, &LedgerViewPage::slotRequestSelectionChanged);
+  connect(d->ui->m_ledgerView, &LedgerView::requestCustomContextMenu, this, &LedgerViewPage::requestCustomContextMenu);
 
-  connect(d->ui->splitter, &QSplitter::splitterMoved, this, &LedgerViewPage::splitterChanged);
+  connect(d->ui->m_splitter, &QSplitter::splitterMoved, this, &LedgerViewPage::splitterChanged);
 
-  d->ui->ledgerView->setColumnSelectorGroupName(configGroupName);
+  d->ui->m_ledgerView->setColumnSelectorGroupName(configGroupName);
+
+  // prepare filter container
+  d->ui->m_closeButton->setIcon(Icons::get(Icon::DialogClose));
+  d->ui->m_closeButton->setAutoRaise(true);
+
+  d->ui->m_filterBox->insertItem((int)eRegister::ItemState::Any, Icons::get(Icon::TransactionStateAny), i18n("Any status"));
+  d->ui->m_filterBox->insertItem((int)eRegister::ItemState::Imported, Icons::get(Icon::TransactionStateImported), i18n("Imported"));
+  d->ui->m_filterBox->insertItem((int)eRegister::ItemState::Matched, Icons::get(Icon::TransactionStateMatched), i18n("Matched"));
+  d->ui->m_filterBox->insertItem((int)eRegister::ItemState::Erroneous, Icons::get(Icon::TransactionStateErroneous), i18n("Erroneous"));
+  d->ui->m_filterBox->insertItem((int)eRegister::ItemState::Scheduled, Icons::get(Icon::TransactionStateScheduled), i18n("Scheduled"));
+  d->ui->m_filterBox->insertItem((int)eRegister::ItemState::NotMarked, Icons::get(Icon::TransactionStateNotMarked), i18n("Not marked"));
+  d->ui->m_filterBox->insertItem((int)eRegister::ItemState::NotReconciled, Icons::get(Icon::TransactionStateNotReconciled), i18n("Not reconciled"));
+  d->ui->m_filterBox->insertItem((int)eRegister::ItemState::Cleared, Icons::get(Icon::TransactionStateCleared), i18nc("Reconciliation state 'Cleared'", "Cleared"));
+  d->ui->m_filterBox->setCurrentIndex((int)eRegister::ItemState::Any);
+  // connect(d->ui->m_filterBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &RegisterSearchLine::slotStatusChanged);
+  // label->setBuddy(d->ui->m_filterBox);
+
+
+
+  d->ui->m_filterContainer->hide();
+
+  connect(d->ui->m_closeButton, &QToolButton::clicked, d->ui->m_filterContainer, &QWidget::hide);
+  connect(pActions[eMenu::Action::ShowFilterWidget], &QAction::triggered, this, [&]() {
+    if (isVisible()) {
+      d->ui->m_filterContainer->show();
+    }
+  });
 
   // setup the model stack
   const auto file = MyMoneyFile::instance();
-  d->accountFilter = new LedgerAccountFilter(d->ui->ledgerView, QVector<QAbstractItemModel*> { file->specialDatesModel(), file->schedulesJournalModel() } );
+  d->accountFilter = new LedgerAccountFilter(d->ui->m_ledgerView, QVector<QAbstractItemModel*> { file->specialDatesModel(), file->schedulesJournalModel() } );
   connect(file->journalModel(), &JournalModel::balanceChanged, d->accountFilter, &LedgerAccountFilter::recalculateBalancesOnIdle);
 
+  d->stateFilter = new LedgerFilter(d->ui->m_ledgerView);
+  d->stateFilter->setSourceModel(d->accountFilter);
+
   d->specialDatesFilter = new SpecialDatesFilter(file->specialDatesModel(), this);
-  d->specialDatesFilter->setSourceModel(d->accountFilter);
+  d->specialDatesFilter->setSourceModel(d->stateFilter);
 
   // Moving rows in a source model to a KConcatenateRowsProxyModel
   // does not get propagated through it which destructs our ledger in such cases.
@@ -110,7 +151,7 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
   connect(file->journalModel(), SIGNAL(rowsAboutToBeMoved(const QModelIndex&,int,int,const QModelIndex&,int)), this, SLOT(keepSelection()));
   connect(file->journalModel(), SIGNAL(rowsMoved(const QModelIndex&,int,int,const QModelIndex&,int)), this, SLOT(reloadFilter()), Qt::QueuedConnection);
 
-  d->ui->ledgerView->setModel(d->specialDatesFilter);
+  d->ui->m_ledgerView->setModel(d->specialDatesFilter);
 }
 
 LedgerViewPage::~LedgerViewPage()
@@ -120,14 +161,14 @@ LedgerViewPage::~LedgerViewPage()
 
 void LedgerViewPage::keepSelection()
 {
-  d->selections.setSelection(SelectedObjects::Transaction, d->ui->ledgerView->selectedTransactions());
+  d->selections.setSelection(SelectedObjects::Transaction, d->ui->m_ledgerView->selectedTransactions());
 }
 
 void LedgerViewPage::reloadFilter()
 {
   d->specialDatesFilter->forceReload();
 
-  d->ui->ledgerView->setSelectedTransactions(d->selections.selection(SelectedObjects::Transaction));
+  d->ui->m_ledgerView->setSelectedTransactions(d->selections.selection(SelectedObjects::Transaction));
   // not sure if the following statement must be removed (THB - 2020-09-20)
   d->selections.clearSelections(SelectedObjects::Transaction);
 }
@@ -153,7 +194,7 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
         JournalModel::Column::Amount,
         JournalModel::Column::Payment,
         JournalModel::Column::Deposit, };
-      d->ui->ledgerView->setColumnsHidden(columns);
+      d->ui->m_ledgerView->setColumnsHidden(columns);
       columns = {
         JournalModel::Column::Date,
         JournalModel::Column::Security,
@@ -163,7 +204,7 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
         JournalModel::Column::Price,
         JournalModel::Column::Value,
         JournalModel::Column::Balance, };
-      d->ui->ledgerView->setColumnsShown(columns);
+      d->ui->m_ledgerView->setColumnsShown(columns);
       break;
 
     default:
@@ -174,7 +215,7 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
         JournalModel::Column::Price,
         JournalModel::Column::Amount,
         JournalModel::Column::Value, };
-      d->ui->ledgerView->setColumnsHidden(columns);
+      d->ui->m_ledgerView->setColumnsHidden(columns);
       columns = { JournalModel::Column::Number,
         JournalModel::Column::Date,
         JournalModel::Column::Detail,
@@ -182,31 +223,31 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
         JournalModel::Column::Payment,
         JournalModel::Column::Deposit,
         JournalModel::Column::Balance, };
-      d->ui->ledgerView->setColumnsShown(columns);
+      d->ui->m_ledgerView->setColumnsShown(columns);
 
-      d->form = new NewTransactionForm(d->ui->formWidget);
+      d->form = new NewTransactionForm(d->ui->m_formWidget);
       break;
   }
 
   if(d->form) {
     d->hideFormReasons.remove(QLatin1String("FormAvailable"));
     // make sure we have a layout
-    if(!d->ui->formWidget->layout()) {
-      d->ui->formWidget->setLayout(new QHBoxLayout(d->ui->formWidget));
+    if(!d->ui->m_formWidget->layout()) {
+      d->ui->m_formWidget->setLayout(new QHBoxLayout(d->ui->m_formWidget));
     }
-    d->ui->formWidget->layout()->addWidget(d->form);
-    connect(d->ui->ledgerView, &LedgerView::transactionSelected, d->form, &NewTransactionForm::showTransaction);
+    d->ui->m_formWidget->layout()->addWidget(d->form);
+    connect(d->ui->m_ledgerView, &LedgerView::transactionSelected, d->form, &NewTransactionForm::showTransaction);
   }
-  d->ui->formWidget->setVisible(d->hideFormReasons.isEmpty());
+  d->ui->m_formWidget->setVisible(d->hideFormReasons.isEmpty());
   d->accountFilter->setAccount(acc);
   d->accountId = acc.id();
 
-  d->ui->ledgerView->setAccountId(d->accountId);
+  d->ui->m_ledgerView->setAccountId(d->accountId);
   d->selections.setSelection(SelectedObjects::Account, d->accountId);
   if (!acc.institutionId().isEmpty()) {
     d->selections.setSelection(SelectedObjects::Institution, acc.institutionId());
   }
-  d->ui->ledgerView->selectMostRecentTransaction();
+  d->ui->m_ledgerView->selectMostRecentTransaction();
 }
 
 void LedgerViewPage::showTransactionForm(bool show)
@@ -216,21 +257,21 @@ void LedgerViewPage::showTransactionForm(bool show)
   } else {
     d->hideFormReasons.insert(QLatin1String("General"));
   }
-  d->ui->formWidget->setVisible(d->hideFormReasons.isEmpty());
+  d->ui->m_formWidget->setVisible(d->hideFormReasons.isEmpty());
 }
 
 void LedgerViewPage::startEdit()
 {
   d->hideFormReasons.insert(QLatin1String("Edit"));
-  d->ui->formWidget->hide();
+  d->ui->m_formWidget->hide();
 }
 
 void LedgerViewPage::finishEdit()
 {
   d->hideFormReasons.remove(QLatin1String("Edit"));
-  d->ui->formWidget->setVisible(d->hideFormReasons.isEmpty());
+  d->ui->m_formWidget->setVisible(d->hideFormReasons.isEmpty());
   // the focus should be on the ledger view once editing ends
-  d->ui->ledgerView->setFocus();
+  d->ui->m_ledgerView->setFocus();
 }
 
 void LedgerViewPage::splitterChanged(int pos, int index)
@@ -238,7 +279,7 @@ void LedgerViewPage::splitterChanged(int pos, int index)
   Q_UNUSED(pos);
   Q_UNUSED(index);
 
-  d->ui->ledgerView->ensureCurrentItemIsVisible();
+  d->ui->m_ledgerView->ensureCurrentItemIsVisible();
 }
 
 void LedgerViewPage::setShowEntryForNewTransaction(bool show)
@@ -248,7 +289,7 @@ void LedgerViewPage::setShowEntryForNewTransaction(bool show)
 
 void LedgerViewPage::slotSettingsChanged()
 {
-  d->ui->ledgerView->slotSettingsChanged();
+  d->ui->m_ledgerView->slotSettingsChanged();
 }
 
 void LedgerViewPage::slotRequestSelectionChanged(const SelectedObjects& selections) const
@@ -260,11 +301,11 @@ void LedgerViewPage::slotRequestSelectionChanged(const SelectedObjects& selectio
 
 const SelectedObjects& LedgerViewPage::selections() const
 {
-  d->selections.setSelection(SelectedObjects::Transaction, d->ui->ledgerView->selectedTransactions());
+  d->selections.setSelection(SelectedObjects::Transaction, d->ui->m_ledgerView->selectedTransactions());
   return d->selections;
 }
 
 void LedgerViewPage::selectTransaction(const QString& id)
 {
-  d->ui->ledgerView->setSelectedTransactions(QStringList { id });
+  d->ui->m_ledgerView->setSelectedTransactions(QStringList { id });
 }
