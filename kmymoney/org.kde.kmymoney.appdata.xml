@@ -204,4 +204,46 @@
   <provides>
     <binary>kmymoney</binary>
   </provides>
+  <content_rating type="oars-1.1"/>
+  <custom>
+    <value key="KDE::forum">69</value>
+    <value key="KDE::mailinglist">kmymoney@kde.org</value>
+    <value key="KDE::mailinglist-devel">kmymoney-devel@kde.org</value>
+    <value key="KDE::irc">#kmymoney</value>
+  </custom>
+  <releases>
+    <!-- Note: website infrastructure uses the appstream file from the master branch
+               to determine the last release, so this entry must always reflect the
+               last actual release -->
+    <release date="2020-06-14" version="5.1.0">
+      <url>https://blog.bembel.net/2020/06/kmymoney-5-1-0-released/</url>
+      <artifacts>
+        <artifact type="source">
+          <location>https://download.kde.org/stable/kmymoney/5.1.0/src/kmymoney-5.1.0.tar.xz</location>
+          <checksum type="sha256">2db968f1d112b913fde3e0e5160215ca689ea2ca5ce3f6f00a4ef97330f71351</checksum>
+          <size type="download">12005824</size>
+        </artifact>
+      </artifacts>
+    </release>
+    <release date="2020-01-19" version="5.0.8">
+      <url>https://kmymoney.org/changelogs/kmymoney-5-0-8-release-notes.html</url>
+      <artifacts>
+        <artifact type="source">
+          <location>https://download.kde.org/stable/kmymoney/5.0.8/src/kmymoney-5.0.8.tar.xz</location>
+          <checksum type="sha256">ac6bcef37def09ca2530276254eab5e9ae57f3a1cd5ed7c87c3d38045400d4c0</checksum>
+          <size type="download">11753276</size>
+        </artifact>
+      </artifacts>
+    </release>
+    <release date="2019-09-22" version="5.0.7">
+      <url>https://kmymoney.org/changelogs/kmymoney-5-0-7-release-notes.html</url>
+      <artifacts>
+        <artifact type="source">
+          <location>https://download.kde.org/stable/kmymoney/5.0.7/src/kmymoney-5.0.7.tar.xz</location>
+          <checksum type="sha256">d5dcac31db410861fe74955109715012bcddfd095cdbb18c91827a77dffeb5c0</checksum>
+          <size type="download">11667088</size>
+        </artifact>
+      </artifacts>
+    </release>
+  </releases>
 </component>
