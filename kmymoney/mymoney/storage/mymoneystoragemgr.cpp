@@ -287,14 +287,14 @@ void MyMoneyStorageMgr::removePayee(const MyMoneyPayee& payee)
   // scan all transactions to check if the payee is still referenced
   for (it_t = d->m_transactionList.begin(); it_t != d->m_transactionList.end(); ++it_t) {
     if ((*it_t).hasReferenceTo(payee.id())) {
-      throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot remove payee that is still referenced to a %1").arg("transaction"));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot remove payee %1 that is still referenced to transaction %2").arg(payee.id(), (*it_t).id()));
     }
   }
 
   // check referential integrity in schedules
   for (it_s = d->m_scheduleList.begin(); it_s != d->m_scheduleList.end(); ++it_s) {
     if ((*it_s).hasReferenceTo(payee.id())) {
-      throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot remove payee that is still referenced to a %1").arg("schedule"));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot remove payee %1 that is still referenced to a schedule %2").arg(payee.id(), (*it_s).id()));
     }
   }
 
@@ -373,14 +373,14 @@ void MyMoneyStorageMgr::removeTag(const MyMoneyTag& tag)
   // scan all transactions to check if the tag is still referenced
   for (it_t = d->m_transactionList.begin(); it_t != d->m_transactionList.end(); ++it_t) {
     if ((*it_t).hasReferenceTo(tag.id())) {
-      throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot remove tag that is still referenced to a %1").arg("transaction"));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot remove tag %1 that is still referenced to transaction %2").arg(tag.id(), (*it_t).id()));
     }
   }
 
   // check referential integrity in schedules
   for (it_s = d->m_scheduleList.begin(); it_s != d->m_scheduleList.end(); ++it_s) {
     if ((*it_s).hasReferenceTo(tag.id())) {
-      throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot remove tag that is still referenced to a %1").arg("schedule"));
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Cannot remove tag %1 that is still referenced to schedule %2").arg(tag.id(), (*it_s).id()));
     }
   }
 
