@@ -846,6 +846,9 @@ bool JournalModel::setData(const QModelIndex& idx, const QVariant& value, int ro
 
 void JournalModel::load(const QMap<QString, MyMoneyTransaction>& list)
 {
+  QElapsedTimer t;
+
+  t.start();
   beginResetModel();
   // first get rid of any existing entries
   clearModelItems();
@@ -866,7 +869,7 @@ void JournalModel::load(const QMap<QString, MyMoneyTransaction>& list)
     updateNextObjectId(id);
     d->addIdKeyMapping(id, it.key());
     auto transaction = QSharedPointer<MyMoneyTransaction>(new MyMoneyTransaction(*it));
-    foreach (const auto split, (*transaction).splits()) {
+    for (const auto& split : (*transaction).splits()) {
       const JournalEntry journalEntry(it.key(), transaction, split);
       static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->dataRef() = journalEntry;
       ++row;
@@ -879,7 +882,7 @@ void JournalModel::load(const QMap<QString, MyMoneyTransaction>& list)
   // and don't count loading as a modification
   setDirty(false);
 
-  qDebug() << "Model for" << m_idLeadin << "loaded with" << rowCount() << "items";
+  qDebug() << "Model for" << m_idLeadin << "loaded with" << rowCount() << "items in" << t.elapsed() << "ms";
 }
 
 void JournalModel::unload()

@@ -374,13 +374,18 @@ void SchedulesModel::setColorScheme(SchedulesModel::ColorScheme scheme, const QC
 
 void SchedulesModel::load(const QMap<QString, MyMoneySchedule>& list)
 {
+  QElapsedTimer t;
+
+  t.start();
   beginResetModel();
   clearModelItems();
 
   m_nextId = 0;
 
   QRegularExpression exp(QStringLiteral("^%1(\\d+)$").arg(m_idLeadin));
-  foreach (auto item, list) {
+  int itemCount = 0;
+  for (const auto& item : list) {
+    ++itemCount;
     QRegularExpressionMatch m = exp.match(item.id());
     if (m.hasMatch()) {
       const quint64 id = m.captured(1).toUInt();
@@ -402,6 +407,7 @@ void SchedulesModel::load(const QMap<QString, MyMoneySchedule>& list)
 
   // inform that the whole model has changed
   endResetModel();
+  qDebug() << "Model for schedules loaded with" << itemCount << "items in" << t.elapsed() << "ms";
 }
 
 void SchedulesModel::doAddItem(const MyMoneySchedule& schedule, const QModelIndex& parentIdx)
