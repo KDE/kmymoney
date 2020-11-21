@@ -422,9 +422,10 @@ public:
       // create a transaction filter that contains all payees selected for removal
       MyMoneyTransactionFilter f = MyMoneyTransactionFilter();
       const auto list = selectedPayees();
-      for (const auto payee : list) {
+      for (const auto& payee : list) {
         f.addPayee(payee.id());
       }
+      f.setConsiderCategorySplits(true);
 
       // request a list of all transactions that still use the payees in question
       QList<MyMoneyTransaction> translist = file->transactionList(f);
