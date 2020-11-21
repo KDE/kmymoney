@@ -401,6 +401,7 @@ public:
       filter.addPayee((*it).id());
 
     filter.setDateFilter(KMyMoneySettings::startDate().date(), QDate());
+    filter.setConsiderCategorySplits(true);
 
     // retrieve the list from the engine
     file->transactionList(m_transactionList, filter);
@@ -479,6 +480,7 @@ public:
            it != m_selectedPayeesList.constEnd(); ++it) {
         f.addPayee((*it).id());
       }
+      f.setConsiderCategorySplits(true);
       // request a list of all transactions that still use the payees in question
       QList<MyMoneyTransaction> translist = file->transactionList(f);
   //     qDebug() << "[KPayeesView::slotDeletePayee]  " << translist.count() << " transaction still assigned to payees";
