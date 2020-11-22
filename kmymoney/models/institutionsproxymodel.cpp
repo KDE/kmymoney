@@ -85,73 +85,8 @@ bool InstitutionsProxyModel::filterAcceptsRow(int source_row, const QModelIndex 
 {
   if (source_parent.isValid()) {
     // if the entry has a valid parent it is an account
-    const auto idx = sourceModel()->index(source_row, AccountsModel::Column::AccountName, source_parent);
     return AccountsProxyModel::filterAcceptsRow(source_row, source_parent);
   } else {
     return filterAcceptsRowOrChildRows(source_row, source_parent);
   }
-}
-
-/**
-  * This function implements a recursive matching. It is used to match a row even if it's values
-  * don't match the current filtering criteria but it has at least one child row that does match.
-  */
-bool InstitutionsProxyModel::filterAcceptsRowOrChildRows(int source_row, const QModelIndex &source_parent) const
-{
-  if (QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent))
-    return true;
-
-  const auto index = sourceModel()->index(source_row, AccountsModel::Column::AccountName, source_parent);
-  for (auto i = 0; i < sourceModel()->rowCount(index); ++i) {
-    if (filterAcceptsRowOrChildRows(i, index))
-      return true;
-  }
-  return false;
-}
-
-/**
-  * Implementation function that performs the actual filtering.
-  */
-bool InstitutionsProxyModel::acceptSourceItem(const QModelIndex &source) const
-{
-  if (source.isValid()) {
-    const auto accountTypeValue = sourceModel()->data(source, eMyMoney::Model::Roles::AccountTypeRole);
-    const bool isValidAccountEntry = accountTypeValue.isValid();
-    const bool isValidInstititonEntry = sourceModel()->data(source, eMyMoney::Model::Roles::InstitutionBankCodeRole).isValid();
-
-    if (isValidAccountEntry) {
-      const auto accountType = static_cast<eMyMoney::Account::Type>(accountTypeValue.toInt());
-
-      if (hideClosedAccounts() && sourceModel()->data(source, eMyMoney::Model::Roles::AccountIsClosedRole).toBool())
-        return false;
-
-      // we hide stock accounts if not in expert mode
-      // we hide equity accounts if not in expert mode
-      if (hideEquityAccounts()) {
-        if (accountType == eMyMoney::Account::Type::Equity)
-          return false;
-
-        if (sourceModel()->data(source, eMyMoney::Model::Roles::AccountIsInvestRole).toBool())
-          return false;
-      }
-      return true;
-
-    } else if (isValidInstititonEntry) {
-      if (sourceModel()->rowCount(source) == 0) {
-        // if this is an institution that has no children show it only if hide unused institutions
-        // (hide closed accounts for now) is not checked
-        return !hideClosedAccounts();
-      }
-      return true;
-    }
-
-    // all parents that have at least one visible child must be visible
-    const auto rowCount = sourceModel()->rowCount(source);
-    for (auto i = 0; i < rowCount; ++i) {
-      const auto index = sourceModel()->index(i, AccountsModel::Column::AccountName, source);
-      if (acceptSourceItem(index))
-        return true;
-    }
-  }
-  return false;
 }

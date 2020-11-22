@@ -40,6 +40,7 @@
 #include <QPrintDialog>
 #include <QVBoxLayout>
 #include <QPrinter>
+#include <QElapsedTimer>
 #ifdef ENABLE_WEBENGINE
 #include <QWebEngineView>
 #else
@@ -454,6 +455,8 @@ public:
 
       QStringList::ConstIterator it;
 
+      QElapsedTimer t;
+      t.start();
       for (it = settings.constBegin(); it != settings.constEnd(); ++it) {
         int option = (*it).toInt();
         if (option > 0) {
@@ -497,6 +500,7 @@ public:
               break;
           }
           m_html += "<div class=\"gap\">&nbsp;</div>\n";
+          qDebug() << "Processed home view section" << option << "in" << t.restart() << "ms";
         }
       }
 

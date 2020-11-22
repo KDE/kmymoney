@@ -772,13 +772,16 @@ QModelIndex AccountsModel::equityIndex() const
 
 void AccountsModel::load(const QMap<QString, MyMoneyAccount>& _list)
 {
+  QElapsedTimer t;
+
+  t.start();
   beginResetModel();
   // first get rid of any existing entries
   clearModelItems();
 
   auto list = d->checkHierarchy(_list);
   int itemCount = 0;
-  foreach(auto baseAccount, d->defaults) {
+  for(const auto& baseAccount : d->defaults) {
     ++itemCount;
     // we have nothing to do for favorites
     if (baseAccount.groupType == eMyMoney::Account::Standard::Favorite)
@@ -800,7 +803,7 @@ void AccountsModel::load(const QMap<QString, MyMoneyAccount>& _list)
 
   emit modelLoaded();
 
-  qDebug() << "Model for accounts loaded with" << itemCount << "items";
+  qDebug() << "Model for accounts loaded with" << itemCount << "items in" << t.elapsed() << "ms";
 }
 
 QList<MyMoneyAccount> AccountsModel::itemList() const

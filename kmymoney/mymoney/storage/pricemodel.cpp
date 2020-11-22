@@ -164,13 +164,16 @@ bool PriceModel::setData(const QModelIndex& idx, const QVariant& value, int role
 
 void PriceModel::load(const QMap<MyMoneySecurityPair, MyMoneyPriceEntries>& list)
 {
+  QElapsedTimer t;
+
+  t.start();
   beginResetModel();
   // first get rid of any existing entries
   clearModelItems();
 
   // create the number of required items
   int itemCount = 0;
-  foreach (const auto& item, list) {
+  for (const auto& item : list) {
     itemCount += item.count();
   }
   insertRows(0, itemCount);
@@ -179,7 +182,7 @@ void PriceModel::load(const QMap<MyMoneySecurityPair, MyMoneyPriceEntries>& list
   QMap<MyMoneySecurityPair, MyMoneyPriceEntries>::const_iterator itPairs;
   for (itPairs = list.constBegin(); itPairs != list.constEnd(); ++itPairs) {
     QDate lastDate(1900, 1, 1);
-    foreach(auto priceInfo, *itPairs) {
+    for (const auto& priceInfo : *itPairs) {
       if (lastDate > priceInfo.date()) {
         qDebug() << "Price loader: dates not sorted as needed" << priceInfo.date() << "older than" << lastDate;
       }
@@ -196,7 +199,7 @@ void PriceModel::load(const QMap<MyMoneySecurityPair, MyMoneyPriceEntries>& list
   // and don't count loading as a modification
   setDirty(false);
 
-  qDebug() << "Model for prices loaded with" << rowCount() << "items";
+  qDebug() << "Model for prices loaded with" << row << "items in" << t.elapsed() << "ms";
 }
 
 void PriceModel::addPrice(const MyMoneyPrice& price)

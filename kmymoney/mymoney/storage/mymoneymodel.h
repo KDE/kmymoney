@@ -32,6 +32,7 @@
 #include <QUndoStack>
 
 #include <QDebug>
+#include <QElapsedTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -74,9 +75,15 @@ public:
       return childItems.count();
     }
 
+
     void appendChild(TreeItem<T>* item)
     {
       childItems.append(item);
+    }
+
+    void appendChildren(QVector<TreeItem<T>*> items)
+    {
+      childItems.append(items);
     }
 
     bool insertChildren(int row, QVector<TreeItem<T>*> items)
@@ -307,6 +314,9 @@ public:
   {
     TreeItem<T> *parentItem;
 
+    if (rows == 0)
+      return true;
+
     if (!parent.isValid())
       parentItem = m_rootItem;
     else
@@ -318,21 +328,18 @@ public:
 
     beginInsertRows(parent, startRow, startRow + rows - 1);
 
-    // appending can be done one by one
+    // create new items
+    QVector<TreeItem<T>*> items(rows, nullptr);
+    for (int row = 0; row < rows; ++row) {
+      items[row] = new TreeItem<T>(T(), parentItem);
+    }
+    // differentiate between insert and append
     if (startRow < childCount) {
-      QVector<TreeItem<T>*> items;
-      for (int row = 0; row < rows; ++row) {
-        items << new TreeItem<T>(T(), parentItem);
-      }
       if (!parentItem->insertChildren(startRow, items)) {
         qDeleteAll(items);
       }
     } else {
-      for (int row = 0; row < rows; ++row) {
-        TreeItem<T> *newItem = new TreeItem<T>(T(), parentItem);
-        if (!parentItem->insertChild(startRow, newItem))
-          break;
-      }
+      parentItem->appendChildren(items);
     }
 
     endInsertRows();
@@ -523,6 +530,9 @@ public:
 
   void load(const QMap<QString, T>& list)
   {
+    QElapsedTimer t;
+
+    t.start();
     beginResetModel();
     // first get rid of any existing entries
     clearModelItems();
@@ -536,7 +546,7 @@ public:
     m_nextId = 0;
 
     int row = 0;
-    foreach (const auto item, list) {
+    for (const auto& item : list) {
       updateNextObjectId(item.id());
       static_cast<TreeItem<T>*>(index(row, 0).internalPointer())->dataRef() = item;
       ++row;
@@ -544,7 +554,7 @@ public:
     endResetModel();
     emit modelLoaded();
 
-    qDebug() << "Model for" << m_idLeadin << "loaded with" << rowCount() << "items";
+    qDebug() << "Model for" << m_idLeadin << "loaded with" << rowCount() << "items in" << t.elapsed() << "ms";
   }
 
   struct Worker

@@ -410,6 +410,7 @@ public:
       for (const auto& payee : list) {
         f.addPayee(payee.id());
       }
+      f.setConsiderCategorySplits(true);
 
       // request a list of all transactions that still use the payees in question
       QList<MyMoneyTransaction> translist = file->transactionList(f);

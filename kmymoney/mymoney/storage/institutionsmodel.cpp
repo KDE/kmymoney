@@ -218,6 +218,9 @@ void InstitutionsModel::setColorScheme(AccountsModel::ColorScheme scheme, const 
 
 void InstitutionsModel::load(const QMap<QString, MyMoneyInstitution>& list)
 {
+  QElapsedTimer t;
+
+  t.start();
   beginResetModel();
   // first get rid of any existing entries
   clearModelItems();
@@ -243,7 +246,7 @@ void InstitutionsModel::load(const QMap<QString, MyMoneyInstitution>& list)
 
   emit modelLoaded();
 
-  qDebug() << "Model for \"I\" loaded with" << rowCount() << "items";
+  qDebug() << "Model for" << m_idLeadin << "loaded with" << rowCount() << "items in" << t.elapsed() << "ms";
 }
 
 void InstitutionsModel::slotLoadAccountsWithoutInstitutions(const QModelIndexList& indexes)

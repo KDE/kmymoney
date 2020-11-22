@@ -82,7 +82,7 @@ public:
     , m_items(NoItem)
   {
     Q_Q(AmountEdit);
-    m_calculatorFrame = new QFrame(q);
+    m_calculatorFrame = new QFrame;
     m_calculatorFrame->setWindowFlags(Qt::Popup);
 
     m_calculatorFrame->setFrameStyle(QFrame::Panel | QFrame::Raised);
@@ -145,18 +145,22 @@ public:
   void calculatorOpen(QKeyEvent* k)
   {
     Q_Q(AmountEdit);
+    m_calculator->setInitialValues(q->text(), k);
+
     // do not open the calculator in read-only mode
     if (q->isReadOnly())
       return;
 
-    m_calculator->setInitialValues(q->text(), k);
+    // show calculator and update size
+    m_calculatorFrame->show();
+    m_calculatorFrame->setGeometry(m_calculator->geometry());
 
-    auto h = m_calculatorFrame->height();
-    auto w = m_calculatorFrame->width();
+    const auto h = m_calculatorFrame->height();
+    const auto w = m_calculatorFrame->width();
 
-    // usually, the calculator widget is shown underneath the MoneyEdit widget
+    // usually, the calculator widget is shown underneath the AmountEdit widget
     // if it does not fit on the screen, we show it above this widget
-    auto p = q->mapToGlobal(QPoint(0, 0));
+    auto p = q->mapToGlobal(QPoint());
     if (p.y() + q->height() + h > QApplication::desktop()->height()) {
       p.setY(p.y() - h);
     } else {
@@ -164,15 +168,12 @@ public:
     }
 
     // usually, it is shown left aligned. If it does not fit, we align it
-    // to the right edge of the widget
+    // to the right edge of the AmountEdit widget
     if (p.x() + w > QApplication::desktop()->width()) {
       p.setX(p.x() + q->width() - w);
     }
-    m_calculatorFrame->show();
 
-    QRect r = m_calculator->geometry();
-    r.moveTopLeft(p);
-    m_calculatorFrame->setGeometry(r);
+    m_calculatorFrame->move(p);
     m_calculator->setFocus();
   }
 
