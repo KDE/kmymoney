@@ -233,8 +233,7 @@ bool AccountsProxyModel::acceptSourceItem(const QModelIndex &source) const
         if (d->m_typeList.contains(account.accountType()))
           return true;
       } else if (data.canConvert<MyMoneyInstitution>() && sourceModel()->rowCount(source) == 0) {
-        // if this is an institution that has no children show it only if hide unused institutions (hide closed accounts for now) is not checked
-        return !hideClosedAccounts();
+        return true;
       }
       // let the visibility of all other institutions (the ones with children) be controlled by the visibility of their children
     }
