@@ -181,6 +181,8 @@ AccountsViewProxyModel *KMyMoneyAccountTreeView::init(View view)
 
   d->m_model->setSourceModel(sourceModel);
   d->m_model->setSourceColumns(sourceModel->getColumns());
+  d->m_model->setFilterCaseSensitivity(Qt::CaseInsensitive);
+  d->m_model->setSortLocaleAware(true);
   setModel(d->m_model);
 
   connect(this->header(), &QWidget::customContextMenuRequested, d->m_model, &AccountsViewProxyModel::slotColumnsMenu);
