@@ -84,7 +84,7 @@ bool InstitutionsProxyModel::lessThan(const QModelIndex &left, const QModelIndex
 bool InstitutionsProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
   const auto index = sourceModel()->index(source_row, AccountsModel::Column::AccountName, source_parent);
-  return true;
+  return acceptSourceItem(index) && filterAcceptsRowOrChildRows(source_row, source_parent);
 }
 
 /**
@@ -132,11 +132,6 @@ bool InstitutionsProxyModel::acceptSourceItem(const QModelIndex &source) const
       return true;
 
     } else if (isValidInstititonEntry) {
-      if (sourceModel()->rowCount(source) == 0) {
-        // if this is an institution that has no children show it only if hide unused institutions
-        // (hide closed accounts for now) is not checked
-        return !hideClosedAccounts();
-      }
       return true;
     }
 
