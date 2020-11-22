@@ -191,7 +191,7 @@ KPayeesView::KPayeesView(QWidget *parent) :
   connect(telephoneEdit, SIGNAL(textChanged(QString)), this, SLOT(slotPayeeDataChanged()));
   connect(emailEdit, SIGNAL(textChanged(QString)), this, SLOT(slotPayeeDataChanged()));
   connect(notesEdit, SIGNAL(textChanged()), this, SLOT(slotPayeeDataChanged()));
-  connect(referenceEdit, SIGNAL(textChanged()), this, SLOT(slotPayeeDataChanged()));
+  connect(referenceEdit, SIGNAL(textChanged(QString)), this, SLOT(slotPayeeDataChanged()));
   connect(matchKeyEditList, SIGNAL(changed()), this, SLOT(slotKeyListChanged()));
 
   connect(radioNoMatch, SIGNAL(toggled(bool)), this, SLOT(slotPayeeDataChanged()));
