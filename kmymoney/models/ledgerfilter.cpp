@@ -240,4 +240,5 @@ void LedgerFilter::clearFilter()
     d->lineEdit->clear();
   if (d->comboBox)
     d->comboBox->setCurrentIndex(0);
+  invalidateFilter();
 }

@@ -124,6 +124,7 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
   connect(d->ui->m_closeButton, &QToolButton::clicked, this, [&]() {
     d->stateFilter->clearFilter();
     d->ui->m_filterContainer->hide();
+    QMetaObject::invokeMethod(d->ui->m_ledgerView, &LedgerView::ensureCurrentItemIsVisible, Qt::QueuedConnection);
   });
   connect(pActions[eMenu::Action::ShowFilterWidget], &QAction::triggered, this, [&]() {
     if (isVisible()) {
