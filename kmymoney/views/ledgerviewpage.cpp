@@ -22,6 +22,7 @@
 // QT Includes
 
 #include <QAction>
+#include <QKeyEvent>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -110,6 +111,7 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
   d->stateFilter->setSourceModel(d->accountFilter);
   d->stateFilter->setComboBox(d->ui->m_filterBox);
   d->stateFilter->setLineEdit(d->ui->m_searchWidget);
+  d->ui->m_searchWidget->installEventFilter(this);
 
   d->specialDatesFilter = new SpecialDatesFilter(file->specialDatesModel(), this);
   d->specialDatesFilter->setSourceModel(d->stateFilter);
@@ -148,6 +150,20 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
 LedgerViewPage::~LedgerViewPage()
 {
   delete d;
+}
+
+bool LedgerViewPage::eventFilter(QObject* watched, QEvent* event)
+{
+  if (watched == d->ui->m_searchWidget) {
+    if (event->type() == QEvent::KeyPress) {
+      const auto kev = static_cast<QKeyEvent*>(event);
+      if (kev->modifiers() == Qt::NoModifier && kev->key() == Qt::Key_Escape) {
+        d->ui->m_closeButton->animateClick();
+        return true;
+      }
+    }
+  }
+  return QWidget::eventFilter(watched, event);
 }
 
 void LedgerViewPage::keepSelection()

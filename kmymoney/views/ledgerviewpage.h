@@ -56,6 +56,7 @@ public:
   const SelectedObjects& selections() const;
 
 protected:
+  bool eventFilter(QObject *watched, QEvent *event) override;
 
 public Q_SLOTS:
   void showTransactionForm(bool show);
