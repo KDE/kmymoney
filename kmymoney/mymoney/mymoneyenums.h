@@ -555,6 +555,7 @@ namespace eMyMoney {
       JournalTransactionIdRole,
       JournalSplitPaymentRole,
       JournalSplitDepositRole,
+      JournalSplitAccountIdRole,
 
       // Ledger
       LedgerDisplayOrderRole,
