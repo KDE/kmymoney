@@ -221,12 +221,15 @@ public:
       m_activityResourceInstance(nullptr),
 #endif
       m_applicationIsReady(true),
-      m_webConnect(new WebConnect(app)) {
+      m_webConnect(new WebConnect(app))
+  {
     // since the days of the week are from 1 to 7,
     // and a day of the week is used to index this bit array,
     // resize the array to 8 elements (element 0 is left unused)
     m_processingDays.resize(8);
 
+    m_actionCollectorTimer.setSingleShot(true);
+    m_actionCollectorTimer.setInterval(100);
   }
 
   void unlinkStatementXML();
@@ -295,6 +298,7 @@ public:
   bool                  m_autoSaveEnabled;
   QTimer*               m_autoSaveTimer;
   QTimer*               m_progressTimer;
+
   int                   m_autoSavePeriod;
   bool                  m_inAutoSaving;
 
@@ -320,6 +324,7 @@ public:
   WebConnect*           m_webConnect;
 
   SelectedObjects       m_selections;
+  QTimer                m_actionCollectorTimer;
 
   // methods
   void consistencyCheck(bool alwaysDisplayResults);
@@ -1181,6 +1186,12 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   // kickstart date change timer
   slotDateChanged();
   d->fileAction(eKMyMoney::FileAction::Closed);
+
+  connect(&d->m_actionCollectorTimer, &QTimer::timeout, this, [&]() {
+    // update the actions in the views
+    d->m_myMoneyView->updateActions(d->m_selections);
+    emit selectionChanged(d->m_selections);
+  });
 }
 
 KMyMoneyApp::~KMyMoneyApp()
@@ -1306,10 +1317,7 @@ void KMyMoneyApp::slotSelectionChanged(const SelectedObjects& selections)
 
   d->m_selections = selections;
 
-  // update the actions in the views
-  d->m_myMoneyView->updateActions(selections);
-
-  emit selectionChanged(selections);
+  d->m_actionCollectorTimer.start();
 }
 
 QHash<Action, QAction *> KMyMoneyApp::initActions()
