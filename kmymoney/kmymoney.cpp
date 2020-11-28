@@ -1604,7 +1604,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
   // *************
   {
     const QVector<QPair<Action, QKeySequence>> actionShortcuts {
-      {qMakePair(Action::EditFindTransaction,         Qt::CTRL + Qt::Key_F)},
+      {qMakePair(Action::EditFindTransaction,         Qt::CTRL + Qt::SHIFT + Qt::Key_F)},
       {qMakePair(Action::ViewTransactionDetail,       Qt::CTRL + Qt::Key_T)},
       {qMakePair(Action::ViewHideReconciled,          Qt::CTRL + Qt::Key_R)},
       {qMakePair(Action::ViewHideCategories,          Qt::CTRL + Qt::Key_U)},
@@ -1619,7 +1619,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {qMakePair(Action::WizardNewUser,               Qt::CTRL + Qt::Key_G)},
 #endif
       {qMakePair(Action::AssignTransactionsNumber,    Qt::CTRL + Qt::SHIFT + Qt::Key_N)},
-      {qMakePair(Action::ShowFilterWidget,            Qt::CTRL + Qt::SHIFT + Qt::Key_F)},
+      {qMakePair(Action::ShowFilterWidget,            Qt::CTRL + Qt::Key_F)},
     };
 
     for(const auto& it : actionShortcuts)
