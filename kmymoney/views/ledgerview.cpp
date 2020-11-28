@@ -647,9 +647,11 @@ void LedgerView::setSelectedTransactions(const QStringList& transactionIds)
     const auto indexes = journalModel->indexesByTransactionId(id);
     int row = -1;
     for (const auto baseIdx : indexes) {
-      row = journalModel->mapFromBaseSource(model(), baseIdx).row();
-      if (row != -1) {
-        break;
+      if (baseIdx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == d->accountId) {
+        row = journalModel->mapFromBaseSource(model(), baseIdx).row();
+        if (row != -1) {
+          break;
+        }
       }
     }
     if (row == -1) {
