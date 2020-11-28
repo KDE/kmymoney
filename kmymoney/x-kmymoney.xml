@@ -11,6 +11,7 @@
     <comment xml:lang="it">File di KMyMoney</comment>
     <comment xml:lang="nl">KMyMoney-bestand</comment>
     <comment xml:lang="nn">KMyMoney-fil</comment>
+    <comment xml:lang="pt_BR">Arquivo do KMyMoney</comment>
     <comment xml:lang="sv">KMyMoney-fil</comment>
     <comment xml:lang="uk">файл KMyMoney</comment>
     <glob pattern="*.kmy"/>
