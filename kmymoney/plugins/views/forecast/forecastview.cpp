@@ -47,8 +47,9 @@ ForecastView::~ForecastView()
   qDebug("Plugins: forecastview unloaded");
 }
 
-void ForecastView::plug()
+void ForecastView::plug(KXMLGUIFactory* guiFactory)
 {
+  Q_UNUSED(guiFactory)
   m_view = new KForecastView;
 
   // Tell the host application to load my GUI component

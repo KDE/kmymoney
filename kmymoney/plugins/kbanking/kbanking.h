@@ -82,7 +82,7 @@ public:
 
   void sendOnlineJob(QList<onlineJob>& jobs) override;
 
-  void plug() override;
+  void plug(KXMLGUIFactory* guiFactory) override;
   void unplug() override;
 
 private:

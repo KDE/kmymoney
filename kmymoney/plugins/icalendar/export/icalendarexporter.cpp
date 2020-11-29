@@ -136,8 +136,9 @@ void iCalendarExporter::slotExport()
     d->m_exporter.exportToFile(icalFilePath);
 }
 
-void iCalendarExporter::plug()
+void iCalendarExporter::plug(KXMLGUIFactory* guiFactory)
 {
+  Q_UNUSED(guiFactory)
   connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &iCalendarExporter::slotExport);
 }
 

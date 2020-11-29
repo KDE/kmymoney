@@ -190,8 +190,9 @@ KBanking::~KBanking()
   qDebug("Plugins: kbanking unloaded");
 }
 
-void KBanking::plug()
+void KBanking::plug(KXMLGUIFactory* guiFactory)
 {
+  Q_UNUSED(guiFactory)
   m_kbanking = new KBankingExt(this, "KMyMoney");
 
   d->passwordCacheTimer = new QTimer(this);

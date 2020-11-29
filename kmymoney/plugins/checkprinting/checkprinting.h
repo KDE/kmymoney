@@ -36,7 +36,7 @@ public:
   ~CheckPrinting() override;
 
 public Q_SLOTS:
-  void plug() override;
+  void plug(KXMLGUIFactory* guiFactory) override;
   void unplug() override;
   void configurationChanged() override;
 

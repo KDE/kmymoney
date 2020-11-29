@@ -121,7 +121,7 @@ public Q_SLOTS:
   /**
    * @brief Called during plug in process
    */
-  virtual void plug();
+  virtual void plug(KXMLGUIFactory* guiFactory);
 
   /**
    * @brief Called before unloading

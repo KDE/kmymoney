@@ -422,7 +422,7 @@ void KBudgetView::slotHideUnused(bool toggled)
     d->m_budgetProxyModel->setHideUnusedIncomeExpenseAccounts(d->ui->m_hideUnusedButton->isChecked());
 }
 
-void KBudgetView::createActions(KXMLGUIClient* guiClient)
+void KBudgetView::createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiClient)
 {
   typedef void(KBudgetView::*KBudgetViewFunc)();
   struct actionInfo {
@@ -451,7 +451,7 @@ void KBudgetView::createActions(KXMLGUIClient* guiClient)
   }
 
   // create context menu
-  d->m_contextMenu = qobject_cast<QMenu*>(guiClient->factory()->container(QStringLiteral("budget_context_menu"), guiClient));
+  d->m_contextMenu = qobject_cast<QMenu*>(guiFactory->container(QStringLiteral("budget_context_menu"), guiClient));
 
   // For some unknown reason, the context menu does not get created this way from the .rc file.
   // I must be doing something wrong / don't understand something. This kxmlgui thingy

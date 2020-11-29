@@ -48,7 +48,7 @@ BudgetView::~BudgetView()
   qDebug("Plugins: budgetview unloaded");
 }
 
-void BudgetView::plug()
+void BudgetView::plug(KXMLGUIFactory* guiFactory)
 {
   m_view = new KBudgetView;
 
@@ -68,7 +68,7 @@ void BudgetView::plug()
   #endif
 
   // create my actions and menus
-  m_view->createActions(this);
+  m_view->createActions(guiFactory, this);
 
   viewInterface()->addView(m_view, i18n("Budgets"), View::Budget, Icons::Icon::Budget);
 }

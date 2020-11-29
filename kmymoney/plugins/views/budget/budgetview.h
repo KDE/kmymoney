@@ -37,7 +37,7 @@ public:
   explicit BudgetView(QObject *parent, const QVariantList &args);
   ~BudgetView() override;
 
-  void plug() final override;
+  void plug(KXMLGUIFactory* guiFactory) final override;
   void unplug() final override;
 
 private:

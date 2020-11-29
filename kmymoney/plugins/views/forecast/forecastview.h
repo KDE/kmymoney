@@ -39,7 +39,7 @@ public:
   explicit ForecastView(QObject *parent, const QVariantList &args);
   ~ForecastView() override;
 
-  void plug() override;
+  void plug(KXMLGUIFactory* guiFactory) override;
   void unplug() override;
 
 private:

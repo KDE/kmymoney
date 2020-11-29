@@ -141,7 +141,7 @@ namespace KMyMoneyPlugin
           }
 
           ctnPlugins.standard.insert((*it).pluginId(), plugin);
-          plugin->plug();
+          plugin->plug(guiFactory);
           guiFactory->addClient(plugin);
 
           auto IOnline = qobject_cast<OnlinePlugin *>(plugin);

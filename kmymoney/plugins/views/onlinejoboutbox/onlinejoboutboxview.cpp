@@ -46,7 +46,7 @@ OnlineJobOutboxView::~OnlineJobOutboxView()
   qDebug("Plugins: onlinejoboutboxview unloaded");
 }
 
-void OnlineJobOutboxView::plug()
+void OnlineJobOutboxView::plug(KXMLGUIFactory* guiFactory)
 {
   m_view = new KOnlineJobOutboxView;
 
@@ -66,7 +66,7 @@ void OnlineJobOutboxView::plug()
   #endif
 
   // create my actions and menus
-  m_view->createActions(this);
+  m_view->createActions(guiFactory, this);
 
   viewInterface()->addView(m_view, i18nc("@item name of view", "Outbox"), View::OnlineJobOutbox, Icons::Icon::OnlineJobOutbox);
 }

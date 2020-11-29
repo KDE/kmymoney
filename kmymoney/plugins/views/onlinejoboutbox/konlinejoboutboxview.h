@@ -26,6 +26,7 @@
 // KDE Headers
 
 class KXMLGUIClient;
+class KXMLGUIFactory;
 
 // ----------------------------------------------------------------------------
 // Project Headers
@@ -60,7 +61,7 @@ public:
 
   void executeCustomAction(eView::Action action) override;
 
-  void createActions(KXMLGUIClient* guiClient);
+  void createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiClient);
   void removeActions();
 
   QStringList selectedOnlineJobs() const;

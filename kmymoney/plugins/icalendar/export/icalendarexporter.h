@@ -46,7 +46,7 @@ protected Q_SLOTS:
   void slotExport();
 
   // the plugin loader plugs in a plugin
-  void plug() override;
+  void plug(KXMLGUIFactory* guiFactory) override;
 
   // the plugin loader unplugs a plugin
   void unplug() override;

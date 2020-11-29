@@ -57,8 +57,9 @@ ReportsView::~ReportsView()
   qDebug("Plugins: reportsview unloaded");
 }
 
-void ReportsView::plug()
+void ReportsView::plug(KXMLGUIFactory* guiFactory)
 {
+  Q_UNUSED(guiFactory)
   m_view = new KReportsView;
   viewInterface()->addView(m_view, i18n("Reports"), View::Reports, Icons::Icon::Reports);
 }

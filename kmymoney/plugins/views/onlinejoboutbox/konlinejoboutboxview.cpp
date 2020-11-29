@@ -171,7 +171,7 @@ KOnlineJobOutboxView::~KOnlineJobOutboxView()
 {
 }
 
-void KOnlineJobOutboxView::createActions(KXMLGUIClient* guiClient)
+void KOnlineJobOutboxView::createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiClient)
 {
   typedef void(KOnlineJobOutboxView::*ViewFunc)();
   struct actionInfo {
@@ -200,7 +200,7 @@ void KOnlineJobOutboxView::createActions(KXMLGUIClient* guiClient)
   }
 
   // create context menu
-  d->m_contextMenu = qobject_cast<QMenu*>(guiClient->factory()->container(QStringLiteral("onlinejob_context_menu"), guiClient));
+  d->m_contextMenu = qobject_cast<QMenu*>(guiFactory->container(QStringLiteral("onlinejob_context_menu"), guiClient));
 
   // For some unknown reason, the context menu does not get created this way from the .rc file.
   // I must be doing something wrong / don't understand something. This kxmlgui thingy
