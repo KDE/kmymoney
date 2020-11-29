@@ -58,6 +58,9 @@ public Q_SLOTS:
   void slotSettingsChanged() override;
   void updateActions(const SelectedObjects& selections) override;
 
+protected:
+  bool eventFilter(QObject *watched, QEvent *event) override;
+
 private:
   Q_DECLARE_PRIVATE(KInstitutionsView)
 

@@ -23,6 +23,7 @@
 // QT Includes
 
 #include <QAction>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -74,9 +75,13 @@ public:
     Q_Q(KInstitutionsView);
     ui->setupUi(q);
 
-    // setup icons for collapse and expand button
+    // setup icons for buttons
     ui->m_collapseButton->setIcon(Icons::get(Icon::ListCollapse));
     ui->m_expandButton->setIcon(Icons::get(Icon::ListExpand));
+    // prepare the filter container
+    ui->m_closeButton->setIcon(Icons::get(Icon::DialogClose));
+    ui->m_filterContainer->hide();
+    ui->m_searchWidget->installEventFilter(q);
 
     ui->m_accountTree->setProxyModel(new InstitutionsProxyModel);
     m_proxyModel = ui->m_accountTree->proxyModel();
@@ -119,6 +124,21 @@ KInstitutionsView::KInstitutionsView(QWidget *parent) :
   Q_D(KInstitutionsView);
   d->init();
 
+  connect(d->ui->m_closeButton, &QToolButton::clicked, this, [&]() {
+    Q_D(KInstitutionsView);
+    d->ui->m_searchWidget->clear();
+    d->ui->m_filterContainer->hide();
+  });
+
+  connect(pActions[eMenu::Action::ShowFilterWidget], &QAction::triggered, this, [&]() {
+    Q_D(KInstitutionsView);
+    // only react if this is the current view
+    if (isVisible()) {
+      d->ui->m_filterContainer->show();
+      d->ui->m_searchWidget->setFocus();
+    }
+  });
+
   connect(pActions[eMenu::Action::NewInstitution],    &QAction::triggered, this, &KInstitutionsView::slotNewInstitution);
   connect(pActions[eMenu::Action::EditInstitution],   &QAction::triggered, this, &KInstitutionsView::slotEditInstitution);
   connect(pActions[eMenu::Action::DeleteInstitution], &QAction::triggered, this, &KInstitutionsView::slotDeleteInstitution);
@@ -130,6 +150,22 @@ KInstitutionsView::KInstitutionsView(QWidget *parent) :
 KInstitutionsView::~KInstitutionsView()
 {
 }
+
+bool KInstitutionsView::eventFilter(QObject* watched, QEvent* event)
+{
+  Q_D(KInstitutionsView);
+  if (watched == d->ui->m_searchWidget) {
+    if (event->type() == QEvent::KeyPress) {
+      const auto kev = static_cast<QKeyEvent*>(event);
+      if (kev->modifiers() == Qt::NoModifier && kev->key() == Qt::Key_Escape) {
+        d->ui->m_closeButton->animateClick();
+        return true;
+      }
+    }
+  }
+  return QWidget::eventFilter(watched, event);
+}
+
 
 void KInstitutionsView::slotSettingsChanged()
 {
@@ -151,10 +187,6 @@ void KInstitutionsView::executeCustomAction(eView::Action action)
         Q_D(KInstitutionsView);
         QMetaObject::invokeMethod(d->ui->m_accountTree, "setFocus", Qt::QueuedConnection);
       }
-      break;
-
-    case eView::Action::EditInstitution:
-      slotEditInstitution();
       break;
 
     default:
