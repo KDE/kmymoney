@@ -107,8 +107,8 @@ namespace KMyMoneyPlugin
           ctnPlugins.storage.remove(it.key());
           ctnPlugins.data.remove(it.key());
 
-          it.value()->unplug();
           guiFactory->removeClient(it.value());
+          it.value()->unplug();
           delete it.value();
           it = plugins.erase(it);
           continue;
@@ -141,8 +141,8 @@ namespace KMyMoneyPlugin
           }
 
           ctnPlugins.standard.insert((*it).pluginId(), plugin);
-          guiFactory->addClient(plugin);
           plugin->plug();
+          guiFactory->addClient(plugin);
 
           auto IOnline = qobject_cast<OnlinePlugin *>(plugin);
           if (IOnline)
