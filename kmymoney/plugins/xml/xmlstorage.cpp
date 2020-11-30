@@ -548,8 +548,12 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
     // so QFile::rename(writeFile, localFile) will fail since Windows does not allow moving files in use
     // as a workaround QFile::copy is used instead of QFile::rename below
     // writeFile (i.e. tmpFile) will be deleted by QTemporaryFile dtor when it falls out of scope
-    if (!QFile::remove(localFile) || !QFile::copy(writeFile, localFile))
-      throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while writing to '%1'").arg(localFile));
+    if (!QFile::remove(localFile)) {
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while removing '%1'").arg(localFile));
+    }
+    if (!QFile::copy(writeFile, localFile)) {
+      throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while copying '%1' to '%2'").arg(writeFile, localFile));
+    }
   }
   QFile::setPermissions(localFile, fmode);
   pWriter->setProgressCallback(0);
