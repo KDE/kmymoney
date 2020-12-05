@@ -638,13 +638,15 @@ public:
   void skipSchedule(MyMoneySchedule& schedule)
   {
     Q_Q(KScheduledView);
+    const auto parentWidget = QApplication::activeWindow();
+
     if (!schedule.id().isEmpty()) {
       try {
         schedule = MyMoneyFile::instance()->schedule(schedule.id());
         if (!schedule.isFinished()) {
           if (schedule.occurrence() != eMyMoney::Schedule::Occurrence::Once) {
             QDate next = schedule.nextDueDate();
-            if (!schedule.isFinished() && (KMessageBox::questionYesNo(q, i18n("<qt>Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</b>?</qt>", schedule.name(), QLocale().toString(next, QLocale::ShortFormat)))) == KMessageBox::Yes) {
+            if (!schedule.isFinished() && (KMessageBox::questionYesNo(parentWidget, i18n("<qt>Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</b>?</qt>", schedule.name(), QLocale().toString(next, QLocale::ShortFormat)))) == KMessageBox::Yes) {
               MyMoneyFileTransaction ft;
               schedule.setLastPayment(next);
               schedule.setNextDueDate(schedule.nextPayment(next));
@@ -654,7 +656,7 @@ public:
           }
         }
       } catch (const MyMoneyException &e) {
-        KMessageBox::detailedSorry(q, i18n("<qt>Unable to skip scheduled transaction <b>%1</b>.</qt>", schedule.name()), e.what());
+        KMessageBox::detailedSorry(parentWidget, i18n("<qt>Unable to skip scheduled transaction <b>%1</b>.</qt>", schedule.name()), e.what());
       }
     }
   }
