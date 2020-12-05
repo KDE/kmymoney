@@ -70,10 +70,10 @@
    </account>
    <account type="13" name="Spenden"/>
    <account type="13" name="Steuern">
-    <account type="13" name="Einkommenssteuer"/>
+    <account type="13" name="Einkommensteuer"/>
     <account type="13" name="Pflegeversicherung"/>
     <account type="13" name="Rentenversicherung"/>
-    <account type="13" name="Solidarzuschlag"/>
+    <account type="13" name="Solidaritätszuschlag"/>
     <account type="13" name="Sonstige"/>
     <account type="13" name="Sozialabgaben"/>
     <account type="13" name="Zinsabschlagsteuer"/>
