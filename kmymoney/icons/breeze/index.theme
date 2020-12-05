@@ -2,6 +2,7 @@
 Name=Breeze
 Name[ca]=Brisa
 Name[ca@valencia]=Brisa
+Name[cs]=Breeze
 Name[en_GB]=Breeze
 Name[es]=Brisa
 Name[fr]=Breeze
@@ -18,6 +19,7 @@ Name[x-test]=xxBreezexx
 Comment=Breeze by the KDE VDG
 Comment[ca]=Brisa, creat pel VDG del KDE
 Comment[ca@valencia]=Brisa, creat pel VDG del KDE
+Comment[cs]=Breeze od KDE VDG
 Comment[en_GB]=Breeze by the KDE VDG
 Comment[es]=Brisa por KDE VDG
 Comment[fr]=Breeze sombre par l'équipe de graphistes de KDE
