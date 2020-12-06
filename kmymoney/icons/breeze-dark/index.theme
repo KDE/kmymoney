@@ -2,6 +2,7 @@
 Name=Breeze Dark
 Name[ca]=Brisa fosca
 Name[ca@valencia]=Brisa fosca
+Name[cs]=Breeze Tmavé
 Name[en_GB]=Breeze Dark
 Name[es]=Brisa oscuro
 Name[fr]=Breeze sombre
@@ -18,6 +19,7 @@ Name[x-test]=xxBreeze Darkxx
 Comment=Breeze Dark by the KDE VDG
 Comment[ca]=Brisa fosca, creat pel VDG del KDE
 Comment[ca@valencia]=Brisa fosca, creat pel VDG del KDE
+Comment[cs]=Breeze Dark od KDE VDG
 Comment[en_GB]=Breeze Dark by the KDE VDG
 Comment[es]=Brisa oscuro por KDE VDG
 Comment[fr]=Breeze sombre par l'équipe de graphistes de KDE
