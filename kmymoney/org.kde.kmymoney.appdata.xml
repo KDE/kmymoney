@@ -49,6 +49,7 @@
   <summary xml:lang="ko">복식 부기를 지원하는 개인 재무 관리자</summary>
   <summary xml:lang="nl">Persoonlijk financieel beheer gebaseerd op dubbel boekhouden</summary>
   <summary xml:lang="nn">Rekneskapsprogram for privatøkonomien basert på dobbel bokføring</summary>
+  <summary xml:lang="pl">Program do zarządzania finansami osobistymi oparty na księgowości podwójnych zapisów</summary>
   <summary xml:lang="pt">Gestor de finanças pessoais com base na contabilidade por duplo registo</summary>
   <summary xml:lang="pt-BR">Gerenciador de finanças pessoais com base na contabilidade de entrada dupla</summary>
   <summary xml:lang="sv">Hemekonomihanterare baserad på dubbel bokföring</summary>
@@ -71,7 +72,7 @@
     <p xml:lang="ko">KMyMoney는 개인 재무 관리자입니다. 이 제품은 비전문 사용자가 사용하기 쉽도록 다양한 기능과 함께 제공됩니다.</p>
     <p xml:lang="nl">KMyMoney is een persoonlijke financieelbeheerder door KDE. Het komt met een grote set aan functies terwijl het gemakkelijk is te gebruiken voor de niet-technische gebruiker.</p>
     <p xml:lang="nn">KMyMoney er eit rekneskapsprogram for privatøkonomien din, frå KDE. Det er funksjonsrikt men samtidig lett å bruka for ikkje-tekniske brukarar.</p>
-    <p xml:lang="pl">KMyMoney jest programem do zarządzania osobistymi finansami stworzony w ramach KDE. Posada wiele funkcji, będąc przy tym łatwym w użyciu przez nietechicznych użytkowników.</p>
+    <p xml:lang="pl">KMyMoney jest programem do zarządzania osobistymi finansami stworzony w ramach KDE. Posada wiele funkcji, będąc przy tym łatwym w użyciu przez nietechnicznych użytkowników.</p>
     <p xml:lang="pt">O KMyMoney é um gestor de finanças pessoais do KDE. Vem com um grande conjunto de funcionalidades, embora seja simples de usar com um utilizador não técnico.</p>
     <p xml:lang="pt-BR">O KMyMoney é um gerenciador de finanças pessoal do KDE. Ele vem com um grande conjunto de recursos sendo fácil de usar para o usuário não técnico.</p>
     <p xml:lang="sk">KMyMomney je osobný správca financií od KDE. Prichádza s veľkou sadou funkcií, pričom je jednoduchý na používanie pre netechnického používateľa.</p>

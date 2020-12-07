@@ -11,9 +11,11 @@
     <comment xml:lang="it">File di KMyMoney</comment>
     <comment xml:lang="nl">KMyMoney-bestand</comment>
     <comment xml:lang="nn">KMyMoney-fil</comment>
+    <comment xml:lang="pl">Plik KMyMoney</comment>
     <comment xml:lang="pt_BR">Arquivo do KMyMoney</comment>
     <comment xml:lang="sv">KMyMoney-fil</comment>
     <comment xml:lang="uk">файл KMyMoney</comment>
+    <comment xml:lang="zh_CN">KMyMoney 文件</comment>
     <glob pattern="*.kmy"/>
     <glob pattern="*.kmt"/>
   </mime-type>
