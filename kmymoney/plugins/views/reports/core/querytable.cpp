@@ -280,8 +280,14 @@ void QueryTable::constructTotalRows()
   for (int i = 0; i < rows-1; ++i) {
     // it should be unlikely that total row is at the top of rows, so...
     if ((m_rows.at(i)[ctRank] == QLatin1String("5")) || (m_rows.at(i)[ctTopAccount].isEmpty())) {
-      m_rows.move(i, rows - 1);                       // ...move it at the end
-      --i; // check the same slot again
+      // check if there are other entries than totals so moving makes sense
+      for (int j = i+1; j <= rows-1; ++j) {
+        if ((m_rows.at(j)[ctRank] != QLatin1String("5")) && (!m_rows.at(j)[ctTopAccount].isEmpty())) {
+          m_rows.move(i, rows - 1);                   // ...move it at the end
+          --i;                                        // check the same slot again
+          break;
+        }
+      }
     } else if (m_rows.at(i)[ctRank] == QLatin1String("4")) {
       // search last entry of same topAccount
       auto last = i+1;
