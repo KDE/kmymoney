@@ -506,14 +506,14 @@ public:
               schedule.transaction().splits().isEmpty() ? MyMoneySplit() : schedule.transaction().splits().front(), true);
           // force actions to be available no matter what (will be updated according to the state during
           // slotTransactionsEnter or slotTransactionsCancel)
-          pActions[eMenu::Action::CancelTransaction]->setEnabled(true);
-          pActions[eMenu::Action::EnterTransaction]->setEnabled(true);
 
           KConfirmManualEnterDlg::Action action = KConfirmManualEnterDlg::ModifyOnce;
           if (!autoEnter || !schedule.isFixed()) {
             for (; dlg != 0;) {
               rc = eDialogs::ScheduleResultCode::Cancel;
               if (dlg->exec() == QDialog::Accepted && dlg != 0) {
+                pActions[eMenu::Action::CancelTransaction]->setEnabled(true);
+                pActions[eMenu::Action::EnterTransaction]->setEnabled(true);
                 rc = dlg->resultCode();
                 if (rc == eDialogs::ScheduleResultCode::Enter) {
                   transactionEditor->createTransaction(taccepted, torig, torig.splits().isEmpty() ? MyMoneySplit() : torig.splits().front(), true);
@@ -540,6 +540,8 @@ public:
                   slotTransactionsCancel(transactionEditor, schedule);
                 }
               } else {
+                pActions[eMenu::Action::CancelTransaction]->setEnabled(true);
+                pActions[eMenu::Action::EnterTransaction]->setEnabled(true);
                 if (autoEnter) {
                   if (KMessageBox::warningYesNo(q, i18n("Are you sure you wish to stop this scheduled transaction from being entered into the register?\n\nKMyMoney will prompt you again next time it starts unless you manually enter it later.")) == KMessageBox::No) {
                     // the user has chosen 'No' for the above question,
