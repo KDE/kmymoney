@@ -19,7 +19,12 @@
  */
 
 #include "weboobinterface.h"
+
+//Python uses slots var that is QT macro
+#pragma push_macro("slots")
+#undef slots
 #include <Python.h>
+#pragma pop_macro("slots")
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -59,7 +64,7 @@ WeboobInterface::WeboobInterface() :
   PyRun_SimpleString(cscript);
   ba = fileInfo.baseName().toLocal8Bit();
   const char *sBaseName = ba.data();
-  auto pyName = PyString_FromString(sBaseName);
+  auto pyName = PyUnicode_FromString(sBaseName);
   m_weboobInterface = PyImport_Import(pyName);  // this will be nullptr if no hack
   Py_DECREF(pyName);
 
@@ -90,7 +95,7 @@ PyObject* WeboobInterface::execute(QString method, QVariantList args)
       for (auto i = 0; i < args.size(); ++i) {
         ba = args.at(i).toString().toLocal8Bit();
         const char *carg = ba.data();
-        auto argValue = PyString_FromString(carg);
+        auto argValue = PyUnicode_FromString(carg);
         if (!argValue) {
           Py_DECREF(pArgs);
           fprintf(stderr, "Cannot convert argument: %s\n", carg);
@@ -113,7 +118,7 @@ PyObject* WeboobInterface::execute(QString method, QVariantList args)
 
         if (pyValue) {
           auto pyRepr = PyObject_Repr(pyValue);
-          QString sError = PyString_AsString(pyRepr);
+          QString sError = PyUnicode_AsUTF8(pyRepr);
           if (sError.contains(QLatin1String("BrowserIncorrectPassword()")))
             throw WeboobException(ExceptionCode::BrowserIncorrectPassword);
           Py_DECREF(pyRepr);
@@ -138,7 +143,7 @@ QList<WeboobInterface::Backend> WeboobInterface::getBackends()
     Py_ssize_t pos = 0;
     while (PyDict_Next(pValue, &pos, &key, &value)) {
       WeboobInterface::Backend backend;
-      backend.name = PyString_AsString(key);
+      backend.name = PyUnicode_AsUTF8(key);
       backend.module = extractDictStringValue(value, "module");
       backendsList.append(backend);
     }
@@ -162,7 +167,7 @@ QList<WeboobInterface::Account> WeboobInterface::getAccounts(QString backend)
     while (PyDict_Next(pValue, &pos, &key, &value)) {
 
       WeboobInterface::Account account;
-      account.id = PyString_AsString(key);
+      account.id = PyUnicode_AsUTF8(key);
       account.name = extractDictStringValue(value, "name");
       account.balance = MyMoneyMoney(extractDictLongValue(value, "balance"), 100);
       account.type = (WeboobInterface::Account::type_t)extractDictLongValue(value, "type");
@@ -188,7 +193,7 @@ WeboobInterface::Account WeboobInterface::getAccount(QString backend, QString ac
     acc.balance = MyMoneyMoney(extractDictLongValue(retVal, "balance"), 100);
     acc.type = (WeboobInterface::Account::type_t)extractDictLongValue(retVal, "type");
 
-    auto key = PyString_FromString("transactions");
+    auto key = PyUnicode_FromString("transactions");
     auto val = PyDict_GetItem(retVal, key);
     if (val) {
       auto sizeVal = PyList_Size(val);
@@ -223,10 +228,10 @@ WeboobInterface::Account WeboobInterface::getAccount(QString backend, QString ac
 QString WeboobInterface::extractDictStringValue(PyObject* pyContainer, const char* szKey)
 {
   QString sVal;
-  auto pyKey = PyString_FromString(szKey);
+  auto pyKey = PyUnicode_FromString(szKey);
   auto pyVal = PyDict_GetItem(pyContainer, pyKey);
   if (pyVal)
-    sVal = PyString_AsString(pyVal);
+    sVal = PyUnicode_AsUTF8(pyVal);
   Py_DECREF(pyKey);
   return sVal;
 }
@@ -234,10 +239,10 @@ QString WeboobInterface::extractDictStringValue(PyObject* pyContainer, const cha
 long WeboobInterface::extractDictLongValue(PyObject* pyContainer, const char* szKey)
 {
   long sVal = 0;
-  auto pyKey = PyString_FromString(szKey);
+  auto pyKey = PyUnicode_FromString(szKey);
   auto pyVal = PyDict_GetItem(pyContainer, pyKey);
   if (pyVal)
-    sVal = PyInt_AsLong(pyVal);
+    sVal = PyLong_AsLong(pyVal);
   Py_DECREF(pyKey);
   return sVal;
 }
