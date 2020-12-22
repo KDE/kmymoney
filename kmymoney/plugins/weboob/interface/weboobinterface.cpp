@@ -69,7 +69,7 @@ WeboobInterface::WeboobInterface() :
 
   if (nativeScript->open())
   {
-    auto moduleName  = QFileInfo(nativeScriptFileInfo).baseName().toLocal8Bit();
+    auto moduleName  = nativeScriptFileInfo.baseName().toLocal8Bit();
     auto moduleLocation = nativeScriptFileInfo.absolutePath().toLocal8Bit();
 
     qDebug() << "Attempt to load the" << moduleName << "python module from" << moduleLocation;
