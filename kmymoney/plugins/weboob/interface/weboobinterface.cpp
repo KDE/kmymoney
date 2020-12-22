@@ -18,6 +18,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QDebug>
+#include <QTemporaryFile>
+
 #include "weboobinterface.h"
 
 //Python uses slots var that is QT macro
@@ -46,28 +49,51 @@
 WeboobInterface::WeboobInterface() :
   m_weboobInterface(nullptr)
 {
-  const auto fileInfo = QFileInfo(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "kmymoney/weboob/kmymoneyweboob.py"));
-
-  // begin of a hack (read more on https://bugs.kde.org/show_bug.cgi?id=335965)
-  auto pythonLib = new QLibrary();
-  pythonLib->setLoadHints(QLibrary::ExportExternalSymbolsHint);
-  pythonLib->setFileName(LIB_PYTHON);
-  pythonLib->load();
-  // end of a hack
+  Q_INIT_RESOURCE(weboobinterface);
 
   Py_Initialize();
+  qDebug() << "Python interpreter found:" << Py_GetVersion();
 
-  auto script = QString::fromLatin1("import sys\n"
-                                    "sys.path.append('%1')\n").arg(fileInfo.absolutePath());
-  auto ba = script.toLocal8Bit();
-  const char *cscript = ba.data();
-  PyRun_SimpleString(cscript);
-  ba = fileInfo.baseName().toLocal8Bit();
-  const char *sBaseName = ba.data();
-  auto pyName = PyUnicode_FromString(sBaseName);
-  m_weboobInterface = PyImport_Import(pyName);  // this will be nullptr if no hack
-  Py_DECREF(pyName);
+  const auto scriptResourceName = ":/plugins/weboob/kmymoneyweboob.py";
+  auto nativeScript = std::unique_ptr<QTemporaryFile>(QTemporaryFile::createNativeFile(scriptResourceName));
 
+  if (!nativeScript) {
+    qDebug() << "Failed to save a native copy of the embedded" << scriptResourceName << "script";
+    return;
+  }
+
+  // createNativeFile() doesn't take templateName, so we need to rename the file post-creation to meet Python reqs
+  nativeScript->rename(nativeScript->fileName().remove(QChar('.')).append(".py"));
+  auto nativeScriptFileInfo = QFileInfo(nativeScript->fileName());
+  qDebug() << "Saved a copy of the embedded" << scriptResourceName << "script as" << nativeScriptFileInfo.filePath();
+
+  if (nativeScript->open())
+  {
+    auto moduleName  = QFileInfo(nativeScriptFileInfo).baseName().toLocal8Bit();
+    auto moduleLocation = nativeScriptFileInfo.absolutePath().toLocal8Bit();
+
+    qDebug() << "Attempt to load the" << moduleName << "python module from" << moduleLocation;
+
+    PyObject *sys = PyImport_ImportModule("sys");
+    PyObject *path = PyObject_GetAttrString(sys, "path");
+    PyObject *pyLocation = PyUnicode_FromString(moduleLocation);
+    PyList_Append(path, pyLocation);
+
+    m_weboobInterface = PyImport_ImportModule(moduleName);
+
+    if (m_weboobInterface == nullptr)
+    {
+      PyErr_Print();
+    }
+    else
+    {
+      qDebug() << moduleName << "Python module loaded successfully";
+    }
+
+    Py_DECREF(sys);
+    Py_DECREF(path);
+    Py_DECREF(pyLocation);
+  }
 }
 
 WeboobInterface::~WeboobInterface()
