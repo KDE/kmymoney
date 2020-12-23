@@ -13,6 +13,8 @@ set(weboob_PART_SRCS
   weboob.cpp
 )
 
+qt5_add_resources(weboob_PART_SRCS weboob.qrc)
+
 kcoreaddons_add_plugin(weboob
                        SOURCES ${weboob_PART_SRCS}
                        JSON "${CMAKE_CURRENT_BINARY_DIR}/weboob.json"
@@ -33,8 +35,3 @@ target_link_libraries(
   kmm_plugin
   Qt5::Concurrent
 )
-
-########### install files ###############
-
-install(FILES weboob.rc
-        DESTINATION "${KXMLGUI_INSTALL_DIR}/weboob")

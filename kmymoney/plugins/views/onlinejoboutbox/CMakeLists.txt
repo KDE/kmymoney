@@ -13,6 +13,8 @@ ki18n_wrap_ui(onlinejoboutboxview_SOURCES
   konlinetransferform.ui
   )
 
+qt5_add_resources(onlinejoboutboxview_SOURCES onlinejoboutboxview.qrc)
+
 kcoreaddons_add_plugin(onlinejoboutboxview
                        SOURCES ${onlinejoboutboxview_SOURCES}
                        JSON "${CMAKE_CURRENT_BINARY_DIR}/onlinejoboutboxview.json"
@@ -33,6 +35,3 @@ target_link_libraries(onlinejoboutboxview
     KF5::TextWidgets
     kmm_menus
 )
-
-install(FILES onlinejoboutboxview.rc
-        DESTINATION ${KXMLGUI_INSTALL_DIR}/onlinejoboutboxview)

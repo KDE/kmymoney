@@ -20,6 +20,8 @@ set(ofximporter_PART_UI
 
 ki18n_wrap_ui(ofximporter_PART_SRCS ${ofximporter_PART_UI})
 
+qt5_add_resources(ofximporter_PART_SRCS ofximporter.qrc)
+
 kcoreaddons_add_plugin(ofximporter
                        SOURCES ${ofximporter_PART_SRCS}
                        JSON "${CMAKE_CURRENT_BINARY_DIR}/ofximporter.json"
@@ -47,8 +49,3 @@ target_include_directories(ofximporter
   ${CMAKE_CURRENT_BINARY_DIR}/dialogs
   ${LIBOFX_INCLUDEDIR}
 )
-
-########### install files ###############
-
-install(FILES ofximporter.rc
-        DESTINATION "${KXMLGUI_INSTALL_DIR}/ofximporter")

@@ -7,6 +7,9 @@ set(forecastview_SOURCES
   )
 
 ki18n_wrap_ui(forecastview_SOURCES kforecastview.ui)
+
+qt5_add_resources(forecastview_SOURCES forecastview.qrc)
+
 kconfig_add_kcfg_files(forecastview_SOURCES forecastviewsettings.kcfgc)
 
 kcoreaddons_add_plugin(forecastview
@@ -60,6 +63,3 @@ target_link_libraries(kcm_forecastview
 
 install(FILES kcm_forecastview.desktop
         DESTINATION "${SERVICES_INSTALL_DIR}")
-
-install(FILES forecastview.rc
-        DESTINATION ${KXMLGUI_INSTALL_DIR}/forecastview)

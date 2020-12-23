@@ -23,6 +23,8 @@ set(csvimporter_PART_SRCS
 
 kconfig_add_kcfg_files(csvimporter_PART_SRCS pluginsettings.kcfgc)
 
+qt5_add_resources(csvimporter_PART_SRCS csvimporter.qrc)
+
 ki18n_wrap_ui(csvimporter_PART_SRCS
   csvwizard.ui
   transactiondlg.ui
@@ -56,9 +58,6 @@ target_link_libraries(csvimporter
 )
 
 ########### install files ###############
-
-install(FILES csvimporter.rc
-        DESTINATION "${KXMLGUI_INSTALL_DIR}/csvimporter")
 
 # the KCM module
 set(kcm_csvimporter_PART_SRCS

@@ -17,6 +17,8 @@ endif()
 
 ki18n_wrap_ui(sqlstorage_SOURCES kselectdatabasedlg.ui kgeneratesqldlg.ui)
 
+qt5_add_resources(sqlstorage_SOURCES sqlstorage.qrc)
+
 kcoreaddons_add_plugin(sqlstorage
                        SOURCES ${sqlstorage_SOURCES}
                        JSON "${CMAKE_CURRENT_BINARY_DIR}/sqlstorage.json"
@@ -36,9 +38,6 @@ target_link_libraries(sqlstorage
     kmm_utils_platformtools
     xmlstoragehelper
 )
-
-install(FILES sqlstorage.rc
-        DESTINATION "${KXMLGUI_INSTALL_DIR}/sqlstorage")
 
 if(BUILD_TESTING)
   add_subdirectory(tests)

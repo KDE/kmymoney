@@ -11,6 +11,8 @@ set(icalendarexporter_PART_SRCS
 
 kconfig_add_kcfg_files(icalendarexporter_PART_SRCS pluginsettings.kcfgc)
 
+qt5_add_resources(icalendarexporter_PART_SRCS icalendarexporter.qrc)
+
 kcoreaddons_add_plugin(icalendarexporter
                        SOURCES ${icalendarexporter_PART_SRCS}
                        JSON "${CMAKE_CURRENT_BINARY_DIR}/icalendarexporter.json"
@@ -28,9 +30,6 @@ target_link_libraries(icalendarexporter
   kmm_plugin
   ${LibIcal_LIBRARIES}
 )
-
-install(FILES icalendarexporter.rc
-        DESTINATION "${KXMLGUI_INSTALL_DIR}/icalendarexporter")
 
 # the KCM module
 
