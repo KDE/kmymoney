@@ -27,11 +27,6 @@
 #include <QTimer>
 #include <QUuid>
 
-#ifdef IS_APPIMAGE
-#include <QCoreApplication>
-#include <QStandardPaths>
-#endif
-
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -207,16 +202,7 @@ void KBanking::plug(KXMLGUIFactory* guiFactory)
         if (m_kbanking->init() == 0) {
             // Tell the host application to load my GUI component
             const auto rcFileName = QLatin1String("kbanking.rc");
-
-#ifdef IS_APPIMAGE
-            const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), objectName(), rcFileName);
-            setXMLFile(rcFilePath);
-
-            const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + objectName() + QLatin1Char('/') + rcFileName;
-            setLocalXMLFile(localRcFilePath);
-#else
             setXMLFile(rcFileName);
-#endif
 
             // get certificate handling and dialog settings management
             AB_Gui_Extend(gui->getCInterface(), m_kbanking->getCInterface());

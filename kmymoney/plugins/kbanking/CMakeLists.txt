@@ -22,6 +22,20 @@ set(kbanking_PART_SRCS
 
 kconfig_add_kcfg_files(kbanking_PART_SRCS kbankingsettings.kcfgc)
 
+# Add new menu entries if debugging is enabled
+set(KMM_BANKING_DEBUG_OPTIONS)
+# preprocessor definitions in case this is a debug build
+string(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_TOLOWER)
+if("${CMAKE_BUILD_TYPE_TOLOWER}" MATCHES "debug")
+    file(READ kbanking_debug_rc KMM_BANKING_DEBUG_OPTIONS)
+endif()
+configure_file(kbanking.rc.in "${CMAKE_CURRENT_BINARY_DIR}/kbanking.rc" @ONLY)
+
+# need to load kbanking.qrc from ${CMAKE_CURRENT_BINARY_DIR} because the resource files
+# must be located in the same directory as the .qrc file, or one of its subdirectories.
+configure_file(kbanking.qrc "${CMAKE_CURRENT_BINARY_DIR}/kbanking.qrc" COPYONLY)
+qt5_add_resources(kbanking_PART_SRCS "${CMAKE_CURRENT_BINARY_DIR}/kbanking.qrc")
+
 kcoreaddons_add_plugin(kbanking
                        SOURCES ${kbanking_PART_SRCS}
                        JSON "${CMAKE_CURRENT_BINARY_DIR}/kbanking.json"
@@ -50,19 +64,7 @@ target_link_libraries(kbanking
                       aqbanking::aqbanking
 )
 
-# Add new menu entries if debugging is enabled
-set(KMM_BANKING_DEBUG_OPTIONS)
-# preprocessor definitions in case this is a debug build
-string(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_TOLOWER)
-if("${CMAKE_BUILD_TYPE_TOLOWER}" MATCHES "debug")
-  file(READ kbanking_debug_rc KMM_BANKING_DEBUG_OPTIONS)
-endif()
-configure_file(kbanking.rc.in "${CMAKE_CURRENT_BINARY_DIR}/kbanking.rc" @ONLY)
-
 ########### install files ###############
-
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kbanking.rc
-        DESTINATION ${KXMLGUI_INSTALL_DIR}/kbanking)
 
 install(FILES kbanking.kcfg
         DESTINATION ${KCFG_INSTALL_DIR})

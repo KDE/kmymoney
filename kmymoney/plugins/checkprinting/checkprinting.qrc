@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/kxmlgui5/checkprinting">
+        <file>checkprinting.rc</file>
+    </qresource>
+</RCC>

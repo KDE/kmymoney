@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/kxmlgui5/ofximporter">
+        <file>ofximporter.rc</file>
+    </qresource>
+</RCC>

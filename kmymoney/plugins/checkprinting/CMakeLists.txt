@@ -9,6 +9,8 @@ set(checkprinting_PART_SRCS
 
 kconfig_add_kcfg_files(checkprinting_PART_SRCS pluginsettings.kcfgc)
 
+qt5_add_resources(checkprinting_PART_SRCS checkprinting.qrc)
+
 kcoreaddons_add_plugin(checkprinting
                        SOURCES ${checkprinting_PART_SRCS}
                        JSON "${CMAKE_CURRENT_BINARY_DIR}/checkprinting.json"
@@ -33,9 +35,6 @@ if(ENABLE_WEBENGINE)
 else(ENABLE_WEBENGINE)
  target_link_libraries(checkprinting KF5::WebKit)
 endif(ENABLE_WEBENGINE)
-
-install(FILES checkprinting.rc
-        DESTINATION "${KXMLGUI_INSTALL_DIR}/checkprinting")
 
 install(FILES check_template.html
         DESTINATION "${DATA_INSTALL_DIR}/checkprinting")

@@ -16,6 +16,8 @@ set(qifexporter_PART_UI
 
 ki18n_wrap_ui(qifexporter_PART_SRCS ${qifexporter_PART_UI})
 
+qt5_add_resources(qifexporter_PART_SRCS qifexporter.qrc)
+
 kcoreaddons_add_plugin(qifexporter
                        SOURCES ${qifexporter_PART_SRCS}
                        JSON "${CMAKE_CURRENT_BINARY_DIR}/qifexporter.json"
@@ -32,8 +34,3 @@ target_link_libraries(qifexporter
   kmm_base_widgets
   kmm_widgets
 )
-
-########### install files ###############
-
-install(FILES qifexporter.rc
-        DESTINATION "${KXMLGUI_INSTALL_DIR}/qifexporter")

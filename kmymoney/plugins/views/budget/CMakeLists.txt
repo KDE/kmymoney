@@ -13,6 +13,8 @@ ki18n_wrap_ui(budgetview_SOURCES
               knewbudgetdlg.ui
               )
 
+qt5_add_resources(budgetview_SOURCES budgetview.qrc)
+
 kcoreaddons_add_plugin(budgetview
                        SOURCES ${budgetview_SOURCES}
                        JSON "${CMAKE_CURRENT_BINARY_DIR}/budgetview.json"
@@ -29,7 +31,3 @@ target_link_libraries(budgetview
     kmm_widgets
     kmymoney_common
 )
-
-install(FILES budgetview.rc
-        DESTINATION ${KXMLGUI_INSTALL_DIR}/budgetview)
-

@@ -16,6 +16,8 @@ set(qifimporter_PART_UI
 
 ki18n_wrap_ui(qifimporter_PART_SRCS ${qifimporter_PART_UI})
 
+qt5_add_resources(qifimporter_PART_SRCS qifimporter.qrc)
+
 kcoreaddons_add_plugin(qifimporter
                        SOURCES ${qifimporter_PART_SRCS}
                        JSON "${CMAKE_CURRENT_BINARY_DIR}/qifimporter.json"
@@ -35,8 +37,3 @@ target_link_libraries(qifimporter
     Alkimia::alkimia
     kmm_settings
 )
-
-########### install files ###############
-
-install(FILES qifimporter.rc
-        DESTINATION "${KXMLGUI_INSTALL_DIR}/qifimporter")

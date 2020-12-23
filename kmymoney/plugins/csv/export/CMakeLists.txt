@@ -9,6 +9,8 @@ set(csvexporter_PART_SRCS
   csvexportdlg.cpp
 )
 
+qt5_add_resources(csvexporter_PART_SRCS csvexporter.qrc)
+
 ki18n_wrap_ui(csvexporter_PART_SRCS
   csvexportdlg.ui
 )
@@ -32,11 +34,3 @@ target_link_libraries(csvexporter
     KF5::KIOWidgets
     kmm_plugin
 )
-
-########### install files ###############
-
-install(FILES csvexporter.rc
-        DESTINATION "${KXMLGUI_INSTALL_DIR}/csvexporter")
-
-#INSTALL(FILES csvexporterrc
-#  DESTINATION ${CONFIG_INSTALL_DIR})
