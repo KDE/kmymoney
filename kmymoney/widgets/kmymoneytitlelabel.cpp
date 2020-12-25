@@ -69,16 +69,14 @@ void KMyMoneyTitleLabel::setLeftImageFile(const QString& _file)
 {
     Q_D(KMyMoneyTitleLabel);
     d->m_leftImageFile = _file;
-    QString lfullpath = QStandardPaths::locate(QStandardPaths::DataLocation, d->m_leftImageFile);
-    d->m_leftImage.load(lfullpath);
+    d->m_leftImage.load(_file);
 }
 
 void KMyMoneyTitleLabel::setRightImageFile(const QString& _file)
 {
     Q_D(KMyMoneyTitleLabel);
     d->m_rightImageFile = _file;
-    QString rfullpath = QStandardPaths::locate(QStandardPaths::DataLocation, d->m_rightImageFile);
-    d->m_rightImage.load(rfullpath);
+    d->m_rightImage.load(_file);
     if (d->m_rightImage.height() < 30)
         setMinimumHeight(30);
     else {
