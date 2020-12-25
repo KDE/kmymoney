@@ -135,7 +135,7 @@ KMyMoneyView::KMyMoneyView()
             d->m_header = new KMyMoneyTitleLabel(this);
             d->m_header->setObjectName("titleLabel");
             d->m_header->setMinimumSize(QSize(100, 30));
-            d->m_header->setRightImageFile("pics/titlelabel_background.png");
+            d->m_header->setRightImageFile(":/pics/titlelabel_background.png");
             d->m_header->setVisible(KMyMoneySettings::showTitleBar());
             gridLayout->addWidget(d->m_header, 1, 1);
         }

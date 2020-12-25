@@ -3,4 +3,7 @@
     <qresource prefix="/kxmlgui5/kmymoney">
         <file>kmymoneyui.rc</file>
     </qresource>
+    <qresource prefix="/">
+        <file>pics/titlelabel_background.png</file>
+    </qresource>
 </RCC>
