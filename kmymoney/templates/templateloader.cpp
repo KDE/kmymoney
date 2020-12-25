@@ -19,9 +19,6 @@
 #include <QUrl>
 #include <QDebug>
 #include <QTemporaryFile>
-#ifdef IS_APPIMAGE
-#include <QCoreApplication>
-#endif
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -234,21 +231,8 @@ void TemplateLoader::load(TemplatesModel* model)
     if (d->model == nullptr) {
         return;
     }
-
-    // get list of template subdirs and scan them for the list of subdirs
-#ifdef IS_APPIMAGE
-    // according to https://docs.appimage.org/packaging-guide/ingredients.html#open-source-applications
-    // QStandardPaths::AppDataLocation is unreliable on AppImages, so apply workaround here in case we fail to find templates
-    // watch out for QStringBuilder here; for yet unknown reason it causes segmentation fault on startup
-    const auto templateDirList = QString("%1%2").arg(QCoreApplication::applicationDirPath(), QLatin1String("/../share/kmymoney/templates/"));
-    if (QFile::exists(templateDirList)) {
-        d->dirlist.append(templateDirList);
-    } else {
-        qWarning() << "Template directory was not found in the following location:" << templateDirList;
-    }
-#else
     d->dirlist = QStandardPaths::locateAll(QStandardPaths::DataLocation, "templates", QStandardPaths::LocateDirectory);
-#endif
+    d->dirlist.append(":/templates");
 
     QStringList::iterator it;
     for (it = d->dirlist.begin(); it != d->dirlist.end(); ++it) {
