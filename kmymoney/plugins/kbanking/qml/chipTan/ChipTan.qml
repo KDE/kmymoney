@@ -78,7 +78,7 @@ Rectangle {
             }
 
             Image {
-                source: "/usr/share/icons/default.kde4/22x22/actions/zoom-in.png"
+                source: "qrc:/icons/breeze-dark/actions/22/zoom-in.svg"
                 MouseArea {
                     anchors.fill: parent
                     onClicked: chipTanFlickerField.userWidth = chipTanFlickerField.width+10
@@ -86,7 +86,7 @@ Rectangle {
             }
 
             Image {
-                source: "/usr/share/icons/default.kde4/22x22/actions/zoom-out.png"
+                source: "qrc:/icons/breeze-dark/actions/22/zoom-out.svg"
                 MouseArea {
                     anchors.fill: parent
                     onClicked: chipTanFlickerField.userWidth = chipTanFlickerField.width-10
@@ -94,7 +94,7 @@ Rectangle {
             }
 
             Image {
-                source: "/usr/share/icons/default.kde4/22x22/actions/media-playback-start.png"
+                source: "qrc:/icons/breeze-dark/actions/22/media-playback-start.png"
                 MouseArea {
                     anchors.fill: parent
                     onClicked: chipTanFlickerField.userTaktLength =  chipTanFlickerField.taktLength + 20
@@ -102,7 +102,7 @@ Rectangle {
             }
 
             Image {
-                source: "/usr/share/icons/default.kde4/22x22/actions/media-seek-forward.png"
+                source: "qrc:/icons/breeze-dark/actions/22/media-seek-forward.svg"
                 MouseArea {
                     anchors.fill: parent
                     onClicked: chipTanFlickerField.userTaktLength =  chipTanFlickerField.taktLength - 20

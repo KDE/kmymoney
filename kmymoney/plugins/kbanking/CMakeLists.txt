@@ -9,7 +9,6 @@ endif()
 
 add_subdirectory( dialogs )
 add_subdirectory( widgets )
-add_subdirectory( qml )
 add_subdirectory( tasksettings )
 
 set(kbanking_PART_SRCS
@@ -35,6 +34,8 @@ configure_file(kbanking.rc.in "${CMAKE_CURRENT_BINARY_DIR}/kbanking.rc" @ONLY)
 # must be located in the same directory as the .qrc file, or one of its subdirectories.
 configure_file(kbanking.qrc "${CMAKE_CURRENT_BINARY_DIR}/kbanking.qrc" COPYONLY)
 qt5_add_resources(kbanking_PART_SRCS "${CMAKE_CURRENT_BINARY_DIR}/kbanking.qrc")
+
+qt5_add_resources(kbanking_PART_SRCS "qml/chipTan/chipTan.qrc")
 
 kcoreaddons_add_plugin(kbanking
                        SOURCES ${kbanking_PART_SRCS}

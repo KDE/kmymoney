@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/plugins/kbanking/chipTan">
+        <file>ChipTan.qml</file>
+        <file>chipTan.js</file>
+        <file>ChipTanFlickerField.qml</file>
+        <file>positionmarker.svg</file>
+    </qresource>
+</RCC>

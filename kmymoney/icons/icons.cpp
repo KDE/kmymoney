@@ -102,6 +102,8 @@ const QHash<Icon, QString> iconMappings{
     {Icon::Reverse, QStringLiteral("reverse")},
     {Icon::SeekForward, QStringLiteral("media-seek-forward")},
     {Icon::SkipForward, QStringLiteral("media-skip-forward")},
+    {Icon::SeekBackward, QStringLiteral("media-seek-backward")},
+    {Icon::SkipBackward, QStringLiteral("media-skip-backward")},
     {Icon::SortAscending, QStringLiteral("view-sort-ascending-symbolic")},
     {Icon::SortDescending, QStringLiteral("view-sort-descending-symbolic")},
     {Icon::Split, QStringLiteral("split")},

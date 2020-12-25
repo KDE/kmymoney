@@ -6,7 +6,7 @@
 */
 
 import QtQuick 2.3
-import "chipTan.js" as Logic
+import "qrc:/plugins/kbanking/chipTan/chipTan.js" as Logic
 
 Rectangle {
     id: chipTanFlickerField
@@ -63,7 +63,7 @@ Rectangle {
 
                 Image {
                     visible: (index == 0 || index == 4)
-                    source: "positionmarker.svg"
+                    source: "qrc:/plugins/kbanking/chipTan/positionmarker.svg"
                     smooth: true
                     width: height
                     anchors {
