@@ -384,7 +384,7 @@ void QueryTableTest::testCashFlowAnalysis()
 void QueryTableTest::testAccountQuery()
 {
     try {
-        QString htmlcontext = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"html/kmymoney.css\"></head><body>\n%1\n</body></html>\n");
+        QString htmlcontext = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"qrc:/html/kmymoney.css\"></head><body>\n%1\n</body></html>\n");
 
         //
         // No transactions, opening balances only
