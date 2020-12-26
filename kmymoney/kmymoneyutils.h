@@ -230,42 +230,6 @@ public:
     static QString variableCSS();
 
     /**
-      * This method searches a KDE specific resource and applies country and
-      * language settings during the search. Therefore, the parameter @p filename must contain
-      * the characters '%1' which gets replaced with the language/country values.
-      *
-      * The search is performed in the following order (stopped immediately if a file was found):
-      * - @c \%1 is replaced with <tt>_\<country\>.\<language\></tt>
-      * - @c \%1 is replaced with <tt>_\<language\></tt>
-      * - @c \%1 is replaced with <tt>_\<country\></tt>
-      * - @c \%1 is replaced with the empty string
-      *
-      * @c \<country\> and @c \<language\> denote the respective KDE settings.
-      *
-      * Example: The KDE settings for country is Spain (es) and language is set
-      * to Galician (gl). The code for looking up a file looks like this:
-      *
-      * @code
-      *
-      *  :
-      *  QString fname = KMyMoneyUtils::findResource("appdata", "html/home%1.html")
-      *  :
-      *
-      * @endcode
-      *
-      * The method calls KStandardDirs::findResource() with the following values for the
-      * parameter @p filename:
-      *
-      * - <tt>html/home_es.gl.html</tt>
-      * - <tt>html/home_gl.html</tt>
-      * - <tt>html/home_es.html</tt>
-      * - <tt>html/home.html</tt>
-      *
-      * @note See KStandardDirs::findResource() for details on the parameters
-      */
-    static QString findResource(QStandardPaths::StandardLocation type, const QString& filename);
-
-    /**
       * This method returns the split referencing a stock account if
       * one exists in the transaction passed as @p t. If none is present
       * in @p t, an empty MyMoneySplit() object will be returned.
