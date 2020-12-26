@@ -209,53 +209,6 @@ QString KMyMoneyUtils::variableCSS()
     return css;
 }
 
-QString KMyMoneyUtils::findResource(QStandardPaths::StandardLocation type, const QString& filename)
-{
-    QLocale locale;
-    QString country;
-    QString localeName = locale.bcp47Name();
-    QString language = localeName;
-
-    // extract language and country from the bcp47name
-    QRegularExpression regExp(QLatin1String("(\\w+)_(\\w+)"));
-    QRegularExpressionMatch match = regExp.match(localeName);
-    if (match.hasMatch()) {
-        language = match.captured(1);
-        country = match.captured(2);
-    }
-
-    QString rc;
-
-    // check that the placeholder is present and set things up
-    if (filename.indexOf("%1") != -1) {
-        /// @fixme somehow I have the impression, that language and country
-        ///    mappings to the filename are not correct. This certainly must
-        ///    be overhauled at some point in time (ipwizard, 2017-10-22)
-        QString mask = filename.arg("_%1.%2");
-        rc = QStandardPaths::locate(type, mask.arg(country, language));
-
-        // search the given resource
-        if (rc.isEmpty()) {
-            mask = filename.arg("_%1");
-            rc = QStandardPaths::locate(type, mask.arg(language));
-        }
-        if (rc.isEmpty()) {
-            // qDebug(QString("html/home_%1.html not found").arg(country).toLatin1());
-            rc = QStandardPaths::locate(type, mask.arg(country));
-        }
-        if (rc.isEmpty()) {
-            rc = QStandardPaths::locate(type, filename.arg(""));
-        }
-    } else {
-        rc = QStandardPaths::locate(type, filename);
-    }
-
-    if (rc.isEmpty()) {
-        qWarning("No resource found for (%s,%s)", qPrintable(QStandardPaths::displayName(type)), qPrintable(filename));
-    }
-    return rc;
-}
-
 const MyMoneySplit KMyMoneyUtils::stockSplit(const MyMoneyTransaction& t)
 {
     MyMoneySplit investmentAccountSplit;

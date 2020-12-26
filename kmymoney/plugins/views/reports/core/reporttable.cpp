@@ -40,7 +40,7 @@ QString reports::ReportTable::cssFileNameGet()
 
     if (!MyMoneyFile::instance()->value(m_reportStyleSheet).isEmpty()) {
         // try to find the stylesheet specific for this report
-        cssfilename = KMyMoneyUtils::findResource(QStandardPaths::AppDataLocation, m_resourceHtml + '/' + MyMoneyFile::instance()->value(m_reportStyleSheet));
+        cssfilename = QStandardPaths::locate(QStandardPaths::AppConfigLocation, m_resourceHtml + '/' + MyMoneyFile::instance()->value(m_reportStyleSheet));
     }
 
     if (cssfilename.isEmpty() || !QFile::exists(cssfilename)) {
@@ -50,7 +50,7 @@ QString reports::ReportTable::cssFileNameGet()
 
     if (cssfilename.isEmpty() || !QFile::exists(cssfilename)) {
         // if there still is nothing, try to use the themed default
-        cssfilename = KMyMoneyUtils::findResource(QStandardPaths::AppConfigLocation, m_resourceHtml + '/' + m_cssFileDefault);
+        cssfilename = QStandardPaths::locate(QStandardPaths::AppConfigLocation, m_resourceHtml + '/' + m_cssFileDefault);
     }
 
     if (cssfilename.isEmpty() || !QFile::exists(cssfilename)) {
