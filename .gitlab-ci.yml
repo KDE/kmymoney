@@ -16,9 +16,9 @@ build_local_ubuntu_2004:
     - apt update
     - apt install -y apt-utils
     - apt build-dep -y kmymoney
-    - apt install -y qt5-default libsqlcipher-dev libqt5sql5-sqlite qtbase5-private-dev
+    - apt install -y qt5-default libsqlcipher-dev libqt5sql5-sqlite qtbase5-private-dev ninja-build
 
   script:
     - echo "Building."
-    - cmake -DCMAKE_BUILD_TYPE=Debug
-    - make
+    - cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug
+    - ninja
