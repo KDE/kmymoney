@@ -14,9 +14,9 @@ build_local_ubuntu_2004:
     - echo "Installing dependencies."
     - sed -i -- 's/#[ ]*deb-src/deb-src/g' /etc/apt/sources.list
     - apt update
-    - apt install -y apt-utils
-    - apt build-dep -y kmymoney
-    - apt install -y qt5-default libsqlcipher-dev libqt5sql5-sqlite qtbase5-private-dev ninja-build
+    - apt install -y apt-utils eatmydata
+    - eatmydata apt build-dep -y kmymoney
+    - eatmydata apt install -y qt5-default libsqlcipher-dev libqt5sql5-sqlite qtbase5-private-dev ninja-build
 
   script:
     - echo "Building."
