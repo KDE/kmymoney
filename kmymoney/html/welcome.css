@@ -96,14 +96,14 @@ body {
 
 #topleft {
   background: 
-url(./images/topleft.png) no-repeat left top;
+url(qrc:/html/images/topleft.png) no-repeat left top;
   width:87%;
   margin-left:5%;
   margin-right:5%;
 
   }
 #topright {
-  background:url(./images/topright.png) 
+  background:url(qrc:/html/images/topright.png) 
   top right no-repeat;
   position: relative;
   right:-22px;
@@ -111,7 +111,7 @@ url(./images/topleft.png) no-repeat left top;
   }
 
 #rightborder {
-  background: url(./images/rightborder.png) 
+  background: url(qrc:/html/images/rightborder.png) 
   top right repeat-y;
   position: relative;
   right:-22px;
@@ -121,7 +121,7 @@ url(./images/topleft.png) no-repeat left top;
 
 #bottomleft {
   background: 
-	url(./images/bottomleft.png) 
+	url(qrc:/html/images/bottomleft.png) 
   bottom left no-repeat;
     position: relative;
 	top: 91px;
@@ -130,7 +130,7 @@ padding-top: 0px;
   }
 
 #bottomright {
-	background: url(./images/bottomright.png) 
+	background: url(qrc:/html/images/bottomright.png) 
   bottom right no-repeat;
     position: relative;
     right:-22px;
