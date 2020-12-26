@@ -2829,56 +2829,24 @@ void KMyMoneyApp::Private::saveConsistencyCheckResults()
 void KMyMoneyApp::Private::setThemedCSS()
 {
     const QStringList CSSnames {QStringLiteral("kmymoney.css"), QStringLiteral("welcome.css")};
-    const QString rcDir("/html/");
-    QStringList defaultCSSDirs;
-#ifndef IS_APPIMAGE
-    defaultCSSDirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, rcDir, QStandardPaths::LocateDirectory);
-#else
-    // according to https://docs.appimage.org/packaging-guide/ingredients.html#open-source-applications
-    // QStandardPaths::AppDataLocation is unreliable on AppImages, so apply workaround here in case we fail to find icons
-    // watch out for QStringBuilder here; for yet unknown reason it causes segmentation fault on startup
-    const auto appImageAppDataLocation = QString("%1%2%3").arg(QCoreApplication::applicationDirPath(), QString("/../share/kmymoney"), rcDir);
-    if (QFile::exists(appImageAppDataLocation + CSSnames.first())) {
-        defaultCSSDirs.append(appImageAppDataLocation);
-    } else {
-        qWarning("CSS file was not found in the following location:");
-        qWarning() << appImageAppDataLocation;
-    }
-#endif
-
-    // scan the list of directories to find the ones that really
-    // contains all files we look for
-    QString defaultCSSDir;
-    foreach (const auto dir, defaultCSSDirs) {
-        defaultCSSDir = dir;
-        foreach (const auto CSSname, CSSnames) {
-            QFileInfo fileInfo(defaultCSSDir + CSSname);
-            if (!fileInfo.exists()) {
-                defaultCSSDir.clear();
-                break;
-            }
-        }
-        if (!defaultCSSDir.isEmpty()) {
-            break;
-        }
-    }
-
+    const QString cssDir("/html/");
+    const QString embeddedCSSPath = ":" + cssDir;
     // make sure we have the local directory where the themed version is stored
-    const QString themedCSSDir  = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation).first() + rcDir;
-    QDir().mkpath(themedCSSDir);
+    const QString themedCSSPath  = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation).first() + cssDir;
+    QDir().mkpath(themedCSSPath);
 
     foreach (const auto CSSname, CSSnames) {
-        const QString defaultCSSFilename = defaultCSSDir + CSSname;
+        const QString defaultCSSFilename = embeddedCSSPath + CSSname;
         QFileInfo fileInfo(defaultCSSFilename);
         if (fileInfo.exists()) {
-            const QString themedCSSFilename = themedCSSDir + CSSname;
+            const QString themedCSSFilename = themedCSSPath + CSSname;
             QFile::remove(themedCSSFilename);
             if (QFile::copy(defaultCSSFilename, themedCSSFilename)) {
+                QFile::setPermissions(themedCSSFilename, QFileDevice::ReadOwner|QFileDevice::WriteOwner);
                 QFile cssFile (themedCSSFilename);
                 if (cssFile.open(QIODevice::ReadWrite)) {
                     QTextStream cssStream(&cssFile);
                     auto cssText = cssStream.readAll();
-                    cssText.replace(QLatin1String("./"), defaultCSSDir, Qt::CaseSensitive);
                     cssText.replace(QLatin1String("WindowText"),    KMyMoneySettings::schemeColor(SchemeColor::WindowText).name(),        Qt::CaseSensitive);
                     cssText.replace(QLatin1String("Window"),        KMyMoneySettings::schemeColor(SchemeColor::WindowBackground).name(),  Qt::CaseSensitive);
                     cssText.replace(QLatin1String("HighlightText"), KMyMoneySettings::schemeColor(SchemeColor::ListHighlightText).name(), Qt::CaseSensitive);

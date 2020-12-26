@@ -18,13 +18,13 @@
 }
 
 body#summaryview { /* set body attributes that affect only the summary view (and not reports) */
-    background: url(./images/bg-texture.png) repeat fixed;
+    background: url(qrc:/html/images/bg-texture.png) repeat fixed;
     background-color:Window;
 }
 
 
 #vieweffect { /* creates a dropshadow at the top of the view creating a resessed effect */
-    background: url(./images/top-shadow.png) repeat-x top;
+    background: url(qrc:/html/images/top-shadow.png) repeat-x top;
     margin:0px -10px 0px -10px;
     position:fixed;
     top:-5px;
@@ -43,7 +43,7 @@ body#summaryview { /* set body attributes that affect only the summary view (and
   }
 
   .shadow {/*wraps .displayblock -can be used for special decorative effects like a drop shadow */
-   background: url(./images/shadow.png) no-repeat bottom right;
+   background: url(qrc:/html/images/shadow.png) no-repeat bottom right;
     margin:0px 5px 30px 15px;
   }
 
@@ -61,7 +61,7 @@ body#summaryview { /* set body attributes that affect only the summary view (and
   }
 
   .summaryheader { /*section labels over each table in the financial summary*/
-   background: Highlight url(./images/currencyflourish.png) no-repeat bottom right;
+   background: Highlight url(qrc:/html/images/currencyflourish.png) no-repeat bottom right;
     color:WindowText;
     Font-size:1.2em;
     font-weight:bold;
