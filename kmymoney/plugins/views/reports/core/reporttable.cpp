@@ -54,8 +54,8 @@ QString reports::ReportTable::cssFileNameGet()
     }
 
     if (cssfilename.isEmpty() || !QFile::exists(cssfilename)) {
-        // if there still is nothing, try to use the installation default
-        cssfilename = KMyMoneyUtils::findResource(QStandardPaths::AppDataLocation, m_resourceHtml + '/' + m_cssFileDefault);
+        // if there still is nothing, try to use the embedded default
+        cssfilename = ":/" + m_resourceHtml + '/' + m_cssFileDefault;
     }
 
     return cssfilename;
@@ -88,9 +88,20 @@ QString reports::ReportTable::renderHeader(const QString& title, const QByteArra
                      << cssfilename << " readonly";
         }
     } else {
+
+        auto scheme = QStringLiteral("file");
+
+        if (cssfilename.at(0) == ':') {
+          cssfilename.remove(0, 1);
+          scheme = QStringLiteral("qrc");
+        }
+
+        QUrl cssUrl = cssUrl.fromLocalFile(cssfilename);
+        cssUrl.setScheme(scheme);
+
         // do not include css inline instead use a link to the css file
         header += "\n<link rel=\"stylesheet\" type=\"text/css\" href=\""
-                  + QUrl::fromLocalFile(cssfilename).url() + "\">\n";
+                  + cssUrl.url() + "\">\n";
     }
 
     header += KMyMoneyUtils::variableCSS();
