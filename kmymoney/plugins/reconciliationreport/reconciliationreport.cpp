@@ -66,11 +66,11 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
 
     QString filename;
     if (!MyMoneyFile::instance()->value("reportstylesheet").isEmpty())
-        filename = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString("html/%1").arg(MyMoneyFile::instance()->value("reportstylesheet")));
+        filename = QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString("html/%1").arg(MyMoneyFile::instance()->value("reportstylesheet")))).url();
     if (filename.isEmpty())
-        filename = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "html/kmymoney.css");
+        filename = "qrc:/html/kmymoney.css";
     QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n") +
-                     QString("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">").arg(QUrl::fromLocalFile(filename).url());
+                     QString("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">").arg(filename);
 
     header += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />";
 
