@@ -223,6 +223,16 @@
     <!-- Note: website infrastructure uses the appstream file from the master branch
                to determine the last release, so this entry must always reflect the
                last actual release -->
+    <release date="2020-12-20" version="5.1.1">
+      <url>https://kmymoney.org/2020/12/20/kmymoney-5-1-1-released</url>
+      <artifacts>
+        <artifact type="source">
+          <location>https://download.kde.org/stable/kmymoney/5.1.1/src/kmymoney-5.1.1.tar.xz</location>
+          <checksum type="sha256">df7b9f78e8596f99d28295ca738708f0655ee057789dfd921c7b1bab96578298</checksum>
+          <size type="download">12059768</size>
+        </artifact>
+      </artifacts>
+    </release>
     <release date="2020-06-14" version="5.1.0">
       <url>https://blog.bembel.net/2020/06/kmymoney-5-1-0-released/</url>
       <artifacts>
