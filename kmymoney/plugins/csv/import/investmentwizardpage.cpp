@@ -72,16 +72,16 @@ InvestmentPage::InvestmentPage(CSVWizard *dlg, CSVImporterCore *imp) :
 
   m_profile = dynamic_cast<InvestmentProfile *>(m_imp->m_profile);
 
-  connect(ui->m_memoCol, SIGNAL(currentIndexChanged(int)), this, SLOT(memoColSelected(int)));
-  connect(ui->m_typeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(typeColSelected(int)));
-  connect(ui->m_dateCol, SIGNAL(currentIndexChanged(int)), this, SLOT(dateColSelected(int)));
-  connect(ui->m_quantityCol, SIGNAL(currentIndexChanged(int)), this, SLOT(quantityColSelected(int)));
-  connect(ui->m_priceCol, SIGNAL(currentIndexChanged(int)), this, SLOT(priceColSelected(int)));
-  connect(ui->m_priceFraction, SIGNAL(currentIndexChanged(int)), this, SLOT(fractionChanged(int)));
-  connect(ui->m_amountCol, SIGNAL(currentIndexChanged(int)), this, SLOT(amountColSelected(int)));
-  connect(ui->m_feeCol, SIGNAL(currentIndexChanged(int)), this, SLOT(feeColSelected(int)));
-  connect(ui->m_symbolCol, SIGNAL(currentIndexChanged(int)), this, SLOT(symbolColSelected(int)));
-  connect(ui->m_nameCol, SIGNAL(currentIndexChanged(int)), this, SLOT(nameColSelected(int)));
+  connect(ui->m_memoCol, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &InvestmentPage::memoColSelected);
+  connect(ui->m_typeCol, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &InvestmentPage::typeColSelected);
+  connect(ui->m_dateCol, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &InvestmentPage::dateColSelected);
+  connect(ui->m_quantityCol, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &InvestmentPage::quantityColSelected);
+  connect(ui->m_priceCol, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &InvestmentPage::priceColSelected);
+  connect(ui->m_priceFraction, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &InvestmentPage::fractionChanged);
+  connect(ui->m_amountCol, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &InvestmentPage::amountColSelected);
+  connect(ui->m_feeCol, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &InvestmentPage::feeColSelected);
+  connect(ui->m_symbolCol, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &InvestmentPage::symbolColSelected);
+  connect(ui->m_nameCol, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &InvestmentPage::nameColSelected);
   connect(ui->m_feeIsPercentage, &QAbstractButton::clicked, this, &InvestmentPage::feeIsPercentageClicked);
   connect(ui->m_feeRate, &QLineEdit::editingFinished, this, &InvestmentPage::feeInputsChanged);
   connect(ui->m_feeRate, &QLineEdit::textChanged, this, &InvestmentPage::feeRateChanged);

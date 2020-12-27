@@ -57,7 +57,7 @@ KReportDlg::KReportDlg(QWidget* parent, const QString& summaryReportHTML, const 
   KGuiItem::assign(printButton, KStandardGuiItem::print());
 
   // signals and slots connections
-  connect(printButton, SIGNAL(clicked()), this, SLOT(print()));
+  connect(printButton, &QPushButton::clicked, this, &KReportDlg::print);
 }
 
 KReportDlg::~KReportDlg()

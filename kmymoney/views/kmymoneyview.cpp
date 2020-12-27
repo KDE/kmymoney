@@ -162,8 +162,7 @@ KMyMoneyView::KMyMoneyView()
   // set the model
   setModel(m_model);
   setCurrentPage(viewFrames[View::Home]);
-  connect(this, SIGNAL(currentPageChanged(QModelIndex,QModelIndex)), this, SLOT(slotCurrentPageChanged(QModelIndex,QModelIndex)));
-
+  connect(this, &KPageView::currentPageChanged, this, &KMyMoneyView::slotCurrentPageChanged);
   updateViewType();
 }
 

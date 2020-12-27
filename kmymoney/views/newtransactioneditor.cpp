@@ -521,18 +521,18 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     frameCollection->addFrame(new WidgetHintFrame(d->ui->numberEdit, WidgetHintFrame::Warning));
     frameCollection->addWidget(d->ui->enterButton);
 
-    /// @todo convert to new signal/slot syntax
-    connect(d->ui->numberEdit, SIGNAL(textChanged(QString)), this, SLOT(numberChanged(QString)));
-    connect(d->ui->costCenterCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(costCenterChanged(int)));
-    connect(d->ui->accountCombo, SIGNAL(accountSelected(QString)), this, SLOT(categoryChanged(QString)));
+    connect(d->ui->numberEdit, &QLineEdit::textChanged, this, &NewTransactionEditor::numberChanged);
+    connect(d->ui->costCenterCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &NewTransactionEditor::costCenterChanged);
+    connect(d->ui->accountCombo, &KMyMoneyAccountCombo::accountSelected, this, &NewTransactionEditor::categoryChanged);
     connect(d->ui->accountCombo, &KMyMoneyAccountCombo::splitDialogRequest, this, &NewTransactionEditor::editSplits);
-    connect(d->ui->dateEdit, SIGNAL(dateChanged(QDate)), this, SLOT(postdateChanged(QDate)));
-    connect(d->amountHelper, SIGNAL(valueChanged()), this, SLOT(valueChanged()));
-    connect(d->ui->payeeEdit, SIGNAL(currentIndexChanged(int)), this, SLOT(payeeChanged(int)));
+
+    connect(d->ui->dateEdit, &KMyMoneyDateEdit::dateChanged, this, &NewTransactionEditor::postdateChanged);
+    connect(d->amountHelper, &CreditDebitHelper::valueChanged, this, &NewTransactionEditor::valueChanged);
+    connect(d->ui->payeeEdit, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &NewTransactionEditor::payeeChanged);
     connect(d->ui->tagContainer, &KTagContainer::tagsChanged, this, &NewTransactionEditor::tagsChanged);
 
-    connect(d->ui->cancelButton, SIGNAL(clicked(bool)), this, SLOT(reject()));
-    connect(d->ui->enterButton, SIGNAL(clicked(bool)), this, SLOT(acceptEdit()));
+    connect(d->ui->cancelButton, &QToolButton::clicked, this, &NewTransactionEditor::reject);
+    connect(d->ui->enterButton, &QToolButton::clicked, this, &NewTransactionEditor::acceptEdit);
 
     // handle some events in certain conditions different from default
     d->ui->payeeEdit->installEventFilter(this);

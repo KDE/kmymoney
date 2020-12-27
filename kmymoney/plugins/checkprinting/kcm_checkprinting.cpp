@@ -49,10 +49,8 @@ PluginSettingsWidget::PluginSettingsWidget(QWidget* parent) :
   m_previewFrame->setLayout(layout);
   layout->addWidget(m_checkTemplatePreviewHTMLPart);
 
-  connect(kcfg_checkTemplateFile, SIGNAL(urlSelected(QUrl)),
-          this, SLOT(urlSelected(QUrl)));
-  connect(kcfg_checkTemplateFile, SIGNAL(returnPressed(QString)),
-          this, SLOT(returnPressed(QString)));
+  connect(kcfg_checkTemplateFile, &KUrlRequester::urlSelected, this, &PluginSettingsWidget::urlSelected);
+  connect(kcfg_checkTemplateFile, QOverload<const QString&>::of(&KUrlRequester::returnPressed), this, &PluginSettingsWidget::returnPressed);
 }
 
 void PluginSettingsWidget::urlSelected(const QUrl &url)

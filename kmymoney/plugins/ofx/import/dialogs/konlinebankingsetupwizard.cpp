@@ -108,18 +108,19 @@ KOnlineBankingSetupWizard::KOnlineBankingSetupWizard(QWidget *parent):
   delete dlg;
 
   checkNextButton();
-  connect(this, SIGNAL(currentIdChanged(int)), this, SLOT(checkNextButton()));
-  connect(this, SIGNAL(currentIdChanged(int)), this, SLOT(newPage(int)));
-  connect(m_listFi, SIGNAL(itemSelectionChanged()), this, SLOT(checkNextButton()));
-  connect(m_listAccount, SIGNAL(itemSelectionChanged()), this, SLOT(checkNextButton()));
-  connect(m_selectionTab, SIGNAL(currentChanged(int)), this, SLOT(checkNextButton()));
-  connect(m_fid, SIGNAL(userTextChanged(QString)), this, SLOT(checkNextButton()));
-  connect(m_bankName, SIGNAL(userTextChanged(QString)), this, SLOT(checkNextButton()));
-  connect(m_url, SIGNAL(textChanged(QString)), this, SLOT(checkNextButton()));
-  connect(m_editUsername, SIGNAL(userTextChanged(QString)), this, SLOT(checkNextButton()));
-  connect(m_editPassword, SIGNAL(userTextChanged(QString)), this, SLOT(checkNextButton()));
-  connect(m_applicationEdit, SIGNAL(userTextChanged(QString)), this, SLOT(checkNextButton()));
-  connect(m_applicationCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(applicationSelectionChanged()));
+  connect(this, &KOnlineBankingSetupWizard::currentIdChanged, this, &KOnlineBankingSetupWizard::checkNextButton);
+  connect(this, &KOnlineBankingSetupWizard::currentIdChanged, this, &KOnlineBankingSetupWizard::newPage);
+
+  connect(m_listFi, &QListWidget::itemSelectionChanged, this, &KOnlineBankingSetupWizard::checkNextButton);
+  connect(m_listAccount, &QTreeWidget::itemSelectionChanged, this, &KOnlineBankingSetupWizard::checkNextButton);
+  connect(m_selectionTab, &QTabWidget::currentChanged, this, &KOnlineBankingSetupWizard::checkNextButton);
+  connect(m_fid, &QLineEdit::textEdited, this, &KOnlineBankingSetupWizard::checkNextButton);
+  connect(m_bankName, &QLineEdit::textEdited, this, &KOnlineBankingSetupWizard::checkNextButton);
+  connect(m_url, &KUrlRequester::textChanged, this, &KOnlineBankingSetupWizard::checkNextButton);
+  connect(m_editUsername, &QLineEdit::textEdited, this, &KOnlineBankingSetupWizard::checkNextButton);
+  connect(m_editPassword, &QLineEdit::textEdited, this, &KOnlineBankingSetupWizard::checkNextButton);
+  connect(m_applicationEdit, &QLineEdit::textEdited, this, &KOnlineBankingSetupWizard::checkNextButton);
+  connect(m_applicationCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &KOnlineBankingSetupWizard::applicationSelectionChanged);
 
   // setup text on buttons
   setButtonText(QWizard::NextButton, i18nc("Go to next page of the wizard", "&Next"));
@@ -200,7 +201,7 @@ void KOnlineBankingSetupWizard::newPage(int id)
         // open the KDE wallet if not already opened
         if (ok && !d->m_wallet) {
           d->m_wallet = Wallet::openWallet(Wallet::NetworkWallet(), winId(), Wallet::Asynchronous);
-          connect(d->m_wallet, SIGNAL(walletOpened(bool)), SLOT(walletOpened(bool)));
+          connect(d->m_wallet, &KWallet::Wallet::walletOpened, this, &KOnlineBankingSetupWizard::walletOpened);
         }
         focus = m_editUsername;
         break;

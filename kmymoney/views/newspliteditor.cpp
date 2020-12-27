@@ -326,13 +326,13 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
 
   new AmountEditCurrencyHelper(d->ui->accountCombo, d->amountHelper, commodity.id());
 
-  connect(d->ui->numberEdit, SIGNAL(textChanged(QString)), this, SLOT(numberChanged(QString)));
-  connect(d->ui->costCenterCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(costCenterChanged(int)));
-  connect(d->ui->accountCombo, SIGNAL(accountSelected(QString)), this, SLOT(categoryChanged(QString)));
+  connect(d->ui->numberEdit, &QLineEdit::textChanged, this, &NewSplitEditor::numberChanged);
+  connect(d->ui->costCenterCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &NewSplitEditor::costCenterChanged);
+  connect(d->ui->accountCombo, &KMyMoneyAccountCombo::accountSelected, this, &NewSplitEditor::categoryChanged);
   connect(d->amountHelper, &CreditDebitHelper::valueChanged, this, &NewSplitEditor::amountChanged);
 
-  connect(d->ui->cancelButton, SIGNAL(clicked(bool)), this, SLOT(reject()));
-  connect(d->ui->enterButton, SIGNAL(clicked(bool)), this, SLOT(acceptEdit()));
+  connect(d->ui->cancelButton, &QToolButton::clicked, this, &NewSplitEditor::reject);
+  connect(d->ui->enterButton, &QToolButton::clicked, this, &NewSplitEditor::acceptEdit);
 }
 
 NewSplitEditor::~NewSplitEditor()

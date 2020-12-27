@@ -76,17 +76,17 @@ CsvExportDlg::CsvExportDlg(QWidget *parent) : QDialog(parent), ui(new Ui::CsvExp
   KGuiItem::assign(ui->m_qbuttonBrowse, browseButtonItem);
 
   // connect the buttons to their functionality
-  connect(ui->m_qbuttonBrowse, SIGNAL(clicked()), this, SLOT(slotBrowse()));
-  connect(ui->m_qbuttonOk, SIGNAL(clicked()), this, SLOT(slotOkClicked()));
-  connect(ui->m_qbuttonCancel, SIGNAL(clicked()), this, SLOT(reject()));
+  connect(ui->m_qbuttonBrowse, &QPushButton::clicked, this, &CsvExportDlg::slotBrowse);
+  connect(ui->m_qbuttonOk, &QPushButton::clicked, this, [&]() { writeConfig(); accept(); });
+  connect(ui->m_qbuttonCancel, &QPushButton::clicked, this, &CsvExportDlg::reject);
 
   // connect the change signals to the check slot and perform initial check
-  connect(ui->m_qlineeditFile, SIGNAL(editingFinished()), this, SLOT(checkData()));
-  connect(ui->m_radioButtonAccount, SIGNAL(toggled(bool)), this, SLOT(checkData()));
-  connect(ui->m_radioButtonCategories, SIGNAL(toggled(bool)), this, SLOT(checkData()));
-  connect(ui->m_accountComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(checkData(QString)));
-  connect(ui->m_separatorComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(separator(int)));
-  connect(ui->m_separatorComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(checkData()));
+  connect(ui->m_qlineeditFile, &KLineEdit::editingFinished, this, [&] { checkData(); });
+  connect(ui->m_radioButtonAccount, &QRadioButton::toggled, this, [&] { checkData(); });
+  connect(ui->m_radioButtonCategories, &QRadioButton::toggled, this, [&] { checkData(); });
+  connect(ui->m_accountComboBox, QOverload<const QString&>::of(&KComboBox::currentIndexChanged), this, &CsvExportDlg::checkData);
+  connect(ui->m_separatorComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int index) { m_separator = m_fieldDelimiterCharList[index]; } );
+  connect(ui->m_separatorComboBox, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), this, &CsvExportDlg::checkData);
 
   checkData(QString());
 }
@@ -102,18 +102,6 @@ void CsvExportDlg::slotBrowse()
     newName += QLatin1String(".csv");
   if (!newName.isEmpty())
     ui->m_qlineeditFile->setText(newName);
-}
-
-void CsvExportDlg::slotOkClicked()
-{
-  // Make sure we save the last used settings for use next time,
-  writeConfig();
-  accept();
-}
-
-void CsvExportDlg::separator(int separatorIndex)
-{
-  m_separator = m_fieldDelimiterCharList[separatorIndex];
 }
 
 void CsvExportDlg::readConfig()

@@ -122,7 +122,7 @@ SplitView::SplitView(QWidget* parent)
   // horizontalHeader()->setMovable(true);
 
   // make sure to get informed about resize operations on the columns
-  connect(horizontalHeader(), SIGNAL(sectionResized(int,int,int)), this, SLOT(adjustDetailColumn()));
+  connect(horizontalHeader(), &QHeaderView::sectionResized, this, [&]() { adjustDetailColumn(viewport()->width()); });
 
   // we don't need autoscroll as we do not support drag/drop
   setAutoScroll(false);
@@ -377,11 +377,6 @@ void SplitView::resizeEvent(QResizeEvent* event)
   // qDebug() << "resizeEvent, old:" << event->oldSize() << "new:" << event->size() << "viewport:" << viewport()->width();
   QTableView::resizeEvent(event);
   adjustDetailColumn(event->size().width());
-}
-
-void SplitView::adjustDetailColumn()
-{
-  adjustDetailColumn(viewport()->width());
 }
 
 void SplitView::adjustDetailColumn(int newViewportWidth)

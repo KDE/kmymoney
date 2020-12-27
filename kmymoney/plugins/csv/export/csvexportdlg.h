@@ -108,20 +108,9 @@ public:
 
 protected Q_SLOTS:
   /**
-    * Called when the user clicked on the Export button
-    */
-  void slotOkClicked();
-
-  /**
     * Called when the user needs to browse the filesystem for a CSV file
     */
   void slotBrowse();
-
-  /**
-    * Called when the user changes the field separator setting
-    */
-  void separator(int separatorIndex);
-
 
   /**
     * This slot checks whether all data is correct to enable

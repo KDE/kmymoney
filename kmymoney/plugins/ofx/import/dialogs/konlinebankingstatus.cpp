@@ -82,7 +82,7 @@ KOnlineBankingStatus::KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *p
   m_clientUidLabel->setEnabled(false);
 #endif
 
-  connect(m_applicationCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(applicationSelectionChanged()));
+  connect(m_applicationCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &KOnlineBankingStatus::applicationSelectionChanged);
   m_headerVersionEdit->hide();
 
   int numDays = 60;

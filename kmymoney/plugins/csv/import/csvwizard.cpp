@@ -104,7 +104,7 @@ CSVWizard::CSVWizard(CSVImporter *plugin) :
   connect(m_wiz->button(QWizard::CancelButton), &QAbstractButton::clicked, this, &CSVWizard::reject);
   connect(m_wiz->button(QWizard::CustomButton1), &QAbstractButton::clicked, this, &CSVWizard::fileDialogClicked);
   connect(m_wiz->button(QWizard::CustomButton2), &QAbstractButton::clicked, this, &CSVWizard::saveAsQIFClicked);
-  connect(m_wiz, SIGNAL(currentIdChanged(int)), this, SLOT(slotIdChanged(int)));
+  connect(m_wiz, &QWizard::currentIdChanged, this, &CSVWizard::slotIdChanged);
 
   ui->tableView->setWordWrap(false);
 
@@ -485,7 +485,7 @@ void IntroPage::initializePage()
 
   ui->m_profiles->lineEdit()->setClearButtonEnabled(true);
 
-  connect(ui->m_profiles, SIGNAL(currentIndexChanged(int)), this, SLOT(slotComboSourceIndexChanged(int)));
+  connect(ui->m_profiles, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &IntroPage::slotComboSourceIndexChanged);
   connect(ui->m_add, &QAbstractButton::clicked, this, &IntroPage::slotAddProfile);
   connect(ui->m_remove, &QAbstractButton::clicked, this, &IntroPage::slotRemoveProfile);
   connect(ui->m_rename, &QAbstractButton::clicked, this, &IntroPage::slotRenameProfile);
@@ -675,9 +675,9 @@ SeparatorPage::SeparatorPage(CSVWizard *dlg, CSVImporterCore *imp) :
   ui(new Ui::SeparatorPage)
 {
   ui->setupUi(this);
-  connect(ui->m_encoding, SIGNAL(currentIndexChanged(int)), this, SLOT(encodingChanged(int)));
-  connect(ui->m_fieldDelimiter, SIGNAL(currentIndexChanged(int)), this, SLOT(fieldDelimiterChanged(int)));
-  connect(ui->m_textDelimiter, SIGNAL(currentIndexChanged(int)), this, SLOT(textDelimiterChanged(int)));
+  connect(ui->m_encoding, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &SeparatorPage::encodingChanged);
+  connect(ui->m_fieldDelimiter, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &SeparatorPage::fieldDelimiterChanged);
+  connect(ui->m_textDelimiter, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &SeparatorPage::textDelimiterChanged);
 }
 
 SeparatorPage::~SeparatorPage()
@@ -837,8 +837,8 @@ RowsPage::RowsPage(CSVWizard *dlg, CSVImporterCore *imp) :
     ui(new Ui::RowsPage)
 {
   ui->setupUi(this);
-  connect(ui->m_startLine, SIGNAL(valueChanged(int)), this, SLOT(startRowChanged(int)));;
-  connect(ui->m_endLine, SIGNAL(valueChanged(int)), this, SLOT(endRowChanged(int)));
+  connect(ui->m_startLine, QOverload<int>::of(&QSpinBox::valueChanged), this, &RowsPage::startRowChanged);
+  connect(ui->m_endLine, QOverload<int>::of(&QSpinBox::valueChanged), this, &RowsPage::endRowChanged);
 }
 
 RowsPage::~RowsPage()
@@ -936,8 +936,8 @@ FormatsPage::FormatsPage(CSVWizard *dlg, CSVImporterCore *imp) :
     m_isDateFormatOK(false)
 {
   ui->setupUi(this);
-  connect(ui->m_dateFormat, SIGNAL(currentIndexChanged(int)), this, SLOT(dateFormatChanged(int)));
-  connect(ui->m_decimalSymbol, SIGNAL(currentIndexChanged(int)), this, SLOT(decimalSymbolChanged(int)));
+  connect(ui->m_dateFormat, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &FormatsPage::dateFormatChanged);
+  connect(ui->m_decimalSymbol, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &FormatsPage::decimalSymbolChanged);
 }
 
 FormatsPage::~FormatsPage()

@@ -135,8 +135,8 @@ void KMandatoryFieldGroup::add(QWidget *widget)
 
     else if (qobject_cast<IonlineJobEdit*>(widget)) {
       connect(qobject_cast<IonlineJobEdit*>(widget),
-              SIGNAL(validityChanged(bool)),
-              this, SLOT(changed()));
+              &IonlineJobEdit::validityChanged,
+              this, &KMandatoryFieldGroup::changed);
 
       // Do not set palette for IonlineJobEdits as they contain subwidgets
       d->m_widgets.append(widget);

@@ -62,10 +62,8 @@ KBMapAccount::KBMapAccount(KBankingExt *kb,
   else
     d->ui.accountIdEdit->setEnabled(false);
 
-  QObject::connect(d->ui.accountList, SIGNAL(itemSelectionChanged()),
-                   this, SLOT(slotSelectionChanged()));
-  QObject::connect(d->ui.helpButton, SIGNAL(clicked()),
-                   this, SLOT(slotHelpClicked()));
+  connect(d->ui.accountList, &KBAccountListView::itemSelectionChanged, this, &KBMapAccount::slotSelectionChanged);
+  connect(d->ui.helpButton, &QPushButton::clicked, this, &KBMapAccount::slotHelpClicked);
 
   d->ui.accountList->addAccounts(d->banking->getAccounts());
 }

@@ -34,11 +34,11 @@ nationalAccountEdit::nationalAccountEdit(QWidget* parent)
   d->ui.setupUi(this);
   setFocusProxy(d->ui.accountNumberEdit);
 
-  connect(d->ui.accountNumberEdit, SIGNAL(textChanged(QString)), this, SIGNAL(accountNumberChannged(QString)));
-  connect(d->ui.institutionCodeEdit, SIGNAL(textChanged(QString)), this, SIGNAL(institutionCodeChanged(QString)));
+  connect(d->ui.accountNumberEdit, &QLineEdit::textChanged, this, &nationalAccountEdit::accountNumberChannged);
+  connect(d->ui.institutionCodeEdit, &QLineEdit::textChanged, this, &nationalAccountEdit::institutionCodeChanged);
 
-  connect(d->ui.accountNumberEdit, SIGNAL(returnPressed()), this, SLOT(editFinished()));
-  connect(d->ui.institutionCodeEdit, SIGNAL(returnPressed()), this, SLOT(editFinished()));
+  connect(d->ui.accountNumberEdit, &QLineEdit::returnPressed, this, &nationalAccountEdit::editFinished);
+  connect(d->ui.institutionCodeEdit, &QLineEdit::returnPressed, this, &nationalAccountEdit::editFinished);
 }
 
 payeeIdentifier nationalAccountEdit::identifier() const

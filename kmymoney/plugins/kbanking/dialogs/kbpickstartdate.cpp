@@ -67,8 +67,7 @@ KBPickStartDate::KBPickStartDate(KBankingExt* qb,
 
   d->banking = qb;
 
-  QObject::connect(d->ui.buttonBox, SIGNAL(helpRequested()),
-                   this, SLOT(slotHelpClicked()));
+  connect(d->ui.buttonBox, &QDialogButtonBox::helpRequested, this, &KBPickStartDate::slotHelpClicked);
   d->ui.label->setText(i18n("<qt><p>Please select the first date for which transactions are to be retrieved from <b>%1</b>.</p><p>If you specify no date then the bank will choose one.</p></qt>", accountName));
 
   if (lastUpdate.isValid()) {

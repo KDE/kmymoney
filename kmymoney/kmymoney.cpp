@@ -500,7 +500,6 @@ public:
 
     if (baseId.isEmpty()) {
       QPointer<KCurrencyEditDlg> dlg = new KCurrencyEditDlg(q);
-  //    connect(dlg, SIGNAL(selectBaseCurrency(MyMoneySecurity)), this, SLOT(slotSetBaseCurrency(MyMoneySecurity)));
       dlg->exec();
       delete dlg;
     }
@@ -1132,7 +1131,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   setCentralWidget(frame);
 
-  connect(&d->m_proc, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotBackupHandleEvents()));
+  connect(&d->m_proc, QOverload<int,QProcess::ExitStatus>::of(&KProcess::finished), this, &KMyMoneyApp::slotBackupHandleEvents);
 
   // force to show the home page if the file is closed
   connect(pActions[Action::ViewTransactionDetail], &QAction::toggled, d->m_myMoneyView, &KMyMoneyView::slotShowTransactionDetail);
@@ -1147,8 +1146,8 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   d->m_autoSaveTimer = new QTimer(this);
   d->m_progressTimer = new QTimer(this);
 
-  connect(d->m_autoSaveTimer, SIGNAL(timeout()), this, SLOT(slotAutoSave()));
-  connect(d->m_progressTimer, SIGNAL(timeout()), this, SLOT(slotStatusProgressDone()));
+  connect(d->m_autoSaveTimer, &QTimer::timeout, this, &KMyMoneyApp::slotAutoSave);
+  connect(d->m_progressTimer, &QTimer::timeout, this, &KMyMoneyApp::slotStatusProgressDone);
 
   // connect the WebConnect server
   connect(d->m_webConnect, &WebConnect::gotUrl, this, &KMyMoneyApp::webConnectUrl);
@@ -1213,7 +1212,7 @@ void KMyMoneyApp::slotInstallConsistencyCheckContextMenu()
       widget->setToolTip(i18n("This is the consistency check log, use the context menu to copy or save it."));
       widget->setWhatsThis(widget->toolTip());
       widget->setContextMenuPolicy(Qt::CustomContextMenu);
-      connect(widget, SIGNAL(customContextMenuRequested(QPoint)), SLOT(slotShowContextMenuForConsistencyCheck(QPoint)));
+      connect(widget, &QListWidget::customContextMenuRequested, this, &KMyMoneyApp::slotShowContextMenuForConsistencyCheck);
     }
   }
 }

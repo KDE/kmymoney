@@ -106,7 +106,6 @@ protected Q_SLOTS:
   void resizeEditorRow();
 
   virtual void adjustDetailColumn(int newViewportWidth);
-  virtual void adjustDetailColumn();
 
 Q_SIGNALS:
   void transactionSelected(const QModelIndex& idx);

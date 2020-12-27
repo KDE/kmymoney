@@ -88,13 +88,13 @@ KExportDlg::KExportDlg(QWidget *parent)
   connect(m_qbuttonCancel, &QAbstractButton::clicked, this, &QDialog::reject);
 
   // connect the change signals to the check slot and perform initial check
-  connect(m_qlineeditFile, SIGNAL(editingFinished()), this, SLOT(checkData()));
-  connect(m_qcheckboxAccount, SIGNAL(toggled(bool)), this, SLOT(checkData()));
-  connect(m_qcheckboxCategories, SIGNAL(toggled(bool)), this, SLOT(checkData()));
-  connect(m_accountComboBox, SIGNAL(accountSelected(QString)), this, SLOT(checkData(QString)));
-  connect(m_profileComboBox, SIGNAL(activated(int)), this, SLOT(checkData()));
-  connect(m_kmymoneydateStart, SIGNAL(dateChanged(QDate)), this, SLOT(checkData()));
-  connect(m_kmymoneydateEnd, SIGNAL(dateChanged(QDate)), this, SLOT(checkData()));
+  connect(m_qlineeditFile, &QLineEdit::editingFinished, this, [&]() { checkData(); });
+  connect(m_qcheckboxAccount, &QCheckBox::toggled, this, [&]() { checkData(); });
+  connect(m_qcheckboxCategories, &QCheckBox::toggled, this, [&]() { checkData(); });
+  connect(m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, this, &KExportDlg::checkData);
+  connect(m_profileComboBox, QOverload<int>::of(&KComboBox::activated), this, [&]() { checkData(); });
+  connect(m_kmymoneydateStart, &KMyMoneyDateInput::dateChanged, this, [&]() { checkData(); });
+  connect(m_kmymoneydateEnd, &KMyMoneyDateInput::dateChanged, this, [&]() { checkData(); });
 
   checkData(QString());
 }

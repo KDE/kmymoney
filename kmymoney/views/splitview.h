@@ -99,7 +99,6 @@ protected Q_SLOTS:
   void currentChanged(const QModelIndex &current, const QModelIndex &previous) final override;
 
   virtual void adjustDetailColumn(int newViewportWidth);
-  virtual void adjustDetailColumn();
 
 Q_SIGNALS:
   void transactionSelected(const QModelIndex& idx);

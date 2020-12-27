@@ -301,7 +301,7 @@ public:
               }
 
               QString newId;
-              q->connect(transactionEditor, SIGNAL(balanceWarning(QWidget*,MyMoneyAccount,QString)), m_balanceWarning.data(), SLOT(slotShowMessage(QWidget*,MyMoneyAccount,QString)));
+              q->connect(transactionEditor, &TransactionEditor::balanceWarning, m_balanceWarning.data(), &KBalanceWarning::slotShowMessage);
               if (transactionEditor->enterTransactions(newId, false)) {
                 if (!newId.isEmpty()) {
                   t = MyMoneyFile::instance()->transaction(newId);

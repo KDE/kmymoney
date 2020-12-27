@@ -158,7 +158,7 @@ LedgerView::LedgerView(QWidget* parent)
   // horizontalHeader()->setMovable(true);
 
   // make sure to get informed about resize operations on the columns
-  connect(horizontalHeader(), SIGNAL(sectionResized(int,int,int)), this, SLOT(adjustDetailColumn()));
+  connect(horizontalHeader(), &QHeaderView::sectionResized, this, [&]() { adjustDetailColumn(viewport()->width()); } );
 
   // we don't need autoscroll as we do not support drag/drop
   setAutoScroll(false);
@@ -461,11 +461,6 @@ void LedgerView::resizeEvent(QResizeEvent* event)
   d->infoMessage->setWordWrap(false);
   d->infoMessage->setWordWrap(true);
   d->infoMessage->setText(d->infoMessage->text());
-}
-
-void LedgerView::adjustDetailColumn()
-{
-  adjustDetailColumn(viewport()->width());
 }
 
 void LedgerView::adjustDetailColumn(int newViewportWidth)

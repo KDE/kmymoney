@@ -110,7 +110,7 @@ QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem
 
     if(d->m_editor) {
       d->m_editorRow = index.row();
-      connect(d->m_editor, SIGNAL(done()), this, SLOT(endEdit()));
+      connect(d->m_editor, &NewSplitEditor::done, this, &SplitDelegate::endEdit);
       emit sizeHintChanged(index);
     }
 

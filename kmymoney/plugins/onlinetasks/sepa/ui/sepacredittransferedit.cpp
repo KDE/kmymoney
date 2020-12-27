@@ -158,8 +158,8 @@ private Q_SLOTS:
 ibanBicCompleter::ibanBicCompleter(QObject *parent)
     : QCompleter(parent)
 {
-  connect(this, SIGNAL(activated(QModelIndex)), SLOT(slotActivated(QModelIndex)));
-  connect(this, SIGNAL(highlighted(QModelIndex)), SLOT(slotHighlighted(QModelIndex)));
+  connect(this, QOverload<const QModelIndex&>::of(&QCompleter::activated), this, &ibanBicCompleter::slotActivated);
+  connect(this, QOverload<const QModelIndex&>::of(&QCompleter::highlighted), this, &ibanBicCompleter::slotHighlighted);
 }
 
 void ibanBicCompleter::slotActivated(const QModelIndex &index) const
@@ -210,31 +210,31 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
   m_requiredFields->add(ui->value);
   // Other required fields are set in updateSettings()
 
-  connect(m_requiredFields, SIGNAL(stateChanged(bool)), this, SLOT(requiredFieldsCompleted(bool)));
+  connect(m_requiredFields, QOverload<bool>::of(&KMandatoryFieldGroup::stateChanged), this, &sepaCreditTransferEdit::requiredFieldsCompleted);
 
-  connect(ui->beneficiaryName, SIGNAL(textChanged(QString)), this, SLOT(beneficiaryNameChanged(QString)));
-  connect(ui->beneficiaryIban, SIGNAL(textChanged(QString)), this, SLOT(beneficiaryIbanChanged(QString)));
-  connect(ui->beneficiaryBankCode, SIGNAL(textChanged(QString)), this, SLOT(beneficiaryBicChanged(QString)));
-  connect(ui->value, SIGNAL(valueChanged(QString)), this, SLOT(valueChanged()));
-  connect(ui->sepaReference, SIGNAL(textChanged(QString)), this, SLOT(endToEndReferenceChanged(QString)));
-  connect(ui->purpose, SIGNAL(textChanged()), this, SLOT(purposeChanged()));
+  connect(ui->beneficiaryName, &KLineEdit::textChanged, this, &sepaCreditTransferEdit::beneficiaryNameChanged);
+  connect(ui->beneficiaryIban, &KIbanLineEdit::textChanged, this, &sepaCreditTransferEdit::beneficiaryIbanChanged);
+  connect(ui->beneficiaryBankCode, &KBicEdit::textChanged, this, &sepaCreditTransferEdit::beneficiaryBicChanged);
+  connect(ui->value, &AmountEdit::valueChanged, this, &sepaCreditTransferEdit::valueChanged);
+  connect(ui->sepaReference, &KLineEdit::textChanged, this, &sepaCreditTransferEdit::endToEndReferenceChanged);
+  connect(ui->purpose, &KMyMoneyTextEdit::textChanged, this, &sepaCreditTransferEdit::purposeChanged);
 
-  connect(qApp, SIGNAL(focusChanged(QWidget*,QWidget*)), this, SLOT(updateEveryStatus()));
+  connect(qApp, &QApplication::focusChanged, this, &sepaCreditTransferEdit::updateEveryStatus);
 
-  connect(ui->beneficiaryName, SIGNAL(textChanged(QString)), this, SIGNAL(onlineJobChanged()));
-  connect(ui->beneficiaryIban, SIGNAL(textChanged(QString)), this, SIGNAL(onlineJobChanged()));
-  connect(ui->beneficiaryBankCode, SIGNAL(textChanged(QString)), this, SIGNAL(onlineJobChanged()));
-  connect(ui->value, SIGNAL(valueChanged(QString)), this, SIGNAL(onlineJobChanged()));
-  connect(ui->sepaReference, SIGNAL(textChanged(QString)), this, SIGNAL(onlineJobChanged()));
-  connect(ui->purpose, SIGNAL(textChanged()), this, SIGNAL(onlineJobChanged()));
+  connect(ui->beneficiaryName, &KLineEdit::textChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
+  connect(ui->beneficiaryIban, &KIbanLineEdit::textChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
+  connect(ui->beneficiaryBankCode, &KBicEdit::textChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
+  connect(ui->value, &AmountEdit::valueChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
+  connect(ui->sepaReference, &KLineEdit::textChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
+  connect(ui->purpose, &KMyMoneyTextEdit::textChanged, this, &sepaCreditTransferEdit::onlineJobChanged);
 
   // Connect signals for read only
-  connect(this, SIGNAL(readOnlyChanged(bool)), ui->beneficiaryName, SLOT(setReadOnly(bool)));
-  connect(this, SIGNAL(readOnlyChanged(bool)), ui->beneficiaryIban, SLOT(setReadOnly(bool)));
-  connect(this, SIGNAL(readOnlyChanged(bool)), ui->beneficiaryBankCode, SLOT(setReadOnly(bool)));
-  connect(this, SIGNAL(readOnlyChanged(bool)), ui->value, SLOT(setReadOnly(bool)));
-  connect(this, SIGNAL(readOnlyChanged(bool)), ui->sepaReference, SLOT(setReadOnly(bool)));
-  connect(this, SIGNAL(readOnlyChanged(bool)), ui->purpose, SLOT(setReadOnly(bool)));
+  connect(this, &sepaCreditTransferEdit::readOnlyChanged, ui->beneficiaryName, &KLineEdit::setReadOnly);
+  connect(this, &sepaCreditTransferEdit::readOnlyChanged, ui->beneficiaryIban, &KIbanLineEdit::setReadOnly);
+  connect(this, &sepaCreditTransferEdit::readOnlyChanged, ui->beneficiaryBankCode, &KBicEdit::setReadOnly);
+  connect(this, &sepaCreditTransferEdit::readOnlyChanged, ui->value, &AmountEdit::setReadOnly);
+  connect(this, &sepaCreditTransferEdit::readOnlyChanged, ui->sepaReference, &KLineEdit::setReadOnly);
+  connect(this, &sepaCreditTransferEdit::readOnlyChanged, ui->purpose, &KMyMoneyTextEdit::setReadOnly);
 
   // Create models for completers
   payeeIdentifierModel* identModel = new payeeIdentifierModel(this);
@@ -254,8 +254,8 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
     completer->setCompletionRole(payeeIdentifierModel::payeeName);
     completer->setCaseSensitivity(Qt::CaseInsensitive);
 
-    connect(completer, SIGNAL(activatedIban(QString)), ui->beneficiaryIban, SLOT(setText(QString)));
-    connect(completer, SIGNAL(activatedBic(QString)), ui->beneficiaryBankCode, SLOT(setText(QString)));
+    connect(completer, &ibanBicCompleter::activatedIban, ui->beneficiaryIban, &KIbanLineEdit::setText);
+    connect(completer, &ibanBicCompleter::activatedBic, ui->beneficiaryBankCode, &KBicEdit::setText);
 
     ui->beneficiaryName->setCompleter(completer);
 
@@ -272,8 +272,8 @@ sepaCreditTransferEdit::sepaCreditTransferEdit(QWidget *parent, QVariantList arg
     ibanCompleter->setCompletionRole(ibanBicFilterProxyModel::payeeIban);
     ibanCompleter->setCaseSensitivity(Qt::CaseInsensitive);
 
-    connect(ibanCompleter, SIGNAL(activatedName(QString)), ui->beneficiaryName, SLOT(setText(QString)));
-    connect(ibanCompleter, SIGNAL(activatedBic(QString)), ui->beneficiaryBankCode, SLOT(setText(QString)));
+    connect(ibanCompleter, &ibanBicCompleter::activatedName, ui->beneficiaryName, &KLineEdit::setText);
+    connect(ibanCompleter, &ibanBicCompleter::activatedBic, ui->beneficiaryBankCode, &KBicEdit::setText);
 
     ui->beneficiaryIban->setCompleter(ibanCompleter);
 

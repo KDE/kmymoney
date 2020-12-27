@@ -28,7 +28,7 @@
 payeeIdentifierTypeSelectionWidget::payeeIdentifierTypeSelectionWidget(QWidget* parent)
     : QComboBox(parent)
 {
-  connect(this, SIGNAL(activated(int)), this, SLOT(itemSelected(int)));
+  connect(this, QOverload<int>::of(&payeeIdentifierTypeSelectionWidget::activated), this, &payeeIdentifierTypeSelectionWidget::itemSelected);
 }
 
 void payeeIdentifierTypeSelectionWidget::itemSelected(int index)
@@ -51,8 +51,7 @@ QWidget* payeeIdentifierSelectionDelegate::createEditor(QWidget* parent, const Q
 
   payeeIdentifierTypeSelectionWidget* comboBox = new payeeIdentifierTypeSelectionWidget(parent);
   comboBox->setFrame(false);
-  connect(comboBox, SIGNAL(commitData(QWidget*)), this, SIGNAL(commitData(QWidget*)));
-
+  connect(comboBox, &payeeIdentifierTypeSelectionWidget::commitData, this, &payeeIdentifierSelectionDelegate::commitData);
   comboBox->addItem(i18n("Please select the account number type"));
 
   const QMap<QString, QString> availableDelegates {

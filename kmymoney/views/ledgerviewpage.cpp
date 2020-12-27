@@ -103,8 +103,8 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
   // and hope that QConcatenateTablesProxyModel has this fixed. But it was
   // only introduced with Qt 5.13 which is a bit new for some distros. As
   // it looks from the source of it the problem is still present as of 2020-01-04
-  connect(file->journalModel(), SIGNAL(rowsAboutToBeMoved(const QModelIndex&,int,int,const QModelIndex&,int)), this, SLOT(keepSelection()));
-  connect(file->journalModel(), SIGNAL(rowsMoved(const QModelIndex&,int,int,const QModelIndex&,int)), this, SLOT(reloadFilter()), Qt::QueuedConnection);
+  connect(file->journalModel(), &JournalModel::rowsAboutToBeMoved, this, &LedgerViewPage::keepSelection);
+  connect(file->journalModel(), &JournalModel::rowsMoved, this, &LedgerViewPage::reloadFilter, Qt::QueuedConnection);
 
   d->ui->ledgerView->setModel(d->specialDatesFilter);
 }

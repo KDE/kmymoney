@@ -110,12 +110,12 @@ MyMoneyQifProfileEditor::MyMoneyQifProfileEditor(const bool edit, QWidget *paren
   connect(m_editAccountDelimiter, &QLineEdit::textChanged, &m_profile, &MyMoneyQifProfile::setAccountDelimiter);
   connect(m_editVoidMark, &QLineEdit::textChanged, &m_profile, &MyMoneyQifProfile::setVoidMark);
 
-  connect(m_editDateFormat, SIGNAL(highlighted(QString)), &m_profile, SLOT(setOutputDateFormat(QString)));
-  connect(m_editApostrophe, SIGNAL(highlighted(QString)), &m_profile, SLOT(setApostropheFormat(QString)));
+  connect(m_editDateFormat, QOverload<const QString&>::of(&QComboBox::highlighted), &m_profile, &MyMoneyQifProfile::setOutputDateFormat);
+  connect(m_editApostrophe, QOverload<const QString&>::of(&QComboBox::highlighted), &m_profile, &MyMoneyQifProfile::setApostropheFormat);
 
   connect(m_editAmounts, &QTreeWidget::itemSelectionChanged, this, &MyMoneyQifProfileEditor::slotAmountTypeSelected);
-  connect(m_decimalBox, SIGNAL(activated(QString)), this, SLOT(slotDecimalChanged(QString)));
-  connect(m_thousandsBox, SIGNAL(activated(QString)), this, SLOT(slotThousandsChanged(QString)));
+  connect(m_decimalBox, QOverload<const QString&>::of(&QComboBox::activated), this, &MyMoneyQifProfileEditor::slotDecimalChanged);
+  connect(m_thousandsBox, QOverload<const QString&>::of(&QComboBox::activated), this, &MyMoneyQifProfileEditor::slotThousandsChanged);
 
   connect(m_editInputFilterLocation, &KUrlRequester::textChanged, &m_profile, &MyMoneyQifProfile::setFilterScriptImport);
   connect(m_editInputFilterLocation, &KUrlRequester::urlSelected, m_editInputFilterLocation, &KUrlRequester::setUrl);

@@ -34,7 +34,7 @@ SecuritiesDlg::SecuritiesDlg() :
   m_buttonOK->setShortcut(Qt::CTRL | Qt::Key_Return);
   m_buttonOK->setEnabled(false);
 
-  connect(ui->tableWidget,  SIGNAL(itemChanged(QTableWidgetItem*)), this,  SLOT(slotItemChanged(QTableWidgetItem*)));
+  connect(ui->tableWidget, &QTableWidget::itemChanged, this, &SecuritiesDlg::slotItemChanged);
 }
 
 SecuritiesDlg::~SecuritiesDlg()

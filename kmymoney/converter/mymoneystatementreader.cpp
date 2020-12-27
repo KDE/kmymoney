@@ -1066,8 +1066,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
           QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Cancel|QDialogButtonBox::No|QDialogButtonBox::Yes);
           dialog->setLayout(mainLayout);
           mainLayout->addWidget(mainWidget);
-          dialog->connect(buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));
-          dialog->connect(buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
+          connect(buttonBox, &QDialogButtonBox::accepted, dialog, &QDialog::accept);
+          connect(buttonBox, &QDialogButtonBox::rejected, dialog, &QDialog::reject);
           mainLayout->addWidget(buttonBox);
           KGuiItem::assign(buttonBox->button(QDialogButtonBox::Yes), KGuiItem(i18n("Save Category")));
           KGuiItem::assign(buttonBox->button(QDialogButtonBox::No), KGuiItem(i18n("No Category")));

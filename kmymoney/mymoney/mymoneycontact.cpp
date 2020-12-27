@@ -79,7 +79,7 @@ void MyMoneyContact::fetchContact(const QString &email)
     job->fetchScope().fetchFullPayload();
     job->fetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
     job->setProperty("MyMoneyContact_email", email);
-    connect(job, SIGNAL(result(KJob*)), this, SLOT(searchContactResult(KJob*)));
+    connect(job, &Akonadi::RecursiveItemFetchJob::result, this, &MyMoneyContact::searchContactResult);
     job->start();
   }
 #else

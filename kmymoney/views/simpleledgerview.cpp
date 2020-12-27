@@ -95,7 +95,7 @@ public:
       QWidget *w = bar->tabButton(0, closeSide);
       bar->setTabButton(0, closeSide, 0);
       w->deleteLater();
-      q->connect(bar, SIGNAL(tabMoved(int,int)), q, SLOT(checkTabOrder(int,int)));
+      q->connect(bar, &QTabBar::tabMoved, q, &SimpleLedgerView::checkTabOrder);
     }
 
     webSiteButton = new QToolButton;

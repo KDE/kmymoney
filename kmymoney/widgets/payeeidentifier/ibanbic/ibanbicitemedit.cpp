@@ -34,14 +34,14 @@ ibanBicItemEdit::ibanBicItemEdit(QWidget* parent)
   d->ui->setupUi(this);
   setFocusProxy(d->ui->ibanEdit);
 
-  connect(d->ui->ibanEdit, SIGNAL(textChanged(QString)), this, SLOT(updateIdentifier()));
-  connect(d->ui->bicEdit, SIGNAL(textChanged(QString)), this, SLOT(updateIdentifier()));
+  connect(d->ui->ibanEdit, &KIbanLineEdit::textChanged, this, &ibanBicItemEdit::updateIdentifier);
+  connect(d->ui->bicEdit, &KBicEdit::textChanged, this, &ibanBicItemEdit::updateIdentifier);
 
-  connect(d->ui->ibanEdit, SIGNAL(textChanged(QString)), this, SIGNAL(ibanChanged(QString)));
-  connect(d->ui->bicEdit, SIGNAL(textChanged(QString)), this, SIGNAL(bicChanged(QString)));
+  connect(d->ui->ibanEdit, &KIbanLineEdit::textChanged, this, &ibanBicItemEdit::ibanChanged);
+  connect(d->ui->bicEdit, &KBicEdit::textChanged, this, &ibanBicItemEdit::bicChanged);
 
-  connect(d->ui->ibanEdit, SIGNAL(returnPressed()), this, SLOT(editFinished()));
-  connect(d->ui->bicEdit, SIGNAL(returnPressed()), this, SLOT(editFinished()));
+  connect(d->ui->ibanEdit, &KIbanLineEdit::returnPressed, this, &ibanBicItemEdit::editFinished);
+  connect(d->ui->bicEdit, &KBicEdit::returnPressed, this, &ibanBicItemEdit::editFinished);
 }
 
 void ibanBicItemEdit::editFinished()

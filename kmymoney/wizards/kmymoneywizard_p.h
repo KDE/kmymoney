@@ -194,12 +194,12 @@ public:
     if (oldPage) {
         oldPage->widget()->hide();
         m_pageLayout->removeWidget(oldPage->widget());
-        q->disconnect(oldPage->object(), SIGNAL(completeStateChanged()), q, SLOT(completeStateChanged()));
+        q->disconnect(oldPage->object(), &KMyMoneyWizardPagePrivate::completeStateChanged, q, &KMyMoneyWizard::completeStateChanged);
       }
     KMyMoneyWizardPage* newPage = m_history.back();
     if (newPage) {
         m_pageLayout->insertWidget(0, newPage->widget());
-        q->connect(newPage->object(), SIGNAL(completeStateChanged()), q, SLOT(completeStateChanged()));
+        q->connect(newPage->object(), &KMyMoneyWizardPagePrivate::completeStateChanged, q, &KMyMoneyWizard::completeStateChanged);
         newPage->widget()->show();
         selectStep(newPage->step());
         if (newPage->isLastPage()) {
