@@ -23,7 +23,6 @@
 // QT Includes
 
 #include <QPalette>
-#include <QTimer>
 #include <QHBoxLayout>
 #include <QFrame>
 #include <QPushButton>
@@ -185,7 +184,7 @@ void KMyMoneyCategory::focusInEvent(QFocusEvent *ev)
   // make sure, we get a clean state before we automagically move the focus to
   // some other widget (like for 'split transaction'). We do this by delaying
   // the emission of the focusIn signal until the next run of the event loop.
-  QTimer::singleShot(0, this, SIGNAL(focusIn()));
+  QMetaObject::invokeMethod(this, "focusIn", Qt::QueuedConnection);
 }
 
 void KMyMoneyCategory::setSplitTransaction()

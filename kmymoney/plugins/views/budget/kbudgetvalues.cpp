@@ -24,7 +24,6 @@
 #include <QButtonGroup>
 #include <QLabel>
 #include <QRadioButton>
-#include <QTimer>
 #include <QApplication>
 #include <QKeyEvent>
 #include <QEvent>
@@ -297,7 +296,7 @@ void KBudgetValues::slotChangePeriod(int id)
 void KBudgetValues::slotNeedUpdate()
 {
   if (!signalsBlocked())
-    QTimer::singleShot(0, this, SIGNAL(valuesChanged()));
+    QMetaObject::invokeMethod(this, "valuesChanged", Qt::QueuedConnection);
 }
 
 void KBudgetValues::setBudgetValues(const MyMoneyBudget& budget, const MyMoneyBudget::AccountGroup& budgetAccount)
