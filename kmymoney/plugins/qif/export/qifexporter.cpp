@@ -87,7 +87,6 @@ void QIFExporter::slotQifExport()
   if (dlg->exec() == QDialog::Accepted && dlg != nullptr) {
 //    if (okToWriteFile(QUrl::fromLocalFile(dlg->filename()))) {
       MyMoneyQifWriter writer;
-      connect(&writer, SIGNAL(signalProgress(int,int)), this, SLOT(slotStatusProgressBar(int,int)));
 
       writer.write(dlg->filename(), dlg->profile(), dlg->accountId(),
                    dlg->accountSelected(), dlg->categorySelected(),
