@@ -1,6 +1,7 @@
 /*
  * Copyright 2011-2017  Allan Anderson <agander93@gmail.com>
  * Copyright 2016-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -21,6 +22,8 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
+class QComboBox;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -60,27 +63,21 @@ private:
   int nextId() const final override;
 
   bool                validateMemoComboBox();
-  void                resetComboBox(const Column comboBox);
+  void                resetComboBox ( Column comboBox, int index = -1 );
   bool                validateSelectedColumn(const int col, const Column type);
 
-  BankingProfile       *m_profile;
-  Ui::BankingPage      *ui;
-
   void                memoColSelected(int col);
-  void                categoryColSelected(int col);
-  void                numberColSelected(int col);
   void                payeeColSelected(int col);
-  void                dateColSelected(int col);
-  void                debitColSelected(int col);
-  void                creditColSelected(int col);
-  void                amountColSelected(int col);
-  void                amountToggled(bool checked);
-  void                debitCreditToggled(bool checked);
-  void                oppositeSignsClicked(bool checked);
+
   void                clearColumns();
   void                updateCurrentMemoSelection();
   void                clearMemoColumns();
 
+private:
+  BankingProfile*             m_profile;
+  Ui::BankingPage*            ui;
+
+  QHash<Column, QComboBox *>  m_columnBoxes;
 };
 
 #endif // BANKINGWIZARDPAGE_H
