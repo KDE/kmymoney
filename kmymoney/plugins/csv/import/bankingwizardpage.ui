@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>681</width>
-    <height>253</height>
+    <width>698</width>
+    <height>402</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,247 +19,265 @@
   <property name="windowTitle">
    <string>Banking Wizard Page</string>
   </property>
-  <layout class="QHBoxLayout" name="hl1" stretch="5,1,5">
+  <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>
-    <spacer name="leftSpacer">
+    <widget class="QLabel" name="header">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Please select the appropriate columns to use,
+ corresponding to your data.</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="line">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
+    </widget>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QHBoxLayout" name="hl_selectors" stretch="0,0,0,0,0">
      <item>
-      <widget class="QLabel" name="label">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+      <spacer name="leftSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
-       <property name="text">
-        <string>Please select the appropriate columns to use,
- corresponding to your data.</string>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
        </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
+      </spacer>
      </item>
      <item>
-      <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0,0,0,0,0">
-       <item row="3" column="4">
-        <widget class="QLabel" name="labelBnk_debits">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="accessibleName">
-          <string comment="column containing debits field"/>
-         </property>
-         <property name="text">
-          <string comment="location of debit column">Debit</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="labelBnk_category">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="accessibleName">
-          <string comment="column containing number field"/>
-         </property>
-         <property name="text">
-          <string comment="column containing number field">Category</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QComboBox" name="m_dateCol">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>Select column containing date field.</string>
-         </property>
-         <property name="maxVisibleItems">
-          <number>12</number>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="1">
-        <widget class="QComboBox" name="m_categoryCol">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>Select column containing category field.</string>
-         </property>
-         <property name="maxVisibleItems">
-          <number>12</number>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="4">
-        <widget class="QLabel" name="labelBnk_credits">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="accessibleName">
-          <string comment="column containing credits field"/>
-         </property>
-         <property name="text">
-          <string comment="location of credit column">Credit</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="5">
-        <widget class="QComboBox" name="m_creditCol">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>Select column containing credit field.</string>
-         </property>
-         <property name="maxVisibleItems">
-          <number>12</number>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2">
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Minimum</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>6</width>
-           <height>0</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="3" column="3">
-        <widget class="QRadioButton" name="m_radioDebitCredit">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <underline>false</underline>
-          </font>
-         </property>
-         <property name="toolTip">
-          <string>Select 'Debit/credit' if both columns exist, otherwise select 'Amount'.</string>
-         </property>
-         <property name="accessibleName">
-          <string comment="presence of debit and credit column"/>
-         </property>
-         <property name="text">
-          <string comment="presence of debit/credit columns">De&amp;bit/credit</string>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="labelBnk_date">
-         <property name="accessibleName">
-          <string comment="column containing date field"/>
-         </property>
-         <property name="text">
-          <string>Date</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="5">
-        <widget class="QComboBox" name="m_amountCol">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>Select column containing amount field.</string>
-         </property>
-         <property name="maxVisibleItems">
-          <number>12</number>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="5">
-        <widget class="QComboBox" name="m_debitCol">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>Select column containing debit field.</string>
-         </property>
-         <property name="maxVisibleItems">
-          <number>12</number>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="labelBnk_payee">
-         <property name="accessibleName">
-          <string comment="column containing payee or description field"/>
-         </property>
-         <property name="text">
-          <string comment="column containing payee or description field">Payee/Description</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="1">
-        <layout class="QHBoxLayout" name="hl2" stretch="1,10,0">
-         <item>
+      <layout class="QVBoxLayout" name="vl_left">
+       <item>
+        <layout class="QGridLayout" name="gl_fields">
+         <item row="0" column="0">
+          <widget class="QLabel" name="labelBnk_number">
+           <property name="accessibleName">
+            <string comment="column containing number field"/>
+           </property>
+           <property name="text">
+            <string comment="column containing number field">Number</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="buddy">
+            <cstring>m_numberCol</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QComboBox" name="m_numberCol">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Select column containing number field.</string>
+           </property>
+           <property name="editable">
+            <bool>false</bool>
+           </property>
+           <property name="maxVisibleItems">
+            <number>12</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QToolButton" name="m_numberColClear">
+           <property name="toolTip">
+            <string>Clear number field selection.</string>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="labelBnk_date">
+           <property name="accessibleName">
+            <string comment="column containing date field"/>
+           </property>
+           <property name="text">
+            <string>Date</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="buddy">
+            <cstring>m_dateCol</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QComboBox" name="m_dateCol">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Select column containing date field.</string>
+           </property>
+           <property name="maxVisibleItems">
+            <number>12</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QToolButton" name="m_dateColClear">
+           <property name="toolTip">
+            <string>Clear date field selection.</string>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="labelBnk_payee">
+           <property name="accessibleName">
+            <string comment="column containing payee or description field"/>
+           </property>
+           <property name="text">
+            <string comment="column containing payee or description field">Payee/Description</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="buddy">
+            <cstring>m_payeeCol</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QComboBox" name="m_payeeCol">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Select column containing payee or description field.</string>
+           </property>
+           <property name="maxVisibleItems">
+            <number>12</number>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QToolButton" name="m_payeeColClear">
+           <property name="toolTip">
+            <string>Clear payee field selection.</string>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="labelBnk_category">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="accessibleName">
+            <string comment="column containing number field"/>
+           </property>
+           <property name="text">
+            <string comment="column containing number field">Category</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="buddy">
+            <cstring>m_categoryCol</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QComboBox" name="m_categoryCol">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Select column containing category field.</string>
+           </property>
+           <property name="maxVisibleItems">
+            <number>12</number>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="QToolButton" name="m_categoryColClear">
+           <property name="toolTip">
+            <string>Clear category field selection.</string>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="labelBnk_memo">
+           <property name="accessibleName">
+            <string comment="column containing date field"/>
+           </property>
+           <property name="text">
+            <string>Memo</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="buddy">
+            <cstring>m_memoCol</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
           <widget class="QComboBox" name="m_memoCol">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -275,205 +293,465 @@
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QLabel" name="m_currentMemoColums">
+         <item row="5" column="0" colspan="2">
+          <widget class="QLabel" name="m_currentMemoColumns">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
-            <string notr="true">Selection</string>
+            <string>Selection</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QToolButton" name="m_clearMemoColumns">
+         <item row="5" column="2">
+          <widget class="QToolButton" name="m_memoColClear">
            <property name="toolTip">
-            <string>Clear selected memo column entries</string>
+            <string>Clear memo field selection.</string>
            </property>
            <property name="text">
-            <string comment="Clear memo column assignment">Clear</string>
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="labelBnk_balance">
+           <property name="text">
+            <string>Balance</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="buddy">
+            <cstring>m_balanceCol</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QComboBox" name="m_balanceCol">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Select column containing balance field.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="2">
+          <widget class="QToolButton" name="m_balanceColClear">
+           <property name="toolTip">
+            <string>Clear balance field selection.</string>
+           </property>
+           <property name="text">
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
-       <item row="4" column="1">
-        <widget class="QComboBox" name="m_payeeCol">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>Select column containing payee or description field.</string>
-         </property>
-         <property name="maxVisibleItems">
-          <number>12</number>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QLabel" name="labelBnk_memo">
-         <property name="accessibleName">
-          <string comment="column containing date field"/>
-         </property>
-         <property name="text">
-          <string>Memo</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QComboBox" name="m_numberCol">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>Select column containing number field.</string>
-         </property>
-         <property name="editable">
-          <bool>false</bool>
-         </property>
-         <property name="maxVisibleItems">
-          <number>12</number>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="labelBnk_number">
-         <property name="accessibleName">
-          <string comment="column containing number field"/>
-         </property>
-         <property name="text">
-          <string comment="column containing number field">Number</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="4">
-        <widget class="QLabel" name="labelBnk_amount">
-         <property name="accessibleName">
-          <string comment="presence of amount column"/>
-         </property>
-         <property name="text">
-          <string comment="location of amount column">Amount</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="3">
-        <widget class="QRadioButton" name="m_radioAmount">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>Select 'Amount' if only one value column, otherwise select 'Debit/credit'.</string>
-         </property>
-         <property name="whatsThis">
-          <string extracomment="Select 'Amount' if only one value column, otherwise select "/>
-         </property>
-         <property name="accessibleName">
-          <string comment="presence of amount column"/>
-         </property>
-         <property name="text">
-          <string comment="presence of amount column">A&amp;mount</string>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0" colspan="7">
-        <widget class="Line" name="line_4">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
+       <item>
+        <spacer name="verticalSpacer_2">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Vertical</enum>
          </property>
-        </widget>
-       </item>
-       <item row="5" column="5">
-        <widget class="QCheckBox" name="m_oppositeSigns">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
          </property>
-         <property name="toolTip">
-          <string>Select if your amount column has signs improperly set.</string>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Opposite signs</string>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="5">
-        <widget class="QPushButton" name="m_clear">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>Clear all selected column entries</string>
-         </property>
-         <property name="text">
-          <string comment="Clear all column assignments">Clear all</string>
-         </property>
-        </widget>
+        </spacer>
        </item>
       </layout>
+     </item>
+     <item>
+      <spacer name="midSpace">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Minimum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>13</width>
+         <height>29</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QTabWidget" name="m_amountTabWidget">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="amountTab">
+        <attribute name="title">
+         <string>Amount</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <layout class="QGridLayout" name="gl_amount">
+           <item row="0" column="0">
+            <widget class="QLabel" name="labelBnk_amount">
+             <property name="accessibleName">
+              <string comment="presence of amount column"/>
+             </property>
+             <property name="text">
+              <string comment="location of amount column">Amount</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="buddy">
+              <cstring>m_amountCol</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="m_amountCol">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Select column containing amount field.</string>
+             </property>
+             <property name="maxVisibleItems">
+              <number>12</number>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QToolButton" name="m_amountColClear">
+             <property name="toolTip">
+              <string>Clear amount field selection.</string>
+             </property>
+             <property name="text">
+              <string>...</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="labelBnk_indicator">
+             <property name="text">
+              <string>Debit/Credit Indicator</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="buddy">
+              <cstring>m_creditDebitIndicatorCol</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="m_creditDebitIndicatorCol">
+             <property name="toolTip">
+              <string>Select column containing indicator field.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QToolButton" name="m_creditDebitIndicatorColClear">
+             <property name="toolTip">
+              <string>Clear indicator field selection.</string>
+             </property>
+             <property name="text">
+              <string>...</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="labelBnk_debit">
+             <property name="text">
+              <string>Indicator for Credit</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1" colspan="2">
+            <widget class="QLineEdit" name="m_creditIndicator">
+             <property name="toolTip">
+              <string>Enter text that is used to indicate that amount is a credit.</string>
+             </property>
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="labelBnk_credit">
+             <property name="text">
+              <string>Indicator for Debit</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1" colspan="2">
+            <widget class="QLineEdit" name="m_debitIndicator">
+             <property name="toolTip">
+              <string>Enter text that is used to indicate that amount is a debit.</string>
+             </property>
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="labelBnk_opposite">
+             <property name="text">
+              <string>Opposite signs</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1" colspan="2">
+            <widget class="QCheckBox" name="m_oppositeSigns">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Select if your amount column has signs improperly set.</string>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>64</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="debitCreditTab">
+        <attribute name="title">
+         <string>Debit/credit</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <layout class="QGridLayout" name="gl_debitcredit">
+           <item row="0" column="0">
+            <widget class="QLabel" name="labelBnk_debits">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="accessibleName">
+              <string comment="column containing debits field"/>
+             </property>
+             <property name="text">
+              <string comment="location of debit column">Debit</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="buddy">
+              <cstring>m_debitCol</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="m_debitCol">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Select column containing debit field.</string>
+             </property>
+             <property name="maxVisibleItems">
+              <number>12</number>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QToolButton" name="m_debitColClear">
+             <property name="toolTip">
+              <string>Clear debit field selection.</string>
+             </property>
+             <property name="text">
+              <string>...</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="labelBnk_credits">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="accessibleName">
+              <string comment="column containing credits field"/>
+             </property>
+             <property name="text">
+              <string comment="location of credit column">Credit</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="buddy">
+              <cstring>m_creditCol</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="m_creditCol">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Select column containing credit field.</string>
+             </property>
+             <property name="maxVisibleItems">
+              <number>12</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QToolButton" name="m_creditColClear">
+             <property name="toolTip">
+              <string>Clear credit field selection.</string>
+             </property>
+             <property name="text">
+              <string>...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>38</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <spacer name="rightSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>
    <item>
-    <spacer name="rightSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
+    <layout class="QHBoxLayout" name="hl_bottom">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_clear">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Clear all selected column and indicator entries</string>
+       </property>
+       <property name="text">
+        <string comment="Clear all column assignments">Clear all</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
  <tabstops>
   <tabstop>m_numberCol</tabstop>
+  <tabstop>m_numberColClear</tabstop>
   <tabstop>m_dateCol</tabstop>
+  <tabstop>m_dateColClear</tabstop>
   <tabstop>m_payeeCol</tabstop>
+  <tabstop>m_payeeColClear</tabstop>
   <tabstop>m_categoryCol</tabstop>
+  <tabstop>m_categoryColClear</tabstop>
   <tabstop>m_memoCol</tabstop>
-  <tabstop>m_clearMemoColumns</tabstop>
-  <tabstop>m_radioAmount</tabstop>
-  <tabstop>m_radioDebitCredit</tabstop>
+  <tabstop>m_memoColClear</tabstop>
+  <tabstop>m_balanceCol</tabstop>
+  <tabstop>m_balanceColClear</tabstop>
+  <tabstop>m_amountTabWidget</tabstop>
   <tabstop>m_amountCol</tabstop>
-  <tabstop>m_debitCol</tabstop>
-  <tabstop>m_creditCol</tabstop>
+  <tabstop>m_amountColClear</tabstop>
+  <tabstop>m_creditDebitIndicatorCol</tabstop>
+  <tabstop>m_creditDebitIndicatorColClear</tabstop>
+  <tabstop>m_creditIndicator</tabstop>
+  <tabstop>m_debitIndicator</tabstop>
   <tabstop>m_oppositeSigns</tabstop>
-  <tabstop>m_clear</tabstop>
+  <tabstop>m_debitCol</tabstop>
+  <tabstop>m_debitColClear</tabstop>
+  <tabstop>m_creditCol</tabstop>
+  <tabstop>m_creditColClear</tabstop>
  </tabstops>
  <resources/>
  <connections/>
