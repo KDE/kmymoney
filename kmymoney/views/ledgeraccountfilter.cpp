@@ -44,6 +44,7 @@ public:
   : LedgerFilterBasePrivate(qq)
   , onlinebalanceproxymodel(nullptr)
   , balanceCalculationPending(false)
+  , sortPending(false)
   {}
 
   ~LedgerAccountFilterPrivate()
@@ -53,6 +54,7 @@ public:
   OnlineBalanceProxyModel*    onlinebalanceproxymodel;
   MyMoneyAccount              account;
   bool                        balanceCalculationPending;
+  bool                        sortPending;
 };
 
 
@@ -79,10 +81,33 @@ LedgerAccountFilter::LedgerAccountFilter(QObject* parent, QVector<QAbstractItemM
 
   setSortRole(eMyMoney::Model::TransactionPostDateRole);
   setSourceModel(d->concatModel);
+
+  connect(d->concatModel, &QAbstractItemModel::rowsInserted, this, [&](const QModelIndex &parent, int first, int last) {
+    Q_UNUSED(parent)
+    Q_UNUSED(first)
+    Q_UNUSED(last)
+
+    Q_D(LedgerAccountFilter);
+    // mark this view for sorting but don't actually start sorting
+    // until we come back to the main event loop. This allows to collect
+    // multiple row insertions into the model into a single sort run.
+    // This is important during import of multiple transactions.
+    if (!d->sortPending) {
+      d->sortPending = true;
+      QMetaObject::invokeMethod(this, &LedgerAccountFilter::sortView, Qt::QueuedConnection);
+    }
+  });
 }
 
 LedgerAccountFilter::~LedgerAccountFilter()
 {
+}
+
+void LedgerAccountFilter::sortView()
+{
+  Q_D(LedgerAccountFilter);
+  sort(0);
+  d->sortPending = false;
 }
 
 void LedgerAccountFilter::setShowBalanceInverted(bool inverted)

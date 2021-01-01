@@ -50,6 +50,7 @@ public Q_SLOTS:
 
 protected Q_SLOTS:
   void recalculateBalances();
+  void sortView();
 
 protected:
   bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
