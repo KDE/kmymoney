@@ -263,9 +263,9 @@ bool MyMoneyStatement::read(const QDomElement& _e)
         }
 
         // process splits (if any)
-        child = c.firstChild();
-        while (!child.isNull() && child.isElement()) {
-          c = child.toElement();
+        auto splitChild = c.firstChild();
+        while (!splitChild.isNull() && splitChild.isElement()) {
+          c = splitChild.toElement();
           if (c.tagName() == getElName(Statement::Element::Split)) {
             MyMoneyStatement::Split s;
             s.m_accountId = c.attribute(getAttrName(Statement::Attribute::AccountID));
@@ -275,7 +275,7 @@ bool MyMoneyStatement::read(const QDomElement& _e)
             s.m_strMemo = c.attribute(getAttrName(Statement::Attribute::Memo));
             t.m_listSplits += s;
           }
-          child = child.nextSibling();
+          splitChild = splitChild.nextSibling();
         }
         m_listTransactions += t;
       } else if (c.tagName() == getElName(Statement::Element::Price)) {
