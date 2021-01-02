@@ -532,6 +532,13 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
   pWriter->setProgressCallback(appInterface()->progressCallback());
   pWriter->writeFile(device.get(), MyMoneyFile::instance()->storage());
   device->close();
+  // The next statement is a try to resolve bug #425752
+  // In case of GPG encryption it will delete the context
+  // before the QFile::copy() operation takes place.
+  // I suspect the GPG encryption to somehow keep the file
+  // open on MS-WIN systems in the background, something
+  // which does not harm on other operating systems.
+  delete device.release();
 
   // Check for errors if possible, only possible for KGPGFile
   QFileDevice *fileDevice = qobject_cast<QFileDevice*>(device.get());
