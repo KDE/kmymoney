@@ -33,6 +33,9 @@
 #include "mymoneyenums.h"
 
 class MyMoneyAccount;
+class SelectedObjects;
+
+namespace eMenu { enum class Menu; }
 
 class LedgerView : public QTableView
 {
@@ -101,6 +104,7 @@ protected:
   void keyPressEvent ( QKeyEvent* event ) override;
 
 protected Q_SLOTS:
+  void selectionChanged ( const QItemSelection& selected, const QItemSelection& deselected ) override;
   void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) final override;
   void currentChanged(const QModelIndex &current, const QModelIndex &previous) final override;
   void resizeEditorRow();
@@ -108,9 +112,11 @@ protected Q_SLOTS:
   virtual void adjustDetailColumn(int newViewportWidth);
 
 Q_SIGNALS:
-  void transactionSelected(const QModelIndex& idx);
-  void aboutToStartEdit();
-  void aboutToFinishEdit();
+  void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos) const;
+  void transactionSelectionChanged (const SelectedObjects& selection) const;
+  void transactionSelected(const QModelIndex& idx) const;
+  void aboutToStartEdit() const;
+  void aboutToFinishEdit() const;
 
 protected:
   class Private;

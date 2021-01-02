@@ -29,7 +29,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+namespace eMenu { enum class Menu; }
+
 class MyMoneyAccount;
+class SelectedObjects;
 
 class LedgerViewPage : public QWidget
 {
@@ -48,7 +51,12 @@ public:
    */
   void setShowEntryForNewTransaction(bool show = true);
 
+  void selectTransaction(const QString& id);
+
+  const SelectedObjects& selections() const;
+
 protected:
+  bool eventFilter(QObject *watched, QEvent *event) override;
 
 public Q_SLOTS:
   void showTransactionForm(bool show);
@@ -60,8 +68,12 @@ protected Q_SLOTS:
   void finishEdit();
   void keepSelection();
   void reloadFilter();
+  void slotRequestSelectionChanged(const SelectedObjects& selections) const;
 
 Q_SIGNALS:
+  void requestSelectionChanged(const SelectedObjects& selection) const;
+  void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos) const;
+
   void transactionSelected(const QModelIndex& idx);
   void aboutToStartEdit();
   void aboutToFinishEdit();

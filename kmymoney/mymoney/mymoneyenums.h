@@ -508,6 +508,7 @@ namespace eMyMoney {
 
       // MyMoneyTransaction
       TransactionErroneousRole,
+      TransactionImportedRole,
       TransactionPostDateRole,
       TransactionCounterAccountRole,
       TransactionCounterAccountIdRole,
@@ -525,6 +526,7 @@ namespace eMyMoney {
       TransactionIsStockSplitRole,
       TransactionInvestmentAccountIdRole,
       TransactionCommodityRole,
+      TransactionScheduleRole,
 
       // MyMoneySplit
       SplitSharesSuffixRole,
@@ -545,12 +547,15 @@ namespace eMyMoney {
       SplitCostCenterIdRole,
       SplitActivityRole,
       SplitTagIdRole,
-
+      SplitMatchedRole,
+      SplitFormattedValueRole,
+      SplitFormattedSharesRole,
       // Journal
       JournalSplitIdRole,
       JournalTransactionIdRole,
       JournalSplitPaymentRole,
       JournalSplitDepositRole,
+      JournalSplitAccountIdRole,
 
       // Ledger
       LedgerDisplayOrderRole,

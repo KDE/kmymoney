@@ -159,6 +159,11 @@ public:
   eMyMoney::Account::Type accountGroup() const;
 
   /**
+   * Return the account group for a given account @a type.
+   */
+  eMyMoney::Account::Type accountGroup(eMyMoney::Account::Type type) const;
+
+  /**
     * This method returns the id of the MyMoneyInstitution object this account
     * belongs to.
     * @return id of MyMoneyInstitution object. QString() if it is

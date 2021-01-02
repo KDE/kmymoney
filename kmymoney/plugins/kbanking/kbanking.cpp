@@ -35,6 +35,7 @@
 #include <QLabel>
 #include <QTimer>
 #include <QRegularExpression>
+#include <QUuid>
 
 #include <QDebug> //! @todo remove @c #include <QDebug>
 
@@ -190,8 +191,9 @@ KBanking::~KBanking()
   qDebug("Plugins: kbanking unloaded");
 }
 
-void KBanking::plug()
+void KBanking::plug(KXMLGUIFactory* guiFactory)
 {
+  Q_UNUSED(guiFactory)
   m_kbanking = new KBankingExt(this, "KMyMoney");
 
   d->passwordCacheTimer = new QTimer(this);
@@ -1091,12 +1093,7 @@ bool KBankingExt::askMapAccount(const MyMoneyAccount& acc)
 
 QString KBankingExt::mappingId(const MyMoneyObject& object) const
 {
-  QString id = MyMoneyFile::instance()->storageId() + QLatin1Char('-') + object.id();
-
-  // AqBanking does not handle the enclosing parens, so we remove it
-  id.remove('{');
-  id.remove('}');
-  return id;
+  return MyMoneyFile::instance()->storageId().toString(QUuid::WithoutBraces) + QLatin1Char('-') + object.id();
 }
 
 

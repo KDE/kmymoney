@@ -1094,11 +1094,11 @@ public:
    * In case the storage object does not have an id yet, a new one will be
    * assigned.
    *
-   * @return QString containing the value
+   * @return QUuid containing the value
    *
    * An exception is thrown if no storage object is attached.
    */
-  QString storageId();
+  QUuid storageId();
 
   /**
     * This method is used to delete a key-value-pair from the

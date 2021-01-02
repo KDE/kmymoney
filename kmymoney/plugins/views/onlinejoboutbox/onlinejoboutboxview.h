@@ -37,7 +37,7 @@ public:
   explicit OnlineJobOutboxView(QObject *parent, const QVariantList &args);
   ~OnlineJobOutboxView() final;
 
-  void plug() final override;
+  void plug(KXMLGUIFactory* guiFactory) final override;
   void unplug() final override;
 
 private:

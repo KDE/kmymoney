@@ -41,11 +41,15 @@ set( kmm_printer_SRCS
   kmm_printer.cpp
 )
 
+set( kmm_selections_SRCS
+  selectedobjects.cpp
+)
 
 add_library(kmm_utils_validators STATIC ${kmm_utils_validators_SRCS})
 add_library(kmm_utils_platformtools STATIC ${kmm_utils_platformtools_SRCS})
 add_library(kmm_webconnect SHARED ${kmm_webconnect_SRCS})
 add_library(kmm_printer SHARED ${kmm_printer_SRCS})
+add_library(kmm_selections SHARED ${kmm_selections_SRCS})
 
 target_link_libraries( kmm_utils_validators
   PUBLIC
@@ -80,6 +84,17 @@ target_link_libraries(kmm_printer
   Qt5::PrintSupport
 )
 
+target_link_libraries( kmm_selections
+  PUBLIC
+  Qt5::Core
+)
+
+set_target_properties(kmm_selections PROPERTIES
+  VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
+)
+
+generate_export_header(kmm_selections)
+
 set_target_properties(kmm_printer PROPERTIES
   VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
 )
@@ -92,8 +107,15 @@ set_target_properties(kmm_webconnect PROPERTIES
 
 generate_export_header(kmm_webconnect)
 
-install(TARGETS kmm_printer kmm_webconnect ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS
+        kmm_printer
+        kmm_webconnect
+        kmm_selections
+        ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kmm_printer_export.h
+install(FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/kmm_printer_export.h
+        ${CMAKE_CURRENT_BINARY_DIR}/kmm_selections_export.h
+        ${CMAKE_CURRENT_BINARY_DIR}/kmm_webconnect_export.h
   DESTINATION ${INCLUDE_INSTALL_DIR}/kmymoney COMPONENT Devel)
 

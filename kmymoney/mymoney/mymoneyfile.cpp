@@ -3927,21 +3927,20 @@ bool MyMoneyFile::referencesClosedAccount(const MyMoneySplit& s) const
   return false;
 }
 
-QString MyMoneyFile::storageId()
+QUuid MyMoneyFile::storageId()
 {
-  QString id = value("kmm-id");
-  if (id.isEmpty()) {
+  QUuid uid(value("kmm-id"));
+  if (uid.isNull()) {
     MyMoneyFileTransaction ft;
     try {
-      QUuid uid = QUuid::createUuid();
+      uid = QUuid::createUuid();
       setValue("kmm-id", uid.toString());
       ft.commit();
-      id = uid.toString();
     } catch (const MyMoneyException &) {
       qDebug("Unable to setup UID for new storage object");
     }
   }
-  return id;
+  return uid;
 }
 
 QString MyMoneyFile::openingBalancesPrefix()

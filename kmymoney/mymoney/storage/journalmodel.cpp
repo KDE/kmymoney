@@ -638,6 +638,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::JournalSplitIdRole:
       return journalEntry.split().id();
 
+    case eMyMoney::Model::JournalSplitAccountIdRole:
+      return journalEntry.split().accountId();
+
     case eMyMoney::Model::JournalTransactionIdRole:
       return journalEntry.transaction().id();
 
@@ -678,6 +681,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::TransactionErroneousRole:
       return !transaction.splitSum().isZero();
+
+    case eMyMoney::Model::TransactionImportedRole:
+      return transaction.isImported();
 
     case eMyMoney::Model::TransactionInvestmentAccountIdRole:
       if (MyMoneyFile::instance()->isInvestmentTransaction(journalEntry.transaction())) {
@@ -723,6 +729,12 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         rc.setValue(journalEntry.split().shares());
         return rc;
       }
+
+    case eMyMoney::Model::SplitFormattedValueRole:
+      return d->formatValue(transaction, journalEntry.split(), MyMoneyMoney::ONE);
+
+    case eMyMoney::Model::SplitFormattedSharesRole:
+      return d->formatShares(split);
 
     case eMyMoney::Model::SplitValueRole:
     {
@@ -774,11 +786,17 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::SplitPayeeRole:
       return MyMoneyFile::instance()->payeesModel()->itemById(journalEntry.split().payeeId()).name();
 
+    case eMyMoney::Model::SplitMatchedRole:
+      return journalEntry.split().isMatched();
+
     case eMyMoney::Model::TransactionCounterAccountRole:
       return d->counterAccount(idx, journalEntry, transaction);
 
     case eMyMoney::Model::TransactionCounterAccountIdRole:
       return d->counterAccountId(journalEntry, transaction);
+
+    case eMyMoney::Model::TransactionScheduleRole:
+      return false;
 
     case eMyMoney::Model::JournalSplitPaymentRole:
       if (journalEntry.split().value().isNegative()) {

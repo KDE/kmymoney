@@ -1,5 +1,6 @@
 /*
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -24,9 +25,11 @@
 // QT Includes
 
 #include <QWidget>
+class QPoint;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
+
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -34,6 +37,12 @@
 #include "viewenums.h"
 
 class MyMoneyObject;
+class KPageWidgetItem;
+class SelectedObjects;
+namespace eMenu {
+  enum class Action;
+  enum class Menu;
+}
 
 /**
   * This class is an abstract base class that all specific views
@@ -45,23 +54,64 @@ class KMM_WIDGETS_EXPORT KMyMoneyViewBase : public QWidget
   Q_OBJECT
 
 public:
-  explicit KMyMoneyViewBase(QWidget* parent = nullptr);
   virtual ~KMyMoneyViewBase();
 
   virtual void executeCustomAction(eView::Action) {}
 
+  /**
+   * This method is called during a view change on the view
+   * that is left. In case you override it, make sure to
+   * call the base class method as well.
+   */
+  virtual void aboutToHide();
+
+  /**
+   * This method is called during a view change on the view
+   * that is entered. In case you override it, make sure to
+   * call the base class method as well. The base class
+   * implementation takes care of saving the last selected
+   * view and informs the application about the current
+   * selected objects in this view by emitting the
+   * requestSelectionChange() signal.
+   *
+   * @sa requestSelectionChange()
+   */
+  virtual void aboutToShow();
+
+protected:
+  void changeEvent(QEvent* ev) override;
+
 Q_SIGNALS:
-  void selectByObject(const MyMoneyObject&, eView::Intent);
-  void selectByVariant(const QVariantList&, eView::Intent);
+  // these signals are send to application logic
+  void requestSelectionChange(const SelectedObjects& selection) const;
+  void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos) const;
+  void requestActionTrigger(eMenu::Action action);
+
+  void viewStateChanged(bool enabled);
+
+  /**
+   * @deprecated use selectionChanged() instead
+   */
+  void selectByObject(const MyMoneyObject&, eView::Intent) Q_DECL_DEPRECATED;
+  /**
+   * @deprecated use selectionChanged() instead
+   */
+  void selectByVariant(const QVariantList&, eView::Intent) Q_DECL_DEPRECATED;
+
   void customActionRequested(View, eView::Action);
 
-public slots:
-  virtual void slotSelectByObject(const MyMoneyObject&, eView::Intent) {}
-  virtual void slotSelectByVariant(const QVariantList&, eView::Intent) {}
+public Q_SLOTS:
+  virtual void updateActions(const SelectedObjects& selections) { Q_UNUSED(selections) }
+
+  virtual void slotSelectByObject(const MyMoneyObject&, eView::Intent) Q_DECL_DEPRECATED {}
+  virtual void slotSelectByVariant(const QVariantList& args, eView::Intent intent) { Q_UNUSED(args) Q_UNUSED(intent)}
   virtual void slotSettingsChanged() {}
 
 protected:
   const QScopedPointer<KMyMoneyViewBasePrivate> d_ptr;
+
+  // we do not allow to create objects of this class
+  explicit KMyMoneyViewBase(QWidget* parent = nullptr);
   KMyMoneyViewBase(KMyMoneyViewBasePrivate &dd, QWidget *parent);
 
 private:

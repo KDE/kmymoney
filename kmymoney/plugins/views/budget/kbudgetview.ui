@@ -42,44 +42,23 @@
        <item>
         <layout class="QHBoxLayout">
          <item>
-          <widget class="QPushButton" name="m_newButton">
-           <property name="toolTip">
-            <string>Creates a new budget</string>
-           </property>
-           <property name="whatsThis">
-            <string>Use this to create a new empty budget.</string>
-           </property>
+          <widget class="QToolButton" name="m_newButton">
            <property name="text">
-            <string comment="New budget">New</string>
+            <string comment="New budget button">New</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="m_renameButton">
-           <property name="toolTip">
-            <string>Rename the current selected budget.</string>
-           </property>
-           <property name="whatsThis">
-            <string>Use this to start renaming the selected budget.</string>
-           </property>
+          <widget class="QToolButton" name="m_renameButton">
            <property name="text">
-            <string>Ren</string>
+            <string comment="Rename budget button">Ren</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="m_deleteButton">
-           <property name="toolTip">
-            <string>Delete the current selected budget</string>
-           </property>
-           <property name="whatsThis">
-            <string>Use this to delete the selected budget.</string>
-           </property>
+          <widget class="QToolButton" name="m_deleteButton">
            <property name="text">
-            <string>Del</string>
-           </property>
-           <property name="shortcut">
-            <string/>
+            <string comment="Delete budget button">Del</string>
            </property>
           </widget>
          </item>

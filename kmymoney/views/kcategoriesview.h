@@ -36,6 +36,7 @@
 
 class MyMoneyMoney;
 class MyMoneyAccount;
+class SelectedObjects;
 
 /**
   * @brief  This class contains the implementation of the categories view.
@@ -67,20 +68,12 @@ public:
   ~KCategoriesView();
 
   void executeCustomAction(eView::Action action) override;
-  void refresh();
-  void updateActions(const MyMoneyObject& obj);
 
 public Q_SLOTS:
   void slotProfitLossChanged(const MyMoneyMoney &profit, bool isApproximate);
-  void slotShowCategoriesMenu(const MyMoneyAccount& acc);
-
-  void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
-  void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
   void slotSettingsChanged() override;
-
-protected:
-  void showEvent(QShowEvent * event) override;
+  void updateActions(const SelectedObjects& selections) override;
 
 protected Q_SLOTS:
   void slotUnusedIncomeExpenseAccountHidden();

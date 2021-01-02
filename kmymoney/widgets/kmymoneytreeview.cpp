@@ -1,6 +1,5 @@
 /*
- * Copyright 2006-2018  Thomas Baumgart <tbaumgart@kde.org>
- * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,15 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef REGISTERFILTER_H
-#define REGISTERFILTER_H
-
-#include "kmm_oldregister_export.h"
+#include "kmymoneytreeview.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QString>
+#include <QMouseEvent>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -32,22 +28,29 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ledgerfilter.h"
-
-namespace eWidgets { namespace eRegister { enum class ItemState; } }
-
-namespace KMyMoneyRegister
+KMyMoneyTreeView::KMyMoneyTreeView(QWidget *parent)
+  : QTreeView(parent)
 {
-  /**
-  * Used to filter items from the register.
-  */
-  struct KMM_OLDREGISTER_EXPORT RegisterFilter {
-    explicit RegisterFilter(const QString &t, LedgerFilter::State s);
+}
 
-    LedgerFilter::State  state;
-    QString text;
-  };
+KMyMoneyTreeView::~KMyMoneyTreeView()
+{
+}
 
-} // namespace
+void KMyMoneyTreeView::mouseDoubleClickEvent(QMouseEvent *event)
+{
+  emit startEdit(currentIndex());
+  event->accept();
+}
 
-#endif
+void KMyMoneyTreeView::keyPressEvent(QKeyEvent* event)
+{
+  if (event->modifiers() == Qt::NoModifier) {
+    if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
+      emit startEdit(currentIndex());
+      event->accept();
+      return;
+    }
+  }
+  QTreeView::keyPressEvent(event);
+}

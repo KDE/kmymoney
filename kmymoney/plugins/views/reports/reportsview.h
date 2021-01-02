@@ -38,7 +38,7 @@ public:
   explicit ReportsView(QObject *parent, const QVariantList &args);
   ~ReportsView() final;
 
-  void plug() final override;
+  void plug(KXMLGUIFactory* guiFactory) final override;
   void unplug() final override;
 
   QVariant requestData(const QString &arg, uint type) final override;

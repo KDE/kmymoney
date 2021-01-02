@@ -26,6 +26,7 @@
 // QT Includes
 
 #include <QList>
+#include <QAction>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -33,6 +34,7 @@
 #include <KLocalizedString>
 #include <KSharedConfig>
 #include <KConfigGroup>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -53,6 +55,7 @@
 #include "ledgertagfilter.h"
 #include "specialdatesmodel.h"
 #include "specialdatesfilter.h"
+#include "menuenums.h"
 
 using namespace Icons;
 namespace Ui { class KTagsView; }
@@ -68,6 +71,7 @@ public:
     , ui(new Ui::KTagsView)
     , m_transactionFilter(nullptr)
     , m_renameProxyModel(nullptr)
+    , m_updateAction(nullptr)
     , m_needLoad(true)
     , m_allowEditing(true)
   {
@@ -90,6 +94,10 @@ public:
     m_needLoad = false;
     ui->setupUi(q);
 
+    m_updateAction = new QAction(Icons::get(Icon::DialogOK), i18nc("@action:button Update button in tags vew", "Update"), q);
+    q->connect(m_updateAction, &QAction::triggered, q, &KTagsView::slotUpdateTag);
+    m_updateAction->setEnabled(false);
+
     ui->m_register->setSingleLineDetailRole(eMyMoney::Model::TransactionCounterAccountRole);
     ui->m_tagsList->setContextMenuPolicy(Qt::CustomContextMenu);
 
@@ -100,15 +108,14 @@ public:
     ui->m_filterBox->addItem(i18nc("@item Show only closed tags", "Closed"), ItemRenameProxyModel::eClosedItems);
     ui->m_filterBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 
-    ui->m_newButton->setIcon(Icons::get(Icon::TagNew));
-    ui->m_renameButton->setIcon(Icons::get(Icon::TagRename));
-    ui->m_deleteButton->setIcon(Icons::get(Icon::TagRemove));
-    ui->m_updateButton->setIcon(Icons::get(Icon::DialogOK));
-    ui->m_updateButton->setEnabled(false);
+    ui->m_newButton->setDefaultAction(pActions[eMenu::Action::NewTag]);
+    ui->m_renameButton->setDefaultAction(pActions[eMenu::Action::RenameTag]);
+    ui->m_deleteButton->setDefaultAction(pActions[eMenu::Action::DeleteTag]);
+    ui->m_updateButton->setDefaultAction(m_updateAction);
 
     // setup the model stack
     auto file = MyMoneyFile::instance();
-    m_transactionFilter = new LedgerTagFilter(ui->m_register, QVector<QAbstractItemModel*>());
+    m_transactionFilter = new LedgerTagFilter(ui->m_register, QVector<QAbstractItemModel*> { file->specialDatesModel() });
     auto specialDatesFilter = new SpecialDatesFilter(file->specialDatesModel(), q);
     specialDatesFilter->setSourceModel(m_transactionFilter);
     ui->m_register->setModel(specialDatesFilter);
@@ -136,17 +143,11 @@ public:
 
     q->connect(m_renameProxyModel, &ItemRenameProxyModel::renameItem, q, &KTagsView::slotRenameSingleTag);
     q->connect(m_renameProxyModel, &ItemRenameProxyModel::dataChanged, q, &KTagsView::slotModelDataChanged);
-    q->connect(ui->m_tagsList, &QWidget::customContextMenuRequested, q, &KTagsView::slotShowTagsMenu);
-
-    q->connect(ui->m_newButton,    &QAbstractButton::clicked, q, &KTagsView::slotNewTag);
-    q->connect(ui->m_renameButton, &QAbstractButton::clicked, q, &KTagsView::slotRenameTag);
-    q->connect(ui->m_deleteButton, &QAbstractButton::clicked, q, &KTagsView::slotDeleteTag);
 
     q->connect(ui->m_colorbutton, &KColorButton::changed,   q, &KTagsView::slotTagDataChanged);
     q->connect(ui->m_closed,      &QCheckBox::stateChanged, q, &KTagsView::slotTagDataChanged);
     q->connect(ui->m_notes,       &QTextEdit::textChanged,  q, &KTagsView::slotTagDataChanged);
 
-    q->connect(ui->m_updateButton, &QAbstractButton::clicked, q, &KTagsView::slotUpdateTag);
     q->connect(ui->m_helpButton, &QAbstractButton::clicked,   q, &KTagsView::slotHelp);
 
     // use the size settings of the last run (if any)
@@ -176,10 +177,13 @@ public:
     };
     ui->m_register->setColumnsShown(columns);
 
+    // setup the searchline widget
+    q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_renameProxyModel, &QSortFilterProxyModel::setFilterFixedString);
+    ui->m_searchWidget->setClearButtonEnabled(true);
+    ui->m_searchWidget->setPlaceholderText(i18nc("Placeholder text", "Search"));
+
     // At start we haven't any tag selected
     ui->m_tabWidget->setEnabled(false); // disable tab widget
-    ui->m_deleteButton->setEnabled(false); // disable delete and rename button
-    ui->m_renameButton->setEnabled(false);
 
     m_tag = MyMoneyTag(); // make sure we don't access an undefined tag
     clearItemData();
@@ -200,17 +204,13 @@ public:
     auto file = MyMoneyFile::instance();
     MyMoneySecurity base = file->baseCurrency();
 
-    const auto selection = q->selectedTags();
+    const auto tagIds = m_selections.selection(SelectedObjects::Tag);
 
-    if (selection.isEmpty() || !ui->m_tabWidget->isEnabled()) {
+    if (tagIds.isEmpty() || !ui->m_tabWidget->isEnabled()) {
       ui->m_balanceLabel->setText(i18n("Balance: %1", balance.formatMoney(file->baseCurrency().smallestAccountFraction())));
       return;
     }
 
-    QStringList tagIds;
-    for (const auto& tag : selection) {
-        tagIds.append(tag.id());
-    }
     m_transactionFilter->setTagIdList(tagIds);
 
     MyMoneyMoney deposit, payment;
@@ -308,6 +308,20 @@ public:
     ui->m_notes->setText(m_tag.notes());
   }
 
+  void finalizePendingChanges()
+  {
+    Q_Q(KTagsView);
+    // check if the content of a currently selected tag was modified
+    // and ask to store the data
+    if (m_havePendingChanges) {
+      if (KMessageBox::questionYesNo(q, QString("<qt>%1</qt>").arg(
+        i18n("Do you want to save the changes for <b>%1</b>?", m_newName)),
+                                     i18n("Save changes")) == KMessageBox::Yes) {
+        q->slotUpdateTag();
+      }
+    }
+  }
+
   /**
     * Check if a list contains a tag with a given id
     *
@@ -334,6 +348,7 @@ public:
   Ui::KTagsView*                ui;
   LedgerTagFilter*              m_transactionFilter;
   ItemRenameProxyModel*         m_renameProxyModel;
+  QAction*                      m_updateAction;
 
   MyMoneyTag                    m_tag;
   QString                       m_newName;
@@ -341,14 +356,12 @@ public:
   /**
     * This member holds the load state of page
     */
-  bool m_needLoad;
+  bool                          m_needLoad;
 
   /**
     * This signals whether a tag can be edited
     **/
-  bool m_allowEditing;
-
-  QList<MyMoneyTag> m_selectedTags;
+  bool                          m_allowEditing;
 };
 
 

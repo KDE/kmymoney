@@ -106,19 +106,10 @@ public:
     columnSelector->setModel(m_proxyModel);
     q->slotSettingsChanged();
 
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KAccountsView::selectByObject);
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KAccountsView::selectByVariant);
-    /// @todo port to new model code or cleanup
-#if 0
-    m_accountTree = &ui->m_accountTree;
-    m_proxyModel = ui->m_accountTree->init(View::Accounts);
-    q->connect(m_proxyModel, &AccountsProxyModel::unusedIncomeExpenseAccountHidden, q, &KAccountsView::slotUnusedIncomeExpenseAccountHidden);
-    q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByObject, q, &KAccountsView::selectByObject);
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::selectByVariant, q, &KAccountsView::selectByVariant);
-
-    q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KAccountsView::refresh);
-#endif
+    // forward the widget requests
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestCustomContextMenu, q, &KAccountsView::requestCustomContextMenu);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestSelectionChange, q, &KAccountsView::requestSelectionChange);
+    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestActionTrigger, q, &KAccountsView::requestActionTrigger);
   }
 
   void editLoan()
@@ -390,9 +381,60 @@ public:
     }
 
     // re-enable the disabled actions
-    q->updateActions(m_currentAccount);
+    updateActions(m_currentAccount);
 
     KMyMoneyUtils::showStatementImportResult(MyMoneyStatementReader::resultMessages(), processedAccounts);
+  }
+
+  void updateActions(const MyMoneyAccount& acc)
+  {
+    const auto file = MyMoneyFile::instance();
+    switch (acc.accountGroup()) {
+      case eMyMoney::Account::Type::Asset:
+      case eMyMoney::Account::Type::Liability:
+      case eMyMoney::Account::Type::Equity:
+      {
+        auto isClosed = acc.isClosed() ? true : false;
+        pActions[eMenu::Action::EditAccount]->setEnabled(!isClosed);
+        pActions[eMenu::Action::DeleteAccount]->setEnabled(!file->isReferenced(acc));
+
+        pActions[eMenu::Action::ReopenAccount]->setEnabled(isClosed);
+        pActions[eMenu::Action::CloseAccount]->setEnabled(!isClosed);
+
+        if (!isClosed) {
+          const auto canClose = (canCloseAccount(acc) == KAccountsViewPrivate::AccountCanClose) ? true : false;
+          pActions[eMenu::Action::CloseAccount]->setEnabled(canClose);
+          hintCloseAccountAction(acc, pActions[eMenu::Action::CloseAccount]);
+        }
+
+        pActions[eMenu::Action::ChartAccountBalance]->setEnabled(true);
+
+        if (m_currentAccount.hasOnlineMapping()) {
+          pActions[eMenu::Action::UnmapOnlineAccount]->setEnabled(true);
+
+          if (m_onlinePlugins) {
+            // check if provider is available
+            QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
+            it_p = m_onlinePlugins->constFind(m_currentAccount.onlineBankingSettings().value(QLatin1String("provider")).toLower());
+            if (it_p != m_onlinePlugins->constEnd()) {
+              QStringList protocols;
+              (*it_p)->protocols(protocols);
+              if (protocols.count() > 0) {
+                pActions[eMenu::Action::UpdateAccount]->setEnabled(true);
+              }
+            }
+          }
+
+        } else {
+          pActions[eMenu::Action::MapOnlineAccount]->setEnabled(!acc.isClosed() && m_onlinePlugins && !m_onlinePlugins->isEmpty());
+        }
+
+        break;
+      }
+      default:
+        break;
+    }
+    pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(KMyMoneyUtils::canUpdateAllAccounts());
   }
 
   Ui::KAccountsView   *ui;

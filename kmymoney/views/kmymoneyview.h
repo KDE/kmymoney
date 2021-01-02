@@ -42,7 +42,7 @@ class ResourceInstance;
 #endif
 
 namespace eAccountsModel { enum class Column; }
-namespace eMenu { enum class Action; }
+namespace eMenu { enum class Action; enum class Menu; }
 namespace KMyMoneyPlugin { class OnlinePlugin; }
 namespace eDialogs { enum class ScheduleResultCode; }
 namespace eView { enum class Intent; }
@@ -75,6 +75,7 @@ class MyMoneyMoney;
 class MyMoneyObject;
 class QLabel;
 class KMyMoneyViewBase;
+class SelectedObjects;
 
 /**
   * This class represents the view of the MyMoneyFile which contains
@@ -157,6 +158,8 @@ public:
   void addView(KMyMoneyViewBase* view, const QString& name, View idView, Icons::Icon icon);
   void removeView(View idView);
 
+  void selectView(View idView, const QVariantList& args);
+
   /**
    * @brief actionsToBeConnected are actions that need ActionCollection
    * which is available in KMyMoneyApp
@@ -177,10 +180,10 @@ public Q_SLOTS:
     * in the kmymoney.rc file so that it can be selected automatically when
     * the application is started again.
     *
-    * @param current QModelIndex of the current page item
-    * @param previous QModelIndex of the previous page item
+    * @param current KPageWidgetItem pointer to the current page item
+    * @param previous KPageWidgetItem pointer to the previous page item
     */
-  void slotCurrentPageChanged(const QModelIndex current, const QModelIndex previous);
+  void slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* previous);
 
   /**
     * Brings up a dialog to change the list(s) settings and saves them into the
@@ -191,16 +194,6 @@ public Q_SLOTS:
     * data has been loaded from external sources (QIF import).
     **/
   void slotRefreshViews();
-
-  /**
-    * Called, whenever the payees view should pop up and a specific
-    * transaction in an account should be shown.
-    *
-    * @param payeeId The ID of the payee to be shown
-    * @param accountId The ID of the account to be shown
-    * @param transactionId The ID of the transaction to be selected
-    */
-  void slotPayeeSelected(const QString& payeeId, const QString& accountId, const QString& transactionId);
 
   /**
     * Called, whenever the tags view should pop up and a specific
@@ -240,6 +233,8 @@ public Q_SLOTS:
   void slotFileOpened();
   void slotFileClosed();
 
+  void updateActions(const SelectedObjects& selections);
+
 private Q_SLOTS:
   void switchToDefaultView();
 
@@ -255,6 +250,8 @@ private Q_SLOTS:
    */
   void slotContextMenuRequested(const MyMoneyObject& obj);
 
+  void slotRememberLastView(View view);
+
 private:
 
   /**
@@ -262,7 +259,11 @@ private:
     */
   void accountNew(const bool createCategory);
 
-  void resetViewSelection();
+  /**
+   * @deprecated will be replaced by the new SelectedObjects method
+   * which has an inherited reset all the time
+   */
+  void resetViewSelection() Q_DECL_DEPRECATED;
 
 Q_SIGNALS:
    /**
@@ -307,6 +308,11 @@ Q_SIGNALS:
     * by plugins to get information about changes.
     */
   void accountSelected(const MyMoneyAccount& account);
+
+  // these signals request a change by the application
+  void requestSelectionChange (const SelectedObjects& selection);
+  void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos) const;
+  void requestActionTrigger(eMenu::Action action);
 
   void settingsChanged();
 };

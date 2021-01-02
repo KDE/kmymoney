@@ -1,0 +1,10 @@
+<!DOCTYPE kpartgui>
+<kpartgui name="kmymoneyplugin-onlinejoboutboxview" version="0">
+ <Menu name="onlinejob_context_menu">
+   <title>Credit transfer options</title>
+   <Action name="onlinejob_new" />
+   <Action name="onlinejob_edit" />
+   <Action name="onlinejob_delete" />
+   <Action name="onlinejob_log" />
+ </Menu>
+</kpartgui>

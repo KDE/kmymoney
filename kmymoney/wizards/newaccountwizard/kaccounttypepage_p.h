@@ -55,6 +55,7 @@ namespace NewAccountWizard
 
     Ui::KAccountTypePage *ui;
     bool                  m_showPriceWarning;
+    QString               m_parentAccountId;
   };
 }
 

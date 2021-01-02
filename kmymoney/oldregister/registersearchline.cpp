@@ -43,6 +43,7 @@
 #include "registerfilter.h"
 #include "icons/icons.h"
 #include "widgetenums.h"
+#include "ledgerfilter.h"
 
 using namespace eWidgets;
 using namespace KMyMoneyRegister;
@@ -55,13 +56,13 @@ public:
       reg(0),
       combo(0),
       queuedSearches(0),
-      status(eRegister::ItemState::Any) {}
+      status(LedgerFilter::State::Any) {}
 
   Register* reg;
   KComboBox* combo;
   QString search;
   int queuedSearches;
-  eRegister::ItemState status;
+  LedgerFilter::State status;
 };
 
 RegisterSearchLine::RegisterSearchLine(QWidget* parent, Register* reg) :
@@ -82,15 +83,15 @@ RegisterSearchLine::RegisterSearchLine(QWidget* parent, Register* reg) :
   parentWidget()->layout()->addWidget(d->combo);
   // don't change the order of the following lines unless updating
   // the case labels in RegisterSearchLine::itemMatches() at the same time
-  d->combo->insertItem((int)eRegister::ItemState::Any, Icons::get(Icon::TransactionStateAny), i18n("Any status"));
-  d->combo->insertItem((int)eRegister::ItemState::Imported, Icons::get(Icon::TransactionStateImported), i18n("Imported"));
-  d->combo->insertItem((int)eRegister::ItemState::Matched, Icons::get(Icon::TransactionStateMatched), i18n("Matched"));
-  d->combo->insertItem((int)eRegister::ItemState::Erroneous, Icons::get(Icon::TransactionStateErroneous), i18n("Erroneous"));
-  d->combo->insertItem((int)eRegister::ItemState::Scheduled, Icons::get(Icon::TransactionStateScheduled), i18n("Scheduled"));
-  d->combo->insertItem((int)eRegister::ItemState::NotMarked, Icons::get(Icon::TransactionStateNotMarked), i18n("Not marked"));
-  d->combo->insertItem((int)eRegister::ItemState::NotReconciled, Icons::get(Icon::TransactionStateNotReconciled), i18n("Not reconciled"));
-  d->combo->insertItem((int)eRegister::ItemState::Cleared, Icons::get(Icon::TransactionStateCleared), i18nc("Reconciliation state 'Cleared'", "Cleared"));
-  d->combo->setCurrentIndex((int)eRegister::ItemState::Any);
+  d->combo->insertItem((int)LedgerFilter::State::Any, Icons::get(Icon::TransactionStateAny), i18n("Any status"));
+  d->combo->insertItem((int)LedgerFilter::State::Imported, Icons::get(Icon::TransactionStateImported), i18n("Imported"));
+  d->combo->insertItem((int)LedgerFilter::State::Matched, Icons::get(Icon::TransactionStateMatched), i18n("Matched"));
+  d->combo->insertItem((int)LedgerFilter::State::Erroneous, Icons::get(Icon::TransactionStateErroneous), i18n("Erroneous"));
+  d->combo->insertItem((int)LedgerFilter::State::Scheduled, Icons::get(Icon::TransactionStateScheduled), i18n("Scheduled"));
+  d->combo->insertItem((int)LedgerFilter::State::NotMarked, Icons::get(Icon::TransactionStateNotMarked), i18n("Not marked"));
+  d->combo->insertItem((int)LedgerFilter::State::NotReconciled, Icons::get(Icon::TransactionStateNotReconciled), i18n("Not reconciled"));
+  d->combo->insertItem((int)LedgerFilter::State::Cleared, Icons::get(Icon::TransactionStateCleared), i18nc("Reconciliation state 'Cleared'", "Cleared"));
+  d->combo->setCurrentIndex((int)LedgerFilter::State::Any);
   connect(d->combo, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &RegisterSearchLine::slotStatusChanged);
   label->setBuddy(d->combo);
 
@@ -126,7 +127,7 @@ void RegisterSearchLine::setRegister(Register* reg)
 
 void RegisterSearchLine::slotStatusChanged(int status)
 {
-  d->status = static_cast<eRegister::ItemState>(status);
+  d->status = static_cast<LedgerFilter::State>(status);
   updateSearch();
 }
 

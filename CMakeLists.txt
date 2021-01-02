@@ -80,7 +80,7 @@ if (Gpgmepp_FOUND)
   set(GPG_FOUND TRUE)
 else()
   set(GPG_FOUND FALSE)
-  list(APPEND OPT_KF5_COMPONENTS Gpgmepp)
+  list(APPEND OPT_KF5_COMPONENTS QGpgme)
 endif()
 
 if (PkgConfig_FOUND)

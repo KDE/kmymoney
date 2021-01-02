@@ -64,6 +64,7 @@ set(kmm_base_widgets_SOURCES
   passwordtoggle.cpp
   styleditemdelegateforwarder.cpp
   tabbar.cpp
+  kmymoneytreeview.cpp
   )
 
 set(kmm_widgets_SOURCES
@@ -145,6 +146,7 @@ target_link_libraries(kmm_base_widgets PUBLIC
 #  Qt5::Widgets
 #  Qt5::Xml
   Alkimia::alkimia
+  kmm_selections
   kmm_mymoney
   kmm_settings
   kmm_models
@@ -189,6 +191,7 @@ target_link_libraries(kmm_widgets PUBLIC
   kmm_settings
   kmm_base_dialogs
   kmm_base_widgets
+  kmm_selections
 )
 
 set_target_properties(kmm_widgets PROPERTIES

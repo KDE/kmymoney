@@ -57,8 +57,9 @@ ReconciliationReport::~ReconciliationReport()
   qDebug("Plugins: reconciliation report unloaded");
 }
 
-void ReconciliationReport::plug()
+void ReconciliationReport::plug(KXMLGUIFactory* guiFactory)
 {
+  Q_UNUSED(guiFactory)
   connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::accountReconciled, this, &ReconciliationReport::slotGenerateReconciliationReport);
 //  qDebug() << "Connect was done" << viewInterface();
 }

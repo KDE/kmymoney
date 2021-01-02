@@ -25,6 +25,7 @@
 #include <QResizeEvent>
 #include <QDate>
 #include <QScrollBar>
+#include <QAction>
 #include <QDebug>
 
 // ----------------------------------------------------------------------------
@@ -36,6 +37,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "menuenums.h"
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "mymoneyfile.h"
@@ -50,6 +52,7 @@
 #include "specialdatedelegate.h"
 #include "schedulesjournalmodel.h"
 #include "transactioneditorbase.h"
+#include "selectedobjects.h"
 
 Q_GLOBAL_STATIC(LedgerView*, s_globalEditView);
 
@@ -121,6 +124,62 @@ public:
     *s_globalEditView() = nullptr;
   }
 
+  void updateDynamicActions()
+  {
+    const auto indexes = q->selectionModel()->selectedIndexes();
+    auto const gotoAccount = pActions[eMenu::Action::GoToAccount];
+    auto const gotoPayee = pActions[eMenu::Action::GoToPayee];
+
+    gotoAccount->setText(i18nc("@action:inmenu open account", "Go to account"));
+    gotoAccount->setEnabled(false);
+    gotoPayee->setText(i18nc("@action:inmenu open payee", "Go to payee"));
+    gotoPayee->setEnabled(false);
+
+    if (!indexes.isEmpty()) {
+      const auto baseIdx = MyMoneyFile::instance()->journalModel()->mapToBaseSource(indexes.at(0));
+      const auto journalEntry = MyMoneyFile::instance()->journalModel()->itemByIndex(baseIdx);
+      MyMoneyAccount acc;
+      if (!q->isColumnHidden(JournalModel::Column::Account)) {
+        // in case the account column is shown, we jump to that account
+        acc = MyMoneyFile::instance()->account(journalEntry.split().accountId());
+      } else {
+        // otherwise, we try to find a suitable asset/liability account
+        for (const auto& split : journalEntry.transaction().splits()) {
+          acc = MyMoneyFile::instance()->account(split.accountId());
+          if (split.id() != journalEntry.split().id()) {
+            if (!acc.isIncomeExpense()) {
+              // for stock accounts we show the portfolio account
+              if (acc.isInvest()) {
+                acc = MyMoneyFile::instance()->account(acc.parentAccountId());
+              }
+              break;
+            }
+          }
+        }
+      }
+
+      // found an account, update the action
+      if (!acc.id().isEmpty()) {
+        auto name = acc.name();
+        name.replace(QRegExp("&(?!&)"), "&&");
+        gotoAccount->setEnabled(true);
+        gotoAccount->setText(i18nc("@action:inmenu open account", "Go to '%1'", name));
+        gotoAccount->setData(acc.id());
+      }
+
+      if (!journalEntry.split().payeeId().isEmpty()) {
+        auto payeeId = indexes.at(0).data(eMyMoney::Model::SplitPayeeIdRole).toString();
+        if (!payeeId.isEmpty()) {
+          auto name = indexes.at(0).data(eMyMoney::Model::SplitPayeeRole).toString();
+          name.replace(QRegExp("&(?!&)"), "&&");
+          gotoPayee->setEnabled(true);
+          gotoPayee->setText(i18nc("@action:inmenu open payee", "Go to '%1'", name));
+          gotoPayee->setData(payeeId);
+        }
+      }
+    }
+  }
+
   LedgerView*                     q;
   DelegateProxy*                  delegateProxy;
   QHash<const QAbstractItemModel*, QStyledItemDelegate*>   delegates;
@@ -133,6 +192,7 @@ public:
   QString                         accountId;
   QString                         groupName;
   QPersistentModelIndex           editIndex;
+  SelectedObjects                 selection;
 };
 
 
@@ -167,6 +227,12 @@ LedgerView::LedgerView(QWidget* parent)
 
   setSelectionBehavior(SelectRows);
 
+  // setup context menu
+  setContextMenuPolicy(Qt::CustomContextMenu);
+  connect(this, &QWidget::customContextMenuRequested, this, [&](QPoint pos) {
+    d->updateDynamicActions();
+    emit requestCustomContextMenu(eMenu::Menu::Transaction, viewport()->mapToGlobal(pos));
+  });
   setTabKeyNavigation(false);
 }
 
@@ -198,6 +264,7 @@ void LedgerView::setModel(QAbstractItemModel* model)
 void LedgerView::setAccountId(const QString& id)
 {
   d->accountId = id;
+  d->selection.setSelection(SelectedObjects::Account, id);
 }
 
 const QString& LedgerView::accountId() const
@@ -532,6 +599,13 @@ void LedgerView::selectMostRecentTransaction()
   }
 }
 
+void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
+{
+  QTableView::selectionChanged(selected, deselected);
+  d->selection.setSelection(SelectedObjects::Transaction, selectedTransactions());
+  emit transactionSelectionChanged(d->selection);
+}
+
 QStringList LedgerView::selectedTransactions() const
 {
   QStringList selection;
@@ -568,9 +642,11 @@ void LedgerView::setSelectedTransactions(const QStringList& transactionIds)
     const auto indexes = journalModel->indexesByTransactionId(id);
     int row = -1;
     for (const auto baseIdx : indexes) {
-      row = journalModel->mapFromBaseSource(model(), baseIdx).row();
-      if (row != -1) {
-        break;
+      if (baseIdx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == d->accountId) {
+        row = journalModel->mapFromBaseSource(model(), baseIdx).row();
+        if (row != -1) {
+          break;
+        }
       }
     }
     if (row == -1) {
@@ -612,7 +688,6 @@ void LedgerView::setSelectedTransactions(const QStringList& transactionIds)
   // add a possibly dangling range
   createSelectionRange();
 
-  selectionModel()->clearSelection();
-  selectionModel()->select(selection, QItemSelectionModel::Select);
+  selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
   setCurrentIndex(currentIdx);
 }

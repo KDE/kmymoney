@@ -2096,8 +2096,6 @@ void MyMoneyFileTest::testModifyTransactionInClosedAccount()
 
 void MyMoneyFileTest::testStorageId()
 {
-  QString id;
-
   // make sure id will be setup if it does not exist
   MyMoneyFileTransaction ft;
   try {
@@ -2109,8 +2107,8 @@ void MyMoneyFileTest::testStorageId()
 
   try {
     // check for a new id
-    id = m->storageId();
-    QVERIFY(!id.isEmpty());
+    auto id = m->storageId();
+    QVERIFY(!id.isNull());
     // check that it is the same if we ask again
     QCOMPARE(id, m->storageId());
   } catch (const MyMoneyException &e) {

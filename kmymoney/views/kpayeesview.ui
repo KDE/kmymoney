@@ -48,55 +48,34 @@
        <item>
         <layout class="QHBoxLayout">
          <item>
-          <widget class="QPushButton" name="m_newButton">
-           <property name="toolTip">
-            <string>Creates a new payee</string>
-           </property>
-           <property name="whatsThis">
-            <string>Use this to create a new payee.</string>
-           </property>
+          <widget class="QToolButton" name="m_newButton">
            <property name="text">
-            <string comment="New payee">New</string>
+            <string>New</string>
+           </property>
+           <property name="toolButtonStyle">
+            <enum>Qt::ToolButtonIconOnly</enum>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="m_renameButton">
-           <property name="toolTip">
-            <string>Rename the current selected payee</string>
-           </property>
-           <property name="whatsThis">
-            <string>Use this to start renaming the selected payee.</string>
-           </property>
+          <widget class="QToolButton" name="m_renameButton">
            <property name="text">
             <string>Ren</string>
            </property>
+           <property name="toolButtonStyle">
+            <enum>Qt::ToolButtonIconOnly</enum>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="m_deleteButton">
-           <property name="toolTip">
-            <string>Delete selected payee(s)</string>
-           </property>
-           <property name="whatsThis">
-            <string>Use this to delete the selected payee. You can also select multiple payees to be deleted.</string>
-           </property>
+          <widget class="QToolButton" name="m_deleteButton">
            <property name="text">
             <string>Del</string>
            </property>
-           <property name="shortcut">
-            <string/>
-           </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="m_mergeButton">
-           <property name="toolTip">
-            <string>Merge multiple selected payees</string>
-           </property>
-           <property name="whatsThis">
-            <string>Use this to merge multiple selected payees.</string>
-           </property>
+          <widget class="QToolButton" name="m_mergeButton">
            <property name="text">
             <string>Merge</string>
            </property>
@@ -340,17 +319,17 @@
          </widget>
         </item>
         <item row="5" column="2">
-          <widget class="QPushButton" name="m_sendMail">
-             <property name="toolTip">
-              <string>Creates new e-mail to your payee.</string>
-             </property>
-             <property name="whatsThis">
-              <string>Use this to create new e-mail to your payee.</string>
-             </property>
-             <property name="text">
-              <string>Send</string>
-             </property>
-          </widget>
+         <widget class="QPushButton" name="m_sendMail">
+          <property name="toolTip">
+           <string>Creates new e-mail to your payee.</string>
+          </property>
+          <property name="whatsThis">
+           <string>Use this to create new e-mail to your payee.</string>
+          </property>
+          <property name="text">
+           <string>Send</string>
+          </property>
+         </widget>
         </item>
         <item row="4" column="1" colspan="2">
          <widget class="KLineEdit" name="telephoneEdit"/>
@@ -631,10 +610,6 @@
  </customwidgets>
  <tabstops>
   <tabstop>m_tabWidget</tabstop>
-  <tabstop>m_newButton</tabstop>
-  <tabstop>m_renameButton</tabstop>
-  <tabstop>m_deleteButton</tabstop>
-  <tabstop>m_mergeButton</tabstop>
   <tabstop>m_filterBox</tabstop>
   <tabstop>addressEdit</tabstop>
   <tabstop>payeecityEdit</tabstop>

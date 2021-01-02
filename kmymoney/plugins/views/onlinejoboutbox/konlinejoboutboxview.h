@@ -19,15 +19,38 @@
 #ifndef KONLINEJOBOUTBOXVIEW_H
 #define KONLINEJOBOUTBOXVIEW_H
 
-#include "kmymoneyviewbase.h"
+// ----------------------------------------------------------------------------
+// Qt Headers
 
+// ----------------------------------------------------------------------------
+// KDE Headers
+
+class KXMLGUIClient;
+class KXMLGUIFactory;
+
+// ----------------------------------------------------------------------------
+// Project Headers
+
+#include "kmymoneyviewbase.h"
 #include "onlinejob.h"
 
 class QModelIndex;
 
 namespace KMyMoneyPlugin { class OnlinePlugin; }
 
+namespace eMenu {
+  enum class OnlineAction {
+    LogOnlineJob,
+    AccountCreditTransfer,
+    DeleteOnlineJob,
+    EditOnlineJob,
+    SendOnlineJobs
+  };
+  inline uint qHash(const OnlineAction key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+};
+
 class KOnlineJobOutboxViewPrivate;
+class SelectedObjects;
 class KOnlineJobOutboxView : public KMyMoneyViewBase
 {
   Q_OBJECT
@@ -38,13 +61,15 @@ public:
 
   void executeCustomAction(eView::Action action) override;
 
-  void updateActions(const MyMoneyObject& obj);
+  void createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiClient);
+  void removeActions();
 
   QStringList selectedOnlineJobs() const;
 
 public Q_SLOTS:
-  void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
   void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
+
+  void updateActions(const SelectedObjects& selections) override;
 
 Q_SIGNALS:
   void sendJobs(QList<onlineJob>);
@@ -59,8 +84,7 @@ private:
   Q_DECLARE_PRIVATE(KOnlineJobOutboxView)
 
 private Q_SLOTS:
-  void updateNewCreditTransferButton();
-  void updateButtonState() const;
+  void updateSelection();
 
   void slotRemoveJob();
 

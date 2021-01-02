@@ -47,8 +47,9 @@ KMyMoneyPlugin::Plugin::~Plugin()
 {
 }
 
-void KMyMoneyPlugin::Plugin::plug()
+void KMyMoneyPlugin::Plugin::plug(KXMLGUIFactory* guiFactory)
 {
+  Q_UNUSED(guiFactory)
 }
 
 void KMyMoneyPlugin::Plugin::unplug()

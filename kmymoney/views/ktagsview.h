@@ -23,16 +23,20 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+class QItemSelection;
+
 // ----------------------------------------------------------------------------
 // KDE Includes
+
+class KPageWidgetItem;
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "kmymoneyviewbase.h"
 
-class QItemSelection;
 class MyMoneyTag;
+class SelectedObjects;
 
 template <typename T> class QList;
 
@@ -49,7 +53,6 @@ public:
   explicit KTagsView(QWidget *parent = nullptr);
   ~KTagsView() override;
 
-  void updateTagActions(const QList<MyMoneyTag>& tags);
   void executeCustomAction(eView::Action action) override;
 
 public Q_SLOTS:
@@ -57,9 +60,12 @@ public Q_SLOTS:
   void slotSelectTagAndTransaction(const QString& tagId);
   void slotHelp();
 
+  void updateActions(const SelectedObjects& selections) override;
+
 protected:
   void showEvent(QShowEvent* event) override;
-  QList<MyMoneyTag> selectedTags() const;
+  void aboutToShow() override;
+  void aboutToHide() override;
 
 protected Q_SLOTS:
   /**
@@ -90,14 +96,6 @@ private:
   Q_DECLARE_PRIVATE(KTagsView)
 
 private Q_SLOTS:
-  /**
-    * This slot receives the signal from the listview control that an item was right-clicked,
-    * If @p points to a real tag item, emits openContextMenu().
-    *
-    * @param p position of the pointer device
-    */
-  void slotShowTagsMenu(const QPoint& p);
-
   void slotNewTag();
   void slotRenameTag();
   void slotDeleteTag();

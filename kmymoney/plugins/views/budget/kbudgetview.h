@@ -24,19 +24,34 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+class QTreeWidgetItem;
+class QMenu;
+
 // ----------------------------------------------------------------------------
 // KDE Includes
+
+class KActionCollection;
+class KXMLGUIClient;
+class KXMLGUIFactory;
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "kmymoneyviewbase.h"
 
-class QTreeWidgetItem;
 
 class MyMoneyObject;
 class MyMoneyBudget;
 class MyMoneyMoney;
+class SelectedObjects;
+
+namespace eMenu {
+  enum class BudgetAction {
+    NewBudget, RenameBudget, DeleteBudget,
+    CopyBudget, BudgetForecast,
+  };
+  inline uint qHash(const BudgetAction key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+};
 
 /**
   * @author Darren Gould
@@ -53,11 +68,14 @@ public:
 
   void executeCustomAction(eView::Action action) override;
 
+  void createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiClient);
+  void removeActions();
+
 public Q_SLOTS:
   void slotSettingsChanged() override;
+  void updateActions(const SelectedObjects& selections) override;
 
 protected:
-  KBudgetView(KBudgetViewPrivate &dd, QWidget *parent);
   void showEvent(QShowEvent * event) override;
 
 private:
@@ -72,14 +90,6 @@ private Q_SLOTS:
   void slotResetBudget();
   void slotUpdateBudget();
 
-  /**
-    * This slot receives the signal from the listview control that an
-    * item was right-clicked,
-    * If @p p points to a real budget item, emits openContextMenu().
-    *
-    * @param p position of the pointing device
-    */
-  void slotOpenContextMenu(const QPoint&);
   void slotSelectAccount(const MyMoneyObject &obj, eView::Intent intent);
   void slotBudgetedAmountChanged();
   /**
@@ -90,6 +100,7 @@ private Q_SLOTS:
   void slotSelectBudget();
   void slotHideUnused(bool toggled);
 
+  void slotAccountSelectionChanged (const SelectedObjects& selections);
 };
 
 #endif

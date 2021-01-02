@@ -30,10 +30,7 @@
 // QT Includes
 
 #include <QList>
-#include <QTimer>
-#include <QPushButton>
-#include <QMenu>
-#include <QIcon>
+#include <QAction>
 #include <QScopedPointer>
 #include <QDebug>
 
@@ -139,11 +136,6 @@ public:
         ui->m_scheduleTree->setExpanded(idx, m_expandedGroups[groupType]);
       }
     }
-  }
-
-  static bool accountNameLessThan(const MyMoneyAccount& acc1, const MyMoneyAccount& acc2)
-  {
-    return acc1.name().toLower() < acc2.name().toLower();
   }
 
   void settingsChanged()
@@ -347,7 +339,6 @@ public:
       pActions[eMenu::Action::EnterTransaction]->setEnabled(false);
       // qDebug("KMyMoneyApp::slotTransactionsCancel");
       delete editor;
-      emit q->selectByObject(schedule, eView::Intent::None);
     }
   }
 
@@ -359,13 +350,15 @@ public:
   void skipSchedule(MyMoneySchedule& schedule)
   {
     Q_Q(KScheduledView);
+    const auto parentWidget = QApplication::activeWindow();
+
     if (!schedule.id().isEmpty()) {
       try {
         schedule = MyMoneyFile::instance()->schedule(schedule.id());
         if (!schedule.isFinished()) {
           if (schedule.occurrence() != eMyMoney::Schedule::Occurrence::Once) {
             QDate next = schedule.nextDueDate();
-            if (!schedule.isFinished() && (KMessageBox::questionYesNo(q, i18n("<qt>Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</b>?</qt>", schedule.name(), QLocale().toString(next, QLocale::ShortFormat)))) == KMessageBox::Yes) {
+            if (!schedule.isFinished() && (KMessageBox::questionYesNo( parentWidget, i18n("<qt>Do you really want to skip the <b>%1</b> transaction scheduled for <b>%2</b>?</qt>", schedule.name(), QLocale().toString(next, QLocale::ShortFormat)))) == KMessageBox::Yes) {
               MyMoneyFileTransaction ft;
               schedule.setLastPayment(next);
               schedule.setNextDueDate(schedule.nextPayment(next));

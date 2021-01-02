@@ -37,7 +37,7 @@ public:
   ~ReconciliationReport() override;
 
 public Q_SLOTS:
-  void plug() override;
+  void plug(KXMLGUIFactory* guiFactory) override;
   void unplug() override;
 
 protected Q_SLOTS:

@@ -183,6 +183,8 @@
 #include "mymoneytracer.h"
 #endif
 
+#include "selectedobjects.h"
+
 using namespace Icons;
 using namespace eMenu;
 
@@ -219,12 +221,15 @@ public:
       m_activityResourceInstance(nullptr),
 #endif
       m_applicationIsReady(true),
-      m_webConnect(new WebConnect(app)) {
+      m_webConnect(new WebConnect(app))
+  {
     // since the days of the week are from 1 to 7,
     // and a day of the week is used to index this bit array,
     // resize the array to 8 elements (element 0 is left unused)
     m_processingDays.resize(8);
 
+    m_actionCollectorTimer.setSingleShot(true);
+    m_actionCollectorTimer.setInterval(100);
   }
 
   void unlinkStatementXML();
@@ -293,6 +298,7 @@ public:
   bool                  m_autoSaveEnabled;
   QTimer*               m_autoSaveTimer;
   QTimer*               m_progressTimer;
+
   int                   m_autoSavePeriod;
   bool                  m_inAutoSaving;
 
@@ -316,6 +322,9 @@ public:
   bool                  m_applicationIsReady;
 
   WebConnect*           m_webConnect;
+
+  SelectedObjects       m_selections;
+  QTimer                m_actionCollectorTimer;
 
   // methods
   void consistencyCheck(bool alwaysDisplayResults);
@@ -1044,7 +1053,7 @@ public:
     *                    these widgets are not yet created (the default is false).
     */
   void updateCaption();
-  void updateActions();
+  void updateActions(const SelectedObjects& selections);
   bool canFileSaveAs() const;
   bool canUpdateAllAccounts() const;
   void fileAction(eKMyMoney::FileAction action);
@@ -1108,6 +1117,21 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   layout->addWidget(d->m_myMoneyView, 10);
   connect(d->m_myMoneyView, &KMyMoneyView::statusMsg, this, &KMyMoneyApp::slotStatusMsg);
   connect(d->m_myMoneyView, &KMyMoneyView::statusProgress, this, &KMyMoneyApp::slotStatusProgressBar);
+  // connect view requests
+  connect(d->m_myMoneyView, &KMyMoneyView::requestSelectionChange, this, &KMyMoneyApp::slotSelectionChanged);
+
+  connect(d->m_myMoneyView, &KMyMoneyView::requestCustomContextMenu, this, [&](eMenu::Menu type, const QPoint& pos) {
+    if (pMenus.contains(type)) {
+      pMenus[type]->exec(pos);
+    } else
+      qDebug() << "Context menu for type" << static_cast<int>(type) << " not found";
+  });
+
+  connect(d->m_myMoneyView, &KMyMoneyView::requestActionTrigger, this, [&](eMenu::Action action) {
+    if (pActions.contains(action)) {
+      pActions[action]->trigger();
+    }
+  });
 
   // Initialize kactivities resource instance
 #ifdef ENABLE_ACTIVITIES
@@ -1161,6 +1185,12 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
   // kickstart date change timer
   slotDateChanged();
   d->fileAction(eKMyMoney::FileAction::Closed);
+
+  connect(&d->m_actionCollectorTimer, &QTimer::timeout, this, [&]() {
+    // update the actions in the views
+    d->m_myMoneyView->updateActions(d->m_selections);
+    emit selectionChanged(d->m_selections);
+  });
 }
 
 KMyMoneyApp::~KMyMoneyApp()
@@ -1252,12 +1282,41 @@ QHash<eMenu::Menu, QMenu *> KMyMoneyApp::initMenus()
     {Menu::MoveTransaction,         QStringLiteral("transaction_move_menu")},
     {Menu::MarkTransaction,         QStringLiteral("transaction_mark_menu")},
     {Menu::MarkTransactionContext,  QStringLiteral("transaction_context_mark_menu")},
-    {Menu::OnlineJob,               QStringLiteral("onlinejob_context_menu")}
   };
 
   for (auto it = menuNames.cbegin(); it != menuNames.cend(); ++it)
     lutMenus.insert(it.key(), qobject_cast<QMenu*>(factory()->container(it.value(), this)));
   return lutMenus;
+}
+
+void KMyMoneyApp::slotSelectionChanged(const SelectedObjects& selections)
+{
+  if (!selections.isEmpty()) {
+    qDebug() << "current selection";
+
+    if (!selections.isEmpty(SelectedObjects::Institution))
+      qDebug() << "Institutions:" << selections.selection(SelectedObjects::Institution);
+    if (!selections.isEmpty(SelectedObjects::Account))
+      qDebug() << "Accounts:" << selections.selection(SelectedObjects::Account);
+    if (!selections.isEmpty(SelectedObjects::Transaction))
+      qDebug() << "Transactions:" << selections.selection(SelectedObjects::Transaction);
+    if (!selections.isEmpty(SelectedObjects::Payee))
+      qDebug() << "Payees:" << selections.selection(SelectedObjects::Payee);
+    if (!selections.isEmpty(SelectedObjects::Schedule))
+      qDebug() << "Schedules:" << selections.selection(SelectedObjects::Schedule);
+    if (!selections.isEmpty(SelectedObjects::Budget))
+      qDebug() << "Budgets:" << selections.selection(SelectedObjects::Budget);
+    if (!selections.isEmpty(SelectedObjects::OnlineJob))
+      qDebug() << "OnlineJobs:" << selections.selection(SelectedObjects::OnlineJob);
+    if (!selections.isEmpty(SelectedObjects::Tag))
+      qDebug() << "Tags:" << selections.selection(SelectedObjects::Tag);
+  } else {
+    qDebug() << "No selections";
+  }
+
+  d->m_selections = selections;
+
+  d->m_actionCollectorTimer.start();
 }
 
 QHash<Action, QAction *> KMyMoneyApp::initActions()
@@ -1344,7 +1403,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::UnmapOnlineAccount,            QStringLiteral("account_online_unmap"),           i18n("Unmap account..."),                           Icon::UnmapOnlineAccount},
       {Action::UpdateAccount,                 QStringLiteral("account_online_update"),          i18n("Update account..."),                          Icon::AccountUpdate},
       {Action::UpdateAllAccounts,             QStringLiteral("account_online_update_all"),      i18n("Update all accounts..."),                     Icon::AccountUpdateAll},
-      {Action::AccountCreditTransfer,         QStringLiteral("account_online_new_credit_transfer"), i18n("New credit transfer"),                    Icon::OnlineTransfer},
       // *******************
       // The categories menu
       // *******************
@@ -1392,6 +1450,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::AssignTransactionsNumber,      QStringLiteral("transaction_assign_number"),      i18n("Assign next number"),                         Icon::Empty},
       {Action::CombineTransactions,           QStringLiteral("transaction_combine"),            i18nc("Combine transactions", "Combine"),    Icon::Empty},
       {Action::CopySplits,                    QStringLiteral("transaction_copy_splits"),        i18n("Copy splits"),                                Icon::Empty},
+      {Action::ShowFilterWidget,              QStringLiteral("filter_show_widget"),             i18n("Show filter widget"),                         Icon::Empty},
       //Investment
       {Action::NewInvestment,                 QStringLiteral("investment_new"),                 i18n("New investment..."),                          Icon::InvestmentNew},
       {Action::EditInvestment,                QStringLiteral("investment_edit"),                i18n("Edit investment..."),                         Icon::InvestmentEdit},
@@ -1414,6 +1473,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::NewTag,                        QStringLiteral("tag_new"),                        i18n("New tag"),                                    Icon::TagNew},
       {Action::RenameTag,                     QStringLiteral("tag_rename"),                     i18n("Rename tag"),                                 Icon::TagRename},
       {Action::DeleteTag,                     QStringLiteral("tag_delete"),                     i18n("Delete tag"),                                 Icon::TagRemove},
+      //Reports
+      {Action::ReportOpen,                    QStringLiteral("report_open"),                    i18n("Open report"),                                Icon::Report},
       //debug actions
 #ifdef KMM_DEBUG
       {Action::WizardNewUser,                 QStringLiteral("new_user_wizard"),                i18n("Test new feature"),                           Icon::Empty},
@@ -1421,9 +1482,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
 #endif
       {Action::DebugTimers,                   QStringLiteral("debug_timers"),                   i18n("Debug Timers"),                               Icon::Empty},
       // onlineJob actions
-      {Action::DeleteOnlineJob,               QStringLiteral("onlinejob_delete"),               i18n("Remove credit transfer"),                     Icon::EditRemove},
-      {Action::EditOnlineJob,                 QStringLiteral("onlinejob_edit"),                 i18n("Edit credit transfer"),                       Icon::DocumentEdit},
-      {Action::LogOnlineJob,                  QStringLiteral("onlinejob_log"),                  i18n("Show log"),                                   Icon::Empty},
     };
 
     for (const auto& info : actionInfos) {
@@ -1494,6 +1552,10 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
       {Action::DebugTraces,                   &KMyMoneyApp::slotToggleTraces},
 #endif
       {Action::DebugTimers,                   &KMyMoneyApp::slotToggleTimers},
+      {Action::GoToPayee,                     &KMyMoneyApp::slotGoToPayee},
+      {Action::GoToAccount,                   &KMyMoneyApp::slotGoToAccount},
+      {Action::ReportOpen,                    &KMyMoneyApp::slotOpenReport},
+
     };
 
     for (auto connection = actionConnections.cbegin(); connection != actionConnections.cend(); ++connection)
@@ -1541,7 +1603,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
   // *************
   {
     const QVector<QPair<Action, QKeySequence>> actionShortcuts {
-      {qMakePair(Action::EditFindTransaction,         Qt::CTRL + Qt::Key_F)},
+      {qMakePair(Action::EditFindTransaction,         Qt::CTRL + Qt::SHIFT + Qt::Key_F)},
       {qMakePair(Action::ViewTransactionDetail,       Qt::CTRL + Qt::Key_T)},
       {qMakePair(Action::ViewHideReconciled,          Qt::CTRL + Qt::Key_R)},
       {qMakePair(Action::ViewHideCategories,          Qt::CTRL + Qt::Key_U)},
@@ -1555,7 +1617,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
 #ifdef KMM_DEBUG
       {qMakePair(Action::WizardNewUser,               Qt::CTRL + Qt::Key_G)},
 #endif
-      {qMakePair(Action::AssignTransactionsNumber,    Qt::CTRL + Qt::SHIFT + Qt::Key_N)}
+      {qMakePair(Action::AssignTransactionsNumber,    Qt::CTRL + Qt::SHIFT + Qt::Key_N)},
+      {qMakePair(Action::ShowFilterWidget,            Qt::CTRL + Qt::Key_F)},
     };
 
     for(const auto& it : actionShortcuts)
@@ -1565,7 +1628,6 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
   // *************
   // Misc settings
   // *************
-  connect(onlineJobAdministration::instance(), &onlineJobAdministration::canSendCreditTransferChanged,  lutActions.value(Action::AccountCreditTransfer), &QAction::setEnabled);
 
   // Setup transaction detail switch
   lutActions[Action::ViewTransactionDetail]->setChecked(KMyMoneySettings::showRegisterDetailed());
@@ -1933,22 +1995,63 @@ void KMyMoneyApp::slotShowTransactionDetail()
 
 }
 
+
+void KMyMoneyApp::slotGoToPayee()
+{
+  const auto action = qobject_cast<QAction*>(sender());
+  if (action) {
+    QString payeeId, accountId, transactionId;
+    payeeId = action->data().toString();
+    if (!d->m_selections.isEmpty(SelectedObjects::Account)) {
+      accountId = d->m_selections.selection(SelectedObjects::Account).at(0);
+    }
+    if (!d->m_selections.isEmpty(SelectedObjects::Transaction)) {
+      transactionId = d->m_selections.selection(SelectedObjects::Transaction).at(0);
+    }
+    QVariantList args = { payeeId, accountId, transactionId };
+    d->m_myMoneyView->slotSelectByVariant(args, eView::Intent::ShowPayee );
+  }
+}
+
+void KMyMoneyApp::slotGoToAccount()
+{
+  const auto action = qobject_cast<QAction*>(sender());
+  if (action) {
+    QString accountId, transactionId;
+    accountId = action->data().toString();
+    if (!d->m_selections.isEmpty(SelectedObjects::Transaction)) {
+      transactionId = d->m_selections.selection(SelectedObjects::Transaction).at(0);
+    }
+    QVariantList args = { accountId, transactionId };
+    d->m_myMoneyView->slotSelectByVariant(args, eView::Intent::ShowTransactionInLedger );
+  }
+}
+
+void KMyMoneyApp::slotOpenReport()
+{
+  const auto action = qobject_cast<QAction*>(sender());
+  if (action) {
+    d->m_myMoneyView->selectView(View::Reports, QVariantList { action->data() } );
+    action->setData(QVariant());
+  }
+}
+
 void KMyMoneyApp::slotHideReconciledTransactions()
 {
   KMyMoneySettings::setHideReconciledTransactions(pActions[Action::ViewHideReconciled]->isChecked());
-  d->m_myMoneyView->slotRefreshViews();
+  d->m_myMoneyView->slotSettingsChanged();
 }
 
 void KMyMoneyApp::slotHideUnusedCategories()
 {
   KMyMoneySettings::setHideUnusedCategory(pActions[Action::ViewHideCategories]->isChecked());
-  d->m_myMoneyView->slotRefreshViews();
+  d->m_myMoneyView->slotSettingsChanged();
 }
 
 void KMyMoneyApp::slotShowAllAccounts()
 {
   KMyMoneySettings::setShowAllAccounts(pActions[Action::ViewShowAll]->isChecked());
-  d->m_myMoneyView->slotRefreshViews();
+  d->m_myMoneyView->slotSettingsChanged();
 }
 
 #ifdef KMM_DEBUG
@@ -2193,7 +2296,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
     onlineJobAdministration::instance()->updateActions();
     onlineJobAdministration::instance()->setOnlinePlugins(pPlugins.extended);
     d->m_myMoneyView->setOnlinePlugins(pPlugins.online);
-    d->updateActions();
+    d->updateActions(d->m_selections);
     d->m_myMoneyView->slotRefreshViews();
     return;
   }
@@ -2206,7 +2309,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
   // update the holiday region configuration
   setHolidayRegion(KMyMoneySettings::holidayRegion());
 
-  d->m_myMoneyView->slotRefreshViews();
+  d->m_myMoneyView->slotSettingsChanged();
 
   // re-read autosave configuration
   d->m_autoSaveEnabled = KMyMoneySettings::autoSaveFile();
@@ -2643,15 +2746,6 @@ void KMyMoneyApp::Private::moveInvestmentTransaction(const QString& /*fromId*/,
   MyMoneyFile::instance()->modifyTransaction(t);
 }
 
-void KMyMoneyApp::showContextMenu(const QString& containerName)
-{
-  QWidget* w = factory()->container(containerName, this);
-  if (auto menu = dynamic_cast<QMenu*>(w))
-    menu->exec(QCursor::pos());
-  else
-    qDebug("menu '%s' not found: w = %p, menu = %p", qPrintable(containerName), w, menu);
-}
-
 void KMyMoneyApp::slotPrintView()
 {
   d->m_myMoneyView->slotPrintView();
@@ -2670,7 +2764,7 @@ void KMyMoneyApp::Private::updateCaption()
   q->setCaption(caption, MyMoneyFile::instance()->dirty());
 }
 
-void KMyMoneyApp::Private::updateActions()
+void KMyMoneyApp::Private::updateActions(const SelectedObjects& selections)
 {
   const QVector<Action> actions
   {
@@ -2679,17 +2773,21 @@ void KMyMoneyApp::Private::updateActions()
     Action::FileDump,
 #endif
     Action::EditFindTransaction, Action::NewCategory, Action::ToolCurrencies, Action::ToolPrices, Action::ToolUpdatePrices,
-    Action::ToolConsistency, Action::ToolPerformance, Action::NewAccount, Action::NewInstitution, Action::NewSchedule
+    Action::ToolConsistency, Action::ToolPerformance, Action::NewAccount, Action::NewInstitution, Action::NewSchedule,
+    Action::ShowFilterWidget, Action::NewPayee, Action::NewTag
   };
 
   for (const auto &action : actions)
     pActions[action]->setEnabled(m_storageInfo.isOpened);
+
   pActions[Action::FileBackup]->setEnabled(m_storageInfo.isOpened && m_storageInfo.type == eKMyMoney::StorageType::XML);
 
   auto aC = q->actionCollection();
   aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::SaveAs)))->setEnabled(canFileSaveAs());
   aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Close)))->setEnabled(m_storageInfo.isOpened);
-  pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(KMyMoneyUtils::canUpdateAllAccounts());
+  pActions[Action::UpdateAllAccounts]->setEnabled(KMyMoneyUtils::canUpdateAllAccounts());
+
+  m_myMoneyView->updateActions(selections);
 }
 
 bool KMyMoneyApp::Private::canFileSaveAs() const
@@ -3268,8 +3366,8 @@ bool KMyMoneyApp::slotFileNew()
     KMyMoneySettings::setFirstTimeRun(false);
 
     d->fileAction(eKMyMoney::FileAction::Opened);
-    if (actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::SaveAs)))->isEnabled())
-      slotFileSaveAs();
+    slotFileSaveAs();
+
   } catch (const MyMoneyException & e) {
     slotFileClose();
     d->removeStorage();
@@ -3518,7 +3616,7 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
       MyMoneyFile::instance()->forceDataChanged();
       // Enable save in case the fix changed the contents
       q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(dirty());
-      updateActions();
+      updateActions(SelectedObjects());
       m_myMoneyView->slotFileOpened();
       onlineJobAdministration::instance()->updateActions();
       m_myMoneyView->enableViewsIfFileOpen(m_storageInfo.isOpened);
@@ -3537,9 +3635,6 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
       // start the check for scheduled transactions that need to be
       // entered as soon as the event loop becomes active.
       QMetaObject::invokeMethod(q, "slotCheckSchedules",  Qt::QueuedConnection);
-
-      // make sure to catch view activations
-      connect(m_myMoneyView, &KMyMoneyView::viewActivated, q, &KMyMoneyApp::slotViewSelected);
       break;
 
     case eKMyMoney::FileAction::Saved:
@@ -3561,7 +3656,7 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
       q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
       q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
       m_myMoneyView->enableViewsIfFileOpen(m_storageInfo.isOpened);
-      updateActions();
+      updateActions(SelectedObjects());
       break;
 
     case eKMyMoney::FileAction::Changed:

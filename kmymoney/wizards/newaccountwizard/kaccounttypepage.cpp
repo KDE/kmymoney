@@ -38,8 +38,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "ui_kaccounttypepage.h"
-
 /// @todo port to new model code
 // #include "kequitypriceupdatedlg.h"
 #include "kmymoneycurrencyselector.h"
@@ -61,6 +59,7 @@
 #include "wizardpage.h"
 #include "kguiutils.h"
 #include "mymoneyenums.h"
+#include "accountsmodel.h"
 
 using namespace eMyMoney;
 
@@ -263,32 +262,42 @@ namespace NewAccountWizard
 
   void AccountTypePage::setAccount(const MyMoneyAccount& acc)
   {
-    Q_D(const AccountTypePage);
+    Q_D(AccountTypePage);
     if (acc.accountType() != Account::Type::Unknown) {
         if (acc.accountType() == Account::Type::AssetLoan) {
             d->ui->m_typeSelection->setCurrentItem((int)Account::Type::Loan);
           } else {
             d->ui->m_typeSelection->setCurrentItem((int)acc.accountType());
           }
-      }
+    }
     d->ui->m_openingDate->setDate(acc.openingDate());
     d->ui->m_accountName->setText(acc.name());
+    d->m_parentAccountId = acc.parentAccountId();
   }
 
   MyMoneyAccount AccountTypePage::parentAccount()
   {
-    switch (accountType()) {
-      case Account::Type::CreditCard:
-      case Account::Type::Liability:
-      case Account::Type::Loan: // Can be either but we return liability here
-        return MyMoneyFile::instance()->liability();
-        break;
-      case Account::Type::Equity:
-        return MyMoneyFile::instance()->equity();
-      default:
-        break;
+    Q_D(AccountTypePage);
+    const auto file = MyMoneyFile::instance();
+    const auto acc = file->accountsModel()->itemById(d->m_parentAccountId);
+    // in case we don't have a parent account or its group does
+    // not match the selected account type, we use the corresponding
+    // standard top level account
+    if (acc.id().isEmpty() || (acc.accountGroup() != acc.accountGroup(accountType()))) {
+      switch (accountType()) {
+        case Account::Type::CreditCard:
+        case Account::Type::Liability:
+        case Account::Type::Loan: // Can be either but we return liability here
+          return file->liability();
+          break;
+        case Account::Type::Equity:
+          return file->equity();
+        default:
+          break;
       }
-    return MyMoneyFile::instance()->asset();
+      return file->asset();
+    }
+    return acc;
   }
 
   bool AccountTypePage::allowsParentAccount() const

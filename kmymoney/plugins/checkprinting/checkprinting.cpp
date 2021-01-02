@@ -119,8 +119,9 @@ CheckPrinting::~CheckPrinting()
   qDebug("Plugins: checkprinting unloaded");
 }
 
-void CheckPrinting::plug()
+void CheckPrinting::plug(KXMLGUIFactory* guiFactory)
 {
+  Q_UNUSED(guiFactory)
   connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::transactionsSelected, this, &CheckPrinting::slotTransactionsSelected);
 }
 

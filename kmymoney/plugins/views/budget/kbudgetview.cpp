@@ -27,6 +27,10 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
+#include <KXMLGUIClient>
+#include <KXMLGUIFactory>
+#include <KActionCollection>
+
 // ----------------------------------------------------------------------------
 // Project Includes
 
@@ -34,13 +38,8 @@
 
 using namespace Icons;
 
-KBudgetView::KBudgetView(QWidget *parent) :
-    KMyMoneyViewBase(*new KBudgetViewPrivate(this), parent)
-{
-}
-
-KBudgetView::KBudgetView(KBudgetViewPrivate &dd, QWidget *parent)
-    : KMyMoneyViewBase(dd, parent)
+KBudgetView::KBudgetView(QWidget* parent)
+  : KMyMoneyViewBase(*new KBudgetViewPrivate(this), parent)
 {
 }
 
@@ -55,7 +54,6 @@ void KBudgetView::slotSettingsChanged()
     d->m_budgetProxyModel->setColorScheme(AccountsModel::Positive, KMyMoneySettings::schemeColor(SchemeColor::Positive));
     d->m_budgetProxyModel->setColorScheme(AccountsModel::Negative, KMyMoneySettings::schemeColor(SchemeColor::Negative));
   }
-
 }
 
 void KBudgetView::showEvent(QShowEvent * event)
@@ -63,6 +61,16 @@ void KBudgetView::showEvent(QShowEvent * event)
   Q_D(KBudgetView);
   if (!d->m_budgetProxyModel) {
     d->init();
+
+    connect(d->ui->m_budgetList, &QTableView::customContextMenuRequested, this, [&](const QPoint&) {
+      Q_D(KBudgetView);
+      if (d->m_contextMenu) {
+        d->m_contextMenu->exec(QCursor::pos());
+      } else {
+        qDebug() << "No context menu assigned in KBudgetView";
+      }
+    });
+
     slotSelectBudget();
   }
   emit customActionRequested(View::Budget, eView::Action::AboutToShow);
@@ -262,34 +270,6 @@ void KBudgetView::slotStartRename()
   }
 }
 
-void KBudgetView::slotOpenContextMenu(const QPoint&)
-{
-  Q_D(KBudgetView);
-
-  typedef void(KBudgetView::*KBudgetViewFunc)();
-  struct actionInfo {
-    KBudgetViewFunc callback;
-    QString         text;
-    Icon            icon;
-    bool            enabled;
-  };
-  const auto actionStates = d->actionStates();
-
-  const QVector<actionInfo> actionInfos {
-    {&KBudgetView::slotNewBudget,        i18n("New budget"),               Icon::DocumentNew,                 actionStates[eMenu::Action::NewBudget]},
-    {&KBudgetView::slotStartRename,      i18n("Rename budget"),            Icon::DocumentEdit,                actionStates[eMenu::Action::RenameBudget]},
-    {&KBudgetView::slotDeleteBudget,     i18n("Delete budget"),            Icon::EditRemove,                  actionStates[eMenu::Action::DeleteBudget]},
-    {&KBudgetView::slotCopyBudget,       i18n("Copy budget"),              Icon::EditCopy,                    actionStates[eMenu::Action::CopyBudget]},
-    {&KBudgetView::slotBudgetForecast,   i18n("Budget based on forecast"), Icon::OfficeChartLineForecast,     actionStates[eMenu::Action::BudgetForecast]}
-  };
-  auto menu = new QMenu(i18nc("Menu header", "Budget options"));
-  for (const auto& info : actionInfos) {
-    auto a = menu->addAction(Icons::get(info.icon), info.text, this, info.callback);
-    a->setEnabled(info.enabled);
-  }
-  menu->exec(QCursor::pos());
-}
-
 void KBudgetView::slotSelectAccount(const MyMoneyObject &obj, eView::Intent intent)
 {
   Q_UNUSED(intent)
@@ -393,6 +373,18 @@ void KBudgetView::slotBudgetBalanceChanged(const MyMoneyMoney &balance)
                                               : i18nc("Profit/Loss", "Profit: %1", formattedValue));
 }
 
+void KBudgetView::slotAccountSelectionChanged(const SelectedObjects& selections)
+{
+  Q_UNUSED(selections)
+  Q_D(KBudgetView);
+  const auto idx = d->ui->m_accountTree->currentIndex();
+  if (idx.isValid()) {
+    const auto baseIdx = MyMoneyFile::baseModel()->mapToBaseSource(idx);
+    const auto account = MyMoneyFile::instance()->accountsModel()->itemByIndex(baseIdx);
+    slotSelectAccount(account, eView::Intent::None);
+  }
+}
+
 void KBudgetView::slotSelectBudget()
 {
   Q_D(KBudgetView);
@@ -404,7 +396,9 @@ void KBudgetView::slotSelectBudget()
   d->m_budget = d->selectedBudget();
   d->ui->m_accountTree->setDisabled(d->m_budget.id().isEmpty());
 
+  SelectedObjects selection;
   if (!d->m_budget.id().isEmpty()) {
+    selection.addSelection(SelectedObjects::Budget, d->m_budget.id());
     d->loadBudgetAccountsView();
     const auto idx = d->ui->m_accountTree->currentIndex();
     if (idx.isValid()) {
@@ -416,8 +410,7 @@ void KBudgetView::slotSelectBudget()
     }
   }
 
-  d->actionStates();
-  d->updateButtonStates();
+  emit requestSelectionChange(selection);
 }
 
 void KBudgetView::slotHideUnused(bool toggled)
@@ -427,4 +420,72 @@ void KBudgetView::slotHideUnused(bool toggled)
   const auto prevState = !toggled;
   if (prevState != d->ui->m_hideUnusedButton->isChecked())
     d->m_budgetProxyModel->setHideUnusedIncomeExpenseAccounts(d->ui->m_hideUnusedButton->isChecked());
+}
+
+void KBudgetView::createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiClient)
+{
+  typedef void(KBudgetView::*KBudgetViewFunc)();
+  struct actionInfo {
+    QString             name;
+    KBudgetViewFunc     callback;
+    QString             text;
+    Icon                icon;
+    eMenu::BudgetAction id;
+  };
+
+  const QVector<actionInfo> actionInfos {
+    {QStringLiteral("budget_new"),              &KBudgetView::slotNewBudget,      i18n("New budget"),               Icon::DocumentNew,             eMenu::BudgetAction::NewBudget},
+    {QStringLiteral("budget_rename"),           &KBudgetView::slotStartRename,    i18n("Rename budget"),            Icon::DocumentEdit,            eMenu::BudgetAction::RenameBudget},
+    {QStringLiteral("budget_delete"),           &KBudgetView::slotDeleteBudget,   i18n("Delete budget"),            Icon::EditRemove,              eMenu::BudgetAction::DeleteBudget},
+    {QStringLiteral("budget_copy"),             &KBudgetView::slotCopyBudget,     i18n("Copy budget"),              Icon::EditCopy,                eMenu::BudgetAction::CopyBudget},
+    {QStringLiteral("budget_base_on_forecast"), &KBudgetView::slotBudgetForecast, i18n("Budget based on forecast"), Icon::OfficeChartLineForecast, eMenu::BudgetAction::BudgetForecast}
+  };
+
+  Q_D(KBudgetView);
+  d->m_actionCollection = guiClient->actionCollection();
+  for (const auto& actionInfo : actionInfos) {
+    QAction *action = d->m_actionCollection->addAction(actionInfo.name, this, actionInfo.callback);
+    action->setText(actionInfo.text);
+    action->setIcon(Icons::get(actionInfo.icon));
+    d->m_actions.insert(actionInfo.id, action);
+  }
+
+  // create context menu
+  d->m_contextMenu = qobject_cast<QMenu*>(guiFactory->container(QStringLiteral("budget_context_menu"), guiClient));
+
+  // For some unknown reason, the context menu does not get created this way from the .rc file.
+  // I must be doing something wrong / don't understand something. This kxmlgui thingy
+  // remains a mystery to me. Apparently, I am also too stupid to get the window tile showing up
+  if (!d->m_contextMenu) {
+    d->m_contextMenu = new QMenu(this);
+    d->m_contextMenu->setWindowTitle(i18nc("@title:menu Bugdet context menu", "Budget options"));
+    for (const auto& actionInfo : actionInfos) {
+      d->m_contextMenu->insertAction(nullptr, d->m_actions[actionInfo.id]);
+    }
+  }
+}
+
+void KBudgetView::removeActions()
+{
+  Q_D(KBudgetView);
+  // remove and delete the actions for this plugin
+  for (const auto& action : d->m_actions) {
+    d->m_actionCollection->removeAction(action);
+  }
+  // the context menu should be our child, but you never know
+  d->m_contextMenu->deleteLater();
+}
+
+void KBudgetView::updateActions(const SelectedObjects& selections)
+{
+  Q_D(KBudgetView);
+  d->m_actions[eMenu::BudgetAction::NewBudget]->setEnabled(true);
+
+  auto b = !selections.isEmpty(SelectedObjects::Budget);
+  d->m_actions[eMenu::BudgetAction::DeleteBudget]->setEnabled(b);
+
+  b = selections.count(SelectedObjects::Budget) == 1;
+  d->m_actions[eMenu::BudgetAction::CopyBudget]->setEnabled(b);
+  d->m_actions[eMenu::BudgetAction::RenameBudget]->setEnabled(b);
+  d->m_actions[eMenu::BudgetAction::BudgetForecast]->setEnabled(b);
 }

@@ -68,6 +68,7 @@ KCategoriesView::KCategoriesView(QWidget *parent) :
 
   d->ui->m_accountTree->setItemDelegate(new AccountDelegate(d->ui->m_accountTree));
   connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::profitLossChanged, this, &KCategoriesView::slotProfitLossChanged);
+
 }
 
 KCategoriesView::~KCategoriesView()
@@ -91,10 +92,6 @@ void KCategoriesView::executeCustomAction(eView::Action action)
   Q_D(KCategoriesView);
 
   switch(action) {
-    case eView::Action::Refresh:
-      refresh();
-      break;
-
     case eView::Action::SetDefaultFocus:
       QMetaObject::invokeMethod(d->ui->m_accountTree, "setFocus", Qt::QueuedConnection);
       break;
@@ -104,82 +101,50 @@ void KCategoriesView::executeCustomAction(eView::Action action)
   }
 }
 
-void KCategoriesView::refresh()
+void KCategoriesView::updateActions(const SelectedObjects& selections)
 {
+  /// @todo updateActions
   Q_D(KCategoriesView);
-  if (!isVisible()) {
-    d->m_needsRefresh = true;
+  const auto file = MyMoneyFile::instance();
+
+  // check if there is anything todo and quit if not
+  if (selections.selection(SelectedObjects::Account).count() < 1
+    && d->m_currentCategory.id().isEmpty() ) {
     return;
   }
-  d->m_needsRefresh = false;
 
-/// @todo port to new model code
-#if 0
-  d->m_proxyModel->invalidate();
-  d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
+  pActions[eMenu::Action::NewCategory]->setEnabled(true);
+  pActions[eMenu::Action::EditCategory]->setEnabled(false);
+  pActions[eMenu::Action::DeleteCategory]->setEnabled(false);
 
-  // reinitialize the default state of the hidden categories label
-  d->m_haveUnusedCategories = false;
-  d->ui->m_hiddenCategories->hide();
-  d->m_proxyModel->setHideUnusedIncomeExpenseAccounts(KMyMoneySettings::hideUnusedCategory());
-#endif
-}
-
-void KCategoriesView::showEvent(QShowEvent * event)
-{
-  Q_D(KCategoriesView);
-  /// @todo port to new model code
-#if 0
-  if (!d->m_proxyModel)
-    d->init();
-
-  emit customActionRequested(View::Categories, eView::Action::AboutToShow);
-
-  if (d->m_needsRefresh)
-    refresh();
-
-  #endif
-  // don't forget base class implementation
-  QWidget::showEvent(event);
-}
-
-void KCategoriesView::updateActions(const MyMoneyObject& obj)
-{
-  Q_D(KCategoriesView);
-  if (typeid(obj) != typeid(MyMoneyAccount) &&
-      (obj.id().isEmpty() && d->m_currentCategory.id().isEmpty())) // do not disable actions that were already disabled))
+  const auto accountIds = selections.selection(SelectedObjects::Account);
+  if (accountIds.isEmpty()) {
+    d->m_currentCategory = MyMoneyAccount();
     return;
+  }
+  const auto acc = file->accountsModel()->itemById(accountIds.at(0));
+  auto b = file->isStandardAccount(acc.id()) ? false : true;
 
-  const auto& acc = static_cast<const MyMoneyAccount&>(obj);
-
-  if (d->m_currentCategory.id().isEmpty() && acc.id().isEmpty())
-    return;
-
+  QBitArray skip((int)eStorage::Reference::Count);
   switch (acc.accountType()) {
     case eMyMoney::Account::Type::Income:
     case eMyMoney::Account::Type::Expense:
-    {
-      const auto file = MyMoneyFile::instance();
-      auto b = file->isStandardAccount(acc.id()) ? false : true;
+      d->m_currentCategory = acc;
       pActions[eMenu::Action::EditCategory]->setEnabled(b);
+
       // enable delete action, if category/account itself is not referenced
       // by any object except accounts, because we want to allow
       // deleting of sub-categories. Also, we allow transactions, schedules and budgets
       // to be present because we can re-assign them during the delete process
-      QBitArray skip((int)eStorage::Reference::Count);
       skip.fill(false);
       skip.setBit((int)eStorage::Reference::Transaction);
       skip.setBit((int)eStorage::Reference::Account);
       skip.setBit((int)eStorage::Reference::Schedule);
       skip.setBit((int)eStorage::Reference::Budget);
-
       pActions[eMenu::Action::DeleteCategory]->setEnabled(b && !file->isReferenced(acc, skip));
-      d->m_currentCategory = acc;
       break;
-    }
+
     default:
-      pActions[eMenu::Action::EditCategory]->setEnabled(false);
-      pActions[eMenu::Action::DeleteCategory]->setEnabled(false);
       d->m_currentCategory = MyMoneyAccount();
       break;
   }
@@ -208,43 +173,6 @@ void KCategoriesView::slotProfitLossChanged(const MyMoneyMoney &profit, bool isA
     d->updateViewLabel(d->ui->m_totalProfitsLabel,
                            isApproximate ? i18nc("Approximate profit", "Profit: ~%1", formattedValue)
                                          : i18n("Profit: %1", formattedValue));
-}
-
-void KCategoriesView::slotShowCategoriesMenu(const MyMoneyAccount& acc)
-{
-  Q_UNUSED(acc);
-  pMenus[eMenu::Menu::Category]->exec(QCursor::pos());
-}
-
-void KCategoriesView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
-{
-  switch(intent) {
-    case eView::Intent::UpdateActions:
-      updateActions(obj);
-      break;
-
-    case eView::Intent::OpenContextMenu:
-      slotShowCategoriesMenu(static_cast<const MyMoneyAccount&>(obj));
-      break;
-
-    default:
-      break;
-  }
-}
-
-void KCategoriesView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
-{
-  /// @todo cleanup
-#if 0
-  switch (intent) {
-    case eView::Intent::UpdateProfit:
-      if (variant.count() == 1)
-        slotProfitLossChanged(variant.first().value<MyMoneyMoney>());
-      break;
-    default:
-      break;
-  }
-#endif
 }
 
 void KCategoriesView::slotNewCategory()
@@ -283,9 +211,6 @@ void KCategoriesView::slotEditCategory()
       return;
   }
 
-  // set a status message so that the application can't be closed until the editing is done
-  //        slotStatusMsg(caption);
-
   QPointer<KNewAccountDlg> dlg =
       new KNewAccountDlg(d->m_currentCategory, true, true, 0, i18n("Edit category '%1'", d->m_currentCategory.name()));
 
@@ -305,17 +230,12 @@ void KCategoriesView::slotEditCategory()
         file->reparentAccount(account, parent);
 
       ft.commit();
-
-      // reload the account object as it might have changed in the meantime
-      emit selectByObject(account, eView::Intent::None);
-
     } catch (const MyMoneyException &e) {
       KMessageBox::error(this, i18n("Unable to modify category '%1'. Cause: %2", d->m_currentCategory.name(), QString::fromLatin1(e.what())));
     }
   }
 
   delete dlg;
-  //        ready();
 }
 
 void KCategoriesView::slotDeleteCategory()
@@ -360,7 +280,6 @@ void KCategoriesView::slotDeleteCategory()
       auto newCategory = file->account(categoryId);
       try {
         {
-          //        KMSTATUS(i18n("Adjusting transactions..."));
           /*
             d->m_currentCategory.id() is the old id, categoryId the new one
             Now search all transactions and schedules that reference d->m_currentCategory.id()
@@ -373,36 +292,26 @@ void KCategoriesView::slotDeleteCategory()
           QList<MyMoneyTransaction>::iterator it_t;
           file->transactionList(tlist, filter);
 
-          //        slotStatusProgressBar(0, tlist.count());
-//          int cnt = 0;
           for (it_t = tlist.begin(); it_t != tlist.end(); ++it_t) {
-            //          slotStatusProgressBar(++cnt, 0);
             MyMoneyTransaction t = (*it_t);
             if (t.replaceId(categoryId, d->m_currentCategory.id()))
               file->modifyTransaction(t);
           }
-          //        slotStatusProgressBar(tlist.count(), 0);
         }
         // now fix all schedules
         {
-          //        KMSTATUS(i18n("Adjusting scheduled transactions..."));
           QList<MyMoneySchedule> slist = file->scheduleList(d->m_currentCategory.id());
           QList<MyMoneySchedule>::iterator it_s;
 
-//          int cnt = 0;
-          //        slotStatusProgressBar(0, slist.count());
           for (it_s = slist.begin(); it_s != slist.end(); ++it_s) {
-            //          slotStatusProgressBar(++cnt, 0);
             MyMoneySchedule sch = (*it_s);
             if (sch.replaceId(categoryId, d->m_currentCategory.id())) {
               file->modifySchedule(sch);
             }
           }
-          //        slotStatusProgressBar(slist.count(), 0);
         }
         // now fix all budgets
         {
-          //        KMSTATUS(i18n("Adjusting budgets..."));
           QList<MyMoneyBudget> blist = file->budgetList();
           QList<MyMoneyBudget>::const_iterator it_b;
           for (it_b = blist.constBegin(); it_b != blist.constEnd(); ++it_b) {
@@ -414,17 +323,13 @@ void KCategoriesView::slotDeleteCategory()
               b.setAccount(toBudget, categoryId);
               b.removeReference(d->m_currentCategory.id());
               file->modifyBudget(b);
-
             }
           }
-          //        slotStatusProgressBar(blist.count(), 0);
         }
       } catch (MyMoneyException &e) {
         KMessageBox::error(this, i18n("Unable to exchange category <b>%1</b> with category <b>%2</b>. Reason: %3", d->m_currentCategory.name(), newCategory.name(), QString::fromLatin1(e.what())));
-        //    slotStatusProgressBar(-1, -1);
         return;
       }
-      //    slotStatusProgressBar(-1, -1);
     }
 
     // retain the account name for a possible later usage in the error message box
@@ -445,7 +350,6 @@ void KCategoriesView::slotDeleteCategory()
           try {
             file->removeAccount(d->m_currentCategory);
             d->m_currentCategory.clearId();
-            emit selectByObject(d->m_currentCategory, eView::Intent::None);
             ft.commit();
           } catch (const MyMoneyException &e) {
             KMessageBox::error(this, i18n("<qt>Unable to delete category <b>%1</b>. Cause: %2</qt>", selectedAccountName, QString::fromLatin1(e.what())));
@@ -517,15 +421,11 @@ void KCategoriesView::slotDeleteCategory()
       }
     }
     // the category/account is deleted after the switch
-
-
     try {
       file->removeAccount(d->m_currentCategory);
       d->m_currentCategory.clearId();
-      emit selectByObject(MyMoneyAccount(), eView::Intent::None);
       ft.commit();
     } catch (const MyMoneyException &e) {
       KMessageBox::error(this, i18n("Unable to delete category '%1'. Cause: %2", selectedAccountName, QString::fromLatin1(e.what())));
     }
 }
-

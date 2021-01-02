@@ -64,7 +64,6 @@ namespace eMenu {
     ReportAccountTransactions, ChartAccountBalance,
     UpdateAccountMenu, UpdateAccount, UpdateAllAccounts,
     MapOnlineAccount, UnmapOnlineAccount,
-    AccountCreditTransfer,
     // *************
     // The category menu
     // *************
@@ -116,18 +115,13 @@ namespace eMenu {
     // *************
     NewTag, RenameTag, DeleteTag,
     // *************
-    // The budget menu
-    // *************
-    NewBudget, RenameBudget, DeleteBudget,
-    CopyBudget, ChangeBudgetYear, BudgetForecast,
-    // *************
     // The show actions
     // *************
     ShowHomeView, ShowInstitutionsView, ShowAccountsView,
     ShowSchedulesView, ShowCategoriesView, ShowTagsView,
     ShowPayeesView, ShowLedgersView, ShowInvestmentsView,
     ShowReportsView, ShowBudgetView, ShowForecastView,
-    ShowOnlineJobOutboxView,
+    ShowOnlineJobOutboxView, ShowFilterWidget,
     // *************
     // The misc actions
     // *************
@@ -135,7 +129,8 @@ namespace eMenu {
     WizardNewUser, DebugTraces,
 #endif
     DebugTimers,
-    DeleteOnlineJob, EditOnlineJob, LogOnlineJob
+    DeleteOnlineJob, EditOnlineJob, LogOnlineJob,
+    ReportOpen
   };
 
   inline uint qHash(const Action key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }

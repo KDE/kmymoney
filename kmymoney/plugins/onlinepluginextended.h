@@ -71,7 +71,7 @@ public:
    */
   virtual void sendOnlineJob(QList<onlineJob>& jobs) = 0;
 
-  virtual void plug() override = 0;
+  virtual void plug(KXMLGUIFactory* guiFactory) override = 0;
   virtual void unplug() override = 0;
 
 Q_SIGNALS:

@@ -57,6 +57,7 @@
 #include "mymoneyenums.h"
 #include "modelenums.h"
 #include "columnselector.h"
+#include "mymoneymoney.h"
 
 using namespace eMyMoney;
 

@@ -25,7 +25,6 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QTreeView>
 #include <QScopedPointer>
 
 // ----------------------------------------------------------------------------
@@ -34,18 +33,21 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class MyMoneyObject;
+#include "kmymoneytreeview.h"
+
 class AccountsProxyModel;
 class KMyMoneyAccountTreeViewPrivate;
+class SelectedObjects;
 
-namespace eAccountsModel { enum class Column; }
-namespace eView { enum class Intent; }
-enum class View;
+namespace eMenu {
+  enum class Action;
+  enum class Menu;
+}
 
 /**
   * This view was created to handle the actions that could be performed with the accounts.
   */
-class KMM_BASE_WIDGETS_EXPORT KMyMoneyAccountTreeView : public QTreeView
+class KMM_BASE_WIDGETS_EXPORT KMyMoneyAccountTreeView : public KMyMoneyTreeView
 {
   Q_OBJECT
   Q_DISABLE_COPY(KMyMoneyAccountTreeView)
@@ -71,17 +73,14 @@ public:
    */
   void setProxyModel(AccountsProxyModel* model);
 
-protected:
-  void mouseDoubleClickEvent(QMouseEvent *event) override;
-  void keyPressEvent(QKeyEvent *event) override;
-
 protected Q_SLOTS:
   void customContextMenuRequested(const QPoint);
   void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) override;
 
 Q_SIGNALS:
-  void selectByObject(const MyMoneyObject&, eView::Intent);
-  void selectByVariant(const QVariantList&, eView::Intent);
+  void requestSelectionChange (const SelectedObjects& selections) const;
+  void requestCustomContextMenu(eMenu::Menu contextMenu, const QPoint& pos) const;
+  void requestActionTrigger(eMenu::Action action);
 
 private:
   const QScopedPointer<KMyMoneyAccountTreeViewPrivate> d_ptr;

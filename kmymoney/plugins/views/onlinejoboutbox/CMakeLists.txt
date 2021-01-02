@@ -33,3 +33,6 @@ target_link_libraries(onlinejoboutboxview
     KF5::TextWidgets
     kmm_menus
 )
+
+install(FILES onlinejoboutboxview.rc
+        DESTINATION ${KXMLGUI_INSTALL_DIR}/onlinejoboutboxview)

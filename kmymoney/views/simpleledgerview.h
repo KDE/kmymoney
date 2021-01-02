@@ -29,6 +29,7 @@
 // Project Includes
 
 #include "kmymoneyviewbase.h"
+class SelectedObjects;
 
 class SimpleLedgerViewPrivate;
 class SimpleLedgerView : public KMyMoneyViewBase
@@ -44,36 +45,25 @@ public:
   virtual void executeCustomAction(eView::Action action) override;
 
 public Q_SLOTS:
-  /**
-   * This method closes all open ledgers
-   */
-  void closeLedgers();
-
-  /**
-   * This slot creates tabs for the initial ledgers on file open
-   */
-  void openLedgersAfterOpen();
-
   void showEvent(QShowEvent* event) override;
 
+  void slotSelectByVariant(const QVariantList& args, eView::Intent intent) override;
   void slotSettingsChanged() override;
-
-protected:
 
 private Q_SLOTS:
   void tabSelected(int idx);
   void tabClicked(int idx);
-  void openLedger(QString accountId, bool makeCurrentLedger);
   /**
-   * A convenience method for openLedger() that sets @a makeCurrentLedger to @c true.
+   * Open the ledger of account @a accountId and make it the current ledger
    */
-  void openNewLedger(QString accountId);
+  void openLedger (QString accountId);
   void closeLedger(int idx);
   void checkTabOrder(int from, int to);
   void setupCornerWidget();
 
 protected:
   bool eventFilter(QObject* o, QEvent* e) override;
+  void aboutToShow() override;
 
 Q_SIGNALS:
   void showForms(bool show);

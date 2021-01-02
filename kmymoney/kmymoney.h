@@ -61,6 +61,7 @@ class MyMoneyTransaction;
 class WebConnect;
 class creditTransfer;
 class IMyMoneyOperationsFormat;
+class SelectedObjects;
 
 template <class T> class onlineJobTyped;
 typedef  void (*KMyMoneyAppCallback)(int, int, const QString &);
@@ -106,6 +107,8 @@ private Q_SLOTS:
     * Handle the context menu of the list used by KMessageBox::informationList to display the consistency check results.
     */
   void slotShowContextMenuForConsistencyCheck(const QPoint &);
+
+  void slotSelectionChanged(const SelectedObjects& selection);
 
 protected Q_SLOTS:
   /**
@@ -207,7 +210,10 @@ protected Q_SLOTS:
 
   void slotShowNextView();
 
-  void slotViewSelected(View view);
+  /**
+   * @deprecated move contents of this method to KMyMoneyView
+   */
+  void slotViewSelected(View view) Q_DECL_DEPRECATED;
 
   /**
     * Calls the print logic for the current view
@@ -246,6 +252,10 @@ protected Q_SLOTS:
   void slotStatusProgressDone();
 
   void slotCheckSchedules();
+
+  void slotGoToPayee();
+  void slotGoToAccount();
+  void slotOpenReport();
 
 public:
   /**
@@ -301,12 +311,6 @@ public:
     */
   void dumpActions() const;
 #endif
-
-  /**
-    * Popup the context menu with the respective @p containerName.
-    * Valid container names are defined in kmymoneyui.rc
-    */
-  void showContextMenu(const QString& containerName);
 
   void createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal);
 
@@ -606,6 +610,8 @@ Q_SIGNALS:
   void cancelMatchTransaction();
 
   void kmmFilePlugin(unsigned int);
+
+  void selectionChanged(const SelectedObjects& selection);
 
 public:
 
