@@ -12,7 +12,7 @@ services:
       - seccomp:unconfined
     container_name: debug
     volumes:
-      - ~/Tresors/KMyMoney:/config
+      - ~/KMyMoney:/config
       - ~/.aqbanking:/root/.aqbanking
       - ~/.config/kmymoney:/root/.config/kmymoney
       - ~/.gdbinit:/root/.gdbinit
