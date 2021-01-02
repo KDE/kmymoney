@@ -1506,27 +1506,32 @@ namespace KMyMoneyRegister
     RegisterItem* item = d->m_focusItem;
     int height = 0;
 
+    bool hitTopOrBottom = false;
     switch (key) {
       case Qt::Key_PageUp:
-        while (height < viewport()->height() && item->prevItem()) {
+        while (height < viewport()->height() && item->prevItem() && !hitTopOrBottom) {
           do {
             item = item->prevItem();
             if (item->isVisible())
               height += item->rowHeightHint();
           } while ((!item->isSelectable() || !item->isVisible()) && item->prevItem());
-          while ((!item->isSelectable() || !item->isVisible()) && item->nextItem())
+          hitTopOrBottom = (item->prevItem() == nullptr);
+          while ((!item->isSelectable() || !item->isVisible()) && item->nextItem()) {
             item = item->nextItem();
+          }
         }
         break;
       case Qt::Key_PageDown:
-        while (height < viewport()->height() && item->nextItem()) {
+        while (height < viewport()->height() && item->nextItem() && !hitTopOrBottom) {
           do {
             if (item->isVisible())
               height += item->rowHeightHint();
             item = item->nextItem();
           } while ((!item->isSelectable() || !item->isVisible()) && item->nextItem());
-          while ((!item->isSelectable() || !item->isVisible()) && item->prevItem())
+          hitTopOrBottom = (item->nextItem() == nullptr);
+          while ((!item->isSelectable() || !item->isVisible()) && item->prevItem()) {
             item = item->prevItem();
+          }
         }
         break;
 
