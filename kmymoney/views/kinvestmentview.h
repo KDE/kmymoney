@@ -54,7 +54,7 @@ public:
   void executeCustomAction(eView::Action action) override;
   void setDefaultFocus();
   void refresh();
-  void updateActions(const MyMoneyObject &obj) Q_DECL_DEPRECATED;
+  Q_DECL_DEPRECATED void updateActions(const MyMoneyObject &obj);
 
 public Q_SLOTS:
   /**

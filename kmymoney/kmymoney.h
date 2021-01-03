@@ -213,7 +213,7 @@ protected Q_SLOTS:
   /**
    * @deprecated move contents of this method to KMyMoneyView
    */
-  void slotViewSelected(View view) Q_DECL_DEPRECATED;
+  Q_DECL_DEPRECATED void slotViewSelected(View view);
 
   /**
     * Calls the print logic for the current view

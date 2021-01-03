@@ -92,18 +92,18 @@ Q_SIGNALS:
   /**
    * @deprecated use selectionChanged() instead
    */
-  void selectByObject(const MyMoneyObject&, eView::Intent) Q_DECL_DEPRECATED;
+  Q_DECL_DEPRECATED void selectByObject(const MyMoneyObject&, eView::Intent);
   /**
    * @deprecated use selectionChanged() instead
    */
-  void selectByVariant(const QVariantList&, eView::Intent) Q_DECL_DEPRECATED;
+  Q_DECL_DEPRECATED void selectByVariant(const QVariantList&, eView::Intent);
 
   void customActionRequested(View, eView::Action);
 
 public Q_SLOTS:
   virtual void updateActions(const SelectedObjects& selections) { Q_UNUSED(selections) }
 
-  virtual void slotSelectByObject(const MyMoneyObject&, eView::Intent) Q_DECL_DEPRECATED {}
+  Q_DECL_DEPRECATED virtual void slotSelectByObject(const MyMoneyObject&, eView::Intent) {}
   virtual void slotSelectByVariant(const QVariantList& args, eView::Intent intent) { Q_UNUSED(args) Q_UNUSED(intent)}
   virtual void slotSettingsChanged() {}
 

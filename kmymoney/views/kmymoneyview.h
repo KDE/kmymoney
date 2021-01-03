@@ -263,7 +263,7 @@ private:
    * @deprecated will be replaced by the new SelectedObjects method
    * which has an inherited reset all the time
    */
-  void resetViewSelection() Q_DECL_DEPRECATED;
+  Q_DECL_DEPRECATED void resetViewSelection();
 
 Q_SIGNALS:
    /**
