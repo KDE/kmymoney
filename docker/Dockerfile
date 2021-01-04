@@ -15,7 +15,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y openssh-server gdb gdbserver rsync
 RUN apt-get build-dep -y kmymoney
-RUN apt-get install -y qt5-default
+RUN apt-get install -y qt5-default qtwebengine5-dev
 RUN apt-get install -y libsqlcipher-dev
 RUN apt-get install -y libqt5sql5-*
 RUN apt-get install -y breeze-icon-theme
