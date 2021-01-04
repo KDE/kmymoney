@@ -67,6 +67,8 @@ while(<STDIN>) {
         $_ =~ /id="([^"]*)"/;
         $transactionid = $1;
         $transactionid = $scheduleid if($transactionid eq "");
+        $_ =~ /postdate="([^"]*)"/;
+        $postdate = $1;
         next;
     }
     if ($_ =~ /<SPLIT [a-z]+=/) {
@@ -80,10 +82,10 @@ while(<STDIN>) {
                     if ($@) {
                         print "Invalid string: '$value'\n";
                     } else {
-                        print "$transactionid;$splitid;$value;$result\n";
+                        print "$postdate;$transactionid;$splitid;$value;$result\n";
                     }
                 } else {
-                    print "$transactionid;$splitid;$value\n";
+                    print "$postdate;$transactionid;$splitid;$value\n";
                 }
             }
         }
