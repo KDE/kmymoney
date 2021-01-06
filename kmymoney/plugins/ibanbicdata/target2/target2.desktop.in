@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Target2Participants
 Name[ca]=Objectiu2Participants
+Name[ca@valencia]=Objectiu2Participants
 Name[es]=Target2Participants
 Name[nl]=Target2Participants
 Name[pt]=Target2Participants
@@ -9,6 +10,7 @@ Name[uk]=Target2Participants
 Name[x-test]=xxTarget2Participantsxx
 Comment=Contains the BIC and name of all target2 participants
 Comment[ca]=Conté el BIC i el nom de tots els participants objectiu 2
+Comment[ca@valencia]=Conté el BIC i el nom de tots els participants objectiu 2
 Comment[es]=Contiene el BIC y el nombre de todos los participantes de TARGET2
 Comment[nl]=Bevat de BIC en naam van alle target2 deelnemers
 Comment[pt]=Contém o BIC e o nome de todos os participantes no target2
