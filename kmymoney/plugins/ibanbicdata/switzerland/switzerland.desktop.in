@@ -1,6 +1,20 @@
 [Desktop Entry]
 Name=Swiss IBAN and BIC
+Name[ca]=IBAN i BIC suïssos
+Name[ca@valencia]=IBAN i BIC suïssos
+Name[es]=IBAN y BIC suizos
+Name[fr]=Informations « IBAN » et « BIC » pour la Suisse
+Name[sv]=Schweiziska IBAN och BIC
+Name[uk]=Швейцарський IBAN і BIC
+Name[x-test]=xxSwiss IBAN and BICxx
 Comment=Make information about swiss IBANs and BICs available.
+Comment[ca]=Posa a disposició la informació sobre els IBAN i BIC suïssos.
+Comment[ca@valencia]=Posa a disposició la informació sobre els IBAN i BIC suïssos.
+Comment[es]=Poner a disposición la información sobre IBAN y BIC suizos.
+Comment[fr]=Rendre disponibles les informations « IBAN » et « BIC » pour la Suisse.
+Comment[sv]=Mer information om tillgängliga schweiziska IBAN och BIC.
+Comment[uk]=Робить доступними дані щодо швейцарських IBAN і BIC.
+Comment[x-test]=xxMake information about swiss IBANs and BICs available.xx
 Type=Service
 ServiceTypes=KMyMoney/IbanBicData
 X-KDE-PluginInfo-Author=Christian David

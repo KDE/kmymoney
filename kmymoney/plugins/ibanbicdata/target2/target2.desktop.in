@@ -1,6 +1,20 @@
 [Desktop Entry]
 Name=Target2Participants
+Name[ca]=Objectiu2Participants
+Name[ca@valencia]=Objectiu2Participants
+Name[es]=Target2Participants
+Name[fr]=Target2Participants
+Name[sv]=Target2Participants
+Name[uk]=Target2Participants
+Name[x-test]=xxTarget2Participantsxx
 Comment=Contains the BIC and name of all target2 participants
+Comment[ca]=Conté el BIC i el nom de tots els participants objectiu 2
+Comment[ca@valencia]=Conté el BIC i el nom de tots els participants objectiu 2
+Comment[es]=Contiene el BIC y el nombre de todos los participantes de TARGET2
+Comment[fr]=Contient les informations « BIC » et non de tous les participants de « target2 ».
+Comment[sv]=Innehåller BIC och namn på alla mål-2-deltagare.
+Comment[uk]=Містить BIC і назву усіх учасників target2
+Comment[x-test]=xxContains the BIC and name of all target2 participantsxx
 Type=Service
 ServiceTypes=KMyMoney/IbanBicData
 X-KDE-PluginInfo-Author=Christian David
