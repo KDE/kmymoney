@@ -131,6 +131,9 @@ public:
     q->connect(ui->m_toAmount, &AmountEdit::valueChanged, q, &KCurrencyCalculator::slotUpdateResult);
     q->connect(ui->m_conversionRate, &AmountEdit::valueChanged, q, &KCurrencyCalculator::slotUpdateRate);
 
+    q->connect(ui->m_toAmount, &AmountEdit::returnPressed, q, &KCurrencyCalculator::accept);
+    q->connect(ui->m_conversionRate, &AmountEdit::returnPressed, q, &KCurrencyCalculator::accept);
+
     // use this as the default
     ui->m_amountButton->animateClick();
     q->slotUpdateResult(ui->m_toAmount->text());
