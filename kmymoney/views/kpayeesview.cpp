@@ -312,6 +312,7 @@ void KPayeesView::slotSelectPayee()
     d->ui->checkMatchIgnoreCase->setChecked(ignorecase);
 
     d->ui->checkEnableDefaultCategory->setChecked(!d->m_payee.defaultAccountId().isEmpty());
+    d->ui->comboDefaultCategory->setCurrentIndex(-1);
     d->ui->comboDefaultCategory->setSelected(d->m_payee.defaultAccountId());
 
     d->ui->payeeIdentifiers->setSource(d->m_payee);
