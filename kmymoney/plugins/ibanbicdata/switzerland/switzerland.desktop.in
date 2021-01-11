@@ -2,6 +2,7 @@
 Name=Swiss IBAN and BIC
 Name[ca]=IBAN i BIC suïssos
 Name[ca@valencia]=IBAN i BIC suïssos
+Name[en_GB]=Swiss IBAN and BIC
 Name[es]=IBAN y BIC suizos
 Name[fr]=Informations « IBAN » et « BIC » pour la Suisse
 Name[nl]=Zwitserse IBAN en BIC
@@ -13,6 +14,7 @@ Name[x-test]=xxSwiss IBAN and BICxx
 Comment=Make information about swiss IBANs and BICs available.
 Comment[ca]=Posa a disposició la informació sobre els IBAN i BIC suïssos.
 Comment[ca@valencia]=Posa a disposició la informació sobre els IBAN i BIC suïssos.
+Comment[en_GB]=Make information about swiss IBANs and BICs available.
 Comment[es]=Poner a disposición la información sobre IBAN y BIC suizos.
 Comment[fr]=Rendre disponibles les informations « IBAN » et « BIC » pour la Suisse.
 Comment[nl]=Informatie over Zwitserse IBAN's en BIC's beschikbaar maken.
