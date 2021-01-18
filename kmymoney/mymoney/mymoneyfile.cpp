@@ -2943,9 +2943,22 @@ void MyMoneyFile::addPrice(const MyMoneyPrice& price)
 
   d->checkTransaction(Q_FUNC_INFO);
 
+  auto adjustedPrice(price);
+  const auto fromSecurity = security(price.from());
+  const auto toSecurity = security(price.to());
+  // if fromSecurity is a currency and toSecurity is not a currency
+  // we swap both of them so that it is a security -> currency
+  // conversion
+  if (fromSecurity.isCurrency() && !toSecurity.isCurrency()) {
+    adjustedPrice = MyMoneyPrice(price.to(),
+                                 price.from(),
+                                 price.date(),
+                                 price.rate(price.from()),
+                                 price.source());
+  }
   // store the account's which are affected by this price regarding their value
-  d->priceChanged(*this, price);
-  d->m_storage->addPrice(price);
+  d->priceChanged(*this, adjustedPrice);
+  d->m_storage->addPrice(adjustedPrice);
 }
 
 void MyMoneyFile::removePrice(const MyMoneyPrice& price)
