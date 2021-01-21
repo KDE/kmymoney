@@ -7,6 +7,7 @@ Name[ca@valencia]=Una base de dades per als noms de les institucions i les regle
 Name[en_GB]=A database for institution names and IBAN to BIC rules
 Name[es]=Una base de datos de nombres de organismos y de reglas IBAN y BIC
 Name[fr]=Une base de données pour les noms d'institutions et les règles de correspondance « IBAN » vers « BIC ».
+Name[it]=Un database per i nomi degli istituti e le regole da iban a bic
 Name[nl]=Een database voor banknamen en iban naar bic regels
 Name[pl]=Baza danych nazw instytucji i zasady przekształcania iban na bic
 Name[pt_BR]=Um banco de dados para nomes de instituições e regras IBAN e BIC
