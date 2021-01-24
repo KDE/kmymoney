@@ -1,6 +1,7 @@
 /*
  * Copyright 2010  Allan Anderson <agander93@gmail.com>
  * Copyright 2017-2018  Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+ * Copyright 2020       Thomas Baumgart <tbaumgart@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -53,7 +54,8 @@ enum miscSettingsE { ConfDirectory, ConfEncoding, ConfDateFormat,
                      ConfFeeIsPercentage, ConfFeeRate, ConfMinFee,
                      ConfSecurityName, ConfSecuritySymbol, ConfCurrencySymbol,
                      ConfPriceFraction, ConfDontAsk,
-                     ConfHeight, ConfWidth
+                     ConfHeight, ConfWidth,
+                     ConfCreditIndicator, ConfDebitIndicator,
 };
 
 enum validationResultE { ValidActionType, InvalidActionValues, NoActionType };
@@ -140,6 +142,8 @@ public:
   QList<int>       m_memoColList;
 
   bool             m_oppositeSigns;
+  QString          m_creditIndicator;
+  QString          m_debitIndicator;
 };
 
 class KMM_CSVIMPORTERCORE_EXPORT InvestmentProfile : public CSVProfile
