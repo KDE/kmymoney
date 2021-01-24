@@ -23,6 +23,7 @@
 
 #include <QAction>
 #include <QKeyEvent>
+#include <QTimer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -69,6 +70,8 @@ public:
     ui->m_splitter->setStretchFactor(0, 3);
     ui->m_splitter->setStretchFactor(1, 1);
     ui->m_splitter->setSizes(QList<int>() << 10000 << ui->m_formWidget->sizeHint().height());
+
+    delayTimer.setSingleShot(true);
   }
 
   ~Private()
@@ -84,6 +87,7 @@ public:
   QSet<QString>         hideFormReasons;
   QString               accountId;
   SelectedObjects       selections;
+  QTimer                delayTimer;
 };
 
 LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
@@ -124,6 +128,7 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
   connect(d->ui->m_closeButton, &QToolButton::clicked, this, [&]() {
     d->stateFilter->clearFilter();
     d->ui->m_filterContainer->hide();
+    d->ui->m_ledgerView->setFocus();
     QMetaObject::invokeMethod(d->ui->m_ledgerView, &LedgerView::ensureCurrentItemIsVisible, Qt::QueuedConnection);
   });
   connect(pActions[eMenu::Action::ShowFilterWidget], &QAction::triggered, this, [&]() {
@@ -146,6 +151,27 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
   connect(file->journalModel(), &JournalModel::rowsMoved, this, &LedgerViewPage::reloadFilter, Qt::QueuedConnection);
 
   d->ui->m_ledgerView->setModel(d->specialDatesFilter);
+
+  // combine multipe row updates into one
+  connect(d->stateFilter, &LedgerFilter::rowsRemoved, this, [&]() {
+    // trigger update
+    d->delayTimer.start(20);
+  });
+
+  connect(d->stateFilter, &LedgerFilter::rowsInserted, this, [&]() {
+    // trigger update
+    d->delayTimer.start(20);
+  });
+
+  connect(&d->delayTimer, &QTimer::timeout, this, [&]() {
+    auto list = d->ui->m_ledgerView->selectedTransactions();
+    if (list.isEmpty()) {
+      d->ui->m_ledgerView->selectMostRecentTransaction();
+    } else {
+      d->ui->m_ledgerView->ensureCurrentItemIsVisible();
+    }
+  });
+
 }
 
 LedgerViewPage::~LedgerViewPage()
