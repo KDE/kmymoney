@@ -67,6 +67,7 @@
         "Name[fi]": "QIF-vienti",
         "Name[fr]": "Exportateur QIF",
         "Name[gl]": "Exportador a QIF",
+        "Name[ia]": "Exportator de QIF",
         "Name[it]": "Strumento di esportazione QIF",
         "Name[ko]": "QIF 내보내기 도구",
         "Name[nl]": "QIF exporteren",

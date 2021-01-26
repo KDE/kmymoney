@@ -67,6 +67,7 @@
         "Name[fi]": "QIF-tuonti",
         "Name[fr]": "Importateur QIF",
         "Name[gl]": "Importador de QIF",
+        "Name[ia]": "Importator de QIF",
         "Name[it]": "Strumento di importazione QIF",
         "Name[ko]": "QIF 가져오기 도구",
         "Name[nl]": "QIF importeren",

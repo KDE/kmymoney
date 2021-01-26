@@ -68,6 +68,7 @@
         "Name[fi]": "CSV-tuoja",
         "Name[fr]": "Importateur CSV",
         "Name[gl]": "Importador de CSV",
+        "Name[ia]": "Importator de CSV",
         "Name[it]": "Strumento di importazione CSV",
         "Name[ko]": "CSV 가져오기 도구",
         "Name[nl]": "CSV-importeerprogramma",

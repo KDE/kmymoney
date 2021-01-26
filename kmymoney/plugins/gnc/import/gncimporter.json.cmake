@@ -66,6 +66,7 @@
         "Name[fi]": "GNC-tuonti",
         "Name[fr]": "Importateur GNC",
         "Name[gl]": "Importador de GNC",
+        "Name[ia]": "Importator de GNC",
         "Name[it]": "Strumento di importazione GNC",
         "Name[ko]": "GNC 가져오기 도구",
         "Name[nl]": "GNC-importprogramma",

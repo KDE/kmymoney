@@ -66,6 +66,7 @@
         "Name[fi]": "IBAN / BIC",
         "Name[fr]": "Données IBAN/BIC",
         "Name[gl]": "Datos de IBAN e BIC",
+        "Name[ia]": "Datos de IBAN/BIC",
         "Name[it]": "Dati IBAN/BIC",
         "Name[ko]": "IBAN/BIC 데이터",
         "Name[nl]": "IBAN/BIC gegevens",

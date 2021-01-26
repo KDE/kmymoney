@@ -66,6 +66,7 @@
         "Name[fi]": "Ennustenäkymä",
         "Name[fr]": "Vue Prévisions",
         "Name[gl]": "Vista de prognóstico",
+        "Name[ia]": "Vista de prevision",
         "Name[it]": "Vista delle previsioni",
         "Name[ko]": "예측 보기",
         "Name[nl]": "Prognoseweergave",
