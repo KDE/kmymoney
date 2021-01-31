@@ -94,6 +94,10 @@ LedgerAccountFilter::LedgerAccountFilter(QObject* parent, QVector<QAbstractItemM
     // This is important during import of multiple transactions.
     if (!d->sortPending) {
       d->sortPending = true;
+      // in case a recalc operation is pending, we turn it off
+      // since we need to sort first. Once sorting is done,
+      // the recalc will be triggered again
+      d->balanceCalculationPending = false;
       QMetaObject::invokeMethod(this, &LedgerAccountFilter::sortView, Qt::QueuedConnection);
     }
   });
@@ -108,6 +112,9 @@ void LedgerAccountFilter::sortView()
   Q_D(LedgerAccountFilter);
   sort(0);
   d->sortPending = false;
+
+  // trigger a recalculation of the balances after sorting
+  recalculateBalancesOnIdle(d->account.id());
 }
 
 void LedgerAccountFilter::setShowBalanceInverted(bool inverted)
@@ -122,7 +129,8 @@ void LedgerAccountFilter::recalculateBalancesOnIdle(const QString& accountId)
   // only start recalc if the caller means us
   if (!accountId.compare(d->account.id())) {
     // make sure the balances are recalculated but trigger only once
-    if(!d->balanceCalculationPending) {
+    // if sorting is pending, we don't trigger recalc as it is part of sorting
+    if(!d->balanceCalculationPending && !d->sortPending) {
       d->balanceCalculationPending = true;
       QMetaObject::invokeMethod(this, "recalculateBalances", Qt::QueuedConnection);
     }
@@ -133,10 +141,18 @@ void LedgerAccountFilter::recalculateBalances()
 {
   Q_D(LedgerAccountFilter);
 
+  // false alert. we could end up here in case a recalc is triggered
+  // and turned off by sorting afterwards. In this case, we simply
+  // skip the calculation as it is in vain.
+  if(!d->balanceCalculationPending) {
+    return;
+  }
+
   if (sourceModel() == nullptr || d->account.id().isEmpty())
     return;
 
-  // we need to operate on the base model, not the filtered one
+  // we need to operate on our own model (filtered by account and
+  // sorted by date including schedules)
   // and update only the selected account(s). In case of investment
   // accounts, we also update the balance of the underlying stock
   // accounts.
@@ -149,12 +165,11 @@ void LedgerAccountFilter::recalculateBalances()
   }
 
   QHash<QString, MyMoneyMoney> balances;
-  const auto model = MyMoneyFile::instance()->journalModel();
-  const auto rows = model->rowCount();
+  const auto rows = rowCount();
   QModelIndex idx;
   QString accountId;
   for (int row = 0; row < rows; ++row) {
-    idx = model->index(row, 0);
+    idx = index(row, 0);
     accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
     if (accountIds.contains(accountId)) {
       if (isInvestmentAccount) {
@@ -171,9 +186,8 @@ void LedgerAccountFilter::recalculateBalances()
           balances[accountId] += idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
         }
       }
-      const auto dispIndex = model->index(idx.row(), JournalModel::Column::Balance);
-      model->setData(dispIndex, QVariant::fromValue(balances[accountId]), Qt::DisplayRole);
-
+      const auto dispIndex = index(row, JournalModel::Column::Balance);
+      setData(dispIndex, QVariant::fromValue(balances[accountId]), Qt::DisplayRole);
     }
   }
 
@@ -200,9 +214,7 @@ void LedgerAccountFilter::setAccount(const MyMoneyAccount& acc)
   sort(JournalModel::Column::Date);
 
   // if balance calculation has not been triggered, then run it immediately
-  if(!d->balanceCalculationPending) {
-    recalculateBalances();
-  }
+  recalculateBalancesOnIdle(d->account.id());
 }
 
 bool LedgerAccountFilter::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
