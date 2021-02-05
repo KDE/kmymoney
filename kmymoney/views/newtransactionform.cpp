@@ -115,10 +115,10 @@ void NewTransactionForm::showTransaction(const QModelIndex& idx)
 
   d->ui->numberEdit->setText(index.data(eMyMoney::Model::SplitNumberRole).toString());
 
-  d->ui->amountEdit->setText(i18nc("@item:intext Amount, %1 transaction amount, %2 abbreviated Credit/Debit suffix: Cr. or Dr.",
+  d->ui->amountEdit->setText(i18nc("@item:intext Amount, %1 transaction amount, %2 payment direction in parens",
                                    "%1 %2",
                                    index.data(eMyMoney::Model::SplitSharesFormattedRole).toString(),
-                                   index.data(eMyMoney::Model::SplitSharesSuffixRole).toString()));
+                                   idx.data(eMyMoney::Model::SplitSharesSuffixRole).toString()));
 
   const auto status = index.data(eMyMoney::Model::SplitReconcileFlagRole).toInt();
   const auto statusIdx = MyMoneyFile::instance()->statusModel()->index(status, 0);

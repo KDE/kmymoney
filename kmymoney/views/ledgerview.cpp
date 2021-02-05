@@ -426,7 +426,7 @@ void LedgerView::currentChanged(const QModelIndex& current, const QModelIndex& p
       edit(idx);
     } else {
       scrollTo(idx, EnsureVisible);
-      emit transactionSelected(MyMoneyFile::baseModel()->mapToBaseSource(idx));
+      emit transactionSelected(idx);
     }
     QMetaObject::invokeMethod(this, "doItemsLayout", Qt::QueuedConnection);
   }
