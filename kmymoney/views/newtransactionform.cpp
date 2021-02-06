@@ -115,7 +115,7 @@ void NewTransactionForm::showTransaction(const QModelIndex& idx)
 
   d->ui->numberEdit->setText(index.data(eMyMoney::Model::SplitNumberRole).toString());
 
-  d->ui->amountEdit->setText(i18nc("@item:intext Amount, %1 transaction amount, %2 payment direction in parens",
+  d->ui->amountEdit->setText(i18nc("@item:intext Amount, %1 transaction amount, %2 payment direction enclosed in parenthesis",
                                    "%1 %2",
                                    index.data(eMyMoney::Model::SplitSharesFormattedRole).toString(),
                                    idx.data(eMyMoney::Model::SplitSharesSuffixRole).toString()));
