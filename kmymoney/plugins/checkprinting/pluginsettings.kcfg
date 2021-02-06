@@ -6,8 +6,13 @@
 
 	<kcfgfile name="kmymoney/checkprintingrc"/>
 	<group name="General">
-    <entry name="checkTemplateFile" type="String">
+	<entry name="useCustomCheckTemplate" type="Bool">
+     <label>Use custom check template</label>
+     <default>true</default>
+    </entry>
+    <entry name="checkTemplateFile" type="Path">
       <label>The check template file which defines the way the printed check will look.</label>
+      <default>:/plugins/checkprinting/templates/check_template.html</default>
     </entry>
     <entry name="printedChecks" type="StringList">
       <label>A list containing the id's of already printed checks.</label>

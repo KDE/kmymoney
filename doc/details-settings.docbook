@@ -908,22 +908,26 @@ of accounts.</para>
   is included with the source of &kmymoney;, and should always be
   enabled.  It allows printing of a check based on the data from a selected
   transaction, with the layout controlled by an &HTML; template. You need to use a
-  template which is matched to your pre-printed checks.  When you click on the
-  <guibutton>configure</guibutton> (&configicon;) button, the <guilabel>Check
-  printing</guilabel> configuration dialog is displayed.  At the top is a text box
-  for the path to the selected template.  To the right of that is a button which
-  brings up a file chooser, to select an alternate template file.
+  template which is matched to your pre-printed checks.  A default, built-in
+  template is provided. You may also choose a custom template. To do so, click on
+  the <guibutton>configure</guibutton> (&configicon;) button to get the
+  <guilabel>Check printing</guilabel> configuration dialog displayed.  At the top
+  you can check the box to use a custom template.  To the right of that is a
+  button which brings up a file chooser, to select an alternate template file.
 </para>
 
 <para>
   A template file is an &HTML; file, in which specific strings are used to
   reference the fields from the transaction and from the current account and
-  institution to show where they will be printed on the check.  &kmymoney; is
-  shipped with some sample template files.  You should either be able to use one
-  of them, or modify one to suit your needs.  When the default template is
-  selected, the configuration dialog will show you the folder which contains
-  the sample files.
+  institution to show where they will be printed on the check.  &kmymoney;
+  ships with a default, built-in template.  At <ulink url="https://invent.kde.org/office/kmymoney/-/blob/master/kmymoney/plugins/checkprinting/templates/">this</ulink>
+  address you can find the HTML source file of default template, as well as some
+  additional templates.  You should either be able to use one of them, or modify
+  one to suit your needs.  Note that only a <emphasis>subset</emphasis> of the
+  HTML standard is supported — the detailed documentation on that can be found
+  <ulink url="https://doc.qt.io/qt-5/richtext-html-subset.html">here</ulink>.
 </para>
+
 
 <!-- info from source code on substitution variables
     // data about the user
