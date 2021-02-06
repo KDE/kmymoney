@@ -2,4 +2,7 @@
     <qresource prefix="/kxmlgui5/checkprinting">
         <file>checkprinting.rc</file>
     </qresource>
+    <qresource prefix="/plugins/checkprinting/">
+        <file>templates/check_template.html</file>
+    </qresource>
 </RCC>

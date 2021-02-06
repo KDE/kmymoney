@@ -36,12 +36,6 @@ else(ENABLE_WEBENGINE)
  target_link_libraries(checkprinting KF5::WebKit)
 endif(ENABLE_WEBENGINE)
 
-install(FILES check_template.html
-        DESTINATION "${DATA_INSTALL_DIR}/checkprinting")
-
-install(FILES check_template_green_linen.html
-        DESTINATION "${DATA_INSTALL_DIR}/checkprinting")
-
 # the KCM module
 
 set(kcm_checkprinting_PART_SRCS
@@ -64,7 +58,9 @@ set_target_properties(kcm_checkprinting
                       PROPERTIES
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
-target_link_libraries(kcm_checkprinting
+target_link_libraries(
+                      kcm_checkprinting
+                      kmm_url
                       Qt5::PrintSupport
                       KF5::I18n
                       KF5::ConfigWidgets

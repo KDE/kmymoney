@@ -12,11 +12,7 @@
 #include <QAction>
 #include <QFile>
 #include <QDialog>
-#ifdef ENABLE_WEBENGINE
-#include <QWebEngineView>
-#else
-#include <KWebView>
-#endif
+#include <QTextDocument>
 #include <QStandardPaths>
 
 // KDE includes
@@ -76,31 +72,27 @@ struct CheckPrinting::Private {
 
     void readCheckTemplate()
     {
-        QString checkTemplateHTMLPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "checkprinting/check_template.html");
 
-        if (PluginSettings::checkTemplateFile().isEmpty()) {
-            PluginSettings::setCheckTemplateFile(checkTemplateHTMLPath);
-            PluginSettings::self()->save();
-        }
+        QFile *checkTemplateHTMLFile = new QFile(PluginSettings::checkTemplateFile());
 
-        QFile checkTemplateHTMLFile(PluginSettings::checkTemplateFile());
-        checkTemplateHTMLFile.open(QIODevice::ReadOnly);
+        if (!PluginSettings::useCustomCheckTemplate || PluginSettings::checkTemplateFile().isEmpty() || !checkTemplateHTMLFile->exists())
+            checkTemplateHTMLFile = new QFile(PluginSettings::defaultCheckTemplateFileValue());
+        if (!(checkTemplateHTMLFile->open(QIODevice::ReadOnly)))
+            qDebug() << "Failed to open the template from" << checkTemplateHTMLFile->fileName();
+        else
+            qDebug() << "Template successfully opened from" << checkTemplateHTMLFile->fileName();
 
-        QTextStream stream(&checkTemplateHTMLFile);
+        QTextStream stream(checkTemplateHTMLFile);
 
         m_checkTemplateHTML = stream.readAll();
 
-        checkTemplateHTMLFile.close();
+        checkTemplateHTMLFile->close();
     }
 
     void printCheck(const QString& accountId, const QString& transactionId)
     {
         MyMoneyMoneyToWordsConverter converter;
-#ifdef ENABLE_WEBENGINE
-        auto htmlPart = new QWebEngineView();
-#else
-        auto htmlPart = new KWebView();
-#endif
+        auto htmlPart = new QTextDocument();
 
         const auto file = MyMoneyFile::instance();
         const auto transaction = file->transaction(transactionId);
@@ -155,15 +147,10 @@ struct CheckPrinting::Private {
         }
 
         // print the check
-        htmlPart->setHtml(checkHTML, QUrl("file://"));
+        htmlPart->setHtml(checkHTML);
         auto printer = KMyMoneyPrinter::startPrint();
-        if (printer != nullptr) {
-#ifdef ENABLE_WEBENGINE
-            htmlPart->page()->print(printer, [=] (bool) {});
-#else
+        if (printer != nullptr)
             htmlPart->print(printer);
-#endif
-        }
 
         // mark the transaction as printed
         markAsPrinted(transactionId);
@@ -182,6 +169,7 @@ CheckPrinting::CheckPrinting(QObject *parent, const KPluginMetaData &metaData, c
 {
     // Tell the host application to load my GUI component
     const auto rcFileName = QLatin1String("checkprinting.rc");
+
 
     setXMLFile(rcFileName);
 

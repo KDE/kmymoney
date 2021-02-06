@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Icalendar export settings</string>
+   <string>Checking settings</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -25,18 +25,15 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QLabel" name="check_template_file">
+        <widget class="QCheckBox" name="kcfg_useCustomCheckTemplate">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Check template file</string>
-         </property>
-         <property name="wordWrap">
-          <bool>false</bool>
+          <string>Use custom check template</string>
          </property>
         </widget>
        </item>
@@ -44,6 +41,9 @@
         <widget class="KUrlRequester" name="kcfg_checkTemplateFile">
          <property name="kcfg_property" stdset="0">
           <cstring>text</cstring>
+         </property>
+         <property name="enabled">
+          <bool>false</bool>
          </property>
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">

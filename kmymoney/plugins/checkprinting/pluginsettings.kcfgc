@@ -3,4 +3,5 @@ File=pluginsettings.kcfg
 ClassName=PluginSettings
 Singleton=true
 Mutators=true
+DefaultValueGetters=true
 # will create the necessary code for setting those variables
