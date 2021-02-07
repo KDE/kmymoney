@@ -43,6 +43,7 @@ if (CMAKE_COMPILER_IS_GNUCXX AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 6.0.0)
     message(FATAL_ERROR "This version of KMyMoney requires at least gcc 6.0.0 to be built successfully")
 endif()
 
+set(APPLE_SUPPRESS_X11_WARNING TRUE)
 find_package(ECM 5.42 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
