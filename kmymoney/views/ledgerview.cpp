@@ -655,10 +655,15 @@ QStringList LedgerView::selectedTransactions() const
   QStringList selection;
 
   QString id;
+  int lastRow = -1;
   for (const auto& idx : selectionModel()->selectedIndexes()) {
-    id = idx.data(eMyMoney::Model::JournalTransactionIdRole).toString();
-    if (!selection.contains(id)) {
-      selection.append(id);
+    // we don't need to process all columns but only the first one
+    if (idx.row() != lastRow) {
+      lastRow = idx.row();
+      id = idx.data(eMyMoney::Model::JournalTransactionIdRole).toString();
+      if (!selection.contains(id)) {
+        selection.append(id);
+      }
     }
   }
   return selection;
