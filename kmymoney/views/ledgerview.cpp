@@ -601,7 +601,51 @@ void LedgerView::selectMostRecentTransaction()
 
 void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
 {
+  // call base class implementation
   QTableView::selectionChanged(selected, deselected);
+
+  QSet<int> allSelectedRows;
+  QSet<int> selectedRows;
+
+  if (!selected.isEmpty()) {
+    int lastRow = -1;
+    for (const auto& idx : selectionModel()->selectedIndexes()) {
+      if (idx.row() != lastRow) {
+        lastRow = idx.row();
+        allSelectedRows += lastRow;
+      }
+    }
+    lastRow = -1;
+    for (const auto& idx : selected.indexes()) {
+      if (idx.row() != lastRow) {
+        lastRow = idx.row();
+        selectedRows += lastRow;
+      }
+    }
+
+    allSelectedRows -= selectedRows;
+    // determine the current type of selection by looking at
+    // the first item in allSelectedRows. In case allSelectedRows
+    // is empty, a single item was selected and we are good to go
+    if (!allSelectedRows.isEmpty()) {
+      const auto baseIdx = model()->index(*allSelectedRows.constBegin(), 0);
+      const auto isSchedule = baseIdx.data(eMyMoney::Model::TransactionScheduleRole).toBool();
+
+      // now scan all in selected to check if they are of the same type
+      // and add them to toDeselect if not.
+      QItemSelection toDeselect;
+      for (const auto& idx : selected.indexes()) {
+        if (idx.data(eMyMoney::Model::TransactionScheduleRole).toBool() != isSchedule) {
+          toDeselect.select(idx, idx);
+        }
+      }
+      if (!toDeselect.isEmpty()) {
+        selectionModel()->select(toDeselect, QItemSelectionModel::Deselect);
+        /// @TODO: may be, we should inform the user why we deselect here
+      }
+    }
+  }
+
   d->selection.setSelection(SelectedObjects::Transaction, selectedTransactions());
   emit transactionSelectionChanged(d->selection);
 }
