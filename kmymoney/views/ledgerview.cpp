@@ -124,8 +124,10 @@ public:
     *s_globalEditView() = nullptr;
   }
 
-  void updateDynamicActions()
+  eMenu::Menu updateDynamicActions()
   {
+    eMenu::Menu menuType = eMenu::Menu::Transaction;
+
     const auto indexes = q->selectionModel()->selectedIndexes();
     auto const gotoAccount = pActions[eMenu::Action::GoToAccount];
     auto const gotoPayee = pActions[eMenu::Action::GoToPayee];
@@ -138,6 +140,12 @@ public:
     if (!indexes.isEmpty()) {
       const auto baseIdx = MyMoneyFile::instance()->journalModel()->mapToBaseSource(indexes.at(0));
       const auto journalEntry = MyMoneyFile::instance()->journalModel()->itemByIndex(baseIdx);
+
+      // if this entry points to the schedules, we switch the menu type
+      if (baseIdx.model() == MyMoneyFile::instance()->schedulesJournalModel()) {
+        menuType = eMenu::Menu::Schedule;
+      }
+
       MyMoneyAccount acc;
       if (!q->isColumnHidden(JournalModel::Column::Account)) {
         // in case the account column is shown, we jump to that account
@@ -178,6 +186,7 @@ public:
         }
       }
     }
+    return menuType;
   }
 
   LedgerView*                     q;
@@ -230,8 +239,8 @@ LedgerView::LedgerView(QWidget* parent)
   // setup context menu
   setContextMenuPolicy(Qt::CustomContextMenu);
   connect(this, &QWidget::customContextMenuRequested, this, [&](QPoint pos) {
-    d->updateDynamicActions();
-    emit requestCustomContextMenu(eMenu::Menu::Transaction, viewport()->mapToGlobal(pos));
+    const auto menuType = d->updateDynamicActions();
+    emit requestCustomContextMenu(menuType, viewport()->mapToGlobal(pos));
   });
   setTabKeyNavigation(false);
 }
