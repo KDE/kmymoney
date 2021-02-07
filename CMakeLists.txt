@@ -48,6 +48,7 @@ endif()
 # See https://blog.kitware.com/create-dlls-on-windows-without-declspec-using-new-cmake-export-all-feature/
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
+set(APPLE_SUPPRESS_X11_WARNING TRUE)
 find_package(ECM 5.42 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
