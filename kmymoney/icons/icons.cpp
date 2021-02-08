@@ -284,7 +284,7 @@ namespace Icons {
       {Icon::FinancialCategories,
        {{IconSet::Common, QStringLiteral("categories")},
         {IconSet::Oxygen, QStringLiteral("view-categories")},
-        {IconSet::Breeze, QStringLiteral("view-categories")},
+        {IconSet::Breeze, QStringLiteral("financial-categories")},
         {IconSet::Oxygen, QStringLiteral("view-financial-categories")}}},
       {Icon::Ledger,
        {{IconSet::Common, QStringLiteral("ledger")},
