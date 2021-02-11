@@ -148,7 +148,7 @@ KMyMoneyView::KMyMoneyView()
     {View::Categories,      i18n("Categories"),                   Icon::FinancialCategories},
     {View::Tags,            i18n("Tags"),                         Icon::Tags},
     {View::Payees,          i18n("Payees"),                       Icon::Payees},
-    {View::NewLedgers,      i18n("Ledgers"),                      Icon::Ledger},
+    {View::NewLedgers,      i18n("Ledgers"),                      Icon::Ledgers},
     {View::Investments,     i18n("Investments"),                  Icon::Investments},
     /// @todo remove when new ledger is fully functional
     {View::OldLedgers,      i18n("Old ledgers"),                  Icon::DocumentProperties},

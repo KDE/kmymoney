@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Usage: ./copy_from_breeze.sh breeze-icon\
+# Usage: ./copy_from_breeze.sh breeze-icons\
 # where breeze-icon\ is a path to a root folder of a cloned breeze-icon git repository
 # (must contain "icons" and "icons-dark" subfolders).
 
@@ -68,6 +68,8 @@ for i in $all_icons; do
         [ -z "$DOS2UNIX" ] || $DOS2UNIX $dest
     done
 done
+
+
 
 # remove the generated file to force regeneration
 rm -f icons.qrc
