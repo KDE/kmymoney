@@ -325,9 +325,9 @@ OfxHttpRequest::OfxHttpRequest(const QString& type, const QUrl &url, const QByte
     d->m_fpTrace.open(QIODevice::WriteOnly | QIODevice::Append);
   }
 
-  KIO::JobFlag jobFlags = KIO::DefaultFlags;
+  auto jobFlags = KIO::DefaultFlags | KIO::Overwrite;
   if (!showProgressInfo)
-    jobFlags = KIO::HideProgressInfo;
+    jobFlags = KIO::HideProgressInfo | KIO::Overwrite;
 
   KIO::Job* job;
   if(type.toLower() == QStringLiteral("get")) {
