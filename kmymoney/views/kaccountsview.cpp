@@ -67,16 +67,14 @@ KAccountsView::~KAccountsView()
 
 void KAccountsView::executeCustomAction(eView::Action action)
 {
+  Q_D(KAccountsView);
   switch(action) {
     case eView::Action::Refresh:
       refresh();
       break;
 
     case eView::Action::SetDefaultFocus:
-      {
-        Q_D(KAccountsView);
-        QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
-      }
+      QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
       break;
 
     default:

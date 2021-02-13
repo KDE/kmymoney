@@ -75,16 +75,14 @@ KTagsView::~KTagsView()
 
 void KTagsView::executeCustomAction(eView::Action action)
 {
+  Q_D(KTagsView);
   switch(action) {
     case eView::Action::Refresh:
       refresh();
       break;
 
     case eView::Action::SetDefaultFocus:
-      {
-        Q_D(KTagsView);
-        QTimer::singleShot(0, d->m_searchWidget, SLOT(setFocus()));
-      }
+      QTimer::singleShot(0, d->m_searchWidget, SLOT(setFocus()));
       break;
 
     default:

@@ -533,16 +533,14 @@ void KPayeesView::slotSendMail()
 
 void KPayeesView::executeCustomAction(eView::Action action)
 {
+  Q_D(KPayeesView);
   switch(action) {
     case eView::Action::Refresh:
       refresh();
       break;
 
     case eView::Action::SetDefaultFocus:
-      {
-        Q_D(KPayeesView);
-        QTimer::singleShot(0, d->m_searchWidget, SLOT(setFocus()));
-      }
+      QTimer::singleShot(0, d->m_searchWidget, SLOT(setFocus()));
       break;
 
     case eView::Action::ClosePayeeIdentifierSource:

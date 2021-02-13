@@ -70,16 +70,14 @@ KCategoriesView::~KCategoriesView()
 
 void KCategoriesView::executeCustomAction(eView::Action action)
 {
+  Q_D(KCategoriesView);
   switch(action) {
     case eView::Action::Refresh:
       refresh();
       break;
 
     case eView::Action::SetDefaultFocus:
-      {
-        Q_D(KCategoriesView);
-        QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
-      }
+      QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
       break;
 
     default:

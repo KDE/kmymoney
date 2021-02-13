@@ -113,16 +113,14 @@ void KScheduledView::slotTimerDone()
 
 void KScheduledView::executeCustomAction(eView::Action action)
 {
+  Q_D(KScheduledView);
   switch(action) {
     case eView::Action::Refresh:
       refresh();
       break;
 
     case eView::Action::SetDefaultFocus:
-      {
-        Q_D(KScheduledView);
-        QTimer::singleShot(0, d->m_searchWidget->searchLine(), SLOT(setFocus()));
-      }
+      QTimer::singleShot(0, d->m_searchWidget->searchLine(), SLOT(setFocus()));
       break;
 
     case eView::Action::EditSchedule:

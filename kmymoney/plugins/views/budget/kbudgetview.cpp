@@ -69,16 +69,14 @@ void KBudgetView::showEvent(QShowEvent * event)
 
 void KBudgetView::executeCustomAction(eView::Action action)
 {
+  Q_D(KBudgetView);
   switch(action) {
     case eView::Action::Refresh:
       refresh();
       break;
 
     case eView::Action::SetDefaultFocus:
-      {
-        Q_D(KBudgetView);
-        QTimer::singleShot(0, d->ui->m_budgetList, SLOT(setFocus()));
-      }
+      QTimer::singleShot(0, d->ui->m_budgetList, SLOT(setFocus()));
       break;
 
     default:

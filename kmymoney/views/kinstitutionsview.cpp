@@ -56,16 +56,14 @@ KInstitutionsView::~KInstitutionsView()
 
 void KInstitutionsView::executeCustomAction(eView::Action action)
 {
+  Q_D(KInstitutionsView);
   switch(action) {
     case eView::Action::Refresh:
       refresh();
       break;
 
     case eView::Action::SetDefaultFocus:
-      {
-        Q_D(KInstitutionsView);
-        QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
-      }
+      QTimer::singleShot(0, d->ui->m_accountTree, SLOT(setFocus()));
       break;
 
     case eView::Action::EditInstitution:
