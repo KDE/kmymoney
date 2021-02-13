@@ -420,10 +420,7 @@ void KOnlineJobOutboxView::executeCustomAction(eView::Action action)
   Q_D(KOnlineJobOutboxView);
   switch(action) {
     case eView::Action::SetDefaultFocus:
-      {
-        Q_D(KOnlineJobOutboxView);
-        QTimer::singleShot(0, d->ui->m_onlineJobView, SLOT(setFocus()));
-      }
+      QTimer::singleShot(0, d->ui->m_onlineJobView, SLOT(setFocus()));
       break;
 
     case eView::Action::InitializeAfterFileOpen:

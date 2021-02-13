@@ -81,12 +81,10 @@ void KBudgetView::showEvent(QShowEvent * event)
 
 void KBudgetView::executeCustomAction(eView::Action action)
 {
+  Q_D(KBudgetView);
   switch(action) {
     case eView::Action::SetDefaultFocus:
-      {
-        Q_D(KBudgetView);
-        QMetaObject::invokeMethod(d->ui->m_budgetList, "setFocus", Qt::QueuedConnection);
-      }
+      QMetaObject::invokeMethod(d->ui->m_budgetList, "setFocus", Qt::QueuedConnection);
       break;
 
     default:

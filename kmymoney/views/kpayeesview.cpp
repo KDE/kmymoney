@@ -484,12 +484,10 @@ void KPayeesView::slotSendMail()
 
 void KPayeesView::executeCustomAction(eView::Action action)
 {
+  Q_D(KPayeesView);
   switch(action) {
     case eView::Action::SetDefaultFocus:
-      {
-        Q_D(KPayeesView);
-        QMetaObject::invokeMethod(d->ui->m_searchWidget, "setFocus", Qt::QueuedConnection);
-      }
+      QMetaObject::invokeMethod(d->ui->m_searchWidget, "setFocus", Qt::QueuedConnection);
       break;
 
     case eView::Action::ClosePayeeIdentifierSource:

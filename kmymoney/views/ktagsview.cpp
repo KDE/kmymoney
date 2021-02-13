@@ -72,12 +72,10 @@ KTagsView::~KTagsView()
 
 void KTagsView::executeCustomAction(eView::Action action)
 {
+  Q_D(KTagsView);
   switch(action) {
     case eView::Action::SetDefaultFocus:
-      {
-        Q_D(KTagsView);
-        QMetaObject::invokeMethod(d->ui->m_searchWidget, "setFocus");
-      }
+      QMetaObject::invokeMethod(d->ui->m_searchWidget, "setFocus");
       break;
 
     default:

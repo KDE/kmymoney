@@ -91,16 +91,14 @@ void KAccountsView::slotSettingsChanged()
 
 void KAccountsView::executeCustomAction(eView::Action action)
 {
+  Q_D(KAccountsView);
   switch(action) {
     case eView::Action::Refresh:
       refresh();
       break;
 
     case eView::Action::SetDefaultFocus:
-      {
-        Q_D(KAccountsView);
-        QMetaObject::invokeMethod(d->ui->m_accountTree, "setFocus", Qt::QueuedConnection);
-      }
+      QMetaObject::invokeMethod(d->ui->m_accountTree, "setFocus", Qt::QueuedConnection);
       break;
 
     default:

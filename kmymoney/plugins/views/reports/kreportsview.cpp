@@ -108,16 +108,14 @@ KReportsView::~KReportsView()
 
 void KReportsView::executeCustomAction(eView::Action action)
 {
+  Q_D(KReportsView);
   switch(action) {
     case eView::Action::Refresh:
       refresh();
       break;
 
     case eView::Action::SetDefaultFocus:
-      {
-        Q_D(KReportsView);
-        QTimer::singleShot(0, d->m_tocTreeWidget, SLOT(setFocus()));
-      }
+      QTimer::singleShot(0, d->m_tocTreeWidget, SLOT(setFocus()));
       break;
 
     case eView::Action::Print:
@@ -130,7 +128,6 @@ void KReportsView::executeCustomAction(eView::Action action)
 
     case eView::Action::ShowBalanceChart:
       {
-        Q_D(KReportsView);
         QPointer<KBalanceChartDlg> dlg = new KBalanceChartDlg(d->m_currentAccount, this);
         dlg->exec();
         delete dlg;
