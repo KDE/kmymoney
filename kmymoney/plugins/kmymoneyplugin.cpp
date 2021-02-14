@@ -56,13 +56,18 @@ void KMyMoneyPlugin::Plugin::unplug()
 {
 }
 
-void KMyMoneyPlugin::Plugin::configurationChanged()
+void KMyMoneyPlugin::Plugin::updateActions(const SelectedObjects& selections)
+{
+    Q_UNUSED(selections)
+}
+
+void KMyMoneyPlugin::Plugin::updateConfiguration()
 {
 }
 
 KToggleAction* KMyMoneyPlugin::Plugin::toggleAction(const QString& actionName) const
 {
-  static KToggleAction dummyAction(QString("Dummy"), 0);
+  static KToggleAction dummyAction(QString("Dummy"), nullptr);
 
   KToggleAction* p = dynamic_cast<KToggleAction*>(actionCollection()->action(QString(actionName.toLatin1())));
   if (!p) {

@@ -36,19 +36,11 @@ public:
   ~CheckPrinting() override;
 
 public Q_SLOTS:
-  void plug(KXMLGUIFactory* guiFactory) override;
-  void unplug() override;
-  void configurationChanged() override;
-
-private:
-  void readCheckTemplate();
-
-  bool canBePrinted(const KMyMoneyRegister::SelectedTransaction & selectedTransaction) const;
-  void markAsPrinted(const KMyMoneyRegister::SelectedTransaction & selectedTransaction);
+  void updateConfiguration() override;
+  void updateActions ( const SelectedObjects& selections ) override;
 
 protected Q_SLOTS:
   void slotPrintCheck();
-  void slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
 
 private:
   struct Private;

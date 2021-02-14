@@ -52,7 +52,7 @@ protected Q_SLOTS:
   void unplug() override;
 
   // the plugin's configurations has changed
-  void configurationChanged() override;
+  void updateConfiguration() override;
 
 private:
   struct Private;

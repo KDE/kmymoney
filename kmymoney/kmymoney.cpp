@@ -1188,7 +1188,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
   connect(&d->m_actionCollectorTimer, &QTimer::timeout, this, [&]() {
     // update the actions in the views
-    d->m_myMoneyView->updateActions(d->m_selections);
+    d->updateActions(d->m_selections);
     emit selectionChanged(d->m_selections);
   });
 }
@@ -2310,6 +2310,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
   setHolidayRegion(KMyMoneySettings::holidayRegion());
 
   d->m_myMoneyView->slotSettingsChanged();
+  KMyMoneyPlugin::updateConfiguration(pPlugins);
 
   // re-read autosave configuration
   d->m_autoSaveEnabled = KMyMoneySettings::autoSaveFile();
@@ -2787,7 +2788,9 @@ void KMyMoneyApp::Private::updateActions(const SelectedObjects& selections)
   aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Close)))->setEnabled(m_storageInfo.isOpened);
   pActions[Action::UpdateAllAccounts]->setEnabled(KMyMoneyUtils::canUpdateAllAccounts());
 
+  // update actions in views and plugins
   m_myMoneyView->updateActions(selections);
+  KMyMoneyPlugin::updateActions(pPlugins, selections);
 }
 
 bool KMyMoneyApp::Private::canFileSaveAs() const

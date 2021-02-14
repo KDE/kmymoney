@@ -43,6 +43,7 @@ class MyMoneyStorageMgr;
 class MyMoneyAccount;
 class KMyMoneySettings;
 class IMyMoneyOperationsFormat;
+class SelectedObjects;
 
 namespace KMyMoneyPlugin { class AppInterface; }
 namespace KMyMoneyPlugin { class ImportInterface; }
@@ -129,10 +130,16 @@ public Q_SLOTS:
   virtual void unplug();
 
   /**
-   * @brief Called if the configuration of the plugin was changed
-   * @todo Implement
+   * This method is called by the application whenever a
+   * selection changes. The default implementation does nothing.
    */
-  virtual void configurationChanged() ;
+  virtual void updateActions(const SelectedObjects& selections);
+
+  /**
+   * This method is called by the application whenever the
+   * configuration changes. The default implementation does nothing.
+   */
+  virtual void updateConfiguration();
 
 protected:
   /** See KMyMoneyApp::toggleAction() for a description */

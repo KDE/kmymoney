@@ -169,4 +169,18 @@ namespace KMyMoneyPlugin
 
     }
   }
+
+  void updateActions(const Container& plugins, const SelectedObjects& selections)
+  {
+      for(const auto& plugin : plugins.standard) {
+          plugin->updateActions(selections);
+      }
+  }
+
+  void updateConfiguration(const Container& plugins)
+  {
+      for(const auto& plugin : plugins.standard) {
+          plugin->updateConfiguration();
+      }
+  }
 }

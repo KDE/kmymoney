@@ -147,7 +147,7 @@ void iCalendarExporter::unplug()
   disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &iCalendarExporter::slotExport);
 }
 
-void iCalendarExporter::configurationChanged()
+void iCalendarExporter::updateConfiguration()
 {
   PluginSettings::self()->load();
   // export the schedules because the configuration has changed

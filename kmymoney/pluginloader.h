@@ -19,19 +19,20 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-// ----------------------------------------------------------------------------
-// KDE Includes
+class QObject;
+class QString;
+template <class Key, class T> class QMap;
 
 // ----------------------------------------------------------------------------
-// Project Includes
+// KDE Includes
 
 class KPluginMetaData;
 class KXMLGUIFactory;
 
-class QObject;
-class QString;
+// ----------------------------------------------------------------------------
+// Project Includes
 
-template <class Key, class T> class QMap;
+class SelectedObjects;
 
 namespace KMyMoneyPlugin
 {
@@ -73,6 +74,19 @@ namespace KMyMoneyPlugin
    * @param guiFactory GUI Factory of plugins. This should be GUI Factory of KMyMoneyApp
    */
   void pluginHandling(Action action, Container& ctnPlugins, QObject* parent, KXMLGUIFactory* guiFactory);
+
+  /**
+   * @brief Update the actions in all plugins
+   * @param plugins   List of loaded plugins
+   * @param selection the current selection
+   */
+  void updateActions(const Container& plugins, const SelectedObjects& selections);
+
+  /**
+   * @brief Update the configuration in all plugins
+   * @param plugins   List of loaded plugins
+   */
+  void updateConfiguration(const Container& plugins);
 }
 
 #endif
