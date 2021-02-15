@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This file is part of KMyMoney, A Personal Finance Manager by KDE
-Copyright (C) 2014-2015 Christian Dávid <christian-david@web.de>
+SPDX-FileCopyrightText: 2014-2015 Christian Dávid <christian-david@web.de>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License

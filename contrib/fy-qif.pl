@@ -11,10 +11,7 @@
 #
 #***************************************************************************
 #*                                                                         *
-#* This program is free software; you can redistribute it and/or modify    *
-#* it under the terms of the GNU General Public License as published by    *
-#* the Free Software Foundation; either version 2 of the License, or       *
-#* (at your option) any later version.                                     *
+#* SPDX-License-Identifier: GPL-2.0-or-later
 #*                                                                         *
 #***************************************************************************/
 
@@ -31,7 +28,7 @@
 # ^
 
 # This uses perl-Finance-YahooQuote
-# Copyright (C) 2002 Dirk Eddelbuettel <edd@debian.org>, and GPL'ed
+# SPDX-FileCopyrightText: 2002 Dirk Eddelbuettel <edd@debian.org>, and GPL'ed
 # Based on the original example by Dj Padzensky
 #
 # $Id: yahooquote,v 1.2 2002/12/24 17:50:28 edd Exp $

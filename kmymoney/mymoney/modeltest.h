@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).
+** SPDX-FileCopyrightText: 2012 Nokia Corporation and /or its subsidiary(-ies).
 ** Contact: https://www.qt.io/developers/
 **
 ** This file is part of the test suite of the Qt Toolkit.

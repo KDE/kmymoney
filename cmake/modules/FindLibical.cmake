@@ -5,7 +5,7 @@
 #  LIBICAL_LIBRARIES - The libraries needed to use Libical
 #  LIBICAL_VERSION = The value of ICAL_VERSION defined in ical.h
 
-# Copyright (c) 2008, Allen Winter <winter@kde.org>
+# SPDX-FileCopyrightText: 2008 Allen Winter <winter@kde.org>
 #
 # Redistribution and use is allowed according to the terms of the BSD license.
 # For details see the accompanying COPYING-CMAKE-SCRIPTS file.
