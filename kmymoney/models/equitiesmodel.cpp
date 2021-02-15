@@ -1,14 +1,10 @@
 /*
- * SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
-
+    SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+	SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "equitiesmodel.h"
-#include "accountsmodel.h"
-#include "mymoneyfile.h"
-#include "securitiesmodel.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes

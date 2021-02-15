@@ -1,17 +1,9 @@
-/***************************************************************************
-                          kmymoney.cpp
-                             -------------------
-    copyright            : (C) 2000 by Michael Edwardes <mte@users.sourceforge.net>
-                           (C) 2002-2020 by Thomas Baumgart <tbaumgart@kde.org>
-                           (C) 2017-2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-
-****************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2000 Michael Edwardes <mte@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2002-2020 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 
 #include <config-kmymoney.h>

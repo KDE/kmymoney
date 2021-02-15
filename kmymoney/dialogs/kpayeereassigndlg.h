@@ -1,10 +1,9 @@
 /*
- * SPDX-FileCopyrightText: 2005 Andreas Nicolai <Andreas.Nicolai@gmx.net>
- * SPDX-FileCopyrightText: 2007-2008 Thomas Baumgart <tbaumgart@kde.org>
- * SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2005 Andreas Nicolai <Andreas.Nicolai@gmx.net>
+    SPDX-FileCopyrightText: 2007-2008 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef KPAYEEREASSIGNDLG_H
 #define KPAYEEREASSIGNDLG_H

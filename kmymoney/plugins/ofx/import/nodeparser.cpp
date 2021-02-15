@@ -1,15 +1,7 @@
-/***************************************************************************
-                          nodeparse.cpp
-                             -------------------
-    copyright            : (C) 2008 by Thomas Baumgart
-    email                : <ipwizard@users.sourceforge.net>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2008 Thomas Baumgart <<ipwizard@users.sourceforge.net>>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "nodeparser.h"
 

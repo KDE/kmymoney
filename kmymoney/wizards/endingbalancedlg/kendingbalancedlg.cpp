@@ -1,16 +1,8 @@
-/***************************************************************************
-                          kendingbalancedlg.cpp
-                             -------------------
-    copyright            : (C) 2000,2003 by Michael Edwardes, Thomas Baumgart
-    email                : mte@users.sourceforge.net
-                           ipwizard@users.sourceforge.net
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2000, 2003 Michael Edwardes Thomas Baumgart <mte@users.sourceforge.net>
+    ipwizard@users.sourceforge.net
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "kendingbalancedlg.h"
 

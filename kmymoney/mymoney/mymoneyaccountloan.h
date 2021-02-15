@@ -1,13 +1,12 @@
 /*
- * SPDX-FileCopyrightText: 2001-2002 Michael Edwardes <mte@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2001 Felix Rodriguez <frodriguez@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2002-2003 Kevin Tambascio <ktambascio@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2006-2019 Thomas Baumgart <tbaumgart@kde.org>
- * SPDX-FileCopyrightText: 2006 Ace Jones <acejones@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2001-2002 Michael Edwardes <mte@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2001 Felix Rodriguez <frodriguez@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2002-2003 Kevin Tambascio <ktambascio@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2006-2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2006 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef MYMONEYACCOUNTLOAN_H
 #define MYMONEYACCOUNTLOAN_H

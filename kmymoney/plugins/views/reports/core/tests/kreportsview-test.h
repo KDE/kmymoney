@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2005 Thomas Baumgart <tbaumgart@kde.org>
- * SPDX-FileCopyrightText: 2005 Ace Jones <acejones@users.sourceforge.net>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2005 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2005 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef KREPORTSVIEWTEST_H
 #define KREPORTSVIEWTEST_H

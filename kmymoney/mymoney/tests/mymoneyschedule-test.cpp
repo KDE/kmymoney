@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2003 Michael Edwardes <mte@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2006 Ace Jones <acejones@users.sourceforge.net>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2003 Michael Edwardes <mte@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2006 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "mymoneyschedule-test.h"
 

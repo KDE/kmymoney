@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2014 Christian Dávid <christian-david@web.de>
- * SPDX-FileCopyrightText: 2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2014 Christian Dávid <christian-david@web.de>
+    SPDX-FileCopyrightText: 2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "qsqlcipher-test.h"
 

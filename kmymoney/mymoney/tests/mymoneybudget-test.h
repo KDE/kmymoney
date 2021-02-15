@@ -1,8 +1,7 @@
 /*
- * SPDX-FileCopyrightText: 2010-2011 Thomas Baumgart <tbaumgart@kde.org>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2010-2011 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef MYMONEYBUDGETTEST_H
 #define MYMONEYBUDGETTEST_H

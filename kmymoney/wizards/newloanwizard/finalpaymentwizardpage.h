@@ -1,16 +1,7 @@
-/***************************************************************************
-                         finalpaymentwizardpage  -  description
-                            -------------------
-   begin                : Sun Jul 4 2010
-   copyright            : (C) 2010 by Fernando Vilas
-   email                : kmymoney-devel@kde.org
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2010 Fernando Vilas <kmymoney-devel@kde.org>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef FINALPAYMENTWIZARDPAGE_H
 #define FINALPAYMENTWIZARDPAGE_H

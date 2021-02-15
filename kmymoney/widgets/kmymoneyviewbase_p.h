@@ -1,10 +1,9 @@
 /*
- * SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- * SPDX-FileCopyrightText: 2019-2020 Thomas Baumgart <tbaumgart@kde.org>
- * SPDX-FileCopyrightText: 2020 Robert Szczesiak <dev.rszczesiak@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2019-2020 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2020 Robert Szczesiak <dev.rszczesiak@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef KMYMONEYVIEWBASEPRIVATE_H
 #define KMYMONEYVIEWBASEPRIVATE_H

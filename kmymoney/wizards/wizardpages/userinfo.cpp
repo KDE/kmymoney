@@ -1,16 +1,7 @@
-/***************************************************************************
-                             userinfo.cpp
-                             -------------------
-    begin                : Fri Jun  1 2007
-    copyright            : (C) 2007 Thomas Baumgart
-    email                : Thomas Baumgart <ipwizard@users.sourceforge.net>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2007 Thomas Baumgart <Thomas Baumgart <ipwizard@users.sourceforge.net>>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "userinfo.h"
 

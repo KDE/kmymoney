@@ -1,16 +1,7 @@
-/***************************************************************************
-                         kofxdirectconnectdlg.cpp
-                             -------------------
-    begin                : Sat Nov 13 2004
-    copyright            : (C) 2002 by Ace Jones
-    email                : acejones@users.sourceforge.net
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2002 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "kofxdirectconnectdlg.h"
 #include "kmymoneysettings.h"

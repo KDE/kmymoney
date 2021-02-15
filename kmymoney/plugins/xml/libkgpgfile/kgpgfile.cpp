@@ -1,14 +1,7 @@
-/***************************************************************************
-                             kgpgfile.cpp
-                             -------------------
-    copyright            : (C) 2004,2005,2009 by Thomas Baumgart <ipwizard@users.sourceforge.net>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2004, 2005, 2009 Thomas Baumgart <ipwizard@users.sourceforge.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include <config-kmymoney.h>
 

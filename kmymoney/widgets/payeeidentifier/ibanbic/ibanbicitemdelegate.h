@@ -1,8 +1,7 @@
 /*
- * SPDX-FileCopyrightText: 2014-2016 Christian Dávid <christian-david@web.de>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2014-2016 Christian Dávid <christian-david@web.de>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef IBANBICITEMDELEGATE_H
 #define IBANBICITEMDELEGATE_H

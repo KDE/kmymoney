@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2000-2001 Michael Edwardes <mte@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2000-2001 Michael Edwardes <mte@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef MYMONEYCATEGORY_H
 #define MYMONEYCATEGORY_H

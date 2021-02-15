@@ -1,8 +1,7 @@
 /*
- * SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef SCHEDULESJOURNALMODEL_H
 #define SCHEDULESJOURNALMODEL_H

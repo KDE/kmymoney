@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2013-2014 Allan Anderson <agander93@gmail.com>
- * SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2013-2014 Allan Anderson <agander93@gmail.com>
+    SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include <config-kmymoney.h>
 #include "csvexporter.h"

@@ -1,9 +1,8 @@
 /*  This file is part of the KDE project
     SPDX-FileCopyrightText: 2009 Laurent Montel <montel@kde.org>
-    (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-FileCopyrightText: 2018 Michael Kiefer <Michael-Kiefer@web.de>
     SPDX-FileCopyrightText: 2020 Robert Szczesiak <dev.rszczesiak@gmail.com>
-
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 

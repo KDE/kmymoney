@@ -1,11 +1,10 @@
 /*
- * SPDX-FileCopyrightText: 2002-2019 Thomas Baumgart <tbaumgart@kde.org>
- * SPDX-FileCopyrightText: 2004 Kevin Tambascio <ktambascio@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2005-2006 Ace Jones <acejones@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2002-2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2004 Kevin Tambascio <ktambascio@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2005-2006 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "mymoneysplit.h"
 #include "mymoneysplit_p.h"

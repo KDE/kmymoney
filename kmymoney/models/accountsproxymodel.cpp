@@ -1,10 +1,9 @@
 /*
- * SPDX-FileCopyrightText: 2010-2014 Cristian One ț <onet.cristian@gmail.com>
- * SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- * SPDX-FileCopyrightText: 2019-2020 Thomas Baumgart <tbaumgart@kde.org>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2010-2014 Cristian One ț <onet.cristian@gmail.com>
+    SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2019-2020 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "accountsproxymodel.h"
 #include "accountsproxymodel_p.h"

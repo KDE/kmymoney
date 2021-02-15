@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2009 Cristian Onet <onet.cristian@gmail.com>
- * SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2009 Cristian Onet <onet.cristian@gmail.com>
+    SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include <config-kmymoney.h>
 #include "icalendarexporter.h"

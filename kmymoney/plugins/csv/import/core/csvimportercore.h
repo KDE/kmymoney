@@ -1,10 +1,9 @@
 /*
- * SPDX-FileCopyrightText: 2010 Allan Anderson <agander93@gmail.com>
- * SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- * SPDX-FileCopyrightText: 2020 Thomas Baumgart <tbaumgart@kde.org>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2010 Allan Anderson <agander93@gmail.com>
+    SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2020 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef CSVIMPORTERCORE_H
 #define CSVIMPORTERCORE_H

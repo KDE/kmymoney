@@ -1,16 +1,7 @@
-/***************************************************************************
-                          konlinebankingstatus.h
-                             -------------------
-    begin                : Wed Apr 16 2008
-    copyright            : (C) 2008 by Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2008 Thomas Baumgart <ipwizard@users.sourceforge.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef KONLINEBANKINGSTATUS_H
 #define KONLINEBANKINGSTATUS_H

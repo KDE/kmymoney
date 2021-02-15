@@ -1,15 +1,7 @@
-/***************************************************************************
-                          kendingbalancedlg.h
-                             -------------------
-    copyright            : (C) 2000 by Michael Edwardes
-    email                : mte@users.sourceforge.net
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2000 Michael Edwardes <mte@users.sourceforge.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef KENDINGBALANCEDLG_H
 #define KENDINGBALANCEDLG_H

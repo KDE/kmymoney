@@ -1,10 +1,9 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * SPDX-FileCopyrightText: 2014 Christian Dávid <christian-david@web.de>
- * SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
- *
- *SPDX-License-Identifier: GPL-2.0-or-laterrg/licenses/>.
- */
+
+    SPDX-FileCopyrightText: 2014 Christian Dávid <christian-david@web.de>
+    SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-License-Identifier: GPL-2.0-or-laterrg/licenses/>.
+*/
 
 #ifndef UNAVAILABLETASK_H
 #define UNAVAILABLETASK_H

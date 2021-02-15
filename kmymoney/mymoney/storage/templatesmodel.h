@@ -1,8 +1,7 @@
 /*
- * SPDX-FileCopyrightText: 2020 Thomas Baumgart <tbaumgart@kde.org>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2020 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef TEMPLATESMODEL_H
 #define TEMPLATESMODEL_H

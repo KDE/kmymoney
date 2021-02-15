@@ -1,15 +1,14 @@
 /*
- * SPDX-FileCopyrightText: 2002-2019 Thomas Baumgart <tbaumgart@kde.org>
- * SPDX-FileCopyrightText: 2003 Michael Edwardes <mte@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2004-2006 Ace Jones <acejones@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2004 Kevin Tambascio <ktambascio@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2009-2014 Cristian One ț <onet.cristian@gmail.com>
- * SPDX-FileCopyrightText: 2012 Alessandro Russo <axela74@yahoo.it>
- * SPDX-FileCopyrightText: 2016 Christian Dávid <christian-david@web.de>
- * SPDX-FileCopyrightText: 2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2002-2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2003 Michael Edwardes <mte@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2004-2006 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2004 Kevin Tambascio <ktambascio@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2009-2014 Cristian One ț <onet.cristian@gmail.com>
+    SPDX-FileCopyrightText: 2012 Alessandro Russo <axela74@yahoo.it>
+    SPDX-FileCopyrightText: 2016 Christian Dávid <christian-david@web.de>
+    SPDX-FileCopyrightText: 2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "mymoneyxmlcontenthandler-test.h"
 

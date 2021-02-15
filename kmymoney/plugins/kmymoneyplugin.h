@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2005-2021 Thomas Baumgart <ipwizard@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2015 Christian Dávid <christian-david@web.de>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2005-2021 Thomas Baumgart <ipwizard@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2015 Christian Dávid <christian-david@web.de>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef KMYMONEYPLUGIN_H
 #define KMYMONEYPLUGIN_H

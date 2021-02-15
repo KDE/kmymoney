@@ -1,12 +1,11 @@
 /*
- * SPDX-FileCopyrightText: 2002-2004 Kevin Tambascio <ktambascio@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2003-2019 Thomas Baumgart <tbaumgart@kde.org>
- * SPDX-FileCopyrightText: 2004-2005 Ace Jones <acejones@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2009-2010 Alvaro Soliverez <asoliverez@kde.org>
- * SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2002-2004 Kevin Tambascio <ktambascio@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2003-2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2004-2005 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2009-2010 Alvaro Soliverez <asoliverez@kde.org>
+    SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 
 #ifndef KINVESTMENTVIEW_H

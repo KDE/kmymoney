@@ -1,13 +1,12 @@
 /*
- * SPDX-FileCopyrightText: 2000-2002 Michael Edwardes <mte@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2001-2019 Thomas Baumgart <tbaumgart@kde.org>
- * SPDX-FileCopyrightText: 2001 Felix Rodriguez <frodriguez@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2003 Kevin Tambascio <ktambascio@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2004-2005 Ace Jones <acejones@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2006 Darren Gould <darren_gould@gmx.de>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2000-2002 Michael Edwardes <mte@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2001-2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2001 Felix Rodriguez <frodriguez@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2003 Kevin Tambascio <ktambascio@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2004-2005 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2006 Darren Gould <darren_gould@gmx.de>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef MYMONEYTRANSACTION_H
 #define MYMONEYTRANSACTION_H

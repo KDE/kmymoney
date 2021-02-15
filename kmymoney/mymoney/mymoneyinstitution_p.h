@@ -1,12 +1,11 @@
 /*
- * SPDX-FileCopyrightText: 2000-2001 Michael Edwardes <mte@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2002-2017 Thomas Baumgart <tbaumgart@kde.org>
- * SPDX-FileCopyrightText: 2003 Kevin Tambascio <ktambascio@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2004-2006 Ace Jones <acejones@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2000-2001 Michael Edwardes <mte@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2002-2017 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2003 Kevin Tambascio <ktambascio@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2004-2006 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef MYMONEYINSTITUTION_P_H
 #define MYMONEYINSTITUTION_P_H

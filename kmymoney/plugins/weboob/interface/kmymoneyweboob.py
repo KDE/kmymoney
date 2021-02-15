@@ -1,9 +1,9 @@
 #
-# This file is part of KMyMoney, A Personal Finance Manager by KDE
+
 # SPDX-FileCopyrightText: 2014-2015 Romain Bignon <romain@symlink.me>
 # SPDX-FileCopyrightText: 2014-2015 Florent Fourcot <weboob@flo.fourcot.fr>
+# SPDX-License-Identifier: GPL-2.0-or-laterrg/licenses/>.
 #
-#SPDX-License-Identifier: GPL-2.0-or-laterrg/licenses/>.
 
 from weboob.core import Weboob
 from weboob.capabilities.bank import CapBank

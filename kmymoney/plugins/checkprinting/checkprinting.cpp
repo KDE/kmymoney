@@ -1,11 +1,8 @@
-/***************************************************************************
- *   This file is part of KMyMoney, A Personal Finance Manager by KDE      *
- *                                                                         *
- *   SPDX-FileCopyrightText: 2009 Cristian Onet <onet.cristian@gmail.com>       *
- *   SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>           *
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2009 Cristian Onet <onet.cristian@gmail.com>
+    SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+*/
 
 #include <config-kmymoney.h>
 #include "checkprinting.h"

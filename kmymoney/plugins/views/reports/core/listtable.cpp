@@ -1,10 +1,9 @@
 /*
- * SPDX-FileCopyrightText: 2004-2005 Ace Jones <acejones@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2008-2011 Alvaro Soliverez <asoliverez@gmail.com>
- * SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2004-2005 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2008-2011 Alvaro Soliverez <asoliverez@gmail.com>
+    SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "listtable.h"
 

@@ -1,8 +1,7 @@
 /*
- * SPDX-FileCopyrightText: 2014-2015 Christian Dávid <christian-david@web.de>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2014-2015 Christian Dávid <christian-david@web.de>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef NATIONALACCOUNTDELEGATE_H
 #define NATIONALACCOUNTDELEGATE_H

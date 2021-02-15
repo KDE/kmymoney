@@ -1,8 +1,7 @@
 /*
- * SPDX-FileCopyrightText: 2009-2012 Thomas Baumgart <tbaumgart@kde.org>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2009-2012 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "mymoneystoragemgr-test.h"
 #include <iostream>

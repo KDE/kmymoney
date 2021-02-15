@@ -1,9 +1,7 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * SPDX-FileCopyrightText: 2017 Thomas Baumgart <tbaumgart@kde.org>
- *
- *SPDX-License-Identifier: GPL-2.0-or-laterrg/licenses/>.
- */
+    SPDX-FileCopyrightText: 2017 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-License-Identifier: GPL-2.0-or-laterrg/licenses/>.
+*/
 
 #ifndef WEBCONNECT_H
 #define WEBCONNECT_H

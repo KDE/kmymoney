@@ -1,16 +1,7 @@
-/***************************************************************************
-                          webpricequote.h
-                             -------------------
-    begin                : Thu Dec 30 2004
-    copyright            : (C) 2004 by Ace Jones
-    email                : Ace Jones <acejones@users.sourceforge.net>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2004 Ace Jones <Ace Jones <acejones@users.sourceforge.net>>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef WEBPRICEQUOTE_H
 #define WEBPRICEQUOTE_H

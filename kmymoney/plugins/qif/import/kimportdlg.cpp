@@ -1,19 +1,10 @@
-/***************************************************************************
-                          kimportdlg.cpp  -  description
-                             -------------------
-    begin                : Wed May 16 2001
-    copyright            : (C) 2001 by Michael Edwardes
-    email                : mte@users.sourceforge.net
-                           Javier Campos Morales <javi_c@ctv.es>
-                           Felix Rodriguez <frodriguez@mail.wesleyan.edu>
-                           Thomas Baumgart <ipwizard@users.sourceforge.net>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2001 Michael Edwardes <mte@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2001 Javier Campos Morales <javi_c@ctv.es>
+    SPDX-FileCopyrightText: 2001 Felix Rodriguez <frodriguez@mail.wesleyan.edu>
+    SPDX-FileCopyrightText: 2001 Thomas Baumgart <ipwizard@users.sourceforge.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "kimportdlg.h"
 

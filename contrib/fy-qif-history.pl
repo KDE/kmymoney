@@ -1,18 +1,8 @@
 #!/usr/bin/perl -w
 
 #***************************************************************************
-# fy-qif.pl - description
-# -------------------
-# begin : Sat 10 Feb 2012
-# copyright : (C) 2012 by Joe W. Byers
-# email : financialseal@financialseal.com
-#
-#***************************************************************************/
-#
-#***************************************************************************
-#*                                                                         *
-#* SPDX-License-Identifier: GPL-2.0-or-later
-#*                                                                         *
+# SPDX-FileCopyrightText: 2012 Joe W. Byers <financialseal@financialseal.com>
+# SPDX-License-Identifier: GPL-2.0-or-later
 #***************************************************************************/
 
 # Simple script to download security prices from finance.yahoo and create a 

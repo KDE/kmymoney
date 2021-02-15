@@ -1,16 +1,8 @@
-/***************************************************************************
-                          convertertest.cpp
-                          -------------------
-    copyright            : (C) 2002 by Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
-                           Ace Jones <ace.j@hotpop.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2002 Thomas Baumgart <ipwizard@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2002 Ace Jones <ace.j@hotpop.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "converter-test.h"
 

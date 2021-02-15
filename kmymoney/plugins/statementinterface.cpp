@@ -1,16 +1,7 @@
-/***************************************************************************
-                          statementinterface.cpp
-                             -------------------
-    begin                : Wed Jan 5 2005
-    copyright            : (C) 2005 Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2005 Thomas Baumgart <ipwizard@users.sourceforge.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 // ----------------------------------------------------------------------------
 // QT Includes

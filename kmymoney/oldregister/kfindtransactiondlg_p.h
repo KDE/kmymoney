@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2002-2018 Thomas Baumgart <tbaumgart@kde.org>
- * SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2002-2018 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef KFINDTRANSACTIONDLG_P_H
 #define KFINDTRANSACTIONDLG_P_H

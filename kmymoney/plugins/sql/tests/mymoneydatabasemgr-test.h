@@ -1,15 +1,7 @@
-/***************************************************************************
-                          mymoneygenericstoragetest.h
-                          -------------------
-    copyright            : (C) 2008 by Fernando Vilas
-    email                : fvilas@iname.com
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2008 Fernando Vilas <fvilas@iname.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef MYMONEYDATABASEMGRTEST_H
 #define MYMONEYDATABASEMGRTEST_H

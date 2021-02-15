@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2013-2015 Christian Dávid <christian-david@web.de>
- * SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2013-2015 Christian Dávid <christian-david@web.de>
+    SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include <QSet>
 
