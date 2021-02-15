@@ -1,6 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2017 Thomas Baumgart <tbaumgart@kde.org>
-    SPDX-License-Identifier: GPL-2.0-or-laterrg/licenses/>.
+    SPDX-License-Identifier: GPL-2.0-or-later
 */
 
 #include "webconnect.h"
