@@ -1,18 +1,9 @@
-/***************************************************************************
-                          kbudgetview.h
-                          -------------
-    begin                : Thu Jan 10 2006
-    copyright            : (C) 2006 by Darren Gould
-    email                : darren_gould@gmx.de
-                           Alvaro Soliverez <asoliverez@gmail.com>
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2006 Darren Gould <darren_gould@gmx.de>
+    SPDX-FileCopyrightText: 2006 Alvaro Soliverez <asoliverez@gmail.com>
+    SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef KBUDGETVIEW_H
 #define KBUDGETVIEW_H

@@ -1,10 +1,9 @@
 /*
- * SPDX-FileCopyrightText: 2008-2015 Thomas Baumgart <tbaumgart@kde.org>
- * SPDX-FileCopyrightText: 2015 Christian Dávid <christian-david@web.de>
- * SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2008-2015 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2015 Christian Dávid <christian-david@web.de>
+    SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef TRANSACTIONMATCHER_H
 #define TRANSACTIONMATCHER_H

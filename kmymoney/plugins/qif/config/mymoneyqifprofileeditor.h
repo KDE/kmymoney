@@ -1,16 +1,7 @@
-/***************************************************************************
-                          kqifprofileeditor.h  -  description
-                             -------------------
-    begin                : Tue Dec 24 2002
-    copyright            : (C) 2002 by Thomas Baumgart
-    email                : thb@net-bembel.de
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2002 Thomas Baumgart <thb@net-bembel.de>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef MYMONEYQIFPROFILEEDITOR_H
 #define MYMONEYQIFPROFILEEDITOR_H

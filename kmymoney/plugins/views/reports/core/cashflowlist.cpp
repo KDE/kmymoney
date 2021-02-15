@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2007 Sascha Pfau <MrPeacock@gmail.com>
- * SPDX-FileCopyrightText: 2018 Ralf Habacker <ralf.habacker@freenet.de>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2007 Sascha Pfau <MrPeacock@gmail.com>
+    SPDX-FileCopyrightText: 2018 Ralf Habacker <ralf.habacker@freenet.de>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 /*
  * This file contains code from the func_xirr and related methods of

@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2018 Martin Preuss <martin@libchipcard.de>
- * SPDX-FileCopyrightText: 2004-2019 Thomas Baumgart <tbaumgart@kde.org>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2018 Martin Preuss <martin@libchipcard.de>
+    SPDX-FileCopyrightText: 2004-2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 /** @file
  * @short A C++ wrapper of the main aqbanking interface

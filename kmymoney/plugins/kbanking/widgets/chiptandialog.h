@@ -1,10 +1,9 @@
 /*
- * A tan input dialog for optical chipTan used in online banking
- * SPDX-FileCopyrightText: 2014 Christian David <christian-david@web.de>
- *
- * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
- *
- */
+    A tan input dialog for optical chipTan used in online banking
+    SPDX-FileCopyrightText: 2014 Christian David <christian-david@web.de>
+    SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+
+*/
 
 #ifndef CHIPTANDIALOG_H
 #define CHIPTANDIALOG_H

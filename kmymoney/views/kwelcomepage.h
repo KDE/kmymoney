@@ -1,16 +1,7 @@
-/***************************************************************************
-                          kwelcomepage.h  -  description
-                             -------------------
-    begin                : Sat Sep 5 2009
-    copyright            : (C) 2009 by Alvaro Soliverez <asoliverez@gmail.com>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2009 Alvaro Soliverez <asoliverez@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 #ifndef KWELCOMEPAGE_H
 #define KWELCOMEPAGE_H
 

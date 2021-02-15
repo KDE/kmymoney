@@ -1,16 +1,7 @@
-/***************************************************************************
-                          newspliteditor.h
-                             -------------------
-    begin                : Sat Apr 9 2016
-    copyright            : (C) 2016 by Thomas Baumgart
-    email                : Thomas Baumgart <tbaumgart@kde.org>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2016 Thomas Baumgart <Thomas Baumgart <tbaumgart@kde.org>>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef NEWSPLITEDITOR_H
 #define NEWSPLITEDITOR_H

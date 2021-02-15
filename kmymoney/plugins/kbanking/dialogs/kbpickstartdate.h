@@ -1,9 +1,8 @@
-/***************************************************************************
- *   SPDX-FileCopyrightText: 2009 Cristian Onet onet.cristian @gmail.com                 *
- *   SPDX-FileCopyrightText: 2004 Martin Preuss aquamaniac @users.sourceforge.net        *
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2009 Cristian Onet onet.cristian @gmail.com
+    SPDX-FileCopyrightText: 2004 Martin Preuss aquamaniac @users.sourceforge.net
+    SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+*/
 #ifndef KBPICKSTARTDATE_H
 #define KBPICKSTARTDATE_H
 

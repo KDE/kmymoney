@@ -1,18 +1,9 @@
-/***************************************************************************
-                          icons.h
-                             -------------------
-    begin                : Sun Jun 25 2017
-    copyright            : (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-                           (C) 2020 by Dawid Wróbel <me@dawidwrobel.com>
+/*
+    SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2020 Dawid Wróbel <me@dawidwrobel.com>
 
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef ICONS_H
 #define ICONS_H

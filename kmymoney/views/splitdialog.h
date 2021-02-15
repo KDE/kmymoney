@@ -1,16 +1,7 @@
-/***************************************************************************
-                          splitdialog.h
-                             -------------------
-    begin                : Sat Aug 8 2015
-    copyright            : (C) 2015 by Thomas Baumgart
-    email                : Thomas Baumgart <tbaumgart@kde.org>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2015 Thomas Baumgart <Thomas Baumgart <tbaumgart@kde.org>>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef SPLITDIALOG_H
 #define SPLITDIALOG_H

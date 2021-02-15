@@ -1,8 +1,7 @@
 /*
- * SPDX-FileCopyrightText: 2009-2015 Cristian One ț <onet.cristian@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2009-2015 Cristian One ț <onet.cristian@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef MODELS_H
 #define MODELS_H

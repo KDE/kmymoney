@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2005-2017 Thomas Baumgart <tbaumgart@kde.org>
- * SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2005-2017 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "mymoneysecurity.h"
 #include "mymoneysecurity_p.h"

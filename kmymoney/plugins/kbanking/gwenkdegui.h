@@ -1,10 +1,9 @@
 /*
- * A gwenhywfar gui for aqbanking using KDE widgets
- * SPDX-FileCopyrightText: 2014-2016 Christian David <christian-david@web.de>
- *
- * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
- *
- */
+    A gwenhywfar gui for aqbanking using KDE widgets
+    SPDX-FileCopyrightText: 2014-2016 Christian David <christian-david@web.de>
+    SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+
+*/
 
 #ifndef GWENKDEGUI_H
 #define GWENKDEGUI_H

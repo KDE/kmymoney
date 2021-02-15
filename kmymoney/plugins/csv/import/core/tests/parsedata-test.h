@@ -1,8 +1,7 @@
 /*
- * SPDX-FileCopyrightText: 2010-2012 Allan Anderson <agander93@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2010-2012 Allan Anderson <agander93@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef PARSEDATATEST_H
 #define PARSEDATATEST_H

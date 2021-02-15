@@ -1,16 +1,7 @@
-/***************************************************************************
-                         loanattributeswizardpage  -  description
-                            -------------------
-   begin                : Mon Dec 30 2013
-   copyright            : (C) 2013 by Jeremy Whiting
-   email                : jpwhiting@kde.org
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2013 Jeremy Whiting <jpwhiting@kde.org>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef LOANATTRIBUTESWIZARDPAGE_H
 #define LOANATTRIBUTESWIZARDPAGE_H

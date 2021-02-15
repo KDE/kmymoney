@@ -1,15 +1,7 @@
-/***************************************************************************
-                          main.cpp
-                             -------------------
-    copyright            : (C) 2001 by Michael Edwardes
-    email                : mte@users.sourceforge.net
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2001 Michael Edwardes <mte@users.sourceforge.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 
 #include <config-kmymoney.h>

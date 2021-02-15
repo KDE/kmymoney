@@ -1,15 +1,7 @@
-/***************************************************************************
-                          xea2kmt.cpp
-                          -------------------
-    copyright            : (C) 2014 by Ralf Habacker <ralf.habacker@freenet.de>
-
-****************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2014 Ralf Habacker <ralf.habacker@freenet.de>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "../kmymoney/mymoney/mymoneyaccount.h"
 

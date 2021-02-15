@@ -1,10 +1,9 @@
 /*
- * A tan input dialog for optical photoTan used in online banking
- * SPDX-FileCopyrightText: 2019 Jürgen Diez
- *
- * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
- *
- */
+    A tan input dialog for optical photoTan used in online banking
+    SPDX-FileCopyrightText: 2019 Jürgen Diez
+    SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+
+*/
 
 #include "phototandialog.h"
 #include "ui_phototandialog.h"

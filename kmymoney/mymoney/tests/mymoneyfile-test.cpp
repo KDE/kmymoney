@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2002-2018 Thomas Baumgart <tbaumgart@kde.org>
- * SPDX-FileCopyrightText: 2004 Ace Jones <acejones@users.sourceforge.net>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2002-2018 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2004 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "mymoneyfile-test.h"
 #include <iostream>

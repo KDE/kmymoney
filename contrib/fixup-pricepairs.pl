@@ -1,7 +1,6 @@
 #!/usr/bin/perl
 #
 # SPDX-FileCopyrightText: 2018 Thomas Baumgart <tbaumgart@kde.org>
-#
 # SPDX-License-Identifier: GPL-2.0-or-later
 #
 # ----------------------------------------------------------------------

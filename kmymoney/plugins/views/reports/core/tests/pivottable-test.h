@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2005-2018 Thomas Baumgart <tbaumgart@kde.org>
- * SPDX-FileCopyrightText: 2005-2006 Ace Jones <acejones@users.sourceforge.net>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2005-2018 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2005-2006 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef PIVOTTABLETEST_H
 #define PIVOTTABLETEST_H

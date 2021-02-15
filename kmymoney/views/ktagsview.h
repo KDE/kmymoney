@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2012 Alessandro Russo <axela74@yahoo.it>
- * SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2012 Alessandro Russo <axela74@yahoo.it>
+    SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef KTAGSVIEW_H
 #define KTAGSVIEW_H

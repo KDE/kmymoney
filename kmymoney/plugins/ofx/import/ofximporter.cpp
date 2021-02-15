@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2005 Ace Jones acejones @users.sourceforge.net
- * SPDX-FileCopyrightText: 2010-2019 Thomas Baumgart tbaumgart @kde.org
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2005 Ace Jones acejones @users.sourceforge.net
+    SPDX-FileCopyrightText: 2010-2019 Thomas Baumgart tbaumgart @kde.org
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include <config-kmymoney.h>
 #include "ofximporter.h"

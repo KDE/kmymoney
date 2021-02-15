@@ -1,16 +1,7 @@
-/***************************************************************************
-                          importinterface.cpp
-                             -------------------
-    begin                : Mon Apr 14 2008
-    copyright            : (C) 2008 Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2008 Thomas Baumgart <ipwizard@users.sourceforge.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 // ----------------------------------------------------------------------------
 // QT Includes

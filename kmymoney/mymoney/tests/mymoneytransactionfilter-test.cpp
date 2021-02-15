@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2018 Ralf Habacker <ralf.habacker@freenet.de>
- * SPDX-FileCopyrightText: 2018 Thomas Baumgart <tbaumgart@kde.org>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2018 Ralf Habacker <ralf.habacker@freenet.de>
+    SPDX-FileCopyrightText: 2018 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "mymoneytransactionfilter-test.h"
 

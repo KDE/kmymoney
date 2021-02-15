@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2004-2005 Ace Jones <acejones@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2008-2010 Alvaro Soliverez <asoliverez@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2004-2005 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2008-2010 Alvaro Soliverez <asoliverez@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef OBJECTINFOTABLE_H
 #define OBJECTINFOTABLE_H

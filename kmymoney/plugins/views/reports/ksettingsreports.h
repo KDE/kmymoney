@@ -1,16 +1,8 @@
-/***************************************************************************
-                          ksettingsreports.h
-                             -------------------
-    copyright            : (C) 2010 by Bernd Gonsior
-    email                : bernd.gonsior@googlemail.com
-                           (C) 2017 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2010 Bernd Gonsior <bernd.gonsior@googlemail.com>
+    SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef KSETTINGSREPORTS_H
 #define KSETTINGSREPORTS_H

@@ -1,8 +1,7 @@
 /*
- * SPDX-FileCopyrightText: 2007-2011 Thomas Baumgart <tbaumgart@kde.org>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2007-2011 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "mymoneymap-test.h"
 #include <iostream>

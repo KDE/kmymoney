@@ -1,10 +1,8 @@
 /*
- * This file is part of KMyMoney, A Personal Finance Manager by KDE
- * SPDX-FileCopyrightText: 2005 Thomas Baumgart <ipwizard@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2015 Christian Dávid <christian-david@web.de>
- *
- *SPDX-License-Identifier: GPL-2.0-or-laterrg/licenses/>.
- */
+    SPDX-FileCopyrightText: 2005 Thomas Baumgart <ipwizard@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2015 Christian Dávid <christian-david@web.de>
+    SPDX-License-Identifier: GPL-2.0-or-laterrg/licenses/>.
+*/
 
 #ifndef KMYMONEYPLUGIN_H
 #define KMYMONEYPLUGIN_H

@@ -1,11 +1,10 @@
 /*
- * SPDX-FileCopyrightText: 2004 Martin Preuss aquamaniac @users.sourceforge.net
- * SPDX-FileCopyrightText: 2009 Cristian Onet onet.cristian @gmail.com
- * SPDX-FileCopyrightText: 2010-2019 Thomas Baumgart tbaumgart @kde.org
- * SPDX-FileCopyrightText: 2016 Christian David christian-david @web.de
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2004 Martin Preuss aquamaniac @users.sourceforge.net
+    SPDX-FileCopyrightText: 2009 Cristian Onet onet.cristian @gmail.com
+    SPDX-FileCopyrightText: 2010-2019 Thomas Baumgart tbaumgart @kde.org
+    SPDX-FileCopyrightText: 2016 Christian David christian-david @web.de
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 #ifndef KBANKING_H
 #define KBANKING_H
 

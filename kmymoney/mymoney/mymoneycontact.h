@@ -1,8 +1,7 @@
 /*
- * SPDX-FileCopyrightText: 2014-2015 Cristian One ț <onet.cristian@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2014-2015 Cristian One ț <onet.cristian@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef MYMONEYCONTACT_H
 #define MYMONEYCONTACT_H

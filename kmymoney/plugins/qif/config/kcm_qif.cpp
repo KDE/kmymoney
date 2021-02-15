@@ -1,8 +1,7 @@
-/***************************************************************************
- *   SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz lukasz.wojnilowicz @gmail.com       *
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz lukasz.wojnilowicz @gmail.com
+    SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+*/
 
 #include "kcm_qif.h"
 #include <config-kmymoney-version.h>

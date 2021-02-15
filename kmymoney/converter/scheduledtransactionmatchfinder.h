@@ -1,15 +1,9 @@
-/***************************************************************************
+/*
     KMyMoney transaction importing module - searches for a matching scheduled transaction
 
-    copyright            : (C) 2012 by Lukasz Maszczynski <lukasz@maszczynski.net>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+    SPDX-FileCopyrightText: 2012 Lukasz Maszczynski <lukasz@maszczynski.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef SCHEDULEDTRANSACTIONMATCHFINDER_H
 #define SCHEDULEDTRANSACTIONMATCHFINDER_H

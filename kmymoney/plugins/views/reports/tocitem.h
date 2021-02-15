@@ -1,16 +1,7 @@
-/***************************************************************************
-                          tocitem.h  -  description
-                             -------------------
-    begin                : Sat Jul 03 2010
-    copyright            : (C) Bernd Gonsior
-    email                : bernd.gonsior@googlemail.com
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    copyright            : (C) Bernd Gonsior <bernd.gonsior@googlemail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 #ifndef TOCITEM_H
 #define TOCITEM_H
 

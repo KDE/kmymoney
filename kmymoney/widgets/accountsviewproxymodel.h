@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2009 Cristian One ț <onet.cristian@gmail.com>
- * SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2009 Cristian One ț <onet.cristian@gmail.com>
+    SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef ACCOUNTSVIEWPROXYMODEL_H
 #define ACCOUNTSVIEWPROXYMODEL_H

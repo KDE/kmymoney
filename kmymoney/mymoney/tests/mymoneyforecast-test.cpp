@@ -1,8 +1,7 @@
 /*
- * SPDX-FileCopyrightText: 2007-2010 Alvaro Soliverez <asoliverez@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2007-2010 Alvaro Soliverez <asoliverez@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "mymoneyforecast-test.h"
 

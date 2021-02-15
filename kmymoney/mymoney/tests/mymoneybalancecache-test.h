@@ -1,8 +1,7 @@
 /*
- * SPDX-FileCopyrightText: 2009-2011 Fernando Vilas <fvilas@iname.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2009-2011 Fernando Vilas <fvilas@iname.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef MYMONEYBALANCECACHETEST_H
 #define MYMONEYBALANCECACHETEST_H

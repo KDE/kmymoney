@@ -1,13 +1,10 @@
-/***************************************************************************
-    begin       : Mon Mar 01 2004
-    copyright   : (C) 2004 by Martin Preuss
-    email       : martin@libchipcard.de
+/*
+    SPDX-FileCopyrightText: 2004 Martin Preuss <martin@libchipcard.de>
 
- ***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+
+    SPDX-License-Identifier: GPL-2.0-or-later
+
+*/
 
 #ifdef HAVE_CONFIG_H
 # include <config-kmymoney.h>

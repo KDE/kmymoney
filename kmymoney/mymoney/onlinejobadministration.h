@@ -1,8 +1,7 @@
 /*
- * SPDX-FileCopyrightText: 2013-2018 Christian Dávid <christian-david@web.de>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2013-2018 Christian Dávid <christian-david@web.de>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef ONLINEJOBADMINISTRATION_H
 #define ONLINEJOBADMINISTRATION_H

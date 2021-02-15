@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2002-2010 Thomas Baumgart <tbaumgart@kde.org>
- * SPDX-FileCopyrightText: 2006 Ace Jones <acejones@users.sourceforge.net>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2002-2010 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2006 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef MYMONEYINSTITUTIONTEST_H
 #define MYMONEYINSTITUTIONTEST_H

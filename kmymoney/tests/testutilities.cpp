@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2005-2017 Thomas Baumgart <tbaumgart@kde.org>
- * SPDX-FileCopyrightText: 2005-2006 Ace Jones <acejones@users.sourceforge.net>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2005-2017 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2005-2006 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "testutilities.h"
 

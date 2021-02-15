@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2013-2014 Christian Dávid <christian-david@web.de>
- * SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2013-2014 Christian Dávid <christian-david@web.de>
+    SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef KMYMONEYTEXTEDITHIGHLIGHTER_H
 #define KMYMONEYTEXTEDITHIGHLIGHTER_H

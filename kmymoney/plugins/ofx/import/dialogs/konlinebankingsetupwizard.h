@@ -1,16 +1,7 @@
-/***************************************************************************
-                          konlinebankingsetupwizard.h
-                             -------------------
-    begin                : Sat Jan 7 2006
-    copyright            : (C) 2006 by Ace Jones
-    email                : acejones@users.sourceforge.net
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2006 Ace Jones <acejones@users.sourceforge.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef KONLINEBANKINGSETUPWIZARD_H
 #define KONLINEBANKINGSETUPWIZARD_H

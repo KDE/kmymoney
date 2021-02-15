@@ -1,9 +1,8 @@
 /*
- * SPDX-FileCopyrightText: 2009 Ian Neal <ianrsn70@users.sourceforge.net>
- * SPDX-FileCopyrightText: 2009 Thomas Baumgart <tbaumgart@kde.org>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+    SPDX-FileCopyrightText: 2009 Ian Neal <ianrsn70@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2009 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef IMYMONEYPROCESSINGCALENDAR_H
 #define IMYMONEYPROCESSINGCALENDAR_H

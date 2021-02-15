@@ -1,15 +1,9 @@
-/***************************************************************************
+/*
     KMyMoney transaction importing module - tests for ExistingTransactionMatchFinder
 
-    copyright            : (C) 2012 by Lukasz Maszczynski <lukasz@maszczynski.net>
-
-***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+    SPDX-FileCopyrightText: 2012 Lukasz Maszczynski <lukasz@maszczynski.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "matchfinder-test.h"
 #include "existingtransactionmatchfinder.h"

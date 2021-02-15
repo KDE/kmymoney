@@ -1,16 +1,7 @@
-/***************************************************************************
-                          mymoneytemplate.cpp  -  description
-                             -------------------
-    begin                : Sat Aug 14 2004
-    copyright            : (C) 2004 by Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2004 Thomas Baumgart <ipwizard@users.sourceforge.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "mymoneytemplate.h"
 

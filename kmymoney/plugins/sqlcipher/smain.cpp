@@ -1,13 +1,12 @@
-/****************************************************************************
-**
-** SPDX-FileCopyrightText: 2016 The Qt Company Ltd.
-** Contact: https://www.qt.io/licensing/
-**
-** This file is part of the plugins of the Qt Toolkit.
-**
-** SPDX-License-Identifier: LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KFQF-Accepted-GPL OR LicenseRef-Qt-Commercial
-**
-****************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2016 The Qt Company Ltd.
+    Contact: https://www.qt.io/licensing/
+
+    This file is part of the plugins of the Qt Toolkit.
+
+    SPDX-License-Identifier: LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KFQF-Accepted-GPL OR LicenseRef-Qt-Commercial
+
+*/
 
 #include <qsqldriverplugin.h>
 #include <qstringlist.h>
