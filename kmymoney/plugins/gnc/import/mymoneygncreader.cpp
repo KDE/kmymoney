@@ -14,10 +14,7 @@ email                : mte@users.sourceforge.net
 
 /***************************************************************************
  *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   SPDX-License-Identifier: GPL-2.0-or-later
  *                                                                         *
  ***************************************************************************/
 
@@ -1529,7 +1526,7 @@ void MyMoneyGncReader::convertAccount(const GncAccount* gac)
     // now determine the account type and its parent id
     /* This list taken from
     # Feb 2006: A RELAX NG Compact schema for gnucash "v2" XML files.
-    # Copyright (C) 2006 Joshua Sled <jsled@asynchronous.org>
+    # SPDX-FileCopyrightText: 2006 Joshua Sled <jsled@asynchronous.org>
     "NO_TYPE" "BANK" "CASH" "CREDIT" "ASSET" "LIABILITY" "STOCK" "MUTUAL" "CURRENCY"
     "INCOME" "EXPENSE" "EQUITY" "RECEIVABLE" "PAYABLE" "CHECKING" "SAVINGS" "MONEYMRKT" "CREDITLINE"
     Some don't seem to be used in practice. Not sure what CREDITLINE s/be converted as.
