@@ -1,0 +1,24 @@
+# default KDe build env
+include:
+  - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-before.yml
+  - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-extragear-linux.yml
+  - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/ci-extragear-freebsd.yml
+
+# custom builds
+build_local_ubuntu_2004:
+  stage: build
+  image: ubuntu:20.04
+  variables:
+    DEBIAN_FRONTEND: "noninteractive"
+  before_script:
+    - echo "Installing dependencies."
+    - sed -i -- 's/#[ ]*deb-src/deb-src/g' /etc/apt/sources.list
+    - apt update
+    - apt install -y apt-utils eatmydata
+    - eatmydata apt build-dep -y kmymoney
+    - eatmydata apt install -y qt5-default libsqlcipher-dev libqt5sql5-sqlite qtbase5-private-dev ninja-build
+
+  script:
+    - echo "Building."
+    - cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug
+    - ninja
