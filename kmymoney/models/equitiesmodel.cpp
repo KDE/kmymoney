@@ -5,6 +5,9 @@
 */
 
 #include "equitiesmodel.h"
+#include "accountsmodel.h"
+#include "mymoneyfile.h"
+#include "securitiesmodel.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
