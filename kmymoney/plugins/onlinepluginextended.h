@@ -1,7 +1,7 @@
 /*
     This file is part of KMyMoney, A Personal Finance Manager f*or KDE
     SPDX-FileCopyrightText: 2014 Christian Dávid <christian-david@web.de>
-    SPDX-License-Identifier: GPL-2.0-or-laterrg/licenses/>.
+    SPDX-License-Identifier: GPL-2.0-or-later
 */
 
 #ifndef ONLINEPLUGINEXTENDED_H

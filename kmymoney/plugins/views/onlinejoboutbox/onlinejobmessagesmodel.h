@@ -1,6 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2015 Christian Dávid <christian-david@web.de>
-    SPDX-License-Identifier: GPL-2.0-or-laterrg/licenses/>.
+    SPDX-License-Identifier: GPL-2.0-or-later
 */
 
 #ifndef ONLINEJOBMESSAGESMODEL_H

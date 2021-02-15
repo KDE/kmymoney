@@ -1,7 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2017 Marc Hübner <mahueb55@gmail.com>
     SPDX-FileCopyrightText: 2020 Thomas Baumgart <tbaumgart@kde.org>
-    SPDX-License-Identifier: GPL-2.0-or-laterrg/licenses/>.
+    SPDX-License-Identifier: GPL-2.0-or-later
 */
 
 #include "platformtools.h"

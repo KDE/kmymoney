@@ -1,6 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
-    SPDX-License-Identifier: GPL-2.0-or-laterrg/licenses/>.
+    SPDX-License-Identifier: GPL-2.0-or-later
 */
 
 #include "kmm_printer.h"

@@ -1,7 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2012 Thomas Baumgart <ipwizard@users.sourceforge.net>
     SPDX-FileCopyrightText: 2015 Christian Dávid <christian-david@web.de>
-    SPDX-License-Identifier: GPL-2.0-or-laterrg/licenses/>.
+    SPDX-License-Identifier: GPL-2.0-or-later
 */
 
 #ifndef KMYMONEYUTILSTEST_H
