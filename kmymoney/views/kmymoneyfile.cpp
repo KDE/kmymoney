@@ -1,24 +1,12 @@
-/***************************************************************************
-                          kmymoneyfile.cpp  -  description
-                             -------------------
-    begin                : Mon Jun 10 2002
-    copyright            : (C) 2000-2002 by Michael Edwardes
-    email                : mte@users.sourceforge.net
-                           Javier Campos Morales <javi_c@users.sourceforge.net>
-                           Felix Rodriguez <frodriguez@users.sourceforge.net>
-                           John C <thetacoturtle@users.sourceforge.net>
-                           Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           Kevin Tambascio <ktambascio@users.sourceforge.net>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2000-2002 Michael Edwardes <mte@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2000-2002 Javier Campos Morales <javi_c@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2000-2002 Felix Rodriguez <frodriguez@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2000-2002 John C <thetacoturtle@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2000-2002 Thomas Baumgart <ipwizard@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2000-2002 Kevin Tambascio <ktambascio@users.sourceforge.net>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 /*
  * This file is currently not used anymore, but kept here for reference purposes

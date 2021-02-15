@@ -6,7 +6,7 @@
 #  LIBOFX_LIBRARIES - Link these to LibOfx
 #  LIBOFX_DEFINITIONS - Compiler switches required for using LibOfx
 
-# Copyright (c) 2006, Alexander Neundorf, <neundorf@kde.org>
+# SPDX-FileCopyrightText: 2006 Alexander Neundorf <neundorf@kde.org>
 # Copied from FindLibXslt.cmake, 2009, Guillaume DE BURE, <gdebure@yahoo.com>
 #
 # Redistribution and use is allowed according to the terms of the BSD license.
