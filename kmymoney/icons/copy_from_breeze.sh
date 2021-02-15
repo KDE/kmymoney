@@ -1,4 +1,7 @@
 #!/bin/bash
+# SPDX-FileCopyrightText: 2020 Dawid Wrobel <me@dawidwrobel.com>
+# SPDX-FileCopyrightText: 2020 Thomas Baumgart <tbaumgart@kde.org>
+# SPDX-License-Identifier: GPL-2.0-or-later
 
 # Usage: ./copy_from_breeze.sh breeze-icons\
 # where breeze-icon\ is a path to a root folder of a cloned breeze-icon git repository

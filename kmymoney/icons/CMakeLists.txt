@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2020-2021 Dawid Wrobel <me@dawidwrobel.com>
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 include(ECMInstallIcons)
 
 file(GLOB_RECURSE KMYMONEY_ICONS "kmymoney/*.png")
