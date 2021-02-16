@@ -1,19 +1,8 @@
-/***************************************************************************
-                          convertertest.h
-                          -------------------
-    copyright            : (C) 2002 by Thomas Baumgart
-    email                : ipwizard@users.sourceforge.net
-                           Ace Jones <ace.jones@hotpop.com>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2002 Thomas Baumgart <ipwizard@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2002 Ace Jones <ace.jones@hotpop.com>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef CONVERTERTEST_H
 #define CONVERTERTEST_H

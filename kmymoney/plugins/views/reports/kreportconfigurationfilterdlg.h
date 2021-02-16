@@ -1,27 +1,15 @@
-/***************************************************************************
-                          kreportconfigurationdlg.h  -  description
-                             -------------------
-    begin                : Mon Jun 21 2004
-    copyright            : (C) 2000-2004 by Michael Edwardes
-    email                : mte@users.sourceforge.net
-                           Javier Campos Morales <javi_c@users.sourceforge.net>
-                           Felix Rodriguez <frodriguez@users.sourceforge.net>
-                           John C <thetacoturtle@users.sourceforge.net>
-                           Thomas Baumgart <ipwizard@users.sourceforge.net>
-                           Kevin Tambascio <ktambascio@users.sourceforge.net>
-                           Ace Jones <ace.j@hotpop.com>
-                           (C) 2017, 2018 by Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-                           2018 by Michael Kiefer <Michael-Kiefer@web.de>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+    SPDX-FileCopyrightText: 2000-2004 Michael Edwardes <mte@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2000-2004 Javier Campos Morales <javi_c@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2000-2004 Felix Rodriguez <frodriguez@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2000-2004 John C <thetacoturtle@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2000-2004 Thomas Baumgart <ipwizard@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2000-2004 Kevin Tambascio <ktambascio@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2000-2004 Ace Jones <ace.j@hotpop.com>
+    SPDX-FileCopyrightText: 2017, 2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2018 Michael Kiefer <Michael-Kiefer@web.de>
+    SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef KREPORTCONFIGURATIONFILTERDLG_H
 #define KREPORTCONFIGURATIONFILTERDLG_H

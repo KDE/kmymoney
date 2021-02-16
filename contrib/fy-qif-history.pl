@@ -1,21 +1,8 @@
 #!/usr/bin/perl -w
 
 #***************************************************************************
-# fy-qif.pl - description
-# -------------------
-# begin : Sat 10 Feb 2012
-# copyright : (C) 2012 by Joe W. Byers
-# email : financialseal@financialseal.com
-#
-#***************************************************************************/
-#
-#***************************************************************************
-#*                                                                         *
-#* This program is free software; you can redistribute it and/or modify    *
-#* it under the terms of the GNU General Public License as published by    *
-#* the Free Software Foundation; either version 2 of the License, or       *
-#* (at your option) any later version.                                     *
-#*                                                                         *
+# SPDX-FileCopyrightText: 2012 Joe W. Byers <financialseal@financialseal.com>
+# SPDX-License-Identifier: GPL-2.0-or-later
 #***************************************************************************/
 
 # Simple script to download security prices from finance.yahoo and create a 
@@ -31,7 +18,7 @@
 # ^
 
 # This uses perl-Finance-YahooQuote
-# Copyright (C) 2002 Dirk Eddelbuettel <edd@debian.org>, and GPL'ed
+# SPDX-FileCopyrightText: 2002 Dirk Eddelbuettel <edd@debian.org>, and GPL'ed
 # Based on the original example by Dj Padzensky
 #
 # $Id: yahooquote,v 1.2 2002/12/24 17:50:28 edd Exp $
