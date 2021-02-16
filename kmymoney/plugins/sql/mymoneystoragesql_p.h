@@ -24,6 +24,7 @@
 #include <QIODevice>
 #include <QUrlQuery>
 #include <QSqlQuery>
+#include <QSqlDriver>
 #include <QSqlError>
 #include <QList>
 #include <QSqlRecord>
@@ -885,12 +886,14 @@ public:
 
   bool clearTable(const QString& tableName, QSqlQuery& query)
   {
-    if (query.exec(QString("SELECT count(*) FROM %1").arg(tableName))) {
-      if (query.next()) {
-        if (query.value(0).toUInt() > 0) {
-          if (!query.exec(QString("DELETE FROM %1").arg(tableName)))
-            return false;
-        }
+    if (query.driver()->tables(QSql::Tables).contains(tableName)) {
+      if (query.exec(QString("SELECT count(*) FROM %1").arg(tableName))) {
+	if (query.next()) {
+	  if (query.value(0).toUInt() > 0) {
+	    if (!query.exec(QString("DELETE FROM %1").arg(tableName)))
+	      return false;
+	  }
+	}
       }
     }
     return true;
