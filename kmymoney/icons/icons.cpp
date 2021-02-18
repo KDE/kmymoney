@@ -111,7 +111,7 @@ namespace Icons {
       {Icon::Unknown, QStringLiteral("unknown")},
       {Icon::UnmapOnlineAccount, QStringLiteral("network-disconnect")},
       {Icon::UserProperties, QStringLiteral("user-properties")},
-      {Icon::Accounts, QStringLiteral("view-financial-account")},
+      {Icon::Accounts, QStringLiteral("financial-account")},
       {Icon::Asset, QStringLiteral("view-financial-account-asset")},
       {Icon::AssetClosed, QStringLiteral("view-financial-account-asset-closed")},
       {Icon::BankAccount, QStringLiteral("view-financial-account")},
