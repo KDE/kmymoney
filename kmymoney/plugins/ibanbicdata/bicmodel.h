@@ -16,7 +16,7 @@ class IBAN_BIC_IDENTIFIER_EXPORT bicModel : public QSqlQueryModel
 
 public:
   enum DisplayRole {
-    InstitutionNameRole = Qt::UserRole
+    InstitutionNameRole = Qt::UserRole,
   };
 
   explicit bicModel(QObject* parent = 0);

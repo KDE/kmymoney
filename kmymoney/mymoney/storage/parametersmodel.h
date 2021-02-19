@@ -54,7 +54,7 @@ class KMM_MYMONEY_EXPORT ParametersModel : public MyMoneyModel<ParameterItem>
 public:
   class Column {
     enum {
-      Name
+      Name,
     } Columns;
   };
 

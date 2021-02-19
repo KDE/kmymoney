@@ -32,13 +32,13 @@ class KMyMoneySecuritySelectorPrivate
 public:
   enum displayItemE {
     Symbol = 0,
-    FullName
+    FullName,
   };
 
   enum displayTypeE {
     TypeCurrencies = 0x01,
     TypeSecurities = 0x02,
-    TypeAll        = 0x03
+    TypeAll        = 0x03,
   };
 
   explicit KMyMoneySecuritySelectorPrivate(KMyMoneySecuritySelector *qq):

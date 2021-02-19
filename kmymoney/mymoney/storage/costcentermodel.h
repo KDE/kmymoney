@@ -31,7 +31,7 @@ class KMM_MYMONEY_EXPORT CostCenterModel : public MyMoneyModel<MyMoneyCostCenter
 public:
   class Column {
     enum {
-      Name
+      Name,
     } Columns;
   };
 

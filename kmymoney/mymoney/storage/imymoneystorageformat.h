@@ -34,7 +34,7 @@ public:
 
   enum fileVersionDirectionType {
     Reading = 0,          /**< version of file to be read */
-    Writing = 1           /**< version to be used when writing a file */
+    Writing = 1,          /**< version to be used when writing a file */
   };
 
 /// @todo port to new model code

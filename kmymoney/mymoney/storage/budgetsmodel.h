@@ -31,7 +31,7 @@ class KMM_MYMONEY_EXPORT BudgetsModel : public MyMoneyModel<MyMoneyBudget>
 public:
   enum Columns {
       Name,
-      Year
+      Year,
   };
 
   explicit BudgetsModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);

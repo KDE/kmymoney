@@ -23,14 +23,14 @@ public:
    */
   enum roles {
     OnlineJobId = Qt::UserRole, /**< QString of onlineJob.id() */
-    OnlineJobRole /**< the real onlineJob */
+    OnlineJobRole, /**< the real onlineJob */
   };
 
   enum columns {
     ColAccount,
     ColAction,
     ColDestination,
-    ColValue
+    ColValue,
   };
 
   /** Only @ref Models should be able to construct this class */

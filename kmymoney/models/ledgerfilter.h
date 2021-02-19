@@ -37,7 +37,7 @@ public:
     NotMarked,
     NotReconciled,
     Cleared,
-    Scheduled
+    Scheduled,
   };
 
   explicit LedgerFilter(QObject* parent);

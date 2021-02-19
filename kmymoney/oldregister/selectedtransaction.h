@@ -51,7 +51,7 @@ namespace KMyMoneyRegister
       NoWarning = 0,
       OneSplitReconciled,
       OneSplitFrozen,
-      OneAccountClosed
+      OneAccountClosed,
     } warnLevel_t;
     /**
    * checks the transaction for specific reasons which would

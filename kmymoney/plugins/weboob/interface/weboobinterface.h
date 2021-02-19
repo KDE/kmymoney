@@ -49,7 +49,7 @@ public:
       TYPE_WITHDRAWAL,
       TYPE_CARD,
       TYPE_LOAN_PAYMENT,
-      TYPE_BANK
+      TYPE_BANK,
     } type;
     QString raw;
     QString category;
@@ -67,7 +67,7 @@ public:
       TYPE_DEPOSIT,
       TYPE_LOAN,
       TYPE_MARKET,
-      TYPE_JOINT
+      TYPE_JOINT,
     } type;
     MyMoneyMoney balance;
 

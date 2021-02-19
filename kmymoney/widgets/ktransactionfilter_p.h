@@ -44,7 +44,7 @@ public:
     addAccountToFilter = 0,
     addCategoryToFilter,
     addPayeeToFilter,
-    addTagToFilter
+    addTagToFilter,
   };
 
   // the set of accounts to choose from

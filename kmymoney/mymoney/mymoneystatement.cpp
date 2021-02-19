@@ -29,7 +29,7 @@ namespace eMyMoney {
       Transaction,
       Split,
       Price,
-      Security
+      Security,
     };
     uint qHash(const Element key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 

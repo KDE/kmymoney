@@ -37,7 +37,7 @@ public:
   typedef enum {
     UseOriginal = 0,
     ModifyOnce,
-    ModifyAlways
+    ModifyAlways,
   } Action;
 
   /**

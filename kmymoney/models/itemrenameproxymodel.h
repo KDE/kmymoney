@@ -53,7 +53,7 @@ public:
     eOpenedItems,
     eClosedItems,
     // insert new values above this line
-    eMaxItems
+    eMaxItems,
   } ReferenceFilterType;
 
   explicit ItemRenameProxyModel(QObject *parent = nullptr);

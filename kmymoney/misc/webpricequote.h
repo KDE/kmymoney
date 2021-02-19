@@ -91,7 +91,7 @@ private:
   * for stock prices or currency exchange rates.
   */
 struct KMM_WEBCONNECT_EXPORT WebPriceQuoteSource {
-  enum identifyBy {Symbol, IdentificationNumber, Name};
+  enum identifyBy {Symbol, IdentificationNumber, Name,};
   WebPriceQuoteSource() : m_webIDBy(Symbol), m_skipStripping(false) {}
   explicit WebPriceQuoteSource(const QString& name);
   WebPriceQuoteSource(const QString& name, const QString& url, const QString& csvUrl, const QString& id, const identifyBy idBy, const QString& price, const QString& date, const QString& dateformat, bool skipStripping = false);
@@ -126,7 +126,7 @@ public:
 
   typedef enum _quoteSystemE {
     Native = 0,
-    FinanceQuote
+    FinanceQuote,
   } quoteSystemE;
 
   void setDate(const QDate& _from, const QDate& _to);

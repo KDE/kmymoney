@@ -14,14 +14,14 @@ namespace eKMyMoney {
     Saved,
     Closing,
     Closed,
-    Changed
+    Changed,
   };
 
   enum class StorageType {
     None,
     XML,
     SQL,
-    GNC
+    GNC,
   };
 
   inline uint qHash(const StorageType key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }

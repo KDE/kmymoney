@@ -36,7 +36,7 @@ namespace KMyMoneyPlugin
   enum Action {
     Load,         // load all enabled plugins
     Unload,       // unload all loaded plugins
-    Reorganize    // load requested and unload unneeded plugins
+    Reorganize,    // load requested and unload unneeded plugins
   };
 
   /**
@@ -45,7 +45,7 @@ namespace KMyMoneyPlugin
   enum Category {
     OnlineBankOperations,
     PayeeIdentifier,
-    StandardPlugin
+    StandardPlugin,
   };
 
   Category pluginCategory(const KPluginMetaData& pluginInfo);

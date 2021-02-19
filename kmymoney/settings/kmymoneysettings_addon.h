@@ -32,7 +32,7 @@ enum class SchemeColor {
   TransactionErroneous,
   FieldRequired,
   GroupMarker,
-  MissingConversionRate
+  MissingConversionRate,
 };
 
 #endif

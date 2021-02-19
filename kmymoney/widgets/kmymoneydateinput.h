@@ -58,7 +58,7 @@ namespace KMyMoney {
     enum {
       Created,
       GotFocus,
-      FirstMousePress
+      FirstMousePress,
     }                   m_initStage;
   };
 }; // namespace

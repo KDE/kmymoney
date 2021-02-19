@@ -32,7 +32,7 @@ namespace platformTools
     BeforeQuantityMoney,
     BeforeQuantityMoneyWithSpace,
     AfterQuantityMoney,
-    AfterQuantityMoneyWithSpace
+    AfterQuantityMoneyWithSpace,
   };
 
   currencySymbolPosition_t currencySymbolPosition(bool negativeValues = false);
@@ -43,7 +43,7 @@ namespace platformTools
     PreceedQuantityAndSymbol,
     SucceedQuantityAndSymbol,
     PreceedSymbol,
-    SucceedSymbol
+    SucceedSymbol,
   };
 
   currencySignPosition_t currencySignPosition(bool negativeValues = false);

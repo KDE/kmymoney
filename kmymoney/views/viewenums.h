@@ -18,7 +18,7 @@ namespace eView {
                    Referenced, // used tags
                    Unused,     // unused tags
                    Opened,     // not closed tags
-                   Closed      // closed tags
+                   Closed,     // closed tags
                  };
 
   enum class Intent {
@@ -40,7 +40,7 @@ namespace eView {
     ReportProgressMessage,
     SelectRegisterTransactions,
     AccountReconciled,
-    SetOnlinePlugins
+    SetOnlinePlugins,
   };
 
   enum class Action {
@@ -56,7 +56,7 @@ namespace eView {
     CleanupBeforeFileClose,
     InitializeAfterFileOpen,
     DisableViewDepenedendActions,
-    ShowBalanceChart
+    ShowBalanceChart,
   };
 
 }

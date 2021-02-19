@@ -34,7 +34,7 @@ public:
     Type = 0,
     Description,
     // insert new columns above this line
-    MaxColumns
+    MaxColumns,
   };
 
   explicit TemplatesModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);

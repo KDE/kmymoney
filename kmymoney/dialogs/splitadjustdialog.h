@@ -28,7 +28,7 @@ public:
     SplitAdjustContinue,
     SplitAdjustChange,
     SplitAdjustDistribute,
-    SplitAdjustLeaveAsIs
+    SplitAdjustLeaveAsIs,
   };
 
   Options selectedOption() const;

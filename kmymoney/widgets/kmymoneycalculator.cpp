@@ -113,7 +113,7 @@ public:
     CLEAR,
     CLEARALL,
     /* insert new buttons before this line */
-    MAX_BUTTONS
+    MAX_BUTTONS,
   };
 
   /**

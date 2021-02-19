@@ -46,12 +46,12 @@ public:
     Bic,
     Iban,
     // insert new columns above this line
-    MaxColumns
+    MaxColumns,
   };
 
   enum ColorScheme {
     Positive,
-    Negative
+    Negative,
   };
 
   explicit AccountsModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);

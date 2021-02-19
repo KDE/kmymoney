@@ -31,10 +31,10 @@ public:
 
   enum PriceItemDataRole {
     ScheduleIdRole = Qt::UserRole,
-    OrderRole = Qt::UserRole + 1
+    OrderRole = Qt::UserRole + 1,
   };
 
-  enum ePriceColumns { ePriceCommodity = 0, ePriceStockName, ePriceCurrency, ePriceDate, ePricePrice, ePriceSource };
+  enum ePriceColumns { ePriceCommodity = 0, ePriceStockName, ePriceCurrency, ePriceDate, ePricePrice, ePriceSource, };
 
 };
 

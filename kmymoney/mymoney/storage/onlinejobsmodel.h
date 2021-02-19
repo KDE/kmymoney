@@ -35,7 +35,7 @@ public:
     Destination,
     Value,
     // insert new columns above this line
-    MaxColumns
+    MaxColumns,
   };
 
   explicit OnlineJobsModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);

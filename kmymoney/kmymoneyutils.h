@@ -106,7 +106,7 @@ public:
       * an investment is involved. Usually, a special dialog
       * is used to modify this transaction.
       */
-    InvestmentTransaction
+    InvestmentTransaction,
   };
 
   static const int maxHomePageItems = 5;

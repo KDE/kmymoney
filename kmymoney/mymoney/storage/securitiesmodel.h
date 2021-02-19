@@ -37,7 +37,7 @@ public:
     Currency,
     Fraction,
     // insert new columns above this line
-    MaxColumns
+    MaxColumns,
   };
 
 

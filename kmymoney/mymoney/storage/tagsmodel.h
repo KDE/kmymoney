@@ -32,7 +32,7 @@ public:
   class Column {
   public:
     enum {
-      Name
+      Name,
     } Columns;
   };
 

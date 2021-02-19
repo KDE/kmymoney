@@ -26,7 +26,7 @@ public:
   enum FrameStyle {
     Error = 0,
     Warning,
-    Info
+    Info,
   };
   Q_ENUM(FrameStyle)
 

@@ -32,7 +32,7 @@ public:
     /** item represents a reportgroup */
     GROUP  = QTreeWidgetItem::UserType + 10,
     /** item represents a report */
-    REPORT = QTreeWidgetItem::UserType + 20
+    REPORT = QTreeWidgetItem::UserType + 20,
   } type;
 
   /** Constructor.
