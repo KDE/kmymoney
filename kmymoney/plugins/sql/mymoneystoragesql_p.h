@@ -883,6 +883,8 @@ public:
 	  }
 	}
       }
+    } else {
+      qWarning() << "clearTable():" << tableName << "does not exist.";
     }
     return true;
   }
