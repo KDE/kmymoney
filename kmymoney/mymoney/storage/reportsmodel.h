@@ -32,7 +32,7 @@ public:
   enum Columns {
     ReportName,
     // insert new columns above this line
-    MaxColumns
+    MaxColumns,
   };
 
   explicit ReportsModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);

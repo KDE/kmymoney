@@ -73,7 +73,7 @@ class KPayeesViewPrivate : public KMyMoneyViewBasePrivate
 public:
   enum struct eTransactionDisplay {
     ShowTransactions,
-    ClearTransactionDisplay
+    ClearTransactionDisplay,
   };
 
   explicit KPayeesViewPrivate(KPayeesView *qq)

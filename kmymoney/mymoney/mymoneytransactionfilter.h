@@ -60,7 +60,7 @@ public:
     amountFilterActive   = 0x0080,
     typeFilterActive     = 0x0100,
     stateFilterActive    = 0x0200,
-    validityFilterActive = 0x0400
+    validityFilterActive = 0x0400,
   };
   Q_DECLARE_FLAGS(FilterSet, FilterFlags)
 

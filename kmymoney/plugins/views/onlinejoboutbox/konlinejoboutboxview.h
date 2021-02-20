@@ -31,7 +31,7 @@ namespace eMenu {
     AccountCreditTransfer,
     DeleteOnlineJob,
     EditOnlineJob,
-    SendOnlineJobs
+    SendOnlineJobs,
   };
   inline uint qHash(const OnlineAction key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 };

@@ -34,7 +34,7 @@ public:
         Split,
         Tag,
         Budget,
-        OnlineJob
+        OnlineJob,
     } Object_t;
     SelectedObjects();
 

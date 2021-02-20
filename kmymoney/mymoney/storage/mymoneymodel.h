@@ -171,7 +171,7 @@ public:
     Add,
     Modify,
     Remove,
-    Reparent
+    Reparent,
   };
 
   /**

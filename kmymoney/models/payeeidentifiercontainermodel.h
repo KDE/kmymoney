@@ -36,7 +36,7 @@ public:
    */
   enum roles {
     payeeIdentifierType = payeeIdentifierModel::payeeIdentifierType, /**< type of payeeIdentifier */
-    payeeIdentifier = payeeIdentifierModel::payeeIdentifier /**< actual payeeIdentifier */
+    payeeIdentifier = payeeIdentifierModel::payeeIdentifier, /**< actual payeeIdentifier */
   };
 
   explicit payeeIdentifierContainerModel(QObject* parent = 0);

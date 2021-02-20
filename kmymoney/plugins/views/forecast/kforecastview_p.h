@@ -60,7 +60,7 @@ typedef enum {
   BudgetView,
   ChartView,
   // insert new values above this line
-  MaxViewTabs
+  MaxViewTabs,
 } ForecastViewTab;
 
 enum ForecastViewRoles {

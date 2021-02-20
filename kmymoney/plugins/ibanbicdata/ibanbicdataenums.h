@@ -18,17 +18,17 @@ namespace eIBANBIC {
     bankNameAndBic,
     extractBankIdentifier,
     isBicAllocated,
-    bicModel
+    bicModel,
   };
 
   enum bicAllocationStatus : unsigned int {
     bicAllocated = 0,
     bicNotAllocated,
-    bicAllocationUncertain
+    bicAllocationUncertain,
   };
 
   enum DisplayRole {
-    InstitutionNameRole = Qt::UserRole
+    InstitutionNameRole = Qt::UserRole,
   };
 }
 #endif

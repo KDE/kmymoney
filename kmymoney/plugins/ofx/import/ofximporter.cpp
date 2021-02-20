@@ -56,7 +56,7 @@ using KWallet::Wallet;
 typedef enum  {
   UniqueIdUnknown = -1,
   UniqueIdOfx = 0,
-  UniqueIdKMyMoney
+  UniqueIdKMyMoney,
 } UniqueTransactionIdSource;
 
 class OFXImporter::Private
@@ -70,7 +70,7 @@ public:
   enum NamePreference {
     PreferId = 0,
     PreferName,
-    PreferMemo
+    PreferMemo,
   } m_preferName;
   UniqueTransactionIdSource  m_uniqueIdSource;
   bool m_walletIsOpen;

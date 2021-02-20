@@ -75,7 +75,7 @@ public:
     Price,
     Source,
     // insert new columns above this line
-    MaxColumns
+    MaxColumns,
   };
 
   explicit PriceModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);

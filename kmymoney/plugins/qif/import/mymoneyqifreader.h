@@ -58,7 +58,7 @@ private:
     EntryPrice,
     EntryPayee,
     EntryClass,
-    EntrySkip
+    EntrySkip,
   } QifEntryTypeE;
 
   struct qSplit {
@@ -224,7 +224,7 @@ private:
 
   enum SelectCreateMode {
     Create = 0,
-    Select
+    Select,
   };
 
   /**

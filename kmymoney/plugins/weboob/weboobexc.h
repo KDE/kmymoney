@@ -20,7 +20,7 @@
 // Project Includes
 
 enum class ExceptionCode {
-  BrowserIncorrectPassword
+  BrowserIncorrectPassword,
 };
 
 class WeboobException : public QException

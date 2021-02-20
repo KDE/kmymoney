@@ -39,7 +39,7 @@ namespace eMyMoney
 
     enum fileVersionE : int {
       FILE_4_BYTE_VALUE = 0,
-      FILE_8_BYTE_VALUE
+      FILE_8_BYTE_VALUE,
     };
 
     QChar _thousandSeparator = QLatin1Char(',');

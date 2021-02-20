@@ -119,7 +119,7 @@ namespace eMenu {
 #endif
     DebugTimers,
     DeleteOnlineJob, EditOnlineJob, LogOnlineJob,
-    ReportOpen
+    ReportOpen,
   };
 
   inline uint qHash(const Action key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
@@ -136,7 +136,7 @@ namespace eMenu {
     MoveTransaction,
     MarkTransaction,
     MarkTransactionContext,
-    OnlineJob
+    OnlineJob,
   };
 
   inline uint qHash(const Menu key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }

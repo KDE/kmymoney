@@ -30,7 +30,7 @@ enum class Tag {
   OnlineJobs,
   KMMFile,
   FileInfo,
-  User
+  User,
 };
 
 enum class Node {
@@ -50,7 +50,7 @@ enum class Node {
   Budget,
   OnlineJob,
   KeyValuePairs,
-  Equity
+  Equity,
 };
 
 namespace Element {
@@ -60,12 +60,12 @@ namespace Element {
     LastModifiedDate,
     Version,
     FixVersion,
-    Pair
+    Pair,
   };
 
   enum class Transaction {
     Split = 0,
-    Splits
+    Splits,
   };
 
   enum class Split {
@@ -73,37 +73,37 @@ namespace Element {
     Tag,
     Match,
     Container,
-    KeyValuePairs
+    KeyValuePairs,
   };
 
   enum class Account {
     SubAccount,
     SubAccounts,
-    OnlineBanking
+    OnlineBanking,
   };
 
   enum class Payee {
     Address,
-    Identifier
+    Identifier,
   };
 
   enum class KVP {
-    Pair
+    Pair,
   };
 
   enum class Institution {
     AccountID,
     AccountIDS,
-    Address
+    Address,
   };
 
   enum class Schedule {
     Payment,
-    Payments
+    Payments,
   };
 
   enum class OnlineJob {
-    OnlineTask
+    OnlineTask,
   };
 }
 
@@ -126,7 +126,7 @@ namespace Attribute {
     Street,
     Telephone,
     // insert new entries above this line
-    LastAttribute
+    LastAttribute,
   };
 
   enum class Transaction {
@@ -138,7 +138,7 @@ namespace Attribute {
     Commodity,
     BankID,
     // insert new entries above this line
-    LastAttribute
+    LastAttribute,
   };
 
   enum class Split {
@@ -158,7 +158,7 @@ namespace Attribute {
     ReconcileFlag,
     KMMatchedTx,
     // insert new entries above this line
-    LastAttribute
+    LastAttribute,
   };
 
   enum class Account {
@@ -177,7 +177,7 @@ namespace Attribute {
     IBAN,
     BIC,
     // insert new entries above this line
-    LastAttribute
+    LastAttribute,
   };
 
   enum class Payee {
@@ -205,7 +205,7 @@ namespace Attribute {
     Country,
     AccountNumber,
     // insert new entries above this line
-    LastAttribute
+    LastAttribute,
   };
 
   enum class Tag {
@@ -216,7 +216,7 @@ namespace Attribute {
     Closed,
     Notes,
     // insert new entries above this line
-    LastAttribute
+    LastAttribute,
   };
 
   enum class Security {
@@ -231,14 +231,14 @@ namespace Attribute {
     TradingCurrency,
     TradingMarket,
     // insert new entries above this line
-    LastAttribute
+    LastAttribute,
   };
 
   enum class KVP {
     Key,
     Value,
     // insert new entries above this line
-    LastAttribute
+    LastAttribute,
   };
 
   enum class Institution {
@@ -251,7 +251,7 @@ namespace Attribute {
     Zip,
     Telephone,
     // insert new entries above this line
-    LastAttribute
+    LastAttribute,
   };
 
   enum class Schedule {
@@ -270,7 +270,7 @@ namespace Attribute {
     EndDate,
     LastDayInMonth,
     // insert new entries above this line
-    LastAttribute
+    LastAttribute,
   };
 
   enum class OnlineJob {
@@ -284,14 +284,14 @@ namespace Attribute {
     RejectedByBank,
     SendingError,
     // insert new entries above this line
-    LastAttribute
+    LastAttribute,
   };
 
   enum class CostCenter {
     ID = 0,
     Name,
     // insert new entries above this line
-    LastAttribute
+    LastAttribute,
   };
 }
 

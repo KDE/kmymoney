@@ -56,7 +56,7 @@ public:
     addAccountToFilter = 0,
     addCategoryToFilter,
     addPayeeToFilter,
-    addTagToFilter
+    addTagToFilter,
   };
 
   explicit KFindTransactionDlgPrivate(KFindTransactionDlg *qq) :

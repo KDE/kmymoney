@@ -181,7 +181,7 @@ enum backupStateE {
   BACKUP_IDLE = 0,
   BACKUP_MOUNTING,
   BACKUP_COPYING,
-  BACKUP_UNMOUNTING
+  BACKUP_UNMOUNTING,
 };
 
 class KMyMoneyApp::Private

@@ -23,7 +23,7 @@ namespace eWidgets {
   ReconcileState,   ///< sort by reconciliation state
   Security,         ///< sort by security (only useful for investment accounts)
   // insert new values in front of this line
-  MaxFields
+  MaxFields,
   };
 
   namespace eTransaction {
@@ -41,7 +41,7 @@ namespace eWidgets {
       Value,
       Balance,
       // insert new values above this line
-      LastColumn
+      LastColumn,
     };
   }
 
@@ -52,7 +52,7 @@ namespace eWidgets {
       Label2,
       Value2,
       // insert new values above this line
-      LastColumn
+      LastColumn,
     };
   }
 
@@ -60,7 +60,7 @@ namespace eWidgets {
     enum class SignalEmission {
       Normal = 0,      // standard signal behaviour
       Never,           // don't signal selection of a tab at all
-      Always           // always signal selection of a tab
+      Always,          // always signal selection of a tab
     };
   }
 
@@ -76,18 +76,18 @@ namespace eWidgets {
       Withdrawal = 12203,
       Atm,
       // insert new values above this line
-      LastAction
+      LastAction,
     };
 
     enum class CashFlowDirection {
       Deposit = 0,          //< transaction is deposit
       Payment,              //< transaction is payment
-      Unknown               //< transaction cashflow is unknown
+      Unknown,              //< transaction cashflow is unknown
     };
 
     enum class DetailColumn {
       PayeeFirst = 0,       ///< show the payee on the first row of the transaction in the details column and the account on the second
-      AccountFirst          ///< show the account on the first row of the transaction in the details column and the payee on the second
+      AccountFirst,         ///< show the account on the first row of the transaction in the details column and the payee on the second
     };
   }
 
@@ -97,7 +97,7 @@ namespace eWidgets {
       Positive,
       Information,
       Warning,
-      Error
+      Error,
     };
   }
 

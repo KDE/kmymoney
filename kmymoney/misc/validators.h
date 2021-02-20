@@ -13,7 +13,7 @@ namespace validators
 enum lengthStatus {
   ok = 0,
   tooShort  = -1,
-  tooLong = 1
+  tooLong = 1,
 };
 
 /** @brief checks if all lines in text are shorter than length */

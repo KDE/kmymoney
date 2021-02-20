@@ -37,7 +37,7 @@ public:
   typedef enum {
     Unused,
     Optional,
-    Mandatory
+    Mandatory,
   } fieldRequired_t;
 
   virtual eMyMoney::Split::InvestmentTransactionType type() const = 0;

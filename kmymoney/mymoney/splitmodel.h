@@ -33,7 +33,7 @@ public:
     Payment,
     Deposit,
     // insert new columns above this line
-    MaxColumns
+    MaxColumns,
   };
 
   explicit SplitModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);

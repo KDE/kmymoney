@@ -31,7 +31,7 @@ private:
     folderOutbox,
     folderDrafts,
     folderTemplates,
-    folderHistoric
+    folderHistoric,
   };
 
   onlineJobFolder();

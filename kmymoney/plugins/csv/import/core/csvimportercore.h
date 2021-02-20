@@ -32,7 +32,7 @@ class ConvertDate;
 namespace eMyMoney { namespace Account { enum class Type; } }
 
 enum autodetectTypeE { AutoFieldDelimiter, AutoDecimalSymbol, AutoDateFormat,
-                       AutoAccountInvest, AutoAccountBank
+                       AutoAccountInvest, AutoAccountBank,
                      };
 
 enum miscSettingsE { ConfDirectory, ConfEncoding, ConfDateFormat,

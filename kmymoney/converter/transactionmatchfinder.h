@@ -24,7 +24,7 @@ public:
     MatchNotFound,           ///< no matching transaction found
     MatchImprecise,          ///< matching transaction found
     MatchPrecise,            ///< matching transaction found with exactly the same parameters
-    MatchDuplicate           ///< found transaction duplicate
+    MatchDuplicate,          ///< found transaction duplicate
   } MatchResult;
 
   /** Initializes the match finder.

@@ -40,7 +40,7 @@ public:
       Frequency,
       PaymentMethod,
       // insert new values above this line
-      MaxColumns
+      MaxColumns,
     } Columns;
   };
 

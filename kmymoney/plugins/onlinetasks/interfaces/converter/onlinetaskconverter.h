@@ -39,7 +39,7 @@ public:
      */
     convertionLossyMinor,
     /** Conversion is possible without user interaction */
-    convertionLoseless
+    convertionLoseless,
   };
 
   onlineTaskConverter();

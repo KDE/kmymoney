@@ -36,7 +36,7 @@ struct JournalModel::Private
 {
   typedef enum {
     Interest,
-    Fees
+    Fees,
   } category_t;
 
   Private(JournalModel* qq)

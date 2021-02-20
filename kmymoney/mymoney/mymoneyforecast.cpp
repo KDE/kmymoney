@@ -35,7 +35,7 @@
 #include "mymoneyexception.h"
 #include "mymoneyenums.h"
 
-enum class eForecastMethod {Scheduled = 0, Historic = 1 };
+enum class eForecastMethod {Scheduled = 0, Historic = 1, };
 
 /**
  * daily balances of an account
