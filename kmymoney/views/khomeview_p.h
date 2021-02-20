@@ -987,6 +987,9 @@ public:
     QList<MyMoneyReport> reports = MyMoneyFile::instance()->reportList();
 
     if (!reports.isEmpty()) {
+      qStableSort(reports.begin(), reports.end(), [&](const MyMoneyReport &rep1, const MyMoneyReport &rep2) {
+        return rep1.name().localeAwareCompare(rep2.name()) < 0;
+      });
       bool firstTime = 1;
       int row = 0;
       QList<MyMoneyReport>::const_iterator it_report = reports.constBegin();
