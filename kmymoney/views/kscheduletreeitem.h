@@ -30,7 +30,7 @@ public:
 
   enum ScheduleItemDataRole {
     ScheduleIdRole = Qt::UserRole,
-    OrderRole = Qt::UserRole + 1
+    OrderRole = Qt::UserRole + 1,
   };
 
 };

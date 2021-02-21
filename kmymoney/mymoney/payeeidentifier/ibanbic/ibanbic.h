@@ -35,7 +35,7 @@ public:
   enum bicAllocationStatus {
     bicAllocated = 0,
     bicNotAllocated,
-    bicAllocationUncertain
+    bicAllocationUncertain,
   };
 
   ibanBic();

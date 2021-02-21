@@ -25,7 +25,7 @@ namespace eDialogs {
     savings =    0x040,         ///< savings accounts selected
     investment = 0x080,         ///< investment accounts selected
     creditCard = 0x100,         ///< credit card accounts selected
-    last =       0x200          ///< the leftmost bit in the mask
+    last =       0x200,         ///< the leftmost bit in the mask
   };
 
   enum class UpdatePrice {
@@ -33,20 +33,20 @@ namespace eDialogs {
     Missing,
     Downloaded,
     SameSource,
-    Ask
+    Ask,
   };
 
   enum class PriceMode {
     Price = 0,
     PricePerShare,
-    PricePerTransaction
+    PricePerTransaction,
   };
 
   enum class ScheduleResultCode {
     Cancel = 0,    // cancel the operation
     Enter,         // enter the schedule
     Skip,          // skip the schedule
-    Ignore         // ignore the schedule
+    Ignore,        // ignore the schedule
   };
 
 }

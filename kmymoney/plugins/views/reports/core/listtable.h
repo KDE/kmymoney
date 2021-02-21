@@ -77,7 +77,7 @@ public:
                    ctCategory, ctTopCategory, ctCategoryType,
                    ctNumber, ctReconcileFlag,
                    ctAction, ctTag, ctPayee, ctEquityType, ctType, ctName,
-                   ctDepth, ctRowsCount, ctTax, ctFavorite, ctDescription, ctOccurrence, ctPaymentType
+                   ctDepth, ctRowsCount, ctTax, ctFavorite, ctDescription, ctOccurrence, ctPaymentType,
                  };
   /**
     * Contains a single row in the table.

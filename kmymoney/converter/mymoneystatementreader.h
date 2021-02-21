@@ -98,7 +98,7 @@ private:
 
   enum SelectCreateMode {
     Create = 0,
-    Select
+    Select,
   };
 
   /**

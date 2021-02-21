@@ -49,7 +49,7 @@ public:
   ~CSVWizard();
 
   enum wizardPageE  { PageIntro, PageSeparator, PageRows,
-                      PageBanking, PageInvestment, PagePrices, PageFormats
+                      PageBanking, PageInvestment, PagePrices, PageFormats,
                     };
 
   const MyMoneyStatement& statement() const;

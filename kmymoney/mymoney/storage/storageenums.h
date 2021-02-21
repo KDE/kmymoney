@@ -22,7 +22,7 @@ namespace eStorage {
     Price,
     Tag,
     // insert new entries above this line
-    Count
+    Count,
     };
 
     inline uint qHash(const Reference key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }

@@ -60,7 +60,7 @@ public:
          Page_Duration, Page_Payment, Page_FinalPayment,
          Page_CalculationOverview, Page_NewPayments, Page_InterestCategory,
          Page_AdditionalFees, Page_Schedule, Page_SummaryEdit,
-         Page_AssetAccount, Page_Summary
+         Page_AssetAccount, Page_Summary,
        };
 
   explicit KNewLoanWizard(QWidget *parent = nullptr);

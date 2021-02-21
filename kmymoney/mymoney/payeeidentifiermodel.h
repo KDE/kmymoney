@@ -30,7 +30,7 @@ public:
     isPayeeIdentifier = Qt::UserRole + 1, /**< refers index to payeeIdentifier (true) or MyMoneyPayee (false) */
     payeeIdentifierType = Qt::UserRole + 2, /**< type of payeeIdentifier */
     payeeIdentifier = Qt::UserRole + 3, /**< actual payeeIdentifier */
-    payeeIdentifierUserRole = Qt::UserRole + 4 /**< role to start with for inheriting models */
+    payeeIdentifierUserRole = Qt::UserRole + 4, /**< role to start with for inheriting models */
   };
 
   explicit payeeIdentifierModel(QObject* parent = 0);

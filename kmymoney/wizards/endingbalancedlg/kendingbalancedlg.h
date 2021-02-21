@@ -40,7 +40,7 @@ class KEndingBalanceDlg : public QWizard
 
 public:
   enum { Page_CheckingStart, Page_PreviousPostpone,
-         Page_CheckingStatementInfo, Page_InterestChargeCheckings
+         Page_CheckingStatementInfo, Page_InterestChargeCheckings,
        };
 
   explicit KEndingBalanceDlg(const MyMoneyAccount& account, QWidget *parent = nullptr);

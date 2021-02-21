@@ -23,7 +23,7 @@ namespace eAccountsModel {
         TotalValue,
         AccountNumber,
         AccountSortCode,
-        LastColumnMarker
+        LastColumnMarker,
     };
 
     inline uint qHash(const Column key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
@@ -97,7 +97,7 @@ namespace eLedgerModel {
 
     // A pseudo role to emit the dataChanged() signal when
     // used with setData()
-    EmitDataChanged
+    EmitDataChanged,
 
   };
 }

@@ -230,7 +230,7 @@ public:
   enum class SQLAction {
     Save,
     Modify,
-    Remove
+    Remove,
   };
 
   /**

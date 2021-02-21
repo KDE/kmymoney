@@ -31,7 +31,7 @@ class ConvertDate;
 namespace eMyMoney { namespace Account { enum class Type; } }
 
 enum autodetectTypeE { AutoFieldDelimiter, AutoDecimalSymbol, AutoDateFormat,
-                       AutoAccountInvest, AutoAccountBank
+                       AutoAccountInvest, AutoAccountBank,
                      };
 
 enum miscSettingsE { ConfDirectory, ConfEncoding, ConfDateFormat,
@@ -41,7 +41,7 @@ enum miscSettingsE { ConfDirectory, ConfEncoding, ConfDateFormat,
                      ConfFeeIsPercentage, ConfFeeRate, ConfMinFee,
                      ConfSecurityName, ConfSecuritySymbol, ConfCurrencySymbol,
                      ConfPriceFraction, ConfDontAsk,
-                     ConfHeight, ConfWidth
+                     ConfHeight, ConfWidth,
 };
 
 enum validationResultE { ValidActionType, InvalidActionValues, NoActionType };

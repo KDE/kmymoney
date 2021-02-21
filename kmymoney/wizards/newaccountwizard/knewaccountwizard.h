@@ -37,7 +37,7 @@ namespace NewAccountWizard
     StepSchedule,
     StepPayout,
     StepParentAccount,
-    StepFinish
+    StepFinish,
   };
 
   /**

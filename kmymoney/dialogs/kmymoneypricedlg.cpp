@@ -54,7 +54,7 @@ namespace eMenu {
     // The price menu
     // *************
     NewPrice, DeletePrice,
-    UpdatePrice, EditPrice
+    UpdatePrice, EditPrice,
   };
   inline uint qHash(const Action key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 }

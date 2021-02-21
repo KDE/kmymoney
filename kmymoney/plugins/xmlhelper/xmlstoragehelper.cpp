@@ -45,13 +45,13 @@ namespace Element {
     Dates,
     Category,
     AccountGroup,
-    Validity
+    Validity,
   };
 
   enum class Budget {
     Budget = 0,
     Account,
-    Period
+    Period,
   };
 }
 
@@ -79,7 +79,7 @@ namespace Attribute {
     NegExpenses,
     Validity, ChartPalette,
     // insert new entries above this line
-    LastAttribute
+    LastAttribute,
   };
 
   enum class Budget {
@@ -91,7 +91,7 @@ namespace Attribute {
     BudgetSubAccounts,
     Amount,
     // insert new entries above this line
-    LastAttribute
+    LastAttribute,
   };
 
 }
@@ -100,7 +100,7 @@ namespace MyMoneyXmlContentHandler2 {
 
   enum class Node {
     Report,
-    Budget
+    Budget,
   };
 
   QString nodeName(Node nodeID)

@@ -34,7 +34,7 @@ namespace eMyMoney {
       Equity,               /**< Denotes an equity account e.g. opening/closing balance */
 
       /* insert new account types above this line */
-      MaxAccountTypes       /**< Denotes the number of different account types */
+      MaxAccountTypes,      /**< Denotes the number of different account types */
     };
     inline uint qHash(const Type key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
 
@@ -43,7 +43,7 @@ namespace eMyMoney {
       Asset,
       Expense,
       Income,
-      Equity
+      Equity,
     };
 
     inline uint qHash(const Standard key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
@@ -54,7 +54,7 @@ namespace eMyMoney {
       Disabled = 0,
       Name,
       Key,
-      NameExact
+      NameExact,
     };
   }
 
@@ -64,7 +64,7 @@ namespace eMyMoney {
       MutualFund,
       Bond,
       Currency,
-      None
+      None,
     };
 
     inline uint qHash(const Type key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
@@ -119,7 +119,7 @@ namespace eMyMoney {
       EveryOtherYear = 2048,
       Quarterly = 4096,
       EveryFourMonths = 8192,
-      Yearly = 16384
+      Yearly = 16384,
     };
 
     /**
@@ -130,7 +130,7 @@ namespace eMyMoney {
       Bill = 1,
       Deposit = 2,
       Transfer = 4,
-      LoanPayment = 5
+      LoanPayment = 5,
     };
 
     /**
@@ -144,7 +144,7 @@ namespace eMyMoney {
       Other = 8,
       WriteChecque = 16,
       StandingOrder = 32,
-      BankTransfer = 64
+      BankTransfer = 64,
     };
 
     /**
@@ -156,7 +156,7 @@ namespace eMyMoney {
     enum class WeekendOption {
       MoveBefore = 0,
       MoveAfter = 1,
-      MoveNothing = 2
+      MoveNothing = 2,
     };
   }
 
@@ -166,7 +166,7 @@ namespace eMyMoney {
       Monthly,
       MonthByMonth,
       Yearly,
-      Max
+      Max,
     };
 
     inline uint qHash(const Level key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
@@ -181,7 +181,7 @@ namespace eMyMoney {
       Deposits,
       Transfers,
       // insert new constants above of this line
-      LastType
+      LastType,
     };
 
     // Make sure to keep the following enum values in sync with the values
@@ -193,7 +193,7 @@ namespace eMyMoney {
       Reconciled,
       Frozen,
       // insert new constants above of this line
-      LastState
+      LastState,
     };
 
     // Make sure to keep the following enum values in sync with the values
@@ -203,7 +203,7 @@ namespace eMyMoney {
       Valid,
       Invalid,
       // insert new constants above of this line
-      LastValidity
+      LastValidity,
     };
 
     // Make sure to keep the following enum values in sync with the values
@@ -239,7 +239,7 @@ namespace eMyMoney {
       Today,
       Next18Months,
       // insert new constants above of this line
-      LastDateItem
+      LastDateItem,
     };
     inline uint qHash(const Date key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
   }
@@ -267,7 +267,7 @@ namespace eMyMoney {
       Reconciled,
       Frozen,
       // insert new values above
-      MaxReconcileState
+      MaxReconcileState,
     };
 
     enum class InvestmentTransactionType {
@@ -280,7 +280,7 @@ namespace eMyMoney {
       AddShares,
       RemoveShares,
       SplitShares,
-      InterestIncome///
+      InterestIncome,///
     };
 
     inline uint qHash(const InvestmentTransactionType key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
@@ -299,7 +299,7 @@ namespace eMyMoney {
       Yield,
       AddShares,
       SplitShares,
-      InterestIncome
+      InterestIncome,
     };
 
     inline uint qHash(const Action key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
@@ -319,7 +319,7 @@ namespace eMyMoney {
       Schedule,
       Security,
       OnlineJob,
-      CostCenter
+      CostCenter,
     };
 
     /**
@@ -329,7 +329,7 @@ namespace eMyMoney {
     enum class Mode {
       Add = 1,
       Modify,
-      Remove
+      Remove,
     };
 
   }
@@ -348,7 +348,7 @@ namespace eMyMoney {
         see this during normal operation. */
       Warning, /**< A piece of information the user should see but not be enforced to do so (= no modal dialog). E.g. a task is expected to have
         direct effect but instead you have to wait a day (and that is common behavior). */
-      Error /**< Important for the user - he must be warned. E.g. a task could unexpectedly not be executed */
+      Error, /**< Important for the user - he must be warned. E.g. a task could unexpectedly not be executed */
     };
 
     /**
@@ -359,7 +359,7 @@ namespace eMyMoney {
       acceptedByBank, /**< bank definitely confirmed the job */
       rejectedByBank, /**< bank definitely rejected this job */
       abortedByUser, /**< aborted by user during sending */
-      sendingError /**< an error occurred, the job is certainly not executed by the bank */
+      sendingError, /**< an error occurred, the job is certainly not executed by the bank */
     };
   }
 
@@ -370,7 +370,7 @@ namespace eMyMoney {
       Savings,
       Investment,
       CreditCard,
-      Invalid
+      Invalid,
     };
 
     inline uint qHash(const Type key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
@@ -390,7 +390,7 @@ namespace eMyMoney {
       Stksplit,
       Fees,
       Interest,
-      Invalid
+      Invalid,
     };
 
     inline uint qHash(const Action key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
@@ -403,7 +403,7 @@ namespace eMyMoney {
       PreceedQuantityAndSymbol = 1,
       SucceedQuantityAndSymbol = 2,
       PreceedSymbol = 3,
-      SucceedSymbol = 4
+      SucceedSymbol = 4,
     };
   }
 

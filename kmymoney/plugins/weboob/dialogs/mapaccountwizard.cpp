@@ -33,7 +33,7 @@
 
 enum {
   BACKENDS_PAGE = 0,
-  ACCOUNTS_PAGE
+  ACCOUNTS_PAGE,
 };
 
 class MapAccountWizardPrivate

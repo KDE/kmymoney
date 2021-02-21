@@ -10,7 +10,7 @@ namespace eWidgetPlugin {
   enum WidgetType {
     NetWorthForecast,
     NetWorthForecastWithArgs, // for forecast view
-    Budget
+    Budget,
   };
 }
 

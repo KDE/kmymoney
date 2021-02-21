@@ -132,7 +132,7 @@ public:
     */
   enum paymentTypeE {
     Preferred = 1,          ///< show preferred accounts
-    Payment = 2             ///< show payment accounts
+    Payment = 2,            ///< show payment accounts
   };
 
   void init()

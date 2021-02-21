@@ -32,14 +32,14 @@ class KMM_MYMONEY_EXPORT MyMoneyAccountLoan : public MyMoneyAccount
 public:
   enum interestDueE {
     paymentDue = 0,
-    paymentReceived
+    paymentReceived,
   };
 
   enum interestChangeUnitE {
     changeDaily = 0,
     changeWeekly,
     changeMonthly,
-    changeYearly
+    changeYearly,
   };
 
   MyMoneyAccountLoan() {}
