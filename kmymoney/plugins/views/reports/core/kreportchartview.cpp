@@ -521,7 +521,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
     for (int i = 0 ; i < rowNum ; ++i) {
       QPen pen = diagramAttributes->headerData(i, Qt::Horizontal, DatasetPenRole).value< QPen >();
       pen.setWidth(penWidth);
-      m_model.setHeaderData(i, Qt::Horizontal, qVariantFromValue(pen), DatasetPenRole);
+      m_model.setHeaderData(i, Qt::Horizontal, QVariant::fromValue(pen), DatasetPenRole);
     }
   }
 
