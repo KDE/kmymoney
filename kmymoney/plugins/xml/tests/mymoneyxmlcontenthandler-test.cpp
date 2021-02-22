@@ -595,14 +595,6 @@ void MyMoneyXmlContentHandlerTest::writeSplit()
   QCOMPARE(tag.tagName(), QLatin1String("TAG"));
   QCOMPARE(tag.attribute("id"), QLatin1String("G000001"));
   QCOMPARE(tag.childNodes().size(), 0);
-
-  QString ref = QString(
-                  "<!DOCTYPE TEST>\n"
-                  "<SPLIT-CONTAINER>\n"
-                  " <SPLIT payee=\"P000001\" reconcileflag=\"2\" shares=\"96379/100\" reconciledate=\"\" action=\"Deposit\" bankid=\"SPID\" account=\"A000076\" number=\"124\" value=\"96379/1000\" memo=\"\" id=\"\">\n"
-                  "  <TAG id=\"G000001\"/>\n"
-                  " </SPLIT>\n"
-                  "</SPLIT-CONTAINER>\n");
 }
 
 void MyMoneyXmlContentHandlerTest::testReplaceIDinSplit()

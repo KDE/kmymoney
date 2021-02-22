@@ -87,9 +87,9 @@ void LedgerPayeeFilter::recalculateBalances()
   if (sourceModel() == nullptr || d->filterIds.isEmpty())
     return;
 
-  const auto start = index(0, 0);
   /// @todo port to new model code
 #if 0
+  const auto start = index(0, 0);
   const auto indexes = match(start, eMyMoney::Model::SplitAccountIdRole, d->payeeId, -1);
   MyMoneyMoney balance;
   for(const auto &idx : indexes) {

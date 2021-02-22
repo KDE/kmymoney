@@ -51,6 +51,7 @@ public:
 
   void setSingleLineDetailRole(eMyMoney::Model::Roles role)
   {
+    Q_UNUSED(role)
 #if 0
     auto delegate = qobject_cast<SplitDelegate*>(q->itemDelegate());
     if (delegate) {

@@ -53,6 +53,7 @@ int SpecialDatesModel::columnCount(const QModelIndex& parent) const
 
 Qt::ItemFlags SpecialDatesModel::flags(const QModelIndex& index) const
 {
+  Q_UNUSED(index)
   return Qt::NoItemFlags;
 }
 

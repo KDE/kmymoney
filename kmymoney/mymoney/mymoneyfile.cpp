@@ -1079,6 +1079,8 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 
 void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned int level)
 {
+  Q_UNUSED(account_list);
+  Q_UNUSED(level);
   /// @todo port to new model code
   qDebug() << "removeAccountList needs to be ported to new model code";
 #if 0

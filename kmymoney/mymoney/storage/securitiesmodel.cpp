@@ -101,7 +101,6 @@ QVariant SecuritiesModel::data(const QModelIndex& index, int role) const
   if (index.row() < 0 || index.row() >= rowCount(index.parent()))
     return QVariant();
 
-  QVariant rc;
   const MyMoneySecurity& security = static_cast<TreeItem<MyMoneySecurity>*>(index.internalPointer())->constDataRef();
   MyMoneySecurity tradingCurrency;
   switch(role) {

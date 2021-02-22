@@ -335,8 +335,6 @@ public:
 
   void accountsUpdateOnline(const QList<MyMoneyAccount>& accList)
   {
-    Q_Q(KAccountsView);
-
     // block the update account actions for now so that we don't get here twice
     const QVector<eMenu::Action> disabledActions {eMenu::Action::UpdateAccount, eMenu::Action::UpdateAllAccounts};
     for (const auto& a : disabledActions)

@@ -1332,8 +1332,6 @@ void KBankingExt::_slToStatement(MyMoneyStatement &ks,
                                  const AB_SECURITY *sy)
 {
   MyMoneyFile* file = MyMoneyFile::instance();
-  QString s;
-  QString memo;
   const char *p;
   const AB_VALUE *val;
   const GWEN_TIME *ti;

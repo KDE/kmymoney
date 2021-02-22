@@ -490,8 +490,6 @@ void KPayeesView::executeCustomAction(eView::Action action)
 
 void KPayeesView::showEvent(QShowEvent* event)
 {
-  Q_D(KPayeesView);
-
   emit customActionRequested(View::Payees, eView::Action::AboutToShow);
 
   // don't forget base class implementation

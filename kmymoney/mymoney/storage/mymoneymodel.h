@@ -665,7 +665,6 @@ protected:
 
   virtual void redo(const T& before, const T& after)
   {
-    QModelIndex idx;
     switch(undoOperation(before, after)) {
       case Add:
         doAddItem(after);

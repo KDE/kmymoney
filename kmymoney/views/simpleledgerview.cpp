@@ -124,7 +124,6 @@ public:
 
   void openLedgersAfterFileOpen()
   {
-    Q_Q(SimpleLedgerView);
     if (m_needInit)
       return;
 
