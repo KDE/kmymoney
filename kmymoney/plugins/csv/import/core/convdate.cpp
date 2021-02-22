@@ -193,11 +193,11 @@ QDate ConvertDate::convertDate(const QString& txt)
 
   QString dateFormat;
   // deal with Feb 30th
-  if ((aMonth == QLatin1Literal("02")) && (aDay == QLatin1Literal("30"))) {
+  if ((aMonth == QLatin1String("02")) && (aDay == QLatin1String("30"))) {
     if (QDate(aYear.toUInt(), 2, 29).isValid()) {
-      aDay = QLatin1Literal("29");
+      aDay = QStringLiteral("29");
     } else {
-      aDay = QLatin1Literal("28");
+      aDay = QStringLiteral("28");
     }
   }
   switch (m_dateFormatIndex) {

@@ -329,7 +329,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
                   //only show the column type in the header if there is more than one type
                   if (myRowTypeListSize > 1)
-                    legendText = QString(myColumnTypeHeaderList.at(i) + QLatin1Literal(" - ") + it_row.key().name());
+                    legendText = QString(myColumnTypeHeaderList.at(i) + QLatin1String(" - ") + it_row.key().name());
                   else
                     legendText = it_row.key().name();
 
@@ -369,7 +369,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
               //only show the column type in the header if there is more than one type
               if (myRowTypeListSize > 1)
-                legendText = QString(myColumnTypeHeaderList.at(i) + QLatin1Literal(" - ") + it_innergroup.key());
+                legendText = QString(myColumnTypeHeaderList.at(i) + QLatin1String(" - ") + it_innergroup.key());
               else
                 legendText = it_innergroup.key();
 
@@ -401,7 +401,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
             //only show the column type in the header if there is more than one type
             if (myRowTypeListSize > 1)
-              legendText = QString(myColumnTypeHeaderList.at(i) + QLatin1Literal(" - ") + it_outergroup.key());
+              legendText = QString(myColumnTypeHeaderList.at(i) + QLatin1String(" - ") + it_outergroup.key());
             else
               legendText = it_outergroup.key();
 
@@ -425,7 +425,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
             //only show the column type in the header if there is more than one type
             if (myRowTypeListSize > 1)
-              legendText = QString(myColumnTypeHeaderList.at(i) + QLatin1Literal(" - ") + i18nc("Total balance", "Total"));
+              legendText = QString(myColumnTypeHeaderList.at(i) + QLatin1String(" - ") + i18nc("Total balance", "Total"));
             else
               legendText = QString(i18nc("Total balance", "Total"));
 
@@ -449,7 +449,7 @@ void KReportChartView::drawPivotChart(const PivotGrid &grid, const MyMoneyReport
 
           //only show the column type in the header if there is more than one type
           if (myRowTypeListSize > 1)
-            legendText = QString(myColumnTypeHeaderList.at(i) + QLatin1Literal(" - ") + i18nc("Total balance", "Total"));
+            legendText = QString(myColumnTypeHeaderList.at(i) + QLatin1String(" - ") + i18nc("Total balance", "Total"));
           else
             legendText = QString(i18nc("Total balance", "Total"));
 
