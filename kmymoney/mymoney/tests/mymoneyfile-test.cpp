@@ -1964,9 +1964,11 @@ void MyMoneyFileTest::testAddPrice()
   testAddAccounts();
   testBaseCurrency();
   MyMoneyAccount p;
+  MyMoneySecurity second("RON", "Romanian Leu (new)", "RON");
 
   MyMoneyFileTransaction ft;
   try {
+    m->addCurrency(second);
     p = m->account("A000002");
     p.setCurrencyId("RON");
     m->modifyAccount(p);
