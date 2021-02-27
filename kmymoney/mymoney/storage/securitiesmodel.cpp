@@ -195,8 +195,9 @@ void SecuritiesModel::loadCurrencies(const QMap<QString, MyMoneySecurity>& list)
   setDirty(false);
 
   int row = 0;
-  foreach (const auto item, list) {
+  foreach (const auto& item, list) {
     static_cast<TreeItem<MyMoneySecurity>*>(index(row, 0).internalPointer())->dataRef() = item;
+    static_cast<TreeItem<MyMoneySecurity>*>(index(row, 0).internalPointer())->dataRef().setSecurityType(eMyMoney::Security::Type::Currency);
     ++row;
   }
   endResetModel();
