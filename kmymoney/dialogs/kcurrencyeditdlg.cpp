@@ -45,6 +45,7 @@
 #include "kmymoneyutils.h"
 #include "icons/icons.h"
 #include "storageenums.h"
+#include "mymoneyenums.h"
 
 using namespace Icons;
 
@@ -594,6 +595,7 @@ void KCurrencyEditDlg::slotEditCurrency()
 {
   Q_D(KCurrencyEditDlg);
   auto currency = d->ui->m_currencyList->currentItem()->data(0, Qt::UserRole).value<MyMoneySecurity>();
+  currency.setSecurityType(eMyMoney::Security::Type::Currency);
   d->editCurrency(currency);
 
   // update the model data
@@ -608,6 +610,8 @@ void KCurrencyEditDlg::slotNewCurrency()
 {
   Q_D(KCurrencyEditDlg);
   MyMoneySecurity currency;
+  currency.setSecurityType(eMyMoney::Security::Type::Currency);
+  currency.setRoundingMethod(AlkValue::RoundNever);
   if (d->editCurrency(currency)) {
     slotSelectCurrency(currency.id());
   }
