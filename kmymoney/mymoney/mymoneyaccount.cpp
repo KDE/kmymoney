@@ -552,6 +552,9 @@ QString MyMoneyAccount::accountTypeToString(const Account::Type accountType)
 bool MyMoneyAccount::addReconciliation(const QDate& date, const MyMoneyMoney& amount)
 {
   Q_D(MyMoneyAccount);
+  // make sure, that history has been loaded
+  reconciliationHistory();
+
   d->m_reconciliationHistory[date] = amount;
   QString history, sep;
   QMap<QDate, MyMoneyMoney>::const_iterator it;
