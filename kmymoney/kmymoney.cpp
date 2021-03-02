@@ -2287,7 +2287,10 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
   // update the holiday region configuration
   setHolidayRegion(KMyMoneySettings::holidayRegion());
 
-  d->m_myMoneyView->slotRefreshViews();
+  // Update view menu entries
+  pActions[Action::ViewHideReconciled]->setChecked(KMyMoneySettings::hideReconciledTransactions());
+  // calls slotRefreshViews()
+  slotHideReconciledTransactions();
 
   // re-read autosave configuration
   d->m_autoSaveEnabled = KMyMoneySettings::autoSaveFile();
