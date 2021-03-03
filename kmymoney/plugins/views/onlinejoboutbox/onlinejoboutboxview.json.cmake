@@ -26,7 +26,8 @@
                 "Name[sk]": "Christian Dávid",
                 "Name[sv]": "Christian Dávid",
                 "Name[uk]": "Christian Dávid",
-                "Name[x-test]": "xxChristian Dávidxx"
+                "Name[x-test]": "xxChristian Dávidxx",
+                "Name[zh_CN]": "Christian Dávid"
             }
         ],
         "Description": "Adds online job outbox view to KMyMoney",
@@ -69,6 +70,7 @@
         "Name[sv]": "Utkorgsvy för nätjobb",
         "Name[uk]": "Панель вихідних даних інтернет-завдань",
         "Name[x-test]": "xxOnline job outbox viewxx",
+        "Name[zh_CN]": "线上任务发件箱视图",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

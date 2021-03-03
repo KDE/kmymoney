@@ -26,7 +26,8 @@
                 "Name[sk]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[sv]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[uk]": "Alvaro Soliverez,Łukasz Wojniłowicz",
-                "Name[x-test]": "xxAlvaro Soliverez,Łukasz Wojniłowiczxx"
+                "Name[x-test]": "xxAlvaro Soliverez,Łukasz Wojniłowiczxx",
+                "Name[zh_CN]": "Alvaro Soliverez,Łukasz Wojniłowicz"
             }
         ],
         "Description": "Adds forecast view to KMyMoney",
@@ -75,6 +76,7 @@
         "Name[sv]": "Prognosvy",
         "Name[uk]": "Перегляд прогнозів",
         "Name[x-test]": "xxForecast viewxx",
+        "Name[zh_CN]": "预测视图",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

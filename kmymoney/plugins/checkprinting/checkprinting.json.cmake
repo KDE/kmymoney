@@ -26,7 +26,8 @@
                 "Name[sk]": "Cristian Oneț",
                 "Name[sv]": "Cristian Oneț",
                 "Name[uk]": "Cristian Oneț",
-                "Name[x-test]": "xxCristian Onețxx"
+                "Name[x-test]": "xxCristian Onețxx",
+                "Name[zh_CN]": "Cristian Oneț"
             }
         ],
         "Description": "Provides the capability to print checks",
@@ -76,6 +77,7 @@
         "Name[sv]": "Checkutskrift",
         "Name[uk]": "Друк чеків",
         "Name[x-test]": "xxCheck printingxx",
+        "Name[zh_CN]": "支票打印",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

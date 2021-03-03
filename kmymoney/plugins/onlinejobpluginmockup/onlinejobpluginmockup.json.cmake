@@ -26,7 +26,8 @@
                 "Name[sk]": "Christian David",
                 "Name[sv]": "Christian David",
                 "Name[uk]": "Christian David",
-                "Name[x-test]": "xxChristian Davidxx"
+                "Name[x-test]": "xxChristian Davidxx",
+                "Name[zh_CN]": "Christian David"
             }
         ],
         "Description": "If mapped to an account, it pretends it could handle all onlineTasks (for developers only).",
@@ -72,6 +73,7 @@
         "Name[sv]": "Insticksprogram med nätjobbsattrapp",
         "Name[uk]": "onlinejobpluginmockup",
         "Name[x-test]": "xxonlinejobpluginmockupxx",
+        "Name[zh_CN]": "onlinejobpluginmockup",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

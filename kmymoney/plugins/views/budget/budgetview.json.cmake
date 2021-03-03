@@ -26,7 +26,8 @@
                 "Name[sk]": "Darren Gould",
                 "Name[sv]": "Darren Gould",
                 "Name[uk]": "Darren Gould",
-                "Name[x-test]": "xxDarren Gouldxx"
+                "Name[x-test]": "xxDarren Gouldxx",
+                "Name[zh_CN]": "Darren Gould"
             }
         ],
         "Description": "Adds budget view to KMyMoney",
@@ -74,6 +75,7 @@
         "Name[sv]": "Budgetvy",
         "Name[uk]": "Панель бюджету",
         "Name[x-test]": "xxBudget viewxx",
+        "Name[zh_CN]": "预算视图",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

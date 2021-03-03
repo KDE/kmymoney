@@ -26,7 +26,8 @@
                 "Name[sk]": "Allan Anderson",
                 "Name[sv]": "Allan Anderson",
                 "Name[uk]": "Allan Anderson",
-                "Name[x-test]": "xxAllan Andersonxx"
+                "Name[x-test]": "xxAllan Andersonxx",
+                "Name[zh_CN]": "Allan Anderson"
             }
         ],
         "Description": "Add CSV exporting to KMyMoney",
@@ -78,6 +79,7 @@
         "Name[sv]": "CSV-export",
         "Name[uk]": "Експортування CSV",
         "Name[x-test]": "xxCSV Exporterxx",
+        "Name[zh_CN]": "CSV 导出工具",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

@@ -25,7 +25,8 @@
                 "Name[sk]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
                 "Name[sv]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
                 "Name[uk]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
-                "Name[x-test]": "xxMartin Preuss,Thomas Baumgart,Christian Dávidxx"
+                "Name[x-test]": "xxMartin Preuss,Thomas Baumgart,Christian Dávidxx",
+                "Name[zh_CN]": "Martin Preuss,Thomas Baumgart,Christian Dávid"
             }
         ],
         "Description": "Add HBCI/FinTs online banking to KMyMoney",
@@ -75,6 +76,7 @@
         "Name[sv]": "Kbank",
         "Name[uk]": "KBanking",
         "Name[x-test]": "xxKBankingxx",
+        "Name[zh_CN]": "KBanking",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],
