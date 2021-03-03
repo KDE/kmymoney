@@ -27,7 +27,8 @@
                 "Name[sl]": "Cristian Oneț",
                 "Name[sv]": "Cristian Oneț",
                 "Name[uk]": "Cristian Oneț",
-                "Name[x-test]": "xxCristian Onețxx"
+                "Name[x-test]": "xxCristian Onețxx",
+                "Name[zh_CN]": "Cristian Oneț"
             }
         ],
         "Description": "Exports schedules to iCalendar files",
@@ -80,6 +81,7 @@
         "Name[sv]": "iCalendar",
         "Name[uk]": "iCalendar",
         "Name[x-test]": "xxiCalendarxx",
+        "Name[zh_CN]": "iCalendar",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

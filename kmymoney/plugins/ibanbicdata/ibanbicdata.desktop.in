@@ -16,6 +16,7 @@ Name[sl]=Baza podatkov imen institucij in pravil iban v bic
 Name[sv]=En databas för institutionsnamn och IBAN- till BIC-regler
 Name[uk]=База даних назв банківських установ та правил перетворення iban на bic
 Name[x-test]=xxA database for institution names and iban to bic rulesxx
+Name[zh_CN]=机构名称和国际银行账号至银行识别码转换规则数据库
 
 [PropertyDef::X-KMyMoney-CountryCodes]
 Type=QStringList

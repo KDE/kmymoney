@@ -27,7 +27,8 @@
                 "Name[sl]": "Cristian Oneț",
                 "Name[sv]": "Cristian Oneț",
                 "Name[uk]": "Cristian Oneț",
-                "Name[x-test]": "xxCristian Onețxx"
+                "Name[x-test]": "xxCristian Onețxx",
+                "Name[zh_CN]": "Cristian Oneț"
             }
         ],
         "Description": "Creates a report after each reconciliation containing data about the reconciliation process",
@@ -52,6 +53,7 @@
         "Description[sv]": "Skapar en rapport efter varje avstämning som innehåller information om avstämningsprocessen",
         "Description[uk]": "Створення звітів після кожного узгодження із даними щодо процедури узгодження",
         "Description[x-test]": "xxCreates a report after each reconciliation containing data about the reconciliation processxx",
+        "Description[zh_CN]": "每次对账后生成包含对账过程数据的报表",
         "EnabledByDefault": true,
         "Icon": "application-vnd.oasis.opendocument.spreadsheet",
         "Id": "reconciliationreport",
@@ -80,6 +82,7 @@
         "Name[sv]": "Avstämningsrapport",
         "Name[uk]": "Звіт щодо звірки",
         "Name[x-test]": "xxReconciliation reportxx",
+        "Name[zh_CN]": "对帐报告",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

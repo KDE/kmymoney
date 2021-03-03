@@ -27,7 +27,8 @@
                 "Name[sl]": "Romain Bignon",
                 "Name[sv]": "Romain Bignon",
                 "Name[uk]": "Romain Bignon",
-                "Name[x-test]": "xxRomain Bignonxx"
+                "Name[x-test]": "xxRomain Bignonxx",
+                "Name[zh_CN]": "Romain Bignon"
             }
         ],
         "Description": "Plugin for weboob",
@@ -79,6 +80,7 @@
         "Name[sv]": "Weboob",
         "Name[uk]": "Weboob",
         "Name[x-test]": "xxWeboobxx",
+        "Name[zh_CN]": "Weboob",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

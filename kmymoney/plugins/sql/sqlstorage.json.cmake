@@ -26,7 +26,8 @@
                 "Name[sl]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[sv]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[uk]": "Tony Bloomfield,Łukasz Wojniłowicz",
-                "Name[x-test]": "xxTony Bloomfield,Łukasz Wojniłowiczxx"
+                "Name[x-test]": "xxTony Bloomfield,Łukasz Wojniłowiczxx",
+                "Name[zh_CN]": "Tony Bloomfield,Łukasz Wojniłowicz"
             }
         ],
         "Description": "Adds SQL storage support to KMyMoney",
@@ -77,6 +78,7 @@
         "Name[sv]": "SQL-lagring",
         "Name[uk]": "Сховище SQL",
         "Name[x-test]": "xxSQL Storagexx",
+        "Name[zh_CN]": "SQL 存储",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],
