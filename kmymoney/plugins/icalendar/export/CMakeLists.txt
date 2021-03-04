@@ -21,12 +21,12 @@ set_target_properties(icalendarexporter
                       PROPERTIES
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
-target_include_directories(icalendarexporter PRIVATE ${LIBICAL_INCLUDE_DIRS})
+target_include_directories(icalendarexporter PRIVATE ${LibIcal_INCLUDE_DIRS})
 target_link_libraries(icalendarexporter
   KF5::KIOWidgets
   kmm_mymoney
   kmm_plugin
-  ${LIBICAL_LIBRARIES}
+  ${LibIcal_LIBRARIES}
 )
 
 install(FILES icalendarexporter.rc
