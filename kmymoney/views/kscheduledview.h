@@ -68,7 +68,6 @@ public:
   void slotSettingsChanged() override;
 
 public Q_SLOTS:
-  void slotShowScheduleMenu(const MyMoneySchedule& sch);
   void slotEditSchedule();
 
   void slotEnterOverdueSchedules(const MyMoneyAccount& acc);

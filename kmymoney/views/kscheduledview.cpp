@@ -208,12 +208,6 @@ void KScheduledView::slotListViewCollapsed(const QModelIndex& idx)
   }
 }
 
-void KScheduledView::slotShowScheduleMenu(const MyMoneySchedule& sch)
-{
-  Q_UNUSED(sch)
-  pMenus[eMenu::Menu::Schedule]->exec(QCursor::pos());
-}
-
 void KScheduledView::slotSetSelectedItem(const QItemSelection& selected, const QItemSelection& deselected )
 {
   Q_UNUSED(deselected)
