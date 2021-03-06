@@ -2289,8 +2289,10 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
 
   // Update view menu entries
   pActions[Action::ViewHideReconciled]->setChecked(KMyMoneySettings::hideReconciledTransactions());
+  pActions[Action::ViewHideCategories]->setChecked(KMyMoneySettings::hideUnusedCategory());
   // calls slotRefreshViews()
   slotHideReconciledTransactions();
+  slotHideUnusedCategories();
 
   // re-read autosave configuration
   d->m_autoSaveEnabled = KMyMoneySettings::autoSaveFile();
