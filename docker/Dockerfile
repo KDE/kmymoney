@@ -14,13 +14,14 @@ RUN echo "tzdata tzdata/Zones/Europe select Madrid" | debconf-set-selections
 # RUN echo "deb-src http://archive.neon.kde.org/testing focal main" >> /etc/apt/sources.list
 RUN sed -i -- 's/#[ ]*deb-src/deb-src/g' /etc/apt/sources.list
 RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install -y openssh-server gdb gdbserver rsync
-RUN apt-get build-dep -y kmymoney
-RUN apt-get install -y qt5-default qtwebengine5-dev
-RUN apt-get install -y libsqlcipher-dev
-RUN apt-get install -y libqt5sql5-*
-RUN apt-get install -y breeze-icon-theme
+RUN apt-get install -y eatmydata
+RUN eatmydata apt-get upgrade -y
+RUN eatmydata apt-get install -y openssh-server gdb gdbserver rsync
+RUN eatmydata apt-get build-dep -y kmymoney
+RUN eatmydata apt-get install -y qt5-default qtwebengine5-dev
+RUN eatmydata apt-get install -y libsqlcipher-dev
+RUN eatmydata apt-get install -y libqt5sql5-*
+RUN eatmydata apt-get install -y breeze-icon-theme
 
 RUN mkdir /var/run/sshd
 RUN echo 'root:root' | chpasswd
