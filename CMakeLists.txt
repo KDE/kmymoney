@@ -300,9 +300,9 @@ add_feature_info(Weboob ENABLE_WEBOOB "Online banking interface using Weboob.")
 
 
 # check for optional ical support
-find_package(LibIcal)
+find_package(Libical)
 cmake_dependent_option(ENABLE_LIBICAL "Enable Calendar plugin" ON
-                       "LibIcal_FOUND" OFF)
+                       "LIBICAL_FOUND" OFF)
 add_feature_info(iCalendar ENABLE_LIBICAL "iCalendar integration.")
 
 
