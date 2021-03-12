@@ -4,12 +4,14 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN echo "tzdata tzdata/Areas select Europe" | debconf-set-selections
 RUN echo "tzdata tzdata/Zones/Europe select Madrid" | debconf-set-selections
-RUN apt-get update
-RUN apt-get install -y apt-utils
-RUN apt-get install -y gnupg wget
-RUN wget -qO - http://archive.neon.kde.org/public.key | apt-key add -
-RUN echo "deb http://archive.neon.kde.org/testing focal main" >> /etc/apt/sources.list
-RUN echo "deb-src http://archive.neon.kde.org/testing focal main" >> /etc/apt/sources.list
+# See https://invent.kde.org/office/kmymoney/-/wikis/home#bleeding-edge-kde-neon-ubuntu-repositories
+# for the section below
+# RUN apt-get update
+# RUN apt-get install -y apt-utils 
+# RUN apt-get install -y gnupg wget
+# RUN wget -qO - http://archive.neon.kde.org/public.key | apt-key add -
+# RUN echo "deb http://archive.neon.kde.org/testing focal main" >> /etc/apt/sources.list
+# RUN echo "deb-src http://archive.neon.kde.org/testing focal main" >> /etc/apt/sources.list
 RUN sed -i -- 's/#[ ]*deb-src/deb-src/g' /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get upgrade -y
