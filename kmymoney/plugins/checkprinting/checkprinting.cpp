@@ -71,13 +71,10 @@ struct CheckPrinting::Private
 
     void readCheckTemplate()
     {
-        QFile *checkTemplateHTMLFile;
+        QFile *checkTemplateHTMLFile = new QFile(PluginSettings::checkTemplateFile());;
 
-        if (!PluginSettings::useCustomCheckTemplate || PluginSettings::checkTemplateFile().isEmpty()) {
+        if (!PluginSettings::useCustomCheckTemplate || PluginSettings::checkTemplateFile().isEmpty() || !checkTemplateHTMLFile->exists()) {
             checkTemplateHTMLFile = new QFile(PluginSettings::defaultCheckTemplateFileValue());
-        }
-        else {
-            checkTemplateHTMLFile = new QFile(PluginSettings::checkTemplateFile());
         }
 
         if (!(checkTemplateHTMLFile->open(QIODevice::ReadOnly))) {
