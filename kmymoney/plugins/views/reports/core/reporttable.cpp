@@ -19,12 +19,12 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmmurl.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneyexception.h"
+#include "kmmurl.h"
 
 reports::ReportTable::ReportTable(const MyMoneyReport& _report):
     m_resourceHtml("html"),
