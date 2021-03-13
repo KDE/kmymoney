@@ -704,7 +704,7 @@ void SeparatorPage::initializeEncodingCombobox()
 
   QList<QTextCodec *>   codecs;
   QMap<QString, QTextCodec *> codecMap;
-  QRegExp iso8859RegExp(QLatin1Literal("ISO[- ]8859-([0-9]+).*"));
+  QRegExp iso8859RegExp(QStringLiteral("ISO[- ]8859-([0-9]+).*"));
 
   foreach (const auto mib, QTextCodec::availableMibs()) {
     QTextCodec *codec = QTextCodec::codecForMib(mib);

@@ -49,7 +49,8 @@
                 "Name[sl]": "Christian David",
                 "Name[sv]": "Christian David",
                 "Name[uk]": "Christian David",
-                "Name[x-test]": "xxChristian Davidxx"
+                "Name[x-test]": "xxChristian Davidxx",
+                "Name[zh_CN]": "Christian David"
             }
         ],
         "Description": "Order types for single european payment area (SEPA) orders",
@@ -98,6 +99,7 @@
         "Name[sv]": "SEPA-order",
         "Name[uk]": "Векселі SEPA",
         "Name[x-test]": "xxSEPA ordersxx",
+        "Name[zh_CN]": "单一欧元支付区订单",
         "ServiceTypes": [
             "KMyMoney/OnlineTask",
             "KMyMoney/OnlineTaskUi",

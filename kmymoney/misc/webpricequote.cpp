@@ -384,7 +384,7 @@ bool WebPriceQuote::launchFinanceQuote(const QString& _webID, const QString& _km
   emit status(i18nc("Executing 'script' 'online source' 'investment symbol' ", "Executing %1 %2 %3...", m_financeQuoteScriptPath, FQSource, _webID));
 
   d->m_filter.setProcessChannelMode(QProcess::MergedChannels);
-  d->m_filter.start(QLatin1Literal("perl"), arguments);
+  d->m_filter.start(QStringLiteral("perl"), arguments);
 
   // This seems to work best if we just block until done.
   if (d->m_filter.waitForFinished()) {
@@ -1036,9 +1036,9 @@ void FinanceQuoteProcess::slotProcessExited()
 void FinanceQuoteProcess::launch(const QString& scriptPath)
 {
   QStringList arguments;
-  arguments << scriptPath << QLatin1Literal("-l");
+  arguments << scriptPath << QStringLiteral("-l");
   setProcessChannelMode(QProcess::SeparateChannels);
-  start(QLatin1Literal("perl"), arguments);
+  start(QStringLiteral("perl"), arguments);
   if (! waitForStarted()) qWarning("Unable to start FQ script");
   return;
 }

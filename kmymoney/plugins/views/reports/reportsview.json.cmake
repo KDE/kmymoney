@@ -27,7 +27,8 @@
                 "Name[sl]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[sv]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[uk]": "Alvaro Soliverez,Łukasz Wojniłowicz",
-                "Name[x-test]": "xxAlvaro Soliverez,Łukasz Wojniłowiczxx"
+                "Name[x-test]": "xxAlvaro Soliverez,Łukasz Wojniłowiczxx",
+                "Name[zh_CN]": "Alvaro Soliverez,Łukasz Wojniłowicz"
             }
         ],
         "Description": "Adds reports view to KMyMoney",
@@ -78,6 +79,7 @@
         "Name[sv]": "Rapportvy",
         "Name[uk]": "Перегляд звітів",
         "Name[x-test]": "xxReports viewxx",
+        "Name[zh_CN]": "报表视图",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

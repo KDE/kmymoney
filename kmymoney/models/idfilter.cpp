@@ -40,6 +40,13 @@ bool IdFilter::filterAcceptsRow(int source_row, const QModelIndex& source_parent
   Q_D(const IdFilter);
 
   const auto idx = sourceModel()->index(source_row, 0, source_parent);
+
+  // in case the object supports the ClosedRole, we evaluate it
+  // and don't accept this item when it is true
+  const auto closedRole = idx.data(eMyMoney::Model::ClosedRole);
+  if (closedRole.isValid() && (closedRole.toBool() == true))
+      return false;
+
   return !d->idList.contains(idx.data(eMyMoney::Model::IdRole).toString());
 }
 

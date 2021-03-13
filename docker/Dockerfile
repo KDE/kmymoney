@@ -4,21 +4,24 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN echo "tzdata tzdata/Areas select Europe" | debconf-set-selections
 RUN echo "tzdata tzdata/Zones/Europe select Madrid" | debconf-set-selections
-RUN apt-get update
-RUN apt-get install -y apt-utils
-RUN apt-get install -y gnupg wget
-RUN wget -qO - http://archive.neon.kde.org/public.key | apt-key add -
-RUN echo "deb http://archive.neon.kde.org/testing focal main" >> /etc/apt/sources.list
-RUN echo "deb-src http://archive.neon.kde.org/testing focal main" >> /etc/apt/sources.list
+# See https://invent.kde.org/office/kmymoney/-/wikis/home#bleeding-edge-kde-neon-ubuntu-repositories
+# for the section below
+# RUN apt-get update
+# RUN apt-get install -y apt-utils 
+# RUN apt-get install -y gnupg wget
+# RUN wget -qO - http://archive.neon.kde.org/public.key | apt-key add -
+# RUN echo "deb http://archive.neon.kde.org/testing focal main" >> /etc/apt/sources.list
+# RUN echo "deb-src http://archive.neon.kde.org/testing focal main" >> /etc/apt/sources.list
 RUN sed -i -- 's/#[ ]*deb-src/deb-src/g' /etc/apt/sources.list
 RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install -y openssh-server gdb gdbserver rsync
-RUN apt-get build-dep -y kmymoney
-RUN apt-get install -y qt5-default qtwebengine5-dev
-RUN apt-get install -y libsqlcipher-dev
-RUN apt-get install -y libqt5sql5-*
-RUN apt-get install -y breeze-icon-theme
+RUN apt-get install -y eatmydata
+RUN eatmydata apt-get upgrade -y
+RUN eatmydata apt-get install -y openssh-server gdb gdbserver rsync
+RUN eatmydata apt-get build-dep -y kmymoney
+RUN eatmydata apt-get install -y qt5-default qtwebengine5-dev
+RUN eatmydata apt-get install -y libsqlcipher-dev
+RUN eatmydata apt-get install -y libqt5sql5-*
+RUN eatmydata apt-get install -y breeze-icon-theme
 
 RUN mkdir /var/run/sshd
 RUN echo 'root:root' | chpasswd

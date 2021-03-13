@@ -197,8 +197,6 @@ QStringList LedgerFilterBase::filterFixedStrings() const
 
 void LedgerFilterBase::setShowEntryForNewTransaction(bool show)
 {
-  Q_D(LedgerFilterBase);
-
   if (show) {
     addSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
   } else {

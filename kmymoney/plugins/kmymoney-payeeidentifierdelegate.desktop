@@ -23,6 +23,7 @@ Name[sv]=Uppritning av betalningsmottagarens identifierare
 Name[tr]=Alıcı tanımlayıcı boyacısı
 Name[uk]=Засіб малювання для ідентифікатора отримувача
 Name[x-test]=xxPainter of payee identifierxx
+Name[zh_CN]=收款人识别码
 
 [PropertyDef::X-KMyMoney-payeeIdentifierIds]
 Type=QStringList

@@ -187,7 +187,6 @@ public:
 
   void showTransactions()
   {
-    Q_Q(KTagsView);
     MyMoneyMoney balance;
     auto file = MyMoneyFile::instance();
     MyMoneySecurity base = file->baseCurrency();
@@ -206,6 +205,7 @@ public:
     QSet<QString> accountIds;
     /// @todo port to new model code
 #if 0
+    Q_Q(KTagsView);
     // setup the list and the pointer vector
     MyMoneyTransactionFilter filter;
     filter.setConsiderCategorySplits();

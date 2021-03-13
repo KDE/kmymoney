@@ -41,7 +41,7 @@ KMyMoneyMoneyValidator::~KMyMoneyMoneyValidator()
 QValidator::State KMyMoneyMoneyValidator::validate(QString & input, int & _p) const
 {
   Q_UNUSED(_p)
-  QString s = input;
+  Q_UNUSED(input)
   // TODO: port this to kf5
 #if 0
   KLocale * l = KLocale::global();

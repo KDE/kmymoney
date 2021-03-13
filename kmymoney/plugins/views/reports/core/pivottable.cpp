@@ -1779,7 +1779,7 @@ QString PivotTable::renderHTML() const
                 }
               }
             } else
-              rowdata += QString(QLatin1Literal("<td colspan=%1></td>")).arg(m_numColumns + m_rowTypeList.size());
+              rowdata += QStringLiteral("<td colspan=%1></td>").arg(m_numColumns + m_rowTypeList.size());
 
             //
             // Row Header

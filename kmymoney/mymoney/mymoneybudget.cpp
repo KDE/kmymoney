@@ -346,14 +346,14 @@ MyMoneyBudget::MyMoneyBudget() :
   MyMoneyObject(*new MyMoneyBudgetPrivate)
 {
   Q_D(MyMoneyBudget);
-  d->m_name = QLatin1Literal("Unconfigured Budget");
+  d->m_name = QStringLiteral("Unconfigured Budget");
 }
 
 MyMoneyBudget::MyMoneyBudget(const QString &id) :
   MyMoneyObject(*new MyMoneyBudgetPrivate, id)
 {
   Q_D(MyMoneyBudget);
-  d->m_name = QLatin1Literal("Unconfigured Budget");
+  d->m_name = QStringLiteral("Unconfigured Budget");
 }
 
 MyMoneyBudget::MyMoneyBudget(const QString& id, const MyMoneyBudget& other) :

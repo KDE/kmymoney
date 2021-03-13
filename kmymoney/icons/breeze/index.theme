@@ -3,6 +3,7 @@ Name=Breeze
 Name[ca]=Brisa
 Name[ca@valencia]=Brisa
 Name[cs]=Breeze
+Name[de]=Breeze
 Name[en_GB]=Breeze
 Name[es]=Brisa
 Name[fi]=Breeze
@@ -18,11 +19,13 @@ Name[sl]=Sapica
 Name[sv]=Breeze
 Name[uk]=Breeze
 Name[x-test]=xxBreezexx
+Name[zh_CN]=微风
 
 Comment=Breeze by the KDE VDG
 Comment[ca]=Brisa, creat pel VDG del KDE
 Comment[ca@valencia]=Brisa, creat pel VDG del KDE
 Comment[cs]=Breeze od KDE VDG
+Comment[de]=Breeze von der KDE VDG
 Comment[en_GB]=Breeze by the KDE VDG
 Comment[es]=Brisa por KDE VDG
 Comment[fi]=Breeze KDE VDG:ltä
@@ -38,6 +41,7 @@ Comment[sl]=Sapica od KDE SVG
 Comment[sv]=Breeze av KDE:s visuella designgrupp
 Comment[uk]=Breeze, автори — KDE VDG
 Comment[x-test]=xxBreeze by the KDE VDGxx
+Comment[zh_CN]=微风，由 KDE VDG 创作
 
 DisplayDepth=32
 

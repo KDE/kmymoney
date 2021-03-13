@@ -52,7 +52,6 @@ AccountsProxyModel::~AccountsProxyModel()
   */
 bool AccountsProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
-  Q_D(const AccountsProxyModel);
   if (!left.isValid() || !right.isValid())
     return false;
   // different sorting based on the column which is being sorted

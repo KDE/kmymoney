@@ -26,7 +26,8 @@
                 "Name[sl]": "Ace Jones,Thomas Baumgart",
                 "Name[sv]": "Ace Jones,Thomas Baumgart",
                 "Name[uk]": "Ace Jones,Thomas Baumgart",
-                "Name[x-test]": "xxAce Jones,Thomas Baumgartxx"
+                "Name[x-test]": "xxAce Jones,Thomas Baumgartxx",
+                "Name[zh_CN]": "Ace Jones,Thomas Baumgart"
             }
         ],
         "Description": "Add OFX importing to KMyMoney",
@@ -80,6 +81,7 @@
         "Name[sv]": "QFX-import",
         "Name[uk]": "Інструмент імпортування OFX",
         "Name[x-test]": "xxOFX Importerxx",
+        "Name[zh_CN]": "OFX 导入工具",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],

@@ -101,7 +101,6 @@ QVariant SecuritiesModel::data(const QModelIndex& index, int role) const
   if (index.row() < 0 || index.row() >= rowCount(index.parent()))
     return QVariant();
 
-  QVariant rc;
   const MyMoneySecurity& security = static_cast<TreeItem<MyMoneySecurity>*>(index.internalPointer())->constDataRef();
   MyMoneySecurity tradingCurrency;
   switch(role) {
@@ -196,8 +195,9 @@ void SecuritiesModel::loadCurrencies(const QMap<QString, MyMoneySecurity>& list)
   setDirty(false);
 
   int row = 0;
-  foreach (const auto item, list) {
+  foreach (const auto& item, list) {
     static_cast<TreeItem<MyMoneySecurity>*>(index(row, 0).internalPointer())->dataRef() = item;
+    static_cast<TreeItem<MyMoneySecurity>*>(index(row, 0).internalPointer())->dataRef().setSecurityType(eMyMoney::Security::Type::Currency);
     ++row;
   }
   endResetModel();

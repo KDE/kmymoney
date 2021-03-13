@@ -144,8 +144,6 @@ Activity::~Activity()
 
 void Invest::Activity::setupWidgets(const QStringList& activityWidgets) const
 {
-  Q_D(const Activity);
-
   static const QStringList dynamicWidgetNames = {
     "sharesLabel", "sharesAmountEdit",
     "assetAccountLabel", "assetAccountCombo",
@@ -314,7 +312,6 @@ eMyMoney::Split::InvestmentTransactionType Buy::type() const
 
 void Buy::showWidgets() const
 {
-  Q_D(const Activity);
   static const QStringList activityWidgets = {
     "sharesLabel", "sharesAmountEdit",
     "assetAccountLabel", "assetAccountCombo",
@@ -411,8 +408,6 @@ eMyMoney::Split::InvestmentTransactionType Reinvest::type() const
 
 void Reinvest::showWidgets() const
 {
-  Q_D(const Activity);
-
   static const QStringList activityWidgets = {
     "sharesLabel", "sharesAmountEdit",
     "assetAccountLabel", "assetAccountCombo",
@@ -451,7 +446,6 @@ eMyMoney::Split::InvestmentTransactionType Add::type() const
 
 void Add::showWidgets() const
 {
-  Q_D(const Activity);
   static const QStringList activityWidgets = {
     "sharesLabel", "sharesAmountEdit",
   };
@@ -492,7 +486,6 @@ eMyMoney::Split::InvestmentTransactionType Remove::type() const
 
 void Remove::showWidgets() const
 {
-  Q_D(const Activity);
   static const QStringList activityWidgets = {
     "sharesLabel", "sharesAmountEdit",
   };
@@ -539,7 +532,6 @@ eMyMoney::Split::InvestmentTransactionType Invest::Split::type() const
 
 void Invest::Split::showWidgets() const
 {
-  Q_D(const Activity);
   static const QStringList activityWidgets = {
     "sharesLabel", "sharesAmountEdit",
   };

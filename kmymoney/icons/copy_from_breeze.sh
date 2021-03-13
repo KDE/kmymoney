@@ -14,6 +14,13 @@ function show_help()
     echo "  <breeze-icon-dir> must contain an icons and an icons-dark subdirectory"
 }
 
+# the following function implementation was taken from a post on
+# https://stackoverflow.com/questions/1055671/how-can-i-get-the-behavior-of-gnus-readlink-f-on-a-mac
+function readlinkf()
+{
+    perl -MCwd -e 'print Cwd::abs_path shift' "$1";
+}
+
 # make sure, src_dir does not end in '/' and is present
 src_dir=${1%/}
 if [ -z "$src_dir" ]; then
@@ -43,7 +50,7 @@ if [ ! -d $src_dir/icons-dark ]; then
     exit 1
 fi
 
-scriptdir=$(dirname $(readlink -e $0))
+scriptdir=$(dirname $(readlinkf $0))
 [ -n "$scriptdir" ] || exit 1
 cd $scriptdir
 

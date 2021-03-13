@@ -62,7 +62,6 @@ QVariant SchedulesJournalModel::data(const QModelIndex& index, int role) const
     return QVariant();
 
 
-  QVariant rc;
   const JournalEntry& entry = static_cast<TreeItem<JournalEntry>*>(index.internalPointer())->constDataRef();
   switch (role) {
     case eMyMoney::Model::ScheduleIsOverdueRole:
