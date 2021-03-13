@@ -4,8 +4,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef MYQURL_H
-#define MYQURL_H
+#ifndef KMMURL_H
+#define KMMURL_H
 
 #undef QUrl
 
@@ -32,4 +32,4 @@ private:
 };
 
 #define QUrl KMMUrl
-#endif // MYQURL_H
+#endif // KMMURL_H
