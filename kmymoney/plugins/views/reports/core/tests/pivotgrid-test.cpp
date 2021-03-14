@@ -6,7 +6,7 @@
 
 #include "pivotgrid-test.h"
 
-#include <QtTest>
+#include <QTest>
 
 #include "tests/testutilities.h"
 

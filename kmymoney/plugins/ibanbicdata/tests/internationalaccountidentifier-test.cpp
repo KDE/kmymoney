@@ -7,7 +7,7 @@
 #include "payeeidentifier/ibanbic/ibanbic.h"
 #include "plugins/ibanbicdata/ibanbicdata.h"
 
-#include <QtTest>
+#include <QTest>
 
 QTEST_GUILESS_MAIN(internationalAccountIdentifierTest);
 

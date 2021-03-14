@@ -6,7 +6,7 @@
 #include "mymoneyexception-test.h"
 #include "mymoneyexception.h"
 
-#include <QtTest>
+#include <QTest>
 
 QTEST_GUILESS_MAIN(MyMoneyExceptionTest)
 

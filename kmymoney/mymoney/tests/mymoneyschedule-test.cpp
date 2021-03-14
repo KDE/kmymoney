@@ -7,7 +7,7 @@
 #include "mymoneyschedule-test.h"
 
 #include <QList>
-#include <QtTest>
+#include <QTest>
 #include <QDomDocument>
 #include <QDomElement>
 

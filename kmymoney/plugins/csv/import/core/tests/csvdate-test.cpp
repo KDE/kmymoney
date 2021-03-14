@@ -6,7 +6,7 @@
 
 #include "csvdate-test.h"
 
-#include <QtTest>
+#include <QTest>
 
 #include "../convdate.h"
 

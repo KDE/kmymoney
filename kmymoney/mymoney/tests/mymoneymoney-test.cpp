@@ -8,7 +8,7 @@
 #include <limits>
 #include <cstdint>
 
-#include <QtTest>
+#include <QTest>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyMoneyTest;
 

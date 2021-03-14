@@ -6,7 +6,7 @@
 #include "mymoneystoragemgr-test.h"
 #include <iostream>
 #include <QList>
-#include <QtTest>
+#include <QTest>
 
 #include "mymoneystoragemgr_p.h"
 

@@ -11,7 +11,7 @@
 #include <QFile>
 #include <QDataStream>
 #include <QList>
-#include <QtTest>
+#include <QTest>
 
 #include "mymoneytestutils.h"
 #include "mymoneyexception.h"
