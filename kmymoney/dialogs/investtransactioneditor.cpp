@@ -1022,7 +1022,7 @@ bool InvestTransactionEditor::setupPrice(const MyMoneyTransaction& t, MyMoneySpl
                                 fromValue,
                                 toValue,
                                 t.postDate(),
-                                fract,
+                                10000000000,
                                 d->m_regForm);
 
       if (calc->exec() == QDialog::Rejected) {
