@@ -8,7 +8,7 @@
 
 #include "mymoneypayee-test.h"
 
-#include <QtTest>
+#include <QTest>
 
 #define KMM_MYMONEY_UNIT_TESTABLE friend class MyMoneyPayeeTest;
 

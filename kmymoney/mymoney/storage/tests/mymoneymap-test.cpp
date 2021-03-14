@@ -5,7 +5,7 @@
 
 #include "mymoneymap-test.h"
 #include <iostream>
-#include <QtTest>
+#include <QTest>
 
 QTEST_GUILESS_MAIN(MyMoneyMapTest)
 

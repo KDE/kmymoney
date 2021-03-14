@@ -6,7 +6,7 @@
 
 #include "mymoneytransactionfilter-test.h"
 
-#include <QtTest>
+#include <QTest>
 
 #include "mymoneyenums.h"
 #include "mymoneytransactionfilter.h"

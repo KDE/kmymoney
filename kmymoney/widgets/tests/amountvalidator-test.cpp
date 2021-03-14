@@ -5,7 +5,7 @@
 
 #include "amountvalidator-test.h"
 
-#include <QtTest>
+#include <QTest>
 #include <QValidator>
 
 #include <config-kmymoney.h>

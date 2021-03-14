@@ -11,7 +11,7 @@
 #include <QFile>
 #include <QDataStream>
 #include <QList>
-#include <QtTest>
+#include <QTest>
 
 #include "mymoneystoragemgr_p.h"
 #include "mymoneytestutils.h"

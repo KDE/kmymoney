@@ -6,7 +6,7 @@
 
 #include "qsqlcipher-test.h"
 
-#include <QtTest>
+#include <QTest>
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QSqlResult>

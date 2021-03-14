@@ -5,7 +5,7 @@
 
 #include "payeeidentifier-test.h"
 
-#include <QtTest>
+#include <QTest>
 
 #include "mymoney/payeeidentifier/payeeidentifier.h"
 #include "mymoney/payeeidentifier/payeeidentifiertyped.h"

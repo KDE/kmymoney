@@ -12,7 +12,7 @@
 
 #include "mymoneyxmlcontenthandler-test.h"
 
-#include <QtTest>
+#include <QTest>
 #include "../mymoneystoragexml.cpp"
 #include "mymoneyobject_p.h"
 #include "mymoneyobject.h"

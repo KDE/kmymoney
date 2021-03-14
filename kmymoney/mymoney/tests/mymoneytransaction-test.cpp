@@ -8,7 +8,7 @@
 
 #include <QDebug>
 
-#include <QtTest>
+#include <QTest>
 
 #include "mymoneytestutils.h"
 #include "mymoneymoney.h"

@@ -5,7 +5,7 @@
 
 #include "parsedata-test.h"
 
-#include <QtTest>
+#include <QTest>
 #include <QString>
 
 #include "../csvutil.h"

@@ -5,7 +5,7 @@
 
 #include "mymoneystoragenames-test.h"
 
-#include <QtTest>
+#include <QTest>
 #include "../mymoneystoragenames.cpp"
 #include "plugins/xmlhelper/xmlstoragehelper.h"
 #include "plugins/xmlhelper/xmlstoragehelper.cpp"

@@ -5,7 +5,7 @@
 
 #include "csvimportercore-test.h"
 
-#include <QtTest>
+#include <QTest>
 
 #include "mymoneyfile.h"
 #include "mymoneyaccount.h"

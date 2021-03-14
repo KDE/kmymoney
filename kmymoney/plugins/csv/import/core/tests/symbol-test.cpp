@@ -6,7 +6,7 @@
 #include "symbol-test.h"
 #include "../csvutil.h"
 
-#include <QtTest>
+#include <QTest>
 #include <QString>
 #include <QLocale>
 

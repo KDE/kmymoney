@@ -6,7 +6,7 @@
 
 #include "converter-test.h"
 
-#include <QtTest>
+#include <QTest>
 #include <QFile>
 
 // uses helper functions from reports tests

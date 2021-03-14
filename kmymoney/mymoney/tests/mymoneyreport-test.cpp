@@ -7,7 +7,7 @@
 
 #include <QDebug>
 
-#include <QtTest>
+#include <QTest>
 
 #include "mymoneyreport_p.h"
 

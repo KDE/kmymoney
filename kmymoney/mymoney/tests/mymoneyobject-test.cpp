@@ -5,7 +5,7 @@
 
 #include "mymoneyobject-test.h"
 
-#include <QtTest>
+#include <QTest>
 #include <QDomDocument>
 #include <QDomElement>
 

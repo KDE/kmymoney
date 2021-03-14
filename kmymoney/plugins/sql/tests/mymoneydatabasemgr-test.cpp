@@ -6,7 +6,7 @@
 #include "mymoneydatabasemgr-test.h"
 #include <iostream>
 
-#include <QtTest>
+#include <QTest>
 
 #include "mymoneystoragemgr_p.h"
 #include "../mymoneystoragesql.h"
