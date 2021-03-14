@@ -106,10 +106,10 @@ public:
     }
 
     // fill in initial values
-    ui->m_toAmount->setPrecision(MyMoneyMoney::denomToPrec(m_resultFraction));
+    ui->m_toAmount->setPrecision(-1);
     ui->m_toAmount->setValue(m_toAmount);
 
-    ui->m_conversionRate->setPrecision(m_fromCurrency.pricePrecision());
+    ui->m_conversionRate->setPrecision(-1);
 
     q->connect(ui->m_amountButton, &QAbstractButton::clicked, q, &KCurrencyCalculator::slotSetToAmount);
     q->connect(ui->m_rateButton, &QAbstractButton::clicked, q, &KCurrencyCalculator::slotSetExchangeRate);
@@ -241,7 +241,7 @@ bool KCurrencyCalculator::setupSplitPrice(MyMoneyMoney& shares,
                                 fromValue,
                                 toValue,
                                 t.postDate(),
-                                fract,
+                                10000000000,
                                 parentWidget);
 
       if (calc->exec() == QDialog::Rejected) {
