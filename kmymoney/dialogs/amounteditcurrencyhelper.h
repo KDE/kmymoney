@@ -29,17 +29,7 @@ class AmountEditCurrencyHelperPrivate;
 #define KMM_WIDGETS_EXPORT
 #endif
 
-
-
 /**
- * This class takes care of the selection of visible columns of a tree view and
- * their sizes and stores the selection in the global application configuration.
- *
- * The @a parent tree view must have a model attached that allows to
- * extract the maximum number of columns. The header names found in
- * the model are displayed in a menu when the user clicks on the
- * header with the right mouse button.
- *
  * @author Thomas Baumgart
  */
 class KMM_BASE_DIALOGS_EXPORT AmountEditCurrencyHelper : public QObject
