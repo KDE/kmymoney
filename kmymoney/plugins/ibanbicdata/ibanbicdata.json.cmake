@@ -52,6 +52,7 @@
         "Description[sv]": "Lägger till fördefinierade IBAN/BIC-nummer i KMyMoney",
         "Description[uk]": "Попередньо визначені номери IBAN/BIC у KMyMoney",
         "Description[x-test]": "xxAdds predefined IBAN/BIC numbers to KMyMoneyxx",
+        "Description[zh_CN]": "为 KMyMoney 添加预定义的国际银行账号/银行识别码",
         "EnabledByDefault": true,
         "Icon": "server-database",
         "Id": "ibanbicdata",

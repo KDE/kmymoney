@@ -52,6 +52,7 @@
         "Description[sv]": "Lägg till OFX-import till KMyMoney",
         "Description[uk]": "Імпортування даних OFX у KMyMoney",
         "Description[x-test]": "xxAdd OFX importing to KMyMoneyxx",
+        "Description[zh_CN]": "为 KMyMoney 添加 QFX 导入服务",
         "EnabledByDefault": true,
         "Icon": "network-connect",
         "Id": "ofximporter",

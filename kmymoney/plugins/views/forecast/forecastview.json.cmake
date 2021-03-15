@@ -52,6 +52,7 @@
         "Description[sv]": "Lägger till prognosvy i KMyMoney",
         "Description[uk]": "Панель прогнозів у KMyMoney",
         "Description[x-test]": "xxAdds forecast view to KMyMoneyxx",
+        "Description[zh_CN]": "为 KMyMoney 添加预测视图",
         "EnabledByDefault": true,
         "Icon": "forecast",
         "Id": "forecastview",

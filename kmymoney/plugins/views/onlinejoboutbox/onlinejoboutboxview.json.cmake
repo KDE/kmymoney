@@ -50,6 +50,7 @@
         "Description[sv]": "Lägger till utkorgsvy för nätjobb i KMyMoney",
         "Description[uk]": "Панель вихідних інтернет-завдань у KMyMoney",
         "Description[x-test]": "xxAdds online job outbox view to KMyMoneyxx",
+        "Description[zh_CN]": "为 KMyMoney 添加在线任务发件箱视图",
         "EnabledByDefault": true,
         "Icon": "online-banking",
         "Id": "onlinejoboutboxview",

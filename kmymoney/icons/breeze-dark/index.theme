@@ -19,7 +19,7 @@ Name[sl]=Sapica temna
 Name[sv]=Breeze mörk
 Name[uk]=Темна Breeze
 Name[x-test]=xxBreeze Darkxx
-Name[zh_CN]=暗色微风
+Name[zh_CN]=Breeze 微风暗色
 
 Comment=Breeze Dark by the KDE VDG
 Comment[ca]=Brisa fosca, creat pel VDG del KDE
@@ -41,7 +41,7 @@ Comment[sl]=Sapica temna od KDE SVG
 Comment[sv]=Breeze mörk av KDE:s visuella designgrupp
 Comment[uk]=Темна Breeze, автори — KDE VDG
 Comment[x-test]=xxBreeze Dark by the KDE VDGxx
-Comment[zh_CN]=暗色微风，由 KDE VDG 创作
+Comment[zh_CN]=Breeze 微风暗色主题，由 KDE VDG (视觉设计团队) 设计制作
 
 DisplayDepth=32
 

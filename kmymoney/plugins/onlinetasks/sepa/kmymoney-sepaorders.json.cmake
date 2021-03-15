@@ -73,6 +73,7 @@
         "Description[sv]": "Ordertyp för gemensamma eurobetalningsområdet (SEPA) order",
         "Description[uk]": "Типи векселів для Єдиної європейської системи сплат (SEPA)",
         "Description[x-test]": "xxOrder types for single european payment area (SEPA) ordersxx",
+        "Description[zh_CN]": "单一欧元支付区订单类型",
         "EnabledByDefault": true,
         "Icon": "network-connect",
         "Id": "SEPA orders for online banking",

@@ -52,6 +52,7 @@
         "Description[sv]": "Lägger till budgetvy i KMyMoney",
         "Description[uk]": "Панель бюджетів у KMyMoney",
         "Description[x-test]": "xxAdds budget view to KMyMoneyxx",
+        "Description[zh_CN]": "为 KMyMoney 添加预算视图",
         "EnabledByDefault": true,
         "Icon": "budget",
         "Id": "budgetview",

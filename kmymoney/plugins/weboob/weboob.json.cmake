@@ -53,6 +53,7 @@
         "Description[sv]": "Insticksprogram för weboob",
         "Description[uk]": "Додаток weboob",
         "Description[x-test]": "xxPlugin for weboobxx",
+        "Description[zh_CN]": "weboob 插件",
         "EnabledByDefault": true,
         "Icon": "network-connect",
         "Id": "weboob",

@@ -53,6 +53,7 @@
         "Description[sv]": "Lägg till QIF-import till KMyMoney",
         "Description[uk]": "Імпортування даних QIF у KMyMoney",
         "Description[x-test]": "xxAdd QIF importing to KMyMoneyxx",
+        "Description[zh_CN]": "为 KMyMoney 添加 QIF 导入服务",
         "EnabledByDefault": true,
         "Icon": "document-import",
         "Id": "qifimporter",

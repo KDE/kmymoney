@@ -52,6 +52,7 @@
         "Description[sv]": "Lägger till rapportvy i KMyMoney",
         "Description[uk]": "Панель звітів у KMyMoney",
         "Description[x-test]": "xxAdds reports view to KMyMoneyxx",
+        "Description[zh_CN]": "为 KMyMoney 添加报告视图",
         "EnabledByDefault": true,
         "Icon": "report",
         "Id": "reportsview",
