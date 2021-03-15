@@ -49,6 +49,7 @@
         "Description[sv]": "Lägger till stöd för SQL-lagring i KMyMoney",
         "Description[uk]": "Підтримка сховища даних SQL у KMyMoney",
         "Description[x-test]": "xxAdds SQL storage support to KMyMoneyxx",
+        "Description[zh_CN]": "为 KMyMoney 添加 SQL 存储支持",
         "EnabledByDefault": true,
         "Icon": "server-database",
         "Id": "sqlstorage",

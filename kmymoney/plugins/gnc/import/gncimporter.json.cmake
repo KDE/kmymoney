@@ -50,6 +50,7 @@
         "Description[sv]": "Lägg till GnuCash-import till KMyMoney",
         "Description[uk]": "Імпортування даних GnuCash у KMyMoney",
         "Description[x-test]": "xxAdd GnuCash importing to KMyMoneyxx",
+        "Description[zh_CN]": "为 KMyMoney 添加 GnuCash 导入服务",
         "EnabledByDefault": true,
         "Icon": "document-import",
         "Id": "gncimporter",

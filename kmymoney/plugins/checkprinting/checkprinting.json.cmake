@@ -51,6 +51,7 @@
         "Description[sv]": "Tillhandahåller möjlighet att skriva ut checkar",
         "Description[uk]": "Можливість друку чеків",
         "Description[x-test]": "xxProvides the capability to print checksxx",
+        "Description[zh_CN]": "提供支票打印功能",
         "EnabledByDefault": true,
         "Icon": "document-print",
         "Id": "checkprinting",

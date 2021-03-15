@@ -49,6 +49,7 @@
         "Description[sv]": "Lägg till HBCI/FinTs Internetbank till KMyMoney",
         "Description[uk]": "Онлайн-банкінг HBCI/FinTs у KMyMoney",
         "Description[x-test]": "xxAdd HBCI/FinTs online banking to KMyMoneyxx",
+        "Description[zh_CN]": "为 KMyMoney 添加线上的居家银行计算机接口/金融交易服务",
         "EnabledByDefault": true,
         "Icon": "network-connect",
         "Id": "kbanking",
