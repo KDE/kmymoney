@@ -147,7 +147,7 @@ public:
     // usually, the calculator widget is shown underneath the AmountEdit widget
     // if it does not fit on the screen, we show it above this widget
     auto p = q->mapToGlobal(QPoint());
-    if (p.y() + q->height() + h > QApplication::desktop()->height()) {
+    if (p.y() + q->height() + h > QApplication::desktop()->availableGeometry(m_calculatorFrame).height()) {
       p.setY(p.y() - h);
     } else {
       p.setY(p.y() + q->height());
@@ -155,7 +155,7 @@ public:
 
     // usually, it is shown left aligned. If it does not fit, we align it
     // to the right edge of the AmountEdit widget
-    if (p.x() + w > QApplication::desktop()->width()) {
+    if (p.x() + w > QApplication::desktop()->availableGeometry(m_calculatorFrame).width()) {
       p.setX(p.x() + q->width() - w);
     }
 
