@@ -12,6 +12,7 @@
 #include <QSqlResult>
 #include <QSqlRecord>
 #include <QCoreApplication>
+#include <QtDebug>
 
 QTEST_GUILESS_MAIN(qsqlciphertest)
 
