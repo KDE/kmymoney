@@ -23,13 +23,10 @@
 
 PopupPositioner::PopupPositioner(QWidget* baseWidget, QWidget* popupWidget, Anchor anchor)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5,14,0)
-    const auto screen = baseWidget->screen();
-#else
+    // the following two lines use deprecated functions. I have not yet
+    // found out how to obtain the same information with newer versions (> 5.14)
     auto screenNr = QApplication::desktop()->screenNumber(baseWidget);
-    const auto screen = QApplication::desktop()->screen(screenNr);
-#endif
-    QRect screenRect(screen->x(), screen->y(), screen->width(), screen->height());
+    const auto screenRect = QApplication::desktop()->screenGeometry(screenNr);
 
     auto p = baseWidget->mapToGlobal(QPoint());
     // align the y coordinate
