@@ -16,7 +16,7 @@ set(kmymoney_STAT_HEADERS
   kmymoneyvalidationfeedback.h
   onlinejobmessagesview.h
   kmymoneydateedit.h
-  amountedit.h amountvalidator.h creditdebithelper.h
+  amountedit.h amountvalidator.h creditdebithelper.h popuppositioner.h
   )
 
 ########### Shared widget library ###########
@@ -59,6 +59,7 @@ set(kmm_widgets_sources
   kmymoneyviewbase.cpp
   kmymoneyaccountsviewbase.cpp
   passwordtoggle.cpp
+  popuppositioner.cpp
   )
 
 set(nationalAccountWidget_SOURCES

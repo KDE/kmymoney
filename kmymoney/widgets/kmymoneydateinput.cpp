@@ -34,7 +34,8 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "icons/icons.h"
+#include "icons.h"
+#include "popuppositioner.h"
 
 using namespace Icons;
 
@@ -242,23 +243,7 @@ void KMyMoneyDateInput::toggleDatePicker()
   if (d->m_dateFrame->isVisible()) {
     d->m_dateFrame->hide();
   } else {
-    QPoint tmpPoint = mapToGlobal(d->m_dateButton->geometry().bottomRight());
-
-    // usually, the datepicker widget is shown underneath the d->m_dateEdit widget
-    // if it does not fit on the screen, we show it above this widget
-
-    if (tmpPoint.y() + h > QApplication::desktop()->height()) {
-      tmpPoint.setY(tmpPoint.y() - h - d->m_dateButton->height());
-    }
-
-    if ((d->m_qtalignment == Qt::AlignRight && tmpPoint.x() + w <= QApplication::desktop()->width())
-        || (tmpPoint.x() - w < 0)) {
-      d->m_dateFrame->setGeometry(tmpPoint.x() - width(), tmpPoint.y(), w, h);
-    } else {
-      tmpPoint.setX(tmpPoint.x() - w);
-      d->m_dateFrame->setGeometry(tmpPoint.x(), tmpPoint.y(), w, h);
-    }
-
+    PopupPositioner pos(d->m_dateButton, d->m_dateFrame, PopupPositioner::BottomRight);
     if (d->m_date.isValid() && d->m_date != INVALID_DATE) {
       d->m_datePicker->setDate(d->m_date);
     } else {
