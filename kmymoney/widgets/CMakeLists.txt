@@ -21,6 +21,7 @@ set(kmm_widgets_HEADERS
   kmymoneytitlelabel.h
   kmymoneyvalidationfeedback.h
   onlinejobmessagesview.h
+  popuppositioner.h
   )
 
 ########### Shared widget library ###########
@@ -62,6 +63,7 @@ set(kmm_base_widgets_SOURCES
   ktagcontainer.cpp
   ktaglabel.cpp
   passwordtoggle.cpp
+  popuppositioner.cpp
   styleditemdelegateforwarder.cpp
   tabbar.cpp
   kmymoneytreeview.cpp

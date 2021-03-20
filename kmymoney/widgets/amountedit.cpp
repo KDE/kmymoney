@@ -30,7 +30,8 @@
 #include "amountvalidator.h"
 #include "kmymoneycalculator.h"
 #include "mymoneysecurity.h"
-#include "icons/icons.h"
+#include "icons.h"
+#include "popuppositioner.h"
 
 using namespace Icons;
 
@@ -143,25 +144,7 @@ public:
     m_calculatorFrame->show();
     m_calculatorFrame->setGeometry(m_calculator->geometry());
 
-    const auto h = m_calculatorFrame->height();
-    const auto w = m_calculatorFrame->width();
-
-    // usually, the calculator widget is shown underneath the AmountEdit widget
-    // if it does not fit on the screen, we show it above this widget
-    auto p = q->mapToGlobal(QPoint());
-    if (p.y() + q->height() + h > QApplication::desktop()->height()) {
-      p.setY(p.y() - h);
-    } else {
-      p.setY(p.y() + q->height());
-    }
-
-    // usually, it is shown left aligned. If it does not fit, we align it
-    // to the right edge of the AmountEdit widget
-    if (p.x() + w > QApplication::desktop()->width()) {
-      p.setX(p.x() + q->width() - w);
-    }
-
-    m_calculatorFrame->move(p);
+    PopupPositioner pos(q, m_calculatorFrame, PopupPositioner::BottemLeft);
     m_calculator->setFocus();
   }
 
