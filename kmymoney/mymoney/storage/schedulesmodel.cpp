@@ -182,7 +182,7 @@ QVariant SchedulesModel::headerData(int section, Qt::Orientation orientation, in
         I18N_NOOP2("Schedule header", "Amount"),
         I18N_NOOP2("Schedule header", "Next Due Date"),
         I18N_NOOP2("Schedule header", "Frequency"),
-        I18N_NOOP2("Schedule header", "Payment Method")
+        I18N_NOOP2("Schedule header", "Payment Method"),
     };
 
     if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {

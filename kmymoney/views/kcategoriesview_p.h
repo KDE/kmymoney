@@ -71,7 +71,7 @@ public:
                                         AccountsModel::Column::Bic,
                                         AccountsModel::Column::BankCode,
                                         AccountsModel::Column::Number,
-                                        AccountsModel::Column::HasOnlineMapping }));
+                                        AccountsModel::Column::HasOnlineMapping, }));
 
         ui->m_accountTree->setModel(MyMoneyFile::instance()->accountsModel());
         m_proxyModel->addAccountGroup(AccountsProxyModel::incomeExpense());

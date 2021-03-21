@@ -77,7 +77,7 @@ const QHash<Statement::Type, QString> txAccountType {
     {Statement::Type::Savings,    QStringLiteral("savings")},
     {Statement::Type::Investment, QStringLiteral("investment")},
     {Statement::Type::CreditCard, QStringLiteral("creditcard")},
-    {Statement::Type::Invalid,    QStringLiteral("invalid")}
+    {Statement::Type::Invalid,    QStringLiteral("invalid")},
 };
 
 const QHash<Transaction::Action, QString> txAction {
@@ -91,7 +91,7 @@ const QHash<Transaction::Action, QString> txAction {
     {Transaction::Action::Stksplit,         QStringLiteral("stocksplit")},
     {Transaction::Action::Fees,             QStringLiteral("fees")},
     {Transaction::Action::Interest,         QStringLiteral("interest")},
-    {Transaction::Action::Invalid,          QStringLiteral("invalid")}
+    {Transaction::Action::Invalid,          QStringLiteral("invalid")},
 };
 
 QString getElName(const Statement::Element el)
@@ -102,7 +102,7 @@ QString getElName(const Statement::Element el)
         {Statement::Element::Transaction,  QStringLiteral("TRANSACTION")},
         {Statement::Element::Split,        QStringLiteral("SPLIT")},
         {Statement::Element::Price,        QStringLiteral("PRICE")},
-        {Statement::Element::Security,     QStringLiteral("SECURITY")}
+        {Statement::Element::Security,     QStringLiteral("SECURITY")},
     };
     return elNames[el];
 }

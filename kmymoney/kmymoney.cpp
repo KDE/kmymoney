@@ -571,7 +571,7 @@ public:
         static const QStringList symbols = {  QStringLiteral("XAU"),
                                               QStringLiteral("XPD"),
                                               QStringLiteral("XPT"),
-                                              QStringLiteral("XAG")
+                                              QStringLiteral("XAG"),
                                            };
 
 
@@ -812,12 +812,12 @@ public:
 
     void fixLoanAccount_0(MyMoneyAccount acc)
     {
-        if (acc.value("final-payment").isEmpty()
-                || acc.value("term").isEmpty()
-                || acc.value("periodic-payment").isEmpty()
-                || acc.value("loan-amount").isEmpty()
-                || acc.value("interest-calculation").isEmpty()
-                || acc.value("schedule").isEmpty()
+        if (acc.value("final-payment").isEmpty() //
+                || acc.value("term").isEmpty() //
+                || acc.value("periodic-payment").isEmpty() //
+                || acc.value("loan-amount").isEmpty() //
+                || acc.value("interest-calculation").isEmpty() //
+                || acc.value("schedule").isEmpty() //
                 || acc.value("fixed-interest").isEmpty()) {
             KMessageBox::information(q,
                                      i18n("<p>The account \"%1\" was previously created as loan account but some information is missing.</p><p>The new loan wizard will be started to collect all relevant information.</p><p>Please use KMyMoney version 0.8.7 or later and earlier than version 0.9 to correct the problem.</p>"
@@ -895,11 +895,11 @@ public:
                 MyMoneyMoney val;
                 foreach (const auto split, splits) {
                     auto acc = file->account(split.accountId());
-                    if (acc.accountGroup() == eMyMoney::Account::Type::Asset
+                    if (acc.accountGroup() == eMyMoney::Account::Type::Asset //
                             || acc.accountGroup() == eMyMoney::Account::Type::Liability) {
                         val = split.value();
                         accountCount++;
-                        if (acc.accountType() == eMyMoney::Account::Type::Loan
+                        if (acc.accountType() == eMyMoney::Account::Type::Loan //
                                 || acc.accountType() == eMyMoney::Account::Type::AssetLoan)
                             isLoan = true;
                     } else
@@ -1347,6 +1347,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             Icon    icon;
         };
 
+        // clang-format off
         const QVector<actionInfo> actionInfos {
             // *************
             // The File menu
@@ -1475,6 +1476,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::DebugTimers,                   QStringLiteral("debug_timers"),                   i18n("Debug Timers"),                               Icon::Empty},
             // onlineJob actions
         };
+        // clang-format on
 
         for (const auto& info : actionInfos) {
             auto a = new QAction(this);
@@ -1583,7 +1585,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             Action::HelpShow,
             Action::SettingsAllMessages,
             Action::ToolPerformance,
-            Action::ToolCalculator
+            Action::ToolCalculator,
         };
         for (const auto& action : alwaysEnabled) {
             lutActions[action]->setEnabled(true);
@@ -2767,7 +2769,7 @@ void KMyMoneyApp::Private::updateActions(const SelectedObjects& selections)
 #endif
         Action::EditFindTransaction, Action::NewCategory, Action::ToolCurrencies, Action::ToolPrices, Action::ToolUpdatePrices,
         Action::ToolConsistency, Action::ToolPerformance, Action::NewAccount, Action::NewInstitution, Action::NewSchedule,
-        Action::ShowFilterWidget, Action::NewPayee, Action::NewTag
+        Action::ShowFilterWidget, Action::NewPayee, Action::NewTag,
     };
 
     for (const auto &action : actions)
@@ -2951,8 +2953,8 @@ void KMyMoneyApp::slotCheckSchedules()
 
             if (schedule.autoEnter()) {
                 try {
-                    while (!schedule.isFinished() && (schedule.adjustedNextDueDate() <= checkDate)
-                            && rc != eDialogs::ScheduleResultCode::Ignore
+                    while (!schedule.isFinished() && (schedule.adjustedNextDueDate() <= checkDate) //
+                            && rc != eDialogs::ScheduleResultCode::Ignore //
                             && rc != eDialogs::ScheduleResultCode::Cancel) {
                         rc = d->m_myMoneyView->enterSchedule(schedule, true, true);
                         schedule = file->schedule((*it).id()); // get a copy of the modified schedule

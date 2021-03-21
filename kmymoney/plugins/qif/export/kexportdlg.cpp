@@ -212,10 +212,10 @@ void KExportDlg::checkData(const QString& accountId)
         }
     }
 
-    if (!m_qlineeditFile->text().isEmpty()
-            && !m_accountComboBox->getSelected().isEmpty()
-            && !m_profileComboBox->currentText().isEmpty()
-            && m_kmymoneydateStart->date() <= m_kmymoneydateEnd->date()
+    if (!m_qlineeditFile->text().isEmpty() //
+            && !m_accountComboBox->getSelected().isEmpty() //
+            && !m_profileComboBox->currentText().isEmpty() //
+            && m_kmymoneydateStart->date() <= m_kmymoneydateEnd->date() //
             && (m_qcheckboxAccount->isChecked() || m_qcheckboxCategories->isChecked()))
         okEnabled = true;
 

@@ -822,8 +822,8 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
             throw MYMONEYEXCEPTION_CSTRING("Unable to modify the standard account groups");
     }
 
-    if (account.accountType() != acc.accountType() &&
-            (!account.isLiquidAsset() || !acc.isLiquidAsset()))
+    if (account.accountType() != acc.accountType() //
+        && (!account.isLiquidAsset() || !acc.isLiquidAsset()))
         throw MYMONEYEXCEPTION_CSTRING("Unable to change account type");
 
     // make sure that all the referenced objects exist
@@ -994,10 +994,10 @@ bool MyMoneyFile::hasActiveSplits(const QString& id) const
 
 bool MyMoneyFile::isStandardAccount(const QString& id) const
 {
-    return id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability)
-           || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset)
-           || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense)
-           || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income)
+    return id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability) //
+           || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset) //
+           || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense) //
+           || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income) //
            || id == MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Equity);
 }
 
@@ -1575,7 +1575,7 @@ void MyMoneyFile::addTransaction(MyMoneyTransaction& transaction)
     // scan the splits again to update last account access and notification list
     const auto splits2 = transaction.splits();
     for (const auto& split : splits2) {
-        d->accountsModel.touchAccountById(split.accountId());;
+        d->accountsModel.touchAccountById(split.accountId());
         d->addCacheNotification(split.accountId(), transaction.postDate());
     }
 
@@ -1596,7 +1596,7 @@ MyMoneyTransaction MyMoneyFile::transaction(const QString& accountId, const int 
     auto acc = account(accountId);
     MyMoneyTransactionFilter filter;
 
-    if (acc.accountGroup() == eMyMoney::Account::Type::Income
+    if (acc.accountGroup() == eMyMoney::Account::Type::Income //
             || acc.accountGroup() == eMyMoney::Account::Type::Expense)
         filter.addCategory(accountId);
     else
@@ -4045,7 +4045,7 @@ bool MyMoneyFile::hasValidId(const MyMoneyAccount& acc) const
         eMyMoney::Account::Standard::Asset,
         eMyMoney::Account::Standard::Expense,
         eMyMoney::Account::Standard::Income,
-        eMyMoney::Account::Standard::Equity
+        eMyMoney::Account::Standard::Equity,
     };
     const auto id = acc.id();
     for (const auto idx : qAsConst(stdAccNames)) {

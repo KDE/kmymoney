@@ -109,7 +109,7 @@ QWidget *ReportsView::netWorthForecast(const QString &arg) const
     if (liArgs.count() != 4)
         return new QWidget();
 
-    eMyMoney::Report::DetailLevel detailLevel[4] = { eMyMoney::Report::DetailLevel::All, eMyMoney::Report::DetailLevel::Top, eMyMoney::Report::DetailLevel::Group, eMyMoney::Report::DetailLevel::Total };
+    eMyMoney::Report::DetailLevel detailLevel[4] = { eMyMoney::Report::DetailLevel::All, eMyMoney::Report::DetailLevel::Top, eMyMoney::Report::DetailLevel::Group, eMyMoney::Report::DetailLevel::Total, };
 
     MyMoneyReport reportCfg = MyMoneyReport(
                                   eMyMoney::Report::RowType::AssetLiability,

@@ -86,7 +86,7 @@ public:
                                         AccountsModel::Column::Vat,
                                         AccountsModel::Column::Iban,
                                         AccountsModel::Column::Number,
-                                        AccountsModel::Column::HasOnlineMapping }));
+                                        AccountsModel::Column::HasOnlineMapping, }));
 
         ui->m_accountTree->setModel(MyMoneyFile::instance()->institutionsModel());
         m_proxyModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquity());

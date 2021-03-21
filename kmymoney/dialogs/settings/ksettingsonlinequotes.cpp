@@ -202,6 +202,7 @@ void KSettingsOnlineQuotes::slotLoadWidgets()
 void KSettingsOnlineQuotes::slotEntryChanged()
 {
     Q_D(KSettingsOnlineQuotes);
+    // clang-format off
     bool modified = d->ui->m_editURL->text() != d->m_currentItem.m_url
                     || d->ui->m_editCSVURL->text() != d->m_currentItem.m_csvUrl
                     || d->ui->m_editIdentifier->text() != d->m_currentItem.m_webID
@@ -210,6 +211,7 @@ void KSettingsOnlineQuotes::slotEntryChanged()
                     || d->ui->m_editDateFormat->text() != d->m_currentItem.m_dateformat
                     || d->ui->m_editPrice->text() != d->m_currentItem.m_price
                     || d->ui->m_skipStripping->isChecked() != d->m_currentItem.m_skipStripping;
+    // clang-format on
 
     d->ui->m_updateButton->setEnabled(modified);
 }

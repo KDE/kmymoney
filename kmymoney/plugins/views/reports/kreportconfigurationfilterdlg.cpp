@@ -246,7 +246,7 @@ void KReportConfigurationFilterDlg::slotSearch()
             d->m_currentState.setMovingAverageDays(d->m_tabRowColPivot->ui->m_movingAverageDays->value());
         }
     } else if (d->m_tabRowColQuery) {
-        eMyMoney::Report::RowType rtq[8] = { eMyMoney::Report::RowType::Category, eMyMoney::Report::RowType::TopCategory, eMyMoney::Report::RowType::Tag, eMyMoney::Report::RowType::Payee, eMyMoney::Report::RowType::Account, eMyMoney::Report::RowType::TopAccount, eMyMoney::Report::RowType::Month, eMyMoney::Report::RowType::Week };
+        eMyMoney::Report::RowType rtq[8] = { eMyMoney::Report::RowType::Category, eMyMoney::Report::RowType::TopCategory, eMyMoney::Report::RowType::Tag, eMyMoney::Report::RowType::Payee, eMyMoney::Report::RowType::Account, eMyMoney::Report::RowType::TopAccount, eMyMoney::Report::RowType::Month, eMyMoney::Report::RowType::Week, };
         d->m_currentState.setRowType(rtq[d->m_tabRowColQuery->ui->m_comboOrganizeBy->currentIndex()]);
 
         unsigned qc = eMyMoney::Report::QueryColumn::None;
@@ -314,7 +314,7 @@ void KReportConfigurationFilterDlg::slotSearch()
         d->m_currentState.setYLabelsPrecision(d->m_tabRange->ui->m_yLabelsPrecision->value());
         d->m_currentState.setDataFilter((eMyMoney::Report::DataLock)d->m_tabRange->ui->m_dataLock->currentIndex());
 
-        eMyMoney::Report::ColumnType ct[6] = { eMyMoney::Report::ColumnType::Days, eMyMoney::Report::ColumnType::Weeks, eMyMoney::Report::ColumnType::Months, eMyMoney::Report::ColumnType::BiMonths, eMyMoney::Report::ColumnType::Quarters, eMyMoney::Report::ColumnType::Years };
+        eMyMoney::Report::ColumnType ct[6] = { eMyMoney::Report::ColumnType::Days, eMyMoney::Report::ColumnType::Weeks, eMyMoney::Report::ColumnType::Months, eMyMoney::Report::ColumnType::BiMonths, eMyMoney::Report::ColumnType::Quarters, eMyMoney::Report::ColumnType::Years, };
         bool dy[6] = { true, true, false, false, false, false };
         d->m_currentState.setColumnType(ct[d->m_tabRange->ui->m_comboColumns->currentIndex()]);
 

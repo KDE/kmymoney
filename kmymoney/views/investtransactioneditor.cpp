@@ -78,16 +78,17 @@ public:
         interestSplitModel->setObjectName("InterestSplitModel");
 
         // keep in sync with eMyMoney::Split::InvestmentTransactionType
-        QStringList activityItems;
-        activityItems   << i18nc("@item:inlistbox transaction type", "Buy shares")
-                        << i18nc("@item:inlistbox transaction type", "Sell shares")
-                        << i18nc("@item:inlistbox transaction type", "Dividend")
-                        << i18nc("@item:inlistbox transaction type", "Reinvest dividend")
-                        << i18nc("@item:inlistbox transaction type", "Yield")
-                        << i18nc("@item:inlistbox transaction type", "Add shares")
-                        << i18nc("@item:inlistbox transaction type", "Remove shares")
-                        << i18nc("@item:inlistbox transaction type", "Split shares")
-                        << i18nc("@item:inlistbox transaction type", "Interest Income");
+        QStringList activityItems{
+            i18nc("@item:inlistbox transaction type", "Buy shares"),
+            i18nc("@item:inlistbox transaction type", "Sell shares"),
+            i18nc("@item:inlistbox transaction type", "Dividend"),
+            i18nc("@item:inlistbox transaction type", "Reinvest dividend"),
+            i18nc("@item:inlistbox transaction type", "Yield"),
+            i18nc("@item:inlistbox transaction type", "Add shares"),
+            i18nc("@item:inlistbox transaction type", "Remove shares"),
+            i18nc("@item:inlistbox transaction type", "Split shares"),
+            i18nc("@item:inlistbox transaction type", "Interest Income"),
+        };
 
         activitiesModel->setStringList(activityItems);
     }

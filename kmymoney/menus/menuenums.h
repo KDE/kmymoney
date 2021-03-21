@@ -14,6 +14,7 @@ class QAction;
 class QMenu;
 
 namespace eMenu {
+// clang-format off
 enum class Action {
     // *************
     // The File menu
@@ -121,6 +122,7 @@ enum class Action {
     DeleteOnlineJob, EditOnlineJob, LogOnlineJob,
     ReportOpen,
 };
+// clang-format on
 
 inline uint qHash(const Action key, uint seed) {
     return ::qHash(static_cast<uint>(key), seed);

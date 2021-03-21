@@ -377,7 +377,7 @@ const QString MyMoneyQifProfile::accountDelimiter() const
 
 const QString MyMoneyQifProfile::date(const QDate& datein) const
 {
-    QString::const_iterator format = m_dateFormat.begin();;
+    QString::const_iterator format = m_dateFormat.begin();
     QString buffer;
     QChar delim;
     int maskLen;

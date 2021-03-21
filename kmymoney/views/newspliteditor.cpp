@@ -289,7 +289,7 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     d->ui->payeeEdit->setModelColumn(0);
     d->ui->payeeEdit->completer()->setFilterMode(Qt::MatchContains);
 
-    d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity});
+    d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity,});
     d->accountsModel->setHideEquityAccounts(false);
     d->accountsModel->setSourceModel(model);
     d->accountsModel->sort(AccountsModel::Column::AccountName);

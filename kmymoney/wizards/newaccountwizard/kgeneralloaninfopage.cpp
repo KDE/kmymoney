@@ -107,7 +107,7 @@ void GeneralLoanInfoPage::enterPage()
         // setup default dates to last of this month and one year on top
         QDate firstDay(QDate::currentDate().year(), QDate::currentDate().month(), 1);
         d->ui->m_firstPaymentDate->setDate(firstDay.addMonths(1).addDays(-1));
-        d->ui->m_interestChangeDateEdit->setDate(d->ui->m_firstPaymentDate->date().addYears(1));;
+        d->ui->m_interestChangeDateEdit->setDate(d->ui->m_firstPaymentDate->date().addYears(1));
         d->m_firstTime = false;
     }
 }

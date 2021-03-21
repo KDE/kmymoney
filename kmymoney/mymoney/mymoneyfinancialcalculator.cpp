@@ -262,9 +262,10 @@ double MyMoneyFinancialCalculator::interestRate()
             else
                 a = 1.0;
             eint =
-                dabs((d->m_fv + a * d->m_npp * d->m_pmt) /
-                     (3.0 *
-                      ((d->m_npp - 1.0) * (d->m_npp - 1.0) * d->m_pmt + d->m_pv -
+
+                dabs((d->m_fv + a * d->m_npp * d->m_pmt) / //
+                     (3.0 * //
+                      ((d->m_npp - 1.0) * (d->m_npp - 1.0) * d->m_pmt + d->m_pv - //
                        d->m_fv)));
         } else {
             if ((d->m_pv * d->m_pmt) < 0.0) {

@@ -306,6 +306,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
         if (!list.isEmpty())
             currentId = list.first();
     }
+    // clang-format off
     if (d->m_typeList.contains(Account::Type::Checkings)
             || d->m_typeList.contains(Account::Type::Savings)
             || d->m_typeList.contains(Account::Type::Cash)
@@ -322,6 +323,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
             || d->m_typeList.contains(Account::Type::Loan)
             || d->m_typeList.contains(Account::Type::Liability))
         typeMask |= eDialogs::Category::liability;
+    // clang-format on
 
     if (d->m_typeList.contains(Account::Type::Income))
         typeMask |= eDialogs::Category::income;
@@ -419,7 +421,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
                     subItem->setIcon(0, acc.accountIcon());
                     if (acc.value("PreferredAccount") == "Yes"
                             && d->m_typeList.contains(acc.accountType())) {
-                        selector->newItem(d->m_favorites, acc.name(), tmpKey, acc.id())->setIcon(0, acc.accountIcon());;
+                        selector->newItem(d->m_favorites, acc.name(), tmpKey, acc.id())->setIcon(0, acc.accountIcon());
                     }
                     if (acc.accountList().count() > 0) {
                         subItem->setExpanded(true);

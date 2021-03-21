@@ -334,7 +334,7 @@ eMyMoney::Split::InvestmentTransactionType Buy::type() const
 void Buy::showWidgets() const
 {
     Q_D(const OldActivity);
-    static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "shares" << "price" << "total" << "fee-account" << "fee-amount" << "interest-account" << "interest-amount";
+    static const QStringList visibleWidgetIds = {"asset-account", "shares", "price", "total", "fee-account", "fee-amount", "interest-account", "interest-amount",};
     setWidgetVisibility(visibleWidgetIds, true);
 
     setLabelText("interest-amount-label", i18n("Interest"));
@@ -400,8 +400,8 @@ bool Buy::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
 
     auto feeAccountWidget = d->haveWidget<KMyMoneyCategory*>("fee-account");
     auto feeAmountWidget = d->haveWidget<AmountEdit*>("fee-amount");
-    if (!feeAccountWidget || !feeAmountWidget ||
-            !createCategorySplits(t, feeAccountWidget, feeAmountWidget, MyMoneyMoney::ONE, feeSplits, m_feeSplits))
+    if (!feeAccountWidget || !feeAmountWidget //
+        || !createCategorySplits(t, feeAccountWidget, feeAmountWidget, MyMoneyMoney::ONE, feeSplits, m_feeSplits))
         return false;
 
     createAssetAccountSplit(assetAccountSplit, s0);
@@ -436,7 +436,7 @@ eMyMoney::Split::InvestmentTransactionType Sell::type() const
 void Sell::showWidgets() const
 {
     Q_D(const OldActivity);
-    static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "fee-amount" << "shares" << "price" << "total" << "interest-account" << "fee-account";
+    static const QStringList visibleWidgetIds = {"asset-account", "interest-amount", "fee-amount", "shares", "price", "total", "interest-account", "fee-account",};
     setWidgetVisibility(visibleWidgetIds, true);
 
     if (auto shareEdit = d->haveWidget<AmountEdit*>("shares"))
@@ -517,14 +517,14 @@ bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpl
 
     auto feeAccountWidget = d->haveWidget<KMyMoneyCategory*>("fee-account");
     auto feeAmountWidget = d->haveWidget<AmountEdit*>("fee-amount");
-    if (!feeAccountWidget || !feeAmountWidget ||
-            !createCategorySplits(t, feeAccountWidget, feeAmountWidget, MyMoneyMoney::ONE, feeSplits, m_feeSplits))
+    if (!feeAccountWidget || !feeAmountWidget //
+        || !createCategorySplits(t, feeAccountWidget, feeAmountWidget, MyMoneyMoney::ONE, feeSplits, m_feeSplits))
         return false;
 
     auto interestAccountWidget = d->haveWidget<KMyMoneyCategory*>("interest-account");
     auto interestAmountWidget = d->haveWidget<AmountEdit*>("interest-amount");
-    if (!interestAccountWidget || !interestAmountWidget ||
-            !createCategorySplits(t, interestAccountWidget, interestAmountWidget, MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
+    if (!interestAccountWidget || !interestAmountWidget //
+        || !createCategorySplits(t, interestAccountWidget, interestAmountWidget, MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
         return false;
 
     const auto total = sumSplits(s0, feeSplits, interestSplits);
@@ -555,9 +555,9 @@ eMyMoney::Split::InvestmentTransactionType Div::type() const
 
 void Div::showWidgets() const
 {
-    static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "fee-amount" << "total" << "interest-account" << "fee-account";
+    static const QStringList visibleWidgetIds = {"asset-account", "interest-amount", "fee-amount", "total", "interest-account", "fee-account"};
     setWidgetVisibility(visibleWidgetIds, true);
-    static const QStringList hiddenWidgetIds = QStringList() << "shares" << "price";
+    static const QStringList hiddenWidgetIds = {"shares", "price"};
     setWidgetVisibility(hiddenWidgetIds, false);
 
     setLabelText("interest-amount-label", i18n("Interest"));
@@ -600,14 +600,14 @@ bool Div::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
 
     auto feeAccountWidget = d->haveWidget<KMyMoneyCategory*>("fee-account");
     auto feeAmountWidget = d->haveWidget<AmountEdit*>("fee-amount");
-    if (!feeAccountWidget || !feeAmountWidget ||
-            !createCategorySplits(t, feeAccountWidget, feeAmountWidget, MyMoneyMoney::ONE, feeSplits, m_feeSplits))
+    if (!feeAccountWidget || !feeAmountWidget //
+        || !createCategorySplits(t, feeAccountWidget, feeAmountWidget, MyMoneyMoney::ONE, feeSplits, m_feeSplits))
         return false;
 
     auto interestAccountWidget = d->haveWidget<KMyMoneyCategory*>("interest-account");
     auto interestAmountWidget = d->haveWidget<AmountEdit*>("interest-amount");
-    if (!interestAccountWidget || !interestAmountWidget ||
-            !createCategorySplits(t, interestAccountWidget, interestAmountWidget, MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
+    if (!interestAccountWidget || !interestAmountWidget //
+        || !createCategorySplits(t, interestAccountWidget, interestAmountWidget, MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
         return false;
 
     createAssetAccountSplit(assetAccountSplit, s0);
@@ -638,7 +638,7 @@ eMyMoney::Split::InvestmentTransactionType Reinvest::type() const
 void Reinvest::showWidgets() const
 {
     Q_D(const OldActivity);
-    static const QStringList visibleWidgetIds = QStringList() << "price" << "fee-account" << "interest-account";
+    static const QStringList visibleWidgetIds = {"price", "fee-account", "interest-account"};
     setWidgetVisibility(visibleWidgetIds, true);
 
     if (auto shareEdit = d->haveWidget<AmountEdit*>("shares")) {
@@ -715,8 +715,8 @@ bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMone
 
     auto interestAccountWidget = d->haveWidget<KMyMoneyCategory*>("interest-account");
     auto interestAmountWidget = d->haveWidget<AmountEdit*>("interest-amount");
-    if (!interestAccountWidget || !interestAmountWidget ||
-            !createCategorySplits(t, interestAccountWidget, interestAmountWidget, MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
+    if (!interestAccountWidget || !interestAmountWidget //
+        || !createCategorySplits(t, interestAccountWidget, interestAmountWidget, MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
         return false;
 
     if (interestSplits.count() != 1) {
@@ -931,9 +931,9 @@ eMyMoney::Split::InvestmentTransactionType IntInc::type() const
 
 void IntInc::showWidgets() const
 {
-    static const QStringList visibleWidgetIds = QStringList() << "asset-account" << "interest-amount" << "total" << "interest-account" << "fee-amount" << "fee-account";
+    static const QStringList visibleWidgetIds = {"asset-account", "interest-amount", "total", "interest-account", "fee-amount", "fee-account"};
     setWidgetVisibility(visibleWidgetIds, true);
-    static const QStringList hiddenWidgetIds = QStringList() << "shares" << "price";
+    static const QStringList hiddenWidgetIds = {"shares", "price"};
     setWidgetVisibility(hiddenWidgetIds, false);
 
     setLabelText("interest-amount-label", i18n("Interest"));
@@ -975,14 +975,14 @@ bool IntInc::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneyS
 
     auto feeAccountWidget = d->haveWidget<KMyMoneyCategory*>("fee-account");
     auto feeAmountWidget = d->haveWidget<AmountEdit*>("fee-amount");
-    if (!feeAccountWidget || !feeAmountWidget ||
-            !createCategorySplits(t, feeAccountWidget, feeAmountWidget, MyMoneyMoney::ONE, feeSplits, m_feeSplits))
+    if (!feeAccountWidget || !feeAmountWidget //
+        || !createCategorySplits(t, feeAccountWidget, feeAmountWidget, MyMoneyMoney::ONE, feeSplits, m_feeSplits))
         return false;
 
     auto interestAccountWidget = d->haveWidget<KMyMoneyCategory*>("interest-account");
     auto interestAmountWidget = d->haveWidget<AmountEdit*>("interest-amount");
-    if (!interestAccountWidget || !interestAmountWidget ||
-            !createCategorySplits(t, interestAccountWidget, interestAmountWidget, MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
+    if (!interestAccountWidget || !interestAmountWidget //
+        || !createCategorySplits(t, interestAccountWidget, interestAmountWidget, MyMoneyMoney::MINUS_ONE, interestSplits, m_interestSplits))
         return false;
 
     createAssetAccountSplit(assetAccountSplit, s0);

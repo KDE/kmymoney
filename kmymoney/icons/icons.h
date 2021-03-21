@@ -20,6 +20,7 @@ class QIcon;
 
 namespace Icons {
 
+// clang-format off
 enum class Icon { OpenDatabase, Merge, Reconcile, Split, Tip, PerformanceTest,
                   Calculator,
                   UserProperties, DocumentProperties,
@@ -90,6 +91,7 @@ enum class Icon { OpenDatabase, Merge, Reconcile, Split, Tip, PerformanceTest,
                   Reverse, Visibility, NoVisibility,
                   SelectAll, Backup,
                 };
+// clang-format on
 
 KMM_ICONS_EXPORT QIcon get(Icons::Icon icon);
 

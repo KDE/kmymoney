@@ -336,8 +336,8 @@ void KCurrencyCalculator::accept()
 
     if (d->ui->m_updateButton->isChecked()) {
         auto pr = MyMoneyFile::instance()->price(d->m_fromCurrency.id(), d->m_toCurrency.id(), d->ui->m_dateEdit->date());
-        if (!pr.isValid()
-                || pr.date() != d->ui->m_dateEdit->date()
+        if (!pr.isValid() //
+                || pr.date() != d->ui->m_dateEdit->date() //
                 || (pr.date() == d->ui->m_dateEdit->date() && pr.rate(d->m_fromCurrency.id()) != price())) {
             pr = MyMoneyPrice(d->m_fromCurrency.id(), d->m_toCurrency.id(), d->ui->m_dateEdit->date(), price(), i18n("User"));
             MyMoneyFileTransaction ft;

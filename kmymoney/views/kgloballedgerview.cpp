@@ -282,7 +282,7 @@ void KGlobalLedgerView::updateActions(const MyMoneyObject& obj)
         Action::FinishReconciliation,
         Action::PostponeReconciliation,
         Action::OpenAccount,
-        Action::NewTransaction
+        Action::NewTransaction,
     };
 
     for (const auto& a : actionsToBeDisabled)

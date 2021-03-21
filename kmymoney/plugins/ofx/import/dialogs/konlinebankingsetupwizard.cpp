@@ -534,7 +534,7 @@ int KOnlineBankingSetupWizard::ofxStatusCallback(struct OfxStatusData data, void
 
 bool KOnlineBankingSetupWizard::chosenSettings(MyMoneyKeyValueContainer& settings)
 {
-    bool result = false;;
+    bool result = false;
 
     if (m_fDone) {
         QTreeWidgetItem* qitem = m_listAccount->currentItem();

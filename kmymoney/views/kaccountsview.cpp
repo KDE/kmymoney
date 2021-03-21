@@ -137,7 +137,7 @@ void KAccountsView::updateActions(const SelectedObjects& selections)
         eMenu::Action::CloseAccount, eMenu::Action::ReopenAccount,
         eMenu::Action::ChartAccountBalance,
         eMenu::Action::UnmapOnlineAccount, eMenu::Action::MapOnlineAccount,
-        eMenu::Action::UpdateAccount
+        eMenu::Action::UpdateAccount,
     };
 
     for (const auto& a : actionsToBeDisabled)

@@ -107,7 +107,7 @@ QString nodeName(Node nodeID)
 {
     static const QHash<Node, QString> nodeNames {
         {Node::Report,        QStringLiteral("REPORT")},
-        {Node::Budget,        QStringLiteral("BUDGET")}
+        {Node::Budget,        QStringLiteral("BUDGET")},
     };
     return nodeNames.value(nodeID);
 }
@@ -130,7 +130,7 @@ QString elementName(Element::Report elementID)
         {Element::Report::Dates,        QStringLiteral("DATES")},
         {Element::Report::Category,     QStringLiteral("CATEGORY")},
         {Element::Report::AccountGroup, QStringLiteral("ACCOUNTGROUP")},
-        {Element::Report::Validity,     QStringLiteral("VALIDITY")}
+        {Element::Report::Validity,     QStringLiteral("VALIDITY")},
     };
     return elementNames.value(elementID);
 }
@@ -195,7 +195,7 @@ QString attributeName(Attribute::Report attributeID)
         {Attribute::Report::From,                   QStringLiteral("from")},
         {Attribute::Report::To,                     QStringLiteral("to")},
         {Attribute::Report::Validity,               QStringLiteral("validity")},
-        {Attribute::Report::NegExpenses,            QStringLiteral("negexpenses")}
+        {Attribute::Report::NegExpenses,            QStringLiteral("negexpenses")},
     };
     return attributeNames.value(attributeID);
 }
@@ -224,7 +224,7 @@ QString attributeName(Attribute::Budget attributeID)
         {Attribute::Budget::Version,            QStringLiteral("version")},
         {Attribute::Budget::BudgetLevel,        QStringLiteral("budgetlevel")},
         {Attribute::Budget::BudgetSubAccounts,  QStringLiteral("budgetsubaccounts")},
-        {Attribute::Budget::Amount,             QStringLiteral("amount")}
+        {Attribute::Budget::Amount,             QStringLiteral("amount")},
     };
     return attributeNames.value(attributeID);
 }
@@ -288,7 +288,7 @@ QHash<eMyMoney::Report::ColumnType, QString> columTypesLUT()
         //      {eMyMoney::Report::ColumnType::,        QStringLiteral("9")}
         //      {eMyMoney::Report::ColumnType::,        QStringLiteral("10")}
         //      {eMyMoney::Report::ColumnType::,        QStringLiteral("11")}
-        {eMyMoney::Report::ColumnType::Years,     QStringLiteral("years")}
+        {eMyMoney::Report::ColumnType::Years,     QStringLiteral("years")},
     };
     return lut;
 }
@@ -320,7 +320,7 @@ QHash<eMyMoney::Report::QueryColumn, QString> queryColumnsLUT()
         {eMyMoney::Report::QueryColumn::Performance, QStringLiteral("performance")},
         {eMyMoney::Report::QueryColumn::Loan,        QStringLiteral("loan")},
         {eMyMoney::Report::QueryColumn::Balance,     QStringLiteral("balance")},
-        {eMyMoney::Report::QueryColumn::CapitalGain, QStringLiteral("capitalgain")}
+        {eMyMoney::Report::QueryColumn::CapitalGain, QStringLiteral("capitalgain")},
     };
     return lut;
 }
@@ -343,7 +343,7 @@ QHash<eMyMoney::Report::DetailLevel, QString> detailLevelLUT()
         {eMyMoney::Report::DetailLevel::Top,    QStringLiteral("top")},
         {eMyMoney::Report::DetailLevel::Group,  QStringLiteral("group")},
         {eMyMoney::Report::DetailLevel::Total,  QStringLiteral("total")},
-        {eMyMoney::Report::DetailLevel::End,    QStringLiteral("invalid")}
+        {eMyMoney::Report::DetailLevel::End,    QStringLiteral("invalid")},
     };
     return lut;
 }
@@ -366,7 +366,7 @@ QHash<eMyMoney::Report::ChartType, QString> chartTypeLUT()
         {eMyMoney::Report::ChartType::Bar,        QStringLiteral("bar")},
         {eMyMoney::Report::ChartType::Pie,        QStringLiteral("pie")},
         {eMyMoney::Report::ChartType::Ring,       QStringLiteral("ring")},
-        {eMyMoney::Report::ChartType::StackedBar, QStringLiteral("stackedbar")}
+        {eMyMoney::Report::ChartType::StackedBar, QStringLiteral("stackedbar")},
     };
     return lut;
 }
@@ -453,7 +453,7 @@ QHash<int, QString> stateAttributeLUT()
         {2, QStringLiteral("cleared")},
         {3, QStringLiteral("reconciled")},
         {4, QStringLiteral("frozen")},
-        {5, QStringLiteral("none")}
+        {5, QStringLiteral("none")},
     };
     return lut;
 }
@@ -519,7 +519,7 @@ QHash<eMyMoney::TransactionFilter::Date, QString> dateLockLUT()
         {eMyMoney::TransactionFilter::Date::CurrentFiscalYear,  QStringLiteral("currentFiscalYear")},
         {eMyMoney::TransactionFilter::Date::LastFiscalYear,     QStringLiteral("lastFiscalYear")},
         {eMyMoney::TransactionFilter::Date::Today,              QStringLiteral("today")},
-        {eMyMoney::TransactionFilter::Date::Next18Months,       QStringLiteral("next18months")}
+        {eMyMoney::TransactionFilter::Date::Next18Months,       QStringLiteral("next18months")},
     };
     return lut;
 }
@@ -538,7 +538,7 @@ QHash<eMyMoney::Report::DataLock, QString> dataLockLUT()
 {
     static const QHash<eMyMoney::Report::DataLock, QString> lut {
         {eMyMoney::Report::DataLock::Automatic,   QStringLiteral("automatic")},
-        {eMyMoney::Report::DataLock::UserDefined, QStringLiteral("userdefined")}
+        {eMyMoney::Report::DataLock::UserDefined, QStringLiteral("userdefined")},
     };
     return lut;
 }

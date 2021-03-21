@@ -244,12 +244,12 @@ int main(int argc, char *argv[])
         auto needLeadIn = fi.isFile();
 #ifdef Q_OS_WIN
         QRegularExpression exp("^[a-z]:", QRegularExpression::CaseInsensitiveOption);
-        needLeadIn &= !exp.match(fname).hasMatch()
-                      && !fname.startsWith(QLatin1String(".\\"))
+        needLeadIn &= !exp.match(fname).hasMatch() //
+                      && !fname.startsWith(QLatin1String(".\\")) //
                       && !fname.startsWith(QLatin1String("\\"));
 #endif
-        needLeadIn &= !fname.startsWith(QLatin1String("file://"))
-                      && !fname.startsWith(QLatin1String("./"))
+        needLeadIn &= !fname.startsWith(QLatin1String("file://")) //
+                      && !fname.startsWith(QLatin1String("./")) //
                       && !fname.startsWith(QLatin1String("/"));
         if (needLeadIn) {
             fname.prepend(QLatin1String("./"));
@@ -395,7 +395,7 @@ static void migrateConfigFiles()
         // some files have changed their names during switch to KF5, so prepare map for name replacements
         QMap<QString, QString> configNamesChange {
             {QStringLiteral("printcheckpluginrc"), QStringLiteral("checkprintingrc")},
-            {QStringLiteral("icalendarexportpluginrc"), QStringLiteral("icalendarexporterrc")}
+            {QStringLiteral("icalendarexportpluginrc"), QStringLiteral("icalendarexporterrc")},
         };
 
         for (const auto& sConfigName : qAsConst(sConfigNames)) {
