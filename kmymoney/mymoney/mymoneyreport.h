@@ -28,15 +28,17 @@ template <typename T> class QList;
 namespace eMyMoney { namespace Account { enum class Type; }
                      namespace TransactionFilter { enum class Date; } }
 
-namespace eMyMoney { namespace Report { enum class RowType; } }
-namespace eMyMoney { namespace Report { enum class ReportType; } }
-namespace eMyMoney { namespace Report { enum class ColumnType; } }
-namespace eMyMoney { namespace Report { enum QueryColumn : int; } }
-namespace eMyMoney { namespace Report { enum class DetailLevel; } }
-namespace eMyMoney { namespace Report { enum class InvestmentSum; } }
-namespace eMyMoney { namespace Report { enum class ChartType; } }
-namespace eMyMoney { namespace Report { enum class DataLock; } }
-namespace eMyMoney { namespace Report { enum class ChartPalette; } }
+namespace eMyMoney { namespace Report {
+enum class RowType;
+enum class ReportType;
+enum class ColumnType;
+enum QueryColumn : int;
+enum class DetailLevel;
+enum class InvestmentSum;
+enum class ChartType;
+enum class DataLock;
+enum class ChartPalette;
+}}
 
 /**
   * This class defines a report within the MyMoneyEngine.  The report class

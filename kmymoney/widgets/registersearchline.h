@@ -18,8 +18,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace KMyMoneyRegister { class Register; }
-namespace KMyMoneyRegister { class RegisterItem; }
+namespace KMyMoneyRegister {
+class Register;
+class RegisterItem;
+}
 
 namespace KMyMoneyRegister
 {

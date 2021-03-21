@@ -31,10 +31,12 @@ class MyMoneyAccount;
 class KMyMoneySettings;
 class IMyMoneyOperationsFormat;
 
-namespace KMyMoneyPlugin { class AppInterface; }
-namespace KMyMoneyPlugin { class ImportInterface; }
-namespace KMyMoneyPlugin { class StatementInterface; }
-namespace KMyMoneyPlugin { class ViewInterface; }
+namespace KMyMoneyPlugin {
+class AppInterface;
+class ImportInterface;
+class StatementInterface;
+class ViewInterface;
+}
 
 namespace eKMyMoney { enum class StorageType; }
 

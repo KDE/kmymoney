@@ -31,8 +31,10 @@ class MyMoneySecurity;
 class MyMoneyMoney;
 class MyMoneySplit;
 class payeeIdentifier;
-namespace eMyMoney { namespace Account { enum class Type; } }
-namespace eMyMoney { namespace Account { enum class Standard; } }
+namespace eMyMoney { namespace Account {
+enum class Type;
+enum class Standard;
+}}
 template <class T> class payeeIdentifierTyped;
 
 /**

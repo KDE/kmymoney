@@ -31,9 +31,11 @@ class QDate;
 class MyMoneyMoney;
 class MyMoneyTransaction;
 
-namespace eMyMoney { namespace Split { enum class InvestmentTransactionType; } }
-namespace eMyMoney { namespace Split { enum class State; } }
-namespace eMyMoney { namespace Split { enum class Action; } }
+namespace eMyMoney { namespace Split {
+enum class InvestmentTransactionType;
+enum class State;
+enum class Action;
+}}
 
 /**
   * @author Thomas Baumgart
