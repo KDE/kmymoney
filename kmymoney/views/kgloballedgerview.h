@@ -31,9 +31,11 @@ class MyMoneySplit;
 class MyMoneyTransaction;
 class TransactionEditor;
 
-namespace KMyMoneyRegister { class SelectedTransactions; }
-namespace KMyMoneyRegister { class RegisterItem; }
-namespace KMyMoneyRegister { class Transaction; }
+namespace KMyMoneyRegister {
+class SelectedTransactions;
+class RegisterItem;
+class Transaction;
+}
 namespace KMyMoneyTransactionForm { class TransactionForm; }
 namespace eWidgets { namespace eRegister { enum class Action; } }
 namespace eMyMoney { namespace Schedule { enum class Occurrence; } }
