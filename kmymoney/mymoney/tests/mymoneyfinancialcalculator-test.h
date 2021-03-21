@@ -12,29 +12,29 @@ class MyMoneyFinancialCalculator;
 
 class MyMoneyFinancialCalculatorTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 protected:
-  MyMoneyFinancialCalculator *m;
+    MyMoneyFinancialCalculator *m;
 
 private Q_SLOTS:
 
-  void init();
-  void cleanup();
-  void testEmptyConstructor();
-  void testSetPrec();
-  void testSetNpp();
-  void testSetPF();
-  void testSetCF();
-  void testSetBep();
-  void testSetDisc();
-  void testSetIr();
-  void testSetPv();
-  void testSetPmt();
-  void testSetFv();
-  void testCombinedSet();
-  void testNumPayments();
-  void testUseCase1();
-  void testUseCase2();
+    void init();
+    void cleanup();
+    void testEmptyConstructor();
+    void testSetPrec();
+    void testSetNpp();
+    void testSetPF();
+    void testSetCF();
+    void testSetBep();
+    void testSetDisc();
+    void testSetIr();
+    void testSetPv();
+    void testSetPmt();
+    void testSetFv();
+    void testCombinedSet();
+    void testNumPayments();
+    void testUseCase1();
+    void testUseCase2();
 };
 
 #endif

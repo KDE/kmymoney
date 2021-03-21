@@ -23,44 +23,44 @@
 class AccountSettingsPrivate
 {
 public:
-  AccountSettingsPrivate() :
-    ui(new Ui::AccountSettings)
-  {
-  }
+    AccountSettingsPrivate() :
+        ui(new Ui::AccountSettings)
+    {
+    }
 
-  ~AccountSettingsPrivate()
-  {
-    delete ui;
-  }
-  Ui::AccountSettings *ui;
+    ~AccountSettingsPrivate()
+    {
+        delete ui;
+    }
+    Ui::AccountSettings *ui;
 };
 
 AccountSettings::AccountSettings(const MyMoneyAccount& /*acc*/, QWidget* parent) :
     QWidget(parent),
     d_ptr(new AccountSettingsPrivate)
 {
-  Q_D(AccountSettings);
-  d->ui->setupUi(this);
+    Q_D(AccountSettings);
+    d->ui->setupUi(this);
 }
 
 AccountSettings::~AccountSettings()
 {
-  Q_D(AccountSettings);
-  delete d;
+    Q_D(AccountSettings);
+    delete d;
 }
 
 void AccountSettings::loadUi(const MyMoneyKeyValueContainer& kvp)
 {
-  Q_D(AccountSettings);
-  d->ui->id->setText(kvp.value("wb-id"));
-  d->ui->backend->setText(kvp.value("wb-backend"));
-  d->ui->max_history->setText(kvp.value("wb-max"));
+    Q_D(AccountSettings);
+    d->ui->id->setText(kvp.value("wb-id"));
+    d->ui->backend->setText(kvp.value("wb-backend"));
+    d->ui->max_history->setText(kvp.value("wb-max"));
 }
 
 void AccountSettings::loadKvp(MyMoneyKeyValueContainer& kvp)
 {
-  Q_D(AccountSettings);
-  kvp.setValue("wb-id", d->ui->id->text());
-  kvp.setValue("wb-backend", d->ui->backend->text());
-  kvp.setValue("wb-max", d->ui->max_history->text());
+    Q_D(AccountSettings);
+    kvp.setValue("wb-id", d->ui->id->text());
+    kvp.setValue("wb-backend", d->ui->backend->text());
+    kvp.setValue("wb-max", d->ui->max_history->text());
 }

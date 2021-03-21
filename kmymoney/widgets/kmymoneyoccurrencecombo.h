@@ -22,7 +22,11 @@
 
 #include "kmymoneygeneralcombo.h"
 
-namespace eMyMoney { namespace Schedule { enum class Occurrence; } }
+namespace eMyMoney {
+namespace Schedule {
+enum class Occurrence;
+}
+}
 
 /**
  * This class implements an occurrence selector
@@ -32,14 +36,14 @@ namespace eMyMoney { namespace Schedule { enum class Occurrence; } }
  */
 class KMM_BASE_WIDGETS_EXPORT KMyMoneyOccurrenceCombo : public KMyMoneyGeneralCombo
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyOccurrenceCombo)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyOccurrenceCombo)
 
 public:
-  explicit KMyMoneyOccurrenceCombo(QWidget* parent = nullptr);
-  ~KMyMoneyOccurrenceCombo() override;
+    explicit KMyMoneyOccurrenceCombo(QWidget* parent = nullptr);
+    ~KMyMoneyOccurrenceCombo() override;
 
-  eMyMoney::Schedule::Occurrence currentItem() const;
+    eMyMoney::Schedule::Occurrence currentItem() const;
 };
 
 #endif

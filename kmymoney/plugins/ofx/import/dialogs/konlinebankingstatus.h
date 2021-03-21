@@ -32,25 +32,25 @@ class OfxHeaderVersion;
 class KOnlineBankingStatusDecl : public QWidget, public Ui::KOnlineBankingStatusDecl
 {
 public:
-  explicit KOnlineBankingStatusDecl(QWidget *parent) : QWidget(parent) {
-    setupUi(this);
-  }
+    explicit KOnlineBankingStatusDecl(QWidget *parent) : QWidget(parent) {
+        setupUi(this);
+    }
 };
 
 class KOnlineBankingStatus : public KOnlineBankingStatusDecl
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *parent = 0);
-  ~KOnlineBankingStatus();
-  const QString appId() const;
-  QString headerVersion() const;
+    explicit KOnlineBankingStatus(const MyMoneyAccount& acc, QWidget *parent = 0);
+    ~KOnlineBankingStatus();
+    const QString appId() const;
+    QString headerVersion() const;
 protected Q_SLOTS:
-  void applicationSelectionChanged();
+    void applicationSelectionChanged();
 
 private:
-  OfxAppVersion*  m_appId;
-  OfxHeaderVersion* m_headerVersion;
+    OfxAppVersion*  m_appId;
+    OfxHeaderVersion* m_headerVersion;
 };
 
 #endif

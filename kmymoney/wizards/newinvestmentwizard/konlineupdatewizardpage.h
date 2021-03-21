@@ -20,7 +20,9 @@
 
 class MyMoneySecurity;
 
-namespace Ui { class KOnlineUpdateWizardPage; }
+namespace Ui {
+class KOnlineUpdateWizardPage;
+}
 
 /**
  * This class implements the Online Update page of the
@@ -28,28 +30,28 @@ namespace Ui { class KOnlineUpdateWizardPage; }
  */
 class KOnlineUpdateWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit KOnlineUpdateWizardPage(QWidget *parent = nullptr);
-  ~KOnlineUpdateWizardPage();
+    explicit KOnlineUpdateWizardPage(QWidget *parent = nullptr);
+    ~KOnlineUpdateWizardPage();
 
-  /**
-   * Overload the isComplete function to control the Next button
-   */
-  bool isComplete() const final override;
-  void init2(const MyMoneySecurity& security);
+    /**
+     * Overload the isComplete function to control the Next button
+     */
+    bool isComplete() const final override;
+    void init2(const MyMoneySecurity& security);
 
-  /**
-   * Return whether the m_onlineFactor control is enabled
-   */
-  bool isOnlineFactorEnabled() const;
+    /**
+     * Return whether the m_onlineFactor control is enabled
+     */
+    bool isOnlineFactorEnabled() const;
 
 public Q_SLOTS:
-  void slotCheckPage(const QString&);
-  void slotSourceChanged(bool);
+    void slotCheckPage(const QString&);
+    void slotSourceChanged(bool);
 
 private:
-  Ui::KOnlineUpdateWizardPage  *ui;
+    Ui::KOnlineUpdateWizardPage  *ui;
 };
 
 #endif

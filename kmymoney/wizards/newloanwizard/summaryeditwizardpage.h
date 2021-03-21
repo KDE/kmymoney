@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class SummaryEditWizardPage; }
+namespace Ui {
+class SummaryEditWizardPage;
+}
 
 /**
  * This class implements the Summary Edit page of the
@@ -26,19 +28,19 @@ namespace Ui { class SummaryEditWizardPage; }
 
 class SummaryEditWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit SummaryEditWizardPage(QWidget *parent = nullptr);
-  ~SummaryEditWizardPage() override;
+    explicit SummaryEditWizardPage(QWidget *parent = nullptr);
+    ~SummaryEditWizardPage() override;
 
-  /**
-   * Overload the initializePage function to set widgets based on
-   * the inputs from previous pages.
-   */
-  void initializePage() final override;
+    /**
+     * Overload the initializePage function to set widgets based on
+     * the inputs from previous pages.
+     */
+    void initializePage() final override;
 
 private:
-  Ui::SummaryEditWizardPage *ui;
+    Ui::SummaryEditWizardPage *ui;
 };
 
 #endif

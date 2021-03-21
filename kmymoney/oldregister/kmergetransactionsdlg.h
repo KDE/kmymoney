@@ -23,14 +23,14 @@
 class MyMoneyAccount;
 class KMM_OLDREGISTER_EXPORT KMergeTransactionsDlg: public KSelectTransactionsDlg
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit KMergeTransactionsDlg(const MyMoneyAccount& account, QWidget* parent = nullptr);
+    explicit KMergeTransactionsDlg(const MyMoneyAccount& account, QWidget* parent = nullptr);
 
-  bool eventFilter(QObject* , QEvent*) override;
+    bool eventFilter(QObject*, QEvent*) override;
 
 public Q_SLOTS:
-  void slotHelp() override;
+    void slotHelp() override;
 };
 
 #endif // KMERGETRANSACTIONSDLG_H

@@ -18,26 +18,26 @@
 
 namespace NewUserWizard
 {
-  class IntroPage;
-  class GeneralPage;
-  class CurrencyPage;
-  class AccountPage;
-  class CategoriesPage;
-  class PreferencePage;
+class IntroPage;
+class GeneralPage;
+class CurrencyPage;
+class AccountPage;
+class CategoriesPage;
+class PreferencePage;
 
-  class WizardPrivate : public KMyMoneyWizardPrivate
-  {
+class WizardPrivate : public KMyMoneyWizardPrivate
+{
     Q_DISABLE_COPY(WizardPrivate)
 
-  public:
+public:
     explicit WizardPrivate(Wizard *qq):
-      KMyMoneyWizardPrivate(qq),
-      m_introPage(nullptr),
-      m_generalPage(nullptr),
-      m_currencyPage(nullptr),
-      m_accountPage(nullptr),
-      m_categoriesPage(nullptr),
-      m_preferencePage(nullptr)
+        KMyMoneyWizardPrivate(qq),
+        m_introPage(nullptr),
+        m_generalPage(nullptr),
+        m_currencyPage(nullptr),
+        m_accountPage(nullptr),
+        m_categoriesPage(nullptr),
+        m_preferencePage(nullptr)
     {
     }
 
@@ -52,7 +52,7 @@ namespace NewUserWizard
     AccountPage*      m_accountPage;
     CategoriesPage*   m_categoriesPage;
     PreferencePage*   m_preferencePage;
-  };
+};
 
 } // namespace
 

@@ -25,5 +25,5 @@ TransactionFormItemDelegate::TransactionFormItemDelegate(TransactionForm *parent
 
 void TransactionFormItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-  m_transactionForm->paintCell(painter, option, index);
+    m_transactionForm->paintCell(painter, option, index);
 }

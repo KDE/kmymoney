@@ -25,6 +25,6 @@ TransactionEditorContainer::~TransactionEditorContainer()
 
 void TransactionEditorContainer::updateGeometries()
 {
-  QTableWidget::updateGeometries();
-  emit geometriesUpdated();
+    QTableWidget::updateGeometries();
+    emit geometriesUpdated();
 }

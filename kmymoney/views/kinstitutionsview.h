@@ -1,9 +1,9 @@
- /*
- * SPDX-FileCopyrightText: 2007-2019 Thomas Baumgart <tbaumgart@kde.org>
- * SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+/*
+* SPDX-FileCopyrightText: 2007-2019 Thomas Baumgart <tbaumgart@kde.org>
+* SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+*
+* SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #ifndef KINSTITUTIONSVIEW_H
 #define KINSTITUTIONSVIEW_H
@@ -32,30 +32,30 @@ class SelectedObjects;
 class KInstitutionsViewPrivate;
 class KInstitutionsView : public KMyMoneyViewBase
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KInstitutionsView(QWidget *parent = nullptr);
-  ~KInstitutionsView();
+    explicit KInstitutionsView(QWidget *parent = nullptr);
+    ~KInstitutionsView();
 
-  void executeCustomAction(eView::Action action) override;
+    void executeCustomAction(eView::Action action) override;
 
 public Q_SLOTS:
-  void slotNetWorthChanged(const MyMoneyMoney &netWorth, bool isApproximate);
-  void slotEditInstitution();
+    void slotNetWorthChanged(const MyMoneyMoney &netWorth, bool isApproximate);
+    void slotEditInstitution();
 
-  void slotSettingsChanged() override;
-  void updateActions(const SelectedObjects& selections) override;
+    void slotSettingsChanged() override;
+    void updateActions(const SelectedObjects& selections) override;
 
 protected:
-  bool eventFilter(QObject *watched, QEvent *event) override;
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
 private:
-  Q_DECLARE_PRIVATE(KInstitutionsView)
+    Q_DECLARE_PRIVATE(KInstitutionsView)
 
 private Q_SLOTS:
-  void slotNewInstitution();
-  void slotDeleteInstitution();
+    void slotNewInstitution();
+    void slotDeleteInstitution();
 };
 
 #endif

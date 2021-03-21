@@ -33,29 +33,29 @@
 
 struct TemplatesModel::Private
 {
-  Q_DECLARE_PUBLIC(TemplatesModel)
+    Q_DECLARE_PUBLIC(TemplatesModel)
 
-  Private(TemplatesModel* qq, QObject* parent)
-    : q_ptr(qq)
-    , parentObject(parent)
-  {
-  }
+    Private(TemplatesModel* qq, QObject* parent)
+        : q_ptr(qq)
+        , parentObject(parent)
+    {
+    }
 
 
-  TemplatesModel*                  q_ptr;
-  QObject*                        parentObject;
+    TemplatesModel*                  q_ptr;
+    QObject*                        parentObject;
 };
 
 TemplatesModel::TemplatesModel(QObject* parent, QUndoStack* undoStack)
-  : MyMoneyModel<MyMoneyTemplate>(parent, QStringLiteral("TMPL"), TemplatesModel::ID_SIZE, undoStack)
-  , d(new Private(this, parent))
+    : MyMoneyModel<MyMoneyTemplate>(parent, QStringLiteral("TMPL"), TemplatesModel::ID_SIZE, undoStack)
+    , d(new Private(this, parent))
 {
-  setObjectName(QLatin1String("TemplatesModel"));
+    setObjectName(QLatin1String("TemplatesModel"));
 
-  useIdToItemMapper(true);
+    useIdToItemMapper(true);
 
-  // force creation of empty template structure
-  unload();
+    // force creation of empty template structure
+    unload();
 }
 
 TemplatesModel::~TemplatesModel()
@@ -64,140 +64,140 @@ TemplatesModel::~TemplatesModel()
 
 int TemplatesModel::columnCount(const QModelIndex& parent) const
 {
-  Q_UNUSED(parent);
-  return Column::MaxColumns;
+    Q_UNUSED(parent);
+    return Column::MaxColumns;
 }
 
 QVariant TemplatesModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-  if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
-    switch(section) {
-      case Column::Type:
-        return i18nc("@title:column Country/Hierarchy type", "Type");
-      case Column::Description:
-        return i18nc("@title:column Column heading for description", "Description");
-      default:
-        return QVariant();
+    if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
+        switch(section) {
+        case Column::Type:
+            return i18nc("@title:column Country/Hierarchy type", "Type");
+        case Column::Description:
+            return i18nc("@title:column Column heading for description", "Description");
+        default:
+            return QVariant();
+        }
     }
-  }
-  return QAbstractItemModel::headerData(section, orientation, role);
+    return QAbstractItemModel::headerData(section, orientation, role);
 }
 
 QVariant TemplatesModel::data(const QModelIndex& idx, int role) const
 {
-  if (!idx.isValid())
-    return QVariant();
-  if (idx.row() < 0 || idx.row() >= rowCount(idx.parent()))
-    return QVariant();
+    if (!idx.isValid())
+        return QVariant();
+    if (idx.row() < 0 || idx.row() >= rowCount(idx.parent()))
+        return QVariant();
 
-  const MyMoneyTemplate& tmpl = static_cast<TreeItem<MyMoneyTemplate>*>(idx.internalPointer())->constDataRef();
+    const MyMoneyTemplate& tmpl = static_cast<TreeItem<MyMoneyTemplate>*>(idx.internalPointer())->constDataRef();
 
-  switch(role) {
+    switch(role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-      switch(idx.column()) {
+        switch(idx.column()) {
         case Column::Type:
-          // make sure to never return any displayable text for the dummy entry
-          return tmpl.title();
+            // make sure to never return any displayable text for the dummy entry
+            return tmpl.title();
 
         case Column::Description:
-          return tmpl.shortDescription();
+            return tmpl.shortDescription();
 
         default:
-          break;
-      }
-      break;
+            break;
+        }
+        break;
 
     case eMyMoney::Model::TemplatesCountryRole:
     case eMyMoney::Model::TemplatesTypeRole:
-      return tmpl.title();
+        return tmpl.title();
 
     case eMyMoney::Model::TemplatesDescriptionRole:
-      return tmpl.shortDescription();
+        return tmpl.shortDescription();
 
     case eMyMoney::Model::TemplatesLongDescriptionRole:
-      return tmpl.longDescription();
+        return tmpl.longDescription();
 
     case eMyMoney::Model::TemplatesLocaleRole:
-      return tmpl.locale();
+        return tmpl.locale();
 
     case Qt::TextAlignmentRole:
-      return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
+        return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
 
     case eMyMoney::Model::IdRole:
-      return tmpl.id();
+        return tmpl.id();
 
-  }
-  return QVariant();
+    }
+    return QVariant();
 }
 
 Qt::ItemFlags TemplatesModel::flags(const QModelIndex &index) const
 {
-  if (!index.isValid())
-    return Qt::ItemFlags();
-  if (index.row() < 0 || index.row() >= rowCount(index.parent()))
-    return Qt::ItemFlags();
+    if (!index.isValid())
+        return Qt::ItemFlags();
+    if (index.row() < 0 || index.row() >= rowCount(index.parent()))
+        return Qt::ItemFlags();
 
-  // we don't allow to select the country entries of the model
-  return index.parent().isValid() ? (Qt::ItemIsEnabled | Qt::ItemIsSelectable) : Qt::ItemIsEnabled;
+    // we don't allow to select the country entries of the model
+    return index.parent().isValid() ? (Qt::ItemIsEnabled | Qt::ItemIsSelectable) : Qt::ItemIsEnabled;
 }
 
 
 bool TemplatesModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-  if(!index.isValid()) {
-    return false;
-  }
+    if(!index.isValid()) {
+        return false;
+    }
 
-  MyMoneyTemplate& tmpl = static_cast<TreeItem<MyMoneyTemplate>*>(index.internalPointer())->dataRef();
+    MyMoneyTemplate& tmpl = static_cast<TreeItem<MyMoneyTemplate>*>(index.internalPointer())->dataRef();
 
-  switch(role) {
+    switch(role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-      switch(index.column()) {
+        switch(index.column()) {
         case Column::Type:
-          tmpl.setTitle(value.toString());
-          return true;
+            tmpl.setTitle(value.toString());
+            return true;
 
         case Column::Description:
-          tmpl.setShortDescription(value.toString());
-          return true;
+            tmpl.setShortDescription(value.toString());
+            return true;
 
         default:
-          break;
-      }
-      break;
+            break;
+        }
+        break;
 
     case eMyMoney::Model::TemplatesCountryRole:
-      tmpl.setTitle(value.toString());
-      return true;
+        tmpl.setTitle(value.toString());
+        return true;
 
     case eMyMoney::Model::TemplatesDescriptionRole:
-      tmpl.setShortDescription(value.toString());
-      return true;
+        tmpl.setShortDescription(value.toString());
+        return true;
 
     case eMyMoney::Model::TemplatesLongDescriptionRole:
-      tmpl.setLongDescription(value.toString());
-      return true;
+        tmpl.setLongDescription(value.toString());
+        return true;
 
     case eMyMoney::Model::TemplatesLocaleRole:
-      tmpl.setLocale(value.toString());
-      return true;
+        tmpl.setLocale(value.toString());
+        return true;
 
     default:
-      if (role >= Qt::UserRole) {
-        qDebug() << "setData(" << index.row() << index.column() << ")" << value << role;
-      }
-      break;
-  }
-  return QAbstractItemModel::setData(index, value, role);
+        if (role >= Qt::UserRole) {
+            qDebug() << "setData(" << index.row() << index.column() << ")" << value << role;
+        }
+        break;
+    }
+    return QAbstractItemModel::setData(index, value, role);
 }
 
 void TemplatesModel::addItem(MyMoneyTemplate& tmpl, const QModelIndex& parentIdx)
 {
-  if (parentIdx.isValid()) {
-    tmpl = MyMoneyTemplate(nextId(), tmpl);
-    doAddItem(tmpl, parentIdx);
-  }
+    if (parentIdx.isValid()) {
+        tmpl = MyMoneyTemplate(nextId(), tmpl);
+        doAddItem(tmpl, parentIdx);
+    }
 }
 

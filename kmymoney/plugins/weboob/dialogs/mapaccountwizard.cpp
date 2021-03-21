@@ -32,47 +32,47 @@
 #include "../weboobexc.h"
 
 enum {
-  BACKENDS_PAGE = 0,
-  ACCOUNTS_PAGE,
+    BACKENDS_PAGE = 0,
+    ACCOUNTS_PAGE,
 };
 
 class MapAccountWizardPrivate
 {
 public:
-  MapAccountWizardPrivate(WeboobInterface* weboob) :
-    ui(new Ui::MapAccountWizard),
-    m_weboob(*weboob)
-  {
-  }
+    MapAccountWizardPrivate(WeboobInterface* weboob) :
+        ui(new Ui::MapAccountWizard),
+        m_weboob(*weboob)
+    {
+    }
 
-  ~MapAccountWizardPrivate()
-  {
-    delete ui;
-  }
+    ~MapAccountWizardPrivate()
+    {
+        delete ui;
+    }
 
-  Ui::MapAccountWizard *ui;
-  WeboobInterface &m_weboob;
-  QFutureWatcher<QList<WeboobInterface::Account> > accountsWatcher;
-  QFutureWatcher<QList<WeboobInterface::Backend> > backendsWatcher;
-  std::unique_ptr<QProgressDialog> progress;
+    Ui::MapAccountWizard *ui;
+    WeboobInterface &m_weboob;
+    QFutureWatcher<QList<WeboobInterface::Account> > accountsWatcher;
+    QFutureWatcher<QList<WeboobInterface::Backend> > backendsWatcher;
+    std::unique_ptr<QProgressDialog> progress;
 };
 
 MapAccountWizard::MapAccountWizard(QWidget *parent, WeboobInterface* weboob) :
-  QWizard(parent),
-  d_ptr(new MapAccountWizardPrivate(weboob))
+    QWizard(parent),
+    d_ptr(new MapAccountWizardPrivate(weboob))
 {
-  Q_D(MapAccountWizard);
-  d->ui->setupUi(this);
-  d->ui->addBackendButton->setVisible(false); // the button isn't connected to anything
+    Q_D(MapAccountWizard);
+    d->ui->setupUi(this);
+    d->ui->addBackendButton->setVisible(false); // the button isn't connected to anything
 
-  slotCheckNextButton();
-  connect(this, &QWizard::currentIdChanged, this, &MapAccountWizard::slotCheckNextButton);
-  connect(this, &QWizard::currentIdChanged, this, &MapAccountWizard::slotNewPage);
-  connect(d->ui->backendsList, &QTreeWidget::itemSelectionChanged, this, &MapAccountWizard::slotCheckNextButton);
-  connect(d->ui->accountsList, &QTreeWidget::itemSelectionChanged, this, &MapAccountWizard::slotCheckNextButton);
-auto abc = QString();
-  connect(&d->accountsWatcher, &QFutureWatcherBase::finished, this, &MapAccountWizard::slotGotAccounts);
-  connect(&d->backendsWatcher, &QFutureWatcherBase::finished, this, &MapAccountWizard::slotGotBackends);
+    slotCheckNextButton();
+    connect(this, &QWizard::currentIdChanged, this, &MapAccountWizard::slotCheckNextButton);
+    connect(this, &QWizard::currentIdChanged, this, &MapAccountWizard::slotNewPage);
+    connect(d->ui->backendsList, &QTreeWidget::itemSelectionChanged, this, &MapAccountWizard::slotCheckNextButton);
+    connect(d->ui->accountsList, &QTreeWidget::itemSelectionChanged, this, &MapAccountWizard::slotCheckNextButton);
+    auto abc = QString();
+    connect(&d->accountsWatcher, &QFutureWatcherBase::finished, this, &MapAccountWizard::slotGotAccounts);
+    connect(&d->backendsWatcher, &QFutureWatcherBase::finished, this, &MapAccountWizard::slotGotBackends);
 }
 
 /**
@@ -80,50 +80,50 @@ auto abc = QString();
  */
 MapAccountWizard::~MapAccountWizard()
 {
-  Q_D(MapAccountWizard);
-  delete d;
+    Q_D(MapAccountWizard);
+    delete d;
 }
 
 QString MapAccountWizard::currentBackend() const
 {
-  Q_D(const MapAccountWizard);
-  return d->ui->backendsList->currentItem()->text(0);
+    Q_D(const MapAccountWizard);
+    return d->ui->backendsList->currentItem()->text(0);
 }
 
 QString MapAccountWizard::currentAccount() const
 {
-  Q_D(const MapAccountWizard);
-  return d->ui->accountsList->currentItem()->text(0);
+    Q_D(const MapAccountWizard);
+    return d->ui->accountsList->currentItem()->text(0);
 }
 
 void MapAccountWizard::slotCheckNextButton(void)
 {
-  Q_D(MapAccountWizard);
-  auto enableButton = false;
-  switch (currentId()) {
+    Q_D(MapAccountWizard);
+    auto enableButton = false;
+    switch (currentId()) {
     case BACKENDS_PAGE:
-      enableButton = d->ui->backendsList->currentItem() != 0 && d->ui->backendsList->currentItem()->isSelected();
-      button(QWizard::NextButton)->setEnabled(enableButton);
-      break;
+        enableButton = d->ui->backendsList->currentItem() != 0 && d->ui->backendsList->currentItem()->isSelected();
+        button(QWizard::NextButton)->setEnabled(enableButton);
+        break;
     case ACCOUNTS_PAGE:
-      enableButton = d->ui->accountsList->currentItem() != 0 && d->ui->accountsList->currentItem()->isSelected();
-      button(QWizard::FinishButton)->setEnabled(enableButton);
-      break;
-  }
+        enableButton = d->ui->accountsList->currentItem() != 0 && d->ui->accountsList->currentItem()->isSelected();
+        button(QWizard::FinishButton)->setEnabled(enableButton);
+        break;
+    }
 
 }
 
 void MapAccountWizard::slotNewPage(int id)
 {
-  Q_D(MapAccountWizard);
-  d->progress = std::make_unique<QProgressDialog>(this);
-  d->progress->setModal(true);
-  d->progress->setCancelButton(nullptr);
-  d->progress->setMinimum(0);
-  d->progress->setMaximum(0);
-  d->progress->setMinimumDuration(0);
+    Q_D(MapAccountWizard);
+    d->progress = std::make_unique<QProgressDialog>(this);
+    d->progress->setModal(true);
+    d->progress->setCancelButton(nullptr);
+    d->progress->setMinimum(0);
+    d->progress->setMaximum(0);
+    d->progress->setMinimumDuration(0);
 
-  switch (id) {
+    switch (id) {
     case BACKENDS_PAGE: {
         d->ui->backendsList->clear();
         d->progress->setWindowTitle(i18n("Loading Weboob backend..."));
@@ -133,7 +133,7 @@ void MapAccountWizard::slotNewPage(int id)
         d->backendsWatcher.setFuture(QtConcurrent::run(&d->m_weboob, &WeboobInterface::getBackends));
 
         break;
-      }
+    }
     case ACCOUNTS_PAGE: {
         d->ui->accountsList->clear();
         d->progress->setWindowTitle(i18n("Connecting to bank..."));
@@ -146,57 +146,57 @@ void MapAccountWizard::slotNewPage(int id)
         d->ui->accountsList->setEnabled(false);
 
         break;
-      }
+    }
 
     default:
-      // I do not know if this can actually happen. But to be safe:
-      d->progress.reset();
-  }
+        // I do not know if this can actually happen. But to be safe:
+        d->progress.reset();
+    }
 }
 
 void MapAccountWizard::slotGotBackends()
 {
-  Q_D(MapAccountWizard);
-  const auto backends = d->backendsWatcher.result();
-  for (const auto& backend : backends)
-    d->ui->backendsList->addTopLevelItem(new QTreeWidgetItem(QStringList{backend.name,
-                                                                  backend.module}));
-  d->progress.reset();
+    Q_D(MapAccountWizard);
+    const auto backends = d->backendsWatcher.result();
+    for (const auto& backend : backends)
+        d->ui->backendsList->addTopLevelItem(new QTreeWidgetItem(QStringList{backend.name,
+                                             backend.module}));
+    d->progress.reset();
 
-  if (backends.isEmpty())
-    KMessageBox::information(this, i18n("No backends available.\nAdd one using weboob-config-qt."));
+    if (backends.isEmpty())
+        KMessageBox::information(this, i18n("No backends available.\nAdd one using weboob-config-qt."));
 }
 
 void MapAccountWizard::slotGotAccounts()
 {
-  Q_D(MapAccountWizard);
-  try {
-    const auto accounts = d->accountsWatcher.result();
-    for (const auto& account : accounts)
-      d->ui->accountsList->addTopLevelItem(new QTreeWidgetItem(QStringList{account.id,
-                                                                    account.name,
-                                                                    account.balance.formatMoney(QString(), 2)}));
-    d->progress.reset();
+    Q_D(MapAccountWizard);
+    try {
+        const auto accounts = d->accountsWatcher.result();
+        for (const auto& account : accounts)
+            d->ui->accountsList->addTopLevelItem(new QTreeWidgetItem(QStringList{account.id,
+                                                 account.name,
+                                                 account.balance.formatMoney(QString(), 2)}));
+        d->progress.reset();
 
-  if (accounts.isEmpty())
-    KMessageBox::information(this, i18n("No accounts available.\nCheck your backend configuration in weboob-config-qt."));
-  else
-    button(QWizard::FinishButton)->setEnabled(true);
+        if (accounts.isEmpty())
+            KMessageBox::information(this, i18n("No accounts available.\nCheck your backend configuration in weboob-config-qt."));
+        else
+            button(QWizard::FinishButton)->setEnabled(true);
 
-  } catch (const WeboobException &e) {
-    d->progress.reset();
-    QString msg;
-    switch (e.msg()) {
-      case ExceptionCode::BrowserIncorrectPassword:
-        msg = i18n("Incorrect password.");
-        break;
-      default:
-        break;
+    } catch (const WeboobException &e) {
+        d->progress.reset();
+        QString msg;
+        switch (e.msg()) {
+        case ExceptionCode::BrowserIncorrectPassword:
+            msg = i18n("Incorrect password.");
+            break;
+        default:
+            break;
+        }
+        if (!msg.isEmpty())
+            KMessageBox::error(this, msg);
     }
-    if (!msg.isEmpty())
-      KMessageBox::error(this, msg);
-  }
 
-  button(QWizard::BackButton)->setEnabled(true);
-  d->ui->accountsList->setEnabled(true);
+    button(QWizard::BackButton)->setEnabled(true);
+    d->ui->accountsList->setEnabled(true);
 }

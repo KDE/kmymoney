@@ -13,38 +13,40 @@
 class payeeIdentifier;
 class MyMoneyPayeeIdentifierContainer;
 
-namespace Ui { class KPayeeIdentifierView; }
+namespace Ui {
+class KPayeeIdentifierView;
+}
 
 class KPayeeIdentifierView : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KPayeeIdentifierView(QWidget* parent);
-  ~KPayeeIdentifierView();
-  QList<payeeIdentifier> identifiers() const;
+    explicit KPayeeIdentifierView(QWidget* parent);
+    ~KPayeeIdentifierView();
+    QList<payeeIdentifier> identifiers() const;
 
-  void closeSource();
+    void closeSource();
 
 Q_SIGNALS:
-  void dataChanged();
+    void dataChanged();
 
 public Q_SLOTS:
-  void setSource(MyMoneyPayeeIdentifierContainer data);
+    void setSource(MyMoneyPayeeIdentifierContainer data);
 
 private Q_SLOTS:
-  void removeSelected();
+    void removeSelected();
 
 private:
-  Ui::KPayeeIdentifierView* ui;
+    Ui::KPayeeIdentifierView* ui;
 };
 
 class payeeIdentifierDelegate : public StyledItemDelegateForwarder
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit payeeIdentifierDelegate(QObject* parent = 0);
-  virtual QAbstractItemDelegate* getItemDelegate(const QModelIndex& index) const override;
+    explicit payeeIdentifierDelegate(QObject* parent = 0);
+    virtual QAbstractItemDelegate* getItemDelegate(const QModelIndex& index) const override;
 };
 
 #endif // KPAYEEIDENTIFIERVIEW_H

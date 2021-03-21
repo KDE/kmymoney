@@ -10,12 +10,12 @@
 
 class sepaOnlineTasksLoader : public QObject, public KMyMoneyPlugin::onlineTaskFactory
 {
-  Q_OBJECT
-  Q_INTERFACES(KMyMoneyPlugin::onlineTaskFactory)
+    Q_OBJECT
+    Q_INTERFACES(KMyMoneyPlugin::onlineTaskFactory)
 
 public:
-  explicit sepaOnlineTasksLoader(QObject* parent = nullptr, const QVariantList& options = QVariantList{});
-  onlineTask* createOnlineTask(const QString& taskId) const final override;
+    explicit sepaOnlineTasksLoader(QObject* parent = nullptr, const QVariantList& options = QVariantList{});
+    onlineTask* createOnlineTask(const QString& taskId) const final override;
 
 };
 

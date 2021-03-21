@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class VariableInterestDateWizardPage; }
+namespace Ui {
+class VariableInterestDateWizardPage;
+}
 
 /**
  * This class implements the Variable Interest Date page of the
@@ -26,13 +28,13 @@ namespace Ui { class VariableInterestDateWizardPage; }
 
 class VariableInterestDateWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit VariableInterestDateWizardPage(QWidget *parent = nullptr);
-  ~VariableInterestDateWizardPage();
+    explicit VariableInterestDateWizardPage(QWidget *parent = nullptr);
+    ~VariableInterestDateWizardPage();
 
 private:
-  Ui::VariableInterestDateWizardPage *ui;
+    Ui::VariableInterestDateWizardPage *ui;
 };
 
 #endif

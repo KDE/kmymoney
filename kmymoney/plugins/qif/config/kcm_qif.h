@@ -10,7 +10,7 @@
 class KCMqif : public KCModule
 {
 public:
-  KCMqif(QWidget* parent, const QVariantList& args);
+    KCMqif(QWidget* parent, const QVariantList& args);
 };
 
 #endif // KCM_QIF_H

@@ -20,26 +20,26 @@ class CsvExportDlg;
 
 class CSVExporter : public KMyMoneyPlugin::Plugin
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit CSVExporter(QObject *parent, const QVariantList &args);
-  ~CSVExporter() override;
+    explicit CSVExporter(QObject *parent, const QVariantList &args);
+    ~CSVExporter() override;
 
-  bool              okToWriteFile(const QUrl &url);
-  CsvExportDlg*     exporterDialog() {
-    return m_dlg;
-  }
+    bool              okToWriteFile(const QUrl &url);
+    CsvExportDlg*     exporterDialog() {
+        return m_dlg;
+    }
 
 private:
-  QAction*          m_action;
-  CsvExportDlg*     m_dlg;
+    QAction*          m_action;
+    CsvExportDlg*     m_dlg;
 
 protected Q_SLOTS:
-  void slotCsvExport();
+    void slotCsvExport();
 
 protected:
-  void createActions();
+    void createActions();
 };
 
 #endif

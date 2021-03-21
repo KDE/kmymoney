@@ -25,41 +25,41 @@ class KMyMoneyWizardPage;
 
 namespace NewUserWizard
 {
-  class IntroPagePrivate : public WizardPagePrivate<Wizard>
-  {
+class IntroPagePrivate : public WizardPagePrivate<Wizard>
+{
     Q_DISABLE_COPY(IntroPagePrivate)
 
-  public:
+public:
     IntroPagePrivate(QObject* parent) :
-      WizardPagePrivate<Wizard>(parent),
-      ui(new Ui::KIntroPage)
+        WizardPagePrivate<Wizard>(parent),
+        ui(new Ui::KIntroPage)
     {
     }
 
     ~IntroPagePrivate()
     {
-      delete ui;
+        delete ui;
     }
 
     Ui::KIntroPage *ui;
-  };
+};
 
-  IntroPage::IntroPage(Wizard* wizard) :
+IntroPage::IntroPage(Wizard* wizard) :
     QWidget(wizard),
     WizardPage<Wizard>(*new IntroPagePrivate(wizard), stepCount++, this, wizard)
-  {
+{
     Q_D(IntroPage);
     d->ui->setupUi(this);
-  }
+}
 
-  IntroPage::~IntroPage()
-  {
-  }
+IntroPage::~IntroPage()
+{
+}
 
-  KMyMoneyWizardPage* IntroPage::nextPage() const
-  {
+KMyMoneyWizardPage* IntroPage::nextPage() const
+{
     Q_D(const IntroPage);
     return d->m_wizard->d_func()->m_generalPage;
-  }
+}
 
 }

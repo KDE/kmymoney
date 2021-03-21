@@ -28,17 +28,19 @@
 // Some ideas/code have been borrowed from Calendar-0.13 (phoenix.bmedesign.com/~qt)
 
 namespace KMyMoney {
-  /**
-    * Provided to be able to catch the focusOut events before the contents gets changed
-    */
-  class OldDateEdit : public QDateEdit
-  {
+/**
+  * Provided to be able to catch the focusOut events before the contents gets changed
+  */
+class OldDateEdit : public QDateEdit
+{
     Q_OBJECT
-  public:
+public:
     explicit OldDateEdit(const QDate& date, QWidget* parent = nullptr);
-    void setInitialSection(Section section) { m_initialSection = section; }
+    void setInitialSection(Section section) {
+        m_initialSection = section;
+    }
 
-  protected:
+protected:
     /** if the date was cleared (a state which is not supported by QDateEdit)
       * make sure that a date can be entered again
       */
@@ -53,14 +55,14 @@ namespace KMyMoney {
     /** reimplemented for internal reasons */
     void focusInEvent(QFocusEvent *event) final override;
 
-  private:
+private:
     QDateEdit::Section  m_initialSection;
     enum {
-      Created,
-      GotFocus,
-      FirstMousePress,
+        Created,
+        GotFocus,
+        FirstMousePress,
     }                   m_initStage;
-  };
+};
 }; // namespace
 
 /**
@@ -71,78 +73,78 @@ namespace KMyMoney {
   */
 class KMM_BASE_WIDGETS_EXPORT KMyMoneyDateInput : public QWidget
 {
-  Q_OBJECT
-  Q_PROPERTY(QDate date READ date WRITE setDate STORED false)
+    Q_OBJECT
+    Q_PROPERTY(QDate date READ date WRITE setDate STORED false)
 
 public:
-  explicit KMyMoneyDateInput(QWidget* parent = nullptr, Qt::AlignmentFlag flags = Qt::AlignLeft);
-  ~KMyMoneyDateInput();
+    explicit KMyMoneyDateInput(QWidget* parent = nullptr, Qt::AlignmentFlag flags = Qt::AlignLeft);
+    ~KMyMoneyDateInput();
 
-  /**
-    * Returns the selected date in the widget. If the widget is not
-    * showing a date, a QDate() object is returned which has an invalid date.
-    */
-  QDate date() const;
+    /**
+      * Returns the selected date in the widget. If the widget is not
+      * showing a date, a QDate() object is returned which has an invalid date.
+      */
+    QDate date() const;
 
-  /**
-    * Set the date shown in the widget to @a date. If @a date is invalid,
-    * no text will be shown. The internal widget will use 1.1.1800 for this
-    * special case, as the standard QDateEdit widget does not support an
-    * invalid date as of Qt4 anymore, but we need it anyway for multi transaction
-    * edit.
-    */
-  void setDate(QDate date);
+    /**
+      * Set the date shown in the widget to @a date. If @a date is invalid,
+      * no text will be shown. The internal widget will use 1.1.1800 for this
+      * special case, as the standard QDateEdit widget does not support an
+      * invalid date as of Qt4 anymore, but we need it anyway for multi transaction
+      * edit.
+      */
+    void setDate(QDate date);
 
-  void setMaximumDate(const QDate& max);
+    void setMaximumDate(const QDate& max);
 
-  /**
-    * Setup the widget with @a date. This date is stored internally and
-    * can be reloaded using resetDate().
-    *
-    * @sa setDate, resetDate
-    */
-  void loadDate(const QDate& date);
+    /**
+      * Setup the widget with @a date. This date is stored internally and
+      * can be reloaded using resetDate().
+      *
+      * @sa setDate, resetDate
+      */
+    void loadDate(const QDate& date);
 
-  /**
-    * Setup the widget with the date loaded using loadDate().
-    *
-    *  @sa loadDate
-    */
-  void resetDate();
+    /**
+      * Setup the widget with the date loaded using loadDate().
+      *
+      *  @sa loadDate
+      */
+    void resetDate();
 
-  QWidget* focusWidget() const;
-  void setRange(const QDate & min, const QDate & max);
-  void markAsBadDate(bool bad = false, const QColor& = QColor());
+    QWidget* focusWidget() const;
+    void setRange(const QDate & min, const QDate & max);
+    void markAsBadDate(bool bad = false, const QColor& = QColor());
 
 Q_SIGNALS:
-  void dateChanged(const QDate& date);
+    void dateChanged(const QDate& date);
 
 protected:
-  /**
-    * - increments/decrements the date upon +/- key input
-    * - increments/decrements the date upon Up/Down key input
-    * - sets the date to current date when the 'T' key is pressed.
-    *   The actual key for this to happen might be overridden through
-    *   an i18n package. The 'T'-key is always possible.
-    */
-  void keyPressEvent(QKeyEvent* k) override;
-  void showEvent(QShowEvent* event) override;
+    /**
+      * - increments/decrements the date upon +/- key input
+      * - increments/decrements the date upon Up/Down key input
+      * - sets the date to current date when the 'T' key is pressed.
+      *   The actual key for this to happen might be overridden through
+      *   an i18n package. The 'T'-key is always possible.
+      */
+    void keyPressEvent(QKeyEvent* k) override;
+    void showEvent(QShowEvent* event) override;
 
-  /** To intercept events sent to focusWidget() */
-  bool eventFilter(QObject *o, QEvent *e) override;
+    /** To intercept events sent to focusWidget() */
+    bool eventFilter(QObject *o, QEvent *e) override;
 
 
 protected Q_SLOTS:
-  void slotDateChosen(QDate date);
-  void toggleDatePicker();
+    void slotDateChosen(QDate date);
+    void toggleDatePicker();
 
 private Q_SLOTS:
-  void slotDateChosenRef(const QDate& date);
-  void fixSize();
+    void slotDateChosenRef(const QDate& date);
+    void fixSize();
 
 private:
-  struct Private;
-  Private * const d;
+    struct Private;
+    Private * const d;
 };
 
 #endif

@@ -21,26 +21,26 @@
 class KSettingsSchedulesPrivate;
 class KSettingsSchedules : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KSettingsSchedules)
+    Q_OBJECT
+    Q_DISABLE_COPY(KSettingsSchedules)
 
 public:
-  explicit KSettingsSchedules(QWidget* parent = nullptr);
-  ~KSettingsSchedules();
+    explicit KSettingsSchedules(QWidget* parent = nullptr);
+    ~KSettingsSchedules();
 
 public Q_SLOTS:
-  void slotResetRegion();
+    void slotResetRegion();
 
 protected Q_SLOTS:
-  void slotLoadRegion(const QString &region);
-  void slotSetRegion(const QString &region);
+    void slotLoadRegion(const QString &region);
+    void slotSetRegion(const QString &region);
 
 protected:
-  void loadList();
+    void loadList();
 
 private:
-  KSettingsSchedulesPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KSettingsSchedules)
+    KSettingsSchedulesPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KSettingsSchedules)
 };
 
 #endif

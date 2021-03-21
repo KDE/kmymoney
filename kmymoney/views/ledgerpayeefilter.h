@@ -22,31 +22,31 @@ class MyMoneyAccount;
 class LedgerPayeeFilterPrivate;
 class LedgerPayeeFilter : public LedgerFilterBase
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit LedgerPayeeFilter(QObject* parent, QVector<QAbstractItemModel*> specialJournalModels);
-  ~LedgerPayeeFilter() override;
+    explicit LedgerPayeeFilter(QObject* parent, QVector<QAbstractItemModel*> specialJournalModels);
+    ~LedgerPayeeFilter() override;
 
-  void setShowBalanceInverted(bool inverted = true);
+    void setShowBalanceInverted(bool inverted = true);
 
-  void setPayeeIdList(const QStringList& payeeIds);
+    void setPayeeIdList(const QStringList& payeeIds);
 
 public Q_SLOTS:
-  void recalculateBalances();
+    void recalculateBalances();
 
-  void recalculateBalancesOnIdle(const QString& accountId);
+    void recalculateBalancesOnIdle(const QString& accountId);
 
 protected:
-  /**
-   * This method is overridden and checks if the splits payeeId is
-   * contained in the list provided by setPayeeIdList() and
-   * references an asset or liability account.
-   */
-  bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
+    /**
+     * This method is overridden and checks if the splits payeeId is
+     * contained in the list provided by setPayeeIdList() and
+     * references an asset or liability account.
+     */
+    bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
 
 private:
-  Q_DECLARE_PRIVATE_D(LedgerFilterBase::d_ptr, LedgerPayeeFilter);
+    Q_DECLARE_PRIVATE_D(LedgerFilterBase::d_ptr, LedgerPayeeFilter);
 };
 
 #endif // LEDGERPAYEEFILTER_H

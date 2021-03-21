@@ -10,17 +10,21 @@
 #include "kmm_base_widgets_export.h"
 #include "kmymoneyvalidationfeedback.h"
 
-namespace eWidgets { namespace ValidationFeedback { enum class MessageType; } }
+namespace eWidgets {
+namespace ValidationFeedback {
+enum class MessageType;
+}
+}
 
 class KMM_BASE_WIDGETS_EXPORT bicValidator : public QValidator
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit bicValidator(QObject* parent = 0);
-  QValidator::State validate(QString& , int&) const final override;
+    explicit bicValidator(QObject* parent = 0);
+    QValidator::State validate(QString&, int&) const final override;
 
-  static QPair<eWidgets::ValidationFeedback::MessageType, QString> validateWithMessage(const QString&);
+    static QPair<eWidgets::ValidationFeedback::MessageType, QString> validateWithMessage(const QString&);
 };
 
 #endif // BICVALIDATOR_H

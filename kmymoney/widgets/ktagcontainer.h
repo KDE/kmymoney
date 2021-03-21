@@ -34,28 +34,28 @@ class MyMoneyTag;
 class KTagContainerPrivate;
 class KMM_BASE_WIDGETS_EXPORT KTagContainer : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KTagContainer)
+    Q_OBJECT
+    Q_DISABLE_COPY(KTagContainer)
 
 public:
-  explicit KTagContainer(QWidget* parent = nullptr);
-  ~KTagContainer();
+    explicit KTagContainer(QWidget* parent = nullptr);
+    ~KTagContainer();
 
-  void setModel(QAbstractItemModel* model);
-  void loadTags(const QList<QString>& idList);
+    void setModel(QAbstractItemModel* model);
+    void loadTags(const QList<QString>& idList);
 
-  QComboBox* tagCombo();
-  const QList<QString> selectedTags();
+    QComboBox* tagCombo();
+    const QList<QString> selectedTags();
 
 protected Q_SLOTS:
-  void slotRemoveTagWidget();
+    void slotRemoveTagWidget();
 
 Q_SIGNALS:
-  void tagsChanged(const QStringList& tagIdList);
+    void tagsChanged(const QStringList& tagIdList);
 
 private:
-  KTagContainerPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KTagContainer)
+    KTagContainerPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KTagContainer)
 };
 
 #endif

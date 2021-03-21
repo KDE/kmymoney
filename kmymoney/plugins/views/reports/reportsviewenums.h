@@ -7,11 +7,11 @@
 #define REPORTSVIEWENUMS_H
 
 namespace eWidgetPlugin {
-  enum WidgetType {
+enum WidgetType {
     NetWorthForecast,
     NetWorthForecastWithArgs, // for forecast view
     Budget,
-  };
+};
 }
 
 #endif

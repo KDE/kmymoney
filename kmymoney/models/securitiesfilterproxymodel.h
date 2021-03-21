@@ -31,22 +31,24 @@
  */
 class KMM_MODELS_EXPORT SecuritiesFilterProxyModel : public QSortFilterProxyModel
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  SecuritiesFilterProxyModel(QObject *parent , SecuritiesModel *model);
-  ~SecuritiesFilterProxyModel();
+    SecuritiesFilterProxyModel(QObject *parent, SecuritiesModel *model);
+    ~SecuritiesFilterProxyModel();
 
 protected:
-  bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
+    bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
 
 private:
-  class Private;
-  Private* const d;
+    class Private;
+    Private* const d;
 
 #if QT_VERSION < QT_VERSION_CHECK(5,10,0)
-  // provide the interface for backward compatbility
-  void setRecursiveFilteringEnabled(bool enable) { Q_UNUSED(enable); }
+    // provide the interface for backward compatbility
+    void setRecursiveFilteringEnabled(bool enable) {
+        Q_UNUSED(enable);
+    }
 #endif
 
 };

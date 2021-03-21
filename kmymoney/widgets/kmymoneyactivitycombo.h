@@ -22,7 +22,11 @@
 
 #include "kmymoneymvccombo.h"
 
-namespace eMyMoney { namespace Split { enum class InvestmentTransactionType; } }
+namespace eMyMoney {
+namespace Split {
+enum class InvestmentTransactionType;
+}
+}
 
 /**
   * @author Thomas Baumgart
@@ -32,27 +36,27 @@ namespace eMyMoney { namespace Split { enum class InvestmentTransactionType; } }
 class KMyMoneyActivityComboPrivate;
 class KMM_BASE_WIDGETS_EXPORT KMyMoneyActivityCombo : public KMyMoneyMVCCombo
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyActivityCombo)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyActivityCombo)
 
 public:
-  /**
-    * Create a combo box that contains the entries "Buy", "Sell" etc.
-    */
-  explicit KMyMoneyActivityCombo(QWidget *w = 0);
-  ~KMyMoneyActivityCombo() override;
+    /**
+      * Create a combo box that contains the entries "Buy", "Sell" etc.
+      */
+    explicit KMyMoneyActivityCombo(QWidget *w = 0);
+    ~KMyMoneyActivityCombo() override;
 
-  void setActivity(eMyMoney::Split::InvestmentTransactionType activity);
-  eMyMoney::Split::InvestmentTransactionType activity() const;
+    void setActivity(eMyMoney::Split::InvestmentTransactionType activity);
+    eMyMoney::Split::InvestmentTransactionType activity() const;
 
 protected Q_SLOTS:
-  void slotSetActivity(const QString& id);
+    void slotSetActivity(const QString& id);
 
 Q_SIGNALS:
-  void activitySelected(eMyMoney::Split::InvestmentTransactionType);
+    void activitySelected(eMyMoney::Split::InvestmentTransactionType);
 
 private:
-  Q_DECLARE_PRIVATE(KMyMoneyActivityCombo)
+    Q_DECLARE_PRIVATE(KMyMoneyActivityCombo)
 };
 
 #endif

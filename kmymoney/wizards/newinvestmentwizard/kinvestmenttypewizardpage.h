@@ -20,7 +20,9 @@
 
 class MyMoneySecurity;
 
-namespace Ui { class KInvestmentTypeWizardPage; }
+namespace Ui {
+class KInvestmentTypeWizardPage;
+}
 
 /**
  * This class implements the investment type page of the
@@ -28,16 +30,16 @@ namespace Ui { class KInvestmentTypeWizardPage; }
  */
 class KInvestmentTypeWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit KInvestmentTypeWizardPage(QWidget *parent = nullptr);
-  ~KInvestmentTypeWizardPage();
+    explicit KInvestmentTypeWizardPage(QWidget *parent = nullptr);
+    ~KInvestmentTypeWizardPage();
 
-  void init2(const MyMoneySecurity& security);
-  void setIntroLabelText(const QString& text);
+    void init2(const MyMoneySecurity& security);
+    void setIntroLabelText(const QString& text);
 
 private:
-  Ui::KInvestmentTypeWizardPage  *ui;
+    Ui::KInvestmentTypeWizardPage  *ui;
 };
 
 #endif

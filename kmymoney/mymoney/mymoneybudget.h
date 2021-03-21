@@ -28,7 +28,11 @@ class MyMoneyMoney;
 template <typename T> class QList;
 template <class Key, class T> class QMap;
 
-namespace eMyMoney { namespace Budget { enum class Level; } }
+namespace eMyMoney {
+namespace Budget {
+enum class Level;
+}
+}
 
 /**
   * This class defines a Budget within the MyMoneyEngine.  The Budget class
@@ -44,205 +48,205 @@ namespace eMyMoney { namespace Budget { enum class Level; } }
 class MyMoneyBudgetPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyBudget: public MyMoneyObject
 {
-  Q_DECLARE_PRIVATE(MyMoneyBudget)
+    Q_DECLARE_PRIVATE(MyMoneyBudget)
 
-  KMM_MYMONEY_UNIT_TESTABLE
+    KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  MyMoneyBudget();
-  explicit MyMoneyBudget(const QString &id);
+    MyMoneyBudget();
+    explicit MyMoneyBudget(const QString &id);
 
-  /**
-    * This constructor creates an object based on the data found in the
-    * MyMoneyBudget budget object.
-    */
-  MyMoneyBudget(const QString& id,
-                const MyMoneyBudget& other);
+    /**
+      * This constructor creates an object based on the data found in the
+      * MyMoneyBudget budget object.
+      */
+    MyMoneyBudget(const QString& id,
+                  const MyMoneyBudget& other);
 
-  MyMoneyBudget(const MyMoneyBudget& other);
-  MyMoneyBudget(MyMoneyBudget && other);
-  MyMoneyBudget & operator=(MyMoneyBudget other);
-  friend void swap(MyMoneyBudget& first, MyMoneyBudget& second);
+    MyMoneyBudget(const MyMoneyBudget& other);
+    MyMoneyBudget(MyMoneyBudget && other);
+    MyMoneyBudget & operator=(MyMoneyBudget other);
+    friend void swap(MyMoneyBudget& first, MyMoneyBudget& second);
 
-  ~MyMoneyBudget();
+    ~MyMoneyBudget();
 
-  /**
-    * Helper class for MyMoneyBudget
-    *
-    * This is an abstraction of the PERIOD stored in the BUDGET/ACCOUNT tag in XML
-    *
-    * @author Darren Gould
-    */
-  class PeriodGroupPrivate;
-  class KMM_MYMONEY_EXPORT PeriodGroup
-  {
-    Q_DECLARE_PRIVATE(PeriodGroup)
-    PeriodGroupPrivate* d_ptr;
+    /**
+      * Helper class for MyMoneyBudget
+      *
+      * This is an abstraction of the PERIOD stored in the BUDGET/ACCOUNT tag in XML
+      *
+      * @author Darren Gould
+      */
+    class PeriodGroupPrivate;
+    class KMM_MYMONEY_EXPORT PeriodGroup
+    {
+        Q_DECLARE_PRIVATE(PeriodGroup)
+        PeriodGroupPrivate* d_ptr;
 
-  public:
-    PeriodGroup();
-    PeriodGroup(const PeriodGroup & other);
-    PeriodGroup(PeriodGroup && other);
-    PeriodGroup & operator=(PeriodGroup other);
-    friend void swap(PeriodGroup& first, PeriodGroup& second);
+    public:
+        PeriodGroup();
+        PeriodGroup(const PeriodGroup & other);
+        PeriodGroup(PeriodGroup && other);
+        PeriodGroup & operator=(PeriodGroup other);
+        friend void swap(PeriodGroup& first, PeriodGroup& second);
 
-    ~PeriodGroup();
+        ~PeriodGroup();
 
-    QDate startDate() const;
-    void setStartDate(const QDate& start);
+        QDate startDate() const;
+        void setStartDate(const QDate& start);
 
-    MyMoneyMoney amount() const;
-    void setAmount(const MyMoneyMoney& amount);
+        MyMoneyMoney amount() const;
+        void setAmount(const MyMoneyMoney& amount);
 
-    bool operator == (const PeriodGroup &right) const;
-  };
+        bool operator == (const PeriodGroup &right) const;
+    };
 
-  /**
-    * Helper class for MyMoneyBudget
-    *
-    * This is an abstraction of the Account Data stored in the BUDGET tag in XML
-    *
-    * @author Darren Gould
-    */
-  class AccountGroupPrivate;
-  class KMM_MYMONEY_EXPORT AccountGroup
-  {
-    Q_DECLARE_PRIVATE(AccountGroup)
-    AccountGroupPrivate* d_ptr;
+    /**
+      * Helper class for MyMoneyBudget
+      *
+      * This is an abstraction of the Account Data stored in the BUDGET tag in XML
+      *
+      * @author Darren Gould
+      */
+    class AccountGroupPrivate;
+    class KMM_MYMONEY_EXPORT AccountGroup
+    {
+        Q_DECLARE_PRIVATE(AccountGroup)
+        AccountGroupPrivate* d_ptr;
 
-  public:
-    AccountGroup();
-    AccountGroup(const AccountGroup & other);
-    AccountGroup(AccountGroup && other);
-    AccountGroup & operator=(AccountGroup other);
-    friend void swap(AccountGroup& first, AccountGroup& second);
+    public:
+        AccountGroup();
+        AccountGroup(const AccountGroup & other);
+        AccountGroup(AccountGroup && other);
+        AccountGroup & operator=(AccountGroup other);
+        friend void swap(AccountGroup& first, AccountGroup& second);
 
-    ~AccountGroup();
+        ~AccountGroup();
 
-    QString id() const;
-    void setId(const QString& id);
+        QString id() const;
+        void setId(const QString& id);
 
-    bool budgetSubaccounts() const;
-    void setBudgetSubaccounts(bool budgetsubaccounts);
+        bool budgetSubaccounts() const;
+        void setBudgetSubaccounts(bool budgetsubaccounts);
 
-    eMyMoney::Budget::Level budgetLevel() const;
-    void setBudgetLevel(eMyMoney::Budget::Level level);
+        eMyMoney::Budget::Level budgetLevel() const;
+        void setBudgetLevel(eMyMoney::Budget::Level level);
 
-    PeriodGroup period(const QDate& date) const;
-    void addPeriod(const QDate& date, PeriodGroup& period);
-    const QMap<QDate, PeriodGroup> getPeriods() const;
-    void clearPeriods();
+        PeriodGroup period(const QDate& date) const;
+        void addPeriod(const QDate& date, PeriodGroup& period);
+        const QMap<QDate, PeriodGroup> getPeriods() const;
+        void clearPeriods();
 
-    MyMoneyMoney balance() const;
-    MyMoneyMoney totalBalance() const;
+        MyMoneyMoney balance() const;
+        MyMoneyMoney totalBalance() const;
 
-    // This member adds the value of another account group
-    // m_budgetlevel is adjusted to the larger one of both
-    // m_budgetsubaccounts remains unaffected
-    AccountGroup operator += (const AccountGroup& right);
+        // This member adds the value of another account group
+        // m_budgetlevel is adjusted to the larger one of both
+        // m_budgetsubaccounts remains unaffected
+        AccountGroup operator += (const AccountGroup& right);
 
-    bool operator == (const AccountGroup &right) const;
+        bool operator == (const AccountGroup &right) const;
 
-    bool isZero() const;
+        bool isZero() const;
 
-  protected:
-    void convertToMonthly();
-    void convertToYearly();
-    void convertToMonthByMonth();
-  };
+    protected:
+        void convertToMonthly();
+        void convertToYearly();
+        void convertToMonthByMonth();
+    };
 
-  /**
-   * This operator tests for equality of two MyMoneyBudget objects
-   */
-  bool operator == (const MyMoneyBudget &) const;
+    /**
+     * This operator tests for equality of two MyMoneyBudget objects
+     */
+    bool operator == (const MyMoneyBudget &) const;
 
-  QString name() const;
-  void setName(const QString& name);
+    QString name() const;
+    void setName(const QString& name);
 
-  QDate budgetStart() const;
-  void setBudgetStart(const QDate& start);
+    QDate budgetStart() const;
+    void setBudgetStart(const QDate& start);
 
-  const AccountGroup & account(const QString &id) const;
-  void setAccount(const AccountGroup& account, const QString &id);
+    const AccountGroup & account(const QString &id) const;
+    void setAccount(const AccountGroup& account, const QString &id);
 
-  bool contains(const QString &id) const;
-  QList<AccountGroup> getaccounts() const;
+    bool contains(const QString &id) const;
+    QList<AccountGroup> getaccounts() const;
 
-  QMap<QString, MyMoneyBudget::AccountGroup> accountsMap() const;
+    QMap<QString, MyMoneyBudget::AccountGroup> accountsMap() const;
 
-  /**
-    * This method checks if a reference to the given object exists. It returns,
-    * a @p true if the object is referencing the one requested by the
-    * parameter @p id and the balance() returned is zero.
-    * If it does not, this method returns @p false.
-    *
-    * @param id id of the object to be checked for references
-    * @retval true This object references object with id @p id.
-    * @retval false This object does not reference the object with id @p id.
-    */
-  bool hasReferenceTo(const QString& id) const override;
+    /**
+      * This method checks if a reference to the given object exists. It returns,
+      * a @p true if the object is referencing the one requested by the
+      * parameter @p id and the balance() returned is zero.
+      * If it does not, this method returns @p false.
+      *
+      * @param id id of the object to be checked for references
+      * @retval true This object references object with id @p id.
+      * @retval false This object does not reference the object with id @p id.
+      */
+    bool hasReferenceTo(const QString& id) const override;
 
-  /**
-   * @copydoc MyMoneyObject::referencedObjects
-   */
-  QSet<QString> referencedObjects() const override;
+    /**
+     * @copydoc MyMoneyObject::referencedObjects
+     */
+    QSet<QString> referencedObjects() const override;
 
-  /**
-    * This member removes all references to object identified by @p id. Used
-    * to remove objects which are about to be removed from the engine.
-    */
-  void removeReference(const QString& id);
+    /**
+      * This member removes all references to object identified by @p id. Used
+      * to remove objects which are about to be removed from the engine.
+      */
+    void removeReference(const QString& id);
 };
 
 inline void swap(MyMoneyBudget::PeriodGroup& first, MyMoneyBudget::PeriodGroup& second) // krazy:exclude=inline
 {
-  using std::swap;
-  swap(first.d_ptr, second.d_ptr);
+    using std::swap;
+    swap(first.d_ptr, second.d_ptr);
 }
 
 inline MyMoneyBudget::PeriodGroup::PeriodGroup(MyMoneyBudget::PeriodGroup && other) : PeriodGroup() // krazy:exclude=inline
 {
-  swap(*this, other);
+    swap(*this, other);
 }
 
 inline MyMoneyBudget::PeriodGroup & MyMoneyBudget::PeriodGroup::operator=(MyMoneyBudget::PeriodGroup other) // krazy:exclude=inline
 {
-  swap(*this, other);
-  return *this;
+    swap(*this, other);
+    return *this;
 }
 
 inline void swap(MyMoneyBudget::AccountGroup& first, MyMoneyBudget::AccountGroup& second) // krazy:exclude=inline
 {
-  using std::swap;
-  swap(first.d_ptr, second.d_ptr);
+    using std::swap;
+    swap(first.d_ptr, second.d_ptr);
 }
 
 inline MyMoneyBudget::AccountGroup::AccountGroup(MyMoneyBudget::AccountGroup && other) : AccountGroup() // krazy:exclude=inline
 {
-  swap(*this, other);
+    swap(*this, other);
 }
 
 inline MyMoneyBudget::AccountGroup & MyMoneyBudget::AccountGroup::operator=(MyMoneyBudget::AccountGroup other) // krazy:exclude=inline
 {
-  swap(*this, other);
-  return *this;
+    swap(*this, other);
+    return *this;
 }
 
 inline void swap(MyMoneyBudget& first, MyMoneyBudget& second) // krazy:exclude=inline
 {
-  using std::swap;
-  swap(first.d_ptr, second.d_ptr);
+    using std::swap;
+    swap(first.d_ptr, second.d_ptr);
 }
 
 inline MyMoneyBudget::MyMoneyBudget(MyMoneyBudget && other) : MyMoneyBudget() // krazy:exclude=inline
 {
-  swap(*this, other);
+    swap(*this, other);
 }
 
 inline MyMoneyBudget & MyMoneyBudget::operator=(MyMoneyBudget other) // krazy:exclude=inline
 {
-  swap(*this, other);
-  return *this;
+    swap(*this, other);
+    return *this;
 }
 
 /**

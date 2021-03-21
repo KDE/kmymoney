@@ -26,20 +26,20 @@ class TocItemReport : public TocItem
 {
 private:
 
-  /** Reference to the MyMoneyReport object. */
-  MyMoneyReport m_report;
+    /** Reference to the MyMoneyReport object. */
+    MyMoneyReport m_report;
 
 public:
 
-  /** Constructor.
-   *
-   * @param parent pointer to the parent QWidget
-   * @param report reference to the report associated with this TOC-entry
-   */
-  TocItemReport(QTreeWidgetItem* parent, MyMoneyReport& report);
+    /** Constructor.
+     *
+     * @param parent pointer to the parent QWidget
+     * @param report reference to the report associated with this TOC-entry
+     */
+    TocItemReport(QTreeWidgetItem* parent, MyMoneyReport& report);
 
-  /** Returns the report associated with this TOC-entry. */
-  MyMoneyReport& getReport();
+    /** Returns the report associated with this TOC-entry. */
+    MyMoneyReport& getReport();
 };
 
 #endif

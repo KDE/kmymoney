@@ -22,19 +22,23 @@
 
 #include "ledgerfilter.h"
 
-namespace eWidgets { namespace eRegister { enum class ItemState; } }
+namespace eWidgets {
+namespace eRegister {
+enum class ItemState;
+}
+}
 
 namespace KMyMoneyRegister
 {
-  /**
-  * Used to filter items from the register.
-  */
-  struct KMM_OLDREGISTER_EXPORT RegisterFilter {
+/**
+* Used to filter items from the register.
+*/
+struct KMM_OLDREGISTER_EXPORT RegisterFilter {
     explicit RegisterFilter(const QString &t, LedgerFilter::State s);
 
     LedgerFilter::State  state;
     QString text;
-  };
+};
 
 } // namespace
 

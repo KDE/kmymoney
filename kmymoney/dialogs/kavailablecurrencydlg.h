@@ -29,20 +29,20 @@ class KTreeWidgetSearchLineWidget;
 class QTreeWidgetItem;
 class KMM_BASE_DIALOGS_EXPORT KAvailableCurrencyDlg : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit KAvailableCurrencyDlg(QWidget *parent = nullptr);
-  ~KAvailableCurrencyDlg();
+    explicit KAvailableCurrencyDlg(QWidget *parent = nullptr);
+    ~KAvailableCurrencyDlg();
 
-  QList<QTreeWidgetItem *> selectedItems() const;
+    QList<QTreeWidgetItem *> selectedItems() const;
 
 protected Q_SLOTS:
-  void slotLoadCurrencies();
-  void slotItemSelectionChanged();
+    void slotLoadCurrencies();
+    void slotItemSelectionChanged();
 
 private:
-  Ui::KAvailableCurrencyDlg*    ui;
-  KTreeWidgetSearchLineWidget*  m_searchWidget;
+    Ui::KAvailableCurrencyDlg*    ui;
+    KTreeWidgetSearchLineWidget*  m_searchWidget;
 };
 
 #endif

@@ -15,28 +15,28 @@ class CurrenciesDlg;
 
 class CurrenciesDlg : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  CurrenciesDlg();
-  ~CurrenciesDlg();
+    CurrenciesDlg();
+    ~CurrenciesDlg();
 
-  Ui::CurrenciesDlg*   ui;
+    Ui::CurrenciesDlg*   ui;
 
-  /**
-  * This method initializes currencies comboboxes.
-  */
-  void             initializeCurrencies(const QString &presetFromCurrency, const QString &presetToCurrency);
+    /**
+    * This method initializes currencies comboboxes.
+    */
+    void             initializeCurrencies(const QString &presetFromCurrency, const QString &presetToCurrency);
 
-  QString          fromCurrency();
-  QString          toCurrency();
-  int              dontAsk();
+    QString          fromCurrency();
+    QString          toCurrency();
+    int              dontAsk();
 
 private:
-  QPushButton*     m_buttonOK;
+    QPushButton*     m_buttonOK;
 
 private Q_SLOTS:
-  void             slotIndexChanged(int index);
+    void             slotIndexChanged(int index);
 };
 
 #endif // CURRENCIESDLG_H

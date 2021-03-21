@@ -24,15 +24,15 @@ class KMyMoneyApp;
 
 namespace KMyMoneyPlugin
 {
-  /**
-  * This class represents the implementation of the
-  * AppInterface.
-  */
-  class KMMAppInterface : public AppInterface
-  {
+/**
+* This class represents the implementation of the
+* AppInterface.
+*/
+class KMMAppInterface : public AppInterface
+{
     Q_OBJECT
 
-  public:
+public:
     explicit KMMAppInterface(KMyMoneyApp* app, QObject* parent, const char* name = 0);
     ~KMMAppInterface() override = default;
 
@@ -56,9 +56,9 @@ namespace KMyMoneyPlugin
     QString readLastUsedDir() const override;
     void consistencyCheck(bool alwaysDisplayResult) override;
 
-  private:
+private:
     KMyMoneyApp* m_app;
-  };
+};
 
 }
 

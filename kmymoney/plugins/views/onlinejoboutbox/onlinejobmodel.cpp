@@ -32,61 +32,65 @@ onlineJobModel::onlineJobModel(QObject *parent) :
     QAbstractTableModel(parent),
     m_jobIdList(QStringList())
 {
-  MyMoneyFile *const file = MyMoneyFile::instance();
-  connect(file, &MyMoneyFile::objectAdded,
-          this, &onlineJobModel::slotObjectAdded);
-  connect(file, &MyMoneyFile::objectModified,
-          this, &onlineJobModel::slotObjectModified);
-  connect(file, &MyMoneyFile::objectRemoved,
-          this, &onlineJobModel::slotObjectRemoved);
+    MyMoneyFile *const file = MyMoneyFile::instance();
+    connect(file, &MyMoneyFile::objectAdded,
+            this, &onlineJobModel::slotObjectAdded);
+    connect(file, &MyMoneyFile::objectModified,
+            this, &onlineJobModel::slotObjectModified);
+    connect(file, &MyMoneyFile::objectRemoved,
+            this, &onlineJobModel::slotObjectRemoved);
 }
 
 void onlineJobModel::load()
 {
-  unload();
-  beginInsertRows(QModelIndex(), 0, 0);
-  foreach (const onlineJob job, MyMoneyFile::instance()->onlineJobList()) {
-    m_jobIdList.append(job.id());
-  }
-  endInsertRows();
+    unload();
+    beginInsertRows(QModelIndex(), 0, 0);
+    foreach (const onlineJob job, MyMoneyFile::instance()->onlineJobList()) {
+        m_jobIdList.append(job.id());
+    }
+    endInsertRows();
 }
 
 void onlineJobModel::unload()
 {
-  if (!m_jobIdList.isEmpty()) {
-    beginResetModel();
-    m_jobIdList.clear();
-    endResetModel();
-  }
+    if (!m_jobIdList.isEmpty()) {
+        beginResetModel();
+        m_jobIdList.clear();
+        endResetModel();
+    }
 }
 
 int onlineJobModel::rowCount(const QModelIndex & parent) const
 {
-  if (parent.isValid())
-    return 0;
-  return m_jobIdList.count();
+    if (parent.isValid())
+        return 0;
+    return m_jobIdList.count();
 }
 
 int onlineJobModel::columnCount(const QModelIndex & parent) const
 {
-  if (parent.isValid())
-    return 0;
-  return 4;
+    if (parent.isValid())
+        return 0;
+    return 4;
 }
 
 QVariant onlineJobModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-  if (role != Qt::DisplayRole)
-    return QVariant();
-  if (orientation == Qt::Horizontal) {
-    switch (section) {
-      case columns::ColAccount: return i18n("Account");
-      case columns::ColAction: return i18n("Action");
-      case columns::ColDestination: return i18n("Destination");
-      case columns::ColValue: return i18n("Value");
+    if (role != Qt::DisplayRole)
+        return QVariant();
+    if (orientation == Qt::Horizontal) {
+        switch (section) {
+        case columns::ColAccount:
+            return i18n("Account");
+        case columns::ColAction:
+            return i18n("Action");
+        case columns::ColDestination:
+            return i18n("Destination");
+        case columns::ColValue:
+            return i18n("Value");
+        }
     }
-  }
-  return QVariant();
+    return QVariant();
 }
 
 /**
@@ -95,106 +99,115 @@ QVariant onlineJobModel::headerData(int section, Qt::Orientation orientation, in
  */
 QVariant onlineJobModel::data(const QModelIndex & index, int role) const
 {
-  if (index.parent().isValid())
-    return QVariant();
+    if (index.parent().isValid())
+        return QVariant();
 
-  Q_ASSERT(m_jobIdList.length() > index.row());
-  onlineJob job;
+    Q_ASSERT(m_jobIdList.length() > index.row());
+    onlineJob job;
 
-  try {
-    job = MyMoneyFile::instance()->getOnlineJob(m_jobIdList[index.row()]);
-  } catch (const MyMoneyException &) {
-    return QVariant();
-  }
-
-  // id of MyMoneyObject
-  if (role == roles::OnlineJobId)
-    return QVariant::fromValue(job.id());
-  else if (role == roles::OnlineJobRole)
-    return QVariant::fromValue(job);
-
-  // If job is null, display an error message and exit
-  if (job.isNull()) {
-    if (index.column() == columns::ColAction) {
-      switch (role) {
-        case Qt::DisplayRole: return i18n("Not able to display this job.");
-        case Qt::ToolTipRole: return i18n("Could not find a plugin to display this job or it does not contain any data.");
-      }
-    }
-    return QVariant();
-  }
-
-  // Show general information
-  if (index.column() == columns::ColAccount) {
-    // Account column
-    if (role == Qt::DisplayRole) {
-      return QVariant::fromValue(job.responsibleMyMoneyAccount().name());
-    } else if (role == Qt::DecorationRole) {
-      if (job.isLocked())
-        return Icons::get(Icon::TaskOngoing);
-
-      switch (job.bankAnswerState()) {
-        case eMyMoney::OnlineJob::sendingState::acceptedByBank: return Icons::get(Icon::TaskComplete);
-        case eMyMoney::OnlineJob::sendingState::sendingError:
-        case eMyMoney::OnlineJob::sendingState::abortedByUser:
-        case eMyMoney::OnlineJob::sendingState::rejectedByBank: return Icons::get(Icon::TaskReject);
-        case eMyMoney::OnlineJob::sendingState::noBankAnswer: break;
-      }
-      if (job.sendDate().isValid()) {
-        return Icons::get(Icon::TaskAccepted);
-      } else if (!job.isValid()) {
-        return Icons::get(Icon::DialogWarning);
-      }
-    } else if (role == Qt::ToolTipRole) {
-      if (job.isLocked())
-        return i18n("Job is being processed at the moment.");
-
-      switch (job.bankAnswerState()) {
-        case eMyMoney::OnlineJob::sendingState::acceptedByBank: return i18nc("Arg 1 is a date/time", "This job was accepted by the bank on %1.", job.bankAnswerDate().toString(Qt::DefaultLocaleShortDate));
-        case eMyMoney::OnlineJob::sendingState::sendingError: return i18nc("Arg 1 is a date/time", "Sending this job failed (tried on %1).", job.sendDate().toString(Qt::DefaultLocaleShortDate));
-        case eMyMoney::OnlineJob::sendingState::abortedByUser: return i18n("Sending this job was manually aborted.");
-        case eMyMoney::OnlineJob::sendingState::rejectedByBank: return i18nc("Arg 1 is a date/time", "The bank rejected this job on %1.", job.bankAnswerDate().toString(Qt::DefaultLocaleShortDate));
-        case eMyMoney::OnlineJob::sendingState::noBankAnswer:
-          if (job.sendDate().isValid())
-            return i18nc("Arg 1 is a date/time", "The bank accepted this job on %1.", job.sendDate().toString(Qt::DefaultLocaleShortDate));
-          else if (!job.isValid())
-            return i18n("This job needs further editing and cannot be sent therefore.");
-          else
-            return i18n("This job is ready for sending.");
-      }
+    try {
+        job = MyMoneyFile::instance()->getOnlineJob(m_jobIdList[index.row()]);
+    } catch (const MyMoneyException &) {
+        return QVariant();
     }
 
-    return QVariant();
-  } else if (index.column() == columns::ColAction) {
-    if (role == Qt::DisplayRole)
-      return QVariant::fromValue(job.task()->jobTypeName());
-    return QVariant();
-  }
+    // id of MyMoneyObject
+    if (role == roles::OnlineJobId)
+        return QVariant::fromValue(job.id());
+    else if (role == roles::OnlineJobRole)
+        return QVariant::fromValue(job);
 
-  // Show credit transfer data
-  try {
-    onlineJobTyped<creditTransfer> transfer(job);
-
-    if (index.column() == columns::ColValue) {
-      if (role == Qt::DisplayRole)
-        return QVariant::fromValue(MyMoneyUtils::formatMoney(transfer.task()->value(), transfer.task()->currency()));
-      if (role == Qt::TextAlignmentRole)
-        return int (Qt::AlignVCenter | Qt::AlignRight);
-    } else if (index.column() == columns::ColDestination) {
-      if (role == Qt::DisplayRole) {
-        const payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBic(transfer.constTask()->beneficiary());
-        return QVariant(ibanBic->ownerName());
-      }
+    // If job is null, display an error message and exit
+    if (job.isNull()) {
+        if (index.column() == columns::ColAction) {
+            switch (role) {
+            case Qt::DisplayRole:
+                return i18n("Not able to display this job.");
+            case Qt::ToolTipRole:
+                return i18n("Could not find a plugin to display this job or it does not contain any data.");
+            }
+        }
+        return QVariant();
     }
-  } catch (const MyMoneyException &) {
-  }
 
-  return QVariant();
+    // Show general information
+    if (index.column() == columns::ColAccount) {
+        // Account column
+        if (role == Qt::DisplayRole) {
+            return QVariant::fromValue(job.responsibleMyMoneyAccount().name());
+        } else if (role == Qt::DecorationRole) {
+            if (job.isLocked())
+                return Icons::get(Icon::TaskOngoing);
+
+            switch (job.bankAnswerState()) {
+            case eMyMoney::OnlineJob::sendingState::acceptedByBank:
+                return Icons::get(Icon::TaskComplete);
+            case eMyMoney::OnlineJob::sendingState::sendingError:
+            case eMyMoney::OnlineJob::sendingState::abortedByUser:
+            case eMyMoney::OnlineJob::sendingState::rejectedByBank:
+                return Icons::get(Icon::TaskReject);
+            case eMyMoney::OnlineJob::sendingState::noBankAnswer:
+                break;
+            }
+            if (job.sendDate().isValid()) {
+                return Icons::get(Icon::TaskAccepted);
+            } else if (!job.isValid()) {
+                return Icons::get(Icon::DialogWarning);
+            }
+        } else if (role == Qt::ToolTipRole) {
+            if (job.isLocked())
+                return i18n("Job is being processed at the moment.");
+
+            switch (job.bankAnswerState()) {
+            case eMyMoney::OnlineJob::sendingState::acceptedByBank:
+                return i18nc("Arg 1 is a date/time", "This job was accepted by the bank on %1.", job.bankAnswerDate().toString(Qt::DefaultLocaleShortDate));
+            case eMyMoney::OnlineJob::sendingState::sendingError:
+                return i18nc("Arg 1 is a date/time", "Sending this job failed (tried on %1).", job.sendDate().toString(Qt::DefaultLocaleShortDate));
+            case eMyMoney::OnlineJob::sendingState::abortedByUser:
+                return i18n("Sending this job was manually aborted.");
+            case eMyMoney::OnlineJob::sendingState::rejectedByBank:
+                return i18nc("Arg 1 is a date/time", "The bank rejected this job on %1.", job.bankAnswerDate().toString(Qt::DefaultLocaleShortDate));
+            case eMyMoney::OnlineJob::sendingState::noBankAnswer:
+                if (job.sendDate().isValid())
+                    return i18nc("Arg 1 is a date/time", "The bank accepted this job on %1.", job.sendDate().toString(Qt::DefaultLocaleShortDate));
+                else if (!job.isValid())
+                    return i18n("This job needs further editing and cannot be sent therefore.");
+                else
+                    return i18n("This job is ready for sending.");
+            }
+        }
+
+        return QVariant();
+    } else if (index.column() == columns::ColAction) {
+        if (role == Qt::DisplayRole)
+            return QVariant::fromValue(job.task()->jobTypeName());
+        return QVariant();
+    }
+
+    // Show credit transfer data
+    try {
+        onlineJobTyped<creditTransfer> transfer(job);
+
+        if (index.column() == columns::ColValue) {
+            if (role == Qt::DisplayRole)
+                return QVariant::fromValue(MyMoneyUtils::formatMoney(transfer.task()->value(), transfer.task()->currency()));
+            if (role == Qt::TextAlignmentRole)
+                return int (Qt::AlignVCenter | Qt::AlignRight);
+        } else if (index.column() == columns::ColDestination) {
+            if (role == Qt::DisplayRole) {
+                const payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBic(transfer.constTask()->beneficiary());
+                return QVariant(ibanBic->ownerName());
+            }
+        }
+    } catch (const MyMoneyException &) {
+    }
+
+    return QVariant();
 }
 
 void onlineJobModel::reloadAll()
 {
-  emit dataChanged(index(rowCount() - 1, 0), index(rowCount() - 1, columnCount() - 1));
+    emit dataChanged(index(rowCount() - 1, 0), index(rowCount() - 1, columnCount() - 1));
 }
 
 /**
@@ -202,16 +215,16 @@ void onlineJobModel::reloadAll()
  */
 bool onlineJobModel::removeRow(int row, const QModelIndex& parent)
 {
-  if (parent.isValid())
-    return false;
+    if (parent.isValid())
+        return false;
 
-  Q_ASSERT(m_jobIdList.count() < row);
-  MyMoneyFile* file = MyMoneyFile::instance();
-  MyMoneyFileTransaction transaction;
-  const onlineJob job = file->getOnlineJob(m_jobIdList[row]);
-  file->removeOnlineJob(job);
-  transaction.commit();
-  return true;
+    Q_ASSERT(m_jobIdList.count() < row);
+    MyMoneyFile* file = MyMoneyFile::instance();
+    MyMoneyFileTransaction transaction;
+    const onlineJob job = file->getOnlineJob(m_jobIdList[row]);
+    file->removeOnlineJob(job);
+    transaction.commit();
+    return true;
 }
 
 /**
@@ -219,50 +232,50 @@ bool onlineJobModel::removeRow(int row, const QModelIndex& parent)
  */
 bool onlineJobModel::removeRows(int row, int count, const QModelIndex & parent)
 {
-  if (parent.isValid())
-    return false;
+    if (parent.isValid())
+        return false;
 
-  Q_ASSERT(m_jobIdList.count() > row);
-  Q_ASSERT(m_jobIdList.count() >= (row + count));
+    Q_ASSERT(m_jobIdList.count() > row);
+    Q_ASSERT(m_jobIdList.count() >= (row + count));
 
-  MyMoneyFile* file = MyMoneyFile::instance();
-  MyMoneyFileTransaction transaction;
-  for (int i = 0; i < count; ++i) {
-    const onlineJob job = file->getOnlineJob(m_jobIdList[row+i]);
-    file->removeOnlineJob(job);
-  }
-  transaction.commit();
-  return true;
+    MyMoneyFile* file = MyMoneyFile::instance();
+    MyMoneyFileTransaction transaction;
+    for (int i = 0; i < count; ++i) {
+        const onlineJob job = file->getOnlineJob(m_jobIdList[row+i]);
+        file->removeOnlineJob(job);
+    }
+    transaction.commit();
+    return true;
 }
 
 void onlineJobModel::slotObjectAdded(eMyMoney::File::Object objType, const QString& id)
 {
-  if (Q_LIKELY(objType != eMyMoney::File::Object::OnlineJob))
-    return;
-  beginInsertRows(QModelIndex(), rowCount(), rowCount());
-  m_jobIdList.append(id);
-  endInsertRows();
+    if (Q_LIKELY(objType != eMyMoney::File::Object::OnlineJob))
+        return;
+    beginInsertRows(QModelIndex(), rowCount(), rowCount());
+    m_jobIdList.append(id);
+    endInsertRows();
 }
 
 void onlineJobModel::slotObjectModified(eMyMoney::File::Object objType, const QString& id)
 {
-  if (Q_LIKELY(objType != eMyMoney::File::Object::OnlineJob))
-    return;
+    if (Q_LIKELY(objType != eMyMoney::File::Object::OnlineJob))
+        return;
 
-  int row = m_jobIdList.indexOf(id);
-  if (row != -1)
-    emit dataChanged(index(row, 0), index(row, columnCount() - 1));
+    int row = m_jobIdList.indexOf(id);
+    if (row != -1)
+        emit dataChanged(index(row, 0), index(row, columnCount() - 1));
 }
 
 void onlineJobModel::slotObjectRemoved(eMyMoney::File::Object objType, const QString& id)
 {
-  if (Q_LIKELY(objType != eMyMoney::File::Object::OnlineJob))
-    return;
+    if (Q_LIKELY(objType != eMyMoney::File::Object::OnlineJob))
+        return;
 
-  int row = m_jobIdList.indexOf(id);
-  if (row != -1) {
-    m_jobIdList.removeAll(id);
-    beginRemoveRows(QModelIndex(), row, row);
-    endRemoveRows();
-  }
+    int row = m_jobIdList.indexOf(id);
+    if (row != -1) {
+        m_jobIdList.removeAll(id);
+        beginRemoveRows(QModelIndex(), row, row);
+        endRemoveRows();
+    }
 }

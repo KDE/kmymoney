@@ -15,11 +15,11 @@
 class MyMoneyInvestTransaction : public MyMoneyTransaction
 {
 public:
-  MyMoneyInvestTransaction();
-  MyMoneyInvestTransaction(MyMoneyAccount *parent, const long id, transactionMethod method, const QString& number, const QString& memo,
-                           const MyMoneyMoney& amount, const QDate& date, const QString& categoryMajor, const QString& categoryMinor, const QString& atmName,
-                           const QString& fromTo, const QString& bankFrom, const QString& bankTo, stateE state);
-  ~MyMoneyInvestTransaction();
+    MyMoneyInvestTransaction();
+    MyMoneyInvestTransaction(MyMoneyAccount *parent, const long id, transactionMethod method, const QString& number, const QString& memo,
+                             const MyMoneyMoney& amount, const QDate& date, const QString& categoryMajor, const QString& categoryMinor, const QString& atmName,
+                             const QString& fromTo, const QString& bankFrom, const QString& bankTo, stateE state);
+    ~MyMoneyInvestTransaction();
 };
 #endif
 

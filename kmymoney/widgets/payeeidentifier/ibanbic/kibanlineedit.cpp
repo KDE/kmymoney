@@ -11,11 +11,11 @@
 KIbanLineEdit::KIbanLineEdit(QWidget* parent)
     : KLineEdit(parent)
 {
-  ibanValidator *const validatorPtr = new ibanValidator;
-  setValidator(validatorPtr);
+    ibanValidator *const validatorPtr = new ibanValidator;
+    setValidator(validatorPtr);
 }
 
 const ibanValidator* KIbanLineEdit::validator() const
 {
-  return qobject_cast<const ibanValidator*>(KLineEdit::validator());
+    return qobject_cast<const ibanValidator*>(KLineEdit::validator());
 }

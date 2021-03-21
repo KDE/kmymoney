@@ -23,10 +23,10 @@ using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;
 
 StdTransactionScheduled::StdTransactionScheduled(Register *parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId) :
-  StdTransaction(parent, transaction, split, uniqueId)
+    StdTransaction(parent, transaction, split, uniqueId)
 {
-  // setup initial size
-  setNumRowsRegister(numRowsRegister(KMyMoneySettings::showRegisterDetailed()));
+    // setup initial size
+    setNumRowsRegister(numRowsRegister(KMyMoneySettings::showRegisterDetailed()));
 }
 
 StdTransactionScheduled::~StdTransactionScheduled()
@@ -35,34 +35,34 @@ StdTransactionScheduled::~StdTransactionScheduled()
 
 const char* StdTransactionScheduled::className()
 {
-  return "StdTransactionScheduled";
+    return "StdTransactionScheduled";
 }
 
 bool StdTransactionScheduled::paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index)
 {
-  auto rc = Transaction::paintRegisterCellSetup(painter, option, index);
-  option.palette.setCurrentColorGroup(QPalette::Disabled);
-  return rc;
+    auto rc = Transaction::paintRegisterCellSetup(painter, option, index);
+    option.palette.setCurrentColorGroup(QPalette::Disabled);
+    return rc;
 }
 
 bool StdTransactionScheduled::isSelectable() const
 {
-  return true;
+    return true;
 }
 
 bool StdTransactionScheduled::canHaveFocus() const
 {
-  return true;
+    return true;
 }
 
 bool StdTransactionScheduled::isScheduled() const
 {
-  return true;
+    return true;
 }
 
 int StdTransactionScheduled::sortSamePostDate() const
 {
-  return 4;
+    return 4;
 }
 
 

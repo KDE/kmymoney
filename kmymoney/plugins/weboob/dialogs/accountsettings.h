@@ -25,19 +25,19 @@ class MyMoneyKeyValueContainer;
 class AccountSettingsPrivate;
 class AccountSettings: public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit AccountSettings(const MyMoneyAccount& acc, QWidget* parent);
-  ~AccountSettings();
+    explicit AccountSettings(const MyMoneyAccount& acc, QWidget* parent);
+    ~AccountSettings();
 
-  void loadUi(const MyMoneyKeyValueContainer& kvp);
+    void loadUi(const MyMoneyKeyValueContainer& kvp);
 
-  void loadKvp(MyMoneyKeyValueContainer& kvp);
+    void loadKvp(MyMoneyKeyValueContainer& kvp);
 private:
 
-  Q_DECLARE_PRIVATE(AccountSettings)
-  AccountSettingsPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(AccountSettings)
+    AccountSettingsPrivate * const d_ptr;
 };
 
 

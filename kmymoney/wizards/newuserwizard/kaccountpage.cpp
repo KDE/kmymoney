@@ -32,38 +32,38 @@
 
 namespace NewUserWizard
 {
-  AccountPage::AccountPage(Wizard* wizard) :
+AccountPage::AccountPage(Wizard* wizard) :
     QWidget(wizard),
     WizardPage<Wizard>(*new AccountPagePrivate(wizard), stepCount, this, wizard)       // don't inc. the step count here
-  {
+{
     Q_D(AccountPage);
     d->ui->setupUi(this);
     d->m_mandatoryGroup->add(d->ui->m_accountNameEdit);
     connect(d->m_mandatoryGroup, static_cast<void (KMandatoryFieldGroup::*)()>(&KMandatoryFieldGroup::stateChanged), object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
     connect(d->ui->m_haveCheckingAccountButton, &QAbstractButton::toggled, object(), &KMyMoneyWizardPagePrivate::completeStateChanged);
     d->ui->m_openingDateEdit->setDate(QDate(QDate::currentDate().year(), 1, 1));
-  }
+}
 
-  AccountPage::~AccountPage()
-  {
-  }
+AccountPage::~AccountPage()
+{
+}
 
-  void AccountPage::enterPage()
-  {
+void AccountPage::enterPage()
+{
     Q_D(AccountPage);
     d->ui->m_accountNameEdit->setFocus();
-  }
+}
 
-  KMyMoneyWizardPage* AccountPage::nextPage() const
-  {
+KMyMoneyWizardPage* AccountPage::nextPage() const
+{
     Q_D(const AccountPage);
     return d->m_wizard->d_func()->m_categoriesPage;
-  }
+}
 
-  bool AccountPage::isComplete() const
-  {
+bool AccountPage::isComplete() const
+{
     Q_D(const AccountPage);
     return !d->ui->m_haveCheckingAccountButton->isChecked() || d->m_mandatoryGroup->isEnabled();
-  }
+}
 
 }

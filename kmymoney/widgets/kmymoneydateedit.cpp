@@ -19,6 +19,6 @@ const QDate INVALID_DATE = QDate(1800, 1, 1);
 
 
 KMyMoneyDateEdit::KMyMoneyDateEdit(QWidget* parent)
-  : QDateEdit(parent)
+    : QDateEdit(parent)
 {
 }

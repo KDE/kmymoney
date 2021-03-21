@@ -100,66 +100,66 @@ class QDomElement;
 class ONLINETASK_INTERFACES_EXPORT onlineTask
 {
 public:
-  ONLINETASK_META_BASE(onlineTask, "org.kmymoney.onlineTask", /* no attribute here */);
-  onlineTask();
-  virtual ~onlineTask() {}
+    ONLINETASK_META_BASE(onlineTask, "org.kmymoney.onlineTask", /* no attribute here */);
+    onlineTask();
+    virtual ~onlineTask() {}
 
-  /**
-   * @brief Checks if the task is ready for sending
-   */
-  virtual bool isValid() const = 0;
+    /**
+     * @brief Checks if the task is ready for sending
+     */
+    virtual bool isValid() const = 0;
 
-  /**
-   * @brief Human readable type-name
-   */
-  virtual QString jobTypeName() const = 0;
+    /**
+     * @brief Human readable type-name
+     */
+    virtual QString jobTypeName() const = 0;
 
-  /** @see MyMoneyObject::writeXML() */
-  virtual void writeXML(QDomDocument &document, QDomElement &parent) const = 0;
+    /** @see MyMoneyObject::writeXML() */
+    virtual void writeXML(QDomDocument &document, QDomElement &parent) const = 0;
 
 protected:
-  onlineTask(const onlineTask& other);
+    onlineTask(const onlineTask& other);
 
-  /**
-   * @brief Copy this instance including inherited information
-   *
-   * This method copies an onlineJob including all information which are stored in inherited classes
-   * even if you do not know the final type of an reference or pointer.
-   */
-  virtual onlineTask* clone() const = 0;
+    /**
+     * @brief Copy this instance including inherited information
+     *
+     * This method copies an onlineJob including all information which are stored in inherited classes
+     * even if you do not know the final type of an reference or pointer.
+     */
+    virtual onlineTask* clone() const = 0;
 
-  /** @see MyMoneyObject::hasReferenceTo() */
-  virtual bool hasReferenceTo(const QString &id) const = 0;
+    /** @see MyMoneyObject::hasReferenceTo() */
+    virtual bool hasReferenceTo(const QString &id) const = 0;
 
-  /**
-   * @copydoc MyMoneyObject::referencedObjects
-   */
-  virtual QSet<QString> referencedObjects() const = 0;
+    /**
+     * @copydoc MyMoneyObject::referencedObjects
+     */
+    virtual QSet<QString> referencedObjects() const = 0;
 
-  /**
-   * @brief Create a new instance of this task based on xml data
-   *
-   * This method is used to load an onlineTask from a xml file.
-   *
-   * This method is created const as it should create a @emph new onlineTask.
-   * @return A pointer to a new instance, caller takes ownership
-   */
-  virtual onlineTask* createFromXml(const QDomElement &element) const = 0;
+    /**
+     * @brief Create a new instance of this task based on xml data
+     *
+     * This method is used to load an onlineTask from a xml file.
+     *
+     * This method is created const as it should create a @emph new onlineTask.
+     * @return A pointer to a new instance, caller takes ownership
+     */
+    virtual onlineTask* createFromXml(const QDomElement &element) const = 0;
 
-  /**
-   * @brief Account this job is related to
-   *
-   * Each task must have an account on which it operates. This is used to determine
-   * the correct onlinePlugin which can execute this job. If the job is related to more
-   * than one account (e.g. a password change) select a random one.
-   *
-   * You can make this method public if it is useful for you.
-   *
-   * @return accountId
-   */
-  virtual QString responsibleAccount() const = 0;
+    /**
+     * @brief Account this job is related to
+     *
+     * Each task must have an account on which it operates. This is used to determine
+     * the correct onlinePlugin which can execute this job. If the job is related to more
+     * than one account (e.g. a password change) select a random one.
+     *
+     * You can make this method public if it is useful for you.
+     *
+     * @return accountId
+     */
+    virtual QString responsibleAccount() const = 0;
 
-  friend class onlineJob;
+    friend class onlineJob;
 };
 
 Q_DECLARE_INTERFACE(onlineTask, "org.kmymoney.onlinetask");

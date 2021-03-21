@@ -17,38 +17,38 @@
 
 class MyMoneyXmlContentHandlerTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 private Q_SLOTS:
-  void init();
-  void cleanup();
-  void readMyMoneyObject();
-  void readKeyValueContainer();
-  void writeKeyValueContainer();
-  void readTransaction();
-  void readTransactionEx();
-  void writeTransaction();
-  void readSplit();
-  void writeSplit();
-  void testReplaceIDinSplit();
-  void readAccount();
-  void writeAccount();
-  void readWritePayee();
-  void readWriteTag();
-  void readInstitution();
-  void writeInstitution();
-  void readSchedule();
-  void writeSchedule();
-  void testOverdue();
-  void testNextPayment();
-  void testNextPaymentOnLastDayOfMonth();
-  void testPaymentDates();
-  void testHasReferenceTo();
-  void testPaidEarlyOneTime();
-  void testReplaceId();
+    void init();
+    void cleanup();
+    void readMyMoneyObject();
+    void readKeyValueContainer();
+    void writeKeyValueContainer();
+    void readTransaction();
+    void readTransactionEx();
+    void writeTransaction();
+    void readSplit();
+    void writeSplit();
+    void testReplaceIDinSplit();
+    void readAccount();
+    void writeAccount();
+    void readWritePayee();
+    void readWriteTag();
+    void readInstitution();
+    void writeInstitution();
+    void readSchedule();
+    void writeSchedule();
+    void testOverdue();
+    void testNextPayment();
+    void testNextPaymentOnLastDayOfMonth();
+    void testPaymentDates();
+    void testHasReferenceTo();
+    void testPaidEarlyOneTime();
+    void testReplaceId();
 
 private:
-  void setupAccounts();
+    void setupAccounts();
 };
 
 #endif

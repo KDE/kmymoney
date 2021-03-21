@@ -26,45 +26,45 @@ class KMyMoneyLineEdit;
 class KMyMoneyComboPrivate
 {
 public:
-  KMyMoneyComboPrivate() :
-    m_completion(nullptr),
-    m_edit(nullptr),
-    m_canCreateObjects(false),
-    m_inFocusOutEvent(false)
-  {
-  }
+    KMyMoneyComboPrivate() :
+        m_completion(nullptr),
+        m_edit(nullptr),
+        m_canCreateObjects(false),
+        m_inFocusOutEvent(false)
+    {
+    }
 
-  virtual ~KMyMoneyComboPrivate()
-  {
-  }
+    virtual ~KMyMoneyComboPrivate()
+    {
+    }
 
-  /**
-    * This member keeps a pointer to the object's completion object
-    */
-  KMyMoneyCompletion*    m_completion;
+    /**
+      * This member keeps a pointer to the object's completion object
+      */
+    KMyMoneyCompletion*    m_completion;
 
-  /**
-    * Use our own line edit to provide hint functionality
-    */
-  KMyMoneyLineEdit*      m_edit;
+    /**
+      * Use our own line edit to provide hint functionality
+      */
+    KMyMoneyLineEdit*      m_edit;
 
-  /**
-    * The currently selected item
-    */
-  QString                m_id;
+    /**
+      * The currently selected item
+      */
+    QString                m_id;
 
-  QTimer                 m_timer;
-  QMutex                 m_focusMutex;
-  /**
-    * Flag to control object creation. Use setSuppressObjectCreation()
-    * to modify it's setting. Defaults to @a false.
-    */
-  bool                   m_canCreateObjects;
+    QTimer                 m_timer;
+    QMutex                 m_focusMutex;
+    /**
+      * Flag to control object creation. Use setSuppressObjectCreation()
+      * to modify it's setting. Defaults to @a false.
+      */
+    bool                   m_canCreateObjects;
 
-  /**
-    * Flag to check whether a focusOutEvent processing is underway or not
-    */
-  bool                   m_inFocusOutEvent;
+    /**
+      * Flag to check whether a focusOutEvent processing is underway or not
+      */
+    bool                   m_inFocusOutEvent;
 };
 
 #endif

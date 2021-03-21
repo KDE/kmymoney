@@ -43,14 +43,14 @@ class MyMoneyPayee;
   */
 class KMM_BASE_WIDGETS_EXPORT KMyMoneyPayeeCombo : public KMyMoneyMVCCombo
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyPayeeCombo)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyPayeeCombo)
 
 public:
-  explicit KMyMoneyPayeeCombo(QWidget* parent = nullptr);
-  ~KMyMoneyPayeeCombo() override;
+    explicit KMyMoneyPayeeCombo(QWidget* parent = nullptr);
+    ~KMyMoneyPayeeCombo() override;
 
-  void loadPayees(const QList<MyMoneyPayee>& list);
+    void loadPayees(const QList<MyMoneyPayee>& list);
 };
 
 #endif

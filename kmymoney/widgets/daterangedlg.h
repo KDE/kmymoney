@@ -20,52 +20,56 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace eMyMoney { namespace TransactionFilter { enum class Date; } }
+namespace eMyMoney {
+namespace TransactionFilter {
+enum class Date;
+}
+}
 
 class DateRangeDlgPrivate;
 class KMM_WIDGETS_EXPORT DateRangeDlg : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(DateRangeDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(DateRangeDlg)
 
 public:
-  explicit DateRangeDlg(QWidget* parent = nullptr);
-  ~DateRangeDlg();
+    explicit DateRangeDlg(QWidget* parent = nullptr);
+    ~DateRangeDlg();
 
-  /*!
-   * Setup a sliding date range which is relative to the
-   * current date (sliding date range)
-   */
-  void setDateRange(eMyMoney::TransactionFilter::Date);
+    /*!
+     * Setup a sliding date range which is relative to the
+     * current date (sliding date range)
+     */
+    void setDateRange(eMyMoney::TransactionFilter::Date);
 
-  /*!
-   * Setup a fixed user selected date range (does not slide)
-   */
-  void setDateRange(const QDate& from, const QDate& to);
+    /*!
+     * Setup a fixed user selected date range (does not slide)
+     */
+    void setDateRange(const QDate& from, const QDate& to);
 
-  /*!
-   * Return the currently selected date range option
-   */
-  eMyMoney::TransactionFilter::Date dateRange() const;
+    /*!
+     * Return the currently selected date range option
+     */
+    eMyMoney::TransactionFilter::Date dateRange() const;
 
-  QDate fromDate() const;
-  QDate toDate() const;
+    QDate fromDate() const;
+    QDate toDate() const;
 
 public Q_SLOTS:
-  void slotReset();
-  void slotDateRangeSelectedByUser();
-  void slotDateChanged();
+    void slotReset();
+    void slotDateRangeSelectedByUser();
+    void slotDateChanged();
 
 Q_SIGNALS:
-  /*!
-   * The rangeChanged() signal is emitted whenever a range
-   * is changed (user interaction or call to setDateRange() )
-   */
-  void rangeChanged();
+    /*!
+     * The rangeChanged() signal is emitted whenever a range
+     * is changed (user interaction or call to setDateRange() )
+     */
+    void rangeChanged();
 
 private:
-  DateRangeDlgPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(DateRangeDlg)
+    DateRangeDlgPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(DateRangeDlg)
 };
 
 #endif

@@ -25,16 +25,16 @@ class MyMoneyMoney;
 
 class AccountDelegate : public QStyledItemDelegate
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit AccountDelegate(QObject* parent = 0);
-  virtual ~AccountDelegate();
+    explicit AccountDelegate(QObject* parent = 0);
+    virtual ~AccountDelegate();
 
-  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
+    void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
 
 private:
-  class Private;
-  Private * const d;
+    class Private;
+    Private * const d;
 };
 
 #endif // ACCOUNTDELEGATE_H

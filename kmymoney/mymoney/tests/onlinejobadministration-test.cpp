@@ -18,43 +18,43 @@
 QTEST_GUILESS_MAIN(onlineJobAdministrationTest)
 
 onlineJobAdministrationTest::onlineJobAdministrationTest()
-  : file(nullptr)
+    : file(nullptr)
 {
 }
 
 void onlineJobAdministrationTest::setupBaseCurrency()
 {
-  file = MyMoneyFile::instance();
+    file = MyMoneyFile::instance();
 
-  MyMoneySecurity base("EUR", "Euro", QChar(0x20ac));
-  MyMoneyFileTransaction ft;
-  try {
-    file->currency(base.id());
-  } catch (const MyMoneyException &e) {
-    file->addCurrency(base);
-  }
-  file->setBaseCurrency(base);
-  ft.commit();
+    MyMoneySecurity base("EUR", "Euro", QChar(0x20ac));
+    MyMoneyFileTransaction ft;
+    try {
+        file->currency(base.id());
+    } catch (const MyMoneyException &e) {
+        file->addCurrency(base);
+    }
+    file->setBaseCurrency(base);
+    ft.commit();
 }
 
 
 void onlineJobAdministrationTest::initTestCase()
 {
-  setupBaseCurrency();
-  file = MyMoneyFile::instance();
+    setupBaseCurrency();
+    file = MyMoneyFile::instance();
 
-  try {
-    MyMoneyAccount account = MyMoneyAccount();
-    account.setName("Test Account");
-    account.setAccountType(eMyMoney::Account::Type::Savings);
-    MyMoneyAccount asset = file->asset();
-    MyMoneyFileTransaction transaction;
-    file->addAccount(account , asset);
-    accountId = account.id();
-    transaction.commit();
-  } catch (const MyMoneyException &ex) {
-    QFAIL(qPrintable(QString::fromLatin1("Unexpected exception %1").arg(ex.what())));
-  }
+    try {
+        MyMoneyAccount account = MyMoneyAccount();
+        account.setName("Test Account");
+        account.setAccountType(eMyMoney::Account::Type::Savings);
+        MyMoneyAccount asset = file->asset();
+        MyMoneyFileTransaction transaction;
+        file->addAccount(account, asset);
+        accountId = account.id();
+        transaction.commit();
+    } catch (const MyMoneyException &ex) {
+        QFAIL(qPrintable(QString::fromLatin1("Unexpected exception %1").arg(ex.what())));
+    }
 }
 
 void onlineJobAdministrationTest::cleanupTestCase()
@@ -63,8 +63,8 @@ void onlineJobAdministrationTest::cleanupTestCase()
 
 void onlineJobAdministrationTest::init()
 {
-  qDeleteAll(onlineJobAdministration::instance()->m_onlineTasks);
-  onlineJobAdministration::instance()->m_onlineTasks.clear();
+    qDeleteAll(onlineJobAdministration::instance()->m_onlineTasks);
+    onlineJobAdministration::instance()->m_onlineTasks.clear();
 }
 
 void onlineJobAdministrationTest::getSettings()
@@ -73,8 +73,8 @@ void onlineJobAdministrationTest::getSettings()
 
 void onlineJobAdministrationTest::registerOnlineTask()
 {
-  dummyTask *task = new dummyTask;
-  onlineJobAdministration::instance()->registerOnlineTask(task);
-  QCOMPARE(onlineJobAdministration::instance()->m_onlineTasks.count(), 1);
-  QVERIFY(onlineJobAdministration::instance()->m_onlineTasks.value(task->taskName()));
+    dummyTask *task = new dummyTask;
+    onlineJobAdministration::instance()->registerOnlineTask(task);
+    QCOMPARE(onlineJobAdministration::instance()->m_onlineTasks.count(), 1);
+    QVERIFY(onlineJobAdministration::instance()->m_onlineTasks.value(task->taskName()));
 }

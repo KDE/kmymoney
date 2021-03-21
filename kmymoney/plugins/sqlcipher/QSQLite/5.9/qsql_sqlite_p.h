@@ -50,11 +50,11 @@ public:
     ~QSQLiteDriver();
     bool hasFeature(DriverFeature f) const Q_DECL_OVERRIDE;
     bool open(const QString & db,
-                   const QString & user,
-                   const QString & password,
-                   const QString & host,
-                   int port,
-                   const QString & connOpts) Q_DECL_OVERRIDE;
+              const QString & user,
+              const QString & password,
+              const QString & host,
+              int port,
+              const QString & connOpts) Q_DECL_OVERRIDE;
     void close() Q_DECL_OVERRIDE;
     QSqlResult *createResult() const Q_DECL_OVERRIDE;
     bool beginTransaction() Q_DECL_OVERRIDE;

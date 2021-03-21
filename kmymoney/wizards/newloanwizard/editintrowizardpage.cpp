@@ -19,13 +19,13 @@
 #include "ui_editintrowizardpage.h"
 
 EditIntroWizardPage::EditIntroWizardPage(QWidget *parent)
-  : QWizardPage(parent),
-    ui(new Ui::EditIntroWizardPage)
+    : QWizardPage(parent),
+      ui(new Ui::EditIntroWizardPage)
 {
-  ui->setupUi(this);
+    ui->setupUi(this);
 }
 
 EditIntroWizardPage::~EditIntroWizardPage()
 {
-  delete ui;
+    delete ui;
 }

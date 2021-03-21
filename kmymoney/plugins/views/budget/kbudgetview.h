@@ -34,11 +34,13 @@ class MyMoneyMoney;
 class SelectedObjects;
 
 namespace eMenu {
-  enum class BudgetAction {
+enum class BudgetAction {
     NewBudget, RenameBudget, DeleteBudget,
     CopyBudget, BudgetForecast,
-  };
-  inline uint qHash(const BudgetAction key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+};
+inline uint qHash(const BudgetAction key, uint seed) {
+    return ::qHash(static_cast<uint>(key), seed);
+}
 };
 
 /**
@@ -48,47 +50,47 @@ namespace eMenu {
 class KBudgetViewPrivate;
 class KBudgetView : public KMyMoneyViewBase
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KBudgetView(QWidget *parent = nullptr);
-  ~KBudgetView() override;
+    explicit KBudgetView(QWidget *parent = nullptr);
+    ~KBudgetView() override;
 
-  void executeCustomAction(eView::Action action) override;
+    void executeCustomAction(eView::Action action) override;
 
-  void createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiClient);
-  void removeActions();
+    void createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiClient);
+    void removeActions();
 
 public Q_SLOTS:
-  void slotSettingsChanged() override;
-  void updateActions(const SelectedObjects& selections) override;
+    void slotSettingsChanged() override;
+    void updateActions(const SelectedObjects& selections) override;
 
 protected:
-  void showEvent(QShowEvent * event) override;
+    void showEvent(QShowEvent * event) override;
 
 private:
-  Q_DECLARE_PRIVATE(KBudgetView)
+    Q_DECLARE_PRIVATE(KBudgetView)
 
 private Q_SLOTS:
-  void slotNewBudget();
-  void slotDeleteBudget();
-  void slotCopyBudget();
-  void slotStartRename();
-  void slotBudgetForecast();
-  void slotResetBudget();
-  void slotUpdateBudget();
+    void slotNewBudget();
+    void slotDeleteBudget();
+    void slotCopyBudget();
+    void slotStartRename();
+    void slotBudgetForecast();
+    void slotResetBudget();
+    void slotUpdateBudget();
 
-  void slotSelectAccount(const MyMoneyObject &obj, eView::Intent intent);
-  void slotBudgetedAmountChanged();
-  /**
-    *This is to update the information about the checkbox "budget amount integrates subaccounts" into the file, when the user clicks the check box
-   */
-  void cb_includesSubaccounts_clicked();
-  void slotBudgetBalanceChanged(const MyMoneyMoney &balance);
-  void slotSelectBudget();
-  void slotHideUnused(bool toggled);
+    void slotSelectAccount(const MyMoneyObject &obj, eView::Intent intent);
+    void slotBudgetedAmountChanged();
+    /**
+      *This is to update the information about the checkbox "budget amount integrates subaccounts" into the file, when the user clicks the check box
+     */
+    void cb_includesSubaccounts_clicked();
+    void slotBudgetBalanceChanged(const MyMoneyMoney &balance);
+    void slotSelectBudget();
+    void slotHideUnused(bool toggled);
 
-  void slotAccountSelectionChanged (const SelectedObjects& selections);
+    void slotAccountSelectionChanged (const SelectedObjects& selections);
 };
 
 #endif

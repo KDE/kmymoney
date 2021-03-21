@@ -42,70 +42,70 @@
 class KImportDlgDecl : public QDialog, public Ui::KImportDlgDecl
 {
 public:
-  explicit KImportDlgDecl(QWidget *parent) : QDialog(parent) {
-    setupUi(this);
-  }
+    explicit KImportDlgDecl(QWidget *parent) : QDialog(parent) {
+        setupUi(this);
+    }
 };
 
 class KImportDlg : public KImportDlgDecl
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  /**
-    * Standard constructor
-    */
-  explicit KImportDlg(QWidget *parent);
+    /**
+      * Standard constructor
+      */
+    explicit KImportDlg(QWidget *parent);
 
-  /** Standard destructor */
-  ~KImportDlg();
+    /** Standard destructor */
+    ~KImportDlg();
 
-  /**
-    */
-  const QUrl file() const {
-    return QUrl::fromUserInput(m_qlineeditFile->text());
-  };
+    /**
+      */
+    const QUrl file() const {
+        return QUrl::fromUserInput(m_qlineeditFile->text());
+    };
 
-  /**
-    */
-  const QString profile() const {
-    return m_profileComboBox->currentText();
-  };
+    /**
+      */
+    const QString profile() const {
+        return m_profileComboBox->currentText();
+    };
 
 protected Q_SLOTS:
-  /** Called to let the user browse for a QIF file to import from. */
-  void slotBrowse();
+    /** Called to let the user browse for a QIF file to import from. */
+    void slotBrowse();
 
-  /** Test whether to enable the buttons */
-  void slotFileTextChanged(const QString& text);
+    /** Test whether to enable the buttons */
+    void slotFileTextChanged(const QString& text);
 
-  void slotOkClicked();
+    void slotOkClicked();
 
 private:
-  /**
-    * This method loads the available profiles into
-    * the combo box. The parameter @p selectLast controls if
-    * the last profile used is preset or not. If preset is not
-    * selected, the current selection remains. If the currently selected
-    * text is not present in the list anymore, the first item will be
-    * selected.
-    *
-    * @param selectLast If true, the last used profile is selected. The
-    *                   default is false.
-    */
-  void loadProfiles(const bool selectLast = false);
+    /**
+      * This method loads the available profiles into
+      * the combo box. The parameter @p selectLast controls if
+      * the last profile used is preset or not. If preset is not
+      * selected, the current selection remains. If the currently selected
+      * text is not present in the list anymore, the first item will be
+      * selected.
+      *
+      * @param selectLast If true, the last used profile is selected. The
+      *                   default is false.
+      */
+    void loadProfiles(const bool selectLast = false);
 
-  /**
-    * This method is used to load an account hierarchy into a string list
-    *
-    * @param strList Reference to the string list to setup
-    * @param id Account id to add
-    * @param leadIn constant leadin to be added in front of the account name
-    */
-  void addCategories(QStringList& strList, const QString& id, const QString& leadIn) const;
+    /**
+      * This method is used to load an account hierarchy into a string list
+      *
+      * @param strList Reference to the string list to setup
+      * @param id Account id to add
+      * @param leadIn constant leadin to be added in front of the account name
+      */
+    void addCategories(QStringList& strList, const QString& id, const QString& leadIn) const;
 
-  void readConfig();
-  void writeConfig();
+    void readConfig();
+    void writeConfig();
 };
 
 #endif

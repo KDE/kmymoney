@@ -23,28 +23,28 @@ class LedgerAccountFilterPrivate;
 
 class LedgerAccountFilter : public LedgerFilterBase
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit LedgerAccountFilter(QObject* parent, QVector<QAbstractItemModel*> specialJournalModels);
-  ~LedgerAccountFilter() override;
+    explicit LedgerAccountFilter(QObject* parent, QVector<QAbstractItemModel*> specialJournalModels);
+    ~LedgerAccountFilter() override;
 
-  void setShowBalanceInverted(bool inverted = true);
+    void setShowBalanceInverted(bool inverted = true);
 
-  void setAccount(const MyMoneyAccount& acc);
+    void setAccount(const MyMoneyAccount& acc);
 
 public Q_SLOTS:
-  void recalculateBalancesOnIdle(const QString& accountId);
+    void recalculateBalancesOnIdle(const QString& accountId);
 
 protected Q_SLOTS:
-  void recalculateBalances();
-  void sortView();
+    void recalculateBalances();
+    void sortView();
 
 protected:
-  bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
+    bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
 
 private:
-  Q_DECLARE_PRIVATE_D(LedgerFilterBase::d_ptr, LedgerAccountFilter)
+    Q_DECLARE_PRIVATE_D(LedgerFilterBase::d_ptr, LedgerAccountFilter)
 };
 
 #endif // LEDGERACCOUNTFILTER_H

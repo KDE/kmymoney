@@ -30,21 +30,21 @@ KMyMoneyPayeeCombo::~KMyMoneyPayeeCombo()
 
 void KMyMoneyPayeeCombo::loadPayees(const QList<MyMoneyPayee>& list)
 {
-  clear();
+    clear();
 
-  //add a blank item, since the field is optional
-  addItem(QString(), QVariant(QString()));
+    //add a blank item, since the field is optional
+    addItem(QString(), QVariant(QString()));
 
-  //add all payees
-  QList<MyMoneyPayee>::const_iterator it;
-  for (it = list.constBegin(); it != list.constEnd(); ++it) {
-    addItem((*it).name(), QVariant((*it).id()));
-  }
+    //add all payees
+    QList<MyMoneyPayee>::const_iterator it;
+    for (it = list.constBegin(); it != list.constEnd(); ++it) {
+        addItem((*it).name(), QVariant((*it).id()));
+    }
 
-  //sort the model, which will sort the list in the combo
-  model()->sort(Qt::DisplayRole, Qt::AscendingOrder);
+    //sort the model, which will sort the list in the combo
+    model()->sort(Qt::DisplayRole, Qt::AscendingOrder);
 
-  //set the text to empty and the index to the first item on the list
-  setCurrentIndex(0);
-  clearEditText();
+    //set the text to empty and the index to the first item on the list
+    setCurrentIndex(0);
+    clearEditText();
 }

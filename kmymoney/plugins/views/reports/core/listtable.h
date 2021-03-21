@@ -44,100 +44,100 @@ class ReportAccount;
 class ListTable : public ReportTable
 {
 public:
-  explicit ListTable(const MyMoneyReport&);
-  QString renderHTML() const final override;
-  QString renderCSV() const final override;
-  void drawChart(KReportChartView&) const final override {}
-  void dump(const QString& file, const QString& context = QString()) const final override;
-  void init();
+    explicit ListTable(const MyMoneyReport&);
+    QString renderHTML() const final override;
+    QString renderCSV() const final override;
+    void drawChart(KReportChartView&) const final override {}
+    void dump(const QString& file, const QString& context = QString()) const final override;
+    void init();
 
 public:
-  enum cellTypeE /*{*/ /*Money*/
-                  {ctValue, ctNetInvValue, ctMarketValue,
-                   ctPrice, ctLastPrice, ctBuyPrice,
-                   ctBuys, ctSells, ctBuysST, ctSellsST, ctBuysLT, ctSellsLT,
-                   ctCapitalGain, ctCapitalGainST,ctCapitalGainLT,
-                   ctCashIncome, ctReinvestIncome,
-                   ctFees, ctInterest,
-                   ctStartingBalance, ctEndingBalance, ctBalance, ctCurrentBalance,
-                   ctBalanceWarning, ctMaxBalanceLimit, ctOpeningBalance,
-                   ctCreditWarning, ctMaxCreditLimit,
-                   ctLoanAmount, ctPeriodicPayment, ctFinalPayment, ctPayment,
-                   /*Shares*/
-                   ctShares,
-                   /*Percent*/
-                   ctReturn, ctReturnInvestment, ctInterestRate, ctPercentageGain,
-                   /*Date*/
-                   ctPostDate, ctEntryDate, ctNextDueDate, ctOpeningDate, ctNextInterestChange,
-                   ctMonth, ctWeek, ctReconcileDate,
-                   /*Misc*/
-                   ctCurrency, ctCurrencyName, ctCommodity, ctID,
-                   ctRank, ctSplit, ctMemo,
-                   ctAccount, ctAccountID, ctTopAccount, ctInvestAccount, ctInstitution,
-                   ctCategory, ctTopCategory, ctCategoryType,
-                   ctNumber, ctReconcileFlag,
-                   ctAction, ctTag, ctPayee, ctEquityType, ctType, ctName,
-                   ctDepth, ctRowsCount, ctTax, ctFavorite, ctDescription, ctOccurrence, ctPaymentType
-                 };
-  /**
-    * Contains a single row in the table.
-    *
-    * Each column is a key/value pair, both strings.  This class is just
-    * a QMap with the added ability to specify which columns you'd like to
-    * use as a sort key when you qHeapSort a list of these TableRows
-    */
-  class TableRow: public QMap<cellTypeE, QString>
-  {
-  public:
-    bool operator< (const TableRow&) const;
-    bool operator<= (const TableRow&) const;
-    bool operator> (const TableRow&) const;
-    bool operator== (const TableRow&) const;
+    enum cellTypeE /*{*/ /*Money*/
+    {   ctValue, ctNetInvValue, ctMarketValue,
+        ctPrice, ctLastPrice, ctBuyPrice,
+        ctBuys, ctSells, ctBuysST, ctSellsST, ctBuysLT, ctSellsLT,
+        ctCapitalGain, ctCapitalGainST,ctCapitalGainLT,
+        ctCashIncome, ctReinvestIncome,
+        ctFees, ctInterest,
+        ctStartingBalance, ctEndingBalance, ctBalance, ctCurrentBalance,
+        ctBalanceWarning, ctMaxBalanceLimit, ctOpeningBalance,
+        ctCreditWarning, ctMaxCreditLimit,
+        ctLoanAmount, ctPeriodicPayment, ctFinalPayment, ctPayment,
+        /*Shares*/
+        ctShares,
+        /*Percent*/
+        ctReturn, ctReturnInvestment, ctInterestRate, ctPercentageGain,
+        /*Date*/
+        ctPostDate, ctEntryDate, ctNextDueDate, ctOpeningDate, ctNextInterestChange,
+        ctMonth, ctWeek, ctReconcileDate,
+        /*Misc*/
+        ctCurrency, ctCurrencyName, ctCommodity, ctID,
+        ctRank, ctSplit, ctMemo,
+        ctAccount, ctAccountID, ctTopAccount, ctInvestAccount, ctInstitution,
+        ctCategory, ctTopCategory, ctCategoryType,
+        ctNumber, ctReconcileFlag,
+        ctAction, ctTag, ctPayee, ctEquityType, ctType, ctName,
+        ctDepth, ctRowsCount, ctTax, ctFavorite, ctDescription, ctOccurrence, ctPaymentType
+    };
+    /**
+      * Contains a single row in the table.
+      *
+      * Each column is a key/value pair, both strings.  This class is just
+      * a QMap with the added ability to specify which columns you'd like to
+      * use as a sort key when you qHeapSort a list of these TableRows
+      */
+    class TableRow: public QMap<cellTypeE, QString>
+    {
+    public:
+        bool operator< (const TableRow&) const;
+        bool operator<= (const TableRow&) const;
+        bool operator> (const TableRow&) const;
+        bool operator== (const TableRow&) const;
 
-    static void setSortCriteria(const QVector<cellTypeE>& _criteria) {
-      m_sortCriteria = _criteria;
+        static void setSortCriteria(const QVector<cellTypeE>& _criteria) {
+            m_sortCriteria = _criteria;
+        }
+    private:
+        static QVector<cellTypeE> m_sortCriteria;
+    };
+
+    const QList<TableRow>& rows() {
+        return m_rows;
     }
-  private:
-    static QVector<cellTypeE> m_sortCriteria;
-  };
-
-  const QList<TableRow>& rows() {
-    return m_rows;
-  }
 
 protected:
-  void render(QString&, QString&) const;
+    void render(QString&, QString&) const;
 
-  /**
-   * If not in expert mode, include all subaccounts for each selected
-   * investment account.
-   * For investment-only reports, it will also exclude the subaccounts
-   * that have a zero balance
-   */
-  void includeInvestmentSubAccounts();
+    /**
+     * If not in expert mode, include all subaccounts for each selected
+     * investment account.
+     * For investment-only reports, it will also exclude the subaccounts
+     * that have a zero balance
+     */
+    void includeInvestmentSubAccounts();
 
-  QList<TableRow> m_rows;
+    QList<TableRow> m_rows;
 
-  QList<cellTypeE> m_group;
-  /**
-   * Comma-separated list of columns to place BEFORE the subtotal column
-   */
-  QList<cellTypeE> m_columns;
-  /**
-   * Name of the subtotal column
-   */
-  QList<cellTypeE> m_subtotal;
-  /**
-   * Comma-separated list of columns to place AFTER the subtotal column
-   */
-  QList<cellTypeE> m_postcolumns;
+    QList<cellTypeE> m_group;
+    /**
+     * Comma-separated list of columns to place BEFORE the subtotal column
+     */
+    QList<cellTypeE> m_columns;
+    /**
+     * Name of the subtotal column
+     */
+    QList<cellTypeE> m_subtotal;
+    /**
+     * Comma-separated list of columns to place AFTER the subtotal column
+     */
+    QList<cellTypeE> m_postcolumns;
 
-  virtual bool linkEntries() const = 0;
+    virtual bool linkEntries() const = 0;
 
 private:
-  enum cellGroupE { cgMoney, cgShares, cgPercent, cgDate, cgPrice, cgMisc };
-  static cellGroupE cellGroup(const cellTypeE cellType);
-  static QString tableHeader(const cellTypeE cellType);
+    enum cellGroupE { cgMoney, cgShares, cgPercent, cgDate, cgPrice, cgMisc };
+    static cellGroupE cellGroup(const cellTypeE cellType);
+    static QString tableHeader(const cellTypeE cellType);
 };
 
 }

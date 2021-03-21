@@ -32,30 +32,30 @@ namespace KMyMoneyPlugin
   */
 class KMM_PLUGIN_EXPORT StatementInterface : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit StatementInterface(QObject* parent, const char* name = 0);
-  virtual ~StatementInterface();
+    explicit StatementInterface(QObject* parent, const char* name = 0);
+    virtual ~StatementInterface();
 
-  virtual void resetMessages() const = 0;
-  virtual void showMessages(int statementCount) const = 0;
+    virtual void resetMessages() const = 0;
+    virtual void showMessages(int statementCount) const = 0;
 
-  /**
-    * This method imports a MyMoneyStatement into the engine
-    */
-  virtual QStringList import(const MyMoneyStatement& s, bool silent = false) = 0;
+    /**
+      * This method imports a MyMoneyStatement into the engine
+      */
+    virtual QStringList import(const MyMoneyStatement& s, bool silent = false) = 0;
 
-  /**
-   * This method returns the account for a given @a key - @a value pair.
-   * If the account is not found in the list of accounts, MyMoneyAccount()
-   * is returned.
-   */
-  virtual MyMoneyAccount account(const QString& key, const QString& value) const = 0;
+    /**
+     * This method returns the account for a given @a key - @a value pair.
+     * If the account is not found in the list of accounts, MyMoneyAccount()
+     * is returned.
+     */
+    virtual MyMoneyAccount account(const QString& key, const QString& value) const = 0;
 
-  /**
-   */
-  virtual void setAccountOnlineParameters(const MyMoneyAccount& acc, const MyMoneyKeyValueContainer& kvps) const = 0;
+    /**
+     */
+    virtual void setAccountOnlineParameters(const MyMoneyAccount& acc, const MyMoneyKeyValueContainer& kvps) const = 0;
 
 };
 

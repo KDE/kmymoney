@@ -25,21 +25,25 @@ class MyMoneyFile;
 class MyMoneyTransaction;
 class QTextStream;
 
-namespace eMyMoney { namespace Split { enum class State; } }
+namespace eMyMoney {
+namespace Split {
+enum class State;
+}
+}
 
 class KMM_MYMONEY_EXPORT MyMoneyStorageDump
 {
 public:
-  MyMoneyStorageDump();
-  ~MyMoneyStorageDump();
+    MyMoneyStorageDump();
+    ~MyMoneyStorageDump();
 
-  void readStream(QDataStream& s, MyMoneyFile* file);
-  void writeStream(QDataStream& s, MyMoneyFile* file);
+    void readStream(QDataStream& s, MyMoneyFile* file);
+    void writeStream(QDataStream& s, MyMoneyFile* file);
 
 private:
-  void dumpTransaction(QTextStream& s, MyMoneyFile* file, const MyMoneyTransaction& it_t);
-  void dumpKVP(const QString& headline, QTextStream& s, const MyMoneyKeyValueContainer &kvp, int indent = 0);
-  const QString reconcileToString(eMyMoney::Split::State flag) const;
+    void dumpTransaction(QTextStream& s, MyMoneyFile* file, const MyMoneyTransaction& it_t);
+    void dumpKVP(const QString& headline, QTextStream& s, const MyMoneyKeyValueContainer &kvp, int indent = 0);
+    const QString reconcileToString(eMyMoney::Split::State flag) const;
 };
 
 #endif

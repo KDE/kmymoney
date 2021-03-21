@@ -40,37 +40,37 @@ using namespace eMyMoney;
 
 namespace NewAccountWizard
 {
-  class Wizard;
+class Wizard;
 
-  class HierarchyPagePrivate : public WizardPagePrivate<Wizard>
-  {
+class HierarchyPagePrivate : public WizardPagePrivate<Wizard>
+{
     Q_DISABLE_COPY(HierarchyPagePrivate)
 
-  public:
+public:
     explicit HierarchyPagePrivate(QObject* parent)
-      : WizardPagePrivate<Wizard>(parent)
-      , ui(new Ui::KHierarchyPage)
-      , m_columnSelector(nullptr)
+        : WizardPagePrivate<Wizard>(parent)
+        , ui(new Ui::KHierarchyPage)
+        , m_columnSelector(nullptr)
     {
     }
 
     ~HierarchyPagePrivate()
     {
-      delete ui;
+        delete ui;
     }
 
     Ui::KHierarchyPage        *ui;
     ColumnSelector*           m_columnSelector;
-  };
+};
 }
 
 
 namespace NewAccountWizard
 {
-  HierarchyPage::HierarchyPage(Wizard* wizard) :
+HierarchyPage::HierarchyPage(Wizard* wizard) :
     QWidget(wizard),
     WizardPage<Wizard>(*new HierarchyPagePrivate(wizard), StepParentAccount, this, wizard)
-  {
+{
     Q_D(HierarchyPage);
     d->ui->setupUi(this);
     // setup the filter model first
@@ -95,14 +95,14 @@ namespace NewAccountWizard
     proxyModel->setDynamicSortFilter(true);
 
     connect(d->ui->m_parentAccounts->selectionModel(), &QItemSelectionModel::currentChanged, this, &HierarchyPage::parentAccountChanged);
-  }
+}
 
-  HierarchyPage::~HierarchyPage()
-  {
-  }
+HierarchyPage::~HierarchyPage()
+{
+}
 
-  void HierarchyPage::enterPage()
-  {
+void HierarchyPage::enterPage()
+{
     Q_D(HierarchyPage);
     // Ensure that the list reflects the selected Account Type
     MyMoneyAccount topAccount = d->m_wizard->d_func()->m_accountTypePage->parentAccount();
@@ -116,35 +116,35 @@ namespace NewAccountWizard
     d->ui->m_parentAccounts->selectionModel()->select(idx, QItemSelectionModel::SelectCurrent);
     d->ui->m_parentAccounts->setCurrentIndex(idx);
     d->ui->m_parentAccounts->scrollTo(idx, QAbstractItemView::PositionAtCenter);
-  }
+}
 
-  KMyMoneyWizardPage* HierarchyPage::nextPage() const
-  {
+KMyMoneyWizardPage* HierarchyPage::nextPage() const
+{
     Q_D(const HierarchyPage);
     return d->m_wizard->d_func()->m_accountSummaryPage;
-  }
+}
 
-  QWidget* HierarchyPage::initialFocusWidget() const
-  {
+QWidget* HierarchyPage::initialFocusWidget() const
+{
     Q_D(const HierarchyPage);
     return d->ui->m_parentAccounts;
-  }
+}
 
-  MyMoneyAccount HierarchyPage::parentAccount() const
-  {
+MyMoneyAccount HierarchyPage::parentAccount() const
+{
     Q_D(const HierarchyPage);
     const auto accountId = d->ui->m_parentAccounts->currentIndex().data(eMyMoney::Model::Roles::IdRole).toString();
     return MyMoneyFile::instance()->accountsModel()->itemById(accountId);
-  }
+}
 
-  bool HierarchyPage::isComplete() const
-  {
+bool HierarchyPage::isComplete() const
+{
     Q_D(const HierarchyPage);
     return d->ui->m_parentAccounts->currentIndex().isValid();
-  }
+}
 
-  void HierarchyPage::parentAccountChanged()
-  {
+void HierarchyPage::parentAccountChanged()
+{
     completeStateChanged();
-  }
+}
 }

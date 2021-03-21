@@ -28,24 +28,24 @@ class MyMoneySecurityPrivate : public MyMoneyObjectPrivate
 {
 public:
 
-  MyMoneySecurityPrivate() :
-    m_securityType(eMyMoney::Security::Type::None),
-    m_smallestCashFraction(100),
-    m_smallestAccountFraction(100),
-    m_pricePrecision(4),
-    m_roundingMethod(AlkValue::RoundRound)
-  {
-  }
+    MyMoneySecurityPrivate() :
+        m_securityType(eMyMoney::Security::Type::None),
+        m_smallestCashFraction(100),
+        m_smallestAccountFraction(100),
+        m_pricePrecision(4),
+        m_roundingMethod(AlkValue::RoundRound)
+    {
+    }
 
-  QString                   m_name;
-  QString                   m_tradingSymbol;
-  QString                   m_tradingMarket;
-  QString                   m_tradingCurrency;
-  eMyMoney::Security::Type        m_securityType;
-  int                       m_smallestCashFraction;
-  int                       m_smallestAccountFraction;
-  int                       m_pricePrecision;
-  AlkValue::RoundingMethod  m_roundingMethod;
+    QString                   m_name;
+    QString                   m_tradingSymbol;
+    QString                   m_tradingMarket;
+    QString                   m_tradingCurrency;
+    eMyMoney::Security::Type        m_securityType;
+    int                       m_smallestCashFraction;
+    int                       m_smallestAccountFraction;
+    int                       m_pricePrecision;
+    AlkValue::RoundingMethod  m_roundingMethod;
 };
 
 #endif

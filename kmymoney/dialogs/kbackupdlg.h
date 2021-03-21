@@ -12,7 +12,9 @@
 
 #include <QDialog>
 
-namespace Ui { class KBackupDlg; }
+namespace Ui {
+class KBackupDlg;
+}
 
 /**
   *@author Michael Edwardes
@@ -20,23 +22,23 @@ namespace Ui { class KBackupDlg; }
 
 class KMM_BASE_DIALOGS_EXPORT KBackupDlg : public QDialog
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KBackupDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(KBackupDlg)
 
 public:
-  explicit KBackupDlg(QWidget* parent = nullptr);
-  ~KBackupDlg();
+    explicit KBackupDlg(QWidget* parent = nullptr);
+    ~KBackupDlg();
 
-  QString mountPoint() const;
-  bool mountCheckBoxChecked() const;
+    QString mountPoint() const;
+    bool mountCheckBoxChecked() const;
 
 protected Q_SLOTS:
-  void chooseButtonClicked();
+    void chooseButtonClicked();
 
 private:
-  Ui::KBackupDlg *ui;
-  void readConfig();
-  void writeConfig();
+    Ui::KBackupDlg *ui;
+    void readConfig();
+    void writeConfig();
 };
 
 #endif // KBACKUPDLG_H

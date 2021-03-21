@@ -29,23 +29,23 @@
 class KAccountTemplateSelectorPrivate;
 class KMM_BASE_WIDGETS_EXPORT KAccountTemplateSelector : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KAccountTemplateSelector)
+    Q_OBJECT
+    Q_DISABLE_COPY(KAccountTemplateSelector)
 
 public:
-  explicit KAccountTemplateSelector(QWidget* parent = nullptr);
-  ~KAccountTemplateSelector();
+    explicit KAccountTemplateSelector(QWidget* parent = nullptr);
+    ~KAccountTemplateSelector();
 
-  void setModel(TemplatesModel* model);
+    void setModel(TemplatesModel* model);
 
-  QList<MyMoneyTemplate> selectedTemplates() const;
+    QList<MyMoneyTemplate> selectedTemplates() const;
 
 public Q_SLOTS:
-  void setupInitialSelection();
+    void setupInitialSelection();
 
 private:
-  KAccountTemplateSelectorPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KAccountTemplateSelector)
+    KAccountTemplateSelectorPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KAccountTemplateSelector)
 };
 
 #endif

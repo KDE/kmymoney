@@ -11,7 +11,7 @@
 class onlineTaskSettingsFactory
 {
 protected:
-  virtual IonlineTaskSettings::ptr createSettings() const = 0;
+    virtual IonlineTaskSettings::ptr createSettings() const = 0;
 };
 
 Q_DECLARE_INTERFACE(onlineTaskSettingsFactory, "org.kmymoney.onlinetask.settingsFactory")

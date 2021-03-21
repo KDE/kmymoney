@@ -36,39 +36,39 @@ void payeeidentifier_test::cleanup()
 
 void payeeidentifier_test::createAndDeleteEmptyIdent()
 {
-  payeeIdentifier ident{};
+    payeeIdentifier ident{};
 }
 
 void payeeidentifier_test::copyIdent()
 {
-  try {
-    const payeeIdentifier ident = payeeIdentifier(new payeeIdentifiers::ibanBic());
-    payeeIdentifier ident2 = ident;
-    QVERIFY(!ident2.isNull());
-    QCOMPARE(ident2.iid(), payeeIdentifiers::ibanBic::staticPayeeIdentifierIid());
-  } catch (...) {
-    QFAIL("Unexpected exception");
-  }
+    try {
+        const payeeIdentifier ident = payeeIdentifier(new payeeIdentifiers::ibanBic());
+        payeeIdentifier ident2 = ident;
+        QVERIFY(!ident2.isNull());
+        QCOMPARE(ident2.iid(), payeeIdentifiers::ibanBic::staticPayeeIdentifierIid());
+    } catch (...) {
+        QFAIL("Unexpected exception");
+    }
 }
 
 void payeeidentifier_test::moveIdent()
 {
-  try {
-    payeeIdentifier ident = payeeIdentifier(new payeeIdentifiers::ibanBic());
-    payeeIdentifier ident2 = ident;
-  } catch (...) {
-    QFAIL("Unexpected exception");
-  }
+    try {
+        payeeIdentifier ident = payeeIdentifier(new payeeIdentifiers::ibanBic());
+        payeeIdentifier ident2 = ident;
+    } catch (...) {
+        QFAIL("Unexpected exception");
+    }
 }
 
 void payeeidentifier_test::createTypedIdent()
 {
-  try {
-    payeeIdentifier ident = payeeIdentifier(new payeeIdentifiers::ibanBic());
-    payeeIdentifierTyped<payeeIdentifiers::ibanBic> typedIdent{ident};
-  } catch (...) {
-    QFAIL("Unexpected exception");
-  }
+    try {
+        payeeIdentifier ident = payeeIdentifier(new payeeIdentifiers::ibanBic());
+        payeeIdentifierTyped<payeeIdentifiers::ibanBic> typedIdent{ident};
+    } catch (...) {
+        QFAIL("Unexpected exception");
+    }
 }
 
 

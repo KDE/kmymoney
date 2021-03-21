@@ -29,19 +29,19 @@ namespace KMyMoneyPlugin
   */
 class KMMViewInterface : public ViewInterface
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  KMMViewInterface(KMyMoneyView* view, QObject* parent, const char* name = 0);
-  ~KMMViewInterface() {}
+    KMMViewInterface(KMyMoneyView* view, QObject* parent, const char* name = 0);
+    ~KMMViewInterface() {}
 
-  void slotRefreshViews() override;
+    void slotRefreshViews() override;
 
-  void addView(KMyMoneyViewBase* view, const QString& name, View idView, Icons::Icon icon) override;
-  void removeView(View idView) override;
+    void addView(KMyMoneyViewBase* view, const QString& name, View idView, Icons::Icon icon) override;
+    void removeView(View idView) override;
 
 private:
-  KMyMoneyView* m_view;
+    KMyMoneyView* m_view;
 };
 
 } // namespace

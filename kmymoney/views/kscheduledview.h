@@ -27,8 +27,14 @@ class MyMoneySchedule;
 class MyMoneyAccount;
 class SelectedObjects;
 
-namespace eDialogs { enum class ScheduleResultCode; }
-namespace eView { namespace Schedules { enum class Requester; } }
+namespace eDialogs {
+enum class ScheduleResultCode;
+}
+namespace eView {
+namespace Schedules {
+enum class Requester;
+}
+}
 
 /**
   * Contains all the scheduled transactions be they bills, deposits or transfers.
@@ -44,58 +50,58 @@ namespace eView { namespace Schedules { enum class Requester; } }
 class KScheduledViewPrivate;
 class KScheduledView : public KMyMoneyViewBase
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  /**
-    * Standard constructor for QWidgets.
-    */
-  explicit KScheduledView(QWidget *parent = nullptr);
+    /**
+      * Standard constructor for QWidgets.
+      */
+    explicit KScheduledView(QWidget *parent = nullptr);
 
-  /**
-    * Standard destructor.
-    */
-  ~KScheduledView() override;
+    /**
+      * Standard destructor.
+      */
+    ~KScheduledView() override;
 
-  void executeCustomAction(eView::Action action) override;
+    void executeCustomAction(eView::Action action) override;
 
-  // TODO: remove that function
-  /**
-   * ugly proxy function
-   */
-  eDialogs::ScheduleResultCode enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys);
+    // TODO: remove that function
+    /**
+     * ugly proxy function
+     */
+    eDialogs::ScheduleResultCode enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys);
 
-  void slotSettingsChanged() override;
+    void slotSettingsChanged() override;
 
 public Q_SLOTS:
-  void slotShowScheduleMenu(const MyMoneySchedule& sch);
-  void slotEditSchedule();
+    void slotShowScheduleMenu(const MyMoneySchedule& sch);
+    void slotEditSchedule();
 
-  void slotEnterOverdueSchedules(const MyMoneyAccount& acc);
+    void slotEnterOverdueSchedules(const MyMoneyAccount& acc);
 
-  void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
-  void updateActions(const SelectedObjects& selections) override;
+    void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
+    void updateActions(const SelectedObjects& selections) override;
 
 Q_SIGNALS:
-  void enterOverdueSchedulesFinished(eView::Schedules::Requester req);
+    void enterOverdueSchedulesFinished(eView::Schedules::Requester req);
 
 protected:
-  void showEvent(QShowEvent* event) override;
+    void showEvent(QShowEvent* event) override;
 
 private:
-  Q_DECLARE_PRIVATE(KScheduledView)
+    Q_DECLARE_PRIVATE(KScheduledView)
 
 private Q_SLOTS:
-  void slotListViewCollapsed(const QModelIndex& idx);
-  void slotListViewExpanded(const QModelIndex& idx);
+    void slotListViewCollapsed(const QModelIndex& idx);
+    void slotListViewExpanded(const QModelIndex& idx);
 
-  void slotSetSelectedItem(const QItemSelection& selected, const QItemSelection& deselected);
+    void slotSetSelectedItem(const QItemSelection& selected, const QItemSelection& deselected);
 
-  void slotNewSchedule();
-  void slotDeleteSchedule();
-  void slotDuplicateSchedule();
-  void slotEnterSchedule();
-  void slotSkipSchedule();
+    void slotNewSchedule();
+    void slotDeleteSchedule();
+    void slotDuplicateSchedule();
+    void slotEnterSchedule();
+    void slotSkipSchedule();
 };
 
 #endif

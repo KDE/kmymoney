@@ -24,38 +24,38 @@
 class OnlineBalanceProxyModelPrivate;
 class KMM_MODELS_EXPORT OnlineBalanceProxyModel : public QSortFilterProxyModel
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  enum Column {
-    Symbol = 0,
-    Quantity,
-    Price,
-    Value,
-  };
+    enum Column {
+        Symbol = 0,
+        Quantity,
+        Price,
+        Value,
+    };
 
-  OnlineBalanceProxyModel(QObject *parent = nullptr);
-  ~OnlineBalanceProxyModel();
+    OnlineBalanceProxyModel(QObject *parent = nullptr);
+    ~OnlineBalanceProxyModel();
 
-  void setSourceModel ( QAbstractItemModel* sourceModel ) override;
+    void setSourceModel ( QAbstractItemModel* sourceModel ) override;
 
-  QVariant data(const QModelIndex& idx, int role) const override;
+    QVariant data(const QModelIndex& idx, int role) const override;
 
-  int columnCount ( const QModelIndex& parent = QModelIndex() ) const override;
+    int columnCount ( const QModelIndex& parent = QModelIndex() ) const override;
 
-  Qt::ItemFlags flags ( const QModelIndex& index ) const override;
+    Qt::ItemFlags flags ( const QModelIndex& index ) const override;
 
-  QModelIndex index ( int row, int column, const QModelIndex & parent ) const override;
+    QModelIndex index ( int row, int column, const QModelIndex & parent ) const override;
 
 protected:
-  bool filterAcceptsRow ( int source_row, const QModelIndex& source_parent ) const override;
+    bool filterAcceptsRow ( int source_row, const QModelIndex& source_parent ) const override;
 
 private:
-  void init();
-  void load();
+    void init();
+    void load();
 
 private:
-  OnlineBalanceProxyModelPrivate* d_ptr;
-  Q_DECLARE_PRIVATE(OnlineBalanceProxyModel);
+    OnlineBalanceProxyModelPrivate* d_ptr;
+    Q_DECLARE_PRIVATE(OnlineBalanceProxyModel);
 };
 
 #endif // ONLINEBALANCEPROXYMODEL_H

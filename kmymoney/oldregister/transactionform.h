@@ -24,22 +24,30 @@
 
 class MyMoneyAccount;
 
-namespace KMyMoneyRegister { class Transaction; }
-namespace eWidgets { namespace eRegister { enum class Action; }
-                     namespace eTransactionForm { enum class Column; } }
+namespace KMyMoneyRegister {
+class Transaction;
+}
+namespace eWidgets {
+namespace eRegister {
+enum class Action;
+}
+namespace eTransactionForm {
+enum class Column;
+}
+}
 namespace KMyMoneyTransactionForm
 {
-  class TabBar;
-  /**
-  * @author Thomas Baumgart
-  */
-  class TransactionFormPrivate;
-  class KMM_OLDREGISTER_EXPORT TransactionForm : public TransactionEditorContainer
-  {
+class TabBar;
+/**
+* @author Thomas Baumgart
+*/
+class TransactionFormPrivate;
+class KMM_OLDREGISTER_EXPORT TransactionForm : public TransactionEditorContainer
+{
     Q_OBJECT
     Q_DISABLE_COPY(TransactionForm)
 
-  public:
+public:
     explicit TransactionForm(QWidget* parent = nullptr);
     ~TransactionForm();
 
@@ -68,7 +76,7 @@ namespace KMyMoneyTransactionForm
 
     void enableTabBar(bool b);
 
-  protected:
+protected:
 
     /**
     * reimplemented to prevent normal mouse press behavior
@@ -100,27 +108,27 @@ namespace KMyMoneyTransactionForm
     */
     bool focusNextPrevChild(bool next) override;
 
-  public Q_SLOTS:
+public Q_SLOTS:
     void slotSetTransaction(KMyMoneyRegister::Transaction* item);
     void resize(int col);
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     /**
     * Helper method to convert @a int into @a KMyMoneyRegister::Action
     */
     void slotActionSelected(int);
 
-  Q_SIGNALS:
+Q_SIGNALS:
     /**
     * This signal is emitted when a user selects a tab. @a id
     * contains the tab's id (e.g. KMyMoneyRegister::ActionDeposit)
     */
     void newTransaction(eWidgets::eRegister::Action id);
 
-  private:
+private:
     TransactionFormPrivate * const d_ptr;
     Q_DECLARE_PRIVATE(TransactionForm)
-  };
+};
 } // namespace
 
 #endif

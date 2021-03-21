@@ -23,7 +23,9 @@ class KXMLGUIClient;
 
 class QTreeWidgetItem;
 
-namespace reports { class KReportChartView; }
+namespace reports {
+class KReportChartView;
+}
 
 class FixedColumnTreeView;
 class MyMoneyAccount;
@@ -38,29 +40,29 @@ class MyMoneyPrice;
 class KForecastViewPrivate;
 class KForecastView : public KMyMoneyViewBase
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KForecastView(QWidget *parent = nullptr);
-  ~KForecastView() override;
+    explicit KForecastView(QWidget *parent = nullptr);
+    ~KForecastView() override;
 
-  void executeCustomAction(eView::Action action) override;
-  void refresh();
+    void executeCustomAction(eView::Action action) override;
+    void refresh();
 
-  void createActions(KXMLGUIClient* guiClient);
-  void removeActions();
+    void createActions(KXMLGUIClient* guiClient);
+    void removeActions();
 
 protected:
-  void showEvent(QShowEvent* event) override;
+    void showEvent(QShowEvent* event) override;
 
 private:
-  Q_DECLARE_PRIVATE(KForecastView)
+    Q_DECLARE_PRIVATE(KForecastView)
 
 private Q_SLOTS:
-  void slotTabChanged(int index);
-  void slotManualForecast();
-  void itemExpanded(QTreeWidgetItem *item);
-  void itemCollapsed(QTreeWidgetItem *item);
+    void slotTabChanged(int index);
+    void slotManualForecast();
+    void itemExpanded(QTreeWidgetItem *item);
+    void itemCollapsed(QTreeWidgetItem *item);
 };
 
 #endif

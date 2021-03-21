@@ -17,13 +17,13 @@ KTreeWidgetFilterLineWidget::KTreeWidgetFilterLineWidget(QWidget* parent, QTreeW
 
 void KTreeWidgetFilterLineWidget::createWidgets()
 {
-  KTreeWidgetSearchLineWidget::createWidgets();
+    KTreeWidgetSearchLineWidget::createWidgets();
 
-  // The layout pointer is stored in the private class, so we do not have access to it directly
-  // => use findChild()
-  QLabel* label = findChild<QLabel*>();
-  if (!label)
-    return;
+    // The layout pointer is stored in the private class, so we do not have access to it directly
+    // => use findChild()
+    QLabel* label = findChild<QLabel*>();
+    if (!label)
+        return;
 
-  label->setText(i18nc("Filter widget label", "Fi&lter:"));
+    label->setText(i18nc("Filter widget label", "Fi&lter:"));
 }

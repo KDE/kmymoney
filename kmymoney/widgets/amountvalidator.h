@@ -28,12 +28,12 @@
   */
 class AmountValidator : public QDoubleValidator
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit AmountValidator(QObject * parent);
-  explicit AmountValidator(double bottom, double top, int decimals,
-                         QObject * parent);
+    explicit AmountValidator(QObject * parent);
+    explicit AmountValidator(double bottom, double top, int decimals,
+                             QObject * parent);
 };
 
 #endif

@@ -18,7 +18,11 @@ enum class Column { Date, Memo, Number, Payee, Amount, Credit, Debit, Category, 
 enum class Profile { Banking, Investment, CurrencyPrices, StockPrices };
 enum class ProfileAction { Add, Remove, Rename, UpdateLastUsed };
 
-inline uint qHash(const Column key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
-inline uint qHash(const Profile key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+inline uint qHash(const Column key, uint seed) {
+    return ::qHash(static_cast<uint>(key), seed);
+}
+inline uint qHash(const Profile key, uint seed) {
+    return ::qHash(static_cast<uint>(key), seed);
+}
 
 #endif

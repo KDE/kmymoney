@@ -89,7 +89,7 @@ public:
                         << i18nc("@item:inlistbox transaction type", "Split shares")
                         << i18nc("@item:inlistbox transaction type", "Interest Income");
 
-       activitiesModel->setStringList(activityItems);
+        activitiesModel->setStringList(activityItems);
     }
 
     ~Private()
@@ -104,7 +104,7 @@ public:
         for (int row = 0; row < rows; ++row) {
             const auto idx = model->index(row, 0);
             qDebug() << row << idx.data(eMyMoney::Model::IdRole).toString() << idx.data(eMyMoney::Model::SplitAccountIdRole).toString()
-            << idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>().formatMoney(100) << idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>().formatMoney(100);
+                     << idx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>().formatMoney(100) << idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>().formatMoney(100);
         }
     }
     void createStatusEntry(eMyMoney::Split::State status);
@@ -521,49 +521,49 @@ void InvestTransactionEditor::Private::updateWidgetState()
 
     const auto widget = ui->sharesAmountEdit;
     switch(currentActivity->type()) {
-        default:
-            WidgetHintFrame::hide(widget, i18nc("@info:tooltip", "Number of shares"));
-            if (widget->isVisible()) {
-                if (widget->value().isZero()) {
-                    WidgetHintFrame::show(widget, i18nc("@info:tooltip", "Enter number of shares for this transaction"));
-                }
+    default:
+        WidgetHintFrame::hide(widget, i18nc("@info:tooltip", "Number of shares"));
+        if (widget->isVisible()) {
+            if (widget->value().isZero()) {
+                WidgetHintFrame::show(widget, i18nc("@info:tooltip", "Enter number of shares for this transaction"));
             }
-            break;
-        case eMyMoney::Split::InvestmentTransactionType::SplitShares:
-            WidgetHintFrame::hide(widget, i18nc("@info:tooltip", "Split ratio"));
-            if (widget->isVisible()) {
-                if (widget->value().isZero()) {
-                    WidgetHintFrame::show(widget, i18nc("@info:tooltip", "Enter the split ratio for this transaction"));
-                }
+        }
+        break;
+    case eMyMoney::Split::InvestmentTransactionType::SplitShares:
+        WidgetHintFrame::hide(widget, i18nc("@info:tooltip", "Split ratio"));
+        if (widget->isVisible()) {
+            if (widget->value().isZero()) {
+                WidgetHintFrame::show(widget, i18nc("@info:tooltip", "Enter the split ratio for this transaction"));
             }
-            break;
+        }
+        break;
     }
 
     switch(currentActivity->priceRequired()) {
-        case Invest::Activity::Unused:
-            break;
-        case Invest::Activity::Optional:
-        case Invest::Activity::Mandatory:
-            if (ui->priceAmountEdit->value().isZero()) {
-                WidgetHintFrame::show(ui->priceAmountEdit, i18nc("@info:tooltip", "Enter price information for this transaction"));
-            }
-            break;
+    case Invest::Activity::Unused:
+        break;
+    case Invest::Activity::Optional:
+    case Invest::Activity::Mandatory:
+        if (ui->priceAmountEdit->value().isZero()) {
+            WidgetHintFrame::show(ui->priceAmountEdit, i18nc("@info:tooltip", "Enter price information for this transaction"));
+        }
+        break;
     }
 
     QString accountId;
     switch(currentActivity->assetAccountRequired()) {
-        case Invest::Activity::Unused:
-            break;
-        case Invest::Activity::Optional:
-        case Invest::Activity::Mandatory:
-            accountId = ui->assetAccountCombo->getSelected();
-            if (MyMoneyFile::instance()->isStandardAccount(accountId)) {
-                accountId.clear();
-            }
-            if (accountId.isEmpty()) {
-                WidgetHintFrame::show(ui->assetAccountCombo, i18nc("@info:tooltip", "Select account to balance the transaction"));
-            }
-            break;
+    case Invest::Activity::Unused:
+        break;
+    case Invest::Activity::Optional:
+    case Invest::Activity::Mandatory:
+        accountId = ui->assetAccountCombo->getSelected();
+        if (MyMoneyFile::instance()->isStandardAccount(accountId)) {
+            accountId.clear();
+        }
+        if (accountId.isEmpty()) {
+            WidgetHintFrame::show(ui->assetAccountCombo, i18nc("@info:tooltip", "Select account to balance the transaction"));
+        }
+        break;
     }
 
     if (!currentActivity->haveFees(currentActivity->feesRequired())) {
@@ -672,8 +672,13 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     connect(d->ui->interestCombo, &KMyMoneyAccountCombo::splitDialogRequest, this, &InvestTransactionEditor::editInterestSplits, Qt::QueuedConnection);
 
     /// @todo convert to new signal/slot syntax
-    connect(d->ui->cancelButton, &QToolButton::clicked, this, [&]() { emit done(); } );
-    connect(d->ui->enterButton, &QToolButton::clicked, this, [&]() { d->accepted = true; emit done(); } );
+    connect(d->ui->cancelButton, &QToolButton::clicked, this, [&]() {
+        emit done();
+    } );
+    connect(d->ui->enterButton, &QToolButton::clicked, this, [&]() {
+        d->accepted = true;
+        emit done();
+    } );
 
     // handle some events in certain conditions different from default
     d->ui->activityCombo->installEventFilter(this);
@@ -831,43 +836,43 @@ void InvestTransactionEditor::activityChanged(int index)
         }
         delete d->currentActivity;
         switch(type) {
-            default:
-            case eMyMoney::Split::InvestmentTransactionType::BuyShares:
-                d->currentActivity = new Invest::Buy(this);
-                break;
-            case eMyMoney::Split::InvestmentTransactionType::SellShares:
-                d->currentActivity = new Invest::Sell(this);
-                break;
-            case eMyMoney::Split::InvestmentTransactionType::Dividend:
-            case eMyMoney::Split::InvestmentTransactionType::Yield:
-                d->currentActivity = new Invest::Div(this);
-                break;
-            case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
-                d->currentActivity = new Invest::Reinvest(this);
-                break;
-            case eMyMoney::Split::InvestmentTransactionType::AddShares:
-                d->currentActivity = new Invest::Add(this);
-                break;
-            case eMyMoney::Split::InvestmentTransactionType::RemoveShares:
-                d->currentActivity = new Invest::Remove(this);
-                break;
-            case eMyMoney::Split::InvestmentTransactionType::SplitShares:
-                d->currentActivity = new Invest::Split(this);
-                break;
-            case eMyMoney::Split::InvestmentTransactionType::InterestIncome:
-                d->currentActivity = new Invest::IntInc(this);
-                break;
+        default:
+        case eMyMoney::Split::InvestmentTransactionType::BuyShares:
+            d->currentActivity = new Invest::Buy(this);
+            break;
+        case eMyMoney::Split::InvestmentTransactionType::SellShares:
+            d->currentActivity = new Invest::Sell(this);
+            break;
+        case eMyMoney::Split::InvestmentTransactionType::Dividend:
+        case eMyMoney::Split::InvestmentTransactionType::Yield:
+            d->currentActivity = new Invest::Div(this);
+            break;
+        case eMyMoney::Split::InvestmentTransactionType::ReinvestDividend:
+            d->currentActivity = new Invest::Reinvest(this);
+            break;
+        case eMyMoney::Split::InvestmentTransactionType::AddShares:
+            d->currentActivity = new Invest::Add(this);
+            break;
+        case eMyMoney::Split::InvestmentTransactionType::RemoveShares:
+            d->currentActivity = new Invest::Remove(this);
+            break;
+        case eMyMoney::Split::InvestmentTransactionType::SplitShares:
+            d->currentActivity = new Invest::Split(this);
+            break;
+        case eMyMoney::Split::InvestmentTransactionType::InterestIncome:
+            d->currentActivity = new Invest::IntInc(this);
+            break;
         }
         d->currentActivity->showWidgets();
 
         if (type != eMyMoney::Split::InvestmentTransactionType::SplitShares &&
-            oldType == eMyMoney::Split::InvestmentTransactionType::SplitShares) {
+                oldType == eMyMoney::Split::InvestmentTransactionType::SplitShares) {
             // switch to split
             d->stockSplit.setValue(MyMoneyMoney());
             d->stockSplit.setPrice(MyMoneyMoney());
             d->ui->sharesAmountEdit->setPrecision(-1);
         } else if (type == eMyMoney::Split::InvestmentTransactionType::SplitShares &&
-            oldType != eMyMoney::Split::InvestmentTransactionType::SplitShares) {
+                   oldType != eMyMoney::Split::InvestmentTransactionType::SplitShares) {
             // switch away from split
             d->stockSplit.setPrice(d->ui->priceAmountEdit->value());
             d->stockSplit.setValue(d->stockSplit.shares() * d->stockSplit.price());
@@ -1058,29 +1063,29 @@ void InvestTransactionEditor::keyPressEvent(QKeyEvent* e)
 {
     if (!e->modifiers() || ((e->modifiers() & Qt::KeypadModifier) && (e->key() == Qt::Key_Enter))) {
         switch (e->key()) {
-            case Qt::Key_Enter:
-            case Qt::Key_Return: {
-                if (focusWidget() == d->ui->cancelButton) {
-                    d->ui->cancelButton->click();
-                } else {
-                    if (d->ui->enterButton->isEnabled()) {
-                        // move focus to enter button which
-                        // triggers update of widgets
-                        d->ui->enterButton->setFocus();
-                        d->ui->enterButton->click();
-                    }
-                    return;
+        case Qt::Key_Enter:
+        case Qt::Key_Return: {
+            if (focusWidget() == d->ui->cancelButton) {
+                d->ui->cancelButton->click();
+            } else {
+                if (d->ui->enterButton->isEnabled()) {
+                    // move focus to enter button which
+                    // triggers update of widgets
+                    d->ui->enterButton->setFocus();
+                    d->ui->enterButton->click();
                 }
+                return;
             }
+        }
+        break;
+
+        case Qt::Key_Escape:
+            d->ui->cancelButton->click();
             break;
 
-            case Qt::Key_Escape:
-                d->ui->cancelButton->click();
-                break;
-
-            default:
-                e->ignore();
-                return;
+        default:
+            e->ignore();
+            return;
         }
     } else {
         e->ignore();

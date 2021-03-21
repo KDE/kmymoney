@@ -29,26 +29,26 @@ class MyMoneyTemplate;
 class TemplateLoaderPrivate;
 class KMM_TEMPLATES_EXPORT TemplateLoader : public QObject
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(TemplateLoader)
-  Q_DECLARE_PRIVATE(TemplateLoader)
+    Q_OBJECT
+    Q_DISABLE_COPY(TemplateLoader)
+    Q_DECLARE_PRIVATE(TemplateLoader)
 
 public:
-  explicit TemplateLoader(QWidget* parent = nullptr);
-  ~TemplateLoader();
+    explicit TemplateLoader(QWidget* parent = nullptr);
+    ~TemplateLoader();
 
-  void load(TemplatesModel* model);
+    void load(TemplatesModel* model);
 
-  bool importTemplate(const MyMoneyTemplate& tmpl);
+    bool importTemplate(const MyMoneyTemplate& tmpl);
 
 private Q_SLOTS:
-  void slotLoadCountry();
+    void slotLoadCountry();
 
 Q_SIGNALS:
-  void loadingFinished();
+    void loadingFinished();
 
 private:
-  TemplateLoaderPrivate * const d_ptr;
+    TemplateLoaderPrivate * const d_ptr;
 };
 
 #endif

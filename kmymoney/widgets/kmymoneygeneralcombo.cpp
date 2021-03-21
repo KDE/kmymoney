@@ -20,7 +20,7 @@
 KMyMoneyGeneralCombo::KMyMoneyGeneralCombo(QWidget* w) :
     KComboBox(w)
 {
-  connect(this, static_cast<void (QComboBox::*)(int)>(&QComboBox::highlighted), this, &KMyMoneyGeneralCombo::slotChangeItem);
+    connect(this, static_cast<void (QComboBox::*)(int)>(&QComboBox::highlighted), this, &KMyMoneyGeneralCombo::slotChangeItem);
 }
 
 KMyMoneyGeneralCombo::~KMyMoneyGeneralCombo()
@@ -29,30 +29,30 @@ KMyMoneyGeneralCombo::~KMyMoneyGeneralCombo()
 
 void KMyMoneyGeneralCombo::setCurrentItem(int id)
 {
-  setCurrentIndex(findData(QVariant(id), Qt::UserRole, Qt::MatchExactly));
+    setCurrentIndex(findData(QVariant(id), Qt::UserRole, Qt::MatchExactly));
 }
 
 int KMyMoneyGeneralCombo::currentItem() const
 {
-  return itemData(currentIndex()).toInt();
+    return itemData(currentIndex()).toInt();
 }
 
 void KMyMoneyGeneralCombo::clear()
 {
-  KComboBox::clear();
+    KComboBox::clear();
 }
 
 void KMyMoneyGeneralCombo::insertItem(const QString& txt, int id, int idx)
 {
-  KComboBox::insertItem(idx, txt, QVariant(id));
+    KComboBox::insertItem(idx, txt, QVariant(id));
 }
 
 void KMyMoneyGeneralCombo::removeItem(int id)
 {
-  KComboBox::removeItem(findData(QVariant(id), Qt::UserRole, Qt::MatchExactly));
+    KComboBox::removeItem(findData(QVariant(id), Qt::UserRole, Qt::MatchExactly));
 }
 
 void KMyMoneyGeneralCombo::slotChangeItem(int idx)
 {
-  emit itemSelected(itemData(idx).toInt());
+    emit itemSelected(itemData(idx).toInt());
 }

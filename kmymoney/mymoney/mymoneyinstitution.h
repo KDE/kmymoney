@@ -35,143 +35,143 @@ class QPixmap;
 class MyMoneyInstitutionPrivate;
 class KMM_MYMONEY_EXPORT MyMoneyInstitution : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
-  Q_DECLARE_PRIVATE_D(MyMoneyObject::d_ptr, MyMoneyInstitution)
+    Q_DECLARE_PRIVATE_D(MyMoneyObject::d_ptr, MyMoneyInstitution)
 
-  KMM_MYMONEY_UNIT_TESTABLE
+    KMM_MYMONEY_UNIT_TESTABLE
 
 public:
 
-  /**
-    * This is the constructor for a new empty institution description
-    */
-  MyMoneyInstitution();
-  explicit MyMoneyInstitution(const QString &id);
+    /**
+      * This is the constructor for a new empty institution description
+      */
+    MyMoneyInstitution();
+    explicit MyMoneyInstitution(const QString &id);
 
-  /**
-    * This is the constructor used by an application to fill the
-    * values required for a new institution. This object should then be
-    * passed to @see MyMoneyFile::addInstitution
-    */
-  explicit MyMoneyInstitution(const QString& name,
-                              const QString& city,
-                              const QString& street,
-                              const QString& postcode,
-                              const QString& telephone,
-                              const QString& manager,
-                              const QString& bankcode);
+    /**
+      * This is the constructor used by an application to fill the
+      * values required for a new institution. This object should then be
+      * passed to @see MyMoneyFile::addInstitution
+      */
+    explicit MyMoneyInstitution(const QString& name,
+                                const QString& city,
+                                const QString& street,
+                                const QString& postcode,
+                                const QString& telephone,
+                                const QString& manager,
+                                const QString& bankcode);
 
-  MyMoneyInstitution(const MyMoneyInstitution & other);
-  MyMoneyInstitution(MyMoneyInstitution && other);
-  MyMoneyInstitution & operator=(MyMoneyInstitution other);
-  friend void swap(MyMoneyInstitution& first, MyMoneyInstitution& second);
+    MyMoneyInstitution(const MyMoneyInstitution & other);
+    MyMoneyInstitution(MyMoneyInstitution && other);
+    MyMoneyInstitution & operator=(MyMoneyInstitution other);
+    friend void swap(MyMoneyInstitution& first, MyMoneyInstitution& second);
 
-  /**
-    * This is the destructor for any MyMoneyInstitution object
-    */
-  ~MyMoneyInstitution();
+    /**
+      * This is the destructor for any MyMoneyInstitution object
+      */
+    ~MyMoneyInstitution();
 
-  /**
-    * This is the constructor for a new institution known to the current file
-    *
-    * @param id id assigned to the new institution object
-    * @param right institution definition
-    */
-  MyMoneyInstitution(const QString& id, const MyMoneyInstitution& other);
+    /**
+      * This is the constructor for a new institution known to the current file
+      *
+      * @param id id assigned to the new institution object
+      * @param right institution definition
+      */
+    MyMoneyInstitution(const QString& id, const MyMoneyInstitution& other);
 
-  QString manager() const;
-  void setManager(const QString& manager);
+    QString manager() const;
+    void setManager(const QString& manager);
 
-  QString name() const;
-  void setName(const QString& name);
+    QString name() const;
+    void setName(const QString& name);
 
-  QString postcode() const;
-  void setPostcode(const QString& code);
+    QString postcode() const;
+    void setPostcode(const QString& code);
 
-  QString street() const;
-  void setStreet(const QString& street);
+    QString street() const;
+    void setStreet(const QString& street);
 
-  QString telephone() const;
-  void setTelephone(const QString& tel);
+    QString telephone() const;
+    void setTelephone(const QString& tel);
 
-  QString town() const;
-  void setTown(const QString& town);
+    QString town() const;
+    void setTown(const QString& town);
 
-  QString city() const;
-  void setCity(const QString& town);
+    QString city() const;
+    void setCity(const QString& town);
 
-  QString bankcode() const;
-  void setBankCode(const QString& code);
+    QString bankcode() const;
+    void setBankCode(const QString& code);
 
-  /**
-    * This method adds the id of an account to the account list of
-    * this institution It is verified, that the account is only
-    * mentioned once.
-    *
-    * @param account id of the account to be added
-    */
-  void addAccountId(const QString& account);
+    /**
+      * This method adds the id of an account to the account list of
+      * this institution It is verified, that the account is only
+      * mentioned once.
+      *
+      * @param account id of the account to be added
+      */
+    void addAccountId(const QString& account);
 
-  /**
-    * This method deletes the id of an account from the account list
-    * of this institution
-    *
-    * @param account id of the account to be deleted
-    * @return id of account deleted, otherwise empty string
-    */
-  QString removeAccountId(const QString& account);
+    /**
+      * This method deletes the id of an account from the account list
+      * of this institution
+      *
+      * @param account id of the account to be deleted
+      * @return id of account deleted, otherwise empty string
+      */
+    QString removeAccountId(const QString& account);
 
-  /**
-    * This method is used to return the set of accounts known to
-    * this institution
-    * return QStringList of account ids
-    */
-  QStringList accountList() const;
+    /**
+      * This method is used to return the set of accounts known to
+      * this institution
+      * return QStringList of account ids
+      */
+    QStringList accountList() const;
 
-  /**
-    * This method returns the number of accounts known to
-    * this institution
-    * @return number of accounts
-    */
-  unsigned int accountCount() const;
+    /**
+      * This method returns the number of accounts known to
+      * this institution
+      * @return number of accounts
+      */
+    unsigned int accountCount() const;
 
-  bool operator == (const MyMoneyInstitution&) const;
-  bool operator < (const MyMoneyInstitution& right) const;
+    bool operator == (const MyMoneyInstitution&) const;
+    bool operator < (const MyMoneyInstitution& right) const;
 
-  /**
-    * This method checks if a reference to the given object exists. It returns,
-    * a @p true if the object is referencing the one requested by the
-    * parameter @p id. If it does not, this method returns @p false.
-    *
-    * @param id id of the object to be checked for references
-    * @retval true This object references object with id @p id.
-    * @retval false This object does not reference the object with id @p id.
-    */
-  bool hasReferenceTo(const QString& id) const override;
+    /**
+      * This method checks if a reference to the given object exists. It returns,
+      * a @p true if the object is referencing the one requested by the
+      * parameter @p id. If it does not, this method returns @p false.
+      *
+      * @param id id of the object to be checked for references
+      * @retval true This object references object with id @p id.
+      * @retval false This object does not reference the object with id @p id.
+      */
+    bool hasReferenceTo(const QString& id) const override;
 
-  /**
-   * @copydoc MyMoneyObject::referencedObjects
-   */
-  QSet<QString> referencedObjects() const override;
+    /**
+     * @copydoc MyMoneyObject::referencedObjects
+     */
+    QSet<QString> referencedObjects() const override;
 
-  static QPixmap pixmap(const int size = 64);
+    static QPixmap pixmap(const int size = 64);
 };
 
 inline void swap(MyMoneyInstitution& first, MyMoneyInstitution& second) // krazy:exclude=inline
 {
-  using std::swap;
-  swap(first.MyMoneyObject::d_ptr, second.MyMoneyObject::d_ptr);
-  swap(first.MyMoneyKeyValueContainer::d_ptr, second.MyMoneyKeyValueContainer::d_ptr);
+    using std::swap;
+    swap(first.MyMoneyObject::d_ptr, second.MyMoneyObject::d_ptr);
+    swap(first.MyMoneyKeyValueContainer::d_ptr, second.MyMoneyKeyValueContainer::d_ptr);
 }
 
 inline MyMoneyInstitution::MyMoneyInstitution(MyMoneyInstitution && other) : MyMoneyInstitution() // krazy:exclude=inline
 {
-  swap(*this, other);
+    swap(*this, other);
 }
 
 inline MyMoneyInstitution & MyMoneyInstitution::operator=(MyMoneyInstitution other) // krazy:exclude=inline
 {
-  swap(*this, other);
-  return *this;
+    swap(*this, other);
+    return *this;
 }
 
 /**

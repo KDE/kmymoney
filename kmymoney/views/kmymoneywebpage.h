@@ -30,20 +30,20 @@ class MyQWebEnginePage : public QWebEnginePage
 class MyQWebEnginePage : public KWebPage
 #endif
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
 #ifdef ENABLE_WEBENGINE
-  explicit MyQWebEnginePage(QObject* parent = nullptr) : QWebEnginePage(parent){}
+    explicit MyQWebEnginePage(QObject* parent = nullptr) : QWebEnginePage(parent) {}
 #else
-  explicit MyQWebEnginePage(QObject* parent = nullptr) : KWebPage(parent){}
+    explicit MyQWebEnginePage(QObject* parent = nullptr) : KWebPage(parent) {}
 #endif
 
 protected:
 #ifdef ENABLE_WEBENGINE
-  bool acceptNavigationRequest(const QUrl &url, NavigationType type, bool) final override;
+    bool acceptNavigationRequest(const QUrl &url, NavigationType type, bool) final override;
 #else
-  bool acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest &request, NavigationType type) final override;
+    bool acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest &request, NavigationType type) final override;
 #endif
 
 };

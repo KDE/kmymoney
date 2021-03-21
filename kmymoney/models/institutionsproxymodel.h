@@ -41,21 +41,21 @@
 
 class KMM_MODELS_EXPORT InstitutionsProxyModel : public AccountsProxyModel
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(InstitutionsProxyModel)
+    Q_OBJECT
+    Q_DISABLE_COPY(InstitutionsProxyModel)
 
 public:
-  explicit InstitutionsProxyModel(QObject *parent = nullptr);
-  virtual ~InstitutionsProxyModel();
+    explicit InstitutionsProxyModel(QObject *parent = nullptr);
+    virtual ~InstitutionsProxyModel();
 
 protected:
-  bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
-  bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
 
-  int visibleItems(const QModelIndex& index) const;
+    int visibleItems(const QModelIndex& index) const;
 
 Q_SIGNALS:
-  void unusedIncomeExpenseAccountHidden();
+    void unusedIncomeExpenseAccountHidden();
 
 };
 

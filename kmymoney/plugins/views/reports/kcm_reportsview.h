@@ -12,27 +12,27 @@
 class ReportsViewSettingsWidgetPrivate;
 class ReportsViewSettingsWidget : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(ReportsViewSettingsWidget)
+    Q_OBJECT
+    Q_DISABLE_COPY(ReportsViewSettingsWidget)
 
 public:
-  explicit ReportsViewSettingsWidget(QWidget* parent = nullptr);
-  ~ReportsViewSettingsWidget();
+    explicit ReportsViewSettingsWidget(QWidget* parent = nullptr);
+    ~ReportsViewSettingsWidget();
 
 private:
-  ReportsViewSettingsWidgetPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(ReportsViewSettingsWidget)
+    ReportsViewSettingsWidgetPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(ReportsViewSettingsWidget)
 
 private Q_SLOTS:
-  void slotCssUrlSelected(const QUrl&);
-  void slotEditingFinished();
+    void slotCssUrlSelected(const QUrl&);
+    void slotEditingFinished();
 };
 
 class KCMReportsView : public KCModule
 {
 public:
-  explicit KCMReportsView(QWidget* parent, const QVariantList& args);
-  ~KCMReportsView();
+    explicit KCMReportsView(QWidget* parent, const QVariantList& args);
+    ~KCMReportsView();
 };
 
 #endif

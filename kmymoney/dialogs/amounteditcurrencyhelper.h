@@ -44,36 +44,36 @@ class AmountEditCurrencyHelperPrivate;
  */
 class KMM_BASE_DIALOGS_EXPORT AmountEditCurrencyHelper : public QObject
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(AmountEditCurrencyHelper)
+    Q_OBJECT
+    Q_DISABLE_COPY(AmountEditCurrencyHelper)
 
 public:
-  /**
-   * Creates a AmountEditCurrencyHelper object
-   *
-   * @param category pointer to KMyMoneyAccountCombo object
-   * @param amount pointer to AmountEdit object
-   */
-  explicit AmountEditCurrencyHelper(KMyMoneyAccountCombo* category, AmountEdit* amount, const QString& commodityId);
+    /**
+     * Creates a AmountEditCurrencyHelper object
+     *
+     * @param category pointer to KMyMoneyAccountCombo object
+     * @param amount pointer to AmountEdit object
+     */
+    explicit AmountEditCurrencyHelper(KMyMoneyAccountCombo* category, AmountEdit* amount, const QString& commodityId);
 
-  /**
-   * Creates a AmountEditCurrencyHelper object
-   *
-   * @param category pointer to KMyMoneyAccountCombo object
-   * @param amount pointer to CreditDebitHelper object
-   */
-  explicit AmountEditCurrencyHelper(KMyMoneyAccountCombo* category, CreditDebitHelper* amount, const QString& commodityId);
+    /**
+     * Creates a AmountEditCurrencyHelper object
+     *
+     * @param category pointer to KMyMoneyAccountCombo object
+     * @param amount pointer to CreditDebitHelper object
+     */
+    explicit AmountEditCurrencyHelper(KMyMoneyAccountCombo* category, CreditDebitHelper* amount, const QString& commodityId);
 
-  ~AmountEditCurrencyHelper();
+    ~AmountEditCurrencyHelper();
 
-  void setCommodity(const QString& commodityId);
+    void setCommodity(const QString& commodityId);
 
 public Q_SLOTS:
-  void categoryChanged(const QString& id);
+    void categoryChanged(const QString& id);
 
 private:
-  AmountEditCurrencyHelperPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(AmountEditCurrencyHelper)
+    AmountEditCurrencyHelperPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(AmountEditCurrencyHelper)
 };
 
 #endif

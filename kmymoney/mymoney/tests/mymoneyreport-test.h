@@ -14,13 +14,13 @@
 
 class MyMoneyReportTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 protected:
-  MyMoneyReport *m;
+    MyMoneyReport *m;
 
 private Q_SLOTS:
-  void init();
-  void cleanup();
+    void init();
+    void cleanup();
 };
 #endif

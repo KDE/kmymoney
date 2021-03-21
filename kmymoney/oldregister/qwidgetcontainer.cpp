@@ -25,24 +25,24 @@ QWidgetContainer::QWidgetContainer()
 
 QWidget* QWidgetContainer::haveWidget(const QString& name) const
 {
-  QWidgetContainer::const_iterator it_w;
-  it_w = find(name);
-  if (it_w != end())
-    return *it_w;
-  return 0;
+    QWidgetContainer::const_iterator it_w;
+    it_w = find(name);
+    if (it_w != end())
+        return *it_w;
+    return 0;
 }
 
 void QWidgetContainer::removeOrphans()
 {
-  QWidgetContainer::iterator it_w;
-  for (it_w = begin(); it_w != end();) {
-    if ((*it_w) && (*it_w)->parent())
-      ++it_w;
-    else {
-      QWidget* const w = *it_w;
-      it_w = erase(it_w);
-      if (w)
-        w->deleteLater();
+    QWidgetContainer::iterator it_w;
+    for (it_w = begin(); it_w != end();) {
+        if ((*it_w) && (*it_w)->parent())
+            ++it_w;
+        else {
+            QWidget* const w = *it_w;
+            it_w = erase(it_w);
+            if (w)
+                w->deleteLater();
+        }
     }
-  }
 }

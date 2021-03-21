@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class PaymentFrequencyWizardPage; }
+namespace Ui {
+class PaymentFrequencyWizardPage;
+}
 
 /**
  * This class implements the Payment Frequency page of the
@@ -26,12 +28,12 @@ namespace Ui { class PaymentFrequencyWizardPage; }
 
 class PaymentFrequencyWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit PaymentFrequencyWizardPage(QWidget *parent = nullptr);
-  ~PaymentFrequencyWizardPage();
+    explicit PaymentFrequencyWizardPage(QWidget *parent = nullptr);
+    ~PaymentFrequencyWizardPage();
 
-  Ui::PaymentFrequencyWizardPage *ui;
+    Ui::PaymentFrequencyWizardPage *ui;
 };
 
 #endif

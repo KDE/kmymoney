@@ -23,15 +23,15 @@ class MyMoneyInstitution;
 
 namespace NewAccountWizard
 {
-  class Wizard;
+class Wizard;
 
-  class InstitutionPagePrivate;
-  class InstitutionPage : public QWidget, public WizardPage<Wizard>
-  {
+class InstitutionPagePrivate;
+class InstitutionPage : public QWidget, public WizardPage<Wizard>
+{
     Q_OBJECT
     Q_DISABLE_COPY(InstitutionPage)
 
-  public:
+public:
     explicit InstitutionPage(Wizard* parent);
     ~InstitutionPage() override;
     KMyMoneyWizardPage* nextPage() const override;
@@ -47,17 +47,17 @@ namespace NewAccountWizard
 
     void selectExistingInstitution(const QString& id);
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void slotLoadWidgets();
     void slotNewInstitution();
     void slotSelectInstitution(int index);
 
-  private:
+private:
     Q_DECLARE_PRIVATE_D(WizardPage<Wizard>::d_ptr, InstitutionPage)
     friend class Wizard;
     friend class AccountSummaryPage;
     friend class BrokeragePage;
-  };
+};
 } // namespace
 
 #endif

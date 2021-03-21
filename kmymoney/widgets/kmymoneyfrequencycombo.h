@@ -28,40 +28,40 @@
  */
 class KMM_BASE_WIDGETS_EXPORT KMyMoneyFrequencyCombo : public KMyMoneyOccurrenceCombo
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyFrequencyCombo)
-  Q_PROPERTY(QVariant data READ currentData WRITE setCurrentData STORED false)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyFrequencyCombo)
+    Q_PROPERTY(QVariant data READ currentData WRITE setCurrentData STORED false)
 
 public:
-  explicit KMyMoneyFrequencyCombo(QWidget* parent = nullptr);
-  ~KMyMoneyFrequencyCombo() override;
+    explicit KMyMoneyFrequencyCombo(QWidget* parent = nullptr);
+    ~KMyMoneyFrequencyCombo() override;
 
-  /**
-   * This method returns the number of events for the selected payment
-   * frequency (eg for yearly the return value is 1 and for monthly it
-   * is 12). In case, the frequency cannot be converted (once, every other year, etc.)
-   * the method returns 0.
-   */
-  int eventsPerYear() const;
-  /**
-   * This method returns the number of days between two events of
-   * the selected frequency. The return value for months is based
-   * on 30 days and the year is 360 days long.
-   */
-  int daysBetweenEvents() const;
+    /**
+     * This method returns the number of events for the selected payment
+     * frequency (eg for yearly the return value is 1 and for monthly it
+     * is 12). In case, the frequency cannot be converted (once, every other year, etc.)
+     * the method returns 0.
+     */
+    int eventsPerYear() const;
+    /**
+     * This method returns the number of days between two events of
+     * the selected frequency. The return value for months is based
+     * on 30 days and the year is 360 days long.
+     */
+    int daysBetweenEvents() const;
 
-  QVariant currentData() const;
+    QVariant currentData() const;
 
-  void setCurrentData(QVariant datavar);
+    void setCurrentData(QVariant datavar);
 
 Q_SIGNALS:
-  void currentDataChanged(QVariant data);
+    void currentDataChanged(QVariant data);
 
 protected Q_SLOTS:
-  void slotCurrentDataChanged();
+    void slotCurrentDataChanged();
 
 private:
-  QVariant data;
+    QVariant data;
 
 };
 

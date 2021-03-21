@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class NewGeneralInfoWizardPage; }
+namespace Ui {
+class NewGeneralInfoWizardPage;
+}
 
 /**
  * This class implements the New General Info page of the
@@ -26,13 +28,13 @@ namespace Ui { class NewGeneralInfoWizardPage; }
 
 class NewGeneralInfoWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit NewGeneralInfoWizardPage(QWidget *parent = nullptr);
-  ~NewGeneralInfoWizardPage();
+    explicit NewGeneralInfoWizardPage(QWidget *parent = nullptr);
+    ~NewGeneralInfoWizardPage();
 
 private:
-  Ui::NewGeneralInfoWizardPage *ui;
+    Ui::NewGeneralInfoWizardPage *ui;
 };
 
 #endif

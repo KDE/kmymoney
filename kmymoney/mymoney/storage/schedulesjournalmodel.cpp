@@ -26,22 +26,22 @@
 
 struct SchedulesJournalModel::Private
 {
-  Private()
-    : previewPeriod(0)
-    , updateRequested(false)
-    , showPlannedDate(false)
-  {}
+    Private()
+        : previewPeriod(0)
+        , updateRequested(false)
+        , showPlannedDate(false)
+    {}
 
-  int  previewPeriod;
-  bool updateRequested;
-  bool showPlannedDate;
+    int  previewPeriod;
+    bool updateRequested;
+    bool showPlannedDate;
 };
 
 SchedulesJournalModel::SchedulesJournalModel(QObject* parent, QUndoStack* undoStack)
-  : JournalModel(QLatin1String("SCH"), parent, undoStack)
-  , d(new Private)
+    : JournalModel(QLatin1String("SCH"), parent, undoStack)
+    , d(new Private)
 {
-  setObjectName(QLatin1String("SchedulesJournalModel"));
+    setObjectName(QLatin1String("SchedulesJournalModel"));
 }
 
 SchedulesJournalModel::~SchedulesJournalModel()
@@ -50,169 +50,169 @@ SchedulesJournalModel::~SchedulesJournalModel()
 
 Qt::ItemFlags SchedulesJournalModel::flags(const QModelIndex& index) const
 {
-  Q_UNUSED(index);
-  return (Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+    Q_UNUSED(index);
+    return (Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 }
 
 QVariant SchedulesJournalModel::data(const QModelIndex& index, int role) const
 {
-  if (!index.isValid())
-    return QVariant();
-  if (index.row() < 0 || index.row() >= rowCount(index.parent()))
-    return QVariant();
+    if (!index.isValid())
+        return QVariant();
+    if (index.row() < 0 || index.row() >= rowCount(index.parent()))
+        return QVariant();
 
 
-  QVariant rc;
-  const JournalEntry& entry = static_cast<TreeItem<JournalEntry>*>(index.internalPointer())->constDataRef();
-  switch (role) {
+    QVariant rc;
+    const JournalEntry& entry = static_cast<TreeItem<JournalEntry>*>(index.internalPointer())->constDataRef();
+    switch (role) {
     case eMyMoney::Model::ScheduleIsOverdueRole:
-      return entry.transaction().value(QStringLiteral("kmm-is-overdue")).compare(QStringLiteral("yes")) == 0;
+        return entry.transaction().value(QStringLiteral("kmm-is-overdue")).compare(QStringLiteral("yes")) == 0;
 
     case eMyMoney::Model::TransactionScheduleRole:
-      return true;
+        return true;
 
     default:
-      break;
-  }
-  return JournalModel::data(index, role);
+        break;
+    }
+    return JournalModel::data(index, role);
 }
 
 bool SchedulesJournalModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-  return JournalModel::setData(index, value, role);
+    return JournalModel::setData(index, value, role);
 #if 0
-  if (!index.isValid()) {
-    return false;
-  }
+    if (!index.isValid()) {
+        return false;
+    }
 
-  if (!index.isValid())
-    return false;
-  if (index.row() < 0 || index.row() >= rowCount(index.parent()))
-    return false;
+    if (!index.isValid())
+        return false;
+    if (index.row() < 0 || index.row() >= rowCount(index.parent()))
+        return false;
 
-  JournalEntry& entry = static_cast<TreeItem<JournalEntry>*>(index.internalPointer())->dataRef();
+    JournalEntry& entry = static_cast<TreeItem<JournalEntry>*>(index.internalPointer())->dataRef();
 
-  bool rc = true;
-  switch(role) {
+    bool rc = true;
+    switch(role) {
     case eMyMoney::Model::PayeeNameRole:
     case Qt::DisplayRole:
     case Qt::EditRole:
-      // make sure to never return any displayable text for the dummy entry
-      break;
+        // make sure to never return any displayable text for the dummy entry
+        break;
 
     default:
-      rc = false;
-      break;
-  }
+        rc = false;
+        break;
+    }
 
-  if (rc) {
-    setDirty();
-    const auto topLeft = SchedulesJournalModel::index(index.row(), 0);
-    const auto bottomRight = SchedulesJournalModel::index(index.row(), columnCount()-1);
-    emit dataChanged(topLeft, bottomRight);
-  }
-  return rc;
+    if (rc) {
+        setDirty();
+        const auto topLeft = SchedulesJournalModel::index(index.row(), 0);
+        const auto bottomRight = SchedulesJournalModel::index(index.row(), columnCount()-1);
+        emit dataChanged(topLeft, bottomRight);
+    }
+    return rc;
 #endif
 }
 
 void SchedulesJournalModel::load(const QMap<QString, MyMoneyTransaction>& list)
 {
-  Q_UNUSED(list);
-  qDebug() << Q_FUNC_INFO << "must never be called";
+    Q_UNUSED(list);
+    qDebug() << Q_FUNC_INFO << "must never be called";
 }
 
 void SchedulesJournalModel::updateData()
 {
-  // register the update of the model for the
-  // next event loop run so that the model is
-  // updated only once even if load() is called
-  // multiple times in a row. This is enough,
-  // since the model is always loaded completely
-  // (no partial updates)
-  if (!d->updateRequested) {
-    d->updateRequested = true;
-    QMetaObject::invokeMethod(this, "doLoad", Qt::QueuedConnection);
-  }
+    // register the update of the model for the
+    // next event loop run so that the model is
+    // updated only once even if load() is called
+    // multiple times in a row. This is enough,
+    // since the model is always loaded completely
+    // (no partial updates)
+    if (!d->updateRequested) {
+        d->updateRequested = true;
+        QMetaObject::invokeMethod(this, "doLoad", Qt::QueuedConnection);
+    }
 }
 
 void SchedulesJournalModel::doLoad()
 {
-  // create scheduled transactions which have a scheduled postdate
-  // within the next 'period' days.
-  const auto endDate = QDate::currentDate().addDays(d->previewPeriod);
-  QList<MyMoneySchedule> scheduleList = MyMoneyFile::instance()->scheduleList();
+    // create scheduled transactions which have a scheduled postdate
+    // within the next 'period' days.
+    const auto endDate = QDate::currentDate().addDays(d->previewPeriod);
+    QList<MyMoneySchedule> scheduleList = MyMoneyFile::instance()->scheduleList();
 
-  // in case we don't have a single schedule, there are certainly no transactions
-  if (scheduleList.isEmpty()) {
-    JournalModel::unload();
+    // in case we don't have a single schedule, there are certainly no transactions
+    if (scheduleList.isEmpty()) {
+        JournalModel::unload();
 
-  } else {
+    } else {
 
-    QMap<QString, MyMoneyTransaction> transactionList;
+        QMap<QString, MyMoneyTransaction> transactionList;
 
-    while (!scheduleList.isEmpty()) {
-      MyMoneySchedule& s = scheduleList.first();
-      for (;;) {
-        if (s.isFinished() || s.adjustedNextDueDate() > endDate) {
-          break;
+        while (!scheduleList.isEmpty()) {
+            MyMoneySchedule& s = scheduleList.first();
+            for (;;) {
+                if (s.isFinished() || s.adjustedNextDueDate() > endDate) {
+                    break;
+                }
+
+                MyMoneyTransaction t(s.id(), MyMoneyFile::instance()->scheduledTransaction(s));
+                if (s.isOverdue()) {
+                    if (!d->showPlannedDate) {
+                        // if the transaction is scheduled and overdue, it can't
+                        // certainly be posted in the past. So we take today's date
+                        // as the alternative
+                        qDebug() << "Adjust scheduled transaction" << s.name() << "from" << t.postDate() << "to" << s.adjustedDate(QDate::currentDate(), eMyMoney::Schedule::WeekendOption::MoveAfter) << s.weekendOptionToString(eMyMoney::Schedule::WeekendOption::MoveAfter);
+                        t.setPostDate(s.adjustedDate(QDate::currentDate(), eMyMoney::Schedule::WeekendOption::MoveAfter));
+                    } else {
+                        t.setPostDate(s.adjustedNextDueDate());
+                    }
+                    t.setValue(QLatin1String("kmm-is-overdue"), QLatin1String("yes"));
+                }
+
+                // add transaction to the list
+                transactionList.insert(t.uniqueSortKey(), t);
+
+                // keep track of this payment locally (not in the engine)
+                if (s.isOverdue() && !d->showPlannedDate) {
+                    s.setLastPayment(QDate::currentDate());
+                } else {
+                    s.setLastPayment(s.nextDueDate());
+                }
+
+                // if this is a one time schedule, we can bail out here as we're done
+                if (s.occurrence() == eMyMoney::Schedule::Occurrence::Once)
+                    break;
+
+                // for all others, we check if the next payment date is still 'in range'
+                QDate nextDueDate = s.nextPayment(s.nextDueDate());
+                if (nextDueDate.isValid()) {
+                    s.setNextDueDate(nextDueDate);
+                } else {
+                    break;
+                }
+            }
+            scheduleList.pop_front();
         }
-
-        MyMoneyTransaction t(s.id(), MyMoneyFile::instance()->scheduledTransaction(s));
-        if (s.isOverdue()) {
-          if (!d->showPlannedDate) {
-            // if the transaction is scheduled and overdue, it can't
-            // certainly be posted in the past. So we take today's date
-            // as the alternative
-            qDebug() << "Adjust scheduled transaction" << s.name() << "from" << t.postDate() << "to" << s.adjustedDate(QDate::currentDate(), eMyMoney::Schedule::WeekendOption::MoveAfter) << s.weekendOptionToString(eMyMoney::Schedule::WeekendOption::MoveAfter);
-            t.setPostDate(s.adjustedDate(QDate::currentDate(), eMyMoney::Schedule::WeekendOption::MoveAfter));
-          } else {
-            t.setPostDate(s.adjustedNextDueDate());
-          }
-          t.setValue(QLatin1String("kmm-is-overdue"), QLatin1String("yes"));
-        }
-
-        // add transaction to the list
-        transactionList.insert(t.uniqueSortKey(), t);
-
-        // keep track of this payment locally (not in the engine)
-        if (s.isOverdue() && !d->showPlannedDate) {
-          s.setLastPayment(QDate::currentDate());
-        } else {
-          s.setLastPayment(s.nextDueDate());
-        }
-
-        // if this is a one time schedule, we can bail out here as we're done
-        if (s.occurrence() == eMyMoney::Schedule::Occurrence::Once)
-          break;
-
-        // for all others, we check if the next payment date is still 'in range'
-        QDate nextDueDate = s.nextPayment(s.nextDueDate());
-        if (nextDueDate.isValid()) {
-          s.setNextDueDate(nextDueDate);
-        } else {
-          break;
-        }
-      }
-      scheduleList.pop_front();
+        JournalModel::load(transactionList);
     }
-    JournalModel::load(transactionList);
-  }
-  // free up the lock for the next update
-  d->updateRequested = false;
+    // free up the lock for the next update
+    d->updateRequested = false;
 }
 
 void SchedulesJournalModel::setPreviewPeriod(int days)
 {
-  if (d->previewPeriod != days) {
-    d->previewPeriod = days;
-    updateData();
-  }
+    if (d->previewPeriod != days) {
+        d->previewPeriod = days;
+        updateData();
+    }
 }
 
 void SchedulesJournalModel::setShowPlannedDate(bool showPlannedDate)
 {
-  if (d->showPlannedDate != showPlannedDate) {
-    d->showPlannedDate = showPlannedDate;
-    updateData();
-  }
+    if (d->showPlannedDate != showPlannedDate) {
+        d->showPlannedDate = showPlannedDate;
+        updateData();
+    }
 }

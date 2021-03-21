@@ -12,56 +12,56 @@
 
 class internationalAccountIdentifierTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  bool dataInstalled(const QString& countryCode);
+    bool dataInstalled(const QString& countryCode);
 
 private Q_SLOTS:
-  void initTestCase();
-  void cleanupTestCase();
+    void initTestCase();
+    void cleanupTestCase();
 
-  void init();
-  void cleanup();
+    void init();
+    void cleanup();
 
-  void comparison();
+    void comparison();
 
-  void ibanChecksum_data();
-  void ibanChecksum();
+    void ibanChecksum_data();
+    void ibanChecksum();
 
-  void paperformatIban_data();
-  void paperformatIban();
+    void paperformatIban_data();
+    void paperformatIban();
 
-  void electronicformatIban_data();
-  void electronicformatIban();
+    void electronicformatIban_data();
+    void electronicformatIban();
 
-  void setIban_data();
-  void setIban();
+    void setIban_data();
+    void setIban();
 
-  void setBic_data();
-  void setBic();
+    void setBic_data();
+    void setBic();
 
-  void equalOperator_data();
-  void equalOperator();
+    void equalOperator_data();
+    void equalOperator();
 
-  void uneqalOperator_data();
-  void uneqalOperator();
+    void uneqalOperator_data();
+    void uneqalOperator();
 
-  void getProperties_data();
-  void getProperties();
+    void getProperties_data();
+    void getProperties();
 
-  void iban2bic_data();
-  void iban2bic();
+    void iban2bic_data();
+    void iban2bic();
 
-  void nameByBic_data();
-  void nameByBic();
+    void nameByBic_data();
+    void nameByBic();
 
-  void bicAndNameByIban_data();
-  void bicAndNameByIban();
+    void bicAndNameByIban_data();
+    void bicAndNameByIban();
 
-  void qStringNullAndEmpty();
+    void qStringNullAndEmpty();
 
-  void bicAllocated_data();
-  void bicAllocated();
+    void bicAllocated_data();
+    void bicAllocated();
 };
 
 #endif // INTERNATIONALACCOUNTIDENTIFIERTEST_H

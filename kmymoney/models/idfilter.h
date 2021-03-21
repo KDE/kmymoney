@@ -22,24 +22,24 @@
 class IdFilterPrivate;
 class KMM_MODELS_EXPORT IdFilter : public QSortFilterProxyModel
 {
-  Q_OBJECT
-  Q_DECLARE_PRIVATE(IdFilter)
-  Q_DISABLE_COPY(IdFilter)
+    Q_OBJECT
+    Q_DECLARE_PRIVATE(IdFilter)
+    Q_DISABLE_COPY(IdFilter)
 
 public:
-  explicit IdFilter(QObject* parent);
+    explicit IdFilter(QObject* parent);
 
-  void setFilterList(const QStringList& idList);
-  void addFilter(const QString& id);
-  void removeFilter(const QString& id);
-  QList<QString> filterList() const;
+    void setFilterList(const QStringList& idList);
+    void addFilter(const QString& id);
+    void removeFilter(const QString& id);
+    QList<QString> filterList() const;
 
 protected:
-  bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
-  bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
+    bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
+    bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
 
 private:
-  IdFilterPrivate*  d_ptr;
+    IdFilterPrivate*  d_ptr;
 };
 
 #endif // IDFILTER_H

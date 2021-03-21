@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class InterestEditWizardPage; }
+namespace Ui {
+class InterestEditWizardPage;
+}
 
 /**
  * This class implements the Interest Edit page of the
@@ -26,17 +28,17 @@ namespace Ui { class InterestEditWizardPage; }
 
 class InterestEditWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit InterestEditWizardPage(QWidget *parent = nullptr);
-  ~InterestEditWizardPage() override;
+    explicit InterestEditWizardPage(QWidget *parent = nullptr);
+    ~InterestEditWizardPage() override;
 
-  /**
-   * Overload the isComplete function to control the Next button
-   */
-  bool isComplete() const final override;
+    /**
+     * Overload the isComplete function to control the Next button
+     */
+    bool isComplete() const final override;
 
-  Ui::InterestEditWizardPage *ui;
+    Ui::InterestEditWizardPage *ui;
 };
 
 #endif

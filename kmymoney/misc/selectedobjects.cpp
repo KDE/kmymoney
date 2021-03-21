@@ -11,54 +11,54 @@ SelectedObjects::SelectedObjects()
 
 void SelectedObjects::addSelection(SelectedObjects::Object_t type, const QString& id)
 {
-  addSelections(type, QStringList() << id);
+    addSelections(type, QStringList() << id);
 }
 
 void SelectedObjects::addSelections(SelectedObjects::Object_t type, const QStringList& ids)
 {
-  for(const auto& id : qAsConst(ids)) {
-    if (!m_selections[type].contains(id)) {
-      m_selections[type].append(id);
+    for(const auto& id : qAsConst(ids)) {
+        if (!m_selections[type].contains(id)) {
+            m_selections[type].append(id);
+        }
     }
-  }
 }
 
 void SelectedObjects::setSelection(SelectedObjects::Object_t type, const QString& id)
 {
-  setSelection(type, QStringList() << id);
+    setSelection(type, QStringList() << id);
 }
 
 void SelectedObjects::setSelection(SelectedObjects::Object_t type, const QStringList& ids)
 {
-  m_selections[type] = ids;
+    m_selections[type] = ids;
 }
 
 void SelectedObjects::clearSelections(SelectedObjects::Object_t type)
 {
-  m_selections.remove(type);
+    m_selections.remove(type);
 }
 
 void SelectedObjects::clearSelections()
 {
-  m_selections.clear();
+    m_selections.clear();
 }
 
 int SelectedObjects::count(SelectedObjects::Object_t type) const
 {
-  return m_selections[type].count();
+    return m_selections[type].count();
 }
 
 bool SelectedObjects::isEmpty(SelectedObjects::Object_t type) const
 {
-  return m_selections[type].isEmpty();
+    return m_selections[type].isEmpty();
 }
 
 QStringList SelectedObjects::selection(SelectedObjects::Object_t type) const
 {
-  return m_selections[type];
+    return m_selections[type];
 }
 
 bool SelectedObjects::isEmpty() const
 {
-  return m_selections.isEmpty();
+    return m_selections.isEmpty();
 }

@@ -53,88 +53,88 @@ enum ERowType {eActual, eBudget, eBudgetDiff, eForecast, eAverage, ePrice };
   */
 class PivotCell: public MyMoneyMoney
 {
-  KMM_MYMONEY_UNIT_TESTABLE
+    KMM_MYMONEY_UNIT_TESTABLE
 
 public:
-  PivotCell() : m_stockSplit(MyMoneyMoney::ONE), m_cellUsed(false) {}
-  explicit PivotCell(const MyMoneyMoney& value);
-  virtual ~PivotCell();
-  static PivotCell stockSplit(const MyMoneyMoney& factor);
-  PivotCell operator += (const PivotCell& right);
-  PivotCell operator += (const MyMoneyMoney& value);
-  const QString formatMoney(int fraction, bool showThousandSeparator = true) const;
-  const QString formatMoney(const QString& currency, const int prec, bool showThousandSeparator = true) const;
-  MyMoneyMoney calculateRunningSum(const MyMoneyMoney& runningSum);
-  MyMoneyMoney cellBalance(const MyMoneyMoney& _balance);
-  bool isUsed() const {
-    return m_cellUsed;
-  }
+    PivotCell() : m_stockSplit(MyMoneyMoney::ONE), m_cellUsed(false) {}
+    explicit PivotCell(const MyMoneyMoney& value);
+    virtual ~PivotCell();
+    static PivotCell stockSplit(const MyMoneyMoney& factor);
+    PivotCell operator += (const PivotCell& right);
+    PivotCell operator += (const MyMoneyMoney& value);
+    const QString formatMoney(int fraction, bool showThousandSeparator = true) const;
+    const QString formatMoney(const QString& currency, const int prec, bool showThousandSeparator = true) const;
+    MyMoneyMoney calculateRunningSum(const MyMoneyMoney& runningSum);
+    MyMoneyMoney cellBalance(const MyMoneyMoney& _balance);
+    bool isUsed() const {
+        return m_cellUsed;
+    }
 private:
-  MyMoneyMoney m_stockSplit;
-  MyMoneyMoney m_postSplit;
-  bool m_cellUsed;
+    MyMoneyMoney m_stockSplit;
+    MyMoneyMoney m_postSplit;
+    bool m_cellUsed;
 };
 class PivotGridRow: public QList<PivotCell>
 {
 public:
 
-  explicit PivotGridRow(unsigned _numcolumns = 0) {
-    for (uint i = 0; i < _numcolumns; i++)
-      append(PivotCell());
-  }
-  MyMoneyMoney m_total;
+    explicit PivotGridRow(unsigned _numcolumns = 0) {
+        for (uint i = 0; i < _numcolumns; i++)
+            append(PivotCell());
+    }
+    MyMoneyMoney m_total;
 };
 
 class PivotGridRowSet: public QMap<ERowType, PivotGridRow>
 {
 public:
-  explicit PivotGridRowSet(unsigned _numcolumns = 0);
+    explicit PivotGridRowSet(unsigned _numcolumns = 0);
 };
 
 class PivotInnerGroup: public QMap<ReportAccount, PivotGridRowSet>
 {
 public:
-  explicit PivotInnerGroup(unsigned _numcolumns = 0): m_total(_numcolumns) {}
+    explicit PivotInnerGroup(unsigned _numcolumns = 0): m_total(_numcolumns) {}
 
-  PivotGridRowSet m_total;
+    PivotGridRowSet m_total;
 };
 
 class PivotOuterGroup: public QMap<QString, PivotInnerGroup>
 {
 public:
-  explicit PivotOuterGroup(unsigned _numcolumns = 0, unsigned _sort = m_kDefaultSortOrder, bool _inverted = false): m_total(_numcolumns), m_inverted(_inverted), m_sortOrder(_sort) {}
-  bool operator<(const PivotOuterGroup& _right) const {
-    if (m_sortOrder != _right.m_sortOrder)
-      return m_sortOrder < _right.m_sortOrder;
-    else
-      return m_displayName < _right.m_displayName;
-  }
-  PivotGridRowSet m_total;
+    explicit PivotOuterGroup(unsigned _numcolumns = 0, unsigned _sort = m_kDefaultSortOrder, bool _inverted = false): m_total(_numcolumns), m_inverted(_inverted), m_sortOrder(_sort) {}
+    bool operator<(const PivotOuterGroup& _right) const {
+        if (m_sortOrder != _right.m_sortOrder)
+            return m_sortOrder < _right.m_sortOrder;
+        else
+            return m_displayName < _right.m_displayName;
+    }
+    PivotGridRowSet m_total;
 
-  // An inverted outergroup means that all values placed in subordinate rows
-  // should have their sign inverted from typical cash-flow notation.  Also it
-  // means that when the report is summed, the values should be inverted again
-  // so that the grand total is really "non-inverted outergroup MINUS inverted outergroup".
-  bool m_inverted;
+    // An inverted outergroup means that all values placed in subordinate rows
+    // should have their sign inverted from typical cash-flow notation.  Also it
+    // means that when the report is summed, the values should be inverted again
+    // so that the grand total is really "non-inverted outergroup MINUS inverted outergroup".
+    bool m_inverted;
 
-  // The localized name of the group for display in the report. Outergoups need this
-  // independently, because they will lose their association with the TGrid when the
-  // report is rendered.
-  QString m_displayName;
+    // The localized name of the group for display in the report. Outergoups need this
+    // independently, because they will lose their association with the TGrid when the
+    // report is rendered.
+    QString m_displayName;
 
-  // lower numbers sort toward the top of the report. defaults to 100, which is a nice
-  // middle-of-the-road value
-  unsigned m_sortOrder;
+    // lower numbers sort toward the top of the report. defaults to 100, which is a nice
+    // middle-of-the-road value
+    unsigned m_sortOrder;
 
-  // default sort order
-  static const unsigned m_kDefaultSortOrder;
+    // default sort order
+    static const unsigned m_kDefaultSortOrder;
 };
 class PivotGrid: public QMap<QString, PivotOuterGroup>
 {
 public:
-  PivotGridRowSet rowSet(QString id);
+    PivotGridRowSet rowSet(QString id);
 
-  PivotGridRowSet m_total;
+    PivotGridRowSet m_total;
 };
 
 }

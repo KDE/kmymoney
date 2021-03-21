@@ -18,17 +18,17 @@ K_PLUGIN_FACTORY_WITH_JSON(sepaOnlineTasksFactory,
                           )
 
 sepaOnlineTasksLoader::sepaOnlineTasksLoader(QObject* parent, const QVariantList& /*options*/)
-  : QObject(parent),
-  onlineTaskFactory()
+    : QObject(parent),
+      onlineTaskFactory()
 {
 }
 
 onlineTask* sepaOnlineTasksLoader::createOnlineTask(const QString& taskId) const
 {
-  if (taskId == sepaOnlineTransferImpl::name())
-    return new sepaOnlineTransferImpl;
-  
-  return nullptr;
+    if (taskId == sepaOnlineTransferImpl::name())
+        return new sepaOnlineTransferImpl;
+
+    return nullptr;
 }
 
 // Needed for K_PLUGIN_FACTORY

@@ -37,109 +37,109 @@
 
 class CsvExportDlg : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit CsvExportDlg(QWidget *parent = 0);
-  ~CsvExportDlg();
+    explicit CsvExportDlg(QWidget *parent = 0);
+    ~CsvExportDlg();
 
-  /**
-    * This method returns the filename entered into the edit field
-    *
-    * @return QString with filename
-    */
-  const QString filename() const {
-    return ui->m_qlineeditFile->text();
-  };
+    /**
+      * This method returns the filename entered into the edit field
+      *
+      * @return QString with filename
+      */
+    const QString filename() const {
+        return ui->m_qlineeditFile->text();
+    };
 
-  /**
-    * This method returns the start date of the export dialog
-    */
-  QDate startDate() const {
-    return ui->m_kmymoneydateStart->date();
-  };
+    /**
+      * This method returns the start date of the export dialog
+      */
+    QDate startDate() const {
+        return ui->m_kmymoneydateStart->date();
+    };
 
-  /**
-    * This method returns the end date of the export dialog
-    */
-  QDate endDate() const {
-    return ui->m_kmymoneydateEnd->date();
-  };
+    /**
+      * This method returns the end date of the export dialog
+      */
+    QDate endDate() const {
+        return ui->m_kmymoneydateEnd->date();
+    };
 
-  /**
-    * This method returns the state of the account radioButton
-    */
-  bool accountSelected() const {
-    return ui->m_radioButtonAccount->isChecked();
-  };
+    /**
+      * This method returns the state of the account radioButton
+      */
+    bool accountSelected() const {
+        return ui->m_radioButtonAccount->isChecked();
+    };
 
-  /**
-    * This method returns the state of the category radioButton
-    */
-  bool categorySelected() const {
-    return ui->m_radioButtonCategories->isChecked();
-  };
+    /**
+      * This method returns the state of the category radioButton
+      */
+    bool categorySelected() const {
+        return ui->m_radioButtonCategories->isChecked();
+    };
 
-  /**
-    * This method returns the accountId of the selected file
-    */
-  const QString accountId() const {
-    return m_accountId;
-  };
+    /**
+      * This method returns the accountId of the selected file
+      */
+    const QString accountId() const {
+        return m_accountId;
+    };
 
-  /**
-    * This method returns the field separator value
-    */
-  QString separator() {
-    return m_separator;
-  };
+    /**
+      * This method returns the field separator value
+      */
+    QString separator() {
+        return m_separator;
+    };
 
 protected Q_SLOTS:
-  /**
-    * Called when the user needs to browse the filesystem for a CSV file
-    */
-  void slotBrowse();
+    /**
+      * Called when the user needs to browse the filesystem for a CSV file
+      */
+    void slotBrowse();
 
-  /**
-    * This slot checks whether all data is correct to enable
-    * the 'Export' button. The enable state of the 'Export' button
-    * is updated appropriately.
-    *
-    * If the parameter @p account is not empty, then it is assumed
-    * a new account is selected and the date fields will be loaded
-    * with the date of the first and last transaction within this
-    * account.
-    *
-    * @param account The name of the selected account.
-    */
-  void checkData(const QString& account = QString());
+    /**
+      * This slot checks whether all data is correct to enable
+      * the 'Export' button. The enable state of the 'Export' button
+      * is updated appropriately.
+      *
+      * If the parameter @p account is not empty, then it is assumed
+      * a new account is selected and the date fields will be loaded
+      * with the date of the first and last transaction within this
+      * account.
+      *
+      * @param account The name of the selected account.
+      */
+    void checkData(const QString& account = QString());
 
-  /**
-    * This method returns a list of Asset or Liability types, but
-    * excluding any Stocks.
-    */
-  QStringList getAccounts();
+    /**
+      * This method returns a list of Asset or Liability types, but
+      * excluding any Stocks.
+      */
+    QStringList getAccounts();
 
 public Q_SLOTS:
 
-  void slotStatusProgressBar(int current, int total);
+    void slotStatusProgressBar(int current, int total);
 
 private:
 
-  void readConfig();
-  void writeConfig();
+    void readConfig();
+    void writeConfig();
 
-  /**
-    * This method is used to load the available accounts into the
-    * combo box for selection.
-    */
-  void loadAccounts();
+    /**
+      * This method is used to load the available accounts into the
+      * combo box for selection.
+      */
+    void loadAccounts();
 
-  Ui::CsvExportDlg* ui;
-  QString           m_accountId;
-  QString           m_separator;
-  QStringList       m_idList;
-  QStringList       m_fieldDelimiterCharList;
+    Ui::CsvExportDlg* ui;
+    QString           m_accountId;
+    QString           m_separator;
+    QStringList       m_idList;
+    QStringList       m_fieldDelimiterCharList;
 };
 
 bool caseInsensitiveLessThan(const QString &s1, const QString &s2);

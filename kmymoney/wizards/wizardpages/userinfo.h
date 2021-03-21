@@ -14,7 +14,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class UserInfo; }
+namespace Ui {
+class UserInfo;
+}
 
 class MyMoneyPayee;
 
@@ -24,15 +26,15 @@ class MyMoneyPayee;
 
 class UserInfo : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(UserInfo)
+    Q_OBJECT
+    Q_DISABLE_COPY(UserInfo)
 
 public:
-  explicit UserInfo(QWidget *parent = nullptr);
-  virtual ~UserInfo();
+    explicit UserInfo(QWidget *parent = nullptr);
+    virtual ~UserInfo();
 
-  MyMoneyPayee user() const;
-  Ui::UserInfo *ui;
+    MyMoneyPayee user() const;
+    Ui::UserInfo *ui;
 };
 
 

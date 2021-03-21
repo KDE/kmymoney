@@ -21,10 +21,10 @@ KSettingsFonts::KSettingsFonts(QWidget* parent) :
     QWidget(parent),
     ui(new Ui::KSettingsFonts)
 {
-  ui->setupUi(this);
+    ui->setupUi(this);
 }
 
 KSettingsFonts::~KSettingsFonts()
 {
-  delete ui;
+    delete ui;
 }

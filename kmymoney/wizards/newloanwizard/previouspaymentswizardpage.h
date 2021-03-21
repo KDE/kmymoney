@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class PreviousPaymentsWizardPage; }
+namespace Ui {
+class PreviousPaymentsWizardPage;
+}
 
 /**
  * This class implements the Previous Payments page of the
@@ -26,13 +28,13 @@ namespace Ui { class PreviousPaymentsWizardPage; }
 
 class PreviousPaymentsWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit PreviousPaymentsWizardPage(QWidget *parent = nullptr);
-  ~PreviousPaymentsWizardPage();
+    explicit PreviousPaymentsWizardPage(QWidget *parent = nullptr);
+    ~PreviousPaymentsWizardPage();
 
 private:
-  Ui::PreviousPaymentsWizardPage *ui;
+    Ui::PreviousPaymentsWizardPage *ui;
 };
 
 #endif

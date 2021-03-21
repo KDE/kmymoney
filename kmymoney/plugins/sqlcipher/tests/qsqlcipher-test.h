@@ -13,27 +13,27 @@
 
 class qsqlciphertest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 private:
-  int data();
+    int data();
 
 private Q_SLOTS:
-  void initTestCase();
-  void cleanupTestCase();
+    void initTestCase();
+    void cleanupTestCase();
 
-  void isSQLCipherUsed();
-  void createEncryptedDatabase();
-  void createTable();
-  void writeData_data();
-  void writeData();
-  void reopenDatabase();
-  void countData();
-  void readData_data();
-  void readData();
+    void isSQLCipherUsed();
+    void createEncryptedDatabase();
+    void createTable();
+    void writeData_data();
+    void writeData();
+    void reopenDatabase();
+    void countData();
+    void readData_data();
+    void readData();
 
 private:
-  QTemporaryFile m_file;
-  QSqlDatabase m_db;
+    QTemporaryFile m_file;
+    QSqlDatabase m_db;
 };
 
 #endif // QSQLCIPHER_TEST_H

@@ -30,23 +30,31 @@ class QModelIndex;
 
 class MyMoneyMoney;
 
-namespace eMyMoney { namespace Split { enum class State; } }
-namespace eWidgets { namespace eRegister { enum class CashFlowDirection; } }
+namespace eMyMoney {
+namespace Split {
+enum class State;
+}
+}
+namespace eWidgets {
+namespace eRegister {
+enum class CashFlowDirection;
+}
+}
 
 namespace KMyMoneyRegister
 {
-  struct RegisterFilter;
-  class Register;
+struct RegisterFilter;
+class Register;
 
-  /**
-  * @author Thomas Baumgart
-  */
-  class RegisterItemPrivate;
-  class KMM_OLDREGISTER_EXPORT RegisterItem
-  {
+/**
+* @author Thomas Baumgart
+*/
+class RegisterItemPrivate;
+class KMM_OLDREGISTER_EXPORT RegisterItem
+{
     Q_DISABLE_COPY(RegisterItem)
 
-  public:
+public:
     explicit RegisterItem(Register* getParent);
     virtual ~RegisterItem();
 
@@ -180,13 +188,13 @@ namespace KMyMoneyRegister
     */
     virtual bool maybeTip(const QPoint& /* relpos */, int /* row */, int /* col */, QRect& /* r */, QString& /* msg */);
 
-  protected:
+protected:
     RegisterItemPrivate * const d_ptr;
     RegisterItem(RegisterItemPrivate &dd, Register *parent);
 
-  private:
+private:
     Q_DECLARE_PRIVATE(RegisterItem)
-  };
+};
 } // namespace
 
 #endif

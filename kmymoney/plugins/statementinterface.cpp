@@ -17,7 +17,7 @@
 KMyMoneyPlugin::StatementInterface::StatementInterface(QObject* parent, const char* name) :
     QObject(parent)
 {
-  setObjectName(name);
+    setObjectName(name);
 }
 
 KMyMoneyPlugin::StatementInterface::~StatementInterface()

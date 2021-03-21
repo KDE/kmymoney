@@ -28,22 +28,22 @@
 class MyMoneyBudgetPrivate : public MyMoneyObjectPrivate
 {
 public:
-  /**
-    * The user-assigned name of the Budget
-    */
-  QString m_name;
+    /**
+      * The user-assigned name of the Budget
+      */
+    QString m_name;
 
-  /**
-    * The user-assigned year of the Budget
-    */
-  QDate m_start;
+    /**
+      * The user-assigned year of the Budget
+      */
+    QDate m_start;
 
-  /**
-    * Map the budgeted accounts
-    *
-    * Each account Id is stored against the AccountGroup information
-    */
-  QMap<QString, MyMoneyBudget::AccountGroup> m_accounts;
+    /**
+      * Map the budgeted accounts
+      *
+      * Each account Id is stored against the AccountGroup information
+      */
+    QMap<QString, MyMoneyBudget::AccountGroup> m_accounts;
 };
 
 #endif

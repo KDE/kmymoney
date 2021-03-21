@@ -36,29 +36,29 @@ class MyMoneyReport;
 class KReportConfigurationFilterDlgPrivate;
 class KReportConfigurationFilterDlg : public QDialog
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KReportConfigurationFilterDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(KReportConfigurationFilterDlg)
 
 public:
-  explicit KReportConfigurationFilterDlg(MyMoneyReport report, QWidget *parent = nullptr);
-  ~KReportConfigurationFilterDlg();
+    explicit KReportConfigurationFilterDlg(MyMoneyReport report, QWidget *parent = nullptr);
+    ~KReportConfigurationFilterDlg();
 
-  MyMoneyReport getConfig() const;
+    MyMoneyReport getConfig() const;
 
 protected Q_SLOTS:
-  void slotRowTypeChanged(int);
-  void slotColumnTypeChanged(int);
-  void slotReset();
-  void slotSearch();
-  void slotShowHelp();
-  void slotUpdateCheckTransfers();
-  void slotUpdateColumnsCombo();
-  void slotUpdateColumnsCombo(int idx);
-  void slotLogAxisChanged(int state);
-  void slotNegExpensesChanged(int state);
+    void slotRowTypeChanged(int);
+    void slotColumnTypeChanged(int);
+    void slotReset();
+    void slotSearch();
+    void slotShowHelp();
+    void slotUpdateCheckTransfers();
+    void slotUpdateColumnsCombo();
+    void slotUpdateColumnsCombo(int idx);
+    void slotLogAxisChanged(int state);
+    void slotNegExpensesChanged(int state);
 
 private:
-  Q_DECLARE_PRIVATE(KReportConfigurationFilterDlg)
-  KReportConfigurationFilterDlgPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KReportConfigurationFilterDlg)
+    KReportConfigurationFilterDlgPrivate * const d_ptr;
 };
 #endif

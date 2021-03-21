@@ -29,9 +29,9 @@ using namespace KMyMoneyRegister;
 
 namespace KMyMoneyRegister
 {
-  class InvestTransactionPrivate : public TransactionPrivate
-  {
-  public:
+class InvestTransactionPrivate : public TransactionPrivate
+{
+public:
     QList<MyMoneySplit>       m_feeSplits;
     QList<MyMoneySplit>       m_interestSplits;
     MyMoneySplit              m_assetAccountSplit;
@@ -43,7 +43,7 @@ namespace KMyMoneyRegister
     MyMoneyMoney              m_feeAmount;
     MyMoneyMoney              m_interestAmount;
     MyMoneyMoney              m_totalAmount;
-  };
+};
 }
 
 #endif

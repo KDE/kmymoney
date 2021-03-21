@@ -18,23 +18,23 @@ class KWebView;
 
 class KReportDlg : public QDialog, public Ui::KReconciliationReportDlgDecl
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  KReportDlg(QWidget* parent, const QString& summaryReportHTML, const QString& detailsReportHTML);
-  ~KReportDlg();
+    KReportDlg(QWidget* parent, const QString& summaryReportHTML, const QString& detailsReportHTML);
+    ~KReportDlg();
 
 protected Q_SLOTS:
-  void print();
+    void print();
 
 private:
-  #ifdef ENABLE_WEBENGINE
-  QWebEngineView *m_summaryHTMLPart;
-  QWebEngineView *m_detailsHTMLPart;
-  #else
-  KWebView       *m_summaryHTMLPart;
-  KWebView       *m_detailsHTMLPart;
-  #endif
+#ifdef ENABLE_WEBENGINE
+    QWebEngineView *m_summaryHTMLPart;
+    QWebEngineView *m_detailsHTMLPart;
+#else
+    KWebView       *m_summaryHTMLPart;
+    KWebView       *m_detailsHTMLPart;
+#endif
 };
 
 #endif

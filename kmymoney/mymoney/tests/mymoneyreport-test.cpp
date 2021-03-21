@@ -15,10 +15,10 @@ QTEST_GUILESS_MAIN(MyMoneyReportTest)
 
 void MyMoneyReportTest::init()
 {
-  m = new MyMoneyReport();
+    m = new MyMoneyReport();
 }
 
 void MyMoneyReportTest::cleanup()
 {
-  delete m;
+    delete m;
 }

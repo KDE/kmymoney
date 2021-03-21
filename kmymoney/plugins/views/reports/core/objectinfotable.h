@@ -41,22 +41,24 @@ class ReportAccount;
 class ObjectInfoTable : public ListTable
 {
 public:
-  explicit ObjectInfoTable(const MyMoneyReport&);
-  void init();
+    explicit ObjectInfoTable(const MyMoneyReport&);
+    void init();
 
 protected:
-  void constructScheduleTable();
-  void constructAccountTable();
-  void constructAccountLoanTable();
+    void constructScheduleTable();
+    void constructAccountTable();
+    void constructAccountLoanTable();
 
-  bool linkEntries() const final override { return false; }
+    bool linkEntries() const final override {
+        return false;
+    }
 
 private:
-  /**
-    * @param acc the investment account
-    * @return the balance in the currency of the investment account
-    */
-  MyMoneyMoney investmentBalance(const MyMoneyAccount& acc);
+    /**
+      * @param acc the investment account
+      * @return the balance in the currency of the investment account
+      */
+    MyMoneyMoney investmentBalance(const MyMoneyAccount& acc);
 };
 
 }

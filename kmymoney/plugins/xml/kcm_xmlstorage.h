@@ -24,32 +24,32 @@
 
 class PluginSettingsWidget : public QWidget, public Ui::XMLStorageSettings
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(PluginSettingsWidget)
+    Q_OBJECT
+    Q_DISABLE_COPY(PluginSettingsWidget)
 
 public:
-  explicit PluginSettingsWidget(QWidget* parent = nullptr);
+    explicit PluginSettingsWidget(QWidget* parent = nullptr);
 
 public Q_SLOTS:
-  void showEvent(QShowEvent *event) override;
+    void showEvent(QShowEvent *event) override;
 
 protected Q_SLOTS:
-  void slotStatusChanged(bool state);
-  void slotIdChanged();
-  void slotIdChanged(int idx);
-  void slotKeyListChanged();
+    void slotStatusChanged(bool state);
+    void slotIdChanged();
+    void slotIdChanged(int idx);
+    void slotKeyListChanged();
 
 private:
-  int               m_checkCount;
-  bool              m_needCheckList;
-  bool              m_listOk;
+    int               m_checkCount;
+    bool              m_needCheckList;
+    bool              m_listOk;
 };
 
 class KCMXMLStorage : public KCModule
 {
 public:
-  explicit KCMXMLStorage(QWidget *parent, const QVariantList &args);
-  ~KCMXMLStorage();
+    explicit KCMXMLStorage(QWidget *parent, const QVariantList &args);
+    ~KCMXMLStorage();
 };
 
 #endif

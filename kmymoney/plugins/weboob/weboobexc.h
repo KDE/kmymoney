@@ -20,16 +20,22 @@
 // Project Includes
 
 enum class ExceptionCode {
-  BrowserIncorrectPassword,
+    BrowserIncorrectPassword,
 };
 
 class WeboobException : public QException
 {
 public:
     explicit WeboobException(ExceptionCode ec) : m_exceptionCode(ec) {}
-    ExceptionCode msg() const { return m_exceptionCode; }
-    void raise() const { throw *this; }
-    WeboobException *clone() const { return new WeboobException(*this); }
+    ExceptionCode msg() const {
+        return m_exceptionCode;
+    }
+    void raise() const {
+        throw *this;
+    }
+    WeboobException *clone() const {
+        return new WeboobException(*this);
+    }
     ExceptionCode m_exceptionCode;
 };
 #endif

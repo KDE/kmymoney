@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class ScheduleWizardPage; }
+namespace Ui {
+class ScheduleWizardPage;
+}
 
 /**
  * This class implements the Schedule page of the
@@ -26,23 +28,23 @@ namespace Ui { class ScheduleWizardPage; }
 
 class ScheduleWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit ScheduleWizardPage(QWidget *parent = nullptr);
-  ~ScheduleWizardPage();
+    explicit ScheduleWizardPage(QWidget *parent = nullptr);
+    ~ScheduleWizardPage();
 
-  /**
-   * Overload the isComplete function to control the Next button
-   */
-  bool isComplete() const final override;
+    /**
+     * Overload the isComplete function to control the Next button
+     */
+    bool isComplete() const final override;
 
-  /**
-   * Overload the initializePage function to set widgets based on
-   * the inputs from previous pages.
-   */
-  void initializePage() final override;
+    /**
+     * Overload the initializePage function to set widgets based on
+     * the inputs from previous pages.
+     */
+    void initializePage() final override;
 
-  Ui::ScheduleWizardPage *ui;
+    Ui::ScheduleWizardPage *ui;
 };
 
 #endif

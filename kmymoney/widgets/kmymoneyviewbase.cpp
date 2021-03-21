@@ -21,20 +21,20 @@
 #include "kmymoneyutils.h"
 
 KMyMoneyViewBase::KMyMoneyViewBase(QWidget* parent)
-  : QWidget(parent)
-  , d_ptr(new KMyMoneyViewBasePrivate(this))
+    : QWidget(parent)
+    , d_ptr(new KMyMoneyViewBasePrivate(this))
 {
 }
 
 KMyMoneyViewBase::KMyMoneyViewBase(KMyMoneyViewBasePrivate &dd, QWidget *parent)
-  : QWidget(parent)
-  , d_ptr(&dd)
+    : QWidget(parent)
+    , d_ptr(&dd)
 {
-  // make sure we keep a copy of what we send out
-  connect(this, &KMyMoneyViewBase::requestSelectionChange, this, [&](const SelectedObjects& selections) {
-    Q_D(KMyMoneyViewBase);
-    d->m_selections = selections;
-  });
+    // make sure we keep a copy of what we send out
+    connect(this, &KMyMoneyViewBase::requestSelectionChange, this, [&](const SelectedObjects& selections) {
+        Q_D(KMyMoneyViewBase);
+        d->m_selections = selections;
+    });
 }
 
 KMyMoneyViewBase::~KMyMoneyViewBase()
@@ -43,10 +43,10 @@ KMyMoneyViewBase::~KMyMoneyViewBase()
 
 void KMyMoneyViewBase::aboutToShow()
 {
-  Q_D(KMyMoneyViewBase);
+    Q_D(KMyMoneyViewBase);
 
-  // tell everyone what is selected here
-  emit requestSelectionChange(d->m_selections);
+    // tell everyone what is selected here
+    emit requestSelectionChange(d->m_selections);
 }
 
 void KMyMoneyViewBase::aboutToHide()
@@ -55,9 +55,9 @@ void KMyMoneyViewBase::aboutToHide()
 
 void KMyMoneyViewBase::changeEvent(QEvent* ev)
 {
-  QWidget::changeEvent(ev);
+    QWidget::changeEvent(ev);
 
-  if(ev->type() == QEvent::EnabledChange) {
-    emit viewStateChanged(isEnabled());
-  }
+    if(ev->type() == QEvent::EnabledChange) {
+        emit viewStateChanged(isEnabled());
+    }
 }

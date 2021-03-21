@@ -18,7 +18,7 @@
 #include "ui_kbaccountsettings.h"
 
 struct KBAccountSettings::Private {
-  Ui::KBAccountSettings ui;
+    Ui::KBAccountSettings ui;
 };
 
 KBAccountSettings::KBAccountSettings(const MyMoneyAccount& /*acc*/,
@@ -26,54 +26,54 @@ KBAccountSettings::KBAccountSettings(const MyMoneyAccount& /*acc*/,
     QWidget(parent),
     d(new Private)
 {
-  d->ui.setupUi(this);
+    d->ui.setupUi(this);
 }
 
 KBAccountSettings::~KBAccountSettings()
 {
-  delete d;
+    delete d;
 }
 
 void KBAccountSettings::loadUi(const MyMoneyKeyValueContainer& kvp)
 {
-  d->ui.m_usePayeeAsIsButton->setChecked(true);
-  d->ui.m_transactionDownload->setChecked(kvp.value("kbanking-txn-download") != "no");
-  d->ui.m_preferredStatementDate->setCurrentIndex(kvp.value("kbanking-statementDate").toInt());
-  if (!kvp.value("kbanking-payee-regexp").isEmpty()) {
-    d->ui.m_extractPayeeButton->setChecked(true);
-    d->ui.m_payeeRegExpEdit->setText(kvp.value("kbanking-payee-regexp"));
-    d->ui.m_memoRegExpEdit->setText(kvp.value("kbanking-memo-regexp"));
-    d->ui.m_payeeExceptions->clear();
-    d->ui.m_payeeExceptions->insertStringList(kvp.value("kbanking-payee-exceptions").split(';', QString::SkipEmptyParts));
-  }
-  d->ui.m_removeLineBreaksFromMemo->setChecked(kvp.value("kbanking-memo-removelinebreaks").compare(QLatin1String("no")));
+    d->ui.m_usePayeeAsIsButton->setChecked(true);
+    d->ui.m_transactionDownload->setChecked(kvp.value("kbanking-txn-download") != "no");
+    d->ui.m_preferredStatementDate->setCurrentIndex(kvp.value("kbanking-statementDate").toInt());
+    if (!kvp.value("kbanking-payee-regexp").isEmpty()) {
+        d->ui.m_extractPayeeButton->setChecked(true);
+        d->ui.m_payeeRegExpEdit->setText(kvp.value("kbanking-payee-regexp"));
+        d->ui.m_memoRegExpEdit->setText(kvp.value("kbanking-memo-regexp"));
+        d->ui.m_payeeExceptions->clear();
+        d->ui.m_payeeExceptions->insertStringList(kvp.value("kbanking-payee-exceptions").split(';', QString::SkipEmptyParts));
+    }
+    d->ui.m_removeLineBreaksFromMemo->setChecked(kvp.value("kbanking-memo-removelinebreaks").compare(QLatin1String("no")));
 }
 
 void KBAccountSettings::loadKvp(MyMoneyKeyValueContainer& kvp)
 {
-  kvp.deletePair("kbanking-payee-regexp");
-  kvp.deletePair("kbanking-memo-regexp");
-  kvp.deletePair("kbanking-payee-exceptions");
-  kvp.deletePair("kbanking-txn-download");
-  kvp.deletePair("kbanking-memo-remlinebreak");
-  // The key "kbanking-jobexec" is not used since version 4.8 anymore
-  kvp.deletePair("kbanking-jobexec");
+    kvp.deletePair("kbanking-payee-regexp");
+    kvp.deletePair("kbanking-memo-regexp");
+    kvp.deletePair("kbanking-payee-exceptions");
+    kvp.deletePair("kbanking-txn-download");
+    kvp.deletePair("kbanking-memo-remlinebreak");
+    // The key "kbanking-jobexec" is not used since version 4.8 anymore
+    kvp.deletePair("kbanking-jobexec");
 
-  if (d->ui.m_extractPayeeButton->isChecked()
-      && !d->ui.m_payeeRegExpEdit->text().isEmpty()
-      && !d->ui.m_memoRegExpEdit->text().isEmpty()) {
-    kvp["kbanking-payee-regexp"] = d->ui.m_payeeRegExpEdit->text();
-    kvp["kbanking-memo-regexp"] = d->ui.m_memoRegExpEdit->text();
-    kvp["kbanking-payee-exceptions"] = d->ui.m_payeeExceptions->items().join(";");
-  } else if (d->ui.m_extractPayeeButton->isChecked()) {
-    KMessageBox::information(0, i18n("You selected to extract the payee from the memo field but did not supply a regular expression for payee and memo extraction. The option will not be activated."), i18n("Missing information"));
-  }
-  if (!d->ui.m_transactionDownload->isChecked())
-    kvp["kbanking-txn-download"] = "no";
+    if (d->ui.m_extractPayeeButton->isChecked()
+            && !d->ui.m_payeeRegExpEdit->text().isEmpty()
+            && !d->ui.m_memoRegExpEdit->text().isEmpty()) {
+        kvp["kbanking-payee-regexp"] = d->ui.m_payeeRegExpEdit->text();
+        kvp["kbanking-memo-regexp"] = d->ui.m_memoRegExpEdit->text();
+        kvp["kbanking-payee-exceptions"] = d->ui.m_payeeExceptions->items().join(";");
+    } else if (d->ui.m_extractPayeeButton->isChecked()) {
+        KMessageBox::information(0, i18n("You selected to extract the payee from the memo field but did not supply a regular expression for payee and memo extraction. The option will not be activated."), i18n("Missing information"));
+    }
+    if (!d->ui.m_transactionDownload->isChecked())
+        kvp["kbanking-txn-download"] = "no";
 
-  // remove linebreaks, default is on
-  if (!d->ui.m_removeLineBreaksFromMemo->isChecked())
-    kvp["kbanking-memo-removelinebreaks"] = "no";
+    // remove linebreaks, default is on
+    if (!d->ui.m_removeLineBreaksFromMemo->isChecked())
+        kvp["kbanking-memo-removelinebreaks"] = "no";
 
-  kvp["kbanking-statementDate"] = QString("%1").arg(d->ui.m_preferredStatementDate->currentIndex());
+    kvp["kbanking-statementDate"] = QString("%1").arg(d->ui.m_preferredStatementDate->currentIndex());
 }

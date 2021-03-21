@@ -24,21 +24,21 @@ class QStyleOptionViewItem;
 
 namespace KMyMoneyRegister
 {
-  class Register;
-  class RegisterItemDelegate : public QStyledItemDelegate
-  {
+class Register;
+class RegisterItemDelegate : public QStyledItemDelegate
+{
     Q_OBJECT
     Q_DISABLE_COPY(RegisterItemDelegate)
 
-  public:
+public:
     explicit RegisterItemDelegate(Register *parent);
     ~RegisterItemDelegate();
 
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const final override;
 
-  private:
+private:
     Register *m_register;
-  };
+};
 
 } // namespace
 

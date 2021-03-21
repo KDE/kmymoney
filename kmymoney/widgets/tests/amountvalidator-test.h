@@ -29,7 +29,7 @@ private Q_SLOTS:
     void testValidator();
 
 private:
-    void setLocale(const QString& name, const QChar& decimal , const QChar& group);
+    void setLocale(const QString& name, const QChar& decimal, const QChar& group);
     void addAcceptableNumber(const QString& testCaseName, const QString& number);
     void addInvalidNumber(const QString& testCaseName, const QString& number);
 };

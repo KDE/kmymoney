@@ -30,30 +30,30 @@
   */
 class KMyMoneyMoneyValidator : public QDoubleValidator
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyMoneyValidator)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyMoneyValidator)
 
 public:
-  /**
-    * Construct a locale-aware KDoubleValidator with default range
-    * (whatever QDoubleValidator uses for that) and parent @p
-    * parent
-    */
-  explicit KMyMoneyMoneyValidator(QObject * parent);
-  /**
-    * Construct a locale-aware KDoubleValidator for range [@p bottom,@p
-    * top] and a precision of @p digits after the decimal
-    * point.
-    */
-  explicit KMyMoneyMoneyValidator(double bottom, double top, int decimals,
-                                  QObject * parent);
-  /**
-    * Destructs the validator.
-    */
-  ~KMyMoneyMoneyValidator();
+    /**
+      * Construct a locale-aware KDoubleValidator with default range
+      * (whatever QDoubleValidator uses for that) and parent @p
+      * parent
+      */
+    explicit KMyMoneyMoneyValidator(QObject * parent);
+    /**
+      * Construct a locale-aware KDoubleValidator for range [@p bottom,@p
+      * top] and a precision of @p digits after the decimal
+      * point.
+      */
+    explicit KMyMoneyMoneyValidator(double bottom, double top, int decimals,
+                                    QObject * parent);
+    /**
+      * Destructs the validator.
+      */
+    ~KMyMoneyMoneyValidator();
 
-  /** Overloaded for internal reasons. The API is not affected. */
-  QValidator::State validate(QString & input, int & pos) const override;
+    /** Overloaded for internal reasons. The API is not affected. */
+    QValidator::State validate(QString & input, int & pos) const override;
 };
 
 #endif

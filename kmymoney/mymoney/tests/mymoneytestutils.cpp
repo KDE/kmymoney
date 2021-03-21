@@ -9,6 +9,6 @@
 
 QString unexpectedExceptionString(const MyMoneyException &e)
 {
-  return QString("Unexpected exception: %1").arg(e.what());
+    return QString("Unexpected exception: %1").arg(e.what());
 }
 

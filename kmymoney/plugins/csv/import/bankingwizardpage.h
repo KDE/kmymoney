@@ -33,39 +33,39 @@ class BankingPage;
 
 class BankingPage : public CSVWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit BankingPage(CSVWizard *dlg, CSVImporterCore *imp);
-  ~BankingPage();
+    explicit BankingPage(CSVWizard *dlg, CSVImporterCore *imp);
+    ~BankingPage();
 
-  bool validateCreditDebit();
-  /**
-  * This method fills QIF file with bank/credit card data
-  */
-  void                makeQIF(const MyMoneyStatement &st, const QString &outFileName);
-
-private:
-  void initializePage() final override;
-  bool isComplete() const final override;
-  int nextId() const final override;
-
-  bool                validateMemoComboBox();
-  void                resetComboBox ( Column comboBox, int index = -1 );
-  bool                validateSelectedColumn(const int col, const Column type);
-
-  void                memoColSelected(int col);
-  void                payeeColSelected(int col);
-
-  void                clearColumns();
-  void                updateCurrentMemoSelection();
-  void                clearMemoColumns();
+    bool validateCreditDebit();
+    /**
+    * This method fills QIF file with bank/credit card data
+    */
+    void                makeQIF(const MyMoneyStatement &st, const QString &outFileName);
 
 private:
-  BankingProfile*             m_profile;
-  Ui::BankingPage*            ui;
+    void initializePage() final override;
+    bool isComplete() const final override;
+    int nextId() const final override;
 
-  QHash<Column, QComboBox *>  m_columnBoxes;
+    bool                validateMemoComboBox();
+    void                resetComboBox ( Column comboBox, int index = -1 );
+    bool                validateSelectedColumn(const int col, const Column type);
+
+    void                memoColSelected(int col);
+    void                payeeColSelected(int col);
+
+    void                clearColumns();
+    void                updateCurrentMemoSelection();
+    void                clearMemoColumns();
+
+private:
+    BankingProfile*             m_profile;
+    Ui::BankingPage*            ui;
+
+    QHash<Column, QComboBox *>  m_columnBoxes;
 };
 
 #endif // BANKINGWIZARDPAGE_H

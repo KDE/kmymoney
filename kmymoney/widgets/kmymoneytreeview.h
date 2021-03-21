@@ -27,19 +27,19 @@
   */
 class KMM_BASE_WIDGETS_EXPORT KMyMoneyTreeView : public QTreeView
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyTreeView)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyTreeView)
 
 public:
-  explicit KMyMoneyTreeView(QWidget* parent = nullptr);
-  ~KMyMoneyTreeView();
+    explicit KMyMoneyTreeView(QWidget* parent = nullptr);
+    ~KMyMoneyTreeView();
 
 protected:
-  void mouseDoubleClickEvent(QMouseEvent *event) override;
-  void keyPressEvent(QKeyEvent *event) override;
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
 
 Q_SIGNALS:
-  void startEdit(const QModelIndex& idx) const;
+    void startEdit(const QModelIndex& idx) const;
 };
 
 #endif // KMYMONEYTREEVIEW_H

@@ -19,8 +19,8 @@
 
 namespace KMyMoneyRegister
 {
-  RegisterFilter::RegisterFilter(const QString &t, LedgerFilter::State s) :
+RegisterFilter::RegisterFilter(const QString &t, LedgerFilter::State s) :
     state(s), text(t)
-  {
-  }
+{
+}
 }

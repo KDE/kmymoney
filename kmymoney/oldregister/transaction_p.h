@@ -34,19 +34,19 @@
 
 namespace KMyMoneyRegister
 {
-  class  TransactionPrivate : public RegisterItemPrivate
-  {
-  public:
+class  TransactionPrivate : public RegisterItemPrivate
+{
+public:
     TransactionPrivate() :
-      m_form(nullptr),
-      m_formRowHeight(-1),
-      m_selected(false),
-      m_focus(false),
-      m_erroneous(false),
-      m_inEdit(false),
-      m_inRegisterEdit(false),
-      m_showBalance(true),
-      m_reducedIntensity(false)
+        m_form(nullptr),
+        m_formRowHeight(-1),
+        m_selected(false),
+        m_focus(false),
+        m_erroneous(false),
+        m_inEdit(false),
+        m_inRegisterEdit(false),
+        m_showBalance(true),
+        m_reducedIntensity(false)
     {
     }
 
@@ -56,44 +56,44 @@ namespace KMyMoneyRegister
 
     void init(int uniqueId)
     {
-      auto file = MyMoneyFile::instance();
+        auto file = MyMoneyFile::instance();
 
-      // load the account
-      if (!m_split.accountId().isEmpty())
-        m_account = file->account(m_split.accountId());
+        // load the account
+        if (!m_split.accountId().isEmpty())
+            m_account = file->account(m_split.accountId());
 
-      // load the payee
-      if (!m_split.payeeId().isEmpty()) {
-        m_payee = file->payee(m_split.payeeId()).name();
-      }
-      if (m_parent->account().isIncomeExpense()) {
-        m_payeeHeader = m_split.shares().isNegative() ? i18nc("Payer", "From") : i18nc("Payee", "Pay to");
-      } else {
-        m_payeeHeader = m_split.shares().isNegative() ? i18nc("Payee", "Pay to") : i18nc("Payer", "From");
-      }
-
-      // load the tag
-      if (!m_split.tagIdList().isEmpty()) {
-        const QList<QString> t = m_split.tagIdList();
-        for (auto i = 0; i < t.count(); i++) {
-          m_tagList << file->tag(t[i]).name();
-          m_tagColorList << file->tag(t[i]).tagColor();
+        // load the payee
+        if (!m_split.payeeId().isEmpty()) {
+            m_payee = file->payee(m_split.payeeId()).name();
         }
-      }
+        if (m_parent->account().isIncomeExpense()) {
+            m_payeeHeader = m_split.shares().isNegative() ? i18nc("Payer", "From") : i18nc("Payee", "Pay to");
+        } else {
+            m_payeeHeader = m_split.shares().isNegative() ? i18nc("Payee", "Pay to") : i18nc("Payer", "From");
+        }
 
-      // load the currency
-      if (!m_transaction.id().isEmpty())
-        m_splitCurrencyId = m_account.currencyId();
+        // load the tag
+        if (!m_split.tagIdList().isEmpty()) {
+            const QList<QString> t = m_split.tagIdList();
+            for (auto i = 0; i < t.count(); i++) {
+                m_tagList << file->tag(t[i]).name();
+                m_tagColorList << file->tag(t[i]).tagColor();
+            }
+        }
 
-      // check if transaction is erroneous or not
-      m_erroneous = !m_transaction.splitSum().isZero();
+        // load the currency
+        if (!m_transaction.id().isEmpty())
+            m_splitCurrencyId = m_account.currencyId();
 
-      if (!m_uniqueId.isEmpty()) {
-        m_uniqueId += '-';
-        QString id;
-        id.setNum(uniqueId);
-        m_uniqueId += id.rightJustified(3, '0');
-      }
+        // check if transaction is erroneous or not
+        m_erroneous = !m_transaction.splitSum().isZero();
+
+        if (!m_uniqueId.isEmpty()) {
+            m_uniqueId += '-';
+            QString id;
+            id.setNum(uniqueId);
+            m_uniqueId += id.rightJustified(3, '0');
+        }
     }
 
     MyMoneyTransaction      m_transaction;
@@ -117,7 +117,7 @@ namespace KMyMoneyRegister
     bool                    m_inRegisterEdit;
     bool                    m_showBalance;
     bool                    m_reducedIntensity;
-  };
+};
 }
 
 #endif

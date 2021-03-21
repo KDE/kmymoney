@@ -14,8 +14,8 @@ class KPluginInfo;
 class KCMiCalendarExporter : public KCModule
 {
 public:
-  explicit KCMiCalendarExporter(QWidget *parent = 0, const QVariantList& args = QVariantList());
-  ~KCMiCalendarExporter();
+    explicit KCMiCalendarExporter(QWidget *parent = 0, const QVariantList& args = QVariantList());
+    ~KCMiCalendarExporter();
 };
 
 #endif // KCM_ICALENDAREXPORT_H

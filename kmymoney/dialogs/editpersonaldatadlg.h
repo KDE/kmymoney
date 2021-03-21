@@ -27,39 +27,39 @@ struct ContactData;
 class EditPersonalDataDlgPrivate;
 class KMM_BASE_DIALOGS_EXPORT EditPersonalDataDlg : public QDialog
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(EditPersonalDataDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(EditPersonalDataDlg)
 
 public:
-  explicit EditPersonalDataDlg(QWidget *parent, const QString& title);
-  explicit EditPersonalDataDlg(QString userName,
-                               QString userStreet,
-                               QString userTown,
-                               QString userCounty,
-                               QString userPostcode,
-                               QString userTelephone,
-                               QString userEmail,
-                               QWidget *parent,
-                               const QString& title);
-  ~EditPersonalDataDlg();
+    explicit EditPersonalDataDlg(QWidget *parent, const QString& title);
+    explicit EditPersonalDataDlg(QString userName,
+                                 QString userStreet,
+                                 QString userTown,
+                                 QString userCounty,
+                                 QString userPostcode,
+                                 QString userTelephone,
+                                 QString userEmail,
+                                 QWidget *parent,
+                                 const QString& title);
+    ~EditPersonalDataDlg();
 
-  QString userName() const;
-  QString userStreet() const;
-  QString userTown() const;
-  QString userCountry() const;
-  QString userPostcode() const;
-  QString userTelephone() const;
-  QString userEmail() const;
+    QString userName() const;
+    QString userStreet() const;
+    QString userTown() const;
+    QString userCountry() const;
+    QString userPostcode() const;
+    QString userTelephone() const;
+    QString userEmail() const;
 
 protected Q_SLOTS:
-  void okClicked();
-  void loadFromAddressBook();
-  /** Gets the result of searching for the contact details of the current user */
-  void slotContactFetched(const ContactData &identity);
+    void okClicked();
+    void loadFromAddressBook();
+    /** Gets the result of searching for the contact details of the current user */
+    void slotContactFetched(const ContactData &identity);
 
 private:
-  EditPersonalDataDlgPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(EditPersonalDataDlg)
+    EditPersonalDataDlgPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(EditPersonalDataDlg)
 };
 
 #endif

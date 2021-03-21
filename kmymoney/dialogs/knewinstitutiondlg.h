@@ -27,27 +27,27 @@ class KJob;
 class KNewInstitutionDlgPrivate;
 class KMM_BASE_DIALOGS_EXPORT KNewInstitutionDlg : public QDialog
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KNewInstitutionDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(KNewInstitutionDlg)
 
 public:
-  explicit KNewInstitutionDlg(MyMoneyInstitution& institution, QWidget *parent = nullptr);
-  ~KNewInstitutionDlg();
-  const MyMoneyInstitution& institution();
+    explicit KNewInstitutionDlg(MyMoneyInstitution& institution, QWidget *parent = nullptr);
+    ~KNewInstitutionDlg();
+    const MyMoneyInstitution& institution();
 
-  static void newInstitution(MyMoneyInstitution& institution);
+    static void newInstitution(MyMoneyInstitution& institution);
 
 private Q_SLOTS:
-  void okClicked();
-  void institutionNameChanged(const QString &);
-  void slotUrlChanged(const QString&);
-  void slotLoadIcon();
-  void slotIconLoaded(KJob* job);
-  void killIconLoad();
+    void okClicked();
+    void institutionNameChanged(const QString &);
+    void slotUrlChanged(const QString&);
+    void slotLoadIcon();
+    void slotIconLoaded(KJob* job);
+    void killIconLoad();
 
 private:
-  KNewInstitutionDlgPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KNewInstitutionDlg)
+    KNewInstitutionDlgPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KNewInstitutionDlg)
 };
 
 #endif

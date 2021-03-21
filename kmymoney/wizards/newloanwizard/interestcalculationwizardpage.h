@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class InterestCalculationWizardPage; }
+namespace Ui {
+class InterestCalculationWizardPage;
+}
 
 /**
  * This class implements the Interest Calculation page of the
@@ -26,13 +28,13 @@ namespace Ui { class InterestCalculationWizardPage; }
 
 class InterestCalculationWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit InterestCalculationWizardPage(QWidget *parent = nullptr);
-  ~InterestCalculationWizardPage();
+    explicit InterestCalculationWizardPage(QWidget *parent = nullptr);
+    ~InterestCalculationWizardPage();
 
 private:
-  Ui::InterestCalculationWizardPage *ui;
+    Ui::InterestCalculationWizardPage *ui;
 };
 
 #endif

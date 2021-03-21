@@ -24,16 +24,16 @@ class QAction;
 
 class KMM_BASE_WIDGETS_EXPORT PasswordToggle : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit PasswordToggle(QLineEdit* parent);
+    explicit PasswordToggle(QLineEdit* parent);
 
 protected Q_SLOTS:
-  void toggleEchoModeAction(const QString& text);
-  void toggleEchoMode();
+    void toggleEchoModeAction(const QString& text);
+    void toggleEchoMode();
 private:
-  QLineEdit*    m_lineEdit;
-  QAction*      m_toggleAction;
+    QLineEdit*    m_lineEdit;
+    QAction*      m_toggleAction;
 };
 
 

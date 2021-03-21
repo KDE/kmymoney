@@ -20,18 +20,18 @@
 
 namespace KMyMoneyRegister
 {
-  class RegisterItem;
-  class ItemPtrVector : public QVector<RegisterItem *>
-  {
-  public:
+class RegisterItem;
+class ItemPtrVector : public QVector<RegisterItem *>
+{
+public:
     void sort();
 
-  protected:
+protected:
     /**
     * sorter's compare routine. Returns true if i1 < i2
     */
     static bool item_cmp(RegisterItem* i1, RegisterItem* i2);
-  };
+};
 } // namespace
 
 #endif

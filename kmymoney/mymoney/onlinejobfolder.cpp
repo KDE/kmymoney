@@ -22,20 +22,20 @@ onlineJobFolder::onlineJobFolder(const onlineJobFolder &other)
 
 onlineJobFolder onlineJobFolder::outbox()
 {
-  return onlineJobFolder(folderOutbox);
+    return onlineJobFolder(folderOutbox);
 }
 
 onlineJobFolder onlineJobFolder::drafts()
 {
-  return onlineJobFolder(folderDrafts);
+    return onlineJobFolder(folderDrafts);
 }
 
 onlineJobFolder onlineJobFolder::templates()
 {
-  return onlineJobFolder(folderTemplates);
+    return onlineJobFolder(folderTemplates);
 }
 
 onlineJobFolder onlineJobFolder::historic()
 {
-  return onlineJobFolder(folderHistoric);
+    return onlineJobFolder(folderHistoric);
 }

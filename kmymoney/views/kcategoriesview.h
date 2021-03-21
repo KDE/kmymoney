@@ -50,30 +50,30 @@ class SelectedObjects;
 class KCategoriesViewPrivate;
 class KCategoriesView : public KMyMoneyViewBase
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KCategoriesView(QWidget *parent = nullptr);
-  ~KCategoriesView();
+    explicit KCategoriesView(QWidget *parent = nullptr);
+    ~KCategoriesView();
 
-  void executeCustomAction(eView::Action action) override;
+    void executeCustomAction(eView::Action action) override;
 
 public Q_SLOTS:
-  void slotProfitLossChanged(const MyMoneyMoney &profit, bool isApproximate);
+    void slotProfitLossChanged(const MyMoneyMoney &profit, bool isApproximate);
 
-  void slotSettingsChanged() override;
-  void updateActions(const SelectedObjects& selections) override;
+    void slotSettingsChanged() override;
+    void updateActions(const SelectedObjects& selections) override;
 
 protected Q_SLOTS:
-  void slotUnusedIncomeExpenseAccountHidden();
+    void slotUnusedIncomeExpenseAccountHidden();
 
 private:
-  Q_DECLARE_PRIVATE(KCategoriesView)
+    Q_DECLARE_PRIVATE(KCategoriesView)
 
 private Q_SLOTS:
-  void slotNewCategory();
-  void slotEditCategory();
-  void slotDeleteCategory();
+    void slotNewCategory();
+    void slotEditCategory();
+    void slotDeleteCategory();
 };
 
 #endif

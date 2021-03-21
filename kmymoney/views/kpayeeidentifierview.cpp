@@ -24,77 +24,77 @@ payeeIdentifierDelegate::payeeIdentifierDelegate(QObject* parent)
 
 QAbstractItemDelegate* payeeIdentifierDelegate::getItemDelegate(const QModelIndex& index) const
 {
-  static QPointer<QAbstractItemDelegate> defaultDelegate;
-  const QString type = (index.isValid()) ? index.model()->data(index, payeeIdentifierContainerModel::payeeIdentifierType).toString() : QString();
+    static QPointer<QAbstractItemDelegate> defaultDelegate;
+    const QString type = (index.isValid()) ? index.model()->data(index, payeeIdentifierContainerModel::payeeIdentifierType).toString() : QString();
 
-  if (type.isEmpty()) {
-    QAbstractItemDelegate* delegate = new payeeIdentifierSelectionDelegate(this->parent());
-    connectSignals(delegate);
+    if (type.isEmpty()) {
+        QAbstractItemDelegate* delegate = new payeeIdentifierSelectionDelegate(this->parent());
+        connectSignals(delegate);
+        return delegate;
+    }
+
+    QAbstractItemDelegate* delegate = nullptr;
+    // Use this->parent() as parent because "this" is const
+    if (type == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid()) {
+        delegate = new ibanBicItemDelegate(this->parent());
+    } else if (type == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid()) {
+        delegate = new nationalAccountDelegate(this->parent());
+    }
+
+    if (delegate == 0) {
+        if (defaultDelegate == 0)
+            defaultDelegate = new QStyledItemDelegate(this->parent());
+        delegate = defaultDelegate;
+    }
+    connectSignals(delegate, Qt::UniqueConnection);
+    Q_CHECK_PTR(delegate);
     return delegate;
-  }
-
-  QAbstractItemDelegate* delegate = nullptr;
-  // Use this->parent() as parent because "this" is const
-  if (type == payeeIdentifiers::ibanBic::staticPayeeIdentifierIid()) {
-    delegate = new ibanBicItemDelegate(this->parent());
-  } else if (type == payeeIdentifiers::nationalAccount::staticPayeeIdentifierIid()) {
-    delegate = new nationalAccountDelegate(this->parent());
-  }
-
-  if (delegate == 0) {
-    if (defaultDelegate == 0)
-      defaultDelegate = new QStyledItemDelegate(this->parent());
-    delegate = defaultDelegate;
-  }
-  connectSignals(delegate, Qt::UniqueConnection);
-  Q_CHECK_PTR(delegate);
-  return delegate;
 }
 
 KPayeeIdentifierView::KPayeeIdentifierView(QWidget* parent)
     : QWidget(parent),
       ui(new Ui::KPayeeIdentifierView)
 {
-  ui->setupUi(this);
-  ui->view->setItemDelegate(new payeeIdentifierDelegate(ui->view));
+    ui->setupUi(this);
+    ui->view->setItemDelegate(new payeeIdentifierDelegate(ui->view));
 }
 
 KPayeeIdentifierView::~KPayeeIdentifierView()
 {
-  delete ui;
+    delete ui;
 }
 
 void KPayeeIdentifierView::setSource(MyMoneyPayeeIdentifierContainer container)
 {
-  if (ui->view->model() == 0) {
-    // this model must be closed after each KMyMoneyApp::fileLoaded signal
-    // to limit includes, it is connected outside of this class
-    auto model = new payeeIdentifierContainerModel(ui->view);
-    connect(model, &payeeIdentifierContainerModel::dataChanged, this, &KPayeeIdentifierView::dataChanged);
-    connect(model, &payeeIdentifierContainerModel::rowsRemoved, this, &KPayeeIdentifierView::dataChanged);
-    ui->view->setModel(model);
-  }
+    if (ui->view->model() == 0) {
+        // this model must be closed after each KMyMoneyApp::fileLoaded signal
+        // to limit includes, it is connected outside of this class
+        auto model = new payeeIdentifierContainerModel(ui->view);
+        connect(model, &payeeIdentifierContainerModel::dataChanged, this, &KPayeeIdentifierView::dataChanged);
+        connect(model, &payeeIdentifierContainerModel::rowsRemoved, this, &KPayeeIdentifierView::dataChanged);
+        ui->view->setModel(model);
+    }
 
-  Q_CHECK_PTR(qobject_cast<payeeIdentifierContainerModel*>(ui->view->model()));    // this should never fail but may help during debugging
-  static_cast<payeeIdentifierContainerModel*>(ui->view->model())->setSource(container);
+    Q_CHECK_PTR(qobject_cast<payeeIdentifierContainerModel*>(ui->view->model()));    // this should never fail but may help during debugging
+    static_cast<payeeIdentifierContainerModel*>(ui->view->model())->setSource(container);
 
-  // Open persistent editor for last row
-  ui->view->openPersistentEditor(ui->view->model()->index(ui->view->model()->rowCount(QModelIndex()) - 1, 0));
+    // Open persistent editor for last row
+    ui->view->openPersistentEditor(ui->view->model()->index(ui->view->model()->rowCount(QModelIndex()) - 1, 0));
 }
 
 void KPayeeIdentifierView::closeSource()
 {
-  auto model = ui->view->model();
-  if (model)
-    static_cast<payeeIdentifierContainerModel*>(model)->closeSource();
+    auto model = ui->view->model();
+    if (model)
+        static_cast<payeeIdentifierContainerModel*>(model)->closeSource();
 }
 
 QList< payeeIdentifier > KPayeeIdentifierView::identifiers() const
 {
-  const QAbstractItemModel* model = ui->view->model();
-  if (model != 0)
-    return static_cast<const payeeIdentifierContainerModel*>(model)->identifiers();
-  return QList< payeeIdentifier >();
+    const QAbstractItemModel* model = ui->view->model();
+    if (model != 0)
+        return static_cast<const payeeIdentifierContainerModel*>(model)->identifiers();
+    return QList< payeeIdentifier >();
 }
 
 /**
@@ -102,7 +102,7 @@ QList< payeeIdentifier > KPayeeIdentifierView::identifiers() const
  */
 inline bool QModelIndexRowComparison(const QModelIndex& first, const QModelIndex& second)
 {
-  return (first.row() > second.row());
+    return (first.row() > second.row());
 }
 
 /**
@@ -111,15 +111,15 @@ inline bool QModelIndexRowComparison(const QModelIndex& first, const QModelIndex
  */
 void KPayeeIdentifierView::removeSelected()
 {
-  QModelIndexList selectedRows = ui->view->selectionModel()->selectedRows();
-  // To keep the items valid during remove the data must be removed from highest row
-  // to the lowest. Unfortunately QList has no reverse iterator.
-  std::sort(selectedRows.begin(), selectedRows.end(), QModelIndexRowComparison);
+    QModelIndexList selectedRows = ui->view->selectionModel()->selectedRows();
+    // To keep the items valid during remove the data must be removed from highest row
+    // to the lowest. Unfortunately QList has no reverse iterator.
+    std::sort(selectedRows.begin(), selectedRows.end(), QModelIndexRowComparison);
 
-  QAbstractItemModel* model = ui->view->model();
-  Q_CHECK_PTR(model);
+    QAbstractItemModel* model = ui->view->model();
+    Q_CHECK_PTR(model);
 
-  QModelIndexList::const_iterator end = selectedRows.constEnd();
-  for (QModelIndexList::const_iterator iter = selectedRows.constBegin(); iter != end; ++iter)
-    model->removeRow(iter->row(), iter->parent());
+    QModelIndexList::const_iterator end = selectedRows.constEnd();
+    for (QModelIndexList::const_iterator iter = selectedRows.constBegin(); iter != end; ++iter)
+        model->removeRow(iter->row(), iter->parent());
 }

@@ -23,15 +23,15 @@ class MyMoneyAccount;
 
 namespace NewAccountWizard
 {
-  class Wizard;
-  class HierarchyPagePrivate;
+class Wizard;
+class HierarchyPagePrivate;
 
-  class HierarchyPage : public QWidget, public WizardPage<Wizard>
-  {
+class HierarchyPage : public QWidget, public WizardPage<Wizard>
+{
     Q_OBJECT
     Q_DISABLE_COPY(HierarchyPage)
 
-  public:
+public:
     explicit HierarchyPage(Wizard* parent);
     ~HierarchyPage() override;
 
@@ -42,14 +42,14 @@ namespace NewAccountWizard
 
     bool isComplete() const override;
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void parentAccountChanged();
 
-  private:
+private:
     Q_DECLARE_PRIVATE_D(WizardPage<Wizard>::d_ptr, HierarchyPage)
     friend class Wizard;
     friend class AccountSummaryPage;
-  };
+};
 
 } // namespace
 

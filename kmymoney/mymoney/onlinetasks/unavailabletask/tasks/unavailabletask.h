@@ -23,30 +23,30 @@
 class unavailableTask : public onlineTask
 {
 public:
-  ONLINETASK_META(unavailableTask, "org.kmymoney.onlineTask.unavailableTask");
-  bool isValid() const override;
-  QString jobTypeName() const override;
+    ONLINETASK_META(unavailableTask, "org.kmymoney.onlineTask.unavailableTask");
+    bool isValid() const override;
+    QString jobTypeName() const override;
 
-  void writeXML(QDomDocument& document, QDomElement& parent) const override;
+    void writeXML(QDomDocument& document, QDomElement& parent) const override;
 protected:
-  QString responsibleAccount() const override;
-  unavailableTask* createFromXml(const QDomElement& element) const override;
-  bool hasReferenceTo(const QString& id) const override;
+    QString responsibleAccount() const override;
+    unavailableTask* createFromXml(const QDomElement& element) const override;
+    bool hasReferenceTo(const QString& id) const override;
 
-  /**
-   * @copydoc MyMoneyObject::referencedObjects
-   */
-  QSet<QString> referencedObjects() const override;
+    /**
+     * @copydoc MyMoneyObject::referencedObjects
+     */
+    QSet<QString> referencedObjects() const override;
 
-  unavailableTask* clone() const override;
+    unavailableTask* clone() const override;
 
 private:
-  explicit unavailableTask(const QDomElement& element);
+    explicit unavailableTask(const QDomElement& element);
 
-  /**
-   * The data received by createFromXml(). Written back by writeXML().
-   */
-  QDomElement m_data;
+    /**
+     * The data received by createFromXml(). Written back by writeXML().
+     */
+    QDomElement m_data;
 };
 
 #endif // UNAVAILABLETASK_H

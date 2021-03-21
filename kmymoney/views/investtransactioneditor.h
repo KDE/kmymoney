@@ -21,63 +21,63 @@ class QWidget;
 
 class InvestTransactionEditor : public TransactionEditorBase
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit InvestTransactionEditor(QWidget* parent = 0, const QString& accountId = QString());
-  virtual ~InvestTransactionEditor();
+    explicit InvestTransactionEditor(QWidget* parent = 0, const QString& accountId = QString());
+    virtual ~InvestTransactionEditor();
 
-  /**
-   * This method returns true if the user pressed the enter button.
-   * It remains false, in case the user pressed the cancel button.
-   */
-  virtual bool accepted() const override;
+    /**
+     * This method returns true if the user pressed the enter button.
+     * It remains false, in case the user pressed the cancel button.
+     */
+    virtual bool accepted() const override;
 
-  /**
-   * Returns the currently entered amount
-   */
-  MyMoneyMoney transactionAmount() const;
+    /**
+     * Returns the currently entered amount
+     */
+    MyMoneyMoney transactionAmount() const;
 
-  /**
-   */
-  void loadTransaction(const QModelIndex& index) override;
-  void saveTransaction() override;
+    /**
+     */
+    void loadTransaction(const QModelIndex& index) override;
+    void saveTransaction() override;
 
-  /**
-   * Reimplemented to suppress some events in certain conditions
-   */
-  bool eventFilter(QObject* o, QEvent* e) override;
+    /**
+     * Reimplemented to suppress some events in certain conditions
+     */
+    bool eventFilter(QObject* o, QEvent* e) override;
 
-  /**
-   * Returns the transaction amount
-   */
-  MyMoneyMoney totalAmount() const;
+    /**
+     * Returns the transaction amount
+     */
+    MyMoneyMoney totalAmount() const;
 
 protected:
-  virtual void keyPressEvent(QKeyEvent* e) override;
+    virtual void keyPressEvent(QKeyEvent* e) override;
 
 protected Q_SLOTS:
-  void editFeeSplits();
-  void editInterestSplits();
+    void editFeeSplits();
+    void editInterestSplits();
 
-  void activityChanged (int index);
-  void sharesChanged();
+    void activityChanged (int index);
+    void sharesChanged();
 
-  void feeCategoryChanged(const QString& accountId);
-  void interestCategoryChanged(const QString& accountId);
-  void feesValueChanged();
-  void interestValueChanged();
-  void postdateChanged(const QDate& date);
-  void securityAccountChanged (int index);
+    void feeCategoryChanged(const QString& accountId);
+    void interestCategoryChanged(const QString& accountId);
+    void feesValueChanged();
+    void interestValueChanged();
+    void postdateChanged(const QDate& date);
+    void securityAccountChanged (int index);
 
-  void assetAccountChanged (const QString& accountId);
+    void assetAccountChanged (const QString& accountId);
 
-  void updateWidgets();
-  void updateTotalAmount();
+    void updateWidgets();
+    void updateTotalAmount();
 
 private:
-  class Private;
-  QScopedPointer<Private> const d;
+    class Private;
+    QScopedPointer<Private> const d;
 };
 
 #endif // INVESTTRANSACTIONEDITOR_H

@@ -21,15 +21,15 @@
 
 namespace NewAccountWizard
 {
-  class Wizard;
+class Wizard;
 
-  class CreditCardSchedulePagePrivate;
-  class CreditCardSchedulePage : public QWidget, public WizardPage<Wizard>
-  {
+class CreditCardSchedulePagePrivate;
+class CreditCardSchedulePage : public QWidget, public WizardPage<Wizard>
+{
     Q_OBJECT
     Q_DISABLE_COPY(CreditCardSchedulePage)
 
-  public:
+public:
     explicit CreditCardSchedulePage(Wizard* parent);
     ~CreditCardSchedulePage() override;
 
@@ -39,14 +39,14 @@ namespace NewAccountWizard
 
     QWidget* initialFocusWidget() const override;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void slotLoadWidgets();
 
-  private:
+private:
     Q_DECLARE_PRIVATE_D(WizardPage<Wizard>::d_ptr, CreditCardSchedulePage)
     friend class Wizard;
     friend class AccountSummaryPage;
-  };
+};
 
 } // namespace
 

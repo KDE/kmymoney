@@ -8,30 +8,32 @@
 
 #include <QDialog>
 
-namespace eDialogs { enum class UpdatePrice; }
+namespace eDialogs {
+enum class UpdatePrice;
+}
 
 class EquityPriceUpdateConfDlgPrivate;
 class EquityPriceUpdateConfDlg : public QDialog
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(EquityPriceUpdateConfDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(EquityPriceUpdateConfDlg)
 
 public:
-  explicit EquityPriceUpdateConfDlg(eDialogs::UpdatePrice policy);
-  ~EquityPriceUpdateConfDlg();
+    explicit EquityPriceUpdateConfDlg(eDialogs::UpdatePrice policy);
+    ~EquityPriceUpdateConfDlg();
 
-  eDialogs::UpdatePrice policy() const;
+    eDialogs::UpdatePrice policy() const;
 
 private Q_SLOTS:
-  void updateAllToggled(bool toggled);
-  void updateMissingToggled(bool toggled);
-  void updateDownloadedToggled(bool toggled);
-  void updateSameSourceToggled(bool toggled);
-  void askToggled(bool toggled);
+    void updateAllToggled(bool toggled);
+    void updateMissingToggled(bool toggled);
+    void updateDownloadedToggled(bool toggled);
+    void updateSameSourceToggled(bool toggled);
+    void askToggled(bool toggled);
 
 private:
-  EquityPriceUpdateConfDlgPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(EquityPriceUpdateConfDlg)
+    EquityPriceUpdateConfDlgPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(EquityPriceUpdateConfDlg)
 };
 
 #endif // KEQUITYPRICEUPDATECONFDLG_H

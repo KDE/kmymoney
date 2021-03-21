@@ -26,12 +26,12 @@ class MyMoneyTransaction;
 namespace KMyMoneyRegister
 {
 
-  class Register;
-  class KMM_OLDREGISTER_EXPORT StdTransactionMatched : public StdTransaction
-  {
+class Register;
+class KMM_OLDREGISTER_EXPORT StdTransactionMatched : public StdTransaction
+{
     static const int m_additionalRows = 3;
 
-  public:
+public:
     explicit StdTransactionMatched(Register* getParent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
     ~StdTransactionMatched() override;
 
@@ -50,7 +50,7 @@ namespace KMyMoneyRegister
     * Provided for internal reasons. No API change. See RegisterItem::numRowsRegister()
     */
     int numRowsRegister() const override;
-  };
+};
 
 } // namespace
 

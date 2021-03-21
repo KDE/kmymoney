@@ -30,43 +30,43 @@
 
 namespace NewUserWizard
 {
-  class CategoriesPagePrivate : public WizardPagePrivate<Wizard>
-  {
+class CategoriesPagePrivate : public WizardPagePrivate<Wizard>
+{
     Q_DISABLE_COPY(CategoriesPagePrivate)
 
-  public:
+public:
     CategoriesPagePrivate(QObject* parent) :
-      WizardPagePrivate<Wizard>(parent)
+        WizardPagePrivate<Wizard>(parent)
     {
     }
     TemplatesModel        model;
     TemplateLoader        loader;
-  };
+};
 
-  CategoriesPage::CategoriesPage(Wizard* wizard) :
+CategoriesPage::CategoriesPage(Wizard* wizard) :
     Accounts(wizard),
     WizardPage<Wizard>(*new CategoriesPagePrivate(wizard), stepCount++, this, wizard)
-  {
+{
     Q_D(CategoriesPage);
     d->loader.load(&d->model);
     ui->m_templateSelector->setModel(&d->model);
 
     connect(&d->loader, &TemplateLoader::loadingFinished, ui->m_templateSelector, &KAccountTemplateSelector::setupInitialSelection);
-  }
+}
 
-  CategoriesPage::~CategoriesPage()
-  {
-  }
+CategoriesPage::~CategoriesPage()
+{
+}
 
-  KMyMoneyWizardPage* CategoriesPage::nextPage() const
-  {
+KMyMoneyWizardPage* CategoriesPage::nextPage() const
+{
     Q_D(const CategoriesPage);
     return d->m_wizard->d_func()->m_preferencePage;
-  }
+}
 
-  QList<MyMoneyTemplate> CategoriesPage::selectedTemplates() const
-  {
+QList<MyMoneyTemplate> CategoriesPage::selectedTemplates() const
+{
     return ui->m_templateSelector->selectedTemplates();
-  }
+}
 
 }

@@ -25,62 +25,62 @@
 class LedgerFilterBasePrivate;
 class KMM_MODELS_EXPORT LedgerFilterBase : public QSortFilterProxyModel
 {
-  Q_OBJECT
-  Q_DECLARE_PRIVATE(LedgerFilterBase)
-  Q_DISABLE_COPY(LedgerFilterBase)
+    Q_OBJECT
+    Q_DECLARE_PRIVATE(LedgerFilterBase)
+    Q_DISABLE_COPY(LedgerFilterBase)
 
 public:
-  enum GroupSortOrder {
-    DateGrouping = 0,
-    PayeeGrouping,
-    JournalEntry,
-    OnlineBalance,
-  };
+    enum GroupSortOrder {
+        DateGrouping = 0,
+        PayeeGrouping,
+        JournalEntry,
+        OnlineBalance,
+    };
 
-  virtual ~LedgerFilterBase();
+    virtual ~LedgerFilterBase();
 
-  void setAccountType(eMyMoney::Account::Type type);
+    void setAccountType(eMyMoney::Account::Type type);
 
-  void setFilterFixedString(const QString& filter);
-  void setFilterFixedStrings(const QStringList& filters);
+    void setFilterFixedString(const QString& filter);
+    void setFilterFixedStrings(const QStringList& filters);
 
-  QStringList filterFixedStrings() const;
+    QStringList filterFixedStrings() const;
 
-  /**
-   * This method returns the headerData adjusted to the current
-   * accountType
-   */
-  QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
+    /**
+     * This method returns the headerData adjusted to the current
+     * accountType
+     */
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
-  /**
-   * This method returns the data adjusted to the current accountType
-   */
-  QVariant data(const QModelIndex& idx, int role) const override;
+    /**
+     * This method returns the data adjusted to the current accountType
+     */
+    QVariant data(const QModelIndex& idx, int role) const override;
 
-  void setShowEntryForNewTransaction(bool show);
+    void setShowEntryForNewTransaction(bool show);
 
-  void setShowScheduledTransactions(bool show);
+    void setShowScheduledTransactions(bool show);
 
-  /**
-   * add @a model to the source models
-   */
-  void addSourceModel(QAbstractItemModel* model);
+    /**
+     * add @a model to the source models
+     */
+    void addSourceModel(QAbstractItemModel* model);
 
-  /**
-   * remove @a model from the source models
-   */
-  void removeSourceModel(QAbstractItemModel* model);
+    /**
+     * remove @a model from the source models
+     */
+    void removeSourceModel(QAbstractItemModel* model);
 
 protected:
-  LedgerFilterBasePrivate*  d_ptr;
-  explicit LedgerFilterBase(LedgerFilterBasePrivate* dd, QObject* parent);
+    LedgerFilterBasePrivate*  d_ptr;
+    explicit LedgerFilterBase(LedgerFilterBasePrivate* dd, QObject* parent);
 
-  bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
+    bool lessThan(const QModelIndex& left, const QModelIndex& right) const override;
 
-  /**
-   * @note This does not call the base class implementation for speed purposes
-   */
-  bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
+    /**
+     * @note This does not call the base class implementation for speed purposes
+     */
+    bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const override;
 
 };
 

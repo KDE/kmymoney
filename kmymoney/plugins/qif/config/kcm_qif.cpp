@@ -15,12 +15,12 @@
 
 KCMqif::KCMqif(QWidget *parent, const QVariantList& args) : KCModule(parent, args)
 {
-  auto editor = new MyMoneyQifProfileEditor(true, this);
-  auto layout = new QVBoxLayout;
-  setLayout(layout);
-  layout->addWidget(editor);
-  setButtons(NoAdditionalButton);
-  load();
+    auto editor = new MyMoneyQifProfileEditor(true, this);
+    auto layout = new QVBoxLayout;
+    setLayout(layout);
+    layout->addWidget(editor);
+    setButtons(NoAdditionalButton);
+    load();
 }
 
 K_PLUGIN_FACTORY(KCMqifFactory, registerPlugin<KCMqif>();)

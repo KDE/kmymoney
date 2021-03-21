@@ -16,59 +16,59 @@ namespace payeeIdentifiers
 class KMM_MYMONEY_EXPORT nationalAccount : public payeeIdentifierData
 {
 public:
-  PAYEEIDENTIFIER_IID(nationalAccount, "org.kmymoney.payeeIdentifier.national");
+    PAYEEIDENTIFIER_IID(nationalAccount, "org.kmymoney.payeeIdentifier.national");
 
-  nationalAccount();
-  nationalAccount(const nationalAccount& other);
+    nationalAccount();
+    nationalAccount(const nationalAccount& other);
 
-  bool isValid() const final override;
-  bool operator==(const payeeIdentifierData& other) const final override;
-  bool operator==(const nationalAccount& other) const;
+    bool isValid() const final override;
+    bool operator==(const payeeIdentifierData& other) const final override;
+    bool operator==(const nationalAccount& other) const;
 
-  nationalAccount* clone() const final override {
-    return new nationalAccount(*this);
-  }
-  nationalAccount* createFromXml(const QDomElement& element) const final override;
-  void writeXML(QDomDocument& document, QDomElement& parent) const final override;
+    nationalAccount* clone() const final override {
+        return new nationalAccount(*this);
+    }
+    nationalAccount* createFromXml(const QDomElement& element) const final override;
+    void writeXML(QDomDocument& document, QDomElement& parent) const final override;
 
-  void setBankCode(const QString& bankCode) {
-    m_bankCode = bankCode;
-  }
-  QString bankCode() const {
-    return m_bankCode;
-  }
+    void setBankCode(const QString& bankCode) {
+        m_bankCode = bankCode;
+    }
+    QString bankCode() const {
+        return m_bankCode;
+    }
 
-  /** @todo implement */
-  QString bankName() const {
-    return QString();
-  }
+    /** @todo implement */
+    QString bankName() const {
+        return QString();
+    }
 
-  void setAccountNumber(const QString& accountNumber) {
-    m_accountNumber = accountNumber;
-  }
-  QString accountNumber() const {
-    return m_accountNumber;
-  }
+    void setAccountNumber(const QString& accountNumber) {
+        m_accountNumber = accountNumber;
+    }
+    QString accountNumber() const {
+        return m_accountNumber;
+    }
 
-  QString country() const {
-    return m_country;
-  }
-  void setCountry(const QString& countryCode) {
-    m_country = countryCode.toUpper();
-  }
+    QString country() const {
+        return m_country;
+    }
+    void setCountry(const QString& countryCode) {
+        m_country = countryCode.toUpper();
+    }
 
-  QString ownerName() const {
-    return m_ownerName;
-  }
-  void setOwnerName(const QString& ownerName) {
-    m_ownerName = ownerName;
-  }
+    QString ownerName() const {
+        return m_ownerName;
+    }
+    void setOwnerName(const QString& ownerName) {
+        m_ownerName = ownerName;
+    }
 
 private:
-  QString m_ownerName;
-  QString m_country;
-  QString m_bankCode;
-  QString m_accountNumber;
+    QString m_ownerName;
+    QString m_country;
+    QString m_bankCode;
+    QString m_accountNumber;
 };
 
 } // namespace payeeIdentifiers

@@ -13,29 +13,29 @@ class MyMoneyAccount;
 
 class MyMoneyAccountTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 protected:
-  MyMoneyAccount *m;
+    MyMoneyAccount *m;
 
 private Q_SLOTS:
-  void init();
-  void cleanup();
-  void testEmptyConstructor();
-  void testConstructor();
-  void testSetFunctions();
-  void testCopyConstructor();
-  void testAssignmentConstructor();
-  void testSubAccounts();
-  void testEquality();
-  void testHasReferenceTo();
-  void testAdjustBalance();
-  void testSetClosed();
-  void specialAccountTypes();
-  void specialAccountTypes_data();
-  void addReconciliation();
-  void reconciliationHistory();
-  void testHasOnlineMapping();
+    void init();
+    void cleanup();
+    void testEmptyConstructor();
+    void testConstructor();
+    void testSetFunctions();
+    void testCopyConstructor();
+    void testAssignmentConstructor();
+    void testSubAccounts();
+    void testEquality();
+    void testHasReferenceTo();
+    void testAdjustBalance();
+    void testSetClosed();
+    void specialAccountTypes();
+    void specialAccountTypes_data();
+    void addReconciliation();
+    void reconciliationHistory();
+    void testHasOnlineMapping();
 };
 
 #endif

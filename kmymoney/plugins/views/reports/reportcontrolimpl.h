@@ -9,17 +9,19 @@
 
 #include <QWidget>
 
-namespace Ui { class ReportControl; }
+namespace Ui {
+class ReportControl;
+}
 
 class ReportControl : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(ReportControl)
+    Q_OBJECT
+    Q_DISABLE_COPY(ReportControl)
 
 public:
-  explicit ReportControl(QWidget *parent);
-  ~ReportControl();
+    explicit ReportControl(QWidget *parent);
+    ~ReportControl();
 
-  Ui::ReportControl* ui;
+    Ui::ReportControl* ui;
 };
 #endif /* REPORTCONTROLIMPL_H */

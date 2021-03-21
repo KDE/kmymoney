@@ -10,20 +10,20 @@
 
 onlineJobMessagesView::onlineJobMessagesView(QWidget* parent)
     : QWidget(parent),
-    ui(new Ui::onlineJobMessageView)
+      ui(new Ui::onlineJobMessageView)
 {
-  ui->setupUi(this);
-  connect(ui->closeButton, &QAbstractButton::pressed, this, &QWidget::close);
+    ui->setupUi(this);
+    connect(ui->closeButton, &QAbstractButton::pressed, this, &QWidget::close);
 }
 
 void onlineJobMessagesView::setModel(QAbstractItemModel* model)
 {
-  ui->tableView->setModel(model);
-  // Enlarge the description column
-  ui->tableView->setColumnWidth(2, 4*ui->tableView->columnWidth(2));
+    ui->tableView->setModel(model);
+    // Enlarge the description column
+    ui->tableView->setColumnWidth(2, 4*ui->tableView->columnWidth(2));
 }
 
 onlineJobMessagesView::~onlineJobMessagesView()
 {
-  delete ui;
+    delete ui;
 }

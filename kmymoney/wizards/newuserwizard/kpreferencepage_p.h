@@ -21,24 +21,24 @@
 
 namespace NewUserWizard
 {
-  class Wizard;
-  class PreferencePagePrivate : public WizardPagePrivate<Wizard>
-  {
+class Wizard;
+class PreferencePagePrivate : public WizardPagePrivate<Wizard>
+{
     Q_DISABLE_COPY(PreferencePagePrivate)
 
-  public:
+public:
     explicit PreferencePagePrivate(QObject* parent) :
-      WizardPagePrivate<Wizard>(parent),
-      ui(new Ui::KPreferencePage)
+        WizardPagePrivate<Wizard>(parent),
+        ui(new Ui::KPreferencePage)
     {
     }
 
     ~PreferencePagePrivate()
     {
-      delete ui;
+        delete ui;
     }
 
     Ui::KPreferencePage *ui;
-  };
+};
 }
 #endif

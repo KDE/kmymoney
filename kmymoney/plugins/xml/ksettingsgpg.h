@@ -23,25 +23,25 @@ class QShowEvent;
 class KSettingsGpgPrivate;
 class KSettingsGpg : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KSettingsGpg)
+    Q_OBJECT
+    Q_DISABLE_COPY(KSettingsGpg)
 
 public:
-  explicit KSettingsGpg(QWidget* parent = nullptr);
-  ~KSettingsGpg();
+    explicit KSettingsGpg(QWidget* parent = nullptr);
+    ~KSettingsGpg();
 
 public Q_SLOTS:
-  void showEvent(QShowEvent * event) override;
+    void showEvent(QShowEvent * event) override;
 
 protected Q_SLOTS:
-  void slotStatusChanged(bool state);
-  void slotIdChanged();
-  void slotIdChanged(int idx);
-  void slotKeyListChanged();
+    void slotStatusChanged(bool state);
+    void slotIdChanged();
+    void slotIdChanged(int idx);
+    void slotKeyListChanged();
 
 private:
-  KSettingsGpgPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KSettingsGpg)
+    KSettingsGpgPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KSettingsGpg)
 };
 #endif
 
