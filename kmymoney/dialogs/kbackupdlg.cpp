@@ -73,7 +73,8 @@ bool KBackupDlg::mountCheckBoxChecked() const
 
 void KBackupDlg::chooseButtonClicked()
 {
-    auto newDir = QFileDialog::getExistingDirectoryUrl(this, QString(), QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)));
+    QUrl documentsLocation = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
+    auto newDir = QFileDialog::getExistingDirectoryUrl(this, QString(), documentsLocation);
     if (!newDir.path().isEmpty())
         ui->txtMountPoint->setText(newDir.path());
 }

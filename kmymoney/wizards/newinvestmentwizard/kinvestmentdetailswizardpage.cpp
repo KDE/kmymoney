@@ -113,8 +113,8 @@ void KInvestmentDetailsWizardPage::init2(const MyMoneySecurity& security)
  */
 bool KInvestmentDetailsWizardPage::isComplete() const
 {
-    return (!ui->m_investmentName->text().isEmpty()
-            && !ui->m_investmentSymbol->text().isEmpty()
+    return (!ui->m_investmentName->text().isEmpty() //
+            && !ui->m_investmentSymbol->text().isEmpty() //
             && !ui->m_fraction->value().isZero());
 }
 

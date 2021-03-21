@@ -264,7 +264,7 @@ void KMMSchedulesToiCalendar::exportToFile(const QString& filePath, bool setting
 
     if (newCalendar) {
         // set proid and version
-        icalcomponent_add_property(vCalendar, icalproperty_new_prodid("icalendarexport"));;
+        icalcomponent_add_property(vCalendar, icalproperty_new_prodid("icalendarexport"));
         icalcomponent_add_property(vCalendar, icalproperty_new_version("2.0"));
     }
 

@@ -28,7 +28,7 @@ QString tagName(Tag tagID)
         {Tag::OnlineJobs,   QStringLiteral("ONLINEJOBS")},
         {Tag::KMMFile,      QStringLiteral("KMYMONEY-FILE")},
         {Tag::FileInfo,     QStringLiteral("FILEINFO")},
-        {Tag::User,         QStringLiteral("USER")}
+        {Tag::User,         QStringLiteral("USER")},
     };
     return tagNames.value(tagID);
 }
@@ -143,7 +143,7 @@ QString elementName(Element::General elementID)
         {Element::General::LastModifiedDate,  QStringLiteral("LAST_MODIFIED_DATE")},
         {Element::General::Version,           QStringLiteral("VERSION")},
         {Element::General::FixVersion,        QStringLiteral("FIXVERSION")},
-        {Element::General::Pair,              QStringLiteral("PAIR")}
+        {Element::General::Pair,              QStringLiteral("PAIR")},
     };
     return elementNames.value(elementID);
 }
@@ -166,7 +166,7 @@ QString attributeName(Attribute::General attributeID)
         {Attribute::General::City,      QStringLiteral("city")},
         {Attribute::General::ZipCode,   QStringLiteral("zipcode")},
         {Attribute::General::Street,    QStringLiteral("street")},
-        {Attribute::General::Telephone, QStringLiteral("telephone")}
+        {Attribute::General::Telephone, QStringLiteral("telephone")},
     };
     return attributeNames.value(attributeID);
 }
@@ -175,7 +175,7 @@ QString elementName(Element::Transaction elementID)
 {
     static const QMap<Element::Transaction, QString> elementNames {
         {Element::Transaction::Split,  QStringLiteral("SPLIT")},
-        {Element::Transaction::Splits, QStringLiteral("SPLITS")}
+        {Element::Transaction::Splits, QStringLiteral("SPLITS")},
     };
     return elementNames.value(elementID);
 }
@@ -201,7 +201,7 @@ QString elementName(Element::Split elementID)
         {Element::Split::Tag,            QStringLiteral("TAG")},
         {Element::Split::Match,          QStringLiteral("MATCH")},
         {Element::Split::Container,      QStringLiteral("CONTAINER")},
-        {Element::Split::KeyValuePairs,  QStringLiteral("KEYVALUEPAIRS")}
+        {Element::Split::KeyValuePairs,  QStringLiteral("KEYVALUEPAIRS")},
     };
     return elementNames.value(elementID);
 }
@@ -223,7 +223,7 @@ QString attributeName(Attribute::Split attributeID)
         {Attribute::Split::CostCenter,     QStringLiteral("costcenter")},
         {Attribute::Split::ReconcileDate,  QStringLiteral("reconciledate")},
         {Attribute::Split::ReconcileFlag,  QStringLiteral("reconcileflag")},
-        {Attribute::Split::KMMatchedTx,    QStringLiteral("kmm-matched-tx")}
+        {Attribute::Split::KMMatchedTx,    QStringLiteral("kmm-matched-tx")},
     };
     return attributeNames.value(attributeID);
 }
@@ -233,7 +233,7 @@ QString elementName(Element::Account elementID)
     static const QMap<Element::Account, QString> elementNames {
         {Element::Account::SubAccount,     QStringLiteral("SUBACCOUNT")},
         {Element::Account::SubAccounts,    QStringLiteral("SUBACCOUNTS")},
-        {Element::Account::OnlineBanking,  QStringLiteral("ONLINEBANKING")}
+        {Element::Account::OnlineBanking,  QStringLiteral("ONLINEBANKING")},
     };
     return elementNames.value(elementID);
 }
@@ -264,7 +264,7 @@ QString elementName(Element::Payee elementID)
 {
     static const QMap<Element::Payee, QString> elementNames {
         {Element::Payee::Address,         QStringLiteral("ADDRESS")},
-        {Element::Payee::Identifier,      QStringLiteral("payeeIdentifier")}
+        {Element::Payee::Identifier,      QStringLiteral("payeeIdentifier")},
     };
     return elementNames.value(elementID);
 }
@@ -322,7 +322,7 @@ QString attributeName(Attribute::Security attributeID)
         {Attribute::Security::PP,               QStringLiteral("pp")},
         {Attribute::Security::SCF,              QStringLiteral("scf")},
         {Attribute::Security::TradingCurrency,  QStringLiteral("trading-currency")},
-        {Attribute::Security::TradingMarket,    QStringLiteral("trading-market")}
+        {Attribute::Security::TradingMarket,    QStringLiteral("trading-market")},
     };
     return attributeNames.value(attributeID);
 }
@@ -339,7 +339,7 @@ QString attributeName(Attribute::KVP attributeID)
 {
     static const QMap<Attribute::KVP, QString> attributeNames {
         {Attribute::KVP::Key,   QStringLiteral("key")},
-        {Attribute::KVP::Value, QStringLiteral("value")}
+        {Attribute::KVP::Value, QStringLiteral("value")},
     };
     return attributeNames.value(attributeID);
 }
@@ -349,7 +349,7 @@ QString elementName(Element::Institution elementID)
     static const QMap<Element::Institution, QString> elementNames {
         {Element::Institution::AccountID,  QStringLiteral("ACCOUNTID")},
         {Element::Institution::AccountIDS, QStringLiteral("ACCOUNTIDS")},
-        {Element::Institution::Address,    QStringLiteral("ADDRESS")}
+        {Element::Institution::Address,    QStringLiteral("ADDRESS")},
     };
     return elementNames.value(elementID);
 }
@@ -364,7 +364,7 @@ QString attributeName(Attribute::Institution attributeID)
         {Attribute::Institution::Street,     QStringLiteral("street")},
         {Attribute::Institution::City,       QStringLiteral("city")},
         {Attribute::Institution::Zip,        QStringLiteral("zip")},
-        {Attribute::Institution::Telephone,  QStringLiteral("telephone")}
+        {Attribute::Institution::Telephone,  QStringLiteral("telephone")},
     };
     return attributeNames.value(attributeID);
 }
@@ -373,7 +373,7 @@ QString elementName(Element::Schedule elementID)
 {
     static const QMap<Element::Schedule, QString> elementNames {
         {Element::Schedule::Payment,  QStringLiteral("PAYMENT")},
-        {Element::Schedule::Payments, QStringLiteral("PAYMENTS")}
+        {Element::Schedule::Payments, QStringLiteral("PAYMENTS")},
     };
     return elementNames.value(elementID);
 }
@@ -393,7 +393,7 @@ QString attributeName(Attribute::Schedule attributeID)
         {Attribute::Schedule::Date,                 QStringLiteral("date")},
         {Attribute::Schedule::StartDate,            QStringLiteral("startDate")},
         {Attribute::Schedule::EndDate,              QStringLiteral("endDate")},
-        {Attribute::Schedule::LastDayInMonth,       QStringLiteral("lastDayInMonth")}
+        {Attribute::Schedule::LastDayInMonth,       QStringLiteral("lastDayInMonth")},
     };
     return attributeNames.value(attributeID);
 }
@@ -401,7 +401,7 @@ QString attributeName(Attribute::Schedule attributeID)
 QString elementName(Element::OnlineJob elementID)
 {
     static const QMap<Element::OnlineJob, QString> elementNames {
-        {Element::OnlineJob::OnlineTask, QStringLiteral("onlineTask")}
+        {Element::OnlineJob::OnlineTask, QStringLiteral("onlineTask")},
     };
     return elementNames.value(elementID);
 }

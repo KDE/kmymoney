@@ -125,8 +125,8 @@ public:
 
         QList<MyMoneySecurity> securities = file->securityList();
         for (QList<MyMoneySecurity>::const_iterator it = securities.constBegin(); it != securities.constEnd(); ++it) {
-            if (!(*it).isCurrency()
-                    && (securityId.isEmpty() || ((*it).id() == securityId))
+            if (!(*it).isCurrency() //
+                    && (securityId.isEmpty() || ((*it).id() == securityId)) //
                     && !(*it).value("kmm-online-source").isEmpty()
                ) {
                 addInvestment(*it);

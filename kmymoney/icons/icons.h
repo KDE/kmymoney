@@ -23,6 +23,7 @@ namespace Icons {
 
 enum class IconSet { Common, Oxygen, Tango, Breeze };
 
+// clang-format off
 enum class Icon { OpenDatabase, Merge, Reconcile, Split, Tip, PerformanceTest,
                   Calculator,
                   UserProperties, DocumentProperties,
@@ -93,6 +94,7 @@ enum class Icon { OpenDatabase, Merge, Reconcile, Split, Tip, PerformanceTest,
                   PriceUpdate, InvestmentOnlinePriceAll, Reverse, Visibility, NoVisibility,
                   SelectAll,
                 };
+// clang-format on
 
 KMM_ICONS_EXPORT void setUpMappings(const QString & themeName);
 KMM_ICONS_EXPORT QIcon get(Icons::Icon icon);

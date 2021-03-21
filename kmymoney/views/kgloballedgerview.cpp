@@ -64,6 +64,7 @@ QDate KGlobalLedgerViewPrivate::m_lastPostDate;
 KGlobalLedgerView::KGlobalLedgerView(QWidget *parent) :
     KMyMoneyViewBase(*new KGlobalLedgerViewPrivate(this), parent)
 {
+    // clang-format off
     const QHash<Action, std::function<void()>> actionConnections {
         {Action::NewTransaction,            [this](){ KGlobalLedgerView::slotNewTransaction(); }},
         {Action::EditTransaction,           [this](){ KGlobalLedgerView::slotEditTransaction(); }},
@@ -92,6 +93,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent) :
         {Action::OpenAccount,               [this](){ KGlobalLedgerView::slotOpenAccount(); }},
         {Action::EditFindTransaction,       [this](){ KGlobalLedgerView::slotFindTransaction(); }},
     };
+    // clang-format on
 
     for (auto a = actionConnections.cbegin(); a != actionConnections.cend(); ++a)
         connect(pActions[a.key()], &QAction::triggered, this, a.value());
@@ -215,7 +217,7 @@ void KGlobalLedgerView::updateActions(const MyMoneyObject& obj)
         Action::FinishReconciliation,
         Action::PostponeReconciliation,
         Action::OpenAccount,
-        Action::NewTransaction
+        Action::NewTransaction,
     };
 
     for (const auto& a : actionsToBeDisabled)

@@ -83,11 +83,11 @@ bool TransactionMatchFinder::splitsAreDuplicates(const MyMoneySplit& split1, con
 
 bool TransactionMatchFinder::splitsMatch(const MyMoneySplit& importedSplit, const MyMoneySplit& existingSplit, int amountVariation) const
 {
-    return (splitsAccountsMatch(importedSplit, existingSplit) &&
-            splitsBankIdsMatch(importedSplit, existingSplit) &&
-            splitsAmountsMatch(importedSplit, existingSplit, amountVariation) &&
-            splitsPayeesMatchOrEmpty(importedSplit, existingSplit) &&
-            !existingSplit.isMatched());
+    return (splitsAccountsMatch(importedSplit, existingSplit) //
+            && splitsBankIdsMatch(importedSplit, existingSplit) //
+            && splitsAmountsMatch(importedSplit, existingSplit, amountVariation)  //
+            && splitsPayeesMatchOrEmpty(importedSplit, existingSplit) //
+            && !existingSplit.isMatched());
 }
 
 bool TransactionMatchFinder::splitsAccountsMatch(const MyMoneySplit & split1, const MyMoneySplit & split2) const

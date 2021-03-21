@@ -36,13 +36,15 @@ TransactionDlg::TransactionDlg(const QStringList& colList, const QStringList& co
     m_errorBrushText = KColorScheme(QPalette::Normal).foreground(KColorScheme::NegativeText);
 
     // initialize action types list according to cbActionTypes
-    m_actionTypes << eMyMoney::Transaction::Action::Buy <<
-                  eMyMoney::Transaction::Action::Sell <<
-                  eMyMoney::Transaction::Action::CashDividend <<
-                  eMyMoney::Transaction::Action::ReinvestDividend <<
-                  eMyMoney::Transaction::Action::Shrsin <<
-                  eMyMoney::Transaction::Action::Shrsout <<
-                  eMyMoney::Transaction::Action::Interest;
+    m_actionTypes = {
+        eMyMoney::Transaction::Action::Buy,
+        eMyMoney::Transaction::Action::Sell,
+        eMyMoney::Transaction::Action::CashDividend,
+        eMyMoney::Transaction::Action::ReinvestDividend,
+        eMyMoney::Transaction::Action::Shrsin,
+        eMyMoney::Transaction::Action::Shrsout,
+        eMyMoney::Transaction::Action::Interest,
+    };
 
     QIcon icon = Icons::get(Icon::DialogOK);
     if (!icon.availableSizes().isEmpty())
@@ -98,7 +100,7 @@ void TransactionDlg::updateWindowSize()
     newWidth -= frameGeometry().width() - geometry().width();
     QRect dlg = geometry();
     dlg.setWidth(newWidth);
-    dlg.moveTo((screen.width() - dlg.width()) / 2,
+    dlg.moveTo((screen.width() - dlg.width()) / 2, //
                (screen.height() - dlg.height()) / 2);
     setGeometry(dlg);
 }

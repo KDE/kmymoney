@@ -527,7 +527,10 @@ void KEditScheduleDlg::editSchedule(const MyMoneySchedule& inputSchedule)
                             // than previous payment.  Date would be
                             // updated automatically so we probably
                             // want to clear it.  Let's ask the user.
-                            if (KMessageBox::questionYesNo(nullptr, i18n("<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the scheduled transaction was last paid on <b>%2</b>, KMyMoney will automatically adjust the scheduled transaction date to the next date unless the last payment date is reset.  Do you want to reset the last payment date?</qt>", QLocale().toString(next, QLocale::ShortFormat), QLocale().toString(last, QLocale::ShortFormat)), i18n("Reset Last Payment Date"), KStandardGuiItem::yes(), KStandardGuiItem::no()) == KMessageBox::Yes) {
+                            QString questionText = i18n("<qt>You have entered a scheduled transaction date of <b>%1</b>.  Because the scheduled transaction was last paid on <b>%2</b>, KMyMoney will automatically adjust the scheduled transaction date to the next date unless the last payment date is reset.  Do you want to reset the last payment date?</qt>", QLocale().toString(next, QLocale::ShortFormat), QLocale().toString(last, QLocale::ShortFormat));
+                            if (KMessageBox::questionYesNo(nullptr, 
+                                questionText,
+                                i18n("Reset Last Payment Date"), KStandardGuiItem::yes(), KStandardGuiItem::no()) == KMessageBox::Yes) {
                                 sched.setLastPayment(QDate());
                             }
                         }

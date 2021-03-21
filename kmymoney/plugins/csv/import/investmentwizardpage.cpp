@@ -95,7 +95,8 @@ void InvestmentPage::initializePage()
         {Column::Quantity, ui->m_quantityCol}, {Column::Memo, ui->m_memoCol},
         {Column::Price, ui->m_priceCol}, {Column::Date, ui->m_dateCol},
         {Column::Fee,  ui->m_feeCol},  {Column::Symbol, ui->m_symbolCol},
-        {Column::Name, ui->m_nameCol}};
+        {Column::Name, ui->m_nameCol},
+    };
 
     if (ui->m_dateCol->count() != m_imp->m_file->m_columnCount)
         m_dlg->initializeComboBoxes(columns);
@@ -143,12 +144,12 @@ void InvestmentPage::initializePage()
 
 bool InvestmentPage::isComplete() const
 {
-    return  ui->m_dateCol->currentIndex() > -1 &&
-            ui->m_typeCol->currentIndex() > -1 &&
-            ui->m_quantityCol->currentIndex() > -1 &&
-            ui->m_priceCol->currentIndex() > -1 &&
-            ui->m_amountCol->currentIndex() > -1 &&
-            ui->m_priceFraction->currentIndex() > -1;
+    return ui->m_dateCol->currentIndex() > -1 //
+        && ui->m_typeCol->currentIndex() > -1 //
+        && ui->m_quantityCol->currentIndex() > -1 //
+        && ui->m_priceCol->currentIndex() > -1 //
+        && ui->m_amountCol->currentIndex() > -1 //
+        && ui->m_priceFraction->currentIndex() > -1;
 }
 
 bool InvestmentPage::validatePage()

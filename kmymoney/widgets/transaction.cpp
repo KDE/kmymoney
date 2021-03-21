@@ -51,6 +51,7 @@ using namespace eWidgets;
 using namespace KMyMoneyRegister;
 using namespace KMyMoneyTransactionForm;
 
+// clang-format off
 static unsigned char attentionSign[] = {
     0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A,
     0x00, 0x00, 0x00, 0x0D, 0x49, 0x48, 0x44, 0x52,
@@ -132,6 +133,7 @@ static unsigned char attentionSign[] = {
     0x00, 0x00, 0x00, 0x49, 0x45, 0x4E, 0x44, 0xAE,
     0x42, 0x60, 0x82
 };
+// clang-format on
 
 Transaction::Transaction(Register *parent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId) :
     RegisterItem(*new TransactionPrivate, parent)
@@ -705,8 +707,8 @@ QString Transaction::reconcileState(bool text) const
     Q_D(const Transaction);
     auto txt = KMyMoneyUtils::reconcileStateToString(d->m_split.reconcileFlag(), text);
 
-    if ((text == true)
-            && (txt == i18nc("Unknown reconciliation state", "Unknown"))
+    if ((text == true) //
+            && (txt == i18nc("Unknown reconciliation state", "Unknown")) //
             && (d->m_transaction.id().isEmpty()))
         txt.clear();
     return txt;
@@ -813,7 +815,7 @@ bool Transaction::matches(const RegisterFilter& filter) const
     foreach (const auto split, d->m_transaction.splits()) {
         // check if the text is contained in one of the fields
         // memo, number, payee, tag, account
-        if (split.memo().contains(filter.text, Qt::CaseInsensitive)
+        if (split.memo().contains(filter.text, Qt::CaseInsensitive) //
                 || split.number().contains(filter.text, Qt::CaseInsensitive))
             return true;
 

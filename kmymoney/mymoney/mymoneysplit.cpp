@@ -54,21 +54,23 @@ bool MyMoneySplit::operator == (const MyMoneySplit& right) const
 {
     Q_D(const MyMoneySplit);
     auto d2 = static_cast<const MyMoneySplitPrivate *>(right.d_func());
-    return MyMoneyObject::operator==(right) &&
-           MyMoneyKeyValueContainer::operator==(right) &&
-           d->m_account == d2->m_account &&
-           d->m_costCenter == d2->m_costCenter &&
-           d->m_payee == d2->m_payee &&
-           d->m_tagList == d2->m_tagList &&
-           d->m_memo == d2->m_memo &&
-           d->m_action == d2->m_action &&
-           d->m_reconcileDate == d2->m_reconcileDate &&
-           d->m_reconcileFlag == d2->m_reconcileFlag &&
-           ((d->m_number.length() == 0 && d2->m_number.length() == 0) || d->m_number == d2->m_number) &&
-           d->m_shares == d2->m_shares &&
-           d->m_value == d2->m_value &&
-           d->m_price == d2->m_price &&
-           d->m_transactionId == d2->m_transactionId;
+    // clang-format off
+    return MyMoneyObject::operator==(right)
+        && MyMoneyKeyValueContainer::operator==(right)
+        && d->m_account == d2->m_account
+        && d->m_costCenter == d2->m_costCenter
+        && d->m_payee == d2->m_payee
+        && d->m_tagList == d2->m_tagList
+        && d->m_memo == d2->m_memo
+        && d->m_action == d2->m_action
+        && d->m_reconcileDate == d2->m_reconcileDate
+        && d->m_reconcileFlag == d2->m_reconcileFlag
+        && ((d->m_number.length() == 0 && d2->m_number.length() == 0) || d->m_number == d2->m_number)
+        && d->m_shares == d2->m_shares
+        && d->m_value == d2->m_value
+        && d->m_price == d2->m_price
+        && d->m_transactionId == d2->m_transactionId;
+    // clang-format on
 }
 
 MyMoneySplit MyMoneySplit::operator-() const

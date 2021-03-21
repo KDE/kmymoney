@@ -221,19 +221,21 @@ bool MyMoneyAccount::operator == (const MyMoneyAccount& right) const
 {
     Q_D(const MyMoneyAccount);
     auto d2 = static_cast<const MyMoneyAccountPrivate *>(right.d_func());
-    return (MyMoneyKeyValueContainer::operator==(right) &&
-            MyMoneyObject::operator==(right) &&
-            (d->m_accountList == d2->m_accountList) &&
-            (d->m_accountType == d2->m_accountType) &&
-            (d->m_lastModified == d2->m_lastModified) &&
-            (d->m_lastReconciliationDate == d2->m_lastReconciliationDate) &&
-            ((d->m_name.length() == 0 && d2->m_name.length() == 0) || (d->m_name == d2->m_name)) &&
-            ((d->m_number.length() == 0 && d2->m_number.length() == 0) || (d->m_number == d2->m_number)) &&
-            ((d->m_description.length() == 0 && d2->m_description.length() == 0) || (d->m_description == d2->m_description)) &&
-            (d->m_openingDate == d2->m_openingDate) &&
-            (d->m_parentAccount == d2->m_parentAccount) &&
-            (d->m_currencyId == d2->m_currencyId) &&
-            (d->m_institution == d2->m_institution));
+    // clang-format off
+    return (MyMoneyKeyValueContainer::operator==(right)
+            && MyMoneyObject::operator==(right)
+            && (d->m_accountList == d2->m_accountList)
+            && (d->m_accountType == d2->m_accountType)
+            && (d->m_lastModified == d2->m_lastModified)
+            && (d->m_lastReconciliationDate == d2->m_lastReconciliationDate)
+            && ((d->m_name.length() == 0 && d2->m_name.length() == 0) || (d->m_name == d2->m_name))
+            && ((d->m_number.length() == 0 && d2->m_number.length() == 0) || (d->m_number == d2->m_number))
+            && ((d->m_description.length() == 0 && d2->m_description.length() == 0) || (d->m_description == d2->m_description))
+            && (d->m_openingDate == d2->m_openingDate)
+            && (d->m_parentAccount == d2->m_parentAccount)
+            && (d->m_currencyId == d2->m_currencyId)
+            && (d->m_institution == d2->m_institution));
+    // clang-format on
 }
 
 Account::Type MyMoneyAccount::accountGroup() const
@@ -312,9 +314,9 @@ bool MyMoneyAccount::isInvest() const
 
 bool MyMoneyAccount::isLiquidAsset() const
 {
-    return accountType() == Account::Type::Checkings ||
-           accountType() == Account::Type::Savings ||
-           accountType() == Account::Type::Cash;
+    return accountType() == Account::Type::Checkings //
+            || accountType() == Account::Type::Savings //
+            || accountType() == Account::Type::Cash;
 }
 
 bool MyMoneyAccount::isLiquidLiability() const

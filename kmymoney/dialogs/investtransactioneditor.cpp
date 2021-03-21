@@ -921,8 +921,16 @@ void InvestTransactionEditor::slotUpdateActivity(eMyMoney::Split::InvestmentTran
     d->showCategory("interest-account", false);
     d->showCategory("fee-account", false);
 
-    QStringList dynwidgets;
-    dynwidgets << "total-label" << "asset-label" << "fee-label" << "fee-amount-label" << "interest-label" << "interest-amount-label" << "price-label" << "shares-label";
+    QStringList dynwidgets= {
+        "total-label",
+        "asset-label",
+        "fee-label",
+        "fee-amount-label",
+        "interest-label",
+        "interest-amount-label",
+        "price-label",
+        "shares-label",
+    };
 
     // hiding labels works by clearing them. hide() does not do the job
     // as the underlying text in the QTable object will shine through
@@ -935,7 +943,7 @@ void InvestTransactionEditor::slotUpdateActivity(eMyMoney::Split::InvestmentTran
 
     // real widgets can be hidden
     dynwidgets.clear();
-    dynwidgets << "asset-account" << "interest-amount" << "fee-amount" << "shares" << "price" << "total";
+    dynwidgets = QStringList{"asset-account", "interest-amount", "fee-amount", "shares", "price", "total"};
 
     for (it_s = dynwidgets.constBegin(); it_s != dynwidgets.constEnd(); ++it_s) {
         QWidget* w = haveWidget(*it_s);

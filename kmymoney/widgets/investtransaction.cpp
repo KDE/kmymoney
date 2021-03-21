@@ -471,7 +471,7 @@ void InvestTransaction::registerCellText(QString& txt, Qt::Alignment& align, int
         switch (col) {
         case (int)eTransaction::Column::Detail:
             align |= Qt::AlignLeft;
-            if (haveAssetAccount() && !d->m_assetAccountSplit.accountId().isEmpty()
+            if (haveAssetAccount() && !d->m_assetAccountSplit.accountId().isEmpty() //
                     && haveInterest() && d->m_interestSplits.count()) {
                 txt = d->m_interestCategory;
             } else if (haveFees() && d->m_feeSplits.count()) {
@@ -482,7 +482,7 @@ void InvestTransaction::registerCellText(QString& txt, Qt::Alignment& align, int
 
         case (int)eTransaction::Column::Quantity:
             align |= Qt::AlignRight;
-            if (haveAssetAccount() && !d->m_assetAccountSplit.accountId().isEmpty()
+            if (haveAssetAccount() && !d->m_assetAccountSplit.accountId().isEmpty() //
                     && haveInterest() && d->m_interestSplits.count()) {
                 txt = MyMoneyUtils::formatMoney(-d->m_interestAmount, d->m_currency);
             } else if (haveFees() && d->m_feeSplits.count()) {
@@ -499,8 +499,8 @@ void InvestTransaction::registerCellText(QString& txt, Qt::Alignment& align, int
         switch (col) {
         case (int)eTransaction::Column::Detail:
             align |= Qt::AlignLeft;
-            if (haveAssetAccount() && !d->m_assetAccountSplit.accountId().isEmpty()
-                    && haveInterest() && d->m_interestSplits.count()
+            if (haveAssetAccount() && !d->m_assetAccountSplit.accountId().isEmpty() //
+                    && haveInterest() && d->m_interestSplits.count() //
                     && haveFees() && d->m_feeSplits.count()) {
                 txt = d->m_feeCategory;
             } else
@@ -509,8 +509,8 @@ void InvestTransaction::registerCellText(QString& txt, Qt::Alignment& align, int
 
         case (int)eTransaction::Column::Quantity:
             align |= Qt::AlignRight;
-            if (haveAssetAccount() && !d->m_assetAccountSplit.accountId().isEmpty()
-                    && haveInterest() && d->m_interestSplits.count()
+            if (haveAssetAccount() && !d->m_assetAccountSplit.accountId().isEmpty() //
+                    && haveInterest() && d->m_interestSplits.count() //
                     && haveFees() && d->m_feeSplits.count()) {
                 txt = MyMoneyUtils::formatMoney(d->m_feeAmount, d->m_currency);
             }

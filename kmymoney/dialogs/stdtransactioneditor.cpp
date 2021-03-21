@@ -602,8 +602,8 @@ void StdTransactionEditor::slotUpdatePayee(const QString& payeeId)
     // in case there is no category assigned, no value entered and no
     // memo available, we search for the last transaction of this payee
     // in the account.
-    if (d->m_transaction.id().isEmpty()
-            && d->m_splits.count() == 0
+    if (d->m_transaction.id().isEmpty() //
+            && d->m_splits.count() == 0 //
             && KMyMoneySettings::autoFillTransaction() != 0) {
         // check if category is empty
         if (auto category = dynamic_cast<KMyMoneyCategory*>(d->m_editWidgets["category"])) {
@@ -619,8 +619,7 @@ void StdTransactionEditor::slotUpdatePayee(const QString& payeeId)
             return;
 
         // check if all value fields are empty
-        QStringList fields;
-        fields << "amount" << "payment" << "deposit";
+        QStringList fields{"amount", "payment", "deposit"};
         QStringList::const_iterator it_f;
         for (it_f = fields.constBegin(); it_f != fields.constEnd(); ++it_f) {
             const auto amount = dynamic_cast<AmountEdit*>(haveWidget(*it_f));

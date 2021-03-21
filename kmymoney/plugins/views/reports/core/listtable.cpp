@@ -240,15 +240,15 @@ void ListTable::render(QString& result, QString& csv) const
             if (rowRank == 2) {
                 if (*it_column == ctValue)
                     data = (*it_row).value(ctSplit);
-                else if (*it_column == ctPostDate
-                         || *it_column == ctNumber
-                         || *it_column == ctPayee
-                         || *it_column == ctAction
-                         || *it_column == ctShares
-                         || *it_column == ctPrice
-                         || *it_column == ctNextDueDate
-                         || *it_column == ctBalance
-                         || *it_column == ctAccount
+                else if (*it_column == ctPostDate //
+                         || *it_column == ctNumber //
+                         || *it_column == ctPayee //
+                         || *it_column == ctAction //
+                         || *it_column == ctShares //
+                         || *it_column == ctPrice //
+                         || *it_column == ctNextDueDate //
+                         || *it_column == ctBalance //
+                         || *it_column == ctAccount //
                          || *it_column == ctName)
                     data.clear();
             }

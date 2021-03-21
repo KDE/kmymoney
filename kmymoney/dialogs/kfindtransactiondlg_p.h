@@ -90,7 +90,8 @@ public:
             eWidgets::eTransaction::Column::Detail,
             eWidgets::eTransaction::Column::ReconcileFlag,
             eWidgets::eTransaction::Column::Payment,
-            eWidgets::eTransaction::Column::Deposit};
+            eWidgets::eTransaction::Column::Deposit,
+        };
         ui->m_register->setupRegister(MyMoneyAccount(), cols);
         ui->m_register->setSelectionMode(QTableWidget::SingleSelection);
 

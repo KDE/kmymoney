@@ -106,6 +106,7 @@ void KMyMoneySecuritySelector::update(const QString& id)
     QList<MyMoneySecurity>::ConstIterator it;
 
     // construct a transparent 16x16 pixmap
+    // clang-format off
     static unsigned char empty_png[] = {
         0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A,
         0x00, 0x00, 0x00, 0x0D, 0x49, 0x48, 0x44, 0x52,
@@ -127,6 +128,7 @@ void KMyMoneySecuritySelector::update(const QString& id)
         0x00, 0x00, 0x49, 0x45, 0x4E, 0x44, 0xAE, 0x42,
         0x60, 0x82
     };
+    // clang-format on
 
     QPixmap empty;
     empty.loadFromData(empty_png, sizeof(empty_png), 0, Qt::AutoColor);

@@ -126,7 +126,7 @@ const char* homePageItems[] = {
     I18N_NOOP("Budget"),
     I18N_NOOP("CashFlow"),
     // insert new items above this comment
-    0
+    0,
 };
 
 const QString KMyMoneyUtils::homePageItemToString(const int idx)

@@ -63,7 +63,7 @@ void MyMoneyContact::fetchContact(const QString &email)
         emit contactFetched(contact);
     } else {
         // fetch the contact data
-        Akonadi::RecursiveItemFetchJob *job = new Akonadi::RecursiveItemFetchJob(Akonadi::Collection::root(), QStringList() << KContacts::Addressee::mimeType());
+        Akonadi::RecursiveItemFetchJob *job = new Akonadi::RecursiveItemFetchJob(Akonadi::Collection::root(), QStringList{KContacts::Addressee::mimeType()});
         job->fetchScope().fetchFullPayload();
         job->fetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
         job->setProperty("MyMoneyContact_email", email);
@@ -97,7 +97,7 @@ void MyMoneyContact::searchContactResult(KJob *job)
                 QList<KContacts::PhoneNumber::Type> typesList = {KContacts::PhoneNumber::Work | KContacts::PhoneNumber::Pref,
                                                                  KContacts::PhoneNumber::Work,
                                                                  KContacts::PhoneNumber::Home | KContacts::PhoneNumber::Pref,
-                                                                 KContacts::PhoneNumber::Home
+                                                                 KContacts::PhoneNumber::Home,
                                                                 };
                 foreach (auto type,  typesList) {
                     foreach (auto phn, phones) {
@@ -122,7 +122,7 @@ void MyMoneyContact::searchContactResult(KJob *job)
                 QList<KContacts::Address::Type> typesList = {KContacts::Address::Work | KContacts::Address::Pref,
                                                              KContacts::Address::Work,
                                                              KContacts::Address::Home | KContacts::Address::Pref,
-                                                             KContacts::Address::Home
+                                                             KContacts::Address::Home,
                                                             };
                 foreach (auto type,  typesList) {
                     foreach (auto addr, addresses) {

@@ -946,7 +946,7 @@ void MyMoneyXmlContentHandlerTest::readInstitution()
 void MyMoneyXmlContentHandlerTest::writeInstitution()
 {
     MyMoneyInstitution n("name", "town", "street", "postcode",
-                         "telephone", "manager", "sortcode");;
+                         "telephone", "manager", "sortcode");
 
     n.addAccountId("A000001");
     n.addAccountId("A000003");

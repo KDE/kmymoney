@@ -153,13 +153,13 @@ bool MyMoneyTransaction::operator == (const MyMoneyTransaction& right) const
 {
     Q_D(const MyMoneyTransaction);
     auto d2 = static_cast<const MyMoneyTransactionPrivate *>(right.d_func());
-    return (MyMoneyObject::operator==(right) &&
-            MyMoneyKeyValueContainer::operator==(right) &&
-            (d->m_commodity == d2->m_commodity) &&
-            ((d->m_memo.length() == 0 && d2->m_memo.length() == 0) || (d->m_memo == d2->m_memo)) &&
-            (d->m_splits == d2->m_splits) &&
-            (d->m_entryDate == d2->m_entryDate) &&
-            (d->m_postDate == d2->m_postDate));
+    return (MyMoneyObject::operator==(right)
+            && MyMoneyKeyValueContainer::operator==(right) //
+            && (d->m_commodity == d2->m_commodity) //
+            && ((d->m_memo.length() == 0 && d2->m_memo.length() == 0) || (d->m_memo == d2->m_memo))  //
+            && (d->m_splits == d2->m_splits) //
+            && (d->m_entryDate == d2->m_entryDate) //
+            && (d->m_postDate == d2->m_postDate));
 }
 
 bool MyMoneyTransaction::operator != (const MyMoneyTransaction& r) const

@@ -1108,7 +1108,7 @@ MyMoneyMoney MyMoneyForecast::calculateAccountTrend(const MyMoneyAccount& acc, q
     }
     //get all transactions for the period
     filter.setDateFilter(startDate, QDate::currentDate());
-    if (acc.accountGroup() == eMyMoney::Account::Type::Income
+    if (acc.accountGroup() == eMyMoney::Account::Type::Income //
             || acc.accountGroup() == eMyMoney::Account::Type::Expense) {
         filter.addCategory(acc.id());
     } else {

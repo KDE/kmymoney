@@ -64,8 +64,8 @@ void setDirectory(const QString& dir)
 
 bool needReload(const QFileInfo& i)
 {
-    return ((!i.isReadable())
-            || (i.lastModified().addDays(7) < QDateTime::currentDateTime())
+    return ((!i.isReadable()) //
+            || (i.lastModified().addDays(7) < QDateTime::currentDateTime()) //
             || (i.size() < 1024));
 }
 

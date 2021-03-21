@@ -220,8 +220,8 @@ bool MyMoneyInstitution::operator == (const MyMoneyInstitution& right) const
 {
     Q_D(const MyMoneyInstitution);
     auto d2 = static_cast<const MyMoneyInstitutionPrivate *>(right.d_func());
-    if (MyMoneyObject::operator==(right) &&
-            ((d->m_name.length() == 0 && d2->m_name.length() == 0) || (d->m_name == d2->m_name)) &&
+    if (MyMoneyObject::operator==(right) //
+            && ((d->m_name.length() == 0 && d2->m_name.length() == 0) || (d->m_name == d2->m_name)) &&
             ((d->m_town.length() == 0 && d2->m_town.length() == 0) || (d->m_town == d2->m_town)) &&
             ((d->m_street.length() == 0 && d2->m_street.length() == 0) || (d->m_street == d2->m_street)) &&
             ((d->m_postcode.length() == 0 && d2->m_postcode.length() == 0) || (d->m_postcode == d2->m_postcode)) &&

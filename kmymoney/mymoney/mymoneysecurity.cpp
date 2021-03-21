@@ -80,18 +80,19 @@ bool MyMoneySecurity::operator == (const MyMoneySecurity& right) const
 {
     Q_D(const MyMoneySecurity);
     auto d2 = static_cast<const MyMoneySecurityPrivate *>(right.d_func());
+    // clang-format off
     return (d->m_id == d2->m_id)
            && (d->m_name == d2->m_name)
            && (d->m_tradingSymbol == d2->m_tradingSymbol)
            && (d->m_tradingMarket == d2->m_tradingMarket)
            && (d->m_roundingMethod == d2->m_roundingMethod)
-           && (d->m_tradingSymbol == d2->m_tradingSymbol)
            && (d->m_tradingCurrency == d2->m_tradingCurrency)
            && (d->m_securityType == d2->m_securityType)
            && (d->m_smallestAccountFraction == d2->m_smallestAccountFraction)
            && (d->m_smallestCashFraction == d2->m_smallestCashFraction)
            && (d->m_pricePrecision == d2->m_pricePrecision)
            && this->MyMoneyKeyValueContainer::operator == (right);
+    // clang-format on
 }
 
 bool MyMoneySecurity::operator < (const MyMoneySecurity& right) const

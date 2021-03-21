@@ -92,7 +92,7 @@ const QHash<eMyMoney::Transaction::Action, QString> CSVImporterCore::m_transacti
     {eMyMoney::Transaction::Action::CashDividend, QStringLiteral("DivXParam")},
     {eMyMoney::Transaction::Action::Interest, QStringLiteral("IntIncParam")},
     {eMyMoney::Transaction::Action::Shrsin, QStringLiteral("ShrsinParam")},
-    {eMyMoney::Transaction::Action::Shrsout, QStringLiteral("ShrsoutParam")}
+    {eMyMoney::Transaction::Action::Shrsout, QStringLiteral("ShrsoutParam")},
 };
 
 const QString CSVImporterCore::m_confProfileNames = QStringLiteral("ProfileNames");
@@ -670,17 +670,18 @@ int CSVImporterCore::detectDecimalSymbols(const QList<int> &columns)
     MyMoneyFile *file = MyMoneyFile::instance();
     file->accountList(accounts);
 
-    QList<eMyMoney::Account::Type> accountTypes;
-    accountTypes << eMyMoney::Account::Type::Checkings <<
-                 eMyMoney::Account::Type::Savings <<
-                 eMyMoney::Account::Type::Liability <<
-                 eMyMoney::Account::Type::Checkings <<
-                 eMyMoney::Account::Type::Savings <<
-                 eMyMoney::Account::Type::Cash <<
-                 eMyMoney::Account::Type::CreditCard <<
-                 eMyMoney::Account::Type::Loan <<
-                 eMyMoney::Account::Type::Asset <<
-                 eMyMoney::Account::Type::Liability;
+    QList<eMyMoney::Account::Type> accountTypes{
+        eMyMoney::Account::Type::Checkings,
+        eMyMoney::Account::Type::Savings,
+        eMyMoney::Account::Type::Liability,
+        eMyMoney::Account::Type::Checkings,
+        eMyMoney::Account::Type::Savings,
+        eMyMoney::Account::Type::Cash,
+        eMyMoney::Account::Type::CreditCard,
+        eMyMoney::Account::Type::Loan,
+        eMyMoney::Account::Type::Asset,
+        eMyMoney::Account::Type::Liability,
+    };
 
     QSet<QString> currencySymbols;
     foreach (const auto account, accounts) {
@@ -804,16 +805,18 @@ bool CSVImporterCore::detectAccount(MyMoneyStatement &st)
     switch(m_profile->type()) {
     default:
     case Profile::Banking:
-        accountTypes << eMyMoney::Account::Type::Checkings <<
-                     eMyMoney::Account::Type::Savings <<
-                     eMyMoney::Account::Type::Liability <<
-                     eMyMoney::Account::Type::Checkings <<
-                     eMyMoney::Account::Type::Savings <<
-                     eMyMoney::Account::Type::Cash <<
-                     eMyMoney::Account::Type::CreditCard <<
-                     eMyMoney::Account::Type::Loan <<
-                     eMyMoney::Account::Type::Asset <<
-                     eMyMoney::Account::Type::Liability;
+        accountTypes << QList<eMyMoney::Account::Type>{
+            eMyMoney::Account::Type::Checkings,
+            eMyMoney::Account::Type::Savings,
+            eMyMoney::Account::Type::Liability,
+            eMyMoney::Account::Type::Checkings,
+            eMyMoney::Account::Type::Savings,
+            eMyMoney::Account::Type::Cash,
+            eMyMoney::Account::Type::CreditCard,
+            eMyMoney::Account::Type::Loan,
+            eMyMoney::Account::Type::Asset,
+            eMyMoney::Account::Type::Liability,
+        };
         accounts = findAccounts(accountTypes, statementHeader);
         break;
     case Profile::Investment:

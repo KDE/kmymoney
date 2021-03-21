@@ -284,10 +284,10 @@ public:
                 */
                 // Do not create account types that are not supported
                 // by the current engine.
-                if (m_account.accountType() == Account::Type::Unknown ||
-                        m_account.accountType() == Account::Type::CertificateDep ||
-                        m_account.accountType() == Account::Type::MoneyMarket ||
-                        m_account.accountType() == Account::Type::Currency)
+                if (m_account.accountType() == Account::Type::Unknown //
+                    || m_account.accountType() == Account::Type::CertificateDep //
+                    || m_account.accountType() == Account::Type::MoneyMarket //
+                    || m_account.accountType() == Account::Type::Currency)
                     typeString = MyMoneyAccount::accountTypeToString(Account::Type::Checkings);
             }
 
@@ -450,7 +450,7 @@ public:
     {
         if (widget) {
             if(widget->isChecked()) {
-                m_account.setValue(key, "Yes");;
+                m_account.setValue(key, "Yes");
             } else {
                 m_account.deletePair(key);
             }

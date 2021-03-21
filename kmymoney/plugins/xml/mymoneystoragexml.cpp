@@ -215,6 +215,7 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
 {
     if (m_level == 0) {
         QString s = qName.toUpper();
+        // clang-format off
         if (s == nodeName(Node::Transaction)
                 || s == nodeName(Node::Account)
                 || s == nodeName(Node::Price)
@@ -231,6 +232,7 @@ bool MyMoneyXmlContentHandler::startElement(const QString& /* namespaceURI */, c
                 || s == tagName(Tag::User)
                 || s == nodeName(Node::ScheduleTX)
                 || s == nodeName(Node::OnlineJob)) {
+            // clang-format on
             m_baseNode = m_doc.createElement(qName);
             for (int i = 0; i < atts.count(); ++i) {
                 m_baseNode.setAttribute(atts.qName(i), atts.value(i));

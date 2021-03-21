@@ -306,6 +306,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
         if (!list.isEmpty())
             currentId = list.first();
     }
+    // clang-format off
     if (d->m_typeList.contains(Account::Type::Checkings)
             || d->m_typeList.contains(Account::Type::Savings)
             || d->m_typeList.contains(Account::Type::Cash)
@@ -322,6 +323,7 @@ int AccountSet::load(KMyMoneyAccountSelector* selector)
             || d->m_typeList.contains(Account::Type::Loan)
             || d->m_typeList.contains(Account::Type::Liability))
         typeMask |= eDialogs::Category::liability;
+    // clang-format on
 
     if (d->m_typeList.contains(Account::Type::Income))
         typeMask |= eDialogs::Category::income;

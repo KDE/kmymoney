@@ -62,7 +62,7 @@ public:
         const QStringList subDirs = {
             QStringLiteral(".gnupg"),
             QString(),
-            QStringLiteral("gnupg")
+            QStringLiteral("gnupg"),
         };
 
         ctx = GpgME::Context::createForProtocol(GpgME::OpenPGP);

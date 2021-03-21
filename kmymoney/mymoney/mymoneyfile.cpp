@@ -578,8 +578,8 @@ void MyMoneyFile::modifyAccount(const MyMoneyAccount& _account)
             throw MYMONEYEXCEPTION_CSTRING("Unable to modify the standard account groups");
     }
 
-    if (account.accountType() != acc.accountType() &&
-            !account.isLiquidAsset() && !acc.isLiquidAsset())
+    if (account.accountType() != acc.accountType() //
+             && !account.isLiquidAsset() && !acc.isLiquidAsset())
         throw MYMONEYEXCEPTION_CSTRING("Unable to change account type");
 
     // if the account was moved to another institution, we notify

@@ -440,7 +440,7 @@ QHash<eMenu::Action, QAction *> KMyMoneyView::actionsToBeConnected()
         {Action::ShowReportsView,         &KMyMoneyView::slotShowReportsPage,       i18n("Show reports page"),                Qt::CTRL + Qt::Key_9},
         {Action::ShowBudgetView,          &KMyMoneyView::slotShowBudgetPage,        i18n("Show budget page"),                },
         {Action::ShowForecastView,        &KMyMoneyView::slotShowForecastPage,      i18n("Show forecast page"),              },
-        {Action::ShowOnlineJobOutboxView, &KMyMoneyView::slotShowOutboxPage,        i18n("Show outbox page")                 }
+        {Action::ShowOnlineJobOutboxView, &KMyMoneyView::slotShowOutboxPage,        i18n("Show outbox page")                 },
     };
 
     QHash<Action, QAction *> lutActions;
