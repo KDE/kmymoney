@@ -142,7 +142,7 @@ eRegister::Action StdTransaction::actionType() const
         if (split.accountId() == d->m_split.accountId())
             continue;
         auto acc = MyMoneyFile::instance()->account(split.accountId());
-        if (acc.accountGroup() == eMyMoney::Account::Type::Income
+        if (acc.accountGroup() == eMyMoney::Account::Type::Income //
                 || acc.accountGroup() == eMyMoney::Account::Type::Expense) {
             // otherwise, we have to determine between deposit and withdrawal
             action = d->m_split.shares().isNegative() ? eRegister::Action::Withdrawal : eRegister::Action::Deposit;

@@ -125,7 +125,7 @@ bool BudgetsModel::setData(const QModelIndex& index, const QVariant& value, int 
         switch(index.column()) {
         case Columns::Name:
             budget.setName(value.toString());
-            break;;
+            break;
 
         case Columns::Year:
         {

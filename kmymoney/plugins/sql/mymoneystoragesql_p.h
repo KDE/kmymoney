@@ -2378,8 +2378,7 @@ public:
         MyMoneyDbTransaction t(*q, Q_FUNC_INFO);
         QSqlQuery query(*q);
         // kmmSplits - add index on transactionId + splitId
-        QStringList list;
-        list << "transactionId" << "splitId";
+        QStringList list{"transactionId", "splitId"};
         if (!query.exec(MyMoneyDbIndex("kmmSplits", "kmmTx_Split", list, false).generateDDL(m_driver) + ';')) {
             buildError(query, Q_FUNC_INFO, "Error adding kmmSplits index on (transactionId, splitId)");
             return (1);

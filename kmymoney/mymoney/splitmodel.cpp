@@ -178,7 +178,7 @@ QVariant SplitModel::headerData(int section, Qt::Orientation orientation, int ro
             return d->headerData.value(static_cast<Column>(section));
 
         case Qt::SizeHintRole:
-            return QSize(20, 20);;
+            return QSize(20, 20);
         }
         return {};
     }

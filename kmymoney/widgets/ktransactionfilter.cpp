@@ -154,11 +154,11 @@ void KTransactionFilter::slotUpdateSelections()
     d->ui->m_payeesView->setEnabled(!d->ui->m_emptyPayeesButton->isChecked());
 
     // Details tab
-    if (d->ui->m_typeBox->currentIndex() != 0
-            || d->ui->m_stateBox->currentIndex() != 0
-            || d->ui->m_validityBox->currentIndex() != 0
-            || (d->ui->m_nrButton->isChecked() && d->ui->m_nrEdit->text().length() != 0)
-            || (d->ui->m_nrRangeButton->isChecked()
+    if (d->ui->m_typeBox->currentIndex() != 0 //
+            || d->ui->m_stateBox->currentIndex() != 0 //
+            || d->ui->m_validityBox->currentIndex() != 0 //
+            || (d->ui->m_nrButton->isChecked() && d->ui->m_nrEdit->text().length() != 0) //
+            || (d->ui->m_nrRangeButton->isChecked() //
                 && (d->ui->m_nrFromEdit->text().length() != 0 || d->ui->m_nrToEdit->text().length() != 0))) {
         if (!txt.isEmpty())
             txt += separator;
@@ -298,7 +298,7 @@ MyMoneyTransactionFilter KTransactionFilter::setupFilter()
     if ((d->ui->m_amountButton->isChecked() && d->ui->m_amountEdit->isValid())) {
         d->m_filter.setAmountFilter(d->ui->m_amountEdit->value(), d->ui->m_amountEdit->value());
 
-    } else if ((d->ui->m_amountRangeButton->isChecked()
+    } else if ((d->ui->m_amountRangeButton->isChecked() //
                 && (d->ui->m_amountFromEdit->isValid() || d->ui->m_amountToEdit->isValid()))) {
 
         MyMoneyMoney from(MyMoneyMoney::minValue), to(MyMoneyMoney::maxValue);
@@ -344,7 +344,7 @@ MyMoneyTransactionFilter KTransactionFilter::setupFilter()
     if (d->ui->m_nrButton->isChecked() && !d->ui->m_nrEdit->text().isEmpty())
         d->m_filter.setNumberFilter(d->ui->m_nrEdit->text(), d->ui->m_nrEdit->text());
 
-    if (d->ui->m_nrRangeButton->isChecked()
+    if (d->ui->m_nrRangeButton->isChecked() //
             && (!d->ui->m_nrFromEdit->text().isEmpty() || !d->ui->m_nrToEdit->text().isEmpty())) {
         d->m_filter.setNumberFilter(d->ui->m_nrFromEdit->text(), d->ui->m_nrToEdit->text());
     }

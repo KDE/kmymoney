@@ -220,11 +220,11 @@ void CSVWizard::updateWindowSize()
     QRect screen = QApplication::desktop()->availableGeometry();    //get available screen size
     QRect wizard = this->frameGeometry();                           //get current wizard size
 
-    int newWidth = table->contentsMargins().left() +
-                   table->contentsMargins().right() +
-                   table->horizontalHeader()->length() +
-                   table->verticalHeader()->width() +
-                   (wizard.width() - table->width());
+    int newWidth = (table->contentsMargins().left() //
+                    + table->contentsMargins().right() //
+                    + table->horizontalHeader()->length() //
+                    + table->verticalHeader()->width() //
+                    + (wizard.width() - table->width()));
     if (table->verticalScrollBar()->isEnabled()) {
         if (!table->verticalScrollBar()->isVisible() && // vertical scrollbar may be not visible after repaint...
                 table->horizontalScrollBar()->isVisible())  // ...so use horizontal scrollbar dimension
@@ -233,11 +233,11 @@ void CSVWizard::updateWindowSize()
             newWidth += table->verticalScrollBar()->width();
     }
 
-    int newHeight = table->contentsMargins().top() +
-                    table->contentsMargins().bottom() +
-                    table->verticalHeader()->length() +
-                    table->horizontalHeader()->height() +
-                    (wizard.height() - table->height());
+    int newHeight = (table->contentsMargins().top() //
+                     + table->contentsMargins().bottom() //
+                     + table->verticalHeader()->length() //
+                     + table->horizontalHeader()->height() //
+                     + (wizard.height() - table->height()));
 
     if (table->horizontalScrollBar()->isEnabled()) {
         if (!table->horizontalScrollBar()->isVisible() && // horizontal scrollbar may be not visible after repaint...

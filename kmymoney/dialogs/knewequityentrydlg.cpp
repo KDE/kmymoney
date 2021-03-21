@@ -123,9 +123,9 @@ void KNewEquityEntryDlg::slotDataChanged()
     Q_D(KNewEquityEntryDlg);
     auto okEnabled = true;
 
-    if (!d->ui->edtFraction->value().isPositive()
-            || d->ui->edtMarketSymbol->text().isEmpty()
-            || d->ui->edtEquityName->text().isEmpty())
+    if (!d->ui->edtFraction->value().isPositive() //
+            || d->ui->edtMarketSymbol->text().isEmpty() //
+            || d->ui->edtEquityName->text().isEmpty()) //
         okEnabled = false;
 
     d->ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(okEnabled);

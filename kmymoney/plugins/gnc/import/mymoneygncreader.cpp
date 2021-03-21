@@ -863,7 +863,7 @@ GncSchedule::GncSchedule()
     static const QString dataEls[] = {"sx:name", "sx:enabled", "sx:autoCreate", "sx:autoCreateNotify",
                                       "sx:autoCreateDays", "sx:advanceCreateDays", "sx:advanceRemindDays",
                                       "sx:instanceCount", "sx:num-occur",
-                                      "sx:rem-occur", "sx:templ-acct"
+                                      "sx:rem-occur", "sx:templ-acct",
                                      };
     m_dataElementList = dataEls;
     static const unsigned int anonClasses[] = {NXTSCHD, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS, ASIS};
@@ -2107,7 +2107,7 @@ void MyMoneyGncReader::convertSchedule(const GncSchedule *gsc)
             {   "two-yearly", 'y', 2, Schedule::Occurrence::EveryOtherYear,
                 Schedule::WeekendOption::MoveNothing
             },
-            {"zzz", 'y', 1, Schedule::Occurrence::Yearly, Schedule::WeekendOption::MoveNothing}
+            {"zzz", 'y', 1, Schedule::Occurrence::Yearly, Schedule::WeekendOption::MoveNothing},
             // zzz = stopper, may cause problems. what else can we do?
         };
 

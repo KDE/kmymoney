@@ -86,7 +86,7 @@ public:
                                         AccountsModel::Column::PostedValue,
                                         AccountsModel::Column::BankCode,
                                         AccountsModel::Column::Bic,
-                                        AccountsModel::Column::CostCenter }));
+                                        AccountsModel::Column::CostCenter, }));
 
         ui->m_accountTree->setModel(MyMoneyFile::instance()->accountsModel());
         m_proxyModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquity());

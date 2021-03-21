@@ -56,8 +56,8 @@ bool MyMoneyPayee::operator == (const MyMoneyPayee& right) const
 {
     Q_D(const MyMoneyPayee);
     auto d2 = static_cast<const MyMoneyPayeePrivate *>(right.d_func());
-    return (MyMoneyObject::operator==(right) &&
-            ((d->m_name.length() == 0 && d2->m_name.length() == 0) || (d->m_name == d2->m_name)) &&
+    return (MyMoneyObject::operator==(right) //
+            && ((d->m_name.length() == 0 && d2->m_name.length() == 0) || (d->m_name == d2->m_name)) &&
             ((d->m_address.length() == 0 && d2->m_address.length() == 0) || (d->m_address == d2->m_address)) &&
             ((d->m_city.length() == 0 && d2->m_city.length() == 0) || (d->m_city == d2->m_city)) &&
             ((d->m_state.length() == 0 && d2->m_state.length() == 0) || (d->m_state == d2->m_state)) &&

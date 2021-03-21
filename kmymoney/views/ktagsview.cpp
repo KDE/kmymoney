@@ -47,7 +47,7 @@ KTagsView::KTagsView(QWidget *parent) :
     const QHash<eMenu::Action, KTagsViewFunc> actionConnections {
         {eMenu::Action::NewTag,    &KTagsView::slotNewTag},
         {eMenu::Action::RenameTag, &KTagsView::slotRenameTag},
-        {eMenu::Action::DeleteTag, &KTagsView::slotDeleteTag}
+        {eMenu::Action::DeleteTag, &KTagsView::slotDeleteTag},
     };
 
     for (auto a = actionConnections.cbegin(); a != actionConnections.cend(); ++a)

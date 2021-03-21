@@ -1473,7 +1473,7 @@ QString PivotTable::renderCSV() const
                     }
                 } else {
                     for (auto i = 0; i < m_numColumns + m_rowTypeList.size(); ++i)
-                        rowdata.append(',');;
+                        rowdata.append(',');
                 }
 
                 //

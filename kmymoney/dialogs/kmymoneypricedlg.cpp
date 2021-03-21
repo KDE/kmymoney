@@ -370,7 +370,7 @@ void KMyMoneyPriceDlg::slotShowPriceMenu(const QPoint& p)
             {eMenu::Action::NewPrice,    &KMyMoneyPriceDlg::slotNewPrice,          i18n("New price..."),           Icon::DocumentNew,       true},
             {eMenu::Action::EditPrice,   &KMyMoneyPriceDlg::slotEditPrice,         i18n("Edit price..."),          Icon::DocumentEdit,      cond1},
             {eMenu::Action::UpdatePrice, &KMyMoneyPriceDlg::slotOnlinePriceUpdate, i18n("Online Price Update..."), Icon::OnlinePriceUpdate, cond2},
-            {eMenu::Action::DeletePrice, &KMyMoneyPriceDlg::slotDeletePrice,       i18n("Delete price..."), Icon::EditRemove,        cond1}
+            {eMenu::Action::DeletePrice, &KMyMoneyPriceDlg::slotDeletePrice,       i18n("Delete price..."), Icon::EditRemove,        cond1},
         };
 
         QList<QAction*> LUTActions;

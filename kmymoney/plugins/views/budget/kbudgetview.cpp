@@ -161,7 +161,7 @@ void KBudgetView::slotCopyBudget()
         MyMoneyFileTransaction ft;
         try {
 
-            MyMoneyBudget budget = file->budget(indexes.first().data(eMyMoney::Model::IdRole).toString());;
+            MyMoneyBudget budget = file->budget(indexes.first().data(eMyMoney::Model::IdRole).toString());
             budget.clearId();
             budget.setName(i18n("Copy of %1", budget.name()));
 
@@ -424,7 +424,7 @@ void KBudgetView::createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiCl
         {QStringLiteral("budget_rename"),           &KBudgetView::slotStartRename,    i18n("Rename budget"),            Icon::DocumentEdit,            eMenu::BudgetAction::RenameBudget},
         {QStringLiteral("budget_delete"),           &KBudgetView::slotDeleteBudget,   i18n("Delete budget"),            Icon::EditRemove,              eMenu::BudgetAction::DeleteBudget},
         {QStringLiteral("budget_copy"),             &KBudgetView::slotCopyBudget,     i18n("Copy budget"),              Icon::EditCopy,                eMenu::BudgetAction::CopyBudget},
-        {QStringLiteral("budget_base_on_forecast"), &KBudgetView::slotBudgetForecast, i18n("Budget based on forecast"), Icon::OfficeChartLineForecast, eMenu::BudgetAction::BudgetForecast}
+        {QStringLiteral("budget_base_on_forecast"), &KBudgetView::slotBudgetForecast, i18n("Budget based on forecast"), Icon::OfficeChartLineForecast, eMenu::BudgetAction::BudgetForecast},
     };
 
     Q_D(KBudgetView);

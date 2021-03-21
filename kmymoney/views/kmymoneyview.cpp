@@ -385,7 +385,7 @@ QHash<eMenu::Action, QAction *> KMyMoneyView::actionsToBeConnected()
         {Action::ShowReportsView,         View::Reports,            i18n("Show reports page"),                Qt::CTRL + Qt::Key_9},
         {Action::ShowBudgetView,          View::Budget,             i18n("Show budget page"),                 },
         {Action::ShowForecastView,        View::Forecast,           i18n("Show forecast page"),               },
-        {Action::ShowOnlineJobOutboxView, View::OnlineJobOutbox,    i18n("Show outbox page")                  }
+        {Action::ShowOnlineJobOutboxView, View::OnlineJobOutbox,    i18n("Show outbox page")                  },
     };
 
     QHash<Action, QAction *> lutActions;

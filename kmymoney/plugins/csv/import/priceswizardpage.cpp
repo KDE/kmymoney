@@ -82,9 +82,9 @@ void PricesPage::initializePage()
 
 bool PricesPage::isComplete() const
 {
-    return  ui->m_dateCol->currentIndex() > -1 &&
-            ui->m_priceCol->currentIndex() > -1 &&
-            ui->m_priceFraction->currentIndex() > -1;
+    return ui->m_dateCol->currentIndex() > -1 //
+        && ui->m_priceCol->currentIndex() > -1 //
+        && ui->m_priceFraction->currentIndex() > -1;
 }
 
 bool PricesPage::validatePage()

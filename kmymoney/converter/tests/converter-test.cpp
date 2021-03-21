@@ -73,26 +73,28 @@ void ConverterTest::testWebQuotes_data()
     QTest::addColumn<QString>("testname");
     QTest::addColumn<QString>("source");
 
+    // clang-format off
     QTest::newRow("Yahoo UK") << "VOD.L" << "test Yahoo UK" << "Yahoo UK";
     QTest::newRow("Yahoo Currency") << "EUR > USD" << "test Yahoo Currency" << "Yahoo Currency";
     QTest::newRow("Financial Express") << "0585239" << "test Financial Express" << "Financial Express";
     QTest::newRow("Yahoo France") << "EAD.PA" << "test Yahoo France" << "Yahoo France";
     QTest::newRow("Globe & Mail") << "50492" << "test Globe-Mail" << "Globe & Mail";
     QTest::newRow("MSN Canada") << "TDB647" << "test MSN.CA" << "MSN.CA";
+    // clang-format on
 
-//  QTest::newRow("Finanztreff") << "BASF.SE" << "test Finanztreff" << "Finanztreff";
-//  QTest::newRow("boerseonline") << "symbol" << "test boerseonline" << "boerseonline";
-//  QTest::newRow("Wallstreet-Online.DE (Default)") << "symbol" << "test Wallstreet-Online.DE (Default)" << "Wallstreet-Online.DE (Default)";
-//  QTest::newRow("Financial Times UK") << "DZGEAE" << "test Financial Times UK Funds" << "Financial Times UK Funds");
+    // QTest::newRow("Finanztreff") << "BASF.SE" << "test Finanztreff" << "Finanztreff";
+    // QTest::newRow("boerseonline") << "symbol" << "test boerseonline" << "boerseonline";
+    // QTest::newRow("Wallstreet-Online.DE (Default)") << "symbol" << "test Wallstreet-Online.DE (Default)" << "Wallstreet-Online.DE (Default)";
+    // QTest::newRow("Financial Times UK") << "DZGEAE" << "test Financial Times UK Funds" << "Financial Times UK Funds");
 
     QTest::newRow("Yahoo Canada") << "UTS.TO" << "test Yahoo Canada" << "Yahoo Canada";
 
-//  QTest::newRow("Wallstreed-Online.DE (Hamburg)") << "TDB647" << "test Wallstreet-Online.DE (Hamburg)" << "Wallstreet-Online.DE (Hamburg)";
-//  QTest::newRow("Gielda Papierow Wartosciowych (GPW)") << "TDB647" << "test Gielda Papierow Wartosciowych (GPW)" << "Gielda Papierow Wartosciowych (GPW)";
-//  QTest::newRow("OMX Baltic") << "TDB647" << "test OMX Baltic funds" << "OMX Baltic funds";
+    // QTest::newRow("Wallstreed-Online.DE (Hamburg)") << "TDB647" << "test Wallstreet-Online.DE (Hamburg)" << "Wallstreet-Online.DE (Hamburg)";
+    // QTest::newRow("Gielda Papierow Wartosciowych (GPW)") << "TDB647" << "test Gielda Papierow Wartosciowych (GPW)" << "Gielda Papierow Wartosciowych (GPW)";
+    // QTest::newRow("OMX Baltic") << "TDB647" << "test OMX Baltic funds" << "OMX Baltic funds";
 
     QTest::newRow("Finance::Quote usa") << "DIS" << "test F::Q usa" << "Finance::Quote usa";
-//UNTESTED: Other F::Q sources, local files, user custom sources
+    //UNTESTED: Other F::Q sources, local files, user custom sources
 }
 
 void ConverterTest::testWebQuotesDefault()
@@ -103,7 +105,7 @@ void ConverterTest::testWebQuotesDefault()
         QuoteReceiver qr(&q);
 
         q.launch("DIS", "test default");
-//    qDebug() << "ConverterTest::testWebQuotes(): quote for " << q.m_symbol << " on " << qr.m_date.toString() << " is " << qr.m_price.toString() << " errors(" << qr.m_errors.count() << "): " << qr.m_errors.join(" /// ");
+        // qDebug() << "ConverterTest::testWebQuotes(): quote for " << q.m_symbol << " on " << qr.m_date.toString() << " is " << qr.m_price.toString() << " errors(" << qr.m_errors.count() << "): " << qr.m_errors.join(" /// ");
 
         // No errors allowed
         QVERIFY(qr.m_errors.count() == 0);

@@ -623,20 +623,22 @@ bool MyMoneySchedule::operator ==(const MyMoneySchedule& right) const
 {
     Q_D(const MyMoneySchedule);
     auto d2 = static_cast<const MyMoneySchedulePrivate *>(right.d_func());
-    if (MyMoneyObject::operator==(right) &&
-            d->m_occurrence == d2->m_occurrence &&
-            d->m_occurrenceMultiplier == d2->m_occurrenceMultiplier &&
-            d->m_type == d2->m_type &&
-            d->m_startDate == d2->m_startDate &&
-            d->m_paymentType == d2->m_paymentType &&
-            d->m_fixed == d2->m_fixed &&
-            d->m_transaction == d2->m_transaction &&
-            d->m_endDate == d2->m_endDate &&
-            d->m_lastDayInMonth == d2->m_lastDayInMonth &&
-            d->m_autoEnter == d2->m_autoEnter &&
-            d->m_lastPayment == d2->m_lastPayment &&
-            ((d->m_name.length() == 0 && d2->m_name.length() == 0) || (d->m_name == d2->m_name)))
+    // clang-format off
+    if (MyMoneyObject::operator==(right)
+        && d->m_occurrence == d2->m_occurrence
+        && d->m_occurrenceMultiplier == d2->m_occurrenceMultiplier
+        && d->m_type == d2->m_type
+        && d->m_startDate == d2->m_startDate
+        && d->m_paymentType == d2->m_paymentType
+        && d->m_fixed == d2->m_fixed
+        && d->m_transaction == d2->m_transaction
+        && d->m_endDate == d2->m_endDate
+        && d->m_lastDayInMonth == d2->m_lastDayInMonth
+        && d->m_autoEnter == d2->m_autoEnter
+        && d->m_lastPayment == d2->m_lastPayment
+        && ((d->m_name.length() == 0 && d2->m_name.length() == 0) || (d->m_name == d2->m_name)))
         return true;
+    // clang-format on
     return false;
 }
 
@@ -1296,12 +1298,12 @@ void MyMoneySchedule::simpleToCompoundOccurrence(int& multiplier, Schedule::Occu
 {
     Schedule::Occurrence newOcc = occurrence;
     int newMulti = 1;
-    if (occurrence == Schedule::Occurrence::Once ||
-            occurrence == Schedule::Occurrence::Daily ||
-            occurrence == Schedule::Occurrence::Weekly ||
-            occurrence == Schedule::Occurrence::EveryHalfMonth ||
-            occurrence == Schedule::Occurrence::Monthly ||
-            occurrence == Schedule::Occurrence::Yearly) { // Already a base occurrence and multiplier
+    if (occurrence == Schedule::Occurrence::Once //
+        || occurrence == Schedule::Occurrence::Daily //
+        || occurrence == Schedule::Occurrence::Weekly //
+        || occurrence == Schedule::Occurrence::EveryHalfMonth //
+        || occurrence == Schedule::Occurrence::Monthly //
+        || occurrence == Schedule::Occurrence::Yearly) { // Already a base occurrence and multiplier
     } else if (occurrence == Schedule::Occurrence::Fortnightly ||
                occurrence == Schedule::Occurrence::EveryOtherWeek) {
         newOcc    = Schedule::Occurrence::Weekly;
@@ -1321,8 +1323,8 @@ void MyMoneySchedule::simpleToCompoundOccurrence(int& multiplier, Schedule::Occu
     } else if (occurrence == Schedule::Occurrence::EveryOtherMonth) {
         newOcc    = Schedule::Occurrence::Monthly;
         newMulti  = 2;
-    } else if (occurrence == Schedule::Occurrence::EveryThreeMonths ||
-               occurrence == Schedule::Occurrence::Quarterly) {
+    } else if (occurrence == Schedule::Occurrence::EveryThreeMonths //
+            || occurrence == Schedule::Occurrence::Quarterly) {
         newOcc    = Schedule::Occurrence::Monthly;
         newMulti  = 3;
     } else if (occurrence == Schedule::Occurrence::EveryFourMonths) {

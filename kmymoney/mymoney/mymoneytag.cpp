@@ -110,8 +110,8 @@ bool MyMoneyTag::operator == (const MyMoneyTag& right) const
 {
     Q_D(const MyMoneyTag);
     auto d2 = static_cast<const MyMoneyTagPrivate *>(right.d_func());
-    return (MyMoneyObject::operator==(right) &&
-            ((d->m_name.length() == 0 && d2->m_name.length() == 0) || (d->m_name == d2->m_name)) &&
+    return (MyMoneyObject::operator==(right) //
+            && ((d->m_name.length() == 0 && d2->m_name.length() == 0) || (d->m_name == d2->m_name)) &&
             ((d->m_tag_color.isValid() == false && d2->m_tag_color.isValid() == false) || (d->m_tag_color.name() == d2->m_tag_color.name())) &&
             (d->m_closed == d2->m_closed));
 }

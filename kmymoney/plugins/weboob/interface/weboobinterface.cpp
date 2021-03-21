@@ -220,7 +220,7 @@ WeboobInterface::Account WeboobInterface::getAccount(QString backend, QString ac
                         tr.id = extractDictStringValue(val3, "id");
                         tr.date = QDate::fromString(extractDictStringValue(val3, "date"), "yyyy-MM-dd");
                         tr.rdate = QDate::fromString(extractDictStringValue(val3, "rdate"), "yyyy-MM-dd");
-                        tr.type = (WeboobInterface::Transaction::type_t)extractDictLongValue(val3, "type");;
+                        tr.type = (WeboobInterface::Transaction::type_t)extractDictLongValue(val3, "type");
                         tr.raw = extractDictStringValue(val3, "raw");
                         tr.category = extractDictStringValue(val3, "category");
                         tr.label = extractDictStringValue(val3, "label");

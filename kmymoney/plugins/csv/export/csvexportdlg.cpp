@@ -40,7 +40,7 @@ using namespace Icons;
 CsvExportDlg::CsvExportDlg(QWidget *parent) : QDialog(parent), ui(new Ui::CsvExportDlg)
 {
     ui->setupUi(this);
-    m_fieldDelimiterCharList << "," << ";" << "\t";
+    m_fieldDelimiterCharList = QStringList{ ",", ";", "\t"};
     ui->m_separatorComboBox->setCurrentIndex(-1);
 
     // Set (almost) all the last used options
@@ -171,10 +171,10 @@ void CsvExportDlg::checkData(const QString& accountName)
         ui->m_accountComboBox->setCompletedText(accnt.id());
     }
 
-    if (!ui->m_qlineeditFile->text().isEmpty()
-            && !ui->m_accountComboBox->currentText().isEmpty()
-            && ui->m_kmymoneydateStart->date() <= ui->m_kmymoneydateEnd->date()
-            && (ui->m_radioButtonAccount->isChecked() || ui->m_radioButtonCategories->isChecked())
+    if (!ui->m_qlineeditFile->text().isEmpty() //
+            && !ui->m_accountComboBox->currentText().isEmpty() //
+            && ui->m_kmymoneydateStart->date() <= ui->m_kmymoneydateEnd->date() //
+            && (ui->m_radioButtonAccount->isChecked() || ui->m_radioButtonCategories->isChecked()) //
             && (ui->m_separatorComboBox->currentIndex() >= 0)) {
         okEnabled = true;
     }

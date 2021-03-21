@@ -36,7 +36,7 @@ static const char * sortOrderText[] = {
     I18N_NOOP("Type"),
     I18N_NOOP("Category"),
     I18N_NOOP("Reconcile state"),
-    I18N_NOOP("Security")
+    I18N_NOOP("Security"),
     // add new values above this comment line
 };
 

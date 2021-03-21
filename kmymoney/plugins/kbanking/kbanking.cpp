@@ -253,7 +253,7 @@ void KBanking::loadProtocolConversion()
             {"aqofxconnect", "OFX"},
             {"aqyellownet", "YellowNet"},
             {"aqgeldkarte", "Geldkarte"},
-            {"aqdtaus", "DTAUS"}
+            {"aqdtaus", "DTAUS"},
         };
     }
 }
@@ -929,18 +929,18 @@ int KBankingExt::executeQueue(AB_IMEXPORTER_CONTEXT *ctx)
 
             AB_TRANSACTION_STATUS abStatus = AB_Transaction_GetStatus(abJob);
 
-            if (abStatus == AB_Transaction_StatusSent
-                    || abStatus == AB_Transaction_StatusPending
-                    || abStatus == AB_Transaction_StatusAccepted
-                    || abStatus == AB_Transaction_StatusRejected
-                    || abStatus == AB_Transaction_StatusError
+            if (abStatus == AB_Transaction_StatusSent //
+                    || abStatus == AB_Transaction_StatusPending //
+                    || abStatus == AB_Transaction_StatusAccepted //
+                    || abStatus == AB_Transaction_StatusRejected //
+                    || abStatus == AB_Transaction_StatusError //
                     || abStatus == AB_Transaction_StatusUnknown)
                 job.setJobSend();
 
             if (abStatus == AB_Transaction_StatusAccepted)
                 job.setBankAnswer(eMyMoney::OnlineJob::sendingState::acceptedByBank);
-            else if (abStatus == AB_Transaction_StatusError
-                     || abStatus == AB_Transaction_StatusRejected
+            else if (abStatus == AB_Transaction_StatusError //
+                     || abStatus == AB_Transaction_StatusRejected //
                      || abStatus == AB_Transaction_StatusUnknown)
                 job.setBankAnswer(eMyMoney::OnlineJob::sendingState::sendingError);
 

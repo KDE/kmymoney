@@ -50,7 +50,7 @@ BankingPage::BankingPage(CSVWizard *dlg, CSVImporterCore *imp)
         {Column::Payee,  ui->m_payeeCol},
         {Column::Category, ui->m_categoryCol},
         {Column::CreditDebitIndicator, ui->m_creditDebitIndicatorCol},
-        {Column::Balance, ui->m_balanceCol}
+        {Column::Balance, ui->m_balanceCol},
     };
 
     auto clearComboBox = [&](QComboBox* combobox) {
