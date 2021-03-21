@@ -2921,6 +2921,7 @@ void MyMoneyFile::setBaseCurrency(const MyMoneySecurity& curr)
     setValue("kmm-baseCurrency", curr.id());
     // force reload of base currency cache
     d->m_baseCurrency = MyMoneySecurity();
+    emit dataChanged();
   }
 }
 
