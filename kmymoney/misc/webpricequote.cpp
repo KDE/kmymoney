@@ -571,7 +571,7 @@ const QMap<QString, WebPriceQuoteSource> WebPriceQuote::defaultQuoteSources()
                                           QString(),
                                           "https://fx-rate.net/([^/]+/[^/]+)",
                                           WebPriceQuoteSource::identifyBy::Symbol,
-                                          "1[ a-zA-Z]+=</span><br\\s*/?>\\s*([,\\d+\\.]+)",
+                                          "1\\s[^=]+\\s=</span><br\\s/>\\s([^\\s]+)",
                                           "updated\\s\\d+:\\d+:\\d+\\(\\w+\\)\\s+(\\d{1,2}/\\d{2}/\\d{4})",
                                           "%d/%m/%y",
                                           true // skip HTML stripping
