@@ -38,6 +38,7 @@
 #include "mymoneyutils.h"
 #include "viewinterface.h"
 #include "selectedobjects.h"
+#include "journalmodel.h"
 
 #include "numbertowords.h"
 #include "pluginsettings.h"
@@ -60,13 +61,14 @@ struct CheckPrinting::Private {
     bool canBePrinted(const QString& accountId, const QString& transactionId) const
     {
         // can't print it twice
-        if (m_printedTransactionIdList.contains(transactionId)) {
-            return false;
+        if (!m_printedTransactionIdList.contains(transactionId)) {
+            const auto transaction = MyMoneyFile::instance()->journalModel()->transactionById(transactionId);
+            if (!transaction.id().isEmpty()) {
+                const auto split = transaction.splitByAccount(accountId);
+                return split.shares().isNegative();
+            }
         }
-        const auto transaction = MyMoneyFile::instance()->transaction(transactionId);
-        const auto split = transaction.splitByAccount(accountId);
-
-        return split.shares().isNegative();
+        return false;
     }
 
     void markAsPrinted(const QString& transactionId)
