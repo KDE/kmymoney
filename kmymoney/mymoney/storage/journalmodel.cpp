@@ -1220,12 +1220,23 @@ MyMoneyMoney JournalModel::balance(const QString& accountId, const QDate& date) 
     QModelIndex lastIdx = upperBound(MyMoneyTransaction::uniqueSortKey(date, QStringLiteral("x")), 0, rowCount()-1);
     // in case the index is invalid, we search for a data past
     // the end of the journal, so we can simply use the cached
-    // balance.
-    if (lastIdx.isValid()) {
+    // balance if it is available. Otherwise, we have to go
+    // through the journal
+    if (lastIdx.isValid() || !d->balanceCache.contains(accountId)) {
       // in case the entry is in the first half,
       // we start from the beginning and go forward
-      if (lastIdx.row() < rowCount()/2) {
-        for (int row = 0; row < lastIdx.row(); ++row) {
+      auto lastRow = lastIdx.row();
+
+      // if the lastRow is -1 we have an invalid index which means,
+      // that the balance cache is not filled and we have to scan
+      // all journal entries.
+      if (lastRow == -1) {
+        lastRow = rowCount();
+      }
+
+      // invalid index or first half?
+      if (lastIdx.row() < rowCount()/2)  {
+        for (int row = 0; row < lastRow; ++row) {
           const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
           if (journalEntry.split().accountId() == accountId) {
             if (journalEntry.transaction().isStockSplit()) {
