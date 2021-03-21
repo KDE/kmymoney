@@ -575,6 +575,7 @@ void MyMoneyFile::commitTransaction()
       case eMyMoney::File::Object::Parameter:
       case eMyMoney::File::Object::OnlineJob:
       case eMyMoney::File::Object::Report:
+      case eMyMoney::File::Object::BaseCurrency:
         changed = true;
         break;
       default:
@@ -3363,6 +3364,7 @@ void MyMoneyFile::setBaseCurrency(const MyMoneySecurity& curr)
     setValue("kmm-baseCurrency", curr.id());
     // force reload of base currency cache
     d->m_baseCurrency = c;
+    d->m_changeSet += MyMoneyNotification(File::Mode::Modify, File::Object::BaseCurrency, c.id());
   }
 }
 

@@ -334,6 +334,7 @@ namespace eMyMoney {
       Price,
       Parameter,
       Report,
+      BaseCurrency
     };
 
     /**
