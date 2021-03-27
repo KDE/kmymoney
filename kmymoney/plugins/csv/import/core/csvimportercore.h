@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2010 Allan Anderson <agander93@gmail.com>
     SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2020 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -42,6 +43,7 @@ enum miscSettingsE { ConfDirectory, ConfEncoding, ConfDateFormat,
                      ConfSecurityName, ConfSecuritySymbol, ConfCurrencySymbol,
                      ConfPriceFraction, ConfDontAsk,
                      ConfHeight, ConfWidth,
+                     ConfCreditIndicator, ConfDebitIndicator,
 };
 
 enum validationResultE { ValidActionType, InvalidActionValues, NoActionType };
@@ -128,6 +130,8 @@ public:
   QList<int>       m_memoColList;
 
   bool             m_oppositeSigns;
+  QString          m_creditIndicator;
+  QString          m_debitIndicator;
 };
 
 class KMM_CSVIMPORTERCORE_EXPORT InvestmentProfile : public CSVProfile

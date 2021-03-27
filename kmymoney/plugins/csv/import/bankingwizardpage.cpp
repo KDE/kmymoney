@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2011-2017 Allan Anderson <agander93@gmail.com>
     SPDX-FileCopyrightText: 2016-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2020 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -12,6 +13,7 @@
 #include <QFile>
 #include <QStandardItemModel>
 #include <QTextStream>
+#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -23,10 +25,13 @@
 
 #include "csvwizard.h"
 #include "core/csvimportercore.h"
-
+#include "icons.h"
 #include "ui_bankingwizardpage.h"
 
 // ----------------------------------------------------------------------------
+
+#define connectClearButton(col) \
+  connect(ui->col ## Clear, &QToolButton::clicked, this, [&]() { clearComboBox(ui->col ); } );
 
 BankingPage::BankingPage(CSVWizard *dlg, CSVImporterCore *imp)
   : CSVWizardPage(dlg, imp)
@@ -35,32 +40,83 @@ BankingPage::BankingPage(CSVWizard *dlg, CSVImporterCore *imp)
 {
   ui->setupUi(this);
 
-  connect(ui->m_clear, &QAbstractButton::clicked, this, &BankingPage::clearColumns);
-  connect(ui->m_radioAmount, &QAbstractButton::toggled, this, &BankingPage::amountToggled);
-  connect(ui->m_radioDebitCredit, &QAbstractButton::toggled, this, &BankingPage::debitCreditToggled);
-  connect(ui->m_oppositeSigns, &QAbstractButton::clicked, this, &BankingPage::oppositeSignsClicked);
+  m_columnBoxes = QHash<Column, QComboBox*> {
+    {Column::Amount, ui->m_amountCol},
+    {Column::Debit, ui->m_debitCol},
+    {Column::Credit, ui->m_creditCol},
+    {Column::Memo, ui->m_memoCol},
+    {Column::Number, ui->m_numberCol},
+    {Column::Date, ui->m_dateCol},
+    {Column::Payee,  ui->m_payeeCol},
+    {Column::Category, ui->m_categoryCol},
+    {Column::CreditDebitIndicator, ui->m_creditDebitIndicatorCol},
+    {Column::Balance, ui->m_balanceCol},
+  };
 
-  // initialize column names
-  m_dlg->m_colTypeName.insert(Column::Payee,i18n("Payee"));
-  m_dlg->m_colTypeName.insert(Column::Number,i18n("Number"));
-  m_dlg->m_colTypeName.insert(Column::Debit,i18n("Debit"));
-  m_dlg->m_colTypeName.insert(Column::Credit,i18n("Credit"));
-  m_dlg->m_colTypeName.insert(Column::Date,i18n("Date"));
-  m_dlg->m_colTypeName.insert(Column::Amount,i18n("Amount"));
-  m_dlg->m_colTypeName.insert(Column::Category,i18n("Category"));
-  m_dlg->m_colTypeName.insert(Column::Memo,i18n("Memo"));
+  auto clearComboBox = [&](QComboBox* combobox) { combobox->setCurrentIndex(-1); };
+
+  connect(ui->m_clear, &QAbstractButton::clicked, this, &BankingPage::clearColumns);
+  connect(ui->m_oppositeSigns, &QAbstractButton::clicked, this, [&](bool checked) { m_profile->m_oppositeSigns = checked; });
+
+  connect(ui->m_amountTabWidget, &QTabWidget::currentChanged, this, [&](int index) {
+    if (ui->m_amountTabWidget->widget(index) == ui->amountTab) { // amountTab
+      clearComboBox(ui->m_debitCol);
+      clearComboBox(ui->m_creditCol);
+    } else {          // creditDebitTab
+      clearComboBox(ui->m_amountCol);
+    }
+  });
 
   void (QComboBox::* signal)(int) = &QComboBox::currentIndexChanged;
-  connect(ui->m_amountCol, signal, this, &BankingPage::amountColSelected);
-  connect(ui->m_debitCol, signal, this, &BankingPage::debitColSelected);
-  connect(ui->m_creditCol, signal, this, &BankingPage::creditColSelected);
-  connect(ui->m_memoCol, signal, this, &BankingPage::memoColSelected);
-  connect(ui->m_numberCol, signal, this, &BankingPage::numberColSelected);
-  connect(ui->m_dateCol, signal, this, &BankingPage::dateColSelected);
-  connect(ui->m_payeeCol, signal, this, &BankingPage::payeeColSelected);
-  connect(ui->m_categoryCol, signal, this, &BankingPage::categoryColSelected);
+  connect(ui->m_amountCol, signal, this, [&](int col) { validateSelectedColumn(col, Column::Amount); });
+  connect(ui->m_debitCol, signal, this, [&](int col) { validateSelectedColumn(col, Column::Debit); });
+  connect(ui->m_creditCol, signal, this, [&](int col) { validateSelectedColumn(col, Column::Credit); });
+  connect(ui->m_numberCol, signal, this, [&](int col) { validateSelectedColumn(col, Column::Number); });
+  connect(ui->m_dateCol, signal, this, [&](int col) { validateSelectedColumn(col, Column::Date); });
+  connect(ui->m_categoryCol, signal, this, [&](int col) { validateSelectedColumn(col, Column::Category); });
 
-  connect(ui->m_clearMemoColumns, &QToolButton::clicked, this, &BankingPage::clearMemoColumns);
+  connect(ui->m_creditIndicator, &QLineEdit::textEdited, [&](const QString& indicator) {
+    m_profile->m_creditIndicator = indicator;
+    emit completeChanged();
+  });
+  connect(ui->m_debitIndicator, &QLineEdit::textEdited, [&](const QString&  indicator) {
+    m_profile->m_debitIndicator = indicator;
+    emit completeChanged();
+  });
+
+  connect(ui->m_memoCol, signal, this, &BankingPage::memoColSelected);
+  connect(ui->m_payeeCol, signal, this, &BankingPage::payeeColSelected);
+  connect(ui->m_creditDebitIndicatorCol, signal, this, [&](int col) {
+    if (validateSelectedColumn(col, Column::CreditDebitIndicator)) {
+      ui->m_creditIndicator->setDisabled(col == -1);
+      ui->m_debitIndicator->setDisabled(col == -1);
+      ui->m_oppositeSigns->setEnabled(col == -1);
+      ui->labelBnk_opposite->setEnabled(col == -1);
+    }
+  });
+
+  connect(ui->m_memoColClear, &QToolButton::clicked, this, &BankingPage::clearMemoColumns);
+
+  // connect the clear buttons with the comboboxes
+  connectClearButton(m_numberCol);
+  connectClearButton(m_dateCol);
+  connectClearButton(m_payeeCol);
+  connectClearButton(m_categoryCol);
+  connectClearButton(m_balanceCol);
+  connectClearButton(m_amountCol);
+  connectClearButton(m_creditDebitIndicatorCol);
+  connectClearButton(m_debitCol);
+  connectClearButton(m_creditCol);
+
+  // setup clear icon on toolbuttons
+  const auto toolButtons = findChildren<QToolButton*>();
+  for (const auto& button : toolButtons) {
+    button->setIcon(Icons::get(Icons::Icon::EditClear));
+  }
+
+  // assume debit/credit indicator is not filled
+  ui->m_creditIndicator->setDisabled(true);
+  ui->m_debitIndicator->setDisabled(true);
 }
 
 BankingPage::~BankingPage()
@@ -70,40 +126,56 @@ BankingPage::~BankingPage()
 
 void BankingPage::initializePage()
 {
-  QHash<Column, QComboBox *> columns {{Column::Amount, ui->m_amountCol}, {Column::Debit, ui->m_debitCol},
-                                           {Column::Credit, ui->m_creditCol}, {Column::Memo, ui->m_memoCol},
-                                           {Column::Number, ui->m_numberCol}, {Column::Date, ui->m_dateCol},
-                                           {Column::Payee,  ui->m_payeeCol},  {Column::Category, ui->m_categoryCol}};
-
   m_profile = dynamic_cast<BankingProfile *>(m_imp->m_profile);
   updateCurrentMemoSelection();
 
+  // fill in column numbers into all comboboxes
   if (ui->m_dateCol->count() != m_imp->m_file->m_columnCount)
-    m_dlg->initializeComboBoxes(columns);
+    m_dlg->initializeComboBoxes(m_columnBoxes);
 
-  columns.remove(Column::Memo);
-  for (auto it = columns.cbegin(); it != columns.cend(); ++it) {
-    auto index = m_profile->m_colTypeNum.value(it.key());
-    // reset values to undefined in case out of range
-    if (index >= it.value()->count()) {
-      m_profile->m_colTypeNum[it.key()] = -1;;
+  m_dlg->m_colTypeName.clear();
+  const auto labels = findChildren<QLabel*>();
+  for (auto it = m_columnBoxes.cbegin(); it != m_columnBoxes.cend(); ++it) {
+    // m_dlg->m_colTypeName is constructed based on the QLabel::buddy()
+    // setup in the UI file pointing to the combobox
+    for (const auto& label : labels) {
+      if (label->buddy() == it.value()) {
+        m_dlg->m_colTypeName.insert(it.key(), label->text());
+        break;
+      }
+    }
+    if (!m_dlg->m_colTypeName.contains(it.key())) {
+      qWarning() << "No colTypeName in BankingPage for" << it.value()->objectName();
+    }
+    // skip memo column, we take of it later
+    if (it.key() == Column::Memo)
+      continue;
+
+    auto index = -1;
+    if (m_profile->m_colTypeNum.contains(it.key())) {
+      index = m_profile->m_colTypeNum.value(it.key());
+    }
+    // reset values to undefined in case out of range or unknown
+    if ((index == -1) || (index >= it.value()->count())) {
+      m_profile->m_colTypeNum[it.key()] = -1;
     }
     it.value()->setCurrentIndex(m_profile->m_colTypeNum.value(it.key()));
   }
 
   ui->m_oppositeSigns->setChecked(m_profile->m_oppositeSigns);
 
-  if (m_profile->m_memoColList.count() > 0)
-  {
-    for (int i = 0; i < m_profile->m_memoColList.count(); ++i)
-      ui->m_memoCol->setCurrentIndex(m_profile->m_memoColList.value(i));
-  } else
-    ui->m_memoCol->setCurrentIndex(-1);
+  ui->m_memoCol->setCurrentIndex(-1);
+  for (int i = 0; i < m_profile->m_memoColList.count(); ++i) {
+    ui->m_memoCol->setCurrentIndex(m_profile->m_memoColList.value(i));
+  }
 
-  if (this->m_profile->m_colTypeNum.value(Column::Debit) == -1)     // If amount previously selected, set check radio_amount
-    ui->m_radioAmount->setChecked(true);
-  else                                     // ...else set check radio_debCred to clear amount col
-    ui->m_radioDebitCredit->setChecked(true);
+  if (m_profile->m_colTypeNum.value(Column::Debit) == -1)     // If amount previously selected, setup tab
+    ui->m_amountTabWidget->setCurrentWidget(ui->amountTab);
+  else                                     // ...else set credit/debit tab
+    ui->m_amountTabWidget->setCurrentWidget(ui->debitCreditTab);
+
+  ui->m_creditIndicator->setText(m_profile->m_creditIndicator);
+  ui->m_debitIndicator->setText(m_profile->m_debitIndicator);
 }
 
 int BankingPage::nextId() const
@@ -113,94 +185,98 @@ int BankingPage::nextId() const
 
 bool BankingPage::isComplete() const
 {
-  return ui->m_dateCol->currentIndex() > -1 &&
-         ui->m_payeeCol->currentIndex() > -1 &&
-        (ui->m_amountCol->currentIndex() > -1 ||
-        (ui->m_debitCol->currentIndex() > -1 &&
-         ui->m_creditCol->currentIndex() > -1));
+  bool rc = (ui->m_dateCol->currentIndex() > -1) &&
+            (ui->m_payeeCol->currentIndex() > -1);
+
+  if (ui->m_amountTabWidget->currentIndex() == 0) { // amountTab selected
+    rc &= (ui->m_amountCol->currentIndex() > -1);
+    if (ui->m_creditDebitIndicatorCol->currentIndex() > -1) {
+      // at least one of the indicators must be filled and they both must differ
+      rc &= !(ui->m_debitIndicator->text().isEmpty() && ui->m_creditIndicator->text().isEmpty());
+      rc &= (ui->m_debitIndicator->text() != ui->m_creditIndicator->text());
+    }
+  } else {
+    // debit and credit must be filled
+    rc &= (ui->m_debitCol->currentIndex() > -1) &&
+          (ui->m_creditCol->currentIndex() > -1);
+  }
+  return rc;
 }
 
 bool BankingPage::validateMemoComboBox()
 {
-  if (m_profile->m_memoColList.isEmpty())
-    return true;
-
-  for (int i = 0; i < ui->m_memoCol->count(); ++i)
-  {
-    const QString txt = ui->m_memoCol->itemText(i);
-    if (txt.contains(QLatin1Char('*')))  // check if text containing '*' belongs to valid column types
-      if (m_profile->m_colNumType.value(i) != Column::Payee) {
-        ui->m_memoCol->setItemText(i, QString::number(i + 1));
-        m_profile->m_memoColList.removeOne(i);
-        return false;
-      }
+  if (!m_profile->m_memoColList.isEmpty()) {
+    for (int i = 0; i < ui->m_memoCol->count(); ++i)
+    {
+      const QString txt = ui->m_memoCol->itemText(i);
+      if (txt.contains(QLatin1Char('*')))  // check if text containing '*' belongs to valid column types
+        if (m_profile->m_colNumType.value(i) != Column::Payee) {
+          ui->m_memoCol->setItemText(i, QString::number(i + 1));
+          m_profile->m_memoColList.removeOne(i);
+          return false;
+        }
+    }
   }
   return true;
 }
 
 void BankingPage::memoColSelected(int col)
 {
-  if (m_profile->m_colNumType.value(col) == Column::Payee ) {
-    int rc = KMessageBox::Yes;
-    if (isVisible())
-      rc = KMessageBox::questionYesNo(m_dlg, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
-                                              "<center>If you wish to copy the Payee data to the memo field, click 'Yes'.</center>",
-                                              m_dlg->m_colTypeName.value(m_profile->m_colNumType.value(col))));
-    if (rc == KMessageBox::Yes) {
-      ui->m_memoCol->setItemText(col, QString::number(col + 1) + QLatin1Char('*'));
-      if (!m_profile->m_memoColList.contains(col))
-        m_profile->m_memoColList.append(col);
+  if (col != -1) {
+    if (m_profile->m_colNumType.value(col) == Column::Payee ) {
+      int rc = KMessageBox::Yes;
+      if (isVisible())
+        rc = KMessageBox::questionYesNo(m_dlg, i18n("<center>The '<b>%1</b>' field already has this column selected.</center>"
+                                                "<center>If you wish to copy the Payee data to the memo field, click 'Yes'.</center>",
+                                                m_dlg->m_colTypeName.value(m_profile->m_colNumType.value(col))));
+      if (rc == KMessageBox::Yes) {
+        ui->m_memoCol->setItemText(col, QString::number(col + 1) + QLatin1Char('*'));
+        if (!m_profile->m_memoColList.contains(col))
+          m_profile->m_memoColList.append(col);
+      } else {
+        ui->m_memoCol->setItemText(col, QString::number(col + 1));
+        m_profile->m_memoColList.removeOne(col);
+      }
+      //allow only separate memo field occupy combobox
+      QSignalBlocker blocker(ui->m_memoCol);
+      if (m_profile->m_colTypeNum.value(Column::Memo) != -1)
+        ui->m_memoCol->setCurrentIndex(m_profile->m_colTypeNum.value(Column::Memo));
+      else
+        ui->m_memoCol->setCurrentIndex(-1);
+
     } else {
-      ui->m_memoCol->setItemText(col, QString::number(col + 1));
-      m_profile->m_memoColList.removeOne(col);
-    }
-    //allow only separate memo field occupy combobox
-    ui->m_memoCol->blockSignals(true);
-    if (m_profile->m_colTypeNum.value(Column::Memo) != -1)
-      ui->m_memoCol->setCurrentIndex(m_profile->m_colTypeNum.value(Column::Memo));
-    else
-      ui->m_memoCol->setCurrentIndex(-1);
-    ui->m_memoCol->blockSignals(false);
+      if (m_profile->m_colTypeNum.value(Column::Memo) != -1)        // check if this memo has any column 'number' assigned...
+        m_profile->m_memoColList.removeOne(col);           // ...if true remove it from memo list
 
-  } else {
-    if (m_profile->m_colTypeNum.value(Column::Memo) != -1)        // check if this memo has any column 'number' assigned...
-      m_profile->m_memoColList.removeOne(col);           // ...if true remove it from memo list
-
-    if(validateSelectedColumn(col, Column::Memo)) {
-      if (col != - 1 && !m_profile->m_memoColList.contains(col)) {
-        m_profile->m_memoColList.append(col);
-        qSort(m_profile->m_memoColList);
+      if(validateSelectedColumn(col, Column::Memo)) {
+        if (!m_profile->m_memoColList.contains(col)) {
+          m_profile->m_memoColList.append(col);
+          std::sort(m_profile->m_memoColList.begin(), m_profile->m_memoColList.end());
+        }
       }
     }
+    updateCurrentMemoSelection();
+    // always clear the col in the combo box after it is added to the list
+    ui->m_memoCol->setCurrentIndex(-1);
+
   }
-  updateCurrentMemoSelection();
 }
 
 void BankingPage::updateCurrentMemoSelection()
 {
   const auto& list = m_profile->m_memoColList;
   const bool haveSelection = !list.isEmpty();
-  QString txt;
+  QString txt = i18nc("@item:intext No field selection", "None");
   if (haveSelection) {
+    txt.clear();
     for (const auto& entry : list) {
       txt += QString("%1, ").arg(entry+1);
     }
     txt = txt.left(txt.length()-2);
   }
-  ui->m_currentMemoColums->setText(QString("%1").arg(txt, -30, QChar(' ')));
+  ui->m_currentMemoColumns->setText(i18nc("@label:listbox list of currently selected fields", "<i>Memo columns:</i> %1").arg(txt));
 
-  ui->m_clearMemoColumns->setEnabled(haveSelection);
-}
-
-
-void BankingPage::categoryColSelected(int col)
-{
-  validateSelectedColumn(col, Column::Category);
-}
-
-void BankingPage::numberColSelected(int col)
-{
-  validateSelectedColumn(col, Column::Number);
+  ui->m_memoColClear->setEnabled(haveSelection);
 }
 
 void BankingPage::payeeColSelected(int col)
@@ -210,108 +286,39 @@ void BankingPage::payeeColSelected(int col)
       memoColSelected(col);    // ...if true set memo field again
 }
 
-void BankingPage::dateColSelected(int col)
-{
-  validateSelectedColumn(col, Column::Date);
-}
-
-void BankingPage::debitColSelected(int col)
-{
-  validateSelectedColumn(col, Column::Debit);
-}
-
-void BankingPage::creditColSelected(int col)
-{
-  validateSelectedColumn(col, Column::Credit);
-}
-
-void BankingPage::amountColSelected(int col)
-{
-  validateSelectedColumn(col, Column::Amount);
-}
-
-void BankingPage::amountToggled(bool checked)
-{
-  if (checked) {
-    ui->m_amountCol->setEnabled(true);  //  disable credit & debit ui choices
-    ui->labelBnk_amount->setEnabled(true);
-    ui->labelBnk_credits->setEnabled(false);
-    ui->labelBnk_debits->setEnabled(false);
-
-    ui->m_debitCol->setEnabled(false);
-    ui->m_debitCol->setCurrentIndex(-1);
-    ui->m_creditCol->setEnabled(false);
-    ui->m_creditCol->setCurrentIndex(-1);
-  }
-}
-
-void BankingPage::debitCreditToggled(bool checked)
-{
-  if (checked) {
-    ui->m_debitCol->setEnabled(true);  //         if 'debit/credit' selected
-    ui->labelBnk_debits->setEnabled(true);
-    ui->m_creditCol->setEnabled(true);
-    ui->labelBnk_credits->setEnabled(true);
-
-    ui->m_amountCol->setEnabled(false);  //       disable 'amount' ui choices
-    ui->m_amountCol->setCurrentIndex(-1);  //     as credit/debit chosen
-    ui->labelBnk_amount->setEnabled(false);
-  }
-}
-
-void BankingPage::oppositeSignsClicked(bool checked)
-{
-  m_profile->m_oppositeSigns = checked;
-}
-
 void BankingPage::clearColumns()
 {
-  ui->m_dateCol->setCurrentIndex(-1);
-  ui->m_payeeCol->setCurrentIndex(-1);
-  ui->m_numberCol->setCurrentIndex(-1);
-  ui->m_amountCol->setCurrentIndex(-1);
-  ui->m_debitCol->setCurrentIndex(-1);
-  ui->m_creditCol->setCurrentIndex(-1);
-  ui->m_categoryCol->setCurrentIndex(-1);
+  for (const auto& comboBox : m_columnBoxes) {
+    comboBox->setCurrentIndex(-1);
+  }
+  ui->m_creditIndicator->clear();
+  ui->m_debitIndicator->clear();
   clearMemoColumns();
 }
 
 void BankingPage::clearMemoColumns()
 {
+  m_profile->m_colTypeNum[Column::Memo] = -1;
+
+  for (auto it = m_profile->m_colNumType.begin(); it != m_profile->m_colNumType.end(); /* no inc here */) {
+    if (it.value() == Column::Memo) {
+      it = m_profile->m_colNumType.erase(it);
+    } else {
+      ++it;
+    }
+  }
   m_profile->m_memoColList.clear();
-  ui->m_memoCol->setCurrentIndex(-1);
+
+  updateCurrentMemoSelection();
 }
 
-void BankingPage::resetComboBox(const Column comboBox)
+void BankingPage::resetComboBox(Column comboBox, int index)
 {
-  switch (comboBox) {
-    case Column::Amount:
-      ui->m_amountCol->setCurrentIndex(-1);
-      break;
-    case Column::Credit:
-      ui->m_creditCol->setCurrentIndex(-1);
-      break;
-    case Column::Date:
-      ui->m_dateCol->setCurrentIndex(-1);
-      break;
-    case Column::Debit:
-      ui->m_debitCol->setCurrentIndex(-1);
-      break;
-    case Column::Memo:
-      ui->m_memoCol->setCurrentIndex(-1);
-      break;
-    case Column::Number:
-      ui->m_numberCol->setCurrentIndex(-1);
-      break;
-    case Column::Payee:
-      ui->m_payeeCol->setCurrentIndex(-1);
-      break;
-    case Column::Category:
-      ui->m_categoryCol->setCurrentIndex(-1);
-      break;
-    default:
+  if (m_columnBoxes.contains(comboBox)) {
+    m_columnBoxes.value(comboBox)->setCurrentIndex(index);
+  } else {
       KMessageBox::sorry(m_dlg, i18n("<center>Field name not recognised.</center> <center>'<b>%1</b>'</center> Please re-enter your column selections."
-                                    , (int)comboBox), i18n("CSV import"));
+                                    , static_cast<int>(comboBox)), i18n("CSV import"));
   }
 }
 
@@ -322,13 +329,18 @@ bool BankingPage::validateSelectedColumn(const int col, const Column type)
 
   bool ret = true;
   if (col == -1) { // user only wanted to reset his column so allow him
+    m_profile->m_colNumType.remove(m_profile->m_colTypeNum[type]);
     m_profile->m_colTypeNum[type] = col;  // assign new column 'number' to this 'type'
+
+  } else if (col == m_profile->m_colTypeNum[type]) {
+    // nothing to do since it is the same value
+
   } else if (m_profile->m_colNumType.contains(col)) { // if this column 'number' has already 'type' assigned
-    KMessageBox::information(m_dlg, i18n("The '<b>%1</b>' field already has this column selected. <center>Please reselect both entries as necessary.</center>",
-                                     m_dlg->m_colTypeName.value(m_profile->m_colNumType.value(col))));
-    resetComboBox(m_profile->m_colNumType.value(col));
-    resetComboBox(type);
+    KMessageBox::information(m_dlg, i18n("Column <b>%1</b> cannot be selected because it is already used in '<b>%2</b>'.",
+                                     col+1, m_dlg->m_colTypeName.value(m_profile->m_colNumType.value(col))));
+    resetComboBox(type, m_profile->m_colTypeNum[type]);
     ret = false;
+
   } else {
     m_profile->m_colTypeNum[type] = col; // assign new column 'number' to this 'type'
     m_profile->m_colNumType[col] = type; // assign new 'type' to this column 'number'

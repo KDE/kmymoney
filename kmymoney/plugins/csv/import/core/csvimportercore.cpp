@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2010 Allan Anderson <agander93@gmail.com>
     SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2020 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -56,6 +57,8 @@ const QHash<Column, QString> CSVImporterCore::m_colTypeConfName {
   {Column::Fee, QStringLiteral("FeeCol")},
   {Column::Symbol, QStringLiteral("SymbolCol")},
   {Column::Name, QStringLiteral("NameCol")},
+  {Column::CreditDebitIndicator, QStringLiteral("CreditDebitIndicatorCol")},
+  {Column::Balance, QStringLiteral("BalanceCol")},
 };
 
 const QHash<miscSettingsE, QString> CSVImporterCore::m_miscSettingsConfName {
@@ -77,7 +80,9 @@ const QHash<miscSettingsE, QString> CSVImporterCore::m_miscSettingsConfName {
   {ConfPriceFraction, QStringLiteral("PriceFraction")},
   {ConfDontAsk, QStringLiteral("DontAsk")},
   {ConfHeight, QStringLiteral("Height")},
-  {ConfWidth, QStringLiteral("Width")}
+  {ConfWidth, QStringLiteral("Width")},
+  {ConfCreditIndicator, QStringLiteral("CreditIndicator")},
+  {ConfDebitIndicator, QStringLiteral("DebitIndicator")},
 };
 
 const QHash<eMyMoney::Transaction::Action, QString> CSVImporterCore::m_transactionConfName {
@@ -889,10 +894,43 @@ bool CSVImporterCore::processBankRow(MyMoneyStatement &st, const BankingProfile 
 
   // process amount field
   col = profile->m_colTypeNum.value(Column::Amount, -1);
-  tr.m_amount = processAmountField(profile, row, col);
-  if (col != -1 && profile->m_oppositeSigns) // change signs to opposite if requested by user
-    tr.m_amount *= MyMoneyMoney(-1);
+  if (col != -1) {
+    tr.m_amount = processAmountField(profile, row, col);
+    col = profile->m_colTypeNum.value(Column::CreditDebitIndicator, -1);
+    if (col != -1) {
+      const auto indicator = m_file->m_model->item(row, col)->text();
 
+      QRegularExpression exp;
+      exp.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
+      auto pattern = profile->m_creditIndicator;
+      // simplified version of QRegularExpression::wildcardToRegularExpression()
+      // for older Qt versions where the method does not exist
+      pattern.replace(QLatin1String("\\"), QLatin1String("\\\\"));
+      pattern.replace(QLatin1String("."), QLatin1String("\\."));
+      pattern.replace(QLatin1String("*"), QLatin1String(".*"));
+      pattern.replace(QLatin1String("?"), QLatin1String("."));
+      pattern.prepend(QLatin1String("\\A"));
+      pattern.append(QLatin1String("\\z"));
+#else
+      auto pattern = QRegularExpression::wildcardToRegularExpression(profile->m_creditIndicator);
+#endif
+      exp.setPattern(pattern);
+
+      if (exp.match(indicator).hasMatch()) {
+        tr.m_amount = tr.m_amount.abs();
+      } else {
+        exp.setPattern(profile->m_debitIndicator);
+        if (exp.match(indicator).hasMatch()) {
+          tr.m_amount = -(tr.m_amount.abs());
+        }
+      }
+    } else {
+      if (profile->m_oppositeSigns) // change signs to opposite if requested by user
+        tr.m_amount = -tr.m_amount;
+    }
+  }
   // process credit/debit field
   if (profile->m_colTypeNum.value(Column::Credit, -1) != -1 &&
       profile->m_colTypeNum.value(Column::Debit, -1) != -1) {
@@ -920,6 +958,20 @@ bool CSVImporterCore::processBankRow(MyMoneyStatement &st, const BankingProfile 
       s2.m_accountId = accountId;
       s2.m_strCategoryName = txt;
       tr.m_listSplits.append(s2);
+    }
+  }
+
+  // process balance field
+  col = profile->m_colTypeNum.value(Column::Balance, -1);
+  if (col != -1) {
+    // prior date than the one we have? Adjust it
+    if (!st.m_dateBegin.isValid() || st.m_dateBegin > tr.m_datePosted) {
+      st.m_dateBegin = tr.m_datePosted;
+    }
+    // later or equal date, adjust it and the closing balance
+    if (!st.m_dateEnd.isValid() || st.m_dateEnd <= tr.m_datePosted) {
+      st.m_dateEnd = tr.m_datePosted;
+      st.m_closingBalance = processAmountField(profile, row, col);
     }
   }
 
@@ -1465,8 +1517,12 @@ bool BankingProfile::readSettings(const KSharedConfigPtr &config)
   m_colTypeNum[Column::Credit] = profilesGroup.readEntry(CSVImporterCore::m_colTypeConfName.value(Column::Credit), -1);
   m_colTypeNum[Column::Date] = profilesGroup.readEntry(CSVImporterCore::m_colTypeConfName.value(Column::Date), -1);
   m_colTypeNum[Column::Category] = profilesGroup.readEntry(CSVImporterCore::m_colTypeConfName.value(Column::Category), -1);
+  m_colTypeNum[Column::CreditDebitIndicator] = profilesGroup.readEntry(CSVImporterCore::m_colTypeConfName.value(Column::CreditDebitIndicator), -1);
+  m_colTypeNum[Column::Balance] = profilesGroup.readEntry(CSVImporterCore::m_colTypeConfName.value(Column::Balance), -1);
   m_colTypeNum[Column::Memo] = -1; // initialize, otherwise random data may go here
   m_oppositeSigns = profilesGroup.readEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfOppositeSigns), false);
+  m_creditIndicator = profilesGroup.readEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfCreditIndicator), QString());
+  m_debitIndicator = profilesGroup.readEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfDebitIndicator), QString());
   m_memoColList = profilesGroup.readEntry(CSVImporterCore::m_colTypeConfName.value(Column::Memo), QList<int>());
 
   CSVProfile::readSettings(profilesGroup);
@@ -1479,6 +1535,8 @@ void BankingProfile::writeSettings(const KSharedConfigPtr &config)
   CSVProfile::writeSettings(profilesGroup);
 
   profilesGroup.writeEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfOppositeSigns), m_oppositeSigns);
+  profilesGroup.writeEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfCreditIndicator), m_creditIndicator);
+  profilesGroup.writeEntry(CSVImporterCore::m_miscSettingsConfName.value(ConfDebitIndicator), m_debitIndicator);
   profilesGroup.writeEntry(CSVImporterCore::m_colTypeConfName.value(Column::Payee),
                            m_colTypeNum.value(Column::Payee));
   profilesGroup.writeEntry(CSVImporterCore::m_colTypeConfName.value(Column::Number),
@@ -1493,6 +1551,10 @@ void BankingProfile::writeSettings(const KSharedConfigPtr &config)
                            m_colTypeNum.value(Column::Date));
   profilesGroup.writeEntry(CSVImporterCore::m_colTypeConfName.value(Column::Category),
                            m_colTypeNum.value(Column::Category));
+  profilesGroup.writeEntry(CSVImporterCore::m_colTypeConfName.value(Column::CreditDebitIndicator),
+                           m_colTypeNum.value(Column::CreditDebitIndicator));
+  profilesGroup.writeEntry(CSVImporterCore::m_colTypeConfName.value(Column::Balance),
+                           m_colTypeNum.value(Column::Balance));
   profilesGroup.writeEntry(CSVImporterCore::m_colTypeConfName.value(Column::Memo),
                            m_memoColList);
   profilesGroup.config()->sync();

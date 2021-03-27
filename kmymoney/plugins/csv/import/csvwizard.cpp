@@ -427,16 +427,14 @@ void CSVWizard::initializeComboBoxes(const QHash<Column, QComboBox *> &columns)
     columnNumbers.append(QString::number(i + 1));
 
   foreach (const auto column, columns) {
-    // disable widgets allowing their initialization
-    column->blockSignals(true);
+    // block signals from combobox during their initialization
+    QSignalBlocker blocker(column);
     // clear all existing items before adding new ones
     column->clear();
     // populate comboboxes with col # values
     column->addItems(columnNumbers);
     // all comboboxes are set to 0 so set them to -1
     column->setCurrentIndex(-1);
-    // enable widgets after their initialization
-    column->blockSignals(false);
   }
 }
 
