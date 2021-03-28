@@ -2533,8 +2533,9 @@ QString MyMoneyFile::checkCategory(const QString& name, const MyMoneyMoney& valu
       }
     } while (!parent.isEmpty() && accountId.isEmpty());
 
-    // if we did not find the category, we create it
-    if (!found) {
+    // if we did not find the category,
+    // but have a name for it, we create it
+    if (!found && !accName.isEmpty()) {
         MyMoneyAccount parentAccount;
       if (newAccount.parentAccountId().isEmpty()) {
         if (!value.isNegative() && value2.isNegative())
