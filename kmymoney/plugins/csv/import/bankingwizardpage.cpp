@@ -185,8 +185,17 @@ int BankingPage::nextId() const
 
 bool BankingPage::isComplete() const
 {
-  bool rc = (ui->m_dateCol->currentIndex() > -1) &&
-            (ui->m_payeeCol->currentIndex() > -1);
+  // the settings are complete, if we
+  // a) have a date and,
+  // if the amount option is selected
+  //   b) an amount
+  //   c) a debit and/or credit indicator if that option is selected
+  //      and they differ
+  // if the debit/credit option is selected
+  //   b) a debit and credit column
+  //
+  // other columns are optional
+  bool rc = (ui->m_dateCol->currentIndex() > -1);
 
   if (ui->m_amountTabWidget->currentIndex() == 0) { // amountTab selected
     rc &= (ui->m_amountCol->currentIndex() > -1);
