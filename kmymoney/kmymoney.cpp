@@ -1782,6 +1782,7 @@ bool KMyMoneyApp::queryClose()
         return false;
 
     saveOptions();
+    qApp->quit();
     return true;
 }
 
