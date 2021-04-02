@@ -30,29 +30,29 @@ class MyMoneyObject;
 class KMyMoneyViewBasePrivate;
 class KMM_WIDGETS_EXPORT KMyMoneyViewBase : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KMyMoneyViewBase(QWidget* parent = nullptr);
-  virtual ~KMyMoneyViewBase();
+    explicit KMyMoneyViewBase(QWidget* parent = nullptr);
+    virtual ~KMyMoneyViewBase();
 
-  virtual void executeCustomAction(eView::Action) {}
+    virtual void executeCustomAction(eView::Action) {}
 
 Q_SIGNALS:
-  void selectByObject(const MyMoneyObject&, eView::Intent);
-  void selectByVariant(const QVariantList&, eView::Intent);
-  void customActionRequested(View, eView::Action);
+    void selectByObject(const MyMoneyObject&, eView::Intent);
+    void selectByVariant(const QVariantList&, eView::Intent);
+    void customActionRequested(View, eView::Action);
 
 public slots:
-  virtual void slotSelectByObject(const MyMoneyObject&, eView::Intent) {}
-  virtual void slotSelectByVariant(const QVariantList&, eView::Intent) {}
+    virtual void slotSelectByObject(const MyMoneyObject&, eView::Intent) {}
+    virtual void slotSelectByVariant(const QVariantList&, eView::Intent) {}
 
 protected:
-  const QScopedPointer<KMyMoneyViewBasePrivate> d_ptr;
-  KMyMoneyViewBase(KMyMoneyViewBasePrivate &dd, QWidget *parent);
+    const QScopedPointer<KMyMoneyViewBasePrivate> d_ptr;
+    KMyMoneyViewBase(KMyMoneyViewBasePrivate &dd, QWidget *parent);
 
 private:
-  Q_DECLARE_PRIVATE(KMyMoneyViewBase)
+    Q_DECLARE_PRIVATE(KMyMoneyViewBase)
 };
 
 #endif

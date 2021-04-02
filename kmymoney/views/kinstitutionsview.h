@@ -30,33 +30,33 @@ class MyMoneyMoney;
 class KInstitutionsViewPrivate;
 class KInstitutionsView : public KMyMoneyAccountsViewBase
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KInstitutionsView(QWidget *parent = nullptr);
-  ~KInstitutionsView();
+    explicit KInstitutionsView(QWidget *parent = nullptr);
+    ~KInstitutionsView();
 
-  void executeCustomAction(eView::Action action) override;
-  void refresh();
-  void updateActions(const MyMoneyObject &obj);
+    void executeCustomAction(eView::Action action) override;
+    void refresh();
+    void updateActions(const MyMoneyObject &obj);
 
 public Q_SLOTS:
-  void slotNetWorthChanged(const MyMoneyMoney &);
-  void slotShowInstitutionsMenu(const MyMoneyInstitution& inst);
-  void slotEditInstitution();
+    void slotNetWorthChanged(const MyMoneyMoney &);
+    void slotShowInstitutionsMenu(const MyMoneyInstitution& inst);
+    void slotEditInstitution();
 
-  void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
-  void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
+    void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
+    void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
 protected:
-  void showEvent(QShowEvent * event) override;
+    void showEvent(QShowEvent * event) override;
 
 private:
-  Q_DECLARE_PRIVATE(KInstitutionsView)
+    Q_DECLARE_PRIVATE(KInstitutionsView)
 
 private Q_SLOTS:
-  void slotNewInstitution();
-  void slotDeleteInstitution();
+    void slotNewInstitution();
+    void slotDeleteInstitution();
 };
 
 #endif

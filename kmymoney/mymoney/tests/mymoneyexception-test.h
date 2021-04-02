@@ -10,13 +10,13 @@
 
 class MyMoneyExceptionTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 private Q_SLOTS:
-  void init();
-  void cleanup();
+    void init();
+    void cleanup();
 
-  void testDefaultConstructor();
-  void testCatching();
+    void testDefaultConstructor();
+    void testCatching();
 };
 #endif

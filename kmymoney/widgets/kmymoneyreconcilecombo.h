@@ -20,7 +20,11 @@
 
 #include "kmymoneymvccombo.h"
 
-namespace eMyMoney { namespace Split { enum class State; } }
+namespace eMyMoney {
+namespace Split {
+enum class State;
+}
+}
 
 /**
   * @author Thomas Baumgart
@@ -30,19 +34,19 @@ namespace eMyMoney { namespace Split { enum class State; } }
 
 class KMM_WIDGETS_EXPORT KMyMoneyReconcileCombo : public KMyMoneyMVCCombo
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyReconcileCombo)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyReconcileCombo)
 
 public:
-  explicit KMyMoneyReconcileCombo(QWidget *w = 0);
-  ~KMyMoneyReconcileCombo() override;
+    explicit KMyMoneyReconcileCombo(QWidget *w = 0);
+    ~KMyMoneyReconcileCombo() override;
 
-  void setState(eMyMoney::Split::State state);
-  eMyMoney::Split::State state() const;
-  void removeDontCare();
+    void setState(eMyMoney::Split::State state);
+    eMyMoney::Split::State state() const;
+    void removeDontCare();
 
 protected Q_SLOTS:
-  void slotSetState(const QString&);
+    void slotSetState(const QString&);
 };
 
 #endif

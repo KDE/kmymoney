@@ -20,85 +20,87 @@
 
 class QTreeWidgetItem;
 
-namespace Ui { class KSortOptionDlg; }
+namespace Ui {
+class KSortOptionDlg;
+}
 
 /**
   * @author Thomas Baumgart
   */
 class KSortOptionDlg : public QDialog
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KSortOptionDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(KSortOptionDlg)
 
 public:
-  explicit KSortOptionDlg(QWidget *parent = nullptr);
-  ~KSortOptionDlg();
+    explicit KSortOptionDlg(QWidget *parent = nullptr);
+    ~KSortOptionDlg();
 
-  void setSortOption(const QString& option, const QString& def);
-  QString sortOption() const;
-  void hideDefaultButton();
+    void setSortOption(const QString& option, const QString& def);
+    QString sortOption() const;
+    void hideDefaultButton();
 
 private:
-  Ui::KSortOptionDlg *ui;
+    Ui::KSortOptionDlg *ui;
 };
 
 class KFindTransactionDlgPrivate;
 class KFindTransactionDlg : public QDialog
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KFindTransactionDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(KFindTransactionDlg)
 
 public:
-  /**
-   @param withEquityAccounts set to false to hide equity accounts in account page
-  */
-  explicit KFindTransactionDlg(QWidget *parent = nullptr, bool withEquityAccounts = false);
-  virtual ~KFindTransactionDlg();
+    /**
+     @param withEquityAccounts set to false to hide equity accounts in account page
+    */
+    explicit KFindTransactionDlg(QWidget *parent = nullptr, bool withEquityAccounts = false);
+    virtual ~KFindTransactionDlg();
 
-  bool eventFilter(QObject *o, QEvent *e) override;
+    bool eventFilter(QObject *o, QEvent *e) override;
 
 protected Q_SLOTS:
-  virtual void slotReset();
-  virtual void slotSearch();
+    virtual void slotReset();
+    virtual void slotSearch();
 
-  /**
-    * This slot opens the detailed help page in khelpcenter. The
-    * anchor for the information is taken from m_helpAnchor.
-    */
-  virtual void slotShowHelp();
+    /**
+      * This slot opens the detailed help page in khelpcenter. The
+      * anchor for the information is taken from m_helpAnchor.
+      */
+    virtual void slotShowHelp();
 
-  void slotRefreshView();
+    void slotRefreshView();
 
-  /**
-    * This slot selects the current selected transaction/split and emits
-    * the signal @a transactionSelected(const QString& accountId, const QString& transactionId)
-    */
-  void slotSelectTransaction();
+    /**
+      * This slot selects the current selected transaction/split and emits
+      * the signal @a transactionSelected(const QString& accountId, const QString& transactionId)
+      */
+    void slotSelectTransaction();
 
-  void slotRightSize();
+    void slotRightSize();
 
-  void slotSortOptions();
+    void slotSortOptions();
 
 Q_SIGNALS:
-  void transactionSelected(const QString& accountId, const QString& transactionId);
+    void transactionSelected(const QString& accountId, const QString& transactionId);
 
-  /**
-    * This signal is sent out when a selection has been made. It is
-    * used to control the state of the Search button.
-    * The Search button is only active when a selection has been made
-    * (i.e. notEmpty == true)
-    */
-  void selectionNotEmpty(bool);
+    /**
+      * This signal is sent out when a selection has been made. It is
+      * used to control the state of the Search button.
+      * The Search button is only active when a selection has been made
+      * (i.e. notEmpty == true)
+      */
+    void selectionNotEmpty(bool);
 
 protected:
-  KFindTransactionDlgPrivate * const d_ptr;
-  KFindTransactionDlg(KFindTransactionDlgPrivate &dd, QWidget *parent, bool withEquityAccounts);
+    KFindTransactionDlgPrivate * const d_ptr;
+    KFindTransactionDlg(KFindTransactionDlgPrivate &dd, QWidget *parent, bool withEquityAccounts);
 
-  void resizeEvent(QResizeEvent*) override;
-  void showEvent(QShowEvent* event) override;
+    void resizeEvent(QResizeEvent*) override;
+    void showEvent(QShowEvent* event) override;
 
 private:
-  Q_DECLARE_PRIVATE(KFindTransactionDlg)
+    Q_DECLARE_PRIVATE(KFindTransactionDlg)
 };
 
 #endif

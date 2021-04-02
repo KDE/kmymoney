@@ -37,121 +37,121 @@
 class KMyMoneyCalculatorPrivate;
 class KMM_WIDGETS_EXPORT KMyMoneyCalculator : public QFrame
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyCalculator)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyCalculator)
 
 public:
-  explicit KMyMoneyCalculator(QWidget* parent = nullptr);
-  ~KMyMoneyCalculator();
+    explicit KMyMoneyCalculator(QWidget* parent = nullptr);
+    ~KMyMoneyCalculator();
 
-  /**
-    * This methods is used to extract the result of the last
-    * calculation. The fractional part is separated from the
-    * integral part by the character setup using setComma().
-    *
-    * @return QString representing the result of the
-    *         last operation
-    */
-  QString result() const;
+    /**
+      * This methods is used to extract the result of the last
+      * calculation. The fractional part is separated from the
+      * integral part by the character setup using setComma().
+      *
+      * @return QString representing the result of the
+      *         last operation
+      */
+    QString result() const;
 
-  /**
-    * This method is used to set the character to be used
-    * as the separator between the integer and fractional part
-    * of an operand. Upon creation of the object, m_comma is
-    * set to the current locale setting of KDE's decimalSymbol.
-    *
-    * @param ch QChar representing the character to be used
-    */
-  void setComma(const QChar ch);
+    /**
+      * This method is used to set the character to be used
+      * as the separator between the integer and fractional part
+      * of an operand. Upon creation of the object, m_comma is
+      * set to the current locale setting of KDE's decimalSymbol.
+      *
+      * @param ch QChar representing the character to be used
+      */
+    void setComma(const QChar ch);
 
-  /**
-    * This method is used to preset the first operand and start
-    * execution of an operation. This method is currently used
-    * by AmountEdit. If @p ev is 0, then no operation will be
-    * started.
-    *
-    * @param value reference to QString representing the operands value
-    * @param ev    pointer to QKeyEvent representing the operation's key
-    */
-  void setInitialValues(const QString& value, QKeyEvent* ev);
+    /**
+      * This method is used to preset the first operand and start
+      * execution of an operation. This method is currently used
+      * by AmountEdit. If @p ev is 0, then no operation will be
+      * started.
+      *
+      * @param value reference to QString representing the operands value
+      * @param ev    pointer to QKeyEvent representing the operation's key
+      */
+    void setInitialValues(const QString& value, QKeyEvent* ev);
 
 Q_SIGNALS:
-  /**
-    * This signal is emitted, when a new result is available
-    */
-  void signalResultAvailable();
+    /**
+      * This signal is emitted, when a new result is available
+      */
+    void signalResultAvailable();
 
-  /**
-    * This signal is emitted, when the user pressed the ESC key
-    */
-  void signalQuit();
+    /**
+      * This signal is emitted, when the user pressed the ESC key
+      */
+    void signalQuit();
 
 protected:
-  void keyPressEvent(QKeyEvent* ev) override;
+    void keyPressEvent(QKeyEvent* ev) override;
 
-  /**
-    * This method is used to transform a double into a QString
-    * and removing any trailing 0's and decimal separators
-    *
-    * @param val reference to double value to be converted
-    * @return QString object containing the converted value
-    */
-  QString normalizeString(const double& val);
+    /**
+      * This method is used to transform a double into a QString
+      * and removing any trailing 0's and decimal separators
+      *
+      * @param val reference to double value to be converted
+      * @return QString object containing the converted value
+      */
+    QString normalizeString(const double& val);
 
 protected Q_SLOTS:
-  /**
-    * This method appends the digit represented by the parameter
-    * to the current operand
-    *
-    * @param button integer value of the digit to be added in the
-    *               range [0..9]
-    */
-  void digitClicked(int button);
+    /**
+      * This method appends the digit represented by the parameter
+      * to the current operand
+      *
+      * @param button integer value of the digit to be added in the
+      *               range [0..9]
+      */
+    void digitClicked(int button);
 
-  /**
-    * This methods starts the operation contained in the parameter
-    *
-    * @param button The Qt::Keycode for the button pressed or clicked
-    */
-  void calculationClicked(int button);
+    /**
+      * This methods starts the operation contained in the parameter
+      *
+      * @param button The Qt::Keycode for the button pressed or clicked
+      */
+    void calculationClicked(int button);
 
-  /**
-    * This method appends a period (comma) to initialize the fractional
-    * part of an operand. The period is only appended once.
-    */
-  void commaClicked();
+    /**
+      * This method appends a period (comma) to initialize the fractional
+      * part of an operand. The period is only appended once.
+      */
+    void commaClicked();
 
-  /**
-    * This method reverses the sign of the current operand
-    */
-  void plusminusClicked();
+    /**
+      * This method reverses the sign of the current operand
+      */
+    void plusminusClicked();
 
-  /**
-    * This method clears the current operand
-    */
-  void clearClicked();
+    /**
+      * This method clears the current operand
+      */
+    void clearClicked();
 
-  /**
-    * This method clears all registers
-    */
-  void clearAllClicked();
+    /**
+      * This method clears all registers
+      */
+    void clearAllClicked();
 
-  /**
-    * This method executes the percent operation
-    */
-  void percentClicked();
+    /**
+      * This method executes the percent operation
+      */
+    void percentClicked();
 
-  /**
-    * This method updates the display of the calculator with
-    * the text passed as argument
-    *
-    * @param str reference to QString containing the new display contents
-    */
-  void changeDisplay(const QString& str);
+    /**
+      * This method updates the display of the calculator with
+      * the text passed as argument
+      *
+      * @param str reference to QString containing the new display contents
+      */
+    void changeDisplay(const QString& str);
 
 private:
-  KMyMoneyCalculatorPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KMyMoneyCalculator)
+    KMyMoneyCalculatorPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KMyMoneyCalculator)
 };
 
 #endif

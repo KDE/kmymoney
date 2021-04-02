@@ -35,34 +35,34 @@ class MyMoneyMoney;
 class BudgetViewProxyModelPrivate;
 class KMM_WIDGETS_EXPORT BudgetViewProxyModel : public AccountsViewProxyModel
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(BudgetViewProxyModel)
+    Q_OBJECT
+    Q_DISABLE_COPY(BudgetViewProxyModel)
 
 public:
-  explicit BudgetViewProxyModel(QObject *parent = nullptr);
-  ~BudgetViewProxyModel() override;
+    explicit BudgetViewProxyModel(QObject *parent = nullptr);
+    ~BudgetViewProxyModel() override;
 
-  virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
-  Qt::ItemFlags flags(const QModelIndex &index) const override;
+    virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
 
-  void setBudget(const MyMoneyBudget& budget);
+    void setBudget(const MyMoneyBudget& budget);
 
 Q_SIGNALS:
-  /**
-    * Emit this signal when the balance of the budget is changed.
-    */
-  void balanceChanged(const MyMoneyMoney &);
+    /**
+      * Emit this signal when the balance of the budget is changed.
+      */
+    void balanceChanged(const MyMoneyMoney &);
 
 protected:
-  bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
-  MyMoneyMoney accountBalance(const QString &accountId) const;
-  MyMoneyMoney accountValue(const MyMoneyAccount &account, const MyMoneyMoney &balance) const;
-  MyMoneyMoney computeTotalValue(const QModelIndex &source_index) const;
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
+    MyMoneyMoney accountBalance(const QString &accountId) const;
+    MyMoneyMoney accountValue(const MyMoneyAccount &account, const MyMoneyMoney &balance) const;
+    MyMoneyMoney computeTotalValue(const QModelIndex &source_index) const;
 
 private:
-  Q_DECLARE_PRIVATE(BudgetViewProxyModel)
+    Q_DECLARE_PRIVATE(BudgetViewProxyModel)
 
-  void checkBalance();
+    void checkBalance();
 };
 
 #endif

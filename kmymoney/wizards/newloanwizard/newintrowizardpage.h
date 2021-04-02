@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class NewIntroWizardPage; }
+namespace Ui {
+class NewIntroWizardPage;
+}
 
 /**
  * This class implements the New Intro page of the
@@ -26,13 +28,13 @@ namespace Ui { class NewIntroWizardPage; }
 
 class NewIntroWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit NewIntroWizardPage(QWidget *parent = nullptr);
-  ~NewIntroWizardPage();
+    explicit NewIntroWizardPage(QWidget *parent = nullptr);
+    ~NewIntroWizardPage();
 
 private:
-  Ui::NewIntroWizardPage *ui;
+    Ui::NewIntroWizardPage *ui;
 };
 
 #endif

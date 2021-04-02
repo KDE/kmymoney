@@ -20,27 +20,29 @@
 
 template <typename T> class QList;
 
-namespace Ui { class KLoadTemplateDlg; }
+namespace Ui {
+class KLoadTemplateDlg;
+}
 
 class MyMoneyTemplate;
 
 /// This dialog lets the user load more account templates
 class KLoadTemplateDlg : public QDialog
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KLoadTemplateDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(KLoadTemplateDlg)
 
 public:
-  explicit KLoadTemplateDlg(QWidget *parent = nullptr);
-  ~KLoadTemplateDlg();
+    explicit KLoadTemplateDlg(QWidget *parent = nullptr);
+    ~KLoadTemplateDlg();
 
-  QList<MyMoneyTemplate> templates() const;
+    QList<MyMoneyTemplate> templates() const;
 
 private Q_SLOTS:
-  void slotHelp();
+    void slotHelp();
 
 private:
-  Ui::KLoadTemplateDlg *ui;
+    Ui::KLoadTemplateDlg *ui;
 };
 
 #endif

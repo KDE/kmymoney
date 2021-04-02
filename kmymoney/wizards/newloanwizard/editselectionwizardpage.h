@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class EditSelectionWizardPage; }
+namespace Ui {
+class EditSelectionWizardPage;
+}
 
 /**
  * This class implements the Edit Selection page of the
@@ -26,12 +28,12 @@ namespace Ui { class EditSelectionWizardPage; }
 
 class EditSelectionWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit EditSelectionWizardPage(QWidget *parent = nullptr);
-  ~EditSelectionWizardPage();
+    explicit EditSelectionWizardPage(QWidget *parent = nullptr);
+    ~EditSelectionWizardPage();
 
-  Ui::EditSelectionWizardPage *ui;
+    Ui::EditSelectionWizardPage *ui;
 };
 
 #endif

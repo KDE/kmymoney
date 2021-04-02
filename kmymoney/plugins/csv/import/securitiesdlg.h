@@ -17,28 +17,28 @@ class SecuritiesDlg;
 class QTableWidgetItem;
 class SecuritiesDlg : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  SecuritiesDlg();
-  ~SecuritiesDlg();
+    SecuritiesDlg();
+    ~SecuritiesDlg();
 
-  Ui::SecuritiesDlg*   ui;
+    Ui::SecuritiesDlg*   ui;
 
-  /**
-  * This method displays the security symbol and name. If symbol or name isn't empty
-  * it blocks cell from editing respectively
-  */
-  void             displayLine(const QString symbol, const QString name);
+    /**
+    * This method displays the security symbol and name. If symbol or name isn't empty
+    * it blocks cell from editing respectively
+    */
+    void             displayLine(const QString symbol, const QString name);
 
 private:
-  typedef enum:int {ColumnStatus, ColumnSymbol, ColumnName} columnsE;
-  QPushButton*     m_buttonOK;
-  int              m_validRowCount;
-  int              m_RowCount;
+    typedef enum:int {ColumnStatus, ColumnSymbol, ColumnName} columnsE;
+    QPushButton*     m_buttonOK;
+    int              m_validRowCount;
+    int              m_RowCount;
 
 private Q_SLOTS:
-  void             slotItemChanged(QTableWidgetItem* item);
+    void             slotItemChanged(QTableWidgetItem* item);
 };
 
 #endif // SECURITIESDLG_H

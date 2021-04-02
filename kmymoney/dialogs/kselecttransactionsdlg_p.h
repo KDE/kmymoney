@@ -22,24 +22,24 @@
 
 class KSelectTransactionsDlgPrivate
 {
-  Q_DISABLE_COPY(KSelectTransactionsDlgPrivate)
+    Q_DISABLE_COPY(KSelectTransactionsDlgPrivate)
 
 public:
-  KSelectTransactionsDlgPrivate() :
-    ui(new Ui::KSelectTransactionsDlg)
-  {
-  }
+    KSelectTransactionsDlgPrivate() :
+        ui(new Ui::KSelectTransactionsDlg)
+    {
+    }
 
-  ~KSelectTransactionsDlgPrivate()
-  {
-    delete ui;
-  }
+    ~KSelectTransactionsDlgPrivate()
+    {
+        delete ui;
+    }
 
-  Ui::KSelectTransactionsDlg  *ui;
- /**
-   * The account in which the transactions are displayed
-   */
-  MyMoneyAccount m_account;
+    Ui::KSelectTransactionsDlg  *ui;
+    /**
+      * The account in which the transactions are displayed
+      */
+    MyMoneyAccount m_account;
 };
 
 #endif // KMERGETRANSACTIONSDLG_H

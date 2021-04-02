@@ -26,72 +26,72 @@ typedef _object PyObject;
 
 class WeboobInterface
 {
-  PyObject  *m_weboobInterface;
+    PyObject  *m_weboobInterface;
 
 public:
 
-  struct Backend {
-    QString name;
-    QString module;
-  };
+    struct Backend {
+        QString name;
+        QString module;
+    };
 
-  struct Transaction {
-    QString id;
-    QDate date;
-    QDate rdate;
-    enum type_t {
-      TYPE_UNKNOWN = 0,
-      TYPE_TRANSFER,
-      TYPE_ORDER,
-      TYPE_CHECK,
-      TYPE_DEPOSIT,
-      TYPE_PAYBACK,
-      TYPE_WITHDRAWAL,
-      TYPE_CARD,
-      TYPE_LOAN_PAYMENT,
-      TYPE_BANK,
-    } type;
-    QString raw;
-    QString category;
-    QString label;
-    MyMoneyMoney amount;
-  };
+    struct Transaction {
+        QString id;
+        QDate date;
+        QDate rdate;
+        enum type_t {
+            TYPE_UNKNOWN = 0,
+            TYPE_TRANSFER,
+            TYPE_ORDER,
+            TYPE_CHECK,
+            TYPE_DEPOSIT,
+            TYPE_PAYBACK,
+            TYPE_WITHDRAWAL,
+            TYPE_CARD,
+            TYPE_LOAN_PAYMENT,
+            TYPE_BANK,
+        } type;
+        QString raw;
+        QString category;
+        QString label;
+        MyMoneyMoney amount;
+    };
 
-  struct Account {
-    QString id;
-    QString name;
-    enum type_t {
-      TYPE_UNKNOWN = 0,
-      TYPE_CHECKING,
-      TYPE_SAVINGS,
-      TYPE_DEPOSIT,
-      TYPE_LOAN,
-      TYPE_MARKET,
-      TYPE_JOINT,
-    } type;
-    MyMoneyMoney balance;
+    struct Account {
+        QString id;
+        QString name;
+        enum type_t {
+            TYPE_UNKNOWN = 0,
+            TYPE_CHECKING,
+            TYPE_SAVINGS,
+            TYPE_DEPOSIT,
+            TYPE_LOAN,
+            TYPE_MARKET,
+            TYPE_JOINT,
+        } type;
+        MyMoneyMoney balance;
 
-    QList<Transaction> transactions;
-  };
+        QList<Transaction> transactions;
+    };
 
-  explicit WeboobInterface();
+    explicit WeboobInterface();
 
-  ~WeboobInterface();
+    ~WeboobInterface();
 
-  QStringList getProtocols();
+    QStringList getProtocols();
 
-  QList<Backend> getBackends();
+    QList<Backend> getBackends();
 
-  QList<Account> getAccounts(QString backend);
+    QList<Account> getAccounts(QString backend);
 
-  Account getAccount(QString backend, QString account, QString max);
+    Account getAccount(QString backend, QString account, QString max);
 
 private:
 
-  PyObject* execute(QString method, QVariantList args);
+    PyObject* execute(QString method, QVariantList args);
 
-  QString extractDictStringValue(PyObject* pyContainer, const char *szKey);
-  long extractDictLongValue(PyObject* pyContainer, const char* szKey);
+    QString extractDictStringValue(PyObject* pyContainer, const char *szKey);
+    long extractDictLongValue(PyObject* pyContainer, const char* szKey);
 };
 
 #endif

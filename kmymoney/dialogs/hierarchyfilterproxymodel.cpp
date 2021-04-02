@@ -30,16 +30,16 @@ HierarchyFilterProxyModel::HierarchyFilterProxyModel(QObject *parent)
   */
 Qt::ItemFlags HierarchyFilterProxyModel::flags(const QModelIndex &index) const
 {
-  Qt::ItemFlags flags = AccountsProxyModel::flags(index);
-  QModelIndex currentIndex = index;
-  while (currentIndex.isValid()) {
-    QVariant accountId = data(currentIndex, (int)eAccountsModel::Role::ID);
-    if (accountId.isValid() && accountId.toString() == m_currentAccountId) {
-      flags = flags & ~Qt::ItemIsSelectable & ~Qt::ItemIsEnabled;
+    Qt::ItemFlags flags = AccountsProxyModel::flags(index);
+    QModelIndex currentIndex = index;
+    while (currentIndex.isValid()) {
+        QVariant accountId = data(currentIndex, (int)eAccountsModel::Role::ID);
+        if (accountId.isValid() && accountId.toString() == m_currentAccountId) {
+            flags = flags & ~Qt::ItemIsSelectable & ~Qt::ItemIsEnabled;
+        }
+        currentIndex = currentIndex.parent();
     }
-    currentIndex = currentIndex.parent();
-  }
-  return flags;
+    return flags;
 }
 
 /**
@@ -49,7 +49,7 @@ Qt::ItemFlags HierarchyFilterProxyModel::flags(const QModelIndex &index) const
   */
 void HierarchyFilterProxyModel::setCurrentAccountId(const QString &currentAccountId)
 {
-  m_currentAccountId = currentAccountId;
+    m_currentAccountId = currentAccountId;
 }
 
 /**
@@ -59,11 +59,11 @@ void HierarchyFilterProxyModel::setCurrentAccountId(const QString &currentAccoun
   */
 QModelIndex HierarchyFilterProxyModel::getSelectedParentAccountIndex() const
 {
-  QModelIndexList list = match(index(0, 0), (int)eAccountsModel::Role::ID, m_currentAccountId, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
-  if (!list.empty()) {
-    return list.front().parent();
-  }
-  return QModelIndex();
+    QModelIndexList list = match(index(0, 0), (int)eAccountsModel::Role::ID, m_currentAccountId, -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
+    if (!list.empty()) {
+        return list.front().parent();
+    }
+    return QModelIndex();
 }
 
 /**
@@ -71,12 +71,12 @@ QModelIndex HierarchyFilterProxyModel::getSelectedParentAccountIndex() const
   */
 bool HierarchyFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
-  const auto index = sourceModel()->index(source_row, (int)eAccountsModel::Column::Account, source_parent);
-  const auto data = source_parent.isValid() ? index.parent().data((int)eAccountsModel::Role::ID)
-                                            : index.data((int)eAccountsModel::Role::ID);
-  if (data.isValid() && data.toString() == AccountsModel::favoritesAccountId)
-    return false;
-  return AccountsProxyModel::filterAcceptsRow(source_row, source_parent);
+    const auto index = sourceModel()->index(source_row, (int)eAccountsModel::Column::Account, source_parent);
+    const auto data = source_parent.isValid() ? index.parent().data((int)eAccountsModel::Role::ID)
+                      : index.data((int)eAccountsModel::Role::ID);
+    if (data.isValid() && data.toString() == AccountsModel::favoritesAccountId)
+        return false;
+    return AccountsProxyModel::filterAcceptsRow(source_row, source_parent);
 }
 
 /**
@@ -84,8 +84,8 @@ bool HierarchyFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
   */
 bool HierarchyFilterProxyModel::filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const
 {
-  Q_UNUSED(source_parent)
-  if (source_column == 0)
-    return true;
-  return false;
+    Q_UNUSED(source_parent)
+    if (source_column == 0)
+        return true;
+    return false;
 }

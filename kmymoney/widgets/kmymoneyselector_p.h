@@ -26,56 +26,56 @@ class QHBoxLayout;
 
 class KMyMoneySelectorPrivate
 {
-  Q_DISABLE_COPY(KMyMoneySelectorPrivate)
-  Q_DECLARE_PUBLIC(KMyMoneySelector)
+    Q_DISABLE_COPY(KMyMoneySelectorPrivate)
+    Q_DECLARE_PUBLIC(KMyMoneySelector)
 
 public:
-  explicit KMyMoneySelectorPrivate(KMyMoneySelector *qq) :
-    q_ptr(qq),
-    m_treeWidget(nullptr),
-    m_selMode(QTreeWidget::SingleSelection),
-    m_layout(nullptr)
-  {
-  }
+    explicit KMyMoneySelectorPrivate(KMyMoneySelector *qq) :
+        q_ptr(qq),
+        m_treeWidget(nullptr),
+        m_selMode(QTreeWidget::SingleSelection),
+        m_layout(nullptr)
+    {
+    }
 
-  void init()
-  {
-    Q_Q(KMyMoneySelector);
-    q->setAutoFillBackground(true);
+    void init()
+    {
+        Q_Q(KMyMoneySelector);
+        q->setAutoFillBackground(true);
 
-    m_selMode = QTreeWidget::SingleSelection;
+        m_selMode = QTreeWidget::SingleSelection;
 
-    m_treeWidget = new QTreeWidget(q);
-    // don't show horizontal scroll bar
-    m_treeWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        m_treeWidget = new QTreeWidget(q);
+        // don't show horizontal scroll bar
+        m_treeWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    m_treeWidget->setSortingEnabled(false);
-    m_treeWidget->setAlternatingRowColors(true);
+        m_treeWidget->setSortingEnabled(false);
+        m_treeWidget->setAlternatingRowColors(true);
 
-    m_treeWidget->setAllColumnsShowFocus(true);
+        m_treeWidget->setAllColumnsShowFocus(true);
 
-    m_layout = new QHBoxLayout(q);
-    m_layout->setSpacing(0);
-    m_layout->setMargin(0);
+        m_layout = new QHBoxLayout(q);
+        m_layout->setSpacing(0);
+        m_layout->setMargin(0);
 
-    m_treeWidget->header()->hide();
+        m_treeWidget->header()->hide();
 
-    m_layout->addWidget(m_treeWidget);
+        m_layout->addWidget(m_treeWidget);
 
-    // force init
-    m_selMode = QTreeWidget::MultiSelection;
-    q->setSelectionMode(QTreeWidget::SingleSelection);
+        // force init
+        m_selMode = QTreeWidget::MultiSelection;
+        q->setSelectionMode(QTreeWidget::SingleSelection);
 
-    q->connect(m_treeWidget, &QTreeWidget::itemPressed, q, &KMyMoneySelector::slotItemPressed);
-    q->connect(m_treeWidget, &QTreeWidget::itemChanged, q, &KMyMoneySelector::stateChanged);
-  }
+        q->connect(m_treeWidget, &QTreeWidget::itemPressed, q, &KMyMoneySelector::slotItemPressed);
+        q->connect(m_treeWidget, &QTreeWidget::itemChanged, q, &KMyMoneySelector::stateChanged);
+    }
 
-  KMyMoneySelector          *q_ptr;
-  QTreeWidget*               m_treeWidget;
-  QStringList                m_itemList;
-  QString                    m_baseName;
-  QTreeWidget::SelectionMode m_selMode;
-  QHBoxLayout*               m_layout;
+    KMyMoneySelector          *q_ptr;
+    QTreeWidget*               m_treeWidget;
+    QStringList                m_itemList;
+    QString                    m_baseName;
+    QTreeWidget::SelectionMode m_selMode;
+    QHBoxLayout*               m_layout;
 };
 
 #endif

@@ -21,18 +21,18 @@ class QModelIndex;
 
 class NewTransactionForm : public QFrame
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit NewTransactionForm(QWidget* parent = 0);
-  virtual ~NewTransactionForm();
+    explicit NewTransactionForm(QWidget* parent = 0);
+    virtual ~NewTransactionForm();
 
 public Q_SLOTS:
-  void showTransaction(const QString& transactionSplitId);
-  void modelDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
+    void showTransaction(const QString& transactionSplitId);
+    void modelDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
 
 private:
-  class Private;
-  Private * const d;
+    class Private;
+    Private * const d;
 };
 
 #endif // NEWTRANSACTIONFORM_H

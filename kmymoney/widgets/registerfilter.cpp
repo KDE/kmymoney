@@ -19,8 +19,8 @@
 
 namespace KMyMoneyRegister
 {
-  RegisterFilter::RegisterFilter(const QString &t, eWidgets::eRegister::ItemState s) :
+RegisterFilter::RegisterFilter(const QString &t, eWidgets::eRegister::ItemState s) :
     state(s), text(t)
-  {
-  }
+{
+}
 }

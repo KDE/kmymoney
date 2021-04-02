@@ -23,21 +23,21 @@
 #include "kaccounttemplateselector.h"
 
 KLoadTemplateDlg::KLoadTemplateDlg(QWidget* parent) :
-  QDialog(parent),
-  ui(new Ui::KLoadTemplateDlg)
+    QDialog(parent),
+    ui(new Ui::KLoadTemplateDlg)
 {
-  ui->setupUi(this);
-  connect(ui->buttonBox, &QDialogButtonBox::helpRequested, this, &KLoadTemplateDlg::slotHelp);
+    ui->setupUi(this);
+    connect(ui->buttonBox, &QDialogButtonBox::helpRequested, this, &KLoadTemplateDlg::slotHelp);
 }
 
 KLoadTemplateDlg::~KLoadTemplateDlg()
 {
-  delete ui;
+    delete ui;
 }
 
 QList<MyMoneyTemplate> KLoadTemplateDlg::templates() const
 {
-  return ui->m_templateSelector->selectedTemplates();
+    return ui->m_templateSelector->selectedTemplates();
 }
 
 void KLoadTemplateDlg::slotHelp()

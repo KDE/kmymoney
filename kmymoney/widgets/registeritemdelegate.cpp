@@ -21,8 +21,8 @@
 using namespace KMyMoneyRegister;
 
 RegisterItemDelegate::RegisterItemDelegate(Register *parent) :
-  QStyledItemDelegate(parent),
-  m_register(parent)
+    QStyledItemDelegate(parent),
+    m_register(parent)
 {
 }
 
@@ -32,10 +32,10 @@ RegisterItemDelegate::~RegisterItemDelegate()
 
 void RegisterItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-  RegisterItem* const item = m_register->itemAtRow(index.row());
-  if (item && m_register->updatesEnabled()) {
-    QStyleOptionViewItem opt = option;
-    initStyleOption(&opt, index);
-    item->paintRegisterCell(painter, opt, index);
-  }
+    RegisterItem* const item = m_register->itemAtRow(index.row());
+    if (item && m_register->updatesEnabled()) {
+        QStyleOptionViewItem opt = option;
+        initStyleOption(&opt, index);
+        item->paintRegisterCell(painter, opt, index);
+    }
 }

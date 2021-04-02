@@ -39,12 +39,12 @@ template <class baseProxyModel>
 class AccountNamesFilterProxyModelTpl : public baseProxyModel
 {
 public:
-  explicit AccountNamesFilterProxyModelTpl(QObject *parent = 0);
+    explicit AccountNamesFilterProxyModelTpl(QObject *parent = 0);
 
-  virtual Qt::ItemFlags flags(const QModelIndex &index) const override;
+    virtual Qt::ItemFlags flags(const QModelIndex &index) const override;
 
 protected:
-  bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override;
+    bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override;
 };
 
 /**
@@ -60,10 +60,10 @@ protected:
  */
 class AccountNamesFilterProxyModel : public AccountNamesFilterProxyModelTpl<AccountsProxyModel>
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit AccountNamesFilterProxyModel(QObject* parent = 0)
-      : AccountNamesFilterProxyModelTpl< AccountsProxyModel >(parent) {}
+    explicit AccountNamesFilterProxyModel(QObject* parent = 0)
+        : AccountNamesFilterProxyModelTpl< AccountsProxyModel >(parent) {}
 };
 
 /**
@@ -89,46 +89,46 @@ typedef AccountNamesFilterProxyModelTpl<OnlineBankingAccountsFilterProxyModel> O
   */
 class KMyMoneyAccountCombo : public KComboBox
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyAccountCombo)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyAccountCombo)
 
 public:
-  explicit KMyMoneyAccountCombo(QSortFilterProxyModel *model, QWidget* parent = nullptr);
-  explicit KMyMoneyAccountCombo(QWidget* parent = nullptr);
-  ~KMyMoneyAccountCombo();
+    explicit KMyMoneyAccountCombo(QSortFilterProxyModel *model, QWidget* parent = nullptr);
+    explicit KMyMoneyAccountCombo(QWidget* parent = nullptr);
+    ~KMyMoneyAccountCombo();
 
-  void setSelected(const QString& id);
-  const QString& getSelected() const;
+    void setSelected(const QString& id);
+    const QString& getSelected() const;
 
-  void setModel(QSortFilterProxyModel *model);
+    void setModel(QSortFilterProxyModel *model);
 
-  /**
-   * Overridden to get specific behavior
-   */
-  void setEditable(bool isEditable);
+    /**
+     * Overridden to get specific behavior
+     */
+    void setEditable(bool isEditable);
 
-  bool eventFilter(QObject* o, QEvent* e) override;
+    bool eventFilter(QObject* o, QEvent* e) override;
 
 public Q_SLOTS:
-  void expandAll();
-  void collapseAll();
-  void showPopup() override;
-  void hidePopup() override;
+    void expandAll();
+    void collapseAll();
+    void showPopup() override;
+    void hidePopup() override;
 
 protected:
-  void wheelEvent(QWheelEvent *ev) override;
+    void wheelEvent(QWheelEvent *ev) override;
 
 protected Q_SLOTS:
-  void activated();
-  void makeCompletion(const QString& txt) override;
-  void selectItem(const QModelIndex& index);
+    void activated();
+    void makeCompletion(const QString& txt) override;
+    void selectItem(const QModelIndex& index);
 
 Q_SIGNALS:
-  void accountSelected(const QString&);
+    void accountSelected(const QString&);
 
 private:
-  class Private;
-  QScopedPointer<Private> const d;
+    class Private;
+    QScopedPointer<Private> const d;
 };
 
 template <class baseProxyModel>
@@ -143,9 +143,9 @@ AccountNamesFilterProxyModelTpl<baseProxyModel>::AccountNamesFilterProxyModelTpl
 template <class baseProxyModel>
 Qt::ItemFlags AccountNamesFilterProxyModelTpl<baseProxyModel>::flags(const QModelIndex &index) const
 {
-  if (!index.parent().isValid())
-    return baseProxyModel::flags(index) & ~Qt::ItemIsSelectable;
-  return baseProxyModel::flags(index);
+    if (!index.parent().isValid())
+        return baseProxyModel::flags(index) & ~Qt::ItemIsSelectable;
+    return baseProxyModel::flags(index);
 }
 
 /**
@@ -154,10 +154,10 @@ Qt::ItemFlags AccountNamesFilterProxyModelTpl<baseProxyModel>::flags(const QMode
 template <class baseProxyModel>
 bool AccountNamesFilterProxyModelTpl<baseProxyModel>::filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const
 {
-  Q_UNUSED(source_parent)
-  if (source_column == 0)
-    return true;
-  return false;
+    Q_UNUSED(source_parent)
+    if (source_column == 0)
+        return true;
+    return false;
 }
 #endif
 // kate: space-indent on; indent-width 2; remove-trailing-space on; remove-trailing-space-save on;

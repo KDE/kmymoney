@@ -47,25 +47,25 @@ class MyMoneyAccount;
 class OfxAppVersion
 {
 public:
-  OfxAppVersion(KComboBox* combo, KLineEdit* versionEdit, const QString& appId);
-  /**
-   * This method returns the currently selected application id
-   * as a colon separated value consisting of the application
-   * and version (eg. "QWIN:1700").  If current value is the
-   * default, an empty string is returned.
-   */
-  const QString appId() const;
+    OfxAppVersion(KComboBox* combo, KLineEdit* versionEdit, const QString& appId);
+    /**
+     * This method returns the currently selected application id
+     * as a colon separated value consisting of the application
+     * and version (eg. "QWIN:1700").  If current value is the
+     * default, an empty string is returned.
+     */
+    const QString appId() const;
 
-  /**
-   * This method returns @c true in case the current selected application
-   * version is valid (contains app and version) or @c false otherwise.
-   */
-  bool isValid() const;
+    /**
+     * This method returns @c true in case the current selected application
+     * version is valid (contains app and version) or @c false otherwise.
+     */
+    bool isValid() const;
 
 private:
-  QMap<QString, QString> m_appMap;
-  KComboBox*             m_combo;
-  KLineEdit*             m_versionEdit;
+    QMap<QString, QString> m_appMap;
+    KComboBox*             m_combo;
+    KLineEdit*             m_versionEdit;
 };
 
 /**
@@ -74,11 +74,11 @@ private:
 class OfxHeaderVersion
 {
 public:
-  OfxHeaderVersion(KComboBox* combo, const QString& headerVersion);
-  QString headerVersion() const;
+    OfxHeaderVersion(KComboBox* combo, const QString& headerVersion);
+    QString headerVersion() const;
 
 private:
-  KComboBox*             m_combo;
+    KComboBox*             m_combo;
 };
 
 /**
@@ -87,32 +87,32 @@ private:
 class MyMoneyOfxConnector
 {
 public:
-  explicit MyMoneyOfxConnector(const MyMoneyAccount& _account);
-  QString url() const;
+    explicit MyMoneyOfxConnector(const MyMoneyAccount& _account);
+    QString url() const;
 
-  /**
-   * Constructs the request for a statement. The first date
-   * for which transactions will be requested is determined
-   * by statementStartDate()
-   */
-  const QByteArray statementRequest() const;
-  const QByteArray statementResponse(const QDate& _dtstart) const;
-
-private:
-  void initRequest(OfxFiLogin* fi) const;
-  QDate statementStartDate() const;
-  QString iban() const;
-  QString fiorg() const;
-  QString fiid() const;
-  QString clientUid() const;
-  QString username() const;
-  QString password() const;
-  QString accountnum() const;
-  OfxAccountData::AccountType accounttype() const;
+    /**
+     * Constructs the request for a statement. The first date
+     * for which transactions will be requested is determined
+     * by statementStartDate()
+     */
+    const QByteArray statementRequest() const;
+    const QByteArray statementResponse(const QDate& _dtstart) const;
 
 private:
-  const MyMoneyAccount& m_account;
-  MyMoneyKeyValueContainer m_fiSettings;
+    void initRequest(OfxFiLogin* fi) const;
+    QDate statementStartDate() const;
+    QString iban() const;
+    QString fiorg() const;
+    QString fiid() const;
+    QString clientUid() const;
+    QString username() const;
+    QString password() const;
+    QString accountnum() const;
+    OfxAccountData::AccountType accounttype() const;
+
+private:
+    const MyMoneyAccount& m_account;
+    MyMoneyKeyValueContainer m_fiSettings;
 };
 
 // open a synchronous wallet in a safe way (the function is here because the wallet is only used in the OFX plugin)

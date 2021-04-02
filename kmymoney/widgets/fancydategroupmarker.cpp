@@ -22,19 +22,19 @@
 #include "groupmarker.h"
 
 FancyDateGroupMarker::FancyDateGroupMarker(Register* parent,
-                                           const QDate& date,
-                                           const QString& txt) :
+        const QDate& date,
+        const QString& txt) :
     GroupMarker(*new FancyDateGroupMarkerPrivate, parent, txt)
 {
-  Q_D(FancyDateGroupMarker);
-  d->m_date = date;
+    Q_D(FancyDateGroupMarker);
+    d->m_date = date;
 }
 
 FancyDateGroupMarker::FancyDateGroupMarker(FancyDateGroupMarkerPrivate &dd, Register *parent, const QDate& date, const QString& txt) :
-  GroupMarker(dd, parent, txt)
+    GroupMarker(dd, parent, txt)
 {
-  Q_D(FancyDateGroupMarker);
-  d->m_date = date;
+    Q_D(FancyDateGroupMarker);
+    d->m_date = date;
 }
 
 FancyDateGroupMarker::~FancyDateGroupMarker()
@@ -43,17 +43,17 @@ FancyDateGroupMarker::~FancyDateGroupMarker()
 
 QDate FancyDateGroupMarker::sortPostDate() const
 {
-  Q_D(const FancyDateGroupMarker);
-  return d->m_date;
+    Q_D(const FancyDateGroupMarker);
+    return d->m_date;
 }
 
 QDate FancyDateGroupMarker::sortEntryDate() const
 {
-  Q_D(const FancyDateGroupMarker);
-  return d->m_date;
+    Q_D(const FancyDateGroupMarker);
+    return d->m_date;
 }
 
 const char* FancyDateGroupMarker::className()
 {
-  return "FancyDateGroupMarker";
+    return "FancyDateGroupMarker";
 }

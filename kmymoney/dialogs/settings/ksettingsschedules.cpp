@@ -29,93 +29,93 @@ using namespace KHolidays;
 
 class KSettingsSchedulesPrivate
 {
-  Q_DISABLE_COPY(KSettingsSchedulesPrivate)
+    Q_DISABLE_COPY(KSettingsSchedulesPrivate)
 
 public:
-  KSettingsSchedulesPrivate() :
-    ui(new Ui::KSettingsSchedules)
-  {
-  }
+    KSettingsSchedulesPrivate() :
+        ui(new Ui::KSettingsSchedules)
+    {
+    }
 
-  ~KSettingsSchedulesPrivate()
-  {
-    delete ui;
-  }
+    ~KSettingsSchedulesPrivate()
+    {
+        delete ui;
+    }
 
-  Ui::KSettingsSchedules *ui;
-  QMap<QString, QString> m_regionMap;
+    Ui::KSettingsSchedules *ui;
+    QMap<QString, QString> m_regionMap;
 };
 
 KSettingsSchedules::KSettingsSchedules(QWidget* parent) :
-  QWidget(parent),
-  d_ptr(new KSettingsSchedulesPrivate)
+    QWidget(parent),
+    d_ptr(new KSettingsSchedulesPrivate)
 {
-  Q_D(KSettingsSchedules);
-  d->ui->setupUi(this);
-  // hide the internally used holidayRegion field
-  d->ui->kcfg_HolidayRegion->hide();
+    Q_D(KSettingsSchedules);
+    d->ui->setupUi(this);
+    // hide the internally used holidayRegion field
+    d->ui->kcfg_HolidayRegion->hide();
 
-  loadList();
+    loadList();
 
-  // setup connections so that region gets selected once field is filled
-  connect(d->ui->kcfg_HolidayRegion, &QLineEdit::textChanged, this, &KSettingsSchedules::slotLoadRegion);
+    // setup connections so that region gets selected once field is filled
+    connect(d->ui->kcfg_HolidayRegion, &QLineEdit::textChanged, this, &KSettingsSchedules::slotLoadRegion);
 
-  // setup connections so that changes are forwarded to the field
-  connect(d->ui->m_holidayRegion, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged), this, &KSettingsSchedules::slotSetRegion);
+    // setup connections so that changes are forwarded to the field
+    connect(d->ui->m_holidayRegion, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged), this, &KSettingsSchedules::slotSetRegion);
 }
 
 KSettingsSchedules::~KSettingsSchedules()
 {
-  Q_D(KSettingsSchedules);
-  delete d;
+    Q_D(KSettingsSchedules);
+    delete d;
 }
 
 void KSettingsSchedules::loadList()
 {
-  Q_D(KSettingsSchedules);
-  QStringList regions;
+    Q_D(KSettingsSchedules);
+    QStringList regions;
 #ifdef ENABLE_HOLIDAYS
-  QStringList regionCodes = HolidayRegion::regionCodes();
+    QStringList regionCodes = HolidayRegion::regionCodes();
 
-  foreach (const QString &regionCode, regionCodes) {
-    const auto regionName( HolidayRegion::name(regionCode));
-    const QLocale langLocale(HolidayRegion::languageCode(regionCode));
-    const auto languageName = QLocale().languageToString(langLocale.language());
-    const auto description = HolidayRegion::description(regionCode);
-    const QString region = !description.isEmpty() ? description : i18nc("Holiday region (region language)", "Holidays for %1 (%2)", regionName, languageName);
-    d->m_regionMap[region] = regionCode;
-    regions << region;
-  }
-  regions.sort();
+    foreach (const QString &regionCode, regionCodes) {
+        const auto regionName( HolidayRegion::name(regionCode));
+        const QLocale langLocale(HolidayRegion::languageCode(regionCode));
+        const auto languageName = QLocale().languageToString(langLocale.language());
+        const auto description = HolidayRegion::description(regionCode);
+        const QString region = !description.isEmpty() ? description : i18nc("Holiday region (region language)", "Holidays for %1 (%2)", regionName, languageName);
+        d->m_regionMap[region] = regionCode;
+        regions << region;
+    }
+    regions.sort();
 #endif
 
-  d->m_regionMap[d->ui->m_holidayRegion->itemText(0)] = QString();
-  d->ui->m_holidayRegion->insertItems(1, regions);
+    d->m_regionMap[d->ui->m_holidayRegion->itemText(0)] = QString();
+    d->ui->m_holidayRegion->insertItems(1, regions);
 }
 
 void KSettingsSchedules::slotSetRegion(const QString &region)
 {
-  Q_D(KSettingsSchedules);
-  d->ui->kcfg_HolidayRegion->setText(d->m_regionMap[region]);
+    Q_D(KSettingsSchedules);
+    d->ui->kcfg_HolidayRegion->setText(d->m_regionMap[region]);
 }
 
 void KSettingsSchedules::slotLoadRegion(const QString &region)
 {
-  Q_D(KSettingsSchedules);
-  // only need this once
-  disconnect(d->ui->kcfg_HolidayRegion, &KLineEdit::textChanged, this, &KSettingsSchedules::slotLoadRegion);
-  auto i = 0;
-  if (!region.isEmpty())
-    i = d->ui->m_holidayRegion->findText(d->m_regionMap.key(region));
-  if ((i > -1) && (i != d->ui->m_holidayRegion->currentIndex())) {
-    d->ui->m_holidayRegion->blockSignals(true);
-    d->ui->m_holidayRegion->setCurrentIndex(i);
-    d->ui->m_holidayRegion->blockSignals(false);
-  }
+    Q_D(KSettingsSchedules);
+    // only need this once
+    disconnect(d->ui->kcfg_HolidayRegion, &KLineEdit::textChanged, this, &KSettingsSchedules::slotLoadRegion);
+    auto i = 0;
+    if (!region.isEmpty())
+        i = d->ui->m_holidayRegion->findText(d->m_regionMap.key(region));
+    if ((i > -1) && (i != d->ui->m_holidayRegion->currentIndex())) {
+        d->ui->m_holidayRegion->blockSignals(true);
+        d->ui->m_holidayRegion->setCurrentIndex(i);
+        d->ui->m_holidayRegion->blockSignals(false);
+    }
 }
 
 void KSettingsSchedules::slotResetRegion()
 {
-  Q_D(KSettingsSchedules);
-  slotLoadRegion(d->ui->kcfg_HolidayRegion->text());
+    Q_D(KSettingsSchedules);
+    slotLoadRegion(d->ui->kcfg_HolidayRegion->text());
 }

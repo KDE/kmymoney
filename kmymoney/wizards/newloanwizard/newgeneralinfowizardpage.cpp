@@ -19,13 +19,13 @@
 #include "ui_newgeneralinfowizardpage.h"
 
 NewGeneralInfoWizardPage::NewGeneralInfoWizardPage(QWidget *parent)
-  : QWizardPage(parent),
-    ui(new Ui::NewGeneralInfoWizardPage)
+    : QWizardPage(parent),
+      ui(new Ui::NewGeneralInfoWizardPage)
 {
-  ui->setupUi(this);
+    ui->setupUi(this);
 }
 
 NewGeneralInfoWizardPage::~NewGeneralInfoWizardPage()
 {
-  delete ui;
+    delete ui;
 }

@@ -14,19 +14,19 @@
 PluginSettingsWidget::PluginSettingsWidget(QWidget* parent) :
     QWidget(parent)
 {
-  setupUi(this);
+    setupUi(this);
 }
 
 KCMCSVImporter::KCMCSVImporter(QWidget *parent, const QVariantList& args)
-  : KCModule(parent, args)
+    : KCModule(parent, args)
 {
-  PluginSettingsWidget* w = new PluginSettingsWidget(this);
-  addConfig(PluginSettings::self(), w);
-  QVBoxLayout *layout = new QVBoxLayout;
-  setLayout(layout);
-  layout->addWidget(w);
-  setButtons(NoAdditionalButton);
-  load();
+    PluginSettingsWidget* w = new PluginSettingsWidget(this);
+    addConfig(PluginSettings::self(), w);
+    QVBoxLayout *layout = new QVBoxLayout;
+    setLayout(layout);
+    layout->addWidget(w);
+    setButtons(NoAdditionalButton);
+    load();
 }
 
 KCMCSVImporter::~KCMCSVImporter()

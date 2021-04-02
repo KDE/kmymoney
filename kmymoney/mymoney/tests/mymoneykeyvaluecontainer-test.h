@@ -12,22 +12,22 @@ class MyMoneyKeyValueContainer;
 
 class MyMoneyKeyValueContainerTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 protected:
-  MyMoneyKeyValueContainer *m;
+    MyMoneyKeyValueContainer *m;
 
 private Q_SLOTS:
-  void init();
-  void cleanup();
-  void testEmptyConstructor();
-  void testRetrieveValue();
-  void testSetValue();
-  void testDeletePair();
-  void testClear();
-  void testRetrieveList();
-  void testLoadList();
-  void testArrayRead();
-  void testArrayWrite();
+    void init();
+    void cleanup();
+    void testEmptyConstructor();
+    void testRetrieveValue();
+    void testSetValue();
+    void testDeletePair();
+    void testClear();
+    void testRetrieveList();
+    void testLoadList();
+    void testArrayRead();
+    void testArrayWrite();
 };
 
 #endif

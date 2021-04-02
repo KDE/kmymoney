@@ -20,20 +20,20 @@
 
 namespace KMyMoneyTransactionForm
 {
-  class TransactionForm;
-  class TransactionFormItemDelegate : public QStyledItemDelegate
-  {
+class TransactionForm;
+class TransactionFormItemDelegate : public QStyledItemDelegate
+{
     Q_OBJECT
     Q_DISABLE_COPY(TransactionFormItemDelegate)
 
-  public:
+public:
     explicit TransactionFormItemDelegate(TransactionForm *parent);
 
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
-  private:
+private:
     TransactionForm *m_transactionForm;
-  };
+};
 } // namespace
 
 #endif

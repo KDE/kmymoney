@@ -15,14 +15,14 @@ class QAbstractItemDelegate;
 
 class KMM_WIDGETS_EXPORT KBicEdit : public KLineEdit
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KBicEdit(QWidget* parent = 0);
-  virtual ~KBicEdit();
+    explicit KBicEdit(QWidget* parent = 0);
+    virtual ~KBicEdit();
 
 private:
-  QAbstractItemDelegate* m_popupDelegate;
+    QAbstractItemDelegate* m_popupDelegate;
 };
 
 #endif // KBICEDIT_H

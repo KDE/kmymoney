@@ -30,49 +30,49 @@
 class MyMoneyInstitutionPrivate : public MyMoneyObjectPrivate
 {
 public:
-  /**
-    * This member variable keeps the name of the institution
-    */
-  QString m_name;
+    /**
+      * This member variable keeps the name of the institution
+      */
+    QString m_name;
 
-  /**
-    * This member variable keeps the city of the institution
-    */
-  QString m_town;
+    /**
+      * This member variable keeps the city of the institution
+      */
+    QString m_town;
 
-  /**
-    * This member variable keeps the street of the institution
-    */
-  QString m_street;
+    /**
+      * This member variable keeps the street of the institution
+      */
+    QString m_street;
 
-  /**
-    * This member variable keeps the zip-code of the institution
-    */
-  QString m_postcode;
+    /**
+      * This member variable keeps the zip-code of the institution
+      */
+    QString m_postcode;
 
-  /**
-    * This member variable keeps the telephone number of the institution
-    */
-  QString m_telephone;
+    /**
+      * This member variable keeps the telephone number of the institution
+      */
+    QString m_telephone;
 
-  /**
-    * This member variable keeps the name of the representative of
-    * the institution
-    */
-  QString m_manager;
+    /**
+      * This member variable keeps the name of the representative of
+      * the institution
+      */
+    QString m_manager;
 
-  /**
-    * This member variable keeps the sort code of the institution.
-    * FIXME: I have no idea
-    * what it is good for. I keep it because it was in the old engine.
-    */
-  QString m_sortcode;
+    /**
+      * This member variable keeps the sort code of the institution.
+      * FIXME: I have no idea
+      * what it is good for. I keep it because it was in the old engine.
+      */
+    QString m_sortcode;
 
-  /**
-    * This member variable keeps the sorted list of the account ids
-    * available at this institution
-    */
-  QStringList m_accountList;
+    /**
+      * This member variable keeps the sorted list of the account ids
+      * available at this institution
+      */
+    QStringList m_accountList;
 };
 
 #endif

@@ -25,31 +25,31 @@ class Register;
 class GroupMarkerPrivate;
 class GroupMarker : public RegisterItem
 {
-  Q_DISABLE_COPY(GroupMarker)
+    Q_DISABLE_COPY(GroupMarker)
 
 public:
-  explicit GroupMarker(Register* getParent, const QString& txt);
-  ~GroupMarker() override;
+    explicit GroupMarker(Register* getParent, const QString& txt);
+    ~GroupMarker() override;
 
-  void setText(const QString& txt);
-  QString text() const;
-  bool isSelectable() const override;
-  bool canHaveFocus() const override;
-  int numRows() const;
-  const char* className() override;
-  bool isErroneous() const override;
-  void paintRegisterCell(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
-  void paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) override;
+    void setText(const QString& txt);
+    QString text() const;
+    bool isSelectable() const override;
+    bool canHaveFocus() const override;
+    int numRows() const;
+    const char* className() override;
+    bool isErroneous() const override;
+    void paintRegisterCell(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
+    void paintFormCell(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) override;
 
-  int rowHeightHint() const override;
+    int rowHeightHint() const override;
 
-  bool matches(const RegisterFilter&) const override;
-  int sortSamePostDate() const override;
-  void setErroneous(bool condition = true);
+    bool matches(const RegisterFilter&) const override;
+    int sortSamePostDate() const override;
+    void setErroneous(bool condition = true);
 
 protected:
-  GroupMarker(GroupMarkerPrivate &dd, Register *parent, const QString& txt);
-  Q_DECLARE_PRIVATE(GroupMarker)
+    GroupMarker(GroupMarkerPrivate &dd, Register *parent, const QString& txt);
+    Q_DECLARE_PRIVATE(GroupMarker)
 };
 
 } // namespace

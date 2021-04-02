@@ -28,67 +28,67 @@ namespace KMyMoneyPlugin
  */
 class KMM_PLUGIN_EXPORT OnlinePluginExtended : public Plugin, public OnlinePlugin
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  OnlinePluginExtended(QObject* parent, const char* name);
-  virtual ~OnlinePluginExtended() {}
+    OnlinePluginExtended(QObject* parent, const char* name);
+    virtual ~OnlinePluginExtended() {}
 
-  /**
-   * @brief List onlineJobs supported by an account
-   *
-   * KMyMoney will use this function to ask the online plugin which online jobs it supports.
-   * Later changes can be made public using the jobAvailable signals.
-   *
-   * @return A QStringList with supported onlineTask::name()s as values.
-   */
-  virtual QStringList availableJobs(QString accountId) = 0;
+    /**
+     * @brief List onlineJobs supported by an account
+     *
+     * KMyMoney will use this function to ask the online plugin which online jobs it supports.
+     * Later changes can be made public using the jobAvailable signals.
+     *
+     * @return A QStringList with supported onlineTask::name()s as values.
+     */
+    virtual QStringList availableJobs(QString accountId) = 0;
 
-  /**
-   * @brief Get settings for onlineTask
-   *
-   * @see onlineTask::settings
-   */
-  virtual IonlineTaskSettings::ptr settings(QString accountId, QString taskName) = 0;
+    /**
+     * @brief Get settings for onlineTask
+     *
+     * @see onlineTask::settings
+     */
+    virtual IonlineTaskSettings::ptr settings(QString accountId, QString taskName) = 0;
 
-  /**
-   * @brief Send onlineJobs to bank
-   *
-   * @param jobs Do not delete the onlineJob objects. You can edit them but expect them to be deleted after
-   * you returned from this function.
-   */
-  virtual void sendOnlineJob(QList<onlineJob>& jobs) = 0;
+    /**
+     * @brief Send onlineJobs to bank
+     *
+     * @param jobs Do not delete the onlineJob objects. You can edit them but expect them to be deleted after
+     * you returned from this function.
+     */
+    virtual void sendOnlineJob(QList<onlineJob>& jobs) = 0;
 
-  virtual void plug() override = 0;
-  virtual void unplug() override = 0;
+    virtual void plug() override = 0;
+    virtual void unplug() override = 0;
 
 Q_SIGNALS:
-  /**
-   * @brief Emit to make onlineJob available
-   *
-   * In case a onlineJob got available during runtime, emit one of these signals.
-   */
-  void jobAvailable(QString accountId, QString);
-  void jobAvailable(QString accountId, QStringList);
-  void jobUnavailable(QString accountId, QString);
-  //void jobUnavailable( QString accountId );
+    /**
+     * @brief Emit to make onlineJob available
+     *
+     * In case a onlineJob got available during runtime, emit one of these signals.
+     */
+    void jobAvailable(QString accountId, QString);
+    void jobAvailable(QString accountId, QStringList);
+    void jobUnavailable(QString accountId, QString);
+    //void jobUnavailable( QString accountId );
 };
 
 class KMM_PLUGIN_EXPORT onlineTaskFactory
 {
 public:
-  virtual onlineTask* createOnlineTask(const QString& taskId) const = 0;
+    virtual onlineTask* createOnlineTask(const QString& taskId) const = 0;
 
-  // Make g++ happy
-  virtual ~onlineTaskFactory() {}
+    // Make g++ happy
+    virtual ~onlineTaskFactory() {}
 };
 
 class KMM_PLUGIN_EXPORT payeeIdentifierDataFactory
 {
 public:
-  virtual payeeIdentifierData* createPayeeIdentifier(const QString& payeeIdentifierIid) const = 0;
-  // Make g+ happy
-  virtual ~payeeIdentifierDataFactory() {}
+    virtual payeeIdentifierData* createPayeeIdentifier(const QString& payeeIdentifierIid) const = 0;
+    // Make g+ happy
+    virtual ~payeeIdentifierDataFactory() {}
 };
 
 } // namespace KMyMoneyPlugin

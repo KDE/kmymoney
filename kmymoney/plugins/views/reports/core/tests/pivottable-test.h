@@ -25,34 +25,34 @@ namespace reports
 
 class PivotTableTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 private:
-  MyMoneyStorageMgr* storage;
-  MyMoneyFile* file;
+    MyMoneyStorageMgr* storage;
+    MyMoneyFile* file;
 
 private Q_SLOTS:
-  void setup();
-  void init();
-  void cleanup();
-  void testNetWorthSingle();
-  void testNetWorthOfsetting();
-  void testNetWorthOpeningPrior();
-  void testNetWorthDateFilter();
-  void testNetWorthOpening();
-  void testSpendingEmpty();
-  void testSingleTransaction();
-  void testSubAccount();
-  void testFilterIEvsIE();
-  void testFilterALvsAL();
-  void testFilterALvsIE();
-  void testFilterAllvsIE();
-  void testFilterBasics();
-  void testMultipleCurrencies();
-  void testAdvancedFilter();
-  void testColumnType();
-  void testInvestment();
-  void testBudget();
-  void testHtmlEncoding();
+    void setup();
+    void init();
+    void cleanup();
+    void testNetWorthSingle();
+    void testNetWorthOfsetting();
+    void testNetWorthOpeningPrior();
+    void testNetWorthDateFilter();
+    void testNetWorthOpening();
+    void testSpendingEmpty();
+    void testSingleTransaction();
+    void testSubAccount();
+    void testFilterIEvsIE();
+    void testFilterALvsAL();
+    void testFilterALvsIE();
+    void testFilterAllvsIE();
+    void testFilterBasics();
+    void testMultipleCurrencies();
+    void testAdvancedFilter();
+    void testColumnType();
+    void testInvestment();
+    void testBudget();
+    void testHtmlEncoding();
 };
 
 }

@@ -32,8 +32,8 @@ QPrintDialog* KMyMoneyPrinter::dialog()
     static QPrintDialog* dialog(nullptr);
 
     if (dialog == nullptr) {
-      dialog = new QPrintDialog(instance());
-      dialog->setWindowTitle(QString());
+        dialog = new QPrintDialog(instance());
+        dialog->setWindowTitle(QString());
     }
     return dialog;
 }
@@ -49,9 +49,9 @@ QPrinter* KMyMoneyPrinter::startPrint(QPrinter::PrinterMode mode)
 
 void KMyMoneyPrinter::cleanup()
 {
-  auto printer = instance();
-  auto dlg = dialog();
+    auto printer = instance();
+    auto dlg = dialog();
 
-  delete dlg;
-  delete printer;
+    delete dlg;
+    delete printer;
 }

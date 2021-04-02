@@ -22,26 +22,26 @@
 
 namespace NewAccountWizard
 {
-  class Wizard;
+class Wizard;
 
-  class LoanPayoutPagePrivate : public WizardPagePrivate<Wizard>
-  {
+class LoanPayoutPagePrivate : public WizardPagePrivate<Wizard>
+{
     Q_DISABLE_COPY(LoanPayoutPagePrivate)
 
-  public:
+public:
     explicit LoanPayoutPagePrivate(QObject* parent) :
-      WizardPagePrivate<Wizard>(parent),
-      ui(new Ui::KLoanPayoutPage)
+        WizardPagePrivate<Wizard>(parent),
+        ui(new Ui::KLoanPayoutPage)
     {
     }
 
     ~LoanPayoutPagePrivate()
     {
-      delete ui;
+        delete ui;
     }
 
     Ui::KLoanPayoutPage *ui;
-  };
+};
 }
 
 #endif

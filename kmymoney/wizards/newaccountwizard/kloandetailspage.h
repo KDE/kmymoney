@@ -21,15 +21,15 @@
 
 namespace NewAccountWizard
 {
-  class Wizard;
+class Wizard;
 
-  class LoanDetailsPagePrivate;
-  class LoanDetailsPage : public QWidget, public WizardPage<Wizard>
-  {
+class LoanDetailsPagePrivate;
+class LoanDetailsPage : public QWidget, public WizardPage<Wizard>
+{
     Q_OBJECT
     Q_DISABLE_COPY(LoanDetailsPage)
 
-  public:
+public:
     explicit LoanDetailsPage(Wizard* parent);
     ~LoanDetailsPage() override;
 
@@ -40,29 +40,29 @@ namespace NewAccountWizard
     QWidget* initialFocusWidget() const override;
 
     /**
-   * This method returns the number of payments depending on
-   * the settings of m_termAmount and m_termUnit widgets
-   */
+    * This method returns the number of payments depending on
+    * the settings of m_termAmount and m_termUnit widgets
+    */
     int term() const;
 
-  private:
+private:
     /**
-   * This method is used to update the term widgets
-   * according to the length of the given @a term.
-   * The term is also converted into a string and returned.
-   */
+    * This method is used to update the term widgets
+    * according to the length of the given @a term.
+    * The term is also converted into a string and returned.
+    */
     QString updateTermWidgets(const double term);
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void slotValuesChanged();
     void slotCalculate();
 
-  private:
+private:
     Q_DECLARE_PRIVATE_D(WizardPage<Wizard>::d_ptr, LoanDetailsPage)
     friend class Wizard;
     friend class AccountSummaryPage;
     friend class LoanPaymentPage;
-  };
+};
 } // namespace
 
 #endif

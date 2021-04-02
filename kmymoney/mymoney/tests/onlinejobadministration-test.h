@@ -16,21 +16,21 @@ class MyMoneyStorageMgr;
 
 class onlineJobAdministrationTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  MyMoneyStorageMgr* storage;
-  MyMoneyFile* file;
-  QString accountId;
+    MyMoneyStorageMgr* storage;
+    MyMoneyFile* file;
+    QString accountId;
 
 public:
-  onlineJobAdministrationTest();
+    onlineJobAdministrationTest();
 
 private Q_SLOTS:
-  void initTestCase();
-  void cleanupTestCase();
-  void init();
-  void getSettings();
-  void registerOnlineTask();
+    void initTestCase();
+    void cleanupTestCase();
+    void init();
+    void getSettings();
+    void registerOnlineTask();
 };
 
 #endif // ONLINEJOBADMINISTRATIONTEST_H

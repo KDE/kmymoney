@@ -23,23 +23,23 @@
 
 namespace KMyMoneyRegister
 {
-  class Register;
+class Register;
 
-  class SelectedTransactions: public QList<SelectedTransaction>
-  {
-  public:
+class SelectedTransactions: public QList<SelectedTransaction>
+{
+public:
     // TODO: find out how to move this ctor out of header
     SelectedTransactions() {} // krazy:exclude=inline
     explicit  SelectedTransactions(const Register* r);
 
     /**
-   * @return the highest warnLevel of all transactions in the list
-   */
+    * @return the highest warnLevel of all transactions in the list
+    */
     SelectedTransaction::warnLevel_t warnLevel() const;
 
     bool canModify() const;
     bool canDuplicate() const;
-  };
+};
 
 } // namespace
 

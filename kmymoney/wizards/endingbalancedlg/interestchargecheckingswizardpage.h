@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class InterestChargeCheckingsWizardPage; }
+namespace Ui {
+class InterestChargeCheckingsWizardPage;
+}
 
 /**
  * This class implements the InterestChargeCheckings page of the
@@ -26,19 +28,19 @@ namespace Ui { class InterestChargeCheckingsWizardPage; }
 
 class InterestChargeCheckingsWizardPage : public QWizardPage
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(InterestChargeCheckingsWizardPage)
+    Q_OBJECT
+    Q_DISABLE_COPY(InterestChargeCheckingsWizardPage)
 
 public:
-  explicit InterestChargeCheckingsWizardPage(QWidget *parent = nullptr);
-  ~InterestChargeCheckingsWizardPage() override;
+    explicit InterestChargeCheckingsWizardPage(QWidget *parent = nullptr);
+    ~InterestChargeCheckingsWizardPage() override;
 
-  /**
-   * Overload the isComplete function to control the Next button
-   */
-  bool isComplete() const final override;
+    /**
+     * Overload the isComplete function to control the Next button
+     */
+    bool isComplete() const final override;
 
-  Ui::InterestChargeCheckingsWizardPage *ui;
+    Ui::InterestChargeCheckingsWizardPage *ui;
 };
 
 #endif

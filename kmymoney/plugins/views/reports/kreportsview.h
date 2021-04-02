@@ -31,8 +31,12 @@
 
 #include "mymoneyreport.h"
 
-namespace reports { class KReportChartView; }
-namespace reports { class ReportTable; }
+namespace reports {
+class KReportChartView;
+}
+namespace reports {
+class ReportTable;
+}
 
 class QTreeWidget;
 class QTreeWidgetItem;
@@ -58,81 +62,81 @@ class KWebView;
 class KReportsViewPrivate;
 class KReportsView : public KMyMoneyViewBase
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  /**
-    * Standard constructor.
-    *
-    * @param parent The QWidget this is used in.
-    * @param name The QT name.
-    *
-    * @return An object of type KReportsView
-    *
-    * @see ~KReportsView
-    */
-  explicit KReportsView(QWidget *parent = nullptr);
-  ~KReportsView() override;
+    /**
+      * Standard constructor.
+      *
+      * @param parent The QWidget this is used in.
+      * @param name The QT name.
+      *
+      * @return An object of type KReportsView
+      *
+      * @see ~KReportsView
+      */
+    explicit KReportsView(QWidget *parent = nullptr);
+    ~KReportsView() override;
 
-  void executeCustomAction(eView::Action action) override;
-  void refresh();
-  void updateActions(const MyMoneyObject &obj);
+    void executeCustomAction(eView::Action action) override;
+    void refresh();
+    void updateActions(const MyMoneyObject &obj);
 
 Q_SIGNALS:
-  /**
-    * This signal is emitted whenever a report is selected
-    */
-  void reportSelected(const MyMoneyReport&);
+    /**
+      * This signal is emitted whenever a report is selected
+      */
+    void reportSelected(const MyMoneyReport&);
 
-  /**
-    * This signal is emitted whenever a transaction is selected
-    */
-  void transactionSelected(const QString&, const QString&);
+    /**
+      * This signal is emitted whenever a transaction is selected
+      */
+    void transactionSelected(const QString&, const QString&);
 
-  void switchViewRequested(View view);
+    void switchViewRequested(View view);
 
 protected:
-  /**
-    * Overridden so we can reload the view if necessary.
-    *
-    * @return Nothing.
-    */
-  void showEvent(QShowEvent * event) override;
+    /**
+      * Overridden so we can reload the view if necessary.
+      *
+      * @return Nothing.
+      */
+    void showEvent(QShowEvent * event) override;
 
 public Q_SLOTS:
-  void slotOpenUrl(const QUrl &url);
+    void slotOpenUrl(const QUrl &url);
 
-  void slotPrintView();
-  void slotCopyView();
-  void slotSaveView();
-  void slotConfigure();
-  void slotDuplicate();
-  void slotToggleChart();
-  void slotItemDoubleClicked(QTreeWidgetItem* item, int);
-  void slotOpenReport(const QString&);
-  void slotOpenReport(const MyMoneyReport&);
-  void slotCloseCurrent();
-  void slotClose(int index);
-  void slotCloseAll();
-  void slotDelete();
-  void slotListContextMenu(const QPoint &);
-  void slotOpenFromList();
-  void slotPrintFromList();
-  void slotConfigureFromList();
-  void slotNewFromList();
-  void slotDeleteFromList();
+    void slotPrintView();
+    void slotCopyView();
+    void slotSaveView();
+    void slotConfigure();
+    void slotDuplicate();
+    void slotToggleChart();
+    void slotItemDoubleClicked(QTreeWidgetItem* item, int);
+    void slotOpenReport(const QString&);
+    void slotOpenReport(const MyMoneyReport&);
+    void slotCloseCurrent();
+    void slotClose(int index);
+    void slotCloseAll();
+    void slotDelete();
+    void slotListContextMenu(const QPoint &);
+    void slotOpenFromList();
+    void slotPrintFromList();
+    void slotConfigureFromList();
+    void slotNewFromList();
+    void slotDeleteFromList();
 
-  void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
+    void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
 
 private:
-  Q_DECLARE_PRIVATE(KReportsView)
+    Q_DECLARE_PRIVATE(KReportsView)
 
 private Q_SLOTS:
-  /**
-    * This slot creates a transaction report for the selected account
-    * and opens it in the reports view.
-    */
-  void slotReportAccountTransactions();
+    /**
+      * This slot creates a transaction report for the selected account
+      * and opens it in the reports view.
+      */
+    void slotReportAccountTransactions();
 };
 
 #endif

@@ -19,25 +19,25 @@
 class onlineJobFolder
 {
 public:
-  onlineJobFolder(const onlineJobFolder &other); // krazy:exclude=explicit
+    onlineJobFolder(const onlineJobFolder &other); // krazy:exclude=explicit
 
-  static onlineJobFolder outbox();
-  static onlineJobFolder drafts();
-  static onlineJobFolder templates();
-  static onlineJobFolder historic();
+    static onlineJobFolder outbox();
+    static onlineJobFolder drafts();
+    static onlineJobFolder templates();
+    static onlineJobFolder historic();
 
 private:
-  enum onlineJobFolders {
-    folderOutbox,
-    folderDrafts,
-    folderTemplates,
-    folderHistoric,
-  };
+    enum onlineJobFolders {
+        folderOutbox,
+        folderDrafts,
+        folderTemplates,
+        folderHistoric,
+    };
 
-  onlineJobFolder();
-  explicit onlineJobFolder(const onlineJobFolders& folder);
+    onlineJobFolder();
+    explicit onlineJobFolder(const onlineJobFolders& folder);
 
-  onlineJobFolders m_folder;
+    onlineJobFolders m_folder;
 };
 
 #endif // ONLINEJOBFOLDER_H

@@ -20,26 +20,30 @@ class MyMoneyMoney;
 class QDate;
 class QString;
 
-namespace KMyMoneyRegister { class Register; }
-namespace KMyMoneyRegister { class RegisterItem; }
+namespace KMyMoneyRegister {
+class Register;
+}
+namespace KMyMoneyRegister {
+class RegisterItem;
+}
 
 using namespace KMyMoneyRegister;
 
 namespace KMyMoneyRegister
 {
-  class RegisterItemPrivate
-  {
-  public:
+class RegisterItemPrivate
+{
+public:
     RegisterItemPrivate() :
-      m_parent(nullptr),
-      m_prev(nullptr),
-      m_next(nullptr),
-      m_startRow(0),
-      m_rowsRegister(1),
-      m_rowsForm(1),
-      m_alternate(false),
-      m_needResize(false),
-      m_visible(true)
+        m_parent(nullptr),
+        m_prev(nullptr),
+        m_next(nullptr),
+        m_startRow(0),
+        m_rowsRegister(1),
+        m_rowsForm(1),
+        m_alternate(false),
+        m_needResize(false),
+        m_visible(true)
     {
     }
 
@@ -61,7 +65,7 @@ namespace KMyMoneyRegister
     static QString           nullString;
     static MyMoneyMoney      nullValue;
 
-  };
+};
 }
 
 #endif

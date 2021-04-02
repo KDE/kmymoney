@@ -25,44 +25,44 @@ using namespace eMyMoney;
 class LedgerSchedulePrivate : public LedgerTransactionPrivate
 {
 public:
-  MyMoneySchedule     m_schedule;
+    MyMoneySchedule     m_schedule;
 };
 
 LedgerSchedule::LedgerSchedule() :
-  LedgerTransaction(*new LedgerSchedulePrivate, MyMoneyTransaction(), MyMoneySplit())
+    LedgerTransaction(*new LedgerSchedulePrivate, MyMoneyTransaction(), MyMoneySplit())
 {
 }
 
 LedgerSchedule::LedgerSchedule(const MyMoneySchedule& s, const MyMoneyTransaction& t, const MyMoneySplit& sp) :
- LedgerTransaction(*new LedgerSchedulePrivate, t, sp)
+    LedgerTransaction(*new LedgerSchedulePrivate, t, sp)
 {
-  Q_D(LedgerSchedule);
-  d->m_schedule = s;
+    Q_D(LedgerSchedule);
+    d->m_schedule = s;
 }
 
 LedgerSchedule::LedgerSchedule(const LedgerSchedule& other) :
-  LedgerTransaction(*new LedgerSchedulePrivate(*other.d_func()))
+    LedgerTransaction(*new LedgerSchedulePrivate(*other.d_func()))
 {
 }
 
 LedgerSchedule::~LedgerSchedule()
 {
-  // deletion of d_ptr is taken care of by base class
+    // deletion of d_ptr is taken care of by base class
 }
 
 QString LedgerSchedule::transactionSplitId() const
 {
-  Q_D(const LedgerSchedule);
-  return QString::fromLatin1("%1-%2").arg(d->m_schedule.id(), d->m_split.id());
+    Q_D(const LedgerSchedule);
+    return QString::fromLatin1("%1-%2").arg(d->m_schedule.id(), d->m_split.id());
 }
 
 QString LedgerSchedule::scheduleId() const
 {
-  Q_D(const LedgerSchedule);
-  return d->m_schedule.id();
+    Q_D(const LedgerSchedule);
+    return d->m_schedule.id();
 }
 
 bool LedgerSchedule::isImported() const
 {
-  return false;
+    return false;
 }

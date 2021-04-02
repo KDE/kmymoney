@@ -12,64 +12,66 @@
 
 class QModelIndex;
 
-namespace KMyMoneyPlugin { class OnlinePlugin; }
+namespace KMyMoneyPlugin {
+class OnlinePlugin;
+}
 
 class KOnlineJobOutboxViewPrivate;
 class KOnlineJobOutboxView : public KMyMoneyViewBase
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KOnlineJobOutboxView(QWidget *parent = 0);
-  ~KOnlineJobOutboxView() override;
+    explicit KOnlineJobOutboxView(QWidget *parent = 0);
+    ~KOnlineJobOutboxView() override;
 
-  void executeCustomAction(eView::Action action) override;
+    void executeCustomAction(eView::Action action) override;
 
-  void updateActions(const MyMoneyObject& obj);
+    void updateActions(const MyMoneyObject& obj);
 
-  QStringList selectedOnlineJobs() const;
+    QStringList selectedOnlineJobs() const;
 
 public Q_SLOTS:
-  void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
-  void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
+    void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
+    void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
 Q_SIGNALS:
-  void sendJobs(QList<onlineJob>);
-  void editJob(QString);
-  void newCreditTransfer();
+    void sendJobs(QList<onlineJob>);
+    void editJob(QString);
+    void newCreditTransfer();
 
 protected:
-  void showEvent(QShowEvent* event) override;
-  void contextMenuEvent(QContextMenuEvent*) override;
+    void showEvent(QShowEvent* event) override;
+    void contextMenuEvent(QContextMenuEvent*) override;
 
 private:
-  Q_DECLARE_PRIVATE(KOnlineJobOutboxView)
+    Q_DECLARE_PRIVATE(KOnlineJobOutboxView)
 
 private Q_SLOTS:
-  void updateNewCreditTransferButton();
-  void updateButtonState() const;
+    void updateNewCreditTransferButton();
+    void updateButtonState() const;
 
-  void slotRemoveJob();
+    void slotRemoveJob();
 
-  /** @brief If any job is selected, send it. Send all valid jobs otherwise. */
-  void slotSendJobs();
+    /** @brief If any job is selected, send it. Send all valid jobs otherwise. */
+    void slotSendJobs();
 
-  /** @brief Send all sendable online jobs */
-  void slotSendAllSendableJobs();
+    /** @brief Send all sendable online jobs */
+    void slotSendAllSendableJobs();
 
-  /** @brief Send only the selected jobs */
-  void slotSendSelectedJobs();
+    /** @brief Send only the selected jobs */
+    void slotSendSelectedJobs();
 
-  void slotEditJob();
-  void slotEditJob(const QModelIndex&);
+    void slotEditJob();
+    void slotEditJob(const QModelIndex&);
 
-  void slotOnlineJobSave(onlineJob job);
-  void slotOnlineJobSend(onlineJob job);
-  void slotOnlineJobSend(QList<onlineJob> jobs);
+    void slotOnlineJobSave(onlineJob job);
+    void slotOnlineJobSend(onlineJob job);
+    void slotOnlineJobSend(QList<onlineJob> jobs);
 
-  void slotOnlineJobLog();
-  void slotOnlineJobLog(const QStringList& onlineJobIds);
-  void slotNewCreditTransfer();
+    void slotOnlineJobLog();
+    void slotOnlineJobLog(const QStringList& onlineJobIds);
+    void slotNewCreditTransfer();
 };
 
 #endif // KONLINEJOBOUTBOXVIEW_H

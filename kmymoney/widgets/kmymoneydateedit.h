@@ -14,10 +14,10 @@
 // TODO: check if this class is really necessary
 class KMyMoneyDateEdit : public QDateEdit
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KMyMoneyDateEdit(QWidget* parent = nullptr);
+    explicit KMyMoneyDateEdit(QWidget* parent = nullptr);
 
 };
 #endif // KMYMONEYDATEEDIT_H

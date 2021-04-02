@@ -18,20 +18,24 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace eWidgets { namespace eTabBar { enum class SignalEmission; } }
+namespace eWidgets {
+namespace eTabBar {
+enum class SignalEmission;
+}
+}
 
 namespace KMyMoneyTransactionForm
 {
-  /**
-  * @author Thomas Baumgart
-  */
-  class TabBarPrivate;
-  class TabBar : public QTabBar
-  {
+/**
+* @author Thomas Baumgart
+*/
+class TabBarPrivate;
+class TabBar : public QTabBar
+{
     Q_OBJECT
     Q_DISABLE_COPY(TabBar)
 
-  public:
+public:
     explicit TabBar(QWidget* parent = nullptr);
     ~TabBar();
 
@@ -48,7 +52,7 @@ namespace KMyMoneyTransactionForm
 
     int currentIndex() const;
 
-  public Q_SLOTS:
+public Q_SLOTS:
 
     /**
     * overridden for internal reasons, API not changed
@@ -60,26 +64,26 @@ namespace KMyMoneyTransactionForm
     */
     void showEvent(QShowEvent* event) override;
 
-  protected:
+protected:
     void mousePressEvent(QMouseEvent* event) override;
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void slotTabCurrentChanged(int id);
 
-  Q_SIGNALS:
+Q_SIGNALS:
     void tabCurrentChanged(int id);
 
-  private:
+private:
     /**
     * returns the Qt index of tab at pos @a p or -1
     * Derived from QTabBarPrivate
     */
     int indexAtPos(const QPoint& p) const;
 
-  private:
+private:
     TabBarPrivate * const d_ptr;
     Q_DECLARE_PRIVATE(TabBar)
-  };
+};
 
 } // namespace
 

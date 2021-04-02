@@ -14,11 +14,11 @@ class ibanValidator;
 
 class KMM_WIDGETS_EXPORT KIbanLineEdit : public KLineEdit
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KIbanLineEdit(QWidget* parent);
-  const ibanValidator* validator() const;
+    explicit KIbanLineEdit(QWidget* parent);
+    const ibanValidator* validator() const;
 };
 
 #endif // KIBANLINEEDIT_H

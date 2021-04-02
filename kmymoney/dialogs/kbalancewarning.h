@@ -23,17 +23,17 @@ class MyMoneyAccount;
 
 class KBalanceWarning : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit KBalanceWarning(QObject* parent);
-  virtual ~KBalanceWarning();
+    explicit KBalanceWarning(QObject* parent);
+    virtual ~KBalanceWarning();
 
 public Q_SLOTS:
-  void slotShowMessage(QWidget* parent, const MyMoneyAccount& account, const QString& msg);
+    void slotShowMessage(QWidget* parent, const MyMoneyAccount& account, const QString& msg);
 
 private:
-  class Private;
-  Private* d;
+    class Private;
+    Private* d;
 };
 
 #endif

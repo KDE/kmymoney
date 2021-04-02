@@ -24,15 +24,15 @@ class MyMoneySplit;
 
 namespace NewAccountWizard
 {
-  class Wizard;
+class Wizard;
 
-  class LoanPaymentPagePrivate;
-  class LoanPaymentPage : public QWidget, public WizardPage<Wizard>
-  {
+class LoanPaymentPagePrivate;
+class LoanPaymentPage : public QWidget, public WizardPage<Wizard>
+{
     Q_OBJECT
     Q_DISABLE_COPY(LoanPaymentPage)
 
-  public:
+public:
     explicit LoanPaymentPage(Wizard* parent);
     ~LoanPaymentPage() override;
 
@@ -41,33 +41,33 @@ namespace NewAccountWizard
     void enterPage() override;
 
     /**
-   * This method returns the sum of the additional fees
-   */
+    * This method returns the sum of the additional fees
+    */
     MyMoneyMoney additionalFees() const;
 
     /**
-   * This method returns the base payment, that's principal and interest
-   */
+    * This method returns the base payment, that's principal and interest
+    */
     MyMoneyMoney basePayment() const;
 
     /**
-   * This method returns the splits that make up the additional fees in @p list.
-   * @note The splits may contain assigned ids which the caller must remove before
-   * adding the splits to a MyMoneyTransaction object.
-   */
+    * This method returns the splits that make up the additional fees in @p list.
+    * @note The splits may contain assigned ids which the caller must remove before
+    * adding the splits to a MyMoneyTransaction object.
+    */
     void additionalFeesSplits(QList<MyMoneySplit>& list);
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void slotAdditionalFees();
 
-  protected:
+protected:
     void updateAmounts();
 
-  private:
+private:
     Q_DECLARE_PRIVATE_D(WizardPage<Wizard>::d_ptr, LoanPaymentPage)
     friend class Wizard;
     friend class AccountSummaryPage;
-  };
+};
 } // namespace
 
 #endif

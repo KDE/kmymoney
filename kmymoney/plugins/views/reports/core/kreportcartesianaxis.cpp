@@ -37,9 +37,9 @@ const QString KReportCartesianAxis::customizedLabel( const QString& label ) cons
     const qreal labelValue = label.toDouble( &ok );
     if ( ok ) {
         return m_locale.toString( labelValue, 'f', m_precision )
-                .remove( separator )
-                .remove( QRegularExpression( "0+$" ) )
-                .remove( QRegularExpression( "\\" + decimalPoint + "$" ) );
+               .remove( separator )
+               .remove( QRegularExpression( "0+$" ) )
+               .remove( QRegularExpression( "\\" + decimalPoint + "$" ) );
     } else
         return label;
 }

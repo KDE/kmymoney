@@ -11,58 +11,59 @@
 class dummyTask : public onlineTask
 {
 public:
-  ONLINETASK_META(dummyTask, "org.kmymoney.onlinetasks.dummy");
-  dummyTask()
-      : m_testNumber(0) {
+    ONLINETASK_META(dummyTask, "org.kmymoney.onlinetasks.dummy");
+    dummyTask()
+        : m_testNumber(0) {
 
-  }
+    }
 
-  dummyTask(const dummyTask& other)
-      : onlineTask(other),
-      m_testNumber(other.m_testNumber) {
-  }
+    dummyTask(const dummyTask& other)
+        : onlineTask(other),
+          m_testNumber(other.m_testNumber) {
+    }
 
-  /**
-   * @brief Checks if the task is ready for sending
-   */
-  bool isValid() const final override {
-    return true;
-  }
+    /**
+     * @brief Checks if the task is ready for sending
+     */
+    bool isValid() const final override {
+        return true;
+    }
 
-  /**
-   * @brief Human readable type-name
-   */
-  QString jobTypeName() const final override {
-    return QLatin1String("Dummy task");
-  }
+    /**
+     * @brief Human readable type-name
+     */
+    QString jobTypeName() const final override {
+        return QLatin1String("Dummy task");
+    }
 
-  void setTestNumber(const int& number) {
-    m_testNumber = number;
-  }
-  int testNumber() {
-    return m_testNumber;
-  }
+    void setTestNumber(const int& number) {
+        m_testNumber = number;
+    }
+    int testNumber() {
+        return m_testNumber;
+    }
 
-  void writeXML(QDomDocument&, QDomElement&) const final override {}
+    void writeXML(QDomDocument&, QDomElement&) const final override {}
 
 protected:
 
-  dummyTask* clone() const final override {
-    return (new dummyTask(*this));
-  }
-  bool hasReferenceTo(const QString &id) const final override {
-    Q_UNUSED(id); return false;
-  }
+    dummyTask* clone() const final override {
+        return (new dummyTask(*this));
+    }
+    bool hasReferenceTo(const QString &id) const final override {
+        Q_UNUSED(id);
+        return false;
+    }
 
-  dummyTask* createFromXml(const QDomElement&) const final override {
-    return (new dummyTask);
-  }
+    dummyTask* createFromXml(const QDomElement&) const final override {
+        return (new dummyTask);
+    }
 
-  QString responsibleAccount() const final override {
-    return QString();
-  }
+    QString responsibleAccount() const final override {
+        return QString();
+    }
 
-  int m_testNumber;
+    int m_testNumber;
 };
 
 #endif // DUMMYTASK_H

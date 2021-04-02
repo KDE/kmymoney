@@ -12,14 +12,14 @@
 
 class MyMoneyObjectTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 private Q_SLOTS:
-  void testEmptyConstructor();
-  void testConstructor();
-  void testClearId();
-  void testCopyConstructor();
-  void testAssignmentConstructor();
-  void testEquality();
+    void testEmptyConstructor();
+    void testConstructor();
+    void testClearId();
+    void testCopyConstructor();
+    void testAssignmentConstructor();
+    void testEquality();
 };
 
 #endif

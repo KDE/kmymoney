@@ -15,19 +15,19 @@ class MyMoneyTransaction;
 
 class ReconciliationReport: public KMyMoneyPlugin::Plugin
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit ReconciliationReport(QObject *parent, const QVariantList &args);
-  ~ReconciliationReport() override;
+    explicit ReconciliationReport(QObject *parent, const QVariantList &args);
+    ~ReconciliationReport() override;
 
 public Q_SLOTS:
-  void plug() override;
-  void unplug() override;
+    void plug() override;
+    void unplug() override;
 
 protected Q_SLOTS:
-  // reconciliation of an account has finished
-  void slotGenerateReconciliationReport(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
+    // reconciliation of an account has finished
+    void slotGenerateReconciliationReport(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
 };
 
 #endif // RECONCILIATIONREPORT_H

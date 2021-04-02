@@ -20,11 +20,11 @@
 
 namespace KMyMoneyRegister
 {
-  class StdTransactionPrivate : public TransactionPrivate
-  {
-  public:
+class StdTransactionPrivate : public TransactionPrivate
+{
+public:
     bool m_showAccountRow;
-  };
+};
 }
 
 #endif

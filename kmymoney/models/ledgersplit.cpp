@@ -32,28 +32,28 @@ public:
 };
 
 LedgerSplit::LedgerSplit() :
-  LedgerTransaction(*new LedgerSplitPrivate, MyMoneyTransaction(), MyMoneySplit())
+    LedgerTransaction(*new LedgerSplitPrivate, MyMoneyTransaction(), MyMoneySplit())
 {
 }
 
 LedgerSplit::LedgerSplit(const MyMoneyTransaction& t, const MyMoneySplit& s) :
-  LedgerTransaction(*new LedgerSplitPrivate, t, s)
+    LedgerTransaction(*new LedgerSplitPrivate, t, s)
 {
-  Q_D(LedgerSplit);
-  // override the settings made in the base class
-  d->m_payeeName.clear();
-  d->m_payeeId = d->m_split.payeeId();
-  if(!d->m_payeeId.isEmpty()) {
-    try {
-      d->m_payeeName = MyMoneyFile::instance()->payee(d->m_payeeId).name();
-    } catch (const MyMoneyException &) {
-      qDebug() << "payee" << d->m_payeeId << "not found.";
+    Q_D(LedgerSplit);
+    // override the settings made in the base class
+    d->m_payeeName.clear();
+    d->m_payeeId = d->m_split.payeeId();
+    if(!d->m_payeeId.isEmpty()) {
+        try {
+            d->m_payeeName = MyMoneyFile::instance()->payee(d->m_payeeId).name();
+        } catch (const MyMoneyException &) {
+            qDebug() << "payee" << d->m_payeeId << "not found.";
+        }
     }
-  }
 }
 
 LedgerSplit::LedgerSplit(const LedgerSplit& other) :
-  LedgerTransaction(*new LedgerSplitPrivate(*other.d_func()))
+    LedgerTransaction(*new LedgerSplitPrivate(*other.d_func()))
 {
 }
 
@@ -63,6 +63,6 @@ LedgerSplit::~LedgerSplit()
 
 QString LedgerSplit::memo() const
 {
-  Q_D(const LedgerSplit);
-  return d->m_split.memo();
+    Q_D(const LedgerSplit);
+    return d->m_split.memo();
 }

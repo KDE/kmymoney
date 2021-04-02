@@ -19,13 +19,13 @@
 #include "ui_newpaymentswizardpage.h"
 
 NewPaymentsWizardPage::NewPaymentsWizardPage(QWidget *parent)
-  : QWizardPage(parent),
-    ui(new Ui::NewPaymentsWizardPage)
+    : QWizardPage(parent),
+      ui(new Ui::NewPaymentsWizardPage)
 {
-  ui->setupUi(this);
+    ui->setupUi(this);
 }
 
 NewPaymentsWizardPage::~NewPaymentsWizardPage()
 {
-  delete ui;
+    delete ui;
 }

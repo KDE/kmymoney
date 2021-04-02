@@ -448,7 +448,7 @@ void ModelTest::data()
 
     colorVariant = model->data ( model->index ( 0, 0 ), Qt::TextColorRole );
     if ( colorVariant.isValid() ) {
-      QVERIFY(  colorVariant.canConvert<QColor> () );
+        QVERIFY(  colorVariant.canConvert<QColor> () );
     }
 
     // Check that the "check state" is one we know about.
@@ -533,7 +533,7 @@ void ModelTest::layoutChanged()
  */
 void ModelTest::rowsAboutToBeRemoved ( const QModelIndex &parent, int start, int end )
 {
-qDebug() << "ratbr" << parent << start << end;
+    qDebug() << "ratbr" << parent << start << end;
     Changing c;
     c.parent = parent;
     c.oldSize = model->rowCount ( parent );
@@ -549,7 +549,7 @@ qDebug() << "ratbr" << parent << start << end;
  */
 void ModelTest::rowsRemoved ( const QModelIndex & parent, int start, int end )
 {
-  qDebug() << "rr" << parent << start << end;
+    qDebug() << "rr" << parent << start << end;
     Changing c = remove.pop();
     QVERIFY( c.parent == parent );
     QVERIFY( c.oldSize - ( end - start + 1 ) == model->rowCount ( parent ) );

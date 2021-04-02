@@ -17,31 +17,31 @@ class KPluginInfo;
 
 class iCalendarExporter: public KMyMoneyPlugin::Plugin
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit iCalendarExporter(QObject *parent, const QVariantList &args);
-  ~iCalendarExporter() override;
+    explicit iCalendarExporter(QObject *parent, const QVariantList &args);
+    ~iCalendarExporter() override;
 
 protected Q_SLOTS:
-  // this is the export function called when the user selects the interface menu
-  void slotFirstExport();
+    // this is the export function called when the user selects the interface menu
+    void slotFirstExport();
 
-  // this is the export method called automatically
-  void slotExport();
+    // this is the export method called automatically
+    void slotExport();
 
-  // the plugin loader plugs in a plugin
-  void plug() override;
+    // the plugin loader plugs in a plugin
+    void plug() override;
 
-  // the plugin loader unplugs a plugin
-  void unplug() override;
+    // the plugin loader unplugs a plugin
+    void unplug() override;
 
-  // the plugin's configurations has changed
-  void configurationChanged() override;
+    // the plugin's configurations has changed
+    void configurationChanged() override;
 
 private:
-  struct Private;
-  std::unique_ptr<Private> d;
+    struct Private;
+    std::unique_ptr<Private> d;
 };
 
 #endif // ICALENDAREXPORT_H

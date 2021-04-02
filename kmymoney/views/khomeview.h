@@ -34,32 +34,32 @@
 class KHomeViewPrivate;
 class KHomeView : public KMyMoneyViewBase
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KHomeView(QWidget *parent = nullptr);
-  ~KHomeView() override;
+    explicit KHomeView(QWidget *parent = nullptr);
+    ~KHomeView() override;
 
-  void executeCustomAction(eView::Action action) override;
-  void refresh();
+    void executeCustomAction(eView::Action action) override;
+    void refresh();
 
 protected:
-  void showEvent(QShowEvent* event) override;
-  void wheelEvent(QWheelEvent *event) override;
-  bool eventFilter(QObject* o, QEvent* e) override;
+    void showEvent(QShowEvent* event) override;
+    void wheelEvent(QWheelEvent *event) override;
+    bool eventFilter(QObject* o, QEvent* e) override;
 
 public Q_SLOTS:
-  /**
-    * Print the current view
-    */
-  void slotPrintView();
+    /**
+      * Print the current view
+      */
+    void slotPrintView();
 
 private:
-  Q_DECLARE_PRIVATE(KHomeView)
+    Q_DECLARE_PRIVATE(KHomeView)
 
 private Q_SLOTS:
-  void slotOpenUrl(const QUrl &url);
-  void slotAdjustScrollPos();
+    void slotOpenUrl(const QUrl &url);
+    void slotAdjustScrollPos();
 };
 
 #endif

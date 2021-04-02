@@ -19,13 +19,13 @@
 #include "ui_newcalculateloanwizardpage.h"
 
 NewCalculateLoanWizardPage::NewCalculateLoanWizardPage(QWidget *parent)
-  : QWizardPage(parent),
-    ui(new Ui::NewCalculateLoanWizardPage)
+    : QWizardPage(parent),
+      ui(new Ui::NewCalculateLoanWizardPage)
 {
-  ui->setupUi(this);
+    ui->setupUi(this);
 }
 
 NewCalculateLoanWizardPage::~NewCalculateLoanWizardPage()
 {
-  delete ui;
+    delete ui;
 }

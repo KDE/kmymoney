@@ -22,27 +22,27 @@
 namespace KMyMoneyRegister
 {
 
-  class StdTransactionDownloaded : public StdTransaction
-  {
-  public:
+class StdTransactionDownloaded : public StdTransaction
+{
+public:
     explicit StdTransactionDownloaded(Register* getParent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
     ~StdTransactionDownloaded() override;
 
     const char* className() override;
 
     bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
-  };
+};
 
-  class InvestTransactionDownloaded : public InvestTransaction
-  {
-  public:
+class InvestTransactionDownloaded : public InvestTransaction
+{
+public:
     explicit InvestTransactionDownloaded(Register* getParent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
     ~InvestTransactionDownloaded() override;
 
     const char* className() override;
 
     bool paintRegisterCellSetup(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
-  };
+};
 
 
 } // namespace

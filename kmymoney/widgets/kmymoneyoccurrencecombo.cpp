@@ -32,6 +32,6 @@ KMyMoneyOccurrenceCombo::~KMyMoneyOccurrenceCombo()
 
 Schedule::Occurrence KMyMoneyOccurrenceCombo::currentItem() const
 {
-  return static_cast<Schedule::Occurrence>(KMyMoneyGeneralCombo::currentItem());
+    return static_cast<Schedule::Occurrence>(KMyMoneyGeneralCombo::currentItem());
 }
 

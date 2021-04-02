@@ -20,12 +20,12 @@
 
 namespace KMyMoneyRegister
 {
-  class FancyDateGroupMarkerPrivate;
-  class FancyDateGroupMarker : public GroupMarker
-  {
+class FancyDateGroupMarkerPrivate;
+class FancyDateGroupMarker : public GroupMarker
+{
     Q_DISABLE_COPY(FancyDateGroupMarker)
 
-  public:
+public:
     explicit FancyDateGroupMarker(Register* getParent, const QDate& date, const QString& txt);
     ~FancyDateGroupMarker() override;
 
@@ -33,10 +33,10 @@ namespace KMyMoneyRegister
     QDate sortEntryDate() const override;
     const char* className() override;
 
-  protected:
+protected:
     FancyDateGroupMarker(FancyDateGroupMarkerPrivate &dd, Register *parent, const QDate& date, const QString& txt);
-     Q_DECLARE_PRIVATE(FancyDateGroupMarker)
-  };
+    Q_DECLARE_PRIVATE(FancyDateGroupMarker)
+};
 } // namespace
 
 #endif

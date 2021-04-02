@@ -20,17 +20,17 @@ class KForecastView;
 
 class ForecastView : public KMyMoneyPlugin::Plugin
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit ForecastView(QObject *parent, const QVariantList &args);
-  ~ForecastView() override;
+    explicit ForecastView(QObject *parent, const QVariantList &args);
+    ~ForecastView() override;
 
-  void plug() override;
-  void unplug() override;
+    void plug() override;
+    void unplug() override;
 
 private:
-  KForecastView* m_view;
+    KForecastView* m_view;
 };
 
 #endif

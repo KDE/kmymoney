@@ -26,19 +26,19 @@
 using namespace Icons;
 
 KTagLabel::KTagLabel(const QString& id, const QString& name, QWidget* parent) :
-  QFrame(parent)
+    QFrame(parent)
 {
-  QToolButton *t = new QToolButton(this);
-  t->setIcon(Icons::get(Icon::DialogClose));
-  t->setAutoRaise(true);
-  QLabel *l = new QLabel(name, this);
-  m_tagId = id;
-  QHBoxLayout *layout = new QHBoxLayout;
-  layout->setContentsMargins(0, 0, 0, 0);
-  layout->setSpacing(0);
-  this->setLayout(layout);
-  layout->addWidget(t);
-  layout->addWidget(l);
-  connect(t, &QAbstractButton::clicked, this, &KTagLabel::clicked);
-  //this->setFrameStyle(QFrame::Panel | QFrame::Plain);
+    QToolButton *t = new QToolButton(this);
+    t->setIcon(Icons::get(Icon::DialogClose));
+    t->setAutoRaise(true);
+    QLabel *l = new QLabel(name, this);
+    m_tagId = id;
+    QHBoxLayout *layout = new QHBoxLayout;
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
+    this->setLayout(layout);
+    layout->addWidget(t);
+    layout->addWidget(l);
+    connect(t, &QAbstractButton::clicked, this, &KTagLabel::clicked);
+    //this->setFrameStyle(QFrame::Panel | QFrame::Plain);
 }

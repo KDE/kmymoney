@@ -49,36 +49,36 @@ class MyMoneyAccount;
 class KCategoriesViewPrivate;
 class KCategoriesView : public KMyMoneyAccountsViewBase
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KCategoriesView(QWidget *parent = nullptr);
-  ~KCategoriesView();
+    explicit KCategoriesView(QWidget *parent = nullptr);
+    ~KCategoriesView();
 
-  void executeCustomAction(eView::Action action) override;
-  void refresh();
-  void updateActions(const MyMoneyObject& obj);
+    void executeCustomAction(eView::Action action) override;
+    void refresh();
+    void updateActions(const MyMoneyObject& obj);
 
 public Q_SLOTS:
-  void slotProfitChanged(const MyMoneyMoney &);
-  void slotShowCategoriesMenu(const MyMoneyAccount& acc);
+    void slotProfitChanged(const MyMoneyMoney &);
+    void slotShowCategoriesMenu(const MyMoneyAccount& acc);
 
-  void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
-  void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
+    void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
+    void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
 protected:
-  void showEvent(QShowEvent * event) override;
+    void showEvent(QShowEvent * event) override;
 
 protected Q_SLOTS:
-  void slotUnusedIncomeExpenseAccountHidden();
+    void slotUnusedIncomeExpenseAccountHidden();
 
 private:
-  Q_DECLARE_PRIVATE(KCategoriesView)
+    Q_DECLARE_PRIVATE(KCategoriesView)
 
 private Q_SLOTS:
-  void slotNewCategory();
-  void slotEditCategory();
-  void slotDeleteCategory();
+    void slotNewCategory();
+    void slotEditCategory();
+    void slotDeleteCategory();
 };
 
 #endif

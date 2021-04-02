@@ -42,99 +42,99 @@ class MyMoneyPayee;
 class KPayeesViewPrivate;
 class KPayeesView : public KMyMoneyViewBase
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KPayeesView(QWidget *parent = nullptr);
-  ~KPayeesView() override;
+    explicit KPayeesView(QWidget *parent = nullptr);
+    ~KPayeesView() override;
 
-  void executeCustomAction(eView::Action action) override;
-  void refresh();
-  void updatePayeeActions(const QList<MyMoneyPayee>& payees);
+    void executeCustomAction(eView::Action action) override;
+    void refresh();
+    void updatePayeeActions(const QList<MyMoneyPayee>& payees);
 
 public Q_SLOTS:
-  void slotSelectPayeeAndTransaction(const QString& payeeId, const QString& accountId = QString(), const QString& transactionId = QString());
-  void slotStartRename(QListWidgetItem*);
-  void slotHelp();
+    void slotSelectPayeeAndTransaction(const QString& payeeId, const QString& accountId = QString(), const QString& transactionId = QString());
+    void slotStartRename(QListWidgetItem*);
+    void slotHelp();
 
-  /**
-   * @brief proxy slot to close a model based on file open/close
-   */
-  void slotClosePayeeIdentifierSource();
+    /**
+     * @brief proxy slot to close a model based on file open/close
+     */
+    void slotClosePayeeIdentifierSource();
 
-  void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
+    void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
 Q_SIGNALS:
-  void transactionSelected(const QString& accountId, const QString& transactionId);
-  void openContextMenu(const MyMoneyObject& obj);
-  void selectObjects(const QList<MyMoneyPayee>& payees);
+    void transactionSelected(const QString& accountId, const QString& transactionId);
+    void openContextMenu(const MyMoneyObject& obj);
+    void selectObjects(const QList<MyMoneyPayee>& payees);
 
 protected:
-  void showEvent(QShowEvent* event) override;
+    void showEvent(QShowEvent* event) override;
 
 private:
-  Q_DECLARE_PRIVATE(KPayeesView)
+    Q_DECLARE_PRIVATE(KPayeesView)
 
 private Q_SLOTS:
-  /**
-    * This slot is called whenever the selection in m_payeesList
-    * is about to change.
-    */
-  void slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev);
+    /**
+      * This slot is called whenever the selection in m_payeesList
+      * is about to change.
+      */
+    void slotSelectPayee(QListWidgetItem* cur, QListWidgetItem* prev);
 
-  /**
-    * This slot is called whenever the selection in m_payeesList
-    * has been changed.
-    */
-  void slotSelectPayee();
+    /**
+      * This slot is called whenever the selection in m_payeesList
+      * has been changed.
+      */
+    void slotSelectPayee();
 
-  /**
-    * This slot marks the current selected payee as modified (dirty).
-    */
-  void slotPayeeDataChanged();
-  void slotKeyListChanged();
+    /**
+      * This slot marks the current selected payee as modified (dirty).
+      */
+    void slotPayeeDataChanged();
+    void slotKeyListChanged();
 
-  /**
-    * This slot is called when the name of a payee is changed inside
-    * the payee list view and only a single payee is selected.
-    */
-  void slotRenameSinglePayee(QListWidgetItem *p);
+    /**
+      * This slot is called when the name of a payee is changed inside
+      * the payee list view and only a single payee is selected.
+      */
+    void slotRenameSinglePayee(QListWidgetItem *p);
 
-  /**
-    * Updates the payee data in m_payee from the information in the
-    * payee information widget.
-    */
-  void slotUpdatePayee();
+    /**
+      * Updates the payee data in m_payee from the information in the
+      * payee information widget.
+      */
+    void slotUpdatePayee();
 
-  void slotSelectTransaction();
+    void slotSelectTransaction();
 
-  void slotChangeFilter(int index);
+    void slotChangeFilter(int index);
 
-  /**
-    * This slot receives the signal from the listview control that an item was right-clicked,
-    * If @p points to a real payee item, emits openContextMenu().
-    *
-    * @param p position of the pointer device
-    */
-  void slotShowPayeesMenu(const QPoint& p);
+    /**
+      * This slot receives the signal from the listview control that an item was right-clicked,
+      * If @p points to a real payee item, emits openContextMenu().
+      *
+      * @param p position of the pointer device
+      */
+    void slotShowPayeesMenu(const QPoint& p);
 
-  void slotChooseDefaultAccount();
+    void slotChooseDefaultAccount();
 
-  /**
-    * Fetches the payee data from addressbook.
-    */
-  void slotSyncAddressBook();
-  void slotContactFetched(const ContactData &identity);
+    /**
+      * Fetches the payee data from addressbook.
+      */
+    void slotSyncAddressBook();
+    void slotContactFetched(const ContactData &identity);
 
-  /**
-    * Creates mail to payee.
-    */
-  void slotSendMail();
+    /**
+      * Creates mail to payee.
+      */
+    void slotSendMail();
 
-  void slotNewPayee();
-  void slotRenamePayee();
-  void slotDeletePayee();
-  void slotMergePayee();
+    void slotNewPayee();
+    void slotRenamePayee();
+    void slotDeletePayee();
+    void slotMergePayee();
 };
 
 #endif

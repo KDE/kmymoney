@@ -54,104 +54,104 @@ class QDateTime;
   */
 class KGPGFile : public QFile
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KGPGFile(const QString& fname = "",
-                    const QString& homedir = "~/.gnupg",
-                    const QString& options = "");
+    explicit KGPGFile(const QString& fname = "",
+                      const QString& homedir = "~/.gnupg",
+                      const QString& options = "");
 
-  ~KGPGFile();
+    ~KGPGFile();
 
-  bool open(OpenMode mode) final override;
-  void close() final override;
-  virtual void flush();
+    bool open(OpenMode mode) final override;
+    void close() final override;
+    virtual void flush();
 
-  qint64 readData(char *data, qint64 maxlen) final override;
-  qint64 writeData(const char *data, qint64 maxlen) final override;
+    qint64 readData(char *data, qint64 maxlen) final override;
+    qint64 writeData(const char *data, qint64 maxlen) final override;
 
-  /**
-    * Adds a recipient for whom the file should be encrypted.
-    * At least one recipient must be specified using this
-    * method before the file can be written to. @p recipient
-    * must contain a valid name as defined by GPG. See the
-    * GPG documentation for more information.
-    *
-    * @param recipient recipients identification (e.g. e-mail address)
-    */
-  void addRecipient(const QString& recipient);
+    /**
+      * Adds a recipient for whom the file should be encrypted.
+      * At least one recipient must be specified using this
+      * method before the file can be written to. @p recipient
+      * must contain a valid name as defined by GPG. See the
+      * GPG documentation for more information.
+      *
+      * @param recipient recipients identification (e.g. e-mail address)
+      */
+    void addRecipient(const QString& recipient);
 
-  /**
-    * sets the name of the file to @p fn. This method must be
-    * called prior to open().
-    */
-  void setFileName(const QString& fn);
+    /**
+      * sets the name of the file to @p fn. This method must be
+      * called prior to open().
+      */
+    void setFileName(const QString& fn);
 
-  /** This function returns the error from the GPG system as a user
-    * readable string. The strinf is empty if there were no errors.
-    */
-  QString errorToString() const;
+    /** This function returns the error from the GPG system as a user
+      * readable string. The strinf is empty if there were no errors.
+      */
+    QString errorToString() const;
 
-  /**
-   * This method returns the information about the expiration date of a key.
-   * An invalid QDateTime object is returned if @a name matches more than one
-   * key or the key does not have an expiration date.
-   */
-  QDateTime keyExpires(const QString& name);
+    /**
+     * This method returns the information about the expiration date of a key.
+     * An invalid QDateTime object is returned if @a name matches more than one
+     * key or the key does not have an expiration date.
+     */
+    QDateTime keyExpires(const QString& name);
 
-  /**
-    * Checks whether GPG is available or not
-    *
-    * @retval true GPG can be started and returns a version number
-    * @retval false GPG is not available
-    */
-  static bool GPGAvailable();
+    /**
+      * Checks whether GPG is available or not
+      *
+      * @retval true GPG can be started and returns a version number
+      * @retval false GPG is not available
+      */
+    static bool GPGAvailable();
 
-  /**
-    * Checks whether a key for a given user-id @p name exists.
-    *
-    * @param name the user-id to be checked. @p name can be
-    *             any reference understood by GPG (e.g. an e-mail
-    *             address or a key-id)
-    * @retval true key for user-id @p name was found
-    * @retval false key for user-id @p not available
-    */
-  static bool keyAvailable(const QString& name);
+    /**
+      * Checks whether a key for a given user-id @p name exists.
+      *
+      * @param name the user-id to be checked. @p name can be
+      *             any reference understood by GPG (e.g. an e-mail
+      *             address or a key-id)
+      * @retval true key for user-id @p name was found
+      * @retval false key for user-id @p not available
+      */
+    static bool keyAvailable(const QString& name);
 
-  /**
-    * This function returns a list of the secret keys contained
-    * in the keyring. Each list item is divided into two fields
-    * separated by a colon (':'). The first field contains the
-    * key id, the second field the name. The list may contain
-    * multiple entries with the same key-id and different names.
-    *
-    * Example of an entry in the list:
-    *
-    *    "9C59DB40B75DD3BA:Thomas Baumgart <ipwizard@users.sourceforge.net>"
-    */
-  static void secretKeyList(QStringList& list);
+    /**
+      * This function returns a list of the secret keys contained
+      * in the keyring. Each list item is divided into two fields
+      * separated by a colon (':'). The first field contains the
+      * key id, the second field the name. The list may contain
+      * multiple entries with the same key-id and different names.
+      *
+      * Example of an entry in the list:
+      *
+      *    "9C59DB40B75DD3BA:Thomas Baumgart <ipwizard@users.sourceforge.net>"
+      */
+    static void secretKeyList(QStringList& list);
 
-  /**
-    * This function returns a list of the public keys contained
-    * in the keyring. Each list item is divided into two fields
-    * separated by a colon (':'). The first field contains the
-    * key id, the second field the name. The list may contain
-    * multiple entries with the same key-id and different names.
-    *
-    * Example of an entry in the list:
-    *
-    *    "9C59DB40B75DD3BA:Thomas Baumgart <ipwizard@users.sourceforge.net>"
-    */
-  static void publicKeyList(QStringList& list);
-
-private:
-  void keyList(QStringList& list, bool secretKeys = false, const QString& pattern = QString());
+    /**
+      * This function returns a list of the public keys contained
+      * in the keyring. Each list item is divided into two fields
+      * separated by a colon (':'). The first field contains the
+      * key id, the second field the name. The list may contain
+      * multiple entries with the same key-id and different names.
+      *
+      * Example of an entry in the list:
+      *
+      *    "9C59DB40B75DD3BA:Thomas Baumgart <ipwizard@users.sourceforge.net>"
+      */
+    static void publicKeyList(QStringList& list);
 
 private:
-  /// \internal d-pointer class.
-  class Private;
-  /// \internal d-pointer instance.
-  Private* const d;
+    void keyList(QStringList& list, bool secretKeys = false, const QString& pattern = QString());
+
+private:
+    /// \internal d-pointer class.
+    class Private;
+    /// \internal d-pointer instance.
+    Private* const d;
 
 };
 

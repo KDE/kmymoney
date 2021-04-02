@@ -25,11 +25,11 @@ class QDomDocument;
 class QDomElement;
 
 namespace MyMoneyXmlContentHandler2 {
-  MyMoneyReport readReport(const QDomElement &node);
-  void writeReport(const MyMoneyReport &report, QDomDocument &document, QDomElement &parent);
+MyMoneyReport readReport(const QDomElement &node);
+void writeReport(const MyMoneyReport &report, QDomDocument &document, QDomElement &parent);
 
-  MyMoneyBudget readBudget(const QDomElement &node);
-  void writeBudget(const MyMoneyBudget &budget, QDomDocument &document, QDomElement &parent);
+MyMoneyBudget readBudget(const QDomElement &node);
+void writeBudget(const MyMoneyBudget &budget, QDomDocument &document, QDomElement &parent);
 }
 
 #endif

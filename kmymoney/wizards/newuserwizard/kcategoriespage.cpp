@@ -28,36 +28,36 @@
 
 namespace NewUserWizard
 {
-  class CategoriesPagePrivate : public WizardPagePrivate<Wizard>
-  {
+class CategoriesPagePrivate : public WizardPagePrivate<Wizard>
+{
     Q_DISABLE_COPY(CategoriesPagePrivate)
 
-  public:
+public:
     CategoriesPagePrivate(QObject* parent) :
-      WizardPagePrivate<Wizard>(parent)
+        WizardPagePrivate<Wizard>(parent)
     {
     }
-  };
+};
 
-  CategoriesPage::CategoriesPage(Wizard* wizard) :
+CategoriesPage::CategoriesPage(Wizard* wizard) :
     Accounts(wizard),
     WizardPage<Wizard>(*new CategoriesPagePrivate(wizard), stepCount++, this, wizard)
-  {
-  }
+{
+}
 
-  CategoriesPage::~CategoriesPage()
-  {
-  }
+CategoriesPage::~CategoriesPage()
+{
+}
 
-  KMyMoneyWizardPage* CategoriesPage::nextPage() const
-  {
+KMyMoneyWizardPage* CategoriesPage::nextPage() const
+{
     Q_D(const CategoriesPage);
     return d->m_wizard->d_func()->m_preferencePage;
-  }
+}
 
-  QList<MyMoneyTemplate> CategoriesPage::selectedTemplates() const
-  {
+QList<MyMoneyTemplate> CategoriesPage::selectedTemplates() const
+{
     return ui->m_templateSelector->selectedTemplates();
-  }
+}
 
 }

@@ -42,11 +42,11 @@
 
 namespace NewUserWizard
 {
-  int stepCount = 0;
+int stepCount = 0;
 
-  Wizard::Wizard(QWidget *parent, bool modal, Qt::WindowFlags flags) :
+Wizard::Wizard(QWidget *parent, bool modal, Qt::WindowFlags flags) :
     KMyMoneyWizard(*new WizardPrivate(this), parent, modal, flags)
-  {
+{
     Q_D(Wizard);
     bool isFirstTime = KMyMoneySettings::firstTimeRun();
 
@@ -54,14 +54,14 @@ namespace NewUserWizard
 
     setTitle(i18n("KMyMoney New File Setup"));
     if (isFirstTime)
-      addStep(i18nc("New file wizard introduction", "Introduction"));
+        addStep(i18nc("New file wizard introduction", "Introduction"));
     addStep(i18n("Personal Data"));
     addStep(i18n("Select Currency"));
     addStep(i18n("Select Accounts"));
     addStep(i18nc("Finish the wizard", "Finish"));
 
     if (isFirstTime)
-      d->m_introPage = new IntroPage(this);
+        d->m_introPage = new IntroPage(this);
     d->m_generalPage = new GeneralPage(this);
     d->m_currencyPage = new CurrencyPage(this);
     d->m_accountPage = new AccountPage(this);
@@ -70,73 +70,73 @@ namespace NewUserWizard
 
     d->m_accountPage->d_func()->ui->m_haveCheckingAccountButton->setChecked(true);
     if (isFirstTime)
-      d->setFirstPage(d->m_introPage);
+        d->setFirstPage(d->m_introPage);
     else
-      d->setFirstPage(d->m_generalPage);
+        d->setFirstPage(d->m_generalPage);
 
     setHelpContext("firsttime-3");
-  }
+}
 
-  Wizard::~Wizard()
-  {
-  }
+Wizard::~Wizard()
+{
+}
 
-  MyMoneyPayee Wizard::user() const
-  {
+MyMoneyPayee Wizard::user() const
+{
     Q_D(const Wizard);
     return d->m_generalPage->user();
-  }
+}
 
-  MyMoneyInstitution Wizard::institution() const
-  {
+MyMoneyInstitution Wizard::institution() const
+{
     Q_D(const Wizard);
     MyMoneyInstitution inst;
     if (d->m_accountPage->d_func()->ui->m_haveCheckingAccountButton->isChecked()) {
-      if (d->m_accountPage->d_func()->ui->m_institutionNameEdit->text().length()) {
-        inst.setName(d->m_accountPage->d_func()->ui->m_institutionNameEdit->text());
-        if (d->m_accountPage->d_func()->ui->m_institutionNumberEdit->text().length())
-          inst.setSortcode(d->m_accountPage->d_func()->ui->m_institutionNumberEdit->text());
-      }
+        if (d->m_accountPage->d_func()->ui->m_institutionNameEdit->text().length()) {
+            inst.setName(d->m_accountPage->d_func()->ui->m_institutionNameEdit->text());
+            if (d->m_accountPage->d_func()->ui->m_institutionNumberEdit->text().length())
+                inst.setSortcode(d->m_accountPage->d_func()->ui->m_institutionNumberEdit->text());
+        }
     }
     return inst;
-  }
+}
 
-  MyMoneyAccount Wizard::account() const
-  {
+MyMoneyAccount Wizard::account() const
+{
     Q_D(const Wizard);
     MyMoneyAccount acc;
     if (d->m_accountPage->d_func()->ui->m_haveCheckingAccountButton->isChecked()) {
-      acc.setName(d->m_accountPage->d_func()->ui->m_accountNameEdit->text());
-      if (d->m_accountPage->d_func()->ui->m_accountNumberEdit->text().length())
-        acc.setNumber(d->m_accountPage->d_func()->ui->m_accountNumberEdit->text());
-      acc.setOpeningDate(d->m_accountPage->d_func()->ui->m_openingDateEdit->date());
-      acc.setCurrencyId(d->m_baseCurrency.id());
-      acc.setAccountType(eMyMoney::Account::Type::Checkings);
+        acc.setName(d->m_accountPage->d_func()->ui->m_accountNameEdit->text());
+        if (d->m_accountPage->d_func()->ui->m_accountNumberEdit->text().length())
+            acc.setNumber(d->m_accountPage->d_func()->ui->m_accountNumberEdit->text());
+        acc.setOpeningDate(d->m_accountPage->d_func()->ui->m_openingDateEdit->date());
+        acc.setCurrencyId(d->m_baseCurrency.id());
+        acc.setAccountType(eMyMoney::Account::Type::Checkings);
     }
     return acc;
-  }
+}
 
-  MyMoneyMoney Wizard::openingBalance() const
-  {
+MyMoneyMoney Wizard::openingBalance() const
+{
     Q_D(const Wizard);
     return d->m_accountPage->d_func()->ui->m_openingBalanceEdit->value();
-  }
+}
 
-  MyMoneySecurity Wizard::baseCurrency() const
-  {
+MyMoneySecurity Wizard::baseCurrency() const
+{
     Q_D(const Wizard);
     return d->m_baseCurrency;
-  }
+}
 
-  QList<MyMoneyTemplate> Wizard::templates() const
-  {
+QList<MyMoneyTemplate> Wizard::templates() const
+{
     Q_D(const Wizard);
     return d->m_categoriesPage->selectedTemplates();
-  }
+}
 
-  bool Wizard::startSettingsAfterFinished() const
-  {
+bool Wizard::startSettingsAfterFinished() const
+{
     Q_D(const Wizard);
     return d->m_preferencePage->d_func()->ui->m_openConfigAfterFinished->checkState() == Qt::Checked;
-  }
+}
 }

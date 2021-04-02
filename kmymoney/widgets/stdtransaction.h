@@ -20,12 +20,12 @@
 
 namespace KMyMoneyRegister
 {
-  class StdTransactionPrivate;
-  class StdTransaction : public Transaction
-  {
+class StdTransactionPrivate;
+class StdTransaction : public Transaction
+{
     Q_DISABLE_COPY(StdTransaction)
 
-  public:
+public:
     explicit StdTransaction(Register* getParent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
     ~StdTransaction() override;
 
@@ -67,10 +67,10 @@ namespace KMyMoneyRegister
     */
     virtual void setShowRowInForm(int row, bool show) override;
 
-  protected:
+protected:
     Q_DECLARE_PRIVATE(StdTransaction)
     void setupFormHeader(const QString& id);
-  };
+};
 } // namespace
 
 #endif

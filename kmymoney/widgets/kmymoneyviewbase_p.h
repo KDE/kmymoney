@@ -18,9 +18,9 @@
 class KMyMoneyViewBasePrivate
 {
 public:
-  virtual ~KMyMoneyViewBasePrivate(){}
+    virtual ~KMyMoneyViewBasePrivate() {}
 
-  bool m_needsRefresh;
+    bool m_needsRefresh;
 };
 
 #endif

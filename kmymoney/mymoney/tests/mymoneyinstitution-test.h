@@ -13,22 +13,22 @@ class MyMoneyInstitution;
 
 class MyMoneyInstitutionTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 protected:
-  MyMoneyInstitution *m, *n;
+    MyMoneyInstitution *m, *n;
 
 private Q_SLOTS:
-  void init();
-  void cleanup();
-  void testEmptyConstructor();
-  void testSetFunctions();
-  void testNonemptyConstructor();
-  void testCopyConstructor();
-  void testMyMoneyFileConstructor();
-  void testEquality();
-  void testInequality();
-  void testAccountIDList();
+    void init();
+    void cleanup();
+    void testEmptyConstructor();
+    void testSetFunctions();
+    void testNonemptyConstructor();
+    void testCopyConstructor();
+    void testMyMoneyFileConstructor();
+    void testEquality();
+    void testInequality();
+    void testAccountIDList();
 };
 
 #endif

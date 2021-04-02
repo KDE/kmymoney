@@ -18,56 +18,66 @@
 
 #include "fancydategroupmarker.h"
 
-namespace eWidgets { enum class SortField;
-                     namespace Transaction { enum class Column; }
-                     namespace Register { enum class DetailColumn;} }
-namespace eMyMoney { namespace Account { enum class Type; } }
+namespace eWidgets {
+enum class SortField;
+namespace Transaction {
+enum class Column;
+}
+namespace Register {
+enum class DetailColumn;
+}
+}
+namespace eMyMoney {
+namespace Account {
+enum class Type;
+}
+}
 
 namespace KMyMoneyRegister
 {
-  class Register;
+class Register;
 
-  class StatementGroupMarkerPrivate;
-  class StatementGroupMarker : public FancyDateGroupMarker
-  {
+class StatementGroupMarkerPrivate;
+class StatementGroupMarker : public FancyDateGroupMarker
+{
     Q_DISABLE_COPY(StatementGroupMarker)
 
-  public:
+public:
     explicit StatementGroupMarker(Register* getParent, eWidgets::eRegister::CashFlowDirection dir, const QDate& date, const QString& txt);
     ~StatementGroupMarker() override;
 
     eWidgets::eRegister::CashFlowDirection sortType() const override;
     int sortSamePostDate() const override;
 
-  private:
+private:
     Q_DECLARE_PRIVATE(StatementGroupMarker)
-  };
+};
 
 
-  class SimpleDateGroupMarker : public FancyDateGroupMarker
-  {
+class SimpleDateGroupMarker : public FancyDateGroupMarker
+{
     Q_DISABLE_COPY(SimpleDateGroupMarker)
 
-  public:
+public:
     explicit SimpleDateGroupMarker(Register* getParent, const QDate& date, const QString& txt);
     ~SimpleDateGroupMarker() override;
 
     void paintRegisterCell(QPainter *painter, QStyleOptionViewItem &option, const QModelIndex &index) override;
     int rowHeightHint() const override;
     const char* className() override;
-  };
+};
 
-  class FiscalYearGroupMarker : public FancyDateGroupMarker
-  {
+class FiscalYearGroupMarker : public FancyDateGroupMarker
+{
     Q_DISABLE_COPY(FiscalYearGroupMarker)
 
-  public:
+public:
     explicit FiscalYearGroupMarker(Register* getParent, const QDate& date, const QString& txt);
     ~FiscalYearGroupMarker() override;
 
     const char* className() override;
     int sortSamePostDate() const override;
-  };
+};
 
 } // namespace
 

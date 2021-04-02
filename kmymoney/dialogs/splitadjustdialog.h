@@ -15,25 +15,25 @@
 
 class SplitAdjustDialog : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit SplitAdjustDialog(QWidget* parent, Qt::WindowFlags f = 0);
-  virtual ~SplitAdjustDialog();
+    explicit SplitAdjustDialog(QWidget* parent, Qt::WindowFlags f = 0);
+    virtual ~SplitAdjustDialog();
 
-  void setValues(QString transactionSum, QString splitSum, QString diff, int splitCount);
+    void setValues(QString transactionSum, QString splitSum, QString diff, int splitCount);
 
-  enum Options {
-    SplitAdjustContinue,
-    SplitAdjustChange,
-    SplitAdjustDistribute,
-    SplitAdjustLeaveAsIs,
-  };
+    enum Options {
+        SplitAdjustContinue,
+        SplitAdjustChange,
+        SplitAdjustDistribute,
+        SplitAdjustLeaveAsIs,
+    };
 
-  Options selectedOption() const;
-  
+    Options selectedOption() const;
+
 private:
-  class Private;
-  QScopedPointer<Private> d;
+    class Private;
+    QScopedPointer<Private> d;
 };
 
 #endif // SPLITADJUSTDIALOG_H

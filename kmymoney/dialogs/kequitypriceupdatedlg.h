@@ -35,35 +35,35 @@ typedef QMap<MyMoneySecurityPair, MyMoneyPriceEntries> MyMoneyPriceList;
 class KEquityPriceUpdateDlgPrivate;
 class KEquityPriceUpdateDlg : public QDialog
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KEquityPriceUpdateDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(KEquityPriceUpdateDlg)
 
 public:
-  explicit KEquityPriceUpdateDlg(QWidget *parent, const QString& securityId = QString());
-  ~KEquityPriceUpdateDlg();
-  void storePrices();
-  MyMoneyPrice price(const QString& id) const;
+    explicit KEquityPriceUpdateDlg(QWidget *parent, const QString& securityId = QString());
+    ~KEquityPriceUpdateDlg();
+    void storePrices();
+    MyMoneyPrice price(const QString& id) const;
 
 protected Q_SLOTS:
-  void slotConfigureClicked();
-  void slotUpdateSelectedClicked();
-  void slotUpdateAllClicked();
-  void slotUpdateSelection();
-  void slotDateChanged();
+    void slotConfigureClicked();
+    void slotUpdateSelectedClicked();
+    void slotUpdateAllClicked();
+    void slotUpdateSelection();
+    void slotDateChanged();
 
-  void logStatusMessage(const QString&);
-  void logErrorMessage(const QString&);
-  void slotReceivedCSVQuote(const QString& _kmmID, const QString& _webID, MyMoneyStatement& st);
-  void slotReceivedQuote(const QString& _kmmID, const QString& _webID, const QDate&, const double&);
-  void slotQuoteFailed(const QString& _kmmID, const QString& _webID);
+    void logStatusMessage(const QString&);
+    void logErrorMessage(const QString&);
+    void slotReceivedCSVQuote(const QString& _kmmID, const QString& _webID, MyMoneyStatement& st);
+    void slotReceivedQuote(const QString& _kmmID, const QString& _webID, const QDate&, const double&);
+    void slotQuoteFailed(const QString& _kmmID, const QString& _webID);
 
 protected:
-  void addInvestment(const MyMoneySecurity& inv);
-  void finishUpdate();
+    void addInvestment(const MyMoneySecurity& inv);
+    void finishUpdate();
 
 private:
-  KEquityPriceUpdateDlgPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KEquityPriceUpdateDlg)
+    KEquityPriceUpdateDlgPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KEquityPriceUpdateDlg)
 
 };
 

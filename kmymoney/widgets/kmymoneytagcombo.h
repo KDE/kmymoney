@@ -33,27 +33,27 @@ class MyMoneyTag;
 class KMyMoneyTagComboPrivate;
 class KMM_WIDGETS_EXPORT KMyMoneyTagCombo : public KMyMoneyMVCCombo
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyTagCombo)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyTagCombo)
 
 public:
-  explicit KMyMoneyTagCombo(QWidget* parent = nullptr);
-  ~KMyMoneyTagCombo() override;
+    explicit KMyMoneyTagCombo(QWidget* parent = nullptr);
+    ~KMyMoneyTagCombo() override;
 
-  void loadTags(const QList<MyMoneyTag>& list);
-  /** ids in usedIdList are escluded from the internal list
-    * you should call loadTags before calling setUsedTagList because it doesn't readd
-    * tag removed in previous call*/
-  void setUsedTagList(QList<QString>& usedIdList, QList<QString>& usedTagNameList);
+    void loadTags(const QList<MyMoneyTag>& list);
+    /** ids in usedIdList are escluded from the internal list
+      * you should call loadTags before calling setUsedTagList because it doesn't readd
+      * tag removed in previous call*/
+    void setUsedTagList(QList<QString>& usedIdList, QList<QString>& usedTagNameList);
 
 protected:
-  /**
-    * check if the current text is contained in the internal list, if not ask the user if want to create a new item.
-    */
-  virtual void checkCurrentText() override;
+    /**
+      * check if the current text is contained in the internal list, if not ask the user if want to create a new item.
+      */
+    virtual void checkCurrentText() override;
 
 private:
-  Q_DECLARE_PRIVATE(KMyMoneyTagCombo)
+    Q_DECLARE_PRIVATE(KMyMoneyTagCombo)
 };
 
 #endif

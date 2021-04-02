@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class CalculationOverviewWizardPage; }
+namespace Ui {
+class CalculationOverviewWizardPage;
+}
 
 /**
  * This class implements the Calculation Overview page of the
@@ -26,13 +28,13 @@ namespace Ui { class CalculationOverviewWizardPage; }
 
 class CalculationOverviewWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit CalculationOverviewWizardPage(QWidget *parent = nullptr);
-  ~CalculationOverviewWizardPage();
+    explicit CalculationOverviewWizardPage(QWidget *parent = nullptr);
+    ~CalculationOverviewWizardPage();
 
 private:
-  Ui::CalculationOverviewWizardPage *ui;
+    Ui::CalculationOverviewWizardPage *ui;
 };
 
 #endif

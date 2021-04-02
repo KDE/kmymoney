@@ -20,26 +20,26 @@ class MyMoneyQifReader;
 
 class QIFExporter : public KMyMoneyPlugin::Plugin
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit QIFExporter(QObject *parent, const QVariantList &args);
-  ~QIFExporter() override;
+    explicit QIFExporter(QObject *parent, const QVariantList &args);
+    ~QIFExporter() override;
 
-  QAction          *m_action;
+    QAction          *m_action;
 
-  MyMoneyQifReader *m_qifReader;
+    MyMoneyQifReader *m_qifReader;
 
 public Q_SLOTS:
-  /**
-    * Called when the user wishes to export some transaction to a
-    * QIF formatted file. An account must be open for this to work.
-    * Uses MyMoneyQifWriter() for the actual output.
-    */
-  void slotQifExport();
+    /**
+      * Called when the user wishes to export some transaction to a
+      * QIF formatted file. An account must be open for this to work.
+      * Uses MyMoneyQifWriter() for the actual output.
+      */
+    void slotQifExport();
 
 protected:
-  void createActions();
+    void createActions();
 };
 
 #endif

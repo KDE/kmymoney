@@ -16,38 +16,38 @@
 #include "mymoneyexception.h"
 
 MyMoneyObject::MyMoneyObject(MyMoneyObjectPrivate &dd) :
-  d_ptr(&dd)
+    d_ptr(&dd)
 {
 }
 
 MyMoneyObject::MyMoneyObject(MyMoneyObjectPrivate &dd,
                              const QString& id) :
-  d_ptr(&dd)
+    d_ptr(&dd)
 {
-  Q_D(MyMoneyObject);
-  d->m_id = id;
+    Q_D(MyMoneyObject);
+    d->m_id = id;
 }
 
 MyMoneyObject::~MyMoneyObject()
 {
-  Q_D(MyMoneyObject);
-  delete d;
+    Q_D(MyMoneyObject);
+    delete d;
 }
 
 QString MyMoneyObject::id() const
 {
-  Q_D(const MyMoneyObject);
-  return d->m_id;
+    Q_D(const MyMoneyObject);
+    return d->m_id;
 }
 
 bool MyMoneyObject::operator == (const MyMoneyObject& right) const
 {
-  Q_D(const MyMoneyObject);
-  return d->m_id == right.d_func()->m_id;
+    Q_D(const MyMoneyObject);
+    return d->m_id == right.d_func()->m_id;
 }
 
 void MyMoneyObject::clearId()
 {
-  Q_D(MyMoneyObject);
-  d->m_id.clear();
+    Q_D(MyMoneyObject);
+    d->m_id.clear();
 }

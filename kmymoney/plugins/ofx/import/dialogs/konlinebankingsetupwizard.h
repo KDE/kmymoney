@@ -48,51 +48,51 @@ class OfxHeaderVersion;
 
 class KOnlineBankingSetupWizard : public QWizard, public Ui::KOnlineBankingSetupWizard
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  class ListViewItem: public MyMoneyKeyValueContainer, public QTreeWidgetItem
-  {
-  public:
-    ListViewItem(QTreeWidget* parent, const MyMoneyKeyValueContainer& kvps);
-    // virtual void x();
-  };
+    class ListViewItem: public MyMoneyKeyValueContainer, public QTreeWidgetItem
+    {
+    public:
+        ListViewItem(QTreeWidget* parent, const MyMoneyKeyValueContainer& kvps);
+        // virtual void x();
+    };
 
-  explicit KOnlineBankingSetupWizard(QWidget *parent = 0);
-  ~KOnlineBankingSetupWizard();
+    explicit KOnlineBankingSetupWizard(QWidget *parent = 0);
+    ~KOnlineBankingSetupWizard();
 
-  bool chosenSettings(MyMoneyKeyValueContainer& settings);
+    bool chosenSettings(MyMoneyKeyValueContainer& settings);
 
-  bool isInit() const {
-    return m_fInit;
-  }
+    bool isInit() const {
+        return m_fInit;
+    }
 
 protected Q_SLOTS:
-  void checkNextButton();
-  void newPage(int id);
-  void walletOpened(bool ok);
-  void applicationSelectionChanged();
+    void checkNextButton();
+    void newPage(int id);
+    void walletOpened(bool ok);
+    void applicationSelectionChanged();
 
 protected:
-  bool finishAccountPage();
-  bool finishLoginPage();
-  bool finishFiPage();
-  bool post(const char* request, const char* url, const char* filename);
+    bool finishAccountPage();
+    bool finishLoginPage();
+    bool finishFiPage();
+    bool post(const char* request, const char* url, const char* filename);
 
-  static int ofxAccountCallback(struct OfxAccountData data, void * pv);
-  static int ofxStatusCallback(struct OfxStatusData data, void * pv);
+    static int ofxAccountCallback(struct OfxAccountData data, void * pv);
+    static int ofxStatusCallback(struct OfxStatusData data, void * pv);
 
 private:
-  /// \internal d-pointer class.
-  class Private;
-  /// \internal d-pointer instance.
-  Private* const d;
+    /// \internal d-pointer class.
+    class Private;
+    /// \internal d-pointer instance.
+    Private* const d;
 
-  QList<OfxFiServiceInfo> m_bankInfo;
-  QList<OfxFiServiceInfo>::const_iterator m_it_info;
-  bool m_fDone;
-  bool m_fInit;
-  OfxAppVersion* m_appId;
-  OfxHeaderVersion* m_headerVersion;
+    QList<OfxFiServiceInfo> m_bankInfo;
+    QList<OfxFiServiceInfo>::const_iterator m_it_info;
+    bool m_fDone;
+    bool m_fInit;
+    OfxAppVersion* m_appId;
+    OfxHeaderVersion* m_headerVersion;
 };
 
 #endif

@@ -21,9 +21,9 @@
 namespace KMyMoneyRegister
 {
 
-  class StdTransactionScheduled : public StdTransaction
-  {
-  public:
+class StdTransactionScheduled : public StdTransaction
+{
+public:
     explicit StdTransactionScheduled(Register* getParent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
     ~StdTransactionScheduled() override;
 
@@ -39,7 +39,7 @@ namespace KMyMoneyRegister
     //   virtual void paintRegisterGrid(QPainter* painter, int row, int col, const QRect& r, const QColorGroup& cg) const;
 
     //   void registerCellText(QString& txt, Qt::Alignment& align, int row, int col, QPainter* painter = 0);
-  };
+};
 
 } // namespace
 

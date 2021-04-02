@@ -19,7 +19,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class KUpdateStockPriceDlg; }
+namespace Ui {
+class KUpdateStockPriceDlg;
+}
 
 class QDate;
 
@@ -31,24 +33,24 @@ class MyMoneyMoney;
 
 class KUpdateStockPriceDlg : public QDialog
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KUpdateStockPriceDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(KUpdateStockPriceDlg)
 
 public:
-  explicit KUpdateStockPriceDlg(QWidget* parent = nullptr);
-  ~KUpdateStockPriceDlg();
+    explicit KUpdateStockPriceDlg(QWidget* parent = nullptr);
+    ~KUpdateStockPriceDlg();
 
-  QDate date() const;
-  MyMoneyMoney price() const;
+    QDate date() const;
+    MyMoneyMoney price() const;
 
-  Ui::KUpdateStockPriceDlg *ui;
+    Ui::KUpdateStockPriceDlg *ui;
 
 public Q_SLOTS:
-  int exec() override;
+    int exec() override;
 
 protected Q_SLOTS:
-  void slotCheckData();
-  void slotCheckData(int idx);
+    void slotCheckData();
+    void slotCheckData(int idx);
 };
 
 #endif

@@ -24,7 +24,7 @@ void AmountValidatorTest::cleanup()
 }
 
 
-void AmountValidatorTest::setLocale(const QString& name, const QChar& decimal , const QChar& group)
+void AmountValidatorTest::setLocale(const QString& name, const QChar& decimal, const QChar& group)
 {
     currentLocale = name;
     currentDecimalPoint = decimal;

@@ -27,23 +27,23 @@ class MyMoneyTemplate;
 class KAccountTemplateSelectorPrivate;
 class KAccountTemplateSelector : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KAccountTemplateSelector)
+    Q_OBJECT
+    Q_DISABLE_COPY(KAccountTemplateSelector)
 
 public:
-  explicit KAccountTemplateSelector(QWidget* parent = nullptr);
-  ~KAccountTemplateSelector();
+    explicit KAccountTemplateSelector(QWidget* parent = nullptr);
+    ~KAccountTemplateSelector();
 
-  QList<MyMoneyTemplate> selectedTemplates() const;
+    QList<MyMoneyTemplate> selectedTemplates() const;
 
 private Q_SLOTS:
-  void slotLoadHierarchy();
-  void slotLoadCountry();
-  void slotLoadTemplateList();
+    void slotLoadHierarchy();
+    void slotLoadCountry();
+    void slotLoadTemplateList();
 
 private:
-  KAccountTemplateSelectorPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KAccountTemplateSelector)
+    KAccountTemplateSelectorPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KAccountTemplateSelector)
 };
 
 #endif

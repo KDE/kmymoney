@@ -16,13 +16,13 @@
 // Project Includes
 
 AmountValidator::AmountValidator(QObject * parent) :
-  AmountValidator(-HUGE_VAL, HUGE_VAL, 1000, parent)
+    AmountValidator(-HUGE_VAL, HUGE_VAL, 1000, parent)
 {
 }
 
 AmountValidator::AmountValidator(double bottom, double top, int decimals,
-    QObject * parent) :
+                                 QObject * parent) :
     QDoubleValidator(bottom, top, decimals, parent)
 {
-  setNotation(StandardNotation);
+    setNotation(StandardNotation);
 }

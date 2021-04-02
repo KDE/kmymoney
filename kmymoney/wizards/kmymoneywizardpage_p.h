@@ -49,7 +49,7 @@ public:
 
     void emitCompleteStateChanged()
     {
-      emit completeStateChanged();
+        emit completeStateChanged();
     }
 
     uint                  m_step;

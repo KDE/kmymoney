@@ -13,35 +13,35 @@
 QTEST_GUILESS_MAIN(ParseDataTest);
 
 ParseDataTest::ParseDataTest() :
-  m_parse(nullptr)
+    m_parse(nullptr)
 {
 }
 
 void ParseDataTest::init()
 {
-  m_parse = new Parse;
+    m_parse = new Parse;
 }
 
 void ParseDataTest::cleanup()
 {
-  delete m_parse;
+    delete m_parse;
 }
 
 void ParseDataTest::parseSplitString()
 {
-  QVector<FieldDelimiter> delimiters {FieldDelimiter::Comma, FieldDelimiter::Semicolon, FieldDelimiter::Colon, FieldDelimiter::Tab};
-  foreach (const auto delimiter, delimiters) { //        All four delimiters should produce same result
-    m_parse->setFieldDelimiter(delimiter);
+    QVector<FieldDelimiter> delimiters {FieldDelimiter::Comma, FieldDelimiter::Semicolon, FieldDelimiter::Colon, FieldDelimiter::Tab};
+    foreach (const auto delimiter, delimiters) { //        All four delimiters should produce same result
+        m_parse->setFieldDelimiter(delimiter);
 
-    QString input = "abc,defgh,";//  When this string is QString::split(), two strings
-    //  ....will result if ',' is the field delimiter.
-    //      This is not good.
-    input.prepend('"');  //            make input string quoted
-    input.append('"');
-    QStringList expected;
-    expected << "abc,defgh,";
-    QVERIFY(m_parse->parseLine(input) == expected);   // if parseLine() detects the condition,
-  }                                                   // ...it rebuilds the string
+        QString input = "abc,defgh,";//  When this string is QString::split(), two strings
+        //  ....will result if ',' is the field delimiter.
+        //      This is not good.
+        input.prepend('"');  //            make input string quoted
+        input.append('"');
+        QStringList expected;
+        expected << "abc,defgh,";
+        QVERIFY(m_parse->parseLine(input) == expected);   // if parseLine() detects the condition,
+    }                                                   // ...it rebuilds the string
 }
 
 void ParseDataTest::parse_data()

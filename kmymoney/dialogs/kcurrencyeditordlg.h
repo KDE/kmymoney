@@ -27,18 +27,18 @@ class MyMoneySecurity;
 class KCurrencyEditorDlgPrivate;
 class KCurrencyEditorDlg : public QDialog
 {
-  Q_DISABLE_COPY(KCurrencyEditorDlg)
+    Q_DISABLE_COPY(KCurrencyEditorDlg)
 
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit KCurrencyEditorDlg(const MyMoneySecurity &currency, QWidget *parent = nullptr);
-  ~KCurrencyEditorDlg();
+    explicit KCurrencyEditorDlg(const MyMoneySecurity &currency, QWidget *parent = nullptr);
+    ~KCurrencyEditorDlg();
 
-  MyMoneySecurity currency() const;
+    MyMoneySecurity currency() const;
 
 private:
-  KCurrencyEditorDlgPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KCurrencyEditorDlg)
+    KCurrencyEditorDlgPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KCurrencyEditorDlg)
 };
 
 #endif

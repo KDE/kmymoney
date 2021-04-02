@@ -25,32 +25,32 @@ class MyMoneyKeyValueContainer;
 class WeboobPrivate;
 class Weboob : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::OnlinePlugin
 {
-  Q_OBJECT
-  Q_INTERFACES(KMyMoneyPlugin::OnlinePlugin)
+    Q_OBJECT
+    Q_INTERFACES(KMyMoneyPlugin::OnlinePlugin)
 
 public:
-  explicit Weboob(QObject *parent, const QVariantList &args);
-  ~Weboob() override;
+    explicit Weboob(QObject *parent, const QVariantList &args);
+    ~Weboob() override;
 
-  void plug() override;
-  void unplug() override;
+    void plug() override;
+    void unplug() override;
 
-  void protocols(QStringList& protocolList) const override;
+    void protocols(QStringList& protocolList) const override;
 
-  QWidget* accountConfigTab(const MyMoneyAccount& account, QString& tabName) override;
+    QWidget* accountConfigTab(const MyMoneyAccount& account, QString& tabName) override;
 
-  MyMoneyKeyValueContainer onlineBankingSettings(const MyMoneyKeyValueContainer& current) override;
+    MyMoneyKeyValueContainer onlineBankingSettings(const MyMoneyKeyValueContainer& current) override;
 
-  bool mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& onlineBankingSettings) override;
+    bool mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& onlineBankingSettings) override;
 
-  bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts = false) override;
+    bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts = false) override;
 
 private:
-  Q_DECLARE_PRIVATE(Weboob)
-  WeboobPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(Weboob)
+    WeboobPrivate * const d_ptr;
 
 private Q_SLOTS:
-  void gotAccount();
+    void gotAccount();
 };
 
 #endif

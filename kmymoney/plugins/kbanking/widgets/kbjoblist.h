@@ -21,17 +21,17 @@ class KBJobListViewItem;
 class KBJobListViewItem: public QTreeWidgetItem
 {
 private:
-  AB_TRANSACTION *_job;
+    AB_TRANSACTION *_job;
 
-  void _populate();
+    void _populate();
 
 public:
-  KBJobListViewItem(KBJobListView *parent, AB_TRANSACTION *j);
-  KBJobListViewItem(const KBJobListViewItem &item);
+    KBJobListViewItem(KBJobListView *parent, AB_TRANSACTION *j);
+    KBJobListViewItem(const KBJobListViewItem &item);
 
-  virtual ~KBJobListViewItem();
+    virtual ~KBJobListViewItem();
 
-  AB_TRANSACTION *getJob();
+    AB_TRANSACTION *getJob();
 };
 
 
@@ -40,14 +40,14 @@ class KBJobListView: public QTreeWidget
 {
 private:
 public:
-  explicit KBJobListView(QWidget *parent = 0);
-  virtual ~KBJobListView();
+    explicit KBJobListView(QWidget *parent = 0);
+    virtual ~KBJobListView();
 
-  void addJob(AB_TRANSACTION *j);
-  void addJobs(const std::list<AB_TRANSACTION*> &js);
+    void addJob(AB_TRANSACTION *j);
+    void addJobs(const std::list<AB_TRANSACTION*> &js);
 
-  AB_TRANSACTION *getCurrentJob();
-  std::list<AB_TRANSACTION*> getSelectedJobs();
+    AB_TRANSACTION *getCurrentJob();
+    std::list<AB_TRANSACTION*> getSelectedJobs();
 };
 
 

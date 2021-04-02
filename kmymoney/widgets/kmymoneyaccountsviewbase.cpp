@@ -32,12 +32,12 @@ KMyMoneyAccountsViewBase::~KMyMoneyAccountsViewBase()
 
 AccountsViewProxyModel *KMyMoneyAccountsViewBase::getProxyModel()
 {
-  Q_D(KMyMoneyAccountsViewBase);
-  return d->m_proxyModel;
+    Q_D(KMyMoneyAccountsViewBase);
+    return d->m_proxyModel;
 }
 
 KMyMoneyAccountTreeView *KMyMoneyAccountsViewBase::getTreeView()
 {
-  Q_D(KMyMoneyAccountsViewBase);
-  return *d->m_accountTree;
+    Q_D(KMyMoneyAccountsViewBase);
+    return *d->m_accountTree;
 }

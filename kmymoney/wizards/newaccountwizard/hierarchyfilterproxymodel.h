@@ -23,23 +23,23 @@ class MyMoneyInstitution;
 
 namespace NewAccountWizard
 {
-  class HierarchyFilterProxyModelPrivate;
-  class HierarchyFilterProxyModel : public AccountsProxyModel
-  {
+class HierarchyFilterProxyModelPrivate;
+class HierarchyFilterProxyModel : public AccountsProxyModel
+{
     Q_OBJECT
     Q_DISABLE_COPY(HierarchyFilterProxyModel)
 
-  public:
+public:
     explicit HierarchyFilterProxyModel(QObject *parent = nullptr);
     ~HierarchyFilterProxyModel() override;
 
-  protected:
+protected:
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
     bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override;
 
-  private:
+private:
     Q_DECLARE_PRIVATE(HierarchyFilterProxyModel)
-  };
+};
 } // namespace
 
 #endif

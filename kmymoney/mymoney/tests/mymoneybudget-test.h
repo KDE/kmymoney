@@ -10,21 +10,21 @@
 
 class MyMoneyBudgetTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 protected:
 private Q_SLOTS:
-  void init();
-  void addMonthlyToMonthly();
-  void addMonthlyToYearly();
-  void addMonthlyToMonthByMonth();
-  void addYearlyToMonthly();
-  void addYearlyToYearly();
-  void addYearlyToMonthByMonth();
-  void addMonthByMonthToMonthly();
-  void addMonthByMonthToYearly();
-  void addMonthByMonthToMonthByMonth();
-  void cleanup();
+    void init();
+    void addMonthlyToMonthly();
+    void addMonthlyToYearly();
+    void addMonthlyToMonthByMonth();
+    void addYearlyToMonthly();
+    void addYearlyToYearly();
+    void addYearlyToMonthByMonth();
+    void addMonthByMonthToMonthly();
+    void addMonthByMonthToYearly();
+    void addMonthByMonthToMonthByMonth();
+    void cleanup();
 };
 
 #endif

@@ -124,118 +124,118 @@ class KMyMoneyWizardPagePrivate;
 class KMyMoneyWizardPage
 {
 public:
-  /**
-    * This method is called by the wizard when the page is entered from
-    * the previous page. The default implementation does nothing.
-    */
-  virtual void enterPage();
+    /**
+      * This method is called by the wizard when the page is entered from
+      * the previous page. The default implementation does nothing.
+      */
+    virtual void enterPage();
 
-  /**
-    * This method is called by the wizard when the page is left to return to
-    * the previous page. The default implementation does nothing.
-    */
-  virtual void leavePage();
+    /**
+      * This method is called by the wizard when the page is left to return to
+      * the previous page. The default implementation does nothing.
+      */
+    virtual void leavePage();
 
-  /**
-    * This method is called by the wizard whenever a page is entered
-    * (either in forward or backward direction). The default
-    * implementation does nothing.
-    */
-  virtual void resetPage();
+    /**
+      * This method is called by the wizard whenever a page is entered
+      * (either in forward or backward direction). The default
+      * implementation does nothing.
+      */
+    virtual void resetPage();
 
-  /**
-    * This method returns a pointer to the next page that should be
-    * shown when the user presses the 'Next' button.
-    *
-    * @return pointer to next wizard page
-    */
-  virtual KMyMoneyWizardPage* nextPage() const;
+    /**
+      * This method returns a pointer to the next page that should be
+      * shown when the user presses the 'Next' button.
+      *
+      * @return pointer to next wizard page
+      */
+    virtual KMyMoneyWizardPage* nextPage() const;
 
-  /**
-    * This returns, if the current page is the last page of the wizard.
-    * The default implementation returns @p false if nextPage() returns 0,
-    * @p true otherwise.
-    *
-    * @retval false more pages follow
-    * @retval true this is the last page of the wizard
-    */
-  virtual bool isLastPage() const;
+    /**
+      * This returns, if the current page is the last page of the wizard.
+      * The default implementation returns @p false if nextPage() returns 0,
+      * @p true otherwise.
+      *
+      * @retval false more pages follow
+      * @retval true this is the last page of the wizard
+      */
+    virtual bool isLastPage() const;
 
-  /**
-    * This returns, if all necessary data for this page has been
-    * filled. It is used to enabled the 'Next' or 'Finish' button.
-    * The button is only enabled, if this method returns @p true,
-    * which is the default implementation.
-    *
-    * @retval false more data required from the user before we can proceed
-    * @retval true all data available, we allow to switch to the next page
-    */
-  virtual bool isComplete() const;
+    /**
+      * This returns, if all necessary data for this page has been
+      * filled. It is used to enabled the 'Next' or 'Finish' button.
+      * The button is only enabled, if this method returns @p true,
+      * which is the default implementation.
+      *
+      * @retval false more data required from the user before we can proceed
+      * @retval true all data available, we allow to switch to the next page
+      */
+    virtual bool isComplete() const;
 
-  /**
-    * This method returns the step to which this page belongs.
-    * It is required by the KMyMoneyWizard and is not intended
-    * to be used by application code.
-    *
-    * @return step of wizard this page belongs to
-    */
-  unsigned int step() const;
+    /**
+      * This method returns the step to which this page belongs.
+      * It is required by the KMyMoneyWizard and is not intended
+      * to be used by application code.
+      *
+      * @return step of wizard this page belongs to
+      */
+    unsigned int step() const;
 
-  /**
-    * This method returns a pointer to the widget of the page.
-    * It is required by the KMyMoneyWizard and is not intended
-    * to be used by application code.
-    *
-    * @return pointer to widget of page
-    */
-  QWidget* widget() const;
+    /**
+      * This method returns a pointer to the widget of the page.
+      * It is required by the KMyMoneyWizard and is not intended
+      * to be used by application code.
+      *
+      * @return pointer to widget of page
+      */
+    QWidget* widget() const;
 
-  /**
-    * This method returns a pointer to the QObject used for
-    * the signal/slot mechanism.
-    * It is required by the KMyMoneyWizard and can be used
-    * by application code for signal/slot connections as well.
-    * Other use is not foreseen.
-    */
-  const KMyMoneyWizardPagePrivate *object() const;
+    /**
+      * This method returns a pointer to the QObject used for
+      * the signal/slot mechanism.
+      * It is required by the KMyMoneyWizard and can be used
+      * by application code for signal/slot connections as well.
+      * Other use is not foreseen.
+      */
+    const KMyMoneyWizardPagePrivate *object() const;
 
-  /**
-    * This method returns a pointer to the widget which should
-    * receive the focus when the page is opened.
-    *
-    * @return pointer to widget or 0 if none is to be selected
-    *         The default implementation returns 0
-    */
-  virtual QWidget* initialFocusWidget() const;
+    /**
+      * This method returns a pointer to the widget which should
+      * receive the focus when the page is opened.
+      *
+      * @return pointer to widget or 0 if none is to be selected
+      *         The default implementation returns 0
+      */
+    virtual QWidget* initialFocusWidget() const;
 
-  virtual KMyMoneyWizard* wizard() const = 0;
+    virtual KMyMoneyWizard* wizard() const = 0;
 
-  /**
-   * This method returns a specific help context for the page shown
-   * The default returns an empty string.
-   */
-  virtual QString helpContext() const;
+    /**
+     * This method returns a specific help context for the page shown
+     * The default returns an empty string.
+     */
+    virtual QString helpContext() const;
 
-  virtual ~KMyMoneyWizardPage();
+    virtual ~KMyMoneyWizardPage();
 protected:
-  KMyMoneyWizardPagePrivate * const d_ptr;
+    KMyMoneyWizardPagePrivate * const d_ptr;
 
-  KMyMoneyWizardPage(KMyMoneyWizardPagePrivate &dd, uint step, QWidget *widget);
-  Q_DECLARE_PRIVATE(KMyMoneyWizardPage)
+    KMyMoneyWizardPage(KMyMoneyWizardPagePrivate &dd, uint step, QWidget *widget);
+    Q_DECLARE_PRIVATE(KMyMoneyWizardPage)
 
-  /**
-    * Constructor (kept protected, so that one cannot create such an object directly)
-    */
-  explicit KMyMoneyWizardPage(uint step, QWidget* widget);
+    /**
+      * Constructor (kept protected, so that one cannot create such an object directly)
+      */
+    explicit KMyMoneyWizardPage(uint step, QWidget* widget);
 
-  /**
-    * This method must be called by the implementation when the
-    * data in the fields of the wizard change and the state of
-    * completeness changed.
-    *
-    * @note If you do not override isComplete() then there is no need
-    * to call this method.
-    */
-  void completeStateChanged();
+    /**
+      * This method must be called by the implementation when the
+      * data in the fields of the wizard change and the state of
+      * completeness changed.
+      *
+      * @note If you do not override isComplete() then there is no need
+      * to call this method.
+      */
+    void completeStateChanged();
 };
 #endif

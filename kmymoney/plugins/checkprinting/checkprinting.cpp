@@ -12,12 +12,12 @@
 #include <QFile>
 #include <QDialog>
 #ifdef ENABLE_WEBENGINE
-  #include <QWebEngineView>
+#include <QWebEngineView>
 #else
-  #include <KWebView>
+#include <KWebView>
 #endif
 #ifdef IS_APPIMAGE
-  #include <QCoreApplication>
+#include <QCoreApplication>
 #endif
 #include <QStandardPaths>
 
@@ -46,50 +46,50 @@
 #include "kmm_printer.h"
 
 struct CheckPrinting::Private {
-  QAction* m_action;
-  QString  m_checkTemplateHTML;
-  QStringList m_printedTransactionIdList;
-  KMyMoneyRegister::SelectedTransactions m_transactions;
+    QAction* m_action;
+    QString  m_checkTemplateHTML;
+    QStringList m_printedTransactionIdList;
+    KMyMoneyRegister::SelectedTransactions m_transactions;
 };
 
 CheckPrinting::CheckPrinting(QObject *parent, const QVariantList &args) :
-  KMyMoneyPlugin::Plugin(parent, "checkprinting"/*must be the same as X-KDE-PluginInfo-Name*/)
+    KMyMoneyPlugin::Plugin(parent, "checkprinting"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
-  Q_UNUSED(args);
-  // Tell the host application to load my GUI component
-  const auto componentName = QLatin1String("checkprinting");
-  const auto rcFileName = QLatin1String("checkprinting.rc");
-  setComponentName(componentName, i18nc("It's about printing bank checks", "Check printing"));
+    Q_UNUSED(args);
+    // Tell the host application to load my GUI component
+    const auto componentName = QLatin1String("checkprinting");
+    const auto rcFileName = QLatin1String("checkprinting.rc");
+    setComponentName(componentName, i18nc("It's about printing bank checks", "Check printing"));
 
 #ifdef IS_APPIMAGE
-  const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
-  setXMLFile(rcFilePath);
+    const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
+    setXMLFile(rcFilePath);
 
-  const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
-  setLocalXMLFile(localRcFilePath);
+    const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+    setLocalXMLFile(localRcFilePath);
 #else
-  setXMLFile(rcFileName);
+    setXMLFile(rcFileName);
 #endif
 
-  // For ease announce that we have been loaded.
-  qDebug("Plugins: checkprinting loaded");
+    // For ease announce that we have been loaded.
+    qDebug("Plugins: checkprinting loaded");
 
-  d = std::unique_ptr<Private>(new Private);
+    d = std::unique_ptr<Private>(new Private);
 
-  // Create the actions of this plugin
-  QString actionName = i18n("Print check");
+    // Create the actions of this plugin
+    QString actionName = i18n("Print check");
 
-  d->m_action = actionCollection()->addAction("transaction_checkprinting", this, SLOT(slotPrintCheck()));
-  d->m_action->setText(actionName);
+    d->m_action = actionCollection()->addAction("transaction_checkprinting", this, SLOT(slotPrintCheck()));
+    d->m_action->setText(actionName);
 
-  // wait until a transaction is selected before enabling the action
-  d->m_action->setEnabled(false);
-  d->m_printedTransactionIdList = PluginSettings::printedChecks();
-  readCheckTemplate();
+    // wait until a transaction is selected before enabling the action
+    d->m_action->setEnabled(false);
+    d->m_printedTransactionIdList = PluginSettings::printedChecks();
+    readCheckTemplate();
 
-  //! @todo Christian: Replace
+    //! @todo Christian: Replace
 #if 0
-  connect(KMyMoneyPlugin::PluginLoader::instance(), SIGNAL(configChanged(Plugin*)), this, SLOT(slotUpdateConfig()));
+    connect(KMyMoneyPlugin::PluginLoader::instance(), SIGNAL(configChanged(Plugin*)), this, SLOT(slotUpdateConfig()));
 #endif
 }
 
@@ -98,156 +98,156 @@ CheckPrinting::CheckPrinting(QObject *parent, const QVariantList &args) :
  */
 CheckPrinting::~CheckPrinting()
 {
-  actionCollection()->removeAction(d->m_action);
-  qDebug("Plugins: checkprinting unloaded");
+    actionCollection()->removeAction(d->m_action);
+    qDebug("Plugins: checkprinting unloaded");
 }
 
 void CheckPrinting::plug()
 {
-  connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::transactionsSelected, this, &CheckPrinting::slotTransactionsSelected);
+    connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::transactionsSelected, this, &CheckPrinting::slotTransactionsSelected);
 }
 
 void CheckPrinting::unplug()
 {
-  disconnect(viewInterface(), &KMyMoneyPlugin::ViewInterface::transactionsSelected, this, &CheckPrinting::slotTransactionsSelected);
+    disconnect(viewInterface(), &KMyMoneyPlugin::ViewInterface::transactionsSelected, this, &CheckPrinting::slotTransactionsSelected);
 }
 
 void CheckPrinting::readCheckTemplate()
 {
-  QString checkTemplateHTMLPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "checkprinting/check_template.html");
+    QString checkTemplateHTMLPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "checkprinting/check_template.html");
 
-  if (PluginSettings::checkTemplateFile().isEmpty()) {
-    PluginSettings::setCheckTemplateFile(checkTemplateHTMLPath);
-    PluginSettings::self()->save();
-  }
+    if (PluginSettings::checkTemplateFile().isEmpty()) {
+        PluginSettings::setCheckTemplateFile(checkTemplateHTMLPath);
+        PluginSettings::self()->save();
+    }
 
-  QFile checkTemplateHTMLFile(PluginSettings::checkTemplateFile());
-  checkTemplateHTMLFile.open(QIODevice::ReadOnly);
+    QFile checkTemplateHTMLFile(PluginSettings::checkTemplateFile());
+    checkTemplateHTMLFile.open(QIODevice::ReadOnly);
 
-  QTextStream stream(&checkTemplateHTMLFile);
+    QTextStream stream(&checkTemplateHTMLFile);
 
-  d->m_checkTemplateHTML = stream.readAll();
+    d->m_checkTemplateHTML = stream.readAll();
 
-  checkTemplateHTMLFile.close();
+    checkTemplateHTMLFile.close();
 }
 
 bool CheckPrinting::canBePrinted(const KMyMoneyRegister::SelectedTransaction & selectedTransaction) const
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
-  bool isACheck = file->account(selectedTransaction.split().accountId()).accountType() == eMyMoney::Account::Type::Checkings && selectedTransaction.split().shares().isNegative();
+    MyMoneyFile* file = MyMoneyFile::instance();
+    bool isACheck = file->account(selectedTransaction.split().accountId()).accountType() == eMyMoney::Account::Type::Checkings && selectedTransaction.split().shares().isNegative();
 
-  return isACheck && d->m_printedTransactionIdList.contains(selectedTransaction.transaction().id()) == 0;
+    return isACheck && d->m_printedTransactionIdList.contains(selectedTransaction.transaction().id()) == 0;
 }
 
 void CheckPrinting::markAsPrinted(const KMyMoneyRegister::SelectedTransaction & selectedTransaction)
 {
-  d->m_printedTransactionIdList.append(selectedTransaction.transaction().id());
+    d->m_printedTransactionIdList.append(selectedTransaction.transaction().id());
 }
 
 void CheckPrinting::slotPrintCheck()
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
-  MyMoneyMoneyToWordsConverter converter;
-  #ifdef ENABLE_WEBENGINE
-  auto htmlPart = new QWebEngineView();
-  #else
-  auto htmlPart = new KWebView();
-  #endif
+    MyMoneyFile* file = MyMoneyFile::instance();
+    MyMoneyMoneyToWordsConverter converter;
+#ifdef ENABLE_WEBENGINE
+    auto htmlPart = new QWebEngineView();
+#else
+    auto htmlPart = new KWebView();
+#endif
 
-  KMyMoneyRegister::SelectedTransactions::const_iterator it;
-  for (it = d->m_transactions.constBegin(); it != d->m_transactions.constEnd(); ++it) {
-    if (!canBePrinted(*it))
-      continue; // skip this check since it was already printed
+    KMyMoneyRegister::SelectedTransactions::const_iterator it;
+    for (it = d->m_transactions.constBegin(); it != d->m_transactions.constEnd(); ++it) {
+        if (!canBePrinted(*it))
+            continue; // skip this check since it was already printed
 
-    QString checkHTML = d->m_checkTemplateHTML;
-    const MyMoneyAccount account = file->account((*it).split().accountId());
-    const MyMoneySecurity currency = file->currency(account.currencyId());
-    const MyMoneyInstitution institution = file->institution(file->account((*it).split().accountId()).institutionId());
+        QString checkHTML = d->m_checkTemplateHTML;
+        const MyMoneyAccount account = file->account((*it).split().accountId());
+        const MyMoneySecurity currency = file->currency(account.currencyId());
+        const MyMoneyInstitution institution = file->institution(file->account((*it).split().accountId()).institutionId());
 
-    // replace the predefined tokens
-    // data about the user
-    checkHTML.replace("$OWNER_NAME", file->user().name());
-    checkHTML.replace("$OWNER_ADDRESS", file->user().address());
-    checkHTML.replace("$OWNER_CITY", file->user().city());
-    checkHTML.replace("$OWNER_STATE", file->user().state());
-    // data about the account institution
-    checkHTML.replace("$INSTITUTION_NAME", institution.name());
-    checkHTML.replace("$INSTITUTION_STREET", institution.street());
-    checkHTML.replace("$INSTITUTION_TELEPHONE", institution.telephone());
-    checkHTML.replace("$INSTITUTION_TOWN", institution.town());
-    checkHTML.replace("$INSTITUTION_CITY", institution.city());
-    checkHTML.replace("$INSTITUTION_POSTCODE", institution.postcode());
-    checkHTML.replace("$INSTITUTION_MANAGER", institution.manager());
-    // data about the transaction
-    checkHTML.replace("$DATE", QLocale().toString((*it).transaction().postDate(), QLocale::ShortFormat));
-    checkHTML.replace("$CHECK_NUMBER", (*it).split().number());
-    checkHTML.replace("$PAYEE_NAME", file->payee((*it).split().payeeId()).name());
-    checkHTML.replace("$PAYEE_ADDRESS", file->payee((*it).split().payeeId()).address());
-    checkHTML.replace("$PAYEE_CITY", file->payee((*it).split().payeeId()).city());
-    checkHTML.replace("$PAYEE_POSTCODE", file->payee((*it).split().payeeId()).postcode());
-    checkHTML.replace("$PAYEE_STATE", file->payee((*it).split().payeeId()).state());
-    checkHTML.replace("$AMOUNT_STRING", converter.convert((*it).split().value().abs(), currency.smallestAccountFraction()));
-    checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().value().abs(), currency));
-    checkHTML.replace("$MEMO", (*it).split().memo());
-    const auto currencyId = (*it).transaction().commodity();
-    const auto accountcurrency = MyMoneyFile::instance()->currency(currencyId);
-    checkHTML.replace("$TRANSACTIONCURRENCY", accountcurrency.tradingSymbol());
-    int numSplits = (int)(*it).transaction().splitCount();
-    const int maxSplits = 11;
-    for (int i = maxSplits-1; i >= 0 ; i--) {
-        const QString valueVariable = QString("$SPLITVALUE%1").arg(i);
-        const QString accountVariable = QString("$SPLITACCOUNTNAME%1").arg(i);
-        if (i < numSplits) {
-            checkHTML.replace( valueVariable, MyMoneyUtils::formatMoney((*it).transaction().splits()[i].value().abs(), currency));
-            checkHTML.replace( accountVariable, (file->account((*it).transaction().splits()[i].accountId())).name());
-        } else {
-            checkHTML.replace( valueVariable, " ");
-            checkHTML.replace( accountVariable, " ");
+        // replace the predefined tokens
+        // data about the user
+        checkHTML.replace("$OWNER_NAME", file->user().name());
+        checkHTML.replace("$OWNER_ADDRESS", file->user().address());
+        checkHTML.replace("$OWNER_CITY", file->user().city());
+        checkHTML.replace("$OWNER_STATE", file->user().state());
+        // data about the account institution
+        checkHTML.replace("$INSTITUTION_NAME", institution.name());
+        checkHTML.replace("$INSTITUTION_STREET", institution.street());
+        checkHTML.replace("$INSTITUTION_TELEPHONE", institution.telephone());
+        checkHTML.replace("$INSTITUTION_TOWN", institution.town());
+        checkHTML.replace("$INSTITUTION_CITY", institution.city());
+        checkHTML.replace("$INSTITUTION_POSTCODE", institution.postcode());
+        checkHTML.replace("$INSTITUTION_MANAGER", institution.manager());
+        // data about the transaction
+        checkHTML.replace("$DATE", QLocale().toString((*it).transaction().postDate(), QLocale::ShortFormat));
+        checkHTML.replace("$CHECK_NUMBER", (*it).split().number());
+        checkHTML.replace("$PAYEE_NAME", file->payee((*it).split().payeeId()).name());
+        checkHTML.replace("$PAYEE_ADDRESS", file->payee((*it).split().payeeId()).address());
+        checkHTML.replace("$PAYEE_CITY", file->payee((*it).split().payeeId()).city());
+        checkHTML.replace("$PAYEE_POSTCODE", file->payee((*it).split().payeeId()).postcode());
+        checkHTML.replace("$PAYEE_STATE", file->payee((*it).split().payeeId()).state());
+        checkHTML.replace("$AMOUNT_STRING", converter.convert((*it).split().value().abs(), currency.smallestAccountFraction()));
+        checkHTML.replace("$AMOUNT_DECIMAL", MyMoneyUtils::formatMoney((*it).split().value().abs(), currency));
+        checkHTML.replace("$MEMO", (*it).split().memo());
+        const auto currencyId = (*it).transaction().commodity();
+        const auto accountcurrency = MyMoneyFile::instance()->currency(currencyId);
+        checkHTML.replace("$TRANSACTIONCURRENCY", accountcurrency.tradingSymbol());
+        int numSplits = (int)(*it).transaction().splitCount();
+        const int maxSplits = 11;
+        for (int i = maxSplits-1; i >= 0 ; i--) {
+            const QString valueVariable = QString("$SPLITVALUE%1").arg(i);
+            const QString accountVariable = QString("$SPLITACCOUNTNAME%1").arg(i);
+            if (i < numSplits) {
+                checkHTML.replace( valueVariable, MyMoneyUtils::formatMoney((*it).transaction().splits()[i].value().abs(), currency));
+                checkHTML.replace( accountVariable, (file->account((*it).transaction().splits()[i].accountId())).name());
+            } else {
+                checkHTML.replace( valueVariable, " ");
+                checkHTML.replace( accountVariable, " ");
+            }
         }
+
+        // print the check
+        htmlPart->setHtml(checkHTML, QUrl("file://"));
+        auto printer = KMyMoneyPrinter::startPrint();
+        if (printer != nullptr) {
+#ifdef ENABLE_WEBENGINE
+            htmlPart->page()->print(printer, [=] (bool) {});
+#else
+            htmlPart->print(printer);
+#endif
+        }
+
+        // mark the transaction as printed
+        markAsPrinted(*it);
     }
 
-    // print the check
-    htmlPart->setHtml(checkHTML, QUrl("file://"));
-    auto printer = KMyMoneyPrinter::startPrint();
-    if (printer != nullptr) {
-      #ifdef ENABLE_WEBENGINE
-        htmlPart->page()->print(printer, [=] (bool) {});
-      #else
-        htmlPart->print(printer);
-      #endif
-    }
-
-    // mark the transaction as printed
-    markAsPrinted(*it);
-  }
-
-  PluginSettings::setPrintedChecks(d->m_printedTransactionIdList);
-  delete htmlPart;
+    PluginSettings::setPrintedChecks(d->m_printedTransactionIdList);
+    delete htmlPart;
 }
 
 void CheckPrinting::slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions)
 {
-  d->m_transactions = transactions;
-  bool actionEnabled = false;
-  // enable/disable the action depending if there are transactions selected or not
-  // and whether they can be printed or not
-  KMyMoneyRegister::SelectedTransactions::const_iterator it;
-  for (it = d->m_transactions.constBegin(); it != d->m_transactions.constEnd(); ++it) {
-    if (canBePrinted(*it)) {
-      actionEnabled = true;
-      break;
+    d->m_transactions = transactions;
+    bool actionEnabled = false;
+    // enable/disable the action depending if there are transactions selected or not
+    // and whether they can be printed or not
+    KMyMoneyRegister::SelectedTransactions::const_iterator it;
+    for (it = d->m_transactions.constBegin(); it != d->m_transactions.constEnd(); ++it) {
+        if (canBePrinted(*it)) {
+            actionEnabled = true;
+            break;
+        }
     }
-  }
-  d->m_action->setEnabled(actionEnabled);
+    d->m_action->setEnabled(actionEnabled);
 }
 
 // the plugin's configurations has changed
 void CheckPrinting::configurationChanged()
 {
-  PluginSettings::self()->load();
-  // re-read the data because the configuration has changed
-  readCheckTemplate();
-  d->m_printedTransactionIdList = PluginSettings::printedChecks();
+    PluginSettings::self()->load();
+    // re-read the data because the configuration has changed
+    readCheckTemplate();
+    d->m_printedTransactionIdList = PluginSettings::printedChecks();
 }
 
 K_PLUGIN_FACTORY_WITH_JSON(CheckPrintingFactory, "checkprinting.json", registerPlugin<CheckPrinting>();)

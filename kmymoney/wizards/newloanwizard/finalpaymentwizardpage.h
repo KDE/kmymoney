@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class FinalPaymentWizardPage; }
+namespace Ui {
+class FinalPaymentWizardPage;
+}
 
 /**
  * This class implements the Online Update page of the
@@ -26,14 +28,14 @@ namespace Ui { class FinalPaymentWizardPage; }
 
 class FinalPaymentWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit FinalPaymentWizardPage(QWidget *parent = nullptr);
-  ~FinalPaymentWizardPage();
+    explicit FinalPaymentWizardPage(QWidget *parent = nullptr);
+    ~FinalPaymentWizardPage();
 
-  void resetCalculator();
+    void resetCalculator();
 
-  Ui::FinalPaymentWizardPage *ui;
+    Ui::FinalPaymentWizardPage *ui;
 };
 
 #endif

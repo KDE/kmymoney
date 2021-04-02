@@ -28,43 +28,43 @@ class MyMoneyMoney;
 class CreditDebitHelperPrivate;
 class KMM_WIDGETS_EXPORT CreditDebitHelper : public QObject
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(CreditDebitHelper)
+    Q_OBJECT
+    Q_DISABLE_COPY(CreditDebitHelper)
 
 public:
-  explicit CreditDebitHelper(QObject* parent, AmountEdit* credit, AmountEdit* debit);
-  ~CreditDebitHelper();
+    explicit CreditDebitHelper(QObject* parent, AmountEdit* credit, AmountEdit* debit);
+    ~CreditDebitHelper();
 
-  /**
-   * Returns the value of the widget that is filled.
-   * A credit is returned as negative, a debit as positive value.
-   */
-  MyMoneyMoney value() const;
+    /**
+     * Returns the value of the widget that is filled.
+     * A credit is returned as negative, a debit as positive value.
+     */
+    MyMoneyMoney value() const;
 
-  /**
-   * Loads the widgets with the @a value passed. If
-   * @a value is negative it is loaded into the credit
-   * widget, otherwise into the debit widget.
-   */
-  void setValue(const MyMoneyMoney& value);
+    /**
+     * Loads the widgets with the @a value passed. If
+     * @a value is negative it is loaded into the credit
+     * widget, otherwise into the debit widget.
+     */
+    void setValue(const MyMoneyMoney& value);
 
-  /**
-   * This method returns true if at least one
-   * of the two widgets is filled with text.
-   * It returns false if both widgets are empty.
-   */
-  bool haveValue() const;
+    /**
+     * This method returns true if at least one
+     * of the two widgets is filled with text.
+     * It returns false if both widgets are empty.
+     */
+    bool haveValue() const;
 
 Q_SIGNALS:
-  void valueChanged();
+    void valueChanged();
 
 private Q_SLOTS:
-  void creditChanged();
-  void debitChanged();
+    void creditChanged();
+    void debitChanged();
 
 private:
-  CreditDebitHelperPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(CreditDebitHelper)
+    CreditDebitHelperPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(CreditDebitHelper)
 };
 
 #endif

@@ -21,19 +21,19 @@
 class KSettingsReportsPrivate;
 class KSettingsReports : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KSettingsReports)
+    Q_OBJECT
+    Q_DISABLE_COPY(KSettingsReports)
 
 public:
-  explicit KSettingsReports(QWidget* parent = nullptr);
-  ~KSettingsReports();
+    explicit KSettingsReports(QWidget* parent = nullptr);
+    ~KSettingsReports();
 
 protected Q_SLOTS:
-  void slotCssUrlSelected(const QUrl&);
-  void slotEditingFinished();
+    void slotCssUrlSelected(const QUrl&);
+    void slotEditingFinished();
 
 private:
-  KSettingsReportsPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KSettingsReports)
+    KSettingsReportsPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KSettingsReports)
 };
 #endif

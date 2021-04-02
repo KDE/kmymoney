@@ -18,20 +18,20 @@
 class MyMoneyObjectPrivate
 {
 public:
-  MyMoneyObjectPrivate()
-  {
-  }
+    MyMoneyObjectPrivate()
+    {
+    }
 
-  virtual ~MyMoneyObjectPrivate()
-  {
-  }
+    virtual ~MyMoneyObjectPrivate()
+    {
+    }
 
-  void setId(const QString& id)
-  {
-    m_id = id;
-  }
+    void setId(const QString& id)
+    {
+        m_id = id;
+    }
 
-  QString m_id;
+    QString m_id;
 };
 
 #endif

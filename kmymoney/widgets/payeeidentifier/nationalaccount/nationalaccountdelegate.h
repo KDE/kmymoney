@@ -15,22 +15,22 @@
 
 class KMM_WIDGETS_EXPORT nationalAccountDelegate : public QStyledItemDelegate
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit nationalAccountDelegate(QObject* parent, const QVariantList& options = QVariantList());
+    explicit nationalAccountDelegate(QObject* parent, const QVariantList& options = QVariantList());
 
-  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
-  QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
-  QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
-  void setEditorData(QWidget* editor, const QModelIndex& index) const final override;
-  void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const final override;
-  void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
+    void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
+    QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
+    QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
+    void setEditorData(QWidget* editor, const QModelIndex& index) const final override;
+    void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const final override;
+    void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
 
 Q_SIGNALS:
-  void sizeHintChanged(const QModelIndex&) const;
+    void sizeHintChanged(const QModelIndex&) const;
 
 private:
-  inline payeeIdentifierTyped<payeeIdentifiers::nationalAccount> identByIndex(const QModelIndex& index) const;
+    inline payeeIdentifierTyped<payeeIdentifiers::nationalAccount> identByIndex(const QModelIndex& index) const;
 
 };
 

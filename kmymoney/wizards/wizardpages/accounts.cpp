@@ -17,13 +17,13 @@
 #include "ui_accounts.h"
 
 Accounts::Accounts(QWidget* parent) :
-  QWidget(parent),
-  ui(new Ui::Accounts)
+    QWidget(parent),
+    ui(new Ui::Accounts)
 {
-  ui->setupUi(this);
+    ui->setupUi(this);
 }
 
 Accounts::~Accounts()
 {
-  delete ui;
+    delete ui;
 }

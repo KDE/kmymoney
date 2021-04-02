@@ -22,27 +22,27 @@ class KPluginSelector;
 class  KSettingsPluginsPrivate;
 class KSettingsPlugins : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KSettingsPlugins)
+    Q_OBJECT
+    Q_DISABLE_COPY(KSettingsPlugins)
 
 public:
-  explicit KSettingsPlugins(QWidget* parent = nullptr);
-  ~KSettingsPlugins();
+    explicit KSettingsPlugins(QWidget* parent = nullptr);
+    ~KSettingsPlugins();
 
 public Q_SLOTS:
-  void slotResetToDefaults();
-  void slotSavePluginConfiguration();
+    void slotResetToDefaults();
+    void slotSavePluginConfiguration();
 
 Q_SIGNALS:
-  void changed(bool);
-  void settingsChanged(const QString &dialogName);
+    void changed(bool);
+    void settingsChanged(const QString &dialogName);
 
 private:
-  KSettingsPluginsPrivate* const d_ptr;
-  Q_DECLARE_PRIVATE(KSettingsPlugins)
+    KSettingsPluginsPrivate* const d_ptr;
+    Q_DECLARE_PRIVATE(KSettingsPlugins)
 
 private Q_SLOTS:
-  void slotPluginsSelectionChanged(bool changed);
+    void slotPluginsSelectionChanged(bool changed);
 };
 #endif
 

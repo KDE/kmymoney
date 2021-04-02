@@ -26,32 +26,32 @@
 class KMyMoneySecuritySelectorPrivate;
 class KMyMoneySecuritySelector : public KComboBox
 {
-  Q_OBJECT  
-  Q_DISABLE_COPY(KMyMoneySecuritySelector)
-  Q_PROPERTY(MyMoneySecurity security READ security WRITE setSecurity DESIGNABLE false STORED false)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneySecuritySelector)
+    Q_PROPERTY(MyMoneySecurity security READ security WRITE setSecurity DESIGNABLE false STORED false)
 
 public:
-  explicit KMyMoneySecuritySelector(QWidget* parent = nullptr);
-  virtual ~KMyMoneySecuritySelector();
+    explicit KMyMoneySecuritySelector(QWidget* parent = nullptr);
+    virtual ~KMyMoneySecuritySelector();
 
-  const MyMoneySecurity& security() const;
-  void setSecurity(const MyMoneySecurity& currency);
+    const MyMoneySecurity& security() const;
+    void setSecurity(const MyMoneySecurity& currency);
 
-  void update(const QString& id);
+    void update(const QString& id);
 
 protected:
-  KMyMoneySecuritySelectorPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KMyMoneySecuritySelector)
+    KMyMoneySecuritySelectorPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KMyMoneySecuritySelector)
 };
 
 class KMyMoneyCurrencySelector : public KMyMoneySecuritySelector
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyCurrencySelector)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyCurrencySelector)
 
 public:
-  explicit KMyMoneyCurrencySelector(QWidget* parent = nullptr);
-  ~KMyMoneyCurrencySelector() override;
+    explicit KMyMoneyCurrencySelector(QWidget* parent = nullptr);
+    ~KMyMoneyCurrencySelector() override;
 };
 
 #endif

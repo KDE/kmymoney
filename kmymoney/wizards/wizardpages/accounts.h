@@ -14,7 +14,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class Accounts; }
+namespace Ui {
+class Accounts;
+}
 
 /**
   * @author Thomas Baumgart
@@ -22,14 +24,14 @@ namespace Ui { class Accounts; }
 
 class Accounts : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(Accounts)
+    Q_OBJECT
+    Q_DISABLE_COPY(Accounts)
 
 public:
-  explicit Accounts(QWidget *parent = nullptr);
-  virtual ~Accounts();
+    explicit Accounts(QWidget *parent = nullptr);
+    virtual ~Accounts();
 
-  Ui::Accounts *ui;
+    Ui::Accounts *ui;
 };
 
 

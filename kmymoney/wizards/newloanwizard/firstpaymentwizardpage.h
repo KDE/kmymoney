@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class FirstPaymentWizardPage; }
+namespace Ui {
+class FirstPaymentWizardPage;
+}
 
 /**
  * This class implements the Online Update page of the
@@ -26,22 +28,22 @@ namespace Ui { class FirstPaymentWizardPage; }
 
 class FirstPaymentWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit FirstPaymentWizardPage(QWidget *parent = nullptr);
-  ~FirstPaymentWizardPage();
-  /**
-   * Overload the isComplete function to control the Next button
-   */
-  bool isComplete() const final override;
+    explicit FirstPaymentWizardPage(QWidget *parent = nullptr);
+    ~FirstPaymentWizardPage();
+    /**
+     * Overload the isComplete function to control the Next button
+     */
+    bool isComplete() const final override;
 
-  /**
-   * Overload the initializePage function to set widgets based on
-   * the inputs from previous pages.
-   */
-  void initializePage() final override;
+    /**
+     * Overload the initializePage function to set widgets based on
+     * the inputs from previous pages.
+     */
+    void initializePage() final override;
 
-  Ui::FirstPaymentWizardPage *ui;
+    Ui::FirstPaymentWizardPage *ui;
 };
 
 #endif

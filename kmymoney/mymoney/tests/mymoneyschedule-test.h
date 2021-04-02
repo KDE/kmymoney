@@ -11,27 +11,27 @@
 
 class MyMoneyScheduleTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 private Q_SLOTS:
-  void testEmptyConstructor();
-  void testConstructor();
-  void testSetFunctions();
-  void testCopyConstructor();
-  void testAssignmentConstructor();
-  void testAddHalfMonths();
-  void testAdjustedNextDueDate();
-  void testModifyNextDueDate();
-  void testDaysBetweenEvents();
-  void testEventsPerYear();
-  void testOccurrenceToString();
-  void testOccurrencePeriodToString();
-  void testOccurrencePeriod();
-  void testSimpleToFromCompoundOccurrence();
-  void testProcessingDates();
-  void testAdjustedNextPayment();
-  void testAdjustedWhenItWillEnd();
-  void testProcessLastDayInMonth();
+    void testEmptyConstructor();
+    void testConstructor();
+    void testSetFunctions();
+    void testCopyConstructor();
+    void testAssignmentConstructor();
+    void testAddHalfMonths();
+    void testAdjustedNextDueDate();
+    void testModifyNextDueDate();
+    void testDaysBetweenEvents();
+    void testEventsPerYear();
+    void testOccurrenceToString();
+    void testOccurrencePeriodToString();
+    void testOccurrencePeriod();
+    void testSimpleToFromCompoundOccurrence();
+    void testProcessingDates();
+    void testAdjustedNextPayment();
+    void testAdjustedWhenItWillEnd();
+    void testProcessLastDayInMonth();
 };
 
 #endif

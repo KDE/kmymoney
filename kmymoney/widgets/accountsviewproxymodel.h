@@ -33,29 +33,29 @@ class QPoint;
 class AccountsViewProxyModelPrivate;
 class KMM_WIDGETS_EXPORT AccountsViewProxyModel : public AccountsProxyModel
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(AccountsViewProxyModel)
+    Q_OBJECT
+    Q_DISABLE_COPY(AccountsViewProxyModel)
 
 public:
-  explicit AccountsViewProxyModel(QObject *parent = nullptr);
-  ~AccountsViewProxyModel() override;
+    explicit AccountsViewProxyModel(QObject *parent = nullptr);
+    ~AccountsViewProxyModel() override;
 
-  void setColumnVisibility(eAccountsModel::Column column, bool visible);
-  QSet<eAccountsModel::Column> getVisibleColumns();
+    void setColumnVisibility(eAccountsModel::Column column, bool visible);
+    QSet<eAccountsModel::Column> getVisibleColumns();
 
 public Q_SLOTS:
-  void slotColumnsMenu(const QPoint);
+    void slotColumnsMenu(const QPoint);
 
 Q_SIGNALS:
-  void columnToggled(const eAccountsModel::Column column, const bool show);
+    void columnToggled(const eAccountsModel::Column column, const bool show);
 
 protected:
-  AccountsViewProxyModel(AccountsViewProxyModelPrivate &dd, QObject *parent);
-  bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
-  bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override;
+    AccountsViewProxyModel(AccountsViewProxyModelPrivate &dd, QObject *parent);
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
+    bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override;
 
 private:
-  Q_DECLARE_PRIVATE(AccountsViewProxyModel)
+    Q_DECLARE_PRIVATE(AccountsViewProxyModel)
 };
 
 #endif

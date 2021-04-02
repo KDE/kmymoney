@@ -20,24 +20,24 @@ class KMyMoneyWizardPage;
 
 namespace NewUserWizard
 {
-  class Wizard;
+class Wizard;
 
-  class IntroPagePrivate;
-  class IntroPage : public QWidget, public WizardPage<Wizard>
-  {
+class IntroPagePrivate;
+class IntroPage : public QWidget, public WizardPage<Wizard>
+{
     Q_OBJECT
     Q_DISABLE_COPY(IntroPage)
 
-  public:
+public:
     explicit IntroPage(Wizard* parent);
     ~IntroPage() override;
 
     KMyMoneyWizardPage* nextPage() const override;
 
-  private:
+private:
     Q_DECLARE_PRIVATE_D(WizardPage<Wizard>::d_ptr, IntroPage)
     friend class Wizard;
-  };
+};
 } // namespace
 
 #endif

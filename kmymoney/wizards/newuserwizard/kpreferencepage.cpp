@@ -23,16 +23,16 @@
 
 namespace NewUserWizard
 {
-  PreferencePage::PreferencePage(Wizard* wizard) :
+PreferencePage::PreferencePage(Wizard* wizard) :
     QWidget(wizard),
     WizardPage<Wizard>(*new PreferencePagePrivate(wizard), stepCount++, this, wizard)
-  {
+{
     Q_D(PreferencePage);
     d->ui->setupUi(this);
-  }
+}
 
-  PreferencePage::~PreferencePage()
-  {
-  }
+PreferencePage::~PreferencePage()
+{
+}
 
 }

@@ -18,19 +18,21 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class KSettingsForecast; }
+namespace Ui {
+class KSettingsForecast;
+}
 
 class KSettingsForecast : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KSettingsForecast)
+    Q_OBJECT
+    Q_DISABLE_COPY(KSettingsForecast)
 
 public:
-  explicit KSettingsForecast(QWidget* parent = nullptr);
-  ~KSettingsForecast();
+    explicit KSettingsForecast(QWidget* parent = nullptr);
+    ~KSettingsForecast();
 
 private:
-  Ui::KSettingsForecast       *ui;
+    Ui::KSettingsForecast       *ui;
 };
 #endif
 

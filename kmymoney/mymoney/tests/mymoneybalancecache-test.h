@@ -12,20 +12,20 @@
 
 class MyMoneyBalanceCacheTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 protected:
-  MyMoneyBalanceCache* m;
+    MyMoneyBalanceCache* m;
 
 private Q_SLOTS:
-  void init();
-  void cleanup();
-  void testCacheItem();
-  void testEmpty();
-  void testInsert();
-  void testClear();
-  void testSize();
-  void testRetrieve();
+    void init();
+    void cleanup();
+    void testCacheItem();
+    void testEmpty();
+    void testInsert();
+    void testClear();
+    void testSize();
+    void testRetrieve();
 };
 
 #endif

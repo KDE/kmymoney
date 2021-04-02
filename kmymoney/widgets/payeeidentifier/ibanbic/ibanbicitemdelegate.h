@@ -15,22 +15,22 @@
 
 class KMM_WIDGETS_EXPORT ibanBicItemDelegate : public QStyledItemDelegate
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit ibanBicItemDelegate(QObject* parent = nullptr, const QVariantList& args = QVariantList());
-  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
-  QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override;
-  QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
-  void setEditorData(QWidget* editor, const QModelIndex& index) const override;
-  void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const override;
-  void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+    explicit ibanBicItemDelegate(QObject* parent = nullptr, const QVariantList& args = QVariantList());
+    void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+    QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+    QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+    void setEditorData(QWidget* editor, const QModelIndex& index) const override;
+    void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const override;
+    void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
 
 Q_SIGNALS:
-  void sizeHintChanged(const QModelIndex&) const;
+    void sizeHintChanged(const QModelIndex&) const;
 
 private:
-  inline payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBicByIndex(const QModelIndex& index) const;
+    inline payeeIdentifierTyped<payeeIdentifiers::ibanBic> ibanBicByIndex(const QModelIndex& index) const;
 
 };
 

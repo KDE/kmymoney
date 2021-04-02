@@ -29,10 +29,10 @@
 #include "ui_kbpickstartdate.h"
 
 struct KBPickStartDate::Private {
-  Ui::KBPickStartDate ui;
-  KBankingExt *banking;
-  QDate firstPossible;
-  QDate lastUpdate;
+    Ui::KBPickStartDate ui;
+    KBankingExt *banking;
+    QDate firstPossible;
+    QDate lastUpdate;
 };
 
 
@@ -45,83 +45,83 @@ KBPickStartDate::KBPickStartDate(KBankingExt* qb,
     QDialog(parent),
     d(new Private)
 {
-  d->ui.setupUi(this);
-  d->firstPossible = firstPossible;
-  d->lastUpdate = lastUpdate;
-  setModal(modal);
+    d->ui.setupUi(this);
+    d->firstPossible = firstPossible;
+    d->lastUpdate = lastUpdate;
+    setModal(modal);
 
-  d->banking = qb;
+    d->banking = qb;
 
-  QObject::connect(d->ui.buttonBox, SIGNAL(helpRequested()),
-                   this, SLOT(slotHelpClicked()));
-  d->ui.label->setText(i18n("<qt><p>Please select the first date for which transactions are to be retrieved from <b>%1</b>.</p><p>If you specify no date then the bank will choose one.</p></qt>", accountName));
+    QObject::connect(d->ui.buttonBox, SIGNAL(helpRequested()),
+                     this, SLOT(slotHelpClicked()));
+    d->ui.label->setText(i18n("<qt><p>Please select the first date for which transactions are to be retrieved from <b>%1</b>.</p><p>If you specify no date then the bank will choose one.</p></qt>", accountName));
 
-  if (lastUpdate.isValid()) {
-    d->ui.lastUpdateLabel->setText(lastUpdate.toString());
-    d->ui.lastUpdateButton->setEnabled(true);
-    d->ui.lastUpdateLabel->setEnabled(true);
-  } else {
-    d->ui.lastUpdateButton->setEnabled(false);
-    d->ui.lastUpdateLabel->setEnabled(false);
-    if (defaultChoice == 2)
-      defaultChoice = 1;
-  }
+    if (lastUpdate.isValid()) {
+        d->ui.lastUpdateLabel->setText(lastUpdate.toString());
+        d->ui.lastUpdateButton->setEnabled(true);
+        d->ui.lastUpdateLabel->setEnabled(true);
+    } else {
+        d->ui.lastUpdateButton->setEnabled(false);
+        d->ui.lastUpdateLabel->setEnabled(false);
+        if (defaultChoice == 2)
+            defaultChoice = 1;
+    }
 
-  if (firstPossible.isValid()) {
-    d->ui.firstDateLabel->setText(firstPossible.toString());
-    d->ui.firstDateButton->setEnabled(true);
-    d->ui.firstDateLabel->setEnabled(true);
-    // As long as we use the KDateWidget we don't have
-    // a chance to control the range. Once we are able
-    // to use a KMyMoneyDateInput widget, we can make use
-    // of the setRange() method again.
-    // d->ui.pickDateEdit->setRange(firstPossible, QDate());
-  } else {
-    d->ui.firstDateButton->setEnabled(false);
-    d->ui.firstDateLabel->setEnabled(false);
-    if (defaultChoice == 3)
-      defaultChoice = 1;
-  }
+    if (firstPossible.isValid()) {
+        d->ui.firstDateLabel->setText(firstPossible.toString());
+        d->ui.firstDateButton->setEnabled(true);
+        d->ui.firstDateLabel->setEnabled(true);
+        // As long as we use the KDateWidget we don't have
+        // a chance to control the range. Once we are able
+        // to use a KMyMoneyDateInput widget, we can make use
+        // of the setRange() method again.
+        // d->ui.pickDateEdit->setRange(firstPossible, QDate());
+    } else {
+        d->ui.firstDateButton->setEnabled(false);
+        d->ui.firstDateLabel->setEnabled(false);
+        if (defaultChoice == 3)
+            defaultChoice = 1;
+    }
 
-  switch (defaultChoice) {
+    switch (defaultChoice) {
     case 2:
-      d->ui.lastUpdateButton->setChecked(true);
-      break;
+        d->ui.lastUpdateButton->setChecked(true);
+        break;
     case 3:
-      d->ui.firstDateButton->setChecked(true);
-      break;
+        d->ui.firstDateButton->setChecked(true);
+        break;
     default:
-      d->ui.noDateButton->setChecked(true);
-      break;
-  }
+        d->ui.noDateButton->setChecked(true);
+        break;
+    }
 
-  d->ui.pickDateEdit->setDate(QDate::currentDate());
+    d->ui.pickDateEdit->setDate(QDate::currentDate());
 
-  d->ui.buttonGroup->setFocus();
+    d->ui.buttonGroup->setFocus();
 }
 
 
 
 KBPickStartDate::~KBPickStartDate()
 {
-  delete d;
+    delete d;
 }
 
 
 QDate KBPickStartDate::date()
 {
-  if (d->ui.noDateButton->isChecked())
-    return QDate();
-  else if (d->ui.firstDateButton->isChecked())
-    return d->firstPossible;
-  else if (d->ui.pickDateButton->isChecked())
-    return d->ui.pickDateEdit->date();
-  else if (d->ui.lastUpdateButton->isChecked())
-    return d->lastUpdate;
-  else {
-    DBG_ERROR(0, "Unknown date state");
-    return QDate();
-  }
+    if (d->ui.noDateButton->isChecked())
+        return QDate();
+    else if (d->ui.firstDateButton->isChecked())
+        return d->firstPossible;
+    else if (d->ui.pickDateButton->isChecked())
+        return d->ui.pickDateEdit->date();
+    else if (d->ui.lastUpdateButton->isChecked())
+        return d->lastUpdate;
+    else {
+        DBG_ERROR(0, "Unknown date state");
+        return QDate();
+    }
 }
 
 

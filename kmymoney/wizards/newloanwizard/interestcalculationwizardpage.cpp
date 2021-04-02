@@ -22,19 +22,19 @@ InterestCalculationWizardPage::InterestCalculationWizardPage(QWidget *parent)
     : QWizardPage(parent),
       ui(new Ui::InterestCalculationWizardPage)
 {
-  ui->setupUi(this);
-  ui->ButtonGroup5->setId(ui->m_interestOnReceptionButton, 0);
-  ui->ButtonGroup5->setId(ui->m_interestOnPaymentButton, 1);
+    ui->setupUi(this);
+    ui->ButtonGroup5->setId(ui->m_interestOnReceptionButton, 0);
+    ui->ButtonGroup5->setId(ui->m_interestOnPaymentButton, 1);
 
-  // Register the fields with the QWizard and connect the
-  // appropriate signals to update the "Next" button correctly
-  registerField("interestOnReceptionButton", ui->m_interestOnReceptionButton);
-  registerField("interestOnPaymentButton", ui->m_interestOnPaymentButton);
+    // Register the fields with the QWizard and connect the
+    // appropriate signals to update the "Next" button correctly
+    registerField("interestOnReceptionButton", ui->m_interestOnReceptionButton);
+    registerField("interestOnPaymentButton", ui->m_interestOnPaymentButton);
 
-  ui->m_interestOnReceptionButton->click();
+    ui->m_interestOnReceptionButton->click();
 }
 
 InterestCalculationWizardPage::~InterestCalculationWizardPage()
 {
-  delete ui;
+    delete ui;
 }

@@ -18,17 +18,21 @@
 
 #include "transaction.h"
 
-namespace eMyMoney { namespace Split { enum class InvestmentTransactionType; } }
+namespace eMyMoney {
+namespace Split {
+enum class InvestmentTransactionType;
+}
+}
 
 namespace KMyMoneyRegister
 {
 
-  class InvestTransactionPrivate;
-  class InvestTransaction : public Transaction
-  {
+class InvestTransactionPrivate;
+class InvestTransaction : public Transaction
+{
     Q_DISABLE_COPY(InvestTransaction)
 
-  public:
+public:
     explicit InvestTransaction(Register* getParent, const MyMoneyTransaction& transaction, const MyMoneySplit& split, int uniqueId);
     ~InvestTransaction() override;
 
@@ -65,7 +69,7 @@ namespace KMyMoneyRegister
 
     void splits(MyMoneySplit& assetAccountSplit, QList<MyMoneySplit>& interestSplits, QList<MyMoneySplit>& feeSplits) const;
 
-  protected:
+protected:
     bool haveShares() const;
     bool haveFees() const;
     bool haveInterest() const;
@@ -83,9 +87,9 @@ namespace KMyMoneyRegister
     */
     void activity(QString& txt, eMyMoney::Split::InvestmentTransactionType type) const;
 
-  private:
+private:
     Q_DECLARE_PRIVATE(InvestTransaction)
-  };
+};
 } // namespace
 
 #endif

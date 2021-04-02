@@ -12,16 +12,16 @@
 
 class onlineJobTypedTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 private Q_SLOTS:
-  void initTestCase();
-  void cleanupTestCase();
+    void initTestCase();
+    void cleanupTestCase();
 
-  void copyContructor();
-  void constructWithIncompatibleType();
-  void constructWithNull();
-  void copyByAssignment();
-  void constructWithManadtoryDynamicCast();
+    void copyContructor();
+    void constructWithIncompatibleType();
+    void constructWithNull();
+    void copyByAssignment();
+    void constructWithManadtoryDynamicCast();
 };
 
 #endif // ONLINEJOBTYPEDTEST_H

@@ -54,21 +54,21 @@ namespace reports
 
 class Debug
 {
-  QString m_methodName;
-  static QString m_sTabs;
-  static bool m_sEnabled;
-  bool m_enabled;
-  static QString m_sEnableKey;
+    QString m_methodName;
+    static QString m_sTabs;
+    static bool m_sEnabled;
+    bool m_enabled;
+    static QString m_sEnableKey;
 public:
-  explicit Debug(const QString& _name);
-  ~Debug();
-  void output(const QString& _text);
-  static void enable(bool _e) {
-    m_sEnabled = _e;
-  }
-  static void setEnableKey(const QString& _s) {
-    m_sEnableKey = _s;
-  }
+    explicit Debug(const QString& _name);
+    ~Debug();
+    void output(const QString& _text);
+    static void enable(bool _e) {
+        m_sEnabled = _e;
+    }
+    static void setEnableKey(const QString& _s) {
+        m_sEnableKey = _s;
+    }
 };
 
 } // end namespace reports

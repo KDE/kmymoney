@@ -24,38 +24,38 @@ template <class T> class payeeIdentifierTyped;
 class KMM_MYMONEY_EXPORT MyMoneyPayeeIdentifierContainer
 {
 public:
-  MyMoneyPayeeIdentifierContainer();
+    MyMoneyPayeeIdentifierContainer();
 
-  unsigned int payeeIdentifierCount() const;
-  ::payeeIdentifier payeeIdentifier(unsigned int) const;
-  QList< ::payeeIdentifier > payeeIdentifiers() const;
+    unsigned int payeeIdentifierCount() const;
+    ::payeeIdentifier payeeIdentifier(unsigned int) const;
+    QList< ::payeeIdentifier > payeeIdentifiers() const;
 
-  template< class type >
-  QList< ::payeeIdentifierTyped<type> > payeeIdentifiersByType() const;
+    template< class type >
+    QList< ::payeeIdentifierTyped<type> > payeeIdentifiersByType() const;
 
-  void addPayeeIdentifier(const ::payeeIdentifier& ident);
-  void addPayeeIdentifier(const unsigned int position, const ::payeeIdentifier& ident);
+    void addPayeeIdentifier(const ::payeeIdentifier& ident);
+    void addPayeeIdentifier(const unsigned int position, const ::payeeIdentifier& ident);
 
-  void removePayeeIdentifier(const ::payeeIdentifier& ident);
-  void removePayeeIdentifier(const int index);
+    void removePayeeIdentifier(const ::payeeIdentifier& ident);
+    void removePayeeIdentifier(const int index);
 
-  void modifyPayeeIdentifier(const ::payeeIdentifier& ident);
-  void modifyPayeeIdentifier(const int index, const ::payeeIdentifier& ident);
+    void modifyPayeeIdentifier(const ::payeeIdentifier& ident);
+    void modifyPayeeIdentifier(const int index, const ::payeeIdentifier& ident);
 
-  void resetPayeeIdentifiers(const QList< ::payeeIdentifier >& list = QList< ::payeeIdentifier >());
+    void resetPayeeIdentifiers(const QList< ::payeeIdentifier >& list = QList< ::payeeIdentifier >());
 
-  void loadXML(QDomElement node);
-  void writeXML(QDomDocument document, QDomElement parent) const;
+    void loadXML(QDomElement node);
+    void writeXML(QDomDocument document, QDomElement parent) const;
 
 protected:
-  QList< ::payeeIdentifier > m_payeeIdentifiers;
+    QList< ::payeeIdentifier > m_payeeIdentifiers;
 };
 
 template< class type >
 QList< payeeIdentifierTyped<type> > MyMoneyPayeeIdentifierContainer::payeeIdentifiersByType() const
 {
-  QList< payeeIdentifierTyped<type> > typedList;
-  return typedList;
+    QList< payeeIdentifierTyped<type> > typedList;
+    return typedList;
 }
 
 #endif // MYMONEYPAYEEIDENTIFIERCONTAINER_H

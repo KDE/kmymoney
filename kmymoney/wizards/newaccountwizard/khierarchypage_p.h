@@ -23,30 +23,30 @@
 
 namespace NewAccountWizard
 {
-  class Wizard;
-  class HierarchyFilterProxyModel;
+class Wizard;
+class HierarchyFilterProxyModel;
 
-  class HierarchyPagePrivate : public WizardPagePrivate<Wizard>
-  {
+class HierarchyPagePrivate : public WizardPagePrivate<Wizard>
+{
     Q_DISABLE_COPY(HierarchyPagePrivate)
 
-  public:
+public:
     explicit HierarchyPagePrivate(QObject* parent) :
-      WizardPagePrivate<Wizard>(parent),
-      ui(new Ui::KHierarchyPage),
-      m_filterProxyModel(nullptr)
+        WizardPagePrivate<Wizard>(parent),
+        ui(new Ui::KHierarchyPage),
+        m_filterProxyModel(nullptr)
     {
     }
 
     ~HierarchyPagePrivate()
     {
-      delete ui;
+        delete ui;
     }
 
     Ui::KHierarchyPage        *ui;
     HierarchyFilterProxyModel *m_filterProxyModel;
     MyMoneyAccount             m_parentAccount;
-  };
+};
 }
 
 #endif

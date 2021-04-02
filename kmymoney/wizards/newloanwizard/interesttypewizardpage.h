@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class InterestTypeWizardPage; }
+namespace Ui {
+class InterestTypeWizardPage;
+}
 
 /**
  * This class implements the Interest Type page of the
@@ -26,12 +28,12 @@ namespace Ui { class InterestTypeWizardPage; }
 
 class InterestTypeWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit InterestTypeWizardPage(QWidget *parent = nullptr);
-  ~InterestTypeWizardPage();
+    explicit InterestTypeWizardPage(QWidget *parent = nullptr);
+    ~InterestTypeWizardPage();
 
-  Ui::InterestTypeWizardPage *ui;
+    Ui::InterestTypeWizardPage *ui;
 };
 
 #endif

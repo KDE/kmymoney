@@ -12,16 +12,16 @@
 
 class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit PluginSettingsWidget(QWidget* parent = 0);
+    explicit PluginSettingsWidget(QWidget* parent = 0);
 };
 
 class KCMCSVImporter : public KCModule
 {
 public:
-  explicit KCMCSVImporter(QWidget* parent, const QVariantList& args);
-  ~KCMCSVImporter();
+    explicit KCMCSVImporter(QWidget* parent, const QVariantList& args);
+    ~KCMCSVImporter();
 };
 
 #endif // KCM_CSVIMPORT_H

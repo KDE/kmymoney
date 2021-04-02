@@ -21,39 +21,39 @@ class MyMoneyAccount;
 
 class LedgerViewPage : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit LedgerViewPage(QWidget* parent = 0);
-  virtual ~LedgerViewPage();
+    explicit LedgerViewPage(QWidget* parent = 0);
+    virtual ~LedgerViewPage();
 
-  virtual void setAccount(const MyMoneyAccount& id);
-  virtual QString accountId() const;
+    virtual void setAccount(const MyMoneyAccount& id);
+    virtual QString accountId() const;
 
-  /**
-   * This method is used to modify the visibility of the
-   * empty entry at the end of the ledger. The default
-   * for the parameter @a show is @c true.
-   */
-  void setShowEntryForNewTransaction(bool show = true);
+    /**
+     * This method is used to modify the visibility of the
+     * empty entry at the end of the ledger. The default
+     * for the parameter @a show is @c true.
+     */
+    void setShowEntryForNewTransaction(bool show = true);
 
 protected:
 
 public Q_SLOTS:
-  void showTransactionForm(bool show);
-  void splitterChanged(int pos, int index);
+    void showTransactionForm(bool show);
+    void splitterChanged(int pos, int index);
 
 protected Q_SLOTS:
-  void startEdit();
-  void finishEdit();
+    void startEdit();
+    void finishEdit();
 
 Q_SIGNALS:
-  void transactionSelected(const QString& transactionSplitId);
-  void aboutToStartEdit();
-  void aboutToFinishEdit();
+    void transactionSelected(const QString& transactionSplitId);
+    void aboutToStartEdit();
+    void aboutToFinishEdit();
 
 private:
-  class Private;
-  Private * const d;
+    class Private;
+    Private * const d;
 };
 
 #endif // LEDGERVIEWPAGE_H

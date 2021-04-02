@@ -31,11 +31,13 @@ class QDate;
 class MyMoneyMoney;
 class MyMoneyTransaction;
 
-namespace eMyMoney { namespace Split {
+namespace eMyMoney {
+namespace Split {
 enum class InvestmentTransactionType;
 enum class State;
 enum class Action;
-}}
+}
+}
 
 /**
   * @author Thomas Baumgart
@@ -48,184 +50,184 @@ enum class Action;
 class MyMoneySplitPrivate;
 class KMM_MYMONEY_EXPORT MyMoneySplit : public MyMoneyObject, public MyMoneyKeyValueContainer
 {
-  Q_DECLARE_PRIVATE_D(MyMoneyObject::d_ptr, MyMoneySplit)
+    Q_DECLARE_PRIVATE_D(MyMoneyObject::d_ptr, MyMoneySplit)
 
-  KMM_MYMONEY_UNIT_TESTABLE
+    KMM_MYMONEY_UNIT_TESTABLE
 
 public:
 
-  MyMoneySplit();
-  explicit MyMoneySplit(const QString &id);
+    MyMoneySplit();
+    explicit MyMoneySplit(const QString &id);
 
-  MyMoneySplit(const QString& id,
-               const MyMoneySplit& other);
+    MyMoneySplit(const QString& id,
+                 const MyMoneySplit& other);
 
-  MyMoneySplit(const MyMoneySplit & other);
-  MyMoneySplit(MyMoneySplit && other);
-  MyMoneySplit & operator=(MyMoneySplit other);
-  friend void swap(MyMoneySplit& first, MyMoneySplit& second);
+    MyMoneySplit(const MyMoneySplit & other);
+    MyMoneySplit(MyMoneySplit && other);
+    MyMoneySplit & operator=(MyMoneySplit other);
+    friend void swap(MyMoneySplit& first, MyMoneySplit& second);
 
-  ~MyMoneySplit();
+    ~MyMoneySplit();
 
-  bool operator == (const MyMoneySplit&) const;
+    bool operator == (const MyMoneySplit&) const;
 
-  /**
-   * Returns a copy of the MyMoneySplit where the sign of
-   * shares and value is inverted.
-   */
-  MyMoneySplit operator-() const;
+    /**
+     * Returns a copy of the MyMoneySplit where the sign of
+     * shares and value is inverted.
+     */
+    MyMoneySplit operator-() const;
 
-  /**
-    * This method checks if a reference to the given object exists. It returns,
-    * a @p true if the object is referencing the one requested by the
-    * parameter @p id. If it does not, this method returns @p false.
-    *
-    * @param id id of the object to be checked for references
-    * @retval true This object references object with id @p id.
-    * @retval false This object does not reference the object with id @p id.
+    /**
+      * This method checks if a reference to the given object exists. It returns,
+      * a @p true if the object is referencing the one requested by the
+      * parameter @p id. If it does not, this method returns @p false.
+      *
+      * @param id id of the object to be checked for references
+      * @retval true This object references object with id @p id.
+      * @retval false This object does not reference the object with id @p id.
+      */
+    bool hasReferenceTo(const QString& id) const override;
+
+    MyMoneyMoney shares() const;
+    void setShares(const MyMoneyMoney& shares);
+
+    void negateShares();
+
+    /**
+     * This method returns the price. If the member m_price is not zero
+     * its value is returned. Otherwise, if m_shares is not zero the quotient
+     * of m_value / m_shares is returned. If m_values equals to zero, 1
+     * will be returned.
+     */
+    MyMoneyMoney price() const;
+    /** This method just returns what is in m_price, so when we write to the
+     *  database, we don't just generate prices
     */
-  bool hasReferenceTo(const QString& id) const override;
+    MyMoneyMoney actualPrice() const;
+    void setPrice(const MyMoneyMoney& price);
 
-  MyMoneyMoney shares() const;
-  void setShares(const MyMoneyMoney& shares);
+    MyMoneyMoney value() const;
+    MyMoneyMoney value(const QString& transactionCurrencyId, const QString& splitCurrencyId) const;
 
-  void negateShares();
+    /**
+     * Required to have (direct) access to the MyMoneyKeyValueContainer::value() method.
+     */
+    QString value(const QString& key) const;
 
-  /**
-   * This method returns the price. If the member m_price is not zero
-   * its value is returned. Otherwise, if m_shares is not zero the quotient
-   * of m_value / m_shares is returned. If m_values equals to zero, 1
-   * will be returned.
-   */
-  MyMoneyMoney price() const;
-  /** This method just returns what is in m_price, so when we write to the
-   *  database, we don't just generate prices
-  */
-  MyMoneyMoney actualPrice() const;
-  void setPrice(const MyMoneyMoney& price);
+    /**
+     * Required to have (direct) access to the MyMoneyKeyValueContainer::setValue() method.
+     */
+    void setValue(const QString& key, const QString& value);
+    void setValue(const MyMoneyMoney& value);
+    /**
+      * This method is used to set either the shares or the value depending on
+      * the currencies assigned to the split/account and the transaction.
+      *
+      * If @p transactionCurrencyId equals @p splitCurrencyId this method
+      * calls setValue(MyMoneyMoney) otherwise setShares(MyMoneyMoney).
+      *
+      * @param value the value to be assiged
+      * @param transactionCurrencyId the id of the currency assigned to the transaction
+      * @param splitCurrencyId the id of the currency assigned to the split (i.e. the
+      *                        the id of the currency assigned to the account that is
+      *                        referenced by the split)
+      */
+    void setValue(const MyMoneyMoney& value, const QString& transactionCurrencyId, const QString& splitCurrencyId);
 
-  MyMoneyMoney value() const;
-  MyMoneyMoney value(const QString& transactionCurrencyId, const QString& splitCurrencyId) const;
+    void negateValue();
 
-  /**
-   * Required to have (direct) access to the MyMoneyKeyValueContainer::value() method.
-   */
-  QString value(const QString& key) const;
+    QString accountId() const;
+    void setAccountId(const QString& account);
 
-  /**
-   * Required to have (direct) access to the MyMoneyKeyValueContainer::setValue() method.
-   */
-  void setValue(const QString& key, const QString& value);
-  void setValue(const MyMoneyMoney& value);
-  /**
-    * This method is used to set either the shares or the value depending on
-    * the currencies assigned to the split/account and the transaction.
-    *
-    * If @p transactionCurrencyId equals @p splitCurrencyId this method
-    * calls setValue(MyMoneyMoney) otherwise setShares(MyMoneyMoney).
-    *
-    * @param value the value to be assiged
-    * @param transactionCurrencyId the id of the currency assigned to the transaction
-    * @param splitCurrencyId the id of the currency assigned to the split (i.e. the
-    *                        the id of the currency assigned to the account that is
-    *                        referenced by the split)
-    */
-  void setValue(const MyMoneyMoney& value, const QString& transactionCurrencyId, const QString& splitCurrencyId);
+    QString costCenterId() const;
+    void setCostCenterId(const QString& costCenter);
 
-  void negateValue();
+    QString memo() const;
+    void setMemo(const QString& memo);
 
-  QString accountId() const;
-  void setAccountId(const QString& account);
+    eMyMoney::Split::State reconcileFlag() const;
+    void setReconcileFlag(const eMyMoney::Split::State flag);
 
-  QString costCenterId() const;
-  void setCostCenterId(const QString& costCenter);
+    QDate reconcileDate() const;
+    void setReconcileDate(const QDate& date);
 
-  QString memo() const;
-  void setMemo(const QString& memo);
+    QString payeeId() const;
+    void setPayeeId(const QString& payee);
 
-  eMyMoney::Split::State reconcileFlag() const;
-  void setReconcileFlag(const eMyMoney::Split::State flag);
+    QList<QString> tagIdList() const;
+    void setTagIdList(const QList<QString>& tagList);
 
-  QDate reconcileDate() const;
-  void setReconcileDate(const QDate& date);
+    QString action() const;
+    void setAction(const QString& action);
+    void setAction(eMyMoney::Split::InvestmentTransactionType type);
+    bool isAmortizationSplit() const;
+    bool isInterestSplit() const;
 
-  QString payeeId() const;
-  void setPayeeId(const QString& payee);
+    QString number() const;
+    void setNumber(const QString& number);
 
-  QList<QString> tagIdList() const;
-  void setTagIdList(const QList<QString>& tagList);
+    bool isAutoCalc() const;
 
-  QString action() const;
-  void setAction(const QString& action);
-  void setAction(eMyMoney::Split::InvestmentTransactionType type);
-  bool isAmortizationSplit() const;
-  bool isInterestSplit() const;
+    QString bankID() const;
+    void setBankID(const QString& bankID);
 
-  QString number() const;
-  void setNumber(const QString& number);
+    QString transactionId() const;
+    void setTransactionId(const QString& id);
 
-  bool isAutoCalc() const;
+    /**
+    * returns @a true if this its a transaction matched against an imported
+    * transaction. The imported and matched transaction can be extracted
+    * using matchedTransaction() and can be removed using removeMatch().
+     */
+    bool isMatched() const;
 
-  QString bankID() const;
-  void setBankID(const QString& bankID);
+    /**
+     * add an imported transaction @p t as matching transaction. Any previously
+     * added transaction will be overridden. @p t.isImported() must return true,
+     * otherwise the transaction is not stored.
+     */
+    void addMatch(const MyMoneyTransaction& t);
 
-  QString transactionId() const;
-  void setTransactionId(const QString& id);
+    /**
+     * remove the data of the imported transaction added with addMatch().
+     */
+    void removeMatch();
 
-  /**
-  * returns @a true if this its a transaction matched against an imported
-  * transaction. The imported and matched transaction can be extracted
-  * using matchedTransaction() and can be removed using removeMatch().
-   */
-  bool isMatched() const;
+    /**
+     * Return the matching imported transaction. If no such transaction
+     * is available (isMatched() returns false) an empty transaction is returned.
+     */
+    MyMoneyTransaction matchedTransaction() const;
 
-  /**
-   * add an imported transaction @p t as matching transaction. Any previously
-   * added transaction will be overridden. @p t.isImported() must return true,
-   * otherwise the transaction is not stored.
-   */
-  void addMatch(const MyMoneyTransaction& t);
+    /**
+     * This method replaces all occurrences of id @a oldId with
+     * @a newId.  All other ids are not changed.
+     *
+     * @return true if any change has been performed
+     * @return false if nothing has been modified
+     */
+    bool replaceId(const QString& newId, const QString& oldId);
 
-  /**
-   * remove the data of the imported transaction added with addMatch().
-   */
-  void removeMatch();
-
-  /**
-   * Return the matching imported transaction. If no such transaction
-   * is available (isMatched() returns false) an empty transaction is returned.
-   */
-  MyMoneyTransaction matchedTransaction() const;
-
-  /**
-   * This method replaces all occurrences of id @a oldId with
-   * @a newId.  All other ids are not changed.
-   *
-   * @return true if any change has been performed
-   * @return false if nothing has been modified
-   */
-  bool replaceId(const QString& newId, const QString& oldId);
-
-  static QString actionName(eMyMoney::Split::Action action);
+    static QString actionName(eMyMoney::Split::Action action);
 };
 
 
 inline void swap(MyMoneySplit& first, MyMoneySplit& second) // krazy:exclude=inline
 {
-  using std::swap;
-  swap(first.MyMoneyObject::d_ptr, second.MyMoneyObject::d_ptr);
-  swap(first.MyMoneyKeyValueContainer::d_ptr, second.MyMoneyKeyValueContainer::d_ptr);
+    using std::swap;
+    swap(first.MyMoneyObject::d_ptr, second.MyMoneyObject::d_ptr);
+    swap(first.MyMoneyKeyValueContainer::d_ptr, second.MyMoneyKeyValueContainer::d_ptr);
 }
 
 inline MyMoneySplit::MyMoneySplit(MyMoneySplit && other) : MyMoneySplit() // krazy:exclude=inline
 {
-  swap(*this, other);
+    swap(*this, other);
 }
 
 inline MyMoneySplit & MyMoneySplit::operator=(MyMoneySplit other) // krazy:exclude=inline
 {
-  swap(*this, other);
-  return *this;
+    swap(*this, other);
+    return *this;
 }
 
 /**

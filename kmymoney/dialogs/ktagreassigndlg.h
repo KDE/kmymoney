@@ -18,7 +18,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class KTagReassignDlg; }
+namespace Ui {
+class KTagReassignDlg;
+}
 
 /**
  *  Implementation of the dialog that lets the user select a tag in order
@@ -29,29 +31,29 @@ class MyMoneyTag;
 
 class KTagReassignDlg : public QDialog
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KTagReassignDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(KTagReassignDlg)
 
 public:
-  explicit KTagReassignDlg(QWidget* parent = nullptr);
-  ~KTagReassignDlg();
+    explicit KTagReassignDlg(QWidget* parent = nullptr);
+    ~KTagReassignDlg();
 
-  /**
-    * This function sets up the dialog, lets the user select a tag and returns
-    * the id of the selected tag in the tagslist.
-    *
-    * @param tagslist reference to QList of MyMoneyTag objects to be contained in the list
-    *
-    * @return Returns the id of the selected tag in the list or QString() if
-    *         the dialog was aborted. QString() is also returned if the tagslist is empty.
-    */
-  QString show(const QList<MyMoneyTag>& tagslist);
+    /**
+      * This function sets up the dialog, lets the user select a tag and returns
+      * the id of the selected tag in the tagslist.
+      *
+      * @param tagslist reference to QList of MyMoneyTag objects to be contained in the list
+      *
+      * @return Returns the id of the selected tag in the list or QString() if
+      *         the dialog was aborted. QString() is also returned if the tagslist is empty.
+      */
+    QString show(const QList<MyMoneyTag>& tagslist);
 
 protected:
-  void accept() override;
+    void accept() override;
 
 private:
-  Ui::KTagReassignDlg *ui;
+    Ui::KTagReassignDlg *ui;
 };
 
 #endif // KTAGREASSIGNDLG_H

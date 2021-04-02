@@ -21,9 +21,9 @@
 class MyMoneyKeyValueContainerPrivate
 {
 public:
-  /**
-    * This member variable represents the container of key/value pairs.
-    */
-  QMap<QString, QString>  m_kvp;
+    /**
+      * This member variable represents the container of key/value pairs.
+      */
+    QMap<QString, QString>  m_kvp;
 };
 #endif

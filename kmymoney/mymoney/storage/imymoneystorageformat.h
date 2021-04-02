@@ -28,32 +28,32 @@ class MyMoneyStorageMgr;
 class KMM_MYMONEY_EXPORT IMyMoneyOperationsFormat
 {
 public:
-  IMyMoneyOperationsFormat();
-  virtual ~IMyMoneyOperationsFormat();
+    IMyMoneyOperationsFormat();
+    virtual ~IMyMoneyOperationsFormat();
 
-  enum fileVersionDirectionType {
-    Reading = 0,          /**< version of file to be read */
-    Writing = 1,          /**< version to be used when writing a file */
-  };
+    enum fileVersionDirectionType {
+        Reading = 0,          /**< version of file to be read */
+        Writing = 1,          /**< version to be used when writing a file */
+    };
 
-  virtual void readFile(QIODevice* qf, MyMoneyStorageMgr* storage) = 0;
-  // virtual void readStream(QDataStream& s, IMyMoneySerialization* storage) = 0;
+    virtual void readFile(QIODevice* qf, MyMoneyStorageMgr* storage) = 0;
+    // virtual void readStream(QDataStream& s, IMyMoneySerialization* storage) = 0;
 
-  virtual void writeFile(QIODevice* qf, MyMoneyStorageMgr* storage) = 0;
-  //virtual void writeStream(QDataStream& s, IMyMoneySerialization* storage) = 0;
+    virtual void writeFile(QIODevice* qf, MyMoneyStorageMgr* storage) = 0;
+    //virtual void writeStream(QDataStream& s, IMyMoneySerialization* storage) = 0;
 
-  virtual void setProgressCallback(void(*callback)(int, int, const QString&)) = 0;
-  /**
-    * This member is used to store the file version information
-    * obtained while reading a file.
-    */
-  static unsigned int fileVersionRead;
+    virtual void setProgressCallback(void(*callback)(int, int, const QString&)) = 0;
+    /**
+      * This member is used to store the file version information
+      * obtained while reading a file.
+      */
+    static unsigned int fileVersionRead;
 
-  /**
-    * This member is used to store the file version information
-    * to be used when writing a file.
-    */
-  static unsigned int fileVersionWrite;
+    /**
+      * This member is used to store the file version information
+      * to be used when writing a file.
+      */
+    static unsigned int fileVersionWrite;
 };
 
 #endif

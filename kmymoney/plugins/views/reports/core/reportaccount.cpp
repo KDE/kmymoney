@@ -40,145 +40,145 @@ ReportAccount::ReportAccount()
 ReportAccount::ReportAccount(const ReportAccount& copy):
     MyMoneyAccount(copy), m_nameHierarchy(copy.m_nameHierarchy)
 {
-  // NOTE: I implemented the copy constructor solely for debugging reasons
+    // NOTE: I implemented the copy constructor solely for debugging reasons
 
-  DEBUG_ENTER(Q_FUNC_INFO);
+    DEBUG_ENTER(Q_FUNC_INFO);
 }
 
 ReportAccount::ReportAccount(const QString& accountid):
     MyMoneyAccount(MyMoneyFile::instance()->account(accountid))
 {
-  DEBUG_ENTER(Q_FUNC_INFO);
-  DEBUG_OUTPUT(QString("Account %1").arg(accountid));
-  calculateAccountHierarchy();
+    DEBUG_ENTER(Q_FUNC_INFO);
+    DEBUG_OUTPUT(QString("Account %1").arg(accountid));
+    calculateAccountHierarchy();
 }
 
 ReportAccount::ReportAccount(const MyMoneyAccount& account):
     MyMoneyAccount(account)
 {
-  DEBUG_ENTER(Q_FUNC_INFO);
-  DEBUG_OUTPUT(QString("Account %1").arg(account.id()));
-  calculateAccountHierarchy();
+    DEBUG_ENTER(Q_FUNC_INFO);
+    DEBUG_OUTPUT(QString("Account %1").arg(account.id()));
+    calculateAccountHierarchy();
 }
 
 void ReportAccount::calculateAccountHierarchy()
 {
-  DEBUG_ENTER(Q_FUNC_INFO);
+    DEBUG_ENTER(Q_FUNC_INFO);
 
-  MyMoneyFile* file = MyMoneyFile::instance();
-  QString resultid = id();
-  QString parentid = parentAccountId();
+    MyMoneyFile* file = MyMoneyFile::instance();
+    QString resultid = id();
+    QString parentid = parentAccountId();
 
-#ifdef DEBUG_HIDE_SENSITIVE
-  m_nameHierarchy.prepend(file->account(resultid).id());
-#else
-  m_nameHierarchy.prepend(file->account(resultid).name());
-#endif
-  while (!parentid.isEmpty() && !file->isStandardAccount(parentid)) {
-    // take on the identity of our parent
-    resultid = parentid;
-
-    // and try again
-    parentid = file->account(resultid).parentAccountId();
 #ifdef DEBUG_HIDE_SENSITIVE
     m_nameHierarchy.prepend(file->account(resultid).id());
 #else
     m_nameHierarchy.prepend(file->account(resultid).name());
 #endif
-  }
+    while (!parentid.isEmpty() && !file->isStandardAccount(parentid)) {
+        // take on the identity of our parent
+        resultid = parentid;
+
+        // and try again
+        parentid = file->account(resultid).parentAccountId();
+#ifdef DEBUG_HIDE_SENSITIVE
+        m_nameHierarchy.prepend(file->account(resultid).id());
+#else
+        m_nameHierarchy.prepend(file->account(resultid).name());
+#endif
+    }
 }
 
 MyMoneyMoney ReportAccount::deepCurrencyPrice(const QDate& date, bool exactDate) const
 {
-  DEBUG_ENTER(Q_FUNC_INFO);
+    DEBUG_ENTER(Q_FUNC_INFO);
 
-  MyMoneyMoney result(1, 1);
-  MyMoneyFile* file = MyMoneyFile::instance();
+    MyMoneyMoney result(1, 1);
+    MyMoneyFile* file = MyMoneyFile::instance();
 
-  MyMoneySecurity undersecurity = file->security(currencyId());
-  if (! undersecurity.isCurrency()) {
-    const MyMoneyPrice &price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), date, exactDate);
-    if (price.isValid()) {
-      result = price.rate(undersecurity.tradingCurrency());
+    MyMoneySecurity undersecurity = file->security(currencyId());
+    if (! undersecurity.isCurrency()) {
+        const MyMoneyPrice &price = file->price(undersecurity.id(), undersecurity.tradingCurrency(), date, exactDate);
+        if (price.isValid()) {
+            result = price.rate(undersecurity.tradingCurrency());
 
-      DEBUG_OUTPUT(QString("Converting under %1 to deep %2, price on %3 is %4")
-                   .arg(undersecurity.name())
-                   .arg(file->security(undersecurity.tradingCurrency()).name())
-                   .arg(date.toString(Qt::ISODate))
-                   .arg(result.toDouble()));
-    } else {
-      DEBUG_OUTPUT(QString("No price to convert under %1 to deep %2 on %3")
-                   .arg(undersecurity.name())
-                   .arg(file->security(undersecurity.tradingCurrency()).name())
-                   .arg(date.toString(Qt::ISODate)));
-      result = MyMoneyMoney();
+            DEBUG_OUTPUT(QString("Converting under %1 to deep %2, price on %3 is %4")
+                         .arg(undersecurity.name())
+                         .arg(file->security(undersecurity.tradingCurrency()).name())
+                         .arg(date.toString(Qt::ISODate))
+                         .arg(result.toDouble()));
+        } else {
+            DEBUG_OUTPUT(QString("No price to convert under %1 to deep %2 on %3")
+                         .arg(undersecurity.name())
+                         .arg(file->security(undersecurity.tradingCurrency()).name())
+                         .arg(date.toString(Qt::ISODate)));
+            result = MyMoneyMoney();
+        }
     }
-  }
 
-  return result;
+    return result;
 }
 
 MyMoneyMoney ReportAccount::baseCurrencyPrice(const QDate& date, bool exactDate) const
 {
-  // Note that whether or not the user chooses to convert to base currency, all the values
-  // for a given account/category are converted to the currency for THAT account/category
-  // The "Convert to base currency" tells the report to convert from the account/category
-  // currency to the file's base currency.
-  //
-  // An example where this matters is if Category 'C' and account 'U' are in USD, but
-  // Account 'J' is in JPY.  Say there are two transactions, one is US$100 from U to C,
-  // the other is JPY10,000 from J to C.  Given a JPY price of USD$0.01, this means
-  // C will show a balance of $200 NO MATTER WHAT the user chooses for 'convert to base
-  // currency.  This confused me for a while, which is why I wrote this comment.
-  //    --acejones
+    // Note that whether or not the user chooses to convert to base currency, all the values
+    // for a given account/category are converted to the currency for THAT account/category
+    // The "Convert to base currency" tells the report to convert from the account/category
+    // currency to the file's base currency.
+    //
+    // An example where this matters is if Category 'C' and account 'U' are in USD, but
+    // Account 'J' is in JPY.  Say there are two transactions, one is US$100 from U to C,
+    // the other is JPY10,000 from J to C.  Given a JPY price of USD$0.01, this means
+    // C will show a balance of $200 NO MATTER WHAT the user chooses for 'convert to base
+    // currency.  This confused me for a while, which is why I wrote this comment.
+    //    --acejones
 
-  DEBUG_ENTER(Q_FUNC_INFO);
+    DEBUG_ENTER(Q_FUNC_INFO);
 
-  MyMoneyMoney result(1, 1);
-  MyMoneyFile* file = MyMoneyFile::instance();
+    MyMoneyMoney result(1, 1);
+    MyMoneyFile* file = MyMoneyFile::instance();
 
-  if (isForeignCurrency()) {
-    result = foreignCurrencyPrice(file->baseCurrency().id(), date, exactDate);
-  }
+    if (isForeignCurrency()) {
+        result = foreignCurrencyPrice(file->baseCurrency().id(), date, exactDate);
+    }
 
-  return result;
+    return result;
 }
 
 MyMoneyMoney ReportAccount::foreignCurrencyPrice(const QString foreignCurrency, const QDate& date, bool exactDate) const
 {
-  DEBUG_ENTER(Q_FUNC_INFO);
+    DEBUG_ENTER(Q_FUNC_INFO);
 
-  MyMoneyMoney result(1, 1);
-  MyMoneyFile* file = MyMoneyFile::instance();
-  MyMoneySecurity security = file->security(foreignCurrency);
+    MyMoneyMoney result(1, 1);
+    MyMoneyFile* file = MyMoneyFile::instance();
+    MyMoneySecurity security = file->security(foreignCurrency);
 
-  //check whether it is a currency or a commodity. In the latter case case, get the trading currency
-  QString tradingCurrency;
-  if (security.isCurrency()) {
-    tradingCurrency = foreignCurrency;
-  } else {
-    tradingCurrency = security.tradingCurrency();
-  }
-
-  //It makes no sense to get the price if both currencies are the same
-  if (currency().id() != tradingCurrency) {
-    const MyMoneyPrice &price = file->price(currency().id(), tradingCurrency, date, exactDate);
-
-    if (price.isValid()) {
-      result = price.rate(tradingCurrency);
-      DEBUG_OUTPUT(QString("Converting deep %1 to currency %2, price on %3 is %4")
-                   .arg(file->currency(currency().id()).name())
-                   .arg(file->currency(foreignCurrency).name())
-                   .arg(date.toString())
-                   .arg(result.toDouble()));
+    //check whether it is a currency or a commodity. In the latter case case, get the trading currency
+    QString tradingCurrency;
+    if (security.isCurrency()) {
+        tradingCurrency = foreignCurrency;
     } else {
-      DEBUG_OUTPUT(QString("No price to convert deep %1 to currency %2 on %3")
-                   .arg(file->currency(currency().id()).name())
-                   .arg(file->currency(foreignCurrency).name())
-                   .arg(date.toString()));
+        tradingCurrency = security.tradingCurrency();
     }
-  }
-  return result;
+
+    //It makes no sense to get the price if both currencies are the same
+    if (currency().id() != tradingCurrency) {
+        const MyMoneyPrice &price = file->price(currency().id(), tradingCurrency, date, exactDate);
+
+        if (price.isValid()) {
+            result = price.rate(tradingCurrency);
+            DEBUG_OUTPUT(QString("Converting deep %1 to currency %2, price on %3 is %4")
+                         .arg(file->currency(currency().id()).name())
+                         .arg(file->currency(foreignCurrency).name())
+                         .arg(date.toString())
+                         .arg(result.toDouble()));
+        } else {
+            DEBUG_OUTPUT(QString("No price to convert deep %1 to currency %2 on %3")
+                         .arg(file->currency(currency().id()).name())
+                         .arg(file->currency(foreignCurrency).name())
+                         .arg(date.toString()));
+        }
+    }
+    return result;
 }
 
 /**
@@ -188,53 +188,53 @@ MyMoneyMoney ReportAccount::foreignCurrencyPrice(const QString foreignCurrency, 
   */
 MyMoneySecurity ReportAccount::currency() const
 {
-  MyMoneyFile* file = MyMoneyFile::instance();
+    MyMoneyFile* file = MyMoneyFile::instance();
 
-  // First, get the deep currency
-  MyMoneySecurity deepcurrency = file->security(currencyId());
-  if (! deepcurrency.isCurrency())
-    deepcurrency = file->security(deepcurrency.tradingCurrency());
+    // First, get the deep currency
+    MyMoneySecurity deepcurrency = file->security(currencyId());
+    if (! deepcurrency.isCurrency())
+        deepcurrency = file->security(deepcurrency.tradingCurrency());
 
-  // Return the deep currency's ID
-  return deepcurrency;
+    // Return the deep currency's ID
+    return deepcurrency;
 }
 
 bool ReportAccount::operator<(const ReportAccount& second) const
 {
 //   DEBUG_ENTER(Q_FUNC_INFO);
 
-  bool result = false;
-  bool haveresult = false;
-  QStringList::const_iterator it_first = m_nameHierarchy.begin();
-  QStringList::const_iterator it_second = second.m_nameHierarchy.begin();
-  while (it_first != m_nameHierarchy.end()) {
-    // The first string is longer than the second, but otherwise identical
-    if (it_second == second.m_nameHierarchy.end()) {
-      result = false;
-      haveresult = true;
-      break;
+    bool result = false;
+    bool haveresult = false;
+    QStringList::const_iterator it_first = m_nameHierarchy.begin();
+    QStringList::const_iterator it_second = second.m_nameHierarchy.begin();
+    while (it_first != m_nameHierarchy.end()) {
+        // The first string is longer than the second, but otherwise identical
+        if (it_second == second.m_nameHierarchy.end()) {
+            result = false;
+            haveresult = true;
+            break;
+        }
+
+        if ((*it_first) < (*it_second)) {
+            result = true;
+            haveresult = true;
+            break;
+        } else if ((*it_first) > (*it_second)) {
+            result = false;
+            haveresult = true;
+            break;
+        }
+
+        ++it_first;
+        ++it_second;
     }
 
-    if ((*it_first) < (*it_second)) {
-      result = true;
-      haveresult = true;
-      break;
-    } else if ((*it_first) > (*it_second)) {
-      result = false;
-      haveresult = true;
-      break;
-    }
-
-    ++it_first;
-    ++it_second;
-  }
-
-  // The second string is longer than the first, but otherwise identical
-  if (!haveresult && (it_second != second.m_nameHierarchy.end()))
-    result = true;
+    // The second string is longer than the first, but otherwise identical
+    if (!haveresult && (it_second != second.m_nameHierarchy.end()))
+        result = true;
 
 //   DEBUG_OUTPUT(QString("%1 < %2 is %3").arg(debugName(),second.debugName()).arg(result));
-  return result;
+    return result;
 }
 
 /**
@@ -246,77 +246,77 @@ bool ReportAccount::operator<(const ReportAccount& second) const
   */
 QString ReportAccount::name() const
 {
-  return m_nameHierarchy.back();
+    return m_nameHierarchy.back();
 }
 
 // MyMoneyAccount:fullHierarchyDebug()
 QString ReportAccount::debugName() const
 {
-  return m_nameHierarchy.join("|");
+    return m_nameHierarchy.join("|");
 }
 
 // MyMoneyAccount:fullHierarchy()
 QString ReportAccount::fullName() const
 {
-  return m_nameHierarchy.join(": ");
+    return m_nameHierarchy.join(": ");
 }
 
 // MyMoneyAccount:isTopCategory()
 bool ReportAccount::isTopLevel() const
 {
-  return (m_nameHierarchy.size() == 1);
+    return (m_nameHierarchy.size() == 1);
 }
 
 // MyMoneyAccount:hierarchyDepth()
 unsigned ReportAccount::hierarchyDepth() const
 {
-  return (m_nameHierarchy.size());
+    return (m_nameHierarchy.size());
 }
 
 ReportAccount ReportAccount::parent() const
 {
-  return ReportAccount(parentAccountId());
+    return ReportAccount(parentAccountId());
 }
 
 ReportAccount ReportAccount::topParent() const
 {
-  DEBUG_ENTER(Q_FUNC_INFO);
+    DEBUG_ENTER(Q_FUNC_INFO);
 
-  MyMoneyFile* file = MyMoneyFile::instance();
-  QString resultid = id();
-  QString parentid = parentAccountId();
+    MyMoneyFile* file = MyMoneyFile::instance();
+    QString resultid = id();
+    QString parentid = parentAccountId();
 
-  while (!parentid.isEmpty() && !file->isStandardAccount(parentid)) {
-    // take on the identity of our parent
-    resultid = parentid;
+    while (!parentid.isEmpty() && !file->isStandardAccount(parentid)) {
+        // take on the identity of our parent
+        resultid = parentid;
 
-    // and try again
-    parentid = file->account(resultid).parentAccountId();
-  }
+        // and try again
+        parentid = file->account(resultid).parentAccountId();
+    }
 
-  return ReportAccount(resultid);
+    return ReportAccount(resultid);
 }
 
 QString ReportAccount::topParentName() const
 {
-  return m_nameHierarchy.first();
+    return m_nameHierarchy.first();
 }
 
 QString ReportAccount::institutionId() const
 {
-  DEBUG_ENTER(Q_FUNC_INFO);
+    DEBUG_ENTER(Q_FUNC_INFO);
 
-  MyMoneyFile* file = MyMoneyFile::instance();
-  QString resultid = MyMoneyAccount::institutionId();
-  QString parentid = parentAccountId();
+    MyMoneyFile* file = MyMoneyFile::instance();
+    QString resultid = MyMoneyAccount::institutionId();
+    QString parentid = parentAccountId();
 
-  while (resultid.isEmpty() && !parentid.isEmpty() && !file->isStandardAccount(parentid)) {
-    const auto account = file->account(parentid);
-    resultid = account.institutionId();
-    // and try again
-    parentid = account.parentAccountId();
-  }
-  return resultid;
+    while (resultid.isEmpty() && !parentid.isEmpty() && !file->isStandardAccount(parentid)) {
+        const auto account = file->account(parentid);
+        resultid = account.institutionId();
+        // and try again
+        parentid = account.parentAccountId();
+    }
+    return resultid;
 }
 
 }  // end namespace reports

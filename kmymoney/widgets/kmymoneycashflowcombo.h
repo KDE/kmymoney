@@ -20,8 +20,16 @@
 
 #include "kmymoneymvccombo.h"
 
-namespace eMyMoney { namespace Account { enum class Type; } }
-namespace eWidgets { namespace eRegister { enum class CashFlowDirection; } }
+namespace eMyMoney {
+namespace Account {
+enum class Type;
+}
+}
+namespace eWidgets {
+namespace eRegister {
+enum class CashFlowDirection;
+}
+}
 
 /**
   * @author Thomas Baumgart
@@ -31,30 +39,30 @@ namespace eWidgets { namespace eRegister { enum class CashFlowDirection; } }
 class KMyMoneyCashFlowComboPrivate;
 class KMM_WIDGETS_EXPORT KMyMoneyCashFlowCombo : public KMyMoneyMVCCombo
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyCashFlowCombo)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyCashFlowCombo)
 
 public:
-  /**
-    * Create a combo box that contains the entries "Pay to", "From" and
-    * "  " for don't care.
-    */
-  explicit KMyMoneyCashFlowCombo(eMyMoney::Account::Type type, QWidget *parent = nullptr);
-  ~KMyMoneyCashFlowCombo() override;
+    /**
+      * Create a combo box that contains the entries "Pay to", "From" and
+      * "  " for don't care.
+      */
+    explicit KMyMoneyCashFlowCombo(eMyMoney::Account::Type type, QWidget *parent = nullptr);
+    ~KMyMoneyCashFlowCombo() override;
 
-  void setDirection(eWidgets::eRegister::CashFlowDirection dir);
-  eWidgets::eRegister::CashFlowDirection direction() const;
+    void setDirection(eWidgets::eRegister::CashFlowDirection dir);
+    eWidgets::eRegister::CashFlowDirection direction() const;
 
-  void removeDontCare();
+    void removeDontCare();
 
 protected Q_SLOTS:
-  void slotSetDirection(const QString& id);
+    void slotSetDirection(const QString& id);
 
 Q_SIGNALS:
-  void directionSelected(eWidgets::eRegister::CashFlowDirection);
+    void directionSelected(eWidgets::eRegister::CashFlowDirection);
 
 private:
-  Q_DECLARE_PRIVATE(KMyMoneyCashFlowCombo)
+    Q_DECLARE_PRIVATE(KMyMoneyCashFlowCombo)
 };
 
 #endif

@@ -12,19 +12,19 @@
 
 class MyMoneyPriceTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 protected:
-  MyMoneyPrice* m;
+    MyMoneyPrice* m;
 
 private Q_SLOTS:
-  void init();
-  void cleanup();
+    void init();
+    void cleanup();
 
-  void testDefaultConstructor();
-  void testConstructor();
-  void testValidity();
-  void testRate();
+    void testDefaultConstructor();
+    void testConstructor();
+    void testValidity();
+    void testRate();
 
 };
 #endif

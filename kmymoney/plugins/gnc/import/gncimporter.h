@@ -20,20 +20,20 @@ class MyMoneyGncReader;
 
 class GNCImporter : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::StoragePlugin
 {
-  Q_OBJECT
-  Q_INTERFACES(KMyMoneyPlugin::StoragePlugin)
+    Q_OBJECT
+    Q_INTERFACES(KMyMoneyPlugin::StoragePlugin)
 
 public:
-  explicit GNCImporter(QObject *parent, const QVariantList &args);
-  ~GNCImporter() override;
+    explicit GNCImporter(QObject *parent, const QVariantList &args);
+    ~GNCImporter() override;
 
-  MyMoneyStorageMgr *open(const QUrl &url) override;
-  bool save(const QUrl &url) override;
-  bool saveAs() override;
+    MyMoneyStorageMgr *open(const QUrl &url) override;
+    bool save(const QUrl &url) override;
+    bool saveAs() override;
 
-  eKMyMoney::StorageType storageType() const override;
-  QString fileExtension() const override;
-  QUrl openUrl() const override;
+    eKMyMoney::StorageType storageType() const override;
+    QString fileExtension() const override;
+    QUrl openUrl() const override;
 };
 
 #endif

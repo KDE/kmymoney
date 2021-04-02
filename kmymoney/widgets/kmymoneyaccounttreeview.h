@@ -23,8 +23,12 @@
 class MyMoneyObject;
 class AccountsViewProxyModel;
 
-namespace eAccountsModel { enum class Column; }
-namespace eView { enum class Intent; }
+namespace eAccountsModel {
+enum class Column;
+}
+namespace eView {
+enum class Intent;
+}
 enum class View;
 
 /**
@@ -33,33 +37,33 @@ enum class View;
 class KMyMoneyAccountTreeViewPrivate;
 class KMM_WIDGETS_EXPORT KMyMoneyAccountTreeView : public QTreeView
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyAccountTreeView)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyAccountTreeView)
 
 public:
-  explicit KMyMoneyAccountTreeView(QWidget* parent = nullptr);
-  ~KMyMoneyAccountTreeView();
+    explicit KMyMoneyAccountTreeView(QWidget* parent = nullptr);
+    ~KMyMoneyAccountTreeView();
 
-  AccountsViewProxyModel *init(View view);
+    AccountsViewProxyModel *init(View view);
 
 protected:
-  void mouseDoubleClickEvent(QMouseEvent *event) override;
-  void keyPressEvent(QKeyEvent *event) override;
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
 
 protected Q_SLOTS:
-  void customContextMenuRequested(const QPoint);
-  void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) override;
+    void customContextMenuRequested(const QPoint);
+    void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) override;
 
 Q_SIGNALS:
-  void selectByObject(const MyMoneyObject&, eView::Intent);
-  void selectByVariant(const QVariantList&, eView::Intent);
+    void selectByObject(const MyMoneyObject&, eView::Intent);
+    void selectByVariant(const QVariantList&, eView::Intent);
 
 private:
-  KMyMoneyAccountTreeViewPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KMyMoneyAccountTreeView)
+    KMyMoneyAccountTreeViewPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KMyMoneyAccountTreeView)
 
 private Q_SLOTS:
-  void slotColumnToggled(const eAccountsModel::Column column, const bool show);
+    void slotColumnToggled(const eAccountsModel::Column column, const bool show);
 };
 
 #endif // KMYMONEYACCOUNTTREEVIEW_H

@@ -14,37 +14,37 @@ unavailableTask::unavailableTask(const QDomElement& element)
 
 QString unavailableTask::jobTypeName() const
 {
-  return i18n("Could not load responsible plugin to view this task.");
+    return i18n("Could not load responsible plugin to view this task.");
 }
 
 QString unavailableTask::responsibleAccount() const
 {
-  return QString();
+    return QString();
 }
 
 unavailableTask* unavailableTask::createFromXml(const QDomElement& element) const
 {
-  return new unavailableTask(element);
+    return new unavailableTask(element);
 }
 
 void unavailableTask::writeXML(QDomDocument& document, QDomElement& parent) const
 {
-  Q_UNUSED(document);
-  parent = m_data;
+    Q_UNUSED(document);
+    parent = m_data;
 }
 
 bool unavailableTask::hasReferenceTo(const QString& id) const
 {
-  Q_UNUSED(id);
-  return false;
+    Q_UNUSED(id);
+    return false;
 }
 
 unavailableTask* unavailableTask::clone() const
 {
-  return new unavailableTask(m_data);
+    return new unavailableTask(m_data);
 }
 
 bool unavailableTask::isValid() const
 {
-  return true;
+    return true;
 }

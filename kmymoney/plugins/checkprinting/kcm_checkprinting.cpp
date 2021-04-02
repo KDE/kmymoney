@@ -23,45 +23,45 @@
 PluginSettingsWidget::PluginSettingsWidget(QWidget* parent) :
     QWidget(parent)
 {
-  setupUi(this);
-  #ifdef ENABLE_WEBENGINE
-  m_checkTemplatePreviewHTMLPart = new QWebEngineView(m_previewFrame);
-  #else
-  m_checkTemplatePreviewHTMLPart = new KWebView(m_previewFrame);
-  #endif
+    setupUi(this);
+#ifdef ENABLE_WEBENGINE
+    m_checkTemplatePreviewHTMLPart = new QWebEngineView(m_previewFrame);
+#else
+    m_checkTemplatePreviewHTMLPart = new KWebView(m_previewFrame);
+#endif
 
-  QVBoxLayout *layout = new QVBoxLayout;
-  m_previewFrame->setLayout(layout);
-  layout->addWidget(m_checkTemplatePreviewHTMLPart);
+    QVBoxLayout *layout = new QVBoxLayout;
+    m_previewFrame->setLayout(layout);
+    layout->addWidget(m_checkTemplatePreviewHTMLPart);
 
-  connect(kcfg_checkTemplateFile, SIGNAL(urlSelected(QUrl)),
-          this, SLOT(urlSelected(QUrl)));
-  connect(kcfg_checkTemplateFile, SIGNAL(returnPressed(QString)),
-          this, SLOT(returnPressed(QString)));
+    connect(kcfg_checkTemplateFile, SIGNAL(urlSelected(QUrl)),
+            this, SLOT(urlSelected(QUrl)));
+    connect(kcfg_checkTemplateFile, SIGNAL(returnPressed(QString)),
+            this, SLOT(returnPressed(QString)));
 }
 
 void PluginSettingsWidget::urlSelected(const QUrl &url)
 {
-  if (!url.isEmpty())
-    m_checkTemplatePreviewHTMLPart->load(url);
+    if (!url.isEmpty())
+        m_checkTemplatePreviewHTMLPart->load(url);
 }
 
 void PluginSettingsWidget::returnPressed(const QString& url)
 {
-  if (!url.isEmpty())
-    m_checkTemplatePreviewHTMLPart->load(QUrl::fromUserInput(url));
+    if (!url.isEmpty())
+        m_checkTemplatePreviewHTMLPart->load(QUrl::fromUserInput(url));
 }
 
 KCMCheckPrinting::KCMCheckPrinting(QWidget *parent, const QVariantList& args)
-  : KCModule(parent, args)
+    : KCModule(parent, args)
 {
-  PluginSettingsWidget* w = new PluginSettingsWidget(this);
-  addConfig(PluginSettings::self(), w);
-  QVBoxLayout *layout = new QVBoxLayout;
-  setLayout(layout);
-  layout->addWidget(w);
-  load();
-  w->urlSelected(QUrl::fromUserInput(PluginSettings::checkTemplateFile()));
+    PluginSettingsWidget* w = new PluginSettingsWidget(this);
+    addConfig(PluginSettings::self(), w);
+    QVBoxLayout *layout = new QVBoxLayout;
+    setLayout(layout);
+    layout->addWidget(w);
+    load();
+    w->urlSelected(QUrl::fromUserInput(PluginSettings::checkTemplateFile()));
 }
 
 KCMCheckPrinting::~KCMCheckPrinting()

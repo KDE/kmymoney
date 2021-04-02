@@ -9,19 +9,22 @@
 #include <QHashFunctions>
 
 enum class View { Home = 0, Institutions, Accounts, Schedules, Categories, Tags,
-                  Payees, Ledgers, Investments, Reports, Budget, Forecast, OnlineJobOutbox, NewLedgers, None };
+                  Payees, Ledgers, Investments, Reports, Budget, Forecast, OnlineJobOutbox, NewLedgers, None
+                };
 
-inline uint qHash(const View key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+inline uint qHash(const View key, uint seed) {
+    return ::qHash(static_cast<uint>(key), seed);
+}
 
 namespace eView {
-  enum class Tag { All = 0,
-                   Referenced, // used tags
-                   Unused,     // unused tags
-                   Opened,     // not closed tags
-                   Closed,     // closed tags
-                 };
+enum class Tag { All = 0,
+                 Referenced, // used tags
+                 Unused,     // unused tags
+                 Opened,     // not closed tags
+                 Closed,     // closed tags
+               };
 
-  enum class Intent {
+enum class Intent {
     None,
     UpdateActions,
     OpenContextMenu,
@@ -41,9 +44,9 @@ namespace eView {
     SelectRegisterTransactions,
     AccountReconciled,
     SetOnlinePlugins,
-  };
+};
 
-  enum class Action {
+enum class Action {
     None,
     Refresh,
     SetDefaultFocus,
@@ -57,7 +60,7 @@ namespace eView {
     InitializeAfterFileOpen,
     DisableViewDepenedendActions,
     ShowBalanceChart,
-  };
+};
 
 }
 

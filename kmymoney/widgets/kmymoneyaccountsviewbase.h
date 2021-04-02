@@ -29,20 +29,20 @@ class AccountsViewProxyModel;
 class KMyMoneyAccountsViewBasePrivate;
 class KMM_WIDGETS_EXPORT KMyMoneyAccountsViewBase : public KMyMoneyViewBase
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KMyMoneyAccountsViewBase(QWidget* parent = nullptr);
-  virtual ~KMyMoneyAccountsViewBase();
+    explicit KMyMoneyAccountsViewBase(QWidget* parent = nullptr);
+    virtual ~KMyMoneyAccountsViewBase();
 
-  AccountsViewProxyModel  *getProxyModel();
-  KMyMoneyAccountTreeView *getTreeView();
+    AccountsViewProxyModel  *getProxyModel();
+    KMyMoneyAccountTreeView *getTreeView();
 
 protected:
-  KMyMoneyAccountsViewBase(KMyMoneyAccountsViewBasePrivate &dd, QWidget *parent);
+    KMyMoneyAccountsViewBase(KMyMoneyAccountsViewBasePrivate &dd, QWidget *parent);
 
 private:
-  Q_DECLARE_PRIVATE(KMyMoneyAccountsViewBase)
+    Q_DECLARE_PRIVATE(KMyMoneyAccountsViewBase)
 };
 
 #endif

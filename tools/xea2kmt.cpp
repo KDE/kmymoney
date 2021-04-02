@@ -101,12 +101,12 @@ public:
     }
 
     TemplateAccount(const TemplateAccount &b)
-      : id(b.id),
-        m_type(b.m_type),
-        m_name(b.m_name),
-        code(b.code),
-        parent(b.parent),
-        slotList(b.slotList)
+        : id(b.id),
+          m_type(b.m_type),
+          m_name(b.m_name),
+          code(b.code),
+          parent(b.parent),
+          slotList(b.slotList)
     {
     }
 
@@ -209,7 +209,7 @@ QDebug operator <<(QDebug out, const TemplateAccount::PointerList &a)
 {
     out << "TemplateAccount::List(";
     foreach(const TemplateAccount *account, a)
-            out << *account;
+        out << *account;
     out << ")";
     return out;
 }
@@ -488,13 +488,13 @@ protected:
         QString fileName = inFileName;
         fileName.replace(QRegExp(".*/accounts"),"accounts");
         xml.writeComment(QString("\n"
-            "     Converted using xea2kmt from GnuCash sources\n"
-            "\n"
-            "        %1\n"
-            "\n"
-            "     Please check the source file for possible copyright\n"
-            "     and license information.\n"
-        ).arg(fileName));
+                                 "     Converted using xea2kmt from GnuCash sources\n"
+                                 "\n"
+                                 "        %1\n"
+                                 "\n"
+                                 "     Please check the source file for possible copyright\n"
+                                 "     and license information.\n"
+                                ).arg(fileName));
         xml.writeDTD("<!DOCTYPE KMYMONEY-TEMPLATE>");
         xml.writeStartElement("","kmymoney-account-template");
         _template.fileName = fileName;

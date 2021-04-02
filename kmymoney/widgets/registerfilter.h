@@ -18,19 +18,23 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace eWidgets { namespace eRegister { enum class ItemState; } }
+namespace eWidgets {
+namespace eRegister {
+enum class ItemState;
+}
+}
 
 namespace KMyMoneyRegister
 {
-  /**
-  * Used to filter items from the register.
-  */
-  struct RegisterFilter {
+/**
+* Used to filter items from the register.
+*/
+struct RegisterFilter {
     explicit RegisterFilter(const QString &t, eWidgets::eRegister::ItemState s);
 
     eWidgets::eRegister::ItemState state;
     QString text;
-  };
+};
 
 } // namespace
 

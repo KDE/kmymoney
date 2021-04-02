@@ -24,15 +24,15 @@ template <class T>
 class WizardPagePrivate : public KMyMoneyWizardPagePrivate
 {
 public:
-  WizardPagePrivate(QObject* parent) :
-    KMyMoneyWizardPagePrivate(parent),
-    m_wizard(nullptr),
-    m_wizardBase(nullptr)
-  {
-  }
+    WizardPagePrivate(QObject* parent) :
+        KMyMoneyWizardPagePrivate(parent),
+        m_wizard(nullptr),
+        m_wizardBase(nullptr)
+    {
+    }
 
-  T*                m_wizard;
-  KMyMoneyWizard*   m_wizardBase;
+    T*                m_wizard;
+    KMyMoneyWizard*   m_wizardBase;
 };
 
 #endif

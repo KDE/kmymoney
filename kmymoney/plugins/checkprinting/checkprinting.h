@@ -14,30 +14,30 @@ class KPluginInfo;
 class QObject;
 class CheckPrinting : public KMyMoneyPlugin::Plugin
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit CheckPrinting(QObject *parent, const QVariantList &args);
-  ~CheckPrinting() override;
+    explicit CheckPrinting(QObject *parent, const QVariantList &args);
+    ~CheckPrinting() override;
 
 public Q_SLOTS:
-  void plug() override;
-  void unplug() override;
-  void configurationChanged() override;
+    void plug() override;
+    void unplug() override;
+    void configurationChanged() override;
 
 private:
-  void readCheckTemplate();
+    void readCheckTemplate();
 
-  bool canBePrinted(const KMyMoneyRegister::SelectedTransaction & selectedTransaction) const;
-  void markAsPrinted(const KMyMoneyRegister::SelectedTransaction & selectedTransaction);
+    bool canBePrinted(const KMyMoneyRegister::SelectedTransaction & selectedTransaction) const;
+    void markAsPrinted(const KMyMoneyRegister::SelectedTransaction & selectedTransaction);
 
 protected Q_SLOTS:
-  void slotPrintCheck();
-  void slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
+    void slotPrintCheck();
+    void slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
 
 private:
-  struct Private;
-  std::unique_ptr<Private> d;
+    struct Private;
+    std::unique_ptr<Private> d;
 };
 
 #endif

@@ -23,21 +23,21 @@ class KBAccountListViewItem;
 class KBAccountListViewItem: public QTreeWidgetItem
 {
 private:
-  AB_ACCOUNT_SPEC *_account;
+    AB_ACCOUNT_SPEC *_account;
 
-  void _populate();
-  bool operator< (const QTreeWidgetItem & other) const final override;   //!< correctly sort text columns, which contain numbers
+    void _populate();
+    bool operator< (const QTreeWidgetItem & other) const final override;   //!< correctly sort text columns, which contain numbers
 
 public:
-  KBAccountListViewItem(KBAccountListView *parent, AB_ACCOUNT_SPEC *acc);
-  KBAccountListViewItem(KBAccountListView *parent,
-                        QTreeWidgetItem *after,
-                        AB_ACCOUNT_SPEC *acc);
-  KBAccountListViewItem(const KBAccountListViewItem &item);
+    KBAccountListViewItem(KBAccountListView *parent, AB_ACCOUNT_SPEC *acc);
+    KBAccountListViewItem(KBAccountListView *parent,
+                          QTreeWidgetItem *after,
+                          AB_ACCOUNT_SPEC *acc);
+    KBAccountListViewItem(const KBAccountListViewItem &item);
 
-  virtual ~KBAccountListViewItem();
+    virtual ~KBAccountListViewItem();
 
-  AB_ACCOUNT_SPEC *getAccount();
+    AB_ACCOUNT_SPEC *getAccount();
 };
 
 
@@ -46,16 +46,16 @@ class KBAccountListView: public QTreeWidget
 {
 private:
 public:
-  explicit KBAccountListView(QWidget *parent = 0);
-  virtual ~KBAccountListView();
+    explicit KBAccountListView(QWidget *parent = 0);
+    virtual ~KBAccountListView();
 
-  void addAccount(AB_ACCOUNT_SPEC *acc);
-  void addAccounts(const std::list<AB_ACCOUNT_SPEC*> &accs);
+    void addAccount(AB_ACCOUNT_SPEC *acc);
+    void addAccounts(const std::list<AB_ACCOUNT_SPEC*> &accs);
 
-  AB_ACCOUNT_SPEC *getCurrentAccount();
-  std::list<AB_ACCOUNT_SPEC*> getSelectedAccounts();
+    AB_ACCOUNT_SPEC *getCurrentAccount();
+    std::list<AB_ACCOUNT_SPEC*> getSelectedAccounts();
 
-  std::list<AB_ACCOUNT_SPEC*> getSortedAccounts();
+    std::list<AB_ACCOUNT_SPEC*> getSortedAccounts();
 
 };
 

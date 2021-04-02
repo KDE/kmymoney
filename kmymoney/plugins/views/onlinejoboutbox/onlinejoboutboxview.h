@@ -20,17 +20,17 @@ class KOnlineJobOutboxView;
 
 class OnlineJobOutboxView : public KMyMoneyPlugin::Plugin
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit OnlineJobOutboxView(QObject *parent, const QVariantList &args);
-  ~OnlineJobOutboxView() final;
+    explicit OnlineJobOutboxView(QObject *parent, const QVariantList &args);
+    ~OnlineJobOutboxView() final;
 
-  void plug() final override;
-  void unplug() final override;
+    void plug() final override;
+    void unplug() final override;
 
 private:
-  KOnlineJobOutboxView* m_view;
+    KOnlineJobOutboxView* m_view;
 };
 
 #endif

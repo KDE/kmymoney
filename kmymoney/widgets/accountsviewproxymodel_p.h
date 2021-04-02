@@ -24,19 +24,19 @@
 
 class AccountsViewProxyModelPrivate : public AccountsProxyModelPrivate
 {
-  Q_DISABLE_COPY(AccountsViewProxyModelPrivate)
+    Q_DISABLE_COPY(AccountsViewProxyModelPrivate)
 
 public:
-  AccountsViewProxyModelPrivate() :
-    AccountsProxyModelPrivate()
-  {
-  }
+    AccountsViewProxyModelPrivate() :
+        AccountsProxyModelPrivate()
+    {
+    }
 
-  virtual ~AccountsViewProxyModelPrivate() override
-  {
-  }
+    virtual ~AccountsViewProxyModelPrivate() override
+    {
+    }
 
-  QSet<eAccountsModel::Column> m_visColumns;
+    QSet<eAccountsModel::Column> m_visColumns;
 };
 
 #endif

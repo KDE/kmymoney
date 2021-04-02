@@ -13,25 +13,25 @@
 
 class QueryTableTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 private:
-  MyMoneyStorageMgr* storage;
-  MyMoneyFile* file;
+    MyMoneyStorageMgr* storage;
+    MyMoneyFile* file;
 
 private Q_SLOTS:
-  void setup();
-  void init();
-  void cleanup();
-  void testQueryBasics();
-  void testCashFlowAnalysis();
-  void testAccountQuery();
-  void testInvestment();
-  void testSplitShares();
-  void testConversionRate();
-  void testBalanceColumn();
-  void testBalanceColumnWithMultipleCurrencies();
-  void testTaxReport();
-  void testProtectedMethods();
+    void setup();
+    void init();
+    void cleanup();
+    void testQueryBasics();
+    void testCashFlowAnalysis();
+    void testAccountQuery();
+    void testInvestment();
+    void testSplitShares();
+    void testConversionRate();
+    void testBalanceColumn();
+    void testBalanceColumnWithMultipleCurrencies();
+    void testTaxReport();
+    void testProtectedMethods();
 };
 
 #endif

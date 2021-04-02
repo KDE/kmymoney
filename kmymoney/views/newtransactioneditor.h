@@ -19,57 +19,57 @@ class QWidget;
 
 class NewTransactionEditor : public QFrame
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit NewTransactionEditor(QWidget* parent = 0, const QString& accountId = QString());
-  virtual ~NewTransactionEditor();
+    explicit NewTransactionEditor(QWidget* parent = 0, const QString& accountId = QString());
+    virtual ~NewTransactionEditor();
 
-  /**
-   * This method returns true if the user pressed the enter button.
-   * It remains false, in case the user pressed the cancel button.
-   */
-  virtual bool accepted() const;
+    /**
+     * This method returns true if the user pressed the enter button.
+     * It remains false, in case the user pressed the cancel button.
+     */
+    virtual bool accepted() const;
 
-  /**
-   * Returns the currently entered amount
-   */
-  MyMoneyMoney transactionAmount() const;
+    /**
+     * Returns the currently entered amount
+     */
+    MyMoneyMoney transactionAmount() const;
 
-  /**
-   */
-  void loadTransaction(const QString& id);
-  void saveTransaction();
+    /**
+     */
+    void loadTransaction(const QString& id);
+    void saveTransaction();
 
-  /**
-   * Reimplemented to suppress some events in certain conditions
-   */
-  bool eventFilter(QObject* o, QEvent* e) override;
+    /**
+     * Reimplemented to suppress some events in certain conditions
+     */
+    bool eventFilter(QObject* o, QEvent* e) override;
 
 protected:
-  virtual void keyPressEvent(QKeyEvent* e) override;
+    virtual void keyPressEvent(QKeyEvent* e) override;
 
 protected Q_SLOTS:
-  virtual void reject();
-  virtual void acceptEdit();
+    virtual void reject();
+    virtual void acceptEdit();
 
-  virtual void editSplits();
+    virtual void editSplits();
 
-  virtual void numberChanged(const QString& newNumber);
-  virtual void categoryChanged(const QString& accountId);
-  virtual void costCenterChanged(int costCenterIndex);
-  virtual void postdateChanged(const QDate& date);
+    virtual void numberChanged(const QString& newNumber);
+    virtual void categoryChanged(const QString& accountId);
+    virtual void costCenterChanged(int costCenterIndex);
+    virtual void postdateChanged(const QDate& date);
 
-  void valueChanged();
+    void valueChanged();
 
 Q_SIGNALS:
-  void done();
-  void transactionChanged(const QString&);
+    void done();
+    void transactionChanged(const QString&);
 
 private:
-  class Private;
-  QScopedPointer<Private> const d;
-  static QDate  m_lastPostDateUsed;
+    class Private;
+    QScopedPointer<Private> const d;
+    static QDate  m_lastPostDateUsed;
 };
 
 #endif // NEWTRANSACTIONEDITOR_H

@@ -24,16 +24,16 @@
 class KPriceTreeItem : public QTreeWidgetItem
 {
 public:
-  explicit KPriceTreeItem(QTreeWidget* parent);
+    explicit KPriceTreeItem(QTreeWidget* parent);
 
-  bool operator<(const QTreeWidgetItem &otherItem) const final override;
+    bool operator<(const QTreeWidgetItem &otherItem) const final override;
 
-  enum PriceItemDataRole {
-    ScheduleIdRole = Qt::UserRole,
-    OrderRole = Qt::UserRole + 1
-  };
+    enum PriceItemDataRole {
+        ScheduleIdRole = Qt::UserRole,
+        OrderRole = Qt::UserRole + 1
+    };
 
-  enum ePriceColumns { ePriceCommodity = 0, ePriceStockName, ePriceCurrency, ePriceDate, ePricePrice, ePriceSource };
+    enum ePriceColumns { ePriceCommodity = 0, ePriceStockName, ePriceCurrency, ePriceDate, ePricePrice, ePriceSource };
 
 };
 

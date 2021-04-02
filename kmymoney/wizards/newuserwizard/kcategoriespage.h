@@ -22,29 +22,29 @@ template <typename T> class QList;
 
 namespace NewUserWizard
 {
-  class Wizard;
-  /**
-  * Wizard page collecting information about the account templates.
-  *
-  * @author Thomas Baumgart
-  */
-  class CategoriesPagePrivate;
-  class CategoriesPage : public Accounts, public WizardPage<Wizard>
-  {
+class Wizard;
+/**
+* Wizard page collecting information about the account templates.
+*
+* @author Thomas Baumgart
+*/
+class CategoriesPagePrivate;
+class CategoriesPage : public Accounts, public WizardPage<Wizard>
+{
     Q_OBJECT
     Q_DISABLE_COPY(CategoriesPage)
 
-  public:
+public:
     explicit CategoriesPage(Wizard* parent);
     ~CategoriesPage() override;
 
     KMyMoneyWizardPage* nextPage() const override;
     QList<MyMoneyTemplate> selectedTemplates() const;
 
-  private:
+private:
     Q_DECLARE_PRIVATE_D(WizardPage<Wizard>::d_ptr, CategoriesPage)
     friend class Wizard;
-  };
+};
 } // namespace
 
 #endif

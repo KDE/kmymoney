@@ -23,29 +23,29 @@ class QTextCodec;
 class KGncImportOptionsDlgPrivate;
 class KGncImportOptionsDlg : public QDialog
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KGncImportOptionsDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(KGncImportOptionsDlg)
 
 public:
-  explicit KGncImportOptionsDlg(QWidget *parent = nullptr);
-  ~KGncImportOptionsDlg();
+    explicit KGncImportOptionsDlg(QWidget *parent = nullptr);
+    ~KGncImportOptionsDlg();
 
-  int investmentOption() const;
-  bool quoteOption() const;
-  bool scheduleOption() const;
-  QTextCodec* decodeOption();
-  bool txNotesOption() const;
-  bool generalDebugOption() const;
-  bool xmlDebugOption() const;
-  bool anonymizeOption() const;
+    int investmentOption() const;
+    bool quoteOption() const;
+    bool scheduleOption() const;
+    QTextCodec* decodeOption();
+    bool txNotesOption() const;
+    bool generalDebugOption() const;
+    bool xmlDebugOption() const;
+    bool anonymizeOption() const;
 
 public Q_SLOTS:
-  void slotDecodeOptionChanged(bool);
-  void slotHelp();
+    void slotDecodeOptionChanged(bool);
+    void slotHelp();
 
 private:
-  KGncImportOptionsDlgPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KGncImportOptionsDlg)
+    KGncImportOptionsDlgPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KGncImportOptionsDlg)
 };
 
 #endif

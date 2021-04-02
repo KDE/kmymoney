@@ -37,33 +37,33 @@
 
 namespace NewAccountWizard
 {
-  BrokeragePage::BrokeragePage(Wizard* wizard) :
+BrokeragePage::BrokeragePage(Wizard* wizard) :
     QWidget(wizard),
     WizardPage<Wizard>(*new BrokeragePagePrivate(wizard), StepBroker, this, wizard)
-  {
+{
     Q_D(BrokeragePage);
     d->ui->setupUi(this);
     connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &BrokeragePage::slotLoadWidgets);
-  }
+}
 
-  BrokeragePage::~BrokeragePage()
-  {
-  }
+BrokeragePage::~BrokeragePage()
+{
+}
 
-  void BrokeragePage::slotLoadWidgets()
-  {
+void BrokeragePage::slotLoadWidgets()
+{
     Q_D(BrokeragePage);
     d->ui->m_brokerageCurrency->update(QString("x"));
-  }
+}
 
-  void BrokeragePage::enterPage()
-  {
+void BrokeragePage::enterPage()
+{
     Q_D(BrokeragePage);
     // assign the currency of the investment account to the
     // brokerage account if nothing else has ever been selected
     if (d->ui->m_brokerageCurrency->security().id().isEmpty()) {
         d->ui->m_brokerageCurrency->setSecurity(d->m_wizard->d_func()->m_accountTypePage->d_func()->ui->m_currencyComboBox->security());
-      }
+    }
 
     // check if the institution relevant fields should be enabled or not
     bool enabled = d->m_wizard->d_func()->m_institutionPage->d_func()->ui->m_accountNumber->isEnabled();
@@ -71,17 +71,17 @@ namespace NewAccountWizard
     d->ui->m_accountNumber->setEnabled(enabled);
     d->ui->m_ibanLabel->setEnabled(enabled);
     d->ui->m_iban->setEnabled(enabled);
-  }
+}
 
-  QWidget* BrokeragePage::initialFocusWidget() const
-  {
+QWidget* BrokeragePage::initialFocusWidget() const
+{
     Q_D(const BrokeragePage);
     return d->ui->m_createBrokerageButton;
-  }
+}
 
-  KMyMoneyWizardPage* BrokeragePage::nextPage() const
-  {
+KMyMoneyWizardPage* BrokeragePage::nextPage() const
+{
     Q_D(const BrokeragePage);
     return d->m_wizard->d_func()->m_hierarchyPage;
-  }
+}
 }

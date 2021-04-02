@@ -46,22 +46,24 @@ class ReportAccount;
 class QueryTable : public ListTable
 {
 public:
-  explicit QueryTable(const MyMoneyReport&);
-  void init();
+    explicit QueryTable(const MyMoneyReport&);
+    void init();
 
 protected:
-  void constructAccountTable();
-  void constructTotalRows();
-  void constructTransactionTable();
-  void sumInvestmentValues(const ReportAccount &account, QList<CashFlowList> &cfList, QList<MyMoneyMoney> &shList) const;
-  void constructPerformanceRow(const ReportAccount& account, TableRow& result, CashFlowList &all) const;
-  void constructCapitalGainRow(const ReportAccount& account, TableRow& result) const;
-  QString helperROI(const MyMoneyMoney& buys, const MyMoneyMoney& sells, const MyMoneyMoney& startingBal, const MyMoneyMoney& endingBal, const MyMoneyMoney& cashIncome) const;
-  QString helperIRR(const CashFlowList& all) const;
-  void constructSplitsTable();
-  bool linkEntries() const final override { return true; }
+    void constructAccountTable();
+    void constructTotalRows();
+    void constructTransactionTable();
+    void sumInvestmentValues(const ReportAccount &account, QList<CashFlowList> &cfList, QList<MyMoneyMoney> &shList) const;
+    void constructPerformanceRow(const ReportAccount& account, TableRow& result, CashFlowList &all) const;
+    void constructCapitalGainRow(const ReportAccount& account, TableRow& result) const;
+    QString helperROI(const MyMoneyMoney& buys, const MyMoneyMoney& sells, const MyMoneyMoney& startingBal, const MyMoneyMoney& endingBal, const MyMoneyMoney& cashIncome) const;
+    QString helperIRR(const CashFlowList& all) const;
+    void constructSplitsTable();
+    bool linkEntries() const final override {
+        return true;
+    }
 private:
-  enum InvestmentValue {Buys = 0, Sells, BuysOfSells, SellsOfBuys, LongTermBuysOfSells, LongTermSellsOfBuys, BuysOfOwned, ReinvestIncome, CashIncome, End};
+    enum InvestmentValue {Buys = 0, Sells, BuysOfSells, SellsOfBuys, LongTermBuysOfSells, LongTermSellsOfBuys, BuysOfOwned, ReinvestIncome, CashIncome, End};
 
 };
 

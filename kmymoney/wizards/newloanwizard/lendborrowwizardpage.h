@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class LendBorrowWizardPage; }
+namespace Ui {
+class LendBorrowWizardPage;
+}
 
 /**
  * This class implements the Online Update page of the
@@ -26,13 +28,13 @@ namespace Ui { class LendBorrowWizardPage; }
 
 class LendBorrowWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit LendBorrowWizardPage(QWidget *parent = nullptr);
-  ~LendBorrowWizardPage();
+    explicit LendBorrowWizardPage(QWidget *parent = nullptr);
+    ~LendBorrowWizardPage();
 
 private:
-  Ui::LendBorrowWizardPage *ui;
+    Ui::LendBorrowWizardPage *ui;
 };
 
 #endif

@@ -12,23 +12,23 @@
 class KMyMoneyTextEditHighlighterPrivate;
 class KMyMoneyTextEditHighlighter : public Sonnet::Highlighter
 {
-  Q_DISABLE_COPY(KMyMoneyTextEditHighlighter)
+    Q_DISABLE_COPY(KMyMoneyTextEditHighlighter)
 
 public:
-  explicit KMyMoneyTextEditHighlighter(QTextEdit* parent = nullptr); // krazy:exclude=qclasses
-  ~KMyMoneyTextEditHighlighter();
+    explicit KMyMoneyTextEditHighlighter(QTextEdit* parent = nullptr); // krazy:exclude=qclasses
+    ~KMyMoneyTextEditHighlighter();
 
-  void setAllowedChars(const QString& chars);
-  void setMaxLength(const int& length);
-  void setMaxLines(const int& lines);
-  void setMaxLineLength(const int& length);
+    void setAllowedChars(const QString& chars);
+    void setMaxLength(const int& length);
+    void setMaxLines(const int& lines);
+    void setMaxLineLength(const int& length);
 
 protected:
-  void highlightBlock(const QString& text) final override;
+    void highlightBlock(const QString& text) final override;
 
 private:
-  KMyMoneyTextEditHighlighterPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KMyMoneyTextEditHighlighter)
+    KMyMoneyTextEditHighlighterPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KMyMoneyTextEditHighlighter)
 };
 
 #endif // KMYMONEYTEXTEDIT_H

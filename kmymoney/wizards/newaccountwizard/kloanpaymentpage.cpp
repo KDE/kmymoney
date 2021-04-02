@@ -39,10 +39,10 @@
 
 namespace NewAccountWizard
 {
-  LoanPaymentPage::LoanPaymentPage(Wizard* wizard) :
+LoanPaymentPage::LoanPaymentPage(Wizard* wizard) :
     QWidget(wizard),
     WizardPage<Wizard>(*new LoanPaymentPagePrivate(wizard), StepFees, this, wizard)
-  {
+{
     Q_D(LoanPaymentPage);
     d->ui->setupUi(this);
     d->phonyAccount = MyMoneyAccount(QLatin1String("Phony-ID"), MyMoneyAccount());
@@ -54,45 +54,45 @@ namespace NewAccountWizard
     d->additionalFeesTransaction.addSplit(d->phonySplit);
 
     connect(d->ui->m_additionalFeesButton, &QAbstractButton::clicked, this, &LoanPaymentPage::slotAdditionalFees);
-  }
+}
 
-  LoanPaymentPage::~LoanPaymentPage()
-  {
-  }
+LoanPaymentPage::~LoanPaymentPage()
+{
+}
 
-  MyMoneyMoney LoanPaymentPage::basePayment() const
-  {
+MyMoneyMoney LoanPaymentPage::basePayment() const
+{
     Q_D(const LoanPaymentPage);
     return d->m_wizard->d_func()->m_loanDetailsPage->d_func()->ui->m_paymentAmount->value();
-  }
+}
 
-  MyMoneyMoney LoanPaymentPage::additionalFees() const
-  {
+MyMoneyMoney LoanPaymentPage::additionalFees() const
+{
     Q_D(const LoanPaymentPage);
     return d->additionalFees;
-  }
+}
 
-  void LoanPaymentPage::additionalFeesSplits(QList<MyMoneySplit>& list)
-  {
+void LoanPaymentPage::additionalFeesSplits(QList<MyMoneySplit>& list)
+{
     Q_D(LoanPaymentPage);
     list.clear();
 
     foreach (const auto split, d->additionalFeesTransaction.splits()) {
         if (split.accountId() != d->phonyAccount.id()) {
             list << split;
-          }
-      }
-  }
+        }
+    }
+}
 
-  void LoanPaymentPage::updateAmounts()
-  {
+void LoanPaymentPage::updateAmounts()
+{
     Q_D(LoanPaymentPage);
     d->ui->m_additionalFees->setText(d->additionalFees.formatMoney(d->m_wizard->d_func()->currency().tradingSymbol(), d->m_wizard->d_func()->precision()));
     d->ui->m_totalPayment->setText((basePayment() + d->additionalFees).formatMoney(d->m_wizard->d_func()->currency().tradingSymbol(), d->m_wizard->d_func()->precision()));
-  }
+}
 
-  void LoanPaymentPage::enterPage()
-  {
+void LoanPaymentPage::enterPage()
+{
     Q_D(LoanPaymentPage);
     const MyMoneySecurity& currency = d->m_wizard->d_func()->currency();
 
@@ -101,10 +101,10 @@ namespace NewAccountWizard
     d->additionalFeesTransaction.setCommodity(currency.id());
 
     updateAmounts();
-  }
+}
 
-  void LoanPaymentPage::slotAdditionalFees()
-  {
+void LoanPaymentPage::slotAdditionalFees()
+{
     Q_D(LoanPaymentPage);
     QMap<QString, MyMoneyMoney> priceInfo;
     QPointer<KSplitTransactionDlg> dlg = new KSplitTransactionDlg(d->additionalFeesTransaction, d->phonySplit, d->phonyAccount, false, !d->m_wizard->moneyBorrowed(), MyMoneyMoney(), priceInfo);
@@ -117,20 +117,20 @@ namespace NewAccountWizard
 
         d->additionalFees = MyMoneyMoney();
         foreach (const auto split, d->additionalFeesTransaction.splits()) {
-          if (split.accountId() != d->phonyAccount.id()) {
-            d->additionalFees += split.shares();
-          }
+            if (split.accountId() != d->phonyAccount.id()) {
+                d->additionalFees += split.shares();
+            }
         }
         updateAmounts();
-      }
+    }
 
     delete dlg;
-  }
+}
 
-  KMyMoneyWizardPage* LoanPaymentPage::nextPage() const
-  {
+KMyMoneyWizardPage* LoanPaymentPage::nextPage() const
+{
     Q_D(const LoanPaymentPage);
     return d->m_wizard->d_func()->m_loanSchedulePage;
-  }
-  
+}
+
 }
