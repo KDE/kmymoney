@@ -11,16 +11,16 @@
 
 class onlineJobTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 private Q_SLOTS:
 //    void initTestCase();
 //    void cleanupTestCase();
 
-  void testDefaultConstructor();
-  void testCopyConstructor();
-  void testCopyAssignment();
-  void testCopyConstructorWithNewId();
+    void testDefaultConstructor();
+    void testCopyConstructor();
+    void testCopyAssignment();
+    void testCopyConstructorWithNewId();
 };
 
 #endif // ONLINEJOBTEST_H

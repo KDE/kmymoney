@@ -30,57 +30,57 @@ class MyMoneySecurity;
 class KNewInvestmentWizardPrivate;
 class KNewInvestmentWizard : public QWizard
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  /**
-    * Use this constructor for the creation of a new investment
-    */
-  explicit KNewInvestmentWizard(QWidget *parent = nullptr);
+    /**
+      * Use this constructor for the creation of a new investment
+      */
+    explicit KNewInvestmentWizard(QWidget *parent = nullptr);
 
-  /**
-    * Use this constructor for the modification of an existing investment
-    */
-  explicit KNewInvestmentWizard(const MyMoneyAccount& acc, QWidget *parent = nullptr);
+    /**
+      * Use this constructor for the modification of an existing investment
+      */
+    explicit KNewInvestmentWizard(const MyMoneyAccount& acc, QWidget *parent = nullptr);
 
-  /**
-    * Use this constructor for the modification of an existing security
-    */
-  explicit KNewInvestmentWizard(const MyMoneySecurity& sec, QWidget *parent = nullptr);
+    /**
+      * Use this constructor for the modification of an existing security
+      */
+    explicit KNewInvestmentWizard(const MyMoneySecurity& sec, QWidget *parent = nullptr);
 
-  ~KNewInvestmentWizard();
+    ~KNewInvestmentWizard();
 
-  /**
-   * This method sets the name in the name widget.
-   */
-  void setName(const QString& name);
+    /**
+     * This method sets the name in the name widget.
+     */
+    void setName(const QString& name);
 
-  /**
-    * Depending on the constructor used, this method either
-    * creates all necessary objects for the investment or updates
-    * them.
-    *
-    * @param parentId id of parent account for the investment
-    */
-  void createObjects(const QString& parentId);
+    /**
+      * Depending on the constructor used, this method either
+      * creates all necessary objects for the investment or updates
+      * them.
+      *
+      * @param parentId id of parent account for the investment
+      */
+    void createObjects(const QString& parentId);
 
-  /**
-    * Create a new investment in a given @p parent investment account
-    */
-  static void newInvestment(const MyMoneyAccount& parent);
-  static void newInvestment(MyMoneyAccount& account, const MyMoneyAccount& parent);
+    /**
+      * Create a new investment in a given @p parent investment account
+      */
+    static void newInvestment(const MyMoneyAccount& parent);
+    static void newInvestment(MyMoneyAccount& account, const MyMoneyAccount& parent);
 
-  static void editInvestment(const MyMoneyAccount& parent);
+    static void editInvestment(const MyMoneyAccount& parent);
 
-  MyMoneyAccount account() const;
+    MyMoneyAccount account() const;
 
 protected Q_SLOTS:
-  void slotCheckForExistingSymbol(const QString&);
-  void slotHelp();
+    void slotCheckForExistingSymbol(const QString&);
+    void slotHelp();
 
 private:
-  Q_DISABLE_COPY(KNewInvestmentWizard)
-  Q_DECLARE_PRIVATE(KNewInvestmentWizard)
-  const QScopedPointer<KNewInvestmentWizardPrivate> d_ptr;
+    Q_DISABLE_COPY(KNewInvestmentWizard)
+    Q_DECLARE_PRIVATE(KNewInvestmentWizard)
+    const QScopedPointer<KNewInvestmentWizardPrivate> d_ptr;
 };
 
 #endif

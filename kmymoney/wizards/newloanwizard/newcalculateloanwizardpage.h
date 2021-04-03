@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class NewCalculateLoanWizardPage; }
+namespace Ui {
+class NewCalculateLoanWizardPage;
+}
 
 /**
  * This class implements the New Calculate Loan page of the
@@ -26,13 +28,13 @@ namespace Ui { class NewCalculateLoanWizardPage; }
 
 class NewCalculateLoanWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit NewCalculateLoanWizardPage(QWidget *parent = nullptr);
-  ~NewCalculateLoanWizardPage();
+    explicit NewCalculateLoanWizardPage(QWidget *parent = nullptr);
+    ~NewCalculateLoanWizardPage();
 
 private:
-  Ui::NewCalculateLoanWizardPage *ui;
+    Ui::NewCalculateLoanWizardPage *ui;
 };
 
 #endif

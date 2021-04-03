@@ -26,41 +26,41 @@ class QUndoStack;
   */
 class KMM_MYMONEY_EXPORT SchedulesJournalModel : public JournalModel
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  class Column {
-  public:
-    enum {
-      Name,
-    } Columns;
-  };
+    class Column {
+    public:
+        enum {
+            Name,
+        } Columns;
+    };
 
-  explicit SchedulesJournalModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
-  ~SchedulesJournalModel();
+    explicit SchedulesJournalModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
+    ~SchedulesJournalModel();
 
-  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
-  Qt::ItemFlags flags(const QModelIndex & index) const override;
+    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+    Qt::ItemFlags flags(const QModelIndex & index) const override;
 
-  bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) override;
+    bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) override;
 
-  void setPreviewPeriod(int days);
-  void setShowPlannedDate(bool showPlannedDate = true);
+    void setPreviewPeriod(int days);
+    void setShowPlannedDate(bool showPlannedDate = true);
 
 public Q_SLOTS:
-  void updateData();
+    void updateData();
 
 private Q_SLOTS:
-  /**
-   * override the JournalModel::load() method here so that it cannot
-   * be called, as it is useless in the context of this class
-   */
-  void load(const QMap<QString, MyMoneyTransaction>& list);
-  void doLoad();
+    /**
+     * override the JournalModel::load() method here so that it cannot
+     * be called, as it is useless in the context of this class
+     */
+    void load(const QMap<QString, MyMoneyTransaction>& list);
+    void doLoad();
 
 private:
-  struct Private;
-  QScopedPointer<Private> d;
+    struct Private;
+    QScopedPointer<Private> d;
 };
 
 #endif // SCHEDULESJOURNALMODEL_H

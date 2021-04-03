@@ -18,47 +18,47 @@ class TransactionDlg;
 
 class TransactionDlg : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  TransactionDlg(const QStringList& colList, const QStringList& colHeaders, const int typeCol,
-              const QList<eMyMoney::Transaction::Action>& validActionTypes);
-  ~TransactionDlg();
+    TransactionDlg(const QStringList& colList, const QStringList& colHeaders, const int typeCol,
+                   const QList<eMyMoney::Transaction::Action>& validActionTypes);
+    ~TransactionDlg();
 
-  Ui::TransactionDlg*   ui;
-  QBrush             m_colorBrush;
-  QBrush             m_colorBrushText;
-  QBrush             m_errorBrush;
-  QBrush             m_errorBrushText;
-  eMyMoney::Transaction::Action getActionType();
+    Ui::TransactionDlg*   ui;
+    QBrush             m_colorBrush;
+    QBrush             m_colorBrushText;
+    QBrush             m_errorBrush;
+    QBrush             m_errorBrushText;
+    eMyMoney::Transaction::Action getActionType();
 
 private:
-  QPixmap           m_iconYes;
-  QPixmap           m_iconNo;
+    QPixmap           m_iconYes;
+    QPixmap           m_iconNo;
 
-  QPushButton*      m_buttonOK;
-  QPushButton*      m_buttonCancel;
+    QPushButton*      m_buttonOK;
+    QPushButton*      m_buttonCancel;
 
-  QList<eMyMoney::Transaction::Action> m_validActionTypes;
-  QList<eMyMoney::Transaction::Action> m_actionTypes;
+    QList<eMyMoney::Transaction::Action> m_validActionTypes;
+    QList<eMyMoney::Transaction::Action> m_actionTypes;
 
-  QStringList      m_columnList;
+    QStringList      m_columnList;
 
-  int              m_typeColumn;
+    int              m_typeColumn;
 
-  void             updateWindowSize();
+    void             updateWindowSize();
 
-  /**
-  * This method displays the transaction line in tableWidget
-  */
-  void             displayLine(const QStringList& colList, const QStringList& colHeaders, const int typeCol);
+    /**
+    * This method displays the transaction line in tableWidget
+    */
+    void             displayLine(const QStringList& colList, const QStringList& colHeaders, const int typeCol);
 
-  /**
-  * This will add appropriate icons to cbActionTypes entries
-  */
-  void             iconifyActionTypesComboBox(const QList<eMyMoney::Transaction::Action>& validActionTypes);
+    /**
+    * This will add appropriate icons to cbActionTypes entries
+    */
+    void             iconifyActionTypesComboBox(const QList<eMyMoney::Transaction::Action>& validActionTypes);
 private Q_SLOTS:
-  void             slotActionSelected(int index);
+    void             slotActionSelected(int index);
 };
 
 #endif // TRANSACTIONDLG_H

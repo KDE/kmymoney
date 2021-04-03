@@ -369,7 +369,7 @@ bool NewTransactionEditor::Private::valueChanged(CreditDebitHelper* valueHelper)
 {
     bool rc = true;
     if (valueHelper->haveValue() && (splitModel.rowCount() <= 1)) {
-    // if (valueHelper->haveValue() && (splitModel.rowCount() <= 1) && (amountHelper->value() != split.value())) {
+        // if (valueHelper->haveValue() && (splitModel.rowCount() <= 1) && (amountHelper->value() != split.value())) {
         rc = false;
         try {
             MyMoneyMoney shares;
@@ -478,20 +478,20 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     // in case there is no text in the edit field
     connect(d->ui->payeeEdit->lineEdit(), &QLineEdit::textEdited,
             [&](const QString& txt)
-            {
-                if (txt.isEmpty()) {
-                    d->ui->payeeEdit->setCurrentIndex(0);
-                }
-            }
-    );
+    {
+        if (txt.isEmpty()) {
+            d->ui->payeeEdit->setCurrentIndex(0);
+        }
+    }
+           );
     connect(d->ui->accountCombo->lineEdit(), &QLineEdit::textEdited,
             [&](const QString& txt)
-            {
-                if (txt.isEmpty()) {
-                    d->ui->accountCombo->setSelected(QString());
-                }
-            }
-    );
+    {
+        if (txt.isEmpty()) {
+            d->ui->accountCombo->setSelected(QString());
+        }
+    }
+           );
     d->ui->enterButton->setIcon(Icons::get(Icon::DialogOK));
     d->ui->cancelButton->setIcon(Icons::get(Icon::DialogCancel));
 

@@ -19,44 +19,44 @@ class chipTanDialog;
 
 class chipTanDialog : public QDialog
 {
-  Q_OBJECT
-  Q_PROPERTY(QString infoText READ infoText() WRITE setInfoText)
-  Q_PROPERTY(QString hhdCode READ hhdCode() WRITE setHhdCode)
-  Q_PROPERTY(int flickerFieldWidth READ flickerFieldWidth WRITE setFlickerFieldWidth)
+    Q_OBJECT
+    Q_PROPERTY(QString infoText READ infoText() WRITE setInfoText)
+    Q_PROPERTY(QString hhdCode READ hhdCode() WRITE setHhdCode)
+    Q_PROPERTY(int flickerFieldWidth READ flickerFieldWidth WRITE setFlickerFieldWidth)
 
 public:
-  explicit chipTanDialog(QWidget* parent = 0);
-  ~chipTanDialog();
+    explicit chipTanDialog(QWidget* parent = 0);
+    ~chipTanDialog();
 
-  enum Result { Accepted = 0, Rejected, InternalError };
+    enum Result { Accepted = 0, Rejected, InternalError };
 
-  QString infoText();
-  QString hhdCode();
-  QString tan();
-  int flickerFieldWidth();
+    QString infoText();
+    QString hhdCode();
+    QString tan();
+    int flickerFieldWidth();
 
 public Q_SLOTS:
-  void accept() final override;
-  void reject() final override;
+    void accept() final override;
+    void reject() final override;
 
-  void setInfoText(const QString&);
-  void setHhdCode(const QString&);
+    void setInfoText(const QString&);
+    void setHhdCode(const QString&);
 
-  void setTanLimits(const int& minLength, const int& maxLength);
-  void setFlickerFieldWidth(const int& width);
-  void setFlickerFieldClockSetting(const int& width);
+    void setTanLimits(const int& minLength, const int& maxLength);
+    void setFlickerFieldWidth(const int& width);
+    void setFlickerFieldClockSetting(const int& width);
 
 private Q_SLOTS:
-  void tanInputChanged(const QString&);
-  void flickerFieldWidthChanged(const int& width);
-  void flickerFieldClockSettingChanged(const int& takt);
+    void tanInputChanged(const QString&);
+    void flickerFieldWidthChanged(const int& width);
+    void flickerFieldClockSettingChanged(const int& takt);
 
 private:
-  std::unique_ptr<Ui::chipTanDialog> ui;
-  QString m_tan;
-  bool m_accepted;
+    std::unique_ptr<Ui::chipTanDialog> ui;
+    QString m_tan;
+    bool m_accepted;
 
-  void setRootObjectProperty(const char* property, const QVariant& value);
+    void setRootObjectProperty(const char* property, const QVariant& value);
 };
 
 #endif // CHIPTANDIALOG_H

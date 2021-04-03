@@ -22,22 +22,22 @@ class QModelIndex;
 
 class NewTransactionForm : public QFrame
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit NewTransactionForm(QWidget* parent = nullptr);
-  virtual ~NewTransactionForm();
+    explicit NewTransactionForm(QWidget* parent = nullptr);
+    virtual ~NewTransactionForm();
 
 public Q_SLOTS:
-  void showTransaction(const QModelIndex& idx);
-  void modelDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
+    void showTransaction(const QModelIndex& idx);
+    void modelDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
 
 protected Q_SLOTS:
-  void rowsInserted(const QModelIndex& parent, int first, int last);
-  void rowsRemoved(const QModelIndex& parent, int first, int last);
+    void rowsInserted(const QModelIndex& parent, int first, int last);
+    void rowsRemoved(const QModelIndex& parent, int first, int last);
 
 private:
-  class Private;
-  Private * const d;
+    class Private;
+    Private * const d;
 };
 
 #endif // NEWTRANSACTIONFORM_H

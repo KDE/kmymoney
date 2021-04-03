@@ -15,23 +15,23 @@ class MyMoneyFile;
 
 class onlineJobAdministrationTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  MyMoneyFile* file;
-  QString accountId;
+    MyMoneyFile* file;
+    QString accountId;
 
 public:
-  onlineJobAdministrationTest();
+    onlineJobAdministrationTest();
 
 private Q_SLOTS:
-  void initTestCase();
-  void cleanupTestCase();
-  void init();
-  void getSettings();
-  void registerOnlineTask();
+    void initTestCase();
+    void cleanupTestCase();
+    void init();
+    void getSettings();
+    void registerOnlineTask();
 
 private:
-  void setupBaseCurrency();
+    void setupBaseCurrency();
 };
 
 #endif // ONLINEJOBADMINISTRATIONTEST_H

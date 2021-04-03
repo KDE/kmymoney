@@ -21,25 +21,25 @@
 
 namespace NewAccountWizard
 {
-  class Wizard;
+class Wizard;
 
-  class AccountSummaryPagePrivate;
-  class AccountSummaryPage : public QWidget, public WizardPage<Wizard>
-  {
+class AccountSummaryPagePrivate;
+class AccountSummaryPage : public QWidget, public WizardPage<Wizard>
+{
     Q_OBJECT
     Q_DISABLE_COPY(AccountSummaryPage)
 
-  public:
+public:
     explicit AccountSummaryPage(Wizard* parent);
     ~AccountSummaryPage() override;
 
     void enterPage() override;
     QWidget* initialFocusWidget() const override;
 
-  private:
+private:
     Q_DECLARE_PRIVATE_D(WizardPage<Wizard>::d_ptr, AccountSummaryPage)
     friend class Wizard;
-  };
+};
 } // namespace
 
 #endif

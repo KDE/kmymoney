@@ -15,17 +15,17 @@ class MyMoneyKeyValueContainer;
 class KBAccountSettings: public QWidget
 {
 public:
-  KBAccountSettings(const MyMoneyAccount& acc, QWidget* parent);
-  ~KBAccountSettings();
+    KBAccountSettings(const MyMoneyAccount& acc, QWidget* parent);
+    ~KBAccountSettings();
 
-  void loadUi(const MyMoneyKeyValueContainer& kvp);
-  void loadKvp(MyMoneyKeyValueContainer& kvp);
+    void loadUi(const MyMoneyKeyValueContainer& kvp);
+    void loadKvp(MyMoneyKeyValueContainer& kvp);
 
 private:
-  /// \internal d-pointer class.
-  struct Private;
-  /// \internal d-pointer instance.
-  Private* const d;
+    /// \internal d-pointer class.
+    struct Private;
+    /// \internal d-pointer instance.
+    Private* const d;
 };
 
 

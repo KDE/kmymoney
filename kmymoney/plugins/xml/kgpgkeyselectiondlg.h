@@ -24,43 +24,43 @@
 class KGpgKeySelectionDlgPrivate;
 class KGpgKeySelectionDlg : public QDialog
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KGpgKeySelectionDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(KGpgKeySelectionDlg)
 
 public:
 
-  explicit KGpgKeySelectionDlg(QWidget* parent = nullptr);
-  ~KGpgKeySelectionDlg();
+    explicit KGpgKeySelectionDlg(QWidget* parent = nullptr);
+    ~KGpgKeySelectionDlg();
 
-  /**
-   * preset the key selector with the keys contained in @a keyList.
-   * The key contained in @a defaultKey is made the current selection.
-   */
-  void setSecretKeys(const QStringList& keyList, const QString& defaultKey);
+    /**
+     * preset the key selector with the keys contained in @a keyList.
+     * The key contained in @a defaultKey is made the current selection.
+     */
+    void setSecretKeys(const QStringList& keyList, const QString& defaultKey);
 
-  /**
-   * preset the additional key list with the given key ids in @a list
-   */
-  void setAdditionalKeys(const QStringList& list);
+    /**
+     * preset the additional key list with the given key ids in @a list
+     */
+    void setAdditionalKeys(const QStringList& list);
 
-  /**
-   * Returns the selected secret key. In case "No encryption" is selected,
-   * the string is empty.
-   */
-  QString secretKey() const;
+    /**
+     * Returns the selected secret key. In case "No encryption" is selected,
+     * the string is empty.
+     */
+    QString secretKey() const;
 
-  /**
-   * Returns the list of keys currently listed in the KEditListWidget
-   */
-  QStringList additionalKeys() const;
+    /**
+     * Returns the list of keys currently listed in the KEditListWidget
+     */
+    QStringList additionalKeys() const;
 
 protected Q_SLOTS:
-  void slotIdChanged();
-  void slotKeyListChanged();
+    void slotIdChanged();
+    void slotKeyListChanged();
 
 private:
-  KGpgKeySelectionDlgPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KGpgKeySelectionDlg)
+    KGpgKeySelectionDlgPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KGpgKeySelectionDlg)
 };
 
 #endif

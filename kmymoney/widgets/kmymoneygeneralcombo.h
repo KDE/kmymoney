@@ -24,33 +24,33 @@
 
 class KMM_BASE_WIDGETS_EXPORT KMyMoneyGeneralCombo : public KComboBox
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyGeneralCombo)
-  Q_PROPERTY(int currentItem READ currentItem WRITE setCurrentItem STORED false)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyGeneralCombo)
+    Q_PROPERTY(int currentItem READ currentItem WRITE setCurrentItem STORED false)
 
 public:
-  explicit KMyMoneyGeneralCombo(QWidget* parent = nullptr);
-  virtual ~KMyMoneyGeneralCombo();
+    explicit KMyMoneyGeneralCombo(QWidget* parent = nullptr);
+    virtual ~KMyMoneyGeneralCombo();
 
-  void insertItem(const QString& txt, int id, int idx = -1);
+    void insertItem(const QString& txt, int id, int idx = -1);
 
-  void setCurrentItem(int id);
-  int currentItem() const;
+    void setCurrentItem(int id);
+    int currentItem() const;
 
-  void removeItem(int id);
+    void removeItem(int id);
 
 public Q_SLOTS:
-  void clear();
+    void clear();
 
 Q_SIGNALS:
-  void itemSelected(int id);
+    void itemSelected(int id);
 
 protected:
-  // prevent the caller to use the standard KComboBox insertItem function with a default idx
-  void insertItem(const QString&);
+    // prevent the caller to use the standard KComboBox insertItem function with a default idx
+    void insertItem(const QString&);
 
 protected Q_SLOTS:
-  void slotChangeItem(int idx);
+    void slotChangeItem(int idx);
 
 };
 

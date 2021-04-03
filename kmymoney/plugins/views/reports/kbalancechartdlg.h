@@ -18,7 +18,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 namespace reports {
-  class KReportChartView;
+class KReportChartView;
 }
 class MyMoneyAccount;
 
@@ -29,16 +29,16 @@ class MyMoneyAccount;
  */
 class KBalanceChartDlg : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit KBalanceChartDlg(const MyMoneyAccount& account, QWidget* parent = nullptr);
-  ~KBalanceChartDlg();
+    explicit KBalanceChartDlg(const MyMoneyAccount& account, QWidget* parent = nullptr);
+    ~KBalanceChartDlg();
 
 protected:
-  /**
-    * Draw the chart and calculate and draw the account limits if any
-    */
-  reports::KReportChartView* drawChart(const MyMoneyAccount& account);
+    /**
+      * Draw the chart and calculate and draw the account limits if any
+      */
+    reports::KReportChartView* drawChart(const MyMoneyAccount& account);
 
 };
 

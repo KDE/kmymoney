@@ -35,91 +35,93 @@ class InvestmentPage;
 class PricesPage;
 class FormatsPage;
 
-namespace Ui { class CSVWizard; }
+namespace Ui {
+class CSVWizard;
+}
 
 class QScrollBar;
 class QComboBox;
 class QLabel;
 class CSVWizard : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit CSVWizard(CSVImporter *plugin);
-  ~CSVWizard();
+    explicit CSVWizard(CSVImporter *plugin);
+    ~CSVWizard();
 
-  enum wizardPageE  { PageIntro, PageSeparator, PageRows,
-                      PageBanking, PageInvestment, PagePrices, PageFormats,
-                    };
+    enum wizardPageE  { PageIntro, PageSeparator, PageRows,
+                        PageBanking, PageInvestment, PagePrices, PageFormats,
+                      };
 
-  const MyMoneyStatement& statement() const;
+    const MyMoneyStatement& statement() const;
 
-  Ui::CSVWizard    *ui;
-  MyMoneyStatement  m_st;
-  QScrollBar       *m_vScrollBar;
-  IntroPage        *m_pageIntro;
+    Ui::CSVWizard    *ui;
+    MyMoneyStatement  m_st;
+    QScrollBar       *m_vScrollBar;
+    IntroPage        *m_pageIntro;
 
-  int               m_initialHeight;
-  int               m_initialWidth;
+    int               m_initialHeight;
+    int               m_initialWidth;
 
-  QBrush            m_clearBrush;
-  QBrush            m_clearBrushText;
-  QBrush            m_colorBrush;
-  QBrush            m_colorBrushText;
-  QBrush            m_errorBrush;
-  QBrush            m_errorBrushText;
+    QBrush            m_clearBrush;
+    QBrush            m_clearBrushText;
+    QBrush            m_colorBrush;
+    QBrush            m_colorBrushText;
+    QBrush            m_errorBrush;
+    QBrush            m_errorBrushText;
 
-  QMap <Column, QString> m_colTypeName;
-  bool              m_skipSetup;
+    QMap <Column, QString> m_colTypeName;
+    bool              m_skipSetup;
 
-  void              clearColumnsBackground(const int col);
-  void              clearColumnsBackground(const QList<int> &columnList);
-  void              clearBackground();
-  void              markUnwantedRows();
-  void              importClicked();
-  /**
-  * Called in order to adjust window size to suit the file,
-  */
-  void              updateWindowSize();
+    void              clearColumnsBackground(const int col);
+    void              clearColumnsBackground(const QList<int> &columnList);
+    void              clearBackground();
+    void              markUnwantedRows();
+    void              importClicked();
+    /**
+    * Called in order to adjust window size to suit the file,
+    */
+    void              updateWindowSize();
 
-  void              initializeComboBoxes(const QHash<Column, QComboBox *> &columns);
+    void              initializeComboBoxes(const QHash<Column, QComboBox *> &columns);
 
-  void              presetFilename(const QString& name);
+    void              presetFilename(const QString& name);
 
 private:
-  QList<QLabel *>  m_stageLabels;
+    QList<QLabel *>  m_stageLabels;
 
-  int m_curId;
-  int m_lastId;
+    int m_curId;
+    int m_lastId;
 
-  SeparatorPage               *m_pageSeparator;
-  RowsPage                    *m_pageRows;
-  QPointer<BankingPage>        m_pageBanking;
-  QPointer<InvestmentPage>     m_pageInvestment;
-  QPointer<PricesPage>         m_pagePrices;
-  FormatsPage                 *m_pageFormats;
+    SeparatorPage               *m_pageSeparator;
+    RowsPage                    *m_pageRows;
+    QPointer<BankingPage>        m_pageBanking;
+    QPointer<InvestmentPage>     m_pageInvestment;
+    QPointer<PricesPage>         m_pagePrices;
+    FormatsPage                 *m_pageFormats;
 
-  CSVImporter*        m_plugin;
-  CSVImporterCore*    m_imp;
-  QWizard*            m_wiz;
-  QString             m_fileName;
+    CSVImporter*        m_plugin;
+    CSVImporterCore*    m_imp;
+    QWizard*            m_wiz;
+    QString             m_fileName;
 
-  void readWindowSize(const KSharedConfigPtr& config);
-  void saveWindowSize(const KSharedConfigPtr& config);
-  void showStage();
+    void readWindowSize(const KSharedConfigPtr& config);
+    void saveWindowSize(const KSharedConfigPtr& config);
+    void showStage();
 
-  void saveSettings() const;
-  bool eventFilter(QObject *object, QEvent *event) override;
+    void saveSettings() const;
+    bool eventFilter(QObject *object, QEvent *event) override;
 
 private Q_SLOTS:
-  /**
-  * This method is called when 'Exit' is clicked.  The plugin settings will
-  * be saved and the plugin will be terminated.
-  */
-  void slotClose();
-  void slotIdChanged(int id);
-  void fileDialogClicked();
-  void saveAsQIFClicked();
+    /**
+    * This method is called when 'Exit' is clicked.  The plugin settings will
+    * be saved and the plugin will be terminated.
+    */
+    void slotClose();
+    void slotIdChanged(int id);
+    void fileDialogClicked();
+    void saveAsQIFClicked();
 };
 
 namespace Ui
@@ -129,40 +131,40 @@ class IntroPage;
 
 class IntroPage : public CSVWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit IntroPage(CSVWizard *dlg, CSVImporterCore *imp);
-  ~IntroPage();
+    explicit IntroPage(CSVWizard *dlg, CSVImporterCore *imp);
+    ~IntroPage();
 
-  void             initializePage() override;
+    void             initializePage() override;
 
-  Profile     m_profileType;
-  Ui::IntroPage   *ui;
+    Profile     m_profileType;
+    Ui::IntroPage   *ui;
 
 Q_SIGNALS:
-  void             signalBankClicked(bool);
-  void             activated(int);
-  void             returnPressed();
+    void             signalBankClicked(bool);
+    void             activated(int);
+    void             returnPressed();
 
 private:
-  QStringList      m_profiles;
+    QStringList      m_profiles;
 
-  bool             validatePage() override;
-  int              nextId() const override;
+    bool             validatePage() override;
+    int              nextId() const override;
 
-  void             profileChanged(const ProfileAction action);
-  void             profileTypeChanged(const Profile profileType, bool toggled);
+    void             profileChanged(const ProfileAction action);
+    void             profileTypeChanged(const Profile profileType, bool toggled);
 
 private Q_SLOTS:
-  void             slotAddProfile();
-  void             slotRemoveProfile();
-  void             slotRenameProfile();
-  void             slotComboSourceIndexChanged(int idx);
-  void             slotBankRadioToggled(bool toggled);
-  void             slotInvestRadioToggled(bool toggled);
-  void             slotCurrencyPricesRadioToggled(bool toggled);
-  void             slotStockPricesRadioToggled(bool toggled);
+    void             slotAddProfile();
+    void             slotRemoveProfile();
+    void             slotRenameProfile();
+    void             slotComboSourceIndexChanged(int idx);
+    void             slotBankRadioToggled(bool toggled);
+    void             slotInvestRadioToggled(bool toggled);
+    void             slotCurrencyPricesRadioToggled(bool toggled);
+    void             slotStockPricesRadioToggled(bool toggled);
 };
 
 namespace Ui
@@ -172,27 +174,27 @@ class SeparatorPage;
 
 class SeparatorPage : public CSVWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit SeparatorPage(CSVWizard *dlg, CSVImporterCore *imp);
-  ~SeparatorPage();
+    explicit SeparatorPage(CSVWizard *dlg, CSVImporterCore *imp);
+    ~SeparatorPage();
 
 private Q_SLOTS:
-  void                encodingChanged(const int index);
-  void                fieldDelimiterChanged(const int index);
-  void                textDelimiterChanged(const int index);
+    void                encodingChanged(const int index);
+    void                fieldDelimiterChanged(const int index);
+    void                textDelimiterChanged(const int index);
 
 Q_SIGNALS:
-  void                completeChanged();
+    void                completeChanged();
 
 private:
-  Ui::SeparatorPage   *ui;
-  void                initializeEncodingCombobox();
-  void                initializePage() override;
-  bool                isComplete() const override;
-  void                cleanupPage() override;
-  bool                validatePage() override;
+    Ui::SeparatorPage   *ui;
+    void                initializeEncodingCombobox();
+    void                initializePage() override;
+    bool                isComplete() const override;
+    void                cleanupPage() override;
+    bool                validatePage() override;
 };
 
 namespace Ui
@@ -202,27 +204,27 @@ class RowsPage;
 
 class RowsPage : public CSVWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit RowsPage(CSVWizard *dlg, CSVImporterCore *imp);
-  ~RowsPage();
+    explicit RowsPage(CSVWizard *dlg, CSVImporterCore *imp);
+    ~RowsPage();
 
 private Q_SLOTS:
-  /**
-  * This method is called when the user edits the startLine setting.
-  */
-  void            startRowChanged(int val);
+    /**
+    * This method is called when the user edits the startLine setting.
+    */
+    void            startRowChanged(int val);
 
-  /**
-  * This method is called when the user edits the lastLine setting.
-  */
-  void            endRowChanged(int val);
+    /**
+    * This method is called when the user edits the lastLine setting.
+    */
+    void            endRowChanged(int val);
 private:
-  Ui::RowsPage   *ui;
-  void            initializePage() override;
-  int             nextId() const override;
-  void            cleanupPage() override;
+    Ui::RowsPage   *ui;
+    void            initializePage() override;
+    int             nextId() const override;
+    void            cleanupPage() override;
 };
 
 namespace Ui
@@ -232,39 +234,39 @@ class FormatsPage;
 
 class FormatsPage : public CSVWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit FormatsPage(CSVWizard *dlg, CSVImporterCore *imp);
-  ~FormatsPage();
+    explicit FormatsPage(CSVWizard *dlg, CSVImporterCore *imp);
+    ~FormatsPage();
 
 private:
-  Ui::FormatsPage  *ui;
-  bool              m_isDecimalSymbolOK;
-  bool              m_isDateFormatOK;
+    Ui::FormatsPage  *ui;
+    bool              m_isDecimalSymbolOK;
+    bool              m_isDateFormatOK;
 
-  /**
-  * This method is called when the user selects a new decimal symbol.  The
-  * UI is updated using the new symbol, and on importing, the new symbol
-  * also will be used.
-  */
-  bool              validateDecimalSymbols(const QList<int> &columns);
+    /**
+    * This method is called when the user selects a new decimal symbol.  The
+    * UI is updated using the new symbol, and on importing, the new symbol
+    * also will be used.
+    */
+    bool              validateDecimalSymbols(const QList<int> &columns);
 
-  /**
-  * This method checks if all dates in date column are valid.
-  */
-  bool              validateDateFormat(const int index);
+    /**
+    * This method checks if all dates in date column are valid.
+    */
+    bool              validateDateFormat(const int index);
 
-  void              initializePage() override;
-  bool              isComplete() const override;
-  void              cleanupPage() override;
+    void              initializePage() override;
+    bool              isComplete() const override;
+    void              cleanupPage() override;
 
 Q_SIGNALS:
-  void              completeChanged();
+    void              completeChanged();
 
 private Q_SLOTS:
-  void              decimalSymbolChanged(int);
-  void              dateFormatChanged(const int index);
+    void              decimalSymbolChanged(int);
+    void              dateFormatChanged(const int index);
 };
 
 #endif // CSVWIZARD_H

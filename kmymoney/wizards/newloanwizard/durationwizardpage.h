@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class DurationWizardPage; }
+namespace Ui {
+class DurationWizardPage;
+}
 
 /**
  * This class implements the Duration page of the
@@ -26,19 +28,19 @@ namespace Ui { class DurationWizardPage; }
 
 class DurationWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit DurationWizardPage(QWidget *parent = nullptr);
-  ~DurationWizardPage();
+    explicit DurationWizardPage(QWidget *parent = nullptr);
+    ~DurationWizardPage();
 
-  QString updateTermWidgets(const double val);
-  int term() const;
+    QString updateTermWidgets(const double val);
+    int term() const;
 
 public Q_SLOTS:
-  void resetCalculator();
+    void resetCalculator();
 
 private:
-  Ui::DurationWizardPage *ui;
+    Ui::DurationWizardPage *ui;
 };
 
 #endif

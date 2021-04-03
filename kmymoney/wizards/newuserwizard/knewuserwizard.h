@@ -28,18 +28,18 @@ class MyMoneyTemplate;
   */
 namespace NewUserWizard
 {
-  extern int stepCount;
+extern int stepCount;
 
-  /**
-  * @author Thomas Baumgart
-  *
-  * This class implements the new user wizard which is used to gather
-  * some initial information from the user who creates a new KMyMoney
-  * 'file'.
-  */
-  class WizardPrivate;
-  class Wizard : public KMyMoneyWizard
-  {
+/**
+* @author Thomas Baumgart
+*
+* This class implements the new user wizard which is used to gather
+* some initial information from the user who creates a new KMyMoney
+* 'file'.
+*/
+class WizardPrivate;
+class Wizard : public KMyMoneyWizard
+{
     friend class IntroPage;
     friend class GeneralPage;
     friend class CurrencyPage;
@@ -50,7 +50,7 @@ namespace NewUserWizard
     Q_OBJECT
     Q_DISABLE_COPY(Wizard)
 
-  public:
+public:
     explicit Wizard(QWidget *parent = nullptr, bool modal = false, Qt::WindowFlags flags = 0);
     ~Wizard() override;
     /**
@@ -92,9 +92,9 @@ namespace NewUserWizard
     */
     bool startSettingsAfterFinished() const;
 
-  private:
+private:
     Q_DECLARE_PRIVATE(Wizard)
-  };
+};
 
 } // namespace
 

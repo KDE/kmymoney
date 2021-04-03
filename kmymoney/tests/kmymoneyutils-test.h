@@ -16,14 +16,14 @@
 
 class KMyMoneyUtilsTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 protected:
 
 private Q_SLOTS:
-  void initTestCase();
-  void init();
-  void cleanup();
-  void testNextCheckNumber();
+    void initTestCase();
+    void init();
+    void cleanup();
+    void testNextCheckNumber();
 };
 
 #endif

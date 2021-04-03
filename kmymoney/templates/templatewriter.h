@@ -28,19 +28,19 @@ class MyMoneyTemplate;
 class TemplateWriterPrivate;
 class KMM_TEMPLATES_EXPORT TemplateWriter : public QObject
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(TemplateWriter)
-  Q_DECLARE_PRIVATE(TemplateWriter)
+    Q_OBJECT
+    Q_DISABLE_COPY(TemplateWriter)
+    Q_DECLARE_PRIVATE(TemplateWriter)
 
 public:
-  explicit TemplateWriter(QWidget* parent = nullptr);
-  ~TemplateWriter();
+    explicit TemplateWriter(QWidget* parent = nullptr);
+    ~TemplateWriter();
 
-  bool exportTemplate(const MyMoneyTemplate& tmpl, const QUrl &url);
-  QString errorMessage() const;
+    bool exportTemplate(const MyMoneyTemplate& tmpl, const QUrl &url);
+    QString errorMessage() const;
 
 private:
-  TemplateWriterPrivate * const d_ptr;
+    TemplateWriterPrivate * const d_ptr;
 };
 
 #endif

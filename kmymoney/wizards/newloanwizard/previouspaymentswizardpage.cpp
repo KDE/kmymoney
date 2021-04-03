@@ -19,23 +19,23 @@
 #include "ui_previouspaymentswizardpage.h"
 
 PreviousPaymentsWizardPage::PreviousPaymentsWizardPage(QWidget *parent)
-  : QWizardPage(parent),
-    ui(new Ui::PreviousPaymentsWizardPage)
+    : QWizardPage(parent),
+      ui(new Ui::PreviousPaymentsWizardPage)
 {
-  ui->setupUi(this);
+    ui->setupUi(this);
 
-  ui->ButtonGroup3->setId(ui->m_noPreviousPaymentButton, 0);
-  ui->ButtonGroup3->setId(ui->m_previousPaymentButton, 1);
+    ui->ButtonGroup3->setId(ui->m_noPreviousPaymentButton, 0);
+    ui->ButtonGroup3->setId(ui->m_previousPaymentButton, 1);
 
-  // Register the fields with the QWizard and connect the
-  // appropriate signals to update the "Next" button correctly
-  registerField("noPreviousPaymentButton", ui->m_noPreviousPaymentButton);
-  registerField("previousPaymentButton", ui->m_previousPaymentButton);
+    // Register the fields with the QWizard and connect the
+    // appropriate signals to update the "Next" button correctly
+    registerField("noPreviousPaymentButton", ui->m_noPreviousPaymentButton);
+    registerField("previousPaymentButton", ui->m_previousPaymentButton);
 
-  ui->m_noPreviousPaymentButton->click();
+    ui->m_noPreviousPaymentButton->click();
 }
 
 PreviousPaymentsWizardPage::~PreviousPaymentsWizardPage()
 {
-  delete ui;
+    delete ui;
 }

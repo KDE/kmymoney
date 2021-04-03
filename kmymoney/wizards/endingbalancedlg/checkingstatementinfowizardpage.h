@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class CheckingStatementInfoWizardPage; }
+namespace Ui {
+class CheckingStatementInfoWizardPage;
+}
 
 /**
  * This class implements the CheckingStatementInfo page of the
@@ -26,14 +28,14 @@ namespace Ui { class CheckingStatementInfoWizardPage; }
 
 class CheckingStatementInfoWizardPage : public QWizardPage
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(CheckingStatementInfoWizardPage)
+    Q_OBJECT
+    Q_DISABLE_COPY(CheckingStatementInfoWizardPage)
 
 public:
-  explicit CheckingStatementInfoWizardPage(QWidget *parent = nullptr);
-  ~CheckingStatementInfoWizardPage();
+    explicit CheckingStatementInfoWizardPage(QWidget *parent = nullptr);
+    ~CheckingStatementInfoWizardPage();
 
-  Ui::CheckingStatementInfoWizardPage *ui;
+    Ui::CheckingStatementInfoWizardPage *ui;
 };
 
 #endif

@@ -13,7 +13,7 @@
 #include <QDialog>
 
 namespace Ui {
-  class KTemplateExportDlg;
+class KTemplateExportDlg;
 }
 
 class KMM_TEMPLATES_EXPORT KTemplateExportDlg : public QDialog

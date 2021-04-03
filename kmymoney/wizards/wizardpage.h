@@ -32,33 +32,37 @@ template <class T>
 class WizardPage : public KMyMoneyWizardPage
 {
 public:
-  WizardPage(uint step, QWidget* widget, T* parent) :
-    KMyMoneyWizardPage(*new WizardPagePrivate<T>(widget), step, widget)
-  {
-    d_func()->m_wizard = parent;
-    d_func()->m_wizardBase = parent;
-  }
+    WizardPage(uint step, QWidget* widget, T* parent) :
+        KMyMoneyWizardPage(*new WizardPagePrivate<T>(widget), step, widget)
+    {
+        d_func()->m_wizard = parent;
+        d_func()->m_wizardBase = parent;
+    }
 
-  ~WizardPage() override
-  {
-  }
+    ~WizardPage() override
+    {
+    }
 
-  virtual KMyMoneyWizard* wizard() const override
-  {
-    return d_func()->m_wizardBase;
-  }
+    virtual KMyMoneyWizard* wizard() const override
+    {
+        return d_func()->m_wizardBase;
+    }
 
 protected:
-  using KMyMoneyWizardPage::d_ptr;
-  inline WizardPagePrivate<T>* d_func() { return reinterpret_cast<WizardPagePrivate<T> *>(qGetPtrHelper(d_ptr)); }
-  inline const WizardPagePrivate<T>* d_func() const { return reinterpret_cast<const WizardPagePrivate<T> *>(qGetPtrHelper(d_ptr)); }
-  friend class WizardPagePrivate<T>;
-  WizardPage(WizardPagePrivate<T> &dd, uint step, QWidget* widget, T* parent) :
-    KMyMoneyWizardPage(dd, step, widget)
-  {
-    d_func()->m_wizard = parent;
-    d_func()->m_wizardBase = parent;
-  }
+    using KMyMoneyWizardPage::d_ptr;
+    inline WizardPagePrivate<T>* d_func() {
+        return reinterpret_cast<WizardPagePrivate<T> *>(qGetPtrHelper(d_ptr));
+    }
+    inline const WizardPagePrivate<T>* d_func() const {
+        return reinterpret_cast<const WizardPagePrivate<T> *>(qGetPtrHelper(d_ptr));
+    }
+    friend class WizardPagePrivate<T>;
+    WizardPage(WizardPagePrivate<T> &dd, uint step, QWidget* widget, T* parent) :
+        KMyMoneyWizardPage(dd, step, widget)
+    {
+        d_func()->m_wizard = parent;
+        d_func()->m_wizardBase = parent;
+    }
 };
 
 #endif

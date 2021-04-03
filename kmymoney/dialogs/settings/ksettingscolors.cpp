@@ -19,24 +19,24 @@
 #include "ui_ksettingscolors.h"
 
 KSettingsColors::KSettingsColors(QWidget* parent) :
-  QWidget(parent),
-  ui(new Ui::KSettingsColors)
+    QWidget(parent),
+    ui(new Ui::KSettingsColors)
 {
-  ui->setupUi(this);
-  connect(ui->kcfg_useCustomColors, &QGroupBox::toggled, this, &KSettingsColors::slotCustomColorsToggled);
+    ui->setupUi(this);
+    connect(ui->kcfg_useCustomColors, &QGroupBox::toggled, this, &KSettingsColors::slotCustomColorsToggled);
 }
 
 KSettingsColors::~KSettingsColors()
 {
-  delete ui;
+    delete ui;
 }
 
 void KSettingsColors::slotCustomColorsToggled(bool)
 {
-  ui->kcfg_transactionErroneousColor->setColor(KMyMoneySettings::schemeColor(SchemeColor::TransactionErroneous));
-  ui->kcfg_missingConversionRateColor->setColor(KMyMoneySettings::schemeColor(SchemeColor::MissingConversionRate));
-  ui->kcfg_groupMarkerColor->setColor(KMyMoneySettings::schemeColor(SchemeColor::GroupMarker));
-  ui->kcfg_fieldRequiredColor->setColor(KMyMoneySettings::schemeColor(SchemeColor::FieldRequired));
-  ui->kcfg_transactionImportedColor->setColor(KMyMoneySettings::schemeColor(SchemeColor::TransactionImported));
-  ui->kcfg_transactionMatchedColor->setColor(KMyMoneySettings::schemeColor(SchemeColor::TransactionMatched));
+    ui->kcfg_transactionErroneousColor->setColor(KMyMoneySettings::schemeColor(SchemeColor::TransactionErroneous));
+    ui->kcfg_missingConversionRateColor->setColor(KMyMoneySettings::schemeColor(SchemeColor::MissingConversionRate));
+    ui->kcfg_groupMarkerColor->setColor(KMyMoneySettings::schemeColor(SchemeColor::GroupMarker));
+    ui->kcfg_fieldRequiredColor->setColor(KMyMoneySettings::schemeColor(SchemeColor::FieldRequired));
+    ui->kcfg_transactionImportedColor->setColor(KMyMoneySettings::schemeColor(SchemeColor::TransactionImported));
+    ui->kcfg_transactionMatchedColor->setColor(KMyMoneySettings::schemeColor(SchemeColor::TransactionMatched));
 }

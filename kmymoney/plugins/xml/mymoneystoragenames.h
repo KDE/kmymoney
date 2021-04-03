@@ -15,100 +15,100 @@
 // Project Includes
 
 enum class Tag {
-  Institutions,
-  Payees,
-  CostCenters,
-  Tags,
-  Accounts,
-  Transactions,
-  Schedules,
-  Securities,
-  Currencies,
-  Prices,
-  Reports,
-  Budgets,
-  OnlineJobs,
-  KMMFile,
-  FileInfo,
-  User,
+    Institutions,
+    Payees,
+    CostCenters,
+    Tags,
+    Accounts,
+    Transactions,
+    Schedules,
+    Securities,
+    Currencies,
+    Prices,
+    Reports,
+    Budgets,
+    OnlineJobs,
+    KMMFile,
+    FileInfo,
+    User,
 };
 
 enum class Node {
-  Institution,
-  Payee,
-  CostCenter,
-  Tag,
-  Account,
-  Transaction,
-  Split,
-  ScheduleTX,
-  Security,
-  Currency,
-  Price,
-  PricePair,
-  Report,
-  Budget,
-  OnlineJob,
-  KeyValuePairs,
-  Equity,
+    Institution,
+    Payee,
+    CostCenter,
+    Tag,
+    Account,
+    Transaction,
+    Split,
+    ScheduleTX,
+    Security,
+    Currency,
+    Price,
+    PricePair,
+    Report,
+    Budget,
+    OnlineJob,
+    KeyValuePairs,
+    Equity,
 };
 
 namespace Element {
-  enum class General {
+enum class General {
     Address,
     CreationDate,
     LastModifiedDate,
     Version,
     FixVersion,
     Pair,
-  };
+};
 
-  enum class Transaction {
+enum class Transaction {
     Split = 0,
     Splits,
-  };
+};
 
-  enum class Split {
+enum class Split {
     Split = 0,
     Tag,
     Match,
     Container,
     KeyValuePairs,
-  };
+};
 
-  enum class Account {
+enum class Account {
     SubAccount,
     SubAccounts,
     OnlineBanking,
-  };
+};
 
-  enum class Payee {
+enum class Payee {
     Address,
     Identifier,
-  };
+};
 
-  enum class KVP {
+enum class KVP {
     Pair,
-  };
+};
 
-  enum class Institution {
+enum class Institution {
     AccountID,
     AccountIDS,
     Address,
-  };
+};
 
-  enum class Schedule {
+enum class Schedule {
     Payment,
     Payments,
-  };
+};
 
-  enum class OnlineJob {
+enum class OnlineJob {
     OnlineTask,
-  };
+};
 }
 
 namespace Attribute {
-  enum class General {
+enum class General {
     ID = 0,
     Date,
     Count,
@@ -127,9 +127,9 @@ namespace Attribute {
     Telephone,
     // insert new entries above this line
     LastAttribute,
-  };
+};
 
-  enum class Transaction {
+enum class Transaction {
     Name = 0,
     Type,
     PostDate,
@@ -139,9 +139,9 @@ namespace Attribute {
     BankID,
     // insert new entries above this line
     LastAttribute,
-  };
+};
 
-  enum class Split {
+enum class Split {
     ID = 0,
     BankID,
     Account,
@@ -159,9 +159,9 @@ namespace Attribute {
     KMMatchedTx,
     // insert new entries above this line
     LastAttribute,
-  };
+};
 
-  enum class Account {
+enum class Account {
     ID = 0,
     Name,
     Type,
@@ -178,9 +178,9 @@ namespace Attribute {
     BIC,
     // insert new entries above this line
     LastAttribute,
-  };
+};
 
-  enum class Payee {
+enum class Payee {
     ID = 0,
     Name,
     Type,
@@ -206,9 +206,9 @@ namespace Attribute {
     AccountNumber,
     // insert new entries above this line
     LastAttribute,
-  };
+};
 
-  enum class Tag {
+enum class Tag {
     ID = 0,
     Name,
     Type,
@@ -217,9 +217,9 @@ namespace Attribute {
     Notes,
     // insert new entries above this line
     LastAttribute,
-  };
+};
 
-  enum class Security {
+enum class Security {
     ID = 0,
     Name,
     Symbol,
@@ -232,16 +232,16 @@ namespace Attribute {
     TradingMarket,
     // insert new entries above this line
     LastAttribute,
-  };
+};
 
-  enum class KVP {
+enum class KVP {
     Key,
     Value,
     // insert new entries above this line
     LastAttribute,
-  };
+};
 
-  enum class Institution {
+enum class Institution {
     ID = 0,
     Name,
     Manager,
@@ -252,9 +252,9 @@ namespace Attribute {
     Telephone,
     // insert new entries above this line
     LastAttribute,
-  };
+};
 
-  enum class Schedule {
+enum class Schedule {
     ID = 0,
     Name,
     Type,
@@ -271,9 +271,9 @@ namespace Attribute {
     LastDayInMonth,
     // insert new entries above this line
     LastAttribute,
-  };
+};
 
-  enum class OnlineJob {
+enum class OnlineJob {
     ID = 0,
     Send,
     BankAnswerDate,
@@ -285,14 +285,14 @@ namespace Attribute {
     SendingError,
     // insert new entries above this line
     LastAttribute,
-  };
+};
 
-  enum class CostCenter {
+enum class CostCenter {
     ID = 0,
     Name,
     // insert new entries above this line
     LastAttribute,
-  };
+};
 }
 
 QString elementName(Element::General elementID);

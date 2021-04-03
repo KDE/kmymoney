@@ -26,31 +26,31 @@ class QUndoStack;
   */
 class KMM_MYMONEY_EXPORT CostCenterModel : public MyMoneyModel<MyMoneyCostCenter>
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  class Column {
-    enum {
-      Name,
-    } Columns;
-  };
+    class Column {
+        enum {
+            Name,
+        } Columns;
+    };
 
-  explicit CostCenterModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
-  virtual ~CostCenterModel();
+    explicit CostCenterModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
+    virtual ~CostCenterModel();
 
-  static const int ID_SIZE = 6;
+    static const int ID_SIZE = 6;
 
-  int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
-  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
-  QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;
+    int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
+    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;
 
-  bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
+    bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
 
 public Q_SLOTS:
 
 private:
-  struct Private;
-  QScopedPointer<Private> d;
+    struct Private;
+    QScopedPointer<Private> d;
 };
 
 #endif // COSTCENTERMODEL_H

@@ -23,30 +23,30 @@
 
 class LedgerFilterBasePrivate {
 public:
-  LedgerFilterBasePrivate(LedgerFilterBase* qq)
-  : q(qq)
-  , concatModel(nullptr)
-  , accountType(eMyMoney::Account::Type::Asset)
-  , showValuesInverted(false)
-  {
-  }
+    LedgerFilterBasePrivate(LedgerFilterBase* qq)
+        : q(qq)
+        , concatModel(nullptr)
+        , accountType(eMyMoney::Account::Type::Asset)
+        , showValuesInverted(false)
+    {
+    }
 
-  inline bool isAccountsModel(const QAbstractItemModel* model) const
-  {
-    return (model == static_cast<void*>(MyMoneyFile::instance()->accountsModel()));
-  }
+    inline bool isAccountsModel(const QAbstractItemModel* model) const
+    {
+        return (model == static_cast<void*>(MyMoneyFile::instance()->accountsModel()));
+    }
 
-  inline bool isSpecialDatesModel(const QAbstractItemModel* model) const
-  {
-    return (model == static_cast<void*>(MyMoneyFile::instance()->specialDatesModel()));
-  }
+    inline bool isSpecialDatesModel(const QAbstractItemModel* model) const
+    {
+        return (model == static_cast<void*>(MyMoneyFile::instance()->specialDatesModel()));
+    }
 
-  LedgerFilterBase*           q;
-  KConcatenateRowsProxyModel* concatModel;          // Qt5.13+ use QConcatenateTablesProxyModel
-  eMyMoney::Account::Type     accountType;
-  QStringList                 filterIds;
-  bool                        showValuesInverted;
-  QSet<QAbstractItemModel*>   sourceModels;
+    LedgerFilterBase*           q;
+    KConcatenateRowsProxyModel* concatModel;          // Qt5.13+ use QConcatenateTablesProxyModel
+    eMyMoney::Account::Type     accountType;
+    QStringList                 filterIds;
+    bool                        showValuesInverted;
+    QSet<QAbstractItemModel*>   sourceModels;
 };
 
 #endif

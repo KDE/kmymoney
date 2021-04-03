@@ -14,16 +14,16 @@
 
 class MyMoneyMapTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 protected:
-  MyMoneyMap<QString, QString> *m;
+    MyMoneyMap<QString, QString> *m;
 private Q_SLOTS:
-  void init();
-  void cleanup();
-  void testArrayOperator();
-  void testModifyKey();
-  void testModifyKeyTwice();
+    void init();
+    void cleanup();
+    void testArrayOperator();
+    void testModifyKey();
+    void testModifyKeyTwice();
 };
 
 #endif

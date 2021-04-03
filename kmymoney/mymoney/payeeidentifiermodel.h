@@ -22,42 +22,42 @@
  */
 class KMM_MYMONEY_EXPORT payeeIdentifierModel : public QAbstractItemModel
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  enum roles {
-    payeeName = Qt::UserRole, /**< MyMoneyPayee::name() */
-    isPayeeIdentifier = Qt::UserRole + 1, /**< refers index to payeeIdentifier (true) or MyMoneyPayee (false) */
-    payeeIdentifierType = Qt::UserRole + 2, /**< type of payeeIdentifier */
-    payeeIdentifier = Qt::UserRole + 3, /**< actual payeeIdentifier */
-    payeeIdentifierUserRole = Qt::UserRole + 4, /**< role to start with for inheriting models */
-  };
+    enum roles {
+        payeeName = Qt::UserRole, /**< MyMoneyPayee::name() */
+        isPayeeIdentifier = Qt::UserRole + 1, /**< refers index to payeeIdentifier (true) or MyMoneyPayee (false) */
+        payeeIdentifierType = Qt::UserRole + 2, /**< type of payeeIdentifier */
+        payeeIdentifier = Qt::UserRole + 3, /**< actual payeeIdentifier */
+        payeeIdentifierUserRole = Qt::UserRole + 4, /**< role to start with for inheriting models */
+    };
 
-  explicit payeeIdentifierModel(QObject* parent = 0);
-  QVariant data(const QModelIndex& index, int role) const final override;
-  int columnCount(const QModelIndex& parent) const final override;
-  int rowCount(const QModelIndex& parent) const final override;
-  QModelIndex parent(const QModelIndex& child) const final override;
-  QModelIndex index(int row, int column, const QModelIndex &parent) const final override;
-  Qt::ItemFlags flags(const QModelIndex &index) const final override;
+    explicit payeeIdentifierModel(QObject* parent = 0);
+    QVariant data(const QModelIndex& index, int role) const final override;
+    int columnCount(const QModelIndex& parent) const final override;
+    int rowCount(const QModelIndex& parent) const final override;
+    QModelIndex parent(const QModelIndex& child) const final override;
+    QModelIndex index(int row, int column, const QModelIndex &parent) const final override;
+    Qt::ItemFlags flags(const QModelIndex &index) const final override;
 
-  /**
-   * @brief Set which payeeIdentifier types to show
-   *
-   * @param filter list of payeeIdentifier types. An empty list leads to an empty model.
-   */
-  void setTypeFilter(QStringList filter);
+    /**
+     * @brief Set which payeeIdentifier types to show
+     *
+     * @param filter list of payeeIdentifier types. An empty list leads to an empty model.
+     */
+    void setTypeFilter(QStringList filter);
 
-  /** convenience overload for setTypeFilter(QStringList) */
-  void setTypeFilter(QString type);
+    /** convenience overload for setTypeFilter(QStringList) */
+    void setTypeFilter(QString type);
 
-  void loadData();
+    void loadData();
 
 private:
-  typedef QPair<QString, int> identId_t;
-  inline MyMoneyPayee payeeByIndex(const QModelIndex& index) const;
-  QStringList m_payeeIdentifierIds;
-  QStringList m_typeFilter;
+    typedef QPair<QString, int> identId_t;
+    inline MyMoneyPayee payeeByIndex(const QModelIndex& index) const;
+    QStringList m_payeeIdentifierIds;
+    QStringList m_typeFilter;
 };
 
 #endif // PAYEEIDENTIFIERMODEL_H

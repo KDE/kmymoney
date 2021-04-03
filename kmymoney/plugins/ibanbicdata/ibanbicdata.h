@@ -16,7 +16,9 @@
 #include <QVariant>
 #include <QSqlDatabase>
 
-namespace eIBANBIC {enum bicAllocationStatus : unsigned int;}
+namespace eIBANBIC {
+enum bicAllocationStatus : unsigned int;
+}
 
 /**
  * @brief This class implements everything that needs lookup
@@ -28,56 +30,56 @@ namespace eIBANBIC {enum bicAllocationStatus : unsigned int;}
  */
 class ibanBicData : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::DataPlugin
 {
-  Q_OBJECT
-  Q_INTERFACES(KMyMoneyPlugin::DataPlugin)
-  KMM_MYMONEY_UNIT_TESTABLE
+    Q_OBJECT
+    Q_INTERFACES(KMyMoneyPlugin::DataPlugin)
+    KMM_MYMONEY_UNIT_TESTABLE
 
 public:
     explicit ibanBicData(QObject *parent, const QVariantList &args);
-  ~ibanBicData() override;
+    ~ibanBicData() override;
 
-  QVariant requestData(const QString &arg, uint type) override;
+    QVariant requestData(const QString &arg, uint type) override;
 
-  int bbanLength(const QString& countryCode);
-  int bankIdentifierPosition(const QString& countryCode);
-  int bankIdentifierLength(const QString& countryCode);
+    int bbanLength(const QString& countryCode);
+    int bankIdentifierPosition(const QString& countryCode);
+    int bankIdentifierLength(const QString& countryCode);
 
-  /**
-   * @brief Create a BIC from a given IBAN
-   *
-   * The bic is always 11 characters long.
-   *
-   * @return QString::isNull() == true means an internal error occurred, QString::isEmpty() == true means there is no BIC
-   */
-  QString iban2Bic(const QString& iban);
+    /**
+     * @brief Create a BIC from a given IBAN
+     *
+     * The bic is always 11 characters long.
+     *
+     * @return QString::isNull() == true means an internal error occurred, QString::isEmpty() == true means there is no BIC
+     */
+    QString iban2Bic(const QString& iban);
 
-  QString bankNameByBic(QString bic);
+    QString bankNameByBic(QString bic);
 
-  /**
-   * @brief Create a BIC from a IBAN and get the institutes name
-   *
-   * first: bic, always 11 characters long.
-   * second: institution name
-   *
-   * QString::isNull() == true means an internal error occurred, QString::isEmpty() == true means there is no data
-   */
-  QPair<QString, QString> bankNameAndBic(const QString& iban);
+    /**
+     * @brief Create a BIC from a IBAN and get the institutes name
+     *
+     * first: bic, always 11 characters long.
+     * second: institution name
+     *
+     * QString::isNull() == true means an internal error occurred, QString::isEmpty() == true means there is no data
+     */
+    QPair<QString, QString> bankNameAndBic(const QString& iban);
 
-  QString extractBankIdentifier(const QString& iban);
+    QString extractBankIdentifier(const QString& iban);
 
-  eIBANBIC::bicAllocationStatus isBicAllocated(const QString& bic);
+    eIBANBIC::bicAllocationStatus isBicAllocated(const QString& bic);
 
 private:
-  QVariant findPropertyByCountry(const QString& countryCode, const QString& property, const QVariant::Type type);
+    QVariant findPropertyByCountry(const QString& countryCode, const QString& property, const QVariant::Type type);
 
-  /**
-   * @brief Create/get QSqlDatabase
-   *
-   * Returns a QSqlDatabase. It is invalid if something went wrong.
-   *
-   * @param database This string is used to locate the database in the data dir
-   */
-  QSqlDatabase createDatabaseConnection(const QString& database);
+    /**
+     * @brief Create/get QSqlDatabase
+     *
+     * Returns a QSqlDatabase. It is invalid if something went wrong.
+     *
+     * @param database This string is used to locate the database in the data dir
+     */
+    QSqlDatabase createDatabaseConnection(const QString& database);
 };
 
 #endif // IBANBICDATA_H

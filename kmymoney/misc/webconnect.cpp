@@ -17,12 +17,12 @@ class WebConnect::Private
 {
 public:
     explicit Private(WebConnect* parent)
-    : q(parent)
-    , clientSocket(new QLocalSocket(parent))
-    , serverSocket(0)
-    , server(new QLocalServer(parent))
-    , serverFail(false)
-    , blockSize(0)
+        : q(parent)
+        , clientSocket(new QLocalSocket(parent))
+        , serverSocket(0)
+        , server(new QLocalServer(parent))
+        , serverFail(false)
+        , blockSize(0)
     {
     }
 
@@ -43,12 +43,12 @@ public:
         if (!connectToServer()) {
             // no other instance seems to be running, so we start the server
             if (!server->listen(socketName)) {
-              qCInfo(WebConnectLog) << "Starting server failed. Try to remove stale socket.";
-              server->removeServer(socketName);
-              if(!server->listen(socketName)) {
-                qCWarning(WebConnectLog) << "Starting server failed again. WebConnect not available.";
-                serverFail = true;
-              }
+                qCInfo(WebConnectLog) << "Starting server failed. Try to remove stale socket.";
+                server->removeServer(socketName);
+                if(!server->listen(socketName)) {
+                    qCWarning(WebConnectLog) << "Starting server failed again. WebConnect not available.";
+                    serverFail = true;
+                }
             }
             if (!serverFail) {
                 qCInfo(WebConnectLog) << "Running in server mode";

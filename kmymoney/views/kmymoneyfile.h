@@ -25,25 +25,25 @@ class MyMoneyStorageMgr;
 class KMyMoneyFile
 {
 private:
-  // static KMyMoneyFile *_instance;
-  // MyMoneyFile *m_file;
-  MyMoneyStorageMgr *m_storage;
-  bool m_open;
+    // static KMyMoneyFile *_instance;
+    // MyMoneyFile *m_file;
+    MyMoneyStorageMgr *m_storage;
+    bool m_open;
 
 protected:
-  // KMyMoneyFile(const QString&);
+    // KMyMoneyFile(const QString&);
 
 public:
-  KMyMoneyFile();
-  ~KMyMoneyFile();
+    KMyMoneyFile();
+    ~KMyMoneyFile();
 //  static KMyMoneyFile *instance();
 
-  // MyMoneyFile* file();
-  MyMoneyStorageMgr* storage();
-  void reset();
-  void open();
-  void close();
-  bool isOpen();
+    // MyMoneyFile* file();
+    MyMoneyStorageMgr* storage();
+    void reset();
+    void open();
+    void close();
+    bool isOpen();
 
 };
 #endif

@@ -26,28 +26,28 @@ class QTreeWidgetItem;
 class KMyMoneyPriceDlgPrivate;
 class KMM_EXTENDED_DIALOGS_EXPORT KMyMoneyPriceDlg : public QDialog
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyPriceDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyPriceDlg)
 
 public:
-  explicit KMyMoneyPriceDlg(QWidget* parent);
-  ~KMyMoneyPriceDlg();
+    explicit KMyMoneyPriceDlg(QWidget* parent);
+    ~KMyMoneyPriceDlg();
 
 private:
-  QTreeWidgetItem* loadPriceItem(const MyMoneyPrice& basePrice);
+    QTreeWidgetItem* loadPriceItem(const MyMoneyPrice& basePrice);
 
 protected Q_SLOTS:
-  void slotSelectPrice();
-  void slotNewPrice();
-  void slotDeletePrice();
-  void slotEditPrice();
-  void slotLoadWidgets();
-  void slotOnlinePriceUpdate();
-  void slotShowPriceMenu(const QPoint& p);
+    void slotSelectPrice();
+    void slotNewPrice();
+    void slotDeletePrice();
+    void slotEditPrice();
+    void slotLoadWidgets();
+    void slotOnlinePriceUpdate();
+    void slotShowPriceMenu(const QPoint& p);
 
 private:
-  KMyMoneyPriceDlgPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KMyMoneyPriceDlg)
+    KMyMoneyPriceDlgPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KMyMoneyPriceDlg)
 };
 
 #endif // KMYMONEYPRICEDLG_H

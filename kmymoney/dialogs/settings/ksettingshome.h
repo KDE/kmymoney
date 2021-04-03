@@ -21,23 +21,23 @@
 class KSettingsHomePrivate;
 class KSettingsHome : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KSettingsHome)
+    Q_OBJECT
+    Q_DISABLE_COPY(KSettingsHome)
 
 public:
-  explicit KSettingsHome(QWidget* parent = nullptr);
-  ~KSettingsHome();
+    explicit KSettingsHome(QWidget* parent = nullptr);
+    ~KSettingsHome();
 
 protected Q_SLOTS:
-  void slotLoadItems();
-  void slotUpdateItemList();
-  void slotSelectHomePageItem();
-  void slotMoveUp();
-  void slotMoveDown();
+    void slotLoadItems();
+    void slotUpdateItemList();
+    void slotSelectHomePageItem();
+    void slotMoveUp();
+    void slotMoveDown();
 
 private:
-  KSettingsHomePrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KSettingsHome)
+    KSettingsHomePrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KSettingsHome)
 };
 #endif
 

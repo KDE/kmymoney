@@ -21,27 +21,27 @@
 class CashFlowListItem
 {
 public:
-  CashFlowListItem() {}
-  CashFlowListItem(const QDate& _date, const MyMoneyMoney& _value): m_date(_date), m_value(_value) {}
-  bool operator<(const CashFlowListItem& _second) const {
-    return m_date < _second.m_date;
-  }
-  bool operator<=(const CashFlowListItem& _second) const {
-    return m_date <= _second.m_date;
-  }
-  bool operator>(const CashFlowListItem& _second) const {
-    return m_date > _second.m_date;
-  }
-  const QDate& date() const {
-    return m_date;
-  }
-  const MyMoneyMoney& value() const {
-    return m_value;
-  }
+    CashFlowListItem() {}
+    CashFlowListItem(const QDate& _date, const MyMoneyMoney& _value): m_date(_date), m_value(_value) {}
+    bool operator<(const CashFlowListItem& _second) const {
+        return m_date < _second.m_date;
+    }
+    bool operator<=(const CashFlowListItem& _second) const {
+        return m_date <= _second.m_date;
+    }
+    bool operator>(const CashFlowListItem& _second) const {
+        return m_date > _second.m_date;
+    }
+    const QDate& date() const {
+        return m_date;
+    }
+    const MyMoneyMoney& value() const {
+        return m_value;
+    }
 
 private:
-  QDate m_date;
-  MyMoneyMoney m_value;
+    QDate m_date;
+    MyMoneyMoney m_value;
 };
 
 /**
@@ -50,14 +50,14 @@ private:
 class CashFlowList: public QList<CashFlowListItem>
 {
 public:
-  CashFlowList() {}
-  double XIRR(double rate = 0.1) const;
-  MyMoneyMoney total() const;
-  void dumpDebug() const;
+    CashFlowList() {}
+    double XIRR(double rate = 0.1) const;
+    MyMoneyMoney total() const;
+    void dumpDebug() const;
 
 private:
-  double xirrResult(double rate) const;
-  double xirrResultDerive(double rate) const;
+    double xirrResult(double rate) const;
+    double xirrResultDerive(double rate) const;
 };
 
 #endif // CASHFLOWLIST_H

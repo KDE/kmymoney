@@ -20,9 +20,9 @@
 #include "mymoneyfile.h"
 
 ItemRenameProxyModel::ItemRenameProxyModel(QObject *parent)
-  : QSortFilterProxyModel(parent)
-  , m_renameColumn(0)
-  , m_referenceFilter(eAllItem)
+    : QSortFilterProxyModel(parent)
+    , m_renameColumn(0)
+    , m_referenceFilter(eAllItem)
 {
 }
 
@@ -32,76 +32,76 @@ ItemRenameProxyModel::~ItemRenameProxyModel()
 
 void ItemRenameProxyModel::setRenameColumn(int column)
 {
-  m_renameColumn = column;
+    m_renameColumn = column;
 }
 
 bool ItemRenameProxyModel::setData(const QModelIndex& idx, const QVariant& value, int role)
 {
-  if (idx.column() == m_renameColumn && role == Qt::EditRole) {
-    qDebug() << "Rename to" << value.toString();
-    emit renameItem(idx, value);
-    return true;
-  }
-  return QSortFilterProxyModel::setData(idx, value, role);
+    if (idx.column() == m_renameColumn && role == Qt::EditRole) {
+        qDebug() << "Rename to" << value.toString();
+        emit renameItem(idx, value);
+        return true;
+    }
+    return QSortFilterProxyModel::setData(idx, value, role);
 }
 
 Qt::ItemFlags ItemRenameProxyModel::flags(const QModelIndex& idx) const
 {
-  auto flags = QSortFilterProxyModel::flags(idx);
-  if (idx.column() == m_renameColumn) {
-    flags |= Qt::ItemIsEditable;
-  }
-  return flags;
+    auto flags = QSortFilterProxyModel::flags(idx);
+    if (idx.column() == m_renameColumn) {
+        flags |= Qt::ItemIsEditable;
+    }
+    return flags;
 }
 
 void ItemRenameProxyModel::setReferenceFilter(const QVariant& filterType)
 {
-  const uint type = filterType.toUInt();
-  if (type < eMaxItems) {
-    setReferenceFilter(static_cast<ReferenceFilterType>(type));
-  }
+    const uint type = filterType.toUInt();
+    if (type < eMaxItems) {
+        setReferenceFilter(static_cast<ReferenceFilterType>(type));
+    }
 }
 
 void ItemRenameProxyModel::setReferenceFilter(ItemRenameProxyModel::ReferenceFilterType filterType)
 {
-  if (m_referenceFilter != filterType) {
-    m_referenceFilter = filterType;
-    invalidateFilter();
-  }
+    if (m_referenceFilter != filterType) {
+        m_referenceFilter = filterType;
+        invalidateFilter();
+    }
 }
 
 bool ItemRenameProxyModel::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
 {
-  if (m_referenceFilter != eAllItem) {
-    const auto idx = sourceModel()->index(source_row, 0, source_parent);
-    const auto itemId = idx.data(eMyMoney::Model::IdRole).toString();
-    if (!itemId.isEmpty()) {
-      QVariant rc;
-      switch(m_referenceFilter) {
-        case eReferencedItems:
-          if (!MyMoneyFile::instance()->referencedObjects().contains(itemId))
-            return false;
-          break;
-        case eUnReferencedItems:
-          if (MyMoneyFile::instance()->referencedObjects().contains(itemId))
-            return false;
-          break;
-        case eOpenedItems:
-          rc = idx.data(eMyMoney::Model::ClosedRole);
-          if (rc.isValid() && (rc.toBool() == true)) {
-            return false;
-          }
-          break;
-        case eClosedItems:
-          rc = idx.data(eMyMoney::Model::ClosedRole);
-          if (rc.isValid() && (rc.toBool() == false)) {
-            return false;
-          }
-          break;
-        default:
-          break;
-      }
+    if (m_referenceFilter != eAllItem) {
+        const auto idx = sourceModel()->index(source_row, 0, source_parent);
+        const auto itemId = idx.data(eMyMoney::Model::IdRole).toString();
+        if (!itemId.isEmpty()) {
+            QVariant rc;
+            switch(m_referenceFilter) {
+            case eReferencedItems:
+                if (!MyMoneyFile::instance()->referencedObjects().contains(itemId))
+                    return false;
+                break;
+            case eUnReferencedItems:
+                if (MyMoneyFile::instance()->referencedObjects().contains(itemId))
+                    return false;
+                break;
+            case eOpenedItems:
+                rc = idx.data(eMyMoney::Model::ClosedRole);
+                if (rc.isValid() && (rc.toBool() == true)) {
+                    return false;
+                }
+                break;
+            case eClosedItems:
+                rc = idx.data(eMyMoney::Model::ClosedRole);
+                if (rc.isValid() && (rc.toBool() == false)) {
+                    return false;
+                }
+                break;
+            default:
+                break;
+            }
+        }
     }
-  }
-  return QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
+    return QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
 }

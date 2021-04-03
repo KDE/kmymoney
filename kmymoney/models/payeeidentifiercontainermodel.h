@@ -26,60 +26,60 @@ class MyMoneyPayeeIdentifierContainer;
 class payeeIdentifier;
 class KMM_MODELS_EXPORT payeeIdentifierContainerModel : public QAbstractListModel
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  /**
-   * @brief Roles for this model
-   *
-   * They are equal to payeeIdentifierModel::roles
-   */
-  enum roles {
-    payeeIdentifierType = payeeIdentifierModel::payeeIdentifierType, /**< type of payeeIdentifier */
-    payeeIdentifier = payeeIdentifierModel::payeeIdentifier, /**< actual payeeIdentifier */
-  };
+    /**
+     * @brief Roles for this model
+     *
+     * They are equal to payeeIdentifierModel::roles
+     */
+    enum roles {
+        payeeIdentifierType = payeeIdentifierModel::payeeIdentifierType, /**< type of payeeIdentifier */
+        payeeIdentifier = payeeIdentifierModel::payeeIdentifier, /**< actual payeeIdentifier */
+    };
 
-  explicit payeeIdentifierContainerModel(QObject* parent = 0);
+    explicit payeeIdentifierContainerModel(QObject* parent = 0);
 
-  QVariant data(const QModelIndex& index, int role) const final override;
+    QVariant data(const QModelIndex& index, int role) const final override;
 
-  /**
-   * This model only supports to edit payeeIdentifier role with a QVariant of type
-   * payeeIdentifier.
-   */
-  bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
+    /**
+     * This model only supports to edit payeeIdentifier role with a QVariant of type
+     * payeeIdentifier.
+     */
+    bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
 
-  Qt::ItemFlags flags(const QModelIndex& index) const final override;
+    Qt::ItemFlags flags(const QModelIndex& index) const final override;
 
-  int rowCount(const QModelIndex& parent) const final override;
+    int rowCount(const QModelIndex& parent) const final override;
 
-  bool insertRows(int row, int count, const QModelIndex& parent) final override;
-  bool removeRows(int row, int count, const QModelIndex& parent) final override;
+    bool insertRows(int row, int count, const QModelIndex& parent) final override;
+    bool removeRows(int row, int count, const QModelIndex& parent) final override;
 
-  /**
-   * @brief Set source of data
-   *
-   * This makes the model editable.
-   */
-  void setSource(MyMoneyPayeeIdentifierContainer data);
+    /**
+     * @brief Set source of data
+     *
+     * This makes the model editable.
+     */
+    void setSource(MyMoneyPayeeIdentifierContainer data);
 
-  /** @brief Get stored data */
-  QList< ::payeeIdentifier > identifiers() const;
+    /** @brief Get stored data */
+    QList< ::payeeIdentifier > identifiers() const;
 
 public Q_SLOTS:
-  /**
-   * @brief Removes all data from the model
-   *
-   * The model is not editable afterwards.
-   */
-  void closeSource();
+    /**
+     * @brief Removes all data from the model
+     *
+     * The model is not editable afterwards.
+     */
+    void closeSource();
 
 private:
-  /** @internal
-   * The use of a shared pointer makes this future prof. Because using identifier() causes
-   * some unnecessary work.
-   */
-  QSharedPointer<MyMoneyPayeeIdentifierContainer> m_data;
+    /** @internal
+     * The use of a shared pointer makes this future prof. Because using identifier() causes
+     * some unnecessary work.
+     */
+    QSharedPointer<MyMoneyPayeeIdentifierContainer> m_data;
 };
 
 #endif // PAYEEIDENTIFIERCONTAINERMODEL_H

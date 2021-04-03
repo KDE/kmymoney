@@ -14,44 +14,44 @@ class Parse;
 
 class SymbolTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  SymbolTest();
+    SymbolTest();
 
-  Parse*           m_parse;
+    Parse*           m_parse;
 
-  QStringList      m_input;
-  QStringList      m_expected;
+    QStringList      m_input;
+    QStringList      m_expected;
 
 private:
-  QString          m_localeDecimal;
-  QString          m_testDecimal;
-  QString          m_localeThousands;
+    QString          m_localeDecimal;
+    QString          m_testDecimal;
+    QString          m_localeThousands;
 
 private Q_SLOTS:
-  void init();
-  void cleanup();
-  void cleanupTestCase();
-  void testDefaultConstructor();
-  void testDefaultConstructor_data();
-  void testConstructor();
-  void testConstructor_data();
-  void initTestCase();
-  void initTestCase_data();
+    void init();
+    void cleanup();
+    void cleanupTestCase();
+    void testDefaultConstructor();
+    void testDefaultConstructor_data();
+    void testConstructor();
+    void testConstructor_data();
+    void initTestCase();
+    void initTestCase_data();
 
-  /**
-  * There are three sub-tests in this class, for checking various
-  * data strings, using both the dot '.' and the comma ',' as
-  * decimal symbols, plus a format that should produce an invalid
-  * conversion.
-  */
-  void       testDecimalSymbolDot();
-  void       testDecimalSymbolDot_data();
-  void       testDecimalSymbolComma();
-  void       testDecimalSymbolComma_data();
-  void       testDecimalSymbolInvalid();
-  void       testDecimalSymbolInvalid_data();
+    /**
+    * There are three sub-tests in this class, for checking various
+    * data strings, using both the dot '.' and the comma ',' as
+    * decimal symbols, plus a format that should produce an invalid
+    * conversion.
+    */
+    void       testDecimalSymbolDot();
+    void       testDecimalSymbolDot_data();
+    void       testDecimalSymbolComma();
+    void       testDecimalSymbolComma_data();
+    void       testDecimalSymbolInvalid();
+    void       testDecimalSymbolInvalid_data();
 
 };
 #endif

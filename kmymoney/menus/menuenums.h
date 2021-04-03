@@ -14,7 +14,7 @@ class QAction;
 class QMenu;
 
 namespace eMenu {
-  enum class Action {
+enum class Action {
     // *************
     // The File menu
     // *************
@@ -22,9 +22,9 @@ namespace eMenu {
     FileImportStatement,
     FileImportTemplate, FileExportTemplate,
     Print,
-    #ifdef KMM_DEBUG
+#ifdef KMM_DEBUG
     FileDump,
-    #endif
+#endif
     FilePersonalData, FileInformation,
     // *************
     // The edit menu
@@ -120,11 +120,13 @@ namespace eMenu {
     DebugTimers,
     DeleteOnlineJob, EditOnlineJob, LogOnlineJob,
     ReportOpen,
-  };
+};
 
-  inline uint qHash(const Action key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+inline uint qHash(const Action key, uint seed) {
+    return ::qHash(static_cast<uint>(key), seed);
+}
 
-  enum class Menu {
+enum class Menu {
     Institution,
     Account,
     Schedule,
@@ -137,9 +139,11 @@ namespace eMenu {
     MarkTransaction,
     MarkTransactionContext,
     OnlineJob,
-  };
+};
 
-  inline uint qHash(const Menu key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+inline uint qHash(const Menu key, uint seed) {
+    return ::qHash(static_cast<uint>(key), seed);
+}
 }
 
 KMM_MENUS_EXPORT extern QHash<eMenu::Action, QAction *> pActions;

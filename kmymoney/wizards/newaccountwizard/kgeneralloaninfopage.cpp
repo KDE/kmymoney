@@ -44,10 +44,10 @@ using namespace eMyMoney;
 
 namespace NewAccountWizard
 {
-  GeneralLoanInfoPage::GeneralLoanInfoPage(Wizard* wizard) :
+GeneralLoanInfoPage::GeneralLoanInfoPage(Wizard* wizard) :
     QWidget(wizard),
     WizardPage<Wizard>(*new GeneralLoanInfoPagePrivate(wizard), StepDetails, this, wizard)
-  {
+{
     Q_D(GeneralLoanInfoPage);
     d->ui->setupUi(this);
 
@@ -77,31 +77,31 @@ namespace NewAccountWizard
     connect(d->ui->m_openingBalance, &AmountEdit::textChanged, object(),  &KMyMoneyWizardPagePrivate::completeStateChanged);
 
     connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, this, &GeneralLoanInfoPage::slotLoadWidgets);
-  }
+}
 
-  GeneralLoanInfoPage::~GeneralLoanInfoPage()
-  {
-  }
+GeneralLoanInfoPage::~GeneralLoanInfoPage()
+{
+}
 
-  KMyMoneyWizardPage* GeneralLoanInfoPage::nextPage() const
-  {
+KMyMoneyWizardPage* GeneralLoanInfoPage::nextPage() const
+{
     Q_D(const GeneralLoanInfoPage);
     return d->m_wizard->d_func()->m_loanDetailsPage;
-  }
+}
 
-  bool GeneralLoanInfoPage::recordAllPayments() const
-  {
+bool GeneralLoanInfoPage::recordAllPayments() const
+{
     Q_D(const GeneralLoanInfoPage);
     bool rc = true;     // all payments
     if (d->ui->m_recordings->isEnabled()) {
         if (d->ui->m_recordings->currentIndex() != 0)
-          rc = false;
-      }
+            rc = false;
+    }
     return rc;
-  }
+}
 
-  void GeneralLoanInfoPage::enterPage()
-  {
+void GeneralLoanInfoPage::enterPage()
+{
     Q_D(GeneralLoanInfoPage);
     if (d->m_firstTime) {
         // setup default dates to last of this month and one year on top
@@ -109,17 +109,17 @@ namespace NewAccountWizard
         d->ui->m_firstPaymentDate->setDate(firstDay.addMonths(1).addDays(-1));
         d->ui->m_interestChangeDateEdit->setDate(d->ui->m_firstPaymentDate->date().addYears(1));;
         d->m_firstTime = false;
-      }
-  }
+    }
+}
 
-  bool GeneralLoanInfoPage::isComplete() const
-  {
+bool GeneralLoanInfoPage::isComplete() const
+{
     Q_D(const GeneralLoanInfoPage);
     d->m_wizard->d_func()->setStepHidden(StepPayout, !d->m_wizard->openingBalance().isZero());
     bool rc = KMyMoneyWizardPage::isComplete();
     if (!rc) {
         d->m_wizard->d_func()->m_nextButton->setToolTip(i18n("No payee supplied"));
-      }
+    }
 
     // fixup availability of items on this page
     d->ui->m_recordings->setDisabled(d->ui->m_anyPayments->currentIndex() == 0);
@@ -133,35 +133,35 @@ namespace NewAccountWizard
     if (d->ui->m_openingBalance->isEnabled() && d->ui->m_openingBalance->text().length() == 0) {
         rc = false;
         d->m_wizard->d_func()->m_nextButton->setToolTip(i18n("No opening balance supplied"));
-      }
+    }
 
     if (rc
-        && (d->ui->m_interestType->currentIndex() != 0)
-        && (d->ui->m_interestChangeDateEdit->date() <= d->ui->m_firstPaymentDate->date())) {
+            && (d->ui->m_interestType->currentIndex() != 0)
+            && (d->ui->m_interestChangeDateEdit->date() <= d->ui->m_firstPaymentDate->date())) {
         rc = false;
         d->m_wizard->d_func()->m_nextButton->setToolTip(i18n("An interest change can only happen after the first payment"));
-      }
+    }
     return rc;
-  }
+}
 
-  MyMoneyAccount GeneralLoanInfoPage::parentAccount()
-  {
+MyMoneyAccount GeneralLoanInfoPage::parentAccount()
+{
     Q_D(GeneralLoanInfoPage);
     return (d->ui->m_loanDirection->currentIndex() == 0)
-        ? MyMoneyFile::instance()->liability()
-        : MyMoneyFile::instance()->asset();
-  }
+           ? MyMoneyFile::instance()->liability()
+           : MyMoneyFile::instance()->asset();
+}
 
-  QWidget* GeneralLoanInfoPage::initialFocusWidget() const
-  {
+QWidget* GeneralLoanInfoPage::initialFocusWidget() const
+{
     Q_D(const GeneralLoanInfoPage);
     return d->ui->m_loanDirection;
-  }
+}
 
-  void GeneralLoanInfoPage::slotLoadWidgets()
-  {
+void GeneralLoanInfoPage::slotLoadWidgets()
+{
     Q_D(GeneralLoanInfoPage);
     d->ui->m_payee->loadPayees(MyMoneyFile::instance()->payeeList());
-  }
+}
 
 }

@@ -16,30 +16,30 @@ class SecurityDlg;
 class QPushButton;
 class SecurityDlg : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  SecurityDlg();
-  ~SecurityDlg();
+    SecurityDlg();
+    ~SecurityDlg();
 
-  Ui::SecurityDlg*   ui;
+    Ui::SecurityDlg*   ui;
 
-  /**
-  * This method initializes securities combobox.
-  */
-  void             initializeSecurities(const QString &presetSymbol, const QString &presetName);
+    /**
+    * This method initializes securities combobox.
+    */
+    void             initializeSecurities(const QString &presetSymbol, const QString &presetName);
 
-  QString          security();
-  QString          name();
-  QString          symbol();
-  int              dontAsk();
+    QString          security();
+    QString          name();
+    QString          symbol();
+    int              dontAsk();
 
 private:
-  QPushButton*     m_buttonOK;
+    QPushButton*     m_buttonOK;
 
 private Q_SLOTS:
-  void             slotIndexChanged(int index);
-  void             slotEditingFinished();
+    void             slotIndexChanged(int index);
+    void             slotEditingFinished();
 };
 
 #endif // SECURITYDLG_H

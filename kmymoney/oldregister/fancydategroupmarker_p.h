@@ -22,11 +22,11 @@
 
 namespace KMyMoneyRegister
 {
-  class FancyDateGroupMarkerPrivate : public GroupMarkerPrivate
-  {
-  public:
+class FancyDateGroupMarkerPrivate : public GroupMarkerPrivate
+{
+public:
     QDate m_date;
-  };
+};
 }
 
 #endif

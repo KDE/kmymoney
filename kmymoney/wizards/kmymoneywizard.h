@@ -127,45 +127,45 @@ template <class T> class QList;
 class KMyMoneyWizardPrivate;
 class KMM_WIZARD_EXPORT KMyMoneyWizard : public QDialog
 {
-  friend class KMyMoneyWizardPage;
+    friend class KMyMoneyWizardPage;
 
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyWizard)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyWizard)
 
 public:
-  /**
-    * Modify the title of the wizard to be @p txt.
-    *
-    * @param txt The text that should be used as title
-    */
-  void setTitle(const QString& txt);
+    /**
+      * Modify the title of the wizard to be @p txt.
+      *
+      * @param txt The text that should be used as title
+      */
+    void setTitle(const QString& txt);
 
-  /**
-    * Add step @p text to the wizard
-    *
-    * @param text Text to be shown for this step
-    */
-  void addStep(const QString& text);
+    /**
+      * Add step @p text to the wizard
+      *
+      * @param text Text to be shown for this step
+      */
+    void addStep(const QString& text);
 
-  QList<KMyMoneyWizardPage*> historyPages() const;
+    QList<KMyMoneyWizardPage*> historyPages() const;
 
-  /**
-    * This method repeats selection of the current step in the
-    * step frame.
-    * This is used to allow changes made to showing and hiding
-    * pages to immediately to be reflected in the step frame
-    */
-  void reselectStep();
+    /**
+      * This method repeats selection of the current step in the
+      * step frame.
+      * This is used to allow changes made to showing and hiding
+      * pages to immediately to be reflected in the step frame
+      */
+    void reselectStep();
 
-  /**
-   * Setup a global help context for the wizard. It will be used whenever
-   * there is no specific help context available for the current page.
-   *
-   * @sa KMyMoneyWizardPage::helpContext()
-   */
-  void setHelpContext(const QString& ctx);
+    /**
+     * Setup a global help context for the wizard. It will be used whenever
+     * there is no specific help context available for the current page.
+     *
+     * @sa KMyMoneyWizardPage::helpContext()
+     */
+    void setHelpContext(const QString& ctx);
 
-  virtual ~KMyMoneyWizard();
+    virtual ~KMyMoneyWizard();
 
 Q_SIGNALS:
 //  /**
@@ -187,24 +187,24 @@ Q_SIGNALS:
 //  void createCategory(const QString& txt, QString& id);
 
 protected:
-  KMyMoneyWizardPrivate * const d_ptr;
-  KMyMoneyWizard(KMyMoneyWizardPrivate &dd, QWidget* parent = nullptr, bool modal = false, Qt::WindowFlags f = 0);
-  /**
-    * Constructor (kept protected, so that one cannot create such an object directly)
-    */
-  explicit KMyMoneyWizard(QWidget* parent = nullptr, bool modal = false, Qt::WindowFlags f = 0);
+    KMyMoneyWizardPrivate * const d_ptr;
+    KMyMoneyWizard(KMyMoneyWizardPrivate &dd, QWidget* parent = nullptr, bool modal = false, Qt::WindowFlags f = 0);
+    /**
+      * Constructor (kept protected, so that one cannot create such an object directly)
+      */
+    explicit KMyMoneyWizard(QWidget* parent = nullptr, bool modal = false, Qt::WindowFlags f = 0);
 
 protected Q_SLOTS:
-  void accept() override;
-  void completeStateChanged();
+    void accept() override;
+    void completeStateChanged();
 
 private Q_SLOTS:
-  void backButtonClicked();
-  void nextButtonClicked();
-  void helpButtonClicked();
+    void backButtonClicked();
+    void nextButtonClicked();
+    void helpButtonClicked();
 
 private:
-  Q_DECLARE_PRIVATE(KMyMoneyWizard)
+    Q_DECLARE_PRIVATE(KMyMoneyWizard)
 };
 
 #endif

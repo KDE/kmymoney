@@ -17,45 +17,45 @@
 
 class MyMoneyForecastTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  MyMoneyForecastTest();
+    MyMoneyForecastTest();
 
 private Q_SLOTS:
-  void init();
-  void cleanup();
-  void testEmptyConstructor();
-  void testDoForecast();
-  void testDoForecastInit();
-  void testGetForecastAccountList();
-  void testCalculateAccountTrend();
-  void testGetForecastBalance();
-  void testIsForecastAccount();
-  void testDoFutureScheduledForecast();
-  void testDaysToMinimumBalance();
-  void testDaysToZeroBalance();
-  void testScheduleForecast();
-  void testSkipOpeningDate();
-  void testAccountMinimumBalanceDateList();
-  void testAccountMaximumBalanceDateList();
-  void testAccountAverageBalance();
-  void testBeginForecastDate();
-  void testHistoryDays();
-  void testCreateBudget();
-  void testLinearRegression();
+    void init();
+    void cleanup();
+    void testEmptyConstructor();
+    void testDoForecast();
+    void testDoForecastInit();
+    void testGetForecastAccountList();
+    void testCalculateAccountTrend();
+    void testGetForecastBalance();
+    void testIsForecastAccount();
+    void testDoFutureScheduledForecast();
+    void testDaysToMinimumBalance();
+    void testDaysToZeroBalance();
+    void testScheduleForecast();
+    void testSkipOpeningDate();
+    void testAccountMinimumBalanceDateList();
+    void testAccountMaximumBalanceDateList();
+    void testAccountAverageBalance();
+    void testBeginForecastDate();
+    void testHistoryDays();
+    void testCreateBudget();
+    void testLinearRegression();
 
 protected:
-  MyMoneyForecast *m;
+    MyMoneyForecast *m;
 
 private:
-  MyMoneyStorageMgr* storage;
-  MyMoneyFile* file;
+    MyMoneyStorageMgr* storage;
+    MyMoneyFile* file;
 
-  MyMoneyMoney moT1;
-  MyMoneyMoney moT2;
-  MyMoneyMoney moT3;
-  MyMoneyMoney moT4;
-  MyMoneyMoney moT5;
+    MyMoneyMoney moT1;
+    MyMoneyMoney moT2;
+    MyMoneyMoney moT3;
+    MyMoneyMoney moT4;
+    MyMoneyMoney moT5;
 };
 
 #endif

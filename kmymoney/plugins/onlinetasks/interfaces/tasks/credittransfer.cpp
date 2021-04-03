@@ -11,5 +11,5 @@ creditTransfer::~creditTransfer()
 
 QString creditTransfer::jobTypeName() const
 {
-  return "Credit Transfer";
+    return "Credit Transfer";
 }

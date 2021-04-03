@@ -24,24 +24,24 @@ class WeboobInterface;
 class MapAccountWizardPrivate;
 class MapAccountWizard : public QWizard
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit MapAccountWizard(QWidget *parent, WeboobInterface *weboob);
-  ~MapAccountWizard();
+    explicit MapAccountWizard(QWidget *parent, WeboobInterface *weboob);
+    ~MapAccountWizard();
 
-  QString currentBackend() const;
-  QString currentAccount() const;
+    QString currentBackend() const;
+    QString currentAccount() const;
 
 private:
-  Q_DECLARE_PRIVATE(MapAccountWizard)
-  MapAccountWizardPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(MapAccountWizard)
+    MapAccountWizardPrivate * const d_ptr;
 
 private Q_SLOTS:
-  void slotCheckNextButton(void);
-  void slotNewPage(int id);
-  void slotGotAccounts();
-  void slotGotBackends();
+    void slotCheckNextButton(void);
+    void slotNewPage(int id);
+    void slotGotAccounts();
+    void slotGotBackends();
 };
 
 #endif

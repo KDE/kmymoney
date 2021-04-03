@@ -11,16 +11,16 @@
 
 class ForecastViewSettingsWidget : public QWidget, public Ui::ForecastViewSettings
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit ForecastViewSettingsWidget(QWidget* parent = nullptr);
+    explicit ForecastViewSettingsWidget(QWidget* parent = nullptr);
 };
 
 class KCMForecastView : public KCModule
 {
 public:
-  explicit KCMForecastView(QWidget* parent, const QVariantList& args);
-  ~KCMForecastView();
+    explicit KCMForecastView(QWidget* parent, const QVariantList& args);
+    ~KCMForecastView();
 };
 
 #endif

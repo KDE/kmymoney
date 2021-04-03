@@ -26,31 +26,31 @@ class QUndoStack;
   */
 class KMM_MYMONEY_EXPORT BudgetsModel : public MyMoneyModel<MyMoneyBudget>
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  enum Columns {
-      Name,
-      Year,
-  };
+    enum Columns {
+        Name,
+        Year,
+    };
 
-  explicit BudgetsModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
-  ~BudgetsModel();
+    explicit BudgetsModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
+    ~BudgetsModel();
 
-  static const int ID_SIZE = 6;
+    static const int ID_SIZE = 6;
 
-  int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
-  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
-  QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;
+    int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
+    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;
 
-  Qt::ItemFlags flags(const QModelIndex &index) const override;
-  bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
+    bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
 
 public Q_SLOTS:
 
 private:
-  struct Private;
-  QScopedPointer<Private> d;
+    struct Private;
+    QScopedPointer<Private> d;
 };
 
 #endif // BUDGETSMODEL_H

@@ -28,23 +28,23 @@
 KMergeTransactionsDlg::KMergeTransactionsDlg(const MyMoneyAccount& account, QWidget* parent) :
     KSelectTransactionsDlg(account, parent)
 {
-  // setup descriptive texts
-  setWindowTitle(i18n("Merge Transactions"));
-  d_ptr->ui->m_description->setText(i18n("Are you sure you wish to merge these transactions?"));
+    // setup descriptive texts
+    setWindowTitle(i18n("Merge Transactions"));
+    d_ptr->ui->m_description->setText(i18n("Are you sure you wish to merge these transactions?"));
 
-  // no selection possible
-  d_ptr->ui->m_register->setSelectionMode(QTableWidget::NoSelection);
+    // no selection possible
+    d_ptr->ui->m_register->setSelectionMode(QTableWidget::NoSelection);
 
-  // override default and enable ok button right away
-  d_ptr->ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
+    // override default and enable ok button right away
+    d_ptr->ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
 }
 
-bool KMergeTransactionsDlg::eventFilter(QObject* , QEvent*)
+bool KMergeTransactionsDlg::eventFilter(QObject*, QEvent*)
 {
-  return false;
+    return false;
 }
 
 void KMergeTransactionsDlg::slotHelp()
 {
-  KHelpClient::invokeHelp("details.ledgers.match");
+    KHelpClient::invokeHelp("details.ledgers.match");
 }

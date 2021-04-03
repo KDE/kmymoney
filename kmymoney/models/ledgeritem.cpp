@@ -27,5 +27,5 @@ LedgerItem::~LedgerItem()
 
 QString LedgerItem::accountId() const
 {
-  return QString();
+    return QString();
 }

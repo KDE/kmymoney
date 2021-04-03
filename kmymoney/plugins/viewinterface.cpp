@@ -17,7 +17,7 @@
 KMyMoneyPlugin::ViewInterface::ViewInterface(QObject* parent, const char* name) :
     QObject(parent)
 {
-  setObjectName(name);
+    setObjectName(name);
 }
 
 KMyMoneyPlugin::ViewInterface::~ViewInterface()

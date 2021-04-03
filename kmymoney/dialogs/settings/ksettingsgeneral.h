@@ -21,24 +21,24 @@
 class KSettingsGeneralPrivate;
 class KSettingsGeneral : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KSettingsGeneral)
+    Q_OBJECT
+    Q_DISABLE_COPY(KSettingsGeneral)
 
 public:
-  explicit KSettingsGeneral(QWidget* parent = nullptr);
-  ~KSettingsGeneral();
+    explicit KSettingsGeneral(QWidget* parent = nullptr);
+    ~KSettingsGeneral();
 
 protected Q_SLOTS:
-  void slotChooseLogPath();
-  void slotLoadStartDate(const QDate&);
-  void slotUpdateLogTypes();
+    void slotChooseLogPath();
+    void slotLoadStartDate(const QDate&);
+    void slotUpdateLogTypes();
 
 protected:
-  void showEvent(QShowEvent* event) override;
+    void showEvent(QShowEvent* event) override;
 
 private:
-  KSettingsGeneralPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KSettingsGeneral)
+    KSettingsGeneralPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KSettingsGeneral)
 };
 #endif
 

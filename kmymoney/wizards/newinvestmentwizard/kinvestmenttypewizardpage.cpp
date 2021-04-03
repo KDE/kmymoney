@@ -23,32 +23,32 @@
 #include "mymoneyenums.h"
 
 KInvestmentTypeWizardPage::KInvestmentTypeWizardPage(QWidget *parent) :
-  QWizardPage(parent),
-  ui(new Ui::KInvestmentTypeWizardPage)
+    QWizardPage(parent),
+    ui(new Ui::KInvestmentTypeWizardPage)
 {
-  ui->setupUi(this);
-  ui->m_securityType->addItem(i18nc("Security type", "Stock"), (int)eMyMoney::Security::Type::Stock);
-  ui->m_securityType->addItem(i18nc("Security type", "Mutual Fund"), (int)eMyMoney::Security::Type::MutualFund);
-  ui->m_securityType->addItem(i18nc("Security type", "Bond"), (int)eMyMoney::Security::Type::Bond);
-  registerField("securityType", ui->m_securityType, "currentData", SIGNAL(currentIndexChanged(int)));
+    ui->setupUi(this);
+    ui->m_securityType->addItem(i18nc("Security type", "Stock"), (int)eMyMoney::Security::Type::Stock);
+    ui->m_securityType->addItem(i18nc("Security type", "Mutual Fund"), (int)eMyMoney::Security::Type::MutualFund);
+    ui->m_securityType->addItem(i18nc("Security type", "Bond"), (int)eMyMoney::Security::Type::Bond);
+    registerField("securityType", ui->m_securityType, "currentData", SIGNAL(currentIndexChanged(int)));
 }
 
 KInvestmentTypeWizardPage::~KInvestmentTypeWizardPage()
 {
-  delete ui;
+    delete ui;
 }
 
 void KInvestmentTypeWizardPage::init2(const MyMoneySecurity& security)
 {
-  //get the current text of the security and set the combo index accordingly
-  auto text = MyMoneySecurity::securityTypeToString(security.securityType());
-  for (auto i = 0; i < ui->m_securityType->count(); ++i) {
-    if (ui->m_securityType->itemText(i) == text)
-      ui->m_securityType->setCurrentIndex(i);
-  }
+    //get the current text of the security and set the combo index accordingly
+    auto text = MyMoneySecurity::securityTypeToString(security.securityType());
+    for (auto i = 0; i < ui->m_securityType->count(); ++i) {
+        if (ui->m_securityType->itemText(i) == text)
+            ui->m_securityType->setCurrentIndex(i);
+    }
 }
 
 void KInvestmentTypeWizardPage::setIntroLabelText(const QString& text)
 {
-  ui->m_introLabel->setText(text);
+    ui->m_introLabel->setText(text);
 }

@@ -24,22 +24,32 @@ class MyMoneyAccount;
 class MyMoneySplit;
 class MyMoneyTransaction;
 
-namespace eWidgets { enum class SortField;
-                     namespace eTransaction { enum class Column; }
-                     namespace eRegister { enum class DetailColumn;} }
-namespace eMyMoney { namespace Account { enum class Type; } }
+namespace eWidgets {
+enum class SortField;
+namespace eTransaction {
+enum class Column;
+}
+namespace eRegister {
+enum class DetailColumn;
+}
+}
+namespace eMyMoney {
+namespace Account {
+enum class Type;
+}
+}
 
 template <typename T> class QList;
 
 namespace KMyMoneyRegister
 {
-  class RegisterItem;
-  class Transaction;
-  class SelectedTransactions;
+class RegisterItem;
+class Transaction;
+class SelectedTransactions;
 
-  class RegisterPrivate;
-  class KMM_OLDREGISTER_EXPORT Register : public TransactionEditorContainer
-  {
+class RegisterPrivate;
+class KMM_OLDREGISTER_EXPORT Register : public TransactionEditorContainer
+{
     Q_OBJECT
     Q_DISABLE_COPY(Register)
 
@@ -47,7 +57,7 @@ namespace KMyMoneyRegister
     friend class StdTransaction;
     friend class InvestTransaction;
 
-  public:
+public:
     explicit Register(QWidget* parent = nullptr);
     virtual ~Register();
 
@@ -234,10 +244,10 @@ namespace KMyMoneyRegister
     eWidgets::eRegister::DetailColumn getDetailsColumnType() const;
     void setDetailsColumnType(eWidgets::eRegister::DetailColumn detailsColumnType);
 
-  public Q_SLOTS:
-      void ensureFocusItemVisible();
+public Q_SLOTS:
+    void ensureFocusItemVisible();
 
-  protected:
+protected:
 
     void mouseReleaseEvent(QMouseEvent *e) override;
     void contextMenuEvent(QContextMenuEvent *e) override;
@@ -293,14 +303,14 @@ namespace KMyMoneyRegister
     */
     int minimumColumnWidth(int col);
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void resize();
 
     void selectItem(int row, int col);
     void slotEnsureItemVisible();
     void slotDoubleClicked(int row, int);
 
-  Q_SIGNALS:
+Q_SIGNALS:
     void transactionsSelected(const KMyMoneyRegister::SelectedTransactions& list);
     /**
     * This signal is emitted when the focus and selection changes to @p item.
@@ -316,11 +326,11 @@ namespace KMyMoneyRegister
     void focusChanged();
 
     /**
-   * This signal is emitted when an @p item is about to be selected. The boolean
-   * @p okToSelect is preset to @c true. If the @p item should not be selected
-   * for whatever reason, the boolean @p okToSelect should be reset to @c false
-   * by the connected slot.
-   */
+    * This signal is emitted when an @p item is about to be selected. The boolean
+    * @p okToSelect is preset to @c true. If the @p item should not be selected
+    * for whatever reason, the boolean @p okToSelect should be reset to @c false
+    * by the connected slot.
+    */
     void aboutToSelectItem(KMyMoneyRegister::RegisterItem* item, bool& okToSelect);
 
     void editTransaction();
@@ -346,10 +356,10 @@ namespace KMyMoneyRegister
     */
     void itemAdded(RegisterItem* item);
 
-  private:
+private:
     RegisterPrivate * const d_ptr;
     Q_DECLARE_PRIVATE(Register)
-  };
+};
 
 } // namespace
 

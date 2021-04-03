@@ -26,39 +26,39 @@
 class KLoadTemplateDlgPrivate
 {
 public:
-  KLoadTemplateDlgPrivate()
-  : ui(new Ui::KLoadTemplateDlg)
-  {}
+    KLoadTemplateDlgPrivate()
+        : ui(new Ui::KLoadTemplateDlg)
+    {}
 
-  Ui::KLoadTemplateDlg* ui;
-  TemplatesModel        model;
-  TemplateLoader        loader;
+    Ui::KLoadTemplateDlg* ui;
+    TemplatesModel        model;
+    TemplateLoader        loader;
 };
 
 KLoadTemplateDlg::KLoadTemplateDlg(QWidget* parent) :
-  QDialog(parent),
-  d_ptr(new KLoadTemplateDlgPrivate)
+    QDialog(parent),
+    d_ptr(new KLoadTemplateDlgPrivate)
 {
-  Q_D(KLoadTemplateDlg);
-  d->ui->setupUi(this);
-  connect(d->ui->buttonBox, &QDialogButtonBox::helpRequested, this, &KLoadTemplateDlg::slotHelp);
+    Q_D(KLoadTemplateDlg);
+    d->ui->setupUi(this);
+    connect(d->ui->buttonBox, &QDialogButtonBox::helpRequested, this, &KLoadTemplateDlg::slotHelp);
 
-  d->loader.load(&d->model);
-  d->ui->m_templateSelector->setModel(&d->model);
+    d->loader.load(&d->model);
+    d->ui->m_templateSelector->setModel(&d->model);
 
-  connect(&d->loader, &TemplateLoader::loadingFinished, d->ui->m_templateSelector, &KAccountTemplateSelector::setupInitialSelection);
+    connect(&d->loader, &TemplateLoader::loadingFinished, d->ui->m_templateSelector, &KAccountTemplateSelector::setupInitialSelection);
 }
 
 KLoadTemplateDlg::~KLoadTemplateDlg()
 {
-  Q_D(KLoadTemplateDlg);
-  delete d;
+    Q_D(KLoadTemplateDlg);
+    delete d;
 }
 
 QList<MyMoneyTemplate> KLoadTemplateDlg::templates() const
 {
-  Q_D(const KLoadTemplateDlg);
-  return d->ui->m_templateSelector->selectedTemplates();
+    Q_D(const KLoadTemplateDlg);
+    return d->ui->m_templateSelector->selectedTemplates();
 }
 
 void KLoadTemplateDlg::slotHelp()

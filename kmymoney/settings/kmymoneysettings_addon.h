@@ -18,21 +18,21 @@
 class MyMoneyForecast;
 
 enum class SchemeColor {
-  ListBackground1,
-  ListBackground2,
-  ListGrid,
-  ListHighlightText,
-  ListHighlight,
-  WindowText,
-  WindowBackground,
-  Positive,
-  Negative,
-  TransactionImported,
-  TransactionMatched,
-  TransactionErroneous,
-  FieldRequired,
-  GroupMarker,
-  MissingConversionRate,
+    ListBackground1,
+    ListBackground2,
+    ListGrid,
+    ListHighlightText,
+    ListHighlight,
+    WindowText,
+    WindowBackground,
+    Positive,
+    Negative,
+    TransactionImported,
+    TransactionMatched,
+    TransactionErroneous,
+    FieldRequired,
+    GroupMarker,
+    MissingConversionRate,
 };
 
 #endif

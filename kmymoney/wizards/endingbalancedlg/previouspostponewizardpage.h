@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class PreviousPostponeWizardPage; }
+namespace Ui {
+class PreviousPostponeWizardPage;
+}
 
 /**
  * This class implements the PreviousPostpone page of the
@@ -26,14 +28,14 @@ namespace Ui { class PreviousPostponeWizardPage; }
 
 class PreviousPostponeWizardPage : public QWizardPage
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(PreviousPostponeWizardPage)
+    Q_OBJECT
+    Q_DISABLE_COPY(PreviousPostponeWizardPage)
 
 public:
-  explicit PreviousPostponeWizardPage(QWidget *parent = nullptr);
-  ~PreviousPostponeWizardPage();
+    explicit PreviousPostponeWizardPage(QWidget *parent = nullptr);
+    ~PreviousPostponeWizardPage();
 
-  Ui::PreviousPostponeWizardPage *ui;
+    Ui::PreviousPostponeWizardPage *ui;
 };
 
 #endif

@@ -9,8 +9,8 @@ namespace KMyMoneyPlugin {
 
 InterfaceLoader& pluginInterfaces()
 {
-  static InterfaceLoader m_interfaces;
-  return m_interfaces;
+    static InterfaceLoader m_interfaces;
+    return m_interfaces;
 }
 
 }

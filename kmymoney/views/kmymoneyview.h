@@ -31,13 +31,28 @@ class ResourceInstance;
 }
 #endif
 
-namespace eAccountsModel { enum class Column; }
-namespace eMenu { enum class Action; enum class Menu; }
-namespace KMyMoneyPlugin { class OnlinePlugin; }
-namespace eDialogs { enum class ScheduleResultCode; }
-namespace eView { enum class Intent; }
-namespace eView { enum class Action; }
-namespace Icons { enum class Icon; }
+namespace eAccountsModel {
+enum class Column;
+}
+namespace eMenu {
+enum class Action;
+enum class Menu;
+}
+namespace KMyMoneyPlugin {
+class OnlinePlugin;
+}
+namespace eDialogs {
+enum class ScheduleResultCode;
+}
+namespace eView {
+enum class Intent;
+}
+namespace eView {
+enum class Action;
+}
+namespace Icons {
+enum class Icon;
+}
 
 class KMyMoneyApp;
 class KHomeView;
@@ -80,231 +95,231 @@ class SelectedObjects;
 enum class View;
 class KMyMoneyView : public KPageWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 private:
 
-  KPageWidgetModel* m_model;
+    KPageWidgetModel* m_model;
 
-  QHash<View, KPageWidgetItem*> viewFrames;
-  QHash<View, KMyMoneyViewBase*> viewBases;
+    QHash<View, KPageWidgetItem*> viewFrames;
+    QHash<View, KMyMoneyViewBase*> viewBases;
 
-  KMyMoneyTitleLabel* m_header;
+    KMyMoneyTitleLabel* m_header;
 
-  void viewAccountList(const QString& selectAccount); // Show the accounts view
+    void viewAccountList(const QString& selectAccount); // Show the accounts view
 
-  void createSchedule(MyMoneySchedule s, MyMoneyAccount& a);
+    void createSchedule(MyMoneySchedule s, MyMoneyAccount& a);
 
 public:
-  /**
-    * The constructor for KMyMoneyView. Just creates all the tabs for the
-    * different aspects of the MyMoneyFile.
-    */
-  KMyMoneyView();
+    /**
+      * The constructor for KMyMoneyView. Just creates all the tabs for the
+      * different aspects of the MyMoneyFile.
+      */
+    KMyMoneyView();
 
-  /**
-    * Destructor
-    */
-  ~KMyMoneyView();
+    /**
+      * Destructor
+      */
+    ~KMyMoneyView();
 
-  /**
-    * This method enables the state of all views (except home view) according
-    * to an open file.
-    */
-  void enableViewsIfFileOpen(bool fileOpen);
-  void switchToHomeView();
+    /**
+      * This method enables the state of all views (except home view) according
+      * to an open file.
+      */
+    void enableViewsIfFileOpen(bool fileOpen);
+    void switchToHomeView();
 
-  void addWidget(QWidget* w);
+    void addWidget(QWidget* w);
 
-  void showPageAndFocus(View idView);
-  void showPage(View idView);
+    void showPageAndFocus(View idView);
+    void showPage(View idView);
 
-  /**
-    * check if the current view allows to print something
-    *
-    * @retval true Yes, view allows to print
-    * @retval false No, view cannot print
-    */
-  bool canPrint();
+    /**
+      * check if the current view allows to print something
+      *
+      * @retval true Yes, view allows to print
+      * @retval false No, view cannot print
+      */
+    bool canPrint();
 
-  void finishReconciliation(const MyMoneyAccount& account);
+    void finishReconciliation(const MyMoneyAccount& account);
 
-  void showTitleBar(bool show);
+    void showTitleBar(bool show);
 
-  /**
-    * This method changes the view type according to the settings.
-    */
-  void updateViewType();
+    /**
+      * This method changes the view type according to the settings.
+      */
+    void updateViewType();
 
-  void slotAccountTreeViewChanged(const eAccountsModel::Column column, const bool show);
+    void slotAccountTreeViewChanged(const eAccountsModel::Column column, const bool show);
 
-  void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins);
+    void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins);
 
-  // TODO: remove that function
-  /**
-   * ugly proxy function
-   */
-  eDialogs::ScheduleResultCode enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys);
+    // TODO: remove that function
+    /**
+     * ugly proxy function
+     */
+    eDialogs::ScheduleResultCode enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys);
 
-  void addView(KMyMoneyViewBase* view, const QString& name, View idView, Icons::Icon icon);
-  void removeView(View idView);
+    void addView(KMyMoneyViewBase* view, const QString& name, View idView, Icons::Icon icon);
+    void removeView(View idView);
 
-  void selectView(View idView, const QVariantList& args);
+    void selectView(View idView, const QVariantList& args);
 
-  /**
-   * @brief actionsToBeConnected are actions that need ActionCollection
-   * which is available in KMyMoneyApp
-   * @return QHash of action id and QAction itself
-   */
-  QHash<eMenu::Action, QAction *> actionsToBeConnected();
+    /**
+     * @brief actionsToBeConnected are actions that need ActionCollection
+     * which is available in KMyMoneyApp
+     * @return QHash of action id and QAction itself
+     */
+    QHash<eMenu::Action, QAction *> actionsToBeConnected();
 
 protected:
-  /**
-    * Overwritten because KMyMoney has it's custom header.
-    */
-  bool showPageHeader() const final override;
+    /**
+      * Overwritten because KMyMoney has it's custom header.
+      */
+    bool showPageHeader() const final override;
 
 
 public Q_SLOTS:
-  /**
-    * This slot writes information about the page passed as argument @a current
-    * in the kmymoney.rc file so that it can be selected automatically when
-    * the application is started again.
-    *
-    * @param current KPageWidgetItem pointer to the current page item
-    * @param previous KPageWidgetItem pointer to the previous page item
-    */
-  void slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* previous);
+    /**
+      * This slot writes information about the page passed as argument @a current
+      * in the kmymoney.rc file so that it can be selected automatically when
+      * the application is started again.
+      *
+      * @param current KPageWidgetItem pointer to the current page item
+      * @param previous KPageWidgetItem pointer to the previous page item
+      */
+    void slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* previous);
 
-  /**
-    * Brings up a dialog to change the list(s) settings and saves them into the
-    * class KMyMoneySettings (a singleton).
-    *
-    * @see KListSettingsDlg
-    * Refreshes all views. Used e.g. after settings have been changed or
-    * data has been loaded from external sources (QIF import).
-    **/
-  void slotRefreshViews();
+    /**
+      * Brings up a dialog to change the list(s) settings and saves them into the
+      * class KMyMoneySettings (a singleton).
+      *
+      * @see KListSettingsDlg
+      * Refreshes all views. Used e.g. after settings have been changed or
+      * data has been loaded from external sources (QIF import).
+      **/
+    void slotRefreshViews();
 
-  /**
-    * Called, whenever the tags view should pop up and a specific
-    * transaction in an account should be shown.
-    *
-    * @param tagId The ID of the tag to be shown
-    * @param accountId The ID of the account to be shown
-    * @param transactionId The ID of the transaction to be selected
-    */
-  void slotTagSelected(const QString& tagId, const QString& accountId, const QString& transactionId);
+    /**
+      * Called, whenever the tags view should pop up and a specific
+      * transaction in an account should be shown.
+      *
+      * @param tagId The ID of the tag to be shown
+      * @param accountId The ID of the account to be shown
+      * @param transactionId The ID of the transaction to be selected
+      */
+    void slotTagSelected(const QString& tagId, const QString& accountId, const QString& transactionId);
 
-  /**
-    * This slot prints the current view.
-    */
-  void slotPrintView();
+    /**
+      * This slot prints the current view.
+      */
+    void slotPrintView();
 
-  /**
-    * Called when the user changes the detail
-    * setting of the transaction register
-    *
-    * @param detailed if true, the register is shown with all details
-    */
-  void slotShowTransactionDetail(bool detailed);
+    /**
+      * Called when the user changes the detail
+      * setting of the transaction register
+      *
+      * @param detailed if true, the register is shown with all details
+      */
+    void slotShowTransactionDetail(bool detailed);
 
-  /**
-   * Informs respective views about selected object, so they can
-   * update action states and current object.
-   * @param obj Account, Category, Investment, Stock, Institution
-   */
-  void slotObjectSelected(const MyMoneyObject& obj);
+    /**
+     * Informs respective views about selected object, so they can
+     * update action states and current object.
+     * @param obj Account, Category, Investment, Stock, Institution
+     */
+    void slotObjectSelected(const MyMoneyObject& obj);
 
-  void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent);
-  void slotSelectByVariant(const QVariantList& variant, eView::Intent intent);
-  void slotCustomActionRequested(View view, eView::Action action);
-  void slotSettingsChanged();
+    void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent);
+    void slotSelectByVariant(const QVariantList& variant, eView::Intent intent);
+    void slotCustomActionRequested(View view, eView::Action action);
+    void slotSettingsChanged();
 
-  void slotFileOpened();
-  void slotFileClosed();
+    void slotFileOpened();
+    void slotFileClosed();
 
-  void updateActions(const SelectedObjects& selections);
+    void updateActions(const SelectedObjects& selections);
 
 private Q_SLOTS:
-  void switchToDefaultView();
+    void switchToDefaultView();
 
-  /**
-   * Opens object in ledgers or edits in case of institution
-   * @param obj Account, Category, Investment, Stock, Institution
-   */
-  void slotOpenObjectRequested(const MyMoneyObject& obj);
+    /**
+     * Opens object in ledgers or edits in case of institution
+     * @param obj Account, Category, Investment, Stock, Institution
+     */
+    void slotOpenObjectRequested(const MyMoneyObject& obj);
 
-  /**
-   * Opens context menu based on objects's type
-   * @param obj Account, Category, Investment, Stock, Institution
-   */
-  void slotContextMenuRequested(const MyMoneyObject& obj);
+    /**
+     * Opens context menu based on objects's type
+     * @param obj Account, Category, Investment, Stock, Institution
+     */
+    void slotContextMenuRequested(const MyMoneyObject& obj);
 
-  void slotRememberLastView(View view);
+    void slotRememberLastView(View view);
 
 private:
 
-  /**
-    * Internal method used by slotAccountNew() and slotAccountCategory().
-    */
-  void accountNew(const bool createCategory);
+    /**
+      * Internal method used by slotAccountNew() and slotAccountCategory().
+      */
+    void accountNew(const bool createCategory);
 
-  /**
-   * @deprecated will be replaced by the new SelectedObjects method
-   * which has an inherited reset all the time
-   */
-  Q_DECL_DEPRECATED void resetViewSelection();
+    /**
+     * @deprecated will be replaced by the new SelectedObjects method
+     * which has an inherited reset all the time
+     */
+    Q_DECL_DEPRECATED void resetViewSelection();
 
 Q_SIGNALS:
-   /**
-    * This signal is emitted whenever a view is selected.
-    * The parameter @p view is identified as one of KMyMoneyView::viewID.
-    */
-  void viewActivated(View view);
+    /**
+     * This signal is emitted whenever a view is selected.
+     * The parameter @p view is identified as one of KMyMoneyView::viewID.
+     */
+    void viewActivated(View view);
 
-  void accountSelectedForContextMenu(const MyMoneyAccount& acc);
+    void accountSelectedForContextMenu(const MyMoneyAccount& acc);
 
-  void viewStateChanged(bool enabled);
-  /**
-    * This signal is emitted to inform the kmmFile plugin when various file actions
-    * occur. The Action parameter distinguishes between them.
-    */
-  void kmmFilePlugin(unsigned int action);
+    void viewStateChanged(bool enabled);
+    /**
+      * This signal is emitted to inform the kmmFile plugin when various file actions
+      * occur. The Action parameter distinguishes between them.
+      */
+    void kmmFilePlugin(unsigned int action);
 
-  /**
-   * @brief proxy signal
-   */
-  void statusMsg(const QString& txt);
+    /**
+     * @brief proxy signal
+     */
+    void statusMsg(const QString& txt);
 
-  /**
-   * @brief proxy signal
-   */
-  void statusProgress(int cnt, int base);
+    /**
+     * @brief proxy signal
+     */
+    void statusProgress(int cnt, int base);
 
-  void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
+    void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
 
-  /**
-    * This signal is emitted when a transaction/list of transactions has been selected by
-    * the GUI. If no transaction is selected or the selection is removed,
-    * @p transactions is identical to an empty QList. This signal is used
-    * by plugins to get information about changes.
-    */
-  void transactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
+    /**
+      * This signal is emitted when a transaction/list of transactions has been selected by
+      * the GUI. If no transaction is selected or the selection is removed,
+      * @p transactions is identical to an empty QList. This signal is used
+      * by plugins to get information about changes.
+      */
+    void transactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
 
-  /**
-    * This signal is emitted when a new account has been selected by
-    * the GUI. If no account is selected or the selection is removed,
-    * @a account is identical to MyMoneyAccount(). This signal is used
-    * by plugins to get information about changes.
-    */
-  void accountSelected(const MyMoneyAccount& account);
+    /**
+      * This signal is emitted when a new account has been selected by
+      * the GUI. If no account is selected or the selection is removed,
+      * @a account is identical to MyMoneyAccount(). This signal is used
+      * by plugins to get information about changes.
+      */
+    void accountSelected(const MyMoneyAccount& account);
 
-  // these signals request a change by the application
-  void requestSelectionChange (const SelectedObjects& selection);
-  void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos) const;
-  void requestActionTrigger(eMenu::Action action);
+    // these signals request a change by the application
+    void requestSelectionChange (const SelectedObjects& selection);
+    void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos) const;
+    void requestActionTrigger(eMenu::Action action);
 
-  void settingsChanged();
+    void settingsChanged();
 };
 
 #endif

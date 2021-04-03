@@ -32,29 +32,29 @@
 using namespace Icons;
 
 InterestCategoryWizardPage::InterestCategoryWizardPage(QWidget *parent)
-  : QWizardPage(parent),
-    ui(new Ui::InterestCategoryWizardPage)
+    : QWizardPage(parent),
+      ui(new Ui::InterestCategoryWizardPage)
 {
-  ui->setupUi(this);
-  // Register the fields with the QWizard and connect the
-  // appropriate signals to update the "Next" button correctly
-  registerField("interestAccountEdit", ui->m_interestAccountEdit, "selectedItems");
+    ui->setupUi(this);
+    // Register the fields with the QWizard and connect the
+    // appropriate signals to update the "Next" button correctly
+    registerField("interestAccountEdit", ui->m_interestAccountEdit, "selectedItems");
 
-  connect(ui->m_interestAccountEdit, &KMyMoneySelector::stateChanged, this, &QWizardPage::completeChanged);
-  ui->m_interestAccountEdit->removeButtons();
+    connect(ui->m_interestAccountEdit, &KMyMoneySelector::stateChanged, this, &QWizardPage::completeChanged);
+    ui->m_interestAccountEdit->removeButtons();
 
-  // load button icons
-  KGuiItem createCategoryButtonItem(i18n("&Create..."),
-                                    Icons::get(Icon::DocumentNew),
-                                    i18n("Create a new category"),
-                                    i18n("Use this to open the new account editor"));
-  KGuiItem::assign(ui->m_createCategoryButton, createCategoryButtonItem);
-  connect(ui->m_createCategoryButton, &QAbstractButton::clicked, this, &InterestCategoryWizardPage::slotCreateCategory);
+    // load button icons
+    KGuiItem createCategoryButtonItem(i18n("&Create..."),
+                                      Icons::get(Icon::DocumentNew),
+                                      i18n("Create a new category"),
+                                      i18n("Use this to open the new account editor"));
+    KGuiItem::assign(ui->m_createCategoryButton, createCategoryButtonItem);
+    connect(ui->m_createCategoryButton, &QAbstractButton::clicked, this, &InterestCategoryWizardPage::slotCreateCategory);
 }
 
 InterestCategoryWizardPage::~InterestCategoryWizardPage()
 {
-  delete ui;
+    delete ui;
 }
 
 /**
@@ -62,41 +62,41 @@ InterestCategoryWizardPage::~InterestCategoryWizardPage()
  */
 bool InterestCategoryWizardPage::isComplete() const
 {
-  return ui->m_interestAccountEdit->selectedItems().count() > 0;
+    return ui->m_interestAccountEdit->selectedItems().count() > 0;
 }
 
 void InterestCategoryWizardPage::slotCreateCategory()
 {
-  MyMoneyAccount acc, base;
-  MyMoneyFile* file = MyMoneyFile::instance();
+    MyMoneyAccount acc, base;
+    MyMoneyFile* file = MyMoneyFile::instance();
 
-  if (field("borrowButton").toBool()) {
-    base = file->expense();
-    acc.setAccountType(eMyMoney::Account::Type::Expense);
-  } else {
-    base = file->income();
-    acc.setAccountType(eMyMoney::Account::Type::Income);
-  }
-  acc.setParentAccountId(base.id());
-
-  QPointer<KNewAccountDlg> dlg = new KNewAccountDlg(acc, true, true, nullptr, QString());
-  if (dlg->exec() == QDialog::Accepted) {
-    acc = dlg->account();
-
-    MyMoneyFileTransaction ft;
-    try {
-      QString id;
-      id = file->createCategory(base, acc.name());
-      if (id.isEmpty())
-        throw MYMONEYEXCEPTION_CSTRING("failure while creating the account hierarchy");
-
-      ft.commit();
-
-      ui->m_interestAccountEdit->setSelected(id);
-
-    } catch (const MyMoneyException &e) {
-      KMessageBox::information(this, i18n("Unable to add account: %1", QString::fromLatin1(e.what())));
+    if (field("borrowButton").toBool()) {
+        base = file->expense();
+        acc.setAccountType(eMyMoney::Account::Type::Expense);
+    } else {
+        base = file->income();
+        acc.setAccountType(eMyMoney::Account::Type::Income);
     }
-  }
-  delete dlg;
+    acc.setParentAccountId(base.id());
+
+    QPointer<KNewAccountDlg> dlg = new KNewAccountDlg(acc, true, true, nullptr, QString());
+    if (dlg->exec() == QDialog::Accepted) {
+        acc = dlg->account();
+
+        MyMoneyFileTransaction ft;
+        try {
+            QString id;
+            id = file->createCategory(base, acc.name());
+            if (id.isEmpty())
+                throw MYMONEYEXCEPTION_CSTRING("failure while creating the account hierarchy");
+
+            ft.commit();
+
+            ui->m_interestAccountEdit->setSelected(id);
+
+        } catch (const MyMoneyException &e) {
+            KMessageBox::information(this, i18n("Unable to add account: %1", QString::fromLatin1(e.what())));
+        }
+    }
+    delete dlg;
 }

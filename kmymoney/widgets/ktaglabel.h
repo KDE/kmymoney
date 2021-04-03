@@ -28,19 +28,21 @@
   */
 class KTagLabel : public QFrame
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KTagLabel)
+    Q_OBJECT
+    Q_DISABLE_COPY(KTagLabel)
 
 public:
-  explicit KTagLabel(const QString& id, const QString& name, QWidget* parent = nullptr);
+    explicit KTagLabel(const QString& id, const QString& name, QWidget* parent = nullptr);
 
-  inline const QString& id() { return m_id; }
+    inline const QString& id() {
+        return m_id;
+    }
 
 Q_SIGNALS:
-  void clicked(bool);
+    void clicked(bool);
 
 private:
-  QString     m_id;
+    QString     m_id;
 };
 
 #endif

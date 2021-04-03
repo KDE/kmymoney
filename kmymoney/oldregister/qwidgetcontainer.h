@@ -23,13 +23,13 @@ class QWidget;
 
 namespace KMyMoneyRegister
 {
-  struct QWidgetContainer : public QMap<QString, QWidget*>
-  {
+struct QWidgetContainer : public QMap<QString, QWidget*>
+{
     Q_DISABLE_COPY(QWidgetContainer)
     QWidgetContainer();
     QWidget* haveWidget(const QString& name) const;
     void removeOrphans();
-  };
+};
 } // namespace
 
 #endif

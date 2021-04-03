@@ -29,31 +29,31 @@
 
 
 KSettingsReports::KSettingsReports(QWidget* parent) :
-  QWidget(parent),
-  d_ptr(new KSettingsReportsPrivate)
+    QWidget(parent),
+    d_ptr(new KSettingsReportsPrivate)
 {
-  Q_D(KSettingsReports);
-  d->ui->setupUi(this);
+    Q_D(KSettingsReports);
+    d->ui->setupUi(this);
 
-  // keep initial (default) css file in mind
-  d->m_cssFileOld = KMyMoneySettings::cssFileDefault();
+    // keep initial (default) css file in mind
+    d->m_cssFileOld = KMyMoneySettings::cssFileDefault();
 
-  // set default css file in ksettingsreports dialog
-  d->ui->kcfg_CssFileDefault->setUrl(QUrl::fromLocalFile(KMyMoneySettings::cssFileDefault()));
+    // set default css file in ksettingsreports dialog
+    d->ui->kcfg_CssFileDefault->setUrl(QUrl::fromLocalFile(KMyMoneySettings::cssFileDefault()));
 
-  d->m_fileKLineEdit = d->ui->kcfg_CssFileDefault->lineEdit();
+    d->m_fileKLineEdit = d->ui->kcfg_CssFileDefault->lineEdit();
 
-  connect(d->ui->kcfg_CssFileDefault, &KUrlRequester::urlSelected,
-          this, &KSettingsReports::slotCssUrlSelected);
+    connect(d->ui->kcfg_CssFileDefault, &KUrlRequester::urlSelected,
+            this, &KSettingsReports::slotCssUrlSelected);
 
-  connect(d->m_fileKLineEdit, &QLineEdit::editingFinished,
-          this, &KSettingsReports::slotEditingFinished);
+    connect(d->m_fileKLineEdit, &QLineEdit::editingFinished,
+            this, &KSettingsReports::slotEditingFinished);
 }
 
 KSettingsReports::~KSettingsReports()
 {
-  Q_D(KSettingsReports);
-  delete d;
+    Q_D(KSettingsReports);
+    delete d;
 }
 
 

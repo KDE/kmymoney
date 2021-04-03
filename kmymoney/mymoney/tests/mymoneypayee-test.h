@@ -13,18 +13,18 @@
 
 class MyMoneyPayeeTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 private Q_SLOTS:
-  void testDefaultAccount();
-  void testEmptyMatchKeyBegin();
-  void testEmptyMatchKeyEnd();
-  void testEmptyMatchKeyMiddle();
-  void testEmptyMatchKeyMix();
-  void testMatchKeyDisallowSingleSpace();
-  void testMatchKeyDisallowMultipleSpace();
-  void testMatchKeyAllowSpaceAtStart();
-  void testMatchKeyAllowSpaceAtEnd();
-  void testMatchNameExact();
+    void testDefaultAccount();
+    void testEmptyMatchKeyBegin();
+    void testEmptyMatchKeyEnd();
+    void testEmptyMatchKeyMiddle();
+    void testEmptyMatchKeyMix();
+    void testMatchKeyDisallowSingleSpace();
+    void testMatchKeyDisallowMultipleSpace();
+    void testMatchKeyAllowSpaceAtStart();
+    void testMatchKeyAllowSpaceAtEnd();
+    void testMatchNameExact();
 };
 
 #endif

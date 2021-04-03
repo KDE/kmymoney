@@ -21,23 +21,23 @@
 
 public:
 
-  static QColor schemeColor(const SchemeColor color);
+static QColor schemeColor(const SchemeColor color);
 
-  static QFont listCellFontEx();
-  static QFont listHeaderFontEx();
-  static QStringList listOfItems();
+static QFont listCellFontEx();
+static QFont listHeaderFontEx();
+static QStringList listOfItems();
 
-  /**
-    * returns the number of the first month in the fiscal year
-    */
-  static int firstFiscalMonth();
+/**
+  * returns the number of the first month in the fiscal year
+  */
+static int firstFiscalMonth();
 
-  /**
-    * returns the number of the first day of the fiscal year
-    */
-  static int firstFiscalDay();
+/**
+  * returns the number of the first day of the fiscal year
+  */
+static int firstFiscalDay();
 
-  /**
-    * returns the date of the first day in the current fiscal year
-    */
-  static QDate firstFiscalDate();
+/**
+  * returns the date of the first day in the current fiscal year
+  */
+static QDate firstFiscalDate();

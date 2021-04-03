@@ -16,21 +16,21 @@
 class QAbstractItemModel;
 namespace Ui
 {
-  class onlineJobMessageView;
+class onlineJobMessageView;
 }
 
 class KMM_WIDGETS_EXPORT onlineJobMessagesView : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(onlineJobMessagesView)
+    Q_OBJECT
+    Q_DISABLE_COPY(onlineJobMessagesView)
 
 public:
-  explicit onlineJobMessagesView(QWidget* parent = nullptr);
-  ~onlineJobMessagesView();
-  void setModel(QAbstractItemModel* model);
+    explicit onlineJobMessagesView(QWidget* parent = nullptr);
+    ~onlineJobMessagesView();
+    void setModel(QAbstractItemModel* model);
 
 protected:
-  Ui::onlineJobMessageView* ui;
+    Ui::onlineJobMessageView* ui;
 };
 
 #endif // ONLINEJOBMESSAGESVIEW_H

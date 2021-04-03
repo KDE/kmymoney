@@ -30,60 +30,60 @@
 class AccountDelegate::Private
 {
 public:
-  Private()
-  {}
+    Private()
+    {}
 
-  ~Private()
-  {
-  }
+    ~Private()
+    {
+    }
 };
 
 
 AccountDelegate::AccountDelegate(QObject* parent)
-  : QStyledItemDelegate(parent)
-  , d(new Private)
+    : QStyledItemDelegate(parent)
+    , d(new Private)
 {
 }
 
 AccountDelegate::~AccountDelegate()
 {
-  delete d;
+    delete d;
 }
 
 void AccountDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-  QStyleOptionViewItem opt = option;
-  QModelIndex baseIdx;
-  initStyleOption(&opt, index);
+    QStyleOptionViewItem opt = option;
+    QModelIndex baseIdx;
+    initStyleOption(&opt, index);
 
-  QTreeView* view = qobject_cast< QTreeView*>(parent());
+    QTreeView* view = qobject_cast< QTreeView*>(parent());
 
-  if (view) {
-    switch(index.column()) {
-      case AccountsModel::Column::TotalBalance:
-        opt.text.clear();
-        baseIdx = index.model()->index(index.row(), 0, index.parent());
-        if (index.parent().isValid() && (view->isExpanded(baseIdx) || index.model()->rowCount(index) == 0)) {
-          if (baseIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString() != MyMoneyFile::instance()->baseCurrency().id()) {
-            paint(painter, option, index.model()->index(index.row(), AccountsModel::Column::Balance, index.parent()));
-            return;
-          }
+    if (view) {
+        switch(index.column()) {
+        case AccountsModel::Column::TotalBalance:
+            opt.text.clear();
+            baseIdx = index.model()->index(index.row(), 0, index.parent());
+            if (index.parent().isValid() && (view->isExpanded(baseIdx) || index.model()->rowCount(index) == 0)) {
+                if (baseIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString() != MyMoneyFile::instance()->baseCurrency().id()) {
+                    paint(painter, option, index.model()->index(index.row(), AccountsModel::Column::Balance, index.parent()));
+                    return;
+                }
+            }
+            break;
+
+        case AccountsModel::Column::TotalPostedValue:
+            baseIdx = index.model()->index(index.row(), 0, index.parent());
+            if (index.parent().isValid() && (view->isExpanded(baseIdx) || index.model()->rowCount(index) == 0)) {
+                paint(painter, option, index.model()->index(index.row(), AccountsModel::Column::PostedValue, index.parent()));
+                return;
+            }
+            break;
         }
-        break;
-
-      case AccountsModel::Column::TotalPostedValue:
-        baseIdx = index.model()->index(index.row(), 0, index.parent());
-        if (index.parent().isValid() && (view->isExpanded(baseIdx) || index.model()->rowCount(index) == 0)) {
-          paint(painter, option, index.model()->index(index.row(), AccountsModel::Column::PostedValue, index.parent()));
-          return;
-        }
-        break;
     }
-  }
 
-  painter->save();
+    painter->save();
 
-  QStyledItemDelegate::paint(painter, opt, index);
+    QStyledItemDelegate::paint(painter, opt, index);
 
-  painter->restore();
+    painter->restore();
 }

@@ -9,22 +9,24 @@
 #include <QHashFunctions>
 
 namespace eKMyMoney {
-  enum class FileAction {
+enum class FileAction {
     Opened,
     Saved,
     Closing,
     Closed,
     Changed,
-  };
+};
 
-  enum class StorageType {
+enum class StorageType {
     None,
     XML,
     SQL,
     GNC,
-  };
+};
 
-  inline uint qHash(const StorageType key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+inline uint qHash(const StorageType key, uint seed) {
+    return ::qHash(static_cast<uint>(key), seed);
+}
 
 }
 #endif

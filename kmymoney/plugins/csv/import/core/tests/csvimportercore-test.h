@@ -16,31 +16,31 @@ class MyMoneyFile;
 
 class CSVImporterCoreTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  CSVImporterCore     *csvImporter;
-  BankingProfile      *debitCreditProfile;
-  BankingProfile      *amountProfile;
-  PricesProfile       *pricesProfile;
-  InvestmentProfile   *investmentProfile;
-  MyMoneyFile         *file;
+    CSVImporterCore     *csvImporter;
+    BankingProfile      *debitCreditProfile;
+    BankingProfile      *amountProfile;
+    PricesProfile       *pricesProfile;
+    InvestmentProfile   *investmentProfile;
+    MyMoneyFile         *file;
 private Q_SLOTS:
-  void initTestCase();
-  void init();
-  void cleanup();
+    void initTestCase();
+    void init();
+    void cleanup();
 
-  void testBasicPriceTable();
-  void testPriceFractionSetting();
-  void testImportByDebitCredit();
-  void testImportByAmount();
-  void testImportByName();
-  void testImportBySymbol();
-  void testFeeColumn();
-  void testAutoDecimalSymbol();
-  void testInvAccountAutodetection();
-  void testCalculatedFeeColumn();
+    void testBasicPriceTable();
+    void testPriceFractionSetting();
+    void testImportByDebitCredit();
+    void testImportByAmount();
+    void testImportByName();
+    void testImportBySymbol();
+    void testFeeColumn();
+    void testAutoDecimalSymbol();
+    void testInvAccountAutodetection();
+    void testCalculatedFeeColumn();
 
 private:
-  void setupBaseCurrency();
+    void setupBaseCurrency();
 };
 #endif

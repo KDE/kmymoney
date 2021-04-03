@@ -48,58 +48,58 @@ class Models;
 class MyMoneyStorageANON : public MyMoneyStorageXML
 {
 public:
-  MyMoneyStorageANON();
-  virtual ~MyMoneyStorageANON();
+    MyMoneyStorageANON();
+    virtual ~MyMoneyStorageANON();
 
 protected:
-  void writeUserInformation(QDomElement& userInfo) final override;
+    void writeUserInformation(QDomElement& userInfo) final override;
 
-  void writeInstitution(QDomElement& institutions, const MyMoneyInstitution& i) final override;
+    void writeInstitution(QDomElement& institutions, const MyMoneyInstitution& i) final override;
 
-  void writePayee(QDomElement& payees, const MyMoneyPayee& p) final override;
+    void writePayee(QDomElement& payees, const MyMoneyPayee& p) final override;
 
-  void writeTag(QDomElement& tags, const MyMoneyTag& ta) final override;
+    void writeTag(QDomElement& tags, const MyMoneyTag& ta) final override;
 
-  void writeAccount(QDomElement& accounts, const MyMoneyAccount& p) final override;
+    void writeAccount(QDomElement& accounts, const MyMoneyAccount& p) final override;
 
-  void writeTransaction(QDomElement& transactions, const MyMoneyTransaction& tx) final override;
+    void writeTransaction(QDomElement& transactions, const MyMoneyTransaction& tx) final override;
 
-  void writeSchedule(QDomElement& scheduledTx, const MyMoneySchedule& tx) final override;
+    void writeSchedule(QDomElement& scheduledTx, const MyMoneySchedule& tx) final override;
 
-  void writeBudget(QDomElement& budgets, const MyMoneyBudget& b) final override;
+    void writeBudget(QDomElement& budgets, const MyMoneyBudget& b) final override;
 
-  void writeReport(QDomElement& reports, const MyMoneyReport& r) final override;
+    void writeReport(QDomElement& reports, const MyMoneyReport& r) final override;
 
-  void readFile(QIODevice* s, MyMoneyFile* file) final override;
+    void readFile(QIODevice* s, MyMoneyFile* file) final override;
 
-  void writeSecurity(QDomElement& securityElement, const MyMoneySecurity& security) final override;
+    void writeSecurity(QDomElement& securityElement, const MyMoneySecurity& security) final override;
 
-  /** Cannot remove prive data from plugins, yet. It is simply doing nothing. */
-  void writeOnlineJob(QDomElement& onlineJobs, const onlineJob& job) final override;
+    /** Cannot remove prive data from plugins, yet. It is simply doing nothing. */
+    void writeOnlineJob(QDomElement& onlineJobs, const onlineJob& job) final override;
 
-  QDomElement findChildElement(const QString& name, const QDomElement& root);
+    QDomElement findChildElement(const QString& name, const QDomElement& root);
 
-  void writeAccounts(QDomElement& accounts) final override;
+    void writeAccounts(QDomElement& accounts) final override;
 
 private:
-  /**
-    * The list of key-value pairs to not modify
-    */
-  static QStringList zKvpNoModify;
+    /**
+      * The list of key-value pairs to not modify
+      */
+    static QStringList zKvpNoModify;
 
-  /**
-    * The list of key-value pairs which are numbers to be hidden
-    */
-  static QStringList zKvpXNumber;
+    /**
+      * The list of key-value pairs which are numbers to be hidden
+      */
+    static QStringList zKvpXNumber;
 
-  QString hideString(const QString&) const;
-  MyMoneyMoney hideNumber(const MyMoneyMoney&) const;
-  void fakeTransaction(MyMoneyTransaction& tn);
-  void fakeBudget(MyMoneyBudget& bn);
-  void fakeKeyValuePair(MyMoneyKeyValueContainer& _kvp);
+    QString hideString(const QString&) const;
+    MyMoneyMoney hideNumber(const MyMoneyMoney&) const;
+    void fakeTransaction(MyMoneyTransaction& tn);
+    void fakeBudget(MyMoneyBudget& bn);
+    void fakeKeyValuePair(MyMoneyKeyValueContainer& _kvp);
 
-  MyMoneyMoney          m_factor;
-  QList<MyMoneyAccount> m_accountList;
+    MyMoneyMoney          m_factor;
+    QList<MyMoneyAccount> m_accountList;
 };
 
 #endif

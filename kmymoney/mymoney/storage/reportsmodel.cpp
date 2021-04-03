@@ -22,14 +22,14 @@
 
 struct ReportsModel::Private
 {
-  Private() {}
+    Private() {}
 };
 
 ReportsModel::ReportsModel(QObject* parent, QUndoStack* undoStack)
-  : MyMoneyModel<MyMoneyReport>(parent, QStringLiteral("R"), ReportsModel::ID_SIZE, undoStack)
-  , d(new Private)
+    : MyMoneyModel<MyMoneyReport>(parent, QStringLiteral("R"), ReportsModel::ID_SIZE, undoStack)
+    , d(new Private)
 {
-  setObjectName(QLatin1String("ReportsModel"));
+    setObjectName(QLatin1String("ReportsModel"));
 }
 
 ReportsModel::~ReportsModel()
@@ -38,58 +38,58 @@ ReportsModel::~ReportsModel()
 
 int ReportsModel::columnCount(const QModelIndex& parent) const
 {
-  Q_UNUSED(parent);
-  return 1;
+    Q_UNUSED(parent);
+    return 1;
 }
 
 QVariant ReportsModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-  if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
-    switch(section) {
-      case 0:
-        return i18nc("Reportname", "Name");
-        break;
+    if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
+        switch(section) {
+        case 0:
+            return i18nc("Reportname", "Name");
+            break;
+        }
     }
-  }
-  return QAbstractItemModel::headerData(section, orientation, role);
+    return QAbstractItemModel::headerData(section, orientation, role);
 }
 
 QVariant ReportsModel::data(const QModelIndex& index, int role) const
 {
-  if (!index.isValid())
-    return QVariant();
-  if (index.row() < 0 || index.row() >= rowCount(index.parent()))
-    return QVariant();
+    if (!index.isValid())
+        return QVariant();
+    if (index.row() < 0 || index.row() >= rowCount(index.parent()))
+        return QVariant();
 
-  const MyMoneyReport& report = static_cast<TreeItem<MyMoneyReport>*>(index.internalPointer())->constDataRef();
-  switch(role) {
+    const MyMoneyReport& report = static_cast<TreeItem<MyMoneyReport>*>(index.internalPointer())->constDataRef();
+    switch(role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
-      switch(index.column()) {
+        switch(index.column()) {
         case ReportName:
-          return report.name();
+            return report.name();
         default:
-          return QStringLiteral("not yet implemented");
-      }
-      break;
+            return QStringLiteral("not yet implemented");
+        }
+        break;
 
     case Qt::TextAlignmentRole:
-      return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
-      break;
+        return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
+        break;
 
     case eMyMoney::Model::Roles::IdRole:
-      return report.id();
-      break;
-  }
-  return QVariant();
+        return report.id();
+        break;
+    }
+    return QVariant();
 }
 
 bool ReportsModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-  if(!index.isValid()) {
-    return false;
-  }
+    if(!index.isValid()) {
+        return false;
+    }
 
-  qDebug() << "setData(" << index.row() << index.column() << ")" << value << role;
-  return QAbstractItemModel::setData(index, value, role);
+    qDebug() << "setData(" << index.row() << index.column() << ")" << value << role;
+    return QAbstractItemModel::setData(index, value, role);
 }

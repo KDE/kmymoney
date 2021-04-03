@@ -9,7 +9,7 @@
 #include <QHashFunctions>
 
 namespace eStorage {
-    enum class Reference {
+enum class Reference {
     Account = 0,
     Institution,
     Payee,
@@ -24,8 +24,10 @@ namespace eStorage {
     CostCenter,
     // insert new entries above this line
     Count,
-    };
+};
 
-    inline uint qHash(const Reference key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+inline uint qHash(const Reference key, uint seed) {
+    return ::qHash(static_cast<uint>(key), seed);
+}
 }
 #endif

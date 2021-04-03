@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class AssetAccountWizardPage; }
+namespace Ui {
+class AssetAccountWizardPage;
+}
 
 /**
  * This class implements the Online Update page of the
@@ -26,20 +28,20 @@ namespace Ui { class AssetAccountWizardPage; }
 
 class AssetAccountWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit AssetAccountWizardPage(QWidget *parent = nullptr);
-  ~AssetAccountWizardPage();
+    explicit AssetAccountWizardPage(QWidget *parent = nullptr);
+    ~AssetAccountWizardPage();
 
-  /**
-   * Overload the isComplete function to control the Next button
-   */
-  bool isComplete() const final override;
+    /**
+     * Overload the isComplete function to control the Next button
+     */
+    bool isComplete() const final override;
 
-  Ui::AssetAccountWizardPage *ui;
+    Ui::AssetAccountWizardPage *ui;
 
 public Q_SLOTS:
-  void slotAccountNew();
+    void slotAccountNew();
 };
 
 #endif

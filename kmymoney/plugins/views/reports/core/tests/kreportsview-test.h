@@ -13,40 +13,40 @@
 
 class KReportsViewTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 private:
-  MyMoneyAccount  *m;
+    MyMoneyAccount  *m;
 
-  MyMoneyStorageMgr* storage;
-  MyMoneyFile* file;
+    MyMoneyStorageMgr* storage;
+    MyMoneyFile* file;
 
 private Q_SLOTS:
-  void init();
-  void cleanup();
-  void testNetWorthSingle();
-  void testNetWorthOfsetting();
-  void testNetWorthOpeningPrior();
-  void testNetWorthDateFilter();
-  void testSpendingEmpty();
-  void testSingleTransaction();
-  void testSubAccount();
-  void testFilterIEvsIE();
-  void testFilterALvsAL();
-  void testFilterALvsIE();
-  void testFilterAllvsIE();
-  void testFilterBasics();
-  void testMultipleCurrencies();
-  void testAdvancedFilter();
-  void testColumnType();
-  void testXMLWrite();
-  void testQueryBasics();
-  void testCashFlowAnalysis();
-  void testAccountQuery();
-  void testInvestment();
-  void testWebQuotes();
-  void testDateFormat();
-  void testHasReferenceTo();
+    void init();
+    void cleanup();
+    void testNetWorthSingle();
+    void testNetWorthOfsetting();
+    void testNetWorthOpeningPrior();
+    void testNetWorthDateFilter();
+    void testSpendingEmpty();
+    void testSingleTransaction();
+    void testSubAccount();
+    void testFilterIEvsIE();
+    void testFilterALvsAL();
+    void testFilterALvsIE();
+    void testFilterAllvsIE();
+    void testFilterBasics();
+    void testMultipleCurrencies();
+    void testAdvancedFilter();
+    void testColumnType();
+    void testXMLWrite();
+    void testQueryBasics();
+    void testCashFlowAnalysis();
+    void testAccountQuery();
+    void testInvestment();
+    void testWebQuotes();
+    void testDateFormat();
+    void testHasReferenceTo();
 };
 
 #endif

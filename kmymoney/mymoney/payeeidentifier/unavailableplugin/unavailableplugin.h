@@ -23,24 +23,24 @@ namespace payeeIdentifiers
 class payeeIdentifierUnavailable : public payeeIdentifierData
 {
 public:
-  PAYEEIDENTIFIER_IID(payeeIdentifierUnavailable, "org.kmymoney.payeeIdentifier.payeeIdentifierUnavailable");
+    PAYEEIDENTIFIER_IID(payeeIdentifierUnavailable, "org.kmymoney.payeeIdentifier.payeeIdentifierUnavailable");
 
-  payeeIdentifierUnavailable();
-  void writeXML(QDomDocument& document, QDomElement& parent) const final override;
-  payeeIdentifierUnavailable* createFromXml(const QDomElement& element) const final override;
-  bool isValid() const final override;
-  bool operator==(const payeeIdentifierData& other) const final override;
-  bool operator==(const payeeIdentifierUnavailable& other) const;
+    payeeIdentifierUnavailable();
+    void writeXML(QDomDocument& document, QDomElement& parent) const final override;
+    payeeIdentifierUnavailable* createFromXml(const QDomElement& element) const final override;
+    bool isValid() const final override;
+    bool operator==(const payeeIdentifierData& other) const final override;
+    bool operator==(const payeeIdentifierUnavailable& other) const;
 
-  friend class payeeIdentifierLoader;
-  /** @todo make private */
-  explicit payeeIdentifierUnavailable(QDomElement data);
+    friend class payeeIdentifierLoader;
+    /** @todo make private */
+    explicit payeeIdentifierUnavailable(QDomElement data);
 
 protected:
-  payeeIdentifierUnavailable* clone() const final override;
+    payeeIdentifierUnavailable* clone() const final override;
 
 private:
-  QDomElement m_data;
+    QDomElement m_data;
 };
 
 } // namespace payeeidentifiers

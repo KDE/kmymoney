@@ -20,10 +20,10 @@
 
 KMyMoneyFile::KMyMoneyFile()
 {
-  // m_file = MyMoneyFile::instance();
-  m_storage = new MyMoneyStorageMgr;
-  // m_file->attachStorage(m_storage);
-  m_open = false;  // lie a little bit for now
+    // m_file = MyMoneyFile::instance();
+    m_storage = new MyMoneyStorageMgr;
+    // m_file->attachStorage(m_storage);
+    m_open = false;  // lie a little bit for now
 }
 
 /*
@@ -34,13 +34,13 @@ KMyMoneyFile::KMyMoneyFile(const QString&)
 
 KMyMoneyFile::~KMyMoneyFile()
 {
-  if (m_storage) {
-    MyMoneyFile::instance()->detachStorage(m_storage);
-    delete m_storage;
-  }
+    if (m_storage) {
+        MyMoneyFile::instance()->detachStorage(m_storage);
+        delete m_storage;
+    }
 
-  // if(m_file)
-  //   delete m_file;
+    // if(m_file)
+    //   delete m_file;
 }
 
 /*
@@ -61,42 +61,42 @@ MyMoneyFile* KMyMoneyFile::file()
 
 MyMoneyStorageMgr* KMyMoneyFile::storage()
 {
-  return m_storage;
+    return m_storage;
 }
 
 void KMyMoneyFile::reset()
 {
-  /*
-    delete m_storage;
-    delete m_file;
-    m_storage = new MyMoneyStorageMgr;
-    m_file = new MyMoneyFile(m_storage);
-  */
+    /*
+      delete m_storage;
+      delete m_file;
+      m_storage = new MyMoneyStorageMgr;
+      m_file = new MyMoneyFile(m_storage);
+    */
 }
 
 void KMyMoneyFile::open()
 {
-  if (m_storage != 0)
-    close();
+    if (m_storage != 0)
+        close();
 
-  m_storage = new MyMoneyStorageMgr;
-  MyMoneyFile::instance()->attachStorage(m_storage);
-  m_open = true;
+    m_storage = new MyMoneyStorageMgr;
+    MyMoneyFile::instance()->attachStorage(m_storage);
+    m_open = true;
 }
 
 void KMyMoneyFile::close()
 {
-  if (m_storage != 0) {
-    MyMoneyFile::instance()->detachStorage(m_storage);
-    delete m_storage;
-    m_storage = 0;
-  }
-  m_open = false;
+    if (m_storage != 0) {
+        MyMoneyFile::instance()->detachStorage(m_storage);
+        delete m_storage;
+        m_storage = 0;
+    }
+    m_open = false;
 }
 
 bool KMyMoneyFile::isOpen()
 {
-  return m_open;
+    return m_open;
 }
 
 #endif

@@ -18,25 +18,27 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class KSettingsColors; }
+namespace Ui {
+class KSettingsColors;
+}
 
 class KSettingsColors : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KSettingsColors)
+    Q_OBJECT
+    Q_DISABLE_COPY(KSettingsColors)
 
 public:
-  explicit KSettingsColors(QWidget* parent = nullptr);
-  ~KSettingsColors();
+    explicit KSettingsColors(QWidget* parent = nullptr);
+    ~KSettingsColors();
 
 private Q_SLOTS:
-  /**
-    * This presets custom colors with system's color scheme
-    */
-  void slotCustomColorsToggled(bool);
+    /**
+      * This presets custom colors with system's color scheme
+      */
+    void slotCustomColorsToggled(bool);
 
 private:
-  Ui::KSettingsColors       *ui;
+    Ui::KSettingsColors       *ui;
 };
 #endif
 

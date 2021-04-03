@@ -20,7 +20,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class KMyMoneyFileInfoDlg; }
+namespace Ui {
+class KMyMoneyFileInfoDlg;
+}
 
 /**
   * @author Thomas Baumgart
@@ -28,15 +30,15 @@ namespace Ui { class KMyMoneyFileInfoDlg; }
 
 class KMM_BASE_DIALOGS_EXPORT KMyMoneyFileInfoDlg : public QDialog
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyFileInfoDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyFileInfoDlg)
 
 public:
-  explicit KMyMoneyFileInfoDlg(QWidget *parent = nullptr);
-  ~KMyMoneyFileInfoDlg();
+    explicit KMyMoneyFileInfoDlg(QWidget *parent = nullptr);
+    ~KMyMoneyFileInfoDlg();
 
 private:
-  Ui::KMyMoneyFileInfoDlg *ui;
+    Ui::KMyMoneyFileInfoDlg *ui;
 };
 
 #endif

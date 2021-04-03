@@ -12,12 +12,12 @@
 #include <QFile>
 #include <QDialog>
 #ifdef ENABLE_WEBENGINE
-  #include <QWebEngineView>
+#include <QWebEngineView>
 #else
-  #include <KWebView>
+#include <KWebView>
 #endif
 #ifdef IS_APPIMAGE
-  #include <QCoreApplication>
+#include <QCoreApplication>
 #endif
 #include <QStandardPaths>
 
@@ -98,11 +98,11 @@ struct CheckPrinting::Private {
     void printCheck(const QString& accountId, const QString& transactionId)
     {
         MyMoneyMoneyToWordsConverter converter;
-        #ifdef ENABLE_WEBENGINE
+#ifdef ENABLE_WEBENGINE
         auto htmlPart = new QWebEngineView();
-        #else
+#else
         auto htmlPart = new KWebView();
-        #endif
+#endif
 
         const auto file = MyMoneyFile::instance();
         const auto transaction = file->transaction(transactionId);
@@ -160,11 +160,11 @@ struct CheckPrinting::Private {
         htmlPart->setHtml(checkHTML, QUrl("file://"));
         auto printer = KMyMoneyPrinter::startPrint();
         if (printer != nullptr) {
-            #ifdef ENABLE_WEBENGINE
+#ifdef ENABLE_WEBENGINE
             htmlPart->page()->print(printer, [=] (bool) {});
-            #else
+#else
             htmlPart->print(printer);
-            #endif
+#endif
         }
 
         // mark the transaction as printed
@@ -175,43 +175,43 @@ struct CheckPrinting::Private {
 };
 
 CheckPrinting::CheckPrinting(QObject *parent, const QVariantList &args) :
-  KMyMoneyPlugin::Plugin(parent, "checkprinting"/*must be the same as X-KDE-PluginInfo-Name*/)
+    KMyMoneyPlugin::Plugin(parent, "checkprinting"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
-  Q_UNUSED(args);
-  // Tell the host application to load my GUI component
-  const auto componentName = QLatin1String("checkprinting");
-  const auto rcFileName = QLatin1String("checkprinting.rc");
-  setComponentName(componentName, i18nc("It's about printing bank checks", "Check printing"));
+    Q_UNUSED(args);
+    // Tell the host application to load my GUI component
+    const auto componentName = QLatin1String("checkprinting");
+    const auto rcFileName = QLatin1String("checkprinting.rc");
+    setComponentName(componentName, i18nc("It's about printing bank checks", "Check printing"));
 
 #ifdef IS_APPIMAGE
-  const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
-  setXMLFile(rcFilePath);
+    const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
+    setXMLFile(rcFilePath);
 
-  const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
-  setLocalXMLFile(localRcFilePath);
+    const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+    setLocalXMLFile(localRcFilePath);
 #else
-  setXMLFile(rcFileName);
+    setXMLFile(rcFileName);
 #endif
 
-  // For ease announce that we have been loaded.
-  qDebug("Plugins: checkprinting loaded");
+    // For ease announce that we have been loaded.
+    qDebug("Plugins: checkprinting loaded");
 
-  d = std::unique_ptr<Private>(new Private);
+    d = std::unique_ptr<Private>(new Private);
 
-  // Create the actions of this plugin
-  QString actionName = i18n("Print check");
+    // Create the actions of this plugin
+    QString actionName = i18n("Print check");
 
-  d->m_action = actionCollection()->addAction("transaction_checkprinting", this, SLOT(slotPrintCheck()));
-  d->m_action->setText(actionName);
+    d->m_action = actionCollection()->addAction("transaction_checkprinting", this, SLOT(slotPrintCheck()));
+    d->m_action->setText(actionName);
 
-  // wait until a transaction is selected before enabling the action
-  d->m_action->setEnabled(false);
-  d->m_printedTransactionIdList = PluginSettings::printedChecks();
-  d->readCheckTemplate();
+    // wait until a transaction is selected before enabling the action
+    d->m_action->setEnabled(false);
+    d->m_printedTransactionIdList = PluginSettings::printedChecks();
+    d->readCheckTemplate();
 
-  //! @todo Christian: Replace
+    //! @todo Christian: Replace
 #if 0
-  connect(KMyMoneyPlugin::PluginLoader::instance(), SIGNAL(configChanged(Plugin*)), this, SLOT(slotUpdateConfig()));
+    connect(KMyMoneyPlugin::PluginLoader::instance(), SIGNAL(configChanged(Plugin*)), this, SLOT(slotUpdateConfig()));
 #endif
 }
 
@@ -220,25 +220,25 @@ CheckPrinting::CheckPrinting(QObject *parent, const QVariantList &args) :
  */
 CheckPrinting::~CheckPrinting()
 {
-  actionCollection()->removeAction(d->m_action);
-  qDebug("Plugins: checkprinting unloaded");
+    actionCollection()->removeAction(d->m_action);
+    qDebug("Plugins: checkprinting unloaded");
 }
 
 void CheckPrinting::slotPrintCheck()
 {
-  const auto transactions = d->selections.selection(SelectedObjects::Transaction);
-  const auto accounts = d->selections.selection(SelectedObjects::Account);
-  for (const auto& accountId : accounts) {
-      if (d->canBePrinted(accountId)) {
-          for (const auto& transactionId : transactions) {
-              if (d->canBePrinted(accountId, transactionId)) {
-                  d->printCheck(accountId, transactionId);
-              }
-          }
-      }
-  }
-  updateActions(d->selections);
-  PluginSettings::setPrintedChecks(d->m_printedTransactionIdList);
+    const auto transactions = d->selections.selection(SelectedObjects::Transaction);
+    const auto accounts = d->selections.selection(SelectedObjects::Account);
+    for (const auto& accountId : accounts) {
+        if (d->canBePrinted(accountId)) {
+            for (const auto& transactionId : transactions) {
+                if (d->canBePrinted(accountId, transactionId)) {
+                    d->printCheck(accountId, transactionId);
+                }
+            }
+        }
+    }
+    updateActions(d->selections);
+    PluginSettings::setPrintedChecks(d->m_printedTransactionIdList);
 }
 
 void CheckPrinting::updateActions(const SelectedObjects& selections)
@@ -268,10 +268,10 @@ void CheckPrinting::updateActions(const SelectedObjects& selections)
 // the plugin's configurations has changed
 void CheckPrinting::updateConfiguration()
 {
-  PluginSettings::self()->load();
-  // re-read the data because the configuration has changed
-  d->readCheckTemplate();
-  d->m_printedTransactionIdList = PluginSettings::printedChecks();
+    PluginSettings::self()->load();
+    // re-read the data because the configuration has changed
+    d->readCheckTemplate();
+    d->m_printedTransactionIdList = PluginSettings::printedChecks();
 }
 
 K_PLUGIN_FACTORY_WITH_JSON(CheckPrintingFactory, "checkprinting.json", registerPlugin<CheckPrinting>();)

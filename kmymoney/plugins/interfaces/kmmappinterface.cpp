@@ -21,70 +21,70 @@ KMyMoneyPlugin::KMMAppInterface::KMMAppInterface(KMyMoneyApp* app, QObject* pare
     AppInterface(parent, name),
     m_app(app)
 {
-  connect(m_app, &KMyMoneyApp::kmmFilePlugin, this, &AppInterface::kmmFilePlugin);
+    connect(m_app, &KMyMoneyApp::kmmFilePlugin, this, &AppInterface::kmmFilePlugin);
 }
 
 bool KMyMoneyPlugin::KMMAppInterface::fileOpen()
 {
-  return m_app->fileOpen();
+    return m_app->fileOpen();
 }
 
 bool KMyMoneyPlugin::KMMAppInterface::isDatabase()
 {
-  return m_app->isDatabase();
+    return m_app->isDatabase();
 }
 
 bool KMyMoneyPlugin::KMMAppInterface::isNativeFile()
 {
-  return m_app->isNativeFile();
+    return m_app->isNativeFile();
 }
 
 QUrl KMyMoneyPlugin::KMMAppInterface::filenameURL() const
 {
-  return m_app->filenameURL();
+    return m_app->filenameURL();
 }
 
 void KMyMoneyPlugin::KMMAppInterface::writeFilenameURL(const QUrl &url)
 {
-  m_app->writeFilenameURL(url);
+    m_app->writeFilenameURL(url);
 }
 
 QUrl KMyMoneyPlugin::KMMAppInterface::lastOpenedURL()
 {
-  return m_app->lastOpenedURL();
+    return m_app->lastOpenedURL();
 }
 
 void KMyMoneyPlugin::KMMAppInterface::writeLastUsedFile(const QString& fileName)
 {
-  m_app->writeLastUsedFile(fileName);
+    m_app->writeLastUsedFile(fileName);
 }
 
 void KMyMoneyPlugin::KMMAppInterface::slotFileOpenRecent(const QUrl &url)
 {
-  m_app->slotFileOpenRecent(url);
+    m_app->slotFileOpenRecent(url);
 }
 
 void KMyMoneyPlugin::KMMAppInterface::addToRecentFiles(const QUrl& url)
 {
-  m_app->addToRecentFiles(url);
+    m_app->addToRecentFiles(url);
 }
 
 KMyMoneyAppCallback KMyMoneyPlugin::KMMAppInterface::progressCallback()
 {
-  return m_app->progressCallback();
+    return m_app->progressCallback();
 }
 
 void KMyMoneyPlugin::KMMAppInterface::writeLastUsedDir(const QString &directory)
 {
-  m_app->writeLastUsedDir(directory);
+    m_app->writeLastUsedDir(directory);
 }
 
 QString KMyMoneyPlugin::KMMAppInterface::readLastUsedDir() const
 {
-  return m_app->readLastUsedDir();
+    return m_app->readLastUsedDir();
 }
 
 void KMyMoneyPlugin::KMMAppInterface::consistencyCheck(bool alwaysDisplayResult)
 {
-  m_app->consistencyCheck(alwaysDisplayResult);
+    m_app->consistencyCheck(alwaysDisplayResult);
 }

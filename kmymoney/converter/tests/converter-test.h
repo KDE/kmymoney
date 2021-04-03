@@ -13,18 +13,18 @@
 
 class ConverterTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 private:
-  MyMoneyFile* file;
+    MyMoneyFile* file;
 
 private Q_SLOTS:
-  void init();
-  void cleanup();
-  void testWebQuotesDefault();
-  void testWebQuotes_data();
-  void testWebQuotes();
-  void testDateFormat();
+    void init();
+    void cleanup();
+    void testWebQuotesDefault();
+    void testWebQuotes_data();
+    void testWebQuotes();
+    void testDateFormat();
 };
 
 #endif // CONVERTERTEST_H

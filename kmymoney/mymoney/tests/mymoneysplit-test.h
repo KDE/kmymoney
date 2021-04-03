@@ -13,26 +13,26 @@ class MyMoneySplit;
 
 class MyMoneySplitTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 protected:
-  MyMoneySplit *m;
+    MyMoneySplit *m;
 
 private Q_SLOTS:
-  void init();
-  void cleanup();
-  void testEmptyConstructor();
-  void testSetFunctions();
-  void testCopyConstructor();
-  void testAssignmentConstructor();
-  void testEquality();
-  void testInequality();
-  void testAmortization();
-  void testValue();
-  void testSetValue();
-  void testSetAction();
-  void testIsAutoCalc();
-  void testUnaryMinus();
+    void init();
+    void cleanup();
+    void testEmptyConstructor();
+    void testSetFunctions();
+    void testCopyConstructor();
+    void testAssignmentConstructor();
+    void testEquality();
+    void testInequality();
+    void testAmortization();
+    void testValue();
+    void testSetValue();
+    void testSetAction();
+    void testIsAutoCalc();
+    void testUnaryMinus();
 };
 
 #endif

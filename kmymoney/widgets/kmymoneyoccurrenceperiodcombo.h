@@ -29,12 +29,12 @@
  */
 class KMM_BASE_WIDGETS_EXPORT KMyMoneyOccurrencePeriodCombo : public KMyMoneyOccurrenceCombo
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyOccurrencePeriodCombo)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyOccurrencePeriodCombo)
 
 public:
-  explicit KMyMoneyOccurrencePeriodCombo(QWidget* parent = nullptr);
-  ~KMyMoneyOccurrencePeriodCombo() override;
+    explicit KMyMoneyOccurrencePeriodCombo(QWidget* parent = nullptr);
+    ~KMyMoneyOccurrencePeriodCombo() override;
 
 };
 

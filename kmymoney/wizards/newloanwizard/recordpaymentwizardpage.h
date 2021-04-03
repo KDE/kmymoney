@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class RecordPaymentWizardPage; }
+namespace Ui {
+class RecordPaymentWizardPage;
+}
 
 /**
  * This class implements the Record Payment page of the
@@ -26,19 +28,19 @@ namespace Ui { class RecordPaymentWizardPage; }
 
 class RecordPaymentWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit RecordPaymentWizardPage(QWidget *parent = nullptr);
-  ~RecordPaymentWizardPage();
+    explicit RecordPaymentWizardPage(QWidget *parent = nullptr);
+    ~RecordPaymentWizardPage();
 
-  /**
-   * Overload the initializePage function to set widgets based on
-   * the inputs from previous pages.
-   */
-  void initializePage() final override;
+    /**
+     * Overload the initializePage function to set widgets based on
+     * the inputs from previous pages.
+     */
+    void initializePage() final override;
 
 private:
-  Ui::RecordPaymentWizardPage *ui;
+    Ui::RecordPaymentWizardPage *ui;
 };
 
 #endif

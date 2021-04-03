@@ -15,11 +15,11 @@ class CSVImporterCore;
 class CSVWizardPage : public QWizardPage
 {
 public:
-  CSVWizardPage(CSVWizard *dlg, CSVImporterCore *imp) : QWizardPage(nullptr), m_dlg(dlg), m_imp(imp) {}
+    CSVWizardPage(CSVWizard *dlg, CSVImporterCore *imp) : QWizardPage(nullptr), m_dlg(dlg), m_imp(imp) {}
 
 protected:
-  CSVWizard   *m_dlg;
-  CSVImporterCore *m_imp;
+    CSVWizard   *m_dlg;
+    CSVImporterCore *m_imp;
 };
 
 #endif // CSVWIZARDPAGE_H

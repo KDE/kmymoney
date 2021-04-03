@@ -23,27 +23,27 @@ class MyMoneyTagPrivate : public MyMoneyObjectPrivate
 {
 public:
 
-  MyMoneyTagPrivate() :
-    m_closed(false),
-    m_tag_color(QColor("black"))
-  {
-  }
+    MyMoneyTagPrivate() :
+        m_closed(false),
+        m_tag_color(QColor("black"))
+    {
+    }
 
-  MyMoneyTagPrivate(const MyMoneyTagPrivate& d) :
-    m_name(d.m_name),
-    m_closed(d.m_closed),
-    m_tag_color(d.m_tag_color),
-    m_notes(d.m_notes)
-  {
-  }
+    MyMoneyTagPrivate(const MyMoneyTagPrivate& d) :
+        m_name(d.m_name),
+        m_closed(d.m_closed),
+        m_tag_color(d.m_tag_color),
+        m_notes(d.m_notes)
+    {
+    }
 
-  // Simple fields
-  QString m_name;
-  // Closed tags will not be shown in the selector inside a transaction, only in the Tag tab
-  bool m_closed;
-  // Set the color showed in the ledger
-  QColor m_tag_color;
-  QString m_notes;
+    // Simple fields
+    QString m_name;
+    // Closed tags will not be shown in the selector inside a transaction, only in the Tag tab
+    bool m_closed;
+    // Set the color showed in the ledger
+    QColor m_tag_color;
+    QString m_notes;
 };
 
 #endif

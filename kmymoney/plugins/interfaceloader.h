@@ -19,7 +19,7 @@ class KMyMoneyApp;
 namespace KMyMoneyPlugin
 {
 
-  class Plugin;
+class Plugin;
 
 /**
  * @internal
@@ -30,18 +30,18 @@ namespace KMyMoneyPlugin
  * this class @ref pluginInterfaces() is used.
  */
 class InterfaceLoader {
-  /**
-   * @{
-   * This class is owner of these objects. However, the parent is somebody else. They are deleted by destruction of the parent only.
-   */
-  KMyMoneyPlugin::AppInterface* appInterface;
-  KMyMoneyPlugin::ViewInterface* viewInterface;
-  KMyMoneyPlugin::StatementInterface* statementInterface;
-  KMyMoneyPlugin::ImportInterface* importInterface;
-  /** @} */
+    /**
+     * @{
+     * This class is owner of these objects. However, the parent is somebody else. They are deleted by destruction of the parent only.
+     */
+    KMyMoneyPlugin::AppInterface* appInterface;
+    KMyMoneyPlugin::ViewInterface* viewInterface;
+    KMyMoneyPlugin::StatementInterface* statementInterface;
+    KMyMoneyPlugin::ImportInterface* importInterface;
+    /** @} */
 
-  friend KMyMoneyApp;
-  friend KMyMoneyPlugin::Plugin;
+    friend KMyMoneyApp;
+    friend KMyMoneyPlugin::Plugin;
 };
 
 /**

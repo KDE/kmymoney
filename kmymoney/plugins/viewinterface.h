@@ -48,80 +48,80 @@ namespace KMyMoneyPlugin
   */
 class KMM_PLUGIN_EXPORT ViewInterface : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit ViewInterface(QObject* parent, const char* name = 0);
-  virtual ~ViewInterface();
+    explicit ViewInterface(QObject* parent, const char* name = 0);
+    virtual ~ViewInterface();
 
-  /**
-    * Brings up a dialog to change the list(s) settings and saves them into the
-    * class KMyMoneySettings (a singleton).
-    *
-    * @see KListSettingsDlg
-    * Refreshes all views. Used e.g. after settings have been changed or
-    * data has been loaded from external sources (QIF import).
-    **/
-  virtual void slotRefreshViews() = 0;
+    /**
+      * Brings up a dialog to change the list(s) settings and saves them into the
+      * class KMyMoneySettings (a singleton).
+      *
+      * @see KListSettingsDlg
+      * Refreshes all views. Used e.g. after settings have been changed or
+      * data has been loaded from external sources (QIF import).
+      **/
+    virtual void slotRefreshViews() = 0;
 
-  /**
-    * This method creates a new page in the application.
-    * See KPageWidget::addPage() for details.
-    */
+    /**
+      * This method creates a new page in the application.
+      * See KPageWidget::addPage() for details.
+      */
 //  virtual KMyMoneyViewBase* addPage(const QString& item, const QString& icon) = 0;
 
-  /**
-    * This method adds a widget to the layout of the view
-    * created with addPage()
-    *
-    * @param view pointer to view widget
-    * @param w widget to be added to @p page
-    */
+    /**
+      * This method adds a widget to the layout of the view
+      * created with addPage()
+      *
+      * @param view pointer to view widget
+      * @param w widget to be added to @p page
+      */
 //  virtual void addWidget(KMyMoneyViewBase* view, QWidget* w) = 0;
 
     virtual void addView(KMyMoneyViewBase* view, const QString& name, View idView, Icons::Icon icon) = 0;
     virtual void removeView(View idView) = 0;
 
 Q_SIGNALS:
-  /**
-   * This signal is emitted when a new account has been selected by
-   * the GUI. If no account is selected or the selection is removed,
-   * @a account is identical to MyMoneyAccount(). This signal is used
-   * by plugins to get information about changes.
-   */
-  void accountSelected(const MyMoneyAccount& acc);
+    /**
+     * This signal is emitted when a new account has been selected by
+     * the GUI. If no account is selected or the selection is removed,
+     * @a account is identical to MyMoneyAccount(). This signal is used
+     * by plugins to get information about changes.
+     */
+    void accountSelected(const MyMoneyAccount& acc);
 
-  /**
-   * This signal is emitted when a transaction/list of transactions has been selected by
-   * the GUI. If no transaction is selected or the selection is removed,
-   * @p transactions is identical to an empty QList. This signal is used
-   * by plugins to get information about changes.
-   */
-  void transactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
+    /**
+     * This signal is emitted when a transaction/list of transactions has been selected by
+     * the GUI. If no transaction is selected or the selection is removed,
+     * @p transactions is identical to an empty QList. This signal is used
+     * by plugins to get information about changes.
+     */
+    void transactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
 
-  /**
-   * This signal is emitted when a new institution has been selected by
-   * the GUI. If no institution is selected or the selection is removed,
-   * @a institution is identical to MyMoneyInstitution(). This signal is used
-   * by plugins to get information about changes.
-   */
+    /**
+     * This signal is emitted when a new institution has been selected by
+     * the GUI. If no institution is selected or the selection is removed,
+     * @a institution is identical to MyMoneyInstitution(). This signal is used
+     * by plugins to get information about changes.
+     */
 //  void institutionSelected(const MyMoneyInstitution& institution);
 
-  /**
-   * This signal is emitted when an account has been successfully reconciled
-   * and all transactions are updated in the engine. It can be used by plugins
-   * to create reconciliation reports.
-   *
-   * @param account the account data
-   * @param date the reconciliation date as provided through the dialog
-   * @param startingBalance the starting balance as provided through the dialog
-   * @param endingBalance the ending balance as provided through the dialog
-   * @param transactionList reference to QList of QPair containing all
-   *        transaction/split pairs processed by the reconciliation.
-   */
-  void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
+    /**
+     * This signal is emitted when an account has been successfully reconciled
+     * and all transactions are updated in the engine. It can be used by plugins
+     * to create reconciliation reports.
+     *
+     * @param account the account data
+     * @param date the reconciliation date as provided through the dialog
+     * @param startingBalance the starting balance as provided through the dialog
+     * @param endingBalance the ending balance as provided through the dialog
+     * @param transactionList reference to QList of QPair containing all
+     *        transaction/split pairs processed by the reconciliation.
+     */
+    void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
 
-  void viewStateChanged(bool);
+    void viewStateChanged(bool);
 };
 
 } // namespace

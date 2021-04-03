@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class PaymentEditWizardPage; }
+namespace Ui {
+class PaymentEditWizardPage;
+}
 
 /**
  * This class implements the Payment Edit page of the
@@ -26,12 +28,12 @@ namespace Ui { class PaymentEditWizardPage; }
 
 class PaymentEditWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit PaymentEditWizardPage(QWidget *parent = nullptr);
-  ~PaymentEditWizardPage();
+    explicit PaymentEditWizardPage(QWidget *parent = nullptr);
+    ~PaymentEditWizardPage();
 
-  Ui::PaymentEditWizardPage *ui;
+    Ui::PaymentEditWizardPage *ui;
 };
 
 #endif

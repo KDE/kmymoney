@@ -18,26 +18,26 @@
 class ExistingTransactionMatchFinder : public TransactionMatchFinder
 {
 public:
-  /** Ctor, initializes the match finder
-   * @param matchWindow max number of days the transactions may vary and still be considered to be matching
-   */
-  explicit ExistingTransactionMatchFinder(int m_matchWindow = 3);
+    /** Ctor, initializes the match finder
+     * @param matchWindow max number of days the transactions may vary and still be considered to be matching
+     */
+    explicit ExistingTransactionMatchFinder(int m_matchWindow = 3);
 
 protected:
-  typedef QPair<MyMoneyTransaction, MyMoneySplit> TransactionAndSplitPair;
-  QList<TransactionAndSplitPair> listOfMatchCandidates;
+    typedef QPair<MyMoneyTransaction, MyMoneySplit> TransactionAndSplitPair;
+    QList<TransactionAndSplitPair> listOfMatchCandidates;
 
-  /** Creates a list of transactions within matchWindow range and with the same amount as the imported transaction we're trying to match
-   */
-  void createListOfMatchCandidates() final override;
+    /** Creates a list of transactions within matchWindow range and with the same amount as the imported transaction we're trying to match
+     */
+    void createListOfMatchCandidates() final override;
 
-  /** Searches for a matching transaction in the ledger
-   *
-   * Match result can be set to any value described in @ref TransactionMatchFinder::findMatch().
-   * @ref MatchDuplicate is set if the imported transaction has the same bank id as the existing transaction;
-   * @ref MatchImprecise is set when transaction dates are not equal, but within matchWindow range
-   */
-  void findMatchInMatchCandidatesList() final override;
+    /** Searches for a matching transaction in the ledger
+     *
+     * Match result can be set to any value described in @ref TransactionMatchFinder::findMatch().
+     * @ref MatchDuplicate is set if the imported transaction has the same bank id as the existing transaction;
+     * @ref MatchImprecise is set when transaction dates are not equal, but within matchWindow range
+     */
+    void findMatchInMatchCandidatesList() final override;
 };
 
 #endif // EXISTINGTRANSACTIONMATCHFINDER_H

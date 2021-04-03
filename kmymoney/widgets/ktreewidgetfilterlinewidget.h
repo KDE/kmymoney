@@ -12,18 +12,18 @@
 
 class KMM_WIDGETS_EXPORT KTreeWidgetFilterLineWidget : public KTreeWidgetSearchLineWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KTreeWidgetFilterLineWidget(QWidget* parent = nullptr, QTreeWidget *treeWidget = 0);
+    explicit KTreeWidgetFilterLineWidget(QWidget* parent = nullptr, QTreeWidget *treeWidget = 0);
 
 protected Q_SLOTS:
-  /**
-   * @copydoc KTreeWidgetSearchLineWidget::createWidgets()
-   *
-   * After widgets are created, this version finds the label and renames it to "Filter"
-   */
-  void createWidgets() final override;
+    /**
+     * @copydoc KTreeWidgetSearchLineWidget::createWidgets()
+     *
+     * After widgets are created, this version finds the label and renames it to "Filter"
+     */
+    void createWidgets() final override;
 };
 
 #endif // KTREEWIDGETFILTERLINEWIDGET_H

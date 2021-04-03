@@ -31,46 +31,46 @@ PopupPositioner::PopupPositioner(QWidget* baseWidget, QWidget* popupWidget, Anch
     auto p = baseWidget->mapToGlobal(QPoint());
     // align the y coordinate
     switch(anchor) {
-        case BottemLeft:
-        case BottomRight:
-            if (p.y() + baseWidget->height() + popupWidget->height() > screenRect.bottomLeft().y()) {
-                p.setY(p.y() - popupWidget->height());
-            } else {
-                p.setY(p.y() + baseWidget->height());
-            }
-            break;
-        case TopLeft:
-        case TopRight:
-            if (p.y() - popupWidget->height() < screenRect.topLeft().y()) {
-                p.setY(p.y() + baseWidget->height());
-            } else {
-                p.setY(p.y() - popupWidget->height());
-            }
-            break;
+    case BottemLeft:
+    case BottomRight:
+        if (p.y() + baseWidget->height() + popupWidget->height() > screenRect.bottomLeft().y()) {
+            p.setY(p.y() - popupWidget->height());
+        } else {
+            p.setY(p.y() + baseWidget->height());
+        }
+        break;
+    case TopLeft:
+    case TopRight:
+        if (p.y() - popupWidget->height() < screenRect.topLeft().y()) {
+            p.setY(p.y() + baseWidget->height());
+        } else {
+            p.setY(p.y() - popupWidget->height());
+        }
+        break;
     }
 
     // align the x coordinate
     switch(anchor) {
-        case BottemLeft:
-        case TopLeft:
-            // if left aligning causes the widget to leave the screen area
-            // then align it to the right edge of the base widget instead
-            if (p.x() + popupWidget->width() > screenRect.topRight().x()) {
-                p.setX(p.x() + baseWidget->width() - popupWidget->width());
-            }
-            break;
-
-        case BottomRight:
-        case TopRight:
-            // align to the right
+    case BottemLeft:
+    case TopLeft:
+        // if left aligning causes the widget to leave the screen area
+        // then align it to the right edge of the base widget instead
+        if (p.x() + popupWidget->width() > screenRect.topRight().x()) {
             p.setX(p.x() + baseWidget->width() - popupWidget->width());
+        }
+        break;
 
-            // if right aligning causes the widget to leave the screen area
-            // then align it to the left edge of the base widget
-            if (p.x() < screenRect.topLeft().x()) {
-                p.setX(baseWidget->x());
-            }
-            break;
+    case BottomRight:
+    case TopRight:
+        // align to the right
+        p.setX(p.x() + baseWidget->width() - popupWidget->width());
+
+        // if right aligning causes the widget to leave the screen area
+        // then align it to the left edge of the base widget
+        if (p.x() < screenRect.topLeft().x()) {
+            p.setX(baseWidget->x());
+        }
+        break;
     }
 
     // if the popup widget leaves the screen to the left

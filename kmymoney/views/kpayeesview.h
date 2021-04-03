@@ -42,75 +42,75 @@ class QItemSelection;
 class KPayeesViewPrivate;
 class KPayeesView : public KMyMoneyViewBase
 {
-  Q_DECLARE_PRIVATE(KPayeesView)
-  Q_OBJECT
+    Q_DECLARE_PRIVATE(KPayeesView)
+    Q_OBJECT
 
 public:
-  explicit KPayeesView(QWidget *parent = nullptr);
-  ~KPayeesView() override;
+    explicit KPayeesView(QWidget *parent = nullptr);
+    ~KPayeesView() override;
 
-  void executeCustomAction(eView::Action action) override;
+    void executeCustomAction(eView::Action action) override;
 
 public Q_SLOTS:
-  void slotHelp();
+    void slotHelp();
 
-  /**
-   * @brief proxy slot to close a model based on file open/close
-   */
-  void slotClosePayeeIdentifierSource();
+    /**
+     * @brief proxy slot to close a model based on file open/close
+     */
+    void slotClosePayeeIdentifierSource();
 
-  void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
+    void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
-  void updateActions(const SelectedObjects& selections) override;
+    void updateActions(const SelectedObjects& selections) override;
 
 Q_SIGNALS:
-  void transactionSelected(const QString& accountId, const QString& transactionId);
+    void transactionSelected(const QString& accountId, const QString& transactionId);
 
 protected:
-  void showEvent(QShowEvent* event) override;
-  void aboutToShow() override;
-  void aboutToHide() override;
+    void showEvent(QShowEvent* event) override;
+    void aboutToShow() override;
+    void aboutToHide() override;
 
 private Q_SLOTS:
-  /**
-   * This slot is called whenever the selection in m_payeesList
-   * is about to change.
-   */
-  void slotPayeeSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
+    /**
+     * This slot is called whenever the selection in m_payeesList
+     * is about to change.
+     */
+    void slotPayeeSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
 
-  /**
-    * This slot marks the current selected payee as modified (dirty).
-    */
-  void slotPayeeDataChanged();
-  void slotKeyListChanged();
+    /**
+      * This slot marks the current selected payee as modified (dirty).
+      */
+    void slotPayeeDataChanged();
+    void slotKeyListChanged();
 
-  void slotRenameSinglePayee(const QModelIndex& idx, const QVariant& value);
+    void slotRenameSinglePayee(const QModelIndex& idx, const QVariant& value);
 
-  /**
-    * Updates the payee data in m_payee from the information in the
-    * payee information widget.
-    */
-  void slotUpdatePayee();
+    /**
+      * Updates the payee data in m_payee from the information in the
+      * payee information widget.
+      */
+    void slotUpdatePayee();
 
-  void slotChooseDefaultAccount();
+    void slotChooseDefaultAccount();
 
-  /**
-    * Fetches the payee data from addressbook.
-    */
-  void slotSyncAddressBook();
-  void slotContactFetched(const ContactData &identity);
+    /**
+      * Fetches the payee data from addressbook.
+      */
+    void slotSyncAddressBook();
+    void slotContactFetched(const ContactData &identity);
 
-  /**
-    * Creates mail to payee.
-    */
-  void slotSendMail();
+    /**
+      * Creates mail to payee.
+      */
+    void slotSendMail();
 
-  void slotNewPayee();
-  void slotRenamePayee();
-  void slotDeletePayee();
-  void slotMergePayee();
+    void slotNewPayee();
+    void slotRenamePayee();
+    void slotDeletePayee();
+    void slotMergePayee();
 
-  void slotModelDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
+    void slotModelDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
 
 };
 

@@ -26,87 +26,87 @@
 
 class AmountEditCurrencyHelperPrivate
 {
-  Q_DECLARE_PUBLIC(AmountEditCurrencyHelper)
+    Q_DECLARE_PUBLIC(AmountEditCurrencyHelper)
 
 public:
-  AmountEditCurrencyHelperPrivate(AmountEditCurrencyHelper* qq)
-    : q_ptr(qq)
-    , category(nullptr)
-    , amount(nullptr)
-    , creditDebitHelper(nullptr)
-  {
-  }
+    AmountEditCurrencyHelperPrivate(AmountEditCurrencyHelper* qq)
+        : q_ptr(qq)
+        , category(nullptr)
+        , amount(nullptr)
+        , creditDebitHelper(nullptr)
+    {
+    }
 
-  AmountEditCurrencyHelper*       q_ptr;
-  KMyMoneyAccountCombo*           category;
-  AmountEdit*                     amount;
-  CreditDebitHelper*              creditDebitHelper;
-  QString                         commodityId;
+    AmountEditCurrencyHelper*       q_ptr;
+    KMyMoneyAccountCombo*           category;
+    AmountEdit*                     amount;
+    CreditDebitHelper*              creditDebitHelper;
+    QString                         commodityId;
 
-  void init(KMyMoneyAccountCombo* _category, AmountEdit* _amount, CreditDebitHelper* _creditDebitHelper, const QString& _commodityId)
-  {
-    Q_Q(AmountEditCurrencyHelper);
-    category = _category;
-    amount = _amount;
-    creditDebitHelper = _creditDebitHelper;
-    commodityId = _commodityId;
+    void init(KMyMoneyAccountCombo* _category, AmountEdit* _amount, CreditDebitHelper* _creditDebitHelper, const QString& _commodityId)
+    {
+        Q_Q(AmountEditCurrencyHelper);
+        category = _category;
+        amount = _amount;
+        creditDebitHelper = _creditDebitHelper;
+        commodityId = _commodityId;
 
-    q->connect(category, &KMyMoneyAccountCombo::accountSelected, q, &AmountEditCurrencyHelper::categoryChanged);
+        q->connect(category, &KMyMoneyAccountCombo::accountSelected, q, &AmountEditCurrencyHelper::categoryChanged);
 
-    q->categoryChanged(category->getSelected());
-  }
+        q->categoryChanged(category->getSelected());
+    }
 };
 
 
 AmountEditCurrencyHelper::AmountEditCurrencyHelper(KMyMoneyAccountCombo* category, AmountEdit* amount, const QString& commodityId)
-  : QObject(category)
-  , d_ptr(new AmountEditCurrencyHelperPrivate(this))
+    : QObject(category)
+    , d_ptr(new AmountEditCurrencyHelperPrivate(this))
 {
-  Q_D(AmountEditCurrencyHelper);
-  connect(amount, &QObject::destroyed, this, &QObject::deleteLater);
-  d->init(category, amount, nullptr, commodityId);
+    Q_D(AmountEditCurrencyHelper);
+    connect(amount, &QObject::destroyed, this, &QObject::deleteLater);
+    d->init(category, amount, nullptr, commodityId);
 }
 
 AmountEditCurrencyHelper::AmountEditCurrencyHelper(KMyMoneyAccountCombo* category, CreditDebitHelper* amount, const QString& commodityId)
-  : QObject(category)
-  , d_ptr(new AmountEditCurrencyHelperPrivate(this))
+    : QObject(category)
+    , d_ptr(new AmountEditCurrencyHelperPrivate(this))
 {
-  Q_D(AmountEditCurrencyHelper);
-  connect(amount, &QObject::destroyed, this, &QObject::deleteLater);
-  d->init(category, nullptr, amount, commodityId);
+    Q_D(AmountEditCurrencyHelper);
+    connect(amount, &QObject::destroyed, this, &QObject::deleteLater);
+    d->init(category, nullptr, amount, commodityId);
 }
 
 AmountEditCurrencyHelper::~AmountEditCurrencyHelper()
 {
-  Q_D(AmountEditCurrencyHelper);
-  delete d;
+    Q_D(AmountEditCurrencyHelper);
+    delete d;
 }
 
 void AmountEditCurrencyHelper::setCommodity(const QString& commodityId)
 {
-  Q_D(AmountEditCurrencyHelper);
-  d->commodityId = commodityId;
+    Q_D(AmountEditCurrencyHelper);
+    d->commodityId = commodityId;
 }
 
 void AmountEditCurrencyHelper::categoryChanged(const QString& id)
 {
-  Q_D(AmountEditCurrencyHelper);
-  QString currencySymbol;
+    Q_D(AmountEditCurrencyHelper);
+    QString currencySymbol;
 
-  try {
-    const auto category = MyMoneyFile::instance()->account(id);
-    if (category.isIncomeExpense()) {
-      const auto security = MyMoneyFile::instance()->security(category.currencyId());
-      if (security.id() != d->commodityId) {
-        currencySymbol = security.tradingSymbol();
-      }
+    try {
+        const auto category = MyMoneyFile::instance()->account(id);
+        if (category.isIncomeExpense()) {
+            const auto security = MyMoneyFile::instance()->security(category.currencyId());
+            if (security.id() != d->commodityId) {
+                currencySymbol = security.tradingSymbol();
+            }
+        }
+    } catch(MyMoneyException& e) {
     }
-  } catch(MyMoneyException& e) {
-  }
 
-  if (d->amount) {
-    d->amount->showCurrencySymbol(currencySymbol);
-  } else if(d->creditDebitHelper) {
-    d->creditDebitHelper->showCurrencySymbol(currencySymbol);
-  }
+    if (d->amount) {
+        d->amount->showCurrencySymbol(currencySymbol);
+    } else if(d->creditDebitHelper) {
+        d->creditDebitHelper->showCurrencySymbol(currencySymbol);
+    }
 }

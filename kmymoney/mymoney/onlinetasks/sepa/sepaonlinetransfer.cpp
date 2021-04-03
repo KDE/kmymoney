@@ -6,12 +6,12 @@
 #include "sepaonlinetransfer.h"
 
 sepaOnlineTransfer::sepaOnlineTransfer() :
-  onlineTask(), creditTransfer()
+    onlineTask(), creditTransfer()
 {
 
 }
 
 sepaOnlineTransfer::sepaOnlineTransfer(const sepaOnlineTransfer &other) :
-  onlineTask(other), creditTransfer(other)
+    onlineTask(other), creditTransfer(other)
 {
 }

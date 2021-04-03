@@ -23,77 +23,81 @@ class KXMLGUIFactory;
 
 class QModelIndex;
 
-namespace KMyMoneyPlugin { class OnlinePlugin; }
+namespace KMyMoneyPlugin {
+class OnlinePlugin;
+}
 
 namespace eMenu {
-  enum class OnlineAction {
+enum class OnlineAction {
     LogOnlineJob,
     AccountCreditTransfer,
     DeleteOnlineJob,
     EditOnlineJob,
     SendOnlineJobs,
-  };
-  inline uint qHash(const OnlineAction key, uint seed) { return ::qHash(static_cast<uint>(key), seed); }
+};
+inline uint qHash(const OnlineAction key, uint seed) {
+    return ::qHash(static_cast<uint>(key), seed);
+}
 };
 
 class KOnlineJobOutboxViewPrivate;
 class SelectedObjects;
 class KOnlineJobOutboxView : public KMyMoneyViewBase
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit KOnlineJobOutboxView(QWidget *parent = 0);
-  ~KOnlineJobOutboxView() override;
+    explicit KOnlineJobOutboxView(QWidget *parent = 0);
+    ~KOnlineJobOutboxView() override;
 
-  void executeCustomAction(eView::Action action) override;
+    void executeCustomAction(eView::Action action) override;
 
-  void createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiClient);
-  void removeActions();
+    void createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiClient);
+    void removeActions();
 
-  QStringList selectedOnlineJobs() const;
+    QStringList selectedOnlineJobs() const;
 
 public Q_SLOTS:
-  void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
+    void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
-  void updateActions(const SelectedObjects& selections) override;
+    void updateActions(const SelectedObjects& selections) override;
 
 Q_SIGNALS:
-  void sendJobs(QList<onlineJob>);
-  void editJob(QString);
-  void newCreditTransfer();
+    void sendJobs(QList<onlineJob>);
+    void editJob(QString);
+    void newCreditTransfer();
 
 protected:
-  void showEvent(QShowEvent* event) override;
-  void contextMenuEvent(QContextMenuEvent*) override;
+    void showEvent(QShowEvent* event) override;
+    void contextMenuEvent(QContextMenuEvent*) override;
 
 private:
-  Q_DECLARE_PRIVATE(KOnlineJobOutboxView)
+    Q_DECLARE_PRIVATE(KOnlineJobOutboxView)
 
 private Q_SLOTS:
-  void updateSelection();
+    void updateSelection();
 
-  void slotRemoveJob();
+    void slotRemoveJob();
 
-  /** @brief If any job is selected, send it. Send all valid jobs otherwise. */
-  void slotSendJobs();
+    /** @brief If any job is selected, send it. Send all valid jobs otherwise. */
+    void slotSendJobs();
 
-  /** @brief Send all sendable online jobs */
-  void slotSendAllSendableJobs();
+    /** @brief Send all sendable online jobs */
+    void slotSendAllSendableJobs();
 
-  /** @brief Send only the selected jobs */
-  void slotSendSelectedJobs();
+    /** @brief Send only the selected jobs */
+    void slotSendSelectedJobs();
 
-  void slotEditJob();
-  void slotEditJob(const QModelIndex&);
+    void slotEditJob();
+    void slotEditJob(const QModelIndex&);
 
-  void slotOnlineJobSave(onlineJob job);
-  void slotOnlineJobSend(onlineJob job);
-  void slotOnlineJobSend(QList<onlineJob> jobs);
+    void slotOnlineJobSave(onlineJob job);
+    void slotOnlineJobSend(onlineJob job);
+    void slotOnlineJobSend(QList<onlineJob> jobs);
 
-  void slotOnlineJobLog();
-  void slotOnlineJobLog(const QStringList& onlineJobIds);
-  void slotNewCreditTransfer();
+    void slotOnlineJobLog();
+    void slotOnlineJobLog(const QStringList& onlineJobIds);
+    void slotNewCreditTransfer();
 };
 
 #endif // KONLINEJOBOUTBOXVIEW_H

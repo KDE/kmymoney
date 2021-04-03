@@ -18,24 +18,26 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class KSettingsRegister; }
+namespace Ui {
+class KSettingsRegister;
+}
 
 class KSettingsRegister : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KSettingsRegister)
+    Q_OBJECT
+    Q_DISABLE_COPY(KSettingsRegister)
 
 public:
-  explicit KSettingsRegister(QWidget* parent = nullptr);
-  ~KSettingsRegister();
+    explicit KSettingsRegister(QWidget* parent = nullptr);
+    ~KSettingsRegister();
 
 protected Q_SLOTS:
-  void slotLoadNormal(const QString& text);
-  void slotLoadReconcile(const QString& text);
-  void slotLoadSearch(const QString& text);
+    void slotLoadNormal(const QString& text);
+    void slotLoadReconcile(const QString& text);
+    void slotLoadSearch(const QString& text);
 
 private:
-  Ui::KSettingsRegister *ui;
+    Ui::KSettingsRegister *ui;
 
 };
 #endif

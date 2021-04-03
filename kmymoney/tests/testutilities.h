@@ -78,37 +78,37 @@ extern QString curBase;
 class TransactionHelper: public MyMoneyTransaction
 {
 private:
-  QString m_id;
+    QString m_id;
 public:
-  TransactionHelper(const QDate& _date, const QString& _action, MyMoneyMoney _value, const QString& _accountid, const QString& _categoryid, const QString& _currencyid = QString(), const QString& _payee = "Test Payee");
-  ~TransactionHelper();
-  void update();
+    TransactionHelper(const QDate& _date, const QString& _action, MyMoneyMoney _value, const QString& _accountid, const QString& _categoryid, const QString& _currencyid = QString(), const QString& _payee = "Test Payee");
+    ~TransactionHelper();
+    void update();
 protected:
-  TransactionHelper() {}
+    TransactionHelper() {}
 };
 
 class InvTransactionHelper: public TransactionHelper
 {
 public:
-  InvTransactionHelper(const QDate& _date, const QString& _action, MyMoneyMoney _shares, MyMoneyMoney _value, const QString& _stockaccountid, const QString& _transferid, const QString& _categoryid, MyMoneyMoney _fee = MyMoneyMoney());
-  void init(const QDate& _date, const QString& _action, MyMoneyMoney _shares, MyMoneyMoney _price, MyMoneyMoney _fee, const QString& _stockaccountid, const QString& _transferid, const QString& _categoryid);
+    InvTransactionHelper(const QDate& _date, const QString& _action, MyMoneyMoney _shares, MyMoneyMoney _value, const QString& _stockaccountid, const QString& _transferid, const QString& _categoryid, MyMoneyMoney _fee = MyMoneyMoney());
+    void init(const QDate& _date, const QString& _action, MyMoneyMoney _shares, MyMoneyMoney _price, MyMoneyMoney _fee, const QString& _stockaccountid, const QString& _transferid, const QString& _categoryid);
 };
 
 class BudgetEntryHelper
 {
 private:
-  QDate m_date;
-  QString m_categoryid;
-  MyMoneyMoney m_amount;
+    QDate m_date;
+    QString m_categoryid;
+    MyMoneyMoney m_amount;
 
 public:
-  BudgetEntryHelper() {}
-  BudgetEntryHelper(const QDate& _date, const QString& _categoryid, bool /* _applytosub */, const MyMoneyMoney& _amount): m_date(_date), m_categoryid(_categoryid), m_amount(_amount) {}
+    BudgetEntryHelper() {}
+    BudgetEntryHelper(const QDate& _date, const QString& _categoryid, bool /* _applytosub */, const MyMoneyMoney& _amount): m_date(_date), m_categoryid(_categoryid), m_amount(_amount) {}
 };
 
 class BudgetHelper: public QList<BudgetEntryHelper>
 {
-  MyMoneyMoney budgetAmount(const QDate& _date, const QString& _categoryid, bool& _applytosub);
+    MyMoneyMoney budgetAmount(const QDate& _date, const QString& _categoryid, bool& _applytosub);
 };
 
 extern QString makeBaseCurrency(const MyMoneySecurity& currency = MyMoneySecurity("EUR", "Euro", QChar(0x20ac)));

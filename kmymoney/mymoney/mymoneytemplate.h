@@ -32,12 +32,12 @@ class QUrl;
 
 struct KMM_MYMONEY_EXPORT MyMoneyTemplateLoadResult
 {
-  QString   errorMsg;
-  int       errorLine {-1};
-  int       errorColumn {-1};
+    QString   errorMsg;
+    int       errorLine {-1};
+    int       errorColumn {-1};
 
-  void setErrorMsg(const QString& msg);
-  bool isOK() const;
+    void setErrorMsg(const QString& msg);
+    bool isOK() const;
 };
 
 /**
@@ -49,51 +49,51 @@ struct KMM_MYMONEY_EXPORT MyMoneyTemplateLoadResult
 class MyMoneyTemplatePrivate;
 class KMM_MYMONEY_EXPORT MyMoneyTemplate : public MyMoneyObject
 {
-  Q_DECLARE_PRIVATE_D(MyMoneyObject::d_ptr, MyMoneyTemplate)
+    Q_DECLARE_PRIVATE_D(MyMoneyObject::d_ptr, MyMoneyTemplate)
 
 public:
-  MyMoneyTemplate();
-  explicit MyMoneyTemplate(const QString& id, const MyMoneyTemplate& other);
-  MyMoneyTemplate(const MyMoneyTemplate & other);
-  MyMoneyTemplate(MyMoneyTemplate && other);
-  MyMoneyTemplate & operator=(MyMoneyTemplate other);
-  friend void swap(MyMoneyTemplate& first, MyMoneyTemplate& second);
+    MyMoneyTemplate();
+    explicit MyMoneyTemplate(const QString& id, const MyMoneyTemplate& other);
+    MyMoneyTemplate(const MyMoneyTemplate & other);
+    MyMoneyTemplate(MyMoneyTemplate && other);
+    MyMoneyTemplate & operator=(MyMoneyTemplate other);
+    friend void swap(MyMoneyTemplate& first, MyMoneyTemplate& second);
 
-  ~MyMoneyTemplate() override;
+    ~MyMoneyTemplate() override;
 
-  const QString& title() const;
-  const QString& shortDescription() const;
-  const QString& longDescription() const;
-  const QString& locale() const;
-  const QUrl& source() const;
+    const QString& title() const;
+    const QString& shortDescription() const;
+    const QString& longDescription() const;
+    const QString& locale() const;
+    const QUrl& source() const;
 
-  void setTitle(const QString &s);
-  void setShortDescription(const QString &s);
-  void setLongDescription(const QString &s);
-  void setLocale(const QString& s);
-  void setSource(const QUrl& s);
+    void setTitle(const QString &s);
+    void setShortDescription(const QString &s);
+    void setLongDescription(const QString &s);
+    void setLocale(const QString& s);
+    void setSource(const QUrl& s);
 
-  MyMoneyTemplateLoadResult setAccountTree(QFile *file);
-  const QDomNode& accountTree() const;
+    MyMoneyTemplateLoadResult setAccountTree(QFile *file);
+    const QDomNode& accountTree() const;
 
-  /**
-   * reimplemented for internal reasons
-   */
-  virtual bool hasReferenceTo(const QString& id) const override;
+    /**
+     * reimplemented for internal reasons
+     */
+    virtual bool hasReferenceTo(const QString& id) const override;
 
-  /**
-   * reimplemented for internal reasons
-   */
-  virtual QSet<QString> referencedObjects() const override;
+    /**
+     * reimplemented for internal reasons
+     */
+    virtual QSet<QString> referencedObjects() const override;
 
 protected:
 #if 0
-  bool loadDescription();
-  bool createAccounts(MyMoneyAccount& parent, QDomNode account);
-  bool setFlags(MyMoneyAccount& acc, QDomNode flags);
-  bool saveToLocalFile(QSaveFile* qfile);
-  bool addAccountStructure(QDomElement& parent, const MyMoneyAccount& acc);
-  bool hierarchy(QMap<QString, QTreeWidgetItem*>& list, const QString& parent, QDomNode account);
+    bool loadDescription();
+    bool createAccounts(MyMoneyAccount& parent, QDomNode account);
+    bool setFlags(MyMoneyAccount& acc, QDomNode flags);
+    bool saveToLocalFile(QSaveFile* qfile);
+    bool addAccountStructure(QDomElement& parent, const MyMoneyAccount& acc);
+    bool hierarchy(QMap<QString, QTreeWidgetItem*>& list, const QString& parent, QDomNode account);
 #endif
 
 private:
@@ -101,19 +101,19 @@ private:
 
 inline void swap(MyMoneyTemplate& first, MyMoneyTemplate& second) // krazy:exclude=inline
 {
-  using std::swap;
-  swap(first.d_ptr, second.d_ptr);
+    using std::swap;
+    swap(first.d_ptr, second.d_ptr);
 }
 
 inline MyMoneyTemplate::MyMoneyTemplate(MyMoneyTemplate && other) : MyMoneyTemplate() // krazy:exclude=inline
 {
-  swap(*this, other);
+    swap(*this, other);
 }
 
 inline MyMoneyTemplate & MyMoneyTemplate::operator=(MyMoneyTemplate other) // krazy:exclude=inline
 {
-  swap(*this, other);
-  return *this;
+    swap(*this, other);
+    return *this;
 }
 
 /**

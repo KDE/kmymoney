@@ -19,28 +19,28 @@ class KWebView;
 
 class PluginSettingsWidget : public QWidget, public Ui::PluginSettingsDecl
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit PluginSettingsWidget(QWidget* parent = 0);
+    explicit PluginSettingsWidget(QWidget* parent = 0);
 
 public Q_SLOTS:
-  void urlSelected(const QUrl &url);
-  void returnPressed(const QString& url);
+    void urlSelected(const QUrl &url);
+    void returnPressed(const QString& url);
 
 private:
-  #ifdef ENABLE_WEBENGINE
-  QWebEngineView *m_checkTemplatePreviewHTMLPart;
-  #else
-  KWebView       *m_checkTemplatePreviewHTMLPart;
-  #endif
+#ifdef ENABLE_WEBENGINE
+    QWebEngineView *m_checkTemplatePreviewHTMLPart;
+#else
+    KWebView       *m_checkTemplatePreviewHTMLPart;
+#endif
 };
 
 class KCMCheckPrinting : public KCModule
 {
 public:
-  KCMCheckPrinting(QWidget* parent, const QVariantList& args);
-  ~KCMCheckPrinting();
+    KCMCheckPrinting(QWidget* parent, const QVariantList& args);
+    ~KCMCheckPrinting();
 };
 
 #endif

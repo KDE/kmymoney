@@ -20,7 +20,11 @@
 
 #include "kmymoneycompletion.h"
 
-namespace eMyMoney { namespace Account { enum class Type; } }
+namespace eMyMoney {
+namespace Account {
+enum class Type;
+}
+}
 
 class KMyMoneyAccountSelector;
 
@@ -29,24 +33,24 @@ class KMyMoneyAccountSelector;
   */
 class KMM_BASE_WIDGETS_EXPORT KMyMoneyAccountCompletion : public KMyMoneyCompletion
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyAccountCompletion)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyAccountCompletion)
 
 public:
 
-  explicit KMyMoneyAccountCompletion(QWidget* parent = nullptr);
-  ~KMyMoneyAccountCompletion() override;
+    explicit KMyMoneyAccountCompletion(QWidget* parent = nullptr);
+    ~KMyMoneyAccountCompletion() override;
 
-  QStringList accountList(const QList<eMyMoney::Account::Type>& list) const;
-  QStringList accountList() const;
+    QStringList accountList(const QList<eMyMoney::Account::Type>& list) const;
+    QStringList accountList() const;
 
-  /**
-    * reimplemented from KMyMoneyCompletion
-    */
-  KMyMoneyAccountSelector* selector() const;
+    /**
+      * reimplemented from KMyMoneyCompletion
+      */
+    KMyMoneyAccountSelector* selector() const;
 
 public Q_SLOTS:
-  void slotMakeCompletion(const QString& txt);
+    void slotMakeCompletion(const QString& txt);
 };
 
 #endif

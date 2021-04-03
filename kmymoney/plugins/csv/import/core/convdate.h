@@ -16,25 +16,25 @@ class KMM_CSVIMPORTERCORE_EXPORT ConvertDate
 {
 
 public:
-  ConvertDate();
-  ~ConvertDate();
+    ConvertDate();
+    ~ConvertDate();
 
-  /**
-  * This method is used to convert a QString date into QDate() format.
-  * If the  date is invalid, QDate() is returned.
-  */
-  QDate convertDate(const QString& txt);
+    /**
+    * This method is used to convert a QString date into QDate() format.
+    * If the  date is invalid, QDate() is returned.
+    */
+    QDate convertDate(const QString& txt);
 
-  /**
-  * This method converts the selected date setting into
-  * a QString date format string.
-  */
-  QString          stringFormat();
+    /**
+    * This method converts the selected date setting into
+    * a QString date format string.
+    */
+    QString          stringFormat();
 
-  void             setDateFormatIndex(const DateFormat _d);
+    void             setDateFormatIndex(const DateFormat _d);
 
 private:
-  DateFormat       m_dateFormatIndex;
+    DateFormat       m_dateFormatIndex;
 }
 ;
 #endif

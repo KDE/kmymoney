@@ -30,21 +30,21 @@ class QSqlResult;
 
 class KMMSqlQuery : public QSqlQuery
 {
-  static int queryId;
+    static int queryId;
 public:
-  explicit KMMSqlQuery (QSqlResult *r, char *file, int line);
-  explicit KMMSqlQuery (const QString& query = QString(), QSqlDatabase db = QSqlDatabase());
-  explicit KMMSqlQuery (QSqlDatabase db);
-  virtual ~KMMSqlQuery();
+    explicit KMMSqlQuery (QSqlResult *r, char *file, int line);
+    explicit KMMSqlQuery (const QString& query = QString(), QSqlDatabase db = QSqlDatabase());
+    explicit KMMSqlQuery (QSqlDatabase db);
+    virtual ~KMMSqlQuery();
 
-  bool exec(const QString &query);
-  bool exec();
-  void finish();
-  bool prepare(const QString& cmd);
+    bool exec(const QString &query);
+    bool exec();
+    void finish();
+    bool prepare(const QString& cmd);
 
 private:
-  int id;
-  QString cmd;
+    int id;
+    QString cmd;
 };
 
 #define QSqlQuery KMMSqlQuery

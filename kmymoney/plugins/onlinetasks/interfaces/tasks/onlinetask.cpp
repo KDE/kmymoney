@@ -10,5 +10,5 @@ onlineTask::onlineTask()
 
 onlineTask::onlineTask(const onlineTask &other)
 {
-  Q_UNUSED(other);
+    Q_UNUSED(other);
 }

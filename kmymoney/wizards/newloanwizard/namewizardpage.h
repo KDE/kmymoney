@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class NameWizardPage; }
+namespace Ui {
+class NameWizardPage;
+}
 
 /**
  * This class implements the Name page of the
@@ -26,23 +28,23 @@ namespace Ui { class NameWizardPage; }
 
 class NameWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit NameWizardPage(QWidget *parent = nullptr);
-  ~NameWizardPage();
+    explicit NameWizardPage(QWidget *parent = nullptr);
+    ~NameWizardPage();
 
-  /**
-   * Some things on this page depend on previous pages for correct
-   * initialization, so overload initializePage()
-   */
-  void initializePage() final override;
+    /**
+     * Some things on this page depend on previous pages for correct
+     * initialization, so overload initializePage()
+     */
+    void initializePage() final override;
 
-  /**
-   * Overload the isComplete function to control the Next button
-   */
-  bool isComplete() const final override;
+    /**
+     * Overload the isComplete function to control the Next button
+     */
+    bool isComplete() const final override;
 
-  Ui::NameWizardPage *ui;
+    Ui::NameWizardPage *ui;
 };
 
 #endif

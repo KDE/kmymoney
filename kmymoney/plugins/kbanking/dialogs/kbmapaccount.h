@@ -16,33 +16,33 @@ class KBankingExt;
 
 class KBMapAccount: public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  KBMapAccount(KBankingExt *kb,
-               const char *bankCode,
-               const char *accountId,
-               QWidget* parent = 0,
-               Qt::WindowFlags fl = 0);
-  ~KBMapAccount();
+    KBMapAccount(KBankingExt *kb,
+                 const char *bankCode,
+                 const char *accountId,
+                 QWidget* parent = 0,
+                 Qt::WindowFlags fl = 0);
+    ~KBMapAccount();
 
-  AB_ACCOUNT_SPEC *getAccount();
+    AB_ACCOUNT_SPEC *getAccount();
 
-  void accept() final override;
+    void accept() final override;
 
 protected Q_SLOTS:
-  void slotSelectionChanged();
-  void slotHelpClicked();
+    void slotSelectionChanged();
+    void slotHelpClicked();
 
 private:
-  /// \internal d-pointer class.
-  struct Private;
-  /// \internal d-pointer instance.
-  Private* const d;
-  /*
-    KMyMoneyBanking *_banking;
-    AB_ACCOUNT *_account;
-    KBAccountListView *_accountList;
-  */
+    /// \internal d-pointer class.
+    struct Private;
+    /// \internal d-pointer instance.
+    Private* const d;
+    /*
+      KMyMoneyBanking *_banking;
+      AB_ACCOUNT *_account;
+      KBAccountListView *_accountList;
+    */
 };
 
 

@@ -20,18 +20,18 @@ class KMyMoneyWizardPage;
 
 namespace NewUserWizard
 {
-  class Wizard;
+class Wizard;
 
-  /**
-  * Wizard page collecting information about the checking account
-  */
-  class AccountPagePrivate;
-  class AccountPage : public QWidget, public WizardPage<Wizard>
-  {
+/**
+* Wizard page collecting information about the checking account
+*/
+class AccountPagePrivate;
+class AccountPage : public QWidget, public WizardPage<Wizard>
+{
     Q_OBJECT
     Q_DISABLE_COPY(AccountPage)
 
-  public:
+public:
     explicit AccountPage(Wizard* parent);
     ~AccountPage() override;
 
@@ -41,11 +41,11 @@ namespace NewUserWizard
 
     void enterPage() override;
 
-  private:
+private:
     Q_DECLARE_PRIVATE_D(WizardPage<Wizard>::d_ptr, AccountPage)
     friend class Wizard;
     friend class CurrencyPage;
-  };
+};
 } // namespace
 
 #endif

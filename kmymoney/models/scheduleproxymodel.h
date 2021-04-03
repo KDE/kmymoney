@@ -35,26 +35,28 @@
 class ScheduleProxyModelPrivate;
 class KMM_MODELS_EXPORT ScheduleProxyModel : public QSortFilterProxyModel
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(ScheduleProxyModel)
+    Q_OBJECT
+    Q_DISABLE_COPY(ScheduleProxyModel)
 
 public:
-  explicit ScheduleProxyModel (QObject *parent = nullptr);
-  virtual ~ScheduleProxyModel ();
+    explicit ScheduleProxyModel (QObject *parent = nullptr);
+    virtual ~ScheduleProxyModel ();
 
-  void setHideFinishedSchedules(bool hide);
-
-protected:
-  virtual bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
-  virtual bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override;
+    void setHideFinishedSchedules(bool hide);
 
 protected:
-  QScopedPointer<ScheduleProxyModelPrivate> d;
+    virtual bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
+    virtual bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override;
+
+protected:
+    QScopedPointer<ScheduleProxyModelPrivate> d;
 
 private:
 #if QT_VERSION < QT_VERSION_CHECK(5,10,0)
-  // provide the interface for backward compatbility
-  void setRecursiveFilteringEnabled(bool enable) { Q_UNUSED(enable); }
+    // provide the interface for backward compatbility
+    void setRecursiveFilteringEnabled(bool enable) {
+        Q_UNUSED(enable);
+    }
 #endif
 
 };

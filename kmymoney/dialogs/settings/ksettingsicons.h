@@ -20,25 +20,25 @@
 class KSettingsIconsPrivate;
 class KSettingsIcons : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KSettingsIcons)
+    Q_OBJECT
+    Q_DISABLE_COPY(KSettingsIcons)
 
 public:
-  explicit KSettingsIcons(QWidget* parent = nullptr);
-  ~KSettingsIcons();
+    explicit KSettingsIcons(QWidget* parent = nullptr);
+    ~KSettingsIcons();
 
 public Q_SLOTS:
-  void slotResetTheme();
+    void slotResetTheme();
 
 protected Q_SLOTS:
-  void slotLoadTheme(const QString &theme);
-  void slotSetTheme(const int &theme);
+    void slotLoadTheme(const QString &theme);
+    void slotSetTheme(const int &theme);
 
 protected:
-  void loadList();
+    void loadList();
 private:
-  KSettingsIconsPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KSettingsIcons)
+    KSettingsIconsPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KSettingsIcons)
 };
 #endif
 

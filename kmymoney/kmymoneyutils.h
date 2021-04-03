@@ -56,359 +56,364 @@ class MyMoneyInstitution;
 class MyMoneyForecast;
 class SplitModel;
 
-namespace eMyMoney { namespace Schedule { enum class Occurrence;
-                                          enum class PaymentType;
-                                          enum class WeekendOption;
-                                          enum class Type; }
-                     namespace Split { enum class State;
-                                       enum class InvestmentTransactionType; }
-                   }
+namespace eMyMoney {
+namespace Schedule {
+enum class Occurrence;
+enum class PaymentType;
+enum class WeekendOption;
+enum class Type;
+}
+namespace Split {
+enum class State;
+enum class InvestmentTransactionType;
+}
+}
 
 class KMyMoneyUtils
 {
 public:
-  enum transactionTypeE {
-    /**
-      * Unknown transaction type (e.g. used for a transaction with only
-      * a single split)
-      */
-    Unknown,
+    enum transactionTypeE {
+        /**
+          * Unknown transaction type (e.g. used for a transaction with only
+          * a single split)
+          */
+        Unknown,
+
+        /**
+          * A 'normal' transaction is one that consists out two splits: one
+          * referencing an income/expense account, the other referencing
+          * an asset/liability account.
+          */
+        Normal,
+
+        /**
+          * A transfer denotes a transaction consisting of two splits.
+          * Both of the splits reference an asset/liability
+          * account.
+          */
+        Transfer,
+
+        /**
+          * Whenever a transaction consists of more than 2 splits,
+          * it is treated as 'split transaction'.
+          */
+        SplitTransaction,
+
+        /**
+          * This transaction denotes a specific transaction where
+          * a loan account is involved. Usually, a special dialog
+          * is used to modify this transaction.
+          */
+        LoanPayment,
+
+        /**
+          * This transaction denotes a specific transaction where
+          * an investment is involved. Usually, a special dialog
+          * is used to modify this transaction.
+          */
+        InvestmentTransaction,
+    };
+
+    static const int maxHomePageItems = 5;
+
+    KMyMoneyUtils();
+    ~KMyMoneyUtils();
 
     /**
-      * A 'normal' transaction is one that consists out two splits: one
-      * referencing an income/expense account, the other referencing
-      * an asset/liability account.
+      * This method is used to convert the occurrence type from its
+      * internal representation into a human readable format.
+      *
+      * @param occurrence numerical representation of the MyMoneySchedule
+      *                  occurrence type
+      *
+      * @return QString representing the human readable format translated according to the language catalog
+      *
+      * @sa MyMoneySchedule::occurrenceToString()
+      *
+      * @deprecated Use i18n(MyMoneySchedule::occurrenceToString(occurrence)) instead
       */
-    Normal,
+    static const QString occurrenceToString(const eMyMoney::Schedule::Occurrence occurrence);
 
     /**
-      * A transfer denotes a transaction consisting of two splits.
-      * Both of the splits reference an asset/liability
-      * account.
+      * This method is used to convert the payment type from its
+      * internal representation into a human readable format.
+      *
+      * @param paymentType numerical representation of the MyMoneySchedule
+      *                  payment type
+      *
+      * @return QString representing the human readable format translated according to the language catalog
+      *
+      * @sa MyMoneySchedule::paymentMethodToString()
       */
-    Transfer,
+    static const QString paymentMethodToString(eMyMoney::Schedule::PaymentType paymentType);
 
     /**
-      * Whenever a transaction consists of more than 2 splits,
-      * it is treated as 'split transaction'.
+      * This method is used to convert the schedule weekend option from its
+      * internal representation into a human readable format.
+      *
+      * @param weekendOption numerical representation of the MyMoneySchedule
+      *                  weekend option
+      *
+      * @return QString representing the human readable format translated according to the language catalog
+      *
+      * @sa MyMoneySchedule::weekendOptionToString()
       */
-    SplitTransaction,
+    static const QString weekendOptionToString(eMyMoney::Schedule::WeekendOption weekendOption);
 
     /**
-      * This transaction denotes a specific transaction where
-      * a loan account is involved. Usually, a special dialog
-      * is used to modify this transaction.
+      * This method is used to convert the schedule type from its
+      * internal representation into a human readable format.
+      *
+      * @param type numerical representation of the MyMoneySchedule
+      *                  schedule type
+      *
+      * @return QString representing the human readable format translated according to the language catalog
+      *
+      * @sa MyMoneySchedule::scheduleTypeToString()
       */
-    LoanPayment,
+    static const QString scheduleTypeToString(eMyMoney::Schedule::Type type);
 
     /**
-      * This transaction denotes a specific transaction where
-      * an investment is involved. Usually, a special dialog
-      * is used to modify this transaction.
+      * This method is used to convert a numeric index of an item
+      * represented on the home page into its string form.
+      *
+      * @param idx numeric index of item
+      *
+      * @return QString with text of this item
       */
-    InvestmentTransaction,
-  };
+    static const QString homePageItemToString(const int idx);
 
-  static const int maxHomePageItems = 5;
+    /**
+      * This method is used to convert the name of a home page item
+      * to its internal numerical representation
+      *
+      * @param txt QString reference of the items name
+      *
+      * @retval 0 @p txt is unknown
+      * @retval >0 numeric value for @p txt
+      */
+    static int stringToHomePageItem(const QString& txt);
 
-  KMyMoneyUtils();
-  ~KMyMoneyUtils();
+    /**
+      * Retrieve a KDE KGuiItem for the new schedule button.
+      *
+      * @return The KGuiItem that can be used to display the icon and text
+      */
+    static KGuiItem scheduleNewGuiItem();
 
-  /**
-    * This method is used to convert the occurrence type from its
-    * internal representation into a human readable format.
-    *
-    * @param occurrence numerical representation of the MyMoneySchedule
-    *                  occurrence type
-    *
-    * @return QString representing the human readable format translated according to the language catalog
-    *
-    * @sa MyMoneySchedule::occurrenceToString()
-    *
-    * @deprecated Use i18n(MyMoneySchedule::occurrenceToString(occurrence)) instead
+    /**
+      * Retrieve a KDE KGuiItem for the account filter button
+      *
+      * @return The KGuiItem that can be used to display the icon and text
+      */
+    static KGuiItem accountsFilterGuiItem();
+
+    /**
+      * This method adds the file extension passed as argument @p extension
+      * to the end of the file name passed as argument @p name if it is not present.
+      * If @p name contains an extension it will be removed.
+      *
+      * @param name filename to be checked
+      * @param extension extension to be added (w/o the dot)
+      *
+      * @retval true if @p name was changed
+      * @retval false if @p name remained unchanged
+      */
+    static bool appendCorrectFileExt(QString& name, const QString& extension);
+
+    /**
+      * Check that internal MyMoney engine constants use the same
+      * values as the KDE constants.
+      */
+    static void checkConstants();
+
+    static QString variableCSS();
+
+    /**
+      * This method searches a KDE specific resource and applies country and
+      * language settings during the search. Therefore, the parameter @p filename must contain
+      * the characters '%1' which gets replaced with the language/country values.
+      *
+      * The search is performed in the following order (stopped immediately if a file was found):
+      * - @c \%1 is replaced with <tt>_\<country\>.\<language\></tt>
+      * - @c \%1 is replaced with <tt>_\<language\></tt>
+      * - @c \%1 is replaced with <tt>_\<country\></tt>
+      * - @c \%1 is replaced with the empty string
+      *
+      * @c \<country\> and @c \<language\> denote the respective KDE settings.
+      *
+      * Example: The KDE settings for country is Spain (es) and language is set
+      * to Galician (gl). The code for looking up a file looks like this:
+      *
+      * @code
+      *
+      *  :
+      *  QString fname = KMyMoneyUtils::findResource("appdata", "html/home%1.html")
+      *  :
+      *
+      * @endcode
+      *
+      * The method calls KStandardDirs::findResource() with the following values for the
+      * parameter @p filename:
+      *
+      * - <tt>html/home_es.gl.html</tt>
+      * - <tt>html/home_gl.html</tt>
+      * - <tt>html/home_es.html</tt>
+      * - <tt>html/home.html</tt>
+      *
+      * @note See KStandardDirs::findResource() for details on the parameters
+      */
+    static QString findResource(QStandardPaths::StandardLocation type, const QString& filename);
+
+    /**
+      * This method returns the split referencing a stock account if
+      * one exists in the transaction passed as @p t. If none is present
+      * in @p t, an empty MyMoneySplit() object will be returned.
+      *
+      * @param t transaction to be checked for a stock account
+      * @return MyMoneySplit object referencing a stock account or an
+      *         empty MyMoneySplit object.
+      */
+    static const MyMoneySplit stockSplit(const MyMoneyTransaction& t);
+
+    /**
+      * This method analyses the splits of a transaction and returns
+      * the type of transaction. Possible values are defined by the
+      * KMyMoneyUtils::transactionTypeE enum.
+      *
+      * @param t const reference to the transaction
+      *
+      * @return KMyMoneyUtils::transactionTypeE value of the action
+      */
+    static transactionTypeE transactionType(const MyMoneyTransaction& t);
+
+    /**
+      * This method modifies a scheduled loan transaction such that all
+      * references to automatic calculated values are resolved to actual values.
+      *
+      * @param schedule const reference to the schedule the transaction is based on
+      * @param transaction reference to the transaction to be checked and modified
+      * @param balances QMap of (account-id,balance) pairs to be used as current balance
+      *                 for the calculation of interest. If map is empty, the engine
+      *                 will be interrogated for current balances.
+      */
+    static void calculateAutoLoan(const MyMoneySchedule& schedule, MyMoneyTransaction& transaction, const QMap<QString, MyMoneyMoney>& balances);
+
+    /**
+      * Returns the next check number for account @a acc. No check is performed, if the
+      * number is already in use.
+      */
+    static QString nextCheckNumber(const MyMoneyAccount& acc);
+
+    /**
+      * Returns the next check free number for account @a acc.
+      */
+    static QString nextFreeCheckNumber(const MyMoneyAccount& acc);
+
+
+    // static void setLastNumberUsed(const QString& num);
+
+    // static QString lastNumberUsed();
+
+    /**
+      * Returns previous number if offset is -1 or
+      * the following number if offset is 1.
+      */
+    static QString getAdjacentNumber(const QString& number, int offset = 1);
+
+
+    /**
+    * remove any non-numeric characters from check number
+    * to allow validity check
     */
-  static const QString occurrenceToString(const eMyMoney::Schedule::Occurrence occurrence);
+    static quint64 numericPart(const QString & num);
 
-  /**
-    * This method is used to convert the payment type from its
-    * internal representation into a human readable format.
-    *
-    * @param paymentType numerical representation of the MyMoneySchedule
-    *                  payment type
-    *
-    * @return QString representing the human readable format translated according to the language catalog
-    *
-    * @sa MyMoneySchedule::paymentMethodToString()
-    */
-  static const QString paymentMethodToString(eMyMoney::Schedule::PaymentType paymentType);
+    /**
+      * Returns the text representing the reconcile flag. If @a text is @p true
+      * then the full text will be returned otherwise a short form (usually one character).
+      */
+    static QString reconcileStateToString(eMyMoney::Split::State flag, bool text = false);
 
-  /**
-    * This method is used to convert the schedule weekend option from its
-    * internal representation into a human readable format.
-    *
-    * @param weekendOption numerical representation of the MyMoneySchedule
-    *                  weekend option
-    *
-    * @return QString representing the human readable format translated according to the language catalog
-    *
-    * @sa MyMoneySchedule::weekendOptionToString()
-    */
-  static const QString weekendOptionToString(eMyMoney::Schedule::WeekendOption weekendOption);
+    /**
+     * Returns the transaction for @a schedule. In case of a loan payment the
+     * transaction will be modified by calculateAutoLoan().
+     * The ID of the transaction as well as the entryDate will be reset.
+     *
+     * @returns adjusted transaction
+     */
+    static MyMoneyTransaction scheduledTransaction(const MyMoneySchedule& schedule);
 
-  /**
-    * This method is used to convert the schedule type from its
-    * internal representation into a human readable format.
-    *
-    * @param type numerical representation of the MyMoneySchedule
-    *                  schedule type
-    *
-    * @return QString representing the human readable format translated according to the language catalog
-    *
-    * @sa MyMoneySchedule::scheduleTypeToString()
-    */
-  static const QString scheduleTypeToString(eMyMoney::Schedule::Type type);
+    /**
+     * This method replaces the deprecated QApplication::mainWidget() from Qt 3.x.
+     * It assumes that there is only one KXmlGuiWindow in the application, and
+     * returns it.
+     *
+     * @return the first KXmlGuiWindow found in QApplication::topLevelWidgets()
+     */
+    static KXmlGuiWindow* mainWindow();
 
-  /**
-    * This method is used to convert a numeric index of an item
-    * represented on the home page into its string form.
-    *
-    * @param idx numeric index of item
-    *
-    * @return QString with text of this item
-    */
-  static const QString homePageItemToString(const int idx);
+    /**
+      * This method sets the button text and icons to the KDE standard ones
+      * for the QWizard passed as argument.
+      */
+    static void updateWizardButtons(QWizard *);
 
-  /**
-    * This method is used to convert the name of a home page item
-    * to its internal numerical representation
-    *
-    * @param txt QString reference of the items name
-    *
-    * @retval 0 @p txt is unknown
-    * @retval >0 numeric value for @p txt
-    */
-  static int stringToHomePageItem(const QString& txt);
+    static void dissectInvestmentTransaction(const QModelIndex &investSplitIdx, QModelIndex &assetAccountSplitIdx, SplitModel* feeSplitModel, SplitModel* interestSplitModel, MyMoneySecurity &security, MyMoneySecurity &currency, eMyMoney::Split::InvestmentTransactionType &transactionType);
+    static void processPriceList(const MyMoneyStatement& st);
 
-  /**
-    * Retrieve a KDE KGuiItem for the new schedule button.
-    *
-    * @return The KGuiItem that can be used to display the icon and text
-    */
-  static KGuiItem scheduleNewGuiItem();
+    /**
+      * This method deletes security and associated price list but asks beforehand.
+      */
+    static void deleteSecurity(const MyMoneySecurity &security, QWidget *parent = nullptr);
 
-  /**
-    * Retrieve a KDE KGuiItem for the account filter button
-    *
-    * @return The KGuiItem that can be used to display the icon and text
-    */
-  static KGuiItem accountsFilterGuiItem();
+    /**
+     * Check whether the url links to an existing file or not
+     * @returns whether the file exists or not
+     */
+    static bool fileExists(const QUrl &url);
 
-  /**
-    * This method adds the file extension passed as argument @p extension
-    * to the end of the file name passed as argument @p name if it is not present.
-    * If @p name contains an extension it will be removed.
-    *
-    * @param name filename to be checked
-    * @param extension extension to be added (w/o the dot)
-    *
-    * @retval true if @p name was changed
-    * @retval false if @p name remained unchanged
-    */
-  static bool appendCorrectFileExt(QString& name, const QString& extension);
+    static QString downloadFile(const QUrl &url);
 
-  /**
-    * Check that internal MyMoney engine constants use the same
-    * values as the KDE constants.
-    */
-  static void checkConstants();
+    static bool newPayee(const QString& newnameBase, QString& id);
 
-  static QString variableCSS();
+    static void newTag(const QString& newnameBase, QString& id);
 
-  /**
-    * This method searches a KDE specific resource and applies country and
-    * language settings during the search. Therefore, the parameter @p filename must contain
-    * the characters '%1' which gets replaced with the language/country values.
-    *
-    * The search is performed in the following order (stopped immediately if a file was found):
-    * - @c \%1 is replaced with <tt>_\<country\>.\<language\></tt>
-    * - @c \%1 is replaced with <tt>_\<language\></tt>
-    * - @c \%1 is replaced with <tt>_\<country\></tt>
-    * - @c \%1 is replaced with the empty string
-    *
-    * @c \<country\> and @c \<language\> denote the respective KDE settings.
-    *
-    * Example: The KDE settings for country is Spain (es) and language is set
-    * to Galician (gl). The code for looking up a file looks like this:
-    *
-    * @code
-    *
-    *  :
-    *  QString fname = KMyMoneyUtils::findResource("appdata", "html/home%1.html")
-    *  :
-    *
-    * @endcode
-    *
-    * The method calls KStandardDirs::findResource() with the following values for the
-    * parameter @p filename:
-    *
-    * - <tt>html/home_es.gl.html</tt>
-    * - <tt>html/home_gl.html</tt>
-    * - <tt>html/home_es.html</tt>
-    * - <tt>html/home.html</tt>
-    *
-    * @note See KStandardDirs::findResource() for details on the parameters
-    */
-  static QString findResource(QStandardPaths::StandardLocation type, const QString& filename);
+    /**
+      * Creates a new institution entry in the MyMoneyFile engine
+      *
+      * @param institution MyMoneyInstitution object containing the data of
+      *                    the institution to be created.
+      */
+    static void newInstitution(MyMoneyInstitution& institution);
 
-  /**
-    * This method returns the split referencing a stock account if
-    * one exists in the transaction passed as @p t. If none is present
-    * in @p t, an empty MyMoneySplit() object will be returned.
-    *
-    * @param t transaction to be checked for a stock account
-    * @return MyMoneySplit object referencing a stock account or an
-    *         empty MyMoneySplit object.
-    */
-  static const MyMoneySplit stockSplit(const MyMoneyTransaction& t);
+    static QDebug debug();
 
-  /**
-    * This method analyses the splits of a transaction and returns
-    * the type of transaction. Possible values are defined by the
-    * KMyMoneyUtils::transactionTypeE enum.
-    *
-    * @param t const reference to the transaction
-    *
-    * @return KMyMoneyUtils::transactionTypeE value of the action
-    */
-  static transactionTypeE transactionType(const MyMoneyTransaction& t);
+    static MyMoneyForecast forecast();
 
-  /**
-    * This method modifies a scheduled loan transaction such that all
-    * references to automatic calculated values are resolved to actual values.
-    *
-    * @param schedule const reference to the schedule the transaction is based on
-    * @param transaction reference to the transaction to be checked and modified
-    * @param balances QMap of (account-id,balance) pairs to be used as current balance
-    *                 for the calculation of interest. If map is empty, the engine
-    *                 will be interrogated for current balances.
-    */
-  static void calculateAutoLoan(const MyMoneySchedule& schedule, MyMoneyTransaction& transaction, const QMap<QString, MyMoneyMoney>& balances);
+    static bool canUpdateAllAccounts();
 
-  /**
-    * Returns the next check number for account @a acc. No check is performed, if the
-    * number is already in use.
-    */
-  static QString nextCheckNumber(const MyMoneyAccount& acc);
+    static void showStatementImportResult(const QStringList& resultMessages, uint statementCount);
 
-  /**
-    * Returns the next check free number for account @a acc.
-    */
-  static QString nextFreeCheckNumber(const MyMoneyAccount& acc);
-
-
-  // static void setLastNumberUsed(const QString& num);
-
-  // static QString lastNumberUsed();
-
-  /**
-    * Returns previous number if offset is -1 or
-    * the following number if offset is 1.
-    */
-  static QString getAdjacentNumber(const QString& number, int offset = 1);
-
-
-  /**
-  * remove any non-numeric characters from check number
-  * to allow validity check
-  */
-  static quint64 numericPart(const QString & num);
-
-  /**
-    * Returns the text representing the reconcile flag. If @a text is @p true
-    * then the full text will be returned otherwise a short form (usually one character).
-    */
-  static QString reconcileStateToString(eMyMoney::Split::State flag, bool text = false);
-
-  /**
-   * Returns the transaction for @a schedule. In case of a loan payment the
-   * transaction will be modified by calculateAutoLoan().
-   * The ID of the transaction as well as the entryDate will be reset.
-   *
-   * @returns adjusted transaction
-   */
-  static MyMoneyTransaction scheduledTransaction(const MyMoneySchedule& schedule);
-
-  /**
-   * This method replaces the deprecated QApplication::mainWidget() from Qt 3.x.
-   * It assumes that there is only one KXmlGuiWindow in the application, and
-   * returns it.
-   *
-   * @return the first KXmlGuiWindow found in QApplication::topLevelWidgets()
-   */
-  static KXmlGuiWindow* mainWindow();
-
-  /**
-    * This method sets the button text and icons to the KDE standard ones
-    * for the QWizard passed as argument.
-    */
-  static void updateWizardButtons(QWizard *);
-
-  static void dissectInvestmentTransaction(const QModelIndex &investSplitIdx, QModelIndex &assetAccountSplitIdx, SplitModel* feeSplitModel, SplitModel* interestSplitModel, MyMoneySecurity &security, MyMoneySecurity &currency, eMyMoney::Split::InvestmentTransactionType &transactionType);
-  static void processPriceList(const MyMoneyStatement& st);
-
-  /**
-    * This method deletes security and associated price list but asks beforehand.
-    */
-  static void deleteSecurity(const MyMoneySecurity &security, QWidget *parent = nullptr);
-
-  /**
-   * Check whether the url links to an existing file or not
-   * @returns whether the file exists or not
-   */
-  static bool fileExists(const QUrl &url);
-
-  static QString downloadFile(const QUrl &url);
-
-  static bool newPayee(const QString& newnameBase, QString& id);
-
-  static void newTag(const QString& newnameBase, QString& id);
-
-  /**
-    * Creates a new institution entry in the MyMoneyFile engine
-    *
-    * @param institution MyMoneyInstitution object containing the data of
-    *                    the institution to be created.
-    */
-  static void newInstitution(MyMoneyInstitution& institution);
-
-  static QDebug debug();
-
-  static MyMoneyForecast forecast();
-
-  static bool canUpdateAllAccounts();
-
-  static void showStatementImportResult(const QStringList& resultMessages, uint statementCount);
-
-  /**
-    * This method returns a double converted into a QString
-    * after removing any group separators, trailing zeros,
-    * and decimal separators.
-    *
-    * @param val reference to a qreal value to be converted
-    * @param loc reference to a Qlocale converter
-    * @param f format specifier:
-    *          e - format as [-]9.9e[+|-]999
-    *          E - format as [-]9.9E[+|-]999
-    *          f - format as [-]9.9
-    *          g - use e or f format, whichever is the most concise
-    *          G - use E or f format, whichever is the most concise
-    * @param prec precision representing the number of digits
-    *             after the decimal point ('e', 'E' and 'f' formats)
-    *             or the maximum number of significant digits
-    *             (trailing zeroes are omitted) ('g' and 'G' formats)
-    * @return QString object containing the converted value
-    */
-  static QString normalizeNumericString(const qreal& val, const QLocale& loc, const char f = 'g', const int prec = 6);
+    /**
+      * This method returns a double converted into a QString
+      * after removing any group separators, trailing zeros,
+      * and decimal separators.
+      *
+      * @param val reference to a qreal value to be converted
+      * @param loc reference to a Qlocale converter
+      * @param f format specifier:
+      *          e - format as [-]9.9e[+|-]999
+      *          E - format as [-]9.9E[+|-]999
+      *          f - format as [-]9.9
+      *          g - use e or f format, whichever is the most concise
+      *          G - use E or f format, whichever is the most concise
+      * @param prec precision representing the number of digits
+      *             after the decimal point ('e', 'E' and 'f' formats)
+      *             or the maximum number of significant digits
+      *             (trailing zeroes are omitted) ('g' and 'G' formats)
+      * @return QString object containing the converted value
+      */
+    static QString normalizeNumericString(const qreal& val, const QLocale& loc, const char f = 'g', const int prec = 6);
 };
 
 #endif

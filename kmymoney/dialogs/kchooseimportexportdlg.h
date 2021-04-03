@@ -28,20 +28,20 @@
 class KChooseImportExportDlgPrivate;
 class KMM_BASE_DIALOGS_EXPORT KChooseImportExportDlg : public QDialog
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KChooseImportExportDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(KChooseImportExportDlg)
 
 public:
-  explicit KChooseImportExportDlg(int type, QWidget *parent = nullptr);
-  ~KChooseImportExportDlg();
-  QString importExportType() const;
+    explicit KChooseImportExportDlg(int type, QWidget *parent = nullptr);
+    ~KChooseImportExportDlg();
+    QString importExportType() const;
 
 protected Q_SLOTS:
-  void slotTypeActivated(const QString& text);
+    void slotTypeActivated(const QString& text);
 
 private:
-  KChooseImportExportDlgPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KChooseImportExportDlg)
+    KChooseImportExportDlgPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KChooseImportExportDlg)
 };
 
 #endif

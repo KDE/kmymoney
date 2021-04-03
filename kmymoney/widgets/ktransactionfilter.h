@@ -34,56 +34,56 @@ class DateRangeDlg;
 class KTransactionFilterPrivate;
 class KMM_WIDGETS_EXPORT KTransactionFilter : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KTransactionFilter)
+    Q_OBJECT
+    Q_DISABLE_COPY(KTransactionFilter)
 
 public:
-  /**
-   @param withEquityAccounts set to false to hide equity accounts in account page
-  */
-  explicit KTransactionFilter(QWidget *parent = nullptr, bool withEquityAccounts = false, bool withInvestments = false, bool withDataTab = true);
-  ~KTransactionFilter();
-
-  MyMoneyTransactionFilter setupFilter();
-  void resetFilter(MyMoneyReport& rep);
-  KMyMoneyAccountSelector* categoriesView();
-  DateRangeDlg* dateRange();
-
-  /**
-    * This slot opens the detailed help page in khelpcenter. The
-    * anchor for the information is taken from m_helpAnchor.
+    /**
+     @param withEquityAccounts set to false to hide equity accounts in account page
     */
-  void slotShowHelp();
-  void slotReset();
+    explicit KTransactionFilter(QWidget *parent = nullptr, bool withEquityAccounts = false, bool withInvestments = false, bool withDataTab = true);
+    ~KTransactionFilter();
+
+    MyMoneyTransactionFilter setupFilter();
+    void resetFilter(MyMoneyReport& rep);
+    KMyMoneyAccountSelector* categoriesView();
+    DateRangeDlg* dateRange();
+
+    /**
+      * This slot opens the detailed help page in khelpcenter. The
+      * anchor for the information is taken from m_helpAnchor.
+      */
+    void slotShowHelp();
+    void slotReset();
 
 private Q_SLOTS:
-  void slotUpdateSelections();
+    void slotUpdateSelections();
 
-  void slotAmountSelected();
-  void slotAmountRangeSelected();
+    void slotAmountSelected();
+    void slotAmountRangeSelected();
 
-  void slotSelectAllPayees();
-  void slotDeselectAllPayees();
+    void slotSelectAllPayees();
+    void slotDeselectAllPayees();
 
-  void slotSelectAllTags();
-  void slotDeselectAllTags();
+    void slotSelectAllTags();
+    void slotDeselectAllTags();
 
-  void slotNrSelected();
-  void slotNrRangeSelected();
+    void slotNrSelected();
+    void slotNrRangeSelected();
 
 Q_SIGNALS:
 
-  /**
-    * This signal is sent out when a selection has been made. It is
-    * used to control the state of the Search button.
-    * The Search button is only active when a selection has been made
-    * (i.e. notEmpty == true)
-    */
-  void selectionNotEmpty(bool);
+    /**
+      * This signal is sent out when a selection has been made. It is
+      * used to control the state of the Search button.
+      * The Search button is only active when a selection has been made
+      * (i.e. notEmpty == true)
+      */
+    void selectionNotEmpty(bool);
 
 private:
-  Q_DECLARE_PRIVATE(KTransactionFilter)
-  KTransactionFilterPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KTransactionFilter)
+    KTransactionFilterPrivate * const d_ptr;
 };
 
 #endif

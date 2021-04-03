@@ -11,13 +11,13 @@ class QString;
 class KMMSchedulesToiCalendar
 {
 public:
-  KMMSchedulesToiCalendar();
-  ~KMMSchedulesToiCalendar();
-  void exportToFile(const QString& file, bool settingsChaged = false);
+    KMMSchedulesToiCalendar();
+    ~KMMSchedulesToiCalendar();
+    void exportToFile(const QString& file, bool settingsChaged = false);
 
 private:
-  struct Private;
-  Private *d;
+    struct Private;
+    Private *d;
 };
 
 #endif // SCHEDULESTOICALENDAR_H

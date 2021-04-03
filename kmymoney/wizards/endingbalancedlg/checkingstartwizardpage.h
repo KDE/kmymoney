@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class CheckingStartWizardPage; }
+namespace Ui {
+class CheckingStartWizardPage;
+}
 
 /**
  * This class implements the CheckingStart page of the
@@ -26,15 +28,15 @@ namespace Ui { class CheckingStartWizardPage; }
 
 class CheckingStartWizardPage : public QWizardPage
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(CheckingStartWizardPage)
+    Q_OBJECT
+    Q_DISABLE_COPY(CheckingStartWizardPage)
 
 public:
-  explicit CheckingStartWizardPage(QWidget *parent = nullptr);
-  ~CheckingStartWizardPage();
+    explicit CheckingStartWizardPage(QWidget *parent = nullptr);
+    ~CheckingStartWizardPage();
 
 private:
-  Ui::CheckingStartWizardPage *ui;
+    Ui::CheckingStartWizardPage *ui;
 };
 
 #endif

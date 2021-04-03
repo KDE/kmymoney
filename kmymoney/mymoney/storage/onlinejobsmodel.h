@@ -26,34 +26,34 @@ class QUndoStack;
   */
 class KMM_MYMONEY_EXPORT OnlineJobsModel : public MyMoneyModel<onlineJob>
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  enum Columns {
-    AccountName,
-    Action,
-    Destination,
-    Value,
-    // insert new columns above this line
-    MaxColumns,
-  };
+    enum Columns {
+        AccountName,
+        Action,
+        Destination,
+        Value,
+        // insert new columns above this line
+        MaxColumns,
+    };
 
-  explicit OnlineJobsModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
-  virtual ~OnlineJobsModel();
+    explicit OnlineJobsModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
+    virtual ~OnlineJobsModel();
 
-  static const int ID_SIZE = 6;
+    static const int ID_SIZE = 6;
 
-  int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
-  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
-  QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;
+    int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
+    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;
 
-  bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
+    bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
 
 public Q_SLOTS:
 
 private:
-  struct Private;
-  QScopedPointer<Private> d;
+    struct Private;
+    QScopedPointer<Private> d;
 };
 
 #endif // ONLINEJOBSMODEL_H

@@ -18,19 +18,21 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class KSettingsFonts; }
+namespace Ui {
+class KSettingsFonts;
+}
 
 class KSettingsFonts : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KSettingsFonts)
+    Q_OBJECT
+    Q_DISABLE_COPY(KSettingsFonts)
 
 public:
-  explicit KSettingsFonts(QWidget* parent = nullptr);
-  ~KSettingsFonts();
+    explicit KSettingsFonts(QWidget* parent = nullptr);
+    ~KSettingsFonts();
 
 private:
-  Ui::KSettingsFonts *ui;
+    Ui::KSettingsFonts *ui;
 };
 #endif
 

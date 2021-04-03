@@ -54,16 +54,16 @@ class KMM_MYMONEY_EXPORT MyMoneyException final : public std::runtime_error
 #endif
 {
 public:
-/**
-  * The constructor to create a new MyMoneyException object.
-  *
-  * @param exceptionMessage reference to const char * containing the message
-  *
-  * An easier way to use this constructor is to use the macro
-  * MYMONEYEXCEPTION(text) instead. It automatically assigns the file
-  * and line parameter to the correct values.
-  */
-  explicit MyMoneyException(const char *exceptionMessage) : std::runtime_error(exceptionMessage) {}  // krazy:exclude=inline
+    /**
+      * The constructor to create a new MyMoneyException object.
+      *
+      * @param exceptionMessage reference to const char * containing the message
+      *
+      * An easier way to use this constructor is to use the macro
+      * MYMONEYEXCEPTION(text) instead. It automatically assigns the file
+      * and line parameter to the correct values.
+      */
+    explicit MyMoneyException(const char *exceptionMessage) : std::runtime_error(exceptionMessage) {}  // krazy:exclude=inline
 };
 
 #endif

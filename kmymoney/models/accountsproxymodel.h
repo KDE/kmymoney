@@ -51,81 +51,89 @@
   *
   */
 
-namespace eMyMoney { namespace Account {enum class Type;} }
-namespace eAccountsModel { enum class Column; }
+namespace eMyMoney {
+namespace Account {
+enum class Type;
+}
+}
+namespace eAccountsModel {
+enum class Column;
+}
 
 class AccountsProxyModelPrivate;
 class KMM_MODELS_EXPORT AccountsProxyModel : public QSortFilterProxyModel
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(AccountsProxyModel)
+    Q_OBJECT
+    Q_DISABLE_COPY(AccountsProxyModel)
 
 public:
-  explicit AccountsProxyModel(QObject *parent = nullptr);
-  virtual ~AccountsProxyModel();
+    explicit AccountsProxyModel(QObject *parent = nullptr);
+    virtual ~AccountsProxyModel();
 
-  void addAccountType(eMyMoney::Account::Type type);
-  void addAccountGroup(const QVector<eMyMoney::Account::Type> &groups);
-  void removeAccountType(eMyMoney::Account::Type type);
+    void addAccountType(eMyMoney::Account::Type type);
+    void addAccountGroup(const QVector<eMyMoney::Account::Type> &groups);
+    void removeAccountType(eMyMoney::Account::Type type);
 
-  void clear();
+    void clear();
 
-  void setHideClosedAccounts(bool hideClosedAccounts);
-  bool hideClosedAccounts() const;
+    void setHideClosedAccounts(bool hideClosedAccounts);
+    bool hideClosedAccounts() const;
 
-  void setHideEquityAccounts(bool hideEquityAccounts);
-  bool hideEquityAccounts() const;
+    void setHideEquityAccounts(bool hideEquityAccounts);
+    bool hideEquityAccounts() const;
 
-  void setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncomeExpenseAccounts);
-  bool hideUnusedIncomeExpenseAccounts() const;
+    void setHideUnusedIncomeExpenseAccounts(bool hideUnusedIncomeExpenseAccounts);
+    bool hideUnusedIncomeExpenseAccounts() const;
 
-  void setHideFavoriteAccounts(bool hideFavoriteAccounts);
-  bool hideFavoriteAccounts() const;
+    void setHideFavoriteAccounts(bool hideFavoriteAccounts);
+    bool hideFavoriteAccounts() const;
 
-  void setHideAllEntries(bool hideAllEntries);
-  bool hideAllEntries() const;
+    void setHideAllEntries(bool hideAllEntries);
+    bool hideAllEntries() const;
 
-  int visibleItems(bool includeBaseAccounts = false) const;
+    int visibleItems(bool includeBaseAccounts = false) const;
 
-  void setNotSelectable(const QString& accountId);
+    void setNotSelectable(const QString& accountId);
 
-  Qt::ItemFlags flags(const QModelIndex &index) const override;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
 
-  /**
-   * This is a convenience method which returns a prefilled vector
-   * to be used with accAccountGroup() for asset, liability and equity
-   * accounts.
-   */
-  static QVector<eMyMoney::Account::Type> assetLiabilityEquity();
+    /**
+     * This is a convenience method which returns a prefilled vector
+     * to be used with accAccountGroup() for asset, liability and equity
+     * accounts.
+     */
+    static QVector<eMyMoney::Account::Type> assetLiabilityEquity();
 
-  /**
-   * This is a convenience method which returns a prefilled vector
-   * to be used with accAccountGroup() for income and expense
-   * accounts.
-   */
-  static QVector<eMyMoney::Account::Type> incomeExpense();
+    /**
+     * This is a convenience method which returns a prefilled vector
+     * to be used with accAccountGroup() for income and expense
+     * accounts.
+     */
+    static QVector<eMyMoney::Account::Type> incomeExpense();
 
 protected:
-  const QScopedPointer<AccountsProxyModelPrivate> d_ptr;
-  AccountsProxyModel(AccountsProxyModelPrivate &dd, QObject *parent);
+    const QScopedPointer<AccountsProxyModelPrivate> d_ptr;
+    AccountsProxyModel(AccountsProxyModelPrivate &dd, QObject *parent);
 
-  bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
-  bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
-  bool acceptSourceItem(const QModelIndex &source) const;
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
+    bool acceptSourceItem(const QModelIndex &source) const;
 
-  bool filterAcceptsRowOrChildRows(int source_row, const QModelIndex &source_parent) const;
+    bool filterAcceptsRowOrChildRows(int source_row, const QModelIndex &source_parent) const;
 
-  int visibleItems(const QModelIndex& index) const;
+    int visibleItems(const QModelIndex& index) const;
 
 Q_SIGNALS:
-  void unusedIncomeExpenseAccountHidden() const;
+    void unusedIncomeExpenseAccountHidden() const;
 
 private:
-  Q_DECLARE_PRIVATE(AccountsProxyModel)
+    Q_DECLARE_PRIVATE(AccountsProxyModel)
 
 #if QT_VERSION < QT_VERSION_CHECK(5,10,0)
-  // provide the interface for backward compatbility
-  void setRecursiveFilteringEnabled(bool enable) { Q_UNUSED(enable) }
+    // provide the interface for backward compatbility
+    void setRecursiveFilteringEnabled(bool enable) {
+        Q_UNUSED(enable)
+    }
 #endif
 
 };
@@ -150,42 +158,42 @@ template <class baseProxyModel>
 class AccountNamesFilterProxyModelTpl : public baseProxyModel
 {
 public:
-  explicit AccountNamesFilterProxyModelTpl(QObject *parent = 0)
-    : baseProxyModel(parent)
-  {}
+    explicit AccountNamesFilterProxyModelTpl(QObject *parent = 0)
+        : baseProxyModel(parent)
+    {}
 
-  /**
-   * Top items are not selectable because they are not real accounts but are only used for grouping.
-   */
-  virtual Qt::ItemFlags flags(const QModelIndex &idx) const override
-  {
-    if (!idx.parent().isValid())
-      return baseProxyModel::flags(idx) & ~Qt::ItemIsSelectable;
-    return baseProxyModel::flags(idx);
-  }
-
-  /**
-   * The Qt::EditRole returns the full account name including parent account name
-   */
-  virtual QVariant data(const QModelIndex& idx, int role) const override
-  {
-    if (role == Qt::EditRole) {
-      return baseProxyModel::data(idx, eMyMoney::Model::AccountFullNameRole);
+    /**
+     * Top items are not selectable because they are not real accounts but are only used for grouping.
+     */
+    virtual Qt::ItemFlags flags(const QModelIndex &idx) const override
+    {
+        if (!idx.parent().isValid())
+            return baseProxyModel::flags(idx) & ~Qt::ItemIsSelectable;
+        return baseProxyModel::flags(idx);
     }
-    return baseProxyModel::data(idx, role);
-  }
+
+    /**
+     * The Qt::EditRole returns the full account name including parent account name
+     */
+    virtual QVariant data(const QModelIndex& idx, int role) const override
+    {
+        if (role == Qt::EditRole) {
+            return baseProxyModel::data(idx, eMyMoney::Model::AccountFullNameRole);
+        }
+        return baseProxyModel::data(idx, role);
+    }
 
 protected:
-  /**
-   * Filter all but the first column.
-   */
-  bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override
-  {
-    Q_UNUSED(source_parent)
-    if (source_column == 0)
-      return true;
-    return false;
-  }
+    /**
+     * Filter all but the first column.
+     */
+    bool filterAcceptsColumn(int source_column, const QModelIndex &source_parent) const override
+    {
+        Q_UNUSED(source_parent)
+        if (source_column == 0)
+            return true;
+        return false;
+    }
 };
 
 /**
@@ -204,10 +212,10 @@ protected:
  */
 class KMM_MODELS_EXPORT AccountNamesFilterProxyModel : public AccountNamesFilterProxyModelTpl<AccountsProxyModel>
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit AccountNamesFilterProxyModel(QObject* parent = 0)
-  : AccountNamesFilterProxyModelTpl< AccountsProxyModel >(parent) {}
+    explicit AccountNamesFilterProxyModel(QObject* parent = 0)
+        : AccountNamesFilterProxyModelTpl< AccountsProxyModel >(parent) {}
 };
 
 

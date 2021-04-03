@@ -10,31 +10,31 @@
 
 class MyMoneyStorageNamesTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 private Q_SLOTS:
-  void keyValuePairElementNames();
-  void keyValuePairAttributeNames();
-  void transactionElementNames();
-  void transactionAttributeNames();
-  void splitElementNames();
-  void splitAttributeNames();
-  void accountElementNames();
-  void accountAttributeNames();
-  void payeeElementNames();
-  void payeeAttributeNames();
-  void tagAttributeNames();
-  void securityAttributeNames();
-  void institutionElementNames();
-  void institutionAttributeNames();
-  void reportElementNames();
-  void reportAttributeNames();
-  void budgetElementNames();
-  void budgetAttributeNames();
-  void scheduleElementNames();
-  void scheduleAttributeNames();
-  void onlineJobElementNames();
-  void onlineJobAttributeNames();
+    void keyValuePairElementNames();
+    void keyValuePairAttributeNames();
+    void transactionElementNames();
+    void transactionAttributeNames();
+    void splitElementNames();
+    void splitAttributeNames();
+    void accountElementNames();
+    void accountAttributeNames();
+    void payeeElementNames();
+    void payeeAttributeNames();
+    void tagAttributeNames();
+    void securityAttributeNames();
+    void institutionElementNames();
+    void institutionAttributeNames();
+    void reportElementNames();
+    void reportAttributeNames();
+    void budgetElementNames();
+    void budgetAttributeNames();
+    void scheduleElementNames();
+    void scheduleAttributeNames();
+    void onlineJobElementNames();
+    void onlineJobAttributeNames();
 
 };
 

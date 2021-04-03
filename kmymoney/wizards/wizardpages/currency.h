@@ -17,7 +17,9 @@
 class QTreeWidgetItem;
 class MyMoneySecurity;
 
-namespace Ui { class Currency; }
+namespace Ui {
+class Currency;
+}
 
 /**
   * @author Thomas Baumgart
@@ -25,18 +27,18 @@ namespace Ui { class Currency; }
 
 class Currency : public QWidget
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(Currency)
+    Q_OBJECT
+    Q_DISABLE_COPY(Currency)
 
 public:
-  explicit Currency(QWidget *parent = nullptr);
-  virtual ~Currency();
+    explicit Currency(QWidget *parent = nullptr);
+    virtual ~Currency();
 
-  QTreeWidgetItem* insertCurrency(const MyMoneySecurity& sec);
-  void selectCurrency(const MyMoneySecurity& sec);
-  QString selectedCurrency() const;
+    QTreeWidgetItem* insertCurrency(const MyMoneySecurity& sec);
+    void selectCurrency(const MyMoneySecurity& sec);
+    QString selectedCurrency() const;
 
-  Ui::Currency *ui;
+    Ui::Currency *ui;
 };
 
 #endif

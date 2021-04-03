@@ -26,11 +26,11 @@ typedef  void (*KMyMoneyAppCallback)(int, int, const QString &);
 
 namespace KMyMoneyPlugin
 {
-  class KMM_PLUGIN_EXPORT AppInterface : public QObject
-  {
+class KMM_PLUGIN_EXPORT AppInterface : public QObject
+{
     Q_OBJECT
 
-  public:
+public:
     explicit AppInterface(QObject* parent, const char* name = 0);
     virtual ~AppInterface();
 
@@ -54,9 +54,9 @@ namespace KMyMoneyPlugin
     virtual QString readLastUsedDir() const = 0;
     virtual void consistencyCheck(bool alwaysDisplayResult) = 0;
 
-   Q_SIGNALS:
+Q_SIGNALS:
     void kmmFilePlugin(unsigned int);
-  };
+};
 
 }
 

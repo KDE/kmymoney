@@ -30,13 +30,13 @@
 class IonlineTaskSettings
 {
 public:
-  typedef QSharedPointer<IonlineTaskSettings> ptr;
+    typedef QSharedPointer<IonlineTaskSettings> ptr;
 
-  /**
-   * Ensure this class to be polymorph
-   * Make gcc happy and prevent a warning
-   */
-  virtual ~IonlineTaskSettings() {}
+    /**
+     * Ensure this class to be polymorph
+     * Make gcc happy and prevent a warning
+     */
+    virtual ~IonlineTaskSettings() {}
 };
 
 Q_DECLARE_INTERFACE(IonlineTaskSettings, "org.kmymoney.onlinetask.settings")

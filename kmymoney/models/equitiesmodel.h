@@ -1,6 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
-	SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -23,29 +23,29 @@
 class EquitiesModelPrivate;
 class KMM_MODELS_EXPORT EquitiesModel : public KExtraColumnsProxyModel
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  enum Column {
-    Symbol = 0,
-    Quantity,
-    Price,
-    Value,
-  };
+    enum Column {
+        Symbol = 0,
+        Quantity,
+        Price,
+        Value,
+    };
 
-  EquitiesModel(QObject *parent = nullptr);
-  ~EquitiesModel();
+    EquitiesModel(QObject *parent = nullptr);
+    ~EquitiesModel();
 
-  QVariant extraColumnData(const QModelIndex &parent, int row, int extraColumn, int role = Qt::DisplayRole) const override;
+    QVariant extraColumnData(const QModelIndex &parent, int row, int extraColumn, int role = Qt::DisplayRole) const override;
 
 public Q_SLOTS:
 
 private:
-  void init();
-  void load();
+    void init();
+    void load();
 
 private:
-  EquitiesModelPrivate* d_ptr;
-  Q_DECLARE_PRIVATE(EquitiesModel);
+    EquitiesModelPrivate* d_ptr;
+    Q_DECLARE_PRIVATE(EquitiesModel);
 };
 
 #endif // EQUITIESMODEL_H

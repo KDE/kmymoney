@@ -12,16 +12,16 @@
 class MyMoneyMoneyToWordsConverter
 {
 private:
-  QString convertTreeDigitGroup(int threeDigitNumber);
+    QString convertTreeDigitGroup(int threeDigitNumber);
 
 public:
-  MyMoneyMoneyToWordsConverter();
-  QString convert(const MyMoneyMoney & money, signed64 denom = 100);
+    MyMoneyMoneyToWordsConverter();
+    QString convert(const MyMoneyMoney & money, signed64 denom = 100);
 
 private:
-  QStringList m_smallNumbers;
-  QStringList m_tens;
-  QStringList m_scaleNumbers;
+    QStringList m_smallNumbers;
+    QStringList m_tens;
+    QStringList m_scaleNumbers;
 };
 
 #endif // NUMBERTOWORDS_H

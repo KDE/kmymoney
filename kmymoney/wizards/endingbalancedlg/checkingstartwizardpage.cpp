@@ -17,15 +17,15 @@
 #include "ui_checkingstartwizardpage.h"
 
 CheckingStartWizardPage::CheckingStartWizardPage(QWidget *parent) :
-  QWizardPage(parent),
-  ui(new Ui::CheckingStartWizardPage)
+    QWizardPage(parent),
+    ui(new Ui::CheckingStartWizardPage)
 {
-  ui->setupUi(this);
-  // Register the fields with the QWizard and connect the
-  // appropriate signals to update the "Next" button correctly
+    ui->setupUi(this);
+    // Register the fields with the QWizard and connect the
+    // appropriate signals to update the "Next" button correctly
 }
 
 CheckingStartWizardPage::~CheckingStartWizardPage()
 {
-  delete ui;
+    delete ui;
 }

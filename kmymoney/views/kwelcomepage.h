@@ -28,18 +28,18 @@ class KWelcomePage
 {
 public:
 
-  KWelcomePage();
-  ~KWelcomePage();
+    KWelcomePage();
+    ~KWelcomePage();
 
-  static const QString welcomePage();
+    static const QString welcomePage();
 
-  static const QString whatsNewPage();
+    static const QString whatsNewPage();
 
 protected:
 
-  static const QStringList featuresList();
-  static bool isGroupHeader(const QString& item);
-  static bool isGroupItem(const QString& item);
+    static const QStringList featuresList();
+    static bool isGroupHeader(const QString& item);
+    static bool isGroupItem(const QString& item);
 };
 
 #endif

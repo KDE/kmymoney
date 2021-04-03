@@ -18,13 +18,13 @@
 #include "ui_ksettingsforecast.h"
 
 KSettingsForecast::KSettingsForecast(QWidget* parent) :
-  QWidget(parent),
-  ui(new Ui::KSettingsForecast)
+    QWidget(parent),
+    ui(new Ui::KSettingsForecast)
 {
-  ui->setupUi(this);
+    ui->setupUi(this);
 }
 
 KSettingsForecast::~KSettingsForecast()
 {
-  delete ui;
+    delete ui;
 }

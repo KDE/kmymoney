@@ -16,41 +16,45 @@
 #include "onlinejobmessage.h"
 #include "mymoneyenums.h"
 
-namespace eMyMoney { namespace OnlineJob { enum class sendingState; } }
+namespace eMyMoney {
+namespace OnlineJob {
+enum class sendingState;
+}
+}
 
 class onlineJobPrivate : public MyMoneyObjectPrivate
 {
 public:
-  /**
-   * @brief Date-time the job was sent to the bank
-   *
-   * This does not mean an answer was given by the bank
-   */
-  QDateTime m_jobSend;
+    /**
+     * @brief Date-time the job was sent to the bank
+     *
+     * This does not mean an answer was given by the bank
+     */
+    QDateTime m_jobSend;
 
-  /**
-   * @brief Date-time of confirmation/rejection of the bank
-   *
-   * which state this timestamp belongs to is stored in m_jobBankAnswerState
-   */
-  QDateTime m_jobBankAnswerDate;
+    /**
+     * @brief Date-time of confirmation/rejection of the bank
+     *
+     * which state this timestamp belongs to is stored in m_jobBankAnswerState
+     */
+    QDateTime m_jobBankAnswerDate;
 
-  /**
-   * @brief Answer of the bank
-   *
-   * combined with m_jobBankAnswerDate
-   */
-  eMyMoney::OnlineJob::sendingState m_jobBankAnswerState;
+    /**
+     * @brief Answer of the bank
+     *
+     * combined with m_jobBankAnswerDate
+     */
+    eMyMoney::OnlineJob::sendingState m_jobBankAnswerState;
 
-  /**
-   * @brief Validation result status
-   */
-  QList<onlineJobMessage> m_messageList;
+    /**
+     * @brief Validation result status
+     */
+    QList<onlineJobMessage> m_messageList;
 
-  /**
-   * @brief Locking state
-   */
-  bool m_locked;
+    /**
+     * @brief Locking state
+     */
+    bool m_locked;
 };
 
 #endif

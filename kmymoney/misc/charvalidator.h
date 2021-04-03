@@ -10,16 +10,16 @@
 
 class charValidator : public QValidator
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit charValidator(QObject* parent = 0, const QString& characters = QString());
-  QValidator::State validate(QString& , int&) const final override;
+    explicit charValidator(QObject* parent = 0, const QString& characters = QString());
+    QValidator::State validate(QString&, int&) const final override;
 
-  void setAllowedCharacters(const QString&);
+    void setAllowedCharacters(const QString&);
 
 private:
-  QString m_allowedCharacters;
+    QString m_allowedCharacters;
 };
 
 #endif // CHARVALIDATOR_H

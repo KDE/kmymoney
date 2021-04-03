@@ -27,15 +27,15 @@ class QDate;
 class IMyMoneyProcessingCalendar
 {
 public:
-  // TODO: find out how to move this ctor and dtor out of header
-  IMyMoneyProcessingCalendar() {} // krazy:exclude=inline
-  virtual ~IMyMoneyProcessingCalendar() {} // krazy:exclude=inline
+    // TODO: find out how to move this ctor and dtor out of header
+    IMyMoneyProcessingCalendar() {} // krazy:exclude=inline
+    virtual ~IMyMoneyProcessingCalendar() {} // krazy:exclude=inline
 
-  /**
-    * returns if a given day is used by an institution to process
-    * transactions or not
-    */
-  virtual bool isProcessingDate(const QDate& date) const = 0;
+    /**
+      * returns if a given day is used by an institution to process
+      * transactions or not
+      */
+    virtual bool isProcessingDate(const QDate& date) const = 0;
 };
 
 #endif

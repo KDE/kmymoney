@@ -21,26 +21,26 @@
 class KGenerateSqlDlgPrivate;
 class KGenerateSqlDlg : public QDialog
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KGenerateSqlDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(KGenerateSqlDlg)
 
 public:
-  explicit KGenerateSqlDlg(QWidget *parent = nullptr);
-  ~KGenerateSqlDlg();
-  /**
-   * execute the generation
-   */
-  int exec() override;
+    explicit KGenerateSqlDlg(QWidget *parent = nullptr);
+    ~KGenerateSqlDlg();
+    /**
+     * execute the generation
+     */
+    int exec() override;
 
 public Q_SLOTS:
-  void slotHelp();
-  void slotdriverSelected();
-  void slotcreateTables();
-  void slotsaveSQL();
+    void slotHelp();
+    void slotdriverSelected();
+    void slotcreateTables();
+    void slotsaveSQL();
 
 private:
-  KGenerateSqlDlgPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KGenerateSqlDlg)
+    KGenerateSqlDlgPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KGenerateSqlDlg)
 
 };
 

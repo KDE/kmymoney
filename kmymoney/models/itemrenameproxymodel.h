@@ -42,40 +42,40 @@
 
 class KMM_MODELS_EXPORT ItemRenameProxyModel : public QSortFilterProxyModel
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(ItemRenameProxyModel)
+    Q_OBJECT
+    Q_DISABLE_COPY(ItemRenameProxyModel)
 
 public:
-  typedef enum  {
-    eAllItem = 0,
-    eReferencedItems,
-    eUnReferencedItems,
-    eOpenedItems,
-    eClosedItems,
-    // insert new values above this line
-    eMaxItems,
-  } ReferenceFilterType;
+    typedef enum  {
+        eAllItem = 0,
+        eReferencedItems,
+        eUnReferencedItems,
+        eOpenedItems,
+        eClosedItems,
+        // insert new values above this line
+        eMaxItems,
+    } ReferenceFilterType;
 
-  explicit ItemRenameProxyModel(QObject *parent = nullptr);
-  virtual ~ItemRenameProxyModel();
+    explicit ItemRenameProxyModel(QObject *parent = nullptr);
+    virtual ~ItemRenameProxyModel();
 
-  bool setData(const QModelIndex& idx, const QVariant& value, int role) override;
+    bool setData(const QModelIndex& idx, const QVariant& value, int role) override;
 
-  Qt::ItemFlags flags(const QModelIndex& idx) const override;
-  void setRenameColumn(int column);
+    Qt::ItemFlags flags(const QModelIndex& idx) const override;
+    void setRenameColumn(int column);
 
-  void setReferenceFilter(ReferenceFilterType filterType);
-  void setReferenceFilter(const QVariant& filterType);
+    void setReferenceFilter(ReferenceFilterType filterType);
+    void setReferenceFilter(const QVariant& filterType);
 
 protected:
-  virtual bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
+    virtual bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
 
 Q_SIGNALS:
-  void renameItem(const QModelIndex& idx, const QVariant& value);
+    void renameItem(const QModelIndex& idx, const QVariant& value);
 
 private:
-  int                   m_renameColumn;
-  ReferenceFilterType   m_referenceFilter;
+    int                   m_renameColumn;
+    ReferenceFilterType   m_referenceFilter;
 };
 
 #endif

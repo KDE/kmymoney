@@ -34,60 +34,60 @@ using namespace Icons;
 
 class KCategoriesViewPrivate : public KMyMoneyViewBasePrivate
 {
-  Q_DECLARE_PUBLIC(KCategoriesView)
+    Q_DECLARE_PUBLIC(KCategoriesView)
 
 public:
-  explicit KCategoriesViewPrivate(KCategoriesView *qq)
-    : KMyMoneyViewBasePrivate(qq)
-    , ui(new Ui::KCategoriesView)
-    , m_haveUnusedCategories(false)
-    , m_proxyModel(nullptr)
-  {
-  }
+    explicit KCategoriesViewPrivate(KCategoriesView *qq)
+        : KMyMoneyViewBasePrivate(qq)
+        , ui(new Ui::KCategoriesView)
+        , m_haveUnusedCategories(false)
+        , m_proxyModel(nullptr)
+    {
+    }
 
-  ~KCategoriesViewPrivate()
-  {
-    delete ui;
-  }
+    ~KCategoriesViewPrivate()
+    {
+        delete ui;
+    }
 
-  void init()
-  {
-    Q_Q(KCategoriesView);
-    ui->setupUi(q);
+    void init()
+    {
+        Q_Q(KCategoriesView);
+        ui->setupUi(q);
 
-    // setup icons for collapse and expand button
-    ui->m_collapseButton->setIcon(Icons::get(Icon::ListCollapse));
-    ui->m_expandButton->setIcon(Icons::get(Icon::ListExpand));
+        // setup icons for collapse and expand button
+        ui->m_collapseButton->setIcon(Icons::get(Icon::ListCollapse));
+        ui->m_expandButton->setIcon(Icons::get(Icon::ListExpand));
 
-    // setup filter
-    m_proxyModel = ui->m_accountTree->proxyModel();
-    q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
+        // setup filter
+        m_proxyModel = ui->m_accountTree->proxyModel();
+        q->connect(ui->m_searchWidget, &QLineEdit::textChanged, m_proxyModel, &QSortFilterProxyModel::setFilterFixedString);
 
-    auto columnSelector = new ColumnSelector(ui->m_accountTree, q->metaObject()->className());
-    columnSelector->setAlwaysVisible(QVector<int>({ AccountsModel::Column::AccountName }));
-    columnSelector->setAlwaysHidden(QVector<int>({ AccountsModel::Column::Balance,
-                                                   AccountsModel::Column::PostedValue,
-                                                   AccountsModel::Column::Iban,
-                                                   AccountsModel::Column::Bic,
-                                                   AccountsModel::Column::BankCode,
-                                                   AccountsModel::Column::Number,
-                                                   AccountsModel::Column::HasOnlineMapping }));
+        auto columnSelector = new ColumnSelector(ui->m_accountTree, q->metaObject()->className());
+        columnSelector->setAlwaysVisible(QVector<int>({ AccountsModel::Column::AccountName }));
+        columnSelector->setAlwaysHidden(QVector<int>({ AccountsModel::Column::Balance,
+                                        AccountsModel::Column::PostedValue,
+                                        AccountsModel::Column::Iban,
+                                        AccountsModel::Column::Bic,
+                                        AccountsModel::Column::BankCode,
+                                        AccountsModel::Column::Number,
+                                        AccountsModel::Column::HasOnlineMapping }));
 
-    ui->m_accountTree->setModel(MyMoneyFile::instance()->accountsModel());
-    m_proxyModel->addAccountGroup(AccountsProxyModel::incomeExpense());
+        ui->m_accountTree->setModel(MyMoneyFile::instance()->accountsModel());
+        m_proxyModel->addAccountGroup(AccountsProxyModel::incomeExpense());
 
-    columnSelector->setModel(m_proxyModel);
-    q->slotSettingsChanged();
+        columnSelector->setModel(m_proxyModel);
+        q->slotSettingsChanged();
 
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestCustomContextMenu, q, &KCategoriesView::requestCustomContextMenu);
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestSelectionChange, q, &KCategoriesView::requestSelectionChange);
-    q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestActionTrigger, q, &KCategoriesView::requestActionTrigger);
-  }
+        q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestCustomContextMenu, q, &KCategoriesView::requestCustomContextMenu);
+        q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestSelectionChange, q, &KCategoriesView::requestSelectionChange);
+        q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestActionTrigger, q, &KCategoriesView::requestActionTrigger);
+    }
 
-  Ui::KCategoriesView   *ui;
-  bool                  m_haveUnusedCategories;
-  MyMoneyAccount        m_currentCategory;
-  AccountsProxyModel*   m_proxyModel;
+    Ui::KCategoriesView   *ui;
+    bool                  m_haveUnusedCategories;
+    MyMoneyAccount        m_currentCategory;
+    AccountsProxyModel*   m_proxyModel;
 };
 
 #endif

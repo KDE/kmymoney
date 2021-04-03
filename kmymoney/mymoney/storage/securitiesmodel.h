@@ -26,40 +26,40 @@ class QUndoStack;
   */
 class KMM_MYMONEY_EXPORT SecuritiesModel : public MyMoneyModel<MyMoneySecurity>
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  enum Column {
-    Security = 0,
-    Symbol,
-    Type,
-    Market,
-    Currency,
-    Fraction,
-    // insert new columns above this line
-    MaxColumns,
-  };
+    enum Column {
+        Security = 0,
+        Symbol,
+        Type,
+        Market,
+        Currency,
+        Fraction,
+        // insert new columns above this line
+        MaxColumns,
+    };
 
 
-  explicit SecuritiesModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
-  virtual ~SecuritiesModel();
+    explicit SecuritiesModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
+    virtual ~SecuritiesModel();
 
-  static const int ID_SIZE = 6;
+    static const int ID_SIZE = 6;
 
-  int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
-  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
-  QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;
+    int columnCount(const QModelIndex& parent = QModelIndex()) const final override;
+    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const final override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const final override;
 
-  bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
+    bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) final override;
 
-  void addCurrency(const MyMoneySecurity& currency);
-  void loadCurrencies(const QMap<QString, MyMoneySecurity>& list);
+    void addCurrency(const MyMoneySecurity& currency);
+    void loadCurrencies(const QMap<QString, MyMoneySecurity>& list);
 
 public Q_SLOTS:
 
 private:
-  struct Private;
-  QScopedPointer<Private> d;
+    struct Private;
+    QScopedPointer<Private> d;
 };
 
 #endif // SECURITIESMODEL_H

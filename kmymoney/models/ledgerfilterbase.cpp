@@ -28,15 +28,15 @@
 using namespace eMyMoney;
 
 LedgerFilterBase::LedgerFilterBase(LedgerFilterBasePrivate* dd, QObject* parent)
-: QSortFilterProxyModel(parent)
-, d_ptr(dd)
+    : QSortFilterProxyModel(parent)
+    , d_ptr(dd)
 {
-  Q_D(LedgerFilterBase);
-  d->concatModel = new KConcatenateRowsProxyModel(parent);
+    Q_D(LedgerFilterBase);
+    d->concatModel = new KConcatenateRowsProxyModel(parent);
 
-  setFilterRole(eMyMoney::Model::Roles::SplitAccountIdRole);
-  setFilterKeyColumn(0);
-  setSortRole(eMyMoney::Model::Roles::TransactionPostDateRole);
+    setFilterRole(eMyMoney::Model::Roles::SplitAccountIdRole);
+    setFilterKeyColumn(0);
+    setSortRole(eMyMoney::Model::Roles::TransactionPostDateRole);
 }
 
 LedgerFilterBase::~LedgerFilterBase()
@@ -45,182 +45,182 @@ LedgerFilterBase::~LedgerFilterBase()
 
 void LedgerFilterBase::setAccountType(Account::Type type)
 {
-  Q_D(LedgerFilterBase);
-  d->accountType = type;
+    Q_D(LedgerFilterBase);
+    d->accountType = type;
 }
 
 QVariant LedgerFilterBase::data(const QModelIndex& idx, int role) const
 {
-  if (role == eMyMoney::Model::SplitSharesSuffixRole) {
-    const int columnRole = data(idx, eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>().isNegative() ? JournalModel::Column::Payment : JournalModel::Column::Deposit;
-    return QString("(%1)").arg(headerData(columnRole, Qt::Horizontal, Qt::DisplayRole).toString());
-  }
+    if (role == eMyMoney::Model::SplitSharesSuffixRole) {
+        const int columnRole = data(idx, eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>().isNegative() ? JournalModel::Column::Payment : JournalModel::Column::Deposit;
+        return QString("(%1)").arg(headerData(columnRole, Qt::Horizontal, Qt::DisplayRole).toString());
+    }
 
-  return QSortFilterProxyModel::data(idx, role);
+    return QSortFilterProxyModel::data(idx, role);
 }
 
 QVariant LedgerFilterBase::headerData(int section, Qt::Orientation orientation, int role) const
 {
-  if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
-    Q_D(const LedgerFilterBase);
-    switch(section) {
-      case JournalModel::Column::Payment:
-        switch(d->accountType) {
-          case Account::Type::CreditCard:
-            return i18nc("Payment made with credit card", "Charge");
+    if(orientation == Qt::Horizontal && role == Qt::DisplayRole) {
+        Q_D(const LedgerFilterBase);
+        switch(section) {
+        case JournalModel::Column::Payment:
+            switch(d->accountType) {
+            case Account::Type::CreditCard:
+                return i18nc("Payment made with credit card", "Charge");
 
-          case Account::Type::Asset:
-          case Account::Type::AssetLoan:
-            return i18nc("Decrease of asset/liability value", "Decrease");
+            case Account::Type::Asset:
+            case Account::Type::AssetLoan:
+                return i18nc("Decrease of asset/liability value", "Decrease");
 
-          case Account::Type::Liability:
-          case Account::Type::Loan:
-            return i18nc("Increase of asset/liability value", "Increase");
+            case Account::Type::Liability:
+            case Account::Type::Loan:
+                return i18nc("Increase of asset/liability value", "Increase");
 
-          case Account::Type::Income:
-          case Account::Type::Expense:
-            return i18n("Income");
+            case Account::Type::Income:
+            case Account::Type::Expense:
+                return i18n("Income");
 
-          default:
+            default:
+                break;
+            }
+            break;
+
+        case JournalModel::Column::Deposit:
+            switch(d->accountType) {
+            case Account::Type::CreditCard:
+                return i18nc("Payment towards credit card", "Payment");
+
+            case Account::Type::Asset:
+            case Account::Type::AssetLoan:
+                return i18nc("Increase of asset/liability value", "Increase");
+
+            case Account::Type::Liability:
+            case Account::Type::Loan:
+                return i18nc("Decrease of asset/liability value", "Decrease");
+
+            case Account::Type::Income:
+            case Account::Type::Expense:
+                return i18n("Expense");
+
+            default:
+                break;
+            }
             break;
         }
-        break;
-
-      case JournalModel::Column::Deposit:
-        switch(d->accountType) {
-          case Account::Type::CreditCard:
-            return i18nc("Payment towards credit card", "Payment");
-
-          case Account::Type::Asset:
-          case Account::Type::AssetLoan:
-            return i18nc("Increase of asset/liability value", "Increase");
-
-          case Account::Type::Liability:
-          case Account::Type::Loan:
-            return i18nc("Decrease of asset/liability value", "Decrease");
-
-          case Account::Type::Income:
-          case Account::Type::Expense:
-            return i18n("Expense");
-
-          default:
-            break;
-        }
-        break;
     }
-  }
-  return QSortFilterProxyModel::headerData(section, orientation, role);
+    return QSortFilterProxyModel::headerData(section, orientation, role);
 }
 
 bool LedgerFilterBase::lessThan(const QModelIndex& left, const QModelIndex& right) const
 {
-  Q_D(const LedgerFilterBase);
+    Q_D(const LedgerFilterBase);
 
-  // make sure that the dummy transaction is shown last in any case
-  if(left.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
-    return false;
-
-  } else if(right.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
-    return true;
-  }
-
-  const auto model = MyMoneyFile::baseModel();
-  // make sure that the online balance is the last entry of a day
-  // and the date headers are the first
-  if (left.data(eMyMoney::Model::TransactionPostDateRole).toDate() == right.data(eMyMoney::Model::TransactionPostDateRole).toDate()) {
-    const auto leftModel = model->baseModel(left);
-    const auto rightModel = model->baseModel(right);
-    if (leftModel != rightModel) {
-      if (d->isAccountsModel(leftModel)) {
+    // make sure that the dummy transaction is shown last in any case
+    if(left.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
         return false;
-      } else if (d->isAccountsModel(rightModel)) {
+
+    } else if(right.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
         return true;
-      } else if(d->isSpecialDatesModel(leftModel)) {
-        return true;
-      } else if(d->isSpecialDatesModel(rightModel)) {
-        return false;
-      }
     }
-    // same model and same post date, the ids decide
-    return left.data(eMyMoney::Model::IdRole).toString() < right.data(eMyMoney::Model::IdRole).toString();
-  }
 
-  // otherwise use normal sorting
-  return QSortFilterProxyModel::lessThan(left, right);
+    const auto model = MyMoneyFile::baseModel();
+    // make sure that the online balance is the last entry of a day
+    // and the date headers are the first
+    if (left.data(eMyMoney::Model::TransactionPostDateRole).toDate() == right.data(eMyMoney::Model::TransactionPostDateRole).toDate()) {
+        const auto leftModel = model->baseModel(left);
+        const auto rightModel = model->baseModel(right);
+        if (leftModel != rightModel) {
+            if (d->isAccountsModel(leftModel)) {
+                return false;
+            } else if (d->isAccountsModel(rightModel)) {
+                return true;
+            } else if(d->isSpecialDatesModel(leftModel)) {
+                return true;
+            } else if(d->isSpecialDatesModel(rightModel)) {
+                return false;
+            }
+        }
+        // same model and same post date, the ids decide
+        return left.data(eMyMoney::Model::IdRole).toString() < right.data(eMyMoney::Model::IdRole).toString();
+    }
+
+    // otherwise use normal sorting
+    return QSortFilterProxyModel::lessThan(left, right);
 }
 
 bool LedgerFilterBase::filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
 {
-  Q_D(const LedgerFilterBase);
+    Q_D(const LedgerFilterBase);
 
-  // if no filter is set, we don't display anything
-  if (d->filterIds.isEmpty())
-    return false;
+    // if no filter is set, we don't display anything
+    if (d->filterIds.isEmpty())
+        return false;
 
-  // in case it's a special date entry, we accept it
-  QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
-  const auto baseModel = MyMoneyFile::baseModel()->baseModel(idx);
-  if (d->isSpecialDatesModel(baseModel)) {
-    return (sortRole() == eMyMoney::Model::TransactionPostDateRole);
-  }
+    // in case it's a special date entry, we accept it
+    QModelIndex idx = sourceModel()->index(source_row, 0, source_parent);
+    const auto baseModel = MyMoneyFile::baseModel()->baseModel(idx);
+    if (d->isSpecialDatesModel(baseModel)) {
+        return (sortRole() == eMyMoney::Model::TransactionPostDateRole);
+    }
 
-  // now do the filtering
-  const auto id = idx.data(filterRole()).toString();
-  bool rc = d->filterIds.contains(id);
+    // now do the filtering
+    const auto id = idx.data(filterRole()).toString();
+    bool rc = d->filterIds.contains(id);
 
-  // in case a journal entry has no id, it is the new transaction placeholder
-  if(!rc) {
-    rc = idx.data(eMyMoney::Model::IdRole).toString().isEmpty();
-  }
-  return rc;
+    // in case a journal entry has no id, it is the new transaction placeholder
+    if(!rc) {
+        rc = idx.data(eMyMoney::Model::IdRole).toString().isEmpty();
+    }
+    return rc;
 }
 
 void LedgerFilterBase::setFilterFixedString(const QString& id)
 {
-  Q_D(LedgerFilterBase);
-  setFilterFixedStrings(QStringList() << id);
+    Q_D(LedgerFilterBase);
+    setFilterFixedStrings(QStringList() << id);
 }
 
 void LedgerFilterBase::setFilterFixedStrings(const QStringList& filters)
 {
-  Q_D(LedgerFilterBase);
-  d->filterIds = filters;
-  invalidateFilter();
+    Q_D(LedgerFilterBase);
+    d->filterIds = filters;
+    invalidateFilter();
 }
 
 QStringList LedgerFilterBase::filterFixedStrings() const
 {
-  Q_D(const LedgerFilterBase);
-  return d->filterIds;
+    Q_D(const LedgerFilterBase);
+    return d->filterIds;
 }
 
 
 void LedgerFilterBase::setShowEntryForNewTransaction(bool show)
 {
-  if (show) {
-    addSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
-  } else {
-    removeSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
-  }
+    if (show) {
+        addSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
+    } else {
+        removeSourceModel(MyMoneyFile::instance()->journalModel()->newTransaction());
+    }
 }
 
 
 void LedgerFilterBase::addSourceModel(QAbstractItemModel* model)
 {
-  Q_D(LedgerFilterBase);
-  if (model && !d->sourceModels.contains(model)) {
-    d->concatModel->addSourceModel(model);
-    d->sourceModels.insert(model);
-    invalidateFilter();
-  }
+    Q_D(LedgerFilterBase);
+    if (model && !d->sourceModels.contains(model)) {
+        d->concatModel->addSourceModel(model);
+        d->sourceModels.insert(model);
+        invalidateFilter();
+    }
 }
 
 void LedgerFilterBase::removeSourceModel(QAbstractItemModel* model)
 {
-  Q_D(LedgerFilterBase);
-  if (model && d->sourceModels.contains(model)) {
-    d->concatModel->removeSourceModel(model);
-    d->sourceModels.remove(model);
-    invalidateFilter();
-  }
+    Q_D(LedgerFilterBase);
+    if (model && d->sourceModels.contains(model)) {
+        d->concatModel->removeSourceModel(model);
+        d->sourceModels.remove(model);
+        invalidateFilter();
+    }
 }

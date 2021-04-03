@@ -21,23 +21,23 @@
 class KNewBudgetDlgPrivate;
 class KNewBudgetDlg : public QDialog
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KNewBudgetDlg)
+    Q_OBJECT
+    Q_DISABLE_COPY(KNewBudgetDlg)
 
 public:
-  explicit KNewBudgetDlg(QWidget* parent = nullptr);
-  ~KNewBudgetDlg();
+    explicit KNewBudgetDlg(QWidget* parent = nullptr);
+    ~KNewBudgetDlg();
 
-  QString getYear() const;
-  QString getName() const;
+    QString getYear() const;
+    QString getName() const;
 
 public Q_SLOTS:
-  void m_pbCancel_clicked();
-  void m_pbOk_clicked();
+    void m_pbCancel_clicked();
+    void m_pbOk_clicked();
 
 private:
-  KNewBudgetDlgPrivate * const d_ptr;
-  Q_DECLARE_PRIVATE(KNewBudgetDlg)
+    KNewBudgetDlgPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(KNewBudgetDlg)
 };
 
 #endif // KNEWBUDGETDLG_H

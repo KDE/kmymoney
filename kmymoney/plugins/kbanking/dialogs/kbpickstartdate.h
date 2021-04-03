@@ -20,27 +20,27 @@ class KBankingExt;
   */
 class KBPickStartDate : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  KBPickStartDate(KBankingExt* qb,
-                  const QDate &firstPossible,
-                  const QDate &lastUpdate,
-                  const QString& accountName,
-                  int defaultChoice,
-                  QWidget* parent = 0,
-                  bool modal = false);
-  ~KBPickStartDate();
+    KBPickStartDate(KBankingExt* qb,
+                    const QDate &firstPossible,
+                    const QDate &lastUpdate,
+                    const QString& accountName,
+                    int defaultChoice,
+                    QWidget* parent = 0,
+                    bool modal = false);
+    ~KBPickStartDate();
 
-  QDate date();
+    QDate date();
 
 public Q_SLOTS:
-  void slotHelpClicked();
+    void slotHelpClicked();
 
 private:
-  /// \internal d-pointer class.
-  struct Private;
-  /// \internal d-pointer instance.
-  Private* const d;
+    /// \internal d-pointer class.
+    struct Private;
+    /// \internal d-pointer instance.
+    Private* const d;
 };
 
 #endif

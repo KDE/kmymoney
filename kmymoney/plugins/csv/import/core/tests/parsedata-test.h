@@ -14,32 +14,32 @@ class Parse;
 
 class ParseDataTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  ParseDataTest();
+    ParseDataTest();
 
-  Parse* m_parse;
+    Parse* m_parse;
 
 private Q_SLOTS:
-  void init();
-  void cleanup();
-  void cleanupTestCase();
-  void testDefaultConstructor();
-  void testDefaultConstructor_data();
-  void testConstructor();
-  void testConstructor_data();
-  void initTestCase();
-  void initTestCase_data();
+    void init();
+    void cleanup();
+    void cleanupTestCase();
+    void testDefaultConstructor();
+    void testDefaultConstructor_data();
+    void testConstructor();
+    void testConstructor_data();
+    void initTestCase();
+    void initTestCase_data();
 
-  /**
-  * This method is used to test that a quoted string containing
-  * a comma, which would get split by QString::split() when comma
-  * is the field separator, is detected and rebuilt.  If the field
-  * separator is not a comma, the split does not occur.
-  */
-  void parseSplitString();
-  void parse_data();
+    /**
+    * This method is used to test that a quoted string containing
+    * a comma, which would get split by QString::split() when comma
+    * is the field separator, is detected and rebuilt.  If the field
+    * separator is not a comma, the split does not occur.
+    */
+    void parseSplitString();
+    void parse_data();
 
 };
 #endif

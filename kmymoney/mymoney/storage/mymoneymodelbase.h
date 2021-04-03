@@ -23,96 +23,96 @@
 
 class KMM_MYMONEY_EXPORT MyMoneyModelBase : public QAbstractItemModel
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit MyMoneyModelBase(QObject* parent, const QString& idLeadin, quint8 idSize);
-  virtual ~MyMoneyModelBase();
+    explicit MyMoneyModelBase(QObject* parent, const QString& idLeadin, quint8 idSize);
+    virtual ~MyMoneyModelBase();
 
-  /**
-   * This method returns a list with the first QModelIndex that mathches the @a name
-   * in the Qt::DisplayRole role in the model.
-   *
-   * @sa
-   */
-  virtual QModelIndexList indexListByName(const QString& name, const QModelIndex& parent = QModelIndex()) const;
+    /**
+     * This method returns a list with the first QModelIndex that mathches the @a name
+     * in the Qt::DisplayRole role in the model.
+     *
+     * @sa
+     */
+    virtual QModelIndexList indexListByName(const QString& name, const QModelIndex& parent = QModelIndex()) const;
 
-  QModelIndex lowerBound(const QString& id) const;
+    QModelIndex lowerBound(const QString& id) const;
 
-  virtual QModelIndex lowerBound(const QString& id, int first, int last) const = 0;
+    virtual QModelIndex lowerBound(const QString& id, int first, int last) const = 0;
 
-  QModelIndex upperBound(const QString& id) const;
+    QModelIndex upperBound(const QString& id) const;
 
-  virtual QModelIndex upperBound(const QString& id, int first, int last) const = 0;
+    virtual QModelIndex upperBound(const QString& id, int first, int last) const = 0;
 
-  /**
-   * This is convenience method returning the value of
-   * mapToBaseSource(idx).model()
-   *
-   * @sa mapToBaseSource
-   */
-  const QAbstractItemModel* baseModel(const QModelIndex& idx);
+    /**
+     * This is convenience method returning the value of
+     * mapToBaseSource(idx).model()
+     *
+     * @sa mapToBaseSource
+     */
+    const QAbstractItemModel* baseModel(const QModelIndex& idx);
 
-  /**
-   * This method returns the model index in the base model of a
-   * QModelIndex @a idx. The method traverses any possible filter
-   * model until it finds the base model. In case the index already
-   * points to the base model or points to an unknown filter model type
-   * it is returned unaltered.
-   *
-   * @note The following filter models (and any derivatives are supported:
-   * QSortFilterProxyModel, KConcatenateRowsProxyModel
-   */
-  QModelIndex mapToBaseSource(const QModelIndex& idx);
+    /**
+     * This method returns the model index in the base model of a
+     * QModelIndex @a idx. The method traverses any possible filter
+     * model until it finds the base model. In case the index already
+     * points to the base model or points to an unknown filter model type
+     * it is returned unaltered.
+     *
+     * @note The following filter models (and any derivatives are supported:
+     * QSortFilterProxyModel, KConcatenateRowsProxyModel
+     */
+    QModelIndex mapToBaseSource(const QModelIndex& idx);
 
-  /**
-   * This method returns a QModelIndex for a stacked @a proxyModel based
-   * on the model index @a idx pointing to the base model.
-   */
-  QModelIndex mapFromBaseSource(QAbstractItemModel* proxyModel, const QModelIndex& idx);
+    /**
+     * This method returns a QModelIndex for a stacked @a proxyModel based
+     * on the model index @a idx pointing to the base model.
+     */
+    QModelIndex mapFromBaseSource(QAbstractItemModel* proxyModel, const QModelIndex& idx);
 
-  void setDirty(bool dirty = true);
-  bool isDirty() const;
-  QString peekNextId() const;
+    void setDirty(bool dirty = true);
+    bool isDirty() const;
+    QString peekNextId() const;
 
-  /**
-   * checks if the @a id follows the ids created by this model
-   * @returns @c true in case of a valid id, @c false otherwise.
-   */
-  bool isValidId (const QString& id) const;
+    /**
+     * checks if the @a id follows the ids created by this model
+     * @returns @c true in case of a valid id, @c false otherwise.
+     */
+    bool isValidId (const QString& id) const;
 
 protected:
-  QString nextId();
+    QString nextId();
 
-  virtual void updateNextObjectId(const QString& id);
+    virtual void updateNextObjectId(const QString& id);
 
-  virtual void doUpdateReferencedObjects() = 0;
+    virtual void doUpdateReferencedObjects() = 0;
 
-  /**
-   * Overridden for internal reasons. This version will
-   * block emission of signals during the reset completely
-   */
-  void beginResetModel();
+    /**
+     * Overridden for internal reasons. This version will
+     * block emission of signals during the reset completely
+     */
+    void beginResetModel();
 
-  /**
-   * Overridden for internal reasons. This version will
-   * reset the signal emission state to the state it was
-   * prior to the call of @sa beginResetModel()
-   */
-  void endResetModel();
+    /**
+     * Overridden for internal reasons. This version will
+     * reset the signal emission state to the state it was
+     * prior to the call of @sa beginResetModel()
+     */
+    void endResetModel();
 
 protected Q_SLOTS:
-  void updateReferencedObjects();
+    void updateReferencedObjects();
 
 Q_SIGNALS:
-  void modelLoaded();
+    void modelLoaded();
 
 protected:
-  quint64                       m_nextId;
-  QString                       m_idLeadin;
-  quint8                        m_idSize;
-  bool                          m_dirty;
-  bool                          m_blockedSignals;
-  QRegularExpression            m_idMatchExp;
+    quint64                       m_nextId;
+    QString                       m_idLeadin;
+    quint8                        m_idSize;
+    bool                          m_dirty;
+    bool                          m_blockedSignals;
+    QRegularExpression            m_idMatchExp;
 };
 
 #endif // MYMONEYMODELBASE_H

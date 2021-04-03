@@ -48,53 +48,53 @@ typedef AccountNamesFilterProxyModelTpl<OnlineBankingAccountsFilterProxyModel> O
   */
 class KMM_BASE_WIDGETS_EXPORT KMyMoneyAccountCombo : public KComboBox
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyAccountCombo)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyAccountCombo)
 
 public:
-  explicit KMyMoneyAccountCombo(QSortFilterProxyModel *model, QWidget* parent = nullptr);
-  explicit KMyMoneyAccountCombo(QWidget* parent = nullptr);
-  ~KMyMoneyAccountCombo();
+    explicit KMyMoneyAccountCombo(QSortFilterProxyModel *model, QWidget* parent = nullptr);
+    explicit KMyMoneyAccountCombo(QWidget* parent = nullptr);
+    ~KMyMoneyAccountCombo();
 
-  const QString& getSelected() const;
+    const QString& getSelected() const;
 
-  void setModel(QSortFilterProxyModel *model);
+    void setModel(QSortFilterProxyModel *model);
 
-  /**
-   * Overridden to get specific behavior
-   */
-  void setEditable(bool isEditable);
+    /**
+     * Overridden to get specific behavior
+     */
+    void setEditable(bool isEditable);
 
-  bool eventFilter(QObject* o, QEvent* e) override;
+    bool eventFilter(QObject* o, QEvent* e) override;
 
-  QTreeView* popup() const;
+    QTreeView* popup() const;
 
 public Q_SLOTS:
-  void expandAll();
-  void collapseAll();
-  void showPopup() override;
-  void hidePopup() override;
-  void setSelected(const QString& id);
-  void setSplitActionVisible(bool show);
+    void expandAll();
+    void collapseAll();
+    void showPopup() override;
+    void hidePopup() override;
+    void setSelected(const QString& id);
+    void setSplitActionVisible(bool show);
 
 protected:
-  void wheelEvent(QWheelEvent *ev) override;
+    void wheelEvent(QWheelEvent *ev) override;
 
 protected Q_SLOTS:
-  void activated();
-  void makeCompletion(const QString& txt) override;
-  void selectItem(const QModelIndex& index);
+    void activated();
+    void makeCompletion(const QString& txt) override;
+    void selectItem(const QModelIndex& index);
 
 Q_SIGNALS:
-  void accountSelected(const QString&);
-  void splitDialogRequest();
+    void accountSelected(const QString&);
+    void splitDialogRequest();
 
 private:
-  void init();
+    void init();
 
 private:
-  class Private;
-  QScopedPointer<Private> const d;
+    class Private;
+    QScopedPointer<Private> const d;
 };
 
 
@@ -103,27 +103,27 @@ class QAbstractButton;
 class KMyMoneyAccountComboSplitHelperPrivate;
 class KMM_BASE_WIDGETS_EXPORT KMyMoneyAccountComboSplitHelper : public QObject
 {
-  Q_OBJECT
-  Q_DISABLE_COPY(KMyMoneyAccountComboSplitHelper)
+    Q_OBJECT
+    Q_DISABLE_COPY(KMyMoneyAccountComboSplitHelper)
 
 public:
-  explicit KMyMoneyAccountComboSplitHelper(QComboBox* accountCombo, QAbstractItemModel *model);
-  ~KMyMoneyAccountComboSplitHelper();
+    explicit KMyMoneyAccountComboSplitHelper(QComboBox* accountCombo, QAbstractItemModel *model);
+    ~KMyMoneyAccountComboSplitHelper();
 
 protected:
-  bool eventFilter(QObject *watched, QEvent *event) override;
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
 private Q_SLOTS:
-  void splitCountChanged();
-  void modelDestroyed();
+    void splitCountChanged();
+    void modelDestroyed();
 
 Q_SIGNALS:
-  void accountComboEnabled(bool enabled);
-  void accountComboDisabled(bool disabled);
+    void accountComboEnabled(bool enabled);
+    void accountComboDisabled(bool disabled);
 
 private:
-  Q_DECLARE_PRIVATE(KMyMoneyAccountComboSplitHelper);
-  QScopedPointer<KMyMoneyAccountComboSplitHelperPrivate>  d_ptr;
+    Q_DECLARE_PRIVATE(KMyMoneyAccountComboSplitHelper);
+    QScopedPointer<KMyMoneyAccountComboSplitHelperPrivate>  d_ptr;
 };
 
 

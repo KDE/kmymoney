@@ -26,22 +26,22 @@
 
 namespace NewAccountWizard
 {
-  class Wizard;
+class Wizard;
 
-  class LoanPaymentPagePrivate : public WizardPagePrivate<Wizard>
-  {
+class LoanPaymentPagePrivate : public WizardPagePrivate<Wizard>
+{
     Q_DISABLE_COPY(LoanPaymentPagePrivate)
 
-  public:
+public:
     explicit LoanPaymentPagePrivate(QObject* parent) :
-      WizardPagePrivate<Wizard>(parent),
-      ui(new Ui::KLoanPaymentPage)
+        WizardPagePrivate<Wizard>(parent),
+        ui(new Ui::KLoanPaymentPage)
     {
     }
 
     ~LoanPaymentPagePrivate()
     {
-      delete ui;
+        delete ui;
     }
 
     Ui::KLoanPaymentPage *ui;
@@ -49,7 +49,7 @@ namespace NewAccountWizard
     MyMoneySplit          phonySplit;
     MyMoneyTransaction    additionalFeesTransaction;
     MyMoneyMoney          additionalFees;
-  };
+};
 }
 
 #endif

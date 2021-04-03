@@ -17,21 +17,21 @@
 TocItemReport::TocItemReport(QTreeWidgetItem* parent, MyMoneyReport& report):
     TocItem(parent, QStringList() << report.name() << report.comment())
 {
-  m_report = report;
+    m_report = report;
 
-  type = TocItem::REPORT;
+    type = TocItem::REPORT;
 
-  QString tocTyp = QString::number(type);
-  QString id = report.name();
+    QString tocTyp = QString::number(type);
+    QString id = report.name();
 
-  QStringList key;
-  key << tocTyp << id;
+    QStringList key;
+    key << tocTyp << id;
 
-  QVariant data(key);
-  this->setData(0, Qt::UserRole, data);
+    QVariant data(key);
+    this->setData(0, Qt::UserRole, data);
 }
 
 MyMoneyReport& TocItemReport::getReport()
 {
-  return m_report;
+    return m_report;
 }

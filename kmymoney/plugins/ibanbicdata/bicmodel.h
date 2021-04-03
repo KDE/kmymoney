@@ -12,15 +12,15 @@
 
 class IBAN_BIC_IDENTIFIER_EXPORT bicModel : public QSqlQueryModel
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  enum DisplayRole {
-    InstitutionNameRole = Qt::UserRole,
-  };
+    enum DisplayRole {
+        InstitutionNameRole = Qt::UserRole,
+    };
 
-  explicit bicModel(QObject* parent = 0);
-  QVariant data(const QModelIndex& item, int role = Qt::DisplayRole) const final override;
+    explicit bicModel(QObject* parent = 0);
+    QVariant data(const QModelIndex& item, int role = Qt::DisplayRole) const final override;
 
 };
 

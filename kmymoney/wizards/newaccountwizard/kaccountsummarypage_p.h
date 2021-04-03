@@ -22,26 +22,26 @@
 
 namespace NewAccountWizard
 {
-  class Wizard;
+class Wizard;
 
-  class AccountSummaryPagePrivate : public WizardPagePrivate<Wizard>
-  {
+class AccountSummaryPagePrivate : public WizardPagePrivate<Wizard>
+{
     Q_DISABLE_COPY(AccountSummaryPagePrivate)
 
-  public:
+public:
     explicit AccountSummaryPagePrivate(QObject* parent) :
-      WizardPagePrivate<Wizard>(parent),
-      ui(new Ui::KAccountSummaryPage)
+        WizardPagePrivate<Wizard>(parent),
+        ui(new Ui::KAccountSummaryPage)
     {
     }
 
     ~AccountSummaryPagePrivate()
     {
-      delete ui;
+        delete ui;
     }
 
     Ui::KAccountSummaryPage *ui;
-  };  
+};
 }
 
 #endif

@@ -9,7 +9,7 @@
 #include <qnamespace.h>
 
 namespace eIBANBIC {
-  enum DataType {
+enum DataType {
     bbanLength,
     bankIdentifierPosition,
     bankIdentifierLength,
@@ -19,16 +19,16 @@ namespace eIBANBIC {
     extractBankIdentifier,
     isBicAllocated,
     bicModel,
-  };
+};
 
-  enum bicAllocationStatus : unsigned int {
+enum bicAllocationStatus : unsigned int {
     bicAllocated = 0,
     bicNotAllocated,
     bicAllocationUncertain,
-  };
+};
 
-  enum DisplayRole {
+enum DisplayRole {
     InstitutionNameRole = Qt::UserRole,
-  };
+};
 }
 #endif

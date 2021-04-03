@@ -23,16 +23,16 @@ namespace reports
 
 class PivotGridTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 private:
-  MyMoneyFile* file;
+    MyMoneyFile* file;
 
 private Q_SLOTS:
-  void init();
-  void cleanup();
-  void testCellAddValue();
-  void testCellAddCell();
-  void testCellRunningSum();
+    void init();
+    void cleanup();
+    void testCellAddValue();
+    void testCellAddCell();
+    void testCellRunningSum();
 };
 
 }

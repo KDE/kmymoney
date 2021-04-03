@@ -22,23 +22,23 @@ class SplitModel;
 
 class TransactionEditorBase : public QFrame
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit TransactionEditorBase(QWidget* parent = 0, const QString& accountId = QString());
-  virtual ~TransactionEditorBase();
+    explicit TransactionEditorBase(QWidget* parent = 0, const QString& accountId = QString());
+    virtual ~TransactionEditorBase();
 
-  virtual bool accepted() const = 0;
-  virtual void loadTransaction(const QModelIndex& index) = 0;
-  virtual void saveTransaction() = 0;
+    virtual bool accepted() const = 0;
+    virtual void loadTransaction(const QModelIndex& index) = 0;
+    virtual void saveTransaction() = 0;
 
 protected:
-  void addSplitsFromModel(MyMoneyTransaction& t, const SplitModel* model);
-  void addSplitsFromModel(QList<MyMoneySplit>& splits, const SplitModel* model);
+    void addSplitsFromModel(MyMoneyTransaction& t, const SplitModel* model);
+    void addSplitsFromModel(QList<MyMoneySplit>& splits, const SplitModel* model);
 
 Q_SIGNALS:
-  void done();
-  void editorLayoutChanged();
+    void done();
+    void editorLayoutChanged();
 
 };
 

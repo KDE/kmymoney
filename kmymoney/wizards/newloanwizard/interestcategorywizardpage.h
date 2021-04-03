@@ -17,7 +17,9 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-namespace Ui { class InterestCategoryWizardPage; }
+namespace Ui {
+class InterestCategoryWizardPage;
+}
 
 /**
  * This class implements the Interest Category page of the
@@ -26,20 +28,20 @@ namespace Ui { class InterestCategoryWizardPage; }
 
 class InterestCategoryWizardPage : public QWizardPage
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit InterestCategoryWizardPage(QWidget *parent = nullptr);
-  ~InterestCategoryWizardPage();
+    explicit InterestCategoryWizardPage(QWidget *parent = nullptr);
+    ~InterestCategoryWizardPage();
 
-  /**
-   * Overload the isComplete function to control the Next button
-   */
-  bool isComplete() const final override;
+    /**
+     * Overload the isComplete function to control the Next button
+     */
+    bool isComplete() const final override;
 
-  Ui::InterestCategoryWizardPage *ui;
+    Ui::InterestCategoryWizardPage *ui;
 
 protected Q_SLOTS:
-  void slotCreateCategory();
+    void slotCreateCategory();
 };
 
 #endif

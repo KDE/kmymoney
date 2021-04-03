@@ -25,37 +25,37 @@ class LedgerSplitPrivate;
 class LedgerSplit : public LedgerTransaction
 {
 public:
-  explicit LedgerSplit(const MyMoneyTransaction& t, const MyMoneySplit& s);
-  LedgerSplit(const LedgerSplit & other);
-  LedgerSplit(LedgerSplit && other);
-  LedgerSplit & operator=(LedgerSplit other);
-  friend void swap(LedgerSplit& first, LedgerSplit& second);
+    explicit LedgerSplit(const MyMoneyTransaction& t, const MyMoneySplit& s);
+    LedgerSplit(const LedgerSplit & other);
+    LedgerSplit(LedgerSplit && other);
+    LedgerSplit & operator=(LedgerSplit other);
+    friend void swap(LedgerSplit& first, LedgerSplit& second);
 
-  ~LedgerSplit() override;
+    ~LedgerSplit() override;
 
-  /// @copydoc LedgerItem::memo()
-  QString memo() const override;
+    /// @copydoc LedgerItem::memo()
+    QString memo() const override;
 
 private:
-  LedgerSplit();
-  Q_DECLARE_PRIVATE(LedgerSplit)
+    LedgerSplit();
+    Q_DECLARE_PRIVATE(LedgerSplit)
 };
 
 inline void swap(LedgerSplit& first, LedgerSplit& second) // krazy:exclude=inline
 {
-  using std::swap;
-  swap(first.d_ptr, second.d_ptr);
+    using std::swap;
+    swap(first.d_ptr, second.d_ptr);
 }
 
 inline LedgerSplit::LedgerSplit(LedgerSplit && other) : LedgerSplit() // krazy:exclude=inline
 {
-  swap(*this, other);
+    swap(*this, other);
 }
 
 inline LedgerSplit & LedgerSplit::operator=(LedgerSplit other) // krazy:exclude=inline
 {
-  swap(*this, other);
-  return *this;
+    swap(*this, other);
+    return *this;
 }
 
 #endif // LEDGERSPLIT_H
