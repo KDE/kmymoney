@@ -82,10 +82,34 @@
 using namespace Icons;
 using namespace eMyMoney;
 
-KMyMoneyView::KMyMoneyView()
-    : KPageWidget(nullptr),
-      m_header(0)
+class KMyMoneyViewPrivate
 {
+public:
+    KMyMoneyViewPrivate(KMyMoneyView* qq)
+        : q_ptr(qq)
+        , m_model(nullptr)
+        , m_header(nullptr)
+    {
+    }
+
+    KMyMoneyView* q_ptr;
+    KPageWidgetModel* m_model;
+    KMyMoneyTitleLabel* m_header;
+
+    QHash<View, KPageWidgetItem*> viewFrames;
+    QHash<View, KMyMoneyViewBase*> viewBases;
+
+
+};
+
+
+
+
+KMyMoneyView::KMyMoneyView()
+    : KPageWidget(nullptr)
+    , d_ptr(new KMyMoneyViewPrivate(this))
+{
+    Q_D(KMyMoneyView);
     // this is a workaround for the bug in KPageWidget that causes the header to be shown
     // for a short while during page switch which causes a kind of bouncing of the page's
     // content and if the page's content is at it's minimum size then during a page switch
@@ -99,27 +123,27 @@ KMyMoneyView::KMyMoneyView()
         if (headerItem && qobject_cast<KTitleWidget*>(headerItem->widget()) != NULL) {
             gridLayout->removeItem(headerItem);
             // after we remove the KPageWidget standard header replace it with our own title label
-            m_header = new KMyMoneyTitleLabel(this);
-            m_header->setObjectName("titleLabel");
-            m_header->setMinimumSize(QSize(100, 30));
-            m_header->setRightImageFile("pics/titlelabel_background.png");
-            m_header->setVisible(KMyMoneySettings::showTitleBar());
-            gridLayout->addWidget(m_header, 1, 1);
+            d->m_header = new KMyMoneyTitleLabel(this);
+            d->m_header->setObjectName("titleLabel");
+            d->m_header->setMinimumSize(QSize(100, 30));
+            d->m_header->setRightImageFile("pics/titlelabel_background.png");
+            d->m_header->setVisible(KMyMoneySettings::showTitleBar());
+            gridLayout->addWidget(d->m_header, 1, 1);
         }
     }
 
-    m_model = new KPageWidgetModel(this); // cannot be parentless, otherwise segfaults at exit
+    d->m_model = new KPageWidgetModel(this); // cannot be parentless, otherwise segfaults at exit
 
-    viewBases[View::Home] = new KHomeView;
-    viewBases[View::Institutions] = new KInstitutionsView;
-    viewBases[View::Accounts] = new KAccountsView;
-    viewBases[View::Schedules] = new KScheduledView;
-    viewBases[View::Categories] = new KCategoriesView;
-    viewBases[View::Tags] = new KTagsView;
-    viewBases[View::Payees] = new KPayeesView;
-    viewBases[View::NewLedgers] = new SimpleLedgerView;
-    viewBases[View::Investments] = new KInvestmentView;
-    viewBases[View::OldLedgers] = new KGlobalLedgerView;
+    d->viewBases[View::Home] = new KHomeView;
+    d->viewBases[View::Institutions] = new KInstitutionsView;
+    d->viewBases[View::Accounts] = new KAccountsView;
+    d->viewBases[View::Schedules] = new KScheduledView;
+    d->viewBases[View::Categories] = new KCategoriesView;
+    d->viewBases[View::Tags] = new KTagsView;
+    d->viewBases[View::Payees] = new KPayeesView;
+    d->viewBases[View::NewLedgers] = new SimpleLedgerView;
+    d->viewBases[View::Investments] = new KInvestmentView;
+    d->viewBases[View::OldLedgers] = new KGlobalLedgerView;
 
     struct viewInfo
     {
@@ -144,12 +168,12 @@ KMyMoneyView::KMyMoneyView()
     };
 
     for (const viewInfo& view : viewsInfo) {
-        addView(viewBases[view.id], view.name, view.id, view.icon);
+        addView(d->viewBases[view.id], view.name, view.id, view.icon);
     }
 
     // set the model
-    setModel(m_model);
-    setCurrentPage(viewFrames[View::Home]);
+    setModel(d->m_model);
+    setCurrentPage(d->viewFrames[View::Home]);
     connect(this, &KMyMoneyView::currentPageChanged, this, &KMyMoneyView::slotSwitchView);
 
     updateViewType();
@@ -161,7 +185,8 @@ KMyMoneyView::~KMyMoneyView()
 
 void KMyMoneyView::slotFileOpened()
 {
-    for( const auto view : qAsConst(viewBases)) {
+    Q_D(KMyMoneyView);
+    for( const auto& view : qAsConst(d->viewBases)) {
         view->executeCustomAction(eView::Action::InitializeAfterFileOpen);
     }
 
@@ -175,11 +200,12 @@ void KMyMoneyView::slotFileOpened()
 
 void KMyMoneyView::slotFileClosed()
 {
+    Q_D(KMyMoneyView);
     disconnect(this, &KMyMoneyView::viewActivated, this, &KMyMoneyView::slotRememberLastView);
 
     showPageAndFocus(View::Home);
 
-    for( const auto view : qAsConst(viewBases)) {
+    for( const auto& view : qAsConst(d->viewBases)) {
         view->executeCustomAction(eView::Action::CleanupBeforeFileClose);
     }
 
@@ -189,8 +215,9 @@ void KMyMoneyView::slotFileClosed()
 
 void KMyMoneyView::showTitleBar(bool show)
 {
-    if (m_header)
-        m_header->setVisible(show);
+    Q_D(KMyMoneyView);
+    if (d->m_header)
+        d->m_header->setVisible(show);
 }
 
 void KMyMoneyView::updateViewType()
@@ -275,20 +302,23 @@ void KMyMoneyView::slotAccountTreeViewChanged(const eAccountsModel::Column colum
 
 void KMyMoneyView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins)
 {
-    if (viewBases.contains(View::Accounts))
-        viewBases[View::Accounts]->slotSelectByVariant(QVariantList {QVariant::fromValue(static_cast<void*>(&plugins))}, eView::Intent::SetOnlinePlugins);
+    Q_D(KMyMoneyView);
+    if (d->viewBases.contains(View::Accounts))
+        d->viewBases[View::Accounts]->slotSelectByVariant(QVariantList {QVariant::fromValue(static_cast<void*>(&plugins))}, eView::Intent::SetOnlinePlugins);
 
-    if (viewBases.contains(View::OnlineJobOutbox))
-        viewBases[View::OnlineJobOutbox]->slotSelectByVariant(QVariantList {QVariant::fromValue(static_cast<void*>(&plugins))}, eView::Intent::SetOnlinePlugins);
+    if (d->viewBases.contains(View::OnlineJobOutbox))
+        d->viewBases[View::OnlineJobOutbox]->slotSelectByVariant(QVariantList {QVariant::fromValue(static_cast<void*>(&plugins))}, eView::Intent::SetOnlinePlugins);
 }
 
 eDialogs::ScheduleResultCode KMyMoneyView::enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys)
 {
-    return static_cast<KScheduledView*>(viewBases[View::Schedules])->enterSchedule(schedule, autoEnter, extendedKeys);
+    Q_D(KMyMoneyView);
+    return static_cast<KScheduledView*>(d->viewBases[View::Schedules])->enterSchedule(schedule, autoEnter, extendedKeys);
 }
 
 void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idView, Icons::Icon icon)
 {
+    Q_D(KMyMoneyView);
     /* There is a bug in
      *    static int layoutText(QTextLayout *layout, int maxWidth)
      *    from kpageview_p.cpp from kwidgetsaddons.
@@ -300,50 +330,56 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
 
     auto isViewInserted = false;
     for (auto i = (int)idView; i < (int)View::None; ++i) {
-        if (viewFrames.contains((View)i)) {
-            viewFrames[idView] = m_model->insertPage(viewFrames[(View)i],view, adjustedName);
+        if (d->viewFrames.contains((View)i)) {
+            d->viewFrames[idView] = d->m_model->insertPage(d->viewFrames[(View)i],view, adjustedName);
             isViewInserted = true;
             break;
         }
     }
 
     if (!isViewInserted)
-        viewFrames[idView] = m_model->addPage(view, adjustedName);
+        d->viewFrames[idView] = d->m_model->addPage(view, adjustedName);
 
-    viewFrames[idView]->setIcon(Icons::get(icon));
-    viewBases[idView] = view;
-    connect(viewBases[idView], &KMyMoneyViewBase::requestCustomContextMenu, this, &KMyMoneyView::requestCustomContextMenu);
-    connect(viewBases[idView], &KMyMoneyViewBase::requestActionTrigger, this, &KMyMoneyView::requestActionTrigger);
-    connect(viewBases[idView], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
-    connect(this, &KMyMoneyView::settingsChanged, viewBases[idView], &KMyMoneyViewBase::slotSettingsChanged);
+    d->viewFrames[idView]->setIcon(Icons::get(icon));
+    d->viewBases[idView] = view;
+    connect(d->viewBases[idView], &KMyMoneyViewBase::requestCustomContextMenu, this, &KMyMoneyView::requestCustomContextMenu);
+    connect(d->viewBases[idView], &KMyMoneyViewBase::requestActionTrigger, this, &KMyMoneyView::requestActionTrigger);
+    connect(d->viewBases[idView], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
+    connect(this, &KMyMoneyView::settingsChanged, d->viewBases[idView], &KMyMoneyViewBase::slotSettingsChanged);
 
-    connect(viewBases[idView], &KMyMoneyViewBase::viewStateChanged, viewFrames[idView], &KPageWidgetItem::setEnabled);
-    connect(viewBases[idView], &KMyMoneyViewBase::requestSelectionChange, this, &KMyMoneyView::requestSelectionChange);
+    connect(d->viewBases[idView], &KMyMoneyViewBase::viewStateChanged, d->viewFrames[idView], &KPageWidgetItem::setEnabled);
+    connect(d->viewBases[idView], &KMyMoneyViewBase::requestSelectionChange, this, &KMyMoneyView::requestSelectionChange);
 }
 
 void KMyMoneyView::removeView(View idView)
 {
-    if (!viewBases.contains(idView))
+    Q_D(KMyMoneyView);
+    if (!d->viewBases.contains(idView))
         return;
 
-    disconnect(viewBases[idView], &KMyMoneyViewBase::viewStateChanged, viewFrames[idView], &KPageWidgetItem::setEnabled);
-    disconnect(viewBases[idView], &KMyMoneyViewBase::requestSelectionChange, this, &KMyMoneyView::requestSelectionChange);
+    disconnect(d->viewBases[idView], &KMyMoneyViewBase::viewStateChanged, d->viewFrames[idView], &KPageWidgetItem::setEnabled);
+    disconnect(d->viewBases[idView], &KMyMoneyViewBase::requestSelectionChange, this, &KMyMoneyView::requestSelectionChange);
 
-    disconnect(viewBases[idView], &KMyMoneyViewBase::requestCustomContextMenu, this, &KMyMoneyView::requestCustomContextMenu);
-    disconnect(viewBases[idView], &KMyMoneyViewBase::requestActionTrigger, this, &KMyMoneyView::requestActionTrigger);
-    disconnect(viewBases[idView], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
-    disconnect(this, &KMyMoneyView::settingsChanged, viewBases[idView], &KMyMoneyViewBase::slotSettingsChanged);
+    disconnect(d->viewBases[idView], &KMyMoneyViewBase::requestCustomContextMenu, this, &KMyMoneyView::requestCustomContextMenu);
+    disconnect(d->viewBases[idView], &KMyMoneyViewBase::requestActionTrigger, this, &KMyMoneyView::requestActionTrigger);
+    disconnect(d->viewBases[idView], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
+    disconnect(this, &KMyMoneyView::settingsChanged, d->viewBases[idView], &KMyMoneyViewBase::slotSettingsChanged);
 
-    m_model->removePage(viewFrames[idView]);
-    viewFrames.remove(idView);
-    viewBases.remove(idView);
+    d->m_model->removePage(d->viewFrames[idView]);
+    d->viewFrames.remove(idView);
+    d->viewBases.remove(idView);
 }
 
 void KMyMoneyView::updateActions(const SelectedObjects& selections)
 {
-    for (auto const view : viewBases) {
+    Q_D(KMyMoneyView);
+    for (const auto& view : d->viewBases) {
         view->updateActions(selections);
     }
+
+    // global actions
+    pActions[eMenu::Action::OpenAccount]->setEnabled(
+        !selections.isEmpty(SelectedObjects::Account));
 }
 
 void KMyMoneyView::slotSettingsChanged()
@@ -412,85 +448,95 @@ bool KMyMoneyView::showPageHeader() const
 
 void KMyMoneyView::showPageAndFocus(View idView)
 {
-    if (viewFrames.contains(idView)) {
+    Q_D(KMyMoneyView);
+    if (d->viewFrames.contains(idView)) {
         showPage(idView);
-        viewBases[idView]->executeCustomAction(eView::Action::SetDefaultFocus);
+        d->viewBases[idView]->executeCustomAction(eView::Action::SetDefaultFocus);
     }
 }
 
 void KMyMoneyView::showPage(View idView)
 {
-    if (!viewFrames.contains(idView) ||
-            currentPage() == viewFrames[idView])
+    Q_D(KMyMoneyView);
+    if (!d->viewFrames.contains(idView) ||
+        currentPage() == d->viewFrames[idView])
         return;
 
     resetViewSelection();
-    setCurrentPage(viewFrames[idView]);
+    setCurrentPage(d->viewFrames[idView]);
 }
 
 bool KMyMoneyView::canPrint()
 {
-    return ((viewFrames.contains(View::Reports) && viewFrames[View::Reports] == currentPage()) ||
-            (viewFrames.contains(View::Home) && viewFrames[View::Home] == currentPage()));
+    Q_D(KMyMoneyView);
+    return ((d->viewFrames.contains(View::Reports) && d->viewFrames[View::Reports] == currentPage()) ||
+    (d->viewFrames.contains(View::Home) && d->viewFrames[View::Home] == currentPage()));
 }
 
 void KMyMoneyView::enableViewsIfFileOpen(bool fileOpen)
 {
+    Q_D(KMyMoneyView);
     // call set enabled only if the state differs to avoid widgets 'bouncing on the screen' while doing this
     Q_ASSERT_X((int)(View::Home) == 0, "viewenums.h", "View::Home must be the first entry");
     Q_ASSERT_X(((int)(View::Home)+1) == (int)View::Institutions, "viewenums.h", "View::Institutions must be the second entry");
 
     // the home view is always enabled
-    viewFrames[View::Home]->setEnabled(true);
+    d->viewFrames[View::Home]->setEnabled(true);
     for (auto i = (int)View::Institutions; i < (int)View::None; ++i)
-        if (viewFrames.contains(View(i)))
-            if (viewFrames[View(i)]->isEnabled() != fileOpen)
-                viewFrames[View(i)]->setEnabled(fileOpen);
+        if (d->viewFrames.contains(View(i)))
+            if (d->viewFrames[View(i)]->isEnabled() != fileOpen)
+                d->viewFrames[View(i)]->setEnabled(fileOpen);
 
     emit viewStateChanged(fileOpen);
 }
 
 void KMyMoneyView::switchToDefaultView()
 {
+    Q_D(KMyMoneyView);
     const auto idView = KMyMoneySettings::startLastViewSelected() ?
                         static_cast<View>(KMyMoneySettings::lastViewSelected()) :
                         View::Home;
     // if we currently see a different page, then select the right one
-    if (viewFrames.contains(idView) && viewFrames[idView] != currentPage())
+    if (d->viewFrames.contains(idView) && d->viewFrames[idView] != currentPage())
         showPage(idView);
 }
 
 void KMyMoneyView::slotTagSelected(const QString& tag, const QString& account, const QString& transaction)
 {
+    Q_D(KMyMoneyView);
     showPage(View::Tags);
-    static_cast<KTagsView*>(viewBases[View::Tags])->slotSelectTagAndTransaction(tag, account, transaction);
+    static_cast<KTagsView*>(d->viewBases[View::Tags])->slotSelectTagAndTransaction(tag, account, transaction);
 }
 
 void KMyMoneyView::finishReconciliation(const MyMoneyAccount& /* account */)
 {
+    Q_D(KMyMoneyView);
 /// @todo port to new model code
 #if 0
     MyMoneyFile::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 #endif
-    static_cast<KGlobalLedgerView*>(viewBases[View::OldLedgers])->slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
+    static_cast<KGlobalLedgerView*>(d->viewBases[View::OldLedgers])->slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 }
 
 void KMyMoneyView::viewAccountList(const QString& /*selectAccount*/)
 {
-    if (viewFrames[View::Accounts] != currentPage())
+    Q_D(KMyMoneyView);
+    if (d->viewFrames[View::Accounts] != currentPage())
         showPage(View::Accounts);
-    viewBases[View::Accounts]->show();
+    d->viewBases[View::Accounts]->show();
 }
 
 void KMyMoneyView::slotRefreshViews()
 {
+    Q_D(KMyMoneyView);
     showTitleBar(KMyMoneySettings::showTitleBar());
 
-    for (auto i = (int)View::Home; i < (int)View::None; ++i)
-        if (viewBases.contains(View(i)))
-            viewBases[View(i)]->executeCustomAction(eView::Action::Refresh);
+    for (auto i = (int)View::Home; i < (int)View::None; ++i) {
+        if (d->viewBases.contains(View(i)))
+            d->viewBases[View(i)]->executeCustomAction(eView::Action::Refresh);
+    }
 
-    viewBases[View::Payees]->executeCustomAction(eView::Action::ClosePayeeIdentifierSource);
+    d->viewBases[View::Payees]->executeCustomAction(eView::Action::ClosePayeeIdentifierSource);
 }
 
 void KMyMoneyView::slotShowTransactionDetail(bool detailed)
@@ -501,6 +547,7 @@ void KMyMoneyView::slotShowTransactionDetail(bool detailed)
 
 void KMyMoneyView::slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* previous)
 {
+    Q_D(KMyMoneyView);
     if (previous != nullptr) {
         const auto view = qobject_cast<KMyMoneyViewBase*>(previous->widget());
         if (view) {
@@ -509,8 +556,8 @@ void KMyMoneyView::slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* pre
     }
 
     // set the current page's title in the header
-    if (m_header)
-        m_header->setText(current->header());
+    if (d->m_header)
+        d->m_header->setText(current->header());
 
     if (current != nullptr) {
         const auto view = qobject_cast<KMyMoneyViewBase*>(current->widget());
@@ -519,7 +566,7 @@ void KMyMoneyView::slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* pre
             // remember last selected view
             // omit the initial page selection
             if (previous != nullptr) {
-                for (auto it = viewFrames.constBegin(); it != viewFrames.constEnd(); ++it) {
+                for (auto it = d->viewFrames.constBegin(); it != d->viewFrames.constEnd(); ++it) {
                     if (it.value() == current) {
                         emit viewActivated(it.key());
                         break;
@@ -582,10 +629,11 @@ void KMyMoneyView::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& n
 
 void KMyMoneyView::slotPrintView()
 {
-    if (viewFrames.contains(View::Reports) && viewFrames[View::Reports] == currentPage())
-        viewBases[View::Reports]->executeCustomAction(eView::Action::Print);
-    else if (viewFrames.contains(View::Home) && viewFrames[View::Home] == currentPage())
-        viewBases[View::Home]->executeCustomAction(eView::Action::Print);
+    Q_D(KMyMoneyView);
+    if (d->viewFrames.contains(View::Reports) && d->viewFrames[View::Reports] == currentPage())
+        d->viewBases[View::Reports]->executeCustomAction(eView::Action::Print);
+    else if (d->viewFrames.contains(View::Home) && d->viewFrames[View::Home] == currentPage())
+        d->viewBases[View::Home]->executeCustomAction(eView::Action::Print);
 }
 
 void KMyMoneyView::resetViewSelection()
@@ -599,44 +647,46 @@ void KMyMoneyView::resetViewSelection()
 
 void KMyMoneyView::slotOpenObjectRequested(const MyMoneyObject& obj)
 {
+    Q_D(KMyMoneyView);
     if (typeid(obj) == typeid(MyMoneyAccount)) {
         const auto& acc = static_cast<const MyMoneyAccount&>(obj);
         // check if we can open this account
         // currently it make's sense for asset and liability accounts
         if (!MyMoneyFile::instance()->isStandardAccount(acc.id()))
-            if (viewBases.contains(View::OldLedgers))
-                viewBases[View::OldLedgers]->slotSelectByVariant(QVariantList {QVariant(acc.id()), QVariant(QString()) }, eView::Intent::ShowTransactionInLedger );
+            if (d->viewBases.contains(View::OldLedgers))
+                d->viewBases[View::OldLedgers]->slotSelectByVariant(QVariantList {QVariant(acc.id()), QVariant(QString()) }, eView::Intent::ShowTransactionInLedger );
 
     } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
 //    const auto& inst = static_cast<const MyMoneyInstitution&>(obj);
-        if (viewBases.contains(View::Institutions))
-            viewBases[View::Institutions]->executeCustomAction(eView::Action::EditInstitution);
+        if (d->viewBases.contains(View::Institutions))
+            d->viewBases[View::Institutions]->executeCustomAction(eView::Action::EditInstitution);
     } else if (typeid(obj) == typeid(MyMoneySchedule)) {
-        if (viewBases.contains(View::Schedules))
-            viewBases[View::Schedules]->executeCustomAction(eView::Action::EditSchedule);
+        if (d->viewBases.contains(View::Schedules))
+            d->viewBases[View::Schedules]->executeCustomAction(eView::Action::EditSchedule);
     } else if (typeid(obj) == typeid(MyMoneyReport)) {
 //    const auto& rep = static_cast<const MyMoneyReport&>(obj);
         showPage(View::Reports);
-        if (viewBases.contains(View::Reports))
-            viewBases[View::Reports]->slotSelectByObject(obj, eView::Intent::OpenObject);
+        if (d->viewBases.contains(View::Reports))
+            d->viewBases[View::Reports]->slotSelectByObject(obj, eView::Intent::OpenObject);
     }
 }
 
 void KMyMoneyView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
 {
+    Q_D(KMyMoneyView);
     switch (intent) {
     case eView::Intent::None:
         slotObjectSelected(obj);
         break;
 
     case eView::Intent::SynchronizeAccountInInvestmentView:
-        if (viewBases.contains(View::Investments))
-            viewBases[View::Investments]->slotSelectByObject(obj, intent);
+        if (d->viewBases.contains(View::Investments))
+            d->viewBases[View::Investments]->slotSelectByObject(obj, intent);
         break;
 
     case eView::Intent::SynchronizeAccountInLedgersView:
-        if (viewBases.contains(View::OldLedgers))
-            viewBases[View::OldLedgers]->slotSelectByObject(obj, intent);
+        if (d->viewBases.contains(View::OldLedgers))
+            d->viewBases[View::OldLedgers]->slotSelectByObject(obj, intent);
         break;
 
     case eView::Intent::OpenObject:
@@ -648,14 +698,14 @@ void KMyMoneyView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent in
         break;
 
     case eView::Intent::StartEnteringOverdueScheduledTransactions:
-        if (viewBases.contains(View::Schedules))
-            viewBases[View::Schedules]->slotSelectByObject(obj, intent);
+        if (d->viewBases.contains(View::Schedules))
+            d->viewBases[View::Schedules]->slotSelectByObject(obj, intent);
         break;
 
     case eView::Intent::FinishEnteringOverdueScheduledTransactions:
-        if (viewBases.contains(View::OldLedgers)) {
+        if (d->viewBases.contains(View::OldLedgers)) {
             showPage(View::OldLedgers);
-            viewBases[View::OldLedgers]->slotSelectByObject(obj, intent);
+            d->viewBases[View::OldLedgers]->slotSelectByObject(obj, intent);
         }
         break;
 
@@ -666,14 +716,16 @@ void KMyMoneyView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent in
 
 void KMyMoneyView::selectView(View idView, const QVariantList& args)
 {
-    if (viewBases.contains(idView)) {
+    Q_D(KMyMoneyView);
+    if (d->viewBases.contains(idView)) {
         showPage(idView);
-        viewBases[idView]->slotSelectByVariant(args, eView::Intent::None);
+        d->viewBases[idView]->slotSelectByVariant(args, eView::Intent::None);
     }
 }
 
 void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
 {
+    Q_D(KMyMoneyView);
     switch(intent) {
     case eView::Intent::ReportProgress:
         if (variant.count() == 2)
@@ -697,14 +749,14 @@ void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Inten
 #endif
 
     case eView::Intent::UpdateProfit:
-        if (viewBases.contains(View::Categories))
-            viewBases[View::Categories]->slotSelectByVariant(variant, intent);
+        if (d->viewBases.contains(View::Categories))
+            d->viewBases[View::Categories]->slotSelectByVariant(variant, intent);
         break;
 
     case eView::Intent::ShowTransactionInLedger:
-        if (viewBases.contains(View::NewLedgers)) {
+        if (d->viewBases.contains(View::NewLedgers)) {
             showPage(View::NewLedgers);
-            viewBases[View::NewLedgers]->slotSelectByVariant(variant, intent);
+            d->viewBases[View::NewLedgers]->slotSelectByVariant(variant, intent);
         }
         break;
 
@@ -718,17 +770,17 @@ void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Inten
         break;
 
     case eView::Intent::ShowPayee:
-        if (viewBases.contains(View::Payees)) {
+        if (d->viewBases.contains(View::Payees)) {
             showPage(View::Payees);
-            viewBases[View::Payees]->slotSelectByVariant(variant, intent);
+            d->viewBases[View::Payees]->slotSelectByVariant(variant, intent);
         }
         break;
 
     case eView::Intent::SelectRegisterTransactions:
         if (variant.count() == 1) {
             emit transactionsSelected(variant.at(0).value<KMyMoneyRegister::SelectedTransactions>()); // for plugins
-            if (viewBases.contains(View::OldLedgers))
-                viewBases[View::OldLedgers]->slotSelectByVariant(variant, intent);
+            if (d->viewBases.contains(View::OldLedgers))
+                d->viewBases[View::OldLedgers]->slotSelectByVariant(variant, intent);
         }
         break;
 
@@ -748,6 +800,7 @@ void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Inten
 
 void KMyMoneyView::slotCustomActionRequested(View view, eView::Action action)
 {
+    Q_D(KMyMoneyView);
     switch (action) {
     case eView::Action::AboutToShow:
         resetViewSelection();
@@ -756,8 +809,8 @@ void KMyMoneyView::slotCustomActionRequested(View view, eView::Action action)
         showPage(view);
         break;
     case eView::Action::ShowBalanceChart:
-        if (viewBases.contains(View::Reports))
-            viewBases[View::Reports]->executeCustomAction(action);
+        if (d->viewBases.contains(View::Reports))
+            d->viewBases[View::Reports]->executeCustomAction(action);
         break;
     default:
         break;
@@ -766,14 +819,15 @@ void KMyMoneyView::slotCustomActionRequested(View view, eView::Action action)
 
 void KMyMoneyView::slotObjectSelected(const MyMoneyObject& obj)
 {
+    Q_D(KMyMoneyView);
     // carrying some slots over to views isn't easy for all slots...
     // ...so calls to kmymoney still must be here
     if (typeid(obj) == typeid(MyMoneyAccount)) {
         QVector<View> views {View::Investments, View::Categories, View::Accounts,
                              View::OldLedgers, View::Reports, View::OnlineJobOutbox};
         for (const auto view : views)
-            if (viewBases.contains(view))
-                viewBases[view]->slotSelectByObject(obj, eView::Intent::UpdateActions);
+            if (d->viewBases.contains(view))
+                d->viewBases[view]->slotSelectByObject(obj, eView::Intent::UpdateActions);
 
         // for plugin only
         const auto& acc = static_cast<const MyMoneyAccount&>(obj);
@@ -781,26 +835,27 @@ void KMyMoneyView::slotObjectSelected(const MyMoneyObject& obj)
                 !MyMoneyFile::instance()->isStandardAccount(acc.id()))
             emit accountSelected(acc);
     } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
-        viewBases[View::Institutions]->slotSelectByObject(obj, eView::Intent::UpdateActions);
+        d->viewBases[View::Institutions]->slotSelectByObject(obj, eView::Intent::UpdateActions);
     } else if (typeid(obj) == typeid(MyMoneySchedule)) {
-        viewBases[View::Schedules]->slotSelectByObject(obj, eView::Intent::UpdateActions);
+        d->viewBases[View::Schedules]->slotSelectByObject(obj, eView::Intent::UpdateActions);
     }
 }
 
 void KMyMoneyView::slotContextMenuRequested(const MyMoneyObject& obj)
 {
+    Q_D(KMyMoneyView);
     if (typeid(obj) == typeid(MyMoneyAccount)) {
         const auto& acc = static_cast<const MyMoneyAccount&>(obj);
         if (acc.isInvest())
-            viewBases[View::Investments]->slotSelectByObject(obj, eView::Intent::OpenContextMenu);
+            d->viewBases[View::Investments]->slotSelectByObject(obj, eView::Intent::OpenContextMenu);
         else if (acc.isIncomeExpense())
-            viewBases[View::Categories]->slotSelectByObject(obj, eView::Intent::OpenContextMenu);
+            d->viewBases[View::Categories]->slotSelectByObject(obj, eView::Intent::OpenContextMenu);
         else
-            viewBases[View::Accounts]->slotSelectByObject(obj, eView::Intent::OpenContextMenu);
+            d->viewBases[View::Accounts]->slotSelectByObject(obj, eView::Intent::OpenContextMenu);
 
     } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
-        viewBases[View::Institutions]->slotSelectByObject(obj, eView::Intent::OpenContextMenu);
+        d->viewBases[View::Institutions]->slotSelectByObject(obj, eView::Intent::OpenContextMenu);
     } else if (typeid(obj) == typeid(MyMoneySchedule)) {
-        viewBases[View::Schedules]->slotSelectByObject(obj, eView::Intent::OpenContextMenu);
+        d->viewBases[View::Schedules]->slotSelectByObject(obj, eView::Intent::OpenContextMenu);
     }
 }

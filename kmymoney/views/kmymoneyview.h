@@ -93,17 +93,14 @@ class SelectedObjects;
   * @short Handles the view of the MyMoneyFile.
   */
 enum class View;
+class KMyMoneyViewPrivate;
 class KMyMoneyView : public KPageWidget
 {
     Q_OBJECT
+    Q_DECLARE_PRIVATE(KMyMoneyView)
+
 private:
-
-    KPageWidgetModel* m_model;
-
-    QHash<View, KPageWidgetItem*> viewFrames;
-    QHash<View, KMyMoneyViewBase*> viewBases;
-
-    KMyMoneyTitleLabel* m_header;
+    const QScopedPointer<KMyMoneyViewPrivate> d_ptr;
 
     void viewAccountList(const QString& selectAccount); // Show the accounts view
 
