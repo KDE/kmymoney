@@ -59,7 +59,7 @@ void BudgetView::plug(KXMLGUIFactory* guiFactory)
     // create my actions and menus
     m_view->createActions(guiFactory, this);
 
-    viewInterface()->addView(m_view, i18n("Budgets"), View::Budget, Icons::Icon::Budget);
+    viewInterface()->addView(m_view, i18n("Budgets"), View::Budget, Icons::Icon::Budgets);
 }
 
 void BudgetView::unplug()

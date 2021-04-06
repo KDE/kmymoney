@@ -33,6 +33,7 @@ const QHash<Icon, QString> iconMappings{
     {Icon::ArrowRight, QStringLiteral("arrow-right")},
     {Icon::ArrowUp, QStringLiteral("arrow-up")},
     {Icon::Budget, QStringLiteral("view-financial-budget")},
+    {Icon::Budgets, QStringLiteral("financial-budget")},
     {Icon::Calculator, QStringLiteral("accessories-calculator")},
     {Icon::Configure, QStringLiteral("configure")},
     {Icon::DialogCancel, QStringLiteral("dialog-cancel")},
