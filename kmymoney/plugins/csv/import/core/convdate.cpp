@@ -27,6 +27,12 @@ QDate ConvertDate::convertDate(const QString& txt)
     QString aFormat;
     QString dat;
     QDate  aDate;
+
+    aDate = QDate::fromString(txt, Qt::DateFormat::ISODate);
+
+    if (aDate.isValid())
+        return aDate;
+
     QString dateFormatString = stringFormat();
 
     QRegularExpression rx(QStringLiteral("[\\. :-]"));  //                           replace date field separators '.' ' ' ':' '-'
