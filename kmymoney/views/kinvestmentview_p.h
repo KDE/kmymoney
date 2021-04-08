@@ -104,8 +104,8 @@ public:
         m_accountsProxyModel->addAccountType(eMyMoney::Account::Type::Investment);
         m_accountsProxyModel->setHideEquityAccounts(false);
         auto const model = Models::instance()->accountsModel();
-        m_accountsProxyModel->setSourceModel(model);
         m_accountsProxyModel->setSourceColumns(model->getColumns());
+        m_accountsProxyModel->setSourceModel(model);
         m_accountsProxyModel->sort((int)eAccountsModel::Column::Account);
         ui->m_accountComboBox->setModel(m_accountsProxyModel);
         ui->m_accountComboBox->expandAll();

@@ -167,8 +167,8 @@ AccountsViewProxyModel *KMyMoneyAccountTreeView::init(View view)
         institutionsModel->setColumnVisibility(column, true);
     }
 
-    d->m_model->setSourceModel(sourceModel);
     d->m_model->setSourceColumns(sourceModel->getColumns());
+    d->m_model->setSourceModel(sourceModel);
     d->m_model->setFilterCaseSensitivity(Qt::CaseInsensitive);
     d->m_model->setSortLocaleAware(true);
     setModel(d->m_model);

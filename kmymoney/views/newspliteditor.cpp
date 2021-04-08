@@ -200,8 +200,8 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const QString& counterAccountId)
     d->accountsModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense, eMyMoney::Account::Type::Equity,});
     d->accountsModel->setHideEquityAccounts(false);
     auto const model = Models::instance()->accountsModel();
-    d->accountsModel->setSourceModel(model);
     d->accountsModel->setSourceColumns(model->getColumns());
+    d->accountsModel->setSourceModel(model);
     d->accountsModel->sort((int)eAccountsModel::Column::Account);
     d->ui->accountCombo->setModel(d->accountsModel);
 

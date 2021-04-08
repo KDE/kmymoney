@@ -95,8 +95,8 @@ public:
 
         accountsModel->setHideEquityAccounts(false);
         auto const model = Models::instance()->accountsModel();
-        accountsModel->setSourceModel(model);
         accountsModel->setSourceColumns(model->getColumns());
+        accountsModel->setSourceModel(model);
         accountsModel->sort((int)eAccountsModel::Column::Account);
         ui->accountCombo->setModel(accountsModel);
 

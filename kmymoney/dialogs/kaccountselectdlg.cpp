@@ -123,8 +123,8 @@ KAccountSelectDlg::KAccountSelectDlg(const eDialogs::Category accountType, const
     filterProxyModel->addAccountGroup(accountTypes);
 
     auto model = Models::instance()->accountsModel();
-    filterProxyModel->setSourceModel(model);
     filterProxyModel->setSourceColumns(model->getColumns());
+    filterProxyModel->setSourceModel(model);
     filterProxyModel->sort((int)eAccountsModel::Column::Account);
 
     d->ui->m_accountSelector->setModel(filterProxyModel);
