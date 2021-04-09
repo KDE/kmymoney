@@ -1703,10 +1703,9 @@ void Register::addGroupMarkers()
         if (KMyMoneySettings::startDate().date() != QDate(1900, 1, 1))
             new KMyMoneyRegister::FancyDateGroupMarker(this, KMyMoneySettings::startDate().date(), i18n("Prior transactions possibly filtered"));
 
+        if (d->m_account.lastReconciliationDate().isValid())
+            new KMyMoneyRegister::StatementGroupMarker(this, eRegister::CashFlowDirection::Deposit, d->m_account.lastReconciliationDate(), i18n("Last reconciliation"));
         if (KMyMoneySettings::showFancyMarker()) {
-            if (d->m_account.lastReconciliationDate().isValid())
-                new KMyMoneyRegister::StatementGroupMarker(this, eRegister::CashFlowDirection::Deposit, d->m_account.lastReconciliationDate(), i18n("Last reconciliation"));
-
             if (!d->m_account.value("lastImportedTransactionDate").isEmpty()
                     && !d->m_account.value("lastStatementBalance").isEmpty()) {
                 MyMoneyMoney balance(d->m_account.value("lastStatementBalance"));
