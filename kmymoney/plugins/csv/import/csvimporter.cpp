@@ -79,16 +79,13 @@ QString CSVImporter::formatName() const
 
 QString CSVImporter::formatFilenameFilter() const
 {
-    return "*.csv";
+    return "*.csv *.txt";
 }
 
 bool CSVImporter::isMyFormat(const QString& filename) const
 {
-    // filename is considered a CSV file if it can be opened
-    // and the filename ends in ".csv" (case does not matter).
     QFile f(filename);
-    return filename.endsWith(QLatin1String(".csv"), Qt::CaseInsensitive)
-           && f.open(QIODevice::ReadOnly | QIODevice::Text);
+    return f.open(QIODevice::ReadOnly | QIODevice::Text);
 }
 
 void CSVImporter::startWizardRun()
