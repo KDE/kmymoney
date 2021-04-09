@@ -252,6 +252,10 @@
    <label>Hide reconciled transactions</label>
    <default>false</default>
   </entry>
+  <entry name="ShowReconciledBalances" type="Bool">
+   <label>Show reconciled balances</label>
+   <default>true</default>
+  </entry>
   <entry name="ShowRegisterDetailed" type="Bool">
    <label>Show all register entries in full detail</label>
    <default>false</default>

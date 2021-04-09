@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui version="46" name="kmymoney" >
+<kpartgui version="47" name="kmymoney" >
  <MenuBar>
   <Menu name="file" >
    <DefineGroup name="open_db_group" append="open_merge"/>
@@ -30,6 +30,7 @@
   <Menu name="view" >
    <Action name="view_show_transaction_detail" />
    <Action name="view_hide_reconciled_transactions" />
+   <Action name="view_show_reconciled_balances" />
    <Action name="view_hide_unused_categories" />
    <Action name="view_show_all_accounts" />
   </Menu>

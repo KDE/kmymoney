@@ -1386,6 +1386,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             // *************
             {Action::ViewTransactionDetail,         QStringLiteral("view_show_transaction_detail"),   i18n("Show Transaction Detail"),                    Icon::TransactionDetails},
             {Action::ViewHideReconciled,            QStringLiteral("view_hide_reconciled_transactions"), i18n("Hide reconciled transactions"),            Icon::HideReconciled},
+            {Action::ViewShowReconciledBalances,    QStringLiteral("view_show_reconciled_balances"),  i18n("Show reconciled balances"),                   Icon::ShowReconciledBalances},
             {Action::ViewHideCategories,            QStringLiteral("view_hide_unused_categories"),    i18n("Hide unused categories"),                     Icon::HideCategories},
             {Action::ViewShowAll,                   QStringLiteral("view_show_all_accounts"),         i18n("Show all accounts"),                          Icon::Empty},
             // *********************
@@ -1530,6 +1531,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             // *************
             {Action::ViewTransactionDetail,         &KMyMoneyApp::slotShowTransactionDetail},
             {Action::ViewHideReconciled,            &KMyMoneyApp::slotHideReconciledTransactions},
+            {Action::ViewShowReconciledBalances,    &KMyMoneyApp::slotShowReconciledBalances},
             {Action::ViewHideCategories,            &KMyMoneyApp::slotHideUnusedCategories},
             {Action::ViewShowAll,                   &KMyMoneyApp::slotShowAllAccounts},
             // **************
@@ -1573,6 +1575,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
         // so set them here
         const QVector<Action> checkableActions {
             Action::ViewTransactionDetail, Action::ViewHideReconciled, Action::ViewHideCategories,
+            Action::ViewShowReconciledBalances, Action::ViewHideCategories,
 #ifdef KMM_DEBUG
             Action::DebugTraces,
             Action::DebugTimers,
@@ -1635,6 +1638,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     // Setup transaction detail switch
     lutActions[Action::ViewTransactionDetail]->setChecked(KMyMoneySettings::showRegisterDetailed());
     lutActions[Action::ViewHideReconciled]->setChecked(KMyMoneySettings::hideReconciledTransactions());
+    lutActions[Action::ViewShowReconciledBalances]->setChecked(KMyMoneySettings::showReconciledBalances());
     lutActions[Action::ViewHideCategories]->setChecked(KMyMoneySettings::hideUnusedCategory());
     lutActions[Action::ViewShowAll]->setChecked(KMyMoneySettings::showAllAccounts());
 
@@ -1777,6 +1781,7 @@ void KMyMoneyApp::readOptions()
 
 
     pActions[Action::ViewHideReconciled]->setChecked(KMyMoneySettings::hideReconciledTransactions());
+    pActions[Action::ViewShowReconciledBalances]->setChecked(KMyMoneySettings::showReconciledBalances());
     pActions[Action::ViewHideCategories]->setChecked(KMyMoneySettings::hideUnusedCategory());
 
     d->m_recentFiles->loadEntries(d->m_config->group("Recent Files"));
@@ -2013,6 +2018,12 @@ void KMyMoneyApp::slotShowTransactionDetail()
 void KMyMoneyApp::slotHideReconciledTransactions()
 {
     KMyMoneySettings::setHideReconciledTransactions(pActions[Action::ViewHideReconciled]->isChecked());
+    d->m_myMoneyView->slotRefreshViews();
+}
+
+void KMyMoneyApp::slotShowReconciledBalances()
+{
+    KMyMoneySettings::setShowReconciledBalances(pActions[Action::ViewShowReconciledBalances]->isChecked());
     d->m_myMoneyView->slotRefreshViews();
 }
 

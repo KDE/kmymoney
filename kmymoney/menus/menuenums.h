@@ -34,7 +34,7 @@ enum class Action {
     // *************
     // The view menu
     // *************
-    ViewTransactionDetail, ViewHideReconciled,
+    ViewTransactionDetail, ViewHideReconciled, ViewShowReconciledBalances,
     ViewHideCategories, ViewShowAll,
     // *************
     // The institution menu

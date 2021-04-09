@@ -436,6 +436,11 @@ public Q_SLOTS:
     void slotHideReconciledTransactions();
 
     /**
+      * Toggles the show reconciled balances setting
+      */
+    void slotShowReconciledBalances();
+
+    /**
       * Toggles the hide unused categories setting
       */
     void slotHideUnusedCategories();

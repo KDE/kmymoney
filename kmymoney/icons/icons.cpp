@@ -153,6 +153,9 @@ const QHash<Icon, QHash<IconSet, QString> > iconMappings{
     {   Icon::HideReconciled,
         {{IconSet::Common, QStringLiteral("hide-reconciled")}}
     },
+    {   Icon::ShowReconciledBalances,
+        {{IconSet::Breeze, QStringLiteral("gnumeric-autosum")}}
+    },
     {Icon::KMyMoney, {{IconSet::Common, QStringLiteral("kmymoney")}}},
     {   Icon::KeyEnter,
         {   {IconSet::Common, QStringLiteral("input-keyboard")},

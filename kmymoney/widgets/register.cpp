@@ -1705,6 +1705,14 @@ void Register::addGroupMarkers()
 
         if (d->m_account.lastReconciliationDate().isValid())
             new KMyMoneyRegister::StatementGroupMarker(this, eRegister::CashFlowDirection::Deposit, d->m_account.lastReconciliationDate(), i18n("Last reconciliation"));
+
+        if (KMyMoneySettings::showReconciledBalances()) {
+            foreach(const QDate &date, d->m_account.reconciliationHistory().keys()) {
+                QString txt = i18n("Reconciled Balance: %1", d->m_account.reconciliationHistory()[date].formatMoney(d->m_account.fraction()));
+                new KMyMoneyRegister::StatementGroupMarker(this, eRegister::CashFlowDirection::Deposit, date, txt);
+            }
+        }
+
         if (KMyMoneySettings::showFancyMarker()) {
             if (!d->m_account.value("lastImportedTransactionDate").isEmpty()
                     && !d->m_account.value("lastStatementBalance").isEmpty()) {

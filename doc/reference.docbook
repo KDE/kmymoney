@@ -261,6 +261,20 @@
   <varlistentry>
     <term><menuchoice>
       <shortcut>
+        <keycombo>&Ctrl;<keycap>B</keycap></keycombo>
+      </shortcut>
+      <guimenu>View</guimenu>
+        <guimenuitem>Show reconciled balances</guimenuitem>
+      </menuchoice></term>
+    <listitem>
+      <para><action>Show reconciled balances and the last reconciliation
+        milestone on the register.</action></para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term><menuchoice>
+      <shortcut>
         <keycombo>&Ctrl;<keycap>U</keycap></keycombo>
       </shortcut>
       <guimenu>View</guimenu>
