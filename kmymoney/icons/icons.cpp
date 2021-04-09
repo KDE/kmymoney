@@ -83,6 +83,7 @@ const QHash<Icon, QString> iconMappings{
     {Icon::OfficeChartLineForecast, QStringLiteral("office-chart-line-forecast")},
     {Icon::OpenDatabase, QStringLiteral("server-database")},
     {Icon::Pause, QStringLiteral("media-playback-pause")},
+    {Icon::Payee, QStringLiteral("system-users")},
     {Icon::PayeeNew, QStringLiteral("list-add-user")},
     {Icon::PayeeRemove, QStringLiteral("list-remove-user")},
     {Icon::PayeeMerge, QStringLiteral("merge")},
