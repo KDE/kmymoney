@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2014 Christian Dávid <christian-david@web.de>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -32,7 +33,11 @@ class onlineJobPluginMockup : public KMyMoneyPlugin::OnlinePluginExtended
                  KMyMoneyPlugin::OnlinePlugin)
 
 public:
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
     explicit onlineJobPluginMockup(QObject *parent, const QVariantList &args);
+#else
+    explicit onlineJobPluginMockup(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+#endif
     ~onlineJobPluginMockup() override;
 
     void protocols(QStringList& protocolList) const override;

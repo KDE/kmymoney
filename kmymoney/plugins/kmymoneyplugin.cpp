@@ -16,16 +16,20 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KToggleAction>
 #include <KActionCollection>
-#include <mymoneyexception.h>
+#include <KPluginMetaData>
+#include <KToggleAction>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 #include "interfaceloader.h"
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
+#include <mymoneyexception.h>
+#endif
 
 KMyMoneyPlugin::Container pPlugins;
 
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
 KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const QVariantList& args)
     :
     QObject(),
@@ -41,6 +45,20 @@ KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const QVariantList& args)
         setComponentName(args.at(0).toString(), m_componentDisplayName);
     }
 }
+#else
+KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const KPluginMetaData &metaData, const QVariantList& args)
+    :
+    QObject(),
+    KXMLGUIClient()
+{
+    Q_UNUSED(parent)
+    Q_UNUSED(args)
+
+    setObjectName(metaData.pluginId());
+    m_componentDisplayName = metaData.name();
+    setComponentName(metaData.name(), m_componentDisplayName);
+}
+#endif
 
 KMyMoneyPlugin::Plugin::~Plugin()
 {

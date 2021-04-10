@@ -3,6 +3,7 @@
     SPDX-FileCopyrightText: 2009 Cristian Onet onet.cristian @gmail.com
     SPDX-FileCopyrightText: 2010-2019 Thomas Baumgart tbaumgart @kde.org
     SPDX-FileCopyrightText: 2016 Christian David christian-david @web.de
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 #ifndef KBANKING_H
@@ -54,7 +55,11 @@ class KBanking : public KMyMoneyPlugin::OnlinePluginExtended
                  KMyMoneyPlugin::OnlinePlugin)
 
 public:
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
     explicit KBanking(QObject *parent, const QVariantList &args);
+#else
+    explicit KBanking(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+#endif
     ~KBanking() override;
 
     bool importStatement(const MyMoneyStatement& s);

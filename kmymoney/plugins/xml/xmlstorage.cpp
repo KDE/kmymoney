@@ -59,8 +59,13 @@ static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
 #define RECOVER_KEY_EXPIRATION_WARNING 30
 #endif
 
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
 XMLStorage::XMLStorage(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, args)
+#else
+XMLStorage::XMLStorage(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
+    KMyMoneyPlugin::Plugin(parent, metaData, args)
+#endif
 {
     // For information, announce that we have been loaded.
     qDebug("Plugins: xmlstorage loaded");

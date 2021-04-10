@@ -34,7 +34,11 @@ class OFXImporter : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::Import
     Q_INTERFACES(KMyMoneyPlugin::OnlinePlugin)
 
 public:
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
     explicit OFXImporter(QObject *parent, const QVariantList &args);
+#else
+    explicit OFXImporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+#endif
     ~OFXImporter() override;
 
     /**

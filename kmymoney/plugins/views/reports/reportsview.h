@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -24,7 +25,11 @@ class ReportsView : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::DataPl
     Q_INTERFACES(KMyMoneyPlugin::DataPlugin)
 
 public:
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
     explicit ReportsView(QObject *parent, const QVariantList &args);
+#else
+    explicit ReportsView(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+#endif
     ~ReportsView() final;
 
     void plug(KXMLGUIFactory* guiFactory) final override;

@@ -39,8 +39,13 @@ struct iCalendarExporter::Private {
     KMMSchedulesToiCalendar m_exporter;
 };
 
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
 iCalendarExporter::iCalendarExporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, args),
+#else
+iCalendarExporter::iCalendarExporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
+    KMyMoneyPlugin::Plugin(parent, metaData, args),
+#endif
     d(std::unique_ptr<Private>(new Private))
 {
     d->m_profileName = "iCalendarPlugin";

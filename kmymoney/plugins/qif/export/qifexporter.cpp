@@ -30,8 +30,13 @@
 #include "mymoneyqifwriter.h"
 #include "viewinterface.h"
 
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
 QIFExporter::QIFExporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, args)
+#else
+QIFExporter::QIFExporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
+    KMyMoneyPlugin::Plugin(parent, metaData, args)
+#endif
 {
     const auto rcFileName = QLatin1String("qifexporter.rc");
 

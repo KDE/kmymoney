@@ -72,8 +72,13 @@ QUrlQuery SQLStorage::convertOldUrl(const QUrl& url)
 }
 
 
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
 SQLStorage::SQLStorage(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, args)
+#else
+SQLStorage::SQLStorage(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
+    KMyMoneyPlugin::Plugin(parent, metaData, args)
+#endif
 {
     const auto rcFileName = QLatin1String("sqlstorage.rc");
 

@@ -2,6 +2,7 @@
     SPDX-FileCopyrightText: 2014-2015 Romain Bignon <romain@symlink.me>
     SPDX-FileCopyrightText: 2014-2015 Florent Fourcot <weboob@flo.fourcot.fr>
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -29,7 +30,11 @@ class Weboob : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::OnlinePlugi
     Q_INTERFACES(KMyMoneyPlugin::OnlinePlugin)
 
 public:
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
     explicit Weboob(QObject *parent, const QVariantList &args);
+#else
+    explicit Weboob(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+#endif
     ~Weboob() override;
 
     void plug() override;

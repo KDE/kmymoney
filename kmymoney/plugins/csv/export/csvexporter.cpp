@@ -31,10 +31,16 @@
 
 #include "csvexportdlg.h"
 #include "csvwriter.h"
+#include "kmymoneyplugin.h"
 #include "viewinterface.h"
 
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
 CSVExporter::CSVExporter(QObject *parent, const QVariantList &args)
     : KMyMoneyPlugin::Plugin(parent, args)
+#else
+CSVExporter::CSVExporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
+    : KMyMoneyPlugin::Plugin(parent, metaData, args)
+#endif
     , m_action(nullptr)
 {
     const auto rcFileName = QLatin1String("csvexporter.rc");

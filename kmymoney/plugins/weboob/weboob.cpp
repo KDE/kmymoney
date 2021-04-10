@@ -59,8 +59,13 @@ public:
     AccountSettings* accountSettings;
 };
 
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
 Weboob::Weboob(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, args),
+#else
+Weboob::Weboob(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
+    KMyMoneyPlugin::Plugin(parent, metaData,args),
+#end,
     d_ptr(new WeboobPrivate)
 {
     const auto rcFileName = QLatin1String("weboob.rc");

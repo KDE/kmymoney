@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -24,7 +25,11 @@ class SQLStorage : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::Storage
     Q_INTERFACES(KMyMoneyPlugin::StoragePlugin)
 
 public:
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
     explicit SQLStorage(QObject *parent, const QVariantList &args);
+#else
+    explicit SQLStorage(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+#endif
     ~SQLStorage() override;
 
     QAction *m_openDBaction;

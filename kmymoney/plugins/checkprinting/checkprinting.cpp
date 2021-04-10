@@ -175,8 +175,13 @@ struct CheckPrinting::Private {
     }
 };
 
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
 CheckPrinting::CheckPrinting(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, args)
+#else
+CheckPrinting::CheckPrinting(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
+    KMyMoneyPlugin::Plugin(parent, metaData, args)
+#endif
 {
     // Tell the host application to load my GUI component
     const auto rcFileName = QLatin1String("checkprinting.rc");

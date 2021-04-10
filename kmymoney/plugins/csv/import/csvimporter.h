@@ -25,7 +25,11 @@ class CSVImporter : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::Import
     Q_INTERFACES(KMyMoneyPlugin::ImporterPlugin)
 
 public:
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
     explicit CSVImporter(QObject *parent, const QVariantList &args);
+#else
+    explicit CSVImporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+#endif
     ~CSVImporter() override;
 
     virtual QStringList formatMimeTypes() const override;

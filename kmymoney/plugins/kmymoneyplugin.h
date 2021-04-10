@@ -20,7 +20,11 @@
 // KDE Includes
 
 #include <KXMLGUIClient>
+
+#include "kcoreaddons_version.h"
+
 class KToggleAction;
+class KPluginMetaData;
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -107,7 +111,11 @@ class KMM_PLUGIN_EXPORT Plugin : public QObject, public KXMLGUIClient
 {
     Q_OBJECT
 public:
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
     explicit Plugin(QObject* parent, const QVariantList& args);
+#else
+    explicit Plugin(QObject* parent, const KPluginMetaData &metaData, const QVariantList& args);
+#endif
     virtual ~Plugin();
 
     QString componentDisplayName() const;

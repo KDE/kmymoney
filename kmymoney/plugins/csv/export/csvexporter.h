@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2013-2014 Allan Anderson <agander93@gmail.com>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -23,7 +24,11 @@ class CSVExporter : public KMyMoneyPlugin::Plugin
     Q_OBJECT
 
 public:
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
     explicit CSVExporter(QObject *parent, const QVariantList &args);
+#else
+    explicit CSVExporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+#endif
     ~CSVExporter() override;
 
     bool              okToWriteFile(const QUrl &url);

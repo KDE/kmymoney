@@ -125,9 +125,11 @@ void pluginHandling(Action action, Container& ctnPlugins, QObject* parent, KXMLG
                     loader.unload();
                     continue;
                 }
-
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
                 Plugin* plugin = factory->create<Plugin>(parent, QVariantList { (*it).pluginId(), (*it).name() });
-
+#else
+                Plugin* plugin = factory->create<Plugin>(parent);
+#endif
                 if (!plugin) {
                     qWarning("This is not KMyMoney plugin: '%s'", qPrintable((*it).fileName()));
                     loader.unload();

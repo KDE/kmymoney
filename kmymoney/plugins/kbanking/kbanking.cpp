@@ -159,8 +159,13 @@ public:
 };
 
 
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
 KBanking::KBanking(QObject *parent, const QVariantList &args) :
     OnlinePluginExtended(parent, args)
+#else
+KBanking::KBanking(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
+    OnlinePluginExtended(parent, metaData, args)
+#endif
     , d(new Private)
     , m_configAction(nullptr)
     , m_importAction(nullptr)

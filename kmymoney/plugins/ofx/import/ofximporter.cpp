@@ -112,8 +112,13 @@ static UniqueTransactionIdSource defaultIdSource()
 }
 
 
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
 OFXImporter::OFXImporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, args),
+#else
+OFXImporter::OFXImporter(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
+    KMyMoneyPlugin::Plugin(parent, metaData, args),
+#endif
     /*
      * the string in the line above must be the same as
      * X-KDE-PluginInfo-Name and the provider name assigned in
