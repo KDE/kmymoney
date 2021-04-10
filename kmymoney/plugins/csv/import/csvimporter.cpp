@@ -85,7 +85,10 @@ QString CSVImporter::formatFilenameFilter() const
 bool CSVImporter::isMyFormat(const QString& filename) const
 {
     QFile f(filename);
-    return f.open(QIODevice::ReadOnly | QIODevice::Text);
+    return (filename.endsWith(QLatin1String(".csv"), Qt::CaseInsensitive) ||
+        filename.endsWith(QLatin1String(".tsv"), Qt::CaseInsensitive) ||
+        filename.endsWith(QLatin1String(".txt"), Qt::CaseInsensitive))
+        && f.open(QIODevice::ReadOnly | QIODevice::Text);
 }
 
 void CSVImporter::startWizardRun()
