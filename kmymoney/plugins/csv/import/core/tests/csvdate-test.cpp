@@ -40,7 +40,7 @@ void CsvDateTest::testConvertDate()
 
     m_convert->setDateFormatIndex(DateFormat::MonthDayYear);  //           US date format
 
-    QVERIFY(m_convert->convertDate("2001-11-30") == QDate());
+    QVERIFY(m_convert->convertDate("2001-11-30") == QDate(2001, 11, 30));
     QVERIFY(m_convert->convertDate("20011130") == QDate());
     QVERIFY(m_convert->convertDate("11-30-2001") == QDate(2001, 11, 30));
     QVERIFY(m_convert->convertDate("11302001") == QDate(2001, 11, 30));
