@@ -327,6 +327,6 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
     delete dlg;
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(ReconciliationReportFactory, "reconciliationreport.json", registerPlugin<ReconciliationReport>();)
+K_PLUGIN_CLASS_WITH_JSON(ReconciliationReport, "reconciliationreport.json")
 
 #include "reconciliationreport.moc"

@@ -277,6 +277,6 @@ void CheckPrinting::updateConfiguration()
     d->m_printedTransactionIdList = PluginSettings::printedChecks();
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(CheckPrintingFactory, "checkprinting.json", registerPlugin<CheckPrinting>();)
+K_PLUGIN_CLASS_WITH_JSON(CheckPrinting, "checkprinting.json")
 
 #include "checkprinting.moc"

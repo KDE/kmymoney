@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2005-2010 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -196,6 +197,6 @@ KCMXMLStorage::~KCMXMLStorage()
 {
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(KCMXMLStorageFactory, "kcm_xmlstorage.json", registerPlugin<KCMXMLStorage>();)
+K_PLUGIN_CLASS_WITH_JSON(KCMXMLStorage, "kcm_xmlstorage.json")
 
 #include "kcm_xmlstorage.moc"

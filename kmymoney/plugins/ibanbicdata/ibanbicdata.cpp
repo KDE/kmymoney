@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2014 Christian Dávid <christian-david@web.de>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -303,6 +304,6 @@ QSqlDatabase ibanBicData::createDatabaseConnection(const QString& database)
     return db;
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(ibanBicDataFactory, "ibanbicdata.json", registerPlugin<ibanBicData>();)
+K_PLUGIN_CLASS_WITH_JSON(ibanBicData, "ibanbicdata.json")
 
 #include "ibanbicdata.moc"

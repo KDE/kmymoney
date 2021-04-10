@@ -1037,6 +1037,6 @@ const QStringList& OFXImporter::errors() const
     return d->m_errors;
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(OFXImporterFactory, "ofximporter.json", registerPlugin<OFXImporter>();)
+K_PLUGIN_CLASS_WITH_JSON(OFXImporter, "ofximporter.json")
 
 #include "ofximporter.moc"

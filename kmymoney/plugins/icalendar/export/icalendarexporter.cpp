@@ -147,6 +147,6 @@ void iCalendarExporter::updateConfiguration()
         d->m_exporter.exportToFile(icalFilePath);
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(iCalendarExporterFactory, "icalendarexporter.json", registerPlugin<iCalendarExporter>();)
+K_PLUGIN_CLASS_WITH_JSON(iCalendarExporter, "icalendarexporter.json")
 
 #include "icalendarexporter.moc"

@@ -73,6 +73,6 @@ void ForecastView::unplug()
     viewInterface()->removeView(View::Forecast);
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(ForecastViewFactory, "forecastview.json", registerPlugin<ForecastView>();)
+K_PLUGIN_CLASS_WITH_JSON(ForecastView, "forecastview.json")
 
 #include "forecastview.moc"

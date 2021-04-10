@@ -225,6 +225,6 @@ void Weboob::gotAccount()
     d->progress->hide();
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(WeboobFactory, "weboob.json", registerPlugin<Weboob>();)
+K_PLUGIN_CLASS_WITH_JSON(Weboob, "weboob.json")
 
 #include "weboob.moc"

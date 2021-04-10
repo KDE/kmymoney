@@ -70,6 +70,6 @@ void OnlineJobOutboxView::unplug()
     viewInterface()->removeView(View::OnlineJobOutbox);
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(OnlineJobOutboxViewFactory, "onlinejoboutboxview.json", registerPlugin<OnlineJobOutboxView>();)
+K_PLUGIN_CLASS_WITH_JSON(OnlineJobOutboxView, "onlinejoboutboxview.json")
 
 #include "onlinejoboutboxview.moc"

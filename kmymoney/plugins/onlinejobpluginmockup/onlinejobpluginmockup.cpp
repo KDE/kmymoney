@@ -93,6 +93,6 @@ void onlineJobPluginMockup::sendOnlineJob(QList< onlineJob >& jobs)
     }
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(onlineJobPluginMockupFactory, "onlinejobpluginmockup.json", registerPlugin<onlineJobPluginMockup>();)
+K_PLUGIN_CLASS_WITH_JSON(onlineJobPluginMockup, "onlinejobpluginmockup.json")
 
 #include "onlinejobpluginmockup.moc"

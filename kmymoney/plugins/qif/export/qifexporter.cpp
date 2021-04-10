@@ -88,6 +88,6 @@ void QIFExporter::slotQifExport()
     m_action->setEnabled(true);
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(QIFExporterFactory, "qifexporter.json", registerPlugin<QIFExporter>();)
+K_PLUGIN_CLASS_WITH_JSON(QIFExporter, "qifexporter.json")
 
 #include "qifexporter.moc"

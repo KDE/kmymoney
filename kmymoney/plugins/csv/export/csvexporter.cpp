@@ -117,6 +117,6 @@ bool CSVExporter::okToWriteFile(const QUrl &url)
     return reallySaveFile;
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(CSVExporterFactory, "csvexporter.json", registerPlugin<CSVExporter>();)
+K_PLUGIN_CLASS_WITH_JSON(CSVExporter, "csvexporter.json")
 
 #include "csvexporter.moc"

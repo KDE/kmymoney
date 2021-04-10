@@ -322,6 +322,6 @@ QString ReportsView::linkend() const
     return QStringLiteral("</a>");
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(ReportsViewFactory, "reportsview.json", registerPlugin<ReportsView>();)
+K_PLUGIN_CLASS_WITH_JSON(ReportsView, "reportsview.json")
 
 #include "reportsview.moc"

@@ -369,6 +369,6 @@ bool SQLStorage::saveAsDatabase(const QUrl &url)
     }
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(SQLStorageFactory, "sqlstorage.json", registerPlugin<SQLStorage>();)
+K_PLUGIN_CLASS_WITH_JSON(SQLStorage, "sqlstorage.json")
 
 #include "sqlstorage.moc"

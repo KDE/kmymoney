@@ -1519,6 +1519,6 @@ bool KBankingExt::importAccountInfo(AB_IMEXPORTER_CONTEXT *ctx,
     return true;
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(KBankingFactory, "kbanking.json", registerPlugin<KBanking>();)
+K_PLUGIN_CLASS_WITH_JSON(KBanking, "kbanking.json")
 
 #include "kbanking.moc"

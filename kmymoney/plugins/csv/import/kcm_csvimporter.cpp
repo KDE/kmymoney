@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2016-2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -33,6 +34,6 @@ KCMCSVImporter::~KCMCSVImporter()
 {
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(KCMCSVImporterFactory, "kcm_csvimporter.json", registerPlugin<KCMCSVImporter>();)
+K_PLUGIN_CLASS_WITH_JSON(KCMCSVImporter, "kcm_csvimporter.json")
 
 #include "kcm_csvimporter.moc"

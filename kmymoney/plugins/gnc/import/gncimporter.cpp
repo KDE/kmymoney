@@ -136,6 +136,6 @@ QString GNCImporter::fileExtension() const
     return i18n("GnuCash files (*.gnucash *.xac *.gnc)");
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(GNCImporterFactory, "gncimporter.json", registerPlugin<GNCImporter>();)
+K_PLUGIN_CLASS_WITH_JSON(GNCImporter, "gncimporter.json")
 
 #include "gncimporter.moc"

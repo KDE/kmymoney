@@ -73,6 +73,6 @@ void BudgetView::unplug()
     viewInterface()->removeView(View::Budget);
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(BudgetViewFactory, "budgetview.json", registerPlugin<BudgetView>();)
+K_PLUGIN_CLASS_WITH_JSON(BudgetView, "budgetview.json")
 
 #include "budgetview.moc"

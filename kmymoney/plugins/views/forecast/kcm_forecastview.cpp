@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2018 Łukasz Wojniłowicz lukasz.wojnilowicz @gmail.com
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
@@ -34,6 +35,6 @@ KCMForecastView::~KCMForecastView()
 {
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(KCMForecastViewFactory, "kcm_forecastview.json", registerPlugin<KCMForecastView>();)
+K_PLUGIN_CLASS_WITH_JSON(KCMForecastView, "kcm_forecastview.json")
 
 #include "kcm_forecastview.moc"

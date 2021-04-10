@@ -103,6 +103,6 @@ QString CSVImporter::lastError() const
     return QString();
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(CSVImporterFactory, "csvimporter.json", registerPlugin<CSVImporter>();)
+K_PLUGIN_CLASS_WITH_JSON(CSVImporter, "csvimporter.json")
 
 #include "csvimporter.moc"

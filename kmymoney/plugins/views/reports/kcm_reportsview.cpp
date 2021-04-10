@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2018 Łukasz Wojniłowicz lukasz.wojnilowicz @gmail.com
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
@@ -196,6 +197,6 @@ KCMReportsView::~KCMReportsView()
 {
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(KCMReportsViewFactory, "kcm_reportsview.json", registerPlugin<KCMReportsView>();)
+K_PLUGIN_CLASS_WITH_JSON(KCMReportsView, "kcm_reportsview.json")
 
 #include "kcm_reportsview.moc"

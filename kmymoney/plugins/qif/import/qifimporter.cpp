@@ -114,6 +114,6 @@ bool QIFImporter::slotGetStatements(const QList<MyMoneyStatement> &statements)
     return ret;
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(QIFImporterFactory, "qifimporter.json", registerPlugin<QIFImporter>();)
+K_PLUGIN_CLASS_WITH_JSON(QIFImporter, "qifimporter.json")
 
 #include "qifimporter.moc"

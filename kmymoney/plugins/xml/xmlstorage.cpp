@@ -576,6 +576,6 @@ void XMLStorage::checkRecoveryKeyValidity()
     }
 }
 
-K_PLUGIN_FACTORY_WITH_JSON(XMLStorageFactory, "xmlstorage.json", registerPlugin<XMLStorage>();)
+K_PLUGIN_CLASS_WITH_JSON(XMLStorage, "xmlstorage.json")
 
 #include "xmlstorage.moc"
