@@ -1,6 +1,7 @@
 /*
 
     SPDX-FileCopyrightText: 2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -32,7 +33,7 @@
 #define VIEW_LEDGER         "ledger"
 
 ReportsView::ReportsView(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, "reportsview"/*must be the same as X-KDE-PluginInfo-Name*/),
+    KMyMoneyPlugin::Plugin(parent, args, "reportsview"/*must be the same as X-KDE-PluginInfo-Name*/),
     m_view(nullptr)
 {
     Q_UNUSED(args)

@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2005 Ace Jones acejones @users.sourceforge.net
     SPDX-FileCopyrightText: 2010-2019 Thomas Baumgart tbaumgart @kde.org
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -112,7 +113,7 @@ static UniqueTransactionIdSource defaultIdSource()
 
 
 OFXImporter::OFXImporter(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, "ofximporter"),
+    KMyMoneyPlugin::Plugin(parent, args, "ofximporter"),
     /*
      * the string in the line above must be the same as
      * X-KDE-PluginInfo-Name and the provider name assigned in
@@ -192,14 +193,9 @@ void OFXImporter::slotImportFile()
     delete widget;
 }
 
-QString OFXImporter::formatName() const
+QStringList OFXImporter::formatMimeTypes() const
 {
-    return QStringLiteral("OFX");
-}
-
-QString OFXImporter::formatFilenameFilter() const
-{
-    return QStringLiteral("*.ofx *.qfx *.ofc");
+    return {"application/x-ofx", "application/vnd.intu.qfx", "application/x-ofc"};
 }
 
 

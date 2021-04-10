@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -59,7 +60,7 @@ static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
 #endif
 
 XMLStorage::XMLStorage(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, "xmlstorage"/*must be the same as X-KDE-PluginInfo-Name*/)
+    KMyMoneyPlugin::Plugin(parent, args, "xmlstorage"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
     Q_UNUSED(args)
     setComponentName("xmlstorage", i18n("XML storage"));

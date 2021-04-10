@@ -1,6 +1,7 @@
 /*
 
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -35,7 +36,7 @@ class MyMoneyStatement;
 static constexpr KCompressionDevice::CompressionType const& COMPRESSION_TYPE = KCompressionDevice::GZip;
 
 GNCImporter::GNCImporter(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, "gncimporter"/*must be the same as X-KDE-PluginInfo-Name*/)
+    KMyMoneyPlugin::Plugin(parent, args, "gncimporter"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
     Q_UNUSED(args)
     setComponentName("gncimporter", i18n("GnuCash importer"));

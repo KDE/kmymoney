@@ -2,6 +2,7 @@
     SPDX-FileCopyrightText: 2000 Michael Edwardes <mte@users.sourceforge.net>
     SPDX-FileCopyrightText: 2002-2020 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -3143,7 +3144,10 @@ void KMyMoneyApp::webConnect(const QString& sourceUrl, const QByteArray& asn_id)
                 while (it_plugin != pPlugins.importer.constEnd()) {
                     if ((*it_plugin)->isMyFormat(url)) {
                         if (!(*it_plugin)->import(url) && !(*it_plugin)->lastError().isEmpty()) {
-                            KMessageBox::error(this, i18n("Unable to import %1 using %2 plugin.  The plugin returned the following error: %3", url, (*it_plugin)->formatName(), (*it_plugin)->lastError()), i18n("Importing error"));
+                            auto pluginName = QString();
+                            if (pPlugins.standard.contains(it_plugin.key()))
+                                pluginName = pPlugins.standard.value(it_plugin.key())->fullName();
+                            KMessageBox::error(this, i18nc("%1 file location, %2 plugin name", "Unable to import %1 using %2 plugin. The plugin returned the following error: %3", url, pluginName, (*it_plugin)->lastError()), i18n("Importing error"));
                         }
 
                         break;

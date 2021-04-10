@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2009 Cristian Onet onet.cristian @gmail.com
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
@@ -31,7 +32,7 @@
 #include "kreconciliationreportdlg.h"
 
 ReconciliationReport::ReconciliationReport(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, "reconciliationreport"/*must be the same as X-KDE-PluginInfo-Name*/)
+    KMyMoneyPlugin::Plugin(parent, args, "reconciliationreport"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
     Q_UNUSED(args);
     qDebug("Plugins: reconciliation report loaded");

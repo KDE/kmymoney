@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-FileCopyrightText: 2021 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -125,7 +126,7 @@ void pluginHandling(Action action, Container& ctnPlugins, QObject* parent, KXMLG
                     continue;
                 }
 
-                Plugin* plugin = factory->create<Plugin>(parent);
+                Plugin* plugin = factory->create<Plugin>(parent, QVariantList { (*it).name() });
                 if (!plugin) {
                     qWarning("This is not KMyMoney plugin: '%s'", qPrintable((*it).fileName()));
                     loader.unload();

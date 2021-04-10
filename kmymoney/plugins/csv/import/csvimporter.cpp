@@ -2,6 +2,7 @@
     SPDX-FileCopyrightText: 2010-2014 Allan Anderson <agander93@gmail.com>
     SPDX-FileCopyrightText: 2016-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-FileCopyrightText: 2018-2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -33,7 +34,7 @@
 #include "viewinterface.h"
 
 CSVImporter::CSVImporter(QObject *parent, const QVariantList &args)
-    : KMyMoneyPlugin::Plugin(parent, "csvimporter"/*must be the same as X-KDE-PluginInfo-Name*/)
+    : KMyMoneyPlugin::Plugin(parent, args, "csvimporter"/*must be the same as X-KDE-PluginInfo-Name*/)
     , m_action(nullptr)
 {
     Q_UNUSED(args);
@@ -72,23 +73,9 @@ void CSVImporter::createActions()
     connect(viewInterface(), &KMyMoneyPlugin::ViewInterface::viewStateChanged, action(qPrintable(kpartgui)), &QAction::setEnabled);
 }
 
-QString CSVImporter::formatName() const
+QStringList CSVImporter::formatMimeTypes() const
 {
-    return QLatin1String("CSV");
-}
-
-QString CSVImporter::formatFilenameFilter() const
-{
-    return "*.csv *.txt";
-}
-
-bool CSVImporter::isMyFormat(const QString& filename) const
-{
-    QFile f(filename);
-    return (filename.endsWith(QLatin1String(".csv"), Qt::CaseInsensitive) ||
-        filename.endsWith(QLatin1String(".tsv"), Qt::CaseInsensitive) ||
-        filename.endsWith(QLatin1String(".txt"), Qt::CaseInsensitive))
-        && f.open(QIODevice::ReadOnly | QIODevice::Text);
+    return {"text/csv", "text/tab-separated-values"};
 }
 
 void CSVImporter::startWizardRun()

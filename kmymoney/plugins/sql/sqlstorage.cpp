@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -72,7 +73,7 @@ QUrlQuery SQLStorage::convertOldUrl(const QUrl& url)
 
 
 SQLStorage::SQLStorage(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, "sqlstorage"/*must be the same as X-KDE-PluginInfo-Name*/)
+    KMyMoneyPlugin::Plugin(parent, args, "sqlstorage"/*must be the same as X-KDE-PluginInfo-Name*/)
 {
     Q_UNUSED(args)
     const auto componentName = QLatin1String("sqlstorage");

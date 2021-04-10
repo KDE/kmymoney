@@ -2,6 +2,7 @@
     SPDX-FileCopyrightText: 2010-2014 Allan Anderson <agander93@gmail.com>
     SPDX-FileCopyrightText: 2016-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-FileCopyrightText: 2018 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -27,32 +28,7 @@ public:
     explicit CSVImporter(QObject *parent, const QVariantList &args);
     ~CSVImporter() override;
 
-    /**
-      * This method returns the english-language name of the format
-      * this plugin imports, e.g. "CSV"
-      *
-      * @return QString Name of the format
-      */
-    virtual QString formatName() const override;
-
-    /**
-      * This method returns the filename filter suitable for passing to
-      * KFileDialog::setFilter(), e.g. "*.csv" which describes how
-      * files of this format are likely to be named in the file system
-      *
-      * @return QString Filename filter string
-      */
-    virtual QString formatFilenameFilter() const override;
-
-    /**
-      * This method returns whether this plugin is able to import
-      * a particular file.
-      *
-      * @param filename Fully-qualified pathname to a file
-      *
-      * @return bool Whether the indicated file is importable by this plugin
-      */
-    virtual bool isMyFormat(const QString& filename) const override;
+    virtual QStringList formatMimeTypes() const override;
 
     /**
       * Import a file

@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2005-2021 Thomas Baumgart <ipwizard@users.sourceforge.net>
     SPDX-FileCopyrightText: 2015 Christian Dávid <christian-david@web.de>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -10,6 +11,7 @@
 // QT Includes
 
 #include <QMap>
+#include <QMimeDatabase>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -23,17 +25,27 @@
 
 KMyMoneyPlugin::Container pPlugins;
 
-KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const char* name) :
+KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const QVariantList& args, const char* name) :
     QObject(),
     KXMLGUIClient()
 {
     Q_UNUSED(parent)
 
     setObjectName(name);
+
+    if (!args.isEmpty())
+        m_fullName = args.at(0).toString();
+    else
+        m_fullName = name;
 }
 
 KMyMoneyPlugin::Plugin::~Plugin()
 {
+}
+
+QString KMyMoneyPlugin::Plugin::fullName() const
+{
+    return m_fullName;
 }
 
 void KMyMoneyPlugin::Plugin::plug(KXMLGUIFactory* guiFactory)
@@ -102,6 +114,19 @@ KMyMoneyPlugin::ImportInterface* KMyMoneyPlugin::Plugin::importInterface() const
 
 KMyMoneyPlugin::ImporterPlugin::ImporterPlugin()
 {
+}
+
+bool KMyMoneyPlugin::ImporterPlugin::isMyFormat(const QString &filename) const
+{
+    QMimeDatabase db;
+    QMimeType mime = db.mimeTypeForFile(filename);
+
+    if(!mime.isDefault())
+        for (const auto& mimeTypeName : formatMimeTypes())
+            if (mime.inherits(mimeTypeName))
+                    return true;
+
+    return false;
 }
 
 KMyMoneyPlugin::ImporterPlugin::~ImporterPlugin()

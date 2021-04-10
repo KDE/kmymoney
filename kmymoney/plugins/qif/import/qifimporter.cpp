@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -33,7 +34,7 @@
 class MyMoneyStatement;
 
 QIFImporter::QIFImporter(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, "qifimporter"/*must be the same as X-KDE-PluginInfo-Name*/),
+    KMyMoneyPlugin::Plugin(parent, args, "qifimporter"/*must be the same as X-KDE-PluginInfo-Name*/),
     m_qifReader(nullptr)
 {
     Q_UNUSED(args);

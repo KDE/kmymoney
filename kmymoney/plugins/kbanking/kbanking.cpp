@@ -3,6 +3,7 @@
     SPDX-FileCopyrightText: 2009 Cristian Onet onet.cristian @gmail.com
     SPDX-FileCopyrightText: 2010-2019 Thomas Baumgart tbaumgart @kde.org
     SPDX-FileCopyrightText: 2015 Christian David christian-david @web.de
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -159,7 +160,7 @@ public:
 
 
 KBanking::KBanking(QObject *parent, const QVariantList &args) :
-    OnlinePluginExtended(parent, "kbanking")
+    OnlinePluginExtended(parent, args, "kbanking")
     , d(new Private)
     , m_configAction(nullptr)
     , m_importAction(nullptr)

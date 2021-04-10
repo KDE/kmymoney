@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2005-2021 Thomas Baumgart <ipwizard@users.sourceforge.net>
     SPDX-FileCopyrightText: 2015 Christian Dávid <christian-david@web.de>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -106,8 +107,12 @@ class KMM_PLUGIN_EXPORT Plugin : public QObject, public KXMLGUIClient
 {
     Q_OBJECT
 public:
-    explicit Plugin(QObject* parent = nullptr, const char* name = "");
+    explicit Plugin(QObject* parent,
+                    const QVariantList& args,
+                    const char* name);
     virtual ~Plugin();
+
+    QString fullName() const;
 
 public Q_SLOTS:
     /**
@@ -147,6 +152,9 @@ protected:
     ViewInterface* viewInterface() const;
     StatementInterface* statementInterface() const;
     ImportInterface* importInterface() const;
+
+private:
+    QString m_fullName;
 };
 
 /**
@@ -232,31 +240,25 @@ public:
     virtual ~ImporterPlugin();
 
     /**
-      * This method returns the english-language name of the format
-      * this plugin imports, e.g. "OFX"
+      * This method returns the list of the MIME types that this plugin handles,
+      * e.g. {"application/x-ofx", "application/x-qfx"}. Be specific: don't use generic
+      * types, like "text/plain", which many other types inherit from, and which
+      * would result in @ref isMyFormat() returning false positives.
       *
-      * @return QString Name of the format
+      * @return QStringList List of MIME types
       */
-    virtual QString formatName() const = 0;
+    virtual QStringList formatMimeTypes() const = 0;
 
     /**
-      * This method returns the filename filter suitable for passing to
-      * KFileDialog::setFilter(), e.g. "*.ofx *.qfx" which describes how
-      * files of this format are likely to be named in the file system
-      *
-      * @return QString Filename filter string
-      */
-    virtual QString formatFilenameFilter() const = 0;
-
-    /**
-      * This method returns whether this plugin is able to import
-      * a particular file.
+      * This method checks whether the file provided is of expected format.
+      * The default implementation checks whether the file's MIME type inherits any
+      * of the types provided by @ref formatMimeTypes().
       *
       * @param filename Fully-qualified pathname to a file
       *
       * @return bool Whether the indicated file is importable by this plugin
       */
-    virtual bool isMyFormat(const QString& filename) const = 0;
+    virtual bool isMyFormat(const QString& filename) const;
 
     /**
       * Import a file

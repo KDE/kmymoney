@@ -2,6 +2,7 @@
     SPDX-FileCopyrightText: 2010 Allan Anderson <agander93@gmail.com>
     SPDX-FileCopyrightText: 2017-2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-FileCopyrightText: 2020 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -1784,7 +1785,7 @@ bool CSVFile::getInFileName(QString inFileName)
 
     QPointer<QFileDialog> dialog = new QFileDialog(nullptr, QString(),
             fileInfo.absoluteFilePath());
-    dialog->setMimeTypeFilters({"text/csv", "text/plain", "application/octet-stream"});
+    dialog->setMimeTypeFilters({"text/csv", "text/tab-separted-values", "text/plain", "application/octet-stream"});
     dialog->setFileMode(QFileDialog::ExistingFile);
     QUrl url;
     if (dialog->exec() == QDialog::Accepted)

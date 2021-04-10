@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2009 Cristian Onet <onet.cristian@gmail.com>
     SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -39,7 +40,7 @@ struct iCalendarExporter::Private {
 };
 
 iCalendarExporter::iCalendarExporter(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, "icalendarexporter"/*must be the same as X-KDE-PluginInfo-Name*/),
+    KMyMoneyPlugin::Plugin(parent, args, "icalendarexporter"/*must be the same as X-KDE-PluginInfo-Name*/),
     d(std::unique_ptr<Private>(new Private))
 {
     Q_UNUSED(args);

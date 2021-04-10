@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2005 Ace Jones acejones @users.sourceforge.net
     SPDX-FileCopyrightText: 2010-2018 Thomas Baumgart tbaumgart @kde.org
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 #ifndef OFXIMPORTER_H
@@ -37,25 +38,16 @@ public:
     ~OFXImporter() override;
 
     /**
-      * This method returns the english-language name of the format
-      * this plugin imports, e.g. "OFX"
+      * This method returns the list of the MIME types that this plugin handles,
+      * i.e. {"application/x-ofx", "application/vnd.intu.qfx", "application/x-ofc"}.
       *
-      * @return QString Name of the format
+      * @return QStringList List of MIME types
       */
-    QString formatName() const override;
-
-    /**
-      * This method returns the filename filter suitable for passing to
-      * KFileDialog::setFilter(), e.g. "*.ofx *.qfx" which describes how
-      * files of this format are likely to be named in the file system
-      *
-      * @return QString Filename filter string
-      */
-    QString formatFilenameFilter() const override;
+    QStringList formatMimeTypes() const override;
 
     /**
       * This method returns whether this plugin is able to import
-      * a particular file.
+      * the OFX-formatted files.
       *
       * @param filename Fully-qualified pathname to a file
       *

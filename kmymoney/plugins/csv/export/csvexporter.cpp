@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2013-2014 Allan Anderson <agander93@gmail.com>
     SPDX-FileCopyrightText: 2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -33,7 +34,7 @@
 #include "viewinterface.h"
 
 CSVExporter::CSVExporter(QObject *parent, const QVariantList &args)
-    : KMyMoneyPlugin::Plugin(parent, "csvexporter"/*must be the same as X-KDE-PluginInfo-Name*/)
+    : KMyMoneyPlugin::Plugin(parent, args, "csvexporter"/*must be the same as X-KDE-PluginInfo-Name*/)
     , m_action(nullptr)
 {
     Q_UNUSED(args);

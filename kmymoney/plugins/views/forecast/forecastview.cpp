@@ -2,7 +2,7 @@
 
     SPDX-FileCopyrightText: 2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-FileCopyrightText: 2020 Thomas Baumgart <tbaumgart@kde.org>
-
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -24,7 +24,7 @@
 #include "kforecastview.h"
 
 ForecastView::ForecastView(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, "forecastview"/*must be the same as X-KDE-PluginInfo-Name*/),
+    KMyMoneyPlugin::Plugin(parent, args, "forecastview"/*must be the same as X-KDE-PluginInfo-Name*/),
     m_view(nullptr)
 {
     Q_UNUSED(args)
