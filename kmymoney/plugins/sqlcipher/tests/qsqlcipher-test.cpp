@@ -6,13 +6,13 @@
 
 #include "qsqlcipher-test.h"
 
-#include <QTest>
-#include <QSqlQuery>
-#include <QSqlError>
-#include <QSqlResult>
-#include <QSqlRecord>
 #include <QCoreApplication>
-#include <QtDebug>
+#include <QDebug>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QSqlRecord>
+#include <QSqlResult>
+#include <QTest>
 
 QTEST_GUILESS_MAIN(qsqlciphertest)
 
