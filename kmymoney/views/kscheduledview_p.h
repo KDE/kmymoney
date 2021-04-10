@@ -627,7 +627,6 @@ public:
       */
     void skipSchedule(MyMoneySchedule& schedule)
     {
-        Q_Q(KScheduledView);
         const auto parentWidget = QApplication::activeWindow();
 
         if (!schedule.id().isEmpty()) {

@@ -69,7 +69,6 @@ public:
         m_prec(2),
         m_allowEmpty(false)
     {
-        Q_Q(AmountEdit);
         m_calculatorFrame = new QFrame;
         m_calculatorFrame->setWindowFlags(Qt::Popup);
 
