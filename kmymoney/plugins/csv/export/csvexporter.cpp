@@ -37,10 +37,7 @@ CSVExporter::CSVExporter(QObject *parent, const QVariantList &args)
     : KMyMoneyPlugin::Plugin(parent, args)
     , m_action(nullptr)
 {
-    Q_UNUSED(args);
-    const auto componentName = QLatin1String("csvexporter");
     const auto rcFileName = QLatin1String("csvexporter.rc");
-    setComponentName(componentName, i18n("CSV exporter"));
 
 #ifdef IS_APPIMAGE
     const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);

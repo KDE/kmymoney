@@ -27,7 +27,6 @@ ForecastView::ForecastView(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, args),
     m_view(nullptr)
 {
-
     // For information, announce that we have been loaded.
     qDebug("Plugins: forecastview loaded");
 }

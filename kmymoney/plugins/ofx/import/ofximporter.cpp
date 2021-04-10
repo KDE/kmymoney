@@ -122,10 +122,7 @@ OFXImporter::OFXImporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::ImporterPlugin(),
     d(new Private)
 {
-    Q_UNUSED(args)
-    const auto componentName = QLatin1String("ofximporter");
     const auto rcFileName = QLatin1String("ofximporter.rc");
-    setComponentName(componentName, i18n("OFX Importer"));
 
 #ifdef IS_APPIMAGE
     const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);

@@ -178,11 +178,8 @@ struct CheckPrinting::Private {
 CheckPrinting::CheckPrinting(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, args)
 {
-    Q_UNUSED(args);
     // Tell the host application to load my GUI component
-    const auto componentName = QLatin1String("checkprinting");
     const auto rcFileName = QLatin1String("checkprinting.rc");
-    setComponentName(componentName, i18nc("It's about printing bank checks", "Check printing"));
 
 #ifdef IS_APPIMAGE
     const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);

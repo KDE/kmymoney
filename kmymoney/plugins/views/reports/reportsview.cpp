@@ -36,8 +36,6 @@ ReportsView::ReportsView(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, args),
     m_view(nullptr)
 {
-    Q_UNUSED(args)
-    setComponentName("reportsview", i18n("Reports view"));
     // For information, announce that we have been loaded.
     qDebug("Plugins: reportsview loaded");
 }

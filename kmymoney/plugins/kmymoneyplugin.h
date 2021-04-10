@@ -110,7 +110,7 @@ public:
     explicit Plugin(QObject* parent, const QVariantList& args);
     virtual ~Plugin();
 
-    QString fullName() const;
+    QString componentDisplayName() const;
 
 public Q_SLOTS:
     /**
@@ -152,7 +152,7 @@ protected:
     ImportInterface* importInterface() const;
 
 private:
-    QString m_fullName;
+    QString m_componentDisplayName;
 };
 
 /**

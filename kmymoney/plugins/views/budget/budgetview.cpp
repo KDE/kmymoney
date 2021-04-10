@@ -28,7 +28,6 @@ BudgetView::BudgetView(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, args),
     m_view(nullptr)
 {
-    Q_UNUSED(args)
     // For information, announce that we have been loaded.
     qDebug("Plugins: budgetview loaded");
 }

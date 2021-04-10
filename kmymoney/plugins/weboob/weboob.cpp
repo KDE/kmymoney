@@ -63,10 +63,7 @@ Weboob::Weboob(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, args),
     d_ptr(new WeboobPrivate)
 {
-    Q_UNUSED(args)
-    const auto componentName = QLatin1String("weboob");
     const auto rcFileName = QLatin1String("weboob.rc");
-    setComponentName(componentName, i18n("Weboob"));
 
 #ifdef IS_APPIMAGE
     const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);

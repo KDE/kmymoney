@@ -127,6 +127,7 @@ void pluginHandling(Action action, Container& ctnPlugins, QObject* parent, KXMLG
                 }
 
                 Plugin* plugin = factory->create<Plugin>(parent, QVariantList { (*it).pluginId(), (*it).name() });
+
                 if (!plugin) {
                     qWarning("This is not KMyMoney plugin: '%s'", qPrintable((*it).fileName()));
                     loader.unload();

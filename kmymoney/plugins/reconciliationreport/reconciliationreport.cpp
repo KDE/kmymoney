@@ -34,7 +34,6 @@
 ReconciliationReport::ReconciliationReport(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, args)
 {
-    Q_UNUSED(args);
     qDebug("Plugins: reconciliation report loaded");
 }
 

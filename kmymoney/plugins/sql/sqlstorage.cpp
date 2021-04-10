@@ -75,10 +75,7 @@ QUrlQuery SQLStorage::convertOldUrl(const QUrl& url)
 SQLStorage::SQLStorage(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, args)
 {
-    Q_UNUSED(args)
-    const auto componentName = QLatin1String("sqlstorage");
     const auto rcFileName = QLatin1String("sqlstorage.rc");
-    setComponentName(componentName, i18n("SQL storage"));
 
 #ifdef IS_APPIMAGE
     const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);

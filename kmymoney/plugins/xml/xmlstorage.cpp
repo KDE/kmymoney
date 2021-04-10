@@ -62,8 +62,6 @@ static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
 XMLStorage::XMLStorage(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, args)
 {
-    Q_UNUSED(args)
-    setComponentName("xmlstorage", i18n("XML storage"));
     // For information, announce that we have been loaded.
     qDebug("Plugins: xmlstorage loaded");
     checkRecoveryKeyValidity();

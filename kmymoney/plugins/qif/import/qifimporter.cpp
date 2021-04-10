@@ -37,10 +37,7 @@ QIFImporter::QIFImporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, args),
     m_qifReader(nullptr)
 {
-    Q_UNUSED(args);
-    const auto componentName = QLatin1String("qifimporter");
     const auto rcFileName = QLatin1String("qifimporter.rc");
-    setComponentName(componentName, i18n("QIF importer"));
 
 #ifdef IS_APPIMAGE
     const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);

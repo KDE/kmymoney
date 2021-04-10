@@ -38,8 +38,6 @@ static constexpr KCompressionDevice::CompressionType const& COMPRESSION_TYPE = K
 GNCImporter::GNCImporter(QObject *parent, const QVariantList &args) :
     KMyMoneyPlugin::Plugin(parent, args)
 {
-    Q_UNUSED(args)
-    setComponentName("gncimporter", i18n("GnuCash importer"));
     // For information, announce that we have been loaded.
     qDebug("Plugins: gncimporter loaded");
 }

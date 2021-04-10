@@ -37,7 +37,8 @@ KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const QVariantList& args)
         throw MYMONEYEXCEPTION_CSTRING("Plugin not initialized properly!");
     else {
         setObjectName(args.at(0).toString());
-        m_fullName = args.at(1).toString();
+        m_componentDisplayName = args.at(1).toString();
+        setComponentName(args.at(0).toString(), m_componentDisplayName);
     }
 }
 
@@ -45,9 +46,9 @@ KMyMoneyPlugin::Plugin::~Plugin()
 {
 }
 
-QString KMyMoneyPlugin::Plugin::fullName() const
+QString KMyMoneyPlugin::Plugin::componentDisplayName() const
 {
-    return m_fullName;
+    return m_componentDisplayName;
 }
 
 void KMyMoneyPlugin::Plugin::plug(KXMLGUIFactory* guiFactory)
