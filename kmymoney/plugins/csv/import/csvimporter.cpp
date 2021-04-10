@@ -34,10 +34,10 @@
 #include "viewinterface.h"
 
 CSVImporter::CSVImporter(QObject *parent, const QVariantList &args)
-    : KMyMoneyPlugin::Plugin(parent, args, "csvimporter"/*must be the same as X-KDE-PluginInfo-Name*/)
+    : KMyMoneyPlugin::Plugin(parent, args)
     , m_action(nullptr)
 {
-    Q_UNUSED(args);
+    ;
     const auto componentName = QLatin1String("csvimporter");
     const auto rcFileName = QLatin1String("csvimporter.rc");
     setComponentName(componentName, i18n("CSV importer"));

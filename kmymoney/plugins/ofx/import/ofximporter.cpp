@@ -113,7 +113,7 @@ static UniqueTransactionIdSource defaultIdSource()
 
 
 OFXImporter::OFXImporter(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args, "ofximporter"),
+    KMyMoneyPlugin::Plugin(parent, args),
     /*
      * the string in the line above must be the same as
      * X-KDE-PluginInfo-Name and the provider name assigned in

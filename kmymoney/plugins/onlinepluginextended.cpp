@@ -10,8 +10,8 @@
 namespace KMyMoneyPlugin
 {
 
-OnlinePluginExtended::OnlinePluginExtended(QObject* parent, const QVariantList& args, const char* name)
-    : Plugin(parent, args, name),
+OnlinePluginExtended::OnlinePluginExtended(QObject* parent, const QVariantList& args)
+    : Plugin(parent, args),
       OnlinePlugin()
 {}
 

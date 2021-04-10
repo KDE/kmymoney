@@ -60,7 +60,7 @@ static constexpr char recoveryKeyId[] = "59B0F826D2B08440";
 #endif
 
 XMLStorage::XMLStorage(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args, "xmlstorage"/*must be the same as X-KDE-PluginInfo-Name*/)
+    KMyMoneyPlugin::Plugin(parent, args)
 {
     Q_UNUSED(args)
     setComponentName("xmlstorage", i18n("XML storage"));

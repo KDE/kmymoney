@@ -36,7 +36,7 @@ class MyMoneyStatement;
 static constexpr KCompressionDevice::CompressionType const& COMPRESSION_TYPE = KCompressionDevice::GZip;
 
 GNCImporter::GNCImporter(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args, "gncimporter"/*must be the same as X-KDE-PluginInfo-Name*/)
+    KMyMoneyPlugin::Plugin(parent, args)
 {
     Q_UNUSED(args)
     setComponentName("gncimporter", i18n("GnuCash importer"));

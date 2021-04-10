@@ -34,7 +34,7 @@
 #include "viewinterface.h"
 
 CSVExporter::CSVExporter(QObject *parent, const QVariantList &args)
-    : KMyMoneyPlugin::Plugin(parent, args, "csvexporter"/*must be the same as X-KDE-PluginInfo-Name*/)
+    : KMyMoneyPlugin::Plugin(parent, args)
     , m_action(nullptr)
 {
     Q_UNUSED(args);

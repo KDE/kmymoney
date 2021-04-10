@@ -34,7 +34,7 @@
 class MyMoneyStatement;
 
 QIFImporter::QIFImporter(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args, "qifimporter"/*must be the same as X-KDE-PluginInfo-Name*/),
+    KMyMoneyPlugin::Plugin(parent, args),
     m_qifReader(nullptr)
 {
     Q_UNUSED(args);

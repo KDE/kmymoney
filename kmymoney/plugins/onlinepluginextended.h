@@ -32,7 +32,7 @@ class KMM_PLUGIN_EXPORT OnlinePluginExtended : public Plugin, public OnlinePlugi
     Q_OBJECT
 
 public:
-    OnlinePluginExtended(QObject* parent, const QVariantList& args, const char* name);
+    OnlinePluginExtended(QObject* parent, const QVariantList& args);
     virtual ~OnlinePluginExtended() {}
 
     /**

@@ -23,7 +23,7 @@
 #include "konlinejoboutboxview.h"
 
 OnlineJobOutboxView::OnlineJobOutboxView(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args, "onlinejoboutboxview"/*must be the same as X-KDE-PluginInfo-Name*/),
+    KMyMoneyPlugin::Plugin(parent, args),
     m_view(nullptr)
 {
     Q_UNUSED(args)

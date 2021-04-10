@@ -176,7 +176,7 @@ struct CheckPrinting::Private {
 };
 
 CheckPrinting::CheckPrinting(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args, "checkprinting"/*must be the same as X-KDE-PluginInfo-Name*/)
+    KMyMoneyPlugin::Plugin(parent, args)
 {
     Q_UNUSED(args);
     // Tell the host application to load my GUI component

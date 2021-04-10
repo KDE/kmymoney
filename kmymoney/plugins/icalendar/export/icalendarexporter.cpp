@@ -40,7 +40,7 @@ struct iCalendarExporter::Private {
 };
 
 iCalendarExporter::iCalendarExporter(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args, "icalendarexporter"/*must be the same as X-KDE-PluginInfo-Name*/),
+    KMyMoneyPlugin::Plugin(parent, args),
     d(std::unique_ptr<Private>(new Private))
 {
     Q_UNUSED(args);

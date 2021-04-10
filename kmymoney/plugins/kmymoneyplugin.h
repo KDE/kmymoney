@@ -107,9 +107,7 @@ class KMM_PLUGIN_EXPORT Plugin : public QObject, public KXMLGUIClient
 {
     Q_OBJECT
 public:
-    explicit Plugin(QObject* parent,
-                    const QVariantList& args,
-                    const char* name);
+    explicit Plugin(QObject* parent, const QVariantList& args);
     virtual ~Plugin();
 
     QString fullName() const;

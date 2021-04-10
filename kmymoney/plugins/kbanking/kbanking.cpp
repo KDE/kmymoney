@@ -160,7 +160,7 @@ public:
 
 
 KBanking::KBanking(QObject *parent, const QVariantList &args) :
-    OnlinePluginExtended(parent, args, "kbanking")
+    OnlinePluginExtended(parent, args)
     , d(new Private)
     , m_configAction(nullptr)
     , m_importAction(nullptr)

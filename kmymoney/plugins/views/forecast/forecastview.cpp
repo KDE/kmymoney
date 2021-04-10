@@ -24,10 +24,10 @@
 #include "kforecastview.h"
 
 ForecastView::ForecastView(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args, "forecastview"/*must be the same as X-KDE-PluginInfo-Name*/),
+    KMyMoneyPlugin::Plugin(parent, args),
     m_view(nullptr)
 {
-    Q_UNUSED(args)
+
     // For information, announce that we have been loaded.
     qDebug("Plugins: forecastview loaded");
 }

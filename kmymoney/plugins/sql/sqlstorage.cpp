@@ -73,7 +73,7 @@ QUrlQuery SQLStorage::convertOldUrl(const QUrl& url)
 
 
 SQLStorage::SQLStorage(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args, "sqlstorage"/*must be the same as X-KDE-PluginInfo-Name*/)
+    KMyMoneyPlugin::Plugin(parent, args)
 {
     Q_UNUSED(args)
     const auto componentName = QLatin1String("sqlstorage");

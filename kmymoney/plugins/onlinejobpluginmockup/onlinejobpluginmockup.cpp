@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2014-2015 Christian Dávid <christian-david@web.de>
+    SPDX-FileCopyrightText: 2021 Dawid Wróbel <me@dawidwrobel.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -17,9 +18,8 @@
 #include "sepacredittransfersettingsmockup.h"
 
 onlineJobPluginMockup::onlineJobPluginMockup(QObject *parent, const QVariantList &args) :
-    OnlinePluginExtended(parent, "onlinejobpluginmockup")
+    OnlinePluginExtended(parent, args)
 {
-    Q_UNUSED(args);
     qDebug("onlineJobPluginMockup should be used during development only!");
 }
 

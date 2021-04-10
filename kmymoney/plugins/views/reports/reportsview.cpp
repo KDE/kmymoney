@@ -33,7 +33,7 @@
 #define VIEW_LEDGER         "ledger"
 
 ReportsView::ReportsView(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args, "reportsview"/*must be the same as X-KDE-PluginInfo-Name*/),
+    KMyMoneyPlugin::Plugin(parent, args),
     m_view(nullptr)
 {
     Q_UNUSED(args)

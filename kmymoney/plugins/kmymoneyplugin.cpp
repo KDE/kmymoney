@@ -18,6 +18,7 @@
 
 #include <KToggleAction>
 #include <KActionCollection>
+#include <mymoneyexception.h>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -25,18 +26,19 @@
 
 KMyMoneyPlugin::Container pPlugins;
 
-KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const QVariantList& args, const char* name) :
+KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const QVariantList& args)
+    :
     QObject(),
     KXMLGUIClient()
 {
     Q_UNUSED(parent)
 
-    setObjectName(name);
-
-    if (!args.isEmpty())
-        m_fullName = args.at(0).toString();
-    else
-        m_fullName = name;
+    if (args.isEmpty() || args.count() < 2)
+        throw MYMONEYEXCEPTION_CSTRING("Plugin not initialized properly!");
+    else {
+        setObjectName(args.at(0).toString());
+        m_fullName = args.at(1).toString();
+    }
 }
 
 KMyMoneyPlugin::Plugin::~Plugin()

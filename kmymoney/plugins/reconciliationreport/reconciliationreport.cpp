@@ -32,7 +32,7 @@
 #include "kreconciliationreportdlg.h"
 
 ReconciliationReport::ReconciliationReport(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args, "reconciliationreport"/*must be the same as X-KDE-PluginInfo-Name*/)
+    KMyMoneyPlugin::Plugin(parent, args)
 {
     Q_UNUSED(args);
     qDebug("Plugins: reconciliation report loaded");

@@ -31,7 +31,7 @@
 #include "viewinterface.h"
 
 QIFExporter::QIFExporter(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args, "qifexporter"/*must be the same as X-KDE-PluginInfo-Name*/)
+    KMyMoneyPlugin::Plugin(parent, args)
 {
     Q_UNUSED(args);
     const auto componentName = QLatin1String("qifexporter");
