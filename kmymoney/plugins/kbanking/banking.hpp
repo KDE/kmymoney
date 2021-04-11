@@ -82,19 +82,6 @@ public:
 
   int getUserDataDir(GWEN_BUFFER *buf) const ;
 
-  int loadSharedConfig(const char *name, GWEN_DB_NODE **pDb);
-  int saveSharedConfig(const char *name, GWEN_DB_NODE *db);
-  int lockSharedConfig(const char *name);
-  int unlockSharedConfig(const char *name);
-
-  int loadSharedSubConfig(const char *name,
-                         const char *subGroup,
-                         GWEN_DB_NODE **pDb);
-
-  int saveSharedSubConfig(const char *name,
-                         const char *subGroup,
-                         GWEN_DB_NODE *dbSrc);
-
   void setAccountAlias(AB_ACCOUNT_SPEC *a, const char *alias);
 
   /**
