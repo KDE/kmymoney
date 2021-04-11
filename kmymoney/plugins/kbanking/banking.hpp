@@ -20,20 +20,20 @@
 #include <list>
 #include <string>
 
-
 /**
  * @brief A C++ binding for the C module @ref AB_BANKING
  *
  * This class simply is a C++ binding for the C module @ref AB_BANKING.
  * It redirects C callbacks used by AB_BANKING to virtual functions in
- * this class. It als transforms some return values inconveniant for
+ * this class. It also transforms some return values inconveniant for
  * C++ into STL objects (such as "list<T>").
  *
  * @ingroup G_AB_CPP_INTERFACE
  *
  * @author Martin Preuss<martin@aquamaniac.de>
  */
-class AB_Banking {
+class AB_Banking
+{
 private:
   AB_BANKING *_banking;
 
@@ -82,19 +82,6 @@ public:
 
   int getUserDataDir(GWEN_BUFFER *buf) const ;
 
-  int loadSharedConfig(const char *name, GWEN_DB_NODE **pDb);
-  int saveSharedConfig(const char *name, GWEN_DB_NODE *db);
-  int lockSharedConfig(const char *name);
-  int unlockSharedConfig(const char *name);
-
-  int loadSharedSubConfig(const char *name,
-                         const char *subGroup,
-                         GWEN_DB_NODE **pDb);
-
-  int saveSharedSubConfig(const char *name,
-                         const char *subGroup,
-                         GWEN_DB_NODE *dbSrc);
-
   void setAccountAlias(AB_ACCOUNT_SPEC *a, const char *alias);
 
   /**
@@ -129,11 +116,7 @@ public:
                              uint32_t flags);
 
   virtual bool importAccountInfo(AB_IMEXPORTER_CONTEXT *ctx, AB_IMEXPORTER_ACCOUNTINFO *ai, uint32_t flags);
-
 };
-
-
-
 
 #endif /* AQ_BANKING_CPP_H */
 
