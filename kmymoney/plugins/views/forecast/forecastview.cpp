@@ -47,9 +47,7 @@ void ForecastView::plug(KXMLGUIFactory* guiFactory)
     m_view = new KForecastView;
 
     // Tell the host application to load my GUI component
-    const auto componentName = QLatin1String("forecastview");
     const auto rcFileName = QLatin1String("forecastview.rc");
-    setComponentName(componentName, i18n("Forecast view"));
 
 #ifdef IS_APPIMAGE
     const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);

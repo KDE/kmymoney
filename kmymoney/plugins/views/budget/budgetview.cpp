@@ -47,9 +47,7 @@ void BudgetView::plug(KXMLGUIFactory* guiFactory)
     m_view = new KBudgetView;
 
     // Tell the host application to load my GUI component
-    const auto componentName = QLatin1String("budgetview");
     const auto rcFileName = QLatin1String("budgetview.rc");
-    setComponentName(componentName, i18n("Budgets view"));
 
 #ifdef IS_APPIMAGE
     const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);

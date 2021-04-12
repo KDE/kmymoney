@@ -45,9 +45,7 @@ void OnlineJobOutboxView::plug(KXMLGUIFactory* guiFactory)
     m_view = new KOnlineJobOutboxView;
 
     // Tell the host application to load my GUI component
-    const auto componentName = QLatin1String("onlinejoboutboxview");
     const auto rcFileName = QLatin1String("onlinejoboutboxview.rc");
-    setComponentName(componentName, i18nc("@item:inlistbox", "Budgets view"));
 
 #ifdef IS_APPIMAGE
     const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);

@@ -203,9 +203,7 @@ void KBanking::plug(KXMLGUIFactory* guiFactory)
 
         if (m_kbanking->init() == 0) {
             // Tell the host application to load my GUI component
-            const auto componentName = QLatin1String("kbanking");
             const auto rcFileName = QLatin1String("kbanking.rc");
-            setComponentName(componentName, "KBanking");
 
 #ifdef IS_APPIMAGE
             const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
