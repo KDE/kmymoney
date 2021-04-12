@@ -1785,7 +1785,7 @@ bool CSVFile::getInFileName(QString inFileName)
 
     QPointer<QFileDialog> dialog = new QFileDialog(nullptr, QString(),
             fileInfo.absoluteFilePath());
-    dialog->setMimeTypeFilters({"text/csv", "text/tab-separted-values", "text/plain", "application/octet-stream"});
+    dialog->setMimeTypeFilters({"text/csv", "text/tab-separated-values", "text/plain", "application/octet-stream"});
     dialog->setFileMode(QFileDialog::ExistingFile);
     QUrl url;
     if (dialog->exec() == QDialog::Accepted)
