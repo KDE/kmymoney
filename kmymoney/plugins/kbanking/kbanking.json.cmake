@@ -30,7 +30,7 @@
                 "Name[zh_CN]": "Martin Preuss,Thomas Baumgart,Christian Dávid"
             }
         ],
-        "Description": "Add HBCI/FinTs online banking to KMyMoney",
+        "Description": "Add HBCI/FinTs, OFX and PayPal online banking to KMyMoney",
         "Description[ca@valencia]": "Afig la banca en línia HBCI/FinTs al KMyMoney",
         "Description[ca]": "Afegeix la banca en línia HBCI/FinTs al KMyMoney",
         "Description[en_GB]": "Add HBCI/FinTs online banking to KMyMoney",
