@@ -18,12 +18,14 @@
 #include "ibanbicdataenums.h"
 #include "bicmodel.h"
 
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
 ibanBicData::ibanBicData(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, "ibanbicdata"/*must be the same as X-KDE-PluginInfo-Name*/)
+    KMyMoneyPlugin::Plugin(parent, args)
+#else
+ibanBicData::ibanBicData(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
+    KMyMoneyPlugin::Plugin(parent, metaData, args)
+#endif
 {
-    Q_UNUSED(args)
-    setComponentName("ibanbicdata", i18n("IBAN/BIC Data"));
-
     // For information, announce that we have been loaded.
     qDebug("Plugins: ibanbicdata loaded");
 }
