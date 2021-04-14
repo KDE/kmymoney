@@ -35,6 +35,7 @@
         "Description[ca]": "Afegeix la banca en línia HBCI/FinTs, OFX i PayPal al KMyMoney",
         "Description[es]": "Añade banca en línea HBCI/FinTs, OFX y PayPal a KMyMoney",
         "Description[nl]": "Voegt HBCI/FinTs, OFX en PayPal online bankieren toe aan KMyMoney",
+        "Description[sl]": "Doda spletno bančništvo HBCI/FinTs, OFX in PayPal v KMyMoney",
         "Description[sv]": "Lägg till HBCI/FinTs Internetbank och PayPal till KMyMoney",
         "Description[uk]": "Онлайн-банкінг HBCI/FinTs, OFX і PayPal у KMyMoney",
         "Description[x-test]": "xxAdd HBCI/FinTs, OFX and PayPal online banking to KMyMoneyxx",
