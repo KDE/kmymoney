@@ -28,7 +28,11 @@ PluginSettingsWidget::PluginSettingsWidget(QWidget* parent) :
     QWidget(parent)
 {
     setupUi(this);
-    setEnabled(KGPGFile::GPGAvailable());
+    bool available = KGPGFile::GPGAvailable();
+    setEnabled(available);
+    if (!available) {
+        setToolTip(i18n("GPG installation not found or not working properly."));
+    }
 
     // don't show the widget in which the master key is actually kept
     kcfg_GpgRecipient->hide();
@@ -146,6 +150,7 @@ void PluginSettingsWidget::showEvent(QShowEvent * event)
     // if we don't have at least one secret key, we turn off encryption
     if (keyList.isEmpty()) {
         setEnabled(false);
+        setToolTip(i18n("No GPG secret keys found, please run gpg[2] --gen-key or import keys into gpg"));
         kcfg_WriteDataEncrypted->setChecked(false);
     }
 
@@ -170,6 +175,7 @@ void PluginSettingsWidget::slotStatusChanged(bool state)
     kcfg_GpgRecipientList->setEnabled(state);
 
     if (state) {
+        setToolTip(QString());
         m_recoverKeyFound->setState((KLed::State)(KGPGFile::keyAvailable(RECOVER_KEY_ID) ? KLed::On : KLed::Off));
         kcfg_EncryptRecover->setEnabled(m_recoverKeyFound->state() == KLed::On);
         slotIdChanged();
