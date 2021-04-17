@@ -61,12 +61,12 @@ public:
 
 #if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
 Weboob::Weboob(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args),
+    KMyMoneyPlugin::Plugin(parent, args)
 #else
 Weboob::Weboob(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, metaData,args),
-#end,
-    d_ptr(new WeboobPrivate)
+    KMyMoneyPlugin::Plugin(parent, metaData,args)
+#endif
+    , d_ptr(new WeboobPrivate)
 {
     const auto rcFileName = QLatin1String("weboob.rc");
 
@@ -90,8 +90,9 @@ Weboob::~Weboob()
     qDebug("Plugins: weboob unloaded");
 }
 
-void Weboob::plug()
+void Weboob::plug(KXMLGUIFactory* guiFactory)
 {
+    Q_UNUSED(guiFactory)
     Q_D(Weboob);
     connect(&d->watcher, &QFutureWatcher<WeboobInterface::Account>::finished, this, &Weboob::gotAccount);
 }
