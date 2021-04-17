@@ -44,6 +44,14 @@ class KMM_WIDGETS_EXPORT KMyMoneyViewBase : public QWidget
 public:
     virtual ~KMyMoneyViewBase();
 
+    /**
+     * Execute the action using the @a args. This does nothing
+     * in its base implementation. If a view needs to act upon
+     * the execution of @a action you need to override this
+     * method in the view.
+     */
+    virtual void executeAction(eMenu::Action action, const QVariantList& args);
+
     virtual void executeCustomAction(eView::Action) {}
 
     /**

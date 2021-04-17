@@ -169,6 +169,11 @@ public:
      */
     QHash<eMenu::Action, QAction *> actionsToBeConnected();
 
+    /**
+     * Execute the action using the @a args
+     */
+    void executeAction(eMenu::Action action, QVariantList args);
+
 protected:
     /**
       * Overwritten because KMyMoney has it's custom header.

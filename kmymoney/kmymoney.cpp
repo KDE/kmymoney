@@ -2003,8 +2003,7 @@ void KMyMoneyApp::slotGoToPayee()
         if (!d->m_selections.isEmpty(SelectedObjects::Transaction)) {
             transactionId = d->m_selections.selection(SelectedObjects::Transaction).at(0);
         }
-        QVariantList args = { payeeId, accountId, transactionId };
-        d->m_myMoneyView->slotSelectByVariant(args, eView::Intent::ShowPayee );
+        d->m_myMoneyView->executeAction(eMenu::Action::GoToPayee, QVariantList{payeeId, accountId, transactionId});
     }
 }
 

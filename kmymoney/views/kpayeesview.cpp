@@ -110,20 +110,6 @@ void KPayeesView::slotClosePayeeIdentifierSource()
     d->ui->payeeIdentifiers->closeSource();
 }
 
-void KPayeesView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
-{
-    Q_D(KPayeesView);
-    switch (intent) {
-    case eView::Intent::ShowPayee:
-        if (variant.count() == 3) {
-            d->selectPayeeAndTransaction(variant.at(0).toString(), variant.at(1).toString(), variant.at(2).toString());
-        }
-        break;
-    default:
-        break;
-    }
-}
-
 void KPayeesView::slotRenameSinglePayee(const QModelIndex& idx, const QVariant& value)
 {
     Q_D(KPayeesView);
@@ -228,32 +214,7 @@ void KPayeesView::slotPayeeSelectionChanged(const QItemSelection& selected, cons
     Q_D(KPayeesView);
 
     d->finalizePendingChanges();
-
-    d->m_selections.setSelection(SelectedObjects::Payee, d->selectedPayeeIds());
-    emit requestSelectionChange(d->m_selections);
-
-    const auto selectedPayees = d->selectedPayees();
-    d->m_payee = MyMoneyPayee();
-    if (!selectedPayees.isEmpty()) {
-        d->m_payee = selectedPayees.at(0);
-    }
-
-    // as of now we are updating only the last selected payee, and until
-    // selection mode of the QListView has been changed to Extended, this
-    // will also be the only selection and behave exactly as before - Andreas
-    try {
-        d->m_newName = d->m_payee.name();
-        d->loadDetails();
-
-        slotPayeeDataChanged();
-        d->showTransactions();
-
-    } catch (const MyMoneyException &e) {
-        qDebug("exception during display of payee: %s", e.what());
-        // clear display data
-        d->m_transactionFilter->setPayeeIdList(QStringList());
-        d->m_payee = MyMoneyPayee();
-    }
+    d->selectPayee();
 }
 
 void KPayeesView::slotKeyListChanged()
@@ -469,6 +430,20 @@ void KPayeesView::slotSendMail()
     QRegularExpression re(".+@.+");
     if (re.match(d->m_payee.email()).hasMatch())
         QDesktopServices::openUrl(QUrl(QStringLiteral("mailto:?to=") + d->m_payee.email(), QUrl::TolerantMode));
+}
+
+void KPayeesView::executeAction(eMenu::Action action, const QVariantList& args)
+{
+    Q_D(KPayeesView);
+    switch (action) {
+    case eMenu::Action::GoToPayee:
+        if (args.count() == 3) {
+            d->selectPayeeAndTransaction(args.at(0).toString(), args.at(1).toString(), args.at(2).toString());
+        }
+        break;
+    default:
+        break;
+    }
 }
 
 void KPayeesView::executeCustomAction(eView::Action action)

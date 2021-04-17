@@ -51,6 +51,10 @@ public:
 
     void executeCustomAction(eView::Action action) override;
 
+    void executeAction(eMenu::Action action, const QVariantList& args) override;
+
+    void updateActions(const SelectedObjects& selections) override;
+
 public Q_SLOTS:
     void slotHelp();
 
@@ -58,10 +62,6 @@ public Q_SLOTS:
      * @brief proxy slot to close a model based on file open/close
      */
     void slotClosePayeeIdentifierSource();
-
-    void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
-
-    void updateActions(const SelectedObjects& selections) override;
 
 Q_SIGNALS:
     void transactionSelected(const QString& accountId, const QString& transactionId);

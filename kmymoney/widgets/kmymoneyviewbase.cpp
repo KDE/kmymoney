@@ -10,6 +10,8 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QVariantList>
+
 // ----------------------------------------------------------------------------
 // KDE Includes
 
@@ -19,6 +21,7 @@
 // Project Includes
 
 #include "kmymoneyutils.h"
+#include "mymoneyenums.h"
 
 KMyMoneyViewBase::KMyMoneyViewBase(QWidget* parent)
     : QWidget(parent)
@@ -60,4 +63,10 @@ void KMyMoneyViewBase::changeEvent(QEvent* ev)
     if(ev->type() == QEvent::EnabledChange) {
         emit viewStateChanged(isEnabled());
     }
+}
+
+void KMyMoneyViewBase::executeAction(eMenu::Action action, const QVariantList& args)
+{
+    Q_UNUSED(action)
+    Q_UNUSED(args)
 }

@@ -659,6 +659,8 @@ public:
             qDebug() << "selectPayeeAndTransaction: Payee not found" << payeeId;
             return;
         }
+
+        // select the payee
         ui->m_payees->setCurrentIndex(list.at(0));
 
         const auto model = ui->m_register->model();
@@ -684,11 +686,20 @@ public:
             }
         }
 
-        if (transactionRow != -1) {
-            ui->m_register->setCurrentIndex(model->index(transactionRow, 0));
-        }
-
         ensurePayeeVisible(payeeId);
+
+        if (transactionRow != -1) {
+            // use the date column here for the index so that scrollTo has an effect
+            // because column 0 (Number) is hidden in the payees view.
+            idx = model->index(transactionRow, JournalModel::Column::Date);
+            ui->m_register->setCurrentIndex(idx);
+
+            // if it's not the last transaction, we scroll a bit further
+            if (transactionRow + 1 < rows) {
+                idx = model->index(transactionRow + 1, JournalModel::Column::Date);
+            }
+            ui->m_register->scrollTo(idx);
+        }
     }
 
     void finalizePendingChanges()
@@ -700,6 +711,38 @@ public:
                                            i18n("Save changes")) == KMessageBox::Yes) {
                 q->slotUpdatePayee();
             }
+        }
+    }
+
+    void selectPayee()
+    {
+        Q_Q(KPayeesView);
+        m_selections.setSelection(SelectedObjects::Payee, selectedPayeeIds());
+        q->emit requestSelectionChange(m_selections);
+
+        const auto selectedPayeesList = selectedPayees();
+        m_payee = MyMoneyPayee();
+        ui->m_tabWidget->setEnabled(false);
+        if (!selectedPayeesList.isEmpty()) {
+            m_payee = selectedPayeesList.at(0);
+            ui->m_tabWidget->setEnabled(true);
+        }
+
+        // as of now we are updating only the last selected payee, and until
+        // selection mode of the QListView has been changed to Extended, this
+        // will also be the only selection and behave exactly as before - Andreas
+        try {
+            m_newName = m_payee.name();
+            loadDetails();
+
+            q->slotPayeeDataChanged();
+            showTransactions();
+
+        } catch (const MyMoneyException& e) {
+            qDebug() << "exception during display of payee: " << e.what();
+            // clear display data
+            m_transactionFilter->setPayeeIdList(QStringList());
+            m_payee = MyMoneyPayee();
         }
     }
 
