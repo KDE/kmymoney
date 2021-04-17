@@ -15,16 +15,15 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QCheckBox>
+#include <QDebug>
+#include <QLabel>
 #include <QLayout>
 #include <QRadioButton>
-#include <QStringList>
 #include <QRegExp>
-#include <QCheckBox>
-#include <QLabel>
-#include <QTimer>
 #include <QRegularExpression>
-
-#include <QDebug> //! @todo remove @c #include <QDebug>
+#include <QStringList>
+#include <QTimer>
 
 #ifdef IS_APPIMAGE
 #include <QCoreApplication>
@@ -141,13 +140,14 @@ public:
      */
     static int gwenLogHook(GWEN_GUI* gui, const char* domain, GWEN_LOGGER_LEVEL level, const char* message) {
         Q_UNUSED(gui);
-        Q_UNUSED(domain);
-        Q_UNUSED(level);
 
         const char* messageToFilter = "Job not supported with this account";
-        if (strstr(message, messageToFilter) != 0)
-            return 1;
-        return 0;
+        if (!strstr(message, messageToFilter)) {
+            // emulate AqBanking log format here as much as possible
+            const auto time = QDateTime::currentDateTime();
+            qDebug("%d:%s:%s %s", level, qPrintable(time.toString(Qt::ISODate).replace('T', ' ')), domain, message);
+        }
+        return 1;
     }
 
     QTimer *passwordCacheTimer;
