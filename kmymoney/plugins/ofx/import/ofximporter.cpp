@@ -376,7 +376,10 @@ int OFXImporter::ofxTransactionCallback(struct OfxTransactionData data, void * p
             // be in data.amount.  Since I've never seen an OFX file with
             // cash dividends, this is an assumption on my part. (acejones)
             break;
-
+	case OFX_INVBANKTRAN:
+            // This is a regular transaction within an investment account
+	    // so there is nothing special to do here.
+            break;
         //
         // These types are all not handled.  We will generate a warning for them.
         //
