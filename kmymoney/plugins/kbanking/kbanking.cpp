@@ -223,7 +223,8 @@ void KBanking::plug(KXMLGUIFactory* guiFactory)
 
             // load protocol conversion list
             loadProtocolConversion();
-            GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Warning);
+            if (qEnvironmentVariableIsEmpty("AQBANKING_LOGLEVEL"))
+                GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Warning);
             GWEN_Gui_SetLogHookFn(GWEN_Gui_GetGui(), &KBanking::Private::gwenLogHook);
 
         } else {
