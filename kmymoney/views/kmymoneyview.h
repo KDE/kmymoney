@@ -172,7 +172,7 @@ public:
     /**
      * Execute the action using the @a args
      */
-    void executeAction(eMenu::Action action, QVariantList args);
+    void executeAction(eMenu::Action action, const QVariantList& args);
 
 protected:
     /**

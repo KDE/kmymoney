@@ -28,20 +28,21 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <ui_simpleledgerview.h>
-#include "kmymoneyviewbase_p.h"
-#include "ledgerviewpage.h"
 #include "accountsmodel.h"
+#include "icons.h"
 #include "institutionsmodel.h"
 #include "kmymoneyaccountcombo.h"
-#include "icons.h"
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "mymoneyinstitution.h"
-#include "mymoneyenums.h"
-#include "modelenums.h"
 #include "kmymoneysettings.h"
+#include "kmymoneyviewbase_p.h"
+#include "ledgerviewpage.h"
+#include "menuenums.h"
+#include "modelenums.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyfile.h"
+#include "mymoneyinstitution.h"
 #include "selectedobjects.h"
+#include <ui_simpleledgerview.h>
 
 using namespace Icons;
 
@@ -507,10 +508,11 @@ void SimpleLedgerView::executeCustomAction(eView::Action action)
     }
 }
 
-void SimpleLedgerView::slotSelectByVariant(const QVariantList& args, eView::Intent intent)
+void SimpleLedgerView::executeAction(eMenu::Action action, const QVariantList& args)
 {
     Q_D(SimpleLedgerView);
-    if ((intent == eView::Intent::ShowTransactionInLedger) && (args.count() == 2)) {
+    switch (action) {
+    case eMenu::Action::GoToAccount: {
         const auto accountId = args.at(0).toString();
         const auto transactionId = args.at(1).toString();
         openLedger(accountId);
@@ -518,5 +520,9 @@ void SimpleLedgerView::slotSelectByVariant(const QVariantList& args, eView::Inte
         if (view) {
             view->selectTransaction(transactionId);
         }
+        break;
+    }
+    default:
+        break;
     }
 }

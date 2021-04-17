@@ -2016,8 +2016,7 @@ void KMyMoneyApp::slotGoToAccount()
         if (!d->m_selections.isEmpty(SelectedObjects::Transaction)) {
             transactionId = d->m_selections.selection(SelectedObjects::Transaction).at(0);
         }
-        QVariantList args = { accountId, transactionId };
-        d->m_myMoneyView->slotSelectByVariant(args, eView::Intent::ShowTransactionInLedger );
+        d->m_myMoneyView->executeAction(eMenu::Action::GoToAccount, QVariantList{accountId, transactionId});
     }
 }
 

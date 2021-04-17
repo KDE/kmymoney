@@ -30,12 +30,13 @@ public:
 
     virtual void showTransactionForm(bool = true);
 
-    virtual void executeCustomAction(eView::Action action) override;
+    void executeAction(eMenu::Action action, const QVariantList& args) override;
+
+    void executeCustomAction(eView::Action action) override;
 
 public Q_SLOTS:
     void showEvent(QShowEvent* event) override;
 
-    void slotSelectByVariant(const QVariantList& args, eView::Intent intent) override;
     void slotSettingsChanged() override;
 
 private Q_SLOTS:

@@ -378,8 +378,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
     }
 
     // global actions
-    pActions[eMenu::Action::OpenAccount]->setEnabled(
-        !selections.isEmpty(SelectedObjects::Account));
+    pActions[eMenu::Action::OpenAccount]->setEnabled(!selections.isEmpty(SelectedObjects::Account));
 }
 
 void KMyMoneyView::slotSettingsChanged()
@@ -458,8 +457,7 @@ void KMyMoneyView::showPageAndFocus(View idView)
 void KMyMoneyView::showPage(View idView)
 {
     Q_D(KMyMoneyView);
-    if (!d->viewFrames.contains(idView) ||
-        currentPage() == d->viewFrames[idView])
+    if (!d->viewFrames.contains(idView) || (currentPage() == d->viewFrames[idView]))
         return;
 
     resetViewSelection();
@@ -720,6 +718,26 @@ void KMyMoneyView::selectView(View idView, const QVariantList& args)
     if (d->viewBases.contains(idView)) {
         showPage(idView);
         d->viewBases[idView]->slotSelectByVariant(args, eView::Intent::None);
+    }
+}
+
+void KMyMoneyView::executeAction(eMenu::Action action, const QVariantList& args)
+{
+    Q_D(KMyMoneyView);
+
+    const static QHash<eMenu::Action, View> actionRoutes = {
+        {eMenu::Action::GoToPayee, View::Payees},
+        {eMenu::Action::GoToAccount, View::NewLedgers},
+    };
+
+    const auto viewId = actionRoutes.value(action, View::None);
+
+    if (viewId != View::None) {
+        showPage(viewId);
+        d->viewBases[viewId]->executeAction(action, args);
+    } else {
+        // maybe, we need to pass it by all views
+        // in case it is unknown to the routing table
     }
 }
 
