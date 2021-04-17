@@ -193,7 +193,10 @@ void KBanking::plug()
         //! @todo when is gwenKdeGui deleted?
         gwenKdeGui *gui = new gwenKdeGui();
         GWEN_Gui_SetGui(gui->getCInterface());
-        GWEN_Logger_SetLevel(0, GWEN_LoggerLevel_Warning);
+        GWEN_Gui_SetLogHookFn(gui->getCInterface(), &KBanking::Private::gwenLogHook);
+        if (qEnvironmentVariableIsEmpty("GWEN_LOGLEVEL")) {
+            GWEN_Logger_SetLevel(GWEN_LOGDOMAIN, GWEN_LoggerLevel_Warning);
+        }
 
         if (m_kbanking->init() == 0) {
             // Tell the host application to load my GUI component
@@ -219,7 +222,6 @@ void KBanking::plug()
             loadProtocolConversion();
             if (qEnvironmentVariableIsEmpty("AQBANKING_LOGLEVEL"))
                 GWEN_Logger_SetLevel(AQBANKING_LOGDOMAIN, GWEN_LoggerLevel_Warning);
-            GWEN_Gui_SetLogHookFn(GWEN_Gui_GetGui(), &KBanking::Private::gwenLogHook);
 
         } else {
             qWarning("Could not initialize KBanking online banking interface");
