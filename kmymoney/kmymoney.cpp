@@ -2521,21 +2521,6 @@ void KMyMoneyApp::slotShowTipOfTheDay()
     KTipDialog::showTip(d->m_myMoneyView, "", true);
 }
 
-void KMyMoneyApp::slotShowPreviousView()
-{
-
-}
-
-void KMyMoneyApp::slotShowNextView()
-{
-
-}
-
-void KMyMoneyApp::slotViewSelected(View view)
-{
-    KMyMoneySettings::setLastViewSelected(static_cast<int>(view));
-}
-
 void KMyMoneyApp::slotGenerateSql()
 {
 //  QPointer<KGenerateSqlDlg> editor = new KGenerateSqlDlg(this);
@@ -2643,32 +2628,6 @@ void KMyMoneyApp::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& ne
         } catch (const MyMoneyException &e) {
             KMessageBox::information(this, i18n("Unable to add scheduled transaction: %1", QString::fromLatin1(e.what())));
         }
-    }
-}
-
-void KMyMoneyApp::slotReparentAccount(const MyMoneyAccount& _src, const MyMoneyInstitution& _dst)
-{
-    MyMoneyAccount src(_src);
-    src.setInstitutionId(_dst.id());
-    MyMoneyFileTransaction ft;
-    try {
-        MyMoneyFile::instance()->modifyAccount(src);
-        ft.commit();
-    } catch (const MyMoneyException &e) {
-        KMessageBox::sorry(this, i18n("<p><b>%1</b> cannot be moved to institution <b>%2</b>. Reason: %3</p>", src.name(), _dst.name(), QString::fromLatin1(e.what())));
-    }
-}
-
-void KMyMoneyApp::slotReparentAccount(const MyMoneyAccount& _src, const MyMoneyAccount& _dst)
-{
-    MyMoneyAccount src(_src);
-    MyMoneyAccount dst(_dst);
-    MyMoneyFileTransaction ft;
-    try {
-        MyMoneyFile::instance()->reparentAccount(src, dst);
-        ft.commit();
-    } catch (const MyMoneyException &e) {
-        KMessageBox::sorry(this, i18n("<p><b>%1</b> cannot be moved to <b>%2</b>. Reason: %3</p>", src.name(), dst.name(), QString::fromLatin1(e.what())));
     }
 }
 
@@ -3645,7 +3604,6 @@ void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
     case eKMyMoney::FileAction::Closing:
         disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
         // make sure to not catch view activations anymore
-        disconnect(m_myMoneyView, &KMyMoneyView::viewActivated, q, &KMyMoneyApp::slotViewSelected);
         m_myMoneyView->slotFileClosed();
         // notify the models that the file is going to be closed (we should have something like dataChanged that reaches the models first)
         MyMoneyFile::instance()->unload();

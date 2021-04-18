@@ -201,15 +201,6 @@ protected Q_SLOTS:
 
     void slotShowTipOfTheDay();
 
-    void slotShowPreviousView();
-
-    void slotShowNextView();
-
-    /**
-     * @deprecated move contents of this method to KMyMoneyView
-     */
-    Q_DECL_DEPRECATED void slotViewSelected(View view);
-
     /**
       * Calls the print logic for the current view
       */
@@ -480,22 +471,6 @@ public Q_SLOTS:
       * Called to update stock and currency prices from the user menu
       */
     void slotEquityPriceUpdate();
-
-    /**
-      * This slot reparents account @p src to be a child of account @p dest
-      *
-      * @param src account to be reparented
-      * @param dest new parent
-      */
-    void slotReparentAccount(const MyMoneyAccount& src, const MyMoneyAccount& dest);
-
-    /**
-      * This slot reparents account @p src to be a held at institution @p dest
-      *
-      * @param src account to be reparented
-      * @param dest new parent institution
-      */
-    void slotReparentAccount(const MyMoneyAccount& src, const MyMoneyInstitution& dest);
 
     /**
       * Create a new investment in a given @p parent investment account
