@@ -448,8 +448,6 @@ void StdTransactionEditor::loadEditWidgets(eRegister::Action action)
                 amountWidget->setValue(value.abs());
         }
 
-        slotUpdateCategory(categoryId);
-
         // try to preset for specific action if a new transaction is being started
         if (d->m_transaction.id().isEmpty()) {
             if ((w = haveWidget("category-label")) != 0) {
@@ -1039,28 +1037,13 @@ void StdTransactionEditor::updateAmount(const MyMoneyMoney& val)
     auto categoryLabel = dynamic_cast<QLabel*>(haveWidget("category-label"));
     if (categoryLabel) {
         if (auto cashflow = dynamic_cast<KMyMoneyCashFlowCombo*>(d->m_editWidgets["cashflow"])) {
-            if (!val.isPositive())  {  //   fixes BUG321317
-                if (categoryLabel->text() != i18n("Category")) {
-                    if (cashflow->direction() == eRegister::CashFlowDirection::Payment) {
-                        categoryLabel->setText(i18n("Transfer to"));
-                    }
-                } else {
-                    slotUpdateCashFlow(cashflow->direction());
-                }
-                if (auto amountWidget = dynamic_cast<AmountEdit*>(d->m_editWidgets["amount"]))
-                    amountWidget->setValue(val.abs());
-            } else {
-                if (categoryLabel->text() != i18n("Category")) {
-                    if (cashflow->direction() == eRegister::CashFlowDirection::Payment) {
-                        categoryLabel->setText(i18n("Transfer to"));
-                    } else {
-                        categoryLabel->setText(i18n("Transfer from"));
-                        cashflow->setDirection(eRegister::CashFlowDirection::Deposit);  //  editing with +ve shows 'from' not 'pay to'
-                    }
-                }
-                if (auto amountWidget = dynamic_cast<AmountEdit*>(d->m_editWidgets["amount"]))
-                    amountWidget->setValue(val.abs());
+            QSignalBlocker blockCashFlow(cashflow);
+            if (val.isNegative()) {
+                cashflow->reverseDirection();
             }
+            slotUpdateCashFlow(cashflow->direction());
+            if (auto amountWidget = dynamic_cast<AmountEdit*>(d->m_editWidgets["amount"]))
+                amountWidget->setValue(val.abs());
         }
     }
 }

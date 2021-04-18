@@ -51,6 +51,7 @@ public:
     ~KMyMoneyCashFlowCombo() override;
 
     void setDirection(eWidgets::eRegister::CashFlowDirection dir);
+    void reverseDirection();
     eWidgets::eRegister::CashFlowDirection direction() const;
 
     void removeDontCare();

@@ -67,6 +67,21 @@ void KMyMoneyCashFlowCombo::setDirection(eRegister::CashFlowDirection dir)
     setSelectedItem(num.setNum((int)dir));
 }
 
+void KMyMoneyCashFlowCombo::reverseDirection()
+{
+    Q_D(KMyMoneyCashFlowCombo);
+    switch (d->m_dir) {
+    case eWidgets::eRegister::CashFlowDirection::Deposit:
+        setDirection(eWidgets::eRegister::CashFlowDirection::Payment);
+        break;
+    case eWidgets::eRegister::CashFlowDirection::Payment:
+        setDirection(eWidgets::eRegister::CashFlowDirection::Deposit);
+        break;
+    default:
+        break;
+    }
+}
+
 eRegister::CashFlowDirection KMyMoneyCashFlowCombo::direction() const
 {
     Q_D(const KMyMoneyCashFlowCombo);
