@@ -84,6 +84,8 @@ using namespace eMyMoney;
 
 class KMyMoneyViewPrivate
 {
+    Q_DECLARE_PUBLIC(KMyMoneyView);
+
 public:
     KMyMoneyViewPrivate(KMyMoneyView* qq)
         : q_ptr(qq)
@@ -92,14 +94,21 @@ public:
     {
     }
 
+    /**
+     * Returns the id of the current selected view
+     */
+    View currentViewId()
+    {
+        Q_Q(KMyMoneyView);
+        return viewFrames.key(q->currentPage());
+    }
+
     KMyMoneyView* q_ptr;
     KPageWidgetModel* m_model;
     KMyMoneyTitleLabel* m_header;
 
     QHash<View, KPageWidgetItem*> viewFrames;
     QHash<View, KMyMoneyViewBase*> viewBases;
-
-
 };
 
 
@@ -728,6 +737,7 @@ void KMyMoneyView::executeAction(eMenu::Action action, const QVariantList& args)
     const static QHash<eMenu::Action, View> actionRoutes = {
         {eMenu::Action::GoToPayee, View::Payees},
         {eMenu::Action::GoToAccount, View::NewLedgers},
+        {eMenu::Action::ReportOpen, View::Reports},
     };
 
     const auto viewId = actionRoutes.value(action, View::None);
@@ -736,8 +746,9 @@ void KMyMoneyView::executeAction(eMenu::Action action, const QVariantList& args)
         showPage(viewId);
         d->viewBases[viewId]->executeAction(action, args);
     } else {
-        // maybe, we need to pass it by all views
-        // in case it is unknown to the routing table
+        d->viewBases[d->currentViewId()]->executeAction(action, args);
+        // maybe, we need to pass by all views
+        // in case the action is unknown to the routing table
     }
 }
 

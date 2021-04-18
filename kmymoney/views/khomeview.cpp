@@ -70,16 +70,25 @@ void KHomeView::wheelEvent(QWheelEvent* event)
     }
 }
 
+void KHomeView::executeAction(eMenu::Action action, const QVariantList& args)
+{
+    Q_UNUSED(args)
+
+    switch (action) {
+    case eMenu::Action::Print:
+        slotPrintView();
+        break;
+    default:
+        break;
+    }
+}
+
 void KHomeView::executeCustomAction(eView::Action action)
 {
     Q_D(KHomeView);
     switch(action) {
     case eView::Action::Refresh:
         refresh();
-        break;
-
-    case eView::Action::Print:
-        slotPrintView();
         break;
 
     case eView::Action::CleanupBeforeFileClose:

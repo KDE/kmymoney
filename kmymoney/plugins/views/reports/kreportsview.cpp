@@ -94,6 +94,22 @@ KReportsView::~KReportsView()
 {
 }
 
+void KReportsView::executeAction(eMenu::Action action, const QVariantList& args)
+{
+    switch (action) {
+    case eMenu::Action::ReportOpen:
+        if (args.count() == 1) {
+            slotOpenReport(args.at(0).toString());
+        }
+        break;
+    case eMenu::Action::Print:
+        slotPrintView();
+        break;
+    default:
+        break;
+    }
+}
+
 void KReportsView::executeCustomAction(eView::Action action)
 {
     Q_D(KReportsView);
@@ -104,10 +120,6 @@ void KReportsView::executeCustomAction(eView::Action action)
 
     case eView::Action::SetDefaultFocus:
         QTimer::singleShot(0, d->m_tocTreeWidget, SLOT(setFocus()));
-        break;
-
-    case eView::Action::Print:
-        slotPrintView();
         break;
 
     case eView::Action::CleanupBeforeFileClose:
@@ -213,6 +225,7 @@ void KReportsView::slotOpenUrl(const QUrl &url)
             qWarning() << i18n("Unknown command '%1' in KReportsView::slotOpenUrl()", qPrintable(command));
 
     } else if (view == VIEW_LEDGER) {
+        /// @todo maybe use eMenu::Action::GotoAccount instead here
         emit selectByVariant(QVariantList {QVariant(id), QVariant(tid)}, eView::Intent::ShowTransactionInLedger);
     } else {
         qWarning() << i18n("Unknown view '%1' in KReportsView::slotOpenUrl()", qPrintable(view));
@@ -699,14 +712,6 @@ void KReportsView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent in
         slotOpenReport(static_cast<const MyMoneyReport&>(obj));
     default:
         break;
-    }
-}
-
-void KReportsView::slotSelectByVariant(const QVariantList& args, eView::Intent intent)
-{
-    Q_UNUSED(intent)
-    if (!args.isEmpty()) {
-        slotOpenReport(args.at(0).toString());
     }
 }
 

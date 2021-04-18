@@ -80,6 +80,8 @@ public:
     ~KReportsView() override;
 
     void executeCustomAction(eView::Action action) override;
+    void executeAction(eMenu::Action action, const QVariantList& args) override;
+
     void refresh();
 
 Q_SIGNALS:
@@ -127,7 +129,6 @@ public Q_SLOTS:
     void slotDeleteFromList();
 
     void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
-    void slotSelectByVariant ( const QVariantList& args, eView::Intent intent ) override;
 
     void updateActions(const SelectedObjects& selections) override;
 

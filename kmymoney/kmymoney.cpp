@@ -2024,7 +2024,7 @@ void KMyMoneyApp::slotOpenReport()
 {
     const auto action = qobject_cast<QAction*>(sender());
     if (action) {
-        d->m_myMoneyView->selectView(View::Reports, QVariantList { action->data() } );
+        d->m_myMoneyView->executeAction(eMenu::Action::ReportOpen, QVariantList{action->data()});
         action->setData(QVariant());
     }
 }
@@ -2742,7 +2742,7 @@ void KMyMoneyApp::Private::moveInvestmentTransaction(const QString& /*fromId*/,
 
 void KMyMoneyApp::slotPrintView()
 {
-    d->m_myMoneyView->slotPrintView();
+    d->m_myMoneyView->executeAction(eMenu::Action::Print, QVariantList());
 }
 
 void KMyMoneyApp::Private::updateCaption()

@@ -41,6 +41,7 @@ public:
     ~KHomeView() override;
 
     void executeCustomAction(eView::Action action) override;
+    void executeAction(eMenu::Action action, const QVariantList& args) override;
     void refresh();
 
 protected:
