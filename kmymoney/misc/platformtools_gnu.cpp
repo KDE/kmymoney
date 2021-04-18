@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <clocale>
 
+#include <QDebug>
 #include <QString>
 
 QString platformTools::osUsername()
@@ -40,6 +41,11 @@ platformTools::currencySymbolPosition_t platformTools::currencySymbolPosition(bo
             rc = (space != 0) ? platformTools::AfterQuantityMoneyWithSpace : platformTools::AfterQuantityMoney;
         }
     }
+
+    if (rc > AfterQuantityMoneyWithSpace) {
+        qDebug("currencySymbolPosition for %s values from locale is out of bounds (%d). Reset to default.", negativeValues ? "negative" : "positive", rc);
+        rc = platformTools::AfterQuantityMoneyWithSpace;
+    }
     return rc;
 }
 
@@ -49,6 +55,11 @@ platformTools::currencySignPosition_t platformTools::currencySignPosition(bool n
     struct lconv* lc = std::localeconv();
     if (lc) {
         rc = static_cast<platformTools::currencySignPosition_t>(negativeValues ? lc->n_sign_posn : lc->p_sign_posn);
+    }
+
+    if (rc > SucceedSymbol) {
+        qDebug("currencySignPosition for %s values from locale is out of bounds (%d). Reset to default.", negativeValues ? "negative" : "positive", rc);
+        rc = platformTools::PreceedQuantityAndSymbol;
     }
     return rc;
 }
