@@ -6,7 +6,7 @@
 #ifndef POPUPPOSITIONER_H
 #define POPUPPOSITIONER_H
 
-#include "kmm_widgets_export.h"
+#include "kmm_base_widgets_export.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -29,7 +29,7 @@ class QWidget;
   *
   * @author Thomas Baumgart
   */
-class KMM_WIDGETS_EXPORT PopupPositioner
+class KMM_BASE_WIDGETS_EXPORT PopupPositioner
 {
 public:
     typedef enum { TopLeft, TopRight, BottemLeft, BottomRight } Anchor;
