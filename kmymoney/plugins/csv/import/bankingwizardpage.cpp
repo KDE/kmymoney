@@ -290,7 +290,7 @@ void BankingPage::updateCurrentMemoSelection()
         }
         txt = txt.left(txt.length()-2);
     }
-    ui->m_currentMemoColumns->setText(i18nc("@label:listbox list of currently selected fields", "<i>Memo columns:</i> %1").arg(txt));
+    ui->m_currentMemoColumns->setText(i18nc("@label:listbox list of currently selected fields", "<i>Memo columns:</i> %1", txt));
 
     ui->m_memoColClear->setEnabled(haveSelection);
 }
