@@ -56,7 +56,7 @@ KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const KPluginMetaData &metaData,
 
     setObjectName(metaData.pluginId());
     m_componentDisplayName = metaData.name();
-    setComponentName(metaData.name(), m_componentDisplayName);
+    setComponentName(metaData.pluginId(), m_componentDisplayName);
 }
 #endif
 
