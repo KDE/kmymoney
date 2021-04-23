@@ -387,6 +387,12 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
     }
 
     // global actions
+    // --------------
+    // the goto payee action does not make sense if the payees view is active
+    if (d->currentViewId() == View::Payees) {
+        pActions[eMenu::Action::GoToPayee]->setDisabled(true);
+    }
+    // the open ledger function only makes sense if we have an account selection
     pActions[eMenu::Action::OpenAccount]->setEnabled(!selections.isEmpty(SelectedObjects::Account));
 }
 
