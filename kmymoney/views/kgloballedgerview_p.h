@@ -1258,7 +1258,6 @@ public:
         if (m_selectedTransactions.count() != 2)
             return;
 
-        KMyMoneyRegister::SelectedTransactions::const_iterator it;
         KMyMoneyRegister::SelectedTransaction toBeDeleted;
         KMyMoneyRegister::SelectedTransaction remaining;
         for (const auto& it : m_selectedTransactions) {
