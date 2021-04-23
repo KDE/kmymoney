@@ -34,41 +34,42 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneyviewbase_p.h"
+#include "accountsmodel.h"
+#include "fancydategroupmarkers.h"
+#include "kbalancewarning.h"
 #include "kendingbalancedlg.h"
 #include "kfindtransactiondlg.h"
-#include "kmymoneyaccountselector.h"
-#include "kmymoneyutils.h"
-#include "mymoneyexception.h"
-#include "mymoneymoney.h"
-#include "mymoneyaccount.h"
-#include "mymoneyfile.h"
+#include "kmergetransactionsdlg.h"
 #include "kmymoneyaccountcombo.h"
-#include "kbalancewarning.h"
-#include "transactionmatcher.h"
-#include "tabbar.h"
-#include "register.h"
-#include "transactioneditor.h"
-#include "selectedtransactions.h"
+#include "kmymoneyaccountselector.h"
 #include "kmymoneysettings.h"
-#include "registersearchline.h"
-#include "scheduledtransaction.h"
-#include "accountsmodel.h"
+#include "kmymoneyutils.h"
+#include "kmymoneyviewbase_p.h"
+#include "menuenums.h"
+#include "modelenums.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
+#include "mymoneypayee.h"
 #include "mymoneyprice.h"
 #include "mymoneyschedule.h"
 #include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneytracer.h"
 #include "mymoneytransaction.h"
 #include "mymoneytransactionfilter.h"
-#include "mymoneysplit.h"
-#include "mymoneypayee.h"
-#include "mymoneytracer.h"
+#include "register.h"
+#include "registersearchline.h"
+#include "scheduledtransaction.h"
+#include "selectedtransactions.h"
+#include "tabbar.h"
 #include "transaction.h"
+#include "transactioneditor.h"
 #include "transactionform.h"
-#include "fancydategroupmarkers.h"
+#include "transactionmatcher.h"
 #include "widgetenums.h"
-#include "mymoneyenums.h"
-#include "modelenums.h"
-#include "menuenums.h"
 
 #include <config-kmymoney.h>
 #ifdef KMM_DEBUG
@@ -1258,52 +1259,54 @@ public:
         if (m_selectedTransactions.count() != 2)
             return;
 
-        MyMoneyTransaction startMatchTransaction;
-        MyMoneyTransaction endMatchTransaction;
-        MyMoneySplit startSplit;
-        MyMoneySplit endSplit;
-
         KMyMoneyRegister::SelectedTransactions::const_iterator it;
-        KMyMoneyRegister::SelectedTransactions toBeDeleted;
-        for (it = m_selectedTransactions.constBegin(); it != m_selectedTransactions.constEnd(); ++it) {
-            if ((*it).transaction().isImported()) {
-                if (endMatchTransaction.id().isEmpty()) {
-                    endMatchTransaction = (*it).transaction();
-                    endSplit = (*it).split();
-                    toBeDeleted << *it;
+        KMyMoneyRegister::SelectedTransaction toBeDeleted;
+        KMyMoneyRegister::SelectedTransaction remaining;
+        for (const auto& it : m_selectedTransactions) {
+            if (it.transaction().isImported()) {
+                if (toBeDeleted.transaction().id().isEmpty()) {
+                    toBeDeleted = it;
                 } else {
                     //This is a second imported transaction, we still want to merge
-                    startMatchTransaction = (*it).transaction();
-                    startSplit = (*it).split();
+                    remaining = it;
                 }
-            } else if (!(*it).split().isMatched()) {
-                if (startMatchTransaction.id().isEmpty()) {
-                    startMatchTransaction = (*it).transaction();
-                    startSplit = (*it).split();
+            } else if (!it.split().isMatched()) {
+                if (remaining.transaction().id().isEmpty()) {
+                    remaining = it;
                 } else {
-                    endMatchTransaction = (*it).transaction();
-                    endSplit = (*it).split();
-                    toBeDeleted << *it;
+                    toBeDeleted = it;
                 }
             }
         }
 
-#if 0
-        KMergeTransactionsDlg dlg(m_selectedAccount);
-        dlg.addTransaction(startMatchTransaction);
-        dlg.addTransaction(endMatchTransaction);
-        if (dlg.exec() == QDialog::Accepted)
-#endif
-        {
+        // the user selected two transactions but they might be
+        // selected in the wrong order. We check here, if the
+        // other way around makes more sense and simply exchange
+        // the two. See bko #435512
+        if ((remaining.transaction().splitCount() == 1) && (toBeDeleted.transaction().splitCount() > 1)) {
+            swap(remaining, toBeDeleted);
+        }
+
+        bool doMatch = true;
+        // in case the transaction we are about to remove contains
+        // more than one split, we ask the user if this is what
+        // she really wants.
+        if (toBeDeleted.transaction().splitCount() > 1) {
+            KMergeTransactionsDlg dlg(m_currentAccount);
+            dlg.addTransaction(remaining.transaction());
+            dlg.addTransaction(toBeDeleted.transaction());
+            doMatch = (dlg.exec() == QDialog::Accepted);
+        }
+        if (doMatch) {
             MyMoneyFileTransaction ft;
             try {
-                if (startMatchTransaction.id().isEmpty())
+                if (remaining.transaction().id().isEmpty())
                     throw MYMONEYEXCEPTION(QString::fromLatin1("No manually entered transaction selected for matching"));
-                if (endMatchTransaction.id().isEmpty())
+                if (toBeDeleted.transaction().id().isEmpty())
                     throw MYMONEYEXCEPTION(QString::fromLatin1("No imported transaction selected for matching"));
 
                 TransactionMatcher matcher(m_currentAccount);
-                matcher.match(startMatchTransaction, startSplit, endMatchTransaction, endSplit, true);
+                matcher.match(remaining.transaction(), remaining.split(), toBeDeleted.transaction(), toBeDeleted.split(), true);
                 ft.commit();
             } catch (const MyMoneyException &e) {
                 KMessageBox::detailedSorry(q, i18n("Unable to match the selected transactions"), e.what());

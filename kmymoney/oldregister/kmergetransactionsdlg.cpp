@@ -30,7 +30,11 @@ KMergeTransactionsDlg::KMergeTransactionsDlg(const MyMoneyAccount& account, QWid
 {
     // setup descriptive texts
     setWindowTitle(i18n("Merge Transactions"));
-    d_ptr->ui->m_description->setText(i18n("Are you sure you wish to merge these transactions?"));
+    d_ptr->ui->m_description->setText(
+        i18n("Are you sure you wish to merge these transactions?  The one you "
+             "selected first is the top one, and its values will be used in "
+             "the merged transaction.  Cancel and select the other transaction "
+             "first, if you want its values to be used."));
 
     // no selection possible
     d_ptr->ui->m_register->setSelectionMode(QTableWidget::NoSelection);
