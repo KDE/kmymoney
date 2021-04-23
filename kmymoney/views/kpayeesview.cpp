@@ -49,6 +49,17 @@ KPayeesView::KPayeesView(QWidget *parent) :
         d->m_renameProxyModel->setReferenceFilter(d->ui->m_filterBox->itemData(idx));
     });
 
+    d->ui->m_register->selectionModel();
+    connect(d->ui->m_register->selectionModel(), &QItemSelectionModel::currentChanged, this, [&](const QModelIndex& current, const QModelIndex& previous) {
+        Q_UNUSED(previous)
+        Q_D(KPayeesView);
+        d->m_selections.clearSelections(SelectedObjects::Transaction);
+        d->m_selections.clearSelections(SelectedObjects::Account);
+        d->m_selections.setSelection(SelectedObjects::Transaction, current.data(eMyMoney::Model::JournalTransactionIdRole).toString());
+        d->m_selections.setSelection(SelectedObjects::Account, current.data(eMyMoney::Model::SplitAccountIdRole).toString());
+        emit requestSelectionChange(d->m_selections);
+    });
+
     connect(pActions[eMenu::Action::NewPayee], &QAction::triggered, this, &KPayeesView::slotNewPayee);
     connect(pActions[eMenu::Action::DeletePayee], &QAction::triggered, this, &KPayeesView::slotDeletePayee);
     connect(pActions[eMenu::Action::RenamePayee], &QAction::triggered, this, &KPayeesView::slotRenamePayee);

@@ -660,6 +660,9 @@ public:
             return;
         }
 
+        m_selections.clearSelections();
+        m_selections.setSelection(SelectedObjects::Payee, payeeId);
+
         // select the payee
         ui->m_payees->setCurrentIndex(list.at(0));
 
@@ -694,12 +697,17 @@ public:
             idx = model->index(transactionRow, JournalModel::Column::Date);
             ui->m_register->setCurrentIndex(idx);
 
+            m_selections.setSelection(SelectedObjects::Account, idx.data(eMyMoney::Model::SplitAccountIdRole).toString());
+            m_selections.setSelection(SelectedObjects::Transaction, transactionId);
+
             // if it's not the last transaction, we scroll a bit further
             if (transactionRow + 1 < rows) {
                 idx = model->index(transactionRow + 1, JournalModel::Column::Date);
             }
             ui->m_register->scrollTo(idx);
         }
+
+        q->emit requestSelectionChange(m_selections);
     }
 
     void finalizePendingChanges()
@@ -717,9 +725,6 @@ public:
     void selectPayee()
     {
         Q_Q(KPayeesView);
-        m_selections.setSelection(SelectedObjects::Payee, selectedPayeeIds());
-        q->emit requestSelectionChange(m_selections);
-
         const auto selectedPayeesList = selectedPayees();
         m_payee = MyMoneyPayee();
         ui->m_tabWidget->setEnabled(false);
@@ -744,6 +749,9 @@ public:
             m_transactionFilter->setPayeeIdList(QStringList());
             m_payee = MyMoneyPayee();
         }
+
+        m_selections.setSelection(SelectedObjects::Payee, selectedPayeeIds());
+        q->emit requestSelectionChange(m_selections);
     }
 
     Ui::KPayeesView*    ui;
