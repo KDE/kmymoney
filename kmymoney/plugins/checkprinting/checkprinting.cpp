@@ -187,10 +187,10 @@ CheckPrinting::CheckPrinting(QObject *parent, const KPluginMetaData &metaData, c
     const auto rcFileName = QLatin1String("checkprinting.rc");
 
 #ifdef IS_APPIMAGE
-    const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
+    const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), objectName(), rcFileName);
     setXMLFile(rcFilePath);
 
-    const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + componentName + QLatin1Char('/') + rcFileName;
+    const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + objectName() + QLatin1Char('/') + rcFileName;
     setLocalXMLFile(localRcFilePath);
 #else
     setXMLFile(rcFileName);

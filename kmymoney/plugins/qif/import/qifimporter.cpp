@@ -45,7 +45,7 @@ QIFImporter::QIFImporter(QObject *parent, const KPluginMetaData &metaData, const
     const auto rcFileName = QLatin1String("qifimporter.rc");
 
 #ifdef IS_APPIMAGE
-    const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), componentName, rcFileName);
+    const QString rcFilePath = QString("%1/../share/kxmlgui5/%2/%3").arg(QCoreApplication::applicationDirPath(), objectName(), rcFileName);
     setXMLFile(rcFilePath);
 
     const QString localRcFilePath = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).first() + QLatin1Char('/') + rcFileName;
