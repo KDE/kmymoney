@@ -200,7 +200,10 @@ void KOnlineJobOutboxView::createActions(KXMLGUIFactory* guiFactory, KXMLGUIClie
             d->m_contextMenu->insertAction(nullptr, d->m_actions[actionInfo.id]);
         }
     }
+
+    d->m_sharedToolbarActions.insert(eMenu::Action::FileNew, d->m_actions[eMenu::OnlineAction::AccountCreditTransfer]);
 }
+
 void KOnlineJobOutboxView::removeActions()
 {
     Q_D(const KOnlineJobOutboxView);

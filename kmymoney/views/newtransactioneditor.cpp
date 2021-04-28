@@ -102,6 +102,7 @@ public:
     bool valueChanged(CreditDebitHelper* valueHelper);
     bool isIncomeExpense(const QModelIndex& idx);
     bool tagsChanged(const QStringList& ids);
+    int editSplits();
 
     MyMoneyMoney getPrice();
     MyMoneyMoney splitsSum() const;
@@ -426,6 +427,66 @@ MyMoneyMoney NewTransactionEditor::Private::splitsSum() const
     return value;
 }
 
+int NewTransactionEditor::Private::editSplits()
+{
+    const auto transactionFactor(amountHelper->value().isNegative() ? MyMoneyMoney::ONE : MyMoneyMoney::MINUS_ONE);
+
+    SplitModel dlgSplitModel(q, nullptr, splitModel);
+
+    // create an empty split at the end
+    // used to create new splits
+    dlgSplitModel.appendEmptySplit();
+
+    auto commodityId = transaction.commodity();
+    if (commodityId.isEmpty())
+        commodityId = m_account.currencyId();
+    const auto commodity = MyMoneyFile::instance()->security(commodityId);
+
+    QPointer<SplitDialog> splitDialog = new SplitDialog(m_account, commodity, -(q->transactionAmount()), transactionFactor, q);
+    splitDialog->setModel(&dlgSplitModel);
+
+    int rc = splitDialog->exec();
+
+    if (splitDialog && (rc == QDialog::Accepted)) {
+        // remove that empty split again before we update the splits
+        dlgSplitModel.removeEmptySplit();
+
+        // copy the splits model contents
+        splitModel = dlgSplitModel;
+
+        // update the transaction amount
+        amountHelper->setValue(-splitDialog->transactionAmount());
+
+        // the price might have been changed, so we have to update our copy
+        // but only if there is one counter split
+        if (splitModel.rowCount() == 1) {
+            const auto splitIdx = splitModel.index(0, 0);
+            const auto shares = splitIdx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
+            const auto value = splitIdx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
+            if (!shares.isZero()) {
+                price = value / shares;
+            }
+        }
+
+        // bypass the currency calculator here, we have all info already
+        bypassPriceEditor = true;
+        updateWidgetState();
+        bypassPriceEditor = false;
+
+        QWidget* next = ui->tagContainer->tagCombo();
+        if (ui->costCenterCombo->isEnabled()) {
+            next = ui->costCenterCombo;
+        }
+        next->setFocus();
+    }
+
+    if (splitDialog) {
+        splitDialog->deleteLater();
+    }
+
+    return rc;
+}
+
 NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accountId)
     : TransactionEditorBase(parent, accountId)
     , d(new Private(this))
@@ -512,7 +573,9 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     connect(d->ui->numberEdit, &QLineEdit::textChanged, this, &NewTransactionEditor::numberChanged);
     connect(d->ui->costCenterCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &NewTransactionEditor::costCenterChanged);
     connect(d->ui->accountCombo, &KMyMoneyAccountCombo::accountSelected, this, &NewTransactionEditor::categoryChanged);
-    connect(d->ui->accountCombo, &KMyMoneyAccountCombo::splitDialogRequest, this, &NewTransactionEditor::editSplits);
+    connect(d->ui->accountCombo, &KMyMoneyAccountCombo::splitDialogRequest, this, [&]() {
+        d->editSplits();
+    });
 
     connect(d->ui->dateEdit, &KMyMoneyDateEdit::dateChanged, this, &NewTransactionEditor::postdateChanged);
     connect(d->amountHelper, &CreditDebitHelper::valueChanged, this, &NewTransactionEditor::valueChanged);
@@ -735,60 +798,7 @@ void NewTransactionEditor::tagsChanged(const QStringList& tagIds)
 
 void NewTransactionEditor::editSplits()
 {
-    const auto transactionFactor(d->amountHelper->value().isNegative() ? MyMoneyMoney::ONE : MyMoneyMoney::MINUS_ONE);
-
-    SplitModel splitModel(this, nullptr, d->splitModel);
-
-    // create an empty split at the end
-    // used to create new splits
-    splitModel.appendEmptySplit();
-
-    auto commodityId = d->transaction.commodity();
-    if (commodityId.isEmpty())
-        commodityId = d->m_account.currencyId();
-    const auto commodity = MyMoneyFile::instance()->security(commodityId);
-
-    QPointer<SplitDialog> splitDialog = new SplitDialog(d->m_account, commodity, -transactionAmount(), transactionFactor, this);
-    splitDialog->setModel(&splitModel);
-
-    int rc = splitDialog->exec();
-
-    if (splitDialog && (rc == QDialog::Accepted)) {
-        // remove that empty split again before we update the splits
-        splitModel.removeEmptySplit();
-
-        // copy the splits model contents
-        d->splitModel = splitModel;
-
-        // update the transaction amount
-        d->amountHelper->setValue(-splitDialog->transactionAmount());
-
-        // the price might have been changed, so we have to update our copy
-        // but only if there is one counter split
-        if (d->splitModel.rowCount() == 1) {
-            const auto splitIdx = d->splitModel.index(0, 0);
-            const auto shares = splitIdx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>();
-            const auto value = splitIdx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>();
-            if (!shares.isZero()) {
-                d->price = value / shares;
-            }
-        }
-
-        // bypass the currency calculator here, we have all info already
-        d->bypassPriceEditor = true;
-        d->updateWidgetState();
-        d->bypassPriceEditor = false;
-
-        QWidget* next = d->ui->tagContainer->tagCombo();
-        if (d->ui->costCenterCombo->isEnabled()) {
-            next = d->ui->costCenterCombo;
-        }
-        next->setFocus();
-    }
-
-    if (splitDialog) {
-        splitDialog->deleteLater();
-    }
+    d->editSplits() == QDialog::Accepted ? acceptEdit() : reject();
 }
 
 MyMoneyMoney NewTransactionEditor::transactionAmount() const

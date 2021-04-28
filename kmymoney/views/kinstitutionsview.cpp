@@ -134,6 +134,8 @@ KInstitutionsView::KInstitutionsView(QWidget *parent) :
 
     d->ui->m_accountTree->setItemDelegate(new AccountDelegate(d->ui->m_accountTree));
     connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::netWorthChanged, this, &KInstitutionsView::slotNetWorthChanged);
+
+    d->m_sharedToolbarActions.insert(eMenu::Action::FileNew, pActions[eMenu::Action::NewInstitution]);
 }
 
 KInstitutionsView::~KInstitutionsView()
@@ -185,7 +187,6 @@ void KInstitutionsView::updateActions(const SelectedObjects& selections)
 {
     Q_D(KInstitutionsView);
 
-    pActions[eMenu::Action::NewInstitution]->setEnabled(true);
     pActions[eMenu::Action::EditInstitution]->setEnabled(false);
     pActions[eMenu::Action::DeleteInstitution]->setEnabled(false);
 

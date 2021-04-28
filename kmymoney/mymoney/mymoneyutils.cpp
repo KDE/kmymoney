@@ -23,14 +23,15 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "journalmodel.h"
 #include "mymoneyaccount.h"
-#include "mymoneymoney.h"
-#include "mymoneysecurity.h"
-#include "mymoneytransaction.h"
-#include "mymoneysplit.h"
-#include "mymoneyfile.h"
 #include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
 #include "mymoneyschedule.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 
 QString MyMoneyUtils::getFileExtension(QString strFileName)
 {
@@ -161,3 +162,38 @@ QString MyMoneyUtils::paymentMethodToString(eMyMoney::Schedule::PaymentType paym
     return i18nc("Scheduled Transaction payment type", MyMoneySchedule::paymentMethodToString(paymentType).toLatin1());
 }
 
+modifyTransactionWarnLevel_t MyMoneyUtils::transactionWarnLevel(const QStringList& journalEntryIds)
+{
+    modifyTransactionWarnLevel_t level = NoWarning;
+    for (const auto& journalEntryId : journalEntryIds) {
+        const auto rc = transactionWarnLevel(journalEntryId);
+        if (rc > level) {
+            level = rc;
+        }
+    }
+    return level;
+}
+modifyTransactionWarnLevel_t MyMoneyUtils::transactionWarnLevel(const QString& journalEntryId)
+{
+    const auto file = MyMoneyFile::instance();
+    modifyTransactionWarnLevel_t level = NoWarning;
+
+    try {
+        const auto journalEntry = file->journalModel()->itemById(journalEntryId);
+        if (!journalEntry.id().isEmpty()) {
+            for (const auto& split : journalEntry.transaction().splits()) {
+                auto acc = file->account(split.accountId());
+                if (acc.isClosed())
+                    level = OneAccountClosed;
+                else if (split.reconcileFlag() == eMyMoney::Split::State::Frozen)
+                    level = OneSplitFrozen;
+                else if (split.reconcileFlag() == eMyMoney::Split::State::Reconciled && level < OneSplitReconciled)
+                    level = OneSplitReconciled;
+            }
+        }
+    } catch (const MyMoneyException&) {
+        // qDebug("Exception in SelectedTransaction::warnLevel(): %s", e.what());
+    }
+
+    return level;
+}

@@ -46,6 +46,8 @@ KScheduledView::KScheduledView(QWidget *parent) :
 
     Q_D(KScheduledView);
     d->m_balanceWarning.reset(new KBalanceWarning(this));
+
+    d->m_sharedToolbarActions.insert(eMenu::Action::FileNew, pActions[eMenu::Action::NewSchedule]);
 }
 
 KScheduledView::~KScheduledView()
@@ -112,8 +114,6 @@ void KScheduledView::updateActions(const SelectedObjects& selections)
 
     for (const auto& a : actionsToBeDisabled)
         pActions[a]->setEnabled(false);
-
-    pActions[eMenu::Action::NewSchedule]->setEnabled(true);
 
     MyMoneySchedule sch;
     if (!selections.selection(SelectedObjects::Schedule).isEmpty()) {

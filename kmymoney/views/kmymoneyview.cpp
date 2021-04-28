@@ -41,43 +41,44 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "simpleledgerview.h"
-#include "kmymoneysettings.h"
-#include "kmymoneytitlelabel.h"
-#include "kcurrencyeditdlg.h"
-#include "mymoneyexception.h"
-#include "khomeview.h"
-#include "kaccountsview.h"
-#include "kcategoriesview.h"
-#include "kinstitutionsview.h"
-#include "kpayeesview.h"
-#include "ktagsview.h"
-#include "kscheduledview.h"
-#include "kgloballedgerview.h"
-#include "kinvestmentview.h"
-#include "modelenums.h"
 #include "accountsmodel.h"
 #include "equitiesmodel.h"
-#include "securitiesmodel.h"
-#include "specialdatesmodel.h"
-#include "schedulesjournalmodel.h"
 #include "icons.h"
-#include "onlinejobadministration.h"
+#include "kaccountsview.h"
+#include "kcategoriesview.h"
+#include "kcurrencyeditdlg.h"
+#include "kgloballedgerview.h"
+#include "khomeview.h"
+#include "kinstitutionsview.h"
+#include "kinvestmentview.h"
 #include "kmymoneyaccounttreeview.h"
+#include "kmymoneyplugin.h"
+#include "kmymoneysettings.h"
+#include "kmymoneytitlelabel.h"
+#include "kpayeesview.h"
+#include "kscheduledview.h"
+#include "ktagsview.h"
+#include "menuenums.h"
+#include "modelenums.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneyinstitution.h"
 #include "mymoneymoney.h"
 #include "mymoneyprice.h"
-#include "mymoneyschedule.h"
-#include "mymoneysplit.h"
-#include "mymoneyaccount.h"
-#include "mymoneyinstitution.h"
-#include "mymoneytag.h"
-#include "mymoneyfile.h"
-#include "mymoneysecurity.h"
 #include "mymoneyreport.h"
-#include "kmymoneyplugin.h"
-#include "mymoneyenums.h"
-#include "menuenums.h"
+#include "mymoneyschedule.h"
+#include "mymoneysecurity.h"
+#include "mymoneysplit.h"
+#include "mymoneytag.h"
+#include "mymoneyutils.h"
+#include "onlinejobadministration.h"
+#include "schedulesjournalmodel.h"
+#include "securitiesmodel.h"
 #include "selectedobjects.h"
+#include "simpleledgerview.h"
+#include "specialdatesmodel.h"
 
 using namespace Icons;
 using namespace eMyMoney;
@@ -103,12 +104,78 @@ public:
         return viewFrames.key(q->currentPage());
     }
 
+    void selectSharedActions(View viewId)
+    {
+        Q_Q(KMyMoneyView);
+        const auto view = viewBases.value(viewId, nullptr);
+        if (view) {
+            const auto sharedActions = view->sharedToolbarActions();
+            if (sharedActions.isEmpty()) {
+                // reset to default
+                emit q->selectSharedActionButton(eMenu::Action::None, nullptr);
+            } else {
+                for (auto it = sharedActions.cbegin(); it != sharedActions.cend(); ++it) {
+                    emit q->selectSharedActionButton(it.key(), it.value());
+                }
+            }
+        }
+    }
+
+    void addSharedActions(KMyMoneyViewBase* view)
+    {
+        Q_Q(KMyMoneyView);
+        const auto sharedActions = view->sharedToolbarActions();
+        for (auto it = sharedActions.cbegin(); it != sharedActions.cend(); ++it) {
+            emit q->addSharedActionButton(it.key(), it.value());
+        }
+    }
+
+    void switchView(eMenu::Action action)
+    {
+        Q_Q(KMyMoneyView);
+        const static QHash<eMenu::Action, View> actionRoutes = {
+            {eMenu::Action::GoToPayee, View::Payees},
+            {eMenu::Action::OpenAccount, View::NewLedgers},
+            {eMenu::Action::GoToAccount, View::NewLedgers},
+            {eMenu::Action::ReportOpen, View::Reports},
+        };
+
+        const auto viewId = actionRoutes.value(action, View::None);
+
+        if (viewId != View::None) {
+            q->showPage(viewId);
+        }
+    }
+
     KMyMoneyView* q_ptr;
     KPageWidgetModel* m_model;
     KMyMoneyTitleLabel* m_header;
 
     QHash<View, KPageWidgetItem*> viewFrames;
     QHash<View, KMyMoneyViewBase*> viewBases;
+
+    struct viewInfo {
+        View id;
+        QString name;
+        Icon icon;
+    };
+
+    // clang-format off
+    const QVector<viewInfo> viewsInfo
+    {
+        {View::Home,            i18n("Home"),                         Icon::Home},
+        {View::Institutions,    i18n("Institutions"),                 Icon::Institutions},
+        {View::Accounts,        i18n("Accounts"),                     Icon::Accounts},
+        {View::Schedules,       i18n("Scheduled\ntransactions"),      Icon::Schedule},
+        {View::Categories,      i18n("Categories"),                   Icon::FinancialCategories},
+        {View::Tags,            i18n("Tags"),                         Icon::Tags},
+        {View::Payees,          i18n("Payees"),                       Icon::Payees},
+        {View::NewLedgers,      i18n("Ledgers"),                      Icon::Ledgers},
+        {View::Investments,     i18n("Investments"),                  Icon::Investments},
+        /// @todo remove when new ledger is fully functional
+        {View::OldLedgers,      i18n("Old ledgers"),                  Icon::DocumentProperties},
+    };
+    // clang-format on
 };
 
 
@@ -154,29 +221,7 @@ KMyMoneyView::KMyMoneyView()
     d->viewBases[View::Investments] = new KInvestmentView;
     d->viewBases[View::OldLedgers] = new KGlobalLedgerView;
 
-    struct viewInfo
-    {
-        View id;
-        QString name;
-        Icon icon;
-    };
-
-    const QVector<viewInfo> viewsInfo
-    {
-        {View::Home,            i18n("Home"),                         Icon::Home},
-        {View::Institutions,    i18n("Institutions"),                 Icon::Institutions},
-        {View::Accounts,        i18n("Accounts"),                     Icon::Accounts},
-        {View::Schedules,       i18n("Scheduled\ntransactions"),      Icon::Schedule},
-        {View::Categories,      i18n("Categories"),                   Icon::FinancialCategories},
-        {View::Tags,            i18n("Tags"),                         Icon::Tags},
-        {View::Payees,          i18n("Payees"),                       Icon::Payees},
-        {View::NewLedgers,      i18n("Ledgers"),                      Icon::Ledgers},
-        {View::Investments,     i18n("Investments"),                  Icon::Investments},
-        /// @todo remove when new ledger is fully functional
-        {View::OldLedgers,      i18n("Old ledgers"),                  Icon::DocumentProperties},
-    };
-
-    for (const viewInfo& view : viewsInfo) {
+    for (const auto& view : d->viewsInfo) {
         addView(d->viewBases[view.id], view.name, view.id, view.icon);
     }
 
@@ -351,28 +396,39 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
 
     d->viewFrames[idView]->setIcon(Icons::get(icon));
     d->viewBases[idView] = view;
-    connect(d->viewBases[idView], &KMyMoneyViewBase::requestCustomContextMenu, this, &KMyMoneyView::requestCustomContextMenu);
-    connect(d->viewBases[idView], &KMyMoneyViewBase::requestActionTrigger, this, &KMyMoneyView::requestActionTrigger);
-    connect(d->viewBases[idView], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
-    connect(this, &KMyMoneyView::settingsChanged, d->viewBases[idView], &KMyMoneyViewBase::slotSettingsChanged);
+    connect(view, &KMyMoneyViewBase::requestCustomContextMenu, this, &KMyMoneyView::requestCustomContextMenu);
+    connect(view, &KMyMoneyViewBase::requestActionTrigger, this, &KMyMoneyView::requestActionTrigger);
+    connect(view, &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
+    connect(this, &KMyMoneyView::settingsChanged, view, &KMyMoneyViewBase::slotSettingsChanged);
 
-    connect(d->viewBases[idView], &KMyMoneyViewBase::viewStateChanged, d->viewFrames[idView], &KPageWidgetItem::setEnabled);
-    connect(d->viewBases[idView], &KMyMoneyViewBase::requestSelectionChange, this, &KMyMoneyView::requestSelectionChange);
+    connect(view, &KMyMoneyViewBase::viewStateChanged, d->viewFrames[idView], &KPageWidgetItem::setEnabled);
+    connect(view, &KMyMoneyViewBase::requestSelectionChange, this, &KMyMoneyView::requestSelectionChange);
+
+    d->addSharedActions(view);
+}
+
+void KMyMoneyView::setupSharedActions()
+{
+    Q_D(KMyMoneyView);
+    for (const auto& view : d->viewsInfo) {
+        d->addSharedActions(d->viewBases[view.id]);
+    }
 }
 
 void KMyMoneyView::removeView(View idView)
 {
     Q_D(KMyMoneyView);
-    if (!d->viewBases.contains(idView))
+    auto view = d->viewBases.value(idView, nullptr);
+    if (!view)
         return;
 
-    disconnect(d->viewBases[idView], &KMyMoneyViewBase::viewStateChanged, d->viewFrames[idView], &KPageWidgetItem::setEnabled);
-    disconnect(d->viewBases[idView], &KMyMoneyViewBase::requestSelectionChange, this, &KMyMoneyView::requestSelectionChange);
+    disconnect(view, &KMyMoneyViewBase::viewStateChanged, d->viewFrames[idView], &KPageWidgetItem::setEnabled);
+    disconnect(view, &KMyMoneyViewBase::requestSelectionChange, this, &KMyMoneyView::requestSelectionChange);
 
-    disconnect(d->viewBases[idView], &KMyMoneyViewBase::requestCustomContextMenu, this, &KMyMoneyView::requestCustomContextMenu);
-    disconnect(d->viewBases[idView], &KMyMoneyViewBase::requestActionTrigger, this, &KMyMoneyView::requestActionTrigger);
-    disconnect(d->viewBases[idView], &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
-    disconnect(this, &KMyMoneyView::settingsChanged, d->viewBases[idView], &KMyMoneyViewBase::slotSettingsChanged);
+    disconnect(view, &KMyMoneyViewBase::requestCustomContextMenu, this, &KMyMoneyView::requestCustomContextMenu);
+    disconnect(view, &KMyMoneyViewBase::requestActionTrigger, this, &KMyMoneyView::requestActionTrigger);
+    disconnect(view, &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
+    disconnect(this, &KMyMoneyView::settingsChanged, view, &KMyMoneyViewBase::slotSettingsChanged);
 
     d->m_model->removePage(d->viewFrames[idView]);
     d->viewFrames.remove(idView);
@@ -382,16 +438,92 @@ void KMyMoneyView::removeView(View idView)
 void KMyMoneyView::updateActions(const SelectedObjects& selections)
 {
     Q_D(KMyMoneyView);
-    for (const auto& view : d->viewBases) {
-        view->updateActions(selections);
+
+    const auto currentView = d->currentViewId();
+    const auto file = MyMoneyFile::instance();
+
+    // update actions in all views. process the current last
+    for (const auto& view : d->viewBases.keys()) {
+        if (view == currentView)
+            break;
+        d->viewBases[view]->updateActions(selections);
     }
+    d->viewBases[currentView]->updateActions(selections);
 
     // global actions
     // --------------
-    // the goto payee action does not make sense if the payees view is active
-    if (d->currentViewId() == View::Payees) {
-        pActions[eMenu::Action::GoToPayee]->setDisabled(true);
+    pActions[eMenu::Action::NewTransaction]->setDisabled(true);
+    pActions[eMenu::Action::EditTransaction]->setDisabled(true);
+    pActions[eMenu::Action::EditSplits]->setDisabled(true);
+    pActions[eMenu::Action::DeleteTransaction]->setDisabled(true);
+    pActions[eMenu::Action::DuplicateTransaction]->setDisabled(true);
+    pActions[eMenu::Action::AddReversingTransaction]->setDisabled(true);
+    pActions[eMenu::Action::CopySplits]->setDisabled(true);
+    pActions[eMenu::Action::MarkNotReconciled]->setDisabled(true);
+    pActions[eMenu::Action::MarkCleared]->setDisabled(true);
+    pActions[eMenu::Action::MarkReconciled]->setDisabled(true);
+
+    if (!selections.selection(SelectedObjects::JournalEntry).isEmpty()) {
+        pActions[eMenu::Action::MarkNotReconciled]->setEnabled(true);
+        pActions[eMenu::Action::MarkCleared]->setEnabled(true);
+        pActions[eMenu::Action::MarkReconciled]->setEnabled(true);
     }
+
+    switch (d->currentViewId()) {
+    case View::NewLedgers:
+        pActions[eMenu::Action::NewTransaction]->setEnabled(true);
+        // intentional fall through
+
+    case View::Payees:
+        if (selections.selection(SelectedObjects::JournalEntry).isEmpty()) {
+            pActions[eMenu::Action::EditTransaction]->setDisabled(true);
+            pActions[eMenu::Action::EditSplits]->setDisabled(true);
+            pActions[eMenu::Action::DeleteTransaction]->setDisabled(true);
+            pActions[eMenu::Action::DuplicateTransaction]->setDisabled(true);
+            pActions[eMenu::Action::AddReversingTransaction]->setDisabled(true);
+            pActions[eMenu::Action::CopySplits]->setDisabled(true);
+        } else {
+            const auto warnLevel = MyMoneyUtils::transactionWarnLevel(selections.selection(SelectedObjects::JournalEntry));
+            pActions[eMenu::Action::EditTransaction]->setEnabled(true);
+            pActions[eMenu::Action::EditSplits]->setEnabled(true);
+            pActions[eMenu::Action::DeleteTransaction]->setEnabled(warnLevel <= OneSplitReconciled);
+            pActions[eMenu::Action::DuplicateTransaction]->setEnabled(warnLevel <= OneSplitReconciled);
+            pActions[eMenu::Action::AddReversingTransaction]->setEnabled(warnLevel <= OneSplitReconciled);
+            pActions[eMenu::Action::CopySplits]->setDisabled(true);
+
+            if (selections.selection(SelectedObjects::JournalEntry).count() >= 2) {
+                int singleSplitTransactions = 0;
+                int multipleSplitTransactions = 0;
+                for (const auto& journalEntryId : selections.selection(SelectedObjects::JournalEntry)) {
+                    const auto idx = file->journalModel()->indexById(journalEntryId);
+                    const auto indeces = file->journalModel()->indexesByTransactionId(idx.data(eMyMoney::Model::JournalTransactionIdRole).toString());
+                    switch (indeces.count()) {
+                    case 0:
+                        break;
+                    case 1:
+                        singleSplitTransactions++;
+                        break;
+                    default:
+                        multipleSplitTransactions++;
+                        break;
+                    }
+                }
+                if (singleSplitTransactions > 0 && multipleSplitTransactions == 1) {
+                    pActions[eMenu::Action::CopySplits]->setEnabled(true);
+                }
+            }
+        }
+        break;
+
+    case View::Home:
+    case View::Reports:
+        pActions[eMenu::Action::Print]->setEnabled(true);
+        break;
+
+    default:
+        break;
+    }
+
     // the open ledger function only makes sense if we have an account selection
     pActions[eMenu::Action::OpenAccount]->setEnabled(!selections.isEmpty(SelectedObjects::Account));
 }
@@ -475,15 +607,7 @@ void KMyMoneyView::showPage(View idView)
     if (!d->viewFrames.contains(idView) || (currentPage() == d->viewFrames[idView]))
         return;
 
-    resetViewSelection();
     setCurrentPage(d->viewFrames[idView]);
-}
-
-bool KMyMoneyView::canPrint()
-{
-    Q_D(KMyMoneyView);
-    return ((d->viewFrames.contains(View::Reports) && d->viewFrames[View::Reports] == currentPage()) ||
-    (d->viewFrames.contains(View::Home) && d->viewFrames[View::Home] == currentPage()));
 }
 
 void KMyMoneyView::enableViewsIfFileOpen(bool fileOpen)
@@ -514,13 +638,6 @@ void KMyMoneyView::switchToDefaultView()
         showPage(idView);
 }
 
-void KMyMoneyView::slotTagSelected(const QString& tag, const QString& account, const QString& transaction)
-{
-    Q_D(KMyMoneyView);
-    showPage(View::Tags);
-    static_cast<KTagsView*>(d->viewBases[View::Tags])->slotSelectTagAndTransaction(tag, account, transaction);
-}
-
 void KMyMoneyView::finishReconciliation(const MyMoneyAccount& /* account */)
 {
     Q_D(KMyMoneyView);
@@ -529,14 +646,6 @@ void KMyMoneyView::finishReconciliation(const MyMoneyAccount& /* account */)
     MyMoneyFile::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
 #endif
     static_cast<KGlobalLedgerView*>(d->viewBases[View::OldLedgers])->slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
-}
-
-void KMyMoneyView::viewAccountList(const QString& /*selectAccount*/)
-{
-    Q_D(KMyMoneyView);
-    if (d->viewFrames[View::Accounts] != currentPage())
-        showPage(View::Accounts);
-    d->viewBases[View::Accounts]->show();
 }
 
 void KMyMoneyView::slotRefreshViews()
@@ -586,10 +695,9 @@ void KMyMoneyView::slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* pre
                     }
                 }
             }
+            d->selectSharedActions(d->currentViewId());
         }
     }
-
-    pActions[eMenu::Action::Print]->setEnabled(canPrint());
 }
 
 void KMyMoneyView::slotRememberLastView(View view)
@@ -638,24 +746,6 @@ void KMyMoneyView::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& n
             KMessageBox::information(this, i18n("Unable to add schedule: %1", QString::fromLatin1(e.what())));
         }
     }
-}
-
-void KMyMoneyView::slotPrintView()
-{
-    Q_D(KMyMoneyView);
-    if (d->viewFrames.contains(View::Reports) && d->viewFrames[View::Reports] == currentPage())
-        d->viewBases[View::Reports]->executeCustomAction(eView::Action::Print);
-    else if (d->viewFrames.contains(View::Home) && d->viewFrames[View::Home] == currentPage())
-        d->viewBases[View::Home]->executeCustomAction(eView::Action::Print);
-}
-
-void KMyMoneyView::resetViewSelection()
-{
-    slotObjectSelected(MyMoneyAccount());
-    slotObjectSelected(MyMoneyInstitution());
-    slotObjectSelected(MyMoneySchedule());
-    slotObjectSelected(MyMoneyTag());
-    slotSelectByVariant(QVariantList {QVariant::fromValue(KMyMoneyRegister::SelectedTransactions())}, eView::Intent::SelectRegisterTransactions);
 }
 
 void KMyMoneyView::slotOpenObjectRequested(const MyMoneyObject& obj)
@@ -736,26 +826,14 @@ void KMyMoneyView::selectView(View idView, const QVariantList& args)
     }
 }
 
-void KMyMoneyView::executeAction(eMenu::Action action, const QVariantList& args)
+void KMyMoneyView::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
     Q_D(KMyMoneyView);
 
-    const static QHash<eMenu::Action, View> actionRoutes = {
-        {eMenu::Action::GoToPayee, View::Payees},
-        {eMenu::Action::GoToAccount, View::NewLedgers},
-        {eMenu::Action::ReportOpen, View::Reports},
-    };
-
-    const auto viewId = actionRoutes.value(action, View::None);
-
-    if (viewId != View::None) {
-        showPage(viewId);
-        d->viewBases[viewId]->executeAction(action, args);
-    } else {
-        d->viewBases[d->currentViewId()]->executeAction(action, args);
-        // maybe, we need to pass by all views
-        // in case the action is unknown to the routing table
-    }
+    d->switchView(action);
+    d->viewBases[d->currentViewId()]->executeAction(action, selections);
+    // maybe, we need to pass by all views
+    // in case the action is unknown to the routing table
 }
 
 void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
@@ -837,9 +915,6 @@ void KMyMoneyView::slotCustomActionRequested(View view, eView::Action action)
 {
     Q_D(KMyMoneyView);
     switch (action) {
-    case eView::Action::AboutToShow:
-        resetViewSelection();
-        break;
     case eView::Action::SwitchView:
         showPage(view);
         break;

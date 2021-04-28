@@ -100,9 +100,10 @@
 #include "widgets/amountedit.h"
 #include "widgets/kmymoneymvccombo.h"
 
-#include "views/kmymoneyview.h"
 #include "accountsmodel.h"
 #include "equitiesmodel.h"
+#include "journalmodel.h"
+#include "views/kmymoneyview.h"
 
 #include "mymoney/mymoneyobject.h"
 #include "mymoney/mymoneyfile.h"
@@ -315,6 +316,13 @@ public:
 
     SelectedObjects       m_selections;
     QTimer                m_actionCollectorTimer;
+
+    typedef struct {
+        QToolButton* button = nullptr;
+        QAction* defaultAction = nullptr;
+    } SharedActionButtonInfo;
+
+    QHash<eMenu::Action, SharedActionButtonInfo> m_sharedActionButtons;
 
     // methods
     void consistencyCheck(bool alwaysDisplayResults);
@@ -1035,19 +1043,172 @@ public:
         qDebug("Duplicate account in transaction %s", qPrintable(t.id()));
     }
 
+    void updateActions(const SelectedObjects& selections)
+    {
+        static const QVector<Action> actions = {Action::FilePersonalData,
+                                                Action::FileInformation,
+                                                Action::FileImportTemplate,
+                                                Action::FileExportTemplate,
+#ifdef KMM_DEBUG
+                                                Action::FileDump,
+#endif
+                                                Action::EditFindTransaction,
+                                                Action::NewCategory,
+                                                Action::ToolCurrencies,
+                                                Action::ToolPrices,
+                                                Action::ToolUpdatePrices,
+                                                Action::ToolConsistency,
+                                                Action::ToolPerformance,
+                                                Action::NewAccount,
+                                                Action::NewInstitution,
+                                                Action::NewSchedule,
+                                                Action::ShowFilterWidget,
+                                                Action::NewPayee,
+                                                Action::NewTag};
+
+        for (const auto& action : actions)
+            pActions[action]->setEnabled(m_storageInfo.isOpened);
+
+        // make sure all shared actions of the New button have the right state
+        for (const auto action : m_sharedActionButtons[Action::FileNew].button->actions()) {
+            action->setEnabled(m_storageInfo.isOpened);
+        }
+        // except the New File/Book which is always enabled
+        pActions[Action::FileNew]->setEnabled(true);
+
+        pActions[Action::FileBackup]->setEnabled(m_storageInfo.isOpened && m_storageInfo.type == eKMyMoney::StorageType::XML);
+
+        auto aC = q->actionCollection();
+        aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::SaveAs)))->setEnabled(canFileSaveAs());
+        aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Close)))->setEnabled(m_storageInfo.isOpened);
+        pActions[Action::UpdateAllAccounts]->setEnabled(KMyMoneyUtils::canUpdateAllAccounts());
+
+        // update actions in views and plugins
+        m_myMoneyView->updateActions(selections);
+        KMyMoneyPlugin::updateActions(pPlugins, selections);
+    }
+
+    bool canFileSaveAs() const
+    {
+        return (m_storageInfo.isOpened
+                && (!pPlugins.storage.isEmpty() && !(pPlugins.storage.count() == 1 && pPlugins.storage.first()->storageType() == eKMyMoney::StorageType::GNC)));
+    }
+
     /**
       * This method is used to update the caption of the application window.
       * It sets the caption to "filename [modified] - KMyMoney".
-      *
-      * @param skipActions if true, the actions will not be updated. This
-      *                    is usually onyl required by some early calls when
-      *                    these widgets are not yet created (the default is false).
       */
-    void updateCaption();
-    void updateActions(const SelectedObjects& selections);
-    bool canFileSaveAs() const;
-    bool canUpdateAllAccounts() const;
-    void fileAction(eKMyMoney::FileAction action);
+    void updateCaption()
+    {
+        auto caption = m_storageInfo.url.isEmpty() && m_myMoneyView && m_storageInfo.isOpened ? i18n("Untitled") : m_storageInfo.url.fileName();
+
+#ifdef KMM_DEBUG
+        caption += QString(" (%1 x %2)").arg(q->width()).arg(q->height());
+#endif
+
+        q->setCaption(caption, MyMoneyFile::instance()->dirty());
+    }
+
+    // bool canUpdateAllAccounts() const;
+    void fileAction(eKMyMoney::FileAction action)
+    {
+        AmountEdit amountEdit;
+
+        switch (action) {
+        case eKMyMoney::FileAction::Opened:
+            q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
+            updateAccountNames();
+            updateCurrencyNames();
+            selectBaseCurrency();
+
+            // setup the standard precision
+            amountEdit.setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
+
+            applyFileFixes();
+            // setup internal data for which we need all models loaded
+            MyMoneyFile::instance()->accountsModel()->setupAccountFractions();
+
+            // clean undostack
+            MyMoneyFile::instance()->undoStack()->clear();
+
+            // inform everyone about new data
+            MyMoneyFile::instance()->modelsReadyToUse();
+            MyMoneyFile::instance()->forceDataChanged();
+            // Enable save in case the fix changed the contents
+            q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(dirty());
+            updateActions(SelectedObjects());
+            m_myMoneyView->slotFileOpened();
+            onlineJobAdministration::instance()->updateActions();
+            m_myMoneyView->enableViewsIfFileOpen(m_storageInfo.isOpened);
+            m_myMoneyView->slotRefreshViews();
+            onlineJobAdministration::instance()->updateOnlineTaskProperties();
+            q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
+
+#ifdef ENABLE_ACTIVITIES
+            {
+                // make sure that we don't store the DB password in activity
+                QUrl url(m_storageInfo.url);
+                url.setPassword(QString());
+                m_activityResourceInstance->setUri(url);
+            }
+#endif
+            // start the check for scheduled transactions that need to be
+            // entered as soon as the event loop becomes active.
+            QMetaObject::invokeMethod(q, "slotCheckSchedules", Qt::QueuedConnection);
+            break;
+
+        case eKMyMoney::FileAction::Saved:
+            q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
+            q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
+            m_autoSaveTimer->stop();
+            break;
+
+        case eKMyMoney::FileAction::Closing:
+            disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
+            // make sure to not catch view activations anymore
+            m_myMoneyView->slotFileClosed();
+            // notify the models that the file is going to be closed (we should have something like dataChanged that reaches the models first)
+            MyMoneyFile::instance()->unload();
+            break;
+
+        case eKMyMoney::FileAction::Closed:
+            q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
+            q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
+            m_myMoneyView->enableViewsIfFileOpen(m_storageInfo.isOpened);
+            updateActions(SelectedObjects());
+            break;
+
+        case eKMyMoney::FileAction::Changed:
+            q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
+            q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(true && !m_storageInfo.url.isEmpty());
+            // As this method is called every time the MyMoneyFile instance
+            // notifies a modification, it's the perfect place to start the timer if needed
+            if (m_autoSaveEnabled && !m_autoSaveTimer->isActive()) {
+                m_autoSaveTimer->setSingleShot(true);
+                m_autoSaveTimer->start(m_autoSavePeriod * 60 * 1000); // miliseconds
+            }
+            pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(KMyMoneyUtils::canUpdateAllAccounts());
+            break;
+
+        default:
+            break;
+        }
+
+        updateCaption();
+    }
+
+    eMenu::Action qActionToId(const QAction* action)
+    {
+        if (action) {
+            auto it = pActions.constBegin();
+            for (; it != pActions.constEnd(); ++it) {
+                if (*it == action) {
+                    return it.key();
+                }
+            }
+        }
+        return eMenu::Action::None;
+    }
 };
 
 KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
@@ -1104,7 +1265,14 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
     pActions = initActions();
     pMenus = initMenus();
 
+    // overwrite the default text of the new file button
+    pActions[Action::FileNew]->setText(i18nc("@action New file/database", "New book..."));
+
     d->m_myMoneyView = new KMyMoneyView;
+    // we need to setup this connection so that setupSharedActions() has a callback
+    connect(d->m_myMoneyView, &KMyMoneyView::addSharedActionButton, this, &KMyMoneyApp::slotAddSharedAction);
+    d->m_myMoneyView->setupSharedActions();
+
     layout->addWidget(d->m_myMoneyView, 10);
     connect(d->m_myMoneyView, &KMyMoneyView::statusMsg, this, &KMyMoneyApp::slotStatusMsg);
     connect(d->m_myMoneyView, &KMyMoneyView::statusProgress, this, &KMyMoneyApp::slotStatusProgressBar);
@@ -1121,6 +1289,17 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
     connect(d->m_myMoneyView, &KMyMoneyView::requestActionTrigger, this, [&](eMenu::Action action) {
         if (pActions.contains(action)) {
             pActions[action]->trigger();
+        }
+    });
+
+    // and setup the shared action dynamics
+    connect(d->m_myMoneyView, &KMyMoneyView::selectSharedActionButton, this, [&](eMenu::Action action, QAction* newAction) {
+        if (d->m_sharedActionButtons.contains(action) && newAction) {
+            d->m_sharedActionButtons.value(action).button->setDefaultAction(newAction);
+        } else {
+            for (auto buttonInfo : d->m_sharedActionButtons) {
+                buttonInfo.button->setDefaultAction(buttonInfo.defaultAction);
+            }
         }
     });
 
@@ -1291,8 +1470,8 @@ void KMyMoneyApp::slotSelectionChanged(const SelectedObjects& selections)
             qDebug() << "Institutions:" << selections.selection(SelectedObjects::Institution);
         if (!selections.isEmpty(SelectedObjects::Account))
             qDebug() << "Accounts:" << selections.selection(SelectedObjects::Account);
-        if (!selections.isEmpty(SelectedObjects::Transaction))
-            qDebug() << "Transactions:" << selections.selection(SelectedObjects::Transaction);
+        if (!selections.isEmpty(SelectedObjects::JournalEntry))
+            qDebug() << "JournalEntries:" << selections.selection(SelectedObjects::JournalEntry);
         if (!selections.isEmpty(SelectedObjects::Payee))
             qDebug() << "Payees:" << selections.selection(SelectedObjects::Payee);
         if (!selections.isEmpty(SelectedObjects::Schedule))
@@ -1326,14 +1505,14 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     // *************
     // Adding standard actions
     // *************
-    KStandardAction::openNew(this, &KMyMoneyApp::slotFileNew, aC);
+    lutActions.insert(Action::FileNew, KStandardAction::openNew(this, &KMyMoneyApp::slotFileNew, aC));
     KStandardAction::open(this, &KMyMoneyApp::slotFileOpen, aC);
     d->m_recentFiles = KStandardAction::openRecent(this, &KMyMoneyApp::slotFileOpenRecent, aC);
     KStandardAction::save(this, &KMyMoneyApp::slotFileSave, aC);
     KStandardAction::saveAs(this, &KMyMoneyApp::slotFileSaveAs, aC);
     KStandardAction::close(this, &KMyMoneyApp::slotFileClose, aC);
     KStandardAction::quit(this, &KMyMoneyApp::slotFileQuit, aC);
-    lutActions.insert(Action::Print, KStandardAction::print(this, &KMyMoneyApp::slotPrintView, aC));
+    lutActions.insert(Action::Print, KStandardAction::print(this, &KMyMoneyApp::slotExecuteAction, aC));
     KStandardAction::preferences(this, &KMyMoneyApp::slotSettings, aC);
 
     // *************
@@ -1423,7 +1602,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             // ***************************
             // Actions w/o main menu entry
             // ***************************
-            {Action::NewTransaction,                QStringLiteral("transaction_new"),                i18nc("New transaction button", "New"),             Icon::DocumentNew},
+            {Action::NewTransaction,                QStringLiteral("transaction_new"),                i18nc("New transaction button", "New transaction"), Icon::DocumentNew},
             {Action::EditTransaction,               QStringLiteral("transaction_edit"),               i18nc("Edit transaction button", "Edit"),           Icon::DocumentEdit},
             {Action::EnterTransaction,              QStringLiteral("transaction_enter"),              i18nc("Enter transaction", "Enter"),                Icon::DialogOK},
             {Action::EditSplits,                    QStringLiteral("transaction_editsplits"),         i18nc("Edit split button", "Edit splits"),          Icon::Split},
@@ -1452,19 +1631,19 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::UpdatePriceOnline,             QStringLiteral("investment_online_price_update"), i18n("Online price update..."),                     Icon::OnlinePriceUpdate},
             {Action::UpdatePriceManually,           QStringLiteral("investment_manual_price_update"), i18n("Manual price update..."),                     Icon::Empty},
             //Schedule
-            {Action::NewSchedule,                   QStringLiteral("schedule_new"),                   i18n("New scheduled transaction"),                  Icon::NewSchedule},
+            {Action::NewSchedule,                   QStringLiteral("schedule_new"),                   i18n("New schedule..."),                            Icon::NewSchedule},
             {Action::EditSchedule,                  QStringLiteral("schedule_edit"),                  i18n("Edit scheduled transaction"),                 Icon::DocumentEdit},
             {Action::DeleteSchedule,                QStringLiteral("schedule_delete"),                i18n("Delete scheduled transaction"),               Icon::EditRemove},
             {Action::DuplicateSchedule,             QStringLiteral("schedule_duplicate"),             i18n("Duplicate scheduled transaction"),            Icon::EditCopy},
             {Action::EnterSchedule,                 QStringLiteral("schedule_enter"),                 i18n("Enter next transaction..."),                  Icon::KeyEnter},
             {Action::SkipSchedule,                  QStringLiteral("schedule_skip"),                  i18n("Skip next transaction..."),                   Icon::SeekForward},
             //Payees
-            {Action::NewPayee,                      QStringLiteral("payee_new"),                      i18n("New payee"),                                  Icon::PayeeNew},
+            {Action::NewPayee,                      QStringLiteral("payee_new"),                      i18n("New payee..."),                               Icon::PayeeNew},
             {Action::RenamePayee,                   QStringLiteral("payee_rename"),                   i18n("Rename payee"),                               Icon::PayeeRename},
             {Action::DeletePayee,                   QStringLiteral("payee_delete"),                   i18n("Delete payee"),                               Icon::PayeeRemove},
             {Action::MergePayee,                    QStringLiteral("payee_merge"),                    i18n("Merge payees"),                               Icon::PayeeMerge},
             //Tags
-            {Action::NewTag,                        QStringLiteral("tag_new"),                        i18n("New tag"),                                    Icon::TagNew},
+            {Action::NewTag,                        QStringLiteral("tag_new"),                        i18n("New tag..."),                                 Icon::TagNew},
             {Action::RenameTag,                     QStringLiteral("tag_rename"),                     i18n("Rename tag"),                                 Icon::TagRename},
             {Action::DeleteTag,                     QStringLiteral("tag_delete"),                     i18n("Delete tag"),                                 Icon::TagRemove},
             //Reports
@@ -1498,13 +1677,14 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
 
     {
         // List with slots that get connected here. Other slots get connected in e.g. appropriate views
+        // clang-format off
         typedef void(KMyMoneyApp::*KMyMoneyAppFunc)();
-        const QHash<eMenu::Action, KMyMoneyAppFunc> actionConnections {
+        const QHash<eMenu::Action, KMyMoneyAppFunc> actionConnections{
             // *************
             // The File menu
             // *************
-//      {Action::FileOpenDatabase,              &KMyMoneyApp::slotOpenDatabase},
-//      {Action::FileSaveAsDatabase,            &KMyMoneyApp::slotSaveAsDatabase},
+            //      {Action::FileOpenDatabase,              &KMyMoneyApp::slotOpenDatabase},
+            //      {Action::FileSaveAsDatabase,            &KMyMoneyApp::slotSaveAsDatabase},
             {Action::FileBackup,                    &KMyMoneyApp::slotBackupFile},
             {Action::FileImportTemplate,            &KMyMoneyApp::slotLoadAccountTemplates},
             {Action::FileExportTemplate,            &KMyMoneyApp::slotSaveAccountTemplates},
@@ -1528,7 +1708,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::ToolUpdatePrices,              &KMyMoneyApp::slotEquityPriceUpdate},
             {Action::ToolConsistency,               &KMyMoneyApp::slotFileConsistencyCheck},
             {Action::ToolPerformance,               &KMyMoneyApp::slotPerformanceTest},
-//      {Action::ToolSQL,                       &KMyMoneyApp::slotGenerateSql},
+    //      {Action::ToolSQL,                       &KMyMoneyApp::slotGenerateSql},
             {Action::ToolCalculator,                &KMyMoneyApp::slotToolsStartKCalc},
             // *****************
             // The settings menu
@@ -1547,11 +1727,24 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::DebugTraces,                   &KMyMoneyApp::slotToggleTraces},
 #endif
             {Action::DebugTimers,                   &KMyMoneyApp::slotToggleTimers},
-            {Action::GoToPayee,                     &KMyMoneyApp::slotGoToPayee},
-            {Action::GoToAccount,                   &KMyMoneyApp::slotGoToAccount},
-            {Action::ReportOpen,                    &KMyMoneyApp::slotOpenReport},
 
+            {Action::OpenAccount,                   &KMyMoneyApp::slotExecuteAction},
+            {Action::NewTransaction,                &KMyMoneyApp::slotExecuteAction},
+            {Action::EditTransaction,               &KMyMoneyApp::slotExecuteAction},
+            {Action::EditSplits,                    &KMyMoneyApp::slotExecuteAction},
+            {Action::DeleteTransaction,             &KMyMoneyApp::slotDeleteTransactions},
+            {Action::DuplicateTransaction,          &KMyMoneyApp::slotDuplicateTransactions},
+            {Action::AddReversingTransaction,       &KMyMoneyApp::slotDuplicateTransactions},
+            {Action::CopySplits,                    &KMyMoneyApp::slotCopySplits},
+            {Action::MarkCleared,                   &KMyMoneyApp::slotMarkTransactions},
+            {Action::MarkReconciled,                &KMyMoneyApp::slotMarkTransactions},
+            {Action::MarkNotReconciled,             &KMyMoneyApp::slotMarkTransactions},
+
+            {Action::GoToPayee,                     &KMyMoneyApp::slotExecuteActionWithData},
+            {Action::GoToAccount,                   &KMyMoneyApp::slotExecuteActionWithData},
+            {Action::ReportOpen,                    &KMyMoneyApp::slotExecuteActionWithData},
         };
+        // clang-format off
 
         for (auto connection = actionConnections.cbegin(); connection != actionConnections.cend(); ++connection)
             connect(lutActions[connection.key()], &QAction::triggered, this, connection.value());
@@ -1660,7 +1853,32 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
 
     menuContainer = static_cast<QMenu*>(factory()->container(QStringLiteral("export"), this));
     menuContainer->setIcon(Icons::get(Icon::DocumentExport));
+
     return lutActions;
+}
+
+void KMyMoneyApp::slotAddSharedAction(eMenu::Action action, QAction* defaultAction)
+{
+    auto toolButton = d->m_sharedActionButtons.value(action).button;
+    if (toolButton == nullptr) {
+        auto actionObject = pActions.value(action, nullptr);
+        if (actionObject) {
+            for (auto* widget : actionObject->associatedWidgets()) {
+                toolButton = qobject_cast<QToolButton*>(widget);
+                if (toolButton) {
+                    d->m_sharedActionButtons[action].button = toolButton;
+                    d->m_sharedActionButtons[action].defaultAction = actionObject;
+                    break;
+                }
+            }
+        }
+    }
+
+    if (toolButton) {
+        auto currentAction = toolButton->defaultAction();
+        toolButton->setDefaultAction(defaultAction);
+        toolButton->setDefaultAction(currentAction);
+    }
 }
 
 #ifdef KMM_DEBUG
@@ -1991,42 +2209,332 @@ void KMyMoneyApp::slotShowTransactionDetail()
 
 }
 
-
-void KMyMoneyApp::slotGoToPayee()
+void KMyMoneyApp::slotDeleteTransactions()
 {
-    const auto action = qobject_cast<QAction*>(sender());
-    if (action) {
-        QString payeeId, accountId, transactionId;
-        payeeId = action->data().toString();
-        if (!d->m_selections.isEmpty(SelectedObjects::Account)) {
-            accountId = d->m_selections.selection(SelectedObjects::Account).at(0);
+    const auto file = MyMoneyFile::instance();
+
+    // since we may jump here via code, we have to make sure to react only
+    // if the action is enabled
+    if (!pActions[Action::DeleteTransaction]->isEnabled())
+        return;
+
+    if (d->m_selections.selection(SelectedObjects::JournalEntry).isEmpty())
+        return;
+
+    if (MyMoneyUtils::transactionWarnLevel(d->m_selections.selection(SelectedObjects::JournalEntry)) == OneSplitReconciled) {
+        if (KMessageBox::warningContinueCancel(this,
+            i18n("At least one split of the selected transactions has been reconciled. "
+            "Do you wish to delete the transactions anyway?"),
+            i18n("Transaction already reconciled")) == KMessageBox::Cancel)
+            return;
+
+    } else {
+        auto msg =
+        i18np("Do you really want to delete the selected transaction?",
+            "Do you really want to delete all %1 selected transactions?",
+            d->m_selections.selection(SelectedObjects::JournalEntry).count());
+
+        if (KMessageBox::questionYesNo(this, msg, i18n("Delete transaction")) == KMessageBox::Cancel) {
+            return;
         }
-        if (!d->m_selections.isEmpty(SelectedObjects::Transaction)) {
-            transactionId = d->m_selections.selection(SelectedObjects::Transaction).at(0);
+    }
+
+    MyMoneyFileTransaction ft;
+    for (const auto& journalEntryId : d->m_selections.selection(SelectedObjects::JournalEntry)) {
+        const auto journalEntry = file->journalModel()->itemById(journalEntryId);
+        if (!journalEntry.transaction().id().isEmpty()) {
+            if (!file->referencesClosedAccount(journalEntry.transaction())) {
+                file->removeTransaction(journalEntry.transaction());
+            }
         }
-        d->m_myMoneyView->executeAction(eMenu::Action::GoToPayee, QVariantList{payeeId, accountId, transactionId});
+    }
+    ft.commit();
+}
+
+void KMyMoneyApp::slotDuplicateTransactions()
+{
+    auto action = qobject_cast<QAction*>(sender());
+    const auto actionId = d->qActionToId(action);
+
+    const auto reverse = (actionId == eMenu::Action::AddReversingTransaction);
+    const auto accountId = d->m_selections.firstSelection(SelectedObjects::Account);
+
+    if (d->m_selections.selection(SelectedObjects::JournalEntry).isEmpty()
+        || accountId.isEmpty())
+        return;
+
+    MyMoneyFileTransaction ft;
+    QString lastAddedTransactionId;
+    const auto file = MyMoneyFile::instance();
+
+    try {
+        for (const auto& journalEntryId : d->m_selections.selection(SelectedObjects::JournalEntry)) {
+            const auto journalEntry = file->journalModel()->itemById(journalEntryId);
+            if (!journalEntry.id().isEmpty()) {
+                auto t = journalEntry.transaction();
+                if (!t.id().isEmpty()) {
+                    // wipe out any reconciliation information
+                    for (auto& split : t.splits()) {
+                        split.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
+                        split.setReconcileDate(QDate());
+                        split.setBankID(QString());
+                    }
+                    // clear invalid data
+                    t.setEntryDate(QDate());
+                    t.clearId();
+
+                    if (reverse)
+                        // reverse transaction
+                        t.reverse();
+                    else
+                        // set the post date to today
+                        t.setPostDate(QDate::currentDate());
+
+                    file->addTransaction(t);
+                    lastAddedTransactionId = t.id();
+                }
+            }
+        }
+        ft.commit();
+
+        // select the new transaction in the ledger
+        auto selections = d->m_selections;
+        const auto indeces = file->journalModel()->indexesByTransactionId(lastAddedTransactionId);
+        for (const auto& idx : indeces) {
+            if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == accountId) {
+                selections.setSelection(SelectedObjects::JournalEntry, idx.data(eMyMoney::Model::IdRole).toString());
+            }
+        }
+        d->m_myMoneyView->executeAction(eMenu::Action::OpenAccount, selections);
+
+    } catch (const MyMoneyException &e) {
+        KMessageBox::detailedSorry(this, i18n("Unable to duplicate transaction(s)"), QString::fromLatin1(e.what()));
     }
 }
 
-void KMyMoneyApp::slotGoToAccount()
+void KMyMoneyApp::slotCopySplits()
 {
-    const auto action = qobject_cast<QAction*>(sender());
-    if (action) {
-        QString accountId, transactionId;
-        accountId = action->data().toString();
-        if (!d->m_selections.isEmpty(SelectedObjects::Transaction)) {
-            transactionId = d->m_selections.selection(SelectedObjects::Transaction).at(0);
+    const auto file = MyMoneyFile::instance();
+    const auto accountId = d->m_selections.firstSelection(SelectedObjects::Account);
+
+    if (!accountId.isEmpty() && (d->m_selections.selection(SelectedObjects::JournalEntry).count() >= 2)) {
+        int singleSplitTransactions = 0;
+        int multipleSplitTransactions = 0;
+        MyMoneyTransaction selectedSourceTransaction;
+
+        QString selectedSourceSplitId;
+        for (const auto& journalEntryId : d->m_selections.selection(SelectedObjects::JournalEntry)) {
+            const auto journalEntry = file->journalModel()->itemById(journalEntryId);
+            if (!journalEntry.id().isEmpty()) {
+                const auto t = journalEntry.transaction();
+                switch (t.splitCount()) {
+                    case 0:
+                        break;
+                    case 1:
+                        singleSplitTransactions++;
+                        break;
+                    default:
+                        selectedSourceTransaction = t;
+                        selectedSourceSplitId = journalEntry.split().id();
+                        multipleSplitTransactions++;
+                        break;
+                }
+            }
         }
-        d->m_myMoneyView->executeAction(eMenu::Action::GoToAccount, QVariantList{accountId, transactionId});
+        if (singleSplitTransactions > 0 && multipleSplitTransactions == 1) {
+            MyMoneyFileTransaction ft;
+            try {
+                // remember the splitId that is used in the source transaction
+                // as the link
+                for (const auto& journalEntryId : d->m_selections.selection(SelectedObjects::JournalEntry)) {
+                    const auto journalEntry = file->journalModel()->itemById(journalEntryId);
+                    if (!journalEntry.id().isEmpty()) {
+                        auto t = journalEntry.transaction();
+                        // don't process the source transaction
+                        if (selectedSourceTransaction.id() == t.id()) {
+                            continue;
+                        }
+
+                        if (!t.id().isEmpty() && (t.splitCount() == 1)) {
+                            // keep a copy of that one and only split
+                            const auto baseSplit = t.splits().first();
+
+                            for (const auto& split : selectedSourceTransaction.splits()) {
+                                // Don't copy the source split, as we already have that
+                                // as part of the destination transaction
+                                if (split.id() == selectedSourceSplitId) {
+                                    continue;
+                                }
+
+                                MyMoneySplit sp(split);
+                                // clear the ID and reconciliation state
+                                sp.clearId();
+                                sp.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
+                                sp.setReconcileDate(QDate());
+
+                                // in case it is a simple transaction consisting of two splits,
+                                // we can adjust the share and value part of the second split we
+                                // just created. We need to keep a possible price in mind in case
+                                // of different currencies
+                                if (t.splitCount() == 2) {
+                                    sp.setValue(-baseSplit.value());
+                                    sp.setShares(-(baseSplit.shares() * baseSplit.price()));
+                                }
+                                t.addSplit(sp);
+                            }
+                            // check if we need to add/update a VAT assignment
+                            file->updateVAT(t);
+
+                            // and store the modified transaction
+                            file->modifyTransaction(t);
+                        }
+                    }
+                }
+                ft.commit();
+            } catch (const MyMoneyException &) {
+                qDebug() << "transactionCopySplits() failed";
+            }
+        }
     }
 }
 
-void KMyMoneyApp::slotOpenReport()
+void KMyMoneyApp::slotMarkTransactions()
 {
-    const auto action = qobject_cast<QAction*>(sender());
-    if (action) {
-        d->m_myMoneyView->executeAction(eMenu::Action::ReportOpen, QVariantList{action->data()});
-        action->setData(QVariant());
+    auto action = qobject_cast<QAction*>(sender());
+    const auto actionId = d->qActionToId(action);
+    const auto file = MyMoneyFile::instance();
+    const auto accountId = d->m_selections.firstSelection(SelectedObjects::Account);
+
+    static const QHash<eMenu::Action, eMyMoney::Split::State> action2state = {
+        {eMenu::Action::MarkNotReconciled, eMyMoney::Split::State::NotReconciled},
+        {eMenu::Action::MarkCleared, eMyMoney::Split::State::Cleared},
+        {eMenu::Action::MarkReconciled, eMyMoney::Split::State::Reconciled},
+    };
+
+    const auto flag = action2state.value(actionId, eMyMoney::Split::State::Unknown);
+    if ((actionId == eMenu::Action::None) || accountId.isEmpty()) {
+        return;
+    }
+
+    auto cnt = d->m_selections.selection(SelectedObjects::JournalEntry).count();
+    auto i = 0;
+
+    MyMoneyFileTransaction ft;
+    try {
+        for (const auto& journalEntryId : d->m_selections.selection(SelectedObjects::JournalEntry)) {
+            // turn on signals before we modify the last entry in the list
+            cnt--;
+            MyMoneyFile::instance()->blockSignals(cnt != 0);
+
+            // get a fresh copy
+            auto journalEntry = file->journalModel()->itemById(journalEntryId);
+            if (!journalEntry.id().isEmpty()) {
+                auto t = journalEntry.transaction();
+                auto sp = journalEntry.split();
+                if (sp.reconcileFlag() != flag) {
+                    if (flag == eMyMoney::Split::State::Unknown) {
+                        /// @todo fixme for reconciliation
+                        // if (m_reconciliationAccount.id().isEmpty()) {
+                            // in normal mode we cycle through all states
+                            switch (sp.reconcileFlag()) {
+                                case eMyMoney::Split::State::NotReconciled:
+                                    sp.setReconcileFlag(eMyMoney::Split::State::Cleared);
+                                    break;
+                                case eMyMoney::Split::State::Cleared:
+                                    sp.setReconcileFlag(eMyMoney::Split::State::Reconciled);
+                                    break;
+                                case eMyMoney::Split::State::Reconciled:
+                                    sp.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
+                                    break;
+                                default:
+                                    break;
+                            }
+#if 0
+                    /// @todo fixme for reconciliation
+                        } else {
+                            // in reconciliation mode we skip the reconciled state
+                            switch (sp.reconcileFlag()) {
+                                case eMyMoney::Split::State::NotReconciled:
+                                    sp.setReconcileFlag(eMyMoney::Split::State::Cleared);
+                                    break;
+                                case eMyMoney::Split::State::Cleared:
+                                    sp.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+#endif
+                    } else {
+                        sp.setReconcileFlag(flag);
+                    }
+
+                    t.modifySplit(sp);
+                    MyMoneyFile::instance()->modifyTransaction(t);
+                }
+            }
+        }
+        ft.commit();
+    } catch (const MyMoneyException &e) {
+        KMessageBox::detailedSorry(this, i18n("Unable to modify transaction"), e.what());
+    }
+}
+
+#if 0
+void KMyMoneyApp::slotOpenAccount()
+{
+    QString accountId, transactionId;
+    if (!d->m_selections.isEmpty(SelectedObjects::Account)) {
+        accountId = d->m_selections.selection(SelectedObjects::Account).at(0);
+        if (!d->m_selections.isEmpty(SelectedObjects::Transaction)) {
+            transactionId = d->m_selections.selection(SelectedObjects::Transaction).at(0);
+        }
+        d->m_myMoneyView->executeAction(eMenu::Action::OpenAccount, QVariantList{accountId, transactionId});
+    }
+}
+
+void KMyMoneyApp::slotEditTransaction()
+{
+    if (!d->m_selections.isEmpty(SelectedObjects::Account)) {
+        const auto accountId = d->m_selections.selection(SelectedObjects::Account).at(0);
+        if (!d->m_selections.isEmpty(SelectedObjects::Transaction)) {
+            d->m_myMoneyView->executeAction(eMenu::Action::EditTransaction, QVariantList{accountId, d->m_selections.selection(SelectedObjects::Transaction).first()});
+        }
+    }
+}
+#endif
+
+void KMyMoneyApp::slotExecuteActionWithData()
+{
+    static const QHash<eMenu::Action, SelectedObjects::Object_t> actionToType = {
+        {Action::OpenAccount, SelectedObjects::Account},
+        {Action::GoToAccount, SelectedObjects::Account},
+        {Action::GoToPayee, SelectedObjects::Payee},
+        {Action::ReportOpen, SelectedObjects::Report},
+    };
+    auto action = qobject_cast<QAction*>(sender());
+    const auto actionId = d->qActionToId(action);
+
+    if (actionId != eMenu::Action::None) {
+        if (actionToType.contains(actionId)) {
+            auto selections = d->m_selections;
+            qDebug() << action->data().toString();
+            selections.setSelection(actionToType[actionId], action->data().toString());
+            d->m_myMoneyView->executeAction(actionId, selections);
+            action->setData(QVariant());
+        } else {
+            qDebug() << "Action" << static_cast<int>(actionId) << "missing in slotExecuteActionWithData";
+        }
+    }
+}
+
+void KMyMoneyApp::slotExecuteAction()
+{
+    const auto actionId = d->qActionToId(qobject_cast<QAction*>(sender()));
+    if (actionId != eMenu::Action::None) {
+        // make sure to work on the current state
+        const auto selections = d->m_selections;
+        d->m_myMoneyView->executeAction(actionId, selections);
     }
 }
 
@@ -2698,59 +3206,6 @@ void KMyMoneyApp::Private::moveInvestmentTransaction(const QString& /*fromId*/,
     s.setAccountId(newStockAccountId);
     t.modifySplit(s);
     MyMoneyFile::instance()->modifyTransaction(t);
-}
-
-void KMyMoneyApp::slotPrintView()
-{
-    d->m_myMoneyView->executeAction(eMenu::Action::Print, QVariantList());
-}
-
-void KMyMoneyApp::Private::updateCaption()
-{
-    auto caption = m_storageInfo.url.isEmpty() && m_myMoneyView && m_storageInfo.isOpened  ?
-                   i18n("Untitled") :
-                   m_storageInfo.url.fileName();
-
-#ifdef KMM_DEBUG
-    caption += QString(" (%1 x %2)").arg(q->width()).arg(q->height());
-#endif
-
-    q->setCaption(caption, MyMoneyFile::instance()->dirty());
-}
-
-void KMyMoneyApp::Private::updateActions(const SelectedObjects& selections)
-{
-    const QVector<Action> actions
-    {
-        Action::FilePersonalData, Action::FileInformation, Action::FileImportTemplate, Action::FileExportTemplate,
-#ifdef KMM_DEBUG
-        Action::FileDump,
-#endif
-        Action::EditFindTransaction, Action::NewCategory, Action::ToolCurrencies, Action::ToolPrices, Action::ToolUpdatePrices,
-        Action::ToolConsistency, Action::ToolPerformance, Action::NewAccount, Action::NewInstitution, Action::NewSchedule,
-        Action::ShowFilterWidget, Action::NewPayee, Action::NewTag,
-    };
-
-    for (const auto &action : actions)
-        pActions[action]->setEnabled(m_storageInfo.isOpened);
-
-    pActions[Action::FileBackup]->setEnabled(m_storageInfo.isOpened && m_storageInfo.type == eKMyMoney::StorageType::XML);
-
-    auto aC = q->actionCollection();
-    aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::SaveAs)))->setEnabled(canFileSaveAs());
-    aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Close)))->setEnabled(m_storageInfo.isOpened);
-    pActions[Action::UpdateAllAccounts]->setEnabled(KMyMoneyUtils::canUpdateAllAccounts());
-
-    // update actions in views and plugins
-    m_myMoneyView->updateActions(selections);
-    KMyMoneyPlugin::updateActions(pPlugins, selections);
-}
-
-bool KMyMoneyApp::Private::canFileSaveAs() const
-{
-    return (m_storageInfo.isOpened &&
-            (!pPlugins.storage.isEmpty() &&
-             !(pPlugins.storage.count() == 1 && pPlugins.storage.first()->storageType() == eKMyMoney::StorageType::GNC)));
 }
 
 void KMyMoneyApp::slotDataChanged()
@@ -3515,93 +3970,6 @@ void KMyMoneyApp::slotFileQuit()
     if (quitApplication) {
         QCoreApplication::quit();
     }
-}
-
-void KMyMoneyApp::Private::fileAction(eKMyMoney::FileAction action)
-{
-    AmountEdit amountEdit;
-
-    switch(action) {
-    case eKMyMoney::FileAction::Opened:
-        q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
-        updateAccountNames();
-        updateCurrencyNames();
-        selectBaseCurrency();
-
-        // setup the standard precision
-        amountEdit.setStandardPrecision(MyMoneyMoney::denomToPrec(MyMoneyFile::instance()->baseCurrency().smallestAccountFraction()));
-
-        applyFileFixes();
-        // setup internal data for which we need all models loaded
-        MyMoneyFile::instance()->accountsModel()->setupAccountFractions();
-
-        // clean undostack
-        MyMoneyFile::instance()->undoStack()->clear();
-
-        // inform everyone about new data
-        MyMoneyFile::instance()->modelsReadyToUse();
-        MyMoneyFile::instance()->forceDataChanged();
-        // Enable save in case the fix changed the contents
-        q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(dirty());
-        updateActions(SelectedObjects());
-        m_myMoneyView->slotFileOpened();
-        onlineJobAdministration::instance()->updateActions();
-        m_myMoneyView->enableViewsIfFileOpen(m_storageInfo.isOpened);
-        m_myMoneyView->slotRefreshViews();
-        onlineJobAdministration::instance()->updateOnlineTaskProperties();
-        q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
-
-#ifdef ENABLE_ACTIVITIES
-        {
-            // make sure that we don't store the DB password in activity
-            QUrl url(m_storageInfo.url);
-            url.setPassword(QString());
-            m_activityResourceInstance->setUri(url);
-        }
-#endif
-        // start the check for scheduled transactions that need to be
-        // entered as soon as the event loop becomes active.
-        QMetaObject::invokeMethod(q, "slotCheckSchedules",  Qt::QueuedConnection);
-        break;
-
-    case eKMyMoney::FileAction::Saved:
-        q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
-        q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
-        m_autoSaveTimer->stop();
-        break;
-
-    case eKMyMoney::FileAction::Closing:
-        disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
-        // make sure to not catch view activations anymore
-        m_myMoneyView->slotFileClosed();
-        // notify the models that the file is going to be closed (we should have something like dataChanged that reaches the models first)
-        MyMoneyFile::instance()->unload();
-        break;
-
-    case eKMyMoney::FileAction::Closed:
-        q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
-        q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(false);
-        m_myMoneyView->enableViewsIfFileOpen(m_storageInfo.isOpened);
-        updateActions(SelectedObjects());
-        break;
-
-    case eKMyMoney::FileAction::Changed:
-        q->disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
-        q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(true && !m_storageInfo.url.isEmpty());
-        // As this method is called every time the MyMoneyFile instance
-        // notifies a modification, it's the perfect place to start the timer if needed
-        if (m_autoSaveEnabled && !m_autoSaveTimer->isActive()) {
-            m_autoSaveTimer->setSingleShot(true);
-            m_autoSaveTimer->start(m_autoSavePeriod * 60 * 1000);  //miliseconds
-        }
-        pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(KMyMoneyUtils::canUpdateAllAccounts());
-        break;
-
-    default:
-        break;
-    }
-
-    updateCaption();
 }
 
 KMStatus::KMStatus(const QString &text)

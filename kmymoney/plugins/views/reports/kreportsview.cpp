@@ -94,13 +94,11 @@ KReportsView::~KReportsView()
 {
 }
 
-void KReportsView::executeAction(eMenu::Action action, const QVariantList& args)
+void KReportsView::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
     switch (action) {
     case eMenu::Action::ReportOpen:
-        if (args.count() == 1) {
-            slotOpenReport(args.at(0).toString());
-        }
+        slotOpenReport(selections.firstSelection(SelectedObjects::Report));
         break;
     case eMenu::Action::Print:
         slotPrintView();

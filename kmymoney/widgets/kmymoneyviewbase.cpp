@@ -65,8 +65,14 @@ void KMyMoneyViewBase::changeEvent(QEvent* ev)
     }
 }
 
-void KMyMoneyViewBase::executeAction(eMenu::Action action, const QVariantList& args)
+void KMyMoneyViewBase::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
     Q_UNUSED(action)
-    Q_UNUSED(args)
+    Q_UNUSED(selections)
+}
+
+QHash<eMenu::Action, QAction*> KMyMoneyViewBase::sharedToolbarActions()
+{
+    Q_D(KMyMoneyViewBase);
+    return d->m_sharedToolbarActions;
 }

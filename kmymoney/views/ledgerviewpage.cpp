@@ -152,14 +152,13 @@ LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
     });
 
     connect(&d->delayTimer, &QTimer::timeout, this, [&]() {
-        auto list = d->ui->m_ledgerView->selectedTransactions();
+        auto list = d->ui->m_ledgerView->selectedJournalEntries();
         if (list.isEmpty()) {
             d->ui->m_ledgerView->selectMostRecentTransaction();
         } else {
             d->ui->m_ledgerView->ensureCurrentItemIsVisible();
         }
     });
-
 }
 
 LedgerViewPage::~LedgerViewPage()
@@ -183,16 +182,16 @@ bool LedgerViewPage::eventFilter(QObject* watched, QEvent* event)
 
 void LedgerViewPage::keepSelection()
 {
-    d->selections.setSelection(SelectedObjects::Transaction, d->ui->m_ledgerView->selectedTransactions());
+    d->selections.setSelection(SelectedObjects::JournalEntry, d->ui->m_ledgerView->selectedJournalEntries());
 }
 
 void LedgerViewPage::reloadFilter()
 {
     d->specialDatesFilter->forceReload();
 
-    d->ui->m_ledgerView->setSelectedTransactions(d->selections.selection(SelectedObjects::Transaction));
+    d->ui->m_ledgerView->setSelectedJournalEntries(d->selections.selection(SelectedObjects::JournalEntry));
     // not sure if the following statement must be removed (THB - 2020-09-20)
-    d->selections.clearSelections(SelectedObjects::Transaction);
+    d->selections.clearSelections(SelectedObjects::JournalEntry);
 }
 
 QString LedgerViewPage::accountId() const
@@ -320,17 +319,49 @@ void LedgerViewPage::slotSettingsChanged()
 
 void LedgerViewPage::slotRequestSelectionChanged(const SelectedObjects& selections) const
 {
-    d->selections.setSelection(SelectedObjects::Transaction, selections.selection(SelectedObjects::Transaction));
+    d->selections.setSelection(SelectedObjects::JournalEntry, selections.selection(SelectedObjects::JournalEntry));
     emit requestSelectionChanged(d->selections);
 }
 
 const SelectedObjects& LedgerViewPage::selections() const
 {
-    d->selections.setSelection(SelectedObjects::Transaction, d->ui->m_ledgerView->selectedTransactions());
+    d->selections.setSelection(SelectedObjects::JournalEntry, d->ui->m_ledgerView->selectedJournalEntries());
     return d->selections;
 }
 
-void LedgerViewPage::selectTransaction(const QString& id)
+void LedgerViewPage::selectJournalEntry(const QString& id)
 {
-    d->ui->m_ledgerView->setSelectedTransactions(QStringList { id });
+    d->ui->m_ledgerView->setSelectedJournalEntries(QStringList{id});
+}
+
+void LedgerViewPage::executeAction(eMenu::Action action, const SelectedObjects& selections)
+{
+    const auto journalEntryIds = selections.selection(SelectedObjects::JournalEntry);
+    switch (action) {
+    case eMenu::Action::GoToAccount:
+    case eMenu::Action::OpenAccount:
+        if (!journalEntryIds.isEmpty()) {
+            selectJournalEntry(journalEntryIds.first());
+        }
+        break;
+
+    case eMenu::Action::NewTransaction:
+        d->ui->m_ledgerView->editNewTransaction();
+        break;
+
+    case eMenu::Action::EditTransaction:
+        d->ui->m_ledgerView->edit(d->ui->m_ledgerView->currentIndex());
+        break;
+
+    case eMenu::Action::EditSplits: {
+        d->ui->m_ledgerView->edit(d->ui->m_ledgerView->currentIndex());
+        const auto editor = d->ui->m_ledgerView->indexWidget(d->ui->m_ledgerView->editIndex());
+        if (editor) {
+            QMetaObject::invokeMethod(editor, "editSplits", Qt::QueuedConnection);
+        }
+        break;
+    }
+    default:
+        break;
+    }
 }

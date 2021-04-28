@@ -206,11 +206,14 @@ CheckPrinting::~CheckPrinting()
 
 void CheckPrinting::slotPrintCheck()
 {
-    const auto transactions = d->selections.selection(SelectedObjects::Transaction);
+    const auto file = MyMoneyFile::instance();
+    const auto journalEntries = d->selections.selection(SelectedObjects::JournalEntry);
     const auto accounts = d->selections.selection(SelectedObjects::Account);
     for (const auto& accountId : accounts) {
         if (d->canBePrinted(accountId)) {
-            for (const auto& transactionId : transactions) {
+            for (const auto& journalEntryId : journalEntries) {
+                const auto idx = file->journalModel()->indexById(journalEntryId);
+                const auto transactionId = idx.data(eMyMoney::Model::JournalTransactionIdRole).toString();
                 if (d->canBePrinted(accountId, transactionId)) {
                     d->printCheck(accountId, transactionId);
                 }
@@ -223,14 +226,17 @@ void CheckPrinting::slotPrintCheck()
 
 void CheckPrinting::updateActions(const SelectedObjects& selections)
 {
+    const auto file = MyMoneyFile::instance();
     bool actionEnabled = false;
     // enable/disable the action depending if there are transactions selected or not
     // and whether they can be printed or not
-    const auto transactions = selections.selection(SelectedObjects::Transaction);
+    const auto journalEntries = selections.selection(SelectedObjects::JournalEntry);
     const auto accounts = selections.selection(SelectedObjects::Account);
     for (const auto& accountId : accounts) {
         if (d->canBePrinted(accountId)) {
-            for (const auto& transactionId : transactions) {
+            for (const auto& journalEntryId : journalEntries) {
+                const auto idx = file->journalModel()->indexById(journalEntryId);
+                const auto transactionId = idx.data(eMyMoney::Model::JournalTransactionIdRole).toString();
                 if (d->canBePrinted(accountId, transactionId)) {
                     actionEnabled = true;
                     break;

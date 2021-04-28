@@ -36,11 +36,14 @@ KPayeesView::KPayeesView(QWidget *parent) :
 
     connect(d->ui->m_payees, &QWidget::customContextMenuRequested, this, [&](QPoint pos) {
         Q_D(KPayeesView);
+        updateActions(d->m_selections);
         emit requestCustomContextMenu(eMenu::Menu::Payee, d->ui->m_payees->mapToGlobal(pos));
     });
 
     connect(d->ui->m_register, &QWidget::customContextMenuRequested, this, [&](QPoint pos) {
         Q_D(KPayeesView);
+        // it does not make sense to jump to myself
+        pActions[eMenu::Action::GoToPayee]->setDisabled(true);
         emit requestCustomContextMenu(eMenu::Menu::Transaction, d->ui->m_register->mapToGlobal(pos));
     });
 
@@ -49,14 +52,14 @@ KPayeesView::KPayeesView(QWidget *parent) :
         d->m_renameProxyModel->setReferenceFilter(d->ui->m_filterBox->itemData(idx));
     });
 
-    d->ui->m_register->selectionModel();
-    connect(d->ui->m_register->selectionModel(), &QItemSelectionModel::currentChanged, this, [&](const QModelIndex& current, const QModelIndex& previous) {
-        Q_UNUSED(previous)
+    connect(d->ui->m_register, &LedgerView::transactionSelectionChanged, this, [&](const SelectedObjects& selections) {
         Q_D(KPayeesView);
-        d->m_selections.clearSelections(SelectedObjects::Transaction);
-        d->m_selections.clearSelections(SelectedObjects::Account);
-        d->m_selections.setSelection(SelectedObjects::Transaction, current.data(eMyMoney::Model::JournalTransactionIdRole).toString());
-        d->m_selections.setSelection(SelectedObjects::Account, current.data(eMyMoney::Model::SplitAccountIdRole).toString());
+        d->m_selections.setSelection(SelectedObjects::JournalEntry, selections.selection(SelectedObjects::JournalEntry));
+        if (selections.selection(SelectedObjects::JournalEntry).count() == 1) {
+            const auto file = MyMoneyFile::instance();
+            const auto idx = file->journalModel()->indexById(selections.firstSelection(SelectedObjects::JournalEntry));
+            d->m_selections.setSelection(SelectedObjects::Account, idx.data(eMyMoney::Model::SplitAccountIdRole).toString());
+        }
         emit requestSelectionChange(d->m_selections);
     });
 
@@ -64,6 +67,8 @@ KPayeesView::KPayeesView(QWidget *parent) :
     connect(pActions[eMenu::Action::DeletePayee], &QAction::triggered, this, &KPayeesView::slotDeletePayee);
     connect(pActions[eMenu::Action::RenamePayee], &QAction::triggered, this, &KPayeesView::slotRenamePayee);
     connect(pActions[eMenu::Action::MergePayee], &QAction::triggered, this, &KPayeesView::slotMergePayee);
+
+    d->m_sharedToolbarActions.insert(eMenu::Action::FileNew, pActions[eMenu::Action::NewPayee]);
 }
 
 KPayeesView::~KPayeesView()
@@ -443,15 +448,30 @@ void KPayeesView::slotSendMail()
         QDesktopServices::openUrl(QUrl(QStringLiteral("mailto:?to=") + d->m_payee.email(), QUrl::TolerantMode));
 }
 
-void KPayeesView::executeAction(eMenu::Action action, const QVariantList& args)
+void KPayeesView::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
+    const auto payeeId(selections.firstSelection(SelectedObjects::Payee));
+    const auto accountId(selections.firstSelection(SelectedObjects::Account));
+    const auto journalEntryId(selections.firstSelection(SelectedObjects::JournalEntry));
+
     Q_D(KPayeesView);
+    const auto idx = d->ui->m_register->currentIndex();
     switch (action) {
     case eMenu::Action::GoToPayee:
-        if (args.count() == 3) {
-            d->selectPayeeAndTransaction(args.at(0).toString(), args.at(1).toString(), args.at(2).toString());
+        d->selectPayeeAndTransaction(payeeId, accountId, journalEntryId);
+        break;
+    case eMenu::Action::EditTransaction:
+        d->ui->m_register->edit(d->ui->m_register->currentIndex());
+        break;
+    case eMenu::Action::EditSplits: {
+        d->ui->m_register->edit(idx);
+        const auto editor = d->ui->m_register->indexWidget(d->ui->m_register->editIndex());
+        if (editor) {
+            QMetaObject::invokeMethod(editor, "editSplits", Qt::QueuedConnection);
         }
         break;
+    }
+
     default:
         break;
     }

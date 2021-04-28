@@ -19,6 +19,8 @@ enum class Action {
     // *************
     // The File menu
     // *************
+    None,
+    FileNew,
     FileOpenDatabase, FileSaveAsDatabase, FileBackup,
     FileImportStatement,
     FileImportTemplate, FileExportTemplate,

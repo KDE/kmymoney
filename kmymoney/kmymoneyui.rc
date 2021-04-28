@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui version="47" name="kmymoney" >
+<kpartgui version="48" name="kmymoney" >
  <MenuBar>
   <Menu name="file" >
    <DefineGroup name="open_db_group" append="open_merge"/>
@@ -239,9 +239,6 @@
   <Separator lineSeparator="true"/>
   <Action name="edit_undo" />
   <Action name="edit_redo" />
-  <Separator lineSeparator="true"/>
-  <Action name="institution_new" />
-  <Action name="account_new" />
   <Separator lineSeparator="true"/>
   <Action name="account_open" />
   <Action name="account_edit" />

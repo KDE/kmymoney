@@ -508,20 +508,24 @@ void SimpleLedgerView::executeCustomAction(eView::Action action)
     }
 }
 
-void SimpleLedgerView::executeAction(eMenu::Action action, const QVariantList& args)
+void SimpleLedgerView::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
     Q_D(SimpleLedgerView);
+    const auto accountId = selections.selection(SelectedObjects::Account).first();
     switch (action) {
-    case eMenu::Action::GoToAccount: {
-        const auto accountId = args.at(0).toString();
-        const auto transactionId = args.at(1).toString();
-        openLedger(accountId);
-        auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());
-        if (view) {
-            view->selectTransaction(transactionId);
+    case eMenu::Action::GoToAccount:
+    case eMenu::Action::NewTransaction:
+    case eMenu::Action::OpenAccount:
+    case eMenu::Action::EditTransaction:
+    case eMenu::Action::EditSplits:
+        if (!accountId.isEmpty()) {
+            openLedger(accountId);
+            auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());
+            if (view) {
+                view->executeAction(action, selections);
+            }
         }
         break;
-    }
     default:
         break;
     }

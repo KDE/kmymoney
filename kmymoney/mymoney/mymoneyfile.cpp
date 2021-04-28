@@ -385,6 +385,7 @@ MyMoneyFile::MyMoneyFile() :
     d(new Private(this))
 {
     reloadSpecialDates();
+    connect(&d->journalModel, &JournalModel::balanceChanged, &d->m_balanceCache, QOverload<const QString&>::of(&MyMoneyBalanceCache::clear));
 }
 
 MyMoneyFile::~MyMoneyFile()

@@ -45,12 +45,12 @@ public:
     virtual ~KMyMoneyViewBase();
 
     /**
-     * Execute the action using the @a args. This does nothing
-     * in its base implementation. If a view needs to act upon
+     * Execute the @a action using the @a selections. This base
+     * class implementation os a no-op. If a view needs to act upon
      * the execution of @a action you need to override this
-     * method in the view.
+     * method in the derived class of the view.
      */
-    virtual void executeAction(eMenu::Action action, const QVariantList& args);
+    virtual void executeAction(eMenu::Action action, const SelectedObjects& selections);
 
     virtual void executeCustomAction(eView::Action) {}
 
@@ -73,6 +73,8 @@ public:
      * @sa requestSelectionChange()
      */
     virtual void aboutToShow();
+
+    virtual QHash<eMenu::Action, QAction*> sharedToolbarActions();
 
 protected:
     void changeEvent(QEvent* ev) override;

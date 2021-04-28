@@ -19,6 +19,7 @@
 
 namespace eMenu {
 enum class Menu;
+enum class Action;
 }
 
 class MyMoneyAccount;
@@ -41,9 +42,11 @@ public:
      */
     void setShowEntryForNewTransaction(bool show = true);
 
-    void selectTransaction(const QString& id);
+    void selectJournalEntry(const QString& id);
 
     const SelectedObjects& selections() const;
+
+    void executeAction(eMenu::Action action, const SelectedObjects& selections);
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event) override;

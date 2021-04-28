@@ -23,6 +23,14 @@ class QDate;
 class QString;
 
 //class that has utility functions to use throughout the application.
+
+typedef enum {
+    NoWarning = 0,
+    OneSplitReconciled,
+    OneSplitFrozen,
+    OneAccountClosed,
+} modifyTransactionWarnLevel_t;
+
 namespace MyMoneyUtils
 {
 KMM_MYMONEY_EXPORT QString getFileExtension(QString strFileName);
@@ -90,7 +98,8 @@ KMM_MYMONEY_EXPORT QString formatDate(const QDate& date);
  */
 KMM_MYMONEY_EXPORT QString paymentMethodToString(eMyMoney::Schedule::PaymentType paymentType);
 
-
+KMM_MYMONEY_EXPORT modifyTransactionWarnLevel_t transactionWarnLevel(const QString& transactionId);
+KMM_MYMONEY_EXPORT modifyTransactionWarnLevel_t transactionWarnLevel(const QStringList& transactionIds);
 }
 
 #endif

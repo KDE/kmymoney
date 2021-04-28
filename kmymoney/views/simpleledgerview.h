@@ -30,7 +30,7 @@ public:
 
     virtual void showTransactionForm(bool = true);
 
-    void executeAction(eMenu::Action action, const QVariantList& args) override;
+    void executeAction(eMenu::Action action, const SelectedObjects& selections) override;
 
     void executeCustomAction(eView::Action action) override;
 

@@ -11,8 +11,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QHash>
 #include <QLabel>
 #include <QString>
+class QAction;
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -20,13 +22,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <mymoneymoney.h>
-#include <mymoneyfile.h>
+#include "menuenums.h"
+#include "selectedobjects.h"
 #include <accountsmodel.h>
 #include <kmymoneysettings.h>
+#include <mymoneyfile.h>
+#include <mymoneymoney.h>
 #include <mymoneysecurity.h>
 #include <mymoneyutils.h>
-#include "selectedobjects.h"
 
 class KMyMoneyViewBase;
 class KMyMoneyViewBasePrivate
@@ -77,6 +80,7 @@ public:
 
     KMyMoneyViewBase*     q_ptr;
     SelectedObjects       m_selections;
+    QHash<eMenu::Action, QAction*> m_sharedToolbarActions;
     bool                  m_needsRefresh;
     bool                  m_havePendingChanges;
 };

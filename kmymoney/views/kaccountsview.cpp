@@ -53,6 +53,8 @@ KAccountsView::KAccountsView(QWidget *parent) :
 
     d->ui->m_accountTree->setItemDelegate(new AccountDelegate(d->ui->m_accountTree));
     connect(MyMoneyFile::instance()->accountsModel(), &AccountsModel::netWorthChanged, this, &KAccountsView::slotNetWorthChanged);
+
+    d->m_sharedToolbarActions.insert(eMenu::Action::FileNew, pActions[eMenu::Action::NewAccount]);
 }
 
 KAccountsView::~KAccountsView()

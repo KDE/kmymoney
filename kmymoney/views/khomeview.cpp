@@ -70,9 +70,9 @@ void KHomeView::wheelEvent(QWheelEvent* event)
     }
 }
 
-void KHomeView::executeAction(eMenu::Action action, const QVariantList& args)
+void KHomeView::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
-    Q_UNUSED(args)
+    Q_UNUSED(selections)
 
     switch (action) {
     case eMenu::Action::Print:

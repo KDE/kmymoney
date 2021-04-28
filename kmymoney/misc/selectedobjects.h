@@ -29,12 +29,12 @@ public:
         Account,
         Institution,
         Payee,
-        Transaction,
+        JournalEntry,
         Schedule,
-        Split,
         Tag,
         Budget,
         OnlineJob,
+        Report,
     } Object_t;
     SelectedObjects();
 
@@ -46,6 +46,13 @@ public:
     void clearSelections( Object_t type);
     void clearSelections();
     QStringList selection( Object_t type) const;
+
+    /**
+     * This method returns the first id of the corresponding
+     * selection set for @a type or an empty QString in
+     * case the selection is empty.
+     */
+    QString firstSelection(Object_t type) const;
 
     int count( Object_t type) const;
     /**

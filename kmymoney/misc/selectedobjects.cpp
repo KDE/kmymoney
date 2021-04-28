@@ -11,7 +11,7 @@ SelectedObjects::SelectedObjects()
 
 void SelectedObjects::addSelection(SelectedObjects::Object_t type, const QString& id)
 {
-    addSelections(type, QStringList() << id);
+    addSelections(type, QStringList(id));
 }
 
 void SelectedObjects::addSelections(SelectedObjects::Object_t type, const QStringList& ids)
@@ -25,7 +25,7 @@ void SelectedObjects::addSelections(SelectedObjects::Object_t type, const QStrin
 
 void SelectedObjects::setSelection(SelectedObjects::Object_t type, const QString& id)
 {
-    setSelection(type, QStringList() << id);
+    setSelection(type, QStringList(id));
 }
 
 void SelectedObjects::setSelection(SelectedObjects::Object_t type, const QStringList& ids)
@@ -56,6 +56,14 @@ bool SelectedObjects::isEmpty(SelectedObjects::Object_t type) const
 QStringList SelectedObjects::selection(SelectedObjects::Object_t type) const
 {
     return m_selections[type];
+}
+
+QString SelectedObjects::firstSelection(SelectedObjects::Object_t type) const
+{
+    if (!m_selections[type].isEmpty()) {
+        return m_selections[type].first();
+    }
+    return {};
 }
 
 bool SelectedObjects::isEmpty() const

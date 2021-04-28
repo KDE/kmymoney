@@ -8,9 +8,11 @@
 
 // ----------------------------------------------------------------------------
 // QT Includes
+
 #include <QDate>
 #include <QHash>
 #include <QMap>
+#include <QObject>
 #include <QString>
 
 // ----------------------------------------------------------------------------
@@ -72,25 +74,15 @@ private:
  * transactions required to calculate a balance for a later date. This class
  * is intended to be used at the @ref MyMoneyFile layer.
  */
-class KMM_MYMONEY_EXPORT MyMoneyBalanceCache
+class KMM_MYMONEY_EXPORT MyMoneyBalanceCache : public QObject
 {
+    Q_OBJECT
 public:
 
     /**
      * Remove all balances from the cache
      */
     void clear();
-
-    /**
-     * Remove all balances associated with a given account from the cache
-     */
-    void clear(const QString& accountId);
-
-    /**
-     * Remove all balances on or after the date associated with an account
-     * from the cache
-     */
-    void clear(const QString& accountId, const QDate& date);
 
     /**
      * @return true if there are no balances in the cache, otherwise false
@@ -142,6 +134,18 @@ public:
      * @param balance the balance of the account at the end the day
      */
     void insert(const QString& accountId, const QDate& date, const MyMoneyMoney& balance);
+
+public Q_SLOTS:
+    /**
+     * Remove all balances associated with a given account from the cache
+     */
+    void clear(const QString& accountId);
+
+    /**
+     * Remove all balances on or after the date associated with an account
+     * from the cache
+     */
+    void clear(const QString& accountId, const QDate& date);
 
 private:
     typedef QHash<QString, QMap<QDate, MyMoneyMoney> > BalanceCacheType;

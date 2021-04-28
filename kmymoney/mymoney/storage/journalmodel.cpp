@@ -876,7 +876,7 @@ void JournalModel::load(const QMap<QString, MyMoneyTransaction>& list)
         d->addIdKeyMapping(id, it.key());
         auto transaction = QSharedPointer<MyMoneyTransaction>(new MyMoneyTransaction(*it));
         for (const auto& split : (*transaction).splits()) {
-            const JournalEntry journalEntry(it.key(), transaction, split);
+            const JournalEntry journalEntry(QString("%1-%2").arg(it.key(), split.id()), transaction, split);
             static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->dataRef() = journalEntry;
             ++row;
         }
@@ -971,7 +971,7 @@ void JournalModel::doAddItem(const JournalEntry& item, const QModelIndex& parent
 
     const auto originalStartRow = startRow;
     foreach (const auto split, (*transaction).splits()) {
-        JournalEntry journalEntry(key, transaction, split);
+        JournalEntry journalEntry(QString("%1-%2").arg(key, split.id()), transaction, split);
         static_cast<TreeItem<JournalEntry>*>(index(startRow, 0).internalPointer())->dataRef() = journalEntry;
         ++startRow;
     }
@@ -1074,7 +1074,7 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
     // use the oldKey for now to keep sorting in a correct state
     int row = srcIdx.row();
     foreach (const auto split, newTransaction.splits()) {
-        JournalEntry journalEntry(oldKey, transaction, split);
+        JournalEntry journalEntry(QString("%1-%2").arg(oldKey, split.id()), transaction, split);
         static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->dataRef() = journalEntry;
         ++row;
     }
@@ -1103,7 +1103,7 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
             const int srcRow = srcIdx.row();
             for (int rows = newSplitCount; rows > 0; --rows) {
                 auto journalEntry = m_rootItem->takeChild(srcRow);
-                journalEntry->dataRef().m_id = newKey;
+                journalEntry->dataRef().m_id = QString("%1-%2").arg(newKey, journalEntry->constDataRef().m_split.id());
                 entries.append(journalEntry);
             }
             // check if the destination row must be adjusted

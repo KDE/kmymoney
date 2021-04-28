@@ -153,6 +153,10 @@ public:
                     }
                 }
             }
+            // we don't allow jumping to categories when there are more than one
+            if (acc.isIncomeExpense() && journalEntry.transaction().splitCount() > 2) {
+                acc.clearId();
+            }
 
             // found an account, update the action
             if (!acc.id().isEmpty()) {
@@ -254,6 +258,7 @@ void LedgerView::setModel(QAbstractItemModel* model)
     if (!d->columnSelector) {
         d->columnSelector = new ColumnSelector(this, d->groupName);
     }
+    QSignalBlocker blocker(this);
     QTableView::setModel(model);
 
     d->columnSelector->setModel(model);
@@ -358,6 +363,11 @@ void LedgerView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint
 
     d->editIndex = QModelIndex();
     QMetaObject::invokeMethod(this, "ensureCurrentItemIsVisible", Qt::QueuedConnection);
+}
+
+QModelIndex LedgerView::editIndex() const
+{
+    return d->editIndex;
 }
 
 void LedgerView::mousePressEvent(QMouseEvent* event)
@@ -598,6 +608,17 @@ void LedgerView::selectMostRecentTransaction()
     }
 }
 
+void LedgerView::editNewTransaction()
+{
+    const auto row = model()->rowCount() - 1;
+    const auto idx = model()->index(row, 0);
+    if (idx.data(eMyMoney::Model::IdRole).toString().isEmpty()) {
+        scrollTo(idx, QAbstractItemView::EnsureVisible);
+        selectRow(idx.row());
+        setCurrentIndex(idx);
+    }
+}
+
 void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
 {
     // call base class implementation
@@ -608,6 +629,7 @@ void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSel
 
     if (!selected.isEmpty()) {
         int lastRow = -1;
+        const auto test = selectionModel()->selectedIndexes();
         for (const auto& idx : selectionModel()->selectedIndexes()) {
             if (idx.row() != lastRow) {
                 lastRow = idx.row();
@@ -645,21 +667,30 @@ void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSel
         }
     }
 
-    d->selection.setSelection(SelectedObjects::Transaction, selectedTransactions());
+    QStringList selectedJournalEntries;
+    int lastRow = -1;
+    for (const auto& idx : selectionModel()->selectedIndexes()) {
+        if (idx.row() != lastRow) {
+            lastRow = idx.row();
+            selectedJournalEntries += idx.data(eMyMoney::Model::IdRole).toString();
+        }
+    }
+
+    d->selection.setSelection(SelectedObjects::JournalEntry, selectedJournalEntries);
     emit transactionSelectionChanged(d->selection);
 }
 
-QStringList LedgerView::selectedTransactions() const
+QStringList LedgerView::selectedJournalEntries() const
 {
     QStringList selection;
 
-    QString id;
     int lastRow = -1;
+    QString id;
     for (const auto& idx : selectionModel()->selectedIndexes()) {
         // we don't need to process all columns but only the first one
         if (idx.row() != lastRow) {
             lastRow = idx.row();
-            id = idx.data(eMyMoney::Model::JournalTransactionIdRole).toString();
+            id = idx.data(eMyMoney::Model::IdRole).toString();
             if (!selection.contains(id)) {
                 selection.append(id);
             }
@@ -668,7 +699,7 @@ QStringList LedgerView::selectedTransactions() const
     return selection;
 }
 
-void LedgerView::setSelectedTransactions(const QStringList& transactionIds)
+void LedgerView::setSelectedJournalEntries(const QStringList& journalEntryIds)
 {
     QItemSelection selection;
     const auto journalModel = MyMoneyFile::instance()->journalModel();
@@ -684,19 +715,28 @@ void LedgerView::setSelectedTransactions(const QStringList& transactionIds)
         }
     };
 
-    for (const auto& id : transactionIds) {
+    for (const auto& id : journalEntryIds) {
         if (id.isEmpty())
             continue;
-        const auto indexes = journalModel->indexesByTransactionId(id);
         int row = -1;
-        for (const auto baseIdx : indexes) {
-            if (baseIdx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == d->accountId) {
-                row = journalModel->mapFromBaseSource(model(), baseIdx).row();
-                if (row != -1) {
-                    break;
+        const auto baseIdx = journalModel->indexById(id);
+        row = journalModel->mapFromBaseSource(model(), baseIdx).row();
+
+        // the baseIdx may point to a split in a different account which
+        // we don't see here. In this case, we scan the journal entries
+        // of the transaction
+        if ((row == -1) && baseIdx.isValid()) {
+            const auto indexes = journalModel->indexesByTransactionId(baseIdx.data(eMyMoney::Model::JournalTransactionIdRole).toString());
+            for (const auto idx : indexes) {
+                if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == d->accountId) {
+                    row = journalModel->mapFromBaseSource(model(), idx).row();
+                    if (row != -1) {
+                        break;
+                    }
                 }
             }
         }
+
         if (row == -1) {
             qDebug() << "transaction" << id << "not found anymore for selection. skipped";
             continue;

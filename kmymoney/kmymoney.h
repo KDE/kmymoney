@@ -105,6 +105,8 @@ private Q_SLOTS:
 
     void slotSelectionChanged(const SelectedObjects& selection);
 
+    void slotAddSharedAction(eMenu::Action action, QAction* defaultAction);
+
 protected Q_SLOTS:
     /**
       * This slot is intended to be used as part of auto saving. This is used when the
@@ -202,11 +204,6 @@ protected Q_SLOTS:
     void slotShowTipOfTheDay();
 
     /**
-      * Calls the print logic for the current view
-      */
-    void slotPrintView();
-
-    /**
       * Call this slot, if any configuration parameter has changed
       */
     void slotUpdateConfiguration(const QString &dialogName);
@@ -239,9 +236,13 @@ protected Q_SLOTS:
 
     void slotCheckSchedules();
 
-    void slotGoToPayee();
-    void slotGoToAccount();
-    void slotOpenReport();
+    void slotDeleteTransactions();
+    void slotDuplicateTransactions();
+    void slotCopySplits();
+    void slotMarkTransactions();
+
+    void slotExecuteAction();
+    void slotExecuteActionWithData();
 
 public:
     /**

@@ -54,18 +54,23 @@ public:
 
     void setModel(QAbstractItemModel * model) override;
 
-    QStringList selectedTransactions() const;
-    void setSelectedTransactions(const QStringList& transactionIds);
+    QStringList selectedJournalEntries() const;
+
+    void setSelectedJournalEntries(const QStringList& transactionIds);
 
     void selectMostRecentTransaction();
 
     void setColumnSelectorGroupName(const QString& groupName);
+
+    void editNewTransaction();
 
     /**
      * New transactions will be created in account referenced by @a id.
      */
     void setAccountId(const QString& id);
     const QString& accountId() const;
+
+    QModelIndex editIndex() const;
 
 public Q_SLOTS:
     /**

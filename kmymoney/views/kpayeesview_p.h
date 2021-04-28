@@ -643,12 +643,13 @@ public:
         ui->m_updateButton->setEnabled(dirty);
     }
 
-    void selectPayeeAndTransaction(const QString& payeeId, const QString& accountId = QString(), const QString& transactionId = QString())
+    void selectPayeeAndTransaction(const QString& payeeId, const QString& accountId = QString(), const QString& journalEntryId = QString())
     {
         Q_Q(KPayeesView);
         if (!q->isVisible())
             return;
 
+        const auto file = MyMoneyFile::instance();
         QModelIndex idx;
         const auto list = ui->m_payees->model()->match(ui->m_payees->model()->index(0, 0), eMyMoney::Model::IdRole,
                           payeeId,
@@ -671,10 +672,21 @@ public:
 
         const auto rows = model->rowCount();
         int transactionRow = -1;
-        // scan all transactions shown for this payee
+
+        // it could be, that the selected JournalEntryId is not available here
+        // so we also scan for the transactionId
+
+        const auto journalIdx = file->journalModel()->indexById(journalEntryId);
+        const auto transactionId = journalIdx.data(eMyMoney::Model::JournalTransactionIdRole).toString();
+
+        // scan all entries shown for this payee
         for (int row = 0; row < rows; ++row) {
             idx = model->index(row, 0);
-            if (idx.data(eMyMoney::Model::JournalTransactionIdRole).toString() == transactionId) {
+            if (idx.data(eMyMoney::Model::IdRole).toString() == journalEntryId) {
+                transactionRow = row;
+                break;
+
+            } else if (idx.data(eMyMoney::Model::JournalTransactionIdRole).toString() == transactionId) {
                 // if the transaction id matches and we don't have a match already we keep it
                 if (transactionRow == -1)
                     transactionRow = row;
@@ -698,7 +710,7 @@ public:
             ui->m_register->setCurrentIndex(idx);
 
             m_selections.setSelection(SelectedObjects::Account, idx.data(eMyMoney::Model::SplitAccountIdRole).toString());
-            m_selections.setSelection(SelectedObjects::Transaction, transactionId);
+            m_selections.setSelection(SelectedObjects::JournalEntry, idx.data(eMyMoney::Model::IdRole).toString());
 
             // if it's not the last transaction, we scroll a bit further
             if (transactionRow + 1 < rows) {

@@ -102,8 +102,6 @@ class KMyMoneyView : public KPageWidget
 private:
     const QScopedPointer<KMyMoneyViewPrivate> d_ptr;
 
-    void viewAccountList(const QString& selectAccount); // Show the accounts view
-
     void createSchedule(MyMoneySchedule s, MyMoneyAccount& a);
 
 public:
@@ -129,14 +127,6 @@ public:
 
     void showPageAndFocus(View idView);
     void showPage(View idView);
-
-    /**
-      * check if the current view allows to print something
-      *
-      * @retval true Yes, view allows to print
-      * @retval false No, view cannot print
-      */
-    bool canPrint();
 
     void finishReconciliation(const MyMoneyAccount& account);
 
@@ -170,9 +160,11 @@ public:
     QHash<eMenu::Action, QAction *> actionsToBeConnected();
 
     /**
-     * Execute the action using the @a args
+     * Execute the @a action using the selected objects of @a selections
      */
-    void executeAction(eMenu::Action action, const QVariantList& args);
+    void executeAction(eMenu::Action action, const SelectedObjects& selections);
+
+    void setupSharedActions();
 
 protected:
     /**
@@ -201,21 +193,6 @@ public Q_SLOTS:
       * data has been loaded from external sources (QIF import).
       **/
     void slotRefreshViews();
-
-    /**
-      * Called, whenever the tags view should pop up and a specific
-      * transaction in an account should be shown.
-      *
-      * @param tagId The ID of the tag to be shown
-      * @param accountId The ID of the account to be shown
-      * @param transactionId The ID of the transaction to be selected
-      */
-    void slotTagSelected(const QString& tagId, const QString& accountId, const QString& transactionId);
-
-    /**
-      * This slot prints the current view.
-      */
-    void slotPrintView();
 
     /**
       * Called when the user changes the detail
@@ -258,19 +235,6 @@ private Q_SLOTS:
     void slotContextMenuRequested(const MyMoneyObject& obj);
 
     void slotRememberLastView(View view);
-
-private:
-
-    /**
-      * Internal method used by slotAccountNew() and slotAccountCategory().
-      */
-    void accountNew(const bool createCategory);
-
-    /**
-     * @deprecated will be replaced by the new SelectedObjects method
-     * which has an inherited reset all the time
-     */
-    Q_DECL_DEPRECATED void resetViewSelection();
 
 Q_SIGNALS:
     /**
@@ -322,6 +286,9 @@ Q_SIGNALS:
     void requestActionTrigger(eMenu::Action action);
 
     void settingsChanged();
+
+    void addSharedActionButton(eMenu::Action action, QAction* defaultAction);
+    void selectSharedActionButton(eMenu::Action action, QAction* defaultAction);
 };
 
 #endif
