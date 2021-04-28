@@ -39,67 +39,99 @@
 #include <gpgme++/data.h>
 #include <gpgme++/engineinfo.h>
 
+class GPGConfig
+{
+private:
+    GPGConfig()
+        : m_isInitialized(false)
+    {
+        GpgME::initializeLibrary();
+
+        auto ctx = GpgME::Context::createForProtocol(GpgME::OpenPGP);
+        if (!ctx) {
+            qDebug("Failed to create the GpgME context for the OpenPGP protocol");
+            return;
+        }
+
+        // we search the directory that GPG provides as default
+        if (ctx->engineInfo().homeDirectory() == nullptr) {
+            m_homeDir = QString::fromUtf8(GpgME::dirInfo("homedir"));
+        } else {
+            m_homeDir = QString::fromUtf8(ctx->engineInfo().homeDirectory());
+        }
+
+        const auto fileName = QString("%1/%2").arg(m_homeDir, "secring.gpg");
+        qDebug() << "GPG search" << fileName;
+        if (!QFileInfo::exists(fileName)) {
+            qDebug() << "GPG no secure keyring found.";
+        }
+        m_homeDir = QDir::toNativeSeparators(m_homeDir);
+        /// FIXME This might be nasty if the underlying gpgme lib does not work on UTF-8
+        auto lastError = ctx->setEngineHomeDirectory(m_homeDir.toUtf8());
+        if (lastError.encodedError()) {
+            qDebug() << "Failure while setting GPG home directory to" << m_homeDir << "\n" << QLatin1String(lastError.asString());
+        }
+
+        qDebug() << "GPG Home directory located in" << ctx->engineInfo().homeDirectory();
+        qDebug() << "GPG binary located in" << ctx->engineInfo().fileName();
+
+        m_isInitialized = true;
+    }
+
+    QString m_homeDir;
+    bool m_isInitialized;
+
+public:
+    static GPGConfig* instance()
+    {
+        static GPGConfig* gpgConfig = nullptr;
+        if (!gpgConfig) {
+            gpgConfig = new GPGConfig;
+        }
+        return gpgConfig;
+    }
+
+    bool isInitialized() const
+    {
+        return m_isInitialized;
+    }
+
+    QString homeDir() const
+    {
+        return m_homeDir;
+    }
+};
+
 class KGPGFile::Private
 {
 public:
-    Private() {
-        m_fileRead = 0;
-        m_fileWrite = 0;
-        GpgME::initializeLibrary();
+    Private()
+        : m_fileRead(nullptr)
+        , m_fileWrite(nullptr)
+        , m_ctx(nullptr)
+    {
+        const auto gpgConfig(GPGConfig::instance());
 
-        // figure out the location of the GPG home directory
-        QStringList baseDirs;
-
-        // we search in the home directory ...
-        baseDirs << QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
-
-        // ... and in the application data dirs.
-        // since we look for gnupg, we need to replace the application name
-        foreach (auto baseDir, QStandardPaths::standardLocations(QStandardPaths::AppDataLocation)) {
-            baseDirs << baseDir.replace(QLatin1String("kmymoney"), QLatin1String("gnupg"), Qt::CaseInsensitive);
+        if (!gpgConfig->isInitialized()) {
+            qDebug() << "GPGConfig not initialized";
+            return;
         }
 
-        const QStringList subDirs = {
-            QStringLiteral(".gnupg"),
-            QString(),
-            QStringLiteral("gnupg"),
-        };
-
-        ctx = GpgME::Context::createForProtocol(GpgME::OpenPGP);
-        if (!ctx)
+        m_ctx = GpgME::Context::createForProtocol(GpgME::OpenPGP);
+        if (!m_ctx) {
             qDebug("Failed to create the GpgME context for the OpenPGP protocol");
-
-        bool found = false;
-        foreach (const auto baseDir, baseDirs) {
-            foreach (const auto subDir, subDirs) {
-                auto dir = baseDir;
-                if (!subDir.isEmpty()) {
-                    dir.append(QString("/%1").arg(subDir));
-                }
-                const auto fileName = QString("%1/%2").arg(dir, "secring.gpg");
-                qDebug() << "GPG search" << fileName;
-                if (QFileInfo::exists(fileName)) {
-                    qDebug() << "Found";
-                    /// FIXME This might be nasty if the underlying gpgme lib does not work on UTF-8
-                    m_lastError = ctx->setEngineHomeDirectory(QDir::toNativeSeparators(dir).toUtf8());
-                    if (m_lastError.encodedError()) {
-                        qDebug() << "Failure while setting GPG home directory to" << dir << "\n" << QLatin1String(m_lastError.asString());
-                    }
-                    found = true;
-                    break;
-                }
-            }
-            if (found) {
-                break;
-            }
+            return;
         }
 
-        qDebug() << "GPG Home directory" << ctx->engineInfo().homeDirectory();
-        qDebug() << "GPG filename" << ctx->engineInfo().fileName();
+        /// FIXME This might be nasty if the underlying gpgme lib does not work on UTF-8
+        m_lastError = m_ctx->setEngineHomeDirectory(QDir::toNativeSeparators(gpgConfig->homeDir()).toUtf8());
+        if (m_lastError.encodedError()) {
+            qDebug() << "Failure while setting GPG home directory to" << gpgConfig->homeDir() << "\n" << QLatin1String(m_lastError.asString());
+        }
     }
 
     ~Private() {
-        delete ctx;
+        delete m_ctx;
     }
 
     QString m_fn;
@@ -108,7 +140,7 @@ public:
 
     GpgME::Error m_lastError;
 
-    GpgME::Context* ctx;
+    GpgME::Context* m_ctx;
     GpgME::Data m_data;
 
     std::vector< GpgME::Key > m_recipients;
@@ -116,8 +148,6 @@ public:
     // the result set of the last key list job
     std::vector< GpgME::Key > m_keys;
 };
-
-
 
 KGPGFile::KGPGFile(const QString& fn, const QString& homedir, const QString& options) :
     d(new Private)
@@ -178,7 +208,7 @@ bool KGPGFile::open(OpenMode mode)
         return false;
     }
 
-    if (!d->ctx) {
+    if (!d->m_ctx) {
         setOpenMode(NotOpen);
         return false;
     }
@@ -198,7 +228,7 @@ bool KGPGFile::open(OpenMode mode)
         }
 
         // write out in ASCII armor mode
-        d->ctx->setArmor(true);
+        d->m_ctx->setArmor(true);
         d->m_fileWrite = new QSaveFile;
 
     } else if (isReadable()) {
@@ -215,7 +245,7 @@ bool KGPGFile::open(OpenMode mode)
             return false;
         }
         GpgME::Data dcipher(d->m_fileRead->handle());
-        d->m_lastError = d->ctx->decrypt(dcipher, d->m_data).error();
+        d->m_lastError = d->m_ctx->decrypt(dcipher, d->m_data).error();
         if (d->m_lastError.encodedError()) {
             return false;
         }
@@ -238,13 +268,13 @@ void KGPGFile::close()
         return;
     }
 
-    if (!d->ctx)
+    if (!d->m_ctx)
         return;
 
     if (isWritable()) {
         d->m_data.seek(0, SEEK_SET);
         GpgME::Data dcipher(d->m_fileWrite->handle());
-        d->m_lastError = d->ctx->encrypt(d->m_recipients, d->m_data, dcipher, GpgME::Context::AlwaysTrust).error();
+        d->m_lastError = d->m_ctx->encrypt(d->m_recipients, d->m_data, dcipher, GpgME::Context::AlwaysTrust).error();
         if (d->m_lastError.encodedError()) {
             setErrorString(QLatin1String("Failure while writing temporary file for file: '") + QLatin1String(d->m_lastError.asString()) + QLatin1String("'"));
         } else if (!d->m_fileWrite->commit()) {
@@ -372,11 +402,11 @@ void KGPGFile::keyList(QStringList& list, bool secretKeys, const QString& patter
 {
     d->m_keys.clear();
     list.clear();
-    if (d->ctx && !d->ctx->startKeyListing(pattern.toUtf8().constData(), secretKeys)) {
+    if (d->m_ctx && !d->m_ctx->startKeyListing(pattern.toUtf8().constData(), secretKeys)) {
         GpgME::Error error;
         for (;;) {
             GpgME::Key key;
-            key = d->ctx->nextKey(error);
+            key = d->m_ctx->nextKey(error);
             if (error.encodedError() != GPG_ERR_NO_ERROR)
                 break;
 
@@ -418,7 +448,7 @@ void KGPGFile::keyList(QStringList& list, bool secretKeys, const QString& patter
                 }
             }
         }
-        d->ctx->endKeyListing();
+        d->m_ctx->endKeyListing();
     }
 }
 
