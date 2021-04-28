@@ -51,7 +51,7 @@ class Wizard : public KMyMoneyWizard
     Q_DISABLE_COPY(Wizard)
 
 public:
-    explicit Wizard(QWidget *parent = nullptr, bool modal = false, Qt::WindowFlags flags = 0);
+    explicit Wizard(QWidget *parent = nullptr, bool modal = false, Qt::WindowFlags flags = {});
     ~Wizard() override;
     /**
     * Returns the personal information of the user (e.g. name, address, etc.)

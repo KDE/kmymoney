@@ -44,7 +44,7 @@ class KMM_BASE_WIDGETS_EXPORT KMyMoneySelector : public QWidget
 
     Q_PROPERTY(QStringList selectedItems READ selectedItems DESIGNABLE false STORED false)
 public:
-    explicit KMyMoneySelector(QWidget* parent = nullptr, Qt::WindowFlags flags = 0);
+    explicit KMyMoneySelector(QWidget* parent = nullptr, Qt::WindowFlags flags = {});
     virtual ~KMyMoneySelector();
 
     /**
@@ -343,7 +343,7 @@ protected Q_SLOTS:
 
 protected:
     KMyMoneySelectorPrivate * const d_ptr;
-    KMyMoneySelector(KMyMoneySelectorPrivate &dd, QWidget* parent = nullptr, Qt::WindowFlags flags = 0);
+    KMyMoneySelector(KMyMoneySelectorPrivate &dd, QWidget* parent = nullptr, Qt::WindowFlags flags = {});
 
 private:
     Q_DECLARE_PRIVATE(KMyMoneySelector)

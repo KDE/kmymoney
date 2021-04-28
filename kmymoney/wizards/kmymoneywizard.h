@@ -75,7 +75,7 @@ template <class T> class QList;
   * {
   *   Q_OBJECT
   * public:
-  *   KNewUserWizard(QWidget* parent = nullptr, const char* name = 0, bool modal = false, Qt::WindowFlags flags = 0);
+  *   KNewUserWizard(QWidget* parent = nullptr, const char* name = 0, bool modal = false, Qt::WindowFlags flags = {});
   *
   * private:
   *   KNewUserGeneral*  m_generalPage;
@@ -188,11 +188,11 @@ Q_SIGNALS:
 
 protected:
     KMyMoneyWizardPrivate * const d_ptr;
-    KMyMoneyWizard(KMyMoneyWizardPrivate &dd, QWidget* parent = nullptr, bool modal = false, Qt::WindowFlags f = 0);
+    KMyMoneyWizard(KMyMoneyWizardPrivate &dd, QWidget* parent = nullptr, bool modal = false, Qt::WindowFlags f = {});
     /**
       * Constructor (kept protected, so that one cannot create such an object directly)
       */
-    explicit KMyMoneyWizard(QWidget* parent = nullptr, bool modal = false, Qt::WindowFlags f = 0);
+    explicit KMyMoneyWizard(QWidget* parent = nullptr, bool modal = false, Qt::WindowFlags f = {});
 
 protected Q_SLOTS:
     void accept() override;

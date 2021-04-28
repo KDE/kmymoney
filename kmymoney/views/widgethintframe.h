@@ -30,7 +30,7 @@ public:
     };
     Q_ENUM(FrameStyle)
 
-    explicit WidgetHintFrame(QWidget* editWidget, FrameStyle style = Error, Qt::WindowFlags f = 0);
+    explicit WidgetHintFrame(QWidget* editWidget, FrameStyle style = Error, Qt::WindowFlags f = {});
     ~WidgetHintFrame();
 
     void attachToWidget(QWidget* w);

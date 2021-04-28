@@ -19,7 +19,7 @@ class KMM_EXTENDED_DIALOGS_EXPORT SplitAdjustDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit SplitAdjustDialog(QWidget* parent, Qt::WindowFlags f = 0);
+    explicit SplitAdjustDialog(QWidget* parent, Qt::WindowFlags f = {});
     virtual ~SplitAdjustDialog();
 
     void setValues(QString transactionSum, QString splitSum, QString diff, int splitCount);

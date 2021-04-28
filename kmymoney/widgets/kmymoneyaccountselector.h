@@ -55,7 +55,7 @@ class KMM_BASE_WIDGETS_EXPORT KMyMoneyAccountSelector : public KMyMoneySelector
 public:
     friend class AccountSet;
 
-    explicit KMyMoneyAccountSelector(QWidget* parent = nullptr, Qt::WindowFlags flags = 0, const bool createButtons = true);
+    explicit KMyMoneyAccountSelector(QWidget* parent = nullptr, Qt::WindowFlags flags = {}, const bool createButtons = true);
     ~KMyMoneyAccountSelector() override;
 
     /**
