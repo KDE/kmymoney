@@ -75,7 +75,7 @@ struct CheckPrinting::Private {
 
         QFile *checkTemplateHTMLFile = new QFile(PluginSettings::checkTemplateFile());
 
-        if (!PluginSettings::useCustomCheckTemplate || PluginSettings::checkTemplateFile().isEmpty() || !checkTemplateHTMLFile->exists())
+        if (!PluginSettings::useCustomCheckTemplate() || PluginSettings::checkTemplateFile().isEmpty() || !checkTemplateHTMLFile->exists())
             checkTemplateHTMLFile = new QFile(PluginSettings::defaultCheckTemplateFileValue());
         if (!(checkTemplateHTMLFile->open(QIODevice::ReadOnly)))
             qDebug() << "Failed to open the template from" << checkTemplateHTMLFile->fileName();
