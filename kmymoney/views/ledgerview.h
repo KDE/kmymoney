@@ -60,6 +60,8 @@ public:
 
     void selectMostRecentTransaction();
 
+    void selectAllTransactions();
+
     void setColumnSelectorGroupName(const QString& groupName);
 
     void editNewTransaction();

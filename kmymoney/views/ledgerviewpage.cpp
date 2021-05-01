@@ -361,6 +361,9 @@ void LedgerViewPage::executeAction(eMenu::Action action, const SelectedObjects& 
         }
         break;
     }
+    case eMenu::Action::SelectAllTransactions:
+        d->ui->m_ledgerView->selectAllTransactions();
+        break;
     default:
         break;
     }

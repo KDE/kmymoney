@@ -471,7 +471,9 @@ void KPayeesView::executeAction(eMenu::Action action, const SelectedObjects& sel
         }
         break;
     }
-
+    case eMenu::Action::SelectAllTransactions:
+        d->ui->m_register->selectAllTransactions();
+        break;
     default:
         break;
     }

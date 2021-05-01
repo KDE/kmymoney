@@ -779,3 +779,50 @@ void LedgerView::setSelectedJournalEntries(const QStringList& journalEntryIds)
     selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
     setCurrentIndex(currentIdx);
 }
+
+void LedgerView::selectAllTransactions()
+{
+    QItemSelection selection;
+    const auto journalModel = MyMoneyFile::instance()->journalModel();
+    int startRow = -1;
+    int lastRow = -1;
+    const auto lastColumn = model()->columnCount() - 1;
+    const auto rows = model()->rowCount();
+
+    auto createSelectionRange = [&]() {
+        if (startRow != -1) {
+            selection.select(model()->index(startRow, 0), model()->index(lastRow, lastColumn));
+            startRow = -1;
+        }
+    };
+
+    for (auto row = 0; row < rows; ++row) {
+        const auto idx = model()->index(row, 0);
+        if (!idx.data(eMyMoney::Model::JournalTransactionIdRole).toString().isEmpty()) {
+            auto baseIdx = journalModel->mapToBaseSource(idx);
+            if (baseIdx.model() == journalModel) {
+                if (startRow == -1) {
+                    startRow = row;
+                    lastRow = row;
+                } else {
+                    if (row == (lastRow + 1)) {
+                        lastRow = row;
+                    } else {
+                        // a new range start, so we take care of it
+                        createSelectionRange();
+                    }
+                }
+            } else {
+                // a range ends, so we take care of it
+                createSelectionRange();
+            }
+        } else {
+            // a range ends, so we take care of it
+            createSelectionRange();
+        }
+    }
+    // add a possibly dangling range
+    createSelectionRange();
+
+    selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
+}

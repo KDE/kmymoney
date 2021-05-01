@@ -518,6 +518,7 @@ void SimpleLedgerView::executeAction(eMenu::Action action, const SelectedObjects
     case eMenu::Action::OpenAccount:
     case eMenu::Action::EditTransaction:
     case eMenu::Action::EditSplits:
+    case eMenu::Action::SelectAllTransactions:
         if (!accountId.isEmpty()) {
             openLedger(accountId);
             auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());

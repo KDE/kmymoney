@@ -462,6 +462,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
     pActions[eMenu::Action::MarkNotReconciled]->setDisabled(true);
     pActions[eMenu::Action::MarkCleared]->setDisabled(true);
     pActions[eMenu::Action::MarkReconciled]->setDisabled(true);
+    pActions[eMenu::Action::SelectAllTransactions]->setEnabled(false);
 
     if (!selections.selection(SelectedObjects::JournalEntry).isEmpty()) {
         pActions[eMenu::Action::MarkNotReconciled]->setEnabled(true);
@@ -475,6 +476,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
         // intentional fall through
 
     case View::Payees:
+        pActions[eMenu::Action::SelectAllTransactions]->setEnabled(true);
         if (selections.selection(SelectedObjects::JournalEntry).isEmpty()) {
             pActions[eMenu::Action::EditTransaction]->setDisabled(true);
             pActions[eMenu::Action::EditSplits]->setDisabled(true);

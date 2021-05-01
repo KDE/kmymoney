@@ -1732,6 +1732,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::NewTransaction,                &KMyMoneyApp::slotExecuteAction},
             {Action::EditTransaction,               &KMyMoneyApp::slotExecuteAction},
             {Action::EditSplits,                    &KMyMoneyApp::slotExecuteAction},
+            {Action::SelectAllTransactions,         &KMyMoneyApp::slotExecuteAction},
             {Action::DeleteTransaction,             &KMyMoneyApp::slotDeleteTransactions},
             {Action::DuplicateTransaction,          &KMyMoneyApp::slotDuplicateTransactions},
             {Action::AddReversingTransaction,       &KMyMoneyApp::slotDuplicateTransactions},
@@ -2242,9 +2243,11 @@ void KMyMoneyApp::slotDeleteTransactions()
     MyMoneyFileTransaction ft;
     for (const auto& journalEntryId : d->m_selections.selection(SelectedObjects::JournalEntry)) {
         const auto journalEntry = file->journalModel()->itemById(journalEntryId);
-        if (!journalEntry.transaction().id().isEmpty()) {
-            if (!file->referencesClosedAccount(journalEntry.transaction())) {
-                file->removeTransaction(journalEntry.transaction());
+        if (!journalEntry.id().isEmpty()) {
+            if (!journalEntry.transaction().id().isEmpty()) {
+                if (!file->referencesClosedAccount(journalEntry.transaction())) {
+                    file->removeTransaction(journalEntry.transaction());
+                }
             }
         }
     }
