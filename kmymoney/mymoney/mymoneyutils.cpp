@@ -165,35 +165,43 @@ QString MyMoneyUtils::paymentMethodToString(eMyMoney::Schedule::PaymentType paym
 modifyTransactionWarnLevel_t MyMoneyUtils::transactionWarnLevel(const QStringList& journalEntryIds)
 {
     modifyTransactionWarnLevel_t level = NoWarning;
-    for (const auto& journalEntryId : journalEntryIds) {
-        const auto rc = transactionWarnLevel(journalEntryId);
-        if (rc > level) {
-            level = rc;
+
+    const auto file = MyMoneyFile::instance();
+    const auto journalModel = file->journalModel();
+    const auto rows = journalModel->rowCount();
+
+    QString lastTransactionId;
+
+    for (auto row = 0; row < rows; ++row) {
+        const auto idx = journalModel->index(row, 0);
+        if (idx.data(eMyMoney::Model::JournalTransactionIdRole).toString() != lastTransactionId) {
+            if (journalEntryIds.contains(idx.data(eMyMoney::Model::IdRole).toString())) {
+                modifyTransactionWarnLevel_t rc = NoWarning;
+                try {
+                    const auto journalEntry = journalModel->itemByIndex(idx);
+                    for (const auto& split : journalEntry.transaction().splits()) {
+                        auto acc = file->account(split.accountId());
+                        if (acc.isClosed())
+                            rc = OneAccountClosed;
+                        else if (split.reconcileFlag() == eMyMoney::Split::State::Frozen)
+                            rc = OneSplitFrozen;
+                        else if (split.reconcileFlag() == eMyMoney::Split::State::Reconciled && rc < OneSplitReconciled)
+                            rc = OneSplitReconciled;
+                    }
+                } catch (const MyMoneyException& e) {
+                    qDebug() << "Exception in MyMoneyUtils::transactionWarnLevel():" << e.what();
+                }
+                lastTransactionId = idx.data(eMyMoney::Model::JournalTransactionIdRole).toString();
+                if (rc > level) {
+                    level = rc;
+                }
+            }
         }
     }
     return level;
 }
+
 modifyTransactionWarnLevel_t MyMoneyUtils::transactionWarnLevel(const QString& journalEntryId)
 {
-    const auto file = MyMoneyFile::instance();
-    modifyTransactionWarnLevel_t level = NoWarning;
-
-    try {
-        const auto journalEntry = file->journalModel()->itemById(journalEntryId);
-        if (!journalEntry.id().isEmpty()) {
-            for (const auto& split : journalEntry.transaction().splits()) {
-                auto acc = file->account(split.accountId());
-                if (acc.isClosed())
-                    level = OneAccountClosed;
-                else if (split.reconcileFlag() == eMyMoney::Split::State::Frozen)
-                    level = OneSplitFrozen;
-                else if (split.reconcileFlag() == eMyMoney::Split::State::Reconciled && level < OneSplitReconciled)
-                    level = OneSplitReconciled;
-            }
-        }
-    } catch (const MyMoneyException&) {
-        // qDebug("Exception in SelectedTransaction::warnLevel(): %s", e.what());
-    }
-
-    return level;
+    return transactionWarnLevel(QStringList(journalEntryId));
 }

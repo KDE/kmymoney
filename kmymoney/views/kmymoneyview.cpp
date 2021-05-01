@@ -509,6 +509,9 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
                         multipleSplitTransactions++;
                         break;
                     }
+                    if (multipleSplitTransactions > 1) {
+                        break;
+                    }
                 }
                 if (singleSplitTransactions > 0 && multipleSplitTransactions == 1) {
                     pActions[eMenu::Action::CopySplits]->setEnabled(true);
