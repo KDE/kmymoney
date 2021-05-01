@@ -140,7 +140,6 @@ public:
 
         columnSelector->setModel(m_filterProxyModel);
 
-        ui->m_subAccountLabel->setText(i18n("Is a sub account"));
         q->connect(ui->m_parentAccounts->selectionModel(), &QItemSelectionModel::selectionChanged,
                    q, &KNewAccountDlg::slotSelectionChanged);
 
@@ -576,9 +575,17 @@ public:
     void selectParentAccount(const QModelIndex& parentIndex)
     {
         ui->m_parentAccounts->expand(parentIndex);
-        ui->m_parentAccounts->selectionModel()->select(parentIndex, QItemSelectionModel::SelectCurrent);
         ui->m_parentAccounts->setCurrentIndex(parentIndex);
+        ui->m_parentAccounts->selectionModel()->select(parentIndex, QItemSelectionModel::SelectCurrent);
         ui->m_parentAccounts->scrollTo(parentIndex, QAbstractItemView::PositionAtCenter);
+    }
+
+    void changeHierarchyLabel()
+    {
+        const auto idx = ui->m_parentAccounts->currentIndex();
+        const auto fullName = idx.data(eMyMoney::Model::AccountFullHierarchyNameRole).toString();
+        ui->m_subAccountLabel->setText(i18nc("@label:choser %1 account name, %2 parent account name", "<b>%1</b> is a sub account of <b>%2</b>")
+                                           .arg(ui->accountNameEdit->text(), fullName));
     }
 
     KNewAccountDlg*             q_ptr;
@@ -602,6 +609,11 @@ KNewAccountDlg::KNewAccountDlg(const MyMoneyAccount& account, bool isEditing, bo
     d->init();
     if (!title.isEmpty())
         setWindowTitle(title);
+
+    connect(d->ui->accountNameEdit, &QLineEdit::textChanged, this, [&]() {
+        Q_D(KNewAccountDlg);
+        d->changeHierarchyLabel();
+    });
 }
 
 MyMoneyMoney KNewAccountDlg::openingBalance() const
@@ -790,7 +802,7 @@ void KNewAccountDlg::slotSelectionChanged(const QItemSelection &current, const Q
         auto baseIdx = MyMoneyFile::baseModel()->mapToBaseSource(current.indexes().front());
         if (baseIdx.isValid()) {
             d->m_parentAccount = MyMoneyFile::instance()->accountsModel()->itemByIndex(baseIdx);
-            d->ui->m_subAccountLabel->setText(i18n("Is a sub account of %1", d->m_parentAccount.name()));
+            d->changeHierarchyLabel();
         }
     }
 }
