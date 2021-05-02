@@ -35,9 +35,9 @@ class KMyMoneyViewBase;
 class KMyMoneyViewBasePrivate
 {
 public:
-
     explicit KMyMoneyViewBasePrivate(KMyMoneyViewBase* parent)
         : q_ptr(parent)
+        , m_isActiveView(false)
         , m_needsRefresh(false)
         , m_havePendingChanges(false)
     {}
@@ -78,11 +78,17 @@ public:
         return formatViewLabelValue(value, scheme);
     }
 
-    KMyMoneyViewBase*     q_ptr;
-    SelectedObjects       m_selections;
+    bool isActiveView() const
+    {
+        return m_isActiveView;
+    }
+
+    KMyMoneyViewBase* q_ptr;
+    SelectedObjects m_selections;
     QHash<eMenu::Action, QAction*> m_sharedToolbarActions;
-    bool                  m_needsRefresh;
-    bool                  m_havePendingChanges;
+    bool m_isActiveView;
+    bool m_needsRefresh;
+    bool m_havePendingChanges;
 };
 
 #endif

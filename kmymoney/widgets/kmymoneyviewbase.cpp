@@ -48,12 +48,15 @@ void KMyMoneyViewBase::aboutToShow()
 {
     Q_D(KMyMoneyViewBase);
 
+    d->m_isActiveView = true;
     // tell everyone what is selected here
     emit requestSelectionChange(d->m_selections);
 }
 
 void KMyMoneyViewBase::aboutToHide()
 {
+    Q_D(KMyMoneyViewBase);
+    d->m_isActiveView = false;
 }
 
 void KMyMoneyViewBase::changeEvent(QEvent* ev)
