@@ -521,6 +521,9 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
 
 void KMyMoneyView::slotSettingsChanged()
 {
+    Q_D(KMyMoneyView);
+    d->m_header->setVisible(KMyMoneySettings::showTitleBar());
+
     const auto showHeaders = KMyMoneySettings::showFancyMarker();
     QDate firstFiscalDate;
     if (KMyMoneySettings::showFiscalMarker())
