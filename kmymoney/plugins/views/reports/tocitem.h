@@ -1,5 +1,5 @@
 /*
-    copyright            : (C) Bernd Gonsior <bernd.gonsior@googlemail.com>
+    SPDX-FileCopyrightText: Bernd Gonsior <bernd.gonsior@googlemail.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 #ifndef TOCITEM_H
