@@ -96,13 +96,18 @@ KReportsView::~KReportsView()
 
 void KReportsView::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
+    Q_D(KReportsView);
     switch (action) {
     case eMenu::Action::ReportOpen:
         slotOpenReport(selections.firstSelection(SelectedObjects::Report));
         break;
     case eMenu::Action::Print:
-        slotPrintView();
+        if (d->isActiveView()) {
+            slotPrintView();
+        }
         break;
+    case eMenu::Action::FileClose:
+        slotCloseAll();
     default:
         break;
     }
@@ -118,10 +123,6 @@ void KReportsView::executeCustomAction(eView::Action action)
 
     case eView::Action::SetDefaultFocus:
         QTimer::singleShot(0, d->m_tocTreeWidget, SLOT(setFocus()));
-        break;
-
-    case eView::Action::CleanupBeforeFileClose:
-        slotCloseAll();
         break;
 
     case eView::Action::ShowBalanceChart:

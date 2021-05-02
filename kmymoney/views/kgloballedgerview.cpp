@@ -110,6 +110,7 @@ KGlobalLedgerView::~KGlobalLedgerView()
 
 void KGlobalLedgerView::executeCustomAction(eView::Action action)
 {
+#if 0
     Q_D(KGlobalLedgerView);
     switch(action) {
     case eView::Action::Refresh:
@@ -142,6 +143,7 @@ void KGlobalLedgerView::executeCustomAction(eView::Action action)
     default:
         break;
     }
+#endif
 }
 
 void KGlobalLedgerView::refresh()

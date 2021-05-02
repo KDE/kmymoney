@@ -56,7 +56,6 @@ enum class Action {
     ClosePayeeIdentifierSource,
     EditInstitution,
     EditSchedule,
-    CleanupBeforeFileClose,
     InitializeAfterFileOpen,
     DisableViewDepenedendActions,
     ShowBalanceChart,

@@ -138,6 +138,7 @@ public:
             {eMenu::Action::OpenAccount, View::NewLedgers},
             {eMenu::Action::GoToAccount, View::NewLedgers},
             {eMenu::Action::ReportOpen, View::Reports},
+            {eMenu::Action::FileClose, View::Home},
         };
 
         const auto viewId = actionRoutes.value(action, View::None);
@@ -250,21 +251,6 @@ void KMyMoneyView::slotFileOpened()
 
     // make sure to catch view activations
     connect(this, &KMyMoneyView::viewActivated, this, &KMyMoneyView::slotRememberLastView);
-}
-
-void KMyMoneyView::slotFileClosed()
-{
-    Q_D(KMyMoneyView);
-    disconnect(this, &KMyMoneyView::viewActivated, this, &KMyMoneyView::slotRememberLastView);
-
-    showPageAndFocus(View::Home);
-
-    for( const auto& view : qAsConst(d->viewBases)) {
-        view->executeCustomAction(eView::Action::CleanupBeforeFileClose);
-    }
-
-    pActions[eMenu::Action::Print]->setEnabled(false);
-    pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(false);
 }
 
 void KMyMoneyView::showTitleBar(bool show)
@@ -836,9 +822,23 @@ void KMyMoneyView::executeAction(eMenu::Action action, const SelectedObjects& se
     Q_D(KMyMoneyView);
 
     d->switchView(action);
-    d->viewBases[d->currentViewId()]->executeAction(action, selections);
-    // maybe, we need to pass by all views
-    // in case the action is unknown to the routing table
+
+    switch (action) {
+    case eMenu::Action::FileClose:
+        disconnect(this, &KMyMoneyView::viewActivated, this, &KMyMoneyView::slotRememberLastView);
+        break;
+    default:
+        break;
+    }
+
+    // execute the action, at last on the current view
+    const auto currentView = d->viewBases[d->currentViewId()];
+    for (const auto view : d->viewBases) {
+        if (view != currentView) {
+            view->executeAction(action, selections);
+        }
+    }
+    currentView->executeAction(action, selections);
 }
 
 void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)

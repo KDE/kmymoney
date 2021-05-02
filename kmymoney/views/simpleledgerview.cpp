@@ -382,6 +382,11 @@ void SimpleLedgerView::closeLedger(int idx)
     Q_D(SimpleLedgerView);
     // don't react on the close request for the new ledger function
     if(idx != (d->ui->ledgerTab->count()-1)) {
+        // if the currently selected ledger is closed, we
+        // remove any selection
+        d->m_selections.clearSelections();
+        emit requestSelectionChange(d->m_selections);
+
         auto tab = d->ui->ledgerTab->widget(idx);
         d->ui->ledgerTab->removeTab(idx);
         delete tab;
@@ -500,9 +505,6 @@ void SimpleLedgerView::executeCustomAction(eView::Action action)
     case eView::Action::InitializeAfterFileOpen:
         d->openLedgersAfterFileOpen();
         break;
-    case eView::Action::CleanupBeforeFileClose:
-        d->closeLedgers();
-        break;
     default:
         break;
     }
@@ -511,7 +513,7 @@ void SimpleLedgerView::executeCustomAction(eView::Action action)
 void SimpleLedgerView::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
     Q_D(SimpleLedgerView);
-    const auto accountId = selections.selection(SelectedObjects::Account).first();
+    const auto accountId = selections.firstSelection(SelectedObjects::Account);
     switch (action) {
     case eMenu::Action::GoToAccount:
     case eMenu::Action::NewTransaction:
@@ -519,13 +521,16 @@ void SimpleLedgerView::executeAction(eMenu::Action action, const SelectedObjects
     case eMenu::Action::EditTransaction:
     case eMenu::Action::EditSplits:
     case eMenu::Action::SelectAllTransactions:
-        if (!accountId.isEmpty()) {
+        if (d->isActiveView() && !accountId.isEmpty()) {
             openLedger(accountId);
             auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());
             if (view) {
                 view->executeAction(action, selections);
             }
         }
+        break;
+    case eMenu::Action::FileClose:
+        d->closeLedgers();
         break;
     default:
         break;

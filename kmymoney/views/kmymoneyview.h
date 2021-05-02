@@ -215,7 +215,6 @@ public Q_SLOTS:
     void slotSettingsChanged();
 
     void slotFileOpened();
-    void slotFileClosed();
 
     void updateActions(const SelectedObjects& selections);
 

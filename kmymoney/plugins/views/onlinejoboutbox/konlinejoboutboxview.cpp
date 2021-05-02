@@ -406,6 +406,18 @@ void KOnlineJobOutboxView::showEvent(QShowEvent* event)
     QWidget::showEvent(event);
 }
 
+void KOnlineJobOutboxView::executeAction(eMenu::Action action, const SelectedObjects& selections)
+{
+    Q_D(KOnlineJobOutboxView);
+    switch (action) {
+    case eMenu::Action::FileClose:
+        d->onlineJobsModel()->unload();
+        break;
+    default:
+        break;
+    }
+}
+
 void KOnlineJobOutboxView::executeCustomAction(eView::Action action)
 {
     Q_D(KOnlineJobOutboxView);
@@ -416,10 +428,6 @@ void KOnlineJobOutboxView::executeCustomAction(eView::Action action)
 
     case eView::Action::InitializeAfterFileOpen:
         d->onlineJobsModel()->load();
-        break;
-
-    case eView::Action::CleanupBeforeFileClose:
-        d->onlineJobsModel()->unload();
         break;
 
     default:

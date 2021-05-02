@@ -458,21 +458,29 @@ void KPayeesView::executeAction(eMenu::Action action, const SelectedObjects& sel
     const auto idx = d->ui->m_register->currentIndex();
     switch (action) {
     case eMenu::Action::GoToPayee:
-        d->selectPayeeAndTransaction(payeeId, accountId, journalEntryId);
-        break;
-    case eMenu::Action::EditTransaction:
-        d->ui->m_register->edit(d->ui->m_register->currentIndex());
-        break;
-    case eMenu::Action::EditSplits: {
-        d->ui->m_register->edit(idx);
-        const auto editor = d->ui->m_register->indexWidget(d->ui->m_register->editIndex());
-        if (editor) {
-            QMetaObject::invokeMethod(editor, "editSplits", Qt::QueuedConnection);
+        if (d->isActiveView()) {
+            d->selectPayeeAndTransaction(payeeId, accountId, journalEntryId);
         }
         break;
-    }
+    case eMenu::Action::EditTransaction:
+        if (d->isActiveView()) {
+            d->ui->m_register->edit(d->ui->m_register->currentIndex());
+        }
+        break;
+    case eMenu::Action::EditSplits:
+        if (d->isActiveView()) {
+            d->ui->m_register->edit(idx);
+            const auto editor = d->ui->m_register->indexWidget(d->ui->m_register->editIndex());
+            if (editor) {
+                QMetaObject::invokeMethod(editor, "editSplits", Qt::QueuedConnection);
+            }
+        }
+        break;
+
     case eMenu::Action::SelectAllTransactions:
-        d->ui->m_register->selectAllTransactions();
+        if (d->isActiveView()) {
+            d->ui->m_register->selectAllTransactions();
+        }
         break;
     default:
         break;

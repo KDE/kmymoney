@@ -74,9 +74,15 @@ void KHomeView::executeAction(eMenu::Action action, const SelectedObjects& selec
 {
     Q_UNUSED(selections)
 
+    Q_D(KHomeView);
     switch (action) {
     case eMenu::Action::Print:
-        slotPrintView();
+        if (d->isActiveView()) {
+            slotPrintView();
+        }
+        break;
+    case eMenu::Action::FileClose:
+        d->m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
         break;
     default:
         break;
@@ -89,10 +95,6 @@ void KHomeView::executeCustomAction(eView::Action action)
     switch(action) {
     case eView::Action::Refresh:
         refresh();
-        break;
-
-    case eView::Action::CleanupBeforeFileClose:
-        d->m_view->setHtml(KWelcomePage::welcomePage(), QUrl("file://"));
         break;
 
     default:

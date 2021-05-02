@@ -1045,26 +1045,29 @@ public:
 
     void updateActions(const SelectedObjects& selections)
     {
-        static const QVector<Action> actions = {Action::FilePersonalData,
-                                                Action::FileInformation,
-                                                Action::FileImportTemplate,
-                                                Action::FileExportTemplate,
+        static const QVector<Action> actions = {
+            Action::FilePersonalData,
+            Action::FileInformation,
+            Action::FileImportTemplate,
+            Action::FileExportTemplate,
 #ifdef KMM_DEBUG
-                                                Action::FileDump,
+            Action::FileDump,
 #endif
-                                                Action::EditFindTransaction,
-                                                Action::NewCategory,
-                                                Action::ToolCurrencies,
-                                                Action::ToolPrices,
-                                                Action::ToolUpdatePrices,
-                                                Action::ToolConsistency,
-                                                Action::ToolPerformance,
-                                                Action::NewAccount,
-                                                Action::NewInstitution,
-                                                Action::NewSchedule,
-                                                Action::ShowFilterWidget,
-                                                Action::NewPayee,
-                                                Action::NewTag};
+            Action::EditFindTransaction,
+            Action::NewCategory,
+            Action::ToolCurrencies,
+            Action::ToolPrices,
+            Action::ToolUpdatePrices,
+            Action::ToolConsistency,
+            Action::ToolPerformance,
+            Action::NewAccount,
+            Action::NewInstitution,
+            Action::NewSchedule,
+            Action::ShowFilterWidget,
+            Action::NewPayee,
+            Action::NewTag,
+            Action::Print,
+        };
 
         for (const auto& action : actions)
             pActions[action]->setEnabled(m_storageInfo.isOpened);
@@ -1081,7 +1084,7 @@ public:
         auto aC = q->actionCollection();
         aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::SaveAs)))->setEnabled(canFileSaveAs());
         aC->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Close)))->setEnabled(m_storageInfo.isOpened);
-        pActions[Action::UpdateAllAccounts]->setEnabled(KMyMoneyUtils::canUpdateAllAccounts());
+        pActions[Action::UpdateAllAccounts]->setEnabled(m_storageInfo.isOpened && KMyMoneyUtils::canUpdateAllAccounts());
 
         // update actions in views and plugins
         m_myMoneyView->updateActions(selections);
@@ -1166,7 +1169,7 @@ public:
         case eKMyMoney::FileAction::Closing:
             disconnect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
             // make sure to not catch view activations anymore
-            m_myMoneyView->slotFileClosed();
+            m_myMoneyView->executeAction(Action::FileClose, SelectedObjects());
             // notify the models that the file is going to be closed (we should have something like dataChanged that reaches the models first)
             MyMoneyFile::instance()->unload();
             break;
@@ -1510,7 +1513,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
     d->m_recentFiles = KStandardAction::openRecent(this, &KMyMoneyApp::slotFileOpenRecent, aC);
     KStandardAction::save(this, &KMyMoneyApp::slotFileSave, aC);
     KStandardAction::saveAs(this, &KMyMoneyApp::slotFileSaveAs, aC);
-    KStandardAction::close(this, &KMyMoneyApp::slotFileClose, aC);
+    lutActions.insert(Action::FileClose, KStandardAction::close(this, &KMyMoneyApp::slotFileClose, aC));
     KStandardAction::quit(this, &KMyMoneyApp::slotFileQuit, aC);
     lutActions.insert(Action::Print, KStandardAction::print(this, &KMyMoneyApp::slotExecuteAction, aC));
     KStandardAction::preferences(this, &KMyMoneyApp::slotSettings, aC);
@@ -3937,6 +3940,10 @@ bool KMyMoneyApp::slotFileClose()
 
     if (!d->askAboutSaving())
         return false;
+
+    // prevent starting action checks
+    // when there is no file open
+    d->m_actionCollectorTimer.stop();
 
     d->fileAction(eKMyMoney::FileAction::Closing);
 
