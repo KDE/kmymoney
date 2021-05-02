@@ -9,11 +9,11 @@
 #include <config-kmymoney.h>
 #include "ui_pluginsettingsdecl.h"
 
-// Override QUrl
-#include <misc/kmmurl.h>
-
 #include <KCModule>
 #include <QWidget>
+
+// Override QUrl
+#include "kmmurl.h"
 
 class QTextEdit;
 class QTextDocument;
