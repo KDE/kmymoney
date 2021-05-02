@@ -159,7 +159,7 @@ public:
         q->resize(QSize(670, 550).expandedTo(q->minimumSizeHint()));
 
         m_titleLabel->setText(i18n("No Title specified"));
-        m_titleLabel->setRightImageFile("pics/titlelabel_background.png");
+        m_titleLabel->setRightImageFile(":/pics/titlelabel_background.png");
 
         m_finishButton->hide();
 
