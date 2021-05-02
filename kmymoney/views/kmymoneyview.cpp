@@ -821,8 +821,7 @@ void KMyMoneyView::executeAction(eMenu::Action action, const SelectedObjects& se
 {
     Q_D(KMyMoneyView);
 
-    d->switchView(action);
-
+    // when closing, we don't remember the switch to the home view anymore
     switch (action) {
     case eMenu::Action::FileClose:
         disconnect(this, &KMyMoneyView::viewActivated, this, &KMyMoneyView::slotRememberLastView);
@@ -830,6 +829,8 @@ void KMyMoneyView::executeAction(eMenu::Action action, const SelectedObjects& se
     default:
         break;
     }
+
+    d->switchView(action);
 
     // execute the action, at last on the current view
     const auto currentView = d->viewBases[d->currentViewId()];
