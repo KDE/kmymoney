@@ -620,7 +620,7 @@ void KReportsView::slotListContextMenu(const QPoint & p)
         }
     }
 
-    contextmenu->popup(d->m_tocTreeWidget->mapToGlobal(p));
+    contextmenu->popup(d->m_tocTreeWidget->viewport()->mapToGlobal(p));
 }
 
 void KReportsView::slotOpenFromList()
