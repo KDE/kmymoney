@@ -1,0 +1,12 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: kmymoney
+Upstream-Contact: Thomas Baumgart <tbaumgart@kde.org>
+Source: https://invent.kde.org/office/kmymoney
+
+Files: kmymoney/templates/*/*.kmt
+Copyright: GnuCash project
+License: GPL-2.0-or-later
+
+Files: kmymoney/icons/*
+Copyright: KDE Community
+License: LGPL-3.0-only
