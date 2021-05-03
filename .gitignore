@@ -10,3 +10,7 @@ moc_*.cpp
 *.moc
 kmymoney/icons/icons.qrc
 kmymoney/templates/templates.qrc
+/compile_commands.json
+.clangd
+.cache
+.idea
