@@ -380,7 +380,7 @@ void KMyMoneyPriceDlg::slotShowPriceMenu(const QPoint& p)
             connect(a, &QAction::triggered, this, info.callback);
             LUTActions.append(a);
         }
-        menu->addSection(i18nc("Menu header","Price options"));
+        menu->addSection(i18nc("@title:menu", "Price options"));
         menu->addActions(LUTActions);
         menu->exec(QCursor::pos());
     }

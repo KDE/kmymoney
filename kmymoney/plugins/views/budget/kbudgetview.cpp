@@ -444,7 +444,7 @@ void KBudgetView::createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiCl
     // remains a mystery to me. Apparently, I am also too stupid to get the window tile showing up
     if (!d->m_contextMenu) {
         d->m_contextMenu = new QMenu(this);
-        d->m_contextMenu->setWindowTitle(i18nc("@title:menu Bugdet context menu", "Budget options"));
+        d->m_contextMenu->addSection(i18nc("@title:menu budget context menu", "Budget options"));
         for (const auto& actionInfo : actionInfos) {
             d->m_contextMenu->insertAction(nullptr, d->m_actions[actionInfo.id]);
         }

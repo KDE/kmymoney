@@ -195,7 +195,7 @@ void KOnlineJobOutboxView::createActions(KXMLGUIFactory* guiFactory, KXMLGUIClie
     // remains a mystery to me. Apparently, I am also too stupid to get the window tile showing up
     if (!d->m_contextMenu) {
         d->m_contextMenu = new QMenu(this);
-        d->m_contextMenu->setWindowTitle(i18nc("@title:menu Online job context menu", "Credit transfer options"));
+        d->m_contextMenu->addSection(i18nc("@title:menu Online job context menu", "Credit transfer options"));
         for (const auto& actionInfo : actionInfos) {
             d->m_contextMenu->insertAction(nullptr, d->m_actions[actionInfo.id]);
         }

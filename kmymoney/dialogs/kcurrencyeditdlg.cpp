@@ -514,7 +514,7 @@ void KCurrencyEditDlg::slotShowCurrencyMenu(const QPoint& p)
             connect(a, &QAction::triggered, this, info.callback);
             LUTActions.append(a);
         }
-        menu->addSection(i18nc("Menu header","Currency options"));
+        menu->addSection(i18nc("@title:menu", "Currency options"));
         menu->addActions(LUTActions);
         menu->exec(QCursor::pos());
     }

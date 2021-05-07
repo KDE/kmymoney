@@ -385,7 +385,7 @@ void KAccountsView::slotAccountMapOnline()
         break;
     default: {
         QMenu popup(this);
-        popup.setTitle(i18n("Select online banking plugin"));
+        popup.addSection(i18nc("@title:menu Online provider selection", "Online provider"));
 
         // Populate the pick list with all the provider
         for (it_p = d->m_onlinePlugins->constBegin(); it_p != d->m_onlinePlugins->constEnd(); ++it_p) {
