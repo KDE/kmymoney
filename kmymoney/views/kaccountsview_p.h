@@ -395,13 +395,13 @@ public:
 
             pActions[eMenu::Action::ChartAccountBalance]->setEnabled(true);
 
-            if (m_currentAccount.hasOnlineMapping()) {
+            if (acc.hasOnlineMapping()) {
                 pActions[eMenu::Action::UnmapOnlineAccount]->setEnabled(true);
 
                 if (m_onlinePlugins) {
                     // check if provider is available
                     QMap<QString, KMyMoneyPlugin::OnlinePlugin*>::const_iterator it_p;
-                    it_p = m_onlinePlugins->constFind(m_currentAccount.onlineBankingSettings().value(QLatin1String("provider")).toLower());
+                    it_p = m_onlinePlugins->constFind(acc.onlineBankingSettings().value(QLatin1String("provider")).toLower());
                     if (it_p != m_onlinePlugins->constEnd()) {
                         QStringList protocols;
                         (*it_p)->protocols(protocols);
