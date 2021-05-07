@@ -33,9 +33,6 @@ enum class Intent {
     ShowTransactionInLedger,
     SynchronizeAccountInInvestmentView,
     SynchronizeAccountInLedgersView,
-    ToggleColumn,
-    UpdateNetWorth,                             // deprecated
-    UpdateProfit,                               // deprecated
     StartEnteringOverdueScheduledTransactions,
     FinishEnteringOverdueScheduledTransactions,
     EnterSchedule,

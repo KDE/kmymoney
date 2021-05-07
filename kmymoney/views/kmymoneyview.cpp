@@ -289,57 +289,6 @@ void KMyMoneyView::updateViewType()
     }
 }
 
-void KMyMoneyView::slotAccountTreeViewChanged(const eAccountsModel::Column column, const bool show)
-{
-/// @todo "Reimplement global acccount column visibility"
-    /// @todo port to new model code
-#if 0
-    QVector<AccountsViewProxyModel *> proxyModels
-    {
-        static_cast<KMyMoneyAccountsViewBase*>(viewBases[View::Institutions])->getProxyModel(),
-        static_cast<KMyMoneyAccountsViewBase*>(viewBases[View::Accounts])->getProxyModel(),
-        static_cast<KMyMoneyAccountsViewBase*>(viewBases[View::Categories])->getProxyModel()
-    };
-
-    if (viewBases.contains(View::Budget))
-        proxyModels.append(static_cast<KMyMoneyAccountsViewBase*>(viewBases[View::Budget])->getProxyModel());
-
-    for (auto i = proxyModels.count() - 1; i >= 0; --i) { // weed out unloaded views
-        if (!proxyModels.at(i))
-            proxyModels.removeAt(i);
-    }
-
-    QString question;
-
-    if (show)
-        question = i18n("Do you want to show <b>%1</b> column on every loaded view?", AccountsModel::getHeaderName(column));
-    else
-        question = i18n("Do you want to hide <b>%1</b> column on every loaded view?", AccountsModel::getHeaderName(column));
-
-
-    if (proxyModels.count() == 1 || // no need to ask what to do with other views because they aren't loaded
-            KMessageBox::questionYesNo(this,
-                                       question,
-                                       QString(),
-                                       KStandardGuiItem::yes(), KStandardGuiItem::no(),
-                                       QStringLiteral("ShowColumnOnEveryView")) == KMessageBox::Yes) {
-        MyMoneyFile::instance()->accountsModel()->setColumnVisibility(column, show);
-        MyMoneyFile::instance()->institutionsModel()->setColumnVisibility(column, show);
-        foreach(AccountsViewProxyModel *proxyModel, proxyModels) {
-            if (!proxyModel)
-                continue;
-            proxyModel->setColumnVisibility(column, show);
-            proxyModel->invalidate();
-        }
-    } else if(show) {
-        // in case we need to show it, we have to make sure to set the visibility
-        // in the base model as well. Otherwise, we don't see the column through the proxy model
-        MyMoneyFile::instance()->accountsModel()->setColumnVisibility(column, show);
-        MyMoneyFile::instance()->institutionsModel()->setColumnVisibility(column, show);
-    }
-#endif
-}
-
 void KMyMoneyView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins)
 {
     Q_D(KMyMoneyView);
@@ -859,35 +808,10 @@ void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Inten
             emit statusMsg(variant.first().toString());
         break;
 
-        /// @todo cleanup
-#if 0
-    case eView::Intent::UpdateNetWorth:
-        if (viewBases.contains(View::Accounts))
-            viewBases[View::Accounts]->slotSelectByVariant(variant, intent);
-
-        if (viewBases.contains(View::Institutions))
-            viewBases[View::Institutions]->slotSelectByVariant(variant, intent);
-        break;
-#endif
-
-    case eView::Intent::UpdateProfit:
-        if (d->viewBases.contains(View::Categories))
-            d->viewBases[View::Categories]->slotSelectByVariant(variant, intent);
-        break;
-
     case eView::Intent::ShowTransactionInLedger:
         if (d->viewBases.contains(View::NewLedgers)) {
             showPage(View::NewLedgers);
             d->viewBases[View::NewLedgers]->slotSelectByVariant(variant, intent);
-        }
-        break;
-
-    case eView::Intent::ToggleColumn:
-        if (variant.count() == 2) {
-            /// @todo port to new model code
-#if 0
-            slotAccountTreeViewChanged(variant.at(0).value<eAccountsModel::Column>(), variant.at(1).value<bool>());
-#endif
         }
         break;
 

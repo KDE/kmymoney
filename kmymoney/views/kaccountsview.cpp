@@ -186,13 +186,6 @@ void KAccountsView::slotSelectByVariant(const QVariantList& variant, eView::Inte
 {
     Q_D(KAccountsView);
     switch (intent) {
-        /// @todo cleanup
-#if 0
-    case eView::Intent::UpdateNetWorth:
-        if (variant.count() == 1)
-            slotNetWorthChanged(variant.first().value<MyMoneyMoney>());
-        break;
-#endif
     case eView::Intent::SetOnlinePlugins:
         if (variant.count() == 1)
             d->m_onlinePlugins = static_cast<QMap<QString, KMyMoneyPlugin::OnlinePlugin*>*>(variant.first().value<void*>());

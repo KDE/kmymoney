@@ -137,8 +137,6 @@ public:
       */
     void updateViewType();
 
-    void slotAccountTreeViewChanged(const eAccountsModel::Column column, const bool show);
-
     void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins);
 
     // TODO: remove that function
