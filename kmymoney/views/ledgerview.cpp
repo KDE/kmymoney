@@ -8,13 +8,16 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QAction>
+#include <QDate>
+#include <QDebug>
 #include <QHeaderView>
+#include <QMenu>
 #include <QPainter>
 #include <QResizeEvent>
-#include <QDate>
 #include <QScrollBar>
-#include <QAction>
-#include <QDebug>
+#include <QSet>
+#include <QWidgetAction>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -25,37 +28,38 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "menuenums.h"
-#include "mymoneyfile.h"
-#include "mymoneymoney.h"
-#include "mymoneyfile.h"
 #include "accountsmodel.h"
-#include "journalmodel.h"
-#include "specialdatesmodel.h"
 #include "columnselector.h"
-#include "mymoneyenums.h"
 #include "delegateproxy.h"
 #include "journaldelegate.h"
+#include "journalmodel.h"
+#include "kmymoneyaccountselector.h"
+#include "menuenums.h"
+#include "mymoneyenums.h"
+#include "mymoneyfile.h"
+#include "mymoneymoney.h"
 #include "onlinebalancedelegate.h"
-#include "specialdatedelegate.h"
 #include "schedulesjournalmodel.h"
-#include "transactioneditorbase.h"
 #include "selectedobjects.h"
+#include "specialdatedelegate.h"
+#include "specialdatesmodel.h"
+#include "transactioneditorbase.h"
 
 Q_GLOBAL_STATIC(LedgerView*, s_globalEditView);
 
 class LedgerView::Private
 {
 public:
-    Private(LedgerView* p)
-        : q(p)
+    Private(LedgerView* qq)
+        : q(qq)
         , delegateProxy(new DelegateProxy(q))
+        , moveToAccountSelector(nullptr)
+        , columnSelector(nullptr)
+        , infoMessage(new KMessageWidget(q))
         , adjustableColumn(JournalModel::Column::Detail)
         , adjustingColumn(false)
         , showValuesInverted(false)
         , newTransactionPresent(false)
-        , columnSelector(nullptr)
-        , infoMessage(new KMessageWidget(q))
     {
         infoMessage->hide();
 
@@ -110,6 +114,42 @@ public:
     void unregisterGlobalEditor()
     {
         *s_globalEditView() = nullptr;
+    }
+
+    void createMoveToSubMenu()
+    {
+        if (!moveToAccountSelector) {
+            auto menu = pMenus[eMenu::Menu::MoveTransaction];
+            if (menu) {
+                const auto actionList = menu->actions();
+                // the account selector is only created the first time this is called. All following calls will
+                // reuse the created selector. The assumption is, that the first entry is the submenu header and
+                // the second is the account selector. Everything else is a programming mistake and causes a crash.
+                switch (actionList.count()) {
+                case 1: // the header is the only thing in the menu
+                {
+                    auto accountSelectorAction = new QWidgetAction(menu);
+                    moveToAccountSelector = new KMyMoneyAccountSelector(menu, 0, false);
+                    moveToAccountSelector->setObjectName("transaction_move_menu_selector");
+                    accountSelectorAction->setDefaultWidget(moveToAccountSelector);
+                    menu->addAction(accountSelectorAction);
+                    q->connect(moveToAccountSelector, &KMyMoneySelector::itemSelected, q, &LedgerView::slotMoveToAccount);
+                } break;
+
+                case 2: // the header and the selector are newTransactionPresent
+                {
+                    auto accountSelectorAction = qobject_cast<QWidgetAction*>(actionList.at(1));
+                    if (accountSelectorAction) {
+                        moveToAccountSelector = qobject_cast<KMyMoneyAccountSelector*>(accountSelectorAction->defaultWidget());
+                    }
+                } break;
+
+                default:
+                    qFatal("Found misalignment with MoveTransaction menu. Please have fixed by developer.");
+                    break;
+                }
+            }
+        }
     }
 
     eMenu::Menu updateDynamicActions()
@@ -178,22 +218,99 @@ public:
                 }
             }
         }
+
+        // for a transaction context menu we need to update the
+        // "move to account" destinations
+        if (menuType == eMenu::Menu::Transaction) {
+            const auto file = MyMoneyFile::instance();
+            createMoveToSubMenu();
+
+            // in case we were not able to create the selector, we
+            // better get out of here. Anything else would cause
+            // a crash later on (accountSet.load)
+            if (moveToAccountSelector) {
+                const auto selectedAccountId = selection.firstSelection(SelectedObjects::Account);
+                const auto accountIdx = file->accountsModel()->indexById(selectedAccountId);
+                AccountSet accountSet;
+                if (accountIdx.isValid()) {
+                    if (accountIdx.data(eMyMoney::Model::AccountTypeRole).value<eMyMoney::Account::Type>() == eMyMoney::Account::Type::Investment) {
+                        accountSet.addAccountType(eMyMoney::Account::Type::Investment);
+                    } else if (accountIdx.data(eMyMoney::Model::AccountIsAssetLiabilityRole).toBool()) {
+                        accountSet.addAccountType(eMyMoney::Account::Type::Checkings);
+                        accountSet.addAccountType(eMyMoney::Account::Type::Savings);
+                        accountSet.addAccountType(eMyMoney::Account::Type::Cash);
+                        accountSet.addAccountType(eMyMoney::Account::Type::AssetLoan);
+                        accountSet.addAccountType(eMyMoney::Account::Type::CertificateDep);
+                        accountSet.addAccountType(eMyMoney::Account::Type::MoneyMarket);
+                        accountSet.addAccountType(eMyMoney::Account::Type::Asset);
+                        accountSet.addAccountType(eMyMoney::Account::Type::Currency);
+                        accountSet.addAccountType(eMyMoney::Account::Type::CreditCard);
+                        accountSet.addAccountType(eMyMoney::Account::Type::Loan);
+                        accountSet.addAccountType(eMyMoney::Account::Type::Liability);
+                    } else if (accountIdx.data(eMyMoney::Model::AccountIsIncomeExpenseRole).toBool()) {
+                        accountSet.addAccountType(eMyMoney::Account::Type::Income);
+                        accountSet.addAccountType(eMyMoney::Account::Type::Expense);
+                    }
+                } else {
+                    accountSet.addAccountType(eMyMoney::Account::Type::Checkings);
+                    accountSet.addAccountType(eMyMoney::Account::Type::Savings);
+                    accountSet.addAccountType(eMyMoney::Account::Type::Cash);
+                    accountSet.addAccountType(eMyMoney::Account::Type::AssetLoan);
+                    accountSet.addAccountType(eMyMoney::Account::Type::CertificateDep);
+                    accountSet.addAccountType(eMyMoney::Account::Type::MoneyMarket);
+                    accountSet.addAccountType(eMyMoney::Account::Type::Asset);
+                    accountSet.addAccountType(eMyMoney::Account::Type::Currency);
+                    accountSet.addAccountType(eMyMoney::Account::Type::CreditCard);
+                    accountSet.addAccountType(eMyMoney::Account::Type::Loan);
+                    accountSet.addAccountType(eMyMoney::Account::Type::Liability);
+                }
+
+                accountSet.load(moveToAccountSelector);
+
+                // remove those accounts that we currently reference
+                // with the selected items
+                QSet<QString> currencyIds;
+                for (const auto& journalId : selection.selection(SelectedObjects::JournalEntry)) {
+                    const auto journalIdx = file->journalModel()->indexById(journalId);
+                    moveToAccountSelector->removeItem(journalIdx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString());
+                    const auto accountId = journalIdx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString();
+                    const auto accIdx = file->accountsModel()->indexById(accountId);
+                    currencyIds.insert(accIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString());
+                }
+
+                // remove those accounts from the list that are denominated
+                // in a different currency
+                const auto list = moveToAccountSelector->accountList();
+                for (const auto& accountId : list) {
+                    const auto idx = file->accountsModel()->indexById(accountId);
+                    if (!currencyIds.contains(idx.data(eMyMoney::Model::AccountCurrencyIdRole).toString())) {
+                        moveToAccountSelector->removeItem(accountId);
+                    }
+                }
+
+                // in case we have transactions in multiple currencies selected,
+                // the move is not supported.
+                pMenus[eMenu::Menu::MoveTransaction]->setDisabled(currencyIds.count() > 1);
+            }
+        }
+
         return menuType;
     }
 
-    LedgerView*                     q;
-    DelegateProxy*                  delegateProxy;
+    LedgerView* q;
+    DelegateProxy* delegateProxy;
+    KMyMoneyAccountSelector* moveToAccountSelector;
+    ColumnSelector* columnSelector;
+    KMessageWidget* infoMessage;
     QHash<const QAbstractItemModel*, QStyledItemDelegate*>   delegates;
-    int                             adjustableColumn;
-    bool                            adjustingColumn;
-    bool                            showValuesInverted;
-    bool                            newTransactionPresent;
-    ColumnSelector*                 columnSelector;
-    KMessageWidget*                 infoMessage;
-    QString                         accountId;
-    QString                         groupName;
-    QPersistentModelIndex           editIndex;
-    SelectedObjects                 selection;
+    int adjustableColumn;
+    bool adjustingColumn;
+    bool showValuesInverted;
+    bool newTransactionPresent;
+    QString accountId;
+    QString groupName;
+    QPersistentModelIndex editIndex;
+    SelectedObjects selection;
 };
 
 
@@ -825,4 +942,15 @@ void LedgerView::selectAllTransactions()
     createSelectionRange();
 
     selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
+}
+
+void LedgerView::slotMoveToAccount(const QString& accountId)
+{
+    // close the menu, if it is still open
+    if (pMenus[eMenu::Menu::Transaction]->isVisible()) {
+        pMenus[eMenu::Menu::Transaction]->close();
+    }
+
+    pActions[eMenu::Action::MoveTransactionTo]->setData(accountId);
+    pActions[eMenu::Action::MoveTransactionTo]->activate(QAction::Trigger);
 }

@@ -1619,6 +1619,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::MarkCleared,                   QStringLiteral("transaction_mark_cleared"),       i18nc("Mark transaction cleared", "Cleared"),       Icon::Empty},
             {Action::MarkReconciled,                QStringLiteral("transaction_mark_reconciled"),    i18nc("Mark transaction reconciled", "Reconciled"), Icon::Empty},
             {Action::MarkNotReconciled,             QStringLiteral("transaction_mark_notreconciled"), i18nc("Mark transaction not reconciled", "Not reconciled"),     Icon::Empty},
+            {Action::MoveTransactionTo,             QStringLiteral("transaction_move"),               i18nc("Move transaction", "Move transaction"),      Icon::Empty},     // not directly available in UI
+
             {Action::SelectAllTransactions,         QStringLiteral("transaction_select_all"),         i18nc("Select all transactions", "Select all"),     Icon::SelectAll},
             {Action::GoToAccount,                   QStringLiteral("transaction_goto_account"),       i18n("Go to account"),                              Icon::BankAccount},
             {Action::GoToPayee,                     QStringLiteral("transaction_goto_payee"),         i18n("Go to payee"),                                Icon::Payee},
@@ -1743,6 +1745,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::MarkCleared,                   &KMyMoneyApp::slotMarkTransactions},
             {Action::MarkReconciled,                &KMyMoneyApp::slotMarkTransactions},
             {Action::MarkNotReconciled,             &KMyMoneyApp::slotMarkTransactions},
+            {Action::MoveTransactionTo,             &KMyMoneyApp::slotMoveTransactionTo},
 
             {Action::GoToPayee,                     &KMyMoneyApp::slotExecuteActionWithData},
             {Action::GoToAccount,                   &KMyMoneyApp::slotExecuteActionWithData},
@@ -2483,6 +2486,81 @@ void KMyMoneyApp::slotMarkTransactions()
         ft.commit();
     } catch (const MyMoneyException &e) {
         KMessageBox::detailedSorry(this, i18n("Unable to modify transaction"), e.what());
+    }
+}
+
+void KMyMoneyApp::slotMoveTransactionTo()
+{
+    auto action = qobject_cast<QAction*>(sender());
+    // const auto actionId = d->qActionToId(action);
+    const auto file = MyMoneyFile::instance();
+    const auto accountId = action->data().toString();
+    const auto journalEntryList = d->m_selections.selection(SelectedObjects::JournalEntry);
+
+    if (!journalEntryList.isEmpty()) {
+        MyMoneyFileTransaction ft;
+        try {
+            for (const auto& journalId : journalEntryList) {
+                const auto journalIdx = file->journalModel()->indexById(journalId);
+                auto t = file->transaction(journalIdx.data(eMyMoney::Model::JournalTransactionIdRole).toString());
+                if (journalIdx.data(eMyMoney::Model::TransactionIsInvestmentRole).toBool()) {
+                    /// moving an investment transactions must make sure that the
+                    //  necessary (security) accounts exist before the transaction is moved
+                    auto toInvAcc = file->account(accountId);
+                    // first determine which stock we are dealing with.
+                    // fortunately, investment transactions have only one stock involved
+                    QString stockAccountId;
+                    QString stockSecurityId;
+                    MyMoneySplit s;
+                    for (const auto& split : t.splits()) {
+                        stockAccountId = split.accountId();
+                        stockSecurityId = file->account(stockAccountId).currencyId();
+                        if (!file->security(stockSecurityId).isCurrency()) {
+                            s = split;
+                            break;
+                        }
+                    }
+                    // Now check the target investment account to see if it
+                    // contains a stock with this id
+                    QString newStockAccountId;
+                    for (const auto& sAccountId : toInvAcc.accountList()) {
+                        if (file->account(sAccountId).currencyId() == stockSecurityId) {
+                            newStockAccountId = sAccountId;
+                            break;
+                        }
+                    }
+                    // if it doesn't exist, we need to add it as a copy of the old one
+                    // no 'copyAccount()' function??
+                    if (newStockAccountId.isEmpty()) {
+                        MyMoneyAccount stockAccount = file->account(stockAccountId);
+                        MyMoneyAccount newStock;
+                        newStock.setName(stockAccount.name());
+                        newStock.setNumber(stockAccount.number());
+                        newStock.setDescription(stockAccount.description());
+                        newStock.setInstitutionId(stockAccount.institutionId());
+                        newStock.setOpeningDate(stockAccount.openingDate());
+                        newStock.setAccountType(stockAccount.accountType());
+                        newStock.setCurrencyId(stockAccount.currencyId());
+                        newStock.setClosed(stockAccount.isClosed());
+                        file->addAccount(newStock, toInvAcc);
+                        newStockAccountId = newStock.id();
+                    }
+
+                    // now update the split and the transaction
+                    s.setAccountId(newStockAccountId);
+                    t.modifySplit(s);
+
+                } else {
+                    auto s = t.splitById(journalIdx.data(eMyMoney::Model::JournalSplitIdRole).toString());
+                    s.setAccountId(accountId);
+                    t.modifySplit(s);
+                }
+                file->modifyTransaction(t);
+            }
+            ft.commit();
+        } catch (const MyMoneyException& e) {
+            qDebug() << e.what();
+        }
     }
 }
 

@@ -110,6 +110,8 @@ protected Q_SLOTS:
 
     virtual void adjustDetailColumn(int newViewportWidth);
 
+    void slotMoveToAccount(const QString& accountId);
+
 Q_SIGNALS:
     void requestCustomContextMenu(eMenu::Menu type, const QPoint& pos) const;
     void transactionSelectionChanged (const SelectedObjects& selection) const;

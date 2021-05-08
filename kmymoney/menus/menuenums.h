@@ -74,6 +74,7 @@ enum class Action {
     GoToAccount, GoToPayee,
     NewScheduledTransaction, AssignTransactionsNumber,
     CombineTransactions,
+    MoveTransactionTo,
     // *************
     // The tools menu
     // *************

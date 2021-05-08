@@ -240,6 +240,7 @@ protected Q_SLOTS:
     void slotDuplicateTransactions();
     void slotCopySplits();
     void slotMarkTransactions();
+    void slotMoveTransactionTo();
 
     void slotExecuteAction();
     void slotExecuteActionWithData();
