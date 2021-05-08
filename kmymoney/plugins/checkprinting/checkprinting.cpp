@@ -21,8 +21,10 @@
 #include <KLocalizedString>
 
 // KMyMoney includes
-#include "mymoneyfile.h"
+#include "journalmodel.h"
 #include "mymoneyaccount.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
 #include "mymoneymoney.h"
 #include "mymoneypayee.h"
@@ -30,9 +32,8 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyutils.h"
-#include "viewinterface.h"
 #include "selectedobjects.h"
-#include "journalmodel.h"
+#include "viewinterface.h"
 
 #include "numbertowords.h"
 #include "pluginsettings.h"
@@ -56,10 +57,14 @@ struct CheckPrinting::Private {
     {
         // can't print it twice
         if (!m_printedTransactionIdList.contains(transactionId)) {
-            const auto transaction = MyMoneyFile::instance()->journalModel()->transactionById(transactionId);
-            if (!transaction.id().isEmpty()) {
-                const auto split = transaction.splitByAccount(accountId);
-                return split.shares().isNegative();
+            try {
+                const auto transaction = MyMoneyFile::instance()->journalModel()->transactionById(transactionId);
+                if (!transaction.id().isEmpty()) {
+                    const auto split = transaction.splitByAccount(accountId);
+                    return split.shares().isNegative();
+                }
+            } catch (MyMoneyException& e) {
+                return false;
             }
         }
         return false;
