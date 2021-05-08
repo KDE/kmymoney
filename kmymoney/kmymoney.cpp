@@ -2524,7 +2524,6 @@ void KMyMoneyApp::slotExecuteActionWithData()
     if (actionId != eMenu::Action::None) {
         if (actionToType.contains(actionId)) {
             auto selections = d->m_selections;
-            qDebug() << action->data().toString();
             selections.setSelection(actionToType[actionId], action->data().toString());
             d->m_myMoneyView->executeAction(actionId, selections);
             action->setData(QVariant());

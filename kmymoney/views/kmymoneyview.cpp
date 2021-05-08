@@ -815,13 +815,6 @@ void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Inten
         }
         break;
 
-    case eView::Intent::ShowPayee:
-        if (d->viewBases.contains(View::Payees)) {
-            showPage(View::Payees);
-            d->viewBases[View::Payees]->slotSelectByVariant(variant, intent);
-        }
-        break;
-
     case eView::Intent::SelectRegisterTransactions:
         if (variant.count() == 1) {
             emit transactionsSelected(variant.at(0).value<KMyMoneyRegister::SelectedTransactions>()); // for plugins

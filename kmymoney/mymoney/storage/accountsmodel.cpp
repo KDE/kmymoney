@@ -45,7 +45,6 @@ struct AccountsModel::Private
         , parentObject(parent)
         , updateOnBalanceChange(true)
     {
-        Q_Q(AccountsModel);
     }
 
     int loadSubAccounts(const QModelIndex parent, const QMap<QString, MyMoneyAccount>& list)

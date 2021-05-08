@@ -29,7 +29,6 @@ enum class Intent {
     UpdateActions,
     OpenContextMenu,
     OpenObject,
-    ShowPayee,
     ShowTransactionInLedger,
     SynchronizeAccountInInvestmentView,
     SynchronizeAccountInLedgersView,
