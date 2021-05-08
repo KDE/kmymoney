@@ -148,17 +148,17 @@ void KAccountsView::updateActions(const SelectedObjects& selections)
     pActions[eMenu::Action::NewAccount]->setEnabled(true);
     pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(KMyMoneyUtils::canUpdateAllAccounts());
 
-    const auto accountIds = selections.selection(SelectedObjects::Account);
-    if (accountIds.isEmpty()) {
+    const auto accountId = selections.firstSelection(SelectedObjects::Account);
+    if (accountId.isEmpty()) {
         d->m_currentAccount = MyMoneyAccount();
         return;
     }
-    const auto acc = file->accountsModel()->itemById(accountIds.at(0));
+    const auto acc = file->accountsModel()->itemById(accountId);
+    d->m_currentAccount = acc;
+
     if (file->isStandardAccount(acc.id())) {
-        d->m_currentAccount = acc;
         return;
     }
-    d->m_currentAccount = acc;
 
     d->updateActions(acc);
 }
