@@ -40,6 +40,7 @@ enum class Type {
     /* insert new account types above this line */
     MaxAccountTypes,      /**< Denotes the number of different account types */
 };
+
 inline uint qHash(const Type key, uint seed) {
     return ::qHash(static_cast<uint>(key), seed);
 }
@@ -460,7 +461,7 @@ namespace Model {
 enum Roles {
     // The IdRole is used by all model items whereas the id of all other roles id unique
     // for each model. This way, we can identify if an id is used on the wrong model.
-    IdRole  = Qt::UserRole,      // must remain Qt::UserRole due to KMyMoneyMVCCombo::selectedItem
+    IdRole = Qt::UserRole, // must remain Qt::UserRole due to KMyMoneyMVCCombo::selectedItem
     ItemReferenceRole,
 
     // MyMoneyPayee
@@ -481,6 +482,7 @@ enum Roles {
     // MyMoneyAccount
     AccountTypeRole,
     AccountGroupRole,
+    AccountCanBeClosedRole,
     AccountIsClosedRole,
     AccountIsInvestRole,
     AccountBalanceRole,
@@ -560,8 +562,8 @@ enum Roles {
     SplitSharesFormattedRole,
     SplitValueRole,
     SplitPriceRole,
-    SplitReconcileFlagRole,       // the short status flag
-    SplitReconcileStatusRole,     // the full status name
+    SplitReconcileFlagRole, // the short status flag
+    SplitReconcileStatusRole, // the full status name
     SplitReconcileDateRole,
     SplitActionRole,
     SplitNumberRole,

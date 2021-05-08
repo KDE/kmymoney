@@ -433,6 +433,8 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
     }
 
     MyMoneyAccount tradingCurrency;
+    const auto isInvestmentAccount = account.accountType() == eMyMoney::Account::Type::Investment;
+
     switch(role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
@@ -536,7 +538,7 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
         }
         // display the names of closed accounts with strikeout font
         // all others without
-        if (account.isClosed() != font.strikeOut()) {
+        if (account.isClosed()) {
             font.setStrikeOut(account.isClosed());
         }
         return font;
@@ -580,10 +582,30 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
         return account.id();
 
     case eMyMoney::Model::AccountTypeRole:
-        return static_cast<int>(account.accountType());
+        return QVariant::fromValue(account.accountType());
 
     case eMyMoney::Model::AccountIsClosedRole:
         return account.isClosed();
+
+    case eMyMoney::Model::AccountCanBeClosedRole:
+        if (!account.balance().isZero())
+            return false;
+        if (account.hasOnlineMapping())
+            return false;
+        {
+            // an investment account can be closed if all
+            // subaccounts can be closed. For all others,
+            // the subaccounts already have to be closed
+            const auto subAccountRows = rowCount();
+            const auto role = isInvestmentAccount ? eMyMoney::Model::AccountCanBeClosedRole : eMyMoney::Model::AccountIsClosedRole;
+            for (int row = 0; row < subAccountRows; ++row) {
+                const auto subIdx = index(row, 0, idx);
+                if (!subIdx.data(role).toBool()) {
+                    return false;
+                }
+            }
+        }
+        return true;
 
     case eMyMoney::Model::AccountIsAssetLiabilityRole:
         return account.isAssetLiability();
