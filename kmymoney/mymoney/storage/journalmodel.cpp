@@ -386,16 +386,10 @@ JournalModelNewTransaction::~JournalModelNewTransaction()
 
 QVariant JournalModelNewTransaction::data(const QModelIndex& idx, int role) const
 {
-    if (!idx.isValid())
-        return QVariant();
-    if (idx.row() < 0 || idx.row() >= rowCount(idx.parent()))
-        return QVariant();
-
+    Q_UNUSED(idx)
+    Q_UNUSED(role)
     // never show any data for the empty transaction
-    if ((role == Qt::DisplayRole) || (role == Qt::EditRole))
-        return QVariant();
-
-    return JournalModel::data(idx, role);
+    return {};
 }
 
 
