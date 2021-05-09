@@ -177,7 +177,6 @@ bool LedgerFilterBase::filterAcceptsRow(int source_row, const QModelIndex& sourc
 
 void LedgerFilterBase::setFilterFixedString(const QString& id)
 {
-    Q_D(LedgerFilterBase);
     setFilterFixedStrings(QStringList() << id);
 }
 
