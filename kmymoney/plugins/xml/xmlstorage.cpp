@@ -276,14 +276,23 @@ bool XMLStorage::save(const QUrl &url)
                 throw;
             }
         } else {
+            // obtain a temporary name for the local destination
+            // using QTemporaryFile. As long as the object is
+            // not destroyed, the file remains opened, which causes
+            // problems on MS-Windows if you want to e.g. rename it.
+            // Since we just need the name at this point, we simply
+            // create the object, take the name (which is only available
+            // once the file is opened) and destroy the object (which
+            // closes the file on the filesystem) to avoid such problems.
+            const auto tmpfile = new QTemporaryFile;
+            tmpfile->open();
+            const auto fileName = tmpfile->fileName();
+            delete tmpfile;
 
-            QTemporaryFile tmpfile;
-            tmpfile.open(); // to obtain the name
-            tmpfile.close();
-            saveToLocalFile(tmpfile.fileName(), storageWriter.get(), plaintext, keyList);
+            saveToLocalFile(fileName, storageWriter.get(), plaintext, keyList);
 
             Q_CONSTEXPR int permission = -1;
-            QFile file(tmpfile.fileName());
+            QFile file(fileName);
             file.open(QIODevice::ReadOnly);
             KIO::StoredTransferJob *putjob = KIO::storedPut(file.readAll(), url, permission, KIO::JobFlag::Overwrite);
             if (!putjob->exec()) {
@@ -458,11 +467,10 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
 
     // Create a temporary file if needed
     QString writeFile = localFile;
-    QTemporaryFile tmpFile(writeFile);
     if (QFile::exists(localFile)) {
+        QTemporaryFile tmpFile(writeFile);
         tmpFile.open();
         writeFile = tmpFile.fileName();
-        tmpFile.close();
         // Since file is going to be replaced, stash the original permissions so they can be restored
         fmode = QFile::permissions(localFile);
     }
@@ -520,8 +528,8 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
         if (!QFile::remove(localFile)) {
             throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while removing '%1'").arg(localFile));
         }
-        if (!QFile::copy(writeFile, localFile)) {
-            throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while copying '%1' to '%2'").arg(writeFile, localFile));
+        if (!QFile::rename(writeFile, localFile)) {
+            throw MYMONEYEXCEPTION(QString::fromLatin1("Failure while renaming '%1' to '%2'").arg(writeFile, localFile));
         }
     }
     QFile::setPermissions(localFile, fmode);
