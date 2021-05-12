@@ -471,22 +471,7 @@ void XMLStorage::saveToLocalFile(const QString& localFile, IMyMoneyOperationsFor
         fmode = QFile::permissions(localFile);
     }
 
-    /**
-     * @brief Automatically restore settings when scope is left
-     */
-    struct restorePreviousSettingsHelper {
-        restorePreviousSettingsHelper()
-            : m_signalsWereBlocked{MyMoneyFile::instance()->signalsBlocked()}
-        {
-            MyMoneyFile::instance()->blockSignals(true);
-        }
-
-        ~restorePreviousSettingsHelper()
-        {
-            MyMoneyFile::instance()->blockSignals(m_signalsWereBlocked);
-        }
-        const bool m_signalsWereBlocked;
-    } restoreHelper;
+    QSignalBlocker blockMyMoneyFile(MyMoneyFile::instance());
 
     MyMoneyFileTransaction ft;
     MyMoneyFile::instance()->deletePair("kmm-encryption-key");
