@@ -5,16 +5,16 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 #
 
-from weboob.core import Weboob
-from weboob.capabilities.bank import CapBank
+from woob.core import Woob
+from woob.capabilities.bank import CapBank
 
 def get_protocols():
-    w = Weboob()
+    w = Woob()
 
     return w.repositories.get_all_modules_info(CapBank).keys()
 
 def get_backends():
-    w = Weboob()
+    w = Woob()
 
     result = {}
     for instance_name, name, params in sorted(w.backends_config.iter_backends()):
@@ -27,23 +27,21 @@ def get_backends():
     return result
 
 def get_accounts(bname):
-    w = Weboob()
+    w = Woob()
 
     w.load_backends(names=[bname])
     backend = w.get_backend(bname)
 
     results = {}
     for account in backend.iter_accounts():
-        # a unicode bigger than 8 characters used as key of the table make some bugs in the C++ code
-        # convert to string before to use it
-        results[str(account.id)] = {'name':    account.label,
+        results[account.id] = {'name':    account.label,
                                'balance': int(account.balance * 100),
                                'type':    int(account.type),
                               }
     return results
 
 def get_transactions(bname, accid, maximum):
-    w = Weboob()
+    w = Woob()
 
     w.load_backends(names=[bname])
     backend = w.get_backend(bname)
