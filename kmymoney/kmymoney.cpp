@@ -24,6 +24,7 @@
 #include <QDir>
 #include <QDateTime>         // only for performance tests
 #include <QTimer>
+#include <QElapsedTimer>
 #include <QByteArray>
 #include <QBoxLayout>
 #include <QLabel>
@@ -2126,7 +2127,7 @@ void KMyMoneyApp::slotPerformanceTest()
     // dump performance report to stderr
 
     int measurement[2];
-    QTime timer;
+    QElapsedTimer timer;
     MyMoneyAccount acc;
 
     qDebug("--- Starting performance tests ---");
