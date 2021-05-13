@@ -400,6 +400,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
     pActions[eMenu::Action::MarkReconciled]->setDisabled(true);
     pActions[eMenu::Action::SelectAllTransactions]->setEnabled(false);
     pActions[eMenu::Action::MatchTransaction]->setEnabled(false);
+    pActions[eMenu::Action::NewScheduledTransaction]->setEnabled(false);
 
     if (!selections.selection(SelectedObjects::JournalEntry).isEmpty()) {
         pActions[eMenu::Action::MarkNotReconciled]->setEnabled(true);
@@ -477,6 +478,15 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
             if (matchedTransactions > 0) {
                 pActions[eMenu::Action::MatchTransaction]->setEnabled(true);
                 qobject_cast<KDualAction*>(pActions[eMenu::Action::MatchTransaction])->setActive(false);
+            }
+
+            const auto accountId = selections.firstSelection(SelectedObjects::Account);
+            if (!accountId.isEmpty()) {
+                const auto idx = file->accountsModel()->indexById(accountId);
+                if ((idx.data(eMyMoney::Model::AccountIsAssetLiabilityRole).toBool() == true)
+                    && (idx.data(eMyMoney::Model::AccountTypeRole).value<eMyMoney::Account::Type>() != eMyMoney::Account::Type::Investment)) {
+                    pActions[eMenu::Action::NewScheduledTransaction]->setEnabled(selections.selection(SelectedObjects::JournalEntry).count() == 1);
+                }
             }
         }
         break;

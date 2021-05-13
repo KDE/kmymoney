@@ -69,7 +69,6 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent) :
         {Action::AcceptTransaction,         [this](){ KGlobalLedgerView::slotAcceptTransaction(); }},
         {Action::CancelTransaction,         [this](){ KGlobalLedgerView::slotCancelTransaction(); }},
         {Action::CombineTransactions,       [this](){ KGlobalLedgerView::slotCombineTransactions(); }},
-        {Action::NewScheduledTransaction,   [this](){ KGlobalLedgerView::slotCreateScheduledTransaction(); }},
         {Action::AssignTransactionsNumber,  [this](){ KGlobalLedgerView::slotAssignNumber(); }},
         {Action::StartReconciliation,       [this](){ KGlobalLedgerView::slotStartReconciliation(); }},
         {Action::FinishReconciliation,      [this](){ KGlobalLedgerView::slotFinishReconciliation(); }},
@@ -90,6 +89,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent) :
 {Action::SelectAllTransactions,     [this](){ KGlobalLedgerView::slotSelectAllTransactions(); }},
 {Action::ToggleReconciliationFlag,  [this](){ KGlobalLedgerView::slotToggleReconciliationFlag(); }},
 {Action::MatchTransaction,          [this](){ KGlobalLedgerView::slotMatchTransactions(); }},
+{Action::NewScheduledTransaction,   [this](){ KGlobalLedgerView::slotCreateScheduledTransaction(); }},
 #endif
     };
     // clang-format on

@@ -1845,6 +1845,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::ToggleReconciliationFlag,      &KMyMoneyApp::slotMarkTransactions},
             {Action::MoveTransactionTo,             &KMyMoneyApp::slotMoveTransactionTo},
             {Action::MatchTransaction,              &KMyMoneyApp::slotMatchTransaction},
+            {Action::NewScheduledTransaction,       &KMyMoneyApp::slotCreateScheduledTransaction},
 
             {Action::GoToPayee,                     &KMyMoneyApp::slotExecuteActionWithData},
             {Action::GoToAccount,                   &KMyMoneyApp::slotExecuteActionWithData},
@@ -2671,6 +2672,33 @@ void KMyMoneyApp::slotMatchTransaction()
         action->isActive() ? d->matchTransaction() : d->unmatchTransaction();
     }
 
+}
+
+void KMyMoneyApp::slotCreateScheduledTransaction()
+{
+    if (d->m_selections.selection(SelectedObjects::JournalEntry).count() == 1) {
+        const auto journalEntryId = d->m_selections.firstSelection(SelectedObjects::JournalEntry);
+        const auto journalEntry = MyMoneyFile::instance()->journalModel()->itemById(journalEntryId);
+        // make sure to have the current selected split as first split in the schedule
+        MyMoneyTransaction t = journalEntry.transaction();
+        MyMoneySplit s = journalEntry.split();
+        const auto splitId = s.id();
+        s.clearId();
+        s.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
+        s.setReconcileDate(QDate());
+        t.removeSplits();
+        t.addSplit(s);
+        for (const auto& split : journalEntry.transaction().splits()) {
+            if (split.id() != splitId) {
+                auto s0 = split;
+                s0.clearId();
+                s0.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
+                s0.setReconcileDate(QDate());
+                t.addSplit(s0);
+            }
+        }
+        KEditScheduleDlg::newSchedule(t, eMyMoney::Schedule::Occurrence::Monthly);
+    }
 }
 
 #if 0
