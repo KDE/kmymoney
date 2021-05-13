@@ -645,6 +645,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::TransactionIsInvestmentRole:
         return MyMoneyFile::instance()->isInvestmentTransaction(journalEntry.transaction());
 
+    case eMyMoney::Model::TransactionIsImportedRole:
+        return journalEntry.transaction().isImported();
+
     case eMyMoney::Model::TransactionInvestementType:
         return QVariant::fromValue<eMyMoney::Split::InvestmentTransactionType>(journalEntry.split().investmentTransactionType());
 
@@ -794,6 +797,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         }
         break;
 
+    case eMyMoney::Model::JournalSplitIsMatchedRole:
+        return journalEntry.split().isMatched();
+
     case eMyMoney::Model::SplitSharesFormattedRole:
         return d->formatShares(journalEntry.split());
 
@@ -831,6 +837,7 @@ bool JournalModel::setData(const QModelIndex& idx, const QVariant& value, int ro
         switch(idx.column()) {
         case Balance:
             journalEntry.setBalance(value.value<MyMoneyMoney>());
+            emit dataChanged(idx, idx);
             return true;
 
         default:

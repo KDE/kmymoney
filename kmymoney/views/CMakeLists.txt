@@ -22,6 +22,7 @@ set(libviews_a_SOURCES
   ledgerviewpage.cpp
   ledgerview.cpp
   ledgeraccountfilter.cpp
+  ledgerjournalidfilter.cpp
   ledgerpayeefilter.cpp
   ledgertagfilter.cpp
   journaldelegate.cpp
@@ -31,6 +32,7 @@ set(libviews_a_SOURCES
   investactivities.cpp
   newspliteditor.cpp
   transactioneditorbase.cpp
+  ktransactionselectdlg.cpp
   newtransactioneditor.cpp
   newtransactionform.cpp
   splitview.cpp
@@ -48,7 +50,7 @@ set(libviews_a_UI
   kscheduledview.ui
   ktagsview.ui
   kpayeeidentifierview.ui
-
+  ktransactionselectdlg.ui
   simpleledgerview.ui
   ledgerview.ui
   ledgerviewpage.ui

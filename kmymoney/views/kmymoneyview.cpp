@@ -29,14 +29,15 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KMessageBox>
-#include <KTitleWidget>
-#include <KSharedConfig>
-#include <KBackup>
 #include <KActionCollection>
+#include <KBackup>
+#include <KDualAction>
 #include <KIO/StoredTransferJob>
 #include <KJobWidgets>
 #include <KLocalizedString>
+#include <KMessageBox>
+#include <KSharedConfig>
+#include <KTitleWidget>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -398,6 +399,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
     pActions[eMenu::Action::MarkCleared]->setDisabled(true);
     pActions[eMenu::Action::MarkReconciled]->setDisabled(true);
     pActions[eMenu::Action::SelectAllTransactions]->setEnabled(false);
+    pActions[eMenu::Action::MatchTransaction]->setEnabled(false);
 
     if (!selections.selection(SelectedObjects::JournalEntry).isEmpty()) {
         pActions[eMenu::Action::MarkNotReconciled]->setEnabled(true);
@@ -428,11 +430,14 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
             pActions[eMenu::Action::AddReversingTransaction]->setEnabled(warnLevel <= OneSplitReconciled);
             pActions[eMenu::Action::CopySplits]->setDisabled(true);
 
-            if (selections.selection(SelectedObjects::JournalEntry).count() >= 2) {
-                int singleSplitTransactions = 0;
-                int multipleSplitTransactions = 0;
-                for (const auto& journalEntryId : selections.selection(SelectedObjects::JournalEntry)) {
-                    const auto idx = file->journalModel()->indexById(journalEntryId);
+            int singleSplitTransactions(0);
+            int multipleSplitTransactions(0);
+            int matchedTransactions(0);
+            int importedTransactions(0);
+
+            for (const auto& journalEntryId : selections.selection(SelectedObjects::JournalEntry)) {
+                const auto idx = file->journalModel()->indexById(journalEntryId);
+                if ((singleSplitTransactions < 1) || (multipleSplitTransactions < 2)) {
                     const auto indeces = file->journalModel()->indexesByTransactionId(idx.data(eMyMoney::Model::JournalTransactionIdRole).toString());
                     switch (indeces.count()) {
                     case 0:
@@ -444,13 +449,34 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
                         multipleSplitTransactions++;
                         break;
                     }
-                    if (multipleSplitTransactions > 1) {
-                        break;
-                    }
                 }
-                if (singleSplitTransactions > 0 && multipleSplitTransactions == 1) {
-                    pActions[eMenu::Action::CopySplits]->setEnabled(true);
+
+                if (idx.data(eMyMoney::Model::JournalSplitIsMatchedRole).toBool()) {
+                    ++matchedTransactions;
                 }
+                if (idx.data(eMyMoney::Model::TransactionIsImportedRole).toBool()) {
+                    ++importedTransactions;
+                }
+                if ((singleSplitTransactions > 0) && (multipleSplitTransactions > 1) && (matchedTransactions > 0) && (importedTransactions > 0)) {
+                    break;
+                }
+            }
+
+            if (singleSplitTransactions > 0 && multipleSplitTransactions == 1) {
+                pActions[eMenu::Action::CopySplits]->setEnabled(true);
+            }
+
+            // Matching is enabled as soon as one regular and one imported transaction is selected
+            if (selections.selection(SelectedObjects::JournalEntry).count() == 2 /* && pActions[Action::TransactionEdit]->isEnabled() */) {
+                qobject_cast<KDualAction*>(pActions[eMenu::Action::MatchTransaction])->setActive(true);
+                pActions[eMenu::Action::MatchTransaction]->setEnabled(true);
+            }
+            if ((importedTransactions > 0) || (matchedTransactions > 0)) {
+                pActions[eMenu::Action::AcceptTransaction]->setEnabled(true);
+            }
+            if (matchedTransactions > 0) {
+                pActions[eMenu::Action::MatchTransaction]->setEnabled(true);
+                qobject_cast<KDualAction*>(pActions[eMenu::Action::MatchTransaction])->setActive(false);
             }
         }
         break;

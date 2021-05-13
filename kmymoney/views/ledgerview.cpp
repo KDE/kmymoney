@@ -311,6 +311,7 @@ public:
     QString groupName;
     QPersistentModelIndex editIndex;
     SelectedObjects selection;
+    QString firstSelectedId;
 };
 
 
@@ -744,9 +745,24 @@ void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSel
     QSet<int> allSelectedRows;
     QSet<int> selectedRows;
 
+    // we need to remember the first item selected as this
+    // should always be reported as the first item in the
+    // list of selected journalEntries. We have to devide
+    // the number of selected indexes by the column count
+    // to get the number of selected rows.
+    switch (selectionModel()->selectedIndexes().count() / model()->columnCount()) {
+    case 0:
+        d->firstSelectedId.clear();
+        break;
+    case 1:
+        d->firstSelectedId = selectionModel()->selectedIndexes().first().data(eMyMoney::Model::IdRole).toString();
+        break;
+    default:
+        break;
+    }
+
     if (!selected.isEmpty()) {
         int lastRow = -1;
-        const auto test = selectionModel()->selectedIndexes();
         for (const auto& idx : selectionModel()->selectedIndexes()) {
             if (idx.row() != lastRow) {
                 lastRow = idx.row();
@@ -784,13 +800,31 @@ void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSel
         }
     }
 
+    // build the list of selected journalEntryIds
+    // and make sure the first selected is the first listed
     QStringList selectedJournalEntries;
+
     int lastRow = -1;
+    bool firstSelectedStillPresent(false);
+
     for (const auto& idx : selectionModel()->selectedIndexes()) {
         if (idx.row() != lastRow) {
             lastRow = idx.row();
-            selectedJournalEntries += idx.data(eMyMoney::Model::IdRole).toString();
+            if (d->firstSelectedId != idx.data(eMyMoney::Model::IdRole).toString()) {
+                selectedJournalEntries += idx.data(eMyMoney::Model::IdRole).toString();
+            } else {
+                firstSelectedStillPresent = true;
+            }
         }
+    }
+
+    // in case we still have the first selected id, we prepend
+    // it to the list. Otherwise, if the list is not empty, we
+    // use the now first entry to have one in place.
+    if (firstSelectedStillPresent && !d->firstSelectedId.isEmpty()) {
+        selectedJournalEntries.prepend(d->firstSelectedId);
+    } else if (!selectedJournalEntries.isEmpty()) {
+        d->firstSelectedId = selectedJournalEntries.first();
     }
 
     d->selection.setSelection(SelectedObjects::JournalEntry, selectedJournalEntries);

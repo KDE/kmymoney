@@ -38,6 +38,8 @@ public:
     friend class JournalModel;
 
     explicit JournalEntry() {}
+    friend void swap(JournalEntry& first, JournalEntry& second);
+
     explicit JournalEntry(const QString& id, const JournalEntry& other)
         : m_id(id)
         , m_transaction(other.m_transaction)
@@ -88,6 +90,15 @@ private:
     MyMoneySplit                        m_split;
     MyMoneyMoney                        m_balance;
 };
+
+inline void swap(JournalEntry& first, JournalEntry& second)
+{
+    using std::swap;
+    swap(first.m_id, second.m_id);
+    swap(first.m_transaction, second.m_transaction);
+    swap(first.m_split, second.m_split);
+    swap(first.m_balance, second.m_balance);
+}
 
 class JournalModelNewTransaction;
 

@@ -241,6 +241,7 @@ protected Q_SLOTS:
     void slotCopySplits();
     void slotMarkTransactions();
     void slotMoveTransactionTo();
+    void slotMatchTransaction();
 
     void slotExecuteAction();
     void slotExecuteActionWithData();

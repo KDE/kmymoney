@@ -550,6 +550,7 @@ enum Roles {
     TransactionInvestmentAccountIdRole,
     TransactionCommodityRole,
     TransactionScheduleRole,
+    TransactionIsImportedRole,
 
     // MyMoneySplit
     SplitSharesSuffixRole,
@@ -573,12 +574,14 @@ enum Roles {
     SplitMatchedRole,
     SplitFormattedValueRole,
     SplitFormattedSharesRole,
+
     // Journal
     JournalSplitIdRole,
     JournalTransactionIdRole,
     JournalSplitPaymentRole,
     JournalSplitDepositRole,
     JournalSplitAccountIdRole,
+    JournalSplitIsMatchedRole,
 
     // Ledger
     LedgerDisplayOrderRole,

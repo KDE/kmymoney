@@ -43,22 +43,23 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KToolBar>
-#include <KMessageBox>
-#include <KLocalizedString>
-#include <KConfig>
-#include <KStandardAction>
-#include <KActionCollection>
-#include <KTipDialog>
-#include <KRun>
-#include <KConfigDialog>
-#include <KXMLGUIFactory>
-#include <KRecentFilesAction>
-#include <KRecentDirs>
-#include <KProcess>
 #include <KAboutApplicationDialog>
+#include <KActionCollection>
 #include <KBackup>
+#include <KConfig>
+#include <KConfigDialog>
+#include <KDualAction>
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <KProcess>
+#include <KRecentDirs>
+#include <KRecentFilesAction>
+#include <KRun>
+#include <KStandardAction>
+#include <KTipDialog>
+#include <KToolBar>
 #include <KUndoActions>
+#include <KXMLGUIFactory>
 #ifdef ENABLE_HOLIDAYS
 #include <KHolidays/Holiday>
 #include <KHolidays/HolidayRegion>
@@ -73,32 +74,33 @@
 #include "kmymoneysettings.h"
 #include "kmymoneyadaptor.h"
 
-#include "dialogs/settings/ksettingskmymoney.h"
+#include "dialogs/editpersonaldatadlg.h"
 #include "dialogs/kbackupdlg.h"
+#include "dialogs/kbalancewarning.h"
+#include "dialogs/kcategoryreassigndlg.h"
 #include "dialogs/kconfirmmanualenterdlg.h"
-#include "dialogs/kmymoneypricedlg.h"
+#include "dialogs/kcurrencycalculator.h"
 #include "dialogs/kcurrencyeditdlg.h"
 #include "dialogs/kequitypriceupdatedlg.h"
 #include "dialogs/kmymoneyfileinfodlg.h"
-#include "dialogs/knewinstitutiondlg.h"
-#include "dialogs/ksaveasquestion.h"
-#include "wizards/newinvestmentwizard/knewinvestmentwizard.h"
+#include "dialogs/kmymoneypricedlg.h"
 #include "dialogs/knewaccountdlg.h"
-#include "dialogs/editpersonaldatadlg.h"
-#include "dialogs/kcurrencycalculator.h"
-#include "keditscheduledlg.h"
-#include "wizards/newloanwizard/keditloanwizard.h"
+#include "dialogs/knewinstitutiondlg.h"
 #include "dialogs/kpayeereassigndlg.h"
-#include "dialogs/kcategoryreassigndlg.h"
-#include "wizards/endingbalancedlg/kendingbalancedlg.h"
+#include "dialogs/ksaveasquestion.h"
+#include "dialogs/settings/ksettingskmymoney.h"
 #include "dialogs/transactionmatcher.h"
-#include "wizards/newuserwizard/knewuserwizard.h"
-#include "wizards/newaccountwizard/knewaccountwizard.h"
-#include "dialogs/kbalancewarning.h"
-#include "widgets/kmymoneyaccountselector.h"
-#include "widgets/kmymoneypayeecombo.h"
+#include "keditscheduledlg.h"
+#include "ktransactionselectdlg.h"
 #include "widgets/amountedit.h"
+#include "widgets/kmymoneyaccountselector.h"
 #include "widgets/kmymoneymvccombo.h"
+#include "widgets/kmymoneypayeecombo.h"
+#include "wizards/endingbalancedlg/kendingbalancedlg.h"
+#include "wizards/newaccountwizard/knewaccountwizard.h"
+#include "wizards/newinvestmentwizard/knewinvestmentwizard.h"
+#include "wizards/newloanwizard/keditloanwizard.h"
+#include "wizards/newuserwizard/knewuserwizard.h"
 
 #include "accountsmodel.h"
 #include "equitiesmodel.h"
@@ -1212,6 +1214,92 @@ public:
         }
         return eMenu::Action::None;
     }
+
+    void matchTransaction()
+    {
+        if (m_selections.selection(SelectedObjects::JournalEntry).count() != 2)
+            return;
+
+        const auto file(MyMoneyFile::instance());
+        QString toBeDeletedId;
+        QString remainingId;
+
+        for (const auto& journalEntryId : m_selections.selection(SelectedObjects::JournalEntry)) {
+            const auto idx = file->journalModel()->indexById(journalEntryId);
+            if (idx.data(eMyMoney::Model::TransactionIsImportedRole).toBool()) {
+                if (toBeDeletedId.isEmpty()) {
+                    toBeDeletedId = journalEntryId;
+                } else {
+                    // This is a second imported transaction, we still want to merge
+                    remainingId = journalEntryId;
+                }
+            } else if (!idx.data(eMyMoney::Model::JournalSplitIsMatchedRole).toBool()) {
+                if (remainingId.isEmpty()) {
+                    remainingId = journalEntryId;
+                } else {
+                    toBeDeletedId = journalEntryId;
+                }
+            }
+        }
+
+        // the user selected two transactions but they might be
+        // selected in the wrong order. We check here, if the
+        // other way around makes more sense and simply exchange
+        // the two. See bko #435512
+        auto remaining = file->journalModel()->itemById(remainingId);
+        auto toBeDeleted = file->journalModel()->itemById(toBeDeletedId);
+
+        if ((remaining.transaction().splitCount() == 1) && (toBeDeleted.transaction().splitCount() > 1)) {
+            swap(remaining, toBeDeleted);
+        }
+
+        bool doMatch = true;
+        // in case the transaction we are about to remove contains
+        // more than one split, we ask the user if this is what
+        // she really wants.
+        if (toBeDeleted.transaction().splitCount() > 1) {
+            KTransactionMergeDlg dlg(q);
+            dlg.addTransaction(remainingId);
+            dlg.addTransaction(toBeDeletedId);
+            doMatch = (dlg.exec() == QDialog::Accepted);
+        }
+        if (doMatch && (toBeDeleted.split().accountId() == remaining.split().accountId())) {
+            MyMoneyFileTransaction ft;
+            try {
+                if (remaining.transaction().id().isEmpty())
+                    throw MYMONEYEXCEPTION(QString::fromLatin1("No manually entered transaction selected for matching"));
+                if (toBeDeleted.transaction().id().isEmpty())
+                    throw MYMONEYEXCEPTION(QString::fromLatin1("No imported transaction selected for matching"));
+
+                TransactionMatcher matcher;
+                matcher.match(remaining.transaction(), remaining.split(), toBeDeleted.transaction(), toBeDeleted.split(), true);
+                ft.commit();
+            } catch (const MyMoneyException& e) {
+                KMessageBox::detailedSorry(q, i18n("Unable to match the selected transactions"), e.what());
+            }
+        }
+    }
+
+    void unmatchTransaction()
+    {
+        const auto file(MyMoneyFile::instance());
+
+        MyMoneyFileTransaction ft;
+        try {
+            for (const auto& journalEntryId : m_selections.selection(SelectedObjects::JournalEntry)) {
+                const auto idx = file->journalModel()->indexById(journalEntryId);
+                if (idx.data(eMyMoney::Model::JournalSplitIsMatchedRole).toBool()) {
+                    const auto journalEntry = file->journalModel()->itemByIndex(idx);
+                    TransactionMatcher matcher;
+                    matcher.unmatch(journalEntry.transaction(), journalEntry.split());
+                }
+            }
+            ft.commit();
+
+        } catch (const MyMoneyException& e) {
+            KMessageBox::detailedSorry(q, i18n("Unable to unmatch the selected transactions"), e.what());
+        }
+    }
 };
 
 KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
@@ -1674,6 +1762,16 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             lutActions.insert(info.action, a);  // store QAction's pointer for later processing
         }
 
+        auto a = new KDualAction(this);
+        a->setObjectName(QStringLiteral("transaction_match"));
+        a->setActiveText(i18nc("Match transactions", "Match"));
+        a->setInactiveText(i18nc("Unmatch transactions", "Unmatch"));
+        a->setActiveIcon(Icons::get(Icon::Link));
+        a->setInactiveIcon(Icons::get(Icon::Unlink));
+        a->setActive(true);
+        a->setAutoToggle(false);
+        a->setEnabled(false);
+        lutActions.insert(Action::MatchTransaction, a);
     }
 
     lutActions.insert(Action::EditUndo, KUndoActions::createUndoAction(MyMoneyFile::instance()->undoStack(), aC));
@@ -1744,7 +1842,9 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::MarkCleared,                   &KMyMoneyApp::slotMarkTransactions},
             {Action::MarkReconciled,                &KMyMoneyApp::slotMarkTransactions},
             {Action::MarkNotReconciled,             &KMyMoneyApp::slotMarkTransactions},
+            {Action::ToggleReconciliationFlag,      &KMyMoneyApp::slotMarkTransactions},
             {Action::MoveTransactionTo,             &KMyMoneyApp::slotMoveTransactionTo},
+            {Action::MatchTransaction,              &KMyMoneyApp::slotMatchTransaction},
 
             {Action::GoToPayee,                     &KMyMoneyApp::slotExecuteActionWithData},
             {Action::GoToAccount,                   &KMyMoneyApp::slotExecuteActionWithData},
@@ -2417,6 +2517,7 @@ void KMyMoneyApp::slotMarkTransactions()
         {eMenu::Action::MarkNotReconciled, eMyMoney::Split::State::NotReconciled},
         {eMenu::Action::MarkCleared, eMyMoney::Split::State::Cleared},
         {eMenu::Action::MarkReconciled, eMyMoney::Split::State::Reconciled},
+        {eMenu::Action::ToggleReconciliationFlag, eMyMoney::Split::State::Unknown},
     };
 
     const auto flag = action2state.value(actionId, eMyMoney::Split::State::Unknown);
@@ -2561,6 +2662,15 @@ void KMyMoneyApp::slotMoveTransactionTo()
             qDebug() << e.what();
         }
     }
+}
+
+void KMyMoneyApp::slotMatchTransaction()
+{
+    auto action = qobject_cast<KDualAction*>(sender());
+    if (action) {
+        action->isActive() ? d->matchTransaction() : d->unmatchTransaction();
+    }
+
 }
 
 #if 0
