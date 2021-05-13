@@ -1846,6 +1846,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::ToggleReconciliationFlag,      &KMyMoneyApp::slotMarkTransactions},
             {Action::MoveTransactionTo,             &KMyMoneyApp::slotMoveTransactionTo},
             {Action::MatchTransaction,              &KMyMoneyApp::slotMatchTransaction},
+            {Action::AcceptTransaction,             &KMyMoneyApp::slotAcceptTransaction},
+
             {Action::NewScheduledTransaction,       &KMyMoneyApp::slotCreateScheduledTransaction},
 
             {Action::GoToPayee,                     &KMyMoneyApp::slotExecuteActionWithData},
@@ -2699,6 +2701,30 @@ void KMyMoneyApp::slotCreateScheduledTransaction()
             }
         }
         KEditScheduleDlg::newSchedule(t, eMyMoney::Schedule::Occurrence::Monthly);
+    }
+}
+
+void KMyMoneyApp::slotAcceptTransaction()
+{
+    const auto file = MyMoneyFile::instance();
+    MyMoneyFileTransaction ft;
+    try {
+        for (const auto& journalEntryId : d->m_selections.selection(SelectedObjects::JournalEntry)) {
+            const auto journalEntry = file->journalModel()->itemById(journalEntryId);
+            auto t = journalEntry.transaction();
+            auto s = journalEntry.split();
+            if (t.isImported()) {
+                t.setImported(false);
+                s.setReconcileFlag(eMyMoney::Split::State::Cleared);
+                t.modifySplit(s);
+                file->modifyTransaction(t);
+            }
+            TransactionMatcher matcher;
+            matcher.accept(t, s);
+        }
+        ft.commit();
+    } catch (const MyMoneyException &e) {
+        KMessageBox::detailedSorry(this, i18n("Unable to accept transaction"), QString::fromLatin1(e.what()));
     }
 }
 

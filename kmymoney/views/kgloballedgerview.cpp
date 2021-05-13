@@ -66,7 +66,6 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent) :
     // clang-format off
     const QHash<Action, std::function<void()>> actionConnections {
         {Action::EnterTransaction,          [this](){ KGlobalLedgerView::slotEnterTransaction(); }},
-        {Action::AcceptTransaction,         [this](){ KGlobalLedgerView::slotAcceptTransaction(); }},
         {Action::CancelTransaction,         [this](){ KGlobalLedgerView::slotCancelTransaction(); }},
         {Action::CombineTransactions,       [this](){ KGlobalLedgerView::slotCombineTransactions(); }},
         {Action::AssignTransactionsNumber,  [this](){ KGlobalLedgerView::slotAssignNumber(); }},
@@ -90,6 +89,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent) :
 {Action::ToggleReconciliationFlag,  [this](){ KGlobalLedgerView::slotToggleReconciliationFlag(); }},
 {Action::MatchTransaction,          [this](){ KGlobalLedgerView::slotMatchTransactions(); }},
 {Action::NewScheduledTransaction,   [this](){ KGlobalLedgerView::slotCreateScheduledTransaction(); }},
+{Action::AcceptTransaction,         [this](){ KGlobalLedgerView::slotAcceptTransaction(); }},
 #endif
     };
     // clang-format on

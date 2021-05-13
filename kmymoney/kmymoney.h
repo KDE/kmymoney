@@ -242,6 +242,7 @@ protected Q_SLOTS:
     void slotMarkTransactions();
     void slotMoveTransactionTo();
     void slotMatchTransaction();
+    void slotAcceptTransaction();
     void slotCreateScheduledTransaction();
 
     void slotExecuteAction();
