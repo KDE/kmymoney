@@ -187,6 +187,15 @@ void LedgerFilterBase::setFilterFixedStrings(const QStringList& filters)
     invalidateFilter();
 }
 
+void LedgerFilterBase::appendFilterFixedString(const QString& filter)
+{
+    Q_D(LedgerFilterBase);
+    if (!d->filterIds.contains(filter)) {
+        d->filterIds.append(filter);
+        invalidateFilter();
+    }
+}
+
 QStringList LedgerFilterBase::filterFixedStrings() const
 {
     Q_D(const LedgerFilterBase);

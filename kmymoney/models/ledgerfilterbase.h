@@ -43,6 +43,7 @@ public:
 
     void setFilterFixedString(const QString& filter);
     void setFilterFixedStrings(const QStringList& filters);
+    void appendFilterFixedString(const QString& filter);
 
     QStringList filterFixedStrings() const;
 
