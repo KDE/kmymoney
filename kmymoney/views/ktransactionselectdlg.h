@@ -6,8 +6,6 @@
 #ifndef KTRANSACTIONSELECTDLG_H
 #define KTRANSACTIONSELECTDLG_H
 
-#include "kmm_base_dialogs_export.h"
-
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -23,7 +21,7 @@
  * @author Thomas Baumgart
  */
 class KTransactionSelectDlgPrivate;
-class KMM_BASE_DIALOGS_EXPORT KTransactionSelectDlg : public QDialog
+class KTransactionSelectDlg : public QDialog
 {
     Q_OBJECT
     Q_DISABLE_COPY(KTransactionSelectDlg)
