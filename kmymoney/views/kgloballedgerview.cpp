@@ -1623,7 +1623,7 @@ void KGlobalLedgerView::slotAcceptTransaction()
             if ((*it_t).split().isMatched()) {
                 // reload split in case it got changed during the course of this loop
                 MyMoneySplit s = t.splitById((*it_t).split().id());
-                TransactionMatcher matcher(d->m_currentAccount);
+                TransactionMatcher matcher;
                 matcher.accept(t, s);
             }
             emit selectByVariant(QVariantList {QVariant(i++), QVariant(0)}, eView::Intent::ReportProgress);

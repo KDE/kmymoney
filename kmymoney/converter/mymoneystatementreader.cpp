@@ -1267,7 +1267,7 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     try {
         // check for matches already stored in the engine
         TransactionMatchFinder::MatchResult result;
-        TransactionMatcher matcher(thisaccount);
+        TransactionMatcher matcher;
         d->transactionsCount++;
 
         ExistingTransactionMatchFinder existingTrMatchFinder(KMyMoneySettings::matchInterval());

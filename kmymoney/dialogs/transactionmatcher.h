@@ -22,7 +22,7 @@ class KMM_BASE_DIALOGS_EXPORT TransactionMatcher
 public:
     Q_DISABLE_COPY(TransactionMatcher)
 
-    explicit TransactionMatcher(const MyMoneyAccount& acc);
+    explicit TransactionMatcher();
     ~TransactionMatcher();
 
     /**

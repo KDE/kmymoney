@@ -1242,7 +1242,7 @@ public:
         try {
             for (it = m_selectedTransactions.constBegin(); it != m_selectedTransactions.constEnd(); ++it) {
                 if ((*it).split().isMatched()) {
-                    TransactionMatcher matcher(m_currentAccount);
+                    TransactionMatcher matcher;
                     matcher.unmatch((*it).transaction(), (*it).split());
                 }
             }
@@ -1305,7 +1305,7 @@ public:
                 if (toBeDeleted.transaction().id().isEmpty())
                     throw MYMONEYEXCEPTION(QString::fromLatin1("No imported transaction selected for matching"));
 
-                TransactionMatcher matcher(m_currentAccount);
+                TransactionMatcher matcher;
                 matcher.match(remaining.transaction(), remaining.split(), toBeDeleted.transaction(), toBeDeleted.split(), true);
                 ft.commit();
             } catch (const MyMoneyException &e) {

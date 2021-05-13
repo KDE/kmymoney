@@ -29,15 +29,11 @@ public:
     TransactionMatcherPrivate()
     {
     }
-
-    MyMoneyAccount m_account;
 };
 
-TransactionMatcher::TransactionMatcher(const MyMoneyAccount& acc) :
-    d_ptr(new TransactionMatcherPrivate)
+TransactionMatcher::TransactionMatcher()
+    : d_ptr(new TransactionMatcherPrivate)
 {
-    Q_D(TransactionMatcher);
-    d->m_account = acc;
 }
 
 TransactionMatcher::~TransactionMatcher()
@@ -49,7 +45,12 @@ TransactionMatcher::~TransactionMatcher()
 void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTransaction ti, MyMoneySplit si, bool allowImportedTransactions)
 {
     Q_D(TransactionMatcher);
-    auto sec = MyMoneyFile::instance()->security(d->m_account.currencyId());
+    if (sm.accountId() != si.accountId()) {
+        throw MYMONEYEXCEPTION_CSTRING("Both splits must reference the same account for matching");
+    }
+
+    auto account = MyMoneyFile::instance()->account(sm.accountId());
+    auto sec = MyMoneyFile::instance()->security(account.currencyId());
 
     // Now match the transactions.
     //
@@ -90,7 +91,9 @@ void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTr
 
     // verify that the amounts are the same, otherwise we should not be matching!
     if (sm.shares() != si.shares()) {
-        throw MYMONEYEXCEPTION(QString::fromLatin1("Splits for %1 have conflicting values (%2,%3)").arg(d->m_account.name(), MyMoneyUtils::formatMoney(sm.shares(), d->m_account, sec), MyMoneyUtils::formatMoney(si.shares(), d->m_account, sec)));
+        throw MYMONEYEXCEPTION(
+            QString::fromLatin1("Splits for %1 have conflicting values (%2,%3)")
+                .arg(account.name(), MyMoneyUtils::formatMoney(sm.shares(), account, sec), MyMoneyUtils::formatMoney(si.shares(), account, sec)));
     }
 
     // ipwizard: I took over the code to keep the bank id found in the endMatchTransaction
