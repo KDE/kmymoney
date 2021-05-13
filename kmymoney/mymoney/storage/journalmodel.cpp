@@ -837,7 +837,6 @@ bool JournalModel::setData(const QModelIndex& idx, const QVariant& value, int ro
         switch(idx.column()) {
         case Balance:
             journalEntry.setBalance(value.value<MyMoneyMoney>());
-            emit dataChanged(idx, idx);
             return true;
 
         default:
