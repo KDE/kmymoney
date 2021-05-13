@@ -401,6 +401,7 @@ JournalModel::JournalModel(QObject* parent, QUndoStack* undoStack)
     , d(new Private(this))
 {
     setObjectName(QLatin1String("JournalModel"));
+    useIdToItemMapper(true);
 }
 
 JournalModel::JournalModel(const QString& idLeadin, QObject* parent, QUndoStack* undoStack)
@@ -408,6 +409,7 @@ JournalModel::JournalModel(const QString& idLeadin, QObject* parent, QUndoStack*
     , d(new Private(this))
 {
     setObjectName(QLatin1String("JournalModel"));
+    useIdToItemMapper(true);
 }
 
 JournalModel::~JournalModel()
@@ -871,7 +873,11 @@ void JournalModel::load(const QMap<QString, MyMoneyTransaction>& list)
         auto transaction = QSharedPointer<MyMoneyTransaction>(new MyMoneyTransaction(*it));
         for (const auto& split : (*transaction).splits()) {
             const JournalEntry journalEntry(QString("%1-%2").arg(it.key(), split.id()), transaction, split);
-            static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->dataRef() = journalEntry;
+            const auto idx = index(row, 0);
+            static_cast<TreeItem<JournalEntry>*>(idx.internalPointer())->dataRef() = journalEntry;
+            if (m_idToItemMapper) {
+                m_idToItemMapper->insert(journalEntry.id(), static_cast<TreeItem<JournalEntry>*>(idx.internalPointer()));
+            }
             ++row;
         }
     }
@@ -967,6 +973,9 @@ void JournalModel::doAddItem(const JournalEntry& item, const QModelIndex& parent
     foreach (const auto split, (*transaction).splits()) {
         JournalEntry journalEntry(QString("%1-%2").arg(key, split.id()), transaction, split);
         static_cast<TreeItem<JournalEntry>*>(index(startRow, 0).internalPointer())->dataRef() = journalEntry;
+        if (m_idToItemMapper) {
+            m_idToItemMapper->insert(journalEntry.id(), static_cast<TreeItem<JournalEntry>*>(idx.internalPointer()));
+        }
         ++startRow;
     }
 
@@ -997,6 +1006,7 @@ void JournalModel::doRemoveItem(const JournalEntry& before)
     d->startBalanceCacheOperation();
     d->removeTransactionFromBalance(idx.row(), rows);
 
+    // removeRows() also handles the m_idToItemMapper
     removeRows(idx.row(), rows);
     d->removeIdKeyMapping(transaction.id());
 
@@ -1067,9 +1077,13 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
 
     // use the oldKey for now to keep sorting in a correct state
     int row = srcIdx.row();
-    foreach (const auto split, newTransaction.splits()) {
+    for (const auto& split : newTransaction.splits()) {
         JournalEntry journalEntry(QString("%1-%2").arg(oldKey, split.id()), transaction, split);
-        static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->dataRef() = journalEntry;
+        const auto idx = index(row, 0);
+        static_cast<TreeItem<JournalEntry>*>(idx.internalPointer())->dataRef() = journalEntry;
+        if (m_idToItemMapper) {
+            m_idToItemMapper->insert(journalEntry.id(), static_cast<TreeItem<JournalEntry>*>(idx.internalPointer()));
+        }
         ++row;
     }
 
@@ -1097,6 +1111,9 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
             const int srcRow = srcIdx.row();
             for (int rows = newSplitCount; rows > 0; --rows) {
                 auto journalEntry = m_rootItem->takeChild(srcRow);
+                if (m_idToItemMapper) {
+                    m_idToItemMapper->remove(journalEntry->dataRef().m_id);
+                }
                 journalEntry->dataRef().m_id = QString("%1-%2").arg(newKey, journalEntry->constDataRef().m_split.id());
                 entries.append(journalEntry);
             }
@@ -1107,6 +1124,15 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
 
             // insert the items at the new location
             m_rootItem->insertChildren(destRow, entries);
+
+            // and possibly fill in the new m_idToItemMapper values
+            if (m_idToItemMapper) {
+                const int lastRow = destRow + entries.count() - 1;
+                for (row = destRow; row <= lastRow; ++row) {
+                    const auto idx = index(row, 0);
+                    m_idToItemMapper->insert(idx.data(eMyMoney::Model::IdRole).toString(), static_cast<TreeItem<JournalEntry>*>(idx.internalPointer()));
+                }
+            }
 
             d->addIdKeyMapping(oldTransaction.id(), newKey);
 
