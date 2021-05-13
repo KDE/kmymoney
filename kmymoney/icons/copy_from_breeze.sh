@@ -75,6 +75,7 @@ for i in $all_icons; do
         [ -d "$dest_dir" ] || mkdir -p "$dest_dir"
         echo "copying $src to $dest"
         cp "$src" "$dest"
+        chmod oga-x "$dest"
         [ -z "$DOS2UNIX" ] || $DOS2UNIX $dest
     done
 done
