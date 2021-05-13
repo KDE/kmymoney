@@ -484,7 +484,9 @@ void SimpleLedgerView::aboutToShow()
             d->m_selections = view->selections();
         }
     }
-    emit requestSelectionChange(d->m_selections);
+
+    // don't forget base class logic
+    KMyMoneyViewBase::aboutToShow();
 }
 
 void SimpleLedgerView::slotSettingsChanged()
