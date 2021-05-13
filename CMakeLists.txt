@@ -278,12 +278,12 @@ if(PYTHONINTERP_FOUND AND PYTHONLIBS_FOUND)
     message(WARNING "Python 3 required, but Python 2 found.")
   else()
     include(FindPythonModule)
-    find_python_module(weboob REQUIRED)
+    find_python_module(woob REQUIRED)
   endif()
 endif()
 
 cmake_dependent_option(ENABLE_WEBOOB "Enable Weboob plugin" ON
-                       "PYTHONLIBS_FOUND;PYTHONINTERP_FOUND;PY_WEBOOB;Qt5Concurrent_FOUND" OFF)
+                       "PYTHONLIBS_FOUND;PYTHONINTERP_FOUND;PY_WOOB;Qt5Concurrent_FOUND" OFF)
 add_feature_info(Weboob ENABLE_WEBOOB "Online banking interface using Weboob.")
 
 
