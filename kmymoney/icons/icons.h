@@ -21,7 +21,7 @@ class QIcon;
 namespace Icons {
 
 // clang-format off
-enum class Icon { OpenDatabase, Merge, Reconcile, Split, Tip, PerformanceTest,
+enum class Icon { OpenDatabase, Link, Unlink, Reconcile, Split, Tip, PerformanceTest,
                   Calculator,
                   UserProperties, DocumentProperties,
                   ZoomIn, ZoomOut,
