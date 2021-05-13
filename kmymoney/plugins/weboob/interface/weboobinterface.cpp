@@ -213,23 +213,18 @@ WeboobInterface::Account WeboobInterface::getAccount(QString backend, QString ac
             for (auto i = 0 ; i < sizeVal; ++i) {
                 auto val2 = PyList_GetItem(val, i);
                 if (val2) {
-                    PyObject *key3, *val3;
-                    Py_ssize_t pos3 = 0;
-                    while (PyDict_Next(val2, &pos3, &key3, &val3)) {
-                        WeboobInterface::Transaction tr;
-                        tr.id = extractDictStringValue(val3, "id");
-                        tr.date = QDate::fromString(extractDictStringValue(val3, "date"), "yyyy-MM-dd");
-                        tr.rdate = QDate::fromString(extractDictStringValue(val3, "rdate"), "yyyy-MM-dd");
-                        tr.type = (WeboobInterface::Transaction::type_t)extractDictLongValue(val3, "type");
-                        tr.raw = extractDictStringValue(val3, "raw");
-                        tr.category = extractDictStringValue(val3, "category");
-                        tr.label = extractDictStringValue(val3, "label");
-                        tr.amount = MyMoneyMoney(extractDictLongValue(val3, "amount"), 100);
+                    WeboobInterface::Transaction tr;
+                    tr.id = extractDictStringValue(val2, "id");
+                    tr.date = QDate::fromString(extractDictStringValue(val2, "date"), "yyyy-MM-dd");
+                    tr.rdate = QDate::fromString(extractDictStringValue(val2, "rdate"), "yyyy-MM-dd");
+                    tr.type = (WeboobInterface::Transaction::type_t)extractDictLongValue(val2, "type");
+                    tr.raw = extractDictStringValue(val2, "raw");
+                    tr.category = extractDictStringValue(val2, "category");
+                    tr.label = extractDictStringValue(val2, "label");
+                    tr.amount = MyMoneyMoney(extractDictLongValue(val2, "amount"), 100);
 
-                        acc.transactions.append(tr);
-                    }
+                    acc.transactions.append(tr);
                 }
-
             }
         }
         Py_DECREF(key);
