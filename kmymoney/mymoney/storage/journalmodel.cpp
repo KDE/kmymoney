@@ -879,10 +879,10 @@ void JournalModel::load(const QMap<QString, MyMoneyTransaction>& list)
         auto transaction = QSharedPointer<MyMoneyTransaction>(new MyMoneyTransaction(*it));
         for (const auto& split : (*transaction).splits()) {
             const JournalEntry journalEntry(QString("%1-%2").arg(it.key(), split.id()), transaction, split);
-            const auto idx = index(row, 0);
-            static_cast<TreeItem<JournalEntry>*>(idx.internalPointer())->dataRef() = journalEntry;
+            const auto newIdx = index(row, 0);
+            static_cast<TreeItem<JournalEntry>*>(newIdx.internalPointer())->dataRef() = journalEntry;
             if (m_idToItemMapper) {
-                m_idToItemMapper->insert(journalEntry.id(), static_cast<TreeItem<JournalEntry>*>(idx.internalPointer()));
+                m_idToItemMapper->insert(journalEntry.id(), static_cast<TreeItem<JournalEntry>*>(newIdx.internalPointer()));
             }
             ++row;
         }
@@ -976,12 +976,14 @@ void JournalModel::doAddItem(const JournalEntry& item, const QModelIndex& parent
     d->startBalanceCacheOperation();
 
     const auto originalStartRow = startRow;
-    foreach (const auto split, (*transaction).splits()) {
-        JournalEntry journalEntry(QString("%1-%2").arg(key, split.id()), transaction, split);
-        static_cast<TreeItem<JournalEntry>*>(index(startRow, 0).internalPointer())->dataRef() = journalEntry;
+    for (const auto& split : (*transaction).splits()) {
+        const JournalEntry journalEntry(QString("%1-%2").arg(key, split.id()), transaction, split);
+        const auto newIdx = index(startRow, 0);
+        static_cast<TreeItem<JournalEntry>*>(newIdx.internalPointer())->dataRef() = journalEntry;
         if (m_idToItemMapper) {
-            m_idToItemMapper->insert(journalEntry.id(), static_cast<TreeItem<JournalEntry>*>(idx.internalPointer()));
+            m_idToItemMapper->insert(journalEntry.id(), static_cast<TreeItem<JournalEntry>*>(newIdx.internalPointer()));
         }
+
         ++startRow;
     }
 
@@ -1084,11 +1086,11 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
     // use the oldKey for now to keep sorting in a correct state
     int row = srcIdx.row();
     for (const auto& split : newTransaction.splits()) {
-        JournalEntry journalEntry(QString("%1-%2").arg(oldKey, split.id()), transaction, split);
-        const auto idx = index(row, 0);
-        static_cast<TreeItem<JournalEntry>*>(idx.internalPointer())->dataRef() = journalEntry;
+        const JournalEntry journalEntry(QString("%1-%2").arg(oldKey, split.id()), transaction, split);
+        const auto newIdx = index(row, 0);
+        static_cast<TreeItem<JournalEntry>*>(newIdx.internalPointer())->dataRef() = journalEntry;
         if (m_idToItemMapper) {
-            m_idToItemMapper->insert(journalEntry.id(), static_cast<TreeItem<JournalEntry>*>(idx.internalPointer()));
+            m_idToItemMapper->insert(journalEntry.id(), static_cast<TreeItem<JournalEntry>*>(newIdx.internalPointer()));
         }
         ++row;
     }
