@@ -27,6 +27,7 @@ set(libviews_a_SOURCES
   ledgertagfilter.cpp
   journaldelegate.cpp
   onlinebalancedelegate.cpp
+  reconciliationledgerviewpage.cpp
   specialdatedelegate.cpp
   investtransactioneditor.cpp
   investactivities.cpp

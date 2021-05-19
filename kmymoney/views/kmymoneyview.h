@@ -259,7 +259,11 @@ Q_SIGNALS:
      */
     void statusProgress(int cnt, int base);
 
-    void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
+    void accountReconciled(const MyMoneyAccount& account,
+                           const QDate& date,
+                           const MyMoneyMoney& startingBalance,
+                           const MyMoneyMoney& endingBalance,
+                           const QStringList& transactionList);
 
     /**
       * This signal is emitted when a transaction/list of transactions has been selected by

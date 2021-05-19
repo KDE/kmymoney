@@ -1219,6 +1219,24 @@ unsigned int JournalModel::transactionCount(const QString& accountid) const
     return result;
 }
 
+QString JournalModel::updateJournalId(const QString& journalId) const
+{
+    const QRegularExpression regExp(QStringLiteral("[\\d-]+(T\\d+)-(S\\d+)"));
+    const auto expMatch = regExp.match(journalId);
+    if (expMatch.hasMatch()) {
+        const auto transactionId = expMatch.captured(1);
+        const auto splitId = expMatch.captured(2);
+        const auto indeces = indexesByTransactionId(transactionId);
+        for (const auto& idx : indeces) {
+            if (idx.data(eMyMoney::Model::JournalSplitIdRole).toString() == splitId) {
+                qDebug() << "converted" << journalId << "to" << idx.data(eMyMoney::Model::IdRole).toString();
+                return idx.data(eMyMoney::Model::IdRole).toString();
+            }
+        }
+    }
+    return {};
+}
+
 void JournalModel::updateBalances()
 {
     d->loadAccountCache();
@@ -1239,6 +1257,26 @@ void JournalModel::updateBalances()
 
     // and store the results in the accountsModel
     emit balancesChanged(d->balanceCache);
+}
+
+MyMoneyMoney JournalModel::clearedBalance(const QString& accountId, const QDate& date) const
+{
+    MyMoneyMoney balance;
+    const int rows = rowCount();
+    for (int row = 0; row < rows; ++row) {
+        const JournalEntry& journalEntry = static_cast<TreeItem<JournalEntry>*>(index(row, 0).internalPointer())->constDataRef();
+        const auto split(journalEntry.split());
+        if (Q_UNLIKELY(!date.isValid()) || Q_LIKELY(journalEntry.transaction().postDate() <= date)) {
+            if ((split.accountId() == accountId) && (split.reconcileFlag() != eMyMoney::Split::State::NotReconciled)) {
+                if (journalEntry.transaction().isStockSplit()) {
+                    balance *= journalEntry.split().shares();
+                } else {
+                    balance += journalEntry.split().shares();
+                }
+            }
+        }
+    }
+    return balance;
 }
 
 MyMoneyMoney JournalModel::balance(const QString& accountId, const QDate& date) const

@@ -56,7 +56,8 @@ public:
 
     QStringList selectedJournalEntries() const;
 
-    void setSelectedJournalEntries(const QStringList& transactionIds);
+    void setSelectedJournalEntries(const QStringList& journalEntryIds);
+    void reselectJournalEntry(const QString& journalEntryId);
 
     void selectMostRecentTransaction();
 

@@ -5,6 +5,7 @@
 
 
 #include "ledgerviewpage.h"
+#include "ledgerviewpage_p.h"
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -19,11 +20,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include <ui_ledgerviewpage.h>
-#include "newtransactionform.h"
-#include "ledgeraccountfilter.h"
-#include "ledgerfilter.h"
-#include "specialdatesfilter.h"
 #include "specialdatesmodel.h"
 #include "schedulesjournalmodel.h"
 #include "journalmodel.h"
@@ -31,68 +27,29 @@
 #include "widgetenums.h"
 #include "menuenums.h"
 #include "mymoneyfile.h"
-#include "selectedobjects.h"
 #include "mymoneyaccount.h"
 #include "icons.h"
 
 using namespace Icons;
 using namespace eWidgets;
 
-class LedgerViewPage::Private
-{
-public:
-    Private(QWidget* parent)
-        : ui(new Ui_LedgerViewPage)
-        , accountFilter(nullptr)
-        , specialDatesFilter(nullptr)
-        , stateFilter(nullptr)
-        , form(nullptr)
-    {
-        ui->setupUi(parent);
-
-        // make sure, we can disable the detail form but not the ledger view
-        ui->m_splitter->setCollapsible(0, false);
-        ui->m_splitter->setCollapsible(1, true);
-
-        // make sure the ledger gets all the stretching
-        ui->m_splitter->setStretchFactor(0, 3);
-        ui->m_splitter->setStretchFactor(1, 1);
-        ui->m_splitter->setSizes(QList<int>() << 10000 << ui->m_formWidget->sizeHint().height());
-
-        delayTimer.setSingleShot(true);
-    }
-
-    ~Private()
-    {
-        delete ui;
-    }
-
-    Ui_LedgerViewPage*    ui;
-    LedgerAccountFilter*  accountFilter;
-    SpecialDatesFilter*   specialDatesFilter;
-    LedgerFilter*         stateFilter;
-    NewTransactionForm*   form;
-    QSet<QString>         hideFormReasons;
-    QString               accountId;
-    SelectedObjects       selections;
-    QTimer                delayTimer;
-};
-
 LedgerViewPage::LedgerViewPage(QWidget* parent, const QString& configGroupName)
     : QWidget(parent)
     , d(new Private(this))
 {
-    connect(d->ui->m_ledgerView, &LedgerView::transactionSelected, this, &LedgerViewPage::transactionSelected);
-    connect(d->ui->m_ledgerView, &LedgerView::aboutToStartEdit, this, &LedgerViewPage::aboutToStartEdit);
-    connect(d->ui->m_ledgerView, &LedgerView::aboutToFinishEdit, this, &LedgerViewPage::aboutToFinishEdit);
-    connect(d->ui->m_ledgerView, &LedgerView::aboutToStartEdit, this, &LedgerViewPage::startEdit);
-    connect(d->ui->m_ledgerView, &LedgerView::aboutToFinishEdit, this, &LedgerViewPage::finishEdit);
-    connect(d->ui->m_ledgerView, &LedgerView::transactionSelectionChanged, this, &LedgerViewPage::slotRequestSelectionChanged);
-    connect(d->ui->m_ledgerView, &LedgerView::requestCustomContextMenu, this, &LedgerViewPage::requestCustomContextMenu);
+    init(configGroupName);
+}
 
-    connect(d->ui->m_splitter, &QSplitter::splitterMoved, this, &LedgerViewPage::splitterChanged);
+LedgerViewPage::LedgerViewPage(LedgerViewPage::Private& dd, QWidget* parent, const QString& configGroupName)
+    : QWidget(parent)
+    , d(&dd)
+{
+    init(configGroupName);
+}
 
-    d->ui->m_ledgerView->setColumnSelectorGroupName(configGroupName);
+void LedgerViewPage::init(const QString& configGroupName)
+{
+    d->init(configGroupName);
 
     // setup the model stack
     const auto file = MyMoneyFile::instance();
@@ -273,6 +230,8 @@ void LedgerViewPage::setAccount(const MyMoneyAccount& acc)
         d->selections.setSelection(SelectedObjects::Institution, acc.institutionId());
     }
     d->ui->m_ledgerView->selectMostRecentTransaction();
+
+    d->accountName = acc.name();
 }
 
 void LedgerViewPage::showTransactionForm(bool show)
@@ -334,7 +293,7 @@ void LedgerViewPage::selectJournalEntry(const QString& id)
     d->ui->m_ledgerView->setSelectedJournalEntries(QStringList{id});
 }
 
-void LedgerViewPage::executeAction(eMenu::Action action, const SelectedObjects& selections)
+bool LedgerViewPage::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
     const auto journalEntryIds = selections.selection(SelectedObjects::JournalEntry);
     switch (action) {
@@ -364,7 +323,38 @@ void LedgerViewPage::executeAction(eMenu::Action action, const SelectedObjects& 
     case eMenu::Action::SelectAllTransactions:
         d->ui->m_ledgerView->selectAllTransactions();
         break;
+    case eMenu::Action::MatchTransaction:
+        d->ui->m_ledgerView->reselectJournalEntry(selections.firstSelection(SelectedObjects::JournalEntry));
+        break;
+
     default:
         break;
     }
+    return true;
+}
+
+void LedgerViewPage::pushView(LedgerViewPage* view)
+{
+    if (d->stackedView) {
+        qDebug() << "view stack already taken, old one destroyed";
+        d->stackedView->deleteLater();
+    }
+    d->ui->m_ledgerView->setSelectedJournalEntries(view->d->ui->m_ledgerView->selectedJournalEntries());
+    d->stackedView = view;
+}
+
+LedgerViewPage* LedgerViewPage::popView()
+{
+    const auto view = d->stackedView;
+    d->stackedView = nullptr;
+    return view;
+}
+
+QString LedgerViewPage::accountName()
+{
+    return d->accountName;
+}
+
+void LedgerViewPage::updateSummaryInformation()
+{
 }

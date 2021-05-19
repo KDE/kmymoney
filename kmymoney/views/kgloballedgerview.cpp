@@ -69,9 +69,6 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent) :
         {Action::CancelTransaction,         [this](){ KGlobalLedgerView::slotCancelTransaction(); }},
         {Action::CombineTransactions,       [this](){ KGlobalLedgerView::slotCombineTransactions(); }},
         {Action::AssignTransactionsNumber,  [this](){ KGlobalLedgerView::slotAssignNumber(); }},
-        {Action::StartReconciliation,       [this](){ KGlobalLedgerView::slotStartReconciliation(); }},
-        {Action::FinishReconciliation,      [this](){ KGlobalLedgerView::slotFinishReconciliation(); }},
-        {Action::PostponeReconciliation,    [this](){ KGlobalLedgerView::slotPostponeReconciliation(); }},
         {Action::EditFindTransaction,       [this](){ KGlobalLedgerView::slotFindTransaction(); }},
 #if 0 // already moved to new location
 {Action::NewTransaction,            [this](){ KGlobalLedgerView::slotNewTransaction(); }},
@@ -90,6 +87,9 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent) :
 {Action::MatchTransaction,          [this](){ KGlobalLedgerView::slotMatchTransactions(); }},
 {Action::NewScheduledTransaction,   [this](){ KGlobalLedgerView::slotCreateScheduledTransaction(); }},
 {Action::AcceptTransaction,         [this](){ KGlobalLedgerView::slotAcceptTransaction(); }},
+{Action::StartReconciliation,       [this](){ KGlobalLedgerView::slotStartReconciliation(); }},
+{Action::FinishReconciliation,      [this](){ KGlobalLedgerView::slotFinishReconciliation(); }},
+{Action::PostponeReconciliation,    [this](){ KGlobalLedgerView::slotPostponeReconciliation(); }},
 #endif
     };
     // clang-format on
@@ -204,6 +204,7 @@ void KGlobalLedgerView::showEvent(QShowEvent* event)
 
 void KGlobalLedgerView::updateActions(const MyMoneyObject& obj)
 {
+#if 0
     Q_D(KGlobalLedgerView);
 //  if (typeid(obj) != typeid(MyMoneyAccount) &&
 //      (obj.id().isEmpty() && d->m_currentAccount.id().isEmpty())) // do not disable actions that were already disabled))
@@ -261,6 +262,7 @@ void KGlobalLedgerView::updateActions(const MyMoneyObject& obj)
 
     d->m_currentAccount = acc;
 //  slotSelectAccount(acc);
+#endif
 }
 
 void KGlobalLedgerView::updateLedgerActions(const KMyMoneyRegister::SelectedTransactions& list)

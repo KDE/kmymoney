@@ -53,6 +53,8 @@ enum class Action {
     OpenAccount, CloseAccount, ReopenAccount,
     StartReconciliation, FinishReconciliation,
     PostponeReconciliation,
+    CancelReconciliation,
+    ReconciliationReport,
     ReportAccountTransactions, ChartAccountBalance,
     UpdateAccountMenu, UpdateAccount, UpdateAllAccounts,
     MapOnlineAccount, UnmapOnlineAccount,

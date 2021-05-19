@@ -30,6 +30,7 @@ public:
 
     virtual void showTransactionForm(bool = true);
 
+    void updateActions(const SelectedObjects& selections) override;
     void executeAction(eMenu::Action action, const SelectedObjects& selections) override;
 
     void executeCustomAction(eView::Action action) override;
@@ -49,6 +50,7 @@ private Q_SLOTS:
     void closeLedger(int idx);
     void checkTabOrder(int from, int to);
     void setupCornerWidget();
+    void slotRequestSelectionChange(const SelectedObjects& selections) const;
 
 protected:
     bool eventFilter(QObject* o, QEvent* e) override;

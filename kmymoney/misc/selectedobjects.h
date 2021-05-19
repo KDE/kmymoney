@@ -35,6 +35,7 @@ public:
         Budget,
         OnlineJob,
         Report,
+        ReconciliationAccount,
     } Object_t;
     SelectedObjects();
 

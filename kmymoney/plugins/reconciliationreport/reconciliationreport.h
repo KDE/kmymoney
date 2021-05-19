@@ -32,7 +32,11 @@ public Q_SLOTS:
 
 protected Q_SLOTS:
     // reconciliation of an account has finished
-    void slotGenerateReconciliationReport(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
+    void slotGenerateReconciliationReport(const MyMoneyAccount& account,
+                                          const QDate& date,
+                                          const MyMoneyMoney& startingBalance,
+                                          const MyMoneyMoney& endingBalance,
+                                          const QStringList& transactionList);
 };
 
 #endif // RECONCILIATIONREPORT_H

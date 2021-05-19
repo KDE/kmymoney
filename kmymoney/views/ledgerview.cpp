@@ -490,9 +490,12 @@ QModelIndex LedgerView::editIndex() const
 
 void LedgerView::mousePressEvent(QMouseEvent* event)
 {
-    // qDebug() << "mousePressEvent";
     if(state() != QAbstractItemView::EditingState) {
         QTableView::mousePressEvent(event);
+        // a click on the reconciliation column triggers the Mark transaction action
+        if (columnAt(event->pos().x()) == JournalModel::Column::Reconciliation) {
+            pActions[eMenu::Action::ToggleReconciliationFlag]->trigger();
+        }
     }
 }
 
@@ -848,6 +851,24 @@ QStringList LedgerView::selectedJournalEntries() const
         }
     }
     return selection;
+}
+
+void LedgerView::reselectJournalEntry(const QString& journalEntryId)
+{
+    const auto journalModel = MyMoneyFile::instance()->journalModel();
+    const auto baseIdx = journalModel->indexById(journalEntryId);
+    auto row = journalModel->mapFromBaseSource(model(), baseIdx).row();
+    if (row != -1) {
+        setSelectedJournalEntries(QStringList(journalEntryId));
+    } else {
+        // it could be, that the journal id changed due to a date
+        // change. In this case, the transaction id is still the same
+        // so we check if we find it.
+        const auto newJournalEntryId = journalModel->updateJournalId(journalEntryId);
+        if (!newJournalEntryId.isEmpty()) {
+            setSelectedJournalEntries(QStringList(newJournalEntryId));
+        }
+    }
 }
 
 void LedgerView::setSelectedJournalEntries(const QStringList& journalEntryIds)

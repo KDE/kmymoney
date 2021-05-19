@@ -26,10 +26,9 @@ KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoneyView* view, QObject* 
 {
     connect(m_view, &KMyMoneyView::accountSelected, this, &ViewInterface::accountSelected);
     connect(m_view, &KMyMoneyView::transactionsSelected, this, &ViewInterface::transactionsSelected);
-    connect(m_view, &KMyMoneyView::accountReconciled,
-            this, &ViewInterface::accountReconciled);
+    connect(m_view, &KMyMoneyView::accountReconciled, this, &ViewInterface::accountReconciled);
 
-//  connect(app, &KMyMoneyApp::institutionSelected, this, &ViewInterface::institutionSelected);
+    //  connect(app, &KMyMoneyApp::institutionSelected, this, &ViewInterface::institutionSelected);
 
     connect(m_view, &KMyMoneyView::viewStateChanged, this, &ViewInterface::viewStateChanged);
 }

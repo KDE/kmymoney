@@ -108,23 +108,24 @@
 #include "journalmodel.h"
 #include "views/kmymoneyview.h"
 
-#include "mymoney/mymoneyobject.h"
-#include "mymoney/mymoneyfile.h"
-#include "mymoney/mymoneyinstitution.h"
 #include "mymoney/mymoneyaccount.h"
 #include "mymoney/mymoneyaccountloan.h"
-#include "mymoney/mymoneysecurity.h"
+#include "mymoney/mymoneybudget.h"
+#include "mymoney/mymoneyfile.h"
+#include "mymoney/mymoneyforecast.h"
+#include "mymoney/mymoneyinstitution.h"
+#include "mymoney/mymoneyobject.h"
 #include "mymoney/mymoneypayee.h"
 #include "mymoney/mymoneyprice.h"
-#include "mymoney/mymoneytag.h"
-#include "mymoney/mymoneybudget.h"
 #include "mymoney/mymoneyreport.h"
+#include "mymoney/mymoneysecurity.h"
 #include "mymoney/mymoneysplit.h"
-#include "mymoney/mymoneyutils.h"
 #include "mymoney/mymoneystatement.h"
-#include "mymoney/mymoneyforecast.h"
+#include "mymoney/mymoneytag.h"
 #include "mymoney/mymoneytransactionfilter.h"
+#include "mymoney/mymoneyutils.h"
 #include "mymoneyexception.h"
+#include "mymoneyreconciliationreport.h"
 
 #include "mymoneytemplate.h"
 #include "templateloader.h"
@@ -1221,6 +1222,8 @@ public:
         if (m_selections.selection(SelectedObjects::JournalEntry).count() != 2)
             return;
 
+        const auto priorSelection(m_selections);
+
         const auto file(MyMoneyFile::instance());
         QString toBeDeletedId;
         QString remainingId;
@@ -1278,6 +1281,9 @@ public:
             } catch (const MyMoneyException& e) {
                 KMessageBox::detailedSorry(q, i18n("Unable to match the selected transactions"), e.what());
             }
+
+            // inform views about the match (they may have to reselect some items)
+            m_myMoneyView->executeAction(Action::MatchTransaction, priorSelection);
         }
     }
 
@@ -1299,6 +1305,15 @@ public:
 
         } catch (const MyMoneyException& e) {
             KMessageBox::detailedSorry(q, i18n("Unable to unmatch the selected transactions"), e.what());
+        }
+    }
+
+    void executeAction(eMenu::Action actionId)
+    {
+        if (actionId != eMenu::Action::None) {
+            // make sure to work on the current state
+            const auto selections = m_selections;
+            m_myMoneyView->executeAction(actionId, selections);
         }
     }
 };
@@ -1562,6 +1577,8 @@ void KMyMoneyApp::slotSelectionChanged(const SelectedObjects& selections)
             qDebug() << "Institutions:" << selections.selection(SelectedObjects::Institution);
         if (!selections.isEmpty(SelectedObjects::Account))
             qDebug() << "Accounts:" << selections.selection(SelectedObjects::Account);
+        if (!selections.isEmpty(SelectedObjects::ReconciliationAccount))
+            qDebug() << "ReconciliationAccounts:" << selections.selection(SelectedObjects::ReconciliationAccount);
         if (!selections.isEmpty(SelectedObjects::JournalEntry))
             qDebug() << "JournalEntries:" << selections.selection(SelectedObjects::JournalEntry);
         if (!selections.isEmpty(SelectedObjects::Payee))
@@ -1656,8 +1673,10 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::NewAccount,                    QStringLiteral("account_new"),                    i18n("New account..."),                             Icon::AccountNew},
             {Action::OpenAccount,                   QStringLiteral("account_open"),                   i18n("Open ledger"),                                Icon::Ledger},
             {Action::StartReconciliation,           QStringLiteral("account_reconcile"),              i18n("Reconcile..."),                               Icon::Reconcile},
-            {Action::FinishReconciliation,          QStringLiteral("account_reconcile_finish"),       i18nc("Finish reconciliation", "Finish"),   Icon::Reconciled},
+            {Action::FinishReconciliation,          QStringLiteral("account_reconcile_finish"),       i18nc("Finish reconciliation", "Finish"),           Icon::Reconciled},
             {Action::PostponeReconciliation,        QStringLiteral("account_reconcile_postpone"),     i18n("Postpone reconciliation"),                    Icon::Pause},
+            {Action::CancelReconciliation,          QStringLiteral("account_reconcile_cancel"),       i18n("Cancel reconciliation"),                      Icon::Empty},
+            {Action::ReconciliationReport,          QStringLiteral("account_reconcile_report"),       i18n("Report reconciliation"),                      Icon::Empty},
             {Action::EditAccount,                   QStringLiteral("account_edit"),                   i18n("Edit account..."),                            Icon::AccountEdit},
             {Action::DeleteAccount,                 QStringLiteral("account_delete"),                 i18n("Delete account..."),                          Icon::AccountRemove},
             {Action::CloseAccount,                  QStringLiteral("account_close"),                  i18n("Close account"),                              Icon::AccountClose},
@@ -1703,7 +1722,7 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::DuplicateTransaction,          QStringLiteral("transaction_duplicate"),          i18nc("Duplicate transaction", "Duplicate"),        Icon::EditCopy},
             {Action::AddReversingTransaction,       QStringLiteral("transaction_add_reversing"),      i18nc("Add reversing transaction", "Add reversing"),Icon::Reverse},
             {Action::AcceptTransaction,             QStringLiteral("transaction_accept"),             i18nc("Accept 'imported' and 'matched' transaction", "Accept"), Icon::DialogOK},
-            {Action::ToggleReconciliationFlag,      QStringLiteral("transaction_mark_toggle"),        i18nc("Toggle reconciliation flag", "Toggle"),     Icon::Empty},
+            {Action::ToggleReconciliationFlag,      QStringLiteral("transaction_mark_toggle"),        i18nc("Toggle reconciliation flag", "Toggle"),      Icon::Empty},
             {Action::MarkCleared,                   QStringLiteral("transaction_mark_cleared"),       i18nc("Mark transaction cleared", "Cleared"),       Icon::Empty},
             {Action::MarkReconciled,                QStringLiteral("transaction_mark_reconciled"),    i18nc("Mark transaction reconciled", "Reconciled"), Icon::Empty},
             {Action::MarkNotReconciled,             QStringLiteral("transaction_mark_notreconciled"), i18nc("Mark transaction not reconciled", "Not reconciled"),     Icon::Empty},
@@ -1847,6 +1866,12 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::MoveTransactionTo,             &KMyMoneyApp::slotMoveTransactionTo},
             {Action::MatchTransaction,              &KMyMoneyApp::slotMatchTransaction},
             {Action::AcceptTransaction,             &KMyMoneyApp::slotAcceptTransaction},
+
+            {Action::StartReconciliation,           &KMyMoneyApp::slotStartReconciliation},
+            {Action::FinishReconciliation,          &KMyMoneyApp::slotExecuteAction},
+            {Action::PostponeReconciliation,        &KMyMoneyApp::slotExecuteAction},
+            {Action::CancelReconciliation,          &KMyMoneyApp::slotExecuteAction},
+            {Action::ReconciliationReport,          &KMyMoneyApp::slotReportReconciliation},
 
             {Action::NewScheduledTransaction,       &KMyMoneyApp::slotCreateScheduledTransaction},
 
@@ -2515,7 +2540,6 @@ void KMyMoneyApp::slotMarkTransactions()
     auto action = qobject_cast<QAction*>(sender());
     const auto actionId = d->qActionToId(action);
     const auto file = MyMoneyFile::instance();
-    const auto accountId = d->m_selections.firstSelection(SelectedObjects::Account);
 
     static const QHash<eMenu::Action, eMyMoney::Split::State> action2state = {
         {eMenu::Action::MarkNotReconciled, eMyMoney::Split::State::NotReconciled},
@@ -2525,15 +2549,15 @@ void KMyMoneyApp::slotMarkTransactions()
     };
 
     const auto flag = action2state.value(actionId, eMyMoney::Split::State::Unknown);
-    if ((actionId == eMenu::Action::None) || accountId.isEmpty()) {
+    if (actionId == eMenu::Action::None) {
         return;
     }
 
     auto cnt = d->m_selections.selection(SelectedObjects::JournalEntry).count();
-    auto i = 0;
 
     MyMoneyFileTransaction ft;
     try {
+        const auto isReconciliationMode = !d->m_selections.firstSelection(SelectedObjects::ReconciliationAccount).isEmpty();
         for (const auto& journalEntryId : d->m_selections.selection(SelectedObjects::JournalEntry)) {
             // turn on signals before we modify the last entry in the list
             cnt--;
@@ -2546,8 +2570,7 @@ void KMyMoneyApp::slotMarkTransactions()
                 auto sp = journalEntry.split();
                 if (sp.reconcileFlag() != flag) {
                     if (flag == eMyMoney::Split::State::Unknown) {
-                        /// @todo fixme for reconciliation
-                        // if (m_reconciliationAccount.id().isEmpty()) {
+                        if (!isReconciliationMode) {
                             // in normal mode we cycle through all states
                             switch (sp.reconcileFlag()) {
                                 case eMyMoney::Split::State::NotReconciled:
@@ -2562,8 +2585,6 @@ void KMyMoneyApp::slotMarkTransactions()
                                 default:
                                     break;
                             }
-#if 0
-                    /// @todo fixme for reconciliation
                         } else {
                             // in reconciliation mode we skip the reconciled state
                             switch (sp.reconcileFlag()) {
@@ -2577,7 +2598,6 @@ void KMyMoneyApp::slotMarkTransactions()
                                     break;
                             }
                         }
-#endif
                     } else {
                         sp.setReconcileFlag(flag);
                     }
@@ -2728,6 +2748,72 @@ void KMyMoneyApp::slotAcceptTransaction()
     }
 }
 
+void KMyMoneyApp::slotStartReconciliation()
+{
+    slotEnterOverdueSchedules();
+
+    d->executeAction(eMenu::Action::StartReconciliation);
+}
+
+void KMyMoneyApp::slotReportReconciliation()
+{
+    auto action = qobject_cast<QAction*>(sender());
+    const auto report = action->data().value<MyMoneyReconciliationReport>();
+
+    const auto account = MyMoneyFile::instance()->accountsModel()->itemById(report.accountId);
+    if (!account.id().isEmpty()) {
+        KMyMoneyPlugin::pluginInterfaces().viewInterface->accountReconciled(account, report.statementDate, report.startingBalance, report.endingBalance, report.journalEntryIds);
+    }
+}
+
+void KMyMoneyApp::slotEnterOverdueSchedules()
+{
+    const auto accountId = d->m_selections.firstSelection(SelectedObjects::Account);
+    if (accountId.isEmpty())
+        return;
+
+    const auto file = MyMoneyFile::instance();
+    const auto accountIdx = file->accountsModel()->indexById(accountId);
+    if (!accountIdx.isValid()) {
+        qDebug() << "Invalid account id in slotEnterOverdueSchedules";
+        return;
+    }
+
+    auto schedules = file->scheduleList(accountId, eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any, QDate(), QDate(), true);
+    if (!schedules.isEmpty()) {
+        const auto accountName = accountIdx.data(eMyMoney::Model::AccountNameRole).toString();
+        if (KMessageBox::questionYesNo(this,
+            i18n("KMyMoney has detected some overdue scheduled transactions for the account <b>%1</b>. Do you want to enter those scheduled transactions now?").arg(accountName),
+                                       i18n("Scheduled transactions found")) == KMessageBox::Yes) {
+
+            QSet<QString> skipMap;
+            bool processedOne(false);
+            auto rc = eDialogs::ScheduleResultCode::Enter;
+
+            do {
+                processedOne = false;
+                QList<MyMoneySchedule>::const_iterator it_sch;
+                for (it_sch = schedules.constBegin(); (rc != eDialogs::ScheduleResultCode::Cancel) && (it_sch != schedules.constEnd()); ++it_sch) {
+                    MyMoneySchedule sch(*(it_sch));
+
+                    // and enter it if it is not on the skip list
+                    if (!skipMap.contains((*it_sch).id())) {
+                        rc = d->m_myMoneyView->enterSchedule(sch, false, true);
+                        if (rc == eDialogs::ScheduleResultCode::Ignore) {
+                            skipMap.insert((*it_sch).id());
+                        } else {
+                            processedOne = true;
+                        }
+                    }
+                }
+
+                // reload list (maybe this schedule needs to be added again)
+                schedules = file->scheduleList(accountId, eMyMoney::Schedule::Type::Any, eMyMoney::Schedule::Occurrence::Any, eMyMoney::Schedule::PaymentType::Any, QDate(), QDate(), true);
+            } while (processedOne);
+        }
+    }
+}
+
 #if 0
 void KMyMoneyApp::slotOpenAccount()
 {
@@ -2777,12 +2863,7 @@ void KMyMoneyApp::slotExecuteActionWithData()
 
 void KMyMoneyApp::slotExecuteAction()
 {
-    const auto actionId = d->qActionToId(qobject_cast<QAction*>(sender()));
-    if (actionId != eMenu::Action::None) {
-        // make sure to work on the current state
-        const auto selections = d->m_selections;
-        d->m_myMoneyView->executeAction(actionId, selections);
-    }
+    d->executeAction(d->qActionToId(qobject_cast<QAction*>(sender())));
 }
 
 void KMyMoneyApp::slotHideReconciledTransactions()

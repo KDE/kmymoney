@@ -116,10 +116,13 @@ Q_SIGNALS:
      * @param date the reconciliation date as provided through the dialog
      * @param startingBalance the starting balance as provided through the dialog
      * @param endingBalance the ending balance as provided through the dialog
-     * @param transactionList reference to QList of QPair containing all
-     *        transaction/split pairs processed by the reconciliation.
+     * @param transactionList reference to QStringList of JournalEntryIds
      */
-    void accountReconciled(const MyMoneyAccount& account, const QDate& date, const MyMoneyMoney& startingBalance, const MyMoneyMoney& endingBalance, const QList<QPair<MyMoneyTransaction, MyMoneySplit> >& transactionList);
+    void accountReconciled(const MyMoneyAccount& account,
+                           const QDate& date,
+                           const MyMoneyMoney& startingBalance,
+                           const MyMoneyMoney& endingBalance,
+                           const QStringList& transactionList);
 
     void viewStateChanged(bool);
 };

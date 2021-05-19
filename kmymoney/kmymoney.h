@@ -244,6 +244,9 @@ protected Q_SLOTS:
     void slotMatchTransaction();
     void slotAcceptTransaction();
     void slotCreateScheduledTransaction();
+    void slotStartReconciliation();
+    void slotReportReconciliation();
+    void slotEnterOverdueSchedules();
 
     void slotExecuteAction();
     void slotExecuteActionWithData();

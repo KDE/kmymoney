@@ -138,6 +138,7 @@ public:
             {eMenu::Action::GoToPayee, View::Payees},
             {eMenu::Action::OpenAccount, View::NewLedgers},
             {eMenu::Action::GoToAccount, View::NewLedgers},
+            {eMenu::Action::StartReconciliation, View::NewLedgers},
             {eMenu::Action::ReportOpen, View::Reports},
             {eMenu::Action::FileClose, View::Home},
         };
@@ -378,16 +379,6 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
     const auto currentView = d->currentViewId();
     const auto file = MyMoneyFile::instance();
 
-    // update actions in all views. process the current last
-    for (const auto& view : d->viewBases.keys()) {
-        if (view == currentView)
-            break;
-        d->viewBases[view]->updateActions(selections);
-    }
-    d->viewBases[currentView]->updateActions(selections);
-
-    // global actions
-    // --------------
     pActions[eMenu::Action::NewTransaction]->setDisabled(true);
     pActions[eMenu::Action::EditTransaction]->setDisabled(true);
     pActions[eMenu::Action::EditSplits]->setDisabled(true);
@@ -401,11 +392,28 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
     pActions[eMenu::Action::SelectAllTransactions]->setEnabled(false);
     pActions[eMenu::Action::MatchTransaction]->setEnabled(false);
     pActions[eMenu::Action::NewScheduledTransaction]->setEnabled(false);
+    pActions[eMenu::Action::StartReconciliation]->setEnabled(false);
+    pActions[eMenu::Action::PostponeReconciliation]->setEnabled(false);
+    pActions[eMenu::Action::FinishReconciliation]->setEnabled(false);
 
+    // update actions in all views. process the current last
+    for (const auto& view : d->viewBases.keys()) {
+        if (view == currentView)
+            break;
+        d->viewBases[view]->updateActions(selections);
+    }
+    d->viewBases[currentView]->updateActions(selections);
+
+    // global actions
+    // --------------
     if (!selections.selection(SelectedObjects::JournalEntry).isEmpty()) {
         pActions[eMenu::Action::MarkNotReconciled]->setEnabled(true);
         pActions[eMenu::Action::MarkCleared]->setEnabled(true);
         pActions[eMenu::Action::MarkReconciled]->setEnabled(true);
+    }
+
+    if (selections.selection(SelectedObjects::ReconciliationAccount).isEmpty() && (selections.selection(SelectedObjects::Account).count() == 1)) {
+        pActions[eMenu::Action::StartReconciliation]->setEnabled(true);
     }
 
     switch (d->currentViewId()) {
@@ -834,6 +842,7 @@ void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Inten
 {
     Q_D(KMyMoneyView);
     switch(intent) {
+#if 0
     case eView::Intent::ReportProgress:
         if (variant.count() == 2)
             emit statusProgress(variant.at(0).toInt(), variant.at(1).toInt());
@@ -858,7 +867,6 @@ void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Inten
                 d->viewBases[View::OldLedgers]->slotSelectByVariant(variant, intent);
         }
         break;
-
     case eView::Intent::AccountReconciled:
         if (variant.count() == 5)
             emit accountReconciled(variant.at(0).value<MyMoneyAccount>(),
@@ -867,7 +875,7 @@ void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Inten
                                    variant.at(3).value<MyMoneyMoney>(),
                                    variant.at(4).value<QList<QPair<MyMoneyTransaction, MyMoneySplit>>>()); // for plugins
         break;
-
+#endif
     default:
         break;
     }

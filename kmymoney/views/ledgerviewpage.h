@@ -28,6 +28,10 @@ class SelectedObjects;
 class LedgerViewPage : public QWidget
 {
     Q_OBJECT
+protected:
+    class Private;
+    Private* d;
+
 public:
     explicit LedgerViewPage(QWidget* parent = 0, const QString& configGroupName = QString());
     virtual ~LedgerViewPage();
@@ -46,15 +50,30 @@ public:
 
     const SelectedObjects& selections() const;
 
-    void executeAction(eMenu::Action action, const SelectedObjects& selections);
+    /**
+     * Execute the @a action based on the selected objects found in @a selections.
+     *
+     * @retval true in case operation succeeded
+     * @retval false in case operation was aborted or failed
+     */
+    virtual bool executeAction(eMenu::Action action, const SelectedObjects& selections);
+
+    void pushView(LedgerViewPage* view);
+    LedgerViewPage* popView();
+
+    QString accountName();
 
 protected:
+    explicit LedgerViewPage(Private& dd, QWidget* parent = nullptr, const QString& configGroupName = QString());
     bool eventFilter(QObject *watched, QEvent *event) override;
+
+    void init(const QString& configGroupName);
 
 public Q_SLOTS:
     void showTransactionForm(bool show);
     void splitterChanged(int pos, int index);
     void slotSettingsChanged();
+    void updateSummaryInformation();
 
 protected Q_SLOTS:
     void startEdit();
@@ -71,9 +90,6 @@ Q_SIGNALS:
     void aboutToStartEdit();
     void aboutToFinishEdit();
 
-private:
-    class Private;
-    Private * const d;
 };
 
 #endif // LEDGERVIEWPAGE_H

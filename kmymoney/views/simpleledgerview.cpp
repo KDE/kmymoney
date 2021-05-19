@@ -9,15 +9,16 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QTabBar>
-#include <QToolButton>
-#include <QUrl>
+#include <QAction>
 #include <QDesktopServices>
-#include <QLineEdit>
-#include <QTreeView>
-#include <QKeyEvent>
-#include <QTimer>
 #include <QHeaderView>
+#include <QKeyEvent>
+#include <QLineEdit>
+#include <QTabBar>
+#include <QTimer>
+#include <QToolButton>
+#include <QTreeView>
+#include <QUrl>
 #include <QUuid>
 
 // ----------------------------------------------------------------------------
@@ -41,6 +42,7 @@
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"
 #include "mymoneyinstitution.h"
+#include "reconciliationledgerviewpage.h"
 #include "selectedobjects.h"
 #include <ui_simpleledgerview.h>
 
@@ -68,6 +70,21 @@ public:
         delete ui;
     }
 
+    void removeCloseButton(int idx, const QString& tooltip = QString())
+    {
+        Q_Q(SimpleLedgerView);
+        // remove close button from new page
+        QTabBar* bar = ui->ledgerTab->findChild<QTabBar*>();
+        if (bar) {
+            QTabBar::ButtonPosition closeSide =
+                (QTabBar::ButtonPosition)q->style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition, 0, ui->ledgerTab->widget(idx));
+            QWidget* w = bar->tabButton(idx, closeSide);
+            bar->setTabButton(idx, closeSide, 0);
+            bar->setTabToolTip(idx, tooltip);
+            w->deleteLater();
+        }
+    }
+
     void init()
     {
         Q_Q(SimpleLedgerView);
@@ -83,12 +100,9 @@ public:
         // remove close button from new page
         QTabBar* bar = ui->ledgerTab->findChild<QTabBar*>();
         if(bar) {
-            QTabBar::ButtonPosition closeSide = (QTabBar::ButtonPosition)q->style()->styleHint(QStyle::SH_TabBar_CloseButtonPosition, 0, newTabWidget);
-            QWidget *w = bar->tabButton(0, closeSide);
-            bar->setTabButton(0, closeSide, 0);
-            w->deleteLater();
             q->connect(bar, &QTabBar::tabMoved, q, &SimpleLedgerView::checkTabOrder);
         }
+        removeCloseButton(0);
 
         webSiteButton = new QToolButton;
         ui->ledgerTab->setCornerWidget(webSiteButton);
@@ -128,6 +142,7 @@ public:
         if (m_needInit)
             return;
 
+        Q_Q(SimpleLedgerView);
         // get storage id without the enclosing braces
         const auto storageId = MyMoneyFile::instance()->storageId().toString(QUuid::WithoutBraces);
         KSharedConfigPtr config = KSharedConfig::openConfig();
@@ -143,6 +158,7 @@ public:
 
             // in case we have not opened any ledger, we proceed with the favorites
             if (ui->ledgerTab->count() > 1) {
+                q->tabSelected(ui->ledgerTab->currentIndex());
                 return;
             }
         }
@@ -240,6 +256,87 @@ public:
         }
     }
 
+    void openReconciliationLedger(QString accountId)
+    {
+        Q_Q(SimpleLedgerView);
+        if (inModelUpdate || accountId.isEmpty())
+            return;
+
+        accountCombo->hide();
+
+        // in case a stock account is selected, we switch to the parent which
+        // is the investment account
+        MyMoneyAccount acc = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
+        if (acc.isInvest()) {
+            acc = MyMoneyFile::instance()->accountsModel()->itemById(acc.parentAccountId());
+            accountId = acc.id();
+        }
+
+        // check the position of the new tab
+        auto newPos = ui->ledgerTab->count() - 1;
+        LedgerViewPage* view = 0;
+        // check if ledger is already opened
+        for (int idx = 0; idx < ui->ledgerTab->count() - 1; ++idx) {
+            view = qobject_cast<LedgerViewPage*>(ui->ledgerTab->widget(idx));
+            if (view) {
+                if (accountId == view->accountId()) {
+                    newPos = idx;
+                    break;
+                }
+            }
+            view = nullptr; // not found
+        }
+
+        // need a new tab, we insert it before the rightmost one
+        if (!acc.id().isEmpty()) {
+            QString configGroupName;
+            switch (acc.accountType()) {
+            case eMyMoney::Account::Type::Investment:
+                configGroupName = QStringLiteral("InvestmentLedger");
+                break;
+            default:
+                configGroupName = QStringLiteral("StandardLedger");
+                break;
+            }
+            // create new ledger view page
+
+            auto reconciliationView = new ReconciliationLedgerViewPage(q, configGroupName);
+
+            reconciliationView->setAccount(acc);
+            reconciliationView->setShowEntryForNewTransaction();
+            reconciledAccount = acc.id();
+
+            // keep the current view so that we can get it back after reconciliation
+            if (view) {
+                reconciliationView->pushView(view);
+                view->hide();
+                ui->ledgerTab->removeTab(newPos);
+            }
+
+            /// @todo setup current global setting for form visibility
+            // reconciliationView->showTransactionForm(...);
+
+            // insert new ledger reconciliationView page in tab view
+            int newIdx = ui->ledgerTab->insertTab(newPos, reconciliationView, acc.name());
+
+            // we don't allow closing the tab without using the action buttons
+            removeCloseButton(newIdx,
+                              i18nc("@info:tooltip",
+                                    "The close button for this account has been removed because you are reconciling it. Finish or postpone the reconciliation "
+                                    "to get it back."));
+
+            q->connect(reconciliationView, &LedgerViewPage::requestSelectionChanged, q, &SimpleLedgerView::slotRequestSelectionChange);
+            q->connect(reconciliationView, &LedgerViewPage::requestCustomContextMenu, q, &SimpleLedgerView::requestCustomContextMenu);
+
+            q->connect(q, &SimpleLedgerView::settingsChanged, reconciliationView, &LedgerViewPage::slotSettingsChanged);
+
+            // selecting the last tab (the one with the +) and then the new one
+            // makes sure that all signal about the new selection are emitted
+            ui->ledgerTab->setCurrentIndex(ui->ledgerTab->count() - 1);
+            ui->ledgerTab->setCurrentIndex(newIdx);
+        }
+    }
+
     void closeLedgers()
     {
         Q_Q(SimpleLedgerView);
@@ -283,12 +380,24 @@ public:
         }
     }
 
+    void propagateActionToViews(eMenu::Action action, const SelectedObjects& selections)
+    {
+        LedgerViewPage* view = 0;
+        for (int idx = 0; idx < ui->ledgerTab->count() - 1; ++idx) {
+            view = qobject_cast<LedgerViewPage*>(ui->ledgerTab->widget(idx));
+            if (view) {
+                view->executeAction(action, selections);
+            }
+        }
+    }
+
     Ui_SimpleLedgerView*          ui;
     AccountNamesFilterProxyModel* accountsModel;
     QWidget*                      newTabWidget;
     QToolButton*                  webSiteButton;
     KMyMoneyAccountCombo*         accountCombo;
     QUrl                          webSiteUrl;
+    QString reconciledAccount;
     int                           lastIdx;
     bool                          inModelUpdate;
     bool                          m_needInit;
@@ -360,20 +469,21 @@ void SimpleLedgerView::tabClicked(int idx)
 void SimpleLedgerView::tabSelected(int idx)
 {
     Q_D(SimpleLedgerView);
-    // qDebug() << "tabSelected" << idx << (d->ui->ledgerTab->count()-1);
     // make sure that the ledger does not change
     // when the user access the account selection combo box
     if(idx != (d->ui->ledgerTab->count()-1)) {
         d->lastIdx = idx;
-        const auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->widget(idx));
-        if (view) {
-            d->m_selections = view->selections();
-        }
-        emit requestSelectionChange(d->m_selections);
 
     } else {
         d->ui->ledgerTab->setCurrentIndex(d->lastIdx);
     }
+
+    const auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->widget(idx));
+    if (view) {
+        d->m_selections = view->selections();
+    }
+    slotRequestSelectionChange(d->m_selections);
+
     setupCornerWidget();
 }
 
@@ -389,12 +499,26 @@ void SimpleLedgerView::closeLedger(int idx)
 
         auto tab = d->ui->ledgerTab->widget(idx);
         d->ui->ledgerTab->removeTab(idx);
+
+        auto view = qobject_cast<LedgerViewPage*>(tab);
+        if (view) {
+            view = view->popView();
+            if (view) {
+                d->ui->ledgerTab->insertTab(idx, view, view->accountName());
+                d->ui->ledgerTab->setCurrentIndex(d->ui->ledgerTab->count() - 1);
+                d->ui->ledgerTab->setCurrentIndex(idx);
+                d->reconciledAccount.clear();
+            }
+        }
         delete tab;
+
         // make sure we always show an account
         if (d->ui->ledgerTab->currentIndex() == (d->ui->ledgerTab->count()-1)) {
             if (d->ui->ledgerTab->count() > 1) {
                 d->ui->ledgerTab->setCurrentIndex((d->ui->ledgerTab->count()-2));
             }
+        } else {
+            tabSelected(d->ui->ledgerTab->currentIndex());
         }
     }
 }
@@ -500,6 +624,17 @@ void SimpleLedgerView::slotSettingsChanged()
     emit settingsChanged();
 }
 
+void SimpleLedgerView::slotRequestSelectionChange(const SelectedObjects& selections) const
+{
+    Q_D(const SimpleLedgerView);
+    auto newSelections(selections);
+
+    if (!d->reconciledAccount.isEmpty()) {
+        newSelections.setSelection(SelectedObjects::ReconciliationAccount, d->reconciledAccount);
+    }
+    emit requestSelectionChange(newSelections);
+}
+
 void SimpleLedgerView::executeCustomAction(eView::Action action)
 {
     Q_D(SimpleLedgerView);
@@ -509,6 +644,20 @@ void SimpleLedgerView::executeCustomAction(eView::Action action)
         break;
     default:
         break;
+    }
+}
+
+void SimpleLedgerView::updateActions(const SelectedObjects& selections)
+{
+    Q_D(SimpleLedgerView);
+    if (d->isActiveView()) {
+        const auto reconciledAccount = selections.firstSelection(SelectedObjects::ReconciliationAccount);
+        if (!reconciledAccount.isEmpty()) {
+            if (reconciledAccount == selections.firstSelection(SelectedObjects::Account)) {
+                pActions[eMenu::Action::PostponeReconciliation]->setEnabled(true);
+                pActions[eMenu::Action::FinishReconciliation]->setEnabled(true);
+            }
+        }
     }
 }
 
@@ -524,13 +673,45 @@ void SimpleLedgerView::executeAction(eMenu::Action action, const SelectedObjects
     case eMenu::Action::EditSplits:
     case eMenu::Action::SelectAllTransactions:
         if (d->isActiveView() && !accountId.isEmpty()) {
-            openLedger(accountId);
+            d->openLedger(accountId, true);
             auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());
             if (view) {
                 view->executeAction(action, selections);
             }
         }
         break;
+    case eMenu::Action::StartReconciliation:
+        if (d->isActiveView() && !accountId.isEmpty()) {
+            const auto reconciledAccountId = selections.firstSelection(SelectedObjects::ReconciliationAccount);
+            if (reconciledAccountId.isEmpty())
+                d->openReconciliationLedger(accountId);
+            else
+                d->openLedger(accountId, true);
+            auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());
+            if (view) {
+                view->executeAction(action, selections);
+            }
+        }
+        break;
+    case eMenu::Action::FinishReconciliation:
+    case eMenu::Action::PostponeReconciliation:
+    case eMenu::Action::CancelReconciliation:
+        if (d->isActiveView() && !accountId.isEmpty()) {
+            const auto reconciledAccountId = selections.firstSelection(SelectedObjects::ReconciliationAccount);
+            d->openLedger(reconciledAccountId, true);
+            auto view = qobject_cast<LedgerViewPage*>(d->ui->ledgerTab->currentWidget());
+            if (view) {
+                if (view->executeAction(action, selections)) {
+                    closeLedger(d->ui->ledgerTab->currentIndex());
+                }
+            }
+        }
+        break;
+
+    case eMenu::Action::MatchTransaction:
+        d->propagateActionToViews(action, selections);
+        break;
+
     case eMenu::Action::FileClose:
         d->closeLedgers();
         break;

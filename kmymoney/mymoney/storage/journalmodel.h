@@ -84,6 +84,7 @@ public:
     inline void setBalance(const MyMoneyMoney& balance) {
         m_balance = balance;
     }
+
 private:
     QString                             m_id;
     QSharedPointer<MyMoneyTransaction>  m_transaction;
@@ -186,6 +187,14 @@ public:
      * @a index points to a different model or is invalid itself.
      */
     QModelIndex adjustToFirstSplitIdx(const QModelIndex& index) const;
+
+    /**
+     * In case a journal id changes (e.g. because the date changes during merging)
+     * this method returns the update journalEntryId based on the old one.
+     */
+    QString updateJournalId(const QString& journalId) const;
+
+    MyMoneyMoney clearedBalance(const QString& accountId, const QDate& date) const;
 
 protected:
     explicit JournalModel(const QString& idLeadin, QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
