@@ -63,6 +63,11 @@ void OnlineBalanceProxyModel::setSourceModel(QAbstractItemModel* sourceModel)
 {
     Q_D(OnlineBalanceProxyModel);
     d->accountsListModel->setSourceModel(sourceModel);
+
+    // make sure that data changes in the source model invalidate our filter
+    connect(d->accountsListModel, &QAbstractItemModel::dataChanged, this, [&]() {
+        invalidateFilter();
+    });
 }
 
 int OnlineBalanceProxyModel::columnCount(const QModelIndex& parent) const
