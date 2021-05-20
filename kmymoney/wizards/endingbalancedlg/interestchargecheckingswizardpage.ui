@@ -9,7 +9,7 @@
     <item>
      <widget class="QLabel" name="qLabel1" native="true">
       <property name="text" stdset="0">
-       <string>If necessary, enter information about interest or charges here. KMyMoney will create transactions and cleares them directly for you.</string>
+       <string>If necessary, enter information about interest or charges here. KMyMoney will create transactions and clears them directly for you.</string>
       </property>
       <property name="wordWrap">
         <bool>true</bool>
@@ -215,7 +215,7 @@
    <class>AmountEdit</class>
    <extends>QLineEdit</extends>
    <header location="global">amountedit.h</header>
-  </customwidget>	  
+  </customwidget>
  </customwidgets>
  <tabstops>
  </tabstops>
