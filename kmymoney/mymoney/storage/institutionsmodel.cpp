@@ -103,7 +103,6 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
     if (idx.row() < 0 || idx.row() >= rowCount(idx.parent()))
         return QVariant();
 
-    QVariant rc;
     const MyMoneyInstitution& institution = static_cast<TreeItem<MyMoneyInstitution>*>(idx.internalPointer())->constDataRef();
 
     // check for a sub-entry which is actually a proxy to the corresponding account

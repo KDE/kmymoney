@@ -237,9 +237,6 @@ KMyMoneyDateInput::~KMyMoneyDateInput()
 
 void KMyMoneyDateInput::toggleDatePicker()
 {
-    int w = d->m_dateFrame->width();
-    int h = d->m_dateFrame->height();
-
     if (d->m_dateFrame->isVisible()) {
         d->m_dateFrame->hide();
     } else {
