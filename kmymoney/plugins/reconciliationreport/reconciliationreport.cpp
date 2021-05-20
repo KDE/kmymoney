@@ -272,7 +272,7 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
                 for (const auto& tSplit : transaction.splits()) {
                     if (tSplit.accountId() != account.id()) {
                         if (!category.isEmpty())
-                            category += QLatin1Literal(", "); // this is a split transaction
+                            category += QLatin1String(", "); // this is a split transaction
                         category += file->account(tSplit.accountId()).name();
                     }
                 }
@@ -315,7 +315,7 @@ void ReconciliationReport::slotGenerateReconciliationReport(const MyMoneyAccount
                 for (const auto& tSplit : transaction.splits()) {
                     if (tSplit.accountId() != account.id()) {
                         if (!category.isEmpty())
-                            category += QLatin1Literal(", "); // this is a split transaction
+                            category += QLatin1String(", "); // this is a split transaction
                         category += file->account(tSplit.accountId()).name();
                     }
                 }
