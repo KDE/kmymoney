@@ -218,6 +218,7 @@ int gwenKdeGui::getPassword(uint32_t flags, const char* token, const char* title
                                   maxLen,
                                   methodId, methodParams,
                                   guiid);
+        case KBANKING_TANMETHOD_CHIPTAN_QR:
         case KBANKING_TANMETHOD_PHOTOTAN:
             return getPasswordPhoto(flags,
                                     token,
