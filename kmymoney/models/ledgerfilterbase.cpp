@@ -139,6 +139,10 @@ bool LedgerFilterBase::lessThan(const QModelIndex& left, const QModelIndex& righ
                 return true;
             } else if(d->isSpecialDatesModel(rightModel)) {
                 return false;
+            } else if (d->isReconciliationModel(leftModel)) { // rightModel must be journal-/schedulesModel
+                return false;
+            } else if (d->isReconciliationModel(rightModel)) { // leftModel must be journal-/schedulesModel
+                return true;
             }
         }
         // same model and same post date, the ids decide

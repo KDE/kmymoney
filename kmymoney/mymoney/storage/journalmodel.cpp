@@ -663,6 +663,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::TransactionPostDateRole:
         return transaction.postDate();
 
+    case eMyMoney::Model::TransactionEntryDateRole:
+        return transaction.entryDate();
+
     case eMyMoney::Model::TransactionIsStockSplitRole:
         return transaction.isStockSplit();
 
@@ -808,6 +811,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::SplitActivityRole:
         return d->investmentActivity(journalEntry);
+
+    case eMyMoney::Model::JournalBalanceRole:
+        return QVariant::fromValue(journalEntry.balance());
 
     default:
         if (role >= Qt::UserRole)

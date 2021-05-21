@@ -41,6 +41,16 @@ public:
         return (model == static_cast<void*>(MyMoneyFile::instance()->specialDatesModel()));
     }
 
+    inline bool isReconciliationModel(const QAbstractItemModel* model) const
+    {
+        return (model == static_cast<void*>(MyMoneyFile::instance()->reconciliationModel()));
+    }
+
+    inline bool isJournalModel(const QAbstractItemModel* model) const
+    {
+        return (model == static_cast<void*>(MyMoneyFile::instance()->journalModel()));
+    }
+
     LedgerFilterBase*           q;
     KConcatenateRowsProxyModel* concatModel;          // Qt5.13+ use QConcatenateTablesProxyModel
     eMyMoney::Account::Type     accountType;

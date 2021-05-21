@@ -533,6 +533,7 @@ enum Roles {
     TransactionErroneousRole,
     TransactionImportedRole,
     TransactionPostDateRole,
+    TransactionEntryDateRole,
     TransactionCounterAccountRole,
     TransactionCounterAccountIdRole,
     TransactionIsTransferRole,
@@ -582,6 +583,7 @@ enum Roles {
     JournalSplitDepositRole,
     JournalSplitAccountIdRole,
     JournalSplitIsMatchedRole,
+    JournalBalanceRole,
 
     // Ledger
     LedgerDisplayOrderRole,
@@ -599,6 +601,9 @@ enum Roles {
 
     // Tags
     TagNameRole,
+
+    // Reconciliation
+    ReconciliationAmountRole,
 
     // General state
     ClosedRole,

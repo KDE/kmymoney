@@ -20,15 +20,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "specialdatesmodel.h"
-#include "schedulesjournalmodel.h"
-#include "journalmodel.h"
-#include "mymoneyenums.h"
-#include "widgetenums.h"
-#include "menuenums.h"
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
 #include "icons.h"
+#include "journalmodel.h"
+#include "menuenums.h"
+#include "mymoneyaccount.h"
+#include "mymoneyenums.h"
+#include "mymoneyfile.h"
+#include "reconciliationmodel.h"
+#include "schedulesjournalmodel.h"
+#include "specialdatesmodel.h"
+#include "widgetenums.h"
 
 using namespace Icons;
 using namespace eWidgets;
@@ -53,7 +54,9 @@ void LedgerViewPage::init(const QString& configGroupName)
 
     // setup the model stack
     const auto file = MyMoneyFile::instance();
-    d->accountFilter = new LedgerAccountFilter(d->ui->m_ledgerView, QVector<QAbstractItemModel*> { file->specialDatesModel(), file->schedulesJournalModel() } );
+    d->accountFilter =
+        new LedgerAccountFilter(d->ui->m_ledgerView,
+                                QVector<QAbstractItemModel*>{file->specialDatesModel(), file->schedulesJournalModel(), file->reconciliationModel()});
     connect(file->journalModel(), &JournalModel::balanceChanged, d->accountFilter, &LedgerAccountFilter::recalculateBalancesOnIdle);
 
     d->stateFilter = new LedgerFilter(d->ui->m_ledgerView);

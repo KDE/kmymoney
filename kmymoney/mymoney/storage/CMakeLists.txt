@@ -19,6 +19,7 @@ set(storage_HEADERS
   parametersmodel.h
   onlinejobsmodel.h
   reportsmodel.h
+  reconciliationmodel.h
   )
 
 ########### install files ###############

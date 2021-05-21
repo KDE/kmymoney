@@ -39,6 +39,8 @@
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "onlinebalancedelegate.h"
+#include "reconciliationdelegate.h"
+#include "reconciliationmodel.h"
 #include "schedulesjournalmodel.h"
 #include "selectedobjects.h"
 #include "specialdatedelegate.h"
@@ -71,6 +73,7 @@ public:
         delegateProxy->addDelegate(file->accountsModel(), new OnlineBalanceDelegate(q));
         delegateProxy->addDelegate(file->specialDatesModel(), new SpecialDateDelegate(q));
         delegateProxy->addDelegate(file->schedulesJournalModel(), journalDelegate);
+        delegateProxy->addDelegate(file->reconciliationModel(), new ReconciliationDelegate(q));
 
         q->setItemDelegate(delegateProxy);
     }

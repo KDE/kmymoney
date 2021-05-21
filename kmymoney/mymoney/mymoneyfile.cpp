@@ -55,22 +55,23 @@
 #include "mymoneyenums.h"
 
 // the models
-#include "payeesmodel.h"
-#include "costcentermodel.h"
-#include "schedulesmodel.h"
-#include "tagsmodel.h"
-#include "securitiesmodel.h"
-#include "budgetsmodel.h"
 #include "accountsmodel.h"
+#include "budgetsmodel.h"
+#include "costcentermodel.h"
 #include "institutionsmodel.h"
 #include "journalmodel.h"
-#include "pricemodel.h"
-#include "parametersmodel.h"
 #include "onlinejobsmodel.h"
+#include "parametersmodel.h"
+#include "payeesmodel.h"
+#include "pricemodel.h"
+#include "reconciliationmodel.h"
 #include "reportsmodel.h"
-#include "specialdatesmodel.h"
 #include "schedulesjournalmodel.h"
+#include "schedulesmodel.h"
+#include "securitiesmodel.h"
+#include "specialdatesmodel.h"
 #include "statusmodel.h"
+#include "tagsmodel.h"
 /// @note add new models here
 
 #ifdef KMM_MODELTEST
@@ -361,6 +362,7 @@ public:
     SpecialDatesModel   specialDatesModel;
     SchedulesJournalModel schedulesJournalModel;
     StatusModel         statusModel;
+    ReconciliationModel reconciliationModel;
     /// @note add new models here
 };
 
@@ -424,6 +426,7 @@ MyMoneyModelBase* MyMoneyFile::baseModel()
 void MyMoneyFile::finalizeFileOpen()
 {
     d->institutionsModel.slotLoadAccountsWithoutInstitutions(d->accountsModel.accountsWithoutInstitutions());
+    d->reconciliationModel.updateData();
 
     // remove any undo activities generated during loading
     d->undoStack.clear();
@@ -448,6 +451,7 @@ void MyMoneyFile::unload()
     d->reportsModel.unload();
     // specialdatesmodel not unloaded here on purpose
     d->schedulesJournalModel.unload();
+    d->reconciliationModel.unload();
     /// @note add new models here
     d->m_baseCurrency = MyMoneySecurity();
     d->m_balanceCache.clear();
@@ -1701,6 +1705,11 @@ SchedulesJournalModel* MyMoneyFile::schedulesJournalModel() const
 StatusModel* MyMoneyFile::statusModel() const
 {
     return &d->statusModel;
+}
+
+ReconciliationModel* MyMoneyFile::reconciliationModel() const
+{
+    return &d->reconciliationModel;
 }
 
 /// @note add new models here

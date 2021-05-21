@@ -50,6 +50,7 @@ set(kmm_mymoney_LIB_SRCS
     ./storage/parametersmodel.cpp
     ./storage/onlinejobsmodel.cpp
     ./storage/reportsmodel.cpp
+    ./storage/reconciliationmodel.cpp
     ./storage/specialdatesmodel.cpp
     ./storage/schedulesjournalmodel.cpp
     ./storage/templatesmodel.cpp

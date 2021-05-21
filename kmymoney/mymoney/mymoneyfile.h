@@ -154,6 +154,7 @@ class ReportsModel;
 class MyMoneyModelBase;
 
 // non permanent models
+class ReconciliationModel;
 class SpecialDatesModel;
 class SchedulesJournalModel;
 class StatusModel;
@@ -996,8 +997,12 @@ public:
      */
     StatusModel* statusModel() const;
 
-/// @note add new models here
+    /*
+     * The reconciliation entry model
+     */
+    ReconciliationModel* reconciliationModel() const;
 
+    /// @note add new models here
 
     /**
       * This method is used to create a new tag
