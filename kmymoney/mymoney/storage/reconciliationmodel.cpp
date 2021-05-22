@@ -9,6 +9,7 @@
 // QT Includes
 
 #include <QDebug>
+#include <QFont>
 #include <QString>
 
 // ----------------------------------------------------------------------------
@@ -139,8 +140,6 @@ QVariant ReconciliationModel::data(const QModelIndex& idx, int role) const
 
     const ReconciliationEntry& reconciliationEntry = static_cast<TreeItem<ReconciliationEntry>*>(idx.internalPointer())->constDataRef();
 
-    const eMyMoney::Model::Roles trole = static_cast<eMyMoney::Model::Roles>(role);
-
     switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
@@ -152,6 +151,12 @@ QVariant ReconciliationModel::data(const QModelIndex& idx, int role) const
             return d->formatValue(reconciliationEntry.accountId(), reconciliationEntry.amount());
         }
         break;
+
+    case Qt::FontRole: {
+        QFont font;
+        font.setBold(true);
+        return font;
+    }
 
     case Qt::TextAlignmentRole:
         switch (idx.column()) {

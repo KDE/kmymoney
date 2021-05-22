@@ -95,6 +95,7 @@ void ReconciliationDelegate::paint(QPainter* painter, const QStyleOptionViewItem
     opt.rect.setWidth(opt.rect.width() + 5);
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
 
+    painter->setFont(opt.font);
     switch (index.column()) {
     case JournalModel::Column::Detail:
         // adjust the rect to cover all columns
