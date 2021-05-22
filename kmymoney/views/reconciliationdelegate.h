@@ -20,31 +20,17 @@ class QColor;
 #include "kmmstyleditemdelegate.h"
 #include "mymoneyenums.h"
 
-class LedgerView;
 class MyMoneyMoney;
 
 class ReconciliationDelegate : public KMMStyledItemDelegate
 {
     Q_OBJECT
 public:
-    explicit ReconciliationDelegate(LedgerView* parent = 0);
+    explicit ReconciliationDelegate(QWidget* parent = 0);
     virtual ~ReconciliationDelegate();
 
     void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
     QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const final override;
-
-    void setOnlineBalance(const QDate& date, const MyMoneyMoney& amount, int fraction = 0);
-
-    /**
-     * Which data (@a role) shall be displayed in the detail column
-     * when only a single line is shown. The default is the payee.
-     */
-    void setSingleLineRole(eMyMoney::Model::Roles role);
-
-    static void setErroneousColor(const QColor& color);
-    static void setImportedColor(const QColor& color);
-
-    static QColor erroneousColor();
 
 protected:
     bool eventFilter(QObject* o, QEvent* event) final override;
