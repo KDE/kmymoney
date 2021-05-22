@@ -147,7 +147,7 @@ void CsvExportDlg::checkData(const QString& accountName)
             foreach (const auto sAccount, account.accountList()) {
                 accnt = file->account(sAccount);
                 MyMoneyTransactionFilter filter(accnt.id());
-                listTrans = file->transactionList(filter);
+                file->transactionList(listTrans, filter);
                 if (!listTrans.isEmpty()) {
                     if (listTrans[0].postDate() < earliestDate) {
                         earliestDate = listTrans[0].postDate();
@@ -157,7 +157,7 @@ void CsvExportDlg::checkData(const QString& accountName)
             }
         } else {  //Checking, etc.
             MyMoneyTransactionFilter filter(account.id());
-            listTrans = file->transactionList(filter);
+            file->transactionList(listTrans, filter);
             if (listTrans.isEmpty()) {
                 KMessageBox::sorry(0, i18n("There are no entries in this account.\n"),
                                    i18n("Invalid account"));

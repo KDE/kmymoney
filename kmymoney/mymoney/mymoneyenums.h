@@ -583,6 +583,7 @@ enum Roles {
     JournalSplitDepositRole,
     JournalSplitAccountIdRole,
     JournalSplitIsMatchedRole,
+    JournalSplitNumberRole,
     JournalBalanceRole,
 
     // Ledger

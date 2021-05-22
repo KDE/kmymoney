@@ -516,7 +516,8 @@ void ListTable::includeInvestmentSubAccounts()
         filter.addAccount(subAccountsList);
         filter.setReportAllSplits(false);
 
-        QList<MyMoneyTransaction> transactions = file->transactionList(filter);
+        QList<MyMoneyTransaction> transactions;
+        file->transactionList(transactions, filter);
         QList<MyMoneyTransaction>::const_iterator it_t = transactions.constBegin();
 
         //Check each split for a matching account

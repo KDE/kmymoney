@@ -1131,7 +1131,8 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
             } else if (statementTransactionUnderImport.m_listSplits.isEmpty() && !d->m_skipCategoryMatching) {
                 MyMoneyTransactionFilter filter(thisaccount.id());
                 filter.addPayee(payeeid);
-                QList<MyMoneyTransaction> list = file->transactionList(filter);
+                QList<MyMoneyTransaction> list;
+                file->transactionList(list, filter);
                 if (!list.empty()) {
                     // Default to using the most recent transaction as the reference
                     MyMoneyTransaction t_old = list.last();

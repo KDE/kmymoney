@@ -451,7 +451,7 @@ void KEditLoanWizard::updateEditSummary()
 
     int count = 0;
     QList<MyMoneyTransaction> list;
-    list = MyMoneyFile::instance()->transactionList(filter);
+    MyMoneyFile::instance()->transactionList(list, filter);
 
     foreach (const MyMoneyTransaction& it, list) {
         int match = 0;

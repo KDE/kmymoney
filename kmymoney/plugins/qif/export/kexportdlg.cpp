@@ -197,7 +197,8 @@ void KExportDlg::checkData(const QString& accountId)
         account = file->account(accountId);
         if (m_lastAccount != accountId) {
             MyMoneyTransactionFilter filter(accountId);
-            QList<MyMoneyTransaction> list = file->transactionList(filter);
+            QList<MyMoneyTransaction> list;
+            file->transactionList(list, filter);
             QList<MyMoneyTransaction>::Iterator it;
 
             if (!list.isEmpty()) {

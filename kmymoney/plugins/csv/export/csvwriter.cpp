@@ -103,7 +103,8 @@ void CsvWriter::writeAccountEntry(QTextStream& stream, const QString& accountId,
         m_headerLine << QString(i18n("Date")) << QString(i18n("Payee")) << QString(i18n("Amount")) << QString(i18n("Account/Cat")) << QString(i18n("Memo")) << QString(i18n("Status")) << QString(i18n("Number"));
         filter.setDateFilter(startDate, endDate);
 
-        QList<MyMoneyTransaction> trList = file->transactionList(filter);
+        QList<MyMoneyTransaction> trList;
+        file->transactionList(trList, filter);
         QList<MyMoneyTransaction>::ConstIterator it;
         signalProgress(0, trList.count());
         int count = 0;
@@ -245,7 +246,8 @@ void CsvWriter::extractInvestmentEntries(const QString& accountId, const QDate& 
     foreach (const auto sAccount, file->account(accountId).accountList()) {
         MyMoneyTransactionFilter filter(sAccount);
         filter.setDateFilter(startDate, endDate);
-        QList<MyMoneyTransaction> list = file->transactionList(filter);
+        QList<MyMoneyTransaction> list;
+        file->transactionList(list, filter);
         QList<MyMoneyTransaction>::ConstIterator itList;
         signalProgress(0, list.count());
         int count = 0;

@@ -1610,7 +1610,8 @@ MyMoneyTransaction MyMoneyFile::transaction(const QString& accountId, const int 
     else
         filter.addAccount(accountId);
 
-    const auto list = transactionList(filter);
+    QList<MyMoneyTransaction> list;
+    transactionList(list, filter);
     if (idx < 0 || idx >= static_cast<int>(list.count()))
         throw MYMONEYEXCEPTION_CSTRING("Unknown idx for transaction");
 
@@ -2003,28 +2004,11 @@ void MyMoneyFile::warningMissingRate(const QString& fromId, const QString& toId)
 void MyMoneyFile::transactionList(QList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const
 {
     d->journalModel.transactionList(list, filter);
-/// @todo cleanup
-#if 0
-    d->checkStorage();
-    d->m_storage->transactionList(list, filter);
-#endif
 }
 
 void MyMoneyFile::transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const
 {
     d->journalModel.transactionList(list, filter);
-/// @todo cleanup
-#if 0
-    d->checkStorage();
-    d->m_storage->transactionList(list, filter);
-#endif
-}
-
-QList<MyMoneyTransaction> MyMoneyFile::transactionList(MyMoneyTransactionFilter& filter) const
-{
-    QList<MyMoneyTransaction> list;
-    transactionList(list, filter);
-    return list;
 }
 
 QList<MyMoneyPayee> MyMoneyFile::payeeList() const
@@ -3818,68 +3802,64 @@ QSet<QString> MyMoneyFile::referencedObjects() const
 
 bool MyMoneyFile::checkNoUsed(const QString& accId, const QString& no) const
 {
-    /// @todo port to new model code
     // by definition, an empty string or a non-numeric string is not used
     QRegExp exp(QString("(.*\\D)?(\\d+)(\\D.*)?"));
     if (no.isEmpty() || exp.indexIn(no) == -1)
         return false;
 
-    MyMoneyTransactionFilter filter;
-    filter.addAccount(accId);
-    QList<MyMoneyTransaction> transactions = transactionList(filter);
-    QList<MyMoneyTransaction>::ConstIterator it_t = transactions.constBegin();
-    while (it_t != transactions.constEnd()) {
-        try {
-            MyMoneySplit split;
-            // Test whether the transaction also includes a split into
-            // this account
-            split = (*it_t).splitByAccount(accId, true /*match*/);
-            if (!split.number().isEmpty() && split.number() == no)
+    const auto model = &d->journalModel;
+    const auto rows = model->rowCount();
+    for (int row = 0; row < rows; ++row) {
+        const auto idx = model->index(row, 0);
+        if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == accId) {
+            const auto number = idx.data(eMyMoney::Model::JournalSplitNumberRole).toString();
+            if (!number.isEmpty() && number == no) {
                 return true;
-        } catch (const MyMoneyException &) {
+            }
         }
-        ++it_t;
     }
     return false;
 }
 
 QString MyMoneyFile::highestCheckNo(const QString& accId) const
 {
-    /// @todo port to new model code
     unsigned64 lno = 0;
     unsigned64 cno;
     QString no;
-    MyMoneyTransactionFilter filter;
-    filter.addAccount(accId);
-    QList<MyMoneyTransaction> transactions = transactionList(filter);
-    QList<MyMoneyTransaction>::ConstIterator it_t = transactions.constBegin();
-    while (it_t != transactions.constEnd()) {
-        try {
-            // Test whether the transaction also includes a split into
-            // this account
-            MyMoneySplit split = (*it_t).splitByAccount(accId, true /*match*/);
-            if (!split.number().isEmpty()) {
+
+    const auto model = &d->journalModel;
+    const auto rows = model->rowCount();
+    for (int row = 0; row < rows; ++row) {
+        const auto idx = model->index(row, 0);
+        if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == accId) {
+            const auto number = idx.data(eMyMoney::Model::JournalSplitNumberRole).toString();
+            if (!number.isEmpty()) {
                 // non-numerical values stored in number will return 0 in the next line
-                cno = split.number().toULongLong();
+                cno = number.toULongLong();
                 if (cno > lno) {
                     lno = cno;
-                    no = split.number();
+                    no = number;
                 }
             }
-        } catch (const MyMoneyException &) {
         }
-        ++it_t;
     }
     return no;
 }
 
 bool MyMoneyFile::hasNewerTransaction(const QString& accId, const QDate& date) const
 {
-    /// @todo port to new model code
-    MyMoneyTransactionFilter filter;
-    filter.addAccount(accId);
-    filter.setDateFilter(date.addDays(+1), QDate());
-    return !transactionList(filter).isEmpty();
+    const auto model = &d->journalModel;
+    const auto rows = model->rowCount();
+    // the journal is kept in chronological order, so we can search from
+    // the end towards the front. Upon the first transaction we find for
+    // the account we can provide an answer
+    for (int row = rows - 1; row >= 0; --row) {
+        const auto idx = model->index(row, 0);
+        if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == accId) {
+            return idx.data(eMyMoney::Model::TransactionPostDateRole).toDate() > date;
+        }
+    }
+    return false;
 }
 
 void MyMoneyFile::clearCache()
@@ -3972,10 +3952,36 @@ bool MyMoneyFile::hasMatchingOnlineBalance(const MyMoneyAccount& _acc) const
 int MyMoneyFile::countTransactionsWithSpecificReconciliationState(const QString& accId, TransactionFilter::State state) const
 {
     /// @todo port to new model code
-    MyMoneyTransactionFilter filter;
-    filter.addAccount(accId);
-    filter.addState((int)state);
-    return transactionList(filter).count();
+    int rc = 0;
+    const auto model = &d->journalModel;
+    const auto rows = model->rowCount();
+    for (int row = 0; row < rows; ++row) {
+        const auto idx = model->index(row, 0);
+        if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == accId) {
+            if (state == TransactionFilter::State::All) {
+                rc++;
+            } else {
+                const auto reconciliationState = idx.data(eMyMoney::Model::SplitReconcileFlagRole).value<eMyMoney::Split::State>();
+                switch (reconciliationState) {
+                case eMyMoney::Split::State::NotReconciled:
+                    rc += (state == TransactionFilter::State::NotReconciled) ? 1 : 0;
+                    break;
+                case eMyMoney::Split::State::Cleared:
+                    rc += (state == TransactionFilter::State::Cleared) ? 1 : 0;
+                    break;
+                case eMyMoney::Split::State::Reconciled:
+                    rc += (state == TransactionFilter::State::Reconciled) ? 1 : 0;
+                    break;
+                case eMyMoney::Split::State::Frozen:
+                    rc += (state == TransactionFilter::State::Frozen) ? 1 : 0;
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+    }
+    return rc;
 }
 
 QMap<QString, QVector<int> > MyMoneyFile::countTransactionsWithSpecificReconciliationState() const

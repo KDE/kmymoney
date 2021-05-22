@@ -867,7 +867,8 @@ void MyMoneyReport::validDateRange(QDate& db, QDate& de)
         /// @todo port to new model code
         /// use first and last index into journal model instead
         /// of retrieving the whole list of transactions.
-        QList<MyMoneyTransaction> list = MyMoneyFile::instance()->transactionList(*this);
+        QList<MyMoneyTransaction> list;
+        MyMoneyFile::instance()->transactionList(list, *this);
         QDate tmpBegin, tmpEnd;
 
         if (!list.isEmpty()) {

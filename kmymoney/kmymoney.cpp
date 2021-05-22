@@ -2237,7 +2237,7 @@ void KMyMoneyApp::slotPerformanceTest()
 
         timer.start();
         for (int i = 0; i < 100; ++i) {
-            list = MyMoneyFile::instance()->transactionList(filter);
+            MyMoneyFile::instance()->transactionList(list, filter);
             measurement[i != 0] = timer.elapsed();
         }
         std::cerr << "transactionList()" << std::endl;

@@ -372,10 +372,12 @@ void PivotTableTest::testFilterALvsIE()
     TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
 
     MyMoneyReport filter;
+    QList<MyMoneyTransaction> list;
     filter.setRowType(eMyMoney::Report::RowType::ExpenseIncome);
     filter.setDateFilter(QDate(2004, 9, 1), QDate(2005, 1, 1).addDays(-1));
     filter.addAccount(acChecking);
-    QVERIFY(file->transactionList(filter).count() == 1);
+    file->transactionList(list, filter);
+    QVERIFY(list.count() == 1);
 
     XMLandback(filter);
     PivotTable spending_f(filter);
@@ -413,6 +415,7 @@ void PivotTableTest::testFilterBasics()
     TransactionHelper t3(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moParent2, acCredit, acParent);
     TransactionHelper t4(QDate(2004, 11, 7), MyMoneySplit::actionName(eMyMoney::Split::Action::Withdrawal), moChild, acCredit, acChild);
 
+    QList<MyMoneyTransaction> list;
     MyMoneyTransactionFilter filter;
     filter.clear();
     filter.setDateFilter(QDate(2004, 9, 1), QDate(2005, 1, 1).addDays(-1));
@@ -420,15 +423,18 @@ void PivotTableTest::testFilterBasics()
     filter.setReportAllSplits(false);
     filter.setConsiderCategory(true);
 
-    QVERIFY(file->transactionList(filter).count() == 1);
+    file->transactionList(list, filter);
+    QCOMPARE(list.count(), 1);
 
     filter.addCategory(acParent);
 
-    QVERIFY(file->transactionList(filter).count() == 3);
+    file->transactionList(list, filter);
+    QCOMPARE(list.count(), 3);
 
     filter.addAccount(acChecking);
 
-    QVERIFY(file->transactionList(filter).count() == 1);
+    file->transactionList(list, filter);
+    QCOMPARE(list.count(), 1);
 
     filter.clear();
     filter.setDateFilter(QDate(2004, 9, 1), QDate(2005, 1, 1).addDays(-1));
@@ -437,7 +443,8 @@ void PivotTableTest::testFilterBasics()
     filter.setReportAllSplits(false);
     filter.setConsiderCategory(true);
 
-    QVERIFY(file->transactionList(filter).count() == 2);
+    file->transactionList(list, filter);
+    QCOMPARE(list.count(), 2);
 }
 
 void PivotTableTest::testMultipleCurrencies()

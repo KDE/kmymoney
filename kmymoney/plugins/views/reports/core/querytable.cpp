@@ -525,7 +525,8 @@ void QueryTable::constructTransactionTable()
     QMap<QString, MyMoneyAccount> accts;
 
     //get all transactions for this report
-    QList<MyMoneyTransaction> transactions = file->transactionList(report);
+    QList<MyMoneyTransaction> transactions;
+    file->transactionList(transactions, report);
     for (QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.constBegin(); it_transaction != transactions.constEnd(); ++it_transaction) {
 
         TableRow qA, qS;
@@ -1217,7 +1218,8 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
     report.setDateFilter(newStartingDate, newEndingDate);
 
     do {
-        QList<MyMoneyTransaction> transactions = file->transactionList(report);
+        QList<MyMoneyTransaction> transactions;
+        file->transactionList(transactions, report);
         for (QList<MyMoneyTransaction>::const_reverse_iterator  it_t = transactions.crbegin(); it_t != transactions.crend(); ++it_t) {
             MyMoneySplit shareSplit = (*it_t).splitByAccount(account.id());
             MyMoneySplit assetAccountSplit;
@@ -1337,7 +1339,8 @@ void QueryTable::sumInvestmentValues(const ReportAccount& account, QList<CashFlo
         newStartingDate = startingDate;
         newEndingDate = endingDate.addDays(-settlementPeriod);
         report.setDateFilter(newStartingDate, newEndingDate); // search for matching buy transactions year earlier
-        QList<MyMoneyTransaction> transactions = file->transactionList(report);
+        QList<MyMoneyTransaction> transactions;
+        file->transactionList(transactions, report);
         shList[BuysOfOwned] = shList[LongTermBuysOfSells];
 
         foreach (const auto transaction, transactions) {
@@ -1722,7 +1725,8 @@ void QueryTable::constructSplitsTable()
     QMap<QString, MyMoneyAccount> accts;
 
     //get all transactions for this report
-    QList<MyMoneyTransaction> transactions = file->transactionList(report);
+    QList<MyMoneyTransaction> transactions;
+    file->transactionList(transactions, report);
     for (QList<MyMoneyTransaction>::const_iterator it_transaction = transactions.constBegin(); it_transaction != transactions.constEnd(); ++it_transaction) {
 
         TableRow qA, qS;

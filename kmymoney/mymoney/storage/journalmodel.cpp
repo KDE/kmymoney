@@ -622,6 +622,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::JournalSplitIdRole:
         return journalEntry.split().id();
 
+    case eMyMoney::Model::JournalSplitNumberRole:
+        return journalEntry.split().number();
+
     case eMyMoney::Model::JournalSplitAccountIdRole:
         return journalEntry.split().accountId();
 

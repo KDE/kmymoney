@@ -94,7 +94,8 @@ void MyMoneyQifWriter::writeAccountEntry(QTextStream& s, const QString& accountI
         extractInvestmentEntries(s, accountId, startDate, endDate);
     } else {
         filter.setDateFilter(startDate, endDate);
-        QList<MyMoneyTransaction> list = file->transactionList(filter);
+        QList<MyMoneyTransaction> list;
+        file->transactionList(list, filter);
         if (!startDate.isValid() || startDate <= account.openingDate()) {
             s << "D" << m_qifProfile.date(account.openingDate()) << endl;
             openingBalanceTransactionId = file->openingBalanceTransaction(account);
@@ -262,7 +263,8 @@ void MyMoneyQifWriter::extractInvestmentEntries(QTextStream &s, const QString& a
     for (itAcc = accList.constBegin(); itAcc != accList.constEnd(); ++itAcc) {
         MyMoneyTransactionFilter filter((*itAcc));
         filter.setDateFilter(startDate, endDate);
-        QList<MyMoneyTransaction> list = file->transactionList(filter);
+        QList<MyMoneyTransaction> list;
+        file->transactionList(list, filter);
         QList<MyMoneyTransaction>::ConstIterator it;
         signalProgress(0, list.count());
         int count = 0;

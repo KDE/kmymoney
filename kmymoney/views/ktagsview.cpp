@@ -432,8 +432,9 @@ void KTagsView::slotDeleteTag()
             f.addTag(tag.id());
         }
         // request a list of all transactions that still use the tags in question
-        auto translist = file->transactionList(f);
-//     qDebug() << "[KTagsView::slotDeleteTag]  " << translist.count() << " transaction still assigned to tags";
+        QList<MyMoneyTransaction> translist;
+        file->transactionList(translist, f);
+        //     qDebug() << "[KTagsView::slotDeleteTag]  " << translist.count() << " transaction still assigned to tags";
 
         // now get a list of all schedules that make use of one of the tags
         QList<MyMoneySchedule> used_schedules;

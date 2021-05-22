@@ -1462,7 +1462,8 @@ public:
         filter.setDateFilter(startOfMonth, endOfMonth);
         filter.setReportAllSplits(false);
 
-        QList<MyMoneyTransaction> transactions = file->transactionList(filter);
+        QList<MyMoneyTransaction> transactions;
+        file->transactionList(transactions, filter);
         //if no transaction then skip and print total in zero
         if (transactions.size() > 0) {
 

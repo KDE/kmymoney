@@ -265,8 +265,10 @@ public:
         filter.setDateFilter(q->forecastStartDate(), q->forecastEndDate());
         filter.setReportAllSplits(false);
 
-        foreach (const auto transaction, file->transactionList(filter)) {
-            foreach (const auto split, transaction.splits()) {
+        QList<MyMoneyTransaction> list;
+        file->transactionList(list, filter);
+        for (const auto& transaction : list) {
+            for (const auto& split : transaction.splits()) {
                 if (!split.shares().isZero()) {
                     auto acc = file->account(split.accountId());
                     if (q->isForecastAccount(acc)) {
@@ -731,8 +733,10 @@ public:
         filter.setReportAllSplits(false);
 
         //Check past transactions
-        foreach (const auto transaction, file->transactionList(filter)) {
-            foreach (const auto split, transaction.splits()) {
+        QList<MyMoneyTransaction> list;
+        file->transactionList(list, filter);
+        for (const auto& transaction : list) {
+            for (const auto& split : transaction.splits()) {
                 if (!split.shares().isZero()) {
                     auto acc = file->account(split.accountId());
 
@@ -1118,8 +1122,10 @@ MyMoneyMoney MyMoneyForecast::calculateAccountTrend(const MyMoneyAccount& acc, q
     filter.setReportAllSplits(false);
 
     //add all transactions for that account
-    foreach (const auto transaction, file->transactionList(filter)) {
-        foreach (const auto split, transaction.splits()) {
+    QList<MyMoneyTransaction> list;
+    file->transactionList(list, filter);
+    for (const auto& transaction : list) {
+        for (const auto& split : transaction.splits()) {
             if (!split.shares().isZero()) {
                 if (acc.id() == split.accountId()) netIncome += split.value();
             }

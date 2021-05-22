@@ -403,7 +403,8 @@ public:
             f.setConsiderCategorySplits(true);
 
             // request a list of all transactions that still use the payees in question
-            QList<MyMoneyTransaction> translist = file->transactionList(f);
+            QList<MyMoneyTransaction> translist;
+            file->transactionList(translist, f);
             //     qDebug() << "[KPayeesView::slotDeletePayee]  " << translist.count() << " transaction still assigned to payees";
 
             // now get a list of all schedules that make use of one of the payees

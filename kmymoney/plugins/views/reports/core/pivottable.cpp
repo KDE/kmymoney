@@ -183,7 +183,7 @@ void PivotTable::init()
         m_config.setReportAllSplits(false);
         m_config.setConsiderCategory(true);
         try {
-            transactions = file->transactionList(m_config);
+            file->transactionList(transactions, m_config);
         } catch (const MyMoneyException &e) {
             qDebug("ERR: %s", e.what());
             throw;

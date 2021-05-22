@@ -1200,15 +1200,19 @@ void MyMoneyFileTest::testModifyTransactionNewAccount()
     t.modifySplit(s);
 
     m->setDirty(false);
+    QList<MyMoneyTransaction> list;
     MyMoneyFileTransaction ft;
     clearObjectLists();
     try {
         MyMoneyTransactionFilter f1("A000001");
         MyMoneyTransactionFilter f2("A000002");
         MyMoneyTransactionFilter f3("A000003");
-        QCOMPARE(m->transactionList(f1).count(), 1);
-        QCOMPARE(m->transactionList(f2).count(), 0);
-        QCOMPARE(m->transactionList(f3).count(), 1);
+        m->transactionList(list, f1);
+        QCOMPARE(list.count(), 1);
+        m->transactionList(list, f2);
+        QCOMPARE(list.count(), 0);
+        m->transactionList(list, f3);
+        QCOMPARE(list.count(), 1);
 
         m->modifyTransaction(t);
         ft.commit();
@@ -1216,9 +1220,12 @@ void MyMoneyFileTest::testModifyTransactionNewAccount()
         QCOMPARE(t.postDate(), QDate(2002, 2, 1));
         t = m->transaction("A000002", 0);
         QCOMPARE(m->dirty(), true);
-        QCOMPARE(m->transactionList(f1).count(), 0);
-        QCOMPARE(m->transactionList(f2).count(), 1);
-        QCOMPARE(m->transactionList(f3).count(), 1);
+        m->transactionList(list, f1);
+        QCOMPARE(list.count(), 0);
+        m->transactionList(list, f2);
+        QCOMPARE(list.count(), 1);
+        m->transactionList(list, f3);
+        QCOMPARE(list.count(), 1);
 
         QCOMPARE(m_objectsRemoved.count(), 0);
         QCOMPARE(m_objectsModified.count(), 1);
@@ -1244,6 +1251,7 @@ void MyMoneyFileTest::testRemoveTransaction()
 
     m->setDirty(false);
     MyMoneyFileTransaction ft;
+    QList<MyMoneyTransaction> list;
     clearObjectLists();
     try {
         m->removeTransaction(t);
@@ -1253,9 +1261,12 @@ void MyMoneyFileTest::testRemoveTransaction()
         MyMoneyTransactionFilter f1("A000001");
         MyMoneyTransactionFilter f2("A000002");
         MyMoneyTransactionFilter f3("A000003");
-        QCOMPARE(m->transactionList(f1).count(), 0);
-        QCOMPARE(m->transactionList(f2).count(), 0);
-        QCOMPARE(m->transactionList(f3).count(), 0);
+        m->transactionList(list, f1);
+        QCOMPARE(list.count(), 0);
+        m->transactionList(list, f2);
+        QCOMPARE(list.count(), 0);
+        m->transactionList(list, f3);
+        QCOMPARE(list.count(), 0);
 
         QCOMPARE(m_objectsRemoved.count(), 1);
         QCOMPARE(m_objectsModified.count(), 0);
