@@ -1447,18 +1447,36 @@ MyMoneyAccount MyMoneyFile::openingBalanceAccount_internal(const MyMoneySecurity
 
     accountList(accounts, equity().accountList(), true);
 
+    // If an account is clearly marked as an opening balance account
+    // for a specific currency we use it
     for (it = accounts.constBegin(); it != accounts.constEnd(); ++it) {
-        if (it->value("OpeningBalanceAccount") == QLatin1String("Yes")
-                && it->currencyId() == security.id()) {
+        if ((it->value("OpeningBalanceAccount") == QLatin1String("Yes")) && (it->currencyId() == security.id())) {
             acc = *it;
             break;
         }
     }
 
+    // If we did not find one, then we look for one with a
+    // name starting with the opening balances prefix.
     if (acc.id().isEmpty()) {
         for (it = accounts.constBegin(); it != accounts.constEnd(); ++it) {
-            if (it->name().startsWith(MyMoneyFile::openingBalancesPrefix())
-                    && it->currencyId() == security.id()) {
+            if (it->name().startsWith(MyMoneyFile::openingBalancesPrefix()) && (it->currencyId() == security.id())) {
+                acc = *it;
+                break;
+            }
+        }
+    }
+
+    // If we still don't have an opening balances account, we
+    // see if we can find one of type equity with the currency
+    // in question. This is needed, in case we have an old file
+    // which does not have the marker of step 1 above because
+    // is not (yet) present, the name did not match because it
+    // has been replaced (e.g. anonymization or the language
+    // of the application has been changed)
+    if (acc.id().isEmpty()) {
+        for (it = accounts.constBegin(); it != accounts.constEnd(); ++it) {
+            if ((it->accountType() == eMyMoney::Account::Type::Equity) && (it->currencyId() == security.id())) {
                 acc = *it;
                 break;
             }
