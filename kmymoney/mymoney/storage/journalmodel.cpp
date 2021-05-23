@@ -1176,6 +1176,15 @@ void JournalModel::doModifyItem(const JournalEntry& before, const JournalEntry& 
     setDirty();
 }
 
+bool JournalModel::matchTransaction(const QModelIndex& idx, MyMoneyTransactionFilter& filter) const
+{
+    if (idx.row() < 0 || idx.row() > rowCount() - 1)
+        return false;
+
+    const auto journalEntry = static_cast<TreeItem<JournalEntry>*>(idx.internalPointer())->constDataRef();
+    return filter.match(journalEntry.transaction());
+}
+
 void JournalModel::transactionList(QList<MyMoneyTransaction>& list, MyMoneyTransactionFilter& filter) const
 {
     list.clear();

@@ -69,7 +69,6 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent) :
         {Action::CancelTransaction,         [this](){ KGlobalLedgerView::slotCancelTransaction(); }},
         {Action::CombineTransactions,       [this](){ KGlobalLedgerView::slotCombineTransactions(); }},
         {Action::AssignTransactionsNumber,  [this](){ KGlobalLedgerView::slotAssignNumber(); }},
-        {Action::EditFindTransaction,       [this](){ KGlobalLedgerView::slotFindTransaction(); }},
 #if 0 // already moved to new location
 {Action::NewTransaction,            [this](){ KGlobalLedgerView::slotNewTransaction(); }},
 {Action::OpenAccount,               [this](){ KGlobalLedgerView::slotOpenAccount(); }},
@@ -90,6 +89,7 @@ KGlobalLedgerView::KGlobalLedgerView(QWidget *parent) :
 {Action::StartReconciliation,       [this](){ KGlobalLedgerView::slotStartReconciliation(); }},
 {Action::FinishReconciliation,      [this](){ KGlobalLedgerView::slotFinishReconciliation(); }},
 {Action::PostponeReconciliation,    [this](){ KGlobalLedgerView::slotPostponeReconciliation(); }},
+{Action::EditFindTransaction,       [this](){ KGlobalLedgerView::slotFindTransaction(); }},
 #endif
     };
     // clang-format on

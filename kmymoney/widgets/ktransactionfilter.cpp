@@ -35,6 +35,7 @@ KTransactionFilter::KTransactionFilter(QWidget *parent, bool withEquityAccounts,
 {
     Q_D(KTransactionFilter);
     d->init(withEquityAccounts, withInvestments, withDataTab);
+    QMetaObject::invokeMethod(d->ui->m_textEdit, "setFocus", Qt::QueuedConnection);
 }
 
 KTransactionFilter::~KTransactionFilter()

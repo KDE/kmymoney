@@ -629,7 +629,7 @@ public:
       */
     MyMoneyTransaction transaction(const QString& account, const int idx) const;
 
-    QStringList journalEntryIds(const MyMoneyTransactionFilter& filter) const;
+    QStringList journalEntryIds(MyMoneyTransactionFilter filter) const;
 
     /**
      * This method is used to pull a list of transactions from the file

@@ -34,6 +34,7 @@ set(libviews_a_SOURCES
   investactivities.cpp
   newspliteditor.cpp
   transactioneditorbase.cpp
+  ksearchtransactiondlg.cpp
   ktransactionselectdlg.cpp
   newtransactioneditor.cpp
   newtransactionform.cpp
@@ -52,6 +53,7 @@ set(libviews_a_UI
   kscheduledview.ui
   ktagsview.ui
   kpayeeidentifierview.ui
+  ksearchtransactiondlg.ui
   ktransactionselectdlg.ui
   simpleledgerview.ui
   ledgerview.ui

@@ -21,10 +21,11 @@
 #include "mymoneyenums.h"
 #include "kmm_mymoney_export.h"
 
-#include "mymoneyobject.h"
-#include "mymoneytransaction.h"
-#include "mymoneysplit.h"
 #include "mymoneymoney.h"
+#include "mymoneyobject.h"
+#include "mymoneysplit.h"
+#include "mymoneytransaction.h"
+#include "mymoneytransactionfilter.h"
 
 class MyMoneyTransactionFilter;
 class QUndoStack;
@@ -195,6 +196,8 @@ public:
     QString updateJournalId(const QString& journalId) const;
 
     MyMoneyMoney clearedBalance(const QString& accountId, const QDate& date) const;
+
+    bool matchTransaction(const QModelIndex& idx, MyMoneyTransactionFilter& filter) const;
 
 protected:
     explicit JournalModel(const QString& idLeadin, QObject* parent = nullptr, QUndoStack* undoStack = nullptr);

@@ -2001,6 +2001,25 @@ void MyMoneyFile::warningMissingRate(const QString& fromId, const QString& toId)
     }
 }
 
+QStringList MyMoneyFile::journalEntryIds(MyMoneyTransactionFilter filter) const
+{
+    QStringList list;
+    const auto rows = d->journalModel.rowCount();
+    for (int row = 0; row < rows;) {
+        auto idx = d->journalModel.index(row, 0);
+        const auto cnt = idx.data(eMyMoney::Model::TransactionSplitCountRole).toInt();
+        if (d->journalModel.matchTransaction(idx, filter)) {
+            for (int i = 0; i < cnt; ++i) {
+                idx = d->journalModel.index(row + i, 0);
+                list.append(idx.data(eMyMoney::Model::IdRole).toString());
+            }
+        }
+        // we can skip to the first journalEntry of the next transaction directly
+        row += cnt;
+    }
+    return list;
+}
+
 void MyMoneyFile::transactionList(QList<QPair<MyMoneyTransaction, MyMoneySplit> >& list, MyMoneyTransactionFilter& filter) const
 {
     d->journalModel.transactionList(list, filter);

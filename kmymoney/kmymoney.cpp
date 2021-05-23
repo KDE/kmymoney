@@ -92,6 +92,7 @@
 #include "dialogs/settings/ksettingskmymoney.h"
 #include "dialogs/transactionmatcher.h"
 #include "keditscheduledlg.h"
+#include "ksearchtransactiondlg.h"
 #include "ktransactionselectdlg.h"
 #include "widgets/amountedit.h"
 #include "widgets/kmymoneyaccountselector.h"
@@ -193,30 +194,31 @@ enum backupStateE {
 class KMyMoneyApp::Private
 {
 public:
-    explicit Private(KMyMoneyApp *app) :
-        q(app),
-        m_backupState(backupStateE::BACKUP_IDLE),
-        m_backupResult(0),
-        m_backupMount(0),
-        m_ignoreBackupExitCode(false),
-        m_myMoneyView(nullptr),
-        m_startDialog(false),
-        m_progressBar(nullptr),
-        m_statusLabel(nullptr),
-        m_autoSaveEnabled(true),
-        m_autoSaveTimer(nullptr),
-        m_progressTimer(nullptr),
-        m_autoSavePeriod(0),
-        m_inAutoSaving(false),
-        m_recentFiles(nullptr),
+    explicit Private(KMyMoneyApp* app)
+        : q(app)
+        , m_backupState(backupStateE::BACKUP_IDLE)
+        , m_backupResult(0)
+        , m_backupMount(0)
+        , m_ignoreBackupExitCode(false)
+        , m_myMoneyView(nullptr)
+        , m_startDialog(false)
+        , m_progressBar(nullptr)
+        , m_statusLabel(nullptr)
+        , m_autoSaveEnabled(true)
+        , m_autoSaveTimer(nullptr)
+        , m_progressTimer(nullptr)
+        , m_autoSavePeriod(0)
+        , m_inAutoSaving(false)
+        , m_recentFiles(nullptr)
 #ifdef ENABLE_HOLIDAYS
-        m_holidayRegion(nullptr),
+        , m_holidayRegion(nullptr)
 #endif
 #ifdef ENABLE_ACTIVITIES
-        m_activityResourceInstance(nullptr),
+        , m_activityResourceInstance(nullptr)
 #endif
-        m_applicationIsReady(true),
-        m_webConnect(new WebConnect(app))
+        , m_applicationIsReady(true)
+        , m_webConnect(new WebConnect(app))
+        , m_searchDlg(nullptr)
     {
         // since the days of the week are from 1 to 7,
         // and a day of the week is used to index this bit array,
@@ -327,6 +329,8 @@ public:
     } SharedActionButtonInfo;
 
     QHash<eMenu::Action, SharedActionButtonInfo> m_sharedActionButtons;
+
+    KSearchTransactionDlg* m_searchDlg;
 
     // methods
     void consistencyCheck(bool alwaysDisplayResults);
@@ -1878,6 +1882,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::GoToPayee,                     &KMyMoneyApp::slotExecuteActionWithData},
             {Action::GoToAccount,                   &KMyMoneyApp::slotExecuteActionWithData},
             {Action::ReportOpen,                    &KMyMoneyApp::slotExecuteActionWithData},
+
+            {Action::EditFindTransaction,           &KMyMoneyApp::slotFindTransaction},
         };
         // clang-format off
 
@@ -2813,6 +2819,30 @@ void KMyMoneyApp::slotEnterOverdueSchedules()
         }
     }
 }
+
+void KMyMoneyApp::slotFindTransaction()
+{
+    if (!d->m_searchDlg) {
+        d->m_searchDlg = new KSearchTransactionDlg(this);
+        connect(d->m_searchDlg, &QObject::destroyed, this, [&]() {
+            if (d->m_searchDlg)
+                d->m_searchDlg->deleteLater();
+            d->m_searchDlg = nullptr;
+        });
+        connect(d->m_searchDlg, &KSearchTransactionDlg::requestSelectionChange, this, &KMyMoneyApp::slotSelectionChanged);
+
+#if 0
+        connect(d->m_searchDlg, &KSearchTransactionDlg::selectTransaction,
+                this, [&]() {
+                    qDebug() << "Jumping to the found transaction needs to be implemented";
+                });
+#endif
+    }
+    d->m_searchDlg->show();
+    d->m_searchDlg->raise();
+    d->m_searchDlg->activateWindow();
+}
+
 
 #if 0
 void KMyMoneyApp::slotOpenAccount()
