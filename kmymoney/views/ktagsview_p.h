@@ -84,7 +84,7 @@ public:
         m_needLoad = false;
         ui->setupUi(q);
 
-        m_updateAction = new QAction(Icons::get(Icon::DialogOK), i18nc("@action:button Update button in tags vew", "Update"), q);
+        m_updateAction = new QAction(Icons::get(Icon::DialogOK), i18nc("@action:button Update button in tags view", "Update"), q);
         q->connect(m_updateAction, &QAction::triggered, q, &KTagsView::slotUpdateTag);
         m_updateAction->setEnabled(false);
 
