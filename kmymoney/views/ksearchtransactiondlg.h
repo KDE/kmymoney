@@ -6,8 +6,6 @@
 #ifndef KSEARCHTRANSACTIONDLG_H
 #define KSEARCHTRANSACTIONDLG_H
 
-#include "kmm_base_dialogs_export.h"
-
 // ----------------------------------------------------------------------------
 // QT Includes
 
@@ -22,7 +20,7 @@
 
 class SelectedObjects;
 class KSearchTransactionDlgPrivate;
-class KMM_BASE_DIALOGS_EXPORT KSearchTransactionDlg : public QDialog
+class KSearchTransactionDlg : public QDialog
 {
     Q_OBJECT
     Q_DECLARE_PRIVATE(KSearchTransactionDlg);
