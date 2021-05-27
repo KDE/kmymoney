@@ -521,7 +521,7 @@ void PivotTable::calculateColumnHeadings()
 
     // one column for the opening balance
     if (m_startColumn == 1)
-        m_columnHeadings.append("Opening");
+        m_columnHeadings.append(i18nc("@title:column Report heading", "Opening"));
 
     int columnpitch = m_config.columnPitch();
 
@@ -1347,7 +1347,7 @@ QString PivotTable::renderCSV() const
     // Table Header
     //
 
-    QString result = i18n("Account");
+    QString result = i18nc("@title:column report header", "Account");
 
     auto column = 0;
     while (column < m_numColumns) {
@@ -1615,8 +1615,10 @@ QString PivotTable::renderHTML() const
     //
     // Table Header
     //
-    QString result = QString("\n\n<table class=\"report\" cellspacing=\"0\">\n"
-                             "<thead><tr class=\"itemheader\">\n<th>%1</th>").arg(i18n("Account"));
+    QString result = QString(
+                         "\n\n<table class=\"report\" cellspacing=\"0\">\n"
+                         "<thead><tr class=\"itemheader\">\n<th>%1</th>")
+                         .arg(i18nc("@title:column report header", "Account"));
 
     QString headerspan;
     int span = m_rowTypeList.size();
@@ -2116,37 +2118,37 @@ void PivotTable::loadRowTypeList()
              && !m_config.isIncludingAveragePrice())
        ) {
         m_rowTypeList.append(eActual);
-        m_columnTypeHeaderList.append(i18n("Actual"));
+        m_columnTypeHeaderList.append(i18nc("@title:column report header", "Actual"));
     }
 
     if (m_config.hasBudget()) {
         m_rowTypeList.append(eBudget);
-        m_columnTypeHeaderList.append(i18n("Budget"));
+        m_columnTypeHeaderList.append(i18nc("@title:column report header", "Budget"));
     }
 
     if (m_config.isIncludingBudgetActuals()) {
         m_rowTypeList.append(eBudgetDiff);
-        m_columnTypeHeaderList.append(i18n("Difference"));
+        m_columnTypeHeaderList.append(i18nc("@title:column report header", "Difference"));
     }
 
     if (m_config.isIncludingForecast()) {
         m_rowTypeList.append(eForecast);
-        m_columnTypeHeaderList.append(i18n("Forecast"));
+        m_columnTypeHeaderList.append(i18nc("@title:column report header", "Forecast"));
     }
 
     if (m_config.isIncludingMovingAverage()) {
         m_rowTypeList.append(eAverage);
-        m_columnTypeHeaderList.append(i18n("Moving Average"));
+        m_columnTypeHeaderList.append(i18nc("@title:column report header", "Moving Average"));
     }
 
     if (m_config.isIncludingAveragePrice()) {
         m_rowTypeList.append(eAverage);
-        m_columnTypeHeaderList.append(i18n("Moving Average Price"));
+        m_columnTypeHeaderList.append(i18nc("@title:column report header", "Moving Average Price"));
     }
 
     if (m_config.isIncludingPrice()) {
         m_rowTypeList.append(ePrice);
-        m_columnTypeHeaderList.append(i18n("Price"));
+        m_columnTypeHeaderList.append(i18nc("@title:column report header", "Price"));
     }
 }
 
