@@ -556,10 +556,14 @@ QMap<QDate, MyMoneyMoney> MyMoneyAccount::reconciliationHistory()
         QStringList entries = value("reconciliationHistory").split(';');
         foreach (const QString& entry, entries) {
             QStringList parts = entry.split(':');
-            QDate date = QDate::fromString(parts[0], Qt::ISODate);
-            MyMoneyMoney amount(parts[1]);
-            if (parts.count() == 2 && date.isValid()) {
-                d->m_reconciliationHistory[date] = amount;
+            if (parts.count() == 2) {
+                QDate date = QDate::fromString(parts[0], Qt::ISODate);
+                MyMoneyMoney amount(parts[1]);
+                if (parts.count() == 2 && date.isValid()) {
+                    d->m_reconciliationHistory[date] = amount;
+                }
+            } else {
+                qDebug() << "Invalid reconciliationHistory" << entry;
             }
         }
     }
