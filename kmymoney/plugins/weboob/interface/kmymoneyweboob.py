@@ -8,10 +8,6 @@
 from woob.core import Woob
 from woob.capabilities.bank import CapBank
 
-def get_protocols():
-    w = Woob()
-
-    return w.repositories.get_all_modules_info(CapBank).keys()
 
 def get_backends():
     w = Woob()
