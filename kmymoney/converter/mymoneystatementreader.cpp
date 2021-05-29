@@ -648,10 +648,11 @@ void MyMoneyStatementReader::processTransactionEntry(const MyMoneyStatement::Tra
     MyMoneyTransaction transactionUnderImport;
 
     QString dbgMsg;
-    dbgMsg = QString("Process on: '%1', id: '%3', amount: '%2', fees: '%4'")
+    dbgMsg = QString("Process on: '%1', id: '%2', symbol: '%3', amount: '%4', fees: '%5'")
              .arg(statementTransactionUnderImport.m_datePosted.toString(Qt::ISODate))
-             .arg(statementTransactionUnderImport.m_amount.formatMoney("", 2))
              .arg(statementTransactionUnderImport.m_strBankID)
+             .arg(statementTransactionUnderImport.m_strSymbol)
+             .arg(statementTransactionUnderImport.m_amount.formatMoney("", 2))
              .arg(statementTransactionUnderImport.m_fees.formatMoney("", 2));
     qDebug("%s", qPrintable(dbgMsg));
 
