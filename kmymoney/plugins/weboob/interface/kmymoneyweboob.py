@@ -5,8 +5,11 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 #
 
+import logging
 from woob.core import Woob
 from woob.capabilities.bank import CapBank
+
+LOGGER = logging.getLogger(__name__)
 
 
 def get_backends():
@@ -14,7 +17,12 @@ def get_backends():
 
     result = {}
     for instance_name, name, params in sorted(w.backends_config.iter_backends()):
-        module = w.modules_loader.get_or_load_module(name)
+        try:
+            module = w.modules_loader.get_or_load_module(name)
+        except Exception as e:
+            LOGGER.error("Failed to read module %s: %s", name, e)
+            continue
+
         if not module.has_caps(CapBank):
             continue
 
