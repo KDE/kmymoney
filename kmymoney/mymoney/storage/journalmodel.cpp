@@ -634,6 +634,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::TransactionSplitCountRole:
         return journalEntry.transaction().splitCount();
 
+    case eMyMoney::Model::TransactionSplitSumRole:
+        return QVariant::fromValue(journalEntry.transaction().splitSum());
+
     case eMyMoney::Model::TransactionIsTransferRole:
         if (journalEntry.transaction().splitCount() == 2) {
             for (const auto& sp : journalEntry.transaction().splits()) {
@@ -818,6 +821,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::JournalBalanceRole:
         return QVariant::fromValue(journalEntry.balance());
 
+    case eMyMoney::Model::ScheduleIsOverdueRole:
+        return false;
+
     default:
         if (role >= Qt::UserRole)
             qDebug() << "JournalModel::data(), role" << role << "offset" << role-Qt::UserRole << "not implemented";
@@ -920,7 +926,15 @@ MyMoneyTransaction JournalModel::transactionById(const QString& id) const
     if (idx.isValid()) {
         return static_cast<TreeItem<JournalEntry>*>(idx.internalPointer())->constDataRef().transaction();
     }
-    return MyMoneyTransaction();
+    return {};
+}
+
+MyMoneyTransaction JournalModel::transactionByIndex(const QModelIndex& idx) const
+{
+    if (idx.isValid()) {
+        return static_cast<TreeItem<JournalEntry>*>(idx.internalPointer())->constDataRef().transaction();
+    }
+    return {};
 }
 
 QModelIndex JournalModel::firstIndexById(const QString& id) const

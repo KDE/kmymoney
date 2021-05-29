@@ -17,13 +17,18 @@
 #include <QResizeEvent>
 #include <QScrollBar>
 #include <QSet>
+#include <QToolTip>
 #include <QWidgetAction>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KMessageWidget>
+#include <KDualAction>
+#include <KGuiItem>
 #include <KLocalizedString>
+#include <KMessageBox>
+#include <KMessageWidget>
+#include <KStandardGuiItem>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -38,6 +43,8 @@
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
+#include "mymoneysecurity.h"
+#include "mymoneyutils.h"
 #include "onlinebalancedelegate.h"
 #include "reconciliationdelegate.h"
 #include "reconciliationmodel.h"
@@ -300,6 +307,86 @@ public:
         return menuType;
     }
 
+    QString createSplitTooltip(const QModelIndex& idx)
+    {
+        QString txt;
+
+        int splitCount = idx.data(eMyMoney::Model::TransactionSplitCountRole).toInt();
+        if ((q->currentIndex().row() != idx.row()) && (splitCount > 1)) {
+            auto file = MyMoneyFile::instance();
+            const auto journalEntryId = idx.data(eMyMoney::Model::IdRole).toString();
+            const auto securityId = idx.data(eMyMoney::Model::TransactionCommodityRole).toString();
+            const auto security = file->security(securityId);
+            MyMoneyMoney factor(MyMoneyMoney::ONE);
+            if (!idx.data(eMyMoney::Model::Roles::SplitSharesRole).value<MyMoneyMoney>().isNegative())
+                factor = -factor;
+
+            const auto indexes = file->journalModel()->indexesByTransactionId(idx.data(eMyMoney::Model::JournalTransactionIdRole).toString());
+            if (!indexes.isEmpty()) {
+                txt = QLatin1String("<table style='white-space:pre'>");
+                for (const auto& tidx : indexes) {
+                    if (tidx.data(eMyMoney::Model::IdRole).toString() == journalEntryId)
+                        continue;
+                    const auto acc = file->accountsModel()->itemById(tidx.data(eMyMoney::Model::SplitAccountIdRole).toString());
+                    const auto category = file->accountToCategory(acc.id());
+                    const auto amount =
+                        MyMoneyUtils::formatMoney((tidx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>() * factor), acc, security, true);
+
+                    txt += QString("<tr><td>%1</td><td align=right>%2</td></tr>").arg(category, amount);
+                }
+                if (splitCount > 2) {
+                    txt += QStringLiteral("<tr><td></td><td><hr/></td></tr>");
+
+                    const auto acc = file->accountsModel()->itemById(idx.data(eMyMoney::Model::SplitAccountIdRole).toString());
+                    const auto amount =
+                        MyMoneyUtils::formatMoney((idx.data(eMyMoney::Model::SplitValueRole).value<MyMoneyMoney>() * (-factor)), acc, security, true);
+                    txt += QString("<tr><td></td><td align=right>%2</td></tr>").arg(amount);
+                }
+                txt += QLatin1String("</table>");
+            }
+        }
+        return txt;
+    }
+
+    QVector<eMyMoney::Model::Roles> statusRoles(const QModelIndex& idx) const
+    {
+        QVector<eMyMoney::Model::Roles> status;
+        if (idx.data(eMyMoney::Model::TransactionErroneousRole).toBool()) {
+            status.append(eMyMoney::Model::TransactionErroneousRole);
+        } else if (idx.data(eMyMoney::Model::ScheduleIsOverdueRole).toBool()) {
+            status.append(eMyMoney::Model::ScheduleIsOverdueRole);
+        }
+
+        // draw the import icon
+        if (idx.data(eMyMoney::Model::TransactionImportedRole).toBool()) {
+            status.append(eMyMoney::Model::TransactionImportedRole);
+        }
+
+        // draw the matched icon
+        if (idx.data(eMyMoney::Model::JournalSplitIsMatchedRole).toBool()) {
+            status.append(eMyMoney::Model::JournalSplitIsMatchedRole);
+        }
+        return status;
+    }
+
+    int iconClickIndex(const QModelIndex& idx, const QPoint& pos)
+    {
+        const auto font = idx.data(Qt::FontRole).value<QFont>();
+        const auto metrics = QFontMetrics(font);
+        const auto iconWidth = (metrics.lineSpacing() + 2) + (2 * q->style()->pixelMetric(QStyle::PM_FocusFrameHMargin));
+        const auto cellRect = q->visualRect(idx);
+        auto iconRect = QRect(cellRect.x() + cellRect.width() - iconWidth, cellRect.y(), iconWidth, iconWidth);
+        auto iconIndex = -1;
+        for (int i = 0; i < JournalDelegate::maxIcons(); ++i) {
+            if (iconRect.contains(pos)) {
+                iconIndex = i;
+                break;
+            }
+            iconRect.moveLeft(iconRect.left() - iconWidth);
+        }
+        return iconIndex;
+    }
+
     LedgerView* q;
     DelegateProxy* delegateProxy;
     KMyMoneyAccountSelector* moveToAccountSelector;
@@ -491,13 +578,166 @@ QModelIndex LedgerView::editIndex() const
     return d->editIndex;
 }
 
+bool LedgerView::viewportEvent(QEvent* event)
+{
+    if (event->type() == QEvent::ToolTip) {
+        auto helpEvent = static_cast<QHelpEvent*>(event);
+
+        // get the row, if it's the header, then we're done
+        // otherwise, adjust the row to be 0 based.
+        const auto col = columnAt(helpEvent->x());
+        const auto row = rowAt(helpEvent->y());
+        const auto idx = model()->index(row, col);
+
+        if (col == JournalModel::Column::Detail) {
+            bool preventLineBreak(false);
+            int iconIndex = d->iconClickIndex(idx, helpEvent->pos());
+
+            QVector<QString> tooltips(JournalDelegate::maxIcons());
+            if (iconIndex != -1) {
+                int iconCount(0);
+                if (idx.data(eMyMoney::Model::TransactionErroneousRole).toBool()) {
+                    if (idx.data(eMyMoney::Model::Roles::TransactionSplitCountRole).toInt() < 2) {
+                        tooltips[iconCount] = i18nc("@info:tooltip icon description", "Transaction is missing a category assignment.");
+                    } else {
+                        const auto acc = MyMoneyFile::instance()->account(d->accountId);
+                        const auto sec = MyMoneyFile::instance()->security(acc.currencyId());
+                        // don't allow line break between amount and currency symbol
+                        tooltips[iconCount] =
+                            i18nc("@info:tooltip icon description",
+                                  "The transaction has a missing assignment of <b>%1</b>.",
+                                  MyMoneyUtils::formatMoney(idx.data(eMyMoney::Model::TransactionSplitSumRole).value<MyMoneyMoney>().abs(), acc, sec));
+                    }
+                    preventLineBreak = true;
+                    ++iconCount;
+
+                } else if (idx.data(eMyMoney::Model::ScheduleIsOverdueRole).toBool()) {
+                    tooltips[iconCount] = i18nc("@info:tooltip icon description", "This schedule is overdue.");
+                    ++iconCount;
+                }
+
+                if (idx.data(eMyMoney::Model::TransactionImportedRole).toBool()) {
+                    tooltips[iconCount] = i18nc("@info:tooltip icon description", "This transaction is imported. Accept it to mark it cleared.");
+                    ++iconCount;
+                }
+
+                if (idx.data(eMyMoney::Model::JournalSplitIsMatchedRole).toBool()) {
+                    tooltips[iconCount] = i18nc("@info:tooltip icon description", "This transaction is matched. Accept or un-match it.");
+                    ++iconCount;
+                }
+
+            } else {
+                tooltips[0] = d->createSplitTooltip(idx);
+                iconIndex = 0;
+            }
+
+            if ((iconIndex != -1) && !tooltips[iconIndex].isEmpty()) {
+                auto text = tooltips[iconIndex];
+                if (preventLineBreak) {
+                    text = QString("<p style='white-space:pre'>%1</p>").arg(text);
+                }
+                QToolTip::showText(helpEvent->globalPos(), tooltips[iconIndex]);
+                return true;
+            }
+
+        } else if ((col == JournalModel::Column::Payment) || (col == JournalModel::Column::Deposit)) {
+            if (!idx.data(Qt::DisplayRole).toString().isEmpty()) {
+                auto tip = d->createSplitTooltip(idx);
+                if (!tip.isEmpty()) {
+                    QToolTip::showText(helpEvent->globalPos(), tip);
+                    return true;
+                }
+            }
+        }
+
+        QToolTip::hideText();
+        event->ignore();
+        return true;
+    }
+    return QTableView::viewportEvent(event);
+}
+
 void LedgerView::mousePressEvent(QMouseEvent* event)
 {
-    if(state() != QAbstractItemView::EditingState) {
+    if ((state() != QAbstractItemView::EditingState) && (event->button() == Qt::LeftButton)) {
         QTableView::mousePressEvent(event);
         // a click on the reconciliation column triggers the Mark transaction action
-        if (columnAt(event->pos().x()) == JournalModel::Column::Reconciliation) {
+        switch (columnAt(event->pos().x())) {
+        case JournalModel::Column::Reconciliation:
             pActions[eMenu::Action::ToggleReconciliationFlag]->trigger();
+            break;
+
+        case JournalModel::Column::Detail: {
+            const auto col = columnAt(event->x());
+            const auto row = rowAt(event->y());
+            const auto idx = model()->index(row, col);
+            const auto iconIndex = d->iconClickIndex(idx, event->pos());
+            const auto statusRoles = this->statusRoles(idx);
+
+            KGuiItem buttonYes = KStandardGuiItem::yes();
+            KGuiItem buttonNo = KStandardGuiItem::no();
+            KGuiItem buttonCancel = KStandardGuiItem::cancel();
+            KMessageBox::ButtonCode result;
+
+            if (iconIndex != -1 && (iconIndex < statusRoles.count())) {
+                switch (statusRoles[iconIndex]) {
+                case eMyMoney::Model::ScheduleIsOverdueRole:
+                    result = KMessageBox::questionYesNo(this,
+                                                        i18nc("", "Do you want to enter the overdue schedule now?"),
+                                                        i18nc("", "Enter overdue schedule"),
+                                                        buttonYes,
+                                                        buttonNo);
+                    if (result == KMessageBox::ButtonCode::Yes) {
+                        pActions[eMenu::Action::EnterSchedule]->setData(idx.data(eMyMoney::Model::JournalTransactionIdRole).toString());
+                        pActions[eMenu::Action::EnterSchedule]->trigger();
+                    }
+                    break;
+                case eMyMoney::Model::TransactionImportedRole:
+                    result = KMessageBox::questionYesNo(this,
+                                                        i18nc("", "Do you want to accept the imported transaction now?"),
+                                                        i18nc("", "Accept transaction"),
+                                                        buttonYes,
+                                                        buttonNo);
+                    if (result == KMessageBox::ButtonCode::Yes) {
+                        pActions[eMenu::Action::AcceptTransaction]->trigger();
+                    }
+                    break;
+                case eMyMoney::Model::JournalSplitIsMatchedRole: {
+                    buttonYes.setText(pActions[eMenu::Action::AcceptTransaction]->text());
+                    buttonYes.setIcon(pActions[eMenu::Action::AcceptTransaction]->icon());
+                    const auto unmatchAction = qobject_cast<KDualAction*>(pActions[eMenu::Action::MatchTransaction]);
+                    if (unmatchAction) {
+                        unmatchAction->setActive(false);
+                        buttonNo.setText(pActions[eMenu::Action::MatchTransaction]->text());
+                        buttonNo.setIcon(pActions[eMenu::Action::MatchTransaction]->icon());
+
+                        result = KMessageBox::questionYesNoCancel(this,
+                                                                  i18nc("", "Do you want to accept or unmatch the matched transaction now?"),
+                                                                  i18nc("", "Accept or unmatch transaction"),
+                                                                  buttonYes,
+                                                                  buttonNo,
+                                                                  buttonCancel);
+                        switch (result) {
+                        case KMessageBox::ButtonCode::Yes:
+                            pActions[eMenu::Action::AcceptTransaction]->trigger();
+                            break;
+                        case KMessageBox::ButtonCode::No:
+                            pActions[eMenu::Action::MatchTransaction]->trigger();
+                            break;
+                        default:
+                            break;
+                        }
+                    }
+                    break;
+                }
+                default:
+                    break;
+                }
+            }
+            break;
+        }
+        default:
+            break;
         }
     }
 }
@@ -603,6 +843,11 @@ void LedgerView::paintEvent(QPaintEvent* event)
         QRect rect(0, top, viewport()->width(), viewport()->height()-top);
         painter.fillRect(rect, QBrush(palette().base()));
     }
+}
+
+QVector<eMyMoney::Model::Roles> LedgerView::statusRoles(const QModelIndex& idx) const
+{
+    return d->statusRoles(idx);
 }
 
 void LedgerView::setSingleLineDetailRole(eMyMoney::Model::Roles role)
@@ -720,7 +965,7 @@ void LedgerView::selectMostRecentTransaction()
         int row = model()->rowCount()-1;
         const auto journalModel = MyMoneyFile::instance()->journalModel();
         while(row >= 0) {
-            const QModelIndex idx = model()->index(row, 0);
+            const auto idx = model()->index(row, 0);
             if (MyMoneyFile::baseModel()->baseModel(idx) == journalModel) {
                 setCurrentIndex(idx);
                 selectRow(idx.row());

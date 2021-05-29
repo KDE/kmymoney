@@ -67,6 +67,8 @@ public:
 
     void editNewTransaction();
 
+    QVector<eMyMoney::Model::Roles> statusRoles(const QModelIndex& idx) const;
+
     /**
      * New transactions will be created in account referenced by @a id.
      */
@@ -102,6 +104,7 @@ protected:
     int sizeHintForRow(int row) const final override;
     int sizeHintForColumn(int row) const final override;
     void keyPressEvent ( QKeyEvent* event ) override;
+    bool viewportEvent(QEvent*) override;
 
 protected Q_SLOTS:
     void selectionChanged ( const QItemSelection& selected, const QItemSelection& deselected ) override;

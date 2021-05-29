@@ -57,6 +57,15 @@ public:
 
     static QColor erroneousColor();
 
+    /**
+     * The maximum number of icons that can show up in parallel on
+     * a transaction.
+     */
+    static int maxIcons()
+    {
+        return 3;
+    }
+
 protected:
     bool eventFilter(QObject* o, QEvent* event) final override;
 

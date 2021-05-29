@@ -129,6 +129,7 @@ public:
         // insert new columns above this line
         MaxColumns,
     };
+    Q_ENUMS(Column);
 
     explicit JournalModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
     virtual ~JournalModel();
@@ -145,6 +146,7 @@ public:
      * of the linear one provided by the template function
      */
     MyMoneyTransaction transactionById(const QString& id) const;
+    MyMoneyTransaction transactionByIndex(const QModelIndex& idx) const;
 
     /**
      * Returns all indexes for a given transaction @a id or empty

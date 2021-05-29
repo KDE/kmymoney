@@ -2699,6 +2699,7 @@ void KMyMoneyApp::slotMatchTransaction()
     auto action = qobject_cast<KDualAction*>(sender());
     if (action) {
         action->isActive() ? d->matchTransaction() : d->unmatchTransaction();
+        d->updateActions(d->m_selections);
     }
 
 }
@@ -2749,6 +2750,8 @@ void KMyMoneyApp::slotAcceptTransaction()
             matcher.accept(t, s);
         }
         ft.commit();
+        d->updateActions(d->m_selections);
+
     } catch (const MyMoneyException &e) {
         KMessageBox::detailedSorry(this, i18n("Unable to accept transaction"), QString::fromLatin1(e.what()));
     }
