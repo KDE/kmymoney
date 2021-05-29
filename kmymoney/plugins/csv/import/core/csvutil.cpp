@@ -45,7 +45,7 @@ QStringList Parse::parseLine(const QString& data)
             }
             cell.remove(m_textDelimiter);
         }
-        listOut.append(cell);
+        listOut.append(cell.trimmed());
         cell.clear();
     }
     return listOut;
