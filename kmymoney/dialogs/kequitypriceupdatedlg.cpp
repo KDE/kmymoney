@@ -111,6 +111,11 @@ public:
         for (MyMoneyPriceList::ConstIterator it_price = prices.constBegin(); it_price != prices.constEnd(); ++it_price) {
             const MyMoneySecurityPair& pair = it_price.key();
             if (file->security(pair.first).isCurrency() && (securityId.isEmpty() || (pair == currencyIds))) {
+                if (pair.first.trimmed().isEmpty() || pair.second.trimmed().isEmpty()) {
+                    qDebug() << "A currency pair" << pair << "has one of its elements present, while the other one is empty. Omitting.";
+                    continue;
+                }
+
                 const MyMoneyPriceEntries& entries = (*it_price);
                 if (entries.count() > 0 && entries.begin().key() <= QDate::currentDate()) {
                     addPricePair(pair, false);
@@ -191,6 +196,9 @@ public:
 
     void addPricePair(const MyMoneySecurityPair& pair, bool dontCheckExistance)
     {
+        Q_ASSERT(!pair.first.trimmed().isEmpty());
+        Q_ASSERT(!pair.second.trimmed().isEmpty());
+
         auto file = MyMoneyFile::instance();
 
         const auto symbol = QString::fromLatin1("%1 > %2").arg(pair.first, pair.second);
