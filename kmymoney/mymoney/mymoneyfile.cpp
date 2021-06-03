@@ -2577,6 +2577,14 @@ QStringList MyMoneyFile::consistencyCheck()
         bool tChanged = false;
         QDate accountOpeningDate;
         QStringList accountList;
+        if (!(t.value(QStringLiteral("kmm-matched-tx")).isEmpty() && t.value(QStringLiteral("kmm-match-split")).isEmpty())) {
+            t.deletePair(QStringLiteral("kmm-matched-tx"));
+            t.deletePair(QStringLiteral("kmm-match-split"));
+            rc << i18n("  * Removed unused match information from transaction '%1'.", t.id());
+            ++problemCount;
+            tChanged = true;
+        }
+
         const auto splits = t.splits();
         foreach (const auto split, splits) {
             bool sChanged = false;
