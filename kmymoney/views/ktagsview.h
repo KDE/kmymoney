@@ -44,8 +44,8 @@ public:
     void executeCustomAction(eView::Action action) override;
 
 public Q_SLOTS:
-    void slotSelectTagAndTransaction(const QString& tagId, const QString& accountId, const QString& transactionId);
-    void slotSelectTagAndTransaction(const QString& tagId);
+    void slotSelectTagAndTransaction(const QString& tagId, const QString& journalEntryId);
+    void slotSelectTag(const QString& tagId);
     void slotHelp();
 
     void updateActions(const SelectedObjects& selections) override;
@@ -57,10 +57,14 @@ protected:
 
 protected Q_SLOTS:
     /**
-      * This slot is called whenever the selection in m_tagsList
-      * has been changed.
-      */
+     * This slot is called whenever the selection in m_tagsList has been changed.
+     */
     void slotTagSelectionChanged (const QItemSelection& selected, const QItemSelection& deselected);
+
+    /**
+     * This slot is called whenever the selection in the ledger has been changed.
+     */
+    void slotTransactionSelectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
 
     /**
       * This slot marks the current selected tag as modified (dirty).
