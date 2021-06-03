@@ -2184,6 +2184,11 @@ void MyMoneyFile::addSchedule(MyMoneySchedule& sched)
             throw MYMONEYEXCEPTION_CSTRING("Cannot add split referencing standard account");
     }
 
+    // Reset the imported flag of the transaction in any case
+    auto t = sched.transaction();
+    t.setImported(false);
+    sched.setTransaction(t);
+
     d->schedulesModel.addItem(sched);
     d->m_changeSet += MyMoneyNotification(File::Mode::Add, File::Object::Schedule, sched.id());
 }
@@ -2773,6 +2778,12 @@ QStringList MyMoneyFile::consistencyCheck()
                 t.modifySplit(s);
                 tChanged = true;
             }
+        }
+        if (t.isImported()) {
+            rc << i18n("  * Imported flag removed from schedule '%1'", (*it_sch).name());
+            t.setImported(false);
+            tChanged = true;
+            ++problemCount;
         }
         if (tChanged) {
             sch.setTransaction(t);

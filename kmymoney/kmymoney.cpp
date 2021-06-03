@@ -2717,6 +2717,7 @@ void KMyMoneyApp::slotCreateScheduledTransaction()
         s.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
         s.setReconcileDate(QDate());
         t.removeSplits();
+        t.setImported(false);
         t.addSplit(s);
         for (const auto& split : journalEntry.transaction().splits()) {
             if (split.id() != splitId) {
