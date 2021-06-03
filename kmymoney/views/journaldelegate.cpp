@@ -341,7 +341,7 @@ void JournalDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
                 case eMyMoney::Model::ScheduleIsOverdueRole:
                     icon = style->proxy()->standardIcon(QStyle::SP_MessageBoxWarning, &option, option.widget);
                     break;
-                case eMyMoney::Model::TransactionImportedRole:
+                case eMyMoney::Model::TransactionIsImportedRole:
                     icon = Icons::get(Icons::Icon::TransactionStateImported);
                     break;
                 case eMyMoney::Model::JournalSplitIsMatchedRole:

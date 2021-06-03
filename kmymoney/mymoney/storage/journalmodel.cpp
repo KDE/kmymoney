@@ -652,7 +652,7 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
         return MyMoneyFile::instance()->isInvestmentTransaction(journalEntry.transaction());
 
     case eMyMoney::Model::TransactionIsImportedRole:
-        return journalEntry.transaction().isImported();
+        return transaction.isImported();
 
     case eMyMoney::Model::TransactionInvestementType:
         return QVariant::fromValue<eMyMoney::Split::InvestmentTransactionType>(journalEntry.split().investmentTransactionType());
@@ -677,9 +677,6 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::TransactionErroneousRole:
         return !transaction.splitSum().isZero();
-
-    case eMyMoney::Model::TransactionImportedRole:
-        return transaction.isImported();
 
     case eMyMoney::Model::TransactionInvestmentAccountIdRole:
         if (MyMoneyFile::instance()->isInvestmentTransaction(journalEntry.transaction())) {

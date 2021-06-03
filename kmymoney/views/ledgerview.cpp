@@ -358,8 +358,8 @@ public:
         }
 
         // draw the import icon
-        if (idx.data(eMyMoney::Model::TransactionImportedRole).toBool()) {
-            status.append(eMyMoney::Model::TransactionImportedRole);
+        if (idx.data(eMyMoney::Model::TransactionIsImportedRole).toBool()) {
+            status.append(eMyMoney::Model::TransactionIsImportedRole);
         }
 
         // draw the matched icon
@@ -695,7 +695,7 @@ void LedgerView::mousePressEvent(QMouseEvent* event)
                         pActions[eMenu::Action::EnterSchedule]->trigger();
                     }
                     break;
-                case eMyMoney::Model::TransactionImportedRole:
+                case eMyMoney::Model::TransactionIsImportedRole:
                     buttonNo.setToolTip(QString());
                     buttonYes.setToolTip(i18nc("@info:tooltip Accept button", "Accept the transaction and mark it cleared."));
 

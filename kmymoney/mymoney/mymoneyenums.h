@@ -531,7 +531,6 @@ enum Roles {
 
     // MyMoneyTransaction
     TransactionErroneousRole,
-    TransactionImportedRole,
     TransactionPostDateRole,
     TransactionEntryDateRole,
     TransactionCounterAccountRole,

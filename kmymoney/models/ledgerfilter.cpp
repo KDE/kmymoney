@@ -132,7 +132,7 @@ bool LedgerFilter::filterAcceptsRow(int source_row, const QModelIndex& source_pa
             }
             break;
         case State::Imported:
-            if (!idx.data(eMyMoney::Model::TransactionImportedRole).toBool()) {
+            if (!idx.data(eMyMoney::Model::TransactionIsImportedRole).toBool()) {
                 return false;
             }
             break;
