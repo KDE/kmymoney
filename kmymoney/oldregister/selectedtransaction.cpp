@@ -125,6 +125,7 @@ bool SelectedTransaction::operator==(const SelectedTransaction& other) const
 
 uint qHash(const KMyMoneyRegister::SelectedTransaction& t, uint seed) Q_DECL_NOTHROW
 {
+    Q_UNUSED(seed)
     return qHash(t.transaction().id()) ^ qHash(t.split().id());
 }
 

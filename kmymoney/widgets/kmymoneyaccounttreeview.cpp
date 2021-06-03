@@ -74,7 +74,6 @@ KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent)
     : KMyMoneyTreeView(parent)
     , d_ptr(new KMyMoneyAccountTreeViewPrivate(this))
 {
-    Q_D(KMyMoneyAccountTreeView);
     setContextMenuPolicy(Qt::CustomContextMenu);            // allow context menu to be opened on tree items
     connect(this, &QWidget::customContextMenuRequested, this, &KMyMoneyAccountTreeView::customContextMenuRequested);
     setAllColumnsShowFocus(true);

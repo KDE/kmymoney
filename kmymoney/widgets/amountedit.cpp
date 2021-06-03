@@ -72,7 +72,6 @@ public:
         , m_allowEmpty(false)
         , m_items(NoItem)
     {
-        Q_Q(AmountEdit);
         m_calculatorFrame = new QFrame;
         m_calculatorFrame->setWindowFlags(Qt::Popup);
 

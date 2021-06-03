@@ -517,7 +517,6 @@ void TransactionEditor::assignNextNumber()
 
 void TransactionEditor::slotNumberChanged(const QString& txt)
 {
-    Q_D(TransactionEditor);
     auto number = dynamic_cast<KMyMoneyLineEdit*>(haveWidget("number"));
     if (number) {
         const auto next = validateCheckNumber(txt);

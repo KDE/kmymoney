@@ -341,8 +341,6 @@ eMyMoney::Split::InvestmentTransactionType Sell::type() const
 
 void Sell::showWidgets() const
 {
-    Q_D(const Activity);
-
     static const QStringList activityWidgets = {
         "sharesLabel", "sharesAmountEdit",
         "assetAccountLabel", "assetAccountCombo",

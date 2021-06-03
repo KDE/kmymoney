@@ -60,12 +60,6 @@ class KMM_MYMONEY_EXPORT ParametersModel : public MyMoneyModel<ParameterItem>
     Q_OBJECT
 
 public:
-    class Column {
-        enum {
-            Name,
-        } Columns;
-    };
-
     explicit ParametersModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
     virtual ~ParametersModel();
 

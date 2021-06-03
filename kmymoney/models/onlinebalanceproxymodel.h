@@ -42,7 +42,7 @@ public:
 
     int columnCount ( const QModelIndex& parent = QModelIndex() ) const override;
 
-    Qt::ItemFlags flags ( const QModelIndex& index ) const override;
+    Qt::ItemFlags flags(const QModelIndex& idx) const override;
 
     QModelIndex index ( int row, int column, const QModelIndex & parent ) const override;
 

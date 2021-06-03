@@ -44,7 +44,6 @@ TransactionMatcher::~TransactionMatcher()
 
 void TransactionMatcher::match(MyMoneyTransaction tm, MyMoneySplit sm, MyMoneyTransaction ti, MyMoneySplit si, bool allowImportedTransactions)
 {
-    Q_D(TransactionMatcher);
     if (sm.accountId() != si.accountId()) {
         throw MYMONEYEXCEPTION_CSTRING("Both splits must reference the same account for matching");
     }

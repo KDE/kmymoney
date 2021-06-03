@@ -91,7 +91,6 @@ void KHomeView::executeAction(eMenu::Action action, const SelectedObjects& selec
 
 void KHomeView::executeCustomAction(eView::Action action)
 {
-    Q_D(KHomeView);
     switch(action) {
     case eView::Action::Refresh:
         refresh();
@@ -161,8 +160,6 @@ void KHomeView::slotOpenUrl(const QUrl &url)
     QUrlQuery query(url);
     QString id = query.queryItemValue("id");
     QString mode = query.queryItemValue("mode");
-
-    const auto file = MyMoneyFile::instance();
 
     if (protocol == QLatin1String("https")) {
         QDesktopServices::openUrl(url);

@@ -137,11 +137,8 @@ void OnlineBalanceDelegate::paint(QPainter* painter, const QStyleOptionViewItem&
     // Background
     QStyle *style = opt.widget ? opt.widget->style() : QApplication::style();
     const int margin = style->pixelMetric(QStyle::PM_FocusFrameHMargin);
-    const int lineHeight = opt.fontMetrics.lineSpacing() + 2;
 
     const QRect textArea = QRect(opt.rect.x() + margin, opt.rect.y() + margin, opt.rect.width() - 2 * margin, opt.rect.height() - 2 * margin);
-
-    QPalette::ColorGroup cg;
 
     const auto onlineBalanceDate = index.data(eMyMoney::Model::AccountOnlineBalanceDateRole).toDate();
     const auto onlineBalanceValue = index.data(eMyMoney::Model::AccountOnlineBalanceValueRole).value<MyMoneyMoney>();

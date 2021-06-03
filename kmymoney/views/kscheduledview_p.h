@@ -319,7 +319,7 @@ public:
 
     void slotTransactionsCancel(TransactionEditor* editor, const MyMoneySchedule& schedule)
     {
-        Q_Q(KScheduledView);
+        Q_UNUSED(schedule)
         // since we jump here via code, we have to make sure to react only
         // if the action is enabled
         if (pActions[eMenu::Action::CancelTransaction]->isEnabled()) {

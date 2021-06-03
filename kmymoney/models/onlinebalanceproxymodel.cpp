@@ -135,8 +135,9 @@ QVariant OnlineBalanceProxyModel::data(const QModelIndex& idx, int role) const
     return QSortFilterProxyModel::data(idx, role);
 }
 
-Qt::ItemFlags OnlineBalanceProxyModel::flags(const QModelIndex& index) const
+Qt::ItemFlags OnlineBalanceProxyModel::flags(const QModelIndex& idx) const
 {
+    Q_UNUSED(idx)
     return Qt::NoItemFlags;
 }
 

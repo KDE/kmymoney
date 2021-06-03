@@ -93,10 +93,11 @@ void KScheduledView::showEvent(QShowEvent* event)
             d->m_filterModel->sort(logicalIndex, order);
         });
         connect(MyMoneyFile::instance()->schedulesModel(), &SchedulesModel::dataChanged, this, [&](const QModelIndex& from, const QModelIndex& to) {
+            Q_UNUSED(from)
+            Q_UNUSED(to)
             Q_D(KScheduledView);
             d->m_filterModel->invalidate();
         });
-
     }
     emit customActionRequested(View::Schedules, eView::Action::AboutToShow);
 

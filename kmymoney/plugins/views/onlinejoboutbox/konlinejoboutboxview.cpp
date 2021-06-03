@@ -206,7 +206,6 @@ void KOnlineJobOutboxView::createActions(KXMLGUIFactory* guiFactory, KXMLGUIClie
 
 void KOnlineJobOutboxView::removeActions()
 {
-    Q_D(const KOnlineJobOutboxView);
 }
 
 void KOnlineJobOutboxView::updateActions(const SelectedObjects& selections)
@@ -408,6 +407,7 @@ void KOnlineJobOutboxView::showEvent(QShowEvent* event)
 
 void KOnlineJobOutboxView::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
+    Q_UNUSED(selections)
     Q_D(KOnlineJobOutboxView);
     switch (action) {
     case eMenu::Action::FileClose:
