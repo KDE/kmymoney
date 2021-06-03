@@ -2173,8 +2173,10 @@ void MyMoneyFile::addSchedule(MyMoneySchedule& sched)
     if (sched.type() == eMyMoney::Schedule::Type::Any)
         throw MYMONEYEXCEPTION_CSTRING("Cannot store schedule without type");
 
-    const auto splits = sched.transaction().splits();
-    for (const auto& split : splits) {
+    auto t = sched.transaction();
+
+    const auto splits = t.splits();
+    for (auto split : splits) {
         // the following line will throw an exception if the
         // account does not exist or is one of the standard accounts
         const auto acc = account(split.accountId());
@@ -2182,10 +2184,15 @@ void MyMoneyFile::addSchedule(MyMoneySchedule& sched)
             throw MYMONEYEXCEPTION_CSTRING("Cannot add split with no account assigned");
         if (isStandardAccount(split.accountId()))
             throw MYMONEYEXCEPTION_CSTRING("Cannot add split referencing standard account");
+
+        // If we have match information in a split don't copy it into the schedule
+        if (split.isMatched()) {
+            split.removeMatch();
+            t.modifySplit(split);
+        }
     }
 
     // Reset the imported flag of the transaction in any case
-    auto t = sched.transaction();
     t.setImported(false);
     sched.setTransaction(t);
 
