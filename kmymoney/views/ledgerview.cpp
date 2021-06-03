@@ -612,17 +612,17 @@ bool LedgerView::viewportEvent(QEvent* event)
                     ++iconCount;
 
                 } else if (idx.data(eMyMoney::Model::ScheduleIsOverdueRole).toBool()) {
-                    tooltips[iconCount] = i18nc("@info:tooltip icon description", "This schedule is overdue.");
+                    tooltips[iconCount] = i18nc("@info:tooltip icon description", "This schedule is overdue. Click on the icon to enter it.");
                     ++iconCount;
                 }
 
-                if (idx.data(eMyMoney::Model::TransactionImportedRole).toBool()) {
-                    tooltips[iconCount] = i18nc("@info:tooltip icon description", "This transaction is imported. Accept it to mark it cleared.");
+                if (idx.data(eMyMoney::Model::TransactionIsImportedRole).toBool()) {
+                    tooltips[iconCount] = i18nc("@info:tooltip icon description", "This transaction is imported. Click on the icon to accept it.");
                     ++iconCount;
                 }
 
                 if (idx.data(eMyMoney::Model::JournalSplitIsMatchedRole).toBool()) {
-                    tooltips[iconCount] = i18nc("@info:tooltip icon description", "This transaction is matched. Accept or un-match it.");
+                    tooltips[iconCount] = i18nc("@info:tooltip icon description", "This transaction is matched. Click on the icon to accept or un-match it.");
                     ++iconCount;
                 }
 
