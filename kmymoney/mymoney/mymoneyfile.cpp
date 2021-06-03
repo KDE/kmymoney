@@ -2273,7 +2273,6 @@ QStringList MyMoneyFile::consistencyCheck()
     QStringList rc;
 
     /// @todo port to new model code
-#if 0
     QList<MyMoneyAccount> list;
     QList<MyMoneyAccount>::Iterator it_a;
     QList<MyMoneySchedule>::Iterator it_sch;
@@ -2482,10 +2481,11 @@ QStringList MyMoneyFile::consistencyCheck()
         }
 
         // if the account was modified, we need to update it in the engine
-        if (!(d->m_storage->account((*it_a).id()) == (*it_a))) {
-            try {
-                d->m_storage->modifyAccount(*it_a, true);
-            } catch (const MyMoneyException &) {
+        const auto acc = d->accountsModel.itemById((*it_a).id());
+        if (!(acc == (*it_a))) {
+            if (!acc.id().isEmpty()) {
+                d->accountsModel.modifyItem(*it_a);
+            } else {
                 rc << i18n("  * Unable to update account data in engine.");
                 return rc;
             }
@@ -2521,10 +2521,11 @@ QStringList MyMoneyFile::consistencyCheck()
 
     // update the engine objects
     for (it_a = list.begin(); it_a != list.end(); ++it_a) {
+        const auto acc = d->accountsModel.itemById((*it_a).id());
         if (accountRebuild.contains((*it_a).id())) {
-            try {
-                d->m_storage->modifyAccount(*it_a, true);
-            } catch (const MyMoneyException &) {
+            if (!acc.id().isEmpty()) {
+                d->accountsModel.modifyItem(*it_a);
+            } else {
                 rc << i18n("  * Unable to update account data for account %1 in engine", (*it_a).name());
             }
         }
@@ -2541,7 +2542,7 @@ QStringList MyMoneyFile::consistencyCheck()
             // create a new one and store it in the map.
             MyMoneyPayee payee = (*it_p);
             payee.clearId();
-            d->m_storage->addPayee(payee);
+            d->payeesModel.addItem(payee);
             payeeConversionMap[(*it_p).id()] = payee.id();
             rc << i18n("  * Payee %1 recreated with fixed id", payee.name());
             ++problemCount;
@@ -2551,7 +2552,9 @@ QStringList MyMoneyFile::consistencyCheck()
     // Fix the transactions
     MyMoneyTransactionFilter filter;
     filter.setReportAllSplits(false);
-    const auto tList = d->m_storage->transactionList(filter);
+    QList<MyMoneyTransaction> tList;
+    transactionList(tList, filter);
+
     // Generate the list of interest accounts
     for (const auto& transaction : tList) {
         const auto splits = transaction.splits();
@@ -2586,7 +2589,7 @@ QStringList MyMoneyFile::consistencyCheck()
             }
 
             try {
-                const auto acc = this->account(s.accountId());
+                const auto acc = d->accountsModel.itemById(s.accountId());
                 // compute the newest opening date of all accounts involved in the transaction
                 // in case the newest opening date is newer than the transaction post date, do one
                 // of the following:
@@ -2702,7 +2705,7 @@ QStringList MyMoneyFile::consistencyCheck()
         }
 
         if (tChanged) {
-            d->m_storage->modifyTransaction(t);
+            d->journalModel.modifyTransaction(t);
         }
     }
 
@@ -2765,7 +2768,7 @@ QStringList MyMoneyFile::consistencyCheck()
         }
         if (tChanged) {
             sch.setTransaction(t);
-            d->m_storage->modifySchedule(sch);
+            d->schedulesModel.modifyItem(sch);
         }
     }
 
@@ -2786,7 +2789,7 @@ QStringList MyMoneyFile::consistencyCheck()
             }
         }
         if (rChanged) {
-            d->m_storage->modifyReport(r);
+            d->reportsModel.modifyItem(r);
         }
     }
 
@@ -2906,7 +2909,7 @@ QStringList MyMoneyFile::consistencyCheck()
             }
         }
         if (bChanged) {
-            d->m_storage->modifyBudget(b);
+            d->budgetsModel.modifyItem(b);
         }
     }
 
@@ -2921,7 +2924,6 @@ QStringList MyMoneyFile::consistencyCheck()
         rc << QString();
         rc << i18nc("%1 is a string, e.g. 7 problems corrected; %2 is a string, e.g. 3 problems still present", "Finished: %1 %2", problemsCorrected, problemsRemaining);
     }
-#endif
     return rc;
 }
 
