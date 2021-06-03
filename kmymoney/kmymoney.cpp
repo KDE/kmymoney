@@ -3467,41 +3467,6 @@ void KMyMoneyApp::slotAccountNew(MyMoneyAccount& account)
     NewAccountWizard::Wizard::newAccount(account);
 }
 
-void KMyMoneyApp::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& newAccount)
-{
-    MyMoneyFile* file = MyMoneyFile::instance();
-    // Add the schedule only if one exists
-    //
-    // Remember to modify the first split to reference the newly created account
-    if (!newSchedule.name().isEmpty()) {
-        try {
-            // We assume at least 2 splits in the transaction
-            MyMoneyTransaction t = newSchedule.transaction();
-            if (t.splitCount() < 2) {
-                throw MYMONEYEXCEPTION_CSTRING("Transaction for schedule has less than 2 splits!");
-            }
-
-            MyMoneyFileTransaction ft;
-            try {
-                file->addSchedule(newSchedule);
-
-                // in case of a loan account, we keep a reference to this
-                // schedule in the account
-                if (newAccount.accountType() == eMyMoney::Account::Type::Loan
-                        || newAccount.accountType() == eMyMoney::Account::Type::AssetLoan) {
-                    newAccount.setValue("schedule", newSchedule.id());
-                    file->modifyAccount(newAccount);
-                }
-                ft.commit();
-            } catch (const MyMoneyException &e) {
-                KMessageBox::information(this, i18n("Unable to add scheduled transaction: %1", QString::fromLatin1(e.what())));
-            }
-        } catch (const MyMoneyException &e) {
-            KMessageBox::information(this, i18n("Unable to add scheduled transaction: %1", QString::fromLatin1(e.what())));
-        }
-    }
-}
-
 void KMyMoneyApp::slotScheduleNew(const MyMoneyTransaction& _t, eMyMoney::Schedule::Occurrence occurrence)
 {
     KEditScheduleDlg::newSchedule(_t, occurrence);

@@ -102,8 +102,6 @@ class KMyMoneyView : public KPageWidget
 private:
     const QScopedPointer<KMyMoneyViewPrivate> d_ptr;
 
-    void createSchedule(MyMoneySchedule s, MyMoneyAccount& a);
-
 public:
     /**
       * The constructor for KMyMoneyView. Just creates all the tabs for the

@@ -404,8 +404,6 @@ protected:
     void resizeEvent(QResizeEvent*) final override;
 #endif
 
-    void createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& newAccount);
-
     /**
       * This method preloads the holidays for the duration of the default forecast period
       */

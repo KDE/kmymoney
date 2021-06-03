@@ -692,49 +692,6 @@ void KMyMoneyView::slotRememberLastView(View view)
     KMyMoneySettings::setLastViewSelected(static_cast<int>(view));
 }
 
-void KMyMoneyView::createSchedule(MyMoneySchedule newSchedule, MyMoneyAccount& newAccount)
-{
-    // Add the schedule only if one exists
-    //
-    // Remember to modify the first split to reference the newly created account
-    if (!newSchedule.name().isEmpty()) {
-        MyMoneyFileTransaction ft;
-        try {
-            // We assume at least 2 splits in the transaction
-            MyMoneyTransaction t = newSchedule.transaction();
-            if (t.splitCount() < 2) {
-                throw MYMONEYEXCEPTION_CSTRING("Transaction for schedule has less than 2 splits!");
-            }
-            // now search the split that does not have an account reference
-            // and set it up to be the one of the account we just added
-            // to the account pool. Note: the schedule code used to leave
-            // this always the first split, but the loan code leaves it as
-            // the second one. So I thought, searching is a good alternative ....
-            foreach (const auto split, t.splits()) {
-                if (split.accountId().isEmpty()) {
-                    MyMoneySplit s = split;
-                    s.setAccountId(newAccount.id());
-                    t.modifySplit(s);
-                    break;
-                }
-            }
-            newSchedule.setTransaction(t);
-
-            MyMoneyFile::instance()->addSchedule(newSchedule);
-
-            // in case of a loan account, we keep a reference to this
-            // schedule in the account
-            if (newAccount.isLoan()) {
-                newAccount.setValue("schedule", newSchedule.id());
-                MyMoneyFile::instance()->modifyAccount(newAccount);
-            }
-            ft.commit();
-        } catch (const MyMoneyException &e) {
-            KMessageBox::information(this, i18n("Unable to add schedule: %1", QString::fromLatin1(e.what())));
-        }
-    }
-}
-
 void KMyMoneyView::slotOpenObjectRequested(const MyMoneyObject& obj)
 {
     Q_D(KMyMoneyView);
