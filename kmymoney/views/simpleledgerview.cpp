@@ -617,7 +617,7 @@ void SimpleLedgerView::slotSettingsChanged()
 {
     Q_D(SimpleLedgerView);
     if (d->accountsModel) {
-        d->accountsModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
+        d->accountsModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
         d->accountsModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
         d->accountsModel->setHideFavoriteAccounts(false);
     }

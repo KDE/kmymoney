@@ -405,7 +405,7 @@ public:
         // TODO: check why the invalidate is needed here
         m_filterProxyModel->invalidate();
         m_filterProxyModel->setHideFavoriteAccounts(false);
-        m_filterProxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
+        m_filterProxyModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
         m_filterProxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
         m_filterProxyModel->sort(AccountsModel::Column::AccountName);
         m_accountComboBox->expandAll();

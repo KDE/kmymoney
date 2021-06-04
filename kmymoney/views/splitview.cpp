@@ -410,7 +410,7 @@ void SplitView::slotSettingsChanged()
     // KMyMoneySettings::sortNormalView()
     // KMyMoneySettings::ledgerLens()
     // KMyMoneySettings::showRegisterDetailed()
-    d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts());
+    d->m_proxyModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
     d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
     d->m_proxyModel->setHideFavoriteAccounts(true);
 #endif

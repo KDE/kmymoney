@@ -107,7 +107,7 @@ void KAccountsView::refresh()
 
     // TODO: check why the invalidate is needed here
     d->m_proxyModel->invalidate();
-    d->m_proxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
+    d->m_proxyModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
     d->m_proxyModel->setHideEquityAccounts(!KMyMoneySettings::expertMode());
     if (KMyMoneySettings::showCategoriesInAccountsView()) {
         d->m_proxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense});
@@ -273,7 +273,7 @@ void KAccountsView::slotCloseAccount()
         d->m_currentAccount.setClosed(true);
         MyMoneyFile::instance()->modifyAccount(d->m_currentAccount);
         ft.commit();
-        if (KMyMoneySettings::hideClosedAccounts())
+        if (!KMyMoneySettings::showAllAccounts())
             KMessageBox::information(this, i18n("<qt>You have closed this account. It remains in the system because you have transactions which still refer to it, but it is not shown in the views. You can make it visible again by going to the View menu and selecting <b>Show all accounts</b> or by deselecting the <b>Do not show closed accounts</b> setting.</qt>"), i18n("Information"), "CloseAccountInfo");
     } catch (const MyMoneyException &) {
     }

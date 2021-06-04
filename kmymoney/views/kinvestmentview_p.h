@@ -201,11 +201,11 @@ public:
         Q_Q(KInvestmentView);
         /// @todo port to new model code
 #if 0
-        m_equitiesProxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
+        m_equitiesProxyModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
         m_equitiesProxyModel->setHideZeroBalanceAccounts(KMyMoneySettings::hideZeroBalanceEquities());
         m_equitiesProxyModel->invalidate();
 
-        m_accountsProxyModel->setHideClosedAccounts(KMyMoneySettings::hideClosedAccounts() && !KMyMoneySettings::showAllAccounts());
+        m_accountsProxyModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
         m_accountsProxyModel->invalidate();
 
         if (!m_idInvAcc.isEmpty()) {                                          // check if account to be selected exist
