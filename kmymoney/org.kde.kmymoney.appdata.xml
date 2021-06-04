@@ -59,6 +59,7 @@
   <summary xml:lang="sv">Hemekonomihantering baserad på dubbel bokföring</summary>
   <summary xml:lang="uk">Програма для керування особистими фінансами, яку засновано на бухгалтерській системі із подвійним записом</summary>
   <summary xml:lang="x-test">xxPersonal finance manager based on double-entry bookkeepingxx</summary>
+  <summary xml:lang="zh-CN">基于复式簿记的个人财务管理工具</summary>
   <description>
     <p>KMyMoney is a personal finance manager by KDE. It comes with a large set of features while being easy to use for the non-technical user.</p>
     <p xml:lang="ar">«أموالك» هو مدير ماليّة شخصي من «كدي». يأتي التّطبيق بمجموعة كبيرة من المزايا لكن بأخذ النّظر لتبسيط استخدامه للمستخدمين غير التّقنيّين.</p>
@@ -85,7 +86,7 @@
     <p xml:lang="tr">KMyMoney, KDE tarafından bir kişisel bir finans yöneticisidir. Teknik olmayan kullanıcılar için kullanımı kolayken, geniş bir özellik seti ile birlikte gelir.</p>
     <p xml:lang="uk">KMyMoney — програма для керування особистими фінансами від KDE. У програмі передбачено багато можливостей, якими просто користуватися навіть технічно не обізнаним користувачам.</p>
     <p xml:lang="x-test">xxKMyMoney is a personal finance manager by KDE. It comes with a large set of features while being easy to use for the non-technical user.xx</p>
-    <p xml:lang="zh-CN">KMyMoney 是 KDE 出品的个人财务管理器。它在功能丰富的同时易于非技术用户使用。</p>
+    <p xml:lang="zh-CN">KMyMoney 是一款 KDE 开发的个人财务管理工具。它不但功能丰富，而且非专业人士也可轻松上手。</p>
     <p>
       It supports different account types, categorisation of expenses and incomes, reconciliation of bank accounts and import/export to the “QIF” file format.
       Direct download using the OFX and HBCI formats is also possible via plugins.
@@ -117,7 +118,7 @@
     <p xml:lang="tr">Değişik hesap türlerini, gider ve gelirlerin kategorilenmesi, banka hesaplarının anlaşmaları ve “QIF” dosya biçiminin içe/dışa aktarımını destekler. Eklentiler vasıtasıyla OFX ve HBCI biçimleri kullanarak doğrudan indirme de mümkündür. Çevrimiçi bankacılık desteği (rapor indirme) de OFX ve HBCI protokolleriyle sağlanmıştır.</p>
     <p xml:lang="uk">У програмі передбачено різні типи рахунків, категоризацію за витратами та надходженнями коштів, звірення банківських рахунків, а також імпортування та експортування даних у форматі QIF. Крім того, можливе безпосереднє отримання банківських даних (виписок) з інтернету у форматах OFX та HBCI за допомогою додатків.</p>
     <p xml:lang="x-test">xxIt supports different account types, categorisation of expenses and incomes, reconciliation of bank accounts and import/export to the “QIF” file format. Direct download using the OFX and HBCI formats is also possible via plugins. Online banking support (statement download) is also provided for the OFX and HBCI protocols.xx</p>
-    <p xml:lang="zh-CN">它支持不同账户类型，收入费用归集，银行账户对账，导入/导出 “QIF” 文件类型。直接下载 OFX 和 HBCI 格式也可通过插件支持。OFX 和 HBCI 协议也提供了网银支持 (报表下载)。</p>
+    <p xml:lang="zh-CN">它支持多种账户类型，收入费用归集，银行账户对账，导入/导出“QIF”文件格式。可通过插件支持直接下载 OFX 和 HBCI 格式文件。此外 OFX 和 HBCI 协议还提供了网银支持 (报表下载)。</p>
   </description>
   <screenshots>
     <screenshot type="default">
@@ -148,7 +149,7 @@
       <caption xml:lang="tr">KMyMoney iyi bir başlangıç yapması için bir hoş geldiniz sayfası vardır</caption>
       <caption xml:lang="uk">У KMyMoney передбачено сторінку вітання, за допомогою якої новим користувачам буде простіше розпочати користування програмою.</caption>
       <caption xml:lang="x-test">xxKMyMoney has a welcome page to help new users get off to a good startxx</caption>
-      <caption xml:lang="zh-CN">KMyMoney 有一个欢迎页面来帮助新用户轻松入门</caption>
+      <caption xml:lang="zh-CN">KMyMoney 会显示一个欢迎页面来帮助新用户轻松上手</caption>
       <image>https://cdn.kde.org/screenshots/kmymoney/kmymoney.png</image>
     </screenshot>
     <screenshot>
@@ -180,7 +181,7 @@
       <caption xml:lang="tr">Finansal özet mali durumunuzun genel görünümünü verir</caption>
       <caption xml:lang="uk">За допомогою сторінки фінансового резюме вам буде простіше розібратися з поточним фінансовим станом.</caption>
       <caption xml:lang="x-test">xxThe financial summary gives you an overview of your financesxx</caption>
-      <caption xml:lang="zh-CN">财务概览提供了您的财务概况</caption>
+      <caption xml:lang="zh-CN">财务概览让您轻松掌握个人财务概况</caption>
       <image>https://kmymoney.org/images/screenshots/large/kmm2.png</image>
     </screenshot>
     <screenshot>
