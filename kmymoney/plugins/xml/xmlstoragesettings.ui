@@ -173,7 +173,7 @@ The &lt;i&gt;additional recovery encryption&lt;/i&gt; is only accessible, if the
       <item>
        <widget class="QCheckBox" name="kcfg_EncryptRecover">
         <property name="whatsThis">
-         <string>You can specify to encrypt the data also with the KMyMoney recover key. Only the core KMyMoney developers are in posession of the respective private key required to read back such encrypted data.&lt;p&gt;
+         <string>You can specify to encrypt the data also with the KMyMoney recover key. Only the core KMyMoney developers are in possession of the respective private key required to read back such encrypted data.&lt;p&gt;
 
 This mechanism is provided for the case that you have lost your key and cannot access your data anymore. With this option activated, the KMyMoney developers can decrypt the data and supply you with it in a readable form. Please be prepared, that you have to answer a few detailed questions about the contents of your data before we will send it out.</string>
         </property>
