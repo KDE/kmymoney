@@ -429,6 +429,13 @@ void PivotTable::collapseColumns()
 {
     DEBUG_ENTER(Q_FUNC_INFO);
 
+    // check if the report is bound to the fiscal year
+    // and calculate the appropriate offset for the column break
+    int fiscalYearOffset(0);
+    if (startDateIsFiscalYearStart()) {
+        fiscalYearOffset = KMyMoneySettings::firstFiscalMonth() - 1;
+    }
+
     int columnpitch = m_config.columnPitch();
     if (columnpitch != 1) {
         int sourcemonth = (m_config.isColumnsAreDays())
@@ -450,7 +457,7 @@ void PivotTable::collapseColumns()
             }
 
             if (++sourcecolumn < m_numColumns) {
-                if ((sourcemonth++ % columnpitch) == 0) {
+                if (((sourcemonth++ - fiscalYearOffset) % columnpitch) == 0) {
                     if (sourcecolumn != ++destcolumn)
                         clearColumn(destcolumn);
                 }
@@ -568,8 +575,26 @@ void PivotTable::calculateColumnHeadings()
         if (columnpitch == 12) {
             int year = m_beginDate.year();
             int column = m_startColumn;
-            while (column++ < m_numColumns)
-                m_columnHeadings.append(QString::number(year++));
+            const auto fiscalYearDiffersFromCalendarYear = (((m_beginDate.day() != 1) || (m_beginDate.month() != 0)) && startDateIsFiscalYearStart());
+            // in case the report is for a fiscal year and the fiscal year does not
+            // start on Jan 1st, we show both years, the first with 4 digits, the second
+            // with 2 digits (e.g. "2021/22"). If the first year is the last of a
+            // century, we print both with 4 digits (e.g. "2099/2100"). In all
+            // other cases we simply print the current year with 4 digits.
+            while (column++ < m_numColumns) {
+                QString yearHeading;
+                if (fiscalYearDiffersFromCalendarYear) {
+                    if ((year % 100) == 99) {
+                        yearHeading = QStringLiteral("%1/%2").arg(year).arg(year + 1);
+                    } else {
+                        yearHeading = QStringLiteral("%1/%2").arg(year).arg((year + 1) % 100, 2, 10, QLatin1Char('0'));
+                    }
+                } else {
+                    yearHeading = QString::number(year);
+                }
+                m_columnHeadings.append(yearHeading);
+                year++;
+            }
         } else {
             int year = m_beginDate.year();
             bool includeyear = (m_beginDate.year() != m_endDate.year());
@@ -2376,6 +2401,11 @@ int PivotTable::currentDateColumn()
         column = -1;
     }
     return column;
+}
+
+bool reports::PivotTable::startDateIsFiscalYearStart() const
+{
+    return (QDate(2021, m_beginDate.month(), m_beginDate.day()) == QDate(2021, KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay()));
 }
 
 } // namespace

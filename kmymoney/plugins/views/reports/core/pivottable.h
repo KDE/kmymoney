@@ -358,6 +358,14 @@ protected:
       * Returns -1 if the current date is not within range
       */
     int currentDateColumn();
+
+    /**
+     * Returns @c true if day and month of the reports start date
+     * is identical to the selected fiscal year.
+     *
+     * @sa KMyMoneySettings::firstFiscalDay(), KMyMoneySettings::firstFiscalMonth()
+     */
+    bool startDateIsFiscalYearStart() const;
 };
 
 
