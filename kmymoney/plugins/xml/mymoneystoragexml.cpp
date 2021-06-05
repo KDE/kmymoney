@@ -14,6 +14,7 @@
 
 #include <QMap>
 #include <QXmlLocator>
+#include <QXmlStreamWriter>
 #include <QTextStream>
 #include <QList>
 #include <QDomDocument>
@@ -1445,6 +1446,72 @@ void MyMoneyStorageXML::readFile(QIODevice* pDevice, MyMoneyFile* file)
     signalProgress(-1, -1);
 }
 
+bool saveNodeCanonically(QXmlStreamWriter &stream, const QDomNode &domNode)
+{
+    if (stream.hasError()) {
+        return false;
+    }
+
+    if (domNode.isElement()) {
+      const QDomElement domElement = domNode.toElement();
+      if (!domElement.isNull()) {
+          stream.writeStartElement(domElement.tagName());
+
+          if (domElement.hasAttributes()) {
+              QMap<QString, QString> attributes;
+              const QDomNamedNodeMap attributeMap = domElement.attributes();
+              for (int i = 0; i < attributeMap.count(); ++i)
+              {
+                  const QDomNode attribute = attributeMap.item(i);
+                  attributes.insert(attribute.nodeName(), attribute.nodeValue());
+              }
+
+              QMap<QString, QString>::const_iterator i = attributes.constBegin();
+              while (i != attributes.constEnd())
+              {
+                  stream.writeAttribute(i.key(), i.value());
+                  ++i;
+              }
+          }
+
+          if (domElement.hasChildNodes()) {
+              QDomNode elementChild = domElement.firstChild();
+              while (!elementChild.isNull())
+              {
+                  saveNodeCanonically(stream, elementChild);
+                  elementChild = elementChild.nextSibling();
+              }
+          }
+          stream.writeEndElement();
+      }
+    }
+    else if (domNode.isComment()) {
+        stream.writeComment(domNode.nodeValue());
+    }
+    else if (domNode.isText()) {
+        stream.writeCharacters(domNode.nodeValue());
+    }
+    return true;
+}
+
+bool saveCanonicalXML(const QDomNode &doc, QIODevice *file, int indent)
+{
+    QXmlStreamWriter stream(file);
+    stream.setAutoFormatting(true);
+    stream.setAutoFormattingIndent(indent);
+    stream.writeStartDocument();
+    stream.writeDTD(QString("<!DOCTYPE %1>").arg(tagName(Tag::KMMFile)));
+
+    QDomNode root = doc;
+    while (!root.isNull())
+    {
+        if (!saveNodeCanonically(stream, root))
+            break;
+        root = root.nextSibling();
+    }
+    stream.writeEndDocument();
+    return !stream.hasError();
+}
 
 void MyMoneyStorageXML::writeFile(QIODevice* qf, MyMoneyFile* file)
 {
@@ -1528,9 +1595,7 @@ void MyMoneyStorageXML::writeFile(QIODevice* qf, MyMoneyFile* file)
     writeOnlineJobs(onlineJobs);
     mainElement.appendChild(onlineJobs);
 
-    QTextStream stream(qf);
-    stream.setCodec("UTF-8");
-    stream << m_doc->toString();
+    saveCanonicalXML(m_doc->documentElement(), qf, 1);
 
     //hides the progress bar.
     signalProgress(-1, -1);
