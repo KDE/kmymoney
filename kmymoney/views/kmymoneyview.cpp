@@ -254,13 +254,6 @@ void KMyMoneyView::slotFileOpened()
     connect(this, &KMyMoneyView::viewActivated, this, &KMyMoneyView::slotRememberLastView);
 }
 
-void KMyMoneyView::showTitleBar(bool show)
-{
-    Q_D(KMyMoneyView);
-    if (d->m_header)
-        d->m_header->setVisible(show);
-}
-
 void KMyMoneyView::updateViewType()
 {
     // set the face type
@@ -615,20 +608,9 @@ void KMyMoneyView::switchToDefaultView()
         showPage(idView);
 }
 
-void KMyMoneyView::finishReconciliation(const MyMoneyAccount& /* account */)
-{
-    Q_D(KMyMoneyView);
-/// @todo port to new model code
-#if 0
-    MyMoneyFile::instance()->accountsModel()->slotReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
-#endif
-    static_cast<KGlobalLedgerView*>(d->viewBases[View::OldLedgers])->slotSetReconcileAccount(MyMoneyAccount(), QDate(), MyMoneyMoney());
-}
-
 void KMyMoneyView::slotRefreshViews()
 {
     Q_D(KMyMoneyView);
-    showTitleBar(KMyMoneySettings::showTitleBar());
 
     for (auto i = (int)View::Home; i < (int)View::None; ++i) {
         if (d->viewBases.contains(View(i)))
@@ -724,33 +706,8 @@ void KMyMoneyView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent in
         slotOpenObjectRequested(obj);
         break;
 
-    case eView::Intent::OpenContextMenu:
-        slotContextMenuRequested(obj);
-        break;
-
-    case eView::Intent::StartEnteringOverdueScheduledTransactions:
-        if (d->viewBases.contains(View::Schedules))
-            d->viewBases[View::Schedules]->slotSelectByObject(obj, intent);
-        break;
-
-    case eView::Intent::FinishEnteringOverdueScheduledTransactions:
-        if (d->viewBases.contains(View::OldLedgers)) {
-            showPage(View::OldLedgers);
-            d->viewBases[View::OldLedgers]->slotSelectByObject(obj, intent);
-        }
-        break;
-
     default:
         break;
-    }
-}
-
-void KMyMoneyView::selectView(View idView, const QVariantList& args)
-{
-    Q_D(KMyMoneyView);
-    if (d->viewBases.contains(idView)) {
-        showPage(idView);
-        d->viewBases[idView]->slotSelectByVariant(args, eView::Intent::None);
     }
 }
 
@@ -777,49 +734,6 @@ void KMyMoneyView::executeAction(eMenu::Action action, const SelectedObjects& se
         }
     }
     currentView->executeAction(action, selections);
-}
-
-void KMyMoneyView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
-{
-    Q_D(KMyMoneyView);
-    switch(intent) {
-#if 0
-    case eView::Intent::ReportProgress:
-        if (variant.count() == 2)
-            emit statusProgress(variant.at(0).toInt(), variant.at(1).toInt());
-        break;
-
-    case eView::Intent::ReportProgressMessage:
-        if (variant.count() == 1)
-            emit statusMsg(variant.first().toString());
-        break;
-
-    case eView::Intent::ShowTransactionInLedger:
-        if (d->viewBases.contains(View::NewLedgers)) {
-            showPage(View::NewLedgers);
-            d->viewBases[View::NewLedgers]->slotSelectByVariant(variant, intent);
-        }
-        break;
-
-    case eView::Intent::SelectRegisterTransactions:
-        if (variant.count() == 1) {
-            emit transactionsSelected(variant.at(0).value<KMyMoneyRegister::SelectedTransactions>()); // for plugins
-            if (d->viewBases.contains(View::OldLedgers))
-                d->viewBases[View::OldLedgers]->slotSelectByVariant(variant, intent);
-        }
-        break;
-    case eView::Intent::AccountReconciled:
-        if (variant.count() == 5)
-            emit accountReconciled(variant.at(0).value<MyMoneyAccount>(),
-                                   variant.at(1).value<QDate>(),
-                                   variant.at(2).value<MyMoneyMoney>(),
-                                   variant.at(3).value<MyMoneyMoney>(),
-                                   variant.at(4).value<QList<QPair<MyMoneyTransaction, MyMoneySplit>>>()); // for plugins
-        break;
-#endif
-    default:
-        break;
-    }
 }
 
 void KMyMoneyView::slotCustomActionRequested(View view, eView::Action action)
@@ -859,24 +773,5 @@ void KMyMoneyView::slotObjectSelected(const MyMoneyObject& obj)
         d->viewBases[View::Institutions]->slotSelectByObject(obj, eView::Intent::UpdateActions);
     } else if (typeid(obj) == typeid(MyMoneySchedule)) {
         d->viewBases[View::Schedules]->slotSelectByObject(obj, eView::Intent::UpdateActions);
-    }
-}
-
-void KMyMoneyView::slotContextMenuRequested(const MyMoneyObject& obj)
-{
-    Q_D(KMyMoneyView);
-    if (typeid(obj) == typeid(MyMoneyAccount)) {
-        const auto& acc = static_cast<const MyMoneyAccount&>(obj);
-        if (acc.isInvest())
-            d->viewBases[View::Investments]->slotSelectByObject(obj, eView::Intent::OpenContextMenu);
-        else if (acc.isIncomeExpense())
-            d->viewBases[View::Categories]->slotSelectByObject(obj, eView::Intent::OpenContextMenu);
-        else
-            d->viewBases[View::Accounts]->slotSelectByObject(obj, eView::Intent::OpenContextMenu);
-
-    } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
-        d->viewBases[View::Institutions]->slotSelectByObject(obj, eView::Intent::OpenContextMenu);
-    } else if (typeid(obj) == typeid(MyMoneySchedule)) {
-        d->viewBases[View::Schedules]->slotSelectByObject(obj, eView::Intent::OpenContextMenu);
     }
 }

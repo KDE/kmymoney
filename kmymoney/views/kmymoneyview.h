@@ -126,10 +126,6 @@ public:
     void showPageAndFocus(View idView);
     void showPage(View idView);
 
-    void finishReconciliation(const MyMoneyAccount& account);
-
-    void showTitleBar(bool show);
-
     /**
       * This method changes the view type according to the settings.
       */
@@ -145,8 +141,6 @@ public:
 
     void addView(KMyMoneyViewBase* view, const QString& name, View idView, Icons::Icon icon);
     void removeView(View idView);
-
-    void selectView(View idView, const QVariantList& args);
 
     /**
      * @brief actionsToBeConnected are actions that need ActionCollection
@@ -198,7 +192,6 @@ public Q_SLOTS:
     void slotObjectSelected(const MyMoneyObject& obj);
 
     void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent);
-    void slotSelectByVariant(const QVariantList& variant, eView::Intent intent);
     void slotCustomActionRequested(View view, eView::Action action);
     void slotSettingsChanged();
 
@@ -214,12 +207,6 @@ private Q_SLOTS:
      * @param obj Account, Category, Investment, Stock, Institution
      */
     void slotOpenObjectRequested(const MyMoneyObject& obj);
-
-    /**
-     * Opens context menu based on objects's type
-     * @param obj Account, Category, Investment, Stock, Institution
-     */
-    void slotContextMenuRequested(const MyMoneyObject& obj);
 
     void slotRememberLastView(View view);
 

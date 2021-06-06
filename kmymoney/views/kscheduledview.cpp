@@ -174,19 +174,6 @@ void KScheduledView::slotEnterOverdueSchedules(const MyMoneyAccount& acc)
             } while (processedOne);
         }
     }
-    emit selectByObject(MyMoneySchedule(), eView::Intent::FinishEnteringOverdueScheduledTransactions);
-}
-
-void KScheduledView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
-{
-    switch(intent) {
-    case eView::Intent::StartEnteringOverdueScheduledTransactions:
-        slotEnterOverdueSchedules(static_cast<const MyMoneyAccount&>(obj));
-        break;
-
-    default:
-        break;
-    }
 }
 
 void KScheduledView::slotListViewExpanded(const QModelIndex& idx)

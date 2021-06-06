@@ -181,7 +181,6 @@ public Q_SLOTS:
       */
     void slotLedgerSelected(const QString& _accId, const QString& transaction);
 
-    void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
     void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
 
 Q_SIGNALS:
@@ -280,27 +279,6 @@ private Q_SLOTS:
     void slotAssignNumber();
     void slotCopyTransactionToClipboard();
 
-    /**
-      * Used to start reconciliation of account @a account. It switches the
-      * ledger view into reconciliation mode and updates the view.
-      *
-      * @param account account which should be reconciled
-      * @param reconciliationDate the statement date
-      * @param endingBalance the ending balance entered for this account
-      *
-      * @retval true Reconciliation started
-      * @retval false Account cannot be reconciled
-      */
-    void slotStartReconciliation();
-
-    /**
-      * Used to finish reconciliation of account @a account. It switches the
-      * ledger view to normal mode and updates the view.
-      *
-      * @param account account which should be reconciled
-      */
-    void slotFinishReconciliation();
-    void slotPostponeReconciliation();
     void slotOpenAccount();
 
     /**

@@ -78,7 +78,6 @@ public Q_SLOTS:
 
     void slotEnterOverdueSchedules(const MyMoneyAccount& acc);
 
-    void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
     void updateActions(const SelectedObjects& selections) override;
 
 Q_SIGNALS:

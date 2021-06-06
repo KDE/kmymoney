@@ -32,8 +32,6 @@ enum class Intent {
     ShowTransactionInLedger,
     SynchronizeAccountInInvestmentView,
     SynchronizeAccountInLedgersView,
-    StartEnteringOverdueScheduledTransactions,
-    FinishEnteringOverdueScheduledTransactions,
     EnterSchedule,
     ReportProgress,
     ReportProgressMessage,
