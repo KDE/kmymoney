@@ -175,16 +175,6 @@ public Q_SLOTS:
     void slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* previous);
 
     /**
-      * Brings up a dialog to change the list(s) settings and saves them into the
-      * class KMyMoneySettings (a singleton).
-      *
-      * @see KListSettingsDlg
-      * Refreshes all views. Used e.g. after settings have been changed or
-      * data has been loaded from external sources (QIF import).
-      **/
-    void slotRefreshViews();
-
-    /**
      * Informs respective views about selected object, so they can
      * update action states and current object.
      * @param obj Account, Category, Investment, Stock, Institution

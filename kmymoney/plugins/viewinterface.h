@@ -54,31 +54,6 @@ public:
     explicit ViewInterface(QObject* parent, const char* name = 0);
     virtual ~ViewInterface();
 
-    /**
-      * Brings up a dialog to change the list(s) settings and saves them into the
-      * class KMyMoneySettings (a singleton).
-      *
-      * @see KListSettingsDlg
-      * Refreshes all views. Used e.g. after settings have been changed or
-      * data has been loaded from external sources (QIF import).
-      **/
-    virtual void slotRefreshViews() = 0;
-
-    /**
-      * This method creates a new page in the application.
-      * See KPageWidget::addPage() for details.
-      */
-//  virtual KMyMoneyViewBase* addPage(const QString& item, const QString& icon) = 0;
-
-    /**
-      * This method adds a widget to the layout of the view
-      * created with addPage()
-      *
-      * @param view pointer to view widget
-      * @param w widget to be added to @p page
-      */
-//  virtual void addWidget(KMyMoneyViewBase* view, QWidget* w) = 0;
-
     virtual void addView(KMyMoneyViewBase* view, const QString& name, View idView, Icons::Icon icon) = 0;
     virtual void removeView(View idView) = 0;
 

@@ -1153,7 +1153,6 @@ public:
             m_myMoneyView->slotFileOpened();
             onlineJobAdministration::instance()->updateActions();
             m_myMoneyView->enableViewsIfFileOpen(m_storageInfo.isOpened);
-            m_myMoneyView->slotRefreshViews();
             onlineJobAdministration::instance()->updateOnlineTaskProperties();
             q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
 
@@ -3174,7 +3173,6 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
         onlineJobAdministration::instance()->setOnlinePlugins(pPlugins.extended);
         d->m_myMoneyView->setOnlinePlugins(pPlugins.online);
         d->updateActions(d->m_selections);
-        d->m_myMoneyView->slotRefreshViews();
         return;
     }
 
@@ -3957,7 +3955,6 @@ void KMyMoneyApp::slotDateChanged()
     // +1 is to make sure that we're already in the next day when the
     // signal is sent (this way we also avoid setting the timer to 0)
     QTimer::singleShot((static_cast<int>(dt.secsTo(nextDay)) + 1)*1000, this, SLOT(slotDateChanged()));
-    d->m_myMoneyView->slotRefreshViews();
 }
 
 void KMyMoneyApp::setHolidayRegion(const QString& holidayRegion)

@@ -608,18 +608,6 @@ void KMyMoneyView::switchToDefaultView()
         showPage(idView);
 }
 
-void KMyMoneyView::slotRefreshViews()
-{
-    Q_D(KMyMoneyView);
-
-    for (auto i = (int)View::Home; i < (int)View::None; ++i) {
-        if (d->viewBases.contains(View(i)))
-            d->viewBases[View(i)]->executeCustomAction(eView::Action::Refresh);
-    }
-
-    d->viewBases[View::Payees]->executeCustomAction(eView::Action::ClosePayeeIdentifierSource);
-}
-
 void KMyMoneyView::slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* previous)
 {
     Q_D(KMyMoneyView);

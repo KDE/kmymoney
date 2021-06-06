@@ -120,12 +120,6 @@ void KPayeesView::slotChooseDefaultAccount()
     }
 }
 
-void KPayeesView::slotClosePayeeIdentifierSource()
-{
-    Q_D(KPayeesView);
-    d->ui->payeeIdentifiers->closeSource();
-}
-
 void KPayeesView::slotRenameSinglePayee(const QModelIndex& idx, const QVariant& value)
 {
     Q_D(KPayeesView);
@@ -482,6 +476,11 @@ void KPayeesView::executeAction(eMenu::Action action, const SelectedObjects& sel
             d->ui->m_register->selectAllTransactions();
         }
         break;
+
+    case eMenu::Action::FileClose:
+        d->ui->payeeIdentifiers->closeSource();
+        break;
+
     default:
         break;
     }
@@ -493,10 +492,6 @@ void KPayeesView::executeCustomAction(eView::Action action)
     switch(action) {
     case eView::Action::SetDefaultFocus:
         QMetaObject::invokeMethod(d->ui->m_searchWidget, "setFocus", Qt::QueuedConnection);
-        break;
-
-    case eView::Action::ClosePayeeIdentifierSource:
-        slotClosePayeeIdentifierSource();
         break;
 
     default:

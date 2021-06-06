@@ -35,8 +35,6 @@ public:
     KMMViewInterface(KMyMoneyView* view, QObject* parent, const char* name = 0);
     ~KMMViewInterface() {}
 
-    void slotRefreshViews() override;
-
     void addView(KMyMoneyViewBase* view, const QString& name, View idView, Icons::Icon icon) override;
     void removeView(View idView) override;
 

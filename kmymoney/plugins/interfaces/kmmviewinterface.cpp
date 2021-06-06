@@ -33,11 +33,6 @@ KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoneyView* view, QObject* 
     connect(m_view, &KMyMoneyView::viewStateChanged, this, &ViewInterface::viewStateChanged);
 }
 
-void KMyMoneyPlugin::KMMViewInterface::slotRefreshViews()
-{
-    m_view->slotRefreshViews();
-}
-
 void KMyMoneyPlugin::KMMViewInterface::addView(KMyMoneyViewBase* view, const QString& name, View idView, Icons::Icon icon)
 {
     m_view->addView(view, name, idView, icon);
