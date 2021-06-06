@@ -397,11 +397,16 @@ QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
 
     const auto settings = LedgerViewSettings::instance();
     if (((option.state & QStyle::State_Selected) && (settings->showLedgerLens())) || settings->showTransactionDetails()) {
-        rows = d->displayString(index, option).count();
+        rows = index.data(eMyMoney::Model::JournalSplitMaxLinesCountRole).toInt();
+        if (rows == 0) {
+            rows = d->displayString(index, option).count();
 
-        // make sure we show at least one row
-        if(!rows) {
-            rows = 1;
+            // make sure we show at least one row
+            if (!rows) {
+                rows = 1;
+            }
+            auto model = const_cast<QAbstractItemModel*>(index.model());
+            model->setData(index, rows, eMyMoney::Model::JournalSplitMaxLinesCountRole);
         }
         // leave a few pixels as margin for each space between rows
         size.setHeight((size.height() * rows) - (d->m_margin * (rows - 1)));

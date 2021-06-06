@@ -821,6 +821,9 @@ QVariant JournalModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::ScheduleIsOverdueRole:
         return false;
 
+    case eMyMoney::Model::JournalSplitMaxLinesCountRole:
+        return journalEntry.linesInLedger();
+
     default:
         if (role >= Qt::UserRole)
             qDebug() << "JournalModel::data(), role" << role << "offset" << role-Qt::UserRole << "not implemented";
@@ -855,6 +858,10 @@ bool JournalModel::setData(const QModelIndex& idx, const QVariant& value, int ro
             return false;
         }
         break;
+
+    case eMyMoney::Model::JournalSplitMaxLinesCountRole:
+        journalEntry.setLinesInLedger(value.toInt());
+        return true;
 
     default:
         return false;

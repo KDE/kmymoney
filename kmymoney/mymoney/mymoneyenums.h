@@ -585,6 +585,7 @@ enum Roles {
     JournalSplitIsMatchedRole,
     JournalSplitNumberRole,
     JournalBalanceRole,
+    JournalSplitMaxLinesCountRole,
 
     // Ledger
     LedgerDisplayOrderRole,

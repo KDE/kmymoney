@@ -38,7 +38,9 @@ class /* no export here on purpose */ JournalEntry
 public:
     friend class JournalModel;
 
-    explicit JournalEntry() {}
+    explicit JournalEntry()
+    {
+    }
     friend void swap(JournalEntry& first, JournalEntry& second);
 
     explicit JournalEntry(const QString& id, const JournalEntry& other)
@@ -46,30 +48,44 @@ public:
         , m_transaction(other.m_transaction)
         , m_split(other.m_split)
         , m_balance(other.m_balance)
-    {}
+        , m_linesInLedger(other.m_linesInLedger)
+    {
+    }
+
     JournalEntry(QString id, QSharedPointer<MyMoneyTransaction> t, const MyMoneySplit& sp)
         : m_id(id)
         , m_transaction(t)
         , m_split(sp)
+        , m_linesInLedger(0)
     {}
 
-    inline QSharedPointer<MyMoneyTransaction> sharedtransactionPtr() const {
+    inline QSharedPointer<MyMoneyTransaction> sharedtransactionPtr() const
+    {
         return m_transaction;
     }
-    inline const MyMoneyTransaction* transactionPtr() const {
+    inline const MyMoneyTransaction* transactionPtr() const
+    {
         return m_transaction.data();
     }
-    inline const MyMoneyTransaction& transaction() const {
+    inline const MyMoneyTransaction& transaction() const
+    {
         return *m_transaction;
     }
-    inline const MyMoneySplit& split() const {
+    inline const MyMoneySplit& split() const
+    {
         return m_split;
     }
-    inline const MyMoneyMoney& balance() const {
+    inline const MyMoneyMoney& balance() const
+    {
         return m_balance;
     }
-    inline const QString& id() const {
+    inline const QString& id() const
+    {
         return m_id;
+    }
+    inline uint8_t linesInLedger() const
+    {
+        return m_linesInLedger;
     }
     inline bool hasReferenceTo(const QString& id) const {
         return m_transaction->hasReferenceTo(id);
@@ -78,19 +94,26 @@ public:
     /**
      * @copydoc MyMoneyObject::referencedObjects
      */
-    inline QSet<QString> referencedObjects() const {
+    inline QSet<QString> referencedObjects() const
+    {
         return m_transaction->referencedObjects();
     }
 
-    inline void setBalance(const MyMoneyMoney& balance) {
+    inline void setBalance(const MyMoneyMoney& balance)
+    {
         m_balance = balance;
+    }
+    inline void setLinesInLedger(uint8_t lines)
+    {
+        m_linesInLedger = lines;
     }
 
 private:
-    QString                             m_id;
-    QSharedPointer<MyMoneyTransaction>  m_transaction;
-    MyMoneySplit                        m_split;
-    MyMoneyMoney                        m_balance;
+    QString m_id;
+    QSharedPointer<MyMoneyTransaction> m_transaction;
+    MyMoneySplit m_split;
+    MyMoneyMoney m_balance;
+    uint8_t m_linesInLedger;
 };
 
 inline void swap(JournalEntry& first, JournalEntry& second)
@@ -100,6 +123,7 @@ inline void swap(JournalEntry& first, JournalEntry& second)
     swap(first.m_transaction, second.m_transaction);
     swap(first.m_split, second.m_split);
     swap(first.m_balance, second.m_balance);
+    swap(first.m_linesInLedger, second.m_linesInLedger);
 }
 
 class JournalModelNewTransaction;
