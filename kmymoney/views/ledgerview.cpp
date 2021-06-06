@@ -39,6 +39,7 @@
 #include "journaldelegate.h"
 #include "journalmodel.h"
 #include "kmymoneyaccountselector.h"
+#include "ledgerviewsettings.h"
 #include "menuenums.h"
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"
@@ -430,6 +431,9 @@ LedgerView::LedgerView(QWidget* parent)
     connect(horizontalHeader(), &QHeaderView::sectionResized, this, [&]() {
         adjustDetailColumn(viewport()->width());
     } );
+
+    // get notifications about setting changes
+    connect(LedgerViewSettings::instance(), &LedgerViewSettings::settingsChanged, this, &LedgerView::slotSettingsChanged);
 
     // we don't need autoscroll as we do not support drag/drop
     setAutoScroll(false);
@@ -953,6 +957,7 @@ void LedgerView::ensureCurrentItemIsVisible()
 
 void LedgerView::slotSettingsChanged()
 {
+    updateGeometries();
 #if 0
 
     // KMyMoneySettings::showGrid()

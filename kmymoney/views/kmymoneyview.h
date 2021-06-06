@@ -191,14 +191,6 @@ public Q_SLOTS:
     void slotRefreshViews();
 
     /**
-      * Called when the user changes the detail
-      * setting of the transaction register
-      *
-      * @param detailed if true, the register is shown with all details
-      */
-    void slotShowTransactionDetail(bool detailed);
-
-    /**
      * Informs respective views about selected object, so they can
      * update action states and current object.
      * @param obj Account, Category, Investment, Stock, Institution

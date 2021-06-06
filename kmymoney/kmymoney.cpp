@@ -21,25 +21,27 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QDir>
-#include <QDateTime>         // only for performance tests
-#include <QTimer>
-#include <QElapsedTimer>
-#include <QByteArray>
+#include <QApplication>
 #include <QBoxLayout>
-#include <QLabel>
-#include <QMenu>
-#include <QProgressBar>
-#include <QList>
-#include <QUrl>
+#include <QByteArray>
 #include <QClipboard>
-#include <QKeySequence>
+#include <QDateTime> // only for performance tests
+#include <QDir>
+#include <QElapsedTimer>
+#include <QFileDialog>
+#include <QHBoxLayout>
 #include <QIcon>
 #include <QInputDialog>
-#include <QStatusBar>
-#include <QPushButton>
+#include <QKeySequence>
+#include <QLabel>
+#include <QList>
 #include <QListWidget>
-#include <QApplication>
+#include <QMenu>
+#include <QProgressBar>
+#include <QPushButton>
+#include <QStatusBar>
+#include <QTimer>
+#include <QUrl>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -49,6 +51,7 @@
 #include <KBackup>
 #include <KConfig>
 #include <KConfigDialog>
+#include <KConfigDialogManager>
 #include <KDualAction>
 #include <KLocalizedString>
 #include <KMessageBox>
@@ -72,9 +75,7 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "kmymoneysettings.h"
-#include "kmymoneyadaptor.h"
-
+#include "accountsmodel.h"
 #include "dialogs/editpersonaldatadlg.h"
 #include "dialogs/kbackupdlg.h"
 #include "dialogs/kbalancewarning.h"
@@ -91,9 +92,17 @@
 #include "dialogs/ksaveasquestion.h"
 #include "dialogs/settings/ksettingskmymoney.h"
 #include "dialogs/transactionmatcher.h"
+#include "equitiesmodel.h"
+#include "journalmodel.h"
 #include "keditscheduledlg.h"
+#include "kmymoneyadaptor.h"
+#include "kmymoneysettings.h"
+#include "kmymoneyview.h"
 #include "ksearchtransactiondlg.h"
 #include "ktransactionselectdlg.h"
+#include "ledgerviewsettings.h"
+#include "schedulesjournalmodel.h"
+#include "specialdatesmodel.h"
 #include "widgets/amountedit.h"
 #include "widgets/kmymoneyaccountselector.h"
 #include "widgets/kmymoneymvccombo.h"
@@ -103,11 +112,6 @@
 #include "wizards/newinvestmentwizard/knewinvestmentwizard.h"
 #include "wizards/newloanwizard/keditloanwizard.h"
 #include "wizards/newuserwizard/knewuserwizard.h"
-
-#include "accountsmodel.h"
-#include "equitiesmodel.h"
-#include "journalmodel.h"
-#include "views/kmymoneyview.h"
 
 #include "mymoney/mymoneyaccount.h"
 #include "mymoney/mymoneyaccountloan.h"
@@ -154,8 +158,6 @@
 #include "imymoneystorageformat.h"
 
 #include "transactioneditor.h"
-#include <QHBoxLayout>
-#include <QFileDialog>
 
 #include "kmymoneyutils.h"
 #include "kcreditswindow.h"
@@ -1438,9 +1440,6 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
 
     connect(&d->m_proc, QOverload<int,QProcess::ExitStatus>::of(&KProcess::finished), this, &KMyMoneyApp::slotBackupHandleEvents);
 
-    // force to show the home page if the file is closed
-    connect(pActions[Action::ViewTransactionDetail], &QAction::toggled, d->m_myMoneyView, &KMyMoneyView::slotShowTransactionDetail);
-
     d->m_backupState = BACKUP_IDLE;
 
     QLocale locale;
@@ -1898,7 +1897,9 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
         // Some actions are checkable,
         // so set them here
         const QVector<Action> checkableActions {
-            Action::ViewTransactionDetail, Action::ViewHideReconciled, Action::ViewHideCategories,
+            Action::ViewTransactionDetail,
+            Action::ViewHideReconciled,
+            Action::ViewHideCategories,
 #ifdef KMM_DEBUG
             Action::DebugTraces,
             Action::DebugTimers,
@@ -2347,7 +2348,11 @@ bool KMyMoneyApp::isFileOpenedInAnotherInstance(const QUrl &url)
 
 void KMyMoneyApp::slotShowTransactionDetail()
 {
-
+    const auto show = pActions[Action::ViewTransactionDetail]->isChecked();
+    // make persistent
+    KMyMoneySettings::setShowRegisterDetailed(show);
+    // and inform the views
+    LedgerViewSettings::instance()->setShowTransactionDetails(show);
 }
 
 void KMyMoneyApp::slotDeleteTransactions()
@@ -3135,12 +3140,20 @@ bool KMyMoneyApp::okToWriteFile(const QUrl &url)
 
 void KMyMoneyApp::slotSettings()
 {
-    // if we already have an instance of the settings dialog, then use it
-    if (KConfigDialog::showDialog("KMyMoney-Settings"))
+    // if we already have an instance of the settings dialog, then
+    // make sure all widgets show correct state and use it
+    auto dlg = KConfigDialog::exists("KMyMoney-Settings");
+    if (dlg) {
+        const auto managers = dlg->findChildren<KConfigDialogManager*>();
+        for (const auto manager : managers) {
+            manager->updateWidgets();
+        }
+        dlg->show();
         return;
+    }
 
     // otherwise, we have to create it
-    auto dlg = new KSettingsKMyMoney(this, "KMyMoney-Settings", KMyMoneySettings::self());
+    dlg = new KSettingsKMyMoney(this, "KMyMoney-Settings", KMyMoneySettings::self());
     connect(dlg, &KSettingsKMyMoney::settingsChanged, this, &KMyMoneyApp::slotUpdateConfiguration);
     dlg->show();
 }
@@ -3167,6 +3180,20 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
 
     MyMoneyTransactionFilter::setFiscalYearStart(KMyMoneySettings::firstFiscalMonth(), KMyMoneySettings::firstFiscalDay());
     MyMoneyReport::setLineWidth(KMyMoneySettings::lineWidth());
+
+    const auto showHeaders = KMyMoneySettings::showFancyMarker();
+    QDate firstFiscalDate;
+    if (KMyMoneySettings::showFiscalMarker())
+        firstFiscalDate = KMyMoneySettings::firstFiscalDate();
+
+    MyMoneyFile::instance()->specialDatesModel()->setOptions(showHeaders, firstFiscalDate);
+    MyMoneyFile::instance()->schedulesJournalModel()->setPreviewPeriod(KMyMoneySettings::schedulePreview());
+    MyMoneyFile::instance()->schedulesJournalModel()->setShowPlannedDate(KMyMoneySettings::showPlannedScheduleDates());
+
+    LedgerViewSettings::instance()->setShowLedgerLens(KMyMoneySettings::ledgerLens());
+
+    LedgerViewSettings::instance()->setShowTransactionDetails(KMyMoneySettings::showRegisterDetailed());
+    pActions[Action::ViewTransactionDetail]->setChecked(KMyMoneySettings::showRegisterDetailed());
 
     d->m_myMoneyView->slotSettingsChanged();
 

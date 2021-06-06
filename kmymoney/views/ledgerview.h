@@ -34,13 +34,6 @@ public:
     explicit LedgerView(QWidget* parent = 0);
     virtual ~LedgerView();
 
-    /**
-     * This method is used to modify the visibility of the
-     * empty entry at the end of the ledger. The default
-     * for the parameter @a show is @c true.
-     */
-    void setShowEntryForNewTransaction(bool show = true);
-
     void setSingleLineDetailRole(eMyMoney::Model::Roles role);
 
     /**

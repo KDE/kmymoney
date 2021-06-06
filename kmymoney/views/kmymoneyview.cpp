@@ -45,6 +45,7 @@
 #include "accountsmodel.h"
 #include "equitiesmodel.h"
 #include "icons.h"
+#include "journalmodel.h"
 #include "kaccountsview.h"
 #include "kcategoriesview.h"
 #include "kcurrencyeditdlg.h"
@@ -75,11 +76,9 @@
 #include "mymoneytag.h"
 #include "mymoneyutils.h"
 #include "onlinejobadministration.h"
-#include "schedulesjournalmodel.h"
 #include "securitiesmodel.h"
 #include "selectedobjects.h"
 #include "simpleledgerview.h"
-#include "specialdatesmodel.h"
 
 using namespace Icons;
 using namespace eMyMoney;
@@ -517,15 +516,6 @@ void KMyMoneyView::slotSettingsChanged()
     Q_D(KMyMoneyView);
     d->m_header->setVisible(KMyMoneySettings::showTitleBar());
 
-    const auto showHeaders = KMyMoneySettings::showFancyMarker();
-    QDate firstFiscalDate;
-    if (KMyMoneySettings::showFiscalMarker())
-        firstFiscalDate = KMyMoneySettings::firstFiscalDate();
-
-    MyMoneyFile::instance()->specialDatesModel()->setOptions(showHeaders, firstFiscalDate);
-    MyMoneyFile::instance()->schedulesJournalModel()->setPreviewPeriod(KMyMoneySettings::schedulePreview());
-    MyMoneyFile::instance()->schedulesJournalModel()->setShowPlannedDate(KMyMoneySettings::showPlannedScheduleDates());
-
     updateViewType();
 
     emit settingsChanged();
@@ -646,12 +636,6 @@ void KMyMoneyView::slotRefreshViews()
     }
 
     d->viewBases[View::Payees]->executeCustomAction(eView::Action::ClosePayeeIdentifierSource);
-}
-
-void KMyMoneyView::slotShowTransactionDetail(bool detailed)
-{
-    KMyMoneySettings::setShowRegisterDetailed(detailed);
-    slotRefreshViews();
 }
 
 void KMyMoneyView::slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* previous)

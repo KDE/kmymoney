@@ -29,6 +29,7 @@
 #include "investtransactioneditor.h"
 #include "journalmodel.h"
 #include "ledgerview.h"
+#include "ledgerviewsettings.h"
 #include "mymoneyfile.h"
 #include "mymoneysecurity.h"
 #include "mymoneyutils.h"
@@ -59,8 +60,10 @@ public:
     {
         QStringList lines;
         if(index.column() == JournalModel::Column::Detail) {
+            const auto showDetails = LedgerViewSettings::instance()->showTransactionDetails();
+            const auto showLedgerLens = LedgerViewSettings::instance()->showLedgerLens();
             if (index.data(eMyMoney::Model::TransactionIsInvestmentRole).toBool()) {
-                if(opt.state & QStyle::State_Selected) {
+                if (((opt.state & QStyle::State_Selected) && (showLedgerLens)) || showDetails) {
                     lines << index.data(eMyMoney::Model::SplitActivityRole).toString();
                     lines << index.data(eMyMoney::Model::TransactionBrokerageAccountRole).toString();
                     lines << index.data(eMyMoney::Model::TransactionInterestCategoryRole).toString();
@@ -72,7 +75,7 @@ public:
 
             } else {
                 lines << index.data(m_singleLineRole).toString();
-                if(opt.state & QStyle::State_Selected) {
+                if (((opt.state & QStyle::State_Selected) && (showLedgerLens)) || showDetails) {
                     lines.clear();
                     lines << index.data(eMyMoney::Model::Roles::SplitPayeeRole).toString();
                     lines << index.data(eMyMoney::Model::Roles::TransactionCounterAccountRole).toString();
@@ -92,8 +95,10 @@ public:
 
         } else if(index.column() == JournalModel::Column::Quantity) {
             if (index.data(eMyMoney::Model::TransactionIsInvestmentRole).toBool()) {
+                const auto showDetails = LedgerViewSettings::instance()->showTransactionDetails();
+                const auto showLedgerLens = LedgerViewSettings::instance()->showLedgerLens();
                 lines << opt.text;
-                if(opt.state & QStyle::State_Selected) {
+                if (((opt.state & QStyle::State_Selected) && (showLedgerLens)) || showDetails) {
                     // we have to pay attention here as later on empty items will be removed
                     // from the lines all together. Since we use the column detail as label
                     // we have to make that we are not off. Therefor, if the detail column
@@ -390,7 +395,8 @@ QSize JournalDelegate::sizeHint(const QStyleOptionViewItem& option, const QModel
 
     QSize size(10, d->m_lineHeight + 2 * d->m_margin);
 
-    if(option.state & QStyle::State_Selected) {
+    const auto settings = LedgerViewSettings::instance();
+    if (((option.state & QStyle::State_Selected) && (settings->showLedgerLens())) || settings->showTransactionDetails()) {
         rows = d->displayString(index, option).count();
 
         // make sure we show at least one row

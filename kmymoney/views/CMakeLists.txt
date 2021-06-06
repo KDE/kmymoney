@@ -21,6 +21,7 @@ set(libviews_a_SOURCES
   kmmstyleditemdelegate.cpp
   ledgerviewpage.cpp
   ledgerview.cpp
+  ledgerviewsettings.cpp
   ledgeraccountfilter.cpp
   ledgerjournalidfilter.cpp
   ledgerpayeefilter.cpp
