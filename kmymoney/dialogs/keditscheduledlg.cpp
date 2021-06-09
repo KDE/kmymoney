@@ -196,6 +196,17 @@ public:
             m_editor->createTransaction(t, m_schedule.transaction(), m_schedule.transaction().splits().isEmpty() ? MyMoneySplit() : m_schedule.transaction().splits().front(), false);
         }
 
+        // make sure all splits in the scheduled transaction
+        // reference the same payee
+        if (t.splitCount() > 1) {
+            const auto payeeId = t.splits().first().payeeId();
+            for (auto split : t.splits()) {
+                if (split.payeeId() != payeeId) {
+                    split.setPayeeId(payeeId);
+                    t.modifySplit(split);
+                }
+            }
+        }
         t.clearId();
         t.setEntryDate(QDate());
         return t;
