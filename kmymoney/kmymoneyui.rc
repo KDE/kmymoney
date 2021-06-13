@@ -230,7 +230,7 @@
   <Action name="account_online_update" />
   <Action name="account_online_update_all" />
  </Menu>
- <ToolBar noMerge="1" name="mainToolBar" fullWidth="true" >
+ <ToolBar noMerge="1" name="mainToolBar" fullWidth="true" iconText="textundericon">
   <text>Main Toolbar</text>
   <Action name="file_new" />
   <Action name="file_open" />
