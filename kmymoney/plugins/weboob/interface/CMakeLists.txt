@@ -2,7 +2,7 @@ set(weboob_interface_SOURCES
     weboobinterface.cpp
     )
 
-include_directories(${PYTHON_INCLUDE_DIRS})
+include_directories(${Python3_INCLUDE_DIRS})
 
 qt5_add_resources(weboob_interface_SOURCES weboobinterface.qrc)
 
@@ -13,5 +13,5 @@ target_link_libraries (
   Qt5::Core
   Alkimia::alkimia
   PRIVATE
-  ${PYTHON_LIBRARIES}
+  ${Python3_LIBRARIES}
   )

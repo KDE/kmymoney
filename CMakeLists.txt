@@ -279,20 +279,10 @@ cmake_dependent_option(ENABLE_KBANKING "Enable KBanking plugin" ON
 add_feature_info(KBanking ENABLE_KBANKING "Interface for the following online banking protocols: HBCI, EBICS, OFX Direct Connect, Paypal")
 
 # check for optional Weboob support
-set(Python_ADDITIONAL_VERSIONS 3.9 3.8 3.7)
-find_package(PythonInterp 3.7)
-find_package(PythonLibs ${PYTHON_VERSION_STRING})
-
-if(PYTHONINTERP_FOUND AND PYTHONLIBS_FOUND)
-  if(PYTHON_VERSION_MAJOR VERSION_LESS 3)
-    unset(PYTHONLIBS_FOUND)
-    unset(PYTHONINTERP_FOUND)
-    message(WARNING "Python 3 required, but Python 2 found.")
-  endif()
-endif()
+find_package (Python3 COMPONENTS Interpreter Development)
 
 cmake_dependent_option(ENABLE_WEBOOB "Enable Weboob plugin" ON
-                       "PYTHONLIBS_FOUND;PYTHONINTERP_FOUND;Qt5Concurrent_FOUND" OFF)
+                       "Python3_FOUND;Qt5Concurrent_FOUND" OFF)
 add_feature_info(Weboob ENABLE_WEBOOB "Online banking interface using Weboob.")
 
 
