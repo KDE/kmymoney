@@ -2,34 +2,34 @@
 # include(KDECompilerSettings NO_POLICY_SCOPE)
 
 # patch the version with the version defined in the build system
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/weboob.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/weboob.json @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/woob.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/woob.json @ONLY)
 
 add_subdirectory( dialogs )
 add_subdirectory( interface )
 
 ########### next target ###############
 
-set(weboob_PART_SRCS
-  weboob.cpp
+set(woob_PART_SRCS
+        woob.cpp
 )
 
-qt5_add_resources(weboob_PART_SRCS weboob.qrc)
+qt5_add_resources(woob_PART_SRCS woob.qrc)
 
-kcoreaddons_add_plugin(weboob
-                       SOURCES ${weboob_PART_SRCS}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/weboob.json"
+kcoreaddons_add_plugin(woob
+                       SOURCES ${woob_PART_SRCS}
+                       JSON "${CMAKE_CURRENT_BINARY_DIR}/woob.json"
                        INSTALL_NAMESPACE "kmymoney")
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
-set_target_properties(weboob
+set_target_properties(woob
                       PROPERTIES
                       LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 target_link_libraries(
-  weboob
+  woob
   PRIVATE
-  weboob_interface
-  weboob_dialogs
+  woob_interface
+  woob_dialogs
   kmm_mymoney
   kmm_widgets
   kmm_plugin

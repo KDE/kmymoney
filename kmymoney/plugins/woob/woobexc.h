@@ -5,13 +5,13 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef ACCOUNTSETTINGS_H
-#define ACCOUNTSETTINGS_H
+#ifndef WOOBEXC_H
+#define WOOBEXC_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWidget>
+#include <QException>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -19,26 +19,29 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class MyMoneyAccount;
-class MyMoneyKeyValueContainer;
-
-class AccountSettingsPrivate;
-class AccountSettings: public QWidget
-{
-    Q_OBJECT
-
-public:
-    explicit AccountSettings(const MyMoneyAccount& acc, QWidget* parent);
-    ~AccountSettings();
-
-    void loadUi(const MyMoneyKeyValueContainer& kvp);
-
-    void loadKvp(MyMoneyKeyValueContainer& kvp);
-private:
-
-    Q_DECLARE_PRIVATE(AccountSettings)
-    AccountSettingsPrivate * const d_ptr;
+enum class ExceptionCode {
+    BrowserIncorrectPassword,
 };
 
-
+class WoobException : public QException
+{
+public:
+    explicit WoobException(ExceptionCode ec)
+        : m_exceptionCode(ec)
+    {
+    }
+    ExceptionCode msg() const
+    {
+        return m_exceptionCode;
+    }
+    void raise() const
+    {
+        throw *this;
+    }
+    WoobException* clone() const
+    {
+        return new WoobException(*this);
+    }
+    ExceptionCode m_exceptionCode;
+};
 #endif

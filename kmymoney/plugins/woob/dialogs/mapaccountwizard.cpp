@@ -13,23 +13,23 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QtConcurrentRun>
 #include <QFutureWatcher>
 #include <QProgressDialog>
+#include <QtConcurrentRun>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KMessageBox>
 #include <KLocalizedString>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
 #include "ui_mapaccountwizard.h"
 
-#include "../interface/weboobinterface.h"
-#include "../weboobexc.h"
+#include "../interface/woobinterface.h"
+#include "../woobexc.h"
 
 enum {
     BACKENDS_PAGE = 0,
@@ -39,9 +39,9 @@ enum {
 class MapAccountWizardPrivate
 {
 public:
-    MapAccountWizardPrivate(WeboobInterface* weboob) :
-        ui(new Ui::MapAccountWizard),
-        m_weboob(*weboob)
+    MapAccountWizardPrivate(WoobInterface* woob)
+        : ui(new Ui::MapAccountWizard)
+        , m_woob(*woob)
     {
     }
 
@@ -50,16 +50,16 @@ public:
         delete ui;
     }
 
-    Ui::MapAccountWizard *ui;
-    WeboobInterface &m_weboob;
-    QFutureWatcher<QList<WeboobInterface::Account> > accountsWatcher;
-    QFutureWatcher<QList<WeboobInterface::Backend> > backendsWatcher;
+    Ui::MapAccountWizard* ui;
+    WoobInterface& m_woob;
+    QFutureWatcher<QList<WoobInterface::Account>> accountsWatcher;
+    QFutureWatcher<QList<WoobInterface::Backend>> backendsWatcher;
     std::unique_ptr<QProgressDialog> progress;
 };
 
-MapAccountWizard::MapAccountWizard(QWidget *parent, WeboobInterface* weboob) :
-    QWizard(parent),
-    d_ptr(new MapAccountWizardPrivate(weboob))
+MapAccountWizard::MapAccountWizard(QWidget* parent, WoobInterface* woob)
+    : QWizard(parent)
+    , d_ptr(new MapAccountWizardPrivate(woob))
 {
     Q_D(MapAccountWizard);
     d->ui->setupUi(this);
@@ -110,7 +110,6 @@ void MapAccountWizard::slotCheckNextButton(void)
         button(QWizard::FinishButton)->setEnabled(enableButton);
         break;
     }
-
 }
 
 void MapAccountWizard::slotNewPage(int id)
@@ -126,11 +125,11 @@ void MapAccountWizard::slotNewPage(int id)
     switch (id) {
     case BACKENDS_PAGE: {
         d->ui->backendsList->clear();
-        d->progress->setWindowTitle(i18n("Loading Weboob backend..."));
+        d->progress->setWindowTitle(i18n("Loading Woob backend..."));
         d->progress->setLabelText(i18n("Getting list of backends."));
 
         QCoreApplication::processEvents();
-        d->backendsWatcher.setFuture(QtConcurrent::run(&d->m_weboob, &WeboobInterface::getBackends));
+        d->backendsWatcher.setFuture(QtConcurrent::run(&d->m_woob, &WoobInterface::getBackends));
 
         break;
     }
@@ -140,7 +139,7 @@ void MapAccountWizard::slotNewPage(int id)
         d->progress->setLabelText(i18n("Getting list of accounts from your bank."));
 
         QCoreApplication::processEvents();
-        d->accountsWatcher.setFuture(QtConcurrent::run(&d->m_weboob, &WeboobInterface::getAccounts, d->ui->backendsList->currentItem()->text(0)));
+        d->accountsWatcher.setFuture(QtConcurrent::run(&d->m_woob, &WoobInterface::getAccounts, d->ui->backendsList->currentItem()->text(0)));
 
         button(QWizard::BackButton)->setEnabled(false);
         d->ui->accountsList->setEnabled(false);
@@ -159,12 +158,11 @@ void MapAccountWizard::slotGotBackends()
     Q_D(MapAccountWizard);
     const auto backends = d->backendsWatcher.result();
     for (const auto& backend : backends)
-        d->ui->backendsList->addTopLevelItem(new QTreeWidgetItem(QStringList{backend.name,
-                                             backend.module}));
+        d->ui->backendsList->addTopLevelItem(new QTreeWidgetItem(QStringList{backend.name, backend.module}));
     d->progress.reset();
 
     if (backends.isEmpty())
-        KMessageBox::information(this, i18n("No backends available.\nAdd one using weboob-config-qt."));
+        KMessageBox::information(this, i18n("No backends available.\nAdd one using woob config-qt."));
 }
 
 void MapAccountWizard::slotGotAccounts()
@@ -173,17 +171,15 @@ void MapAccountWizard::slotGotAccounts()
     try {
         const auto accounts = d->accountsWatcher.result();
         for (const auto& account : accounts)
-            d->ui->accountsList->addTopLevelItem(new QTreeWidgetItem(QStringList{account.id,
-                                                 account.name,
-                                                 account.balance.formatMoney(QString(), 2)}));
+            d->ui->accountsList->addTopLevelItem(new QTreeWidgetItem(QStringList{account.id, account.name, account.balance.formatMoney(QString(), 2)}));
         d->progress.reset();
 
         if (accounts.isEmpty())
-            KMessageBox::information(this, i18n("No accounts available.\nCheck your backend configuration in weboob-config-qt."));
+            KMessageBox::information(this, i18n("No accounts available.\nCheck your backend configuration in woob config-qt."));
         else
             button(QWizard::FinishButton)->setEnabled(true);
 
-    } catch (const WeboobException &e) {
+    } catch (const WoobException& e) {
         d->progress.reset();
         QString msg;
         switch (e.msg()) {

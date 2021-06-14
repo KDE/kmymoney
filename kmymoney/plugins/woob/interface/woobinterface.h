@@ -5,8 +5,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef WEBOOBINTERFACE_H
-#define WEBOOBINTERFACE_H
+#ifndef WOOBINTERFACE_H
+#define WOOBINTERFACE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -24,12 +24,11 @@
 struct _object;
 typedef _object PyObject;
 
-class WeboobInterface
+class WoobInterface
 {
-    PyObject  *m_weboobInterface;
+    PyObject* m_woobInterface;
 
 public:
-
     struct Backend {
         QString name;
         QString module;
@@ -74,9 +73,9 @@ public:
         QList<Transaction> transactions;
     };
 
-    explicit WeboobInterface();
+    explicit WoobInterface();
 
-    ~WeboobInterface();
+    ~WoobInterface();
 
     QStringList getProtocols();
 
@@ -87,10 +86,9 @@ public:
     Account getAccount(QString backend, QString account, QString max);
 
 private:
-
     PyObject* execute(QString method, QVariantList args);
 
-    QString extractDictStringValue(PyObject* pyContainer, const char *szKey);
+    QString extractDictStringValue(PyObject* pyContainer, const char* szKey);
     long extractDictLongValue(PyObject* pyContainer, const char* szKey);
 };
 

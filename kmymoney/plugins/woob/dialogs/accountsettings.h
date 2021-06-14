@@ -5,13 +5,13 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef MAPACCOUNTWIZARD_H
-#define MAPACCOUNTWIZARD_H
+#ifndef ACCOUNTSETTINGS_H
+#define ACCOUNTSETTINGS_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QWizard>
+#include <QWidget>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -19,29 +19,25 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-class WeboobInterface;
+class MyMoneyAccount;
+class MyMoneyKeyValueContainer;
 
-class MapAccountWizardPrivate;
-class MapAccountWizard : public QWizard
+class AccountSettingsPrivate;
+class AccountSettings : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit MapAccountWizard(QWidget *parent, WeboobInterface *weboob);
-    ~MapAccountWizard();
+    explicit AccountSettings(const MyMoneyAccount& acc, QWidget* parent);
+    ~AccountSettings();
 
-    QString currentBackend() const;
-    QString currentAccount() const;
+    void loadUi(const MyMoneyKeyValueContainer& kvp);
+
+    void loadKvp(MyMoneyKeyValueContainer& kvp);
 
 private:
-    Q_DECLARE_PRIVATE(MapAccountWizard)
-    MapAccountWizardPrivate * const d_ptr;
-
-private Q_SLOTS:
-    void slotCheckNextButton(void);
-    void slotNewPage(int id);
-    void slotGotAccounts();
-    void slotGotBackends();
+    Q_DECLARE_PRIVATE(AccountSettings)
+    AccountSettingsPrivate* const d_ptr;
 };
 
 #endif

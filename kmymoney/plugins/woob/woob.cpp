@@ -8,98 +8,98 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
+#include "woob.h"
 #include <config-kmymoney.h>
-#include "weboob.h"
 
 #include <memory>
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QtConcurrentRun>
 #include <QFutureWatcher>
 #include <QProgressDialog>
+#include <QtConcurrentRun>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KPluginFactory>
 #include <KLocalizedString>
+#include <KPluginFactory>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mapaccountwizard.h"
 #include "accountsettings.h"
-#include "weboobinterface.h"
+#include "mapaccountwizard.h"
+#include "woobinterface.h"
 
 #include "mymoneyaccount.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneystatement.h"
 #include "statementinterface.h"
 
-class WeboobPrivate
+class WoobPrivate
 {
 public:
-    WeboobPrivate()
+    WoobPrivate()
     {
     }
 
-    ~WeboobPrivate()
+    ~WoobPrivate()
     {
     }
 
-    WeboobInterface weboob;
-    QFutureWatcher<WeboobInterface::Account> watcher;
+    WoobInterface woob;
+    QFutureWatcher<WoobInterface::Account> watcher;
     std::unique_ptr<QProgressDialog> progress;
     AccountSettings* accountSettings;
 };
 
 #if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
-Weboob::Weboob(QObject *parent, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, args)
+Woob::Woob(QObject* parent, const QVariantList& args)
+    : KMyMoneyPlugin::Plugin(parent, args)
 #else
-Weboob::Weboob(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args) :
-    KMyMoneyPlugin::Plugin(parent, metaData,args)
+Woob::Woob(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
+    : KMyMoneyPlugin::Plugin(parent, metaData, args)
 #endif
-    , d_ptr(new WeboobPrivate)
+    , d_ptr(new WoobPrivate)
 {
-    const auto rcFileName = QLatin1String("weboob.rc");
+    const auto rcFileName = QLatin1String("woob.rc");
     setXMLFile(rcFileName);
 
-    qDebug("Plugins: weboob loaded");
+    qDebug("Plugins: woob loaded");
 }
 
-Weboob::~Weboob()
+Woob::~Woob()
 {
-    Q_D(Weboob);
+    Q_D(Woob);
     delete d;
-    qDebug("Plugins: weboob unloaded");
+    qDebug("Plugins: woob unloaded");
 }
 
-void Weboob::plug(KXMLGUIFactory* guiFactory)
+void Woob::plug(KXMLGUIFactory* guiFactory)
 {
     Q_UNUSED(guiFactory)
-    Q_D(Weboob);
-    connect(&d->watcher, &QFutureWatcher<WeboobInterface::Account>::finished, this, &Weboob::gotAccount);
+    Q_D(Woob);
+    connect(&d->watcher, &QFutureWatcher<WoobInterface::Account>::finished, this, &Woob::gotAccount);
 }
 
-void Weboob::unplug()
+void Woob::unplug()
 {
-    Q_D(Weboob);
-    disconnect(&d->watcher, &QFutureWatcher<WeboobInterface::Account>::finished, this, &Weboob::gotAccount);
+    Q_D(Woob);
+    disconnect(&d->watcher, &QFutureWatcher<WoobInterface::Account>::finished, this, &Woob::gotAccount);
 }
 
-void Weboob::protocols(QStringList& protocolList) const
+void Woob::protocols(QStringList& protocolList) const
 {
-    protocolList << "weboob";
+    protocolList << "woob";
 }
 
-QWidget* Weboob::accountConfigTab(const MyMoneyAccount& account, QString& tabName)
+QWidget* Woob::accountConfigTab(const MyMoneyAccount& account, QString& tabName)
 {
-    Q_D(Weboob);
+    Q_D(Woob);
     const MyMoneyKeyValueContainer& kvp = account.onlineBankingSettings();
-    tabName = i18n("Weboob configuration");
+    tabName = i18n("Woob configuration");
 
     d->accountSettings = new AccountSettings(account, 0);
     d->accountSettings->loadUi(kvp);
@@ -107,9 +107,9 @@ QWidget* Weboob::accountConfigTab(const MyMoneyAccount& account, QString& tabNam
     return d->accountSettings;
 }
 
-MyMoneyKeyValueContainer Weboob::onlineBankingSettings(const MyMoneyKeyValueContainer& current)
+MyMoneyKeyValueContainer Woob::onlineBankingSettings(const MyMoneyKeyValueContainer& current)
 {
-    Q_D(Weboob);
+    Q_D(Woob);
     MyMoneyKeyValueContainer kvp(current);
     kvp["provider"] = objectName().toLower();
     if (d->accountSettings) {
@@ -118,13 +118,13 @@ MyMoneyKeyValueContainer Weboob::onlineBankingSettings(const MyMoneyKeyValueCont
     return kvp;
 }
 
-bool Weboob::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& onlineBankingSettings)
+bool Woob::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& onlineBankingSettings)
 {
-    Q_D(Weboob);
+    Q_D(Woob);
     Q_UNUSED(acc);
 
     bool rc = false;
-    QPointer<MapAccountWizard> w = new MapAccountWizard(nullptr, &d->weboob);
+    QPointer<MapAccountWizard> w = new MapAccountWizard(nullptr, &d->woob);
     if (w->exec() == QDialog::Accepted && w != nullptr) {
         onlineBankingSettings.setValue("wb-backend", w->currentBackend());
         onlineBankingSettings.setValue("wb-id", w->currentAccount());
@@ -135,9 +135,9 @@ bool Weboob::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& onl
     return rc;
 }
 
-bool Weboob::updateAccount(const MyMoneyAccount& kacc, bool moreAccounts)
+bool Woob::updateAccount(const MyMoneyAccount& kacc, bool moreAccounts)
 {
-    Q_D(Weboob);
+    Q_D(Woob);
     Q_UNUSED(moreAccounts);
 
     QString bname = kacc.onlineBankingSettings().value("wb-backend");
@@ -153,7 +153,7 @@ bool Weboob::updateAccount(const MyMoneyAccount& kacc, bool moreAccounts)
     d->progress->setMaximum(0);
     d->progress->setMinimumDuration(0);
 
-    QFuture<WeboobInterface::Account> future = QtConcurrent::run(&d->weboob, &WeboobInterface::getAccount, bname, id, max);
+    QFuture<WoobInterface::Account> future = QtConcurrent::run(&d->woob, &WoobInterface::getAccount, bname, id, max);
     d->watcher.setFuture(future);
 
     d->progress->exec();
@@ -162,10 +162,10 @@ bool Weboob::updateAccount(const MyMoneyAccount& kacc, bool moreAccounts)
     return true;
 }
 
-void Weboob::gotAccount()
+void Woob::gotAccount()
 {
-    Q_D(Weboob);
-    WeboobInterface::Account acc = d->watcher.result();
+    Q_D(Woob);
+    WoobInterface::Account acc = d->watcher.result();
 
     MyMoneyAccount kacc = statementInterface()->account("wb-id", acc.id);
     MyMoneyStatement ks;
@@ -178,25 +178,25 @@ void Weboob::gotAccount()
 
 #if 0
     switch (acc.type) {
-    case Weboob::Account::TYPE_CHECKING:
+    case Woob::Account::TYPE_CHECKING:
         ks.m_eType = MyMoneyStatement::etCheckings;
         break;
-    case Weboob::Account::TYPE_SAVINGS:
+    case Woob::Account::TYPE_SAVINGS:
         ks.m_eType = MyMoneyStatement::etSavings;
         break;
-    case Weboob::Account::TYPE_MARKET:
+    case Woob::Account::TYPE_MARKET:
         ks.m_eType = MyMoneyStatement::etInvestment;
         break;
-    case Weboob::Account::TYPE_DEPOSIT:
-    case Weboob::Account::TYPE_LOAN:
-    case Weboob::Account::TYPE_JOINT:
-    case Weboob::Account::TYPE_UNKNOWN:
+    case Woob::Account::TYPE_DEPOSIT:
+    case Woob::Account::TYPE_LOAN:
+    case Woob::Account::TYPE_JOINT:
+    case Woob::Account::TYPE_UNKNOWN:
         break;
     }
 #endif
 
-    for (QListIterator<WeboobInterface::Transaction> it(acc.transactions); it.hasNext();) {
-        WeboobInterface::Transaction tr = it.next();
+    for (QListIterator<WoobInterface::Transaction> it(acc.transactions); it.hasNext();) {
+        WoobInterface::Transaction tr = it.next();
         MyMoneyStatement::Transaction kt;
 
         kt.m_strBankID = QLatin1String("ID ") + tr.id;
@@ -213,6 +213,6 @@ void Weboob::gotAccount()
     d->progress->hide();
 }
 
-K_PLUGIN_CLASS_WITH_JSON(Weboob, "weboob.json")
+K_PLUGIN_CLASS_WITH_JSON(Woob, "woob.json")
 
-#include "weboob.moc"
+#include "woob.moc"

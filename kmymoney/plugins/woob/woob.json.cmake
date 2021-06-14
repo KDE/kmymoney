@@ -2,7 +2,7 @@
     "KPlugin": {
         "Authors": [
             {
-                "Email": "romain@weboob.org",
+                "Email": "romain@symlink.me",
                 "Name": "Romain Bignon",
                 "Name[ca@valencia]": "Romain Bignon",
                 "Name[ca]": "Romain Bignon",
@@ -58,7 +58,7 @@
         "Description[zh_CN]": "weboob 插件",
         "EnabledByDefault": true,
         "Icon": "network-connect",
-        "Id": "weboob",
+        "Id": "woob",
         "License": "GPL",
         "Name": "Weboob",
         "Name[ca@valencia]": "Weboob",
