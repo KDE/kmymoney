@@ -43,7 +43,7 @@ WoobInterface::WoobInterface()
     Py_Initialize();
     qDebug() << "Python interpreter found:" << Py_GetVersion();
 
-    const auto scriptResourceName = ":/plugins/weboob/kmymoneyweboob.py";
+    const auto scriptResourceName = ":/plugins/woob/kmymoneywoob.py";
     auto nativeScript = std::unique_ptr<QTemporaryFile>(QTemporaryFile::createNativeFile(scriptResourceName));
 
     if (!nativeScript) {
