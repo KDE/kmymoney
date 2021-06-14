@@ -234,7 +234,7 @@ const QStringList KWelcomePage::featuresList()
     featuresList.append(i18n("- Use QWebEngine in favor of KHTML when available"));
 
     featuresList.append(i18n("* Im-/Exporter"));
-    featuresList.append(i18n("- Added support for Weboob"));
+    featuresList.append(i18n("- Added support for Woob"));
     featuresList.append(i18n("- Improved CSV importer"));
     featuresList.append(i18n("- Added CSV exporter"));
     featuresList.append(i18n("- Improved payee matching when importing transactions"));

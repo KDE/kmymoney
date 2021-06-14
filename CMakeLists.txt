@@ -294,15 +294,15 @@ cmake_dependent_option(ENABLE_KBANKING "Enable KBanking plugin" ON
 
 add_feature_info(KBanking ENABLE_KBANKING "Interface for the following online banking protocols: HBCI, EBICS, OFX Direct Connect, Paypal")
 
-# check for optional Weboob support
+# check for optional Woob support
 find_package(Python3 COMPONENTS Interpreter Development)
 set_package_properties(Python3 PROPERTIES
         TYPE OPTIONAL
-        PURPOSE "Required by Weboob plugin.")
+        PURPOSE "Required by Woob plugin.")
 
-cmake_dependent_option(ENABLE_WEBOOB "Enable Weboob plugin" ON
+cmake_dependent_option(ENABLE_WOOB "Enable Woob plugin" ON
                        "Python3_FOUND;Qt5Concurrent_FOUND" OFF)
-add_feature_info(Weboob ENABLE_WEBOOB "Online banking interface using Weboob.")
+add_feature_info(Woob ENABLE_WOOB "Online banking interface using Woob.")
 
 
 # check for optional ical support

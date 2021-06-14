@@ -5,13 +5,13 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef WEBOOBEXC_H
-#define WEBOOBEXC_H
+#ifndef MAPACCOUNTWIZARD_H
+#define MAPACCOUNTWIZARD_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
 
-#include <QException>
+#include <QWizard>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -19,23 +19,29 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-enum class ExceptionCode {
-    BrowserIncorrectPassword,
+class WoobInterface;
+
+class MapAccountWizardPrivate;
+class MapAccountWizard : public QWizard
+{
+    Q_OBJECT
+
+public:
+    explicit MapAccountWizard(QWidget *parent, WoobInterface *woob);
+    ~MapAccountWizard();
+
+    QString currentBackend() const;
+    QString currentAccount() const;
+
+private:
+    Q_DECLARE_PRIVATE(MapAccountWizard)
+    MapAccountWizardPrivate * const d_ptr;
+
+private Q_SLOTS:
+    void slotCheckNextButton(void);
+    void slotNewPage(int id);
+    void slotGotAccounts();
+    void slotGotBackends();
 };
 
-class WeboobException : public QException
-{
-public:
-    explicit WeboobException(ExceptionCode ec) : m_exceptionCode(ec) {}
-    ExceptionCode msg() const {
-        return m_exceptionCode;
-    }
-    void raise() const {
-        throw *this;
-    }
-    WeboobException *clone() const {
-        return new WeboobException(*this);
-    }
-    ExceptionCode m_exceptionCode;
-};
 #endif

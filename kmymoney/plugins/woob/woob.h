@@ -5,8 +5,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef WEBOOB_H
-#define WEBOOB_H
+#ifndef WOOB_H
+#define WOOB_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -22,15 +22,15 @@
 class MyMoneyAccount;
 class MyMoneyKeyValueContainer;
 
-class WeboobPrivate;
-class Weboob : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::OnlinePlugin
+class WoobPrivate;
+class Woob : public KMyMoneyPlugin::Plugin, public KMyMoneyPlugin::OnlinePlugin
 {
     Q_OBJECT
     Q_INTERFACES(KMyMoneyPlugin::OnlinePlugin)
 
 public:
-    explicit Weboob(QObject *parent, const QVariantList &args);
-    ~Weboob() override;
+    explicit Woob(QObject *parent, const QVariantList &args);
+    ~Woob() override;
 
     void plug() override;
     void unplug() override;
@@ -46,8 +46,8 @@ public:
     bool updateAccount(const MyMoneyAccount& acc, bool moreAccounts = false) override;
 
 private:
-    Q_DECLARE_PRIVATE(Weboob)
-    WeboobPrivate * const d_ptr;
+    Q_DECLARE_PRIVATE(Woob)
+    WoobPrivate * const d_ptr;
 
 private Q_SLOTS:
     void gotAccount();

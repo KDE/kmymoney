@@ -5,8 +5,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef WEBOOBINTERFACE_H
-#define WEBOOBINTERFACE_H
+#ifndef WOOBINTERFACE_H
+#define WOOBINTERFACE_H
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -24,9 +24,9 @@
 struct _object;
 typedef _object PyObject;
 
-class WeboobInterface
+class WoobInterface
 {
-    PyObject  *m_weboobInterface;
+    PyObject  *m_woobInterface;
 
 public:
 
@@ -74,9 +74,9 @@ public:
         QList<Transaction> transactions;
     };
 
-    explicit WeboobInterface();
+    explicit WoobInterface();
 
-    ~WeboobInterface();
+    ~WoobInterface();
 
     QStringList getProtocols();
 
