@@ -22,6 +22,10 @@
 
 #include "icons.h"
 
+// ----------------------------------------------------------------------------
+// Alikimia Includes
+#include <alkimia/alkonlinequoteswidget.h>
+
 using namespace Icons;
 
 KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCoreConfigSkeleton *config)
@@ -35,7 +39,7 @@ KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCore
     const auto colorsPage = new KSettingsColors();
     const auto fontsPage = new KSettingsFonts();
     const auto iconsPage = new KSettingsIcons();
-    const auto onlineQuotesPage = new KSettingsOnlineQuotes();
+    const auto onlineQuotesPage = new AlkOnlineQuotesWidget;
     const auto pluginsPage = new KSettingsPlugins();
 
     addPage(generalPage, i18nc("General settings", "General"), Icons::get(Icon::PreferencesGeneral).name());
