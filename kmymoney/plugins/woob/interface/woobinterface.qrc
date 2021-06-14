@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/plugins/weboob">
-        <file>kmymoneyweboob.py</file>
+    <qresource prefix="/plugins/woob">
+        <file>kmymoneywoob.py</file>
     </qresource>
 </RCC>
