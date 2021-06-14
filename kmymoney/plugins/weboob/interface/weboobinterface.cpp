@@ -16,6 +16,8 @@
 #include <Python.h>
 #pragma pop_macro("slots")
 
+#include <memory>
+
 // ----------------------------------------------------------------------------
 // QT Includes
 
