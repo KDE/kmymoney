@@ -1010,7 +1010,7 @@ bool MyMoneyFile::isStandardAccount(const QString& id) const
 bool MyMoneyFile::isInvestmentTransaction(const MyMoneyTransaction& t) const
 {
     for (const auto& split : t.splits()) {
-        auto acc = account(split.accountId());
+        auto acc = d->accountsModel.itemById(split.accountId());
         if (!acc.id().isEmpty()) {
             if (acc.isInvest() && (split.investmentTransactionType() != eMyMoney::Split::InvestmentTransactionType::UnknownTransactionType)) {
                 return true;
