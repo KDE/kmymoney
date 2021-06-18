@@ -33,8 +33,8 @@ public:
     virtual void saveTransaction() = 0;
 
 protected:
-    void addSplitsFromModel(MyMoneyTransaction& t, const SplitModel* model);
-    void addSplitsFromModel(QList<MyMoneySplit>& splits, const SplitModel* model);
+    void addSplitsFromModel(MyMoneyTransaction& t, const SplitModel* model) const;
+    void addSplitsFromModel(QList<MyMoneySplit>& splits, const SplitModel* model) const;
 
 Q_SIGNALS:
     void done();

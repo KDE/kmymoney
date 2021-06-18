@@ -32,7 +32,7 @@ TransactionEditorBase::~TransactionEditorBase()
 {
 }
 
-void TransactionEditorBase::addSplitsFromModel(QList<MyMoneySplit>& splits, const SplitModel* model)
+void TransactionEditorBase::addSplitsFromModel(QList<MyMoneySplit>& splits, const SplitModel* model) const
 {
     const auto rows = model->rowCount();
     for (int row = 0; row < rows; ++row) {
@@ -50,7 +50,7 @@ void TransactionEditorBase::addSplitsFromModel(QList<MyMoneySplit>& splits, cons
     }
 }
 
-void TransactionEditorBase::addSplitsFromModel(MyMoneyTransaction& t, const SplitModel* model)
+void TransactionEditorBase::addSplitsFromModel(MyMoneyTransaction& t, const SplitModel* model) const
 {
     // now update and add what we have in the model
     const auto rows = model->rowCount();
