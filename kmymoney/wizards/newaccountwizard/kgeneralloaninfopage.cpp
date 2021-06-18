@@ -27,7 +27,6 @@
 #include "ui_kgeneralloaninfopage.h"
 
 #include "kmymoneydateinput.h"
-#include "kmymoneyfrequencycombo.h"
 #include "kmymoneypayeecombo.h"
 #include "kmymoneywizardpage.h"
 #include "knewaccountwizard.h"

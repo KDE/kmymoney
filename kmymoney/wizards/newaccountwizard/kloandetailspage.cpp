@@ -29,7 +29,6 @@
 #include "ui_kgeneralloaninfopage.h"
 #include "ui_kloandetailspage.h"
 
-#include "kmymoneyfrequencycombo.h"
 #include "knewaccountwizard.h"
 #include "knewaccountwizard_p.h"
 #include "kgeneralloaninfopage.h"

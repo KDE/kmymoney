@@ -48,7 +48,6 @@
 #include "kmymoneycategory.h"
 #include "kmymoneycurrencyselector.h"
 #include "kmymoneydateinput.h"
-#include "kmymoneyfrequencycombo.h"
 #include "kmymoneygeneralcombo.h"
 #include "kmymoneypayeecombo.h"
 #include "knewaccountwizard.h"
