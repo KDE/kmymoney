@@ -15,15 +15,18 @@ class QWidget;
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "transactioneditorbase.h"
 #include "mymoneymoney.h"
+#include "mymoneytransaction.h"
+#include "transactioneditorbase.h"
+
+class MyMoneySchedule;
 
 class NewTransactionEditor : public TransactionEditorBase
 {
     Q_OBJECT
 
 public:
-    explicit NewTransactionEditor(QWidget* parent = 0, const QString& accountId = QString());
+    explicit NewTransactionEditor(QWidget* parent = nullptr, const QString& accountId = QString());
     virtual ~NewTransactionEditor();
 
     /**
@@ -42,10 +45,20 @@ public:
     void loadTransaction(const QModelIndex& index) override;
     void saveTransaction() override;
 
+    MyMoneyTransaction transaction() const;
+
+    void loadSchedule(const MyMoneySchedule& schedule);
+
     /**
      * Reimplemented to suppress some events in certain conditions
      */
     bool eventFilter(QObject* o, QEvent* e) override;
+
+    void setShowAccountCombo(bool show) const;
+    void setShowNumberWidget(bool show) const;
+    void setShowButtons(bool show) const;
+
+    QDate postDate() const;
 
 protected:
     virtual void keyPressEvent(QKeyEvent* e) override;
@@ -54,16 +67,11 @@ protected Q_SLOTS:
     virtual void reject();
     virtual void acceptEdit();
 
+    // edit splits directly
     virtual void editSplits();
 
-    virtual void numberChanged(const QString& newNumber);
-    virtual void categoryChanged(const QString& accountId);
-    virtual void costCenterChanged(int costCenterIndex);
-    virtual void postdateChanged(const QDate& date);
-    virtual void payeeChanged(int payeeIndex);
-    virtual void tagsChanged(const QStringList& tagIds);
-
-    void valueChanged();
+Q_SIGNALS:
+    void postDateChanged(const QDate& date) const;
 
 private:
     class Private;

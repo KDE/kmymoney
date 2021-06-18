@@ -3,7 +3,6 @@ set(kmm_oldregister_SOURCES
   investactivities.cpp
   investtransaction.cpp
   investtransactioneditor.cpp
-  keditscheduledlg.cpp
   kenterscheduledlg.cpp
   kfindtransactiondlg.cpp
   kmergetransactionsdlg.cpp
@@ -60,7 +59,6 @@ set(kmm_oldregister_HEADERS
 
 set(kmm_oldregister_UI
   ksortoptiondlg.ui
-  keditscheduledlg.ui
   kenterscheduledlg.ui
   kfindtransactiondlg.ui
   kselecttransactionsdlg.ui

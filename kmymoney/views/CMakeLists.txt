@@ -12,11 +12,11 @@ set(libviews_a_SOURCES
   kmymoneyview.cpp
   kpayeesview.cpp
   kscheduledview.cpp
+  keditscheduledlg.cpp
   ktagsview.cpp
   kpayeeidentifierview.cpp
   payeeidentifierselectiondelegate.cpp
   kmymoneywebpage.cpp
-
   simpleledgerview.cpp
   kmmstyleditemdelegate.cpp
   ledgerviewpage.cpp
@@ -50,6 +50,7 @@ set(libviews_a_UI
   kcategoriesview.ui
   kinstitutionsview.ui
   kinvestmentview.ui
+  keditscheduledlg.ui
   kpayeesview.ui
   kscheduledview.ui
   ktagsview.ui

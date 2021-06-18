@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>798</width>
-    <height>640</height>
+    <height>662</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -69,7 +69,7 @@
         </widget>
        </item>
        <item>
-        <widget class="KMyMoneyOccurrencePeriodCombo" name="m_frequencyEdit" native="true"/>
+        <widget class="QComboBox" name="m_frequencyEdit"/>
        </item>
       </layout>
      </item>
@@ -94,14 +94,7 @@
          </widget>
         </item>
         <item>
-         <widget class="KMyMoneyGeneralCombo" name="m_paymentMethodEdit" native="true">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-         </widget>
+         <widget class="QComboBox" name="m_paymentMethodEdit"/>
         </item>
         <item>
          <spacer name="spacer4">
@@ -132,22 +125,15 @@
        </widget>
       </item>
       <item>
-       <widget class="KMyMoneyRegister::Register" name="m_register" native="true">
-        <property name="rowCount" stdset="0">
+       <widget class="NewTransactionEditor" name="m_editor">
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="lineWidth">
          <number>0</number>
-        </property>
-        <property name="columnCount" stdset="0">
-         <number>12</number>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="KMyMoneyTransactionForm::TransactionForm" name="m_form" native="true">
-        <property name="rowCount" stdset="0">
-         <number>5</number>
-        </property>
-        <property name="columnCount" stdset="0">
-         <number>1</number>
         </property>
        </widget>
       </item>
@@ -372,31 +358,15 @@
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KMyMoneyRegister::Register</class>
-   <extends>QWidget</extends>
-   <header>register.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KMyMoneyGeneralCombo</class>
-   <extends>QWidget</extends>
-   <header>kmymoneygeneralcombo.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>KMyMoneyOccurrencePeriodCombo</class>
-   <extends>QWidget</extends>
-   <header>kmymoneyoccurrenceperiodcombo.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>KMyMoneyTransactionForm::TransactionForm</class>
-   <extends>QWidget</extends>
-   <header>transactionform.h</header>
-  </customwidget>
-  <customwidget>
    <class>KMyMoneyDateInput</class>
    <extends>QWidget</extends>
    <header>kmymoneydateinput.h</header>
+  </customwidget>
+  <customwidget>
+   <class>NewTransactionEditor</class>
+   <extends>QFrame</extends>
+   <header>newtransactioneditor.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
