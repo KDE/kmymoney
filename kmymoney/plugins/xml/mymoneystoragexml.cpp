@@ -1448,6 +1448,11 @@ void MyMoneyStorageXML::readFile(QIODevice* pDevice, MyMoneyFile* file)
 
 bool saveNodeCanonically(QXmlStreamWriter &stream, const QDomNode &domNode)
 {
+    // [#x1-#x8], [#xB-#xC], [#xE-#x1F], [#x7F-#x84], [#x86-#x9F], [#xFDD0-#xFDDF]
+    // taken from https://www.w3.org/TR/xml11/#charsets
+    QRegularExpression removeInvaldCharsExpr(
+        QStringLiteral("[\\x{00}-\\x{08}]|[\\x{0B}-\\x{0C}]|[\\x{0E}-\\x{1F}]|[\\x{7F}-\\x{84}]|[\\x{86}-\\x{9F}]|[\\x{FDD0}-\\x{FDDF}]|"));
+
     if (stream.hasError()) {
         return false;
     }
@@ -1463,7 +1468,7 @@ bool saveNodeCanonically(QXmlStreamWriter &stream, const QDomNode &domNode)
               for (int i = 0; i < attributeMap.count(); ++i)
               {
                   const QDomNode attribute = attributeMap.item(i);
-                  attributes.insert(attribute.nodeName(), attribute.nodeValue());
+                  attributes.insert(attribute.nodeName(), attribute.nodeValue().remove(removeInvaldCharsExpr));
               }
 
               QMap<QString, QString>::const_iterator i = attributes.constBegin();
