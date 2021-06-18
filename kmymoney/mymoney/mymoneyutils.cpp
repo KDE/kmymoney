@@ -159,7 +159,7 @@ QString MyMoneyUtils::formatDate(const QDate& date)
 
 QString MyMoneyUtils::paymentMethodToString(eMyMoney::Schedule::PaymentType paymentType)
 {
-    return i18nc("Scheduled Transaction payment type", MyMoneySchedule::paymentMethodToString(paymentType).toLatin1());
+    return i18n(MyMoneySchedule::paymentMethodToString(paymentType));
 }
 
 modifyTransactionWarnLevel_t MyMoneyUtils::transactionWarnLevel(const QStringList& journalEntryIds)

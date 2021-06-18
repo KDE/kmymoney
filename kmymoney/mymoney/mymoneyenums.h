@@ -147,6 +147,10 @@ enum class Occurrence {
     EveryFourMonths = 8192,
     Yearly = 16384,
 };
+inline uint qHash(const Occurrence key, uint seed)
+{
+    return ::qHash(static_cast<uint>(key), seed);
+}
 
 /**
   * This enum is used to describe the schedule type.
@@ -175,6 +179,10 @@ enum class PaymentType {
     StandingOrder = 32,
     BankTransfer = 64,
 };
+inline uint qHash(const PaymentType key, uint seed)
+{
+    return ::qHash(static_cast<uint>(key), seed);
+}
 
 /**
   * This enum is used by the auto-commit functionality.
@@ -517,6 +525,7 @@ enum Roles {
     ScheduleIsOverdueRole,
     ScheduleIsFinishedRole,
     ScheduleFrequencyRole,
+    SchedulePaymentTypeRole,
 
     // MyMoneySecurity
     SecuritySymbolRole,
@@ -615,5 +624,7 @@ enum Roles {
 
 Q_DECLARE_METATYPE(eMyMoney::Split::State)
 Q_DECLARE_METATYPE(eMyMoney::Split::InvestmentTransactionType)
+Q_DECLARE_METATYPE(eMyMoney::Schedule::Occurrence)
+Q_DECLARE_METATYPE(eMyMoney::Schedule::PaymentType)
 
 #endif
