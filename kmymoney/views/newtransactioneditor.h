@@ -57,6 +57,7 @@ public:
     void setShowAccountCombo(bool show) const;
     void setShowNumberWidget(bool show) const;
     void setShowButtons(bool show) const;
+    void setAccountId(const QString& accountId);
 
     QDate postDate() const;
 

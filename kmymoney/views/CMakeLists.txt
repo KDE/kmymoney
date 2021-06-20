@@ -13,6 +13,7 @@ set(libviews_a_SOURCES
   kpayeesview.cpp
   kscheduledview.cpp
   keditscheduledlg.cpp
+  kenterscheduledlg.cpp
   ktagsview.cpp
   kpayeeidentifierview.cpp
   payeeidentifierselectiondelegate.cpp
@@ -51,6 +52,7 @@ set(libviews_a_UI
   kinstitutionsview.ui
   kinvestmentview.ui
   keditscheduledlg.ui
+  kenterscheduledlg.ui
   kpayeesview.ui
   kscheduledview.ui
   ktagsview.ui

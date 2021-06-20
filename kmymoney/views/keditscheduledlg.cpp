@@ -13,9 +13,6 @@
 #include <QLabel>
 #include <QList>
 #include <QPushButton>
-#include <QStringListModel>
-#include <QTimer>
-#include <QVector>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -179,7 +176,7 @@ public:
         auto t = m_schedule.transaction();
 
         if (m_editor) {
-            m_editor->transaction();
+            t = m_editor->transaction();
         }
 
         t.clearId();

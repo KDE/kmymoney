@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>780</width>
-    <height>410</height>
+    <height>364</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
-  <layout class="QVBoxLayout">
+  <layout class="QVBoxLayout" stretch="0,2,0,0">
    <item>
     <widget class="QGroupBox" name="groupBox1">
      <property name="title">
@@ -24,7 +24,7 @@
      </property>
      <layout class="QHBoxLayout">
       <item>
-       <widget class="QLabel" name="textLabel5">
+       <widget class="QLabel" name="nameLabel">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
           <horstretch>1</horstretch>
@@ -59,7 +59,7 @@
        </widget>
       </item>
       <item>
-       <spacer name="Horizontal Spacing3">
+       <spacer name="hs2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -75,7 +75,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="textLabel1_2">
+       <widget class="QLabel" name="typeLabel">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
           <horstretch>1</horstretch>
@@ -119,47 +119,13 @@
     </widget>
    </item>
    <item>
-    <widget class="KMyMoneyRegister::Register" name="m_register" native="true">
-     <property name="rowCount" stdset="0">
-      <number>0</number>
+    <widget class="NewTransactionEditor" name="m_editor">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
      </property>
-     <property name="columnCount" stdset="0">
-      <number>12</number>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
      </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="frame4">
-     <layout class="QVBoxLayout">
-      <property name="leftMargin">
-       <number>1</number>
-      </property>
-      <property name="topMargin">
-       <number>1</number>
-      </property>
-      <property name="rightMargin">
-       <number>1</number>
-      </property>
-      <property name="bottomMargin">
-       <number>1</number>
-      </property>
-      <item>
-       <widget class="KMyMoneyTransactionForm::TransactionForm" name="m_form" native="true">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>1</horstretch>
-          <verstretch>5</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="rowCount" stdset="0">
-         <number>5</number>
-        </property>
-        <property name="columnCount" stdset="0">
-         <number>1</number>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </widget>
    </item>
    <item>
@@ -182,7 +148,7 @@
       </widget>
      </item>
      <item>
-      <spacer name="Horizontal Spacing2">
+      <spacer name="hs1">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -256,14 +222,10 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>KMyMoneyRegister::Register</class>
-   <extends>QWidget</extends>
-   <header>register.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KMyMoneyTransactionForm::TransactionForm</class>
-   <extends>QWidget</extends>
-   <header>transactionform.h</header>
+   <class>NewTransactionEditor</class>
+   <extends>QFrame</extends>
+   <header>newtransactioneditor.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

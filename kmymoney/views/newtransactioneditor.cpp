@@ -1007,6 +1007,15 @@ MyMoneyTransaction NewTransactionEditor::transaction() const
 
     // now we update the split we are opened for
     MyMoneySplit sp(d->split);
+
+    // in case the transaction does not have a split
+    // at this point, we need to make sure that we
+    // add the first one and don't try to modify it
+    // we do so by clearing its id
+    if (t.splitCount() == 0) {
+        sp.clearId();
+    }
+
     sp.setNumber(d->ui->numberEdit->text());
     sp.setMemo(d->ui->memoEdit->toPlainText());
     // setting up the shares and value members. In case there is
@@ -1030,24 +1039,25 @@ MyMoneyTransaction NewTransactionEditor::transaction() const
         && d->ui->statusCombo->currentIndex() == (int)eMyMoney::Split::State::Reconciled) {
         sp.setReconcileDate(QDate::currentDate());
     }
-        sp.setReconcileFlag(static_cast<eMyMoney::Split::State>(d->ui->statusCombo->currentIndex()));
 
-        const auto payeeRow = d->ui->payeeEdit->currentIndex();
-        const auto payeeIdx = d->payeesModel->index(payeeRow, 0);
-        sp.setPayeeId(payeeIdx.data(eMyMoney::Model::IdRole).toString());
-        sp.setTagIdList(d->ui->tagContainer->selectedTags());
+    sp.setReconcileFlag(static_cast<eMyMoney::Split::State>(d->ui->statusCombo->currentIndex()));
 
-        if (sp.id().isEmpty()) {
-            t.addSplit(sp);
-        } else {
-            t.modifySplit(sp);
-        }
-        t.setPostDate(d->ui->dateEdit->date());
+    const auto payeeRow = d->ui->payeeEdit->currentIndex();
+    const auto payeeIdx = d->payeesModel->index(payeeRow, 0);
+    sp.setPayeeId(payeeIdx.data(eMyMoney::Model::IdRole).toString());
+    sp.setTagIdList(d->ui->tagContainer->selectedTags());
 
-        // now update and add what we have in the model
-        addSplitsFromModel(t, &d->splitModel);
+    if (sp.id().isEmpty()) {
+        t.addSplit(sp);
+    } else {
+        t.modifySplit(sp);
+    }
+    t.setPostDate(d->ui->dateEdit->date());
 
-        return t;
+    // now update and add what we have in the model
+    addSplitsFromModel(t, &d->splitModel);
+
+    return t;
 }
 
 void NewTransactionEditor::saveTransaction()
@@ -1102,4 +1112,9 @@ void NewTransactionEditor::setShowNumberWidget(bool show) const
 {
     d->ui->numberLabel->setVisible(show);
     d->ui->numberEdit->setVisible(show);
+}
+
+void NewTransactionEditor::setAccountId(const QString& accountId)
+{
+    d->ui->accountCombo->setSelected(accountId);
 }
