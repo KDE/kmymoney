@@ -134,10 +134,6 @@
    <label>First time switch to start new user wizard</label>
    <default>true</default>
   </entry>
-  <entry name="showTitleBar" type="Bool">
-   <label>Show title bar on each view</label>
-   <default>true</default>
-  </entry>
   <entry name="stringMatchFromStart" type="Bool">
    <label>Match strings in auto-completion only from the first letter on. A substring behind the first letter is not found.</label>
    <default>false</default>

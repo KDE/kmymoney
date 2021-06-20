@@ -33,7 +33,6 @@
 
 #include "kmymoneywizardpage.h"
 #include "kmymoneywizardpage_p.h"
-#include "kmymoneytitlelabel.h"
 #include "icons/icons.h"
 
 using namespace Icons;
@@ -44,21 +43,20 @@ class KMyMoneyWizardPrivate
     Q_DECLARE_PUBLIC(KMyMoneyWizard)
 
 public:
-    explicit KMyMoneyWizardPrivate(KMyMoneyWizard *qq) :
-        q_ptr(qq),
-        m_cancelButton(nullptr),
-        m_backButton(nullptr),
-        m_nextButton(nullptr),
-        m_finishButton(nullptr),
-        m_helpButton(nullptr),
-        m_wizardLayout(nullptr),
-        m_stepLayout(nullptr),
-        m_pageLayout(nullptr),
-        m_buttonLayout(nullptr),
-        m_stepFrame(nullptr),
-        m_stepLabel(nullptr),
-        m_step(0),
-        m_titleLabel(nullptr)
+    explicit KMyMoneyWizardPrivate(KMyMoneyWizard* qq)
+        : q_ptr(qq)
+        , m_cancelButton(nullptr)
+        , m_backButton(nullptr)
+        , m_nextButton(nullptr)
+        , m_finishButton(nullptr)
+        , m_helpButton(nullptr)
+        , m_wizardLayout(nullptr)
+        , m_stepLayout(nullptr)
+        , m_pageLayout(nullptr)
+        , m_buttonLayout(nullptr)
+        , m_stepFrame(nullptr)
+        , m_stepLabel(nullptr)
+        , m_step(0)
     {
     }
 
@@ -103,9 +101,6 @@ public:
         m_wizardLayout->setContentsMargins(6, 6, 6, 6);
         m_wizardLayout->setSpacing(0);
         m_wizardLayout->setObjectName("wizardLayout");
-        m_titleLabel = new KMyMoneyTitleLabel(q);
-        m_titleLabel->setObjectName("titleLabel");
-        m_wizardLayout->addWidget(m_titleLabel);
 
         QHBoxLayout* hboxLayout = new QHBoxLayout;
         hboxLayout->setContentsMargins(0, 0, 0, 0);
@@ -157,9 +152,6 @@ public:
         m_wizardLayout->addLayout(hboxLayout);
 
         q->resize(QSize(670, 550).expandedTo(q->minimumSizeHint()));
-
-        m_titleLabel->setText(i18n("No Title specified"));
-        m_titleLabel->setRightImageFile("pics/titlelabel_background.png");
 
         m_finishButton->hide();
 
@@ -302,11 +294,6 @@ public:
 
     QList<QLabel*>        m_steps;      // the list of step labels
     int                   m_step;       // the currently selected step
-
-    /*
-     * The title bar
-     */
-    KMyMoneyTitleLabel*   m_titleLabel;
 
     /*
      * The history stack

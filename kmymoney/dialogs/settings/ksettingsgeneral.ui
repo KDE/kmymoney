@@ -365,13 +365,6 @@ Set it to 0 to turn the feature off.</string>
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="kcfg_showTitleBar">
-         <property name="text">
-          <string>Show title bar on each page</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QCheckBox" name="kcfg_syncLedgerInvestment">
          <property name="text">
           <string>Synchronize account selection of ledger and investment view</string>

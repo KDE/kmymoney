@@ -25,7 +25,6 @@
 // Project Includes
 
 #include "kmymoneywizardpage.h"
-#include "kmymoneytitlelabel.h"
 
 
 KMyMoneyWizard::KMyMoneyWizard(QWidget *parent, bool modal, Qt::WindowFlags f) :
@@ -52,8 +51,7 @@ KMyMoneyWizard::~KMyMoneyWizard()
 
 void KMyMoneyWizard::setTitle(const QString& txt)
 {
-    Q_D(KMyMoneyWizard);
-    d->m_titleLabel->setText(txt);
+    this->setWindowTitle(txt);
 }
 
 void KMyMoneyWizard::addStep(const QString& text)

@@ -73,7 +73,6 @@ class MyMoneySecurity;
 class MyMoneyReport;
 class TransactionEditor;
 class KOnlineJobOutbox;
-class KMyMoneyTitleLabel;
 class MyMoneyAccount;
 class MyMoneyMoney;
 class MyMoneyObject;
@@ -100,8 +99,6 @@ private:
 
     QHash<View, KPageWidgetItem*> viewFrames;
     QHash<View, KMyMoneyViewBase*> viewBases;
-
-    KMyMoneyTitleLabel* m_header;
 
     void viewAccountList(const QString& selectAccount); // Show the accounts view
 
@@ -140,8 +137,6 @@ public:
     bool canPrint();
 
     void finishReconciliation(const MyMoneyAccount& account);
-
-    void showTitleBar(bool show);
 
     /**
       * This method changes the view type according to the settings.

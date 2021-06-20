@@ -2,3 +2,8 @@ Id=1
 File=kmymoneyrc
 Group=List Options
 Key=listErronousTransactionColor,listErroneousTransactionColor
+
+Id=remove-show-title-bar-2021
+File=kmymoney/kmymoneyrc
+Group=General Options
+RemoveKey=showTitleBar

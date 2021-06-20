@@ -46,7 +46,6 @@
 #endif
 
 #include "kmymoneysettings.h"
-#include "kmymoneytitlelabel.h"
 #include "kcurrencyeditdlg.h"
 #include "mymoneyexception.h"
 #include "khomeview.h"
@@ -86,8 +85,7 @@ using namespace eMyMoney;
 typedef void(KMyMoneyView::*KMyMoneyViewFunc)();
 
 KMyMoneyView::KMyMoneyView()
-    : KPageWidget(nullptr),
-      m_header(0)
+    : KPageWidget(nullptr)
 {
     // this is a workaround for the bug in KPageWidget that causes the header to be shown
     // for a short while during page switch which causes a kind of bouncing of the page's
@@ -101,13 +99,6 @@ KMyMoneyView::KMyMoneyView()
         // make sure that we remove only the header - we avoid surprises if the header is not at (1,1) in the layout
         if (headerItem && qobject_cast<KTitleWidget*>(headerItem->widget()) != NULL) {
             gridLayout->removeItem(headerItem);
-            // after we remove the KPageWidget standard header replace it with our own title label
-            m_header = new KMyMoneyTitleLabel(this);
-            m_header->setObjectName("titleLabel");
-            m_header->setMinimumSize(QSize(100, 30));
-            m_header->setRightImageFile("pics/titlelabel_background.png");
-            m_header->setVisible(KMyMoneySettings::showTitleBar());
-            gridLayout->addWidget(m_header, 1, 1);
         }
     }
 
@@ -274,12 +265,6 @@ void KMyMoneyView::slotShowForecastPage()
 void KMyMoneyView::slotShowOutboxPage()
 {
     showPageAndFocus(View::OnlineJobOutbox);
-}
-
-void KMyMoneyView::showTitleBar(bool show)
-{
-    if (m_header)
-        m_header->setVisible(show);
 }
 
 void KMyMoneyView::updateViewType()
@@ -540,8 +525,6 @@ void KMyMoneyView::viewAccountList(const QString& /*selectAccount*/)
 
 void KMyMoneyView::slotRefreshViews()
 {
-    showTitleBar(KMyMoneySettings::showTitleBar());
-
     for (auto i = (int)View::Home; i < (int)View::None; ++i)
         if (viewBases.contains(View(i)))
             viewBases[View(i)]->executeCustomAction(eView::Action::Refresh);
@@ -557,10 +540,6 @@ void KMyMoneyView::slotShowTransactionDetail(bool detailed)
 
 void KMyMoneyView::slotCurrentPageChanged(const QModelIndex current, const QModelIndex previous)
 {
-    // set the current page's title in the header
-    if (m_header)
-        m_header->setText(m_model->data(current, KPageModel::HeaderRole).toString());
-
     const auto view = currentPage();
     // remember the selected view if there is a real change
     if (previous.isValid()) {
