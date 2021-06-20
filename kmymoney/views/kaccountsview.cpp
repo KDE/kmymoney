@@ -274,8 +274,10 @@ void KAccountsView::slotSelectByVariant(const QVariantList& variant, eView::Inte
 
 void KAccountsView::slotNewAccount()
 {
+    Q_D(KAccountsView);
     MyMoneyAccount account;
     account.setOpeningDate(KMyMoneySettings::firstFiscalDate());
+    account.setParentAccountId(d->m_currentAccount.id());
     NewAccountWizard::Wizard::newAccount(account);
 }
 

@@ -46,6 +46,7 @@ public:
     Ui::KHierarchyPage        *ui;
     HierarchyFilterProxyModel *m_filterProxyModel;
     MyMoneyAccount             m_parentAccount;
+    QString m_initialParentAccountId;
 };
 }
 

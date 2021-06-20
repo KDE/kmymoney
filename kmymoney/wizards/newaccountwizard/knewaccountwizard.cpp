@@ -120,6 +120,9 @@ void Wizard::setAccount(const MyMoneyAccount& acc)
     if (!acc.institutionId().isEmpty()) {
         d->m_institutionPage->selectExistingInstitution(acc.institutionId());
     }
+    if (!acc.parentAccountId().isEmpty()) {
+        d->m_hierarchyPage->setParentAccount(acc.parentAccountId());
+    }
 }
 
 MyMoneyMoney Wizard::interestRate() const

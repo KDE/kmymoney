@@ -40,6 +40,7 @@ public:
     KMyMoneyWizardPage* nextPage() const override;
     QWidget* initialFocusWidget() const override;
     const MyMoneyAccount& parentAccount();
+    void setParentAccount(const QString& id);
 
     bool isComplete() const override;
 

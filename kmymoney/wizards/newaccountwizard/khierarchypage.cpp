@@ -75,6 +75,16 @@ void HierarchyPage::enterPage()
     d->m_filterProxyModel->clear();
     d->m_filterProxyModel->addAccountGroup(QVector<Account::Type> {topAccount.accountGroup()});
     d->ui->m_parentAccounts->expandAll();
+
+    const auto model = d->ui->m_parentAccounts->model();
+    const auto indexes =
+        model->match(model->index(0, 0), static_cast<int>(eAccountsModel::Role::ID), d->m_initialParentAccountId, 1, Qt::MatchFixedString | Qt::MatchRecursive);
+    if (!indexes.isEmpty()) {
+        const auto idx = indexes.first();
+        d->ui->m_parentAccounts->setCurrentIndex(idx);
+        d->ui->m_parentAccounts->selectionModel()->select(QItemSelection(idx, idx), QItemSelectionModel::Current | QItemSelectionModel::Rows);
+        d->ui->m_parentAccounts->scrollTo(idx, QAbstractItemView::EnsureVisible);
+    }
 }
 
 KMyMoneyWizardPage* HierarchyPage::nextPage() const
@@ -99,6 +109,12 @@ const MyMoneyAccount& HierarchyPage::parentAccount()
         d->m_parentAccount = MyMoneyAccount();
     }
     return d->m_parentAccount;
+}
+
+void HierarchyPage::setParentAccount(const QString& id)
+{
+    Q_D(HierarchyPage);
+    d->m_initialParentAccountId = id;
 }
 
 bool HierarchyPage::isComplete() const
