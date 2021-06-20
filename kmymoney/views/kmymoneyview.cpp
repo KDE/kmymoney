@@ -56,7 +56,6 @@
 #include "kmymoneyaccounttreeview.h"
 #include "kmymoneyplugin.h"
 #include "kmymoneysettings.h"
-#include "kmymoneytitlelabel.h"
 #include "kpayeesview.h"
 #include "kscheduledview.h"
 #include "ktagsview.h"
@@ -91,7 +90,6 @@ public:
     KMyMoneyViewPrivate(KMyMoneyView* qq)
         : q_ptr(qq)
         , m_model(nullptr)
-        , m_header(nullptr)
     {
     }
 
@@ -151,7 +149,6 @@ public:
 
     KMyMoneyView* q_ptr;
     KPageWidgetModel* m_model;
-    KMyMoneyTitleLabel* m_header;
 
     QHash<View, KPageWidgetItem*> viewFrames;
     QHash<View, KMyMoneyViewBase*> viewBases;
@@ -200,13 +197,6 @@ KMyMoneyView::KMyMoneyView()
         // make sure that we remove only the header - we avoid surprises if the header is not at (1,1) in the layout
         if (headerItem && qobject_cast<KTitleWidget*>(headerItem->widget()) != NULL) {
             gridLayout->removeItem(headerItem);
-            // after we remove the KPageWidget standard header replace it with our own title label
-            d->m_header = new KMyMoneyTitleLabel(this);
-            d->m_header->setObjectName("titleLabel");
-            d->m_header->setMinimumSize(QSize(100, 30));
-            d->m_header->setRightImageFile(":/pics/titlelabel_background.png");
-            d->m_header->setVisible(KMyMoneySettings::showTitleBar());
-            gridLayout->addWidget(d->m_header, 1, 1);
         }
     }
 
@@ -507,7 +497,6 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
 void KMyMoneyView::slotSettingsChanged()
 {
     Q_D(KMyMoneyView);
-    d->m_header->setVisible(KMyMoneySettings::showTitleBar());
 
     updateViewType();
 
@@ -617,10 +606,6 @@ void KMyMoneyView::slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* pre
             view->aboutToHide();
         }
     }
-
-    // set the current page's title in the header
-    if (d->m_header)
-        d->m_header->setText(current->header());
 
     if (current != nullptr) {
         const auto view = qobject_cast<KMyMoneyViewBase*>(current->widget());

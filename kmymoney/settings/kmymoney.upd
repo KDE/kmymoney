@@ -8,3 +8,8 @@ Id=remove-hide-acc-opt-2021
 File=kmymoney/kmymoneyrc
 Group=List Options
 RemoveKey=HideClosedAccounts
+
+Id=remove-show-title-bar-2021
+File=kmymoney/kmymoneyrc
+Group=General Options
+RemoveKey=showTitleBar
