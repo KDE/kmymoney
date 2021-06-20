@@ -201,12 +201,11 @@ void KAccountsView::slotNewAccount()
     Q_D(KAccountsView);
     MyMoneyAccount account;
     account.setOpeningDate(KMyMoneySettings::firstFiscalDate());
-    if (!d->m_selections.selection(SelectedObjects::Institution).isEmpty()) {
-        account.setInstitutionId(d->m_selections.selection(SelectedObjects::Institution).at(0));
-    }
-    if (!d->m_selections.selection(SelectedObjects::Account).isEmpty()) {
-        account.setParentAccountId(d->m_selections.selection(SelectedObjects::Account).at(0));
-    }
+
+    account.setAccountType(d->m_currentAccount.accountType());
+    account.setInstitutionId(d->m_currentAccount.institutionId());
+    account.setParentAccountId(d->m_currentAccount.id());
+
     NewAccountWizard::Wizard::newAccount(account);
 }
 
