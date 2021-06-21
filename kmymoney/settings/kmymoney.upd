@@ -13,3 +13,18 @@ Id=remove-show-title-bar-2021
 File=kmymoney/kmymoneyrc
 Group=General Options
 RemoveKey=showTitleBar
+
+Id=reset-accountview-headers-2021
+File=kmymoney/kmymoneyrc
+Group=KAccountsView
+RemoveKey=HeaderState
+
+Id=reset-categoriesview-headers-2021
+File=kmymoney/kmymoneyrc
+Group=KCategoriesView
+RemoveKey=HeaderState
+
+Id=reset-institutionsview-headers-2021
+File=kmymoney/kmymoneyrc
+Group=KInstitutionsView
+RemoveKey=HeaderState

@@ -80,6 +80,7 @@ KMyMoneyAccountTreeView::KMyMoneyAccountTreeView(QWidget *parent)
     setAlternatingRowColors(true);
     setIconSize(QSize(22, 22));
     setSortingEnabled(true);
+    QTreeView::header()->setStretchLastSection(false);
 
     connect(this, &KMyMoneyTreeView::startEdit, this, [&](const QModelIndex& idx) {
         Q_D(KMyMoneyAccountTreeView);
@@ -97,6 +98,12 @@ void KMyMoneyAccountTreeView::setModel(QAbstractItemModel* model)
     Q_D(KMyMoneyAccountTreeView);
     d->proxyModel->setSourceModel(model);
     QTreeView::setModel(d->proxyModel);
+
+    for (int column = 0; column < model->columnCount(); column++) {
+        QVariant headerData = model->headerData(column, Qt::Horizontal, Qt::UserRole);
+        QHeaderView::ResizeMode mode = QHeaderView::ResizeMode(headerData.toInt());
+        QTreeView::header()->setSectionResizeMode(column, mode);
+    }
 }
 
 void KMyMoneyAccountTreeView::setProxyModel(AccountsProxyModel* model)

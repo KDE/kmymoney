@@ -23,16 +23,18 @@
 // KDE Includes
 
 #include <KLocalizedString>
+#include <QHeaderView>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyfile.h"
+#include "modelenums.h"
 #include "mymoneyenums.h"
+#include "mymoneyfile.h"
 #include "mymoneymoney.h"
+#include "mymoneyprice.h"
 #include "mymoneysecurity.h"
 #include "securitiesmodel.h"
-#include "mymoneyprice.h"
 
 #include "icons.h"
 
@@ -333,6 +335,14 @@ int AccountsModel::columnCount(const QModelIndex& parent) const
 QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if(orientation == Qt::Horizontal) {
+        // Using Qt::UserRole here to store QHeaderView::ResizeMode
+        if (role == Qt::UserRole)
+            switch (section) {
+            case Column::AccountName:
+                return QHeaderView::Stretch;
+            default:
+                return QHeaderView::ResizeToContents;
+            }
         if (role == Qt::DisplayRole) {
             switch (section) {
             case Column::AccountName:
