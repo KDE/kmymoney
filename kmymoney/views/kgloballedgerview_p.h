@@ -36,6 +36,7 @@
 
 #include "accountsmodel.h"
 #include "fancydategroupmarkers.h"
+#include "icons.h"
 #include "kbalancewarning.h"
 #include "kendingbalancedlg.h"
 #include "kfindtransactiondlg.h"
@@ -936,17 +937,23 @@ public:
                     foreach (const auto split, t.splits()) {
                         if (split.id() != selectedTransactionSplit.id()) {
                             auto acc = MyMoneyFile::instance()->account(split.accountId());
-                            if (!acc.isIncomeExpense()) {
-                                // for stock accounts we show the portfolio account
-                                if (acc.isInvest()) {
-                                    acc = MyMoneyFile::instance()->account(acc.parentAccountId());
-                                }
-                                m_accountGoto = acc.id();
-                                auto name = acc.name();
-                                name.replace(QRegExp("&(?!&)"), "&&");
-                                pActions[Action::GoToAccount]->setText(i18n("Go to '%1'", name));
-                                break;
+
+                            // set default icon
+                            pActions[Action::GoToAccount]->setIcon(Icons::get(Icons::Icon::Accounts));
+
+                            // for stock accounts we show the portfolio account
+                            if (acc.isInvest()) {
+                                acc = MyMoneyFile::instance()->account(acc.parentAccountId());
+                            } else if (acc.isIncomeExpense()) {
+                                pActions[Action::GoToAccount]->setIcon(Icons::get(Icons::Icon::FinancialCategories));
                             }
+
+                            m_accountGoto = acc.id();
+                            auto name = acc.name();
+                            name.replace(QRegExp("&(?!&)"), "&&");
+                            pActions[Action::GoToAccount]->setText(i18n("Go to '%1'", name));
+
+                            break;
                         }
                     }
                 } catch (const MyMoneyException &) {
