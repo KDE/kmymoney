@@ -278,6 +278,7 @@ void KAccountsView::slotNewAccount()
     MyMoneyAccount account;
     account.setOpeningDate(KMyMoneySettings::firstFiscalDate());
     account.setParentAccountId(d->m_currentAccount.id());
+    account.setAccountType(d->m_currentAccount.accountType());
     NewAccountWizard::Wizard::newAccount(account);
 }
 
