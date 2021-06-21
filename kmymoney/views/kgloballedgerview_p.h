@@ -269,7 +269,7 @@ public:
 
         // the proxy filter model
         m_filterProxyModel = new AccountNamesFilterProxyModel(q);
-        m_filterProxyModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquity());
+        m_filterProxyModel->addAccountGroup(AccountsProxyModel::assetLiabilityEquityIncomeExpense());
         m_filterProxyModel->setSourceModel(MyMoneyFile::instance()->accountsModel());
         m_filterProxyModel->sort(AccountsModel::Column::AccountName);
 

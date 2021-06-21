@@ -426,3 +426,8 @@ QVector<eMyMoney::Account::Type> AccountsProxyModel::incomeExpense()
 {
     return QVector<eMyMoney::Account::Type>({ eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense });
 }
+
+QVector<eMyMoney::Account::Type> AccountsProxyModel::assetLiabilityEquityIncomeExpense()
+{
+    return assetLiabilityEquity() << incomeExpense();
+}
