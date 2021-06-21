@@ -270,7 +270,11 @@ public:
 
         // the proxy filter model
         m_filterProxyModel = new AccountNamesFilterProxyModel(q);
-        m_filterProxyModel->addAccountGroup(QVector<eMyMoney::Account::Type> {eMyMoney::Account::Type::Asset, eMyMoney::Account::Type::Liability, eMyMoney::Account::Type::Equity});
+        m_filterProxyModel->addAccountGroup(QVector<eMyMoney::Account::Type>{eMyMoney::Account::Type::Asset,
+                                                                             eMyMoney::Account::Type::Liability,
+                                                                             eMyMoney::Account::Type::Equity,
+                                                                             eMyMoney::Account::Type::Income,
+                                                                             eMyMoney::Account::Type::Expense});
         auto const model = Models::instance()->accountsModel();
         m_filterProxyModel->setSourceColumns(model->getColumns());
         m_filterProxyModel->setSourceModel(model);
