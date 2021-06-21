@@ -12,14 +12,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "viewinterface.h"
+#include "statementinterface.h"
 
-KMyMoneyPlugin::ViewInterface::ViewInterface(QObject* parent, const char* name) :
-    QObject(parent)
+KMyMoneyPlugin::StatementInterface::StatementInterface(QObject* parent, const char* name)
+    : QObject(parent)
 {
     setObjectName(name);
 }
 
-KMyMoneyPlugin::ViewInterface::~ViewInterface()
+KMyMoneyPlugin::StatementInterface::~StatementInterface()
 {
 }

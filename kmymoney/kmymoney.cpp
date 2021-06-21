@@ -140,14 +140,14 @@
 
 #include "converter/mymoneystatementreader.h"
 
-#include "plugins/interfaces/kmmappinterface.h"
-#include "plugins/interfaces/kmmviewinterface.h"
-#include "plugins/interfaces/kmmstatementinterface.h"
-#include "plugins/interfaces/kmmimportinterface.h"
-#include "plugins/interfaceloader.h"
-#include "plugins/onlinepluginextended.h"
-#include "pluginloader.h"
+#include "interfaces/interfaceloader.h"
+#include "interfaces/onlinepluginextended.h"
 #include "kmymoneyplugin.h"
+#include "pluginloader.h"
+#include "plugins/plugin-interfaces/kmmappinterface.h"
+#include "plugins/plugin-interfaces/kmmimportinterface.h"
+#include "plugins/plugin-interfaces/kmmstatementinterface.h"
+#include "plugins/plugin-interfaces/kmmviewinterface.h"
 
 #include "tasks/credittransfer.h"
 

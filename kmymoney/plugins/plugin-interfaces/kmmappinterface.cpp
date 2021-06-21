@@ -17,9 +17,9 @@
 
 #include "kmymoney.h"
 
-KMyMoneyPlugin::KMMAppInterface::KMMAppInterface(KMyMoneyApp* app, QObject* parent, const char* name) :
-    AppInterface(parent, name),
-    m_app(app)
+KMyMoneyPlugin::KMMAppInterface::KMMAppInterface(KMyMoneyApp* app, QObject* parent, const char* name)
+    : AppInterface(parent, name)
+    , m_app(app)
 {
     connect(m_app, &KMyMoneyApp::kmmFilePlugin, this, &AppInterface::kmmFilePlugin);
 }
@@ -44,7 +44,7 @@ QUrl KMyMoneyPlugin::KMMAppInterface::filenameURL() const
     return m_app->filenameURL();
 }
 
-void KMyMoneyPlugin::KMMAppInterface::writeFilenameURL(const QUrl &url)
+void KMyMoneyPlugin::KMMAppInterface::writeFilenameURL(const QUrl& url)
 {
     m_app->writeFilenameURL(url);
 }
@@ -59,7 +59,7 @@ void KMyMoneyPlugin::KMMAppInterface::writeLastUsedFile(const QString& fileName)
     m_app->writeLastUsedFile(fileName);
 }
 
-void KMyMoneyPlugin::KMMAppInterface::slotFileOpenRecent(const QUrl &url)
+void KMyMoneyPlugin::KMMAppInterface::slotFileOpenRecent(const QUrl& url)
 {
     m_app->slotFileOpenRecent(url);
 }
@@ -74,7 +74,7 @@ KMyMoneyAppCallback KMyMoneyPlugin::KMMAppInterface::progressCallback()
     return m_app->progressCallback();
 }
 
-void KMyMoneyPlugin::KMMAppInterface::writeLastUsedDir(const QString &directory)
+void KMyMoneyPlugin::KMMAppInterface::writeLastUsedDir(const QString& directory)
 {
     m_app->writeLastUsedDir(directory);
 }

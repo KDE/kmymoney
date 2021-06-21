@@ -23,13 +23,12 @@ class MyMoneyAccount;
 class MyMoneyStatement;
 class MyMoneyKeyValueContainer;
 
-namespace KMyMoneyPlugin
-{
+namespace KMyMoneyPlugin {
 
 /**
-  * This abstract class represents the interface to import statements
-  * into the KMyMoney application
-  */
+ * This abstract class represents the interface to import statements
+ * into the KMyMoney application
+ */
 class KMM_PLUGIN_EXPORT StatementInterface : public QObject
 {
     Q_OBJECT
@@ -42,8 +41,8 @@ public:
     virtual void showMessages(int statementCount) const = 0;
 
     /**
-      * This method imports a MyMoneyStatement into the engine
-      */
+     * This method imports a MyMoneyStatement into the engine
+     */
     virtual QStringList import(const MyMoneyStatement& s, bool silent = false) = 0;
 
     /**
@@ -56,7 +55,6 @@ public:
     /**
      */
     virtual void setAccountOnlineParameters(const MyMoneyAccount& acc, const MyMoneyKeyValueContainer& kvps) const = 0;
-
 };
 
 } // namespace

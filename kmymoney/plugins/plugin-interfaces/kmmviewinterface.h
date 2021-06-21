@@ -20,20 +20,21 @@ class KMyMoneyView;
 
 #include "viewinterface.h"
 
-namespace KMyMoneyPlugin
-{
+namespace KMyMoneyPlugin {
 
 /**
-  * This class represents the implementation of the
-  * ViewInterface.
-  */
+ * This class represents the implementation of the
+ * ViewInterface.
+ */
 class KMMViewInterface : public ViewInterface
 {
     Q_OBJECT
 
 public:
     KMMViewInterface(KMyMoneyView* view, QObject* parent, const char* name = 0);
-    ~KMMViewInterface() {}
+    ~KMMViewInterface()
+    {
+    }
 
     void addView(KMyMoneyViewBase* view, const QString& name, View idView, Icons::Icon icon) override;
     void removeView(View idView) override;

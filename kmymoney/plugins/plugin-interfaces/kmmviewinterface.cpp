@@ -20,9 +20,9 @@
 #include "kmymoneyview.h"
 #include "selectedtransactions.h"
 
-KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoneyView* view, QObject* parent, const char* name) :
-    ViewInterface(parent, name),
-    m_view(view)
+KMyMoneyPlugin::KMMViewInterface::KMMViewInterface(KMyMoneyView* view, QObject* parent, const char* name)
+    : ViewInterface(parent, name)
+    , m_view(view)
 {
     connect(m_view, &KMyMoneyView::accountSelected, this, &ViewInterface::accountSelected);
     connect(m_view, &KMyMoneyView::transactionsSelected, this, &ViewInterface::transactionsSelected);

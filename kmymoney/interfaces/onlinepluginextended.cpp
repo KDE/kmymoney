@@ -7,17 +7,19 @@
 
 #include "onlinepluginextended.h"
 
-namespace KMyMoneyPlugin
-{
+namespace KMyMoneyPlugin {
 
 #if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
 OnlinePluginExtended::OnlinePluginExtended(QObject* parent, const QVariantList& args)
-    : Plugin(parent, args),
+    : Plugin(parent, args)
+    ,
 #else
-OnlinePluginExtended::OnlinePluginExtended(QObject* parent, const KPluginMetaData &metaData, const QVariantList& args)
-    : Plugin(parent, metaData, args),
+OnlinePluginExtended::OnlinePluginExtended(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
+    : Plugin(parent, metaData, args)
+    ,
 #endif
-      OnlinePlugin()
-{}
+    OnlinePlugin()
+{
+}
 
 }

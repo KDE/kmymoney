@@ -21,27 +21,28 @@ class MyMoneyKeyValueContainer;
 
 #include "statementinterface.h"
 
-namespace KMyMoneyPlugin
-{
+namespace KMyMoneyPlugin {
 
 /**
-  * This class represents the implementation of the
-  * StatementInterface.
-  */
+ * This class represents the implementation of the
+ * StatementInterface.
+ */
 class KMMStatementInterface : public StatementInterface
 {
     Q_OBJECT
 
 public:
     explicit KMMStatementInterface(QObject* parent, const char* name = 0);
-    ~KMMStatementInterface() {}
+    ~KMMStatementInterface()
+    {
+    }
 
     virtual void resetMessages() const final override;
     virtual void showMessages(int statementCount) const final override;
 
     /**
-      * This method imports a MyMoneyStatement into the engine
-      */
+     * This method imports a MyMoneyStatement into the engine
+     */
     QStringList import(const MyMoneyStatement& s, bool silent = false) final override;
 
     /**
@@ -56,7 +57,7 @@ public:
      * This method stores the online parameters in @a kvps used by the plugin
      * with the account @a acc.
      */
-    void setAccountOnlineParameters(const MyMoneyAccount&acc, const MyMoneyKeyValueContainer& kvps) const final override;
+    void setAccountOnlineParameters(const MyMoneyAccount& acc, const MyMoneyKeyValueContainer& kvps) const final override;
 };
 
 } // namespace

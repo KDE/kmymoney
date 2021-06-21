@@ -53,14 +53,13 @@ enum class StorageType;
  *
  * KMyMoney knows several types of plugins. The most common and generic one is KMyMoneyPlugin::Plugin.
  *
- * Another group of plugins are just loaded on demand and offer special functions with a tight integration into KMyMoney. Whenever possible you should use this kind of plugins.
- * At the moment this are the onlineTask and payeeIdentifierData.
+ * Another group of plugins are just loaded on demand and offer special functions with a tight integration into KMyMoney. Whenever possible you should use this
+ * kind of plugins. At the moment this are the onlineTask and payeeIdentifierData.
  *
  * @{
  */
 
-namespace KMyMoneyPlugin
-{
+namespace KMyMoneyPlugin {
 
 /**
  * This class describes the interface between KMyMoney and it's plugins.
@@ -114,7 +113,7 @@ public:
 #if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
     explicit Plugin(QObject* parent, const QVariantList& args);
 #else
-    explicit Plugin(QObject* parent, const KPluginMetaData &metaData, const QVariantList& args);
+    explicit Plugin(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args);
 #endif
     virtual ~Plugin();
 
@@ -164,14 +163,14 @@ private:
 };
 
 /**
-   * This class describes the interface between the KMyMoney
-   * application and it's ONLINE-BANKING plugins. All online banking plugins
-   * must provide this interface.
-   *
-   * A good tutorial on how to design and develop a plugin
-   * structure for a KDE application (e.g. KMyMoney) can be found at
-   * http://web.archive.org/web/20100305214125/http://developer.kde.org/documentation/tutorials/developing-a-plugin-structure/index.html
-   *
+ * This class describes the interface between the KMyMoney
+ * application and it's ONLINE-BANKING plugins. All online banking plugins
+ * must provide this interface.
+ *
+ * A good tutorial on how to design and develop a plugin
+ * structure for a KDE application (e.g. KMyMoney) can be found at
+ * http://web.archive.org/web/20100305214125/http://developer.kde.org/documentation/tutorials/developing-a-plugin-structure/index.html
+ *
  */
 class KMM_PLUGIN_EXPORT OnlinePlugin
 {
@@ -230,15 +229,15 @@ public:
 };
 
 /**
-  * This class describes the interface between the KMyMoney
-  * application and it's IMPORTER plugins. All importer plugins
-  * must provide this interface.
-  *
-  * A good tutorial on how to design and develop a plugin
-  * structure for a KDE application (e.g. KMyMoney) can be found at
-  * http://web.archive.org/web/20100305214125/http://developer.kde.org/documentation/tutorials/developing-a-plugin-structure/index.html
-  *
-  */
+ * This class describes the interface between the KMyMoney
+ * application and it's IMPORTER plugins. All importer plugins
+ * must provide this interface.
+ *
+ * A good tutorial on how to design and develop a plugin
+ * structure for a KDE application (e.g. KMyMoney) can be found at
+ * http://web.archive.org/web/20100305214125/http://developer.kde.org/documentation/tutorials/developing-a-plugin-structure/index.html
+ *
+ */
 class KMM_PLUGIN_EXPORT ImporterPlugin
 {
 public:
@@ -246,52 +245,51 @@ public:
     virtual ~ImporterPlugin();
 
     /**
-      * This method returns the list of the MIME types that this plugin handles,
-      * e.g. {"application/x-ofx", "application/x-qfx"}. Be specific: don't use generic
-      * types, like "text/plain", which many other types inherit from, and which
-      * would result in @ref isMyFormat() returning false positives.
-      *
-      * @return QStringList List of MIME types
-      */
+     * This method returns the list of the MIME types that this plugin handles,
+     * e.g. {"application/x-ofx", "application/x-qfx"}. Be specific: don't use generic
+     * types, like "text/plain", which many other types inherit from, and which
+     * would result in @ref isMyFormat() returning false positives.
+     *
+     * @return QStringList List of MIME types
+     */
     virtual QStringList formatMimeTypes() const = 0;
 
     /**
-      * This method checks whether the file provided is of expected format.
-      * The default implementation checks whether the file's MIME type inherits any
-      * of the types provided by @ref formatMimeTypes().
-      *
-      * @param filename Fully-qualified pathname to a file
-      *
-      * @return bool Whether the indicated file is importable by this plugin
-      */
+     * This method checks whether the file provided is of expected format.
+     * The default implementation checks whether the file's MIME type inherits any
+     * of the types provided by @ref formatMimeTypes().
+     *
+     * @param filename Fully-qualified pathname to a file
+     *
+     * @return bool Whether the indicated file is importable by this plugin
+     */
     virtual bool isMyFormat(const QString& filename) const;
 
     /**
-      * Import a file
-      *
-      * @param filename File to import
-      *
-      * @return bool Whether the import was successful.
-      */
+     * Import a file
+     *
+     * @param filename File to import
+     *
+     * @return bool Whether the import was successful.
+     */
     virtual bool import(const QString& filename) = 0;
 
     /**
-      * Returns the error result of the last import
-      *
-      * @return QString English-language name of the error encountered in the
-      *  last import, or QString() if it was successful.
-      *
-      */
+     * Returns the error result of the last import
+     *
+     * @return QString English-language name of the error encountered in the
+     *  last import, or QString() if it was successful.
+     *
+     */
     virtual QString lastError() const = 0;
-
 };
 
 /**
-  * This class describes the interface between the KMyMoney
-  * application and it's STORAGE plugins. All storage plugins
-  * must provide this interface.
-  *
-  */
+ * This class describes the interface between the KMyMoney
+ * application and it's STORAGE plugins. All storage plugins
+ * must provide this interface.
+ *
+ */
 class KMM_PLUGIN_EXPORT StoragePlugin
 {
 public:
@@ -303,14 +301,14 @@ public:
      * @param url URL of the file
      * @return true if successfully opened
      */
-    virtual bool open(const QUrl &url) = 0;
+    virtual bool open(const QUrl& url) = 0;
 
     /**
      * @brief Saves storage into file
      * @param url URL of the file
      * @return true if successfully saved
      */
-    virtual bool save(const QUrl &url) = 0;
+    virtual bool save(const QUrl& url) = 0;
 
     /**
      * @brief Saves storage into file
@@ -335,11 +333,11 @@ public:
 };
 
 /**
-  * This class describes the interface between the KMyMoney
-  * application and its data plugins. All data plugins
-  * must provide this interface.
-  *
-  */
+ * This class describes the interface between the KMyMoney
+ * application and its data plugins. All data plugins
+ * must provide this interface.
+ *
+ */
 class KMM_PLUGIN_EXPORT DataPlugin
 {
 public:
@@ -352,7 +350,7 @@ public:
      * @param type Data type to retrieve for item
      * @return a data like int or QString
      */
-    virtual QVariant requestData(const QString &arg, uint type) = 0;
+    virtual QVariant requestData(const QString& arg, uint type) = 0;
 };
 
 class OnlinePluginExtended;
@@ -361,12 +359,12 @@ class OnlinePluginExtended;
  * @brief The Container struct to hold all plugin interfaces
  */
 struct Container {
-    QMap<QString, Plugin*>               standard;  // this should contain all loaded plugins because every plugin should inherit Plugin class
-    QMap<QString, OnlinePlugin*>         online;    // casted standard plugin, if such interface is available
-    QMap<QString, OnlinePluginExtended*> extended;  // casted standard plugin, if such interface is available
-    QMap<QString, ImporterPlugin*>       importer;  // casted standard plugin, if such interface is available
-    QMap<QString, StoragePlugin*>        storage;   // casted standard plugin, if such interface is available
-    QMap<QString, DataPlugin*>           data;      // casted standard plugin, if such interface is available
+    QMap<QString, Plugin*> standard; // this should contain all loaded plugins because every plugin should inherit Plugin class
+    QMap<QString, OnlinePlugin*> online; // casted standard plugin, if such interface is available
+    QMap<QString, OnlinePluginExtended*> extended; // casted standard plugin, if such interface is available
+    QMap<QString, ImporterPlugin*> importer; // casted standard plugin, if such interface is available
+    QMap<QString, StoragePlugin*> storage; // casted standard plugin, if such interface is available
+    QMap<QString, DataPlugin*> data; // casted standard plugin, if such interface is available
 };
 
 } // end of namespace
@@ -380,7 +378,6 @@ Q_DECLARE_INTERFACE(KMyMoneyPlugin::OnlinePlugin, "org.kmymoney.plugin.onlineplu
 Q_DECLARE_INTERFACE(KMyMoneyPlugin::ImporterPlugin, "org.kmymoney.plugin.importerplugin")
 Q_DECLARE_INTERFACE(KMyMoneyPlugin::StoragePlugin, "org.kmymoney.plugin.storageplugin")
 Q_DECLARE_INTERFACE(KMyMoneyPlugin::DataPlugin, "org.kmymoney.plugin.dataplugin")
-
 
 /** @} */
 

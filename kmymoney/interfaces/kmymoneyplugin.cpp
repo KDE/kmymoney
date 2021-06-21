@@ -31,9 +31,8 @@ KMyMoneyPlugin::Container pPlugins;
 
 #if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
 KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const QVariantList& args)
-    :
-    QObject(),
-    KXMLGUIClient()
+    : QObject()
+    , KXMLGUIClient()
 {
     Q_UNUSED(parent)
 
@@ -46,10 +45,9 @@ KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const QVariantList& args)
     }
 }
 #else
-KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const KPluginMetaData &metaData, const QVariantList& args)
-    :
-    QObject(),
-    KXMLGUIClient()
+KMyMoneyPlugin::Plugin::Plugin(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
+    : QObject()
+    , KXMLGUIClient()
 {
     Q_UNUSED(parent)
     Q_UNUSED(args)
@@ -137,15 +135,15 @@ KMyMoneyPlugin::ImporterPlugin::ImporterPlugin()
 {
 }
 
-bool KMyMoneyPlugin::ImporterPlugin::isMyFormat(const QString &filename) const
+bool KMyMoneyPlugin::ImporterPlugin::isMyFormat(const QString& filename) const
 {
     QMimeDatabase db;
     QMimeType mime = db.mimeTypeForFile(filename);
 
-    if(!mime.isDefault())
+    if (!mime.isDefault())
         for (const auto& mimeTypeName : formatMimeTypes())
             if (mime.inherits(mimeTypeName))
-                    return true;
+                return true;
 
     return false;
 }

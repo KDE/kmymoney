@@ -28,10 +28,10 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoney/mymoneyfile.h"
 #include "mymoney/mymoneyaccount.h"
+#include "mymoney/mymoneyfile.h"
 #include "mymoney/mymoneykeyvaluecontainer.h"
-#include "plugins/onlinepluginextended.h"
+#include "onlinepluginextended.h"
 
 #include "onlinetasks/unavailabletask/tasks/unavailabletask.h"
 #include "onlinetasks/interfaces/tasks/credittransfer.h"

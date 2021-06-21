@@ -10,8 +10,8 @@
 // QT Includes
 
 #include <QFileDialog>
-#include <QPointer>
 #include <QGridLayout>
+#include <QPointer>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -19,12 +19,16 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-KMyMoneyPlugin::KMMImportInterface::KMMImportInterface(QObject* parent, const char* name) :
-    ImportInterface(parent, name)
+KMyMoneyPlugin::KMMImportInterface::KMMImportInterface(QObject* parent, const char* name)
+    : ImportInterface(parent, name)
 {
 }
 
-QUrl KMyMoneyPlugin::KMMImportInterface::selectFile(const QString& title, const QString& path, const QString& mask, QFileDialog::FileMode mode, QWidget *widget) const
+QUrl KMyMoneyPlugin::KMMImportInterface::selectFile(const QString& title,
+                                                    const QString& path,
+                                                    const QString& mask,
+                                                    QFileDialog::FileMode mode,
+                                                    QWidget* widget) const
 {
     //    QString path(_path);
 

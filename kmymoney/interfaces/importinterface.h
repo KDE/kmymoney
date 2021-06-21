@@ -9,10 +9,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QFileDialog>
 #include <QObject>
 #include <QString>
 #include <QUrl>
-#include <QFileDialog>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -22,13 +22,12 @@
 
 #include <kmm_plugin_export.h>
 
-namespace KMyMoneyPlugin
-{
+namespace KMyMoneyPlugin {
 
 /**
-  * This abstract class represents the ImportInterface to
-  * add new importers to KMyMoney.
-  */
+ * This abstract class represents the ImportInterface to
+ * add new importers to KMyMoney.
+ */
 class KMM_PLUGIN_EXPORT ImportInterface : public QObject
 {
     Q_OBJECT
@@ -50,7 +49,7 @@ public:
      * you are responsible to delete the widget. It will not be deleted
      * automatically during the destruction of the dialog.
      */
-    virtual QUrl selectFile(const QString& title, const QString& path, const QString& mask, QFileDialog::FileMode mode, QWidget *widget) const = 0;
+    virtual QUrl selectFile(const QString& title, const QString& path, const QString& mask, QFileDialog::FileMode mode, QWidget* widget) const = 0;
 
 Q_SIGNALS:
 };

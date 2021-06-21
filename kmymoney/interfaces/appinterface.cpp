@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2005 Thomas Baumgart <ipwizard@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2018 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -12,14 +12,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "statementinterface.h"
+#include "appinterface.h"
 
-KMyMoneyPlugin::StatementInterface::StatementInterface(QObject* parent, const char* name) :
-    QObject(parent)
+KMyMoneyPlugin::AppInterface::AppInterface(QObject* parent, const char* name)
+    : QObject(parent)
 {
     setObjectName(name);
 }
 
-KMyMoneyPlugin::StatementInterface::~StatementInterface()
+KMyMoneyPlugin::AppInterface::~AppInterface()
 {
 }

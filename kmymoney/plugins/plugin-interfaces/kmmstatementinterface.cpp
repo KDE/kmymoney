@@ -14,20 +14,20 @@
 // ----------------------------------------------------------------------------
 // KDE Includes
 
-#include <KMessageBox>
 #include <KLocalizedString>
+#include <KMessageBox>
 
 // ----------------------------------------------------------------------------
 // Project Includes
 
+#include "mymoneyaccount.h"
 #include "mymoneyexception.h"
 #include "mymoneyfile.h"
-#include "mymoneyaccount.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneystatementreader.h"
 
-KMyMoneyPlugin::KMMStatementInterface::KMMStatementInterface(QObject* parent, const char* name) :
-    StatementInterface(parent, name)
+KMyMoneyPlugin::KMMStatementInterface::KMMStatementInterface(QObject* parent, const char* name)
+    : StatementInterface(parent, name)
 {
 }
 
@@ -45,14 +45,12 @@ void KMyMoneyPlugin::KMMStatementInterface::resetMessages() const
 void KMyMoneyPlugin::KMMStatementInterface::showMessages(int statementCount) const
 {
     const auto resultMessages = MyMoneyStatementReader::resultMessages();
-    KMessageBox::informationList(nullptr,
-                                 i18np("One statement has been processed with the following results:",
-                                       "%1 statements have been processed with the following results:",
-                                       statementCount),
-                                 !resultMessages.isEmpty() ?
-                                 resultMessages :
-                                 QStringList { i18np("No new transaction has been imported.", "No new transactions have been imported.", statementCount) },
-                                 i18n("Statement import statistics"));
+    KMessageBox::informationList(
+        nullptr,
+        i18np("One statement has been processed with the following results:", "%1 statements have been processed with the following results:", statementCount),
+        !resultMessages.isEmpty() ? resultMessages
+                                  : QStringList{i18np("No new transaction has been imported.", "No new transactions have been imported.", statementCount)},
+        i18n("Statement import statistics"));
 }
 
 MyMoneyAccount KMyMoneyPlugin::KMMStatementInterface::account(const QString& key, const QString& value) const
@@ -67,7 +65,7 @@ MyMoneyAccount KMyMoneyPlugin::KMMStatementInterface::account(const QString& key
         // search in the account's online settings kvp container
         const auto& onlineSettingsKvpValue = (*it_a).onlineBankingSettings().value(key);
         if (accountKvpValue.contains(value) || onlineSettingsKvpValue.contains(value)) {
-            if(accId.isEmpty()) {
+            if (accId.isEmpty()) {
                 accId = (*it_a).id();
             }
         }
@@ -90,8 +88,8 @@ void KMyMoneyPlugin::KMMStatementInterface::setAccountOnlineParameters(const MyM
         MyMoneyFile::instance()->modifyAccount(oAcc);
         ft.commit();
 
-    } catch (const MyMoneyException &) {
+    } catch (const MyMoneyException&) {
         qDebug("Unable to setup online parameters for account '%s'", qPrintable(acc.name()));
-//    KMessageBox::detailedSorry(0, i18n("Unable to setup online parameters for account '%1'", acc.name()), QString::fromLatin1(e.what()));
+        //    KMessageBox::detailedSorry(0, i18n("Unable to setup online parameters for account '%1'", acc.name()), QString::fromLatin1(e.what()));
     }
 }

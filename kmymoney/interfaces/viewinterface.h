@@ -19,14 +19,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneytransaction.h"
 #include "mymoneysplit.h"
+#include "mymoneytransaction.h"
 
-#include <kmm_plugin_export.h>
 #include "icons.h"
+#include <kmm_plugin_export.h>
 
-namespace KMyMoneyRegister
-{
+namespace KMyMoneyRegister {
 class SelectedTransactions;
 }
 
@@ -38,14 +37,13 @@ class MyMoneySplit;
 class MyMoneyTransaction;
 class KMyMoneyViewBase;
 
-namespace KMyMoneyPlugin
-{
+namespace KMyMoneyPlugin {
 
 /**
-  * This abstract class represents the ViewInterface to
-  * add new view pages to the JanusWidget of KMyMoney. It
-  * also gives access to the account context menu.
-  */
+ * This abstract class represents the ViewInterface to
+ * add new view pages to the JanusWidget of KMyMoney. It
+ * also gives access to the account context menu.
+ */
 class KMM_PLUGIN_EXPORT ViewInterface : public QObject
 {
     Q_OBJECT
@@ -80,7 +78,7 @@ Q_SIGNALS:
      * @a institution is identical to MyMoneyInstitution(). This signal is used
      * by plugins to get information about changes.
      */
-//  void institutionSelected(const MyMoneyInstitution& institution);
+    //  void institutionSelected(const MyMoneyInstitution& institution);
 
     /**
      * This signal is emitted when an account has been successfully reconciled

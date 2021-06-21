@@ -6,7 +6,7 @@
 #ifndef SEPAONLINETASKSLOADER_H
 #define SEPAONLINETASKSLOADER_H
 
-#include <kmymoney/plugins/onlinepluginextended.h>
+#include <kmymoney/interfaces/onlinepluginextended.h>
 
 class sepaOnlineTasksLoader : public QObject, public KMyMoneyPlugin::onlineTaskFactory
 {

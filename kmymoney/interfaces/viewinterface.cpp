@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2008 Thomas Baumgart <ipwizard@users.sourceforge.net>
+    SPDX-FileCopyrightText: 2005 Thomas Baumgart <ipwizard@users.sourceforge.net>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -12,14 +12,14 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "importinterface.h"
+#include "viewinterface.h"
 
-KMyMoneyPlugin::ImportInterface::ImportInterface(QObject* parent, const char* name) :
-    QObject(parent)
+KMyMoneyPlugin::ViewInterface::ViewInterface(QObject* parent, const char* name)
+    : QObject(parent)
 {
     setObjectName(name);
 }
 
-KMyMoneyPlugin::ImportInterface::~ImportInterface()
+KMyMoneyPlugin::ViewInterface::~ViewInterface()
 {
 }

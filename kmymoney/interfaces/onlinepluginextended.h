@@ -17,8 +17,7 @@ class onlineJob;
 class onlineTask;
 class payeeIdentifierData;
 
-namespace KMyMoneyPlugin
-{
+namespace KMyMoneyPlugin {
 
 /**
  * @brief Interface between KMyMoney and Online Banking plugins for executing transactions
@@ -35,9 +34,11 @@ public:
 #if KCOREADDONS_VERSION < QT_VERSION_CHECK(5, 77, 0)
     OnlinePluginExtended(QObject* parent, const QVariantList& args);
 #else
-    OnlinePluginExtended(QObject* parent, const KPluginMetaData &metaData, const QVariantList& args);
+    OnlinePluginExtended(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args);
 #endif
-    virtual ~OnlinePluginExtended() {}
+    virtual ~OnlinePluginExtended()
+    {
+    }
 
     /**
      * @brief List onlineJobs supported by an account
@@ -76,7 +77,7 @@ Q_SIGNALS:
     void jobAvailable(QString accountId, QString);
     void jobAvailable(QString accountId, QStringList);
     void jobUnavailable(QString accountId, QString);
-    //void jobUnavailable( QString accountId );
+    // void jobUnavailable( QString accountId );
 };
 
 class KMM_PLUGIN_EXPORT onlineTaskFactory
@@ -85,7 +86,9 @@ public:
     virtual onlineTask* createOnlineTask(const QString& taskId) const = 0;
 
     // Make g++ happy
-    virtual ~onlineTaskFactory() {}
+    virtual ~onlineTaskFactory()
+    {
+    }
 };
 
 class KMM_PLUGIN_EXPORT payeeIdentifierDataFactory
@@ -93,7 +96,9 @@ class KMM_PLUGIN_EXPORT payeeIdentifierDataFactory
 public:
     virtual payeeIdentifierData* createPayeeIdentifier(const QString& payeeIdentifierIid) const = 0;
     // Make g+ happy
-    virtual ~payeeIdentifierDataFactory() {}
+    virtual ~payeeIdentifierDataFactory()
+    {
+    }
 };
 
 } // namespace KMyMoneyPlugin

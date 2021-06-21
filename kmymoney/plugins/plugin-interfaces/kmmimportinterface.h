@@ -20,22 +20,23 @@
 
 #include "importinterface.h"
 
-namespace KMyMoneyPlugin
-{
+namespace KMyMoneyPlugin {
 
 /**
-  * This class represents the implementation of the
-  * ImportInterface.
-  */
+ * This class represents the implementation of the
+ * ImportInterface.
+ */
 class KMMImportInterface : public ImportInterface
 {
     Q_OBJECT
 
 public:
     explicit KMMImportInterface(QObject* parent, const char* name = 0);
-    ~KMMImportInterface() override {}
+    ~KMMImportInterface() override
+    {
+    }
 
-    QUrl selectFile(const QString& title, const QString& path, const QString& mask, QFileDialog::FileMode mode, QWidget *widget) const final override;
+    QUrl selectFile(const QString& title, const QString& path, const QString& mask, QFileDialog::FileMode mode, QWidget* widget) const final override;
 };
 
 } // namespace

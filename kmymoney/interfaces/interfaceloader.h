@@ -16,8 +16,7 @@ class ViewInterface;
 }
 class KMyMoneyApp;
 
-namespace KMyMoneyPlugin
-{
+namespace KMyMoneyPlugin {
 
 class Plugin;
 
@@ -29,7 +28,8 @@ class Plugin;
  * It is only used by the classes which are named friends. To receive an instance of
  * this class @ref pluginInterfaces() is used.
  */
-class InterfaceLoader {
+class InterfaceLoader
+{
     /**
      * @{
      * This class is owner of these objects. However, the parent is somebody else. They are deleted by destruction of the parent only.
