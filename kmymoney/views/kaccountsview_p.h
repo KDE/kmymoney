@@ -396,6 +396,7 @@ public:
             pActions[eMenu::Action::ChartAccountBalance]->setEnabled(true);
 
             if (acc.hasOnlineMapping()) {
+                pActions[eMenu::Action::MapOnlineAccount]->setEnabled(false);
                 pActions[eMenu::Action::UnmapOnlineAccount]->setEnabled(true);
 
                 if (m_onlinePlugins) {
