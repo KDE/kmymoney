@@ -381,7 +381,7 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
     // update actions in all views. process the current last
     for (const auto& view : d->viewBases.keys()) {
         if (view == currentView)
-            break;
+            continue;
         d->viewBases[view]->updateActions(selections);
     }
     d->viewBases[currentView]->updateActions(selections);
