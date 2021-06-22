@@ -220,6 +220,8 @@ void KCategoriesView::slotEditCategory()
                 file->reparentAccount(account, parent);
 
             ft.commit();
+            // update our local copy of the category data
+            d->m_currentCategory = account;
         } catch (const MyMoneyException &e) {
             KMessageBox::error(this, i18n("Unable to modify category '%1'. Cause: %2", d->m_currentCategory.name(), QString::fromLatin1(e.what())));
         }
