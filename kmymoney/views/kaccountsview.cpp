@@ -416,6 +416,7 @@ void KAccountsView::slotAccountMapOnline()
                 MyMoneyFile::instance()->modifyAccount(acc);
                 ft.commit();
                 // The mapping could enable the online task system
+                d->m_currentAccount = acc;
                 onlineJobAdministration::instance()->updateOnlineTaskProperties();
             } catch (const MyMoneyException &e) {
                 KMessageBox::error(this, i18n("Unable to map account to online account: %1", QString::fromLatin1(e.what())));
