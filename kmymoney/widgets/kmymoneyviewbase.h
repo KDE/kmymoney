@@ -76,9 +76,6 @@ public:
 
     virtual QHash<eMenu::Action, QAction*> sharedToolbarActions();
 
-protected:
-    void changeEvent(QEvent* ev) override;
-
 Q_SIGNALS:
     // these signals are send to application logic
     void requestSelectionChange(const SelectedObjects& selection) const;
