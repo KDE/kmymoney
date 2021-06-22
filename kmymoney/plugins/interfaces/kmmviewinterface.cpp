@@ -42,14 +42,3 @@ void KMyMoneyPlugin::KMMViewInterface::removeView(View idView)
 {
     m_view->removeView(idView);
 }
-
-//KMyMoneyViewBase* KMyMoneyPlugin::KMMViewInterface::addPage(const QString& item, const QString& icon)
-//{
-//  return m_view->addBasePage(item, icon);
-//}
-
-//void KMyMoneyPlugin::KMMViewInterface::addWidget(KMyMoneyViewBase* view, QWidget* w)
-//{
-//  if (view && w)
-//    view->addWidget(w);
-//}
