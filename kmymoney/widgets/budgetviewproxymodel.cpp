@@ -102,7 +102,7 @@ QVariant BudgetViewProxyModel::data(const QModelIndex & idx, int role) const
             const auto baseCurrency = file->baseCurrency();
 
             switch (idx.column()) {
-            case AccountsModel::Column::TotalBalance:
+            case AccountsModel::Column::Balance:
                 if (currencyId != baseCurrency.id())
                     return MyMoneyUtils::formatMoney(accountBalance(accountId), file->security(currencyId));
                 else

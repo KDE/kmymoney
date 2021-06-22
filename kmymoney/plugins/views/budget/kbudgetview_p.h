@@ -102,7 +102,7 @@ public:
 
         auto columnSelector = new ColumnSelector(ui->m_accountTree, q->metaObject()->className());
         columnSelector->setAlwaysVisible(QVector<int>({ AccountsModel::Column::AccountName }));
-        columnSelector->setAlwaysHidden(QVector<int>({ AccountsModel::Column::Balance, AccountsModel::Column::PostedValue }));
+        columnSelector->setAlwaysHidden(QVector<int>({AccountsModel::Column::PostedValue}));
 
         ui->m_accountTree->setModel(MyMoneyFile::instance()->accountsModel());
 

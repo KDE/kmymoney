@@ -346,33 +346,34 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
         if (role == Qt::DisplayRole) {
             switch (section) {
             case Column::AccountName:
-                return i18n("Name");
+                return i18nc("@title:column Shows the Name of account", "Name");
             case Column::Type:
-                return i18n("Type");
+                return i18nc("@title:column Shows the Type of account (e.g. Asset, Checking, Credit Card)", "Type");
             case Column::HasOnlineMapping:
-                return i18n("Online");
+                return i18nc("@title:column Indicates whether account has an online mapping configured", "Online");
             case Column::Tax:
-                return i18nc("Column heading for category in tax report", "Tax");
+                return i18nc("@title:column Indicates whether account is included in tax reports", "Tax");
             case Column::Vat:
-                return i18nc("Column heading for VAT category", "VAT");
+                return i18nc("@title:column Shows VAT percentage rate, if configured", "VAT");
             case Column::CostCenter:
-                return i18nc("Column heading for Cost Center", "CC");
-            case Column::TotalBalance:
-                return i18n("Balance");
+                return i18nc("@title:column Indicates whether a Cost Center assignment is necessary when entering a transaction", "CC");
+            case Column::Balance:
+                return i18nc("@title:column Shows account's balance (in account's currency)", "Balance");
             case Column::PostedValue:
                 return i18n("Posted Value");
             case Column::TotalPostedValue:
-                return i18n("Total Value");
+                return i18nc("@title:column Shows Total Value, which includes a sum of all subaccounts (in base currency)", "Total Value");
             case Column::Number:
-                return i18n("Number");
+                return i18nc("@title:column Shows Account Number", "Number");
             case Column::Iban:
-                return i18n("IBAN");
+                return i18nc("@title:column Shows IBAN", "IBAN");
             case Column::BankCode:
                 return i18nc(
-                           "Column heading for Bank Code. Use a generic form, do not translate using a culture-specific term, e.g. 'Routing Number' (en_US) or 'Sort Code' (en_GB)",
-                           "Bank Code");
+                    "@title:column Shows Bank Code. Use a generic form, do not translate using a culture-specific term, such as 'Routing Number' (en_US) or "
+                    "'Sort Code' (en_GB)",
+                    "Bank Code");
             case Column::Bic:
-                return i18n("SWIFT/BIC");
+                return i18nc("@title:column Shows SWIFT/BIC", "SWIFT/BIC");
             default:
                 return QVariant();
             }
@@ -381,41 +382,35 @@ QVariant AccountsModel::headerData(int section, Qt::Orientation orientation, int
         if (role == Qt::ToolTipRole) {
             switch (section) {
             case Column::AccountName:
-                return i18nc("Tooltip for 'Name' column. Used in Account, Category and Institution context, so avoid being too specific",
-                             "Full name");
+                return i18nc("@info:tooltip for 'Name' column. Used in Account, Category and Institution context, so avoid being too specific", "Full name");
             case Column::Type:
-                return i18nc("Toolip for a 'Type' column, used in both Account and Category context",
-                             "Type");
+                return i18nc("@info:tooltip for 'Type' column, used in both Account and Category context, so avoid being too specific", "Type");
             case Column::HasOnlineMapping:
-                return i18nc("Tooltip for a YES/NO column",
-                             "Whether account has online mapping set up");
+                return i18nc("@info:tooltip for 'Online' column (YES/NO value)", "Whether account has online mapping set up");
             case Column::Tax:
-                return i18nc("Tooltip for a YES/NO column",
-                             "Whether account is included in tax reports");
+                return i18nc("@info:tooltip for 'Tax' column (YES/NO value)", "Whether account is included in tax reports");
             case Column::Vat:
-                return i18nc("Tooltip for a column showing a VAT % rate",
-                             "VAT percentage rate, if configured.");
+                return i18nc("@info:tooltip for 'VAT' column (% rate)", "VAT percentage rate, if configured.");
             case Column::CostCenter:
-                return i18nc("Tooltip for a YES/NO column",
-                             "Whether a cost center assignment is necessary when entering a transaction.");
-            case Column::TotalBalance:
-                return i18n("Balance");
+                return i18nc("@info:tooltip for 'CC' column (YES/NO value)", "Whether a cost center assignment is necessary when entering a transaction.");
+            case Column::Balance:
+                return i18nc("@info:tooltip for 'Balance' column", "Account balance (in account's currency)");
             case Column::PostedValue:
                 return i18n("Posted Value");
             case Column::TotalPostedValue:
-                return i18n("Total Value");
+                return i18nc("@info:tooltip for 'Total Value' column", "Total Value (including subaccounts)");
             case Column::Number:
-                return i18nc("Tooltip for 'Account Number' column",
-                             "Account or credit card number, as assigned by the institution.");
+                return i18nc("@info:tooltip for 'Account Number' column", "Account or credit card number, as assigned by the institution.");
             case Column::Iban:
-                return i18nc("Tooltip for 'IBAN' column",
-                             "Account number in IBAN (International Bank Account Number) format");
+                return i18nc("@info:tooltip for 'IBAN' column", "Account number in IBAN (International Bank Account Number) format");
             case Column::BankCode:
-                return i18nc("Tooltip for 'Bank Code' column. Include an example of the culture-specific term for 'Bank Code' here, if one is common (https://en.wikipedia.org/wiki/Bank_code).",
-                             "A bank code assigned to Institution by a central bank, a bank supervisory body or a Bankers Association. Known as 'Routing Number' (US accounts) or a 'Sort Code' (UK accounts).");
+                return i18nc(
+                    "@info:tooltip for 'Bank Code' column. Include an example of the culture-specific term for 'Bank Code' here, if one is common "
+                    "(https://en.wikipedia.org/wiki/Bank_code).",
+                    "A bank code assigned to Institution by a central bank, a bank supervisory body or a Bankers Association. Known as 'Routing Number' (US "
+                    "accounts) or a 'Sort Code' (UK accounts).");
             case Column::Bic:
-                return i18nc("Tooltip for 'SWIFT/BIC' column",
-                             "A Business Identifier Code, also known as SWIFT.");
+                return i18nc("@info:tooltip for 'SWIFT/BIC' column", "A Business Identifier Code, also known as SWIFT.");
             default:
                 return QVariant();
             }
@@ -489,9 +484,6 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
             }
             break;
 
-        case Column::TotalBalance:
-            return QVariant();
-
         case Column::Balance:
         {
             auto security = MyMoneyFile::instance()->security(account.currencyId());
@@ -530,7 +522,6 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
         case AccountsModel::Column::Vat:
         case AccountsModel::Column::Balance:
         case AccountsModel::Column::PostedValue:
-        case AccountsModel::Column::TotalBalance:
         case AccountsModel::Column::TotalPostedValue:
             return QVariant(Qt::AlignRight | Qt::AlignVCenter);
         case AccountsModel::Column::HasOnlineMapping:

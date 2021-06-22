@@ -152,7 +152,6 @@ QVariant InstitutionsModel::data(const QModelIndex& idx, int role) const
         case AccountsModel::Column::Vat:
         case AccountsModel::Column::Balance:
         case AccountsModel::Column::PostedValue:
-        case AccountsModel::Column::TotalBalance:
         case AccountsModel::Column::TotalPostedValue:
             return QVariant(Qt::AlignRight | Qt::AlignVCenter);
         default:

@@ -14,17 +14,15 @@ File=kmymoney/kmymoneyrc
 Group=General Options
 RemoveKey=showTitleBar
 
-Id=reset-accountview-headers-2021
+Id=reset-accountview-2021
 File=kmymoney/kmymoneyrc
-Group=KAccountsView
-RemoveKey=HeaderState
+RemoveGroup=KAccountsView
 
-Id=reset-categoriesview-headers-2021
+Id=reset-categoriesview-2021
 File=kmymoney/kmymoneyrc
-Group=KCategoriesView
-RemoveKey=HeaderState
+RemoveGroup=KCategoriesView
 
-Id=reset-institutionsview-headers-2021
+Id=reset-institutionsview-2021
 File=kmymoney/kmymoneyrc
-Group=KInstitutionsView
-RemoveKey=HeaderState
+RemoveGroup=KInstitutionsView
+
