@@ -41,6 +41,7 @@ cmake $KMYMONEY_SOURCES \
     -DBUILD_TESTING=FALSE \
     -DENABLE_WEBENGINE=TRUE \
     -DIS_APPIMAGE=TRUE
+    -DFETCH_TRANSLATIONS=ON
 
 # Build and Install KMyMoney (ready for the next phase)
 make -j$CPU_COUNT install
