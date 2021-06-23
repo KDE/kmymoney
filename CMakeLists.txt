@@ -48,6 +48,10 @@ find_package(ECM 5.42 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
 include(KDEInstallDirs)
+if (NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/po)
+    # Block KDE's translation infrastructure, we'll use our own
+    add_custom_target(fetch-translations)
+endif()
 include(KDECMakeSettings)
 # reimplementation because kmymoney app image is bound to ECM 5.36
 if("${ECM_GLOBAL_FIND_VERSION}" VERSION_LESS "5.38.0")
@@ -124,6 +128,7 @@ cmake_dependent_option(ENABLE_GPG "Enable GPG support." ON
 add_feature_info("Encryption" ENABLE_GPG "Allows to store your financial data using strong GPG encryption.")
 
 add_definitions(-DQT_USE_QSTRINGBUILDER -DQT_NO_CAST_TO_ASCII -DQT_NO_URL_CAST_FROM_STRING)
+add_definitions(-DTRANSLATION_DOMAIN=\"kmymoney\")
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -301,6 +306,60 @@ add_feature_info("prefix.sh" KDE_INSTALL_PREFIX_SCRIPT "create prefix.sh script 
 
 # TODO: this should be removed
 enable_testing()
+
+# Source translations (copied from Krita)
+option(FETCH_TRANSLATIONS "Retrieve translations before building KMyMoney" OFF)
+add_feature_info("K10N translations" FETCH_TRANSLATIONS "Retrieve the translations from KDE L10N before building")
+
+if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/po AND FETCH_TRANSLATIONS)
+    find_package(Python3 COMPONENTS Interpreter REQUIRED)
+    set_package_properties(Python3 PROPERTIES
+            DESCRIPTION "Python is an interpreted, high-level and general-purpose programming language."
+            URL "https://python.org/"
+            TYPE OPTIONAL
+            PURPOSE "Required to manually parse and fetch available translations.")
+    find_package(Subversion 1.4)
+    set_package_properties(Subversion PROPERTIES
+            DESCRIPTION "Subversion is an open source version control system"
+            URL "https://subversion.apache.org/"
+            TYPE OPTIONAL
+            PURPOSE "Required to access the KDE i18n repository.")
+
+    if (Subversion_FOUND AND Python3_FOUND)
+        set(TRANSLATIONS ${CMAKE_CURRENT_BINARY_DIR}/po)
+
+# todo: handle stable/unstable builds and their appropriate translations
+#        if (DEFINED KMYMONEY_STABLE_BRANCH)
+#            set(tr_EXTRA_FLAGS "")
+#        else()
+            set(tr_EXTRA_FLAGS "--unstable")
+#        endif()
+
+        get_filename_component(absolute_podir ${TRANSLATIONS} ABSOLUTE)
+        string(MD5 pathmd5 ${absolute_podir})
+
+        find_file (KMYMONEY_PO_SCRIPT copy_po.py PATHS ${CMAKE_CURRENT_SOURCE_DIR}/packaging REQUIRED)
+        if (NOT TARGET fetch-${pathmd5})
+            file(MAKE_DIRECTORY ${TRANSLATIONS})
+
+            add_custom_target(fetch-${pathmd5}
+                    COMMENT "Retrieving translations..."
+                    COMMAND ${Python3_EXECUTABLE} ${KMYMONEY_PO_SCRIPT} ${tr_EXTRA_FLAGS}
+                    BYPRODUCTS ${TRANSLATIONS}
+                    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                    )
+        endif()
+    endif()
+endif()
+
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/po OR EXISTS ${CMAKE_CURRENT_BINARY_DIR}/po )
+    find_package(KF5I18n CONFIG REQUIRED)
+    ki18n_install(po)
+    if (TRANSLATIONS)
+        add_dependencies(pofiles-${pathmd5} fetch-${pathmd5})
+        add_dependencies(tsfiles-${pathmd5} fetch-${pathmd5})
+    endif()
+endif()
 
 ######################### Settings ##########################
 
