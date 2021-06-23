@@ -49,7 +49,7 @@ void KTransactionFilter::slotReset()
     d->ui->m_textEdit->setText(QString());
     d->ui->m_regExp->setChecked(false);
     d->ui->m_caseSensitive->setChecked(false);
-    d->ui->m_textNegate->setCurrentItem(0);
+    d->ui->m_textNegate->setCurrentIndex(0);
 
     d->ui->m_amountEdit->setEnabled(true);
     d->ui->m_amountFromEdit->setEnabled(false);
