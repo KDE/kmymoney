@@ -580,6 +580,17 @@ public:
     void setCostCenterRequired(bool required = true);
 
     /**
+     * This method returns true if a category is to be included in tax reports
+     */
+    bool isInTaxReports() const;
+
+    /**
+     * This method allows to control if this account (category) is to be included
+     * in tax reports. It is if @a include is @c true (the default).
+     */
+    void setIsInTaxReports(bool include = true);
+
+    /**
      * This method returns a name that has a brokerage suffix of
      * the current name. It only works on investment accounts and
      * returns the name for all other cases.

@@ -3702,7 +3702,7 @@ void MyMoneyFile::updateVAT(MyMoneyTransaction& transaction) const
             if (category.id().isEmpty() && !acc.value("VatAccount").isEmpty()) {
                 category = acc;
                 continue;
-            } else if(taxSplit.id().isEmpty() && !acc.value("Tax").toLower().compare(QLatin1String("yes"))) {
+            } else if (taxSplit.id().isEmpty() && !acc.isInTaxReports()) {
                 taxSplit = split;
                 continue;
             }

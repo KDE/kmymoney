@@ -467,7 +467,7 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
             break;
 
         case AccountsModel::Column::Tax:
-            if (account.value("Tax").toLower() == "yes") {
+            if (account.isInTaxReports()) {
                 return QChar(0x2713);
             }
             break;

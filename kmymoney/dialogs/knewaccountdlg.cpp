@@ -215,7 +215,7 @@ public:
             }
             ui->m_qcheckboxPreferred->hide();
 
-            ui->m_qcheckboxTax->setChecked(m_account.value("Tax").toLower() == "yes");
+            ui->m_qcheckboxTax->setChecked(m_account.isInTaxReports());
             ui->m_costCenterRequiredCheckBox->setChecked(m_account.isCostCenterRequired());
 
             loadVatAccounts();
@@ -224,7 +224,7 @@ public:
             int taxtab = ui->m_tab->indexOf(ui->m_taxTab);
             if (taxtab != -1) {
                 ui->m_vatCategory->setText(i18n("VAT account"));
-                ui->m_qcheckboxTax->setChecked(m_account.value("Tax") == "Yes");
+                ui->m_qcheckboxTax->setChecked(m_account.isInTaxReports());
                 loadVatAccounts();
             } else {
                 ui->m_tab->removeTab(taxtab);
@@ -743,7 +743,7 @@ void KNewAccountDlg::okClicked()
         d->m_account.setCostCenterRequired(d->ui->m_costCenterRequiredCheckBox->isChecked());
     }
 
-    d->storeKVP("Tax", d->ui->m_qcheckboxTax);
+    d->m_account.setIsInTaxReports(d->ui->m_qcheckboxTax->isChecked());
 
     if (d->ui->m_qcheckboxOpeningBalance->isChecked())
         d->m_account.setValue("OpeningBalanceAccount", "Yes");

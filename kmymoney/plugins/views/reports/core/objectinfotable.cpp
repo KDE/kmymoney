@@ -284,7 +284,7 @@ void ObjectInfoTable::constructAccountTable()
             accountRow[ctMaxBalanceLimit] = account.value("minBalanceAbsolute");
             accountRow[ctCreditWarning] = account.value("maxCreditEarly");
             accountRow[ctMaxCreditLimit] = account.value("maxCreditAbsolute");
-            accountRow[ctTax] = account.value("Tax") == QLatin1String("Yes") ? i18nc("Is this a tax account?", "Yes") : QString();
+            accountRow[ctTax] = account.isInTaxReports() ? i18nc("Is this a tax account?", "Yes") : QString();
             accountRow[ctOpeningBalance] = account.value("OpeningBalanceAccount") == QLatin1String("Yes") ? i18nc("Is this an opening balance account?", "Yes") : QString();
             accountRow[ctFavorite] = account.value("PreferredAccount") == QLatin1String("Yes") ? i18nc("Is this a favorite account?", "Yes") : QString();
 

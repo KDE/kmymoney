@@ -332,15 +332,29 @@ bool MyMoneyAccount::isLiquidLiability() const
 
 bool MyMoneyAccount::isCostCenterRequired() const
 {
-    return value("CostCenter").toLower() == QLatin1String("yes");
+    return value(QLatin1String("CostCenter")).toLower() == QLatin1String("yes");
 }
 
 void MyMoneyAccount::setCostCenterRequired(bool required)
 {
     if(required) {
-        setValue("CostCenter", "yes");
+        setValue(QLatin1String("CostCenter"), QLatin1String("yes"));
     } else {
-        deletePair("CostCenter");
+        deletePair(QLatin1String("CostCenter"));
+    }
+}
+
+bool MyMoneyAccount::isInTaxReports() const
+{
+    return value(QLatin1String("Tax")).toLower() == QLatin1String("yes");
+}
+
+void MyMoneyAccount::setIsInTaxReports(bool include)
+{
+    if (include) {
+        setValue(QLatin1String("Tax"), QLatin1String("yes"));
+    } else {
+        deletePair(QLatin1String("Tax"));
     }
 }
 
@@ -371,14 +385,14 @@ MyMoneyKeyValueContainer MyMoneyAccount::onlineBankingSettings() const
 void MyMoneyAccount::setClosed(bool closed)
 {
     if (closed)
-        setValue("mm-closed", "yes");
+        setValue(QLatin1String("mm-closed"), QLatin1String("yes"));
     else
-        deletePair("mm-closed");
+        deletePair(QLatin1String("mm-closed"));
 }
 
 bool MyMoneyAccount::isClosed() const
 {
-    return !(value("mm-closed").isEmpty());
+    return !(value(QLatin1String("mm-closed")).isEmpty());
 }
 
 int MyMoneyAccount::fraction(const MyMoneySecurity& sec) const
@@ -569,7 +583,7 @@ bool MyMoneyAccount::addReconciliation(const QDate& date, const MyMoneyMoney& am
                                           (*it).toString());
         sep = QLatin1Char(';');
     }
-    setValue("reconciliationHistory", history);
+    setValue(QLatin1String("reconciliationHistory"), history);
     return true;
 }
 
