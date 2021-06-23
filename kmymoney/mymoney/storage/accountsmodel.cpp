@@ -449,7 +449,22 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
         case Column::Type:
             return account.accountTypeToString(account.accountType());
 
-        case Column::Tax:
+        case Column::HasOnlineMapping:
+            if (account.hasOnlineMapping()) {
+                return QChar(0x2713);
+            }
+            break;
+
+        case AccountsModel::Column::CostCenter:
+            if (account.isCostCenterRequired()) {
+                return QChar(0x2713);
+            }
+            break;
+
+        case AccountsModel::Column::Tax:
+            if (account.value("Tax").toLower() == "yes") {
+                return QChar(0x2713);
+            }
             break;
 
         case Column::Vat:
@@ -462,9 +477,6 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
                 const auto vatRate = MyMoneyMoney(account.value("VatRate")) * MyMoneyMoney(100, 1);
                 return QString::fromLatin1("%1 %").arg(vatRate.formatMoney(QString(), 1));
             }
-            break;
-
-        case Column::CostCenter:
             break;
 
         case Column::TotalBalance:
@@ -511,6 +523,10 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
         case AccountsModel::Column::TotalBalance:
         case AccountsModel::Column::TotalPostedValue:
             return QVariant(Qt::AlignRight | Qt::AlignVCenter);
+        case AccountsModel::Column::HasOnlineMapping:
+        case AccountsModel::Column::CostCenter:
+        case AccountsModel::Column::Tax:
+            return QVariant(Qt::AlignCenter | Qt::AlignVCenter);
         default:
             break;
         }
@@ -552,24 +568,6 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
                 return Icons::get(Icons::Icon::BankAccount);
             } else {
                 return account.accountIcon();
-            }
-            break;
-
-        case AccountsModel::Column::HasOnlineMapping:
-            if (account.hasOnlineMapping()) {
-                return Icons::get(Icons::Icon::DialogOK);
-            }
-            break;
-
-        case AccountsModel::Column::Tax:
-            if (account.value("Tax").toLower() == "yes") {
-                return Icons::get(Icons::Icon::DialogOK);
-            }
-            break;
-
-        case AccountsModel::Column::CostCenter:
-            if (account.isCostCenterRequired()) {
-                return Icons::get(Icons::Icon::DialogOK);
             }
             break;
 
