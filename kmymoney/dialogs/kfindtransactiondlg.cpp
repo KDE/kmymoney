@@ -111,7 +111,7 @@ void KFindTransactionDlg::slotSearch()
 {
     Q_D(KFindTransactionDlg);
     // perform the search only if the button is enabled
-    if (!d->ui->buttonBox->button(QDialogButtonBox::Apply)->isEnabled())
+    if (!d->ui->buttonBox->button(QDialogButtonBox::Open)->isEnabled())
         return;
 
     // setup the filter from the dialog widgets

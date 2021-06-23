@@ -54,7 +54,7 @@
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="standardButtons">
-      <set>QDialogButtonBox::Apply|QDialogButtonBox::Close|QDialogButtonBox::Help|QDialogButtonBox::Reset</set>
+      <set>QDialogButtonBox::Close|QDialogButtonBox::Help|QDialogButtonBox::Open|QDialogButtonBox::Reset</set>
      </property>
     </widget>
    </item>
@@ -73,8 +73,4 @@
  </tabstops>
  <resources/>
  <connections/>
- <buttongroups>
-  <buttongroup name="ButtonGroup1"/>
-  <buttongroup name="ButtonGroup2"/>
- </buttongroups>
 </ui>

@@ -99,19 +99,16 @@ public:
         q->connect(ui->m_register->horizontalHeader(), &QWidget::customContextMenuRequested, q, &KFindTransactionDlg::slotSortOptions);
 
         // setup the connections
-        q->connect(ui->buttonBox->button(QDialogButtonBox::Apply), &QAbstractButton::clicked, q, &KFindTransactionDlg::slotSearch);
+        q->connect(ui->buttonBox->button(QDialogButtonBox::Open), &QAbstractButton::clicked, q, &KFindTransactionDlg::slotSearch);
         q->connect(ui->buttonBox->button(QDialogButtonBox::Reset), &QAbstractButton::clicked, q, &KFindTransactionDlg::slotReset);
         q->connect(ui->buttonBox->button(QDialogButtonBox::Close), &QAbstractButton::clicked, q, &QObject::deleteLater);
         q->connect(ui->buttonBox->button(QDialogButtonBox::Help), &QAbstractButton::clicked, q, &KFindTransactionDlg::slotShowHelp);
 
         // only allow searches when a selection has been made
-        ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
-        ui->buttonBox->button(QDialogButtonBox::Apply)->setDefault(true);
-        ui->buttonBox->button(QDialogButtonBox::Apply)->setAutoDefault(true);
-        KGuiItem::assign(ui->buttonBox->button(QDialogButtonBox::Apply), KStandardGuiItem::find());
-        ui->buttonBox->button(QDialogButtonBox::Apply)->setToolTip(i18nc("@info:tooltip for find transaction apply button", "Search transactions"));
-        q->connect(m_tabFilters, &KTransactionFilter::selectionNotEmpty, ui->buttonBox->button(QDialogButtonBox::Apply), &QWidget::setEnabled);
-
+        ui->buttonBox->button(QDialogButtonBox::Open)->setEnabled(false);
+        KGuiItem::assign(ui->buttonBox->button(QDialogButtonBox::Open), KStandardGuiItem::find());
+        ui->buttonBox->button(QDialogButtonBox::Open)->setToolTip(i18nc("@info:tooltip for find transaction Open button", "Search transactions"));
+        q->connect(m_tabFilters, &KTransactionFilter::selectionNotEmpty, ui->buttonBox->button(QDialogButtonBox::Open), &QWidget::setEnabled);
 
         // get signal about engine changes
         q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KFindTransactionDlg::slotRefreshView);
