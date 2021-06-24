@@ -4,7 +4,6 @@
         <file>kmymoneyui.rc</file>
     </qresource>
     <qresource prefix="/">
-        <file>pics/titlelabel_background.png</file>
         <file>html/kmymoney.css</file>
         <file>html/welcome.css</file>
         <file>html/images/about_kde.png</file>

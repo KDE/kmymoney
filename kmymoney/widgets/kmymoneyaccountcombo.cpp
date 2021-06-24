@@ -85,6 +85,7 @@ public:
             m_q->connect(m_splitAction, &QAction::triggered, m_q, &KMyMoneyAccountCombo::splitDialogRequest);
 
         } else if(!show && m_splitAction) {
+            m_q->lineEdit()->removeAction(m_splitAction);
             m_splitAction->deleteLater();
             m_splitAction = nullptr;
         }

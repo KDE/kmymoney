@@ -8,3 +8,21 @@ Id=remove-hide-acc-opt-2021
 File=kmymoney/kmymoneyrc
 Group=List Options
 RemoveKey=HideClosedAccounts
+
+Id=remove-show-title-bar-2021
+File=kmymoney/kmymoneyrc
+Group=General Options
+RemoveKey=showTitleBar
+
+Id=reset-accountview-2021
+File=kmymoney/kmymoneyrc
+RemoveGroup=KAccountsView
+
+Id=reset-categoriesview-2021
+File=kmymoney/kmymoneyrc
+RemoveGroup=KCategoriesView
+
+Id=reset-institutionsview-2021
+File=kmymoney/kmymoneyrc
+RemoveGroup=KInstitutionsView
+

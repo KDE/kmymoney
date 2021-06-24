@@ -64,11 +64,12 @@ class KScheduledViewPrivate : public KMyMoneyViewBasePrivate
     Q_DECLARE_PUBLIC(KScheduledView)
 
 public:
-    explicit KScheduledViewPrivate(KScheduledView *qq)
+    explicit KScheduledViewPrivate(KScheduledView* qq)
         : KMyMoneyViewBasePrivate(qq)
         , ui(new Ui::KScheduledView)
         , m_filterModel(nullptr)
         , m_needLoad(true)
+        , m_editingCanceled(false)
         , m_balanceWarning(nullptr)
     {
     }
@@ -197,116 +198,105 @@ public:
             try {
                 QDate origDueDate = schedule.nextDueDate();
 
-                dlg->showExtendedKeys(extendedKeys);
+                dlg->setShowExtendedKeys(extendedKeys);
+                KMyMoneyMVCCombo::setSubstringSearchForChildren(dlg, !KMyMoneySettings::stringMatchFromStart());
 
-                QPointer<TransactionEditor> transactionEditor = dlg->startEdit();
-                if (transactionEditor) {
-                    KMyMoneyMVCCombo::setSubstringSearchForChildren(dlg, !KMyMoneySettings::stringMatchFromStart());
-                    MyMoneyTransaction torig, taccepted;
-                    transactionEditor->createTransaction(torig, dlg->transaction(),
-                                                         schedule.transaction().splits().isEmpty() ? MyMoneySplit() : schedule.transaction().splits().front(), true);
-                    // force actions to be available no matter what (will be updated according to the state during
-                    // slotTransactionsEnter or slotTransactionsCancel)
-                    pActions[eMenu::Action::CancelTransaction]->setEnabled(true);
-                    pActions[eMenu::Action::EnterTransaction]->setEnabled(true);
+                auto torig = dlg->transaction();
+                MyMoneyTransaction taccepted;
+                // force actions to be available no matter what (will be updated according to the state during
+                // slotTransactionsEnter or cancelEditing)
+                pActions[eMenu::Action::CancelTransaction]->setEnabled(true);
+                pActions[eMenu::Action::EnterTransaction]->setEnabled(true);
 
-                    KConfirmManualEnterDlg::Action action = KConfirmManualEnterDlg::ModifyOnce;
-                    if (!autoEnter || !schedule.isFixed()) {
-                        for (; dlg != 0;) {
-                            rc = eDialogs::ScheduleResultCode::Cancel;
-                            if (dlg->exec() == QDialog::Accepted && dlg != 0) {
-                                rc = dlg->resultCode();
-                                if (rc == eDialogs::ScheduleResultCode::Enter) {
-                                    transactionEditor->createTransaction(taccepted, torig, torig.splits().isEmpty() ? MyMoneySplit() : torig.splits().front(), true);
-                                    // make sure to suppress comparison of some data: postDate
-                                    torig.setPostDate(taccepted.postDate());
-                                    if (torig != taccepted) {
-                                        QPointer<KConfirmManualEnterDlg> cdlg =
-                                            new KConfirmManualEnterDlg(schedule, q);
-                                        cdlg->loadTransactions(torig, taccepted);
-                                        if (cdlg->exec() == QDialog::Accepted) {
-                                            action = cdlg->action();
-                                            delete cdlg;
-                                            break;
-                                        }
-                                        delete cdlg;
-                                        // the user has chosen 'cancel' during confirmation,
-                                        // we go back to the editor
-                                        continue;
+                KConfirmManualEnterDlg::Action action = KConfirmManualEnterDlg::ModifyOnce;
+                if (!autoEnter || !schedule.isFixed()) {
+                    while (dlg != nullptr) {
+                        rc = eDialogs::ScheduleResultCode::Cancel;
+                        if ((dlg->exec() == QDialog::Accepted) && (dlg != nullptr)) {
+                            rc = dlg->resultCode();
+                            if (rc == eDialogs::ScheduleResultCode::Enter) {
+                                taccepted = dlg->transaction();
+                                // make sure to suppress comparison of some data: postDate
+                                torig.setPostDate(taccepted.postDate());
+                                if (torig != taccepted) {
+                                    QPointer<KConfirmManualEnterDlg> cdlg = new KConfirmManualEnterDlg(schedule, q);
+                                    cdlg->loadTransactions(torig, taccepted);
+                                    if ((cdlg->exec() == QDialog::Accepted) && (cdlg != nullptr)) {
+                                        action = cdlg->action();
+                                        break;
                                     }
-                                } else if (rc == eDialogs::ScheduleResultCode::Skip) {
-                                    slotTransactionsCancel(transactionEditor, schedule);
-                                    skipSchedule(schedule);
-                                } else {
-                                    slotTransactionsCancel(transactionEditor, schedule);
+                                    // the user has chosen 'cancel' during confirmation,
+                                    // we go back to the editor
+                                    continue;
                                 }
-                            } else {
-                                if (autoEnter) {
-                                    if (KMessageBox::warningYesNo(q, i18n("Are you sure you wish to stop this scheduled transaction from being entered into the register?\n\nKMyMoney will prompt you again next time it starts unless you manually enter it later.")) == KMessageBox::No) {
-                                        // the user has chosen 'No' for the above question,
-                                        // we go back to the editor
-                                        continue;
-                                    }
-                                }
-                                slotTransactionsCancel(transactionEditor, schedule);
+                                break;
+
+                            } else if (rc == eDialogs::ScheduleResultCode::Skip) {
+                                skipSchedule(schedule);
                             }
+                        } else {
+                            if (autoEnter) {
+                                if (KMessageBox::warningYesNo(
+                                        q,
+                                        i18n("Are you sure you wish to stop this scheduled transaction from being entered into the register?\n\nKMyMoney will "
+                                             "prompt you again next time it starts unless you manually enter it later."))
+                                    == KMessageBox::No) {
+                                    // the user has chosen 'No' for the above question,
+                                    // we go back to the editor
+                                    continue;
+                                }
+                            }
+                        }
+                        cancelEditing();
+                        break;
+                    }
+                }
+
+                // if we still have the editor around here, the user did not cancel
+                if ((dlg != nullptr) && (!m_editingCanceled)) {
+                    MyMoneyFileTransaction ft;
+                    try {
+                        MyMoneyTransaction t(taccepted);
+                        // add the new transaction
+                        switch (action) {
+                        case KConfirmManualEnterDlg::UseOriginal:
+                            // setup widgets with original transaction data
+                            t = torig;
+                            break;
+
+                        case KConfirmManualEnterDlg::ModifyAlways:
+                            torig = taccepted;
+                            torig.setPostDate(origDueDate);
+                            schedule.setTransaction(torig);
+                            break;
+
+                        case KConfirmManualEnterDlg::ModifyOnce:
                             break;
                         }
-                    }
 
-                    // if we still have the editor around here, the user did not cancel
-                    if ((transactionEditor != 0) && (dlg != 0)) {
-                        MyMoneyFileTransaction ft;
-                        try {
-                            MyMoneyTransaction t;
-                            // add the new transaction
-                            switch (action) {
-                            case KConfirmManualEnterDlg::UseOriginal:
-                                // setup widgets with original transaction data
-                                transactionEditor->setTransaction(dlg->transaction(), dlg->transaction().splits().isEmpty() ? MyMoneySplit() : dlg->transaction().splits().front());
-                                // and create a transaction based on that data
-                                taccepted = MyMoneyTransaction();
-                                transactionEditor->createTransaction(taccepted, dlg->transaction(),
-                                                                     dlg->transaction().splits().isEmpty() ? MyMoneySplit() : dlg->transaction().splits().front(), true);
-                                break;
+                        MyMoneyFile::instance()->addTransaction(t);
 
-                            case KConfirmManualEnterDlg::ModifyAlways:
-                                torig = taccepted;
-                                torig.setPostDate(origDueDate);
-                                schedule.setTransaction(torig);
-                                break;
-
-                            case KConfirmManualEnterDlg::ModifyOnce:
-                                break;
-                            }
-
-                            QString newId;
-                            q->connect(transactionEditor, &TransactionEditor::balanceWarning, m_balanceWarning.data(), &KBalanceWarning::slotShowMessage);
-                            if (transactionEditor->enterTransactions(newId, false)) {
-                                if (!newId.isEmpty()) {
-                                    t = MyMoneyFile::instance()->transaction(newId);
-                                    schedule.setLastPayment(t.postDate());
-                                }
-                                // in case the next due date is invalid, the schedule is finished
-                                // we mark it as such by setting the next due date to one day past the end
-                                QDate nextDueDate = schedule.nextPayment(origDueDate);
-                                if (!nextDueDate.isValid()) {
-                                    schedule.setNextDueDate(schedule.endDate().addDays(1));
-                                } else {
-                                    schedule.setNextDueDate(nextDueDate);
-                                }
-                                MyMoneyFile::instance()->modifySchedule(schedule);
-                                rc = eDialogs::ScheduleResultCode::Enter;
-
-                                // delete the editor before we emit the dataChanged() signal from the
-                                // engine. Calling this twice in a row does not hurt.
-                                delete transactionEditor;
-                                ft.commit();
-                            }
-                        } catch (const MyMoneyException &e) {
-                            KMessageBox::detailedSorry(q, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e.what());
+                        // we should not need this because addTransaction() does
+                        // update the data, but we want to stay on the safe side
+                        if (!t.id().isEmpty()) {
+                            t = MyMoneyFile::instance()->transaction(t.id());
+                            schedule.setLastPayment(t.postDate());
                         }
-                        delete transactionEditor;
+
+                        // in case the next due date is invalid, the schedule is finished
+                        // we mark it as such by setting the next due date to one day past the end
+                        QDate nextDueDate = schedule.nextPayment(origDueDate);
+                        if (!nextDueDate.isValid()) {
+                            schedule.setNextDueDate(schedule.endDate().addDays(1));
+                        } else {
+                            schedule.setNextDueDate(nextDueDate);
+                        }
+                        MyMoneyFile::instance()->modifySchedule(schedule);
+                        rc = eDialogs::ScheduleResultCode::Enter;
+
+                        ft.commit();
+                    } catch (const MyMoneyException& e) {
+                        KMessageBox::detailedSorry(q, i18n("Unable to enter scheduled transaction '%1'", schedule.name()), e.what());
                     }
                 }
             } catch (const MyMoneyException &e) {
@@ -317,16 +307,14 @@ public:
         return rc;
     }
 
-    void slotTransactionsCancel(TransactionEditor* editor, const MyMoneySchedule& schedule)
+    void cancelEditing()
     {
-        Q_UNUSED(schedule)
         // since we jump here via code, we have to make sure to react only
         // if the action is enabled
         if (pActions[eMenu::Action::CancelTransaction]->isEnabled()) {
             // make sure, we block the enter function
             pActions[eMenu::Action::EnterTransaction]->setEnabled(false);
-            // qDebug("KMyMoneyApp::slotTransactionsCancel");
-            delete editor;
+            m_editingCanceled = true;
         }
     }
 
@@ -369,7 +357,7 @@ public:
       * This member holds the initial load state of the view
       */
     bool m_needLoad;
-
+    bool m_editingCanceled;
     MyMoneySchedule m_currentSchedule;
 
     QScopedPointer<KBalanceWarning> m_balanceWarning;

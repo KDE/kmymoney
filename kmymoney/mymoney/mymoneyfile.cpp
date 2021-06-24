@@ -1010,7 +1010,7 @@ bool MyMoneyFile::isStandardAccount(const QString& id) const
 bool MyMoneyFile::isInvestmentTransaction(const MyMoneyTransaction& t) const
 {
     for (const auto& split : t.splits()) {
-        auto acc = account(split.accountId());
+        auto acc = d->accountsModel.itemById(split.accountId());
         if (!acc.id().isEmpty()) {
             if (acc.isInvest() && (split.investmentTransactionType() != eMyMoney::Split::InvestmentTransactionType::UnknownTransactionType)) {
                 return true;
@@ -3702,7 +3702,7 @@ void MyMoneyFile::updateVAT(MyMoneyTransaction& transaction) const
             if (category.id().isEmpty() && !acc.value("VatAccount").isEmpty()) {
                 category = acc;
                 continue;
-            } else if(taxSplit.id().isEmpty() && !acc.value("Tax").toLower().compare(QLatin1String("yes"))) {
+            } else if (taxSplit.id().isEmpty() && !acc.isInTaxReports()) {
                 taxSplit = split;
                 continue;
             }

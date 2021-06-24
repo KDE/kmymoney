@@ -40,7 +40,8 @@ cmake $KMYMONEY_SOURCES \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -DBUILD_TESTING=FALSE \
     -DENABLE_WEBENGINE=TRUE \
-    -DIS_APPIMAGE=TRUE
+    -DIS_APPIMAGE=TRUE \
+    -DFETCH_TRANSLATIONS=ON
 
 # Build and Install KMyMoney (ready for the next phase)
 make -j$CPU_COUNT install

@@ -1609,7 +1609,8 @@ void MyMoneyGncReader::convertAccount(const GncAccount* gac)
             if (!priceSource.isEmpty()) getPriceSource(e, priceSource);
         }
 
-        if (gac->getKvpValue("tax-related", "integer") == QChar('1')) acc.setValue("Tax", "Yes");
+        if (gac->getKvpValue("tax-related", "integer") == QChar('1'))
+            acc.setIsInTaxReports(true);
         // all the details from the file about the account should be known by now.
         // calling addAccount will automatically fill in the account ID.
         MyMoneyAccount parent;

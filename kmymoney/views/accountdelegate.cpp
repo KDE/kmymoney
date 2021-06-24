@@ -9,9 +9,10 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QApplication>
+#include <QDebug>
 #include <QPainter>
 #include <QTreeView>
-#include <QDebug>
 
 // ----------------------------------------------------------------------------
 // KDE Includes
@@ -60,14 +61,11 @@ void AccountDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
 
     if (view) {
         switch(index.column()) {
-        case AccountsModel::Column::TotalBalance:
-            opt.text.clear();
+        case AccountsModel::Column::Balance:
             baseIdx = index.model()->index(index.row(), 0, index.parent());
-            if (index.parent().isValid() && (view->isExpanded(baseIdx) || index.model()->rowCount(index) == 0)) {
-                if (baseIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString() != MyMoneyFile::instance()->baseCurrency().id()) {
-                    paint(painter, option, index.model()->index(index.row(), AccountsModel::Column::Balance, index.parent()));
-                    return;
-                }
+            if (!view->isExpanded(baseIdx) && index.model()->rowCount(index) != 0
+                && baseIdx.data(eMyMoney::Model::AccountCurrencyIdRole).toString() != MyMoneyFile::instance()->baseCurrency().id()) {
+                opt.text.clear();
             }
             break;
 
@@ -81,9 +79,5 @@ void AccountDelegate::paint(QPainter* painter, const QStyleOptionViewItem& optio
         }
     }
 
-    painter->save();
-
-    QStyledItemDelegate::paint(painter, opt, index);
-
-    painter->restore();
+    QApplication::style()->drawControl(QStyle::CE_ItemViewItem, &opt, painter);
 }

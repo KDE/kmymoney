@@ -1,0 +1,16 @@
+maintainer: tbaumgart
+fancyname: KMyMoney Plugin API
+description: KMyMoney Plugin API documentation
+platforms:
+  - name: Linux
+  - name: Windows
+  - name: macOS
+release: true
+public_lib: true
+public_source_dirs:
+  - kmymoney/interfaces
+public_example_dirs:
+  - kmymoney/plugins/onlinejobpluginmockup
+logo: logo.png
+irc: kmymoney
+mailinglist: kmymoney-devel

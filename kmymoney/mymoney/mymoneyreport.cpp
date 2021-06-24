@@ -943,7 +943,7 @@ bool MyMoneyReport::includes(const MyMoneyAccount& acc) const
         case eMyMoney::Account::Type::Income:
         case eMyMoney::Account::Type::Expense:
             if (isTax())
-                result = (acc.value("Tax") == "Yes") && includesCategory(acc.id());
+                result = acc.isInTaxReports() && includesCategory(acc.id());
             else
                 result = includesCategory(acc.id());
             break;

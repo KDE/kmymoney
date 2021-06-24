@@ -74,7 +74,6 @@ class MyMoneySecurity;
 class MyMoneyReport;
 class TransactionEditor;
 class KOnlineJobOutbox;
-class KMyMoneyTitleLabel;
 class MyMoneyAccount;
 class MyMoneyMoney;
 class MyMoneyObject;

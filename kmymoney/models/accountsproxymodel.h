@@ -111,6 +111,13 @@ public:
      */
     static QVector<eMyMoney::Account::Type> incomeExpense();
 
+    /**
+     * This is a convenience method which returns a prefilled vector
+     * to be used with accAccountGroup() for asset, liability, equity, income and expense
+     * accounts.
+     */
+    static QVector<eMyMoney::Account::Type> assetLiabilityEquityIncomeExpense();
+
 protected:
     const QScopedPointer<AccountsProxyModelPrivate> d_ptr;
     AccountsProxyModel(AccountsProxyModelPrivate &dd, QObject *parent);

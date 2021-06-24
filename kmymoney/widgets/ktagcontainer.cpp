@@ -75,9 +75,9 @@ public:
     QList<KTagLabel*>           m_tagLabelList;
 };
 
-KTagContainer::KTagContainer(QWidget* parent) :
-    QWidget(parent),
-    d_ptr(new KTagContainerPrivate(this))
+KTagContainer::KTagContainer(QWidget* parent)
+    : QWidget(parent)
+    , d_ptr(new KTagContainerPrivate(this))
 {
     Q_D(KTagContainer);
     d->m_tagCombo = new QComboBox(this);
@@ -85,7 +85,7 @@ KTagContainer::KTagContainer(QWidget* parent) :
     d->m_tagCombo->setInsertPolicy(QComboBox::NoInsert);
 
     QHBoxLayout *layout = new QHBoxLayout;
-    layout->setContentsMargins(0, 0, 5, 0);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
     layout->addWidget(d->m_tagCombo, 100);
     setLayout(layout);

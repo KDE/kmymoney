@@ -31,8 +31,6 @@ MyMoneyTransaction::MyMoneyTransaction() :
 {
     Q_D(MyMoneyTransaction);
     d->m_nextSplitID = 1;
-    d->m_entryDate = QDate();
-    d->m_postDate = QDate();
 }
 
 MyMoneyTransaction::MyMoneyTransaction(const QString &id) :
@@ -40,8 +38,6 @@ MyMoneyTransaction::MyMoneyTransaction(const QString &id) :
 {
     Q_D(MyMoneyTransaction);
     d->m_nextSplitID = 1;
-    d->m_entryDate = QDate();
-    d->m_postDate = QDate();
 }
 
 MyMoneyTransaction::MyMoneyTransaction(const MyMoneyTransaction& other) :

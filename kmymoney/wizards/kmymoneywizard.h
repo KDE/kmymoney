@@ -25,105 +25,102 @@ class KMyMoneyWizardPage;
 template <class T> class QList;
 
 /**
-  * @author Thomas Baumgart (C) 2006
-  *
-  * This is a base class for implementation of the KMyMoneyWizard. It provides
-  * the following layout of a wizard:
-  *
-  * @code
-  * +-wizardLayout-----------------------------------------------+
-  * |                                                            |
-  * +------------------------------------------------------------+
-  * |+-stepLayout--++-------------------------------------------+|
-  * ||             ||+-pageLayout------------------------------+||
-  * ||             |||                                         |||
-  * ||             |||                                         |||
-  * ||             |||                                         |||
-  * ||             |||                                         |||
-  * ||             |||                                         |||
-  * ||             |||                                         |||
-  * ||             ||+-----------------------------------------+||
-  * ||             |||+-buttonLayout--------------------------+|||
-  * ||             ||||                                       ||||
-  * ||             |||+---------------------------------------+|||
-  * ||             ||+-----------------------------------------+||
-  * |+-------------++-------------------------------------------+|
-  * +------------------------------------------------------------+
-  * @endcode
-  *
-  * The top bar is filled with a KMyMoneyTitleLabel as known from
-  * KMyMoney's views. To the left there is an area in the same color
-  * as the title bar showing the steps for this wizard. Each such step
-  * can consist of one or more wizard pages. At the bottom of this area
-  * the text "Step x of y" is shown and updated. To the right of this
-  * part, the actual wizard page is shown. At the bottom of the page
-  * the class inserts a standard button widget consisting of a Help,
-  * Back, Next/Finish and Cancel button.
-  *
-  * The wizard serves as container for the wizard pages. In order to access
-  * the data filled into the pages, one would have to provide getter methods.
-  *
-  * Here is an example how this object could be used. Please also see the
-  * example described with the KMyMoneyWizardPage class.
-  *
-  * @code
-  *
-  * class KNewUserGeneral;
-  * class KNewUserPersonal;
-  *
-  * class KNewUserWizard : public KMyMoneyWizard
-  * {
-  *   Q_OBJECT
-  * public:
-  *   KNewUserWizard(QWidget* parent = nullptr, const char* name = 0, bool modal = false, Qt::WindowFlags flags = {});
-  *
-  * private:
-  *   KNewUserGeneral*  m_generalPage;
-  *   KNewUserPersonal* m_personalPage;
-  *   KNewUserFinal*    m_finalPage;
-  *   // add more pages here
-  *
-  *   friend class KNewUserGeneral;
-  *   friend class KNewUserPersonal;
-  *   friend class KNewUserFinal;
-  *   // add more pages here
-  * };
-  * @endcode
-  *
-  * The implementation is also easy and looks like this:
-  *
-  * @code
-  * KNewUserWizard::KNewUserWizard(QWidget* parent, const char* name, bool modal, Qt::WindowFlags flags) :
-  *   KMyMoneyWizard(parent, name, modal, flags)
-  * {
-  *   setTitle("KMyMoney New User Setup");
-  *   addStep("General Data");
-  *   addStep("Personal Data");
-  *   addStep("Finish");
-  *
-  *   m_generalPage = new KNewUserGeneral(this);
-  *   m_personalPage = new KNewUserPersonal(this);
-  *   m_finalPage = new KNewUserFinal(this);
-  *
-  *   setFirstPage(m_testPage1);
-  * }
-  * @endcode
-  *
-  * Don't forget to call setFirstPage() to get things started.
-  *
-  * The code to use this whole structure would then look something like this:
-  *
-  * @code
-  *     KNewUserWizard* wizard = new KNewUserWizard(this, "NewUserWizard");
-  *     int rc = wizard->exec();
-  * @endcode
-  *
-  * The return code of exec() is either @p QDialog::Accepted or
-  * @p QDialog::Rejected.
-  *
-  * @note The implementation of this class is heavily based on ideas found at
-  *       https://doc.qt.io/qt-5/qtwidgets-dialogs-licensewizard-example.html
-  */
+ * @author Thomas Baumgart (C) 2006
+ *
+ * This is a base class for implementation of the KMyMoneyWizard. It provides
+ * the following layout of a wizard:
+ *
+ * @code
+ * +-wizardLayout-----------------------------------------------+
+ * |+-stepLayout--++-------------------------------------------+|
+ * ||             ||+-pageLayout------------------------------+||
+ * ||             |||                                         |||
+ * ||             |||                                         |||
+ * ||             |||                                         |||
+ * ||             |||                                         |||
+ * ||             |||                                         |||
+ * ||             |||                                         |||
+ * ||             ||+-----------------------------------------+||
+ * ||             |||+-buttonLayout--------------------------+|||
+ * ||             ||||                                       ||||
+ * ||             |||+---------------------------------------+|||
+ * ||             ||+-----------------------------------------+||
+ * |+-------------++-------------------------------------------+|
+ * +------------------------------------------------------------+
+ * @endcode
+ *
+ * To the left there is an area in the same color
+ * as the title bar showing the steps for this wizard. Each such step
+ * can consist of one or more wizard pages. At the bottom of this area
+ * the text "Step x of y" is shown and updated. To the right of this
+ * part, the actual wizard page is shown. At the bottom of the page
+ * the class inserts a standard button widget consisting of a Help,
+ * Back, Next/Finish and Cancel button.
+ *
+ * The wizard serves as container for the wizard pages. In order to access
+ * the data filled into the pages, one would have to provide getter methods.
+ *
+ * Here is an example how this object could be used. Please also see the
+ * example described with the KMyMoneyWizardPage class.
+ *
+ * @code
+ *
+ * class KNewUserGeneral;
+ * class KNewUserPersonal;
+ *
+ * class KNewUserWizard : public KMyMoneyWizard
+ * {
+ *   Q_OBJECT
+ * public:
+ *   KNewUserWizard(QWidget* parent = nullptr, const char* name = 0, bool modal = false, Qt::WindowFlags flags = {});
+ *
+ * private:
+ *   KNewUserGeneral*  m_generalPage;
+ *   KNewUserPersonal* m_personalPage;
+ *   KNewUserFinal*    m_finalPage;
+ *   // add more pages here
+ *
+ *   friend class KNewUserGeneral;
+ *   friend class KNewUserPersonal;
+ *   friend class KNewUserFinal;
+ *   // add more pages here
+ * };
+ * @endcode
+ *
+ * The implementation is also easy and looks like this:
+ *
+ * @code
+ * KNewUserWizard::KNewUserWizard(QWidget* parent, const char* name, bool modal, Qt::WindowFlags flags) :
+ *   KMyMoneyWizard(parent, name, modal, flags)
+ * {
+ *   setTitle("KMyMoney New User Setup");
+ *   addStep("General Data");
+ *   addStep("Personal Data");
+ *   addStep("Finish");
+ *
+ *   m_generalPage = new KNewUserGeneral(this);
+ *   m_personalPage = new KNewUserPersonal(this);
+ *   m_finalPage = new KNewUserFinal(this);
+ *
+ *   setFirstPage(m_testPage1);
+ * }
+ * @endcode
+ *
+ * Don't forget to call setFirstPage() to get things started.
+ *
+ * The code to use this whole structure would then look something like this:
+ *
+ * @code
+ *     KNewUserWizard* wizard = new KNewUserWizard(this, "NewUserWizard");
+ *     int rc = wizard->exec();
+ * @endcode
+ *
+ * The return code of exec() is either @p QDialog::Accepted or
+ * @p QDialog::Rejected.
+ *
+ * @note The implementation of this class is heavily based on ideas found at
+ *       https://doc.qt.io/qt-5/qtwidgets-dialogs-licensewizard-example.html
+ */
 class KMyMoneyWizardPrivate;
 class KMM_WIZARD_EXPORT KMyMoneyWizard : public QDialog
 {

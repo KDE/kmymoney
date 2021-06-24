@@ -36,6 +36,10 @@ InterestChargeCheckingsWizardPage::InterestChargeCheckingsWizardPage(QWidget *pa
 
     registerField("payeeEdit", ui->m_payeeEdit, "selectedItem", SIGNAL(itemSelected(QString)));
 
+    // reduce the amount of characters shown for a payee
+    ui->m_payeeEdit->setMinimumContentsLength(40);
+    ui->m_payeeEdit->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLength);
+
     connect(ui->m_interestEdit, &AmountEdit::textChanged, this, &QWizardPage::completeChanged);
     connect(ui->m_interestCategoryEdit, &QComboBox::editTextChanged, this, &QWizardPage::completeChanged);
     connect(ui->m_chargesEdit, &AmountEdit::textChanged, this, &QWizardPage::completeChanged);

@@ -18,7 +18,6 @@ set(kmm_widgets_HEADERS
   kmymoneylineedit.h
   kmymoneymvccombo.h
   kmymoneyselector.h
-  kmymoneytitlelabel.h
   kmymoneyvalidationfeedback.h
   onlinejobmessagesview.h
   popuppositioner.h
@@ -58,7 +57,6 @@ set(kmm_base_widgets_SOURCES
   kmymoneyselector.cpp
   kmymoneytextedit.cpp
   kmymoneytextedithighlighter.cpp
-  kmymoneytitlelabel.cpp
   kmymoneyvalidationfeedback.cpp
   ktagcontainer.cpp
   ktaglabel.cpp

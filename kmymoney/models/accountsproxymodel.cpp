@@ -68,8 +68,8 @@ bool AccountsProxyModel::lessThan(const QModelIndex &left, const QModelIndex &ri
         }
         return leftData.toInt() < rightData.toInt();
     }
-    // the total balance and value columns are sorted based on the value of the account
-    case AccountsModel::Column::TotalBalance:
+    // the balance and total value columns are sorted based on the value of the account
+    case AccountsModel::Column::Balance:
     case AccountsModel::Column::TotalPostedValue: {
         const auto leftData = sourceModel()->data(sourceModel()->index(left.row(), AccountsModel::Column::AccountName, left.parent()), eMyMoney::Model::Roles::AccountTotalValueRole);
         const auto rightData = sourceModel()->data(sourceModel()->index(right.row(), AccountsModel::Column::AccountName, right.parent()), eMyMoney::Model::Roles::AccountTotalValueRole);
@@ -425,4 +425,9 @@ QVector<eMyMoney::Account::Type> AccountsProxyModel::assetLiabilityEquity()
 QVector<eMyMoney::Account::Type> AccountsProxyModel::incomeExpense()
 {
     return QVector<eMyMoney::Account::Type>({ eMyMoney::Account::Type::Income, eMyMoney::Account::Type::Expense });
+}
+
+QVector<eMyMoney::Account::Type> AccountsProxyModel::assetLiabilityEquityIncomeExpense()
+{
+    return assetLiabilityEquity() << incomeExpense();
 }

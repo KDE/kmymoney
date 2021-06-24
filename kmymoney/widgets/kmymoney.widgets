@@ -4,9 +4,6 @@ Includes=kcomponentdata.h
 Init=new KInstance("kmmwidgets");
 Group=KMyMoney widgets
 
-[KMyMoneyTitleLabel]
-ToolTip=The KMyMoney title label widget
-
 [kMyMoneyEdit]
 ToolTip=The KMyMoney edit widget
 

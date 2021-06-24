@@ -201,12 +201,11 @@ void KAccountsView::slotNewAccount()
     Q_D(KAccountsView);
     MyMoneyAccount account;
     account.setOpeningDate(KMyMoneySettings::firstFiscalDate());
-    if (!d->m_selections.selection(SelectedObjects::Institution).isEmpty()) {
-        account.setInstitutionId(d->m_selections.selection(SelectedObjects::Institution).at(0));
-    }
-    if (!d->m_selections.selection(SelectedObjects::Account).isEmpty()) {
-        account.setParentAccountId(d->m_selections.selection(SelectedObjects::Account).at(0));
-    }
+
+    account.setAccountType(d->m_currentAccount.accountType());
+    account.setInstitutionId(d->m_currentAccount.institutionId());
+    account.setParentAccountId(d->m_currentAccount.id());
+
     NewAccountWizard::Wizard::newAccount(account);
 }
 
@@ -417,6 +416,7 @@ void KAccountsView::slotAccountMapOnline()
                 MyMoneyFile::instance()->modifyAccount(acc);
                 ft.commit();
                 // The mapping could enable the online task system
+                d->m_currentAccount = acc;
                 onlineJobAdministration::instance()->updateOnlineTaskProperties();
             } catch (const MyMoneyException &e) {
                 KMessageBox::error(this, i18n("Unable to map account to online account: %1", QString::fromLatin1(e.what())));

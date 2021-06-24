@@ -59,15 +59,6 @@ void KMyMoneyViewBase::aboutToHide()
     d->m_isActiveView = false;
 }
 
-void KMyMoneyViewBase::changeEvent(QEvent* ev)
-{
-    QWidget::changeEvent(ev);
-
-    if(ev->type() == QEvent::EnabledChange) {
-        emit viewStateChanged(isEnabled());
-    }
-}
-
 void KMyMoneyViewBase::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
     Q_UNUSED(action)

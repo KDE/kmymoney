@@ -9,6 +9,8 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}/widgets/
                     ${CMAKE_CURRENT_SOURCE_DIR}/mymoney/
                     ${CMAKE_CURRENT_SOURCE_DIR}/mymoney/storage/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/
+                    ${CMAKE_CURRENT_BINARY_DIR}/interfaces/
                     ${CMAKE_CURRENT_SOURCE_DIR}/plugins/
                     ${CMAKE_CURRENT_BINARY_DIR}/plugins/
                     ${CMAKE_CURRENT_SOURCE_DIR}/views/
@@ -37,6 +39,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
 add_subdirectory( mymoney )
 add_subdirectory( settings )
 add_subdirectory( models  )
+add_subdirectory( interfaces )
 add_subdirectory( plugins )
 add_subdirectory( widgets )
 add_subdirectory( dialogs )

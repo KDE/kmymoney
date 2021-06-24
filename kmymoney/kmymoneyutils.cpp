@@ -80,12 +80,12 @@ KMyMoneyUtils::~KMyMoneyUtils()
 
 const QString KMyMoneyUtils::occurrenceToString(const eMyMoney::Schedule::Occurrence occurrence)
 {
-    return i18nc("Frequency of schedule", MyMoneySchedule::occurrenceToString(occurrence).toLatin1());
+    return i18n(MyMoneySchedule::occurrenceToString(occurrence));
 }
 
 const QString KMyMoneyUtils::paymentMethodToString(eMyMoney::Schedule::PaymentType paymentType)
 {
-    return i18nc("Scheduled Transaction payment type", MyMoneySchedule::paymentMethodToString(paymentType).toLatin1());
+    return i18n(MyMoneySchedule::paymentMethodToString(paymentType));
 }
 
 const QString KMyMoneyUtils::weekendOptionToString(eMyMoney::Schedule::WeekendOption weekendOption)
