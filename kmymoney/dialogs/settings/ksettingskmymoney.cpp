@@ -24,6 +24,8 @@
 
 // ----------------------------------------------------------------------------
 // Alikimia Includes
+#include <alkimia/alkonlinequotesprofile.h>
+#include <alkimia/alkonlinequotesprofilemanager.h>
 #include <alkimia/alkonlinequoteswidget.h>
 
 using namespace Icons;
@@ -31,6 +33,25 @@ using namespace Icons;
 KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCoreConfigSkeleton *config)
     : KConfigDialog(parent, name, config)
 {
+    AlkOnlineQuotesProfileList list = AlkOnlineQuotesProfileManager::instance().profiles();
+    if (list.isEmpty()) {
+        AlkOnlineQuotesProfileManager& manager = AlkOnlineQuotesProfileManager::instance();
+
+        manager.addProfile(new AlkOnlineQuotesProfile("no-config-file", AlkOnlineQuotesProfile::Type::None));
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+        manager.addProfile(new AlkOnlineQuotesProfile("alkimia4", AlkOnlineQuotesProfile::Type::Alkimia4, "alkimia-quotes.knsrc"));
+        manager.addProfile(new AlkOnlineQuotesProfile("skrooge4", AlkOnlineQuotesProfile::Type::Skrooge4, "skrooge-quotes.knsrc"));
+        manager.addProfile(new AlkOnlineQuotesProfile("kmymoney4", AlkOnlineQuotesProfile::Type::KMyMoney4, "kmymoney-quotes.knsrc"));
+#else
+        manager.addProfile(new AlkOnlineQuotesProfile("alkimia5", AlkOnlineQuotesProfile::Type::Alkimia5, "alkimia-quotes.knsrc"));
+        manager.addProfile(new AlkOnlineQuotesProfile("skrooge5", AlkOnlineQuotesProfile::Type::Skrooge5, "skrooge-quotes.knsrc"));
+        manager.addProfile(new AlkOnlineQuotesProfile("kmymoney5", AlkOnlineQuotesProfile::Type::KMyMoney5, "kmymoney-quotes.knsrc"));
+#endif
+#ifdef ENABLE_FINANCEQUOTE
+        manager.addProfile(new AlkOnlineQuotesProfile("Finance::Quote", AlkOnlineQuotesProfile::Type::Script));
+#endif
+    }
+
     // create the pages ...
     const auto generalPage = new KSettingsGeneral();
     const auto registerPage = new KSettingsRegister();
