@@ -22,6 +22,10 @@ target_compile_definitions(qsqlcipher-test
 # to a developer under these system to make additions here
 if(CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "Linux")
   if (NOT EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/sqldrivers")
+    FILE(MAKE_DIRECTORY
+        ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
+        ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+        )
     EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E create_symlink
         ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
         ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/sqldrivers
