@@ -26,8 +26,9 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
           WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
           OUTPUT_VARIABLE GIT_BRANCH
           OUTPUT_STRIP_TRAILING_WHITESPACE)
-  string(TOLOWER ${GIT_BRANCH} GIT_BRANCH)
-  if (${GIT_BRANCH} MATCHES "master|main")
+  string(TOLOWER "${GIT_BRANCH}" GIT_BRANCH)
+  message(STATUS "Working on branch ${GIT_BRANCH}")
+  if ("${GIT_BRANCH}" MATCHES "master|main")
       set(KMYMONEY_STABLE_BRANCH FALSE)
       message(STATUS "Detected an unstable ${GIT_BRANCH} branch")
   endif()
