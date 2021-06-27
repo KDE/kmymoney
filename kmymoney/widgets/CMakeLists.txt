@@ -136,7 +136,6 @@ target_link_libraries(kmm_base_widgets PUBLIC
 #  KF5::ItemViews
 #  KF5::I18n
 #  KF5::XmlGui
-#  KF5::IconThemes
 #  KF5::ConfigWidgets
 #  KF5::ConfigCore
 #  KF5::ItemModels
@@ -174,7 +173,6 @@ target_link_libraries(kmm_widgets PUBLIC
   KF5::ItemViews
   KF5::I18n
   KF5::XmlGui
-  KF5::IconThemes
   KF5::ConfigWidgets
   KF5::ConfigCore
   KF5::ItemModels
@@ -193,6 +191,10 @@ target_link_libraries(kmm_widgets PUBLIC
   kmm_base_widgets
   kmm_selections
 )
+
+if (KMYMONEY_STABLE_BRANCH)
+  target_link_libraries(kmm_widgets PUBLIC KF5::IconThemes)
+endif()
 
 set_target_properties(kmm_widgets PROPERTIES
   VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
