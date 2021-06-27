@@ -121,6 +121,10 @@ target_link_libraries(kmm_widgets PUBLIC
   kmm_plugin
 )
 
+if (KMYMONEY_STABLE_BRANCH)
+  target_link_libraries(kmm_widgets PUBLIC KF5::IconThemes)
+endif()
+
 set_target_properties(kmm_widgets PROPERTIES
   VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
   COMPILE_FLAGS "-DKMM_BUILD_WIDGETS_LIB"
