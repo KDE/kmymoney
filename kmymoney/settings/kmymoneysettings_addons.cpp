@@ -13,6 +13,7 @@
 // KDE Includes
 
 #include <KColorScheme>
+#include <QGuiApplication>
 
 // ----------------------------------------------------------------------------
 // Project Includes
@@ -41,53 +42,54 @@ QColor KMyMoneySettings::schemeColor(const SchemeColor color)
 {
     switch(color) {
     case SchemeColor::ListBackground1:
-        return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::NormalBackground).color();
+        return QGuiApplication::palette().color(QPalette::Active, QPalette::Window); //  background, KColorScheme::View, KColorScheme::NormalBackground
     case SchemeColor::ListBackground2:
-        return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::AlternateBackground).color();
+        return QGuiApplication::palette().color(QPalette::Active,
+                                                QPalette::AlternateBase); //  background, KColorScheme::View, KColorScheme::AlternateBackground
     case SchemeColor::ListGrid:
-        return KColorScheme (QPalette::Active, KColorScheme::View).foreground(KColorScheme::InactiveText).color();
+        return QGuiApplication::palette().color(QPalette::Active, QPalette::PlaceholderText); //  foreground, KColorScheme::View, KColorScheme::InactiveText
     case SchemeColor::ListHighlightText:
-        return KColorScheme (QPalette::Active, KColorScheme::Selection).foreground(KColorScheme::NormalText).color();
+        return QGuiApplication::palette().color(QPalette::Active, QPalette::HighlightedText); //  foreground, KColorScheme::Selection, KColorScheme::NormalText
     case SchemeColor::ListHighlight:
-        return KColorScheme (QPalette::Active, KColorScheme::Selection).background(KColorScheme::NormalBackground).color();
+        return QGuiApplication::palette().color(QPalette::Active, QPalette::Highlight); //  background, KColorScheme::Selection, KColorScheme::NormalBackground
     case SchemeColor::WindowText:
-        return KColorScheme (QPalette::Active, KColorScheme::Window).foreground(KColorScheme::NormalText).color();
+        return QGuiApplication::palette().color(QPalette::Active, QPalette::Text); //  foreground, KColorScheme::Window, KColorScheme::NormalText
     case SchemeColor::WindowBackground:
-        return KColorScheme (QPalette::Active, KColorScheme::Window).background(KColorScheme::NormalBackground).color();
+        return QGuiApplication::palette().color(QPalette::Active, QPalette::Background); //  background, KColorScheme::Window, KColorScheme::NormalBackground
     case SchemeColor::Positive:
-        return KColorScheme (QPalette::Active, KColorScheme::View).foreground(KColorScheme::PositiveText).color();
+        return QGuiApplication::palette().color(QPalette::Active, QPalette::Text); //  foreground, KColorScheme::View, KColorScheme::PositiveText
     case SchemeColor::Negative:
-        return KColorScheme (QPalette::Active, KColorScheme::View).foreground(KColorScheme::NegativeText).color();
+        return QGuiApplication::palette().color(QPalette::Active, QPalette::Text); //  foreground, KColorScheme::View, KColorScheme::NegativeText
     case SchemeColor::TransactionImported:
         if (useCustomColors())
             return transactionImportedColor();
         else
-            return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::LinkBackground).color();
+            return QGuiApplication::palette().color(QPalette::Active, QPalette::Link); //  background, KColorScheme::View, KColorScheme::LinkBackground
     case SchemeColor::TransactionMatched:
         if (useCustomColors())
             return transactionMatchedColor();
         else
-            return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::LinkBackground).color();
+            return QGuiApplication::palette().color(QPalette::Active, QPalette::Link); //  background, KColorScheme::View, KColorScheme::LinkBackground
     case SchemeColor::TransactionErroneous:
         if (useCustomColors())
             return transactionErroneousColor();
         else
-            return KColorScheme (QPalette::Active, KColorScheme::View).foreground(KColorScheme::NegativeText).color();
+            return QGuiApplication::palette().color(QPalette::Active, QPalette::Text); //  foreground, KColorScheme::View, KColorScheme::NegativeText
     case SchemeColor::FieldRequired:
         if (useCustomColors())
             return fieldRequiredColor();
         else
-            return KColorScheme (QPalette::Active, KColorScheme::View).background(KColorScheme::NeutralBackground).color();
+            return QGuiApplication::palette().color(QPalette::Active, QPalette::Background); //  background, KColorScheme::View, KColorScheme::NeutralBackground
     case SchemeColor::GroupMarker:
         if (useCustomColors())
             return groupMarkerColor();
         else
-            return KColorScheme (QPalette::Active, KColorScheme::Selection).background(KColorScheme::LinkBackground).color();
+            return QGuiApplication::palette().color(QPalette::Active, QPalette::Link); //  background, KColorScheme::Selection, KColorScheme::LinkBackground
     case SchemeColor::MissingConversionRate:
         if (useCustomColors())
             return missingConversionRateColor();
         else
-            return KColorScheme (QPalette::Active, KColorScheme::Complementary).foreground(KColorScheme::LinkText).color();
+            return QGuiApplication::palette().color(QPalette::Active, QPalette::Link); //  foreground, KColorScheme::Complementary, KColorScheme::LinkText
     default:
         return QColor();
 
