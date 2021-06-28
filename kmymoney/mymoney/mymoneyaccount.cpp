@@ -441,22 +441,20 @@ void MyMoneyAccount::setBalance(const MyMoneyMoney& val)
 
 QPixmap MyMoneyAccount::accountPixmap(const bool reconcileFlag, const int size) const
 {
-    static const QHash<Account::Type, Icon> accToIco {
-        {Account::Type::Asset, Icon::Asset},
-        {Account::Type::Investment, Icon::Stock},
-        {Account::Type::Stock, Icon::Stock},
-        {Account::Type::MoneyMarket, Icon::Stock},
-        {Account::Type::Checkings, Icon::Checking},
-        {Account::Type::Savings, Icon::Savings},
-        {Account::Type::AssetLoan, Icon::LoanAsset},
-        {Account::Type::Loan, Icon::Loan},
-        {Account::Type::CreditCard, Icon::CreditCard},
-        {Account::Type::Asset, Icon::Asset},
-        {Account::Type::Cash, Icon::Cash},
-        {Account::Type::Income, Icon::Income},
-        {Account::Type::Expense, Icon::Expense},
-        {Account::Type::Equity, Icon::Equity}
-    };
+    static const QHash<Account::Type, Icon> accToIco{{Account::Type::Asset, Icon::Asset},
+                                                     {Account::Type::Investment, Icon::Investment},
+                                                     {Account::Type::Stock, Icon::Stock},
+                                                     {Account::Type::MoneyMarket, Icon::Stock},
+                                                     {Account::Type::Checkings, Icon::Checking},
+                                                     {Account::Type::Savings, Icon::Savings},
+                                                     {Account::Type::AssetLoan, Icon::LoanAsset},
+                                                     {Account::Type::Loan, Icon::Loan},
+                                                     {Account::Type::CreditCard, Icon::CreditCard},
+                                                     {Account::Type::Asset, Icon::Asset},
+                                                     {Account::Type::Cash, Icon::Cash},
+                                                     {Account::Type::Income, Icon::Income},
+                                                     {Account::Type::Expense, Icon::Expense},
+                                                     {Account::Type::Equity, Icon::Equity}};
 
     Icon ixIcon = accToIco.value(accountType(), Icon::Liability);
 
