@@ -2877,10 +2877,22 @@ void KMyMoneyApp::Private::saveConsistencyCheckResults()
 void KMyMoneyApp::Private::setThemedCSS()
 {
     const QStringList CSSnames {QStringLiteral("kmymoney.css"), QStringLiteral("welcome.css")};
+#if defined(Q_OS_MAC)
+    const auto rcDir = QStringLiteral("/kmymoney/html/");
+#else
     const QString rcDir("/html/");
+#endif
     QStringList defaultCSSDirs;
 #ifndef IS_APPIMAGE
     defaultCSSDirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, rcDir, QStandardPaths::LocateDirectory);
+    if (defaultCSSDirs.isEmpty()) {
+        qWarning("the 'html' folder was not found in any of the following QStandardPaths::AppDataLocation:");
+        for (const auto& standardPath : QStandardPaths::standardLocations(QStandardPaths::AppDataLocation))
+            qWarning() << standardPath;
+    } else {
+        qDebug() << "Found html dir(s):" << defaultCSSDirs;
+    }
+
 #else
     // according to https://docs.appimage.org/packaging-guide/ingredients.html#open-source-applications
     // QStandardPaths::AppDataLocation is unreliable on AppImages, so apply workaround here in case we fail to find icons
@@ -2902,17 +2914,19 @@ void KMyMoneyApp::Private::setThemedCSS()
         foreach (const auto CSSname, CSSnames) {
             QFileInfo fileInfo(defaultCSSDir + CSSname);
             if (!fileInfo.exists()) {
+                qDebug() << "Tried " << fileInfo.absoluteFilePath() << "but it doesn't exist";
                 defaultCSSDir.clear();
                 break;
             }
         }
         if (!defaultCSSDir.isEmpty()) {
+            qDebug() << "Found an 'html' folder with CSS files:" << defaultCSSDir;
             break;
         }
     }
 
     // make sure we have the local directory where the themed version is stored
-    const QString themedCSSDir  = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation).first() + rcDir;
+    const QString themedCSSDir = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation).first() + "/html/";
     QDir().mkpath(themedCSSDir);
 
     foreach (const auto CSSname, CSSnames) {
