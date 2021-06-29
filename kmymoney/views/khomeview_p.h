@@ -427,9 +427,18 @@ public:
             m_forecast.setForecastDone(false);
 
             const QString filename = QStandardPaths::locate(QStandardPaths::AppConfigLocation, "html/kmymoney.css");
-            QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">\n").arg(QUrl::fromLocalFile(filename).url());
+            QString header = QString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\">\n<html><head>\n");
 
+            // inline the CSS
+            header += "<style type=\"text/css\">\n<!--\n";
             header += KMyMoneyUtils::variableCSS();
+            QFile cssFile(filename);
+            if (cssFile.open(QIODevice::ReadOnly)) {
+                QTextStream cssStream(&cssFile);
+                header += cssStream.readAll();
+                cssFile.close();
+            }
+            header += "-->\n</style>\n";
 
             header += "</head><body id=\"summaryview\">\n";
 

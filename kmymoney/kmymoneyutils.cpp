@@ -199,13 +199,11 @@ QString KMyMoneyUtils::variableCSS()
     QColor link = KColorScheme(QPalette::Active).foreground(KColorScheme::LinkText).color();
 
     QString css;
-    css += "<style type=\"text/css\">\n<!--\n";
     css += QString(".row-even, .item0 { background-color: %1; color: %2 }\n")
            .arg(KMyMoneySettings::schemeColor(SchemeColor::ListBackground1).name()).arg(tcolor.name());
     css += QString(".row-odd, .item1  { background-color: %1; color: %2 }\n")
            .arg(KMyMoneySettings::schemeColor(SchemeColor::ListBackground2).name()).arg(tcolor.name());
     css += QString("a { color: %1 }\n").arg(link.name());
-    css += "-->\n</style>\n";
     return css;
 }
 
