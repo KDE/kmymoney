@@ -20,7 +20,6 @@ services:
       - build:/build
     ports:
       - "7776:22"
-      - "7777:7777"
     environment:
       - DISPLAY=host.docker.internal:0
     hostname: debug
