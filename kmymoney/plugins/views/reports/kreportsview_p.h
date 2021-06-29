@@ -492,6 +492,7 @@ public:
     {
         Q_Q(KReportsView);
         m_needLoad = false;
+        m_needsRefresh = true;
         auto vbox = new QVBoxLayout(q);
         q->setLayout(vbox);
         vbox->setSpacing(6);
