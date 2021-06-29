@@ -21,7 +21,7 @@ RUN eatmydata apt-get build-dep -y kmymoney
 RUN eatmydata apt-get install -y qt5-default qtwebengine5-dev
 RUN eatmydata apt-get install -y libsqlcipher-dev
 RUN eatmydata apt-get install -y libqt5sql5-*
-RUN eatmydata apt-get install -y subversion python3-dev
+RUN eatmydata apt-get install -y subversion python3-dev ninja-build
 RUN eatmydata apt-get install -y breeze-icon-theme fonts-noto-color-emoji
 
 RUN mkdir /var/run/sshd
