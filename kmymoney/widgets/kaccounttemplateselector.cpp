@@ -177,9 +177,20 @@ void KAccountTemplateSelector::slotLoadTemplateList()
     } else {
         qWarning() << "Template directory was not found in the following location:" << templateDirList;
     }
+
+#elif defined(Q_OS_MAC)
+    d->dirlist = QStandardPaths::locateAll(QStandardPaths::DataLocation, "kmymoney/templates", QStandardPaths::LocateDirectory);
 #else
     d->dirlist = QStandardPaths::locateAll(QStandardPaths::DataLocation, "templates", QStandardPaths::LocateDirectory);
 #endif
+
+    if (d->dirlist.isEmpty()) {
+        qWarning("Template files were not found in any of the following QStandardPaths::AppDataLocation:");
+        for (const auto& standardPath : QStandardPaths::standardLocations(QStandardPaths::AppDataLocation))
+            qWarning() << standardPath;
+    } else {
+        qDebug() << "Found template dir(s):" << d->dirlist;
+    }
 
     QStringList::iterator it;
     for (it = d->dirlist.begin(); it != d->dirlist.end(); ++it) {
