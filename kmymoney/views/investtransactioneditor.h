@@ -53,9 +53,6 @@ public:
      */
     MyMoneyMoney totalAmount() const;
 
-protected:
-    virtual void keyPressEvent(QKeyEvent* e) override;
-
 protected Q_SLOTS:
     void editFeeSplits();
     void editInterestSplits();

@@ -692,6 +692,8 @@ InvestTransactionEditor::InvestTransactionEditor(QWidget* parent, const QString&
     d->amountEditCurrencyHelpers.insert(new AmountEditCurrencyHelper(d->ui->feesCombo, d->ui->feesAmountEdit, d->transaction.commodity()));
     d->amountEditCurrencyHelpers.insert(new AmountEditCurrencyHelper(d->ui->interestCombo, d->ui->interestAmountEdit, d->transaction.commodity()));
 
+    setCancelButton(d->ui->cancelButton);
+    setEnterButton(d->ui->enterButton);
     // setWindowFlags(Qt::FramelessWindowHint | Qt::X11BypassWindowManagerHint);
 }
 
@@ -1059,39 +1061,3 @@ bool InvestTransactionEditor::eventFilter(QObject* o, QEvent* e)
     }
     return QFrame::eventFilter(o, e);
 }
-
-void InvestTransactionEditor::keyPressEvent(QKeyEvent* e)
-{
-    if (!e->modifiers() || ((e->modifiers() & Qt::KeypadModifier) && (e->key() == Qt::Key_Enter))) {
-        switch (e->key()) {
-        case Qt::Key_Enter:
-        case Qt::Key_Return: {
-            if (focusWidget() == d->ui->cancelButton) {
-                d->ui->cancelButton->click();
-            } else {
-                if (d->ui->enterButton->isEnabled()) {
-                    // move focus to enter button which
-                    // triggers update of widgets
-                    d->ui->enterButton->setFocus();
-                    d->ui->enterButton->click();
-                }
-                return;
-            }
-        }
-        break;
-
-        case Qt::Key_Escape:
-            d->ui->cancelButton->click();
-            break;
-
-        default:
-            e->ignore();
-            return;
-        }
-    } else {
-        e->ignore();
-    }
-}
-
-
-// kate: indent-mode cstyle; indent-width 4; replace-tabs on; remove-trailing-space on;remove-trailing-space-save on;

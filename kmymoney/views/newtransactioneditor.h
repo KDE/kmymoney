@@ -63,11 +63,7 @@ public:
 
     QDate postDate() const;
 
-protected:
-    virtual void keyPressEvent(QKeyEvent* e) override;
-
 protected Q_SLOTS:
-    virtual void reject();
     virtual void acceptEdit();
 
     // edit splits directly
