@@ -942,20 +942,11 @@ void InvestTransactionEditor::interestValueChanged()
 void InvestTransactionEditor::editFeeSplits()
 {
     d->editSplits(d->feeSplitModel, d->ui->feesAmountEdit, MyMoneyMoney::ONE);
-#if 0
-    QWidget* next = d->ui->tagComboBox;
-    next->setFocus();
-#endif
 }
 
 void InvestTransactionEditor::editInterestSplits()
 {
     d->editSplits(d->interestSplitModel, d->ui->interestAmountEdit, MyMoneyMoney::MINUS_ONE);
-
-#if 0
-    QWidget* next = d->ui->tagComboBox;
-    next->setFocus();
-#endif
 }
 
 MyMoneyMoney InvestTransactionEditor::transactionAmount() const
