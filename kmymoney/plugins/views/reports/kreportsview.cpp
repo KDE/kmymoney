@@ -249,14 +249,25 @@ void KReportsView::slotSaveView()
 {
     Q_D(KReportsView);
     if (auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->currentWidget())) {
-        QString filterList = i18nc("CSV (Filefilter)", "CSV files") + QLatin1String(" (*.csv);;") + i18nc("HTML (Filefilter)", "HTML files") + QLatin1String(" (*.html)");
-        QUrl newURL = QFileDialog::getSaveFileUrl(this, i18n("Export as"), QUrl::fromLocalFile(KRecentDirs::dir(":kmymoney-export")), filterList, &d->m_selectedExportFilter);
+        QPointer<QFileDialog> dialog = new QFileDialog(nullptr, i18n("Export as"), KRecentDirs::dir(":kmymoney-export"));
+        dialog->setMimeTypeFilters({QStringLiteral("text/csv"), QStringLiteral("text/html")});
+        dialog->setFileMode(QFileDialog::AnyFile);
+        dialog->setAcceptMode(QFileDialog::AcceptSave);
+
+        QUrl newURL;
+        QString selectedMimeType;
+        if (dialog->exec() == QDialog::Accepted) {
+            newURL = dialog->selectedUrls().first();
+            selectedMimeType = dialog->selectedMimeTypeFilter();
+        }
+        delete dialog;
+
         if (!newURL.isEmpty()) {
             KRecentDirs::add(":kmymoney-export", newURL.adjusted(QUrl::RemoveFilename | QUrl::StripTrailingSlash).path());
             QString newName = newURL.toDisplayString(QUrl::PreferLocalFile);
 
             try {
-                tab->saveAs(newName, true);
+                tab->saveAs(newName, selectedMimeType, true);
             } catch (const MyMoneyException &e) {
                 KMessageBox::error(this, i18n("Failed to save: %1", QString::fromLatin1(e.what())));
             }
