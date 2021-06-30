@@ -19,6 +19,7 @@ class QWidget;
 
 class MyMoneyTransaction;
 class SplitModel;
+class QAbstractItemModel;
 
 class TransactionEditorBase : public QFrame
 {
@@ -31,6 +32,10 @@ public:
     virtual bool accepted() const = 0;
     virtual void loadTransaction(const QModelIndex& index) = 0;
     virtual void saveTransaction() = 0;
+    virtual void setAmountPlaceHolderText(const QAbstractItemModel* model)
+    {
+        Q_UNUSED(model)
+    }
 
 protected:
     void addSplitsFromModel(MyMoneyTransaction& t, const SplitModel* model) const;

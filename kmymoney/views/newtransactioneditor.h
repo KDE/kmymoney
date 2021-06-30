@@ -45,6 +45,8 @@ public:
     void loadTransaction(const QModelIndex& index) override;
     void saveTransaction() override;
 
+    void setAmountPlaceHolderText(const QAbstractItemModel* model) override;
+
     MyMoneyTransaction transaction() const;
 
     void loadSchedule(const MyMoneySchedule& schedule);

@@ -695,6 +695,12 @@ NewTransactionEditor::~NewTransactionEditor()
 {
 }
 
+void NewTransactionEditor::setAmountPlaceHolderText(const QAbstractItemModel* model)
+{
+    d->ui->amountEditCredit->setPlaceholderText(model->headerData(JournalModel::Column::Payment, Qt::Horizontal).toString());
+    d->ui->amountEditDebit->setPlaceholderText(model->headerData(JournalModel::Column::Deposit, Qt::Horizontal).toString());
+}
+
 bool NewTransactionEditor::accepted() const
 {
     return d->accepted;
