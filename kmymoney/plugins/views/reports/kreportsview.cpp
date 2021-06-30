@@ -249,7 +249,7 @@ void KReportsView::slotSaveView()
 {
     Q_D(KReportsView);
     if (auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->currentWidget())) {
-        QPointer<QFileDialog> dialog = new QFileDialog(nullptr, i18n("Export as"), KRecentDirs::dir(":kmymoney-export"));
+        QPointer<QFileDialog> dialog = new QFileDialog(this, i18n("Export as"), KRecentDirs::dir(":kmymoney-export"));
         dialog->setMimeTypeFilters({QStringLiteral("text/csv"), QStringLiteral("text/html")});
         dialog->setFileMode(QFileDialog::AnyFile);
         dialog->setAcceptMode(QFileDialog::AcceptSave);
