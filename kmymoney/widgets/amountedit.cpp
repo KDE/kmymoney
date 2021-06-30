@@ -290,7 +290,6 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
             cut();
         }
         if (text().length() == 0) {
-            QLineEdit::keyPressEvent(event);
             break;
         }
         // in case of '-' we do not enter the calculator when
@@ -298,7 +297,6 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
         // no '-' sign at the first position.
         if (event->key() == Qt::Key_Minus) {
             if (cursorPosition() == 0 && text()[0] != '-') {
-                QLineEdit::keyPressEvent(event);
                 break;
             }
         }
@@ -312,6 +310,11 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
             cut();
         }
         d->calculatorOpen(event);
+        return;
+
+    case Qt::Key_Return:
+    case Qt::Key_Escape:
+    case Qt::Key_Enter:
         break;
 
     default:
@@ -343,8 +346,12 @@ void AmountEdit::keyPressEvent(QKeyEvent* event)
             QLineEdit::setText(QLatin1String("0"));
         }
         QLineEdit::keyPressEvent(&newEvent);
-        break;
+        return;
     }
+
+    // in case we have not processed anything, we
+    // need to call the base class implementation
+    QLineEdit::keyPressEvent(event);
 }
 
 
