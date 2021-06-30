@@ -130,7 +130,7 @@ public:
      */
     void updateDataRange();
     void copyToClipboard();
-    void saveAs(const QString& filename, bool includeCSS = false);
+    void saveAs(const QString& filename, const QString& selectedMimeType, bool includeCSS);
     void updateReport();
     QString createTable(const QString& links = QString());
     const ReportControl* control() const {
@@ -326,12 +326,12 @@ void KReportTab::copyToClipboard()
     QApplication::clipboard()->setMimeData(pMimeData);
 }
 
-void KReportTab::saveAs(const QString& filename, bool includeCSS)
+void KReportTab::saveAs(const QString& filename, const QString& selectedMimeType, bool includeCSS)
 {
     QFile file(filename);
 
     if (file.open(QIODevice::WriteOnly)) {
-        if (QFileInfo(filename).suffix().toLower() == QLatin1String("csv")) {
+        if (selectedMimeType == QStringLiteral("text/csv")) {
             QTextStream(&file) << m_table->renderReport(QLatin1String("csv"), m_encoding, QString());
         } else {
             QString table =
