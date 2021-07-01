@@ -16,7 +16,7 @@ RUN sed -i -- 's/#[ ]*deb-src/deb-src/g' /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get install -y eatmydata
 RUN eatmydata apt-get upgrade -y
-RUN eatmydata apt-get install -y openssh-server gdb rsync
+RUN eatmydata apt-get install -y openssh-server gdb rsync iputils-ping telnet
 RUN eatmydata apt-get build-dep -y kmymoney
 RUN eatmydata apt-get install -y qt5-default qtwebengine5-dev
 RUN eatmydata apt-get install -y libsqlcipher-dev
