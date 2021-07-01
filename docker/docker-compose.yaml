@@ -10,19 +10,19 @@ services:
     image: kmymoney_dev
     security_opt:
       - seccomp:unconfined
-    container_name: debug
+    container_name: kmymoney_dev_env
     volumes:
-      - ~/KMyMoney:/config
+      - ${HOST_KMM_BOOKS_FOLDER}:/kmm_books
       - ~/.aqbanking:/root/.aqbanking
-      - ~/.config/kmymoney:/root/.config/kmymoney
+      - ${HOST_KMM_CONFIG_FOLDER}:/root/.config/kmymoney
       - ~/.gdbinit:/root/.gdbinit
       - ~/.gdb:/root/.gdb
       - build:/build
     ports:
-      - "7776:22"
+      - "${HOST_SSH_PORT}:22"
     environment:
       - DISPLAY=host.docker.internal:0
-    hostname: debug
+    hostname: kmymoney_dev_env
 
 volumes:
   build:

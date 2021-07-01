@@ -14,3 +14,4 @@ kmymoney/templates/templates.qrc
 .clangd
 .cache
 .idea
+docker/.env
