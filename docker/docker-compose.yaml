@@ -18,6 +18,8 @@ services:
       - ~/.gdbinit:/root/.gdbinit
       - ~/.gdb:/root/.gdb
       - build:/build
+    extra_hosts:
+      host.docker.internal: host-gateway
     ports:
       - "${HOST_SSH_PORT}:22"
     environment:
