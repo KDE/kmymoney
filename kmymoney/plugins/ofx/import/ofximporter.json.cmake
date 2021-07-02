@@ -47,6 +47,7 @@
         "Description[pl]": "Dodaje importowanie OFX do KMyMoney",
         "Description[pt]": "Adição da importação de OFX para o KMyMoney",
         "Description[pt_BR]": "Adiciona importação OFX no KMyMoney",
+        "Description[ru]": "Добавляет в KMyMoney возможность импорта OFX",
         "Description[sk]": "Pridať OFX import do KMyMoney",
         "Description[sl]": "Doda uvoz OFX v KMyMoney",
         "Description[sv]": "Lägg till OFX-import till KMyMoney",

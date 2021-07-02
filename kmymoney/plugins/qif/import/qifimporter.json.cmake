@@ -48,6 +48,7 @@
         "Description[pl]": "Dodaje importowanie QIF do KMyMoney",
         "Description[pt]": "Adição da importação de QIF para o KMyMoney",
         "Description[pt_BR]": "Adiciona importação QIF no KMyMoney",
+        "Description[ru]": "Добавляет в KMyMoney возможность импорта QIF",
         "Description[sk]": "Pridať QIF import do KMyMoney",
         "Description[sl]": "Dodaj v KMyMoney možnost uvoza QIF",
         "Description[sv]": "Lägg till QIF-import till KMyMoney",

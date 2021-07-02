@@ -48,6 +48,7 @@
         "Description[pl]": "Dodaje importowanie CSV do KMyMoney",
         "Description[pt]": "Adição da importação de CSV para o KMyMoney",
         "Description[pt_BR]": "Adiciona importação CSV no KMyMoney",
+        "Description[ru]": "Добавляет в KMyMoney возможность импорта CSV",
         "Description[sk]": "Pridať CSV importovanie do KMyMoney",
         "Description[sl]": "Doda uvoz CSV v KMyMoney",
         "Description[sv]": "Lägg till CSV-import till KMyMoney",
