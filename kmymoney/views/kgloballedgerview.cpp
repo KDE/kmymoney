@@ -1505,7 +1505,6 @@ void KGlobalLedgerView::slotDuplicateTransaction(bool reverse)
         int i = 0;
         int cnt = d->m_selectedTransactions.count();
         //    KMSTATUS(i18n("Duplicating transactions"));
-        emit selectByVariant(QVariantList {QVariant(0), QVariant(cnt)}, eView::Intent::ReportProgress);
         MyMoneyFileTransaction ft;
         MyMoneyTransaction lt;
         try {
@@ -1530,7 +1529,6 @@ void KGlobalLedgerView::slotDuplicateTransaction(bool reverse)
 
                 MyMoneyFile::instance()->addTransaction(t);
                 lt = t;
-                emit selectByVariant(QVariantList {QVariant(i++), QVariant(0)}, eView::Intent::ReportProgress);
             }
             ft.commit();
 
@@ -1540,8 +1538,6 @@ void KGlobalLedgerView::slotDuplicateTransaction(bool reverse)
         } catch (const MyMoneyException &e) {
             KMessageBox::detailedSorry(this, i18n("Unable to duplicate transaction(s)"), QString::fromLatin1(e.what()));
         }
-        // switch off the progress bar
-        emit selectByVariant(QVariantList {QVariant(-1), QVariant(-1)}, eView::Intent::ReportProgress);
     }
 }
 
@@ -1581,7 +1577,6 @@ void KGlobalLedgerView::slotAcceptTransaction()
     KMyMoneyRegister::SelectedTransactions::const_iterator it_t;
     int cnt = list.count();
     int i = 0;
-    emit selectByVariant(QVariantList {QVariant(0), QVariant(cnt)}, eView::Intent::ReportProgress);
     MyMoneyFileTransaction ft;
     try {
         for (it_t = list.constBegin(); it_t != list.constEnd(); ++it_t) {
@@ -1608,9 +1603,7 @@ void KGlobalLedgerView::slotAcceptTransaction()
                 TransactionMatcher matcher;
                 matcher.accept(t, s);
             }
-            emit selectByVariant(QVariantList {QVariant(i++), QVariant(0)}, eView::Intent::ReportProgress);
         }
-        emit selectByVariant(QVariantList {QVariant(-1), QVariant(-1)}, eView::Intent::ReportProgress);
         ft.commit();
     } catch (const MyMoneyException &e) {
         KMessageBox::detailedSorry(this, i18n("Unable to accept transaction"), QString::fromLatin1(e.what()));
@@ -1923,16 +1916,13 @@ void KGlobalLedgerView::slotCloseSearchDialog()
 
 void KGlobalLedgerView::slotStatusMsg(const QString& txt)
 {
-    emit selectByVariant(QVariantList {QVariant(txt)}, eView::Intent::ReportProgressMessage);
 }
 
 void KGlobalLedgerView::slotStatusProgress(int cnt, int base)
 {
-    emit selectByVariant(QVariantList {QVariant(cnt), QVariant(base)}, eView::Intent::ReportProgress);
 }
 
 void KGlobalLedgerView::slotTransactionsSelected(const KMyMoneyRegister::SelectedTransactions& list)
 {
     updateLedgerActions(list);
-    emit selectByVariant(QVariantList {QVariant::fromValue(list)}, eView::Intent::SelectRegisterTransactions);
 }

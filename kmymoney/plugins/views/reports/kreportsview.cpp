@@ -50,25 +50,26 @@
 
 #include "ui_reportcontrol.h"
 
+#include "icons.h"
+#include "journalmodel.h"
+#include "kbalancechartdlg.h"
+#include "kmymoneysettings.h"
+#include "kmymoneywebpage.h"
+#include "kreportchartview.h"
+#include "kreportconfigurationfilterdlg.h"
+#include "menuenums.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneyreport.h"
-#include "mymoneyexception.h"
-#include "kmymoneysettings.h"
-#include "querytable.h"
 #include "objectinfotable.h"
-#include "kreportconfigurationfilterdlg.h"
-#include "icons/icons.h"
-#include "kbalancechartdlg.h"
-#include <kmymoneywebpage.h>
+#include "pivottable.h"
+#include "querytable.h"
+#include "reportcontrolimpl.h"
+#include "reporttable.h"
 #include "tocitem.h"
 #include "tocitemgroup.h"
 #include "tocitemreport.h"
-#include "kreportchartview.h"
-#include "pivottable.h"
-#include "reporttable.h"
-#include "reportcontrolimpl.h"
-#include "mymoneyenums.h"
-#include "menuenums.h"
 
 using namespace reports;
 using namespace eMyMoney;
@@ -224,8 +225,22 @@ void KReportsView::slotOpenUrl(const QUrl &url)
             qWarning() << i18n("Unknown command '%1' in KReportsView::slotOpenUrl()", qPrintable(command));
 
     } else if (view == VIEW_LEDGER) {
-        /// @todo maybe use eMenu::Action::GotoAccount instead here
-        emit selectByVariant(QVariantList {QVariant(id), QVariant(tid)}, eView::Intent::ShowTransactionInLedger);
+        const auto gotoAccount = pActions[eMenu::Action::GoToAccount];
+        gotoAccount->setData(id);
+
+        // convert transaction id to journalEntryId and make it the current selection
+        SelectedObjects selection;
+        const auto indexes = MyMoneyFile::instance()->journalModel()->indexesByTransactionId(tid);
+        for (const auto& idx : indexes) {
+            if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == id) {
+                tid = idx.data(eMyMoney::Model::IdRole).toString();
+                break;
+            }
+        }
+        selection.setSelection(SelectedObjects::JournalEntry, tid);
+        emit requestSelectionChange(selection);
+
+        gotoAccount->trigger();
     } else {
         qWarning() << i18n("Unknown view '%1' in KReportsView::slotOpenUrl()", qPrintable(view));
     }

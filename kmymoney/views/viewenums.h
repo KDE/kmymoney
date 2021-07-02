@@ -33,10 +33,7 @@ enum class Intent {
     SynchronizeAccountInInvestmentView,
     SynchronizeAccountInLedgersView,
     EnterSchedule,
-    ReportProgress,
-    ReportProgressMessage,
     SelectRegisterTransactions,
-    AccountReconciled,
     SetOnlinePlugins,
 };
 
