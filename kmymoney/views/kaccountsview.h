@@ -66,7 +66,6 @@ private Q_SLOTS:
     void slotDeleteAccount();
     void slotCloseAccount();
     void slotReopenAccount();
-    void slotChartAccountBalance();
     void slotNewCategory();
     void slotNewPayee(const QString& nameBase, QString& id);
     void slotAccountMapOnline();

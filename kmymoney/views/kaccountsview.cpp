@@ -45,7 +45,6 @@ KAccountsView::KAccountsView(QWidget *parent) :
     connect(pActions[eMenu::Action::DeleteAccount],       &QAction::triggered, this, &KAccountsView::slotDeleteAccount);
     connect(pActions[eMenu::Action::CloseAccount],        &QAction::triggered, this, &KAccountsView::slotCloseAccount);
     connect(pActions[eMenu::Action::ReopenAccount],       &QAction::triggered, this, &KAccountsView::slotReopenAccount);
-    connect(pActions[eMenu::Action::ChartAccountBalance], &QAction::triggered, this, &KAccountsView::slotChartAccountBalance);
     connect(pActions[eMenu::Action::MapOnlineAccount],    &QAction::triggered, this, &KAccountsView::slotAccountMapOnline);
     connect(pActions[eMenu::Action::UnmapOnlineAccount],  &QAction::triggered, this, &KAccountsView::slotAccountUnmapOnline);
     connect(pActions[eMenu::Action::UpdateAccount],       &QAction::triggered, this, &KAccountsView::slotAccountUpdateOnline);
@@ -292,14 +291,6 @@ void KAccountsView::slotReopenAccount()
         }
         ft.commit();
     } catch (const MyMoneyException &) {
-    }
-}
-
-void KAccountsView::slotChartAccountBalance()
-{
-    Q_D(KAccountsView);
-    if (!d->m_currentAccount.id().isEmpty()) {
-        emit customActionRequested(View::Accounts, eView::Action::ShowBalanceChart);
     }
 }
 

@@ -43,13 +43,11 @@ enum class Action {
     SetDefaultFocus,
     AboutToShow,
     Print,
-    SwitchView,
     ClosePayeeIdentifierSource,
     EditInstitution,
     EditSchedule,
     InitializeAfterFileOpen,
     DisableViewDepenedendActions,
-    ShowBalanceChart,
 };
 
 }

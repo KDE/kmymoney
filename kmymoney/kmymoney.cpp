@@ -1880,6 +1880,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::GoToPayee,                     &KMyMoneyApp::slotExecuteActionWithData},
             {Action::GoToAccount,                   &KMyMoneyApp::slotExecuteActionWithData},
             {Action::ReportOpen,                    &KMyMoneyApp::slotExecuteActionWithData},
+            {Action::ReportAccountTransactions,     &KMyMoneyApp::slotExecuteAction},
+            {Action::ChartAccountBalance,           &KMyMoneyApp::slotExecuteAction},
 
             {Action::EditFindTransaction,           &KMyMoneyApp::slotFindTransaction},
         };

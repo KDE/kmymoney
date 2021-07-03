@@ -137,6 +137,7 @@ public:
             {eMenu::Action::GoToAccount, View::NewLedgers},
             {eMenu::Action::StartReconciliation, View::NewLedgers},
             {eMenu::Action::ReportOpen, View::Reports},
+            {eMenu::Action::ReportAccountTransactions, View::Reports},
             {eMenu::Action::FileClose, View::Home},
         };
 
@@ -317,7 +318,6 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
     d->viewBases[idView] = view;
     connect(view, &KMyMoneyViewBase::requestCustomContextMenu, this, &KMyMoneyView::requestCustomContextMenu);
     connect(view, &KMyMoneyViewBase::requestActionTrigger, this, &KMyMoneyView::requestActionTrigger);
-    connect(view, &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
     connect(this, &KMyMoneyView::settingsChanged, view, &KMyMoneyViewBase::slotSettingsChanged);
 
     connect(view, &KMyMoneyViewBase::viewStateChanged, d->viewFrames[idView], &KPageWidgetItem::setEnabled);
@@ -346,7 +346,6 @@ void KMyMoneyView::removeView(View idView)
 
     disconnect(view, &KMyMoneyViewBase::requestCustomContextMenu, this, &KMyMoneyView::requestCustomContextMenu);
     disconnect(view, &KMyMoneyViewBase::requestActionTrigger, this, &KMyMoneyView::requestActionTrigger);
-    disconnect(view, &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
     disconnect(this, &KMyMoneyView::settingsChanged, view, &KMyMoneyViewBase::slotSettingsChanged);
 
     d->m_model->removePage(d->viewFrames[idView]);
@@ -707,22 +706,6 @@ void KMyMoneyView::executeAction(eMenu::Action action, const SelectedObjects& se
         }
     }
     currentView->executeAction(action, selections);
-}
-
-void KMyMoneyView::slotCustomActionRequested(View view, eView::Action action)
-{
-    Q_D(KMyMoneyView);
-    switch (action) {
-    case eView::Action::SwitchView:
-        showPage(view);
-        break;
-    case eView::Action::ShowBalanceChart:
-        if (d->viewBases.contains(View::Reports))
-            d->viewBases[View::Reports]->executeCustomAction(action);
-        break;
-    default:
-        break;
-    }
 }
 
 void KMyMoneyView::slotObjectSelected(const MyMoneyObject& obj)

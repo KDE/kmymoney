@@ -107,6 +107,14 @@ void KReportsView::executeAction(eMenu::Action action, const SelectedObjects& se
             slotPrintView();
         }
         break;
+    case eMenu::Action::ChartAccountBalance: {
+        const auto account = MyMoneyFile::instance()->accountsModel()->itemById(selections.firstSelection(SelectedObjects::Account));
+        if (!account.id().isEmpty()) {
+            QPointer<KBalanceChartDlg> dlg = new KBalanceChartDlg(account, this);
+            dlg->exec();
+            delete dlg;
+        }
+    } break;
     case eMenu::Action::FileClose:
         slotCloseAll();
     default:
@@ -125,14 +133,6 @@ void KReportsView::executeCustomAction(eView::Action action)
     case eView::Action::SetDefaultFocus:
         QTimer::singleShot(0, d->m_tocTreeWidget, SLOT(setFocus()));
         break;
-
-    case eView::Action::ShowBalanceChart:
-    {
-        QPointer<KBalanceChartDlg> dlg = new KBalanceChartDlg(d->m_currentAccount, this);
-        dlg->exec();
-        delete dlg;
-    }
-    break;
 
     default:
         break;
@@ -757,7 +757,6 @@ void KReportsView::slotReportAccountTransactions()
         );
         report.setGroup(i18n("Transactions"));
         report.addAccount(d->m_currentAccount.id());
-        emit customActionRequested(View::Reports, eView::Action::SwitchView);
         slotOpenReport(report);
     }
 }

@@ -588,8 +588,6 @@ void KGlobalLedgerView::slotContinueReconciliation()
 
                 if (!file->isStandardAccount(account.id()) &&
                         account.isAssetLiability()) {
-                    if (!isVisible())
-                        emit customActionRequested(View::OldLedgers, eView::Action::SwitchView);
 /// @todo port to new model code
 #if 0
                     MyMoneyFile::instance()->accountsModel()->slotReconcileAccount(account, d->m_endingBalanceDlg->statementDate(), d->m_endingBalanceDlg->endingBalance());
@@ -651,8 +649,6 @@ void KGlobalLedgerView::slotLedgerSelected(const QString& _accId, const QString&
     case Account::Type::Expense:
     case Account::Type::Investment:
     case Account::Type::Equity:
-        if (!isVisible())
-            emit customActionRequested(View::OldLedgers, eView::Action::SwitchView);
         slotSelectAccount(accId, transaction);
         break;
 
