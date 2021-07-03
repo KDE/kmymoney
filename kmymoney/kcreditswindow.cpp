@@ -44,8 +44,8 @@ KAboutData initializeCreditsData()
         aboutData.setOtherText(i18n("Compiled with the following optional features:\n%1", features.join(QLatin1Char('\n'))));
 
     aboutData.addAuthor(QLatin1String("Thomas Baumgart"), i18nc("Roles in project", "Core engine, Release Manager, Project admin"), "tbaumgart@kde.org");
-    aboutData.addAuthor(QLatin1String("Ralf Habacker"), i18nc("Roles in project", "Developer, Maintainer, Windows suppport"), "ralf.habacker@freenet.de");
-    aboutData.addAuthor(QString::fromUtf8("Dawid Wróbel"), i18nc("Roles in project", "Developer, Windows and MacOS suppport"), "me@dawidwrobel.com");
+    aboutData.addAuthor(QLatin1String("Ralf Habacker"), i18nc("Roles in project", "Developer, Maintainer, Windows support"), "ralf.habacker@freenet.de");
+    aboutData.addAuthor(QString::fromUtf8("Dawid Wróbel"), i18nc("Roles in project", "Developer, Windows and MacOS support"), "me@dawidwrobel.com");
 
     aboutData.addAuthor(QLatin1String("Michael Edwardes"),
                         i18n("Inactive member. ") + i18nc("Roles in project", "Initial idea, much initial source code, Project admin"),
