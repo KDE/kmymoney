@@ -635,18 +635,6 @@ void SimpleLedgerView::slotRequestSelectionChange(const SelectedObjects& selecti
     emit requestSelectionChange(newSelections);
 }
 
-void SimpleLedgerView::executeCustomAction(eView::Action action)
-{
-    Q_D(SimpleLedgerView);
-    switch(action) {
-    case eView::Action::InitializeAfterFileOpen:
-        d->openLedgersAfterFileOpen();
-        break;
-    default:
-        break;
-    }
-}
-
 void SimpleLedgerView::updateActions(const SelectedObjects& selections)
 {
     Q_D(SimpleLedgerView);
@@ -712,9 +700,14 @@ void SimpleLedgerView::executeAction(eMenu::Action action, const SelectedObjects
         d->propagateActionToViews(action, selections);
         break;
 
+    case eMenu::Action::FileNew:
+        d->openLedgersAfterFileOpen();
+        break;
+
     case eMenu::Action::FileClose:
         d->closeLedgers();
         break;
+
     default:
         break;
     }

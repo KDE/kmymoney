@@ -42,12 +42,7 @@ enum class Action {
     Refresh,
     Print,
     ClosePayeeIdentifierSource,
-    EditInstitution,
-    EditSchedule,
-    InitializeAfterFileOpen,
-    DisableViewDepenedendActions,
 };
-
 }
 
 #endif

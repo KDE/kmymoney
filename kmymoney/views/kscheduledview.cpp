@@ -60,19 +60,6 @@ void KScheduledView::slotSettingsChanged()
     d->settingsChanged();
 }
 
-void KScheduledView::executeCustomAction(eView::Action action)
-{
-    Q_D(KScheduledView);
-    switch(action) {
-    case eView::Action::EditSchedule:
-        slotEditSchedule();
-        break;
-
-    default:
-        break;
-    }
-}
-
 void KScheduledView::showEvent(QShowEvent* event)
 {
     Q_D(KScheduledView);

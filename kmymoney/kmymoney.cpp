@@ -1150,10 +1150,13 @@ public:
             // Enable save in case the fix changed the contents
             q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(dirty());
             updateActions(SelectedObjects());
-            m_myMoneyView->slotFileOpened();
+            // inform views about new data source
+            m_myMoneyView->executeAction(Action::FileNew, SelectedObjects());
+
             onlineJobAdministration::instance()->updateActions();
             m_myMoneyView->enableViewsIfFileOpen(m_storageInfo.isOpened);
             onlineJobAdministration::instance()->updateOnlineTaskProperties();
+
             q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
 
 #ifdef ENABLE_ACTIVITIES

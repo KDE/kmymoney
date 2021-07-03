@@ -411,22 +411,12 @@ void KOnlineJobOutboxView::executeAction(eMenu::Action action, const SelectedObj
     Q_UNUSED(selections)
     Q_D(KOnlineJobOutboxView);
     switch (action) {
+    case eMenu::Action::FileNew:
+        d->onlineJobsModel()->load();
+        break;
     case eMenu::Action::FileClose:
         d->onlineJobsModel()->unload();
         break;
-    default:
-        break;
-    }
-}
-
-void KOnlineJobOutboxView::executeCustomAction(eView::Action action)
-{
-    Q_D(KOnlineJobOutboxView);
-    switch(action) {
-    case eView::Action::InitializeAfterFileOpen:
-        d->onlineJobsModel()->load();
-        break;
-
     default:
         break;
     }

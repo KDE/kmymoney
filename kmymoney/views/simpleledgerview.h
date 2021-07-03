@@ -33,8 +33,6 @@ public:
     void updateActions(const SelectedObjects& selections) override;
     void executeAction(eMenu::Action action, const SelectedObjects& selections) override;
 
-    void executeCustomAction(eView::Action action) override;
-
 public Q_SLOTS:
     void showEvent(QShowEvent* event) override;
 

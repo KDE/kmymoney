@@ -183,8 +183,6 @@ public Q_SLOTS:
     void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent);
     void slotSettingsChanged();
 
-    void slotFileOpened();
-
     void updateActions(const SelectedObjects& selections);
 
 private Q_SLOTS:

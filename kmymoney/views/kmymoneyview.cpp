@@ -230,21 +230,6 @@ KMyMoneyView::~KMyMoneyView()
 {
 }
 
-void KMyMoneyView::slotFileOpened()
-{
-    Q_D(KMyMoneyView);
-    for( const auto& view : qAsConst(d->viewBases)) {
-        view->executeCustomAction(eView::Action::InitializeAfterFileOpen);
-    }
-
-    // delay the switchToDefaultView call until the event loop is running
-    QMetaObject::invokeMethod(this, "switchToDefaultView", Qt::QueuedConnection);
-    slotObjectSelected(MyMoneyAccount()); // in order to enable update all accounts on file reload
-
-    // make sure to catch view activations
-    connect(this, &KMyMoneyView::viewActivated, this, &KMyMoneyView::slotRememberLastView);
-}
-
 void KMyMoneyView::updateViewType()
 {
     // set the face type
@@ -689,9 +674,18 @@ void KMyMoneyView::executeAction(eMenu::Action action, const SelectedObjects& se
 
     // when closing, we don't remember the switch to the home view anymore
     switch (action) {
+    case eMenu::Action::FileNew: // opened a file or database
+        // make sure to catch view activations
+        connect(this, &KMyMoneyView::viewActivated, this, &KMyMoneyView::slotRememberLastView);
+
+        // delay the switchToDefaultView call until the event loop is running
+        QMetaObject::invokeMethod(this, "switchToDefaultView", Qt::QueuedConnection);
+        break;
+
     case eMenu::Action::FileClose:
         disconnect(this, &KMyMoneyView::viewActivated, this, &KMyMoneyView::slotRememberLastView);
         break;
+
     default:
         break;
     }

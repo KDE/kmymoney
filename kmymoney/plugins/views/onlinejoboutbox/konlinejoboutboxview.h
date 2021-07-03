@@ -52,8 +52,6 @@ public:
 
     void executeAction(eMenu::Action action, const SelectedObjects& selections) override;
 
-    void executeCustomAction(eView::Action action) override;
-
     void createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiClient);
     void removeActions();
 
