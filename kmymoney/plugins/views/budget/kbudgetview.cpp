@@ -61,7 +61,6 @@ void KBudgetView::showEvent(QShowEvent * event)
 
         slotSelectBudget();
     }
-    emit customActionRequested(View::Budget, eView::Action::AboutToShow);
 
     // don't forget base class implementation
     QWidget::showEvent(event);

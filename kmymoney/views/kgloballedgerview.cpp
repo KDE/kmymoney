@@ -169,8 +169,6 @@ void KGlobalLedgerView::showEvent(QShowEvent* event)
     if (d->m_needLoad)
         d->init();
 
-    emit customActionRequested(View::OldLedgers, eView::Action::AboutToShow);
-
     if (d->m_needsRefresh) {
         if (!d->m_inEditMode) {
             setUpdatesEnabled(false);

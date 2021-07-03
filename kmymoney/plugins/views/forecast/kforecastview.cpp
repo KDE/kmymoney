@@ -61,7 +61,6 @@ void KForecastView::showEvent(QShowEvent* event)
         d->init();
         d->loadForecastSettings();
     }
-    emit customActionRequested(View::Forecast, eView::Action::AboutToShow);
 
     slotTabChanged(d->ui->m_tab->currentIndex());
 

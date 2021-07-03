@@ -95,8 +95,6 @@ void KScheduledView::showEvent(QShowEvent* event)
             d->m_filterModel->invalidate();
         });
     }
-    emit customActionRequested(View::Schedules, eView::Action::AboutToShow);
-
     QWidget::showEvent(event);
 }
 

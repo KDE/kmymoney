@@ -60,7 +60,6 @@ Q_SIGNALS:
     void transactionSelected(const QString& accountId, const QString& transactionId);
 
 protected:
-    void showEvent(QShowEvent* event) override;
     void aboutToShow() override;
     void aboutToHide() override;
 

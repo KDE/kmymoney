@@ -40,7 +40,6 @@ enum class Intent {
 enum class Action {
     None,
     Refresh,
-    AboutToShow,
     Print,
     ClosePayeeIdentifierSource,
     EditInstitution,

@@ -95,8 +95,6 @@ void KInvestmentView::showEvent(QShowEvent* event)
     if (d->m_needLoad)
         d->init();
 
-    emit customActionRequested(View::Investments, eView::Action::AboutToShow);
-
     d->m_needReload[eView::Investment::Tab::Equities] = true;  // ensure tree view will be reloaded after selecting account in ledger view
     if (d->m_needReload[eView::Investment::Tab::Equities] == true ||
             d->m_needReload[eView::Investment::Tab::Securities] == true)

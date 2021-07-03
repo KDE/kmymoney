@@ -402,7 +402,6 @@ void KOnlineJobOutboxView::showEvent(QShowEvent* event)
     if (d->m_needLoad)
         d->init();
 
-    emit customActionRequested(View::OnlineJobOutbox, eView::Action::AboutToShow);
     // don't forget base class implementation
     QWidget::showEvent(event);
 }
