@@ -106,6 +106,8 @@ public Q_SLOTS:
     }
     virtual void slotSettingsChanged() {}
 
+    virtual void setDefaultFocus();
+
 protected:
     const QScopedPointer<KMyMoneyViewBasePrivate> d_ptr;
 

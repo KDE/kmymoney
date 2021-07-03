@@ -86,10 +86,6 @@ void KAccountsView::executeCustomAction(eView::Action action)
         refresh();
         break;
 
-    case eView::Action::SetDefaultFocus:
-        QMetaObject::invokeMethod(d->ui->m_accountTree, "setFocus", Qt::QueuedConnection);
-        break;
-
     default:
         break;
     }

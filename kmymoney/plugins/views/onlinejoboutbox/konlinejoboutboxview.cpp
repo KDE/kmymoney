@@ -90,6 +90,8 @@ public:
         q->connect(ui->m_onlineJobView, &QAbstractItemView::doubleClicked, q, static_cast<void (KOnlineJobOutboxView::*)(const QModelIndex &)>(&KOnlineJobOutboxView::slotEditJob));
         q->connect(ui->m_onlineJobView->selectionModel(), &QItemSelectionModel::selectionChanged, q, &KOnlineJobOutboxView::updateSelection);
         q->connect(onlineJobAdministration::instance(), &onlineJobAdministration::canSendCreditTransferChanged, m_actions[eMenu::OnlineAction::AccountCreditTransfer], &QAction::setEnabled);
+
+        m_focusWidget = ui->m_onlineJobView;
     }
 
     onlineJobModel* onlineJobsModel()
@@ -422,10 +424,6 @@ void KOnlineJobOutboxView::executeCustomAction(eView::Action action)
 {
     Q_D(KOnlineJobOutboxView);
     switch(action) {
-    case eView::Action::SetDefaultFocus:
-        QTimer::singleShot(0, d->ui->m_onlineJobView, SLOT(setFocus()));
-        break;
-
     case eView::Action::InitializeAfterFileOpen:
         d->onlineJobsModel()->load();
         break;

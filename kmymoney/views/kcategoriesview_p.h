@@ -83,6 +83,8 @@ public:
         q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestCustomContextMenu, q, &KCategoriesView::requestCustomContextMenu);
         q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestSelectionChange, q, &KCategoriesView::requestSelectionChange);
         q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestActionTrigger, q, &KCategoriesView::requestActionTrigger);
+
+        m_focusWidget = ui->m_accountTree;
     }
 
     Ui::KCategoriesView   *ui;

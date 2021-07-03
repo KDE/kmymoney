@@ -76,10 +76,6 @@ void KInvestmentView::executeCustomAction(eView::Action action)
         refresh();
         break;
 
-    case eView::Action::SetDefaultFocus:
-        setDefaultFocus();
-        break;
-
     default:
         break;
     }

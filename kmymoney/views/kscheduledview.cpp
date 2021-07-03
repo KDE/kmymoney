@@ -64,10 +64,6 @@ void KScheduledView::executeCustomAction(eView::Action action)
 {
     Q_D(KScheduledView);
     switch(action) {
-    case eView::Action::SetDefaultFocus:
-        QMetaObject::invokeMethod(d->ui->m_searchWidget, "setFocus", Qt::QueuedConnection);
-        break;
-
     case eView::Action::EditSchedule:
         slotEditSchedule();
         break;

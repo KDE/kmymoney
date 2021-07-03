@@ -67,19 +67,6 @@ void KBudgetView::showEvent(QShowEvent * event)
     QWidget::showEvent(event);
 }
 
-void KBudgetView::executeCustomAction(eView::Action action)
-{
-    Q_D(KBudgetView);
-    switch(action) {
-    case eView::Action::SetDefaultFocus:
-        QMetaObject::invokeMethod(d->ui->m_budgetList, "setFocus", Qt::QueuedConnection);
-        break;
-
-    default:
-        break;
-    }
-}
-
 void KBudgetView::slotNewBudget()
 {
     Q_D(KBudgetView);

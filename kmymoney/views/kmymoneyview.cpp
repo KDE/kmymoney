@@ -555,7 +555,7 @@ void KMyMoneyView::showPageAndFocus(View idView)
     Q_D(KMyMoneyView);
     if (d->viewFrames.contains(idView)) {
         showPage(idView);
-        d->viewBases[idView]->executeCustomAction(eView::Action::SetDefaultFocus);
+        d->viewBases[idView]->setDefaultFocus();
     }
 }
 

@@ -56,8 +56,6 @@ public:
     explicit KBudgetView(QWidget *parent = nullptr);
     ~KBudgetView() override;
 
-    void executeCustomAction(eView::Action action) override;
-
     void createActions(KXMLGUIFactory* guiFactory, KXMLGUIClient* guiClient);
     void removeActions();
 

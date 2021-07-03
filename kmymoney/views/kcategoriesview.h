@@ -56,8 +56,6 @@ public:
     explicit KCategoriesView(QWidget *parent = nullptr);
     ~KCategoriesView();
 
-    void executeCustomAction(eView::Action action) override;
-
 public Q_SLOTS:
     void slotProfitLossChanged(const MyMoneyMoney &profit, bool isApproximate);
 

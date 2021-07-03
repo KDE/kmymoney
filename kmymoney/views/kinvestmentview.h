@@ -40,7 +40,7 @@ public:
     ~KInvestmentView() override;
 
     void executeCustomAction(eView::Action action) override;
-    void setDefaultFocus();
+    void setDefaultFocus() override;
     void refresh();
     Q_DECL_DEPRECATED void updateActions(const MyMoneyObject &obj);
 

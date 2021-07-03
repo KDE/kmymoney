@@ -183,6 +183,8 @@ public:
 
         m_tag = MyMoneyTag(); // make sure we don't access an undefined tag
         clearItemData();
+
+        m_focusWidget = ui->m_searchWidget;
     }
 
     void clearItemData()
@@ -345,19 +347,6 @@ KTagsView::KTagsView(QWidget *parent) :
 
 KTagsView::~KTagsView()
 {
-}
-
-void KTagsView::executeCustomAction(eView::Action action)
-{
-    Q_D(KTagsView);
-    switch(action) {
-    case eView::Action::SetDefaultFocus:
-        QMetaObject::invokeMethod(d->ui->m_searchWidget, "setFocus");
-        break;
-
-    default:
-        break;
-    }
 }
 
 void KTagsView::slotRenameSingleTag(const QModelIndex& idx, const QVariant& value)

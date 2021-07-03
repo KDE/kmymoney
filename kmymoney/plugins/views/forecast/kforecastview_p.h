@@ -134,6 +134,8 @@ public:
         m_chartLayout->setSpacing(6);
 
         loadForecastSettings();
+
+        m_focusWidget = ui->m_forecastButton;
     }
 
     void loadForecast(ForecastViewTab tab)

@@ -99,6 +99,8 @@ public:
         q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestCustomContextMenu, q, &KAccountsView::requestCustomContextMenu);
         q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestSelectionChange, q, &KAccountsView::requestSelectionChange);
         q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestActionTrigger, q, &KAccountsView::requestActionTrigger);
+
+        m_focusWidget = ui->m_accountTree;
     }
 
     void editLoan()

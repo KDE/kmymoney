@@ -125,6 +125,8 @@ public:
                 ui->m_scheduleTree->setExpanded(idx, m_expandedGroups[groupType]);
             }
         }
+
+        m_focusWidget = ui->m_searchWidget;
     }
 
     void settingsChanged()

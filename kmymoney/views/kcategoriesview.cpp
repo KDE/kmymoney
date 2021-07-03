@@ -77,20 +77,6 @@ void KCategoriesView::slotSettingsChanged()
 }
 
 
-void KCategoriesView::executeCustomAction(eView::Action action)
-{
-    Q_D(KCategoriesView);
-
-    switch(action) {
-    case eView::Action::SetDefaultFocus:
-        QMetaObject::invokeMethod(d->ui->m_accountTree, "setFocus", Qt::QueuedConnection);
-        break;
-
-    default:
-        break;
-    }
-}
-
 void KCategoriesView::updateActions(const SelectedObjects& selections)
 {
     /// @todo updateActions

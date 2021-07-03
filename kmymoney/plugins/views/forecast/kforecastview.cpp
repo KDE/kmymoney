@@ -77,10 +77,6 @@ void KForecastView::executeCustomAction(eView::Action action)
         refresh();
         break;
 
-    case eView::Action::SetDefaultFocus:
-        QTimer::singleShot(0, d->ui->m_forecastButton, SLOT(setFocus()));
-        break;
-
     default:
         break;
     }

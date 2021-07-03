@@ -547,6 +547,8 @@ public:
                    q, &KReportsView::slotListContextMenu);
 
         q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KReportsView::refresh);
+
+        m_focusWidget = m_tocTreeWidget;
     }
 
     void restoreTocExpandState(QMap<QString, bool>& expandStates)

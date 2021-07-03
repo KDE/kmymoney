@@ -130,10 +130,6 @@ void KReportsView::executeCustomAction(eView::Action action)
         refresh();
         break;
 
-    case eView::Action::SetDefaultFocus:
-        QTimer::singleShot(0, d->m_tocTreeWidget, SLOT(setFocus()));
-        break;
-
     default:
         break;
     }

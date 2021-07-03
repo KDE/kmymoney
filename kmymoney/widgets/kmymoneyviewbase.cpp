@@ -59,6 +59,15 @@ void KMyMoneyViewBase::aboutToHide()
     d->m_isActiveView = false;
 }
 
+void KMyMoneyViewBase::setDefaultFocus()
+{
+    Q_D(KMyMoneyViewBase);
+    // set the focus to the specific widget if available
+    if (d->m_focusWidget) {
+        QMetaObject::invokeMethod(d->m_focusWidget, "setFocus", Qt::QueuedConnection);
+    }
+}
+
 void KMyMoneyViewBase::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
     Q_UNUSED(action)
