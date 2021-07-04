@@ -167,8 +167,6 @@ void KInvestmentView::slotEquitySelected(const QModelIndex &current, const QMode
 
     const auto equ = d->currentEquity();
     updateActions(equ);
-
-    emit selectByObject(equ, eView::Intent::None);
 }
 
 void KInvestmentView::slotSecuritySelected(const QModelIndex &current, const QModelIndex &previous)
@@ -228,8 +226,6 @@ void KInvestmentView::slotLoadAccount(const QString &id)
             d->m_equitiesProxyModel->setHideAllEntries(false);
             idx = baseModel->mapFromBaseSource(d->m_equitiesProxyModel, baseIdx);
             d->m_idInvAcc = id;
-            if (isVisible())
-                emit selectByObject(acc, eView::Intent::SynchronizeAccountInLedgersView);
         } else {
             idx = QModelIndex();
         }

@@ -3,7 +3,6 @@ set(libviews_a_SOURCES
   kaccountsview.cpp
   kcategoriesview.cpp
   accountdelegate.cpp
-  kgloballedgerview.cpp
   kwelcomepage.cpp
   khomeview.cpp
   kinstitutionsview.cpp
@@ -85,7 +84,6 @@ endif(ENABLE_WEBENGINE)
 # This should be replaced by virtual methods in a pure abstract object.
 target_link_libraries( views PUBLIC
   newaccountwizard
-  kmm_oldregister
   KF5::TextWidgets
   Qt5::PrintSupport
   kmm_base_dialogs

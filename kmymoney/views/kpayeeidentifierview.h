@@ -8,10 +8,10 @@
 
 #include <QWidget>
 
+#include "mymoneypayeeidentifiercontainer.h"
 #include "widgets/styleditemdelegateforwarder.h"
 
 class payeeIdentifier;
-class MyMoneyPayeeIdentifierContainer;
 
 namespace Ui {
 class KPayeeIdentifierView;

@@ -47,7 +47,6 @@
 #include "specialdatesfilter.h"
 #include "specialdatesmodel.h"
 #include "tagsmodel.h"
-#include "transaction.h"
 #include "ui_ktagsview.h"
 
 using namespace Icons;

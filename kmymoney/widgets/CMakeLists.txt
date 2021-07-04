@@ -76,6 +76,7 @@ set(kmm_widgets_SOURCES
   ktransactionfilter.cpp
   ktreewidgetfilterlinewidget.cpp
   onlinejobmessagesview.cpp
+  transactionsortoption.cpp
   )
 
 set(nationalAccountWidget_SOURCES
@@ -124,6 +125,7 @@ ki18n_wrap_ui(kmm_widgets_SOURCES
   onlinejobmessagesview.ui
   daterangedlg.ui
   ktransactionfilter.ui
+  transactionsortoption.ui
 )
 
 add_library(kmm_base_widgets SHARED ${kmm_base_widgets_SOURCES})

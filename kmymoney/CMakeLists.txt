@@ -50,7 +50,6 @@ add_subdirectory( templates )
 add_subdirectory( misc )
 add_subdirectory( icons )
 add_subdirectory( menus )
-add_subdirectory( oldregister )
 if(BUILD_TESTING)
   add_subdirectory( tests )
 endif()
@@ -146,7 +145,6 @@ target_link_libraries(kmymoney
   newloanwizard
   endingbalancedlg
   wizardpages
-  kmm_oldregister
   kmm_extended_dialogs
   kmm_base_dialogs
   settings

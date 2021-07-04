@@ -4,7 +4,6 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/checkprinting.json.cmake ${CMAKE_CURR
 set(checkprinting_PART_SRCS
     numbertowords.cpp
     checkprinting.cpp
-    #    ../../oldregister/selectedtransaction.cpp
     )
 
 kconfig_add_kcfg_files(checkprinting_PART_SRCS pluginsettings.kcfgc)
@@ -24,10 +23,10 @@ set_target_properties(checkprinting
 target_link_libraries(checkprinting
   Qt5::PrintSupport
   KF5::I18n
-  kmm_oldregister
   kmm_mymoney
   kmm_plugin
   kmm_printer
+  kmm_selections
 )
 
 if(ENABLE_WEBENGINE)

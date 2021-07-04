@@ -166,8 +166,6 @@
 
 #include "imymoneystorageformat.h"
 
-#include "transactioneditor.h"
-
 #include "kmymoneyutils.h"
 #include "kcreditswindow.h"
 

@@ -78,7 +78,7 @@ private Q_SLOTS:
     void slotResetBudget();
     void slotUpdateBudget();
 
-    void slotSelectAccount(const MyMoneyObject &obj, eView::Intent intent);
+    void slotSelectAccount(const MyMoneyObject& obj);
     void slotBudgetedAmountChanged();
     /**
       *This is to update the information about the checkbox "budget amount integrates subaccounts" into the file, when the user clicks the check box

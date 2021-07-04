@@ -51,7 +51,6 @@
 #include "mymoneyprice.h"
 #include "mymoneytransaction.h"
 #include "icons.h"
-#include "transaction.h"
 #include "mymoneyenums.h"
 #include "modelenums.h"
 #include "payeesmodel.h"

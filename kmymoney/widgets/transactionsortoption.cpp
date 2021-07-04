@@ -25,7 +25,7 @@
 using namespace eWidgets;
 using namespace Icons;
 
-static const char * sortOrderText[] = {
+static const char* sortOrderText[] = {
     I18N_NOOP2("Unknown sort order", "Unknown"),
     I18N_NOOP("Post date"),
     I18N_NOOP("Date entered"),
@@ -40,9 +40,9 @@ static const char * sortOrderText[] = {
     // add new values above this comment line
 };
 
-TransactionSortOption::TransactionSortOption(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::TransactionSortOption)
+TransactionSortOption::TransactionSortOption(QWidget* parent)
+    : QWidget(parent)
+    , ui(new Ui::TransactionSortOption)
 {
     ui->setupUi(this);
 
@@ -72,18 +72,18 @@ TransactionSortOption::~TransactionSortOption()
 }
 
 /**
-  * Setup the two lists according to the elements found in @a list.
-  * If an item is negative, it will show up in the available list,
-  * if positive, it shows up in the selected list.
-  *
-  * Special care is taken about the two values @a EntryDateSort and
-  * @a EntryOrderSort. These two entries cannot (should not) exist
-  * alone. Inside this widget, only the @a EntryOrderSort is used.
-  *
-  * setSettings() takes care of hiding the @a EntryDateSort item and if
-  * it exists in @p settings without @a EntryOrderSort being present, it
-  * will add @a EntryOrderSort.
-  */
+ * Setup the two lists according to the elements found in @a list.
+ * If an item is negative, it will show up in the available list,
+ * if positive, it shows up in the selected list.
+ *
+ * Special care is taken about the two values @a EntryDateSort and
+ * @a EntryOrderSort. These two entries cannot (should not) exist
+ * alone. Inside this widget, only the @a EntryOrderSort is used.
+ *
+ * setSettings() takes care of hiding the @a EntryDateSort item and if
+ * it exists in @p settings without @a EntryOrderSort being present, it
+ * will add @a EntryOrderSort.
+ */
 void TransactionSortOption::setSettings(const QString& settings)
 {
     ui->m_availableList->clear();
@@ -111,15 +111,14 @@ void TransactionSortOption::setSettings(const QString& settings)
 
     // make sure to create EntryOrderSort if missing but required
     if (selectedMap.find(static_cast<int>(SortField::EntryDate)) != selectedMap.end()
-            && selectedMap.find(static_cast<int>(SortField::EntryOrder)) == selectedMap.end()) {
+        && selectedMap.find(static_cast<int>(SortField::EntryOrder)) == selectedMap.end()) {
         int val = dateSign * static_cast<int>(SortField::EntryOrder);
         selectedMap[static_cast<int>(SortField::EntryOrder)] = true;
         last = addEntry(ui->m_selectedList, last, val);
     }
 
     // fill available list
-    for (int i = static_cast<int>(SortField::PostDate);
-            i < static_cast<int>(SortField::MaxFields); ++i) {
+    for (int i = static_cast<int>(SortField::PostDate); i < static_cast<int>(SortField::MaxFields); ++i) {
         // Never add EntryDateSort
         if (i == static_cast<int>(SortField::EntryDate))
             continue;
@@ -148,7 +147,7 @@ QListWidgetItem* TransactionSortOption::addEntry(QListWidget* p, QListWidgetItem
 {
     auto txt = sortOrderToText(static_cast<SortField>(abs(idx)));
     if (txt.isEmpty())
-        txt = "Unknown";    // i18n should be handled in sortOptionToText()
+        txt = "Unknown"; // i18n should be handled in sortOptionToText()
 
     int row = p->row(after) + 1;
     p->insertItem(row, txt);
@@ -188,7 +187,7 @@ QString TransactionSortOption::settings() const
         // if we look at the EntryOrderSort option, we have to make
         // sure, that the EntryDateSort is prepended
         if (option == SortField::EntryOrder) {
-            rc  += QString::number(static_cast<int>(SortField::EntryDate) * item->data(Qt::UserRole).toInt()) + ',';
+            rc += QString::number(static_cast<int>(SortField::EntryDate) * item->data(Qt::UserRole).toInt()) + ',';
         }
         rc += QString::number((int)textToSortOrder(item->text()) * item->data(Qt::UserRole).toInt());
         item = ui->m_selectedList->item(ui->m_selectedList->row(item) + 1);

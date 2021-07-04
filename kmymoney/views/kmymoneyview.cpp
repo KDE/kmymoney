@@ -49,7 +49,6 @@
 #include "kaccountsview.h"
 #include "kcategoriesview.h"
 #include "kcurrencyeditdlg.h"
-#include "kgloballedgerview.h"
 #include "khomeview.h"
 #include "kinstitutionsview.h"
 #include "kinvestmentview.h"
@@ -172,8 +171,6 @@ public:
         {View::Payees,          i18n("Payees"),                       Icon::Payees},
         {View::NewLedgers,      i18n("Ledgers"),                      Icon::Ledgers},
         {View::Investments,     i18n("Investments"),                  Icon::Investments},
-        /// @todo remove when new ledger is fully functional
-        {View::OldLedgers,      i18n("Old ledgers"),                  Icon::DocumentProperties},
     };
     // clang-format on
 };
@@ -212,7 +209,6 @@ KMyMoneyView::KMyMoneyView()
     d->viewBases[View::Payees] = new KPayeesView;
     d->viewBases[View::NewLedgers] = new SimpleLedgerView;
     d->viewBases[View::Investments] = new KInvestmentView;
-    d->viewBases[View::OldLedgers] = new KGlobalLedgerView;
 
     for (const auto& view : d->viewsInfo) {
         addView(d->viewBases[view.id], view.name, view.id, view.icon);

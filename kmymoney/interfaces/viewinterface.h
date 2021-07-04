@@ -65,22 +65,6 @@ Q_SIGNALS:
     void accountSelected(const MyMoneyAccount& acc);
 
     /**
-     * This signal is emitted when a transaction/list of transactions has been selected by
-     * the GUI. If no transaction is selected or the selection is removed,
-     * @p transactions is identical to an empty QList. This signal is used
-     * by plugins to get information about changes.
-     */
-    void transactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
-
-    /**
-     * This signal is emitted when a new institution has been selected by
-     * the GUI. If no institution is selected or the selection is removed,
-     * @a institution is identical to MyMoneyInstitution(). This signal is used
-     * by plugins to get information about changes.
-     */
-    //  void institutionSelected(const MyMoneyInstitution& institution);
-
-    /**
      * This signal is emitted when an account has been successfully reconciled
      * and all transactions are updated in the engine. It can be used by plugins
      * to create reconciliation reports.

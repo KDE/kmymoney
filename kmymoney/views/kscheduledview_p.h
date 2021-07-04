@@ -38,7 +38,6 @@
 #include "kmymoneysettings.h"
 #include "kenterscheduledlg.h"
 #include "kbalancewarning.h"
-#include "transactioneditor.h"
 #include "kconfirmmanualenterdlg.h"
 #include "kmymoneymvccombo.h"
 #include "kmymoneyutils.h"

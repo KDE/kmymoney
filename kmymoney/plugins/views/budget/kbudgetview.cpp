@@ -242,9 +242,8 @@ void KBudgetView::slotStartRename()
     }
 }
 
-void KBudgetView::slotSelectAccount(const MyMoneyObject &obj, eView::Intent intent)
+void KBudgetView::slotSelectAccount(const MyMoneyObject& obj)
 {
-    Q_UNUSED(intent)
     Q_D(KBudgetView);
     d->ui->m_assignmentBox->setEnabled(false);
     if (typeid(obj) != typeid(MyMoneyAccount))
@@ -353,7 +352,7 @@ void KBudgetView::slotAccountSelectionChanged(const SelectedObjects& selections)
     if (idx.isValid()) {
         const auto baseIdx = MyMoneyFile::baseModel()->mapToBaseSource(idx);
         const auto account = MyMoneyFile::instance()->accountsModel()->itemByIndex(baseIdx);
-        slotSelectAccount(account, eView::Intent::None);
+        slotSelectAccount(account);
     }
 }
 
@@ -376,7 +375,7 @@ void KBudgetView::slotSelectBudget()
         if (idx.isValid()) {
             const auto baseIdx = MyMoneyFile::baseModel()->mapToBaseSource(idx);
             const auto account = MyMoneyFile::instance()->accountsModel()->itemByIndex(baseIdx);
-            slotSelectAccount(account, eView::Intent::None);
+            slotSelectAccount(account);
         } else {
             d->ui->m_budgetValue->clear();
         }

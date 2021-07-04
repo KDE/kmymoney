@@ -37,7 +37,6 @@ target_link_libraries(settings PUBLIC
   KF5::KCMUtils
   KF5::ItemViews
   Alkimia::alkimia
-  kmm_oldregister
 )
 
 if (KMYMONEY_STABLE_BRANCH)

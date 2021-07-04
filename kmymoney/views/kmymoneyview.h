@@ -22,7 +22,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "selectedtransactions.h"
 
 #ifdef ENABLE_ACTIVITIES
 namespace KActivities
@@ -43,9 +42,6 @@ class OnlinePlugin;
 }
 namespace eDialogs {
 enum class ScheduleResultCode;
-}
-namespace eView {
-enum class Intent;
 }
 namespace eView {
 enum class Action;
@@ -213,14 +209,6 @@ Q_SIGNALS:
                            const MyMoneyMoney& startingBalance,
                            const MyMoneyMoney& endingBalance,
                            const QStringList& transactionList);
-
-    /**
-      * This signal is emitted when a transaction/list of transactions has been selected by
-      * the GUI. If no transaction is selected or the selection is removed,
-      * @p transactions is identical to an empty QList. This signal is used
-      * by plugins to get information about changes.
-      */
-    void transactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
 
     /**
       * This signal is emitted when a new account has been selected by

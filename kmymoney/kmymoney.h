@@ -31,7 +31,6 @@
 #include "onlinejobtyped.h"
 #include "mymoneykeyvaluecontainer.h"
 #include "mymoneymoney.h"
-#include "selectedtransactions.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "mymoneyenums.h"
@@ -546,14 +545,6 @@ Q_SIGNALS:
       * is closed, this signal is also emitted with an empty url.
       */
     void fileLoaded(const QUrl &url);
-
-    /**
-      * This signal is emitted when a transaction/list of transactions has been selected by
-      * the GUI. If no transaction is selected or the selection is removed,
-      * @p transactions is identical to an empty QList. This signal is used
-      * by plugins to get information about changes.
-      */
-    void transactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
 
     /**
      * This signal is emitted if a specific transaction with @a transactionId in account
