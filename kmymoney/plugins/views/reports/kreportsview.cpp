@@ -725,16 +725,6 @@ void KReportsView::slotDeleteFromList()
     }
 }
 
-void KReportsView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
-{
-    switch(intent) {
-    case eView::Intent::OpenObject:
-        slotOpenReport(static_cast<const MyMoneyReport&>(obj));
-    default:
-        break;
-    }
-}
-
 void KReportsView::slotReportAccountTransactions()
 {
     Q_D(KReportsView);

@@ -188,12 +188,6 @@ public Q_SLOTS:
 private Q_SLOTS:
     void switchToDefaultView();
 
-    /**
-     * Opens object in ledgers or edits in case of institution
-     * @param obj Account, Category, Investment, Stock, Institution
-     */
-    void slotOpenObjectRequested(const MyMoneyObject& obj);
-
     void slotRememberLastView(View view);
 
 Q_SIGNALS:

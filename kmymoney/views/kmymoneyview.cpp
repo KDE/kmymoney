@@ -615,32 +615,6 @@ void KMyMoneyView::slotRememberLastView(View view)
     KMyMoneySettings::setLastViewSelected(static_cast<int>(view));
 }
 
-void KMyMoneyView::slotOpenObjectRequested(const MyMoneyObject& obj)
-{
-    Q_D(KMyMoneyView);
-    if (typeid(obj) == typeid(MyMoneyAccount)) {
-        const auto& acc = static_cast<const MyMoneyAccount&>(obj);
-        // check if we can open this account
-        // currently it make's sense for asset and liability accounts
-        if (!MyMoneyFile::instance()->isStandardAccount(acc.id()))
-            if (d->viewBases.contains(View::OldLedgers))
-                d->viewBases[View::OldLedgers]->slotSelectByVariant(QVariantList {QVariant(acc.id()), QVariant(QString()) }, eView::Intent::ShowTransactionInLedger );
-
-    } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
-//    const auto& inst = static_cast<const MyMoneyInstitution&>(obj);
-        if (d->viewBases.contains(View::Institutions))
-            d->viewBases[View::Institutions]->executeCustomAction(eView::Action::EditInstitution);
-    } else if (typeid(obj) == typeid(MyMoneySchedule)) {
-        if (d->viewBases.contains(View::Schedules))
-            d->viewBases[View::Schedules]->executeCustomAction(eView::Action::EditSchedule);
-    } else if (typeid(obj) == typeid(MyMoneyReport)) {
-//    const auto& rep = static_cast<const MyMoneyReport&>(obj);
-        showPage(View::Reports);
-        if (d->viewBases.contains(View::Reports))
-            d->viewBases[View::Reports]->slotSelectByObject(obj, eView::Intent::OpenObject);
-    }
-}
-
 void KMyMoneyView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
 {
     Q_D(KMyMoneyView);
@@ -657,10 +631,6 @@ void KMyMoneyView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent in
     case eView::Intent::SynchronizeAccountInLedgersView:
         if (d->viewBases.contains(View::OldLedgers))
             d->viewBases[View::OldLedgers]->slotSelectByObject(obj, intent);
-        break;
-
-    case eView::Intent::OpenObject:
-        slotOpenObjectRequested(obj);
         break;
 
     default:
