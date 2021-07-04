@@ -58,18 +58,27 @@
 #include <KProcess>
 #include <KRecentDirs>
 #include <KRecentFilesAction>
-#include <KRun>
 #include <KStandardAction>
 #include <KTipDialog>
 #include <KToolBar>
 #include <KUndoActions>
 #include <KXMLGUIFactory>
+#include <kio_version.h>
+
 #ifdef ENABLE_HOLIDAYS
 #include <KHolidays/Holiday>
 #include <KHolidays/HolidayRegion>
 #endif
+
 #ifdef ENABLE_ACTIVITIES
 #include <KActivities/ResourceInstance>
+#endif
+
+#if KIO_VERSION < QT_VERSION_CHECK(5, 70, 0)
+#include <KRun>
+#else
+#include <KDialogJobUiDelegate>
+#include <KIO/CommandLauncherJob>
 #endif
 
 // ----------------------------------------------------------------------------
@@ -3443,7 +3452,14 @@ void KMyMoneyApp::slotToolsStartKCalc()
         cmd = QLatin1String("kcalc");
 #endif
     }
+#if KIO_VERSION < QT_VERSION_CHECK(5,70,0)
     KRun::runCommand(cmd, this);
+#else
+    auto *job = new KIO::CommandLauncherJob(cmd, this);
+    job->setUiDelegate(new KDialogJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, this));
+    job->setWorkingDirectory(QString());
+    job->start();
+#endif
 }
 
 void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)
