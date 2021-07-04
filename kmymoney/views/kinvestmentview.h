@@ -51,7 +51,6 @@ public Q_SLOTS:
     void slotSelectAccount(const MyMoneyObject &obj);
 
     void slotShowInvestmentMenu(const MyMoneyAccount& acc);
-    void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
 
     void updateActions(const SelectedObjects& selections) override;
 

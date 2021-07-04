@@ -173,14 +173,6 @@ public Q_SLOTS:
       */
     void slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* previous);
 
-    /**
-     * Informs respective views about selected object, so they can
-     * update action states and current object.
-     * @param obj Account, Category, Investment, Stock, Institution
-     */
-    void slotObjectSelected(const MyMoneyObject& obj);
-
-    void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent);
     void slotSettingsChanged();
 
     void updateActions(const SelectedObjects& selections);

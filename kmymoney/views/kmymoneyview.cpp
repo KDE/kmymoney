@@ -615,29 +615,6 @@ void KMyMoneyView::slotRememberLastView(View view)
     KMyMoneySettings::setLastViewSelected(static_cast<int>(view));
 }
 
-void KMyMoneyView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
-{
-    Q_D(KMyMoneyView);
-    switch (intent) {
-    case eView::Intent::None:
-        slotObjectSelected(obj);
-        break;
-
-    case eView::Intent::SynchronizeAccountInInvestmentView:
-        if (d->viewBases.contains(View::Investments))
-            d->viewBases[View::Investments]->slotSelectByObject(obj, intent);
-        break;
-
-    case eView::Intent::SynchronizeAccountInLedgersView:
-        if (d->viewBases.contains(View::OldLedgers))
-            d->viewBases[View::OldLedgers]->slotSelectByObject(obj, intent);
-        break;
-
-    default:
-        break;
-    }
-}
-
 void KMyMoneyView::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
     Q_D(KMyMoneyView);
@@ -670,28 +647,4 @@ void KMyMoneyView::executeAction(eMenu::Action action, const SelectedObjects& se
         }
     }
     currentView->executeAction(action, selections);
-}
-
-void KMyMoneyView::slotObjectSelected(const MyMoneyObject& obj)
-{
-    Q_D(KMyMoneyView);
-    // carrying some slots over to views isn't easy for all slots...
-    // ...so calls to kmymoney still must be here
-    if (typeid(obj) == typeid(MyMoneyAccount)) {
-        QVector<View> views {View::Investments, View::Categories, View::Accounts,
-                             View::OldLedgers, View::Reports, View::OnlineJobOutbox};
-        for (const auto view : views)
-            if (d->viewBases.contains(view))
-                d->viewBases[view]->slotSelectByObject(obj, eView::Intent::UpdateActions);
-
-        // for plugin only
-        const auto& acc = static_cast<const MyMoneyAccount&>(obj);
-        if (!acc.isIncomeExpense() &&
-                !MyMoneyFile::instance()->isStandardAccount(acc.id()))
-            emit accountSelected(acc);
-    } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
-        d->viewBases[View::Institutions]->slotSelectByObject(obj, eView::Intent::UpdateActions);
-    } else if (typeid(obj) == typeid(MyMoneySchedule)) {
-        d->viewBases[View::Schedules]->slotSelectByObject(obj, eView::Intent::UpdateActions);
-    }
 }

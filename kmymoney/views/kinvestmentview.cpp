@@ -257,27 +257,6 @@ void KInvestmentView::slotShowInvestmentMenu(const MyMoneyAccount& acc)
     pMenus[eMenu::Menu::Investment]->exec(QCursor::pos());
 }
 
-void KInvestmentView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
-{
-    switch(intent) {
-    case eView::Intent::UpdateActions:
-        updateActions(obj);
-        break;
-
-    case eView::Intent::SynchronizeAccountInInvestmentView:
-        if (KMyMoneySettings::syncLedgerInvestment())
-            slotSelectAccount(obj);
-        break;
-
-    case eView::Intent::OpenContextMenu:
-        slotShowInvestmentMenu(static_cast<const MyMoneyAccount&>(obj));
-        break;
-
-    default:
-        break;
-    }
-}
-
 void KInvestmentView::slotNewInvestment()
 {
     Q_D(KInvestmentView);

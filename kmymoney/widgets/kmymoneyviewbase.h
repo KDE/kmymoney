@@ -100,7 +100,6 @@ public Q_SLOTS:
         Q_UNUSED(selections)
     }
 
-    Q_DECL_DEPRECATED virtual void slotSelectByObject(const MyMoneyObject&, eView::Intent) {}
     virtual void slotSelectByVariant(const QVariantList& args, eView::Intent intent) {
         Q_UNUSED(args) Q_UNUSED(intent)
     }
