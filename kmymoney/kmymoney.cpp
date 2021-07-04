@@ -1445,7 +1445,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
     createInterfaces();
     KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Load, pPlugins, this, guiFactory());
     onlineJobAdministration::instance()->setOnlinePlugins(pPlugins.extended);
-    d->m_myMoneyView->setOnlinePlugins(pPlugins.online);
+    d->m_myMoneyView->setOnlinePlugins(&pPlugins.online);
 
     setCentralWidget(frame);
 
@@ -3185,7 +3185,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
         actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::SaveAs)))->setEnabled(d->canFileSaveAs());
         onlineJobAdministration::instance()->updateActions();
         onlineJobAdministration::instance()->setOnlinePlugins(pPlugins.extended);
-        d->m_myMoneyView->setOnlinePlugins(pPlugins.online);
+        d->m_myMoneyView->setOnlinePlugins(&pPlugins.online);
         d->updateActions(d->m_selections);
         return;
     }

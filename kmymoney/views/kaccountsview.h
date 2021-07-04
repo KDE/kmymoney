@@ -51,10 +51,10 @@ public:
 public Q_SLOTS:
     void slotNetWorthChanged(const MyMoneyMoney &netWorth, bool isApproximate);
 
-    void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
-
     void slotSettingsChanged() override;
     void updateActions(const SelectedObjects& selections) override;
+
+    virtual void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* plugins) override;
 
 private:
     Q_DECLARE_PRIVATE(KAccountsView)

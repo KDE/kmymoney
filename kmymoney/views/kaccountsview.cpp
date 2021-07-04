@@ -177,18 +177,10 @@ void KAccountsView::slotNetWorthChanged(const MyMoneyMoney &netWorth, bool isApp
                        : i18n("Net Worth: %1", formattedValue));
 }
 
-void KAccountsView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
+void KAccountsView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* plugins)
 {
     Q_D(KAccountsView);
-    switch (intent) {
-    case eView::Intent::SetOnlinePlugins:
-        if (variant.count() == 1)
-            d->m_onlinePlugins = static_cast<QMap<QString, KMyMoneyPlugin::OnlinePlugin*>*>(variant.first().value<void*>());
-        break;
-
-    default:
-        break;
-    }
+    d->m_onlinePlugins = plugins;
 }
 
 void KAccountsView::slotNewAccount()

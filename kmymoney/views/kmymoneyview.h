@@ -130,7 +130,7 @@ public:
       */
     void updateViewType();
 
-    void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins);
+    void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* plugins);
 
     // TODO: remove that function
     /**
@@ -239,6 +239,8 @@ Q_SIGNALS:
 
     void addSharedActionButton(eMenu::Action action, QAction* defaultAction);
     void selectSharedActionButton(eMenu::Action action, QAction* defaultAction);
+
+    void onlinePluginsChanged(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* plugins);
 };
 
 #endif

@@ -31,6 +31,9 @@ namespace eMenu {
 enum class Action;
 enum class Menu;
 }
+namespace KMyMoneyPlugin {
+class OnlinePlugin;
+}
 
 /**
   * This class is an abstract base class that all specific views
@@ -104,6 +107,15 @@ public Q_SLOTS:
         Q_UNUSED(args) Q_UNUSED(intent)
     }
     virtual void slotSettingsChanged() {}
+
+    /**
+     * Inform the view about available online plugins. The default
+     * does not do anything
+     */
+    virtual void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* plugins)
+    {
+        Q_UNUSED(plugins)
+    }
 
     virtual void setDefaultFocus();
 

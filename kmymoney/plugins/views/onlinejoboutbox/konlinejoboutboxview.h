@@ -58,9 +58,9 @@ public:
     QStringList selectedOnlineJobs() const;
 
 public Q_SLOTS:
-    void slotSelectByVariant(const QVariantList& variant, eView::Intent intent) override;
-
     void updateActions(const SelectedObjects& selections) override;
+
+    virtual void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* plugins) override;
 
 Q_SIGNALS:
     void sendJobs(QList<onlineJob>);

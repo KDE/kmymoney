@@ -259,14 +259,10 @@ void KMyMoneyView::updateViewType()
     }
 }
 
-void KMyMoneyView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins)
+void KMyMoneyView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* plugins)
 {
-    Q_D(KMyMoneyView);
-    if (d->viewBases.contains(View::Accounts))
-        d->viewBases[View::Accounts]->slotSelectByVariant(QVariantList {QVariant::fromValue(static_cast<void*>(&plugins))}, eView::Intent::SetOnlinePlugins);
-
-    if (d->viewBases.contains(View::OnlineJobOutbox))
-        d->viewBases[View::OnlineJobOutbox]->slotSelectByVariant(QVariantList {QVariant::fromValue(static_cast<void*>(&plugins))}, eView::Intent::SetOnlinePlugins);
+    // propagate to all views
+    emit onlinePluginsChanged(plugins);
 }
 
 eDialogs::ScheduleResultCode KMyMoneyView::enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys)
@@ -304,6 +300,7 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
     connect(view, &KMyMoneyViewBase::requestCustomContextMenu, this, &KMyMoneyView::requestCustomContextMenu);
     connect(view, &KMyMoneyViewBase::requestActionTrigger, this, &KMyMoneyView::requestActionTrigger);
     connect(this, &KMyMoneyView::settingsChanged, view, &KMyMoneyViewBase::slotSettingsChanged);
+    connect(this, &KMyMoneyView::onlinePluginsChanged, view, &KMyMoneyViewBase::setOnlinePlugins);
 
     connect(view, &KMyMoneyViewBase::viewStateChanged, d->viewFrames[idView], &KPageWidgetItem::setEnabled);
     connect(view, &KMyMoneyViewBase::requestSelectionChange, this, &KMyMoneyView::requestSelectionChange);
@@ -332,6 +329,7 @@ void KMyMoneyView::removeView(View idView)
     disconnect(view, &KMyMoneyViewBase::requestCustomContextMenu, this, &KMyMoneyView::requestCustomContextMenu);
     disconnect(view, &KMyMoneyViewBase::requestActionTrigger, this, &KMyMoneyView::requestActionTrigger);
     disconnect(this, &KMyMoneyView::settingsChanged, view, &KMyMoneyViewBase::slotSettingsChanged);
+    disconnect(this, &KMyMoneyView::onlinePluginsChanged, view, &KMyMoneyViewBase::setOnlinePlugins);
 
     d->m_model->removePage(d->viewFrames[idView]);
     d->viewFrames.remove(idView);
