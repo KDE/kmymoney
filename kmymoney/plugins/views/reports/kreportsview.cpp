@@ -124,7 +124,6 @@ void KReportsView::executeAction(eMenu::Action action, const SelectedObjects& se
 
 void KReportsView::executeCustomAction(eView::Action action)
 {
-    Q_D(KReportsView);
     switch(action) {
     case eView::Action::Refresh:
         refresh();

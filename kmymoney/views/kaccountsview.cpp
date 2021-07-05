@@ -80,7 +80,6 @@ void KAccountsView::slotSettingsChanged()
 
 void KAccountsView::executeCustomAction(eView::Action action)
 {
-    Q_D(KAccountsView);
     switch(action) {
     case eView::Action::Refresh:
         refresh();

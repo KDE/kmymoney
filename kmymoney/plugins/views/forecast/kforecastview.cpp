@@ -70,7 +70,6 @@ void KForecastView::showEvent(QShowEvent* event)
 
 void KForecastView::executeCustomAction(eView::Action action)
 {
-    Q_D(KForecastView);
     switch(action) {
     case eView::Action::Refresh:
         refresh();

@@ -474,8 +474,6 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
 
 void KMyMoneyView::slotSettingsChanged()
 {
-    Q_D(KMyMoneyView);
-
     updateViewType();
 
     emit settingsChanged();
