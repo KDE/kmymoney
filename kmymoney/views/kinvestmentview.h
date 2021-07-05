@@ -61,11 +61,6 @@ private:
     Q_DECLARE_PRIVATE(KInvestmentView)
 
 private Q_SLOTS:
-    /**
-      * This slot is used to reload (filters + equities account) specific tab
-      */
-    void slotLoadTab(int index);
-
     void slotEquitySelected(const QModelIndex &current, const QModelIndex &previous);
     void slotSecuritySelected(const QModelIndex &current, const QModelIndex &previous);
 

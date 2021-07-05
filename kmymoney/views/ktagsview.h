@@ -42,7 +42,6 @@ public:
     ~KTagsView() override;
 
 public Q_SLOTS:
-    void slotSelectTagAndTransaction(const QString& tagId, const QString& journalEntryId);
     void slotSelectTag(const QString& tagId);
     void slotHelp();
 

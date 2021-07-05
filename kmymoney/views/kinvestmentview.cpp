@@ -7,8 +7,6 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-
-
 #include "kinvestmentview_p.h"
 
 #include <typeinfo>
@@ -85,8 +83,6 @@ void KInvestmentView::refresh()
 {
     Q_D(KInvestmentView);
     d->m_needReload[eView::Investment::Tab::Equities] = d->m_needReload[eView::Investment::Tab::Securities] = true;
-    if (isVisible())
-        slotLoadTab(d->ui->m_tab->currentIndex());
 }
 
 void KInvestmentView::showEvent(QShowEvent* event)
@@ -139,23 +135,6 @@ void KInvestmentView::updateActions(const MyMoneyObject& obj)
     default:
         d->m_currentEquity = MyMoneyAccount();
         break;
-    }
-}
-
-void KInvestmentView::slotLoadTab(int index)
-{
-    Q_D(KInvestmentView);
-    auto tab = static_cast<eView::Investment::Tab>(index);
-    if (d->m_needReload[tab]) {
-        switch (tab) {
-        case eView::Investment::Tab::Equities:
-            d->loadInvestmentTab();
-            break;
-        case eView::Investment::Tab::Securities:
-            d->loadSecuritiesTab();
-            break;
-        }
-        d->m_needReload[tab] = false;
     }
 }
 
