@@ -38,7 +38,7 @@ const QHash<Icon, QHash<IconSet, QString>> iconMappings{
     {Icon::AccountClosed,
      {{IconSet::Common, QStringLiteral("account-types-closed")},
       {IconSet::Oxygen, QStringLiteral("dialog-close")},
-      {IconSet::Breeze, QStringLiteral("dialog-close")}}},
+      {IconSet::Breeze, QStringLiteral("view-financial-account-closed")}}},
     {Icon::ArrowDown, {{IconSet::Common, QStringLiteral("arrow-down")}, {IconSet::Tango, QStringLiteral("go-down")}}},
     {Icon::ArrowLeft, {{IconSet::Common, QStringLiteral("arrow-left")}, {IconSet::Tango, QStringLiteral("go-previous")}}},
     {Icon::ArrowRight, {{IconSet::Common, QStringLiteral("arrow-right")}, {IconSet::Tango, QStringLiteral("go-next")}}},
@@ -176,6 +176,11 @@ const QHash<Icon, QHash<IconSet, QString>> iconMappings{
      {{IconSet::Common, QStringLiteral("account")},
       {IconSet::Oxygen, QStringLiteral("view-bank-account")},
       {IconSet::Breeze, QStringLiteral("view-financial-account-delete")}}},
+    {Icon::AccountClose, {{IconSet::Breeze, QStringLiteral("view-financial-account-close")}}},
+    {Icon::AccountReopen, {{IconSet::Breeze, QStringLiteral("view-financial-account-reopen")}}},
+    {Icon::AccountUpdate, {{IconSet::Breeze, QStringLiteral("edit-download")}}},
+    {Icon::AccountUpdateAll, {{IconSet::Breeze, QStringLiteral("edit-download")}}},
+    {Icon::PriceUpdate, {{IconSet::Common, QStringLiteral("view-refresh-symbolic")}}},
     {Icon::Calendar, {{IconSet::Common, QStringLiteral("view-calendar")}}},
     {Icon::CalendarDay,
      {{IconSet::Common, QStringLiteral("office-calendar")},
@@ -303,10 +308,6 @@ const QHash<Icon, QHash<IconSet, QString>> iconMappings{
 const QHash<Icon, iconDescription> sComposedIcons{
 
     {Icon::AccountFinishReconciliation, {Icon::Merge, Icon::DialogOK, Qt::BottomRightCorner}},
-    {Icon::AccountClose, {Icon::BankAccount, Icon::DialogClose, Qt::BottomRightCorner}},
-    {Icon::AccountReopen, {Icon::BankAccount, Icon::DialogOK, Qt::BottomRightCorner}},
-    {Icon::AccountUpdate, {Icon::BankAccount, Icon::Download, Qt::BottomRightCorner}},
-    {Icon::AccountUpdateAll, {Icon::BankAccount, Icon::Download, Qt::BottomRightCorner}},
     {Icon::AccountCreditTransfer, {Icon::BankAccount, Icon::MailMessageNew, Qt::BottomRightCorner}},
     {Icon::TransactionMatch, {Icon::Transaction, Icon::DocumentImport, Qt::BottomRightCorner}},
     {Icon::TransactionAccept, {Icon::Transaction, Icon::DialogOKApply, Qt::BottomRightCorner}},
@@ -318,8 +319,7 @@ const QHash<Icon, iconDescription> sComposedIcons{
     {Icon::BudgetNew, {Icon::Budget, Icon::ListAdd, Qt::TopRightCorner}},
     {Icon::BudgetRename, {Icon::Budget, Icon::DocumentEdit, Qt::BottomRightCorner}},
     {Icon::BudgetDelete, {Icon::Budget, Icon::EditDelete, Qt::BottomRightCorner}},
-    {Icon::BudgetCopy, {Icon::Budget, Icon::EditCopy, Qt::BottomRightCorner}},
-    {Icon::PriceUpdate, {Icon::Currencies, Icon::Download, Qt::BottomRightCorner}}};
+    {Icon::BudgetCopy, {Icon::Budget, Icon::EditCopy, Qt::BottomRightCorner}}};
 
 KMM_ICONS_EXPORT void setUpMappings(const QString& themeName)
 {
