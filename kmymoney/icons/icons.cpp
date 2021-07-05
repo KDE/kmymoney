@@ -6,14 +6,14 @@
 
 #include "icons.h"
 
-#include <QHash>
-#include <QString>
-#include <QIcon>
-#include <QPixmapCache>
-#include <QPainter>
-#include <QRegularExpression>
 #include <QDir>
+#include <QHash>
+#include <QIcon>
+#include <QPainter>
+#include <QPixmapCache>
+#include <QRegularExpression>
 #include <QStandardPaths>
+#include <QString>
 
 namespace Icons {
 QHash<Icon, QString> sStandardIcons;
@@ -164,6 +164,18 @@ const QHash<Icon, QHash<IconSet, QString>> iconMappings{
      {{IconSet::Common, QStringLiteral("account")},
       {IconSet::Oxygen, QStringLiteral("view-bank-account")},
       {IconSet::Breeze, QStringLiteral("view-financial-account")}}},
+    {Icon::AccountNew,
+     {{IconSet::Common, QStringLiteral("account")},
+      {IconSet::Oxygen, QStringLiteral("view-bank-account")},
+      {IconSet::Breeze, QStringLiteral("view-financial-account-add")}}},
+    {Icon::AccountEdit,
+     {{IconSet::Common, QStringLiteral("account")},
+      {IconSet::Oxygen, QStringLiteral("view-bank-account")},
+      {IconSet::Breeze, QStringLiteral("view-financial-account-edit")}}},
+    {Icon::AccountDelete,
+     {{IconSet::Common, QStringLiteral("account")},
+      {IconSet::Oxygen, QStringLiteral("view-bank-account")},
+      {IconSet::Breeze, QStringLiteral("view-financial-account-delete")}}},
     {Icon::Calendar, {{IconSet::Common, QStringLiteral("view-calendar")}}},
     {Icon::CalendarDay,
      {{IconSet::Common, QStringLiteral("office-calendar")},
@@ -192,8 +204,19 @@ const QHash<Icon, QHash<IconSet, QString>> iconMappings{
     {Icon::FinancialCategories,
      {{IconSet::Common, QStringLiteral("categories")},
       {IconSet::Oxygen, QStringLiteral("view-categories")},
-      {IconSet::Breeze, QStringLiteral("financial-categories")},
-      {IconSet::Oxygen, QStringLiteral("view-financial-categories")}}},
+      {IconSet::Breeze, QStringLiteral("financial-categories")}}},
+    {Icon::CategoryNew,
+     {{IconSet::Common, QStringLiteral("categories")},
+      {IconSet::Oxygen, QStringLiteral("view-categories")},
+      {IconSet::Breeze, QStringLiteral("financial-category-add")}}},
+    {Icon::CategoryEdit,
+     {{IconSet::Common, QStringLiteral("categories")},
+      {IconSet::Oxygen, QStringLiteral("view-categories")},
+      {IconSet::Breeze, QStringLiteral("financial-category-edit")}}},
+    {Icon::CategoryDelete,
+     {{IconSet::Common, QStringLiteral("categories")},
+      {IconSet::Oxygen, QStringLiteral("view-categories")},
+      {IconSet::Breeze, QStringLiteral("financial-category-delete")}}},
     {Icon::Ledger,
      {{IconSet::Common, QStringLiteral("ledger")},
       {IconSet::Oxygen, QStringLiteral("view-financial-list")},
@@ -213,6 +236,18 @@ const QHash<Icon, QHash<IconSet, QString>> iconMappings{
       {IconSet::Oxygen, QStringLiteral("view-income-categories")}}},
     {Icon::Institution,
      {{IconSet::Common, QStringLiteral("institution")}, {IconSet::Oxygen, QStringLiteral("view-bank")}, {IconSet::Breeze, QStringLiteral("view-institution")}}},
+    {Icon::InstitutionNew,
+     {{IconSet::Common, QStringLiteral("institution")},
+      {IconSet::Oxygen, QStringLiteral("view-bank")},
+      {IconSet::Breeze, QStringLiteral("view-institution-add")}}},
+    {Icon::InstitutionEdit,
+     {{IconSet::Common, QStringLiteral("institution")},
+      {IconSet::Oxygen, QStringLiteral("view-bank")},
+      {IconSet::Breeze, QStringLiteral("view-institution-edit")}}},
+    {Icon::InstitutionDelete,
+     {{IconSet::Common, QStringLiteral("institution")},
+      {IconSet::Oxygen, QStringLiteral("view-bank")},
+      {IconSet::Breeze, QStringLiteral("view-institution-delete")}}},
     {Icon::Institutions,
      {{IconSet::Common, QStringLiteral("institution")}, {IconSet::Oxygen, QStringLiteral("view-bank")}, {IconSet::Breeze, QStringLiteral("institution")}}},
     {Icon::Investment,
@@ -265,37 +300,26 @@ const QHash<Icon, QHash<IconSet, QString>> iconMappings{
     {Icon::NoVisibility, {{IconSet::Common, QStringLiteral("hint")}}},
     {Icon::SelectAll, {{IconSet::Common, QStringLiteral("edit-select-all")}}}};
 
-const QHash<Icon, iconDescription> sComposedIcons {
-    {Icon::InstitutionNew,              {Icon::Bank, Icon::ListAdd, Qt::BottomRightCorner}},
-    {Icon::InstitutionEdit,             {Icon::Bank, Icon::DocumentEdit, Qt::BottomRightCorner}},
-    {Icon::InstitutionDelete,           {Icon::Bank, Icon::EditDelete, Qt::BottomRightCorner}},
-    {Icon::AccountNew,                  {Icon::BankAccount, Icon::ListAdd, Qt::TopRightCorner}},
-    {Icon::AccountFinishReconciliation, {Icon::Merge,                    Icon::DialogOK,       Qt::BottomRightCorner}},
-    {Icon::AccountEdit,                 {Icon::BankAccount, Icon::DocumentEdit, Qt::BottomRightCorner}},
-    {Icon::AccountDelete,               {Icon::BankAccount, Icon::EditDelete, Qt::BottomRightCorner}},
-    {Icon::AccountClose,                {Icon::BankAccount, Icon::DialogClose, Qt::BottomRightCorner}},
-    {Icon::AccountReopen,               {Icon::BankAccount, Icon::DialogOK, Qt::BottomRightCorner}},
-    {Icon::AccountUpdate,               {Icon::BankAccount, Icon::Download, Qt::BottomRightCorner}},
-    {Icon::AccountUpdateAll,            {Icon::BankAccount, Icon::Download, Qt::BottomRightCorner}},
-    {Icon::AccountCreditTransfer,       {Icon::BankAccount, Icon::MailMessageNew, Qt::BottomRightCorner}},
-    {Icon::CategoryNew,                 {Icon::FinancialCategories, Icon::ListAdd, Qt::TopRightCorner}},
-    {Icon::CategoryEdit,                {Icon::FinancialCategories, Icon::DocumentEdit, Qt::BottomRightCorner}},
-    {Icon::CategoryDelete,              {Icon::FinancialCategories, Icon::EditDelete, Qt::BottomRightCorner}},
-    {Icon::TransactionNew,              {Icon::Transaction, Icon::ListAdd, Qt::TopRightCorner}},
-    {Icon::TransactionEdit,             {Icon::Transaction, Icon::DocumentEdit, Qt::BottomRightCorner}},
-    {Icon::TransactionMatch,            {Icon::Transaction, Icon::DocumentImport, Qt::BottomRightCorner}},
-    {Icon::TransactionAccept,           {Icon::Transaction, Icon::DialogOKApply, Qt::BottomRightCorner}},
-    {Icon::InvestmentNew,               {Icon::Investment, Icon::ListAdd, Qt::TopRightCorner}},
-    {Icon::InvestmentEdit,              {Icon::Investment, Icon::DocumentEdit, Qt::BottomRightCorner}},
-    {Icon::InvestmentDelete,            {Icon::Investment, Icon::EditDelete, Qt::BottomRightCorner}},
-    {Icon::InvestmentOnlinePrice,       {Icon::Investment, Icon::Download, Qt::BottomRightCorner}},
-    {Icon::InvestmentOnlinePriceAll,    {Icon::Investment, Icon::Download, Qt::BottomRightCorner}},
-    {Icon::BudgetNew,                   {Icon::Budget, Icon::ListAdd, Qt::TopRightCorner}},
-    {Icon::BudgetRename,                {Icon::Budget, Icon::DocumentEdit, Qt::BottomRightCorner}},
-    {Icon::BudgetDelete,                {Icon::Budget, Icon::EditDelete, Qt::BottomRightCorner}},
-    {Icon::BudgetCopy,                  {Icon::Budget, Icon::EditCopy, Qt::BottomRightCorner}},
-    {Icon::PriceUpdate,                 {Icon::Currencies, Icon::Download, Qt::BottomRightCorner}}
-};
+const QHash<Icon, iconDescription> sComposedIcons{
+
+    {Icon::AccountFinishReconciliation, {Icon::Merge, Icon::DialogOK, Qt::BottomRightCorner}},
+    {Icon::AccountClose, {Icon::BankAccount, Icon::DialogClose, Qt::BottomRightCorner}},
+    {Icon::AccountReopen, {Icon::BankAccount, Icon::DialogOK, Qt::BottomRightCorner}},
+    {Icon::AccountUpdate, {Icon::BankAccount, Icon::Download, Qt::BottomRightCorner}},
+    {Icon::AccountUpdateAll, {Icon::BankAccount, Icon::Download, Qt::BottomRightCorner}},
+    {Icon::AccountCreditTransfer, {Icon::BankAccount, Icon::MailMessageNew, Qt::BottomRightCorner}},
+    {Icon::TransactionMatch, {Icon::Transaction, Icon::DocumentImport, Qt::BottomRightCorner}},
+    {Icon::TransactionAccept, {Icon::Transaction, Icon::DialogOKApply, Qt::BottomRightCorner}},
+    {Icon::InvestmentNew, {Icon::Investment, Icon::ListAdd, Qt::TopRightCorner}},
+    {Icon::InvestmentEdit, {Icon::Investment, Icon::DocumentEdit, Qt::BottomRightCorner}},
+    {Icon::InvestmentDelete, {Icon::Investment, Icon::EditDelete, Qt::BottomRightCorner}},
+    {Icon::InvestmentOnlinePrice, {Icon::Investment, Icon::Download, Qt::BottomRightCorner}},
+    {Icon::InvestmentOnlinePriceAll, {Icon::Investment, Icon::Download, Qt::BottomRightCorner}},
+    {Icon::BudgetNew, {Icon::Budget, Icon::ListAdd, Qt::TopRightCorner}},
+    {Icon::BudgetRename, {Icon::Budget, Icon::DocumentEdit, Qt::BottomRightCorner}},
+    {Icon::BudgetDelete, {Icon::Budget, Icon::EditDelete, Qt::BottomRightCorner}},
+    {Icon::BudgetCopy, {Icon::Budget, Icon::EditCopy, Qt::BottomRightCorner}},
+    {Icon::PriceUpdate, {Icon::Currencies, Icon::Download, Qt::BottomRightCorner}}};
 
 KMM_ICONS_EXPORT void setUpMappings(const QString& themeName)
 {
@@ -322,9 +346,9 @@ KMM_ICONS_EXPORT void setUpMappings(const QString& themeName)
 }
 
 /**
-  * This method overlays an icon over another one, to get a composite one
-  * eg. an icon to add accounts
-  */
+ * This method overlays an icon over another one, to get a composite one
+ * eg. an icon to add accounts
+ */
 QIcon overlayIcon(iconDescription description, const int size = 64)
 {
     const auto iconName = sStandardIcons[description.baseIcon];
@@ -372,7 +396,7 @@ QIcon overlayIcon(iconDescription description, const int size = 64)
     }
     pixmapPainter.drawPixmap(x, y, pxIcon.width() / 2, pxIcon.height() / 2, pxOverlay);
 
-    //save for later use
+    // save for later use
     QPixmapCache::insert(kyIcon, pxIcon);
 
     return pxIcon;
@@ -406,7 +430,9 @@ KMM_ICONS_EXPORT bool storeIconInApplicationCache(const QString& name, const QIc
         } else {
             const QString cacheDir = iconCacheDir();
             if (!cacheDir.isEmpty()) {
-                return icon.pixmap(16).save(QString::fromLatin1("%1/%2-%3").arg(cacheDir, matcher.captured(QStringLiteral("type")), matcher.captured(QStringLiteral("name"))), "PNG");
+                return icon.pixmap(16).save(
+                    QString::fromLatin1("%1/%2-%3").arg(cacheDir, matcher.captured(QStringLiteral("type")), matcher.captured(QStringLiteral("name"))),
+                    "PNG");
             }
         }
     }
@@ -415,8 +441,8 @@ KMM_ICONS_EXPORT bool storeIconInApplicationCache(const QString& name, const QIc
 
 KMM_ICONS_EXPORT QIcon loadIconFromApplicationCache(const QString& name)
 {
-    const QHash<QString, Icon> sEnumIcons {
-        { QStringLiteral("Bank"), Icon::Bank },
+    const QHash<QString, Icon> sEnumIcons{
+        {QStringLiteral("Bank"), Icon::Bank},
     };
 
     // split the icon name from the type
@@ -434,7 +460,8 @@ KMM_ICONS_EXPORT QIcon loadIconFromApplicationCache(const QString& name)
             // otherwise, we use the type as part of the filename
             const QString cacheDir = iconCacheDir();
             if (!cacheDir.isEmpty()) {
-                const QString filename = QString::fromLatin1("%1/%2-%3").arg(cacheDir, matcher.captured(QStringLiteral("type")), matcher.captured(QStringLiteral("name")));
+                const QString filename =
+                    QString::fromLatin1("%1/%2-%3").arg(cacheDir, matcher.captured(QStringLiteral("type")), matcher.captured(QStringLiteral("name")));
                 if (QFile::exists(filename)) {
                     return QIcon(filename);
                 }
