@@ -1775,10 +1775,15 @@ public:
             QString kvpId = query.value(0).toString();
             QString kvpKey = query.value(1).toString();
             QString kvpData = query.value(2).toString();
+
+            // TODO: these should be moved to upgradeVXX() function
             if (isOnlineBanking) {
                 if ((kvpKey.toLower().compare(QLatin1String("provider")) == 0)
                         && (kvpData.toLower().compare(QLatin1String("kmymoney ofx")) == 0)) {
                     kvpData = QStringLiteral("ofximporter");
+                }
+                if ((kvpKey.toLower().compare(QLatin1String("provider")) == 0) && (kvpData.toLower().compare(QLatin1String("weboob")) == 0)) {
+                    kvpData = QStringLiteral("woob");
                 }
             }
             retval[kvpId].setValue(kvpKey, kvpData);
