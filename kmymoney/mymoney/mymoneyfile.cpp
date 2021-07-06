@@ -3786,9 +3786,12 @@ bool MyMoneyFile::isReferenced(const MyMoneyObject& obj, const QBitArray& skipCh
     // is deleted, so we don't need to check here. See
     // MyMoneyStorageMgr::removeReferences(). In case
     // you miss the report checks in the following lines ;)
+    const auto id = obj.id();
+    return isReferenced(id, skipCheck);
+}
 
-    const auto& id = obj.id();
-
+bool MyMoneyFile::isReferenced(const QString& id, const QBitArray& skipCheck) const
+{
     // FIXME optimize the list of objects we have to checks
     //       with a bit of knowledge of the internal structure, we
     //       could optimize the number of objects we check for references
@@ -3845,6 +3848,11 @@ bool MyMoneyFile::isReferenced(const MyMoneyObject& obj, const QBitArray& skipCh
 bool MyMoneyFile::isReferenced(const MyMoneyObject& obj) const
 {
     return isReferenced(obj, QBitArray((int)eStorage::Reference::Count));
+}
+
+bool MyMoneyFile::isReferenced(const QString& id) const
+{
+    return isReferenced(id, QBitArray((int)eStorage::Reference::Count));
 }
 
 QSet<QString> MyMoneyFile::referencedObjects() const

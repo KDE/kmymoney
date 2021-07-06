@@ -36,6 +36,7 @@ public:
         OnlineJob,
         Report,
         ReconciliationAccount,
+        Security,
     } Object_t;
     SelectedObjects();
 

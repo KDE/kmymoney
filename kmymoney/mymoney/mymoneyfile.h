@@ -1629,6 +1629,9 @@ public:
     bool isReferenced(const MyMoneyObject& obj, const QBitArray& skipCheck) const;
     bool isReferenced(const MyMoneyObject& obj) const;
 
+    bool isReferenced(const QString& id, const QBitArray& skipCheck) const;
+    bool isReferenced(const QString& id) const;
+
     /**
      * This method returns the set of ids that are referenced by
      * other objects in all of the data objects.

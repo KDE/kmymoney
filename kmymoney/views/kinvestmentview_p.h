@@ -1,12 +1,11 @@
 /*
     SPDX-FileCopyrightText: 2002-2004 Kevin Tambascio <ktambascio@users.sourceforge.net>
-    SPDX-FileCopyrightText: 2003-2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2003-2021 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-FileCopyrightText: 2004-2005 Ace Jones <acejones@users.sourceforge.net>
     SPDX-FileCopyrightText: 2009-2010 Alvaro Soliverez <asoliverez@kde.org>
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
-
 
 #ifndef KINVESTMENTVIEW_P_H
 #define KINVESTMENTVIEW_P_H
@@ -71,33 +70,6 @@ public:
 
     ~KInvestmentViewPrivate()
     {
-        /// @todo port to new model code
-#if 0
-        if (!m_needLoad) {
-            // save the header state of the equities list
-            auto cfgGroup = KSharedConfig::openConfig()->group("KInvestmentView_Equities");
-            auto cfgHeader = ui->m_equitiesTree->header()->saveState();
-            auto visEColumns = m_equitiesProxyModel->getVisibleColumns();
-
-            QList<int> cfgColumns;
-            foreach (const auto visColumn, visEColumns)
-                cfgColumns.append(static_cast<int>(visColumn));
-
-            cfgGroup.writeEntry("HeaderState", cfgHeader);
-            cfgGroup.writeEntry("ColumnsSelection", cfgColumns);
-
-            // save the header state of the securities list
-            cfgGroup = KSharedConfig::openConfig()->group("KInvestmentView_Securities");
-            cfgHeader = ui->m_securitiesTree->header()->saveState();
-            auto visSColumns = m_securitiesProxyModel->getVisibleColumns();
-            cfgColumns.clear();
-            foreach (const auto visColumn, visSColumns)
-                cfgColumns.append(static_cast<int>(visColumn));
-
-            cfgGroup.writeEntry("HeaderState", cfgHeader);
-            cfgGroup.writeEntry("ColumnsSelection", cfgColumns);
-        }
-#endif
         delete ui;
     }
 
@@ -164,10 +136,6 @@ public:
         m_equityColumnSelector->setSelectable(equityColumns);
 
 
-        q->connect(ui->m_equitiesTree, &QWidget::customContextMenuRequested, q, &KInvestmentView::slotInvestmentMenuRequested);
-        q->connect(ui->m_equitiesTree->selectionModel(), &QItemSelectionModel::currentRowChanged, q, &KInvestmentView::slotEquitySelected);
-        q->connect(ui->m_equitiesTree, &QTreeView::doubleClicked, q, &KInvestmentView::slotEditInvestment);
-
         // Securities tab
         m_securitiesProxyModel = new QSortFilterProxyModel(q);
         ui->m_securitiesTree->setModel(m_securitiesProxyModel);
@@ -179,22 +147,43 @@ public:
         m_securityColumnSelector->setAlwaysVisible(QVector<int>({0}));
         m_securityColumnSelector->setSelectable(m_securityColumnSelector->columns());
 
-        ui->m_deleteSecurityButton->setIcon(Icons::get(Icon::EditRemove));
-        ui->m_deleteSecurityButton->setEnabled(false);
-        ui->m_editSecurityButton->setIcon(Icons::get(Icon::DocumentEdit));
-        ui->m_editSecurityButton->setEnabled(false);
-
         q->connect(ui->m_searchSecurities, &QLineEdit::textChanged, m_securitiesProxyModel, &QSortFilterProxyModel::setFilterFixedString);
-        q->connect(ui->m_securitiesTree->selectionModel(), &QItemSelectionModel::currentRowChanged, q, &KInvestmentView::slotSecuritySelected);
-        q->connect(ui->m_editSecurityButton, &QAbstractButton::clicked, q, &KInvestmentView::slotEditSecurity);
-        q->connect(ui->m_deleteSecurityButton, &QAbstractButton::clicked, q, &KInvestmentView::slotDeleteSecurity);
+    }
 
-        // Investment Page
-        m_needReload[eView::Investment::Tab::Equities] = m_needReload[eView::Investment::Tab::Securities] = true;
-        q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KInvestmentView::refresh);
+    void loadAccount(const QString& id)
+    {
+        Q_Q(KInvestmentView);
+        auto baseModel = MyMoneyFile::instance()->accountsModel();
+        auto baseIdx = baseModel->indexById(id);
+        QModelIndex idx;
 
-        q->connect(ui->m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, q, &KInvestmentView::slotLoadAccount);
+        m_selections.clearSelections();
+        emit q->requestSelectionChange(m_selections);
 
+        m_equitiesProxyModel->setHideAllEntries(true);
+        m_idInvAcc.clear();
+        if (baseIdx.isValid()) {
+            if (baseIdx.data(eMyMoney::Model::AccountTypeRole).value<eMyMoney::Account::Type>() == eMyMoney::Account::Type::Investment) {
+                m_equitiesProxyModel->setHideAllEntries(false);
+                idx = baseModel->mapFromBaseSource(m_equitiesProxyModel, baseIdx);
+                m_idInvAcc = id;
+            } else {
+                idx = QModelIndex();
+            }
+        }
+        ui->m_equitiesTree->setRootIndex(idx);
+
+        if (m_equitiesProxyModel->rowCount(idx) > 0) {
+            idx = m_equitiesProxyModel->index(0, 0, idx);
+            ui->m_equitiesTree->selectionModel()->select(idx, QItemSelectionModel::SelectCurrent | QItemSelectionModel::Rows);
+            ui->m_equitiesTree->setCurrentIndex(idx);
+        }
+
+        if (m_securitiesProxyModel->rowCount(QModelIndex()) > 0) {
+            idx = m_securitiesProxyModel->index(0, 0);
+            ui->m_securitiesTree->selectionModel()->select(idx, QItemSelectionModel::SelectCurrent | QItemSelectionModel::Rows);
+            ui->m_securitiesTree->setCurrentIndex(idx);
+        }
     }
 
     /**
@@ -202,16 +191,16 @@ public:
       */
     void selectDefaultInvestmentAccount()
     {
-        Q_Q(KInvestmentView);
         if (m_accountsProxyModel->rowCount() > 0) {
             /// @todo port to new model code
-#if 0
-            auto firsitem = m_accountsProxyModel->index(0, 0, QModelIndex());
-            if (m_accountsProxyModel->hasChildren(firsitem)) {
-                auto seconditem = m_accountsProxyModel->index(0, 0, firsitem);
-                q->slotSelectAccount(seconditem.data(EquitiesModel::EquityID).toString());
+            const auto indexes = m_accountsProxyModel->match(m_accountsProxyModel->index(0, 0),
+                                                             eMyMoney::Model::AccountTypeRole,
+                                                             QVariant::fromValue<eMyMoney::Account::Type>(eMyMoney::Account::Type::Investment),
+                                                             1,
+                                                             Qt::MatchRecursive);
+            if (!indexes.isEmpty()) {
+                ui->m_accountComboBox->setSelected(indexes.first().data(eMyMoney::Model::IdRole).toString());
             }
-#endif
         }
     }
 
@@ -247,14 +236,13 @@ public:
       */
     bool m_needLoad;
 
-    bool m_needReload[2];
     AccountNamesFilterProxyModel* m_accountsProxyModel;
-    AccountsProxyModel*           m_equitiesProxyModel;
-    // EquitiesFilterProxyModel*     m_equitiesProxyModel;
-    QSortFilterProxyModel*        m_securitiesProxyModel;
-    ColumnSelector*               m_securityColumnSelector;
-    ColumnSelector*               m_equityColumnSelector;
-    MyMoneyAccount                m_currentEquity;
+    AccountsProxyModel* m_equitiesProxyModel;
+    QSortFilterProxyModel* m_securitiesProxyModel;
+    ColumnSelector* m_securityColumnSelector;
+    ColumnSelector* m_equityColumnSelector;
+    SelectedObjects m_equitySelections;
+    SelectedObjects m_securitySelections;
 };
 
 #endif

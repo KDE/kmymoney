@@ -94,6 +94,7 @@ enum class Action {
     // *************
     NewInvestment, EditInvestment, DeleteInvestment,
     UpdatePriceOnline, UpdatePriceManually,
+    EditSecurity, DeleteSecurity,
     // *************
     // The schedule menu
     // *************
@@ -141,6 +142,7 @@ enum class Menu {
     Tag,
     Payee,
     Investment,
+    Security,
     Transaction,
     MoveTransaction,
     MarkTransaction,

@@ -182,6 +182,11 @@
   <Action name="account_close" />
   <Action name="account_reopen" />
  </Menu>
+ <Menu name="security_context_menu">
+  <title>Security options</title>
+  <Action name="security_edit" />
+  <Action name="security_delete" />
+ </Menu>
  <Menu name="schedule_context_menu">
   <title>Scheduled transactions options</title>
   <Action name="schedule_new" />
