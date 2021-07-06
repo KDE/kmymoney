@@ -63,8 +63,6 @@ public:
       */
     ~KScheduledView() override;
 
-    void executeCustomAction(eView::Action action) override;
-
     // TODO: remove that function
     /**
      * ugly proxy function

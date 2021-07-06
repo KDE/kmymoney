@@ -1,6 +1,9 @@
+# For all the configurable CMake switches, please see https://invent.kde.org/office/kmymoney/-/wikis/home#cmake-switches
+
 # The CMake version we require
 cmake_minimum_required(VERSION 3.12)
 
+set(KMYMONEY_STABLE_BRANCH TRUE)
 set(RELEASE_SERVICE_VERSION_MAJOR "5")
 set(RELEASE_SERVICE_VERSION_MINOR "1")
 set(RELEASE_SERVICE_VERSION_MICRO "80")
@@ -11,11 +14,26 @@ project(KMyMoney VERSION "${RELEASE_SERVICE_VERSION}" LANGUAGES CXX)
 
 # Determine the GIT reference (if we're based on GIT)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
-  execute_process(COMMAND git rev-parse --short HEAD WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" OUTPUT_VARIABLE VERSION_SUFFIX OUTPUT_STRIP_TRAILING_WHITESPACE)
+  execute_process(COMMAND git rev-parse --short HEAD
+          WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+          OUTPUT_VARIABLE VERSION_SUFFIX
+          OUTPUT_STRIP_TRAILING_WHITESPACE)
   set(VERSION_SUFFIX "-${VERSION_SUFFIX}")
   # Add variables which are similar to the build in names of cmake
   set(PROJECT_VERSION_SUFFIX "${VERSION_SUFFIX}")
   set(${PROJECT_NAME}_VERSION_SUFFIX "${VERSION_SUFFIX}")
+
+  execute_process(
+          COMMAND git rev-parse --abbrev-ref HEAD
+          WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+          OUTPUT_VARIABLE GIT_BRANCH
+          OUTPUT_STRIP_TRAILING_WHITESPACE)
+  string(TOLOWER "${GIT_BRANCH}" GIT_BRANCH)
+  message(STATUS "Working on branch ${GIT_BRANCH}")
+  if ("${GIT_BRANCH}" MATCHES "master|main")
+      set(KMYMONEY_STABLE_BRANCH FALSE)
+      message(STATUS "Detected an unstable ${GIT_BRANCH} branch")
+  endif()
 elseif(DEFINED VERSION_SUFFIX)
   string(REGEX REPLACE "-*(.+)" "\\1" DASHFREE_SUFFIX "${VERSION_SUFFIX}")
   set(PROJECT_VERSION_SUFFIX "-${DASHFREE_SUFFIX}")
@@ -80,6 +98,12 @@ include(KMyMoneyMacros)
 find_package(PkgConfig)
 
 set (OPT_KF5_COMPONENTS DocTools Holidays Contacts Akonadi IdentityManagement Activities)
+set (REQ_KF5_COMPONENTS Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet XmlGui TextWidgets Notifications KIO)
+
+if (KMYMONEY_STABLE_BRANCH)
+  list(APPEND REQ_KF5_COMPONENTS IconThemes)
+endif()
+
 find_package(Gpgmepp)
 if (Gpgmepp_FOUND)
   set(GPG_FOUND TRUE)
@@ -99,10 +123,9 @@ find_package(Qt5 5.6 OPTIONAL_COMPONENTS
   Sql Concurrent QuickWidgets)
 
 find_package(KF5 5.2 REQUIRED COMPONENTS
-  Archive CoreAddons Config ConfigWidgets I18n Completion KCMUtils ItemModels ItemViews Service Wallet IconThemes XmlGui TextWidgets Notifications KIO)
+  ${REQ_KF5_COMPONENTS})
 find_package(KF5 5.2 OPTIONAL_COMPONENTS
   ${OPT_KF5_COMPONENTS})
-
 
 if(LibAlkimia5_DIR)
   set(_LibAlkimia5_DIR ${LibAlkimia5_DIR})
@@ -339,13 +362,11 @@ add_feature_info("Fetch translations" FETCH_TRANSLATIONS "Downloads KMyMoney tra
 
 if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/po AND FETCH_TRANSLATIONS)
     set(TRANSLATIONS ${CMAKE_CURRENT_BINARY_DIR}/po)
-
-# todo: handle stable/unstable builds and their appropriate translations
-#        if (DEFINED KMYMONEY_STABLE_BRANCH)
-#            set(tr_EXTRA_FLAGS "")
-#        else()
+        if (KMYMONEY_STABLE_BRANCH)
+            set(tr_EXTRA_FLAGS "")
+        else()
             set(tr_EXTRA_FLAGS "--unstable")
-#        endif()
+        endif()
 
     get_filename_component(absolute_podir ${TRANSLATIONS} ABSOLUTE)
     string(MD5 pathmd5 ${absolute_podir})

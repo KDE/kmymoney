@@ -58,18 +58,27 @@
 #include <KProcess>
 #include <KRecentDirs>
 #include <KRecentFilesAction>
-#include <KRun>
 #include <KStandardAction>
 #include <KTipDialog>
 #include <KToolBar>
 #include <KUndoActions>
 #include <KXMLGUIFactory>
+#include <kio_version.h>
+
 #ifdef ENABLE_HOLIDAYS
 #include <KHolidays/Holiday>
 #include <KHolidays/HolidayRegion>
 #endif
+
 #ifdef ENABLE_ACTIVITIES
 #include <KActivities/ResourceInstance>
+#endif
+
+#if KIO_VERSION < QT_VERSION_CHECK(5, 70, 0)
+#include <KRun>
+#else
+#include <KDialogJobUiDelegate>
+#include <KIO/CommandLauncherJob>
 #endif
 
 // ----------------------------------------------------------------------------
@@ -156,8 +165,6 @@
 #include "misc/webconnect.h"
 
 #include "imymoneystorageformat.h"
-
-#include "transactioneditor.h"
 
 #include "kmymoneyutils.h"
 #include "kcreditswindow.h"
@@ -1150,10 +1157,13 @@ public:
             // Enable save in case the fix changed the contents
             q->actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::Save)))->setEnabled(dirty());
             updateActions(SelectedObjects());
-            m_myMoneyView->slotFileOpened();
+            // inform views about new data source
+            m_myMoneyView->executeAction(Action::FileNew, SelectedObjects());
+
             onlineJobAdministration::instance()->updateActions();
             m_myMoneyView->enableViewsIfFileOpen(m_storageInfo.isOpened);
             onlineJobAdministration::instance()->updateOnlineTaskProperties();
+
             q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KMyMoneyApp::slotDataChanged);
 
 #ifdef ENABLE_ACTIVITIES
@@ -1433,7 +1443,7 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
     createInterfaces();
     KMyMoneyPlugin::pluginHandling(KMyMoneyPlugin::Action::Load, pPlugins, this, guiFactory());
     onlineJobAdministration::instance()->setOnlinePlugins(pPlugins.extended);
-    d->m_myMoneyView->setOnlinePlugins(pPlugins.online);
+    d->m_myMoneyView->setOnlinePlugins(&pPlugins.online);
 
     setCentralWidget(frame);
 
@@ -1880,6 +1890,8 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::GoToPayee,                     &KMyMoneyApp::slotExecuteActionWithData},
             {Action::GoToAccount,                   &KMyMoneyApp::slotExecuteActionWithData},
             {Action::ReportOpen,                    &KMyMoneyApp::slotExecuteActionWithData},
+            {Action::ReportAccountTransactions,     &KMyMoneyApp::slotExecuteAction},
+            {Action::ChartAccountBalance,           &KMyMoneyApp::slotExecuteAction},
 
             {Action::EditFindTransaction,           &KMyMoneyApp::slotFindTransaction},
         };
@@ -3171,7 +3183,7 @@ void KMyMoneyApp::slotUpdateConfiguration(const QString &dialogName)
         actionCollection()->action(QString::fromLatin1(KStandardAction::name(KStandardAction::SaveAs)))->setEnabled(d->canFileSaveAs());
         onlineJobAdministration::instance()->updateActions();
         onlineJobAdministration::instance()->setOnlinePlugins(pPlugins.extended);
-        d->m_myMoneyView->setOnlinePlugins(pPlugins.online);
+        d->m_myMoneyView->setOnlinePlugins(&pPlugins.online);
         d->updateActions(d->m_selections);
         return;
     }
@@ -3438,7 +3450,14 @@ void KMyMoneyApp::slotToolsStartKCalc()
         cmd = QLatin1String("kcalc");
 #endif
     }
+#if KIO_VERSION < QT_VERSION_CHECK(5,70,0)
     KRun::runCommand(cmd, this);
+#else
+    auto *job = new KIO::CommandLauncherJob(cmd, this);
+    job->setUiDelegate(new KDialogJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled, this));
+    job->setWorkingDirectory(QString());
+    job->start();
+#endif
 }
 
 void KMyMoneyApp::createAccount(MyMoneyAccount& newAccount, MyMoneyAccount& parentAccount, MyMoneyAccount& brokerageAccount, MyMoneyMoney openingBal)

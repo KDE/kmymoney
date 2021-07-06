@@ -128,8 +128,6 @@ public Q_SLOTS:
     void slotNewFromList();
     void slotDeleteFromList();
 
-    void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
-
     void updateActions(const SelectedObjects& selections) override;
 
 private:

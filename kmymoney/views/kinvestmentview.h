@@ -40,7 +40,7 @@ public:
     ~KInvestmentView() override;
 
     void executeCustomAction(eView::Action action) override;
-    void setDefaultFocus();
+    void setDefaultFocus() override;
     void refresh();
     Q_DECL_DEPRECATED void updateActions(const MyMoneyObject &obj);
 
@@ -51,7 +51,6 @@ public Q_SLOTS:
     void slotSelectAccount(const MyMoneyObject &obj);
 
     void slotShowInvestmentMenu(const MyMoneyAccount& acc);
-    void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent) override;
 
     void updateActions(const SelectedObjects& selections) override;
 
@@ -62,11 +61,6 @@ private:
     Q_DECLARE_PRIVATE(KInvestmentView)
 
 private Q_SLOTS:
-    /**
-      * This slot is used to reload (filters + equities account) specific tab
-      */
-    void slotLoadTab(int index);
-
     void slotEquitySelected(const QModelIndex &current, const QModelIndex &previous);
     void slotSecuritySelected(const QModelIndex &current, const QModelIndex &previous);
 

@@ -486,27 +486,6 @@ void KPayeesView::executeAction(eMenu::Action action, const SelectedObjects& sel
     }
 }
 
-void KPayeesView::executeCustomAction(eView::Action action)
-{
-    Q_D(KPayeesView);
-    switch(action) {
-    case eView::Action::SetDefaultFocus:
-        QMetaObject::invokeMethod(d->ui->m_searchWidget, "setFocus", Qt::QueuedConnection);
-        break;
-
-    default:
-        break;
-    }
-}
-
-void KPayeesView::showEvent(QShowEvent* event)
-{
-    emit customActionRequested(View::Payees, eView::Action::AboutToShow);
-
-    // don't forget base class implementation
-    QWidget::showEvent(event);
-}
-
 void KPayeesView::slotHelp()
 {
     KHelpClient::invokeHelp("details.payees");

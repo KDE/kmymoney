@@ -90,6 +90,8 @@ public:
         q->connect(ui->m_onlineJobView, &QAbstractItemView::doubleClicked, q, static_cast<void (KOnlineJobOutboxView::*)(const QModelIndex &)>(&KOnlineJobOutboxView::slotEditJob));
         q->connect(ui->m_onlineJobView->selectionModel(), &QItemSelectionModel::selectionChanged, q, &KOnlineJobOutboxView::updateSelection);
         q->connect(onlineJobAdministration::instance(), &onlineJobAdministration::canSendCreditTransferChanged, m_actions[eMenu::OnlineAction::AccountCreditTransfer], &QAction::setEnabled);
+
+        m_focusWidget = ui->m_onlineJobView;
     }
 
     onlineJobModel* onlineJobsModel()
@@ -292,17 +294,10 @@ QStringList KOnlineJobOutboxView::selectedOnlineJobs() const
     return list;
 }
 
-void KOnlineJobOutboxView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
+void KOnlineJobOutboxView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* plugins)
 {
     Q_D(KOnlineJobOutboxView);
-    switch(intent) {
-    case eView::Intent::SetOnlinePlugins:
-        if (variant.count() == 1)
-            d->m_onlinePlugins = static_cast<QMap<QString, KMyMoneyPlugin::OnlinePlugin*>*>(variant.first().value<void*>());
-        break;
-    default:
-        break;
-    }
+    d->m_onlinePlugins = plugins;
 }
 
 void KOnlineJobOutboxView::slotSendJobs()
@@ -400,7 +395,6 @@ void KOnlineJobOutboxView::showEvent(QShowEvent* event)
     if (d->m_needLoad)
         d->init();
 
-    emit customActionRequested(View::OnlineJobOutbox, eView::Action::AboutToShow);
     // don't forget base class implementation
     QWidget::showEvent(event);
 }
@@ -410,26 +404,12 @@ void KOnlineJobOutboxView::executeAction(eMenu::Action action, const SelectedObj
     Q_UNUSED(selections)
     Q_D(KOnlineJobOutboxView);
     switch (action) {
+    case eMenu::Action::FileNew:
+        d->onlineJobsModel()->load();
+        break;
     case eMenu::Action::FileClose:
         d->onlineJobsModel()->unload();
         break;
-    default:
-        break;
-    }
-}
-
-void KOnlineJobOutboxView::executeCustomAction(eView::Action action)
-{
-    Q_D(KOnlineJobOutboxView);
-    switch(action) {
-    case eView::Action::SetDefaultFocus:
-        QTimer::singleShot(0, d->ui->m_onlineJobView, SLOT(setFocus()));
-        break;
-
-    case eView::Action::InitializeAfterFileOpen:
-        d->onlineJobsModel()->load();
-        break;
-
     default:
         break;
     }

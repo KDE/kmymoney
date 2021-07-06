@@ -54,7 +54,6 @@ target_link_libraries(kbanking
                       kmm_mymoney
                       kmm_base_widgets
                       kmm_plugin
-                      kmm_oldregister
                       KF5::ConfigCore
                       KF5::ConfigGui
                       Qt5::Core

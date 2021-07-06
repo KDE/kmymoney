@@ -50,7 +50,6 @@ add_subdirectory( templates )
 add_subdirectory( misc )
 add_subdirectory( icons )
 add_subdirectory( menus )
-add_subdirectory( oldregister )
 if(BUILD_TESTING)
   add_subdirectory( tests )
 endif()
@@ -112,7 +111,7 @@ qt5_add_dbus_adaptor(kmymoney_SRCS org.kde.kmymoney.xml kmymoney.h KMyMoneyApp)
 qt5_add_resources(kmymoney_SRCS kmymoney.qrc)
 
 # collect application icons
-file(GLOB_RECURSE KMYMONEY_APP_ICONS "${CMAKE_CURRENT_SOURCE_DIR}/icons/kmymoney/apps/*.png" "${CMAKE_CURRENT_SOURCE_DIR}/icons/breeze/apps/48/kmymoney.svg")
+file(GLOB_RECURSE KMYMONEY_APP_ICONS "${CMAKE_CURRENT_SOURCE_DIR}/icons/kmymoney/apps/*.png")
 # add icons to application sources, to have them bundled
 ecm_add_app_icon(kmymoney_SRCS ICONS ${KMYMONEY_APP_ICONS})
 
@@ -146,7 +145,6 @@ target_link_libraries(kmymoney
   newloanwizard
   endingbalancedlg
   wizardpages
-  kmm_oldregister
   kmm_extended_dialogs
   kmm_base_dialogs
   settings

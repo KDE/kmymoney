@@ -31,6 +31,9 @@ namespace eMenu {
 enum class Action;
 enum class Menu;
 }
+namespace KMyMoneyPlugin {
+class OnlinePlugin;
+}
 
 /**
   * This class is an abstract base class that all specific views
@@ -84,15 +87,6 @@ Q_SIGNALS:
 
     void viewStateChanged(bool enabled);
 
-    /**
-     * @deprecated use selectionChanged() instead
-     */
-    Q_DECL_DEPRECATED void selectByObject(const MyMoneyObject&, eView::Intent);
-    /**
-     * @deprecated use selectionChanged() instead
-     */
-    Q_DECL_DEPRECATED void selectByVariant(const QVariantList&, eView::Intent);
-
     void customActionRequested(View, eView::Action);
 
 public Q_SLOTS:
@@ -100,11 +94,18 @@ public Q_SLOTS:
         Q_UNUSED(selections)
     }
 
-    Q_DECL_DEPRECATED virtual void slotSelectByObject(const MyMoneyObject&, eView::Intent) {}
-    virtual void slotSelectByVariant(const QVariantList& args, eView::Intent intent) {
-        Q_UNUSED(args) Q_UNUSED(intent)
-    }
     virtual void slotSettingsChanged() {}
+
+    /**
+     * Inform the view about available online plugins. The default
+     * does not do anything
+     */
+    virtual void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* plugins)
+    {
+        Q_UNUSED(plugins)
+    }
+
+    virtual void setDefaultFocus();
 
 protected:
     const QScopedPointer<KMyMoneyViewBasePrivate> d_ptr;

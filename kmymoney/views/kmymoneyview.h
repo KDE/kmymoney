@@ -22,7 +22,6 @@
 
 // ----------------------------------------------------------------------------
 // Project Includes
-#include "selectedtransactions.h"
 
 #ifdef ENABLE_ACTIVITIES
 namespace KActivities
@@ -43,9 +42,6 @@ class OnlinePlugin;
 }
 namespace eDialogs {
 enum class ScheduleResultCode;
-}
-namespace eView {
-enum class Intent;
 }
 namespace eView {
 enum class Action;
@@ -130,7 +126,7 @@ public:
       */
     void updateViewType();
 
-    void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins);
+    void setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* plugins);
 
     // TODO: remove that function
     /**
@@ -173,29 +169,12 @@ public Q_SLOTS:
       */
     void slotSwitchView(KPageWidgetItem* current, KPageWidgetItem* previous);
 
-    /**
-     * Informs respective views about selected object, so they can
-     * update action states and current object.
-     * @param obj Account, Category, Investment, Stock, Institution
-     */
-    void slotObjectSelected(const MyMoneyObject& obj);
-
-    void slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent);
-    void slotCustomActionRequested(View view, eView::Action action);
     void slotSettingsChanged();
-
-    void slotFileOpened();
 
     void updateActions(const SelectedObjects& selections);
 
 private Q_SLOTS:
     void switchToDefaultView();
-
-    /**
-     * Opens object in ledgers or edits in case of institution
-     * @param obj Account, Category, Investment, Stock, Institution
-     */
-    void slotOpenObjectRequested(const MyMoneyObject& obj);
 
     void slotRememberLastView(View view);
 
@@ -232,14 +211,6 @@ Q_SIGNALS:
                            const QStringList& transactionList);
 
     /**
-      * This signal is emitted when a transaction/list of transactions has been selected by
-      * the GUI. If no transaction is selected or the selection is removed,
-      * @p transactions is identical to an empty QList. This signal is used
-      * by plugins to get information about changes.
-      */
-    void transactionsSelected(const KMyMoneyRegister::SelectedTransactions& transactions);
-
-    /**
       * This signal is emitted when a new account has been selected by
       * the GUI. If no account is selected or the selection is removed,
       * @a account is identical to MyMoneyAccount(). This signal is used
@@ -256,6 +227,8 @@ Q_SIGNALS:
 
     void addSharedActionButton(eMenu::Action action, QAction* defaultAction);
     void selectSharedActionButton(eMenu::Action action, QAction* defaultAction);
+
+    void onlinePluginsChanged(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* plugins);
 };
 
 #endif

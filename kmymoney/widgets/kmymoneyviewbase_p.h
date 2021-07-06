@@ -37,6 +37,7 @@ class KMyMoneyViewBasePrivate
 public:
     explicit KMyMoneyViewBasePrivate(KMyMoneyViewBase* parent)
         : q_ptr(parent)
+        , m_focusWidget(nullptr)
         , m_isActiveView(false)
         , m_needsRefresh(false)
         , m_havePendingChanges(false)
@@ -84,6 +85,7 @@ public:
     }
 
     KMyMoneyViewBase* q_ptr;
+    QWidget* m_focusWidget;
     SelectedObjects m_selections;
     QHash<eMenu::Action, QAction*> m_sharedToolbarActions;
     bool m_isActiveView;

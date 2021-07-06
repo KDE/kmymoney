@@ -45,6 +45,8 @@ public:
     void loadTransaction(const QModelIndex& index) override;
     void saveTransaction() override;
 
+    void setAmountPlaceHolderText(const QAbstractItemModel* model) override;
+
     MyMoneyTransaction transaction() const;
 
     void loadSchedule(const MyMoneySchedule& schedule);
@@ -61,11 +63,7 @@ public:
 
     QDate postDate() const;
 
-protected:
-    virtual void keyPressEvent(QKeyEvent* e) override;
-
 protected Q_SLOTS:
-    virtual void reject();
     virtual void acceptEdit();
 
     // edit splits directly

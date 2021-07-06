@@ -49,7 +49,6 @@
 #include "kaccountsview.h"
 #include "kcategoriesview.h"
 #include "kcurrencyeditdlg.h"
-#include "kgloballedgerview.h"
 #include "khomeview.h"
 #include "kinstitutionsview.h"
 #include "kinvestmentview.h"
@@ -137,6 +136,7 @@ public:
             {eMenu::Action::GoToAccount, View::NewLedgers},
             {eMenu::Action::StartReconciliation, View::NewLedgers},
             {eMenu::Action::ReportOpen, View::Reports},
+            {eMenu::Action::ReportAccountTransactions, View::Reports},
             {eMenu::Action::FileClose, View::Home},
         };
 
@@ -171,8 +171,6 @@ public:
         {View::Payees,          i18n("Payees"),                       Icon::Payees},
         {View::NewLedgers,      i18n("Ledgers"),                      Icon::Ledgers},
         {View::Investments,     i18n("Investments"),                  Icon::Investments},
-        /// @todo remove when new ledger is fully functional
-        {View::OldLedgers,      i18n("Old ledgers"),                  Icon::DocumentProperties},
     };
     // clang-format on
 };
@@ -211,7 +209,6 @@ KMyMoneyView::KMyMoneyView()
     d->viewBases[View::Payees] = new KPayeesView;
     d->viewBases[View::NewLedgers] = new SimpleLedgerView;
     d->viewBases[View::Investments] = new KInvestmentView;
-    d->viewBases[View::OldLedgers] = new KGlobalLedgerView;
 
     for (const auto& view : d->viewsInfo) {
         addView(d->viewBases[view.id], view.name, view.id, view.icon);
@@ -227,21 +224,6 @@ KMyMoneyView::KMyMoneyView()
 
 KMyMoneyView::~KMyMoneyView()
 {
-}
-
-void KMyMoneyView::slotFileOpened()
-{
-    Q_D(KMyMoneyView);
-    for( const auto& view : qAsConst(d->viewBases)) {
-        view->executeCustomAction(eView::Action::InitializeAfterFileOpen);
-    }
-
-    // delay the switchToDefaultView call until the event loop is running
-    QMetaObject::invokeMethod(this, "switchToDefaultView", Qt::QueuedConnection);
-    slotObjectSelected(MyMoneyAccount()); // in order to enable update all accounts on file reload
-
-    // make sure to catch view activations
-    connect(this, &KMyMoneyView::viewActivated, this, &KMyMoneyView::slotRememberLastView);
 }
 
 void KMyMoneyView::updateViewType()
@@ -273,14 +255,10 @@ void KMyMoneyView::updateViewType()
     }
 }
 
-void KMyMoneyView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>& plugins)
+void KMyMoneyView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* plugins)
 {
-    Q_D(KMyMoneyView);
-    if (d->viewBases.contains(View::Accounts))
-        d->viewBases[View::Accounts]->slotSelectByVariant(QVariantList {QVariant::fromValue(static_cast<void*>(&plugins))}, eView::Intent::SetOnlinePlugins);
-
-    if (d->viewBases.contains(View::OnlineJobOutbox))
-        d->viewBases[View::OnlineJobOutbox]->slotSelectByVariant(QVariantList {QVariant::fromValue(static_cast<void*>(&plugins))}, eView::Intent::SetOnlinePlugins);
+    // propagate to all views
+    emit onlinePluginsChanged(plugins);
 }
 
 eDialogs::ScheduleResultCode KMyMoneyView::enterSchedule(MyMoneySchedule& schedule, bool autoEnter, bool extendedKeys)
@@ -317,8 +295,8 @@ void KMyMoneyView::addView(KMyMoneyViewBase* view, const QString& name, View idV
     d->viewBases[idView] = view;
     connect(view, &KMyMoneyViewBase::requestCustomContextMenu, this, &KMyMoneyView::requestCustomContextMenu);
     connect(view, &KMyMoneyViewBase::requestActionTrigger, this, &KMyMoneyView::requestActionTrigger);
-    connect(view, &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
     connect(this, &KMyMoneyView::settingsChanged, view, &KMyMoneyViewBase::slotSettingsChanged);
+    connect(this, &KMyMoneyView::onlinePluginsChanged, view, &KMyMoneyViewBase::setOnlinePlugins);
 
     connect(view, &KMyMoneyViewBase::viewStateChanged, d->viewFrames[idView], &KPageWidgetItem::setEnabled);
     connect(view, &KMyMoneyViewBase::requestSelectionChange, this, &KMyMoneyView::requestSelectionChange);
@@ -346,8 +324,8 @@ void KMyMoneyView::removeView(View idView)
 
     disconnect(view, &KMyMoneyViewBase::requestCustomContextMenu, this, &KMyMoneyView::requestCustomContextMenu);
     disconnect(view, &KMyMoneyViewBase::requestActionTrigger, this, &KMyMoneyView::requestActionTrigger);
-    disconnect(view, &KMyMoneyViewBase::customActionRequested, this, &KMyMoneyView::slotCustomActionRequested);
     disconnect(this, &KMyMoneyView::settingsChanged, view, &KMyMoneyViewBase::slotSettingsChanged);
+    disconnect(this, &KMyMoneyView::onlinePluginsChanged, view, &KMyMoneyViewBase::setOnlinePlugins);
 
     d->m_model->removePage(d->viewFrames[idView]);
     d->viewFrames.remove(idView);
@@ -496,8 +474,6 @@ void KMyMoneyView::updateActions(const SelectedObjects& selections)
 
 void KMyMoneyView::slotSettingsChanged()
 {
-    Q_D(KMyMoneyView);
-
     updateViewType();
 
     emit settingsChanged();
@@ -556,7 +532,7 @@ void KMyMoneyView::showPageAndFocus(View idView)
     Q_D(KMyMoneyView);
     if (d->viewFrames.contains(idView)) {
         showPage(idView);
-        d->viewBases[idView]->executeCustomAction(eView::Action::SetDefaultFocus);
+        d->viewBases[idView]->setDefaultFocus();
     }
 }
 
@@ -631,68 +607,24 @@ void KMyMoneyView::slotRememberLastView(View view)
     KMyMoneySettings::setLastViewSelected(static_cast<int>(view));
 }
 
-void KMyMoneyView::slotOpenObjectRequested(const MyMoneyObject& obj)
-{
-    Q_D(KMyMoneyView);
-    if (typeid(obj) == typeid(MyMoneyAccount)) {
-        const auto& acc = static_cast<const MyMoneyAccount&>(obj);
-        // check if we can open this account
-        // currently it make's sense for asset and liability accounts
-        if (!MyMoneyFile::instance()->isStandardAccount(acc.id()))
-            if (d->viewBases.contains(View::OldLedgers))
-                d->viewBases[View::OldLedgers]->slotSelectByVariant(QVariantList {QVariant(acc.id()), QVariant(QString()) }, eView::Intent::ShowTransactionInLedger );
-
-    } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
-//    const auto& inst = static_cast<const MyMoneyInstitution&>(obj);
-        if (d->viewBases.contains(View::Institutions))
-            d->viewBases[View::Institutions]->executeCustomAction(eView::Action::EditInstitution);
-    } else if (typeid(obj) == typeid(MyMoneySchedule)) {
-        if (d->viewBases.contains(View::Schedules))
-            d->viewBases[View::Schedules]->executeCustomAction(eView::Action::EditSchedule);
-    } else if (typeid(obj) == typeid(MyMoneyReport)) {
-//    const auto& rep = static_cast<const MyMoneyReport&>(obj);
-        showPage(View::Reports);
-        if (d->viewBases.contains(View::Reports))
-            d->viewBases[View::Reports]->slotSelectByObject(obj, eView::Intent::OpenObject);
-    }
-}
-
-void KMyMoneyView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
-{
-    Q_D(KMyMoneyView);
-    switch (intent) {
-    case eView::Intent::None:
-        slotObjectSelected(obj);
-        break;
-
-    case eView::Intent::SynchronizeAccountInInvestmentView:
-        if (d->viewBases.contains(View::Investments))
-            d->viewBases[View::Investments]->slotSelectByObject(obj, intent);
-        break;
-
-    case eView::Intent::SynchronizeAccountInLedgersView:
-        if (d->viewBases.contains(View::OldLedgers))
-            d->viewBases[View::OldLedgers]->slotSelectByObject(obj, intent);
-        break;
-
-    case eView::Intent::OpenObject:
-        slotOpenObjectRequested(obj);
-        break;
-
-    default:
-        break;
-    }
-}
-
 void KMyMoneyView::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
     Q_D(KMyMoneyView);
 
     // when closing, we don't remember the switch to the home view anymore
     switch (action) {
+    case eMenu::Action::FileNew: // opened a file or database
+        // make sure to catch view activations
+        connect(this, &KMyMoneyView::viewActivated, this, &KMyMoneyView::slotRememberLastView);
+
+        // delay the switchToDefaultView call until the event loop is running
+        QMetaObject::invokeMethod(this, "switchToDefaultView", Qt::QueuedConnection);
+        break;
+
     case eMenu::Action::FileClose:
         disconnect(this, &KMyMoneyView::viewActivated, this, &KMyMoneyView::slotRememberLastView);
         break;
+
     default:
         break;
     }
@@ -707,44 +639,4 @@ void KMyMoneyView::executeAction(eMenu::Action action, const SelectedObjects& se
         }
     }
     currentView->executeAction(action, selections);
-}
-
-void KMyMoneyView::slotCustomActionRequested(View view, eView::Action action)
-{
-    Q_D(KMyMoneyView);
-    switch (action) {
-    case eView::Action::SwitchView:
-        showPage(view);
-        break;
-    case eView::Action::ShowBalanceChart:
-        if (d->viewBases.contains(View::Reports))
-            d->viewBases[View::Reports]->executeCustomAction(action);
-        break;
-    default:
-        break;
-    }
-}
-
-void KMyMoneyView::slotObjectSelected(const MyMoneyObject& obj)
-{
-    Q_D(KMyMoneyView);
-    // carrying some slots over to views isn't easy for all slots...
-    // ...so calls to kmymoney still must be here
-    if (typeid(obj) == typeid(MyMoneyAccount)) {
-        QVector<View> views {View::Investments, View::Categories, View::Accounts,
-                             View::OldLedgers, View::Reports, View::OnlineJobOutbox};
-        for (const auto view : views)
-            if (d->viewBases.contains(view))
-                d->viewBases[view]->slotSelectByObject(obj, eView::Intent::UpdateActions);
-
-        // for plugin only
-        const auto& acc = static_cast<const MyMoneyAccount&>(obj);
-        if (!acc.isIncomeExpense() &&
-                !MyMoneyFile::instance()->isStandardAccount(acc.id()))
-            emit accountSelected(acc);
-    } else if (typeid(obj) == typeid(MyMoneyInstitution)) {
-        d->viewBases[View::Institutions]->slotSelectByObject(obj, eView::Intent::UpdateActions);
-    } else if (typeid(obj) == typeid(MyMoneySchedule)) {
-        d->viewBases[View::Schedules]->slotSelectByObject(obj, eView::Intent::UpdateActions);
-    }
 }

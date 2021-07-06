@@ -9,7 +9,6 @@
 #include <memory>
 
 #include "kmymoneyplugin.h"
-#include "selectedtransactions.h"
 
 class KPluginInfo;
 class QObject;

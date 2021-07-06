@@ -61,23 +61,9 @@ void KBudgetView::showEvent(QShowEvent * event)
 
         slotSelectBudget();
     }
-    emit customActionRequested(View::Budget, eView::Action::AboutToShow);
 
     // don't forget base class implementation
     QWidget::showEvent(event);
-}
-
-void KBudgetView::executeCustomAction(eView::Action action)
-{
-    Q_D(KBudgetView);
-    switch(action) {
-    case eView::Action::SetDefaultFocus:
-        QMetaObject::invokeMethod(d->ui->m_budgetList, "setFocus", Qt::QueuedConnection);
-        break;
-
-    default:
-        break;
-    }
 }
 
 void KBudgetView::slotNewBudget()
@@ -256,9 +242,8 @@ void KBudgetView::slotStartRename()
     }
 }
 
-void KBudgetView::slotSelectAccount(const MyMoneyObject &obj, eView::Intent intent)
+void KBudgetView::slotSelectAccount(const MyMoneyObject& obj)
 {
-    Q_UNUSED(intent)
     Q_D(KBudgetView);
     d->ui->m_assignmentBox->setEnabled(false);
     if (typeid(obj) != typeid(MyMoneyAccount))
@@ -367,7 +352,7 @@ void KBudgetView::slotAccountSelectionChanged(const SelectedObjects& selections)
     if (idx.isValid()) {
         const auto baseIdx = MyMoneyFile::baseModel()->mapToBaseSource(idx);
         const auto account = MyMoneyFile::instance()->accountsModel()->itemByIndex(baseIdx);
-        slotSelectAccount(account, eView::Intent::None);
+        slotSelectAccount(account);
     }
 }
 
@@ -390,7 +375,7 @@ void KBudgetView::slotSelectBudget()
         if (idx.isValid()) {
             const auto baseIdx = MyMoneyFile::baseModel()->mapToBaseSource(idx);
             const auto account = MyMoneyFile::instance()->accountsModel()->itemByIndex(baseIdx);
-            slotSelectAccount(account, eView::Intent::None);
+            slotSelectAccount(account);
         } else {
             d->ui->m_budgetValue->clear();
         }

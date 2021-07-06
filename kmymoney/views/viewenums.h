@@ -8,9 +8,22 @@
 
 #include <QHashFunctions>
 
-enum class View { Home = 0, Institutions, Accounts, Schedules, Categories, Tags,
-                  Payees, NewLedgers, Investments, Reports, Budget, Forecast, OnlineJobOutbox, OldLedgers, None
-                };
+enum class View {
+    Home = 0,
+    Institutions,
+    Accounts,
+    Schedules,
+    Categories,
+    Tags,
+    Payees,
+    NewLedgers,
+    Investments,
+    Reports,
+    Budget,
+    Forecast,
+    OnlineJobOutbox,
+    None,
+};
 
 inline uint qHash(const View key, uint seed) {
     return ::qHash(static_cast<uint>(key), seed);
@@ -24,37 +37,12 @@ enum class Tag { All = 0,
                  Closed,     // closed tags
                };
 
-enum class Intent {
-    None,
-    UpdateActions,
-    OpenContextMenu,
-    OpenObject,
-    ShowTransactionInLedger,
-    SynchronizeAccountInInvestmentView,
-    SynchronizeAccountInLedgersView,
-    EnterSchedule,
-    ReportProgress,
-    ReportProgressMessage,
-    SelectRegisterTransactions,
-    AccountReconciled,
-    SetOnlinePlugins,
-};
-
 enum class Action {
     None,
     Refresh,
-    SetDefaultFocus,
-    AboutToShow,
     Print,
-    SwitchView,
     ClosePayeeIdentifierSource,
-    EditInstitution,
-    EditSchedule,
-    InitializeAfterFileOpen,
-    DisableViewDepenedendActions,
-    ShowBalanceChart,
 };
-
 }
 
 #endif

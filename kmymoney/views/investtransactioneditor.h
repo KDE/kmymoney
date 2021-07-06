@@ -34,11 +34,6 @@ public:
     virtual bool accepted() const override;
 
     /**
-     * Returns the currently entered amount
-     */
-    MyMoneyMoney transactionAmount() const;
-
-    /**
      */
     void loadTransaction(const QModelIndex& index) override;
     void saveTransaction() override;
@@ -53,24 +48,8 @@ public:
      */
     MyMoneyMoney totalAmount() const;
 
-protected:
-    virtual void keyPressEvent(QKeyEvent* e) override;
-
 protected Q_SLOTS:
-    void editFeeSplits();
-    void editInterestSplits();
-
     void activityChanged (int index);
-    void sharesChanged();
-
-    void feeCategoryChanged(const QString& accountId);
-    void interestCategoryChanged(const QString& accountId);
-    void feesValueChanged();
-    void interestValueChanged();
-    void postdateChanged(const QDate& date);
-    void securityAccountChanged (int index);
-
-    void assetAccountChanged (const QString& accountId);
 
     void updateWidgets();
     void updateTotalAmount();

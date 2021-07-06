@@ -127,6 +127,8 @@ public:
         auto grp = KSharedConfig::openConfig()->group("Last Use Settings");
         ui->m_splitter->restoreState(grp.readEntry("KBudgetViewSplitterSize", QByteArray()));
         ui->m_splitter->setChildrenCollapsible(false);
+
+        m_focusWidget = ui->m_budgetList;
     }
 
     void askSave()

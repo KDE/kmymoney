@@ -118,8 +118,6 @@ void KHomeView::showEvent(QShowEvent* event)
     if (d->m_needLoad)
         d->init();
 
-    emit customActionRequested(View::Home, eView::Action::AboutToShow);
-
     if (d->m_needsRefresh)
         refresh();
 

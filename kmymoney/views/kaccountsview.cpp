@@ -45,7 +45,6 @@ KAccountsView::KAccountsView(QWidget *parent) :
     connect(pActions[eMenu::Action::DeleteAccount],       &QAction::triggered, this, &KAccountsView::slotDeleteAccount);
     connect(pActions[eMenu::Action::CloseAccount],        &QAction::triggered, this, &KAccountsView::slotCloseAccount);
     connect(pActions[eMenu::Action::ReopenAccount],       &QAction::triggered, this, &KAccountsView::slotReopenAccount);
-    connect(pActions[eMenu::Action::ChartAccountBalance], &QAction::triggered, this, &KAccountsView::slotChartAccountBalance);
     connect(pActions[eMenu::Action::MapOnlineAccount],    &QAction::triggered, this, &KAccountsView::slotAccountMapOnline);
     connect(pActions[eMenu::Action::UnmapOnlineAccount],  &QAction::triggered, this, &KAccountsView::slotAccountUnmapOnline);
     connect(pActions[eMenu::Action::UpdateAccount],       &QAction::triggered, this, &KAccountsView::slotAccountUpdateOnline);
@@ -81,14 +80,9 @@ void KAccountsView::slotSettingsChanged()
 
 void KAccountsView::executeCustomAction(eView::Action action)
 {
-    Q_D(KAccountsView);
     switch(action) {
     case eView::Action::Refresh:
         refresh();
-        break;
-
-    case eView::Action::SetDefaultFocus:
-        QMetaObject::invokeMethod(d->ui->m_accountTree, "setFocus", Qt::QueuedConnection);
         break;
 
     default:
@@ -182,18 +176,10 @@ void KAccountsView::slotNetWorthChanged(const MyMoneyMoney &netWorth, bool isApp
                        : i18n("Net Worth: %1", formattedValue));
 }
 
-void KAccountsView::slotSelectByVariant(const QVariantList& variant, eView::Intent intent)
+void KAccountsView::setOnlinePlugins(QMap<QString, KMyMoneyPlugin::OnlinePlugin*>* plugins)
 {
     Q_D(KAccountsView);
-    switch (intent) {
-    case eView::Intent::SetOnlinePlugins:
-        if (variant.count() == 1)
-            d->m_onlinePlugins = static_cast<QMap<QString, KMyMoneyPlugin::OnlinePlugin*>*>(variant.first().value<void*>());
-        break;
-
-    default:
-        break;
-    }
+    d->m_onlinePlugins = plugins;
 }
 
 void KAccountsView::slotNewAccount()
@@ -292,14 +278,6 @@ void KAccountsView::slotReopenAccount()
         }
         ft.commit();
     } catch (const MyMoneyException &) {
-    }
-}
-
-void KAccountsView::slotChartAccountBalance()
-{
-    Q_D(KAccountsView);
-    if (!d->m_currentAccount.id().isEmpty()) {
-        emit customActionRequested(View::Accounts, eView::Action::ShowBalanceChart);
     }
 }
 

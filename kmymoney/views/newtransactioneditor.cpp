@@ -686,6 +686,9 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
     d->ui->tagContainer->tagCombo()->installEventFilter(this);
     d->ui->statusCombo->installEventFilter(this);
 
+    setCancelButton(d->ui->cancelButton);
+    setEnterButton(d->ui->enterButton);
+
     // setup tooltip
 
     // setWindowFlags(Qt::FramelessWindowHint | Qt::X11BypassWindowManagerHint);
@@ -693,6 +696,12 @@ NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accou
 
 NewTransactionEditor::~NewTransactionEditor()
 {
+}
+
+void NewTransactionEditor::setAmountPlaceHolderText(const QAbstractItemModel* model)
+{
+    d->ui->amountEditCredit->setPlaceholderText(model->headerData(JournalModel::Column::Payment, Qt::Horizontal).toString());
+    d->ui->amountEditDebit->setPlaceholderText(model->headerData(JournalModel::Column::Deposit, Qt::Horizontal).toString());
 }
 
 bool NewTransactionEditor::accepted() const
@@ -705,47 +714,6 @@ void NewTransactionEditor::acceptEdit()
     if (d->checkForValidTransaction()) {
         d->accepted = true;
         emit done();
-    }
-}
-
-void NewTransactionEditor::reject()
-{
-    emit done();
-}
-
-void NewTransactionEditor::keyPressEvent(QKeyEvent* e)
-{
-    if (!e->modifiers() || (e->modifiers() & Qt::KeypadModifier && e->key() == Qt::Key_Enter)) {
-        if (d->ui->enterButton->isVisible()) {
-            switch (e->key()) {
-            case Qt::Key_Enter:
-            case Qt::Key_Return:
-                if (focusWidget() == d->ui->cancelButton) {
-                    reject();
-                } else {
-                    if (d->ui->enterButton->isEnabled()) {
-                        // move focus to enter button which
-                        // triggers update of widgets
-                        d->ui->enterButton->setFocus();
-                        d->ui->enterButton->click();
-                    }
-                    return;
-                }
-                break;
-
-            case Qt::Key_Escape:
-                reject();
-                break;
-
-            default:
-                e->ignore();
-                break;
-            }
-        } else {
-            e->ignore();
-        }
-    } else {
-        e->ignore();
     }
 }
 

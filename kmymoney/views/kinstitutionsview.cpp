@@ -99,6 +99,8 @@ public:
         q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestCustomContextMenu, q, &KInstitutionsView::requestCustomContextMenu);
         q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestSelectionChange, q, &KInstitutionsView::requestSelectionChange);
         q->connect(ui->m_accountTree, &KMyMoneyAccountTreeView::requestActionTrigger, q, &KInstitutionsView::requestActionTrigger);
+
+        m_focusWidget = ui->m_accountTree;
     }
 
     Ui::KInstitutionsView   *ui;
@@ -170,19 +172,6 @@ void KInstitutionsView::slotSettingsChanged()
     MyMoneyFile::instance()->institutionsModel()->setColorScheme(AccountsModel::Negative, KMyMoneySettings::schemeColor(SchemeColor::Negative));
 }
 
-
-void KInstitutionsView::executeCustomAction(eView::Action action)
-{
-    Q_D(KInstitutionsView);
-    switch(action) {
-    case eView::Action::SetDefaultFocus:
-        QMetaObject::invokeMethod(d->ui->m_accountTree, "setFocus", Qt::QueuedConnection);
-        break;
-
-    default:
-        break;
-    }
-}
 
 void KInstitutionsView::updateActions(const SelectedObjects& selections)
 {

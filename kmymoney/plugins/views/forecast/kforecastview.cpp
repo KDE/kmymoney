@@ -61,7 +61,6 @@ void KForecastView::showEvent(QShowEvent* event)
         d->init();
         d->loadForecastSettings();
     }
-    emit customActionRequested(View::Forecast, eView::Action::AboutToShow);
 
     slotTabChanged(d->ui->m_tab->currentIndex());
 
@@ -71,14 +70,9 @@ void KForecastView::showEvent(QShowEvent* event)
 
 void KForecastView::executeCustomAction(eView::Action action)
 {
-    Q_D(KForecastView);
     switch(action) {
     case eView::Action::Refresh:
         refresh();
-        break;
-
-    case eView::Action::SetDefaultFocus:
-        QTimer::singleShot(0, d->ui->m_forecastButton, SLOT(setFocus()));
         break;
 
     default:

@@ -7,8 +7,6 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-
-
 #include "kinvestmentview_p.h"
 
 #include <typeinfo>
@@ -76,10 +74,6 @@ void KInvestmentView::executeCustomAction(eView::Action action)
         refresh();
         break;
 
-    case eView::Action::SetDefaultFocus:
-        setDefaultFocus();
-        break;
-
     default:
         break;
     }
@@ -89,8 +83,6 @@ void KInvestmentView::refresh()
 {
     Q_D(KInvestmentView);
     d->m_needReload[eView::Investment::Tab::Equities] = d->m_needReload[eView::Investment::Tab::Securities] = true;
-    if (isVisible())
-        slotLoadTab(d->ui->m_tab->currentIndex());
 }
 
 void KInvestmentView::showEvent(QShowEvent* event)
@@ -98,8 +90,6 @@ void KInvestmentView::showEvent(QShowEvent* event)
     Q_D(KInvestmentView);
     if (d->m_needLoad)
         d->init();
-
-    emit customActionRequested(View::Investments, eView::Action::AboutToShow);
 
     d->m_needReload[eView::Investment::Tab::Equities] = true;  // ensure tree view will be reloaded after selecting account in ledger view
     if (d->m_needReload[eView::Investment::Tab::Equities] == true ||
@@ -148,23 +138,6 @@ void KInvestmentView::updateActions(const MyMoneyObject& obj)
     }
 }
 
-void KInvestmentView::slotLoadTab(int index)
-{
-    Q_D(KInvestmentView);
-    auto tab = static_cast<eView::Investment::Tab>(index);
-    if (d->m_needReload[tab]) {
-        switch (tab) {
-        case eView::Investment::Tab::Equities:
-            d->loadInvestmentTab();
-            break;
-        case eView::Investment::Tab::Securities:
-            d->loadSecuritiesTab();
-            break;
-        }
-        d->m_needReload[tab] = false;
-    }
-}
-
 void KInvestmentView::slotEquitySelected(const QModelIndex &current, const QModelIndex &previous)
 {
     Q_D(KInvestmentView);
@@ -173,8 +146,6 @@ void KInvestmentView::slotEquitySelected(const QModelIndex &current, const QMode
 
     const auto equ = d->currentEquity();
     updateActions(equ);
-
-    emit selectByObject(equ, eView::Intent::None);
 }
 
 void KInvestmentView::slotSecuritySelected(const QModelIndex &current, const QModelIndex &previous)
@@ -234,8 +205,6 @@ void KInvestmentView::slotLoadAccount(const QString &id)
             d->m_equitiesProxyModel->setHideAllEntries(false);
             idx = baseModel->mapFromBaseSource(d->m_equitiesProxyModel, baseIdx);
             d->m_idInvAcc = id;
-            if (isVisible())
-                emit selectByObject(acc, eView::Intent::SynchronizeAccountInLedgersView);
         } else {
             idx = QModelIndex();
         }
@@ -261,27 +230,6 @@ void KInvestmentView::slotShowInvestmentMenu(const MyMoneyAccount& acc)
 {
     Q_UNUSED(acc);
     pMenus[eMenu::Menu::Investment]->exec(QCursor::pos());
-}
-
-void KInvestmentView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
-{
-    switch(intent) {
-    case eView::Intent::UpdateActions:
-        updateActions(obj);
-        break;
-
-    case eView::Intent::SynchronizeAccountInInvestmentView:
-        if (KMyMoneySettings::syncLedgerInvestment())
-            slotSelectAccount(obj);
-        break;
-
-    case eView::Intent::OpenContextMenu:
-        slotShowInvestmentMenu(static_cast<const MyMoneyAccount&>(obj));
-        break;
-
-    default:
-        break;
-    }
 }
 
 void KInvestmentView::slotNewInvestment()

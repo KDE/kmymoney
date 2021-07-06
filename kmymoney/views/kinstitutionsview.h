@@ -38,8 +38,6 @@ public:
     explicit KInstitutionsView(QWidget *parent = nullptr);
     ~KInstitutionsView();
 
-    void executeCustomAction(eView::Action action) override;
-
 public Q_SLOTS:
     void slotNetWorthChanged(const MyMoneyMoney &netWorth, bool isApproximate);
     void slotEditInstitution();

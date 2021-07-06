@@ -151,7 +151,7 @@ public:
         columns = m_equityColumnSelector->columns();
 
         int colIdx;
-        foreach(auto col, equityColumns) {
+        for (auto col : equityColumns) {
             colIdx = columns.indexOf(col);
             if (colIdx != -1)
                 columns.remove(colIdx);
@@ -180,7 +180,9 @@ public:
         m_securityColumnSelector->setSelectable(m_securityColumnSelector->columns());
 
         ui->m_deleteSecurityButton->setIcon(Icons::get(Icon::EditRemove));
+        ui->m_deleteSecurityButton->setEnabled(false);
         ui->m_editSecurityButton->setIcon(Icons::get(Icon::DocumentEdit));
+        ui->m_editSecurityButton->setEnabled(false);
 
         q->connect(ui->m_searchSecurities, &QLineEdit::textChanged, m_securitiesProxyModel, &QSortFilterProxyModel::setFilterFixedString);
         q->connect(ui->m_securitiesTree->selectionModel(), &QItemSelectionModel::currentRowChanged, q, &KInvestmentView::slotSecuritySelected);
@@ -189,57 +191,10 @@ public:
 
         // Investment Page
         m_needReload[eView::Investment::Tab::Equities] = m_needReload[eView::Investment::Tab::Securities] = true;
-        q->connect(ui->m_tab, &QTabWidget::currentChanged, q, &KInvestmentView::slotLoadTab);
         q->connect(MyMoneyFile::instance(), &MyMoneyFile::dataChanged, q, &KInvestmentView::refresh);
 
         q->connect(ui->m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, q, &KInvestmentView::slotLoadAccount);
 
-    }
-
-    void loadInvestmentTab()
-    {
-        Q_Q(KInvestmentView);
-        /// @todo port to new model code
-#if 0
-        m_equitiesProxyModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
-        m_equitiesProxyModel->setHideZeroBalanceAccounts(KMyMoneySettings::hideZeroBalanceEquities());
-        m_equitiesProxyModel->invalidate();
-
-        m_accountsProxyModel->setHideClosedAccounts(!KMyMoneySettings::showAllAccounts());
-        m_accountsProxyModel->invalidate();
-
-        if (!m_idInvAcc.isEmpty()) {                                          // check if account to be selected exist
-            try {                                                                  // it could not exist anymore (e.g. another file has been opened)
-                const auto acc = MyMoneyFile::instance()->account(m_idInvAcc);    // then this should throw an exception
-                if (acc.accountType() == eMyMoney::Account::Type::Investment)                 // it could be that id exists but account in new file isn't investment account anymore
-                    q->slotSelectAccount(m_idInvAcc);                                  // otherwise select preset account
-                else
-                    m_idInvAcc.clear();
-            } catch (const MyMoneyException &) {
-                m_idInvAcc.clear();                                               // account is invalid
-            }
-        }
-
-        if (m_idInvAcc.isEmpty())                                             // if account is invalid select default one
-            selectDefaultInvestmentAccount();
-#endif
-        ui->m_accountComboBox->expandAll();
-    }
-
-    void loadSecuritiesTab()
-    {
-        ui->m_deleteSecurityButton->setEnabled(false);
-        ui->m_editSecurityButton->setEnabled(false);
-
-        m_securitiesProxyModel->invalidate();
-        /// @todo cleanup
-#if 0
-        // securities model contains both securities and currencies, so...
-        // ...search here for securities node and show only this
-        const auto indexList = m_securitiesProxyModel->match(m_securitiesProxyModel->index(0, 0), Qt::DisplayRole, QLatin1String("Securities"), 1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchWrap));
-        if (!indexList.isEmpty())
-            ui->m_securitiesTree->setRootIndex(indexList.first());
-#endif
     }
 
     /**

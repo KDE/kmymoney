@@ -41,10 +41,7 @@ public:
     explicit KTagsView(QWidget *parent = nullptr);
     ~KTagsView() override;
 
-    void executeCustomAction(eView::Action action) override;
-
 public Q_SLOTS:
-    void slotSelectTagAndTransaction(const QString& tagId, const QString& journalEntryId);
     void slotSelectTag(const QString& tagId);
     void slotHelp();
 

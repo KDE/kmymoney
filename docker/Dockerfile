@@ -16,12 +16,12 @@ RUN sed -i -- 's/#[ ]*deb-src/deb-src/g' /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get install -y eatmydata
 RUN eatmydata apt-get upgrade -y
-RUN eatmydata apt-get install -y openssh-server gdb gdbserver rsync
+RUN eatmydata apt-get install -y openssh-server gdb rsync iputils-ping telnet
 RUN eatmydata apt-get build-dep -y kmymoney
 RUN eatmydata apt-get install -y qt5-default qtwebengine5-dev
 RUN eatmydata apt-get install -y libsqlcipher-dev
 RUN eatmydata apt-get install -y libqt5sql5-*
-RUN eatmydata apt-get install -y subversion python3-dev
+RUN eatmydata apt-get install -y subversion python3-dev ninja-build
 RUN eatmydata apt-get install -y breeze-icon-theme fonts-noto-color-emoji
 
 RUN mkdir /var/run/sshd
@@ -34,11 +34,8 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
-# 22 for ssh server. 7777 for gdb server.
-EXPOSE 22 7777
-
-RUN useradd -ms /bin/bash debugger
-RUN echo 'debugger:pwd' | chpasswd
+# 22 for ssh server. 
+EXPOSE 22 
 
 ########################################################
 # Add custom packages and development environment here

@@ -49,8 +49,6 @@ public:
     explicit KPayeesView(QWidget *parent = nullptr);
     ~KPayeesView() override;
 
-    void executeCustomAction(eView::Action action) override;
-
     void executeAction(eMenu::Action action, const SelectedObjects& selections) override;
 
     void updateActions(const SelectedObjects& selections) override;
@@ -62,7 +60,6 @@ Q_SIGNALS:
     void transactionSelected(const QString& accountId, const QString& transactionId);
 
 protected:
-    void showEvent(QShowEvent* event) override;
     void aboutToShow() override;
     void aboutToHide() override;
 

@@ -50,25 +50,26 @@
 
 #include "ui_reportcontrol.h"
 
+#include "icons.h"
+#include "journalmodel.h"
+#include "kbalancechartdlg.h"
+#include "kmymoneysettings.h"
+#include "kmymoneywebpage.h"
+#include "kreportchartview.h"
+#include "kreportconfigurationfilterdlg.h"
+#include "menuenums.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
 #include "mymoneyfile.h"
 #include "mymoneyreport.h"
-#include "mymoneyexception.h"
-#include "kmymoneysettings.h"
-#include "querytable.h"
 #include "objectinfotable.h"
-#include "kreportconfigurationfilterdlg.h"
-#include "icons/icons.h"
-#include "kbalancechartdlg.h"
-#include <kmymoneywebpage.h>
+#include "pivottable.h"
+#include "querytable.h"
+#include "reportcontrolimpl.h"
+#include "reporttable.h"
 #include "tocitem.h"
 #include "tocitemgroup.h"
 #include "tocitemreport.h"
-#include "kreportchartview.h"
-#include "pivottable.h"
-#include "reporttable.h"
-#include "reportcontrolimpl.h"
-#include "mymoneyenums.h"
-#include "menuenums.h"
 
 using namespace reports;
 using namespace eMyMoney;
@@ -106,6 +107,14 @@ void KReportsView::executeAction(eMenu::Action action, const SelectedObjects& se
             slotPrintView();
         }
         break;
+    case eMenu::Action::ChartAccountBalance: {
+        const auto account = MyMoneyFile::instance()->accountsModel()->itemById(selections.firstSelection(SelectedObjects::Account));
+        if (!account.id().isEmpty()) {
+            QPointer<KBalanceChartDlg> dlg = new KBalanceChartDlg(account, this);
+            dlg->exec();
+            delete dlg;
+        }
+    } break;
     case eMenu::Action::FileClose:
         slotCloseAll();
     default:
@@ -115,23 +124,10 @@ void KReportsView::executeAction(eMenu::Action action, const SelectedObjects& se
 
 void KReportsView::executeCustomAction(eView::Action action)
 {
-    Q_D(KReportsView);
     switch(action) {
     case eView::Action::Refresh:
         refresh();
         break;
-
-    case eView::Action::SetDefaultFocus:
-        QTimer::singleShot(0, d->m_tocTreeWidget, SLOT(setFocus()));
-        break;
-
-    case eView::Action::ShowBalanceChart:
-    {
-        QPointer<KBalanceChartDlg> dlg = new KBalanceChartDlg(d->m_currentAccount, this);
-        dlg->exec();
-        delete dlg;
-    }
-    break;
 
     default:
         break;
@@ -154,8 +150,6 @@ void KReportsView::showEvent(QShowEvent * event)
     Q_D(KReportsView);
     if (d->m_needLoad)
         d->init();
-
-    emit customActionRequested(View::Reports, eView::Action::AboutToShow);
 
     if (d->m_needsRefresh)
         refresh();
@@ -224,8 +218,22 @@ void KReportsView::slotOpenUrl(const QUrl &url)
             qWarning() << i18n("Unknown command '%1' in KReportsView::slotOpenUrl()", qPrintable(command));
 
     } else if (view == VIEW_LEDGER) {
-        /// @todo maybe use eMenu::Action::GotoAccount instead here
-        emit selectByVariant(QVariantList {QVariant(id), QVariant(tid)}, eView::Intent::ShowTransactionInLedger);
+        const auto gotoAccount = pActions[eMenu::Action::GoToAccount];
+        gotoAccount->setData(id);
+
+        // convert transaction id to journalEntryId and make it the current selection
+        SelectedObjects selection;
+        const auto indexes = MyMoneyFile::instance()->journalModel()->indexesByTransactionId(tid);
+        for (const auto& idx : indexes) {
+            if (idx.data(eMyMoney::Model::JournalSplitAccountIdRole).toString() == id) {
+                tid = idx.data(eMyMoney::Model::IdRole).toString();
+                break;
+            }
+        }
+        selection.setSelection(SelectedObjects::JournalEntry, tid);
+        emit requestSelectionChange(selection);
+
+        gotoAccount->trigger();
     } else {
         qWarning() << i18n("Unknown view '%1' in KReportsView::slotOpenUrl()", qPrintable(view));
     }
@@ -249,14 +257,25 @@ void KReportsView::slotSaveView()
 {
     Q_D(KReportsView);
     if (auto tab = dynamic_cast<KReportTab*>(d->m_reportTabWidget->currentWidget())) {
-        QString filterList = i18nc("CSV (Filefilter)", "CSV files") + QLatin1String(" (*.csv);;") + i18nc("HTML (Filefilter)", "HTML files") + QLatin1String(" (*.html)");
-        QUrl newURL = QFileDialog::getSaveFileUrl(this, i18n("Export as"), QUrl::fromLocalFile(KRecentDirs::dir(":kmymoney-export")), filterList, &d->m_selectedExportFilter);
+        QPointer<QFileDialog> dialog = new QFileDialog(this, i18n("Export as"), KRecentDirs::dir(":kmymoney-export"));
+        dialog->setMimeTypeFilters({QStringLiteral("text/csv"), QStringLiteral("text/html")});
+        dialog->setFileMode(QFileDialog::AnyFile);
+        dialog->setAcceptMode(QFileDialog::AcceptSave);
+
+        QUrl newURL;
+        QString selectedMimeType;
+        if (dialog->exec() == QDialog::Accepted) {
+            newURL = dialog->selectedUrls().first();
+            selectedMimeType = dialog->selectedMimeTypeFilter();
+        }
+        delete dialog;
+
         if (!newURL.isEmpty()) {
             KRecentDirs::add(":kmymoney-export", newURL.adjusted(QUrl::RemoveFilename | QUrl::StripTrailingSlash).path());
             QString newName = newURL.toDisplayString(QUrl::PreferLocalFile);
 
             try {
-                tab->saveAs(newName, true);
+                tab->saveAs(newName, selectedMimeType, true);
             } catch (const MyMoneyException &e) {
                 KMessageBox::error(this, i18n("Failed to save: %1", QString::fromLatin1(e.what())));
             }
@@ -705,16 +724,6 @@ void KReportsView::slotDeleteFromList()
     }
 }
 
-void KReportsView::slotSelectByObject(const MyMoneyObject& obj, eView::Intent intent)
-{
-    switch(intent) {
-    case eView::Intent::OpenObject:
-        slotOpenReport(static_cast<const MyMoneyReport&>(obj));
-    default:
-        break;
-    }
-}
-
 void KReportsView::slotReportAccountTransactions()
 {
     Q_D(KReportsView);
@@ -731,7 +740,6 @@ void KReportsView::slotReportAccountTransactions()
         );
         report.setGroup(i18n("Transactions"));
         report.addAccount(d->m_currentAccount.id());
-        emit customActionRequested(View::Reports, eView::Action::SwitchView);
         slotOpenReport(report);
     }
 }

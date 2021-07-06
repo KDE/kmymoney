@@ -51,7 +51,6 @@
 #include "mymoneyprice.h"
 #include "mymoneytransaction.h"
 #include "icons.h"
-#include "transaction.h"
 #include "mymoneyenums.h"
 #include "modelenums.h"
 #include "payeesmodel.h"
@@ -242,6 +241,8 @@ public:
 
         m_payee = MyMoneyPayee(); // make sure we don't access an undefined payee
         clearItemData();
+
+        m_focusWidget = ui->m_searchWidget;
     }
 
     void ensurePayeeVisible(const QString& id)

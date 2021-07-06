@@ -38,7 +38,6 @@
 #include "kmymoneysettings.h"
 #include "kenterscheduledlg.h"
 #include "kbalancewarning.h"
-#include "transactioneditor.h"
 #include "kconfirmmanualenterdlg.h"
 #include "kmymoneymvccombo.h"
 #include "kmymoneyutils.h"
@@ -125,6 +124,8 @@ public:
                 ui->m_scheduleTree->setExpanded(idx, m_expandedGroups[groupType]);
             }
         }
+
+        m_focusWidget = ui->m_searchWidget;
     }
 
     void settingsChanged()

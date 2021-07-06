@@ -60,23 +60,6 @@ void KScheduledView::slotSettingsChanged()
     d->settingsChanged();
 }
 
-void KScheduledView::executeCustomAction(eView::Action action)
-{
-    Q_D(KScheduledView);
-    switch(action) {
-    case eView::Action::SetDefaultFocus:
-        QMetaObject::invokeMethod(d->ui->m_searchWidget, "setFocus", Qt::QueuedConnection);
-        break;
-
-    case eView::Action::EditSchedule:
-        slotEditSchedule();
-        break;
-
-    default:
-        break;
-    }
-}
-
 void KScheduledView::showEvent(QShowEvent* event)
 {
     Q_D(KScheduledView);
@@ -99,8 +82,6 @@ void KScheduledView::showEvent(QShowEvent* event)
             d->m_filterModel->invalidate();
         });
     }
-    emit customActionRequested(View::Schedules, eView::Action::AboutToShow);
-
     QWidget::showEvent(event);
 }
 

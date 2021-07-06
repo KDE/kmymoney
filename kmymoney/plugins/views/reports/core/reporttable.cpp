@@ -65,42 +65,40 @@ QString reports::ReportTable::cssFileNameGet()
 
 QString reports::ReportTable::renderHeader(const QString& title, const QByteArray& encoding, bool includeCSS)
 {
-    QString header = QString("<!DOCTYPE HTML PUBLIC")
-                     + " \"-//W3C//DTD HTML 4.01 //EN\""
-                     + " \"http://www.w3.org/TR/html4/strict.dtd\">"
-                     + "\n<html>\n<head>"
-                     + "\n<meta http-equiv=\"Content-Type\""
-                     + " content=\"text/html; charset=" + encoding + "\" />"
-                     + "\n<title>" + title + "</title>";
+    QString header = QString(
+                         "<!DOCTYPE HTML PUBLIC"
+                         " \"-//W3C//DTD HTML 4.01 //EN\""
+                         " \"http://www.w3.org/TR/html4/strict.dtd\">"
+                         "\n<html>\n<head>"
+                         "\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=%1\" />"
+                         "\n<title>%2</title>"
+                         "\n<style type=\"text/css\">\n<!--\n%3")
+                         .arg(encoding, title, KMyMoneyUtils::variableCSS());
 
     QString cssfilename = cssFileNameGet();
-
     if (includeCSS) {
         // include css inline
         QFile cssFile(cssfilename);
         if (cssFile.open(QIODevice::ReadOnly)) {
             QTextStream cssStream(&cssFile);
-            header += QString("\n<style type=\"text/css\">")
-                      + "\n<!--\n"
-                      + cssStream.readAll()
-                      + "\n-->\n</style>\n";
+            header += cssStream.readAll();
             cssFile.close();
         } else {
             qDebug() << "reports::ReportTable::htmlHeaderGet: could not open file "
                      << cssfilename << " readonly";
         }
+        header += QLatin1String("\n-->\n</style>\n");
+
     } else {
+        header += QString("\n<style type=\"text/css\">\n<!--\n%1\n-->\n</style>\n").arg(KMyMoneyUtils::variableCSS());
 
         QUrl cssUrl = cssUrl.fromUserInput(cssfilename);
 
         // do not include css inline instead use a link to the css file
-        header += "\n<link rel=\"stylesheet\" type=\"text/css\" href=\""
-                  + cssUrl.url() + "\">\n";
+        header += QString("\n<link rel=\"stylesheet\" type=\"text/css\" href=\"%1\">\n").arg(cssUrl.url());
     }
 
-    header += KMyMoneyUtils::variableCSS();
-
-    header += "</head>\n<body>\n";
+    header += QLatin1String("</head>\n<body>\n");
 
     return header;
 }

@@ -49,8 +49,6 @@
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
 #include "newtransactioneditor.h"
-#include "selectedtransactions.h"
-#include "transaction.h"
 #include "ui_keditscheduledlg.h"
 #include "widgetenums.h"
 

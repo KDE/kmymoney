@@ -19,6 +19,8 @@ class QWidget;
 
 class MyMoneyTransaction;
 class SplitModel;
+class QAbstractButton;
+class QAbstractItemModel;
 
 class TransactionEditorBase : public QFrame
 {
@@ -31,15 +33,29 @@ public:
     virtual bool accepted() const = 0;
     virtual void loadTransaction(const QModelIndex& index) = 0;
     virtual void saveTransaction() = 0;
+    virtual void setAmountPlaceHolderText(const QAbstractItemModel* model)
+    {
+        Q_UNUSED(model)
+    }
 
 protected:
     void addSplitsFromModel(MyMoneyTransaction& t, const SplitModel* model) const;
     void addSplitsFromModel(QList<MyMoneySplit>& splits, const SplitModel* model) const;
 
+    virtual void keyPressEvent(QKeyEvent* e) override;
+    void setCancelButton(QAbstractButton* button);
+    void setEnterButton(QAbstractButton* button);
+
+protected Q_SLOTS:
+    virtual void reject();
+
 Q_SIGNALS:
     void done();
     void editorLayoutChanged();
 
+private:
+    class Private;
+    QScopedPointer<Private> const d;
 };
 
 #endif // TRANSACTIONEDITORBASE_H

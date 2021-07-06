@@ -205,6 +205,7 @@ QWidget* JournalDelegate::createEditor(QWidget* parent, const QStyleOptionViewIt
                         d->m_editor = new NewTransactionEditor(parent, accountId);
                     }
                 }
+                d->m_editor->setAmountPlaceHolderText(index.model());
                 d->m_editorWidthOfs = 8;
                 if(d->m_view) {
                     if(d->m_view->verticalScrollBar()->isVisible()) {

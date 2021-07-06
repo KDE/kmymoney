@@ -47,7 +47,6 @@
 #include "specialdatesfilter.h"
 #include "specialdatesmodel.h"
 #include "tagsmodel.h"
-#include "transaction.h"
 #include "ui_ktagsview.h"
 
 using namespace Icons;
@@ -183,6 +182,8 @@ public:
 
         m_tag = MyMoneyTag(); // make sure we don't access an undefined tag
         clearItemData();
+
+        m_focusWidget = ui->m_searchWidget;
     }
 
     void clearItemData()
@@ -345,19 +346,6 @@ KTagsView::KTagsView(QWidget *parent) :
 
 KTagsView::~KTagsView()
 {
-}
-
-void KTagsView::executeCustomAction(eView::Action action)
-{
-    Q_D(KTagsView);
-    switch(action) {
-    case eView::Action::SetDefaultFocus:
-        QMetaObject::invokeMethod(d->ui->m_searchWidget, "setFocus");
-        break;
-
-    default:
-        break;
-    }
 }
 
 void KTagsView::slotRenameSingleTag(const QModelIndex& idx, const QVariant& value)
@@ -589,7 +577,7 @@ void KTagsView::updateActions(const SelectedObjects& selections)
     }
 }
 
-void KTagsView::slotSelectTagAndTransaction(const QString& tagId, const QString& journalEntryId)
+void KTagsView::slotSelectTag(const QString& tagId)
 {
     Q_D(KTagsView);
     if (!isVisible())
@@ -611,61 +599,6 @@ void KTagsView::slotSelectTagAndTransaction(const QString& tagId, const QString&
         d->ui->m_tagsList->selectionModel()->setCurrentIndex(idx, QItemSelectionModel::ClearAndSelect);
     }
 
-#if 0
-    try {
-        // clear filter
-        d->m_searchWidget->clear();
-        d->m_searchWidget->updateSearch();
-
-        // deselect all other selected items
-        QList<QListWidgetItem *> selectedItems = d->ui->m_tagsList->selectedItems();
-        QList<QListWidgetItem *>::const_iterator tagsIt = selectedItems.constBegin();
-        while (tagsIt != selectedItems.constEnd()) {
-            KTagListItem* item = dynamic_cast<KTagListItem*>(*tagsIt);
-            if (item)
-                item->setSelected(false);
-            ++tagsIt;
-        }
-
-        // find the tag in the list
-        QListWidgetItem* it;
-        for (int i = 0; i < d->ui->m_tagsList->count(); ++i) {
-            it = d->ui->m_tagsList->item(i);
-            KTagListItem* item = dynamic_cast<KTagListItem *>(it);
-            if (item && item->tag().id() == tagId) {
-                d->ui->m_tagsList->scrollToItem(it, QAbstractItemView::PositionAtCenter);
-
-                d->ui->m_tagsList->setCurrentItem(it);     // active item and deselect all others
-                d->ui->m_tagsList->setCurrentRow(i, QItemSelectionModel::ClearAndSelect); // and select it
-
-                //make sure the tag selection is updated and transactions are updated accordingly
-                slotSelectTag();
-
-                KMyMoneyRegister::RegisterItem *registerItem = 0;
-                for (i = 0; i < d->ui->m_register->rowCount(); ++i) {
-                    registerItem = d->ui->m_register->itemAtRow(i);
-                    KMyMoneyRegister::Transaction* t = dynamic_cast<KMyMoneyRegister::Transaction*>(registerItem);
-                    if (t) {
-                        if (t->transaction().id() == transactionId && t->transaction().accountReferenced(accountId)) {
-                            d->ui->m_register->selectItem(registerItem);
-                            d->ui->m_register->ensureItemVisible(registerItem);
-                            break;
-                        }
-                    }
-                }
-                // quit out of outer for() loop
-                break;
-            }
-        }
-    } catch (const MyMoneyException &e) {
-        qWarning("Unexpected exception in KTagsView::slotSelectTagAndTransaction %s", e.what());
-    }
-#endif
-}
-
-void KTagsView::slotSelectTag(const QString& tagId)
-{
-    slotSelectTagAndTransaction(tagId, QString());
 }
 
 void KTagsView::slotHelp()
