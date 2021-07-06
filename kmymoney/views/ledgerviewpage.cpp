@@ -101,7 +101,7 @@ void LedgerViewPage::init(const QString& configGroupName)
 
     d->ui->m_ledgerView->setModel(d->specialDatesFilter);
 
-    // combine multipe row updates into one
+    // combine multiple row updates into one
     connect(d->stateFilter, &LedgerFilter::rowsRemoved, this, [&]() {
         // trigger update
         d->delayTimer.start(20);

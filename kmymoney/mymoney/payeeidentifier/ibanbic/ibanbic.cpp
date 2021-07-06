@@ -235,7 +235,7 @@ bool ibanBic::validateIbanChecksum(const QString& iban)
     // Replace letters
     for (int i = 0; i < reordered.length(); ++i) {
         if (reordered.at(i).isLetter()) {
-            // Replace charactes A -> 10, ..., Z -> 35
+            // Replace characters A -> 10, ..., Z -> 35
             reordered.replace(i, 1, QString::number(reordered.at(i).toLatin1() - 'A' + 10));
             ++i; // the inserted number is always two characters long, jump beyond
         }

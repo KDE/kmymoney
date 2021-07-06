@@ -95,7 +95,7 @@ private:
      * Update data range start and data range end text validators
      * and re-validate the contents of those text fields against the updated validator.
      * If re-validation fails, arbitrary default values will be set depending on vertical axis type.
-     * This fucntion should be called when vertical axis type or labels precision changed.
+     * This function should be called when vertical axis type or labels precision changed.
      */
     void updateDataRangeValidators(const int& precision);
 private Q_SLOTS:

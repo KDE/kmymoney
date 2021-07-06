@@ -133,7 +133,7 @@ QVariant ReconciliationModel::data(const QModelIndex& idx, int role) const
     if (!idx.isValid())
         return {};
 
-    // we report to have the same number of colums as the
+    // we report to have the same number of columns as the
     // journal model but we only react on the first column
     if (idx.column() < 0 || idx.column() >= JournalModel::Column::MaxColumns)
         return {};

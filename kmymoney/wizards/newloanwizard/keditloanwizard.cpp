@@ -250,7 +250,7 @@ void KEditLoanWizard::loadWidgets(const MyMoneyAccount& /* account */)
         setField("interestFrequencyUnitEdit", changeFrequencyUnit);
     }
 
-    // keep track, if the loan should be fully repayed
+    // keep track, if the loan should be fully repaid
     d->m_fullyRepayLoan = d->m_account.finalPayment() < basePayment;
 
     d->updateLoanInfo();
@@ -376,7 +376,7 @@ bool KEditLoanWizard::validateCurrentPage()
 
         // if interest rate and payment amount is given, then force
         // the term to be recalculated. The final payment is adjusted to
-        // 0 if the loan was meant to be fully repayed
+        // 0 if the loan was meant to be fully repaid
         d->ui->m_durationPage->updateTermWidgets(d->m_account.term());
         if (field("interestRateEditValid").toBool()
                 && field("paymentEditValid").toBool()) {

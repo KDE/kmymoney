@@ -145,7 +145,7 @@ public:
      * This method is used to convert the internal representation of
      * an rounding method into a human readable format
      *
-     * @param roundingMethod enumerated representation of the rouding method.
+     * @param roundingMethod enumerated representation of the rounding method.
      *                     For possible values, see AlkValue::RoundingMethod
      *
      * @return QString representing the human readable form

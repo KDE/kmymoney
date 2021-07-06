@@ -537,7 +537,7 @@ void MyMoneyStorageSql::modifyPayee(MyMoneyPayee payee)
     if (!query.exec())
         throw MYMONEYEXCEPTIONSQL_D(QString::fromLatin1("modifying payee's identifiers (delete from mapping table)")); // krazy:exclude=crashy
 
-    // Get list again because modifiyPayeeIdentifier which is used above may change the id
+    // Get list again because modifyPayeeIdentifier which is used above may change the id
     QList<payeeIdentifier> idents(payee.payeeIdentifiers());
 
     QVariantList order;

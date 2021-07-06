@@ -26,12 +26,12 @@ public:
     virtual ~KMMStyledItemDelegate();
 
     /**
-     * Make the editorEvent publically available
+     * Make the editorEvent publicly available
      */
     virtual bool editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& option, const QModelIndex& index) override;
 
     /**
-     * Make the eventFilter publically available
+     * Make the eventFilter publicly available
      */
     bool eventFilter ( QObject * watched, QEvent * event ) override;
 };

@@ -795,7 +795,7 @@ void QueryTable::constructTransactionTable()
                             }
                         } else if (splits.count() > 2) {
                             // this applies when the transaction has more than 2 splits
-                            // and each is shown seperately
+                            // and each is shown separately
                             switch (m_config.rowType()) {
                             case eMyMoney::Report::RowType::Category:
                             case eMyMoney::Report::RowType::TopCategory:
@@ -1464,7 +1464,7 @@ void QueryTable::constructPerformanceRow(const ReportAccount& account, TableRow&
         sellsTotal = cfList.at(Sells).total();
         cashIncomeTotal = cfList.at(CashIncome).total();
         startingBal = endingBal = MyMoneyMoney();
-        // check if there are any meaningfull values before adding them to results
+        // check if there are any meaningful values before adding them to results
         if (buysTotal.isZero() && sellsTotal.isZero() && cashIncomeTotal.isZero())
             return;
         all.append(cfList.at(BuysOfSells));
@@ -1562,7 +1562,7 @@ void QueryTable::constructCapitalGainRow(const ReportAccount& account, TableRow&
         sellsTotal = cfList.at(Sells).total();
         longTermBuysOfSellsTotal = cfList.at(LongTermBuysOfSells).total();
         longTermSellsOfBuys = cfList.at(LongTermSellsOfBuys).total();
-        // check if there are any meaningfull values before adding them to results
+        // check if there are any meaningful values before adding them to results
         if (buysTotal.isZero() && sellsTotal.isZero() &&
                 longTermBuysOfSellsTotal.isZero() && longTermSellsOfBuys.isZero())
             return;

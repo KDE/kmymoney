@@ -180,7 +180,7 @@ void KEndingBalanceDlg::slotUpdateBalances()
     MYMONEYTRACER(tracer);
 
     // determine the beginning balance and ending balance based on the following
-    // forumulas:
+    // formulas:
     //
     // end balance   = current balance - sum(all non cleared transactions)
     //                                 - sum(all cleared transactions posted

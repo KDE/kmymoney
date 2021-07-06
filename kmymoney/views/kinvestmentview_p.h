@@ -189,7 +189,7 @@ public:
     }
 
     /**
-      * This slot is used to programatically preselect default account in investment view
+      * This slot is used to programmatically preselect default account in investment view
       */
     void selectDefaultInvestmentAccount()
     {

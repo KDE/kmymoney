@@ -248,7 +248,7 @@ public:
      * @brief Make this onlineJob a "new" onlineJob
      *
      * Removes all status information, log, and the id. Only
-     * the task is keept.
+     * the task is kept.
      */
     virtual void reset();
 

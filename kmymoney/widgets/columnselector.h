@@ -51,7 +51,7 @@ public:
      * @param offset offset to be added/subtracted during load/store operation for certain columns
      * @param columns QVector of column indeces (incl. offset) to which the @a offset should be applied
      *
-     * @a offset and @a columns are only used for backward compatability and should not be used
+     * @a offset and @a columns are only used for backward compatibility and should not be used
      */
     explicit ColumnSelector(QTreeView* view, const QString& configGroupName = QString(), int offset = 0, const QVector<int>& columns = QVector<int>());
 
@@ -63,7 +63,7 @@ public:
      * @param offset offset to be added/subtracted during load/store operation for certain columns
      * @param columns QVector of column indeces (incl. offset) to which the @a offset should be applied
      *
-     * @a offset and @a columns are only used for backward compatability and should not be used
+     * @a offset and @a columns are only used for backward compatibility and should not be used
      */
     explicit ColumnSelector(QTableView* view, const QString& configGroupName = QString(), int offset = 0, const QVector<int>& columns = QVector<int>());
 
@@ -79,7 +79,7 @@ public:
     /**
      * Set the offset to be subtracted from the actual column number
      * during load and store operations. This is used to maintain
-     * backward compatability and should not be used on new code.
+     * backward compatibility and should not be used on new code.
      * @a columns contains the indexes to which the @a offset should be applied.
      */
     void setColumnOffsetForStorage();

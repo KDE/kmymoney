@@ -131,7 +131,7 @@ public:
       * If @p transactionCurrencyId equals @p splitCurrencyId this method
       * calls setValue(MyMoneyMoney) otherwise setShares(MyMoneyMoney).
       *
-      * @param value the value to be assiged
+      * @param value the value to be assigned
       * @param transactionCurrencyId the id of the currency assigned to the transaction
       * @param splitCurrencyId the id of the currency assigned to the split (i.e. the
       *                        the id of the currency assigned to the account that is

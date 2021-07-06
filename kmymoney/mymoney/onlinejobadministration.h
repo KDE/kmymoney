@@ -267,7 +267,7 @@ private:
      * @brief Get root instance of an onlineTask
      *
      * Returns a pointer from m_onlineTasks or tries to load/create
-     * a approiate root element.
+     * an appropriate root element.
      *
      * Only createOnlineTask and createOnlineTaskByXml use it.
      *

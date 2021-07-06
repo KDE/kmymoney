@@ -1207,7 +1207,7 @@ public:
             // notifies a modification, it's the perfect place to start the timer if needed
             if (m_autoSaveEnabled && !m_autoSaveTimer->isActive()) {
                 m_autoSaveTimer->setSingleShot(true);
-                m_autoSaveTimer->start(m_autoSavePeriod * 60 * 1000); // miliseconds
+                m_autoSaveTimer->start(m_autoSavePeriod * 60 * 1000); // milliseconds
             }
             pActions[eMenu::Action::UpdateAllAccounts]->setEnabled(KMyMoneyUtils::canUpdateAllAccounts());
             break;

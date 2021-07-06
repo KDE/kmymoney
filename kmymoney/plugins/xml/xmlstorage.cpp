@@ -153,7 +153,7 @@ bool XMLStorage::open(const QUrl &url)
         ungetString(qfile, qbaFileHeader.data(), 8);
 
     // Ok, we got the first block of 8 bytes. Read in the two
-    // unsigned long int's by preserving endianess. This is
+    // unsigned long int's by preserving endianness. This is
     // achieved by reading them through a QDataStream object
     qint32 magic0, magic1;
     QDataStream s(&qbaFileHeader, QIODevice::ReadOnly);

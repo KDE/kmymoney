@@ -197,7 +197,7 @@ void KNewInvestmentWizard::createObjects(const QString& parentId)
     MyMoneyFileTransaction ft;
     try {
         // update all relevant attributes only, if we create a stock
-        // account and the security is unknown or we modifiy the security
+        // account and the security is unknown or we modify the security
         MyMoneySecurity newSecurity(d->m_security);
         newSecurity.setName(field("investmentName").toString());
         newSecurity.setTradingSymbol(field("investmentSymbol").toString());

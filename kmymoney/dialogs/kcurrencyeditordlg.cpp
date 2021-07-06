@@ -122,7 +122,7 @@ MyMoneySecurity KCurrencyEditorDlg::currency() const
     Q_D(const KCurrencyEditorDlg);
     MyMoneySecurity newCurrency = d->currency;
 
-    // if we are creating a new currency, we need to assing the ID
+    // if we are creating a new currency, we need to assign the ID
     if (d->currency.id().isEmpty()) {
         newCurrency = MyMoneySecurity(d->ui->leIsoCode->text(), newCurrency);
     }

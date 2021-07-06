@@ -742,7 +742,7 @@ void KReportChartView::drawLimitLine(const double limit)
 {
     if (coordinatePlane()->diagram()->datasetDimension() != 1)
         return;
-    // temporarily disconnect the view from the model to aovid update of view on
+    // temporarily disconnect the view from the model to avoid update of view on
     // emission of the dataChanged() signal for each call of setDataCell().
     // This speeds up the runtime of drawLimitLine() by a factor of
     // approx. 60 on my box (1831ms vs. 31ms).

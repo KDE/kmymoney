@@ -246,8 +246,8 @@ void LoanDetailsPage::slotCalculate()
             // a) means, we have paid more than we owed. This can't be
             // b) means, we paid more than we owed but the last payment is
             //    less in value than regular payments. That means, that the
-            //    future value is to be treated as  (fully payed back)
-            // c) the loan is not payed back yet
+            //    future value is to be treated as  (fully paid back)
+            // c) the loan is not paid back yet
             if ((moneyBorrowed && val < MyMoneyMoney() && qAbs(val.toDouble()) > qAbs(calc.payment()))
                     || (moneyLend && val > MyMoneyMoney() && qAbs(val.toDouble()) > qAbs(calc.payment()))) {
                 // case a)

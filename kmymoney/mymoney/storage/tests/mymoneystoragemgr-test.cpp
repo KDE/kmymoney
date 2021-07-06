@@ -1116,7 +1116,7 @@ void MyMoneyStorageMgrTest::testRemoveAccountFromTree()
     c.setName("Acc C");
 
     // build a tree A -> B -> C, remove B and see if A -> C
-    // remains in the storag manager
+    // remains in the storage manager
 
     try {
         m->addAccount(a);

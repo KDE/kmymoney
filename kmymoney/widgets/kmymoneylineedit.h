@@ -22,7 +22,7 @@
 #include "kmm_base_widgets_export.h"
 
 /**
-  * This class represents a special verson of a KLineEdit object that
+  * This class represents a special version of a KLineEdit object that
   * supports the display of a hint if the display area is empty. It also
   * overrides the comma key on the numeric keypad with the currently
   * selected monetaryDecimalSymbol if selected during creation of the object.

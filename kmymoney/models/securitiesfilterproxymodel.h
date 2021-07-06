@@ -45,7 +45,7 @@ private:
     Private* const d;
 
 #if QT_VERSION < QT_VERSION_CHECK(5,10,0)
-    // provide the interface for backward compatbility
+    // provide the interface for backward compatibility
     void setRecursiveFilteringEnabled(bool enable) {
         Q_UNUSED(enable);
     }

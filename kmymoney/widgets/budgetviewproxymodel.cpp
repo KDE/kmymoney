@@ -109,7 +109,7 @@ QVariant BudgetViewProxyModel::data(const QModelIndex & idx, int role) const
                     return QVariant();
             case AccountsModel::Column::TotalPostedValue:
                 return MyMoneyUtils::formatMoney(computeTotalValue(accountIdx), baseCurrency);
-            // FIXME: Posted value doesn't correspond with total value without below code. Investigate why and wheather it matters.
+            // FIXME: Posted value doesn't correspond with total value without below code. Investigate why and whether it matters.
             //              case AccountsModel::PostedValue:
             //                return QVariant(MyMoneyUtils::formatMoney(accountValue(account, accountBalance(account.id())), file->baseCurrency()));
             default:

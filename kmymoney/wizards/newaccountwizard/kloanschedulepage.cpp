@@ -119,7 +119,7 @@ KMyMoneyWizardPage* LoanSchedulePage::nextPage() const
     Q_D(const LoanSchedulePage);
     // if the balance widget of the general loan info page is enabled and
     // the value is not zero, then the payout already happened and we don't
-    // aks for it.
+    // ask for it.
     if (d->m_wizard->openingBalance().isZero())
         return d->m_wizard->d_func()->m_loanPayoutPage;
     return d->m_wizard->d_func()->m_accountSummaryPage;

@@ -884,10 +884,10 @@ void MyMoneyFile::reparentAccount(MyMoneyAccount &acc, MyMoneyAccount& parent)
         MyMoneyAccount curParent = account(acc.parentAccountId());
 
         if (!d->accountsModel.indexById(acc.id()).isValid())
-            throw MYMONEYEXCEPTION_CSTRING("Unable to reparent non existant account");
+            throw MYMONEYEXCEPTION_CSTRING("Unable to reparent non existent account");
 
         if (!d->accountsModel.indexById(acc.id()).isValid())
-            throw MYMONEYEXCEPTION_CSTRING("Unable to reparent to existant account");
+            throw MYMONEYEXCEPTION_CSTRING("Unable to reparent to existent account");
 
         // reparent in model
         d->accountsModel.reparentAccount(acc.id(), parent.id());

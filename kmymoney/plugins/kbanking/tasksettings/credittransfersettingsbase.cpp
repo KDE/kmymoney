@@ -77,7 +77,7 @@ bool creditTransferSettingsBase::isBicMandatory(const QString& payeeIban, const 
      */
     QStringList sepaParticipants{"FI", "AT", "PT", "BE", "BG", "ES", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "GF", "DE", "GI", "GR", "GP", "GG", "HU", "IS", "IE", "IM", "IT", "JE", "LV", "LI", "LT", "LU", "PT", "MT", "MQ", "YT", "MC", "NL", "NO", "PL", "PT", "RE", "RO", "BL", "MF", "PM", "SM", "SK", "SI", "ES", "SE", "CH", "GB"};
 
-    // Starting form 1st Febuary 2016 no bic is needed between sepa countries
+    // Starting form 1st February 2016 no bic is needed between sepa countries
     return (!sepaParticipants.contains(payeeContryCode, Qt::CaseInsensitive) || !sepaParticipants.contains(beneficaryCountryCode, Qt::CaseInsensitive));
 }
 

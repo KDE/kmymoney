@@ -66,7 +66,7 @@ public:
     void setIban(const QString& iban);
 
     /** @copydoc m_iban
-     * Use this method if you know that iban is in electronic format already. No futher checks are done.
+     * Use this method if you know that iban is in electronic format already. No further checks are done.
      */
     void setElectronicIban(const QString& iban) {
         Q_ASSERT(iban == ibanToElectronic(iban));
@@ -177,7 +177,7 @@ public:
     static QString localBankCodeByIban(const QString& iban);
 
     /**
-     * @brief Chech if IBAN is valid
+     * @brief Check if IBAN is valid
      */
     bool isIbanValid() const;
 
@@ -227,7 +227,7 @@ private:
      * @brief Business Identifier Code
      * According to ISO 9362
      *
-     * A trailing XXX must be ommitted. All characters must be upper case.
+     * A trailing XXX must be omitted. All characters must be upper case.
      */
     QString m_bic;
 

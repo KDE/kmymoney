@@ -62,7 +62,7 @@ public:
     QString sender() const;
 
     /**
-     * @brief What happend?
+     * @brief What happened?
      */
     QString message() const;
 

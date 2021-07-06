@@ -373,8 +373,8 @@ public:
                 // a) means, we have paid more than we owed. This can't be
                 // b) means, we paid more than we owed but the last payment is
                 //    less in value than regular payments. That means, that the
-                //    future value is to be treated as  (fully payed back)
-                // c) the loan is not payed back yet
+                //    future value is to be treated as  (fully paid back)
+                // c) the loan is not paid back yet
 
                 if ((q->field("borrowButton").toBool() && val < 0 && qAbs(val) > qAbs(calc.payment()))
                         || (q->field("lendButton").toBool() && val > 0 && qAbs(val) > qAbs(calc.payment()))) {

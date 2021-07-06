@@ -279,7 +279,7 @@ void MyMoneyStatementReader::Private::assignUniqueBankID(MyMoneySplit& s, const 
 
     if (base.isEmpty()) {
         // in case the importer did not assign a bankID, we will do it here
-        // we use the same algorith as used in the KBanking plugin as this
+        // we use the same algorithm as used in the KBanking plugin as this
         // has been served well for a long time already.
         auto h = MyMoneyTransaction::hash(t_in.m_strPayee.trimmed());
         h = MyMoneyTransaction::hash(t_in.m_strMemo, h);

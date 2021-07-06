@@ -374,7 +374,7 @@ bool TemplateLoader::importTemplate(const MyMoneyTemplate& tmpl)
      * Resolve imported vat account assignments
      *
      * The template account id of the assigned vat account
-     * is stored temporarly in the account key/value pair
+     * is stored temporarily in the account key/value pair
      * 'UnresolvedVatAccount' and resolved below.
      */
     QList<MyMoneyAccount> accountList;

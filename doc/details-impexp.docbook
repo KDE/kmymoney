@@ -1092,7 +1092,7 @@
     require you to change your password the first time you access it online
     using this method.  Unfortunately, at this time, the library that &kmymoney;
     uses (libofx) does not have a way to interactively change a password.  In
-    some cases, it is possible to get a techincal support person at the
+    some cases, it is possible to get a technical support person at the
     institution to change the password for you.  Until we are able to expand
     this section with more detailed troubleshooting information, if you have
     trouble getting this to work for you, you can ask for help on the &kmymoney;

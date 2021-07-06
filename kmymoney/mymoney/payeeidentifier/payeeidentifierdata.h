@@ -96,7 +96,7 @@ public:
     /**
      * @brief Create a new payeeIdentifier form XML data
      *
-     * @param element Note: there could be more data in that elemenet than you created in writeXML()
+     * @param element Note: there could be more data in that element than you created in writeXML()
      */
     virtual payeeIdentifierData* createFromXml(const QDomElement &element) const = 0;
 

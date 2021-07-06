@@ -103,7 +103,7 @@ body#summaryview { /* set body attributes that affect only the summary view (and
   }
 
   .warningtitle { /*<tr> -set warning background color -overdue payments -items of this class also belong to the class called "itemtitle"*/
-    color:red;/*set programatically, not by css*/
+    color:red;/*set programmatically, not by css*/
     background-color: Highlight;
   }
 

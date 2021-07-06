@@ -425,7 +425,7 @@ void SplitDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, con
         block.unblock();
         model->setData(index, QVariant::fromValue<MyMoneyMoney>(-splitEditor->value()), eMyMoney::Model::SplitValueRole);
 
-        // in case this was a new split, we nned to create a new empty one
+        // in case this was a new split, we need to create a new empty one
         SplitModel* splitModel = qobject_cast<SplitModel*>(model);
         if(splitModel) {
             splitModel->appendEmptySplit();

@@ -142,7 +142,7 @@ private:
     /** @brief Minibal number of chars for payee name */
     int _payeeNameMinLength;
 
-    /** @brief characters allowd in purpose and recipient name */
+    /** @brief characters allowed in purpose and recipient name */
     QString _allowedChars;
 
     /** @brief Number of chars allowed for sepa reference */

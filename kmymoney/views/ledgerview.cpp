@@ -1036,7 +1036,7 @@ void LedgerView::selectionChanged(const QItemSelection& selected, const QItemSel
 
     // we need to remember the first item selected as this
     // should always be reported as the first item in the
-    // list of selected journalEntries. We have to devide
+    // list of selected journalEntries. We have to divide
     // the number of selected indexes by the column count
     // to get the number of selected rows.
     switch (selectionModel()->selectedIndexes().count() / model()->columnCount()) {

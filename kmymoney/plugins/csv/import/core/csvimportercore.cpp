@@ -987,7 +987,7 @@ bool CSVImporterCore::processBankRow(MyMoneyStatement &st, const BankingProfile 
                        .arg(tr.m_datePosted.toString(Qt::ISODate))
                        .arg(MyMoneyTransaction::hash(txt));
     QString hash;
-    for (uchar idx = 0; idx < 0xFF; ++idx) {  // assuming threre will be no more than 256 transactions with the same hashBase
+    for (uchar idx = 0; idx < 0xFF; ++idx) {  // assuming there will be no more than 256 transactions with the same hashBase
         hash = QString::fromLatin1("%1-%2").arg(hashBase).arg(idx);
         QSet<QString>::const_iterator it = m_hashSet.constFind(hash);
         if (it == m_hashSet.constEnd())
