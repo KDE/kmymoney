@@ -79,7 +79,6 @@ void KCategoriesView::slotSettingsChanged()
 
 void KCategoriesView::updateActions(const SelectedObjects& selections)
 {
-    /// @todo updateActions
     Q_D(KCategoriesView);
     const auto file = MyMoneyFile::instance();
 

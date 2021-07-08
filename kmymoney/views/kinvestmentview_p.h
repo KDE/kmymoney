@@ -192,7 +192,6 @@ public:
     void selectDefaultInvestmentAccount()
     {
         if (m_accountsProxyModel->rowCount() > 0) {
-            /// @todo port to new model code
             const auto indexes = m_accountsProxyModel->match(m_accountsProxyModel->index(0, 0),
                                                              eMyMoney::Model::AccountTypeRole,
                                                              QVariant::fromValue<eMyMoney::Account::Type>(eMyMoney::Account::Type::Investment),
@@ -209,11 +208,10 @@ public:
       */
     MyMoneySecurity currentSecurity()
     {
-        /// @todo port to new model code
         MyMoneySecurity sec;
-        auto treeItem = ui->m_securitiesTree->currentIndex();
-        if (treeItem.isValid()) {
-            auto mdlItem = m_securitiesProxyModel->index(treeItem.row(), SecuritiesModel::Security, treeItem.parent());
+        const auto securityIdx = ui->m_securitiesTree->currentIndex();
+        if (securityIdx.isValid()) {
+            auto mdlItem = m_securitiesProxyModel->index(securityIdx.row(), SecuritiesModel::Security, securityIdx.parent());
             sec = MyMoneyFile::instance()->security(mdlItem.data(eMyMoney::Model::IdRole).toString());
         }
         return sec;

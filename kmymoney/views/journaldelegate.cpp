@@ -34,7 +34,6 @@
 #include "mymoneysecurity.h"
 #include "mymoneyutils.h"
 #include "newtransactioneditor.h"
-#include "payeesmodel.h"
 #include "schedulesjournalmodel.h"
 
 QColor JournalDelegate::m_erroneousColor = QColor(Qt::red);
