@@ -57,6 +57,8 @@ public:
     void skipStartEditing();
     void blockEditorStart(bool blocked);
 
+    void setTransactionPayeeId(const QString& id);
+
 public Q_SLOTS:
     /**
      * This method scrolls the ledger so that the current item is visible

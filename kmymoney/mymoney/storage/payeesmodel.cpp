@@ -109,7 +109,7 @@ QVariant PayeesModel::data(const QModelIndex& index, int role) const
     QVariant rc;
     const MyMoneyPayee& payee = static_cast<TreeItem<MyMoneyPayee>*>(index.internalPointer())->constDataRef();
     switch (role) {
-    case eMyMoney::Model::Roles::PayeeNameRole:
+    case eMyMoney::Model::PayeeNameRole:
     case Qt::DisplayRole:
     case Qt::EditRole:
         // make sure to never return any displayable text for the dummy entry

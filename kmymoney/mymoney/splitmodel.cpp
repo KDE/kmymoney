@@ -18,12 +18,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "mymoneyenums.h"
-#include "mymoneyfile.h"
 #include "accountsmodel.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "mymoneysecurity.h"
-#include "mymoneyexception.h"
+#include "payeesmodel.h"
 
 struct SplitModel::Private
 {
@@ -208,7 +209,7 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
     case Qt::EditRole:
         switch(idx.column()) {
         case Column::Category:
-            return MyMoneyFile::instance()->accountsModel()->itemById(split.accountId()).name();
+            return MyMoneyFile::instance()->accountsModel()->accountIdToHierarchicalName(split.accountId());
 
         case Column::Memo:
         {
@@ -257,11 +258,23 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::IdRole:
         return split.id();
 
-    case eMyMoney::Model::SplitMemoRole:
-        return split.memo();
+    case eMyMoney::Model::SplitSingleLineMemoRole:
+    case eMyMoney::Model::SplitMemoRole: {
+        QString rc(split.memo());
+        if (role == eMyMoney::Model::SplitSingleLineMemoRole) {
+            // remove empty lines
+            rc.replace("\n\n", "\n");
+            // replace '\n' with ", "
+            rc.replace('\n', ", ");
+        }
+        return rc;
+    }
 
     case eMyMoney::Model::SplitAccountIdRole:
         return split.accountId();
+
+    case eMyMoney::Model::AccountFullNameRole:
+        return MyMoneyFile::instance()->accountsModel()->accountIdToHierarchicalName(split.accountId());
 
     case eMyMoney::Model::SplitSharesRole:
         return QVariant::fromValue<MyMoneyMoney>(split.shares());
@@ -277,6 +290,9 @@ QVariant SplitModel::data(const QModelIndex& idx, int role) const
 
     case eMyMoney::Model::SplitPayeeIdRole:
         return split.payeeId();
+
+    case eMyMoney::Model::SplitPayeeRole:
+        return MyMoneyFile::instance()->payeesModel()->itemById(split.payeeId()).name();
 
     case eMyMoney::Model::TransactionCounterAccountRole:
         break;

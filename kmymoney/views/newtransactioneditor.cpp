@@ -485,6 +485,8 @@ int NewTransactionEditor::Private::editSplits()
     const auto commodity = MyMoneyFile::instance()->security(commodityId);
 
     QPointer<SplitDialog> splitDialog = new SplitDialog(m_account, commodity, -(q->transactionAmount()), transactionFactor, q);
+    const auto payeeId = payeesModel->index(ui->payeeEdit->currentIndex(), 0).data(eMyMoney::Model::IdRole).toString();
+    splitDialog->setTransactionPayeeId(payeeId);
     splitDialog->setModel(&dlgSplitModel);
 
     int rc = splitDialog->exec();
