@@ -30,7 +30,6 @@
 #include "mymoneyfile.h"
 #include "accountsmodel.h"
 #include "costcentermodel.h"
-#include "ledgermodel.h"
 #include "splitmodel.h"
 #include "payeesmodel.h"
 #include "mymoneyaccount.h"

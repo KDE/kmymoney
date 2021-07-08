@@ -59,7 +59,6 @@ set(libviews_a_UI
   ksearchtransactiondlg.ui
   ktransactionselectdlg.ui
   simpleledgerview.ui
-  ledgerview.ui
   ledgerviewpage.ui
   splitdialog.ui
   newspliteditor.ui
