@@ -37,7 +37,6 @@
 #include "kmymoneyaccountcombo.h"
 #include "kmymoneysettings.h"
 #include "kmymoneyutils.h"
-#include "modelenums.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
 #include "mymoneyexception.h"

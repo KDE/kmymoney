@@ -31,18 +31,17 @@
 // ----------------------------------------------------------------------------
 // Project Headers
 
-#include "mymoneycategory.h"
-#include "mymoneyfile.h"
-#include "mymoneyaccount.h"
-#include "mymoneytransaction.h"
-#include "mymoneytransactionfilter.h"
+#include "../config/mymoneyqifprofile.h"
+#include "accountsmodel.h"
+#include "icons/icons.h"
 #include "kmymoneyaccountcombo.h"
 #include "kmymoneyutils.h"
-#include "accountsmodel.h"
-#include <icons/icons.h>
+#include "mymoneyaccount.h"
+#include "mymoneycategory.h"
 #include "mymoneyenums.h"
-#include "modelenums.h"
-#include "../config/mymoneyqifprofile.h"
+#include "mymoneyfile.h"
+#include "mymoneytransaction.h"
+#include "mymoneytransactionfilter.h"
 
 using namespace Icons;
 

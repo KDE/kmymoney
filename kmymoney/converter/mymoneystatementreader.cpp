@@ -44,10 +44,6 @@
 #include "mymoneystatement.h"
 #include "mymoneysecurity.h"
 #include "kmymoneysettings.h"
-/// @todo port to new model code
-// #include "transactioneditor.h"
-// #include "stdtransactioneditor.h"
-// #include "kenterscheduledlg.h"
 #include "amountedit.h"
 #include "kaccountselectdlg.h"
 #include "knewaccountwizard.h"
@@ -59,7 +55,6 @@
 #include "scheduledtransactionmatchfinder.h"
 #include "dialogenums.h"
 #include "mymoneyenums.h"
-#include "modelenums.h"
 #include "mymoneyutils.h"
 #include "kmymoneyutils.h"
 

@@ -18,13 +18,10 @@
 // Project Includes
 
 #include "ui_newtransactionform.h"
-#include "modelenums.h"
 #include "journalmodel.h"
 #include "mymoneyfile.h"
 #include "tagsmodel.h"
 #include "statusmodel.h"
-
-using namespace eLedgerModel;
 
 class NewTransactionForm::Private
 {

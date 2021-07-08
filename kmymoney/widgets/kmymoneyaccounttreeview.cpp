@@ -30,7 +30,6 @@
 #include "accountsmodel.h"
 #include "institutionsmodel.h"
 #include "accountsproxymodel.h"
-#include "modelenums.h"
 #include "menuenums.h"
 #include "selectedobjects.h"
 

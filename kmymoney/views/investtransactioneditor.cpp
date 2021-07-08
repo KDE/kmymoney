@@ -44,7 +44,6 @@
 #include "splitdialog.h"
 #include "widgethintframe.h"
 #include "icons/icons.h"
-#include "modelenums.h"
 #include "mymoneyenums.h"
 #include "mymoneysecurity.h"
 #include "kcurrencycalculator.h"
@@ -372,7 +371,6 @@ MyMoneyMoney InvestTransactionEditor::Private::getPrice(const SplitModel* model,
         const auto category = MyMoneyFile::instance()->accountsModel()->itemById(categoryId);
         if (!category.id().isEmpty()) {
             const auto sec = MyMoneyFile::instance()->security(category.currencyId());
-            /// @todo I think security in the following three occurrences needs to be replaced with currency
             if (sec.id() != currency.id()) {
                 if (result == MyMoneyMoney::ONE) {
                     result = MyMoneyFile::instance()->price(sec.id(), currency.id(), QDate()).rate(sec.id());

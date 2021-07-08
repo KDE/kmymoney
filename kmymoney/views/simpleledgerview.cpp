@@ -37,7 +37,6 @@
 #include "kmymoneyviewbase_p.h"
 #include "ledgerviewpage.h"
 #include "menuenums.h"
-#include "modelenums.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"

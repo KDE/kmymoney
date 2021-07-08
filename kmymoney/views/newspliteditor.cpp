@@ -40,7 +40,6 @@
 #include "splitview.h"
 #include "icons/icons.h"
 #include "mymoneyenums.h"
-#include "modelenums.h"
 #include "mymoneysecurity.h"
 #include "kcurrencycalculator.h"
 #include "amounteditcurrencyhelper.h"

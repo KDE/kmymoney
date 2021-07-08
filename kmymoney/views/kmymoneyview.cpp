@@ -59,7 +59,6 @@
 #include "kscheduledview.h"
 #include "ktagsview.h"
 #include "menuenums.h"
-#include "modelenums.h"
 #include "mymoneyaccount.h"
 #include "mymoneyenums.h"
 #include "mymoneyexception.h"

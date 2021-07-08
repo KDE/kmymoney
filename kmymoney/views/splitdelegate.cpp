@@ -25,10 +25,7 @@
 #include "newspliteditor.h"
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
-#include "modelenums.h"
 #include "mymoneyfile.h"
-
-using namespace eLedgerModel;
 
 QColor SplitDelegate::m_erroneousColor = QColor(Qt::red);
 QColor SplitDelegate::m_importedColor = QColor(Qt::yellow);

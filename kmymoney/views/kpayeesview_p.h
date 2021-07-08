@@ -52,7 +52,6 @@
 #include "mymoneytransaction.h"
 #include "icons.h"
 #include "mymoneyenums.h"
-#include "modelenums.h"
 #include "payeesmodel.h"
 #include "menuenums.h"
 #include "ledgerpayeefilter.h"
