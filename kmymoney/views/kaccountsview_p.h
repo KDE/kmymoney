@@ -216,7 +216,7 @@ public:
                     account.setOnlineBankingSettings((*it_plugin)->onlineBankingSettings(account.onlineBankingSettings()));
                 }
                 auto bal = dlg->openingBalance();
-                if (m_currentAccount.accountGroup() == eMyMoney::Account::Type::Liability) {
+                if (account.accountGroup() == eMyMoney::Account::Type::Liability) {
                     bal = -bal;
                 }
 
@@ -241,10 +241,11 @@ public:
                         file->modifyTransaction(t);
                     }
                 } else if (tid.isEmpty() && !dlg->openingBalance().isZero()) {
-                    file->createOpeningBalanceTransaction(m_currentAccount, bal);
+                    file->createOpeningBalanceTransaction(account, bal);
                 }
 
                 ft.commit();
+                m_currentAccount = account;
 
                 // reload the account object as it might have changed in the meantime
                 //            slotSelectAccount(file->account(account.id()));
