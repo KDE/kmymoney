@@ -60,6 +60,10 @@ using namespace Icons;
 class NewTransactionEditor::Private
 {
 public:
+    enum TaxValueChange {
+        ValueUnchanged,
+        ValueChanged,
+    };
     Private(NewTransactionEditor* parent)
         : q(parent)
         , ui(new Ui_NewTransactionEditor)
@@ -70,6 +74,7 @@ public:
         , accepted(false)
         , costCenterRequired(false)
         , bypassPriceEditor(false)
+        , inUpdateVat(false)
         , splitModel(parent, &undoStack)
         , price(MyMoneyMoney::ONE)
         , amountHelper(nullptr)
@@ -92,7 +97,6 @@ public:
         delete ui;
     }
 
-    void createStatusEntry(eMyMoney::Split::State status);
     void updateWidgetState();
     bool checkForValidTransaction(bool doUserInteraction = true);
     bool isDatePostOpeningDate(const QDate& date, const QString& accountId);
@@ -108,26 +112,28 @@ public:
     bool tagsChanged(const QStringList& ids);
     int editSplits();
     void updateWidgetAccess();
-
+    void updateVAT(TaxValueChange amountChanged);
+    MyMoneyMoney removeVatSplit();
     MyMoneyMoney getPrice();
     MyMoneyMoney splitsSum() const;
 
-    NewTransactionEditor*         q;
-    Ui_NewTransactionEditor*      ui;
+    NewTransactionEditor* q;
+    Ui_NewTransactionEditor* ui;
     AccountNamesFilterProxyModel* accountsModel;
     AccountNamesFilterProxyModel* categoriesModel;
-    QSortFilterProxyModel*        costCenterModel;
-    QSortFilterProxyModel*        payeesModel;
-    bool                          accepted;
-    bool                          costCenterRequired;
-    bool                          bypassPriceEditor;
-    QUndoStack                    undoStack;
-    SplitModel                    splitModel;
-    MyMoneyAccount                m_account;
-    MyMoneyTransaction            transaction;
-    MyMoneySplit                  split;
-    MyMoneyMoney                  price;
-    CreditDebitHelper*            amountHelper;
+    QSortFilterProxyModel* costCenterModel;
+    QSortFilterProxyModel* payeesModel;
+    bool accepted;
+    bool costCenterRequired;
+    bool bypassPriceEditor;
+    bool inUpdateVat;
+    QUndoStack undoStack;
+    SplitModel splitModel;
+    MyMoneyAccount m_account;
+    MyMoneyTransaction transaction;
+    MyMoneySplit split;
+    MyMoneyMoney price;
+    CreditDebitHelper* amountHelper;
 };
 
 void NewTransactionEditor::Private::updateWidgetAccess()
@@ -322,6 +328,7 @@ bool NewTransactionEditor::Private::categoryChanged(const QString& accountId)
                         splitModel.setData(index, QVariant::fromValue<MyMoneyMoney>(MyMoneyMoney()), eMyMoney::Model::SplitSharesRole);
                     }
                 }
+                updateVAT(ValueUnchanged);
 
             } catch (MyMoneyException& e) {
                 qDebug() << "Ooops: invalid account id" << accountId << "in" << Q_FUNC_INFO;
@@ -434,6 +441,7 @@ bool NewTransactionEditor::Private::valueChanged(CreditDebitHelper* valueHelper)
         /// @todo ask what to do: if the rest of the splits is the same amount we could simply reverse the sign
         /// of all splits, otherwise we could ask if the user wants to start the split editor or anything else.
     }
+    updateVAT(ValueChanged);
     return rc;
 }
 
@@ -528,6 +536,137 @@ int NewTransactionEditor::Private::editSplits()
     }
 
     return rc;
+}
+
+MyMoneyMoney NewTransactionEditor::Private::removeVatSplit()
+{
+    const auto rows = splitModel.rowCount();
+    if (rows != 2)
+        return amountHelper->value();
+
+    QModelIndex netSplitIdx;
+    QModelIndex taxSplitIdx;
+    bool netValue(false);
+
+    for (int row = 0; row < rows; ++row) {
+        const auto idx = splitModel.index(row, 0);
+        const auto accountId = idx.data(eMyMoney::Model::SplitAccountIdRole).toString();
+        const auto account = MyMoneyFile::instance()->accountsModel()->itemById(accountId);
+        // in case of failure, we simply stop processing
+        if (account.id().isEmpty()) {
+            return amountHelper->value();
+        }
+        if (!account.value(QLatin1String("VatAccount")).isEmpty()) {
+            netValue = (account.value(QLatin1String("VatAmount")).toLower() == QLatin1String("net"));
+            netSplitIdx = idx;
+        } else if (!account.value(QLatin1String("VatRate")).isEmpty()) {
+            taxSplitIdx = idx;
+        }
+    }
+
+    // return if not all splits are setup
+    if (!(taxSplitIdx.isValid() && netSplitIdx.isValid())) {
+        return amountHelper->value();
+    }
+
+    MyMoneyMoney amount;
+    // reduce the splits
+    if (netValue) {
+        amount = -(netSplitIdx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>());
+    } else {
+        amount = -(netSplitIdx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>()
+                   + taxSplitIdx.data(eMyMoney::Model::SplitSharesRole).value<MyMoneyMoney>());
+    }
+
+    // remove the tax split
+    splitModel.removeRow(netSplitIdx.row());
+
+    return amount;
+}
+
+void NewTransactionEditor::Private::updateVAT(TaxValueChange amountChanged)
+{
+    if (inUpdateVat) {
+        return;
+    }
+
+    struct cleanupHelper {
+        cleanupHelper(bool* lockVariable)
+            : m_lockVariable(lockVariable)
+        {
+            *lockVariable = true;
+        }
+        ~cleanupHelper()
+        {
+            *m_lockVariable = false;
+        }
+        bool* m_lockVariable;
+    } cleanupHelper(&inUpdateVat);
+
+    const auto categoryId = ui->categoryCombo->getSelected();
+
+    auto taxCategoryId = [&]() {
+        if (categoryId.isEmpty()) {
+            return QString();
+        }
+        const auto category = MyMoneyFile::instance()->account(categoryId);
+        return category.value("VatAccount");
+    };
+
+    // if auto vat assignment for this account is turned off
+    // we don't care about taxes
+    if (m_account.value(QLatin1String("NoVat")).toLower() == QLatin1String("yes"))
+        return;
+
+    // more splits than category and tax are not supported
+    if (splitModel.rowCount() > 2)
+        return;
+
+    // in order to do anything, we need an amount
+    MyMoneyMoney amount, newAmount;
+    amount = amountHelper->value();
+    if (amount.isZero())
+        return;
+
+    MyMoneyAccount category;
+
+    // If the transaction has a tax and a category split, remove the tax split
+    if (splitModel.rowCount() == 2) {
+        newAmount = removeVatSplit();
+        if (splitModel.rowCount() == 2) // not removed?
+            return;
+
+        // now we have a single split with a category and check if the
+        // value has changed and we need to update that split
+        if (amountChanged == ValueChanged) {
+            categoryChanged(categoryId);
+        }
+    } else {
+        newAmount = amount;
+    }
+
+    const auto taxId = taxCategoryId();
+    if (taxId.isEmpty())
+        return;
+
+    // seems we have everything we need
+    if (amountChanged == ValueChanged)
+        newAmount = amount;
+
+    if (splitModel.rowCount() != 1)
+        return;
+
+    auto t = q->transaction();
+    t.setCommodity(transaction.commodity());
+    MyMoneyFile::instance()->updateVAT(t);
+
+    // clear current splits and add them again
+    splitModel.unload();
+    for (const auto& split : t.splits()) {
+        if ((split.accountId() == taxId) || split.accountId() == categoryId) {
+            splitModel.appendSplit(split);
+        }
+    }
 }
 
 NewTransactionEditor::NewTransactionEditor(QWidget* parent, const QString& accountId)
