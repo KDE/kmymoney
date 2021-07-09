@@ -26,6 +26,7 @@
                 "Name[sk]": "Christian Dávid",
                 "Name[sl]": "Christian Dávid",
                 "Name[sv]": "Christian Dávid",
+                "Name[tr]": "Christian Dávid",
                 "Name[uk]": "Christian Dávid",
                 "Name[x-test]": "xxChristian Dávidxx",
                 "Name[zh_CN]": "Christian Dávid"
@@ -49,6 +50,7 @@
         "Description[pt_BR]": "Adiciona área da caixa de saída das tarefas online",
         "Description[sl]": "V KMyMoney doda pogled na oddano e-pošto",
         "Description[sv]": "Lägger till utkorgsvy för nätjobb i KMyMoney",
+        "Description[tr]": "KMyMoney'e çevrimiçi iş giden kutusu görünümü ekler",
         "Description[uk]": "Панель вихідних інтернет-завдань у KMyMoney",
         "Description[x-test]": "xxAdds online job outbox view to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加在线任务发件箱视图",
@@ -74,6 +76,7 @@
         "Name[pt_BR]": "Área da caixa de saída das tarefas online",
         "Name[sl]": "Pogled na spletne posle",
         "Name[sv]": "Utkorgsvy för nätjobb",
+        "Name[tr]": "Çevrimiçi iş giden kutusu görünümü",
         "Name[uk]": "Панель вихідних даних інтернет-завдань",
         "Name[x-test]": "xxOnline job outbox viewxx",
         "Name[zh_CN]": "线上任务发件箱视图",

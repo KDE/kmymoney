@@ -25,6 +25,7 @@
                 "Name[sk]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
                 "Name[sl]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
                 "Name[sv]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
+                "Name[tr]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
                 "Name[uk]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz",
                 "Name[x-test]": "xxKevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowiczxx",
                 "Name[zh_CN]": "Kevin Tambascio,Thomas Baumgart,Ace Jones,Łukasz Wojniłowicz"
@@ -49,6 +50,7 @@
         "Description[sk]": "Pridáva podporu XML úložiska do KMyMoney",
         "Description[sl]": "Dodaj programu KMyMoney podporo za shranjevanje XML",
         "Description[sv]": "Lägger till stöd för XML-lagring i KMyMoney",
+        "Description[tr]": "KMyMoney'e XML depolama desteği ekler",
         "Description[uk]": "Підтримка сховищ XML у KMyMoney",
         "Description[x-test]": "xxAdds XML storage support to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 XML 存储支持",
@@ -76,6 +78,7 @@
         "Name[sk]": "XML Úložisko",
         "Name[sl]": "Shramba XML",
         "Name[sv]": "XML-lagring",
+        "Name[tr]": "XML Depolama",
         "Name[uk]": "Сховище XML",
         "Name[x-test]": "xxXML Storagexx",
         "Name[zh_CN]": "XML 存储",

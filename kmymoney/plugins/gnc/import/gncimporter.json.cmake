@@ -26,6 +26,7 @@
                 "Name[sk]": "Michael Edwardes",
                 "Name[sl]": "Michael Edwardes",
                 "Name[sv]": "Michael Edwardes",
+                "Name[tr]": "Michael Edwardes",
                 "Name[uk]": "Michael Edwardes",
                 "Name[x-test]": "xxMichael Edwardesxx",
                 "Name[zh_CN]": "Michael Edwardes"
@@ -51,6 +52,7 @@
         "Description[sk]": "Pridať GnuCash import do KMyMoney",
         "Description[sl]": "Doda uvoz GnuCash v KMyMoney",
         "Description[sv]": "Lägg till GnuCash-import till KMyMoney",
+        "Description[tr]": "KMyMoney'e GnuCash içe aktarmayı ekle",
         "Description[uk]": "Імпортування даних GnuCash у KMyMoney",
         "Description[x-test]": "xxAdd GnuCash importing to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 GnuCash 导入服务",
@@ -80,6 +82,7 @@
         "Name[sk]": "GNC Importer",
         "Name[sl]": "Uvoznik GNC",
         "Name[sv]": "GNC-import",
+        "Name[tr]": "GNC İçe Aktarıcı",
         "Name[uk]": "Імпортування GNC",
         "Name[x-test]": "xxGNC Importerxx",
         "Name[zh_CN]": "GNC 导入工具",

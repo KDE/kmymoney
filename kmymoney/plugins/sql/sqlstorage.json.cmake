@@ -25,6 +25,7 @@
                 "Name[sk]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[sl]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[sv]": "Tony Bloomfield,Łukasz Wojniłowicz",
+                "Name[tr]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[uk]": "Tony Bloomfield,Łukasz Wojniłowicz",
                 "Name[x-test]": "xxTony Bloomfield,Łukasz Wojniłowiczxx",
                 "Name[zh_CN]": "Tony Bloomfield,Łukasz Wojniłowicz"
@@ -49,6 +50,7 @@
         "Description[sk]": "Pridáva podporu SQL úložiska do KMyMoney",
         "Description[sl]": "Doda v KMyMoney podporo za shranjevanje SQL",
         "Description[sv]": "Lägger till stöd för SQL-lagring i KMyMoney",
+        "Description[tr]": "KMyMoney'e SQL depolama desteği ekler",
         "Description[uk]": "Підтримка сховища даних SQL у KMyMoney",
         "Description[x-test]": "xxAdds SQL storage support to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 SQL 存储支持",
@@ -77,6 +79,7 @@
         "Name[sk]": "SQL Úložisko",
         "Name[sl]": "Shramba SQL",
         "Name[sv]": "SQL-lagring",
+        "Name[tr]": "SQL Depolama",
         "Name[uk]": "Сховище SQL",
         "Name[x-test]": "xxSQL Storagexx",
         "Name[zh_CN]": "SQL 存储",

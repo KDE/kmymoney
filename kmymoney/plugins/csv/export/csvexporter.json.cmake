@@ -26,6 +26,7 @@
                 "Name[sk]": "Allan Anderson",
                 "Name[sl]": "Allan Anderson",
                 "Name[sv]": "Allan Anderson",
+                "Name[tr]": "Allan Anderson",
                 "Name[uk]": "Allan Anderson",
                 "Name[x-test]": "xxAllan Andersonxx",
                 "Name[zh_CN]": "Allan Anderson"
@@ -51,6 +52,7 @@
         "Description[sk]": "Pridať CSV exportovanie do KMyMoney",
         "Description[sl]": "Doda izvoz CSV v KMyMoney",
         "Description[sv]": "Lägg till CSV-export till KMyMoney",
+        "Description[tr]": "KMyMoney'e CSV dışa aktarma ekle",
         "Description[uk]": "Експортування даних CSV у KMyMoney",
         "Description[x-test]": "xxAdd CSV exporting to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 CSV 导出服务",
@@ -81,6 +83,7 @@
         "Name[sk]": "CSV exportér",
         "Name[sl]": "Izvoznik CSV",
         "Name[sv]": "CSV-export",
+        "Name[tr]": "CSV Dışa Aktarıcı",
         "Name[uk]": "Експортування CSV",
         "Name[x-test]": "xxCSV Exporterxx",
         "Name[zh_CN]": "CSV 导出工具",

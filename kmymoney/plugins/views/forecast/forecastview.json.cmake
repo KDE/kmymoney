@@ -26,6 +26,7 @@
                 "Name[sk]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[sl]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[sv]": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[tr]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[uk]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[x-test]": "xxAlvaro Soliverez,Łukasz Wojniłowiczxx",
                 "Name[zh_CN]": "Alvaro Soliverez,Łukasz Wojniłowicz"
@@ -50,6 +51,7 @@
         "Description[sk]": "Pridá pohľad predpovede do KMyMoney",
         "Description[sl]": "Doda pogled napovedi v KMyMoney",
         "Description[sv]": "Lägger till prognosvy i KMyMoney",
+        "Description[tr]": "KMyMoney'e tahmin görünümü ekler",
         "Description[uk]": "Панель прогнозів у KMyMoney",
         "Description[x-test]": "xxAdds forecast view to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加预测视图",
@@ -78,6 +80,7 @@
         "Name[sk]": "Pohľad predpovede",
         "Name[sl]": "Pogled napovedi",
         "Name[sv]": "Prognosvy",
+        "Name[tr]": "Tahmin görünümü",
         "Name[uk]": "Перегляд прогнозів",
         "Name[x-test]": "xxForecast viewxx",
         "Name[zh_CN]": "预测视图",

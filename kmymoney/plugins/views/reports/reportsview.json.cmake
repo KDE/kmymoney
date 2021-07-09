@@ -26,6 +26,7 @@
                 "Name[sk]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[sl]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[sv]": "Alvaro Soliverez,Łukasz Wojniłowicz",
+                "Name[tr]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[uk]": "Alvaro Soliverez,Łukasz Wojniłowicz",
                 "Name[x-test]": "xxAlvaro Soliverez,Łukasz Wojniłowiczxx",
                 "Name[zh_CN]": "Alvaro Soliverez,Łukasz Wojniłowicz"
@@ -50,6 +51,7 @@
         "Description[sk]": "Pridá pohľad výpisov do KMyMoney",
         "Description[sl]": "Doda pogled poročil v KMyMoney",
         "Description[sv]": "Lägger till rapportvy i KMyMoney",
+        "Description[tr]": "KMyMoney'e raporlar görünümü ekler",
         "Description[uk]": "Панель звітів у KMyMoney",
         "Description[x-test]": "xxAdds reports view to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加报告视图",
@@ -78,6 +80,7 @@
         "Name[sk]": "Pohľad výpisov",
         "Name[sl]": "Pogled poročil",
         "Name[sv]": "Rapportvy",
+        "Name[tr]": "Rapor görünümü",
         "Name[uk]": "Перегляд звітів",
         "Name[x-test]": "xxReports viewxx",
         "Name[zh_CN]": "报表视图",

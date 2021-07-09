@@ -26,6 +26,7 @@
                 "Name[sk]": "Michael Edwardes",
                 "Name[sl]": "Michael Edwardes",
                 "Name[sv]": "Michael Edwardes",
+                "Name[tr]": "Michael Edwardes",
                 "Name[uk]": "Michael Edwardes",
                 "Name[x-test]": "xxMichael Edwardesxx",
                 "Name[zh_CN]": "Michael Edwardes"
@@ -51,6 +52,7 @@
         "Description[sk]": "Pridať QIF export do KMyMoney",
         "Description[sl]": "Dodaj v KMyMoney možnost izvoza QIF",
         "Description[sv]": "Lägg till QIF-export till KMyMoney",
+        "Description[tr]": "KMyMoney'e QIF dışa aktarma ekle",
         "Description[uk]": "Експортування даних QIF у KMyMoney",
         "Description[x-test]": "xxAdd QIF exporting to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 QIF 导出服务",
@@ -80,6 +82,7 @@
         "Name[sk]": "QIF Exporter",
         "Name[sl]": "Izvoznik QIF",
         "Name[sv]": "QIF-export",
+        "Name[tr]": "QIF Dışa Aktarıcı",
         "Name[uk]": "Інструмент експортування QIF",
         "Name[x-test]": "xxQIF Exporterxx",
         "Name[zh_CN]": "QIF 导出工具",

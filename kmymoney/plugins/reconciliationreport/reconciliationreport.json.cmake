@@ -26,6 +26,7 @@
                 "Name[sk]": "Cristian Oneț",
                 "Name[sl]": "Cristian Oneț",
                 "Name[sv]": "Cristian Oneț",
+                "Name[tr]": "Cristian Oneț",
                 "Name[uk]": "Cristian Oneț",
                 "Name[x-test]": "xxCristian Onețxx",
                 "Name[zh_CN]": "Cristian Oneț"
@@ -51,6 +52,7 @@
         "Description[sk]": "Vytvorí report po každom zrovnaní obsahujúcom dáta o procese zrovnania",
         "Description[sl]": "Po vsaki uskladitvi ustvari poročilo, ki vsebuje podatke o postopku usklajevanja",
         "Description[sv]": "Skapar en rapport efter varje avstämning som innehåller information om avstämningsprocessen",
+        "Description[tr]": "Mutabakat süreciyle ilgili verileri içeren her mutabakattan sonra bir rapor oluşturur",
         "Description[uk]": "Створення звітів після кожного узгодження із даними щодо процедури узгодження",
         "Description[x-test]": "xxCreates a report after each reconciliation containing data about the reconciliation processxx",
         "Description[zh_CN]": "每次对账后生成包含对账过程数据的报表",
@@ -80,6 +82,7 @@
         "Name[sk]": "Zrovnávacia správa",
         "Name[sl]": "Poročilo o uskladitvi",
         "Name[sv]": "Avstämningsrapport",
+        "Name[tr]": "Mutabakat raporu",
         "Name[uk]": "Звіт щодо звірки",
         "Name[x-test]": "xxReconciliation reportxx",
         "Name[zh_CN]": "对帐报告",

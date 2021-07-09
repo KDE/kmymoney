@@ -26,6 +26,7 @@
                 "Name[sk]": "Christian David",
                 "Name[sl]": "Christian David",
                 "Name[sv]": "Christian David",
+                "Name[tr]": "Christian David",
                 "Name[uk]": "Christian David",
                 "Name[x-test]": "xxChristian Davidxx",
                 "Name[zh_CN]": "Christian David"
@@ -50,6 +51,7 @@
         "Description[sk]": "Ak je namapované na účet, zabraňuje spracovaniu všetkých online úloh (len pre vývojárov)",
         "Description[sl]": "Če ima povezavo z računom, se pretvarja, da lahko obdela vse spletne naloge (samo za razvijalce).",
         "Description[sv]": "Om tilldelad till ett konto, låtsas det att det kan hantera alla nätuppgifter (bara för utvecklare).",
+        "Description[tr]": "Bir hesapla eşlenirse, tüm çevrimiçi Görevleri (yalnızca geliştiriciler için) halledebileceğini iddia eder.",
         "Description[uk]": "Якщо пов'язано із рахунком, імітує можливість обробки усіх інтернет-завдань (лише для розробників).",
         "Description[x-test]": "xxIf mapped to an account, it pretends it could handle all onlineTasks (for developers only).xx",
         "Description[zh_CN]": "绑定到账号上会假装可以处理所有在线任务 (仅限开发者用)",
@@ -75,6 +77,7 @@
         "Name[sk]": "onlinejobpluginmockup",
         "Name[sl]": "onlinejobpluginmockup",
         "Name[sv]": "Insticksprogram med nätjobbsattrapp",
+        "Name[tr]": "çevrimiçiişeklentimockup",
         "Name[uk]": "onlinejobpluginmockup",
         "Name[x-test]": "xxonlinejobpluginmockupxx",
         "Name[zh_CN]": "onlinejobpluginmockup",
