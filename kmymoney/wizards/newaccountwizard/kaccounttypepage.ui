@@ -109,7 +109,7 @@ Use the liability account type to manage any type of liability except amortizati
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="KMyMoneySecuritySelector" name="m_currencyComboBox">
+      <widget class="KMyMoneyCurrencySelector" name="m_currencyComboBox">
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -285,7 +285,7 @@ Use the liability account type to manage any type of liability except amortizati
    <header>kmymoneydateinput.h</header>
   </customwidget>
   <customwidget>
-   <class>KMyMoneySecuritySelector</class>
+   <class>KMyMoneyCurrencySelector</class>
    <extends>KComboBox</extends>
    <header>kmymoneycurrencyselector.h</header>
    <container>1</container>
