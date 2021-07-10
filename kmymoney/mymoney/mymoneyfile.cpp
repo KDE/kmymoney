@@ -3726,7 +3726,6 @@ bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAcco
     bool rc = false;
 
     try {
-        MyMoneySplit cat;  // category
         MyMoneySplit tax;  // tax
 
         if (category.value("VatAccount").isEmpty())
