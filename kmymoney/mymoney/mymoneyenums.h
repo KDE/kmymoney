@@ -463,8 +463,6 @@ enum signPosition : int {
 };
 }
 
-/// @todo port to new model code
-// think about moving this to modelenums.h
 namespace Model {
 enum Roles {
     // The IdRole is used by all model items whereas the id of all other roles id unique

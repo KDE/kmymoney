@@ -26,6 +26,7 @@
                 "Name[sk]": "Cristian Oneț",
                 "Name[sl]": "Cristian Oneț",
                 "Name[sv]": "Cristian Oneț",
+                "Name[tr]": "Cristian Oneț",
                 "Name[uk]": "Cristian Oneț",
                 "Name[x-test]": "xxCristian Onețxx",
                 "Name[zh_CN]": "Cristian Oneț"
@@ -51,6 +52,7 @@
         "Description[sk]": "Exportovať rozvrhy do súborov iCalendar",
         "Description[sl]": "Izvozi časovne plane v datoteke iCalendar",
         "Description[sv]": "Exporterar scheman till iCalendar-filer",
+        "Description[tr]": "Zamanlamaları iCalendar dosyalarına aktarır",
         "Description[uk]": "Експортування розкладів до файлів iCalendar",
         "Description[x-test]": "xxExports schedules to iCalendar filesxx",
         "Description[zh_CN]": "将日程表导出为 iCalebdar 文件",
@@ -80,6 +82,7 @@
         "Name[sk]": "iCalendar",
         "Name[sl]": "iCalendar",
         "Name[sv]": "iCalendar",
+        "Name[tr]": "iCalendar",
         "Name[uk]": "iCalendar",
         "Name[x-test]": "xxiCalendarxx",
         "Name[zh_CN]": "iCalendar",

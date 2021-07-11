@@ -36,7 +36,6 @@
 #include "dialogenums.h"
 #include "icons/icons.h"
 #include "mymoneyenums.h"
-#include "modelenums.h"
 
 using namespace Icons;
 

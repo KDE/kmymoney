@@ -28,7 +28,6 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-#include "modelenums.h"
 #include "mymoneyenums.h"
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
@@ -667,6 +666,8 @@ QVariant AccountsModel::data(const QModelIndex& idx, int role) const
     case eMyMoney::Model::AccountIsFavoriteIndexRole:
         return false;
 
+    case eMyMoney::Model::AccountIsInvestRole:
+        return account.isInvest();
     }
     return QVariant();
 }

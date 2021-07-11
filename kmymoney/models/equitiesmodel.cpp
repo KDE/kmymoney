@@ -204,40 +204,35 @@ QVariant EquitiesModel::extraColumnData(const QModelIndex& parent, int row, int 
 {
     const auto file = MyMoneyFile::instance();
 
-    auto idx = index(row, 0, parent);
-    auto baseIdx = MyMoneyFile::baseModel()->mapToBaseSource(idx);
+    const auto idx = index(row, 0, parent);
+    const auto baseIdx = MyMoneyFile::baseModel()->mapToBaseSource(idx);
     auto model = qobject_cast<const AccountsModel*>(baseIdx.model());
 
-    auto acc = model->itemByIndex(baseIdx);
-
-//   auto balance = m_file->balance(account.id());
-//   auto security = m_file->security(account.currencyId());
-//   auto tradingCurrency = m_file->currency(security.tradingCurrency());
-//   auto price = m_file->price(account.currencyId(), tradingCurrency.id());
-
-
+    const auto acc = model->itemByIndex(baseIdx);
 
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
-
-        auto securityIdx = file->securitiesModel()->indexById(acc.currencyId());
-        auto tradingCurrencyIdx = securityIdx.data(eMyMoney::Model::SecurityTradingCurrencyIndexRole).value<QModelIndex>();
+        const auto securityIdx = file->securitiesModel()->indexById(acc.currencyId());
+        const auto tradingCurrencyIdx = securityIdx.data(eMyMoney::Model::SecurityTradingCurrencyIndexRole).value<QModelIndex>();
 
         switch (extraColumn) {
         case Symbol:
             return securityIdx.data(eMyMoney::Model::SecuritySymbolRole);
 
-        case Value:
-            break;
+        case Value: {
+            const auto balance = baseIdx.data(eMyMoney::Model::AccountBalanceRole).value<MyMoneyMoney>();
+            const auto tradingCurrencyId = tradingCurrencyIdx.data(eMyMoney::Model::IdRole).toString();
+            const auto prec = MyMoneyMoney::denomToPrec(tradingCurrencyIdx.data(eMyMoney::Model::SecuritySmallestAccountFractionRole).toInt());
+            const auto tradingCurrencySymbol = tradingCurrencyIdx.data(eMyMoney::Model::SecuritySymbolRole).toString();
+            return (file->price(acc.currencyId(), tradingCurrencyId).rate(tradingCurrencyId) * balance).formatMoney(tradingCurrencySymbol, prec);
+        }
 
-        case Quantity:
-        {
-            auto balance = baseIdx.data(eMyMoney::Model::AccountBalanceRole).value<MyMoneyMoney>();
-            auto prec = MyMoneyMoney::denomToPrec(securityIdx.data(eMyMoney::Model::SecuritySmallestAccountFractionRole).toInt());
+        case Quantity: {
+            const auto balance = baseIdx.data(eMyMoney::Model::AccountBalanceRole).value<MyMoneyMoney>();
+            const auto prec = MyMoneyMoney::denomToPrec(securityIdx.data(eMyMoney::Model::SecuritySmallestAccountFractionRole).toInt());
             return balance.formatMoney(QString(), prec);
         }
 
-        case Price:
-        {
+        case Price: {
             const auto tradingCurrencyId = tradingCurrencyIdx.data(eMyMoney::Model::IdRole).toString();
             const auto prec = securityIdx.data(eMyMoney::Model::SecurityPricePrecisionRole).toInt();
             const auto tradingCurrencySymbol = tradingCurrencyIdx.data(eMyMoney::Model::SecuritySymbolRole).toString();

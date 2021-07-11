@@ -8,12 +8,7 @@ set(libmodels_a_SOURCES
     delegateproxy.cpp
     itemrenameproxymodel.cpp
     onlinebalanceproxymodel.cpp
-    ledgermodel.cpp
-    ledgeritem.cpp
     ledgerfilterbase.cpp
-    ledgerschedule.cpp
-    ledgersplit.cpp
-    ledgertransaction.cpp
     specialdatesfilter.cpp
     idfilter.cpp
     scheduleproxymodel.cpp

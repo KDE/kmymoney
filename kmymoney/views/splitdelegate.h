@@ -44,6 +44,7 @@ public:
     bool showValuesInverted();
 
     void setCommodity(const MyMoneySecurity& commodity);
+    void setTransactionPayeeId(const QString& id);
 
     static void setErroneousColor(const QColor& color);
     static void setImportedColor(const QColor& color);

@@ -128,6 +128,9 @@
          </item>
          <item>
           <widget class="QTreeView" name="m_securitiesTree">
+           <property name="contextMenuPolicy">
+            <enum>Qt::CustomContextMenu</enum>
+           </property>
            <property name="editTriggers">
             <set>QAbstractItemView::DoubleClicked</set>
            </property>
@@ -156,68 +159,6 @@
             <bool>false</bool>
            </property>
           </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout">
-         <item>
-          <widget class="QPushButton" name="m_editSecurityButton">
-           <property name="toolTip">
-            <string>Modify the selected entry</string>
-           </property>
-           <property name="whatsThis">
-            <string>Change the security information of the selected entry.</string>
-           </property>
-           <property name="text">
-            <string>Edit...</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="m_deleteSecurityButton">
-           <property name="toolTip">
-            <string>Delete this entry</string>
-           </property>
-           <property name="whatsThis">
-            <string>Remove this security item from the file</string>
-           </property>
-           <property name="text">
-            <string>Delete...</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="spacer3">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Expanding</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>110</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <spacer name="spacer7">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Expanding</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>51</height>
-            </size>
-           </property>
-          </spacer>
          </item>
         </layout>
        </item>

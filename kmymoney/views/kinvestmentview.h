@@ -1,12 +1,11 @@
 /*
     SPDX-FileCopyrightText: 2002-2004 Kevin Tambascio <ktambascio@users.sourceforge.net>
-    SPDX-FileCopyrightText: 2003-2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2003-2021 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-FileCopyrightText: 2004-2005 Ace Jones <acejones@users.sourceforge.net>
     SPDX-FileCopyrightText: 2009-2010 Alvaro Soliverez <asoliverez@kde.org>
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
     SPDX-License-Identifier: GPL-2.0-or-later
 */
-
 
 #ifndef KINVESTMENTVIEW_H
 #define KINVESTMENTVIEW_H
@@ -22,8 +21,6 @@
 
 #include "kmymoneyviewbase.h"
 
-class MyMoneyAccount;
-class MyMoneyObject;
 class SelectedObjects;
 
 /**
@@ -39,20 +36,10 @@ public:
     explicit KInvestmentView(QWidget *parent = nullptr);
     ~KInvestmentView() override;
 
-    void executeCustomAction(eView::Action action) override;
     void setDefaultFocus() override;
-    void refresh();
-    Q_DECL_DEPRECATED void updateActions(const MyMoneyObject &obj);
-
-public Q_SLOTS:
-    /**
-      * This slot is used to preselect investment account from ledger view
-      */
-    void slotSelectAccount(const MyMoneyObject &obj);
-
-    void slotShowInvestmentMenu(const MyMoneyAccount& acc);
 
     void updateActions(const SelectedObjects& selections) override;
+    void executeAction(eMenu::Action action, const SelectedObjects& selections) override;
 
 protected:
     void showEvent(QShowEvent* event) override;
@@ -61,9 +48,6 @@ private:
     Q_DECLARE_PRIVATE(KInvestmentView)
 
 private Q_SLOTS:
-    void slotEquitySelected(const QModelIndex &current, const QModelIndex &previous);
-    void slotSecuritySelected(const QModelIndex &current, const QModelIndex &previous);
-
     void slotNewInvestment();
     void slotEditInvestment();
     void slotDeleteInvestment();
@@ -72,18 +56,6 @@ private Q_SLOTS:
 
     void slotEditSecurity();
     void slotDeleteSecurity();
-
-    /**
-      * This slot is used to programatically preselect account in investment view
-      */
-    void slotSelectAccount(const QString &id);
-
-    /**
-      * This slot is used to load investment account into tree view
-      */
-    void slotLoadAccount(const QString &id);
-
-    void slotInvestmentMenuRequested(const QPoint&);
 };
 
 #endif

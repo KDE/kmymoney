@@ -29,12 +29,6 @@ class KMM_MYMONEY_EXPORT CostCenterModel : public MyMoneyModel<MyMoneyCostCenter
     Q_OBJECT
 
 public:
-    class Column {
-        enum {
-            Name,
-        } Columns;
-    };
-
     explicit CostCenterModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
     virtual ~CostCenterModel();
 

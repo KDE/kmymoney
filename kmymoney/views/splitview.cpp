@@ -433,3 +433,10 @@ void SplitView::selectMostRecentTransaction()
         }
     }
 }
+
+void SplitView::setTransactionPayeeId(const QString& id)
+{
+    if (d->splitDelegate) {
+        d->splitDelegate->setTransactionPayeeId(id);
+    }
+}

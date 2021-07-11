@@ -26,6 +26,7 @@
                 "Name[sk]": "Cristian Oneț",
                 "Name[sl]": "Cristian Oneț",
                 "Name[sv]": "Cristian Oneț",
+                "Name[tr]": "Cristian Oneț",
                 "Name[uk]": "Cristian Oneț",
                 "Name[x-test]": "xxCristian Onețxx",
                 "Name[zh_CN]": "Cristian Oneț"
@@ -51,6 +52,7 @@
         "Description[sk]": "Poskytuje možnosť tlačiť účty",
         "Description[sl]": "Omogoča tiskanje čekov",
         "Description[sv]": "Tillhandahåller möjlighet att skriva ut checkar",
+        "Description[tr]": "Çekleri yazdırma yeteneği sağlar",
         "Description[uk]": "Можливість друку чеків",
         "Description[x-test]": "xxProvides the capability to print checksxx",
         "Description[zh_CN]": "提供支票打印功能",
@@ -79,6 +81,7 @@
         "Name[sk]": "Skontrolovať tlač",
         "Name[sl]": "Tiskanje čekov",
         "Name[sv]": "Checkutskrift",
+        "Name[tr]": "Çek yazdırma",
         "Name[uk]": "Друк чеків",
         "Name[x-test]": "xxCheck printingxx",
         "Name[zh_CN]": "支票打印",

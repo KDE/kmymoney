@@ -1376,14 +1376,15 @@ void MyMoneyFileTest::testBalanceTotal()
 
 }
 
-/// @todo cleanup
-#if 0
-void MyMoneyFileTest::testSetAccountName()
+void MyMoneyFileTest::testModifyStandardAccountNames()
 {
     MyMoneyFileTransaction ft;
     clearObjectLists();
     try {
-        m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability), "Verbindlichkeiten");
+        auto account = m->account(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Liability));
+        QVERIFY(account.name() != QLatin1String("Verbindlichkeiten"));
+        account.setName(QLatin1String("Verbindlichkeiten"));
+        m->modifyAccount(account);
         ft.commit();
         QCOMPARE(m_objectsRemoved.count(), 0);
         QCOMPARE(m_objectsModified.count(), 1);
@@ -1398,7 +1399,10 @@ void MyMoneyFileTest::testSetAccountName()
     ft.restart();
     clearObjectLists();
     try {
-        m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset), QString::fromUtf8("Vermögen"));
+        auto account = m->account(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Asset));
+        QVERIFY(account.name() != QString::fromUtf8("Vermögen"));
+        account.setName(QString::fromUtf8("Vermögen"));
+        m->modifyAccount(account);
         ft.commit();
         QCOMPARE(m_objectsRemoved.count(), 0);
         QCOMPARE(m_objectsModified.count(), 1);
@@ -1413,7 +1417,10 @@ void MyMoneyFileTest::testSetAccountName()
     ft.restart();
     clearObjectLists();
     try {
-        m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense), "Ausgaben");
+        auto account = m->account(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Expense));
+        QVERIFY(account.name() != QLatin1String("Ausgaben"));
+        account.setName(QLatin1String("Ausgaben"));
+        m->modifyAccount(account);
         ft.commit();
         QCOMPARE(m_objectsRemoved.count(), 0);
         QCOMPARE(m_objectsModified.count(), 1);
@@ -1428,7 +1435,10 @@ void MyMoneyFileTest::testSetAccountName()
     ft.restart();
     clearObjectLists();
     try {
-        m->setAccountName(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income), "Einnahmen");
+        auto account = m->account(MyMoneyAccount::stdAccName(eMyMoney::Account::Standard::Income));
+        QVERIFY(account.name() != QLatin1String("Einnahmen"));
+        account.setName(QLatin1String("Einnahmen"));
+        m->modifyAccount(account);
         ft.commit();
         QCOMPARE(m_objectsRemoved.count(), 0);
         QCOMPARE(m_objectsModified.count(), 1);
@@ -1446,15 +1456,7 @@ void MyMoneyFileTest::testSetAccountName()
     QCOMPARE(m->asset().name(), QString::fromUtf8("Vermögen"));
     QCOMPARE(m->expense().name(), QLatin1String("Ausgaben"));
     QCOMPARE(m->income().name(), QLatin1String("Einnahmen"));
-
-    try {
-        m->setAccountName("A000001", "New account name");
-        ft.commit();
-        QFAIL("Exception expected");
-    } catch (const MyMoneyException &) {
-    }
 }
-#endif
 
 void MyMoneyFileTest::testAddPayee()
 {
@@ -1842,27 +1844,6 @@ void MyMoneyFileTest::testBaseCurrency()
     } catch (const MyMoneyException &e) {
         unexpectedException(e);
     }
-
-/// @todo "Cleanup dead code"
-#if 0 // invalid test with new model based backend
-    // check if it gets reset when attaching a new storage
-    m->detachStorage(storage);
-
-    MyMoneyStorageMgr* newStorage = new MyMoneyStorageMgr;
-    m->attachStorage(newStorage);
-
-    ref = m->baseCurrency();
-    QVERIFY(ref.id().isEmpty());
-
-    m->detachStorage(newStorage);
-    delete newStorage;
-
-    m->attachStorage(storage);
-    ref = m->baseCurrency();
-    QCOMPARE(ref.id(), QLatin1String("EUR"));
-    QCOMPARE(ref.name(), QLatin1String("Euro"));
-    QVERIFY(ref.tradingSymbol() == QChar(0x20ac));
-#endif
 }
 
 void MyMoneyFileTest::testOpeningBalanceNoBase()

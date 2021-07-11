@@ -53,8 +53,7 @@ private Q_SLOTS:
     void testModifyTransactionNewAccount();
     void testRemoveTransaction();
     void testBalanceTotal();
-    /// @todo cleanup
-    // void testSetAccountName();
+    void testModifyStandardAccountNames();
     void testAddPayee();
     void testModifyPayee();
     void testRemovePayee();

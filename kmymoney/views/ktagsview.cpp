@@ -583,7 +583,6 @@ void KTagsView::slotSelectTag(const QString& tagId)
     if (!isVisible())
         return;
 
-    /// @todo port to new model code
     const auto model = MyMoneyFile::instance()->tagsModel();
     const auto baseIdx = model->indexById(tagId);
     auto idx = model->mapFromBaseSource(d->m_renameProxyModel, baseIdx);

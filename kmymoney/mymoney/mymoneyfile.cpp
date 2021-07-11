@@ -790,9 +790,6 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
     fixSplitPrecision(tCopy);
 
     d->journalModel.modifyTransaction(tCopy);
-    /// @todo cleanup
-    // perform modification
-    // d->m_storage->modifyTransaction(tCopy);
 
     // and mark all accounts that are referenced
     const auto splits3 = tCopy.splits();
@@ -976,8 +973,6 @@ void MyMoneyFile::removeTransaction(const MyMoneyTransaction& transaction)
     }
 
     d->journalModel.removeTransaction(transaction);
-    /// @todo cleanup
-    // d->m_storage->removeTransaction(transaction);
 
     // remove a possible notification of that same object from the changeSet
     QList<MyMoneyNotification>::iterator it;
@@ -1086,11 +1081,6 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 
 void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned int level)
 {
-    Q_UNUSED(account_list);
-    Q_UNUSED(level);
-    /// @todo port to new model code
-    qDebug() << "removeAccountList needs to be ported to new model code";
-#if 0
     if (level > 100)
         throw MYMONEYEXCEPTION_CSTRING("Too deep recursion in [MyMoneyFile::removeAccountList]!");
 
@@ -1104,8 +1094,8 @@ void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned in
     }
 
     // process all accounts in the list and test if they have transactions assigned
-    foreach (const auto sAccount, account_list) {
-        auto a = d->m_storage->account(sAccount);
+    for (const auto& sAccount : account_list) {
+        auto a = d->accountsModel.itemById(sAccount);
         //qDebug() << "Deleting account '"<< a.name() << "'";
 
         // first remove all sub-accounts
@@ -1115,13 +1105,12 @@ void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned in
             // then remove account itself, but we first have to get
             // rid of the account list that is still stored in
             // the MyMoneyAccount object. Easiest way is to get a fresh copy.
-            a = d->m_storage->account(sAccount);
+            a = d->accountsModel.itemById(sAccount);
         }
 
         // make sure to remove the item from the cache
         removeAccount(a);
     }
-#endif
 }
 
 bool MyMoneyFile::hasOnlyUnusedAccounts(const QStringList& account_list, unsigned int level)
@@ -1918,16 +1907,6 @@ unsigned int MyMoneyFile::transactionCount(const QString& accountId) const
     return d->journalModel.transactionCount(accountId);
 }
 
-#if 0
-QMap<QString, unsigned long> MyMoneyFile::transactionCountMap() const
-{
-    /// @todo port to new model code
-    d->checkStorage();
-
-    return d->m_storage->transactionCountMap();
-}
-#endif
-
 unsigned int MyMoneyFile::institutionCount() const
 {
     return d->institutionsModel.itemList().count();
@@ -2061,47 +2040,11 @@ QList<MyMoneyTag> MyMoneyFile::tagList() const
 QString MyMoneyFile::accountToCategory(const QString& accountId, bool includeStandardAccounts) const
 {
     return d->accountsModel.accountIdToHierarchicalName(accountId, includeStandardAccounts);
-
-/// @todo cleanup
-#if 0
-    MyMoneyAccount acc;
-    QString rc;
-
-    if (!accountId.isEmpty()) {
-        acc = account(accountId);
-        do {
-            if (!rc.isEmpty())
-                rc = AccountSeparator + rc;
-            rc = acc.name() + rc;
-            acc = account(acc.parentAccountId());
-        } while (!acc.id().isEmpty() && (includeStandardAccounts || !isStandardAccount(acc.id())));
-    }
-    return rc;
-#endif
 }
 
 QString MyMoneyFile::categoryToAccount(const QString& category, Account::Type type) const
 {
     return d->accountsModel.accountNameToId(category, type);
-
-/// @todo cleanup
-#if 0
-    QString id;
-
-    // search the category in the expense accounts and if it is not found, try
-    // to locate it in the income accounts
-    if (type == Account::Type::Unknown
-            || type == Account::Type::Expense) {
-        id = locateSubAccount(MyMoneyFile::instance()->expense(), category);
-    }
-
-    if ((id.isEmpty() && type == Account::Type::Unknown)
-            || type == Account::Type::Income) {
-        id = locateSubAccount(MyMoneyFile::instance()->income(), category);
-    }
-
-    return id;
-#endif
 }
 
 QString MyMoneyFile::categoryToAccount(const QString& category) const
@@ -3726,7 +3669,6 @@ bool MyMoneyFile::addVATSplit(MyMoneyTransaction& transaction, const MyMoneyAcco
     bool rc = false;
 
     try {
-        MyMoneySplit cat;  // category
         MyMoneySplit tax;  // tax
 
         if (category.value("VatAccount").isEmpty())
@@ -3786,9 +3728,12 @@ bool MyMoneyFile::isReferenced(const MyMoneyObject& obj, const QBitArray& skipCh
     // is deleted, so we don't need to check here. See
     // MyMoneyStorageMgr::removeReferences(). In case
     // you miss the report checks in the following lines ;)
+    const auto id = obj.id();
+    return isReferenced(id, skipCheck);
+}
 
-    const auto& id = obj.id();
-
+bool MyMoneyFile::isReferenced(const QString& id, const QBitArray& skipCheck) const
+{
     // FIXME optimize the list of objects we have to checks
     //       with a bit of knowledge of the internal structure, we
     //       could optimize the number of objects we check for references
@@ -3845,6 +3790,11 @@ bool MyMoneyFile::isReferenced(const MyMoneyObject& obj, const QBitArray& skipCh
 bool MyMoneyFile::isReferenced(const MyMoneyObject& obj) const
 {
     return isReferenced(obj, QBitArray((int)eStorage::Reference::Count));
+}
+
+bool MyMoneyFile::isReferenced(const QString& id) const
+{
+    return isReferenced(id, QBitArray((int)eStorage::Reference::Count));
 }
 
 QSet<QString> MyMoneyFile::referencedObjects() const
@@ -4016,7 +3966,6 @@ bool MyMoneyFile::hasMatchingOnlineBalance(const MyMoneyAccount& _acc) const
 
 int MyMoneyFile::countTransactionsWithSpecificReconciliationState(const QString& accId, TransactionFilter::State state) const
 {
-    /// @todo port to new model code
     int rc = 0;
     const auto model = &d->journalModel;
     const auto rows = model->rowCount();

@@ -101,9 +101,6 @@ protected:
     virtual void writeInstitutions(QDomElement& institutions);
 
     virtual void writePrices(QDomElement& prices);
-    /// @todo cleanup
-    // virtual void writePricePair(QDomElement& price, const MyMoneyPriceEntries& p);
-    // virtual void writePrice(QDomElement& prices, const MyMoneyPrice& p);
 
     virtual void writePayees(QDomElement& payees);
     virtual void writePayee(QDomElement& payees, const MyMoneyPayee& p);

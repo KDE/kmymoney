@@ -1561,18 +1561,19 @@ void KMyMoneyApp::slotShowContextMenuForConsistencyCheck(const QPoint &pos)
 QHash<eMenu::Menu, QMenu *> KMyMoneyApp::initMenus()
 {
     QHash<Menu, QMenu *> lutMenus;
-    const QHash<Menu, QString> menuNames {
-        {Menu::Institution,             QStringLiteral("institution_context_menu")},
-        {Menu::Account,                 QStringLiteral("account_context_menu")},
-        {Menu::Schedule,                QStringLiteral("schedule_context_menu")},
-        {Menu::Category,                QStringLiteral("category_context_menu")},
-        {Menu::Tag,                     QStringLiteral("tag_context_menu")},
-        {Menu::Payee,                   QStringLiteral("payee_context_menu")},
-        {Menu::Investment,              QStringLiteral("investment_context_menu")},
-        {Menu::Transaction,             QStringLiteral("transaction_context_menu")},
-        {Menu::MoveTransaction,         QStringLiteral("transaction_move_menu")},
-        {Menu::MarkTransaction,         QStringLiteral("transaction_mark_menu")},
-        {Menu::MarkTransactionContext,  QStringLiteral("transaction_context_mark_menu")},
+    const QHash<Menu, QString> menuNames{
+        {Menu::Institution, QStringLiteral("institution_context_menu")},
+        {Menu::Account, QStringLiteral("account_context_menu")},
+        {Menu::Schedule, QStringLiteral("schedule_context_menu")},
+        {Menu::Category, QStringLiteral("category_context_menu")},
+        {Menu::Tag, QStringLiteral("tag_context_menu")},
+        {Menu::Payee, QStringLiteral("payee_context_menu")},
+        {Menu::Investment, QStringLiteral("investment_context_menu")},
+        {Menu::Security, QStringLiteral("security_context_menu")},
+        {Menu::Transaction, QStringLiteral("transaction_context_menu")},
+        {Menu::MoveTransaction, QStringLiteral("transaction_move_menu")},
+        {Menu::MarkTransaction, QStringLiteral("transaction_mark_menu")},
+        {Menu::MarkTransactionContext, QStringLiteral("transaction_context_mark_menu")},
     };
 
     for (auto it = menuNames.cbegin(); it != menuNames.cend(); ++it)
@@ -1603,6 +1604,8 @@ void KMyMoneyApp::slotSelectionChanged(const SelectedObjects& selections)
             qDebug() << "OnlineJobs:" << selections.selection(SelectedObjects::OnlineJob);
         if (!selections.isEmpty(SelectedObjects::Tag))
             qDebug() << "Tags:" << selections.selection(SelectedObjects::Tag);
+        if (!selections.isEmpty(SelectedObjects::Security))
+            qDebug() << "Securities:" << selections.selection(SelectedObjects::Security);
     } else {
         qDebug() << "No selections";
     }
@@ -1754,6 +1757,9 @@ QHash<Action, QAction *> KMyMoneyApp::initActions()
             {Action::DeleteInvestment,              QStringLiteral("investment_delete"),              i18n("Delete investment..."),                       Icon::InvestmentRemove},
             {Action::UpdatePriceOnline,             QStringLiteral("investment_online_price_update"), i18n("Online price update..."),                     Icon::OnlinePriceUpdate},
             {Action::UpdatePriceManually,           QStringLiteral("investment_manual_price_update"), i18n("Manual price update..."),                     Icon::Empty},
+            {Action::EditSecurity,                  QStringLiteral("security_edit"),                  i18n("Edit security..."),                           Icon::InvestmentEdit},
+            {Action::DeleteSecurity,                QStringLiteral("security_delete"),                i18n("Delete security..."),                         Icon::InvestmentRemove},
+
             //Schedule
             {Action::NewSchedule,                   QStringLiteral("schedule_new"),                   i18n("New schedule..."),                            Icon::NewSchedule},
             {Action::EditSchedule,                  QStringLiteral("schedule_edit"),                  i18n("Edit scheduled transaction"),                 Icon::DocumentEdit},

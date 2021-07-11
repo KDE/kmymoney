@@ -133,18 +133,16 @@ private:
 
     void (*m_progressCallback)(int, int, const QString&);
 
-    void handleMatchingOfExistingTransaction(TransactionMatcher & matcher,
-            MyMoneyTransaction matchedTransaction,
-            MyMoneySplit matchedSplit,
-            MyMoneyTransaction & importedTransaction,
-            const MyMoneySplit & importedSplit,
-            const TransactionMatchFinder::MatchResult & matchResult);
+    void handleMatchingOfExistingTransaction(MyMoneyTransaction matchedTransaction,
+                                             MyMoneySplit matchedSplit,
+                                             MyMoneyTransaction& importedTransaction,
+                                             const MyMoneySplit& importedSplit,
+                                             const TransactionMatchFinder::MatchResult& matchResult);
 
-    void handleMatchingOfScheduledTransaction(TransactionMatcher & matcher,
-            MyMoneySchedule matchedSchedule,
-            MyMoneySplit matchedSplit,
-            const MyMoneyTransaction & importedTransaction,
-            const MyMoneySplit & importedSplit);
+    void handleMatchingOfScheduledTransaction(MyMoneySchedule matchedSchedule,
+                                              MyMoneySplit matchedSplit,
+                                              const MyMoneyTransaction& importedTransaction,
+                                              const MyMoneySplit& importedSplit);
     void addTransaction(MyMoneyTransaction & transaction);
 
     /** Asks the user whether to enter a schedule transaction to match it with imported one

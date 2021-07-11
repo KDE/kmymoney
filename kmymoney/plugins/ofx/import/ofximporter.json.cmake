@@ -25,6 +25,7 @@
                 "Name[sk]": "Ace Jones,Thomas Baumgart",
                 "Name[sl]": "Ace Jones,Thomas Baumgart",
                 "Name[sv]": "Ace Jones,Thomas Baumgart",
+                "Name[tr]": "Ace Jones,Thomas Baumgart",
                 "Name[uk]": "Ace Jones,Thomas Baumgart",
                 "Name[x-test]": "xxAce Jones,Thomas Baumgartxx",
                 "Name[zh_CN]": "Ace Jones,Thomas Baumgart"
@@ -50,6 +51,7 @@
         "Description[sk]": "Pridať OFX import do KMyMoney",
         "Description[sl]": "Doda uvoz OFX v KMyMoney",
         "Description[sv]": "Lägg till OFX-import till KMyMoney",
+        "Description[tr]": "KMyMoney'e OFX aktarımını ekle",
         "Description[uk]": "Імпортування даних OFX у KMyMoney",
         "Description[x-test]": "xxAdd OFX importing to KMyMoneyxx",
         "Description[zh_CN]": "为 KMyMoney 添加 QFX 导入服务",
@@ -80,6 +82,7 @@
         "Name[sk]": "OFX Importer",
         "Name[sl]": "Uvoznik OFX",
         "Name[sv]": "QFX-import",
+        "Name[tr]": "OFX İçe Aktarıcı",
         "Name[uk]": "Інструмент імпортування OFX",
         "Name[x-test]": "xxOFX Importerxx",
         "Name[zh_CN]": "OFX 导入工具",

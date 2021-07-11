@@ -25,10 +25,7 @@
 #include "newspliteditor.h"
 #include "mymoneyaccount.h"
 #include "mymoneysecurity.h"
-#include "modelenums.h"
 #include "mymoneyfile.h"
-
-using namespace eLedgerModel;
 
 QColor SplitDelegate::m_erroneousColor = QColor(Qt::red);
 QColor SplitDelegate::m_importedColor = QColor(Qt::yellow);
@@ -46,6 +43,7 @@ public:
     int                           m_editorRow;
     bool                          m_showValuesInverted;
     MyMoneySecurity               m_commodity;
+    QString m_transactionPayeeId;
 };
 
 
@@ -68,6 +66,11 @@ void SplitDelegate::setErroneousColor(const QColor& color)
 void SplitDelegate::setCommodity(const MyMoneySecurity& commodity)
 {
     d->m_commodity = commodity;
+}
+
+void SplitDelegate::setTransactionPayeeId(const QString& id)
+{
+    d->m_transactionPayeeId = id;
 }
 
 QWidget* SplitDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
@@ -156,7 +159,12 @@ void SplitDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
 
     QStringList lines;
     if(index.column() == SplitModel::Column::Memo) {
-        lines << index.data(eMyMoney::Model::AccountFullNameRole).toString();
+        const auto payeeId = index.data(eMyMoney::Model::SplitPayeeIdRole).toString();
+        if (!payeeId.isEmpty()) {
+            if (payeeId != d->m_transactionPayeeId) {
+                lines << index.data(eMyMoney::Model::SplitPayeeRole).toString();
+            }
+        }
         lines << index.data(eMyMoney::Model::SplitSingleLineMemoRole).toString();
         lines.removeAll(QString());
     }
@@ -307,10 +315,10 @@ QSize SplitDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
     bool fullDisplay = false;
     auto view = qobject_cast<SplitView*>(parent());
     if(view) {
-        QModelIndex currentIndex = view->currentIndex();
+        const auto currentIndex = view->currentIndex();
         if(currentIndex.isValid()) {
-            QString currentId = currentIndex.model()->data(currentIndex, (int)Role::TransactionSplitId).toString();
-            QString myId = index.model()->data(index, (int)Role::TransactionSplitId).toString();
+            const auto currentId = currentIndex.model()->data(currentIndex, eMyMoney::Model::IdRole).toString();
+            const auto myId = index.model()->data(index, eMyMoney::Model::IdRole).toString();
             fullDisplay = (currentId == myId);
         }
     }
@@ -319,9 +327,9 @@ QSize SplitDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
     QStyleOptionViewItem opt = option;
     if(index.isValid()) {
         // check if we are showing the edit widget
-        const QAbstractItemView *viewWidget = qobject_cast<const QAbstractItemView *>(opt.widget);
+        const auto* viewWidget = qobject_cast<const QAbstractItemView*>(opt.widget);
         if (viewWidget) {
-            QModelIndex editIndex = viewWidget->model()->index(index.row(), 0);
+            const auto editIndex = viewWidget->model()->index(index.row(), 0);
             if(editIndex.isValid()) {
                 QWidget* editor = viewWidget->indexWidget(editIndex);
                 if(editor) {
@@ -335,11 +343,15 @@ QSize SplitDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
     int rows = 1;
     if(fullDisplay) {
         initStyleOption(&opt, index);
-        auto payee = index.data((int)Role::PayeeName).toString();
-        auto account = index.data((int)Role::Account).toString();
-        auto memo = index.data((int)Role::SingleLineMemo).toString();
+        int rows = 0;
+        const auto payeeId = index.data(eMyMoney::Model::SplitPayeeIdRole).toString();
+        if (!payeeId.isEmpty() && (payeeId != d->m_transactionPayeeId)) {
+            ++rows;
+        }
+        if (!index.data(eMyMoney::Model::SplitMemoRole).toString().isEmpty()) {
+            ++rows;
+        }
 
-        rows = (payee.length() > 0 ? 1 : 0) + (account.length() > 0 ? 1 : 0) + (memo.length() > 0 ? 1 : 0);
         // make sure we show at least one row
         if(!rows) {
             rows = 1;

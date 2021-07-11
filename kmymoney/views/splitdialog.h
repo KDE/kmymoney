@@ -41,6 +41,7 @@ public:
 
     void setModel(QAbstractItemModel* model);
     void setAccountId(const QString& id);
+    void setTransactionPayeeId(const QString& id);
 
     /**
      * Returns the amount for the transaction.

@@ -48,6 +48,7 @@
                 "Name[sk]": "Christian David",
                 "Name[sl]": "Christian David",
                 "Name[sv]": "Christian David",
+                "Name[tr]": "Christian David",
                 "Name[uk]": "Christian David",
                 "Name[x-test]": "xxChristian Davidxx",
                 "Name[zh_CN]": "Christian David"
@@ -71,6 +72,7 @@
         "Description[pt_BR]": "Tipos de ordem para o SEPA (Single European Payment Area)",
         "Description[sl]": "Plačilni nalogi za enotno evropsko plačilno območje (SEPA)",
         "Description[sv]": "Ordertyp för gemensamma eurobetalningsområdet (SEPA) order",
+        "Description[tr]": "Tek avrupa ödeme bölgesi (SEPA) siparişleri için talimat türleri",
         "Description[uk]": "Типи векселів для Єдиної європейської системи сплат (SEPA)",
         "Description[x-test]": "xxOrder types for single european payment area (SEPA) ordersxx",
         "Description[zh_CN]": "单一欧元支付区订单类型",
@@ -98,6 +100,7 @@
         "Name[sk]": "SEPA príkazy",
         "Name[sl]": "Naročila SEPA",
         "Name[sv]": "SEPA-order",
+        "Name[tr]": "SEPA talimatları",
         "Name[uk]": "Векселі SEPA",
         "Name[x-test]": "xxSEPA ordersxx",
         "Name[zh_CN]": "单一欧元支付区订单",

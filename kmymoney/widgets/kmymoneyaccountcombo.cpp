@@ -293,7 +293,7 @@ void KMyMoneyAccountCombo::setModel(QSortFilterProxyModel *model)
 {
     // CAUTION! Assumption is being made that AccountName column number is always 0
     if (AccountsModel::Column::AccountName != 0) {
-        qFatal("AccountsModel::Column::AccountName must be 0 in modelenums.h");
+        qFatal("AccountsModel::Column::AccountName must be 0 in accountsmodel.h");
     }
 
     // since we create a new popup view, we get rid of an existing one

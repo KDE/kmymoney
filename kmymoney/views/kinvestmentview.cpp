@@ -1,6 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2002-2004 Kevin Tambascio <ktambascio@users.sourceforge.net>
-    SPDX-FileCopyrightText: 2003-2019 Thomas Baumgart <tbaumgart@kde.org>
+    SPDX-FileCopyrightText: 2003-2021 Thomas Baumgart <tbaumgart@kde.org>
     SPDX-FileCopyrightText: 2004-2005 Ace Jones <acejones@users.sourceforge.net>
     SPDX-FileCopyrightText: 2009-2010 Alvaro Soliverez <asoliverez@kde.org>
     SPDX-FileCopyrightText: 2017 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
@@ -8,8 +8,6 @@
 */
 
 #include "kinvestmentview_p.h"
-
-#include <typeinfo>
 
 // ----------------------------------------------------------------------------
 // QT Includes
@@ -41,11 +39,13 @@ using namespace Icons;
 KInvestmentView::KInvestmentView(QWidget *parent) :
     KMyMoneyViewBase(*new KInvestmentViewPrivate(this), parent)
 {
-    connect(pActions[eMenu::Action::NewInvestment],       &QAction::triggered, this, &KInvestmentView::slotNewInvestment);
-    connect(pActions[eMenu::Action::EditInvestment],      &QAction::triggered, this, &KInvestmentView::slotEditInvestment);
-    connect(pActions[eMenu::Action::DeleteInvestment],    &QAction::triggered, this, &KInvestmentView::slotDeleteInvestment);
-    connect(pActions[eMenu::Action::UpdatePriceOnline],   &QAction::triggered, this, &KInvestmentView::slotUpdatePriceOnline);
+    connect(pActions[eMenu::Action::NewInvestment], &QAction::triggered, this, &KInvestmentView::slotNewInvestment);
+    connect(pActions[eMenu::Action::EditInvestment], &QAction::triggered, this, &KInvestmentView::slotEditInvestment);
+    connect(pActions[eMenu::Action::DeleteInvestment], &QAction::triggered, this, &KInvestmentView::slotDeleteInvestment);
+    connect(pActions[eMenu::Action::UpdatePriceOnline], &QAction::triggered, this, &KInvestmentView::slotUpdatePriceOnline);
     connect(pActions[eMenu::Action::UpdatePriceManually], &QAction::triggered, this, &KInvestmentView::slotUpdatePriceManually);
+    connect(pActions[eMenu::Action::EditSecurity], &QAction::triggered, this, &KInvestmentView::slotEditSecurity);
+    connect(pActions[eMenu::Action::DeleteSecurity], &QAction::triggered, this, &KInvestmentView::slotDeleteSecurity);
 }
 
 KInvestmentView::~KInvestmentView()
@@ -67,34 +67,102 @@ void KInvestmentView::setDefaultFocus()
     }
 }
 
-void KInvestmentView::executeCustomAction(eView::Action action)
+void KInvestmentView::executeAction(eMenu::Action action, const SelectedObjects& selections)
 {
-    switch(action) {
-    case eView::Action::Refresh:
-        refresh();
+    Q_UNUSED(selections)
+    Q_D(KInvestmentView);
+    switch (action) {
+    case eMenu::Action::FileNew:
+        if (!d->m_needLoad) {
+            d->ui->m_accountComboBox->expandAll();
+            d->m_equitiesProxyModel->invalidate();
+            d->m_securitiesProxyModel->invalidate();
+            d->selectDefaultInvestmentAccount();
+        }
+        break;
+
+    case eMenu::Action::FileClose:
+        d->m_idInvAcc.clear();
+        d->m_equitySelections.clearSelections();
+        d->m_securitySelections.clearSelections();
+        d->m_selections.clearSelections();
         break;
 
     default:
         break;
     }
 }
-
-void KInvestmentView::refresh()
-{
-    Q_D(KInvestmentView);
-    d->m_needReload[eView::Investment::Tab::Equities] = d->m_needReload[eView::Investment::Tab::Securities] = true;
-}
-
 void KInvestmentView::showEvent(QShowEvent* event)
 {
     Q_D(KInvestmentView);
-    if (d->m_needLoad)
+    if (d->m_needLoad) {
         d->init();
 
-    d->m_needReload[eView::Investment::Tab::Equities] = true;  // ensure tree view will be reloaded after selecting account in ledger view
-    if (d->m_needReload[eView::Investment::Tab::Equities] == true ||
-            d->m_needReload[eView::Investment::Tab::Securities] == true)
-        refresh();
+        connect(d->ui->m_equitiesTree, &QWidget::customContextMenuRequested, this, [&](const QPoint& pos) {
+            Q_D(KInvestmentView);
+            emit requestCustomContextMenu(eMenu::Menu::Investment, d->ui->m_equitiesTree->viewport()->mapToGlobal(pos));
+        });
+
+        connect(d->ui->m_securitiesTree, &QWidget::customContextMenuRequested, this, [&](const QPoint& pos) {
+            Q_D(KInvestmentView);
+            emit requestCustomContextMenu(eMenu::Menu::Security, d->ui->m_equitiesTree->viewport()->mapToGlobal(pos));
+        });
+
+        connect(
+            d->ui->m_equitiesTree->selectionModel(),
+            &QItemSelectionModel::currentRowChanged,
+            this,
+            [&](const QModelIndex& current, const QModelIndex& previous) {
+                Q_UNUSED(previous)
+                Q_D(KInvestmentView);
+                d->m_equitySelections.setSelection(SelectedObjects::Account, current.data(eMyMoney::Model::IdRole).toString());
+                if (d->ui->m_equitiesTree->isVisible()) {
+                    d->m_selections = d->m_equitySelections;
+                    emit requestSelectionChange(d->m_selections);
+                }
+            },
+            Qt::QueuedConnection);
+
+        connect(
+            d->ui->m_securitiesTree->selectionModel(),
+            &QItemSelectionModel::currentRowChanged,
+            this,
+            [&](const QModelIndex& current, const QModelIndex& previous) {
+                Q_UNUSED(previous)
+                Q_D(KInvestmentView);
+                d->m_securitySelections.setSelection(SelectedObjects::Security, current.data(eMyMoney::Model::IdRole).toString());
+                if (d->ui->m_securitiesTree->isVisible()) {
+                    d->m_selections = d->m_securitySelections;
+                    emit requestSelectionChange(d->m_selections);
+                }
+            },
+            Qt::QueuedConnection);
+
+        connect(d->ui->m_equitiesTree, &QTreeView::doubleClicked, this, &KInvestmentView::slotEditInvestment);
+
+        // use a QueuedConnection here to suppress duplicate call (at least on Qt 5.12.7)
+        connect(d->ui->m_tab, &QTabWidget::currentChanged, this, [&](int index) {
+            Q_D(KInvestmentView);
+            const auto tab = static_cast<eView::Investment::Tab>(index);
+
+            switch (tab) {
+            case eView::Investment::Tab::Equities:
+                d->m_selections = d->m_equitySelections;
+                break;
+            case eView::Investment::Tab::Securities:
+                d->m_selections = d->m_securitySelections;
+                break;
+            }
+            emit requestSelectionChange(d->m_selections);
+        });
+
+        connect(d->ui->m_accountComboBox, &KMyMoneyAccountCombo::accountSelected, this, [&](const QString& accountId) {
+            Q_D(KInvestmentView);
+            d->loadAccount(accountId);
+        });
+
+        d->selectDefaultInvestmentAccount();
+    }
 
     // don't forget base class implementation
     QWidget::showEvent(event);
@@ -102,141 +170,51 @@ void KInvestmentView::showEvent(QShowEvent* event)
 
 void KInvestmentView::updateActions(const SelectedObjects& selections)
 {
-    /// @todo updateActions
-}
-
-void KInvestmentView::updateActions(const MyMoneyObject& obj)
-{
     Q_D(KInvestmentView);
-    if (typeid(obj) != typeid(MyMoneyAccount) &&
-            (obj.id().isEmpty() && d->m_currentEquity.id().isEmpty())) // do not disable actions that were already disabled)))
-        return;
-
-    const auto& acc = static_cast<const MyMoneyAccount&>(obj);
-
+    const auto equityId = selections.firstSelection(SelectedObjects::Account);
+    const auto securityId = selections.firstSelection(SelectedObjects::Security);
     const auto file = MyMoneyFile::instance();
-    auto b = acc.accountType() == eMyMoney::Account::Type::Investment ? true : false;
-    if (isVisible() && !d->m_idInvAcc.isEmpty())
-        b = true;
 
-    pActions[eMenu::Action::NewInvestment]->setEnabled(b);
+    pActions[eMenu::Action::NewInvestment]->setEnabled(false);
+    pActions[eMenu::Action::EditInvestment]->setEnabled(false);
+    pActions[eMenu::Action::DeleteInvestment]->setEnabled(false);
+    pActions[eMenu::Action::UpdatePriceManually]->setEnabled(false);
+    pActions[eMenu::Action::UpdatePriceOnline]->setEnabled(false);
 
-    b = acc.isInvest() ? true : false;
-    pActions[eMenu::Action::EditInvestment]->setEnabled(b);
-    pActions[eMenu::Action::DeleteInvestment]->setEnabled(b && !file->isReferenced(acc));
-    pActions[eMenu::Action::UpdatePriceManually]->setEnabled(b);
-    pActions[eMenu::Action::UpdatePriceOnline]->setEnabled(b && !file->security(acc.currencyId()).value("kmm-online-source").isEmpty());
+    pActions[eMenu::Action::EditSecurity]->setEnabled(false);
+    pActions[eMenu::Action::DeleteSecurity]->setEnabled(false);
 
-    switch (acc.accountType()) {
-    case eMyMoney::Account::Type::Investment:
-    case eMyMoney::Account::Type::Stock:
-        d->m_currentEquity = acc;
-        break;
-    default:
-        d->m_currentEquity = MyMoneyAccount();
-        break;
+    // check that the selected account (combobox) is an investment account
+    auto idx = file->accountsModel()->indexById(d->m_idInvAcc);
+    if (idx.data(eMyMoney::Model::AccountTypeRole).value<eMyMoney::Account::Type>() == eMyMoney::Account::Type::Investment) {
+        pActions[eMenu::Action::NewInvestment]->setEnabled(true);
     }
-}
 
-void KInvestmentView::slotEquitySelected(const QModelIndex &current, const QModelIndex &previous)
-{
-    Q_D(KInvestmentView);
-    Q_UNUSED(current);
-    Q_UNUSED(previous);
-
-    const auto equ = d->currentEquity();
-    updateActions(equ);
-}
-
-void KInvestmentView::slotSecuritySelected(const QModelIndex &current, const QModelIndex &previous)
-{
-    Q_D(KInvestmentView);
-    Q_UNUSED(current);
-    Q_UNUSED(previous);
-    const auto sec = d->currentSecurity();
-    if (!sec.id().isEmpty()) {
+    if (!equityId.isEmpty()) {
+        idx = file->accountsModel()->indexById(equityId);
+        if (idx.data(eMyMoney::Model::AccountIsInvestRole).toBool()) {
+            pActions[eMenu::Action::EditInvestment]->setEnabled(true);
+            pActions[eMenu::Action::UpdatePriceManually]->setEnabled(true);
+            pActions[eMenu::Action::DeleteInvestment]->setDisabled(file->isReferenced(equityId));
+            const auto secId = idx.data(eMyMoney::Model::AccountCurrencyIdRole).toString();
+            const auto sec = file->securitiesModel()->itemById(secId);
+            pActions[eMenu::Action::UpdatePriceOnline]->setDisabled(sec.value("kmm-online-source").isEmpty());
+        }
+    }
+    if (!securityId.isEmpty()) {
         QBitArray skip((int)eStorage::Reference::Count);
         skip.fill(false);
         skip.setBit((int)eStorage::Reference::Price);
-        d->ui->m_editSecurityButton->setEnabled(true);
-        d->ui->m_deleteSecurityButton->setEnabled(!MyMoneyFile::instance()->isReferenced(sec, skip));
-    } else {
-        d->ui->m_editSecurityButton->setEnabled(false);
-        d->ui->m_deleteSecurityButton->setEnabled(false);
+        pActions[eMenu::Action::EditSecurity]->setEnabled(true);
+        pActions[eMenu::Action::DeleteSecurity]->setDisabled(file->isReferenced(securityId, skip));
     }
-}
-
-void KInvestmentView::slotSelectAccount(const QString &id)
-{
-    Q_D(KInvestmentView);
-    if (!id.isEmpty()) {
-        d->m_idInvAcc = id;
-        if (isVisible()) {
-            d->ui->m_accountComboBox->setSelected(id);
-            slotSecuritySelected(QModelIndex(), QModelIndex());
-            slotEquitySelected(QModelIndex(), QModelIndex());
-        }
-    }
-}
-
-void KInvestmentView::slotSelectAccount(const MyMoneyObject &obj)
-{
-    if (typeid(obj) != typeid(MyMoneyAccount))
-        return;
-    const auto acc = dynamic_cast<const MyMoneyAccount &>(obj);
-
-    if (acc.accountType() == eMyMoney::Account::Type::Investment)
-        slotSelectAccount(acc.id());
-}
-
-void KInvestmentView::slotLoadAccount(const QString &id)
-{
-    Q_D(KInvestmentView);
-    MyMoneyAccount acc;
-
-    auto baseModel = MyMoneyFile::instance()->accountsModel();
-    auto baseIdx = baseModel->indexById(id);
-    QModelIndex idx;
-
-    d->m_equitiesProxyModel->setHideAllEntries(true);
-    if (baseIdx.isValid()) {
-        acc = MyMoneyFile::instance()->accountsModel()->itemByIndex(baseIdx);
-        if (acc.accountType() == eMyMoney::Account::Type::Investment) {
-            d->m_equitiesProxyModel->setHideAllEntries(false);
-            idx = baseModel->mapFromBaseSource(d->m_equitiesProxyModel, baseIdx);
-            d->m_idInvAcc = id;
-        } else {
-            idx = QModelIndex();
-        }
-    }
-    d->ui->m_equitiesTree->setRootIndex(idx);
-
-    updateActions(acc);
-}
-
-void KInvestmentView::slotInvestmentMenuRequested(const QPoint&)
-{
-    Q_D(KInvestmentView);
-    MyMoneyAccount acc;
-    auto treeItem = d->ui->m_equitiesTree->currentIndex();
-    if (treeItem.isValid()) {
-        auto idx = MyMoneyFile::baseModel()->mapToBaseSource(treeItem);
-        acc = MyMoneyFile::instance()->accountsModel()->itemByIndex(idx);
-    }
-    slotShowInvestmentMenu(acc);
-}
-
-void KInvestmentView::slotShowInvestmentMenu(const MyMoneyAccount& acc)
-{
-    Q_UNUSED(acc);
-    pMenus[eMenu::Menu::Investment]->exec(QCursor::pos());
 }
 
 void KInvestmentView::slotNewInvestment()
 {
     Q_D(KInvestmentView);
     if (!isVisible())
-        KNewInvestmentWizard::newInvestment(d->m_currentEquity);
+        KNewInvestmentWizard::newInvestment(d->currentEquity());
     else
         KNewInvestmentWizard::newInvestment(MyMoneyFile::instance()->account(d->m_idInvAcc));
 }
@@ -244,22 +222,23 @@ void KInvestmentView::slotNewInvestment()
 void KInvestmentView::slotEditInvestment()
 {
     Q_D(KInvestmentView);
-    KNewInvestmentWizard::editInvestment(d->m_currentEquity);
+    KNewInvestmentWizard::editInvestment(d->currentEquity());
 }
 
 void KInvestmentView::slotDeleteInvestment()
 {
     Q_D(KInvestmentView);
     if (KMessageBox::questionYesNo(this,
-                                   i18n("<p>Do you really want to delete the investment <b>%1</b>?</p>", d->m_currentEquity.name()),
+                                   i18n("<p>Do you really want to delete the investment <b>%1</b>?</p>", d->currentEquity().name()),
                                    i18n("Delete investment"),
-                                   KStandardGuiItem::yes(), KStandardGuiItem::no(),
-                                   "DeleteInvestment") == KMessageBox::Yes) {
+                                   KStandardGuiItem::yes(),
+                                   KStandardGuiItem::no(),
+                                   "DeleteInvestment")
+        == KMessageBox::Yes) {
         auto file = MyMoneyFile::instance();
         MyMoneyFileTransaction ft;
         try {
-//      d->m_selectedAccount = MyMoneyAccount(); // CAUTION: deleting equity from investments view needs this, if ID of the equity to be deleted is the smallest from all
-            file->removeAccount(d->m_currentEquity);
+            file->removeAccount(d->currentEquity());
             ft.commit();
         } catch (const MyMoneyException &e) {
             KMessageBox::information(this, i18n("Unable to delete investment: %1", QString::fromLatin1(e.what())));
@@ -277,8 +256,8 @@ void KInvestmentView::slotDeleteInvestment()
 void KInvestmentView::slotUpdatePriceOnline()
 {
     Q_D(KInvestmentView);
-    if (!d->m_currentEquity.id().isEmpty()) {
-        QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(0, d->m_currentEquity.currencyId());
+    if (!d->currentEquity().id().isEmpty()) {
+        QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(0, d->currentEquity().currencyId());
         if ((dlg->exec() == QDialog::Accepted) && (dlg != nullptr))
             dlg->storePrices();
         delete dlg;
@@ -288,9 +267,9 @@ void KInvestmentView::slotUpdatePriceOnline()
 void KInvestmentView::slotUpdatePriceManually()
 {
     Q_D(KInvestmentView);
-    if (!d->m_currentEquity.id().isEmpty()) {
+    if (!d->currentEquity().id().isEmpty()) {
         try {
-            auto security = MyMoneyFile::instance()->security(d->m_currentEquity.currencyId());
+            auto security = MyMoneyFile::instance()->security(d->currentEquity().currencyId());
             auto currency = MyMoneyFile::instance()->security(security.tradingCurrency());
             const auto& price = MyMoneyFile::instance()->price(security.id(), currency.id());
 

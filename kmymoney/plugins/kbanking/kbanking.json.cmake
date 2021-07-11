@@ -25,6 +25,7 @@
                 "Name[sk]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
                 "Name[sl]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
                 "Name[sv]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
+                "Name[tr]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
                 "Name[uk]": "Martin Preuss,Thomas Baumgart,Christian Dávid",
                 "Name[x-test]": "xxMartin Preuss,Thomas Baumgart,Christian Dávidxx",
                 "Name[zh_CN]": "Martin Preuss,Thomas Baumgart,Christian Dávid"
@@ -44,6 +45,7 @@
         "Description[pt_BR]": "Adiciona correspondente bancário do tipo HBCI/FinTs, OFX e PayPal no KMyMoney",
         "Description[sl]": "Doda HBCI/FinTs, OFX and PayPal spletno bančništvo v KMyMoney",
         "Description[sv]": "Lägg till HBCI/FinTs Internetbank och PayPal till KMyMoney",
+        "Description[tr]": "KMyMoney'e HBCI/FinTs, OFX ve PayPal çevrimiçi bankacılığını ekle",
         "Description[uk]": "Онлайн-банкінг HBCI/FinTs, OFX і PayPal у KMyMoney",
         "Description[x-test]": "xxAdd HBCI/FinTs, OFX and PayPal online banking to KMyMoneyxx",
         "EnabledByDefault": true,
@@ -72,6 +74,7 @@
         "Name[sk]": "KBanking",
         "Name[sl]": "KBanking",
         "Name[sv]": "Kbank",
+        "Name[tr]": "KBankacılık",
         "Name[uk]": "KBanking",
         "Name[x-test]": "xxKBankingxx",
         "Name[zh_CN]": "KBanking",

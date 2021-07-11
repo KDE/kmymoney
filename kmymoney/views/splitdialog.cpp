@@ -65,6 +65,8 @@ public:
     MyMoneyMoney                transactionTotal;
     MyMoneyMoney                splitsTotal;
     MyMoneyMoney                inversionFactor;
+
+    QString transactionPayeeId;
 };
 
 static const int SumRow = 0;
@@ -409,4 +411,9 @@ void SplitDialog::mergeSplits()
     qDebug() << "Merge splits not yet implemented.";
     adjustSummary();
     d->selectRow(row);
+}
+
+void SplitDialog::setTransactionPayeeId(const QString& id)
+{
+    d->ui->splitView->setTransactionPayeeId(id);
 }
