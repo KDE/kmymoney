@@ -1081,11 +1081,6 @@ void MyMoneyFile::removeAccount(const MyMoneyAccount& account)
 
 void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned int level)
 {
-    Q_UNUSED(account_list);
-    Q_UNUSED(level);
-    /// @todo port to new model code
-    qDebug() << "removeAccountList needs to be ported to new model code";
-#if 0
     if (level > 100)
         throw MYMONEYEXCEPTION_CSTRING("Too deep recursion in [MyMoneyFile::removeAccountList]!");
 
@@ -1099,8 +1094,8 @@ void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned in
     }
 
     // process all accounts in the list and test if they have transactions assigned
-    foreach (const auto sAccount, account_list) {
-        auto a = d->m_storage->account(sAccount);
+    for (const auto& sAccount : account_list) {
+        auto a = d->accountsModel.itemById(sAccount);
         //qDebug() << "Deleting account '"<< a.name() << "'";
 
         // first remove all sub-accounts
@@ -1110,13 +1105,12 @@ void MyMoneyFile::removeAccountList(const QStringList& account_list, unsigned in
             // then remove account itself, but we first have to get
             // rid of the account list that is still stored in
             // the MyMoneyAccount object. Easiest way is to get a fresh copy.
-            a = d->m_storage->account(sAccount);
+            a = d->accountsModel.itemById(sAccount);
         }
 
         // make sure to remove the item from the cache
         removeAccount(a);
     }
-#endif
 }
 
 bool MyMoneyFile::hasOnlyUnusedAccounts(const QStringList& account_list, unsigned int level)
