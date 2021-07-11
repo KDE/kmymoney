@@ -710,17 +710,6 @@ public:
     unsigned int transactionCount(const QString& accountId = QString()) const;
 
     /**
-      * This method returns a QMap filled with the number of transactions
-      * per account. The account id serves as index into the map. If one
-      * needs to have all transactionCounts() for many accounts, this method
-      * is faster than calling transactionCount(const QString& account) many
-      * times.
-      *
-      * @return QMap with numbers of transactions per account
-      */
-    QMap<QString, unsigned long> transactionCountMap() const;
-
-    /**
       * This method returns the number of institutions currently known to file
       * in the range 0..MAXUINT
       *

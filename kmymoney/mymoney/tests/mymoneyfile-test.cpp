@@ -1842,27 +1842,6 @@ void MyMoneyFileTest::testBaseCurrency()
     } catch (const MyMoneyException &e) {
         unexpectedException(e);
     }
-
-/// @todo "Cleanup dead code"
-#if 0 // invalid test with new model based backend
-    // check if it gets reset when attaching a new storage
-    m->detachStorage(storage);
-
-    MyMoneyStorageMgr* newStorage = new MyMoneyStorageMgr;
-    m->attachStorage(newStorage);
-
-    ref = m->baseCurrency();
-    QVERIFY(ref.id().isEmpty());
-
-    m->detachStorage(newStorage);
-    delete newStorage;
-
-    m->attachStorage(storage);
-    ref = m->baseCurrency();
-    QCOMPARE(ref.id(), QLatin1String("EUR"));
-    QCOMPARE(ref.name(), QLatin1String("Euro"));
-    QVERIFY(ref.tradingSymbol() == QChar(0x20ac));
-#endif
 }
 
 void MyMoneyFileTest::testOpeningBalanceNoBase()

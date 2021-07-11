@@ -790,9 +790,6 @@ void MyMoneyFile::modifyTransaction(const MyMoneyTransaction& transaction)
     fixSplitPrecision(tCopy);
 
     d->journalModel.modifyTransaction(tCopy);
-    /// @todo cleanup
-    // perform modification
-    // d->m_storage->modifyTransaction(tCopy);
 
     // and mark all accounts that are referenced
     const auto splits3 = tCopy.splits();
@@ -976,8 +973,6 @@ void MyMoneyFile::removeTransaction(const MyMoneyTransaction& transaction)
     }
 
     d->journalModel.removeTransaction(transaction);
-    /// @todo cleanup
-    // d->m_storage->removeTransaction(transaction);
 
     // remove a possible notification of that same object from the changeSet
     QList<MyMoneyNotification>::iterator it;
@@ -1918,16 +1913,6 @@ unsigned int MyMoneyFile::transactionCount(const QString& accountId) const
     return d->journalModel.transactionCount(accountId);
 }
 
-#if 0
-QMap<QString, unsigned long> MyMoneyFile::transactionCountMap() const
-{
-    /// @todo port to new model code
-    d->checkStorage();
-
-    return d->m_storage->transactionCountMap();
-}
-#endif
-
 unsigned int MyMoneyFile::institutionCount() const
 {
     return d->institutionsModel.itemList().count();
@@ -2061,47 +2046,11 @@ QList<MyMoneyTag> MyMoneyFile::tagList() const
 QString MyMoneyFile::accountToCategory(const QString& accountId, bool includeStandardAccounts) const
 {
     return d->accountsModel.accountIdToHierarchicalName(accountId, includeStandardAccounts);
-
-/// @todo cleanup
-#if 0
-    MyMoneyAccount acc;
-    QString rc;
-
-    if (!accountId.isEmpty()) {
-        acc = account(accountId);
-        do {
-            if (!rc.isEmpty())
-                rc = AccountSeparator + rc;
-            rc = acc.name() + rc;
-            acc = account(acc.parentAccountId());
-        } while (!acc.id().isEmpty() && (includeStandardAccounts || !isStandardAccount(acc.id())));
-    }
-    return rc;
-#endif
 }
 
 QString MyMoneyFile::categoryToAccount(const QString& category, Account::Type type) const
 {
     return d->accountsModel.accountNameToId(category, type);
-
-/// @todo cleanup
-#if 0
-    QString id;
-
-    // search the category in the expense accounts and if it is not found, try
-    // to locate it in the income accounts
-    if (type == Account::Type::Unknown
-            || type == Account::Type::Expense) {
-        id = locateSubAccount(MyMoneyFile::instance()->expense(), category);
-    }
-
-    if ((id.isEmpty() && type == Account::Type::Unknown)
-            || type == Account::Type::Income) {
-        id = locateSubAccount(MyMoneyFile::instance()->income(), category);
-    }
-
-    return id;
-#endif
 }
 
 QString MyMoneyFile::categoryToAccount(const QString& category) const
@@ -4023,7 +3972,6 @@ bool MyMoneyFile::hasMatchingOnlineBalance(const MyMoneyAccount& _acc) const
 
 int MyMoneyFile::countTransactionsWithSpecificReconciliationState(const QString& accId, TransactionFilter::State state) const
 {
-    /// @todo port to new model code
     int rc = 0;
     const auto model = &d->journalModel;
     const auto rows = model->rowCount();
