@@ -62,6 +62,9 @@ public:
 
     MyMoneyMoney valueSum() const;
 
+    void addSplitsToTransaction(MyMoneyTransaction& t) const;
+    QList<MyMoneySplit> splitList() const;
+
 Q_SIGNALS:
     void itemCountChanged(int cnt);
 

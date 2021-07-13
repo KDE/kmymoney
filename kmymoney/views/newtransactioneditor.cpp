@@ -1163,7 +1163,7 @@ MyMoneyTransaction NewTransactionEditor::transaction() const
     t.setPostDate(d->ui->dateEdit->date());
 
     // now update and add what we have in the model
-    addSplitsFromModel(t, &d->splitModel);
+    d->splitModel.addSplitsToTransaction(t);
 
     return t;
 }

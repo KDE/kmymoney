@@ -39,9 +39,6 @@ public:
     }
 
 protected:
-    void addSplitsFromModel(MyMoneyTransaction& t, const SplitModel* model) const;
-    void addSplitsFromModel(QList<MyMoneySplit>& splits, const SplitModel* model) const;
-
     virtual void keyPressEvent(QKeyEvent* e) override;
     void setCancelButton(QAbstractButton* button);
     void setEnterButton(QAbstractButton* button);

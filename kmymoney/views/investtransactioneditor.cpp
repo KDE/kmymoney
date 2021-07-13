@@ -966,10 +966,10 @@ void InvestTransactionEditor::saveTransaction()
         resultSplits.append(d->assetSplit);
     }
     if (d->currentActivity->feesRequired() != Invest::Activity::Unused) {
-        addSplitsFromModel(resultSplits, d->feeSplitModel);
+        resultSplits.append(d->feeSplitModel->splitList());
     }
     if (d->currentActivity->interestRequired() != Invest::Activity::Unused) {
-        addSplitsFromModel(resultSplits, d->interestSplitModel);
+        resultSplits.append(d->interestSplitModel->splitList());
     }
 
     AlkValue::RoundingMethod roundingMethod = AlkValue::RoundRound;
