@@ -25,17 +25,19 @@
 
 #include "ui_kloanpaymentpage.h"
 
-#include "knewaccountwizard.h"
-#include "knewaccountwizard_p.h"
+#include "kgeneralloaninfopage.h"
+#include "kgeneralloaninfopage_p.h"
 #include "kloandetailspage.h"
 #include "kloandetailspage_p.h"
 #include "kloanschedulepage.h"
-/// @todo port to new model code
-// #include "ksplittransactiondlg.h"
+#include "knewaccountwizard.h"
+#include "knewaccountwizard_p.h"
 #include "mymoneyaccount.h"
+#include "mymoneymoney.h"
 #include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "splitdialog.h"
 #include "wizardpage.h"
 
 namespace NewAccountWizard
@@ -76,13 +78,7 @@ MyMoneyMoney LoanPaymentPage::additionalFees() const
 void LoanPaymentPage::additionalFeesSplits(QList<MyMoneySplit>& list)
 {
     Q_D(LoanPaymentPage);
-    list.clear();
-
-    foreach (const auto split, d->additionalFeesTransaction.splits()) {
-        if (split.accountId() != d->phonyAccount.id()) {
-            list << split;
-        }
-    }
+    list = d->m_splitModel.splitList();
 }
 
 void LoanPaymentPage::updateAmounts()
@@ -106,29 +102,40 @@ void LoanPaymentPage::enterPage()
 
 void LoanPaymentPage::slotAdditionalFees()
 {
-    /// @todo port to new model code
-#if 0
     Q_D(LoanPaymentPage);
-    QMap<QString, MyMoneyMoney> priceInfo;
-    QPointer<KSplitTransactionDlg> dlg = new KSplitTransactionDlg(d->additionalFeesTransaction, d->phonySplit, d->phonyAccount, false, !d->m_wizard->moneyBorrowed(), MyMoneyMoney(), priceInfo);
 
-    // connect(dlg, SIGNAL(newCategory(MyMoneyAccount&)), this, SIGNAL(newCategory(MyMoneyAccount&)));
+    const auto transactionFactor(MyMoneyMoney::ONE);
+    const auto commodity = d->m_wizard->d_func()->currency();
+    const auto payeeId = d->m_wizard->d_func()->m_generalLoanInfoPage->d_func()->ui->m_payee->selectedItem();
 
-    if (dlg->exec() == QDialog::Accepted) {
-        d->additionalFeesTransaction = dlg->transaction();
-        // sum up the additional fees
+    SplitModel dlgSplitModel(this, nullptr, d->m_splitModel);
+    // create an empty split at the end
+    // used to create new splits
+    dlgSplitModel.appendEmptySplit();
 
-        d->additionalFees = MyMoneyMoney();
-        foreach (const auto split, d->additionalFeesTransaction.splits()) {
-            if (split.accountId() != d->phonyAccount.id()) {
-                d->additionalFees += split.shares();
-            }
-        }
+    QPointer<SplitDialog> splitDialog = new SplitDialog(commodity, MyMoneyMoney::autoCalc, commodity.smallestAccountFraction(), transactionFactor, this);
+    splitDialog->setTransactionPayeeId(payeeId);
+    splitDialog->setModel(&dlgSplitModel);
+
+    int rc = splitDialog->exec();
+    if (splitDialog && (rc == QDialog::Accepted)) {
+        // remove that empty split again before we update the splits
+        dlgSplitModel.removeEmptySplit();
+
+        // copy the splits model contents
+        d->m_splitModel = dlgSplitModel;
+
+        // create the phony transaction with those additional splits
+        d->additionalFeesTransaction.removeSplits();
+        d->phonySplit.clearId();
+        d->additionalFeesTransaction.addSplit(d->phonySplit);
+        d->m_splitModel.addSplitsToTransaction(d->additionalFeesTransaction);
+        d->additionalFees = d->m_splitModel.valueSum();
         updateAmounts();
     }
-
-    delete dlg;
-#endif
+    if (splitDialog) {
+        splitDialog->deleteLater();
+    }
 }
 
 KMyMoneyWizardPage* LoanPaymentPage::nextPage() const

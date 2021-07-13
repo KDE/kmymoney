@@ -35,18 +35,18 @@
 #include "ui_schedulewizardpage.h"
 #include "ui_paymentwizardpage.h"
 
-#include "kmymoneyutils.h"
 #include "kmymoneysettings.h"
-
-#include "mymoneyfinancialcalculator.h"
-#include "mymoneyfile.h"
-#include "mymoneyexception.h"
-#include "mymoneysecurity.h"
+#include "kmymoneyutils.h"
 #include "mymoneyaccountloan.h"
+#include "mymoneyenums.h"
+#include "mymoneyexception.h"
+#include "mymoneyfile.h"
+#include "mymoneyfinancialcalculator.h"
 #include "mymoneyschedule.h"
+#include "mymoneysecurity.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
-#include "mymoneyenums.h"
+#include "splitmodel.h"
 
 namespace Ui {
 class KNewLoanWizard;
@@ -523,12 +523,13 @@ public:
             assetSet.load(ui->m_schedulePage->ui->m_paymentAccountEdit);
     }
 
-    KNewLoanWizard       *q_ptr;
-    Ui::KNewLoanWizard   *ui;
-    MyMoneyAccountLoan    m_account;
-    MyMoneyTransaction    m_transaction;
-    MyMoneySplit          m_split;
-    QBitArray             m_pages;
+    KNewLoanWizard* q_ptr;
+    Ui::KNewLoanWizard* ui;
+    SplitModel m_feeSplitModel;
+    MyMoneyAccountLoan m_account;
+    MyMoneyTransaction m_transaction;
+    MyMoneySplit m_split;
+    QBitArray m_pages;
 };
 
 #endif

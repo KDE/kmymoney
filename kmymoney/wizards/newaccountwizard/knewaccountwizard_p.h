@@ -79,20 +79,20 @@ public:
         return MyMoneyMoney::denomToPrec(currency().smallestAccountFraction());
     }
 
-    InstitutionPage*         m_institutionPage;
-    AccountTypePage*         m_accountTypePage;
-    BrokeragePage*           m_brokeragepage;
-    CreditCardSchedulePage*  m_schedulePage;
-    GeneralLoanInfoPage*     m_generalLoanInfoPage;
-    LoanDetailsPage*         m_loanDetailsPage;
-    LoanPaymentPage*         m_loanPaymentPage;
-    LoanSchedulePage*        m_loanSchedulePage;
-    LoanPayoutPage*          m_loanPayoutPage;
-    HierarchyPage*           m_hierarchyPage;
-    AccountSummaryPage*      m_accountSummaryPage;
+    InstitutionPage* m_institutionPage;
+    AccountTypePage* m_accountTypePage;
+    BrokeragePage* m_brokeragepage;
+    CreditCardSchedulePage* m_schedulePage;
+    GeneralLoanInfoPage* m_generalLoanInfoPage;
+    LoanDetailsPage* m_loanDetailsPage;
+    LoanPaymentPage* m_loanPaymentPage;
+    LoanSchedulePage* m_loanSchedulePage;
+    LoanPayoutPage* m_loanPayoutPage;
+    HierarchyPage* m_hierarchyPage;
+    AccountSummaryPage* m_accountSummaryPage;
 
-    MyMoneyAccountLoan       m_account;
-    MyMoneySchedule          m_schedule;
+    MyMoneyAccountLoan m_account;
+    MyMoneySchedule m_schedule;
 };
 } // namespace
 

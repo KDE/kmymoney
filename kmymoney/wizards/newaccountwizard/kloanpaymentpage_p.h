@@ -18,11 +18,12 @@
 
 #include "ui_kloanpaymentpage.h"
 
-#include "wizardpage_p.h"
 #include "mymoneyaccount.h"
 #include "mymoneymoney.h"
 #include "mymoneysplit.h"
 #include "mymoneytransaction.h"
+#include "splitmodel.h"
+#include "wizardpage_p.h"
 
 namespace NewAccountWizard
 {
@@ -45,10 +46,11 @@ public:
     }
 
     Ui::KLoanPaymentPage *ui;
-    MyMoneyAccount        phonyAccount;
-    MyMoneySplit          phonySplit;
-    MyMoneyTransaction    additionalFeesTransaction;
-    MyMoneyMoney          additionalFees;
+    MyMoneyAccount phonyAccount;
+    MyMoneySplit phonySplit;
+    MyMoneyTransaction additionalFeesTransaction;
+    MyMoneyMoney additionalFees;
+    SplitModel m_splitModel;
 };
 }
 

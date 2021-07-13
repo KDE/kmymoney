@@ -55,6 +55,7 @@ private:
     friend class Wizard;
     friend class AccountSummaryPage;
     friend class LoanDetailsPage;
+    friend class LoanPaymentPage;
     friend class LoanSchedulePage;
     friend class WizardPrivate;
 };
