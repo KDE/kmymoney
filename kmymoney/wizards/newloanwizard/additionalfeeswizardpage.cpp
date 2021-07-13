@@ -23,12 +23,11 @@
 
 #include "knewloanwizard.h"
 #include "knewloanwizard_p.h"
-/// @todo port to new model code
-// #include "ksplittransactiondlg.h"
-#include "mymoneyfile.h"
-#include "mymoneysecurity.h"
 #include "mymoneyaccount.h"
+#include "mymoneyfile.h"
 #include "mymoneymoney.h"
+#include "mymoneysecurity.h"
+#include "splitdialog.h"
 
 AdditionalFeesWizardPage::AdditionalFeesWizardPage(QWidget *parent)
     : QWizardPage(parent),
@@ -55,29 +54,40 @@ AdditionalFeesWizardPage::~AdditionalFeesWizardPage()
 
 void AdditionalFeesWizardPage::slotAdditionalFees()
 {
-    /// @todo port to new model code
-#if 0
-    // KMessageBox::information(0, QString("Not yet implemented ... if you want to help, contact kmymoney-devel@kde.org"), QString("Development notice"));
-    MyMoneyAccount account("Phony-ID", MyMoneyAccount());
+    const auto d = qobject_cast<KNewLoanWizard*>(wizard())->d_func();
 
-    QMap<QString, MyMoneyMoney> priceInfo;
-    QPointer<KSplitTransactionDlg> dlg = new KSplitTransactionDlg(qobject_cast<KNewLoanWizard*>(wizard())->d_func()->m_transaction, qobject_cast<KNewLoanWizard*>(wizard())->d_func()->m_split, account, false, !field("borrowButton").toBool(), MyMoneyMoney(), priceInfo);
-    connect(dlg, SIGNAL(newCategory(MyMoneyAccount&)), this, SIGNAL(newCategory(MyMoneyAccount&)));
+    const auto transactionFactor(MyMoneyMoney::ONE);
+    const auto commodity = MyMoneyFile::instance()->currency(d->m_additionalFeesTransaction.commodity());
+    const auto payeeId = field("payeeEdit").toString();
 
-    if (dlg->exec() == QDialog::Accepted) {
-        qobject_cast<KNewLoanWizard*>(wizard())->d_func()->m_transaction = dlg->transaction();
-        // sum up the additional fees
-        MyMoneyMoney fees;
-        foreach (const MyMoneySplit& it, qobject_cast<KNewLoanWizard*>(wizard())->d_func()->m_transaction.splits()) {
-            if (it.accountId() != account.id()) {
-                fees += it.value();
-            }
-        }
-        setField("additionalCost", fees.formatMoney(qobject_cast<KNewLoanWizard*>(wizard())->d_func()->m_account.fraction(MyMoneyFile::instance()->security(qobject_cast<KNewLoanWizard*>(wizard())->d_func()->m_account.currencyId()))));
+    SplitModel dlgSplitModel(this, nullptr, d->m_feeSplitModel);
+
+    // create an empty split at the end
+    // used to create new splits
+    dlgSplitModel.appendEmptySplit();
+
+    QPointer<SplitDialog> splitDialog = new SplitDialog(commodity, MyMoneyMoney::autoCalc, commodity.smallestAccountFraction(), transactionFactor, this);
+    splitDialog->setTransactionPayeeId(payeeId);
+    splitDialog->setModel(&dlgSplitModel);
+
+    int rc = splitDialog->exec();
+    if (splitDialog && (rc == QDialog::Accepted)) {
+        // remove that empty split again before we update the splits
+        dlgSplitModel.removeEmptySplit();
+
+        // copy the splits model contents
+        d->m_feeSplitModel = dlgSplitModel;
+
+        // create the phony transaction with those additional splits
+        d->m_additionalFeesTransaction.removeSplits();
+        d->m_phonySplit.clearId();
+        d->m_additionalFeesTransaction.addSplit(d->m_phonySplit);
+        d->m_feeSplitModel.addSplitsToTransaction(d->m_additionalFeesTransaction);
+        setField("additionalCost", d->m_feeSplitModel.valueSum().formatMoney(commodity.smallestAccountFraction()));
     }
-
-    delete dlg;
-#endif
+    if (splitDialog) {
+        splitDialog->deleteLater();
+    }
     updatePeriodicPayment(qobject_cast<KNewLoanWizard*>(wizard())->d_func()->m_account);
 }
 

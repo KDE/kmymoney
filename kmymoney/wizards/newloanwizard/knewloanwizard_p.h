@@ -116,9 +116,9 @@ public:
 
         // setup a phony transaction for additional fee processing
         m_account = MyMoneyAccount("Phony-ID", MyMoneyAccount());
-        m_split.setAccountId(m_account.id());
-        m_split.setValue(MyMoneyMoney());
-        m_transaction.addSplit(m_split);
+        m_phonySplit.setAccountId(m_account.id());
+        m_phonySplit.setValue(MyMoneyMoney());
+        m_additionalFeesTransaction.addSplit(m_phonySplit);
 
         KMyMoneyUtils::updateWizardButtons(q);
     }
@@ -482,16 +482,12 @@ public:
             }
 
             // copy the splits from the other costs and update the payment split
-            foreach (const MyMoneySplit& it, m_transaction.splits()) {
-                if (it.accountId() != QStringLiteral("Phony-ID")) {
-                    MyMoneySplit sp = it;
-                    sp.clearId();
-                    t.addSplit(sp);
-                    sPayment.setValue(sPayment.value() - sp.value());
-                    sPayment.setShares(sPayment.value());
-                    t.modifySplit(sPayment);
-                }
-            }
+            m_feeSplitModel.addSplitsToTransaction(t);
+
+            // and subtract the sum from the payment value
+            sPayment.setValue(sPayment.value() - m_feeSplitModel.valueSum());
+            sPayment.setShares(sPayment.value());
+            t.modifySplit(sPayment);
         }
         return t;
     }
@@ -527,8 +523,8 @@ public:
     Ui::KNewLoanWizard* ui;
     SplitModel m_feeSplitModel;
     MyMoneyAccountLoan m_account;
-    MyMoneyTransaction m_transaction;
-    MyMoneySplit m_split;
+    MyMoneyTransaction m_additionalFeesTransaction;
+    MyMoneySplit m_phonySplit;
     QBitArray m_pages;
 };
 
