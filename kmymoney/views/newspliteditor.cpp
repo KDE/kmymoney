@@ -308,6 +308,8 @@ NewSplitEditor::NewSplitEditor(QWidget* parent, const MyMoneySecurity& commodity
     frameCollection->addFrame(new WidgetHintFrame(d->ui->numberEdit, WidgetHintFrame::Warning));
     frameCollection->addWidget(d->ui->enterButton);
 
+    d->ui->amountEditCredit->setAllowEmpty(true);
+    d->ui->amountEditDebit->setAllowEmpty(true);
     d->amountHelper = new CreditDebitHelper(this, d->ui->amountEditCredit, d->ui->amountEditDebit);
 
     new AmountEditCurrencyHelper(d->ui->accountCombo, d->amountHelper, commodity.id());
