@@ -426,7 +426,7 @@ void InvestTransactionEditor::Private::editSplits(SplitModel* sourceSplitModel, 
     // used to create new splits
     splitModel.appendEmptySplit();
 
-    QPointer<SplitDialog> splitDialog = new SplitDialog(parentAccount, currency, MyMoneyMoney::autoCalc, transactionFactor, q);
+    QPointer<SplitDialog> splitDialog = new SplitDialog(currency, MyMoneyMoney::autoCalc, parentAccount.fraction(), transactionFactor, q);
     splitDialog->setModel(&splitModel);
 
     int rc = splitDialog->exec();
