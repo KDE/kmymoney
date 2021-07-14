@@ -44,6 +44,10 @@
 #include "misc/webconnect.h"
 #include "platformtools.h"
 
+#ifdef Q_OS_WIN
+#include <windows.h>
+#endif
+
 #ifdef KMM_DEBUG
 #include "mymoneyutils.h"
 #include "mymoneytracer.h"
@@ -65,6 +69,13 @@ int main(int argc, char *argv[])
     // https://doc.qt.io/qt-5/qhash.html#algorithmic-complexity-attacks
     // for details.
     qSetGlobalQHashSeed(0);
+#endif
+
+#ifdef Q_OS_WIN
+    if (AttachConsole(ATTACH_PARENT_PROCESS)) {
+        freopen("CONOUT$", "w", stdout);
+        freopen("CONOUT$", "w", stderr);
+    }
 #endif
 
     /**
