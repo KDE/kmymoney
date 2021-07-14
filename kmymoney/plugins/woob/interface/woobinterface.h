@@ -26,7 +26,10 @@ typedef _object PyObject;
 
 class WoobInterface
 {
-    PyObject* m_woobInterface;
+    PyObject* m_pythonSysModule;
+    PyObject* m_pythonSysPathVariable;
+    PyObject* m_pythonWoobModuleLocation;
+    PyObject* m_pythonWoobModule;
 
 public:
     struct Backend {
@@ -76,6 +79,10 @@ public:
     explicit WoobInterface();
 
     ~WoobInterface();
+
+    bool isPythonInitialized();
+
+    bool isWoobInitialized();
 
     QStringList getProtocols();
 

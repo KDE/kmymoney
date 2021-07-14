@@ -53,6 +53,7 @@ public:
 private:
     Q_DECLARE_PRIVATE(Woob)
     WoobPrivate* const d_ptr;
+    bool checkInitialized();
 
 private Q_SLOTS:
     void gotAccount();

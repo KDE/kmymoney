@@ -24,6 +24,7 @@
 // KDE Includes
 
 #include <KLocalizedString>
+#include <KMessageBox>
 #include <KPluginFactory>
 
 // ----------------------------------------------------------------------------
@@ -124,14 +125,18 @@ bool Woob::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& onlin
     Q_UNUSED(acc);
 
     bool rc = false;
-    QPointer<MapAccountWizard> w = new MapAccountWizard(nullptr, &d->woob);
-    if (w->exec() == QDialog::Accepted && w != nullptr) {
-        onlineBankingSettings.setValue("wb-backend", w->currentBackend());
-        onlineBankingSettings.setValue("wb-id", w->currentAccount());
-        onlineBankingSettings.setValue("wb-max", "0");
-        rc = true;
+
+    if (checkInitialized()) {
+        QPointer<MapAccountWizard> w = new MapAccountWizard(nullptr, &d->woob);
+        if (w->exec() == QDialog::Accepted && w != nullptr) {
+            onlineBankingSettings.setValue("wb-backend", w->currentBackend());
+            onlineBankingSettings.setValue("wb-id", w->currentAccount());
+            onlineBankingSettings.setValue("wb-max", "0");
+            rc = true;
+        }
+        delete w;
     }
-    delete w;
+
     return rc;
 }
 
@@ -140,26 +145,29 @@ bool Woob::updateAccount(const MyMoneyAccount& kacc, bool moreAccounts)
     Q_D(Woob);
     Q_UNUSED(moreAccounts);
 
-    QString bname = kacc.onlineBankingSettings().value("wb-backend");
-    QString id = kacc.onlineBankingSettings().value("wb-id");
-    QString max = kacc.onlineBankingSettings().value("wb-max");
+    if (checkInitialized()) {
+        QString bname = kacc.onlineBankingSettings().value("wb-backend");
+        QString id = kacc.onlineBankingSettings().value("wb-id");
+        QString max = kacc.onlineBankingSettings().value("wb-max");
 
-    d->progress = std::make_unique<QProgressDialog>(nullptr);
-    d->progress->setWindowTitle(i18n("Connecting to bank..."));
-    d->progress->setLabelText(i18n("Retrieving transactions..."));
-    d->progress->setModal(true);
-    d->progress->setCancelButton(nullptr);
-    d->progress->setMinimum(0);
-    d->progress->setMaximum(0);
-    d->progress->setMinimumDuration(0);
+        d->progress = std::make_unique<QProgressDialog>(nullptr);
+        d->progress->setWindowTitle(i18n("Connecting to bank..."));
+        d->progress->setLabelText(i18n("Retrieving transactions..."));
+        d->progress->setModal(true);
+        d->progress->setCancelButton(nullptr);
+        d->progress->setMinimum(0);
+        d->progress->setMaximum(0);
+        d->progress->setMinimumDuration(0);
 
-    QFuture<WoobInterface::Account> future = QtConcurrent::run(&d->woob, &WoobInterface::getAccount, bname, id, max);
-    d->watcher.setFuture(future);
+        QFuture<WoobInterface::Account> future = QtConcurrent::run(&d->woob, &WoobInterface::getAccount, bname, id, max);
+        d->watcher.setFuture(future);
 
-    d->progress->exec();
-    d->progress.reset();
+        d->progress->exec();
+        d->progress.reset();
 
-    return true;
+        return true;
+    } else
+        return false;
 }
 
 void Woob::gotAccount()
@@ -211,6 +219,27 @@ void Woob::gotAccount()
     statementInterface()->import(ks);
 
     d->progress->hide();
+}
+
+bool Woob::checkInitialized()
+{
+    Q_D(Woob);
+
+    if (!d_ptr->woob.isPythonInitialized()) {
+        KMessageBox::error(
+            nullptr,
+            i18n("Woob plugin failed to fully initialize, most likely due to a missing or a misconfigured Python environment. Please refer to the "
+                 "manual on how to fix it."));
+        return false;
+    } else if (!d_ptr->woob.isWoobInitialized()) {
+        KMessageBox::error(
+            nullptr,
+            i18n("Woob plugin failed to fully initialize, most likely due to a missing or a misconfigured Woob Python module. Please refer to the "
+                 "manual on how to fix it."));
+        return false;
+    }
+
+    return true;
 }
 
 K_PLUGIN_CLASS_WITH_JSON(Woob, "woob.json")
