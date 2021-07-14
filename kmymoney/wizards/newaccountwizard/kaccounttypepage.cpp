@@ -26,8 +26,13 @@
 // ----------------------------------------------------------------------------
 // Project Includes
 
-/// @todo port to new model code
-// #include "kequitypriceupdatedlg.h"
+#include "accountsmodel.h"
+#include "kbrokeragepage.h"
+#include "kcreditcardschedulepage.h"
+#include "kequitypriceupdatedlg.h"
+#include "kgeneralloaninfopage.h"
+#include "kguiutils.h"
+#include "khierarchypage.h"
 #include "kmymoneycurrencyselector.h"
 #include "kmymoneydateinput.h"
 #include "kmymoneygeneralcombo.h"
@@ -35,19 +40,13 @@
 #include "kmymoneywizardpage.h"
 #include "knewaccountwizard.h"
 #include "knewaccountwizard_p.h"
-#include "kbrokeragepage.h"
-#include "kcreditcardschedulepage.h"
-#include "kgeneralloaninfopage.h"
-#include "khierarchypage.h"
 #include "mymoneyaccount.h"
+#include "mymoneyenums.h"
 #include "mymoneyfile.h"
 #include "mymoneymoney.h"
 #include "mymoneyprice.h"
 #include "mymoneysecurity.h"
 #include "wizardpage.h"
-#include "kguiutils.h"
-#include "mymoneyenums.h"
-#include "accountsmodel.h"
 
 using namespace eMyMoney;
 
@@ -167,8 +166,6 @@ void AccountTypePage::slotUpdateCurrency()
 
 void AccountTypePage::slotGetOnlineQuote()
 {
-    /// @todo port to new model code
-#if 0
     Q_D(AccountTypePage);
     QString id = MyMoneyFile::instance()->baseCurrency().id() + ' ' + d->ui->m_currencyComboBox->security().id();
     QPointer<KEquityPriceUpdateDlg> dlg = new KEquityPriceUpdateDlg(this, id);
@@ -182,7 +179,6 @@ void AccountTypePage::slotGetOnlineQuote()
         }
     }
     delete dlg;
-#endif
 }
 
 void AccountTypePage::slotPriceWarning()
