@@ -70,7 +70,6 @@ MapAccountWizard::MapAccountWizard(QWidget *parent, WoobInterface* woob) :
     connect(this, &QWizard::currentIdChanged, this, &MapAccountWizard::slotNewPage);
     connect(d->ui->backendsList, &QTreeWidget::itemSelectionChanged, this, &MapAccountWizard::slotCheckNextButton);
     connect(d->ui->accountsList, &QTreeWidget::itemSelectionChanged, this, &MapAccountWizard::slotCheckNextButton);
-    auto abc = QString();
     connect(&d->accountsWatcher, &QFutureWatcherBase::finished, this, &MapAccountWizard::slotGotAccounts);
     connect(&d->backendsWatcher, &QFutureWatcherBase::finished, this, &MapAccountWizard::slotGotBackends);
 }

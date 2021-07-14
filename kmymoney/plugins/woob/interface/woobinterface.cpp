@@ -35,8 +35,8 @@
 
 #include "../woobexc.h"
 
-WoobInterface::WoobInterface() :
-    m_woobInterface(nullptr)
+WoobInterface::WoobInterface()
+    : m_pythonWoobModule(nullptr)
 {
     Q_INIT_RESOURCE(woobinterface);
 
@@ -61,37 +61,60 @@ WoobInterface::WoobInterface() :
         auto moduleName  = nativeScriptFileInfo.baseName().toLocal8Bit();
         auto moduleLocation = nativeScriptFileInfo.absolutePath().toLocal8Bit();
 
-        qDebug() << "Attempt to load the" << moduleName << "python module from" << moduleLocation;
+        qDebug() << "Attempt to load the" << moduleName << "Python module from" << moduleLocation;
 
-        PyObject *sys = PyImport_ImportModule("sys");
-        PyObject *path = PyObject_GetAttrString(sys, "path");
-        PyObject *pyLocation = PyUnicode_FromString(moduleLocation);
-        PyList_Append(path, pyLocation);
-
-        m_woobInterface = PyImport_ImportModule(moduleName);
-
-        if (m_woobInterface == nullptr)
-        {
+        m_pythonSysModule = PyImport_ImportModule("sys");
+        if (m_pythonSysModule == nullptr) {
+            qWarning() << "The dependency 'sys' Python module failed to load";
             PyErr_Print();
-        }
-        else
-        {
-            qDebug() << moduleName << "Python module loaded successfully";
-        }
+        } else {
+            qDebug() << "The dependency 'sys' Python module loaded successfully";
 
-        Py_DECREF(sys);
-        Py_DECREF(path);
-        Py_DECREF(pyLocation);
+            m_pythonSysPathVariable = PyObject_GetAttrString(m_pythonSysModule, "path");
+            if (m_pythonSysPathVariable == nullptr) {
+                qWarning() << "The 'path' Python variable failed to load from 'sys' module";
+                PyErr_Print();
+            } else {
+                qDebug() << "The 'path' Python variable loaded successfully";
+
+                m_pythonWoobModuleLocation = PyUnicode_FromString(moduleLocation);
+                PyList_Append(m_pythonSysPathVariable, m_pythonWoobModuleLocation);
+
+                m_pythonWoobModule = PyImport_ImportModule(moduleName);
+                if (m_pythonWoobModule == nullptr) {
+                    qWarning() << moduleName << "Python module failed to load";
+                    PyErr_Print();
+                } else {
+                    qDebug() << moduleName << "Python module loaded successfully";
+                }
+            }
+        }
     }
 }
 
 WoobInterface::~WoobInterface()
 {
-    if (m_woobInterface)
-        Py_DECREF(m_woobInterface);
+    if (m_pythonSysModule)
+        Py_DECREF(m_pythonSysModule);
+    if (m_pythonSysPathVariable)
+        Py_DECREF(m_pythonSysPathVariable);
+    if (m_pythonWoobModuleLocation)
+        Py_DECREF(m_pythonWoobModuleLocation);
+    if (m_pythonWoobModule)
+        Py_DECREF(m_pythonWoobModule);
 
     if (Py_IsInitialized())
         Py_Finalize();
+}
+
+bool WoobInterface::isPythonInitialized()
+{
+    return m_pythonWoobModuleLocation;
+}
+
+bool WoobInterface::isWoobInitialized()
+{
+    return m_pythonWoobModule;
 }
 
 PyObject* WoobInterface::execute(QString method, QVariantList args)
@@ -102,7 +125,7 @@ PyObject* WoobInterface::execute(QString method, QVariantList args)
     PyObject* retVal = nullptr;
     auto ba = method.toLocal8Bit();
     const char *cmethod = ba.data();
-    auto pyFunc = PyObject_GetAttrString(m_woobInterface, cmethod);
+    auto pyFunc = PyObject_GetAttrString(m_pythonWoobModule, cmethod);
     if (pyFunc && PyCallable_Check(pyFunc)) {
         PyObject* pArgs = nullptr;
         if (!args.isEmpty()) {
@@ -149,7 +172,7 @@ PyObject* WoobInterface::execute(QString method, QVariantList args)
 QList<WoobInterface::Backend> WoobInterface::getBackends()
 {
     QList<WoobInterface::Backend> backendsList;
-    if(!m_woobInterface)
+    if (!isWoobInitialized())
         return backendsList;
 
     auto pValue = execute("get_backends", QVariantList());
@@ -172,7 +195,7 @@ QList<WoobInterface::Backend> WoobInterface::getBackends()
 QList<WoobInterface::Account> WoobInterface::getAccounts(QString backend)
 {
     QList<WoobInterface::Account> accountsList;
-    if(!m_woobInterface)
+    if (!isWoobInitialized())
         return accountsList;
 
     auto pValue = execute("get_accounts", QVariantList{backend});
@@ -198,7 +221,7 @@ QList<WoobInterface::Account> WoobInterface::getAccounts(QString backend)
 WoobInterface::Account WoobInterface::getAccount(QString backend, QString accid, QString max)
 {
     WoobInterface::Account acc;
-    if(!m_woobInterface)
+    if (!isWoobInitialized())
         return acc;
 
     auto retVal = execute("get_transactions", QVariantList{backend, accid, max});
