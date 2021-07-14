@@ -42,6 +42,10 @@
 #include "misc/webconnect.h"
 #include "platformtools.h"
 
+#ifdef Q_OS_WIN
+#include <windows.h>
+#endif
+
 #ifdef KMM_DEBUG
 #include "mymoneyutils.h"
 #include "mymoneytracer.h"
@@ -56,6 +60,13 @@ static void migrateConfigFiles();
 
 int main(int argc, char *argv[])
 {
+#ifdef Q_OS_WIN
+    if (AttachConsole(ATTACH_PARENT_PROCESS)) {
+        freopen("CONOUT$", "w", stdout);
+        freopen("CONOUT$", "w", stderr);
+    }
+#endif
+
     /**
      * Create application first
      */
