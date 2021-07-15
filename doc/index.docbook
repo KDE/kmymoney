@@ -41,11 +41,11 @@
   <!ENTITY Christian.David "<personname><firstname>Christian</firstname><surname>Dávid</surname></personname>">
   <!ENTITY Christian.David.mail "<email>christian-david@web.de</email>">
 
-  <!-- the following author entity was added to contributor.entities for the 5.0 release
-       it can be removed from this file once it is present in the kdelibs minimum version required by &kmymoney; -->
-
   <!ENTITY Michael.Carpino "<personname><firstname>Michael</firstname><surname>Carpino</surname></personname>">
   <!ENTITY Michael.Carpino.mail "<email>mfcarpino@gmail.com</email>">
+
+  <!ENTITY Dawid.Wrobel "<personname><firstname>Dawid</firstname><surname>Wróbel</surname></personname>">
+  <!ENTITY Dawid.Wrobel.mail "<email>me@dawidwrobel.com</email>">
 
   <!-- the following entities have been added to user.entities in trunk and probably 4.7 branch of svn
        they are only in the french branch, and are required for processing of the french documentation
@@ -97,6 +97,7 @@
   <!ENTITY details-impexp SYSTEM "details-impexp.docbook">
   <!ENTITY details-impexp-csv SYSTEM "details-impexp-csv.docbook">
   <!ENTITY details-impexp-csvexp SYSTEM "details-impexp-csvexp.docbook">
+  <!ENTITY details-impexp-woob SYSTEM "details-impexp-woob.docbook">
   <!ENTITY details-reconciliation SYSTEM "details-reconciliation.docbook">
   <!ENTITY details-search SYSTEM "details-search.docbook">
   <!ENTITY details-reports SYSTEM "details-reports.docbook">
@@ -131,6 +132,7 @@ and use `&George.N.Ugnacious; &George.N.Ugnacious.mail;' in the author element.
 <author> &Darin.Strait;	&Darin.Strait.mail; </author>
 <author> &Roger.Lum; &Roger.Lum.mail; </author>
 <author> &Jack.H.Ostroff; &Jack.H.Ostroff.mail; </author>
+<author> &Dawid.Wrobel; &Dawid.Wrobel.mail; </author>
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 </authorgroup>
 
