@@ -377,7 +377,7 @@ bool Buy::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
     if (sharesEdit && (!isMultiSelection() || !sharesEdit->value().isZero())) {
         shares = sharesEdit->value().abs();
         s0.setShares(shares);
-        s0.setValue((shares * price).reduce());
+        s0.setValue((shares * price).convert(currency.smallestAccountFraction(), security.roundingMethod()));
         s0.setPrice(price);
     }
     if (priceEdit && (!isMultiSelection() || !priceEdit->value().isZero())) {
@@ -387,7 +387,7 @@ bool Buy::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpli
             if (!s0.shares().isZero())
                 s0.setPrice((price / s0.shares()).reduce());
         } else {
-            s0.setValue((shares * price).reduce());
+            s0.setValue((shares * price).convert(currency.smallestAccountFraction(), security.roundingMethod()));
             s0.setPrice(price);
         }
     }
@@ -492,7 +492,7 @@ bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpl
     if (sharesEdit && (!isMultiSelection() || !sharesEdit->value().isZero())) {
         shares = -sharesEdit->value().abs();
         s0.setShares(shares);
-        s0.setValue((shares * price).reduce());
+        s0.setValue((shares * price).convert(currency.smallestAccountFraction(), security.roundingMethod()));
         s0.setPrice(price);
     }
     if (priceEdit && (!isMultiSelection() || !priceEdit->value().isZero())) {
@@ -503,7 +503,7 @@ bool Sell::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMoneySpl
             if (!s0.shares().isZero())
                 s0.setPrice((price / s0.shares()).reduce());
         } else {
-            s0.setValue((shares * price).reduce());
+            s0.setValue((shares * price).convert(currency.smallestAccountFraction(), security.roundingMethod()));
             s0.setPrice(price);
         }
     }
@@ -683,7 +683,7 @@ bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMone
     if (sharesEdit && (!isMultiSelection() || !sharesEdit->value().isZero())) {
         shares = sharesEdit->value().abs();
         s0.setShares(shares);
-        s0.setValue((shares * price).reduce());
+        s0.setValue((shares * price).convert(currency.smallestAccountFraction(), security.roundingMethod()));
         s0.setPrice(price);
     }
     if (priceEdit && (!isMultiSelection() || !priceEdit->value().isZero())) {
@@ -693,7 +693,7 @@ bool Reinvest::createTransaction(MyMoneyTransaction& t, MyMoneySplit& s0, MyMone
             if (!s0.shares().isZero())
                 s0.setPrice((price / s0.shares()).reduce());
         } else {
-            s0.setValue((shares * price).reduce());
+            s0.setValue((shares * price).convert(currency.smallestAccountFraction(), security.roundingMethod()));
             s0.setPrice(price);
         }
     }
