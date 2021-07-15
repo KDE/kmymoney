@@ -72,6 +72,7 @@ int main(int argc, char *argv[])
 #endif
 
 #ifdef Q_OS_WIN
+    // enable console logging on Windows
     if (AttachConsole(ATTACH_PARENT_PROCESS)) {
         freopen("CONOUT$", "w", stdout);
         freopen("CONOUT$", "w", stderr);
