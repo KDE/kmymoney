@@ -1444,13 +1444,6 @@ void MyMoneyStorageXML::readFile(QIODevice* pDevice, MyMoneyFile* file)
     }
     qDebug("done parsing file");
 
-    /// @todo port to new model code
-#if 0
-    // this seems to be nonsense, but it clears the dirty flag
-    // as a side-effect.
-    m_storage->setLastModificationDate(m_storage->lastModificationDate());
-#endif
-
     //hides the progress bar.
     signalProgress(-1, -1);
 }
@@ -1613,13 +1606,6 @@ void MyMoneyStorageXML::writeFile(QIODevice* qf, MyMoneyFile* file)
 
     //hides the progress bar.
     signalProgress(-1, -1);
-
-    /// @todo port to new model code
-#if 0
-    // this seems to be nonsense, but it clears the dirty flag
-    // as a side-effect.
-    m_storage->setLastModificationDate(m_storage->lastModificationDate());
-#endif
 
     m_file->fileSaved();
 }
