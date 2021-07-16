@@ -225,6 +225,7 @@ void TemplateLoader::load(TemplatesModel* model)
     Q_D(TemplateLoader);
     d->model = model;
     model->unload();
+    d->currentLocaleId.clear();
 
     QStringList dirs;
 
