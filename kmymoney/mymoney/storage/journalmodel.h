@@ -9,6 +9,7 @@
 // ----------------------------------------------------------------------------
 // QT Includes
 
+#include <QDate>
 #include <QSharedDataPointer>
 
 // ----------------------------------------------------------------------------
@@ -155,6 +156,11 @@ public:
     };
     Q_ENUMS(Column);
 
+    struct DateRange {
+        QDate firstTransaction;
+        QDate lastTransaction;
+    };
+
     explicit JournalModel(QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
     virtual ~JournalModel();
 
@@ -224,6 +230,8 @@ public:
     MyMoneyMoney clearedBalance(const QString& accountId, const QDate& date) const;
 
     bool matchTransaction(const QModelIndex& idx, MyMoneyTransactionFilter& filter) const;
+
+    DateRange dateRange() const;
 
 protected:
     explicit JournalModel(const QString& idLeadin, QObject* parent = nullptr, QUndoStack* undoStack = nullptr);
