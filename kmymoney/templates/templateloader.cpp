@@ -312,15 +312,6 @@ void TemplateLoader::slotLoadCountry()
             }
         }
     }
-    /// @todo port to new model code
-#if 0
-    // make visible the templates of the current locale
-    if (d->it_m.value() == d->currentLocaleId) {
-        d->ui->m_groupList->setCurrentItem(parent);
-        d->ui->m_groupList->expandItem(parent);
-        d->ui->m_groupList->scrollToItem(parent, QTreeView::PositionAtTop);
-    }
-#endif
 
     // next item in list
     ++d->it_m;
