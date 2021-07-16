@@ -107,12 +107,13 @@ public:
         }
 
         // if mode is still <Price> then use that
-        if (mode == eDialogs::PriceMode::Price)
+        if (mode == eDialogs::PriceMode::Price) {
             mode = eDialogs::PriceMode::PricePerShare;
+        }
         return mode;
     }
 
-    MyMoneyMoney shareValue() const
+    MyMoneyMoney valueAllShares() const
     {
         const auto shares = haveVisibleWidget<AmountEdit>("sharesAmountEdit");
         const auto price = haveVisibleWidget<AmountEdit>("priceAmountEdit");
@@ -127,13 +128,15 @@ public:
         return result;
     }
 
-    InvestTransactionEditor*     editor;
+    InvestTransactionEditor* editor;
+    QString actionString;
 };
 
-
-Activity::Activity(InvestTransactionEditor* editor) :
-    d_ptr(new ActivityPrivate(editor))
+Activity::Activity(InvestTransactionEditor* editor, const QString& action)
+    : d_ptr(new ActivityPrivate(editor))
 {
+    Q_D(Activity);
+    d->actionString = action;
 }
 
 Activity::~Activity()
@@ -142,7 +145,7 @@ Activity::~Activity()
     delete d;
 }
 
-void Invest::Activity::setupWidgets(const QStringList& activityWidgets) const
+void Activity::setupWidgets(const QStringList& activityWidgets) const
 {
     static const QStringList dynamicWidgetNames = {
         "sharesLabel", "sharesAmountEdit",
@@ -253,15 +256,16 @@ QString Invest::Activity::sharesLabelText() const
 QString Activity::priceLabelText() const
 {
     Q_D(const Activity);
-    QString label;
-    if (d->priceMode() == eDialogs::PriceMode::Price) {
-        label = i18nc("@label:textbox", "Price");
-    } else if (d->priceMode() == eDialogs::PriceMode::PricePerShare) {
-        label = i18nc("@label:textbox", "Price/share");
-    } else if (d->priceMode() == eDialogs::PriceMode::PricePerTransaction) {
-        label = i18nc("@label:textbox", "Transaction amount");
+    switch (d->priceMode()) {
+    default:
+    case eDialogs::PriceMode::Price:
+        break;
+    case eDialogs::PriceMode::PricePerShare:
+        return i18nc("@label:textbox", "Price/share");
+    case eDialogs::PriceMode::PricePerTransaction:
+        return i18nc("@label:textbox", "Transaction amount");
     }
-    return label;
+    return i18nc("@label:textbox", "Price");
 }
 
 void Activity::loadPriceWidget(const MyMoneySplit & split)
@@ -293,11 +297,26 @@ MyMoneyMoney Activity::interestFactor() const
     return MyMoneyMoney::MINUS_ONE;
 }
 
+QString Activity::actionString() const
+{
+    Q_D(const Activity);
+    return d->actionString;
+}
 
+MyMoneyMoney Activity::valueAllShares() const
+{
+    Q_D(const Activity);
+    return d->valueAllShares();
+}
 
+eDialogs::PriceMode Activity::priceMode() const
+{
+    Q_D(const Activity);
+    return d->priceMode();
+}
 
-Buy::Buy(InvestTransactionEditor* editor) :
-    Activity(editor)
+Buy::Buy(InvestTransactionEditor* editor)
+    : Activity(editor, QLatin1String("Buy"))
 {
 }
 
@@ -323,10 +342,8 @@ void Buy::showWidgets() const
     setupWidgets(activityWidgets);
 }
 
-
-
-Sell::Sell(InvestTransactionEditor* editor) :
-    Activity(editor)
+Sell::Sell(InvestTransactionEditor* editor)
+    : Activity(editor, QLatin1String("Buy"))
 {
 }
 
@@ -364,8 +381,8 @@ MyMoneyMoney Sell::sharesFactor() const
     return MyMoneyMoney::MINUS_ONE;
 }
 
-Div::Div(InvestTransactionEditor* editor) :
-    Activity(editor)
+Div::Div(InvestTransactionEditor* editor)
+    : Activity(editor, QLatin1String("Dividend"))
 {
 }
 
@@ -390,8 +407,8 @@ void Div::showWidgets() const
     setupWidgets(activityWidgets);
 }
 
-Reinvest::Reinvest(InvestTransactionEditor* editor) :
-    Activity(editor)
+Reinvest::Reinvest(InvestTransactionEditor* editor)
+    : Activity(editor, QLatin1String("Reinvest"))
 {
 }
 
@@ -428,8 +445,8 @@ MyMoneyMoney Invest::Reinvest::totalAmount(const MyMoneySplit & stockSplit, cons
     return {};
 }
 
-Add::Add(InvestTransactionEditor* editor) :
-    Activity(editor)
+Add::Add(InvestTransactionEditor* editor)
+    : Activity(editor, QLatin1String("Add"))
 {
 }
 
@@ -467,9 +484,8 @@ MyMoneyMoney Invest::Add::totalAmount(const MyMoneySplit & stockSplit, const Spl
     return {};
 }
 
-
-Remove::Remove(InvestTransactionEditor* editor) :
-    Activity(editor)
+Remove::Remove(InvestTransactionEditor* editor)
+    : Activity(editor, QLatin1String("Add"))
 {
 }
 
@@ -512,10 +528,8 @@ MyMoneyMoney Remove::sharesFactor() const
     return MyMoneyMoney::MINUS_ONE;
 }
 
-
-
-Invest::Split::Split(InvestTransactionEditor* editor) :
-    Activity(editor)
+Invest::Split::Split(InvestTransactionEditor* editor)
+    : Activity(editor, QLatin1String("Split"))
 {
 }
 
@@ -559,9 +573,8 @@ MyMoneyMoney Invest::Split::totalAmount(const MyMoneySplit & stockSplit, const S
     return {};
 }
 
-
-IntInc::IntInc(InvestTransactionEditor* editor) :
-    Activity(editor)
+IntInc::IntInc(InvestTransactionEditor* editor)
+    : Activity(editor, QLatin1String("IntIncome"))
 {
 }
 

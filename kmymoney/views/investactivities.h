@@ -29,6 +29,10 @@ enum class InvestmentTransactionType;
 }
 }
 
+namespace eDialogs {
+enum class PriceMode;
+}
+
 namespace Invest
 {
 
@@ -55,6 +59,18 @@ public:
     virtual MyMoneyMoney totalAmount(const MyMoneySplit& stockSplit, const SplitModel* feesModel, const SplitModel* interestModel) const;
 
     virtual MyMoneyMoney sharesFactor() const;
+
+    /**
+     * This method returns the total value of the shares
+     * The default is to return MyMoneyMoney().
+     *
+     * Widgets with names @c sharesAmountEdit and @c priceAmountEdit must
+     * be present. If the priceMode is eDialogs::PriceMode::PricePerShare
+     * the product of shares times the price will be returned. In other
+     * cases, the value of price is returned.
+     */
+    virtual MyMoneyMoney valueAllShares() const;
+
     virtual MyMoneyMoney feesFactor() const;
     virtual MyMoneyMoney interestFactor() const;
 
@@ -71,11 +87,15 @@ public:
         return Unused;
     }
 
+    eDialogs::PriceMode priceMode() const;
+
     bool haveFees( fieldRequired_t = Mandatory) const;
     bool haveInterest( fieldRequired_t = Mandatory) const;
 
+    QString actionString() const;
+
 protected:
-    explicit Activity(InvestTransactionEditor* editor);
+    explicit Activity(InvestTransactionEditor* editor, const QString& action);
     virtual QString priceLabelText() const;
     virtual QString sharesLabelText() const;
 
