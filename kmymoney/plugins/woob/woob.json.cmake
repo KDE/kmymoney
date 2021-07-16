@@ -33,11 +33,23 @@
             }
         ],
         "Description": "Plugin for Woob",
+        "Description[ca]": "Connector per al Woob",
+        "Description[cs]": "Modul Woob",
+        "Description[nl]": "Plug-in voor Woob",
+        "Description[sv]": "Insticksprogram för Woob",
+        "Description[uk]": "Додаток для Woob",
+        "Description[x-test]": "xxPlugin for Woobxx",
         "EnabledByDefault": true,
         "Icon": "network-connect",
         "Id": "woob",
         "License": "GPL",
         "Name": "Woob",
+        "Name[ca]": "Woob",
+        "Name[cs]": "Woob",
+        "Name[nl]": "Woob",
+        "Name[sv]": "Woob",
+        "Name[uk]": "Woob",
+        "Name[x-test]": "xxWoobxx",
         "ServiceTypes": [
             "KMyMoney/Plugin"
         ],
