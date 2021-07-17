@@ -459,6 +459,13 @@ public:
         if (!(type >= 0 && type < KPayeeReassignDlg::TypeCount))
             return false;
 
+        auto addPatternOrName = [&](const QString& pattern) {
+            if (pattern.startsWith(QLatin1String("^")) && pattern.startsWith(QLatin1String("^"))) {
+                return pattern;
+            }
+            return QRegularExpression::escape(pattern);
+        };
+
         const auto file = MyMoneyFile::instance();
 
         MyMoneyFileTransaction ft;
@@ -671,10 +678,11 @@ public:
                             if (exp.indexIn(*it_n) != -1)
                                 break;
                         }
-                        if (it_k == payeeNames.constEnd())
-                            payeeNames << QRegExp::escape(*it_n);
+                        if (it_k == payeeNames.constEnd()) {
+                            payeeNames << addPatternOrName(*it_n);
+                        }
                     } else if (payeeNames.contains(*it_n) == 0)
-                        payeeNames << QRegExp::escape(*it_n);
+                        payeeNames << addPatternOrName(*it_n);
                 }
 
                 // and update the payee in the engine context
