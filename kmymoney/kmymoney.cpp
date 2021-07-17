@@ -2443,6 +2443,7 @@ void KMyMoneyApp::slotDuplicateTransactions()
                         split.setReconcileFlag(eMyMoney::Split::State::NotReconciled);
                         split.setReconcileDate(QDate());
                         split.setBankID(QString());
+                        split.removeMatch();
                     }
                     // clear invalid data
                     t.setEntryDate(QDate());
