@@ -188,12 +188,12 @@ MyMoneyMoney MyMoneyMoney::abs() const
     return static_cast<const MyMoneyMoney>(AlkValue::abs());
 }
 
-QString MyMoneyMoney::formatMoney(int denom, bool showThousandSeparator) const
+QString MyMoneyMoney::formatMoney(int denom, bool showThousandSeparator, bool validatable) const
 {
-    return formatMoney(QString(), denomToPrec(denom), showThousandSeparator);
+    return formatMoney(QString(), denomToPrec(denom), showThousandSeparator, validatable);
 }
 
-QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool showThousandSeparator) const
+QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool showThousandSeparator, bool validatable) const
 {
     QString res;
     QString tmpCurrency = currency;
@@ -312,7 +312,7 @@ QString MyMoneyMoney::formatMoney(const QString& currency, const int prec, bool 
         }
     }
 
-    if (signpos == eMyMoney::Money::ParensAround) {
+    if (!validatable && signpos == eMyMoney::Money::ParensAround) {
         res.prepend(QLatin1Char('('));
         res.append(QLatin1Char(')'));
     }

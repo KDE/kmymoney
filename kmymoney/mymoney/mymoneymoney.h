@@ -72,8 +72,9 @@ public:
       * @param showThousandSeparator should the thousandSeparator symbol
       *                               be inserted (@a true)
       *                               or not (@a false) (default true)
+      * @param validatable only use validatable formats, i.e. QDoubleValidator valid formats, no () around, etc.
       */
-    QString formatMoney(const QString& currency, const int prec, bool showThousandSeparator = true) const;
+    QString formatMoney(const QString& currency, const int prec, bool showThousandSeparator = true, bool validatable = false) const;
 
     /**
      * This is a convenience method. It behaves exactly as the above one,
@@ -84,7 +85,7 @@ public:
      *
      * @note denom is often set to account.fraction(security).
      */
-    QString formatMoney(int denom, bool showThousandSeparator = true) const;
+    QString formatMoney(int denom, bool showThousandSeparator = true, bool validatable = false) const;
 
     /**
       * This method is used to convert the smallest fraction information into

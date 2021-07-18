@@ -120,7 +120,7 @@ public:
       */
     void ensureFractionalPart(QString& s) const
     {
-        s = MyMoneyMoney(s).formatMoney(QString(), m_prec, false);
+        s = MyMoneyMoney(s).formatMoney(QString(), m_prec, false, true);
     }
 
     /**
@@ -343,7 +343,7 @@ void AmountEdit::setValue(const MyMoneyMoney& value)
 {
     Q_D(AmountEdit);
     // load the value into the widget but don't use thousandsSeparators
-    setText(value.formatMoney(QString(), d->m_prec, false));
+    setText(value.formatMoney(QString(), d->m_prec, false, true));
 }
 
 void AmountEdit::setText(const QString& txt)
