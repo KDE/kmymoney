@@ -193,7 +193,7 @@ const QHash<Icon, QHash<IconSet, QString>> iconMappings{
       {IconSet::Breeze, QStringLiteral("view-financial-account-checking")}}},
     {Icon::Close, {{IconSet::Common, QStringLiteral("view-close")}}},
     {Icon::CreditCard,
-     {{IconSet::Breeze, QStringLiteral("skrooge_credit_card")},
+     {{IconSet::Breeze, QStringLiteral("view-financial-account-credit-card")},
       {IconSet::Common, QStringLiteral("account-types-credit-card")},
       {IconSet::Oxygen, QStringLiteral("view-financial-account-credit-card")}}},
     {Icon::Currencies, {{IconSet::Common, QStringLiteral("view-currency-list")}}},
@@ -407,7 +407,10 @@ KMM_ICONS_EXPORT QIcon get(Icon icon)
     if (sComposedIcons.contains(icon))
         return overlayIcon(sComposedIcons[icon]);
 
-    return QIcon::fromTheme(sStandardIcons[icon]);
+    auto name = sStandardIcons[icon];
+    auto test = QIcon::hasThemeIcon(sStandardIcons[icon]);
+    auto iconpix = QIcon::fromTheme(sStandardIcons[icon]);
+    return iconpix;
 }
 
 QString iconCacheDir()
