@@ -7,7 +7,7 @@
     <sect2>
         <title>What is Woob?</title>
         <para>
-            <ulink url="https://woob.tech/">Woob</ulink> is is <quote>a collection of applications able to interact with
+            <ulink url="https://woob.tech/">Woob</ulink> is <quote>a collection of applications able to interact with
             websites, without requiring the user to open them in a browser</quote>. One of
             <ulink url="https://woob.tech/applications/">such applications</ulink> allows specifically to interact with
             <ulink url="https://woob.tech/applications/bank">financial institutions</ulink>. &kmymoney; provides a
