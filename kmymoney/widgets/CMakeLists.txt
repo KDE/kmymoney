@@ -119,6 +119,7 @@ target_link_libraries(kmm_widgets PUBLIC
   kmm_mymoney
   kmm_models
   kmm_plugin
+  kmm_utils_platformtools
 )
 
 if (KMYMONEY_STABLE_BRANCH)

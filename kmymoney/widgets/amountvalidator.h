@@ -34,6 +34,8 @@ public:
     explicit AmountValidator(QObject * parent);
     explicit AmountValidator(double bottom, double top, int decimals,
                              QObject * parent);
+
+    virtual QValidator::State validate(QString& input, int& pos) const override;
 };
 
 #endif
