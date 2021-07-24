@@ -192,6 +192,7 @@ target_link_libraries(kmm_widgets PUBLIC
   kmm_base_dialogs
   kmm_base_widgets
   kmm_selections
+  kmm_utils_platformtools
 )
 
 if (KMYMONEY_STABLE_BRANCH)
