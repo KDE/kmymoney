@@ -405,28 +405,30 @@ public:
         for (it = m_transactionList.constBegin(); it != m_transactionList.constEnd(); ++it) {
             const MyMoneySplit& split = (*it).second;
             MyMoneyAccount acc = file->account(split.accountId());
-            ++splitCount;
-            uniqueMap[(*it).first.id()]++;
+            if (!acc.isIncomeExpense()) {
+                ++splitCount;
+                uniqueMap[(*it).first.id()]++;
 
-            KMyMoneyRegister::Register::transactionFactory(ui->m_register, (*it).first, (*it).second, uniqueMap[(*it).first.id()]);
+                KMyMoneyRegister::Register::transactionFactory(ui->m_register, (*it).first, (*it).second, uniqueMap[(*it).first.id()]);
 
-            // take care of foreign currencies
-            MyMoneyMoney val = split.shares().abs();
-            if (acc.currencyId() != base.id()) {
-                const MyMoneyPrice &price = file->price(acc.currencyId(), base.id());
-                // in case the price is valid, we use it. Otherwise, we keep
-                // a flag that tells us that the balance is somewhat inaccurate
-                if (price.isValid()) {
-                    val *= price.rate(base.id());
-                } else {
-                    balanceAccurate = false;
+                // take care of foreign currencies
+                MyMoneyMoney val = split.shares().abs();
+                if (acc.currencyId() != base.id()) {
+                    const MyMoneyPrice& price = file->price(acc.currencyId(), base.id());
+                    // in case the price is valid, we use it. Otherwise, we keep
+                    // a flag that tells us that the balance is somewhat inaccurate
+                    if (price.isValid()) {
+                        val *= price.rate(base.id());
+                    } else {
+                        balanceAccurate = false;
+                    }
                 }
-            }
 
-            if (split.shares().isNegative()) {
-                payment += val;
-            } else {
-                deposit += val;
+                if (split.shares().isNegative()) {
+                    payment += val;
+                } else {
+                    deposit += val;
+                }
             }
         }
         balance = deposit - payment;
