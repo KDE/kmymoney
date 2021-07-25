@@ -168,10 +168,12 @@ target_link_libraries(kmymoney
 
 # create symlink to let kcoreaddons find plugins
 if(WIN32 AND NOT CMAKE_CROSSCOMPILING)
-  # First rmdir the junction so mklink will always work
-  add_custom_command(TARGET kmymoney POST_BUILD
-    COMMAND rmdir kmymoney
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+  # First make sure that nothing is in the way so mklink will always work
+  if(EXISTS ${CMAKE_BINARY_DIR}/bin/kmymoney)
+    add_custom_command(TARGET kmymoney POST_BUILD
+      COMMAND rmdir kmymoney
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+  endif()
   add_custom_command(TARGET kmymoney POST_BUILD
     COMMAND mklink /J kmymoney .
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
