@@ -117,7 +117,7 @@
        <item>
         <layout class="QVBoxLayout" name="m_securitiesLayout">
          <item>
-          <widget class="KFilterProxySearchLine" name="m_searchSecurities"/>
+          <widget class="QLineEdit" name="m_searchSecurities"/>
          </item>
          <item>
           <widget class="QTreeView" name="m_securitiesTree">
@@ -222,11 +222,6 @@
  </widget>
  <layoutdefault spacing="6" margin="0"/>
  <customwidgets>
-  <customwidget>
-   <class>KFilterProxySearchLine</class>
-   <extends>QWidget</extends>
-   <header>kfilterproxysearchline.h</header>
-  </customwidget>
   <customwidget>
    <class>KComboBox</class>
    <extends>QComboBox</extends>

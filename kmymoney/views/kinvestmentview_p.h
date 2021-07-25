@@ -146,7 +146,8 @@ public:
         ui->m_securitiesTree->setModel(m_securitiesProxyModel);
         ui->m_securitiesTree->header()->restoreState(cfgHeader);
 
-        ui->m_searchSecurities->setProxy(m_securitiesProxyModel);
+        q->connect(ui->m_searchSecurities, &QLineEdit::textChanged, m_securitiesProxyModel, &QSortFilterProxyModel::setFilterFixedString);
+
         ui->m_deleteSecurityButton->setIcon(Icons::get(Icon::EditDelete));
         ui->m_editSecurityButton->setIcon(Icons::get(Icon::DocumentEdit));
 
