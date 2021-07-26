@@ -30,10 +30,12 @@ public:
     ExceptionCode msg() const {
         return m_exceptionCode;
     }
-    void raise() const {
+    void raise() const override
+    {
         throw *this;
     }
-    WoobException *clone() const {
+    WoobException* clone() const override
+    {
         return new WoobException(*this);
     }
     ExceptionCode m_exceptionCode;
