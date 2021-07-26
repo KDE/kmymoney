@@ -408,7 +408,6 @@ KMM_ICONS_EXPORT QIcon get(Icon icon)
         return overlayIcon(sComposedIcons[icon]);
 
     auto name = sStandardIcons[icon];
-    auto test = QIcon::hasThemeIcon(sStandardIcons[icon]);
     auto iconpix = QIcon::fromTheme(sStandardIcons[icon]);
     return iconpix;
 }
