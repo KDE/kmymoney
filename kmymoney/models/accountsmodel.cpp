@@ -141,7 +141,8 @@ public:
 //      cell->setData(QVariant::fromValue(account), (int)Role::Account); // is set in setAccountBalanceAndValue
             cell->setData(QVariant(account.id()), (int)Role::ID);
             cell->setData(QVariant(account.value("PreferredAccount") == QLatin1String("Yes")), (int)Role::Favorite);
-            cell->setData(QVariant(QIcon(account.accountPixmap(m_reconciledAccount.id().isEmpty() ? false : account.id() == m_reconciledAccount.id()))), Qt::DecorationRole);
+            cell->setData(QVariant(QIcon(account.accountPixmap(m_reconciledAccount.id().isEmpty() ? false : account.id() == m_reconciledAccount.id(), 22))),
+                          Qt::DecorationRole);
             cell->setData(MyMoneyFile::instance()->accountToCategory(account.id(), true), (int)Role::FullName);
             cell->setData(font, Qt::FontRole);
         }
@@ -867,13 +868,13 @@ void AccountsModel::slotReconcileAccount(const MyMoneyAccount &account, const QD
         if (!d->m_reconciledAccount.id().isEmpty()) {
             const auto list = match(index(0, 0), (int)Role::ID, QVariant(d->m_reconciledAccount.id()), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
             for (const auto& index : list)
-                setData(index, QVariant(QIcon(account.accountPixmap(false))), Qt::DecorationRole);
+                setData(index, QVariant(QIcon(account.accountPixmap(false, 22))), Qt::DecorationRole);
         }
 
         // then set the reconciliation flag of the new reconciliation account
         const auto list = match(index(0, 0), (int)Role::ID, QVariant(account.id()), -1, Qt::MatchFlags(Qt::MatchExactly | Qt::MatchCaseSensitive | Qt::MatchRecursive));
         for (const auto& index : list)
-            setData(index, QVariant(QIcon(account.accountPixmap(true))), Qt::DecorationRole);
+            setData(index, QVariant(QIcon(account.accountPixmap(true, 22))), Qt::DecorationRole);
         d->m_reconciledAccount = account;
     }
 }
