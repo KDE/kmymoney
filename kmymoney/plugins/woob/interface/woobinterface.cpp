@@ -106,12 +106,12 @@ WoobInterface::~WoobInterface()
         Py_Finalize();
 }
 
-bool WoobInterface::isPythonInitialized()
+bool WoobInterface::isPythonInitialized() const
 {
     return m_pythonWoobModuleLocation;
 }
 
-bool WoobInterface::isWoobInitialized()
+bool WoobInterface::isWoobInitialized() const
 {
     return m_pythonWoobModule;
 }

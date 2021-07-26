@@ -80,9 +80,9 @@ public:
 
     ~WoobInterface();
 
-    bool isPythonInitialized();
+    bool isPythonInitialized() const;
 
-    bool isWoobInitialized();
+    bool isWoobInitialized() const;
 
     QStringList getProtocols();
 
