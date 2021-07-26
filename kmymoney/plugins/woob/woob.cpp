@@ -53,6 +53,25 @@ public:
     {
     }
 
+    bool checkInitialized() const
+    {
+        if (!woob.isPythonInitialized()) {
+            KMessageBox::error(
+                nullptr,
+                i18n("Woob plugin failed to fully initialize, most likely due to a missing or a misconfigured Python environment. Please refer to the "
+                     "manual on how to fix it."));
+            return false;
+        } else if (!woob.isWoobInitialized()) {
+            KMessageBox::error(
+                nullptr,
+                i18n("Woob plugin failed to fully initialize, most likely due to a missing or a misconfigured Woob Python module. Please refer to the "
+                     "manual on how to fix it."));
+            return false;
+        }
+
+        return true;
+    }
+
     WoobInterface woob;
     QFutureWatcher<WoobInterface::Account> watcher;
     std::unique_ptr<QProgressDialog> progress;
@@ -135,7 +154,7 @@ bool Woob::mapAccount(const MyMoneyAccount& acc, MyMoneyKeyValueContainer& onlin
 
     bool rc = false;
 
-    if (checkInitialized()) {
+    if (d->checkInitialized()) {
         QPointer<MapAccountWizard> w = new MapAccountWizard(nullptr, &d->woob);
         if (w->exec() == QDialog::Accepted && w != nullptr) {
             onlineBankingSettings.setValue("wb-backend", w->currentBackend());
@@ -154,7 +173,7 @@ bool Woob::updateAccount(const MyMoneyAccount& kacc, bool moreAccounts)
     Q_D(Woob);
     Q_UNUSED(moreAccounts);
 
-    if (checkInitialized()) {
+    if (d->checkInitialized()) {
         QString bname = kacc.onlineBankingSettings().value("wb-backend");
         QString id = kacc.onlineBankingSettings().value("wb-id");
         QString max = kacc.onlineBankingSettings().value("wb-max");
@@ -228,27 +247,6 @@ void Woob::gotAccount()
     statementInterface()->import(ks);
 
     d->progress->hide();
-}
-
-bool Woob::checkInitialized()
-{
-    Q_D(Woob);
-
-    if (!d_ptr->woob.isPythonInitialized()) {
-        KMessageBox::error(
-            nullptr,
-            i18n("Woob plugin failed to fully initialize, most likely due to a missing or a misconfigured Python environment. Please refer to the "
-                 "manual on how to fix it."));
-        return false;
-    } else if (!d_ptr->woob.isWoobInitialized()) {
-        KMessageBox::error(
-            nullptr,
-            i18n("Woob plugin failed to fully initialize, most likely due to a missing or a misconfigured Woob Python module. Please refer to the "
-                 "manual on how to fix it."));
-        return false;
-    }
-
-    return true;
 }
 
 K_PLUGIN_FACTORY_WITH_JSON(WoobFactory, "woob.json", registerPlugin<Woob>();)
