@@ -1,11 +1,25 @@
 [Icon Theme]
 Name=Breeze Dark
 Name[ca]=Brisa fosca
+Name[cs]=Breeze Tmavé
+Name[es]=Brisa oscuro
+Name[fr]=Breeze sombre
+Name[nl]=Breeze Dark
 Name[sl]=Sapica temna
+Name[sv]=Breeze mörk
+Name[uk]=Темна Breeze
+Name[x-test]=xxBreeze Darkxx
 
 Comment=Breeze Dark by the KDE VDG
 Comment[ca]=Brisa fosca, creat pel VDG del KDE
+Comment[cs]=Breeze Dark od KDE VDG
+Comment[es]=Brisa oscuro por KDE VDG
+Comment[fr]=Breeze sombre par l'équipe de graphistes de KDE
+Comment[nl]=Breeze Dark door de KDE VDG
 Comment[sl]=Sapica temna od KDE SVG
+Comment[sv]=Breeze mörk av KDE:s visuella designgrupp
+Comment[uk]=Темна Breeze, автори — KDE VDG
+Comment[x-test]=xxBreeze Dark by the KDE VDGxx
 
 DisplayDepth=32
 

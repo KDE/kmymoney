@@ -32,6 +32,7 @@
             }
         ],
         "Description": "Plugin for Woob",
+        "Description[ca@valencia]": "Connector per al Woob",
         "Description[ca]": "Connector per al Woob",
         "Description[cs]": "Modul Woob",
         "Description[en_GB]": "Plugin for Woob",
@@ -51,6 +52,7 @@
         "Id": "woob",
         "License": "GPL",
         "Name": "Woob",
+        "Name[ca@valencia]": "Woob",
         "Name[ca]": "Woob",
         "Name[cs]": "Woob",
         "Name[en_GB]": "Woob",

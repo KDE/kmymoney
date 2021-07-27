@@ -1,11 +1,25 @@
 [Icon Theme]
 Name=Breeze
 Name[ca]=Brisa
+Name[cs]=Breeze
+Name[es]=Brisa
+Name[fr]=Breeze
+Name[nl]=Breeze
 Name[sl]=Sapica
+Name[sv]=Breeze
+Name[uk]=Breeze
+Name[x-test]=xxBreezexx
 
 Comment=Breeze by the KDE VDG
 Comment[ca]=Brisa, creat pel VDG del KDE
+Comment[cs]=Breeze od KDE VDG
+Comment[es]=Brisa por KDE VDG
+Comment[fr]=Breeze sombre par l'équipe de graphistes de KDE
+Comment[nl]=Breeze door de KDE VDG
 Comment[sl]=Sapica od KDE SVG
+Comment[sv]=Breeze av KDE:s visuella designgrupp
+Comment[uk]=Breeze, автори — KDE VDG
+Comment[x-test]=xxBreeze by the KDE VDGxx
 
 DisplayDepth=32
 
