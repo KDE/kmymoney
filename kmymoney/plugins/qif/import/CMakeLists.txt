@@ -20,7 +20,6 @@ qt5_add_resources(qifimporter_PART_SRCS qifimporter.qrc)
 
 kcoreaddons_add_plugin(qifimporter
                        SOURCES ${qifimporter_PART_SRCS}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/qifimporter.json"
                        INSTALL_NAMESPACE "kmymoney")
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}

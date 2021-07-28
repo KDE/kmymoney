@@ -42,7 +42,6 @@ ki18n_wrap_ui(csvimporter_PART_SRCS
 
 kcoreaddons_add_plugin(csvimporter
                        SOURCES ${csvimporter_PART_SRCS}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/csvimporter.json"
                        INSTALL_NAMESPACE "kmymoney")
 
 
@@ -70,7 +69,6 @@ ki18n_wrap_ui(kcm_csvimporter_PART_SRCS pluginsettingsdecl.ui)
 
 kcoreaddons_add_plugin(kcm_csvimporter
                        SOURCES ${kcm_csvimporter_PART_SRCS}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/kcm_csvimporter.json"
                        INSTALL_NAMESPACE "kmymoney")
 
 kcoreaddons_desktop_to_json(kcm_csvimporter kcm_csvimporter.desktop)

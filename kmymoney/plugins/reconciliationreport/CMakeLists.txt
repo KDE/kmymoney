@@ -13,7 +13,6 @@ ki18n_wrap_ui(reconciliationreport_PART_SRCS kreconciliationreportdlgdecl.ui )
 
 kcoreaddons_add_plugin(reconciliationreport
                        SOURCES ${reconciliationreport_PART_SRCS}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/reconciliationreport.json"
                        INSTALL_NAMESPACE "kmymoney")
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}

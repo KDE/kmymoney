@@ -28,7 +28,6 @@ set ( qsqlcipher_HEADERS
 
 kcoreaddons_add_plugin(qsqlcipher
                        SOURCES ${qsqlcipher_SOURCES}
-                       JSON "${CMAKE_CURRENT_SOURCE_DIR}/sqlcipher.json"
                        INSTALL_NAMESPACE "sqldrivers")
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}

@@ -14,7 +14,6 @@ kconfig_add_kcfg_files(forecastview_SOURCES forecastviewsettings.kcfgc)
 
 kcoreaddons_add_plugin(forecastview
                        SOURCES ${forecastview_SOURCES}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/forecastview.json"
                        INSTALL_NAMESPACE "kmymoney")
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
@@ -42,7 +41,6 @@ ki18n_wrap_ui(kcm_forecastview_PART_SRCS forecastviewsettings.ui)
 
 kcoreaddons_add_plugin(kcm_forecastview
                        SOURCES ${kcm_forecastview_PART_SRCS}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/kcm_forecastview.json"
                        INSTALL_NAMESPACE "kmymoney")
 
 kcoreaddons_desktop_to_json(kcm_forecastview kcm_forecastview.desktop)

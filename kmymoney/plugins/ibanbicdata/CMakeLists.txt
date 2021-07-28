@@ -14,7 +14,6 @@ set ( IBANBICDATA_SCRS
 
 kcoreaddons_add_plugin(ibanbicdata
                        SOURCES ${IBANBICDATA_SCRS}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/ibanbicdata.json"
                        INSTALL_NAMESPACE "kmymoney")
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}

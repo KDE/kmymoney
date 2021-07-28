@@ -11,12 +11,10 @@ ki18n_wrap_ui(kcm_qif_PART_SRCS mymoneyqifprofileeditor.ui)
 if(ENABLE_QIFIMPORTER)
 kcoreaddons_add_plugin(kcm_qif
                        SOURCES ${kcm_qif_PART_SRCS}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/kcm_qifimporter.json"
                        INSTALL_NAMESPACE "kmymoney")
 elseif(ENABLE_QIFEXPORTER)
 kcoreaddons_add_plugin(kcm_qif
                        SOURCES ${kcm_qif_PART_SRCS}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/kcm_qifexporter.json"
                        INSTALL_NAMESPACE "kmymoney")
 endif()
 

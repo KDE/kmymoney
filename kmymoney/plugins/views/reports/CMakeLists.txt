@@ -30,7 +30,6 @@ ki18n_wrap_ui(reportsview_SOURCES
 
 kcoreaddons_add_plugin(reportsview
                        SOURCES ${reportsview_SOURCES}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/reportsview.json"
                        INSTALL_NAMESPACE "kmymoney")
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
@@ -70,7 +69,6 @@ ki18n_wrap_ui(kcm_reportsview_PART_SRCS reportsviewsettings.ui)
 
 kcoreaddons_add_plugin(kcm_reportsview
                        SOURCES ${kcm_reportsview_PART_SRCS}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/kcm_reportsview.json"
                        INSTALL_NAMESPACE "kmymoney")
 
 kcoreaddons_desktop_to_json(kcm_reportsview kcm_reportsview.desktop)

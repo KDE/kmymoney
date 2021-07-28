@@ -15,7 +15,6 @@ qt5_add_resources(icalendarexporter_PART_SRCS icalendarexporter.qrc)
 
 kcoreaddons_add_plugin(icalendarexporter
                        SOURCES ${icalendarexporter_PART_SRCS}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/icalendarexporter.json"
                        INSTALL_NAMESPACE "kmymoney")
 
 #kcoreaddons_add_plugin sets LIBRARY_OUTPUT_DIRECTORY to ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${INSTALL_NAMESPACE}
@@ -42,7 +41,6 @@ ki18n_wrap_ui(kcm_icalendarexporter_PART_SRCS pluginsettingsdecl.ui)
 
 kcoreaddons_add_plugin(kcm_icalendarexporter
                        SOURCES ${kcm_icalendarexporter_PART_SRCS}
-                       JSON "${CMAKE_CURRENT_BINARY_DIR}/kcm_icalendarexporter.json"
                        INSTALL_NAMESPACE "kmymoney")
 
 kcoreaddons_desktop_to_json(kcm_icalendarexporter kcm_icalendarexporter.desktop)
