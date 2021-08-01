@@ -17,6 +17,7 @@ set(reportsview_SOURCES
 
 ki18n_wrap_ui(reportsview_SOURCES
   kreportconfigurationfilterdlg.ui
+  kreportsview.ui
   reportcontrol.ui
   reporttabgeneral.ui
   reporttabrowcolquery.ui
