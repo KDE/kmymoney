@@ -190,6 +190,11 @@
 
 #include "selectedobjects.h"
 
+// ----------------------------------------------------------------------------
+// Alkimia Includes
+#include "alkimia/alkonlinequotesprofile.h"
+#include "alkimia/alkonlinequotesprofilemanager.h"
+
 using namespace Icons;
 using namespace eMenu;
 
@@ -1337,6 +1342,10 @@ KMyMoneyApp::KMyMoneyApp(QWidget* parent) :
     KXmlGuiWindow(parent),
     d(new Private(this))
 {
+    AlkOnlineQuotesProfileManager::instance().addProfile(
+        new AlkOnlineQuotesProfile("kmymoney5", AlkOnlineQuotesProfile::Type::KMyMoney5, "kmymoney-quotes.knsrc"));
+
+    AlkOnlineQuotesProfileManager::instance().setWebPageEnabled(true);
 #ifdef KMM_DBUS
     new KmymoneyAdaptor(this);
     QDBusConnection::sessionBus().registerObject("/KMymoney", this);

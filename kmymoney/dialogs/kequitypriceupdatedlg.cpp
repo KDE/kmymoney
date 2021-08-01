@@ -45,10 +45,10 @@
 
 // ----------------------------------------------------------------------------
 // ALkimia Includes
-#include </home/slothdeb/Documents/gsoc/21/alkimia/src/alkonlinequote.h>
-#include </home/slothdeb/Documents/gsoc/21/alkimia/src/alkonlinequotesource.h>
-#include </home/slothdeb/Documents/gsoc/21/alkimia/src/alkquoteitem.h>
+#include <alkimia/alkonlinequote.h>
+#include <alkimia/alkonlinequotesource.h>
 #include <alkimia/alkonlinequotesprofilemanager.h>
+#include <alkimia/alkquoteitem.h>
 
 #define WEBID_COL       0
 #define NAME_COL        1
@@ -276,10 +276,11 @@ public:
             // if it is in use, it_a is not equal to list.end()
             if (it_a != list.constEnd()) {
                 QString webID;
-                AlkOnlineQuoteSource onlineSource(inv.value("kmm-online-source"));
-                if (onlineSource.m_webIDBy == WebPriceQuoteSource::identifyBy::IdentificationNumber)
+                AlkOnlineQuoteSource onlineSource(inv.value("kmm-online-source"), AlkOnlineQuotesProfileManager::instance().profiles().first());
+
+                if (onlineSource.idSelector() == AlkOnlineQuoteSource::IdSelector::IdentificationNumber)
                     webID = inv.value("kmm-security-id");   // insert ISIN number...
-                else if (onlineSource.m_webIDBy == WebPriceQuoteSource::identifyBy::Name)
+                else if (onlineSource.idSelector() == AlkOnlineQuoteSource::IdSelector::Name)
                     webID = inv.name();                     // ...or name...
                 else
                     webID = inv.tradingSymbol();            // ...or symbol

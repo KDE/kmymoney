@@ -33,21 +33,6 @@ using namespace Icons;
 KSettingsKMyMoney::KSettingsKMyMoney(QWidget *parent, const QString &name, KCoreConfigSkeleton *config)
     : KConfigDialog(parent, name, config)
 {
-    AlkOnlineQuotesProfileList list = AlkOnlineQuotesProfileManager::instance().profiles();
-    if (list.isEmpty()) {
-        AlkOnlineQuotesProfileManager& manager = AlkOnlineQuotesProfileManager::instance();
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-        manager.addProfile(new AlkOnlineQuotesProfile("kmymoney4", AlkOnlineQuotesProfile::Type::KMyMoney4, "kmymoney-quotes.knsrc"));
-#else
-        manager.addProfile(new AlkOnlineQuotesProfile("kmymoney5", AlkOnlineQuotesProfile::Type::KMyMoney5, "kmymoney-quotes.knsrc"));
-#endif
-#ifdef ENABLE_FINANCEQUOTE
-        manager.addProfile(new AlkOnlineQuotesProfile("Finance::Quote", AlkOnlineQuotesProfile::Type::Script));
-#endif
-    }
-
-    AlkOnlineQuotesProfileManager::instance().setWebPageEnabled(true);
-
     // create the pages ...
     const auto generalPage = new KSettingsGeneral();
     const auto registerPage = new KSettingsRegister();
