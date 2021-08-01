@@ -301,7 +301,7 @@ set_package_properties(Python3 PROPERTIES
         PURPOSE "Required by Woob plugin.")
 
 cmake_dependent_option(ENABLE_WOOB "Enable Woob plugin" ON
-                       "Python3_FOUND;Qt5Concurrent_FOUND" OFF)
+                       "Python3_FOUND;Qt5Concurrent_FOUND;NOT IS_APPIMAGE" OFF)
 add_feature_info(Woob ENABLE_WOOB "Online banking interface using Woob.")
 
 
